@@ -6,6 +6,7 @@ Provider 接口可替换。任何数据问题都通过 DataUnavailableError 显�
 from __future__ import annotations
 
 import json
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -45,25 +46,52 @@ class YahooPriceProvider:
 
     name = "yahoo"
 
-    def __init__(self, ticker_factory: Callable[[str], Any] | None = None) -> None:
+    def __init__(
+        self,
+        ticker_factory: Callable[[str], Any] | None = None,
+        *,
+        attempts: int = 3,
+        backoff: float = 2.0,
+        sleep: Callable[[float], None] | None = None,
+    ) -> None:
         if ticker_factory is None:
             import yfinance as yf
 
             ticker_factory = yf.Ticker
         self._ticker_factory = ticker_factory
+        self._attempts = max(1, attempts)
+        self._backoff = backoff
+        self._sleep = sleep if sleep is not None else time.sleep
 
     def fetch(self, symbol: str, *, min_rows: int = 21, period: str = "max") -> PriceData:
         info = resolve_symbol(symbol)
-        try:
-            ticker = self._ticker_factory(info.symbol)
-            raw = ticker.history(
-                period=period,
-                interval="1d",
-                auto_adjust=True,   # 复权：避免分红拆股造成虚假颜色切换
-                actions=False,
-            )
-        except Exception as exc:  # noqa: BLE001 - 网络与解析异常统一转为可显示错误
-            raise DataUnavailableError(f"无法获取 {info.symbol} 的行情：{exc}") from exc
+        last_error: Exception | None = None
+        raw = None
+        ticker: Any = None
+
+        # Yahoo 常见 429 限流是瞬时的，有界重试后再判定不可用。
+        for attempt in range(self._attempts):
+            try:
+                ticker = self._ticker_factory(info.symbol)
+                raw = ticker.history(
+                    period=period,
+                    interval="1d",
+                    auto_adjust=True,   # 复权：避免分红拆股造成虚假颜色切换
+                    actions=False,
+                )
+                if raw is not None and len(raw) > 0:
+                    break
+                last_error = None
+            except Exception as exc:  # noqa: BLE001 - 网络与解析异常统一转为可显示错误
+                last_error = exc
+                raw = None
+            if attempt < self._attempts - 1:
+                self._sleep(self._backoff * (attempt + 1))
+
+        if last_error is not None and (raw is None or len(raw) == 0):
+            raise DataUnavailableError(
+                f"无法获取 {info.symbol} 的行情：{last_error}"
+            ) from last_error
 
         if raw is None or len(raw) == 0:
             raise DataUnavailableError(
@@ -121,10 +149,36 @@ class EastmoneyPriceProvider:
         *,
         timeout: float = 10.0,
         max_bars: int = 6000,
+        attempts: int = 3,
+        backoff: float = 1.5,
+        sleep: Callable[[float], None] | None = None,
     ) -> None:
         self._opener = opener or self._default_opener
         self._timeout = timeout
         self._max_bars = max_bars
+        self._attempts = max(1, attempts)
+        self._backoff = backoff
+        self._sleep = sleep if sleep is not None else time.sleep
+
+    def _fetch_text(self, url: str) -> str:
+        """有界重试：瞬时网络中断不应等同于永久不可用。
+
+        任何非 DataUnavailableError 的异常（例如 RemoteDisconnected、
+        socket.timeout）都在此统一转换，保证界面永远只看到 DATA_UNAVAILABLE，
+        而不是原始堆栈。
+        """
+        last: DataUnavailableError | None = None
+        for attempt in range(self._attempts):
+            try:
+                return self._opener(url)
+            except DataUnavailableError as exc:
+                last = exc
+            except Exception as exc:  # noqa: BLE001 - 统一转为可显示错误
+                last = DataUnavailableError(f"东方财富请求失败：{exc}")
+            if attempt < self._attempts - 1:
+                self._sleep(self._backoff * (attempt + 1))
+        assert last is not None
+        raise last
 
     def _default_opener(self, url: str) -> str:
         request = urllib.request.Request(  # noqa: S310 - 固定 https 主机
@@ -138,6 +192,10 @@ class EastmoneyPriceProvider:
                 return response.read().decode("utf-8")
         except urllib.error.URLError as exc:
             raise DataUnavailableError(f"东方财富网络请求失败：{exc.reason}") from exc
+        except OSError as exc:
+            # RemoteDisconnected / ConnectionReset / socket.timeout 等都是 OSError 子类。
+            # 必须转成可显示的 DATA_UNAVAILABLE，不能让原始异常穿透到界面。
+            raise DataUnavailableError(f"东方财富连接中断：{exc}") from exc
 
     def fetch(self, symbol: str, *, min_rows: int = 21) -> PriceData:
         info = resolve_symbol(symbol)
@@ -155,7 +213,7 @@ class EastmoneyPriceProvider:
             "lmt": str(self._max_bars),
         }
         url = f"{self._HOST}?{urllib.parse.urlencode(params)}"
-        payload = self._parse_payload(self._opener(url), info.symbol)
+        payload = self._parse_payload(self._fetch_text(url), info.symbol)
         bars_raw, name = payload
         bars, report = validate_bars(
             bars_raw,

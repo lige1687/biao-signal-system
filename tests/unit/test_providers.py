@@ -44,7 +44,7 @@ class FakeTicker:
 
 def test_yahoo_provider_normalizes_columns_and_requests_adjusted_data() -> None:
     ticker = FakeTicker()
-    provider = YahooPriceProvider(ticker_factory=lambda _: ticker)
+    provider = YahooPriceProvider(ticker_factory=lambda _: ticker, sleep=lambda _: None)
     data = provider.fetch("qqq")
 
     assert data.symbol == "QQQ"
@@ -65,7 +65,9 @@ def test_yahoo_provider_reports_data_unavailable_on_empty_result() -> None:
         def history(self, **_: object) -> pd.DataFrame:
             return pd.DataFrame()
 
-    provider = YahooPriceProvider(ticker_factory=lambda _: EmptyTicker())
+    provider = YahooPriceProvider(
+        ticker_factory=lambda _: EmptyTicker(), sleep=lambda _: None
+    )
     with pytest.raises(DataUnavailableError, match="没有找到"):
         provider.fetch("NOPE")
 
@@ -75,7 +77,7 @@ def test_yahoo_provider_wraps_network_errors_in_chinese() -> None:
         raise RuntimeError("connection reset")
 
     with pytest.raises(DataUnavailableError, match="无法获取"):
-        YahooPriceProvider(ticker_factory=boom).fetch("QQQ")
+        YahooPriceProvider(ticker_factory=boom, sleep=lambda _: None).fetch("QQQ")
 
 
 def _eastmoney_payload(rows: int = 30) -> str:
@@ -98,7 +100,7 @@ def test_eastmoney_provider_parses_klines_and_requests_adjusted() -> None:
         captured["url"] = url
         return _eastmoney_payload()
 
-    provider = EastmoneyPriceProvider(opener=opener)
+    provider = EastmoneyPriceProvider(opener=opener, sleep=lambda _: None)
     data = provider.fetch("159915")
 
     assert data.symbol == "159915.SZ"
@@ -112,19 +114,22 @@ def test_eastmoney_provider_parses_klines_and_requests_adjusted() -> None:
 
 
 def test_eastmoney_provider_rejects_non_a_share() -> None:
-    provider = EastmoneyPriceProvider(opener=lambda _: "{}")
+    provider = EastmoneyPriceProvider(opener=lambda _: "{}", sleep=lambda _: None)
     with pytest.raises(DataUnavailableError, match="不是 A 股"):
         provider.fetch("QQQ")
 
 
 def test_eastmoney_provider_surfaces_malformed_payloads() -> None:
     with pytest.raises(DataUnavailableError, match="非 JSON"):
-        EastmoneyPriceProvider(opener=lambda _: "<html>error</html>").fetch("159915")
+        EastmoneyPriceProvider(
+            opener=lambda _: "<html>error</html>", sleep=lambda _: None
+        ).fetch("159915")
     with pytest.raises(DataUnavailableError, match="缺少 data"):
-        EastmoneyPriceProvider(opener=lambda _: '{"rc":1}').fetch("159915")
+        EastmoneyPriceProvider(opener=lambda _: '{"rc":1}', sleep=lambda _: None).fetch("159915")
     with pytest.raises(DataUnavailableError, match="没有返回日线"):
         EastmoneyPriceProvider(
-            opener=lambda _: '{"data":{"code":"159915","market":0,"klines":[]}}'
+            opener=lambda _: '{"data":{"code":"159915","market":0,"klines":[]}}',
+            sleep=lambda _: None,
         ).fetch("159915")
 
 
@@ -140,7 +145,9 @@ def test_chained_provider_prefers_eastmoney_for_a_shares() -> None:
             order.append(self.name)
             if not self._succeed:
                 raise DataUnavailableError(f"{self.name} 不可用")
-            return EastmoneyPriceProvider(opener=lambda _: _eastmoney_payload()).fetch(symbol)
+            return EastmoneyPriceProvider(
+                opener=lambda _: _eastmoney_payload(), sleep=lambda _: None
+            ).fetch(symbol)
 
     chained = ChainedPriceProvider([Recorder("yahoo", False), Recorder("eastmoney", True)])
     chained.fetch("159915")
@@ -178,3 +185,64 @@ def test_parquet_cache_roundtrip_and_corruption_is_a_miss(tmp_path) -> None:  # 
     entry.path.write_bytes(b"not parquet")
     assert cache.read("QQQ") is None
     assert cache.read("NEVER_FETCHED") is None
+
+
+def test_eastmoney_retries_transient_failures_before_giving_up() -> None:
+    """瞬时中断应重试；成功后不得报告不可用。"""
+    calls: list[int] = []
+
+    def flaky(_: str) -> str:
+        calls.append(1)
+        if len(calls) < 3:
+            raise DataUnavailableError("东方财富连接中断：RemoteDisconnected")
+        return _eastmoney_payload()
+
+    provider = EastmoneyPriceProvider(opener=flaky, attempts=3, sleep=lambda _: None)
+    data = provider.fetch("159915")
+    assert len(calls) == 3
+    assert len(data.bars) == 30
+
+
+def test_eastmoney_reports_last_error_after_exhausting_retries() -> None:
+    attempts: list[int] = []
+
+    def always_fail(_: str) -> str:
+        attempts.append(1)
+        raise DataUnavailableError("东方财富连接中断：RemoteDisconnected")
+
+    provider = EastmoneyPriceProvider(opener=always_fail, attempts=3, sleep=lambda _: None)
+    with pytest.raises(DataUnavailableError, match="连接中断"):
+        provider.fetch("159915")
+    assert len(attempts) == 3
+
+
+def test_yahoo_retries_rate_limit_then_succeeds() -> None:
+    state: list[int] = []
+
+    class Flaky:
+        info = {"shortName": "Invesco QQQ Trust"}
+
+        def history(self, **_: object) -> pd.DataFrame:
+            state.append(1)
+            if len(state) < 2:
+                raise RuntimeError("Too Many Requests. Rate limited.")
+            return _yahoo_frame(30)
+
+    provider = YahooPriceProvider(
+        ticker_factory=lambda _: Flaky(), attempts=3, sleep=lambda _: None
+    )
+    data = provider.fetch("QQQ")
+    assert len(state) == 2
+    assert len(data.bars) == 30
+
+
+def test_network_errors_are_always_data_unavailable_not_raw_exceptions() -> None:
+    """OSError 子类(RemoteDisconnected 等)不得穿透到界面。"""
+    from http.client import RemoteDisconnected
+
+    def disconnect(_: str) -> str:
+        raise RemoteDisconnected("Remote end closed connection without response")
+
+    provider = EastmoneyPriceProvider(opener=disconnect, attempts=1, sleep=lambda _: None)
+    with pytest.raises(DataUnavailableError):
+        provider.fetch("159915")

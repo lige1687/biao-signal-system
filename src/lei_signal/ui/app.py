@@ -33,6 +33,28 @@ DISCLAIMER = (
 
 
 def _load(symbol: str, build_history: bool) -> AnalysisResult:
+    import os
+    fixture_path = os.environ.get("LEI_FIXTURE_PATH")
+    if fixture_path:
+        import pandas as pd
+
+        from lei_signal.compose.pipeline import analyze_bars
+        from lei_signal.data.providers import PriceData
+        from lei_signal.data.validation import ValidationReport
+        bars = pd.read_parquet(fixture_path)
+        report = ValidationReport(
+            rows=len(bars), first_date=bars.index[0], last_date=bars.index[-1],
+            adjusted=True, provider="fixture", duplicates_removed=0, warnings=(),
+        )
+        from lei_signal.data.symbols import resolve_symbol
+        info = resolve_symbol(symbol)
+        price = PriceData(
+            symbol=info.symbol,
+            display_name=os.environ.get("LEI_FIXTURE_NAME", info.symbol),
+            bars=bars, report=report, info=info,
+        )
+        return analyze_bars(symbol, bars, display_name=price.display_name,
+                            price_data=price, build_history=build_history)
     return analyze(symbol, build_history=build_history)
 
 
