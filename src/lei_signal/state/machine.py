@@ -185,7 +185,7 @@ def _resolve_stage(
 
     # 当天刚刚触及 C 的结构 -> 失效提示（但不影响其他仍有效结构）
     invalidated_today = [
-        s for s in structures if s.invalidated_date == day
+        s for s in structures if s.invalidated_date == day and s.side == "bottom"
     ]
     if invalidated_today and not live_bottoms:
         reasons.append("有效底部结构因触及C而全部失效")
