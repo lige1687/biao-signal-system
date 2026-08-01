@@ -168,6 +168,7 @@ class StructureInstance:
     invalidated_date: date | None = None
     invalidated_reason: str | None = None
     source_event_ids: tuple[str, ...] = ()
+    source_rule_id: str | None = None   # 触发本结构的原子规则，用于界面追溯
     provenance: Provenance = Provenance.RESEARCH_PROXY
 
     @property
