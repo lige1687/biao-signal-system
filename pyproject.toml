@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lei-signal-lab"
+version = "0.1.0"
+description = "LEI 技术信号识别、解释与历史有效性研究系统（非自动交易系统）"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=2.0,<3",
+  "pandas>=2.2,<3",
+  "plotly>=5.24,<7",
+  "streamlit>=1.40,<2",
+  "yfinance>=0.2.54,<2",
+  "pyarrow>=15",
+  "requests>=2.31",
+  "PyYAML>=6",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3,<9", "ruff>=0.9", "mypy>=1.10"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/lei_signal"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.11"
+mypy_path = "src"
+ignore_missing_imports = true
+warn_unused_ignores = false

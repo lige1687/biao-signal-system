@@ -1,0 +1,278 @@
+# LEI 信号系统规则账本 v1
+#
+# provenance 取值：
+#   lei_explicit    - LEI 视频明确讲出的规则
+#   lei_inferred    - 根据视频画面与数学关系复原
+#   existing_backtest - 旧回测采用的工程定义
+#   research_proxy  - 为量化建立的代理指标，不冒充作者原始规则
+#   user_config     - 用户自行选择的参数或阈值
+#
+# 任何 research_proxy 必须在界面标注「研究代理」。
+# 阈值只能在此文件调整，且必须同时提升 version。禁止为迎合回测结果修改公式。
+
+ruleset_version: "1.0.0"
+source_video: "https://www.youtube.com/watch?v=7NkwlH6NOk8"
+
+indicators:
+  ema_periods: [20, 60, 120]
+  sma_periods: [20, 60, 120]
+  ema_seed: "first_window_sma"   # alpha = 2/(period+1)，以首窗口 SMA 作为种子
+  atr_period: 14
+  atr_method: "simple_average"   # 非 Wilder 平滑；与旧回测 spec 8.9 一致
+  lag_periods: [20, 60, 120]
+
+rules:
+  # ---------------- LEI 三色 ----------------
+  lei_color:
+    rule_id: "lei_color"
+    version: "1.0.0"
+    provenance: "lei_explicit"
+    formula: |
+      green = Close(t) > EMA20(t) and Close(t) > Close(t-20)
+      black = Close(t) < EMA20(t) and Close(t) < Close(t-20)
+      gray  = ready and not green and not black
+      unknown = 不足 21 根
+    note_cn: "灰色表示均线方向分歧，需要关注；不等于卖出。"
+    events: [lei_color_green_started, lei_color_gray_started, lei_color_black_started]
+
+  # ---------------- 短周期 ----------------
+  ema20_reclaim_rising:
+    rule_id: "ema20_reclaim_rising"
+    version: "1.0.0"
+    provenance: "lei_explicit"
+    formula: |
+      Close(t-1) <= EMA20(t-1) and Close(t) > EMA20(t) and EMA20(t) > EMA20(t-1)
+    note_cn: "早期转强。不要求与共同确认同一天。"
+
+  dual_ma_bull_confirmed:
+    rule_id: "dual_ma_bull_confirmed"
+    version: "1.0.0"
+    provenance: "lei_explicit"
+    formula: |
+      Close > EMA20 and Close > SMA20 and EMA20 > EMA20(t-1)
+      and SMA20 > SMA20(t-1) and color == green
+    note_cn: "读取当前状态，不要求 EMA20 穿越与 SMA20 确认同一天发生。"
+
+  dual_ma_spread:
+    rule_id: "dual_ma_spread"
+    version: "1.0.0"
+    provenance: "lei_inferred"
+    formula: |
+      spread = abs(EMA20 - SMA20) / Close
+      expanding = spread 连续两日扩大且颜色为绿或黑
+      contracting = spread 连续两日收窄
+      cross = EMA20 与 SMA20 相对位置改变
+    note_cn: "辅助信号，不单独决定趋势方向。"
+
+  # ---------------- 长周期背景 ----------------
+  long_trend:
+    rule_id: "long_trend"
+    version: "1.0.0"
+    provenance: "lei_inferred"
+    formula: |
+      long_bull = EMA60 > EMA120
+      long_bear = EMA60 < EMA120
+      long_improving = (EMA60 上升 或 EMA120 上升) 且 (EMA60-EMA120) 向多头方向改善
+      long_stable_bull = EMA60 > EMA120 且两者均不下降
+      long_deteriorating = (EMA60-EMA120) 向空头方向恶化
+    note_cn: "只作独立背景。绝对不得写入底部结构识别器作为硬门槛。"
+    weekly_rule: "周线只在本周最后一个已完成交易日后生效，禁止把周五数据泄漏给周一至周四。"
+
+  # ---------------- 摆动点 ----------------
+  swing_pivots:
+    rule_id: "swing_pivots"
+    version: "1.0.0"
+    provenance: "existing_backtest"
+    ported_from: "licai@a25eae9 src/trading_v11/indicators/pivots.py"
+    params:
+      left: 3
+      right: 3
+    formula: |
+      摆动高点：high 在 left+1+right 窗口内是唯一严格最高
+      摆动低点：low  在 left+1+right 窗口内是唯一严格最低
+      available_date = 右侧第 right 根 K 线的日期（确认日）
+    note_cn: "历史研究必须使用确认日期，不得使用尚未确认的拐点。参数写入 rule_version。"
+
+  # ---------------- 反转 K 线 ----------------
+  bullish_engulfing:
+    rule_id: "bullish_engulfing"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    formula: |
+      Close(t-1) < Open(t-1)
+      and Close(t) > Open(t)
+      and Open(t) <= Close(t-1)
+      and Close(t) >= Open(t-1)
+    note_cn: "阳线反包。即使 EMA60<EMA120、周线未改善也必须独立保存，不得被 Block。"
+
+  bullish_outside_reversal:
+    rule_id: "bullish_outside_reversal"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    formula: |
+      Low(t) <= Low(t-1) and Close(t) >= High(t-1) and Close(t) > Open(t)
+    note_cn: "阳线外包反转。独立事件，不得被长周期趋势 Block。"
+
+  bearish_engulfing:
+    rule_id: "bearish_engulfing"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    formula: |
+      Close(t-1) > Open(t-1)
+      and Close(t) < Open(t)
+      and Open(t) >= Close(t-1)
+      and Close(t) <= Open(t-1)
+    note_cn: "阴线反包，独立风险事件。"
+
+  bearish_outside_reversal:
+    rule_id: "bearish_outside_reversal"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    formula: |
+      High(t) >= High(t-1) and Close(t) <= Low(t-1) and Close(t) < Open(t)
+    note_cn: "阴线外包反转，独立风险事件。"
+
+  # ---------------- 底部结构 ----------------
+  higher_low_bottom:
+    rule_id: "higher_low_bottom"
+    version: "1.0.0"
+    provenance: "lei_explicit"
+    formula: |
+      连续两个确认摆动低点，第二低点 > 第一低点
+      颈线 = 两低点之间的最高价
+      收盘突破颈线时确认
+      C = 结构最低点（第一低点）
+    note_cn: "不得加入日线/周线长趋势硬门槛。"
+
+  double_bottom:
+    rule_id: "double_bottom"
+    version: "1.0.0"
+    provenance: "lei_inferred"
+    params:
+      max_diff_atr: 1.0
+    formula: |
+      两确认低点价差 <= 第二低点处 1 ATR
+      颈线 = 两低点之间最高价
+      收盘突破颈线时确认
+      C = 两低点较低者
+    note_cn: "1 ATR 容差为 research_proxy 量化口径。"
+
+  bullish_reversal_bottom:
+    rule_id: "bullish_reversal_bottom"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    formula: |
+      由 bullish_engulfing 或 bullish_outside_reversal 独立形成候选底部
+      C = 反转 K 线的最低价
+      不要求先出现双底
+    note_cn: "解决「第二根阳线直接反包但系统完全没记录」的问题。"
+
+  bottom_c_lifecycle:
+    rule_id: "bottom_c_lifecycle"
+    version: "1.0.0"
+    provenance: "lei_explicit"
+    formula: |
+      自确认日的下一交易日起：
+        Low(t) <= C  -> bottom_C_touched，结构永久失效
+        Close(t) < C -> bottom_C_close_broken
+    note_cn: "触及 C 后旧结构永久失效；后续上涨不能复活，只能形成新结构。"
+
+  # ---------------- 顶部结构 ----------------
+  top_structure:
+    rule_id: "top_structure"
+    version: "1.0.0"
+    provenance: "existing_backtest"
+    formula: |
+      连续两个确认摆动高点，第二高点 < 第一高点
+      颈线 = 两高点之间的最低价
+      收盘跌破颈线时确认顶部警报
+      后续 High > 第一高点 -> top_warning_invalidated_by_new_high
+    note_cn: "只产生风险提示，不自动卖出。失效后不得继续参与 Top+Black。"
+
+  # ---------------- 关键性波动 ----------------
+  key_wave_black:
+    rule_id: "key_wave_black"
+    version: "1.0.0"
+    provenance: "lei_explicit"
+    formula: |
+      key_black = Close < EMA20 and Close < Close(t-20)
+      top_plus_black = 存在有效顶部警报 且 处于黑色
+      black_without_top = 无有效顶部结构 且 处于黑色
+    note_cn: "两个版本必须分别保存和统计，不能只保留表现较好的版本。"
+
+  # ---------------- 量能 ----------------
+  volume_proxies:
+    rule_id: "volume_proxies"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    params:
+      window: 20
+      breakout_ratio: 1.5
+      bearish_ratio: 1.5
+      shrink_lookback: 3
+    formula: |
+      volume_ratio20 = Volume / mean(Volume, 20)
+      breakout_volume = 收盘突破结构颈线 且 volume_ratio20 >= 1.5
+      pullback_shrink = 回调期最近3日均量 < 前一上涨段最近3日均量
+      bearish_expansion = Close 下跌 且 volume_ratio20 >= 1.5
+    note_cn: "阈值 1.5 为研究代理。只作支持/冲突标签，不作底部或入场必选条件。"
+
+  # ---------------- 筹码分布代理 ----------------
+  volume_profile_proxy:
+    rule_id: "volume_profile_proxy"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    params:
+      window: 120
+      bins: 50
+      value_area: 0.70
+      support_zone_pct: 0.05
+    formula: |
+      把最近 120 根 K 线成交量均匀分配到 low..high 覆盖的价格箱
+      POC = 代理量最大的价格箱
+      VAL/VAH = 覆盖 70% 代理量的价值区下/上沿
+      overhead_supply_ratio = 当前价以上箱体代理量占比
+      support_density = 当前价下方 5% 区间代理量占比
+    note_cn: "OHLCV 无法知道真实持仓成本。界面必须写「筹码分布代理」，不得声称真实持仓成本。"
+
+  # ---------------- B1 第一阻力 ----------------
+  resistance_b1:
+    rule_id: "resistance_b1"
+    version: "1.0.0"
+    provenance: "lei_explicit"
+    params:
+      lookback_days: 504   # 约两年
+    formula: |
+      B1 = 信号发生前已确认、过去两年内、时间上最近、价格高于当时收盘价的摆动高点
+    note_cn: "B1 是第一阻力，不是强制止盈目标，也不是 3R 入场门槛。B1 不存在仍允许产生信号。"
+
+# ---------------- 状态机 ----------------
+state_machine:
+  version: "1.0.0"
+  provenance: "lei_inferred"
+  stages:
+    - no_clue          # 无线索
+    - bottom_watch     # 底部观察
+    - structure_confirmed  # 结构确认
+    - early_strength   # 早期转强
+    - joint_confirmed  # 共同确认
+    - trend_reinforced # 趋势增强
+    - risk_watch       # 风险关注
+    - key_risk         # 关键风险
+    - invalidated      # 失效
+  invariants:
+    - "先前信号不因其他条件当天未满足而被丢弃。"
+    - "共同确认读取当前状态，不要求当天重新穿越 EMA20。"
+    - "长趋势改善时可从共同确认升级为趋势增强，不要求新的 EMA20 交叉。"
+    - "触及 C 永久终止关联底部结构，后续上涨不能复活。"
+    - "同一标的可同时保留多个底部来源；选最近有效结构为主结构，但不删除其他。"
+    - "顶部与底部可暂时并存，界面显示冲突，不静默覆盖。"
+
+# ---------------- 风险提示优先级（仅决定排序，不自动卖出）----------------
+risk_priority:
+  - c_touched_or_broken
+  - top_plus_black
+  - black
+  - active_top_structure
+  - turned_gray
+  - volume_conflict
