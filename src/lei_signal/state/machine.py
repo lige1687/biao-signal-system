@@ -21,7 +21,6 @@ from __future__ import annotations
 from collections.abc import Iterable
 from dataclasses import dataclass, field
 from datetime import date
-from typing import Optional
 
 import pandas as pd
 
@@ -29,6 +28,7 @@ from lei_signal.domain.types import (
     LongTrendState,
     RiskState,
     SignalColor,
+    SignalEvent,
     Stage,
     StructureInstance,
 )
@@ -55,7 +55,7 @@ class StructureObservation:
 
     structure_id: str
     lifecycle_id: str
-    tier: Optional[str]
+    tier: str | None
     opened_on: date
     last_upgraded_on: date
 
@@ -175,7 +175,10 @@ def _max_active_tier_for_stage(
         structure = structure_map.get(sid)
         if structure is None:
             continue
-        confirmed = structure.confirmed_date is not None and structure.confirmed_date <= obs.last_upgraded_on
+        confirmed = (
+            structure.confirmed_date is not None
+            and structure.confirmed_date <= obs.last_upgraded_on
+        )
         if obs.tier == TIER_EARLY_WATCH and not confirmed:
             # 候选观察档：不抬阶段
             continue
@@ -205,7 +208,7 @@ def run_state_machine(
     weekly_trend: pd.DataFrame | None = None,
     early_strength_state: pd.Series | None = None,
     joint_state: pd.Series | None = None,
-    ema_reclaim_events: list | None = None,
+    ema_reclaim_events: Iterable[SignalEvent] | None = None,
 ) -> list[DayState]:
     """逐日推进状态机（Round 3 修复 D1/D2 后版本）。
 
@@ -223,7 +226,7 @@ def run_state_machine(
     # 把事件按结构 + lifecycle_id 索引：{ structure_id: { lifecycle_id: [events...] } }
     # 同 lifecycle_id 内按 available_date 严格单调（事件层已保证）；按此推出
     # 每个观察实例的「最新档位 + 最后升级日」。
-    structure_events: dict[str, dict[str, list[object]]] = {}
+    structure_events: dict[str, dict[str, list[SignalEvent]]] = {}
     if ema_reclaim_events:
         for event in ema_reclaim_events:
             if event.rule_id != "ema20_reclaim_rising":
@@ -247,8 +250,8 @@ def run_state_machine(
             ).append(event)
 
     # 按结构 + lifecycle 排序，方便逐日扫描
-    for sid, lifecycles in structure_events.items():
-        for lid, events in lifecycles.items():
+    for lifecycles in structure_events.values():
+        for events in lifecycles.values():
             events.sort(key=lambda e: e.available_date)
 
     bottoms = [s for s in structures if s.side == "bottom"]
@@ -259,8 +262,6 @@ def run_state_machine(
 
     # 当前活跃观察（每日滚动更新）：{ structure_id: StructureObservation }
     active_observations: dict[str, StructureObservation] = {}
-    # 当日是否刚发生过转黑（用于在 reasons 里提示）
-    last_black_day: date | None = None
 
     for timestamp, row in frame.iterrows():
         day = timestamp.date()
@@ -284,24 +285,16 @@ def run_state_machine(
         # ---- 1) 处理颜色转黑：删除所有观察实例（结构继续存活）----
         if color is SignalColor.BLACK:
             for sid in list(active_observations.keys()):
-                structure = structure_by_id.get(sid)
-                if structure is None:
-                    active_observations.pop(sid, None)
-                    continue
-                # 结构失效由下一段统一处理；这里直接删除整条观察
                 active_observations.pop(sid, None)
-            last_black_day = day
-        else:
-            last_black_day = None
 
         # ---- 2) 按事件逐日推进观察实例 ----
         # 取出当天所有绑定到底部结构的事件（按时间排序）
-        day_events_by_sid: dict[str, list[object]] = {}
+        day_events_by_sid: dict[str, list[tuple[str, SignalEvent]]] = {}
         for sid, lifecycles in structure_events.items():
-            for lid, events in lifecycles.items():
+            for lifecycle_id, events in lifecycles.items():
                 for event in events:
                     if event.available_date == day:
-                        day_events_by_sid.setdefault(sid, []).append(event)
+                        day_events_by_sid.setdefault(sid, []).append((lifecycle_id, event))
 
         for sid, day_events in day_events_by_sid.items():
             structure = structure_by_id.get(sid)
@@ -320,15 +313,15 @@ def run_state_machine(
                 continue
             # 同一日多条事件：按时间顺序处理后取最后档位
             current = active_observations.get(sid)
-            for event in day_events:
-                if current is None or current.lifecycle_id != event.lifecycle_id:
+            for lifecycle_id, event in day_events:
+                if current is None or current.lifecycle_id != lifecycle_id:
                     # 新实例开启
                     tier = event.evidence.get("tier")
                     if not isinstance(tier, str):
                         continue
                     current = StructureObservation(
                         structure_id=sid,
-                        lifecycle_id=event.lifecycle_id,
+                        lifecycle_id=lifecycle_id,
                         tier=tier,
                         opened_on=event.available_date,
                         last_upgraded_on=event.available_date,
@@ -471,10 +464,9 @@ def _resolve_opportunity(
     # _max_active_tier_for_stage 已将其映射到 EARLY_STRENGTH 及以上。
     if opportunity is Stage.NO_CLUE:
         # 没有活跃的观察档位时再按「结构自身状态」做兜底
-        if confirmed_bottoms:
-            opportunity = Stage.STRUCTURE_CONFIRMED
-        else:
-            opportunity = Stage.BOTTOM_WATCH
+        opportunity = (
+            Stage.STRUCTURE_CONFIRMED if confirmed_bottoms else Stage.BOTTOM_WATCH
+        )
     reasons.append(
         f"存在{len(live_bottoms)}个有效底部线索，"
         f"最高活跃观察档位 rank={best_rank}"

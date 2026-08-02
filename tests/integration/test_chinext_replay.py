@@ -22,7 +22,6 @@
 """
 from __future__ import annotations
 
-from datetime import date
 from pathlib import Path
 
 import pandas as pd
@@ -31,7 +30,6 @@ import pytest
 from lei_signal.compose.pipeline import analyze_bars
 from lei_signal.domain.types import Stage
 from lei_signal.rules.dual_ma import ema20_reclaim_state
-from lei_signal.state.machine import StructureObservation
 from tests.golden.fixtures import golden_delayed_upgrade
 
 _FIXTURE_PATH = Path(__file__).parents[2] / "tests" / "fixtures" / "159915_real.parquet"
@@ -156,7 +154,6 @@ def test_synthetic_golden_full_timeline_assertions() -> None:
         "Day B 观察实例必须沿用 Day A 开启的 lifecycle（不许重开实例）"
     )
     # Day A 之前没有 observation（首次开启）
-    day_a_obs = day_a.observations
     assert day_a_lifecycle is not None, "Day A 必须绑定到具体结构 id"
 
 
@@ -208,7 +205,7 @@ def test_synthetic_golden_observation_tier_chain() -> None:
     }
     last_rank = 0
     seen = []
-    for day, tier, lifecycle, sid in observed:
+    for day, tier, _lifecycle, _sid in observed:
         rank = tier_rank[tier]
         assert rank >= last_rank, f"档位降级或重复：{day} {tier} after rank {last_rank}"
         last_rank = rank
@@ -224,7 +221,7 @@ def test_synthetic_golden_observation_tier_chain() -> None:
     # 同一观察实例共享 lifecycle_id：除 early_watch（无）外，所有升级档必须
     # 沿用第一次开启时的 lifecycle_id
     first_lifecycle = observed[0][2]
-    for day, tier, lifecycle, sid in observed[1:]:
+    for day, tier, lifecycle, _sid in observed[1:]:
         assert lifecycle == first_lifecycle, (
             f"{day} {tier} 重开了 lifecycle_id：{lifecycle} ≠ {first_lifecycle}"
         )

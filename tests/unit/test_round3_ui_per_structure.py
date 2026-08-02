@@ -30,7 +30,6 @@ from lei_signal.domain.types import (
 )
 from lei_signal.state.machine import DayState, StructureObservation
 
-
 # ==========================================================================
 # 渲染记录器：捕获 streamlit 调用，而不是读源码
 # ==========================================================================

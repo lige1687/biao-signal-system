@@ -616,7 +616,10 @@ def _collect_structure_observations(
             })
             continue
         tier_cn = _TIER_CN.get(tier, tier)
-        invalid_reason = _describe_inactive_reason(state, structure, obs) if state.color.value == "black" else ""
+        if state.color.value == "black":
+            invalid_reason = _describe_inactive_reason(state, structure, obs)
+        else:
+            invalid_reason = ""
         active_rows.append({
             "结构ID": sid[-12:],
             "结构状态": structure.status.value,

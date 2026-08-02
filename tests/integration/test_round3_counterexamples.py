@@ -11,18 +11,8 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-import pytest
 
 from lei_signal.compose.pipeline import analyze_bars
-from lei_signal.storage.sqlite_store import (
-    connect,
-    read_latest_lifecycle,
-    write_event_lifecycles,
-    write_events,
-    write_structures,
-    write_assessment,
-)
-from lei_signal.state.machine import run_state_machine
 from lei_signal.domain.types import (
     Provenance,
     Stage,
@@ -30,7 +20,15 @@ from lei_signal.domain.types import (
     StructureStatus,
 )
 from lei_signal.rules.ema_reclaim_tiers import detect_structure_bound_ema_reclaim
-
+from lei_signal.state.machine import run_state_machine
+from lei_signal.storage.sqlite_store import (
+    connect,
+    read_latest_lifecycle,
+    write_assessment,
+    write_event_lifecycles,
+    write_events,
+    write_structures,
+)
 
 _INDEX = pd.bdate_range("2024-01-01", periods=10)
 
@@ -201,7 +199,6 @@ def test_counter_sqlite_must_not_silently_keep_old_valid_until() -> None:
     验证：当前实现下，第二次运行的生命周期快照能正确更新（按 as_of 升序
     取最新；同 (event_id, run_id, as_of) 主键下用 INSERT OR REPLACE）。
     """
-    from lei_signal.compose.pipeline import analyze_bars
 
     full = _bars(600, seed=7)
     prefix = full.iloc[:300]
@@ -244,6 +241,7 @@ def test_counter_chinext_must_assert_specific_timeline() -> None:
     「any reversal bottom + stage in {X, Y, Z, ...}」。
     """
     import inspect
+
     from tests.integration import test_chinext_replay
     src = inspect.getsource(test_chinext_replay)
     forbidden_patterns = [
@@ -272,6 +270,7 @@ def test_counter_analyze_must_not_ignore_calendar() -> None:
     ``aggregate_weekly(calendar=...)`` 逐行一致。
     """
     from datetime import date
+
     from lei_signal.data.calendar import weekday_calendar
     from lei_signal.data.point_in_time import aggregate_weekly
 
