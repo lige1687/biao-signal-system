@@ -312,11 +312,38 @@ def test_tencent_provider_rejects_non_a_share() -> None:
 
 
 def test_tencent_provider_surfaces_qfqday_missing() -> None:
-    """降级到不复权 key 时必须显式报错，不得静默冒充前复权。"""
-    payload = json.dumps({"code": 0, "data": {"sz159915": {"day": [[]]}}})
+    """qfqday 和 day 都缺失时必须显式报错。"""
+    payload = json.dumps({"code": 0, "data": {"sz159915": {}}})
     provider = TencentPriceProvider(opener=lambda _: payload, sleep=lambda _: None)
-    with pytest.raises(DataUnavailableError, match="未返回 qfqday"):
+    with pytest.raises(DataUnavailableError, match="未返回 qfqday/day"):
         provider.fetch("159915")
+
+
+def test_tencent_provider_etf_falls_back_to_unadjusted_day() -> None:
+    """ETF 场景：qfqday 缺失但 day 有数据时，回退到不复权并如实标记。"""
+    day_rows = []
+    for i in range(30):
+        day = pd.Timestamp("2024-01-02") + pd.Timedelta(days=i)
+        close = 10.0 + i * 0.1
+        day_rows.append([
+            day.strftime("%Y-%m-%d"),
+            f"{close - 0.05:.4f}",
+            f"{close:.4f}",
+            f"{close + 0.08:.4f}",
+            f"{close - 0.09:.4f}",
+            f"{1_000_000 + i}",
+        ])
+    # 只有 day，没有 qfqday —— ETF 常见情况
+    payload = json.dumps({"code": 0, "data": {"sh515130": {"day": day_rows}}})
+    provider = TencentPriceProvider(opener=lambda _: payload, sleep=lambda _: None)
+    data = provider.fetch("515130")
+
+    assert data.symbol == "515130.SS"
+    assert len(data.bars) == 30
+    # 必须如实标记不复权
+    assert data.report.adjusted is False
+    # 必须有警告说明回退原因
+    assert any("未返回前复权" in str(w) for w in data.report.warnings)
 
 
 def test_tencent_provider_surfaces_error_code() -> None:

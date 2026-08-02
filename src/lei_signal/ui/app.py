@@ -186,6 +186,60 @@ def _analyze_upload(upload_file, symbol: str, build_history: bool) -> AnalysisRe
     )
 
 
+def _render_data_unavailable(symbol: str, error_msg: str, build_history: bool) -> None:
+    """数据全部不可用时，给出分类提示 + 显眼的上传入口。
+
+    不把用户扔在「DATA_UNAVAILABLE」一句技术报错上——按错误类型给出
+    可读中文，并直接在错误页提供 CSV/Parquet 上传按钮，让用户绕过
+    网络问题继续研究。
+    """
+    st.error(f"**无法获取 {symbol} 的行情数据**")
+
+    # 把底层 chained 错误按行展示，每行带分类标签。
+    lines = error_msg.split("\n")
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+        if "限流" in line:
+            st.warning(f"⏳ {line}")
+        elif "网络不通" in line:
+            st.warning(f"🔌 {line}")
+        elif "无数据" in line:
+            st.warning(f"📭 {line}")
+        else:
+            st.caption(line)
+
+    st.divider()
+    st.markdown("#### 备选方案：导入本地行情文件")
+
+    with st.expander("上传 CSV / Parquet 日线数据", expanded=True):
+        st.caption(
+            "文件必须含 date/open/high/low/close/volume 列。"
+            "CSV 需含日期与 OHLCV 列表头。"
+        )
+        upload = st.file_uploader(
+            "选择本地文件",
+            type=["csv", "parquet"],
+            key="error_page_upload",
+        )
+        if upload is not None:
+            try:
+                with st.spinner("正在分析上传数据..."):
+                    st.session_state["analysis"] = _analyze_upload(
+                        upload, symbol, build_history
+                    )
+                st.success("上传数据已加载，请重新点击「分析」或刷新页面查看结果。")
+                st.rerun()
+            except Exception as exc:
+                st.error(f"上传文件解析失败：{exc}")
+
+    st.caption(
+        "数据问题不会被静默处理为「无信号」。"
+        "常见原因：代码不存在、该 ETF 无前复权数据、网络限流或接口临时不可用。"
+    )
+
+
 def render() -> None:
     st.set_page_config(page_title="LEI 技术信号研究系统", layout="wide")
     st.title("LEI 技术信号研究系统")
@@ -240,8 +294,7 @@ def render() -> None:
                 with st.spinner(f"正在获取并分析 {symbol} ..."):
                     st.session_state["analysis"] = _cached_analysis(symbol, build_history)
             except DataUnavailableError as exc:
-                st.error(f"**DATA_UNAVAILABLE**：{exc}")
-                st.caption("数据问题不会被静默处理为「无信号」。请检查代码、市场后缀或稍后重试。")
+                _render_data_unavailable(symbol, str(exc), build_history)
                 return
             except ValueError as exc:
                 st.error(str(exc))

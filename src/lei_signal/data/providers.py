@@ -448,9 +448,14 @@ class TencentPriceProvider:
 
     复权口径（重要）
     ---------------
-    使用 ``qfq``（前复权），与东方财富 ``fqt=1`` 口径一致；因此
+    优先使用 ``qfq``（前复权），与东方财富 ``fqt=1`` 口径一致；因此
     ``adjusted=True`` 会如实写进 ValidationReport——可与东方财富互为对照。
-    如需使用不复权价格，请改用其他源。
+
+    ETF 回退
+    --------
+    部分 ETF 在腾讯接口下不返回 ``qfqday``（ETF 分红拆股极少，前复权无意义），
+    但会返回 ``day``（不复权）。此时**回退到 ``day`` 并如实标记 ``adjusted=False``**，
+    不冒充前复权。界面会据此提示「未复权」，LEI 信号在除权日附近可能有形态偏差。
     """
 
     name = "tencent"
@@ -522,15 +527,33 @@ class TencentPriceProvider:
             "param": f"{self._tencent_symbol(info)},day,,,{self._max_bars},qfq",
         }
         url = f"{self._HOST}?{urllib.parse.urlencode(params)}"
-        bars_raw = self._parse_payload(self._fetch_text(url), info.symbol)
+        bars_raw, adjusted = self._parse_payload(self._fetch_text(url), info.symbol)
+        # 不复权回退必须如实标记，避免下游误用。
+        warnings: tuple[str, ...] = ()
+        if not adjusted:
+            warnings = (
+                "tencent_etf_unadjusted",
+                f"{info.symbol} 腾讯未返回前复权数据，已回退到不复权（adjusted=False）。"
+                "除权除息日附近形态可能有偏差。",
+            )
         bars, report = validate_bars(
             bars_raw,
             symbol=info.symbol,
             provider=self.name,
-            # 如实标记：腾讯 qfq 与东方财富 fqt=1 口径一致，前复权。
-            adjusted=True,
+            adjusted=adjusted,
             min_rows=min_rows,
         )
+        # 把 ETF 回退警告并入 ValidationReport.warnings，让 UI 看到。
+        if warnings:
+            report = ValidationReport(
+                rows=report.rows,
+                first_date=report.first_date,
+                last_date=report.last_date,
+                adjusted=report.adjusted,
+                provider=report.provider,
+                duplicates_removed=report.duplicates_removed,
+                warnings=report.warnings + warnings,
+            )
         return PriceData(
             symbol=info.symbol,
             display_name=info.symbol,
@@ -540,11 +563,18 @@ class TencentPriceProvider:
         )
 
     @staticmethod
-    def _parse_payload(text: str, symbol: str) -> pd.DataFrame:
-        """解析 ``qfqday`` 数组：每行 [日期, 开, 收, 高, 低, 成交量, ...]。
+    def _parse_payload(text: str, symbol: str) -> tuple[pd.DataFrame, bool]:
+        """解析 kline 数组：每行 [日期, 开, 收, 高, 低, 成交量, ...]。
 
-        腾讯 ``qfq`` 前复权返回键为 ``qfqday``，不复权为 ``day``。这里只接受
-        前复权版本——如返回非 qfqday（接口降级）必须显式报错，不得冒充复权。
+        优先使用 ``qfqday``（前复权）。若该键缺失/为空但 ``day``（不复权）
+        存在，则**回退到 ``day``**，返回 ``adjusted=False``——这种情况常见于
+        ETF（分红拆股稀少，qfq 无意义）。
+
+        返回 ``(DataFrame, adjusted)``：
+        - ``adjusted=True`` 表示前复权（qfqday）
+        - ``adjusted=False`` 表示不复权回退（day）
+
+        两者皆无则报错。
         """
         payload_text = text.strip()
         if not payload_text:
@@ -571,19 +601,27 @@ class TencentPriceProvider:
         if market_data is None:
             raise DataUnavailableError(f"{symbol} 腾讯返回缺少行情子对象")
 
-        # 强制使用 qfqday（前复权），不存在即报「源未返回前复权数据」，
-        # 防止降级到不复权 key 静默冒充复权。
+        # 优先 qfqday（前复权）；若缺失则回退 day（不复权），常见于 ETF。
         qfq_rows = market_data.get("qfqday")
-        if not isinstance(qfq_rows, list) or not qfq_rows:
-            raise DataUnavailableError(
-                f"{symbol} 腾讯未返回 qfqday（请确认股票代码或稍后重试）"
-            )
+        if isinstance(qfq_rows, list) and qfq_rows:
+            rows = qfq_rows
+            adjusted = True
+            key_label = "qfqday"
+        else:
+            day_rows = market_data.get("day")
+            if not isinstance(day_rows, list) or not day_rows:
+                raise DataUnavailableError(
+                    f"{symbol} 腾讯未返回 qfqday/day（请确认股票代码或稍后重试）"
+                )
+            rows = day_rows
+            adjusted = False
+            key_label = "day"
 
         records: list[dict[str, Any]] = []
-        for item in qfq_rows:
+        for item in rows:
             if not isinstance(item, list) or len(item) < 6:
                 raise DataUnavailableError(
-                    f"{symbol} 腾讯 qfqday 元素字段不足: {item!r}"
+                    f"{symbol} 腾讯 {key_label} 元素字段不足: {item!r}"
                 )
             try:
                 records.append(
@@ -598,12 +636,31 @@ class TencentPriceProvider:
                 )
             except (TypeError, ValueError) as exc:
                 raise DataUnavailableError(
-                    f"{symbol} 腾讯 qfqday 数值无法解析: {item!r}"
+                    f"{symbol} 腾讯 {key_label} 数值无法解析: {item!r}"
                 ) from exc
 
         frame = pd.DataFrame(records)
         frame["date"] = pd.to_datetime(frame["date"])
-        return frame.set_index("date")
+        return frame.set_index("date"), adjusted
+
+
+def _classify_error(exc: DataUnavailableError) -> str:
+    """把底层 Provider 错误分类成用户能理解的中文。
+
+    分类规则：
+    - 包含「限流」「429」「Too Many Requests」→ 限流
+    - 包含「连接中断」「网络请求失败」「Remote end」→ 网络不通
+    - 包含「未返回」「没有返回」「没有找到」「不是」→ 无数据
+    - 其余保持原样
+    """
+    msg = str(exc)
+    if any(kw in msg for kw in ("限流", "429", "Too Many Requests", "Rate limited")):
+        return f"限流：{msg}"
+    if any(kw in msg for kw in ("连接中断", "网络请求失败", "Remote end", "Empty reply")):
+        return f"网络不通：{msg}"
+    if any(kw in msg for kw in ("未返回", "没有返回", "没有找到", "不是 A 股", "空内容")):
+        return f"无数据：{msg}"
+    return msg
 
 
 class ChainedPriceProvider:
@@ -641,9 +698,9 @@ class ChainedPriceProvider:
             try:
                 return provider.fetch(symbol, min_rows=min_rows)
             except DataUnavailableError as exc:
-                errors.append(f"[{provider.name}] {exc}")
+                errors.append(f"[{provider.name}] {_classify_error(exc)}")
         raise DataUnavailableError(
-            f"{info.symbol} 所有行情源均不可用：" + "；".join(errors)
+            f"{info.symbol} 所有行情源均不可用：\n" + "\n".join(errors)
         )
 
 
