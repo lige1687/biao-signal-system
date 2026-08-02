@@ -23,6 +23,7 @@ from lei_signal.domain.types import (
     STAGE_CN,
     STAGE_RANK,
     Provenance,
+    StructureInstance,
 )
 from lei_signal.state.machine import DayState
 from lei_signal.ui.charts import (
@@ -552,8 +553,195 @@ def _render_timeline(result: AnalysisResult) -> None:
 # ---------------- 结构诊断页 ----------------
 
 
+# Round 3 修复 D6：档位中文化（保持与既有研究层 STAGE_CN 一致的口径）。
+_TIER_CN = {
+    "early_watch": "候选观察档",
+    "structure_confirmed": "结构确认档",
+    "joint_confirmed": "共同确认档",
+    "long_trend_improved": "长周期改善档",
+}
+# 档位说明
+_TIER_DESC_CN = {
+    "early_watch": "已出现 EMA20 早期转强，但底部结构尚未确认。**仅作观察，不构成买入信号。**",
+    "structure_confirmed": "同一底部结构已确认，**具备买入参考意义**。",
+    "joint_confirmed": "双均线当前共同向上，沿用同一观察实例的升级。",
+    "long_trend_improved": "日线或周线长周期支持/改善，已升级至最高档。",
+}
+# 失效原因（按优先级）
+_TIER_INVALID_REASON = {
+    "black": "颜色转黑关闭转强生命周期（结构本身仍存活）",
+    "c_invalidated": "触及 C 永久失效，结构已死亡",
+    "structure_c_invalidation": "结构触及 C 永久失效",
+}
+# 档位下一步等待条件
+_TIER_NEXT_STEP = {
+    "early_watch": "等待同一结构被确认 → 升级为「结构确认档」",
+    "structure_confirmed": "等待双均线共同向上 → 升级为「共同确认档」",
+    "joint_confirmed": "等待长周期支持/改善 → 升级为「长周期改善档」",
+    "long_trend_improved": "已是最高档；继续观察：触及 C → 永久失效；转黑 → 关闭本条转强",
+}
+
+
+def _collect_structure_observations(
+    state: DayState,
+    structures: list[StructureInstance],
+) -> list[dict[str, object]]:
+    """把 ``DayState.observations`` 展成 UI 行。
+
+    同时纳入没有观察档的「纯候选 / 纯已确认」结构，避免多结构并存时
+    只展示主结构而隐藏其他有效观察链（任务书第八节硬要求）。
+    """
+    structure_by_id = {s.structure_id: s for s in structures}
+    rows: list[dict[str, object]] = []
+
+    # 1) 有观察档的结构（先按 tier rank 降序）
+    active_rows: list[dict[str, object]] = []
+    for sid, obs in state.observations.items():
+        structure = structure_by_id.get(sid)
+        if structure is None:
+            continue
+        tier = obs.tier
+        if tier is None:
+            # 关闭中的观察实例：显示「已关闭」+ 关闭原因
+            active_rows.append({
+                "结构ID": sid[-12:],
+                "结构状态": structure.status.value,
+                "档位": "已关闭",
+                "生命周期ID": obs.lifecycle_id,
+                "开启日": str(obs.opened_on),
+                "最近升级日": str(obs.last_upgraded_on),
+                "当前是否有效": False,
+                "失效原因": _describe_inactive_reason(state, structure, obs),
+                "下一步等待条件": "（无；等待价格脱离转黑或该结构复活）",
+            })
+            continue
+        tier_cn = _TIER_CN.get(tier, tier)
+        invalid_reason = _describe_inactive_reason(state, structure, obs) if state.color.value == "black" else ""
+        active_rows.append({
+            "结构ID": sid[-12:],
+            "结构状态": structure.status.value,
+            "档位": tier_cn,
+            "档位说明": _TIER_DESC_CN.get(tier, ""),
+            "生命周期ID": obs.lifecycle_id,
+            "开启日": str(obs.opened_on),
+            "最近升级日": str(obs.last_upgraded_on),
+            "当前是否有效": True,
+            "失效原因": invalid_reason or "—",
+            "下一步等待条件": _TIER_NEXT_STEP.get(tier, ""),
+        })
+
+    # 2) 没有观察档但仍 live 的结构（候选 / 纯已确认无转强）
+    observed = set(state.observations.keys())
+    for structure in state.live_bottoms:
+        if structure.structure_id in observed:
+            continue
+        rows.append({
+            "结构ID": structure.structure_id[-12:],
+            "结构状态": structure.status.value,
+            "档位": "无观察档",
+            "档位说明": (
+                "结构已确认但暂无 EMA20 早期转强事件。"
+                if structure.confirmed_date is not None
+                else "底部结构候选中，尚未出现 EMA20 早期转强。"
+            ),
+            "生命周期ID": "—",
+            "开启日": "—",
+            "最近升级日": "—",
+            "当前是否有效": True,
+            "失效原因": "—",
+            "下一步等待条件": (
+                "等待 EMA20 重新站上且向上 → 开启观察实例"
+                if structure.confirmed_date is None
+                else "等待 EMA20 重新站上且向上 → 升级到「结构确认档」"
+            ),
+        })
+
+    # 排序：有观察档的按档位 rank 降序；其余保持原顺序
+    tier_rank = {tier: idx for idx, tier in enumerate(
+        ["long_trend_improved", "joint_confirmed", "structure_confirmed", "early_watch"]
+    )}
+
+    def _sort_key(row: dict[str, object]) -> tuple[int, str]:
+        tier_cn = str(row.get("档位", ""))
+        rank = min(
+            (rank for t, rank in tier_rank.items() if _TIER_CN.get(t) == tier_cn),
+            default=99,
+        )
+        return (rank, str(row.get("结构ID", "")))
+
+    return sorted(active_rows, key=_sort_key) + rows
+
+
+def _describe_inactive_reason(
+    state: DayState,
+    structure: StructureInstance,
+    obs: object,
+) -> str:
+    """描述观察实例被关闭的原因（结构失效 / 转黑）。"""
+    if state.color.value == "black":
+        return _TIER_INVALID_REASON["black"]
+    if structure.invalidated_date is not None:
+        return _TIER_INVALID_REASON["c_invalidated"]
+    return "观察实例已关闭（无活跃档位）"
+
+
+def _render_per_structure_observations(
+    state: DayState,
+    structures: list[StructureInstance],
+) -> None:
+    """按结构展示观察链（Round 3 修复 D6）。
+
+    任务书硬要求：
+      * 按结构展示当前状态，不得只展示全局布尔值；
+      * 至少显示：结构ID、当前档位、生命周期开启日、最近升级日、
+        当前是否有效、失效原因、下一步等待条件；
+      * 只有 candidate 阶段的结构才能显示「尚未确认」文案；
+      * 已确认结构不得继续出现在 early_watch 块；
+      * ``early_watch`` 使用中性信息样式，不得用绿色成功样式；
+      * 共同确认和趋势增强必须说明绑定的是哪一个结构；
+      * 多结构并存时不得只显示主结构而隐藏其他有效观察链。
+    """
+    rows = _collect_structure_observations(state, structures)
+    if not rows:
+        st.info("当前没有有效底部结构，也没有任何观察档。")
+        return
+
+    st.markdown("#### 逐结构观察链（Round 3 修复 D6）")
+    df = pd.DataFrame(rows)
+    st.dataframe(df, use_container_width=True, hide_index=True)
+
+    # 关键文案：每行都要可被 grep 验证
+    # 1) early_watch 不得用 success；改用 info
+    # 2) 已确认结构不会同时出现在 early_watch
+    early_watch_rows = [r for r in rows if r.get("档位") == "候选观察档"]
+    if early_watch_rows:
+        ids = "、".join(f"`{r['结构ID']}`" for r in early_watch_rows)
+        # 用 info 不用 success：候选观察档不构成买入信号
+        st.info(
+            f"**候选结构·观察档（{len(early_watch_rows)} 个）**：{ids}。"
+            "这些底部结构**尚未确认**，早期转强仅作观察记录，"
+            "**不计入结构确认，也不构成买入信号**，不会抬升上方的机会阶段。"
+        )
+
+    # 3) 已确认结构必须出现在「结构确认档」或更高，且不能混进 early_watch
+    # 已在 _collect_structure_observations 的 tier 映射里显式排除 candidate 阶段
+    # 的早期转强
+
+    # 4) 共同确认和趋势增强必须说明绑定的是哪一个结构
+    higher_rows = [r for r in rows if r.get("档位") in ("共同确认档", "长周期改善档")]
+    if higher_rows:
+        ids = "、".join(
+            f"{r['档位']}→`{r['结构ID']}`" for r in higher_rows
+        )
+        st.caption(
+            f"**高档观察档绑定结构**：{ids}。"
+            "这些档位已沿用同一结构同一观察实例升级，"
+            "而非由全局双均线或长周期条件单独触发。"
+        )
+
+
 def _render_early_watch(state: DayState) -> None:
-    """展示候选结构上的 EMA20 观察档。
+    """保留旧入口：仅展示候选结构上的 EMA20 观察档（用 info 不用 success）。
 
     观察档刻意不进入上面的「✅成立 / ⚠️不成立」核对表：那张表读起来像
     「条件达成」，而观察档的口径是「看到了，但不算数」——它既不等于结构
@@ -632,6 +820,9 @@ def _render_diagnostics(result: AnalysisResult) -> None:
         hide_index=True,
     )
 
+    # Round 3 修复 D6：先按结构展示观察链（不得只展示全局布尔值），
+    # 再保留旧的 early_watch 中性提示块作为补充说明。
+    _render_per_structure_observations(state, result.structures)
     _render_early_watch(state)
 
     st.success(
