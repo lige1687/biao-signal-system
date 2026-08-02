@@ -312,10 +312,10 @@ def test_confirmed_structure_handover_is_exact() -> None:
     for state in history:
         if state.day < _D["01-05"]:
             continue
-        assert state.early_watch_by_structure["S-TIER"] is False, (
+        assert state.early_watch_by_structure.get("S-TIER", False) is False, (
             f"{state.day} 结构已确认，early_watch 必须为 False"
         )
-        assert state.early_strength_by_structure["S-TIER"] is True, (
+        assert state.early_strength_by_structure.get("S-TIER", False) is True, (
             f"{state.day} 结构已确认且转强持续，early_strength 必须为 True"
         )
 

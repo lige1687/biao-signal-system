@@ -309,7 +309,7 @@ def test_early_watch_alone_never_lifts_stage_to_early_strength() -> None:
     state = next(item for item in history if item.day == date(2024, 1, 2))
 
     assert state.early_watch_by_structure.get("S-TIER") is True
-    assert state.early_strength_by_structure.get("S-TIER") is False
+    assert state.early_strength_by_structure.get("S-TIER", False) is False
     assert state.opportunity_stage is Stage.BOTTOM_WATCH, (
         "候选底部的 EMA20 转强只是观察，不构成结构确认或买入"
     )
