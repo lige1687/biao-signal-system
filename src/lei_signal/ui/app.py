@@ -544,16 +544,12 @@ def _render_price_chart(result: AnalysisResult) -> None:
     使用 ECharts 而非 Plotly——ECharts 的 dataZoom 拖拽/滚轮缩放体验
     远优于 Plotly，与用户旧看板一致。
 
-    图内显示的 LEI 系统指标：
-    - K线（红绿 or 绿灰黑两种模式）
-    - EMA20 / SMA20 / 20周期抵扣价
-    - 量能四级配色（放量/温和/正常/缩量）
-    - 结构线（B1 + 主底部 C + 活跃顶部颈线）
-    - 关键性波动竖线（颜色转换日）
-    - 状态背景色带（淡色）
+    提供 6 个开关控制图内标记显隐：底部/顶部构造、主底部 C、顶部颈线、
+    B1、关键性波动。开关变化通过 ``component_key`` 后缀触发 echarts 重渲染。
     """
     a = result.assessment
 
+    # 顶部一行：颜色模式（左侧）+ 提示（右侧）。
     controls = st.columns([2, 3])
     with controls[0]:
         color_mode = st.radio(
@@ -572,9 +568,30 @@ def _render_price_chart(result: AnalysisResult) -> None:
             "图内显示 LEI 全部技术指标和结构标记。"
         )
 
+    # 显示开关——下方图例栏会同步反映。
     st.markdown("#### 价格、均线、结构与成交量")
+    switches = st.columns(6)
+    show_b1 = switches[0].checkbox("B1 阻力", value=True, key="sw_b1")
+    show_bc = switches[1].checkbox("主底部 C", value=True, key="sw_bc")
+    show_tn = switches[2].checkbox("顶部颈线", value=True, key="sw_tn")
+    show_bot_area = switches[3].checkbox("底部构造", value=True, key="sw_bot_area")
+    show_top_area = switches[4].checkbox("顶部构造", value=True, key="sw_top_area")
+    show_kv = switches[5].checkbox("关键波动", value=True, key="sw_kv")
+
+    display = {
+        "b1": show_b1,
+        "bottom_c": show_bc,
+        "top_neckline": show_tn,
+        "bottom_construction": show_bot_area,
+        "top_construction": show_top_area,
+        "key_volatility": show_kv,
+    }
 
     from lei_signal.ui.echarts_kline import render_echarts_kline
+
+    # 用开关状态生成稳定的 component_key，开关变化时强制重渲染。
+    key_bits = ",".join(f"{k}={v}" for k, v in sorted(display.items()))
+    component_key = f"echarts_kline:{key_bits}"
 
     render_echarts_kline(
         result,
@@ -582,6 +599,8 @@ def _render_price_chart(result: AnalysisResult) -> None:
         default_bars=60,
         max_bars=1000,
         height=680,
+        display=display,
+        component_key=component_key,
     )
 
     view = result.frame.tail(60)
