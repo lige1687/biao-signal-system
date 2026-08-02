@@ -117,7 +117,6 @@ def _serialize_result(
     vol_states = [_classify_vol(r) for r in vol_ratios]
 
     a = result.assessment
-    last_date = dates[-1] if dates else None
 
     # ----- B1 -----
     b1_line: dict[str, Any] | None = None
@@ -168,32 +167,59 @@ def _serialize_result(
                 "width": 1.4,
             })
 
-    # ----- 底部 / 顶部构造 markArea -----
-    # 区间：detected_date → max(confirmed_date, invalidated_date) 或 last_date
-    bottom_areas: list[dict[str, Any]] = []
-    top_areas: list[dict[str, Any]] = []
+    # ----- 底部 / 顶部构造：标记用「确认日小图标」替代「色块区域」-----
+    # 旧实现（markArea 琥珀色块）在多结构并存时严重重叠，改用 markPoint：
+    # - 底部结构：确认日 K 线下方画绿色小钻石（失效结构灰色）
+    # - 顶部结构：确认日 K 线上方画红色小钻石（失效结构灰色）
+    # - 失效日：画灰色小 ×（一眼能看出"这里坏了"）
+    # hover tooltip 仍展示完整结构信息（类型/确认日/C/失效日）。
+    bottom_marks: list[dict[str, Any]] = []
+    top_marks: list[dict[str, Any]] = []
+    invalidated_marks: list[dict[str, Any]] = []
 
-    def _make_area(structure) -> dict[str, Any] | None:
-        start = _date_to_str(structure.detected_date)
-        if start is None:
-            start = _date_to_str(structure.confirmed_date)
-        end = _date_to_str(structure.invalidated_date)
-        if end is None:
-            end = _date_to_str(structure.confirmed_date)
-        if end is None:
-            end = last_date
-        if start is None or end is None:
-            return None
-        return {"start": start, "end": end}
+    def _struct_info(structure) -> dict[str, Any]:
+        return {
+            "structure_type": getattr(structure, "structure_type", "") or "",
+            "source_rule": getattr(structure, "source_rule_id", "") or "",
+            "detected_date": _date_to_str(getattr(structure, "detected_date", None)),
+            "confirmed_date": _date_to_str(getattr(structure, "confirmed_date", None)),
+            "invalidated_date": _date_to_str(getattr(structure, "invalidated_date", None)),
+        }
 
     for s in result.structures or []:
-        area = _make_area(s)
-        if area is None:
-            continue
+        info = _struct_info(s)
         if s.side == "bottom":
-            bottom_areas.append(area)
-        elif s.side == "top" and s.neckline is not None:
-            top_areas.append(area)
+            if s.confirmed_date is not None and s.c_price is not None:
+                bottom_marks.append({
+                    "date": _date_to_str(s.confirmed_date),
+                    "price": float(s.c_price),
+                    "label": f"底部确认 {s.structure_type or ''}",
+                    "live": s.invalidated_date is None,
+                    "info": info,
+                })
+            if s.invalidated_date is not None and s.c_price is not None:
+                invalidated_marks.append({
+                    "date": _date_to_str(s.invalidated_date),
+                    "price": float(s.c_price),
+                    "label": "底部失效",
+                    "info": info,
+                })
+        elif s.side == "top":
+            if s.confirmed_date is not None and s.neckline is not None:
+                top_marks.append({
+                    "date": _date_to_str(s.confirmed_date),
+                    "price": float(s.neckline),
+                    "label": f"顶部确认 {s.structure_type or ''}",
+                    "live": s.invalidated_date is None,
+                    "info": info,
+                })
+            if s.invalidated_date is not None and s.neckline is not None:
+                invalidated_marks.append({
+                    "date": _date_to_str(s.invalidated_date),
+                    "price": float(s.neckline),
+                    "label": "顶部失效",
+                    "info": info,
+                })
 
     # ----- 关键性波动（颜色从非绿→绿 或 非黑→黑 的转换日）-----
     key_volatility: list[dict[str, Any]] = []
@@ -223,8 +249,9 @@ def _serialize_result(
         "b1Line": b1_line,
         "bottomLines": bottom_lines,
         "topLines": top_lines,
-        "bottomAreas": bottom_areas,
-        "topAreas": top_areas,
+        "bottomMarks": bottom_marks,
+        "topMarks": top_marks,
+        "invalidatedMarks": invalidated_marks,
         "keyVolatility": key_volatility,
         "colorMode": color_mode,
         "stateColors": _STATE_COLORS,
@@ -265,23 +292,45 @@ def _build_html(
         round((1 - default_bars / total) * 100, 1) if total > default_bars else 0
     )
 
-    # 组装 markArea（构造区域）+ markLine（水平线 + 关键波动竖线）
-    # echarts markArea.data 每项是 [startItem, endItem]，所以类型是 list[list[dict]]。
-    area_blocks: list[list[dict[str, Any]]] = []
+    # 组装 markPoint：底部确认（K线下方绿钻）、顶部确认（K线上方红钻）、
+    # 失效点（K线上方灰×）。hover tooltip 显示完整结构信息。
+    def _to_mark_point(marks: list[dict[str, Any]], color: str, dead_color: str,
+                       symbol: str, offset_y: int) -> list[dict[str, Any]]:
+        out: list[dict[str, Any]] = []
+        for m in marks:
+            info = m.get("info", {})
+            tooltip_lines = [
+                m.get("label", ""),
+                f"确认日: {info.get('confirmed_date', '-')}",
+            ]
+            if info.get("invalidated_date"):
+                tooltip_lines.append(f"失效日: {info['invalidated_date']}")
+            if info.get("structure_type"):
+                tooltip_lines.append(f"类型: {info['structure_type']}")
+            if info.get("source_rule"):
+                tooltip_lines.append(f"规则: {info['source_rule']}")
+            tooltip_html = "<br/>".join(tooltip_lines)
+            out.append({
+                "coord": [m["date"], m["price"]],
+                "symbol": symbol,
+                "symbolSize": 12,
+                "symbolOffset": [0, offset_y],
+                "itemStyle": {"color": color if m.get("live", True) else dead_color},
+                "label": {"show": False},
+                "tooltip": {"formatter": f"<b>{tooltip_html}</b>", "confine": True},
+            })
+        return out
+
+    bottom_pts: list[dict[str, Any]] = []
+    top_pts: list[dict[str, Any]] = []
+    invalidated_pts: list[dict[str, Any]] = []
     if show["bottom_construction"]:
-        for a in data["bottomAreas"]:
-            area_blocks.append([{
-                "xAxis": a["start"],
-                "itemStyle": {"color": _BOTTOM_AREA_COLOR, "borderColor": _BOTTOM_AREA_BORDER, "borderWidth": 1},
-                "label": {"show": True, "position": "insideTop", "formatter": "底", "color": "#9a6510", "fontSize": 10, "fontWeight": "bold"},
-            }, {"xAxis": a["end"]}])
+        bottom_pts = _to_mark_point(data.get("bottomMarks", []), "#0b9b64", "#9ca3af", "diamond", 20)
     if show["top_construction"]:
-        for a in data["topAreas"]:
-            area_blocks.append([{
-                "xAxis": a["start"],
-                "itemStyle": {"color": _TOP_AREA_COLOR, "borderColor": _TOP_AREA_BORDER, "borderWidth": 1},
-                "label": {"show": True, "position": "insideTop", "formatter": "顶", "color": "#b12b35", "fontSize": 10, "fontWeight": "bold"},
-            }, {"xAxis": a["end"]}])
+        top_pts = _to_mark_point(data.get("topMarks", []), "#dc2626", "#9ca3af", "diamond", -22)
+    # 失效标记永远显示（哪怕关掉底部/顶部构造），但属于"辅助信息"
+    invalidated_pts = _to_mark_point(data.get("invalidatedMarks", []), "#9ca3af", "#9ca3af", "pin", -22)
+    all_mark_points = bottom_pts + top_pts + invalidated_pts
 
     line_blocks: list[dict[str, Any]] = []
     if show["b1"] and data.get("b1Line"):
@@ -360,8 +409,9 @@ def _build_html(
   <span class="legend-item"><span class="legend-line" style="border-color:#3867d6"></span>EMA20</span>
   <span class="legend-item"><span class="legend-line" style="border-color:#d89216;border-top-style:dashed"></span>SMA20</span>
   <span class="legend-item"><span class="legend-line" style="border-color:#8d4bd3;border-top-style:dotted"></span>20周期抵扣价</span>
-  <span class="legend-item"><span class="legend-swatch" style="background:rgba(216,146,22,0.18);border:1px solid #d89216"></span>底部构造</span>
-  <span class="legend-item"><span class="legend-swatch" style="background:rgba(220,38,38,0.15);border:1px solid #dc2626"></span>顶部构造</span>
+  <span class="legend-item"><span class="legend-line" style="border-color:#0b9b64"></span>◆</span>底部确认</span>
+  <span class="legend-item"><span class="legend-line" style="border-color:#dc2626"></span>◆</span>顶部确认</span>
+  <span class="legend-item"><span class="legend-line" style="border-color:#9ca3af"></span>×</span>结构失效</span>
   <span class="legend-item"><span class="legend-line" style="border-color:#ea580c;border-top-style:dashed"></span>B1 第一阻力</span>
   <span class="legend-item"><span class="legend-line" style="border-color:#059669;border-top-style:dotted"></span>主底部 C</span>
   <span class="legend-item"><span class="legend-line" style="border-color:#dc2626;border-top-style:dotted"></span>顶部颈线</span>
@@ -396,7 +446,7 @@ const stateDefaults = {{
   borderColor: stateColors.gray, borderColor0: stateColors.gray
 }};
 
-const constructAreas = {json.dumps(area_blocks)};
+const constructPoints = {json.dumps(all_mark_points)};
 const markLines = {json.dumps(line_blocks)};
 
 const start = {start_pct};
@@ -445,7 +495,11 @@ const option = {{
         ? DATA.ohlc.map((item, i) => ({{ value: item, itemStyle: candleStyle[i].itemStyle }}))
         : DATA.ohlc,
       itemStyle: DATA.colorMode === 'lei_color' ? stateDefaults : priceDefaults,
-      markArea: {{ silent: true, data: stateAreas.concat(constructAreas) }},
+      markArea: {{ silent: true, data: stateAreas }},
+      markPoint: {{
+        symbol: "diamond", symbolSize: 12,
+        data: constructPoints
+      }},
       markLine: {{ silent: true, symbol: ["none", "none"],
         lineStyle: {{ color: "#caa23a", type: "dashed", width: 1 }},
         label: {{ show: false }},
