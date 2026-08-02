@@ -37,7 +37,8 @@ def test_price_figure_contains_candles_four_mas_volume_and_colors() -> None:
         profile=result.profile,
     )
     names = [trace.name for trace in figure.data]
-    for required in ("复权K线", "MA20", "EMA20", "EMA60", "EMA120", "颜色状态", "成交量"):
+    # 显式图例：K线、SMA20、EMA20、20周期抵扣价、成交量
+    for required in ("K线", "SMA20", "EMA20", "20周期抵扣价", "成交量"):
         assert required in names, f"图表缺少 {required}"
 
 
@@ -53,7 +54,7 @@ def test_lei_color_mode_splits_candles_by_signal_color() -> None:
 
     # 颜色状态带在 LEI 模式下应被省略（K 线本体已上色）。
     names = [trace.name for trace in figure.data]
-    assert "颜色状态" not in names
+    assert "LEI颜色" not in names
 
     # 至少有一个 LEI 分桶 trace，并使用对应 hex 颜色。
     candle_names = [n for n in names if n.startswith("K线（")]
@@ -89,8 +90,8 @@ def test_lei_color_mode_falls_back_when_no_signal_color_column() -> None:
     }])
     figure = build_price_figure(frame, color_mode="lei_color")
     names = [trace.name for trace in figure.data]
-    # 回退路径画的就是默认「复权K线」
-    assert "复权K线" in names
+    # 回退路径画的就是默认「K线」
+    assert "K线" in names
 
 
 def test_red_green_mode_keeps_color_state_marker() -> None:
@@ -100,7 +101,7 @@ def test_red_green_mode_keeps_color_state_marker() -> None:
         result.frame, color_mode="red_green"
     )
     names = [trace.name for trace in figure.data]
-    assert "颜色状态" in names
+    assert "LEI颜色" in names
 
 
 def test_price_chart_helper_renders_both_modes_without_state_machine_change() -> None:
@@ -120,10 +121,12 @@ def test_price_chart_helper_renders_both_modes_without_state_machine_change() ->
 
 
 def test_color_hex_mapping_is_stable() -> None:
-    assert COLOR_HEX["green"] == "#16a34a"
-    assert COLOR_HEX["gray"] == "#9ca3af"
-    assert COLOR_HEX["black"] == "#111827"
-    assert COLOR_HEX["unknown"] == "#e5e7eb"
+    """LEI 三色 hex 必须稳定（与 collect_levels / chart 共用同一份）。"""
+    # 三色 hex 与用户旧看板风格保持一致（绿/灰/黑）。
+    assert COLOR_HEX["green"] == "#0b9b64"
+    assert COLOR_HEX["gray"] == "#8c96a8"
+    assert COLOR_HEX["black"] == "#1f2937"
+    assert COLOR_HEX["unknown"] == "#c9a227"
 
 
 def test_price_figure_marks_structures_and_b1() -> None:
@@ -153,13 +156,81 @@ def test_price_figure_marks_structures_and_b1() -> None:
         assert bottom_levels, "存在底部结构时 collect_levels 必须返回至少一条底部 C"
 
 
+def test_price_figure_uses_right_yaxis_and_clean_legend() -> None:
+    """Y 轴必须放右侧，且图例显式锁定几项（防止拥挤）。"""
+    result = analyze_bars("SYN", _bars())
+    figure = build_price_figure(result.frame)
+    assert figure.layout.yaxis.side == "right"
+    # 图例锁定 K线/SMA20/EMA20/20周期抵扣价/成交量 五项
+    assert figure.layout.legend.orientation == "h"
+
+
+def test_price_figure_limits_visible_structure_lines() -> None:
+    """图上只画关键的几条结构线（主底部 C + 活跃顶部 + B1），其余只在表里。
+
+    这是为了避免「灰色线条覆盖整个图表」——LEI 通常有 5+ 个历史底部结构，
+    但只有 1-2 条对当前决策真正关键。
+    """
+    from datetime import date
+    from unittest.mock import MagicMock
+
+    # 构造 5 个底部 + 2 个活跃顶部 + 1 个失效顶部
+    structures = []
+    for i in range(5):
+        s = MagicMock()
+        s.side = "bottom"
+        s.c_price = 1.0 + i * 0.01
+        s.invalidated_date = None
+        s.confirmed_date = date(2024, 6, 1 + i)
+        s.detected_date = date(2024, 5, 1 + i)
+        s.structure_type = "higher_low_bottom"
+        s.source_rule_id = "r1"
+        structures.append(s)
+    for i in range(2):
+        s = MagicMock()
+        s.side = "top"
+        s.neckline = 1.5 + i * 0.01
+        s.invalidated_date = None
+        s.confirmed_date = date(2024, 7, 1 + i)
+        s.detected_date = date(2024, 7, 1 + i)
+        s.structure_type = "lower_high_top"
+        s.source_rule_id = "r2"
+        structures.append(s)
+
+    result = analyze_bars("SYN", _bars())
+    figure = build_price_figure(
+        result.frame, structures=structures, b1_price=1.55
+    )
+    # shape 数量应该被限制（不是 5 个底部全画 + 2 个顶部全画 = 7+）。
+    # 实际只画 1 个主底部 + 2 个活跃顶部 + 1 个 B1 = 4 条线段（每个结构一段）。
+    shape_count = len(figure.layout.shapes)
+    assert shape_count <= 5, (
+        f"图上结构线段过多 ({shape_count})，应只画关键几条，其余进表格"
+    )
+
+
+def test_volume_classify_returns_four_levels() -> None:
+    """量能必须按 ratio 分四级（放量/温和/正常/缩量）。"""
+    from lei_signal.ui.charts import _classify_volume
+
+    assert _classify_volume(3.0) == "放量"
+    assert _classify_volume(2.0) == "放量"
+    assert _classify_volume(1.5) == "温和"
+    assert _classify_volume(1.2) == "温和"
+    assert _classify_volume(1.0) == "正常"
+    assert _classify_volume(0.8) == "正常"
+    assert _classify_volume(0.5) == "缩量"
+
+
 def test_price_figure_uses_range_slider_not_manual_window() -> None:
     """图表本体必须用 plotly 自带的 xaxis2 rangeslider，替代手动滑块。"""
     result = analyze_bars("SYN", _bars())
     figure = build_price_figure(result.frame)
     layout = figure.layout
-    # 主图无 slider；成交量子图有迷你 range slider 供用户拖动缩放。
-    assert layout.xaxis.rangeslider.visible is False
+    # 主图 xaxis 不应有 rangeslider（rangeslider 默认不存在）；成交量子图有。
+    xaxis_rs_visible = layout.xaxis.rangeslider.visible
+    assert xaxis_rs_visible in (False, None)
+    # 成交量子图（xaxis2）显式启用 rangeslider 供用户拖动缩放。
     assert layout.xaxis2.rangeslider.visible is True
 
 

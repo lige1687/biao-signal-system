@@ -1,14 +1,25 @@
-"""Plotly 图表：K线、均线、结构标记、成交量与筹码分布代理。
+"""Plotly 图表：K线、均线、20周期抵扣价、量能、结构标记。
+
+设计原则
+--------
+参考用户旧看板的简洁风格：
+
+- K线本体不再被文字档位糊住；所有水平档位含义由 :func:`collect_levels`
+  在图表外的表格展示。
+- Y 轴放在右侧（与同花顺/旧看板一致），左侧留给结构线/抵扣价等注释空间。
+- 颜色更克制：EMA20 蓝、SMA20 琥珀虚线、20 周期抵扣价紫虚线。
+- 量能按 **放量/温和/正常/缩量** 四级配色，对应 :func:`_classify_volume`。
+- 图内结构线**只画关键的几条**（B1 + 活跃顶部颈线 + 主结构 C）；
+  其余结构只在档位表里出现，避免「灰色线条覆盖整个图表」。
 
 K线颜色模式
 -----------
 ``build_price_figure`` 支持两种 K线颜色模式，通过 ``color_mode`` 参数切换：
 
-- ``red_green``（默认，A股惯例）：收盘高于开盘为红色（``#ef4444``），
-  收盘低于开盘为绿色（``#16a34a``）。下方仍保留日级 LEI 颜色小方块。
+- ``red_green``（默认，A股惯例）：收盘高于开盘为红色（``#e33d47``），
+  收盘低于开盘为绿色（``#0b9b64``）。下方保留日级 LEI 颜色小方块。
 - ``lei_color``（LEI 三色模式）：**每根K线整体**按当日 ``signal_color``
-  上色——绿/灰/黑三种状态直接体现在 K 线本体的填充和边框上，
-  不再依赖「涨红跌绿」二元信号。需要 ``frame`` 含 ``signal_color`` 列。
+  上色——绿/灰/黑三种状态直接体现在 K 线本体的填充和边框上。
 
 切换图表模式属于**展示**修改，不会改变任何底层 LEI 计算或生命周期判断。
 """
@@ -25,26 +36,52 @@ from lei_signal.features.volume_profile import VolumeProfileProxy
 
 ColorMode = Literal["red_green", "lei_color"]
 
+# LEI 三色 hex（与 collect_levels 共用）。
 COLOR_HEX = {
-    "green": "#16a34a",
-    "gray": "#9ca3af",
-    "black": "#111827",
-    "unknown": "#e5e7eb",
+    "green": "#0b9b64",
+    "gray": "#8c96a8",
+    "black": "#1f2937",
+    "unknown": "#c9a227",
 }
 
 #: LEI 三色在 K 线上的中文化映射（仅展示用，不参与任何计算）。
 COLOR_CN = {"green": "绿色", "gray": "灰色", "black": "黑色", "unknown": "未知"}
 
+# 与用户旧看板一致的均线配色。
 MA_COLORS = {
-    "sma20": "#f59e0b",
-    "ema20": "#2563eb",
-    "ema60": "#7c3aed",
-    "ema120": "#db2777",
+    "sma20": "#d89216",   # 琥珀虚线
+    "ema20": "#3867d6",   # 蓝实线
+    "ema60": "#9a65b0",   # 紫灰
+    "ema120": "#c25450",  # 暗红
 }
 
+# 20 周期抵扣价用紫色虚线（与旧看板一致）。
+_REF20_COLOR = "#8d4bd3"
+
 # A 股惯例：涨红跌绿（与美股相反）。
-_RED_GREEN_UP = "#ef4444"
-_RED_GREEN_DOWN = "#16a34a"
+_RED_GREEN_UP = "#e33d47"
+_RED_GREEN_DOWN = "#0b9b64"
+
+# 量能四级配色（与旧看板一致）。
+_VOL_COLORS = {
+    "放量": "#e8590c",
+    "温和": "#f4a261",
+    "正常": "#8aa0bd",
+    "缩量": "#9cc4b2",
+}
+
+
+def _classify_volume(ratio: float) -> str:
+    """根据量比（与 20 日均量之比）返回放量/温和/正常/缩量。"""
+    if pd.isna(ratio):
+        return "正常"
+    if ratio >= 2.0:
+        return "放量"
+    if ratio >= 1.2:
+        return "温和"
+    if ratio < 0.8:
+        return "缩量"
+    return "正常"
 
 
 def _split_by_signal_color(frame: pd.DataFrame) -> dict[str, pd.DataFrame]:
@@ -57,6 +94,21 @@ def _split_by_signal_color(frame: pd.DataFrame) -> dict[str, pd.DataFrame]:
         if mask.any():
             buckets[color] = frame.loc[mask]
     return buckets
+
+
+def _candle_trace(frame: pd.DataFrame) -> go.Candlestick:
+    """LEI 颜色模式下回退路径使用的 K 线 trace（按 A 股涨跌色）。"""
+    return go.Candlestick(
+        x=frame.index,
+        open=frame["open"],
+        high=frame["high"],
+        low=frame["low"],
+        close=frame["close"],
+        name="K线",
+        increasing_line_color=_RED_GREEN_UP,
+        decreasing_line_color=_RED_GREEN_DOWN,
+        showlegend=True,
+    )
 
 
 def _add_candle_traces(
@@ -98,34 +150,56 @@ def _add_candle_traces(
         return
 
     # 默认 red_green 模式：A股惯例，涨红跌绿。
-    figure.add_trace(
-        go.Candlestick(
-            x=frame.index,
-            open=frame["open"],
-            high=frame["high"],
-            low=frame["low"],
-            close=frame["close"],
-            name="复权K线",
-            increasing_line_color=_RED_GREEN_UP,
-            decreasing_line_color=_RED_GREEN_DOWN,
-        ),
-        row=1,
-        col=1,
-    )
+    figure.add_trace(_candle_trace(frame), row=1, col=1)
 
 
-def _candle_trace(frame: pd.DataFrame) -> go.Candlestick:
-    """LEI 颜色模式下回退路径使用的 K 线 trace（按 A 股涨跌色）。"""
-    return go.Candlestick(
-        x=frame.index,
-        open=frame["open"],
-        high=frame["high"],
-        low=frame["low"],
-        close=frame["close"],
-        name="复权K线",
-        increasing_line_color=_RED_GREEN_UP,
-        decreasing_line_color=_RED_GREEN_DOWN,
-    )
+def _select_chart_structures(
+    structures: list[StructureInstance] | None,
+    b1_price: float | None,
+) -> tuple[list[StructureInstance], list[StructureInstance], float | None]:
+    """把结构分为「图上画」与「只在表里」两组。
+
+    - **图上画**：B1 阻力、活跃顶部颈线、主结构 C（最近确认的 live 底部）。
+    - **只在表里**：其他次要底部/已失效结构，避免图上灰色线密麻。
+
+    主结构判定：取 ``live_bottoms`` 中 ``confirmed_date`` 最大的一个。
+    """
+    structures = structures or []
+    chart_lines: list[StructureInstance] = []
+    table_only: list[StructureInstance] = []
+
+    live_bottoms = [
+        s for s in structures
+        if s.side == "bottom"
+        and s.c_price is not None
+        and s.invalidated_date is None
+        and s.confirmed_date is not None
+    ]
+    primary_bottom: StructureInstance | None = None
+    if live_bottoms:
+        primary_bottom = max(
+            live_bottoms,
+            key=lambda s: s.confirmed_date or s.detected_date,
+        )
+
+    active_tops = [
+        s for s in structures
+        if s.side == "top"
+        and s.neckline is not None
+        and s.invalidated_date is None
+        and s.confirmed_date is not None
+    ]
+    # 最多 3 条活跃顶部，避免顶部结构多时图上糊住。
+    active_tops_sorted = sorted(
+        active_tops,
+        key=lambda s: s.confirmed_date or s.detected_date,
+        reverse=True,
+    )[:3]
+
+    chart_lines = active_tops_sorted + ([primary_bottom] if primary_bottom else [])
+    seen = {id(s) for s in chart_lines}
+    table_only = [s for s in structures if id(s) not in seen]
+    return chart_lines, table_only, b1_price
 
 
 def collect_levels(
@@ -219,6 +293,28 @@ def collect_levels(
     return levels
 
 
+def _add_segment_line(
+    figure: go.Figure,
+    *,
+    x0: object,
+    x1: object,
+    y: float,
+    color: str,
+    width: float = 1.2,
+    dash: str = "dot",
+) -> None:
+    """画一条只在 [x0, x1] 区间内可见的水平段（避免 add_hline 跨整图）。"""
+    if x0 == x1:
+        return
+    figure.add_shape(
+        type="line",
+        xref="x", yref="y",
+        x0=x0, x1=x1, y0=y, y1=y,
+        line={"color": color, "width": width, "dash": dash},
+        row=1, col=1,
+    )
+
+
 def build_price_figure(
     frame: pd.DataFrame,
     *,
@@ -227,36 +323,31 @@ def build_price_figure(
     profile: VolumeProfileProxy | None = None,
     color_mode: ColorMode = "red_green",
 ) -> go.Figure:
-    """主图：K线 + 四条均线 + 颜色带 + 结构标记 + 成交量。
+    """主图：K线 + 四条均线 + 20周期抵扣价 + 关键结构线 + 量能（4 级配色）。
 
-    设计原则：图表本体只画线，不写字——所有水平档位的含义由调用方通过
-    :func:`collect_levels` 在图表外列表展示，避免文字叠加遮蔽 K 线。
-
-    参数 ``color_mode``
-    ------------------
-    - ``"red_green"``（默认）：K 线按 A 股惯例红涨绿跌，下方保留日级 LEI 小方块。
-    - ``"lei_color"``：K 线本体按当日 ``signal_color``（绿/灰/黑）染色；
-      小方块带在该模式下被省略以免冗余，但成交量柱仍按日级颜色上色。
+    设计原则：图表本体只画线，所有水平档位含义由 :func:`collect_levels`
+    在图表外的表格展示。
     """
     figure = make_subplots(
         rows=2,
         cols=1,
         shared_xaxes=True,
         row_heights=[0.78, 0.22],
-        vertical_spacing=0.03,
+        vertical_spacing=0.05,
         subplot_titles=(
             (
                 "复权K线 · 绿灰黑三色"
                 if color_mode == "lei_color"
-                else "复权K线 · MA20/EMA20/EMA60/EMA120"
+                else "复权K线 · EMA20/SMA20/抵扣价"
             ),
-            "成交量",
+            "成交量（放量/温和/正常/缩量）",
         ),
     )
 
     _add_candle_traces(figure, frame, color_mode)
 
-    labels = {"sma20": "MA20", "ema20": "EMA20", "ema60": "EMA60", "ema120": "EMA120"}
+    # 四条均线：EMA20 主、SMA20 虚线辅助、EMA60/EMA120 长周期背景。
+    labels = {"sma20": "SMA20", "ema20": "EMA20", "ema60": "EMA60", "ema120": "EMA120"}
     for column, label in labels.items():
         if column in frame.columns:
             figure.add_trace(
@@ -264,11 +355,31 @@ def build_price_figure(
                     x=frame.index,
                     y=frame[column],
                     name=label,
-                    line={"width": 1.4, "color": MA_COLORS[column]},
+                    line={
+                        "width": 1.8 if column == "ema20" else 1.3,
+                        "color": MA_COLORS[column],
+                        "dash": "dash" if column == "sma20" else "solid",
+                    },
+                    showlegend=column in {"sma20", "ema20"},
+                    hoverinfo="skip",
                 ),
-                row=1,
-                col=1,
+                row=1, col=1,
             )
+
+    # 20 周期抵扣价（=20 周期前的收盘价；用 close_lag20 列）。
+    if "close_lag20" in frame.columns:
+        figure.add_trace(
+            go.Scatter(
+                x=frame.index,
+                y=frame["close_lag20"],
+                name="20周期抵扣价",
+                line={"width": 1.2, "color": _REF20_COLOR, "dash": "dot"},
+                opacity=0.7,
+                showlegend=True,
+                hoverinfo="skip",
+            ),
+            row=1, col=1,
+        )
 
     # 颜色状态带：red_green 模式下显示（LEI 模式下 K 线本体已上色，省略）。
     if color_mode == "red_green" and "signal_color" in frame.columns:
@@ -277,73 +388,78 @@ def build_price_figure(
                 x=frame.index,
                 y=frame["low"] * 0.985,
                 mode="markers",
-                name="颜色状态",
+                name="LEI颜色",
                 marker={
-                    "size": 5,
+                    "size": 4,
                     "color": frame["signal_color"].map(COLOR_HEX).fillna("#e5e7eb"),
                     "symbol": "square",
                 },
+                showlegend=False,
                 customdata=frame[["signal_color", "signal_reason"]].to_numpy(),
                 hovertemplate="%{x|%Y-%m-%d}<br>状态=%{customdata[0]}<br>%{customdata[1]}<extra></extra>",
             ),
-            row=1,
-            col=1,
+            row=1, col=1,
         )
 
-    # 结构标记：仅画线 + 写入图例 hover，不在图内堆字。
-    for structure in structures or []:
+    # 结构标记：仅画关键的「主底部 C + 活跃顶部颈线 + B1」，
+    # 其余结构全部进右侧表格，避免图上灰色线条覆盖整个图表。
+    chart_lines, _, b1_to_show = _select_chart_structures(structures, b1_price)
+    last_date = frame.index[-1] if len(frame) else None
+    for structure in chart_lines:
         if structure.side == "bottom" and structure.c_price is not None:
+            x0 = structure.detected_date or frame.index[0]
+            x1 = structure.invalidated_date or last_date
             live = structure.invalidated_date is None
-            figure.add_hline(
-                y=structure.c_price,
-                line={
-                    "color": "#059669" if live else "#9ca3af",
-                    "width": 1.2,
-                    "dash": "dot" if live else "dashdot",
-                },
-                row=1,
-                col=1,
+            _add_segment_line(
+                figure,
+                x0=x0, x1=x1,
+                y=float(structure.c_price),
+                color="#059669" if live else "#9ca3af",
+                width=1.2,
+                dash="dot" if live else "dashdot",
             )
-        if structure.side == "top" and structure.neckline is not None:
-            active = structure.invalidated_date is None and structure.confirmed_date is not None
-            if active:
-                figure.add_hline(
-                    y=structure.neckline,
-                    line={"color": "#dc2626", "width": 1.2, "dash": "dot"},
-                    row=1,
-                    col=1,
-                )
+        if (
+            structure.side == "top"
+            and structure.neckline is not None
+            and structure.invalidated_date is None
+            and structure.confirmed_date is not None
+        ):
+            x0 = structure.detected_date or structure.confirmed_date
+            x1 = structure.invalidated_date or last_date
+            _add_segment_line(
+                figure,
+                x0=x0, x1=x1,
+                y=float(structure.neckline),
+                color="#dc2626",
+                width=1.2,
+                dash="dot",
+            )
 
-    if b1_price is not None:
-        figure.add_hline(
-            y=b1_price,
+    if b1_to_show is not None:
+        figure.add_shape(
+            type="line",
+            xref="x", yref="y",
+            x0=frame.index[0], x1=last_date,
+            y0=b1_to_show, y1=b1_to_show,
             line={"color": "#ea580c", "width": 1.4, "dash": "dash"},
-            row=1,
-            col=1,
+            row=1, col=1,
         )
 
-    if profile is not None:
-        for value, color in (
-            (profile.poc, "#0891b2"),
-            (profile.vah, "#64748b"),
-            (profile.val, "#64748b"),
-        ):
-            figure.add_hline(
-                y=value,
-                line={"color": color, "width": 1.0, "dash": "longdash"},
-                row=1,
-                col=1,
-            )
-
-    volume_colors = (
-        frame["signal_color"].map(COLOR_HEX).fillna("#cbd5e1")
-        if "signal_color" in frame.columns
-        else "#94a3b8"
-    )
+    # 量能：按 ratio 分级配色（放量/温和/正常/缩量）。
+    if "volume_ratio20" in frame.columns:
+        vol_states = frame["volume_ratio20"].map(_classify_volume)
+        vol_colors = vol_states.map(lambda s: _VOL_COLORS.get(s, _VOL_COLORS["正常"]))
+    else:
+        vol_colors = "#8aa0bd"
     figure.add_trace(
-        go.Bar(x=frame.index, y=frame["volume"], name="成交量", marker_color=volume_colors),
-        row=2,
-        col=1,
+        go.Bar(
+            x=frame.index,
+            y=frame["volume"],
+            name="成交量",
+            marker_color=vol_colors,
+            hovertemplate="%{x|%Y-%m-%d}<br>量=%{y:.0f}<extra></extra>",
+        ),
+        row=2, col=1,
     )
     if "volume_mean20" in frame.columns:
         figure.add_trace(
@@ -351,29 +467,57 @@ def build_price_figure(
                 x=frame.index,
                 y=frame["volume_mean20"],
                 name="20日均量",
-                line={"width": 1.2, "color": "#f97316"},
+                line={"width": 1.0, "color": "#475569"},
+                showlegend=False,
+                hoverinfo="skip",
             ),
-            row=2,
-            col=1,
+            row=2, col=1,
         )
 
-    # 体积下方的迷你 range slider 取代左侧手动画线 slider，
-    # 用户直接拖动缩放主图；不展示时直接关掉即可。
     figure.update_layout(
         height=620,
-        xaxis_rangeslider_visible=False,
+        # 显式锁定 legend：避免自动堆叠产生拥挤（多trace时）。
+        legend={
+            "orientation": "h",
+            "y": 1.08,
+            "x": 0,
+            "xanchor": "left",
+            "yanchor": "bottom",
+            "traceorder": "normal",
+        },
+        margin={"l": 50, "r": 70, "t": 50, "b": 20},
+        dragmode="zoom",
+        hovermode="x unified",
+        # Y 轴放右侧（与旧看板/同花顺一致），左侧留白给结构线/注释。
+        yaxis={
+            "position": 1.0,
+            "side": "right",
+            "showgrid": True,
+            "gridcolor": "#edf1f6",
+            "zeroline": False,
+        },
+        yaxis2={
+            "position": 1.0,
+            "side": "right",
+            "showgrid": False,
+            "zeroline": False,
+        },
+        # 成交量子图的迷你 range slider 供用户拖动缩放主图。
         xaxis2_rangeslider_visible=True,
         xaxis2_rangeslider_thickness=0.06,
-        hovermode="x unified",
-        legend={"orientation": "h", "y": 1.06},
-        margin={"l": 40, "r": 40, "t": 50, "b": 20},
-        dragmode="zoom",
+        plot_bgcolor="#ffffff",
+        paper_bgcolor="#ffffff",
+        font={
+            "family": "-apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,sans-serif",
+            "color": "#172033",
+        },
     )
-    # 跳过周末和非交易日，让 K 线连续排列，不再出现「5 根一组中间断开」。
-    # bounds ["sat","mon"] 表示从周六到周一之间的区间不画——即跳过周六周日。
-    # 如果将来需要跳过 A 股节假日，在 list 里加 dict(values=["2024-10-01",...]) 即可。
     figure.update_xaxes(
         rangebreaks=[{"bounds": ["sat", "mon"]}],
+        showgrid=False,
+        zeroline=False,
+        showline=True,
+        linecolor="#d9e0ea",
     )
     return figure
 
@@ -473,6 +617,7 @@ def build_stage_history_figure(history_frame: pd.DataFrame) -> go.Figure:
 
 __all__ = [
     "COLOR_HEX",
+    "COLOR_CN",
     "MA_COLORS",
     "build_price_figure",
     "build_stage_history_figure",
