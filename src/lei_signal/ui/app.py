@@ -31,6 +31,7 @@ from lei_signal.ui.charts import (
     build_stage_history_figure,
     build_volume_profile_figure,
 )
+from lei_signal.market_context.mapping import map_reference_markets
 
 DISCLAIMER = (
     "本系统是技术信号识别、解释与历史有效性研究工具，**不是自动交易系统**。"
@@ -250,8 +251,8 @@ def render() -> None:
     if result is None:
         return
 
-    tab_current, tab_timeline, tab_diagnostics, tab_research = st.tabs(
-        ["当前观察", "技术事件时间轴", "结构诊断", "历史信号研究"]
+    tab_current, tab_timeline, tab_diagnostics, tab_research, tab_market = st.tabs(
+        ["当前观察", "技术事件时间轴", "结构诊断", "历史信号研究", "市场环境"]
     )
     with tab_current:
         _render_current(result)
@@ -261,6 +262,8 @@ def render() -> None:
         _render_diagnostics(result)
     with tab_research:
         _render_research(result)
+    with tab_market:
+        _render_market_context_tab(result)
 
 
 # ---------------- 当前观察页 ----------------
@@ -1089,6 +1092,89 @@ def _render_rule_reference() -> None:
             "provenance=research_proxy 表示视频未明确定义、由本项目为量化而建立的代理规则，"
             "不冒充 LEI 原始公式。"
         )
+
+
+# ---------------- 市场环境页 (Round 4) ----------------
+
+def _render_market_context_tab(result: AnalysisResult) -> None:
+    """Render the independent market context dashboard.
+
+    Displays reference-market mapping, breadth values, drawdown,
+    sentiment status, and any data quality warnings. Does NOT modify
+    or interact with Round 3 state machine outputs.
+    """
+    st.subheader("市场环境 · Round 4")
+    st.caption(
+        "市场环境层回答的是「当前市场是否为该技术机会提供顺风」，不是"
+        "「这个标的的技术信号是否成立」。市场环境不改变技术信号阶段。"
+    )
+
+    # Show mapping
+    mapping = map_reference_markets(result.symbol)
+    st.markdown("#### 参考市场映射")
+    if mapping.mapping_incomplete:
+        st.warning(
+            f"标的 `{result.symbol}` 的参考市场映射不完整（mapping_incomplete）。"
+            f"\n原因：{mapping.reason_cn}"
+        )
+    else:
+        st.info(
+            f"主参考市场：**{mapping.primary_market_id.value if mapping.primary_market_id else '无'}**\n\n"
+            f"次参考市场：{'、'.join(m.value for m in mapping.secondary_market_ids) if mapping.secondary_market_ids else '无'}\n\n"
+            f"映射原因：{mapping.reason_cn}"
+        )
+
+    # Data environment status
+    st.markdown("#### 数据环境")
+    env_vars = ["LEI_UNIVERSE_ROOT", "LEI_COMPONENT_BARS_ROOT",
+                "LEI_INDEX_BARS_ROOT", "LEI_SENTIMENT_ROOT"]
+    env_status = {}
+    for var in env_vars:
+        val = os.environ.get(var)
+        env_status[var] = val if val else "未设置"
+
+    env_df = pd.DataFrame(
+        [{"环境变量": k, "状态": v} for k, v in env_status.items()]
+    )
+    st.dataframe(env_df, use_container_width=True, hide_index=True)
+
+    if any(v == "未设置" for v in env_status.values()):
+        st.warning(
+            "部分市场环境数据路径未设置。市场宽度、指数回撤与情绪数据不可用。"
+            "请设置上述环境变量指向本地数据目录后刷新。"
+        )
+        st.info(
+            "**市场环境不改变该技术信号阶段**。"
+        )
+        return
+
+    # Breadth summary placeholder
+    st.markdown("#### 市场宽度")
+    st.info(
+        "市场宽度需要真实的成分股和行情数据。当前为占位显示。\n\n"
+        "设置环境变量后：\n"
+        "- Breadth20 / Breadth50 / Breadth200 及覆盖率\n"
+        "- LEI固定阈值事件（A股标记 research_proxy）\n"
+        "- 长期底色、热度、扩散方向\n"
+        "- 顺风/中性/逆风/未知 摘要"
+    )
+
+    # Drawdown placeholder
+    st.markdown("#### 指数回撤")
+    st.info("需要指数行情数据（LEI_INDEX_BARS_ROOT）")
+
+    # Sentiment placeholder
+    st.markdown("#### 情绪数据（NAAIM / AAII）")
+    st.info("需要情绪数据文件（LEI_SENTIMENT_ROOT）。NAAIM/AAII按实际发布时间可见。")
+
+    # Key disclaimer
+    st.markdown("---")
+    st.success(
+        "**市场环境不改变该技术信号阶段。**\n\n"
+        "标的技术状态与市场环境并列展示，不互相覆盖。\n"
+        "市场环境为提示信息，不构成买入卖出建议。\n"
+        "A股LEI固定阈值标记为 `lei_threshold_research`，未经A股样本外验证。"
+    )
 
 
 if __name__ == "__main__":
