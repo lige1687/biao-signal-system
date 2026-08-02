@@ -173,7 +173,9 @@ def test_parquet_cache_roundtrip_and_corruption_is_a_miss(tmp_path) -> None:  # 
     cache = ParquetCache(tmp_path)
     frame = _yahoo_frame(25).rename(columns=str.lower)
     frame.index = frame.index.tz_localize(None)
-    entry = cache.write("QQQ", frame)
+    # provider 必须显式声明为可信来源，否则命中会被来源校验拦掉，
+    # 下面的「损坏文件视为未命中」就会因为错误的原因通过。
+    entry = cache.write("QQQ", frame, provider="yahoo")
     assert entry.rows == 25
 
     loaded = cache.read("QQQ", required_columns=("open", "close"))

@@ -62,7 +62,7 @@ def test_network_failure_falls_back_to_recent_cache(tmp_path) -> None:  # noqa: 
     """修复 8：网络失败时若缓存存在且未过期，可降级使用。"""
     cache_root = tmp_path / "cache"
     cache = ParquetCache(cache_root)
-    cache.write("QQQ", _bars(300, seed=21))
+    cache.write("QQQ", _bars(300, seed=21), provider="eastmoney")
 
     class AlwaysFail:
         def fetch(self, symbol, *, min_rows=21):
@@ -81,7 +81,7 @@ def test_network_failure_with_stale_cache_still_raises(tmp_path) -> None:  # noq
     """修复 8：缓存已过期时不得静默使用陈旧数据。"""
     cache_root = tmp_path / "cache"
     cache = ParquetCache(cache_root)
-    cache.write("QQQ", _bars(300, seed=31))
+    cache.write("QQQ", _bars(300, seed=31), provider="eastmoney")
     cache_path = cache_root / "QQQ.bars.parquet"
     seven_days_ago = (pd.Timestamp.now() - pd.Timedelta(days=7)).timestamp()
     os.utime(cache_path, (seven_days_ago, seven_days_ago))

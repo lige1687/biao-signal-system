@@ -217,7 +217,13 @@ def analyze(
     # 不用裸 except：真正的逻辑缺陷必须暴露出来，而不是被缓存分支静默吃掉。
     if cache is not None and not cache_fallback_used:
         with suppress(OSError, ImportError, ValueError):
-            cache.write(price_data.symbol, price_data.bars)
+            # 必须显式记录来源：缓存文件名只由 symbol 决定，
+            # 不带来源标记的缓存无法与合成/夹具数据区分（见 cache.py 模块注释）。
+            cache.write(
+                price_data.symbol,
+                price_data.bars,
+                provider=price_data.report.provider,
+            )
 
     result = analyze_bars(
         price_data.symbol,
