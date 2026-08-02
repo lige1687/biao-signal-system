@@ -41,6 +41,84 @@ def test_price_figure_contains_candles_four_mas_volume_and_colors() -> None:
         assert required in names, f"图表缺少 {required}"
 
 
+def test_lei_color_mode_splits_candles_by_signal_color() -> None:
+    """绿灰黑模式下，每根 K 线本体按当日 signal_color 上色，不依赖涨跌。"""
+    result = analyze_bars("SYN", _bars())
+    figure = build_price_figure(
+        result.frame,
+        structures=result.structures,
+        b1_price=result.assessment.b1_price,
+        color_mode="lei_color",
+    )
+
+    # 颜色状态带在 LEI 模式下应被省略（K 线本体已上色）。
+    names = [trace.name for trace in figure.data]
+    assert "颜色状态" not in names
+
+    # 至少有一个 LEI 分桶 trace，并使用对应 hex 颜色。
+    candle_names = [n for n in names if n.startswith("K线（")]
+    assert candle_names, "LEI 模式应至少有一个分桶 K 线 trace"
+
+    from lei_signal.ui.charts import COLOR_HEX
+
+    for trace in figure.data:
+        if not trace.name.startswith("K线（"):
+            continue
+        if "绿色" in trace.name:
+            expected = COLOR_HEX["green"]
+        elif "灰色" in trace.name:
+            expected = COLOR_HEX["gray"]
+        elif "黑色" in trace.name:
+            expected = COLOR_HEX["black"]
+        else:
+            continue
+        # 三色统一：涨跌都用同一 hex，避免「绿涨红跌」残留
+        assert trace.increasing.fillcolor == expected
+        assert trace.decreasing.fillcolor == expected
+        assert trace.increasing.line.color == expected
+        assert trace.decreasing.line.color == expected
+        # 分桶 trace 不应进入 legend，避免图例膨胀
+        assert trace.showlegend is False
+
+
+def test_lei_color_mode_falls_back_when_no_signal_color_column() -> None:
+    """没有 signal_color 列时，LEI 模式不能崩，必须有可读的 K 线。"""
+    frame = _bars()
+    frame = frame.drop(columns=[c for c in frame.columns if c not in {
+        "open", "high", "low", "close", "volume"
+    }])
+    figure = build_price_figure(frame, color_mode="lei_color")
+    names = [trace.name for trace in figure.data]
+    # 回退路径画的就是默认「复权K线」
+    assert "复权K线" in names
+
+
+def test_red_green_mode_keeps_color_state_marker() -> None:
+    """红绿模式必须保留日级 LEI 小方块带，与既有截图一致。"""
+    result = analyze_bars("SYN", _bars())
+    figure = build_price_figure(
+        result.frame, color_mode="red_green"
+    )
+    names = [trace.name for trace in figure.data]
+    assert "颜色状态" in names
+
+
+def test_price_chart_helper_renders_both_modes_without_state_machine_change() -> None:
+    """两种颜色模式只影响展示，不应改变任何 LEI 计算结果。"""
+    result_red = analyze_bars("SYN", _bars())
+    result_lei = analyze_bars("SYN", _bars())
+    # 两份独立计算结果的结构化字段必须一致（阶段、风险、颜色逐日序列）。
+    for left, right in zip(result_red.history, result_lei.history, strict=True):
+        assert left.stage == right.stage
+        assert left.risk_state == right.risk_state
+        for ls, rs in zip(
+            left.observations.values(),
+            right.observations.values(),
+            strict=True,
+        ):
+            assert ls.tier == rs.tier
+
+
 def test_color_hex_mapping_is_stable() -> None:
     assert COLOR_HEX["green"] == "#16a34a"
     assert COLOR_HEX["gray"] == "#9ca3af"

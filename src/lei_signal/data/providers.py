@@ -1,4 +1,4 @@
-"""行情 Provider：Yahoo（默认）与东方财富（A 股增强源）。
+"""行情 Provider：Yahoo、东方财富（A 股增强）、腾讯（A 股前复权主源）。
 
 Provider 接口可替换。任何数据问题都通过 DataUnavailableError 显式暴露，
 不得静默返回空结果。
@@ -437,17 +437,187 @@ class SinaPriceProvider:
         return frame.set_index("date")
 
 
+class TencentPriceProvider:
+    """腾讯财经日线源（A 股前复权主源）。
+
+    为什么新增
+    ----------
+    腾讯 ``web.ifzq.gtimg.cn`` 接口对 A 股前复权日线稳定可用，且不需要 token、
+    不触发东方财富偶发的 ``Empty reply from server`` 也不触发 Yahoo 的 429 限流。
+    已在 A 股路径中放在东方财富之前，避免任何 A 股用户看到「新浪不复权」标签。
+
+    复权口径（重要）
+    ---------------
+    使用 ``qfq``（前复权），与东方财富 ``fqt=1`` 口径一致；因此
+    ``adjusted=True`` 会如实写进 ValidationReport——可与东方财富互为对照。
+    如需使用不复权价格，请改用其他源。
+    """
+
+    name = "tencent"
+    _HOST = "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get"
+
+    def __init__(
+        self,
+        opener: Callable[[str], str] | None = None,
+        *,
+        timeout: float = 10.0,
+        max_bars: int = 1500,
+        attempts: int = 3,
+        backoff: float = 1.5,
+        sleep: Callable[[float], None] | None = None,
+    ) -> None:
+        self._opener = opener or self._default_opener
+        self._timeout = timeout
+        self._max_bars = max_bars
+        self._attempts = max(1, attempts)
+        self._backoff = backoff
+        self._sleep = sleep if sleep is not None else time.sleep
+
+    def _default_opener(self, url: str) -> str:
+        request = urllib.request.Request(  # noqa: S310 - 固定 https 主机
+            url,
+            headers={
+                "User-Agent": "Mozilla/5.0",
+                "Referer": "https://gu.qq.com/",
+            },
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=self._timeout) as response:  # noqa: S310
+                if response.status != 200:
+                    raise DataUnavailableError(f"腾讯返回 HTTP {response.status}")
+                return response.read().decode("utf-8", errors="replace")
+        except urllib.error.URLError as exc:
+            raise DataUnavailableError(f"腾讯网络请求失败：{exc.reason}") from exc
+        except OSError as exc:
+            raise DataUnavailableError(f"腾讯连接中断：{exc}") from exc
+
+    def _fetch_text(self, url: str) -> str:
+        last: DataUnavailableError | None = None
+        for attempt in range(self._attempts):
+            try:
+                return self._opener(url)
+            except DataUnavailableError as exc:
+                last = exc
+            except Exception as exc:  # noqa: BLE001 - 统一转为可显示错误
+                last = DataUnavailableError(f"腾讯请求失败：{exc}")
+            if attempt < self._attempts - 1:
+                self._sleep(self._backoff * (attempt + 1))
+        assert last is not None
+        raise last
+
+    @staticmethod
+    def _tencent_symbol(info: SymbolInfo) -> str:
+        """A 股代码到腾讯口径：沪市 sh600000，深市 sz159915。"""
+        if not is_a_share(info):
+            raise ValueError(f"{info.symbol} 不是 A 股标的，无法映射腾讯代码")
+        prefix = "sh" if info.market is Market.CN_SH else "sz"
+        return f"{prefix}{info.bare_code}"
+
+    def fetch(self, symbol: str, *, min_rows: int = 21) -> PriceData:
+        info = resolve_symbol(symbol)
+        if not is_a_share(info):
+            raise DataUnavailableError(f"{info.symbol} 不是 A 股标的，腾讯源不适用")
+
+        params = {
+            "param": f"{self._tencent_symbol(info)},day,,,{self._max_bars},qfq",
+        }
+        url = f"{self._HOST}?{urllib.parse.urlencode(params)}"
+        bars_raw = self._parse_payload(self._fetch_text(url), info.symbol)
+        bars, report = validate_bars(
+            bars_raw,
+            symbol=info.symbol,
+            provider=self.name,
+            # 如实标记：腾讯 qfq 与东方财富 fqt=1 口径一致，前复权。
+            adjusted=True,
+            min_rows=min_rows,
+        )
+        return PriceData(
+            symbol=info.symbol,
+            display_name=info.symbol,
+            bars=bars,
+            report=report,
+            info=info,
+        )
+
+    @staticmethod
+    def _parse_payload(text: str, symbol: str) -> pd.DataFrame:
+        """解析 ``qfqday`` 数组：每行 [日期, 开, 收, 高, 低, 成交量, ...]。
+
+        腾讯 ``qfq`` 前复权返回键为 ``qfqday``，不复权为 ``day``。这里只接受
+        前复权版本——如返回非 qfqday（接口降级）必须显式报错，不得冒充复权。
+        """
+        payload_text = text.strip()
+        if not payload_text:
+            raise DataUnavailableError(f"{symbol} 腾讯返回空内容")
+        try:
+            payload: dict[str, Any] = json.loads(payload_text)
+        except json.JSONDecodeError as exc:
+            raise DataUnavailableError(f"{symbol} 腾讯返回非 JSON 内容") from exc
+
+        # 腾讯在错误时也会返回 200 + code != 0，例如 code=1 + msg="param invalid"
+        if int(payload.get("code", 0)) != 0:
+            raise DataUnavailableError(
+                f"{symbol} 腾讯返回错误：code={payload.get('code')} msg={payload.get('msg')!r}"
+            )
+
+        data = payload.get("data")
+        if not isinstance(data, dict):
+            raise DataUnavailableError(f"{symbol} 腾讯返回缺少 data 字段")
+        # 取任意一个子市场（key 是 sh600000 / sz159915 形式）
+        market_data = next(
+            (value for value in data.values() if isinstance(value, dict)),
+            None,
+        )
+        if market_data is None:
+            raise DataUnavailableError(f"{symbol} 腾讯返回缺少行情子对象")
+
+        # 强制使用 qfqday（前复权），不存在即报「源未返回前复权数据」，
+        # 防止降级到不复权 key 静默冒充复权。
+        qfq_rows = market_data.get("qfqday")
+        if not isinstance(qfq_rows, list) or not qfq_rows:
+            raise DataUnavailableError(
+                f"{symbol} 腾讯未返回 qfqday（请确认股票代码或稍后重试）"
+            )
+
+        records: list[dict[str, Any]] = []
+        for item in qfq_rows:
+            if not isinstance(item, list) or len(item) < 6:
+                raise DataUnavailableError(
+                    f"{symbol} 腾讯 qfqday 元素字段不足: {item!r}"
+                )
+            try:
+                records.append(
+                    {
+                        "date": item[0],
+                        "open": float(item[1]),
+                        "close": float(item[2]),
+                        "high": float(item[3]),
+                        "low": float(item[4]),
+                        "volume": float(item[5]),
+                    }
+                )
+            except (TypeError, ValueError) as exc:
+                raise DataUnavailableError(
+                    f"{symbol} 腾讯 qfqday 数值无法解析: {item!r}"
+                ) from exc
+
+        frame = pd.DataFrame(records)
+        frame["date"] = pd.to_datetime(frame["date"])
+        return frame.set_index("date")
+
+
 class ChainedPriceProvider:
     """按顺序尝试多个 Provider，全部失败则报告全部原因。
 
-    A 股优先东方财富（复权 + 交易日更贴近本地口径），其余走 Yahoo。
+    A 股优先腾讯（前复权、稳定）+ 东方财富（前复权、A 股增强），新浪已从
+    默认链路中移除：新浪接口返回不复权价格，会污染 LEI 信号。
     """
 
     name = "chained"
 
-    #: A 股尝试顺序。东方财富为前复权口径，优先；新浪为不复权兜底，
-    #: 排在 Yahoo 之前是因为 Yahoo 对 A 股限流严重且常年 429。
-    _A_SHARE_ORDER = ("eastmoney", "sina")
+    #: A 股尝试顺序。腾讯与东方财富都是前复权口径，腾讯在前是因为接口更稳；
+    #: 新浪已退出默认链路（不复权，会污染信号）。Yahoo 仍然作为最终兜底。
+    _A_SHARE_ORDER = ("tencent", "eastmoney")
 
     def __init__(self, providers: list[PriceProvider]) -> None:
         if not providers:
@@ -481,10 +651,15 @@ def default_provider() -> ChainedPriceProvider:
     """默认行情源组合。
 
     A 股实际尝试顺序由 ``ChainedPriceProvider._A_SHARE_ORDER`` 决定：
-    东方财富（前复权）→ 新浪（不复权兜底）→ Yahoo。
+    腾讯（前复权）→ 东方财富（前复权）→ Yahoo。
+    新浪已退出默认链路（不复权）。
     """
     return ChainedPriceProvider(
-        [YahooPriceProvider(), EastmoneyPriceProvider(), SinaPriceProvider()]
+        [
+            TencentPriceProvider(),
+            EastmoneyPriceProvider(),
+            YahooPriceProvider(),
+        ]
     )
 
 
@@ -494,6 +669,7 @@ __all__ = [
     "PriceData",
     "PriceProvider",
     "SinaPriceProvider",
+    "TencentPriceProvider",
     "YahooPriceProvider",
     "default_provider",
 ]

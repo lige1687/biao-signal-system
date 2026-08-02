@@ -1,5 +1,20 @@
-"""Plotly 图表：K线、均线、结构标记、成交量与筹码分布代理。"""
+"""Plotly 图表：K线、均线、结构标记、成交量与筹码分布代理。
+
+K线颜色模式
+-----------
+``build_price_figure`` 支持两种 K线颜色模式，通过 ``color_mode`` 参数切换：
+
+- ``red_green``（默认，A股惯例）：收盘高于开盘为红色（``#ef4444``），
+  收盘低于开盘为绿色（``#16a34a``）。下方仍保留日级 LEI 颜色小方块。
+- ``lei_color``（LEI 三色模式）：**每根K线整体**按当日 ``signal_color``
+  上色——绿/灰/黑三种状态直接体现在 K 线本体的填充和边框上，
+  不再依赖「涨红跌绿」二元信号。需要 ``frame`` 含 ``signal_color`` 列。
+
+切换图表模式属于**展示**修改，不会改变任何底层 LEI 计算或生命周期判断。
+"""
 from __future__ import annotations
+
+from typing import Literal
 
 import pandas as pd
 import plotly.graph_objects as go
@@ -8,12 +23,17 @@ from plotly.subplots import make_subplots
 from lei_signal.domain.types import StructureInstance
 from lei_signal.features.volume_profile import VolumeProfileProxy
 
+ColorMode = Literal["red_green", "lei_color"]
+
 COLOR_HEX = {
     "green": "#16a34a",
     "gray": "#9ca3af",
     "black": "#111827",
     "unknown": "#e5e7eb",
 }
+
+#: LEI 三色在 K 线上的中文化映射（仅展示用，不参与任何计算）。
+COLOR_CN = {"green": "绿色", "gray": "灰色", "black": "黑色", "unknown": "未知"}
 
 MA_COLORS = {
     "sma20": "#f59e0b",
@@ -22,24 +42,62 @@ MA_COLORS = {
     "ema120": "#db2777",
 }
 
+# A 股惯例：涨红跌绿（与美股相反）。
+_RED_GREEN_UP = "#ef4444"
+_RED_GREEN_DOWN = "#16a34a"
 
-def build_price_figure(
+
+def _split_by_signal_color(frame: pd.DataFrame) -> dict[str, pd.DataFrame]:
+    """按 ``signal_color`` 列分桶，跳过未知/缺失。"""
+    if "signal_color" not in frame.columns:
+        return {}
+    buckets: dict[str, pd.DataFrame] = {}
+    for color in ("green", "gray", "black"):
+        mask = frame["signal_color"] == color
+        if mask.any():
+            buckets[color] = frame.loc[mask]
+    return buckets
+
+
+def _add_candle_traces(
+    figure: go.Figure,
     frame: pd.DataFrame,
-    *,
-    structures: list[StructureInstance] | None = None,
-    b1_price: float | None = None,
-    profile: VolumeProfileProxy | None = None,
-) -> go.Figure:
-    """主图：K线 + 四条均线 + 颜色带 + 结构标记 + 成交量。"""
-    figure = make_subplots(
-        rows=2,
-        cols=1,
-        shared_xaxes=True,
-        row_heights=[0.74, 0.26],
-        vertical_spacing=0.04,
-        subplot_titles=("复权K线 · MA20/EMA20/EMA60/EMA120", "成交量"),
-    )
+    color_mode: ColorMode,
+) -> None:
+    """添加 K 线本体。lei_color 模式按日级 signal_color 分桶。"""
+    if color_mode == "lei_color" and "signal_color" in frame.columns:
+        buckets = _split_by_signal_color(frame)
+        if not buckets:
+            # 没有可分桶的颜色，回退到默认涨跌色（绝不静默画错色）。
+            figure.add_trace(_candle_trace(frame), row=1, col=1)
+            return
+        for color, sub in buckets.items():
+            hex_color = COLOR_HEX[color]
+            figure.add_trace(
+                go.Candlestick(
+                    x=sub.index,
+                    open=sub["open"],
+                    high=sub["high"],
+                    low=sub["low"],
+                    close=sub["close"],
+                    name=f"K线（{COLOR_CN[color]}）",
+                    increasing_line_color=hex_color,
+                    decreasing_line_color=hex_color,
+                    increasing_fillcolor=hex_color,
+                    decreasing_fillcolor=hex_color,
+                    showlegend=False,
+                    hovertext=[
+                        f"{idx.strftime('%Y-%m-%d')} · {COLOR_CN[color]}"
+                        for idx in sub.index
+                    ],
+                    hoverinfo="x+text",
+                ),
+                row=1,
+                col=1,
+            )
+        return
 
+    # 默认 red_green 模式：A股惯例，涨红跌绿。
     figure.add_trace(
         go.Candlestick(
             x=frame.index,
@@ -48,12 +106,61 @@ def build_price_figure(
             low=frame["low"],
             close=frame["close"],
             name="复权K线",
-            increasing_line_color="#ef4444",
-            decreasing_line_color="#16a34a",
+            increasing_line_color=_RED_GREEN_UP,
+            decreasing_line_color=_RED_GREEN_DOWN,
         ),
         row=1,
         col=1,
     )
+
+
+def _candle_trace(frame: pd.DataFrame) -> go.Candlestick:
+    """LEI 颜色模式下回退路径使用的 K 线 trace（按 A 股涨跌色）。"""
+    return go.Candlestick(
+        x=frame.index,
+        open=frame["open"],
+        high=frame["high"],
+        low=frame["low"],
+        close=frame["close"],
+        name="复权K线",
+        increasing_line_color=_RED_GREEN_UP,
+        decreasing_line_color=_RED_GREEN_DOWN,
+    )
+
+
+def build_price_figure(
+    frame: pd.DataFrame,
+    *,
+    structures: list[StructureInstance] | None = None,
+    b1_price: float | None = None,
+    profile: VolumeProfileProxy | None = None,
+    color_mode: ColorMode = "red_green",
+) -> go.Figure:
+    """主图：K线 + 四条均线 + 颜色带 + 结构标记 + 成交量。
+
+    参数 ``color_mode``
+    ------------------
+    - ``"red_green"``（默认）：K 线按 A 股惯例红涨绿跌，下方保留日级 LEI 小方块。
+    - ``"lei_color"``：K 线本体按当日 ``signal_color``（绿/灰/黑）染色；
+      小方块带在该模式下被省略以免冗余，但成交量柱仍按日级颜色上色。
+    """
+    figure = make_subplots(
+        rows=2,
+        cols=1,
+        shared_xaxes=True,
+        row_heights=[0.74, 0.26],
+        vertical_spacing=0.04,
+        subplot_titles=(
+            (
+                "复权K线 · 绿灰黑三色"
+                if color_mode == "lei_color"
+                else "复权K线 · MA20/EMA20/EMA60/EMA120"
+            ),
+            "成交量",
+        ),
+    )
+
+    _add_candle_traces(figure, frame, color_mode)
 
     labels = {"sma20": "MA20", "ema20": "EMA20", "ema60": "EMA60", "ema120": "EMA120"}
     for column, label in labels.items():
@@ -69,8 +176,8 @@ def build_price_figure(
                 col=1,
             )
 
-    # 颜色状态带
-    if "signal_color" in frame.columns:
+    # 颜色状态带：red_green 模式下显示（LEI 模式下 K 线本体已上色，省略）。
+    if color_mode == "red_green" and "signal_color" in frame.columns:
         figure.add_trace(
             go.Scatter(
                 x=frame.index,
@@ -87,6 +194,19 @@ def build_price_figure(
             ),
             row=1,
             col=1,
+        )
+    elif color_mode == "lei_color" and "signal_color" in frame.columns:
+        # 在 lei_color 模式下用 caption 形式说明图例（避免 legend 太多项）。
+        figure.add_annotation(
+            text="绿=强势 · 灰=关注 · 黑=弱势",
+            xref="paper",
+            yref="paper",
+            x=0.0,
+            y=1.04,
+            xanchor="left",
+            yanchor="bottom",
+            showarrow=False,
+            font={"size": 11, "color": "#475569"},
         )
 
     # 结构标记

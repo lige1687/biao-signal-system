@@ -11,6 +11,7 @@ from lei_signal.data.cache import ParquetCache
 from lei_signal.data.providers import (
     ChainedPriceProvider,
     EastmoneyPriceProvider,
+    TencentPriceProvider,
     YahooPriceProvider,
 )
 from lei_signal.data.validation import DataUnavailableError
@@ -248,3 +249,143 @@ def test_network_errors_are_always_data_unavailable_not_raw_exceptions() -> None
     provider = EastmoneyPriceProvider(opener=disconnect, attempts=1, sleep=lambda _: None)
     with pytest.raises(DataUnavailableError):
         provider.fetch("159915")
+
+
+# ---------- 腾讯 provider ----------
+
+def _tencent_payload(rows: int = 30, market_key: str = "sz159915") -> str:
+    qfqday = []
+    for i in range(rows):
+        day = pd.Timestamp("2024-01-02") + pd.Timedelta(days=i)
+        close = 10.0 + i * 0.1
+        qfqday.append([
+            day.strftime("%Y-%m-%d"),
+            f"{close - 0.05:.4f}",   # open
+            f"{close:.4f}",          # close
+            f"{close + 0.08:.4f}",   # high
+            f"{close - 0.09:.4f}",   # low
+            f"{1_000_000 + i}",      # volume
+        ])
+    return json.dumps({
+        "code": 0,
+        "msg": "",
+        "data": {market_key: {"qfqday": qfqday, "qfqfactor": 1.0}},
+    })
+
+
+def test_tencent_provider_parses_qfqday_and_is_marked_adjusted() -> None:
+    captured: dict[str, str] = {}
+
+    def opener(url: str) -> str:
+        captured["url"] = url
+        return _tencent_payload()
+
+    provider = TencentPriceProvider(opener=opener, sleep=lambda _: None)
+    data = provider.fetch("159915")
+
+    assert data.symbol == "159915.SZ"
+    assert len(data.bars) == 30
+    assert data.bars.columns.tolist() == ["open", "high", "low", "close", "volume"]
+    # 必须显式请求 qfq 前复权
+    assert "qfq" in captured["url"]
+    assert "param=sz159915" in captured["url"]
+    assert data.report.adjusted is True
+    assert data.report.provider == "tencent"
+
+
+def test_tencent_provider_uses_sh_prefix_for_shanghai() -> None:
+    captured: dict[str, str] = {}
+
+    def opener(url: str) -> str:
+        captured["url"] = url
+        return _tencent_payload(market_key="sh600000")
+
+    provider = TencentPriceProvider(opener=opener, sleep=lambda _: None)
+    provider.fetch("600000")
+    assert "param=sh600000" in captured["url"]
+
+
+def test_tencent_provider_rejects_non_a_share() -> None:
+    provider = TencentPriceProvider(opener=lambda _: "{}", sleep=lambda _: None)
+    with pytest.raises(DataUnavailableError, match="不是 A 股"):
+        provider.fetch("QQQ")
+
+
+def test_tencent_provider_surfaces_qfqday_missing() -> None:
+    """降级到不复权 key 时必须显式报错，不得静默冒充前复权。"""
+    payload = json.dumps({"code": 0, "data": {"sz159915": {"day": [[]]}}})
+    provider = TencentPriceProvider(opener=lambda _: payload, sleep=lambda _: None)
+    with pytest.raises(DataUnavailableError, match="未返回 qfqday"):
+        provider.fetch("159915")
+
+
+def test_tencent_provider_surfaces_error_code() -> None:
+    payload = json.dumps({"code": 1, "msg": "param invalid"})
+    provider = TencentPriceProvider(opener=lambda _: payload, sleep=lambda _: None)
+    with pytest.raises(DataUnavailableError, match="腾讯返回错误"):
+        provider.fetch("159915")
+
+
+def test_tencent_provider_surfaces_malformed_payloads() -> None:
+    with pytest.raises(DataUnavailableError, match="非 JSON"):
+        TencentPriceProvider(
+            opener=lambda _: "<html>error</html>", sleep=lambda _: None
+        ).fetch("159915")
+    with pytest.raises(DataUnavailableError, match="缺少 data"):
+        TencentPriceProvider(
+            opener=lambda _: '{"code":0,"rc":1}', sleep=lambda _: None
+        ).fetch("159915")
+    with pytest.raises(DataUnavailableError, match="qfqday 元素字段不足"):
+        TencentPriceProvider(
+            opener=lambda _: json.dumps({"code": 0, "data": {"sz159915": {"qfqday": [[]]}}}),
+            sleep=lambda _: None,
+        ).fetch("159915")
+
+
+def test_tencent_provider_retries_transient_failures_then_succeeds() -> None:
+    calls: list[int] = []
+
+    def flaky(_: str) -> str:
+        calls.append(1)
+        if len(calls) < 3:
+            raise DataUnavailableError("腾讯连接中断：RemoteDisconnected")
+        return _tencent_payload()
+
+    provider = TencentPriceProvider(opener=flaky, attempts=3, sleep=lambda _: None)
+    data = provider.fetch("159915")
+    assert len(calls) == 3
+    assert len(data.bars) == 30
+
+
+def test_chained_provider_prefers_tencent_for_a_shares() -> None:
+    """腾讯是 A 股新主源，必须排在东方财富之前。"""
+    order: list[str] = []
+
+    class Recorder:
+        def __init__(self, name: str, succeed: bool) -> None:
+            self.name = name
+            self._succeed = succeed
+
+        def fetch(self, symbol: str, *, min_rows: int = 21):  # noqa: ANN202
+            order.append(self.name)
+            if not self._succeed:
+                raise DataUnavailableError(f"{self.name} 不可用")
+            return TencentPriceProvider(
+                opener=lambda _: _tencent_payload(), sleep=lambda _: None
+            ).fetch(symbol)
+
+    chained = ChainedPriceProvider(
+        [Recorder("yahoo", False), Recorder("eastmoney", False), Recorder("tencent", True)]
+    )
+    chained.fetch("159915")
+    assert order[0] == "tencent"
+
+
+def test_chained_provider_skips_sina_when_tencent_present() -> None:
+    """Sina 已退出默认链路——默认 Provider 链中不应出现它。"""
+    from lei_signal.data.providers import default_provider
+
+    chain = default_provider()._providers  # noqa: SLF001 - 测试可见私有
+    names = [provider.name for provider in chain]
+    assert "sina" not in names
+    assert names[0] == "tencent"

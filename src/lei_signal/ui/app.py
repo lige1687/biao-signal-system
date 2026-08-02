@@ -321,6 +321,10 @@ def _render_current(result: AnalysisResult) -> None:
 
     st.info(f"**阶段说明**：{a.stage_change_reason_cn}")
 
+    # 价格/均线/结构主图放在顶部，让用户第一时间看到 K 线与信号叠加。
+    # 表格、维度、风险解释在下方展开，避免「先看一堆表再看到 K 线」的逆序。
+    _render_price_chart(result)
+
     # 三色判断依据
     with st.expander("三色判断依据（可逐值核对）", expanded=True):
         st.write(
@@ -418,18 +422,7 @@ def _render_current(result: AnalysisResult) -> None:
         st.markdown(f"**已经失效（{len(a.invalidated_events)}）**")
         _render_event_list(a.invalidated_events[-12:])
 
-    # 图表
-    st.markdown("#### 价格、均线、结构与成交量")
-    window = st.slider("显示最近多少根K线", 60, min(1200, len(frame)), min(320, len(frame)))
-    st.plotly_chart(
-        build_price_figure(
-            frame.tail(window),
-            structures=result.structures,
-            b1_price=a.b1_price,
-            profile=result.profile,
-        ),
-        use_container_width=True,
-    )
+    # 主图已在顶部渲染（_render_price_chart），此处只放筹码分布代理。
 
     if result.profile is not None:
         st.markdown("#### 筹码分布代理")
@@ -491,6 +484,58 @@ def _render_event_list(events: list) -> None:
         st.caption(
             f"{proxy}**{event.available_date}** {event.rule_id}\n\n{event.reason_cn}"
         )
+
+
+def _render_price_chart(result: AnalysisResult) -> None:
+    """渲染主图（K线 + 均线 + 结构 + 成交量），放在页面顶部。
+
+    用户可切换两种 K 线颜色模式：
+    - **红绿模式**：A 股惯例，涨红跌绿，下方小方块显示日级 LEI 颜色。
+    - **绿灰黑模式**：每根 K 线本体按当日 ``signal_color`` 上色，直接
+      把 LEI 三色状态画在价格图上，无需再向下看小方块。
+    """
+    from lei_signal.ui.charts import ColorMode
+
+    st.markdown("#### 价格、均线、结构与成交量")
+    controls = st.columns([3, 2])
+    with controls[0]:
+        window = st.slider(
+            "显示最近多少根K线",
+            60,
+            min(1200, len(result.frame)),
+            min(320, len(result.frame)),
+            key="price_chart_window",
+        )
+    with controls[1]:
+        # 默认沿用 A 股红绿惯例（与既有截图一致），需要 LEI 三色视角时手动切换。
+        color_mode: ColorMode = st.radio(
+            "K线颜色模式",
+            options=["red_green", "lei_color"],
+            format_func=lambda key: {
+                "red_green": "红绿（A股惯例）",
+                "lei_color": "绿灰黑（LEI 三色）",
+            }[key],
+            horizontal=True,
+            key="price_chart_color_mode",
+        )
+
+    a = result.assessment
+    st.plotly_chart(
+        build_price_figure(
+            result.frame.tail(window),
+            structures=result.structures,
+            b1_price=a.b1_price,
+            profile=result.profile,
+            color_mode=color_mode,
+        ),
+        use_container_width=True,
+        key="price_chart_main",
+    )
+    st.caption(
+        "模式切换**仅影响展示**，不修改任何 LEI 计算、生命周期或风险状态。"
+        if color_mode == "lei_color"
+        else "红绿模式下，K 线下方小方块是日级 LEI 三色状态（绿/灰/黑），与上图一一对应。"
+    )
 
 
 # ---------------- 时间轴页 ----------------

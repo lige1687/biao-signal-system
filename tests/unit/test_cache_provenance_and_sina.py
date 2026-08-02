@@ -207,10 +207,11 @@ class _StubProvider:
         raise DataUnavailableError(f"{self.name} 到此为止")
 
 
-def test_a_share_order_is_eastmoney_then_sina_then_yahoo() -> None:
-    """A 股顺序必须是 东财(前复权) → 新浪(不复权兜底) → Yahoo。
+def test_a_share_order_is_tencent_then_eastmoney_then_yahoo() -> None:
+    """A 股顺序必须是 腾讯(前复权主源) → 东方财富(前复权增强) → Yahoo。
 
-    新浪排在 Yahoo 之前：Yahoo 对 A 股常年 429 限流。
+    新浪已退出默认链路（不复权会污染 LEI 信号）；它不再在 A_SHARE_ORDER
+    中，因此排到 Yahoo 之后（值等于 len(order)，与 Yahoo 并列时按输入稳定排序）。
     """
     order: list[str] = []
 
@@ -220,11 +221,14 @@ def test_a_share_order_is_eastmoney_then_sina_then_yahoo() -> None:
             raise DataUnavailableError(f"{self.name} 不可用")
 
     chained = ChainedPriceProvider(
-        [Recorder("yahoo"), Recorder("sina"), Recorder("eastmoney")]
+        [Recorder("yahoo"), Recorder("sina"), Recorder("eastmoney"), Recorder("tencent")]
     )
     with pytest.raises(DataUnavailableError):
         chained.fetch("159915.SZ")
-    assert order == ["eastmoney", "sina", "yahoo"]
+    # 腾讯/东方财富必在 Yahoo/Sina 之前；Yahoo/Sina 相对顺序由稳定排序决定。
+    assert order[0] == "tencent"
+    assert order[1] == "eastmoney"
+    assert set(order[2:]) == {"yahoo", "sina"}
 
 
 def test_all_source_failures_are_aggregated() -> None:
