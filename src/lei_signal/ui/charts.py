@@ -369,6 +369,12 @@ def build_price_figure(
         margin={"l": 40, "r": 40, "t": 50, "b": 20},
         dragmode="zoom",
     )
+    # 跳过周末和非交易日，让 K 线连续排列，不再出现「5 根一组中间断开」。
+    # bounds ["sat","mon"] 表示从周六到周一之间的区间不画——即跳过周六周日。
+    # 如果将来需要跳过 A 股节假日，在 list 里加 dict(values=["2024-10-01",...]) 即可。
+    figure.update_xaxes(
+        rangebreaks=[{"bounds": ["sat", "mon"]}],
+    )
     return figure
 
 
