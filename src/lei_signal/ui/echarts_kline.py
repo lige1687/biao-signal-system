@@ -292,24 +292,48 @@ def _build_html(
         round((1 - default_bars / total) * 100, 1) if total > default_bars else 0
     )
 
-    # 组装 markPoint：底部确认（K线下方绿钻）、顶部确认（K线上方红钻）、
-    # 失效点（K线上方灰×）。hover tooltip 显示完整结构信息。
+    # 标记点击 → echarts tooltip 弹讲解（人话版本）。
+    # 突破结构失效 (C突破)、顶部确认、底部确认 — 都是关键信号，hover 给出定义和操作含义。
     def _to_mark_point(marks: list[dict[str, Any]], color: str, dead_color: str,
-                       symbol: str, offset_y: int) -> list[dict[str, Any]]:
+                       symbol: str, offset_y: int, side: str) -> list[dict[str, Any]]:
         out: list[dict[str, Any]] = []
         for m in marks:
             info = m.get("info", {})
+            structure_type = info.get("structure_type", "")
+            confirmed = info.get("confirmed_date", "-")
+            invalidated = info.get("invalidated_date")
+            source_rule = info.get("source_rule", "")
+
+            # 人话版本：根据 side 给讲解
+            if side == "bottom":
+                head = "🟢 底部结构确认"
+                explain = "摆动点识别出的「更高低点」或「双底」形态已成型"
+                usage = ("此结构的 C 点是常用止损参考；"
+                         "若价格跌破 C 即结构永久失效（不能再复活）")
+            elif side == "top":
+                head = "🔴 顶部结构确认"
+                explain = "摆动点识别出的「更低高点」形态已成型"
+                usage = "此结构的颈线被有效跌破后，才算顶部确立"
+            else:  # invalidated
+                head = "⚫ 结构失效"
+                explain = "之前确认过的结构，因价格触及 C/颈线而永久失效"
+                usage = "失效后不能再依赖此结构的止损/阻力"
+
             tooltip_lines = [
-                m.get("label", ""),
-                f"确认日: {info.get('confirmed_date', '-')}",
+                head,
+                f"<span style='color:#9a6510'>{m.get('label', '')}</span>",
+                f"确认日: {confirmed}",
             ]
-            if info.get("invalidated_date"):
-                tooltip_lines.append(f"失效日: {info['invalidated_date']}")
-            if info.get("structure_type"):
-                tooltip_lines.append(f"类型: {info['structure_type']}")
-            if info.get("source_rule"):
-                tooltip_lines.append(f"规则: {info['source_rule']}")
+            if invalidated:
+                tooltip_lines.append(f"失效日: {invalidated}")
+            if structure_type:
+                tooltip_lines.append(f"形态: {structure_type}")
+            tooltip_lines.append(f"📖 {explain}")
+            tooltip_lines.append(f"💡 {usage}")
+            if source_rule:
+                tooltip_lines.append(f"<small>规则: {source_rule}</small>")
             tooltip_html = "<br/>".join(tooltip_lines)
+
             out.append({
                 "coord": [m["date"], m["price"]],
                 "symbol": symbol,
@@ -325,11 +349,17 @@ def _build_html(
     top_pts: list[dict[str, Any]] = []
     invalidated_pts: list[dict[str, Any]] = []
     if show["bottom_construction"]:
-        bottom_pts = _to_mark_point(data.get("bottomMarks", []), "#0b9b64", "#9ca3af", "diamond", 20)
+        bottom_pts = _to_mark_point(
+            data.get("bottomMarks", []), "#0b9b64", "#9ca3af", "diamond", 20, "bottom",
+        )
     if show["top_construction"]:
-        top_pts = _to_mark_point(data.get("topMarks", []), "#dc2626", "#9ca3af", "diamond", -22)
-    # 失效标记永远显示（哪怕关掉底部/顶部构造），但属于"辅助信息"
-    invalidated_pts = _to_mark_point(data.get("invalidatedMarks", []), "#9ca3af", "#9ca3af", "pin", -22)
+        top_pts = _to_mark_point(
+            data.get("topMarks", []), "#dc2626", "#9ca3af", "diamond", -22, "top",
+        )
+    # 失效标记：永远展示，但归到 invalidated 类别
+    invalidated_pts = _to_mark_point(
+        data.get("invalidatedMarks", []), "#9ca3af", "#9ca3af", "pin", -22, "invalidated",
+    )
     all_mark_points = bottom_pts + top_pts + invalidated_pts
 
     line_blocks: list[dict[str, Any]] = []
@@ -458,7 +488,29 @@ const option = {{
   legend: {{ top: 2, data: ["K线", "EMA20", "SMA20", "20周期抵扣价", "成交量"], textStyle: {{ color: "#596579" }} }},
   tooltip: {{
     trigger: "axis", axisPointer: {{ type: "cross" }},
-    backgroundColor: "rgba(255,255,255,.96)", borderColor: "#dfe5ee", textStyle: {{ color: "#172033" }}
+    backgroundColor: "rgba(255,255,255,.96)", borderColor: "#dfe5ee", textStyle: {{ color: "#172033" }},
+    formatter: function(params) {{
+      // 取 K 线那一项 + 当日颜色解读
+      var k = null; var vol = null;
+      for (var i = 0; i < params.length; i++) {{
+        if (params[i].seriesName === "K线") k = params[i];
+        if (params[i].seriesName === "成交量") vol = params[i];
+      }}
+      if (!k) return "";
+      var date = k.axisValue;
+      var idx = DATA.dates.indexOf(date);
+      var state = (idx >= 0) ? DATA.states[idx] : "unknown";
+      var stateText = {{green:"🟢 绿色（强势）", gray:"⚪ 灰色（关注）", black:"⚫ 黑色（弱势）", unknown:"❓ 未知"}}[state] || state;
+      var stateNote = {{green:"收盘>EMA20 且 >20日前收盘", gray:"方向分歧，需关注", black:"收盘<EMA20 且 <20日前收盘", unknown:"数据不足"}}[state] || "";
+      var html = "<b>" + date + "</b><br/>" +
+        "状态：" + stateText + "<br/>" +
+        "<small style='color:#888'>" + stateNote + "</small><br/>" +
+        "开:" + k.data[0] + " 高:" + k.data[3] + " 低:" + k.data[2] + " 收:" + k.data[1];
+      if (vol) {{
+        html += "<br/>量:" + (vol.data || vol.value).toLocaleString();
+      }}
+      return html;
+    }}
   }},
   axisPointer: {{ link: [{{ xAxisIndex: "all" }}] }},
   grid: [

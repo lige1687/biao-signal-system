@@ -411,12 +411,20 @@ def test_upload_path_persists_cache_and_sqlite() -> None:
 
 
 def test_sqlite_status_is_surfaced_in_ui() -> None:
-    """界面必须根据 sqlite_persisted 显示真实状态，不得恒显示「已接入」。"""
+    """Phase 1 起 SQLite 持久化状态已从首页移除（用户不关心），
+    但 DataUnavailableError 错误页必须保留，便于调试网络/数据问题。
+
+    该测试守住错误页的处理路径，确保未来不会偷偷删掉。
+    """
     import inspect
 
     from lei_signal.ui import app
 
-    assert "sqlite_persisted" in inspect.getsource(app)
+    src = inspect.getsource(app)
+    assert "_render_data_unavailable" in src, "DataUnavailableError 错误处理不能丢失"
+    assert "classify_error" in src or "限流" in src or "网络不通" in src, (
+        "错误页必须分类提示限流/网络/无数据"
+    )
 
 
 if __name__ == "__main__":  # pragma: no cover

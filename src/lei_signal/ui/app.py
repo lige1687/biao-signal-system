@@ -297,58 +297,98 @@ def _render_data_unavailable(symbol: str, error_msg: str, build_history: bool) -
 
 
 def render() -> None:
-    st.set_page_config(page_title="LEI 技术信号研究系统", layout="wide")
-    st.title("LEI 技术信号研究系统")
-    st.caption(
-        "复权日线 · 三色 + 结构 + 状态机 + 历史有效性研究 · "
-        "信号研究工具，不是自动交易系统"
+    st.set_page_config(
+        page_title="LEI 技术信号研究系统",
+        layout="wide",
+        initial_sidebar_state="collapsed",  # 收起左侧默认 sidebar
     )
 
-    with st.sidebar:
-        st.header("输入")
-        symbol = st.text_input(
-            "股票或ETF代码",
-            value="QQQ",
-            help="例如 QQQ、AAPL、0700.HK、159915、510300",
-        )
-        build_history = st.checkbox(
-            "构建逐日解释历史（较慢，研究页需要）", value=True
-        )
-        # 修复 9：允许上传本地 CSV/Parquet 作为可复现实盘数据导入
-        with st.expander("导入本地行情（CSV / Parquet）", expanded=False):
-            st.caption(
-                "数据获取失败时可上传本地保存的日线；"
-                "文件必须含 date/open/high/low/close/volume 列。"
-                "CSV 需含日期与 OHLCV 列表头。"
+    # 右侧输入 + 信号术语速查（替代原左侧 sidebar）
+    # 用 right_sidebar 占位：Streamlit 无原生 right sidebar，用 border container 模拟。
+    main_area, side_area = st.columns([4, 1])
+    with side_area:
+        with st.container(border=True):
+            st.markdown("#### 🔍 输入")
+            symbol = st.text_input(
+                "股票或ETF代码",
+                value="QQQ",
+                help="例如 QQQ、AAPL、0700.HK、159915、510300",
+                key="symbol_input",
             )
-            upload = st.file_uploader(
-                "选择本地文件",
-                type=["csv", "parquet"],
-                key="local_upload",
+            build_history = st.checkbox(
+                "构建逐日解释历史（较慢，研究页需要）",
+                value=True,
+                key="build_history_check",
             )
-            use_upload = st.checkbox("使用上传文件代替远程拉取", value=False)
-        run = st.button("分析", type="primary", use_container_width=True)
-        st.divider()
-        st.caption(DISCLAIMER)
-        st.caption(
-            f"本地持久化已接入：缓存 `{_CACHE_ROOT}` · 数据库 `{_SQLITE_PATH}`"
-        )
-        st.caption(_CALENDAR_NOTE)
+            with st.expander("导入本地 CSV/Parquet", expanded=False):
+                upload = st.file_uploader(
+                    "选择本地文件",
+                    type=["csv", "parquet"],
+                    key="local_upload",
+                )
+                use_upload = st.checkbox(
+                    "使用上传文件代替远程拉取",
+                    value=False,
+                    key="use_upload_check",
+                )
+            run = st.button(
+                "分析", type="primary", use_container_width=True, key="analyze_btn"
+            )
+            st.caption(DISCLAIMER)
+            st.caption(_CALENDAR_NOTE)
 
+        # 信号术语速查：常驻右侧栏，看图时随手参考
+        with st.container(border=True):
+            st.markdown("#### 📖 信号术语")
+            for key in (
+                "signal_color", "c_point", "b1", "neckline",
+                "ref20", "key_volatility", "stage", "volume_state",
+            ):
+                info = TERM_EXPLANATIONS.get(key)
+                if not info:
+                    continue
+                with st.expander(info["title"], expanded=False):
+                    st.markdown(f"📖 {info['definition']}")
+                    if "formula" in info:
+                        st.code(info["formula"], language="text")
+                    if "usage" in info:
+                        st.markdown(f"💡 {info['usage']}")
+
+    with main_area:
+        _render_main_area(
+            symbol, build_history, run,
+            use_upload if 'use_upload' in dir() else None,
+            upload if 'upload' in dir() else None,
+        )
+
+
+def _render_main_area(
+    symbol: str,
+    build_history: bool,
+    run: bool,
+    use_upload: bool | None,
+    upload: object | None,
+) -> None:
+    """主页内容（已分析后的所有 tab）。"""
     if not run and "analysis" not in st.session_state:
-        st.info("在左侧输入代码后点击「分析」。首次加载会自动下载复权日线行情。")
+        st.info(
+            "右侧输入代码后点击「分析」。"
+            "首次加载会自动下载复权日线行情。"
+        )
         _render_rule_reference()
         return
 
     if run:
-        if "use_upload" in dir() and use_upload and upload is not None:
+        if use_upload and upload is not None:
             st.session_state["analysis"] = _analyze_upload(
                 upload, symbol, build_history
             )
         else:
             try:
                 with st.spinner(f"正在获取并分析 {symbol} ..."):
-                    st.session_state["analysis"] = _cached_analysis(symbol, build_history)
+                    st.session_state["analysis"] = _cached_analysis(
+                        symbol, build_history
+                    )
             except DataUnavailableError as exc:
                 _render_data_unavailable(symbol, str(exc), build_history)
                 return
@@ -875,11 +915,10 @@ def _render_levels_table(
     a: object,
     color_mode: str,
 ) -> None:
-    """在图表外以表格展示所有水平档位。
+    """在图表外展示价格档位。
 
-    与 ``build_price_figure`` 内部画的水平线一一对应——任何线都必须在
-    表格中能找到一条说明，反之亦然。这是「图上干净、图外清晰」原则的
-    落实：图内不再写文字。
+    用户视角：只看**当前活的档位**（B1 + 主底部 C + 活跃顶部颈线）。
+    历史失效档位折叠到 expander 里，避免 10+ 行堆叠看不出主线。
     """
     from lei_signal.ui.charts import collect_levels
 
@@ -894,45 +933,44 @@ def _render_levels_table(
         return
 
     rows: list[dict[str, object]] = []
+    dead_rows: list[dict[str, object]] = []
     current_price = float(view["close"].iloc[-1]) if len(view) else None
+
     for level in levels:
         price = float(level["price"])  # type: ignore[arg-type]
         diff_pct = None
         if current_price is not None and current_price > 0:
             diff_pct = (price / current_price - 1.0) * 100.0
-        rows.append(
-            {
-                "档位": level["type"],
-                "价格": f"{price:.4f}",
-                "距离现价": "—" if diff_pct is None else f"{diff_pct:+.2f}%",
-                "样式": level["dash"],
-                "状态": "有效" if level["live"] else "失效",
-                "备注": level["note"] or "",
-            }
+        row = {
+            "档位": level["type"],
+            "价格": f"{price:.4f}",
+            "距现价": "—" if diff_pct is None else f"{diff_pct:+.2f}%",
+            "状态": "有效" if level["live"] else "失效",
+            "备注": level["note"] or "",
+        }
+        if level["live"]:
+            rows.append(row)
+        else:
+            dead_rows.append(row)
+
+    if rows:
+        st.markdown("##### 当前档位")
+        st.dataframe(
+            pd.DataFrame(rows),
+            use_container_width=True,
+            hide_index=True,
         )
+    else:
+        st.caption("当前窗口内没有活档位。")
 
-    def _sort_key(row: dict[str, object]) -> float:
-        price_str = row["价格"]
-        if not isinstance(price_str, str):
-            return 0.0
-        try:
-            return abs(float(price_str) - (current_price or 0.0))
-        except ValueError:
-            return 0.0
-
-    rows.sort(key=_sort_key)
-
-    st.markdown("##### 价格档位（图表水平线含义）")
-    st.dataframe(
-        pd.DataFrame(rows),
-        use_container_width=True,
-        hide_index=True,
-    )
-    st.caption(
-        "模式切换**仅影响展示**，不修改任何 LEI 计算、生命周期或风险状态。"
-        if color_mode == "lei_color"
-        else "红绿模式下，K 线下方小方块是日级 LEI 三色状态（绿/灰/黑），与上图一一对应。"
-    )
+    if dead_rows:
+        with st.expander(f"📜 历史失效档位（{len(dead_rows)} 条）", expanded=False):
+            st.caption("这些档位已失效，仅供历史参考；不影响当前判断。")
+            st.dataframe(
+                pd.DataFrame(dead_rows),
+                use_container_width=True,
+                hide_index=True,
+            )
 
 
 # ---------------- 时间轴页 ----------------
