@@ -573,18 +573,18 @@ def _render_price_chart(result: AnalysisResult) -> None:
         )
 
     st.markdown("#### 价格、均线、结构与成交量")
-    window = min(120, len(result.frame))
 
     from lei_signal.ui.echarts_kline import render_echarts_kline
 
     render_echarts_kline(
         result,
         color_mode=color_mode,
-        window=window,
+        default_bars=60,
+        max_bars=1000,
         height=680,
     )
 
-    view = result.frame.tail(window)
+    view = result.frame.tail(60)
     _render_levels_table(view, result, a, color_mode)
 
 

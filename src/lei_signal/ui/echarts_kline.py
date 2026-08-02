@@ -62,10 +62,16 @@ def _serialize_result(
     result: AnalysisResult,
     *,
     color_mode: str,
-    window: int = 60,
+    max_bars: int = 1000,
 ) -> dict[str, Any]:
-    """把 AnalysisResult 序列化为 ECharts 可消费的 JSON 结构。"""
-    frame = result.frame.tail(window).copy()
+    """把 AnalysisResult 序列化为 ECharts 可消费的 JSON 结构。
+
+    ``max_bars`` 控制传给前端的最多 K 线根数（默认 1000，足够拖拽回看）。
+    dataZoom 的 ``start`` 在 :func:`_build_html` 中按 ``default_bars`` 计算，
+    默认只展示最后 60 根，用户拖拽滑块可回看全部。
+    """
+    # 传全部数据（截断到 max_bars 上限），让用户拖拽时能看到历史。
+    frame = result.frame.tail(max_bars).copy()
     dates = [idx.strftime("%Y-%m-%d") for idx in frame.index]
 
     # OHLC
@@ -173,10 +179,21 @@ def _serialize_result(
     }
 
 
-def _build_html(data: dict[str, Any], height: int = 680) -> str:
-    """生成包含 ECharts 的完整 HTML 字符串。"""
+def _build_html(data: dict[str, Any], *, default_bars: int = 60, height: int = 680) -> str:
+    """生成包含 ECharts 的完整 HTML 字符串。
+
+    ``default_bars`` 控制初始展示最近多少根 K线；dataZoom 的 ``start``
+    按此计算百分比，用户拖拽滑块可回看全部 ``max_bars`` 根。
+    """
     echarts_js = _ECHARTS_JS.read_text(encoding="utf-8")
     data_json = json.dumps(data, ensure_ascii=False)
+
+    # 计算初始 dataZoom start：只展示最后 default_bars 根。
+    total = len(data["dates"])
+    if total > default_bars:
+        start_pct = round((1 - default_bars / total) * 100, 1)
+    else:
+        start_pct = 0
 
     return f"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -240,7 +257,7 @@ const kvLines = DATA.keyVolatility.map(k => ({{
   lineStyle: {{ color: stateColors[k.state] || "#888", type: "dashed", width: 1, opacity: 0.5 }}
 }}));
 
-const start = DATA.dates.length > 160 ? Math.round((1 - 160 / DATA.dates.length) * 100) : 0;
+const start = {start_pct};
 
 const option = {{
   animation: false,
@@ -329,7 +346,8 @@ def render_echarts_kline(
     result: AnalysisResult,
     *,
     color_mode: str = "red_green",
-    window: int = 60,
+    default_bars: int = 60,
+    max_bars: int = 1000,
     height: int = 680,
 ) -> None:
     """在 Streamlit 中渲染 ECharts K线图。
@@ -340,15 +358,17 @@ def render_echarts_kline(
         LEI 分析管线完整结果。
     color_mode : str
         ``"red_green"`` 红涨绿跌（A股惯例）或 ``"lei_color"`` 绿灰黑三色。
-    window : int
-        默认显示最近多少根 K线（用户可通过 dataZoom 缩放调整）。
+    default_bars : int
+        初始展示最近多少根 K线（默认 60）。用户可通过 dataZoom 拖拽回看。
+    max_bars : int
+        传给前端的最多 K 线根数（默认 1000），限制 DOM 体积。
     height : int
         图表高度（像素）。
     """
     import streamlit.components.v1 as components
 
-    data = _serialize_result(result, color_mode=color_mode, window=window)
-    html = _build_html(data, height=height)
+    data = _serialize_result(result, color_mode=color_mode, max_bars=max_bars)
+    html = _build_html(data, default_bars=default_bars, height=height)
     components.html(html, height=height + 10, scrolling=False)
 
 
