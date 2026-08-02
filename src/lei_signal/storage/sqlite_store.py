@@ -169,6 +169,124 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
             ON event_lifecycle_snapshots(as_of);
         """,
     ),
+    (
+        6,
+        "006_market_context_tables",
+        """
+        -- Round 4: Market context independent storage.
+        -- Does NOT write to signal_events, daily_assessments, or structure_instances.
+
+        -- Universe membership version tracking
+        CREATE TABLE IF NOT EXISTS universe_membership_versions (
+            market_id       TEXT NOT NULL,
+            as_of           TEXT NOT NULL,
+            universe_version TEXT NOT NULL,
+            symbol_count    INTEGER NOT NULL,
+            source          TEXT NOT NULL,
+            source_version  TEXT NOT NULL,
+            source_kind     TEXT NOT NULL,
+            retrieved_at    TEXT NOT NULL,
+            provenance      TEXT NOT NULL,
+            PRIMARY KEY (market_id, as_of, universe_version)
+        );
+        CREATE INDEX IF NOT EXISTS idx_universe_market_asof
+            ON universe_membership_versions(market_id, as_of);
+
+        -- Market breadth snapshots
+        CREATE TABLE IF NOT EXISTS market_breadth_snapshots (
+            market_id         TEXT NOT NULL,
+            as_of             TEXT NOT NULL,
+            available_at      TEXT NOT NULL,
+            universe_version  TEXT NOT NULL,
+            constituent_count INTEGER NOT NULL,
+            eligible_20       INTEGER NOT NULL,
+            eligible_50       INTEGER NOT NULL,
+            eligible_200      INTEGER NOT NULL,
+            missing_20        INTEGER NOT NULL,
+            missing_50        INTEGER NOT NULL,
+            missing_200       INTEGER NOT NULL,
+            coverage_20       REAL NOT NULL,
+            coverage_50       REAL NOT NULL,
+            coverage_200      REAL NOT NULL,
+            breadth_20        REAL,
+            breadth_50        REAL,
+            breadth_200       REAL,
+            percentile_20     REAL,
+            percentile_50     REAL,
+            percentile_200    REAL,
+            source_kind       TEXT NOT NULL,
+            provenance        TEXT NOT NULL,
+            data_status       TEXT NOT NULL,
+            run_id            TEXT NOT NULL,
+            PRIMARY KEY (market_id, as_of, universe_version)
+        );
+        CREATE INDEX IF NOT EXISTS idx_breadth_market_asof
+            ON market_breadth_snapshots(market_id, as_of);
+
+        -- Market context events (extreme events, divergence, etc.)
+        CREATE TABLE IF NOT EXISTS market_context_events (
+            id                INTEGER PRIMARY KEY AUTOINCREMENT,
+            market_id         TEXT NOT NULL,
+            as_of             TEXT NOT NULL,
+            available_at      TEXT NOT NULL,
+            event_type        TEXT NOT NULL,
+            event_version     TEXT NOT NULL,
+            threshold_origin  TEXT NOT NULL,
+            evidence_json     TEXT NOT NULL,
+            provenance        TEXT NOT NULL,
+            source_kind       TEXT NOT NULL,
+            data_status       TEXT NOT NULL,
+            run_id            TEXT NOT NULL,
+            UNIQUE (market_id, as_of, event_type, event_version)
+        );
+        CREATE INDEX IF NOT EXISTS idx_context_events_market_asof
+            ON market_context_events(market_id, as_of);
+
+        -- Sentiment observations (NAAIM, AAII)
+        CREATE TABLE IF NOT EXISTS sentiment_observations (
+            series_id             TEXT NOT NULL,
+            survey_week           TEXT NOT NULL,
+            available_at          TEXT NOT NULL,
+            source                TEXT NOT NULL,
+            license_status        TEXT NOT NULL,
+            publication_delay_days INTEGER,
+            current_eligible      INTEGER NOT NULL,
+            exposure_index        REAL,
+            bullish               REAL,
+            neutral               REAL,
+            bearish               REAL,
+            bull_bear             REAL,
+            percentile            REAL,
+            label                 TEXT NOT NULL,
+            PRIMARY KEY (series_id, survey_week, available_at)
+        );
+        CREATE INDEX IF NOT EXISTS idx_sentiment_available
+            ON sentiment_observations(series_id, available_at);
+
+        -- Market context assessments (summary + reasons + conflicts)
+        CREATE TABLE IF NOT EXISTS market_context_assessments (
+            market_id           TEXT NOT NULL,
+            as_of               TEXT NOT NULL,
+            available_at        TEXT NOT NULL,
+            long_regime         TEXT NOT NULL,
+            heat_state          TEXT NOT NULL,
+            breadth_direction   TEXT NOT NULL,
+            summary             TEXT NOT NULL,
+            reasons_json        TEXT NOT NULL,
+            conflicts_json      TEXT NOT NULL,
+            drawdown_from_ath   REAL,
+            naaim_label         TEXT NOT NULL,
+            aaii_label          TEXT NOT NULL,
+            source_kind         TEXT NOT NULL,
+            provenance          TEXT NOT NULL,
+            data_status         TEXT NOT NULL,
+            run_id              TEXT NOT NULL,
+            PRIMARY KEY (market_id, as_of, available_at)
+        );
+        CREATE INDEX IF NOT EXISTS idx_context_assess_market_asof
+            ON market_context_assessments(market_id, available_at);
+        """,
+    ),
 )
 
 
