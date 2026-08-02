@@ -24,6 +24,12 @@ class TestMapReferenceMarkets:
         assert set(mapping.secondary_market_ids) == {MarketId.CN_ALL_A}
         assert not mapping.mapping_incomplete
 
+    def test_ss_suffix_normalized_to_sh(self) -> None:
+        """`.SS` alias must be normalized to `.SH` for ETF lookup."""
+        mapping = map_reference_markets("515130.SS")
+        assert mapping.primary_market_id is MarketId.CSI_300
+        assert not mapping.mapping_incomplete
+
     def test_sse50_etf_primary_is_index(self) -> None:
         mapping = map_reference_markets("510050.SH")
         assert mapping.primary_market_id is MarketId.SSE_50

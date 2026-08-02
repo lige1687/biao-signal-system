@@ -19,6 +19,7 @@ from lei_signal.market_context.types import MarketId, MarketMapping
 _MAPPING_VERSION = "lei_market_mapping.v1"
 
 # Known A-share ETF → tracking index primary
+# Keys are stored in canonical .SH/.SZ form; lookups normalize .SS alias.
 _ETF_PRIMARY: dict[str, MarketId] = {
     "510050.SH": MarketId.SSE_50,
     "510300.SH": MarketId.CSI_300,
@@ -35,7 +36,17 @@ _ETF_PRIMARY: dict[str, MarketId] = {
     "510710.SH": MarketId.SSE_50,
     "588000.SH": MarketId.SSE_50,  # 科创50 ETF → SSE_50 as best proxy
     "588080.SH": MarketId.SSE_50,
+    # 515130.SH 博时沪深300ETF
+    "515130.SH": MarketId.CSI_300,
 }
+
+
+def _normalize_ashare(symbol: str) -> str:
+    """Normalize A-share suffix: .SS → .SH (common alias)."""
+    if symbol.endswith(".SS"):
+        return symbol[:-3] + ".SH"
+    return symbol
+
 
 # Known US ETFs
 _US_ETF_PRIMARY: dict[str, MarketId] = {
@@ -52,9 +63,12 @@ def _standard_etf_mapping(symbol: str) -> MarketMapping | None:
     # Normalize symbol case
     sym = symbol.strip().upper()
 
+    # Normalize .SS alias for A-share ETFs
+    canonical = _normalize_ashare(sym)
+
     # Check A-share ETFs
-    if symbol in _ETF_PRIMARY:
-        primary = _ETF_PRIMARY[symbol]
+    if canonical in _ETF_PRIMARY:
+        primary = _ETF_PRIMARY[canonical]
         return MarketMapping(
             symbol=symbol,
             primary_market_id=primary,
@@ -78,8 +92,12 @@ def _standard_etf_mapping(symbol: str) -> MarketMapping | None:
 
 
 def _is_a_share(symbol: str) -> bool:
-    """Heuristic: A-share symbols end with .SH or .SZ suffix."""
-    return symbol.endswith(".SH") or symbol.endswith(".SZ")
+    """Heuristic: A-share symbols end with .SH or .SZ (or .SS alias) suffix."""
+    return (
+        symbol.endswith(".SH")
+        or symbol.endswith(".SZ")
+        or symbol.endswith(".SS")
+    )
 
 
 def _is_us_equity(symbol: str) -> bool:
