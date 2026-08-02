@@ -151,8 +151,12 @@ class LocalUniverseProvider:
         except ValueError:
             source_kind = ContextSourceKind.FORMAL
 
-        source = active["source"].iloc[0] if "source" in active.columns and len(active) > 0 else ""
-        source_version = active["source_version"].iloc[0] if "source_version" in active.columns and len(active) > 0 else ""
+        src_col = "source" in active.columns
+        version_col = "source_version" in active.columns
+        source = active["source"].iloc[0] if src_col and len(active) > 0 else ""
+        source_version = (
+            active["source_version"].iloc[0] if version_col and len(active) > 0 else ""
+        )
 
         return {
             "source_kind": source_kind,

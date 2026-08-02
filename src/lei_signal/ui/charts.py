@@ -128,6 +128,97 @@ def _candle_trace(frame: pd.DataFrame) -> go.Candlestick:
     )
 
 
+def collect_levels(
+    frame: pd.DataFrame,
+    *,
+    structures: list[StructureInstance] | None = None,
+    b1_price: float | None = None,
+    profile: VolumeProfileProxy | None = None,
+) -> list[dict[str, object]]:
+    """汇总图上水平线对应的「价格档位」，供 UI 在图表外列表展示。
+
+    返回每条记录含 ``type / subtype / price / color / live / note``，
+    与 ``build_price_figure`` 中绘制的线一一对应——一个在图上画线的类型
+    必须有一条记录，保证 UI 能完整复述图上的水平线含义。
+    """
+    levels: list[dict[str, object]] = []
+    current_price = float(frame["close"].iloc[-1]) if len(frame) else None
+
+    for structure in structures or []:
+        if structure.side == "bottom" and structure.c_price is not None:
+            live = structure.invalidated_date is None
+            note = ""
+            if structure.confirmed_date is not None:
+                note = f"确认日 {structure.confirmed_date}"
+            elif structure.detected_date is not None:
+                note = f"候选日 {structure.detected_date}"
+            levels.append({
+                "type": "底部 C",
+                "subtype": "live" if live else "invalidated",
+                "price": float(structure.c_price),
+                "color": "#059669" if live else "#9ca3af",
+                "dash": "dot" if live else "dashdot",
+                "live": live,
+                "note": note,
+                "structure_type": structure.structure_type,
+                "source_rule": structure.source_rule_id or "",
+                "current_price": current_price,
+            })
+        if (
+            structure.side == "top"
+            and structure.neckline is not None
+            and structure.invalidated_date is None
+            and structure.confirmed_date is not None
+        ):
+            levels.append({
+                "type": "顶部颈线",
+                "subtype": "active",
+                "price": float(structure.neckline),
+                "color": "#dc2626",
+                "dash": "dot",
+                "live": True,
+                "note": f"确认日 {structure.confirmed_date}",
+                "structure_type": structure.structure_type,
+                "source_rule": structure.source_rule_id or "",
+                "current_price": current_price,
+            })
+
+    if b1_price is not None:
+        levels.append({
+            "type": "B1 第一阻力",
+            "subtype": "reference",
+            "price": float(b1_price),
+            "color": "#ea580c",
+            "dash": "dash",
+            "live": True,
+            "note": "参考前高，非强制止盈",
+            "structure_type": "",
+            "source_rule": "",
+            "current_price": current_price,
+        })
+
+    if profile is not None:
+        for value, subtype, color, label in (
+            (profile.poc, "POC", "#0891b2", "POC（代理）"),
+            (profile.vah, "VAH", "#64748b", "VAH（代理）"),
+            (profile.val, "VAL", "#64748b", "VAL（代理）"),
+        ):
+            levels.append({
+                "type": "筹码分布",
+                "subtype": subtype,
+                "price": float(value),
+                "color": color,
+                "dash": "longdash",
+                "live": True,
+                "note": label,
+                "structure_type": "",
+                "source_rule": "",
+                "current_price": current_price,
+            })
+
+    return levels
+
+
 def build_price_figure(
     frame: pd.DataFrame,
     *,
@@ -137,6 +228,9 @@ def build_price_figure(
     color_mode: ColorMode = "red_green",
 ) -> go.Figure:
     """主图：K线 + 四条均线 + 颜色带 + 结构标记 + 成交量。
+
+    设计原则：图表本体只画线，不写字——所有水平档位的含义由调用方通过
+    :func:`collect_levels` 在图表外列表展示，避免文字叠加遮蔽 K 线。
 
     参数 ``color_mode``
     ------------------
@@ -148,8 +242,8 @@ def build_price_figure(
         rows=2,
         cols=1,
         shared_xaxes=True,
-        row_heights=[0.74, 0.26],
-        vertical_spacing=0.04,
+        row_heights=[0.78, 0.22],
+        vertical_spacing=0.03,
         subplot_titles=(
             (
                 "复权K线 · 绿灰黑三色"
@@ -195,21 +289,8 @@ def build_price_figure(
             row=1,
             col=1,
         )
-    elif color_mode == "lei_color" and "signal_color" in frame.columns:
-        # 在 lei_color 模式下用 caption 形式说明图例（避免 legend 太多项）。
-        figure.add_annotation(
-            text="绿=强势 · 灰=关注 · 黑=弱势",
-            xref="paper",
-            yref="paper",
-            x=0.0,
-            y=1.04,
-            xanchor="left",
-            yanchor="bottom",
-            showarrow=False,
-            font={"size": 11, "color": "#475569"},
-        )
 
-    # 结构标记
+    # 结构标记：仅画线 + 写入图例 hover，不在图内堆字。
     for structure in structures or []:
         if structure.side == "bottom" and structure.c_price is not None:
             live = structure.invalidated_date is None
@@ -220,11 +301,6 @@ def build_price_figure(
                     "width": 1.2,
                     "dash": "dot" if live else "dashdot",
                 },
-                annotation_text=(
-                    f"底部C {structure.c_price:.3f}"
-                    f"{'' if live else '（已失效）'}"
-                ),
-                annotation_position="bottom left",
                 row=1,
                 col=1,
             )
@@ -234,8 +310,6 @@ def build_price_figure(
                 figure.add_hline(
                     y=structure.neckline,
                     line={"color": "#dc2626", "width": 1.2, "dash": "dot"},
-                    annotation_text=f"顶部颈线 {structure.neckline:.3f}",
-                    annotation_position="top left",
                     row=1,
                     col=1,
                 )
@@ -244,23 +318,19 @@ def build_price_figure(
         figure.add_hline(
             y=b1_price,
             line={"color": "#ea580c", "width": 1.4, "dash": "dash"},
-            annotation_text=f"B1第一阻力 {b1_price:.3f}",
-            annotation_position="top right",
             row=1,
             col=1,
         )
 
     if profile is not None:
-        for value, label, color in (
-            (profile.poc, "POC（代理）", "#0891b2"),
-            (profile.vah, "VAH（代理）", "#64748b"),
-            (profile.val, "VAL（代理）", "#64748b"),
+        for value, color in (
+            (profile.poc, "#0891b2"),
+            (profile.vah, "#64748b"),
+            (profile.val, "#64748b"),
         ):
             figure.add_hline(
                 y=value,
                 line={"color": color, "width": 1.0, "dash": "longdash"},
-                annotation_text=label,
-                annotation_position="right",
                 row=1,
                 col=1,
             )
@@ -287,12 +357,17 @@ def build_price_figure(
             col=1,
         )
 
+    # 体积下方的迷你 range slider 取代左侧手动画线 slider，
+    # 用户直接拖动缩放主图；不展示时直接关掉即可。
     figure.update_layout(
-        height=760,
+        height=620,
         xaxis_rangeslider_visible=False,
+        xaxis2_rangeslider_visible=True,
+        xaxis2_rangeslider_thickness=0.06,
         hovermode="x unified",
         legend={"orientation": "h", "y": 1.06},
-        margin={"l": 40, "r": 40, "t": 60, "b": 30},
+        margin={"l": 40, "r": 40, "t": 50, "b": 20},
+        dragmode="zoom",
     )
     return figure
 
@@ -396,4 +471,5 @@ __all__ = [
     "build_price_figure",
     "build_stage_history_figure",
     "build_volume_profile_figure",
+    "collect_levels",
 ]

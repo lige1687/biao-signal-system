@@ -493,21 +493,18 @@ def _render_price_chart(result: AnalysisResult) -> None:
     - **红绿模式**：A 股惯例，涨红跌绿，下方小方块显示日级 LEI 颜色。
     - **绿灰黑模式**：每根 K 线本体按当日 ``signal_color`` 上色，直接
       把 LEI 三色状态画在价格图上，无需再向下看小方块。
+
+    缩放通过图表自带的 rangeslider / 滚轮 / 框选完成，**不再使用左侧 slider**；
+    默认显示最近 60 根。图表本体只画线，所有水平档位的含义由右侧
+    _render_levels_table 列表展示，避免文字叠加遮蔽 K 线。
     """
     from lei_signal.ui.charts import ColorMode
 
-    st.markdown("#### 价格、均线、结构与成交量")
-    controls = st.columns([3, 2])
+    a = result.assessment
+
+    # 头部一行：颜色模式 + 提示；缩放交给 plotly。
+    controls = st.columns([2, 3])
     with controls[0]:
-        window = st.slider(
-            "显示最近多少根K线",
-            60,
-            min(1200, len(result.frame)),
-            min(320, len(result.frame)),
-            key="price_chart_window",
-        )
-    with controls[1]:
-        # 默认沿用 A 股红绿惯例（与既有截图一致），需要 LEI 三色视角时手动切换。
         color_mode: ColorMode = st.radio(
             "K线颜色模式",
             options=["red_green", "lei_color"],
@@ -518,11 +515,19 @@ def _render_price_chart(result: AnalysisResult) -> None:
             horizontal=True,
             key="price_chart_color_mode",
         )
+    with controls[1]:
+        st.caption(
+            "💡 图表底部 mini-slider 拖动缩放；框选区域放大；滚轮缩放。"
+            "图表只画线，价格档位见下方表格。"
+        )
 
-    a = result.assessment
+    st.markdown("#### 价格、均线、结构与成交量")
+    window = min(60, len(result.frame))
+    view = result.frame.tail(window)
+
     st.plotly_chart(
         build_price_figure(
-            result.frame.tail(window),
+            view,
             structures=result.structures,
             b1_price=a.b1_price,
             profile=result.profile,
@@ -530,6 +535,74 @@ def _render_price_chart(result: AnalysisResult) -> None:
         ),
         use_container_width=True,
         key="price_chart_main",
+        config={
+            "scrollZoom": True,
+            "displaylogo": False,
+            "modeBarButtonsToRemove": ["lasso2d", "select2d"],
+        },
+    )
+
+    _render_levels_table(view, result, a, color_mode)
+
+
+def _render_levels_table(
+    view: pd.DataFrame,
+    result: AnalysisResult,
+    a: object,
+    color_mode: str,
+) -> None:
+    """在图表外以表格展示所有水平档位。
+
+    与 ``build_price_figure`` 内部画的水平线一一对应——任何线都必须在
+    表格中能找到一条说明，反之亦然。这是「图上干净、图外清晰」原则的
+    落实：图内不再写文字。
+    """
+    from lei_signal.ui.charts import collect_levels
+
+    levels = collect_levels(
+        view,
+        structures=result.structures,
+        b1_price=a.b1_price,  # type: ignore[attr-defined]
+        profile=result.profile,
+    )
+    if not levels:
+        st.caption("当前窗口内没有结构性水平档位。")
+        return
+
+    rows: list[dict[str, object]] = []
+    current_price = float(view["close"].iloc[-1]) if len(view) else None
+    for level in levels:
+        price = float(level["price"])  # type: ignore[arg-type]
+        diff_pct = None
+        if current_price is not None and current_price > 0:
+            diff_pct = (price / current_price - 1.0) * 100.0
+        rows.append(
+            {
+                "档位": level["type"],
+                "价格": f"{price:.4f}",
+                "距离现价": "—" if diff_pct is None else f"{diff_pct:+.2f}%",
+                "样式": level["dash"],
+                "状态": "有效" if level["live"] else "失效",
+                "备注": level["note"] or "",
+            }
+        )
+
+    def _sort_key(row: dict[str, object]) -> float:
+        price_str = row["价格"]
+        if not isinstance(price_str, str):
+            return 0.0
+        try:
+            return abs(float(price_str) - (current_price or 0.0))
+        except ValueError:
+            return 0.0
+
+    rows.sort(key=_sort_key)
+
+    st.markdown("##### 价格档位（图表水平线含义）")
+    st.dataframe(
+        pd.DataFrame(rows),
+        use_container_width=True,
+        hide_index=True,
     )
     st.caption(
         "模式切换**仅影响展示**，不修改任何 LEI 计算、生命周期或风险状态。"
@@ -1163,9 +1236,15 @@ def _render_market_context_tab(result: AnalysisResult) -> None:
             f"\n原因：{mapping.reason_cn}"
         )
     else:
+        primary = mapping.primary_market_id.value if mapping.primary_market_id else "无"
+        secondary = (
+            "、".join(m.value for m in mapping.secondary_market_ids)
+            if mapping.secondary_market_ids
+            else "无"
+        )
         st.info(
-            f"主参考市场：**{mapping.primary_market_id.value if mapping.primary_market_id else '无'}**\n\n"
-            f"次参考市场：{'、'.join(m.value for m in mapping.secondary_market_ids) if mapping.secondary_market_ids else '无'}\n\n"
+            f"主参考市场：**{primary}**\n\n"
+            f"次参考��场：{secondary}\n\n"
             f"映射原因：{mapping.reason_cn}"
         )
 

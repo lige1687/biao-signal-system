@@ -127,16 +127,40 @@ def test_color_hex_mapping_is_stable() -> None:
 
 
 def test_price_figure_marks_structures_and_b1() -> None:
+    """图内不再写文字档位——所有水平线含义由 collect_levels 负责。"""
+    from lei_signal.ui.charts import collect_levels
+
     result = analyze_bars("SYN", _bars())
     figure = build_price_figure(
         result.frame, structures=result.structures, b1_price=123.45
     )
+    # 1. 图内 annotation 只剩 subplot title（不应再有「B1第一阻力」「底部C」等）。
     annotations = " ".join(
         str(annotation.text) for annotation in figure.layout.annotations
     )
-    assert "B1第一阻力" in annotations
+    assert "B1第一阻力" not in annotations
+    assert "底部C" not in annotations
+    assert "顶部颈线" not in annotations
+
+    # 2. 但水平档位列表必须完整回报：含 B1、含任何底部结构 C。
+    levels = collect_levels(
+        result.frame, structures=result.structures, b1_price=123.45
+    )
+    level_types = {row["type"] for row in levels}
+    assert "B1 第一阻力" in level_types
+    bottom_levels = [row for row in levels if row["type"] == "底部 C"]
     if any(s.side == "bottom" and s.c_price for s in result.structures):
-        assert "底部C" in annotations
+        assert bottom_levels, "存在底部结构时 collect_levels 必须返回至少一条底部 C"
+
+
+def test_price_figure_uses_range_slider_not_manual_window() -> None:
+    """图表本体必须用 plotly 自带的 xaxis2 rangeslider，替代手动滑块。"""
+    result = analyze_bars("SYN", _bars())
+    figure = build_price_figure(result.frame)
+    layout = figure.layout
+    # 主图无 slider；成交量子图有迷你 range slider 供用户拖动缩放。
+    assert layout.xaxis.rangeslider.visible is False
+    assert layout.xaxis2.rangeslider.visible is True
 
 
 def test_volume_profile_figure_is_labelled_as_proxy() -> None:

@@ -11,66 +11,31 @@
 - **不**将长周期趋势重新用于 Block 底部、反包或短周期事件
 - 数据错误必须显式 `DATA_UNAVAILABLE`，不得静默处理为「无信号」
 - 任何 `research_proxy` 规则必须在界面明确标注「研究代理」，不冒充 LEI 原始公式
+- 市场环境层（Round 4）只做**独立分组研究**，不硬挡单标的技术信号
 
-## 本轮修复 (2026-08-01 → 2026-08-02)
+## 当前状态 (2026-08-02)
 
-按 10 项修复要求，10 项语义偏差全部修完。**268 项测试通过，1 项 skip**（等待真实 159915 数据快照）。
+**代码门禁：** 496 passed / 1 skipped（159915 真实数据快照）、mypy clean、ruff 13 项工程债。
 
-### 修复 1：周线计算
-- `compute_weekly_long_trend` 不再偷换为 EMA20/40；不足 60/120 根周线时 long_trend = unknown
-- `aggregate_weekly` 新增 `is_complete` 列，明确区分「已结束」与「不确定」
-- 新增 `tests/no_lookahead/test_weekly_unknown.py`（8 项）
+**已完成的研发回合：**
 
-### 修复 2：候选生命周期按时间顺序推进
-- 底部：候选 → 确认 → 失效；先触 C → 永久失效，突破颈线也不能复活
-- 顶部：先创新高 → 永久作废，跌破颈线也不能再确认
-- 新增 `tests/unit/test_lifecycle_order.py`（7 项）
+| 回合 | 内容 | 状态 |
+|---|---|---|
+| Round 2 | 10 项语义修复（周线、生命周期、机会/风险分离、Top+Black、量能/B1 等） | 完成 |
+| Round 3 | 状态机改为事件档位投影器、多结构独立推进/观察/失效/重开与真实日历注入 | 完成 |
+| Round 4 | 独立市场环境层（A股六市场+美股三指数宽度、NAAIM/AAII 情绪、点单成分股） | 代码完成，缺真实数据验收 |
 
-### 修复 3：机会/风险状态分离
-- `DayState.opportunity_stage` 与 `risk_state` 独立保存
-- EMA 转强按 `structure_id` 绑定，结构失效立即关闭
-- 新底部不得继承旧底部早期转强
-- 新增 `tests/unit/test_state_machine_v2.py`（5 项）
+**待完成：**
+- 真实 `159915` 历史行情快照（解锁 Round 3 集成回放）
+- A 股 6 个市场 point-in-time 历史成分股与行情（解锁 Round 4 市场宽度实盘验证）
+- NAAIM/AAII 合法来源历史数据（含 `available_at` 发布时间）
+- 真正未参与规则选择的样本外验证
 
-### 修复 4：Top+Black 组合状态
-- 覆盖两种顺序（顶先确认后转黑；先转黑后顶确认）
-- 重新进入可产生新事件
-- 新增 `tests/unit/test_top_black_combined.py`（5 项）
-
-### 修复 5：事件按真实生命周期分类
-- 颜色事件有效到颜色改变；EMA 转强转黑即失效；摆动点不进 active
-- 移除 60 天展示窗
-- 新增 `tests/unit/test_event_validity.py`（4 项）
-
-### 修复 6：研究统计方向调整
-- `raw_forward_return` + `direction_adjusted_return`
-- 看空信号以「方向命中」为准，不再误标 0% 胜率
-- C 路径优先使用事件自身结构
-- 顶部后续按最早发生事件分类
-- 资产类别可分组
-- 新增 `tests/unit/test_research_direction.py`（7 项）
-
-### 修复 7：量能 / B1
-- `volume_up_surge`（不要求颈线） vs `breakout_volume`（必须有结构颈线）
-- `pullback_shrink` 明确为简单滚动代理
-- B1 默认窗口改为真实两年（`lookback_years=2`）
-- 新增 `tests/unit/test_volume_b1.py`（6 项）
-
-### 修复 8：存储 / 缓存接入正常入口
-- `analyze()` 成功获取后写入 Parquet 缓存
-- 远程失败时按 `cache_max_age_seconds` 降级，UI 显示陈旧警告
-- SQLite 持久化事件 / 结构 / 评估 / 运行
-- 结构生命周期记录完整转换（None→candidate→实际状态）
-- 新增 `tests/integration/test_storage_integration.py`（8 项）
-
-### 修复 9：本地 CSV/Parquet 上传
-- UI 侧栏新增上传入口（已实现）
-- 真实数据获取失败时不冒充真实数据
-- 新增 `tests/integration/test_chinext_replay.py`（2 项；真实快照存在时启用）
-
-### 修复 10：综合 14 项门禁
-- `tests/integration/test_final_gates.py`（12 项）
-- 所有 14 项均通过其他测试模块覆盖
+**确认已证伪的设计：**
+- ❌ 同一日所有条件必须全满足的硬门槛 → 已被生命周期分层替代
+- ❌ B1 必须 ≥ 3R 的硬入场门槛 → 已移除（C 较远、B1 较近，几乎所有信号被过滤）
+- ❌ 候选结构越级抬升 + 升级日要求重新 EMA20 交叉 → Round 3 已封堵
+- ❌ 单一全局阶段覆盖多结构 → 已改为逐 `structure_id` + `lifecycle_id` 独立推进
 
 ## 项目结构
 
@@ -78,27 +43,58 @@
 configs/rules.v1.yaml            19 条规则账本（阈值/版本/来源）
 src/lei_signal/
   domain/                  类型、规则加载器、确定性事件 ID
-  data/                    代码标准化、Provider、复权校验、Point-in-time
+  data/                    代码标准化、Provider（腾讯/东财/Yahoo/新浪）、复权校验、交易日历
   features/                SMA/EMA、ATR、摆动点、量能、筹码分布代理
-  rules/                   19 条原子规则
+  rules/                   19 条原子规则（颜色、双均线、顶底、关键性波动、B1、量能）
   events/                  只追加幂等事件日志
-  state/                   持续观察状态机（机会/风险分离）
+  state/                   Round 3 状态机（逐结构 observations + 机会/风险独立分离）
   compose/                 组合解释器 + 完整分析入口
-  research/                后续收益、MFE/MAE、Bootstrap、匹配基准、分组
+  research/                后续收益、MFE/MAE、Bootstrap、匹配基准、分组 + 市场环境研究
   storage/                 SQLite 迁移 + 幂等事件写入 + 完整生命周期
-  ui/                      Streamlit + Plotly（4 个 tab + 上传）
+  market_context/          Round 4 市场环境层（宽度/回撤/情绪，独立于技术信号）
+  ui/                      Streamlit + Plotly（5 个 tab）
 tests/
-  unit/ golden/ no_lookahead/ integration/   268 tests
+  unit/ golden/ no_lookahead/ integration/  496 tests
 ```
+
+## K线两种颜色模式
+
+| 模式 | 说明 |
+|---|---|
+| **红绿**（A股惯例） | 涨红跌绿；K线下方小方块显示当日 LEI 绿/灰/黑状态（三色叠加在涨跌之上） |
+| **绿灰黑**（LEI 三色） | 每根 K线本体按当日 `signal_color` 上色——绿色=强势、灰色=关注、黑色=弱势。颜色直接画在 K线上，K线整体就是信号视图 |
+
+两种模式只影响**展示**，不改变任何 LEI 计算、生命周期或风险判断。在「当前观察」页可随时切换。
+
+## 行情数据源
+
+| 源 | 代码 | 复权 | 优先级 | 说明 |
+|---|---|---|---|---|
+| 腾讯财经 | `tencent` | 前复权（`qfq`） | A股第1 | 稳定、不需要 token |
+| 东方财富 | `eastmoney` | 前复权（`fqt=1`） | A股第2 | 与腾讯互为对照 |
+| Yahoo Finance | `yahoo` | 复权（`auto_adjust`） | 兜底 | 美股/港股首选；A 股偶发 429 |
+| 新浪财经 | `sina` | **不复权** | 已退出默认链 | 不复权会污染 LEI 信号；仅作备用 |
+
+A 股链路：腾讯 → 东方财富 → Yahoo。美股/港股直接走 Yahoo。
 
 ## 安装与运行
 
 ```bash
 python3 -m pip install -e '.[dev]'
-python3 -m pytest -q                  # 268 passed, 1 skipped
+python3 -m pytest -q                  # 496 passed, 1 skipped
 python3 -m streamlit run src/lei_signal/ui/app.py
 # 访问 http://localhost:8501
 ```
+
+## UI 五页说明
+
+| Tab | 内容 |
+|---|---|
+| **当前观察** | K线主图（顶部）+ metrics + 三色判断依据 + 五维度 + 结构/B1 + 风险 + 支持/冲突 + 事件三栏 |
+| **技术事件时间轴** | 所有信号按 `available_date` 排列，区分今日新增/仍有效/已失效 |
+| **结构诊断** | 每个结构的生命周期链（candidate → early_watch → confirmed → joint → trend），转黑/触C等状态 |
+| **历史信号研究** | 逐笔统计、Bootstrap、资产分组、基准比较（研究用，不构成买卖建议） |
+| **市场环境** | A股/美股宽度、回撤、NAAIM/AAII 情绪、顺风/逆风摘要（独立展示，不挡技术信号） |
 
 ## 真实数据获取失败（2026-08-02 状态）
 
@@ -106,13 +102,11 @@ python3 -m streamlit run src/lei_signal/ui/app.py
 - 东方财富：连接被远程断开
 - Yahoo：HTTP 403 限流
 
-按修复 8 政策：界面正确显示 `DATA_UNAVAILABLE`，并允许用户使用修复 9 新增的 CSV/Parquet 上传入口。系统**不**把合成数据冒充真实数据。
+**腾讯 `web.ifzq.gtimg.cn` 在同等网络环境下可正常工作。** 如遇不可用，可使用 CSV/Parquet 上传入口。系统**不**把合成数据冒充真实数据。
 
-## 已知数据源、复权、时区和统计限制
+## 已知数据���、复权、时区和统计限制
 
-- Yahoo Finance 高频请求会被 429 限流；已加入 3 次有界重试（指数退避 + sleep 可注入）
-- 东方财富接口偶发 RemoteDisconnected；同样自动重试 + OSError 兜底
-- 复权口径：Yahoo `auto_adjust=True`、东方财富 `fqt=1`（前复权），ValidationReport 标注
+- 腾讯/东方财富 A 股前复权口径；Yahoo `auto_adjust=True`；ValidationReport 标注
 - 时区：本地交易日（pandas DatetimeIndex，UTC-naive）
 - 数据不足：少于 21 根触发 `DataUnavailableError`；前 20 根三色状态必须为 `unknown`
 - 统计样本来自单一标的的历史，存在生存偏差；研究页不构成任何买卖建议

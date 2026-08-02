@@ -10,7 +10,7 @@ Design spec section 4.3.
 
 from __future__ import annotations
 
-from typing import AbstractSet
+from collections.abc import Set
 
 from lei_signal.market_context.types import MarketId, MarketMapping
 
@@ -107,7 +107,7 @@ def _is_us_equity(symbol: str) -> bool:
 
 def map_reference_markets(
     symbol: str,
-    memberships: AbstractSet[MarketId] = frozenset(),
+    memberships: Set[MarketId] = frozenset(),
 ) -> MarketMapping:
     """Map a symbol to its reference market(s).
 
@@ -141,7 +141,10 @@ def map_reference_markets(
             primary_market_id=MarketId.CN_ALL_A,
             secondary_market_ids=sorted_secondary,
             mapping_incomplete=False,
-            reason_cn=f"A股个股，主参考市场全A，已识别指数归属: {', '.join(m.value for m in sorted_secondary)}"
+            reason_cn=(
+                "A股个股，主参考市场全A，已识别指数归属: "
+                + ", ".join(m.value for m in sorted_secondary)
+            )
             if sorted_secondary
             else "A股个股，主参考市场全A",
         )

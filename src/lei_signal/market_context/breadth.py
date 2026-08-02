@@ -52,7 +52,7 @@ def compute_breadth_snapshot(
     bars_by_symbol: dict[str, pd.DataFrame],
     sessions: pd.DatetimeIndex,
     as_of: date,
-    config: BreadthConfig = BreadthConfig(),
+    config: BreadthConfig | None = None,
 ) -> BreadthSnapshot:
     """Compute a single breadth snapshot for the given universe on as_of.
 
@@ -62,12 +62,14 @@ def compute_breadth_snapshot(
                         and DatetimeIndex. Must be pre-cropped at as_of.
         sessions: Full market session DatetimeIndex for stale-session tracking.
         as_of: The decision date.
-        config: Breadth calculation parameters.
+        config: Breadth calculation parameters. None uses defaults.
 
     Returns:
         BreadthSnapshot with all three breadth values, eligibility counts,
         coverage ratios, and provenance metadata.
     """
+    if config is None:
+        config = BreadthConfig()
     constituent_count = len(universe.symbols)
     windows = config.ma_windows
 
@@ -216,13 +218,15 @@ def build_breadth_history(
     sessions: pd.DatetimeIndex,
     start: date,
     end: date,
-    config: BreadthConfig = BreadthConfig(),
+    config: BreadthConfig | None = None,
 ) -> pd.DataFrame:
     """Build a breadth history DataFrame from start to end.
 
     Returns a DataFrame with columns for each breadth value, coverage,
     eligibility, universe_version, etc., indexed by date.
     """
+    if config is None:
+        config = BreadthConfig()
     records: list[dict] = []
 
     for as_of in pd.date_range(start, end, freq="B"):
