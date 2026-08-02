@@ -38,6 +38,63 @@ DISCLAIMER = (
     "颜色、阶段与风险提示都只是观察信息。"
 )
 
+# ----- 关键术语解释词典（用户 hover ⓘ 时展示）-----
+# 每个条目含 title / definition（是什么）/ formula（怎么算，可选）/
+# usage（怎么用）/ current（当前怎么说，由 _render_current 动态注入）。
+TERM_EXPLANATIONS: dict[str, dict[str, str]] = {
+    "signal_color": {
+        "title": "绿灰黑三色",
+        "definition": "LEI 用 EMA20 和 20 周期抵扣价共同判断当前趋势方向。",
+        "formula": "绿色 = 收盘 > EMA20 且 收盘 > 20日前收盘；黑色 = 两者均小于；灰色 = 方向分歧",
+        "usage": "绿色=多头状态，黑色=空头状态，灰色=需要关注但不等于卖出",
+    },
+    "c_point": {
+        "title": "C 点（结构低点）",
+        "definition": "底部结构的最低点，也是该结构的止损参考位。",
+        "formula": "由摆动点序列中「更高低点」或「双底」等形态确认",
+        "usage": "价格触及或跌破 C 即结构永久失效，不能复活",
+    },
+    "b1": {
+        "title": "B1 第一阻力",
+        "definition": "信号发生时向前看最近且高于当前价的历史摆动高点。",
+        "formula": "在已确认结构之前约 2 年内，取最近一个高于入场价的摆动高点",
+        "usage": "参考前高/第一阻力位，不是强制止盈目标，也不是入场门槛",
+    },
+    "neckline": {
+        "title": "顶部颈线",
+        "definition": "顶部结构的支撑线，确认后跌破意味着趋势可能反转。",
+        "formula": "由「更低高点」序列中两个低点连线确定",
+        "usage": "有效顶部颈线确认后，价格在其下方运行属于风险信号",
+    },
+    "ref20": {
+        "title": "20周期抵扣价",
+        "definition": "约 20 个交易日前进入均线计算、将在当前时点被替换掉的价格。",
+        "formula": "close_lag20 = close(t-20)",
+        "usage": "当前价高于抵扣价→MA20 方向向上；低于→向下",
+    },
+    "key_volatility": {
+        "title": "关键性波动",
+        "definition": "颜色从非绿→绿或非黑→黑的转换日，标志动能方向变化。",
+        "formula": "color_changed == True 且 signal_color ∈ {green, black}",
+        "usage": "绿色关键波动=动能转强信号；黑色关键波动=动能转弱信号",
+    },
+    "stage": {
+        "title": "机会阶段",
+        "definition": "从「无线索」到「趋势增强」的五级递进，反映结构确认程度。",
+        "formula": (
+            "candidate → early_watch → structure_confirmed → "
+            "joint_confirmed → trend_reinforced"
+        ),
+        "usage": "阶段越高，结构确认越充分；early_watch 只是观察，不构成买入",
+    },
+    "volume_state": {
+        "title": "量能分级",
+        "definition": "根据当日成交量与 20 日均量的比值分四级。",
+        "formula": "≥2x=放量，1.2-2x=温和，0.8-1.2x=正常，<0.8x=缩量",
+        "usage": "放量突破更可信；缩量上涨需警惕；放量下跌偏空",
+    },
+}
+
 
 # 修复 7：把行情缓存与 SQLite 持久化接入普通 UI 分析路径。
 # 默认沿用 ParquetCache 的默认目录（~/.lei_signal_lab/cache）与同目录下的 lab.db；
@@ -321,24 +378,144 @@ def render() -> None:
 # ---------------- 当前观察页 ----------------
 
 
-def _render_current(result: AnalysisResult) -> None:
+def _render_help_tooltip(term_key: str) -> None:
+    """渲染 ⓘ 解释器：hover/点击展开术语定义。
+
+    用 st.popover 实现，避免在页面里堆满文字解释。
+    """
+    info = TERM_EXPLANATIONS.get(term_key)
+    if not info:
+        return
+    with st.popover(f"ⓘ {info['title']}", use_container_width=False):
+        st.markdown(f"**{info['title']}**")
+        st.markdown(f"📖 {info['definition']}")
+        if "formula" in info:
+            st.code(info["formula"], language="text")
+        if "usage" in info:
+            st.markdown(f"💡 {info['usage']}")
+
+
+def _render_today_judgment(result: AnalysisResult) -> None:
+    """今日判断卡片：用人话告诉用户当前该关注什么。
+
+    不堆数据，只回答三个问题：
+    1. 趋势方向是什么？（绿灰黑 + 多周期共振）
+    2. 关键价位在哪？（C 止损 / B1 阻力 / 颈线风险）
+    3. 当前该怎么看？（条件化行动框架，不是买卖指令）
+    """
     a = result.assessment
+    frame = result.frame
+    latest = frame.iloc[-1]
+    last_close = float(latest["close"])
+
+    # --- 趋势方向 ---
+    daily_state = str(latest.get("signal_color", "unknown"))
+    state_cn = COLOR_CN.get(daily_state, "未知")
+    state_emoji = {
+        "green": "🟢", "gray": "⚪", "black": "⚫", "unknown": "❓",
+    }.get(daily_state, "❓")
+
+    mp = _compute_multi_period_state(frame)
+    mp_states = [mp.get(p, {}).get("state") for p in ("日", "周", "月")]
+    if all(s == "green" for s in mp_states):
+        resonance = "三周期共绿，趋势一致向上"
+    elif all(s == "black" for s in mp_states):
+        resonance = "三周期共黑，趋势一致向下"
+    elif "green" in mp_states and "black" in mp_states:
+        resonance = "多空周期并存，方向未明"
+    elif mp_states.count("green") >= 2:
+        resonance = "偏多，但未完全共振"
+    elif mp_states.count("black") >= 2:
+        resonance = "偏空，但未完全共振"
+    else:
+        resonance = "震荡，无明确方向"
+
+    # --- 关键价位 ---
+    price_lines: list[str] = []
+
+    # C 止损
+    primary = a.primary_structure
+    if primary and primary.c_price is not None:
+        c_price = float(primary.c_price)
+        dist_c = (last_close / c_price - 1.0) * 100.0 if c_price > 0 else 0.0
+        price_lines.append(f"📍 止损参考 C = **{c_price:.4f}**（距现价 {dist_c:+.1f}%）")
+
+    # B1 阻力
+    if a.b1_price is not None:
+        b1 = float(a.b1_price)
+        dist_b1 = (b1 / last_close - 1.0) * 100.0 if last_close > 0 else 0.0
+        price_lines.append(f"📈 第一阻力 B1 = **{b1:.4f}**（距现价 {dist_b1:+.1f}%）")
+
+    # 顶部颈线风险
+    if a.active_top is not None and a.active_top.neckline is not None:
+        neck = float(a.active_top.neckline)
+        dist_neck = (neck / last_close - 1.0) * 100.0 if last_close > 0 else 0.0
+        price_lines.append(f"⚠️ 顶部颈线 = **{neck:.4f}**（距现价 {dist_neck:+.1f}%）")
+
+    if not price_lines:
+        price_lines.append("当前无活跃结构标记。")
+
+    # --- 当前该怎么看 ---
+    stage = a.opportunity_stage.value
+    risk = a.risk_state.value
+
+    if daily_state == "green" and risk in ("normal", "gray_watch"):
+        action = "趋势偏多，关注回踩均线不破时的介入机会"
+    elif daily_state == "green" and "top" in risk:
+        action = "趋势偏多但有顶部风险，追高风险增大，注意颈线是否守住"
+    elif daily_state == "black":
+        action = "趋势偏空，观望为主；等待颜色转绿且结构确认后再考虑"
+    elif daily_state == "gray":
+        action = "方向分歧，不急于操作；等颜色明确后再行动"
+    else:
+        action = "数据不足或状态未知，暂不判断"
+
+    if "c_invalidated" in risk:
+        action = "⚠️ 主结构 C 已失效，当前不建议基于该结构操作，等待新结构形成"
+
+    # --- 渲染卡片 ---
+    with st.container(border=True):
+        st.markdown("#### 🎯 今日判断")
+        cols = st.columns([2, 3])
+        with cols[0]:
+            st.markdown(f"**趋势方向**：{state_emoji} {state_cn}")
+            st.caption(resonance)
+        with cols[1]:
+            st.markdown("**关键价位**")
+            for line in price_lines:
+                st.markdown(line)
+
+        st.divider()
+        st.markdown(f"**操作参考**：{action}")
+
+        # 阶段徽章
+        stage_cn = STAGE_CN.get(stage, stage)
+        risk_cn = _risk_state_label(risk)
+        st.caption(f"机会阶段：{stage_cn} ｜ 风险状态：{risk_cn}")
+
+    st.caption(
+        "⚠️ 以上为技术信号观察，不构成买卖建议。"
+        "请结合基本面、仓位管理和风险承受能力综合判断。"
+    )
+
+
+def _render_current(result: AnalysisResult) -> None:
     frame = result.frame
     latest = frame.iloc[-1]
 
     st.subheader(f"{result.display_name}（{result.symbol}）")
 
+    # 数据状态提示（保留——用户需要知道数据可不可信）
     report = result.price_data.report if result.price_data else None
     if report is not None:
-        # first_date/last_date 在 ValidationReport 中是 Optional，但校验通过的报告
-        # 一定有值；此处仍显式兜底，避免界面因元数据缺失而崩溃。
         span = (
             f"{report.first_date.date()} 至 {report.last_date.date()}"
             if report.first_date is not None and report.last_date is not None
             else "日期范围不可用"
         )
         st.caption(
-            f"数据源 {report.provider} · {'复权' if report.adjusted else '未复权'}日线 · "
+            f"数据源 {report.provider} · "
+            f"{'复权' if report.adjusted else '⚠️未复权'}日线 · "
             f"{report.rows} 根 · {span}"
         )
         for warning in report.warnings:
@@ -346,170 +523,92 @@ def _render_current(result: AnalysisResult) -> None:
     if result.suspicious_gaps:
         st.warning(
             f"检测到 {len(result.suspicious_gaps)} 个疑似未复权跳空日，"
-            f"最近一次 {result.suspicious_gaps[-1].date()}（仅提示，未修改价格）"
+            f"最近一次 {result.suspicious_gaps[-1].date()}"
         )
     if getattr(result, "cache_fallback_used", False):
         age_hours = (result.cache_age_seconds or 0) / 3600.0
         st.warning(
-            f"网络行情获取失败，**正在使用本地 Parquet 缓存**（{age_hours:.1f} 小时前）。"
-            f"陈旧数据可能产生过时信号；请尽快恢复网络后重新拉取。"
-        )
-    # 研究库持久化状态必须可见：失败要明确提示，不能静默让用户以为已写入。
-    sqlite_persisted = getattr(result, "sqlite_persisted", None)
-    if sqlite_persisted is True:
-        st.success("事件 / 结构 / 评估已成功持久化到本地 SQLite 研究库。")
-    elif sqlite_persisted is False:
-        st.error(
-            "SQLite 研究库写入**失败**（磁盘不可写或库被锁）；本次分析未持久化。"
-            "界面与缓存结果不受影响，请检查数据库路径权限后重试。"
+            f"网络行情获取失败，**正在使用本地缓存**"
+            f"（{age_hours:.1f} 小时前），可能产生过时信号。"
         )
 
-    columns = st.columns(5)
-    columns[0].metric("机会阶段", STAGE_CN[a.opportunity_stage.value])
-    columns[1].metric("风险状态", _risk_state_label(a.risk_state.value))
-    columns[2].metric("最新颜色", COLOR_CN[a.color.value])
-    columns[3].metric("最新收盘", f"{float(latest['close']):.4f}")
-    columns[4].metric("数据日期", a.as_of.strftime("%Y-%m-%d"))
+    # 1. 摘要栏 + 多周期共振（图表上方）
+    _render_summary_bar(result)
 
-    st.info(f"**阶段说明**：{a.stage_change_reason_cn}")
+    # 2. 今日判断卡片（K线上方，用户第一个看到的）
+    _render_today_judgment(result)
 
-    # 价格/均线/结构主图放在顶部，让用户第一时间看到 K 线与信号叠加。
-    # 表格、维度、风险解释在下方展开，避免「先看一堆表再看到 K 线」的逆序。
+    # 3. K线主图 + 档位表
     _render_price_chart(result)
 
-    # 三色判断依据
-    with st.expander("三色判断依据（可逐值核对）", expanded=True):
-        st.write(
-            f"收盘 **{float(latest['close']):.4f}** ／ "
-            f"EMA20 **{float(latest['ema20']):.4f}** ／ "
-            f"20个交易日前收盘 **{float(latest['close_lag20']):.4f}**"
-        )
-        st.write(f"判定理由：{latest['signal_reason']}")
-        st.caption(
-            "绿色 = 收盘 > EMA20 且 收盘 > 20日前收盘；"
-            "黑色 = 两者均小于；灰色 = 已就绪但两组条件均不成立（方向分歧，需要关注，不等于卖出）"
-        )
-
-    # 五维度
-    st.markdown("#### 维度概览")
-    dimension_columns = st.columns(len(a.dimensions))
-    for column, (name, value) in zip(dimension_columns, a.dimensions.items(), strict=True):
-        column.metric(name, value)
-
-    # 结构与 B1
-    left, right = st.columns(2)
-    with left:
-        st.markdown("#### 有效底部结构")
-        if a.all_live_structures:
-            st.dataframe(
-                pd.DataFrame(
-                    [
-                        {
-                            "结构类型": s.structure_type,
-                            "C": s.c_price,
-                            "颈线": s.neckline,
-                            "候选日": s.detected_date,
-                            "确认日": s.confirmed_date,
-                            "是否主结构": s is a.primary_structure,
-                            "来源规则": s.source_rule_id or "-",
-                        }
-                        for s in a.all_live_structures
-                    ]
-                ),
-                use_container_width=True,
-                hide_index=True,
+    # 4. 三色判断依据（折叠，带ⓘ解释）
+    with st.expander("三色判断依据", expanded=False):
+        cols = st.columns([4, 1])
+        with cols[0]:
+            st.write(
+                f"收盘 **{float(latest['close']):.4f}** ／ "
+                f"EMA20 **{float(latest['ema20']):.4f}** ／ "
+                f"20周期抵扣价 **{float(latest['close_lag20']):.4f}**"
             )
-            st.caption("多个来源的结构同时保留；主结构是最近确认的有效结构，其他不会被删除。")
-        else:
-            st.write("当前没有有效底部结构。")
+            st.write(f"判定理由：{latest['signal_reason']}")
+        with cols[1]:
+            _render_help_tooltip("signal_color")
+            _render_help_tooltip("ref20")
 
-    with right:
-        st.markdown("#### B1 第一阻力")
-        if a.b1_price is not None:
-            st.write(f"B1 = **{a.b1_price:.4f}**（距离 {a.distance_to_b1_pct:.2f}%）")
-            st.write(f"拐点日 {a.b1_pivot_date} ／ 确认可用日 {a.b1_available_date}")
-            if a.distance_to_b1_r is not None:
-                st.write(f"以主结构C计的距离：{a.distance_to_b1_r:.2f}R")
-            st.caption("B1 是第一阻力，不是强制止盈目标，也不是入场门槛。")
-        else:
-            st.write("过去两年内没有已确认且高于当前价的摆动高点，**B1 不存在**。")
-            st.caption("B1 不存在不会阻止信号产生。")
+    # 5. 关键术语速查（折叠）
+    with st.expander("📖 关键术语速查", expanded=False):
+        term_cols = st.columns(4)
+        terms_to_show = [
+            ("signal_color", "绿灰黑三色"),
+            ("c_point", "C 点（止损）"),
+            ("b1", "B1 阻力"),
+            ("neckline", "顶部颈线"),
+            ("ref20", "20周期抵扣价"),
+            ("key_volatility", "关键性波动"),
+            ("stage", "机会阶段"),
+            ("volume_state", "量能分级"),
+        ]
+        for col, (key, label) in zip(term_cols * 2, terms_to_show, strict=True):
+            col.markdown(f"**{label}**")
+            info = TERM_EXPLANATIONS.get(key, {})
+            if info.get("usage"):
+                col.caption(info["usage"])
 
-        if a.active_top is not None:
-            st.warning(
-                f"存在有效顶部警报：颈线 {a.active_top.neckline:.4f}，"
-                f"第一高点 {a.active_top.reference_high:.4f}。"
-                "顶部与底部可暂时并存，此处显示冲突而不是覆盖。"
-            )
-
-    # 风险
-    if a.risks:
-        st.markdown("#### 风险提示（按优先级排序，排序不代表自动卖出）")
-        for index, alert in enumerate(a.risks, start=1):
-            st.error(
-                f"{index}. **{alert.label_cn}** — {alert.detail_cn}　"
-                f"`{alert.rule_id}@{alert.rule_version}`"
-            )
-
-    # 支持与冲突并排
-    st.markdown("#### 支持因素 / 冲突因素（并排显示，不隐藏不利信息）")
-    support_column, conflict_column = st.columns(2)
-    with support_column:
-        st.markdown("**支持**")
-        _render_factors(a.supports)
-    with conflict_column:
-        st.markdown("**冲突**")
-        _render_factors(a.conflicts)
-
-    # 事件三栏
-    st.markdown("#### 今日新增 / 仍然有效 / 已经失效")
-    new_column, active_column, dead_column = st.columns(3)
-    with new_column:
-        st.markdown(f"**今日新增（{len(a.new_events)}）**")
-        _render_event_list(a.new_events)
-    with active_column:
-        st.markdown(f"**仍然有效（{len(a.active_events)}）**")
-        _render_event_list(a.active_events[-12:])
-    with dead_column:
-        st.markdown(f"**已经失效（{len(a.invalidated_events)}）**")
-        _render_event_list(a.invalidated_events[-12:])
-
-    # 主图已在顶部渲染（_render_price_chart），此处只放筹码分布代理。
-
+    # 6. 筹码分布代理（折叠，默认收起——非核心信息）
     if result.profile is not None:
-        st.markdown("#### 筹码分布代理")
-        st.caption(
-            "⚠️ 这是**筹码分布代理**：把成交量按价格区间均匀分配得到的近似分布。"
-            "OHLCV 无法得知真实投资者持仓成本，本图不代表真实持仓成本。"
+        with st.expander("筹码分布代理（非真实持仓成本）", expanded=False):
+            st.caption(
+                "⚠️ 这是**代理**：把成交量按价格区间均匀分配的近似分布，"
+                "OHLCV 无法得知真实投资者持仓成本。"
+            )
+            st.plotly_chart(
+                build_volume_profile_figure(result.profile),
+                use_container_width=True,
+            )
+            pc = st.columns(4)
+            pc[0].metric("POC（代理）", f"{result.profile.poc:.4f}")
+            pc[1].metric("VAL（代理）", f"{result.profile.val:.4f}")
+            pc[2].metric("VAH（代理）", f"{result.profile.vah:.4f}")
+            pc[3].metric(
+                "上方套牢代理占比", f"{result.profile.overhead_supply_ratio:.1%}"
+            )
+
+    # 7. 导出（折叠）
+    with st.expander("导出数据", expanded=False):
+        export_cols = st.columns(2)
+        signal_csv = frame.reset_index().to_csv(index=False).encode("utf-8-sig")
+        export_cols[0].download_button(
+            "下载完整信号CSV", signal_csv,
+            f"{result.symbol}-signals.csv", "text/csv",
+            use_container_width=True,
         )
-        st.plotly_chart(build_volume_profile_figure(result.profile), use_container_width=True)
-        profile_columns = st.columns(4)
-        profile_columns[0].metric("POC（代理）", f"{result.profile.poc:.4f}")
-        profile_columns[1].metric("VAL（代理）", f"{result.profile.val:.4f}")
-        profile_columns[2].metric("VAH（代理）", f"{result.profile.vah:.4f}")
-        profile_columns[3].metric(
-            "上方套牢代理占比", f"{result.profile.overhead_supply_ratio:.1%}"
+        event_csv = result.event_frame.to_csv(index=False).encode("utf-8-sig")
+        export_cols[1].download_button(
+            "下载事件日志CSV", event_csv,
+            f"{result.symbol}-events.csv", "text/csv",
+            use_container_width=True,
         )
 
-    # CSV 导出
-    st.markdown("#### 导出")
-    export_columns = st.columns(2)
-    signal_csv = frame.reset_index().to_csv(index=False).encode("utf-8-sig")
-    export_columns[0].download_button(
-        "下载完整信号CSV",
-        signal_csv,
-        f"{result.symbol}-signals.csv",
-        "text/csv",
-        use_container_width=True,
-    )
-    event_csv = result.event_frame.to_csv(index=False).encode("utf-8-sig")
-    export_columns[1].download_button(
-        "下载事件日志CSV",
-        event_csv,
-        f"{result.symbol}-events.csv",
-        "text/csv",
-        use_container_width=True,
-    )
     st.warning(DISCLAIMER)
 
 
