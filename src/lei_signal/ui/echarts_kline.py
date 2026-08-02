@@ -249,12 +249,8 @@ const structureMarkLines = DATA.structureLines.map(l => ({{
 
 const kvLines = DATA.keyVolatility.map(k => ({{
   xAxis: k.date,
-  label: {{
-    show: true, position: "insideEndTop",
-    formatter: k.label, color: stateColors[k.state] || "#888",
-    fontSize: 9, fontWeight: "bold"
-  }},
-  lineStyle: {{ color: stateColors[k.state] || "#888", type: "dashed", width: 1, opacity: 0.5 }}
+  label: {{ show: false }},
+  lineStyle: {{ color: stateColors[k.state] || "#888", type: "dashed", width: 1, opacity: 0.3 }}
 }}));
 
 const start = {start_pct};
@@ -321,15 +317,28 @@ const option = {{
     }},
     {{
       name: "成交量", type: "bar", xAxisIndex: 1, yAxisIndex: 1,
-      data: DATA.volumes.map((v, i) => ({{
-        value: v,
-        itemStyle: {{
-          color: DATA.volColors[i],
-          borderColor: DATA.ohlc[i][1] >= DATA.ohlc[i][0]
-            ? "rgba(227,61,71,.4)" : "rgba(11,155,100,.4)",
-          borderWidth: 1
-        }}
-      }}))
+      data: DATA.volumes.map((v, i) => {{
+        const isSpike = DATA.volStates[i] === "放量";
+        const isShrink = DATA.volStates[i] === "缩量";
+        return {{
+          value: v,
+          itemStyle: {{
+            color: DATA.volColors[i],
+            borderColor: isSpike ? DATA.volColors[i] :
+              (DATA.ohlc[i][1] >= DATA.ohlc[i][0]
+                ? "rgba(227,61,71,.4)" : "rgba(11,155,100,.4)"),
+            borderWidth: isSpike ? 2 : 1
+          }},
+          label: {{
+            show: isSpike,
+            position: "top",
+            formatter: "放量",
+            color: "#e8590c",
+            fontSize: 9,
+            fontWeight: "bold"
+          }}
+        }};
+      }})
     }}
   ]
 }};
