@@ -334,6 +334,16 @@ def _build_html(
                 tooltip_lines.append(f"<small>规则: {source_rule}</small>")
             tooltip_html = "<br/>".join(tooltip_lines)
 
+            detail_info = {
+                "side": side,
+                "date": m["date"],
+                "price": m["price"],
+                "live": m.get("live", True),
+                "structure_type": structure_type,
+                "confirmed_date": info.get("confirmed_date", ""),
+                "invalidated_date": info.get("invalidated_date", ""),
+            }
+
             out.append({
                 "coord": [m["date"], m["price"]],
                 "symbol": symbol,
@@ -342,6 +352,7 @@ def _build_html(
                 "itemStyle": {"color": color if m.get("live", True) else dead_color},
                 "label": {"show": False},
                 "tooltip": {"formatter": f"<b>{tooltip_html}</b>", "confine": True},
+                "detailInfo": detail_info,
             })
         return out
 
@@ -427,9 +438,46 @@ def _build_html(
     cursor: pointer;
   }}
   .download-btn:hover {{ background: #2955b8; }}
+  .signal-detail {{
+    position: absolute; top: 48px; right: 12px;
+    background: #ffffff; border: 1px solid #dfe5ee;
+    border-radius: 6px; padding: 12px 14px;
+    box-shadow: 0 4px 12px rgba(15,23,42,.08);
+    max-width: 320px; font-size: 12px; line-height: 1.6; color: #172033;
+    z-index: 10; display: none;
+  }}
+  .signal-detail.show {{ display: block; }}
+  .signal-detail .head {{
+    display: flex; align-items: center; gap: 6px;
+    font-weight: 700; margin-bottom: 8px; font-size: 13px;
+  }}
+  .signal-detail .close {{
+    position: absolute; top: 6px; right: 8px;
+    width: 18px; height: 18px; line-height: 16px; text-align: center;
+    border: 1px solid #c9d4e3; border-radius: 50%;
+    cursor: pointer; color: #64748b;
+  }}
+  .signal-detail .row {{ margin: 4px 0; }}
+  .signal-detail .row .pill {{
+    display: inline-block; padding: 1px 6px; border-radius: 3px;
+    font-size: 11px; color: #fff; margin-right: 4px;
+  }}
+  .signal-detail .row.green .pill {{ background: #0b9b64; }}
+  .signal-detail .row.gray .pill {{ background: #8c96a8; }}
+  .signal-detail .row.black .pill {{ background: #1f2937; }}
+  .signal-detail .note {{
+    background: #f8fafc; border-left: 3px solid #3867d6;
+    padding: 6px 8px; margin-top: 6px; border-radius: 3px;
+    color: #475569; font-size: 11px;
+  }}
 </style>
 </head>
-<body>
+<body style="position:relative">
+<div id="signal-detail" class="signal-detail">
+  <span class="close" id="signal-detail-close">×</span>
+  <div class="head" id="sd-head"></div>
+  <div id="sd-body"></div>
+</div>
 <div class="toolbar">
   <span class="toolbar-title">{data["displayName"]} · {data["symbol"]}</span>
   <button class="download-btn" id="dl-btn">📷 导出图片</button>
@@ -597,6 +645,75 @@ const option = {{
 const chart = echarts.init(document.getElementById('chart'));
 chart.setOption(option);
 window.addEventListener('resize', () => chart.resize());
+
+// 点击信号标记 → 在图表右上角弹出"是什么+怎么用"浮层
+const sd = document.getElementById('signal-detail');
+const sdHead = document.getElementById('sd-head');
+const sdBody = document.getElementById('sd-body');
+document.getElementById('signal-detail-close').addEventListener('click', () => {{
+  sd.classList.remove('show');
+}});
+
+const EXPLANATIONS = {{
+  bottom: {{
+    head: '🟢 底部结构确认',
+    def: '摆动点识别出的「更高低点」或「双底」形态已成型',
+    usage: '此结构的 C 点是常用止损参考；若价格跌破 C 即结构永久失效（不能再复活）',
+    badge: 'green'
+  }},
+  top: {{
+    head: '🔴 顶部结构确认',
+    def: '摆动点识别出的「更低高点」形态已成型',
+    usage: '此结构的颈线被有效跌破后，才算顶部确立',
+    badge: 'red'
+  }},
+  invalidated: {{
+    head: '⚫ 结构失效',
+    def: '之前确认过的结构，因价格触及 C/颈线而永久失效',
+    usage: '失效后不能再依赖此结构的止损/阻力',
+    badge: 'gray'
+  }}
+}};
+
+function showSignalDetail(marker) {{
+  const data = marker.data || marker;
+  const info = data.detailInfo || {{}};
+  const side = info.side || 'bottom';
+  const exp = EXPLANATIONS[side] || EXPLANATIONS.bottom;
+  const cls = exp.badge === 'red' ? 'gray' : exp.badge;
+  sdHead.innerHTML = exp.head;
+  const dateStr = (data.coord && data.coord[0]) || info.date || '-';
+  const priceStr = (data.coord && data.coord[1]) ? data.coord[1].toFixed(4) : '-';
+  const stateStr = info.live ? '有效' : '已失效';
+  sdBody.innerHTML =
+    '<div class="row ' + cls + '">' +
+      '<span class="pill">' + stateStr + '</span>' +
+      (info.structure_type || exp.def) +
+    '</div>' +
+    '<div class="row">📍 价格 <b>' + priceStr + '</b> · 日期 <b>' + dateStr + '</b></div>' +
+    (info.confirmed_date
+      ? '<div class="row">确认日 <b>' + info.confirmed_date + '</b></div>'
+      : '') +
+    (info.invalidated_date
+      ? '<div class="row">失效日 <b>' + info.invalidated_date + '</b></div>'
+      : '') +
+    '<div class="note">💡 <b>怎么用：</b>' + exp.usage + '</div>';
+  sd.classList.add('show');
+}}
+
+// 监听 echarts 的 markPoint 点击
+chart.on('click', function(params) {{
+  // params.componentType === 'markPoint' 表示点的是 markPoint
+  if (params.componentType === 'markPoint' && params.data && params.data.detailInfo) {{
+    showSignalDetail(params);
+  }}
+}});
+// 点击空白处关闭浮层
+chart.getZr().on('click', function(params) {{
+  if (!params.target) {{
+    sd.classList.remove('show');
+  }}
+}});
 
 document.getElementById('dl-btn').addEventListener('click', () => {{
   const url = chart.getDataURL({{

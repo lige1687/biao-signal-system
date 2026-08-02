@@ -590,12 +590,13 @@ def _render_help_tooltip(term_key: str) -> None:
 
 
 def _render_today_judgment(result: AnalysisResult) -> None:
-    """今日判断卡片：用人话告诉用户当前该关注什么。
+    """今日判断卡片：整合摘要（去掉重复）。
 
-    不堆数据，只回答三个问题：
-    1. 趋势方向是什么？（绿灰黑 + 多周期共振）
-    2. 关键价位在哪？（C 止损 / B1 阻力 / 颈线风险）
-    3. 当前该怎么看？（条件化行动框架，不是买卖指令）
+    把原摘要栏的 6 个关键指标 + 多周期共振都并入此卡片，
+    顶部不再单独显示摘要。回答三个问题：
+    1. 趋势方向（日/周/月共振）
+    2. 关键价位（C 止损 / B1 阻力 / 颈线风险）
+    3. 当前该怎么看（操作参考）
     """
     a = result.assessment
     frame = result.frame
@@ -605,51 +606,57 @@ def _render_today_judgment(result: AnalysisResult) -> None:
     # --- 趋势方向 ---
     daily_state = str(latest.get("signal_color", "unknown"))
     state_cn = COLOR_CN.get(daily_state, "未知")
-    state_emoji = {
-        "green": "🟢", "gray": "⚪", "black": "⚫", "unknown": "❓",
-    }.get(daily_state, "❓")
+    state_badge = {
+        "green": "badge-green", "gray": "badge-gray",
+        "black": "badge-black", "unknown": "badge-amber",
+    }.get(daily_state, "badge-gray")
 
     mp = _compute_multi_period_state(frame)
     mp_states = [mp.get(p, {}).get("state") for p in ("日", "周", "月")]
     if all(s == "green" for s in mp_states):
-        resonance = "三周期共绿，趋势一致向上"
+        resonance = "三周期共绿"
     elif all(s == "black" for s in mp_states):
-        resonance = "三周期共黑，趋势一致向下"
+        resonance = "三周期共黑"
     elif "green" in mp_states and "black" in mp_states:
-        resonance = "多空周期并存，方向未明"
+        resonance = "多空分化"
     elif mp_states.count("green") >= 2:
-        resonance = "偏多，但未完全共振"
+        resonance = "偏多"
     elif mp_states.count("black") >= 2:
-        resonance = "偏空，但未完全共振"
+        resonance = "偏空"
     else:
-        resonance = "震荡，无明确方向"
+        resonance = "震荡"
+    res_badge = {
+        "三周期共绿": "badge-green", "三周期共黑": "badge-black",
+        "多空分化": "badge-amber", "偏多": "badge-green",
+        "偏空": "badge-black", "震荡": "badge-gray",
+    }.get(resonance, "badge-gray")
 
     # --- 关键价位 ---
-    price_lines: list[str] = []
-
-    # C 止损
+    price_chips: list[str] = []
     primary = a.primary_structure
     if primary and primary.c_price is not None:
         c_price = float(primary.c_price)
         dist_c = (last_close / c_price - 1.0) * 100.0 if c_price > 0 else 0.0
-        price_lines.append(f"📍 止损参考 C = **{c_price:.4f}**（距现价 {dist_c:+.1f}%）")
-
-    # B1 阻力
+        price_chips.append(
+            "<span class='badge' style='background:#059669'>"
+            f"📍 C {c_price:.4f} {dist_c:+.1f}%</span>"
+        )
     if a.b1_price is not None:
         b1 = float(a.b1_price)
         dist_b1 = (b1 / last_close - 1.0) * 100.0 if last_close > 0 else 0.0
-        price_lines.append(f"📈 第一阻力 B1 = **{b1:.4f}**（距现价 {dist_b1:+.1f}%）")
-
-    # 顶部颈线风险
+        price_chips.append(
+            "<span class='badge' style='background:#ea580c'>"
+            f"📈 B1 {b1:.4f} {dist_b1:+.1f}%</span>"
+        )
     if a.active_top is not None and a.active_top.neckline is not None:
         neck = float(a.active_top.neckline)
         dist_neck = (neck / last_close - 1.0) * 100.0 if last_close > 0 else 0.0
-        price_lines.append(f"⚠️ 顶部颈线 = **{neck:.4f}**（距现价 {dist_neck:+.1f}%）")
+        price_chips.append(
+            "<span class='badge' style='background:#dc2626'>"
+            f"⚠️ 颈 {neck:.4f} {dist_neck:+.1f}%</span>"
+        )
 
-    if not price_lines:
-        price_lines.append("当前无活跃结构标记。")
-
-    # --- 当前该怎么看 ---
+    # --- 操作参考 ---
     stage = a.opportunity_stage.value
     risk = a.risk_state.value
 
@@ -667,20 +674,63 @@ def _render_today_judgment(result: AnalysisResult) -> None:
     if "c_invalidated" in risk:
         action = "⚠️ 主结构 C 已失效，当前不建议基于该结构操作，等待新结构形成"
 
-    # --- 渲染卡片 ---
+    # --- 渲染 ---
     with st.container(border=True):
-        st.markdown("#### 🎯 今日判断")
-        cols = st.columns([2, 3])
-        with cols[0]:
-            st.markdown(f"**趋势方向**：{state_emoji} {state_cn}")
-            st.caption(resonance)
-        with cols[1]:
-            st.markdown("**关键价位**")
-            for line in price_lines:
-                st.markdown(line)
+        # 第一行：核心判断 + 共振 + 操作
+        st.markdown(
+            f"<div style='display:flex;align-items:center;gap:8px;margin-bottom:6px'>"
+            f"<span style='font-weight:700;font-size:14px'>🎯 今日判断</span>"
+            f"<span class='badge {state_badge}'>{state_cn}</span>"
+            f"<span class='badge {res_badge}'>{resonance}</span>"
+            f"<span style='font-size:12px;color:#475569;margin-left:8px'>{action}</span>"
+            f"</div>",
+            unsafe_allow_html=True,
+        )
 
-        st.divider()
-        st.markdown(f"**操作参考**：{action}")
+        # 第二行：多周期徽章（日/周/月三色）
+        mp_chips: list[str] = []
+        for period in ("日", "周", "月"):
+            info = mp.get(period, {})
+            state = str(info.get("state", "unknown"))
+            pct = info.get("change_pct")
+            pct_str = f"{pct:+.2f}%" if isinstance(pct, (int, float)) else "—"
+            chip_cls = {
+                "green": "badge-green", "gray": "badge-gray",
+                "black": "badge-black", "unknown": "badge-amber",
+            }.get(state, "badge-gray")
+            mp_chips.append(
+                f"<span style='font-size:11px;color:#64748b;margin-right:2px'>"
+                f"{period}:</span>"
+                f"<span class='badge {chip_cls}' style='margin-right:8px'>"
+                f"{pct_str}</span>"
+            )
+        if price_chips or mp_chips:
+            chips_html = (
+                "<div style='display:flex;flex-wrap:wrap;gap:6px;align-items:center'>"
+                + "".join(mp_chips)
+                + "".join(price_chips)
+                + "</div>"
+            )
+            st.markdown(chips_html, unsafe_allow_html=True)
+
+        # 第三行：关键指标（数字 6 列）
+        ema20 = float(latest["ema20"]) if pd.notna(latest.get("ema20")) else None
+        sma20 = float(latest["sma20"]) if pd.notna(latest.get("sma20")) else None
+        ref20 = float(latest["close_lag20"]) if pd.notna(latest.get("close_lag20")) else None
+        volume = float(latest["volume"])
+        vol_ratio = (
+            float(latest["volume_ratio20"])
+            if pd.notna(latest.get("volume_ratio20"))
+            else None
+        )
+
+        kpi = st.columns(6)
+        kpi[0].metric("EMA20", f"{ema20:.4f}" if ema20 else "—")
+        kpi[1].metric("SMA20", f"{sma20:.4f}" if sma20 else "—")
+        kpi[2].metric("抵扣价", f"{ref20:.4f}" if ref20 else "—")
+        kpi[3].metric("成交量", f"{volume/1e4:.1f}万")
+        kpi[4].metric("量比", f"{vol_ratio:.2f}x" if vol_ratio else "—")
+        kpi[5].metric("换手率", "—")
 
         # 阶段徽章
         stage_cn = STAGE_CN.get(stage, stage)
@@ -726,14 +776,12 @@ def _render_current(result: AnalysisResult) -> None:
             f"（{age_hours:.1f} 小时前），可能产生过时信号。"
         )
 
-    # 1. 摘要栏 + 多周期共振（图表上方）
-    _render_summary_bar(result)
-
-    # 2. 今日判断卡片（K线上方，用户第一个看到的）
-    _render_today_judgment(result)
-
-    # 3. K线主图 + 档位表
+    # 信息架构重排：K线优先，今日判断合并摘要（去掉重复）
+    # 1. K线主图（最大块，占主体）
+    # 2. 今日判断卡片（含关键指标 + 多周期共振 + 操作参考，紧凑）
+    # 3. 三色判断依据 + 关键术语速查 + 档位表 + 筹码 + 导出（折叠）
     _render_price_chart(result)
+    _render_today_judgment(result)
 
     # 4. 三色判断依据（折叠，带ⓘ解释）
     with st.expander("三色判断依据", expanded=False):
@@ -881,12 +929,11 @@ def _compute_multi_period_state(frame: pd.DataFrame) -> dict[str, dict[str, obje
     return out
 
 
-def _render_summary_bar(result: AnalysisResult) -> None:
-    """在图表上方渲染摘要栏：标题 + 关键指标 + 多周期共振。
+def _render_price_title(result: AnalysisResult) -> None:
+    """极简 K线图标题：名称 + 价格 + 涨跌 + 状态徽章。
 
-    专业看盘风格：等宽数字、紧凑卡片、状态徽章。
+    只显示一次 display_name（去掉 symbol 重复），专业终端感。
     """
-    a = result.assessment
     frame = result.frame
     latest = frame.iloc[-1]
     last_close = float(latest["close"])
@@ -895,100 +942,37 @@ def _render_summary_bar(result: AnalysisResult) -> None:
     up_class = "text-up" if change_pct >= 0 else "text-down"
     up_arrow = "▲" if change_pct >= 0 else "▼"
 
+    daily_state = str(latest.get("signal_color", "unknown"))
+    state_badge = {
+        "green": "badge-green", "gray": "badge-gray",
+        "black": "badge-black", "unknown": "badge-amber",
+    }.get(daily_state, "badge-gray")
+    state_cn = COLOR_CN.get(daily_state, "未知")
+
     data_status = ""
     if result.price_data and result.price_data.report:
         rep = result.price_data.report
         adj = "复权" if rep.adjusted else "⚠️未复权"
         data_status = f"{rep.provider} · {adj} · {rep.rows}根"
 
-    daily_state = str(latest.get("signal_color", "unknown"))
-    state_badge_class = {
-        "green": "badge-green", "gray": "badge-gray",
-        "black": "badge-black", "unknown": "badge-amber",
-    }.get(daily_state, "badge-gray")
-    state_cn = COLOR_CN.get(daily_state, "未知")
-
-    # 标题行——专业终端风格：名称+代码+价格+涨跌+状态徽章
     st.markdown(
-        f"<div style='display:flex;align-items:baseline;gap:12px;"
-        f"margin-bottom:6px'>"
-        f"<span style='font-size:18px;font-weight:700;color:#1a1a2e'>"
+        f"<div style='display:flex;align-items:baseline;gap:10px;margin:6px 0'>"
+        f"<span style='font-size:16px;font-weight:700;color:#1a1a2e'>"
         f"{result.display_name}</span>"
-        f"<span style='font-size:13px;color:#8899aa'>{result.symbol}</span>"
         f"<span style='font-size:20px;font-weight:700;font-family:JetBrains Mono,monospace'"
         f" class='{up_class}'>{last_close:.4f}</span>"
-        f"<span class='{up_class}' style='font-size:14px;font-weight:600'>"
+        f"<span class='{up_class}' style='font-size:13px;font-weight:600'>"
         f"{up_arrow} {change_pct:+.2f}%</span>"
-        f"<span class='badge {state_badge_class}'>{state_cn}</span>"
-        f"</div>"
-        f"<div style='font-size:11px;color:#8899aa;margin-bottom:8px'>"
-        f"{data_status} · 数据日期 {a.as_of.strftime('%Y-%m-%d')}"
-        f"</div>",
-        unsafe_allow_html=True,
-    )
-
-    # 关键指标行——紧凑卡片
-    ema20 = float(latest["ema20"]) if pd.notna(latest.get("ema20")) else None
-    sma20 = float(latest["sma20"]) if pd.notna(latest.get("sma20")) else None
-    ref20 = float(latest["close_lag20"]) if pd.notna(latest.get("close_lag20")) else None
-    volume = float(latest["volume"])
-    vol_ratio = float(latest["volume_ratio20"]) if pd.notna(latest.get("volume_ratio20")) else None
-
-    kpi = st.columns(6)
-    kpi[0].metric("EMA20", f"{ema20:.4f}" if ema20 else "—")
-    kpi[1].metric("SMA20", f"{sma20:.4f}" if sma20 else "—")
-    kpi[2].metric("抵扣价", f"{ref20:.4f}" if ref20 else "—")
-    kpi[3].metric("成交量", f"{volume/1e4:.1f}万")
-    kpi[4].metric("量比", f"{vol_ratio:.2f}x" if vol_ratio else "—")
-    kpi[5].metric("换手率", "—")
-
-    # 多周期共振——徽章式
-    mp = _compute_multi_period_state(frame)
-    mp_cols = st.columns([1, 1, 1, 3])
-    for col, period in zip(mp_cols[:3], ("日", "周", "月"), strict=True):
-        info = mp.get(period, {})
-        state = str(info.get("state", "unknown"))
-        pct = info.get("change_pct")
-        state_cn_label = {
-            "green": "绿", "gray": "灰", "black": "黑", "unknown": "未知",
-        }.get(state, "未知")
-        badge_cls = {
-            "green": "badge-green", "gray": "badge-gray",
-            "black": "badge-black", "unknown": "badge-amber",
-        }.get(state, "badge-gray")
-        pct_str = f"{pct:+.2f}%" if isinstance(pct, (int, float)) else "—"
-        col.markdown(
-            f"<span style='font-size:11px;color:#64748b'>{period}线</span> "
-            f"<span class='badge {badge_cls}'>{state_cn_label} {pct_str}</span>",
-            unsafe_allow_html=True,
-        )
-
-    states = [mp.get(p, {}).get("state") for p in ("日", "周", "月")]
-    if all(s == "green" for s in states):
-        resonance = "三周期共绿"
-    elif all(s == "black" for s in states):
-        resonance = "三周期共黑"
-    elif "green" in states and "black" in states:
-        resonance = "多空分化"
-    elif states.count("green") >= 2:
-        resonance = "偏多"
-    elif states.count("black") >= 2:
-        resonance = "偏空"
-    else:
-        resonance = "震荡"
-    res_cls = {
-        "三周期共绿": "badge-green", "三周期共黑": "badge-black",
-        "多空分化": "badge-amber", "偏多": "badge-green",
-        "偏空": "badge-black", "震荡": "badge-gray",
-    }.get(resonance, "badge-gray")
-    mp_cols[3].markdown(
-        f"<span class='badge {res_cls}' style='font-size:12px'>{resonance}</span>",
+        f"<span class='badge {state_badge}'>{state_cn}</span>"
+        f"<span style='font-size:11px;color:#8899aa;margin-left:auto'>"
+        f"{data_status} · {result.assessment.as_of.strftime('%Y-%m-%d')}"
+        f"</span></div>",
         unsafe_allow_html=True,
     )
 
 
 def _render_price_chart(result: AnalysisResult) -> None:
-    """渲染主图（ECharts K线 + 均线 + 抵扣价 + 结构 + 量能），放在页面顶部。
+    """渲染主图（ECharts K线 + 均线 + 抵扣价 + 结构 + 量能）。
 
     使用 ECharts 而非 Plotly——ECharts 的 dataZoom 拖拽/滚轮缩放体验
     远优于 Plotly，与用户旧看板一致。
@@ -996,16 +980,16 @@ def _render_price_chart(result: AnalysisResult) -> None:
     提供 6 个开关控制图内标记显隐：底部/顶部构造、主底部 C、顶部颈线、
     B1、关键性波动。开关变化通过 ``component_key`` 后缀触发 echarts 重渲染。
 
-    摘要栏（标题 + 关键指标 + 多周期共振）放在图表上方。
+    极简标题（行内名称+价格+涨跌+状态徽章）放在图表上方，去掉重复。
     """
-    _render_summary_bar(result)
+    _render_price_title(result)
     a = result.assessment
 
-    # 顶部一行：颜色模式（左侧）+ 提示（右侧）。
-    controls = st.columns([2, 3])
+    # 颜色模式 + 提示行
+    controls = st.columns([3, 2])
     with controls[0]:
         color_mode = st.radio(
-            "K线颜色模式",
+            "颜色模式",
             options=["red_green", "lei_color"],
             format_func=lambda key: {
                 "red_green": "红绿（A股惯例）",
@@ -1013,11 +997,11 @@ def _render_price_chart(result: AnalysisResult) -> None:
             }[key],
             horizontal=True,
             key="price_chart_color_mode",
+            label_visibility="collapsed",
         )
     with controls[1]:
         st.caption(
-            "💡 鼠标拖动底部滑块缩放；滚轮缩放；框选放大。"
-            "图内显示 LEI 全部技术指标和结构标记。"
+            "💡 拖动底部滑块缩放 · 滚轮缩放 · 框选放大 · 点击标记看讲解"
         )
 
     # 显示开关——下方图例栏会同步反映。
