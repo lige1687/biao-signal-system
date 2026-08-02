@@ -28,9 +28,11 @@ _IMPROVED = {
 
 
 def _run() -> tuple[pd.DataFrame, list]:
+    from lei_signal.compose.pipeline import _detect_structure_bound_ema_reclaim
     frame = compute_long_trend(classify_colors(compute_features(golden_delayed_upgrade())))
     structures = detect_reversal_bottoms(frame, "TEST", detect_reversal_events(frame, "TEST"))
-    history = run_state_machine(frame, structures)
+    ema_events = _detect_structure_bound_ema_reclaim(frame, "TEST", structures)
+    history = run_state_machine(frame, structures, ema_reclaim_events=ema_events)
     return frame, history
 
 

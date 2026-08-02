@@ -102,11 +102,14 @@ def run_state_machine(
     weekly_trend: pd.DataFrame | None = None,
     early_strength_state: pd.Series | None = None,
     joint_state: pd.Series | None = None,
+    ema_reclaim_events: list | None = None,
 ) -> list[DayState]:
     """逐日推进状态机。
 
-    early_strength_state 默认是「全局」逐日早期转强布尔；
-    真实结构关联由结构 C 失效事件驱动：
+    early_strength_state 是可选的「全局」逐日 EMA20 早期转强布尔，
+    用于决定哪些日期**有机会**生成结构关联事件（基础过滤）；
+    真实结构关联来自 ema_reclaim_events（已绑定到具体 structure_id）。
+
     当某底部 structure_id 的失效日 <= day，
     该结构对应的早期转强立即失效，不影响其他结构。
     """
@@ -116,6 +119,17 @@ def run_state_machine(
         early_strength_state = ema20_reclaim_state(frame)
     if joint_state is None:
         joint_state = dual_ma_bull_state(frame)
+    # 按结构 + 日期索引：{ structure_id: { day: event } }
+    ema_reclaim_by_structure_day: dict[str, dict[date, object]] = {}
+    if ema_reclaim_events:
+        for event in ema_reclaim_events:
+            if event.rule_id != "ema20_reclaim_rising":
+                continue
+            if not event.structure_id:
+                continue
+            ema_reclaim_by_structure_day.setdefault(
+                event.structure_id, {}
+            )[event.available_date] = event
 
     bottoms = [s for s in structures if s.side == "bottom"]
     tops = [s for s in structures if s.side == "top"]
@@ -144,22 +158,26 @@ def run_state_machine(
         elif live_bottoms:
             primary = max(live_bottoms, key=lambda s: s.detected_date)
 
-        # 逐结构更新 early_strength 状态
-        reclaim_now = bool(early_strength_state.loc[timestamp])
+        # 逐结构更新 early_strength 状态（修复 3：仅在有事件关联时 active）
+        reclaim_now_global = bool(early_strength_state.loc[timestamp])
         if color is SignalColor.BLACK:
             # 转黑：所有关联早期转强立即失效
             per_structure_early = {
                 sid: (False, last_date) for sid, (_, last_date) in per_structure_early.items()
             }
         else:
-            # 在 day 还存在的底部结构 + 当天或最近有 reclaim → 标记 active
-            # 否则标记失效（但保留历史 last_date 以便解释）
             new_per_structure: dict[str, tuple[bool, date | None]] = {}
             for structure in live_bottoms:
                 prev_active, last_date = per_structure_early.get(
                     structure.structure_id, (False, None)
                 )
-                if reclaim_now:
+                # 修复 3：必须存在绑定到该结构 + 当日的 ema_reclaim 事件才标记 active。
+                # 旧的「全局 reclaim_now=True 即所有结构 active」是 bug。
+                has_bound_event = (
+                    ema_reclaim_by_structure_day.get(structure.structure_id, {}).get(day)
+                    is not None
+                )
+                if has_bound_event and reclaim_now_global:
                     new_per_structure[structure.structure_id] = (True, day)
                 else:
                     new_per_structure[structure.structure_id] = (prev_active, last_date)

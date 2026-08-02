@@ -127,6 +127,16 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
             ON structure_lifecycle(structure_id);
         """,
     ),
+    (
+        3,
+        "003_opportunity_risk_split",
+        """
+        -- Round 2 修复 4：机会阶段与风险状态分离。
+        -- daily_assessments 增加 opportunity_stage / risk_state 独立字段。
+        -- 旧 stage 字段保留作为兼容。
+        -- 使用安全的列添加：sqlite 无 IF NOT EXISTS，包装在 try/catch 中。
+        """,
+    ),
 )
 
 
@@ -145,6 +155,22 @@ def connect(path: str | Path) -> sqlite3.Connection:
     connection.execute("PRAGMA foreign_keys = ON")
     apply_migrations(connection)
     return connection
+
+
+def _safe_add_column(
+    connection: sqlite3.Connection,
+    table: str,
+    column: str,
+    type_sql: str,
+) -> None:
+    """sqlite 不支持 ALTER TABLE ADD COLUMN IF NOT EXISTS；用 try/except 兜底。"""
+    try:
+        connection.execute(
+            f"ALTER TABLE {table} ADD COLUMN {column} {type_sql}"
+        )
+    except sqlite3.OperationalError as exc:
+        if "duplicate column" not in str(exc).lower():
+            raise
 
 
 def apply_migrations(connection: sqlite3.Connection) -> tuple[str, ...]:
@@ -167,8 +193,18 @@ def apply_migrations(connection: sqlite3.Connection) -> tuple[str, ...]:
     for ordinal, name, sql in sorted(MIGRATIONS):
         if name in applied:
             continue
-        # executescript 会隐式提交，因此记账单独提交
-        connection.executescript(sql)
+        # 003 包含 ALTER TABLE ADD COLUMN：sqlite 无 IF NOT EXISTS，
+        # 用 _safe_add_column 处理
+        if name == "003_opportunity_risk_split":
+            _safe_add_column(connection, "daily_assessments", "opportunity_stage", "TEXT")
+            _safe_add_column(connection, "daily_assessments", "risk_state", "TEXT")
+            connection.execute(
+                "CREATE INDEX IF NOT EXISTS idx_assessments_opp "
+                "ON daily_assessments(symbol, as_of, opportunity_stage)"
+            )
+        else:
+            # executescript 会隐式提交，因此记账单独提交
+            connection.executescript(sql)
         connection.execute(
             "INSERT INTO schema_migrations (ordinal, name) VALUES (?, ?)",
             (ordinal, name),
@@ -342,14 +378,19 @@ def write_assessment(
     connection: sqlite3.Connection,
     assessment: DailyAssessment,
 ) -> None:
-    """写入每日解释快照（同一天重复运行覆盖为同值）。"""
+    """写入每日解释快照（同一天重复运行覆盖为同值）。
+
+    Round 2 修复 4：同时写入 opportunity_stage 与 risk_state 独立字段。
+    旧 stage 字段保留作为兼容。
+    """
     connection.execute(
         """
         INSERT OR REPLACE INTO daily_assessments (
             symbol, as_of, stage, color, dimensions_json,
             stage_change_reason_cn, primary_structure_id, b1_price,
-            data_status, ruleset_version
-        ) VALUES (?,?,?,?,?,?,?,?,?,?)
+            data_status, ruleset_version,
+            opportunity_stage, risk_state
+        ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
         """,
         (
             assessment.symbol,
@@ -364,6 +405,8 @@ def write_assessment(
             assessment.b1_price,
             assessment.data_status,
             assessment.rule_ruleset_version,
+            assessment.opportunity_stage.value,
+            assessment.risk_state.value,
         ),
     )
     connection.commit()

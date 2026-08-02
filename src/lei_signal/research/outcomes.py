@@ -94,19 +94,24 @@ def build_forward_outcomes(result: AnalysisResult) -> pd.DataFrame:
             )
         )
 
-    # --- 组合阶段起点 ---
-    previous_stage: Stage | None = None
+    # --- 组合机会阶段起点（修复 5：必须使用 opportunity_stage）---
+    # 风险状态产生的变化不参与此处的「机会阶段」记录。
+    # 同一机会阶段在风险期间保持不变，风险解除后不应被错误地记为新信号。
+    previous_opportunity: Stage | None = None
     for state in result.history:
         timestamp = pd.Timestamp(state.day)
         if timestamp not in position_of:
-            previous_stage = state.stage
+            previous_opportunity = state.opportunity_stage
             continue
-        # 只在阶段「进入」时记录一次，避免连续同阶段每天都算一个信号
-        if state.stage in _OPPORTUNITY_STAGES and state.stage != previous_stage:
+        # 只在 opportunity_stage 「进入」时记录一次
+        if (
+            state.opportunity_stage in _OPPORTUNITY_STAGES
+            and state.opportunity_stage != previous_opportunity
+        ):
             records.append(
                 _outcome_row(
-                    signal_key=f"stage:{state.stage.value}",
-                    signal_kind="stage",
+                    signal_key=f"stage:{state.opportunity_stage.value}",
+                    signal_kind="opportunity_transition",
                     event_date=state.day,
                     available_date=state.day,
                     position=position_of[timestamp],
@@ -127,7 +132,32 @@ def build_forward_outcomes(result: AnalysisResult) -> pd.DataFrame:
                     result=result,
                 )
             )
-        previous_stage = state.stage
+
+    # --- 风险状态转换（修复 5：与机会阶段分别统计）---
+    # 风险状态转换本身**不**产生 outcome 收益记录（避免与方向调整混淆），
+    # 但在 records 中标记 risk_transition 以便 UI/研究层区分。
+    previous_risk = None
+    for state in result.history:
+        if previous_risk is not None and state.risk_state != previous_risk:
+            # 风险变化：仅记录一个轻量级事件用于分类
+            records.append({
+                "signal_key": f"risk_state:{state.risk_state.value}",
+                "signal_kind": "risk_transition",
+                "event_date": state.day,
+                "available_date": state.day,
+                "structure_id": None,
+                "direction": "bearish",
+                "rule_version": "1.0.0",
+                "provenance": "lei_inferred",
+                "entry_close": float(frame["close"].iloc[position_of[pd.Timestamp(state.day)]])
+                if pd.Timestamp(state.day) in position_of else None,
+                "market_state": market_state.iloc[position_of[pd.Timestamp(state.day)]]
+                if pd.Timestamp(state.day) in position_of else "unknown",
+                "color_at_signal": state.color.value,
+            })
+        previous_risk = state.risk_state
+
+    return records
 
     if not records:
         return pd.DataFrame()

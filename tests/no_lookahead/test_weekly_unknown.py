@@ -123,9 +123,12 @@ def test_weekly_includes_completed_short_holiday_week_on_friday_close() -> None:
     weekly = aggregate_weekly(bars, as_of=index[-1])  # 下一周周一时回看
     # 第一周（3 根日线）已结束，应被纳入
     assert len(weekly) >= 1
-    assert weekly.iloc[0]["bar_count"] == 3
-    assert weekly.iloc[0]["close"] == 12.4   # 本周最后一根
-    assert weekly.iloc[0].name == index[2]
+    first = weekly.iloc[0]
+    assert first["bar_count"] == 3
+    assert first["close"] == 12.4   # 本周最后一根
+    # 修复后：available_date = 数据中下一交易日（"第一次真正可知"）
+    # 第一周之后的下一根 = index[-1]
+    assert first.name == index[-1]
 
 
 def test_weekly_marks_uncertainty_when_no_next_day_observed() -> None:
@@ -198,7 +201,8 @@ def test_appending_friday_completes_current_week() -> None:
     )
 
     # as_of = 周四：没有后续日线，第一周不能视为完成
-    aggregate_weekly(full, as_of=partial[-1])
+    incomplete = aggregate_weekly(full, as_of=partial[-1])
+    assert incomplete.empty, f"as_of=周四（{partial[-1].date()}）不应有任何已完成的本周周线"
     # 切到周一之后：第一周（仅含 4 根日线）已完成
     after = aggregate_weekly(full, as_of=pd.Timestamp("2024-01-16"))
     assert len(after) >= 1
@@ -206,4 +210,5 @@ def test_appending_friday_completes_current_week() -> None:
     first = after.iloc[0]
     assert first["bar_count"] == 4
     assert first["close"] == pytest.approx(14.0, rel=1e-6)
-    assert first.name == pd.Timestamp("2024-01-11")
+    # 修复后：available_date = 第一周之后的下一根日线（"第一次真正可知"）= 2024-01-16
+    assert first.name == pd.Timestamp("2024-01-16")

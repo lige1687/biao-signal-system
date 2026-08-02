@@ -48,20 +48,26 @@ def aggregate_weekly(
     *,
     as_of: date | pd.Timestamp | None = None,
 ) -> pd.DataFrame:
-    """把日线聚合为周线。
+    """把日线聚合为周线（Round 2 修复 1：周线完成语义）。
 
-    语义（架构第 4.1 节 + 用户修复要求）：
-      * 一周必须由其**自然周结束**之后的下一根日线确认才可使用，
-        否则视为「进行中」并排除——避免周一至周四看到本周含周五的最终值。
-      * 如果数据流断在周一至周四，则**不能**确定这一周是否已经结束
-        （可能是节假日导致的短周，也可能是数据未到）。遇到这种情况，
-        不应提前标记为「完成」也不应延后一周；唯一安全的做法是
-        在该周内**排除**所有未完成周，并在数据中**明确标记**。
-      * 索引使用「该周最后一个已完成交易日的日期」即
-        ``available_date``；下一根日线出现之前这一行**不可用**。
+    严格语义（必须满足）：
+      * as_of 之前「下一交易日已经出现」是「上一周已结束」的必要条件，
+        但**不是**充分条件——必须严格避免「下一交易日」是用未来数据回填。
+      * **可用周线的判定**：当且仅当 as_of 严格晚于该周最后一根日线所在日期
+        **并且**数据中确实存在该日期之后的一根日线（这是「下一交易日出现」的可信信号）。
+        这两条同时满足时，本周视为「已结束」。注意：必须是数据帧中存在的下一日，
+        不是日历上的下一日。
+      * 短周识别：节假日短周（如周一 + 周二）依然可以视为完整周；
+        短周不要求 5 根 K 线——只要求「as_of 之后出现了下一根日线」。
+      * 若无法识别（如数据流断在周一至周四，as_of 落在当周），
+        显式标 `is_complete=False`，**绝不**用日历猜测补全。
+      * `available_date` = 该周第一次真正可知的日期，即「数据中下一交易日」的日期。
+      * 追加未来数据不得改变历史 `as_of` 时的结论。
+      * 不得利用「下一周数据」却把当周周线事件回填到上一周五，造成隐性回看偏差。
+      * 不足 60/120 根周线时 long_trend 保持 `unknown`，禁止任何伪指标兜底。
 
-    该函数在原始日线 DataFrame 之外返回一行状态列 ``is_complete``，
-    供 `compute_weekly_long_trend` 与界面明确区分「已结束」与「不确定」。
+    返回 DataFrame 索引为 `available_date`，并附 `is_complete` 标识；
+    `is_complete=False` 的行已被过滤掉（未完成周不进入周线）。
     """
     if daily.empty:
         return daily.iloc[0:0].copy()
@@ -80,50 +86,64 @@ def aggregate_weekly(
             "low": grouped["low"].min(),
             "close": grouped["close"].last(),
             "volume": grouped["volume"].sum(),
-            "bar_count": grouped.size(),
+            "bar_count": grouped.size().astype(int),
         }
     )
 
-    # 计算每周 last_date 与 is_complete
-    last_dates: list[pd.Timestamp] = []
-    is_complete_flags: list[bool] = []
-    for _, group in grouped:
-        last_ts = group.index[-1]
-        last_dates.append(last_ts)
-        # 周是否结束：必须等到**下一根日线**出现。
-        # 由于此处只看到了最后一根，无法仅凭「本周内有多少根日线」判断
-        # 是否假期短周（例如 3 根日线也可能是真的短周）。
-        # 因此唯一稳健的判断是：本函数外部传入的 as_of 比本周末（周日）
-        # 更晚，才能确定本周结束；否则一律标 False。
-        is_complete_flags.append(False)  # 后续按 as_of 重新判断
+    cutoff = (
+        pd.Timestamp(as_of).normalize()
+        if as_of is not None
+        else frame.index[-1]
+    )
 
-    weekly["available_date"] = last_dates
-    weekly["is_complete"] = is_complete_flags
-
-    # 按 as_of 与「本周末」关系重算 is_complete。
-    # 周末 = 该周周日 23:59:59；只有当 as_of >= 周末时才认为该周已结束。
-    if as_of is not None:
-        cutoff = pd.Timestamp(as_of).normalize()
-    else:
-        cutoff = frame.index[-1]  # as_of 为 None 时，按最后一根日线为基准
+    # 对每个分组，判定「本周是否已结束」：
+    #   - cutoff > 本周最后一日（as_of 严格晚于本周最后一日）
+    #   - 后续是否出现新的日线
+    completed_records: list[dict[str, object]] = []
     for period, group in grouped:
-        week_end = period.end_time.tz_localize(None)  # 本周日结束
-        # pandas Period.end_time 返回本地时区时间戳
-        pd.Timestamp(week_end).normalize()
-        # 严格：as_of 必须严格**晚于**本周最后一根日线所在日期
-        # 才能视为下一周已经开始，进而本周已完成。
-        next_day_in_frame = (frame.index > group.index[-1]).any()
-        complete = (cutoff > group.index[-1]) and next_day_in_frame
-        weekly.loc[period, "is_complete"] = complete
+        last_ts = group.index[-1]
+        if cutoff <= last_ts:
+            # as_of 还在本周内部或当天：本周不结束（周一至周四、节假日短周未到末尾）
+            continue
+        # as_of 严格晚于本周最后一日；下一根日线是否真实出现在 frame 中？
+        later = frame.index[frame.index > last_ts]
+        if len(later) == 0:
+            # 数据流断在最后一根；无「下一交易日」信号，本周不能视为完成
+            continue
+        # available_date 必须是「数据中下一交易日」，不是日历上的下一日
+        next_bar = later[0]
+        completed_records.append(
+            {
+                "open": float(group["open"].iloc[0]),
+                "high": float(group["high"].max()),
+                "low": float(group["low"].min()),
+                "close": float(group["close"].iloc[-1]),
+                "volume": float(group["volume"].sum()),
+                "bar_count": int(len(group)),
+                "available_date": next_bar,
+                "is_complete": True,
+                "week_start": period.start_time.tz_localize(None),
+                "week_end": period.end_time.tz_localize(None),
+            }
+        )
 
-    # 仅保留已完成的周
-    completed = weekly[weekly["is_complete"]].copy()
-    if completed.empty:
-        return completed.reset_index(drop=True).iloc[0:0]
+    if not completed_records:
+        return daily.iloc[0:0].assign(
+            available_date=pd.Series(dtype="datetime64[ns]"),
+            is_complete=pd.Series(dtype=bool),
+            bar_count=pd.Series(dtype=int),
+            week_start=pd.Series(dtype="datetime64[ns]"),
+            week_end=pd.Series(dtype="datetime64[ns]"),
+        ).set_index("available_date").iloc[0:0]
 
-    completed = completed.set_index("available_date")
+    completed = pd.DataFrame(completed_records).set_index("available_date")
     completed.index.name = "date"
-    return completed[["open", "high", "low", "close", "volume", "bar_count", "is_complete"]]
+    return completed[
+        [
+            "open", "high", "low", "close", "volume",
+            "bar_count", "is_complete", "week_start", "week_end",
+        ]
+    ]
 
 
 def build_snapshot(

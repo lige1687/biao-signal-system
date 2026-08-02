@@ -32,6 +32,20 @@ DISCLAIMER = (
 )
 
 
+_RISK_STATE_CN = {
+    "normal": "正常",
+    "gray_watch": "转灰观察",
+    "active_top": "有效顶部",
+    "black": "黑色",
+    "top_plus_black": "Top+Black",
+    "c_invalidated": "C 失效",
+}
+
+
+def _risk_state_label(value: str) -> str:
+    return _RISK_STATE_CN.get(value, value)
+
+
 def _load(symbol: str, build_history: bool) -> AnalysisResult:
     import os
     fixture_path = os.environ.get("LEI_FIXTURE_PATH")
@@ -220,11 +234,11 @@ def _render_current(result: AnalysisResult) -> None:
         )
 
     columns = st.columns(5)
-    columns[0].metric("机会阶段", STAGE_CN[a.stage.value])
-    columns[1].metric("最新颜色", COLOR_CN[a.color.value])
-    columns[2].metric("最新收盘", f"{float(latest['close']):.4f}")
-    columns[3].metric("数据日期", a.as_of.strftime("%Y-%m-%d"))
-    columns[4].metric("规则账本版本", a.rule_ruleset_version)
+    columns[0].metric("机会阶段", STAGE_CN[a.opportunity_stage.value])
+    columns[1].metric("风险状态", _risk_state_label(a.risk_state.value))
+    columns[2].metric("最新颜色", COLOR_CN[a.color.value])
+    columns[3].metric("最新收盘", f"{float(latest['close']):.4f}")
+    columns[4].metric("数据日期", a.as_of.strftime("%Y-%m-%d"))
 
     st.info(f"**阶段说明**：{a.stage_change_reason_cn}")
 

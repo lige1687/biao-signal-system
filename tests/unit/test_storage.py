@@ -50,7 +50,11 @@ def test_migrations_apply_once_and_are_idempotent(tmp_path) -> None:  # noqa: AN
         row["name"]
         for row in connection.execute("SELECT name FROM schema_migrations")
     }
-    assert names == {"001_core_tables", "002_structure_lifecycle_events"}
+    assert names == {
+        "001_core_tables",
+        "002_structure_lifecycle_events",
+        "003_opportunity_risk_split",
+    }
     connection.close()
 
     # 重新打开同一文件不得重复应用

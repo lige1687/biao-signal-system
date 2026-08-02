@@ -197,13 +197,18 @@ def test_gate_10_weekly_never_leaks_friday_into_earlier_days() -> None:
     result = analyze_bars("G", _bars())
     weekly = result.weekly_trend
     assert not weekly.empty
-    # 每个周线索引都必须是真实交易日，且是其所在周的最后一个已完成交易日
+    # 每个周线索引都必须是真实交易日
     daily_index = set(result.frame.index)
     for timestamp in weekly.index:
         assert timestamp in daily_index
-    # 最后一根日线所在的周不得出现在周线中
-    last_week = result.frame.index[-1].to_period("W-SUN")
-    assert all(ts.to_period("W-SUN") != last_week for ts in weekly.index)
+    # 修复后语义：available_date = 数据中下一交易日 = 该周第一次可知。
+    # 因此「in-progress 周」（最后一根日线所在周）不能出现在 weekly 中：
+    # 该周既没有「下一交易日」信号，week_end 应严格早于 last frame date
+    last_date = result.frame.index[-1]
+    for _, row in weekly.iterrows():
+        assert pd.Timestamp(row["week_end"]) < last_date, (
+            f"in-progress 周不得出现在 weekly 中：week_end={row['week_end']}, last={last_date}"
+        )
 
 
 def test_gate_11_repeated_runs_produce_identical_event_ids() -> None:

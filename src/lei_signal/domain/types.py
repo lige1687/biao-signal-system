@@ -124,12 +124,18 @@ LONG_TREND_CN: dict[str, str] = {
 }
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=False, slots=True)
 class SignalEvent:
     """一次客观技术事件。只追加，不回写。
 
     event_date     形态实际发生的日期
     available_date 系统最早能确认它的日期（研究统计必须使用此列）
+    valid_until     状态结束日（exclusive）；=available_date+1day 表示单次事件；
+                    =结束日 表示状态型事件的最后有效日；None 表示永久。
+    lifecycle_id    状态型事件的实例 ID；同一状态重新进入会产生新 ID。
+                    单次事件 = None。
+    ended_event_id  若非 None，表示「该状态的结束事件」的 event_id。
+                    （可在 SQLite 中回查结束事件）
     """
 
     event_id: str
@@ -148,6 +154,9 @@ class SignalEvent:
     invalidation: dict[str, Any] = field(default_factory=dict)
     structure_id: str | None = None
     run_id: str | None = None
+    valid_until: date | None = None
+    lifecycle_id: str | None = None
+    ended_event_id: str | None = None
 
 
 @dataclass(frozen=True, slots=True)

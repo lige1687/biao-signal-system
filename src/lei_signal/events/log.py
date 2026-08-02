@@ -119,6 +119,9 @@ def make_event(
     structure_id: str | None = None,
     timeframe: str = "1d",
     run_id: str | None = None,
+    valid_until: date | None = None,
+    lifecycle_id: str | None = None,
+    ended_event_id: str | None = None,
 ) -> SignalEvent:
     """构造事件，强制 available_date >= event_date。"""
     if available_date < event_date:
@@ -127,12 +130,19 @@ def make_event(
         )
     if not 0 <= strength <= 100:
         raise ValueError(f"{rule_id}: strength 必须在 0..100，得到 {strength}")
+    if valid_until is not None and valid_until < available_date:
+        raise ValueError(
+            f"{rule_id}: valid_until({valid_until}) 不得早于 available_date({available_date})"
+        )
     return SignalEvent(
         event_id=event_id,
         symbol=symbol,
         timeframe=timeframe,
         event_date=event_date,
         available_date=available_date,
+        valid_until=valid_until,
+        lifecycle_id=lifecycle_id,
+        ended_event_id=ended_event_id,
         rule_id=rule_id,
         rule_version=rule_version,
         direction=direction,

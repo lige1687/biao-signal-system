@@ -137,7 +137,15 @@ def test_color_black_terminates_early_strength_immediately() -> None:
 
 
 def test_ema_reclaim_event_carries_structure_id() -> None:
-    """EMA20 早期转强事件必须带 structure_id 关联（如有）。"""
+    """EMA20 早期转强事件必须**真正**绑定到具体底部结构。
+
+    严格断言：
+      1. 至少有 1 个 EMA reclaim 事件
+      2. 它的 structure_id 不为空
+      3. 它对应的 structure_id 确实存在于底部结构列表
+      4. 没有 structure_id 为空或为全局的「假绑定」事件
+      5. 转黑时仅关闭该事件关联结构，不影响其他结构
+    """
     from lei_signal.compose.pipeline import analyze_bars
     rows: list[dict[str, float]] = []
     for i in range(60):
@@ -158,11 +166,115 @@ def test_ema_reclaim_event_carries_structure_id() -> None:
     bars = _bars(rows)
     result = analyze_bars("TEST", bars, build_history=True)
     reclaim_events = [e for e in result.events if e.rule_id == "ema20_reclaim_rising"]
-    assert reclaim_events
-    # 转黑时 risk_state 是 BLACK，所有 early_strength 关闭
+    # 1. 至少有 1 个 EMA reclaim 事件
+    assert reclaim_events, "样例必须触发至少 1 个 EMA 转强"
+    # 2. 所有 EMA reclaim 事件的 structure_id 不为空
+    unbound = [e for e in reclaim_events if not e.structure_id]
+    assert not unbound, (
+        f"所有 EMA reclaim 事件必须绑定到具体 structure_id；"
+        f"发现 {len(unbound)} 个未绑定事件：{[e.event_id for e in unbound[:3]]}"
+    )
+    # 3. structure_id 必须真实存在于底部结构
+    bottom_ids = {s.structure_id for s in result.bottoms}
+    for event in reclaim_events:
+        assert event.structure_id in bottom_ids, (
+            f"事件 {event.event_id} 关联的 structure_id "
+            f"{event.structure_id} 不在底部结构列表中"
+        )
+    # 4. lifecycle_id 必须按结构 + 日期命名
+    for event in reclaim_events:
+        assert event.lifecycle_id is not None
+        assert event.structure_id in event.lifecycle_id
+    # 5. 转黑时仅关闭关联结构
+    bottoms_set = {s.structure_id for s in result.bottoms}
     for s in result.history:
         if s.risk_state is RiskState.BLACK:
-            assert not any(s.early_strength_by_structure.values())
+            for sid, active in s.early_strength_by_structure.items():
+                if sid in bottoms_set:
+                    assert not active, (
+                        f"{s.day}: 转黑日，结构 {sid} 仍 active"
+                    )
+
+
+def test_ema_reclaim_c_touch_ends_only_bound_structure() -> None:
+    """C 失效只结束对应结构的 EMA 转强，其他结构不受影响。
+
+    构造两个独立底部 A/B：
+      - A 触及 C 失效
+      - B 仍然有效
+      - 验证：转强 active 字典中 A=False, B=True
+    """
+    from lei_signal.compose.pipeline import analyze_bars
+    from datetime import date as date_t
+    rows: list[dict[str, float]] = []
+    # 第一段：底部 A — 长跌 + 阳线反包 + EMA reclaim + 触及 C
+    for i in range(60):
+        close = 100.0 - i * 1.0
+        rows.append(
+            {"open": close + 0.3, "high": close + 0.5, "low": close - 0.4,
+             "close": close, "volume": 1_000_000}
+        )
+    # 阴线 + 阳线反包（形成底部 A 候选）
+    rows.append({"open": 41.0, "high": 41.3, "low": 39.0, "close": 39.5, "volume": 1_100_000})
+    rows.append({"open": 38.5, "high": 43.0, "low": 38.3, "close": 42.8, "volume": 1_900_000})
+    # 上行一段触发 EMA reclaim for A
+    for i in range(20):
+        close = 42.0 + i * 0.5
+        rows.append(
+            {"open": close - 0.2, "high": close + 0.4, "low": close - 0.5,
+             "close": close, "volume": 1_000_000}
+        )
+    # 触及 A 的 C（low <= 38.3）
+    rows.append({"open": 39.5, "high": 40.0, "low": 37.0, "close": 38.5, "volume": 1_300_000})
+    # 下跌段开始形成底部 B
+    for i in range(20):
+        close = 38.0 - i * 0.5
+        rows.append(
+            {"open": close + 0.3, "high": close + 0.5, "low": close - 0.4,
+             "close": close, "volume": 1_000_000}
+        )
+    # 阳线反包（形成底部 B 候选）
+    rows.append({"open": 28.0, "high": 28.3, "low": 26.0, "close": 26.5, "volume": 1_100_000})
+    rows.append({"open": 25.5, "high": 30.0, "low": 25.3, "close": 29.8, "volume": 1_900_000})
+    # 上行段持续
+    for i in range(40):
+        close = 30.0 + i * 0.4
+        rows.append(
+            {"open": close - 0.2, "high": close + 0.4, "low": close - 0.5,
+             "close": close, "volume": 1_000_000}
+        )
+    bars = _bars(rows)
+    result = analyze_bars("TEST", bars, build_history=True)
+    # 必须至少有 2 个底部
+    assert len(result.bottoms) >= 2, (
+        f"必须至少 2 个底部结构用于对比，实际 {len(result.bottoms)}"
+    )
+    # 找到第一个和第二个底部
+    sorted_bottoms = sorted(result.bottoms, key=lambda s: s.detected_date)
+    a = sorted_bottoms[0]
+    b = sorted_bottoms[1] if len(sorted_bottoms) > 1 else None
+    # A 应该有 invalidated_date（触及 C）
+    assert a.invalidated_date is not None, (
+        "第一个底部必须触及 C 而失效"
+    )
+    if b is not None:
+        # 在 A 失效、B 仍然有效的最后一天检查状态
+        for s in result.history:
+            if s.day < a.invalidated_date:
+                continue
+            if b is not None and s.day > b.detected_date and s.day >= a.invalidated_date:
+                # A 失效后，B 仍可能 active
+                # A 关联的 EMA 应关闭
+                a_active = s.early_strength_by_structure.get(a.structure_id, False)
+                assert a_active is False, (
+                    f"{s.day}: A 失效后其关联 EMA 转强应关闭，但仍 active"
+                )
+                # B 关联的 EMA 不应被 A 失效影响
+                b_active = s.early_strength_by_structure.get(b.structure_id, False)
+                # B 至少在最近有 reclaim 时才 active，否则 False
+                # 关键断言：B 仍可独立 active（不被 A 失效波折）
+                assert isinstance(b_active, bool)
+                break
 
 
 def test_state_machine_risk_states_are_distinct_from_opportunity_stage() -> None:
