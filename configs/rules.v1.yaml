@@ -203,19 +203,29 @@ rules:
   # ---------------- 量能 ----------------
   volume_proxies:
     rule_id: "volume_proxies"
-    version: "1.0.0"
+    version: "1.1.0"
     provenance: "research_proxy"
     params:
       window: 20
+      up_surge_ratio: 1.5
       breakout_ratio: 1.5
       bearish_ratio: 1.5
       shrink_lookback: 3
     formula: |
       volume_ratio20 = Volume / mean(Volume, 20)
-      breakout_volume = 收盘突破结构颈线 且 volume_ratio20 >= 1.5
-      pullback_shrink = 回调期最近3日均量 < 前一上涨段最近3日均量
-      bearish_expansion = Close 下跌 且 volume_ratio20 >= 1.5
-    note_cn: "阈值 1.5 为研究代理。只作支持/冲突标签，不作底部或入场必选条件。"
+      volume_up_surge = Close 上涨 且 volume_ratio20 >= up_surge_ratio
+      breakout_volume = Close 突破某个明确结构颈线 且 volume_ratio20 >= breakout_ratio
+      pullback_shrink = 当前 Close 下跌 且 最近 shrink_lookback 日均量 < 前 shrink_lookback 日均量
+      bearish_expansion = Close 下跌 且 volume_ratio20 >= bearish_ratio
+    note_cn: |
+      阈值 1.5 为研究代理。volume_up_surge 不要求结构颈线；
+      breakout_volume 必须有结构颈线才会被记录（防止把「放量上行」错叫为「放量突破」）。
+      pullback_shrink 是简单滚动代理（仅比较最近两段均量），不是真正的趋势分段。
+    events:
+      - volume_up_surge
+      - breakout_volume
+      - pullback_shrink
+      - bearish_expansion
 
   # ---------------- 筹码分布代理 ----------------
   volume_profile_proxy:
@@ -238,10 +248,10 @@ rules:
   # ---------------- B1 第一阻力 ----------------
   resistance_b1:
     rule_id: "resistance_b1"
-    version: "1.0.0"
+    version: "1.1.0"
     provenance: "lei_explicit"
     params:
-      lookback_days: 504   # 约两年
+      lookback_years: 2   # 真实过去两年（≈ 730 自然日）
     formula: |
       B1 = 信号发生前已确认、过去两年内、时间上最近、价格高于当时收盘价的摆动高点
     note_cn: "B1 是第一阻力，不是强制止盈目标，也不是 3R 入场门槛。B1 不存在仍允许产生信号。"

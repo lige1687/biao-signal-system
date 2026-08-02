@@ -78,13 +78,12 @@ def compute_weekly_long_trend(weekly: pd.DataFrame) -> pd.DataFrame:
         return weekly.assign(long_trend=[], long_gap=[], long_gap_change=[])
     frame = weekly.copy()
     close = frame["close"].astype(float)
+    # 严格使用真实 EMA60/EMA120。
+    # 真实窗口不足 60/120 根周线时，对应列保持 NaN；
+    # compute_long_trend 会把它们标为 long_trend=unknown（架构第 5.5 节）。
+    # 修复：禁止替换为 EMA16/20/25/35/40 之类的伪指标冒充周线长周期。
     frame["ema60"] = seeded_ema(close, 60)
     frame["ema120"] = seeded_ema(close, 120)
-    # 周线样本少时退化为较短周期，避免整列 NaN 造成「无背景」误读为冲突。
-    if frame["ema60"].isna().all():
-        frame["ema60"] = seeded_ema(close, min(20, max(2, len(frame) // 3)))
-    if frame["ema120"].isna().all():
-        frame["ema120"] = seeded_ema(close, min(40, max(3, len(frame) // 2)))
     return compute_long_trend(frame)
 
 

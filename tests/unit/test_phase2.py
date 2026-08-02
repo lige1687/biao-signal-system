@@ -372,10 +372,10 @@ def test_black_and_top_plus_black_are_saved_separately() -> None:
     assert top_plus[0].severity is Severity.CRITICAL
     assert first_black is not None
 
-    # 无顶部时产生 black_without_top
+    # 无顶部时仅产生 key_wave_black_started，不产生 top_plus_black
     events_no_top = detect_key_wave_events(frame, "TEST", tops=[])
     sub_rules_no_top = {e.evidence["sub_rule"] for e in events_no_top}
-    assert "black_without_top" in sub_rules_no_top
+    assert "key_wave_black_started" in sub_rules_no_top
     assert "top_plus_black" not in sub_rules_no_top
 
 
@@ -404,7 +404,8 @@ def test_invalidated_top_cannot_participate_in_top_plus_black() -> None:
     first_day_events = [e for e in events if e.event_date == first_black]
     sub_rules = {e.evidence["sub_rule"] for e in first_day_events}
     assert "top_plus_black" not in sub_rules
-    assert "black_without_top" in sub_rules
+    # 失效顶部参与 → 仅记录黑色起始，没有 top+black
+    assert "key_wave_black_started" in sub_rules
 
 
 # ---------------- 量能 ----------------
@@ -412,7 +413,7 @@ def test_invalidated_top_cannot_participate_in_top_plus_black() -> None:
 
 def test_volume_labels_are_proxies_and_never_gate() -> None:
     frame = _prepared(_random_bars(300, seed=51))
-    for column in ("volume_surge", "bearish_expansion", "pullback_shrink"):
+    for column in ("volume_up_surge", "bearish_expansion", "pullback_shrink"):
         assert column in frame.columns
     events = detect_volume_events(frame, "TEST")
     assert events

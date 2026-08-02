@@ -1,15 +1,18 @@
 """持续观察状态机。
 
-核心不变量（架构第 6 节）：
-  1. 先前信号不因其他条件当天没满足而被丢弃。
-  2. 「共同确认」读取**当前状态**，不要求当天重新穿越 EMA20。
-  3. 长趋势改善时，即使 EMA20 交叉已经过去，也能升级为趋势增强。
-  4. 任一时刻触及 C 永久终止关联底部结构；后续上涨不能复活。
-  5. 同一标的可同时保留多个底部结构；选最近有效者为主结构，但不删除其他。
-  6. 顶部与底部可暂时并存，界面显示冲突，不静默覆盖。
+核心不变量（架构第 6 节 + 修复要求）：
+  1. 机会阶段与风险状态**分离**保存——前者是机会维度，后者是风险维度。
+     过去会把 KEY_RISK / RISK_WATCH / INVALIDATED 混进 stage，掩盖原机会阶段。
+  2. EMA20 早期转强是**结构关联的持续状态**：
+       - 当转强事件绑定到某个底部 structure_id 时，
+         该结构触及 C 失效 → 关联的早期转强立即失效。
+       - 新底部结构**不得继承**旧底部的早期转强。
+       - 颜色转黑 → 当前所有早期转强失效。
+  3. 状态可逐日回放，不依赖未来数据。
 """
 from __future__ import annotations
 
+from collections.abc import Iterable
 from dataclasses import dataclass, field
 from datetime import date
 
@@ -17,6 +20,7 @@ import pandas as pd
 
 from lei_signal.domain.types import (
     LongTrendState,
+    RiskState,
     SignalColor,
     Stage,
     StructureInstance,
@@ -25,21 +29,42 @@ from lei_signal.domain.types import (
 
 @dataclass
 class DayState:
-    """某一交易日的观察状态。"""
+    """某一交易日的观察状态。机会与风险分离保存。"""
 
     day: date
-    stage: Stage
+    opportunity_stage: Stage
+    risk_state: RiskState
     color: SignalColor
     live_bottoms: list[StructureInstance] = field(default_factory=list)
     primary_bottom: StructureInstance | None = None
     active_top: StructureInstance | None = None
+    # 每个 structure_id 对应一个「该结构仍享有早期转强」的布尔；
+    # 仅当该结构仍存在且没被 C 触及、且最近有未失效的转强事件时为 True。
+    early_strength_by_structure: dict[str, bool] = field(default_factory=dict)
+    # 兼容旧接口：单一早期转强标志（与 primary_bottom 关联）
     early_strength_active: bool = False
     early_strength_date: date | None = None
+    early_strength_structure_id: str | None = None
     joint_confirmed_now: bool = False
     daily_long: LongTrendState = LongTrendState.UNKNOWN
     weekly_long: LongTrendState = LongTrendState.UNKNOWN
     long_supportive: bool = False
     reasons: list[str] = field(default_factory=list)
+
+    @property
+    def stage(self) -> Stage:
+        """综合显示阶段（保留向后兼容）。"""
+        if self.risk_state is RiskState.C_INVALIDATED:
+            return Stage.INVALIDATED
+        if self.risk_state is RiskState.TOP_PLUS_BLACK:
+            return Stage.KEY_RISK
+        if self.risk_state in (RiskState.BLACK, RiskState.ACTIVE_TOP, RiskState.GRAY_WATCH):
+            return Stage.RISK_WATCH
+        return self.opportunity_stage
+
+    @property
+    def color_value(self) -> str:
+        return self.color.value
 
 
 _IMPROVING_STATES = {
@@ -80,8 +105,10 @@ def run_state_machine(
 ) -> list[DayState]:
     """逐日推进状态机。
 
-    每天重新读取「当前仍然有效的状态」，而不是要求所有事件同一天发生。
-    这使得 6 月的短期转强可以在 8 月长趋势改善时推动升级。
+    early_strength_state 默认是「全局」逐日早期转强布尔；
+    真实结构关联由结构 C 失效事件驱动：
+    当某底部 structure_id 的失效日 <= day，
+    该结构对应的早期转强立即失效，不影响其他结构。
     """
     from lei_signal.rules.dual_ma import dual_ma_bull_state, ema20_reclaim_state
 
@@ -94,8 +121,9 @@ def run_state_machine(
     tops = [s for s in structures if s.side == "top"]
 
     history: list[DayState] = []
-    early_active = False
-    early_date: date | None = None
+    # 按结构记录早期转强：{ structure_id: (active, last_reclaim_date) }
+    # 当颜色转黑时，所有结构都标记失效（不复活）。
+    per_structure_early: dict[str, tuple[bool, date | None]] = {}
 
     for timestamp, row in frame.iterrows():
         day = timestamp.date()
@@ -116,13 +144,40 @@ def run_state_machine(
         elif live_bottoms:
             primary = max(live_bottoms, key=lambda s: s.detected_date)
 
-        # 早期转强是**持续状态**：一旦出现就保留，直到被转黑或触及 C 否定。
-        if bool(early_strength_state.loc[timestamp]):
-            early_active = True
-            early_date = day
+        # 逐结构更新 early_strength 状态
+        reclaim_now = bool(early_strength_state.loc[timestamp])
         if color is SignalColor.BLACK:
-            early_active = False
-            early_date = None
+            # 转黑：所有关联早期转强立即失效
+            per_structure_early = {
+                sid: (False, last_date) for sid, (_, last_date) in per_structure_early.items()
+            }
+        else:
+            # 在 day 还存在的底部结构 + 当天或最近有 reclaim → 标记 active
+            # 否则标记失效（但保留历史 last_date 以便解释）
+            new_per_structure: dict[str, tuple[bool, date | None]] = {}
+            for structure in live_bottoms:
+                prev_active, last_date = per_structure_early.get(
+                    structure.structure_id, (False, None)
+                )
+                if reclaim_now:
+                    new_per_structure[structure.structure_id] = (True, day)
+                else:
+                    new_per_structure[structure.structure_id] = (prev_active, last_date)
+            per_structure_early = new_per_structure
+
+        # 至少一个底部结构仍享有早期转强
+        any_early = any(active for active, _ in per_structure_early.values())
+        # 单一主结构早期转强（向后兼容）：取主结构
+        if primary is not None and per_structure_early.get(primary.structure_id, (False, None))[0]:
+            primary_early_active = True
+            primary_early_date = per_structure_early[primary.structure_id][1]
+            primary_early_sid = primary.structure_id
+        else:
+            # 没有关联主结构时，**禁止**回退到全局「最近」早期转强
+            primary_early_active = False
+            primary_early_date = None
+            primary_early_sid = None
+
         joint_now = bool(joint_state.loc[timestamp])
 
         daily_long = LongTrendState(str(row.get("long_trend", "unknown")))
@@ -133,28 +188,36 @@ def run_state_machine(
                 weekly_long = LongTrendState(str(visible["long_trend"].iloc[-1]))
         long_supportive = daily_long in _IMPROVING_STATES or weekly_long in _IMPROVING_STATES
 
-        stage, reasons = _resolve_stage(
-            color=color,
+        opportunity, opp_reasons = _resolve_opportunity(
             live_bottoms=live_bottoms,
             confirmed_bottoms=confirmed_bottoms,
-            active_top=active_top,
-            early_active=early_active,
+            any_early_strength=any_early,
             joint_now=joint_now,
             long_supportive=long_supportive,
+        )
+        risk, risk_reasons = _resolve_risk(
+            color=color,
+            active_top=active_top,
+            structures=structures,
             day=day,
-            structures=bottoms,
         )
 
+        reasons = opp_reasons + risk_reasons
         history.append(
             DayState(
                 day=day,
-                stage=stage,
+                opportunity_stage=opportunity,
+                risk_state=risk,
                 color=color,
                 live_bottoms=live_bottoms,
                 primary_bottom=primary,
                 active_top=active_top,
-                early_strength_active=early_active,
-                early_strength_date=early_date,
+                early_strength_by_structure={
+                    sid: active for sid, (active, _) in per_structure_early.items()
+                },
+                early_strength_active=primary_early_active,
+                early_strength_date=primary_early_date,
+                early_strength_structure_id=primary_early_sid,
                 joint_confirmed_now=joint_now,
                 daily_long=daily_long,
                 weekly_long=weekly_long,
@@ -165,33 +228,16 @@ def run_state_machine(
     return history
 
 
-def _resolve_stage(
+def _resolve_opportunity(
     *,
-    color: SignalColor,
     live_bottoms: list[StructureInstance],
     confirmed_bottoms: list[StructureInstance],
-    active_top: StructureInstance | None,
-    early_active: bool,
+    any_early_strength: bool,
     joint_now: bool,
     long_supportive: bool,
-    day: date,
-    structures: list[StructureInstance],
 ) -> tuple[Stage, list[str]]:
-    """决定当天阶段。
-
-    机会阶段与风险阶段分开判断：风险不删除底部结构，只改变提示层级。
-    """
+    """机会阶段（不混入风险）。"""
     reasons: list[str] = []
-
-    # 当天刚刚触及 C 的结构 -> 失效提示（但不影响其他仍有效结构）
-    invalidated_today = [
-        s for s in structures if s.invalidated_date == day and s.side == "bottom"
-    ]
-    if invalidated_today and not live_bottoms:
-        reasons.append("有效底部结构因触及C而全部失效")
-        return Stage.INVALIDATED, reasons
-
-    # 机会阶段（自下而上升级）
     opportunity = Stage.NO_CLUE
     if live_bottoms:
         opportunity = Stage.BOTTOM_WATCH
@@ -199,34 +245,49 @@ def _resolve_stage(
     if confirmed_bottoms:
         opportunity = Stage.STRUCTURE_CONFIRMED
         reasons.append("底部结构已确认")
-    if live_bottoms and early_active:
+    if live_bottoms and any_early_strength:
         opportunity = Stage.EARLY_STRENGTH
-        reasons.append("EMA20重新站上且向上（早期转强仍有效）")
+        reasons.append("早期转强仍有效（结构关联）")
     if live_bottoms and joint_now:
-        # 不要求今天重新穿越 EMA20
         opportunity = Stage.JOINT_CONFIRMED
-        reasons.append("双均线当前共同向上（共同确认，读取当前状态）")
+        reasons.append("双均线当前共同向上（共同确认）")
     if opportunity is Stage.JOINT_CONFIRMED and long_supportive:
         opportunity = Stage.TREND_REINFORCED
-        reasons.append("日线或周线长周期趋势转为改善/支持（趋势增强）")
+        reasons.append("日线或周线长周期趋势支持/改善（趋势增强）")
+    return opportunity, reasons
 
-    # 风险阶段：只在存在风险时覆盖提示层级
+
+def _resolve_risk(
+    *,
+    color: SignalColor,
+    active_top: StructureInstance | None,
+    structures: Iterable[StructureInstance],
+    day: date,
+) -> tuple[RiskState, list[str]]:
+    """风险状态（与机会阶段分离）。"""
+    reasons: list[str] = []
+    bottoms = [s for s in structures if s.side == "bottom"]
+    invalidated_today = [
+        s for s in bottoms
+        if s.invalidated_date == day
+        and s.status.value == "invalidated"
+    ]
+    if invalidated_today:
+        reasons.append("C 触及/跌破，关联底部结构已失效")
+        return RiskState.C_INVALIDATED, reasons
     if color is SignalColor.BLACK:
         reasons.append("当前为黑色关键性波动")
         if active_top is not None:
-            reasons.append("同时存在有效顶部警报（Top+Black）")
-        return Stage.KEY_RISK, reasons
+            reasons.append("同时存在有效顶部警报（Top+Black 组合）")
+            return RiskState.TOP_PLUS_BLACK, reasons
+        return RiskState.BLACK, reasons
     if active_top is not None:
-        reasons.append("存在有效顶部警报，与底部结构并存（冲突）")
-        return Stage.RISK_WATCH, reasons
-    if color is SignalColor.GRAY and opportunity in (
-        Stage.JOINT_CONFIRMED,
-        Stage.TREND_REINFORCED,
-    ):
-        reasons.append("颜色转灰，均线方向出现分歧")
-        return Stage.RISK_WATCH, reasons
-
-    return opportunity, reasons
+        reasons.append("存在有效顶部警报")
+        return RiskState.ACTIVE_TOP, reasons
+    if color is SignalColor.GRAY:
+        reasons.append("颜色转灰（方向分歧）")
+        return RiskState.GRAY_WATCH, reasons
+    return RiskState.NORMAL, reasons
 
 
 __all__ = ["DayState", "run_state_machine"]

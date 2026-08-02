@@ -22,7 +22,6 @@ from lei_signal.domain.types import (
     RiskAlert,
     SignalColor,
     SignalEvent,
-    Stage,
     StructureInstance,
 )
 from lei_signal.features.volume_profile import VolumeProfileProxy
@@ -63,8 +62,9 @@ def build_assessment(
     row = frame.loc[timestamp]
 
     new_events = [e for e in events if e.available_date == day]
-    active_events = _active_events(events, structures, day)
-    invalidated_events = _invalidated_events(events, structures, day)
+    active_events, ended_events = _active_and_ended_events(
+        events, structures, day, day_state
+    )
 
     supports, conflicts = _build_factors(row, day_state, profile, b1)
     risks = _build_risks(row, day_state, structures, day)
@@ -74,11 +74,13 @@ def build_assessment(
     assessment = DailyAssessment(
         symbol=symbol,
         as_of=day,
+        opportunity_stage=day_state.opportunity_stage,
+        risk_state=day_state.risk_state,
         stage=day_state.stage,
         color=day_state.color,
         new_events=new_events,
         active_events=active_events,
-        invalidated_events=invalidated_events,
+        ended_events=ended_events,
         supports=supports,
         conflicts=conflicts,
         risks=risks,
@@ -90,8 +92,13 @@ def build_assessment(
         b1_available_date=b1.available_date if b1 else None,
         distance_to_b1_pct=b1.distance_pct if b1 else None,
         distance_to_b1_r=b1.distance_r if b1 else None,
+        joint_confirmed_now=day_state.joint_confirmed_now,
         dimensions=dimensions,
         previous_stage=previous_state.stage if previous_state else None,
+        previous_opportunity_stage=(
+            previous_state.opportunity_stage if previous_state else None
+        ),
+        previous_risk_state=previous_state.risk_state if previous_state else None,
         data_status=data_status,
         rule_ruleset_version=ruleset_version(),
         last_data_date=frame.index[-1].date(),
@@ -100,32 +107,111 @@ def build_assessment(
     return assessment
 
 
-def _active_events(
+def _active_and_ended_events(
     events: list[SignalEvent],
     structures: list[StructureInstance],
     day: date,
-) -> list[SignalEvent]:
-    """仍然有效的历史事件。
-
-    「有效」= 已可用、且其关联结构未失效。无结构关联的事件按 60 日观察窗保留，
-    使界面不会无限堆积陈旧提示；窗口是展示口径，不改变事件本身。
+    day_state: DayState,
+) -> tuple[list[SignalEvent], list[SignalEvent]]:
+    """根据事件的真实生命周期分类（修复 5）：
+      颜色事件：有效到颜色改变。
+      双均线共同确认：有效到当前状态不再成立。
+      EMA20 早期转强：有效到关联结构失效或转黑。
+      Top+Black：有效到顶部解除或颜色不黑。
+      顶底结构：按结构生命周期。
+      摆动点：永久历史事实，不是「当前仍有效信号」。
+      单次量能/K线事件：属于历史事件，不应伪装成持续有效状态。
     """
     dead_ids = {
         s.structure_id
         for s in structures
         if s.invalidated_date is not None and s.invalidated_date <= day
     }
-    result: list[SignalEvent] = []
+    active: list[SignalEvent] = []
+    ended: list[SignalEvent] = []
     for event in events:
-        if event.available_date > day or event.available_date == day:
+        if event.available_date > day:
             continue
-        if event.structure_id is not None:
-            if event.structure_id not in dead_ids:
-                result.append(event)
+        # 摆动点：永久历史事实，但不算「当前仍有效信号」
+        if event.rule_id == "swing_pivots":
+            if event.structure_id is not None and event.structure_id in dead_ids:
+                ended.append(event)
+            # 否则不放在「active」里；属于历史事实，但不是有效信号
             continue
-        if (day - event.available_date).days <= 60:
-            result.append(event)
-    return result
+        # EMA20 早期转强：颜色转黑时立即失效，无论是否绑定 structure_id
+        if event.rule_id == "ema20_reclaim_rising":
+            if day_state.color is SignalColor.BLACK:
+                ended.append(event)
+                continue
+            if event.structure_id is not None and event.structure_id in dead_ids:
+                ended.append(event)
+                continue
+            # active 候选
+            active.append(event)
+            continue
+        # Top+Black / black_without_top
+        if event.evidence.get("sub_rule") in ("top_plus_black", "black_without_top"):
+            if event.evidence.get("sub_rule") == "top_plus_black":
+                top_id = event.evidence.get("top_structure_id")
+                if top_id is not None and top_id in dead_ids:
+                    ended.append(event)
+                    continue
+            if day_state.color is not SignalColor.BLACK:
+                ended.append(event)
+                continue
+            active.append(event)
+            continue
+        # 颜色事件：直到颜色改变
+        if event.rule_id == "lei_color":
+            if day_state.color is not SignalColor(event.evidence.get("color", "")):
+                ended.append(event)
+                continue
+            active.append(event)
+            continue
+        # 双均线共同确认
+        if event.rule_id == "dual_ma_bull_confirmed":
+            if not day_state.joint_confirmed_now:
+                ended.append(event)
+                continue
+            active.append(event)
+            continue
+        # C 生命周期事件 + 底部结构事件：按结构生命周期
+        if event.rule_id in (
+            "bottom_c_lifecycle",
+            "higher_low_bottom",
+            "double_bottom",
+        ):
+            if event.structure_id in dead_ids:
+                # 即便已经失效，仍可作为「结束」事件保留
+                ended.append(event)
+            else:
+                active.append(event)
+            continue
+        # 顶部结构事件：按结构生命周期
+        if event.rule_id == "top_structure":
+            if event.structure_id in dead_ids:
+                ended.append(event)
+            else:
+                active.append(event)
+            continue
+        # 反转底部候选/确认事件
+        if event.rule_id in ("bullish_engulfing", "bullish_outside_reversal",
+                             "bearish_engulfing", "bearish_outside_reversal",
+                             "bullish_reversal_bottom"):
+            # 反转 K 线事件：当日触发后属于历史事实，不应假装仍有效
+            # 但关联 structure_id 进入「已结束」分类。
+            if event.structure_id is not None and event.structure_id in dead_ids:
+                ended.append(event)
+            elif event.available_date == day:
+                # 当日触发，出现在 new_events，不进 active/ended
+                continue
+            else:
+                # 历史反转事件
+                ended.append(event)
+            continue
+        # 其他事件（量能、长周期交叉等）
+        active.append(event)
+    return active, ended
 
 
 def _invalidated_events(
@@ -546,27 +632,38 @@ def _stage_change_reason(
     day_state: DayState,
     previous_state: DayState | None,
 ) -> str:
-    """较昨日升级或降级的原因。"""
+    """升级/降级原因：分别比较机会阶段与风险状态（修复 3）。"""
     if previous_state is None:
-        return f"首个评估日，当前阶段：{STAGE_CN[day_state.stage.value]}"
+        return (
+            f"首个评估日，机会阶段：{STAGE_CN[day_state.opportunity_stage.value]}，"
+            f"风险状态：{day_state.risk_state.value}"
+        )
 
-    current, previous = day_state.stage, previous_state.stage
-    if current == previous:
-        return f"阶段与昨日相同（{STAGE_CN[current.value]}）"
-
-    current_rank = STAGE_RANK.get(current.value)
-    previous_rank = STAGE_RANK.get(previous.value)
     reasons = "；".join(day_state.reasons) or "条件变化"
 
-    if current_rank is not None and previous_rank is not None:
+    # 机会阶段变化
+    if day_state.opportunity_stage != previous_state.opportunity_stage:
+        current_rank = STAGE_RANK.get(day_state.opportunity_stage.value, 0)
+        previous_rank = STAGE_RANK.get(previous_state.opportunity_stage.value, 0)
         direction = "升级" if current_rank > previous_rank else "降级"
-    elif current in (Stage.RISK_WATCH, Stage.KEY_RISK, Stage.INVALIDATED):
-        direction = "转入风险提示"
-    else:
-        direction = "变化"
-
+        return (
+            f"机会阶段{direction}："
+            f"{STAGE_CN[previous_state.opportunity_stage.value]} → "
+            f"{STAGE_CN[day_state.opportunity_stage.value]}。"
+            f"风险状态：{day_state.risk_state.value}。"
+            f"原因：{reasons}"
+        )
+    # 风险状态变化
+    if day_state.risk_state != previous_state.risk_state:
+        return (
+            f"风险状态变化：{previous_state.risk_state.value} → "
+            f"{day_state.risk_state.value}。"
+            f"机会阶段保持 {STAGE_CN[day_state.opportunity_stage.value]}。"
+            f"原因：{reasons}"
+        )
     return (
-        f"{direction}：{STAGE_CN[previous.value]} → {STAGE_CN[current.value]}。原因：{reasons}"
+        f"机会阶段与昨日相同（{STAGE_CN[day_state.opportunity_stage.value]}），"
+        f"风险状态 {day_state.risk_state.value}。原因：{reasons}"
     )
 
 

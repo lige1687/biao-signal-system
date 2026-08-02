@@ -56,6 +56,17 @@ class Stage(StrEnum):
     INVALIDATED = "invalidated"
 
 
+class RiskState(StrEnum):
+    """风险状态（与机会阶段分离的独立维度）。"""
+
+    NORMAL = "normal"
+    GRAY_WATCH = "gray_watch"
+    ACTIVE_TOP = "active_top"
+    BLACK = "black"
+    TOP_PLUS_BLACK = "top_plus_black"
+    C_INVALIDATED = "c_invalidated"
+
+
 STAGE_CN: dict[str, str] = {
     "no_clue": "无线索",
     "bottom_watch": "底部观察",
@@ -210,11 +221,19 @@ class DailyAssessment:
 
     symbol: str
     as_of: date
+    # 机会阶段与风险状态分离保存（修复 3）
+    opportunity_stage: Stage
+    risk_state: RiskState
+    # 综合显示阶段（保留向后兼容）：UI 文案可继续用 stage 字段
     stage: Stage
     color: SignalColor
     new_events: list[SignalEvent] = field(default_factory=list)
     active_events: list[SignalEvent] = field(default_factory=list)
-    invalidated_events: list[SignalEvent] = field(default_factory=list)
+    ended_events: list[SignalEvent] = field(default_factory=list)
+    # 向后兼容：旧代码用 invalidated_events 字段
+    @property
+    def invalidated_events(self) -> list[SignalEvent]:
+        return self.ended_events
     supports: list[Factor] = field(default_factory=list)
     conflicts: list[Factor] = field(default_factory=list)
     risks: list[RiskAlert] = field(default_factory=list)
@@ -226,9 +245,12 @@ class DailyAssessment:
     b1_available_date: date | None = None
     distance_to_b1_pct: float | None = None
     distance_to_b1_r: float | None = None
+    joint_confirmed_now: bool = False
     dimensions: dict[str, str] = field(default_factory=dict)
     stage_change_reason_cn: str = ""
     previous_stage: Stage | None = None
+    previous_opportunity_stage: Stage | None = None
+    previous_risk_state: RiskState | None = None
     data_status: str = "OK"
     rule_ruleset_version: str = ""
     last_data_date: date | None = None

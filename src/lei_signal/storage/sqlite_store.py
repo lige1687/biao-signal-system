@@ -264,14 +264,28 @@ def write_structures(
                 payload,
             )
             inserted += 1
+            # 先记录「创建 → candidate」，再记录当前真实状态（如果不同）
             _record_lifecycle(
                 connection,
                 structure_id=structure.structure_id,
                 changed_on=structure.detected_date,
                 from_status=None,
-                to_status=structure.status.value,
+                to_status="candidate",
                 reason="created",
             )
+            if structure.status.value != "candidate":
+                _record_lifecycle(
+                    connection,
+                    structure_id=structure.structure_id,
+                    changed_on=(
+                        structure.confirmed_date
+                        or structure.invalidated_date
+                        or structure.detected_date
+                    ),
+                    from_status="candidate",
+                    to_status=structure.status.value,
+                    reason=structure.invalidated_reason or "status_change",
+                )
         elif existing["status"] != structure.status.value:
             connection.execute(
                 """

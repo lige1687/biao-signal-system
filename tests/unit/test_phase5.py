@@ -143,7 +143,7 @@ def test_summary_reports_both_types_with_sample_counts(outcomes: pd.DataFrame) -
     summary = summarize_by_rule(outcomes, horizon=20)
     assert not summary.empty
     assert set(summary["类型"]) == {"原子信号", "组合阶段"}
-    for column in ("样本数", "有效样本", "胜率", "来源"):
+    for column in ("样本数", "有效样本", "方向命中率", "来源"):
         assert column in summary.columns
     assert (summary["样本数"] > 0).all()
 

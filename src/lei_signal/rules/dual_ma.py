@@ -59,8 +59,19 @@ def dual_ma_bull_state(frame: pd.DataFrame) -> pd.Series:
     ).fillna(False)
 
 
-def detect_ema20_reclaim_events(frame: pd.DataFrame, symbol: str) -> list[SignalEvent]:
-    """早期转强事件。"""
+def detect_ema20_reclaim_events(
+    frame: pd.DataFrame,
+    symbol: str,
+    *,
+    structure_id: str | None = None,
+) -> list[SignalEvent]:
+    """早期转强事件。
+
+    `structure_id` 用于把早期转强事件与某个底部结构绑定。
+    状态机会用此关联来决定该事件的「有效生命周期」：
+    一旦关联结构触及 C 失效，对应的早期转强立即失效，
+    不得继续作为当前机会阶段的一部分。
+    """
     spec = get_rule("ema20_reclaim_rising")
     state = ema20_reclaim_state(frame)
     events: list[SignalEvent] = []
@@ -77,6 +88,7 @@ def detect_ema20_reclaim_events(frame: pd.DataFrame, symbol: str) -> list[Signal
                     symbol=symbol,
                     timeframe="1d",
                     available_date=trade_date,
+                    source_id=structure_id or "global",
                 ),
                 symbol=symbol,
                 event_date=trade_date,
@@ -88,6 +100,7 @@ def detect_ema20_reclaim_events(frame: pd.DataFrame, symbol: str) -> list[Signal
                 strength=60,
                 reason_cn="收盘价重新站上EMA20，且EMA20开始向上（早期转强）",
                 provenance=spec.provenance,
+                structure_id=structure_id,
                 evidence={
                     "close": float(row["close"]),
                     "ema20": float(row["ema20"]),

@@ -87,10 +87,11 @@ def test_thresholds_live_in_config_not_code() -> None:
     """所有阈值必须来自配置。"""
     assert get_rule("swing_pivots").param("left") == 3
     assert get_rule("swing_pivots").param("right") == 3
+    assert get_rule("volume_proxies").param("up_surge_ratio") == 1.5
     assert get_rule("volume_proxies").param("breakout_ratio") == 1.5
     assert get_rule("volume_profile_proxy").param("window") == 120
     assert get_rule("volume_profile_proxy").param("value_area") == 0.70
-    assert get_rule("resistance_b1").param("lookback_days") == 504
+    assert get_rule("resistance_b1").param("lookback_years") == 2
     assert get_rule("double_bottom").param("max_diff_atr") == 1.0
 
 

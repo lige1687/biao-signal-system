@@ -63,6 +63,51 @@ def _cached_analysis(symbol: str, build_history: bool) -> AnalysisResult:
     return _load(symbol, build_history)
 
 
+def _analyze_upload(upload_file, symbol: str, build_history: bool) -> AnalysisResult:
+    """从用户上传的 CSV/Parquet 加载行情（修复 9）。"""
+    from lei_signal.compose.pipeline import analyze_bars
+    from lei_signal.data.providers import PriceData
+    from lei_signal.data.symbols import resolve_symbol
+    from lei_signal.data.validation import ValidationReport
+
+    # 上传文件可能没有 seek/tell 全部支持；pandas 会用 read(n) 多次调用，
+    # 因此把数据全部读入内存后再交给 pandas。
+    if hasattr(upload_file, "seek"):
+        try:
+            upload_file.seek(0)
+        except Exception:  # noqa: BLE001
+            pass
+    raw_bytes = upload_file.read()
+    from io import BytesIO
+    if upload_file.name.endswith(".parquet"):
+        bars = pd.read_parquet(BytesIO(raw_bytes))
+    else:
+        # 解析 CSV：date 可能是列名，也可能是 index；用 first column
+        sample = pd.read_csv(BytesIO(raw_bytes), nrows=2)
+        buf = BytesIO(raw_bytes)
+        if "date" in sample.columns:
+            bars = pd.read_csv(buf, parse_dates=["date"], index_col="date")
+        else:
+            bars = pd.read_csv(buf, index_col=0, parse_dates=True)
+    bars.index = pd.to_datetime(bars.index).tz_localize(None).normalize()
+    bars = bars.sort_index()
+    bars = bars[["open", "high", "low", "close", "volume"]]
+    info = resolve_symbol(symbol)
+    report = ValidationReport(
+        rows=len(bars), first_date=bars.index[0], last_date=bars.index[-1],
+        adjusted=True, provider="local_upload", duplicates_removed=0,
+        warnings=("local_upload", f"上传文件 {upload_file.name}"),
+    )
+    price = PriceData(
+        symbol=info.symbol, display_name=info.symbol,
+        bars=bars, report=report, info=info,
+    )
+    return analyze_bars(
+        info.symbol, bars,
+        display_name=info.symbol, price_data=price, build_history=build_history,
+    )
+
+
 def render() -> None:
     st.set_page_config(page_title="LEI 技术信号研究系统", layout="wide")
     st.title("LEI 技术信号研究系统")
@@ -81,6 +126,19 @@ def render() -> None:
         build_history = st.checkbox(
             "构建逐日解释历史（较慢，研究页需要）", value=True
         )
+        # 修复 9：允许上传本地 CSV/Parquet 作为可复现实盘数据导入
+        with st.expander("导入本地行情（CSV / Parquet）", expanded=False):
+            st.caption(
+                "数据获取失败时可上传本地保存的日线；"
+                "文件必须含 date/open/high/low/close/volume 列。"
+                "CSV 需含日期与 OHLCV 列表头。"
+            )
+            upload = st.file_uploader(
+                "选择本地文件",
+                type=["csv", "parquet"],
+                key="local_upload",
+            )
+            use_upload = st.checkbox("使用上传文件代替远程拉取", value=False)
         run = st.button("分析", type="primary", use_container_width=True)
         st.divider()
         st.caption(DISCLAIMER)
@@ -91,16 +149,21 @@ def render() -> None:
         return
 
     if run:
-        try:
-            with st.spinner(f"正在获取并分析 {symbol} ..."):
-                st.session_state["analysis"] = _cached_analysis(symbol, build_history)
-        except DataUnavailableError as exc:
-            st.error(f"**DATA_UNAVAILABLE**：{exc}")
-            st.caption("数据问题不会被静默处理为「无信号」。请检查代码、市场后缀或稍后重试。")
-            return
-        except ValueError as exc:
-            st.error(str(exc))
-            return
+        if "use_upload" in dir() and use_upload and upload is not None:
+            st.session_state["analysis"] = _analyze_upload(
+                upload, symbol, build_history
+            )
+        else:
+            try:
+                with st.spinner(f"正在获取并分析 {symbol} ..."):
+                    st.session_state["analysis"] = _cached_analysis(symbol, build_history)
+            except DataUnavailableError as exc:
+                st.error(f"**DATA_UNAVAILABLE**：{exc}")
+                st.caption("数据问题不会被静默处理为「无信号」。请检查代码、市场后缀或稍后重试。")
+                return
+            except ValueError as exc:
+                st.error(str(exc))
+                return
 
     result: AnalysisResult | None = st.session_state.get("analysis")
     if result is None:
@@ -148,6 +211,12 @@ def _render_current(result: AnalysisResult) -> None:
         st.warning(
             f"检测到 {len(result.suspicious_gaps)} 个疑似未复权跳空日，"
             f"最近一次 {result.suspicious_gaps[-1].date()}（仅提示，未修改价格）"
+        )
+    if getattr(result, "cache_fallback_used", False):
+        age_hours = (result.cache_age_seconds or 0) / 3600.0
+        st.warning(
+            f"网络行情获取失败，**正在使用本地 Parquet 缓存**（{age_hours:.1f} 小时前）。"
+            f"陈旧数据可能产生过时信号；请尽快恢复网络后重新拉取。"
         )
 
     columns = st.columns(5)
@@ -520,6 +589,7 @@ def _render_research(result: AnalysisResult) -> None:
     from lei_signal.research.stability import (
         baseline_comparison,
         block_bootstrap_ci,
+        cluster_by_structure,
         drop_top_k_analysis,
         split_by_group,
     )
@@ -543,6 +613,7 @@ def _render_research(result: AnalysisResult) -> None:
     st.dataframe(summary, use_container_width=True, hide_index=True)
     st.caption(
         "同时展示原子信号与组合阶段，不只展示表现最好的组合。"
+        "「方向命中率」按信号方向调整：看空信号以下跌为命中。"
         "样本数少于 20 的结果只能作为参考。"
     )
 
@@ -556,7 +627,17 @@ def _render_research(result: AnalysisResult) -> None:
     if not valid.empty:
         metric_columns[1].metric("均值", f"{valid.mean():.2f}%")
         metric_columns[2].metric("中位数", f"{valid.median():.2f}%")
-        metric_columns[3].metric("胜率", f"{(valid > 0).mean():.1%}")
+        # 看空/风险信号：方向命中率 = 后续下跌比例（即对信号方向有利）。
+        # 列名明确写「方向命中」，避免把 bearish 信号后下跌显示为 0% 胜率。
+        hit_col = f"direction_hit_{horizon}"
+        if hit_col in subset.columns:
+            valid_hit = subset[hit_col].dropna().astype(bool)
+            rate = float(valid_hit.mean()) if not valid_hit.empty else 0.0
+            label = "方向命中"
+        else:
+            rate = float((valid > 0).mean())
+            label = "后续上涨比例"
+        metric_columns[3].metric(label, f"{rate:.1%}")
         low, high = block_bootstrap_ci(subset, column=return_column)
         if low is not None:
             metric_columns[4].metric("95%区间", f"{low:.2f}% ~ {high:.2f}%")
@@ -606,6 +687,17 @@ def _render_research(result: AnalysisResult) -> None:
         "若信号均值与基准接近，说明它可能只是搭上了标的的自然漂移。"
     )
 
+    st.markdown("#### 同结构多次升级聚类")
+    cluster = cluster_by_structure(outcomes)
+    if not cluster.empty:
+        st.dataframe(cluster, use_container_width=True, hide_index=True)
+        st.caption(
+            "同一底部结构在生命周期内可能产生多次阶段升级。聚类后避免把这些升级"
+            "当作完全独立样本。"
+        )
+    else:
+        st.caption("该信号未与任何结构关联，无聚类信息。")
+
     st.markdown("#### 大赢家依赖检查（删除最大 1/3/5 个事件）")
     st.dataframe(
         drop_top_k_analysis(subset, column=return_column),
@@ -613,8 +705,8 @@ def _render_research(result: AnalysisResult) -> None:
         hide_index=True,
     )
 
-    st.markdown("#### 分组稳定性（按年份 / 市场状态）")
-    for group in ("year", "market_state"):
+    st.markdown("#### 分组稳定性（按年份 / 市场状态 / 资产类别）")
+    for group in ("year", "market_state", "asset_class"):
         if group in subset.columns:
             st.write(f"**按 {group} 拆分**")
             st.dataframe(

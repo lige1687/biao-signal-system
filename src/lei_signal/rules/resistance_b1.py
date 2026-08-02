@@ -3,6 +3,9 @@
 B1 = 信号发生前**已经确认**、过去两年内、时间上最近、
      价格高于当时收盘价的摆动高点。
 
+修复 7：B1 默认窗口 = 真实过去两年（lookback_years=2，≈ 730 自然日），
+        不再使用 504 个自然日。规则配置、代码、界面、测试保持一致。
+
 B1 是第一阻力，不是强制止盈目标，也不是 3R 入场门槛。
 B1 不存在仍允许产生信号（门禁 10）。
 """
@@ -33,6 +36,13 @@ class B1Resistance:
         return f"B1第一阻力 {self.price:.4f}（{self.pivot_date}确认于{self.available_date}）"
 
 
+def _lookback_days() -> int:
+    """根据配置的真实年限返回自然日数量。"""
+    spec = get_rule("resistance_b1")
+    years = float(spec.param("lookback_years", 2))
+    return int(round(365.25 * years))
+
+
 def find_b1(
     pivots: tuple[Pivot, ...],
     *,
@@ -46,21 +56,20 @@ def find_b1(
     严格性：只使用 available_date <= as_of 的摆动高点，
     即信号发生时已经确认的高点，不使用尚未确认的拐点。
     """
-    spec = get_rule("resistance_b1")
-    window = int(spec.param("lookback_days", 504)) if lookback_days is None else lookback_days
+    window = _lookback_days() if lookback_days is None else lookback_days
     earliest = as_of - timedelta(days=window)
 
     candidates = [
         pivot
         for pivot in swing_highs(pivots)
         if pivot.available_date <= as_of          # 当时已确认
-        and pivot.pivot_date >= earliest          # 两年内
+        and pivot.pivot_date >= earliest          # 窗口内
         and pivot.price > current_close           # 高于当时收盘价
     ]
     if not candidates:
         return None
 
-    # 时间上最近
+    # 时间上最近（先按 pivot_date，再按 index 解决同日并列）
     nearest = max(candidates, key=lambda p: (p.pivot_date, p.index))
     distance_pct = (nearest.price - current_close) / current_close * 100.0
     distance_r: float | None = None

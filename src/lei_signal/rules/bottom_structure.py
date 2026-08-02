@@ -1,10 +1,15 @@
 """底部结构：高低点抬高、双底、反转 K 线底部。
 
-绝对约束（架构 2.1 / 15）：
+绝对约束（架构 2.1 / 15 + 修复要求）：
   底部结构识别器**不得**读取 EMA60/EMA120 或周线趋势。
   长周期不支持只能作为组合层的冲突标签，不能在此 Block 结构。
 
-每个结构保存 C、颈线、来源事件与生命周期。
+每个结构按时间顺序推进状态：候选 → 确认 → 失效，绝不能跳过候选。
+  候选成立后，**逐日**检查：
+    1. 先触及或跌破候选 C：候选永久失效，之后突破颈线不能再确认；
+    2. 先收盘突破颈线：结构确认。
+  已确认结构从确认后的下一交易日起继续检查 C。
+  失效结构永不复活。
 """
 from __future__ import annotations
 
@@ -43,20 +48,100 @@ def _structure_id(symbol: str, structure_type: str, anchor: date, c_price: float
     )
 
 
+def _walk_bottom_structure_lifecycle(
+    frame: pd.DataFrame,
+    *,
+    candidate_date: date,
+    c_price: float,
+    neckline: float,
+    symbol: str,
+    structure_type: str,
+    provenance: Provenance,
+    source_event_ids: tuple[str, ...] = (),
+    source_rule_id: str | None = None,
+    structure_id_override: str | None = None,
+    confirm_immediately: bool = False,
+) -> StructureInstance:
+    """逐日推进底部候选 → 确认 → 失效。
+
+    严格按时间顺序：
+      * 候选自 `candidate_date` 当天成立；
+      * 从**下一交易日**起逐日检查：
+          - 先看是否触及 C：是则立即失效；
+          - 之后看是否突破颈线：是则确认；
+      * 一旦失效，结构**永不复活**——突破颈线也不能再确认。
+      * 如果 `confirm_immediately=True`（用于反转 K 线底部），
+        候选当日即确认，但仍从次日监控 C 触及。
+
+    此函数**不**引用未来数据；它使用 `frame` 整体但在状态推进时按日期
+    单调推进（每个候选都是从 candidate_date 起向前）。
+    """
+    detected = candidate_date
+    c_price = float(c_price)
+    neckline = float(neckline)
+    structure_id = structure_id_override or _structure_id(
+        symbol, structure_type, detected, c_price
+    )
+    structure = StructureInstance(
+        structure_id=structure_id,
+        symbol=symbol,
+        structure_type=structure_type,
+        side="bottom",
+        detected_date=detected,
+        c_price=c_price,
+        neckline=neckline,
+        status=StructureStatus.CANDIDATE,
+        source_event_ids=source_event_ids,
+        source_rule_id=source_rule_id,
+        provenance=provenance,
+    )
+    if confirm_immediately:
+        structure.confirmed_date = detected
+        structure.status = StructureStatus.CONFIRMED
+    # 从候选日的**下一交易日**起逐日监控。
+    # 注意：候选日不参与失效/确认判断（结构当时尚未存在/尚未被承认）。
+    start_ts = pd.Timestamp(detected)
+    forward = frame.loc[frame.index > start_ts]
+    if forward.empty:
+        return structure
+    for ts, row in forward.iterrows():
+        if float(row["low"]) <= c_price:
+            structure.status = StructureStatus.INVALIDATED
+            structure.invalidated_date = ts.date()
+            structure.invalidated_reason = "bottom_C_touched_in_candidate"
+            return structure
+        if not confirm_immediately and float(row["close"]) > neckline:
+            structure.confirmed_date = ts.date()
+            structure.status = StructureStatus.CONFIRMED
+            return _advance_confirmed(structure, frame, ts)
+    return structure
+
+
+def _advance_confirmed(
+    structure: StructureInstance,
+    frame: pd.DataFrame,
+    confirmed_ts: pd.Timestamp,
+) -> StructureInstance:
+    """已确认结构从确认日次日起监控 C 触及。"""
+    forward = frame.loc[frame.index > confirmed_ts]
+    for ts, row in forward.iterrows():
+        if float(row["low"]) <= structure.c_price:
+            structure.status = StructureStatus.INVALIDATED
+            structure.invalidated_date = ts.date()
+            structure.invalidated_reason = "bottom_C_touched"
+            return structure
+    return structure
+
+
 def detect_higher_low_bottoms(
     frame: pd.DataFrame,
     pivots: tuple[Pivot, ...],
     symbol: str,
 ) -> list[StructureInstance]:
-    """高低点抬高型底部。
-
-    连续两个确认摆动低点，第二个高于第一个；两低点之间最高价为颈线；
-    收盘突破颈线时确认。C = 第一个（较低的）低点。
-    """
+    """高低点抬高型底部：时间顺序推进。"""
     spec = get_rule("higher_low_bottom")
     lows = sorted(swing_lows(pivots), key=lambda p: p.index)
     structures: list[StructureInstance] = []
-
     for first, second in zip(lows, lows[1:], strict=False):
         if second.price <= first.price:
             continue
@@ -65,27 +150,17 @@ def detect_higher_low_bottoms(
             continue
         neckline = float(between["high"].max())
         c_price = float(first.price)
-
-        # 候选自第二个低点确认日起成立
-        detected = second.available_date
-        structure = StructureInstance(
-            structure_id=_structure_id(symbol, "higher_low_bottom", detected, c_price),
-            symbol=symbol,
-            structure_type="higher_low_bottom",
-            side="bottom",
-            detected_date=detected,
-            c_price=c_price,
-            neckline=neckline,
-            status=StructureStatus.CANDIDATE,
-            provenance=spec.provenance,
+        structures.append(
+            _walk_bottom_structure_lifecycle(
+                frame,
+                candidate_date=second.available_date,
+                c_price=c_price,
+                neckline=neckline,
+                symbol=symbol,
+                structure_type="higher_low_bottom",
+                provenance=spec.provenance,
+            )
         )
-        # 确认：确认日之后首个收盘突破颈线
-        after = frame.loc[frame.index > pd.Timestamp(detected)]
-        breakout = after.loc[after["close"] > neckline]
-        if not breakout.empty:
-            structure.confirmed_date = breakout.index[0].date()
-            structure.status = StructureStatus.CONFIRMED
-        structures.append(structure)
     return structures
 
 
@@ -98,10 +173,8 @@ def detect_double_bottoms(
     spec = get_rule("double_bottom")
     max_diff_atr = float(spec.param("max_diff_atr", 1.0))
     lows = sorted(swing_lows(pivots), key=lambda p: p.index)
-    structures: list[StructureInstance] = []
-
     atr_column = "atr14" if "atr14" in frame.columns else None
-
+    structures: list[StructureInstance] = []
     for first, second in zip(lows, lows[1:], strict=False):
         if atr_column is None:
             continue
@@ -110,29 +183,20 @@ def detect_double_bottoms(
             continue
         if abs(second.price - first.price) > max_diff_atr * float(atr_value):
             continue
-
         between = frame.iloc[first.index : second.index + 1]
         neckline = float(between["high"].max())
         c_price = float(min(first.price, second.price))
-        detected = second.available_date
-
-        structure = StructureInstance(
-            structure_id=_structure_id(symbol, "double_bottom", detected, c_price),
-            symbol=symbol,
-            structure_type="double_bottom",
-            side="bottom",
-            detected_date=detected,
-            c_price=c_price,
-            neckline=neckline,
-            status=StructureStatus.CANDIDATE,
-            provenance=spec.provenance,
+        structures.append(
+            _walk_bottom_structure_lifecycle(
+                frame,
+                candidate_date=second.available_date,
+                c_price=c_price,
+                neckline=neckline,
+                symbol=symbol,
+                structure_type="double_bottom",
+                provenance=spec.provenance,
+            )
         )
-        after = frame.loc[frame.index > pd.Timestamp(detected)]
-        breakout = after.loc[after["close"] > neckline]
-        if not breakout.empty:
-            structure.confirmed_date = breakout.index[0].date()
-            structure.status = StructureStatus.CONFIRMED
-        structures.append(structure)
     return structures
 
 
@@ -141,11 +205,10 @@ def detect_reversal_bottoms(
     symbol: str,
     reversal_events: list[SignalEvent] | None = None,
 ) -> list[StructureInstance]:
-    """强势反转 K 线独立形成候选底部，不要求先出现双底。
+    """强势反转 K 线独立形成候选底部。
 
-    这是修正「第二根阳线直接反包但系统完全没记录」的核心：
-    反转 K 线自身即可建立结构，C = 反转 K 线最低价，
-    且**不检查任何长周期条件**。
+    反转 K 线**自身即为确认日**，但仍必须按时间顺序：
+      候选可用日（反转 K 线当日）→ 立即确认 → 从次日监控 C 触及。
     """
     spec = get_rule("bullish_reversal_bottom")
     engulfing = bullish_engulfing_state(frame)
@@ -162,29 +225,27 @@ def detect_reversal_bottoms(
         row = frame.loc[timestamp]
         trade_date = timestamp.date()
         c_price = float(row["low"])
+        neckline = float(row["high"])
         source_rule = (
             "bullish_engulfing"
             if bool(engulfing.loc[timestamp])
             else "bullish_outside_reversal"
         )
-        structures.append(
-            StructureInstance(
-                structure_id=_structure_id(
-                    symbol, "bullish_reversal_bottom", trade_date, c_price
-                ),
-                symbol=symbol,
-                structure_type="bullish_reversal_bottom",
-                side="bottom",
-                detected_date=trade_date,
-                c_price=c_price,
-                neckline=float(row["high"]),   # 反转K线高点作为参考颈线
-                confirmed_date=trade_date,     # 反转K线自身即确认（收盘可知）
-                status=StructureStatus.CONFIRMED,
-                source_event_ids=tuple(event_by_date.get(trade_date, ())),
-                source_rule_id=source_rule,
-                provenance=spec.provenance,
-            )
+        structure = _walk_bottom_structure_lifecycle(
+            frame,
+            candidate_date=trade_date,
+            c_price=c_price,
+            neckline=neckline,
+            symbol=symbol,
+            structure_type="bullish_reversal_bottom",
+            provenance=spec.provenance,
+            source_event_ids=tuple(event_by_date.get(trade_date, ())),
+            source_rule_id=source_rule,
+            confirm_immediately=True,
         )
+        # 反转 K 线当日的 close 通常 > open；确认就发生在此刻（不依赖未来突破）
+        # 已经在 _walk 内部走完 candidate→confirmed；之后正常监控 C
+        structures.append(structure)
     return structures
 
 
@@ -195,7 +256,7 @@ def apply_c_lifecycle(
 ) -> list[SignalEvent]:
     """C 生命周期：触及即永久失效。
 
-    自确认日的**下一交易日**起：
+    严格按时间顺序：自确认日的**下一交易日**起：
       Low <= C   -> bottom_C_touched，结构永久失效
       Close < C  -> bottom_C_close_broken（区分盘中触及与收盘跌破）
 

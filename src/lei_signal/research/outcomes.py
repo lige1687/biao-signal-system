@@ -133,7 +133,9 @@ def build_forward_outcomes(result: AnalysisResult) -> pd.DataFrame:
         return pd.DataFrame()
 
     outcomes = pd.DataFrame(records)
-    outcomes["year"] = pd.to_datetime(outcomes["available_date"]).dt.year
+    if not outcomes.empty:
+        outcomes["year"] = pd.to_datetime(outcomes["available_date"]).dt.year
+        outcomes["asset_class"] = infer_asset_class(result.symbol)
     return outcomes
 
 
@@ -222,9 +224,11 @@ def _outcome_row(
         row[f"reached_{label}"] = reached
     row["atr_at_signal"] = atr_value
 
-    # C 路径：使用信号当天的主结构 C
-    c_price = _c_price_on(result, available_date)
+    # C 路径（修复 6.2）：优先使用事件自身关联结构的 C；
+    # 若事件没有关联结构，则用信号当天主结构 C，并标记为「推断」口径。
+    c_price, c_source = _c_price_with_source(result, available_date, structure_id)
     row["c_price"] = c_price
+    row["c_source"] = c_source   # "own_structure" | "inferred_primary"
     touched_c = False
     days_to_touch: float = np.nan
     if c_price is not None:
@@ -235,6 +239,28 @@ def _outcome_row(
             days_to_touch = float(frame.index.get_loc(hits[0]) - position)
     row["touched_c"] = touched_c
     row["days_to_touch_c"] = days_to_touch
+
+    # 方向标准化：bearish 信号时取反（修复 6.1）
+    is_bearish = direction in ("bearish", "risk")
+    for horizon in HORIZONS:
+        raw = row.get(f"fwd_return_{horizon}")
+        mfe = row.get(f"mfe_{horizon}")
+        mae = row.get(f"mae_{horizon}")
+        if raw is not None and pd.notna(raw):
+            adj = -raw if is_bearish else raw
+            row[f"direction_adjusted_return_{horizon}"] = adj
+            row[f"direction_hit_{horizon}"] = (raw < 0) if is_bearish else (raw > 0)
+        else:
+            row[f"direction_adjusted_return_{horizon}"] = np.nan
+            row[f"direction_hit_{horizon}"] = None
+        if mfe is not None and pd.notna(mfe):
+            row[f"mfe_adjusted_{horizon}"] = -mfe if is_bearish else mfe
+        else:
+            row[f"mfe_adjusted_{horizon}"] = np.nan
+        if mae is not None and pd.notna(mae):
+            row[f"mae_adjusted_{horizon}"] = -mae if is_bearish else mae
+        else:
+            row[f"mae_adjusted_{horizon}"] = np.nan
 
     # B1 路径
     b1_price = _b1_price_on(result, available_date, entry_close)
@@ -270,6 +296,48 @@ def _c_price_on(result: AnalysisResult, day: object) -> float | None:
     return None
 
 
+def _c_price_with_source(
+    result: AnalysisResult,
+    day: object,
+    structure_id: str | None,
+) -> tuple[float | None, str]:
+    """优先返回事件自身关联结构的 C；否则用当天主结构 C，并标注推断口径。
+
+    返回 ``(c_price, source)``：source 为
+      * ``"own_structure"`` —— 事件带 structure_id 且对应结构仍存在；
+      * ``"inferred_primary"`` —— 事件无关联结构，使用当天主结构（推断）；
+      * ``"unavailable"`` —— 没有任何结构。
+    """
+    if structure_id is not None:
+        for structure in result.structures:
+            if structure.structure_id == structure_id and structure.c_price is not None:
+                return structure.c_price, "own_structure"
+    inferred = _c_price_on(result, day)
+    if inferred is not None:
+        return inferred, "inferred_primary"
+    return None, "unavailable"
+
+
+def infer_asset_class(symbol: str) -> str:
+    """尽量可靠地推断资产类别；无法判断时返回 unknown。"""
+    s = symbol.upper()
+    if s.endswith(".SS") or s.endswith(".SZ"):
+        return "cn_equity"
+    if s.endswith(".HK"):
+        return "hk_equity"
+    if s.endswith((".L", ".LSE", ".LON")):
+        return "uk_equity"
+    if s.endswith((".T", ".TYO", ".JPX")):
+        return "jp_equity"
+    if s.endswith((".KS", ".KSE")):
+        return "kr_equity"
+    # 常见 ETF 后缀：QQQ, SPY, IWM, 510300.SS, 159915.SZ
+    if s.isalpha() and len(s) <= 5:
+        # 简单启发：3 字母全字母 → 可能是美股 ETF 或股票
+        return "us_equity_or_etf"
+    return "unknown"
+
+
 def _b1_price_on(result: AnalysisResult, day: object, close: float) -> float | None:
     from datetime import date as date_type
 
@@ -282,26 +350,41 @@ def _b1_price_on(result: AnalysisResult, day: object, close: float) -> float | N
 
 
 def summarize_by_rule(outcomes: pd.DataFrame, *, horizon: int = 20) -> pd.DataFrame:
-    """按信号汇总：样本数、均值、中位数、胜率。
+    """按信号汇总：样本数、方向命中率、均值、中位数。
 
-    原子信号与组合阶段都保留，不能只展示表现最好的组合。
+    看多信号：方向命中率 = 后续上涨比例。
+    看空/风险信号：方向命中率 = 后续下跌比例（即对信号方向有利）。
+    列名清楚写明「方向命中」，避免把 bearish 信号后下跌显示为 0%。
     """
-    column = f"fwd_return_{horizon}"
-    if outcomes.empty or column not in outcomes.columns:
+    raw_column = f"fwd_return_{horizon}"
+    adj_column = f"direction_adjusted_return_{horizon}"
+    hit_column = f"direction_hit_{horizon}"
+    if outcomes.empty or raw_column not in outcomes.columns:
         return pd.DataFrame()
 
     rows: list[dict[str, object]] = []
     for key, group in outcomes.groupby("signal_key"):
-        valid = group[column].dropna()
+        valid_raw = group[raw_column].dropna()
+        valid_adj = group[adj_column].dropna() if adj_column in group else pd.Series(dtype=float)
+        hit_series = group[hit_column] if hit_column in group else pd.Series(dtype=object)
+        valid_hit = hit_series.dropna()
         rows.append(
             {
                 "信号": key,
                 "类型": "组合阶段" if str(key).startswith("stage:") else "原子信号",
                 "样本数": len(group),
-                "有效样本": len(valid),
-                f"{horizon}日均值%": round(valid.mean(), 3) if not valid.empty else None,
-                f"{horizon}日中位数%": round(valid.median(), 3) if not valid.empty else None,
-                "胜率": round(float((valid > 0).mean()), 3) if not valid.empty else None,
+                "有效样本": len(valid_raw),
+                f"{horizon}日均值%": round(valid_raw.mean(), 3) if not valid_raw.empty else None,
+                f"{horizon}日中位数%": (
+                    round(valid_raw.median(), 3) if not valid_raw.empty else None
+                ),
+                f"{horizon}日方向调整均值%": (
+                    round(valid_adj.mean(), 3) if not valid_adj.empty else None
+                ),
+                "方向命中率": (
+                    round(float(valid_hit.astype(bool).mean()), 3)
+                    if not valid_hit.empty else None
+                ),
                 "触及C比例": (
                     round(float(group["touched_c"].mean()), 3)
                     if "touched_c" in group else None
@@ -355,7 +438,14 @@ def gray_transition_stats(frame: pd.DataFrame) -> pd.DataFrame:
 
 
 def top_transition_stats(result: AnalysisResult) -> pd.DataFrame:
-    """顶部警报后转黑、新高解除或继续上涨的概率。"""
+    """顶部警报后续结果——按**最早发生**的事件分类（修复 6.3）。
+
+    每个顶部独立观察：
+      * 若首先出现「转黑」日 → 计入「转为黑色」；
+      * 否则若首先出现「创新高解除」日 → 计入「新高解除」；
+      * 否则在样本末仍未发生 → 计入「截至样本末未发生」。
+    旧实现会因为最终创新高而忽略此前已经先转黑，违反时间顺序。
+    """
     tops = [s for s in result.structures if s.side == "top" and s.confirmed_date is not None]
     if not tops:
         return pd.DataFrame()
@@ -365,13 +455,28 @@ def top_transition_stats(result: AnalysisResult) -> pd.DataFrame:
     for top in tops:
         after = frame.loc[frame.index > pd.Timestamp(top.confirmed_date)]
         if after.empty:
+            kept_rising += 1
             continue
-        if top.invalidated_reason == "top_warning_invalidated_by_new_high":
-            resolved_by_high += 1
-            continue
+        # 第一次出现「转黑」或「新高解除」按时间顺序先到者
         black_days = after.index[after["signal_color"].eq("black")]
-        if len(black_days) > 0:
+        first_black = black_days[0] if len(black_days) > 0 else None
+        new_high_day = (
+            top.invalidated_date
+            if top.invalidated_reason == "top_warning_invalidated_by_new_high"
+            and top.invalidated_date is not None
+            and pd.Timestamp(top.invalidated_date) in after.index
+            else None
+        )
+        # 决定谁先到
+        if first_black is not None and new_high_day is not None:
+            if first_black <= pd.Timestamp(new_high_day):
+                turned_black += 1
+            else:
+                resolved_by_high += 1
+        elif first_black is not None:
             turned_black += 1
+        elif new_high_day is not None:
+            resolved_by_high += 1
         else:
             kept_rising += 1
 
@@ -401,6 +506,7 @@ __all__ = [
     "HORIZONS",
     "build_forward_outcomes",
     "gray_transition_stats",
+    "infer_asset_class",
     "stage_label",
     "summarize_by_rule",
     "top_transition_stats",

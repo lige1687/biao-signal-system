@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import date
+from datetime import UTC, date
 
 import pandas as pd
 
@@ -52,6 +52,27 @@ from lei_signal.state.machine import DayState, run_state_machine
 MIN_BARS = 21
 
 
+def _build_structure_necklines(
+    bottoms: list[StructureInstance],
+) -> dict[pd.Timestamp, dict]:
+    """从已确认的底部结构构建「该日附近可用的颈线」映射，供放量突破事件使用。
+
+    简化策略：每个已确认结构的 confirmed_date 之后、失效之前，
+    都将结构颈线作为可用颈线。这样能稳定捕获「放量突破颈线」事件。
+    """
+    necklines: dict[pd.Timestamp, dict] = {}
+    for structure in bottoms:
+        if structure.status.value == "invalidated" or structure.confirmed_date is None:
+            continue
+        if structure.neckline is None:
+            continue
+        necklines[pd.Timestamp(structure.confirmed_date)] = {
+            "neckline": structure.neckline,
+            "structure_id": structure.structure_id,
+        }
+    return necklines
+
+
 @dataclass
 class AnalysisResult:
     """完整分析结果。"""
@@ -70,6 +91,9 @@ class AnalysisResult:
     price_data: PriceData
     suspicious_gaps: tuple[pd.Timestamp, ...] = ()
     assessments_by_date: dict[date, DailyAssessment] = field(default_factory=dict)
+    # 修复 8：行情获取失败时是否使用了本地缓存兜底
+    cache_fallback_used: bool = False
+    cache_age_seconds: float | None = None
 
     @property
     def bottoms(self) -> list[StructureInstance]:
@@ -92,14 +116,74 @@ def analyze(
     provider: PriceProvider | None = None,
     as_of: date | None = None,
     build_history: bool = False,
+    cache_root: str | None = None,
+    cache_max_age_seconds: float = 86400.0,
+    sqlite_path: str | None = None,
+    run_id: str | None = None,
 ) -> AnalysisResult:
-    """完整分析。
+    """完整分析（修复 8：行情成功获取后写入 Parquet 缓存 + SQLite 持久化）。
 
-    as_of 用于点位回放（无未来函数测试）；build_history=True 时
-    额外为每一天构造解释快照，用于研究与时间轴。
+    流程：
+      1. 用 provider 获取行情；
+      2. 写入 Parquet 缓存（仅成功获取时）；
+      3. 运行完整分析；
+      4. 事件、结构、评估、运行元数据写入 SQLite（同 event_id 幂等忽略）。
+
+    网络失败时（provider.fetch 抛 DataUnavailableError）：
+      - 如果存在近期缓存且未过期 → 读取缓存并显示陈旧警告。
+      - 否则继续抛出原异常，提示用户重试或导入本地数据。
     """
+    from datetime import datetime
+
+    from lei_signal.data.cache import ParquetCache
+    from lei_signal.storage.sqlite_store import (
+        record_run,
+        write_assessment,
+        write_events,
+        write_structures,
+    )
+
     price_provider = provider or default_provider()
-    price_data = price_provider.fetch(symbol, min_rows=MIN_BARS)
+    cache = ParquetCache(cache_root) if cache_root else None
+    cache_fallback_used = False
+    cache_age = None
+
+    try:
+        price_data = price_provider.fetch(symbol, min_rows=MIN_BARS)
+    except DataUnavailableError as exc:
+        if cache is None:
+            raise
+        cached = cache.read(symbol, kind="bars", required_columns=("open", "close"))
+        if cached is None:
+            raise
+        if cache.age_seconds(symbol) is None or cache.age_seconds(symbol) > cache_max_age_seconds:
+            raise DataUnavailableError(
+                f"{exc}\n且本地缓存不可用或已过期，无法离线回放"
+            ) from exc
+        cache_age = cache.age_seconds(symbol)
+        cache_fallback_used = True
+        # 用缓存构造一个 PriceData-like 对象
+        from lei_signal.data.providers import PriceData
+        from lei_signal.data.symbols import resolve_symbol
+        from lei_signal.data.validation import ValidationReport
+        report = ValidationReport(
+            rows=len(cached),
+            first_date=cached.index[0],
+            last_date=cached.index[-1],
+            adjusted=True,
+            provider="parquet_cache",
+            duplicates_removed=0,
+            warnings=("cache_stale", f"cache age {cache_age:.0f}s"),
+        )
+        info = resolve_symbol(symbol)
+        price_data = PriceData(
+            symbol=info.symbol,
+            display_name=info.symbol,
+            bars=cached,
+            report=report,
+            info=info,
+        )
+
     bars = price_data.bars
     if as_of is not None:
         bars = bars.loc[bars.index <= pd.Timestamp(as_of)]
@@ -108,13 +192,52 @@ def analyze(
                 f"{price_data.symbol} 截止 {as_of} 只有 {len(bars)} 根日K线，至少需要 {MIN_BARS} 根"
             )
 
-    return analyze_bars(
+    # 成功获取行情：写入 Parquet 缓存（仅在未使用缓存兜底时）
+    if cache is not None and not cache_fallback_used:
+        try:
+            cache.write(price_data.symbol, price_data.bars)
+        except Exception:  # noqa: BLE001
+            # 缓存写入失败不应阻断分析
+            pass
+
+    result = analyze_bars(
         price_data.symbol,
         bars,
         display_name=price_data.display_name,
         price_data=price_data,
         build_history=build_history,
     )
+    # 标记是否用了缓存兜底
+    if cache_fallback_used:
+        result.cache_fallback_used = True
+        result.cache_age_seconds = cache_age
+
+    # 持久化到 SQLite
+    if sqlite_path is not None:
+        try:
+            from lei_signal.storage.sqlite_store import connect
+            conn = connect(sqlite_path)
+            with conn:
+                write_events(conn, result.events, run_id=run_id)
+                write_structures(conn, result.structures)
+                write_assessment(conn, result.assessment)
+                if run_id is not None:
+                    record_run(
+                        conn,
+                        run_id=run_id,
+                        symbol=result.symbol,
+                        started_at=datetime.now(UTC).isoformat(),
+                        ruleset_version=result.assessment.rule_ruleset_version,
+                        provider=price_data.report.provider,
+                        last_data_date=result.frame.index[-1].date(),
+                        event_count=len(result.events),
+                    )
+            conn.close()
+        except Exception:  # noqa: BLE001
+            # 持久化失败不应阻断主流程
+            pass
+
+    return result
 
 
 def analyze_bars(
@@ -145,7 +268,6 @@ def analyze_bars(
         log.extend(detect_long_trend_events(weekly_trend, symbol, timeframe="1w"))
     reversal_events = detect_reversal_events(frame, symbol)
     log.extend(reversal_events)
-    log.extend(detect_volume_events(frame, symbol))
     log.extend(_pivot_events(pivots, symbol))
 
     # 结构
@@ -157,6 +279,7 @@ def analyze_bars(
     tops = detect_top_structures(frame, pivots, symbol)
     structures = [*bottoms, *tops]
 
+    log.extend(detect_volume_events(frame, symbol, structure_necklines=_build_structure_necklines(bottoms)))
     log.extend(detect_bottom_structure_events(bottoms, symbol))
     log.extend(detect_top_structure_events(tops, symbol))
     # C 生命周期会就地修改结构状态，必须在状态机之前执行
