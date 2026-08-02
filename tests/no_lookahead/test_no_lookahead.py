@@ -156,14 +156,14 @@ def test_weekly_excludes_the_in_progress_week() -> None:
         index=index,
     )
     weekly = aggregate_weekly(frame)
-    # 最后一周仍在进行中，必须被排除
+    # 第三周仍在进行中（数据停在周三 1/17，本周周五 1/19 未收盘），必须被排除
     assert len(weekly) == 2
-    # 修复后语义：available_date = 数据中下一交易日。
-    # 2024-01-01 是周一，13 根日线 = 周一..下下周周三（即第三周 1/15=Mon..1/17=Wed）。
-    # 第一周（1/1..1/5）= 5 根；第二周（1/8..1/12）= 5 根。
-    # 第一周的 available_date = 1/8（其后的第一根日线），
-    # 第二周的 available_date = 1/15（其后的第一根日线）。
-    assert weekly.index[-1] == pd.Timestamp("2024-01-15")  # 第二周之后的第一根
+    # Round 2 修复后语义：available_date = 当周最后一个交易日（收盘后运行）。
+    # 13 根日线 = 第一周 1/1..1/5、第二周 1/8..1/12、第三周 1/15..1/17。
+    assert weekly.index.tolist() == [
+        pd.Timestamp("2024-01-05"),
+        pd.Timestamp("2024-01-12"),
+    ]
     assert weekly["bar_count"].tolist() == [5, 5]
 
 
@@ -190,33 +190,29 @@ def test_weekly_does_not_leak_friday_data_into_monday_through_thursday() -> None
         assert len(weekly) == 2, f"{as_of.date()} 不应看到进行中的第三周"
         # 周五的值不可能出现在周一至周四的周线中
         assert friday_close not in weekly["close"].tolist()
-        # 第二周：可用的最后一行 index 应该是「第二周之后出现的下一根日线」——
-        # 即第三周周一（2024-01-15）之前的最后一个自然日之后的那根；
-        # 之前是 weekly.index[-1] = 2024-01-12（旧语义 = 本周最后一日）；
-        # 修复后为「第一根后继日线」，由于第三周周一就在第三周范围内，
-        # 第二周的 available_date 应为 2024-01-15 之前的最后一根后续日线 = 第三周周一
-        # 但因第三周完全未确认（as_of 在第三周内），第二周的 next 应该在第二周结束后。
-        # 实际：第二周最后一日 = 2024-01-12；as_of 在第三周内，第二周之后出现的
-        # 第一根是 2024-01-15（第三周周一）。但我们在循环里 partial=frame[:as_of]
-        # 之后，第三周第一根也在 frame 中，所以第二周的 available_date = 2024-01-15。
-        # 但此时我们截断到 as_of（第三周某天），所以「之后的下一根」也在 frame 中。
-        # 关键不变量：第二周 OHLC 不被第三周数据污染。
-        assert "2024-01-19" not in weekly.index, "周五不得泄漏到周一至周四的周线中"
+        # 第二周 available_date = 其最后一个交易日 1/12；第三周未完成，不得出现。
+        # 关键不变量：周一至周四看到的最新周线仍是第二周，且不被第三周数据污染。
+        assert weekly.index[-1] == pd.Timestamp("2024-01-12")
+        assert pd.Timestamp("2024-01-19") not in weekly.index, (
+            "周五不得泄漏到周一至周四的周线中"
+        )
 
-    # 周五收盘后，第三周才可用
+    # 周五收盘后，第三周立即可用（收盘后运行语义，无需等下一根日线）
     full = frame.loc[frame.index <= third_week[4]].copy()
     full.loc[third_week[4], "close"] = friday_close
-    # 再追加下一周的一根，使第三周成为「已结束」
-    next_monday = pd.Timestamp("2024-01-22")
-    full.loc[next_monday] = {"open": 20.0, "high": 21.0, "low": 19.0,
-                             "close": 20.0, "volume": 1000.0}
     weekly_after = aggregate_weekly(full)
-    # 第三周已知：available_date = 2024-01-22（下一根日线）
-    assert pd.Timestamp("2024-01-22") in weekly_after.index
-    # 第三周 close 应是周五的 friday_close
-    week_3 = weekly_after.loc[pd.Timestamp("2024-01-22")]
+    friday = pd.Timestamp("2024-01-19")
+    assert friday in weekly_after.index, "周五收盘后第三周必须立即可用"
+    week_3 = weekly_after.loc[friday]
     assert week_3["close"] == friday_close
     assert week_3["bar_count"] == 5
+
+    # 再追加下一周的一根：历史结论必须保持不变（不得回溯改写）
+    full.loc[pd.Timestamp("2024-01-22")] = {
+        "open": 20.0, "high": 21.0, "low": 19.0, "close": 20.0, "volume": 1000.0,
+    }
+    weekly_next = aggregate_weekly(full, as_of=friday)
+    pd.testing.assert_frame_equal(weekly_after, weekly_next)
 
 
 def test_snapshot_crops_daily_and_weekly_consistently() -> None:

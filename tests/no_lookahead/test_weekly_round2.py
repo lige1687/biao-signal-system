@@ -41,29 +41,32 @@ def test_1_thursday_close_excludes_current_week() -> None:
 
 
 def test_2_normal_friday_close_includes_current_week() -> None:
-    """2. 正常周周五收盘后，当周立即可用。"""
+    """2. 正常周周五收盘后，当周立即可用（收盘后运行语义）。
+
+    修复前要求「下一交易日出现」才完成，导致周五收盘本周仍不可用；
+    这是不成立的系统性延迟，已修正：as_of 到达当周最后交易日（周五）即完成，
+    available_date = 周五本身（最早可知日），且不构成回看。
+    """
     frame = _week_frame(3)
     friday = frame.index[4]  # 第一周周五
     from lei_signal.data.point_in_time import aggregate_weekly
     weekly = aggregate_weekly(frame, as_of=friday)
-    # 周五：截止周五 17:00 之后，本周视为结束
-    # 关键：当 as_of = 周五当天的日线时，本周应可用
-    # 但由于「as_of 必须严格晚于本周最后一日且下一根日线已在 frame 中」，
-    # 如果 frame 中只有第一周的 5 根日线（无下一周），本周不视为结束。
-    # 若要第一周在 as_of=周五 时被视为结束，必须 frame 包含下一周的第一根日线。
-    # 这是设计选择：避免「只用日线数量猜测完成」。
-    # 真实情况：数据源当天会先送出当周日线，下一交易日才会出现下一根。
-    # 当 as_of = 周五但 frame 仍只有第一周时，as_of 之后无后继日线 → 不视为完成。
-    if weekly.empty:
-        # 这是设计预期：没有后继日线时不能视为完成
-        return
+    # 周五收盘后，本周必须立即可用
+    assert not weekly.empty, "as_of=周五时本周周线必须可用"
     assert len(weekly) == 1
-    assert weekly.index[0] == frame.index[5]  # 下一周周一（数据中下一根）
+    # available_date = 当周最后交易日（周五），不是下一周周一
+    assert weekly.index[0] == friday, f"available_date 应为周五, 实际 {weekly.index[0]}"
+    # 该周确实完整（5 根）
+    assert weekly.iloc[0]["bar_count"] == 5
 
 
 def test_3_holiday_short_week_includes_on_last_business_day() -> None:
-    """3. 节假日短周最后一个交易日收盘纳入。"""
-    # 短周：周一、周二、周三（共 3 根日线）
+    """3. 节假日短周最后一个交易日收盘即纳入（需注入真实休市日）。
+
+    短周能否「当天完成」，取决于日历知不知道周四、周五休市。注入休市日后，
+    周三（短周最后一个交易日）收盘即完成，available_date = 周三本身。
+    """
+    # 短周：周一、周二、周三（周四、周五休市）
     short_index = pd.DatetimeIndex([
         pd.Timestamp("2024-01-08"),  # 周一
         pd.Timestamp("2024-01-09"),  # 周二
@@ -79,25 +82,27 @@ def test_3_holiday_short_week_includes_on_last_business_day() -> None:
         },
         index=short_index,
     )
-    # 短周之后出现下一交易日（周五或下周）
-    next_index = pd.DatetimeIndex([pd.Timestamp("2024-01-15")])
-    next_bar = pd.DataFrame(
-        {
-            "open": [13.0], "high": [13.5], "low": [12.5],
-            "close": [13.4], "volume": [1_000_000.0],
-        },
-        index=next_index,
-    )
-    full = pd.concat([short, next_bar])
+    from lei_signal.data.calendar import weekday_calendar
     from lei_signal.data.point_in_time import aggregate_weekly
-    weekly = aggregate_weekly(full, as_of=next_index[-1])
-    assert len(weekly) >= 1
+
+    holiday_calendar = weekday_calendar(
+        [pd.Timestamp("2024-01-11").date(), pd.Timestamp("2024-01-12").date()]
+    )
+    # 短周最后一个交易日（周三）收盘：立即完成
+    weekly = aggregate_weekly(
+        short, as_of=short_index[-1], calendar=holiday_calendar
+    )
+    assert len(weekly) == 1
     first = weekly.iloc[0]
-    # 短周（3 根 K 线）必须被识别并纳入
     assert first["bar_count"] == 3
     assert first["close"] == 12.4
-    # available_date = 短周之后的第一根日线
-    assert first.name == next_index[-1]
+    # available_date = 短周最后一个交易日（收盘后运行语义）
+    assert first.name == short_index[-1]
+
+    # 反向保证：短周周二收盘时（周三尚未收盘）不得完成
+    assert aggregate_weekly(
+        short.iloc[:2], as_of=short_index[1], calendar=holiday_calendar
+    ).empty
 
 
 def test_4_monday_append_does_not_change_friday_view() -> None:
@@ -141,28 +146,35 @@ def test_5_consistency_with_only_up_to_as_of_data() -> None:
         pd.testing.assert_frame_equal(weekly_full, weekly_truncated)
 
 
-def test_6_available_date_never_earlier_than_first_known() -> None:
-    """6. available_date 不得早于首次可知日期。"""
+def test_6_available_date_is_the_week_last_trading_day() -> None:
+    """6. available_date = 当周最后一个交易日，且不早于该周任何一根日线。"""
     frame = _week_frame(3)
     from lei_signal.data.point_in_time import aggregate_weekly
     weekly = aggregate_weekly(frame)
-    # 每个 weekly 行的 index（available_date）必须晚于该行对应 week_end
+    assert not weekly.empty
     for ts, row in weekly.iterrows():
-        week_end = row["week_end"]
-        # available_date 严格晚于 week_end
-        assert pd.Timestamp(ts) > pd.Timestamp(week_end), (
-            f"available_date {ts} 不得早于本周结束日 {week_end}"
+        available = pd.Timestamp(ts)
+        week_start = pd.Timestamp(row["week_start"])
+        week_end = pd.Timestamp(row["week_end"])
+        # available_date 落在本周之内（收盘后运行语义），不再顺延到下一周
+        assert week_start <= available <= week_end, (
+            f"available_date {available} 应落在 [{week_start}, {week_end}] 内"
         )
-    # 并且：available_date 必须晚于 close 列所对应的最后一日
-    # （从 OHLCV 看，close 来自该周内最后一根日线）
+        # 且必须是该周实际出现过的日线日期（真实交易日，不是虚构日期）
+        assert available in frame.index
+        # 且不早于本周任何一根日线（否则等于回溯宣称「当时已知」）
+        in_week = frame.loc[(frame.index >= week_start) & (frame.index <= week_end)]
+        assert available >= in_week.index[-1]
+    # 正常周：available_date 就是周五
+    assert weekly.index[0] == frame.index[4]
 
 
-def test_7_holiday_short_week_3_days_completes_via_next_bar() -> None:
-    """补充：3 天短周在下一交易日出现后必须完成。
+def test_7_all_holiday_week_falls_back_to_next_bar() -> None:
+    """7. 日历判不出当周任何交易日时（整周休市/日历过期），退回下一根日线兜底。
 
-    本周内：Mon/Tue/Wed。as_of = 下周一（数据中下一根日线出现时）。
+    这是安全网：日历数据缺失或过期时，绝不能永远不完成，也绝不能提前完成。
     """
-    # 短周 Mon/Tue/Wed（Thu 节假日）
+    # 春节整周：日历标记 2/12~2/16 全部休市，但数据里仍有 3 根日线（日历与数据冲突）
     short_index = pd.DatetimeIndex([
         pd.Timestamp("2024-02-12"),  # Mon
         pd.Timestamp("2024-02-13"),  # Tue
@@ -178,19 +190,28 @@ def test_7_holiday_short_week_3_days_completes_via_next_bar() -> None:
         },
         index=short_index,
     )
-    # 下一交易日：下周一 2/19（Fri 与 Sat/Sun 都是假日）
     next_bar = pd.Timestamp("2024-02-19")
     full = pd.concat([short, pd.DataFrame(
         {"open": [103.0], "high": [104.0], "low": [102.0],
          "close": [103.5], "volume": [1_000_000.0]},
         index=pd.DatetimeIndex([next_bar]),
     )])
+    from lei_signal.data.calendar import weekday_calendar
     from lei_signal.data.point_in_time import aggregate_weekly
-    weekly = aggregate_weekly(full, as_of=next_bar)
+
+    closed_week = weekday_calendar(
+        pd.DatetimeIndex(
+            ["2024-02-12", "2024-02-13", "2024-02-14", "2024-02-15", "2024-02-16"]
+        ).date
+    )
+    # 兜底前：本周之后还没有日线出现 => 不得完成
+    assert aggregate_weekly(
+        short, as_of=short_index[-1], calendar=closed_week
+    ).empty
+    # 兜底后：下一根日线出现 => 完成，available_date = 那根日线
+    weekly = aggregate_weekly(full, as_of=next_bar, calendar=closed_week)
     assert len(weekly) >= 1
     first = weekly.iloc[0]
-    # 短周（3 根 K 线）应被识别并纳入
     assert first["bar_count"] == 3
     assert first["close"] == 102.5
-    # available_date = 下一交易日
     assert first.name == next_bar

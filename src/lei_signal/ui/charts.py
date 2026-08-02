@@ -218,7 +218,11 @@ def build_volume_profile_figure(profile: VolumeProfileProxy) -> go.Figure:
 
 
 def build_stage_history_figure(history_frame: pd.DataFrame) -> go.Figure:
-    """阶段演进图。"""
+    """阶段演进图。
+
+    蓝线 = 机会阶段（opportunity_stage）。若 ``history_frame`` 含 ``risk_rank`` /
+    ``risk_cn`` 列，叠加红线 = 风险状态（次 y 轴），两条线独立、互不覆盖。
+    """
     figure = go.Figure()
     figure.add_trace(
         go.Scatter(
@@ -228,19 +232,41 @@ def build_stage_history_figure(history_frame: pd.DataFrame) -> go.Figure:
             name="机会阶段",
             line={"width": 1.6, "color": "#2563eb"},
             customdata=history_frame[["stage_cn"]].to_numpy(),
-            hovertemplate="%{x|%Y-%m-%d}<br>阶段=%{customdata[0]}<extra></extra>",
+            hovertemplate="%{x|%Y-%m-%d}<br>机会阶段=%{customdata[0]}<extra></extra>",
         )
     )
-    figure.update_layout(
-        height=320,
-        yaxis={
+    layout: dict = {
+        "height": 320,
+        "yaxis": {
             "tickmode": "array",
             "tickvals": [0, 1, 2, 3, 4, 5],
             "ticktext": ["无线索", "底部观察", "结构确认", "早期转强", "共同确认", "趋势增强"],
         },
-        margin={"l": 40, "r": 30, "t": 30, "b": 30},
-        hovermode="x unified",
-    )
+        "margin": {"l": 40, "r": 50, "t": 30, "b": 30},
+        "hovermode": "x unified",
+    }
+    if "risk_rank" in history_frame.columns:
+        figure.add_trace(
+            go.Scatter(
+                x=history_frame.index,
+                y=history_frame["risk_rank"],
+                mode="lines+markers",
+                name="风险状态",
+                yaxis="y2",
+                line={"width": 1.6, "color": "#dc2626"},
+                customdata=history_frame[["risk_cn"]].to_numpy(),
+                hovertemplate="%{x|%Y-%m-%d}<br>风险状态=%{customdata[0]}<extra></extra>",
+            )
+        )
+        layout["yaxis2"] = {
+            "tickmode": "array",
+            "tickvals": [0, 1, 2, 3, 4, 5],
+            "ticktext": ["正常", "转灰", "顶部", "黑色", "Top+Black", "C失效"],
+            "overlaying": "y",
+            "side": "right",
+            "showgrid": False,
+        }
+    figure.update_layout(**layout)
     return figure
 
 

@@ -137,6 +137,16 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
         -- 使用安全的列添加：sqlite 无 IF NOT EXISTS，包装在 try/catch 中。
         """,
     ),
+    (
+        4,
+        "004_event_lifecycle_columns",
+        """
+        -- Round 2 收尾修复：事件生命周期字段持久化。
+        -- valid_until / lifecycle_id / ended_event_id 使数据库可还原状态的
+        -- 有效/结束时间，与内存事件、解释层、研究使用同一生命周期。
+        -- sqlite 无 ALTER TABLE ADD COLUMN IF NOT EXISTS，由 apply_migrations 处理。
+        """,
+    ),
 )
 
 
@@ -202,6 +212,10 @@ def apply_migrations(connection: sqlite3.Connection) -> tuple[str, ...]:
                 "CREATE INDEX IF NOT EXISTS idx_assessments_opp "
                 "ON daily_assessments(symbol, as_of, opportunity_stage)"
             )
+        elif name == "004_event_lifecycle_columns":
+            _safe_add_column(connection, "signal_events", "valid_until", "TEXT")
+            _safe_add_column(connection, "signal_events", "lifecycle_id", "TEXT")
+            _safe_add_column(connection, "signal_events", "ended_event_id", "TEXT")
         else:
             # executescript 会隐式提交，因此记账单独提交
             connection.executescript(sql)
@@ -220,7 +234,11 @@ def write_events(
     *,
     run_id: str | None = None,
 ) -> WriteReport:
-    """只追加写入事件。同 event_id 幂等忽略，绝不覆盖已有行。"""
+    """只追加写入事件。同 event_id 幂等忽略，绝不覆盖已有行。
+
+    Round 2 收尾修复：写入 valid_until / lifecycle_id / ended_event_id，
+    使数据库可还原状态的「有效/结束时间」，与内存事件、解释层、研究同一生命周期。
+    """
     inserted = 0
     attempted = 0
     for event in events:
@@ -231,8 +249,8 @@ def write_events(
                 event_id, symbol, timeframe, event_date, available_date,
                 rule_id, rule_version, direction, severity, strength,
                 reason_cn, provenance, evidence_json, invalidation_json,
-                structure_id, run_id
-            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                structure_id, run_id, valid_until, lifecycle_id, ended_event_id
+            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
             """,
             (
                 event.event_id,
@@ -251,6 +269,9 @@ def write_events(
                 json.dumps(event.invalidation, ensure_ascii=False, sort_keys=True, default=str),
                 event.structure_id,
                 run_id or event.run_id,
+                event.valid_until.isoformat() if event.valid_until is not None else None,
+                event.lifecycle_id,
+                event.ended_event_id,
             ),
         )
         inserted += cursor.rowcount if cursor.rowcount > 0 else 0
@@ -258,11 +279,48 @@ def write_events(
     return WriteReport(inserted=inserted, ignored=attempted - inserted)
 
 
+def _expected_structure_transitions(
+    structure: StructureInstance,
+) -> list[tuple[str | None, str, date]]:
+    """根据结构日期字段推断完整状态链（按时间顺序）。
+
+    每个元素 ``(from_status, to_status, changed_on)``：
+      * ``None -> candidate``                  @ detected_date
+      * ``candidate -> confirmed``             @ confirmed_date     （已确认时）
+      * ``confirmed/candidate -> invalidated``  @ invalidated_date  （已失效时）
+
+    旧实现只比较「数据库已有状态」与「当前快照状态」，对一次性传入的最终结构
+    只会记录一次跳变，并因 ``confirmed_date or invalidated_date`` 的 or 链把
+    **确认日**误当作**失效日**，漏掉 candidate→confirmed 与 confirmed→invalidated。
+    这里改为从日期字段重建完整链路，每次运行都补全缺失转换（INSERT OR IGNORE 幂等）。
+    """
+    transitions: list[tuple[str | None, str, date]] = [
+        (None, "candidate", structure.detected_date),
+    ]
+    confirmed_date = structure.confirmed_date
+    is_confirmed = confirmed_date is not None and structure.status.value in (
+        "confirmed",
+        "active",
+        "invalidated",
+    )
+    if is_confirmed and confirmed_date is not None:
+        transitions.append(("candidate", "confirmed", confirmed_date))
+    if structure.invalidated_date is not None and structure.status.value == "invalidated":
+        prev = "confirmed" if is_confirmed else "candidate"
+        transitions.append((prev, "invalidated", structure.invalidated_date))
+    return transitions
+
+
 def write_structures(
     connection: sqlite3.Connection,
     structures: Iterable[StructureInstance],
 ) -> WriteReport:
-    """写入结构。状态变化允许更新，但每次变化同步写生命周期事件。"""
+    """写入结构。状态变化允许更新，但每次变化同步写生命周期事件。
+
+    Round 2 收尾修复：生命周期依据 ``detected_date`` / ``confirmed_date`` /
+    ``invalidated_date`` 重建完整转换链，每次运行幂等补全（不再漏记确认、不再把
+    确认日误当失效日）。
+    """
     inserted = 0
     updated = 0
     for structure in structures:
@@ -300,28 +358,6 @@ def write_structures(
                 payload,
             )
             inserted += 1
-            # 先记录「创建 → candidate」，再记录当前真实状态（如果不同）
-            _record_lifecycle(
-                connection,
-                structure_id=structure.structure_id,
-                changed_on=structure.detected_date,
-                from_status=None,
-                to_status="candidate",
-                reason="created",
-            )
-            if structure.status.value != "candidate":
-                _record_lifecycle(
-                    connection,
-                    structure_id=structure.structure_id,
-                    changed_on=(
-                        structure.confirmed_date
-                        or structure.invalidated_date
-                        or structure.detected_date
-                    ),
-                    from_status="candidate",
-                    to_status=structure.status.value,
-                    reason=structure.invalidated_reason or "status_change",
-                )
         elif existing["status"] != structure.status.value:
             connection.execute(
                 """
@@ -341,14 +377,17 @@ def write_structures(
                 ),
             )
             updated += 1
+        # 生命周期：依据日期字段重建完整转换链，幂等补全（INSERT OR IGNORE）。
+        # 放在 if/elif 之外，保证无论结构是新建还是更新，缺失转换都会被补上。
+        for from_status, to_status, changed_on in _expected_structure_transitions(
+            structure
+        ):
             _record_lifecycle(
                 connection,
                 structure_id=structure.structure_id,
-                changed_on=structure.invalidated_date
-                or structure.confirmed_date
-                or structure.detected_date,
-                from_status=existing["status"],
-                to_status=structure.status.value,
+                changed_on=changed_on,
+                from_status=from_status,
+                to_status=to_status,
                 reason=structure.invalidated_reason or "status_change",
             )
     connection.commit()

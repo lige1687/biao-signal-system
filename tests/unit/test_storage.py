@@ -54,6 +54,7 @@ def test_migrations_apply_once_and_are_idempotent(tmp_path) -> None:  # noqa: AN
         "001_core_tables",
         "002_structure_lifecycle_events",
         "003_opportunity_risk_split",
+        "004_event_lifecycle_columns",
     }
     connection.close()
 

@@ -14,6 +14,7 @@ from lei_signal.domain.types import LongTrendState, Stage
 from lei_signal.features.indicators import compute_features
 from lei_signal.rules.bottom_structure import detect_reversal_bottoms
 from lei_signal.rules.dual_ma import dual_ma_bull_state, ema20_reclaim_state
+from lei_signal.rules.ema_reclaim_tiers import detect_structure_bound_ema_reclaim
 from lei_signal.rules.lei_color import classify_colors
 from lei_signal.rules.long_trend import compute_long_trend
 from lei_signal.rules.reversals import detect_reversal_events
@@ -28,10 +29,9 @@ _IMPROVED = {
 
 
 def _run() -> tuple[pd.DataFrame, list]:
-    from lei_signal.compose.pipeline import _detect_structure_bound_ema_reclaim
     frame = compute_long_trend(classify_colors(compute_features(golden_delayed_upgrade())))
     structures = detect_reversal_bottoms(frame, "TEST", detect_reversal_events(frame, "TEST"))
-    ema_events = _detect_structure_bound_ema_reclaim(frame, "TEST", structures)
+    ema_events = detect_structure_bound_ema_reclaim(frame, "TEST", structures)
     history = run_state_machine(frame, structures, ema_reclaim_events=ema_events)
     return frame, history
 

@@ -19,6 +19,8 @@ from datetime import date
 
 import pandas as pd
 
+from lei_signal.data.calendar import DEFAULT_TRADING_CALENDAR, TradingCalendar
+
 
 @dataclass(frozen=True, slots=True)
 class MarketSnapshot:
@@ -83,24 +85,33 @@ def aggregate_weekly(
     daily: pd.DataFrame,
     *,
     as_of: date | pd.Timestamp | None = None,
+    calendar: TradingCalendar | None = None,
 ) -> pd.DataFrame:
-    """把日线聚合为周线（Round 2 修复 1：周线完成语义）。
+    """把日线聚合为周线（Round 2 修复 1：周线完成语义 —— 收盘后运行）。
 
     严格语义（必须满足）：
-      * as_of 之前「下一交易日已经出现」是「上一周已结束」的必要条件，
-        但**不是**充分条件——必须严格避免「下一交易日」是用未来数据回填。
-      * **可用周线的判定**：当且仅当 as_of 严格晚于该周最后一根日线所在日期
-        **并且**数据中确实存在该日期之后的一根日线（这是「下一交易日出现」的可信信号）。
-        这两条同时满足时，本周视为「已结束」。注意：必须是数据帧中存在的下一日，
-        不是日历上的下一日。
-      * 短周识别：节假日短周（如周一 + 周二）依然可以视为完整周；
-        短周不要求 5 根 K 线——只要求「as_of 之后出现了下一根日线」。
-      * 若无法识别（如数据流断在周一至周四，as_of 落在当周），
-        显式标 `is_complete=False`，**绝不**用日历猜测补全。
-      * `available_date` = 该周第一次真正可知的日期，即「数据中下一交易日」的日期。
-      * 追加未来数据不得改变历史 `as_of` 时的结论。
-      * 不得利用「下一周数据」却把当周周线事件回填到上一周五，造成隐性回看偏差。
+      * **收盘后运行语义**：当 as_of 到达「当周最后一个交易日」（含）时，该周
+        周线即视为完成可用——当日收盘的 OHLC 已经完整，无需等待下一交易日。
+      * 「当周最后一个交易日」由**交易所日历**判定（``calendar``），**不是**
+        「已观测到的最后一根日线」。后者会在周三就把当周误判为完成（周三是
+        截断数据里的最后一根），属于提前完成，必须避免。
+      * 兜底：日历在本周内判不出任何交易日（例如整周休市）时，退回旧规则
+        ——「本周之后已经出现下一根日线」即视为本周结束，``available_date``
+        取那根日线。保证任何情况下都能收敛。
+      * ``available_date`` = 最早可知日 = ``max(日历判定的当周最后交易日,
+        本周内已观测到的最后一根日线)``。取 max 是为了防止「日历说周五是交易日
+        但当天停牌无 K 线」时把可知日回溯到周四——那天我们并不知道本周已结束。
+      * 旧实现要求「下一交易日已经出现」才完成，会把周线系统性延迟一个交易日，
+        导致正常周五收盘、节假日短周最后交易日收盘时周线仍不可用——口径错误，已修正。
+      * 追加未来数据不得改变历史 as_of 时的结论（由裁剪 + 日历纯函数性保证）。
       * 不足 60/120 根周线时 long_trend 保持 `unknown`，禁止任何伪指标兜底。
+
+    参数
+    ----
+    calendar:
+        交易所日历。默认 :data:`DEFAULT_TRADING_CALENDAR`（周一至周五、无节假日），
+        保守且永不提前完成；传入含真实休市日的日历后，节假日短周也能在其最后一个
+        交易日收盘时立即完成。
 
     返回 DataFrame 索引为 `available_date`，并附 `is_complete` 标识；
     `is_complete=False` 的行已被过滤掉（未完成周不进入周线）。
@@ -112,6 +123,8 @@ def aggregate_weekly(
     if frame.empty:
         return empty_weekly()
 
+    trading_calendar = calendar if calendar is not None else DEFAULT_TRADING_CALENDAR
+
     # 按自然周（W-SUN: 周一..周日）分组
     week_key = frame.index.to_period("W-SUN")
     grouped = frame.groupby(week_key)
@@ -122,22 +135,25 @@ def aggregate_weekly(
         else frame.index[-1]
     )
 
-    # 对每个分组，判定「本周是否已结束」：
-    #   - cutoff > 本周最后一日（as_of 严格晚于本周最后一日）
-    #   - 后续是否出现新的日线
     completed_records: list[dict[str, object]] = []
     for period, group in grouped:
-        last_ts = group.index[-1]
-        if cutoff <= last_ts:
-            # as_of 还在本周内部或当天：本周不结束（周一至周四、节假日短周未到末尾）
-            continue
-        # as_of 严格晚于本周最后一日；下一根日线是否真实出现在 frame 中？
-        later = frame.index[frame.index > last_ts]
-        if len(later) == 0:
-            # 数据流断在最后一根；无「下一交易日」信号，本周不能视为完成
-            continue
-        # available_date 必须是「数据中下一交易日」，不是日历上的下一日
-        next_bar = later[0]
+        week_start = period.start_time.tz_localize(None)
+        week_end = period.end_time.tz_localize(None)
+        last_observed = group.index[-1]
+
+        # 1) 日历判定：本周最后一个交易日是否已经收盘？
+        calendar_last = trading_calendar.last_trading_day_in_range(
+            week_start, week_end.normalize()
+        )
+        if calendar_last is not None and cutoff >= calendar_last:
+            available_date = max(calendar_last, last_observed)
+        else:
+            # 2) 兜底：本周之后已经出现下一根日线 => 本周必然已结束。
+            later = frame.index[frame.index > week_end]
+            if len(later) == 0:
+                continue
+            available_date = later[0]
+
         completed_records.append(
             {
                 "open": float(group["open"].iloc[0]),
@@ -146,10 +162,10 @@ def aggregate_weekly(
                 "close": float(group["close"].iloc[-1]),
                 "volume": float(group["volume"].sum()),
                 "bar_count": int(len(group)),
-                "available_date": next_bar,
+                "available_date": available_date,
                 "is_complete": True,
-                "week_start": period.start_time.tz_localize(None),
-                "week_end": period.end_time.tz_localize(None),
+                "week_start": week_start,
+                "week_end": week_end,
             }
         )
 
@@ -165,6 +181,8 @@ def build_snapshot(
     symbol: str,
     bars: pd.DataFrame,
     as_of: date | pd.Timestamp | None = None,
+    *,
+    calendar: TradingCalendar | None = None,
 ) -> MarketSnapshot:
     """构造截止 as_of 的快照。as_of 为空表示使用全部数据。"""
     if bars.empty:
@@ -177,13 +195,15 @@ def build_snapshot(
         symbol=symbol,
         as_of=resolved,
         daily=daily,
-        weekly=aggregate_weekly(daily),
+        weekly=aggregate_weekly(daily, calendar=calendar),
     )
 
 
 __all__ = [
+    "DEFAULT_TRADING_CALENDAR",
     "WEEKLY_COLUMNS",
     "MarketSnapshot",
+    "TradingCalendar",
     "aggregate_weekly",
     "build_snapshot",
     "crop_daily",

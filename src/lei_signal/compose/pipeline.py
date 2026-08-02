@@ -38,11 +38,8 @@ from lei_signal.rules.bottom_structure import (
     detect_reversal_bottoms,
 )
 from lei_signal.rules.color_events import detect_color_events
-from lei_signal.rules.dual_ma import (
-    detect_dual_ma_confirm_events,
-    detect_spread_events,
-    ema20_reclaim_state,
-)
+from lei_signal.rules.dual_ma import detect_dual_ma_confirm_events, detect_spread_events
+from lei_signal.rules.ema_reclaim_tiers import detect_structure_bound_ema_reclaim
 from lei_signal.rules.key_wave import detect_key_wave_events
 from lei_signal.rules.lei_color import classify_colors
 from lei_signal.rules.long_trend import (
@@ -80,85 +77,6 @@ def _build_structure_necklines(
     return necklines
 
 
-def _detect_structure_bound_ema_reclaim(
-    frame: pd.DataFrame,
-    symbol: str,
-    bottoms: list[StructureInstance],
-) -> list[SignalEvent]:
-    """修复 3：为每个底部结构生成**结构关联**的 EMA 早期转强事件。
-
-    规则：
-      - 全局 EMA20 重新站上日（即 ema20_reclaim_state=True），
-        且该日**有至少一个底部结构已 confirmed** 时，
-        为该日 + 该结构生成一个 ema20_reclaim_rising 结构关联事件。
-      - 同一结构 + 不同 reclaim 日 = 不同 lifecycle_id。
-      - 同一日 + 多个结构 = 多对多关联。
-      - 关联事件的 valid_until 在「结构失效日 + 1」或「转黑日 + 1」中较早者。
-    """
-    spec = get_rule("ema20_reclaim_rising")
-    state = ema20_reclaim_state(frame)
-    events: list[SignalEvent] = []
-    # 按时间排序
-    sorted_bottoms = sorted(
-        bottoms,
-        key=lambda s: s.confirmed_date or s.detected_date,
-    )
-    for ts in frame.index:
-        if not bool(state.loc[ts]):
-            continue
-        trade_date = ts.date()
-        row = frame.loc[ts]
-        position = frame.index.get_loc(ts)
-        previous = frame.iloc[position - 1] if position > 0 else row
-        for structure in sorted_bottoms:
-            confirmed = structure.confirmed_date
-            if confirmed is None or trade_date < confirmed:
-                continue  # 结构尚未确认
-            invalidated = structure.invalidated_date
-            if invalidated is not None and trade_date >= invalidated:
-                continue  # 结构已失效
-            # 同一结构在同一日的事件 ID 是确定的
-            event_id = make_event_id(
-                rule_id=spec.rule_id,
-                rule_version=spec.version,
-                symbol=symbol,
-                timeframe="1d",
-                available_date=trade_date,
-                source_id=f"structure:{structure.structure_id}",
-            )
-            lifecycle_id = f"{spec.rule_id}:{structure.structure_id}:{trade_date.isoformat()}"
-            events.append(
-                make_event(
-                    event_id=event_id,
-                    symbol=symbol,
-                    event_date=trade_date,
-                    available_date=trade_date,
-                    rule_id=spec.rule_id,
-                    rule_version=spec.version,
-                    direction=Direction.BULLISH,
-                    severity=Severity.IMPORTANT,
-                    strength=60,
-                    reason_cn=(
-                        f"EMA 早期转强（结构关联）：收盘价重新站上 EMA20 且 EMA20 向上，"
-                        f"关联底部 {structure.structure_type} C={structure.c_price:.4f}"
-                    ),
-                    provenance=spec.provenance,
-                    structure_id=structure.structure_id,
-                    lifecycle_id=lifecycle_id,
-                    evidence={
-                        "close": float(row["close"]),
-                        "ema20": float(row["ema20"]),
-                        "previous_close": float(previous["close"]),
-                        "previous_ema20": float(previous["ema20"]),
-                    },
-                    invalidation={
-                        "condition": "关联底部触及 C 失效，或颜色转黑",
-                    },
-                )
-            )
-    return events
-
-
 @dataclass
 class AnalysisResult:
     """完整分析结果。"""
@@ -180,6 +98,8 @@ class AnalysisResult:
     # 修复 8：行情获取失败时是否使用了本地缓存兜底
     cache_fallback_used: bool = False
     cache_age_seconds: float | None = None
+    # 研究库持久化状态：None=未配置/未尝试，True=成功，False=失败（失败须可见，不静默）
+    sqlite_persisted: bool | None = None
 
     @property
     def bottoms(self) -> list[StructureInstance]:
@@ -302,30 +222,32 @@ def analyze(
         result.cache_age_seconds = cache_age
 
     # 持久化到 SQLite。落库失败（磁盘满、库被锁、路径不可写）不应阻断分析结果返回，
-    # 但只吞 sqlite3.Error / OSError；其他异常说明是真的写错了数据，必须抛出。
-    # 用 closing 包住连接：原写法在中途抛错时会跳过 conn.close() 造成连接泄漏。
+    # 但失败必须**可见**——用显式 try/except 捕获后写入 result.sqlite_persisted=False，
+    # 由 UI 明确提示，而不是静默吞掉让用户以为已持久化。
+    # 只捕获 sqlite3.Error / OSError；其他异常说明是真的写错了数据，必须抛出。
+    # 用 closing 包住连接：中途抛错时仍会关闭连接，避免泄漏。
     if sqlite_path is not None:
         from lei_signal.storage.sqlite_store import connect
 
-        with (
-            suppress(sqlite3.Error, OSError),
-            closing(connect(sqlite_path)) as conn,
-            conn,
-        ):
-            write_events(conn, result.events, run_id=run_id)
-            write_structures(conn, result.structures)
-            write_assessment(conn, result.assessment)
-            if run_id is not None:
-                record_run(
-                    conn,
-                    run_id=run_id,
-                    symbol=result.symbol,
-                    started_at=datetime.now(UTC).isoformat(),
-                    ruleset_version=result.assessment.rule_ruleset_version,
-                    provider=price_data.report.provider,
-                    last_data_date=result.frame.index[-1].date(),
-                    event_count=len(result.events),
-                )
+        try:
+            with closing(connect(sqlite_path)) as conn:
+                write_events(conn, result.events, run_id=run_id)
+                write_structures(conn, result.structures)
+                write_assessment(conn, result.assessment)
+                if run_id is not None:
+                    record_run(
+                        conn,
+                        run_id=run_id,
+                        symbol=result.symbol,
+                        started_at=datetime.now(UTC).isoformat(),
+                        ruleset_version=result.assessment.rule_ruleset_version,
+                        provider=price_data.report.provider,
+                        last_data_date=result.frame.index[-1].date(),
+                        event_count=len(result.events),
+                    )
+            result.sqlite_persisted = True
+        except (sqlite3.Error, OSError):
+            result.sqlite_persisted = False
 
     return result
 
@@ -369,9 +291,10 @@ def analyze_bars(
     tops = detect_top_structures(frame, pivots, symbol)
     structures = [*bottoms, *tops]
 
-    # 修复 3：EMA 早期转强必须绑定到底部结构。
-    # 原始「全局」事件不再产生；改用结构关联的派生事件。
-    log.extend(_detect_structure_bound_ema_reclaim(frame, symbol, bottoms))
+    # EMA 早期转强必须绑定到底部结构，且按档位分层：
+    # candidate 期只进 early_watch（不构成结构确认或买入），确认后逐级升级。
+    # 原始「全局」事件不再产生。
+    log.extend(detect_structure_bound_ema_reclaim(frame, symbol, bottoms))
 
     log.extend(
         detect_volume_events(
@@ -473,11 +396,6 @@ def analyze_bars(
 
 def _pivot_events(pivots: tuple[Pivot, ...], symbol: str) -> list[SignalEvent]:
     """摆动点确认事件：event_date 是拐点日，available_date 是确认日。"""
-    from lei_signal.domain.canonical import make_event_id
-    from lei_signal.domain.rules_config import get_rule
-    from lei_signal.domain.types import Direction, Severity
-    from lei_signal.events.log import make_event
-
     spec = get_rule("swing_pivots")
     events: list[SignalEvent] = []
     for pivot in pivots:

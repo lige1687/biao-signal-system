@@ -9,6 +9,7 @@ import pandas as pd
 import pytest
 
 from lei_signal.compose.pipeline import analyze_bars
+from lei_signal.data.point_in_time import aggregate_weekly
 from lei_signal.domain.types import Provenance, Stage, StructureStatus
 from lei_signal.events.log import EventLog
 from lei_signal.rules.key_wave import detect_key_wave_events
@@ -201,14 +202,34 @@ def test_gate_10_weekly_never_leaks_friday_into_earlier_days() -> None:
     daily_index = set(result.frame.index)
     for timestamp in weekly.index:
         assert timestamp in daily_index
-    # 修复后语义：available_date = 数据中下一交易日 = 该周第一次可知。
-    # 因此「in-progress 周」（最后一根日线所在周）不能出现在 weekly 中：
-    # 该周既没有「下一交易日」信号，week_end 应严格早于 last frame date
+    # Round 2 修复后语义：available_date = 当周最后一个交易日（收盘后运行）。
+    # 因此不变量改为：
+    #   1) available_date 不得晚于最后一根日线（不得引用尚未发生的数据）；
+    #   2) available_date 必须落在本周之内，且不早于该周任何一根日线；
+    #   3) 周一至周四截断时，进行中的当周不得出现（逐日推进验证）。
     last_date = result.frame.index[-1]
-    for _, row in weekly.iterrows():
-        assert pd.Timestamp(row["week_end"]) < last_date, (
-            f"in-progress 周不得出现在 weekly 中：week_end={row['week_end']}, last={last_date}"
-        )
+    for available_date, row in weekly.iterrows():
+        available = pd.Timestamp(available_date)
+        assert available <= last_date, f"available_date {available} 晚于最后数据日"
+        assert pd.Timestamp(row["week_start"]) <= available <= pd.Timestamp(
+            row["week_end"]
+        ), f"available_date {available} 不在本周区间内"
+
+    # 逐日推进：任一 as_of 下，进行中的当周都不得进入周线
+    for as_of in result.frame.index[-12:]:
+        partial = aggregate_weekly(result.frame.loc[result.frame.index <= as_of])
+        for available_date, row in partial.iterrows():
+            assert pd.Timestamp(available_date) <= as_of, (
+                f"as_of={as_of.date()} 时出现了未来的 available_date {available_date}"
+            )
+            week_bars = result.frame.loc[
+                (result.frame.index >= pd.Timestamp(row["week_start"]))
+                & (result.frame.index <= pd.Timestamp(row["week_end"]))
+                & (result.frame.index <= as_of)
+            ]
+            assert row["bar_count"] == len(week_bars), (
+                f"as_of={as_of.date()} 周线 bar_count 与截断后日线数不一致"
+            )
 
 
 def test_gate_11_repeated_runs_produce_identical_event_ids() -> None:

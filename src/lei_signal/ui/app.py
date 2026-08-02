@@ -23,6 +23,7 @@ from lei_signal.domain.types import (
     STAGE_RANK,
     Provenance,
 )
+from lei_signal.state.machine import DayState
 from lei_signal.ui.charts import (
     build_price_figure,
     build_stage_history_figure,
@@ -54,6 +55,16 @@ _RISK_STATE_CN = {
     "black": "黑色",
     "top_plus_black": "Top+Black",
     "c_invalidated": "C 失效",
+}
+
+#: 风险状态排序权重，用于阶段历史图的风险线（与机会阶段同量级、独立 y 轴）。
+_RISK_RANK = {
+    "normal": 0,
+    "gray_watch": 1,
+    "active_top": 2,
+    "black": 3,
+    "top_plus_black": 4,
+    "c_invalidated": 5,
 }
 
 
@@ -101,8 +112,8 @@ def _cached_analysis(symbol: str, build_history: bool) -> AnalysisResult:
 
 
 def _analyze_upload(upload_file, symbol: str, build_history: bool) -> AnalysisResult:
-    """从用户上传的 CSV/Parquet 加载行情（修复 9）。"""
-    from lei_signal.compose.pipeline import analyze_bars
+    """从用户上传的 CSV/Parquet 加载行情（修复 9），并接入缓存与 SQLite 持久化。"""
+    from lei_signal.compose.pipeline import analyze
     from lei_signal.data.providers import PriceData
     from lei_signal.data.symbols import resolve_symbol
     from lei_signal.data.validation import ValidationReport
@@ -139,9 +150,21 @@ def _analyze_upload(upload_file, symbol: str, build_history: bool) -> AnalysisRe
         symbol=info.symbol, display_name=info.symbol,
         bars=bars, report=report, info=info,
     )
-    return analyze_bars(
-        info.symbol, bars,
-        display_name=info.symbol, price_data=price, build_history=build_history,
+    # 用包装 provider 让 analyze 走统一持久化路径（缓存 + SQLite），
+    # 而不是 analyze_bars（无持久化）。上传数据同样写入缓存与研究库。
+    class _UploadProvider:
+        name = "upload"
+
+        def fetch(self, _symbol: str, *, min_rows: int = 21) -> PriceData:
+            return price
+
+    return analyze(
+        info.symbol,
+        provider=_UploadProvider(),
+        build_history=build_history,
+        cache_root=_CACHE_ROOT,
+        sqlite_path=_SQLITE_PATH,
+        run_id=f"upload-{info.symbol}",
     )
 
 
@@ -257,6 +280,15 @@ def _render_current(result: AnalysisResult) -> None:
         st.warning(
             f"网络行情获取失败，**正在使用本地 Parquet 缓存**（{age_hours:.1f} 小时前）。"
             f"陈旧数据可能产生过时信号；请尽快恢复网络后重新拉取。"
+        )
+    # 研究库持久化状态必须可见：失败要明确提示，不能静默让用户以为已写入。
+    sqlite_persisted = getattr(result, "sqlite_persisted", None)
+    if sqlite_persisted is True:
+        st.success("事件 / 结构 / 评估已成功持久化到本地 SQLite 研究库。")
+    elif sqlite_persisted is False:
+        st.error(
+            "SQLite 研究库写入**失败**（磁盘不可写或库被锁）；本次分析未持久化。"
+            "界面与缓存结果不受影响，请检查数据库路径权限后重试。"
         )
 
     columns = st.columns(5)
@@ -503,6 +535,29 @@ def _render_timeline(result: AnalysisResult) -> None:
 # ---------------- 结构诊断页 ----------------
 
 
+def _render_early_watch(state: DayState) -> None:
+    """展示候选结构上的 EMA20 观察档。
+
+    观察档刻意不进入上面的「✅成立 / ⚠️不成立」核对表：那张表读起来像
+    「条件达成」，而观察档的口径是「看到了，但不算数」——它既不等于结构
+    确认，也不构成买入。放在这里单独说明，是为了让它可见而不被误读。
+    """
+    watching = sorted(
+        sid for sid, active in state.early_watch_by_structure.items() if active
+    )
+    if not watching:
+        return
+    st.info(
+        f"**候选结构·观察档（early_watch）**：{len(watching)} 个 —— "
+        + "、".join(f"`{sid}`" for sid in watching)
+        + "\n\n这些底部结构**尚未确认**，但已出现 EMA20 早期转强。"
+        "该档仅作观察记录，**不计入结构确认，也不构成买入信号**，"
+        "因此不会抬升上方的机会阶段。"
+        "只有等结构确认后，同一结构才会沿 结构确认 → 共同确认 → 长周期改善 "
+        "逐级升级为可交易档位；若价格触及 C 点低点，该结构永久失效。"
+    )
+
+
 def _render_diagnostics(result: AnalysisResult) -> None:
     st.subheader("结构诊断")
     st.caption(
@@ -522,7 +577,7 @@ def _render_diagnostics(result: AnalysisResult) -> None:
             s.confirmed_date is not None for s in state.live_bottoms
         ) else "仅候选或无"),
         (
-            "EMA20 早期转强",
+            "EMA20 早期转强（已确认结构）",
             state.early_strength_active,
             f"最近一次 {state.early_strength_date}"
             if state.early_strength_date
@@ -560,8 +615,11 @@ def _render_diagnostics(result: AnalysisResult) -> None:
         hide_index=True,
     )
 
+    _render_early_watch(state)
+
     st.success(
-        f"**结论**：{STAGE_CN[a.stage.value]}。"
+        f"**机会阶段**：{STAGE_CN[a.opportunity_stage.value]}；"
+        f"**风险状态**：{_risk_state_label(a.risk_state.value)}。"
         f"{a.stage_change_reason_cn}"
     )
     st.caption(
@@ -600,13 +658,18 @@ def _render_diagnostics(result: AnalysisResult) -> None:
         )
 
     if result.history:
-        st.markdown("#### 阶段演进")
+        st.markdown("#### 阶段演进（蓝=机会阶段，红=风险状态，两线独立）")
         history_frame = pd.DataFrame(
             [
                 {
                     "date": pd.Timestamp(s.day),
-                    "stage_rank": STAGE_RANK.get(s.stage.value, 0),
-                    "stage_cn": STAGE_CN[s.stage.value],
+                    # 机会阶段线：使用独立的 opportunity_stage，不再用兼容 stage 字段，
+                    # 避免风险状态覆盖机会阶段显示。
+                    "stage_rank": STAGE_RANK.get(s.opportunity_stage.value, 0),
+                    "stage_cn": STAGE_CN[s.opportunity_stage.value],
+                    # 风险状态线（次 y 轴）
+                    "risk_rank": _RISK_RANK.get(s.risk_state.value, 0),
+                    "risk_cn": _risk_state_label(s.risk_state.value),
                 }
                 for s in result.history
             ]
@@ -622,6 +685,7 @@ def _render_diagnostics(result: AnalysisResult) -> None:
 def _render_research(result: AnalysisResult) -> None:
     from lei_signal.research.outcomes import (
         build_forward_outcomes,
+        build_risk_transitions,
         gray_transition_stats,
         summarize_by_rule,
         top_transition_stats,
@@ -646,7 +710,9 @@ def _render_research(result: AnalysisResult) -> None:
         return
 
     horizon = st.selectbox("选择观察期（交易日）", [1, 5, 10, 20, 60, 120], index=3)
-    return_column = f"fwd_return_{horizon}"
+    # 详情页统一使用「方向调整后」口径（看多=原始、看空=取反），与汇总表一致，
+    # 避免看空信号下跌时命中率正确但均值负数的两套口径冲突。
+    return_column = f"direction_adjusted_return_{horizon}"
 
     st.markdown("#### 各原子信号与组合阶段的后续表现")
     summary = summarize_by_rule(outcomes, horizon=horizon)
@@ -665,8 +731,8 @@ def _render_research(result: AnalysisResult) -> None:
     metric_columns[0].metric("样本数", len(subset))
     valid = subset[return_column].dropna()
     if not valid.empty:
-        metric_columns[1].metric("均值", f"{valid.mean():.2f}%")
-        metric_columns[2].metric("中位数", f"{valid.median():.2f}%")
+        metric_columns[1].metric("方向调整均值", f"{valid.mean():.2f}%")
+        metric_columns[2].metric("方向调整中位数", f"{valid.median():.2f}%")
         # 看空/风险信号：方向命中率 = 后续下跌比例（即对信号方向有利）。
         # 列名明确写「方向命中」，避免把 bearish 信号后下跌显示为 0% 胜率。
         hit_col = f"direction_hit_{horizon}"
@@ -682,9 +748,9 @@ def _render_research(result: AnalysisResult) -> None:
         if low is not None:
             metric_columns[4].metric("95%区间", f"{low:.2f}% ~ {high:.2f}%")
 
-    st.markdown("#### MFE / MAE 与 ATR 目标达成")
+    st.markdown("#### MFE / MAE 与 ATR 目标达成（方向调整后口径）")
     path_columns = [
-        f"mfe_{horizon}", f"mae_{horizon}",
+        f"mfe_adjusted_{horizon}", f"mae_adjusted_{horizon}",
         "days_to_plus_1atr", "days_to_plus_2atr", "days_to_minus_1atr",
     ]
     available_path = [c for c in path_columns if c in subset.columns]
@@ -754,6 +820,17 @@ def _render_research(result: AnalysisResult) -> None:
                 use_container_width=True,
                 hide_index=True,
             )
+
+    st.markdown("#### 风险状态转换（与机会阶段分表，不污染收益研究）")
+    risk_transitions = build_risk_transitions(result)
+    if risk_transitions.empty:
+        st.write("本次分析未出现风险状态转换。")
+    else:
+        st.dataframe(risk_transitions, use_container_width=True, hide_index=True)
+        st.caption(
+            "风险状态转换只记录事实（何时、从/到哪种风险状态），不进入收益统计；"
+            "其同日机会阶段见 opportunity_stage 列，两条线独立。"
+        )
 
     st.markdown("#### 转灰与顶部后续概率")
     gray_columns, top_columns = st.columns(2)

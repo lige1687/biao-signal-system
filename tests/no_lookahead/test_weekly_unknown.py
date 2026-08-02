@@ -42,7 +42,7 @@ def _bars(start: str = "2023-01-02", days: int = 800) -> pd.DataFrame:
 
 def test_weekly_trend_with_under_60_weeks_keeps_unknown() -> None:
     """不足 60 根周线时，长趋势状态必须保持 unknown，不得替换为伪 EMA。"""
-    bars = _bars(days=300)   # 约 60 根日线，对应 < 12 根完整周线
+    bars = _bars(days=295)   # 59 个完整自然周，严格少于 60 根周线
     weekly = aggregate_weekly(bars)
     assert len(weekly) < 60
     trend = compute_weekly_long_trend(weekly)
@@ -126,9 +126,10 @@ def test_weekly_includes_completed_short_holiday_week_on_friday_close() -> None:
     first = weekly.iloc[0]
     assert first["bar_count"] == 3
     assert first["close"] == 12.4   # 本周最后一根
-    # 修复后：available_date = 数据中下一交易日（"第一次真正可知"）
-    # 第一周之后的下一根 = index[-1]
-    assert first.name == index[-1]
+    # Round 2 修复后：available_date = 日历判定的当周最后交易日 = 周五 2024-01-12。
+    # 默认日历不含节假日，因此认为该周周五仍是交易日（保守，不会提前完成）；
+    # 比旧语义（等到下一根日线 1/15）提前一个交易日，且仍不构成回看。
+    assert first.name == pd.Timestamp("2024-01-12")
 
 
 def test_weekly_marks_uncertainty_when_no_next_day_observed() -> None:
@@ -200,15 +201,15 @@ def test_appending_friday_completes_current_week() -> None:
         ]
     )
 
-    # as_of = 周四：没有后续日线，第一周不能视为完成
+    # as_of = 周四：本周周五（日历交易日）尚未收盘，第一周不能视为完成
     incomplete = aggregate_weekly(full, as_of=partial[-1])
     assert incomplete.empty, f"as_of=周四（{partial[-1].date()}）不应有任何已完成的本周周线"
-    # 切到周一之后：第一周（仅含 4 根日线）已完成
+    # 切到下一周：第一周（仅含 4 根日线）已完成
     after = aggregate_weekly(full, as_of=pd.Timestamp("2024-01-16"))
     assert len(after) >= 1
     # 确认入的是第一周：4 根日线，close=14.0（最后那根 = 周四）
     first = after.iloc[0]
     assert first["bar_count"] == 4
     assert first["close"] == pytest.approx(14.0, rel=1e-6)
-    # 修复后：available_date = 第一周之后的下一根日线（"第一次真正可知"）= 2024-01-16
-    assert first.name == pd.Timestamp("2024-01-16")
+    # Round 2 修复后：available_date = 当周最后交易日（周五 1/12），而非旧语义的下一根日线
+    assert first.name == pd.Timestamp("2024-01-12")

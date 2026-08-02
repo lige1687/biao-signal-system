@@ -25,6 +25,7 @@ from lei_signal.domain.types import (
     Stage,
     StructureInstance,
 )
+from lei_signal.rules.ema_reclaim_tiers import EARLY_WATCH_SUB_RULES
 
 
 @dataclass
@@ -41,6 +42,9 @@ class DayState:
     # 每个 structure_id 对应一个「该结构仍享有早期转强」的布尔；
     # 仅当该结构仍存在且没被 C 触及、且最近有未失效的转强事件时为 True。
     early_strength_by_structure: dict[str, bool] = field(default_factory=dict)
+    # 候选期（结构尚未确认）绑定的 EMA20 观察档。与上面一栏**严格分开**：
+    # 它不参与机会阶段升级，只用于展示与研究分档。
+    early_watch_by_structure: dict[str, bool] = field(default_factory=dict)
     # 兼容旧接口：单一早期转强标志（与 primary_bottom 关联）
     early_strength_active: bool = False
     early_strength_date: date | None = None
@@ -120,16 +124,27 @@ def run_state_machine(
     if joint_state is None:
         joint_state = dual_ma_bull_state(frame)
     # 按结构 + 日期索引：{ structure_id: { day: event } }
+    #
+    # 关键分流：candidate 期绑定的 early_watch 事件**不能**进入
+    # ``ema_reclaim_by_structure_day``。机会阶梯里 EARLY_STRENGTH 排在
+    # STRUCTURE_CONFIRMED **之上**，若让候选档也点亮它，一个还没确认的底部
+    # 会显示得比已确认结构更高级——正是「early_watch 不视为结构确认或买入
+    # 信号」这条口径要禁止的越级。
     ema_reclaim_by_structure_day: dict[str, dict[date, object]] = {}
+    early_watch_by_structure_day: dict[str, dict[date, object]] = {}
     if ema_reclaim_events:
         for event in ema_reclaim_events:
             if event.rule_id != "ema20_reclaim_rising":
                 continue
             if not event.structure_id:
                 continue
-            ema_reclaim_by_structure_day.setdefault(
-                event.structure_id, {}
-            )[event.available_date] = event
+            sub_rule = event.evidence.get("sub_rule")
+            target = (
+                early_watch_by_structure_day
+                if sub_rule in EARLY_WATCH_SUB_RULES
+                else ema_reclaim_by_structure_day
+            )
+            target.setdefault(event.structure_id, {})[event.available_date] = event
 
     bottoms = [s for s in structures if s.side == "bottom"]
     tops = [s for s in structures if s.side == "top"]
@@ -138,6 +153,8 @@ def run_state_machine(
     # 按结构记录早期转强：{ structure_id: (active, last_reclaim_date) }
     # 当颜色转黑时，所有结构都标记失效（不复活）。
     per_structure_early: dict[str, tuple[bool, date | None]] = {}
+    # 候选观察档单独一套开关，同样遵守「转黑即熄灭」，但不参与阶段升级。
+    per_structure_watch: dict[str, tuple[bool, date | None]] = {}
 
     for timestamp, row in frame.iterrows():
         day = timestamp.date()
@@ -161,30 +178,33 @@ def run_state_machine(
         # 逐结构更新 early_strength 状态（修复 3：仅在有事件关联时 active）
         reclaim_now_global = bool(early_strength_state.loc[timestamp])
         if color is SignalColor.BLACK:
-            # 转黑：所有关联早期转强立即失效
+            # 转黑：所有关联早期转强立即失效（观察档同样熄灭）
             per_structure_early = {
                 sid: (False, last_date) for sid, (_, last_date) in per_structure_early.items()
             }
+            per_structure_watch = {
+                sid: (False, last_date) for sid, (_, last_date) in per_structure_watch.items()
+            }
         else:
-            new_per_structure: dict[str, tuple[bool, date | None]] = {}
-            for structure in live_bottoms:
-                prev_active, last_date = per_structure_early.get(
-                    structure.structure_id, (False, None)
-                )
-                # 修复 3：必须存在绑定到该结构 + 当日的 ema_reclaim 事件才标记 active。
-                # 旧的「全局 reclaim_now=True 即所有结构 active」是 bug。
-                has_bound_event = (
-                    ema_reclaim_by_structure_day.get(structure.structure_id, {}).get(day)
-                    is not None
-                )
-                if has_bound_event and reclaim_now_global:
-                    new_per_structure[structure.structure_id] = (True, day)
-                else:
-                    new_per_structure[structure.structure_id] = (prev_active, last_date)
-            per_structure_early = new_per_structure
+            per_structure_early = _advance_bound_latch(
+                previous=per_structure_early,
+                live_bottoms=live_bottoms,
+                index=ema_reclaim_by_structure_day,
+                day=day,
+                reclaim_now_global=reclaim_now_global,
+            )
+            per_structure_watch = _advance_bound_latch(
+                previous=per_structure_watch,
+                live_bottoms=live_bottoms,
+                index=early_watch_by_structure_day,
+                day=day,
+                reclaim_now_global=reclaim_now_global,
+            )
 
-        # 至少一个底部结构仍享有早期转强
+        # 至少一个底部结构仍享有早期转强（仅确认档及以上，不含候选观察档）
         any_early = any(active for active, _ in per_structure_early.values())
+        # 候选观察档：只用于展示与研究分档，不参与机会阶段升级
+        any_early_watch = any(active for active, _ in per_structure_watch.values())
         # 单一主结构早期转强（向后兼容）：取主结构
         if primary is not None and per_structure_early.get(primary.structure_id, (False, None))[0]:
             primary_early_active = True
@@ -210,6 +230,7 @@ def run_state_machine(
             live_bottoms=live_bottoms,
             confirmed_bottoms=confirmed_bottoms,
             any_early_strength=any_early,
+            any_early_watch=any_early_watch,
             joint_now=joint_now,
             long_supportive=long_supportive,
         )
@@ -233,6 +254,9 @@ def run_state_machine(
                 early_strength_by_structure={
                     sid: active for sid, (active, _) in per_structure_early.items()
                 },
+                early_watch_by_structure={
+                    sid: active for sid, (active, _) in per_structure_watch.items()
+                },
                 early_strength_active=primary_early_active,
                 early_strength_date=primary_early_date,
                 early_strength_structure_id=primary_early_sid,
@@ -246,20 +270,53 @@ def run_state_machine(
     return history
 
 
+def _advance_bound_latch(
+    *,
+    previous: dict[str, tuple[bool, date | None]],
+    live_bottoms: list[StructureInstance],
+    index: dict[str, dict[date, object]],
+    day: date,
+    reclaim_now_global: bool,
+) -> dict[str, tuple[bool, date | None]]:
+    """推进一套「结构关联转强」开关。
+
+    必须存在绑定到该结构 + 当日的事件才点亮；旧的「全局 reclaim_now=True
+    即所有结构 active」是 bug——它会让任意一个结构的转强污染全部结构。
+    未点亮的结构保持上一日状态（转强是持续状态，不是脉冲）。
+    """
+    updated: dict[str, tuple[bool, date | None]] = {}
+    for structure in live_bottoms:
+        prev_active, last_date = previous.get(structure.structure_id, (False, None))
+        has_bound_event = index.get(structure.structure_id, {}).get(day) is not None
+        if has_bound_event and reclaim_now_global:
+            updated[structure.structure_id] = (True, day)
+        else:
+            updated[structure.structure_id] = (prev_active, last_date)
+    return updated
+
+
 def _resolve_opportunity(
     *,
     live_bottoms: list[StructureInstance],
     confirmed_bottoms: list[StructureInstance],
     any_early_strength: bool,
+    any_early_watch: bool,
     joint_now: bool,
     long_supportive: bool,
 ) -> tuple[Stage, list[str]]:
-    """机会阶段（不混入风险）。"""
+    """机会阶段（不混入风险）。
+
+    ``any_early_watch`` 只写理由、**不抬阶段**：候选底部的 EMA20 转强是
+    观察，不是结构确认，更不是买入。让它点亮 ``Stage.EARLY_STRENGTH``
+    会使未确认结构越过「结构确认」档，是明确禁止的。
+    """
     reasons: list[str] = []
     opportunity = Stage.NO_CLUE
     if live_bottoms:
         opportunity = Stage.BOTTOM_WATCH
         reasons.append(f"存在{len(live_bottoms)}个有效底部线索")
+    if live_bottoms and any_early_watch:
+        reasons.append("候选底部出现 EMA20 早期转强（观察档，不构成结构确认或买入）")
     if confirmed_bottoms:
         opportunity = Stage.STRUCTURE_CONFIRMED
         reasons.append("底部结构已确认")

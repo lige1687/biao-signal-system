@@ -320,33 +320,65 @@ def _assign_structure_bound(
 
     * C 失效只终止**对应结构**的转强，不影响其他结构（多结构多对多）；
     * 颜色转黑立即终止；
-    * 同一结构再次转强 → 新实例，旧实例在新实例开始日结束；
+    * **分档升级事件与开启事件共享 ``lifecycle_id``**，同属一条观察实例。
+      因此结束点按「实例」而不是按「事件」计算：升级不得提前结束开启事件，
+      同一实例内所有事件共享同一个 ``valid_until``。若按事件计算，一次
+      early_watch → structure_confirmed 的升级会把开启事件的活跃区间截成
+      一两天，研究层看到的持有窗口全是错的。
+    * 转黑之后再次转强 → 新实例（新 ``lifecycle_id``），旧实例在新实例开始日结束；
     * 新底部结构不会继承旧结构的转强：分组键就是 structure_id。
     """
     for structure_id, group in groups.items():
         structure = structure_by_id.get(structure_id)
         end = _structure_end(structure, horizon)
         group.sort(key=_sort_key)
-        for index, event in enumerate(group):
+        instances = _split_instances(group)
+        for index, instance in enumerate(instances):
+            opened = instance[0].available_date
             candidate = end
             following = next(
                 (
-                    later
-                    for later in group[index + 1 :]
-                    if later.available_date > event.available_date
+                    later[0].available_date
+                    for later in instances[index + 1 :]
+                    if later[0].available_date > opened
                 ),
                 None,
             )
             if following is not None:
-                candidate = min(candidate, following.available_date)
-            black = next((d for d in black_days if d > event.available_date), None)
+                candidate = min(candidate, following)
+            black = next((d for d in black_days if d > opened), None)
             if black is not None:
                 candidate = min(candidate, black)
-            event.valid_until = max(candidate, event.available_date)
-            if event.lifecycle_id is None:
-                event.lifecycle_id = _instance_id(
-                    event.rule_id, structure_id, event.available_date
-                )
+            for event in instance:
+                event.valid_until = max(candidate, event.available_date)
+                if event.lifecycle_id is None:
+                    event.lifecycle_id = _instance_id(
+                        event.rule_id, structure_id, opened
+                    )
+
+
+def _split_instances(group: list[SignalEvent]) -> list[list[SignalEvent]]:
+    """把同一结构下的事件按 ``lifecycle_id`` 切成若干条观察实例。
+
+    ``lifecycle_id is None`` 的事件各自独立成实例——绝不静默并入相邻实例，
+    否则一个忘记赋 ID 的新规则会悄悄继承别人的生命周期。
+    输入需已按 ``_sort_key`` 排序；输出按各实例首个事件的时间排序。
+    """
+    ordered: list[list[SignalEvent]] = []
+    by_lifecycle: dict[str, list[SignalEvent]] = {}
+    for event in group:
+        key = event.lifecycle_id
+        if key is None:
+            ordered.append([event])
+            continue
+        bucket = by_lifecycle.get(key)
+        if bucket is None:
+            bucket = []
+            by_lifecycle[key] = bucket
+            ordered.append(bucket)
+        bucket.append(event)
+    ordered.sort(key=lambda events: _sort_key(events[0]))
+    return ordered
 
 
 def _assign_fallback(

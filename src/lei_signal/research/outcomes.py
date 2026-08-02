@@ -16,6 +16,7 @@ import numpy as np
 import pandas as pd
 
 from lei_signal.domain.types import STAGE_CN, Stage
+from lei_signal.events.lifecycle import END_SUB_RULES
 
 if TYPE_CHECKING:
     from lei_signal.compose.pipeline import AnalysisResult
@@ -87,12 +88,21 @@ def build_forward_outcomes(result: AnalysisResult) -> pd.DataFrame:
         if timestamp not in position_of:
             continue
         sub_rule = event.evidence.get("sub_rule")
+        # 结束标记事件（*_ended / top_warning_invalidated_by_new_high）方向为 neutral，
+        # 不是持续信号，绝不参与后续收益 / MFE / MAE 统计，否则会污染样本数、
+        # 均值与方向命中率。它们只用于「结束某状态」，由解释层与生命周期处理。
+        if sub_rule in END_SUB_RULES:
+            continue
         key = f"{event.rule_id}:{sub_rule}" if sub_rule else event.rule_id
+        tier = event.evidence.get("tier")
+        buy_flag = event.evidence.get("is_buy_signal")
         records.append(
             _outcome_row(
                 signal_key=key,
                 signal_kind="atomic",
                 transition_kind=None,
+                signal_tier=tier if isinstance(tier, str) else None,
+                is_buy_signal=buy_flag if isinstance(buy_flag, bool) else None,
                 event_date=event.event_date,
                 available_date=event.available_date,
                 position=position_of[timestamp],
@@ -220,6 +230,8 @@ def _outcome_row(
     rule_version: str,
     provenance: str,
     result: AnalysisResult,
+    signal_tier: str | None = None,
+    is_buy_signal: bool | None = None,
 ) -> dict[str, object]:
     """单个信号实例的后续走势。所有窗口都严格向前，不使用信号日之前的数据。"""
     entry_close = float(close.iloc[position])
@@ -227,6 +239,12 @@ def _outcome_row(
         "signal_key": signal_key,
         "signal_kind": signal_kind,
         "transition_kind": transition_kind,
+        # 分档维度：EMA20 早期转强的 early_watch / structure_confirmed /
+        # joint_confirmed / long_trend_improved。其余信号为 None。
+        # 有了它就不必在下游靠切 signal_key 字符串来还原档位。
+        "signal_tier": signal_tier,
+        # early_watch 是观察不是买入，聚合时必须能一键剔除。
+        "is_buy_signal": is_buy_signal,
         "event_date": event_date,
         "available_date": available_date,
         "structure_id": structure_id,
