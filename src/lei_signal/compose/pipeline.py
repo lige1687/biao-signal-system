@@ -227,14 +227,26 @@ def analyze(
     # 只捕获 sqlite3.Error / OSError；其他异常说明是真的写错了数据，必须抛出。
     # 用 closing 包住连接：中途抛错时仍会关闭连接，避免泄漏。
     if sqlite_path is not None:
-        from lei_signal.storage.sqlite_store import connect
+        from lei_signal.storage.sqlite_store import (
+            connect,
+            write_event_lifecycles,
+        )
 
         try:
             with closing(connect(sqlite_path)) as conn:
                 write_events(conn, result.events, run_id=run_id)
                 write_structures(conn, result.structures)
                 write_assessment(conn, result.assessment)
+                # Round 3 修复 D3：同时把生命周期字段（valid_until / lifecycle_id /
+                # ended_event_id）写入 ``event_lifecycle_snapshots`` 表，按
+                # ``(event_id, run_id, as_of)`` 主键幂等覆盖（同一分析内一致）。
+                # 多次增量分析会得到多条快照，``read_latest_lifecycle`` 按 as_of
+                # 降序取最新——保留历史演变过程，不抹掉「当时我们以为它什么时候结束」。
                 if run_id is not None:
+                    as_of = result.frame.index[-1].date()
+                    write_event_lifecycles(
+                        conn, result.events, run_id=run_id, as_of=as_of
+                    )
                     record_run(
                         conn,
                         run_id=run_id,
@@ -242,7 +254,7 @@ def analyze(
                         started_at=datetime.now(UTC).isoformat(),
                         ruleset_version=result.assessment.rule_ruleset_version,
                         provider=price_data.report.provider,
-                        last_data_date=result.frame.index[-1].date(),
+                        last_data_date=as_of,
                         event_count=len(result.events),
                     )
             result.sqlite_persisted = True

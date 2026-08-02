@@ -147,6 +147,28 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
         -- sqlite 无 ALTER TABLE ADD COLUMN IF NOT EXISTS，由 apply_migrations 处理。
         """,
     ),
+    (
+        5,
+        "005_event_lifecycle_snapshots",
+        """
+        -- Round 3 修复 D3：事件的生命周期字段（valid_until / lifecycle_id /
+        -- ended_event_id）随后续行情变化而变化；同一 event_id 在不同 as_of 下
+        -- 看到的「正确」生命周期可能不同。signal_events 保持不可变（身份字段），
+        -- 本表只追加生命周期快照，PRIMARY KEY = (event_id, run_id, as_of)。
+        CREATE TABLE IF NOT EXISTS event_lifecycle_snapshots (
+            event_id       TEXT NOT NULL,
+            run_id         TEXT NOT NULL,
+            as_of          TEXT NOT NULL,
+            valid_until    TEXT,
+            lifecycle_id   TEXT,
+            ended_event_id TEXT,
+            recorded_at    TEXT NOT NULL,
+            PRIMARY KEY (event_id, run_id, as_of)
+        );
+        CREATE INDEX IF NOT EXISTS idx_lifecycle_as_of
+            ON event_lifecycle_snapshots(as_of);
+        """,
+    ),
 )
 
 
@@ -493,14 +515,223 @@ def count_events(connection: sqlite3.Connection, symbol: str | None = None) -> i
     return int(row["n"])
 
 
+# ========================================================================
+# Round 3 修复 D3：事件生命周期快照
+# -----------------------------------------------------------------------
+# signal_events 保持不可变（身份字段：发生日、规则版本、证据、结构ID），
+# 用 ``INSERT OR IGNORE`` 幂等忽略。新增 ``event_lifecycle_snapshots`` 表
+# 记录每次分析时算出的 valid_until / lifecycle_id / ended_event_id。
+# 这样后续增量重跑（更长行情下同一 event_id 的 valid_until 可能延长）
+# 不会覆盖旧记录，而是新增一条快照。``read_latest_lifecycle`` 按
+# as_of 降序取最新结果。
+# ========================================================================
+
+
+@dataclass(frozen=True, slots=True)
+class LifecycleSnapshot:
+    """事件在某个 as_of 下的生命周期快照。"""
+
+    event_id: str
+    run_id: str
+    as_of: str
+    valid_until: str | None
+    lifecycle_id: str | None
+    ended_event_id: str | None
+    recorded_at: str
+
+
+def _read_existing_event_identity(
+    connection: sqlite3.Connection,
+    event: SignalEvent,
+) -> dict[str, object] | None:
+    """读取数据库中已存在事件的**身份字段**（不可变字段）。
+
+    身份字段是「事件是什么」的稳定语义，不包括观测时刻的原始数值（close、
+    ema20 等）——后者是 evidence 的快照，随数据源 / 重算口径变化属于正常
+    现象，归入 ``event_lifecycle_snapshots`` 表记录演变。
+    """
+    row = connection.execute(
+        """
+        SELECT event_date, available_date, rule_id, rule_version, structure_id,
+               symbol, timeframe
+        FROM signal_events WHERE event_id = ?
+        """,
+        (event.event_id,),
+    ).fetchone()
+    if row is None:
+        return None
+    return {
+        "event_date": row["event_date"],
+        "available_date": row["available_date"],
+        "rule_id": row["rule_id"],
+        "rule_version": row["rule_version"],
+        "structure_id": row["structure_id"],
+        "symbol": row["symbol"],
+        "timeframe": row["timeframe"],
+    }
+
+
+class EventIdentityConflictError(RuntimeError):
+    """同一 event_id 的身份字段不一致。
+
+    身份字段是历史事实，不应改变。如果出现冲突说明上游规则或事件生成
+    逻辑发生了非预期变更（如规则版本错误、structure_id 错误绑定），
+    必须显式报错，不得静默覆盖。
+    """
+
+
+def _assert_event_identity(
+    connection: sqlite3.Connection,
+    event: SignalEvent,
+) -> None:
+    existing = _read_existing_event_identity(connection, event)
+    if existing is None:
+        return
+    new_values = {
+        "event_date": event.event_date.isoformat(),
+        "available_date": event.available_date.isoformat(),
+        "rule_id": event.rule_id,
+        "rule_version": event.rule_version,
+        "structure_id": event.structure_id,
+        "symbol": event.symbol,
+        "timeframe": event.timeframe,
+    }
+    for key, expected in existing.items():
+        if new_values[key] != expected:
+            raise EventIdentityConflictError(
+                f"事件 {event.event_id} 的身份字段 {key} 不一致："
+                f"已存={expected!r}，新值={new_values[key]!r}。"
+                "身份字段是不可变历史事实，必须显式处理，不得静默覆盖。"
+            )
+
+
+def write_event_lifecycles(
+    connection: sqlite3.Connection,
+    events: Iterable[SignalEvent],
+    *,
+    run_id: str | None,
+    as_of: date,
+) -> tuple[int, int]:
+    """写入事件生命周期快照。
+
+    与 ``write_events`` 不同：
+      * 本函数是**追加**写入：同一 ``(event_id, run_id, as_of)`` 主键下
+        重复写入用 ``INSERT OR REPLACE`` 覆盖（同一次分析内重新跑覆盖为同值）。
+      * **不修改 signal_events**：身份字段保持不可变。
+      * 如果 signal_events 里已有该 event_id 但身份字段不同 → **报错**，
+        不允许任何形式覆盖（保留审计线索）。
+
+    返回 ``(inserted, identity_conflicts)``。
+    """
+    from datetime import UTC, datetime
+
+    if run_id is None:
+        raise ValueError("write_event_lifecycles 必须显式传入 run_id")
+
+    inserted = 0
+    recorded_at = datetime.now(UTC).isoformat()
+    as_of_text = as_of.isoformat()
+
+    for event in events:
+        _assert_event_identity(connection, event)
+        cursor = connection.execute(
+            """
+            INSERT OR REPLACE INTO event_lifecycle_snapshots (
+                event_id, run_id, as_of, valid_until,
+                lifecycle_id, ended_event_id, recorded_at
+            ) VALUES (?,?,?,?,?,?,?)
+            """,
+            (
+                event.event_id,
+                run_id,
+                as_of_text,
+                event.valid_until.isoformat() if event.valid_until is not None else None,
+                event.lifecycle_id,
+                event.ended_event_id,
+                recorded_at,
+            ),
+        )
+        inserted += cursor.rowcount if cursor.rowcount > 0 else 0
+    connection.commit()
+    return inserted, 0
+
+
+def read_latest_lifecycle(
+    connection: sqlite3.Connection,
+    event_id: str,
+) -> LifecycleSnapshot | None:
+    """读取该 event_id 的**最新**生命周期快照（as_of 降序，相同则取 recorded_at 较晚者）。
+
+    用于增量回放场景：同一事件在多次分析中可能有不同快照，本函数返回
+    「最近一次分析认为它什么时候结束」。如果该事件从未写入快照则返回 None。
+    """
+    row = connection.execute(
+        """
+        SELECT event_id, run_id, as_of, valid_until, lifecycle_id,
+               ended_event_id, recorded_at
+        FROM event_lifecycle_snapshots
+        WHERE event_id = ?
+        ORDER BY as_of DESC, recorded_at DESC
+        LIMIT 1
+        """,
+        (event_id,),
+    ).fetchone()
+    if row is None:
+        return None
+    return LifecycleSnapshot(
+        event_id=row["event_id"],
+        run_id=row["run_id"],
+        as_of=row["as_of"],
+        valid_until=row["valid_until"],
+        lifecycle_id=row["lifecycle_id"],
+        ended_event_id=row["ended_event_id"],
+        recorded_at=row["recorded_at"],
+    )
+
+
+def read_lifecycle_at_as_of(
+    connection: sqlite3.Connection,
+    event_id: str,
+    as_of: date,
+) -> LifecycleSnapshot | None:
+    """读取该 event_id 在指定 as_of 时的生命周期快照。"""
+    row = connection.execute(
+        """
+        SELECT event_id, run_id, as_of, valid_until, lifecycle_id,
+               ended_event_id, recorded_at
+        FROM event_lifecycle_snapshots
+        WHERE event_id = ? AND as_of = ?
+        ORDER BY recorded_at DESC
+        LIMIT 1
+        """,
+        (event_id, as_of.isoformat()),
+    ).fetchone()
+    if row is None:
+        return None
+    return LifecycleSnapshot(
+        event_id=row["event_id"],
+        run_id=row["run_id"],
+        as_of=row["as_of"],
+        valid_until=row["valid_until"],
+        lifecycle_id=row["lifecycle_id"],
+        ended_event_id=row["ended_event_id"],
+        recorded_at=row["recorded_at"],
+    )
+
+
 __all__ = [
+    "EventIdentityConflictError",
+    "LifecycleSnapshot",
     "MIGRATIONS",
     "WriteReport",
     "apply_migrations",
     "connect",
     "count_events",
+    "read_latest_lifecycle",
+    "read_lifecycle_at_as_of",
     "record_run",
     "write_assessment",
+    "write_event_lifecycles",
     "write_events",
     "write_structures",
 ]
