@@ -261,13 +261,13 @@ def _build_html(
     data_json = json.dumps(data, ensure_ascii=False)
 
     total = len(data["dates"])
-    if total > default_bars:
-        start_pct = round((1 - default_bars / total) * 100, 1)
-    else:
-        start_pct = 0
+    start_pct = (
+        round((1 - default_bars / total) * 100, 1) if total > default_bars else 0
+    )
 
     # 组装 markArea（构造区域）+ markLine（水平线 + 关键波动竖线）
-    area_blocks: list[dict[str, Any]] = []
+    # echarts markArea.data 每项是 [startItem, endItem]，所以类型是 list[list[dict]]。
+    area_blocks: list[list[dict[str, Any]]] = []
     if show["bottom_construction"]:
         for a in data["bottomAreas"]:
             area_blocks.append([{
@@ -335,9 +335,26 @@ def _build_html(
     width: 18px; height: 0; border-top-width: 1.5px; border-top-style: solid;
     display: inline-block;
   }}
+  .toolbar {{
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 12px; background: #fafbfc; border-bottom: 1px solid #edf1f6;
+  }}
+  .toolbar-title {{
+    font-size: 13px; font-weight: 600; color: #172033;
+  }}
+  .download-btn {{
+    padding: 4px 12px; font-size: 12px;
+    background: #3867d6; color: #fff; border: none; border-radius: 5px;
+    cursor: pointer;
+  }}
+  .download-btn:hover {{ background: #2955b8; }}
 </style>
 </head>
 <body>
+<div class="toolbar">
+  <span class="toolbar-title">{data["displayName"]} · {data["symbol"]}</span>
+  <button class="download-btn" id="dl-btn">📷 导出图片</button>
+</div>
 <div id="chart"></div>
 <div class="legend-bar">
   <span class="legend-item"><span class="legend-line" style="border-color:#3867d6"></span>EMA20</span>
@@ -474,6 +491,20 @@ const option = {{
 const chart = echarts.init(document.getElementById('chart'));
 chart.setOption(option);
 window.addEventListener('resize', () => chart.resize());
+
+document.getElementById('dl-btn').addEventListener('click', () => {{
+  const url = chart.getDataURL({{
+    type: 'png',
+    pixelRatio: 2,
+    backgroundColor: '#ffffff'
+  }});
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = '{data["symbol"]}-kline-' + new Date().toISOString().slice(0, 10) + '.png';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}});
 </script>
 </body>
 </html>"""

@@ -538,6 +538,166 @@ def _render_event_list(events: list) -> None:
         )
 
 
+def _compute_multi_period_state(frame: pd.DataFrame) -> dict[str, dict[str, object]]:
+    """从 frame 计算日/周/月 三周期颜色状态与涨跌幅，供摘要栏使用。
+
+    - 日:  直接用 frame.signal_color
+    - 周:  long_trend（long_bull/long_bear/其他）映射
+    - 月:  ema120 vs close_lag120 推导
+
+    返回 ``{period: {"state": "green/gray/black", "change_pct": float|None}}``。
+    """
+    def _period_change_pct(period_bars: int) -> float | None:
+        if len(frame) < period_bars + 1:
+            return None
+        try:
+            cur = float(frame["close"].iloc[-1])
+            prev = float(frame["close"].iloc[-period_bars - 1])
+            return (cur / prev - 1.0) * 100.0
+        except (KeyError, ValueError):
+            return None
+
+    out: dict[str, dict[str, object]] = {}
+    daily_col = frame["signal_color"] if "signal_color" in frame.columns else None
+    daily_state = str(daily_col.iloc[-1]) if daily_col is not None else "unknown"
+    out["日"] = {"state": daily_state, "change_pct": _period_change_pct(1)}
+
+    lt = frame["long_trend"].iloc[-1] if "long_trend" in frame.columns else None
+    if lt == "long_bull":
+        out["周"] = {"state": "green", "change_pct": _period_change_pct(5)}
+    elif lt == "long_bear":
+        out["周"] = {"state": "black", "change_pct": _period_change_pct(5)}
+    else:
+        out["周"] = {"state": "gray", "change_pct": _period_change_pct(5)}
+
+    if "ema120" in frame.columns and "close_lag120" in frame.columns:
+        ema120 = frame["ema120"].iloc[-1]
+        ref120 = frame["close_lag120"].iloc[-1]
+        if pd.notna(ema120) and pd.notna(ref120):
+            if float(ema120) < float(ref120):
+                out["月"] = {"state": "black", "change_pct": _period_change_pct(20)}
+            elif float(ema120) > float(ref120):
+                out["月"] = {"state": "green", "change_pct": _period_change_pct(20)}
+            else:
+                out["月"] = {"state": "gray", "change_pct": _period_change_pct(20)}
+        else:
+            out["月"] = {"state": "unknown", "change_pct": _period_change_pct(20)}
+    else:
+        out["月"] = {"state": "unknown", "change_pct": None}
+
+    return out
+
+
+def _render_summary_bar(result: AnalysisResult) -> None:
+    """在图表上方渲染摘要栏：标题 + 关键指标 + 多周期共振。
+
+    风格参考用户旧看板（沪深300ETF博时 截图样式）。
+    """
+    a = result.assessment
+    frame = result.frame
+    latest = frame.iloc[-1]
+    last_close = float(latest["close"])
+    prev_close = float(frame["close"].iloc[-2]) if len(frame) > 1 else last_close
+    change_pct = (last_close / prev_close - 1.0) * 100.0 if prev_close > 0 else 0.0
+    up_color = "#e33d47" if change_pct >= 0 else "#0b9b64"
+
+    data_status = ""
+    if result.price_data and result.price_data.report:
+        rep = result.price_data.report
+        adj = "复权" if rep.adjusted else "未复权"
+        data_status = f"{rep.provider} · {adj}日线 · {rep.rows} 根"
+
+    daily_state = str(latest.get("signal_color", "unknown"))
+    daily_state_cn = COLOR_CN.get(daily_state, "未知")
+    daily_state_color = {
+        "green": "#0b9b64",
+        "gray": "#8c96a8",
+        "black": "#1f2937",
+        "unknown": "#c9a227",
+    }.get(daily_state, "#888")
+
+    # 标题行
+    title_cols = st.columns([3, 4])
+    with title_cols[0]:
+        st.markdown(
+            f"### {result.display_name}（{result.symbol}） · "
+            f"<span style='color:{up_color}'>{last_close:.4f} "
+            f"{change_pct:+.2f}%</span>",
+            unsafe_allow_html=True,
+        )
+        if data_status:
+            st.caption(data_status)
+    with title_cols[1]:
+        st.markdown(
+            f"<span style='background:{daily_state_color};color:#fff;"
+            f"padding:2px 8px;border-radius:4px;font-size:12px'>● {daily_state_cn}</span>",
+            unsafe_allow_html=True,
+        )
+        a_date = a.as_of.strftime("%Y-%m-%d")
+        st.caption(f"数据日期 {a_date}")
+
+    # 关键指标行
+    ema20 = float(latest["ema20"]) if pd.notna(latest.get("ema20")) else None
+    sma20 = float(latest["sma20"]) if pd.notna(latest.get("sma20")) else None
+    ref20 = float(latest["close_lag20"]) if pd.notna(latest.get("close_lag20")) else None
+    volume = float(latest["volume"])
+    vol_ratio = float(latest["volume_ratio20"]) if pd.notna(latest.get("volume_ratio20")) else None
+
+    kpi = st.columns(6)
+    kpi[0].metric("EMA20", f"{ema20:.4f}" if ema20 else "—")
+    kpi[1].metric("SMA20", f"{sma20:.4f}" if sma20 else "—")
+    kpi[2].metric("20周期抵扣价", f"{ref20:.4f}" if ref20 else "—")
+    kpi[3].metric("成交量", f"{volume/1e4:.2f}万")
+    kpi[4].metric("量比（较20均量）", f"{vol_ratio:.2f}x" if vol_ratio else "—")
+    # 换手率：data 里有就显示，没有就—
+    kpi[5].metric("换手率", "—")
+
+    # 多周期共振行
+    mp = _compute_multi_period_state(frame)
+    mp_cols = st.columns([1, 1, 1, 3])
+    for col, period in zip(mp_cols[:3], ("日", "周", "月"), strict=True):
+        info = mp.get(period, {})
+        state = str(info.get("state", "unknown"))
+        pct = info.get("change_pct")
+        state_cn_label = {
+            "green": "绿", "gray": "灰", "black": "黑", "unknown": "未知",
+        }.get(state, "未知")
+        state_color = {
+            "green": "#0b9b64",
+            "gray": "#8c96a8",
+            "black": "#1f2937",
+            "unknown": "#c9a227",
+        }.get(state, "#888")
+        pct_str = f"{pct:+.2f}%" if isinstance(pct, (int, float)) else "—"
+        col.markdown(
+            f"{period}线 "
+            f"<span style='background:{state_color};color:#fff;"
+            f"padding:2px 8px;border-radius:4px;font-size:12px'>"
+            f"{state_cn_label} {pct_str}</span>",
+            unsafe_allow_html=True,
+        )
+
+    # 共振判定
+    states = [mp.get(p, {}).get("state") for p in ("日", "周", "月")]
+    if all(s == "green" for s in states):
+        resonance = "三周期共绿"
+    elif all(s == "black" for s in states):
+        resonance = "三周期共黑"
+    elif "green" in states and "black" in states:
+        resonance = "分化（多空周期并存，方向未明）"
+    elif states.count("green") >= 2:
+        resonance = "偏多"
+    elif states.count("black") >= 2:
+        resonance = "偏空"
+    else:
+        resonance = "震荡"
+    mp_cols[3].markdown(
+        f"<span style='background:#eef1f5;color:#33415c;padding:4px 12px;"
+        f"border-radius:6px;font-size:12px'>{resonance}</span>",
+        unsafe_allow_html=True,
+    )
+
+
 def _render_price_chart(result: AnalysisResult) -> None:
     """渲染主图（ECharts K线 + 均线 + 抵扣价 + 结构 + 量能），放在页面顶部。
 
@@ -546,7 +706,10 @@ def _render_price_chart(result: AnalysisResult) -> None:
 
     提供 6 个开关控制图内标记显隐：底部/顶部构造、主底部 C、顶部颈线、
     B1、关键性波动。开关变化通过 ``component_key`` 后缀触发 echarts 重渲染。
+
+    摘要栏（标题 + 关键指标 + 多周期共振）放在图表上方。
     """
+    _render_summary_bar(result)
     a = result.assessment
 
     # 顶部一行：颜色模式（左侧）+ 提示（右侧）。
