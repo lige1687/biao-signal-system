@@ -4,6 +4,8 @@
 """
 from __future__ import annotations
 
+import sqlite3
+from contextlib import closing, suppress
 from dataclasses import dataclass, field
 from datetime import UTC, date
 
@@ -15,7 +17,6 @@ from lei_signal.data.providers import PriceData, PriceProvider, default_provider
 from lei_signal.data.validation import DataUnavailableError, detect_unadjusted_gaps
 from lei_signal.domain.canonical import make_event_id
 from lei_signal.domain.rules_config import get_rule
-from lei_signal.events.log import make_event
 from lei_signal.domain.types import (
     DailyAssessment,
     Direction,
@@ -24,7 +25,8 @@ from lei_signal.domain.types import (
     SignalEvent,
     StructureInstance,
 )
-from lei_signal.events.log import EventLog
+from lei_signal.events.lifecycle import assign_lifecycles
+from lei_signal.events.log import EventLog, make_event
 from lei_signal.features.indicators import compute_features
 from lei_signal.features.pivots import confirmed_pivots
 from lei_signal.features.volume_profile import VolumeProfileProxy, compute_volume_profile
@@ -55,153 +57,6 @@ from lei_signal.rules.volume import compute_volume_labels, detect_volume_events
 from lei_signal.state.machine import DayState, run_state_machine
 
 MIN_BARS = 21
-
-
-# 一次性事件：valid_until = available_date + 1 day，
-# 只在触发当日作为 new_events 出现。
-_ONE_SHOT_RULES = frozenset(
-    {
-        "swing_pivots",            # 摆动点是历史事实
-        "bullish_engulfing",       # 反转 K 线
-        "bullish_outside_reversal",
-        "bearish_engulfing",
-        "bearish_outside_reversal",
-        "volume_proxies",          # 放量/突破/缩量
-        "bottom_c_lifecycle",      # C 触及/跌破快照
-        "key_wave_black_started",  # 黑色起始
-        "key_wave_black_ended",    # 黑色结束
-        "top_plus_black",          # 组合状态进入
-        "top_plus_black_ended",    # 组合状态退出
-        "ema20_reclaim_rising",    # 单次转强（注意：bounding in 状态机再写 valid_until）
-        "top_structure",          # 顶部结构事件
-        "higher_low_bottom",
-        "double_bottom",
-        "bullish_reversal_bottom",
-    }
-)
-
-
-def _one_shot_valid_until(available_date, last_date):
-    """一次性事件的 valid_until：次日凌晨 00:00 之后视为「已结束」。
-
-    若 last_date <= available_date（无后续数据），valid_until = last_date + 1 day。
-    否则 valid_until = available_date + 1 day（仅当日作为 new）。
-    """
-    # 用次日凌晨作为 exclusive 上界：
-    # valid_until = available_date + 1 day（exclusive）
-    from datetime import timedelta
-    candidate = available_date + timedelta(days=1)
-    # 限定到数据范围内：valid_until 不能晚于 last_date + 1
-    cap = last_date + timedelta(days=1)
-    return candidate if candidate <= cap else cap
-
-
-def _assign_lifecycle_intervals(
-    events: list,
-    history: list,
-    last_date,
-) -> list:
-    """为状态型事件（颜色/EMA/共同确认）按时间顺序分配 valid_until + lifecycle_id。
-
-    状态型事件的判定：某日当前状态 = 上一日不同 → 生成 start（valid_until=None 临时）；
-    状态再次改变 → 写入前一个 start 的 valid_until = 当前日。
-    """
-    from datetime import timedelta
-    from collections import defaultdict
-
-    # 1) 一次性事件先标 valid_until
-    updated: list = []
-    for event in events:
-        if event.rule_id in _ONE_SHOT_RULES:
-            updated.append(event)
-            continue
-        updated.append(event)
-
-    # 2) 状态型事件：颜色 / 共同确认
-    #    对每个 rule_id，建立 (available_date, ended_date) 区间。
-    #    当前状态可由 state.color.value、state.joint_confirmed_now 计算。
-    #    EMA 转强由 state.early_strength_by_structure 决定。
-    by_rule: dict[str, list] = defaultdict(list)
-    for event in updated:
-        if event.rule_id in _ONE_SHOT_RULES:
-            continue
-        if event.rule_id not in ("lei_color", "dual_ma_bull_confirmed",
-                                  "ema20_reclaim_rising"):
-            continue
-        by_rule[event.rule_id].append(event)
-
-    # 按 available_date 排序每个 rule 的事件
-    for rule_id, evts in by_rule.items():
-        evts.sort(key=lambda e: (e.available_date, e.event_id))
-
-    # 3) 状态机逐日推进
-    #    对于每条事件，找到它的 [start_date, end_date) 区间。
-    #    规则：start_date = event.available_date，
-    #    end_date = 状态改变的下一日（即下一个相同 rule_id 的 start_date），
-    #    如果直到 last_date 状态一直保持 = 该 rule_id 的 start_date 仍有效，则 end_date = last_date + 1。
-    history_index = {state.day: state for state in history}
-    for rule_id, evts in by_rule.items():
-        # 当前 state 值
-        def state_value_at(day, rule_id=rule_id):
-            state = history_index.get(day)
-            if state is None:
-                return None
-            if rule_id == "lei_color":
-                return state.color.value
-            if rule_id == "dual_ma_bull_confirmed":
-                return bool(state.joint_confirmed_now)
-            if rule_id == "ema20_reclaim_rising":
-                # EMA 转强：必须检查事件关联的特定结构是否仍 active
-                # 不再回退到「任何结构 active」即整体 active
-                for event in evts:
-                    if event.available_date != day or event.structure_id is None:
-                        continue
-                    if state.early_strength_by_structure.get(event.structure_id, False):
-                        return True
-                return False
-            return None
-
-        # 重新生成状态型事件的 lifecycle_id 和 valid_until
-        # 原始 start 事件：lifecycle_id = unique
-        for index, event in enumerate(evts):
-            # 找下一个 start：end_date 是 [start, next_start) 这段时间内状态保持，
-            # 直到状态改变的那一天（next_start 的 available_date）
-            next_start_day = None
-            for later in evts[index + 1:]:
-                if later is not event and later.available_date > event.available_date:
-                    next_start_day = later.available_date
-                    break
-            if next_start_day is not None:
-                event.valid_until = next_start_day
-            else:
-                # 最后一个 start：end_date 取决于状态在 last_date 是否仍 active
-                state = history_index.get(last_date)
-                if state is None:
-                    event.valid_until = None  # 默认 = 永久
-                else:
-                    current = state_value_at(last_date)
-                    if current:
-                        event.valid_until = _add_day(last_date)
-                    else:
-                        # 状态在 last_date 已不是「active」：找最后一次为 active 的日
-                        last_active_day = None
-                        for state in history:
-                            if (state_value_at(state.day) and state.day >= event.available_date):
-                                last_active_day = state.day
-                        if last_active_day is not None:
-                            event.valid_until = _add_day(last_active_day)
-                        else:
-                            event.valid_until = event.available_date
-            # 设置 lifecycle_id
-            if event.lifecycle_id is None:
-                event.lifecycle_id = f"{rule_id}:{event.event_id}"
-
-    return updated
-
-
-def _add_day(d):
-    from datetime import timedelta
-    return d + timedelta(days=1)
 
 
 def _build_structure_necklines(
@@ -387,11 +242,14 @@ def analyze(
         cached = cache.read(symbol, kind="bars", required_columns=("open", "close"))
         if cached is None:
             raise
-        if cache.age_seconds(symbol) is None or cache.age_seconds(symbol) > cache_max_age_seconds:
+        # 只取一次缓存年龄：原写法连调三次 age_seconds，
+        # 既多做磁盘 stat，也可能在三次调用之间读到不同的值。
+        cached_age = cache.age_seconds(symbol)
+        if cached_age is None or cached_age > cache_max_age_seconds:
             raise DataUnavailableError(
                 f"{exc}\n且本地缓存不可用或已过期，无法离线回放"
             ) from exc
-        cache_age = cache.age_seconds(symbol)
+        cache_age = cached_age
         cache_fallback_used = True
         # 用缓存构造一个 PriceData-like 对象
         from lei_signal.data.providers import PriceData
@@ -423,13 +281,13 @@ def analyze(
                 f"{price_data.symbol} 截止 {as_of} 只有 {len(bars)} 根日K线，至少需要 {MIN_BARS} 根"
             )
 
-    # 成功获取行情：写入 Parquet 缓存（仅在未使用缓存兜底时）
+    # 成功获取行情：写入 Parquet 缓存（仅在未使用缓存兜底时）。
+    # 只吞掉「写缓存本身」会遇到的错误：磁盘/权限（OSError）、
+    # 缺少 pyarrow（ImportError）、列结构不合法（ValueError）。
+    # 不用裸 except：真正的逻辑缺陷必须暴露出来，而不是被缓存分支静默吃掉。
     if cache is not None and not cache_fallback_used:
-        try:
+        with suppress(OSError, ImportError, ValueError):
             cache.write(price_data.symbol, price_data.bars)
-        except Exception:  # noqa: BLE001
-            # 缓存写入失败不应阻断分析
-            pass
 
     result = analyze_bars(
         price_data.symbol,
@@ -443,30 +301,31 @@ def analyze(
         result.cache_fallback_used = True
         result.cache_age_seconds = cache_age
 
-    # 持久化到 SQLite
+    # 持久化到 SQLite。落库失败（磁盘满、库被锁、路径不可写）不应阻断分析结果返回，
+    # 但只吞 sqlite3.Error / OSError；其他异常说明是真的写错了数据，必须抛出。
+    # 用 closing 包住连接：原写法在中途抛错时会跳过 conn.close() 造成连接泄漏。
     if sqlite_path is not None:
-        try:
-            from lei_signal.storage.sqlite_store import connect
-            conn = connect(sqlite_path)
-            with conn:
-                write_events(conn, result.events, run_id=run_id)
-                write_structures(conn, result.structures)
-                write_assessment(conn, result.assessment)
-                if run_id is not None:
-                    record_run(
-                        conn,
-                        run_id=run_id,
-                        symbol=result.symbol,
-                        started_at=datetime.now(UTC).isoformat(),
-                        ruleset_version=result.assessment.rule_ruleset_version,
-                        provider=price_data.report.provider,
-                        last_data_date=result.frame.index[-1].date(),
-                        event_count=len(result.events),
-                    )
-            conn.close()
-        except Exception:  # noqa: BLE001
-            # 持久化失败不应阻断主流程
-            pass
+        from lei_signal.storage.sqlite_store import connect
+
+        with (
+            suppress(sqlite3.Error, OSError),
+            closing(connect(sqlite_path)) as conn,
+            conn,
+        ):
+            write_events(conn, result.events, run_id=run_id)
+            write_structures(conn, result.structures)
+            write_assessment(conn, result.assessment)
+            if run_id is not None:
+                record_run(
+                    conn,
+                    run_id=run_id,
+                    symbol=result.symbol,
+                    started_at=datetime.now(UTC).isoformat(),
+                    ruleset_version=result.assessment.rule_ruleset_version,
+                    provider=price_data.report.provider,
+                    last_data_date=result.frame.index[-1].date(),
+                    event_count=len(result.events),
+                )
 
     return result
 
@@ -514,7 +373,13 @@ def analyze_bars(
     # 原始「全局」事件不再产生；改用结构关联的派生事件。
     log.extend(_detect_structure_bound_ema_reclaim(frame, symbol, bottoms))
 
-    log.extend(detect_volume_events(frame, symbol, structure_necklines=_build_structure_necklines(bottoms)))
+    log.extend(
+        detect_volume_events(
+            frame,
+            symbol,
+            structure_necklines=_build_structure_necklines(bottoms),
+        )
+    )
     log.extend(detect_bottom_structure_events(bottoms, symbol))
     log.extend(detect_top_structure_events(tops, symbol))
     # C 生命周期会就地修改结构状态，必须在状态机之前执行
@@ -522,33 +387,15 @@ def analyze_bars(
     # Top+Black 需要读取顶部有效性，因此在顶部结构建立之后执行
     log.extend(detect_key_wave_events(frame, symbol, tops=tops))
 
-    # 一次性事件（摆动点、反转 K 线、放量/突破/缩量、EMA 单次、C 触发生成）
-    # 立即设置 valid_until = available_date + 1 day，确保只作为当日 new_events。
     events = log.events()
     last_date = frame.index[-1].date()
-    for event in events:
-        if event.valid_until is not None:
-            continue
-        if event.rule_id in _ONE_SHOT_RULES:
-            event.valid_until = _one_shot_valid_until(
-                event.available_date, last_date
-            )
-    # 状态型事件（颜色/EMA 转强/共同确认/Top+Black/Top结构/底部结构）必须
-    # 等待状态机跑完后逐状态机生成 start/end 配对。
-    # 先把 EMA 转强事件按「结构失效日 + 1」设置 valid_until（结构失效即关闭）。
-    for event in events:
-        if event.rule_id == "ema20_reclaim_rising" and event.structure_id:
-            struct = next(
-                (s for s in bottoms if s.structure_id == event.structure_id),
-                None,
-            )
-            if struct and struct.invalidated_date is not None:
-                event.valid_until = _add_day(struct.invalidated_date)
     history = run_state_machine(
         frame, structures, weekly_trend=weekly_trend,
         ema_reclaim_events=events,
     )
-    events = _assign_lifecycle_intervals(events, history, last_date)
+    # 生命周期分配集中在 events.lifecycle：pipeline 只负责编排，
+    # 「事件何时结束」属于事件域自身的规则。执行后不再有 valid_until=None。
+    events = assign_lifecycles(events, structures, history, last_date)
 
     # 重新排序与回填
     log = EventLog()

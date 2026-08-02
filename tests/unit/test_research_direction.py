@@ -84,7 +84,7 @@ def test_c_path_uses_event_own_structure() -> None:
     rows.append({"open": 26.0, "high": 26.3, "low": 24.0, "close": 24.5, "volume": 1_100_000})
     rows.append({"open": 23.5, "high": 28.0, "low": 23.3, "close": 27.8, "volume": 1_900_000})
     # 第二个反包：B 底部（远低于 A）
-    for i in range(2, 10):
+    for _ in range(2, 10):
         rows.append({"open": 27.0, "high": 27.0, "low": 10.0,
                      "close": 11.0, "volume": 1_000_000})
     rows.append({"open": 11.0, "high": 11.3, "low": 9.0, "close": 9.5, "volume": 1_100_000})

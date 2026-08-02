@@ -142,7 +142,7 @@ def test_top_candidate_new_high_voids_before_breakdown() -> None:
     """顶部候选：突破第一高点 → 之后跌破颈线 → 必须作废、未确认。"""
     # 必须出现两个摆动高点（第一 > 第二），中间为颈线区
     rows: list[dict[str, float]] = []
-    for i in range(30):
+    for _ in range(30):
         rows.append({"open": 50.0, "high": 50.0, "low": 49.8, "close": 50.0, "volume": 1_000_000})
     # 第一摆动高点 day 6：high=60
     rows[6] = {"open": 50.0, "high": 60.0, "low": 49.5, "close": 55.5, "volume": 1_000_000}
@@ -176,7 +176,7 @@ def test_top_after_confirm_only_invalidates_on_new_high() -> None:
     中间必须经过 confirmed 阶段，最终由新高解除。
     """
     rows: list[dict[str, float]] = []
-    for i in range(30):
+    for _ in range(30):
         rows.append({"open": 50.0, "high": 50.0, "low": 49.8, "close": 50.0, "volume": 1_000_000})
     rows[6] = {"open": 50.0, "high": 60.0, "low": 49.5, "close": 55.5, "volume": 1_000_000}
     rows[7] = {"open": 54.0, "high": 54.5, "low": 51.0, "close": 51.5, "volume": 1_000_000}

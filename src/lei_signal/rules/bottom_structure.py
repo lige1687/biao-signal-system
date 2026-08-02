@@ -122,10 +122,17 @@ def _advance_confirmed(
     frame: pd.DataFrame,
     confirmed_ts: pd.Timestamp,
 ) -> StructureInstance:
-    """已确认结构从确认日次日起监控 C 触及。"""
+    """已确认结构从确认日次日起监控 C 触及。
+
+    ``c_price`` 缺失时没有可比较的失效价位，保持结构原状。
+    用 0 之类的默认值代替会让结构永远不触发 C 失效，是更危险的静默错误。
+    """
+    c_price = structure.c_price
+    if c_price is None:
+        return structure
     forward = frame.loc[frame.index > confirmed_ts]
     for ts, row in forward.iterrows():
-        if float(row["low"]) <= structure.c_price:
+        if float(row["low"]) <= c_price:
             structure.status = StructureStatus.INVALIDATED
             structure.invalidated_date = ts.date()
             structure.invalidated_reason = "bottom_C_touched"

@@ -7,10 +7,14 @@
 """
 from __future__ import annotations
 
+import os
+from contextlib import suppress
+
 import pandas as pd
 import streamlit as st
 
 from lei_signal.compose.pipeline import AnalysisResult, analyze
+from lei_signal.data.cache import DEFAULT_CACHE_DIR
 from lei_signal.data.validation import DataUnavailableError
 from lei_signal.domain.types import (
     COLOR_CN,
@@ -29,6 +33,17 @@ DISCLAIMER = (
     "本系统是技术信号识别、解释与历史有效性研究工具，**不是自动交易系统**。"
     "不下单、不计算仓位、不管理资金，也不输出确定性买卖建议。"
     "颜色、阶段与风险提示都只是观察信息。"
+)
+
+
+# 修复 7：把行情缓存与 SQLite 持久化接入普通 UI 分析路径。
+# 默认沿用 ParquetCache 的默认目录（~/.lei_signal_lab/cache）与同目录下的 lab.db；
+# 可用环境变量覆盖（容器/多用户部署时指向专用路径）。analyze 内部对写缓存与
+# 写库的错误做了精确抑制（OSError/ImportError/ValueError/sqlite3.Error），
+# 因此即使磁盘不可写也不会阻断分析结果返回，只会失去持久化。
+_CACHE_ROOT = os.environ.get("LEI_CACHE_ROOT", str(DEFAULT_CACHE_DIR))
+_SQLITE_PATH = os.environ.get(
+    "LEI_SQLITE_PATH", str(DEFAULT_CACHE_DIR.parent / "lab.db")
 )
 
 
@@ -69,7 +84,15 @@ def _load(symbol: str, build_history: bool) -> AnalysisResult:
         )
         return analyze_bars(symbol, bars, display_name=price.display_name,
                             price_data=price, build_history=build_history)
-    return analyze(symbol, build_history=build_history)
+    # 普通 UI 路径：行情成功获取后写入 Parquet 缓存，并把事件/结构/评估
+    # 持久化到 SQLite（analyze 内部幂等写入、错误精确抑制）。
+    return analyze(
+        symbol,
+        build_history=build_history,
+        cache_root=_CACHE_ROOT,
+        sqlite_path=_SQLITE_PATH,
+        run_id=f"ui-{symbol}",
+    )
 
 
 @st.cache_data(show_spinner=False, ttl=900)
@@ -87,10 +110,10 @@ def _analyze_upload(upload_file, symbol: str, build_history: bool) -> AnalysisRe
     # 上传文件可能没有 seek/tell 全部支持；pandas 会用 read(n) 多次调用，
     # 因此把数据全部读入内存后再交给 pandas。
     if hasattr(upload_file, "seek"):
-        try:
+        # 不可 seek 的流抛 io.UnsupportedOperation（OSError 子类）；
+        # 只吞这一类，其余异常照抛，避免把真实的读取错误掩盖成空文件。
+        with suppress(OSError):
             upload_file.seek(0)
-        except Exception:  # noqa: BLE001
-            pass
     raw_bytes = upload_file.read()
     from io import BytesIO
     if upload_file.name.endswith(".parquet"):
@@ -156,6 +179,9 @@ def render() -> None:
         run = st.button("分析", type="primary", use_container_width=True)
         st.divider()
         st.caption(DISCLAIMER)
+        st.caption(
+            f"本地持久化已接入：缓存 `{_CACHE_ROOT}` · 数据库 `{_SQLITE_PATH}`"
+        )
 
     if not run and "analysis" not in st.session_state:
         st.info("在左侧输入代码后点击「分析」。首次加载会自动下载复权日线行情。")

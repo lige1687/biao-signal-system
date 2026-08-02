@@ -144,7 +144,10 @@ def detect_key_wave_events(
             in_black = False
 
         # --- Top+Black 组合状态起始 / 结束 ---
-        if combined and not in_top_black:
+        # 进入条件写成 `active_top is not None` 而不是 `combined`：
+        # active_top 只在 is_black 为真时才可能非空，两者严格等价，
+        # 但这样类型收窄成立，下面访问 active_top 的字段不需要任何忽略标记。
+        if active_top is not None and not in_top_black:
             # 组合状态从 False 变 True：记录一次事件
             evidence = _evidence_for_row(row)
             events.append(

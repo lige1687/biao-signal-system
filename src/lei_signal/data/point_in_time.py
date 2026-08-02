@@ -43,6 +43,42 @@ def crop_daily(bars: pd.DataFrame, as_of: date | pd.Timestamp) -> pd.DataFrame:
     return bars.loc[bars.index <= cutoff]
 
 
+#: 周线输出的列顺序。空结果与非空结果必须完全一致，
+#: 否则下游 concat / 列位置访问会在「本周尚未结束」时静默错位。
+WEEKLY_COLUMNS = (
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "bar_count",
+    "is_complete",
+    "week_start",
+    "week_end",
+)
+
+_WEEKLY_DTYPES: dict[str, str] = {
+    "open": "float64",
+    "high": "float64",
+    "low": "float64",
+    "close": "float64",
+    "volume": "float64",
+    "bar_count": "int64",
+    "is_complete": "bool",
+    "week_start": "datetime64[ns]",
+    "week_end": "datetime64[ns]",
+}
+
+
+def empty_weekly() -> pd.DataFrame:
+    """没有任何「已结束周」时的空周线，列与索引契约与正常结果一致。"""
+    frame = pd.DataFrame(
+        {name: pd.Series(dtype=_WEEKLY_DTYPES[name]) for name in WEEKLY_COLUMNS}
+    )
+    frame.index = pd.DatetimeIndex([], name="date")
+    return frame
+
+
 def aggregate_weekly(
     daily: pd.DataFrame,
     *,
@@ -70,25 +106,15 @@ def aggregate_weekly(
     `is_complete=False` 的行已被过滤掉（未完成周不进入周线）。
     """
     if daily.empty:
-        return daily.iloc[0:0].copy()
+        return empty_weekly()
 
     frame = daily if as_of is None else crop_daily(daily, as_of)
     if frame.empty:
-        return frame.iloc[0:0].copy()
+        return empty_weekly()
 
     # 按自然周（W-SUN: 周一..周日）分组
     week_key = frame.index.to_period("W-SUN")
     grouped = frame.groupby(week_key)
-    weekly = pd.DataFrame(
-        {
-            "open": grouped["open"].first(),
-            "high": grouped["high"].max(),
-            "low": grouped["low"].min(),
-            "close": grouped["close"].last(),
-            "volume": grouped["volume"].sum(),
-            "bar_count": grouped.size().astype(int),
-        }
-    )
 
     cutoff = (
         pd.Timestamp(as_of).normalize()
@@ -128,22 +154,11 @@ def aggregate_weekly(
         )
 
     if not completed_records:
-        return daily.iloc[0:0].assign(
-            available_date=pd.Series(dtype="datetime64[ns]"),
-            is_complete=pd.Series(dtype=bool),
-            bar_count=pd.Series(dtype=int),
-            week_start=pd.Series(dtype="datetime64[ns]"),
-            week_end=pd.Series(dtype="datetime64[ns]"),
-        ).set_index("available_date").iloc[0:0]
+        return empty_weekly()
 
     completed = pd.DataFrame(completed_records).set_index("available_date")
     completed.index.name = "date"
-    return completed[
-        [
-            "open", "high", "low", "close", "volume",
-            "bar_count", "is_complete", "week_start", "week_end",
-        ]
-    ]
+    return completed[list(WEEKLY_COLUMNS)]
 
 
 def build_snapshot(
@@ -166,4 +181,11 @@ def build_snapshot(
     )
 
 
-__all__ = ["MarketSnapshot", "aggregate_weekly", "build_snapshot", "crop_daily"]
+__all__ = [
+    "WEEKLY_COLUMNS",
+    "MarketSnapshot",
+    "aggregate_weekly",
+    "build_snapshot",
+    "crop_daily",
+    "empty_weekly",
+]

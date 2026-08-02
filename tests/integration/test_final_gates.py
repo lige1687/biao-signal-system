@@ -200,7 +200,8 @@ def test_8_bearish_signal_uses_direction_adjusted_win_rate() -> None:
     if not black.empty:
         # direction_hit 应当与 raw_return < 0 一致
         valid = black.dropna(subset=["direction_hit_20", "fwd_return_20"])
-        assert ((valid["direction_hit_20"] == (valid["fwd_return_20"] < 0)) | valid["fwd_return_20"].eq(0)).all()
+        hit_matches_sign = valid["direction_hit_20"] == (valid["fwd_return_20"] < 0)
+        assert (hit_matches_sign | valid["fwd_return_20"].eq(0)).all()
 
 
 def test_9_c_path_uses_event_own_structure() -> None:

@@ -9,6 +9,7 @@
 """
 from __future__ import annotations
 
+import math
 from typing import TYPE_CHECKING
 
 import numpy as np
@@ -29,6 +30,20 @@ _OPPORTUNITY_STAGES = (
     Stage.JOINT_CONFIRMED,
     Stage.TREND_REINFORCED,
 )
+
+
+def _as_float(value: object) -> float | None:
+    """把 row 中的数值安全转成 float；None / NaN / 非数值一律返回 None。
+
+    存在的意义：``row`` 的静态类型是 ``dict[str, object]``，直接对取回的值
+    做算术运算既不类型安全也容易把 NaN 当成有效数字使用。
+    """
+    if value is None or isinstance(value, bool):
+        return None
+    if isinstance(value, int | float | np.number):
+        number = float(value)
+        return None if math.isnan(number) else number
+    return None
 
 
 def _market_state(frame: pd.DataFrame) -> pd.Series:
@@ -77,6 +92,7 @@ def build_forward_outcomes(result: AnalysisResult) -> pd.DataFrame:
             _outcome_row(
                 signal_key=key,
                 signal_kind="atomic",
+                transition_kind=None,
                 event_date=event.event_date,
                 available_date=event.available_date,
                 position=position_of[timestamp],
@@ -97,6 +113,12 @@ def build_forward_outcomes(result: AnalysisResult) -> pd.DataFrame:
     # --- 组合机会阶段起点（修复 5：必须使用 opportunity_stage）---
     # 风险状态产生的变化不参与此处的「机会阶段」记录。
     # 同一机会阶段在风险期间保持不变，风险解除后不应被错误地记为新信号。
+    #
+    # 类型体系（兼容方案）：
+    #   signal_kind    仍然只有 "atomic" / "stage" 两种，保持旧测试与 UI 契约不变；
+    #   transition_kind 为新增的**独立**维度，机会阶段转换 = "opportunity"，
+    #                   原子事件 = None。风险状态转换不进入本表，
+    #                   由 build_risk_transitions() 单独产出。
     previous_opportunity: Stage | None = None
     for state in result.history:
         timestamp = pd.Timestamp(state.day)
@@ -111,7 +133,8 @@ def build_forward_outcomes(result: AnalysisResult) -> pd.DataFrame:
             records.append(
                 _outcome_row(
                     signal_key=f"stage:{state.opportunity_stage.value}",
-                    signal_kind="opportunity_transition",
+                    signal_kind="stage",
+                    transition_kind="opportunity",
                     event_date=state.day,
                     available_date=state.day,
                     position=position_of[timestamp],
@@ -132,32 +155,9 @@ def build_forward_outcomes(result: AnalysisResult) -> pd.DataFrame:
                     result=result,
                 )
             )
-
-    # --- 风险状态转换（修复 5：与机会阶段分别统计）---
-    # 风险状态转换本身**不**产生 outcome 收益记录（避免与方向调整混淆），
-    # 但在 records 中标记 risk_transition 以便 UI/研究层区分。
-    previous_risk = None
-    for state in result.history:
-        if previous_risk is not None and state.risk_state != previous_risk:
-            # 风险变化：仅记录一个轻量级事件用于分类
-            records.append({
-                "signal_key": f"risk_state:{state.risk_state.value}",
-                "signal_kind": "risk_transition",
-                "event_date": state.day,
-                "available_date": state.day,
-                "structure_id": None,
-                "direction": "bearish",
-                "rule_version": "1.0.0",
-                "provenance": "lei_inferred",
-                "entry_close": float(frame["close"].iloc[position_of[pd.Timestamp(state.day)]])
-                if pd.Timestamp(state.day) in position_of else None,
-                "market_state": market_state.iloc[position_of[pd.Timestamp(state.day)]]
-                if pd.Timestamp(state.day) in position_of else "unknown",
-                "color_at_signal": state.color.value,
-            })
-        previous_risk = state.risk_state
-
-    return records
+        # 关键：无论是否记录，都必须推进 previous_opportunity，
+        # 否则同一机会阶段的连续日会被重复记为新信号。
+        previous_opportunity = state.opportunity_stage
 
     if not records:
         return pd.DataFrame()
@@ -169,10 +169,43 @@ def build_forward_outcomes(result: AnalysisResult) -> pd.DataFrame:
     return outcomes
 
 
+def build_risk_transitions(result: AnalysisResult) -> pd.DataFrame:
+    """风险状态转换表（修复 5：与机会阶段**分表**统计）。
+
+    设计决定（明确记录，避免以后又混回去）：
+      * 风险状态转换**不参加**收益研究，因此**不进入** ``build_forward_outcomes``
+        产出的 outcomes 表。outcomes 表要求每行都具备完整的收益 / MFE / MAE /
+        C / B1 字段，而风险转换只是状态机的状态变化，没有对应的「信号方向」，
+        强行塞进去会污染 ``summarize_by_rule`` 的方向命中率与样本数。
+      * 因此这里只保存**状态转换事实**：何时、从什么风险状态、变成什么风险状态。
+      * 若将来确实要研究风险状态的后续走势，必须改为调用 ``_outcome_row()``
+        并给出明确的 direction，而不是继续追加轻量字典。
+
+    返回列：``day`` / ``from_risk_state`` / ``to_risk_state`` / ``color`` /
+    ``opportunity_stage``（同日机会阶段，便于核对两条线确实独立）。
+    """
+    rows: list[dict[str, object]] = []
+    previous_risk = None
+    for state in result.history:
+        if previous_risk is not None and state.risk_state != previous_risk:
+            rows.append(
+                {
+                    "day": state.day,
+                    "from_risk_state": previous_risk.value,
+                    "to_risk_state": state.risk_state.value,
+                    "color": state.color.value,
+                    "opportunity_stage": state.opportunity_stage.value,
+                }
+            )
+        previous_risk = state.risk_state
+    return pd.DataFrame(rows)
+
+
 def _outcome_row(
     *,
     signal_key: str,
     signal_kind: str,
+    transition_kind: str | None,
     event_date: object,
     available_date: object,
     position: int,
@@ -193,6 +226,7 @@ def _outcome_row(
     row: dict[str, object] = {
         "signal_key": signal_key,
         "signal_kind": signal_kind,
+        "transition_kind": transition_kind,
         "event_date": event_date,
         "available_date": available_date,
         "structure_id": structure_id,
@@ -270,27 +304,44 @@ def _outcome_row(
     row["touched_c"] = touched_c
     row["days_to_touch_c"] = days_to_touch
 
-    # 方向标准化：bearish 信号时取反（修复 6.1）
+    # 方向标准化（修复 6.1）
+    #
+    # 看多信号：调整值 = 原始值。
+    # 看空信号：
+    #   * 收益取反（下跌 = 方向正确）；
+    #   * MFE/MAE 必须**先交换再取反**，不能只取反：
+    #     对看空而言「有利极值」是原始最低点，「不利极值」是原始最高点，
+    #       bearish adjusted MFE = -(raw MAE)
+    #       bearish adjusted MAE = -(raw MFE)
+    #     若只取反不交换，会得到 adjusted MFE < adjusted MAE 的非法结果。
     is_bearish = direction in ("bearish", "risk")
     for horizon in HORIZONS:
-        raw = row.get(f"fwd_return_{horizon}")
-        mfe = row.get(f"mfe_{horizon}")
-        mae = row.get(f"mae_{horizon}")
-        if raw is not None and pd.notna(raw):
-            adj = -raw if is_bearish else raw
-            row[f"direction_adjusted_return_{horizon}"] = adj
-            row[f"direction_hit_{horizon}"] = (raw < 0) if is_bearish else (raw > 0)
-        else:
+        raw_return = _as_float(row.get(f"fwd_return_{horizon}"))
+        raw_mfe = _as_float(row.get(f"mfe_{horizon}"))
+        raw_mae = _as_float(row.get(f"mae_{horizon}"))
+
+        if raw_return is None:
             row[f"direction_adjusted_return_{horizon}"] = np.nan
             row[f"direction_hit_{horizon}"] = None
-        if mfe is not None and pd.notna(mfe):
-            row[f"mfe_adjusted_{horizon}"] = -mfe if is_bearish else mfe
         else:
-            row[f"mfe_adjusted_{horizon}"] = np.nan
-        if mae is not None and pd.notna(mae):
-            row[f"mae_adjusted_{horizon}"] = -mae if is_bearish else mae
-        else:
-            row[f"mae_adjusted_{horizon}"] = np.nan
+            row[f"direction_adjusted_return_{horizon}"] = (
+                -raw_return if is_bearish else raw_return
+            )
+            row[f"direction_hit_{horizon}"] = (
+                raw_return < 0.0 if is_bearish else raw_return > 0.0
+            )
+
+        # 有利/不利极值按方向取原始序列的对应端点
+        favourable = raw_mae if is_bearish else raw_mfe
+        adverse = raw_mfe if is_bearish else raw_mae
+        row[f"mfe_adjusted_{horizon}"] = (
+            np.nan
+            if favourable is None
+            else (-favourable if is_bearish else favourable)
+        )
+        row[f"mae_adjusted_{horizon}"] = (
+            np.nan if adverse is None else (-adverse if is_bearish else adverse)
+        )
 
     # B1 路径
     b1_price = _b1_price_on(result, available_date, entry_close)
@@ -535,6 +586,7 @@ def stage_label(stage_key: str) -> str:
 __all__ = [
     "HORIZONS",
     "build_forward_outcomes",
+    "build_risk_transitions",
     "gray_transition_stats",
     "infer_asset_class",
     "stage_label",

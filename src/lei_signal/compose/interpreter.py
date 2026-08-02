@@ -24,6 +24,7 @@ from lei_signal.domain.types import (
     SignalEvent,
     StructureInstance,
 )
+from lei_signal.events.lifecycle import END_SUB_RULES, PULSE_RULES
 from lei_signal.features.volume_profile import VolumeProfileProxy
 from lei_signal.rules.resistance_b1 import B1Resistance
 from lei_signal.state.machine import DayState
@@ -62,9 +63,7 @@ def build_assessment(
     row = frame.loc[timestamp]
 
     new_events = [e for e in events if e.available_date == day]
-    active_events, ended_events = _active_and_ended_events(
-        events, structures, day, day_state
-    )
+    active_events, ended_events = _active_and_ended_events(events, structures, day)
 
     supports, conflicts = _build_factors(row, day_state, profile, b1)
     risks = _build_risks(row, day_state, structures, day)
@@ -111,139 +110,45 @@ def _active_and_ended_events(
     events: list[SignalEvent],
     structures: list[StructureInstance],
     day: date,
-    day_state: DayState,
 ) -> tuple[list[SignalEvent], list[SignalEvent]]:
-    """Round 2 修复 2：按事件真实生命周期（valid_until）分类。
+    """Round 2 修复 2：按事件真实生命周期分类为 active / ended。
 
-    每个事件在生产时已分配：
-      * valid_until = available_date + 1 day → 单次事件（仅当日 new）
-      * valid_until = 状态结束日（exclusive）→ 状态型事件的有效区间
-      * ended_event_id 指向结束事件
+    唯一判据是 ``events.lifecycle`` 在分析阶段写入的区间::
 
-    分类逻辑：
-      * new_events：available_date == day 的所有事件
-      * active_events：valid_from (=available_date) <= day < valid_until
-                       （即「该日仍处于此状态」的活实例）
-      * ended_events：valid_until <= day（已结束，包括 *_ended 事件）
+        available_date <= day < valid_until   → active
+        valid_until <= day                    → ended
 
-    不再使用「当前状态反推历史事件是否有效」。
+    「哪些规则是脉冲、哪些 sub_rule 是结束标记」直接引用
+    ``events.lifecycle`` 的常量，解释层不再另立一份名单——
+    两份名单迟早漂移（``dual_ma_spread``、``long_trend`` 就曾漏在名单外，
+    导致它们在触发日同时出现在 new 与 active 两栏）。
+
+    脉冲事件与 ``*_ended`` 结束标记永远不进 active：
+    前者在触发日只作为 ``new_events`` 出现，之后归入 ended。
+
+    关联结构已失效的事件直接归入 ended，作为区间之外的附加守卫。
     """
+    dead_structures = {
+        structure.structure_id
+        for structure in structures
+        if structure.invalidated_date is not None and structure.invalidated_date <= day
+    }
     active: list[SignalEvent] = []
     ended: list[SignalEvent] = []
     for event in events:
         if event.available_date > day:
             continue
-        # *_ended 事件：永远不能进 active，只能作为历史结束事件
-        if event.evidence.get("sub_rule", "").endswith("_ended") or event.rule_id in (
-            "key_wave_black_ended", "top_plus_black_ended",
-        ):
+        sub_rule = event.evidence.get("sub_rule")
+        sub_rule = sub_rule if isinstance(sub_rule, str) else ""
+        if sub_rule in END_SUB_RULES or event.rule_id in PULSE_RULES:
+            # 历史事实：触发日只作为 new_events 出现，之后一律归 ended
+            if event.available_date < day:
+                ended.append(event)
+            continue
+        if event.structure_id is not None and event.structure_id in dead_structures:
             ended.append(event)
             continue
-        # 单次事件：valid_until = available_date + 1 day；只在当日 new
-        if event.rule_id in (
-            "swing_pivots",
-            "bullish_engulfing", "bullish_outside_reversal",
-            "bearish_engulfing", "bearish_outside_reversal",
-            "volume_proxies",
-            "bottom_c_lifecycle",
-        ):
-            if event.available_date == day:
-                continue  # only in new_events
-            ended.append(event)
-            continue
-        # 颜色事件：仅在颜色匹配时为 active
-        if event.rule_id == "lei_color":
-            if day_state.color.value == event.evidence.get("color"):
-                if event.valid_until is None or day < event.valid_until:
-                    active.append(event)
-                else:
-                    ended.append(event)
-            else:
-                ended.append(event)
-            continue
-        # 双均线共同确认：状态成立时为 active
-        if event.rule_id == "dual_ma_bull_confirmed":
-            if day_state.joint_confirmed_now:
-                if event.valid_until is None or day < event.valid_until:
-                    active.append(event)
-                else:
-                    ended.append(event)
-            else:
-                ended.append(event)
-            continue
-        # EMA 早期转强：颜色转黑立即失效
-        if event.rule_id == "ema20_reclaim_rising":
-            if day_state.color is SignalColor.BLACK:
-                ended.append(event)
-                continue
-            # 关联底部结构 ID 检查
-            if event.structure_id is not None:
-                structure = next(
-                    (s for s in structures if s.structure_id == event.structure_id),
-                    None,
-                )
-                if structure is None or structure.invalidated_date is not None:
-                    ended.append(event)
-                    continue
-            if event.valid_until is None or day < event.valid_until:
-                active.append(event)
-            else:
-                ended.append(event)
-            continue
-        # Top+Black：进入事件 (top_plus_black) 与退出事件
-        if event.evidence.get("sub_rule") == "top_plus_black":
-            top_id = event.evidence.get("top_structure_id")
-            top_alive = False
-            if top_id is not None:
-                top = next((s for s in structures if s.structure_id == top_id), None)
-                top_alive = top is not None and top.invalidated_date is None
-            if day_state.color is SignalColor.BLACK and top_alive:
-                if event.valid_until is None or day < event.valid_until:
-                    active.append(event)
-                else:
-                    ended.append(event)
-            else:
-                ended.append(event)
-            continue
-        # C 生命周期与底部结构事件
-        if event.rule_id in ("bottom_c_lifecycle", "higher_low_bottom", "double_bottom"):
-            structure = next(
-                (s for s in structures if s.structure_id == event.structure_id),
-                None,
-            )
-            if structure is None or structure.invalidated_date is not None:
-                ended.append(event)
-            elif event.valid_until is None or day < event.valid_until:
-                active.append(event)
-            else:
-                ended.append(event)
-            continue
-        # 顶部结构事件
-        if event.rule_id == "top_structure":
-            structure = next(
-                (s for s in structures if s.structure_id == event.structure_id),
-                None,
-            )
-            if structure is None or structure.invalidated_date is not None:
-                ended.append(event)
-            elif event.valid_until is None or day < event.valid_until:
-                active.append(event)
-            else:
-                ended.append(event)
-            continue
-        # 反转底部候选/确认事件
-        if event.rule_id in (
-            "bullish_engulfing", "bullish_outside_reversal",
-            "bearish_engulfing", "bearish_outside_reversal",
-            "bullish_reversal_bottom",
-        ):
-            # 单次：仅当日 new
-            if event.available_date == day:
-                continue
-            ended.append(event)
-            continue
-        # 其他：按 valid_until
-        if event.valid_until is None or day < event.valid_until:
+        if event.valid_until is not None and day < event.valid_until:
             active.append(event)
         else:
             ended.append(event)

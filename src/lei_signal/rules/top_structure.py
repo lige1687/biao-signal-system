@@ -86,10 +86,18 @@ def _advance_top_after_confirm(
     frame: pd.DataFrame,
     confirmed_ts: pd.Timestamp,
 ) -> StructureInstance:
-    """已确认顶部：从确认日次日起监控新高解除。"""
+    """已确认顶部：从确认日次日起监控新高解除。
+
+    ``reference_high`` 缺失时无法判断「是否创出新高」，
+    此时保持结构原状而不是拿默认值假装比较——
+    宁可让顶部警报继续有效，也不能凭空解除。
+    """
+    reference_high = structure.reference_high
+    if reference_high is None:
+        return structure
     forward = frame.loc[frame.index > confirmed_ts]
     for ts, row in forward.iterrows():
-        if float(row["high"]) > structure.reference_high:
+        if float(row["high"]) > reference_high:
             structure.status = StructureStatus.INVALIDATED
             structure.invalidated_date = ts.date()
             structure.invalidated_reason = "top_warning_invalidated_by_new_high"

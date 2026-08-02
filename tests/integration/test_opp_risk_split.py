@@ -5,13 +5,10 @@ UI 与 SQLite 必须分别显示/保存 opportunity_stage 与 risk_state。
 """
 from __future__ import annotations
 
-from pathlib import Path
-
 import pandas as pd
-import pytest
 
 from lei_signal.compose.pipeline import analyze_bars
-from lei_signal.storage.sqlite_store import connect, count_events
+from lei_signal.storage.sqlite_store import connect
 
 
 def test_opportunity_stage_independent_from_risk_state() -> None:
@@ -67,18 +64,20 @@ def test_sqlite_stores_opportunity_and_risk_separately(tmp_path) -> None:  # noq
         ["open", "high", "low", "close", "volume"]
     ]
     db_path = tmp_path / "opp_risk.db"
-    from lei_signal.compose.pipeline import analyze
-    from lei_signal.data.providers import ChainedPriceProvider, EastmoneyPriceProvider
-    from unittest.mock import patch
     # 直接分析 bars 并写入 SQLite
+    from datetime import UTC, datetime
+
     from lei_signal.compose.pipeline import analyze_bars
-    from lei_signal.storage.sqlite_store import (
-        connect, write_assessment, write_events, write_structures, record_run,
-    )
-    from datetime import datetime, UTC
     from lei_signal.data.providers import PriceData
     from lei_signal.data.symbols import resolve_symbol
     from lei_signal.data.validation import ValidationReport
+    from lei_signal.storage.sqlite_store import (
+        connect,
+        record_run,
+        write_assessment,
+        write_events,
+        write_structures,
+    )
     info = resolve_symbol("T")
     price = PriceData(
         symbol=info.symbol, display_name=info.symbol, bars=bars,
@@ -119,10 +118,14 @@ def test_sqlite_stores_opportunity_and_risk_separately(tmp_path) -> None:  # noq
 def test_migration_compatible_with_existing_database(tmp_path) -> None:  # noqa: ANN001
     """旧数据库（只有 001 + 002）升级时，003 必须兼容。"""
     import sqlite3
-    from lei_signal.storage.sqlite_store import write_assessment
+
     from lei_signal.domain.types import (
-        DailyAssessment, SignalColor, Stage, RiskState,
+        DailyAssessment,
+        RiskState,
+        SignalColor,
+        Stage,
     )
+    from lei_signal.storage.sqlite_store import write_assessment
     db_path = tmp_path / "upgrade.db"
     # 手动构造一个只有 001 + 002 的旧数据库
     conn = sqlite3.connect(str(db_path))
@@ -134,7 +137,8 @@ def test_migration_compatible_with_existing_database(tmp_path) -> None:  # noqa:
     )
     # 001
     for stmt in [
-        "CREATE TABLE IF NOT EXISTS assets (symbol TEXT PRIMARY KEY, display_name TEXT, market TEXT, timezone TEXT)",
+        "CREATE TABLE IF NOT EXISTS assets ("
+        "symbol TEXT PRIMARY KEY, display_name TEXT, market TEXT, timezone TEXT)",
         "CREATE TABLE IF NOT EXISTS signal_events ("
         "event_id TEXT PRIMARY KEY, symbol TEXT NOT NULL, timeframe TEXT NOT NULL, "
         "event_date TEXT NOT NULL, available_date TEXT NOT NULL, "

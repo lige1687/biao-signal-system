@@ -143,20 +143,21 @@ def test_2_multiple_dual_ma_confirms_only_last_active() -> None:
 def test_3_top_plus_black_ended_does_not_resurrect_old_start() -> None:
     """3. Top+Black 结束后旧 start 不能复活。"""
     rows: list[dict[str, float]] = []
-    for i in range(80):
+    for _ in range(80):
         rows.append(
             {"open": 100.0, "high": 100.5, "low": 99.5, "close": 100.0,
              "volume": 1_000_000}
         )
     # 黑段
-    for i in range(80, 100):
+    for _ in range(80, 100):
         rows.append(
             {"open": 100.0, "high": 100.5, "low": 95.0, "close": 95.5,
              "volume": 1_000_000}
         )
     # 构造一个 fake_top
-    from lei_signal.domain.types import StructureInstance, StructureStatus
     from datetime import date
+
+    from lei_signal.domain.types import StructureInstance, StructureStatus
     confirmed = date(2023, 6, 21)
     top = StructureInstance(
         structure_id="top-fake", symbol="T", structure_type="top_structure",
@@ -164,9 +165,10 @@ def test_3_top_plus_black_ended_does_not_resurrect_old_start() -> None:
         confirmed_date=confirmed, status=StructureStatus.INVALIDATED,
         invalidated_date=confirmed, invalidated_reason="top_warning_invalidated_by_new_high",
     )
-    result = analyze_bars("T", pd.DataFrame(rows, index=pd.bdate_range("2023-01-02", periods=len(rows)))[
+    bars = pd.DataFrame(rows, index=pd.bdate_range("2023-01-02", periods=len(rows)))[
         ["open", "high", "low", "close", "volume"]
-    ], build_history=True)
+    ]
+    result = analyze_bars("T", bars, build_history=True)
     # Top+Black 进入事件（如果有）应只在有 top 的区间内
     top_black_events = [
         e for e in result.events
@@ -180,17 +182,17 @@ def test_3_top_plus_black_ended_does_not_resurrect_old_start() -> None:
 def test_4_ended_events_never_active() -> None:
     """4. 所有 *_ended 事件永远不能 active。"""
     rows: list[dict[str, float]] = []
-    for i in range(80):
+    for _ in range(80):
         rows.append(
             {"open": 100.0, "high": 100.5, "low": 99.5, "close": 100.0,
              "volume": 1_000_000}
         )
-    for i in range(80, 100):
+    for _ in range(80, 100):
         rows.append(
             {"open": 100.0, "high": 100.5, "low": 95.0, "close": 95.5,
              "volume": 1_000_000}
         )
-    for i in range(100, 120):
+    for _ in range(100, 120):
         rows.append(
             {"open": 100.0, "high": 100.5, "low": 99.5, "close": 100.0,
              "volume": 1_000_000}
@@ -231,25 +233,25 @@ def test_5_volume_reversal_pivot_events_not_persistently_active() -> None:
 def test_6_state_reentry_creates_new_instance_not_resurrects_old() -> None:
     """6. 同一状态重新进入产生新的实例，而不是复活旧实例。"""
     rows: list[dict[str, float]] = []
-    for i in range(50):
+    for _ in range(50):
         rows.append(
             {"open": 100.0, "high": 100.5, "low": 99.5, "close": 100.0,
              "volume": 1_000_000}
         )
     # 绿段 1
-    for i in range(50, 60):
+    for _ in range(50, 60):
         rows.append(
             {"open": 100.0, "high": 105.0, "low": 100.0, "close": 104.5,
              "volume": 1_000_000}
         )
     # 黑段
-    for i in range(60, 70):
+    for _ in range(60, 70):
         rows.append(
             {"open": 100.0, "high": 100.5, "low": 95.0, "close": 95.5,
              "volume": 1_000_000}
         )
     # 绿段 2
-    for i in range(70, 100):
+    for _ in range(70, 100):
         rows.append(
             {"open": 100.0, "high": 110.0, "low": 100.0, "close": 109.5,
              "volume": 1_000_000}

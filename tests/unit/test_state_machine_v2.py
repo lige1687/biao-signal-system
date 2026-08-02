@@ -41,7 +41,8 @@ def test_state_machine_carries_opportunity_and_risk_independently() -> None:
     rows.append({"open": 38.5, "high": 43.0, "low": 38.3, "close": 42.8, "volume": 1_900_000})
     rows.append({"open": 41.0, "high": 44.0, "low": 40.5, "close": 43.5, "volume": 1_500_000})
     rows.append({"open": 42.5, "high": 45.0, "low": 42.0, "close": 44.5, "volume": 1_400_000})
-    rows.append({"open": 43.0, "high": 44.0, "low": 41.5, "close": 41.8, "volume": 1_300_000})  # 转黑
+    # 转黑
+    rows.append({"open": 43.0, "high": 44.0, "low": 41.5, "close": 41.8, "volume": 1_300_000})
     bars = _bars(rows)
     frame = compute_long_trend(classify_colors(compute_features(bars)))
     structures = detect_reversal_bottoms(bars, "TEST", detect_reversal_events(bars, "TEST"))
@@ -204,8 +205,8 @@ def test_ema_reclaim_c_touch_ends_only_bound_structure() -> None:
       - B 仍然有效
       - 验证：转强 active 字典中 A=False, B=True
     """
+
     from lei_signal.compose.pipeline import analyze_bars
-    from datetime import date as date_t
     rows: list[dict[str, float]] = []
     # 第一段：底部 A — 长跌 + 阳线反包 + EMA reclaim + 触及 C
     for i in range(60):
