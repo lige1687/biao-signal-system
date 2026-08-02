@@ -749,32 +749,59 @@ def _render_current(result: AnalysisResult) -> None:
 
     st.subheader(f"{result.display_name}（{result.symbol}）")
 
-    # 数据状态提示（保留——用户需要知道数据可不可信）
+    # 数据状态：一行 caption（关键信息）+ 折叠的"展开数据说明"
     report = result.price_data.report if result.price_data else None
+    cache_warning = getattr(result, "cache_fallback_used", False)
+    suspicious_count = len(result.suspicious_gaps) if result.suspicious_gaps else 0
+
     if report is not None:
         span = (
             f"{report.first_date.date()} 至 {report.last_date.date()}"
             if report.first_date is not None and report.last_date is not None
             else "日期范围不可用"
         )
-        st.caption(
-            f"数据源 {report.provider} · "
-            f"{'复权' if report.adjusted else '⚠️未复权'}日线 · "
-            f"{report.rows} 根 · {span}"
-        )
-        for warning in report.warnings:
-            st.warning(f"数据提示：{warning}")
-    if result.suspicious_gaps:
-        st.warning(
-            f"检测到 {len(result.suspicious_gaps)} 个疑似未复权跳空日，"
-            f"最近一次 {result.suspicious_gaps[-1].date()}"
-        )
-    if getattr(result, "cache_fallback_used", False):
+        # 主行：数据源 + 复权状态 + 根数 + 日期范围
+        # ETF 等不分红品种：未复权也没影响，不强调警告
+        if report.adjusted:
+            quality_line = f"数据源 {report.provider} · 复权日线 · {report.rows} 根 · {span}"
+        else:
+            # 对 ETF/指数/分红少的品种，⚠️ 改成"无复权"轻量提示
+            adjust_note = (
+                "无复权（ETF/指数可接受）"
+                if report.provider == "tencent"
+                else "无复权（个股建议补全）"
+            )
+            quality_line = (
+                f"数据源 {report.provider} · {adjust_note} · "
+                f"{report.rows} 根 · {span}"
+            )
+        st.caption(quality_line)
+
+    # 重要警告：缓存失效（必须显示，影响信号时效性）
+    if cache_warning:
         age_hours = (result.cache_age_seconds or 0) / 3600.0
         st.warning(
-            f"网络行情获取失败，**正在使用本地缓存**"
-            f"（{age_hours:.1f} 小时前），可能产生过时信号。"
+            f"⚠️ **网络行情获取失败，正在使用本地缓存**（{age_hours:.1f} 小时前）。"
+            f"可能产生过时信号。"
         )
+
+    # 次要提示（折叠进 expander，默认收起不污染首屏）
+    has_warnings = report is not None and report.warnings
+    has_suspicious = suspicious_count > 0
+    if has_warnings or has_suspicious:
+        with st.expander("📋 数据细节（复权提示 / 疑似跳空）", expanded=False):
+            if report is not None and report.warnings:
+                for warning in report.warnings:
+                    st.caption(f"• {warning}")
+            if has_suspicious:
+                st.caption(
+                    f"• 检测到 {suspicious_count} 个疑似未复权跳空日，"
+                    f"最近一次 {result.suspicious_gaps[-1].date()}"
+                )
+            st.caption(
+                "💡 ETF/指数品种一般无分红，复权与否对形态判断影响很小；"
+                "个股才需要严格复权。"
+            )
 
     # 信息架构重排：K线优先，今日判断合并摘要（去掉重复）
     # 1. K线主图（最大块，占主体）
