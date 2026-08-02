@@ -296,12 +296,166 @@ def _render_data_unavailable(symbol: str, error_msg: str, build_history: bool) -
     )
 
 
+# 专业看盘软件 CSS（基于 Impeccable 设计原则）
+# 紧凑、高信息密度、等宽数字、A股涨红跌绿、细线边框
+_PRO_CSS = """
+<style>
+/* ── 全局 ── */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
+
+.stApp {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #fafbfc;
+}
+.stApp, .stApp p, .stApp span, .stApp li {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* ── 数字等宽 ── */
+.stMetric, [data-testid="stMetricValue"] {
+    font-family: "JetBrains Mono", "SF Mono", "Menlo", monospace !important;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── 页面标题 ── */
+h1, .stTitle {
+    font-size: 18px !important;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #1a1a2e;
+    padding-bottom: 0;
+}
+.stApp .stCaption {
+    font-size: 11px !important;
+    color: #8899aa;
+}
+
+/* ── 布局间距 ── */
+.stApp .block-container {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    max-width: 100%;
+}
+.stApp section[data-testid="stVerticalBlock"] {
+    gap: 0.4rem;
+}
+
+/* ── 卡片/容器 ── */
+.stApp div[data-testid="stVerticalBlockBorderWrapper"] {
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 6px !important;
+    background: #fff;
+    box-shadow: none !important;
+    padding: 10px 14px !important;
+}
+
+/* ── 指标卡 ── */
+.stApp [data-testid="stMetric"] {
+    background: #f8fafc;
+    border: 1px solid #e8edf3;
+    border-radius: 4px;
+    padding: 6px 10px !important;
+}
+.stApp [data-testid="stMetricLabel"] {
+    font-size: 10px !important;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.stApp [data-testid="stMetricValue"] {
+    font-size: 15px !important;
+    font-weight: 600;
+    color: #1a1a2e;
+}
+
+/* ── 按钮简化 ── */
+.stApp button[kind="primary"] {
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 4px;
+}
+
+/* ── Tab 紧凑 ── */
+.stApp .stTabs [data-baseweb="tab-list"] {
+    gap: 2px;
+}
+.stApp .stTabs [data-baseweb="tab"] {
+    padding: 4px 12px;
+    font-size: 13px;
+}
+
+/* ── Expander 紧凑 ── */
+.stApp details {
+    border: 1px solid #e8edf3 !important;
+    border-radius: 4px !important;
+}
+.stApp details summary {
+    font-size: 12px !important;
+    padding: 4px 10px !important;
+}
+
+/* ── DataFrame 紧凑 ── */
+.stApp .stDataFrame {
+    font-size: 12px;
+}
+.stApp table {
+    font-size: 12px;
+}
+
+/* ── 输入框 ── */
+.stApp input[type="text"] {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+/* ── 涨跌色 ── */
+.text-up { color: #e33d47; font-weight: 600; }
+.text-down { color: #0b9b64; font-weight: 600; }
+
+/* ── 状态徽章 ── */
+.badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+}
+.badge-green { background: #0b9b64; }
+.badge-gray { background: #8c96a8; }
+.badge-black { background: #1f2937; }
+.badge-red { background: #e33d47; }
+.badge-amber { background: #d89216; }
+
+/* ── 分隔线 ── */
+.stApp hr {
+    margin: 0.4rem 0;
+    border-color: #e8edf3;
+}
+
+/* ── ECharts 容器 ── */
+.stApp iframe {
+    border: 1px solid #e8edf3;
+    border-radius: 6px;
+}
+
+/* ── 右侧栏固定宽度感 ── */
+.stApp [data-testid="stHorizontalBlock"] > div:nth-child(2) {
+    min-width: 280px;
+}
+</style>
+"""
+
+
 def render() -> None:
     st.set_page_config(
         page_title="LEI 技术信号研究系统",
         layout="wide",
-        initial_sidebar_state="collapsed",  # 收起左侧默认 sidebar
+        initial_sidebar_state="collapsed",
     )
+    st.markdown(_PRO_CSS, unsafe_allow_html=True)
 
     # 右侧输入 + 信号术语速查（替代原左侧 sidebar）
     # 用 right_sidebar 占位：Streamlit 无原生 right sidebar，用 border container 模拟。
@@ -730,7 +884,7 @@ def _compute_multi_period_state(frame: pd.DataFrame) -> dict[str, dict[str, obje
 def _render_summary_bar(result: AnalysisResult) -> None:
     """在图表上方渲染摘要栏：标题 + 关键指标 + 多周期共振。
 
-    风格参考用户旧看板（沪深300ETF博时 截图样式）。
+    专业看盘风格：等宽数字、紧凑卡片、状态徽章。
     """
     a = result.assessment
     frame = result.frame
@@ -738,44 +892,42 @@ def _render_summary_bar(result: AnalysisResult) -> None:
     last_close = float(latest["close"])
     prev_close = float(frame["close"].iloc[-2]) if len(frame) > 1 else last_close
     change_pct = (last_close / prev_close - 1.0) * 100.0 if prev_close > 0 else 0.0
-    up_color = "#e33d47" if change_pct >= 0 else "#0b9b64"
+    up_class = "text-up" if change_pct >= 0 else "text-down"
+    up_arrow = "▲" if change_pct >= 0 else "▼"
 
     data_status = ""
     if result.price_data and result.price_data.report:
         rep = result.price_data.report
-        adj = "复权" if rep.adjusted else "未复权"
-        data_status = f"{rep.provider} · {adj}日线 · {rep.rows} 根"
+        adj = "复权" if rep.adjusted else "⚠️未复权"
+        data_status = f"{rep.provider} · {adj} · {rep.rows}根"
 
     daily_state = str(latest.get("signal_color", "unknown"))
-    daily_state_cn = COLOR_CN.get(daily_state, "未知")
-    daily_state_color = {
-        "green": "#0b9b64",
-        "gray": "#8c96a8",
-        "black": "#1f2937",
-        "unknown": "#c9a227",
-    }.get(daily_state, "#888")
+    state_badge_class = {
+        "green": "badge-green", "gray": "badge-gray",
+        "black": "badge-black", "unknown": "badge-amber",
+    }.get(daily_state, "badge-gray")
+    state_cn = COLOR_CN.get(daily_state, "未知")
 
-    # 标题行
-    title_cols = st.columns([3, 4])
-    with title_cols[0]:
-        st.markdown(
-            f"### {result.display_name}（{result.symbol}） · "
-            f"<span style='color:{up_color}'>{last_close:.4f} "
-            f"{change_pct:+.2f}%</span>",
-            unsafe_allow_html=True,
-        )
-        if data_status:
-            st.caption(data_status)
-    with title_cols[1]:
-        st.markdown(
-            f"<span style='background:{daily_state_color};color:#fff;"
-            f"padding:2px 8px;border-radius:4px;font-size:12px'>● {daily_state_cn}</span>",
-            unsafe_allow_html=True,
-        )
-        a_date = a.as_of.strftime("%Y-%m-%d")
-        st.caption(f"数据日期 {a_date}")
+    # 标题行——专业终端风格：名称+代码+价格+涨跌+状态徽章
+    st.markdown(
+        f"<div style='display:flex;align-items:baseline;gap:12px;"
+        f"margin-bottom:6px'>"
+        f"<span style='font-size:18px;font-weight:700;color:#1a1a2e'>"
+        f"{result.display_name}</span>"
+        f"<span style='font-size:13px;color:#8899aa'>{result.symbol}</span>"
+        f"<span style='font-size:20px;font-weight:700;font-family:JetBrains Mono,monospace'"
+        f" class='{up_class}'>{last_close:.4f}</span>"
+        f"<span class='{up_class}' style='font-size:14px;font-weight:600'>"
+        f"{up_arrow} {change_pct:+.2f}%</span>"
+        f"<span class='badge {state_badge_class}'>{state_cn}</span>"
+        f"</div>"
+        f"<div style='font-size:11px;color:#8899aa;margin-bottom:8px'>"
+        f"{data_status} · 数据日期 {a.as_of.strftime('%Y-%m-%d')}"
+        f"</div>",
+        unsafe_allow_html=True,
+    )
 
-    # 关键指标行
+    # 关键指标行——紧凑卡片
     ema20 = float(latest["ema20"]) if pd.notna(latest.get("ema20")) else None
     sma20 = float(latest["sma20"]) if pd.notna(latest.get("sma20")) else None
     ref20 = float(latest["close_lag20"]) if pd.notna(latest.get("close_lag20")) else None
@@ -785,13 +937,12 @@ def _render_summary_bar(result: AnalysisResult) -> None:
     kpi = st.columns(6)
     kpi[0].metric("EMA20", f"{ema20:.4f}" if ema20 else "—")
     kpi[1].metric("SMA20", f"{sma20:.4f}" if sma20 else "—")
-    kpi[2].metric("20周期抵扣价", f"{ref20:.4f}" if ref20 else "—")
-    kpi[3].metric("成交量", f"{volume/1e4:.2f}万")
-    kpi[4].metric("量比（较20均量）", f"{vol_ratio:.2f}x" if vol_ratio else "—")
-    # 换手率：data 里有就显示，没有就—
+    kpi[2].metric("抵扣价", f"{ref20:.4f}" if ref20 else "—")
+    kpi[3].metric("成交量", f"{volume/1e4:.1f}万")
+    kpi[4].metric("量比", f"{vol_ratio:.2f}x" if vol_ratio else "—")
     kpi[5].metric("换手率", "—")
 
-    # 多周期共振行
+    # 多周期共振——徽章式
     mp = _compute_multi_period_state(frame)
     mp_cols = st.columns([1, 1, 1, 3])
     for col, period in zip(mp_cols[:3], ("日", "周", "月"), strict=True):
@@ -801,38 +952,37 @@ def _render_summary_bar(result: AnalysisResult) -> None:
         state_cn_label = {
             "green": "绿", "gray": "灰", "black": "黑", "unknown": "未知",
         }.get(state, "未知")
-        state_color = {
-            "green": "#0b9b64",
-            "gray": "#8c96a8",
-            "black": "#1f2937",
-            "unknown": "#c9a227",
-        }.get(state, "#888")
+        badge_cls = {
+            "green": "badge-green", "gray": "badge-gray",
+            "black": "badge-black", "unknown": "badge-amber",
+        }.get(state, "badge-gray")
         pct_str = f"{pct:+.2f}%" if isinstance(pct, (int, float)) else "—"
         col.markdown(
-            f"{period}线 "
-            f"<span style='background:{state_color};color:#fff;"
-            f"padding:2px 8px;border-radius:4px;font-size:12px'>"
-            f"{state_cn_label} {pct_str}</span>",
+            f"<span style='font-size:11px;color:#64748b'>{period}线</span> "
+            f"<span class='badge {badge_cls}'>{state_cn_label} {pct_str}</span>",
             unsafe_allow_html=True,
         )
 
-    # 共振判定
     states = [mp.get(p, {}).get("state") for p in ("日", "周", "月")]
     if all(s == "green" for s in states):
         resonance = "三周期共绿"
     elif all(s == "black" for s in states):
         resonance = "三周期共黑"
     elif "green" in states and "black" in states:
-        resonance = "分化（多空周期并存，方向未明）"
+        resonance = "多空分化"
     elif states.count("green") >= 2:
         resonance = "偏多"
     elif states.count("black") >= 2:
         resonance = "偏空"
     else:
         resonance = "震荡"
+    res_cls = {
+        "三周期共绿": "badge-green", "三周期共黑": "badge-black",
+        "多空分化": "badge-amber", "偏多": "badge-green",
+        "偏空": "badge-black", "震荡": "badge-gray",
+    }.get(resonance, "badge-gray")
     mp_cols[3].markdown(
-        f"<span style='background:#eef1f5;color:#33415c;padding:4px 12px;"
-        f"border-radius:6px;font-size:12px'>{resonance}</span>",
+        f"<span class='badge {res_cls}' style='font-size:12px'>{resonance}</span>",
         unsafe_allow_html=True,
     )
 
