@@ -12,6 +12,7 @@ from datetime import UTC, date
 import pandas as pd
 
 from lei_signal.compose.interpreter import build_assessment
+from lei_signal.data.calendar import TradingCalendar
 from lei_signal.data.point_in_time import aggregate_weekly
 from lei_signal.data.providers import PriceData, PriceProvider, default_provider
 from lei_signal.data.validation import DataUnavailableError, detect_unadjusted_gaps
@@ -126,6 +127,7 @@ def analyze(
     cache_max_age_seconds: float = 86400.0,
     sqlite_path: str | None = None,
     run_id: str | None = None,
+    calendar: TradingCalendar | None = None,
 ) -> AnalysisResult:
     """完整分析（修复 8：行情成功获取后写入 Parquet 缓存 + SQLite 持久化）。
 
@@ -138,6 +140,14 @@ def analyze(
     网络失败时（provider.fetch 抛 DataUnavailableError）：
       - 如果存在近期缓存且未过期 → 读取缓存并显示陈旧警告。
       - 否则继续抛出原异常，提示用户重试或导入本地数据。
+
+    参数
+    ----
+    calendar:
+        交易所日历（Round 3 修复 D5）。透传给 ``analyze_bars`` →
+        ``aggregate_weekly``，使节假日短周能在其最后一个交易日收盘后
+        立即形成完整周线。留空时使用 ``DEFAULT_TRADING_CALENDAR``
+        （周一至周五、无节假日表），保守且永不提前完成周线。
     """
     from datetime import datetime
 
@@ -215,6 +225,7 @@ def analyze(
         display_name=price_data.display_name,
         price_data=price_data,
         build_history=build_history,
+        calendar=calendar,
     )
     # 标记是否用了缓存兜底
     if cache_fallback_used:
@@ -271,14 +282,23 @@ def analyze_bars(
     display_name: str | None = None,
     price_data: PriceData | None = None,
     build_history: bool = False,
+    calendar: TradingCalendar | None = None,
 ) -> AnalysisResult:
-    """对已获取的行情执行完整分析。便于测试与离线复算。"""
+    """对已获取的行情执行完整分析。便于测试与离线复算。
+
+    参数
+    ----
+    calendar:
+        交易所日历（Round 3 修复 D5）。透传给 ``aggregate_weekly``，
+        与底层测试使用同一注入口径——不允许「底层能注入、生产注不进」。
+        留空时 ``aggregate_weekly`` 使用 ``DEFAULT_TRADING_CALENDAR``。
+    """
     if len(bars) < MIN_BARS:
         raise DataUnavailableError(f"{symbol} 只有 {len(bars)} 根日K线，至少需要 {MIN_BARS} 根")
 
     # 特征与逐日状态
     frame = compute_volume_labels(compute_long_trend(classify_colors(compute_features(bars))))
-    weekly_trend = compute_weekly_long_trend(aggregate_weekly(bars))
+    weekly_trend = compute_weekly_long_trend(aggregate_weekly(bars, calendar=calendar))
     pivots = confirmed_pivots(frame)
 
     # 原子事件

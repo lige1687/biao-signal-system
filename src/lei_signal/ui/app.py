@@ -15,6 +15,7 @@ import streamlit as st
 
 from lei_signal.compose.pipeline import AnalysisResult, analyze
 from lei_signal.data.cache import DEFAULT_CACHE_DIR
+from lei_signal.data.calendar import DEFAULT_TRADING_CALENDAR
 from lei_signal.data.validation import DataUnavailableError
 from lei_signal.domain.types import (
     COLOR_CN,
@@ -45,6 +46,18 @@ DISCLAIMER = (
 _CACHE_ROOT = os.environ.get("LEI_CACHE_ROOT", str(DEFAULT_CACHE_DIR))
 _SQLITE_PATH = os.environ.get(
     "LEI_SQLITE_PATH", str(DEFAULT_CACHE_DIR.parent / "lab.db")
+)
+
+# Round 3 修复 D5：界面两条分析路径（普通行情 / CSV-Parquet 上传）必须使用
+# **同一个**交易日历常量，否则同一份数据在两个入口会得到不同的周线完成时点。
+# 默认仍是保守的 WeekdayCalendar()（周一至周五、无节假日表）：内置一份手写
+# 节假日表一旦写错，会把「本周最后交易日」判早，让周线在真正收盘前就被判完成
+# ——那是错误结论，比「晚一天」严重得多。界面会明示当前口径。
+_TRADING_CALENDAR = DEFAULT_TRADING_CALENDAR
+_CALENDAR_NOTE = (
+    "周线完成口径：默认交易日历只认周一至周五，**不含节假日表**。"
+    "逢 A 股节假日短周，周线完成判定会晚于实际最后交易日收盘（保守方向，"
+    "不会提前完成）。接入真实交易所休市日历后可消除该延迟。"
 )
 
 
@@ -94,7 +107,8 @@ def _load(symbol: str, build_history: bool) -> AnalysisResult:
             bars=bars, report=report, info=info,
         )
         return analyze_bars(symbol, bars, display_name=price.display_name,
-                            price_data=price, build_history=build_history)
+                            price_data=price, build_history=build_history,
+                            calendar=_TRADING_CALENDAR)
     # 普通 UI 路径：行情成功获取后写入 Parquet 缓存，并把事件/结构/评估
     # 持久化到 SQLite（analyze 内部幂等写入、错误精确抑制）。
     return analyze(
@@ -103,6 +117,7 @@ def _load(symbol: str, build_history: bool) -> AnalysisResult:
         cache_root=_CACHE_ROOT,
         sqlite_path=_SQLITE_PATH,
         run_id=f"ui-{symbol}",
+        calendar=_TRADING_CALENDAR,
     )
 
 
@@ -165,6 +180,7 @@ def _analyze_upload(upload_file, symbol: str, build_history: bool) -> AnalysisRe
         cache_root=_CACHE_ROOT,
         sqlite_path=_SQLITE_PATH,
         run_id=f"upload-{info.symbol}",
+        calendar=_TRADING_CALENDAR,
     )
 
 
@@ -205,6 +221,7 @@ def render() -> None:
         st.caption(
             f"本地持久化已接入：缓存 `{_CACHE_ROOT}` · 数据库 `{_SQLITE_PATH}`"
         )
+        st.caption(_CALENDAR_NOTE)
 
     if not run and "analysis" not in st.session_state:
         st.info("在左侧输入代码后点击「分析」。首次加载会自动下载复权日线行情。")
