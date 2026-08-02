@@ -5,7 +5,7 @@ Design spec sections 7, 8, 9, 11.
 
 from __future__ import annotations
 
-from datetime import date, datetime, timezone
+from datetime import date
 
 import pandas as pd
 import pytest
@@ -24,7 +24,6 @@ from lei_signal.market_context.types import (
     ContextSourceKind,
     MarketId,
 )
-
 
 # ── Fixture helpers ───────────────────────────────────────────────────
 

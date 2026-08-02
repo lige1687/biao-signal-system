@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 
 import numpy as np
 import pandas as pd
-import pytest
 
 from lei_signal.market_context.breadth import BreadthConfig
 from lei_signal.market_context.pipeline import MarketContextRequest, analyze_market_context
@@ -56,7 +55,7 @@ class TestPipeline:
             source_version="v1",
             source_kind=ContextSourceKind.FORMAL,
             universe_version="test_hash",
-            retrieved_at=datetime.now(timezone.utc),
+            retrieved_at=datetime.now(UTC),
         )
 
         np.random.seed(42)
@@ -112,7 +111,7 @@ class TestPipeline:
             source_version="v1",
             source_kind=ContextSourceKind.FORMAL,
             universe_version="test_hash",
-            retrieved_at=datetime.now(timezone.utc),
+            retrieved_at=datetime.now(UTC),
         )
 
         # No bars provided — should still produce results

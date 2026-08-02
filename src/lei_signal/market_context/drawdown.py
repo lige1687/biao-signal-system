@@ -59,16 +59,10 @@ def compute_drawdown(
     ath_close = float(closes.max())
     current_close = float(closes.iloc[-1])
 
-    if ath_close > 0:
-        drawdown = current_close / ath_close - 1.0
-    else:
-        drawdown = 0.0
+    drawdown = current_close / ath_close - 1.0 if ath_close > 0 else 0.0
 
     ath_date = ath_idx.date() if hasattr(ath_idx, 'date') else as_of
-    if hasattr(as_of, 'date'):
-        as_of_date = as_of.date()
-    else:
-        as_of_date = as_of
+    as_of_date = as_of.date() if hasattr(as_of, 'date') else as_of
 
     return DrawdownState(
         market_id=market_id,

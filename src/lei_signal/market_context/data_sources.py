@@ -48,10 +48,7 @@ class LocalMarketBarsProvider:
 
     def _load_frame(self, path: Path) -> pd.DataFrame:
         """Load OHLCV frame and normalize."""
-        if path.suffix == ".parquet":
-            df = pd.read_parquet(path)
-        else:
-            df = pd.read_csv(path)
+        df = pd.read_parquet(path) if path.suffix == ".parquet" else pd.read_csv(path)
 
         # Ensure date column is datetime
         if "date" in df.columns and not pd.api.types.is_datetime64_any_dtype(df["date"]):

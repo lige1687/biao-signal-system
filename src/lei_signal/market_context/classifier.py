@@ -9,15 +9,11 @@ Design spec sections 7, 8, 11.
 
 from __future__ import annotations
 
-from datetime import date
-
 import pandas as pd
 
 from lei_signal.market_context.types import (
     BreadthDirection,
     BreadthSnapshot,
-    ContextDataStatus,
-    ContextSourceKind,
     ContextSummary,
     HeatState,
     LongRegime,
@@ -25,7 +21,6 @@ from lei_signal.market_context.types import (
     MarketContextSnapshot,
     MarketId,
 )
-
 
 # ── Threshold constants ───────────────────────────────────────────────
 
@@ -297,7 +292,7 @@ def classify_breadth(
     if long_regime == LongRegime.BEAR:
         conflicts.append("Breadth200仍低于50%，长期市场底色偏熊")
     elif long_regime == LongRegime.BULL:
-        reasons.append(f"Breadth200高于50%，长期市场底色为牛")
+        reasons.append("Breadth200高于50%，长期市场底色为牛")
 
     if heat_state in (HeatState.EXTREME_COLD, HeatState.COLD):
         conflicts.append(f"市场热度处于{heat_state.value}区间")

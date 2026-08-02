@@ -10,14 +10,13 @@ are reported explicitly.
 
 from __future__ import annotations
 
-from datetime import date, datetime, timedelta, timezone
+from collections.abc import Sequence
+from datetime import UTC, date, datetime
 from pathlib import Path
-from typing import Sequence
 
 import pandas as pd
 
 from lei_signal.market_context.types import SentimentLabel, SentimentObservation
-
 
 # ── Required columns ──────────────────────────────────────────────────
 
@@ -159,12 +158,12 @@ def latest_available_sentiment(
     """
     # Ensure decision_at is timezone-aware
     if decision_at.tzinfo is None:
-        decision_at = decision_at.replace(tzinfo=timezone.utc)
+        decision_at = decision_at.replace(tzinfo=UTC)
 
     visible: list[SentimentObservation] = []
     for obs in observations:
         if obs.available_at.tzinfo is None:
-            obs_avail = obs.available_at.replace(tzinfo=timezone.utc)
+            obs_avail = obs.available_at.replace(tzinfo=UTC)
         else:
             obs_avail = obs.available_at
 
@@ -257,7 +256,7 @@ def _is_current_eligible(
     if "public_delayed" in status:
         return False
 
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     age = now - available_at
     return age.days <= max_delay_days
 

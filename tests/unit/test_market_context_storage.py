@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import sqlite3
 import tempfile
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 
 from lei_signal.market_context.storage import (
     write_market_context,
@@ -128,7 +128,7 @@ class TestWriteSentiment:
             obs = SentimentObservation(
                 series_id="NAAIM",
                 survey_week=date(2024, 6, 10),
-                available_at=datetime(2024, 6, 13, 7, 0, tzinfo=timezone.utc),
+                available_at=datetime(2024, 6, 13, 7, 0, tzinfo=UTC),
                 source="official",
                 license_status="licensed",
                 publication_delay_days=3,

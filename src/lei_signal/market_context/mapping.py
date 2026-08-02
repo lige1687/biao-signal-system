@@ -137,14 +137,19 @@ def map_reference_markets(
         if us_memberships:
             # Priority: SP500 > NASDAQ_100 > RUSSELL_2000
             priority = [MarketId.SP500, MarketId.NASDAQ_100, MarketId.RUSSELL_2000]
-            primary = None
+            primary: MarketId | None = None
             for p in priority:
                 if p in us_memberships:
                     primary = p
                     break
 
             if primary is None:
-                primary = next(iter(sorted(us_memberships, key=lambda m: list(MarketId).index(m))))
+                # All members are non-priority; pick the first by enum order
+                sorted_mems = sorted(us_memberships, key=lambda m: list(MarketId).index(m))
+                primary = sorted_mems[0]
+
+            # mypy: primary is guaranteed to be MarketId at this point
+            assert primary is not None
 
             secondary = tuple(
                 sorted(

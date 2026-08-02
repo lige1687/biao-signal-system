@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from lei_signal.market_context.mapping import MarketMapping, map_reference_markets
+from lei_signal.market_context.mapping import map_reference_markets
 from lei_signal.market_context.types import MarketId
 
 

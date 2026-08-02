@@ -11,11 +11,10 @@ and overlap validation.
 from __future__ import annotations
 
 import hashlib
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Protocol
 
-import numpy as np
 import pandas as pd
 
 from lei_signal.market_context.types import ContextSourceKind, MarketId, UniverseSnapshot
@@ -104,10 +103,7 @@ class LocalUniverseProvider:
 
     def _load(self, path: Path) -> pd.DataFrame:
         """Load and validate the membership file."""
-        if path.suffix == ".parquet":
-            df = pd.read_parquet(path)
-        else:
-            df = pd.read_csv(path)
+        df = pd.read_parquet(path) if path.suffix == ".parquet" else pd.read_csv(path)
 
         # Validate required columns
         missing = _REQUIRED_COLS - set(df.columns)
@@ -134,7 +130,7 @@ class LocalUniverseProvider:
         """For each symbol, verify no overlapping intervals."""
         for symbol, group in active.groupby("symbol"):
             intervals = sorted(
-                zip(group["effective_from"], group["effective_until"]),
+                zip(group["effective_from"], group["effective_until"], strict=False),
                 key=lambda x: x[0],
             )
             for i in range(len(intervals) - 1):
@@ -199,7 +195,7 @@ class LocalUniverseProvider:
             source=info["source"],
             source_version=info["source_version"],
             source_kind=info["source_kind"],
-            retrieved_at=datetime.now(timezone.utc),
+            retrieved_at=datetime.now(UTC),
             universe_version=universe_version,
         )
 

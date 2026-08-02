@@ -16,16 +16,14 @@ import pandas as pd
 
 from lei_signal.market_context.breadth import BreadthConfig, compute_breadth_snapshot
 from lei_signal.market_context.classifier import classify_breadth
-from lei_signal.market_context.data_sources import BarsResult
 from lei_signal.market_context.drawdown import compute_drawdown
-from lei_signal.market_context.mapping import MarketMapping, map_reference_markets
+from lei_signal.market_context.mapping import map_reference_markets
 from lei_signal.market_context.sentiment import SentimentObservation, latest_available_sentiment
 from lei_signal.market_context.types import (
     ContextDataStatus,
     ContextSummary,
     MarketContextSnapshot,
     MarketId,
-    SentimentAlignment,
     SentimentLabel,
     UniverseSnapshot,
 )
@@ -158,7 +156,7 @@ def _analyze_single_market(
             pass  # drawdown is optional; proceed without it
 
     # 3. Sentiment (only for US markets)
-    if market_id in {MarketId.SP500, MarketId.NASDAQ_100, MarketId.RUSSELL_200}:
+    if market_id in {MarketId.SP500, MarketId.NASDAQ_100, MarketId.RUSSELL_2000}:
         naaim_obs = latest_available_sentiment(
             [o for o in request.sentiment_observations if o.series_id == "NAAIM"],
             pd.Timestamp(request.as_of).tz_localize("UTC"),

@@ -10,13 +10,8 @@ from lei_signal.market_context.types import (
     ContextDataStatus,
     ContextSourceKind,
     ContextSummary,
-    DrawdownState,
-    HeatState,
-    LongRegime,
-    MarketContextEvent,
     MarketContextSnapshot,
     MarketId,
-    SentimentObservation,
 )
 
 

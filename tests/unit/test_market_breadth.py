@@ -5,9 +5,7 @@ Design spec sections 6, 16.2.
 
 from __future__ import annotations
 
-from datetime import date
-
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 
 import numpy as np
 import pandas as pd
@@ -15,18 +13,14 @@ import pytest
 
 from lei_signal.market_context.breadth import (
     BreadthConfig,
-    build_breadth_history,
     compute_breadth_snapshot,
 )
-from lei_signal.market_context.data_sources import BarsResult
 from lei_signal.market_context.types import (
-    BreadthSnapshot,
     ContextDataStatus,
     ContextSourceKind,
     MarketId,
     UniverseSnapshot,
 )
-
 
 # ── Fixture helpers ───────────────────────────────────────────────────
 
@@ -67,7 +61,7 @@ def _make_universe(symbols: tuple[str, ...]) -> UniverseSnapshot:
         source_version="v1",
         source_kind=ContextSourceKind.FORMAL,
         universe_version="test_hash",
-        retrieved_at=datetime.now(timezone.utc),
+        retrieved_at=datetime.now(UTC),
     )
 
 
@@ -89,7 +83,7 @@ class TestBreadthSnapshot:
         # Generate prices: A, B above MA; C below MA; D has only 55 bars
         np.random.seed(42)
         bars_by_symbol = {}
-        for i, sym in enumerate(symbols):
+        for _i, sym in enumerate(symbols):
             n = 300 if sym != "D.SH" else 55
             trend = np.linspace(100, 200, n) + np.random.randn(n) * 2
             bars_by_symbol[sym] = _make_ohlcv_frame(
@@ -354,7 +348,7 @@ class TestBreadthSnapshot:
             source_version="v1",
             source_kind=ContextSourceKind.RESEARCH_PROXY,
             universe_version="test_hash",
-            retrieved_at=datetime.now(timezone.utc),
+            retrieved_at=datetime.now(UTC),
         )
 
         config = BreadthConfig()

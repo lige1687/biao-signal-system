@@ -6,13 +6,13 @@ Design spec sections 5, 16.1.
 from __future__ import annotations
 
 import tempfile
-from datetime import date, datetime, timezone
+from datetime import date
 from pathlib import Path
 
 import pandas as pd
 import pytest
 
-from lei_signal.market_context.types import ContextSourceKind, MarketId, UniverseSnapshot
+from lei_signal.market_context.types import ContextSourceKind, MarketId
 from lei_signal.market_context.universe import (
     ContextDataUnavailableError,
     LocalUniverseProvider,
@@ -43,7 +43,6 @@ class TestUniverseMembershipProvider:
 
     def test_protocol_is_importable(self) -> None:
         """UniverseMembershipProvider must be a usable protocol."""
-        from lei_signal.market_context.universe import UniverseMembershipProvider
         # Protocol should exist as a type
         assert UniverseMembershipProvider is not None
 
@@ -254,7 +253,6 @@ class TestLocalUniverseProvider:
 
             provider = LocalUniverseProvider(root)
             snap_before = provider.snapshot(MarketId.CSI_300, _dt("2024-03-01"))
-            v_before = snap_before.universe_version
             syms_before = snap_before.symbols
 
             # Now write a file with an additional future row

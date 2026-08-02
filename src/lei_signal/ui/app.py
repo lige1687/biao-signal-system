@@ -25,13 +25,13 @@ from lei_signal.domain.types import (
     Provenance,
     StructureInstance,
 )
+from lei_signal.market_context.mapping import map_reference_markets
 from lei_signal.state.machine import DayState
 from lei_signal.ui.charts import (
     build_price_figure,
     build_stage_history_figure,
     build_volume_profile_figure,
 )
-from lei_signal.market_context.mapping import map_reference_markets
 
 DISCLAIMER = (
     "本系统是技术信号识别、解释与历史有效性研究工具，**不是自动交易系统**。"

@@ -8,9 +8,7 @@ from __future__ import annotations
 
 from dataclasses import fields
 
-import pytest
-
-from lei_signal.market_context.types import MarketContextSnapshot, MarketId
+from lei_signal.market_context.types import MarketContextSnapshot
 
 
 class TestMarketContextIsolation:
@@ -30,9 +28,9 @@ class TestMarketContextIsolation:
         """All market context types must be importable independently of
         Round 3 state machine modules."""
         # Import market context packages — should not import state machine
-        import lei_signal.market_context.types as mct
         import lei_signal.market_context.classifier as mcc
         import lei_signal.market_context.pipeline as mcp
+        import lei_signal.market_context.types as mct
 
         # Verify these modules exist and are usable
         assert mct.ContextSummary is not None

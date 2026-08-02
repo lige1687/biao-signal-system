@@ -7,7 +7,6 @@ from datetime import date
 from pathlib import Path
 
 import pandas as pd
-import pytest
 
 from lei_signal.market_context.data_sources import LocalMarketBarsProvider
 

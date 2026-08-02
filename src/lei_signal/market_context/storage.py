@@ -11,8 +11,8 @@ from __future__ import annotations
 
 import json
 import sqlite3
-from datetime import date, datetime
-from typing import Sequence
+from collections.abc import Sequence
+from datetime import datetime
 
 from lei_signal.market_context.types import (
     MarketContextEvent,

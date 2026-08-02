@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import tempfile
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 from pathlib import Path
 
 import pandas as pd
@@ -16,7 +16,6 @@ from lei_signal.market_context.sentiment import (
     load_aaii_observations,
     load_naaim_observations,
 )
-
 
 # ── NAAIM tests ───────────────────────────────────────────────────────
 
@@ -62,7 +61,7 @@ class TestNAAIM:
             type("SentimentObservation", (), {
                 "series_id": "NAAIM",
                 "survey_week": date(2024, 6, 10),
-                "available_at": datetime(2024, 6, 13, 7, 0, tzinfo=timezone.utc),
+                "available_at": datetime(2024, 6, 13, 7, 0, tzinfo=UTC),
                 "source": "official",
                 "license_status": "licensed",
                 "publication_delay_days": 3,
@@ -78,12 +77,12 @@ class TestNAAIM:
         ]
 
         # Wednesday before release
-        wed = datetime(2024, 6, 12, 16, 0, tzinfo=timezone.utc)
+        wed = datetime(2024, 6, 12, 16, 0, tzinfo=UTC)
         result = latest_available_sentiment(obs_list, wed, max_age_days=14)
         assert result is None
 
         # Thursday after release
-        thu = datetime(2024, 6, 13, 16, 0, tzinfo=timezone.utc)
+        thu = datetime(2024, 6, 13, 16, 0, tzinfo=UTC)
         result = latest_available_sentiment(obs_list, thu, max_age_days=14)
         assert result is not None
         assert result.exposure_index == 80.0
