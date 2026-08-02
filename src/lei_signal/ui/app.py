@@ -28,7 +28,6 @@ from lei_signal.domain.types import (
 from lei_signal.market_context.mapping import map_reference_markets
 from lei_signal.state.machine import DayState
 from lei_signal.ui.charts import (
-    build_price_figure,
     build_stage_history_figure,
     build_volume_profile_figure,
 )
@@ -540,25 +539,24 @@ def _render_event_list(events: list) -> None:
 
 
 def _render_price_chart(result: AnalysisResult) -> None:
-    """渲染主图（K线 + 均线 + 结构 + 成交量），放在页面顶部。
+    """渲染主图（ECharts K线 + 均线 + 抵扣价 + 结构 + 量能），放在页面顶部。
 
-    用户可切换两种 K 线颜色模式：
-    - **红绿模式**：A 股惯例，涨红跌绿，下方小方块显示日级 LEI 颜色。
-    - **绿灰黑模式**：每根 K 线本体按当日 ``signal_color`` 上色，直接
-      把 LEI 三色状态画在价格图上，无需再向下看小方块。
+    使用 ECharts 而非 Plotly——ECharts 的 dataZoom 拖拽/滚轮缩放体验
+    远优于 Plotly，与用户旧看板一致。
 
-    缩放通过图表自带的 rangeslider / 滚轮 / 框选完成，**不再使用左侧 slider**；
-    默认显示最近 60 根。图表本体只画线，所有水平档位的含义由右侧
-    _render_levels_table 列表展示，避免文字叠加遮蔽 K 线。
+    图内显示的 LEI 系统指标：
+    - K线（红绿 or 绿灰黑两种模式）
+    - EMA20 / SMA20 / 20周期抵扣价
+    - 量能四级配色（放量/温和/正常/缩量）
+    - 结构线（B1 + 主底部 C + 活跃顶部颈线）
+    - 关键性波动竖线（颜色转换日）
+    - 状态背景色带（淡色）
     """
-    from lei_signal.ui.charts import ColorMode
-
     a = result.assessment
 
-    # 头部一行：颜色模式 + 提示；缩放交给 plotly。
     controls = st.columns([2, 3])
     with controls[0]:
-        color_mode: ColorMode = st.radio(
+        color_mode = st.radio(
             "K线颜色模式",
             options=["red_green", "lei_color"],
             format_func=lambda key: {
@@ -570,31 +568,23 @@ def _render_price_chart(result: AnalysisResult) -> None:
         )
     with controls[1]:
         st.caption(
-            "💡 图表底部 mini-slider 拖动缩放；框选区域放大；滚轮缩放。"
-            "图表只画线，价格档位见下方表格。"
+            "💡 鼠标拖动底部滑块缩放；滚轮缩放；框选放大。"
+            "图内显示 LEI 全部技术指标和结构标记。"
         )
 
     st.markdown("#### 价格、均线、结构与成交量")
-    window = min(60, len(result.frame))
-    view = result.frame.tail(window)
+    window = min(120, len(result.frame))
 
-    st.plotly_chart(
-        build_price_figure(
-            view,
-            structures=result.structures,
-            b1_price=a.b1_price,
-            profile=result.profile,
-            color_mode=color_mode,
-        ),
-        use_container_width=True,
-        key="price_chart_main",
-        config={
-            "scrollZoom": True,
-            "displaylogo": False,
-            "modeBarButtonsToRemove": ["lasso2d", "select2d"],
-        },
+    from lei_signal.ui.echarts_kline import render_echarts_kline
+
+    render_echarts_kline(
+        result,
+        color_mode=color_mode,
+        window=window,
+        height=680,
     )
 
+    view = result.frame.tail(window)
     _render_levels_table(view, result, a, color_mode)
 
 
