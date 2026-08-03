@@ -589,7 +589,7 @@ def _render_help_tooltip(term_key: str) -> None:
             st.markdown(f"💡 {info['usage']}")
 
 
-def _render_today_judgment(result: AnalysisResult) -> None:
+def _render_today_judgment(result: AnalysisResult, *, narrow: bool = False) -> None:
     """今日判断卡片：整合摘要（去掉重复）。
 
     把原摘要栏的 6 个关键指标 + 多周期共振都并入此卡片，
@@ -713,7 +713,7 @@ def _render_today_judgment(result: AnalysisResult) -> None:
             )
             st.markdown(chips_html, unsafe_allow_html=True)
 
-        # 第三行：关键指标（数字 6 列）
+        # 第三行：关键指标（主区域 6 列，侧边栏 3 列×2 行）
         ema20 = float(latest["ema20"]) if pd.notna(latest.get("ema20")) else None
         sma20 = float(latest["sma20"]) if pd.notna(latest.get("sma20")) else None
         ref20 = float(latest["close_lag20"]) if pd.notna(latest.get("close_lag20")) else None
@@ -724,13 +724,23 @@ def _render_today_judgment(result: AnalysisResult) -> None:
             else None
         )
 
-        kpi = st.columns(6)
-        kpi[0].metric("EMA20", f"{ema20:.4f}" if ema20 else "—")
-        kpi[1].metric("SMA20", f"{sma20:.4f}" if sma20 else "—")
-        kpi[2].metric("抵扣价", f"{ref20:.4f}" if ref20 else "—")
-        kpi[3].metric("成交量", f"{volume/1e4:.1f}万")
-        kpi[4].metric("量比", f"{vol_ratio:.2f}x" if vol_ratio else "—")
-        kpi[5].metric("换手率", "—")
+        if narrow:
+            kpi_r1 = st.columns(3)
+            kpi_r1[0].metric("EMA20", f"{ema20:.4f}" if ema20 else "—")
+            kpi_r1[1].metric("SMA20", f"{sma20:.4f}" if sma20 else "—")
+            kpi_r1[2].metric("抵扣价", f"{ref20:.4f}" if ref20 else "—")
+            kpi_r2 = st.columns(3)
+            kpi_r2[0].metric("成交量", f"{volume/1e4:.1f}万")
+            kpi_r2[1].metric("量比", f"{vol_ratio:.2f}x" if vol_ratio else "—")
+            kpi_r2[2].metric("换手率", "—")
+        else:
+            kpi = st.columns(6)
+            kpi[0].metric("EMA20", f"{ema20:.4f}" if ema20 else "—")
+            kpi[1].metric("SMA20", f"{sma20:.4f}" if sma20 else "—")
+            kpi[2].metric("抵扣价", f"{ref20:.4f}" if ref20 else "—")
+            kpi[3].metric("成交量", f"{volume/1e4:.1f}万")
+            kpi[4].metric("量比", f"{vol_ratio:.2f}x" if vol_ratio else "—")
+            kpi[5].metric("换手率", "—")
 
         # 阶段徽章
         stage_cn = STAGE_CN.get(stage, stage)
@@ -803,14 +813,17 @@ def _render_current(result: AnalysisResult) -> None:
                 "个股才需要严格复权。"
             )
 
-    # 信息架构重排：K线优先，今日判断合并摘要（去掉重复）
-    # 1. K线主图（最大块，占主体）
-    # 2. 今日判断卡片（含关键指标 + 多周期共振 + 操作参考，紧凑）
+    # 信息架构重排：K线优先，今日判断移到侧边栏
+    # 1. 侧边栏：今日判断（趋势/共振/关键价位/指标/操作参考）
+    # 2. K线主图（最大块，占主体）
     # 3. 三色判断依据 + 关键术语速查 + 档位表 + 筹码 + 导出（折叠）
-    _render_price_chart(result)
-    _render_today_judgment(result)
+    with st.sidebar:
+        st.markdown("## 📊 今日判断")
+        _render_today_judgment(result, narrow=True)
 
-    # 4. 三色判断依据（折叠，带ⓘ解释）
+    _render_price_chart(result)
+
+    # 3. 三色判断依据（折叠，带ⓘ解释）
     with st.expander("三色判断依据", expanded=False):
         cols = st.columns([4, 1])
         with cols[0]:
@@ -1033,13 +1046,14 @@ def _render_price_chart(result: AnalysisResult) -> None:
 
     # 显示开关——下方图例栏会同步反映。
     st.markdown("#### 价格、均线、结构与成交量")
-    switches = st.columns(6)
+    switches = st.columns(7)
     show_b1 = switches[0].checkbox("B1 阻力", value=True, key="sw_b1")
     show_bc = switches[1].checkbox("主底部 C", value=True, key="sw_bc")
     show_tn = switches[2].checkbox("顶部颈线", value=True, key="sw_tn")
     show_bot_area = switches[3].checkbox("底部构造", value=True, key="sw_bot_area")
     show_top_area = switches[4].checkbox("顶部构造", value=True, key="sw_top_area")
-    show_kv = switches[5].checkbox("关键波动", value=True, key="sw_kv")
+    show_inv = switches[5].checkbox("失效结构", value=False, key="sw_inv")
+    show_kv = switches[6].checkbox("关键波动", value=True, key="sw_kv")
 
     display = {
         "b1": show_b1,
@@ -1047,6 +1061,7 @@ def _render_price_chart(result: AnalysisResult) -> None:
         "top_neckline": show_tn,
         "bottom_construction": show_bot_area,
         "top_construction": show_top_area,
+        "invalidated": show_inv,
         "key_volatility": show_kv,
     }
 

@@ -282,7 +282,9 @@ def _build_html(
         display = {}
     show = {k: display.get(k, True) for k in
             ("b1", "bottom_construction", "top_construction",
-             "bottom_c", "top_neckline", "key_volatility")}
+             "bottom_c", "top_neckline", "invalidated", "key_volatility")}
+    # 失效结构默认不显示，避免图表杂乱
+    show.setdefault("invalidated", False)
 
     echarts_js = _ECHARTS_JS.read_text(encoding="utf-8")
     data_json = json.dumps(data, ensure_ascii=False)
@@ -367,10 +369,12 @@ def _build_html(
         top_pts = _to_mark_point(
             data.get("topMarks", []), "#dc2626", "#9ca3af", "diamond", -22, "top",
         )
-    # 失效标记：永远展示，但归到 invalidated 类别
-    invalidated_pts = _to_mark_point(
-        data.get("invalidatedMarks", []), "#9ca3af", "#9ca3af", "pin", -22, "invalidated",
-    )
+    # 失效标记：默认隐藏，用户手动打开开关才显示
+    invalidated_pts = []
+    if show["invalidated"]:
+        invalidated_pts = _to_mark_point(
+            data.get("invalidatedMarks", []), "#9ca3af", "#9ca3af", "pin", -22, "invalidated",
+        )
     all_mark_points = bottom_pts + top_pts + invalidated_pts
 
     line_blocks: list[dict[str, Any]] = []
