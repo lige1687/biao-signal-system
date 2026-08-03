@@ -356,17 +356,24 @@ h1, .stTitle {
     border: 1px solid #e8edf3;
     border-radius: 4px;
     padding: 6px 10px !important;
+    min-width: 0 !important;
+    overflow: hidden;
 }
 .stApp [data-testid="stMetricLabel"] {
     font-size: 10px !important;
     color: #64748b;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .stApp [data-testid="stMetricValue"] {
     font-size: 15px !important;
     font-weight: 600;
     color: #1a1a2e;
+    overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 /* ── 按钮简化 ── */
@@ -713,7 +720,7 @@ def _render_today_judgment(result: AnalysisResult, *, narrow: bool = False) -> N
             )
             st.markdown(chips_html, unsafe_allow_html=True)
 
-        # 第三行：关键指标（主区域 6 列，侧边栏 3 列×2 行）
+        # 第三行：关键指标（主区域 6 列，侧边栏 2 列×3 行防溢出）
         ema20 = float(latest["ema20"]) if pd.notna(latest.get("ema20")) else None
         sma20 = float(latest["sma20"]) if pd.notna(latest.get("sma20")) else None
         ref20 = float(latest["close_lag20"]) if pd.notna(latest.get("close_lag20")) else None
@@ -725,14 +732,15 @@ def _render_today_judgment(result: AnalysisResult, *, narrow: bool = False) -> N
         )
 
         if narrow:
-            kpi_r1 = st.columns(3)
+            kpi_r1 = st.columns(2)
             kpi_r1[0].metric("EMA20", f"{ema20:.4f}" if ema20 else "—")
             kpi_r1[1].metric("SMA20", f"{sma20:.4f}" if sma20 else "—")
-            kpi_r1[2].metric("抵扣价", f"{ref20:.4f}" if ref20 else "—")
-            kpi_r2 = st.columns(3)
-            kpi_r2[0].metric("成交量", f"{volume/1e4:.1f}万")
-            kpi_r2[1].metric("量比", f"{vol_ratio:.2f}x" if vol_ratio else "—")
-            kpi_r2[2].metric("换手率", "—")
+            kpi_r2 = st.columns(2)
+            kpi_r2[0].metric("抵扣价", f"{ref20:.4f}" if ref20 else "—")
+            kpi_r2[1].metric("成交量", f"{volume/1e4:.1f}万")
+            kpi_r3 = st.columns(2)
+            kpi_r3[0].metric("量比", f"{vol_ratio:.2f}x" if vol_ratio else "—")
+            kpi_r3[1].metric("换手率", "—")
         else:
             kpi = st.columns(6)
             kpi[0].metric("EMA20", f"{ema20:.4f}" if ema20 else "—")
