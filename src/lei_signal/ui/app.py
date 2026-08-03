@@ -390,6 +390,13 @@ h1, .stTitle {
 .stApp .stTabs [data-baseweb="tab"] {
     padding: 4px 12px;
     font-size: 13px;
+    color: #1a1a2e !important;
+}
+.stApp .stTabs [data-baseweb="tab"]:hover {
+    color: #e33d47 !important;
+}
+.stApp .stTabs [aria-selected="true"] {
+    color: #e33d47 !important;
 }
 
 /* ── Expander 紧凑 ── */
