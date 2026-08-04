@@ -53,6 +53,15 @@ class TradingCalendar(Protocol):
         """``[start, end]`` 闭区间内最后一个交易日；区间内无交易日时返回 ``None``。"""
         ...
 
+    def next_trading_day(self, day: date | pd.Timestamp) -> pd.Timestamp:
+        """``day`` 之后的下一个交易日（严格晚于 ``day``）。
+
+        用于监督员算 ``actionable_from``：信号在 ``day`` 收盘后生成，最早
+        ``next_trading_day(day)`` 开盘执行（红线 1，无未来泄漏）。
+        默认日历不含节假日表，返回值是「未扣节假日的最早可执行日」。
+        """
+        ...
+
 
 @dataclass(frozen=True)
 class WeekdayCalendar:
@@ -82,6 +91,19 @@ class WeekdayCalendar:
                 return cursor
             cursor -= pd.Timedelta(days=1)
         return None
+
+    def next_trading_day(self, day: date | pd.Timestamp) -> pd.Timestamp:
+        """``day`` 之后的下一个交易日（严格晚于 ``day``）。
+
+        默认日历不含节假日表，返回「未扣节假日的最早可执行日」。
+        加 400 天上限防止「全部未来日都是节假日」的病态输入死循环。
+        """
+        cursor = pd.Timestamp(day).normalize() + pd.Timedelta(days=1)
+        for _ in range(400):
+            if self.is_trading_day(cursor):
+                return cursor
+            cursor += pd.Timedelta(days=1)
+        raise ValueError(f"{day} 之后 400 天内无交易日（节假日配置异常）")
 
 
 def weekday_calendar(holidays: Iterable[date] = ()) -> WeekdayCalendar:

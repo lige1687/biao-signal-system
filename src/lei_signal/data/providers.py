@@ -987,29 +987,21 @@ class EastmoneySectorProvider:
 
     @staticmethod
     def _default_opener(url: str) -> str:
-        # push2his 在 IPv6 路径下 TLS 握手会挂死；通过 monkey-patch
-        # socket.getaddrinfo 强制走 IPv4（不破坏 SNI 证书校验）。
-        import socket
-        _orig = socket.getaddrinfo
-        def v4_only(h, p, *a, **kw):
-            return [r for r in _orig(h, p, *a, **kw) if r[0] == socket.AF_INET]
-        socket.getaddrinfo = v4_only
+        # push2his 在部分网络环境 TLS 握手被掐（含本机）；走标准 urllib，
+        # 失败由上层 _fetch_with_failover 轮询其它号段主机兜底。
+        request = urllib.request.Request(  # noqa: S310 - 固定 https 主机
+            url,
+            headers={"User-Agent": "Mozilla/5.0", "Referer": "https://quote.eastmoney.com/"},
+        )
         try:
-            request = urllib.request.Request(  # noqa: S310 - 固定 https 主机
-                url,
-                headers={"User-Agent": "Mozilla/5.0", "Referer": "https://quote.eastmoney.com/"},
-            )
-            try:
-                with urllib.request.urlopen(request, timeout=10) as response:  # noqa: S310
-                    if response.status != 200:
-                        raise DataUnavailableError(f"东财板块返回 HTTP {response.status}")
-                    return response.read().decode("utf-8-sig")
-            except urllib.error.URLError as exc:
-                raise DataUnavailableError(f"东财板块请求失败：{exc.reason}") from exc
-            except OSError as exc:
-                raise DataUnavailableError(f"东财板块连接中断：{exc}") from exc
-        finally:
-            socket.getaddrinfo = _orig
+            with urllib.request.urlopen(request, timeout=10) as response:  # noqa: S310
+                if response.status != 200:
+                    raise DataUnavailableError(f"东财板块返回 HTTP {response.status}")
+                return response.read().decode("utf-8-sig")
+        except urllib.error.URLError as exc:
+            raise DataUnavailableError(f"东财板块请求失败：{exc.reason}") from exc
+        except OSError as exc:
+            raise DataUnavailableError(f"东财板块连接中断：{exc}") from exc
 
     def _fetch_with_failover(self, params: dict[str, str]) -> str:
         """东财各号段轮询；其它异常不向调用方穿透。"""
@@ -1065,6 +1057,168 @@ class EastmoneySectorProvider:
         )
 
 
+class SohuSectorProvider:
+    """搜狐申万行业/地域板块日线。
+
+    为什么新增
+    ----------
+    东财 ``push2his`` 在部分网络环境（含开发者本机）TLS 握手被掐，板块日线
+    拿不到。搜狐 ``q.stock.sohu.com/hisHq`` 对 ``zs_00003xxx``（申万一级行业
+    + 地域板块，共 54 个）返回 755 根日线，足够跑 LEI 全量分析。
+
+    覆盖范围（实测 2026-08）
+    ------------------------
+    - 申万一级行业（28 个）：传媒 SW3098、公用事业 SW3111、电子 SW3123、
+      通信 SW3125、银行 SW3124、医药生物 SW3116……
+    - 地域板块（26 个）：安徽 SW3126、北京 SW3127、广东 SW3130……
+    - **概念板块（电网设备/智能电网等细分）搜狐无历史**，需东财（BK 前缀）。
+
+    局限
+    ----
+    - 盘中无当日形成中 bar：搜狐收盘后才出当日 K。板块强度看收盘形态即可，
+      不像个股盘中要操作，可接受。
+    - 字段顺序「最低在前、最高在后」（与惯例相反），解析时注意对调。
+
+    符号约定
+    --------
+    用户输 ``SW3098`` -> resolve_symbol 识别为 Market.SECTOR -> 这里拼
+    ``zs_00003098`` 请求。
+    """
+
+    name = "sohu_sector"
+    _HOST = "https://q.stock.sohu.com/hisHq"
+    _CODE_RE = __import__("re").compile(r"SW(\d{4})", __import__("re").IGNORECASE)
+
+    def __init__(
+        self,
+        opener: Callable[[str], str] | None = None,
+        *,
+        timeout: float = 12.0,
+        max_bars: int = 1500,
+        attempts: int = 3,
+        backoff: float = 1.5,
+        sleep: Callable[[float], None] | None = None,
+    ) -> None:
+        self._opener = opener or self._default_opener
+        self._timeout = timeout
+        self._max_bars = max_bars
+        self._attempts = max(1, attempts)
+        self._backoff = backoff
+        self._sleep = sleep if sleep is not None else time.sleep
+
+    @classmethod
+    def supports(cls, symbol: str) -> bool:
+        return bool(cls._CODE_RE.search(symbol))
+
+    @staticmethod
+    def _default_opener(url: str) -> str:
+        request = urllib.request.Request(  # noqa: S310 - 固定 https 主机
+            url,
+            headers={"User-Agent": "Mozilla/5.0", "Referer": "https://q.stock.sohu.com/"},
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=12) as response:  # noqa: S310
+                if response.status != 200:
+                    raise DataUnavailableError(f"搜狐板块返回 HTTP {response.status}")
+                return response.read().decode("utf-8", errors="replace")
+        except urllib.error.URLError as exc:
+            raise DataUnavailableError(f"搜狐板块请求失败：{exc.reason}") from exc
+        except OSError as exc:
+            raise DataUnavailableError(f"搜狐板块连接中断：{exc}") from exc
+
+    def _fetch_text(self, url: str) -> str:
+        last: DataUnavailableError | None = None
+        for attempt in range(self._attempts):
+            try:
+                return self._opener(url)
+            except DataUnavailableError as exc:
+                last = exc
+            except Exception as exc:  # noqa: BLE001
+                last = DataUnavailableError(f"搜狐板块请求失败：{exc}")
+            if attempt < self._attempts - 1:
+                self._sleep(self._backoff * (attempt + 1))
+        assert last is not None
+        raise last
+
+    def fetch(self, symbol: str, *, min_rows: int = 21) -> PriceData:
+        m = self._CODE_RE.search(symbol)
+        if m is None:
+            raise DataUnavailableError(
+                f"{symbol} 不是搜狐板块代码（需 SW+4 位数字）"
+            )
+        digits = m.group(1)
+        bare = f"SW{digits}"
+        info = resolve_symbol(bare)
+        # 搜狐 code: zs_ + 8 位补零（3xxx 段补成 00003xxx）
+        sohu_code = f"zs_{digits.zfill(8)}"
+        params = {
+            "code": sohu_code,
+            "start": "20100101",
+            "end": "20500101",
+            "stat": "1",
+            "order": "A",   # 升序，旧->新
+            "period": "d",
+        }
+        url = f"{self._HOST}?{urllib.parse.urlencode(params)}"
+        text = self._fetch_text(url)
+        bars_raw = self._parse_payload(text, bare)
+        bars, report = validate_bars(
+            bars_raw,
+            symbol=info.symbol,
+            provider=self.name,
+            adjusted=False,  # 板块指数无复权
+            min_rows=min_rows,
+        )
+        return PriceData(
+            symbol=info.symbol,
+            display_name=bare,  # 搜狐历史接口不返回板块名
+            bars=bars,
+            report=report,
+            info=info,
+        )
+
+    @staticmethod
+    def _parse_payload(text: str, symbol: str) -> pd.DataFrame:
+        """解析搜狐 hisHq。
+
+        字段顺序：[日期, 开盘, 收盘, 涨跌额, 涨跌幅, 最低, 最高, 成交量, 成交额, 换手率]
+        注意**最低在前最高在后**，与 OHLC 惯例相反。
+        """
+        try:
+            payload = json.loads(text)
+        except json.JSONDecodeError as exc:
+            raise DataUnavailableError(f"{symbol} 搜狐返回非 JSON 内容") from exc
+        if not isinstance(payload, list) or not payload:
+            raise DataUnavailableError(f"{symbol} 搜狐无板块数据")
+        item = payload[0]
+        hq = item.get("hq")
+        if not isinstance(hq, list) or not hq:
+            msg = item.get("msg") if isinstance(item, dict) else "无数据"
+            raise DataUnavailableError(f"{symbol} 搜狐板块无历史K线：{msg}")
+
+        records: list[dict[str, Any]] = []
+        for row in hq:
+            # row: [日期, 开, 收, 涨跌额, 涨跌幅, 低, 高, 量, 额, 换手率]
+            if len(row) < 7:
+                continue
+            try:
+                records.append({
+                    "open": float(row[1]),
+                    "close": float(row[2]),
+                    "low": float(row[5]),   # 低在前
+                    "high": float(row[6]),  # 高在后
+                    "volume": float(row[7]) if len(row) > 7 and row[7] not in ("-", "") else 0.0,
+                })
+            except (ValueError, TypeError):
+                continue
+        if not records:
+            raise DataUnavailableError(f"{symbol} 搜狐板块日线解析为空")
+        df = pd.DataFrame(records)
+        df.index = pd.to_datetime([r[0] for r in hq[:len(records)]], errors="coerce")
+        df = df[df.index.notna()]
+        return df[["open", "high", "low", "close", "volume"]]
+
+
 def default_provider() -> ChainedPriceProvider:
     """默认行情源组合。
 
@@ -1081,6 +1235,7 @@ def default_provider() -> ChainedPriceProvider:
             TencentGlobalIndexProvider(),
             EastmoneyPriceProvider(),
             EastmoneySectorProvider(),
+            SohuSectorProvider(),
             YahooV8PriceProvider(),
             YahooPriceProvider(),
         ]
@@ -1094,6 +1249,7 @@ __all__ = [
     "PriceData",
     "PriceProvider",
     "SinaPriceProvider",
+    "SohuSectorProvider",
     "TencentGlobalIndexProvider",
     "TencentPriceProvider",
     "YahooPriceProvider",

@@ -67,6 +67,12 @@ def resolve_symbol(raw: str) -> SymbolInfo:
     if re.fullmatch(r"BK\d{4}", symbol):
         return SymbolInfo(f"{symbol}.SECTOR", Market.SECTOR, symbol, "Asia/Shanghai")
 
+    # 搜狐申万行业/地域板块：SW + 4 位数字（如 SW3098 传媒、SW3111 公用事业）。
+    # 搜狐 hisHq 用 zs_00003xxx 拿日线；3xxx 段是申万一级行业 + 地域，
+    # 概念板块（4xxx-8xxx）搜狐无历史，不在此列。
+    if re.fullmatch(r"SW\d{4}", symbol):
+        return SymbolInfo(f"{symbol}.SECTOR", Market.SECTOR, symbol, "Asia/Shanghai")
+
     if not re.fullmatch(r"[A-Z0-9.^=\-]+", symbol):
         raise ValueError("代码格式无法识别；港股请使用 0700.HK 形式")
 

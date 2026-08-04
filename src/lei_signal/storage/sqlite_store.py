@@ -382,6 +382,94 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
             );
         """,
     ),
+    (
+        10,
+        "010_trade_plans",
+        """
+        -- 计划台账主体：记录状态机 + 价位，刻意不含数量/金额/成交价/账户
+        CREATE TABLE IF NOT EXISTS trade_plans (
+            plan_id                  TEXT PRIMARY KEY,
+            symbol                   TEXT NOT NULL,
+            module                   TEXT NOT NULL,          -- A/B/C/D，对齐 MODULE_MAP
+            direction                TEXT NOT NULL,          -- long/short
+            entry_rule_id            TEXT,                   -- 入场理由锚点（漂移检测主对象）
+            entry_lifecycle_id       TEXT,
+            entry_trigger_cn         TEXT,
+            entry_price_ref          REAL,                   -- 参考入场价，非成交价
+            invalidation_price       REAL,                   -- revision_no=0 的值永久冻结
+            target_b_price           REAL,
+            target_b_source          TEXT,
+            reward_risk_at_plan      REAL,                   -- 建计划时 R/R 快照；不可计算时 NULL
+            valid_until              TEXT NOT NULL,          -- 逐计划自填有效期；draft 允许空串
+            state                    TEXT NOT NULL,          -- 见 PLAN_STATES
+            ruleset_version          TEXT NOT NULL,
+            reason                   TEXT NOT NULL,          -- 制定原因必填；draft 允许空串
+            -- 五项交易假设（决策 1，制定时冻结，复议对照原文；Python 不语义解析）
+            thesis_cn                TEXT NOT NULL DEFAULT '',
+            invalidation_criteria_cn TEXT NOT NULL DEFAULT '',
+            drawdown_playbook_cn     TEXT NOT NULL DEFAULT '',
+            take_profit_plan_cn      TEXT NOT NULL DEFAULT '',
+            stop_plan_cn             TEXT NOT NULL DEFAULT '',
+            entered_on               TEXT,
+            exited_on                TEXT,
+            exit_reason_rule_id      TEXT,
+            superseded_by            TEXT,
+            created_at               TEXT NOT NULL,
+            updated_at               TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_plans_symbol_state
+            ON trade_plans(symbol, state);
+
+        -- append-only 修订史：revision_no=0 为创建快照，原始失效价与五项预案永远在此
+        CREATE TABLE IF NOT EXISTS trade_plan_revisions (
+            revision_id        TEXT PRIMARY KEY,
+            plan_id            TEXT NOT NULL,
+            revision_no        INTEGER NOT NULL,             -- 0 = 创建快照
+            changed_field      TEXT NOT NULL,                -- __snapshot__ 或字段名
+            old_value          TEXT,
+            new_value          TEXT,
+            verdict            TEXT NOT NULL,                -- 见 VERDICT_*
+            verdict_reason_cn  TEXT,
+            changed_at         TEXT NOT NULL,
+            changed_by         TEXT NOT NULL,                -- user/system
+            UNIQUE (plan_id, revision_no, changed_field)
+        );
+        CREATE INDEX IF NOT EXISTS idx_revisions_plan
+            ON trade_plan_revisions(plan_id, revision_no);
+
+        -- 待办（决策 4）：ENTER/EXIT/REVIEW，催办计数，推迟复活谓词
+        CREATE TABLE IF NOT EXISTS plan_action_items (
+            action_id              TEXT PRIMARY KEY,
+            plan_id                TEXT NOT NULL,
+            kind                   TEXT NOT NULL,             -- ENTER/EXIT/REVIEW
+            source_alert_code      TEXT NOT NULL,
+            state                  TEXT NOT NULL,             -- open/done/deferred/expired
+            due_from               TEXT,                      -- = alert 的 actionable_from
+            nag_count              INTEGER NOT NULL DEFAULT 0,
+            last_nagged_bar_date   TEXT,
+            resume_on              TEXT,                      -- 推迟复活谓词 JSON
+            closed_on              TEXT,
+            close_kind             TEXT,                      -- done/deferred/expired
+            created_at             TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_actions_plan_state
+            ON plan_action_items(plan_id, state);
+
+        -- 原因注解（append-only，永不修改已冻结记录）：推迟/放宽/收紧/复议/事后补充
+        CREATE TABLE IF NOT EXISTS plan_annotations (
+            annotation_id  TEXT PRIMARY KEY,
+            plan_id        TEXT NOT NULL,
+            ref_kind       TEXT NOT NULL,                    -- revision/action
+            ref_id         TEXT,
+            kind           TEXT NOT NULL,                    -- 见 Annotation.kind
+            reason_cn      TEXT NOT NULL,
+            created_at     TEXT NOT NULL,
+            author         TEXT NOT NULL                     -- user/system/agent
+        );
+        CREATE INDEX IF NOT EXISTS idx_annotations_plan
+            ON plan_annotations(plan_id, created_at);
+        """,
+    ),
 )
 
 
