@@ -136,12 +136,13 @@ def nag_open_items(
     for item in list_action_items(conn, plan.plan_id, state="open"):
         if item.last_nagged_bar_date == ctx.last_bar_date:
             continue  # 本 bar 已催过
-        update_action_item(
+        updated = update_action_item(
             conn, item.action_id,
             nag_count=item.nag_count + 1,
             last_nagged_bar_date=ctx.last_bar_date,
         )
-        nagged.append(item)
+        # 返回递增后的快照：调用方（日志/通知）与 DB 里的 nag_count 必须一致
+        nagged.append(updated if updated is not None else item)
     return nagged
 
 

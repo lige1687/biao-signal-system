@@ -48,7 +48,11 @@ ACTIVE_STATES = ("armed", "entered")
 
 @dataclass(frozen=True, slots=True)
 class OpportunityRef:
-    """计划入场条件在当日 DTO 中的投影。"""
+    """计划入场条件在当日 DTO 中的投影。
+
+    ``direction`` 为该机会自身的方向（long/short）。计划只能匹配同方向的机会--
+    做多计划不得拿一条空头场景当入场条件（红线 4：方向/模块不得混算）。
+    """
 
     lifecycle_id: str
     current_conditions_confirmed: bool
@@ -56,6 +60,7 @@ class OpportunityRef:
     rule_id: str | None
     reward_risk_ratio: float | None
     reward_risk_computable: bool
+    direction: str = "long"             # long/short；缺省按做多
 
 
 @dataclass(frozen=True, slots=True)
@@ -258,10 +263,19 @@ def evaluate_plan(
 def _matching_opportunity(
     plan: TradePlan, ctx: MonitorContext
 ) -> OpportunityRef | None:
+    """按 lifecycle_id 匹配，且方向必须与计划一致。
+
+    方向不一致的同名机会视为不匹配（做多计划不得拿空头场景当入场条件，红线 4）。
+    """
     if not plan.entry_lifecycle_id:
         return None
     return next(
-        (o for o in ctx.opportunities if o.lifecycle_id == plan.entry_lifecycle_id),
+        (
+            o
+            for o in ctx.opportunities
+            if o.lifecycle_id == plan.entry_lifecycle_id
+            and o.direction == plan.direction
+        ),
         None,
     )
 

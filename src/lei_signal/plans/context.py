@@ -36,6 +36,23 @@ def _opp_rule_id(opp: Any) -> str | None:
     return getattr(opp, "scenario_id", None)
 
 
+def _opp_direction(opp: Any) -> str:
+    """机会自身方向。ConditionalScenarioDTO 有 direction；回撤/结构机会为做多。
+
+    做空镜像事件的 evidence 带 direction_side=short，优先采信它。
+    """
+    supporting = getattr(opp, "supporting_event", None)
+    if supporting is not None:
+        evidence = getattr(supporting, "evidence", None) or {}
+        side = evidence.get("direction_side")
+        if side in ("long", "short"):
+            return str(side)
+    direction = getattr(opp, "direction", None)
+    if direction in ("long", "short"):
+        return str(direction)
+    return "long"
+
+
 def _to_opportunity_ref(opp: Any) -> OpportunityRef | None:
     lifecycle_id = _opp_lifecycle_id(opp)
     if not lifecycle_id:
@@ -47,6 +64,7 @@ def _to_opportunity_ref(opp: Any) -> OpportunityRef | None:
         rule_id=_opp_rule_id(opp),
         reward_risk_ratio=getattr(opp, "reward_risk_ratio", None),
         reward_risk_computable=bool(getattr(opp, "reward_risk_computable", False)),
+        direction=_opp_direction(opp),
     )
 
 

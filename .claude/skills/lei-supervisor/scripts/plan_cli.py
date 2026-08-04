@@ -13,7 +13,18 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-_PROJECT_ROOT = Path(__file__).resolve().parents[3]
+_HERE = Path(__file__).resolve()
+
+
+def _find_project_root(start: Path) -> Path:
+    """向上搜索项目根（含 configs/rules.v1.yaml），位置无关。"""
+    for candidate in (start, *start.parents):
+        if (candidate / "configs" / "rules.v1.yaml").exists():
+            return candidate
+    return start.parents[-1]
+
+
+_PROJECT_ROOT = _find_project_root(_HERE)
 if str(_PROJECT_ROOT / "src") not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT / "src"))
 

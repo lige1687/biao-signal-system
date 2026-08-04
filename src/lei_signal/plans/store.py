@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import sqlite3
 import uuid
 from datetime import UTC, datetime
@@ -39,11 +40,15 @@ def _now() -> str:
 
 
 def _gen_plan_id(symbol: str, created_at: str) -> str:
+    """URL/回调安全的 plan_id：只含字母数字与下划线。
+
+    ISO 时间戳里的 `.` `:` `-` `+` 都会进 URL 路径与飞书回调参数，必须清掉。
+    """
     short = hashlib.sha1(
         f"{symbol}:{created_at}:{uuid.uuid4().hex}".encode()
     ).hexdigest()[:8]
-    safe_symbol = symbol.replace(".", "_")
-    safe_time = created_at.replace(":", "").replace("-", "")
+    safe_symbol = re.sub(r"[^A-Za-z0-9]", "_", symbol)
+    safe_time = re.sub(r"[^0-9]", "", created_at)[:14]  # YYYYMMDDHHMMSS
     return f"plan_{safe_symbol}_{safe_time}_{short}"
 
 

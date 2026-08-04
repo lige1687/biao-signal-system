@@ -177,6 +177,35 @@ def test_plan_orphaned() -> None:
     assert PLAN_ORPHANED not in _codes(evaluate_plan(_plan(), _ctx()))
 
 
+def test_opposite_direction_opportunity_does_not_match() -> None:
+    """做多计划不得拿同名的空头场景当入场条件（红线4：方向不混算）。
+
+    回归：ma_full_alignment 场景的 direction 随排列方向变，曾把
+    ma_alignment_bearish_start 当作做多入场机会并产 ENTER 待办。
+    """
+    short_opp = OpportunityRef(
+        lifecycle_id="lc1", current_conditions_confirmed=True, state="confirmed",
+        rule_id="ma_full_alignment", reward_risk_ratio=None,
+        reward_risk_computable=False, direction="short",
+    )
+    alerts = evaluate_plan(_plan(direction="long"), _ctx(opportunities=(short_opp,)))
+    codes = _codes(alerts)
+    assert ENTRY_CONDITIONS_MET not in codes, "空头机会不得触发做多入场"
+    assert not any(a.action_kind == "ENTER" for a in alerts), "不得产 ENTER 待办"
+    # 方向不匹配 = 找不到对应机会 -> 视为 orphaned，提醒复核
+    assert PLAN_ORPHANED in codes
+
+
+def test_same_direction_opportunity_matches() -> None:
+    short_opp = OpportunityRef(
+        lifecycle_id="lc1", current_conditions_confirmed=True, state="confirmed",
+        rule_id="ma_full_alignment", reward_risk_ratio=None,
+        reward_risk_computable=False, direction="short",
+    )
+    alerts = evaluate_plan(_plan(direction="short"), _ctx(opportunities=(short_opp,)))
+    assert ENTRY_CONDITIONS_MET in _codes(alerts)
+
+
 def test_module_not_implemented() -> None:
     alerts = evaluate_plan(_plan(module="B"), _ctx())
     a = _by_code(alerts, MODULE_NOT_IMPLEMENTED)
