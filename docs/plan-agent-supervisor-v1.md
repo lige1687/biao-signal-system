@@ -3,6 +3,18 @@
 > 上游：`docs/handoff-agent-supervisor.md`（交接 prompt）。
 > 本文是**功能范围定稿**。交接 prompt §6 的四个待决策点、以及本文早期版本 §9 的六项待确认，均已于 2026-08-04 由人类拍板，结论见第 2 节。
 > 状态：**范围已冻结，可进入实现**。
+>
+> ## 实现状态（2026-08-04，P0–P5 全部完成，门禁绿）
+>
+> 已实现并提交（branch `recovery/lei-round2`）：
+> - **P0 地基**：`src/lei_signal/plans/{models,store}.py`、migration `010_trade_plans`（`sqlite_store.py`）、`data/calendar.py::next_trading_day`
+> - **P1 监督判定**：`src/lei_signal/plans/monitor.py::evaluate_plan`（12 alert code）+ `plans/context.py`
+> - **P2 待办催办**：`src/lei_signal/plans/actions.py`、`scripts/daily_nag.py`、`scripts/com.lei.supervisor.plist`
+> - **P3 漂移复议**：`src/lei_signal/plans/drift.py::check_revision`
+> - **P4 表达层/skill**：`src/lei_signal/plans/grounding.py`、`src/lei_signal/api/routes/plans.py`、`api/schemas.py`、`api/app.py` 挂载、`.claude/skills/lei-supervisor/`、`scripts/plan_cli.py`
+> - **P5 集成**：全量门禁绿，`tests/integration/test_plans_supervisor_e2e.py` 真实数据验证（000001 非退化、000300 阻断）
+>
+> 规则账本追加 `plan_discipline_guard`（承载 §14 两层标注 + R/R 口径出处）。ruleset 维持 1.3.0。
 
 ## 1. 与交接 prompt 的差异（先说清楚改了什么）
 
