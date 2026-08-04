@@ -8,13 +8,13 @@ from __future__ import annotations
 import json
 import re
 import time
-from pathlib import Path
 import urllib.error
 import urllib.parse
 import urllib.request
 from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import UTC, datetime
+from pathlib import Path
 from typing import Any, Protocol
 
 import pandas as pd
@@ -1382,7 +1382,7 @@ class THSBoardProvider:
     def _parse_rows(rows: list[list[str]], symbol: str) -> pd.DataFrame:
         """解析同花顺 line 数据。
 
-        字段：日期,开,收,高,低,量,额,,,,标志位（收在高前，与 OHLC 惯例不同）。
+        字段：日期,开,高,低,收,量,额,,,,标志位（高在收前，需注意对调）。
         """
         records: list[dict[str, Any]] = []
         dates: list[str] = []
@@ -1392,9 +1392,9 @@ class THSBoardProvider:
             try:
                 records.append({
                     "open": float(row[1]),
-                    "close": float(row[2]),
-                    "high": float(row[3]),
-                    "low": float(row[4]),
+                    "high": float(row[2]),
+                    "low": float(row[3]),
+                    "close": float(row[4]),
                     "volume": float(row[5]) if row[5] else 0.0,
                 })
                 dates.append(row[0])

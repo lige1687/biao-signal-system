@@ -484,3 +484,43 @@ def test_yahoo_v8_parses_payload_and_supports_overseas_index() -> None:
         assert "请求失败" in str(exc)
     else:
         raise AssertionError("expected DataUnavailableError on network failure")
+
+
+def test_ths_board_provider_parses_line_payload() -> None:
+    """同花顺行业板块：解析 line js 的 字段顺序 日期,开,高,低,收,量,额。
+
+    实测 d.10jqka.com.cn/v4/line/bk_881278/01/2026.js 返回该顺序，
+    高在收前（与 OHLC 惯例相反），解析时必须对调，否则 OHLC 校验失败。
+    """
+    from lei_signal.data.providers import THSBoardProvider
+
+    # 模拟两年份的 JSONP 响应：quotebridge_v4_line_bk_{code}_01_{year}({"data":"..."})
+    def fake_opener(url: str, headers: dict) -> str:  # noqa: ARG001
+        if "2025" in url:
+            data = "20250102,100.0,105.0,99.0,104.0,1000,100000,,,,0"
+            return f'quotebridge_v4_line_bk_881278_01_2025({{"data":"{data}"}})'
+        data = "20260105,104.0,106.0,103.0,105.5,1200,120000,,,,0"
+        return f'quotebridge_v4_line_bk_881278_01_2026({{"data":"{data}"}})'  # noqa: E501
+
+    p = THSBoardProvider(opener=fake_opener, start_year=2025)  # type: ignore[arg-type]
+    # 跳过 cookie 计算（opener 已注入，不会调 _compute_cookie）
+    p._cookie = "fake"  # type: ignore[assignment]
+    result = p.fetch("TH881278", min_rows=1)
+    b = result.bars
+    assert len(b) == 2
+    # 2026 行：开104 高106 低103 收105.5
+    last = b.iloc[-1]
+    assert last["open"] == 104.0
+    assert last["high"] == 106.0
+    assert last["low"] == 103.0
+    assert last["close"] == 105.5
+    assert last["volume"] == 1200.0
+
+
+def test_ths_board_provider_rejects_non_sector_symbol() -> None:
+    from lei_signal.data.providers import THSBoardProvider
+
+    p = THSBoardProvider()
+    assert p.supports("TH881278") is True
+    assert p.supports("000001.SS") is False
+    assert p.supports("BK0457") is False
