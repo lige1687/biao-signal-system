@@ -56,6 +56,7 @@ PULSE_RULES = frozenset(
         "bullish_reversal_bottom",
         "dual_ma_spread",
         "long_trend",
+        "first_ma_pullback",
     }
 )
 

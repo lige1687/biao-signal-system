@@ -179,6 +179,75 @@ def latest_available_sentiment(
     return max(visible, key=lambda o: o.available_at)
 
 
+def latest_available_sentiment_at(
+    observations: Sequence[SentimentObservation],
+    decision_at: datetime,
+    max_age_days: int,
+) -> SentimentObservation | None:
+    """Like `latest_available_sentiment`, but also re-derives `current_eligible`
+    from the decision_at timestamp.
+
+    The precomputed `obs.current_eligible` flag was evaluated at load time
+    against `datetime.now()`. A flag computed last Tuesday is meaningless
+    when the user is asking for sentiment "right now" three weeks later, so
+    we recompute it on every call. This is the only correct way to make
+    `current_eligible` a function of `decision_at`.
+    """
+    latest = latest_available_sentiment(observations, decision_at, max_age_days)
+    if latest is None:
+        return None
+
+    rederived = _is_current_eligible_at(
+        latest.license_status, latest.available_at, decision_at, max_age_days,
+    )
+    if rederived == latest.current_eligible:
+        return latest
+
+    from lei_signal.market_context.types import (
+        SentimentObservation as _SO,  # local import to avoid cycles
+    )
+    return _SO(
+        series_id=latest.series_id,
+        survey_week=latest.survey_week,
+        available_at=latest.available_at,
+        source=latest.source,
+        license_status=latest.license_status,
+        publication_delay_days=latest.publication_delay_days,
+        current_eligible=rederived,
+        exposure_index=latest.exposure_index,
+        bullish=latest.bullish,
+        neutral=latest.neutral,
+        bearish=latest.bearish,
+        bull_bear=latest.bull_bear,
+        percentile=latest.percentile,
+        label=latest.label,
+    )
+
+
+def _is_current_eligible_at(
+    license_status: str,
+    available_at: datetime,
+    decision_at: datetime,
+    max_delay_days: int,
+) -> bool:
+    """Re-derive `current_eligible` at decision_at instead of at load time.
+
+    Public-delayed data is never current-eligible; otherwise the gap between
+    `decision_at` and `available_at` must not exceed `max_delay_days`.
+    """
+    status = license_status.lower()
+    if "public_delayed" in status:
+        return False
+
+    if available_at.tzinfo is None:
+        available_at = available_at.replace(tzinfo=UTC)
+    if decision_at.tzinfo is None:
+        decision_at = decision_at.replace(tzinfo=UTC)
+
+    age = decision_at - available_at
+    return age.days <= max_delay_days
+
+
 def classify_sentiment_percentile(
     value: float,
     history: Sequence[float],

@@ -25,6 +25,7 @@ class TestMarketId:
             MarketId.CSI_500,
             MarketId.CSI_1000,
             MarketId.CHINEXT,
+            MarketId.STAR_50,
             MarketId.SP500,
             MarketId.NASDAQ_100,
             MarketId.RUSSELL_2000,

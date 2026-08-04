@@ -13,6 +13,7 @@ import pytest
 from lei_signal.data.point_in_time import aggregate_weekly, build_snapshot, crop_daily
 from lei_signal.features.indicators import compute_features
 from lei_signal.features.pivots import confirmed_pivots, pivots_available_on
+from lei_signal.rules.first_ma_pullback import detect_first_ma_pullback_events
 from lei_signal.rules.lei_color import classify_colors
 
 
@@ -69,6 +70,21 @@ def test_ten_historical_cutoffs_reproduce_identical_colors() -> None:
         assert truncated["signal_color"].tolist() == (
             full.loc[:as_of, "signal_color"].tolist()
         ), f"截断日 {as_of.date()} 颜色不一致"
+
+
+def test_first_ma_pullback_events_are_identical_at_historical_cutoffs() -> None:
+    """首次回撤的“第一次”只能由前向状态推进，追加未来行情不得改写旧事件。"""
+    bars = _series(500, seed=29)
+    full_frame = classify_colors(compute_features(bars))
+    full_events = detect_first_ma_pullback_events(full_frame, "TEST")
+
+    for cut in (180, 240, 300, 360, 420):
+        truncated_frame = classify_colors(compute_features(bars.iloc[:cut]))
+        truncated = detect_first_ma_pullback_events(truncated_frame, "TEST")
+        cutoff = bars.index[cut - 1].date()
+        visible = [event for event in full_events if event.available_date <= cutoff]
+        assert [event.event_id for event in truncated] == [event.event_id for event in visible]
+        assert [event.evidence for event in truncated] == [event.evidence for event in visible]
 
 
 # ---------------- 门禁 2：摆动点只在确认日可用 ----------------

@@ -46,6 +46,100 @@ def _rolling_mean(series: pd.Series, window: int) -> pd.Series:
     return series.rolling(window=window, min_periods=window).mean()
 
 
+def _session_axis(history: pd.DataFrame, as_of: date) -> pd.DatetimeIndex | None:
+    """Sorted session axis of `history`, with `as_of` guaranteed present."""
+    if history.empty or not isinstance(history.index, pd.DatetimeIndex):
+        return None
+    ts = pd.Timestamp(as_of)
+    axis = history.index.sort_values()
+    if ts not in axis:
+        axis = axis.append(pd.DatetimeIndex([ts])).sort_values()
+    return axis
+
+
+def value_sessions_back(
+    history: pd.DataFrame,
+    column: str,
+    *,
+    as_of: date,
+    sessions_back: int,
+) -> float | None:
+    """Value of `column` exactly `sessions_back` real sessions before `as_of`.
+
+    The session axis is `history`'s own index, so business-day arithmetic and
+    calendar gaps can never shift the reference point. Returns None when the
+    axis is too short — an approximate reference is worse than no reading.
+    """
+    axis = _session_axis(history, as_of)
+    if axis is None or column not in history.columns:
+        return None
+    pos = int(axis.get_loc(pd.Timestamp(as_of)))
+    ref_pos = pos - sessions_back
+    if ref_pos < 0:
+        return None
+    ref_ts = axis[ref_pos]
+    if ref_ts not in history.index:
+        return None
+    raw = history.at[ref_ts, column]
+    if raw is None or pd.isna(raw):
+        return None
+    return float(raw)
+
+
+def breadth_delta(
+    history: pd.DataFrame,
+    column: str,
+    *,
+    as_of: date,
+    sessions_back: int,
+    current: float | None = None,
+) -> float | None:
+    """Change in `column` over exactly `sessions_back` sessions ending at `as_of`.
+
+    `current` supplies the as_of reading for a snapshot not yet written into
+    `history`; without it, `as_of` must itself be a row in `history`.
+    """
+    if current is None:
+        if history.empty or not isinstance(history.index, pd.DatetimeIndex):
+            return None
+        ts = pd.Timestamp(as_of)
+        if ts not in history.index or column not in history.columns:
+            return None
+        raw = history.at[ts, column]
+        if raw is None or pd.isna(raw):
+            return None
+        current = float(raw)
+
+    reference = value_sessions_back(
+        history, column, as_of=as_of, sessions_back=sessions_back
+    )
+    if reference is None:
+        return None
+    return current - reference
+
+
+def rolling_percentile_at(
+    values: pd.Series,
+    *,
+    as_of: date,
+    lookback: int,
+    min_periods: int,
+) -> float | None:
+    """Point-in-time percentile rank of the `as_of` reading within its history.
+
+    Only observations dated at or before `as_of` are visible, so appending
+    later sessions can never change a percentile already published.
+    """
+    if values.empty or not isinstance(values.index, pd.DatetimeIndex):
+        return None
+    visible = values[values.index <= pd.Timestamp(as_of)].dropna()
+    if len(visible) < min_periods:
+        return None
+    window = visible.iloc[-lookback:]
+    current = float(window.iloc[-1])
+    return float((window <= current).sum()) / len(window) * 100.0
+
+
 def compute_breadth_snapshot(
     *,
     universe: UniverseSnapshot,

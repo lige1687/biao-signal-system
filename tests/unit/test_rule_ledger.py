@@ -42,6 +42,7 @@ REQUIRED_RULES = [
     "key_wave_black",
     "volume_proxies",
     "volume_profile_proxy",
+    "first_ma_pullback",
     "resistance_b1",
 ]
 
@@ -72,6 +73,8 @@ def test_reversal_rules_are_labelled_research_proxy() -> None:
         "bearish_outside_reversal",
         "volume_proxies",
         "volume_profile_proxy",
+        "first_ma_pullback",
+        "exit_ema20_costbasis",
     ):
         assert get_rule(rule_id).is_research_proxy, f"{rule_id} 必须标注 research_proxy"
 
@@ -93,6 +96,10 @@ def test_thresholds_live_in_config_not_code() -> None:
     assert get_rule("volume_profile_proxy").param("value_area") == 0.70
     assert get_rule("resistance_b1").param("lookback_years") == 2
     assert get_rule("double_bottom").param("max_diff_atr") == 1.0
+    pullback = get_rule("first_ma_pullback")
+    assert pullback.param("ma_periods") == [20, 60, 120]
+    assert pullback.param("confirmation_window") == 3
+    assert pullback.param("min_separation_atr") == 1.0
 
 
 def test_indicator_config_declares_required_periods() -> None:
@@ -126,7 +133,7 @@ def test_state_machine_declares_all_stages_and_invariants() -> None:
 
 
 def test_ruleset_version_is_present() -> None:
-    assert ruleset_version() == "1.0.0"
+    assert ruleset_version() == "1.3.0"
     assert load_ruleset()["source_video"].startswith("https://www.youtube.com/watch?v=7NkwlH6NOk8")
 
 

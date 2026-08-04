@@ -12,40 +12,65 @@ from __future__ import annotations
 
 from collections.abc import Set
 
-from lei_signal.market_context.types import MarketId, MarketMapping
+from lei_signal.market_context.types import A_SHARE_MARKETS, MarketId, MarketMapping
 
 # ── Versioned ETF mapping ─────────────────────────────────────────────
 
-_MAPPING_VERSION = "lei_market_mapping.v1"
+#: v2 splits 科创50 ETF out of SSE_50 into its own STAR_50 market.
+MAPPING_VERSION = "lei_market_mapping.v2"
 
-# Known A-share ETF → tracking index primary
-# Keys are stored in canonical .SH/.SZ form; lookups normalize .SS alias.
+# Known dashboard / reference index symbols. These resolve to their tracking
+# index as primary (not the generic All-A basket). Individual A-share stocks
+# always fall through to the CN_ALL_A primary rule below. Keep this in sync
+# with the dashboard index registry (api/config.py DashboardIndex).
+_KNOWN_INDEX_SYMBOLS: frozenset[str] = frozenset(
+    {
+        "000001.SS",  # 上证指数
+        "000300.SS",  # 沪深300
+        "000688.SS",  # 科创50
+        "000905.SS",  # 中证500
+    }
+)
+
+__all__ = ["A_SHARE_MARKETS", "MAPPING_VERSION", "map_reference_markets", "to_repo_symbol"]
+
+
+# Known A-share ETF → tracking index primary.
+# Keys use the repository-canonical Shanghai suffix `.SS` (see
+# lei_signal.data.symbols.resolve_symbol); the `.SH` alias is accepted on lookup.
 _ETF_PRIMARY: dict[str, MarketId] = {
-    "510050.SH": MarketId.SSE_50,
-    "510300.SH": MarketId.CSI_300,
-    "510310.SH": MarketId.CSI_300,
-    "510330.SH": MarketId.CSI_300,
+    "510050.SS": MarketId.SSE_50,
+    "510710.SS": MarketId.SSE_50,
+    "510300.SS": MarketId.CSI_300,
+    "510310.SS": MarketId.CSI_300,
+    "510330.SS": MarketId.CSI_300,
+    "515130.SS": MarketId.CSI_300,
     "159919.SZ": MarketId.CSI_300,
-    "510500.SH": MarketId.CSI_500,
-    "510510.SH": MarketId.CSI_500,
+    "510500.SS": MarketId.CSI_500,
+    "510510.SS": MarketId.CSI_500,
     "159922.SZ": MarketId.CSI_500,
-    "512100.SH": MarketId.CSI_1000,
+    "512100.SS": MarketId.CSI_1000,
     "159845.SZ": MarketId.CSI_1000,
     "159915.SZ": MarketId.CHINEXT,
     "159949.SZ": MarketId.CHINEXT,
-    "510710.SH": MarketId.SSE_50,
-    "588000.SH": MarketId.SSE_50,  # 科创50 ETF → SSE_50 as best proxy
-    "588080.SH": MarketId.SSE_50,
-    # 515130.SH 博时沪深300ETF
-    "515130.SH": MarketId.CSI_300,
+    # 科创50 ETF tracks 上证科创板50 (000688) — a different index from 上证50.
+    # Proxying it with SSE_50 produced confidently wrong conclusions.
+    "588000.SS": MarketId.STAR_50,
+    "588080.SS": MarketId.STAR_50,
 }
 
 
-def _normalize_ashare(symbol: str) -> str:
-    """Normalize A-share suffix: .SS → .SH (common alias)."""
-    if symbol.endswith(".SS"):
-        return symbol[:-3] + ".SH"
-    return symbol
+def to_repo_symbol(symbol: str) -> str:
+    """Canonicalize a symbol to the repository's own form.
+
+    Shanghai listings are `.SS` throughout this repo — `lei_signal.data`
+    rejects `.SH` as a non-A-share, so every symbol crossing into price
+    fetching or universe lookup must pass through here.
+    """
+    sym = symbol.strip().upper()
+    if sym.endswith(".SH"):
+        return sym[:-3] + ".SS"
+    return sym
 
 
 # Known US ETFs
@@ -60,11 +85,8 @@ _US_ETF_PRIMARY: dict[str, MarketId] = {
 
 def _standard_etf_mapping(symbol: str) -> MarketMapping | None:
     """Return a standard mapping for known ETFs, or None."""
-    # Normalize symbol case
     sym = symbol.strip().upper()
-
-    # Normalize .SS alias for A-share ETFs
-    canonical = _normalize_ashare(sym)
+    canonical = to_repo_symbol(sym)
 
     # Check A-share ETFs
     if canonical in _ETF_PRIMARY:
@@ -89,6 +111,40 @@ def _standard_etf_mapping(symbol: str) -> MarketMapping | None:
         )
 
     return None
+
+
+def _us_mapping_with_memberships(
+    symbol: str, us_memberships: set[MarketId],
+) -> MarketMapping:
+    """Pick a US primary by SP500 > NASDAQ_100 > RUSSELL_2000 priority."""
+    priority = [MarketId.SP500, MarketId.NASDAQ_100, MarketId.RUSSELL_2000]
+    primary: MarketId | None = None
+    for p in priority:
+        if p in us_memberships:
+            primary = p
+            break
+
+    if primary is None:
+        # All members are non-priority; pick the first by enum order
+        sorted_mems = sorted(us_memberships, key=lambda m: list(MarketId).index(m))
+        primary = sorted_mems[0]
+
+    assert primary is not None
+
+    secondary = tuple(
+        sorted(
+            [m for m in us_memberships if m != primary],
+            key=lambda m: list(MarketId).index(m),
+        )
+    )
+    return MarketMapping(
+        symbol=symbol,
+        primary_market_id=primary,
+        secondary_market_ids=secondary,
+        mapping_incomplete=False,
+        reason_cn=f"美股，主参考 {primary.value}"
+        + (f"，次参考: {', '.join(m.value for m in secondary)}" if secondary else ""),
+    )
 
 
 def _is_a_share(symbol: str) -> bool:
@@ -127,7 +183,39 @@ def map_reference_markets(
     if etf is not None:
         return etf
 
-    # 2. A-share individual stock
+    # 2. Known dashboard index (000001.SS / 000300.SS / 000688.SS / …).
+    #    These look like A-share symbols (`.SS` suffix), but the caller
+    #    has already declared which reference market they belong to via
+    #    `memberships`. Use the first non-`CN_ALL_A` membership as the
+    #    primary so the bread reader is CSI_300, not the generic All-A
+    #    basket.
+    if _is_a_share(symbol) and memberships and to_repo_symbol(symbol) in _KNOWN_INDEX_SYMBOLS:
+        non_generic = tuple(
+            m for m in memberships if m is not MarketId.CN_ALL_A
+        )
+        if non_generic:
+            sorted_memberships = sorted(
+                non_generic, key=lambda m: list(MarketId).index(m),
+            )
+            primary = sorted_memberships[0]
+            secondary = tuple(
+                sorted(
+                    [m for m in memberships if m is not primary],
+                    key=lambda m: list(MarketId).index(m),
+                )
+            )
+            return MarketMapping(
+                symbol=symbol,
+                primary_market_id=primary,
+                secondary_market_ids=secondary,
+                mapping_incomplete=False,
+                reason_cn=(
+                    f"参考指数 {primary.value}"
+                    + (f"，叠加: {', '.join(m.value for m in secondary)}" if secondary else "")
+                ),
+            )
+
+    # 3. A-share individual stock
     if _is_a_share(symbol):
         # Sort secondary memberships by MarketId enum definition order
         sorted_secondary = tuple(
@@ -156,36 +244,7 @@ def map_reference_markets(
         }}
 
         if us_memberships:
-            # Priority: SP500 > NASDAQ_100 > RUSSELL_2000
-            priority = [MarketId.SP500, MarketId.NASDAQ_100, MarketId.RUSSELL_2000]
-            primary: MarketId | None = None
-            for p in priority:
-                if p in us_memberships:
-                    primary = p
-                    break
-
-            if primary is None:
-                # All members are non-priority; pick the first by enum order
-                sorted_mems = sorted(us_memberships, key=lambda m: list(MarketId).index(m))
-                primary = sorted_mems[0]
-
-            # mypy: primary is guaranteed to be MarketId at this point
-            assert primary is not None
-
-            secondary = tuple(
-                sorted(
-                    [m for m in us_memberships if m != primary],
-                    key=lambda m: list(MarketId).index(m),
-                )
-            )
-            return MarketMapping(
-                symbol=symbol,
-                primary_market_id=primary,
-                secondary_market_ids=secondary,
-                mapping_incomplete=False,
-                reason_cn=f"美股，主参考 {primary.value}"
-                + (f"，次参考: {', '.join(m.value for m in secondary)}" if secondary else ""),
-            )
+            return _us_mapping_with_memberships(symbol, set(us_memberships))
 
         # No membership info from point-in-time data → mapping_incomplete
         return MarketMapping(

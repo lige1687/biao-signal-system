@@ -106,6 +106,10 @@ def _serialize_result(
     sma20 = [round(r, 4) if pd.notna(r) else None for r in frame.get("sma20", [])]
     ema60 = [round(r, 4) if pd.notna(r) else None for r in frame.get("ema60", [])]
     ema120 = [round(r, 4) if pd.notna(r) else None for r in frame.get("ema120", [])]
+    # SMA60/120：compute_features 已按 sma_periods=[20,60,120] 算好，
+    # 此前只是没导出。与 EMA60/120 并列，便于对照长周期的快慢口径差异。
+    sma60 = [round(r, 4) if pd.notna(r) else None for r in frame.get("sma60", [])]
+    sma120 = [round(r, 4) if pd.notna(r) else None for r in frame.get("sma120", [])]
     ref20 = [round(r, 4) if pd.notna(r) else None for r in frame.get("close_lag20", [])]
     states = [str(r) if pd.notna(r) else "unknown" for r in frame.get("signal_color", [])]
 
@@ -126,6 +130,14 @@ def _serialize_result(
             "color": "#ea580c",
             "dash": "dash",
             "width": 1.4,
+            # 以下字段供 Web 端点击横线把手后展示解释；Streamlit 模板不消费。
+            "label_cn": "B1 第一阻力",
+            "pivot_date": _date_to_str(a.b1_pivot_date),
+            "distance_pct": (
+                round(float(a.distance_to_b1_pct), 2)
+                if a.distance_to_b1_pct is not None
+                else None
+            ),
         }
 
     # ----- 主底部 C 线（live 底部中最近确认的一个）-----
@@ -147,6 +159,9 @@ def _serialize_result(
                 "color": "#059669",
                 "dash": "dot",
                 "width": 1.4,
+                "label_cn": "C 点失效线",
+                "structure_id": primary.structure_id,
+                "structure_type": primary.structure_type,
             })
 
     # ----- 活跃顶部颈线 -----
@@ -165,6 +180,9 @@ def _serialize_result(
                 "color": "#dc2626",
                 "dash": "dot",
                 "width": 1.4,
+                "label_cn": "顶部颈线",
+                "structure_id": top.structure_id,
+                "structure_type": top.structure_type,
             })
 
     # ----- 底部 / 顶部构造：标记用「确认日小图标」替代「色块区域」-----
@@ -179,6 +197,9 @@ def _serialize_result(
 
     def _struct_info(structure) -> dict[str, Any]:
         return {
+            # structure_id 供 Web 端点击标记后关联到完整结构与其绑定事件；
+            # Streamlit 端模板不消费该字段（纯新增，无影响）。
+            "structure_id": getattr(structure, "structure_id", "") or "",
             "structure_type": getattr(structure, "structure_type", "") or "",
             "source_rule": getattr(structure, "source_rule_id", "") or "",
             "detected_date": _date_to_str(getattr(structure, "detected_date", None)),
@@ -241,6 +262,8 @@ def _serialize_result(
         "sma20": sma20,
         "ema60": ema60,
         "ema120": ema120,
+        "sma60": sma60,
+        "sma120": sma120,
         "ref20": ref20,
         "states": states,
         "volumes": volumes,
@@ -611,9 +634,9 @@ const option = {{
       }}
     }},
     {{ name: "EMA20", type: "line", data: DATA.ema20, showSymbol: false,
-       lineStyle: {{ width: 1.8, color: "#3867d6" }} }},
+       lineStyle: {{ width: 1.8, color: "#2563eb" }} }},
     {{ name: "SMA20", type: "line", data: DATA.sma20, showSymbol: false,
-       lineStyle: {{ width: 1.4, color: "#d89216", type: "dashed" }} }},
+       lineStyle: {{ width: 1.4, color: "#2563eb", type: "dashed" }} }},
     {{
       name: "20周期抵扣价", type: "line", data: DATA.ref20, showSymbol: false,
       lineStyle: {{ width: 1.2, color: "#8d4bd3", type: "dotted", opacity: 0.6 }},
@@ -781,4 +804,8 @@ def render_echarts_kline(
     components.html(html, height=height + 60, scrolling=False)
 
 
-__all__ = ["render_echarts_kline"]
+#: 供 Web API（lei_signal.api）使用的公开别名：与 Streamlit 端共用同一
+#: 序列化口径，避免两套 K 线 JSON 结构漂移。
+serialize_result = _serialize_result
+
+__all__ = ["render_echarts_kline", "serialize_result"]

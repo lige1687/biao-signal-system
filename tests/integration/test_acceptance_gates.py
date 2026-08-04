@@ -254,7 +254,7 @@ def test_gate_12_every_hint_is_traceable_to_rule_version_and_data_date() -> None
     """门禁 12：每条界面提示都能追溯到规则、版本、输入值和数据日期。"""
     result = analyze_bars("G", _bars(), build_history=True)
     for assessment in result.assessments_by_date.values():
-        assert assessment.rule_ruleset_version == "1.0.0"
+        assert assessment.rule_ruleset_version == "1.3.0"
         assert assessment.last_data_date is not None
         for factor in [*assessment.supports, *assessment.conflicts]:
             assert factor.rule_id

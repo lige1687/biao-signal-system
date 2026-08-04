@@ -19,7 +19,8 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.3,<9", "ruff>=0.9", "mypy>=1.10"]
+dev = ["pytest>=8.3,<9", "ruff>=0.9", "mypy>=1.10", "httpx>=0.27"]
+api = ["fastapi>=0.115,<1", "uvicorn[standard]>=0.30,<1", "pydantic>=2.7,<3"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/lei_signal"]
@@ -39,6 +40,8 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 [tool.ruff.lint.per-file-ignores]
 # echarts_kline.py 包含 HTML/CSS/JS 模板字符串，长行不可避免。
 "src/lei_signal/ui/echarts_kline.py" = ["E501"]
+# explanations.py 是中文文案目录：拆行会割裂句子、伤害可读性与可校对性。
+"src/lei_signal/api/explanations.py" = ["E501"]
 
 [tool.mypy]
 python_version = "3.11"

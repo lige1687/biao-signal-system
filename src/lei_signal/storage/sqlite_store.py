@@ -287,6 +287,101 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
             ON market_context_assessments(market_id, available_at);
         """,
     ),
+    (
+        7,
+        "007_watchlist",
+        """
+        -- 看盘系统自选股列表（Web UI 作用域，纯新增，不影响研究表）
+        CREATE TABLE IF NOT EXISTS watchlist_items (
+            symbol TEXT PRIMARY KEY,
+            display_name TEXT,
+            market TEXT NOT NULL,
+            note TEXT,
+            sort_order INTEGER NOT NULL DEFAULT 0,
+            added_at TEXT NOT NULL
+        );
+        """,
+    ),
+    (
+        8,
+        "008_watchlist_groups",
+        """
+        -- 自选分组（如「科技」「防御」）。内置「大盘」组是 config 常量，
+        -- 不入库、不可删，因此本表只存用户自建组。
+        CREATE TABLE IF NOT EXISTS watchlist_groups (
+            group_id   INTEGER PRIMARY KEY AUTOINCREMENT,
+            name       TEXT NOT NULL UNIQUE,
+            sort_order INTEGER NOT NULL DEFAULT 0,
+            created_at TEXT NOT NULL
+        );
+        """,
+    ),
+    (
+        9,
+        "009_market_context_append_only",
+        """
+        -- Round 5: market-context append-only revisions.
+        -- Each write is a new row keyed by revision_no; never UPDATE prior rows,
+        -- never INSERT OR REPLACE the latest reading. eligibility/missing counts
+        -- are persisted (not zeroed) and stale rows are filtered at query time.
+
+        CREATE TABLE IF NOT EXISTS market_breadth_snapshot_revisions (
+            market_id         TEXT NOT NULL,
+            as_of             TEXT NOT NULL,
+            universe_version  TEXT NOT NULL,
+            revision_no       INTEGER NOT NULL,
+            available_at      TEXT NOT NULL,
+            run_id            TEXT NOT NULL,
+            source_kind       TEXT NOT NULL,
+            provenance        TEXT NOT NULL,
+            data_status       TEXT NOT NULL,
+            constituent_count INTEGER NOT NULL,
+            eligible_20       INTEGER NOT NULL,
+            eligible_50       INTEGER NOT NULL,
+            eligible_200      INTEGER NOT NULL,
+            missing_20        INTEGER NOT NULL,
+            missing_50        INTEGER NOT NULL,
+            missing_200       INTEGER NOT NULL,
+            coverage_20       REAL NOT NULL,
+            coverage_50       REAL NOT NULL,
+            coverage_200      REAL NOT NULL,
+            breadth_20        REAL,
+            breadth_50        REAL,
+            breadth_200       REAL,
+            percentile_20     REAL,
+            percentile_50     REAL,
+            percentile_200    REAL,
+            PRIMARY KEY (market_id, as_of, universe_version, revision_no)
+        );
+        CREATE INDEX IF NOT EXISTS idx_breadth_revisions_latest
+            ON market_breadth_snapshot_revisions(market_id, as_of, revision_no DESC);
+
+        CREATE TABLE IF NOT EXISTS market_context_assessment_revisions (
+            market_id           TEXT NOT NULL,
+            as_of               TEXT NOT NULL,
+            available_at        TEXT NOT NULL,
+            revision_no         INTEGER NOT NULL,
+            run_id              TEXT NOT NULL,
+            long_regime         TEXT NOT NULL,
+            heat_state          TEXT NOT NULL,
+            breadth_direction   TEXT NOT NULL,
+            summary             TEXT NOT NULL,
+            reasons_json        TEXT NOT NULL,
+            conflicts_json      TEXT NOT NULL,
+            drawdown_from_ath   REAL,
+            naaim_label         TEXT NOT NULL,
+            aaii_label          TEXT NOT NULL,
+            source_kind         TEXT NOT NULL,
+            provenance          TEXT NOT NULL,
+            data_status         TEXT NOT NULL,
+            PRIMARY KEY (market_id, as_of, available_at, revision_no)
+        );
+        CREATE INDEX IF NOT EXISTS idx_assess_revisions_latest
+            ON market_context_assessment_revisions(
+                market_id, as_of, available_at DESC, revision_no DESC
+            );
+        """,
+    ),
 )
 
 
@@ -299,10 +394,20 @@ class WriteReport:
 
 
 def connect(path: str | Path) -> sqlite3.Connection:
-    """打开连接并应用迁移。"""
-    connection = sqlite3.connect(str(path))
+    """打开连接并应用迁移。
+
+    - ``timeout=5.0``：并发写（同一进程多线程 + 跨进程）时，后到的连接会等 5 秒
+      而不是立即 ``database is locked``。
+    - ``PRAGMA journal_mode = WAL``：多读单写场景下读写不再互斥。看盘页一次
+      会拉 11+ 个标的，每个都要打开 lab.db，串行阻塞会卡到 60s+。WAL 让
+      读和写可以并发，唯一互斥的是「写 vs 写」，由 5s busy_timeout 兜底。
+    - 迁移必须 **只** 第一次开连接时跑一次（pragma journal_mode 是持久化的，
+      后续连接会复用），避免并发连接重复 apply 互相抢锁。
+    """
+    connection = sqlite3.connect(str(path), timeout=5.0)
     connection.row_factory = sqlite3.Row
     connection.execute("PRAGMA foreign_keys = ON")
+    connection.execute("PRAGMA journal_mode = WAL")
     apply_migrations(connection)
     return connection
 
@@ -356,6 +461,12 @@ def apply_migrations(connection: sqlite3.Connection) -> tuple[str, ...]:
             _safe_add_column(connection, "signal_events", "valid_until", "TEXT")
             _safe_add_column(connection, "signal_events", "lifecycle_id", "TEXT")
             _safe_add_column(connection, "signal_events", "ended_event_id", "TEXT")
+        elif name == "008_watchlist_groups":
+            # 建分组表 + 给已有 watchlist_items 补 group_id 列。
+            # group_id 可空：NULL = 未分组（左栏归入「未分组」）。
+            # 不加外键约束：删组时把成员置 NULL 而非级联删除标的。
+            connection.executescript(sql)
+            _safe_add_column(connection, "watchlist_items", "group_id", "INTEGER")
         else:
             # executescript 会隐式提交，因此记账单独提交
             connection.executescript(sql)

@@ -11,6 +11,7 @@ class Market(StrEnum):
     HK = "hk"
     CN_SH = "cn_sh"
     CN_SZ = "cn_sz"
+    SECTOR = "sector"
     OTHER = "other"
 
 
@@ -19,6 +20,7 @@ MARKET_CN: dict[str, str] = {
     "hk": "港股",
     "cn_sh": "沪市",
     "cn_sz": "深市",
+    "sector": "板块",
     "other": "其他",
 }
 
@@ -59,6 +61,11 @@ def resolve_symbol(raw: str) -> SymbolInfo:
         if symbol.startswith(_SH_PREFIXES):
             return SymbolInfo(f"{symbol}.SS", Market.CN_SH, symbol, "Asia/Shanghai")
         return SymbolInfo(f"{symbol}.SZ", Market.CN_SZ, symbol, "Asia/Shanghai")
+
+    # 东财板块代码：BK + 4 位数字（如 BK0457 电网设备）。
+    # .SECTOR 后缀避免与 A 股六位码 / ETF 混淆。
+    if re.fullmatch(r"BK\d{4}", symbol):
+        return SymbolInfo(f"{symbol}.SECTOR", Market.SECTOR, symbol, "Asia/Shanghai")
 
     if not re.fullmatch(r"[A-Z0-9.^=\-]+", symbol):
         raise ValueError("代码格式无法识别；港股请使用 0700.HK 形式")

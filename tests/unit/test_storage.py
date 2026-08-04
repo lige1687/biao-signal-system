@@ -158,7 +158,7 @@ def test_assessment_and_run_metadata_are_recorded(db) -> None:  # noqa: ANN001
     row = db.execute("SELECT * FROM daily_assessments").fetchone()
     assert row["symbol"] == "SYN"
     assert row["stage"] == result.assessment.stage.value
-    assert row["ruleset_version"] == "1.0.0"
+    assert row["ruleset_version"] == "1.3.0"
     assert row["data_status"] == "OK"
 
     record_run(
@@ -166,14 +166,14 @@ def test_assessment_and_run_metadata_are_recorded(db) -> None:  # noqa: ANN001
         run_id="run-1",
         symbol="SYN",
         started_at="2026-08-01T10:00:00",
-        ruleset_version="1.0.0",
+        ruleset_version="1.3.0",
         provider="fixture",
         last_data_date=result.frame.index[-1].date(),
         event_count=len(result.events),
     )
     run_row = db.execute("SELECT * FROM analysis_runs").fetchone()
     assert run_row["event_count"] == len(result.events)
-    assert run_row["ruleset_version"] == "1.0.0"
+    assert run_row["ruleset_version"] == "1.3.0"
 
 
 def test_two_identical_runs_produce_identical_stored_event_set(tmp_path) -> None:  # noqa: ANN001

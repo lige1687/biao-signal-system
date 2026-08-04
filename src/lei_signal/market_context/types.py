@@ -27,11 +27,26 @@ class MarketId(StrEnum):
     CSI_500 = "CSI_500"
     CSI_1000 = "CSI_1000"
     CHINEXT = "CHINEXT"
+    STAR_50 = "STAR_50"
 
     # US
     SP500 = "SP500"
     NASDAQ_100 = "NASDAQ_100"
     RUSSELL_2000 = "RUSSELL_2000"
+
+
+#: Every A-share reference market. A-share LEI fixed thresholds are
+#: research-grade, so this set also drives the `lei_threshold_research`
+#: provenance marker on emitted events.
+A_SHARE_MARKETS: frozenset[MarketId] = frozenset({
+    MarketId.CN_ALL_A,
+    MarketId.SSE_50,
+    MarketId.CSI_300,
+    MarketId.CSI_500,
+    MarketId.CSI_1000,
+    MarketId.CHINEXT,
+    MarketId.STAR_50,
+})
 
 
 # ── Summary and classification enums ──────────────────────────────────

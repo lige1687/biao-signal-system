@@ -9,17 +9,22 @@ Design spec sections 7, 8, 11.
 
 from __future__ import annotations
 
+from dataclasses import replace
+from datetime import date
+
 import pandas as pd
 
+from lei_signal.market_context.breadth import breadth_delta
 from lei_signal.market_context.types import (
+    A_SHARE_MARKETS,
     BreadthDirection,
     BreadthSnapshot,
+    ContextDataStatus,
     ContextSummary,
     HeatState,
     LongRegime,
     MarketContextEvent,
     MarketContextSnapshot,
-    MarketId,
 )
 
 # ── Threshold constants ───────────────────────────────────────────────
@@ -48,10 +53,7 @@ def _detect_extreme_events(
     events: list[MarketContextEvent] = []
 
     # Determine threshold origin
-    is_ashare = snap.market_id in {
-        MarketId.CN_ALL_A, MarketId.SSE_50, MarketId.CSI_300,
-        MarketId.CSI_500, MarketId.CSI_1000, MarketId.CHINEXT,
-    }
+    is_ashare = snap.market_id in A_SHARE_MARKETS
     threshold_origin = "lei_threshold_research" if is_ashare else "formal"
     provenance_note = "lei_threshold_research" if is_ashare else ""
 
@@ -180,118 +182,198 @@ def _classify_heat_state(
 
 
 def _classify_direction(
-    snap: BreadthSnapshot,
-    history: pd.DataFrame,
-) -> tuple[BreadthDirection, float | None, float | None]:
-    """Classify short-term breadth direction from 5-session changes.
-
-    Returns (direction, b20_delta_5, b50_delta_5).
-    """
-    if len(history) < 1 or snap.breadth_20 is None or snap.breadth_50 is None:
-        return BreadthDirection.UNKNOWN, None, None
-
-    # Get 5 sessions ago (last row before current)
-    prev = history.iloc[-1]
-    prev_b20 = prev.get("breadth_20")
-    prev_b50 = prev.get("breadth_50")
-
-    if prev_b20 is None or pd.isna(prev_b20) or prev_b50 is None or pd.isna(prev_b50):
-        return BreadthDirection.UNKNOWN, None, None
-
-    delta_20 = snap.breadth_20 - float(prev_b20)
-    delta_50 = snap.breadth_50 - float(prev_b50)
-
+    b20: float | None,
+    b50: float | None,
+    delta_20: float | None,
+    delta_50: float | None,
+) -> BreadthDirection:
+    """Classify short-term breadth direction from exact 5-session changes."""
+    if b20 is None or b50 is None or delta_20 is None or delta_50 is None:
+        return BreadthDirection.UNKNOWN
     if delta_20 > 0 and delta_50 > 0:
-        direction = BreadthDirection.EXPANDING
-    elif delta_20 < 0 and delta_50 < 0:
-        direction = BreadthDirection.CONTRACTING
-    else:
-        direction = BreadthDirection.DIVERGING
-
-    return direction, delta_20, delta_50
+        return BreadthDirection.EXPANDING
+    if delta_20 < 0 and delta_50 < 0:
+        return BreadthDirection.CONTRACTING
+    return BreadthDirection.DIVERGING
 
 
 def _classify_summary(
     direction: BreadthDirection,
-    delta_20: float | None,
-    delta_50: float | None,
-    snap: BreadthSnapshot,
+    b20: float | None,
+    b50: float | None,
 ) -> ContextSummary:
     """Classify v1 summary from Breadth20/50 5-session direction only.
 
-    Rules (design spec section 11):
-    - Coverage failure → unknown
-    - Both B20 and B50 5-day deltas > 0 → tailwind
-    - Both < 0 → headwind
-    - All other cases → neutral
+    `b20`/`b50` arrive already coverage-gated, so a failed horizon reaches
+    here as None and yields `unknown` rather than a confident reading.
     """
-    # Coverage check
-    if (snap.coverage_20 < 0.90 or snap.coverage_50 < 0.90
-            or snap.breadth_20 is None or snap.breadth_50 is None):
+    if b20 is None or b50 is None:
         return ContextSummary.UNKNOWN
 
-    if direction == BreadthDirection.EXPANDING:
+    if direction is BreadthDirection.EXPANDING:
         return ContextSummary.TAILWIND
-    elif direction == BreadthDirection.CONTRACTING:
+    if direction is BreadthDirection.CONTRACTING:
         return ContextSummary.HEADWIND
-    elif direction == BreadthDirection.DIVERGING:
+    if direction is BreadthDirection.DIVERGING:
         return ContextSummary.NEUTRAL
+    return ContextSummary.UNKNOWN
+
+
+def _index_return(index_bars: pd.DataFrame | None, as_of: date, sessions_back: int) -> float | None:
+    """Index close-to-close return over exactly `sessions_back` sessions."""
+    if index_bars is None or index_bars.empty or "close" not in index_bars.columns:
+        return None
+    if not isinstance(index_bars.index, pd.DatetimeIndex):
+        return None
+    visible = index_bars[index_bars.index <= pd.Timestamp(as_of)].sort_index()
+    if len(visible) <= sessions_back:
+        return None
+    closes = visible["close"]
+    current = closes.iloc[-1]
+    past = closes.iloc[-1 - sessions_back]
+    if pd.isna(current) or pd.isna(past) or float(past) == 0.0:
+        return None
+    return float(current) / float(past) - 1.0
+
+
+def _detect_divergence_events(
+    snap: BreadthSnapshot,
+    *,
+    index_return: float | None,
+    b20_delta_20: float | None,
+    b50_delta_20: float | None,
+    threshold_origin: str,
+    provenance_note: str,
+) -> list[MarketContextEvent]:
+    """Detect 20-session divergence between index price and breadth.
+
+    Index up while both breadth series retreat means the advance narrowed to
+    fewer names; index down while breadth widens means selling narrowed.
+    """
+    if index_return is None or b20_delta_20 is None or b50_delta_20 is None:
+        return []
+
+    if index_return > 0 and b20_delta_20 < 0 and b50_delta_20 < 0:
+        event_type = "negative_breadth_divergence"
+    elif index_return < 0 and b20_delta_20 > 0 and b50_delta_20 > 0:
+        event_type = "positive_breadth_divergence"
     else:
-        return ContextSummary.UNKNOWN
+        return []
+
+    return [MarketContextEvent(
+        market_id=snap.market_id,
+        as_of=snap.as_of,
+        available_at=snap.available_at,
+        event_type=event_type,
+        event_version=_EVENT_VERSION,
+        threshold_origin=threshold_origin,
+        evidence={
+            "index_return_20": index_return,
+            "breadth_20_delta_20": b20_delta_20,
+            "breadth_50_delta_20": b50_delta_20,
+        },
+        provenance=provenance_note,
+        source_kind=snap.source_kind,
+        data_status=snap.data_status,
+    )]
 
 
 def classify_breadth(
     current: BreadthSnapshot,
     history: pd.DataFrame,
+    *,
+    index_bars: pd.DataFrame | None = None,
+    minimum_coverage: float = 0.90,
 ) -> MarketContextSnapshot:
     """Classify a breadth snapshot into a full MarketContextSnapshot.
 
-    Applies all classifier rules: extreme events, long regime, heat state,
-    direction, divergence, and v1 summary.
+    Coverage is gated per 20/50/200 horizon independently: a horizon below
+    `minimum_coverage` contributes nothing — no reading, no conclusion, no
+    extreme event — while the horizons that do have coverage still report.
 
     Args:
         current: The current breadth snapshot to classify.
-        history: Historical breadth DataFrame (indexed by date) for
-                 direction changes and percentiles.
-
-    Returns:
-        A complete MarketContextSnapshot with all classifications.
+        history: Breadth history indexed by date, used as the session axis for
+                 exact 5/20-session changes. Must not extend past `current.as_of`.
+        index_bars: Reference index OHLCV for divergence detection.
+        minimum_coverage: Per-horizon eligible/constituent floor.
     """
-    # Detect extreme events
-    extreme_events = tuple(_detect_extreme_events(current))
+    as_of = current.as_of
 
-    # Classify long regime
-    long_regime = _classify_long_regime(current.breadth_200)
+    ok_20 = current.coverage_20 >= minimum_coverage
+    ok_50 = current.coverage_50 >= minimum_coverage
+    ok_200 = current.coverage_200 >= minimum_coverage
 
-    # Classify heat state
-    heat_state = _classify_heat_state(current)
+    b20 = current.breadth_20 if ok_20 else None
+    b50 = current.breadth_50 if ok_50 else None
+    b200 = current.breadth_200 if ok_200 else None
 
-    # Classify direction and compute deltas
-    direction, delta_20, delta_50 = _classify_direction(current, history)
+    gated = replace(
+        current,
+        breadth_20=b20,
+        breadth_50=b50,
+        breadth_200=b200,
+        percentile_20=current.percentile_20 if ok_20 else None,
+        percentile_50=current.percentile_50 if ok_50 else None,
+        percentile_200=current.percentile_200 if ok_200 else None,
+    )
 
-    # Compute 20-day delta for Breadth200
-    delta_200 = None
-    if len(history) >= 1 and current.breadth_200 is not None:
-        # Use second-to-last row's breadth_200 if available
-        past_b200 = history.iloc[-1].get("breadth_200")
-        if past_b200 is not None and not pd.isna(past_b200):
-            delta_200 = current.breadth_200 - float(past_b200)
+    extreme_events = tuple(_detect_extreme_events(gated))
+    long_regime = _classify_long_regime(b200)
+    heat_state = _classify_heat_state(gated)
 
-    # Classify v1 summary
-    summary = _classify_summary(direction, delta_20, delta_50, current)
+    delta_20_5 = breadth_delta(
+        history, "breadth_20", as_of=as_of, sessions_back=5, current=b20,
+    ) if b20 is not None else None
+    delta_50_5 = breadth_delta(
+        history, "breadth_50", as_of=as_of, sessions_back=5, current=b50,
+    ) if b50 is not None else None
+    delta_200_20 = breadth_delta(
+        history, "breadth_200", as_of=as_of, sessions_back=20, current=b200,
+    ) if b200 is not None else None
 
-    # Build reasons and conflicts
+    direction = _classify_direction(b20, b50, delta_20_5, delta_50_5)
+    summary = _classify_summary(direction, b20, b50)
+
+    is_ashare = current.market_id in A_SHARE_MARKETS
+    threshold_origin = "lei_threshold_research" if is_ashare else "formal"
+    provenance_note = "lei_threshold_research" if is_ashare else ""
+
+    divergence_events = tuple(_detect_divergence_events(
+        gated,
+        index_return=_index_return(index_bars, as_of, 20),
+        b20_delta_20=breadth_delta(
+            history, "breadth_20", as_of=as_of, sessions_back=20, current=b20,
+        ) if b20 is not None else None,
+        b50_delta_20=breadth_delta(
+            history, "breadth_50", as_of=as_of, sessions_back=20, current=b50,
+        ) if b50 is not None else None,
+        threshold_origin=threshold_origin,
+        provenance_note=provenance_note,
+    ))
+
     reasons: list[str] = []
     conflicts: list[str] = []
 
-    if summary == ContextSummary.TAILWIND:
+    for window, ok, coverage in (
+        (20, ok_20, current.coverage_20),
+        (50, ok_50, current.coverage_50),
+        (200, ok_200, current.coverage_200),
+    ):
+        if not ok:
+            conflicts.append(
+                f"Breadth{window} 覆盖率 {coverage:.1%} 低于 {minimum_coverage:.0%}，"
+                f"该周期不出结论"
+            )
+
+    if summary is ContextSummary.TAILWIND:
         reasons.append("Breadth20和Breadth50最近5个交易日同步上升")
-    elif summary == ContextSummary.HEADWIND:
+    elif summary is ContextSummary.HEADWIND:
         reasons.append("Breadth20和Breadth50最近5个交易日同步下降")
 
-    if long_regime == LongRegime.BEAR:
+    if long_regime is LongRegime.BEAR:
         conflicts.append("Breadth200仍低于50%，长期市场底色偏熊")
-    elif long_regime == LongRegime.BULL:
+    elif long_regime is LongRegime.BULL:
         reasons.append("Breadth200高于50%，长期市场底色为牛")
 
     if heat_state in (HeatState.EXTREME_COLD, HeatState.COLD):
@@ -305,39 +387,46 @@ def classify_breadth(
         elif "hot" in evt.event_type:
             reasons.append(f"触发极端事件: {evt.event_type}")
 
-    # Add threshold origin note for A-share
-    if current.market_id in {
-        MarketId.CN_ALL_A, MarketId.SSE_50, MarketId.CSI_300,
-        MarketId.CSI_500, MarketId.CSI_1000, MarketId.CHINEXT,
-    }:
+    for evt in divergence_events:
+        if evt.event_type == "negative_breadth_divergence":
+            conflicts.append("指数近20个交易日上行但B20/B50同步收缩，涨幅集中在少数标的")
+        else:
+            reasons.append("指数近20个交易日下行但B20/B50同步扩张，跌幅集中在少数标的")
+
+    if is_ashare:
         reasons.append("A股LEI固定阈值为研究级，非正式验证阈值")
+
+    data_status = current.data_status
+    if not (ok_20 and ok_50 and ok_200):
+        data_status = ContextDataStatus.INCOMPLETE
 
     return MarketContextSnapshot(
         market_id=current.market_id,
-        as_of=current.as_of,
+        as_of=as_of,
         available_at=current.available_at,
         universe_version=current.universe_version,
-        breadth_20=current.breadth_20,
-        breadth_50=current.breadth_50,
-        breadth_200=current.breadth_200,
+        breadth_20=b20,
+        breadth_50=b50,
+        breadth_200=b200,
         coverage_20=current.coverage_20,
         coverage_50=current.coverage_50,
         coverage_200=current.coverage_200,
         constituent_count=current.constituent_count,
-        percentile_20=current.percentile_20,
-        percentile_50=current.percentile_50,
-        percentile_200=current.percentile_200,
+        percentile_20=gated.percentile_20,
+        percentile_50=gated.percentile_50,
+        percentile_200=gated.percentile_200,
         breadth_direction=direction,
-        breadth_20_delta_5=delta_20,
-        breadth_50_delta_5=delta_50,
-        breadth_200_delta_20=delta_200,
+        breadth_20_delta_5=delta_20_5,
+        breadth_50_delta_5=delta_50_5,
+        breadth_200_delta_20=delta_200_20,
         long_regime=long_regime,
         heat_state=heat_state,
         extreme_events=extreme_events,
+        divergence_events=divergence_events,
         summary=summary,
         reasons=tuple(reasons),
         conflicts=tuple(conflicts),
         source_kind=current.source_kind,
         provenance=current.provenance,
-        data_status=current.data_status,
+        data_status=data_status,
     )

@@ -21,13 +21,15 @@ class DataUnavailableError(ValueError):
 class ValidationReport:
     """校验结果，用于界面展示数据质量。"""
 
-    rows: int
-    first_date: pd.Timestamp | None
-    last_date: pd.Timestamp | None
-    adjusted: bool
-    provider: str
-    duplicates_removed: int
+    symbol: str = ""
+    rows: int = 0
+    first_date: pd.Timestamp | None = None
+    last_date: pd.Timestamp | None = None
+    adjusted: bool = False
+    provider: str = ""
+    duplicates_removed: int = 0
     warnings: tuple[str, ...] = ()
+    reason: str = ""
 
     @property
     def is_sufficient_for_color(self) -> bool:
@@ -117,6 +119,7 @@ def validate_bars(
         )
 
     report = ValidationReport(
+        symbol=symbol,
         rows=len(result),
         first_date=result.index[0],
         last_date=result.index[-1],

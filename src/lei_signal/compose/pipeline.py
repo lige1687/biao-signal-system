@@ -41,6 +41,12 @@ from lei_signal.rules.bottom_structure import (
 from lei_signal.rules.color_events import detect_color_events
 from lei_signal.rules.dual_ma import detect_dual_ma_confirm_events, detect_spread_events
 from lei_signal.rules.ema_reclaim_tiers import detect_structure_bound_ema_reclaim
+from lei_signal.rules.exit_ema20_costbasis import detect_exit_ema20_costbasis_events
+from lei_signal.rules.false_breakout_reclaim import detect_false_breakout_reclaim_events
+from lei_signal.rules.false_breakout_reclaim_short import (
+    detect_false_breakout_reclaim_short_events,
+)
+from lei_signal.rules.first_ma_pullback import detect_first_ma_pullback_events
 from lei_signal.rules.key_wave import detect_key_wave_events
 from lei_signal.rules.lei_color import classify_colors
 from lei_signal.rules.long_trend import (
@@ -48,6 +54,8 @@ from lei_signal.rules.long_trend import (
     compute_weekly_long_trend,
     detect_long_trend_events,
 )
+from lei_signal.rules.low_level_confirmation import detect_low_level_confirmation_events
+from lei_signal.rules.ma_full_alignment import detect_ma_alignment_events
 from lei_signal.rules.resistance_b1 import B1Resistance, find_b1
 from lei_signal.rules.reversals import detect_reversal_events
 from lei_signal.rules.top_structure import detect_top_structure_events, detect_top_structures
@@ -313,6 +321,17 @@ def analyze_bars(
     # EMA 早期转强事件延后到 bottoms 构建完成后，绑定到具体底部结构
     log.extend(detect_dual_ma_confirm_events(frame, symbol))
     log.extend(detect_spread_events(frame, symbol))
+    # 用户交易笔记的研究代理：完整多头趋势成立后，分别识别 SMA20/60/120
+    # 的首次回撤。严格前向推进，不能由旧 Streamlit 泛化文案代替。
+    log.extend(detect_first_ma_pullback_events(frame, symbol))
+    # P2.1 假突破快速收回：突破前高/结构位后被打回，窗口内快速收回且不破坏趋势。
+    log.extend(detect_false_breakout_reclaim_events(frame, symbol))
+    # 模块 D2 做空镜像骨架：突破压力位后拉回 + sma20_slope<0 + 空头排列 -> 做空方向事件。
+    log.extend(detect_false_breakout_reclaim_short_events(frame, symbol))
+    # P2.3 完整均线排列成立/破坏 + EMA 斜率加速度（研究代理确认维度）。
+    log.extend(detect_ma_alignment_events(frame, symbol))
+    # P2.2 日线做多信号后的次级别确认（日线 OHLC 代理，系统未接 60 分钟）。
+    log.extend(detect_low_level_confirmation_events(frame, symbol))
     log.extend(detect_long_trend_events(frame, symbol, timeframe="1d"))
     if not weekly_trend.empty:
         log.extend(detect_long_trend_events(weekly_trend, symbol, timeframe="1w"))
@@ -347,6 +366,9 @@ def analyze_bars(
     log.extend(apply_c_lifecycle(frame, bottoms, symbol))
     # Top+Black 需要读取顶部有效性，因此在顶部结构建立之后执行
     log.extend(detect_key_wave_events(frame, symbol, tops=tops))
+    # A6① 抵扣价退出（研究代理）：收盘同时跌破 EMA20 与 20 日抵扣价即触发退出事件。
+    # 只依赖当日及此前已完成日 K，无未来泄漏；与黑色定义同构但独立成事件、可回测。
+    log.extend(detect_exit_ema20_costbasis_events(frame, symbol))
 
     events = log.events()
     last_date = frame.index[-1].date()

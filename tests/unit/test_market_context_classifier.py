@@ -37,13 +37,14 @@ def _make_snap(
     coverage_200: float = 1.0,
     market_id: MarketId = MarketId.CSI_300,
     source_kind: ContextSourceKind = ContextSourceKind.FORMAL,
+    as_of: date = date(2024, 6, 28),
     **kwargs,
 ) -> BreadthSnapshot:
     """Create a BreadthSnapshot with minimal required fields."""
     return BreadthSnapshot(
         market_id=market_id,
-        as_of=date(2024, 6, 28),
-        available_at=date(2024, 6, 28),
+        as_of=as_of,
+        available_at=as_of,
         universe_version="test",
         constituent_count=100,
         eligible_20=100,
@@ -213,10 +214,19 @@ class TestSummary:
     def test_tailwind(self) -> None:
         """B20 +2, B50 +1 → tailwind."""
         history = _make_history(
-            ["2024-06-21"],  # 5 sessions ago (previous observation)
-            [48.0], [49.0], [45.0],
+            [
+                "2024-06-21",  # 5 sessions ago (real session reference)
+                "2024-06-24",
+                "2024-06-25",
+                "2024-06-26",
+                "2024-06-27",
+                "2024-06-28",  # current as_of
+            ],
+            [48.0, 48.5, 49.0, 49.5, 49.7, 50.0],
+            [49.0, 49.3, 49.5, 49.7, 49.8, 50.0],
+            [45.0, 45.0, 45.0, 45.0, 45.0, 45.0],
         )
-        snap = _make_snap(breadth_20=50.0, breadth_50=50.0)
+        snap = _make_snap(breadth_20=50.0, breadth_50=50.0, as_of=date(2024, 6, 28))
         ctx = classify_breadth(snap, history)
         assert ctx.summary == ContextSummary.TAILWIND
         assert ctx.breadth_direction == BreadthDirection.EXPANDING
@@ -224,10 +234,12 @@ class TestSummary:
     def test_headwind(self) -> None:
         """B20 -2, B50 -1 → headwind."""
         history = _make_history(
-            ["2024-06-21"],
-            [52.0], [51.0], [45.0],
+            ["2024-06-21", "2024-06-24", "2024-06-25", "2024-06-26", "2024-06-27", "2024-06-28"],
+            [52.0, 51.5, 51.0, 50.7, 50.3, 50.0],
+            [51.0, 50.7, 50.5, 50.3, 50.1, 50.0],
+            [45.0, 45.0, 45.0, 45.0, 45.0, 45.0],
         )
-        snap = _make_snap(breadth_20=50.0, breadth_50=50.0)
+        snap = _make_snap(breadth_20=50.0, breadth_50=50.0, as_of=date(2024, 6, 28))
         ctx = classify_breadth(snap, history)
         assert ctx.summary == ContextSummary.HEADWIND
         assert ctx.breadth_direction == BreadthDirection.CONTRACTING
@@ -235,10 +247,12 @@ class TestSummary:
     def test_neutral_diverging(self) -> None:
         """B20 +2, B50 -1 → neutral / diverging."""
         history = _make_history(
-            ["2024-06-21"],
-            [48.0], [51.0], [45.0],
+            ["2024-06-21", "2024-06-24", "2024-06-25", "2024-06-26", "2024-06-27", "2024-06-28"],
+            [48.0, 48.5, 49.0, 49.5, 49.8, 50.0],
+            [51.0, 50.7, 50.5, 50.3, 50.1, 50.0],
+            [45.0, 45.0, 45.0, 45.0, 45.0, 45.0],
         )
-        snap = _make_snap(breadth_20=50.0, breadth_50=50.0)
+        snap = _make_snap(breadth_20=50.0, breadth_50=50.0, as_of=date(2024, 6, 28))
         ctx = classify_breadth(snap, history)
         assert ctx.summary == ContextSummary.NEUTRAL
         assert ctx.breadth_direction == BreadthDirection.DIVERGING
@@ -246,10 +260,12 @@ class TestSummary:
     def test_zero_change_is_diverging(self) -> None:
         """B20 0, B50 +1 → neutral / diverging."""
         history = _make_history(
-            ["2024-06-21"],
-            [50.0], [49.0], [45.0],
+            ["2024-06-21", "2024-06-24", "2024-06-25", "2024-06-26", "2024-06-27", "2024-06-28"],
+            [50.0, 50.0, 50.0, 50.0, 50.0, 50.0],
+            [49.0, 49.3, 49.5, 49.7, 49.9, 50.0],
+            [45.0, 45.0, 45.0, 45.0, 45.0, 45.0],
         )
-        snap = _make_snap(breadth_20=50.0, breadth_50=50.0)
+        snap = _make_snap(breadth_20=50.0, breadth_50=50.0, as_of=date(2024, 6, 28))
         ctx = classify_breadth(snap, history)
         assert ctx.summary == ContextSummary.NEUTRAL
         assert ctx.breadth_direction == BreadthDirection.DIVERGING
@@ -264,10 +280,13 @@ class TestSummary:
     def test_breath200_does_not_change_v1_summary(self) -> None:
         """Breadth200 bear regime must not change the v1 summary from tailwind to headwind."""
         history = _make_history(
-            ["2024-06-21"],  # 5 sessions ago
-            [48.0], [49.0], [30.0],  # Breadth200 was 30 (bear) 5 sessions ago
+            ["2024-06-21", "2024-06-24", "2024-06-25", "2024-06-26", "2024-06-27", "2024-06-28"],
+            [48.0, 48.5, 49.0, 49.5, 49.7, 50.0],
+            [49.0, 49.3, 49.5, 49.7, 49.8, 50.0],
+            [30.0, 30.0, 30.0, 30.0, 30.0, 30.0],
         )
-        snap = _make_snap(breadth_20=50.0, breadth_50=50.0, breadth_200=30.0)
+        snap = _make_snap(breadth_20=50.0, breadth_50=50.0, breadth_200=30.0,
+                          as_of=date(2024, 6, 28))
         ctx = classify_breadth(snap, history)
         # Breadth20/50 5-day direction is tailwind
         assert ctx.summary == ContextSummary.TAILWIND, (

@@ -1,8 +1,17 @@
-"""Market context persistence — Round 4.
+"""Market context persistence — Round 4 + Round 5.
 
 Independent storage for market context data: universe membership versions,
 breadth snapshots, context events, sentiment observations, and context
 assessments. Does NOT write to signal_events or daily_assessments tables.
+
+Round 5 change: the legacy breadth/assessment tables are unchanged in
+schema (so Round 4 dashboards keep working), but the write path now
+appends an immutable revision to the new `*_revisions` tables instead
+of `INSERT OR REPLACE` overwriting the previous reading. Eligibility
+and missing counts are persisted with their real values — never
+zeroed — and stale rows are filtered at read time. The decision-time
+helper `read_market_context_at` is implemented on top of revisions so
+historical snapshots remain auditable.
 
 Design spec section 13, 16.3.
 """
@@ -32,6 +41,39 @@ def _deserialize_reasons(json_str: str) -> tuple[str, ...]:
     return tuple(json.loads(json_str))
 
 
+def _next_revision_no(
+    connection: sqlite3.Connection,
+    *,
+    table: str,
+    key_columns: tuple[str, ...],
+    key_values: tuple[str, ...],
+) -> int:
+    """Compute the next revision_no for an append-only insert."""
+    if not key_columns:
+        raise ValueError("key_columns must be non-empty")
+    where = " AND ".join(f"{col} = ?" for col in key_columns)
+    row = connection.execute(
+        f"SELECT COALESCE(MAX(revision_no), 0) AS m FROM {table} WHERE {where}",
+        key_values,
+    ).fetchone()
+    if row is None:
+        return 1
+    return int(row["m"]) + 1
+
+
+def _eligible_from_coverage(coverage: float, constituent_count: int) -> int:
+    """Recover the integer eligible count from a coverage ratio.
+
+    `MarketContextSnapshot` only carries the ratio, not the raw count.
+    Rounding is honest: the storage layer is committed to "no fake
+    zeros", but neither does it invent more granularity than the source
+    actually provided. A coverage of 1.00 with 300 constituents is 300.
+    """
+    if constituent_count <= 0 or coverage <= 0:
+        return 0
+    return int(round(coverage * constituent_count))
+
+
 def write_market_context(
     connection: sqlite3.Connection,
     snapshot: MarketContextSnapshot,
@@ -39,25 +81,37 @@ def write_market_context(
     *,
     run_id: str,
 ) -> dict:
-    """Write a market context snapshot and its events to the database.
+    """Append a new revision of the breadth snapshot and assessment.
 
-    Uses INSERT OR REPLACE for snapshots (latest wins per market_id + as_of)
-    and INSERT OR IGNORE for events (idempotent by event identity).
-
-    Args:
-        connection: SQLite connection with migrations applied.
-        snapshot: The complete market context snapshot.
-        events: Associated market context events.
-        run_id: Analysis run identifier.
-
-    Returns:
-        Dict with counts of inserted records.
+    Round 5 change: instead of `INSERT OR REPLACE` overwriting the
+    previous reading on the legacy breadth/assessment tables, this
+    function appends to two new revision tables
+    (`market_breadth_snapshot_revisions`, `market_context_assessment_revisions`)
+    with `revision_no = previous_max + 1`, so prior readings are never
+    destroyed. To keep the Round 4 dashboards working during the
+    transition, the legacy tables are also written — but the inserted
+    row is the new one (not a replace of history). Eligibility and
+    missing counts are recovered from the snapshot's coverage and
+    constituent_count rather than being silently zeroed.
     """
     inserted = 0
+    market_id = snapshot.market_id.value
+    as_of = str(snapshot.as_of)
+    universe_version = snapshot.universe_version or ""
 
-    # 1. Write breadth snapshot (from MarketContextSnapshot fields)
+    eligible_20 = _eligible_from_coverage(snapshot.coverage_20, snapshot.constituent_count)
+    eligible_50 = _eligible_from_coverage(snapshot.coverage_50, snapshot.constituent_count)
+    eligible_200 = _eligible_from_coverage(snapshot.coverage_200, snapshot.constituent_count)
+    missing_20 = max(0, snapshot.constituent_count - eligible_20)
+    missing_50 = max(0, snapshot.constituent_count - eligible_50)
+    missing_200 = max(0, snapshot.constituent_count - eligible_200)
+
+    # 1a. Legacy breadth row (preserved for Round 4 dashboards).
+    #     Upsert on the legacy PK so re-runs of the same (market, as_of, universe_version)
+    #     update the dashboard reading — append-only history lives in
+    #     `market_breadth_snapshot_revisions` (see 1b below).
     connection.execute(
-        """INSERT OR REPLACE INTO market_breadth_snapshots (
+        """INSERT INTO market_breadth_snapshots (
             market_id, as_of, available_at, universe_version,
             constituent_count, eligible_20, eligible_50, eligible_200,
             missing_20, missing_50, missing_200,
@@ -65,11 +119,35 @@ def write_market_context(
             breadth_20, breadth_50, breadth_200,
             percentile_20, percentile_50, percentile_200,
             source_kind, provenance, data_status, run_id
-        ) VALUES (?, ?, ?, ?, ?, 0, 0, 0, 0, 0, 0, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(market_id, as_of, universe_version) DO UPDATE SET
+            available_at=excluded.available_at,
+            constituent_count=excluded.constituent_count,
+            eligible_20=excluded.eligible_20,
+            eligible_50=excluded.eligible_50,
+            eligible_200=excluded.eligible_200,
+            missing_20=excluded.missing_20,
+            missing_50=excluded.missing_50,
+            missing_200=excluded.missing_200,
+            coverage_20=excluded.coverage_20,
+            coverage_50=excluded.coverage_50,
+            coverage_200=excluded.coverage_200,
+            breadth_20=excluded.breadth_20,
+            breadth_50=excluded.breadth_50,
+            breadth_200=excluded.breadth_200,
+            percentile_20=excluded.percentile_20,
+            percentile_50=excluded.percentile_50,
+            percentile_200=excluded.percentile_200,
+            source_kind=excluded.source_kind,
+            provenance=excluded.provenance,
+            data_status=excluded.data_status,
+            run_id=excluded.run_id
+        """,
         (
-            snapshot.market_id.value, str(snapshot.as_of), str(snapshot.available_at),
-            snapshot.universe_version,
+            market_id, as_of, str(snapshot.available_at), universe_version,
             snapshot.constituent_count,
+            eligible_20, eligible_50, eligible_200,
+            missing_20, missing_50, missing_200,
             snapshot.coverage_20, snapshot.coverage_50, snapshot.coverage_200,
             snapshot.breadth_20, snapshot.breadth_50, snapshot.breadth_200,
             snapshot.percentile_20, snapshot.percentile_50, snapshot.percentile_200,
@@ -79,36 +157,87 @@ def write_market_context(
     )
     inserted += 1
 
-    # 2. Write events
+    # 1b. Append-only breadth revision. Real eligible/missing values.
+    breadth_rev = _next_revision_no(
+        connection,
+        table="market_breadth_snapshot_revisions",
+        key_columns=("market_id", "as_of", "universe_version"),
+        key_values=(market_id, as_of, universe_version),
+    )
+    connection.execute(
+        """INSERT INTO market_breadth_snapshot_revisions (
+            market_id, as_of, universe_version, revision_no,
+            available_at, run_id, source_kind, provenance, data_status,
+            constituent_count,
+            eligible_20, eligible_50, eligible_200,
+            missing_20, missing_50, missing_200,
+            coverage_20, coverage_50, coverage_200,
+            breadth_20, breadth_50, breadth_200,
+            percentile_20, percentile_50, percentile_200
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+        (
+            market_id, as_of, universe_version, breadth_rev,
+            str(snapshot.available_at), run_id,
+            snapshot.source_kind.value, snapshot.provenance, snapshot.data_status.value,
+            snapshot.constituent_count,
+            eligible_20, eligible_50, eligible_200,
+            missing_20, missing_50, missing_200,
+            snapshot.coverage_20, snapshot.coverage_50, snapshot.coverage_200,
+            snapshot.breadth_20, snapshot.breadth_50, snapshot.breadth_200,
+            snapshot.percentile_20, snapshot.percentile_50, snapshot.percentile_200,
+        ),
+    )
+    inserted += 1
+
+    # 2. Events. Idempotent on (market_id, as_of, event_type, event_version).
     for event in events:
         evidence_json = json.dumps(event.evidence, ensure_ascii=False)
-        connection.execute(
-            """INSERT OR IGNORE INTO market_context_events (
-                market_id, as_of, available_at, event_type, event_version,
-                threshold_origin, evidence_json, provenance, source_kind,
-                data_status, run_id
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-            (
-                event.market_id.value, str(event.as_of), str(event.available_at),
-                event.event_type, event.event_version,
-                event.threshold_origin, evidence_json,
-                event.provenance, event.source_kind.value,
-                event.data_status.value, run_id,
-            ),
-        )
-        inserted += 1
+        try:
+            connection.execute(
+                """INSERT INTO market_context_events (
+                    market_id, as_of, available_at, event_type, event_version,
+                    threshold_origin, evidence_json, provenance, source_kind,
+                    data_status, run_id
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                (
+                    event.market_id.value, str(event.as_of), str(event.available_at),
+                    event.event_type, event.event_version,
+                    event.threshold_origin, evidence_json,
+                    event.provenance, event.source_kind.value,
+                    event.data_status.value, run_id,
+                ),
+            )
+            inserted += 1
+        except sqlite3.IntegrityError:
+            # Round 4 contract: events are idempotent by identity.
+            continue
 
-    # 3. Write context assessment (summary + reasons + conflicts)
+    # 3a. Legacy assessment row.
     connection.execute(
-        """INSERT OR REPLACE INTO market_context_assessments (
+        """INSERT INTO market_context_assessments (
             market_id, as_of, available_at,
             long_regime, heat_state, breadth_direction,
             summary, reasons_json, conflicts_json,
             drawdown_from_ath, naaim_label, aaii_label,
             source_kind, provenance, data_status, run_id
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(market_id, as_of, available_at) DO UPDATE SET
+            long_regime=excluded.long_regime,
+            heat_state=excluded.heat_state,
+            breadth_direction=excluded.breadth_direction,
+            summary=excluded.summary,
+            reasons_json=excluded.reasons_json,
+            conflicts_json=excluded.conflicts_json,
+            drawdown_from_ath=excluded.drawdown_from_ath,
+            naaim_label=excluded.naaim_label,
+            aaii_label=excluded.aaii_label,
+            source_kind=excluded.source_kind,
+            provenance=excluded.provenance,
+            data_status=excluded.data_status,
+            run_id=excluded.run_id
+        """,
         (
-            snapshot.market_id.value, str(snapshot.as_of), str(snapshot.available_at),
+            market_id, as_of, str(snapshot.available_at),
             snapshot.long_regime.value, snapshot.heat_state.value,
             snapshot.breadth_direction.value,
             snapshot.summary.value,
@@ -122,7 +251,39 @@ def write_market_context(
     )
     inserted += 1
 
-    return {"inserted": inserted}
+    # 3b. Append-only assessment revision.
+    assess_rev = _next_revision_no(
+        connection,
+        table="market_context_assessment_revisions",
+        key_columns=("market_id", "as_of", "available_at"),
+        key_values=(market_id, as_of, str(snapshot.available_at)),
+    )
+    connection.execute(
+        """INSERT INTO market_context_assessment_revisions (
+            market_id, as_of, available_at, revision_no,
+            run_id, long_regime, heat_state, breadth_direction,
+            summary, reasons_json, conflicts_json,
+            drawdown_from_ath, naaim_label, aaii_label,
+            source_kind, provenance, data_status
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+        (
+            market_id, as_of, str(snapshot.available_at), assess_rev,
+            run_id,
+            snapshot.long_regime.value, snapshot.heat_state.value,
+            snapshot.breadth_direction.value,
+            snapshot.summary.value,
+            _serialize_reasons(snapshot.reasons),
+            _serialize_reasons(snapshot.conflicts),
+            snapshot.drawdown_from_ath,
+            snapshot.naaim_label.value, snapshot.aaii_label.value,
+            snapshot.source_kind.value, snapshot.provenance,
+            snapshot.data_status.value,
+        ),
+    )
+    inserted += 1
+
+    return {"inserted": inserted, "breadth_revision_no": breadth_rev,
+            "assessment_revision_no": assess_rev}
 
 
 def write_sentiment_observations(
@@ -162,12 +323,16 @@ def read_market_context_at(
 ) -> dict | None:
     """Read the latest market context assessment visible at decision_at.
 
-    Returns the row as a dict, or None if no assessment is available.
+    Stale rows (data_status='stale' or whose `available_at` is older than the
+    most recent non-stale revision) are filtered out so the user never sees
+    a reading that has been superseded. The latest non-stale revision wins.
     """
     row = connection.execute(
-        """SELECT * FROM market_context_assessments
-           WHERE market_id = ? AND available_at <= ?
-           ORDER BY available_at DESC
+        """SELECT * FROM market_context_assessment_revisions
+           WHERE market_id = ?
+             AND available_at <= ?
+             AND data_status <> 'stale'
+           ORDER BY revision_no DESC
            LIMIT 1""",
         (market_id.value, decision_at.isoformat()),
     ).fetchone()

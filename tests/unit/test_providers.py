@@ -416,3 +416,71 @@ def test_chained_provider_skips_sina_when_tencent_present() -> None:
     names = [provider.name for provider in chain]
     assert "sina" not in names
     assert names[0] == "tencent"
+
+
+def test_yahoo_v8_parses_payload_and_supports_overseas_index() -> None:
+    """Yahoo v8 公开图表 API：解析字段正确 + 海外指数（如 ^KS11）走通。
+
+    之前 yfinance 走 query2 端点会触发 IP 限流（429），新 provider 改走
+    query1/v8，实测稳定。fail_open 行为：异常 / 字段缺失 → DataUnavailableError。
+    """
+    import json
+
+    from lei_signal.data.providers import DataUnavailableError, YahooV8PriceProvider
+
+    # 真实 v8 响应形状（截取 1 根 bar 的关键字段）
+    payload = {
+        "chart": {
+            "result": [
+                {
+                    "meta": {
+                        "currency": "KRW",
+                        "symbol": "^KS11",
+                        "longName": "KOSPI Composite Index",
+                    },
+                    "timestamp": [1754000000],
+                    "indicators": {
+                        "quote": [
+                            {
+                                "open": [6200.5],
+                                "high": [6260.0],
+                                "low": [6198.0],
+                                "close": [6257.45],
+                                "volume": [272959],
+                            }
+                        ]
+                    },
+                }
+            ],
+            "error": None,
+        }
+    }
+
+    p = YahooV8PriceProvider(opener=lambda _u: json.dumps(payload))
+    result = p.fetch("^KS11", min_rows=1)
+    assert result.symbol == "^KS11"
+    assert result.display_name == "KOSPI Composite Index"
+    assert result.bars["close"].iloc[-1] == 6257.45
+    assert result.bars["volume"].iloc[-1] == 272959
+
+    # 错误响应：必须 raise 而非返回空
+    p_err = YahooV8PriceProvider(
+        opener=lambda _u: json.dumps({"chart": {"result": [], "error": None}})
+    )
+    try:
+        p_err.fetch("^KS11")
+    except DataUnavailableError as exc:
+        assert "无数据" in str(exc)
+    else:
+        raise AssertionError("expected DataUnavailableError on empty result")
+
+    # 网络异常：原样向上抛 DataUnavailableError，不抛 OSError
+    def boom(_u: str) -> str:
+        raise OSError("connection reset")
+
+    try:
+        YahooV8PriceProvider(opener=boom).fetch("^KS11")
+    except DataUnavailableError as exc:
+        assert "请求失败" in str(exc)
+    else:
+        raise AssertionError("expected DataUnavailableError on network failure")

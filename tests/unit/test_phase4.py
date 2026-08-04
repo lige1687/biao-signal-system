@@ -31,7 +31,7 @@ def test_assessment_contains_every_required_section() -> None:
     assert a.stage in set(Stage)
     assert a.dimensions.keys() == {"结构", "短周期", "长周期", "量价", "上方空间"}
     assert a.stage_change_reason_cn
-    assert a.rule_ruleset_version == "1.0.0"
+    assert a.rule_ruleset_version == "1.3.0"
     assert a.last_data_date == result.frame.index[-1].date()
     assert a.data_status == "OK"
     # 新增/有效/失效三栏必须存在（可以为空列表，但字段必须有）
