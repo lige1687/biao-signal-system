@@ -15,7 +15,7 @@ from fastapi.staticfiles import StaticFiles
 
 from lei_signal.api import config
 from lei_signal.api.market_context_service import MarketContextService
-from lei_signal.api.routes import dashboard, symbols, watchlist
+from lei_signal.api.routes import dashboard, plans, symbols, watchlist
 from lei_signal.api.services import AnalysisService
 
 
@@ -36,11 +36,13 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
     )
     app.state.analysis_service = analysis_service or AnalysisService()
     app.state.watchlist_db_path = config.sqlite_path()
+    app.state.plans_db_path = config.sqlite_path()
     app.state.market_context_service = _build_market_context_service()
 
     app.include_router(dashboard.router)
     app.include_router(symbols.router)
     app.include_router(watchlist.router)
+    app.include_router(plans.router)
 
     @app.get("/api/health")
     def health() -> dict[str, str]:

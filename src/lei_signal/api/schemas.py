@@ -494,3 +494,104 @@ class SymbolDetailDTO(BaseModel):
 
 class RefreshRequest(BaseModel):
     symbols: list[str] | None = None  # None = 大盘 + 自选全部
+
+
+# ---------------- 计划台账（监督员 v1）----------------
+
+
+class CreatePlanRequest(BaseModel):
+    """建计划草案。draft 阶段允许五项预案/valid_until/reason 为空，确认时校验。"""
+
+    symbol: str
+    module: str  # A/B/C/D
+    direction: str  # long/short
+    ruleset_version: str
+    reason: str = ""
+    valid_until: str = ""
+    entry_rule_id: str | None = None
+    entry_lifecycle_id: str | None = None
+    entry_trigger_cn: str | None = None
+    entry_price_ref: float | None = None
+    invalidation_price: float | None = None
+    target_b_price: float | None = None
+    target_b_source: str | None = None
+    reward_risk_at_plan: float | None = None
+    thesis_cn: str = ""
+    invalidation_criteria_cn: str = ""
+    drawdown_playbook_cn: str = ""
+    take_profit_plan_cn: str = ""
+    stop_plan_cn: str = ""
+
+
+class RevisionRequest(BaseModel):
+    """修订请求。verdict 由 drift.check_revision 判定后填入。"""
+
+    changed_field: str
+    new_value: str | None = None
+    verdict_reason_cn: str | None = None
+    changed_by: str = "user"
+
+
+class DeferRequest(BaseModel):
+    """推迟待办。必填 reason_cn + resume_on 谓词（决策 4c）。"""
+
+    reason_cn: str
+    resume_on: dict[str, Any]
+
+
+class PlanAlertDTO(BaseModel):
+    code: str
+    severity: str
+    rule_id: str | None = None
+    evidence: dict[str, Any] = {}
+    principle_source: str | None = None
+    logic_provenance: str = "research_proxy"
+    caveat_cn: str = ""
+    actionable_from: str = ""
+    data_as_of: str = ""
+    next_step_cn: str = ""
+    action_kind: str | None = None
+
+
+class ActionItemDTO(BaseModel):
+    action_id: str
+    plan_id: str
+    kind: str
+    source_alert_code: str
+    state: str
+    due_from: str | None = None
+    nag_count: int = 0
+    last_nagged_bar_date: str | None = None
+    resume_on: str | None = None
+    closed_on: str | None = None
+    close_kind: str | None = None
+
+
+class PlanDTO(BaseModel):
+    plan_id: str
+    symbol: str
+    module: str
+    direction: str
+    entry_rule_id: str | None = None
+    entry_lifecycle_id: str | None = None
+    entry_trigger_cn: str | None = None
+    entry_price_ref: float | None = None
+    invalidation_price: float | None = None
+    target_b_price: float | None = None
+    target_b_source: str | None = None
+    reward_risk_at_plan: float | None = None
+    valid_until: str
+    state: str
+    ruleset_version: str
+    reason: str
+    thesis_cn: str = ""
+    invalidation_criteria_cn: str = ""
+    drawdown_playbook_cn: str = ""
+    take_profit_plan_cn: str = ""
+    stop_plan_cn: str = ""
+    entered_on: str | None = None
+    exited_on: str | None = None
+    exit_reason_rule_id: str | None = None
+    superseded_by: str | None = None
+    created_at: str = ""
+    updated_at: str = ""
