@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from datetime import date
+from typing import Any
 
 import pandas as pd
 from fastapi import APIRouter, HTTPException, Query, Request
@@ -1380,7 +1381,7 @@ def market_context_data_status(request: Request, market_id: str) -> dict:
 
 
 @router.get("/market-context/global-strip")
-def market_context_global_strip(request: Request) -> dict:
+def market_context_global_strip(request: Request) -> dict[str, Any]:
     """Return the two global panels (CN_ALL_A + SP500) for the topbar strip.
 
     The topbar only needs a compact read of B20 / B50 / 5日 delta /
@@ -1394,7 +1395,7 @@ def market_context_global_strip(request: Request) -> dict:
         if snap is None:
             out.append({"market_id": p.symbol, "summary": p.summary, "data_status": p.data_status})
             continue
-        out.append({
+        entry: dict[str, Any] = {
             "market_id": snap["market_id"],
             "display_name": _GLOBAL_DISPLAY.get(snap["market_id"], snap["market_id"]),
             "summary": p.summary,
@@ -1402,6 +1403,7 @@ def market_context_global_strip(request: Request) -> dict:
             "data_status": p.data_status,
             "breadth_20": snap["breadth_20"],
             "breadth_50": snap["breadth_50"],
+            "breadth_200": snap.get("breadth_200"),
             "breadth_20_delta_5": snap["breadth_20_delta_5"],
             "breadth_50_delta_5": snap["breadth_50_delta_5"],
             "percentile_20": snap["percentile_20"],
@@ -1409,9 +1411,92 @@ def market_context_global_strip(request: Request) -> dict:
             "long_regime": snap["long_regime"],
             "heat_state": snap["heat_state"],
             "drawdown_from_ath": snap["drawdown_from_ath"],
+            "alerts": _breadth_alerts(
+                snap.get("breadth_50"),
+                snap.get("breadth_200"),
+                snap.get("breadth_20"),
+            ),
             "updated_at": p.updated_at,
-        })
+        }
+        out.append(entry)
     return {"panels": out}
+
+
+_HOT_THRESHOLD = 85.0
+_COLD_THRESHOLD = 15.0
+
+
+def _breadth_alerts(
+    b50: float | None,
+    b200: float | None,
+    b20: float | None = None,
+) -> list[dict[str, str]]:
+    """Check breadth extremes and return alert dicts.
+
+    Two tiers:
+    - **reversal**: B50 AND B200 both ≥85 (top) or both ≤15 (bottom).
+      These are the rare "both timeframes agree on an extreme" signals
+      the user wants prominently highlighted.
+    - **stage**: B50 alone ≥85 or ≤15 (B200 not confirmed). Less strong,
+      but still a warning that one timeframe is at an extreme.
+
+    When B50 is unavailable (e.g. CN_ALL_A from dapanyuntu, which only
+    publishes MA20), fall back to B20 so the alert still fires - but
+    label it as B20-based so the user knows it's a shorter lookback.
+    """
+    alerts: list[dict[str, str]] = []
+
+    # Pick the best available "medium" breadth: B50 preferred, B20 fallback.
+    medium = b50 if b50 is not None else b20
+    medium_label = "B50" if b50 is not None else ("B20" if b20 is not None else "")
+
+    if medium is None:
+        return alerts
+
+    # Reversal: both medium AND B200 at the same extreme.
+    if b200 is not None:
+        if medium >= _HOT_THRESHOLD and b200 >= _HOT_THRESHOLD:
+            alerts.append({
+                "level": "reversal",
+                "type": "reversal_top",
+                "title": "⚠️ 反转顶部信号",
+                "desc": (
+                    f"{medium_label}={medium:.1f}% 且 B200={b200:.1f}%，"
+                    "同时高于85%，大概率是趋势反转位置"
+                ),
+            })
+        elif medium <= _COLD_THRESHOLD and b200 <= _COLD_THRESHOLD:
+            alerts.append({
+                "level": "reversal",
+                "type": "reversal_bottom",
+                "title": "⚠️ 反转底部信号",
+                "desc": (
+                    f"{medium_label}={medium:.1f}% 且 B200={b200:.1f}%，"
+                    "同时低于15%，大概率是趋势反转位置"
+                ),
+            })
+
+    # Stage: medium alone at an extreme (B200 not confirmed or not available).
+    if medium >= _HOT_THRESHOLD:
+        already = any(a["type"] == "reversal_top" for a in alerts)
+        if not already:
+            alerts.append({
+                "level": "stage",
+                "type": "stage_top",
+                "title": "阶段性顶部预警",
+                "desc": f"{medium_label}={medium:.1f}%，高于85%，大概率是阶段性顶部",
+            })
+    elif medium <= _COLD_THRESHOLD:
+        already = any(a["type"] == "reversal_bottom" for a in alerts)
+        if not already:
+            alerts.append({
+                "level": "stage",
+                "type": "stage_bottom",
+                "title": "短期底部预警",
+                "desc": f"{medium_label}={medium:.1f}%，低于15%，大概率是短期底部",
+            })
+
+    return alerts
 
 
 _GLOBAL_DISPLAY = {

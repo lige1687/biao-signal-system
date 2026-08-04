@@ -13,6 +13,8 @@ from lei_signal.plans.grounding import (
 )
 from lei_signal.plans.llm import (
     ENV_API_KEY,
+    ENV_BASE_URL,
+    ENV_MODEL,
     ArkConfig,
     build_context_payload,
     call_ark,
@@ -94,12 +96,28 @@ def test_context_payload_carries_two_layer_provenance() -> None:
 
 
 def test_load_ark_config_returns_none_without_key(monkeypatch) -> None:  # noqa: ANN001
-    monkeypatch.delenv(ENV_API_KEY, raising=False)
+    # 回退链：ARK_API_KEY 与 ANTHROPIC_AUTH_TOKEN 都得清，否则会复用本机 Claude 凭据
+    for var in (ENV_API_KEY, "ANTHROPIC_AUTH_TOKEN", "ANTHROPIC_BASE_URL", "ANTHROPIC_MODEL"):
+        monkeypatch.delenv(var, raising=False)
     assert load_ark_config() is None
 
 
+def test_load_ark_config_falls_back_to_anthropic_env(monkeypatch) -> None:  # noqa: ANN001
+    """ARK_API_KEY 缺失时复用 ANTHROPIC_AUTH_TOKEN（本机 Claude 用的就是 ark 网关）。"""
+    for var in (ENV_API_KEY, ENV_BASE_URL, ENV_MODEL):
+        monkeypatch.delenv(var, raising=False)
+    monkeypatch.setenv("ANTHROPIC_AUTH_TOKEN", "fake-token-123")
+    monkeypatch.setenv("ANTHROPIC_BASE_URL", "https://ark.cn-beijing.volces.com/api/coding")
+    monkeypatch.setenv("ANTHROPIC_MODEL", "ark-code-latest")
+    cfg = load_ark_config()
+    assert cfg is not None
+    assert cfg.api_key == "fake-token-123"
+    assert cfg.style == "anthropic"  # /api/coding 自动推断为 Anthropic 协议
+
+
 def test_make_ark_renderer_returns_none_without_key(monkeypatch) -> None:  # noqa: ANN001
-    monkeypatch.delenv(ENV_API_KEY, raising=False)
+    for var in (ENV_API_KEY, "ANTHROPIC_AUTH_TOKEN", "ANTHROPIC_BASE_URL", "ANTHROPIC_MODEL"):
+        monkeypatch.delenv(var, raising=False)
     assert make_ark_renderer(plan=_plan()) is None
 
 

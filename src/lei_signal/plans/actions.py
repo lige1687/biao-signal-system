@@ -15,7 +15,7 @@ from typing import Any
 
 from lei_signal.data.calendar import DEFAULT_TRADING_CALENDAR, TradingCalendar
 from lei_signal.domain.rules_config import get_rule
-from lei_signal.plans.models import ActionItem, TradePlan
+from lei_signal.plans.models import SEVERITY_BLOCK, ActionItem, TradePlan
 from lei_signal.plans.monitor import (
     RESOLVABLE_PATHS,
     MonitorContext,
@@ -34,6 +34,8 @@ from lei_signal.plans.store import (
 ACTION_RESUMED = "ACTION_RESUMED"
 CLOSE_KIND_CONDITIONS_LOST = "conditions_lost"
 CLOSE_KIND_SUPERSEDED = "superseded"
+#: 入场被环境阻断（规格 §13 不开新仓）而关闭的 ENTER 待办
+CLOSE_KIND_ENTRY_BLOCKED = "entry_blocked"
 
 
 @dataclass(frozen=True, slots=True)
@@ -77,11 +79,31 @@ def sync_action_items(
 
     用户主动推迟（deferred）的待办不被覆盖--只有 ``resume_on`` 满足才回 open
     （决策 4c：信号触发，非定时）。
+
+    **入场阻断优先于入场提醒**（规格 §13「满足任一情况，不开新仓」）：本轮存在
+    入场类 block alert（如 ENTRY_BLOCKED_BY_TRADABILITY）时不产 ENTER 待办，
+    已开放的 ENTER 待办一并关闭--产了待办再天天催你入场，直接违背 §13。
+    两条 alert 都保留（客观事实不删），只是不催办。
+    R/R<3 属 §13 第 4 条，但决策 3 已定「只提示永不拦截」，是 hint 级，不参与阻断。
     """
     existing_by_kind = {i.kind: i for i in list_action_items(conn, plan.plan_id)}
+    entry_blocked = any(
+        a.severity == SEVERITY_BLOCK and str(a.code).startswith("ENTRY_")
+        for a in alerts
+    )
     items: list[ActionItem] = []
     for alert in alerts:
         kind = alert.action_kind
+        if kind == "ENTER" and entry_blocked:
+            # §13 不开新仓：不产 ENTER 待办，并关掉既有开放项
+            ex = existing_by_kind.get("ENTER")
+            if ex is not None and ex.state == "open":
+                update_action_item(
+                    conn, ex.action_id, state="expired",
+                    close_kind=CLOSE_KIND_ENTRY_BLOCKED,
+                    closed_on=alert.actionable_from,
+                )
+            continue
         if kind in ("ENTER", "EXIT", "REVIEW"):
             ex = existing_by_kind.get(kind)
             if ex is not None and ex.state == "deferred":
@@ -225,6 +247,7 @@ def validate_resume_on(predicate: dict[str, Any], ctx: MonitorContext) -> None:
 __all__ = [
     "ACTION_RESUMED",
     "CLOSE_KIND_CONDITIONS_LOST",
+    "CLOSE_KIND_ENTRY_BLOCKED",
     "CLOSE_KIND_SUPERSEDED",
     "ensure_review_for_expiry",
     "handle_supersede",

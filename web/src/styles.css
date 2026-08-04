@@ -1471,3 +1471,111 @@ a { color: var(--accent); text-decoration: none; }
 .bucket-chip.active { border-color: var(--lei-green); color: var(--lei-green); }
 
 .breadth-modal-footer { font-size: 11px; padding-top: 8px; }
+
+/* ── 宽度极端预警高亮 ────────────────────────────────────── */
+/* 反转信号：B50+B200 同时极端，最高优先级，脉冲提醒 */
+.strip-chip.alert-reversal,
+.breadth-strip-panel.alert-reversal {
+  border-color: #dc2626;
+  border-width: 2px;
+  animation: breadth-pulse-reversal 2s ease-in-out infinite;
+}
+.strip-chip.alert-stage,
+.breadth-strip-panel.alert-stage {
+  border-color: #ea580c;
+  border-width: 1.5px;
+}
+
+@keyframes breadth-pulse-reversal {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+  50%      { box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.08); }
+}
+
+/* 收起态的小铃铛 */
+.strip-chip-bell {
+  font-size: 11px;
+  color: #dc2626;
+  margin-left: 1px;
+  animation: bell-shake 1.5s ease-in-out infinite;
+}
+@keyframes bell-shake {
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(8deg); }
+  75%      { transform: rotate(-8deg); }
+}
+
+/* 展开态的预警标签 */
+.strip-alert-bell {
+  font-size: 13px;
+  color: #dc2626;
+  margin-left: auto;
+}
+.strip-alert-row {
+  display: flex; flex-wrap: wrap; gap: 3px;
+  margin-top: 3px; padding-top: 3px;
+  border-top: 1px dashed var(--border);
+}
+.strip-alert-badge {
+  font-size: 10px; padding: 1px 6px; border-radius: 3px;
+  font-weight: 600; white-space: nowrap;
+}
+.strip-alert-badge.reversal {
+  color: #fff; background: #dc2626;
+  animation: badge-pulse 2s ease-in-out infinite;
+}
+.strip-alert-badge.reversal_bottom {
+  color: #fff; background: #0b9b64;
+  animation: badge-pulse 2s ease-in-out infinite;
+}
+.strip-alert-badge.stage {
+  color: #ea580c; background: rgba(234, 88, 12, 0.1);
+  border: 1px solid #ea580c;
+}
+.strip-alert-badge.stage_bottom {
+  color: #0891b2; background: rgba(8, 145, 178, 0.1);
+  border: 1px solid #0891b2;
+}
+@keyframes badge-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.7; }
+}
+
+/* 模态里的预警横幅 */
+.breadth-alert-banner {
+  margin: 0 0 12px; padding: 10px 14px; border-radius: 6px;
+  font-size: 13px; line-height: 1.5;
+}
+.breadth-alert-banner.reversal {
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid #dc2626;
+  color: #991b1b;
+}
+.breadth-alert-banner.reversal_bottom {
+  background: rgba(11, 155, 100, 0.08);
+  border: 1px solid #0b9b64;
+  color: #065f46;
+}
+.breadth-alert-banner.stage {
+  background: rgba(234, 88, 12, 0.06);
+  border: 1px solid #ea580c;
+  color: #9a3412;
+}
+.breadth-alert-banner.stage_bottom {
+  background: rgba(8, 145, 178, 0.06);
+  border: 1px solid #0891b2;
+  color: #155e75;
+}
+.breadth-alert-banner strong { font-size: 14px; }
+
+/* 牛/熊底色标签（B200 > 50 = 牛, < 50 = 熊） */
+.strip-chip-regime {
+  font-size: 10px; font-weight: 700;
+  padding: 0 4px; border-radius: 3px;
+  line-height: 16px;
+}
+.strip-chip-regime.regime-bull {
+  color: #dc2626; background: rgba(220, 38, 38, 0.1);
+}
+.strip-chip-regime.regime-bear {
+  color: #0b9b64; background: rgba(11, 155, 100, 0.1);
+}

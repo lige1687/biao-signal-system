@@ -23,6 +23,9 @@ RESEARCH_PROXY_MARKER = "判定方式为研究代理"
 
 _RULE_ID_PATTERN = re.compile(r"rule_id[:：]\s*([A-Za-z_][A-Za-z0-9_]*)")
 
+#: 渲染顺序：阻断优先，其后提醒、提示（规格 §13 语义）
+_SEVERITY_ORDER = {"block": 0, "remind": 1, "hint": 2}
+
 
 def verify_grounding(text: str, allowed_rule_ids: set[str] | frozenset[str]) -> tuple[bool, str]:
     """校验 LLM 输出是否接地。返回 (ok, reason)。
@@ -76,15 +79,28 @@ def template_render(
     lines.append("")
 
     open_items = [i for i in (action_items or []) if i.state == "open"]
+    next_step_by_code = {a.code: a.next_step_cn for a in alerts if a.next_step_cn}
     if open_items:
         for item in open_items:
             lines.append(f"▶ 待办（催办第 {item.nag_count} 次）")
-            lines.append(f"  {_action_kind_cn(item.kind)}：{item.source_alert_code}")
+            detail = next_step_by_code.get(item.source_alert_code) or item.source_alert_code
+            lines.append(f"  {_action_kind_cn(item.kind)}：{detail}")
             lines.append(f"  可执行日：{item.due_from or '-'}")
             lines.append("  -> 你可以：标记已执行 / 推迟（需说明原因）")
             lines.append("")
 
-    for a in alerts:
+    # 阻断优先（规格 §13「不开新仓」）：block 先讲，其后 remind、hint。
+    # 否则「环境阻断」与「入场条件成立」并列，读起来像可以入场。
+    ordered = sorted(alerts, key=lambda a: _SEVERITY_ORDER.get(a.severity, 9))
+    entry_blocked = any(
+        a.severity == "block" and str(a.code).startswith("ENTRY_") for a in alerts
+    )
+    if entry_blocked:
+        lines.append("※ 本轮存在入场阻断条件，按规则不开新仓（规格 §13）；")
+        lines.append("  下列入场类提醒被阻断条件压制，不构成可入场结论。")
+        lines.append("")
+
+    for a in ordered:
         lines.append(_severity_mark(a.severity))
         lines.append(f"  {a.next_step_cn or a.code}")
         lines.append(f"  [rule_id:{a.rule_id} | 证据:{_evidence_kv(a.evidence)}]")

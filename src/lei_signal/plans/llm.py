@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import json
 import os
+import time
 from dataclasses import dataclass
 from typing import Any
 
@@ -26,6 +27,13 @@ ENV_API_KEY = "ARK_API_KEY"
 ENV_BASE_URL = "ARK_BASE_URL"
 ENV_MODEL = "ARK_MODEL"
 
+#: 协议风格。ark 有两种网关：
+#:   openai    -> POST {base}/chat/completions，Bearer 鉴权（/api/v3）
+#:   anthropic -> POST {base}/v1/messages，x-api-key 鉴权（/api/coding）
+STYLE_OPENAI = "openai"
+STYLE_ANTHROPIC = "anthropic"
+ENV_STYLE = "ARK_API_STYLE"
+
 #: 表达层系统提示：把红线写成 LLM 可执行的约束。
 SYSTEM_PROMPT = """你是 LEI 交易系统的纪律监督员的**表达层**。
 
@@ -37,25 +45,32 @@ SYSTEM_PROMPT = """你是 LEI 交易系统的纪律监督员的**表达层**。
    用「参考」「提醒」「阻断原因」「可执行日」等中性表述。
 3. 不得推算任何日期。日期只能照抄给定的 actionable_from / data_as_of。
 4. 不得引入给定数据之外的数值。证据数值必须照抄 evidence。
-5. 带 principle_source 的 alert，必须同时写出原文出处与「判定方式为研究代理」。
+5. 标注规则（每条 alert 都要写，不可省）：
+   - 有 principle_source 时：写「{principle_source} | 判定方式为研究代理」
+   - 无 principle_source 但 logic_provenance 是 research_proxy 时：写「判定方式为研究代理」
+   这是溯源纪律，漏写等于把研究代理冒充成原始规则。
 6. 不输出总分、不输出评级、不预测价格。
-7. next_step 必须照抄给定的 next_step_cn，不得自创。
+7. next_step 必须照抄给定的 next_step_cn，不得自创。待办的「要做什么」也照抄
+   action_items 里的 next_step_cn，不要自己造措辞。
+8. **阻断优先**：存在 severity=block 的 alert 时，先讲阻断，并明确「按规则本轮不开新仓」。
+   此时即使同时存在入场条件成立的提醒，也必须说明它被阻断条件压制，不得让两者并列
+   显得可以入场。severity=hint 的提示（如盈亏比不足）不构成阻断。
 
 输出格式（严格遵守，不要额外寒暄）：
 【计划】{symbol} 模块{module} · {entry_rule_id} · 状态 {state} · 有效期至 {valid_until}
 【数据】{data_as_of}{陈旧警示}
 
 ▶ 待办（催办第 N 次）
-  {kind}：{要做什么}
+  {kind}：{照抄 action_items 的 next_step_cn}
   可执行日：{due_from}
   → 你可以：标记已执行 / 推迟（需说明原因）
 
 ■ 阻断 / ■ 提醒 / □ 提示
   {人话说明}
   [rule_id:{rule_id} | 证据:{evidence 键值}]
-  {原文出处 | 判定方式为研究代理}
+  {按铁律 5 写标注}
 
-【下一步观察】{照抄 next_step_cn}
+【下一步观察】{照抄 next_step_cn；多条时分行列出}
 """
 
 
@@ -65,17 +80,41 @@ class ArkConfig:
     base_url: str = DEFAULT_BASE_URL
     model: str = "ark-code-latest"
     timeout: float = 30.0
+    style: str = STYLE_OPENAI
+    max_tokens: int = 1500
+    #: 429/5xx 的退避重试次数。监督员与其他工具共用同一 key 时会撞限频，
+    #: 但投递是 best-effort：重试用尽仍失败即返回 None，由调用方降级模板。
+    retry_on_throttle: int = 2
+    retry_backoff_seconds: float = 2.0
+
+
+def _infer_style(base_url: str) -> str:
+    """按网关路径推断协议风格。/api/coding 是 Anthropic 兼容，/api/v3 是 OpenAI 兼容。"""
+    return STYLE_ANTHROPIC if "/coding" in base_url else STYLE_OPENAI
 
 
 def load_ark_config() -> ArkConfig | None:
-    """从环境变量读 ark 配置。缺 API key 时返回 None（调用方降级模板）。"""
+    """从环境变量读 ark 配置。缺 API key 时返回 None（调用方降级模板）。
+
+    兼容两组变量名：优先 ARK_*；未设置时回退 ANTHROPIC_*（本机 Claude Code 用的
+    就是 ark 的 /api/coding 网关，复用同一凭据避免重复配置）。
+    """
     api_key = os.environ.get(ENV_API_KEY, "").strip()
+    base_url = os.environ.get(ENV_BASE_URL, "").strip()
+    model = os.environ.get(ENV_MODEL, "").strip()
+    if not api_key:
+        api_key = os.environ.get("ANTHROPIC_AUTH_TOKEN", "").strip()
+        base_url = base_url or os.environ.get("ANTHROPIC_BASE_URL", "").strip()
+        model = model or os.environ.get("ANTHROPIC_MODEL", "").strip()
     if not api_key:
         return None
+    base_url = (base_url or DEFAULT_BASE_URL).rstrip("/")
+    style = os.environ.get(ENV_STYLE, "").strip() or _infer_style(base_url)
     return ArkConfig(
         api_key=api_key,
-        base_url=os.environ.get(ENV_BASE_URL, DEFAULT_BASE_URL).rstrip("/"),
-        model=os.environ.get(ENV_MODEL, "ark-code-latest"),
+        base_url=base_url,
+        model=model or "ark-code-latest",
+        style=style,
     )
 
 
@@ -125,6 +164,11 @@ def build_context_payload(
         if frozen_playbook:
             payload["frozen_playbook"] = frozen_playbook
     if action_items:
+        # 待办要带上对应 alert 的 next_step_cn，否则 LLM 只能干巴巴造一句
+        # 「执行入场类对应操作」--照抄判定层文案才是接地生成。
+        next_step_by_code = {
+            a.code: a.next_step_cn for a in alerts if a.next_step_cn
+        }
         payload["action_items"] = [
             {
                 "kind": i.kind,
@@ -132,6 +176,7 @@ def build_context_payload(
                 "due_from": i.due_from,
                 "nag_count": i.nag_count,
                 "source_alert_code": i.source_alert_code,
+                "next_step_cn": next_step_by_code.get(i.source_alert_code, ""),
             }
             for i in action_items
             if i.state == "open"
@@ -141,41 +186,79 @@ def build_context_payload(
     return payload
 
 
+def _user_content(prompt_payload: dict[str, Any]) -> str:
+    return (
+        "把下面的监督结果讲成人话，严格遵守输出格式与铁律：\n"
+        + json.dumps(prompt_payload, ensure_ascii=False, indent=2)
+    )
+
+
+def _extract_openai(data: dict[str, Any]) -> str | None:
+    choices = data.get("choices") or []
+    if not choices:
+        return None
+    content = choices[0].get("message", {}).get("content")
+    return str(content) if content else None
+
+
+def _extract_anthropic(data: dict[str, Any]) -> str | None:
+    """取 content 里的 text block；跳过 thinking block（推理模型会先输出思考）。"""
+    blocks = data.get("content") or []
+    texts = [
+        str(b.get("text", ""))
+        for b in blocks
+        if isinstance(b, dict) and b.get("type") == "text" and b.get("text")
+    ]
+    joined = "\n".join(texts).strip()
+    return joined or None
+
+
 def call_ark(prompt_payload: dict[str, Any], config: ArkConfig) -> str | None:
-    """调 ark chat completions。任何失败返回 None（调用方降级）。"""
-    url = f"{config.base_url}/chat/completions"
-    body = {
-        "model": config.model,
-        "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {
-                "role": "user",
-                "content": (
-                    "把下面的监督结果讲成人话，严格遵守输出格式与铁律：\n"
-                    + json.dumps(prompt_payload, ensure_ascii=False, indent=2)
-                ),
-            },
-        ],
-        "temperature": 0.2,
-    }
+    """调 ark。支持 OpenAI 兼容（/chat/completions）与 Anthropic 兼容（/v1/messages）
+    两种网关。任何失败返回 None（调用方降级）。
+    """
+    if config.style == STYLE_ANTHROPIC:
+        url = f"{config.base_url}/v1/messages"
+        headers = {
+            "x-api-key": config.api_key,
+            "anthropic-version": "2023-06-01",
+            "Content-Type": "application/json",
+        }
+        body: dict[str, Any] = {
+            "model": config.model,
+            "max_tokens": config.max_tokens,
+            "system": SYSTEM_PROMPT,
+            "messages": [{"role": "user", "content": _user_content(prompt_payload)}],
+        }
+        extract = _extract_anthropic
+    else:
+        url = f"{config.base_url}/chat/completions"
+        headers = {
+            "Authorization": f"Bearer {config.api_key}",
+            "Content-Type": "application/json",
+        }
+        body = {
+            "model": config.model,
+            "messages": [
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": _user_content(prompt_payload)},
+            ],
+            "temperature": 0.2,
+        }
+        extract = _extract_openai
+
     try:
-        resp = requests.post(
-            url,
-            headers={
-                "Authorization": f"Bearer {config.api_key}",
-                "Content-Type": "application/json",
-            },
-            json=body,
-            timeout=config.timeout,
-        )
-        if resp.status_code != 200:
+        for attempt in range(config.retry_on_throttle + 1):
+            resp = requests.post(url, headers=headers, json=body, timeout=config.timeout)
+            if resp.status_code == 200:
+                return extract(resp.json())
+            # 429 限频 / 5xx 瞬时故障：退避重试；其他状态码直接放弃
+            throttled = resp.status_code == 429 or resp.status_code >= 500
+            if throttled and attempt < config.retry_on_throttle:
+                time.sleep(config.retry_backoff_seconds * (2**attempt))
+                continue
             return None
-        data = resp.json()
-        choices = data.get("choices") or []
-        if not choices:
-            return None
-        content = choices[0].get("message", {}).get("content")
-        return str(content) if content else None
+        return None
     except (requests.RequestException, ValueError, KeyError, IndexError):
         return None
 
@@ -214,6 +297,9 @@ __all__ = [
     "ENV_API_KEY",
     "ENV_BASE_URL",
     "ENV_MODEL",
+    "ENV_STYLE",
+    "STYLE_ANTHROPIC",
+    "STYLE_OPENAI",
     "SYSTEM_PROMPT",
     "ArkConfig",
     "build_context_payload",

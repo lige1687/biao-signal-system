@@ -474,6 +474,13 @@ export interface MarketDataStatus {
   fixtures_root: string;
 }
 
+export interface BreadthAlert {
+  level: "reversal" | "stage";
+  type: string;
+  title: string;
+  desc: string;
+}
+
 export interface GlobalPanel {
   market_id: string;
   display_name: string;
@@ -482,6 +489,7 @@ export interface GlobalPanel {
   data_status: string;
   breadth_20: number | null;
   breadth_50: number | null;
+  breadth_200: number | null;
   breadth_20_delta_5: number | null;
   breadth_50_delta_5: number | null;
   percentile_20: number | null;
@@ -489,6 +497,7 @@ export interface GlobalPanel {
   long_regime: string;
   heat_state: string;
   drawdown_from_ath: number | null;
+  alerts: BreadthAlert[];
   updated_at: string;
 }
 

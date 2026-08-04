@@ -2,13 +2,19 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { api } from "../api/client";
-import type { GlobalPanel } from "../types";
+import type { BreadthAlert, GlobalPanel } from "../types";
 import MarketBreadthModal from "./MarketBreadthModal";
 
 function fmtPct(v: number | null | undefined, digits = 1): string {
   if (v == null) return "--";
   return `${v.toFixed(digits)}%`;
 }
+
+const REGIME_CN: Record<string, string> = {
+  bull: "牛",
+  bear: "熊",
+  unknown: "",
+};
 
 function fmtSigned(v: number | null | undefined, digits = 1): string {
   if (v == null) return "";
@@ -18,12 +24,20 @@ function fmtSigned(v: number | null | undefined, digits = 1): string {
 
 function deltaArrow(v: number | null | undefined): string {
   if (v == null) return "";
-  return v > 0 ? "↑" : v < 0 ? "↓" : "→";
+  return v > 0 ? "↑" : v < 0 ? "↓" : "->";
 }
 
 function deltaClass(v: number | null | undefined): string {
   if (v == null) return "";
   return v > 0 ? "up" : v < 0 ? "down" : "";
+}
+
+function hasReversalAlert(alerts: BreadthAlert[] | undefined): boolean {
+  return !!alerts?.some((a) => a.level === "reversal");
+}
+
+function hasAnyAlert(alerts: BreadthAlert[] | undefined): boolean {
+  return !!alerts && alerts.length > 0;
 }
 
 /**
@@ -32,6 +46,10 @@ function deltaClass(v: number | null | undefined): string {
  * Collapsed (default): thin single-line bar, just market name + B20 + arrow.
  * Expanded: compact 2-panel grid with B20/B50/5日/分位.
  * State persisted to localStorage.
+ *
+ * When breadth extremes fire (B50 ≥85 or ≤15, or B50+B200 both at an
+ * extreme), a prominent alert badge pulses on the panel so the user
+ * can't miss a potential reversal signal.
  */
 export default function MarketBreadthStrip() {
   const { data, isLoading } = useQuery({
@@ -66,25 +84,41 @@ export default function MarketBreadthStrip() {
     return (
       <>
         <div className="breadth-strip-collapsed">
-          {panels.map((p) => (
-            <button
-              key={p.market_id}
-              className={`strip-chip status-${p.data_status}`}
-              onClick={() => setOpenPanel(p)}
-              title={`${p.display_name} · 点击展开详情`}
-            >
-              <span className="strip-chip-name">{p.display_name}</span>
-              <span className={`strip-chip-val ${deltaClass(p.breadth_20_delta_5)}`}>
-                {fmtPct(p.breadth_20)}
-              </span>
-              <span className={`strip-chip-arrow ${deltaClass(p.breadth_20_delta_5)}`}>
-                {deltaArrow(p.breadth_20_delta_5)}
-              </span>
-              {p.percentile_20 != null && (
-                <span className="strip-chip-pct">P{p.percentile_20.toFixed(0)}</span>
-              )}
-            </button>
-          ))}
+          {panels.map((p) => {
+            const reversal = hasReversalAlert(p.alerts);
+            const anyAlert = hasAnyAlert(p.alerts);
+            return (
+              <button
+                key={p.market_id}
+                className={`strip-chip status-${p.data_status} ${
+                  reversal ? "alert-reversal" : anyAlert ? "alert-stage" : ""
+                }`}
+                onClick={() => setOpenPanel(p)}
+                title={
+                  p.alerts?.length
+                    ? p.alerts.map((a) => a.title).join(" · ")
+                    : `${p.display_name} · 点击展开详情`
+                }
+              >
+                <span className="strip-chip-name">{p.display_name}</span>
+                {REGIME_CN[p.long_regime] && (
+                  <span className={`strip-chip-regime regime-${p.long_regime}`}>
+                    {REGIME_CN[p.long_regime]}
+                  </span>
+                )}
+                <span className={`strip-chip-val ${deltaClass(p.breadth_20_delta_5)}`}>
+                  {fmtPct(p.breadth_20)}
+                </span>
+                <span className={`strip-chip-arrow ${deltaClass(p.breadth_20_delta_5)}`}>
+                  {deltaArrow(p.breadth_20_delta_5)}
+                </span>
+                {p.percentile_20 != null && (
+                  <span className="strip-chip-pct">P{p.percentile_20.toFixed(0)}</span>
+                )}
+                {anyAlert && <span className="strip-chip-bell">⚠</span>}
+              </button>
+            );
+          })}
           <button className="strip-toggle" onClick={toggle} title="展开市场宽度">
             ▾
           </button>
@@ -99,37 +133,61 @@ export default function MarketBreadthStrip() {
   return (
     <>
       <div className="breadth-strip">
-        {panels.map((p) => (
-          <button
-            key={p.market_id}
-            className={`breadth-strip-panel status-${p.data_status}`}
-            onClick={() => setOpenPanel(p)}
-            title={`${p.display_name} · 点击查看完整宽度与历史分位收益`}
-          >
-            <div className="strip-panel-head">
-              <span className="strip-panel-name">{p.display_name}</span>
-              {p.percentile_20 != null && (
-                <span className="strip-pct-badge">P{p.percentile_20.toFixed(0)}</span>
+        {panels.map((p) => {
+          const reversal = hasReversalAlert(p.alerts);
+          const anyAlert = hasAnyAlert(p.alerts);
+          return (
+            <button
+              key={p.market_id}
+              className={`breadth-strip-panel status-${p.data_status} ${
+                reversal ? "alert-reversal" : anyAlert ? "alert-stage" : ""
+              }`}
+              onClick={() => setOpenPanel(p)}
+              title={`${p.display_name} · 点击查看完整宽度与历史分位收益`}
+            >
+              <div className="strip-panel-head">
+                <span className="strip-panel-name">{p.display_name}</span>
+                {REGIME_CN[p.long_regime] && (
+                  <span className={`strip-chip-regime regime-${p.long_regime}`}>
+                    {REGIME_CN[p.long_regime]}
+                  </span>
+                )}
+                {p.percentile_20 != null && (
+                  <span className="strip-pct-badge">P{p.percentile_20.toFixed(0)}</span>
+                )}
+                {anyAlert && <span className="strip-alert-bell">⚠</span>}
+              </div>
+              <div className="strip-panel-body">
+                <div className="strip-cell">
+                  <span className="muted">B20</span>
+                  <strong>{fmtPct(p.breadth_20)}</strong>
+                  <span className={`strip-delta ${deltaClass(p.breadth_20_delta_5)}`}>
+                    {deltaArrow(p.breadth_20_delta_5)} {fmtSigned(p.breadth_20_delta_5)}
+                  </span>
+                </div>
+                <div className="strip-cell">
+                  <span className="muted">B50</span>
+                  <strong>{fmtPct(p.breadth_50)}</strong>
+                  <span className={`strip-delta ${deltaClass(p.breadth_50_delta_5)}`}>
+                    {deltaArrow(p.breadth_50_delta_5)} {fmtSigned(p.breadth_50_delta_5)}
+                  </span>
+                </div>
+              </div>
+              {anyAlert && (
+                <div className="strip-alert-row">
+                  {p.alerts!.map((a) => (
+                    <span
+                      key={a.type}
+                      className={`strip-alert-badge ${a.level} ${a.type}`}
+                    >
+                      {a.title}
+                    </span>
+                  ))}
+                </div>
               )}
-            </div>
-            <div className="strip-panel-body">
-              <div className="strip-cell">
-                <span className="muted">B20</span>
-                <strong>{fmtPct(p.breadth_20)}</strong>
-                <span className={`strip-delta ${deltaClass(p.breadth_20_delta_5)}`}>
-                  {deltaArrow(p.breadth_20_delta_5)} {fmtSigned(p.breadth_20_delta_5)}
-                </span>
-              </div>
-              <div className="strip-cell">
-                <span className="muted">B50</span>
-                <strong>{fmtPct(p.breadth_50)}</strong>
-                <span className={`strip-delta ${deltaClass(p.breadth_50_delta_5)}`}>
-                  {deltaArrow(p.breadth_50_delta_5)} {fmtSigned(p.breadth_50_delta_5)}
-                </span>
-              </div>
-            </div>
-          </button>
-        ))}
+            </button>
+          );
+        })}
         <button className="strip-toggle" onClick={toggle} title="收起市场宽度">
           ▴
         </button>

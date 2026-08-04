@@ -207,3 +207,56 @@ def test_context_from_result_fixture_marks_stale() -> None:
     result = analyze_bars("000001.SS", bars)
     ctx = context_from_result(result, cache_fallback_used=True)
     assert ctx.cache_fallback_used is True
+
+
+# ---------------------------------------------------------------- §13 入场阻断优先
+
+
+def test_entry_block_suppresses_enter_action_item(tmp_path) -> None:  # noqa: ANN001
+    """规格 §13「满足任一情况，不开新仓」：入场被阻断时不产 ENTER 待办。
+
+    回归：曾同时产出 ENTRY_BLOCKED_BY_TRADABILITY(block) 与 ENTRY_CONDITIONS_MET，
+    并照产 ENTER 待办天天催入场，直接违背 §13。
+    """
+    conn = connect(tmp_path / "block.db")
+    plan = _make_armed_plan(conn)
+    ctx = _ctx(tradability_tradable=False,
+               tradability_blocking_reasons=("5.横盘反复且无标志性动作",))
+    cycle = run_plan_cycle(conn, plan, ctx)
+    codes = [a.code for a in cycle.alerts]
+    # 两条 alert 都保留（客观事实不删）
+    assert "ENTRY_BLOCKED_BY_TRADABILITY" in codes
+    assert "ENTRY_CONDITIONS_MET" in codes
+    # 但不产 ENTER 待办
+    items = list_action_items(conn, plan.plan_id, state="open")
+    assert not any(i.kind == "ENTER" for i in items), "阻断时不得产 ENTER 待办"
+    conn.close()
+
+
+def test_entry_block_closes_existing_open_enter(tmp_path) -> None:  # noqa: ANN001
+    """先有开放 ENTER 待办，随后环境转为阻断 -> 该待办被关闭，不再催办。"""
+    conn = connect(tmp_path / "block2.db")
+    plan = _make_armed_plan(conn)
+    # 第一轮：可交易，产 ENTER 待办
+    run_plan_cycle(conn, plan, _ctx(last_bar_date="2026-08-04"))
+    assert any(i.kind == "ENTER" for i in list_action_items(conn, plan.plan_id, state="open"))
+    # 第二轮：转为阻断
+    plan2 = list_plans(conn, symbol="000001.SS")[0]
+    run_plan_cycle(conn, plan2, _ctx(last_bar_date="2026-08-05",
+                                     tradability_tradable=False,
+                                     tradability_blocking_reasons=("横盘反复",)))
+    open_kinds = [i.kind for i in list_action_items(conn, plan.plan_id, state="open")]
+    assert "ENTER" not in open_kinds, "阻断后既有 ENTER 待办应被关闭"
+    conn.close()
+
+
+def test_rr_below_ideal_does_not_suppress_enter(tmp_path) -> None:  # noqa: ANN001
+    """R/R<3 属 §13 第4条，但决策3定为只提示永不拦截 -> 仍产 ENTER 待办。"""
+    conn = connect(tmp_path / "rr.db")
+    plan = _make_armed_plan(conn)
+    low_rr = OpportunityRef("lc1", True, "confirmed", "first_ma_pullback", 1.5, True, "long")
+    cycle = run_plan_cycle(conn, plan, _ctx(opportunities=(low_rr,)))
+    assert "ENTRY_RR_BELOW_IDEAL" in [a.code for a in cycle.alerts]
+    items = list_action_items(conn, plan.plan_id, state="open")
+    assert any(i.kind == "ENTER" for i in items), "R/R 不足不得拦截入场待办"
+    conn.close()

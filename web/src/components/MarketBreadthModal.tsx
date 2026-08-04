@@ -58,6 +58,17 @@ export default function MarketBreadthModal({ panel, onClose }: Props) {
           <button className="btn small" onClick={onClose}>关闭</button>
         </div>
 
+        {panel.alerts && panel.alerts.length > 0 && (
+          <div className="breadth-alert-section">
+            {panel.alerts.map((a) => (
+              <div key={a.type} className={`breadth-alert-banner ${a.type}`}>
+                <strong>{a.title}</strong>
+                <div>{a.desc}</div>
+              </div>
+            ))}
+          </div>
+        )}
+
         <div className="breadth-modal-grid">
           <div className="modal-cell">
             <div className="muted">B20 (MA20 上方)</div>
