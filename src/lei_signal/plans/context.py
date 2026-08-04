@@ -7,6 +7,8 @@ from __future__ import annotations
 
 from typing import Any
 
+import pandas as pd
+
 from lei_signal.domain.rules_config import ruleset_version
 from lei_signal.plans.monitor import ExitSignalRef, MonitorContext, OpportunityRef
 
@@ -96,4 +98,54 @@ def from_symbol_detail(dto: Any) -> MonitorContext:
     )
 
 
-__all__ = ["from_symbol_detail"]
+def context_from_result(result: Any, *, cache_fallback_used: bool = False) -> MonitorContext:
+    """从 ``AnalysisResult`` 构建 MonitorContext（监督员 live/fixture 取数路径）。
+
+    复用路由 ``_assessment_dto`` 的全部机会/可交易性/退出/R/R 拼装逻辑，避免与
+    看盘界面分叉。lazy import 以免 plans 包在加载期拖入整个路由模块。
+    """
+    from lei_signal.api.routes.symbols import _assessment_dto  # noqa: PLC0415
+    from lei_signal.domain.rules_config import ruleset_version  # noqa: PLC0415
+
+    assessment = _assessment_dto(result)
+    frame = result.frame
+    last_row = frame.iloc[-1]
+    last_bar_date = frame.index[-1].date().isoformat()
+    current_close = float(last_row["close"]) if len(frame) else None
+    ema20 = (
+        float(last_row["ema20"])
+        if "ema20" in frame.columns and pd.notna(last_row.get("ema20"))
+        else None
+    )
+
+    opportunities: list[OpportunityRef] = []
+    for opp in (*assessment.trade_opportunities, *assessment.pullback_opportunities,
+                *assessment.conditional_scenarios):
+        ref = _to_opportunity_ref(opp)
+        if ref is not None:
+            opportunities.append(ref)
+    exit_signals = tuple(
+        ExitSignalRef(rule_id=es.rule_id, state=es.state)
+        for es in assessment.exit_signals
+    )
+    new_event_rule_ids = tuple(
+        e.rule_id for e in result.assessment.new_events if e.rule_id
+    )
+    tradability = assessment.tradability
+    return MonitorContext(
+        last_bar_date=last_bar_date,
+        cache_fallback_used=cache_fallback_used,
+        current_close=current_close,
+        ema20=ema20,
+        tradability_tradable=bool(tradability.tradable) if tradability else True,
+        tradability_blocking_reasons=tuple(
+            tradability.blocking_reasons if tradability else ()
+        ),
+        ruleset_version=ruleset_version(),
+        opportunities=tuple(opportunities),
+        exit_signals=exit_signals,
+        new_event_rule_ids=new_event_rule_ids,
+    )
+
+
+__all__ = ["context_from_result", "from_symbol_detail"]

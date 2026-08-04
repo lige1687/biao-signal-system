@@ -1370,9 +1370,16 @@ class THSBoardProvider:
             adjusted=False,
             min_rows=min_rows,
         )
+        # 板块中文名：查静态表（labels.THS_INDUSTRY_NAMES），查不到回退代码
+        display_name = bare
+        try:
+            from lei_signal.api.labels import THS_INDUSTRY_NAMES
+            display_name = THS_INDUSTRY_NAMES.get(code, bare)
+        except Exception:  # noqa: BLE001 - labels 不可用时回退代码，不阻断
+            pass
         return PriceData(
             symbol=info.symbol,
-            display_name=bare,
+            display_name=display_name,
             bars=bars,
             report=report,
             info=info,

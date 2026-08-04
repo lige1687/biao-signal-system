@@ -54,7 +54,13 @@ def _resolve_display(
     if override is not None:
         return override.display_name, override.market_cn
     if entry.result is not None:
-        return entry.result.display_name, entry.result.price_data.info.market_cn
+        name = entry.result.display_name
+        # 缓存兜底时 display_name 会退回 symbol；板块在此回填中文名
+        if name == symbol and symbol.startswith("TH"):
+            from lei_signal.api.labels import THS_INDUSTRY_NAMES
+            code = symbol[2:8]
+            name = THS_INDUSTRY_NAMES.get(code, symbol)
+        return name, entry.result.price_data.info.market_cn
     if stored is not None:
         # 无分析结果时退回存储名（可能为 None → 显示 symbol）
         name = stored.display_name or symbol
