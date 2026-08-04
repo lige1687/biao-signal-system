@@ -8,6 +8,7 @@ from __future__ import annotations
 import json
 import re
 import time
+from pathlib import Path
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -1219,6 +1220,194 @@ class SohuSectorProvider:
         return df[["open", "high", "low", "close", "volume"]]
 
 
+class THSBoardProvider:
+    """同花顺行业板块日线（主用源）。
+
+    为什么是板块的主路径
+    --------------------
+    东财 ``push2his`` 在部分网络环境 TLS 被掐；搜狐 ``hisHq`` 有 code 截断 bug。
+    同花顺 ``d.10jqka.com.cn/v4/line/bk_{code}/01/{year}.js`` 实测稳定、不限流、
+    按年分片返回完整 OHLCV。行业板块 881xxx（90 个）覆盖电网设备、电力、半导体、
+    通信等主流行业。
+
+    数据口径
+    --------
+    - 板块指数（成份股加权），不复权（指数无复权概念）。
+    - 按年分片：每 年 一个 js 文件，拼接得到全历史（2018 至今 2000+ 根）。
+    - 盘中无当日 bar：同花顺收盘后才出当日 K（板块看收盘形态即可）。
+    - 字段顺序：日期,开,收,高,低,量,额,,,,标志位（注意收在高前）。
+
+    cookie 机制
+    -----------
+    接口需要 ``Cookie: v=<token>``，token 由同花顺的 ``ths.js``（混淆 JS）算出。
+    ``ths.js`` 已内嵌为 ``data/assets/ths.js``，用 ``py_mini_racer`` 执行--
+    不依赖 akshare 运行时。token 缓存 1 小时（实测有效期远长于此）。
+
+    符号约定
+    --------
+    用户输 ``TH881278`` -> resolve_symbol 识别为 Market.SECTOR -> 这里取 881278
+    请求。display_name 由调用方通过板块列表反查（本 provider 只保证代码可用）。
+    """
+
+    name = "ths_board"
+    _LINE_URL = "https://d.10jqka.com.cn/v4/line/bk_{code}/01/{year}.js"
+    _CODE_RE = __import__("re").compile(r"TH(\d{6})", __import__("re").IGNORECASE)
+    _THS_JS_PATH = (
+        Path(__file__).resolve().parent / "assets" / "ths.js"
+    )
+    _COOKIE_TTL = 3600.0  # 1 小时
+
+    def __init__(
+        self,
+        opener: Callable[[str, dict[str, str]], str] | None = None,
+        *,
+        timeout: float = 12.0,
+        start_year: int = 2018,
+        sleep: Callable[[float], None] | None = None,
+    ) -> None:
+        self._opener = opener or self._default_opener
+        self._timeout = timeout
+        self._start_year = start_year
+        self._sleep = sleep if sleep is not None else time.sleep
+        self._cookie: str | None = None
+        self._cookie_at: float = 0.0
+
+    @classmethod
+    def supports(cls, symbol: str) -> bool:
+        return bool(cls._CODE_RE.search(symbol))
+
+    def _compute_cookie(self) -> str:
+        """用 ths.js 算 v cookie（py_mini_racer 执行混淆 JS）。"""
+        import time as _time
+        if self._cookie and (_time.time() - self._cookie_at) < self._COOKIE_TTL:
+            return self._cookie
+        try:
+            import py_mini_racer
+        except ImportError as exc:
+            raise DataUnavailableError(
+                "同花顺板块需要 py_mini_racer（pip install py_mini_racer）"
+            ) from exc
+        js_text = self._THS_JS_PATH.read_text(encoding="utf-8")
+        racer = py_mini_racer.MiniRacer()
+        racer.eval(js_text)
+        token = racer.call("v")
+        if not isinstance(token, str) or not token:
+            raise DataUnavailableError("同花顺 ths.js 算出的 v cookie 为空")
+        self._cookie = token
+        self._cookie_at = _time.time()
+        return token
+
+    @staticmethod
+    def _default_opener(url: str, headers: dict[str, str]) -> str:
+        request = urllib.request.Request(  # noqa: S310 - 固定 https 主机
+            url, headers={**headers, "User-Agent": headers.get("User-Agent", "Mozilla/5.0")}
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=12) as response:  # noqa: S310
+                if response.status != 200:
+                    raise DataUnavailableError(f"同花顺板块返回 HTTP {response.status}")
+                return response.read().decode("utf-8", errors="replace")
+        except urllib.error.URLError as exc:
+            raise DataUnavailableError(f"同花顺板块请求失败：{exc.reason}") from exc
+        except OSError as exc:
+            raise DataUnavailableError(f"同花顺板块连接中断：{exc}") from exc
+
+    def _fetch_year(self, code: str, year: int) -> list[list[str]]:
+        url = self._LINE_URL.format(code=code, year=year)
+        headers = {
+            "Referer": "http://q.10jqka.com.cn",
+            "Host": "d.10jqka.com.cn",
+            "Cookie": f"v={self._compute_cookie()}",
+        }
+        text = self._opener(url, headers)
+        # 响应：quotebridge_v4_line_bk_881278_01_2026({"data":"...;..."})
+        start = text.find("{")
+        if start < 0:
+            raise DataUnavailableError(f"同花顺板块 {code} {year} 年返回非 JSONP")
+        try:
+            payload = json.loads(text[start : text.rfind(")")])
+        except json.JSONDecodeError as exc:
+            raise DataUnavailableError(f"同花顺板块 {code} {year} 年 JSON 解析失败") from exc
+        data = payload.get("data")
+        if not isinstance(data, str) or not data.strip():
+            return []
+        return [b.split(",") for b in data.split(";") if b.strip()]
+
+    def fetch(self, symbol: str, *, min_rows: int = 21) -> PriceData:
+        m = self._CODE_RE.search(symbol)
+        if m is None:
+            raise DataUnavailableError(
+                f"{symbol} 不是同花顺板块代码（需 TH+6 位数字）"
+            )
+        code = m.group(1)
+        bare = f"TH{code}"
+        info = resolve_symbol(bare)
+
+        # 按年拉全历史，拼接
+        import datetime as _dt
+        end_year = _dt.datetime.now().year
+        all_rows: list[list[str]] = []
+        last_err: DataUnavailableError | None = None
+        for year in range(self._start_year, end_year + 1):
+            try:
+                rows = self._fetch_year(code, year)
+                all_rows.extend(rows)
+            except DataUnavailableError as exc:
+                # 单年失败不致命（可能该年无数据/限流）；至少拿到一年就继续
+                last_err = exc
+                # cookie 可能过期，重置后重试一次
+                self._cookie = None
+        if not all_rows:
+            raise last_err or DataUnavailableError(
+                f"同花顺板块 {bare} 无任何年份数据"
+            )
+
+        bars_raw = self._parse_rows(all_rows, bare)
+        bars, report = validate_bars(
+            bars_raw,
+            symbol=info.symbol,
+            provider=self.name,
+            adjusted=False,
+            min_rows=min_rows,
+        )
+        return PriceData(
+            symbol=info.symbol,
+            display_name=bare,
+            bars=bars,
+            report=report,
+            info=info,
+        )
+
+    @staticmethod
+    def _parse_rows(rows: list[list[str]], symbol: str) -> pd.DataFrame:
+        """解析同花顺 line 数据。
+
+        字段：日期,开,收,高,低,量,额,,,,标志位（收在高前，与 OHLC 惯例不同）。
+        """
+        records: list[dict[str, Any]] = []
+        dates: list[str] = []
+        for row in rows:
+            if len(row) < 7:
+                continue
+            try:
+                records.append({
+                    "open": float(row[1]),
+                    "close": float(row[2]),
+                    "high": float(row[3]),
+                    "low": float(row[4]),
+                    "volume": float(row[5]) if row[5] else 0.0,
+                })
+                dates.append(row[0])
+            except (ValueError, TypeError):
+                continue
+        if not records:
+            raise DataUnavailableError(f"{symbol} 同花顺板块日线解析为空")
+        df = pd.DataFrame(records)
+        df.index = pd.to_datetime(dates, format="%Y%m%d", errors="coerce")
+        df = df[df.index.notna()]
+        return df[["open", "high", "low", "close", "volume"]]
+
+
 def default_provider() -> ChainedPriceProvider:
     """默认行情源组合。
 
@@ -1234,6 +1423,7 @@ def default_provider() -> ChainedPriceProvider:
             TencentPriceProvider(),
             TencentGlobalIndexProvider(),
             EastmoneyPriceProvider(),
+            THSBoardProvider(),
             EastmoneySectorProvider(),
             SohuSectorProvider(),
             YahooV8PriceProvider(),
@@ -1250,6 +1440,7 @@ __all__ = [
     "PriceProvider",
     "SinaPriceProvider",
     "SohuSectorProvider",
+    "THSBoardProvider",
     "TencentGlobalIndexProvider",
     "TencentPriceProvider",
     "YahooPriceProvider",

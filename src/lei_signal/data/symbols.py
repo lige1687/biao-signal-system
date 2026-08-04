@@ -73,6 +73,12 @@ def resolve_symbol(raw: str) -> SymbolInfo:
     if re.fullmatch(r"SW\d{4}", symbol):
         return SymbolInfo(f"{symbol}.SECTOR", Market.SECTOR, symbol, "Asia/Shanghai")
 
+    # 同花顺行业板块：TH + 6 位代码（如 TH881278 电网设备、TH881121 半导体）。
+    # 走 d.10jqka.com.cn/v4/line/bk_{code}/01/{year}.js，需 ths.js 算 v cookie。
+    # 行业板块 881xxx（90 个），概念板块需额外 HTML 解析（暂不支持）。
+    if re.fullmatch(r"TH\d{6}", symbol):
+        return SymbolInfo(f"{symbol}.SECTOR", Market.SECTOR, symbol, "Asia/Shanghai")
+
     if not re.fullmatch(r"[A-Z0-9.^=\-]+", symbol):
         raise ValueError("代码格式无法识别；港股请使用 0700.HK 形式")
 

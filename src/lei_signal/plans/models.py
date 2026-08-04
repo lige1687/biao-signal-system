@@ -113,6 +113,7 @@ class PlanAlert:
     actionable_from: str = ""        # ISO 日期，严格晚于 data_as_of
     data_as_of: str = ""             # ISO 日期 = last_bar_date
     next_step_cn: str = ""
+    action_kind: str | None = None   # ENTER/EXIT/REVIEW 产待办；CLOSE_ENTER 关闭 ENTER；None 不产
 
 
 @dataclass(frozen=True, slots=True)

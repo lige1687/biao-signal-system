@@ -474,6 +474,27 @@ rules:
     events:
       - tradability_evaluated
 
+  # ---------------- 计划纪律守卫（规格 §14 + §13，研究代理，两层标注）----------------
+  plan_discipline_guard:
+    rule_id: "plan_discipline_guard"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    params:
+      rr_min_ideal: 3             # 与 reward_risk_filter 对齐；只 hint 不拦（决策 3）
+    formula: |
+      监督员 plan-level alert 的承载规则（不产生交易信号）：
+        INVALIDATION_BREACHED / PLAN_EXPIRING / PLAN_STALE_RULESET /
+        PLAN_ORPHANED / MODULE_NOT_IMPLEMENTED / DATA_STALE / ENTRY_CONDITIONS_LOST。
+      两层标注（决策 2）：原则引规格原文，判定逻辑标 research_proxy。
+    note_cn: |
+      规格第 14 节「任何时候不得在交易已经亏损后更换入场理由，从而移动原定失效价」
+      是裸句（全文【原系统原则】/【回测代理】标记两者皆无），但它是整个监督员最硬的一条
+      纪律。两层标注：原则出处标「规格 §14 原文」，可执行判定（方向分类器 + 硬规则）
+      标 research_proxy + caveat，既不削弱权威又不违反红线 2。
+      R/R 口径（决策 3）：规格 §13 第 4 条把「盈亏比小于 3」列为无交易条件，round1
+      实现为「只算不强制」；人类 2026-08-04 明确定为只提示、永不拦截，文案「建议 >3，
+      2–3 可接受」。此差异是人类决定非实现漂移，必须留出处。界面必须标注「研究代理」。
+
 # ---------------- 状态机 ----------------
 state_machine:
   version: "1.0.0"
