@@ -39,6 +39,7 @@ from lei_signal.rules.bottom_structure import (
     detect_reversal_bottoms,
 )
 from lei_signal.rules.color_events import detect_color_events
+from lei_signal.rules.dense_breakout import detect_dense_breakout_events
 from lei_signal.rules.dual_ma import detect_dual_ma_confirm_events, detect_spread_events
 from lei_signal.rules.ema_reclaim_tiers import detect_structure_bound_ema_reclaim
 from lei_signal.rules.exit_ema20_costbasis import detect_exit_ema20_costbasis_events
@@ -59,6 +60,7 @@ from lei_signal.rules.ma_full_alignment import detect_ma_alignment_events
 from lei_signal.rules.resistance_b1 import B1Resistance, find_b1
 from lei_signal.rules.reversals import detect_reversal_events
 from lei_signal.rules.top_structure import detect_top_structure_events, detect_top_structures
+from lei_signal.rules.two_b_reversal import detect_two_b_reversal_events
 from lei_signal.rules.volume import compute_volume_labels, detect_volume_events
 from lei_signal.state.machine import DayState, run_state_machine
 
@@ -324,6 +326,10 @@ def analyze_bars(
     # 用户交易笔记的研究代理：完整多头趋势成立后，分别识别 SMA20/60/120
     # 的首次回撤。严格前向推进，不能由旧 Streamlit 泛化文案代替。
     log.extend(detect_first_ma_pullback_events(frame, symbol))
+    # 模块 B 均线密集区突破：横盘密集区识别 -> 突破确认 -> 跌回失效（研究代理）。
+    log.extend(detect_dense_breakout_events(frame, symbol))
+    # 模块 C 2B/破底翻：L1/L2 结构 -> 破底翻三版本确认 -> 跌破 L2 失效（研究代理）。
+    log.extend(detect_two_b_reversal_events(frame, symbol))
     # P2.1 假突破快速收回：突破前高/结构位后被打回，窗口内快速收回且不破坏趋势。
     log.extend(detect_false_breakout_reclaim_events(frame, symbol))
     # 模块 D2 做空镜像骨架：突破压力位后拉回 + sma20_slope<0 + 空头排列 -> 做空方向事件。

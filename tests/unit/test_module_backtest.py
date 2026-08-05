@@ -13,10 +13,14 @@ from lei_signal.research.module_backtest import (
 )
 from lei_signal.rules.false_breakout_reclaim import (
     RULE_ID as FO_ID,
+)
+from lei_signal.rules.false_breakout_reclaim import (
     SUB_RULE_CONFIRMED as FO_CONFIRMED,
 )
 from lei_signal.rules.first_ma_pullback import (
     RULE_ID as PB_ID,
+)
+from lei_signal.rules.first_ma_pullback import (
     SUB_RULE_CONFIRMED as PB_CONFIRMED,
 )
 
@@ -55,9 +59,11 @@ def test_module_attribution() -> None:
     assert module_of("first_ma_pullback") == "A"
     assert module_of("false_breakout_reclaim") == "D"
     assert module_of("not_a_rule") is None
-    # B/C 待实现，不在映射中
-    assert "dense_breakout" not in MODULE_MAP
-    assert "two_b_reversal" not in MODULE_MAP
+    # B/C 已实现，在映射中
+    assert module_of("dense_breakout") == "B"
+    assert module_of("two_b_reversal") == "C"
+    assert "dense_breakout" in MODULE_MAP
+    assert "two_b_reversal" in MODULE_MAP
 
 
 def test_module_backtest_groups_by_module_and_category() -> None:

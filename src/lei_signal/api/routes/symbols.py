@@ -71,6 +71,18 @@ from lei_signal.research.low_level_backtest import build_low_level_backtest
 from lei_signal.research.module_backtest import build_module_backtest
 from lei_signal.research.reward_risk_backtest import build_reward_risk_backtest
 from lei_signal.research.scenario_backtest_common import ScenarioBacktestReport
+from lei_signal.rules.dense_breakout import (
+    RULE_ID as DB_RULE_ID,
+)
+from lei_signal.rules.dense_breakout import (
+    SUB_RULE_CONFIRMED as DB_CONFIRMED,
+)
+from lei_signal.rules.dense_breakout import (
+    SUB_RULE_FAILED as DB_FAILED,
+)
+from lei_signal.rules.dense_breakout import (
+    SUB_RULE_WATCH as DB_WATCH,
+)
 from lei_signal.rules.ema_reclaim_tiers import (
     SUB_RULE_BY_TIER,
     TIER_EARLY_WATCH,
@@ -141,6 +153,21 @@ from lei_signal.rules.reward_risk_filter import (
     compute_reward_risk,
 )
 from lei_signal.rules.tradability_gate import evaluate_tradability
+from lei_signal.rules.two_b_reversal import (
+    RULE_ID as TB_RULE_ID,
+)
+from lei_signal.rules.two_b_reversal import (
+    SUB_RULE_FAILED as TB_FAILED,
+)
+from lei_signal.rules.two_b_reversal import (
+    SUB_RULE_V1 as TB_V1,
+)
+from lei_signal.rules.two_b_reversal import (
+    SUB_RULE_V2 as TB_V2,
+)
+from lei_signal.rules.two_b_reversal import (
+    SUB_RULE_V3 as TB_V3,
+)
 from lei_signal.state.machine import DayState, StructureObservation
 from lei_signal.ui.echarts_kline import serialize_result
 
@@ -847,11 +874,179 @@ def _alignment_scenario(result: AnalysisResult) -> ConditionalScenarioDTO | None
     )
 
 
+def _dense_breakout_scenario(result: AnalysisResult) -> ConditionalScenarioDTO | None:
+    """均线密集区突破场景卡（模块 B，研究代理）。"""
+    events = [e for e in result.events if e.rule_id == DB_RULE_ID]
+    if not events:
+        return None
+    last = result.frame.iloc[-1]
+    last_day = result.frame.index[-1].date()
+    close = float(last["close"])
+    arrangement = float(last["sma20"]) > float(last["sma60"]) > float(last["sma120"])
+    candidates: list[ConditionalScenarioDTO] = []
+    by_lc: dict[str, list] = {}
+    for event in events:
+        by_lc.setdefault(event.lifecycle_id or "", []).append(event)
+    for group in by_lc.values():
+        ordered = sorted(group, key=lambda e: e.available_date)
+        if ordered[-1].evidence.get("sub_rule") == DB_FAILED:
+            continue
+        watch = next((e for e in ordered if e.evidence.get("sub_rule") == DB_WATCH), None)
+        if watch is None:
+            continue
+        confirmed = next(
+            (e for e in ordered if e.evidence.get("sub_rule") == DB_CONFIRMED), None
+        )
+        if confirmed is not None:
+            ref = float(confirmed.evidence.get("breakout_reference")
+                        or watch.evidence.get("reference_price") or 0.0)
+        else:
+            ref = float(watch.evidence.get("reference_price") or 0.0)
+        if ref <= 0:
+            continue
+        price_holds = close >= ref
+        if confirmed is not None:
+            if not (arrangement and price_holds):
+                continue
+            state, state_cn = "confirmed", "条件确认"
+        else:
+            state, state_cn = "watch", "横盘待突破"
+        satisfied = ["完整多头排列保持"] if arrangement else []
+        missing: list[str] = []
+        if price_holds:
+            satisfied.append("收盘仍在密集区上沿上方")
+        else:
+            missing.append("收盘未突破密集区上沿")
+        if not arrangement:
+            missing.append("完整多头排列未成立")
+        source = confirmed or watch
+        sub = DB_CONFIRMED if confirmed is not None else DB_WATCH
+        candidates.append(
+            ConditionalScenarioDTO(
+                scenario_id=DB_RULE_ID,
+                scenario_cn="均线密集区突破",
+                direction="long",
+                direction_cn="潜在做多",
+                state=state,
+                state_cn=state_cn,
+                anchor_date=watch.available_date.isoformat(),
+                trigger_date=watch.available_date.isoformat(),
+                latest_date=last_day.isoformat(),
+                key_price=ref,
+                reference_price=ref,
+                distance_pct=(close / ref - 1.0) * 100.0 if ref else None,
+                current_conditions_confirmed=state == "confirmed",
+                satisfied_conditions=satisfied,
+                missing_conditions=missing,
+                next_step_cn=(
+                    "继续管理完整多头排列、转黑与密集区上沿得失。"
+                    if state == "confirmed"
+                    else "等待收盘突破密集区上沿且完整多头排列成立。"
+                ),
+                invalidation_cn=(
+                    "收盘跌回密集区上沿下方且 SMA20 方向向下弯曲、"
+                    "完整多头排列破坏或转黑。"
+                ),
+                caveat_cn=(
+                    "研究代理：源自规格 §9 模块 B，横盘阈值复用 tradability_gate（待确认），"
+                    "不冒充 LEI 原始规则。"
+                ),
+                explanation=to_explanation_dto(lookup(rule_id=DB_RULE_ID, sub_rule=sub)),
+                supporting_event=event_dto(source, as_of=result.assessment.as_of),
+                **_rr_fields(result, confirmed),
+            )
+        )
+    if not candidates:
+        return None
+    return max(
+        candidates,
+        key=lambda c: (c.state == "confirmed", c.trigger_date or ""),
+    )
+
+
+_TB_VERSION_RANK = {TB_V1: 1, TB_V2: 2, TB_V3: 3}
+_TB_VERSION_CN = {TB_V1: "v1", TB_V2: "v2", TB_V3: "v3"}
+
+
+def _two_b_reversal_scenario(result: AnalysisResult) -> ConditionalScenarioDTO | None:
+    """2B/破底翻场景卡（模块 C，研究代理）。取最新活跃结构的最高版本确认。"""
+    events = [e for e in result.events if e.rule_id == TB_RULE_ID]
+    if not events:
+        return None
+    last = result.frame.iloc[-1]
+    last_day = result.frame.index[-1].date()
+    close = float(last["close"])
+    ranked: list[tuple[int, str, ConditionalScenarioDTO]] = []
+    by_lc: dict[str, list] = {}
+    for event in events:
+        by_lc.setdefault(event.lifecycle_id or "", []).append(event)
+    for group in by_lc.values():
+        ordered = sorted(group, key=lambda e: e.available_date)
+        if any(e.evidence.get("sub_rule") == TB_FAILED for e in ordered):
+            continue
+        confirmed_events = [
+            e for e in ordered if e.evidence.get("sub_rule") in _TB_VERSION_RANK
+        ]
+        if not confirmed_events:
+            continue
+        best = max(
+            confirmed_events, key=lambda e: _TB_VERSION_RANK[e.evidence["sub_rule"]]
+        )
+        l1 = float(best.evidence.get("l1_price") or 0.0)
+        l2 = float(best.evidence.get("l2_price") or 0.0)
+        if l1 <= 0 or l2 <= 0:
+            continue
+        sub_rule = best.evidence["sub_rule"]
+        version = _TB_VERSION_CN[sub_rule]
+        price_holds = close >= l1
+        not_failed = close > l2
+        if not (price_holds and not_failed):
+            continue
+        satisfied = [f"收盘站上 L1({l1:.2f})", f"收盘未跌破 L2({l2:.2f})"]
+        candidates_dto = ConditionalScenarioDTO(
+            scenario_id=TB_RULE_ID,
+            scenario_cn=f"2B/破底翻·{version}",
+            direction="long",
+            direction_cn="潜在做多",
+            state="confirmed",
+            state_cn=f"2B·{version}确认",
+            anchor_date=str(best.evidence.get("breakout_date", "")),
+            trigger_date=best.available_date.isoformat(),
+            latest_date=last_day.isoformat(),
+            key_price=l1,
+            reference_price=l2,
+            distance_pct=(close / l1 - 1.0) * 100.0 if l1 else None,
+            current_conditions_confirmed=True,
+            satisfied_conditions=satisfied,
+            missing_conditions=[],
+            next_step_cn="继续管理 L2 失效线；跌破 L2 即 2B 彻底失效。",
+            invalidation_cn=f"收盘跌破 L2({l2:.4f})，2B 结构彻底失效。",
+            caveat_cn=(
+                "研究代理：规格原文未提供 2B 结构定义，L1/L2 量化口径为研究代理，"
+                "two_b_reclaim_bars 待确认，不冒充 LEI 原始规则。"
+            ),
+            explanation=to_explanation_dto(lookup(rule_id=TB_RULE_ID, sub_rule=sub_rule)),
+            supporting_event=event_dto(best, as_of=result.assessment.as_of),
+            **_rr_fields(result, best),
+        )
+        ranked.append((_TB_VERSION_RANK[sub_rule], best.available_date.isoformat(), candidates_dto))
+    if not ranked:
+        return None
+    return max(ranked, key=lambda item: (item[0], item[1]))[2]
+
+
 def _build_conditional_scenarios(result: AnalysisResult) -> list[ConditionalScenarioDTO]:
     if result.frame.empty:
         return []
     scenarios: list[ConditionalScenarioDTO] = []
-    for builder in (_fo_scenario, _fo_short_scenario, _ll_scenario, _alignment_scenario):
+    for builder in (
+        _fo_scenario,
+        _fo_short_scenario,
+        _ll_scenario,
+        _alignment_scenario,
+        _dense_breakout_scenario,
+        _two_b_reversal_scenario,
+    ):
         scenario = builder(result)
         if scenario is not None:
             scenarios.append(scenario)

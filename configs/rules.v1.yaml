@@ -374,6 +374,94 @@ rules:
       - low_level_confirmation_watch
       - low_level_confirmation_confirmed
 
+  # ---------------- 模块 B：均线密集区突破（规格 §9 模块 B，研究代理）----------------
+  dense_breakout:
+    rule_id: "dense_breakout"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    params:
+      breakout_lookback: 60          # 密集区上沿=近 N 根已完成日 K 最高 high（待确认）
+      require_full_alignment: true   # B2 突破时需完整多头排列成立
+    formula: |
+      横盘密集区阈值（cluster_threshold / minimum_consolidation_bars / entanglement_lookback）
+      复用 tradability_gate，不在此重复声明，单一来源避免漂移；
+      B1 环境：entanglement = (max(六线)-min(六线))/close；
+        consolidating = entanglement <= cluster_threshold 且近 entanglement_lookback 日均纠缠
+                        <= cluster_threshold*1.5 且 position >= minimum_consolidation_bars；
+        consolidating 由 false -> true 时开启一个密集区生命周期，产 watch 事件；
+      B2 多头触发：生命周期内，reference(t) = max(high) over [t-breakout_lookback, t-1]（仅已完成日 K），
+        close(t) > reference(t) 且完整多头排列成立（SMA20>SMA60>SMA120 且三线斜率均>0）时
+        产 confirmed 事件，下一根 K 线开盘入场；记录突破日 reference 为 breakout_reference；
+      B3 失效：确认后 close(t) < breakout_reference（跌回密集区）且 sma20_slope(t) < 0
+        （20 均线组向下弯曲）时产 failed 事件，本轮生命周期结束；
+      每个密集区生命周期内只允许一次突破确认（consumed 语义）；密集区若连续
+      entanglement_lookback 日不再 consolidating 则静默结束、允许新密集区开启。
+    note_cn: |
+      “均线密集区突破”是规格 §9 模块 B 的研究代理量化：横盘阶段只等待标志性动作——价格收盘
+      突破密集区上沿且完整多头排列成立。横盘阈值复用 tradability_gate（cluster_threshold/
+      minimum_consolidation_bars 待确认，规格第 17 节），breakout_lookback 为待确认默认值。
+      不是旧 Streamlit 泛化文案，也不冒充 LEI 原始规则。所有判断只使用当日及此前已完成日 K；
+      界面必须标注“研究代理”，并显示密集区识别、突破参考位、确认条件与客观失效。
+    events:
+      - dense_breakout_watch
+      - dense_breakout_confirmed
+      - dense_breakout_failed
+
+  # ---------------- 模块 C：2B / 破底翻反转（规格 §9 模块 C，研究代理）----------------
+  two_b_reversal:
+    rule_id: "two_b_reversal"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    params:
+      two_b_reclaim_bars: 3          # 2B 快速收复最大 K 线数（待确认，规格第 17 节）
+    formula: |
+      C1 结构（研究代理量化口径，规格原文未提供 2B 结构定义）：
+        L2 = 更低的确认摆动低点；L1 = 更高的确认摆动低点（L1 > L2，且 L1 在 L2 之后）；
+        两低点之间需存在一个确认摆动高点（颈线）；结构在 L1.available_date（三左三右确认日）可用；
+      C2 入场（三版本分别产事件，信号在站上当日生成，下一根开盘入场）：
+        breakdown(t) = close(t) < L1 且 close(t) > L2（跌破 L1 但未跌破 L2，即假跌破/破底）；
+        reclaim(t) = breakdown 之后 two_b_reclaim_bars 根内 close(t) >= L1（破底翻）；
+        v1_confirmed = reclaim 当日（收盘站上 L1）；
+        v2_confirmed = reclaim 当日或之后 EMA20 拐头向上（复用 ema20_reclaim_state）；
+        v3_confirmed = reclaim 当日或之后 EMA20 与 SMA20 共同向上（复用 dual_ma_bull_state）；
+        超过 two_b_reclaim_bars 仍未 reclaim -> 本轮 2B 消耗（failed，快速收复窗口耗尽）；
+      C3 失效：close(t) < L2（重新跌破结构最低点）-> failed，2B 彻底失效；
+      每个 L1/L2 结构只允许一次 2B 确认（consumed 语义）：一次破底只计一次翻；
+      大幅负乖离（bias_ema120）仅作 evidence 增强记录，不单独触发交易（规格 §4.7 / C1）。
+    note_cn: |
+      “2B/破底翻”是规格 §9 模块 C 的研究代理量化：规格原文未提供 2B 具体结构定义（[原文未提供]），
+      L1/L2 结构、快速收复窗口、三版本入场均为研究代理量化口径，必须标 research_proxy。
+      L1/L2 用 confirmed_pivots 三左三右确认的摆动低点；EMA20/双均线确认复用 dual_ma 既有状态。
+      two_b_reclaim_bars=3 为待确认默认值（规格第 17 节）。所有判断只使用当日及此前已完成日 K；
+      界面必须标注“研究代理”，并显示 L1/L2、颈线、破底/收复窗口、三版本入场条件与客观失效。
+    events:
+      - two_b_reversal_v1_confirmed
+      - two_b_reversal_v2_confirmed
+      - two_b_reversal_v3_confirmed
+      - two_b_reversal_failed
+
+  holding_watch_guard:
+    rule_id: "holding_watch_guard"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    params: {}
+    formula: |
+      持仓盯盘（plan_kind=holding_watch）退出提醒的承载规则（不产生入场信号）：
+        TAKE_PROFIT_REACHED / STOP_PRICE_BREACHED / SIGNAL_WATCH_TRIGGERED。
+      方向感知比较（只用当日可见收盘价或 14:45 盘中快照价）：
+        long ：达到止盈 = close >= take_profit_price；击穿止损 = close <= stop_price；
+        short：达到止盈 = close <= take_profit_price；击穿止损 = close >= stop_price；
+        信号触发 = watch_signal_rule_ids 任一 rule_id 出现在当日 new_events。
+      止损击穿为 block（纪律最硬：不得事后下移止损，语义同规格 §14）；
+      止盈达到与信号触发为 remind（提示到点，退出与否仍由人决定）。
+      三者 action_kind=EXIT，产 EXIT 待办，走既有催办/回执链路。
+    note_cn: |
+      “持仓盯盘”是人类 2026-08-05 明确的新增用法：标的已在场内，不需要再论证入场
+      理由，只要价位或信号到了就提醒。触发条件（止盈价/止损价/信号 rule_id）由人
+      自填，属 user_config 性质；本规则只承载“比较与提醒”这一层判定，标 research_proxy。
+      仍然只记价位与状态，不记数量/金额/账户。止损击穿沿用规格 §14「不得在亏损后
+      移动原定失效价」的纪律强度，故为 block；界面必须标注“研究代理”。
+
   # ---------------- B1 第一阻力 ----------------
   resistance_b1:
     rule_id: "resistance_b1"

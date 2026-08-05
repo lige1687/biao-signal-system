@@ -25,18 +25,24 @@ from lei_signal.research.scenario_backtest_common import (
     fixed_horizon_stats,
 )
 
-#: rule_id -> (模块, 大类, 中文名)。B/C 待实现，预留映射便于第二轮接入。
+#: rule_id -> (模块, 大类, 中文名)。
 MODULE_MAP: dict[str, tuple[str, str, str]] = {
     "first_ma_pullback": ("A", "trend_following", "稳定上升趋势回调"),
     "false_breakout_reclaim": ("D", "reversal", "假突破反向"),
-    # "dense_breakout": ("B", "trend_following", "均线密集区突破"),   # 待实现
-    # "two_b_reversal": ("C", "reversal", "2B/破底翻"),               # 待实现
+    "dense_breakout": ("B", "trend_following", "均线密集区突破"),
+    "two_b_reversal": ("C", "reversal", "2B/破底翻"),
 }
 
-#: 每个模块的入场确认子规则。
-ENTRY_CONFIRMED_SUBS: dict[str, str] = {
+#: 每个模块的入场确认子规则。two_b_reversal 有三版本入场，用 tuple 收集全部确认子规则。
+ENTRY_CONFIRMED_SUBS: dict[str, str | tuple[str, ...]] = {
     "first_ma_pullback": "first_ma_pullback_confirmed",
     "false_breakout_reclaim": "false_breakout_reclaim_confirmed",
+    "dense_breakout": "dense_breakout_confirmed",
+    "two_b_reversal": (
+        "two_b_reversal_v1_confirmed",
+        "two_b_reversal_v2_confirmed",
+        "two_b_reversal_v3_confirmed",
+    ),
 }
 
 CATEGORY_CN: dict[str, str] = {
@@ -60,7 +66,13 @@ def _entry_positions_by_rule(
     for event in events:
         if event.rule_id not in MODULE_MAP:
             continue
-        if event.evidence.get("sub_rule") != ENTRY_CONFIRMED_SUBS[event.rule_id]:
+        confirmed_subs = ENTRY_CONFIRMED_SUBS[event.rule_id]
+        sub = event.evidence.get("sub_rule")
+        if isinstance(confirmed_subs, str):
+            is_entry = sub == confirmed_subs
+        else:
+            is_entry = sub in confirmed_subs
+        if not is_entry:
             continue
         position = by_day.get(event.available_date)
         if position is not None:
@@ -80,7 +92,7 @@ def build_module_backtest(
     if not any(positions_by_rule.values()):
         return None
 
-    # 模块级分桶（A、D；B/C 待实现）
+    # 模块级分桶（A/B/C/D）
     sides: list[ScenarioBacktestSide] = []
     for rule_id, (module, _category, module_cn) in MODULE_MAP.items():
         entries = positions_by_rule[rule_id]
@@ -124,8 +136,8 @@ def build_module_backtest(
         total_bars=len(frame),
         research_disclaimer_cn=(
             RESEARCH_DISCLAIMER
-            + " 模块 B（密集突破）/C（2B破底翻）待第二轮实现，当前仅统计 A 与 D。"
-            " 趋势跟随与逆势反转分桶统计，不在同一笔交易中改写理由。"
+            + " 模块 A/B/C/D 均已实现并分桶统计；趋势跟随(A+B)与逆势反转(C+D)"
+            "分别统计，不在同一笔交易中改写理由（规格12）。"
         ),
         sides=tuple(sides),
     )
