@@ -15,11 +15,19 @@ from typing import Any
 from lei_signal.data.calendar import DEFAULT_TRADING_CALENDAR, TradingCalendar
 from lei_signal.domain.rules_config import get_rule
 from lei_signal.plans.models import (
+    PLAN_KIND_HOLDING_WATCH,
     SEVERITY_BLOCK,
     SEVERITY_HINT,
     SEVERITY_REMIND,
     PlanAlert,
     TradePlan,
+)
+from lei_signal.research.module_backtest import MODULE_MAP
+
+#: 已实现交易模块集合，由 module_backtest.MODULE_MAP 派生（单一来源）。
+#: 新增模块只需在 MODULE_MAP 登记，监督员对它的 MODULE_NOT_IMPLEMENTED 自动消失。
+IMPLEMENTED_MODULES: frozenset[str] = frozenset(
+    module for module, *_ in MODULE_MAP.values()
 )
 
 # alert codes
@@ -30,6 +38,9 @@ ENTRY_RR_NOT_COMPUTABLE = "ENTRY_RR_NOT_COMPUTABLE"
 ENTRY_CONDITIONS_LOST = "ENTRY_CONDITIONS_LOST"
 INVALIDATION_BREACHED = "INVALIDATION_BREACHED"
 EXIT_TRIGGERED = "EXIT_TRIGGERED"
+TAKE_PROFIT_REACHED = "TAKE_PROFIT_REACHED"
+STOP_PRICE_BREACHED = "STOP_PRICE_BREACHED"
+SIGNAL_WATCH_TRIGGERED = "SIGNAL_WATCH_TRIGGERED"
 PLAN_EXPIRING = "PLAN_EXPIRING"
 PLAN_STALE_RULESET = "PLAN_STALE_RULESET"
 PLAN_ORPHANED = "PLAN_ORPHANED"
@@ -39,6 +50,7 @@ DATA_STALE = "DATA_STALE"
 PLAN_DISCIPLINE_RULE = "plan_discipline_guard"
 TRADABILITY_RULE = "tradability_gate"
 RR_RULE = "reward_risk_filter"
+HOLDING_WATCH_RULE = "holding_watch_guard"
 
 #: resume_on 可引用的点路径（决策 4c）：超出此集合的路径 evaluate_resume 拒绝
 RESOLVABLE_PATHS = ("close", "ema20", "tradability.tradable")
@@ -145,6 +157,9 @@ def evaluate_plan(
     actionable_from = calendar.next_trading_day(ctx.last_bar_date).date().isoformat()
     alerts: list[PlanAlert] = []
     active = plan.state in ACTIVE_STATES
+    # 持仓盯盘：已在场内，只监督退出。入场类判定（可交易性阻断/入场条件/R-R/
+    # lifecycle 孤儿/模块未实现）一律不适用--它们讲的是「该不该开新仓」。
+    holding_watch = plan.plan_kind == PLAN_KIND_HOLDING_WATCH
 
     # DATA_STALE（陈旧数据不递增催办，但仍标注）
     if ctx.cache_fallback_used:
@@ -158,7 +173,7 @@ def evaluate_plan(
 
     # 计划级 meta alert（armed/entered 都适用）
     if active:
-        if plan.module in ("B", "C"):
+        if not holding_watch and plan.module not in IMPLEMENTED_MODULES:
             alerts.append(_alert(
                 code=MODULE_NOT_IMPLEMENTED, severity=SEVERITY_HINT,
                 rule_id=PLAN_DISCIPLINE_RULE, ctx=ctx, actionable_from=actionable_from,
@@ -188,7 +203,7 @@ def evaluate_plan(
             ))
 
         opp = _matching_opportunity(plan, ctx)
-        if plan.entry_lifecycle_id and opp is None:
+        if not holding_watch and plan.entry_lifecycle_id and opp is None:
             alerts.append(_alert(
                 code=PLAN_ORPHANED, severity=SEVERITY_HINT,
                 rule_id=PLAN_DISCIPLINE_RULE, ctx=ctx, actionable_from=actionable_from,
@@ -210,8 +225,8 @@ def evaluate_plan(
                 next_step_cn="失效价已被击穿，按原定计划退出，不得事后移动失效价",
             ))
 
-    # 入场阶段 alert（armed）
-    if plan.state == "armed":
+    # 入场阶段 alert（armed）。持仓盯盘不判入场。
+    if plan.state == "armed" and not holding_watch:
         if not ctx.tradability_tradable:
             alerts.append(_alert(
                 code=ENTRY_BLOCKED_BY_TRADABILITY, severity=SEVERITY_BLOCK,
@@ -256,8 +271,73 @@ def evaluate_plan(
                     action_kind="EXIT",
                     next_step_cn="退出条件已触发，下一交易日开盘退出（参考，非指令）",
                 ))
+        if holding_watch:
+            _holding_watch_alerts(plan, ctx, actionable_from, alerts)
 
     return alerts
+
+
+def _holding_watch_alerts(
+    plan: TradePlan,
+    ctx: MonitorContext,
+    actionable_from: str,
+    alerts: list[PlanAlert],
+) -> None:
+    """持仓盯盘退出提醒：止盈达到 / 止损击穿 / 信号命中（规则 holding_watch_guard）。
+
+    方向感知：long 止盈在上、止损在下；short 反向。只用当日可见收盘价
+    （14:45 盘中快照时为虚拟当日 bar 的快照价），不预测、不算新数值。
+    """
+    close = ctx.current_close
+    is_long = plan.direction == "long"
+
+    if close is not None and plan.take_profit_price is not None:
+        reached = (
+            close >= plan.take_profit_price if is_long else close <= plan.take_profit_price
+        )
+        if reached:
+            alerts.append(_alert(
+                code=TAKE_PROFIT_REACHED, severity=SEVERITY_REMIND,
+                rule_id=HOLDING_WATCH_RULE, ctx=ctx, actionable_from=actionable_from,
+                evidence={"close": close, "take_profit_price": plan.take_profit_price,
+                          "direction": plan.direction},
+                caveat_cn="持仓盯盘触发价由人自填；比较判定为研究代理",
+                action_kind="EXIT",
+                next_step_cn="已达到你设定的止盈价，按你写的止盈预案处理（参考，非指令）",
+            ))
+
+    if close is not None and plan.stop_price is not None:
+        breached = close <= plan.stop_price if is_long else close >= plan.stop_price
+        if breached:
+            alerts.append(_alert(
+                code=STOP_PRICE_BREACHED, severity=SEVERITY_BLOCK,
+                rule_id=HOLDING_WATCH_RULE, ctx=ctx, actionable_from=actionable_from,
+                evidence={"close": close, "stop_price": plan.stop_price,
+                          "direction": plan.direction},
+                principle_source="规格 §14 原文",
+                caveat_cn=(
+                    "原则出自规格§14（不得在亏损后移动原定失效价）；"
+                    "触发价由人自填、击穿判定为研究代理"
+                ),
+                action_kind="EXIT",
+                next_step_cn="已击穿你设定的止损价，按原定止损预案退出，不得事后下移止损",
+            ))
+
+    if plan.watch_signal_rule_ids:
+        hit = [r for r in plan.watch_signal_rule_ids if r in ctx.new_event_rule_ids]
+        if hit:
+            alerts.append(_alert(
+                code=SIGNAL_WATCH_TRIGGERED, severity=SEVERITY_REMIND,
+                rule_id=HOLDING_WATCH_RULE, ctx=ctx, actionable_from=actionable_from,
+                evidence={"triggered_rule_ids": hit,
+                          "watch_signal_rule_ids": list(plan.watch_signal_rule_ids)},
+                caveat_cn="盯盘信号由人自选 rule_id；命中判定为研究代理",
+                action_kind="EXIT",
+                next_step_cn=(
+                    f"你盯的信号已出现（{', '.join(hit)}），按你写的退出预案复核"
+                    "（参考，非指令）"
+                ),
+            ))
 
 
 def _matching_opportunity(
@@ -381,6 +461,7 @@ __all__ = [
     "ENTRY_RR_NOT_COMPUTABLE",
     "EXIT_TRIGGERED",
     "ExitSignalRef",
+    "HOLDING_WATCH_RULE",
     "INVALIDATION_BREACHED",
     "MODULE_NOT_IMPLEMENTED",
     "MonitorContext",
@@ -391,6 +472,9 @@ __all__ = [
     "PLAN_STALE_RULESET",
     "RESOLVABLE_PATHS",
     "RR_RULE",
+    "SIGNAL_WATCH_TRIGGERED",
+    "STOP_PRICE_BREACHED",
+    "TAKE_PROFIT_REACHED",
     "TRADABILITY_RULE",
     "evaluate_plan",
     "evaluate_resume",

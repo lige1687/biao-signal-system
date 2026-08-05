@@ -207,11 +207,14 @@ def test_same_direction_opportunity_matches() -> None:
 
 
 def test_module_not_implemented() -> None:
-    alerts = evaluate_plan(_plan(module="B"), _ctx())
-    a = _by_code(alerts, MODULE_NOT_IMPLEMENTED)
+    # B/C 已实现，不再触发 MODULE_NOT_IMPLEMENTED；A/D 同样不触发。
+    for module in ("A", "B", "C", "D"):
+        assert MODULE_NOT_IMPLEMENTED not in _codes(
+            evaluate_plan(_plan(module=module), _ctx())
+        )
+    # 反：未登记的模块仍触发（由 module_backtest.MODULE_MAP 派生）。
+    a = _by_code(evaluate_plan(_plan(module="Z"), _ctx()), MODULE_NOT_IMPLEMENTED)
     assert a is not None and a.severity == "hint"
-    # 反：模块 A/D
-    assert MODULE_NOT_IMPLEMENTED not in _codes(evaluate_plan(_plan(module="A"), _ctx()))
 
 
 def test_data_stale() -> None:

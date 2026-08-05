@@ -46,6 +46,21 @@ PLAYBOOK_FIELDS = (
 # armed 阶段必填字段（draft 允许空）
 REQUIRED_FOR_ARMED = (*PLAYBOOK_FIELDS, "reason", "valid_until")
 
+# 计划种类。entry=完整入场计划（走 draft->armed->entered）；
+# holding_watch=持仓盯盘（已在场内，只监督退出，直接落 entered）。
+PLAN_KIND_ENTRY = "entry"
+PLAN_KIND_HOLDING_WATCH = "holding_watch"
+PLAN_KINDS = (PLAN_KIND_ENTRY, PLAN_KIND_HOLDING_WATCH)
+
+#: 持仓盯盘必填的退出预案两项（人类 2026-08-05 决定）：
+#: 已在场内不必再论证入场理由，但「什么逻辑退出」必须先写下来，
+#: 否则价位到了仍会临场改主意--这正是监督员要拦的。
+EXIT_PLAYBOOK_FIELDS = ("take_profit_plan_cn", "stop_plan_cn")
+
+#: 持仓盯盘 armed(entered) 必填：两项退出预案 + 有效期。
+#: 触发条件（止盈价/止损价/信号）至少一个非空，由 store 单独校验。
+REQUIRED_FOR_HOLDING_WATCH = (*EXIT_PLAYBOOK_FIELDS, "valid_until")
+
 
 @dataclass(frozen=True, slots=True)
 class TradePlan:
@@ -76,6 +91,15 @@ class TradePlan:
     exited_on: str | None = None
     exit_reason_rule_id: str | None = None
     superseded_by: str | None = None
+    #: entry=完整入场计划；holding_watch=持仓盯盘（只监督退出）
+    plan_kind: str = PLAN_KIND_ENTRY
+    #: 持仓盯盘的退出触发价位。止盈=达到即提醒；止损=击穿即提醒。
+    #: 方向感知：long 时 close>=take_profit / close<=stop；short 反向。
+    take_profit_price: float | None = None
+    stop_price: float | None = None
+    #: 信号型退出触发：这些 rule_id 出现在当日 new_events 即提醒（如灰转绿/转黑）。
+    #: 存储为逗号分隔字符串，模型侧暴露为 tuple。
+    watch_signal_rule_ids: tuple[str, ...] = ()
     created_at: str = ""
     updated_at: str = ""
 
@@ -157,18 +181,23 @@ ResumePredicate = dict[str, Any]
 __all__ = [
     "ActionItem",
     "Annotation",
+    "EXIT_PLAYBOOK_FIELDS",
     "PLAN_ABANDONED",
     "PLAN_ARMED",
     "PLAN_DRAFT",
     "PLAN_ENTERED",
     "PLAN_EXITED",
     "PLAN_INVALIDATED",
+    "PLAN_KIND_ENTRY",
+    "PLAN_KIND_HOLDING_WATCH",
+    "PLAN_KINDS",
     "PLAN_STATES",
     "PLAN_SUPERSEDED",
     "PLAYBOOK_FIELDS",
     "PlanAlert",
     "PlanRevision",
     "REQUIRED_FOR_ARMED",
+    "REQUIRED_FOR_HOLDING_WATCH",
     "ResumePredicate",
     "SEVERITY_BLOCK",
     "SEVERITY_HINT",

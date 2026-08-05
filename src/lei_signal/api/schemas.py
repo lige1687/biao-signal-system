@@ -593,5 +593,52 @@ class PlanDTO(BaseModel):
     exited_on: str | None = None
     exit_reason_rule_id: str | None = None
     superseded_by: str | None = None
+    plan_kind: str = "entry"
+    take_profit_price: float | None = None
+    stop_price: float | None = None
+    watch_signal_rule_ids: list[str] = []
     created_at: str = ""
     updated_at: str = ""
+
+
+class CreateHoldingWatchRequest(BaseModel):
+    """建持仓盯盘（已在场内，只监督退出）。
+
+    必填：两项退出预案 + valid_until + 至少一个触发条件（止盈价/止损价/信号）。
+    入场理由不强制--你已经在场内了。仍不记数量/金额/账户。
+    """
+
+    symbol: str
+    direction: str = "long"
+    ruleset_version: str
+    valid_until: str
+    take_profit_plan_cn: str
+    stop_plan_cn: str
+    take_profit_price: float | None = None
+    stop_price: float | None = None
+    watch_signal_rule_ids: list[str] = []
+    entered_on: str | None = None      # 缺省为当日
+    module: str = "A"
+    reason: str = ""
+
+
+class PlanChatRequest(BaseModel):
+    """向监督员 agent 提问。message 为空时返回当前 alert 的接地摘要。"""
+
+    message: str = ""
+
+
+class PlanChatReply(BaseModel):
+    """agent 回复。grounded=False 表示 LLM 不可用或校验失败，已降级模板。"""
+
+    reply: str
+    grounded: bool
+    plan_id: str
+    alerts: list[PlanAlertDTO] = []
+
+
+class PlansSummaryDTO(BaseModel):
+    """监督待办顶栏红点：未处理待办数 + 活跃计划数。"""
+
+    open_actions: int
+    active_plans: int

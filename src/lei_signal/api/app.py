@@ -15,8 +15,19 @@ from fastapi.staticfiles import StaticFiles
 
 from lei_signal.api import config
 from lei_signal.api.market_context_service import MarketContextService
-from lei_signal.api.routes import dashboard, plans, symbols, watchlist
+from lei_signal.api.routes import (
+    agent,
+    dashboard,
+    feishu_webhook,
+    plans,
+    symbols,
+    watchlist,
+)
 from lei_signal.api.services import AnalysisService
+from lei_signal.env import load_env
+
+# 本地/launchd 运行前把 .env 注入 os.environ（不覆盖已设变量）。
+load_env()
 
 
 def _build_market_context_service() -> MarketContextService:
@@ -43,6 +54,8 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
     app.include_router(symbols.router)
     app.include_router(watchlist.router)
     app.include_router(plans.router)
+    app.include_router(agent.router)
+    app.include_router(feishu_webhook.router)
 
     @app.get("/api/health")
     def health() -> dict[str, str]:

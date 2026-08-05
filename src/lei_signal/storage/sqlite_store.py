@@ -470,6 +470,39 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
             ON plan_annotations(plan_id, created_at);
         """,
     ),
+    (
+        11,
+        "011_feishu_webhook_nonces",
+        """
+        -- Webhook 回执链接 nonce：一次性消费，防止旧链接重放。
+        CREATE TABLE IF NOT EXISTS feishu_webhook_nonces (
+            nonce TEXT PRIMARY KEY,
+            plan_id TEXT NOT NULL,
+            action_id TEXT NOT NULL,
+            expires_at INTEGER NOT NULL,
+            consumed_at TEXT,
+            created_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_feishu_nonces_expiry
+            ON feishu_webhook_nonces(expires_at);
+        """,
+    ),
+    (
+        12,
+        "012_holding_watch_plans",
+        """
+        -- 持仓盯盘（人类 2026-08-05 决定）：已在场内的标的只监督退出。
+        -- plan_kind=holding_watch 时直接落 entered，不走 armed 入场判定。
+        -- 仍然只记价位与状态，不记数量/金额/账户（对齐 migration 010 的边界）。
+        ALTER TABLE trade_plans ADD COLUMN plan_kind TEXT NOT NULL DEFAULT 'entry';
+        ALTER TABLE trade_plans ADD COLUMN take_profit_price REAL;
+        ALTER TABLE trade_plans ADD COLUMN stop_price REAL;
+        -- 信号型退出触发：逗号分隔 rule_id（如 lei_color 转黑、dual_ma_bull_confirmed）
+        ALTER TABLE trade_plans ADD COLUMN watch_signal_rule_ids TEXT NOT NULL DEFAULT '';
+        CREATE INDEX IF NOT EXISTS idx_plans_kind_state
+            ON trade_plans(plan_kind, state);
+        """,
+    ),
 )
 
 

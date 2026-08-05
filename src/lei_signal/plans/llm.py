@@ -213,9 +213,11 @@ def _extract_anthropic(data: dict[str, Any]) -> str | None:
     return joined or None
 
 
-def call_ark(prompt_payload: dict[str, Any], config: ArkConfig) -> str | None:
-    """调 ark。支持 OpenAI 兼容（/chat/completions）与 Anthropic 兼容（/v1/messages）
-    两种网关。任何失败返回 None（调用方降级）。
+def _post_user_content(user_content: str, config: ArkConfig) -> str | None:
+    """发单轮 user 消息到 ark（system 固定为 SYSTEM_PROMPT）。
+
+    call_ark 与 chat_ark 共用此底层：双协议、退避重试、thinking/text 抽取。
+    任何失败返回 None（调用方降级）。
     """
     if config.style == STYLE_ANTHROPIC:
         url = f"{config.base_url}/v1/messages"
@@ -228,7 +230,7 @@ def call_ark(prompt_payload: dict[str, Any], config: ArkConfig) -> str | None:
             "model": config.model,
             "max_tokens": config.max_tokens,
             "system": SYSTEM_PROMPT,
-            "messages": [{"role": "user", "content": _user_content(prompt_payload)}],
+            "messages": [{"role": "user", "content": user_content}],
         }
         extract = _extract_anthropic
     else:
@@ -241,7 +243,7 @@ def call_ark(prompt_payload: dict[str, Any], config: ArkConfig) -> str | None:
             "model": config.model,
             "messages": [
                 {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": _user_content(prompt_payload)},
+                {"role": "user", "content": user_content},
             ],
             "temperature": 0.2,
         }
@@ -261,6 +263,33 @@ def call_ark(prompt_payload: dict[str, Any], config: ArkConfig) -> str | None:
         return None
     except (requests.RequestException, ValueError, KeyError, IndexError):
         return None
+
+
+def call_ark(prompt_payload: dict[str, Any], config: ArkConfig) -> str | None:
+    """调 ark 把监督结果讲成人话。支持 OpenAI 兼容与 Anthropic 兼容两种网关。
+
+    任何失败返回 None（调用方降级）。
+    """
+    return _post_user_content(_user_content(prompt_payload), config)
+
+
+def chat_ark(
+    prompt_payload: dict[str, Any], user_message: str, config: ArkConfig
+) -> str | None:
+    """接地问答：把监督上下文 + 用户问题一起喂给 ark，返回回复。失败返回 None。
+
+    与 call_ark 同一套 SYSTEM_PROMPT（接地铁律）与底层投递；区别仅在于 user 内容
+    追加了用户问题。回复仍须由调用方过 ``verify_grounding``（禁用词 + rule_id 白名单），
+    不过则降级模板--判定权始终在 Python，LLM 只表达。
+    """
+    content = (
+        "以下是当前监督结果（只许引用其中出现过的 rule_id 与 evidence 数值，"
+        "不得编造 rule_id、不得推算日期、不得引入给定外的数值）：\n"
+        + json.dumps(prompt_payload, ensure_ascii=False, indent=2)
+        + f"\n\n用户问题：{user_message}"
+    )
+    return _post_user_content(content, config)
+
 
 
 def make_ark_renderer(
@@ -304,6 +333,7 @@ __all__ = [
     "ArkConfig",
     "build_context_payload",
     "call_ark",
+    "chat_ark",
     "load_ark_config",
     "make_ark_renderer",
 ]
