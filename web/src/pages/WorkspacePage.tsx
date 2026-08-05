@@ -24,6 +24,7 @@ import KlineChart, {
 import ResizeHandle from "../components/ResizeHandle";
 import TodayOverviewPanel from "../components/TodayOverviewPanel";
 import TradeOpportunityPanel from "../components/TradeOpportunityPanel";
+import CreatePlanDialog, { prefillFromOpportunity } from "../components/CreatePlanDialog";
 import WatchlistSidebar from "../components/WatchlistSidebar";
 import type { Explanation, StructureBrief, SymbolDetail } from "../types";
 
@@ -89,6 +90,7 @@ export default function WorkspacePage() {
   const [selection, setSelection] = useState<Selection | null>(null);
   const [display, setDisplay] = useState<ChartDisplay>(DEFAULT_DISPLAY);
   const [addDialogGroup, setAddDialogGroup] = useState<number | null | undefined>(undefined);
+  const [showCreatePlan, setShowCreatePlan] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   // KlineChart 把「下载当前图为 PNG」的闭包回传到这里，按钮点的时候调它
   const downloadPngRef = useRef<(() => void) | null>(null);
@@ -264,6 +266,15 @@ export default function WorkspacePage() {
           </>
         )}
         <span style={{ flex: 1 }} />
+        {data && (
+          <button
+            className="btn small"
+            onClick={() => setShowCreatePlan(true)}
+            title="基于当前信号建立执行计划"
+          >
+            建立执行计划
+          </button>
+        )}
         {dashboard && (
           <span className="muted" style={{ fontSize: 11 }}>
             {data?.meta.data_time
@@ -505,6 +516,15 @@ export default function WorkspacePage() {
             queryClient.invalidateQueries({ queryKey: ["cards"] });
             queryClient.invalidateQueries({ queryKey: ["groups"] });
           }}
+        />
+      )}
+      {showCreatePlan && data && (
+        <CreatePlanDialog
+          symbol={data.symbol}
+          prefill={prefillFromOpportunity(
+            data.assessment.trade_opportunities.find((o) => o.is_active) ?? null,
+          )}
+          onClose={() => setShowCreatePlan(false)}
         />
       )}
     </div>

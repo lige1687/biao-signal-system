@@ -259,6 +259,28 @@ a { color: var(--accent); text-decoration: none; }
 .dialog .actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; }
 .dialog .hint { color: var(--text-faint); font-size: 12px; margin-top: 8px; }
 
+/* 添加自选 tab + 板块选择器 */
+.add-tabs { display: flex; gap: 4px; margin-bottom: 14px; border-bottom: 1px solid var(--border); }
+.add-tab {
+  background: none; border: none; border-bottom: 2px solid transparent;
+  padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer;
+  margin-bottom: -1px;
+}
+.add-tab:hover { color: var(--text); }
+.add-tab.on { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+.sector-list {
+  max-height: 360px; overflow-y: auto; margin-top: 10px;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.sector-item {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 8px;
+  background: none; border: 1px solid transparent; border-radius: 6px;
+  padding: 7px 10px; cursor: pointer; text-align: left; font-size: 13px;
+}
+.sector-item:hover { background: var(--bg-soft); border-color: var(--border); }
+.sector-item:disabled { opacity: 0.5; cursor: default; }
+.sector-item .si-symbol { font-size: 11px; color: var(--text-faint); font-family: ui-monospace, monospace; }
+
 /* ---------- 详情页 ---------- */
 .detail-header {
   display: flex;
@@ -1579,3 +1601,143 @@ a { color: var(--accent); text-decoration: none; }
 .strip-chip-regime.regime-bear {
   color: #0b9b64; background: rgba(11, 155, 100, 0.1);
 }
+
+/* 牛/熊底色横幅 */
+.breadth-regime-banner {
+  margin: 0 0 12px; padding: 8px 14px; border-radius: 6px;
+  font-size: 14px; font-weight: 600;
+}
+.breadth-regime-banner.bull {
+  background: rgba(220, 38, 38, 0.06); border: 1px solid rgba(220, 38, 38, 0.3);
+  color: #991b1b;
+}
+.breadth-regime-banner.bear {
+  background: rgba(11, 155, 100, 0.06); border: 1px solid rgba(11, 155, 100, 0.3);
+  color: #065f46;
+}
+.breadth-regime-banner.neutral {
+  background: rgba(107, 119, 141, 0.06); border: 1px solid var(--border);
+  color: var(--text-faint);
+}
+
+/* 预警规则说明 */
+.breadth-rules { display: flex; flex-direction: column; gap: 6px; }
+.breadth-rule {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; line-height: 1.4;
+}
+.breadth-rule span:last-child { color: var(--text-faint); }
+.rule-tag {
+  flex: 0 0 auto; font-size: 11px; font-weight: 600;
+  padding: 2px 8px; border-radius: 3px; white-space: nowrap;
+}
+.rule-tag.tag-stage-top { color: #ea580c; background: rgba(234,88,12,0.1); border: 1px solid #ea580c; }
+.rule-tag.tag-stage-bottom { color: #0891b2; background: rgba(8,145,178,0.1); border: 1px solid #0891b2; }
+.rule-tag.tag-reversal-top { color: #fff; background: #dc2626; }
+.rule-tag.tag-reversal-bottom { color: #fff; background: #0b9b64; }
+.rule-tag.tag-bull { color: #dc2626; background: rgba(220,38,38,0.08); border: 1px solid rgba(220,38,38,0.3); }
+.rule-tag.tag-bear { color: #0b9b64; background: rgba(11,155,100,0.08); border: 1px solid rgba(11,155,100,0.3); }
+
+/* ---- CreatePlanDialog ---- */
+.cp-card { width: min(680px, 94vw); }
+.cp-intro { font-size: 12px; color: var(--text-faint); margin: 0 0 14px; line-height: 1.55; }
+.cp-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px; }
+.cp-row.reason { grid-template-columns: 1fr; }
+.cp-row .cp-field:last-child:nth-child(2) { grid-column: span 1; }
+.cp-field { display: flex; flex-direction: column; gap: 4px; }
+.cp-field textarea,
+.cp-field input,
+.cp-field select {
+  width: 100%; padding: 7px 9px; font: inherit; font-size: 13px;
+  background: var(--bg-card, #fff); color: var(--text, #222);
+  border: 1px solid var(--border); border-radius: 4px;
+}
+.cp-field textarea { resize: vertical; }
+.cp-label { font-size: 12px; font-weight: 600; color: var(--text-faint); }
+.cp-hint { font-size: 11px; color: var(--text-faint); }
+.cp-section { margin: 8px 0 8px; font-size: 14px; }
+.cp-playbook { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+.cp-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px; }
+.cp-error { color: var(--warn); font-size: 12px; margin-top: 8px; }
+
+/* ---- TopNav ---- */
+.top-nav {
+  display: flex; align-items: center; gap: 4px; height: 38px; padding: 0 14px;
+  border-bottom: 1px solid var(--border); background: var(--bg-panel);
+  position: sticky; top: 0; z-index: 50;
+}
+.top-nav .brand { font-weight: 700; font-size: 14px; margin-right: 14px; color: var(--accent); }
+.top-nav a {
+  padding: 4px 12px; font-size: 13px; border-radius: 4px; color: var(--text);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+}
+.top-nav a:hover { background: var(--bg-card-hover); }
+.top-nav a.active { background: var(--accent); color: #fff; }
+.top-nav .nav-badge {
+  background: var(--warn); color: #fff; border-radius: 9px;
+  font-size: 10px; min-width: 16px; height: 16px; padding: 0 4px;
+  display: inline-flex; align-items: center; justify-content: center; font-weight: 700;
+}
+.top-nav .nav-spacer { flex: 1; }
+
+/* ---- AgentDrawer（右侧抽屉）---- */
+.drawer-overlay {
+  position: fixed; inset: 0; z-index: 110; background: rgba(0,0,0,0.3);
+}
+.drawer-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw); z-index: 111;
+  background: var(--bg-panel); border-left: 1px solid var(--border);
+  display: flex; flex-direction: column; box-shadow: -8px 0 30px rgba(0,0,0,0.15);
+}
+.drawer-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; border-bottom: 1px solid var(--border);
+}
+.drawer-head h2 { margin: 0; font-size: 15px; }
+.drawer-body { flex: 1; overflow: auto; padding: 14px 16px; font-size: 13px; line-height: 1.6; }
+.drawer-body .turn { margin-bottom: 12px; }
+.drawer-body .turn .who { font-size: 11px; color: var(--text-faint); margin-bottom: 3px; }
+.drawer-body .turn .msg {
+  padding: 8px 10px; border-radius: 6px; white-space: pre-wrap;
+  border: 1px solid var(--border); background: var(--bg-card, #fff);
+}
+.drawer-body .grounded-tag { font-size: 11px; color: var(--text-faint); margin-top: 3px; }
+.drawer-body .grounded-tag.warn { color: var(--warn); }
+.drawer-input { display: flex; gap: 8px; padding: 10px 16px; border-top: 1px solid var(--border); }
+.drawer-input input { flex: 1; padding: 7px 9px; font: inherit; font-size: 13px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg-card, #fff); }
+
+/* ---- SupervisorPage ---- */
+.sv-plan-card {
+  border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; margin-bottom: 12px; background: var(--bg-panel);
+}
+.sv-plan-card .sv-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+.sv-plan-card .sv-head b { font-size: 14px; }
+.sv-plan-card .sv-state { font-size: 11px; padding: 2px 8px; border-radius: 9px; background: var(--bg-card-hover); color: var(--text-faint); }
+.sv-plan-card .sv-state.entered { color: var(--lei-green); }
+.sv-plan-card .sv-state.exited { color: var(--text-faint); }
+.sv-playbook { font-size: 12px; color: var(--text-faint); margin: 6px 0 8px; line-height: 1.55; }
+.sv-actions { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+.sv-action-row {
+  display: flex; align-items: center; gap: 8px; font-size: 12px;
+  padding: 6px 8px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg-card, #fff);
+}
+.sv-action-row .kind { font-weight: 700; }
+.sv-action-row .nag { color: var(--warn); font-size: 11px; }
+.sv-action-row .due { color: var(--text-faint); font-size: 11px; margin-left: auto; }
+.sv-defer-inline { display: flex; flex-direction: column; gap: 5px; margin-top: 6px; }
+.sv-defer-inline input, .sv-defer-inline textarea {
+  padding: 5px 7px; font: inherit; font-size: 12px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg-card, #fff);
+}
+.sv-empty { color: var(--text-faint); font-size: 13px; padding: 30px 0; text-align: center; }
+
+/* ---- 持仓盯盘：信号多选 + 计划卡标识 ---- */
+.cp-signals { display: flex; flex-direction: column; gap: 5px; margin-top: 5px; }
+.cp-signal { display: flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 400; }
+.cp-signal input { width: auto; margin: 0; }
+.cp-signal code { font-size: 11px; color: var(--text-faint); }
+.sv-kind-chip {
+  font-size: 10px; padding: 2px 7px; border-radius: 9px; font-weight: 700;
+  background: var(--accent); color: #fff;
+}
+.sv-trigger { font-size: 12px; color: var(--text-faint); }
+.sv-trigger b { color: var(--text); }

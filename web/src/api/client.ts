@@ -1,11 +1,18 @@
 import type {
+  ActionItem,
   BreadthHistoryResponse,
+  CreateHoldingWatchPayload,
+  CreatePlanPayload,
   DashboardResponse,
   EventItem,
   ForwardStatsResponse,
   GlobalStripResponse,
   MarketContextFull,
   MarketDataStatus,
+  Plan,
+  PlanAlert,
+  PlanChatReply,
+  PlansSummary,
   ResolveResult,
   SymbolDetail,
   WatchlistGroup,
@@ -66,6 +73,11 @@ export const api = {
     request<void>(`/watchlist/${encodeURIComponent(symbol)}`, { method: "DELETE" }),
   resolve: (q: string, probe = false) =>
     request<ResolveResult>(`/symbols/resolve?q=${encodeURIComponent(q)}&probe=${probe}`),
+  sectors: () =>
+    request<{
+      sectors: { code: string; name: string; symbol: string }[];
+      indices: { code: string; name: string; symbol: string }[];
+    }>(`/sectors`),
   events: (
     symbol: string,
     opts: { structureId?: string; onDate?: string; ruleId?: string; limit?: number } = {},
@@ -107,4 +119,50 @@ export const api = {
     request<ForwardStatsResponse>(
       `/market-context/forward-stats?market_id=${encodeURIComponent(marketId)}&percentile=${percentile}&bucket_half_width=${bucketHalfWidth}`,
     ),
+  // ---- 计划台账 / 监督员 agent ----
+  listPlans: (params: { symbol?: string; state?: string } = {}) => {
+    const q = new URLSearchParams();
+    if (params.symbol) q.set("symbol", params.symbol);
+    if (params.state) q.set("state", params.state);
+    const qs = q.toString();
+    return request<Plan[]>(`/plans${qs ? `?${qs}` : ""}`);
+  },
+  getPlan: (planId: string) => request<Plan>(`/plans/${encodeURIComponent(planId)}`),
+  plansSummary: () => request<PlansSummary>(`/plans/summary`),
+  createPlan: (body: CreatePlanPayload) =>
+    request<Plan>("/plans", { method: "POST", body: JSON.stringify(body) }),
+  createHoldingWatch: (body: CreateHoldingWatchPayload) =>
+    request<Plan>("/plans/holding-watch", {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  confirmPlan: (planId: string) =>
+    request<Plan>(`/plans/${encodeURIComponent(planId)}/confirm`, { method: "POST" }),
+  planAlerts: (planId: string) =>
+    request<PlanAlert[]>(`/plans/${encodeURIComponent(planId)}/alerts`),
+  planActions: (planId: string, state?: string) => {
+    const qs = state ? `?state=${encodeURIComponent(state)}` : "";
+    return request<ActionItem[]>(
+      `/plans/${encodeURIComponent(planId)}/actions${qs}`,
+    );
+  },
+  doneAction: (planId: string, actionId: string) =>
+    request<ActionItem>(
+      `/plans/${encodeURIComponent(planId)}/actions/${encodeURIComponent(actionId)}/done`,
+      { method: "POST" },
+    ),
+  deferAction: (
+    planId: string,
+    actionId: string,
+    body: { reason_cn: string; resume_on: Record<string, unknown> },
+  ) =>
+    request<ActionItem>(
+      `/plans/${encodeURIComponent(planId)}/actions/${encodeURIComponent(actionId)}/defer`,
+      { method: "POST", body: JSON.stringify(body) },
+    ),
+  planChat: (planId: string, message: string) =>
+    request<PlanChatReply>(`/plans/${encodeURIComponent(planId)}/chat`, {
+      method: "POST",
+      body: JSON.stringify({ message }),
+    }),
 };

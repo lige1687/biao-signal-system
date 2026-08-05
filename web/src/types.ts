@@ -602,3 +602,113 @@ export interface SymbolDetail {
   mark_concepts: Record<string, string>;
   disclaimer_cn: string;
 }
+
+// ---- 计划台账 / 监督员 agent（对齐 schemas.py）----
+
+export interface Plan {
+  plan_id: string;
+  symbol: string;
+  module: string; // A/B/C/D
+  direction: string; // long/short
+  entry_rule_id: string | null;
+  entry_lifecycle_id: string | null;
+  entry_trigger_cn: string | null;
+  entry_price_ref: number | null;
+  invalidation_price: number | null;
+  target_b_price: number | null;
+  target_b_source: string | null;
+  reward_risk_at_plan: number | null;
+  valid_until: string;
+  state: string; // draft/armed/entered/exited/...
+  ruleset_version: string;
+  reason: string;
+  thesis_cn: string;
+  invalidation_criteria_cn: string;
+  drawdown_playbook_cn: string;
+  take_profit_plan_cn: string;
+  stop_plan_cn: string;
+  entered_on: string | null;
+  exited_on: string | null;
+  plan_kind: string; // entry | holding_watch
+  take_profit_price: number | null;
+  stop_price: number | null;
+  watch_signal_rule_ids: string[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CreateHoldingWatchPayload {
+  symbol: string;
+  direction: string;
+  ruleset_version: string;
+  valid_until: string;
+  take_profit_plan_cn: string;
+  stop_plan_cn: string;
+  take_profit_price?: number | null;
+  stop_price?: number | null;
+  watch_signal_rule_ids?: string[];
+  entered_on?: string | null;
+  module?: string;
+  reason?: string;
+}
+
+export interface ActionItem {
+  action_id: string;
+  plan_id: string;
+  kind: string; // ENTER/EXIT/REVIEW
+  source_alert_code: string;
+  state: string; // open/done/deferred/expired
+  due_from: string | null;
+  nag_count: number;
+  resume_on: string | null;
+  closed_on: string | null;
+  close_kind: string | null;
+}
+
+export interface PlanAlert {
+  code: string;
+  severity: string; // block/remind/hint
+  rule_id: string | null;
+  evidence: Record<string, unknown>;
+  principle_source: string | null;
+  logic_provenance: string;
+  caveat_cn: string;
+  actionable_from: string;
+  data_as_of: string;
+  next_step_cn: string;
+  action_kind: string | null;
+}
+
+export interface CreatePlanPayload {
+  symbol: string;
+  module: string;
+  direction: string;
+  ruleset_version: string;
+  reason?: string;
+  valid_until?: string;
+  entry_rule_id?: string | null;
+  entry_lifecycle_id?: string | null;
+  entry_trigger_cn?: string | null;
+  entry_price_ref?: number | null;
+  invalidation_price?: number | null;
+  target_b_price?: number | null;
+  target_b_source?: string | null;
+  reward_risk_at_plan?: number | null;
+  thesis_cn?: string;
+  invalidation_criteria_cn?: string;
+  drawdown_playbook_cn?: string;
+  take_profit_plan_cn?: string;
+  stop_plan_cn?: string;
+}
+
+export interface PlanChatReply {
+  reply: string;
+  grounded: boolean;
+  plan_id: string;
+  alerts: PlanAlert[];
+}
+
+export interface PlansSummary {
+  open_actions: number;
+  active_plans: number;
+}

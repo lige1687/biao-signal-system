@@ -10,6 +10,7 @@ import PullbackBacktestPanel from "../components/PullbackBacktestPanel";
 import PullbackOpportunityPanel from "../components/PullbackOpportunityPanel";
 import ExplanationPanel, { type Selection } from "../components/ExplanationPanel";
 import TradeOpportunityPanel from "../components/TradeOpportunityPanel";
+import CreatePlanDialog, { prefillFromOpportunity } from "../components/CreatePlanDialog";
 import KlineChart, {
   DEFAULT_DISPLAY,
   type ChartDisplay,
@@ -76,6 +77,7 @@ export default function DetailPage() {
   const { symbol = "" } = useParams();
   const queryClient = useQueryClient();
   const [selection, setSelection] = useState<Selection | null>(null);
+  const [showCreatePlan, setShowCreatePlan] = useState(false);
   // 标记默认全关（见 DEFAULT_DISPLAY）：历史标记可达数百个，会严重干扰看盘。
   const [display, setDisplay] = useState<ChartDisplay>(DEFAULT_DISPLAY);
   // KlineChart 把「下载当前图为 PNG」的闭包回传到这里，按钮点的时候调它
@@ -191,6 +193,13 @@ export default function DetailPage() {
               </span>
             )}
             <span style={{ flex: 1 }} />
+            <button
+              className="btn small"
+              onClick={() => setShowCreatePlan(true)}
+              title="基于当前信号建立执行计划"
+            >
+              建立执行计划
+            </button>
             <span style={{ color: "var(--text-faint)", fontSize: 12 }}>
               数据时间{" "}
               {data.meta.data_time
@@ -353,6 +362,16 @@ export default function DetailPage() {
             <div style={{ marginTop: 6 }}>{data.meta.calendar_note_cn}</div>
           </div>
         </>
+      )}
+
+      {showCreatePlan && data && (
+        <CreatePlanDialog
+          symbol={symbol}
+          prefill={prefillFromOpportunity(
+            data.assessment.trade_opportunities.find((o) => o.is_active) ?? null,
+          )}
+          onClose={() => setShowCreatePlan(false)}
+        />
       )}
     </div>
   );
