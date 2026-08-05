@@ -17,7 +17,12 @@ from datetime import UTC, datetime
 from lei_signal.plans.models import (
     PLAN_ARMED,
     PLAN_DRAFT,
+    PLAN_ENTERED,
+    PLAN_KIND_ENTRY,
+    PLAN_KIND_HOLDING_WATCH,
+    PLAN_KINDS,
     PLAYBOOK_FIELDS,
+    REQUIRED_FOR_HOLDING_WATCH,
     VERDICT_SNAPSHOT,
     ActionItem,
     Annotation,
@@ -32,7 +37,25 @@ _TRANSITIONS: dict[str, frozenset[str]] = {
     "entered": frozenset({"exited", "invalidated"}),
 }
 
+#: 持仓盯盘额外允许 draft->entered（已在场内，不经 armed 入场判定）。
+#: 只对 plan_kind=holding_watch 放开--普通入场计划仍必须走 armed，
+#: 否则就能绕过五项预案必填校验直接落 entered。
+_HOLDING_WATCH_EXTRA_TRANSITIONS: dict[str, frozenset[str]] = {
+    PLAN_DRAFT: frozenset({PLAN_ENTERED}),
+}
+
 _FREEZABLE_FIELDS = ("invalidation_price", *PLAYBOOK_FIELDS)
+
+
+def _split_rule_ids(raw: str | None) -> tuple[str, ...]:
+    """逗号分隔 rule_id 串 -> tuple。空串/None -> ()。"""
+    if not raw:
+        return ()
+    return tuple(part.strip() for part in str(raw).split(",") if part.strip())
+
+
+def _join_rule_ids(rule_ids: tuple[str, ...] | list[str] | None) -> str:
+    return ",".join(r.strip() for r in (rule_ids or ()) if r.strip())
 
 
 def _now() -> str:
@@ -79,6 +102,10 @@ def _row_to_plan(row: sqlite3.Row) -> TradePlan:
         exited_on=row["exited_on"],
         exit_reason_rule_id=row["exit_reason_rule_id"],
         superseded_by=row["superseded_by"],
+        plan_kind=row["plan_kind"],
+        take_profit_price=row["take_profit_price"],
+        stop_price=row["stop_price"],
+        watch_signal_rule_ids=_split_rule_ids(row["watch_signal_rule_ids"]),
         created_at=row["created_at"],
         updated_at=row["updated_at"],
     )
@@ -154,11 +181,17 @@ def create_plan(
     drawdown_playbook_cn: str = "",
     take_profit_plan_cn: str = "",
     stop_plan_cn: str = "",
+    plan_kind: str = PLAN_KIND_ENTRY,
+    take_profit_price: float | None = None,
+    stop_price: float | None = None,
+    watch_signal_rule_ids: tuple[str, ...] | list[str] | None = None,
     plan_id: str | None = None,
 ) -> TradePlan:
     """创建 draft 计划。draft 阶段允许五项预案/valid_until/reason 为空。"""
     if direction not in ("long", "short"):
         raise ValueError(f"direction 必须为 long/short，得到 {direction}")
+    if plan_kind not in PLAN_KINDS:
+        raise ValueError(f"plan_kind 必须为 {PLAN_KINDS} 之一，得到 {plan_kind}")
     created_at = _now()
     plan_id = plan_id or _gen_plan_id(symbol, created_at)
     conn.execute(
@@ -168,15 +201,17 @@ def create_plan(
             entry_trigger_cn, entry_price_ref, invalidation_price, target_b_price,
             target_b_source, reward_risk_at_plan, valid_until, state, ruleset_version,
             reason, thesis_cn, invalidation_criteria_cn, drawdown_playbook_cn,
-            take_profit_plan_cn, stop_plan_cn, created_at, updated_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            take_profit_plan_cn, stop_plan_cn, plan_kind, take_profit_price,
+            stop_price, watch_signal_rule_ids, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
             plan_id, symbol, module, direction, entry_rule_id, entry_lifecycle_id,
             entry_trigger_cn, entry_price_ref, invalidation_price, target_b_price,
             target_b_source, reward_risk_at_plan, valid_until, PLAN_DRAFT, ruleset_version,
             reason, thesis_cn, invalidation_criteria_cn, drawdown_playbook_cn,
-            take_profit_plan_cn, stop_plan_cn, created_at, created_at,
+            take_profit_plan_cn, stop_plan_cn, plan_kind, take_profit_price,
+            stop_price, _join_rule_ids(watch_signal_rule_ids), created_at, created_at,
         ),
     )
     # revision_no=0 创建快照：冻结原始失效价与五项预案
@@ -220,6 +255,47 @@ def confirm_plan(conn: sqlite3.Connection, plan_id: str) -> TradePlan:
     return transition_state(conn, plan_id, PLAN_ARMED)
 
 
+def confirm_holding_watch(
+    conn: sqlite3.Connection, plan_id: str, *, entered_on: str
+) -> TradePlan:
+    """持仓盯盘 draft -> entered（已在场内，不经 armed 入场判定）。
+
+    必填（人类 2026-08-05 决定）：
+      - 两项退出预案（take_profit_plan_cn / stop_plan_cn）--「什么逻辑退出」
+        必须先写下来，否则价位到了仍会临场改主意；
+      - valid_until；
+      - 至少一个退出触发条件：止盈价 / 止损价 / 信号 rule_id。三者全空则无从监督。
+    入场理由（五项里的另外三项、entry_rule_id、R/R）不强制--你已经在场内了。
+    """
+    plan = get_plan(conn, plan_id)
+    if plan is None:
+        raise KeyError(f"计划不存在: {plan_id}")
+    if plan.plan_kind != PLAN_KIND_HOLDING_WATCH:
+        raise ValueError(
+            f"confirm_holding_watch 只接受 plan_kind=holding_watch，得到 {plan.plan_kind}"
+        )
+    if plan.state != PLAN_DRAFT:
+        raise ValueError(f"只有 draft 可确认，当前 state={plan.state}")
+    missing = [f for f in REQUIRED_FOR_HOLDING_WATCH if not getattr(plan, f)]
+    if missing:
+        raise ValueError(f"持仓盯盘必填字段为空: {missing}")
+    if (
+        plan.take_profit_price is None
+        and plan.stop_price is None
+        and not plan.watch_signal_rule_ids
+    ):
+        raise ValueError(
+            "持仓盯盘至少需要一个退出触发条件：止盈价 / 止损价 / 信号 rule_id"
+        )
+    transition_state(conn, plan_id, PLAN_ENTERED)
+    conn.execute(
+        "UPDATE trade_plans SET entered_on = ?, updated_at = ? WHERE plan_id = ?",
+        (entered_on, _now(), plan_id),
+    )
+    conn.commit()
+    return get_plan(conn, plan_id)  # type: ignore[return-value]
+
+
 def get_plan(conn: sqlite3.Connection, plan_id: str) -> TradePlan | None:
     row = conn.execute(
         "SELECT * FROM trade_plans WHERE plan_id = ?", (plan_id,)
@@ -257,6 +333,8 @@ def transition_state(
     if plan is None:
         raise KeyError(f"计划不存在: {plan_id}")
     allowed = _TRANSITIONS.get(plan.state, frozenset())
+    if plan.plan_kind == PLAN_KIND_HOLDING_WATCH:
+        allowed = allowed | _HOLDING_WATCH_EXTRA_TRANSITIONS.get(plan.state, frozenset())
     if new_state not in allowed:
         raise ValueError(f"非法状态迁移: {plan.state} -> {new_state}")
     conn.execute(
@@ -275,6 +353,24 @@ def set_entered(
     conn.execute(
         "UPDATE trade_plans SET entered_on = ?, updated_at = ? WHERE plan_id = ?",
         (entered_on, _now(), plan_id),
+    )
+    conn.commit()
+    return get_plan(conn, plan_id)  # type: ignore[return-value]
+
+
+def set_exited(
+    conn: sqlite3.Connection, plan_id: str, *, exited_on: str
+) -> TradePlan:
+    """entered -> exited，记 exited_on（仅日期，无数量金额）。
+
+    与 set_entered 对称：EXIT 确认同样盖 exited_on，使计划时间线（持有时长、
+    有效期）在入场/退出两侧口径一致。exited_on 取 EXIT 待办的 due_from（系统
+    判定的可执行日），与 entered_on 取 ENTER 待办 due_from 同源。
+    """
+    transition_state(conn, plan_id, "exited")
+    conn.execute(
+        "UPDATE trade_plans SET exited_on = ?, updated_at = ? WHERE plan_id = ?",
+        (exited_on, _now(), plan_id),
     )
     conn.commit()
     return get_plan(conn, plan_id)  # type: ignore[return-value]
@@ -514,6 +610,14 @@ def get_action_item(conn: sqlite3.Connection, action_id: str) -> ActionItem | No
     return _row_to_action(row) if row else None
 
 
+def count_open_action_items(conn: sqlite3.Connection) -> int:
+    """全库未处理待办数（state=open），供监督待办顶栏红点。"""
+    row = conn.execute(
+        "SELECT COUNT(*) FROM plan_action_items WHERE state = 'open'"
+    ).fetchone()
+    return int(row[0]) if row else 0
+
+
 def update_action_item(
     conn: sqlite3.Connection,
     action_id: str,
@@ -552,7 +656,9 @@ def update_action_item(
 __all__ = [
     "add_annotation",
     "append_revision",
+    "confirm_holding_watch",
     "confirm_plan",
+    "count_open_action_items",
     "create_plan",
     "frozen_snapshot",
     "get_action_item",
@@ -563,6 +669,7 @@ __all__ = [
     "list_revisions",
     "mark_superseded",
     "set_entered",
+    "set_exited",
     "transition_state",
     "update_action_item",
     "upsert_action_item",

@@ -6,16 +6,19 @@ CRUD + 触发判定 + 待办。判定权在 plans/ 判定层（Python），本�
 from __future__ import annotations
 
 from contextlib import closing
+from datetime import UTC, datetime
 
 from fastapi import APIRouter, HTTPException, Request
 
 from lei_signal.api.config import sqlite_path as default_db
 from lei_signal.api.schemas import (
     ActionItemDTO,
+    CreateHoldingWatchRequest,
     CreatePlanRequest,
     DeferRequest,
     PlanAlertDTO,
     PlanDTO,
+    PlansSummaryDTO,
     RevisionRequest,
 )
 from lei_signal.plans.actions import (
@@ -24,17 +27,19 @@ from lei_signal.plans.actions import (
 )
 from lei_signal.plans.context import context_from_result
 from lei_signal.plans.drift import check_revision
-from lei_signal.plans.models import VERDICT_WITHIN_PLAYBOOK
+from lei_signal.plans.models import PLAN_KIND_HOLDING_WATCH, VERDICT_WITHIN_PLAYBOOK
 from lei_signal.plans.monitor import evaluate_plan
 from lei_signal.plans.store import (
     append_revision,
+    confirm_holding_watch,
     confirm_plan,
+    count_open_action_items,
     create_plan,
     get_plan,
     list_action_items,
     list_plans,
     set_entered,
-    transition_state,
+    set_exited,
     update_action_item,
 )
 from lei_signal.storage.sqlite_store import connect
@@ -60,6 +65,9 @@ def _to_plan_dto(plan) -> PlanDTO:  # noqa: ANN001
         take_profit_plan_cn=plan.take_profit_plan_cn, stop_plan_cn=plan.stop_plan_cn,
         entered_on=plan.entered_on, exited_on=plan.exited_on,
         exit_reason_rule_id=plan.exit_reason_rule_id, superseded_by=plan.superseded_by,
+        plan_kind=plan.plan_kind, take_profit_price=plan.take_profit_price,
+        stop_price=plan.stop_price,
+        watch_signal_rule_ids=list(plan.watch_signal_rule_ids),
         created_at=plan.created_at, updated_at=plan.updated_at,
     )
 
@@ -100,6 +108,34 @@ def post_plan(request: Request, body: CreatePlanRequest) -> PlanDTO:
         return _to_plan_dto(plan)
 
 
+@router.post("/plans/holding-watch", response_model=PlanDTO, status_code=201)
+def post_holding_watch(request: Request, body: CreateHoldingWatchRequest) -> PlanDTO:
+    """建持仓盯盘并直接落 entered（已在场内，只监督退出）。
+
+    一步完成 create+confirm：入场判定不适用，没有 draft 复核的必要。
+    校验（两项退出预案 + 至少一个触发条件）在 store.confirm_holding_watch。
+    """
+    entered_on = body.entered_on or datetime.now(UTC).date().isoformat()
+    with closing(connect(_db_path(request))) as conn:
+        plan = create_plan(
+            conn, symbol=body.symbol, module=body.module, direction=body.direction,
+            ruleset_version=body.ruleset_version, reason=body.reason,
+            valid_until=body.valid_until,
+            take_profit_plan_cn=body.take_profit_plan_cn,
+            stop_plan_cn=body.stop_plan_cn,
+            plan_kind=PLAN_KIND_HOLDING_WATCH,
+            take_profit_price=body.take_profit_price,
+            stop_price=body.stop_price,
+            watch_signal_rule_ids=body.watch_signal_rule_ids,
+        )
+        try:
+            return _to_plan_dto(
+                confirm_holding_watch(conn, plan.plan_id, entered_on=entered_on)
+            )
+        except ValueError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
 @router.post("/plans/{plan_id}/confirm", response_model=PlanDTO)
 def confirm(request: Request, plan_id: str) -> PlanDTO:
     with closing(connect(_db_path(request))) as conn:
@@ -109,6 +145,15 @@ def confirm(request: Request, plan_id: str) -> PlanDTO:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
         except ValueError as exc:
             raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
+@router.get("/plans/summary", response_model=PlansSummaryDTO)
+def plans_summary(request: Request) -> PlansSummaryDTO:
+    """顶栏红点：未处理待办数 + 活跃（armed/entered）计划数。"""
+    with closing(connect(_db_path(request))) as conn:
+        open_actions = count_open_action_items(conn)
+        active = list_plans(conn, state="armed") + list_plans(conn, state="entered")
+    return PlansSummaryDTO(open_actions=open_actions, active_plans=len(active))
 
 
 @router.get("/plans", response_model=list[PlanDTO])
@@ -161,7 +206,9 @@ def enter_plan(request: Request, plan_id: str) -> PlanDTO:
         plan = get_plan(conn, plan_id)
         if plan is None:
             raise HTTPException(status_code=404, detail=f"计划不存在: {plan_id}")
-        entered = set_entered(conn, plan_id, entered_on=plan.valid_until)
+        entered = set_entered(
+            conn, plan_id, entered_on=datetime.now(UTC).date().isoformat()
+        )
         handle_supersede(conn, entered)
         return _to_plan_dto(get_plan(conn, plan_id))
 
@@ -235,10 +282,13 @@ def done_action(request: Request, plan_id: str, action_id: str) -> ActionItemDTO
         if item is None:
             raise HTTPException(status_code=404, detail=f"待办不存在: {action_id}")
         # ENTER done -> plan entered；EXIT done -> plan exited
+        # 入场/退出日取该待办 due_from（系统判定的可执行日），两侧同源；缺 due_from
+        # 时退回当日（仅日期，无数量金额）。
         plan = get_plan(conn, plan_id)
+        executed_on = item.due_from or datetime.now(UTC).date().isoformat()
         if plan is not None and item.kind == "ENTER" and plan.state == "armed":
-            set_entered(conn, plan_id, entered_on=plan.valid_until)
+            set_entered(conn, plan_id, entered_on=executed_on)
             handle_supersede(conn, get_plan(conn, plan_id))  # type: ignore[arg-type]
         elif plan is not None and item.kind == "EXIT" and plan.state == "entered":
-            transition_state(conn, plan_id, "exited")
+            set_exited(conn, plan_id, exited_on=executed_on)
         return _to_action_dto(item)

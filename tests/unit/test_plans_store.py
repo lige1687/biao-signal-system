@@ -155,6 +155,22 @@ def test_illegal_state_transition_rejected(tmp_path) -> None:  # noqa: ANN001
     conn.close()
 
 
+def test_set_entered_and_set_exited_stamp_dates(tmp_path) -> None:  # noqa: ANN001
+    """set_entered / set_exited 对称盖 entered_on / exited_on（仅日期，无数量金额）。"""
+    conn = connect(tmp_path / "dates.db")
+    plan = store.create_plan(conn, **_draft_kwargs())
+    store.confirm_plan(conn, plan.plan_id)
+    entered = store.set_entered(conn, plan.plan_id, entered_on="2026-08-04")
+    assert entered.state == "entered"
+    assert entered.entered_on == "2026-08-04"
+    assert entered.exited_on is None
+    exited = store.set_exited(conn, plan.plan_id, exited_on="2026-08-05")
+    assert exited.state == "exited"
+    assert exited.exited_on == "2026-08-05"
+    assert exited.entered_on == "2026-08-04"  # 入场日不被退出覆盖
+    conn.close()
+
+
 def test_annotations_append_only(tmp_path) -> None:  # noqa: ANN001
     conn = connect(tmp_path / "ann.db")
     plan = store.create_plan(conn, **_draft_kwargs())
@@ -186,4 +202,8 @@ def test_action_item_upsert_idempotent(tmp_path) -> None:  # noqa: ANN001
     )
     assert item.action_id == item2.action_id
     assert len(store.list_action_items(conn, plan.plan_id)) == 1
+    # 全库 open 待办计数（顶栏红点）：1 个 open。
+    assert store.count_open_action_items(conn) == 1
+    store.update_action_item(conn, item.action_id, state="done", close_kind="done")
+    assert store.count_open_action_items(conn) == 0
     conn.close()
