@@ -19,6 +19,7 @@ from lei_signal.api.routes import (
     agent,
     dashboard,
     feishu_webhook,
+    opportunities,
     plans,
     symbols,
     watchlist,
@@ -52,6 +53,7 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
 
     app.include_router(dashboard.router)
     app.include_router(symbols.router)
+    app.include_router(opportunities.router)
     app.include_router(watchlist.router)
     app.include_router(plans.router)
     app.include_router(agent.router)

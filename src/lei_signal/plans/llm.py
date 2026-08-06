@@ -74,6 +74,33 @@ SYSTEM_PROMPT = """你是 LEI 交易系统的纪律监督员的**表达层**。
 """
 
 
+#: 买点分析系统提示。比监督员更严：连「可能构成买点」的措辞也必须引 review 的字段，
+#: 不得自行从行情推断。止损只能引 invalidation_price；盈亏比只能照抄 ratio。
+BUY_POINT_SYSTEM_PROMPT = """你是 LEI 交易系统的买点分析表达层。
+
+你拿到的是一份**已经由确定性 Python 判定层算好**的买点审阅（buy-point-review）。
+你的职责：把它讲成简洁中文，帮用户理解当前是否构成系统定义的买点、图什么信号、
+止损设哪、盈亏比多少，并协助协商落计划。
+
+铁律（违反即输出被丢弃）：
+1. **不得自行判断买点**。买点结论只能来自 review 的 candidates 字段
+   （satisfied_conditions / missing_conditions / state）。不得从行情自行推断。
+2. 禁止出现这些词：买入、卖出、建议买、该买、加仓、减仓、抄底。
+   用「参考」「条件成立」「可执行日」「系统定义的买点」等中性表述。
+3. **不得推算任何价位**。止损只能照抄 candidates 的 invalidation_price；
+   若该字段为 None（场景卡只给失效文案不给价），必须明说「止损价需在建计划时
+   人工确认，系统未给出」，不得编一个数字。盈亏比只能照抄 reward_risk_ratio；
+   reward_risk_computable=False 时必须说「盈亏比目标不可计算」。
+4. **「到什么情况才算买点」只能引 watch_conditions**：价位型条件照抄 price，
+   状态型条件（如多头排列未成立）不得贴数字。不得预测何时到达。
+5. 不得推算日期。可执行日只能照抄 actionable_from / as_of。
+6. research_proxy 标注：场景/可交易性/盈亏比均为研究代理，必须写「判定方式为研究代理」。
+7. 不输出总分、不输出评级、不预测价格走势。
+8. verdict=blocked 时必须先讲阻断（规格 §13），明确「按规则不开新仓」。
+9. 落计划只能提议，不得替用户决定。五项交易假设必须由人写。
+"""
+
+
 @dataclass(frozen=True, slots=True)
 class ArkConfig:
     api_key: str
@@ -213,11 +240,16 @@ def _extract_anthropic(data: dict[str, Any]) -> str | None:
     return joined or None
 
 
-def _post_user_content(user_content: str, config: ArkConfig) -> str | None:
-    """发单轮 user 消息到 ark（system 固定为 SYSTEM_PROMPT）。
+def _post_user_content(
+    user_content: str,
+    config: ArkConfig,
+    *,
+    system_prompt: str = SYSTEM_PROMPT,
+) -> str | None:
+    """发单轮 user 消息到 ark（system 可换）。
 
-    call_ark 与 chat_ark 共用此底层：双协议、退避重试、thinking/text 抽取。
-    任何失败返回 None（调用方降级）。
+    call_ark / chat_ark / chat_buy_point 共用此底层：双协议、退避重试、
+    thinking/text 抽取。任何失败返回 None（调用方降级）。
     """
     if config.style == STYLE_ANTHROPIC:
         url = f"{config.base_url}/v1/messages"
@@ -229,7 +261,7 @@ def _post_user_content(user_content: str, config: ArkConfig) -> str | None:
         body: dict[str, Any] = {
             "model": config.model,
             "max_tokens": config.max_tokens,
-            "system": SYSTEM_PROMPT,
+            "system": system_prompt,
             "messages": [{"role": "user", "content": user_content}],
         }
         extract = _extract_anthropic
@@ -242,7 +274,7 @@ def _post_user_content(user_content: str, config: ArkConfig) -> str | None:
         body = {
             "model": config.model,
             "messages": [
-                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_content},
             ],
             "temperature": 0.2,
@@ -291,6 +323,23 @@ def chat_ark(
     return _post_user_content(content, config)
 
 
+def chat_buy_point(
+    review_payload: dict[str, Any], user_message: str, config: ArkConfig
+) -> str | None:
+    """买点分析问答。用 BUY_POINT_SYSTEM_PROMPT（比监督员更严：禁自行判断买点、
+    禁推算价位）。回复仍须由调用方过 verify_grounding，不过则降级。
+
+    review_payload 是 BuyPointReviewDTO 序列化后的 dict（只含确定性字段）。
+    """
+    content = (
+        "以下是买点审阅结果（已由确定性判定层算好，只许引用其中字段，"
+        "不得自行判断买点、不得推算 review 未给出的价位或盈亏比）：\n"
+        + json.dumps(review_payload, ensure_ascii=False, indent=2)
+        + f"\n\n用户问题：{user_message}"
+    )
+    return _post_user_content(content, config, system_prompt=BUY_POINT_SYSTEM_PROMPT)
+
+
 
 def make_ark_renderer(
     *,
@@ -329,11 +378,13 @@ __all__ = [
     "ENV_STYLE",
     "STYLE_ANTHROPIC",
     "STYLE_OPENAI",
+    "BUY_POINT_SYSTEM_PROMPT",
     "SYSTEM_PROMPT",
     "ArkConfig",
     "build_context_payload",
     "call_ark",
     "chat_ark",
+    "chat_buy_point",
     "load_ark_config",
     "make_ark_renderer",
 ]

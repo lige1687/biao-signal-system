@@ -119,6 +119,41 @@ def cmd_revise(args: argparse.Namespace) -> None:
     print(json.dumps(_req("POST", f"/plans/{args.plan_id}/revise", body), ensure_ascii=False, indent=2))
 
 
+def cmd_review(args: argparse.Namespace) -> None:
+    """买点审阅：当前是否构成系统定义的买点、图什么信号、止损与盈亏比。"""
+    path = f"/symbols/{args.symbol}/buy-point-review"
+    if args.refresh:
+        path += "?refresh=true"
+    print(json.dumps(_req("GET", path), ensure_ascii=False, indent=2))
+
+
+def cmd_scan(args: argparse.Namespace) -> None:
+    """一键扫自选：哪些标的有系统定义的买点、哪些还没建计划。"""
+    qs = []
+    if args.symbols:
+        qs.append(f"symbols={args.symbols}")
+    if args.refresh:
+        qs.append("refresh=true")
+    if not args.only_with_candidates:
+        qs.append("only_with_candidates=false")
+    path = "/opportunities/scan" + (f"?{'&'.join(qs)}" if qs else "")
+    print(json.dumps(_req("GET", path), ensure_ascii=False, indent=2))
+
+
+def cmd_create_holding_watch(args: argparse.Namespace) -> None:
+    """建持仓盯盘（已在场内，只监督退出）。"""
+    body = {
+        "symbol": args.symbol, "direction": args.direction,
+        "ruleset_version": args.ruleset, "valid_until": args.valid_until,
+        "take_profit_plan_cn": args.take_profit, "stop_plan_cn": args.stop_plan,
+        "take_profit_price": args.take_profit_price,
+        "stop_price": args.stop_price,
+        "watch_signal_rule_ids": args.watch_signals.split(",") if args.watch_signals else [],
+        "module": args.module, "reason": args.reason,
+    }
+    print(json.dumps(_req("POST", "/plans/holding-watch", body), ensure_ascii=False, indent=2))
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="LEI 监督员 plan CLI")
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -136,6 +171,20 @@ def main() -> int:
     ac = sub.add_parser("actions"); ac.add_argument("plan_id"); ac.set_defaults(func=cmd_actions)
     r = sub.add_parser("revise"); r.add_argument("plan_id"); r.add_argument("field"); r.add_argument("value")
     r.set_defaults(func=cmd_revise)
+    rv = sub.add_parser("review"); rv.add_argument("symbol"); rv.add_argument("--refresh", action="store_true")
+    rv.set_defaults(func=cmd_review)
+    sc = sub.add_parser("scan"); sc.add_argument("--symbols", default=None)
+    sc.add_argument("--refresh", action="store_true"); sc.add_argument("--only-with-candidates", default=True)
+    sc.set_defaults(func=cmd_scan)
+    hw = sub.add_parser("create-holding-watch")
+    hw.add_argument("--symbol", required=True); hw.add_argument("--direction", default="long")
+    hw.add_argument("--ruleset", required=True); hw.add_argument("--valid-until", required=True)
+    hw.add_argument("--take-profit", required=True); hw.add_argument("--stop-plan", required=True)
+    hw.add_argument("--take-profit-price", type=float, default=None)
+    hw.add_argument("--stop-price", type=float, default=None)
+    hw.add_argument("--watch-signals", default=None, help="逗号分隔 rule_id，如 lei_color,dual_ma_bull_confirmed")
+    hw.add_argument("--module", default="A"); hw.add_argument("--reason", default="")
+    hw.set_defaults(func=cmd_create_holding_watch)
     args = parser.parse_args()
     args.func(args)
     return 0

@@ -622,6 +622,127 @@ class CreateHoldingWatchRequest(BaseModel):
     reason: str = ""
 
 
+class BuyPointCandidateDTO(BaseModel):
+    """一个候选买点：全部字段来自既有机会/场景 DTO，无新判定、无新数值。"""
+
+    scenario_id: str
+    scenario_cn: str
+    module: str | None = None          # A/B/C/D，由 rule_id 经 MODULE_MAP 反查
+    direction: str = "long"
+    state: str                          # watch/confirmed/weakened/invalidated
+    state_cn: str = ""
+    rule_id: str | None = None          # 入场理由锚点（建计划用）
+    lifecycle_id: str | None = None
+    #: 图什么信号进：已满足 / 还缺什么。照抄机会 DTO，不重写措辞。
+    satisfied_conditions: list[str] = []
+    missing_conditions: list[str] = []
+    key_price: float | None = None      # 场景关键价（突破位/站上位等）
+    #: 止损只能引这个：来自场景 invalidation（结构 C 点/密集区下沿等）
+    invalidation_price: float | None = None
+    invalidation_cn: str = ""
+    reward_risk_ratio: float | None = None
+    reward_risk_target: float | None = None
+    reward_risk_target_source_cn: str | None = None
+    reward_risk_computable: bool = False
+    next_step_cn: str = ""
+    caveat_cn: str = ""
+    research_proxy: bool = True
+
+
+class WatchConditionDTO(BaseModel):
+    """「到什么情况才算买点」的单条条件。
+
+    刻意区分价位型与状态型：并非所有缺失条件都对应一个价格。
+    缺「完整多头排列未成立」时没有单一价位可言，硬贴数字就是编造。
+    """
+
+    text_cn: str                        # 照抄 missing_conditions 原文
+    kind: str                           # price | state
+    price: float | None = None          # 仅 kind=price 时有值
+    #: 可跟踪化建议：把该条件交给系统盯盘（复用 holding_watch / resume_on 形态）
+    as_signal_rule_ids: list[str] = []
+
+
+class SuggestedPlanDTO(BaseModel):
+    """可直接落计划的预填。只给系统已算出的值；五项预案必须人写，故不含。"""
+
+    symbol: str
+    module: str
+    direction: str
+    entry_rule_id: str | None = None
+    entry_lifecycle_id: str | None = None
+    entry_trigger_cn: str | None = None
+    invalidation_price: float | None = None
+    target_b_price: float | None = None
+    target_b_source: str | None = None
+    reward_risk_at_plan: float | None = None
+
+
+class BuyPointReviewDTO(BaseModel):
+    """买点审阅：汇总既有确定性判定，供 agent 讲解与协商落计划。
+
+    verdict 由字段组合派生，不是新判定：
+      actionable = 有 confirmed 机会且可交易；
+      blocked    = 有机会但可交易性阻断（规格 §13，按规则不开新仓）；
+      waiting    = 只有 watch 机会，等条件成立；
+      none       = 当前无任何机会。
+    """
+
+    symbol: str
+    display_name: str = ""
+    as_of: str
+    last_close: float | None = None
+    verdict: str
+    verdict_cn: str
+    summary_cn: str
+    tradability: TradabilityDTO | None = None
+    candidates: list[BuyPointCandidateDTO] = []
+    #: verdict != actionable 时给出：到什么情况才算买点
+    watch_conditions: list[WatchConditionDTO] = []
+    #: 仅 verdict=actionable 时给出
+    suggested_plan: SuggestedPlanDTO | None = None
+    has_active_plan: bool = False
+    active_plan_ids: list[str] = []
+    ruleset_version: str = ""
+    disclaimer_cn: str = ""
+
+
+class ScanItemDTO(BaseModel):
+    """批量扫描的单标的精简结果。"""
+
+    symbol: str
+    display_name: str = ""
+    verdict: str
+    verdict_cn: str
+    best_scenario_cn: str | None = None
+    best_state: str | None = None
+    reward_risk_ratio: float | None = None
+    reward_risk_computable: bool = False
+    blocking_reasons: list[str] = []
+    missing_summary_cn: str = ""
+    has_active_plan: bool = False
+    error: str | None = None
+
+
+class ScanResponse(BaseModel):
+    generated_at: str
+    scanned: int
+    items: list[ScanItemDTO] = []
+
+
+class BuyPointChatRequest(BaseModel):
+    """就买点审阅提问。message 为空时返回审阅摘要。"""
+
+    message: str = ""
+
+
+class BuyPointChatReply(BaseModel):
+    reply: str
+    grounded: bool
+    symbol: str
+    review: BuyPointReviewDTO | None = None
+
+
 class PlanChatRequest(BaseModel):
     """向监督员 agent 提问。message 为空时返回当前 alert 的接地摘要。"""
 
