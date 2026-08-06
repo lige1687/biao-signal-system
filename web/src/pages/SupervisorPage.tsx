@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../api/client";
 import AgentDrawer from "../components/AgentDrawer";
+import BuyPointDrawer from "../components/BuyPointDrawer";
 import type { ActionItem, Plan, PlanAlert } from "../types";
 
 const SEVERITY_CN: Record<string, string> = {
@@ -12,6 +13,12 @@ const SEVERITY_CN: Record<string, string> = {
 };
 const SEVERITY_ORDER: Record<string, number> = { block: 0, remind: 1, hint: 2 };
 const KIND_CN: Record<string, string> = { ENTER: "入场", EXIT: "退出", REVIEW: "复核" };
+const VERDICT_COLOR: Record<string, string> = {
+  actionable: "var(--lei-green)",
+  blocked: "var(--warn)",
+  waiting: "var(--text-faint)",
+  none: "var(--text-faint)",
+};
 
 /** 单条待办：已执行 / 推迟（推迟需原因 + 系统可计算的恢复条件）。 */
 function ActionRow({ plan, item }: { plan: Plan; item: ActionItem }) {
@@ -213,6 +220,8 @@ function PlanCard({ plan, onAsk }: { plan: Plan; onAsk: () => void }) {
 
 export default function SupervisorPage() {
   const [askPlanId, setAskPlanId] = useState<string | null>(null);
+  const [scanSymbol, setScanSymbol] = useState<string | null>(null);
+  const [scanOpen, setScanOpen] = useState(false);
   const { data: armed, isLoading: l1 } = useQuery({
     queryKey: ["plans", "armed"],
     queryFn: () => api.listPlans({ state: "armed" }),
@@ -220,6 +229,11 @@ export default function SupervisorPage() {
   const { data: entered, isLoading: l2 } = useQuery({
     queryKey: ["plans", "entered"],
     queryFn: () => api.listPlans({ state: "entered" }),
+  });
+  const { data: scan, refetch: scanRefetch, isFetching: scanFetching } = useQuery({
+    queryKey: ["opportunityScan"],
+    queryFn: () => api.opportunityScan(),
+    enabled: false,  // 只在点开时拉
   });
 
   const plans = [...(entered ?? []), ...(armed ?? [])];
@@ -230,6 +244,74 @@ export default function SupervisorPage() {
       <p className="muted" style={{ fontSize: 12, margin: "0 0 14px" }}>
         活跃计划（entered / armed）与当日判定。待办的「已执行 / 推迟」与飞书回执写同一套状态机。
       </p>
+
+      <div className="sv-scan">
+        <button
+          className="btn small sv-scan-toggle"
+          onClick={() => {
+            const next = !scanOpen;
+            setScanOpen(next);
+            if (next) scanRefetch();
+          }}
+        >
+          {scanOpen ? "▼" : "▶"} 扫描自选买点
+        </button>
+        {scanOpen && (
+          <>
+            {scanFetching && <div className="muted" style={{ fontSize: 12 }}>扫描中…</div>}
+            {scan && scan.items.length > 0 && (
+              <table className="sv-scan-table">
+                <thead>
+                  <tr>
+                    <th>标的</th><th>状态</th><th>最佳机会</th><th>R/R</th>
+                    <th>缺什么</th><th>已有计划</th><th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {scan.items.map((it) => (
+                    <tr key={it.symbol}>
+                      <td>
+                        <Link to={`/symbol/${encodeURIComponent(it.symbol)}`}>
+                          {it.display_name || it.symbol}
+                        </Link>
+                      </td>
+                      <td>
+                        <span
+                          className="sv-scan-verdict"
+                          style={{ background: VERDICT_COLOR[it.verdict] || "var(--text-faint)" }}
+                        >
+                          {it.verdict_cn}
+                        </span>
+                      </td>
+                      <td>{it.best_scenario_cn ?? "-"}</td>
+                      <td>
+                        {it.reward_risk_computable ? it.reward_risk_ratio?.toFixed(1) : "-"}
+                      </td>
+                      <td className="muted" style={{ fontSize: 11 }}>
+                        {it.missing_summary_cn || it.blocking_reasons.join("、") || "-"}
+                      </td>
+                      <td>{it.has_active_plan ? "是" : "否"}</td>
+                      <td>
+                        <button
+                          className="btn small"
+                          onClick={() => setScanSymbol(it.symbol)}
+                        >
+                          分析
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+            {scan && scan.items.length === 0 && !scanFetching && (
+              <div className="muted" style={{ fontSize: 12, padding: "8px 0" }}>
+                当前自选无系统定义的买点。
+              </div>
+            )}
+          </>
+        )}
+      </div>
 
       {(l1 || l2) && <div className="loading">加载中…</div>}
 
@@ -250,6 +332,10 @@ export default function SupervisorPage() {
 
       {askPlanId && (
         <AgentDrawer planId={askPlanId} onClose={() => setAskPlanId(null)} />
+      )}
+
+      {scanSymbol && (
+        <BuyPointDrawer symbol={scanSymbol} onClose={() => setScanSymbol(null)} />
       )}
     </div>
   );

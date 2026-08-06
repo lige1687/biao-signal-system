@@ -1741,3 +1741,32 @@ a { color: var(--accent); text-decoration: none; }
 }
 .sv-trigger { font-size: 12px; color: var(--text-faint); }
 .sv-trigger b { color: var(--text); }
+
+/* ---- BuyPointDrawer ---- */
+.bp-review { margin-bottom: 12px; }
+.bp-verdict { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.bp-verdict-chip {
+  font-size: 11px; padding: 2px 10px; border-radius: 10px; color: #fff; font-weight: 700;
+}
+.bp-summary { font-size: 13px; margin: 0 0 10px; line-height: 1.55; }
+.bp-candidate {
+  border: 1px solid var(--border); border-radius: 5px; padding: 8px 10px; margin-bottom: 8px;
+  background: var(--bg-card, #fff);
+}
+.bp-cand-head { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+.bp-cand-head b { font-size: 13px; }
+.bp-cond { font-size: 12px; margin: 2px 0; }
+.bp-cond.miss { color: var(--warn); }
+.bp-prices { display: flex; gap: 12px; font-size: 12px; color: var(--text-faint); margin-top: 4px; }
+.bp-watch { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+.bp-watch h3 { margin: 0 0 6px; font-size: 13px; }
+.bp-watch-row { display: flex; justify-content: space-between; font-size: 12px; margin: 3px 0; }
+.bp-disclaimer { font-size: 11px; margin-top: 10px; line-height: 1.5; }
+
+/* ---- 扫描区 ---- */
+.sv-scan { margin-bottom: 16px; }
+.sv-scan-toggle { margin-bottom: 8px; }
+.sv-scan-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.sv-scan-table th, .sv-scan-table td { padding: 6px 8px; text-align: left; border-bottom: 1px solid var(--border); }
+.sv-scan-table th { font-weight: 600; color: var(--text-faint); }
+.sv-scan-verdict { font-size: 11px; padding: 2px 7px; border-radius: 8px; color: #fff; font-weight: 700; }

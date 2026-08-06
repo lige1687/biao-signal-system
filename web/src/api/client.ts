@@ -1,6 +1,8 @@
 import type {
   ActionItem,
   BreadthHistoryResponse,
+  BuyPointChatReply,
+  BuyPointReview,
   CreateHoldingWatchPayload,
   CreatePlanPayload,
   DashboardResponse,
@@ -14,6 +16,7 @@ import type {
   PlanChatReply,
   PlansSummary,
   ResolveResult,
+  ScanResponse,
   SymbolDetail,
   WatchlistGroup,
   WatchlistItem,
@@ -165,4 +168,21 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ message }),
     }),
+  // ---- 买点审阅 / 扫描 / 问答 ----
+  buyPointReview: (symbol: string, refresh = false) =>
+    request<BuyPointReview>(
+      `/symbols/${encodeURIComponent(symbol)}/buy-point-review${refresh ? "?refresh=true" : ""}`,
+    ),
+  opportunityScan: (symbols?: string, onlyWithCandidates = true) => {
+    const q = new URLSearchParams();
+    if (symbols) q.set("symbols", symbols);
+    if (!onlyWithCandidates) q.set("only_with_candidates", "false");
+    const qs = q.toString();
+    return request<ScanResponse>(`/opportunities/scan${qs ? `?${qs}` : ""}`);
+  },
+  buyPointChat: (symbol: string, message: string) =>
+    request<BuyPointChatReply>(
+      `/symbols/${encodeURIComponent(symbol)}/buy-point-chat`,
+      { method: "POST", body: JSON.stringify({ message }) },
+    ),
 };

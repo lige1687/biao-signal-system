@@ -25,6 +25,7 @@ import ResizeHandle from "../components/ResizeHandle";
 import TodayOverviewPanel from "../components/TodayOverviewPanel";
 import TradeOpportunityPanel from "../components/TradeOpportunityPanel";
 import CreatePlanDialog, { prefillFromOpportunity } from "../components/CreatePlanDialog";
+import BuyPointDrawer from "../components/BuyPointDrawer";
 import WatchlistSidebar from "../components/WatchlistSidebar";
 import type { Explanation, StructureBrief, SymbolDetail } from "../types";
 
@@ -91,6 +92,7 @@ export default function WorkspacePage() {
   const [display, setDisplay] = useState<ChartDisplay>(DEFAULT_DISPLAY);
   const [addDialogGroup, setAddDialogGroup] = useState<number | null | undefined>(undefined);
   const [showCreatePlan, setShowCreatePlan] = useState(false);
+  const [showBuyPoint, setShowBuyPoint] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   // KlineChart 把「下载当前图为 PNG」的闭包回传到这里，按钮点的时候调它
   const downloadPngRef = useRef<(() => void) | null>(null);
@@ -273,6 +275,15 @@ export default function WorkspacePage() {
             title="基于当前信号建立执行计划"
           >
             建立执行计划
+          </button>
+        )}
+        {data && (
+          <button
+            className="btn small"
+            onClick={() => setShowBuyPoint(true)}
+            title="买点分析"
+          >
+            买点分析
           </button>
         )}
         {dashboard && (
@@ -526,6 +537,9 @@ export default function WorkspacePage() {
           )}
           onClose={() => setShowCreatePlan(false)}
         />
+      )}
+      {showBuyPoint && data && (
+        <BuyPointDrawer symbol={data.symbol} onClose={() => setShowBuyPoint(false)} />
       )}
     </div>
   );

@@ -712,3 +712,89 @@ export interface PlansSummary {
   open_actions: number;
   active_plans: number;
 }
+
+// ---- 买点审阅 / 扫描 ----
+
+export interface BuyPointCandidate {
+  scenario_id: string;
+  scenario_cn: string;
+  module: string | null;
+  direction: string;
+  state: string;
+  state_cn: string;
+  rule_id: string | null;
+  lifecycle_id: string | null;
+  satisfied_conditions: string[];
+  missing_conditions: string[];
+  key_price: number | null;
+  invalidation_price: number | null;
+  invalidation_cn: string;
+  reward_risk_ratio: number | null;
+  reward_risk_target: number | null;
+  reward_risk_computable: boolean;
+  next_step_cn: string;
+  caveat_cn: string;
+  research_proxy: boolean;
+}
+
+export interface WatchCondition {
+  text_cn: string;
+  kind: string; // price | state
+  price: number | null;
+  as_signal_rule_ids: string[];
+}
+
+export interface SuggestedPlan {
+  symbol: string;
+  module: string;
+  direction: string;
+  entry_rule_id: string | null;
+  entry_lifecycle_id: string | null;
+  invalidation_price: number | null;
+  target_b_price: number | null;
+  reward_risk_at_plan: number | null;
+}
+
+export interface BuyPointReview {
+  symbol: string;
+  display_name: string;
+  as_of: string;
+  last_close: number | null;
+  verdict: string; // actionable | blocked | waiting | none
+  verdict_cn: string;
+  summary_cn: string;
+  candidates: BuyPointCandidate[];
+  watch_conditions: WatchCondition[];
+  suggested_plan: SuggestedPlan | null;
+  has_active_plan: boolean;
+  ruleset_version: string;
+  disclaimer_cn: string;
+}
+
+export interface ScanItem {
+  symbol: string;
+  display_name: string;
+  verdict: string;
+  verdict_cn: string;
+  best_scenario_cn: string | null;
+  best_state: string | null;
+  reward_risk_ratio: number | null;
+  reward_risk_computable: boolean;
+  blocking_reasons: string[];
+  missing_summary_cn: string;
+  has_active_plan: boolean;
+  error: string | null;
+}
+
+export interface ScanResponse {
+  generated_at: string;
+  scanned: number;
+  items: ScanItem[];
+}
+
+export interface BuyPointChatReply {
+  reply: string;
+  grounded: boolean;
+  symbol: string;
+  review: BuyPointReview | null;
+}
