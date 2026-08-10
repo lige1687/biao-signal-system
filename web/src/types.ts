@@ -708,6 +708,38 @@ export interface PlanChatReply {
   alerts: PlanAlert[];
 }
 
+/** 草稿符合性核对报告（对齐 ConformanceReportDTO）。 */
+export interface ConformanceReport {
+  can_confirm: boolean;
+  hard_issues: PlanAlert[]; // 阻断确认
+  soft_issues: PlanAlert[]; // 仅提醒
+  system_detected: Record<string, unknown>; // 系统实测 module/direction/场景
+}
+
+/** 编辑 draft 字段的载荷（对齐 DraftUpdateRequest，全可选）。 */
+export interface DraftUpdatePayload {
+  module?: string;
+  direction?: string;
+  valid_until?: string;
+  reason?: string;
+  entry_rule_id?: string | null;
+  entry_lifecycle_id?: string | null;
+  entry_trigger_cn?: string | null;
+  entry_price_ref?: number | null;
+  invalidation_price?: number | null;
+  target_b_price?: number | null;
+  target_b_source?: string | null;
+  reward_risk_at_plan?: number | null;
+  thesis_cn?: string;
+  invalidation_criteria_cn?: string;
+  drawdown_playbook_cn?: string;
+  take_profit_plan_cn?: string;
+  stop_plan_cn?: string;
+  take_profit_price?: number | null;
+  stop_price?: number | null;
+  watch_signal_rule_ids?: string[];
+}
+
 export interface PlansSummary {
   open_actions: number;
   active_plans: number;
@@ -735,6 +767,29 @@ export interface BuyPointCandidate {
   next_step_cn: string;
   caveat_cn: string;
   research_proxy: boolean;
+  last_state_change_date: string | null;
+  opened_date: string | null;
+}
+
+export interface ResonanceGroup {
+  level: number;
+  tolerance_pct: number;
+  rule_ids: string[];
+  candidates: BuyPointCandidate[];
+}
+
+export interface HistoricalStructure {
+  rule_id: string | null;
+  lifecycle_id: string | null;
+  state: string;
+  state_cn: string;
+  scenario_cn: string;
+  direction: string;
+  opened_date: string | null;
+  last_state_change_date: string | null;
+  days_since: number;
+  key_price: number | null;
+  note: string;
 }
 
 export interface WatchCondition {
@@ -742,6 +797,85 @@ export interface WatchCondition {
   kind: string; // price | state
   price: number | null;
   as_signal_rule_ids: string[];
+}
+
+// ---- Step 2: 提醒订阅 ----
+export type WatchState =
+  | "active"
+  | "pending_confirmation"
+  | "dismissed"
+  | "promoted";
+
+export interface WatchSubscription {
+  watch_id: string;
+  symbol: string;
+  direction: string;
+  module: string;
+  source_candidate_id: string | null;
+  source_rule_id: string | null;
+  level: number | null;
+  watch_kind: string; // price | state
+  watch_text_cn: string;
+  as_signal_rule_ids: string[];
+  state: WatchState;
+  created_at: string;
+  last_checked_at: string | null;
+  triggered_at: string | null;
+  triggered_price: number | null;
+  triggered_reason_cn: string | null;
+  promoted_plan_id: string | null;
+  dismissed_at: string | null;
+  dismissed_reason: string | null;
+}
+
+// ---- Step 3: 从 watch 落计划 (POST /api/watch/{id}/promote) ----
+// 与 src/lei_signal/api/schemas.py:WatchPromoteRequest 字段一一对应.
+// 后端硬编码 plan_kind=entry / ruleset_version=watch_promoted_v1, 客户端不可改.
+export interface PromoteWatchRequest {
+  module?: string | null;
+  direction?: string | null;
+  valid_until: string;              // required (armed 必填)
+  reason: string;                   // required (armed 必填)
+  entry_rule_id?: string | null;
+  entry_lifecycle_id?: string | null;
+  entry_trigger_cn?: string | null;
+  entry_price_ref?: number | null;
+  invalidation_price?: number | null;
+  target_b_price?: number | null;
+  target_b_source?: string | null;
+  reward_risk_at_plan?: number | null;
+  thesis_cn: string;                // required
+  invalidation_criteria_cn: string; // required
+  drawdown_playbook_cn: string;     // required
+  take_profit_plan_cn: string;      // required
+  stop_plan_cn: string;             // required
+  watch_signal_rule_ids?: string[] | null;
+  auto_enter?: boolean;             // 后端默认 true
+}
+
+export interface PromoteWatchResponse {
+  plan: Plan;
+  watch: WatchSubscription;
+}
+
+export interface SubscribeWatchRequest {
+  symbol: string;
+  direction: string;
+  module: string;
+  watch_kind: string;
+  watch_text_cn: string;
+  level: number | null;
+  source_candidate_id: string | null;
+  source_rule_id: string | null;
+  as_signal_rule_ids: string[];
+}
+
+export interface CheckReport {
+  total_active: number;
+  triggered_count: number;
+  triggered_watch_ids: string[];
+  skipped: Array<{ watch_id: string; reason: string }>;
+  checked_at: string;
 }
 
 export interface SuggestedPlan {
@@ -764,6 +898,8 @@ export interface BuyPointReview {
   verdict_cn: string;
   summary_cn: string;
   candidates: BuyPointCandidate[];
+  resonance_groups: ResonanceGroup[];
+  historical_structures: HistoricalStructure[];
   watch_conditions: WatchCondition[];
   suggested_plan: SuggestedPlan | null;
   has_active_plan: boolean;
@@ -797,4 +933,52 @@ export interface BuyPointChatReply {
   grounded: boolean;
   symbol: string;
   review: BuyPointReview | null;
+}
+
+// ---- 基本面参考层 (/api/fundamentals) ----
+
+export interface MacroIndicator {
+  key: string; // pmi | cpi | ppi
+  name_cn: string;
+  period: string | null;
+  value: number | null;
+  yoy: number | null;
+  note_cn: string;
+}
+
+export interface IndustryBoard {
+  code: string; // 东财 BK 代码
+  name: string;
+  latest: number | null;
+  pct_change: number | null;
+  turnover_rate: number | null;
+  total_mv_yi: number | null;
+  main_net_inflow_yi: number | null;
+  main_net_inflow_pct: number | null;
+  up_count: number | null;
+  down_count: number | null;
+}
+
+export interface FundamentalsOverview {
+  generated_at: string;
+  macro: MacroIndicator[];
+  boards: IndustryBoard[];
+  board_count: number;
+  errors: string[];
+  disclaimer_cn: string;
+}
+
+export interface IndustryFlowPoint {
+  date: string;
+  main_yi: number | null;
+  small_yi: number | null;
+  medium_yi: number | null;
+  large_yi: number | null;
+  super_large_yi: number | null;
+}
+
+export interface IndustryFlowResponse {
+  code: string;
+  days: number;
+  points: IndustryFlowPoint[];
 }

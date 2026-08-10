@@ -503,6 +503,67 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
             ON trade_plans(plan_kind, state);
         """,
     ),
+    (
+        13,
+        "013_watch_subscriptions",
+        """
+        -- 提醒订阅 (决策 2, 2026-08-08): 用户从 BuyPointReview.watch_conditions
+        -- 一键订阅某条"未来买点"条件, 由 14:45 checker 盯盘.
+        --
+        -- state 状态机:
+        --   active  -> pending_confirmation (checker 命中)
+        --   pending_confirmation -> promoted (Step 3 落计划后回填 promoted_plan_id)
+        --   pending_confirmation -> dismissed (人放弃, 写 dismissed_reason)
+        --   active  -> dismissed (人主动取消)
+        --
+        -- kind 区分价位型 vs 状态型, v1 只接 price (kind=state 留 TODO).
+        CREATE TABLE IF NOT EXISTS watch_subscriptions (
+            watch_id            TEXT PRIMARY KEY,        -- ws_<symbol>_<ts>_<hash>
+            symbol              TEXT NOT NULL,
+            direction           TEXT NOT NULL,           -- long/short
+            module              TEXT NOT NULL,           -- A/B/C/D
+            source_candidate_id TEXT,                    -- review 里的 candidate id
+            source_rule_id      TEXT,                    -- 锚定 rule_id
+            level               REAL,                    -- kind=price 时有值
+            watch_kind          TEXT NOT NULL,           -- price | state
+            watch_text_cn       TEXT NOT NULL,           -- 照抄 WatchConditionDTO.text_cn
+            as_signal_rule_ids  TEXT NOT NULL DEFAULT '',
+            state               TEXT NOT NULL,           -- 见状态机
+            created_at          TEXT NOT NULL,
+            last_checked_at     TEXT,                    -- 上次 checker 跑过的时间
+            triggered_at        TEXT,                    -- 首次进入 pending_confirmation 的时间
+            triggered_price     REAL,                    -- 当时 last_close
+            triggered_reason_cn TEXT,                    -- checker 给的命中原因
+            promoted_plan_id    TEXT,                    -- Step 3 落计划后回填
+            dismissed_at        TEXT,
+            dismissed_reason    TEXT
+        );
+        CREATE INDEX IF NOT EXISTS idx_watch_state_created
+            ON watch_subscriptions(state, created_at DESC);
+        CREATE INDEX IF NOT EXISTS idx_watch_symbol_state
+            ON watch_subscriptions(symbol, state);
+        """,
+    ),
+    (
+        14,
+        "014_plan_source_field",
+        """
+        -- 计划来源 (Step 3, 决策 2, 2026-08-09): trade_plans 加 source 字段,
+        -- 区分计划是用户手建 / 来自提醒 / 来自 agent (未来).
+        --
+        --   user           = 手动 (默认)
+        --   watch_promoted = 来自提醒命中 (Step 2 watch 触发, 用户确认后落计划)
+        --   agent          = 来自 agent (预留, 当前未启用)
+        --
+        -- 为什么要 source:
+        --   1) 让用户/审计能一眼看出"这条计划是被提醒带出来的还是我自己想做的"
+        --   2) Step 2 watch promoted_plan_id 反查时, 知道这条 plan 是从哪个 watch 来的
+        --   3) 未来按来源筛选报告 (eg "本月看提醒命中的计划胜率如何")
+        ALTER TABLE trade_plans ADD COLUMN source TEXT NOT NULL DEFAULT 'user';
+        CREATE INDEX IF NOT EXISTS idx_plans_source_state
+            ON trade_plans(source, state);
+        """,
+    ),
 )
 
 

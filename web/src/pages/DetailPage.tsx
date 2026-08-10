@@ -10,14 +10,20 @@ import PullbackBacktestPanel from "../components/PullbackBacktestPanel";
 import PullbackOpportunityPanel from "../components/PullbackOpportunityPanel";
 import ExplanationPanel, { type Selection } from "../components/ExplanationPanel";
 import TradeOpportunityPanel from "../components/TradeOpportunityPanel";
-import CreatePlanDialog, { prefillFromOpportunity } from "../components/CreatePlanDialog";
-import BuyPointDrawer from "../components/BuyPointDrawer";
+import { prefillFromOpportunity } from "../components/CreatePlanDialog";
+import PlanCreateFlow from "../components/PlanCreateFlow";
+import BuyPointDrawer, { annoToIndex } from "../components/BuyPointDrawer";
 import KlineChart, {
   DEFAULT_DISPLAY,
   type ChartDisplay,
   type MarkPick,
 } from "../components/KlineChart";
-import type { Explanation, StructureBrief, SymbolDetail } from "../types";
+import { useBuyPointCoord } from "../hooks/useBuyPointCoord";
+import type {
+  Explanation,
+  StructureBrief,
+  SymbolDetail,
+} from "../types";
 
 const MARK_SOURCE_CN: Record<MarkPick["kind"], string> = {
   bottom_mark: "图上标记 · 底部结构确认",
@@ -27,6 +33,7 @@ const MARK_SOURCE_CN: Record<MarkPick["kind"], string> = {
   b1_line: "图上参考线 · B1 第一阻力",
   bottom_line: "图上参考线 · C 点失效线",
   top_line: "图上参考线 · 顶部颈线",
+  highlight_price: "买点分析 · 价位标注",
 };
 
 /** 横线类点击（B1 / C 点 / 颈线）：只有价位，没有日期。 */
@@ -80,6 +87,10 @@ export default function DetailPage() {
   const [selection, setSelection] = useState<Selection | null>(null);
   const [showCreatePlan, setShowCreatePlan] = useState(false);
   const [showBuyPoint, setShowBuyPoint] = useState(false);
+  // 右侧解释面板是否收起。买点分析打开时右栏换成抽屉（面板本就不在），
+  // 故 expVisible = !showBuyPoint && !expCollapsed；点图上标记时自动展开看解释。
+  const [expCollapsed, setExpCollapsed] = useState(false);
+  const expVisible = !showBuyPoint && !expCollapsed;
   // 标记默认全关（见 DEFAULT_DISPLAY）：历史标记可达数百个，会严重干扰看盘。
   const [display, setDisplay] = useState<ChartDisplay>(DEFAULT_DISPLAY);
   // KlineChart 把「下载当前图为 PNG」的闭包回传到这里，按钮点的时候调它
@@ -91,9 +102,29 @@ export default function DetailPage() {
     enabled: Boolean(symbol),
   });
 
+  // 买点分析联动：review 查询 + 高亮指令 + 当前候选，抽成 hook 与 WorkspacePage 共用。
+  const {
+    review,
+    reviewLoading,
+    setActiveCand,
+    activeAnnoId,
+    highlightSpec,
+  } = useBuyPointCoord(symbol, data?.chart, showBuyPoint);
+
   const onPick = useCallback(
     (pick: MarkPick) => {
+      // 买点联动（图 -> 卡）：带 annoId 的点击高亮对应候选卡片
+      if (pick.annoId) {
+        const idx = annoToIndex(pick.annoId);
+        if (idx != null) setActiveCand(idx);
+      }
+      // 价位标注线只联动卡片，不开解释面板
+      if (pick.kind === "highlight_price") return;
+      // 买点对话栏打开时解释面板不显示，其余点击也不触发后台事件查询
+      if (showBuyPoint) return;
       if (!data) return;
+      // 点了图上标记 -> 自动展开解释面板（用户可能先收起了它）
+      setExpCollapsed(false);
       const base = resolveSelection(pick, data);
       setSelection(base);
 
@@ -124,7 +155,7 @@ export default function DetailPage() {
           ),
         );
     },
-    [data, symbol],
+    [data, symbol, showBuyPoint],
   );
 
   const doRefresh = async () => {
@@ -204,11 +235,23 @@ export default function DetailPage() {
             </button>
             <button
               className="btn small"
-              onClick={() => setShowBuyPoint(true)}
+              onClick={() => {
+                setActiveCand(null);
+                setShowBuyPoint(true);
+              }}
               title="买点分析"
             >
               买点分析
             </button>
+            {!showBuyPoint && (
+              <button
+                className="btn small"
+                onClick={() => setExpCollapsed((c) => !c)}
+                title={expCollapsed ? "展开右侧解释面板" : "收起右侧解释面板"}
+              >
+                {expCollapsed ? "解释" : "收起解释"}
+              </button>
+            )}
             <span style={{ color: "var(--text-faint)", fontSize: 12 }}>
               数据时间{" "}
               {data.meta.data_time
@@ -246,8 +289,10 @@ export default function DetailPage() {
             </div>
           )}
 
-          {/* 主区：左图右解释。图是主角，解释按需展开，两者并列不遮挡。 */}
-          <div className="detail-main">
+          {/* 主区：左图右解释。图是主角，解释按需展开，两者并列不遮挡。
+              买点分析打开时右栏换成内嵌对话栏（与主图双向高亮联动）；
+              解释面板可收起（收起后主图铺满整宽）。 */}
+          <div className={`detail-main${!showBuyPoint && expCollapsed ? " no-side" : ""}${showBuyPoint ? " bp-open" : ""}`}>
             <div className="kline-wrap">
               <ChartControls
                 display={display}
@@ -259,6 +304,7 @@ export default function DetailPage() {
                 payload={data.chart}
                 display={display}
                 onPick={onPick}
+                highlight={highlightSpec}
                 onDownload={(fn) => (downloadPngRef.current = fn)}
               />
               <div className="chart-legend">
@@ -312,7 +358,21 @@ export default function DetailPage() {
               </div>
             </div>
 
-            <ExplanationPanel selection={selection} onClose={() => setSelection(null)} />
+            {showBuyPoint ? (
+              <BuyPointDrawer
+                symbol={symbol}
+                review={review}
+                reviewLoading={reviewLoading}
+                activeAnnoId={activeAnnoId}
+                onActivateCandidate={(i) => setActiveCand(i)}
+                onClose={() => {
+                  setShowBuyPoint(false);
+                  setActiveCand(null);
+                }}
+              />
+            ) : expVisible ? (
+              <ExplanationPanel selection={selection} onClose={() => setSelection(null)} />
+            ) : null}
           </div>
 
           <TradeOpportunityPanel
@@ -374,17 +434,13 @@ export default function DetailPage() {
       )}
 
       {showCreatePlan && data && (
-        <CreatePlanDialog
+        <PlanCreateFlow
           symbol={symbol}
           prefill={prefillFromOpportunity(
             data.assessment.trade_opportunities.find((o) => o.is_active) ?? null,
           )}
           onClose={() => setShowCreatePlan(false)}
         />
-      )}
-
-      {showBuyPoint && (
-        <BuyPointDrawer symbol={symbol} onClose={() => setShowBuyPoint(false)} />
       )}
     </div>
   );

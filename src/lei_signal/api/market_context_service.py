@@ -135,7 +135,7 @@ def _read_breadth_history(
              FROM market_breadth_snapshot_revisions
             WHERE market_id = ?
               AND as_of <= ?
-              AND data_status <> 'stale'
+              AND data_status NOT IN ('stale', 'unavailable')
          ORDER BY as_of, revision_no DESC""",
         (market_id.value, str(up_to)),
     ).fetchall()
@@ -241,9 +241,18 @@ class MarketContextService:
         percentile = None if percentile is None or pd.isna(percentile) else float(percentile)
         b50 = row.get("breadth_50")
         b50 = None if b50 is None or pd.isna(b50) else float(b50)
+        b200 = row.get("breadth_200")
+        b200 = None if b200 is None or pd.isna(b200) else float(b200)
         status = str(row.get("data_status") or ContextDataStatus.COMPLETE.value)
 
         heat = _heat_from_percentile(percentile)
+        long_regime = LongRegime.UNKNOWN
+        if b200 is not None:
+            if b200 > 50.0:
+                long_regime = LongRegime.BULL
+            elif b200 < 50.0:
+                long_regime = LongRegime.BEAR
+
         return MarketContextDTO(
             symbol=_global_panel_symbol(market_id),
             as_of=latest_ts.date(),
@@ -262,7 +271,7 @@ class MarketContextService:
                 "universe_version": "",
                 "breadth_20": latest,
                 "breadth_50": b50,
-                "breadth_200": None,
+                "breadth_200": b200,
                 "breadth_20_delta_5": delta_5,
                 "breadth_50_delta_5": None,
                 "breadth_200_delta_20": None,
@@ -274,7 +283,7 @@ class MarketContextService:
                 "percentile_50": None,
                 "percentile_200": None,
                 "breadth_direction": BreadthDirection.UNKNOWN.value,
-                "long_regime": LongRegime.UNKNOWN.value,
+                "long_regime": long_regime.value,
                 "heat_state": heat,
                 "drawdown_from_ath": None,
                 "summary": ContextSummary.UNKNOWN.value,

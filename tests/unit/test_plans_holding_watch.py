@@ -14,7 +14,9 @@ from lei_signal.plans.monitor import (
     MODULE_NOT_IMPLEMENTED,
     PLAN_ORPHANED,
     SIGNAL_WATCH_TRIGGERED,
+    STOP_PRICE_APPROACHING,
     STOP_PRICE_BREACHED,
+    TAKE_PROFIT_APPROACHING,
     TAKE_PROFIT_REACHED,
     MonitorContext,
     evaluate_plan,
@@ -50,11 +52,13 @@ def _plan(
     )
 
 
-def _ctx(close: float | None, *, events: tuple[str, ...] = ()) -> MonitorContext:
+def _ctx(
+    close: float | None, *, events: tuple[str, ...] = (), atr: float | None = None
+) -> MonitorContext:
     # tradability_tradable=False 故意为假：持仓盯盘不该因环境阻断而报入场类 alert。
     return MonitorContext(
         last_bar_date="2026-08-05", cache_fallback_used=False, current_close=close,
-        ema20=None, tradability_tradable=False,
+        ema20=None, tradability_tradable=False, atr=atr,
         tradability_blocking_reasons=("横盘不频繁交易",), ruleset_version="1.3.0",
         new_event_rule_ids=events,
     )
@@ -158,6 +162,108 @@ def test_both_triggers_can_fire_together() -> None:
     codes = _codes(plan, _ctx(4050.0, events=("lei_color",)))
     assert TAKE_PROFIT_REACHED in codes
     assert SIGNAL_WATCH_TRIGGERED in codes
+
+
+# ---------------- ATR 接近预警（未击穿但在 proximity_atr*atr 带宽内）----------------
+
+
+def test_take_profit_approaching_within_atr_band() -> None:
+    """做多：close 距止盈 50，atr=60（带宽 60）-> 接近预警，未达到。"""
+    alerts = evaluate_plan(
+        _plan(direction="long", take_profit_price=4000.0), _ctx(3950.0, atr=60.0)
+    )
+    codes = [a.code for a in alerts]
+    assert TAKE_PROFIT_APPROACHING in codes
+    assert TAKE_PROFIT_REACHED not in codes
+    a = next(x for x in alerts if x.code == TAKE_PROFIT_APPROACHING)
+    assert a.severity == "remind"
+    assert a.action_kind is None  # 纯提醒，不产 EXIT 待办
+    assert a.evidence["distance"] == 50.0
+    assert a.evidence["distance_atr"] == pytest.approx(50 / 60)
+
+
+def test_take_profit_approaching_outside_band_no_alert() -> None:
+    """距离超过 1 ATR -> 不报接近。"""
+    codes = _codes(
+        _plan(direction="long", take_profit_price=4000.0), _ctx(3800.0, atr=60.0)
+    )
+    assert TAKE_PROFIT_APPROACHING not in codes
+    assert TAKE_PROFIT_REACHED not in codes
+
+
+def test_stop_price_approaching_within_atr_band() -> None:
+    """做多：close 距止损 40，atr=60 -> 接近预警，未击穿。"""
+    alerts = evaluate_plan(
+        _plan(direction="long", stop_price=3700.0), _ctx(3740.0, atr=60.0)
+    )
+    codes = [a.code for a in alerts]
+    assert STOP_PRICE_APPROACHING in codes
+    assert STOP_PRICE_BREACHED not in codes
+    a = next(x for x in alerts if x.code == STOP_PRICE_APPROACHING)
+    assert a.severity == "remind"
+    assert a.action_kind is None
+    assert "不得事后下移止损" in a.next_step_cn
+
+
+def test_approaching_suppressed_once_breached() -> None:
+    """已击穿/已达 -> 只报击穿，不重复报接近。"""
+    # 止损击穿
+    codes = _codes(_plan(direction="long", stop_price=3700.0), _ctx(3650.0, atr=60.0))
+    assert STOP_PRICE_BREACHED in codes
+    assert STOP_PRICE_APPROACHING not in codes
+    # 止盈达到
+    codes = _codes(
+        _plan(direction="long", take_profit_price=4000.0), _ctx(4050.0, atr=60.0)
+    )
+    assert TAKE_PROFIT_REACHED in codes
+    assert TAKE_PROFIT_APPROACHING not in codes
+
+
+def test_approaching_skipped_when_atr_none() -> None:
+    """atr 不可用时静默跳过接近预警（不阻断击穿判定）。"""
+    codes = _codes(
+        _plan(direction="long", take_profit_price=4000.0, stop_price=3700.0),
+        _ctx(3950.0, atr=None),
+    )
+    assert TAKE_PROFIT_APPROACHING not in codes
+    assert STOP_PRICE_APPROACHING not in codes
+
+
+def test_take_profit_approaching_short_direction() -> None:
+    """做空：止盈在下方，close 在其上方 40（未达到），atr=60 -> 接近。"""
+    codes = _codes(
+        _plan(direction="short", take_profit_price=3700.0), _ctx(3740.0, atr=60.0)
+    )
+    assert TAKE_PROFIT_APPROACHING in codes
+    assert TAKE_PROFIT_REACHED not in codes
+
+
+def test_stop_approaching_short_direction() -> None:
+    """做空：止损在上方，close 在其下方 40（未击穿），atr=60 -> 接近。"""
+    codes = _codes(
+        _plan(direction="short", stop_price=4000.0), _ctx(3960.0, atr=60.0)
+    )
+    assert STOP_PRICE_APPROACHING in codes
+    assert STOP_PRICE_BREACHED not in codes
+
+
+def test_approaching_does_not_create_action_item(tmp_path) -> None:
+    """接近预警是提醒不是待办：sync_action_items 不应为它建 EXIT 项。"""
+    from lei_signal.plans.actions import sync_action_items
+
+    conn = connect(tmp_path / "appr.db")
+    plan = create_plan(
+        conn, symbol="000001.SS", module="A", direction="long",
+        ruleset_version="1.3.0", valid_until="2026-12-31",
+        plan_kind=PLAN_KIND_HOLDING_WATCH, take_profit_plan_cn="到点减",
+        stop_plan_cn="跌破走", stop_price=3700.0,
+    )
+    entered = confirm_holding_watch(conn, plan.plan_id, entered_on="2026-08-05")
+    alerts = evaluate_plan(entered, _ctx(3740.0, atr=60.0))  # 接近止损，未击穿
+    assert STOP_PRICE_APPROACHING in [a.code for a in alerts]
+    sync_action_items(conn, entered, alerts)
+    assert list_action_items(conn, entered.plan_id, state="open") == []
+    conn.close()
 
 
 def test_confirm_holding_watch_requires_exit_playbook_and_a_trigger(tmp_path) -> None:  # noqa: ANN001

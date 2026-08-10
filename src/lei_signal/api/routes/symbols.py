@@ -83,6 +83,9 @@ from lei_signal.rules.dense_breakout import (
 from lei_signal.rules.dense_breakout import (
     SUB_RULE_WATCH as DB_WATCH,
 )
+from lei_signal.rules.dense_breakout import (
+    _recent_dense_upper_bound as _db_recent_upper,
+)
 from lei_signal.rules.ema_reclaim_tiers import (
     SUB_RULE_BY_TIER,
     TIER_EARLY_WATCH,
@@ -875,7 +878,13 @@ def _alignment_scenario(result: AnalysisResult) -> ConditionalScenarioDTO | None
 
 
 def _dense_breakout_scenario(result: AnalysisResult) -> ConditionalScenarioDTO | None:
-    """均线密集区突破场景卡（模块 B，研究代理）。"""
+    """均线密集区突破场景卡（模块 B，研究代理）。
+
+    key_price / reference_price 优先用「最近 N 日 high 的滚动上沿」
+    （规则规格 dense_recompute_lookback，默认 90），回退到事件里的
+    locked ref (B1 横盘时锁定的 breakout_reference)。locked ref 仍
+    通过 caveat_cn 透出，避免静默丢失旧锚点信息。
+    """
     events = [e for e in result.events if e.rule_id == DB_RULE_ID]
     if not events:
         return None
@@ -883,6 +892,9 @@ def _dense_breakout_scenario(result: AnalysisResult) -> ConditionalScenarioDTO |
     last_day = result.frame.index[-1].date()
     close = float(last["close"])
     arrangement = float(last["sma20"]) > float(last["sma60"]) > float(last["sma120"])
+    db_spec = get_rule(DB_RULE_ID)
+    recompute_lookback = int(db_spec.param("dense_recompute_lookback", 90))
+    recent_upper = _db_recent_upper(result.frame, recompute_lookback)
     candidates: list[ConditionalScenarioDTO] = []
     by_lc: dict[str, list] = {}
     for event in events:
@@ -898,10 +910,15 @@ def _dense_breakout_scenario(result: AnalysisResult) -> ConditionalScenarioDTO |
             (e for e in ordered if e.evidence.get("sub_rule") == DB_CONFIRMED), None
         )
         if confirmed is not None:
-            ref = float(confirmed.evidence.get("breakout_reference")
-                        or watch.evidence.get("reference_price") or 0.0)
+            locked_ref = float(confirmed.evidence.get("breakout_reference")
+                               or watch.evidence.get("reference_price") or 0.0)
         else:
-            ref = float(watch.evidence.get("reference_price") or 0.0)
+            locked_ref = float(watch.evidence.get("reference_price") or 0.0)
+        if locked_ref <= 0:
+            continue
+        # key_price 走「当前密集区上沿」, 即近期 high 滚动值;
+        # 拿不到再回退到 locked_ref。两种 ref 同时存在, locked_ref 通过 caveat 透传。
+        ref = recent_upper if recent_upper is not None else locked_ref
         if ref <= 0:
             continue
         price_holds = close >= ref
@@ -914,13 +931,34 @@ def _dense_breakout_scenario(result: AnalysisResult) -> ConditionalScenarioDTO |
         satisfied = ["完整多头排列保持"] if arrangement else []
         missing: list[str] = []
         if price_holds:
-            satisfied.append("收盘仍在密集区上沿上方")
+            satisfied.append(f"收盘仍在当前密集区上沿 ({ref:.2f}) 上方")
         else:
-            missing.append("收盘未突破密集区上沿")
+            missing.append(f"收盘未站上当前密集区上沿 ({ref:.2f})")
         if not arrangement:
             missing.append("完整多头排列未成立")
         source = confirmed or watch
         sub = DB_CONFIRMED if confirmed is not None else DB_WATCH
+        # caveat 同时透出当前 dense upper 和原始 locked ref (B1 锁定值),
+        # 避免只看到当前 dense upper 而不知道 B1 当初是基于哪个价位判定的。
+        # 区间下沿也透出, 用户常把「上沿」和「下沿」搞混, 给一个完整 range 更直观。
+        recent_window = (
+            result.frame.iloc[-recompute_lookback:]
+            if len(result.frame) >= recompute_lookback
+            else result.frame
+        )
+        recent_low = float(recent_window["low"].min()) if not recent_window.empty else None
+        if recent_upper is not None and recent_low is not None:
+            range_note = f"近 {recompute_lookback} 日 high {recent_upper:.2f} / low {recent_low:.2f}"
+        else:
+            range_note = ""
+        if recent_upper is not None and abs(recent_upper - locked_ref) > 0.01:
+            ref_note = (
+                f"当前密集区上沿 {recent_upper:.2f}（{range_note or f'近 {recompute_lookback} 日 high 滚动'}）"
+                f"；原始锁定参考 {locked_ref:.2f}（B1 观察时锁定的密集区上沿，"
+                f"已脱节，仅作历史参考）"
+            )
+        else:
+            ref_note = f"密集区上沿 {ref:.2f}"
         candidates.append(
             ConditionalScenarioDTO(
                 scenario_id=DB_RULE_ID,
@@ -944,12 +982,12 @@ def _dense_breakout_scenario(result: AnalysisResult) -> ConditionalScenarioDTO |
                     else "等待收盘突破密集区上沿且完整多头排列成立。"
                 ),
                 invalidation_cn=(
-                    "收盘跌回密集区上沿下方且 SMA20 方向向下弯曲、"
+                    f"收盘跌回当前密集区上沿 ({ref:.2f}) 下方且 SMA20 方向向下弯曲、"
                     "完整多头排列破坏或转黑。"
                 ),
                 caveat_cn=(
-                    "研究代理：源自规格 §9 模块 B，横盘阈值复用 tradability_gate（待确认），"
-                    "不冒充 LEI 原始规则。"
+                    f"研究代理：源自规格 §9 模块 B；{ref_note}。"
+                    "横盘阈值复用 tradability_gate（待确认），不冒充 LEI 原始规则。"
                 ),
                 explanation=to_explanation_dto(lookup(rule_id=DB_RULE_ID, sub_rule=sub)),
                 supporting_event=event_dto(source, as_of=result.assessment.as_of),

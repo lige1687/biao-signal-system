@@ -17,7 +17,7 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from datetime import UTC, date, datetime
 
-from lei_signal.api import config
+from lei_signal.api import config, session as market_session
 from lei_signal.api.realtime import CacheFirstProvider, IntradayOverlayProvider
 from lei_signal.compose.pipeline import AnalysisResult, analyze
 from lei_signal.data.calendar import DEFAULT_TRADING_CALENDAR, TradingCalendar
@@ -88,16 +88,35 @@ class AnalysisService:
         with self._guard:
             return self._locks.setdefault(symbol, threading.Lock())
 
-    def _is_fresh(self, entry: AnalysisEntry) -> bool:
-        ttl = self._ttl_seconds if entry.error is None else self._error_ttl_seconds
-        age = (datetime.now(UTC) - entry.fetched_at).total_seconds()
-        return age < ttl
+    def _is_fresh(self, entry: AnalysisEntry, symbol: str) -> bool:
+        now = datetime.now(UTC)
+        # 错误条目始终用短 TTL：网络抖动不应被收盘长缓存锁死，尽快重试。
+        if entry.error is not None:
+            age = (now - entry.fetched_at).total_seconds()
+            return age < self._error_ttl_seconds
+        # A 股标的：收盘后数据不变，缓存到下一开盘；盘中沿用短 TTL。
+        # 海外指数：保留原扁平短 TTL（它们有各自的缓存优先链路）。
+        if self._is_a_share_symbol(symbol):
+            return market_session.is_cache_fresh(
+                self._calendar,
+                entry.fetched_at,
+                now=now,
+                open_ttl=self._ttl_seconds,
+            )
+        age = (now - entry.fetched_at).total_seconds()
+        return age < self._ttl_seconds
+
+    def _is_a_share_symbol(self, symbol: str) -> bool:
+        try:
+            return is_a_share(resolve_symbol(symbol))
+        except ValueError:
+            return False
 
     def get(self, symbol: str, *, refresh: bool = False) -> AnalysisEntry:
         """取单标的分析（缓存新鲜则直接返回）。per-symbol 锁防并发重入。"""
         with self._lock_for(symbol):
             entry = self._entries.get(symbol)
-            if entry is not None and not refresh and self._is_fresh(entry):
+            if entry is not None and not refresh and self._is_fresh(entry, symbol):
                 return entry
             entry = self._run(symbol)
             self._entries[symbol] = entry

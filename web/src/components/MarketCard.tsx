@@ -40,6 +40,21 @@ export default function MarketCard({ card, onRemove, onRetry }: Props) {
           <span className="name">{card.display_name}</span>
           <span className="symbol">{card.symbol}</span>
           {card.market_cn && <span className="tag">{card.market_cn}</span>}
+          <span className="spacer" style={{ flex: 1 }} />
+          {onRemove && (
+            <button
+              className="btn small card-remove"
+              title="移出自选"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (confirm(`确认将「${card.display_name}」移出自选？`)) {
+                  onRemove(card.symbol);
+                }
+              }}
+            >
+              ✕
+            </button>
+          )}
         </div>
         <div className="error-msg">{card.error}</div>
         <div className="footer">
@@ -72,13 +87,15 @@ export default function MarketCard({ card, onRemove, onRetry }: Props) {
         <span className="symbol">{card.symbol}</span>
         {card.market_cn && <span className="tag">{card.market_cn}</span>}
         <span className="spacer" style={{ flex: 1 }} />
-        {card.group === "watchlist" && onRemove && (
+        {onRemove && (
           <button
-            className="btn small"
+            className="btn small card-remove"
             title="移出自选"
             onClick={(e) => {
               e.stopPropagation();
-              onRemove(card.symbol);
+              if (confirm(`确认将「${card.display_name}」移出自选？`)) {
+                onRemove(card.symbol);
+              }
             }}
           >
             ✕

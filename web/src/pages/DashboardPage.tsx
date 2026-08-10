@@ -4,19 +4,43 @@ import { api } from "../api/client";
 import AddSymbolDialog from "../components/AddSymbolDialog";
 import MarketBreadthStrip from "../components/MarketBreadthStrip";
 import MarketCard from "../components/MarketCard";
+import WatchSubscriptionsPanel from "../components/WatchSubscriptionsPanel";
+
+/** 加载占位卡片：渐入的 shimmer 比纯文字 loading 更能表达"正在填充"。 */
+function CardSkeletons({ n }: { n: number }) {
+  return (
+    <>
+      {Array.from({ length: n }).map((_, i) => (
+        <div key={`sk-${i}`} className="card-skeleton" />
+      ))}
+    </>
+  );
+}
 
 export default function DashboardPage() {
   const queryClient = useQueryClient();
   const [showAdd, setShowAdd] = useState(false);
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["cards"],
-    queryFn: () => api.dashboard(),
+  // 拆成指数 / 自选两个请求：指数通常先回先渲染，自选后台填充。
+  // react-query 缓存让二次进入两组卡片都秒开，后台静默刷新。
+  const { data: indexData, isLoading: indexLoading, error: indexError } = useQuery({
+    queryKey: ["cards", "index"],
+    queryFn: () => api.dashboard("index"),
+  });
+  const { data: watchData, isLoading: watchLoading, error: watchError } = useQuery({
+    queryKey: ["cards", "watchlist"],
+    queryFn: () => api.dashboard("watchlist"),
   });
 
   const refreshMutation = useMutation({
     mutationFn: (symbols?: string[]) => api.refresh(symbols),
-    onSuccess: (fresh) => queryClient.setQueryData(["cards"], fresh),
+    onSuccess: (fresh) => {
+      // refresh 返回全量，按 group 拆回两个缓存键
+      const idx = fresh.cards.filter((c) => c.group === "index");
+      const wch = fresh.cards.filter((c) => c.group === "watchlist");
+      queryClient.setQueryData(["cards", "index"], { ...fresh, cards: idx });
+      queryClient.setQueryData(["cards", "watchlist"], { ...fresh, cards: wch });
+    },
   });
 
   const removeMutation = useMutation({
@@ -27,16 +51,19 @@ export default function DashboardPage() {
     },
   });
 
-  const indexCards = data?.cards.filter((c) => c.group === "index") ?? [];
-  const watchCards = data?.cards.filter((c) => c.group === "watchlist") ?? [];
+  const indexCards = indexData?.cards ?? [];
+  const watchCards = watchData?.cards ?? [];
+  const generatedAt = indexData?.generated_at ?? watchData?.generated_at;
+  const disclaimer = indexData?.disclaimer_cn ?? watchData?.disclaimer_cn;
+  const error = indexError || watchError;
 
   return (
     <div className="page">
       <div className="header">
         <h1>LEI 看盘系统</h1>
-        {data && (
+        {generatedAt && (
           <span className="generated">
-            更新于 {new Date(data.generated_at).toLocaleString("zh-CN", { hour12: false })}
+            更新于 {new Date(generatedAt).toLocaleString("zh-CN", { hour12: false })}
           </span>
         )}
         <span className="spacer" />
@@ -70,44 +97,43 @@ export default function DashboardPage() {
 
       <MarketBreadthStrip />
 
+      <WatchSubscriptionsPanel />
+
       {error && <div className="error-banner">加载失败：{String(error)}</div>}
-      {isLoading && <div className="loading">正在加载行情与信号（首次需逐只分析，请稍候）…</div>}
 
-      {data && (
-        <>
-          <div className="section-title">
-            指数总览 <span className="count">{indexCards.length}</span>
-          </div>
-          <div className="card-grid">
-            {indexCards.map((card) => (
-              <MarketCard
-                key={card.symbol}
-                card={card}
-                onRetry={(s) => refreshMutation.mutate([s])}
-              />
-            ))}
-          </div>
+      <div className="section-title">
+        指数总览 <span className="count">{indexCards.length}</span>
+      </div>
+      <div className="card-grid">
+        {indexCards.map((card) => (
+          <MarketCard
+            key={card.symbol}
+            card={card}
+            onRetry={(s) => refreshMutation.mutate([s])}
+          />
+        ))}
+        {indexLoading && !indexData && <CardSkeletons n={6} />}
+      </div>
 
-          <div className="section-title">
-            我的自选 <span className="count">{watchCards.length}</span>
-          </div>
-          <div className="card-grid">
-            {watchCards.map((card) => (
-              <MarketCard
-                key={card.symbol}
-                card={card}
-                onRemove={(s) => removeMutation.mutate(s)}
-                onRetry={(s) => refreshMutation.mutate([s])}
-              />
-            ))}
-            <div className="add-card" onClick={() => setShowAdd(true)}>
-              ＋ 添加自选
-            </div>
-          </div>
+      <div className="section-title">
+        我的自选 <span className="count">{watchCards.length}</span>
+      </div>
+      <div className="card-grid">
+        {watchCards.map((card) => (
+          <MarketCard
+            key={card.symbol}
+            card={card}
+            onRemove={(s) => removeMutation.mutate(s)}
+            onRetry={(s) => refreshMutation.mutate([s])}
+          />
+        ))}
+        {watchLoading && !watchData && <CardSkeletons n={4} />}
+        <div className="add-card" onClick={() => setShowAdd(true)}>
+          ＋ 添加自选
+        </div>
+      </div>
 
-          <div className="disclaimer">{data.disclaimer_cn}</div>
-        </>
-      )}
+      {disclaimer && <div className="disclaimer">{disclaimer}</div>}
 
       {showAdd && (
         <AddSymbolDialog

@@ -6,6 +6,7 @@ LLM 输出必须过 ``verify_grounding``（禁用词 + rule_id 白名单），�
 """
 from __future__ import annotations
 
+import logging
 from contextlib import closing
 
 from fastapi import APIRouter, HTTPException, Request
@@ -29,6 +30,8 @@ from lei_signal.plans.llm import (
 from lei_signal.plans.monitor import evaluate_plan
 from lei_signal.plans.store import get_plan, list_action_items
 from lei_signal.storage.sqlite_store import connect
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api", tags=["agent"])
 
@@ -74,10 +77,12 @@ def plan_chat(request: Request, plan_id: str, body: PlanChatRequest) -> PlanChat
         message = body.message.strip() or _DEFAULT_SUMMARY_PROMPT
         raw = chat_ark(payload, message, config)
         if raw is not None:
-            ok, _ = verify_grounding(raw, rule_ids)
+            ok, reason = verify_grounding(raw, rule_ids)
             if ok:
                 reply = raw
                 grounded = True
+            else:
+                logger.warning("计划 chat 接地校验未过，降级模板：%s", reason)
 
     if reply is None:
         # 降级：判定层模板直出，不经过 LLM
@@ -122,10 +127,12 @@ def buy_point_chat(
         message = body.message.strip() or _BP_DEFAULT_PROMPT
         raw = chat_buy_point(review_dict, message, config)
         if raw is not None:
-            ok, _ = verify_grounding(raw, allowed)
+            ok, reason = verify_grounding(raw, allowed)
             if ok:
                 reply = raw
                 grounded = True
+            else:
+                logger.warning("买点 chat 接地校验未过，降级模板：%s", reason)
 
     if reply is None:
         # 降级：把 review 讲成结构化文本，不经过 LLM
@@ -137,7 +144,12 @@ def buy_point_chat(
 
 
 def _buy_point_template(review) -> str:  # noqa: ANN001
-    """review 降级模板：结构化直出，不经过 LLM。"""
+    """review 降级模板：结构化直出，不经过 LLM。
+    与 LLM 路径一致：每个候选只列依据/关键价/状态，止损和盈亏比在文末统一提示。
+
+    recency 后: candidates 是近期独立候选, resonance_groups 是价位共振,
+    historical_structures 是过期结构 (不展开)。
+    """
     lines = [
         f"【买点审阅】{review.display_name} · {review.verdict_cn}",
         f"数据日：{review.as_of}（收盘 {review.last_close or '-'}）",
@@ -146,30 +158,60 @@ def _buy_point_template(review) -> str:  # noqa: ANN001
     if review.tradability and not review.tradability.tradable:
         reasons = "、".join(review.tradability.blocking_reasons) or "见门禁明细"
         lines.append(f"阻断：{reasons}（规格 §13）")
-    for c in review.candidates:
-        lines.append(f"\n· {c.scenario_cn} [{c.state_cn}] rule_id:{c.rule_id or '-'}")
+    # 1. 共振组 (合并展示, 避免重复)
+    for g in review.resonance_groups:
+        n_rules = len(g.rule_ids)
+        rules_str = " / ".join(g.rule_ids)
+        lines.append(
+            f"\n· 共振买点（{n_rules} 个 rule 共识）"
+            f" 价位 {g.level:.2f}（±{g.tolerance_pct*100:.1f}% 内）"
+        )
+        lines.append(f"  rule_ids: {rules_str}")
+        for c in g.candidates:
+            lines.append(
+                f"  - {c.scenario_cn} [{c.state_cn}] rule_id:{c.rule_id or '-'}"
+                f" 关键价 {c.key_price or '-'}"
+            )
+    # 2. 独立近期候选 (recency 过滤后, weakened 已静默丢弃, 无需再筛)
+    for i, c in enumerate(review.candidates, start=1):
+        circled = "①②③④⑤⑥⑦⑧⑨⑩"[i - 1] if i <= 10 else str(i)
+        lines.append(
+            f"\n· 买点{circled} {c.scenario_cn} [{c.state_cn}] "
+            f"rule_id:{c.rule_id or '-'}"
+        )
+        lines.append(f"  关键价：{c.key_price or '系统未给出'}")
         if c.satisfied_conditions:
             lines.append(f"  已满足：{'；'.join(c.satisfied_conditions)}")
         if c.missing_conditions:
             lines.append(f"  还缺：{'；'.join(c.missing_conditions)}")
-        stop = c.invalidation_price or "（系统未给出，建计划时人工确认）"
-        lines.append(f"  关键价 {c.key_price or '-'} · 止损 {stop}")
-        if c.reward_risk_computable:
-            lines.append(f"  盈亏比 {c.reward_risk_ratio}（目标 {c.reward_risk_target}）")
-        else:
-            lines.append("  盈亏比目标不可计算")
+        if c.next_step_cn:
+            lines.append(f"  触发：{c.next_step_cn}")
         lines.append("  判定方式为研究代理")
+    # 3. 历史结构 (一笔带过, 不展开)
+    if review.historical_structures:
+        n = len(review.historical_structures)
+        rules = sorted({h.rule_id for h in review.historical_structures if h.rule_id})
+        rules_str = "、".join(rules) if rules else "-"
+        lines.append(
+            f"\n另有 {n} 个历史结构（{rules_str} 等）已超出 recency 窗口，"
+            f"在审阅卡片底部单列, 不构成当下买点。"
+        )
     if review.watch_conditions:
         lines.append("\n【到什么情况才算买点】")
         for w in review.watch_conditions:
             if w.kind == "price":
                 lines.append(f"· {w.text_cn}（价位 {w.price}）")
             else:
-                lines.append(f"· {w.text_cn}（状态型条件，无单一价位）")
+                lines.append(f"· {w.text_cn}（状态型条件）")
+    # 止损 / 盈亏比 / 落计划 一句话收尾
+    lines.append(
+        "\n止损价与盈亏比在落计划时再确认（需用户给认错位 + 目标位，"
+        "系统不算 R/R）。五项交易假设必须由人写。"
+    )
     if review.suggested_plan:
         sp = review.suggested_plan
         lines.append(
-            f"\n【可落计划预填】模块{sp.module} · {sp.direction} · "
+            f"可落计划预填：模块{sp.module} · {sp.direction} · "
             f"entry_rule_id:{sp.entry_rule_id}"
         )
     lines.append(f"\n{review.disclaimer_cn}")

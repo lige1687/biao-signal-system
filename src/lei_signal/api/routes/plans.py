@@ -13,9 +13,11 @@ from fastapi import APIRouter, HTTPException, Request
 from lei_signal.api.config import sqlite_path as default_db
 from lei_signal.api.schemas import (
     ActionItemDTO,
+    ConformanceReportDTO,
     CreateHoldingWatchRequest,
     CreatePlanRequest,
     DeferRequest,
+    DraftUpdateRequest,
     PlanAlertDTO,
     PlanDTO,
     PlansSummaryDTO,
@@ -25,6 +27,7 @@ from lei_signal.plans.actions import (
     handle_supersede,
     validate_resume_on,
 )
+from lei_signal.plans.conformance import evaluate_draft_conformance
 from lei_signal.plans.context import context_from_result
 from lei_signal.plans.drift import check_revision
 from lei_signal.plans.models import PLAN_KIND_HOLDING_WATCH, VERDICT_WITHIN_PLAYBOOK
@@ -41,6 +44,7 @@ from lei_signal.plans.store import (
     set_entered,
     set_exited,
     update_action_item,
+    update_draft,
 )
 from lei_signal.storage.sqlite_store import connect
 
@@ -110,12 +114,12 @@ def post_plan(request: Request, body: CreatePlanRequest) -> PlanDTO:
 
 @router.post("/plans/holding-watch", response_model=PlanDTO, status_code=201)
 def post_holding_watch(request: Request, body: CreateHoldingWatchRequest) -> PlanDTO:
-    """建持仓盯盘并直接落 entered（已在场内，只监督退出）。
+    """建持仓盯盘 draft（不再一步 confirm）。
 
-    一步完成 create+confirm：入场判定不适用，没有 draft 复核的必要。
-    校验（两项退出预案 + 至少一个触发条件）在 store.confirm_holding_watch。
+    确认统一走 ``POST /plans/{plan_id}/confirm``，过退出逻辑核对（方向合理性等）
+    后再 draft->entered。校验（两项退出预案 + 至少一个触发条件）仍在
+    ``store.confirm_holding_watch``。
     """
-    entered_on = body.entered_on or datetime.now(UTC).date().isoformat()
     with closing(connect(_db_path(request))) as conn:
         plan = create_plan(
             conn, symbol=body.symbol, module=body.module, direction=body.direction,
@@ -128,23 +132,96 @@ def post_holding_watch(request: Request, body: CreateHoldingWatchRequest) -> Pla
             stop_price=body.stop_price,
             watch_signal_rule_ids=body.watch_signal_rule_ids,
         )
+        return _to_plan_dto(plan)
+
+
+@router.get("/plans/{plan_id}/conformance", response_model=ConformanceReportDTO)
+def plan_conformance(request: Request, plan_id: str) -> ConformanceReportDTO:
+    """草稿符合性核对：硬阻断项 + 软建议项 + 系统检测对照。
+
+    判定权在 Python（``evaluate_draft_conformance``），无 LLM、无新数值。
+    """
+    with closing(connect(_db_path(request))) as conn:
+        plan = get_plan(conn, plan_id)
+        if plan is None:
+            raise HTTPException(status_code=404, detail=f"计划不存在: {plan_id}")
+    service = getattr(request.app.state, "analysis_service", None)
+    if service is None:
+        raise HTTPException(status_code=503, detail="分析服务不可用")
+    entry = service.get(plan.symbol)
+    if entry.result is None:
+        raise HTTPException(status_code=502, detail=entry.error or "分析不可用")
+    ctx = context_from_result(entry.result)
+    report = evaluate_draft_conformance(plan, ctx)
+    return ConformanceReportDTO(
+        can_confirm=report.can_confirm,
+        hard_issues=[_to_alert_dto(a) for a in report.hard_issues],
+        soft_issues=[_to_alert_dto(a) for a in report.soft_issues],
+        system_detected=report.system_detected,
+    )
+
+
+@router.put("/plans/{plan_id}/draft", response_model=PlanDTO)
+def update_draft_endpoint(
+    request: Request, plan_id: str, body: DraftUpdateRequest
+) -> PlanDTO:
+    """编辑 draft 字段（仅 draft 态，无 drift）。未传字段不改，传 null 清空。"""
+    updates = body.model_dump(exclude_unset=True)
+    with closing(connect(_db_path(request))) as conn:
         try:
-            return _to_plan_dto(
-                confirm_holding_watch(conn, plan.plan_id, entered_on=entered_on)
-            )
+            plan = update_draft(conn, plan_id, updates)
+        except KeyError as exc:
+            raise HTTPException(status_code=404, detail=str(exc)) from exc
         except ValueError as exc:
-            raise HTTPException(status_code=422, detail=str(exc)) from exc
+            raise HTTPException(status_code=409, detail=str(exc)) from exc
+        return _to_plan_dto(plan)
 
 
 @router.post("/plans/{plan_id}/confirm", response_model=PlanDTO)
 def confirm(request: Request, plan_id: str) -> PlanDTO:
+    """draft -> armed（entry）/ entered（holding_watch）。
+
+    先过草稿符合性硬阻断：有硬项 -> 422 + 报告。分析服务不可用时降级（不阻断），
+    以保持离线可用；线上正常路径下硬阻断生效。
+    """
     with closing(connect(_db_path(request))) as conn:
+        plan = get_plan(conn, plan_id)
+        if plan is None:
+            raise HTTPException(status_code=404, detail=f"计划不存在: {plan_id}")
+        if plan.state != "draft":
+            raise HTTPException(
+                status_code=422, detail=f"只有 draft 可确认，当前 state={plan.state}"
+            )
+        service = getattr(request.app.state, "analysis_service", None)
+        if service is not None:
+            entry = service.get(plan.symbol)
+            if entry.result is not None:
+                ctx = context_from_result(entry.result)
+                report = evaluate_draft_conformance(plan, ctx)
+                if not report.can_confirm:
+                    raise HTTPException(
+                        status_code=422,
+                        detail={
+                            "message": "存在硬阻断项，无法确认",
+                            "hard_issues": [
+                                _to_alert_dto(a).model_dump()
+                                for a in report.hard_issues
+                            ],
+                        },
+                    )
         try:
-            return _to_plan_dto(confirm_plan(conn, plan_id))
+            if plan.plan_kind == PLAN_KIND_HOLDING_WATCH:
+                entered_on = datetime.now(UTC).date().isoformat()
+                confirmed = confirm_holding_watch(
+                    conn, plan_id, entered_on=entered_on
+                )
+            else:
+                confirmed = confirm_plan(conn, plan_id)
         except KeyError as exc:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
         except ValueError as exc:
             raise HTTPException(status_code=422, detail=str(exc)) from exc
+        return _to_plan_dto(confirmed)
 
 
 @router.get("/plans/summary", response_model=PlansSummaryDTO)

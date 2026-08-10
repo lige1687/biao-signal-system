@@ -382,6 +382,7 @@ rules:
     params:
       breakout_lookback: 60          # 密集区上沿=近 N 根已完成日 K 最高 high（待确认）
       require_full_alignment: true   # B2 突破时需完整多头排列成立
+      dense_recompute_lookback: 90   # 场景卡 key_price 重算窗口=近 N 日 high 滚动（视觉口径）
     formula: |
       横盘密集区阈值（cluster_threshold / minimum_consolidation_bars / entanglement_lookback）
       复用 tradability_gate，不在此重复声明，单一来源避免漂移；
@@ -442,18 +443,22 @@ rules:
 
   holding_watch_guard:
     rule_id: "holding_watch_guard"
-    version: "1.0.0"
+    version: "1.1.0"
     provenance: "research_proxy"
-    params: {}
+    params:
+      proximity_atr: 1.0   # 接近预警带宽（ATR 倍数）：|close-预设价| <= proximity_atr*atr 且未击穿时提醒
     formula: |
       持仓盯盘（plan_kind=holding_watch）退出提醒的承载规则（不产生入场信号）：
-        TAKE_PROFIT_REACHED / STOP_PRICE_BREACHED / SIGNAL_WATCH_TRIGGERED。
+        TAKE_PROFIT_REACHED / STOP_PRICE_BREACHED / SIGNAL_WATCH_TRIGGERED；
+        接近预警（未击穿，仅在 atr 可用时）：TAKE_PROFIT_APPROACHING / STOP_PRICE_APPROACHING。
       方向感知比较（只用当日可见收盘价或 14:45 盘中快照价）：
         long ：达到止盈 = close >= take_profit_price；击穿止损 = close <= stop_price；
         short：达到止盈 = close <= take_profit_price；击穿止损 = close >= stop_price；
         信号触发 = watch_signal_rule_ids 任一 rule_id 出现在当日 new_events。
+      接近预警 = 未击穿/未达到 且 |close - 预设价| <= proximity_atr * atr（atr=None 跳过）：
+        先到先报——已达到止盈或已击穿止损时不再发 APPROACHING，避免与击穿提醒重复。
       止损击穿为 block（纪律最硬：不得事后下移止损，语义同规格 §14）；
-      止盈达到与信号触发为 remind（提示到点，退出与否仍由人决定）。
+      止盈达到、接近预警与信号触发为 remind（提示到点/临近，退出与否仍由人决定）。
       三者 action_kind=EXIT，产 EXIT 待办，走既有催办/回执链路。
     note_cn: |
       “持仓盯盘”是人类 2026-08-05 明确的新增用法：标的已在场内，不需要再论证入场
@@ -461,6 +466,8 @@ rules:
       自填，属 user_config 性质；本规则只承载“比较与提醒”这一层判定，标 research_proxy。
       仍然只记价位与状态，不记数量/金额/账户。止损击穿沿用规格 §14「不得在亏损后
       移动原定失效价」的纪律强度，故为 block；界面必须标注“研究代理”。
+      接近预警（2026-08-06）：人类要求“在 ATR 范围内就去提醒”，而非等到精确击穿。
+      proximity_atr 默认 1.0（1 倍 ATR），可在本账本调；atr 不可用时静默跳过，不阻断。
 
   # ---------------- B1 第一阻力 ----------------
   resistance_b1:

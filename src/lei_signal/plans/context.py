@@ -78,6 +78,16 @@ def _last_ema20(chart: dict[str, Any]) -> float | None:
     return None
 
 
+def _last_atr(chart: dict[str, Any]) -> float | None:
+    series = chart.get("atr14") if isinstance(chart, dict) else None
+    if not series:
+        return None
+    for value in reversed(series):
+        if value is not None:
+            return float(value)
+    return None
+
+
 def from_symbol_detail(dto: Any) -> MonitorContext:
     """从 SymbolDetailDTO 裁剪 MonitorContext。"""
     meta = dto.meta
@@ -106,6 +116,7 @@ def from_symbol_detail(dto: Any) -> MonitorContext:
         current_close=current_close,
         ema20=_last_ema20(chart),
         tradability_tradable=bool(tradability.tradable) if tradability else True,
+        atr=_last_atr(chart),
         tradability_blocking_reasons=tuple(
             tradability.blocking_reasons if tradability else ()
         ),
@@ -135,6 +146,11 @@ def context_from_result(result: Any, *, cache_fallback_used: bool = False) -> Mo
         if "ema20" in frame.columns and pd.notna(last_row.get("ema20"))
         else None
     )
+    atr = (
+        float(last_row["atr14"])
+        if "atr14" in frame.columns and pd.notna(last_row.get("atr14"))
+        else None
+    )
 
     opportunities: list[OpportunityRef] = []
     for opp in (*assessment.trade_opportunities, *assessment.pullback_opportunities,
@@ -156,6 +172,7 @@ def context_from_result(result: Any, *, cache_fallback_used: bool = False) -> Mo
         current_close=current_close,
         ema20=ema20,
         tradability_tradable=bool(tradability.tradable) if tradability else True,
+        atr=atr,
         tradability_blocking_reasons=tuple(
             tradability.blocking_reasons if tradability else ()
         ),

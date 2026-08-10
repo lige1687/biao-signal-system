@@ -218,6 +218,29 @@ notify/base.py        Notifier Protocol: send(payload) -> bool
 - 不下单、不接券商、不记股数/金额/成交价/账户
 - 不改判定层、不新增判定逻辑、不新增阈值
 - 不碰 LLM（模板渲染足够；ark 集成是另一条独立任务）
+
+## 附录 A · 自定义机器人 Webhook + Cloudflare Tunnel 验收
+
+本次实际采用的是自定义机器人，不是企业自建应用。自定义机器人只能单向推送，卡片按钮
+通过 `open_url` 打开 LEI 的签名回执页；不能识别点击者的飞书身份。建议只投到私密单人群。
+
+1. 在飞书群添加自定义机器人，将地址写入 `FEISHU_WEBHOOK_URL`。
+2. 生成独立随机长密钥，写入 `FEISHU_ACTION_SECRET`，不得提交到 Git。
+3. 启动 API：`uvicorn lei_signal.api.app:app --host 127.0.0.1 --port 8000`。
+4. 启动临时隧道：`cloudflared tunnel --url http://127.0.0.1:8000`。
+5. 将隧道输出的 HTTPS 根地址写入 `FEISHU_ACTION_BASE_URL`，重启监督脚本/API。
+6. 先执行 dry-run：`python3 scripts/daily_nag.py --notifier feishu --dry-run`。
+7. 正式执行：`python3 scripts/daily_nag.py --notifier feishu`；确认群内只有一张 Tier 2 汇总卡，
+   Tier 1 仍单独推送。
+8. 手机点击“处理”按钮：
+   - 选“已执行”后，待办进入 `done`，ENTER/EXIT 按既有状态机推进；
+   - 选“推迟”时，必须填写 `reason_cn` 和可计算的 `resume_on` JSON；
+   - 重复提交同一链接只显示已处理，不重复写状态；
+   - 过期或签名错误的链接必须拒绝。
+9. 检查飞书收到回执结果通知，并检查 `plan_annotations` 留有原因或执行记录。
+
+生产长期使用不要依赖随机 `trycloudflare.com` 地址；应配置命名 Tunnel 和稳定域名。多人群需要
+增加操作口令或升级企业自建应用，否则签名只能证明链接由 LEI 签发，不能证明操作者身份。
 - 不碰前端（React 面板归 v2 第 3 项）
 - 不引入新第三方 SDK（用 `requests`）
 - 不硬编码凭据、不提交 `.env`、不在测试里放真实 token

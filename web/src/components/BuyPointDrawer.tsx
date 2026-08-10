@@ -1,8 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { api } from "../api/client";
-import type { BuyPointReview } from "../types";
-import CreatePlanDialog, { type PlanPrefill } from "./CreatePlanDialog";
+import AgentMarkdown from "./AgentMarkdown";
+import { moduleCn } from "../modules";
+import type {
+  BuyPointCandidate,
+  BuyPointReview,
+  HistoricalStructure,
+  ResonanceGroup,
+} from "../types";
+import { type PlanPrefill } from "./CreatePlanDialog";
+import PlanCreateFlow from "./PlanCreateFlow";
+import WatchConditionsPanel from "./WatchConditionsPanel";
 
 const VERDICT_STYLE: Record<string, string> = {
   actionable: "var(--lei-green)",
@@ -11,31 +20,100 @@ const VERDICT_STYLE: Record<string, string> = {
   none: "var(--text-faint)",
 };
 
+/** 圆圈数字，用于「买点①②③」展示与一一对应。 */
+const CIRCLED = "①②③④⑤⑥⑦⑧⑨⑩";
+export function circled(n: number): string {
+  return CIRCLED[n] ?? String(n + 1);
+}
+
+/** 匹配「买点①/买点1/买点一」等写法，用于解析 agent 文本里提到的买点序号。 */
+const BP_RE = /买点\s*([①②③④⑤⑥⑦⑧⑨⑩]|[1-9][0-9]?|一|二|三|四|五|六|七|八|九|十)/g;
+
+/** 把匹配到的序号 token 转成 0 起的候选下标。 */
+function parseBpIndex(token: string): number | null {
+  const ci = CIRCLED.indexOf(token);
+  if (ci >= 0) return ci;
+  const cni = "一二三四五六七八九十".indexOf(token);
+  if (cni >= 0) return cni;
+  const n = Number(token);
+  if (Number.isInteger(n) && n >= 1) return n - 1;
+  return null;
+}
+
+/** annoId「bp-N」<-> 候选下标 N。 */
+export function annoToIndex(annoId: string | null | undefined): number | null {
+  if (!annoId) return null;
+  const m = /^bp-(\d+)$/.exec(annoId);
+  return m ? Number(m[1]) : null;
+}
+export function indexToAnno(index: number): string {
+  return `bp-${index}`;
+}
+
+/**
+ * 只保留值得讲的候选（confirmed / watch），跳过 weakened 确认减弱的噪音。
+ * 买点序号 ①②③ 按此筛选后的顺序编号，与 agent prompt 规则 10、主图高亮 annoId 一致。
+ * 全部 weakened 时回退返回全部，避免无候选可显。
+ */
+export function notableCandidates(candidates: BuyPointCandidate[]): BuyPointCandidate[] {
+  const notable = candidates.filter((c) => c.state !== "weakened");
+  return notable.length > 0 ? notable : candidates;
+}
+
 type Turn = { who: "you" | "agent"; text: string; grounded?: boolean };
 
 /**
- * 买点分析抽屉。
+ * 买点分析对话栏（内嵌在详情页主图右侧，不再是全屏抽屉）。
  *
- * 打开即取买点审阅（Python 已判好的确定性结果），按 verdict 展示结构化结论。
- * 可提问，LLM 只讲解审阅字段（接地校验 + 降级模板），不自行判断买点。
- * verdict=actionable 且有 suggested_plan 时，给「据此建计划」直接预填建计划表单。
+ * 打开即取买点审阅（Python 已判好的确定性结果），但**不再预放整坨候选明细**--
+ * 只给一行结论 + 可点的买点序号。对话为主：agent 讲到「买点①」时，文本里的
+ * 序号可点，并自动联动主图高亮（价位线 + 依据结构），形成「图 <-> 卡」一一对应。
+ *
+ * 高亮坐标全部来自确定性层（候选 key_price / invalidation_price + 主图已有结构标记），
+ * LLM 文本只决定「现在讲哪个买点」，不提供坐标（接地红线）。
  */
 export default function BuyPointDrawer({
   symbol,
+  review: ctrlReview,
+  reviewLoading: ctrlReviewLoading,
+  activeAnnoId: ctrlActiveAnnoId,
+  onActivateCandidate: ctrlOnActivate,
   onClose,
 }: {
   symbol: string;
+  /** 受控模式（详情页内嵌）：由父组件提供审阅与高亮联动。不传则自取（独立抽屉）。 */
+  review?: BuyPointReview;
+  reviewLoading?: boolean;
+  activeAnnoId?: string | null;
+  onActivateCandidate?: (index: number | null) => void;
   onClose: () => void;
 }) {
+  const controlled = ctrlOnActivate !== undefined;
+
+  // 独立抽屉模式（Supervisor/Workspace）：自取审阅、自管当前候选
+  const { data: localReview, isLoading: localReviewLoading } = useQuery({
+    queryKey: ["buyPointReview", symbol],
+    queryFn: () => api.buyPointReview(symbol),
+    enabled: !controlled,
+  });
+  const [localActiveCand, setLocalActiveCand] = useState<number | null>(null);
+
+  const review = controlled ? ctrlReview : localReview;
+  const reviewLoading = controlled ? !!ctrlReviewLoading : localReviewLoading;
+  const activeAnnoId = controlled
+    ? (ctrlActiveAnnoId ?? null)
+    : localActiveCand != null
+      ? `bp-${localActiveCand}`
+      : null;
+  const onActivateCandidate = controlled
+    ? ctrlOnActivate!
+    : (i: number | null) => setLocalActiveCand(i);
+
   const [turns, setTurns] = useState<Turn[]>([]);
   const [input, setInput] = useState("");
   const [showCreate, setShowCreate] = useState(false);
+  const [showHistorical, setShowHistorical] = useState(false);
   const bodyRef = useRef<HTMLDivElement | null>(null);
-
-  const { data: review, isLoading } = useQuery({
-    queryKey: ["buyPointReview", symbol],
-    queryFn: () => api.buyPointReview(symbol),
-  });
 
   const ask = useMutation({
     mutationFn: (message: string) => api.buyPointChat(symbol, message),
@@ -51,10 +129,23 @@ export default function BuyPointDrawer({
       ]),
   });
 
+  // 审阅就绪后自动开聊（agent 的开场叙述就是对话起点，会提到买点序号驱动高亮）
   useEffect(() => {
     if (review) ask.mutate("");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [review?.as_of]);
+
+  // agent 最新一条消息里若提到「买点N」，自动把主图/卡片联动到那个买点
+  useEffect(() => {
+    const last = [...turns].reverse().find((t) => t.who === "agent");
+    if (!last || !review) return;
+    const notable = notableCandidates(review.candidates);
+    const matches = [...last.text.matchAll(BP_RE)];
+    if (matches.length === 0) return;
+    const idx = parseBpIndex(matches[matches.length - 1][1]);
+    if (idx != null && idx < notable.length) onActivateCandidate(idx);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [turns, review]);
 
   useEffect(() => {
     bodyRef.current?.scrollTo({ top: bodyRef.current.scrollHeight });
@@ -80,36 +171,105 @@ export default function BuyPointDrawer({
       }
     : {};
 
+  const activeCand = annoToIndex(activeAnnoId);
+  const notable = review ? notableCandidates(review.candidates) : [];
+  const activeCandidate = activeCand != null ? notable[activeCand] : undefined;
+
   return (
     <>
-      <div className="drawer-overlay" onClick={onClose} />
-      <aside className="drawer-panel">
-        <div className="drawer-head">
+      {!controlled && <div className="drawer-overlay" onClick={onClose} />}
+      <aside className={`bp-panel${controlled ? "" : " bp-standalone"}`}>
+        <div className="bp-head">
           <h2>买点分析 · {symbol}</h2>
-          <button className="btn small" onClick={onClose}>关闭</button>
+          <div className="bp-head-actions">
+            {review?.suggested_plan && (
+              <button className="btn small" onClick={() => setShowCreate(true)}>
+                据此建计划
+              </button>
+            )}
+            <button className="btn small" onClick={onClose}>关闭</button>
+          </div>
         </div>
 
-        <div className="drawer-body" ref={bodyRef}>
-          {isLoading && <div className="muted">正在审阅…</div>}
-          {review && <ReviewSummary review={review} onBuildPlan={() => setShowCreate(true)} />}
+        {/* 结论区：上方一行「判定徽章 + 日期」，下方整行展开结论原文，
+            避免长摘要被徽章/日期挤成窄高的一坨竖排。 */}
+        {reviewLoading && !review && <div className="muted">正在审阅…</div>}
+        {review && (
+          <div className="bp-verdict-line">
+            <div className="bp-verdict-meta">
+              <span
+                className="bp-verdict-chip"
+                style={{ background: VERDICT_STYLE[review.verdict] || "var(--text-faint)" }}
+              >
+                {review.verdict_cn}
+              </span>
+              <span className="bp-verdict-date">
+                {review.as_of} · 收盘 {review.last_close ?? "-"}
+              </span>
+            </div>
+            <p className="bp-summary">{review.summary_cn}</p>
+          </div>
+        )}
 
+        {/* 共振买点: 同价位 ±1.5% 内多个 rule 共识, 合并展示, 避免重复 */}
+        {review && review.resonance_groups.length > 0 && (
+          <ResonancePanel groups={review.resonance_groups} />
+        )}
+
+        {/* 买点序号选择器：点一个 -> 主图高亮 + 下方出该买点卡片（只列值得讲的候选） */}
+        {notable.length > 0 && (
+          <div className="bp-chips">
+            {notable.map((c, i) => (
+              <button
+                key={c.scenario_id}
+                className={`bp-chip ${activeCand === i ? "active" : ""}`}
+                onClick={() => onActivateCandidate(activeCand === i ? null : i)}
+                title={c.scenario_cn}
+              >
+                买点{circled(i)}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* 当前买点的聚焦卡片（与主图高亮一一对应） */}
+        {activeCandidate && activeCand != null && (
+          <CandidateCard
+            c={activeCandidate}
+            index={activeCand}
+            onActivate={onActivateCandidate}
+          />
+        )}
+
+        <div className="bp-body" ref={bodyRef}>
           {turns.map((turn, i) => (
-            <div className="turn" key={i}>
+            <div className={`turn ${turn.who}`} key={i}>
               <div className="who">{turn.who === "you" ? "你" : "分析"}</div>
-              <div className="msg">{turn.text}</div>
+              <div className="msg">
+                {turn.who === "agent" ? (
+                  <AgentMarkdown text={turn.text} onBp={(i) => onActivateCandidate(i)} notableCount={notable.length} />
+                ) : (
+                  turn.text
+                )}
+              </div>
               {turn.who === "agent" && turn.grounded !== undefined && (
                 <div className={`grounded-tag ${turn.grounded ? "" : "warn"}`}>
                   {turn.grounded
                     ? "已过接地校验"
-                    : "已降级为结构化模板（LLM 不可用或未过接地校验）"}
+                    : "已降级为结构化模板（LLM 输出不可用：超时 / 被截断 / 未过接地校验）"}
                 </div>
               )}
             </div>
           ))}
-          {ask.isPending && <div className="muted">正在整理…</div>}
+          {ask.isPending && (
+            <div className="bp-spinner-wrap">
+              <span className="bp-spinner" />
+              <span className="muted">分析中…</span>
+            </div>
+          )}
         </div>
 
-        <div className="drawer-input">
+        <div className="bp-input">
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -125,10 +285,43 @@ export default function BuyPointDrawer({
             发送
           </button>
         </div>
+
+        {review && <div className="muted bp-disclaimer">{review.disclaimer_cn}</div>}
+
+        {/* 未来买点 (watch_conditions): 每条配 [设提醒] 按钮, 命中后由
+            14:45 checker 翻 pending_confirmation */}
+        {review && review.watch_conditions.length > 0 && (() => {
+          const firstCand = notable[0];
+          return (
+            <WatchConditionsPanel
+              symbol={symbol}
+              conditions={review.watch_conditions}
+              candidateDirection={
+                review.suggested_plan?.direction ?? firstCand?.direction ?? "long"
+              }
+              candidateModule={
+                review.suggested_plan?.module ?? firstCand?.module ?? "A"
+              }
+              sourceRuleId={
+                review.suggested_plan?.entry_rule_id ?? firstCand?.rule_id ?? null
+              }
+              sourceCandidateId={firstCand?.scenario_id ?? null}
+            />
+          );
+        })()}
+
+        {/* 历史结构: recency 过滤掉的过期结构, 默认折叠, 仅作文案历史参考 */}
+        {review && review.historical_structures.length > 0 && (
+          <HistoricalPanel
+            items={review.historical_structures}
+            expanded={showHistorical}
+            onToggle={() => setShowHistorical((v) => !v)}
+          />
+        )}
       </aside>
 
       {showCreate && (
-        <CreatePlanDialog
+        <PlanCreateFlow
           symbol={symbol}
           prefill={prefill}
           onClose={() => setShowCreate(false)}
@@ -138,82 +331,140 @@ export default function BuyPointDrawer({
   );
 }
 
-function ReviewSummary({
-  review,
-  onBuildPlan,
+/** 聚焦的买点卡片：依据/价位/止损/R/R/下一步，与主图高亮一一对应。
+ * 默认收起，只露标题+价位（最常用的 3 项），省下大量面板高度给 agent 对话；
+ * 点 ▼ 展开看完整依据/注意/rule_id 等。点击卡片其它空白处仍按原逻辑切换激活。 */
+function CandidateCard({
+  c,
+  index,
+  onActivate,
 }: {
-  review: BuyPointReview;
-  onBuildPlan: () => void;
+  c: BuyPointCandidate;
+  index: number;
+  onActivate: (index: number | null) => void;
 }) {
+  const [expanded, setExpanded] = useState(false);
   return (
-    <div className="bp-review">
-      <div className="bp-verdict">
+    <div
+      className={`bp-card active${expanded ? " expanded" : ""}`}
+      onClick={(e) => {
+        // 折叠按钮单独处理，不触发取消激活
+        if ((e.target as HTMLElement).closest(".bp-card-toggle")) return;
+        onActivate(index);
+      }}
+    >
+      <div className="bp-card-head">
+        <b>买点{circled(index)} · {c.scenario_cn}</b>
+        <span className="muted">[{c.state_cn}]</span>
+        {c.module && <span className="sv-kind-chip">{moduleCn(c.module)}</span>}
         <span
-          className="bp-verdict-chip"
-          style={{ background: VERDICT_STYLE[review.verdict] || "var(--text-faint)" }}
+          className="bp-card-toggle"
+          role="button"
+          aria-label={expanded ? "收起买点详情" : "展开买点详情"}
+          title={expanded ? "收起详情" : "展开详情"}
+          onClick={(e) => {
+            e.stopPropagation();
+            setExpanded((v) => !v);
+          }}
         >
-          {review.verdict_cn}
-        </span>
-        <span className="muted" style={{ fontSize: 11 }}>
-          {review.as_of} · 收盘 {review.last_close ?? "-"}
-          {review.has_active_plan && " · 已有活跃计划"}
+          {expanded ? "▼" : "▶"}
         </span>
       </div>
-      <p className="bp-summary">{review.summary_cn}</p>
-
-      {review.candidates.map((c) => (
-        <div className="bp-candidate" key={c.scenario_id}>
-          <div className="bp-cand-head">
-            <b>{c.scenario_cn}</b>
-            <span className="muted">[{c.state_cn}]</span>
-            {c.module && <span className="sv-kind-chip">{c.module}</span>}
-          </div>
+      {/* 价位行始终显示——这是用户最常看的 3 项 */}
+      <div className="bp-prices">
+        <span>关键价 {c.key_price ?? "-"}</span>
+        <span>止损 {c.invalidation_price ?? "（系统未给出，建计划时确认）"}</span>
+        <span>
+          {c.reward_risk_computable ? `R/R ${c.reward_risk_ratio}` : "R/R 不可计算"}
+        </span>
+      </div>
+      {expanded && (
+        <>
           {c.satisfied_conditions.length > 0 && (
             <div className="bp-cond">✓ {c.satisfied_conditions.join("；")}</div>
           )}
           {c.missing_conditions.length > 0 && (
             <div className="bp-cond miss">✗ {c.missing_conditions.join("；")}</div>
           )}
-          <div className="bp-prices">
-            <span>关键价 {c.key_price ?? "-"}</span>
-            <span>
-              止损 {c.invalidation_price ?? "（系统未给出，建计划时确认）"}
-            </span>
-            <span>
-              {c.reward_risk_computable
-                ? `R/R ${c.reward_risk_ratio}`
-                : "R/R 不可计算"}
-            </span>
-          </div>
+          {c.next_step_cn && <div className="bp-next">下一步：{c.next_step_cn}</div>}
+          {c.caveat_cn && <div className="bp-caveat">注意：{c.caveat_cn}</div>}
           <div className="muted" style={{ fontSize: 11 }}>
             rule_id:{c.rule_id ?? "-"} · 判定方式为研究代理
           </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+/** 共振买点面板: 展示同一价位 ±1.5% 内多个 rule 的共识。
+ *  - 默认展开第一条, 其余折叠 (避免长面板)
+ *  - 不与 chips 联动 (共振不是单个候选, 不进 chat 高亮) */
+function ResonancePanel({ groups }: { groups: ResonanceGroup[] }) {
+  const [expandedIdx, setExpandedIdx] = useState<number | null>(0);
+  if (groups.length === 0) return null;
+  return (
+    <div className="bp-resonance">
+      <div className="bp-resonance-head">📡 共振买点 ({groups.length})</div>
+      {groups.map((g, gi) => (
+        <div
+          key={gi}
+          className={`bp-resonance-item${expandedIdx === gi ? " expanded" : ""}`}
+          onClick={() => setExpandedIdx(expandedIdx === gi ? null : gi)}
+        >
+          <div className="bp-resonance-row">
+            <b>价位 {g.level.toFixed(2)}</b>
+            <span className="muted">±{(g.tolerance_pct * 100).toFixed(1)}%</span>
+            <span className="muted">· {g.rule_ids.length} 个 rule 共识</span>
+            <span className="bp-resonance-toggle">
+              {expandedIdx === gi ? "▼" : "▶"}
+            </span>
+          </div>
+          {expandedIdx === gi && (
+            <div className="bp-resonance-detail">
+              {g.candidates.map((c, ci) => (
+                <div key={ci} className="bp-resonance-line">
+                  · {c.scenario_cn} [{c.state_cn}] 关键价 {c.key_price?.toFixed(2) ?? "-"}
+                  <span className="muted"> · {c.rule_id ?? "-"}</span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       ))}
+    </div>
+  );
+}
 
-      {review.watch_conditions.length > 0 && (
-        <div className="bp-watch">
-          <h3>到什么情况才算买点</h3>
-          {review.watch_conditions.map((w, i) => (
-            <div key={i} className="bp-watch-row">
-              <span>· {w.text_cn}</span>
-              {w.kind === "price" ? (
-                <span className="muted">价位 {w.price}</span>
-              ) : (
-                <span className="muted">状态型条件，无单一价位</span>
-              )}
+/** 历史结构面板: 展示被 recency 过滤掉的过期结构, 默认折叠。 */
+function HistoricalPanel({
+  items,
+  expanded,
+  onToggle,
+}: {
+  items: HistoricalStructure[];
+  expanded: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <div className="bp-historical">
+      <div className="bp-historical-head" onClick={onToggle} role="button">
+        <span>
+          📜 历史结构 ({items.length}) — 超出 recency 窗口, 仅作文案历史参考
+        </span>
+        <span className="bp-historical-toggle">{expanded ? "▼" : "▶"}</span>
+      </div>
+      {expanded && (
+        <div className="bp-historical-detail">
+          {items.map((h, hi) => (
+            <div key={hi} className="bp-historical-line">
+              · {h.scenario_cn} [{h.state_cn}] {h.days_since} 天前
+              {h.key_price != null && ` · 关键价 ${h.key_price.toFixed(2)}`}
+              <span className="muted"> · {h.rule_id ?? "-"}</span>
             </div>
           ))}
         </div>
       )}
-
-      {review.suggested_plan && (
-        <button className="btn small primary" onClick={onBuildPlan} style={{ marginTop: 8 }}>
-          据此建计划（预填已就绪）
-        </button>
-      )}
-
-      <div className="muted bp-disclaimer">{review.disclaimer_cn}</div>
     </div>
   );
 }

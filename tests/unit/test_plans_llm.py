@@ -14,6 +14,9 @@ from lei_signal.plans.grounding import (
 from lei_signal.plans.llm import (
     ENV_API_KEY,
     ENV_BASE_URL,
+    ENV_DEEPSEEK_API_KEY,
+    ENV_DEEPSEEK_BASE_URL,
+    ENV_DEEPSEEK_MODEL,
     ENV_MODEL,
     ArkConfig,
     build_context_payload,
@@ -25,6 +28,15 @@ from lei_signal.plans.models import PLAN_ARMED, ActionItem, TradePlan
 from lei_signal.plans.monitor import MonitorContext, OpportunityRef, evaluate_plan
 
 RULESET = "1.3.0"
+
+#: 「无凭据」场景要清的全部变量：DS 优先级最高，不清会抢先返回配置。
+_ALL_CRED_VARS = (
+    ENV_DEEPSEEK_API_KEY,
+    ENV_API_KEY,
+    "ANTHROPIC_AUTH_TOKEN",
+    "ANTHROPIC_BASE_URL",
+    "ANTHROPIC_MODEL",
+)
 
 
 def _plan() -> TradePlan:
@@ -96,15 +108,15 @@ def test_context_payload_carries_two_layer_provenance() -> None:
 
 
 def test_load_ark_config_returns_none_without_key(monkeypatch) -> None:  # noqa: ANN001
-    # 回退链：ARK_API_KEY 与 ANTHROPIC_AUTH_TOKEN 都得清，否则会复用本机 Claude 凭据
-    for var in (ENV_API_KEY, "ANTHROPIC_AUTH_TOKEN", "ANTHROPIC_BASE_URL", "ANTHROPIC_MODEL"):
+    # 回退链：DS / ARK / ANTHROPIC 全得清，否则会复用本机凭据（DS 优先级最高）
+    for var in _ALL_CRED_VARS:
         monkeypatch.delenv(var, raising=False)
     assert load_ark_config() is None
 
 
 def test_load_ark_config_falls_back_to_anthropic_env(monkeypatch) -> None:  # noqa: ANN001
     """ARK_API_KEY 缺失时复用 ANTHROPIC_AUTH_TOKEN（本机 Claude 用的就是 ark 网关）。"""
-    for var in (ENV_API_KEY, ENV_BASE_URL, ENV_MODEL):
+    for var in (ENV_DEEPSEEK_API_KEY, ENV_API_KEY, ENV_BASE_URL, ENV_MODEL):
         monkeypatch.delenv(var, raising=False)
     monkeypatch.setenv("ANTHROPIC_AUTH_TOKEN", "fake-token-123")
     monkeypatch.setenv("ANTHROPIC_BASE_URL", "https://ark.cn-beijing.volces.com/api/coding")
@@ -115,8 +127,35 @@ def test_load_ark_config_falls_back_to_anthropic_env(monkeypatch) -> None:  # no
     assert cfg.style == "anthropic"  # /api/coding 自动推断为 Anthropic 协议
 
 
+def test_deepseek_key_takes_priority_over_ark(monkeypatch) -> None:  # noqa: ANN001
+    """配了 DEEPSEEK_API_KEY 就走 DS（OpenAI 兼容），不回退 ark。"""
+    monkeypatch.setenv(ENV_DEEPSEEK_API_KEY, "sk-ds-fake")
+    monkeypatch.delenv(ENV_DEEPSEEK_BASE_URL, raising=False)
+    monkeypatch.delenv(ENV_DEEPSEEK_MODEL, raising=False)
+    # 同时存在 ark 凭据也不该被选中
+    monkeypatch.setenv(ENV_API_KEY, "ark-should-be-ignored")
+    monkeypatch.setenv("ANTHROPIC_AUTH_TOKEN", "anthropic-should-be-ignored")
+    cfg = load_ark_config()
+    assert cfg is not None
+    assert cfg.api_key == "sk-ds-fake"
+    assert cfg.base_url == "https://api.deepseek.com"
+    assert cfg.model == "deepseek-chat"
+    assert cfg.style == "openai"  # DS 是 OpenAI 兼容协议，走 /chat/completions + Bearer
+
+
+def test_deepseek_base_url_and_model_overridable(monkeypatch) -> None:  # noqa: ANN001
+    """DEEPSEEK_BASE_URL / DEEPSEEK_MODEL 可覆盖默认值，尾斜杠被去掉。"""
+    monkeypatch.setenv(ENV_DEEPSEEK_API_KEY, "sk-ds-fake")
+    monkeypatch.setenv(ENV_DEEPSEEK_BASE_URL, "https://ds.example.com/v1/")
+    monkeypatch.setenv(ENV_DEEPSEEK_MODEL, "deepseek-reasoner")
+    cfg = load_ark_config()
+    assert cfg is not None
+    assert cfg.base_url == "https://ds.example.com/v1"
+    assert cfg.model == "deepseek-reasoner"
+
+
 def test_make_ark_renderer_returns_none_without_key(monkeypatch) -> None:  # noqa: ANN001
-    for var in (ENV_API_KEY, "ANTHROPIC_AUTH_TOKEN", "ANTHROPIC_BASE_URL", "ANTHROPIC_MODEL"):
+    for var in _ALL_CRED_VARS:
         monkeypatch.delenv(var, raising=False)
     assert make_ark_renderer(plan=_plan()) is None
 

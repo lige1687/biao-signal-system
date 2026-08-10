@@ -52,6 +52,15 @@ PLAN_KIND_ENTRY = "entry"
 PLAN_KIND_HOLDING_WATCH = "holding_watch"
 PLAN_KINDS = (PLAN_KIND_ENTRY, PLAN_KIND_HOLDING_WATCH)
 
+# 计划来源 (Step 3, 决策 2, 2026-08-09). 决定 plan 是怎么来的, 用于审计/筛选/报告.
+#   user           = 手动建 (默认, create_plan 不传 source 时落此值)
+#   watch_promoted = 由 Step 2 提醒命中带出, 用户确认后落计划
+#   agent          = 来自 agent 自动生成 (预留, 当前未启用)
+PLAN_SOURCE_USER = "user"
+PLAN_SOURCE_WATCH_PROMOTED = "watch_promoted"
+PLAN_SOURCE_AGENT = "agent"
+PLAN_SOURCES = (PLAN_SOURCE_USER, PLAN_SOURCE_WATCH_PROMOTED, PLAN_SOURCE_AGENT)
+
 #: 持仓盯盘必填的退出预案两项（人类 2026-08-05 决定）：
 #: 已在场内不必再论证入场理由，但「什么逻辑退出」必须先写下来，
 #: 否则价位到了仍会临场改主意--这正是监督员要拦的。
@@ -100,6 +109,8 @@ class TradePlan:
     #: 信号型退出触发：这些 rule_id 出现在当日 new_events 即提醒（如灰转绿/转黑）。
     #: 存储为逗号分隔字符串，模型侧暴露为 tuple。
     watch_signal_rule_ids: tuple[str, ...] = ()
+    #: 计划来源 (Step 3). user=手动, watch_promoted=来自提醒, agent=预留.
+    source: str = PLAN_SOURCE_USER
     created_at: str = ""
     updated_at: str = ""
 
@@ -191,6 +202,10 @@ __all__ = [
     "PLAN_KIND_ENTRY",
     "PLAN_KIND_HOLDING_WATCH",
     "PLAN_KINDS",
+    "PLAN_SOURCES",
+    "PLAN_SOURCE_AGENT",
+    "PLAN_SOURCE_USER",
+    "PLAN_SOURCE_WATCH_PROMOTED",
     "PLAN_STATES",
     "PLAN_SUPERSEDED",
     "PLAYBOOK_FIELDS",

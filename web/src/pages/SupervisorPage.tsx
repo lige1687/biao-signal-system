@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { api } from "../api/client";
 import AgentDrawer from "../components/AgentDrawer";
 import BuyPointDrawer from "../components/BuyPointDrawer";
+import { directionCn, moduleCn } from "../modules";
 import type { ActionItem, Plan, PlanAlert } from "../types";
 
 const SEVERITY_CN: Record<string, string> = {
@@ -145,8 +146,8 @@ function PlanCard({ plan, onAsk }: { plan: Plan; onAsk: () => void }) {
         {isHolding && <span className="sv-kind-chip">持仓盯盘</span>}
         <span className="muted">
           {isHolding
-            ? `${plan.direction} · 只监督退出`
-            : `模块${plan.module} · ${plan.direction} · ${plan.entry_rule_id ?? "-"}`}
+            ? `${directionCn(plan.direction)} · 只监督退出`
+            : `${moduleCn(plan.module)} · ${directionCn(plan.direction)} · ${plan.entry_rule_id ?? "-"}`}
         </span>
         <span className={`sv-state ${plan.state}`}>{plan.state}</span>
         <span className="muted" style={{ fontSize: 11 }}>

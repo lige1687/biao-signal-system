@@ -116,7 +116,9 @@ function SideItem({
           <button
             className="danger"
             onClick={() => {
-              onRemove(card.symbol);
+              if (confirm(`确认将「${card.display_name}」移出自选？`)) {
+                onRemove(card.symbol);
+              }
               setMenu(false);
             }}
           >

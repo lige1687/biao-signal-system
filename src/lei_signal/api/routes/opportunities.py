@@ -11,15 +11,18 @@
 from __future__ import annotations
 
 from contextlib import closing
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from typing import Any
 
+import pandas as pd
 from fastapi import APIRouter, HTTPException, Request
 
 from lei_signal.api.config import sqlite_path as default_db
 from lei_signal.api.schemas import (
     BuyPointCandidateDTO,
     BuyPointReviewDTO,
+    HistoricalStructureDTO,
+    ResonanceGroupDTO,
     ScanItemDTO,
     ScanResponse,
     SuggestedPlanDTO,
@@ -44,9 +47,16 @@ _VERDICT_CN = {
     VERDICT_NONE: "当前无机会",
 }
 
+#: 过去买点 recency 窗口 (3 个交易日, 用户决定)
+RECENCY_BUSINESS_DAYS = 3
+#: 共振合并容差 (key_price ±1.5% 内的不同 rule 视为共振)
+RESONANCE_TOLERANCE_PCT = 0.015
+
 DISCLAIMER = (
     "本审阅只汇总系统既有确定性判定（可交易性门禁 + 已实现模块的条件化场景 + "
     "盈亏比），不含预测。研究代理项已标注；下一根 K 线开盘为最早可执行时点。"
+    f"过去买点 recency 窗口 {RECENCY_BUSINESS_DAYS} 个交易日；过期结构在卡片底部"
+    "单独列出，仅作文案历史参考，不计入买点判定。"
 )
 
 #: 缺失条件文案 -> 可交给系统盯盘的 rule_id（复用 holding_watch 的信号形态）。
@@ -108,11 +118,130 @@ def _watch_conditions(
     return out
 
 
+def _parse_iso_date(s: str | None) -> date | None:
+    if not s:
+        return None
+    try:
+        return date.fromisoformat(s[:10])
+    except (ValueError, TypeError):
+        return None
+
+
+def _business_days_between(d1: date, d2: date) -> int:
+    """d1 距 d2 的工作日数（自然差内的 bdate_range.size - 1）。"""
+    if d1 >= d2:
+        return 0
+    return max(0, len(pd.bdate_range(d1, d2)) - 1)
+
+
+def _is_recent_candidate(
+    cand: BuyPointCandidateDTO, as_of_date: date, threshold_business_days: int
+) -> bool:
+    """recency 判定：候选最近一次状态变更距 as_of ≤ threshold 个交易日。"""
+    last_change = _parse_iso_date(cand.last_state_change_date) or _parse_iso_date(
+        cand.opened_date
+    )
+    if last_change is None:
+        # 无日期信息: 保守起见当历史结构保留, 避免误把无时间锚的候选当近期
+        return False
+    return _business_days_between(last_change, as_of_date) <= threshold_business_days
+
+
+def _to_historical_structure(
+    cand: BuyPointCandidateDTO, as_of_date: date
+) -> HistoricalStructureDTO:
+    last_change_iso = cand.last_state_change_date or cand.opened_date or ""
+    last_change = _parse_iso_date(last_change_iso) or as_of_date
+    days_since = max(0, (as_of_date - last_change).days)
+    return HistoricalStructureDTO(
+        rule_id=cand.rule_id,
+        lifecycle_id=cand.lifecycle_id,
+        state=cand.state,
+        state_cn=cand.state_cn,
+        scenario_cn=cand.scenario_cn,
+        direction=cand.direction,
+        opened_date=cand.opened_date,
+        last_state_change_date=cand.last_state_change_date,
+        days_since=days_since,
+        key_price=cand.key_price,
+        note=(
+            f"{days_since} 天前 {cand.state_cn}，距 as_of 超过 "
+            f"{RECENCY_BUSINESS_DAYS} 个交易日，仅作文案历史参考"
+        ),
+    )
+
+
+def _build_resonance_groups(
+    candidates: list[BuyPointCandidateDTO],
+    tolerance_pct: float,
+) -> tuple[list[ResonanceGroupDTO], list[BuyPointCandidateDTO]]:
+    """按 key_price 在 ±tolerance_pct 范围内合并多个 rule 为共振组。
+
+    返回: (共振组列表, 不在共振组里的独立候选)
+    - 无 key_price 的候选直接进 ungrouped
+    - 单个候选不被合并 (阈值是 ≥2)
+    - 多个 rule_id 在相近价位才合并, 同一 rule 重复不合并 (按 rule_id 去重)
+    """
+    with_price = [c for c in candidates if c.key_price is not None and c.key_price > 0]
+    no_price = [c for c in candidates if c.key_price is None or c.key_price <= 0]
+
+    with_price_sorted = sorted(with_price, key=lambda c: (c.direction, c.key_price))
+    groups: list[ResonanceGroupDTO] = []
+    used: set[int] = set()
+    n = len(with_price_sorted)
+    i = 0
+    while i < n:
+        if i in used:
+            i += 1
+            continue
+        run = [i]
+        j = i + 1
+        while j < n and j not in used:
+            prev = with_price_sorted[run[-1]]
+            cur = with_price_sorted[j]
+            # 同方向 (long/short 各自一组, 反方向是「同价位反对」不是共振) +
+            # 价位容差内 才合并
+            if (
+                prev.direction == cur.direction
+                and prev.key_price > 0
+                and abs(cur.key_price / prev.key_price - 1.0) <= tolerance_pct
+            ):
+                run.append(j)
+                j += 1
+            else:
+                break
+        # 共振: 同方向 + ≥2 个不同 (rule_id, scenario_cn) 才合并
+        run_candidates = [with_price_sorted[k] for k in run]
+        unique_keys = {(c.rule_id, c.scenario_cn) for c in run_candidates}
+        if len(unique_keys) >= 2:
+            levels = sorted(c.key_price for c in run_candidates)
+            median = levels[len(levels) // 2]
+            rule_ids = sorted({c.rule_id for c in run_candidates if c.rule_id})
+            groups.append(
+                ResonanceGroupDTO(
+                    level=median,
+                    tolerance_pct=tolerance_pct,
+                    rule_ids=rule_ids,
+                    candidates=run_candidates,
+                )
+            )
+            for k in run:
+                used.add(k)
+        i = j
+
+    ungrouped = (
+        [with_price_sorted[k] for k in range(n) if k not in used] + no_price
+    )
+    return groups, ungrouped
+
+
 def _candidate_from_scenario(scenario: Any) -> BuyPointCandidateDTO:
     rule_id = scenario.scenario_id
     event = getattr(scenario, "supporting_event", None)
     if event is not None and getattr(event, "rule_id", None):
         rule_id = event.rule_id
+    trigger_date = getattr(scenario, "trigger_date", None)
+    anchor_date = getattr(scenario, "anchor_date", None)
     return BuyPointCandidateDTO(
         scenario_id=scenario.scenario_id,
         scenario_cn=scenario.scenario_cn,
@@ -134,17 +263,30 @@ def _candidate_from_scenario(scenario: Any) -> BuyPointCandidateDTO:
         reward_risk_computable=scenario.reward_risk_computable,
         next_step_cn=scenario.next_step_cn,
         caveat_cn=scenario.caveat_cn,
+        last_state_change_date=trigger_date or None,
+        opened_date=anchor_date or None,
     )
 
 
 def _candidate_from_opportunity(opp: Any) -> BuyPointCandidateDTO:
-    """分层机会（底部结构/回撤）-> 候选。失效价取结构 C 点（系统已算）。"""
+    """分层机会（底部结构/回撤）-> 候选。失效价取结构 C 点（系统已算）。
+
+    状态时间锚: TradeOpportunityDTO 没有 trigger_date, 用 last_upgraded_on
+    (最近一次状态升级日) 作为「最近一次状态变更」近似; opened_on 作为
+    lifecycle 首次锚定日。
+    """
     event = getattr(opp, "supporting_event", None)
     rule_id = getattr(event, "rule_id", None) if event else None
     structure = getattr(opp, "structure", None)
     scenario_cn = "底部结构条件化做多"
     if structure is not None:
         scenario_cn = f"{structure.structure_type_cn}·条件化做多"
+    trigger_date = (
+        getattr(opp, "trigger_date", None)
+        or getattr(opp, "last_upgraded_on", None)
+        or getattr(opp, "last_trigger_date", None)
+    )
+    anchor_date = getattr(opp, "anchor_date", None) or getattr(opp, "opened_on", None)
     return BuyPointCandidateDTO(
         scenario_id=rule_id or "trade_opportunity",
         scenario_cn=scenario_cn,
@@ -166,6 +308,8 @@ def _candidate_from_opportunity(opp: Any) -> BuyPointCandidateDTO:
         reward_risk_computable=getattr(opp, "reward_risk_computable", False),
         next_step_cn=opp.next_step_cn,
         caveat_cn=getattr(opp, "caveat_cn", ""),
+        last_state_change_date=trigger_date or None,
+        opened_date=anchor_date or None,
     )
 
 
@@ -199,35 +343,74 @@ def _review_from_assessment(
     display_name: str = "",
     active_plan_ids: tuple[str, ...] = (),
 ) -> BuyPointReviewDTO:
-    """从 AssessmentDTO 汇总买点审阅（测试入口，避开完整 analyze 管线）。"""
-    candidates: list[BuyPointCandidateDTO] = [
+    """从 AssessmentDTO 汇总买点审阅（测试入口，避开完整 analyze 管线）。
+
+    三档拆分:
+    - candidates  : 近期 (≤RECENCY_BUSINESS_DAYS 个交易日) 的独立候选
+    - resonance_groups: 近期内 key_price 落在 ±RESONANCE_TOLERANCE_PCT 内, ≥2 个
+                       不同 rule_id 共同认可的共振候选
+    - historical_structures: 过期结构, 仅作文案历史参考, 不计入 verdict
+    """
+    raw: list[BuyPointCandidateDTO] = [
         _candidate_from_scenario(s) for s in assessment.conditional_scenarios
     ]
     for opp in (*assessment.trade_opportunities, *assessment.pullback_opportunities):
-        candidates.append(_candidate_from_opportunity(opp))
-    # 只讲活着的候选；已失效的不构成买点
-    candidates = [c for c in candidates if c.state != "invalidated"]
+        raw.append(_candidate_from_opportunity(opp))
+    # 只讲活着的候选；已失效 / 已减弱的不构成买点, 静默丢弃
+    raw = [c for c in raw if c.state not in ("invalidated", "weakened")]
 
+    as_of_date = _parse_iso_date(assessment.as_of) or date.today()
+
+    # 1. recency 过滤: 拆 recent / historical
+    # - 有日期且 ≤ 阈值: recent
+    # - 有日期且 > 阈值: historical (用户可看历史结构, 但不构成当下买点)
+    # - 无日期 (trigger_date & opened_date 都为空): 静默丢弃, 避免在 historical
+    #   里出现 days_since=0 的误导项
+    recent: list[BuyPointCandidateDTO] = []
+    historical: list[HistoricalStructureDTO] = []
+    for c in raw:
+        last_change_iso = c.last_state_change_date or c.opened_date
+        if not last_change_iso:
+            # 无时间锚: 既不展示, 也不计入 historical, 静默丢弃
+            continue
+        if _is_recent_candidate(c, as_of_date, RECENCY_BUSINESS_DAYS):
+            recent.append(c)
+        else:
+            historical.append(_to_historical_structure(c, as_of_date))
+
+    # 2. 共振合并: 在 recent 内按 key_price ±tolerance 合并
+    resonance_groups, ungrouped = _build_resonance_groups(
+        recent, RESONANCE_TOLERANCE_PCT
+    )
+
+    # 3. verdict 用全量 recent (含共振), 不只是 ungrouped
     tradability = assessment.tradability
     tradable = bool(tradability.tradable) if tradability else False
-    confirmed = [c for c in candidates if c.state == "confirmed"]
+    confirmed = [c for c in recent if c.state == "confirmed"]
 
     if confirmed and tradable:
         verdict = VERDICT_ACTIONABLE
-    elif candidates and not tradable:
+    elif recent and not tradable:
         verdict = VERDICT_BLOCKED
-    elif candidates:
+    elif recent:
         verdict = VERDICT_WAITING
     else:
         verdict = VERDICT_NONE
 
     # 排序：confirmed 优先，其次 R/R 可计算且更高者靠前（只排序，不改数值）
-    candidates.sort(
+    ungrouped.sort(
         key=lambda c: (
             0 if c.state == "confirmed" else 1,
             -(c.reward_risk_ratio or 0.0),
         )
     )
+    for g in resonance_groups:
+        g.candidates.sort(
+            key=lambda c: (
+                0 if c.state == "confirmed" else 1,
+                -(c.reward_risk_ratio or 0.0),
+            )
+        )
 
     suggested: SuggestedPlanDTO | None = None
     if verdict == VERDICT_ACTIONABLE:
@@ -245,26 +428,52 @@ def _review_from_assessment(
             reward_risk_at_plan=best.reward_risk_ratio,
         )
 
-    watch = _watch_conditions(candidates) if verdict != VERDICT_ACTIONABLE else []
+    # watch_conditions 用 recent (含共振), 不再混入过期结构
+    watch = _watch_conditions(recent) if verdict != VERDICT_ACTIONABLE else []
+
+    # 4. summary 反映新结构
+    parts: list[str] = []
+    n_ungrouped = len(ungrouped)
+    n_resonance = len(resonance_groups)
+    n_resonance_candidates = sum(len(g.candidates) for g in resonance_groups)
+    n_total_recent = n_ungrouped + n_resonance_candidates
 
     if verdict == VERDICT_ACTIONABLE:
-        summary = (
+        parts.append(
             f"{len(confirmed)} 个场景条件已成立，可交易性未阻断；"
             "下一根 K 线开盘为最早可执行时点（参考，非指令）。"
         )
     elif verdict == VERDICT_BLOCKED:
         reasons = "、".join(tradability.blocking_reasons) if tradability else ""
-        summary = (
-            f"存在 {len(candidates)} 个场景，但环境阻断：{reasons or '见门禁明细'}"
-            "（规格 §13，按规则不开新仓）。"
+        parts.append(
+            f"近 {RECENCY_BUSINESS_DAYS} 个交易日有 {n_total_recent} 个场景，环境阻断："
+            f"{reasons or '见门禁明细'}（规格 §13，按规则不开新仓）。"
         )
     elif verdict == VERDICT_WAITING:
-        summary = (
-            f"{len(candidates)} 个场景在观察中，尚有条件未成立；"
-            "下列条件成立即构成系统定义的买点。"
+        parts.append(
+            f"近 {RECENCY_BUSINESS_DAYS} 个交易日有 {n_total_recent} 个场景在观察中，"
+            "尚有条件未成立；下列条件成立即构成系统定义的买点。"
         )
     else:
-        summary = "当前没有任何活跃的条件化场景，无买点可言。"
+        # 无近期场景
+        if historical:
+            parts.append(
+                f"近 {RECENCY_BUSINESS_DAYS} 个交易日无新买点；"
+                f"另有 {len(historical)} 个历史结构（见卡片底部），"
+                "仅作文案参考，不构成当下买点。"
+            )
+        else:
+            parts.append("当前没有任何活跃的条件化场景，无买点可言。")
+
+    if n_resonance:
+        parts.append(
+            f"{n_resonance} 个价位有 ≥2 个 rule 共振，已合并展示。"
+        )
+    if historical:
+        parts.append(
+            f"{len(historical)} 个结构已超出 recency 窗口，在卡片底部单列。"
+        )
+    summary = " ".join(parts)
 
     return BuyPointReviewDTO(
         symbol=symbol,
@@ -275,7 +484,9 @@ def _review_from_assessment(
         verdict_cn=_VERDICT_CN[verdict],
         summary_cn=summary,
         tradability=tradability,
-        candidates=candidates,
+        candidates=ungrouped,
+        resonance_groups=resonance_groups,
+        historical_structures=historical,
         watch_conditions=watch,
         suggested_plan=suggested,
         has_active_plan=bool(active_plan_ids),
@@ -354,7 +565,10 @@ def scan_opportunities(
             continue
         if only_with_candidates and review.verdict == VERDICT_NONE:
             continue
+        # best 候选: ungrouped 优先, 再回退到第一个共振组的首个候选
         best = review.candidates[0] if review.candidates else None
+        if best is None and review.resonance_groups:
+            best = review.resonance_groups[0].candidates[0]
         missing = "；".join(w.text_cn for w in review.watch_conditions[:2])
         items.append(ScanItemDTO(
             symbol=symbol,

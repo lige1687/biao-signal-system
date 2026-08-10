@@ -21,6 +21,8 @@ from lei_signal.plans.models import (
     PLAN_KIND_ENTRY,
     PLAN_KIND_HOLDING_WATCH,
     PLAN_KINDS,
+    PLAN_SOURCES,
+    PLAN_SOURCE_USER,
     PLAYBOOK_FIELDS,
     REQUIRED_FOR_HOLDING_WATCH,
     VERDICT_SNAPSHOT,
@@ -45,6 +47,18 @@ _HOLDING_WATCH_EXTRA_TRANSITIONS: dict[str, frozenset[str]] = {
 }
 
 _FREEZABLE_FIELDS = ("invalidation_price", *PLAYBOOK_FIELDS)
+
+#: draft 阶段可编辑字段白名单（update_draft 只动这些，state/plan_id 等不可改）。
+#: draft 不走 drift：尚未确认生效，无既定失效价可漂移；confirm 后的改动才走 revise。
+_EDITABLE_DRAFT_FIELDS: frozenset[str] = frozenset({
+    "module", "direction", "valid_until", "reason",
+    "entry_rule_id", "entry_lifecycle_id", "entry_trigger_cn",
+    "entry_price_ref", "invalidation_price", "target_b_price",
+    "target_b_source", "reward_risk_at_plan",
+    "thesis_cn", "invalidation_criteria_cn", "drawdown_playbook_cn",
+    "take_profit_plan_cn", "stop_plan_cn",
+    "take_profit_price", "stop_price", "watch_signal_rule_ids",
+})
 
 
 def _split_rule_ids(raw: str | None) -> tuple[str, ...]:
@@ -106,6 +120,7 @@ def _row_to_plan(row: sqlite3.Row) -> TradePlan:
         take_profit_price=row["take_profit_price"],
         stop_price=row["stop_price"],
         watch_signal_rule_ids=_split_rule_ids(row["watch_signal_rule_ids"]),
+        source=row["source"],
         created_at=row["created_at"],
         updated_at=row["updated_at"],
     )
@@ -186,12 +201,15 @@ def create_plan(
     stop_price: float | None = None,
     watch_signal_rule_ids: tuple[str, ...] | list[str] | None = None,
     plan_id: str | None = None,
+    source: str = PLAN_SOURCE_USER,
 ) -> TradePlan:
     """创建 draft 计划。draft 阶段允许五项预案/valid_until/reason 为空。"""
     if direction not in ("long", "short"):
         raise ValueError(f"direction 必须为 long/short，得到 {direction}")
     if plan_kind not in PLAN_KINDS:
         raise ValueError(f"plan_kind 必须为 {PLAN_KINDS} 之一，得到 {plan_kind}")
+    if source not in PLAN_SOURCES:
+        raise ValueError(f"source 必须为 {PLAN_SOURCES} 之一，得到 {source}")
     created_at = _now()
     plan_id = plan_id or _gen_plan_id(symbol, created_at)
     conn.execute(
@@ -202,8 +220,8 @@ def create_plan(
             target_b_source, reward_risk_at_plan, valid_until, state, ruleset_version,
             reason, thesis_cn, invalidation_criteria_cn, drawdown_playbook_cn,
             take_profit_plan_cn, stop_plan_cn, plan_kind, take_profit_price,
-            stop_price, watch_signal_rule_ids, created_at, updated_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            stop_price, watch_signal_rule_ids, source, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
             plan_id, symbol, module, direction, entry_rule_id, entry_lifecycle_id,
@@ -211,7 +229,7 @@ def create_plan(
             target_b_source, reward_risk_at_plan, valid_until, PLAN_DRAFT, ruleset_version,
             reason, thesis_cn, invalidation_criteria_cn, drawdown_playbook_cn,
             take_profit_plan_cn, stop_plan_cn, plan_kind, take_profit_price,
-            stop_price, _join_rule_ids(watch_signal_rule_ids), created_at, created_at,
+            stop_price, _join_rule_ids(watch_signal_rule_ids), source, created_at, created_at,
         ),
     )
     # revision_no=0 创建快照：冻结原始失效价与五项预案
@@ -291,6 +309,41 @@ def confirm_holding_watch(
     conn.execute(
         "UPDATE trade_plans SET entered_on = ?, updated_at = ? WHERE plan_id = ?",
         (entered_on, _now(), plan_id),
+    )
+    conn.commit()
+    return get_plan(conn, plan_id)  # type: ignore[return-value]
+
+
+def update_draft(
+    conn: sqlite3.Connection, plan_id: str, updates: dict[str, object]
+) -> TradePlan:
+    """编辑 draft 计划当前值（只动 ``_EDITABLE_DRAFT_FIELDS`` 内字段）。
+
+    draft 尚未确认生效，无既定失效价可漂移，故不走 drift/revision；只 UPDATE
+    ``trade_plans`` 当前值。revision_no=0 快照不动（见模块不变量）。非 draft -> ValueError。
+    """
+    plan = get_plan(conn, plan_id)
+    if plan is None:
+        raise KeyError(f"计划不存在: {plan_id}")
+    if plan.state != PLAN_DRAFT:
+        raise ValueError(f"只有 draft 可编辑，当前 state={plan.state}")
+    safe: dict[str, object] = {
+        k: v for k, v in updates.items() if k in _EDITABLE_DRAFT_FIELDS
+    }
+    if "direction" in safe and safe["direction"] not in ("long", "short"):
+        raise ValueError(f"direction 必须为 long/short，得到 {safe['direction']}")
+    if "watch_signal_rule_ids" in safe:
+        ids = safe["watch_signal_rule_ids"]
+        safe["watch_signal_rule_ids"] = _join_rule_ids(
+            ids if isinstance(ids, (list, tuple)) else ()
+        )
+    if not safe:
+        return plan
+    sets = ", ".join(f"{k} = ?" for k in safe)
+    params: list[object] = [*safe.values(), _now(), plan_id]
+    conn.execute(
+        f"UPDATE trade_plans SET {sets}, updated_at = ? WHERE plan_id = ?",
+        params,
     )
     conn.commit()
     return get_plan(conn, plan_id)  # type: ignore[return-value]

@@ -597,6 +597,7 @@ class PlanDTO(BaseModel):
     take_profit_price: float | None = None
     stop_price: float | None = None
     watch_signal_rule_ids: list[str] = []
+    source: str = "user"
     created_at: str = ""
     updated_at: str = ""
 
@@ -647,6 +648,44 @@ class BuyPointCandidateDTO(BaseModel):
     next_step_cn: str = ""
     caveat_cn: str = ""
     research_proxy: bool = True
+    #: 该候选最近一次状态变更日 (= 触发日 / 失效日), 供 recency 过滤用
+    last_state_change_date: str | None = None
+    #: lifecycle 首次锚定日 (= B1 观察日), 仅作文案历史参考
+    opened_date: str | None = None
+
+
+class ResonanceGroupDTO(BaseModel):
+    """同一价位 ±tolerance_pct 范围内多个 rule_id 共同认可的共振买点。
+
+    用户场景: 多个独立结构在相近价位给出买点, 单独展示容易让人疑惑;
+    合并为「共振」一行, 列出所有 rule_id 及其依据, 信息密度更清晰。
+    """
+
+    level: float                        # 共振价位 (中位数 key_price)
+    tolerance_pct: float                # 实际使用的容差
+    rule_ids: list[str] = []            # 共振的 rule_id 列表 (去重)
+    candidates: list[BuyPointCandidateDTO] = []  # 组内所有候选
+
+
+class HistoricalStructureDTO(BaseModel):
+    """被 recency 过滤掉的过期结构。不当买点候选, 仅作文案历史参考。
+
+    设计动机: B1 观察/确认事件可能来自几周/几月/几年前, lifecycle 还活着但
+    不再属于「最近 N 个交易日」的买点范畴; 静默丢掉会让用户疑惑, 显式列出
+    又会污染买点卡片。折中: 单独移入 historical_structures, 默认折叠。
+    """
+
+    rule_id: str | None = None
+    lifecycle_id: str | None = None
+    state: str
+    state_cn: str
+    scenario_cn: str
+    direction: str = "long"
+    opened_date: str | None = None
+    last_state_change_date: str | None = None
+    days_since: int = 0                 # 距 as_of 的日历天数
+    key_price: float | None = None
+    note: str = ""
 
 
 class WatchConditionDTO(BaseModel):
@@ -696,7 +735,12 @@ class BuyPointReviewDTO(BaseModel):
     verdict_cn: str
     summary_cn: str
     tradability: TradabilityDTO | None = None
+    #: 近 N 个交易日的独立候选（不在任何共振组里、且非历史结构）
     candidates: list[BuyPointCandidateDTO] = []
+    #: 近 N 个交易日内, 多个 rule 在相近价位共同认可的共振候选
+    resonance_groups: list[ResonanceGroupDTO] = []
+    #: 被 recency 过滤掉的过期结构, 默认折叠, 不计入 verdict
+    historical_structures: list[HistoricalStructureDTO] = []
     #: verdict != actionable 时给出：到什么情况才算买点
     watch_conditions: list[WatchConditionDTO] = []
     #: 仅 verdict=actionable 时给出
@@ -763,3 +807,151 @@ class PlansSummaryDTO(BaseModel):
 
     open_actions: int
     active_plans: int
+
+
+class ConformanceReportDTO(BaseModel):
+    """草稿符合性核对结果。can_confirm = 无硬项；issue 形态同 PlanAlertDTO。
+
+    hard_issues 阻断确认（confirm 端点据此 422），soft_issues 仅提醒。
+    system_detected = 系统实际检测到的 module/direction/场景，供人对照。
+    """
+
+    can_confirm: bool
+    hard_issues: list[PlanAlertDTO] = []
+    soft_issues: list[PlanAlertDTO] = []
+    system_detected: dict[str, Any] = {}
+
+
+class DraftUpdateRequest(BaseModel):
+    """编辑 draft 字段（仅 draft 态可改，无 drift）。
+
+    全字段可选；路由用 ``model_dump(exclude_unset=True)`` 取仅传入的字段，
+    故「未传 = 不改」「传 null = 清空」语义清晰。
+    """
+
+    module: str | None = None
+    direction: str | None = None
+    valid_until: str | None = None
+    reason: str | None = None
+    entry_rule_id: str | None = None
+    entry_lifecycle_id: str | None = None
+    entry_trigger_cn: str | None = None
+    entry_price_ref: float | None = None
+    invalidation_price: float | None = None
+    target_b_price: float | None = None
+    target_b_source: str | None = None
+    reward_risk_at_plan: float | None = None
+    thesis_cn: str | None = None
+    invalidation_criteria_cn: str | None = None
+    drawdown_playbook_cn: str | None = None
+    take_profit_plan_cn: str | None = None
+    stop_plan_cn: str | None = None
+    take_profit_price: float | None = None
+    stop_price: float | None = None
+    watch_signal_rule_ids: list[str] | None = None
+
+
+# ========================================================================
+# Step 2: 提醒订阅 (watch_subscription)
+# ========================================================================
+
+
+class WatchSubscribeRequest(BaseModel):
+    """POST /api/watch/subscribe 请求体.
+
+    字段名与 WatchConditionDTO 对齐: 用户从 review 拉一条 watch_condition
+    出来, 把 kind/price/text_cn/as_signal_rule_ids 传过来, 加上该
+    candidate 的 direction/module/rule_id.
+    """
+
+    symbol: str
+    direction: str                                  # long/short
+    module: str                                     # A/B/C/D
+    watch_kind: str                                 # price | state
+    watch_text_cn: str
+    level: float | None = None
+    source_candidate_id: str | None = None
+    source_rule_id: str | None = None
+    as_signal_rule_ids: list[str] = []
+
+
+class WatchDismissRequest(BaseModel):
+    """POST /api/watch/{id}/dismiss 请求体."""
+
+    reason: str
+
+
+class WatchSubscriptionDTO(BaseModel):
+    watch_id: str
+    symbol: str
+    direction: str
+    module: str
+    source_candidate_id: str | None = None
+    source_rule_id: str | None = None
+    level: float | None = None
+    watch_kind: str
+    watch_text_cn: str
+    as_signal_rule_ids: list[str] = []
+    state: str
+    created_at: str
+    last_checked_at: str | None = None
+    triggered_at: str | None = None
+    triggered_price: float | None = None
+    triggered_reason_cn: str | None = None
+    promoted_plan_id: str | None = None
+    dismissed_at: str | None = None
+    dismissed_reason: str | None = None
+
+
+class CheckReportDTO(BaseModel):
+    """POST /api/watch/check-now 响应体."""
+
+    total_active: int
+    triggered_count: int
+    triggered_watch_ids: list[str] = []
+    skipped: list[dict] = []      # [{watch_id, reason}]
+    checked_at: str
+
+
+# ========================================================================
+# Step 3: 从 watch 落计划 (watch -> plan)
+# ========================================================================
+
+
+class WatchPromoteRequest(BaseModel):
+    """POST /api/watch/{watch_id}/promote 请求体.
+
+    字段语义与 CreatePlanRequest 一致 -- 用户在 [据此建计划] 弹窗里填的
+    五项预案 + 止损/止盈价/有效期等. 必填项与 armed 完全相同
+    (五项预案 + reason + valid_until), 服务端不二次校验 -- 委托给 confirm_plan.
+
+    invalidation_price / target_b_price 默认从 watch.level 预填, 用户可改.
+    """
+
+    module: str | None = None             # 缺省从 watch 取
+    direction: str | None = None          # 缺省从 watch 取
+    valid_until: str = ""                 # 必填 (armed)
+    reason: str = ""                      # 必填 (armed)
+    entry_rule_id: str | None = None
+    entry_lifecycle_id: str | None = None
+    entry_trigger_cn: str | None = None
+    entry_price_ref: float | None = None
+    invalidation_price: float | None = None
+    target_b_price: float | None = None
+    target_b_source: str | None = None
+    reward_risk_at_plan: float | None = None
+    thesis_cn: str = ""                   # 必填
+    invalidation_criteria_cn: str = ""   # 必填
+    drawdown_playbook_cn: str = ""       # 必填
+    take_profit_plan_cn: str = ""        # 必填
+    stop_plan_cn: str = ""               # 必填
+    watch_signal_rule_ids: list[str] | None = None
+    #: 是否 confirm 后立即 entered (默认 True -- watch_promoted 已经是触发确认)
+    auto_enter: bool = True
+
+
+class WatchPromoteResponse(BaseModel):
+    """POST /api/watch/{watch_id}/promote 响应体."""
+
+    plan: "PlanDTO"
+    watch: "WatchSubscriptionDTO"

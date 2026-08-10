@@ -40,6 +40,8 @@ INVALIDATION_BREACHED = "INVALIDATION_BREACHED"
 EXIT_TRIGGERED = "EXIT_TRIGGERED"
 TAKE_PROFIT_REACHED = "TAKE_PROFIT_REACHED"
 STOP_PRICE_BREACHED = "STOP_PRICE_BREACHED"
+TAKE_PROFIT_APPROACHING = "TAKE_PROFIT_APPROACHING"
+STOP_PRICE_APPROACHING = "STOP_PRICE_APPROACHING"
 SIGNAL_WATCH_TRIGGERED = "SIGNAL_WATCH_TRIGGERED"
 PLAN_EXPIRING = "PLAN_EXPIRING"
 PLAN_STALE_RULESET = "PLAN_STALE_RULESET"
@@ -90,6 +92,7 @@ class MonitorContext:
     current_close: float | None
     ema20: float | None
     tradability_tradable: bool
+    atr: float | None = None            # atr14，用于接近预警（None 则跳过）
     tradability_blocking_reasons: tuple[str, ...] = ()
     ruleset_version: str = ""
     opportunities: tuple[OpportunityRef, ...] = ()
@@ -290,6 +293,11 @@ def _holding_watch_alerts(
     """
     close = ctx.current_close
     is_long = plan.direction == "long"
+    atr = ctx.atr
+    # 接近预警带宽（ATR 倍数）；atr 不可用时静默跳过，不阻断。源：规则账本，不写死。
+    # proximity_atr<=0 时 proximity_atr*atr<=0，而未击穿的 distance>0，
+    # distance<=band 必不成立，故无需额外正负守卫--非正配置天然不报接近预警。
+    proximity_atr = float(get_rule(HOLDING_WATCH_RULE).param("proximity_atr", 1.0))
 
     if close is not None and plan.take_profit_price is not None:
         reached = (
@@ -305,6 +313,22 @@ def _holding_watch_alerts(
                 action_kind="EXIT",
                 next_step_cn="已达到你设定的止盈价，按你写的止盈预案处理（参考，非指令）",
             ))
+        elif atr is not None:
+            # 接近预警：未达到，但已在 proximity_atr*atr 带宽内。
+            distance = abs(close - plan.take_profit_price)
+            if distance <= proximity_atr * atr:
+                alerts.append(_alert(
+                    code=TAKE_PROFIT_APPROACHING, severity=SEVERITY_REMIND,
+                    rule_id=HOLDING_WATCH_RULE, ctx=ctx, actionable_from=actionable_from,
+                    evidence={"close": close, "take_profit_price": plan.take_profit_price,
+                              "direction": plan.direction, "atr": atr,
+                              "distance": distance, "distance_atr": distance / atr},
+                    caveat_cn="持仓盯盘触发价由人自填；接近判定为研究代理",
+                    next_step_cn=(
+                        f"价格距止盈价约 {distance:.2f}（{distance / atr:.2f} ATR），"
+                        "临近你设定的止盈位，留意止盈预案（参考，非指令）"
+                    ),
+                ))
 
     if close is not None and plan.stop_price is not None:
         breached = close <= plan.stop_price if is_long else close >= plan.stop_price
@@ -322,6 +346,25 @@ def _holding_watch_alerts(
                 action_kind="EXIT",
                 next_step_cn="已击穿你设定的止损价，按原定止损预案退出，不得事后下移止损",
             ))
+        elif atr is not None:
+            distance = abs(close - plan.stop_price)
+            if distance <= proximity_atr * atr:
+                alerts.append(_alert(
+                    code=STOP_PRICE_APPROACHING, severity=SEVERITY_REMIND,
+                    rule_id=HOLDING_WATCH_RULE, ctx=ctx, actionable_from=actionable_from,
+                    evidence={"close": close, "stop_price": plan.stop_price,
+                              "direction": plan.direction, "atr": atr,
+                              "distance": distance, "distance_atr": distance / atr},
+                    principle_source="规格 §14 原文",
+                    caveat_cn=(
+                        "原则出自规格§14（不得在亏损后移动原定失效价）；"
+                        "触发价由人自填、接近判定为研究代理"
+                    ),
+                    next_step_cn=(
+                        f"价格距止损价约 {distance:.2f}（{distance / atr:.2f} ATR），"
+                        "临近你设定的止损位，按原定止损预案准备，不得事后下移止损"
+                    ),
+                ))
 
     if plan.watch_signal_rule_ids:
         hit = [r for r in plan.watch_signal_rule_ids if r in ctx.new_event_rule_ids]
@@ -473,7 +516,9 @@ __all__ = [
     "RESOLVABLE_PATHS",
     "RR_RULE",
     "SIGNAL_WATCH_TRIGGERED",
+    "STOP_PRICE_APPROACHING",
     "STOP_PRICE_BREACHED",
+    "TAKE_PROFIT_APPROACHING",
     "TAKE_PROFIT_REACHED",
     "TRADABILITY_RULE",
     "evaluate_plan",

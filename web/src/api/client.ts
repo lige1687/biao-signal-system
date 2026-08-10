@@ -3,21 +3,30 @@ import type {
   BreadthHistoryResponse,
   BuyPointChatReply,
   BuyPointReview,
+  CheckReport,
+  ConformanceReport,
   CreateHoldingWatchPayload,
   CreatePlanPayload,
   DashboardResponse,
+  DraftUpdatePayload,
   EventItem,
   ForwardStatsResponse,
+  FundamentalsOverview,
   GlobalStripResponse,
+  IndustryFlowResponse,
   MarketContextFull,
   MarketDataStatus,
   Plan,
   PlanAlert,
   PlanChatReply,
   PlansSummary,
+  PromoteWatchRequest,
+  PromoteWatchResponse,
   ResolveResult,
   ScanResponse,
+  SubscribeWatchRequest,
   SymbolDetail,
+  WatchSubscription,
   WatchlistGroup,
   WatchlistItem,
 } from "../types";
@@ -31,21 +40,37 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   });
   if (!resp.ok) {
     let detail = `HTTP ${resp.status}`;
+    let body: unknown = null;
     try {
-      const body = await resp.json();
-      if (body?.detail) detail = String(body.detail);
+      body = await resp.json();
+      const d = (body as { detail?: unknown })?.detail;
+      if (d != null) {
+        // detail 可能是字符串（普通错误）或 {message, hard_issues}（confirm 硬阻断）。
+        detail =
+          typeof d === "string"
+            ? d
+            : (d as { message?: string })?.message ?? JSON.stringify(d);
+      }
     } catch {
       /* 保持默认错误 */
     }
-    throw new Error(detail);
+    const err = new Error(detail);
+    // 保留完整响应体，供调用方读取结构化错误（如 422 的 hard_issues）。
+    (err as Error & { body?: unknown }).body = body;
+    throw err;
   }
   if (resp.status === 204) return undefined as T;
   return (await resp.json()) as T;
 }
 
 export const api = {
-  dashboard: (refresh = false) =>
-    request<DashboardResponse>(`/dashboard/cards${refresh ? "?refresh=true" : ""}`),
+  dashboard: (group?: "index" | "watchlist", refresh = false) => {
+    const params = new URLSearchParams();
+    if (group) params.set("group", group);
+    if (refresh) params.set("refresh", "true");
+    const qs = params.toString();
+    return request<DashboardResponse>(`/dashboard/cards${qs ? `?${qs}` : ""}`);
+  },
   refresh: (symbols?: string[]) =>
     request<DashboardResponse>(`/refresh`, {
       method: "POST",
@@ -80,6 +105,7 @@ export const api = {
     request<{
       sectors: { code: string; name: string; symbol: string }[];
       indices: { code: string; name: string; symbol: string }[];
+      us_etfs: { code: string; name: string; symbol: string }[];
     }>(`/sectors`),
   events: (
     symbol: string,
@@ -141,6 +167,15 @@ export const api = {
     }),
   confirmPlan: (planId: string) =>
     request<Plan>(`/plans/${encodeURIComponent(planId)}/confirm`, { method: "POST" }),
+  conformance: (planId: string) =>
+    request<ConformanceReport>(
+      `/plans/${encodeURIComponent(planId)}/conformance`,
+    ),
+  updateDraft: (planId: string, body: DraftUpdatePayload) =>
+    request<Plan>(`/plans/${encodeURIComponent(planId)}/draft`, {
+      method: "PUT",
+      body: JSON.stringify(body),
+    }),
   planAlerts: (planId: string) =>
     request<PlanAlert[]>(`/plans/${encodeURIComponent(planId)}/alerts`),
   planActions: (planId: string, state?: string) => {
@@ -184,5 +219,42 @@ export const api = {
     request<BuyPointChatReply>(
       `/symbols/${encodeURIComponent(symbol)}/buy-point-chat`,
       { method: "POST", body: JSON.stringify({ message }) },
+    ),
+  // ---- 提醒订阅 (Step 2) ----
+  subscribeWatch: (body: SubscribeWatchRequest) =>
+    request<WatchSubscription>("/watch/subscribe", {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  listWatches: (params: { state?: string; symbol?: string } = {}) => {
+    const q = new URLSearchParams();
+    if (params.state) q.set("state", params.state);
+    if (params.symbol) q.set("symbol", params.symbol);
+    const qs = q.toString();
+    return request<WatchSubscription[]>(`/watch${qs ? `?${qs}` : ""}`);
+  },
+  getWatch: (watchId: string) =>
+    request<WatchSubscription>(`/watch/${encodeURIComponent(watchId)}`),
+  dismissWatch: (watchId: string, reason: string) =>
+    request<WatchSubscription>(
+      `/watch/${encodeURIComponent(watchId)}/dismiss`,
+      { method: "POST", body: JSON.stringify({ reason }) },
+    ),
+  promoteWatch: (watchId: string, body: PromoteWatchRequest) =>
+    request<PromoteWatchResponse>(
+      `/watch/${encodeURIComponent(watchId)}/promote`,
+      { method: "POST", body: JSON.stringify(body) },
+    ),
+  triggerWatchCheck: () =>
+    request<CheckReport>("/watch/check-now", { method: "POST" }),
+};
+
+// ---- 基本面参考层 ----
+export const fundamentalsApi = {
+  overview: (refresh = false) =>
+    request<FundamentalsOverview>(`/fundamentals/overview${refresh ? "?refresh=true" : ""}`),
+  industryFlow: (code: string, days = 20) =>
+    request<IndustryFlowResponse>(
+      `/fundamentals/industry/${encodeURIComponent(code)}/flow?days=${days}`,
     ),
 };

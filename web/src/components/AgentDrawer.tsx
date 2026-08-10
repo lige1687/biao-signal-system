@@ -74,7 +74,7 @@ export default function AgentDrawer({
                 <div className={`grounded-tag ${turn.grounded ? "" : "warn"}`}>
                   {turn.grounded
                     ? "已过接地校验（rule_id 白名单 + 禁用词）"
-                    : "已降级为判定层模板（LLM 不可用或未过接地校验）"}
+                    : "已降级为判定层模板（LLM 输出不可用：超时 / 被截断 / 未过接地校验）"}
                 </div>
               )}
             </div>

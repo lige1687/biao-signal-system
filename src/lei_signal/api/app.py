@@ -19,13 +19,16 @@ from lei_signal.api.routes import (
     agent,
     dashboard,
     feishu_webhook,
+    fundamentals,
     opportunities,
     plans,
     symbols,
+    watch_subscriptions,
     watchlist,
 )
 from lei_signal.api.services import AnalysisService
 from lei_signal.env import load_env
+from lei_signal.fundamentals.service import FundamentalsService
 
 # 本地/launchd 运行前把 .env 注入 os.environ（不覆盖已设变量）。
 load_env()
@@ -46,18 +49,21 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
         allow_methods=["GET", "POST", "PATCH", "DELETE"],
         allow_headers=["*"],
     )
-    app.state.analysis_service = analysis_service or AnalysisService()
+    app.state.analysis_service = analysis_service or AnalysisService(max_workers=8)
     app.state.watchlist_db_path = config.sqlite_path()
     app.state.plans_db_path = config.sqlite_path()
     app.state.market_context_service = _build_market_context_service()
+    app.state.fundamentals_service = FundamentalsService()
 
     app.include_router(dashboard.router)
     app.include_router(symbols.router)
     app.include_router(opportunities.router)
     app.include_router(watchlist.router)
+    app.include_router(watch_subscriptions.router)
     app.include_router(plans.router)
     app.include_router(agent.router)
     app.include_router(feishu_webhook.router)
+    app.include_router(fundamentals.router)
 
     @app.get("/api/health")
     def health() -> dict[str, str]:

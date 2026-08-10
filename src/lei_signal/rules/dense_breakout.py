@@ -69,6 +69,28 @@ def _bullish_alignment(row: pd.Series) -> bool:
     )
 
 
+def _recent_dense_upper_bound(
+    frame: pd.DataFrame, lookback_days: int
+) -> float | None:
+    """最近 ``lookback_days`` 个交易日 high 的滚动上沿。
+
+    场景卡层用：突破/观察事件可能来自很早的 B1 生命周期，locked ref
+    (B1 横盘时的上沿) 距当前价位可能已脱节。视觉上「当前密集区上沿」
+    实际是最近区间的最高 high，因此用滚动 max 重算，作为 key_price。
+    阈值不沿用 _consolidating_mask（其 cluster_threshold=0.02 太严，
+    几乎不命中），口径贴近用户看图时的「近期平台顶部」。
+
+    无数据 / 窗口非正 -> None，调用方决定是否回退到 locked ref。
+    """
+    if lookback_days <= 0 or frame.empty or "high" not in frame.columns:
+        return None
+    window = frame.iloc[-lookback_days:] if len(frame) >= lookback_days else frame
+    if window.empty:
+        return None
+    upper = float(window["high"].max())
+    return upper if upper > 0 else None
+
+
 def _consolidating_mask(
     frame: pd.DataFrame,
     cluster_threshold: float,
@@ -274,4 +296,5 @@ __all__ = [
     "SUB_RULE_FAILED",
     "SUB_RULE_WATCH",
     "detect_dense_breakout_events",
+    "_recent_dense_upper_bound",
 ]

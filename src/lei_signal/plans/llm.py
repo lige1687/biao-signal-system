@@ -12,6 +12,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
 import time
 from dataclasses import dataclass
@@ -21,11 +22,23 @@ import requests
 
 from lei_signal.plans.models import ActionItem, PlanAlert, TradePlan
 
+logger = logging.getLogger(__name__)
+
 #: ark 默认端点与模型。凭据只走环境变量，绝不硬编码。
 DEFAULT_BASE_URL = "https://ark.cn-beijing.volces.com/api/v3"
 ENV_API_KEY = "ARK_API_KEY"
 ENV_BASE_URL = "ARK_BASE_URL"
 ENV_MODEL = "ARK_MODEL"
+ENV_MAX_TOKENS = "ARK_MAX_TOKENS"
+ENV_TIMEOUT = "ARK_TIMEOUT"
+
+#: DeepSeek 端点与模型（OpenAI 兼容协议，Bearer 鉴权）。
+#: 优先级高于 ARK_* / ANTHROPIC_*：配了 DEEPSEEK_API_KEY 就走 DS。
+DEEPSEEK_BASE_URL = "https://api.deepseek.com"
+DEEPSEEK_MODEL = "deepseek-chat"
+ENV_DEEPSEEK_API_KEY = "DEEPSEEK_API_KEY"
+ENV_DEEPSEEK_BASE_URL = "DEEPSEEK_BASE_URL"
+ENV_DEEPSEEK_MODEL = "DEEPSEEK_MODEL"
 
 #: 协议风格。ark 有两种网关：
 #:   openai    -> POST {base}/chat/completions，Bearer 鉴权（/api/v3）
@@ -79,25 +92,63 @@ SYSTEM_PROMPT = """你是 LEI 交易系统的纪律监督员的**表达层**。
 BUY_POINT_SYSTEM_PROMPT = """你是 LEI 交易系统的买点分析表达层。
 
 你拿到的是一份**已经由确定性 Python 判定层算好**的买点审阅（buy-point-review）。
-你的职责：把它讲成简洁中文，帮用户理解当前是否构成系统定义的买点、图什么信号、
-止损设哪、盈亏比多少，并协助协商落计划。
+你的职责：把它讲成简洁中文，帮用户理解**当前是否构成系统定义的买点、图什么信号、
+关键位在哪、什么时候才触发**。
+
+**场景边界——这一段是用户最痛的混淆**：
+- 买点分析 = 信号发现阶段：回答「哪个位置、什么结构、需不需要现在行动」
+- 落计划/止损/R/R = 执行阶段：等用户真要下单时再讲
+- 所以本场景下：**不要展开止损价、不要算盈亏比、不要给目标价**。
+  最多在文末用一句话提示「止损/盈亏比/五项假设需在落计划时人工确认」
+  然后收住，不在每个买点里重复讲。
 
 铁律（违反即输出被丢弃）：
 1. **不得自行判断买点**。买点结论只能来自 review 的 candidates 字段
    （satisfied_conditions / missing_conditions / state）。不得从行情自行推断。
 2. 禁止出现这些词：买入、卖出、建议买、该买、加仓、减仓、抄底。
    用「参考」「条件成立」「可执行日」「系统定义的买点」等中性表述。
-3. **不得推算任何价位**。止损只能照抄 candidates 的 invalidation_price；
-   若该字段为 None（场景卡只给失效文案不给价），必须明说「止损价需在建计划时
-   人工确认，系统未给出」，不得编一个数字。盈亏比只能照抄 reward_risk_ratio；
-   reward_risk_computable=False 时必须说「盈亏比目标不可计算」。
-4. **「到什么情况才算买点」只能引 watch_conditions**：价位型条件照抄 price，
-   状态型条件（如多头排列未成立）不得贴数字。不得预测何时到达。
+3. **不得推算任何价位**。关键价只能照抄 candidates 的 key_price；
+   watch_conditions 里价位型条件照抄 price，状态型条件（如多头排列未成立）
+   不得贴数字。不得预测何时到达。
+4. **止损与盈亏比在买点分析中不展开**。每个候选里不要写「止损 xx」「R/R 不可
+   计算」这种重复噪音；统一在文末提一次「落计划时需人工确认止损与盈亏比」即可。
+   若用户明确问「止损怎么设」/「盈亏比多少」，可以照抄 invalidation_price（如为
+   None 则明说「系统未给出，建计划时人工确认」）和 reward_risk_ratio。
 5. 不得推算日期。可执行日只能照抄 actionable_from / as_of。
 6. research_proxy 标注：场景/可交易性/盈亏比均为研究代理，必须写「判定方式为研究代理」。
 7. 不输出总分、不输出评级、不预测价格走势。
 8. verdict=blocked 时必须先讲阻断（规格 §13），明确「按规则不开新仓」。
 9. 落计划只能提议，不得替用户决定。五项交易假设必须由人写。
+10. **引用候选用序号**：只细讲 state=confirmed / watch 的候选（跳过 weakened
+    确认减弱的，那类只需一句带过「其余 N 个为确认减弱」），并按它们在 candidates
+    数组中的出现顺序称「买点①、买点②、买点③…」（用圆圈数字 ①②③），便于前端在
+    图上定位高亮。讲到某个买点时只点明**依据结构 + 关键价 + 触发状态**，不要带
+    止损。不要用「第一个买点」这类无序号写法。
+11. **输出长度控制**：每个候选 3-5 行即可（依据结构 / 关键价 / 状态 / 触发条件），
+    不要在聊天里复述全部 missing_conditions / invalidation_cn 长文本。
+    全文不超过 1500 字，除非用户明确要细节。
+12. **数字关联（沟通纪律）**——用户问题里出现具体数字时的强制动作：
+    用户带数字提问（"8700 是不是更好""我把止损放在 7600"等），说明他在用视觉或
+    个人判断对照系统结论。**禁止机械回答"X 不在范围内"，必须先在 review payload
+    里主动检索最接近的已知位并连接**：
+    - 检索字段：candidates[].key_price（关键价）、reward_risk_target（目标参考）、
+      satisfied_conditions / missing_conditions / invalidation_cn / next_step_cn /
+      caveat_cn 这些**含数字的文本字段**（结构类规则的 L1/L2/密集区上下沿经常藏在
+      文本里，照样要算偏差）、watch_conditions[].price。
+    - 偏差 ≤ 5%：**主动连接**——「你说的 X 跟 Y（候选 N 的 key_price / 含数字字段）
+      接近，偏差 ~W%，系统里对应的是 Y」。必须用具体百分比，不能含糊。
+    - 偏差 5%–15%：说明偏差，并指出最近的对应位是什么。
+    - 偏差 > 15% 或无接近位：说明 review 里没在 X 附近的已知位；并解释系统为什么
+      不收 X（例如"系统跟踪的是结构位和滚动区间，不跟踪视觉的支撑压力线"）。
+    - 不得为了凑关联编造偏差；找不到就老实说没有。
+    这是「沟通纪律」而非「判定权」：只把 review 已有数字跟用户数字做差，不引入新价位。
+13. **对话聚焦**：用户已看过 review（这是 review 上的对话，不是首次打开），按
+    "回答问题"的格式而不是 "复述 review"的格式：
+    - 用户问哪个候选 / 哪个数字，就只讲那个；不要重贴全部 candidates。
+    - 不要重贴 verdict 阻断全文（用户已知道环境阻断，除非他追问）。
+    - 不要重复列 "其余 N 个候选为确认减弱" 之类的兜底。
+    - 长度看问题规模：单点问题 5-10 行即可，全量复述仅在用户明确说"重新过一遍"时。
+    - 文末免责声明仍可保留一句。
 """
 
 
@@ -106,9 +157,14 @@ class ArkConfig:
     api_key: str
     base_url: str = DEFAULT_BASE_URL
     model: str = "ark-code-latest"
-    timeout: float = 30.0
+    #: 请求超时（秒）。多候选大 payload 生成耗时长，30s 易在 thinking 阶段超时。
+    #: 可用 ARK_TIMEOUT 覆盖。
+    timeout: float = 90.0
     style: str = STYLE_OPENAI
-    max_tokens: int = 1500
+    #: 输出 token 上限（thinking+text 共享）。推理模型先 thinking，1500 会被
+    #: 34 候选大 payload 的 thinking 占满、不产出 text block -> 误降级。可用
+    #: ARK_MAX_TOKENS 覆盖。
+    max_tokens: int = 6000
     #: 429/5xx 的退避重试次数。监督员与其他工具共用同一 key 时会撞限频，
     #: 但投递是 best-effort：重试用尽仍失败即返回 None，由调用方降级模板。
     retry_on_throttle: int = 2
@@ -120,12 +176,57 @@ def _infer_style(base_url: str) -> str:
     return STYLE_ANTHROPIC if "/coding" in base_url else STYLE_OPENAI
 
 
-def load_ark_config() -> ArkConfig | None:
-    """从环境变量读 ark 配置。缺 API key 时返回 None（调用方降级模板）。
+def _env_int(name: str, default: int) -> int:
+    raw = os.environ.get(name, "").strip()
+    if not raw:
+        return default
+    try:
+        return int(raw)
+    except ValueError:
+        logger.warning("环境变量 %s=%r 非整数，用默认 %d", name, raw, default)
+        return default
 
-    兼容两组变量名：优先 ARK_*；未设置时回退 ANTHROPIC_*（本机 Claude Code 用的
-    就是 ark 的 /api/coding 网关，复用同一凭据避免重复配置）。
+
+def _env_float(name: str, default: float) -> float:
+    raw = os.environ.get(name, "").strip()
+    if not raw:
+        return default
+    try:
+        return float(raw)
+    except ValueError:
+        logger.warning("环境变量 %s=%r 非浮点，用默认 %s", name, raw, default)
+        return default
+
+
+def load_ark_config() -> ArkConfig | None:
+    """从环境变量读表达层 LLM 配置。缺 API key 时返回 None（调用方降级模板）。
+
+    优先级：
+    1. ``DEEPSEEK_API_KEY`` -> DeepSeek（OpenAI 兼容，Bearer，默认 deepseek-chat）；
+    2. ``ARK_*``；
+    3. ``ANTHROPIC_*``（本机 Claude Code 用的就是 ark 的 /api/coding 网关，
+       复用同一凭据避免重复配置）。
+
+    max_tokens / timeout 可用 ARK_MAX_TOKENS / ARK_TIMEOUT 覆盖默认值。
     """
+    max_tokens = _env_int(ENV_MAX_TOKENS, 6000)
+    timeout = _env_float(ENV_TIMEOUT, 90.0)
+
+    # DeepSeek 优先：配了就走 DS，不再回退 ark（避免两套凭据同时存在时行为不确定）。
+    ds_key = os.environ.get(ENV_DEEPSEEK_API_KEY, "").strip()
+    if ds_key:
+        ds_base = (
+            os.environ.get(ENV_DEEPSEEK_BASE_URL, "").strip() or DEEPSEEK_BASE_URL
+        ).rstrip("/")
+        return ArkConfig(
+            api_key=ds_key,
+            base_url=ds_base,
+            model=os.environ.get(ENV_DEEPSEEK_MODEL, "").strip() or DEEPSEEK_MODEL,
+            style=STYLE_OPENAI,
+            max_tokens=max_tokens,
+            timeout=timeout,
+        )
+
     api_key = os.environ.get(ENV_API_KEY, "").strip()
     base_url = os.environ.get(ENV_BASE_URL, "").strip()
     model = os.environ.get(ENV_MODEL, "").strip()
@@ -142,6 +243,8 @@ def load_ark_config() -> ArkConfig | None:
         base_url=base_url,
         model=model or "ark-code-latest",
         style=style,
+        max_tokens=max_tokens,
+        timeout=timeout,
     )
 
 
@@ -285,15 +388,49 @@ def _post_user_content(
         for attempt in range(config.retry_on_throttle + 1):
             resp = requests.post(url, headers=headers, json=body, timeout=config.timeout)
             if resp.status_code == 200:
-                return extract(resp.json())
+                text = extract(resp.json())
+                if text is None:
+                    # 200 但取不到 text：推理模型 thinking 占满 max_tokens、未产出
+                    # text block 是典型原因。此前静默 None 会误判为「LLM 不可用」。
+                    logger.warning(
+                        "ark 返回 200 但无 text block 可抽取（疑似 thinking 占满 "
+                        "max_tokens=%s，model=%s）；降级模板。",
+                        config.max_tokens,
+                        config.model,
+                    )
+                return text
             # 429 限频 / 5xx 瞬时故障：退避重试；其他状态码直接放弃
             throttled = resp.status_code == 429 or resp.status_code >= 500
             if throttled and attempt < config.retry_on_throttle:
+                logger.info(
+                    "ark HTTP %s，第 %d/%d 次退避重试（model=%s）",
+                    resp.status_code,
+                    attempt + 1,
+                    config.retry_on_throttle,
+                    config.model,
+                )
                 time.sleep(config.retry_backoff_seconds * (2**attempt))
                 continue
+            logger.warning(
+                "ark HTTP %s，放弃（model=%s）。响应摘要：%s",
+                resp.status_code,
+                config.model,
+                getattr(resp, "text", "")[:200],
+            )
             return None
+        logger.warning(
+            "ark 退避重试 %d 次仍失败（model=%s）",
+            config.retry_on_throttle + 1,
+            config.model,
+        )
         return None
-    except (requests.RequestException, ValueError, KeyError, IndexError):
+    except (requests.RequestException, ValueError, KeyError, IndexError) as exc:
+        logger.warning(
+            "ark 调用异常：%s: %s（model=%s）",
+            type(exc).__name__,
+            exc,
+            config.model,
+        )
         return None
 
 

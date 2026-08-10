@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "../api/client";
-import type { CreatePlanPayload, TradeOpportunity } from "../types";
+import { DIRECTION_CN, MODULE_CN } from "../modules";
+import type { CreatePlanPayload, DraftUpdatePayload, TradeOpportunity } from "../types";
 
 /** 从当前 assessment 机会预填的入场字段（缺则空，让人填，不算法新数值）。 */
 export type PlanPrefill = Partial<
@@ -61,33 +62,44 @@ const WATCH_SIGNALS: { id: string; label: string }[] = [
 ];
 
 export default function CreatePlanDialog({
-  symbol,
+  symbol: symbolProp,
   prefill,
+  editPlanId,
   onClose,
+  onCreated,
+  onSaved,
 }: {
-  symbol: string;
-  prefill: PlanPrefill;
+  /** 仅 create 模式需要；edit 模式从计划本身取。 */
+  symbol?: string;
+  prefill?: PlanPrefill;
+  /** 传入即进入编辑模式：加载该 draft，提交走 PUT /draft。 */
+  editPlanId?: string;
   onClose: () => void;
+  /** create 成功（已建 draft，未确认）-> 由父组件打开核对抽屉。 */
+  onCreated?: (planId: string) => void;
+  /** edit 成功（已 PUT /draft）-> 父组件重取核对报告。 */
+  onSaved?: () => void;
 }) {
   const queryClient = useQueryClient();
+  const isEdit = Boolean(editPlanId);
   // 两种模式：entry=完整入场计划（五项预案）；holding=持仓盯盘（已在场内，只盯退出）
   const [mode, setMode] = useState<"entry" | "holding">("entry");
-  const [module, setModule] = useState(prefill.module ?? "A");
-  const [direction, setDirection] = useState(prefill.direction ?? "long");
-  const [entryRuleId, setEntryRuleId] = useState(prefill.entry_rule_id ?? "");
-  const [lifecycleId, setLifecycleId] = useState(prefill.entry_lifecycle_id ?? "");
-  const [entryTriggerCn, setEntryTriggerCn] = useState(prefill.entry_trigger_cn ?? "");
+  const [module, setModule] = useState(prefill?.module ?? "A");
+  const [direction, setDirection] = useState(prefill?.direction ?? "long");
+  const [entryRuleId, setEntryRuleId] = useState(prefill?.entry_rule_id ?? "");
+  const [lifecycleId, setLifecycleId] = useState(prefill?.entry_lifecycle_id ?? "");
+  const [entryTriggerCn, setEntryTriggerCn] = useState(prefill?.entry_trigger_cn ?? "");
   const [entryPriceRef, setEntryPriceRef] = useState(
-    prefill.entry_price_ref != null ? String(prefill.entry_price_ref) : "",
+    prefill?.entry_price_ref != null ? String(prefill.entry_price_ref) : "",
   );
   const [invalidationPrice, setInvalidationPrice] = useState(
-    prefill.invalidation_price != null ? String(prefill.invalidation_price) : "",
+    prefill?.invalidation_price != null ? String(prefill.invalidation_price) : "",
   );
   const [targetBPrice, setTargetBPrice] = useState(
-    prefill.target_b_price != null ? String(prefill.target_b_price) : "",
+    prefill?.target_b_price != null ? String(prefill.target_b_price) : "",
   );
   const [rewardRisk, setRewardRisk] = useState(
-    prefill.reward_risk_at_plan != null ? String(prefill.reward_risk_at_plan) : "",
+    prefill?.reward_risk_at_plan != null ? String(prefill.reward_risk_at_plan) : "",
   );
   const [validUntil, setValidUntil] = useState("");
   const [reason, setReason] = useState("");
@@ -104,9 +116,47 @@ export default function CreatePlanDialog({
   const [stopPrice, setStopPrice] = useState("");
   const [watchSignals, setWatchSignals] = useState<string[]>([]);
 
+  const symbol = symbolProp ?? "";
+
+  // 编辑模式：加载 draft 计划，回填全部字段（仅首次加载时回填，之后不覆盖用户编辑）。
+  const { data: editPlan } = useQuery({
+    queryKey: ["plan", editPlanId],
+    queryFn: () => api.getPlan(editPlanId!),
+    enabled: isEdit,
+  });
+  useEffect(() => {
+    if (!editPlan) return;
+    const p = editPlan;
+    setMode(p.plan_kind === "holding_watch" ? "holding" : "entry");
+    setModule(p.module || "A");
+    setDirection(p.direction || "long");
+    setEntryRuleId(p.entry_rule_id ?? "");
+    setLifecycleId(p.entry_lifecycle_id ?? "");
+    setEntryTriggerCn(p.entry_trigger_cn ?? "");
+    setEntryPriceRef(p.entry_price_ref != null ? String(p.entry_price_ref) : "");
+    setInvalidationPrice(p.invalidation_price != null ? String(p.invalidation_price) : "");
+    setTargetBPrice(p.target_b_price != null ? String(p.target_b_price) : "");
+    setRewardRisk(p.reward_risk_at_plan != null ? String(p.reward_risk_at_plan) : "");
+    setValidUntil(p.valid_until ?? "");
+    setReason(p.reason ?? "");
+    setPlaybook({
+      thesis_cn: p.thesis_cn ?? "",
+      invalidation_criteria_cn: p.invalidation_criteria_cn ?? "",
+      drawdown_playbook_cn: p.drawdown_playbook_cn ?? "",
+      take_profit_plan_cn: p.take_profit_plan_cn ?? "",
+      stop_plan_cn: p.stop_plan_cn ?? "",
+    });
+    setTakeProfitPrice(p.take_profit_price != null ? String(p.take_profit_price) : "");
+    setStopPrice(p.stop_price != null ? String(p.stop_price) : "");
+    setWatchSignals(p.watch_signal_rule_ids ?? []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editPlan?.plan_id]);
+
+  const toNum = (s: string) => (s.trim() ? Number(s) : null);
+
+  // create：建 draft（不自动确认），交给父组件打开核对抽屉。
   const create = useMutation({
     mutationFn: async () => {
-      const toNum = (s: string) => (s.trim() ? Number(s) : null);
       const payload: CreatePlanPayload = {
         symbol,
         module,
@@ -127,14 +177,49 @@ export default function CreatePlanDialog({
         take_profit_plan_cn: playbook.take_profit_plan_cn.trim(),
         stop_plan_cn: playbook.stop_plan_cn.trim(),
       };
-      const plan = await api.createPlan(payload);
-      await api.confirmPlan(plan.plan_id);
-      return plan;
+      return api.createPlan(payload);
+    },
+    onSuccess: (plan) => {
+      queryClient.invalidateQueries({ queryKey: ["plans"] });
+      queryClient.invalidateQueries({ queryKey: ["plansSummary"] });
+      if (onCreated) onCreated(plan.plan_id);
+      else onClose();
+    },
+    onError: (e: unknown) =>
+      setError(e instanceof Error ? e.message : String(e)),
+  });
+
+  // edit：PUT /draft 保存修改，父组件重取核对报告。
+  const saveEdit = useMutation({
+    mutationFn: () => {
+      const payload: DraftUpdatePayload = {
+        module,
+        direction,
+        valid_until: validUntil.trim(),
+        reason: reason.trim(),
+        entry_rule_id: entryRuleId.trim() || null,
+        entry_lifecycle_id: lifecycleId.trim() || null,
+        entry_trigger_cn: entryTriggerCn.trim() || null,
+        entry_price_ref: toNum(entryPriceRef),
+        invalidation_price: toNum(invalidationPrice),
+        target_b_price: toNum(targetBPrice),
+        reward_risk_at_plan: toNum(rewardRisk),
+        thesis_cn: playbook.thesis_cn.trim(),
+        invalidation_criteria_cn: playbook.invalidation_criteria_cn.trim(),
+        drawdown_playbook_cn: playbook.drawdown_playbook_cn.trim(),
+        take_profit_plan_cn: playbook.take_profit_plan_cn.trim(),
+        stop_plan_cn: playbook.stop_plan_cn.trim(),
+        take_profit_price: toNum(takeProfitPrice),
+        stop_price: toNum(stopPrice),
+        watch_signal_rule_ids: watchSignals,
+      };
+      return api.updateDraft(editPlanId!, payload);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["plans"] });
       queryClient.invalidateQueries({ queryKey: ["plansSummary"] });
-      onClose();
+      if (onSaved) onSaved();
+      else onClose();
     },
     onError: (e: unknown) =>
       setError(e instanceof Error ? e.message : String(e)),
@@ -142,7 +227,7 @@ export default function CreatePlanDialog({
 
   const playbookReady = PLAYBOOK.every((p) => playbook[p.key].trim());
   const canSubmit =
-    playbookReady && validUntil.trim() && !create.isPending;
+    playbookReady && Boolean(validUntil.trim()) && !create.isPending && !saveEdit.isPending;
 
   const submit = () => {
     if (!playbookReady) {
@@ -154,13 +239,13 @@ export default function CreatePlanDialog({
       return;
     }
     setError("");
-    create.mutate();
+    if (isEdit) saveEdit.mutate();
+    else create.mutate();
   };
 
   const createHolding = useMutation({
-    mutationFn: () => {
-      const toNum = (s: string) => (s.trim() ? Number(s) : null);
-      return api.createHoldingWatch({
+    mutationFn: () =>
+      api.createHoldingWatch({
         symbol,
         direction,
         ruleset_version: RULESET,
@@ -172,12 +257,12 @@ export default function CreatePlanDialog({
         watch_signal_rule_ids: watchSignals,
         module,
         reason: reason.trim(),
-      });
-    },
-    onSuccess: () => {
+      }),
+    onSuccess: (plan) => {
       queryClient.invalidateQueries({ queryKey: ["plans"] });
       queryClient.invalidateQueries({ queryKey: ["plansSummary"] });
-      onClose();
+      if (onCreated) onCreated(plan.plan_id);
+      else onClose();
     },
     onError: (e: unknown) => setError(e instanceof Error ? e.message : String(e)),
   });
@@ -193,7 +278,8 @@ export default function CreatePlanDialog({
     exitPlaybookReady &&
     Boolean(validUntil.trim()) &&
     hasTrigger &&
-    !createHolding.isPending;
+    !createHolding.isPending &&
+    !saveEdit.isPending;
 
   const submitHolding = () => {
     if (!exitPlaybookReady) {
@@ -209,7 +295,8 @@ export default function CreatePlanDialog({
       return;
     }
     setError("");
-    createHolding.mutate();
+    if (isEdit) saveEdit.mutate();
+    else createHolding.mutate();
   };
 
   const toggleSignal = (id: string) =>
@@ -225,28 +312,40 @@ export default function CreatePlanDialog({
     </label>
   );
 
+  const titleSymbol = editPlan?.symbol ?? symbol;
+  const titleHead = isEdit
+    ? mode === "entry"
+      ? "编辑执行计划"
+      : "编辑持仓盯盘"
+    : mode === "entry"
+      ? "建立执行计划"
+      : "持仓盯盘提醒";
+  const busy = create.isPending || createHolding.isPending || saveEdit.isPending;
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-card cp-card" onClick={(e) => e.stopPropagation()}>
         <div className="modal-head">
-          <h2>{mode === "entry" ? "建立执行计划" : "持仓盯盘提醒"} · {symbol}</h2>
+          <h2>{titleHead} · {titleSymbol}</h2>
           <button className="btn small" onClick={onClose}>关闭</button>
         </div>
 
-        <div className="add-tabs">
-          <button
-            className={`add-tab ${mode === "entry" ? "on" : ""}`}
-            onClick={() => { setMode("entry"); setError(""); }}
-          >
-            入场计划
-          </button>
-          <button
-            className={`add-tab ${mode === "holding" ? "on" : ""}`}
-            onClick={() => { setMode("holding"); setError(""); }}
-          >
-            持仓盯盘（已有仓位）
-          </button>
-        </div>
+        {!isEdit && (
+          <div className="add-tabs">
+            <button
+              className={`add-tab ${mode === "entry" ? "on" : ""}`}
+              onClick={() => { setMode("entry"); setError(""); }}
+            >
+              入场计划
+            </button>
+            <button
+              className={`add-tab ${mode === "holding" ? "on" : ""}`}
+              onClick={() => { setMode("holding"); setError(""); }}
+            >
+              持仓盯盘（已有仓位）
+            </button>
+          </div>
+        )}
 
         {mode === "entry" ? (
           <p className="cp-intro">
@@ -262,19 +361,20 @@ export default function CreatePlanDialog({
         )}
 
         <div className="cp-row">
-          {field(
+          {mode === "entry" && field(
             "模块",
             <select value={module} onChange={(e) => setModule(e.target.value)}>
               {MODULES.map((m) => (
-                <option key={m} value={m}>{m}</option>
+                <option key={m} value={m}>{MODULE_CN[m] ?? m}</option>
               ))}
             </select>,
+            "入场模块（持仓盯盘不需要）",
           )}
           {field(
             "方向",
             <select value={direction} onChange={(e) => setDirection(e.target.value)}>
-              <option value="long">long</option>
-              <option value="short">short</option>
+              <option value="long">{DIRECTION_CN.long}</option>
+              <option value="short">{DIRECTION_CN.short}</option>
             </select>,
           )}
           {field("有效期 valid_until", (
@@ -391,16 +491,14 @@ export default function CreatePlanDialog({
         {error && <div className="cp-error">{error}</div>}
 
         <div className="cp-actions">
-          <button
-            className="btn"
-            onClick={onClose}
-            disabled={create.isPending || createHolding.isPending}
-          >
+          <button className="btn" onClick={onClose} disabled={busy}>
             取消
           </button>
           {mode === "entry" ? (
             <button className="btn primary" onClick={submit} disabled={!canSubmit}>
-              {create.isPending ? "提交中…" : "建立并确认（armed）"}
+              {isEdit
+                ? saveEdit.isPending ? "保存中…" : "保存修改"
+                : create.isPending ? "提交中…" : "建立草案（待核对）"}
             </button>
           ) : (
             <button
@@ -408,7 +506,9 @@ export default function CreatePlanDialog({
               onClick={submitHolding}
               disabled={!canSubmitHolding}
             >
-              {createHolding.isPending ? "提交中…" : "开始盯盘（entered）"}
+              {isEdit
+                ? saveEdit.isPending ? "保存中…" : "保存修改"
+                : createHolding.isPending ? "提交中…" : "建立草案（待核对）"}
             </button>
           )}
         </div>

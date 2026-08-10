@@ -145,6 +145,14 @@ export default function ChartControls({
           <span className="mk mk-kv" style={{ marginRight: 2 }}>▲</span> 关键性波动{" "}
           {counts.keyVolatility > 0 && <em>{counts.keyVolatility}</em>}
         </button>
+        <button
+          className={`chip ${display.chipDist ? "on" : ""}`}
+          style={display.chipDist ? { borderColor: "#f59e0b", color: "#f59e0b" } : undefined}
+          onClick={() => onChange({ ...display, chipDist: !display.chipDist })}
+          title="筹码分布（CYQ）：把成交量按价格纵向铺开，看筹码密集的支撑/阻力区"
+        >
+          ▤ 筹码峰
+        </button>
         {anyMark && (
           <button
             className="chip clear"
