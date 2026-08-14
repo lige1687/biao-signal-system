@@ -5,6 +5,7 @@ import { api } from "../api/client";
 import AssessmentPanel from "../components/AssessmentPanel";
 import ColorBadge from "../components/ColorBadge";
 import ChartControls from "../components/ChartControls";
+import TrendChecklist from "../components/TrendChecklist";
 import ColorBacktestPanel from "../components/ColorBacktestPanel";
 import PullbackBacktestPanel from "../components/PullbackBacktestPanel";
 import PullbackOpportunityPanel from "../components/PullbackOpportunityPanel";
@@ -307,6 +308,7 @@ export default function DetailPage() {
                 highlight={highlightSpec}
                 onDownload={(fn) => (downloadPngRef.current = fn)}
               />
+              <TrendChecklist payload={data.chart} assessment={data.assessment} />
               <div className="chart-legend">
                 {display.bottomMarks && (
                   <span>

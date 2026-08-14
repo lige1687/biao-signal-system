@@ -534,6 +534,9 @@ export interface ChartPayload {
   sma60: (number | null)[];
   sma120: (number | null)[];
   ref20: (number | null)[];
+  macdDif: (number | null)[];
+  macdDea: (number | null)[];
+  macdHist: (number | null)[];
   states: string[];
   volumes: number[];
   volStates: string[];
@@ -743,6 +746,7 @@ export interface DraftUpdatePayload {
 export interface PlansSummary {
   open_actions: number;
   active_plans: number;
+  today_opportunities: number;
 }
 
 // ---- 买点审阅 / 扫描 ----
@@ -928,6 +932,15 @@ export interface ScanResponse {
   items: ScanItem[];
 }
 
+export interface TodayOpportunityResponse {
+  scan_date: string;
+  scanned: number;
+  generated_at: string;
+  actionable: ScanItem[];
+  waiting: ScanItem[];
+  blocked: ScanItem[];
+}
+
 export interface BuyPointChatReply {
   reply: string;
   grounded: boolean;
@@ -952,6 +965,7 @@ export interface IndustryBoard {
   latest: number | null;
   pct_change: number | null;
   turnover_rate: number | null;
+  pe_ttm: number | null;
   total_mv_yi: number | null;
   main_net_inflow_yi: number | null;
   main_net_inflow_pct: number | null;
@@ -981,4 +995,81 @@ export interface IndustryFlowResponse {
   code: string;
   days: number;
   points: IndustryFlowPoint[];
+}
+
+// ---- 利率面板 (/api/fundamentals/rates) ----
+
+export interface TreasurySide {
+  cn_2y: number | null;
+  cn_5y: number | null;
+  cn_10y: number | null;
+  cn_30y: number | null;
+  cn_10_2_spread: number | null;
+  us_2y: number | null;
+  us_5y: number | null;
+  us_10y: number | null;
+  us_30y: number | null;
+  us_10_2_spread: number | null;
+}
+
+export interface TreasuryYields {
+  as_of_cn: string | null;
+  as_of_us: string | null;
+  cn: TreasurySide;
+  us: TreasurySide;
+  cn_us_spread_10y: number | null;
+}
+
+export interface RatesResponse {
+  treasury: TreasuryYields;
+  vix: { value: number; as_of: string } | null;
+  margin: MarginData | null;
+  errors: string[];
+}
+
+// ---- 宏观利率历史序列（趋势图）----
+export interface RatesHistorySeries {
+  label: string;
+  unit: string;
+  dates: string[];
+  values: number[];
+}
+
+export interface RatesHistoryResponse {
+  as_of: string;
+  series: Record<string, RatesHistorySeries>;
+  errors: string[];
+}
+
+// ---- 宏观月度历史序列（PMI/CPI/PPI，趋势图）----
+export interface MacroHistoryResponse {
+  as_of: string;
+  series: Record<string, RatesHistorySeries>;
+  errors: string[];
+}
+
+// ---- 资金面 / 商品 / ETF 相对强度 ----
+
+export interface MarginData {
+  date: string;
+  rzye_yi: number | null; // 融资余额（亿）
+  rqye_yi: number | null; // 融券余额（亿）
+  rzrqye_yi: number | null; // 融资融券余额（亿）
+  buy_yi: number | null; // 融资买入额（亿）
+}
+
+export interface CommodityRatios {
+  copper_gold: number;
+  crude_gold: number;
+  copper: number;
+  gold: number;
+  crude: number;
+}
+
+export interface EtfItem {
+  code: string;
+  name: string;
+  bias: string; // risk_on | risk_off | neutral
+  ret_1m: number;
+  rel_1m: number; // 相对 SPY 的超额（%）
 }

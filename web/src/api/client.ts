@@ -13,7 +13,12 @@ import type {
   ForwardStatsResponse,
   FundamentalsOverview,
   GlobalStripResponse,
+  CommodityRatios,
+  EtfItem,
   IndustryFlowResponse,
+  MacroHistoryResponse,
+  RatesResponse,
+  RatesHistoryResponse,
   MarketContextFull,
   MarketDataStatus,
   Plan,
@@ -26,6 +31,7 @@ import type {
   ScanResponse,
   SubscribeWatchRequest,
   SymbolDetail,
+  TodayOpportunityResponse,
   WatchSubscription,
   WatchlistGroup,
   WatchlistItem,
@@ -140,6 +146,10 @@ export const api = {
     ),
   marketContextGlobalStrip: () =>
     request<GlobalStripResponse>(`/market-context/global-strip`),
+  marketContextBreadthHistory: (marketId: string, lookbackDays = 120) =>
+    request<BreadthHistoryResponse>(
+      `/market-context/breadth-history?market_id=${encodeURIComponent(marketId)}&lookback_days=${lookbackDays}`,
+    ),
   marketContextForwardStats: (
     marketId: string,
     percentile: number,
@@ -215,6 +225,9 @@ export const api = {
     const qs = q.toString();
     return request<ScanResponse>(`/opportunities/scan${qs ? `?${qs}` : ""}`);
   },
+  todayOpportunities: () => request<TodayOpportunityResponse>(`/opportunities/today`),
+  refreshTodayOpportunities: () =>
+    request<TodayOpportunityResponse>(`/opportunities/today/refresh`, { method: "POST" }),
   buyPointChat: (symbol: string, message: string) =>
     request<BuyPointChatReply>(
       `/symbols/${encodeURIComponent(symbol)}/buy-point-chat`,
@@ -256,5 +269,23 @@ export const fundamentalsApi = {
   industryFlow: (code: string, days = 20) =>
     request<IndustryFlowResponse>(
       `/fundamentals/industry/${encodeURIComponent(code)}/flow?days=${days}`,
+    ),
+  rates: (refresh = false) =>
+    request<RatesResponse>(`/fundamentals/rates${refresh ? "?refresh=true" : ""}`),
+  ratesHistory: (lookbackDays = 730) =>
+    request<RatesHistoryResponse>(
+      `/fundamentals/rates-history?lookback_days=${lookbackDays}`,
+    ),
+  macroHistory: (pageSize = 60) =>
+    request<MacroHistoryResponse>(
+      `/fundamentals/macro-history?page_size=${pageSize}`,
+    ),
+  commodities: (refresh = false) =>
+    request<{ commodities: CommodityRatios | null }>(
+      `/fundamentals/commodities${refresh ? "?refresh=true" : ""}`,
+    ),
+  etfStrength: (refresh = false) =>
+    request<{ etf: { items: EtfItem[]; regime: string; spy_1m: number } | null }>(
+      `/fundamentals/etf-strength${refresh ? "?refresh=true" : ""}`,
     ),
 };

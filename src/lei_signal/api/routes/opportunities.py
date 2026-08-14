@@ -26,6 +26,7 @@ from lei_signal.api.schemas import (
     ScanItemDTO,
     ScanResponse,
     SuggestedPlanDTO,
+    TodayOpportunityResponse,
     WatchConditionDTO,
 )
 from lei_signal.domain.rules_config import ruleset_version
@@ -519,18 +520,21 @@ def buy_point_review(request: Request, symbol: str, refresh: bool = False) -> Bu
     )
 
 
-@router.get("/opportunities/scan", response_model=ScanResponse)
-def scan_opportunities(
-    request: Request,
-    symbols: str | None = None,
+def run_opportunity_scan(
+    service: Any,
+    db_path: str,
+    *,
+    symbols: list[str] | None = None,
     refresh: bool = False,
     only_with_candidates: bool = True,
 ) -> ScanResponse:
-    """一键扫自选：哪些标的当前有系统定义的买点、哪些还没建计划。"""
-    service = _service(request)
-    db_path = _db_path(request)
+    """一键扫自选：哪些标的当前有系统定义的买点、哪些还没建计划。
+
+    纯函数（不依赖 Request）：供 HTTP 路由与 launchd 定时脚本共用。
+    返回的 ScanResponse.items 已按 verdict 优先级 + R/R 降序排好。
+    """
     if symbols:
-        wanted = [s.strip() for s in symbols.split(",") if s.strip()]
+        wanted = list(symbols)
     else:
         from lei_signal.api.watchlist import list_watchlist  # noqa: PLC0415
 
@@ -593,11 +597,126 @@ def scan_opportunities(
     )
 
 
+@router.get("/opportunities/scan", response_model=ScanResponse)
+def scan_opportunities(
+    request: Request,
+    symbols: str | None = None,
+    refresh: bool = False,
+    only_with_candidates: bool = True,
+) -> ScanResponse:
+    """一键扫自选：哪些标的当前有系统定义的买点、哪些还没建计划。"""
+    return run_opportunity_scan(
+        _service(request),
+        _db_path(request),
+        symbols=[s.strip() for s in symbols.split(",") if s.strip()] if symbols else None,
+        refresh=refresh,
+        only_with_candidates=only_with_candidates,
+    )
+
+
+def _row_to_scan_item(row: Any) -> ScanItemDTO:
+    """daily_opportunity_scan 一行 -> ScanItemDTO（前端可复用同一渲染逻辑）。"""
+    blocking = row.blocking_reasons
+    if isinstance(blocking, str):
+        import json  # noqa: PLC0415
+
+        try:
+            blocking = json.loads(blocking)
+        except (ValueError, TypeError):
+            blocking = []
+    return ScanItemDTO(
+        symbol=row.symbol,
+        display_name=row.display_name,
+        verdict=row.verdict,
+        verdict_cn=row.verdict_cn,
+        best_scenario_cn=row.best_scenario_cn,
+        best_state=row.best_state,
+        reward_risk_ratio=row.reward_risk_ratio,
+        reward_risk_computable=bool(row.reward_risk_computable),
+        blocking_reasons=list(blocking),
+        missing_summary_cn=row.missing_summary_cn,
+        has_active_plan=bool(row.has_active_plan),
+        error=row.error,
+    )
+
+
+def _group_today(rows: list[Any], scan_date: str) -> TodayOpportunityResponse:
+    """把当日扫描行按 verdict 分组为前端响应。"""
+    actionable: list[ScanItemDTO] = []
+    waiting: list[ScanItemDTO] = []
+    blocked: list[ScanItemDTO] = []
+    generated_at = datetime.now(UTC).isoformat()
+    for row in rows:
+        item = _row_to_scan_item(row)
+        if item.verdict == VERDICT_ACTIONABLE:
+            actionable.append(item)
+        elif item.verdict == VERDICT_WAITING:
+            waiting.append(item)
+        elif item.verdict == VERDICT_BLOCKED:
+            blocked.append(item)
+        # none 不入库，也不会出现在这里
+        if row.generated_at:
+            generated_at = row.generated_at
+    scanned = len(actionable) + len(waiting) + len(blocked)
+    return TodayOpportunityResponse(
+        scan_date=scan_date,
+        scanned=scanned,
+        generated_at=generated_at,
+        actionable=actionable,
+        waiting=waiting,
+        blocked=blocked,
+    )
+
+
+@router.get("/opportunities/today", response_model=TodayOpportunityResponse)
+def today_opportunities(request: Request) -> TodayOpportunityResponse:
+    """今日机会雷达（读库）：dashboard 面板 + 红点的数据源。
+
+    若当日尚未扫描，返回空结构（scanned=0），前端据此隐藏面板/红点。
+    """
+    from lei_signal.api.opportunity_scan import (  # noqa: PLC0415
+        list_scan,
+        today_date,
+    )
+
+    db_path = _db_path(request)
+    scan_date = today_date()
+    with closing(connect(db_path)) as conn:
+        rows = list_scan(conn, scan_date)
+    return _group_today(rows, scan_date)
+
+
+@router.post("/opportunities/today/refresh", response_model=TodayOpportunityResponse)
+def refresh_today_opportunities(request: Request) -> TodayOpportunityResponse:
+    """立即重扫自选并落库（整体重写当日），返回分组后的当日结果。
+
+    供 launchd 定时脚本（15:00）与前端「刷新」按钮共用。
+    """
+    from lei_signal.api.opportunity_scan import (  # noqa: PLC0415
+        list_scan,
+        today_date,
+        upsert_scan_results,
+    )
+
+    db_path = _db_path(request)
+    scan_date = today_date()
+    response = run_opportunity_scan(
+        _service(request), db_path, refresh=True, only_with_candidates=True,
+    )
+    with closing(connect(db_path)) as conn:
+        upsert_scan_results(conn, scan_date, response.items)
+        conn.commit()
+        rows = list_scan(conn, scan_date)
+    return _group_today(rows, scan_date)
+
+
 __all__ = [
     "VERDICT_ACTIONABLE",
     "VERDICT_BLOCKED",
     "VERDICT_NONE",
     "VERDICT_WAITING",
     "build_review",
+    "refresh_today_opportunities",
     "router",
+    "run_opportunity_scan",
 ]

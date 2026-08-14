@@ -564,6 +564,36 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
             ON trade_plans(source, state);
         """,
     ),
+    (
+        15,
+        "015_daily_opportunity_scan",
+        """
+        -- 今日机会雷达 (2026-08-10): 15:00 launchd 扫全自选, 落当日 verdict 快照.
+        -- dashboard 面板 + TopNav 红点读这张表, 不现场跑 scan (scan 5-10s, 轮询不可接受).
+        --
+        -- 一行 = 一个标的一天的 scan 结果. (scan_date, symbol) 唯一.
+        -- 当日重扫 = 先 DELETE 当日再 INSERT (upsert_scan_results 整体重写).
+        CREATE TABLE IF NOT EXISTS daily_opportunity_scan (
+            scan_date        TEXT NOT NULL,        -- YYYY-MM-DD (UTC date)
+            symbol           TEXT NOT NULL,
+            display_name     TEXT NOT NULL DEFAULT '',
+            verdict          TEXT NOT NULL,        -- actionable | blocked | waiting | none
+            verdict_cn       TEXT NOT NULL DEFAULT '',
+            best_scenario_cn TEXT,
+            best_state       TEXT,
+            reward_risk_ratio REAL,
+            reward_risk_computable INTEGER NOT NULL DEFAULT 0,
+            blocking_reasons TEXT NOT NULL DEFAULT '[]',  -- JSON array
+            missing_summary_cn TEXT NOT NULL DEFAULT '',
+            has_active_plan  INTEGER NOT NULL DEFAULT 0,
+            error            TEXT,
+            generated_at     TEXT NOT NULL,
+            PRIMARY KEY (scan_date, symbol)
+        );
+        CREATE INDEX IF NOT EXISTS idx_daily_scan_date_verdict
+            ON daily_opportunity_scan(scan_date, verdict);
+        """,
+    ),
 )
 
 

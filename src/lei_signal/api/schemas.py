@@ -774,6 +774,22 @@ class ScanResponse(BaseModel):
     items: list[ScanItemDTO] = []
 
 
+class TodayOpportunityResponse(BaseModel):
+    """今日机会雷达：按 verdict 分组的当日扫描结果（dashboard 面板 + 红点数据源）。
+
+    actionable / waiting 是"有机会"的标的（红点计数 = actionable + waiting）；
+    blocked 是"环境阻断"的标的，单独列出供用户了解为何按规则不开新仓。
+    verdict=none 的标的不入库、不出现在本响应。
+    """
+
+    scan_date: str
+    scanned: int
+    generated_at: str
+    actionable: list[ScanItemDTO] = []
+    waiting: list[ScanItemDTO] = []
+    blocked: list[ScanItemDTO] = []
+
+
 class BuyPointChatRequest(BaseModel):
     """就买点审阅提问。message 为空时返回审阅摘要。"""
 
@@ -803,10 +819,15 @@ class PlanChatReply(BaseModel):
 
 
 class PlansSummaryDTO(BaseModel):
-    """监督待办顶栏红点：未处理待办数 + 活跃计划数。"""
+    """监督待办顶栏红点：未处理待办数 + 活跃计划数 + 今日机会数。
+
+    today_opportunities = 今日雷达中 actionable + waiting 的标的数
+    （blocked 不计，环境阻断按规则不开新仓）。当日未扫描时为 0。
+    """
 
     open_actions: int
     active_plans: int
+    today_opportunities: int = 0
 
 
 class ConformanceReportDTO(BaseModel):

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.lei.daily_scan</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/python3</string>
+        <string>scripts/daily_scan.py</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PYTHONPATH</key>
+        <string>/Users/yongbiaoli/Desktop/lei-signal-lab/src</string>
+    </dict>
+
+    <!-- 15:00 收盘后扫自选机会雷达, 整体重写当日 daily_opportunity_scan 表.
+         dashboard 面板 + 顶栏红点读这张表. 只写库不推通知 (用户决策).
+         晚于 watch_check (14:46) 与 intraday (14:45), 避开盘中 IO 高峰. -->
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict>
+            <key>Weekday</key><integer>1</integer>
+            <key>Hour</key><integer>15</integer>
+            <key>Minute</key><integer>0</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key><integer>2</integer>
+            <key>Hour</key><integer>15</integer>
+            <key>Minute</key><integer>0</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key><integer>3</integer>
+            <key>Hour</key><integer>15</integer>
+            <key>Minute</key><integer>0</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key><integer>4</integer>
+            <key>Hour</key><integer>15</integer>
+            <key>Minute</key><integer>0</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key><integer>5</integer>
+            <key>Hour</key><integer>15</integer>
+            <key>Minute</key><integer>0</integer>
+        </dict>
+    </array>
+
+    <key>StandardOutPath</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/logs/daily_scan.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/logs/daily_scan.err.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+</dict>
+</plist>

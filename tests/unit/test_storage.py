@@ -6,6 +6,7 @@ import pandas as pd
 import pytest
 
 from lei_signal.compose.pipeline import analyze_bars
+from lei_signal.domain.rules_config import ruleset_version
 from lei_signal.domain.types import StructureStatus
 from lei_signal.storage.sqlite_store import (
     apply_migrations,
@@ -158,7 +159,7 @@ def test_assessment_and_run_metadata_are_recorded(db) -> None:  # noqa: ANN001
     row = db.execute("SELECT * FROM daily_assessments").fetchone()
     assert row["symbol"] == "SYN"
     assert row["stage"] == result.assessment.stage.value
-    assert row["ruleset_version"] == "1.3.0"
+    assert row["ruleset_version"] == ruleset_version()
     assert row["data_status"] == "OK"
 
     record_run(

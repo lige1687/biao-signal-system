@@ -129,11 +129,8 @@ export default function BuyPointDrawer({
       ]),
   });
 
-  // 审阅就绪后自动开聊（agent 的开场叙述就是对话起点，会提到买点序号驱动高亮）
-  useEffect(() => {
-    if (review) ask.mutate("");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [review?.as_of]);
+  // 不再自动开聊: 打开时只展示确定性结论, 用户点 chip 主动激活,
+  // 想聊再打字. 自动开聊会让 LLM 一坨文本抢屏, 反而挡住 next_step / 未来买点.
 
   // agent 最新一条消息里若提到「买点N」，自动把主图/卡片联动到那个买点
   useEffect(() => {
@@ -216,7 +213,7 @@ export default function BuyPointDrawer({
           <ResonancePanel groups={review.resonance_groups} />
         )}
 
-        {/* 买点序号选择器：点一个 -> 主图高亮 + 下方出该买点卡片（只列值得讲的候选） */}
+        {/* 买点序号选择器: 标签带 scenario 简述, 不用 hover 才能知道是啥 */}
         {notable.length > 0 && (
           <div className="bp-chips">
             {notable.map((c, i) => (
@@ -226,7 +223,7 @@ export default function BuyPointDrawer({
                 onClick={() => onActivateCandidate(activeCand === i ? null : i)}
                 title={c.scenario_cn}
               >
-                买点{circled(i)}
+                买点{circled(i)} · {c.scenario_cn}
               </button>
             ))}
           </div>
@@ -241,7 +238,36 @@ export default function BuyPointDrawer({
           />
         )}
 
+        {/* 未来买点 (watch_conditions): 提到 chat 之上, 直接回答"潜在哪里买".
+            每条配 [设提醒] 按钮, 命中后由 14:45 checker 翻 pending_confirmation. */}
+        {review && review.watch_conditions.length > 0 && (() => {
+          const firstCand = notable[0];
+          return (
+            <WatchConditionsPanel
+              symbol={symbol}
+              conditions={review.watch_conditions}
+              candidateDirection={
+                review.suggested_plan?.direction ?? firstCand?.direction ?? "long"
+              }
+              candidateModule={
+                review.suggested_plan?.module ?? firstCand?.module ?? "A"
+              }
+              sourceRuleId={
+                review.suggested_plan?.entry_rule_id ?? firstCand?.rule_id ?? null
+              }
+              sourceCandidateId={firstCand?.scenario_id ?? null}
+            />
+          );
+        })()}
+
         <div className="bp-body" ref={bodyRef}>
+          {turns.length === 0 && !ask.isPending && (
+            <div className="bp-empty-chat muted">
+              已审阅 {notable.length} 个候选 · 共振 {review?.resonance_groups.length ?? 0} 组
+              <br />
+              点上方「买点」看入场/止损/下一步; 这里可以就买点提问.
+            </div>
+          )}
           {turns.map((turn, i) => (
             <div className={`turn ${turn.who}`} key={i}>
               <div className="who">{turn.who === "you" ? "你" : "分析"}</div>
@@ -288,28 +314,6 @@ export default function BuyPointDrawer({
 
         {review && <div className="muted bp-disclaimer">{review.disclaimer_cn}</div>}
 
-        {/* 未来买点 (watch_conditions): 每条配 [设提醒] 按钮, 命中后由
-            14:45 checker 翻 pending_confirmation */}
-        {review && review.watch_conditions.length > 0 && (() => {
-          const firstCand = notable[0];
-          return (
-            <WatchConditionsPanel
-              symbol={symbol}
-              conditions={review.watch_conditions}
-              candidateDirection={
-                review.suggested_plan?.direction ?? firstCand?.direction ?? "long"
-              }
-              candidateModule={
-                review.suggested_plan?.module ?? firstCand?.module ?? "A"
-              }
-              sourceRuleId={
-                review.suggested_plan?.entry_rule_id ?? firstCand?.rule_id ?? null
-              }
-              sourceCandidateId={firstCand?.scenario_id ?? null}
-            />
-          );
-        })()}
-
         {/* 历史结构: recency 过滤掉的过期结构, 默认折叠, 仅作文案历史参考 */}
         {review && review.historical_structures.length > 0 && (
           <HistoricalPanel
@@ -331,9 +335,9 @@ export default function BuyPointDrawer({
   );
 }
 
-/** 聚焦的买点卡片：依据/价位/止损/R/R/下一步，与主图高亮一一对应。
- * 默认收起，只露标题+价位（最常用的 3 项），省下大量面板高度给 agent 对话；
- * 点 ▼ 展开看完整依据/注意/rule_id 等。点击卡片其它空白处仍按原逻辑切换激活。 */
+/** 聚焦的买点卡片: 默认展开 (chat 不再自动抢屏, 空间够),
+ * 露入场下一步/满足条件/缺失条件, 解决"我不知道该不该买"的痛点.
+ * 折叠按钮可手动收起, 留出聊天空间. */
 function CandidateCard({
   c,
   index,
@@ -343,7 +347,7 @@ function CandidateCard({
   index: number;
   onActivate: (index: number | null) => void;
 }) {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
   return (
     <div
       className={`bp-card active${expanded ? " expanded" : ""}`}

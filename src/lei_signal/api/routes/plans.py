@@ -226,11 +226,21 @@ def confirm(request: Request, plan_id: str) -> PlanDTO:
 
 @router.get("/plans/summary", response_model=PlansSummaryDTO)
 def plans_summary(request: Request) -> PlansSummaryDTO:
-    """顶栏红点：未处理待办数 + 活跃（armed/entered）计划数。"""
+    """顶栏红点：未处理待办数 + 活跃（armed/entered）计划数 + 今日机会数。"""
+    from lei_signal.api.opportunity_scan import (  # noqa: PLC0415
+        count_opportunities,
+        today_date,
+    )
+
     with closing(connect(_db_path(request))) as conn:
         open_actions = count_open_action_items(conn)
         active = list_plans(conn, state="armed") + list_plans(conn, state="entered")
-    return PlansSummaryDTO(open_actions=open_actions, active_plans=len(active))
+        today_opps = count_opportunities(conn, today_date())
+    return PlansSummaryDTO(
+        open_actions=open_actions,
+        active_plans=len(active),
+        today_opportunities=today_opps,
+    )
 
 
 @router.get("/plans", response_model=list[PlanDTO])

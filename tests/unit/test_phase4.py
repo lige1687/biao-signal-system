@@ -7,7 +7,7 @@ import pytest
 
 from lei_signal.compose.interpreter import assessment_to_rows
 from lei_signal.compose.pipeline import analyze_bars
-from lei_signal.domain.rules_config import risk_priority
+from lei_signal.domain.rules_config import risk_priority, ruleset_version
 from lei_signal.domain.types import Provenance, Stage
 from tests.golden.fixtures import (
     golden_bottom_c_invalidation,
@@ -24,14 +24,22 @@ def _analyze(bars: pd.DataFrame, **kwargs):  # noqa: ANN202
 # ---------------- 解释快照结构 ----------------
 
 
+#: 架构第 7 节声明的 LEI 五个维度（原始规则，不可增删）
+LEI_DIMENSIONS = {"结构", "短周期", "长周期", "量价", "上方空间"}
+#: 研究代理附加维度：MACD 只表达强度/乖离，不是 LEI 原始维度，
+#: 单列出来是为了不让研究代理混进上面五个维度冒充 LEI 规则。
+PROXY_DIMENSIONS = {"强度(MACD)"}
+
+
 def test_assessment_contains_every_required_section() -> None:
     """架构第 7 节要求的每日解释字段必须齐备。"""
     result = _analyze(golden_delayed_upgrade())
     a = result.assessment
     assert a.stage in set(Stage)
-    assert a.dimensions.keys() == {"结构", "短周期", "长周期", "量价", "上方空间"}
+    assert a.dimensions.keys() >= LEI_DIMENSIONS
+    assert a.dimensions.keys() - LEI_DIMENSIONS <= PROXY_DIMENSIONS
     assert a.stage_change_reason_cn
-    assert a.rule_ruleset_version == "1.3.0"
+    assert a.rule_ruleset_version == ruleset_version()
     assert a.last_data_date == result.frame.index[-1].date()
     assert a.data_status == "OK"
     # 新增/有效/失效三栏必须存在（可以为空列表，但字段必须有）
@@ -55,7 +63,10 @@ def test_dimensions_use_only_declared_labels() -> None:
         "长周期": {"支持", "改善中", "冲突"},
         "量价": {"支持", "中性", "冲突"},
         "上方空间": {"通畅", "存在B1阻力", "无B1数据"},
+        # 研究代理：强度三态（扩散=支持 / 收敛=中性 / 空头扩散=冲突），不表达转折
+        "强度(MACD)": {"支持", "中性", "冲突"},
     }
+    assert allowed.keys() == LEI_DIMENSIONS | PROXY_DIMENSIONS
     for assessment in result.assessments_by_date.values():
         for dimension, value in assessment.dimensions.items():
             assert value in allowed[dimension], f"{dimension}={value} 不在允许集合"

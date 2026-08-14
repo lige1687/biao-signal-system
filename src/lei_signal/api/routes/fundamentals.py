@@ -19,6 +19,36 @@ def overview(request: Request, refresh: bool = False) -> dict:
     return _service(request).overview(refresh=refresh)
 
 
+@router.get("/rates")
+def rates(request: Request, refresh: bool = False) -> dict:
+    """利率 + 资金面板：中美国债收益率 + 中美利差 + VIX + 两融余额。"""
+    return _service(request).rates(refresh=refresh)
+
+
+@router.get("/rates-history")
+def rates_history(request: Request, lookback_days: int = 730) -> dict:
+    """宏观利率/VIX/两融 历史时间序列，供趋势图。lookback_days 默认 730。"""
+    return _service(request).rates_history(lookback_days=lookback_days)
+
+
+@router.get("/macro-history")
+def macro_history(request: Request, page_size: int = 60) -> dict:
+    """PMI/CPI/PPI 月度历史序列，供趋势图。page_size 默认 60 期（约 5 年）。"""
+    return _service(request).macro_history(page_size=page_size)
+
+
+@router.get("/commodities")
+def commodities(request: Request, refresh: bool = False) -> dict:
+    """全球商品代理：铜金比 / 油金比（yfinance）。"""
+    return _service(request).commodities(refresh=refresh)
+
+
+@router.get("/etf-strength")
+def etf_strength(request: Request, refresh: bool = False) -> dict:
+    """11 行业 ETF 相对强度（risk on/off，yfinance）。"""
+    return _service(request).etf_strength(refresh=refresh)
+
+
 @router.get("/industry/{code}/flow")
 def industry_flow(request: Request, code: str, days: int = 20) -> dict:
     """单个行业板块资金流历史（日级，主力/超大/大/中/小单，单位亿元）。"""

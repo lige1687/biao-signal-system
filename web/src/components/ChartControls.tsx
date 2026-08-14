@@ -153,6 +153,14 @@ export default function ChartControls({
         >
           ▤ 筹码峰
         </button>
+        <button
+          className={`chip ${display.macd ? "on" : ""}`}
+          style={display.macd ? { borderColor: "#8b5cf6", color: "#8b5cf6" } : undefined}
+          onClick={() => onChange({ ...display, macd: !display.macd })}
+          title="MACD 副图（研究代理）：DIF/DEA + 红绿柱。表达均线扩散/密集=乖离率=强度，不是转折节点；破线看 LEI 颜色，均线拐头看均线斜率"
+        >
+          ⑃ MACD
+        </button>
         {anyMark && (
           <button
             className="chip clear"

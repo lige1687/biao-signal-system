@@ -1655,6 +1655,63 @@ def market_context_global_strip(request: Request) -> dict[str, Any]:
     return {"panels": out}
 
 
+@router.get("/market-context/breadth-history")
+def market_context_breadth_history(
+    request: Request,
+    market_id: str = Query(..., description="e.g. CN_ALL_A, SP500"),
+    lookback_days: int = Query(120, ge=1, le=1260),
+) -> dict:
+    """Return the breadth history time-series for one global panel.
+
+    Powers the expanded trend chart in the market-breadth snapshot panel
+    (A股 全A / 美股 标普500). Reuses the same persisted revisions the
+    global-strip reads from, so the frontend never recomputes breadth.
+    """
+    try:
+        mid = MarketId(market_id)
+    except ValueError:
+        return {"market_id": market_id, "error": "unknown_market", "history": []}
+    history = _market_context_service(request).get_breadth_history(
+        mid, lookback_days=lookback_days,
+    )
+    return {"market_id": market_id, "lookback_days": lookback_days, "history": history}
+
+
+@router.get("/market-context/a-share-breadth")
+def market_context_a_share_breadth(
+    request: Request,
+    include_ma: bool = Query(
+        False,
+        description="含 MA20/50/200 上方占比(券商金工口径)，需正常网络环境拉个股历史K线",
+    ),
+) -> dict:
+    """真全A市场宽度：替换原 fixture 假全A样本。
+
+    核心维度 = 涨跌家数（腾讯实时快照 + 沪深交易所代码列表），覆盖真全A，
+    默认即算、受限网络可验。可选维度 = MA20/50/200 上方占比（akshare 东财历史K线，
+    券商金工"全A宽度"口径），受限网络下自动降级、绝不伪造。
+    """
+    from lei_signal.market_context.a_share_breadth import get_a_share_breadth
+
+    b = get_a_share_breadth(include_ma=include_ma)
+    return {
+        "as_of": b.as_of,
+        "up": b.up,
+        "down": b.down,
+        "flat": b.flat,
+        "total": b.total,
+        "up_pct": b.up_pct,
+        "adv_dec_ratio": b.adv_dec_ratio,
+        "limit_up": b.limit_up,
+        "limit_down": b.limit_down,
+        "ma20_pct": b.ma20_pct,
+        "ma50_pct": b.ma50_pct,
+        "ma200_pct": b.ma200_pct,
+        "data_status": b.data_status,
+        "source_detail": b.source_detail,
+    }
+
+
 _HOT_THRESHOLD = 85.0
 _COLD_THRESHOLD = 15.0
 

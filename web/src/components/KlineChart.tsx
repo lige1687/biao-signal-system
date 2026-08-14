@@ -88,6 +88,8 @@ export interface ChartDisplay {
   ma: Record<MaKey, boolean>;
   /** 筹码分布（CYQ）：成交量按价格纵向铺开，看密集支撑/阻力。默认关。 */
   chipDist: boolean;
+  /** MACD 副图：DIF/DEA 线 + 红绿柱（研究代理强度指标）。默认关。 */
+  macd: boolean;
   colorMode: ColorMode;
 }
 
@@ -105,8 +107,9 @@ export const DEFAULT_DISPLAY: ChartDisplay = {
     ema120: false,
     sma120: false,
   },
-  chipDist: false,
-  colorMode: "red_green",
+  chipDist: true, // 默认开筹码峰（CYQ）
+  macd: true, // 默认开 MACD 副图
+  colorMode: "lei_state", // 默认 LEI 黑绿灰着色（颜色=当日状态）
 };
 
 /** 买点分析的高亮标注指令。由 DetailPage 根据对话卡片联动驱动。
@@ -170,6 +173,45 @@ export default function KlineChart({ payload, display, onPick, onDownload, highl
       if (ref.current) ref.current.style.cursor = "crosshair";
     });
 
+    // dataZoom 吸附：拖拽/滚轮缩放时把窗口起止索引取整回写，使边缘始终对齐
+    // 到「整根 K 线」，不出现半根蜡烛、也不在极细缩放时漂离数据顶点。若当前
+    // 已是整数索引则跳过，避免 setOption 触发 dataZoom 事件造成死循环。
+    const onDataZoom = (ev: {
+      startValue?: number;
+      endValue?: number;
+      batch?: Array<{ startValue?: number; endValue?: number }>;
+    }) => {
+      const batches = Array.isArray(ev?.batch) ? ev.batch! : [ev];
+      let s: number | null = null;
+      let e: number | null = null;
+      for (const b of batches) {
+        if (b.startValue != null && b.endValue != null) {
+          const rs = Math.round(b.startValue);
+          const re = Math.round(b.endValue);
+          // 取跨度最大的一段（inside 与 slider 可能同时派发）
+          if (s === null || re - rs > e! - s!) {
+            s = rs;
+            e = re;
+          }
+        }
+      }
+      if (s === null || e === null) return;
+      const cur = (chart.getOption().dataZoom as Array<{ startValue?: number; endValue?: number }> | undefined) ?? [];
+      const c0 = cur[0];
+      const alreadyInt =
+        c0 && c0.startValue != null && c0.endValue != null &&
+        Number.isInteger(c0.startValue) && Number.isInteger(c0.endValue);
+      if (!alreadyInt) {
+        chart.setOption({
+          dataZoom: [
+            { startValue: s, endValue: e },
+            { startValue: s, endValue: e },
+          ],
+        });
+      }
+    };
+    chart.on("dataZoom", onDataZoom as (params: unknown) => void);
+
     const onResize = () => chart.resize();
     window.addEventListener("resize", onResize);
     // 容器尺寸变化（如买点侧栏滑入让主图变窄）也要 resize，否则标注位置错乱
@@ -182,6 +224,7 @@ export default function KlineChart({ payload, display, onPick, onDownload, highl
       chart.off("click", onClick as (params: unknown) => void);
       chart.off("mouseover", onOver as (params: unknown) => void);
       chart.off("mouseout");
+      chart.off("dataZoom", onDataZoom as (params: unknown) => void);
       chart.dispose();
       chartRef.current = null;
     };
@@ -209,10 +252,19 @@ export default function KlineChart({ payload, display, onPick, onDownload, highl
 
   // setOption 独立 effect：data/开关变化时只更新 option，不销毁实例，
   // 保留 dataZoom 缩放位置，不闪烁。用 notMerge 防止旧标记/均线残留。
+  // 但 notMerge 会整体替换 option、把 dataZoom 重置回默认，因此先读出当前
+  // 窗口（整数索引）原样续接，既保留缩放位置、又保证吸附在整根 K 线。
+  // 首次渲染时 chart 还没有 option，取 null 用默认区间。
   useEffect(() => {
     const chart = chartRef.current;
     if (!chart) return;
-    chart.setOption(buildKlineOption(payload, display, highlight), { notMerge: true });
+    const curDz = (chart.getOption().dataZoom as Array<{ startValue?: number; endValue?: number }> | undefined) ?? [];
+    const z0 = curDz[0];
+    const zoom =
+      z0 && z0.startValue != null && z0.endValue != null
+        ? { startValue: Math.round(z0.startValue), endValue: Math.round(z0.endValue) }
+        : null;
+    chart.setOption(buildKlineOption(payload, display, highlight, zoom), { notMerge: true });
   }, [payload, display, highlight]);
 
   return (
@@ -244,10 +296,24 @@ function fmtBig(n: number): string {
 
 /** 把 payload + display 组装成 ECharts option。
  *  抽成纯函数：setOption effect 每次调用它，不接触 chart 实例。 */
-function buildKlineOption(payload: ChartPayload, display: ChartDisplay, highlight?: HighlightSpec | null) {
+/** 当前缩放区间（数据索引），跨 setOption 续接用，避免 notMerge 把缩放位置重置。 */
+interface ZoomRange {
+  startValue: number;
+  endValue: number;
+}
+
+function buildKlineOption(
+  payload: ChartPayload,
+  display: ChartDisplay,
+  highlight?: HighlightSpec | null,
+  zoom?: ZoomRange | null,
+) {
     const d = payload;
     const up = d.priceUp;
     const down = d.priceDown;
+    const showMacd = display.macd;
+    // 筹码 value 轴排在所有 category 轴之后：开 MACD 时占 index 3，否则 2。
+    const chipXAxisIndex = showMacd ? 3 : 2;
     // 本站已改为亮色主题，与 Streamlit 研究页一致，因此直接使用后端
     // stateColors（green=#0b9b64 / gray=#8c96a8 / black=#1f2937）——
     // 它本就是为白底设计的，无需再做暗底重映射。
@@ -599,7 +665,7 @@ function buildKlineOption(payload: ChartPayload, display: ChartDisplay, highligh
         chipSeries = {
           name: "筹码峰",
           type: "custom",
-          xAxisIndex: 2,
+          xAxisIndex: chipXAxisIndex,
           yAxisIndex: 0,
           clip: true,
           z: 2,
@@ -689,11 +755,109 @@ function buildKlineOption(payload: ChartPayload, display: ChartDisplay, highligh
       }
     }
 
+    // ---- MACD 副图（研究代理强度指标）----
+    // DIF/DEA 线 + 红绿柱 + 0 轴参考线。作强度/乖离解读，非转折（见 macd_strength）。
+    const macdOpacity = dim ? DIM_OPACITY : 1;
+    const macdSeries: object[] = showMacd
+      ? [
+          {
+            name: "MACD柱",
+            type: "bar",
+            data: d.macdHist.map((v) => ({
+              value: v,
+              itemStyle: {
+                color: v != null && v >= 0 ? up : down,
+                opacity: macdOpacity,
+              },
+            })),
+            xAxisIndex: 2,
+            yAxisIndex: 2,
+            markLine: {
+              silent: true,
+              symbol: "none",
+              lineStyle: { color: "#c0c6d0", type: "dashed", width: 0.8 },
+              label: { show: false },
+              data: [{ yAxis: 0 }],
+            },
+          },
+          {
+            name: "DIF",
+            type: "line",
+            data: d.macdDif,
+            xAxisIndex: 2,
+            yAxisIndex: 2,
+            showSymbol: false,
+            smooth: true,
+            lineStyle: { width: 1.3, color: "#f59e0b", opacity: macdOpacity },
+            itemStyle: { color: "#f59e0b" },
+            z: 3,
+          },
+          {
+            name: "DEA",
+            type: "line",
+            data: d.macdDea,
+            xAxisIndex: 2,
+            yAxisIndex: 2,
+            showSymbol: false,
+            smooth: true,
+            lineStyle: { width: 1.3, color: "#8b5cf6", opacity: macdOpacity },
+            itemStyle: { color: "#8b5cf6" },
+            z: 3,
+          },
+        ]
+      : [];
+    const macdXAxis = showMacd
+      ? [
+          {
+            type: "category",
+            data: d.dates,
+            gridIndex: 2,
+            axisLine: { lineStyle: { color: "#dfe5ee" } },
+            axisLabel: { show: false },
+            splitLine: { show: false },
+          },
+        ]
+      : [];
+    const macdYAxis = showMacd
+      ? [
+          {
+            scale: true,
+            gridIndex: 2,
+            axisLine: { show: false },
+            axisLabel: { color: "#7b8494", fontSize: 10 },
+            splitLine: { show: false },
+          },
+        ]
+      : [];
+    const grids = showMacd
+      ? [
+          { left: 56, right: 34, top: 32, height: "46%" },
+          { left: 56, right: 34, top: "56%", height: "14%" },
+          { left: 56, right: 34, top: "72%", height: "14%" },
+        ]
+      : [
+          { left: 56, right: 34, top: 32, height: "62%" },
+          { left: 56, right: 34, top: "72%", height: "18%" },
+        ];
+    const zoomAxes = showMacd ? [0, 1, 2] : [0, 1];
+
+    // dataZoom 改用「数据索引」(startValue/endValue) 而非百分比，并由外部 dataZoom
+    // 事件把索引取整回写，使拖拽/缩放时窗口永远对齐到「整根 K 线」——不会被切成
+    // 半根、也不会在缩放到很细时漂离数据顶点。zoom 由 setOption effect 传入续接
+    // 用户当前位置；首次/无续接时用默认展示右侧约 60%。
+    const n = d.dates.length;
+    const defStart = n > 1 ? Math.round(0.4 * (n - 1)) : 0;
+    const defEnd = n > 0 ? n - 1 : 0;
+    const clampIdx = (v: number) => Math.max(0, Math.min(n - 1, Math.round(v)));
+    let zs = clampIdx(zoom?.startValue ?? defStart);
+    let ze = clampIdx(zoom?.endValue ?? defEnd);
+    if (zs > ze) [zs, ze] = [ze, zs];
+
     return {
         backgroundColor: "transparent",
         animation: false,
         legend: {
-          data: maSeries.map((s) => s.name),
+          data: [...maSeries.map((s) => s.name), ...(showMacd ? ["DIF", "DEA", "MACD柱"] : [])],
           textStyle: { color: "#5b6473", fontSize: 11 },
           top: 4,
         },
@@ -726,6 +890,11 @@ function buildKlineOption(payload: ChartPayload, display: ChartDisplay, highligh
               } else if (p.seriesName === "量能") {
                 const vol = typeof v === "object" && v !== null && "value" in v ? (v as { value: number }).value : (v as number);
                 lines.push(`量能 ${fmtBig(vol)}`);
+              } else if (p.seriesName === "DIF" || p.seriesName === "DEA") {
+                if (typeof v === "number" && v) lines.push(`${p.seriesName} ${v.toFixed(4)}`);
+              } else if (p.seriesName === "MACD柱") {
+                const hv = typeof v === "object" && v !== null && "value" in v ? (v as { value: number }).value : (v as number);
+                if (hv != null) lines.push(`MACD柱 ${hv.toFixed(4)}`);
               } else if (typeof v === "number" && v) {
                 lines.push(`${p.seriesName} ${v.toFixed(2)}`);
               }
@@ -734,10 +903,7 @@ function buildKlineOption(payload: ChartPayload, display: ChartDisplay, highligh
           },
         },
         axisPointer: { link: [{ xAxisIndex: "all" }] },
-        grid: [
-          { left: 56, right: 34, top: 32, height: "62%" },
-          { left: 56, right: 34, top: "72%", height: "18%" },
-        ],
+        grid: grids,
         xAxis: [
           {
             type: "category",
@@ -755,6 +921,7 @@ function buildKlineOption(payload: ChartPayload, display: ChartDisplay, highligh
             axisLabel: { show: false },
             splitLine: { show: false },
           },
+          ...macdXAxis,
           ...(chipXAxis ? [chipXAxis] : []),
         ],
         yAxis: [
@@ -772,16 +939,17 @@ function buildKlineOption(payload: ChartPayload, display: ChartDisplay, highligh
             axisLabel: { color: "#7b8494", fontSize: 10 },
             splitLine: { show: false },
           },
+          ...macdYAxis,
         ],
         dataZoom: [
-          { type: "inside", xAxisIndex: [0, 1], start: 40, end: 100 },
+          { type: "inside", xAxisIndex: zoomAxes, startValue: zs, endValue: ze },
           {
             type: "slider",
-            xAxisIndex: [0, 1],
+            xAxisIndex: zoomAxes,
             bottom: 6,
             height: 18,
-            start: 40,
-            end: 100,
+            startValue: zs,
+            endValue: ze,
             borderColor: "#dfe5ee",
             backgroundColor: "transparent",
             textStyle: { color: "#7b8494", fontSize: 10 },
@@ -811,6 +979,7 @@ function buildKlineOption(payload: ChartPayload, display: ChartDisplay, highligh
             xAxisIndex: 1,
             yAxisIndex: 1,
           },
+          ...macdSeries,
           ...(chipSeries ? [chipSeries] : []),
         ],
       };

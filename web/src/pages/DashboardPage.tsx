@@ -4,6 +4,7 @@ import { api } from "../api/client";
 import AddSymbolDialog from "../components/AddSymbolDialog";
 import MarketBreadthStrip from "../components/MarketBreadthStrip";
 import MarketCard from "../components/MarketCard";
+import TodayOpportunityPanel from "../components/TodayOpportunityPanel";
 import WatchSubscriptionsPanel from "../components/WatchSubscriptionsPanel";
 
 /** 加载占位卡片：渐入的 shimmer 比纯文字 loading 更能表达"正在填充"。 */
@@ -96,6 +97,8 @@ export default function DashboardPage() {
       </div>
 
       <MarketBreadthStrip />
+
+      <TodayOpportunityPanel />
 
       <WatchSubscriptionsPanel />
 

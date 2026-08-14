@@ -15,20 +15,55 @@ def seeded_ema(close: pd.Series, period: int = 20) -> pd.Series:
     """TradingView 风格 EMA：以首窗口 SMA 作为种子，alpha = 2/(period+1)。
 
     前 period-1 根为 NaN，第 period 根等于 SMA，其后递推。
+    若输入存在前导 NaN（如 MACD 的 DIF：前 slow-1 根为 NaN），自动跳过
+    前导 NaN，从首个有效值起以 SMA 作种子再递推--对无前导 NaN 的序列
+    （如收盘价）行为完全不变。
     """
     if period <= 0:
         raise ValueError("period 必须为正")
     values = close.astype(float).to_numpy()
     result = np.full(len(values), np.nan, dtype=float)
-    if len(values) < period:
+    # 跳过前导 NaN：MACD DIF 等派生序列会带前导 NaN，直接以首窗口 SMA
+    # 作种子会让 seed=NaN 并污染全段，因此先定位首个有效值。
+    first_valid = 0
+    n = len(values)
+    while first_valid < n and np.isnan(values[first_valid]):
+        first_valid += 1
+    valid = values[first_valid:]
+    if len(valid) < period:
         return pd.Series(result, index=close.index, name=f"ema{period}")
 
     seed_index = period - 1
-    result[seed_index] = values[:period].mean()
+    result[first_valid + seed_index] = valid[:period].mean()
     alpha = 2.0 / (period + 1.0)
-    for index in range(seed_index + 1, len(values)):
-        result[index] = alpha * values[index] + (1.0 - alpha) * result[index - 1]
+    for index in range(seed_index + 1, len(valid)):
+        result[first_valid + index] = (
+            alpha * valid[index] + (1.0 - alpha) * result[first_valid + index - 1]
+        )
     return pd.Series(result, index=close.index, name=f"ema{period}")
+
+
+def macd(
+    close: pd.Series, fast: int = 12, slow: int = 26, signal: int = 9
+) -> tuple[pd.Series, pd.Series, pd.Series]:
+    """MACD：DIF = EMA(fast) - EMA(slow)，DEA = EMA(signal, DIF)，hist = 2*(DIF-DEA)。
+
+    复用 ``seeded_ema``：DIF 前 slow-1 根为 NaN，DEA 在 DIF 首个有效值后
+    signal 根起算，追加未来数据不改变旧值（因果/增量）。
+
+    只计算数值，不给出买卖含义。MACD 表达均线扩散/密集=乖离率=**强度**，
+    不是转折趋势节点（解读口径见 ``configs/rules.v1.yaml`` 的 ``macd_strength``）。
+    """
+    if fast <= 0 or slow <= 0 or signal <= 0:
+        raise ValueError("fast/slow/signal 必须为正")
+    if fast >= slow:
+        raise ValueError("fast 必须小于 slow")
+    ema_fast = seeded_ema(close, fast)
+    ema_slow = seeded_ema(close, slow)
+    dif = (ema_fast - ema_slow).rename("macd_dif")
+    dea = seeded_ema(dif, signal).rename("macd_dea")
+    hist = ((dif - dea) * 2.0).rename("macd_hist")
+    return dif, dea, hist
 
 
 def true_range(frame: pd.DataFrame) -> pd.Series:
@@ -72,7 +107,7 @@ def compute_features(bars: pd.DataFrame, config: dict | None = None) -> pd.DataF
     """计算全部基础特征。
 
     产出列：sma{20,60,120}、ema{20,60,120}、close_lag{20,60,120}、atr14、
-    各均线方向、量能均值与量比、spread。
+    各均线方向、量能均值与量比、spread、macd_dif/dea/hist。
     """
     if "close" not in bars.columns:
         raise ValueError("行情缺少 close 列")
@@ -116,7 +151,16 @@ def compute_features(bars: pd.DataFrame, config: dict | None = None) -> pd.DataF
     ).mean()
     result["volume_ratio20"] = volume / result[f"volume_mean{volume_window}"]
 
+    # MACD（研究代理强度指标）：DIF/DEA/hist，作乖离/强度解读，非转折
+    macd_fast = int(settings.get("macd_fast", 12))
+    macd_slow = int(settings.get("macd_slow", 26))
+    macd_signal = int(settings.get("macd_signal", 9))
+    macd_dif, macd_dea, macd_hist = macd(close, macd_fast, macd_slow, macd_signal)
+    result["macd_dif"] = macd_dif
+    result["macd_dea"] = macd_dea
+    result["macd_hist"] = macd_hist
+
     return result
 
 
-__all__ = ["average_true_range", "compute_features", "seeded_ema", "true_range"]
+__all__ = ["average_true_range", "compute_features", "macd", "seeded_ema", "true_range"]

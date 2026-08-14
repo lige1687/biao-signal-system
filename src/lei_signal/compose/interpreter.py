@@ -26,6 +26,7 @@ from lei_signal.domain.types import (
 )
 from lei_signal.events.lifecycle import END_SUB_RULES, PULSE_RULES
 from lei_signal.features.volume_profile import VolumeProfileProxy
+from lei_signal.rules.macd_strength import MacdStrengthReading, read_macd_strength
 from lei_signal.rules.resistance_b1 import B1Resistance
 from lei_signal.state.machine import DayState
 
@@ -70,6 +71,14 @@ def build_assessment(
 
     dimensions = _build_dimensions(day_state, row, b1, profile)
 
+    # MACD 强度解读（研究代理）：读 DIF/DEA/hist 为强度/乖离，不当转折。
+    # 盲区（破线/均线拐头）由 LEI 颜色与均线斜率补齐，见 Factor 的 detail_cn。
+    prev_row = _previous_row(frame, timestamp)
+    macd_reading = read_macd_strength(row, prev_row)
+    if macd_reading is not None:
+        _append_macd_factor(supports, conflicts, macd_reading)
+        dimensions["强度(MACD)"] = macd_reading.dimension_value
+
     assessment = DailyAssessment(
         symbol=symbol,
         as_of=day,
@@ -104,6 +113,46 @@ def build_assessment(
     )
     assessment.stage_change_reason_cn = _stage_change_reason(assessment, day_state, previous_state)
     return assessment
+
+
+def _previous_row(frame: pd.DataFrame, timestamp: pd.Timestamp) -> pd.Series | None:
+    """``timestamp`` 在 frame 中的前一行（前一交易日）；无则 None。"""
+    prior = frame.loc[frame.index < timestamp]
+    return prior.iloc[-1] if len(prior) else None
+
+
+def _append_macd_factor(
+    supports: list[Factor],
+    conflicts: list[Factor],
+    reading: MacdStrengthReading,
+) -> None:
+    """把 MACD 强度解读挂进 supports/conflicts。
+
+    中性（收敛）只进维度、不进列表，与系统「factor 为支持/冲突二态」一致。
+    明示盲区：detail_cn 末尾附 blind_spot_cn，让「破线/拐头需补齐」始终可见。
+    """
+    if reading.dimension_value == "中性":
+        return
+    spec = get_rule("macd_strength")
+    factor = Factor(
+        dimension="强度(MACD)",
+        label_cn=reading.label_cn,
+        detail_cn=f"{reading.detail_cn}；{reading.blind_spot_cn}",
+        rule_id=spec.rule_id,
+        rule_version=spec.version,
+        provenance=spec.provenance,
+        values={
+            "dif": reading.dif,
+            "dea": reading.dea,
+            "hist": reading.hist,
+            "cross": reading.cross,
+            "status": reading.status,
+        },
+    )
+    if reading.dimension_value == "支持":
+        supports.append(factor)
+    else:
+        conflicts.append(factor)
 
 
 def _active_and_ended_events(

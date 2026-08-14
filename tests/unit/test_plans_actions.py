@@ -7,6 +7,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
+from lei_signal.domain.rules_config import ruleset_version
 from lei_signal.plans.actions import (
     run_plan_cycle,
     validate_resume_on,
@@ -198,7 +199,7 @@ def test_context_from_result_on_fixture() -> None:
     ctx = context_from_result(result, cache_fallback_used=False)
     assert ctx.last_bar_date
     assert ctx.current_close is not None
-    assert ctx.ruleset_version == RULESET
+    assert ctx.ruleset_version == ruleset_version()
 
 
 def test_context_from_result_fixture_marks_stale() -> None:

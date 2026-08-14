@@ -72,3 +72,5 @@ description: LEI 交易纪律监督员。读 /api/plans* 确定性输出，按�
 - 不从行情探测买卖点。不调参。不输出总分。
 - 不接 B/C 模块（未实现；module 填 B/C 时 alert 会回 MODULE_NOT_IMPLEMENTED，照实说）。
 - 不自创 next_step、不自创 rule_id、不编 evidence 数值。
+- 讲 MACD 一律按 `macd-reading` skill 的口径（强度非转折，金叉/死叉不构成买点，
+  必带破线/均线拐头的盲区补齐），不另起一套。

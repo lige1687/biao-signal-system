@@ -10,6 +10,7 @@ import pytest
 
 from lei_signal.compose.pipeline import analyze_bars
 from lei_signal.data.point_in_time import aggregate_weekly
+from lei_signal.domain.rules_config import ruleset_version
 from lei_signal.domain.types import Provenance, Stage, StructureStatus
 from lei_signal.events.log import EventLog
 from lei_signal.rules.key_wave import detect_key_wave_events
@@ -254,7 +255,7 @@ def test_gate_12_every_hint_is_traceable_to_rule_version_and_data_date() -> None
     """门禁 12：每条界面提示都能追溯到规则、版本、输入值和数据日期。"""
     result = analyze_bars("G", _bars(), build_history=True)
     for assessment in result.assessments_by_date.values():
-        assert assessment.rule_ruleset_version == "1.3.0"
+        assert assessment.rule_ruleset_version == ruleset_version()
         assert assessment.last_data_date is not None
         for factor in [*assessment.supports, *assessment.conflicts]:
             assert factor.rule_id

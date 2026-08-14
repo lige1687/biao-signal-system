@@ -1889,6 +1889,7 @@ a { color: var(--accent); text-decoration: none; }
   font-size: 12px; padding: 3px 11px; border-radius: 12px;
   border: 1px solid var(--border); background: var(--bg-card, #fff);
   cursor: pointer; color: var(--text-muted, #5b6473);
+  max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .bp-chip:hover { border-color: var(--accent); }
 .bp-chip.active {
@@ -1964,6 +1965,12 @@ a { color: var(--accent); text-decoration: none; }
 }
 
 .bp-disclaimer { font-size: 11px; line-height: 1.5; padding: 8px 14px 12px; color: var(--text-faint); flex-shrink: 0; }
+
+/* chat 空状态: 不再自动开聊后, 给用户一个引导, 不留白屏 */
+.bp-empty-chat {
+  padding: 16px 14px; text-align: center; line-height: 1.7;
+  border-top: 1px dashed var(--border);
+}
 
 /* 共振买点面板: 同价位 ±1.5% 内多个 rule 共识, 合并展示 */
 .bp-resonance { padding: 0 14px 8px; flex-shrink: 0; }
@@ -2079,6 +2086,55 @@ a { color: var(--accent); text-decoration: none; }
   border: 1px solid var(--border); border-radius: 3px; background: var(--bg);
 }
 
+/* ---- 今日机会雷达面板 ---- */
+.opp-panel {
+  margin: 8px 16px 16px; padding: 10px 14px;
+  background: var(--bg-panel); border: 1px solid var(--border); border-radius: 6px;
+}
+.opp-panel-head {
+  display: flex; align-items: center; gap: 8px; font-size: 13px;
+  margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border);
+}
+.opp-spacer { flex: 1; }
+.opp-empty { font-size: 12px; padding: 8px 0; }
+.opp-groups { display: flex; flex-direction: column; gap: 10px; }
+.opp-group-head {
+  font-size: 12.5px; font-weight: 600; margin-bottom: 4px;
+}
+.opp-group-count {
+  font-size: 11px; font-weight: 400; color: var(--text-faint);
+  background: var(--bg); padding: 1px 6px; border-radius: 9px; margin-left: 2px;
+}
+.opp-list { list-style: none; padding: 0; margin: 0; }
+.opp-row {
+  padding: 6px 0; border-bottom: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 3px;
+}
+.opp-row:last-child { border-bottom: none; }
+.opp-row-head { display: flex; align-items: center; gap: 8px; font-size: 12.5px; flex-wrap: wrap; }
+.opp-symbol { font-weight: 700; color: var(--text); text-decoration: none; }
+.opp-symbol:hover { text-decoration: underline; }
+.opp-verdict {
+  color: #fff; font-size: 10.5px; font-weight: 600;
+  padding: 1px 7px; border-radius: 9px;
+}
+.opp-rr {
+  font-family: monospace; color: var(--accent);
+  background: rgba(37,99,235,0.06); padding: 1px 6px; border-radius: 3px;
+}
+.opp-plan-tag {
+  font-size: 10.5px; color: var(--lei-green);
+  border: 1px solid var(--lei-green); padding: 0 5px; border-radius: 3px;
+}
+.opp-scenario { font-size: 12px; color: var(--text-dim); }
+.opp-blocked {
+  font-size: 11.5px; color: var(--text); background: rgba(180,83,9,0.06);
+  border-left: 3px solid var(--warn); padding: 3px 8px; border-radius: 0 3px 3px 0;
+}
+.opp-missing {
+  font-size: 11.5px; color: var(--text-faint);
+}
+
 /* ---- 基本面参考页 ---- */
 .macro-grid {
   display: grid;
@@ -2135,3 +2191,259 @@ a { color: var(--accent); text-decoration: none; }
 .flow-bar.up { background: var(--up); }
 .flow-bar.down { background: var(--down); }
 .flow-val { width: 70px; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ---- 基本面页：利率 / 市场宽度 ---- */
+.rates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+.rates-card { padding-bottom: 6px; }
+.rates-table { margin-top: 8px; }
+.rates-table th, .rates-table td { padding: 5px 8px; font-size: 12.5px; }
+.breadth-row { display: flex; align-items: baseline; gap: 10px; margin: 5px 0; }
+.breadth-row .b-label { width: 48px; font-size: 12px; color: var(--text-faint); }
+.breadth-row .b-val { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+/* 宽度着色（与 macro-chip 同色系）：>85红 / <15绿 / 中间灰 */
+.breadth-row .b-val.opportunity { color: #15803d; }
+.breadth-row .b-val.danger { color: #b91c1c; }
+.breadth-row .b-val.neutral,
+.breadth-row .b-val.caution,
+.breadth-row .b-val.warning { color: var(--text); }
+/* 内联 5 日变化量 */
+.breadth-row .b-delta {
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: 6px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-faint);
+}
+.breadth-mini .breadth-alerts .up { color: var(--up); }
+.breadth-alerts { margin-top: 8px; font-size: 11px; color: var(--warn); border-top: 1px dashed var(--border); padding-top: 6px; }
+.todo-card { background: color-mix(in srgb, var(--bg-card) 60%, transparent); border-style: dashed; }
+.todo-card .macro-note { color: var(--text-faint); }
+
+/* ---- ETF 相对强度 / 商品比 / 标签 ---- */
+.etf-card .fund-table { margin-top: 8px; }
+.etf-card .fund-table td, .etf-card .fund-table th { padding: 4px 8px; font-size: 12px; }
+.tag-off, .tag-on { font-size: 10px; padding: 1px 5px; border-radius: 3px; margin-left: 5px; vertical-align: middle; }
+.tag-off { background: color-mix(in srgb, var(--down) 18%, transparent); color: var(--down); }
+.tag-on { background: color-mix(in srgb, var(--up) 18%, transparent); color: var(--up); }
+.commodity-grid { display: flex; gap: 18px; margin: 6px 0 2px; }
+.commodity-grid > div { display: flex; flex-direction: column; }
+.commodity-grid .b-val { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.commodity-grid .b-label { font-size: 11px; color: var(--text-faint); }
+
+/* ---------- 可折叠卡片（K 线下方信息卡） ---------- */
+.collapsible-panel {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-panel);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.collapsible-panel__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 14px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  font: inherit;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+.collapsible-panel__head:hover { background: var(--bg-hover, rgba(128, 128, 128, 0.08)); }
+/* 展开时头部与正文之间用一条分隔线，收起时不画（否则贴着卡片底边变成双线） */
+.collapsible-panel:not(.is-collapsed) .collapsible-panel__head {
+  border-bottom: 1px solid var(--border);
+}
+.collapsible-chevron {
+  display: inline-block;
+  color: var(--text-faint);
+  font-size: 12px;
+  transition: transform 0.15s ease;
+}
+.collapsible-panel.is-collapsed .collapsible-chevron { transform: rotate(-90deg); }
+.collapsible-panel__title { font-weight: 600; font-size: 14px; }
+.collapsible-panel__summary { margin-left: auto; color: var(--text-faint); font-size: 12px; }
+.collapsible-panel__body { padding: 12px 14px 14px; }
+/* 被包裹的卡片只去掉「外层卡片壳」（边框/背景/阴影/圆角），
+   保留内部 padding 与子元素间距，避免布局塌陷/文字堆叠。
+   内部 <h3> 标题由折叠容器统一承载，故隐藏。 */
+.collapsible-panel__body .panel,
+.collapsible-panel__body .overview,
+.collapsible-panel__body .trade-opportunity-panel,
+.collapsible-panel__body .pullback-opportunity-panel,
+.collapsible-panel__body .conditional-scenario-panel,
+.collapsible-panel__body .exit-signal-panel,
+.collapsible-panel__body .tradability-panel,
+.collapsible-panel__body .market-breadth-panel {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+/* margin 归零避免双重外间距（外层 collapsible-panel 已提供）；padding 保留防塌陷 */
+.collapsible-panel__body .panel,
+.collapsible-panel__body .overview,
+.collapsible-panel__body .trade-opportunity-panel,
+.collapsible-panel__body .pullback-opportunity-panel,
+.collapsible-panel__body .conditional-scenario-panel,
+.collapsible-panel__body .exit-signal-panel,
+.collapsible-panel__body .tradability-panel,
+.collapsible-panel__body .market-breadth-panel {
+  margin: 0 !important;
+}
+/* 隐藏被包裹卡片自身的 <h3> 标题（已由折叠头承载），保留其余内容不变 */
+.collapsible-panel__body > .panel > h3:first-child,
+.collapsible-panel__body > .overview > .ov-head > h3,
+.collapsible-panel__body > .trade-opportunity-panel .trade-opportunity-head h3,
+.collapsible-panel__body > .pullback-opportunity-panel .pullback-opportunity-head h3,
+.collapsible-panel__body > .conditional-scenario-panel .conditional-scenario-head h3,
+.collapsible-panel__body > .exit-signal-panel .exit-signal-head h3,
+.collapsible-panel__body > .tradability-panel .tradability-head h3,
+.collapsible-panel__body > .market-breadth-panel > h3:first-child {
+  display: none !important;
+}
+
+/* ---------- 宏观快照面板（MacroSnapshotPanel） ---------- */
+.macro-snapshot {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-panel);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.macro-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 14px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid transparent;
+  font: inherit;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+.macro-head:hover { background: rgba(128, 128, 128, 0.08); }
+.macro-snapshot.expanded .macro-head { border-bottom-color: var(--border); }
+.macro-chevron { color: var(--text-faint); font-size: 12px; transition: transform 0.15s; }
+.macro-snapshot.expanded .macro-chevron { transform: rotate(90deg); }
+.macro-title { font-weight: 600; font-size: 14px; }
+.macro-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; }
+.macro-chip {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.macro-chip.opportunity { background: #16a34a18; color: #15803d; }
+.macro-chip.neutral { background: #6b728018; color: #4b5563; }
+.macro-chip.caution { background: #f59e0b18; color: #b45309; }
+.macro-chip.warning { background: #ea580c18; color: #c2410c; }
+.macro-chip.danger { background: #dc262618; color: #b91c1c; }
+.macro-toggle { color: var(--text-faint); font-size: 11.5px; margin-left: 8px; }
+
+/* 紧凑模式：两张小卡并排 */
+.macro-compact { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 12px 14px; }
+.macro-card h4 { margin: 0 0 4px; font-size: 13px; }
+.macro-date { font-size: 11px; color: var(--text-faint); margin-bottom: 8px; display: block; }
+.macro-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.macro-table th { text-align: left; font-weight: 600; color: var(--text-faint); padding: 3px 8px 3px 0; font-size: 11px; }
+.macro-table td { padding: 3px 8px 3px 0; font-variant-numeric: tabular-nums; }
+.margin-big { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; margin: 6px 0 4px; }
+.margin-detail { font-size: 11.5px; color: var(--text-faint); }
+
+/* 展开模式：图表 + 阈值说明 */
+.macro-expanded { display: flex; flex-direction: column; gap: 14px; padding: 14px; }
+.macro-chart { height: 260px; width: 100%; min-width: 0; }
+
+/* 市场宽度趋势图（展开）：A股 + 美股 并排/自适应堆叠 */
+.breadth-trends { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+.breadth-trend-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px 6px;
+  background: var(--bg-card);
+}
+.breadth-trend-title { font-size: 12.5px; font-weight: 600; margin-bottom: 4px; }
+.macro-zones { border-top: 1px solid var(--border); padding-top: 12px; }
+.macro-zones h5 { margin: 0 0 8px; font-size: 13px; }
+.zone-block { margin-bottom: 12px; }
+.zone-note { margin: 2px 0 4px; font-size: 11.5px; color: var(--text-faint); line-height: 1.5; }
+.zone-levels { margin: 0; padding-left: 18px; font-size: 11.5px; line-height: 1.7; }
+.zone-levels li { margin-bottom: 2px; }
+.macro-disclaimer {
+  margin-top: 10px;
+  padding: 8px 10px;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 6px;
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+/* ---- 趋势小图 + 大图抽屉（FundamentalsPage 指标卡）---- */
+.metric-card { display: flex; flex-direction: column; }
+.metric-card.clickable { cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s; }
+.metric-card.clickable:hover { border-color: #3a7bd5; box-shadow: 0 2px 12px rgba(58,123,213,0.14); }
+.sparkline { width: 100%; min-width: 0; margin-top: 8px; }
+.sparkline-empty { display: flex; align-items: center; justify-content: center; color: var(--text-faint); font-size: 11px; }
+.sparkline-muted { font-size: 11px; color: var(--text-faint); margin-top: 8px; min-height: 16px; }
+.fund-hint-row { font-size: 12px; color: var(--text-dim); margin: 4px 0 2px; }
+
+.trend-drawer-panel { width: min(780px, 96vw); }
+.trend-drawer-body { display: flex; flex-direction: column; gap: 14px; }
+.trend-subtitle { font-size: 12px; font-weight: 400; color: var(--text-dim); margin-left: 10px; }
+.trend-zones { border-top: 1px solid var(--border); padding-top: 12px; }
+.trend-zones h5 { margin: 0 0 8px; font-size: 13px; font-weight: 600; }
+
+/* ---- 趋势转折 5 条件提示条（K 线图下方显眼位置）----
+   前 2 项系统资源（破线/均线拐头），后 3 项 MACD 佐证（研究代理，强度非买点）。 */
+.trend-checklist {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+.tc-title { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+.tc-title-main { font-size: 13px; font-weight: 650; color: var(--text); }
+.tc-title-sub { font-size: 11px; color: var(--text-faint); }
+.tc-row { display: flex; align-items: stretch; gap: 10px; flex-wrap: wrap; }
+.tc-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.tc-group-label {
+  font-size: 10px; color: var(--text-faint); letter-spacing: 0.5px;
+  border: 1px dashed var(--border); border-radius: 4px; padding: 1px 5px;
+}
+.tc-divider { width: 1px; background: var(--border); align-self: stretch; }
+.tc-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 9px;
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+.tc-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.tc-name { font-weight: 600; color: var(--text); }
+.tc-status { font-weight: 650; }
+.tc-detail { color: var(--text-dim); font-size: 10.5px; }
+.tc-source { color: var(--text-faint); font-size: 10px; margin-left: 2px; }
+@media (max-width: 720px) {
+  .tc-divider { display: none; }
+  .tc-row { flex-direction: column; gap: 6px; }
+}

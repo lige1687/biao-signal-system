@@ -111,6 +111,9 @@ def _serialize_result(
     sma60 = [round(r, 4) if pd.notna(r) else None for r in frame.get("sma60", [])]
     sma120 = [round(r, 4) if pd.notna(r) else None for r in frame.get("sma120", [])]
     ref20 = [round(r, 4) if pd.notna(r) else None for r in frame.get("close_lag20", [])]
+    macd_dif = [round(r, 4) if pd.notna(r) else None for r in frame.get("macd_dif", [])]
+    macd_dea = [round(r, 4) if pd.notna(r) else None for r in frame.get("macd_dea", [])]
+    macd_hist = [round(r, 4) if pd.notna(r) else None for r in frame.get("macd_hist", [])]
     states = [str(r) if pd.notna(r) else "unknown" for r in frame.get("signal_color", [])]
 
     volumes = [float(v) for v in frame["volume"]]
@@ -265,6 +268,9 @@ def _serialize_result(
         "sma60": sma60,
         "sma120": sma120,
         "ref20": ref20,
+        "macdDif": macd_dif,
+        "macdDea": macd_dea,
+        "macdHist": macd_hist,
         "states": states,
         "volumes": volumes,
         "volStates": vol_states,

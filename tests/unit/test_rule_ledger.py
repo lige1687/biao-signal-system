@@ -133,7 +133,7 @@ def test_state_machine_declares_all_stages_and_invariants() -> None:
 
 
 def test_ruleset_version_is_present() -> None:
-    assert ruleset_version() == "1.3.0"
+    assert ruleset_version() == "1.4.0"  # 1.4.0：登记 macd_strength（研究代理强度）
     assert load_ruleset()["source_video"].startswith("https://www.youtube.com/watch?v=7NkwlH6NOk8")
 
 

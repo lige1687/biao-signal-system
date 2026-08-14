@@ -2,9 +2,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { api } from "../api/client";
+import { fundamentalsApi } from "../api/client";
 import AddSymbolDialog from "../components/AddSymbolDialog";
 import AssessmentPanel from "../components/AssessmentPanel";
+import CollapsiblePanel from "../components/CollapsiblePanel";
 import ChartControls from "../components/ChartControls";
+import TrendChecklist from "../components/TrendChecklist";
 import ColorBacktestPanel from "../components/ColorBacktestPanel";
 import PullbackBacktestPanel from "../components/PullbackBacktestPanel";
 import PullbackOpportunityPanel from "../components/PullbackOpportunityPanel";
@@ -14,8 +17,9 @@ import ScenarioBacktestPanel from "../components/ScenarioBacktestPanel";
 import TradabilityPanel from "../components/TradabilityPanel";
 import ColorBadge from "../components/ColorBadge";
 import ExplanationPanel, { type Selection } from "../components/ExplanationPanel";
-import MarketBreadthPanel from "../components/MarketBreadthPanel";
 import MarketBreadthStrip from "../components/MarketBreadthStrip";
+import MacroSnapshotPanel from "../components/MacroSnapshotPanel";
+import MarketBreadthSnapshotPanel from "../components/MarketBreadthSnapshotPanel";
 import KlineChart, {
   DEFAULT_DISPLAY,
   type ChartDisplay,
@@ -117,6 +121,13 @@ export default function WorkspacePage() {
   const { data: dashboard, isLoading: cardsLoading } = useQuery({
     queryKey: ["cards"],
     queryFn: () => api.dashboard(),
+  });
+
+  // 宏观快照：国债收益率 + 两融余额
+  const { data: macroRates, isLoading: macroLoading } = useQuery({
+    queryKey: ["macro-rates"],
+    queryFn: () => fundamentalsApi.rates(),
+    staleTime: 10 * 60 * 1000, // 10 分钟缓存
   });
 
   const cards = dashboard?.cards ?? [];
@@ -409,6 +420,7 @@ export default function WorkspacePage() {
                   highlight={highlightSpec}
                   onDownload={(fn) => (downloadPngRef.current = fn)}
                 />
+                <TrendChecklist payload={data.chart} assessment={data.assessment} />
                 <div className="chart-legend">
                   {display.bottomMarks && (
                     <span>
@@ -490,34 +502,60 @@ export default function WorkspacePage() {
               </div>
 
               {data.today && (
-                <TodayOverviewPanel today={data.today} onPickConcept={pickConcept} />
+                <CollapsiblePanel title="今日概述" storageKey="ws.card.today">
+                  <TodayOverviewPanel today={data.today} onPickConcept={pickConcept} />
+                </CollapsiblePanel>
               )}
 
-              <TradeOpportunityPanel
-                opportunities={data.assessment.trade_opportunities}
-                onSelect={setSelection}
-              />
+              <MacroSnapshotPanel data={macroRates ?? null} isLoading={macroLoading} />
 
-              <PullbackOpportunityPanel
-                opportunities={data.assessment.pullback_opportunities}
-                onSelect={setSelection}
-              />
+              <MarketBreadthSnapshotPanel />
 
-              <ConditionalScenarioPanel
-                scenarios={data.assessment.conditional_scenarios}
-                onSelect={setSelection}
-              />
+              {data.assessment.trade_opportunities.length > 0 && (
+                <CollapsiblePanel title="潜在买点" storageKey="ws.card.trade">
+                  <TradeOpportunityPanel
+                    opportunities={data.assessment.trade_opportunities}
+                    onSelect={setSelection}
+                  />
+                </CollapsiblePanel>
+              )}
 
-              <ExitSignalPanel
-                exitSignals={data.assessment.exit_signals}
-                onSelect={setSelection}
-              />
+              {data.assessment.pullback_opportunities.length > 0 && (
+                <CollapsiblePanel title="首次回撤机会" storageKey="ws.card.pullback">
+                  <PullbackOpportunityPanel
+                    opportunities={data.assessment.pullback_opportunities}
+                    onSelect={setSelection}
+                  />
+                </CollapsiblePanel>
+              )}
 
-              <TradabilityPanel tradability={data.assessment.tradability} />
+              {data.assessment.conditional_scenarios.length > 0 && (
+                <CollapsiblePanel title="条件化场景" storageKey="ws.card.conditional">
+                  <ConditionalScenarioPanel
+                    scenarios={data.assessment.conditional_scenarios}
+                    onSelect={setSelection}
+                  />
+                </CollapsiblePanel>
+              )}
 
-              <AssessmentPanel assessment={data.assessment} onPickConcept={pickConcept} />
+              {data.assessment.exit_signals.length > 0 && (
+                <CollapsiblePanel title="持仓退出" storageKey="ws.card.exit">
+                  <ExitSignalPanel
+                    exitSignals={data.assessment.exit_signals}
+                    onSelect={setSelection}
+                  />
+                </CollapsiblePanel>
+              )}
 
-              <MarketBreadthPanel symbol={selected} onPickConcept={pickConcept} />
+              {data.assessment.tradability && (
+                <CollapsiblePanel title="可交易性门禁" storageKey="ws.card.tradability">
+                  <TradabilityPanel tradability={data.assessment.tradability} />
+                </CollapsiblePanel>
+              )}
+
+              <CollapsiblePanel title="当前观察" storageKey="ws.card.assessment">
+                <AssessmentPanel assessment={data.assessment} onPickConcept={pickConcept} />
+              </CollapsiblePanel>
 
               {data.first_ma_pullback_backtest && (
                 <PullbackBacktestPanel report={data.first_ma_pullback_backtest} />
@@ -530,32 +568,33 @@ export default function WorkspacePage() {
               {data.color_backtest && <ColorBacktestPanel report={data.color_backtest} />}
 
               {data.new_events.length > 0 && (
-                <div className="panel">
-                  <h3>今日新事件（{data.new_events.length}）</h3>
-                  {data.new_events.map((e) => (
-                    <div
-                      key={e.event_id}
-                      className="new-event-row"
-                      onClick={() =>
-                        setSelection({
-                          source: "今日新事件",
-                          date: e.available_date,
-                          explanation: e.explanation,
-                          events: [e],
-                          eventsLoading: false,
-                        })
-                      }
-                      title="点击查看解释"
-                    >
-                      <span className={`sev-chip ${e.severity}`}>{e.severity_cn}</span>
-                      <b>
-                        {e.rule_cn}
-                        {e.sub_rule_cn ? ` · ${e.sub_rule_cn}` : ""}
-                      </b>
-                      <span className="muted">{e.reason_cn}</span>
-                    </div>
-                  ))}
-                </div>
+                <CollapsiblePanel title={`今日新事件（${data.new_events.length}）`} storageKey="ws.card.newevents">
+                  <div className="panel">
+                    {data.new_events.map((e) => (
+                      <div
+                        key={e.event_id}
+                        className="new-event-row"
+                        onClick={() =>
+                          setSelection({
+                            source: "今日新事件",
+                            date: e.available_date,
+                            explanation: e.explanation,
+                            events: [e],
+                            eventsLoading: false,
+                          })
+                        }
+                        title="点击查看解释"
+                      >
+                        <span className={`sev-chip ${e.severity}`}>{e.severity_cn}</span>
+                        <b>
+                          {e.rule_cn}
+                          {e.sub_rule_cn ? ` · ${e.sub_rule_cn}` : ""}
+                        </b>
+                        <span className="muted">{e.reason_cn}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CollapsiblePanel>
               )}
 
               <div className="disclaimer">

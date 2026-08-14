@@ -13,10 +13,15 @@ from typing import Any
 
 from lei_signal.fundamentals import sources
 
-# 板块行情/资金流变化快，缓存 5 分钟；宏观指标月更，缓存 6 小时。
+# 板块行情/资金流变化快，缓存 5 分钟；宏观指标月更，缓存 6 小时；国债 1 小时；VIX 30 分钟。
 _BOARDS_TTL = 300
 _MACRO_TTL = 6 * 3600
 _FLOW_TTL = 300
+_TREASURY_TTL = 3600
+_VIX_TTL = 1800
+_MARGIN_TTL = 3600
+_COMMODITY_TTL = 1800
+_ETF_TTL = 3600
 
 
 class _TtlCache:
@@ -90,3 +95,150 @@ class FundamentalsService:
             f"flow:{code}:{days}", _FLOW_TTL, lambda: sources.fetch_industry_flow(code, days=days)
         )
         return {"code": code, "days": days, "points": points}
+
+    def rates(self, *, refresh: bool = False) -> dict[str, Any]:
+        """利率 + 资金面板：中美国债 + 中美利差 + VIX + 两融余额。单项失败降级。"""
+        if refresh:
+            self._cache.invalidate("treasury")
+            self._cache.invalidate("vix")
+            self._cache.invalidate("margin")
+        errors: list[str] = []
+        treasury: dict[str, Any] = {}
+        try:
+            treasury, _ = self._cache.get_or_load(
+                "treasury", _TREASURY_TTL, sources.fetch_treasury
+            )
+        except sources.FundamentalsSourceError as exc:
+            errors.append(f"国债: {exc}")
+
+        vix: dict[str, Any] | None = None
+        try:
+            vix, _ = self._cache.get_or_load("vix", _VIX_TTL, sources.fetch_vix)
+        except sources.FundamentalsSourceError as exc:
+            errors.append(f"VIX: {exc}")
+
+        margin: dict[str, Any] | None = None
+        try:
+            margin, _ = self._cache.get_or_load("margin", _MARGIN_TTL, sources.fetch_margin)
+        except sources.FundamentalsSourceError as exc:
+            errors.append(f"两融: {exc}")
+
+        return {
+            "treasury": treasury,
+            "vix": vix,
+            "margin": margin,
+            "errors": errors,
+        }
+
+    def rates_history(self, *, lookback_days: int = 730) -> dict[str, Any]:
+        """宏观利率/VIX/两融 历史时间序列，供趋势图使用。单项失败降级。
+
+        返回 {series: {key: {label, unit, dates[], values[]}}, errors[]}。
+        各序列独立取数、独立降级——某一项拉不到不影响其余。
+        """
+        errors: list[str] = []
+        treasury_hist: dict[str, dict[str, float | None]] = {}
+        vix_hist: dict[str, float] = {}
+        margin_hist: dict[str, dict[str, float | None]] = {}
+
+        try:
+            treasury_hist, _ = self._cache.get_or_load(
+                "treasury_hist", _TREASURY_TTL,
+                lambda: sources.fetch_treasury_history(lookback_days),
+            )
+        except sources.FundamentalsSourceError as exc:
+            errors.append(f"国债历史: {exc}")
+        try:
+            vix_hist, _ = self._cache.get_or_load(
+                "vix_hist", _VIX_TTL, lambda: sources.fetch_vix_history(lookback_days)
+            )
+        except sources.FundamentalsSourceError as exc:
+            errors.append(f"VIX历史: {exc}")
+        try:
+            margin_hist, _ = self._cache.get_or_load(
+                "margin_hist", _MARGIN_TTL, sources.fetch_margin_history
+            )
+        except sources.FundamentalsSourceError as exc:
+            errors.append(f"两融历史: {exc}")
+
+        def mk(label: str, unit: str, dvals: dict[str, float | None]) -> dict[str, Any]:
+            items = sorted((d, v) for d, v in dvals.items() if v is not None)
+            return {
+                "label": label,
+                "unit": unit,
+                "dates": [d for d, _ in items],
+                "values": [round(float(v), 2) for _, v in items],
+            }
+
+        us10 = {d: v.get("us_10y") for d, v in treasury_hist.items() if v.get("us_10y") is not None}
+        cn10 = {d: v.get("cn_10y") for d, v in treasury_hist.items() if v.get("cn_10y") is not None}
+        spread = {
+            d: round(cn10[d] - us10[d], 2) for d in cn10 if d in us10
+        }
+        margin_series = {
+            d: v.get("rzrqye_yi") for d, v in margin_hist.items() if v.get("rzrqye_yi") is not None
+        }
+
+        series = {
+            "us_10y": mk("美10Y", "%", us10),
+            "cn_10y": mk("中10Y", "%", cn10),
+            "cn_us_spread_10y": mk("中美10Y利差", "%", spread),
+            "vix": mk("VIX", "", vix_hist),
+            "margin_rzrqye": mk("两融余额", "亿", margin_series),
+        }
+        as_of = max(
+            (s["dates"][-1] for s in series.values() if s["dates"]), default=""
+        )
+        return {"as_of": as_of, "series": series, "errors": errors}
+
+    def macro_history(self, *, page_size: int = 60) -> dict[str, Any]:
+        """PMI/CPI/PPI 月度历史序列，供趋势图。单项失败降级。
+
+        返回 {series: {key: {label, unit, dates[], values[]}}, errors[]}。
+        """
+        errors: list[str] = []
+        series: dict[str, Any] = {}
+
+        def mk(label: str, unit: str, points: list[dict[str, Any]]) -> dict[str, Any]:
+            return {
+                "label": label,
+                "unit": unit,
+                "dates": [p["date"] for p in points],
+                "values": [round(float(p["value"]), 2) for p in points],
+            }
+
+        for key, label, unit, loader in (
+            ("pmi", "制造业 PMI", "", sources.fetch_pmi_history),
+            ("cpi", "CPI 同比", "%", sources.fetch_cpi_history),
+            ("ppi", "PPI 同比", "%", sources.fetch_ppi_history),
+        ):
+            try:
+                points, _ = self._cache.get_or_load(
+                    f"macro_hist:{key}",
+                    _MACRO_TTL,
+                    lambda fn=loader: fn(page_size=page_size),
+                )
+                series[key] = mk(label, unit, points)
+            except sources.FundamentalsSourceError as exc:
+                errors.append(f"宏观历史 {key}: {exc}")
+
+        as_of = max(
+            (s["dates"][-1] for s in series.values() if s["dates"]), default=""
+        )
+        return {"as_of": as_of, "series": series, "errors": errors}
+
+    def commodities(self, *, refresh: bool = False) -> dict[str, Any]:
+        """全球商品代理：铜金比 / 油金比。yfinance 失败返回 None。"""
+        if refresh:
+            self._cache.invalidate("commodity")
+        data, _ = self._cache.get_or_load(
+            "commodity", _COMMODITY_TTL, sources.fetch_commodity_ratios
+        )
+        return {"commodities": data}
+
+    def etf_strength(self, *, refresh: bool = False) -> dict[str, Any]:
+        """11 行业 ETF 相对强度（risk on/off）。yfinance 失败返回 None。"""
+        if refresh:
+            self._cache.invalidate("etf")
+        data, _ = self._cache.get_or_load("etf", _ETF_TTL, sources.fetch_etf_strength)
+        return {"etf": data}
