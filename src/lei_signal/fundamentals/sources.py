@@ -8,6 +8,7 @@
 所有函数只负责"取回原始 JSON 并整型为 dict"，失败抛 FundamentalsSourceError，
 由 service 层决定降级策略（单项失败不影响其他项）。
 """
+
 from __future__ import annotations
 
 import time
@@ -166,9 +167,7 @@ def fetch_industry_flow(code: str, *, days: int = 20) -> list[dict[str, Any]]:
         points.append(
             {
                 "date": parts[0],
-                "main_yi": (lambda v: round(v / 1e8, 2) if v is not None else None)(
-                    _num(parts[1])
-                ),
+                "main_yi": (lambda v: round(v / 1e8, 2) if v is not None else None)(_num(parts[1])),
                 "small_yi": (lambda v: round(v / 1e8, 2) if v is not None else None)(
                     _num(parts[2])
                 ),
@@ -281,23 +280,17 @@ def fetch_macro_history(
 
 def fetch_pmi_history(*, page_size: int = 60) -> list[dict[str, Any]]:
     """制造业 PMI 月度历史（荣枯线 50）。"""
-    return fetch_macro_history(
-        "RPT_ECONOMY_PMI", value_field="MAKE_INDEX", page_size=page_size
-    )
+    return fetch_macro_history("RPT_ECONOMY_PMI", value_field="MAKE_INDEX", page_size=page_size)
 
 
 def fetch_cpi_history(*, page_size: int = 60) -> list[dict[str, Any]]:
     """CPI 同比月度历史（0 = 通胀/通缩分界）。"""
-    return fetch_macro_history(
-        "RPT_ECONOMY_CPI", value_field="NATIONAL_SAME", page_size=page_size
-    )
+    return fetch_macro_history("RPT_ECONOMY_CPI", value_field="NATIONAL_SAME", page_size=page_size)
 
 
 def fetch_ppi_history(*, page_size: int = 60) -> list[dict[str, Any]]:
     """PPI 同比月度历史。"""
-    return fetch_macro_history(
-        "RPT_ECONOMY_PPI", value_field="BASE_SAME", page_size=page_size
-    )
+    return fetch_macro_history("RPT_ECONOMY_PPI", value_field="BASE_SAME", page_size=page_size)
 
 
 # ── 利率类：中美国债 + VIX ──────────────────────────────────────────────
@@ -372,47 +365,58 @@ def fetch_vix() -> dict[str, Any] | None:
         return None
 
 
-# ── 资金面：两融余额（金十数据，沪深合计）─────────────────────────────────
+# ── 资金面：两融余额（东财数据中心，沪深合计）─────────────────────────────
+# 注意：曾用金十 fs_1.json，实测仅覆盖沪市（约为全国 51%）却标注"沪深"，
+# 已改用东财 RPTA_RZRQ_LSHJ（沪深交易所合计），且自带 RZYEZB（融资余额
+# 占流通市值比%）——这是不随市值膨胀漂移的标准风险口径。
 
-_MARGIN_URL = "https://cdn.jin10.com/data_center/reports/fs_1.json"
+_MARGIN_DC_URL = "https://datacenter-web.eastmoney.com/api/data/v1/get"
+
+
+def _fetch_margin_rows(page_size: int = 1) -> list[dict[str, Any]]:
+    """东财 RPTA_RZRQ_LSHJ，按日期倒序返回最近 page_size 个交易日。"""
+    params = {
+        "reportName": "RPTA_RZRQ_LSHJ",
+        "columns": "DIM_DATE,RZRQYE,RZYE,RQYE,RZMRE,RZYEZB",
+        "sortColumns": "DIM_DATE",
+        "sortTypes": "-1",
+        "pageNumber": "1",
+        "pageSize": str(min(int(page_size), 1000)),
+    }
+    payload = _get_json(_MARGIN_DC_URL, params)
+    rows = (payload.get("result") or {}).get("data") or []
+    if not rows:
+        raise FundamentalsSourceError("两融余额无数据")
+    return rows
+
+
+def _margin_row(row: dict[str, Any]) -> dict[str, Any]:
+    def yi(key: str) -> float | None:
+        v = _num(row.get(key))
+        return round(v / 1e8, 2) if v is not None else None
+
+    zb = _num(row.get("RZYEZB"))
+    return {
+        "date": (row.get("DIM_DATE") or "")[:10],
+        "rzye_yi": yi("RZYE"),  # 融资余额（亿）
+        "rqye_yi": yi("RQYE"),  # 融券余额（亿）
+        "rzrqye_yi": yi("RZRQYE"),  # 融资融券余额（亿）
+        "buy_yi": yi("RZMRE"),  # 融资买入额（亿）
+        "rzyezb_pct": round(zb, 3) if zb is not None else None,  # 融资余额占流通市值比（%）
+    }
 
 
 def fetch_margin() -> dict[str, Any]:
-    """沪深融资融券余额汇总（金十数据，日频）。
-
-    金十返回 {keys:[字段名...], values:{日期:[值...]}}，keys 顺序固定为
-    融资买入额/融资余额/融券卖出量/融券余量/融券余额/融资融券余额。
-    """
-    payload = _get_json(_MARGIN_URL, {})
-    keys = payload.get("keys") or []
-    values = payload.get("values") or {}
-    if not values:
-        raise FundamentalsSourceError("两融余额无数据")
-    latest_date = max(values.keys())
-    row = values[latest_date]
-    idx = {k["name"]: i for i, k in enumerate(keys)} if keys and isinstance(keys[0], dict) else {}
-
-    def pick(name: str) -> float | None:
-        i = idx.get(name)
-        if i is None or i >= len(row):
-            return None
-        v = _num(row[i])
-        return round(v / 1e8, 2) if v is not None else None
-
-    return {
-        "date": latest_date,
-        "rzye_yi": pick("融资余额"),      # 融资余额（亿）
-        "rqye_yi": pick("融券余额"),      # 融券余额（亿）
-        "rzrqye_yi": pick("融资融券余额"),  # 融资融券余额（亿）
-        "buy_yi": pick("融资买入额"),     # 融资买入额（亿）
-    }
+    """沪深融资融券余额汇总（东财数据中心，日频，含占流通市值比）。"""
+    return _margin_row(_fetch_margin_rows(1)[0])
 
 
 # ── 宏观指标历史序列（供趋势图使用）────────────────────────────────────────
 # 复用既有数据源取历史，不引新依赖：
 # - 国债（中/美 2/5/10/30Y + 利差）：东财 RPTA_WEB_TREASURYYIELD，放大 ps 取多日序列
 # - VIX：yfinance ^VIX.history()
-# - 两融余额：金十 values 本就是 {日期: 行}，直接全量读
+# - 两融余额：东财 RPTA_RZRQ_LSHJ 放大 pageSize 取多日序列
+
 
 def fetch_treasury_history(lookback_days: int = 730) -> dict[str, dict[str, float | None]]:
     """中美国债收益率历史（按交易日），返回 {date: {cn_2y, cn_5y, ..., us_10y, ...}}。
@@ -451,10 +455,7 @@ def fetch_vix_history(lookback_days: int = 730) -> dict[str, float]:
         hist = yf.Ticker("^VIX").history(period=f"{min(int(lookback_days), 1500)}d")
         if hist.empty:
             raise FundamentalsSourceError("yfinance VIX 历史返回空")
-        out = {
-            str(d.date()): round(float(v), 2)
-            for d, v in hist["Close"].dropna().items()
-        }
+        out = {str(d.date()): round(float(v), 2) for d, v in hist["Close"].dropna().items()}
         if not out:
             raise FundamentalsSourceError("yfinance VIX 无可用数据")
         return out
@@ -462,42 +463,23 @@ def fetch_vix_history(lookback_days: int = 730) -> dict[str, float]:
         raise FundamentalsSourceError(f"VIX 历史: {exc}") from exc
 
 
-def fetch_margin_history() -> dict[str, dict[str, float | None]]:
-    """沪深融资融券余额历史（金十数据）。
+def fetch_margin_history(lookback_days: int = 730) -> dict[str, dict[str, float | None]]:
+    """沪深融资融券余额历史（东财数据中心，日频，含占流通市值比）。
 
-    金十 payload.values 本就是 {日期: [字段值...]}，原 fetch_margin 只取最新一天；
-    这里全量读出，得到日频历史序列。
+    接口单页最多可返回 1000 行，730 个交易日（约 3 年）一页取完。
     """
-    payload = _get_json(_MARGIN_URL, {})
-    keys = payload.get("keys") or []
-    values = payload.get("values") or {}
-    if not values:
-        raise FundamentalsSourceError("两融余额历史无数据")
-    idx = {k["name"]: i for i, k in enumerate(keys)} if keys and isinstance(keys[0], dict) else {}
     out: dict[str, dict[str, float | None]] = {}
-
-    def pick(row: list, name: str) -> float | None:
-        i = idx.get(name)
-        if i is None or i >= len(row):
-            return None
-        v = _num(row[i])
-        return round(v / 1e8, 2) if v is not None else None
-
-    for date, row in values.items():
-        if not isinstance(row, list):
-            continue
-        out[date] = {
-            "rzye_yi": pick(row, "融资余额"),
-            "rqye_yi": pick(row, "融券余额"),
-            "rzrqye_yi": pick(row, "融资融券余额"),
-            "buy_yi": pick(row, "融资买入额"),
-        }
+    for row in _fetch_margin_rows(min(int(lookback_days), 1000)):
+        parsed = _margin_row(row)
+        if parsed["date"]:
+            out[parsed["date"]] = parsed
     if not out:
         raise FundamentalsSourceError("两融余额历史为空")
     return out
 
 
 # ── 全球商品代理：铜金比 / 油金比（thememo 消费类，抽象化全球经济）─────────
+
 
 def _yf_last(tickers: list[str], period: str = "3mo") -> dict[str, dict[str, float]]:
     """yf.download 一批 ticker，返回 {ticker: {last, prev_month}}。失败抛错。"""

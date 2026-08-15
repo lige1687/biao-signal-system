@@ -3,6 +3,7 @@
 降级原则：任何一个数据源挂了，其余照常返回，失败项进 errors 列表，
 页面局部可用 —— 参考层绝不能因为一个接口超时而整页空白。
 """
+
 from __future__ import annotations
 
 import threading
@@ -105,9 +106,7 @@ class FundamentalsService:
         errors: list[str] = []
         treasury: dict[str, Any] = {}
         try:
-            treasury, _ = self._cache.get_or_load(
-                "treasury", _TREASURY_TTL, sources.fetch_treasury
-            )
+            treasury, _ = self._cache.get_or_load("treasury", _TREASURY_TTL, sources.fetch_treasury)
         except sources.FundamentalsSourceError as exc:
             errors.append(f"国债: {exc}")
 
@@ -143,7 +142,8 @@ class FundamentalsService:
 
         try:
             treasury_hist, _ = self._cache.get_or_load(
-                "treasury_hist", _TREASURY_TTL,
+                "treasury_hist",
+                _TREASURY_TTL,
                 lambda: sources.fetch_treasury_history(lookback_days),
             )
         except sources.FundamentalsSourceError as exc:
@@ -172,11 +172,14 @@ class FundamentalsService:
 
         us10 = {d: v.get("us_10y") for d, v in treasury_hist.items() if v.get("us_10y") is not None}
         cn10 = {d: v.get("cn_10y") for d, v in treasury_hist.items() if v.get("cn_10y") is not None}
-        spread = {
-            d: round(cn10[d] - us10[d], 2) for d in cn10 if d in us10
-        }
+        spread = {d: round(cn10[d] - us10[d], 2) for d in cn10 if d in us10}
         margin_series = {
             d: v.get("rzrqye_yi") for d, v in margin_hist.items() if v.get("rzrqye_yi") is not None
+        }
+        margin_zb_series = {
+            d: v.get("rzyezb_pct")
+            for d, v in margin_hist.items()
+            if v.get("rzyezb_pct") is not None
         }
 
         series = {
@@ -185,10 +188,9 @@ class FundamentalsService:
             "cn_us_spread_10y": mk("中美10Y利差", "%", spread),
             "vix": mk("VIX", "", vix_hist),
             "margin_rzrqye": mk("两融余额", "亿", margin_series),
+            "margin_rzyezb": mk("融资余额占流通市值比", "%", margin_zb_series),
         }
-        as_of = max(
-            (s["dates"][-1] for s in series.values() if s["dates"]), default=""
-        )
+        as_of = max((s["dates"][-1] for s in series.values() if s["dates"]), default="")
         return {"as_of": as_of, "series": series, "errors": errors}
 
     def macro_history(self, *, page_size: int = 60) -> dict[str, Any]:
@@ -222,9 +224,7 @@ class FundamentalsService:
             except sources.FundamentalsSourceError as exc:
                 errors.append(f"宏观历史 {key}: {exc}")
 
-        as_of = max(
-            (s["dates"][-1] for s in series.values() if s["dates"]), default=""
-        )
+        as_of = max((s["dates"][-1] for s in series.values() if s["dates"]), default="")
         return {"as_of": as_of, "series": series, "errors": errors}
 
     def commodities(self, *, refresh: bool = False) -> dict[str, Any]:

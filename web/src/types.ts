@@ -1087,6 +1087,7 @@ export interface MarginData {
   rqye_yi: number | null; // 融券余额（亿）
   rzrqye_yi: number | null; // 融资融券余额（亿）
   buy_yi: number | null; // 融资买入额（亿）
+  rzyezb_pct: number | null; // 融资余额占流通市值比（%）--标准风险口径
 }
 
 export interface CommodityRatios {

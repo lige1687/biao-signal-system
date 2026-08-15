@@ -175,3 +175,38 @@ def test_macro_history_degrades_per_item(monkeypatch: pytest.MonkeyPatch) -> Non
     assert set(r["series"]) == {"pmi", "ppi"}
     assert any("宏观历史 cpi" in e for e in r["errors"])
     assert r["as_of"] == "2026-07-01"  # 其余两项仍有数据
+
+
+def test_fetch_margin_parses_eastmoney_row(monkeypatch: pytest.MonkeyPatch) -> None:
+    """两融改用东财 RPTA_RZRQ_LSHJ（沪深合计）后，解析应带出占流通市值比。"""
+    row = {
+        "DIM_DATE": "2026-08-13 00:00:00",
+        "RZYE": 2649740550850.0,
+        "RQYE": 25977668669.0,
+        "RZRQYE": 2675718219519.0,
+        "RZMRE": 242100000000.0,
+        "RZYEZB": 2.63679,
+    }
+    monkeypatch.setattr(sources, "_fetch_margin_rows", lambda page_size=1: [row])
+
+    m = sources.fetch_margin()
+    assert m["date"] == "2026-08-13"
+    assert m["rzrqye_yi"] == pytest.approx(26757.18, abs=0.01)
+    assert m["rzyezb_pct"] == pytest.approx(2.637, abs=0.001)
+
+
+def test_rates_history_includes_margin_ratio_series(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(sources, "fetch_treasury_history", lambda lookback_days=730: {})
+    monkeypatch.setattr(sources, "fetch_vix_history", lambda lookback_days=730: {})
+    monkeypatch.setattr(
+        sources, "fetch_margin_history",
+        lambda lookback_days=730: {
+            "2026-08-12": {"rzrqye_yi": 26500.0, "rzyezb_pct": 2.61},
+            "2026-08-13": {"rzrqye_yi": 26757.18, "rzyezb_pct": 2.64},
+        },
+    )
+
+    r = FundamentalsService().rates_history()
+    assert r["series"]["margin_rzyezb"]["values"] == [2.61, 2.64]
+    assert r["series"]["margin_rzrqye"]["values"] == [26500.0, 26757.18]
+    assert r["errors"] == []

@@ -3,6 +3,13 @@ import { useMemo, useState } from "react";
 import { api, fundamentalsApi } from "../api/client";
 import Sparkline from "../components/trend/Sparkline";
 import TrendDrawer from "../components/trend/TrendDrawer";
+import {
+  isRealAShare,
+  AShareBar,
+  AShareSourceLine,
+  fmtPct as fmtPctAD,
+  fmtRatio as fmtRatioAD,
+} from "../components/aShareBreadthView";
 import type { LineSeries } from "../components/trend/TrendChart";
 import {
   BREADTH_LINES,
@@ -49,6 +56,7 @@ const SPARK_MARK: Record<string, number> = {
   cn_10y: 2.0,
   cn_us_spread_10y: 0,
   vix: 20,
+  margin_rzyezb: 3.0,
   pmi: 50,
   cpi: 0,
   ppi: 0,
@@ -226,31 +234,34 @@ function RatesSection({
         onOpen={open("vix", "VIX 恐慌指数", data.vix?.value ?? null)}
       />
       <MetricCard
-        label="两融余额（沪深）"
-        value={data.margin?.rzrqye_yi == null ? "暂不可用" : `${(data.margin.rzrqye_yi / 10000).toFixed(2)}万亿`}
+        label="两融杠杆（占流通市值比）"
+        value={data.margin?.rzyezb_pct == null ? "暂不可用" : `${data.margin.rzyezb_pct.toFixed(2)}%`}
         sub={
           data.margin == null
-            ? "金十数据暂不可用"
-            : `融资 ${data.margin.rzye_yi?.toFixed(0)}亿 · 融券 ${data.margin.rqye_yi?.toFixed(0)}亿 · 买入 ${data.margin.buy_yi?.toFixed(0)}亿`
+            ? "东财数据中心暂不可用"
+            : data.margin.rzrqye_yi == null
+              ? "两融余额缺数"
+              : `两融余额 ${(data.margin.rzrqye_yi / 10000).toFixed(2)}万亿 · 融资 ${data.margin.rzye_yi?.toFixed(0)}亿 · 买入 ${data.margin.buy_yi?.toFixed(0)}亿`
         }
         zoneLabel={
-          data.margin?.rzrqye_yi == null
+          data.margin?.rzyezb_pct == null
             ? undefined
-            : findZone(data.margin.rzrqye_yi, ZONES.margin_rzrqye).label
+            : findZone(data.margin.rzyezb_pct, ZONES.margin_rzyezb).label
         }
         zoneTone={
-          data.margin?.rzrqye_yi == null
+          data.margin?.rzyezb_pct == null
             ? undefined
-            : findZone(data.margin.rzrqye_yi, ZONES.margin_rzrqye).tone
+            : findZone(data.margin.rzyezb_pct, ZONES.margin_rzyezb).tone
         }
-        sparkValues={spark("margin_rzrqye")}
+        sparkValues={spark("margin_rzyezb")}
+        markY={SPARK_MARK.margin_rzyezb}
         onOpen={open(
-          "margin_rzrqye",
-          "两融余额（沪深）",
-          data.margin?.rzrqye_yi ?? null,
-          data.margin?.rzrqye_yi == null
+          "margin_rzyezb",
+          "融资余额占流通市值比",
+          data.margin?.rzyezb_pct ?? null,
+          data.margin?.rzyezb_pct == null
             ? undefined
-            : `${(data.margin.rzrqye_yi / 10000).toFixed(2)}万亿`,
+            : `${data.margin.rzyezb_pct.toFixed(2)}%（两融余额 ${data.margin.rzrqye_yi == null ? "-" : `${(data.margin.rzrqye_yi / 10000).toFixed(2)}万亿`}）`,
         )}
       />
     </div>
@@ -297,6 +308,24 @@ function BreadthSparkCard({
         "宽度 = 站上 N 日均线的个股占比。50 日 >85% 大概率阶段顶部，<15% 短期底部；配合 200 日同低/同高可能见反转。",
     });
   };
+
+  if (isRealAShare(panel)) {
+    return (
+      <div className="macro-card metric-card">
+        <div className="macro-head">
+          <span className="macro-name">{panel.display_name} 真全A涨跌家数</span>
+        </div>
+        <AShareBar p={panel} />
+        <div className="macro-value">
+          {panel.up != null ? `${panel.up}` : "-"} 涨 / {panel.down != null ? `${panel.down}` : "-"} 跌
+        </div>
+        <div className="macro-note">
+          上涨占比 {fmtPctAD(panel.up_pct)} · 涨跌比 {fmtRatioAD(panel.adv_dec_ratio)}
+        </div>
+        <AShareSourceLine p={panel} />
+      </div>
+    );
+  }
 
   return (
     <div className="macro-card metric-card clickable" onClick={open}>

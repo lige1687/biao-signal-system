@@ -79,12 +79,26 @@ export const CN_US_SPREAD_ZONES: readonly ZoneLevel[] = [
   { max: Infinity, label: "正常溢价", tone: "neutral", note: "> 0.5%：中债收益溢价，资金倾向留驻" },
 ];
 
-/** 两融余额风险区间（单位：亿元） */
+/** 两融风险区间--主口径：融资余额占流通市值比（%，东财 RZYEZB 实测标定）
+ *
+ * 绝对余额会随流通市值膨胀而漂移（2015 峰值 2.27万亿 vs 2025 年 3万亿+ 但占比
+ * 反而更低），标准风险口径是占流通市值比。标定锚点（东财 RPTA_RZRQ_LSHJ 实测）：
+ * 2015-06 股灾顶 4.22–4.66%，2019-01 熊市底 1.96%，近一年 2.27–2.90%。
+ */
+export const MARGIN_ZB_ZONES: readonly ZoneLevel[] = [
+  { max: 2.0, label: "低杠杆/冰点", tone: "opportunity", note: "≤ 2.0%：2019-01 熊市底为 1.96%，情绪冰点，往往对应底部区域但信心不足" },
+  { max: 2.5, label: "偏低/谨慎", tone: "neutral", note: "2.0–2.5%：杠杆意愿偏低，市场偏谨慎" },
+  { max: 3.0, label: "正常区间", tone: "neutral", note: "2.5–3.0%：近一年主体运行区间（2.27–2.90%，实测）" },
+  { max: 3.5, label: "偏热", tone: "caution", note: "3.0–3.5%：杠杆加速入场，关注拥挤度" },
+  { max: Infinity, label: "警戒/过热", tone: "danger", note: "> 3.5%：逼近 2015-06 股灾前 4.2–4.7% 的历史极端区，强平风险显著" },
+];
+
+/** 两融余额绝对值区间（单位：亿元，辅助口径--受市值膨胀影响，仅供对照） */
 export const MARGIN_ZONES: readonly ZoneLevel[] = [
   { max: 15000, label: "低杠杆/情绪谨慎", tone: "caution", note: "< 1.5万亿：市场参与度低，可能处于底部区域但也反映信心不足" },
-  { max: 22000, label: "正常区间", tone: "neutral", note: "1.5–2.2万亿：历史常态区间；2015 年前峰值 2.27 万亿" },
-  { max: 28000, label: "偏高但可控", tone: "warning", note: "2.2–2.8万亿：绝对值偏高但占流通市值比仍 < 3%（2025 年 6 月 3 万亿时仅 2.83%）" },
-  { max: Infinity, label: "警戒线附近", tone: "danger", note: "> 2.8万亿 / 占流通市值 > 4%：接近 2015 年股灾前水平（当时 4.27%）；需高度警惕结构性拥挤与强平风险（银河证券、格上基金）" },
+  { max: 22000, label: "正常区间", tone: "neutral", note: "1.5–2.2万亿：历史常态区间；2015 年峰值 2.27 万亿" },
+  { max: 28000, label: "偏高但可控", tone: "warning", note: "2.2–2.8万亿：绝对值偏高，风险以占流通市值比为准（当前约 2.6%）" },
+  { max: Infinity, label: "警戒线附近", tone: "danger", note: "> 2.8万亿：绝对值创历史新高，需结合占流通市值比判断（占比 > 3.5% 才进入 2015 式警戒区）" },
 ];
 
 /** VIX 恐慌指数区间 */
@@ -148,6 +162,12 @@ export const MARKLINES: Record<string, MarkLine[]> = {
     { y: 20, label: "20 正常", color: "#6b7280" },
     { y: 30, label: "30 恐慌", color: "#dc2626" },
   ],
+  margin_rzyezb: [
+    { y: 2.0, label: "2.0 冰点(2019底)", color: "#16a34a" },
+    { y: 3.0, label: "3.0 正常上限", color: "#6b7280" },
+    { y: 3.5, label: "3.5 偏热", color: "#f59e0b" },
+    { y: 4.0, label: "4.0 警戒(2015顶)", color: "#dc2626" },
+  ],
   margin_rzrqye: [
     { y: 15000, label: "1.5万亿", color: "#f59e0b" },
     { y: 22000, label: "2.2万亿", color: "#6b7280" },
@@ -176,6 +196,7 @@ export const ZONES: Record<string, readonly ZoneLevel[]> = {
   cn_10y: CN_10Y_ZONES,
   cn_us_spread_10y: CN_US_SPREAD_ZONES,
   vix: VIX_ZONES,
+  margin_rzyezb: MARGIN_ZB_ZONES,
   margin_rzrqye: MARGIN_ZONES,
   breadth: BREADTH_ZONES,
   pmi: PMI_ZONES,

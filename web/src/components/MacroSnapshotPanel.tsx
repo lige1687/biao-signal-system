@@ -25,12 +25,12 @@ const CN_10Y_ZONES = [
   { max: Infinity, label: "明显收紧", tone: "warning", note: "> 2.5%：货币政策转向收紧信号，对成长股估值构成压制" },
 ] as const;
 
-/** 两融余额风险区间（单位：万亿元） */
+/** 两融余额风险区间（单位：万亿元，辅助口径；标准风险口径为占流通市值比） */
 const MARGIN_ZONES = [
   { max: 1.5, label: "低杠杆/情绪谨慎", tone: "caution", note: "< 1.5万亿：市场参与度低，可能处于底部区域但也反映信心不足" },
-  { max: 2.2, label: "正常区间", tone: "neutral", note: "1.5–2.2万亿：历史常态区间；2015 年前峰值 2.27 万亿" },
-  { max: 2.8, label: "偏高但可控", tone: "warning", note: "2.2–2.8万亿：绝对值偏高但占流通市值比仍 < 3%（2025 年 6 月 3 万亿时仅 2.83%）" },
-  { max: Infinity, label: "警戒线附近", tone: "danger", note: "> 2.8万亿 / 占流通市值 > 4%：接近 2015 年股灾前水平（当时 4.27%）；需高度警惕结构性拥挤与强平风险（银河证券、格上基金）" },
+  { max: 2.2, label: "正常区间", tone: "neutral", note: "1.5–2.2万亿：历史常态区间；2015 年峰值 2.27 万亿" },
+  { max: 2.8, label: "偏高但可控", tone: "warning", note: "2.2–2.8万亿：绝对值偏高，风险以占流通市值比为准（近一年约 2.1–2.9%）" },
+  { max: Infinity, label: "警戒线附近", tone: "danger", note: "> 2.8万亿：绝对值创历史新高，需结合占流通市值比判断（占比 > 3.5% 才进入 2015 式警戒区，当时 4.2–4.7%）" },
 ] as const;
 
 /** 10-2 利差（收益率曲线）解读 */
@@ -187,11 +187,12 @@ export default function MacroSnapshotPanel({ data, isLoading }: Props) {
             <h4>两融余额（沪深）</h4>
             <span className="macro-date">{m?.date ?? "--"}</span>
             <div className="margin-big">
-              {marginWanYi != null ? `${marginWanYi.toFixed(0)}亿` : "暂不可用"}
+              {marginWanYi != null ? `${marginWanYi.toFixed(2)}万亿` : "暂不可用"}
             </div>
             {m && (
               <div className="margin-detail">
-                融资 {m.rzye_yi != null ? `${m.rzye_yi.toFixed(0)}亿` : "—"}
+                占流通市值 {m.rzyezb_pct != null ? `${m.rzyezb_pct.toFixed(2)}%` : "-"}
+                {" · "}融资 {m.rzye_yi != null ? `${m.rzye_yi.toFixed(0)}亿` : "—"}
                 {" · "}融券 {m.rqye_yi != null ? `${m.rqye_yi.toFixed(0)}亿` : "—"}
                 {" · "}买入 {m.buy_yi != null ? `${m.buy_yi.toFixed(0)}亿` : "—"}
               </div>
