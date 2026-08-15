@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import * as echarts from "echarts";
-import type { MarkLine } from "./zones";
+import type { MarkLine, ZoneLevel } from "./zones";
+import { zoneToneColor } from "./zones";
 
 export interface LineSeries {
   name: string;
@@ -13,17 +14,20 @@ interface TrendChartProps {
   series: LineSeries[];
   unit: string;
   markLines?: MarkLine[];
+  /** 区间框架：在图上渲染成纵向色带（机会绿 -> 风险红，低透明度）。 */
+  zones?: readonly ZoneLevel[];
   height?: number;
   /** 固定 y 轴区间（宽度用 0–100）；不传则自适应 scale。 */
   yRange?: [number, number];
 }
 
-/** 大图趋势线：坐标轴 + tooltip + 分界线，支持单线/多线（宽度 20/50/200）。 */
+/** 大图趋势线：坐标轴 + tooltip + 分界线 + 区间色带，支持单线/多线（宽度 20/50/200）。 */
 export default function TrendChart({
   dates,
   series,
   unit,
   markLines = [],
+  zones = [],
   height = 300,
   yRange,
 }: TrendChartProps) {
@@ -45,12 +49,33 @@ export default function TrendChart({
 
   useEffect(() => {
     instRef.current?.setOption(
-      buildTrendOption(dates, series, unit, markLines, yRange),
+      buildTrendOption(dates, series, unit, markLines, zones, yRange),
       true,
     );
-  }, [dates, series, unit, markLines, yRange]);
+  }, [dates, series, unit, markLines, zones, yRange]);
 
   return <div ref={ref} className="macro-chart" style={{ height }} />;
+}
+
+/** 区间 -> markArea 色带：相邻区间边界围成一个矩形，首尾贴 y 轴 min/max。 */
+function zoneBands(
+  zones: readonly ZoneLevel[],
+): NonNullable<echarts.LineSeriesOption["markArea"]> {
+  return {
+    silent: true,
+    data: zones.map((z, i) => {
+      const lo = i === 0 ? "min" : zones[i - 1].max;
+      const hi = z.max === Infinity ? "max" : z.max;
+      return [
+        { yAxis: lo, xAxis: 0 },
+        {
+          yAxis: hi,
+          xAxis: "max",
+          itemStyle: { color: zoneToneColor(z.tone), opacity: 0.06 },
+        },
+      ];
+    }),
+  };
 }
 
 function buildTrendOption(
@@ -58,6 +83,7 @@ function buildTrendOption(
   series: LineSeries[],
   unit: string,
   markLines: MarkLine[],
+  zones: readonly ZoneLevel[],
   yRange?: [number, number],
 ): echarts.EChartsOption {
   const multi = series.length > 1;
@@ -69,6 +95,9 @@ function buildTrendOption(
     lineStyle: { width: 1.6, color: s.color },
     itemStyle: { color: s.color },
   }));
+  if (zones.length && seriesOpt.length) {
+    seriesOpt[0].markArea = zoneBands(zones);
+  }
   if (markLines.length && seriesOpt.length) {
     seriesOpt[0].markLine = {
       silent: true,

@@ -5,6 +5,7 @@ import Sparkline from "../components/trend/Sparkline";
 import TrendDrawer from "../components/trend/TrendDrawer";
 import {
   isRealAShare,
+  hasBreadth,
   AShareBar,
   AShareSourceLine,
   fmtPct as fmtPctAD,
@@ -15,6 +16,7 @@ import {
   BREADTH_LINES,
   BREADTH_ZONES,
   MARKLINES,
+  SOURCE_NOTES,
   ZONES,
   findZone,
   type MarkLine,
@@ -106,7 +108,7 @@ function buildDrawer(p: {
     unit: p.unit,
     markLines: MARKLINES[p.key] ?? [],
     zones,
-    footnote: p.footnote,
+    footnote: p.footnote ?? SOURCE_NOTES[p.key],
   };
 }
 
@@ -305,11 +307,12 @@ function BreadthSparkCard({
       yRange: [0, 100],
       zones: BREADTH_ZONES,
       footnote:
-        "宽度 = 站上 N 日均线的个股占比。50 日 >85% 大概率阶段顶部，<15% 短期底部；配合 200 日同低/同高可能见反转。",
+        "宽度 = 站上 N 日均线的个股占比。50 日 >85% 大概率阶段顶部，<15% 短期底部；配合 200 日同低/同高可能见反转。" +
+        SOURCE_NOTES.breadth,
     });
   };
 
-  if (isRealAShare(panel)) {
+  if (isRealAShare(panel) && !hasBreadth(panel)) {
     return (
       <div className="macro-card metric-card">
         <div className="macro-head">

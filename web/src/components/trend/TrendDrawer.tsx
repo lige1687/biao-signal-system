@@ -54,6 +54,7 @@ export default function TrendDrawer({
               series={series}
               unit={unit}
               markLines={markLines}
+              zones={zones}
               yRange={yRange}
               height={340}
             />
@@ -69,7 +70,12 @@ export default function TrendDrawer({
                   </li>
                 ))}
               </ol>
-              {footnote && <div className="macro-disclaimer">{footnote}</div>}
+              {footnote && (
+                <div className="trend-source">
+                  <h5>数据与分界线来源</h5>
+                  {footnote}
+                </div>
+              )}
             </div>
           )}
         </div>
