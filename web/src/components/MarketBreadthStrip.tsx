@@ -4,6 +4,14 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "../api/client";
 import type { BreadthAlert, GlobalPanel } from "../types";
 import MarketBreadthModal from "./MarketBreadthModal";
+import {
+  isRealAShare,
+  fmtPct as fmtPctAD,
+  fmtNum as fmtNumAD,
+  fmtRatio as fmtRatioAD,
+  UP_COLOR,
+  DOWN_COLOR,
+} from "./aShareBreadthView";
 
 function fmtPct(v: number | null | undefined, digits = 1): string {
   if (v == null) return "--";
@@ -106,14 +114,22 @@ export default function MarketBreadthStrip() {
                     {REGIME_CN[p.long_regime]}
                   </span>
                 )}
-                <span className={`strip-chip-val ${deltaClass(p.breadth_20_delta_5)}`}>
-                  {fmtPct(p.breadth_20)}
-                </span>
-                <span className={`strip-chip-arrow ${deltaClass(p.breadth_20_delta_5)}`}>
-                  {deltaArrow(p.breadth_20_delta_5)}
-                </span>
-                {p.percentile_20 != null && (
-                  <span className="strip-chip-pct">P{p.percentile_20.toFixed(0)}</span>
+                {isRealAShare(p) ? (
+                  <span className="strip-chip-val">
+                    涨{fmtNumAD(p.up)}·跌{fmtNumAD(p.down)}
+                  </span>
+                ) : (
+                  <>
+                    <span className={`strip-chip-val ${deltaClass(p.breadth_20_delta_5)}`}>
+                      {fmtPct(p.breadth_20)}
+                    </span>
+                    <span className={`strip-chip-arrow ${deltaClass(p.breadth_20_delta_5)}`}>
+                      {deltaArrow(p.breadth_20_delta_5)}
+                    </span>
+                    {p.percentile_20 != null && (
+                      <span className="strip-chip-pct">P{p.percentile_20.toFixed(0)}</span>
+                    )}
+                  </>
                 )}
                 {anyAlert && <span className="strip-chip-bell">⚠</span>}
               </button>
@@ -158,20 +174,40 @@ export default function MarketBreadthStrip() {
                 {anyAlert && <span className="strip-alert-bell">⚠</span>}
               </div>
               <div className="strip-panel-body">
-                <div className="strip-cell">
-                  <span className="muted">B20</span>
-                  <strong>{fmtPct(p.breadth_20)}</strong>
-                  <span className={`strip-delta ${deltaClass(p.breadth_20_delta_5)}`}>
-                    {deltaArrow(p.breadth_20_delta_5)} {fmtSigned(p.breadth_20_delta_5)}
-                  </span>
-                </div>
-                <div className="strip-cell">
-                  <span className="muted">B50</span>
-                  <strong>{fmtPct(p.breadth_50)}</strong>
-                  <span className={`strip-delta ${deltaClass(p.breadth_50_delta_5)}`}>
-                    {deltaArrow(p.breadth_50_delta_5)} {fmtSigned(p.breadth_50_delta_5)}
-                  </span>
-                </div>
+                {isRealAShare(p) ? (
+                  <>
+                    <div className="strip-cell">
+                      <span className="muted">涨/跌</span>
+                      <strong style={{ color: UP_COLOR }}>
+                        {fmtNumAD(p.up)}/{fmtNumAD(p.down)}
+                      </strong>
+                      <span className="strip-delta">占比{fmtPctAD(p.up_pct)}</span>
+                    </div>
+                    <div className="strip-cell">
+                      <span className="muted">涨跌比</span>
+                      <strong style={{ color: (p.adv_dec_ratio ?? 0) >= 1 ? UP_COLOR : DOWN_COLOR }}>
+                        {fmtRatioAD(p.adv_dec_ratio)}
+                      </strong>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="strip-cell">
+                      <span className="muted">B20</span>
+                      <strong>{fmtPct(p.breadth_20)}</strong>
+                      <span className={`strip-delta ${deltaClass(p.breadth_20_delta_5)}`}>
+                        {deltaArrow(p.breadth_20_delta_5)} {fmtSigned(p.breadth_20_delta_5)}
+                      </span>
+                    </div>
+                    <div className="strip-cell">
+                      <span className="muted">B50</span>
+                      <strong>{fmtPct(p.breadth_50)}</strong>
+                      <span className={`strip-delta ${deltaClass(p.breadth_50_delta_5)}`}>
+                        {deltaArrow(p.breadth_50_delta_5)} {fmtSigned(p.breadth_50_delta_5)}
+                      </span>
+                    </div>
+                  </>
+                )}
               </div>
               {anyAlert && (
                 <div className="strip-alert-row">

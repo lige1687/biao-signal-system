@@ -1,5 +1,6 @@
 import type {
   ActionItem,
+  AShareBreadthResponse,
   BreadthHistoryResponse,
   BuyPointChatReply,
   BuyPointReview,
@@ -149,6 +150,11 @@ export const api = {
   marketContextBreadthHistory: (marketId: string, lookbackDays = 120) =>
     request<BreadthHistoryResponse>(
       `/market-context/breadth-history?market_id=${encodeURIComponent(marketId)}&lookback_days=${lookbackDays}`,
+    ),
+  // 真全A市场宽度（涨跌家数 + 可选 MA 上方占比），替换原 fixture 假样本
+  marketContextAShareBreadth: (includeMa = false) =>
+    request<AShareBreadthResponse>(
+      `/market-context/a-share-breadth${includeMa ? "?include_ma=true" : ""}`,
     ),
   marketContextForwardStats: (
     marketId: string,

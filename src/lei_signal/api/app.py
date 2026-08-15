@@ -6,6 +6,9 @@
 """
 from __future__ import annotations
 
+import logging
+import sys
+import threading
 from pathlib import Path
 
 from fastapi import FastAPI
@@ -37,6 +40,25 @@ load_env()
 def _build_market_context_service() -> MarketContextService:
     return MarketContextService()
 
+
+def _warm_a_share_breadth() -> None:
+    """后台预热真全A宽度缓存，首次打开页面不必现场等几秒拉数据。
+
+    daemon 线程不阻塞启动；测试环境（pytest 已导入）跳过，避免单测发网络请求。
+    """
+    if "pytest" in sys.modules:
+        return
+
+    def _run() -> None:
+        try:
+            from lei_signal.market_context.a_share_breadth import get_a_share_breadth
+
+            get_a_share_breadth(include_ma=False)
+        except Exception as e:  # noqa: BLE001 - 预热失败不影响服务
+            logging.getLogger(__name__).warning("A股宽度预热失败: %s", e)
+
+    threading.Thread(target=_run, daemon=True, name="a-share-breadth-warmup").start()
+
 _REPO_ROOT = Path(__file__).resolve().parents[3]
 _WEB_DIST = _REPO_ROOT / "web" / "dist"
 
@@ -64,6 +86,8 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
     app.include_router(agent.router)
     app.include_router(feishu_webhook.router)
     app.include_router(fundamentals.router)
+
+    _warm_a_share_breadth()
 
     @app.get("/api/health")
     def health() -> dict[str, str]:

@@ -1617,41 +1617,81 @@ def market_context_data_status(request: Request, market_id: str) -> dict:
 def market_context_global_strip(request: Request) -> dict[str, Any]:
     """Return the two global panels (CN_ALL_A + SP500) for the topbar strip.
 
-    The topbar only needs a compact read of B20 / B50 / 5日 delta /
-    heat state for each of the two global markets — no full snapshot.
+    全A(CN_ALL_A) 走真全A源（腾讯快照+交易所代码列表，涨跌家数），替换原
+    fixture/dapanyuntu 假 B 系列；标普500(SP500) 保持原 service 计算（美股）。
     """
     from datetime import date as _date
+
     panels = _market_context_service(request).get_global_snapshots(_date.today())
-    out = []
+    out: list[dict[str, Any]] = []
     for p in panels:
         snap = p.snapshots[0] if p.snapshots else None
         if snap is None:
             out.append({"market_id": p.symbol, "summary": p.summary, "data_status": p.data_status})
             continue
-        entry: dict[str, Any] = {
-            "market_id": snap["market_id"],
-            "display_name": _GLOBAL_DISPLAY.get(snap["market_id"], snap["market_id"]),
-            "summary": p.summary,
-            "summary_cn": p.summary_cn,
-            "data_status": p.data_status,
-            "breadth_20": snap["breadth_20"],
-            "breadth_50": snap["breadth_50"],
-            "breadth_200": snap.get("breadth_200"),
-            "breadth_20_delta_5": snap["breadth_20_delta_5"],
-            "breadth_50_delta_5": snap["breadth_50_delta_5"],
-            "percentile_20": snap["percentile_20"],
-            "percentile_50": snap["percentile_50"],
-            "long_regime": snap["long_regime"],
-            "heat_state": snap["heat_state"],
-            "drawdown_from_ath": snap["drawdown_from_ath"],
-            "alerts": _breadth_alerts(
-                snap.get("breadth_50"),
-                snap.get("breadth_200"),
-                snap.get("breadth_20"),
-            ),
-            "updated_at": p.updated_at,
-        }
-        out.append(entry)
+        mid = snap["market_id"]
+        if mid == "SP500":
+            # 美股：原 service 口径（B20/B50/B200 上方占比）
+            out.append({
+                "market_id": mid,
+                "display_name": _GLOBAL_DISPLAY.get(mid, mid),
+                "summary": p.summary,
+                "summary_cn": p.summary_cn,
+                "data_status": p.data_status,
+                "breadth_20": snap["breadth_20"],
+                "breadth_50": snap["breadth_50"],
+                "breadth_200": snap.get("breadth_200"),
+                "breadth_20_delta_5": snap["breadth_20_delta_5"],
+                "breadth_50_delta_5": snap["breadth_50_delta_5"],
+                "percentile_20": snap["percentile_20"],
+                "percentile_50": snap["percentile_50"],
+                "long_regime": snap["long_regime"],
+                "heat_state": snap["heat_state"],
+                "drawdown_from_ath": snap["drawdown_from_ath"],
+                "alerts": _breadth_alerts(
+                    snap.get("breadth_50"),
+                    snap.get("breadth_200"),
+                    snap.get("breadth_20"),
+                ),
+                "updated_at": p.updated_at,
+            })
+        # CN_ALL_A 在下方用真全A源覆盖，这里跳过原假 B 系列
+    # —— 全A(CN_ALL_A)：真全A涨跌家数，替换原 fixture/dapanyuntu 假样本 ——
+    from lei_signal.market_context.a_share_breadth import get_a_share_breadth
+
+    b = get_a_share_breadth(include_ma=False)
+    cn_all_entry: dict[str, Any] = {
+        "market_id": "CN_ALL_A",
+        "display_name": _GLOBAL_DISPLAY.get("CN_ALL_A", "全A"),
+        "summary": "real_a_share",
+        "summary_cn": "真全A涨跌家数",
+        "data_status": b.data_status,
+        # MA 上方占比默认不拉（需正常网络环境），由前端"含 MA 占比"开关另行获取
+        "breadth_20": None,
+        "breadth_50": None,
+        "breadth_200": None,
+        "breadth_20_delta_5": None,
+        "breadth_50_delta_5": None,
+        "percentile_20": None,
+        "percentile_50": None,
+        "long_regime": "unknown",
+        "heat_state": "unknown",
+        "drawdown_from_ath": None,
+        "alerts": _ad_alerts(b.adv_dec_ratio),
+        "updated_at": b.as_of,
+        # 真全A涨跌家数（核心、最权威）
+        "is_real_a_share": True,
+        "up": b.up,
+        "down": b.down,
+        "flat": b.flat,
+        "total": b.total,
+        "up_pct": b.up_pct,
+        "adv_dec_ratio": b.adv_dec_ratio,
+        "limit_up": b.limit_up,
+        "limit_down": b.limit_down,
+        "source_detail": b.source_detail,
+    }
+    out.insert(0, cn_all_entry)
     return {"panels": out}
 
 
@@ -1786,6 +1826,33 @@ def _breadth_alerts(
                 "desc": f"{medium_label}={medium:.1f}%，低于15%，大概率是短期底部",
             })
 
+    return alerts
+
+
+def _ad_alerts(adv_dec: float | None) -> list[dict[str, str]]:
+    """真全A涨跌家数维度的简易情绪预警（替换原 B 系列阈值预警）。
+
+    涨跌比 AD = 上涨家数 / 下跌家数。AD 越低说明跌多涨少、广度越弱；
+    AD 越高说明涨多跌少、广度越强（过强需防追高）。阈值仅为直观参考，
+    非券商金工严格框架。
+    """
+    if adv_dec is None:
+        return []
+    alerts: list[dict[str, str]] = []
+    if adv_dec <= 0.4:
+        alerts.append({
+            "level": "stage",
+            "type": "ad_ice",
+            "title": "⚠️ 普跌·广度冰点",
+            "desc": f"涨跌比 {adv_dec:.2f}（涨/跌），跌多涨少，全市场广度极弱",
+        })
+    elif adv_dec >= 2.5:
+        alerts.append({
+            "level": "stage",
+            "type": "ad_hot",
+            "title": "🔥 普涨·广度过热",
+            "desc": f"涨跌比 {adv_dec:.2f}（涨/跌），涨多跌少，注意追高风险",
+        })
     return alerts
 
 

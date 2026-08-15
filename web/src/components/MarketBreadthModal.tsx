@@ -2,6 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 
 import { api } from "../api/client";
 import type { ForwardStatBucket, GlobalPanel } from "../types";
+import {
+  isRealAShare,
+  AShareBar,
+  AShareGrid,
+  AShareSourceLine,
+} from "./aShareBreadthView";
 
 interface Props {
   panel: GlobalPanel;
@@ -47,6 +53,7 @@ export default function MarketBreadthModal({ panel, onClose }: Props) {
   const hasB200 = panel.breadth_200 != null;
   const isBull = hasB200 && panel.breadth_200! > 50;
   const isBear = hasB200 && panel.breadth_200! < 50;
+  const realA = isRealAShare(panel);
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -68,7 +75,22 @@ export default function MarketBreadthModal({ panel, onClose }: Props) {
           </div>
         )}
 
-        {/* 2. 宽度指标网格（只显示有数据的格子） */}
+        {/* 2. 真全A涨跌家数（CN_ALL_A 走真源时优先展示） */}
+        {realA && (
+          <div className="breadth-modal-section a-share-modal">
+            <h3>真全A · 涨跌家数</h3>
+            <AShareBar p={panel} />
+            <AShareGrid p={panel} />
+            <AShareSourceLine p={panel} />
+            <p className="muted breadth-modal-hint">
+              MA 上方占比（B20/B50/B200）与历史分位需正常网络环境逐只拉历史K线计算，
+              本接口默认不拉取；本机联网时可经
+              <code>/market-context/a-share-breadth?include_ma=true</code> 获取。
+            </p>
+          </div>
+        )}
+
+        {/* 3. 宽度指标网格（只显示有数据的格子） */}
         <div className="breadth-modal-grid">
           <div className="modal-cell">
             <div className="muted">B20 (MA20 上方)</div>
@@ -142,7 +164,7 @@ export default function MarketBreadthModal({ panel, onClose }: Props) {
               <span>熊市底色 — 长期趋势偏空</span>
             </div>
           </div>
-          {panel.breadth_50 == null && !hasB200 && (
+          {panel.breadth_50 == null && !hasB200 && !realA && (
             <p className="muted breadth-modal-hint">
               当前数据源只提供 B20（MA20 站上率），B50/B200 暂不可用。
               预警将在 B50/B200 数据就绪后自动触发。

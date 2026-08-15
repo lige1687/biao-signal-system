@@ -2394,6 +2394,66 @@ a { color: var(--accent); text-decoration: none; }
   color: var(--text);
 }
 
+/* ---- 真全A 涨跌家数面板（AShareBreadthPanel）---- */
+.b-status {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 7px;
+  border-radius: 9px;
+  white-space: nowrap;
+}
+.b-status.status-ok { background: #16a34a18; color: #15803d; }
+.b-status.status-partial { background: #f59e0b18; color: #b45309; }
+.b-status.status-unavailable { background: #dc262618; color: #b91c1c; }
+.ma-toggle {
+  margin-left: auto;
+  font: inherit;
+  font-size: 11px;
+  padding: 3px 9px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-card, #fff);
+  color: var(--text-dim);
+  cursor: pointer;
+}
+.ma-toggle.on { background: #3a7bd518; border-color: #3a7bd5; color: #2c6bc0; }
+.a-breadth-body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 12px; }
+
+/* 涨跌占比条 */
+.ab-bar {
+  display: flex;
+  width: 100%;
+  height: 16px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--border);
+}
+.ab-seg { height: 100%; }
+.ab-seg.up { background: #e23d3d; }
+.ab-seg.flat { background: #9ca3af; }
+.ab-seg.down { background: #1a9e5f; }
+
+/* 数字网格 */
+.ab-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.ab-grid.small { grid-template-columns: repeat(3, 1fr); }
+.ab-stat { display: flex; flex-direction: column; gap: 2px; }
+.ab-stat-label { font-size: 11px; color: var(--text-faint); }
+.ab-stat-value { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.1; }
+
+.ab-ma { border-top: 1px dashed var(--border); padding-top: 10px; }
+.ab-sub { font-size: 12px; font-weight: 600; display: block; margin-bottom: 8px; }
+
+.ab-source {
+  display: flex;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-dim);
+  border-top: 1px dashed var(--border);
+  padding-top: 8px;
+}
+.ab-source-label { flex: none; color: var(--text-faint); font-weight: 600; }
+.ab-source-text { line-height: 1.5; }
+
 /* ---- 趋势小图 + 大图抽屉（FundamentalsPage 指标卡）---- */
 .metric-card { display: flex; flex-direction: column; }
 .metric-card.clickable { cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s; }

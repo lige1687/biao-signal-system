@@ -48,6 +48,23 @@ export default function BreadthTrendChart({
     instRef.current.setOption(buildTrendOption(points), true);
   }, [points]);
 
+  // 全A(CN_ALL_A) 已切换为真全A涨跌家数源；其 MA 上方占比历史需本机联网逐只建库，
+  // 沙箱无历史K线源，故趋势图在此给出明确占位，而非展示旧 fixture 假序列。
+  if (marketId === "CN_ALL_A") {
+    return (
+      <div className="breadth-trend-card">
+        <div className="breadth-trend-title">
+          {displayName} 宽度趋势（近 {LOOKBACK_DAYS} 交易日）
+        </div>
+        <div className="muted breadth-trend-empty">
+          真全A涨跌家数已实时可用（见上方占比条与数字）。
+          MA 上方占比（B20/B50/B200）趋势图需<strong>本机联网</strong>逐只拉历史K线建库，
+          建库后此处自动显示真实序列；当前环境无历史K线源，暂以涨跌家数口径为准。
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="breadth-trend-card">
       <div className="breadth-trend-title">

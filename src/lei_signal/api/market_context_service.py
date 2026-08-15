@@ -711,7 +711,10 @@ def _replace_percentile(
     raise ValueError(f"unsupported window: {window}")
 
 
-#: Global reference panels: 全A (CN_ALL_A, real 5889 stocks) + 标普500 (SP500).
+#: Global reference panels: 全A (CN_ALL_A) + 标普500 (SP500).
+#: 注意：CN_ALL_A 的真实宽度已不再由本模块 fixture 计算——
+#: 涨跌家数口径请走 /market-context/a-share-breadth（真全A、腾讯快照+交易所代码列表）。
+#: 此处 global-strip 仍保留 MA 上方占比作为补充参考，但其口径 = 二级行业等权平均站上率，并非真全A股票数加权。
 _DEFAULT_GLOBAL_MARKETS: tuple[MarketId, ...] = (MarketId.CN_ALL_A, MarketId.SP500)
 
 

@@ -3,6 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "../api/client";
 import type { GlobalPanel } from "../types";
 import BreadthTrendChart from "./BreadthTrendChart";
+import {
+  AShareBar,
+  AShareGrid,
+  AShareSourceLine,
+  isRealAShare,
+  fmtPct as fmtPctAD,
+  fmtNum as fmtNumAD,
+} from "./aShareBreadthView";
 
 /* ------------------------------------------------------------------ */
 /*  阈值与判断依据（全部标注来源）                                      */
@@ -99,15 +107,23 @@ export default function MarketBreadthSnapshotPanel() {
         <span className="macro-chevron">{expanded ? "▾" : "▸"}</span>
         <span className="macro-title">市场宽度 + 情绪</span>
         <span className="macro-badges">
-          {cnAll?.breadth_50 != null && (
-            <span className={`macro-chip ${shortBreadthTone(cnAll.breadth_50)}`} title="全A 50日宽度">
-              全A50 {fmtPct(cnAll.breadth_50)}
+          {cnAll && isRealAShare(cnAll) ? (
+            <span className="macro-chip neutral" title="真全A·上涨家数占比">
+              全A涨 {fmtPctAD(cnAll.up_pct)} · 跌 {fmtNumAD(cnAll.down)}
             </span>
-          )}
-          {cnAll?.breadth_200 != null && (
-            <span className={`macro-chip ${longBreadthTone(cnAll.breadth_200)}`} title="全A 200日宽度">
-              全A200 {fmtPct(cnAll.breadth_200)}
-            </span>
+          ) : (
+            <>
+              {cnAll?.breadth_50 != null && (
+                <span className={`macro-chip ${shortBreadthTone(cnAll.breadth_50)}`} title="全A 50日宽度">
+                  全A50 {fmtPct(cnAll.breadth_50)}
+                </span>
+              )}
+              {cnAll?.breadth_200 != null && (
+                <span className={`macro-chip ${longBreadthTone(cnAll.breadth_200)}`} title="全A 200日宽度">
+                  全A200 {fmtPct(cnAll.breadth_200)}
+                </span>
+              )}
+            </>
           )}
         </span>
         <span className="macro-toggle">{expanded ? "收起" : "展开分析"}</span>
@@ -116,9 +132,13 @@ export default function MarketBreadthSnapshotPanel() {
       {/* ---- 紧凑模式：各市场宽度小卡 ---- */}
       {!expanded && !isLoading && !error && (
         <div className="macro-compact">
-          {primaryPanels.map((p) => (
-            <BreadthMiniCard key={p.market_id} panel={p} />
-          ))}
+          {primaryPanels.map((p) =>
+            isRealAShare(p) ? (
+              <RealAShareCard key={p.market_id} panel={p} />
+            ) : (
+              <BreadthMiniCard key={p.market_id} panel={p} />
+            ),
+          )}
         </div>
       )}
 
@@ -129,8 +149,12 @@ export default function MarketBreadthSnapshotPanel() {
       {expanded && primaryPanels.length > 0 && (
         <div className="macro-expanded">
           <div className="breadth-trends">
-            {cnAll && (
-              <BreadthTrendChart marketId="CN_ALL_A" displayName={cnAll.display_name} />
+            {cnAll && isRealAShare(cnAll) ? (
+              <RealAShareDetail panel={cnAll} />
+            ) : (
+              cnAll && (
+                <BreadthTrendChart marketId="CN_ALL_A" displayName={cnAll.display_name} />
+              )
             )}
             {spx && (
               <BreadthTrendChart marketId="SP500" displayName={spx.display_name} />
@@ -176,10 +200,10 @@ export default function MarketBreadthSnapshotPanel() {
 
             <div className="macro-disclaimer">
               ⚠️ 以上阈值为市场宽度分析经典框架与券商研报惯例的综合归纳，非交易指令。
-              市场宽度反映「上涨家数占比」，用于判断行情广度与健康度；
-              当前数值来源：项目内建 <code>/market-context/global-strip</code> 接口，
-              趋势序列来源：<code>/market-context/breadth-history</code> 接口
-              （后端已算好并持久化，前端零计算）。
+              市场宽度反映「上涨家数占比」，用于判断行情广度与健康度。
+              全A(CN_ALL_A) 已切换为真全A涨跌家数（腾讯快照+交易所代码列表，真全A口径，
+              非 fixture 假样本）；标普500 仍走原 B 系列占比口径。
+              当前数值来源：<code>/market-context/global-strip</code> 接口。
             </div>
           </div>
         </div>
@@ -232,6 +256,45 @@ function BreadthMiniCard({ panel }: { panel: GlobalPanel }) {
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+/* ---- 真全A涨跌家数（替换原假 B 系列） ---- */
+function RealAShareCard({ panel }: { panel: GlobalPanel }) {
+  return (
+    <div className="macro-card breadth-mini a-share-card">
+      <div className="macro-head">
+        <span className="macro-name">{panel.display_name} 真全A涨跌家数</span>
+        <span className="macro-period">{panel.updated_at?.slice(0, 10)}</span>
+      </div>
+      <AShareBar p={panel} />
+      <AShareGrid p={panel} small />
+      {panel.alerts?.length > 0 && (
+        <div className="breadth-alerts">
+          {panel.alerts.map((a, i) => (
+            <div key={i}>· {a.title}{a.desc ? `：${a.desc}` : ""}</div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ---- 展开详情：真全A涨跌家数 ---- */
+function RealAShareDetail({ panel }: { panel: GlobalPanel }) {
+  return (
+    <div className="breadth-trend-card a-share-detail">
+      <div className="breadth-trend-title">真全A · 涨跌家数（腾讯快照 + 交易所代码列表）</div>
+      <AShareBar p={panel} />
+      <AShareGrid p={panel} />
+      <AShareSourceLine p={panel} />
+      <div className="macro-disclaimer">
+        ⚠️ 涨跌家数为真全A口径（沪+深+北交所，受网络策略影响北交所可能偶发跳过），
+        非原 fixture 假样本、非行业等权 proxy。MA 上方占比（B20/B50/B200）需正常网络环境
+        逐只拉历史K线计算，本接口默认不拉取；可在本机联网时经
+        <code>/market-context/a-share-breadth?include_ma=true</code> 获取。
+      </div>
     </div>
   );
 }

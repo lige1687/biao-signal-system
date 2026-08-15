@@ -487,6 +487,17 @@ export interface GlobalPanel {
   summary: string;
   summary_cn: string;
   data_status: string;
+  // 真全A涨跌家数（CN_ALL_A 走真源；标普500 等无此字段）
+  is_real_a_share?: boolean;
+  up?: number | null;
+  down?: number | null;
+  flat?: number | null;
+  total?: number | null;
+  up_pct?: number | null;
+  adv_dec_ratio?: number | null;
+  limit_up?: number | null;
+  limit_down?: number | null;
+  source_detail?: string;
   breadth_20: number | null;
   breadth_50: number | null;
   breadth_200: number | null;
@@ -503,6 +514,26 @@ export interface GlobalPanel {
 
 export interface GlobalStripResponse {
   panels: GlobalPanel[];
+}
+
+/** 真全A市场宽度（涨跌家数 + 可选 MA 上方占比）。
+ *  后端 /market-context/a-share-breadth 返回；来源：腾讯快照+沪深交易所代码列表（涨跌家数）、
+ *  akshare 东财历史K线（MA 占比，需正常网络环境）。 */
+export interface AShareBreadthResponse {
+  as_of: string;
+  up: number;
+  down: number;
+  flat: number;
+  total: number;
+  up_pct: number | null; // 上涨家数占比 %
+  adv_dec_ratio: number | null; // 涨跌比 = up / down
+  limit_up: number;
+  limit_down: number;
+  ma20_pct: number | null; // MA20 上方占比 %（券商金工口径，需联网）
+  ma50_pct: number | null;
+  ma200_pct: number | null;
+  data_status: string; // ok | partial | unavailable
+  source_detail: string;
 }
 
 export interface ForwardStatBucket {
