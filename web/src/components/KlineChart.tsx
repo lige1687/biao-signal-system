@@ -196,7 +196,8 @@ export default function KlineChart({ payload, display, onPick, onDownload, highl
         }
       }
       if (s === null || e === null) return;
-      const cur = (chart.getOption().dataZoom as Array<{ startValue?: number; endValue?: number }> | undefined) ?? [];
+      // getOption() 在首次 setOption 前返回 undefined，必须可选链兜底
+      const cur = (chart.getOption()?.dataZoom as Array<{ startValue?: number; endValue?: number }> | undefined) ?? [];
       const c0 = cur[0];
       const alreadyInt =
         c0 && c0.startValue != null && c0.endValue != null &&
@@ -258,7 +259,8 @@ export default function KlineChart({ payload, display, onPick, onDownload, highl
   useEffect(() => {
     const chart = chartRef.current;
     if (!chart) return;
-    const curDz = (chart.getOption().dataZoom as Array<{ startValue?: number; endValue?: number }> | undefined) ?? [];
+    // 首次渲染时 chart 还没有 option，getOption() 返回 undefined，取 null 用默认区间。
+    const curDz = (chart.getOption()?.dataZoom as Array<{ startValue?: number; endValue?: number }> | undefined) ?? [];
     const z0 = curDz[0];
     const zoom =
       z0 && z0.startValue != null && z0.endValue != null
