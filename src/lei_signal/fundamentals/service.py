@@ -23,6 +23,7 @@ _VIX_TTL = 1800
 _MARGIN_TTL = 3600
 _COMMODITY_TTL = 1800
 _ETF_TTL = 3600
+_OVERLAY_TTL = 12 * 3600
 
 
 class _TtlCache:
@@ -223,6 +224,88 @@ class FundamentalsService:
                 series[key] = mk(label, unit, points)
             except sources.FundamentalsSourceError as exc:
                 errors.append(f"宏观历史 {key}: {exc}")
+
+        as_of = max((s["dates"][-1] for s in series.values() if s["dates"]), default="")
+        return {"as_of": as_of, "series": series, "errors": errors}
+
+    def overlay_history(self, *, years: int = 20) -> dict[str, Any]:
+        """长周期叠加序列：国债收益率 / 两融占比 × 股指（20 年级），单项失败降级。
+
+        供「利率 × 股指」带 dataZoom 的大图：左轴指数、右轴收益率/占比。
+        数据源：国债/两融沿用东财（翻页取全史），A 股指数腾讯、美指 FRED。
+        日频全史 ~5000 点，缓存 12 小时。
+        """
+        years = max(1, min(int(years), 30))
+        lookback = years * 365 + 30
+        errors: list[str] = []
+        series: dict[str, Any] = {}
+
+        def mk(label: str, unit: str, dvals: dict[str, float]) -> dict[str, Any]:
+            items = sorted(dvals.items())
+            return {
+                "label": label,
+                "unit": unit,
+                "dates": [d for d, _ in items],
+                "values": [round(v, 2) for _, v in items],
+            }
+
+        def load(cache_key: str, loader: Callable[[], dict[str, float]]) -> dict[str, float]:
+            data, _ = self._cache.get_or_load(f"overlay:{cache_key}:{years}", _OVERLAY_TTL, loader)
+            return data
+
+        # 国债（中/美 10Y，同一接口一次取出）
+        try:
+            treasury = load("treasury", lambda: sources.fetch_treasury_history(lookback))
+            series["cn_10y"] = mk(
+                "中国 10Y",
+                "%",
+                {d: v["cn_10y"] for d, v in treasury.items() if v.get("cn_10y") is not None},
+            )
+            series["us_10y"] = mk(
+                "美国 10Y",
+                "%",
+                {d: v["us_10y"] for d, v in treasury.items() if v.get("us_10y") is not None},
+            )
+        except sources.FundamentalsSourceError as exc:
+            errors.append(f"国债长史: {exc}")
+
+        # 两融占比 + 绝对余额（全史约 3,977 交易日，2026-08 实测）
+        try:
+            margin = load("margin", lambda: sources.fetch_margin_history(min(lookback, 4000)))
+            series["margin_rzyezb"] = mk(
+                "融资余额占流通市值比",
+                "%",
+                {d: v["rzyezb_pct"] for d, v in margin.items() if v.get("rzyezb_pct") is not None},
+            )
+            series["margin_rzrqye"] = mk(
+                "两融余额",
+                "亿",
+                {d: v["rzrqye_yi"] for d, v in margin.items() if v.get("rzrqye_yi") is not None},
+            )
+        except sources.FundamentalsSourceError as exc:
+            errors.append(f"两融长史: {exc}")
+
+        # A 股指数（腾讯）
+        for key, label, code in (
+            ("sse", "上证指数", sources.CN_INDEX_CODES["sse"]),
+            ("hs300", "沪深300", sources.CN_INDEX_CODES["hs300"]),
+        ):
+            try:
+                hist = load(f"idx:{key}", lambda c=code: sources.fetch_cn_index_history(c))
+                series[key] = mk(label, "", hist)
+            except sources.FundamentalsSourceError as exc:
+                errors.append(f"指数 {label}: {exc}")
+
+        # 美股指数（FRED）
+        for key, label, sid in (
+            ("sp500", "标普500", sources.FRED_INDEX_SERIES["sp500"]),
+            ("nasdaq", "纳斯达克", sources.FRED_INDEX_SERIES["nasdaq"]),
+        ):
+            try:
+                hist = load(f"idx:{key}", lambda s=sid: sources.fetch_fred_index_history(s))
+                series[key] = mk(label, "", hist)
+            except sources.FundamentalsSourceError as exc:
+                errors.append(f"指数 {label}: {exc}")
 
         as_of = max((s["dates"][-1] for s in series.values() if s["dates"]), default="")
         return {"as_of": as_of, "series": series, "errors": errors}

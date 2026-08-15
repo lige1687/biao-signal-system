@@ -2480,6 +2480,17 @@ a { color: var(--accent); text-decoration: none; }
 }
 .trend-source h5 { margin: 0 0 4px; font-size: 12px; font-weight: 600; }
 
+/* ---- 长周期叠加（利率/两融 × 股指，dataZoom 滑动）---- */
+.overlay-block { display: flex; flex-direction: column; gap: 12px; }
+.overlay-toolbar { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.overlay-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px 12px;
+  background: var(--bg-card, #fff);
+}
+.overlay-card h4 { margin: 0 0 6px; font-size: 13px; font-weight: 600; }
+
 /* ---- 趋势转折 5 条件提示条（K 线图下方显眼位置）----
    前 2 项系统资源（破线/均线拐头），后 3 项 MACD 佐证（研究代理，强度非买点）。 */
 .trend-checklist {

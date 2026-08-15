@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { api, fundamentalsApi } from "../api/client";
+import OverlayChart, { type OverlaySeries } from "../components/trend/OverlayChart";
 import Sparkline from "../components/trend/Sparkline";
 import TrendDrawer from "../components/trend/TrendDrawer";
 import {
@@ -148,6 +149,152 @@ function MetricCard({
       ) : (
         <div className="sparkline-muted">{loading ? "加载历史…" : "暂无历史"}</div>
       )}
+    </div>
+  );
+}
+
+// ── 长周期叠加：利率/两融 × 股指（20 年级，dataZoom 滑动窗口）────────────
+
+const OVERLAY_RANGES = [
+  { key: "5y", label: "5年", years: 5 },
+  { key: "10y", label: "10年", years: 10 },
+  { key: "20y", label: "20年", years: 20 },
+  { key: "all", label: "全部", years: 0 },
+] as const;
+type OverlayRange = (typeof OVERLAY_RANGES)[number]["key"];
+
+/** 把序列按目标日历对齐（交易日历不完全重合的日期填 null）。 */
+function alignTo(
+  dates: string[],
+  s?: { dates: string[]; values: number[] },
+): (number | null)[] {
+  if (!s || s.dates.length === 0) return dates.map(() => null);
+  const m = new Map(s.dates.map((d, i) => [d, s.values[i]]));
+  return dates.map((d) => m.get(d) ?? null);
+}
+
+function unionDates(...series: { dates: string[] }[]): string[] {
+  const set = new Set<string>();
+  for (const s of series) for (const d of s.dates) set.add(d);
+  return [...set].sort();
+}
+
+function OverlaySection() {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["fundOverlay", 20],
+    queryFn: () => fundamentalsApi.overlayHistory(20),
+    staleTime: 12 * 3600_000,
+    retry: 1,
+  });
+  const [range, setRange] = useState<OverlayRange>("10y");
+  const s = data?.series ?? {};
+
+  const cnDates = useMemo(
+    () => unionDates(...[s.sse, s.hs300].filter(Boolean)),
+    [s.sse, s.hs300],
+  );
+  const usDates = useMemo(
+    () => unionDates(...[s.sp500, s.nasdaq].filter(Boolean)),
+    [s.sp500, s.nasdaq],
+  );
+
+  /** 可视窗口占全序列百分比（echarts dataZoom start 换算）。 */
+  const startPercent = (dates: string[]): number => {
+    if (range === "all" || dates.length < 2) return 100;
+    const years = OVERLAY_RANGES.find((r) => r.key === range)?.years ?? 10;
+    const span = new Date(dates[dates.length - 1]).getTime() - new Date(dates[0]).getTime();
+    if (span <= 0) return 100;
+    return Math.min(100, Math.max(1, (years * 365.25 * 86400_000) / span) * 100);
+  };
+
+  const cnSeries = useMemo<OverlaySeries[]>(
+    () => [
+      { name: "上证指数", values: alignTo(cnDates, s.sse), color: "#ea580c", axis: "left" },
+      { name: "沪深300", values: alignTo(cnDates, s.hs300), color: "#3a7bd5", axis: "left" },
+      { name: "中国10Y", values: alignTo(cnDates, s.cn_10y), color: "#f59e0b", axis: "right" },
+    ],
+    [cnDates, s.sse, s.hs300, s.cn_10y],
+  );
+  const usSeries = useMemo<OverlaySeries[]>(
+    () => [
+      { name: "标普500", values: alignTo(usDates, s.sp500), color: "#3a7bd5", axis: "left" },
+      { name: "纳斯达克", values: alignTo(usDates, s.nasdaq), color: "#7c3aed", axis: "left" },
+      { name: "美国10Y", values: alignTo(usDates, s.us_10y), color: "#f59e0b", axis: "right" },
+    ],
+    [usDates, s.sp500, s.nasdaq, s.us_10y],
+  );
+  const marginSeries = useMemo<OverlaySeries[]>(
+    () => [
+      { name: "上证指数", values: alignTo(cnDates, s.sse), color: "#ea580c", axis: "left" },
+      { name: "沪深300", values: alignTo(cnDates, s.hs300), color: "#3a7bd5", axis: "left" },
+      {
+        name: "融资余额占流通市值比",
+        values: alignTo(cnDates, s.margin_rzyezb),
+        color: "#dc2626",
+        axis: "right",
+      },
+    ],
+    [cnDates, s.sse, s.hs300, s.margin_rzyezb],
+  );
+
+  if (isLoading) {
+    return (
+      <div className="card-skeleton" style={{ height: 220 }}>
+        <div className="muted" style={{ padding: 12 }}>
+          首次加载需翻页拉取 20 年全史（约 15 秒），之后 12 小时走缓存…
+        </div>
+      </div>
+    );
+  }
+  if (error || !data) {
+    return (
+      <div className="fund-errors">长周期叠加加载失败：{(error as Error | undefined)?.message ?? "未知错误"}</div>
+    );
+  }
+
+  return (
+    <div className="overlay-block">
+      <div className="overlay-toolbar">
+        <span className="muted">可视窗口：</span>
+        {OVERLAY_RANGES.map((r) => (
+          <button
+            key={r.key}
+            className={`ma-toggle${range === r.key ? " on" : ""}`}
+            onClick={() => setRange(r.key)}
+          >
+            {r.label}
+          </button>
+        ))}
+        {data.errors.length > 0 && (
+          <span className="muted" style={{ marginLeft: 8 }}>{data.errors.join("；")}</span>
+        )}
+      </div>
+
+      <div className="overlay-card">
+        <h4>A 股 × 中国 10Y 国债</h4>
+        <OverlayChart dates={cnDates} series={cnSeries} startPercent={startPercent(cnDates)} />
+      </div>
+
+      <div className="overlay-card">
+        <h4>美股 × 美国 10Y 国债</h4>
+        <OverlayChart dates={usDates} series={usSeries} startPercent={startPercent(usDates)} />
+        <div className="fund-hint-row">
+          标普500 FRED 授权仅提供近 10 年；纳斯达克为全史（1971 起）。拖动图下滑块或滚轮缩放查看任意区间。
+        </div>
+      </div>
+
+      <div className="overlay-card">
+        <h4>A 股 × 融资余额占流通市值比</h4>
+        <OverlayChart
+          dates={cnDates}
+          series={marginSeries}
+          rightName="占比 %"
+          startPercent={startPercent(cnDates)}
+        />
+        <div className="fund-hint-row">
+          两融数据自 2010-03 开闸；占比 &gt; 3.5% 为 2015 式警戒区（历史顶 2015-07-03 达 4.70%）。
+        </div>
+      </div>
     </div>
   );
 }
@@ -672,6 +819,10 @@ export default function FundamentalsPage() {
       {/* ── 利率 ── */}
       <h2 className="fund-section-title">① 利率 <span className="fund-count">价格的标尺 / 资本的成本</span></h2>
       {rates ? <RatesSection data={rates} hist={ratesHist} onOpen={setDrawer} /> : <div className="card-skeleton" style={{ height: 180 }} />}
+
+      {/* ── 长周期叠加 ── */}
+      <h2 className="fund-section-title">①⁺ 长周期叠加 <span className="fund-count">利率 / 两融 × 股指（20 年级，可滑动缩放）</span></h2>
+      <OverlaySection />
 
       {/* ── 市场 ── */}
       <h2 className="fund-section-title">② 市场 <span className="fund-count">宽度 + 情绪（最有用）</span></h2>

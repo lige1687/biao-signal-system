@@ -12,6 +12,7 @@
 from __future__ import annotations
 
 import time
+from datetime import datetime, timedelta
 from typing import Any
 
 import requests
@@ -374,20 +375,32 @@ _MARGIN_DC_URL = "https://datacenter-web.eastmoney.com/api/data/v1/get"
 
 
 def _fetch_margin_rows(page_size: int = 1) -> list[dict[str, Any]]:
-    """东财 RPTA_RZRQ_LSHJ，按日期倒序返回最近 page_size 个交易日。"""
-    params = {
-        "reportName": "RPTA_RZRQ_LSHJ",
-        "columns": "DIM_DATE,RZRQYE,RZYE,RQYE,RZMRE,RZYEZB",
-        "sortColumns": "DIM_DATE",
-        "sortTypes": "-1",
-        "pageNumber": "1",
-        "pageSize": str(min(int(page_size), 1000)),
-    }
-    payload = _get_json(_MARGIN_DC_URL, params)
-    rows = (payload.get("result") or {}).get("data") or []
+    """东财 RPTA_RZRQ_LSHJ，按日期倒序返回最近 page_size 个交易日。
+
+    接口单页上限 800 行，超过则翻页拼接（2026-08 实测：全史 3,977 行）。
+    """
+    want = min(int(page_size), 4000)
+    rows: list[dict[str, Any]] = []
+    page = 1
+    while len(rows) < want:
+        params = {
+            "reportName": "RPTA_RZRQ_LSHJ",
+            "columns": "DIM_DATE,RZRQYE,RZYE,RQYE,RZMRE,RZYEZB",
+            "sortColumns": "DIM_DATE",
+            "sortTypes": "-1",
+            "pageNumber": str(page),
+            "pageSize": str(min(800, want - len(rows))),
+        }
+        payload = _get_json(_MARGIN_DC_URL, params)
+        batch = (payload.get("result") or {}).get("data") or []
+        rows.extend(batch)
+        if len(batch) < int(params["pageSize"]):
+            break  # 到底了
+        page += 1
+        time.sleep(0.15)  # 翻页限速
     if not rows:
         raise FundamentalsSourceError("两融余额无数据")
-    return rows
+    return rows[:want]
 
 
 def _margin_row(row: dict[str, Any]) -> dict[str, Any]:
@@ -421,27 +434,33 @@ def fetch_margin() -> dict[str, Any]:
 def fetch_treasury_history(lookback_days: int = 730) -> dict[str, dict[str, float | None]]:
     """中美国债收益率历史（按交易日），返回 {date: {cn_2y, cn_5y, ..., us_10y, ...}}。
 
-    与 fetch_treasury 同接口，仅放大 ps 取回多日序列（原接口只取最新 15 行）。
+    与 fetch_treasury 同接口，翻页取满 lookback（接口单页上限 500 行，
+    2026-08 实测全史 9,321 行、最早 1990-12）。
     """
-    params = {
-        "type": "RPTA_WEB_TREASURYYIELD",
-        "sty": "ALL",
-        "st": "SOLAR_DATE",
-        "sr": "-1",
-        "token": _TREASURY_TOKEN,
-        "p": "1",
-        "ps": str(min(int(lookback_days), 1200)),
-        "pageNo": "1",
-        "pageNum": "1",
-    }
-    payload = _get_json(_TREASURY_URL, params)
-    rows = (payload.get("result") or {}).get("data") or []
     out: dict[str, dict[str, float | None]] = {}
-    for row in rows:
-        date = (row.get("SOLAR_DATE") or "")[:10]
-        if not date:
-            continue
-        out[date] = {name: _num(row.get(code)) for code, name in _TREASURY_FIELDS.items()}
+    max_pages = max(1, int(lookback_days) // 500 + 2)
+    for page in range(1, max_pages + 1):
+        params = {
+            "type": "RPTA_WEB_TREASURYYIELD",
+            "sty": "ALL",
+            "st": "SOLAR_DATE",
+            "sr": "-1",
+            "token": _TREASURY_TOKEN,
+            "p": str(page),
+            "ps": "500",
+            "pageNo": str(page),
+            "pageNum": str(page),
+        }
+        payload = _get_json(_TREASURY_URL, params)
+        rows = (payload.get("result") or {}).get("data") or []
+        for row in rows:
+            date = (row.get("SOLAR_DATE") or "")[:10]
+            if not date:
+                continue
+            out[date] = {name: _num(row.get(code)) for code, name in _TREASURY_FIELDS.items()}
+        if len(rows) < 500 or len(out) >= int(lookback_days):
+            break
+        time.sleep(0.15)  # 翻页限速
     if not out:
         raise FundamentalsSourceError("国债收益率历史无数据")
     return out
@@ -466,15 +485,89 @@ def fetch_vix_history(lookback_days: int = 730) -> dict[str, float]:
 def fetch_margin_history(lookback_days: int = 730) -> dict[str, dict[str, float | None]]:
     """沪深融资融券余额历史（东财数据中心，日频，含占流通市值比）。
 
-    接口单页最多可返回 1000 行，730 个交易日（约 3 年）一页取完。
+    _fetch_margin_rows 自动翻页；两融 2010-03 开闸，全史约 3,977 个交易日。
     """
     out: dict[str, dict[str, float | None]] = {}
-    for row in _fetch_margin_rows(min(int(lookback_days), 1000)):
+    for row in _fetch_margin_rows(min(int(lookback_days), 4000)):
         parsed = _margin_row(row)
         if parsed["date"]:
             out[parsed["date"]] = parsed
     if not out:
         raise FundamentalsSourceError("两融余额历史为空")
+    return out
+
+
+# ── 长周期叠加：股指日线（腾讯 ifzq / 美联储 FRED）───────────────────────
+#
+# 数据源选择（2026-08 实测）：
+# - A股指数：腾讯 ifzq kline（东财 push2his 对连续抓取会整段空响应；
+#   腾讯稳定，单页上限 800 根，按结束日期向前翻页拼全史）
+# - 美股指数：FRED 官方 CSV（美联储圣路易斯联储）。NASDAQCOM 全史（1971 起）；
+#   SP500 因标普授权仅最近 10 年——前端已注明。
+
+_TENCENT_KLINE_URL = "https://web.ifzq.gtimg.cn/appstock/app/kline/kline"
+_FRED_CSV_URL = "https://fred.stlouisfed.org/graph/fredgraph.csv"
+
+CN_INDEX_CODES: dict[str, str] = {
+    "sse": "sh000001",  # 上证指数
+    "hs300": "sh000300",  # 沪深300
+}
+FRED_INDEX_SERIES: dict[str, str] = {
+    "nasdaq": "NASDAQCOM",  # 纳斯达克综合
+    "sp500": "SP500",  # 标普500（FRED 授权仅近 10 年）
+}
+
+
+def fetch_cn_index_history(code: str, lookback_days: int = 5200) -> dict[str, float]:
+    """A 股指数收盘日线（腾讯 ifzq），升序 {date: close}。
+
+    单页上限 800 根：先取最新一页，再以本页最旧一根的前一日为 end 向前翻页。
+    """
+    out: dict[str, float] = {}
+    end = ""
+    for _ in range(int(lookback_days) // 800 + 2):
+        param = f"{code},day,,{end},800" if end else f"{code},day,,,800"
+        payload = _get_json(_TENCENT_KLINE_URL, {"param": param})
+        node = (payload.get("data") or {}).get(code) or {}
+        days = node.get("day") or []
+        if not days:
+            break
+        for row in days:
+            v = _num(row[2]) if len(row) > 2 else None  # [date, open, close, ...]
+            if row[0] and v is not None:
+                out[str(row[0])[:10]] = v
+        oldest = str(days[0][0])[:10]
+        if len(days) < 800 or len(out) >= int(lookback_days):
+            break
+        end = (datetime.strptime(oldest, "%Y-%m-%d") - timedelta(days=1)).strftime("%Y-%m-%d")
+        time.sleep(0.2)  # 翻页限速
+    if not out:
+        raise FundamentalsSourceError(f"指数历史 {code} 无数据")
+    return dict(sorted(out.items()))
+
+
+def fetch_fred_index_history(series_id: str) -> dict[str, float]:
+    """FRED 官方 CSV -> 升序 {date: value}（美联储圣路易斯联储）。"""
+    try:
+        resp = requests.get(
+            _FRED_CSV_URL,
+            params={"id": series_id},
+            headers=_HEADERS,
+            timeout=_TIMEOUT,
+        )
+        resp.raise_for_status()
+    except requests.RequestException as exc:
+        raise FundamentalsSourceError(f"FRED {series_id}: {exc}") from exc
+    out: dict[str, float] = {}
+    for i, line in enumerate(resp.text.splitlines()):
+        if i == 0 or "," not in line:
+            continue  # 表头 / 空行
+        date, _, raw = line.partition(",")
+        v = _num(raw.strip().strip('"'))
+        if v is not None and date:
+            out[date] = v
+    if not out:
+        raise FundamentalsSourceError(f"FRED {series_id} 无数据")
     return out
 
 

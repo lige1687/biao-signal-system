@@ -286,6 +286,10 @@ export const fundamentalsApi = {
     request<MacroHistoryResponse>(
       `/fundamentals/macro-history?page_size=${pageSize}`,
     ),
+  overlayHistory: (years = 20) =>
+    request<RatesHistoryResponse>(
+      `/fundamentals/overlay-history?years=${years}`,
+    ),
   commodities: (refresh = false) =>
     request<{ commodities: CommodityRatios | null }>(
       `/fundamentals/commodities${refresh ? "?refresh=true" : ""}`,

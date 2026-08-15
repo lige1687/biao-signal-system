@@ -37,6 +37,15 @@ def macro_history(request: Request, page_size: int = 60) -> dict:
     return _service(request).macro_history(page_size=page_size)
 
 
+@router.get("/overlay-history")
+def overlay_history(request: Request, years: int = 20) -> dict:
+    """长周期叠加序列：国债/两融 × 股指（20 年级），供带 dataZoom 的大图。
+
+    首次加载需翻页拉全史（约 20s），之后 12 小时内走缓存。
+    """
+    return _service(request).overlay_history(years=years)
+
+
 @router.get("/commodities")
 def commodities(request: Request, refresh: bool = False) -> dict:
     """全球商品代理：铜金比 / 油金比（yfinance）。"""

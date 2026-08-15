@@ -210,3 +210,42 @@ def test_rates_history_includes_margin_ratio_series(monkeypatch: pytest.MonkeyPa
     assert r["series"]["margin_rzyezb"]["values"] == [2.61, 2.64]
     assert r["series"]["margin_rzrqye"]["values"] == [26500.0, 26757.18]
     assert r["errors"] == []
+
+
+def test_overlay_history_merges_sources_with_degradation(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """长周期叠加：各序列独立取数独立降级，A 股指数缺一个不影响其余。"""
+    monkeypatch.setattr(
+        sources, "fetch_treasury_history",
+        lambda lookback_days=730: {"2026-08-13": {"cn_10y": 1.7, "us_10y": 4.63}},
+    )
+    monkeypatch.setattr(
+        sources, "fetch_margin_history",
+        lambda lookback_days=730: {"2026-08-13": {"rzyezb_pct": 2.64, "rzrqye_yi": 26757.18}},
+    )
+    monkeypatch.setattr(
+        sources, "fetch_cn_index_history",
+        lambda code, lookback_days=5200: {"2026-08-13": 3700.0 if code == "sh000001" else 4600.0},
+    )
+    monkeypatch.setattr(
+        sources, "fetch_fred_index_history",
+        lambda sid: {"2026-08-13": 7800.0},
+    )
+
+    r = FundamentalsService().overlay_history(years=20)
+    assert r["series"]["cn_10y"]["values"] == [1.7]
+    assert r["series"]["margin_rzyezb"]["values"] == [2.64]
+    assert r["series"]["sse"]["values"] == [3700.0]
+    assert r["series"]["nasdaq"]["values"] == [7800.0]
+    assert r["errors"] == []
+
+    # 单项失败 -> 降级进 errors，其余照常
+    def boom(sid):
+        raise sources.FundamentalsSourceError("fred down")
+
+    monkeypatch.setattr(sources, "fetch_fred_index_history", boom)
+    r2 = FundamentalsService().overlay_history(years=20)
+    assert "sp500" not in r2["series"] and "nasdaq" not in r2["series"]
+    assert r2["series"]["cn_10y"]["values"] == [1.7]
+    assert any("标普500" in e for e in r2["errors"])
