@@ -650,6 +650,23 @@ def load_kline_wide() -> pd.DataFrame:
     return wide.sort_index()
 
 
+def kline_symbols() -> set[str]:
+    """返回 K线缓存中存在的 symbol 集合（仅读 symbol 列，零全量加载）。
+
+    用于 /api/sectors/{code}/members 的 ``in_kline_cache`` 标记（离线安全）。
+    parquet 缺失则返回空集。
+    """
+    p = ROOT / "a_share_klines.parquet"
+    if not p.exists():
+        return set()
+    try:
+        df = pd.read_parquet(p, columns=["symbol"])
+        return set(df["symbol"].astype(str).tolist())
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("读取 K线 symbol 列失败: %s", exc)
+        return set()
+
+
 def _load_bench_hs300() -> pd.Series | None:
     p = ROOT / "000300.SS.bars.parquet"
     if not p.exists():
