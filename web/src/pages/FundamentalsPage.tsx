@@ -1,29 +1,33 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { api, fundamentalsApi } from "../api/client";
-import OverlayChart, { type OverlaySeries } from "../components/trend/OverlayChart";
+import OverlayChart, { type OverlayMode, type OverlaySeries } from "../components/trend/OverlayChart";
 import Sparkline from "../components/trend/Sparkline";
-import TrendDrawer from "../components/trend/TrendDrawer";
+import MetricCard from "../components/trend/MetricCard";
+import TrendDrawer, { type DrawerState } from "../components/trend/TrendDrawer";
+import { buildDrawer } from "../components/trend/drawer";
+import { alignTo, unionDates } from "../components/trend/align";
+import { fmt, fmtYi, pctClass } from "../utils/format";
 import {
   isRealAShare,
   hasBreadth,
   AShareBar,
   AShareSourceLine,
+  BreadthAsOf,
   fmtPct as fmtPctAD,
   fmtRatio as fmtRatioAD,
 } from "../components/aShareBreadthView";
-import type { LineSeries } from "../components/trend/TrendChart";
 import {
   BREADTH_LINES,
   BREADTH_ZONES,
   MARKLINES,
+  OVERLAY_MARKLINES,
   SOURCE_NOTES,
   ZONES,
   findZone,
-  type MarkLine,
-  type ZoneLevel,
 } from "../components/trend/zones";
 import type {
+  BreadthHistoryResponse,
   CommodityRatios,
   EtfItem,
   GlobalPanel,
@@ -41,17 +45,6 @@ const SORTS: { key: SortKey; label: string }[] = [
   { key: "main_net_inflow_pct", label: "主力净占比" },
   { key: "turnover_rate", label: "换手率" },
 ];
-
-function pctClass(v: number | null): string {
-  if (v == null) return "";
-  return v >= 0 ? "up" : "down";
-}
-function fmt(v: number | null, digits = 2, suffix = ""): string {
-  return v == null ? "-" : `${v.toFixed(digits)}${suffix}`;
-}
-function fmtYi(v: number | null): string {
-  return v == null ? "-" : `${v.toFixed(2)}亿`;
-}
 
 /** 小图分界线（单条，落在数据区间内才有意义）。 */
 const SPARK_MARK: Record<string, number> = {
@@ -73,89 +66,11 @@ type MacroItem = {
   note_cn: string;
 };
 
-type DrawerState = {
-  title: string;
-  subtitle?: string;
-  dates: string[];
-  series: LineSeries[];
-  unit: string;
-  markLines?: MarkLine[];
-  yRange?: [number, number];
-  zones?: readonly ZoneLevel[];
-  footnote?: string;
-} | null;
-
-/** 组装单指标趋势抽屉配置（利率/宏观通用）。 */
-function buildDrawer(p: {
-  title: string;
-  cur: number | null;
-  unit: string;
-  label: string;
-  dates: string[];
-  values: (number | null)[];
-  key: string;
-  periodLabel: string;
-  curDisplay?: string;
-  footnote?: string;
-}): Exclude<DrawerState, null> {
-  const zones = ZONES[p.key] ?? [];
-  const zone = findZone(p.cur, zones);
-  const curStr = p.curDisplay ?? (p.cur == null ? "-" : `${p.cur.toFixed(2)}${p.unit}`);
-  return {
-    title: p.title,
-    subtitle: `当前 ${curStr} · ${zone.label}（近 ${p.dates.length} ${p.periodLabel}）`,
-    dates: p.dates,
-    series: [{ name: p.label, values: p.values, color: "#3a7bd5" }],
-    unit: p.unit,
-    markLines: MARKLINES[p.key] ?? [],
-    zones,
-    footnote: p.footnote ?? SOURCE_NOTES[p.key],
-  };
-}
-
-// ── 通用指标卡：当前值 + 区间标签 + 小图，点开看大图 ─────────────────────
-
-function MetricCard({
-  label,
-  value,
-  sub,
-  zoneLabel,
-  zoneTone,
-  sparkValues,
-  markY,
-  onOpen,
-  loading,
-}: {
-  label: string;
-  value: string;
-  sub?: string;
-  zoneLabel?: string;
-  zoneTone?: string;
-  sparkValues?: number[];
-  markY?: number | null;
-  onOpen?: () => void;
-  loading?: boolean;
-}) {
-  return (
-    <div className={`macro-card metric-card${onOpen ? " clickable" : ""}`} onClick={onOpen}>
-      <div className="macro-head">
-        <span className="macro-name">{label}</span>
-        {zoneLabel && <span className={`macro-chip ${zoneTone ?? ""}`}>{zoneLabel}</span>}
-      </div>
-      <div className="macro-value">{value}</div>
-      {sub && <div className="macro-note">{sub}</div>}
-      {sparkValues && sparkValues.length >= 2 ? (
-        <Sparkline values={sparkValues} markY={markY ?? null} height={48} />
-      ) : (
-        <div className="sparkline-muted">{loading ? "加载历史…" : "暂无历史"}</div>
-      )}
-    </div>
-  );
-}
-
 // ── 长周期叠加：利率/两融 × 股指（20 年级，dataZoom 滑动窗口）────────────
 
 const OVERLAY_RANGES = [
+  { key: "2y", label: "近2年", years: 2 },
+  { key: "4y", label: "近4年", years: 4 },
   { key: "5y", label: "5年", years: 5 },
   { key: "10y", label: "10年", years: 10 },
   { key: "20y", label: "20年", years: 20 },
@@ -163,21 +78,81 @@ const OVERLAY_RANGES = [
 ] as const;
 type OverlayRange = (typeof OVERLAY_RANGES)[number]["key"];
 
-/** 把序列按目标日历对齐（交易日历不完全重合的日期填 null）。 */
-function alignTo(
+/**
+ * 把市场宽度历史对齐到叠图日期，输出可直接叠加的 breadth 序列。
+ * 同时返回有效点数（用于退化判定）与最新 B50（用于卡片头部 chip）。
+ * 退化：有效点 < 4 → 不画误导横线，由调用方显示「积累中」提示。
+ * coverage 是给用户看的实话：宽度只覆盖哪一段、为什么没叠上去
+ * ——指数是 20 年全史，宽度快照只有最近一年甚至几天，不说清就会显得「曲线不匹配」。
+ */
+function breadthOverlay(
   dates: string[],
-  s?: { dates: string[]; values: number[] },
-): (number | null)[] {
-  if (!s || s.dates.length === 0) return dates.map(() => null);
-  const m = new Map(s.dates.map((d, i) => [d, s.values[i]]));
-  return dates.map((d) => m.get(d) ?? null);
+  hist?: BreadthHistoryResponse,
+): {
+  series: OverlaySeries[];
+  valid: number;
+  last50: number | null;
+  degenerate: boolean;
+  coverage: string;
+} {
+  const empty = {
+    series: [] as OverlaySeries[],
+    valid: 0,
+    last50: null as number | null,
+    degenerate: true,
+    coverage: "无宽度快照",
+  };
+  if (!hist || hist.history.length === 0) return empty;
+  const pick = (k: "breadth_20" | "breadth_50" | "breadth_200") => {
+    const m = new Map(hist.history.map((p) => [p.date, p[k]]));
+    return dates.map((d) => m.get(d) ?? null);
+  };
+  const v20 = pick("breadth_20");
+  const v50 = pick("breadth_50");
+  const v200 = pick("breadth_200");
+  const valid = dates.filter((_, i) => v20[i] != null || v50[i] != null || v200[i] != null).length;
+  const hit = dates.filter((_, i) => v20[i] != null || v50[i] != null || v200[i] != null);
+  const window = hit.length ? `${hit[0]} ~ ${hit[hit.length - 1]}` : "无对齐点";
+  // 退化判定：点数过少，或三条线均为恒值（如 SP500 历史为冻结占位值，
+  // 否则会画出误导性的「横线」，复现此前 SP500 趋势图横线问题）。
+  const span = (arr: (number | null)[]) => {
+    const v = arr.filter((x): x is number => x != null);
+    return v.length < 2 ? 0 : Math.max(...v) - Math.min(...v);
+  };
+  const allFlat = span(v20) < 1 && span(v50) < 1 && span(v200) < 1;
+  const degenerate = valid < 4 || allFlat;
+  if (degenerate) {
+    const why = allFlat
+      ? `${valid} 个点全为同一组冻结值（${window}）`
+      : `仅 ${valid} 个有效点（${window}）`;
+    return { series: [], valid, last50: null, degenerate, coverage: `${why}，样本不足未叠加` };
+  }
+  let last50: number | null = null;
+  for (let i = dates.length - 1; i >= 0; i--) {
+    if (v50[i] != null) {
+      last50 = v50[i];
+      break;
+    }
+  }
+  const series: OverlaySeries[] = [
+    { name: "宽度20日", values: v20, color: BREADTH_LINES[0].color, axis: "breadth", dashed: true },
+    { name: "宽度50日", values: v50, color: BREADTH_LINES[1].color, axis: "breadth", dashed: true },
+    { name: "宽度200日", values: v200, color: BREADTH_LINES[2].color, axis: "breadth", dashed: true },
+  ];
+  return { series, valid, last50, degenerate, coverage: `宽度覆盖 ${window}（${valid} 个交易日）` };
 }
 
-function unionDates(...series: { dates: string[] }[]): string[] {
-  const set = new Set<string>();
-  for (const s of series) for (const d of s.dates) set.add(d);
-  return [...set].sort();
+/** 叠图卡片头部的当前宽度 chip：实时显示 50 日宽度所处压力/机会区。 */
+function BreadthChip({ value }: { value: number | null }) {
+  if (value == null) {
+    return <span className="macro-chip muted-chip">宽度：积累中</span>;
+  }
+  const z = findZone(value, BREADTH_ZONES);
+  return (
+    <span className={`macro-chip ${z.tone}`}>宽度(50日) {value.toFixed(1)}% · {z.label}</span>
+  );
 }
+
 
 function OverlaySection() {
   const { data, isLoading, error } = useQuery({
@@ -186,8 +161,25 @@ function OverlaySection() {
     staleTime: 12 * 3600_000,
     retry: 1,
   });
-  const [range, setRange] = useState<OverlayRange>("10y");
+  const [range, setRange] = useState<OverlayRange>("2y");
+  // 原始刻度看绝对水位（利率压力位/机会位有意义），归一化看涨跌比（同一把尺子）。
+  const [mode, setMode] = useState<OverlayMode>("raw");
   const s = data?.series ?? {};
+
+  // 市场宽度历史（真全A 来自收盘后预计算缓存；标普500 来自东财K线）。
+  // 与指数同周期对齐后叠加到叠图第三轴，并在宽度轴标压力/机会位。
+  const { data: cnBreadth } = useQuery({
+    queryKey: ["overlayBreadth", "CN_ALL_A", 1260],
+    queryFn: () => api.marketContextBreadthHistory("CN_ALL_A", 1260),
+    staleTime: 12 * 3600_000,
+    retry: 1,
+  });
+  const { data: usBreadth } = useQuery({
+    queryKey: ["overlayBreadth", "SP500", 1260],
+    queryFn: () => api.marketContextBreadthHistory("SP500", 1260),
+    staleTime: 12 * 3600_000,
+    retry: 1,
+  });
 
   const cnDates = useMemo(
     () => unionDates(...[s.sse, s.hs300].filter(Boolean)),
@@ -204,24 +196,33 @@ function OverlaySection() {
     const years = OVERLAY_RANGES.find((r) => r.key === range)?.years ?? 10;
     const span = new Date(dates[dates.length - 1]).getTime() - new Date(dates[0]).getTime();
     if (span <= 0) return 100;
-    return Math.min(100, Math.max(1, (years * 365.25 * 86400_000) / span) * 100);
+    // 注意：*100 必须在 Math.max(1, …) 内部——最小钳制的是「百分比下限 1%」，
+    // 而非把 0~1 的比例钳成 1（否则所有档位都会退化成 100%，dataZoom 全展）。
+    return Math.min(100, Math.max(1, ((years * 365.25 * 86400_000) / span) * 100));
   };
+
+  const cnB = useMemo(() => breadthOverlay(cnDates, cnBreadth), [cnDates, cnBreadth]);
+  const usB = useMemo(() => breadthOverlay(usDates, usBreadth), [usDates, usBreadth]);
+  const cnDegenerate = cnB.degenerate;
+  const usDegenerate = usB.degenerate;
 
   const cnSeries = useMemo<OverlaySeries[]>(
     () => [
       { name: "上证指数", values: alignTo(cnDates, s.sse), color: "#ea580c", axis: "left" },
       { name: "沪深300", values: alignTo(cnDates, s.hs300), color: "#3a7bd5", axis: "left" },
       { name: "中国10Y", values: alignTo(cnDates, s.cn_10y), color: "#f59e0b", axis: "right" },
+      ...(cnDegenerate ? [] : cnB.series),
     ],
-    [cnDates, s.sse, s.hs300, s.cn_10y],
+    [cnDates, s.sse, s.hs300, s.cn_10y, cnDegenerate, cnB.series],
   );
   const usSeries = useMemo<OverlaySeries[]>(
     () => [
       { name: "标普500", values: alignTo(usDates, s.sp500), color: "#3a7bd5", axis: "left" },
       { name: "纳斯达克", values: alignTo(usDates, s.nasdaq), color: "#7c3aed", axis: "left" },
       { name: "美国10Y", values: alignTo(usDates, s.us_10y), color: "#f59e0b", axis: "right" },
+      ...(usDegenerate ? [] : usB.series),
     ],
-    [usDates, s.sp500, s.nasdaq, s.us_10y],
+    [usDates, s.sp500, s.nasdaq, s.us_10y, usDegenerate, usB.series],
   );
   const marginSeries = useMemo<OverlaySeries[]>(
     () => [
@@ -265,21 +266,76 @@ function OverlaySection() {
             {r.label}
           </button>
         ))}
+        <span className="muted" style={{ marginLeft: 10 }}>纵轴：</span>
+        <button
+          className={`ma-toggle${mode === "raw" ? " on" : ""}`}
+          onClick={() => setMode("raw")}
+          title="指数走左轴、利率走右轴，可读绝对水位与压力位/机会位"
+        >
+          原始刻度
+        </button>
+        <button
+          className={`ma-toggle${mode === "rebase" ? " on" : ""}`}
+          onClick={() => setMode("rebase")}
+          title="全部除以可视窗口起点×100，直接比较涨跌幅"
+        >
+          涨跌比(=100)
+        </button>
         {data.errors.length > 0 && (
           <span className="muted" style={{ marginLeft: 8 }}>{data.errors.join("；")}</span>
         )}
       </div>
 
-      <div className="overlay-card">
-        <h4>A 股 × 中国 10Y 国债</h4>
-        <OverlayChart dates={cnDates} series={cnSeries} startPercent={startPercent(cnDates)} />
+      <div className="fund-hint-row">
+        {mode === "raw"
+          ? "原始刻度：每个指数各占一把左轴（轴的颜色 = 线的颜色），各自自适应可视窗口，所以两条指数线都能铺满高度、形态看得清；代价是纵向高低不再可比（标普的线在纳斯达克上面不代表任何含义）。利率/占比在右轴（%），可读绝对水位与压力位/机会位。要比涨跌幅请切「涨跌比」。"
+          : "涨跌比：全部线取「共同基准日」的值为 100（基准日 = 窗口内所有线都已有数据的最早那天，标注在纵轴上）——标普只有 2016-08 起的数据，若各自用自己的起点当 100，起跑线不同，比出来的涨跌比是错的。纵轴为对数轴：相同垂直距离 = 相同涨跌倍数，纳斯达克 267 倍的全史才不会把标普压成平线。悬停读涨跌幅；拖底部滑块换窗口，基准自动重算；点图例可隐藏某条线，纵轴会跟着重新适配。此模式下利率的绝对分界线与色带不适用（它们是绝对收益率坐标）故隐藏，宽度线本身已是百分比也一并隐去。"}
       </div>
 
       <div className="overlay-card">
-        <h4>美股 × 美国 10Y 国债</h4>
-        <OverlayChart dates={usDates} series={usSeries} startPercent={startPercent(usDates)} />
+        <h4>
+          A 股 × 中国 10Y 国债
+          <BreadthChip value={cnB.last50} />
+        </h4>
+        <OverlayChart
+          dates={cnDates}
+          series={cnSeries}
+          startPercent={startPercent(cnDates)}
+          mode={mode}
+          breadthMarkLines={cnDegenerate ? undefined : MARKLINES.breadth}
+          rightMarkLines={OVERLAY_MARKLINES.cn_10y}
+          rightZones={ZONES.cn_10y}
+        />
         <div className="fund-hint-row">
-          标普500 FRED 授权仅提供近 10 年；纳斯达克为全史（1971 起）。拖动图下滑块或滚轮缩放查看任意区间。
+          背景色带 = 中国 10Y 所处区间（绿=机会/资产荒，红=收紧），右轴虚线标机会位 1.8% / 中枢 2.2% / 压力位 2.5%。
+          虚线细线 = 市场宽度（站上均线的个股占比），80% 超买 / 20% 超卖（行业通用标准）。{cnB.coverage}。
+          分档按当前利率环境标定（2024–2025 券商口径），2014 年以前 10Y 常年在 3–4%，那段历史的色带仅作参考。
+        </div>
+      </div>
+
+      <div className="overlay-card">
+        <h4>
+          美股 × 美国 10Y 国债
+          <BreadthChip value={usB.last50} />
+        </h4>
+        <OverlayChart
+          dates={usDates}
+          series={usSeries}
+          startPercent={startPercent(usDates)}
+          mode={mode}
+          breadthMarkLines={usDegenerate ? undefined : MARKLINES.breadth}
+          rightMarkLines={OVERLAY_MARKLINES.us_10y}
+          rightZones={ZONES.us_10y}
+        />
+        <div className="fund-hint-row">
+          背景色带 = 美国 10Y 所处区间，右轴虚线标机会位 3.5% / 压力位 4.5% / 强压力 5.0%
+          （FRED DGS10 全史实测：2007 年来 ≥4.5% 仅占 6.9%、≥5.0% 仅 0.6%）。
+          标普500 受 FRED 授权限制仅近 10 年，纳斯达克为全史（1971 起）。
+          美股宽度：{usB.coverage}
+          {usDegenerate && "（宽度快照不足，未叠加）"}。宽度由 503 只当期成分股回填，
+          期间被剔除的公司不在样本内（存活者偏差，历史宽度略偏高）；B200 需 200 根K线，
+          起点比 B20/B50 晚约 10 个月。
+          分档由 2007 年后的分布标定，1998–2007 年 10Y 常年 4–6.8%，那段色带仅作参考。
         </div>
       </div>
 
@@ -290,9 +346,12 @@ function OverlaySection() {
           series={marginSeries}
           rightName="占比 %"
           startPercent={startPercent(cnDates)}
+          mode={mode}
+          rightMarkLines={OVERLAY_MARKLINES.margin_rzyezb}
+          rightZones={ZONES.margin_rzyezb}
         />
         <div className="fund-hint-row">
-          两融数据自 2010-03 开闸；占比 &gt; 3.5% 为 2015 式警戒区（历史顶 2015-07-03 达 4.70%）。
+          两融数据自 2010-03 开闸；背景色带为杠杆水位分档，占比 &gt; 3.5% 进入 2015 式警戒区（历史顶 2015-07-03 达 4.70%）。
         </div>
       </div>
     </div>
@@ -427,8 +486,8 @@ function BreadthSparkCard({
   onOpen: (d: DrawerState) => void;
 }) {
   const { data, isLoading } = useQuery({
-    queryKey: ["breadthHistory", panel.market_id, 180],
-    queryFn: () => api.marketContextBreadthHistory(panel.market_id, 180),
+    queryKey: ["breadthHistory", panel.market_id, 1260],
+    queryFn: () => api.marketContextBreadthHistory(panel.market_id, 1260),
     staleTime: 60_000,
   });
   const points = data?.history ?? [];
@@ -454,7 +513,7 @@ function BreadthSparkCard({
       yRange: [0, 100],
       zones: BREADTH_ZONES,
       footnote:
-        "宽度 = 站上 N 日均线的个股占比。50 日 >85% 大概率阶段顶部，<15% 短期底部；配合 200 日同低/同高可能见反转。" +
+        "宽度 = 站上 N 日均线的个股占比。50 日 >80% 大概率阶段顶部，<20% 短期底部；配合 200 日同低/同高可能见反转。" +
         SOURCE_NOTES.breadth,
     });
   };
@@ -473,6 +532,7 @@ function BreadthSparkCard({
           上涨占比 {fmtPctAD(panel.up_pct)} · 涨跌比 {fmtRatioAD(panel.adv_dec_ratio)}
         </div>
         <AShareSourceLine p={panel} />
+        <BreadthAsOf p={panel} />
       </div>
     );
   }

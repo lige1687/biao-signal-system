@@ -28,3 +28,19 @@ export function fmtTime(iso: string | null | undefined): string {
   const d = new Date(iso);
   return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
 }
+
+/** 涨跌幅类名：正 up / 负 down / 空 ""（只用于上色，不用于文本）。 */
+export function pctClass(v: number | null | undefined): string {
+  if (v == null) return "";
+  return v >= 0 ? "up" : "down";
+}
+
+/** 通用数字格式化：null -> "-"，其余带小数位与后缀。 */
+export function fmt(v: number | null | undefined, digits = 2, suffix = ""): string {
+  return v == null ? "-" : `${v.toFixed(digits)}${suffix}`;
+}
+
+/** 亿元格式化：null -> "-"，其余 "x.xx亿"。 */
+export function fmtYi(v: number | null | undefined): string {
+  return v == null ? "-" : `${v.toFixed(2)}亿`;
+}

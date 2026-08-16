@@ -2,6 +2,19 @@ import type { MarkLine, ZoneLevel } from "./zones";
 import { zoneToneColor } from "./zones";
 import TrendChart, { type LineSeries } from "./TrendChart";
 
+/** 趋势抽屉配置（与 TrendDrawerProps 同构，仅可空）。抽自 FundamentalsPage，纯重构。 */
+export type DrawerState = {
+  title: string;
+  subtitle?: string;
+  dates: string[];
+  series: LineSeries[];
+  unit: string;
+  markLines?: MarkLine[];
+  yRange?: [number, number];
+  zones?: readonly ZoneLevel[];
+  footnote?: string;
+} | null;
+
 interface TrendDrawerProps {
   title: string;
   /** 副标题，如「当前 4.68% · 压力区（近 730 日）」。 */
