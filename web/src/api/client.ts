@@ -36,6 +36,9 @@ import type {
   WatchSubscription,
   WatchlistGroup,
   WatchlistItem,
+  SectorTrendResponse,
+  SectorHistoryPoint,
+  SectorMembersResponse,
 } from "../types";
 
 const BASE = "/api";
@@ -67,6 +70,19 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     throw err;
   }
   if (resp.status === 204) return undefined as T;
+  // 200 但返回 HTML = 这个后端没有该路由, 被 SPA 兜底接走了。
+  // 最常见的原因是页面连到了一个旧的后端实例(比如手动 --port 起的、忘了关),
+  // 它读同一份 dist 所以界面是新的, 路由表却是旧的。直接把源点报出来, 免得
+  // 只看到一句 "Unexpected token '<'" 无从下手。
+  const ctype = resp.headers.get("content-type") ?? "";
+  if (!ctype.includes("json")) {
+    throw new Error(
+      `接口返回了 ${ctype || "非 JSON"} 而不是 JSON —— ` +
+        `当前页面来自 ${window.location.origin}，请求 ${resp.url}。` +
+        `很可能这个后端没有该接口（旧实例/未重启）：` +
+        `请确认页面开在 biao 启动的 http://localhost:5173，并执行 biao restart。`,
+    );
+  }
   return (await resp.json()) as T;
 }
 
@@ -147,7 +163,7 @@ export const api = {
     ),
   marketContextGlobalStrip: () =>
     request<GlobalStripResponse>(`/market-context/global-strip`),
-  marketContextBreadthHistory: (marketId: string, lookbackDays = 120) =>
+  marketContextBreadthHistory: (marketId: string, lookbackDays = 1260) =>
     request<BreadthHistoryResponse>(
       `/market-context/breadth-history?market_id=${encodeURIComponent(marketId)}&lookback_days=${lookbackDays}`,
     ),
@@ -297,5 +313,21 @@ export const fundamentalsApi = {
   etfStrength: (refresh = false) =>
     request<{ etf: { items: EtfItem[]; regime: string; spy_1m: number } | null }>(
       `/fundamentals/etf-strength${refresh ? "?refresh=true" : ""}`,
+    ),
+};
+
+// ---- 行业板块趋势工作台 ----
+export const sectorsApi = {
+  trend: (refresh = false, level = "all") =>
+    request<SectorTrendResponse>(
+      `/sectors/trend?level=${level}${refresh ? "&refresh=true" : ""}`,
+    ),
+  history: (code: string, days = 250) =>
+    request<{ code: string; points: SectorHistoryPoint[] }>(
+      `/sectors/${encodeURIComponent(code)}/history?days=${days}`,
+    ),
+  members: (code: string, limit = 50) =>
+    request<SectorMembersResponse>(
+      `/sectors/${encodeURIComponent(code)}/members?limit=${limit}`,
     ),
 };

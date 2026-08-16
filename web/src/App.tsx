@@ -3,6 +3,7 @@ import TopNav from "./components/TopNav";
 import DashboardPage from "./pages/DashboardPage";
 import DetailPage from "./pages/DetailPage";
 import FundamentalsPage from "./pages/FundamentalsPage";
+import SectorsPage from "./pages/SectorsPage";
 import SupervisorPage from "./pages/SupervisorPage";
 import WorkspacePage from "./pages/WorkspacePage";
 
@@ -19,6 +20,8 @@ export default function App() {
         <Route path="/symbol/:symbol" element={<DetailPage />} />
         {/* 基本面参考：宏观 + 行业板块全景（参考层，不进技术信号） */}
         <Route path="/fundamentals" element={<FundamentalsPage />} />
+        {/* 行业板块趋势工作台：等权指数 / RS / 宽度 / 阶段（research_proxy） */}
+        <Route path="/sectors" element={<SectorsPage />} />
         {/* 监督待办：跨标的计划 + 待办 + 当日判定 */}
         <Route path="/plans" element={<SupervisorPage />} />
       </Routes>

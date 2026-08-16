@@ -948,6 +948,7 @@ def _append_history(snapshot: dict) -> None:
         rec_boards[row["code"]] = {
             "stage": row.get("stage"),
             "rs_pctile": row.get("rs_pctile"),
+            "rs_pctile_delta_20": row.get("rs_pctile_delta_20"),
             "b50": row.get("b50"),
             "close": row.get("close"),
         }

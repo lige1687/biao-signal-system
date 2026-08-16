@@ -26,6 +26,7 @@ export default function TopNav() {
       </NavLink>
       <NavLink to="/grid">卡片墙</NavLink>
       <NavLink to="/fundamentals">基本面</NavLink>
+      <NavLink to="/sectors">行业板块</NavLink>
       <NavLink to="/plans">
         监督待办
         {open > 0 && <span className="nav-badge">{open}</span>}

@@ -497,6 +497,10 @@ export interface GlobalPanel {
   adv_dec_ratio?: number | null;
   limit_up?: number | null;
   limit_down?: number | null;
+  // 冻结快照元信息（CN_ALL_A 宽度来自收盘后预计算的磁盘缓存）
+  breadth_as_of?: string | null;
+  breadth_trading_day?: string | null;
+  breadth_source?: string | null;
   source_detail?: string;
   breadth_20: number | null;
   breadth_50: number | null;
@@ -1104,4 +1108,80 @@ export interface EtfItem {
   bias: string; // risk_on | risk_off | neutral
   ret_1m: number;
   rel_1m: number; // 相对 SPY 的超额（%）
+}
+
+// ---- 行业板块趋势工作台 (/api/sectors, research_proxy) ----
+// 判定均为研究代理，不冒充 LEI 原始规则，不出买卖点。
+export interface SectorTrendRow {
+  code: string;
+  name: string;
+  level: 1 | 2 | 3;
+  aliases: string[];
+  parent: string | null;
+  member_count: number;
+  hit_count: number;
+  // 阶段：②上升=markup / ①筑底=accumulation / ③派发=distribution / ④下降=decline / null=样本不足
+  stage: "accumulation" | "markup" | "distribution" | "decline" | null;
+  stage_basis: string[];
+  rs_pctile: number | null;
+  rs_pctile_delta_20: number | null;
+  rs_chg_20: number | null;
+  rs_chg_60: number | null;
+  rs_above_ma20: boolean | null;
+  b20: number | null;
+  b50: number | null;
+  b200: number | null; // MA200 留痕中（320 日窗口内仅 121 天），前端显示「留痕中」
+  nh60: number | null;
+  breadth_divergence: boolean;
+  signal_color: string | null; // green | gray | black | unknown
+  signal_color_cn: string | null;
+  ema20_slope_pct: number | null; // 跨板块可排序（百分比口径）
+  long_trend_cn: string | null;
+  macd_status: string | null;
+  macd_label_cn: string | null;
+  macd_detail_cn: string | null;
+  macd_dimension: string | null;
+  alignment_cn: string | null;
+  close: number | null; // 板块等权指数最新收盘（供抽屉主图）
+  // 当日参考（来自 clist 快照，非趋势判定依据）
+  pct_change: number | null;
+  pe_ttm: number | null;
+  main_net_inflow_yi: number | null;
+  up_count: number | null;
+  down_count: number | null;
+  total_mv_yi: number | null;
+  provenance: "research_proxy";
+}
+
+export interface SectorTrendResponse {
+  as_of: string;
+  date: string;
+  trading_day: string;
+  bench: { all_equal_close: number | null; hs300_close: number | null };
+  boards: SectorTrendRow[];
+  warnings: string[];
+  errors: string[];
+  research_proxy_note: string; // 常驻声明：等权合成/当前成分回溯含前视/不含北交所/MA200留痕中
+}
+
+export interface SectorHistoryPoint {
+  date: string;
+  close: number | null;
+  b50: number | null;
+  rs_pctile: number | null;
+  rs_pctile_delta_20: number | null;
+  stage: string | null;
+}
+
+export interface SectorMembersResponse {
+  as_of: string;
+  code: string;
+  name: string | null;
+  members: {
+    symbol: string;
+    name: string | null;
+    pct_change: number | null;
+    market_value_yi: number | null;
+    in_kline_cache: boolean;
+  }[];
 }
