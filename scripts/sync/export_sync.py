@@ -59,7 +59,7 @@ def dump_table(conn: sqlite3.Connection, table: str):
         cur = conn.execute(f"SELECT * FROM {table}")
     except sqlite3.Error as e:
         return None, f"表不存在或读取失败: {e}"
-    cols = [d[1] for d in cur.description]
+    cols = [d[0] for d in cur.description]
     rows = [dict(zip(cols, r)) for r in cur.fetchall()]
     return rows, None
 
