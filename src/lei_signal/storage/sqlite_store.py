@@ -627,6 +627,33 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
             ON signal_alerts(scan_date, side, tier);
         """,
     ),
+    (
+        17,
+        "017_agent_sessions",
+        """
+        -- agent 会话层：多轮记忆（append-only，不含数量/金额）
+        CREATE TABLE IF NOT EXISTS agent_sessions (
+            session_id     TEXT PRIMARY KEY,
+            symbol         TEXT,                   -- NULL = 全局会话
+            title_cn       TEXT NOT NULL DEFAULT '',
+            created_at     TEXT NOT NULL,          -- UTC ISO
+            last_active_at TEXT NOT NULL
+        );
+        CREATE TABLE IF NOT EXISTS agent_messages (
+            message_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            session_id TEXT NOT NULL REFERENCES agent_sessions(session_id),
+            role       TEXT NOT NULL CHECK (role IN ('user','assistant')),
+            content    TEXT NOT NULL,
+            grounded   INTEGER NOT NULL DEFAULT 0,
+            meta_json  TEXT NOT NULL DEFAULT '{}',
+            created_at TEXT NOT NULL               -- UTC ISO
+        );
+        CREATE INDEX IF NOT EXISTS idx_agent_messages_session
+            ON agent_messages(session_id, message_id);
+        CREATE INDEX IF NOT EXISTS idx_agent_sessions_symbol
+            ON agent_sessions(symbol, last_active_at);
+        """,
+    ),
 )
 
 
