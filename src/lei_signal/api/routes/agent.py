@@ -14,21 +14,41 @@ from fastapi import APIRouter, HTTPException, Request
 from lei_signal.api.config import sqlite_path as default_db
 from lei_signal.api.routes.plans import _to_alert_dto
 from lei_signal.api.schemas import (
+    AgentChatReply,
+    AgentChatRequest,
+    AgentMessageDTO,
+    AgentSessionDTO,
     BuyPointChatReply,
     BuyPointChatRequest,
+    CreateSessionRequest,
     PlanChatReply,
     PlanChatRequest,
+    TraceItem,
 )
+from lei_signal.plans import llm as plans_llm
 from lei_signal.plans.context import context_from_result
-from lei_signal.plans.grounding import render_alerts, verify_grounding
+from lei_signal.plans.grounding import (
+    collect_payload_numbers,
+    render_alerts,
+    verify_grounding,
+    verify_numeric_grounding,
+)
 from lei_signal.plans.llm import (
     build_context_payload,
     chat_ark,
     chat_buy_point,
     load_ark_config,
 )
+from lei_signal.plans.llm_context import build_discussion_context
 from lei_signal.plans.monitor import evaluate_plan
-from lei_signal.plans.store import get_plan, list_action_items
+from lei_signal.plans.sessions import (
+    append_message,
+    create_session,
+    get_session,
+    list_messages,
+    list_sessions,
+)
+from lei_signal.plans.store import get_plan, list_action_items, list_plans
 from lei_signal.storage.sqlite_store import connect
 
 logger = logging.getLogger(__name__)
@@ -216,6 +236,167 @@ def _buy_point_template(review) -> str:  # noqa: ANN001
         )
     lines.append(f"\n{review.disclaimer_cn}")
     return "\n".join(lines)
+
+
+# ---- 统一会话层（spec 2026-08-23）----
+
+
+def _degraded_reply(symbol: str, ctx_payload: dict) -> str:
+    """LLM 不可用/校验失败时的模板直出（不含工程标注，标注走 trace）。"""
+    a = ctx_payload.get("assessment", {})
+    vp = ctx_payload.get("volume_profile") or {}
+    lines = [
+        f"【{ctx_payload.get('display_name', symbol)}】数据日 {ctx_payload.get('as_of', '-')}",
+        f"当前状态：{a.get('color_cn', '-')} / {a.get('stage_cn', '-')}"
+        f" / 风险 {a.get('risk_state_cn', '-')}",
+    ]
+    review = ctx_payload.get("buy_point_review")
+    if review and review.get("candidates"):
+        for i, c in enumerate(review["candidates"][:3], start=1):
+            circled = "①②③④⑤⑥⑦⑧⑨⑩"[i - 1]
+            lines.append(
+                f"买点{circled} {c.get('scenario_cn', '')} [{c.get('state_cn', '')}]"
+                f" 关键价 {c.get('key_price') or '系统未给出'}"
+            )
+    if vp:
+        lines.append(f"筹码分布代理：POC {vp.get('poc')} · VAH {vp.get('vah')}")
+    lines.append("（LLM 暂不可用，以上为判定层数据直出）")
+    return "\n".join(lines)
+
+
+def _build_trace(alerts: list) -> list[TraceItem]:
+    """从 alert 元数据生成角标数据——溯源信息不再进正文。"""
+    return [
+        TraceItem(
+            label=a.next_step_cn or a.code,
+            rule_id=a.rule_id,
+            evidence_cn="；".join(f"{k}={v}" for k, v in (a.evidence or {}).items()),
+            research_proxy=(a.logic_provenance == "research_proxy") if a.logic_provenance else True,
+            principle_source=a.principle_source,
+        )
+        for a in alerts
+    ]
+
+
+@router.post("/agent/chat", response_model=AgentChatReply)
+def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
+    """统一讨论入口：多轮记忆 + 技术摘要全喂 + 数值接地。
+
+    连接策略：全程至多两次开关——先读写会话与上下文原料（一次），LLM 往返
+    不持连接，回复落库再开一次。load_ark_config/chat_discussion 经
+    ``plans_llm`` 模块属性调用（测试 monkeypatch 点），语义与直接调用一致。
+    """
+    with closing(connect(_db_path(request))) as conn:
+        if body.session_id:
+            session = get_session(conn, body.session_id)
+            if session is None:
+                raise HTTPException(status_code=404, detail=f"会话不存在: {body.session_id}")
+        else:
+            session = create_session(
+                conn, body.symbol, body.message[:20] or "新会话"
+            )
+        history_rows = list_messages(conn, session.session_id, limit=20)
+
+        ctx_payload: dict = {}
+        alerts: list = []
+        service = getattr(request.app.state, "analysis_service", None)
+        if body.context_kind == "symbol" and body.symbol and service is not None:
+            entry = service.get(body.symbol)
+            if entry.result is None:
+                raise HTTPException(status_code=502, detail=entry.error or "分析不可用")
+            from lei_signal.api.routes.opportunities import (  # noqa: PLC0415
+                buy_point_review,
+            )
+            review = buy_point_review(request, body.symbol)
+            plans = list_plans(conn, symbol=body.symbol)
+            open_items = [
+                i for p in plans for i in list_action_items(
+                    conn, p.plan_id, state="open"
+                )
+            ]
+            ctx_payload = build_discussion_context(
+                entry.result, review.model_dump(), plans, open_items
+            )
+            ctx = context_from_result(entry.result)
+            alerts = [a for p in plans for a in evaluate_plan(p, ctx)]
+        else:
+            ctx_payload = {"context_kind": "global"}
+
+    config = plans_llm.load_ark_config()
+    reply: str | None = None
+    grounded = False
+    allowed_nums = collect_payload_numbers(ctx_payload)
+    history = [{"role": m.role, "content": m.content} for m in history_rows]
+    if config is not None:
+        raw = plans_llm.chat_discussion(ctx_payload, history, body.message, config)
+        if raw is not None:
+            ok_num, num_reason = verify_numeric_grounding(raw, allowed_nums)
+            rule_ids = {a.rule_id for a in alerts if a.rule_id}
+            ok_txt, txt_reason = verify_grounding(raw, rule_ids)
+            if ok_num and ok_txt:
+                reply, grounded = raw, True
+            else:
+                logger.warning("讨论 chat 校验未过：numeric=%s text=%s", num_reason, txt_reason)
+                raw2 = plans_llm.chat_discussion(ctx_payload, history, body.message, config)
+                if raw2 is not None:
+                    ok2n, _ = verify_numeric_grounding(raw2, allowed_nums)
+                    ok2t, _ = verify_grounding(raw2, rule_ids)
+                    if ok2n and ok2t:
+                        reply, grounded = raw2, True
+
+    symbol = body.symbol or ""
+    if reply is None:
+        reply = _degraded_reply(symbol, ctx_payload)
+        grounded = False
+
+    trace = _build_trace(alerts)
+    with closing(connect(_db_path(request))) as conn:
+        append_message(conn, session.session_id, "user", body.message, True, {})
+        append_message(
+            conn, session.session_id, "assistant", reply, grounded,
+            {"trace": [t.model_dump() for t in trace]},
+        )
+    return AgentChatReply(
+        session_id=session.session_id, reply=reply, grounded=grounded, trace=trace
+    )
+
+
+@router.post("/agent/sessions", response_model=AgentSessionDTO)
+def create_agent_session(request: Request, body: CreateSessionRequest) -> AgentSessionDTO:
+    with closing(connect(_db_path(request))) as conn:
+        s = create_session(conn, body.symbol, body.title_cn or "新会话")
+    return AgentSessionDTO(
+        session_id=s.session_id, symbol=s.symbol, title_cn=s.title_cn,
+        last_active_at=s.last_active_at,
+    )
+
+
+@router.get("/agent/sessions", response_model=list[AgentSessionDTO])
+def list_agent_sessions(request: Request, symbol: str | None = None) -> list[AgentSessionDTO]:
+    with closing(connect(_db_path(request))) as conn:
+        sessions = list_sessions(conn, symbol=symbol)
+        out = []
+        for s in sessions:
+            msgs = list_messages(conn, s.session_id, limit=1)
+            out.append(AgentSessionDTO(
+                session_id=s.session_id, symbol=s.symbol, title_cn=s.title_cn,
+                last_active_at=s.last_active_at,
+                last_message_cn=msgs[-1].content[:50] if msgs else "",
+            ))
+    return out
+
+
+@router.get("/agent/sessions/{session_id}/messages", response_model=list[AgentMessageDTO])
+def agent_session_messages(request: Request, session_id: str) -> list[AgentMessageDTO]:
+    with closing(connect(_db_path(request))) as conn:
+        if get_session(conn, session_id) is None:
+            raise HTTPException(status_code=404, detail=f"会话不存在: {session_id}")
+        msgs = list_messages(conn, session_id, limit=100)
+    return [
+        AgentMessageDTO(role=m.role, content=m.content, grounded=m.grounded,
+                        created_at=m.created_at)
+        for m in msgs
+    ]
 
 
 __all__ = ["router"]

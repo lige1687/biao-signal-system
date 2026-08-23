@@ -1018,3 +1018,49 @@ class WatchPromoteResponse(BaseModel):
 
     plan: PlanDTO
     watch: WatchSubscriptionDTO
+
+
+# ---------------- agent 统一会话（spec 2026-08-23） ----------------
+
+
+class TraceItem(BaseModel):
+    """溯源角标数据：前端 ProvenanceBadge 展开 renders，默认不显示。"""
+    label: str
+    rule_id: str | None = None
+    evidence_cn: str = ""
+    research_proxy: bool = False
+    principle_source: str | None = None
+
+
+class AgentChatRequest(BaseModel):
+    session_id: str | None = None
+    context_kind: str = "symbol"  # symbol | global
+    symbol: str | None = None
+    message: str = ""
+
+
+class AgentChatReply(BaseModel):
+    session_id: str
+    reply: str
+    grounded: bool
+    trace: list[TraceItem] = []
+
+
+class CreateSessionRequest(BaseModel):
+    symbol: str | None = None
+    title_cn: str = ""
+
+
+class AgentSessionDTO(BaseModel):
+    session_id: str
+    symbol: str | None
+    title_cn: str
+    last_active_at: str
+    last_message_cn: str = ""
+
+
+class AgentMessageDTO(BaseModel):
+    role: str
+    content: str
+    grounded: bool
+    created_at: str
