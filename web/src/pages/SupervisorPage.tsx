@@ -207,7 +207,7 @@ function PlanCard({ plan, onAsk }: { plan: Plan; onAsk: () => void }) {
                     evidence_cn: Object.entries(a.evidence ?? {})
                       .map(([k, v]) => `${k}=${v}`)
                       .join("；"),
-                    research_proxy: true,
+                    research_proxy: a.logic_provenance === "research_proxy",
                     principle_source: a.principle_source ?? null,
                   },
                 ]}

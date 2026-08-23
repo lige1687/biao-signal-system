@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { matchPath, useLocation } from "react-router-dom";
 import { api } from "../api/client";
 import AgentMarkdown from "./AgentMarkdown";
@@ -202,7 +202,21 @@ export function parsePlanDraft(text: string): PlanDraft | null {
   }
 }
 
+/**
+ * confirmPlan 阶段失败（createPlan 已落库、激活被拒，如 conformance 硬阻断 422）。
+ * 此时重试只会再造一个孤儿 draft，渲染层据此类区分错误路径并给出 plan_id。
+ */
+class ConfirmPlanError extends Error {
+  readonly planId: string;
+  constructor(planId: string, message: string) {
+    super(message);
+    this.name = "ConfirmPlanError";
+    this.planId = planId;
+  }
+}
+
 function PlanDraftCard({ draft, symbol }: { draft: PlanDraft; symbol: string }) {
+  const queryClient = useQueryClient();
   const create = useMutation({
     mutationFn: async () => {
       // ruleset_version：后端 create 不校验非空，但留空会让 monitor 跳过规则集
@@ -231,8 +245,23 @@ function PlanDraftCard({ draft, symbol }: { draft: PlanDraft; symbol: string }) 
         stop_plan_cn: draft.stop_plan_cn ?? "",
       };
       const plan = await api.createPlan(payload);
-      await api.confirmPlan(plan.plan_id);
+      try {
+        await api.confirmPlan(plan.plan_id);
+      } catch (err) {
+        // draft 已在库、激活被拒：不能用「再点一次」恢复（会产出第二个孤儿 draft），
+        // 携带 plan_id 上抛，由渲染层引导用户走监督待办 / 详情页表单。
+        throw new ConfirmPlanError(
+          plan.plan_id,
+          err instanceof Error ? err.message : String(err),
+        );
+      }
       return plan;
+    },
+    onSuccess: () => {
+      // 全局 staleTime=60s 且 SupervisorPage 打开控制台时不卸载：不失效则监督页
+      // 最长 1 分钟看不到新计划（同 ReviewDrawer confirm 成功后的失效范式）。
+      queryClient.invalidateQueries({ queryKey: ["plans"] });
+      queryClient.invalidateQueries({ queryKey: ["plansSummary"] });
     },
   });
   const rows: Array<[string, string]> = [
@@ -257,13 +286,33 @@ function PlanDraftCard({ draft, symbol }: { draft: PlanDraft; symbol: string }) 
       ))}
       <button
         className="btn small primary"
-        disabled={create.isPending}
+        disabled={
+          create.isPending ||
+          create.isSuccess ||
+          create.error instanceof ConfirmPlanError
+        }
+        title={
+          create.error instanceof ConfirmPlanError
+            ? "草案已落库，重试会新建重复草案；请走下方指引处理"
+            : undefined
+        }
         onClick={() => create.mutate()}
       >
-        {create.isPending ? "提交中…" : "确认落库（draft→armed）"}
+        {create.isPending ? "提交中…" : create.isSuccess ? "已落库" : "确认落库（draft→armed）"}
       </button>
-      {create.error && (
-        <div className="cp-error">{String(create.error)}</div>
+      {create.error instanceof ConfirmPlanError ? (
+        <div className="cp-error">
+          草案已创建但未激活：到监督待办页处理，或从标的详情页的表单继续
+          {create.error.planId ? `（plan_id: ${create.error.planId}）` : ""}。
+          <span className="muted">原因：{create.error.message}</span>
+        </div>
+      ) : (
+        create.error && (
+          <div className="cp-error">
+            {create.error instanceof Error ? create.error.message : String(create.error)}
+            （未落库，可安全重试）
+          </div>
+        )
       )}
       {create.isSuccess && <div className="cp-hint">已落库并激活，见「监督待办」页。</div>}
     </div>
