@@ -3,6 +3,8 @@
 GET 只读库（买点 daily_opportunity_scan + 卖点 signal_alerts 合并）；
 POST refresh 现场重扫并落两表。不推通知（用户决策：只面板+红点）。
 """
+from __future__ import annotations
+
 from contextlib import closing
 
 from fastapi import APIRouter, HTTPException, Request
@@ -21,6 +23,7 @@ from lei_signal.api.signal_alerts_store import (
     SIDE_UNAVAILABLE,
     get_scan_as_of,
     list_signal_alerts,
+    upsert_signal_alerts,
 )
 from lei_signal.storage.sqlite_store import connect
 
@@ -40,8 +43,8 @@ def _service(request: Request):
     return service
 
 
-def _build_response(db_path: str) -> SignalsTodayResponse:
-    scan_date = today_date()
+def _build_response(db_path: str, scan_date: str | None = None) -> SignalsTodayResponse:
+    scan_date = scan_date or today_date()
     with closing(connect(db_path)) as conn:
         buy_rows = list_scan(conn, scan_date)
         sell_rows = list_signal_alerts(conn, scan_date, side=SIDE_SELL)
@@ -101,4 +104,69 @@ def refresh_today_signals(request: Request, as_of: str = "close") -> SignalsToda
     return _build_response(_db_path(request))
 
 
-__all__ = ["refresh_today_signals", "router", "today_signals"]
+def _validate_replay_day(raw: str) -> date:
+    """校验回放日期：过去 + 交易日；否则 422 并给出建议。"""
+    from datetime import date as date_cls, timedelta
+
+    try:
+        day = date_cls.fromisoformat(raw)
+    except ValueError:
+        raise HTTPException(status_code=422, detail="日期格式应为 YYYY-MM-DD") from None
+    if day.isoformat() != raw:  # 3.11+ 可解析 20260821 等变体，强制 YYYY-MM-DD
+        raise HTTPException(status_code=422, detail="日期格式应为 YYYY-MM-DD")
+    from lei_signal.data.calendar import DEFAULT_TRADING_CALENDAR  # noqa: PLC0415
+
+    today = today_date()
+    if not DEFAULT_TRADING_CALENDAR.is_trading_day(day):
+        probe = day
+        for _ in range(10):
+            probe = probe - timedelta(days=1)
+            if (
+                DEFAULT_TRADING_CALENDAR.is_trading_day(probe)
+                and probe.isoformat() < today
+            ):
+                raise HTTPException(
+                    status_code=422,
+                    detail=f"{raw} 非交易日，最近的过去交易日是 {probe.isoformat()}",
+                )
+        raise HTTPException(status_code=422, detail=f"{raw} 非交易日且往前 10 天无交易日")
+    if day.isoformat() >= today:
+        raise HTTPException(
+            status_code=422,
+            detail="只能回放过去的交易日；今天的信号请用 /api/signals/today",
+        )
+    return day
+
+
+@router.get("/signals/day/{day}", response_model=SignalsTodayResponse)
+def day_signals(request: Request, day: str) -> SignalsTodayResponse:
+    """历史交易日信号（读库快照优先）：横幅回放模式的数据源。"""
+    target = _validate_replay_day(day)
+    db_path = _db_path(request)
+    with closing(connect(db_path)) as conn:
+        if get_scan_as_of(conn, target.isoformat()) is None:
+            return SignalsTodayResponse(
+                scan_date=target.isoformat(), as_of=None, available=False,
+            )
+    return _build_response(db_path, scan_date=target.isoformat())
+
+
+@router.post("/signals/day/{day}/replay", response_model=SignalsTodayResponse)
+def replay_day_signals(request: Request, day: str) -> SignalsTodayResponse:
+    """回放补算：当前自选 × 行情截至该日重算（无前视），整体重写该日两表。
+
+    全自选约 30-60 秒，同步执行；幂等，重复调用整体重写。
+    """
+    from lei_signal.api.signal_replay import run_signal_replay  # noqa: PLC0415
+
+    target = _validate_replay_day(day)
+    db_path = _db_path(request)
+    run_signal_replay(db_path, target)
+    day_str = target.isoformat()
+    with closing(connect(db_path)) as conn:
+        if get_scan_as_of(conn, day_str) is None:  # 兜底 meta 行（upsert 是整日重写，勿盲调）
+            upsert_signal_alerts(conn, day_str, "close", [])
+    return _build_response(db_path, scan_date=day_str)
+
+
+__all__ = ["day_signals", "refresh_today_signals", "replay_day_signals", "router", "today_signals"]

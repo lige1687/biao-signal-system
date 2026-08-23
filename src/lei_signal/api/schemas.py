@@ -804,6 +804,7 @@ class SignalsTodayResponse(BaseModel):
     as_of: str | None = None
     generated_at: str = ""
     scanned: int = 0
+    available: bool = True
     actionable: list[ScanItemDTO] = []
     waiting: list[ScanItemDTO] = []
     blocked: list[ScanItemDTO] = []
