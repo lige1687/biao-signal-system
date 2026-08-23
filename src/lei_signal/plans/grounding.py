@@ -8,6 +8,7 @@ LLM 只负责把 alert 讲成人话。其输出必须过 ``verify_grounding`` �
 from __future__ import annotations
 
 import re
+import unicodedata
 from collections.abc import Callable
 from typing import Any
 
@@ -23,9 +24,9 @@ RESEARCH_PROXY_MARKER = "判定方式为研究代理"
 
 _RULE_ID_PATTERN = re.compile(r"rule_id[:：]\s*([A-Za-z_][A-Za-z0-9_]*)")
 
-#: 数值接地：日期（整段豁免）与数值 token（整数/小数，尾部可带 %）。
+#: 数值接地：日期（整段豁免）与数值 token（整数/小数/科学计数法，尾部可带 %）。
 _DATE_RE = re.compile(r"\d{4}-\d{2}-\d{2}")
-_NUM_TOKEN_RE = re.compile(r"-?\d+(?:\.\d+)?%?")
+_NUM_TOKEN_RE = re.compile(r"-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?%?")
 
 #: 渲染顺序：阻断优先，其后提醒、提示（规格 §13 语义）
 _SEVERITY_ORDER = {"block": 0, "remind": 1, "hint": 2}
@@ -151,6 +152,100 @@ def render_alerts(
 
 # ---------------- 数值接地（讨论场景主校验） ----------------
 
+#: 归一化：NFKC（全角数字/％/逗号 -> 半角）、零宽字符、千分位逗号、中文数字。
+_ZERO_WIDTH_RE = re.compile(r"[\u200b\u200c\u200d\ufeff]")
+_THOUSANDS_RE = re.compile(r"(?<=\d),(?=\d{3}\b)")  # 只剥数字间逗号
+_CN_RUN_RE = re.compile(r"[零一二两三四五六七八九十百千万亿]+")
+_CN_DIGIT = {"零": 0, "一": 1, "二": 2, "两": 2, "三": 3, "四": 4,
+             "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
+_CN_UNIT = {"十": 10, "百": 100, "千": 1000}
+_CN_BIG = {"万": 10_000, "亿": 100_000_000}
+
+
+def _cn_num_to_int(s: str) -> int | None:
+    """中文数字 -> int。保守解析：吃不准返回 None（调用方跳过该段，不做校验）。
+
+    支持常用价位写法：八千七百=8700、一千九=1900、八千五=8500、
+    三万五千=35000、一万三=13000、十五=15、两千零五=2005、一亿五千万=1.5e8。
+    口语尾规则：单位后直接跟裸数字（中间无零）按单位/10 落位（八千五=8500）。
+    """
+    total = 0        # 已完成的亿/万大节
+    section = 0      # 当前万以下小节（十百千级）
+    num: int | None = None   # 待落位的裸数字
+    last_unit = 0    # 最近一次单位（含万/亿），供口语尾落位
+    last_big = 0     # 最近一次大单位（须严格递减）
+    zero_gap = False  # 零间隔（两百零五=205，非口语尾）
+    for ch in s:
+        if ch in _CN_DIGIT:
+            d = _CN_DIGIT[ch]
+            if num is not None:
+                return None  # 连续裸数字（一二/八千五五）不是合法中文数字
+            if d == 0:
+                zero_gap = True  # 零只标记跳位，不落值
+            else:
+                num = d
+        elif ch in _CN_UNIT:
+            u = _CN_UNIT[ch]
+            if last_unit and u >= last_unit:
+                return None  # 单位不递减（十百/千千）非法
+            if num is None:
+                if u != 10 or section or total:
+                    return None  # 仅句首「十」可省略首一（十=10、十万）
+                num = 1
+            section += num * u
+            num = None
+            last_unit = u
+            zero_gap = False
+        else:  # 万 / 亿
+            b = _CN_BIG.get(ch)
+            if b is None:
+                return None  # 不认识的字符，保守跳过
+            if last_big and b >= last_big:
+                return None
+            if num is None and section == 0:
+                return None  # 裸「万」「亿」（万一/万亿）不吃
+            section += num or 0
+            total += section * b
+            section = 0
+            num = None
+            last_unit = b
+            last_big = b
+            zero_gap = False
+    if total == 0 and section == 0 and num is None:
+        return None  # 空串/纯零
+    value = total + section
+    if num is not None:
+        if last_unit and not zero_gap:
+            value += num * (last_unit // 10)  # 口语尾：八千五=8500、一万三=13000
+        else:
+            value += num  # 零间隔或无单位：两百零五=205、五=5
+    return value
+
+
+def _convert_cn_numerals(text: str) -> str:
+    """把可解析的中文数字片段替换为阿拉伯数字；解析不了的保持原样（=不校验）。"""
+    out: list[str] = []
+    last = 0
+    for m in _CN_RUN_RE.finditer(text):
+        s, e = m.span()
+        adj = ((s > 0 and text[s - 1] in "0123456789.")
+               or (e < len(text) and text[e] in "0123456789."))
+        val = None if adj else _cn_num_to_int(m.group())
+        out.append(text[last:s])
+        out.append(m.group() if val is None else str(val))
+        last = e
+    out.append(text[last:])
+    return "".join(out)
+
+
+def _normalize_numeric_text(text: str) -> str:
+    """数值接地入口归一化：防绕过（中文数字/全角/零宽）+ 防误拆（千分位）。"""
+    text = unicodedata.normalize("NFKC", text)  # ４３２１->4321、％->%、，->,
+    text = _ZERO_WIDTH_RE.sub("", text)
+    text = _convert_cn_numerals(text)
+    text = _THOUSANDS_RE.sub("", text)  # 1,938.56 -> 1938.56
+    return text
+
 
 def collect_payload_numbers(payload: Any) -> frozenset[float]:
     """递归抽取 payload 中的数值。str 不抽（避免 rule_id 片段混入）。"""
@@ -174,11 +269,15 @@ def collect_payload_numbers(payload: Any) -> frozenset[float]:
 def extract_market_numbers(text: str) -> list[float]:
     """抽取需校验的行情数值。
 
+    入口先归一化：NFKC（全角/％）、剔零宽字符、中文数字转阿拉伯（八千七百->8700）、
+    剥千分位逗号（1,938.56->1938.56）；无法保守解析的中文数字片段跳过（=不校验）。
+
     豁免：日期、纯小整数（|n| < 100，序号/量词/次数）、圆圈数字。
-    校验：小数、百分数、绝对值 >= 100 的整数（价位）。
+    校验：小数、百分数、绝对值 >= 100 的整数（价位）、科学计数法。
     """
+    text = _normalize_numeric_text(text)
     text = _DATE_RE.sub(" ", text)
-    text = re.sub(r"[①②③④⑤⑥⑦⑧⑨⑩]", " ", text)
+    text = re.sub(r"[①②③④⑤⑥⑦⑧⑨⑩]", " ", text)  # NFKC 已转 ASCII，此处兜底
     out: list[float] = []
     for tok in _NUM_TOKEN_RE.findall(text):
         is_pct = tok.endswith("%")
