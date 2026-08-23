@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { NavLink } from "react-router-dom";
 import { api } from "../api/client";
+import { agentConsoleStore } from "../App";
 
 /**
  * 极简全局顶栏。监督待办带红点（全库 open 待办数）；
@@ -32,6 +33,9 @@ export default function TopNav() {
         {open > 0 && <span className="nav-badge">{open}</span>}
       </NavLink>
       <span className="nav-spacer" />
+      <button className="btn small nav-agent" onClick={() => agentConsoleStore.openConsole(null)}>
+        agent
+      </button>
     </nav>
   );
 }

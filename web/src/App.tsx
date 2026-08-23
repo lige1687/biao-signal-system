@@ -1,3 +1,4 @@
+import { useSyncExternalStore } from "react";
 import { Route, Routes } from "react-router-dom";
 import TopNav from "./components/TopNav";
 import DashboardPage from "./pages/DashboardPage";
@@ -6,6 +7,40 @@ import FundamentalsPage from "./pages/FundamentalsPage";
 import SectorsPage from "./pages/SectorsPage";
 import SupervisorPage from "./pages/SupervisorPage";
 import WorkspacePage from "./pages/WorkspacePage";
+import AgentConsole from "./components/AgentConsole";
+
+// ---- AgentConsole 全局开合（模块级单例 store，避免引入状态库）----
+// 上下文标的由 AgentConsole 从 useLocation 自行解析（matchPath "/symbol/:symbol"），
+// 这里的 symbol 只作为 openConsole 的参数留存，不污染 DetailPage。
+type ConsoleState = { open: boolean; symbol: string | null };
+const listeners = new Set<() => void>();
+const closeConsole = () => {
+  consoleState = { open: false, symbol: consoleState.symbol };
+  snapshot = { ...consoleState, closeConsole };
+  listeners.forEach((l) => l());
+};
+let consoleState: ConsoleState = { open: false, symbol: null };
+// useSyncExternalStore 的 getSnapshot 必须返回稳定引用（每次新建字面量会无限重渲染），
+// 因此快照缓存在模块级，仅在状态变更时重建。
+let snapshot: ConsoleState & { closeConsole: () => void } = { ...consoleState, closeConsole };
+export const agentConsoleStore = {
+  openConsole(symbol: string | null) {
+    consoleState = { open: true, symbol };
+    snapshot = { ...consoleState, closeConsole };
+    listeners.forEach((l) => l());
+  },
+  closeConsole,
+};
+export function useAgentConsole() {
+  // subscribe 的清理函数须返回 void（React 类型要求），listeners.delete 的 boolean 不能直接透传。
+  return useSyncExternalStore(
+    (cb) => {
+      listeners.add(cb);
+      return () => { listeners.delete(cb); };
+    },
+    () => snapshot,
+  );
+}
 
 export default function App() {
   return (
@@ -25,6 +60,8 @@ export default function App() {
         {/* 监督待办：跨标的计划 + 待办 + 当日判定 */}
         <Route path="/plans" element={<SupervisorPage />} />
       </Routes>
+      {/* 全局 agent 控制台：任何页面可唤起，上下文跟随当前路由 */}
+      <AgentConsole />
     </>
   );
 }
