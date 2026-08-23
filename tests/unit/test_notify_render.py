@@ -106,6 +106,7 @@ def test_tier_three_and_data_stale_do_not_push() -> None:
 
 
 def test_rendered_copy_is_grounded_and_contains_two_provenance_layers() -> None:
+    """用户视角：正文只留人话，工程溯源（rule_id/原文出处/研究代理标记）进 note。"""
     alert = _alert("PLAN_EXPIRING", action_kind="REVIEW")
     payloads = render_cycle(
         _plan(),
@@ -115,7 +116,10 @@ def test_rendered_copy_is_grounded_and_contains_two_provenance_layers() -> None:
     )
     assert len(payloads) == 1
     body = payloads[0].body_md
-    assert "规格测试原文" in body
-    assert RESEARCH_PROXY_MARKER in body
+    assert "rule_id:" not in body
+    assert "规格测试原文" not in body
+    assert RESEARCH_PROXY_MARKER not in body
+    assert "研究代理判定 · 溯源见系统" in body  # 红线：note 一行小字保留
     assert not any(term in body for term in FORBIDDEN_TERMS)
     assert verify_grounding(body, set(payloads[0].rule_ids))[0]
+    assert payloads[0].rule_ids == frozenset({"plan_valid_until"})  # 回调侧审计字段保留

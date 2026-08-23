@@ -4,7 +4,7 @@ from __future__ import annotations
 from lei_signal.notify.base import NotificationButton, NotificationPayload
 from lei_signal.notify.signing import build_action_url
 from lei_signal.plans.actions import CycleResult
-from lei_signal.plans.grounding import RESEARCH_PROXY_MARKER, verify_grounding
+from lei_signal.plans.grounding import verify_grounding
 from lei_signal.plans.models import ActionItem, PlanAlert, TradePlan
 
 #: Tier1 逐条即时推：已在场内、必须马上知道的退出类事件。
@@ -34,10 +34,27 @@ _TIER3_CODES = frozenset(
 
 
 def _alert_line(alert: PlanAlert) -> str:
-    provenance = alert.principle_source or "规则账本"
-    line = f"**{alert.code}** · {alert.next_step_cn or alert.code}\n"
-    line += f"rule_id:{alert.rule_id or '-'} · {provenance} · {RESEARCH_PROXY_MARKER}"
-    return line
+    """用户视角正文：只留人话。溯源进 note（_provenance_footer），不进正文。"""
+    return f"**{alert.code}** · {alert.next_step_cn or alert.code}"
+
+
+def _provenance_footer(alerts: list[PlanAlert]) -> str:
+    """卡片底部一行小字：红线（研究代理标注）保留在 note，不占正文注意力。
+
+    飞书自定义机器人卡片的 elements 只消费 body_md（NotificationPayload 无
+    note 通道），故用 markdown 引用块 ``> `` 前缀做视觉弱化。
+    """
+    if not alerts:
+        return ""
+    return "> 研究代理判定 · 溯源见系统"
+
+
+def _with_note(body: str, alerts: list[PlanAlert]) -> str:
+    """正文末尾接一行 note。alerts 为空（正文无判定内容）时不加。"""
+    footer = _provenance_footer(alerts)
+    if not footer:
+        return body
+    return f"{body}\n\n{footer}" if body else footer
 
 
 def _safe_body(body: str, alerts: list[PlanAlert]) -> tuple[str, frozenset[str]]:
@@ -45,9 +62,7 @@ def _safe_body(body: str, alerts: list[PlanAlert]) -> tuple[str, frozenset[str]]
     ok, _ = verify_grounding(body, set(rule_ids))
     if ok:
         return body, rule_ids
-    fallback = "\n".join(
-        f"{a.code} · rule_id:{a.rule_id or '-'} · {RESEARCH_PROXY_MARKER}" for a in alerts
-    )
+    fallback = "\n".join(f"{a.code} · {a.next_step_cn or a.code}" for a in alerts)
     return fallback, rule_ids
 
 
@@ -89,6 +104,8 @@ def _action_payload(
     action_secret: str,
 ) -> NotificationPayload:
     body, rule_ids = _action_detail(plan, item, alerts)
+    related = [a for a in alerts if a.code == item.source_alert_code]
+    body = _with_note(body, related)
     button = _action_button(
         plan, item, action_base_url=action_base_url, action_secret=action_secret
     )
@@ -140,6 +157,7 @@ def _summary_payload(
     body, safe_rule_ids = _safe_body(
         "\n\n".join(details), related_alerts + summary_alerts
     )
+    body = _with_note(body, related_alerts + summary_alerts)
     return NotificationPayload(
         title=f"LEI 监督员 · {plan.symbol} 每日汇总",
         body_md=body,
@@ -191,7 +209,7 @@ def render_cycle(
         payloads.append(
             NotificationPayload(
                 title=f"LEI 监督员 · {alert.code}",
-                body_md=body,
+                body_md=_with_note(body, [alert]),
                 tier=1,
                 plan_id=plan.plan_id,
                 rule_ids=rule_ids,
