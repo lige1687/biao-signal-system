@@ -4,7 +4,7 @@ import { matchPath, useLocation } from "react-router-dom";
 import { api } from "../api/client";
 import AgentMarkdown from "./AgentMarkdown";
 import { useAgentConsole } from "../App";
-import type { TraceItem } from "../types";
+import type { CreatePlanPayload, TraceItem } from "../types";
 
 type Turn = { who: "you" | "agent"; text: string; grounded?: boolean; trace?: TraceItem[] };
 
@@ -119,6 +119,12 @@ export default function AgentConsole() {
               ) : (
                 <div className="msg">{turn.text}</div>
               )}
+              {(() => {
+                const draft = parsePlanDraft(turn.text);
+                return draft && symbol ? (
+                  <PlanDraftCard draft={draft} symbol={symbol} />
+                ) : null;
+              })()}
               {turn.who === "agent" && turn.trace && turn.trace.length > 0 && (
                 <ProvLite trace={turn.trace} />
               )}
@@ -175,5 +181,91 @@ function ProvLite({ trace }: { trace: TraceItem[] }) {
         </div>
       )}
     </span>
+  );
+}
+
+type PlanDraft = {
+  module: string; direction: string; entry_rule_id?: string | null;
+  entry_trigger_cn?: string; invalidation_price?: number | null;
+  valid_until?: string; thesis_cn?: string; invalidation_criteria_cn?: string;
+  drawdown_playbook_cn?: string; take_profit_plan_cn?: string; stop_plan_cn?: string;
+};
+
+/** 从 assistant 回复中解析 ```plan-draft {json}``` 代码块。 */
+export function parsePlanDraft(text: string): PlanDraft | null {
+  const m = /```plan-draft\s*([\s\S]*?)```/.exec(text);
+  if (!m) return null;
+  try {
+    return JSON.parse(m[1]) as PlanDraft;
+  } catch {
+    return null;
+  }
+}
+
+function PlanDraftCard({ draft, symbol }: { draft: PlanDraft; symbol: string }) {
+  const create = useMutation({
+    mutationFn: async () => {
+      // ruleset_version：后端 create 不校验非空，但留空会让 monitor 跳过规则集
+      // 版本漂移检测；从买点审阅响应带当前版本，取不到再降级空串（create 仍可过）。
+      let rulesetVersion = "";
+      try {
+        rulesetVersion = (await api.buyPointReview(symbol)).ruleset_version || "";
+      } catch {
+        rulesetVersion = "";
+      }
+      const payload: CreatePlanPayload = {
+        symbol,
+        module: draft.module,
+        direction: draft.direction,
+        ruleset_version: rulesetVersion,
+        reason: "对话式建计划（agent 引导）",
+        entry_rule_id: draft.entry_rule_id ?? null,
+        entry_trigger_cn: draft.entry_trigger_cn ?? "",
+        entry_price_ref: null,
+        invalidation_price: draft.invalidation_price ?? null,
+        valid_until: draft.valid_until ?? "",
+        thesis_cn: draft.thesis_cn ?? "",
+        invalidation_criteria_cn: draft.invalidation_criteria_cn ?? "",
+        drawdown_playbook_cn: draft.drawdown_playbook_cn ?? "",
+        take_profit_plan_cn: draft.take_profit_plan_cn ?? "",
+        stop_plan_cn: draft.stop_plan_cn ?? "",
+      };
+      const plan = await api.createPlan(payload);
+      await api.confirmPlan(plan.plan_id);
+      return plan;
+    },
+  });
+  const rows: Array<[string, string]> = [
+    ["模块/方向", `${draft.module} · ${draft.direction}`],
+    ["入场理由", draft.entry_rule_id ?? "-"],
+    ["失效价", draft.invalidation_price != null ? String(draft.invalidation_price) : "未给出（需人工确认）"],
+    ["有效期至", draft.valid_until ?? "-"],
+    ["交易假设", draft.thesis_cn ?? "-"],
+    ["失效标准", draft.invalidation_criteria_cn ?? "-"],
+    ["回撤预案", draft.drawdown_playbook_cn ?? "-"],
+    ["止盈预案", draft.take_profit_plan_cn ?? "-"],
+    ["止损预案", draft.stop_plan_cn ?? "-"],
+  ];
+  return (
+    <div className="plan-draft-card">
+      <div className="cp-label">计划草稿（确认后落库）</div>
+      {rows.map(([k, v]) => (
+        <div key={k} style={{ fontSize: 12 }}>
+          <span className="muted">{k}：</span>
+          {v}
+        </div>
+      ))}
+      <button
+        className="btn small primary"
+        disabled={create.isPending}
+        onClick={() => create.mutate()}
+      >
+        {create.isPending ? "提交中…" : "确认落库（draft→armed）"}
+      </button>
+      {create.error && (
+        <div className="cp-error">{String(create.error)}</div>
+      )}
+      {create.isSuccess && <div className="cp-hint">已落库并激活，见「监督待办」页。</div>}
+    </div>
   );
 }

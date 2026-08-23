@@ -4,6 +4,7 @@ import { api } from "../api/client";
 import { directionCn, moduleCn } from "../modules";
 import type { PlanAlert } from "../types";
 import CreatePlanDialog from "./CreatePlanDialog";
+import ProvenanceBadge from "./ProvenanceBadge";
 
 type Turn = { who: "you" | "agent"; text: string; grounded?: boolean };
 
@@ -227,7 +228,19 @@ function IssueRow({ a }: { a: PlanAlert }) {
     <div className="rv-issue">
       <div className="rv-issue-head">
         <code>{a.code}</code>
-        {a.rule_id && <span className="muted">[rule_id:{a.rule_id}]</span>}
+        <ProvenanceBadge
+          items={[
+            {
+              label: a.next_step_cn || a.code,
+              rule_id: a.rule_id ?? null,
+              evidence_cn: Object.entries(a.evidence ?? {})
+                .map(([k, v]) => `${k}=${v}`)
+                .join("；"),
+              research_proxy: true,
+              principle_source: a.principle_source ?? null,
+            },
+          ]}
+        />
       </div>
       <div className="rv-issue-step">{a.next_step_cn || a.caveat_cn || "—"}</div>
     </div>

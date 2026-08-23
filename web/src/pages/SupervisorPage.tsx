@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../api/client";
-import AgentDrawer from "../components/AgentDrawer";
+import { agentConsoleStore } from "../App";
 import BuyPointDrawer from "../components/BuyPointDrawer";
 import ProvenanceBadge from "../components/ProvenanceBadge";
 import { directionCn, moduleCn } from "../modules";
@@ -229,7 +229,6 @@ function PlanCard({ plan, onAsk }: { plan: Plan; onAsk: () => void }) {
 }
 
 export default function SupervisorPage() {
-  const [askPlanId, setAskPlanId] = useState<string | null>(null);
   const [scanSymbol, setScanSymbol] = useState<string | null>(null);
   const [scanOpen, setScanOpen] = useState(false);
   const { data: armed, isLoading: l1 } = useQuery({
@@ -336,13 +335,9 @@ export default function SupervisorPage() {
         <PlanCard
           key={plan.plan_id}
           plan={plan}
-          onAsk={() => setAskPlanId(plan.plan_id)}
+          onAsk={() => agentConsoleStore.openConsole(plan.symbol)}
         />
       ))}
-
-      {askPlanId && (
-        <AgentDrawer planId={askPlanId} onClose={() => setAskPlanId(null)} />
-      )}
 
       {scanSymbol && (
         <BuyPointDrawer symbol={scanSymbol} onClose={() => setScanSymbol(null)} />
