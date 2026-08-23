@@ -29,6 +29,7 @@ from lei_signal.plans import llm as plans_llm
 from lei_signal.plans.context import context_from_result
 from lei_signal.plans.grounding import (
     collect_payload_numbers,
+    extract_market_numbers,
     render_alerts,
     verify_grounding,
     verify_numeric_grounding,
@@ -243,6 +244,12 @@ def _buy_point_template(review) -> str:  # noqa: ANN001
 
 def _degraded_reply(symbol: str, ctx_payload: dict) -> str:
     """LLM 不可用/校验失败时的模板直出（不含工程标注，标注走 trace）。"""
+    if ctx_payload.get("context_kind") == "global":
+        # global 会话无标的技术材料，直出「【】数据日 -」是空段，给专属文案
+        return (
+            "当前为全局会话，无标的技术材料。LLM 暂不可用，"
+            "请切换到具体标的详情页打开 agent，或稍后重试。"
+        )
     a = ctx_payload.get("assessment", {})
     vp = ctx_payload.get("volume_profile") or {}
     lines = [
@@ -308,7 +315,10 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
                 buy_point_review,
             )
             review = buy_point_review(request, body.symbol)
-            plans = list_plans(conn, symbol=body.symbol)
+            plans = [
+                p for p in list_plans(conn, symbol=body.symbol)
+                if p.state in ("armed", "entered")
+            ]
             open_items = [
                 i for p in plans for i in list_action_items(
                     conn, p.plan_id, state="open"
@@ -325,24 +335,34 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
     config = plans_llm.load_ark_config()
     reply: str | None = None
     grounded = False
-    allowed_nums = collect_payload_numbers(ctx_payload)
+    # 数值白名单 = 技术材料数值 ∪ 本轮 user message 中出现的数字
+    # （用户问「8700 是不是更好」、LLM 回显「你说的 8700」时不误降级）
+    allowed_nums = collect_payload_numbers(ctx_payload) | frozenset(
+        extract_market_numbers(body.message)
+    )
     history = [{"role": m.role, "content": m.content} for m in history_rows]
     if config is not None:
-        raw = plans_llm.chat_discussion(ctx_payload, history, body.message, config)
-        if raw is not None:
-            ok_num, num_reason = verify_numeric_grounding(raw, allowed_nums)
-            rule_ids = {a.rule_id for a in alerts if a.rule_id}
-            ok_txt, txt_reason = verify_grounding(raw, rule_ids)
-            if ok_num and ok_txt:
-                reply, grounded = raw, True
-            else:
-                logger.warning("讨论 chat 校验未过：numeric=%s text=%s", num_reason, txt_reason)
-                raw2 = plans_llm.chat_discussion(ctx_payload, history, body.message, config)
-                if raw2 is not None:
-                    ok2n, _ = verify_numeric_grounding(raw2, allowed_nums)
-                    ok2t, _ = verify_grounding(raw2, rule_ids)
-                    if ok2n and ok2t:
-                        reply, grounded = raw2, True
+        try:
+            raw = plans_llm.chat_discussion(ctx_payload, history, body.message, config)
+            if raw is not None:
+                ok_num, num_reason = verify_numeric_grounding(raw, allowed_nums)
+                rule_ids = {a.rule_id for a in alerts if a.rule_id}
+                ok_txt, txt_reason = verify_grounding(raw, rule_ids)
+                if ok_num and ok_txt:
+                    reply, grounded = raw, True
+                else:
+                    logger.warning("讨论 chat 校验未过：numeric=%s text=%s",
+                                   num_reason, txt_reason)
+                    raw2 = plans_llm.chat_discussion(
+                        ctx_payload, history, body.message, config
+                    )
+                    if raw2 is not None:
+                        ok2n, _ = verify_numeric_grounding(raw2, allowed_nums)
+                        ok2t, _ = verify_grounding(raw2, rule_ids)
+                        if ok2n and ok2t:
+                            reply, grounded = raw2, True
+        except Exception:  # noqa: BLE001  网络层已在 llm.py 捕获返 None，此处兜真 bug 路径
+            logger.warning("讨论 chat LLM 段意外异常，走降级模板", exc_info=True)
 
     symbol = body.symbol or ""
     if reply is None:

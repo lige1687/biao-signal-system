@@ -121,3 +121,110 @@ def test_sessions_list(client: TestClient) -> None:
     assert r.status_code == 200
     lst = client.get("/api/agent/sessions?symbol=000300.SS").json()
     assert any(s["title_cn"] == "讨论" for s in lst)
+
+
+# ---- Fix round 1：审查 Important-1 / M-1 / M-2 / M-4 回归测试 ----
+
+
+def _boom_discussion(payload, history, message, config):  # noqa: ANN001
+    """模拟 chat_discussion 段真 bug（网络层已被 llm.py 捕获返 None，兜不住的路径）。"""
+    raise RuntimeError("unexpected bug in discussion pipeline")
+
+
+def test_llm_unexpected_exception_degrades(
+    client: TestClient, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Important-1：LLM 段意外异常不 500 裸奔，走降级模板（grounded=False）。"""
+    monkeypatch.setattr(llm, "chat_discussion", _boom_discussion)
+    r = client.post("/api/agent/chat", json={
+        "session_id": None, "context_kind": "symbol",
+        "symbol": "000300.SS", "message": "说说",
+    })
+    assert r.status_code == 200  # 不再 500
+    body = r.json()
+    assert body["grounded"] is False
+    assert "数据日" in body["reply"]  # symbol 上下文的降级模板
+
+
+def test_llm_exception_still_persists_turn(
+    client: TestClient, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Important-1：异常兜底后本轮消息仍成对落库，不丢会话、不留空会话。"""
+    monkeypatch.setattr(llm, "chat_discussion", _boom_discussion)
+    body = client.post("/api/agent/chat", json={
+        "session_id": None, "context_kind": "symbol",
+        "symbol": "000300.SS", "message": "说说",
+    }).json()
+    msgs = client.get(f"/api/agent/sessions/{body['session_id']}/messages").json()
+    assert [m["role"] for m in msgs] == ["user", "assistant"]
+    assert msgs[1]["grounded"] is False
+
+
+def test_user_number_echo_stays_grounded(
+    client: TestClient, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """M-1：用户消息中的数字并入白名单，LLM 回显「你说的 8700」不再降级。"""
+    monkeypatch.setattr(llm, "_llm_call", lambda cfg, msgs: "你说的 8700 与当前结构不重叠")
+    r = client.post("/api/agent/chat", json={
+        "session_id": None, "context_kind": "symbol",
+        "symbol": "000300.SS", "message": "8700 是不是更好的位置",
+    })
+    assert r.status_code == 200
+    assert r.json()["grounded"] is True
+
+
+def test_global_context_degraded_copy(
+    client: TestClient, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """M-4：global 上下文降级不输出「【】数据日 -」空段，给全局会话专属文案。"""
+    monkeypatch.setattr(llm, "load_ark_config", lambda: None)
+    r = client.post("/api/agent/chat", json={
+        "session_id": None, "context_kind": "global",
+        "symbol": None, "message": "现在整体环境怎么看",
+    })
+    assert r.status_code == 200
+    reply = r.json()["reply"]
+    assert "数据日 -" not in reply
+    assert "全局会话" in reply
+
+
+def test_plans_filtered_to_armed_entered(
+    client: TestClient, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """M-2：喂给 build_discussion_context 的 plans 只剩 armed/entered（保序过滤）。"""
+    from lei_signal.api.routes import agent as agent_routes
+    from lei_signal.plans.models import TradePlan
+
+    def plan(pid: str, state: str) -> TradePlan:
+        return TradePlan(
+            plan_id=pid, symbol=SYMBOL, module="A", direction="long",
+            entry_rule_id=None, entry_lifecycle_id=None, entry_trigger_cn=None,
+            entry_price_ref=None, invalidation_price=None, target_b_price=None,
+            target_b_source=None, reward_risk_at_plan=None,
+            valid_until="2099-01-01", state=state, ruleset_version="test",
+            reason="test",
+        )
+
+    mixed = [
+        plan("p-entered", "entered"), plan("p-draft", "draft"),
+        plan("p-closed", "closed"), plan("p-armed", "armed"),
+        plan("p-exited", "exited"),
+    ]
+    captured: dict = {}
+
+    def fake_build_ctx(result, review, plans, open_items):  # noqa: ANN001
+        captured["states"] = [p.state for p in plans]
+        return {"context_kind": "symbol"}
+
+    monkeypatch.setattr(
+        agent_routes, "list_plans",
+        lambda conn, *, symbol=None, state=None: mixed,
+    )
+    monkeypatch.setattr(agent_routes, "build_discussion_context", fake_build_ctx)
+    monkeypatch.setattr(llm, "_llm_call", lambda cfg, msgs: "好的")
+    r = client.post("/api/agent/chat", json={
+        "session_id": None, "context_kind": "symbol",
+        "symbol": "000300.SS", "message": "当前在盯什么计划",
+    })
+    assert r.status_code == 200
+    assert captured["states"] == ["entered", "armed"]
