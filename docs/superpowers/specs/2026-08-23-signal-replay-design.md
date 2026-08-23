@@ -22,12 +22,15 @@
 
 ## 2. 后端
 
-### 2.1 截断 Provider（无前视的关键）
+### 2.1 回放计算（无前视的关键）
+
+**实现发现（写计划时确认）**：`compose/pipeline.analyze()` 自带 `as_of: date` 参数并已实现行情截断（`pipeline.py:217-218`，Round 3 历史快照语义）——无需自造 TruncateAsOfProvider。
 
 新模块 `src/lei_signal/api/signal_replay.py`：
 
-- `TruncateAsOfProvider(inner: PriceProvider, as_of: date)`：实现 PriceProvider 协议，把 inner 返回的日线 `frame[frame.index <= as_of EOD]` 后返回。周线由日线聚合（pipeline 现有逻辑），天然截断。
-- `run_signal_replay(db_path: str, day: date) -> dict`：逐当前自选标的调 `pipeline.analyze(symbol, provider=TruncateAsOfProvider(default_provider(), day))`（**绕过 AnalysisService 的 TTL 缓存**——缓存 key 不含日期；行情优先走本地 Parquet 缓存链）；买点行 `build_review`（模式照抄 `run_opportunity_scan` 循环，active_plan_ids 同口径）、卖点行 `extract_sell_signals`（3 根 recency 窗口相对截断后最后一根计算，`is_new` 正确）；写 `signal_alerts` + `daily_opportunity_scan` 两表 `scan_date=day.isoformat()`、`as_of="close"`，当日整体重写、幂等（复用 Task 2/3 的 upsert）。
+- `run_signal_replay(db_path, day, *, symbols=None, max_workers=4) -> dict`：逐当前自选标的调 `analyze(symbol, as_of=day, cache_root=config.cache_root(), sqlite_path=db_path)`（**绕过 AnalysisService 的 TTL 缓存**——缓存 key 不含日期）。首个标的串行预热（V8 mini_racer 并发初始化崩溃规避，同 daily_scan 模式），其余走线程池。
+- 买点行 `build_review(result, symbol=..., display_name=..., active_plan_ids=())`（回放不显示"已有计划"chip——计划是当下事实，回放日不存在）；卖点行 `extract_sell_signals`（3 根 recency 窗口相对截断后最后一根计算，`is_new` 正确）。
+- 写 `signal_alerts` + `daily_opportunity_scan` 两表 `scan_date=day.isoformat()`、`as_of="close"`，当日整体重写、幂等（复用既有 upsert）。
 - 单标的失败 → unavailable 行（DATA_UNAVAILABLE 显式，不静默），不影响其余。
 
 ### 2.2 API
