@@ -45,12 +45,22 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=0, help="只算前 N 个板块（调试用）")
     ap.add_argument("--no-save", action="store_true", help="跳过落盘")
     ap.add_argument("--force", action="store_true", help="强制重算（忽略成分股当日缓存）")
+    ap.add_argument(
+        "--backfill-history",
+        action="store_true",
+        help="把 320 日窗口的指数/b50/RS 分位序列一次性回填进历史文件（已有实录优先）",
+    )
     args = ap.parse_args()
 
     t0 = time.time()
     try:
         limit = args.limit if args.limit > 0 else None
-        snap = st.run_sector_trend(limit=limit, no_save=args.no_save, force=args.force)
+        snap = st.run_sector_trend(
+            limit=limit,
+            no_save=args.no_save,
+            force=args.force,
+            backfill=args.backfill_history,
+        )
     except FileNotFoundError as exc:
         print(f"✗ 前置缓存缺失：{exc}")
         print("  请先跑 scripts/precompute_a_share_ma.py 生成 a_share_klines.parquet。")

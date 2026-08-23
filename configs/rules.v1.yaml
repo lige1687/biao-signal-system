@@ -10,7 +10,7 @@
 # 任何 research_proxy 必须在界面标注「研究代理」。
 # 阈值只能在此文件调整，且必须同时提升 version。禁止为迎合回测结果修改公式。
 
-ruleset_version: "1.4.0"
+ruleset_version: "1.5.0"
 source_video: "https://www.youtube.com/watch?v=7NkwlH6NOk8"
 
 indicators:
@@ -253,7 +253,7 @@ rules:
   # ---------------- MACD 强度（研究代理，强度非转折）----------------
   macd_strength:
     rule_id: "macd_strength"
-    version: "1.0.0"
+    version: "1.1.0"
     provenance: "research_proxy"
     params:
       fast: 12
@@ -264,13 +264,19 @@ rules:
       DEA = EMA(DIF, signal)
       hist = 2 * (DIF - DEA)
       解读口径（只作强度/乖离，不作转折）：
-        交叉：DIF 与 DEA 上下穿（金叉/死叉）-- MACD 能表达
-        多头排列乖离：DIF 相对 0 轴方向 + hist 幅度（扩散/收敛）-- MACD 能表达
+        交叉（定时）：DIF 与 DEA 上下穿（金叉/死叉）-- MACD 能表达；
+          hist 符号即 DIF×DEA 交叉状态（加速度量，只用于交叉判读，不作扩散判定）；
+          DIF 穿越 0 轴 = EMA12 穿越 EMA26（上穿0轴/下穿0轴，两线排列翻转）
+        多头排列乖离（状态）：DIF 相对 0 轴方向（排列）+ |DIF| 同号趋势
+          （两线间距拉大=扩散、缩小=密集）-- MACD 能表达
         破线（close 破均线）-- MACD 不能表达，由 LEI 颜色（close vs EMA20 vs close_lag20）补齐
         均线拐头 -- MACD 不能表达，由均线斜率（ema20_slope / sma slopes）补齐
       不产生交易事件：金叉/死叉只是强度描述，不构成买点。
     note_cn: |
       MACD 研究均线的扩散和密集状态，本质是乖离率，表示强度而非转折趋势节点。
+      测量分工：交叉（定时）看 DIF×DEA（hist 符号）；强度（状态）看 |DIF| 两线间距趋势--
+      DIF 即 EMA12-EMA26 间距（一阶乖离本身），hist 是二阶动能，两者过半数 bar 趋势
+      不一致，不能混用。状态描述词配一阶量。
       趋势转折 5 步骤中，MACD 只能表达「交叉」与「多头排列+乖离率」；
       「破线」与「均线拐头」需由系统既有的 LEI 颜色与均线斜率补齐，
       方可用 MACD 观察趋势强度。界面必须标注「研究代理」，并明示盲区补齐来源。

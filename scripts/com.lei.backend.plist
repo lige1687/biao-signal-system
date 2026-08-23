@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.lei.backend</string>
+
+    <!-- 直接 exec venv python 跑 uvicorn，避免 /bin/bash 包装脚本触发 macOS 沙箱
+         "Operation not permitted"（.sh 带 com.apple.provenance 属性时）。 -->
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/yongbiaoli/.workbuddy/binaries/python/envs/default/bin/python3</string>
+        <string>-m</string>
+        <string>uvicorn</string>
+        <string>lei_signal.api.app:app</string>
+        <string>--host</string>
+        <string>127.0.0.1</string>
+        <string>--port</string>
+        <string>8000</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PYTHONPATH</key>
+        <string>/Users/yongbiaoli/Desktop/lei-signal-lab/src</string>
+        <key>LEI_SENTIMENT_ROOT</key>
+        <string>/Users/yongbiaoli/Desktop/lei-signal-lab/data/sentiment</string>
+    </dict>
+
+    <!-- 登录即起 + 崩溃自动重启 + 重启电脑后自动恢复 -->
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/logs/backend.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/logs/backend.err.log</string>
+</dict>
+</plist>

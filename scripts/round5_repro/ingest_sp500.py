@@ -170,7 +170,12 @@ def update_manifest(entry: dict) -> None:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--max-workers", type=int, default=6)
-    parser.add_argument("--max-bars", type=int, default=250)
+    parser.add_argument(
+        "--max-bars",
+        type=int,
+        default=0,
+        help="每只成分股保留的最大K线数(0=不截断,拉取Yahoo全量历史)",
+    )
     args = parser.parse_args(argv)
     entry = ingest(max_workers=args.max_workers, max_bars=args.max_bars)
     update_manifest(entry)

@@ -47,6 +47,7 @@ install_agent com.lei.backend
 install_agent com.lei.frontend
 install_agent com.lei.ashare.ma
 install_agent com.lei.sector.trend
+install_agent com.lei.daily.brief
 install_agent com.lei.signal.scan
 
 echo

@@ -106,6 +106,10 @@ def backfill(
         connection.commit()
 
         for i, as_of in enumerate(session_dates):
+            # 先提交主连接上未完成的写事务（如上一轮的 percentile UPDATE），
+            # 再调 _build_for_market —— 它内部会另开连接写快照，两条连接
+            # 若同时持有写事务会互相等待（同进程自死锁，0% CPU 卡死）。
+            connection.commit()
             try:
                 dto = svc._build_for_market(market_id, as_of)
             except Exception as exc:

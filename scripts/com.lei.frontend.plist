@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.lei.frontend</string>
+
+    <!-- 直接 exec managed node 跑 vite，避免 /bin/bash 包装脚本触发 macOS 沙箱
+         "Operation not permitted"（.sh 带 com.apple.provenance 属性时）。 -->
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/yongbiaoli/.workbuddy/binaries/node/versions/22.22.2/bin/node</string>
+        <string>/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/.bin/vite</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/web</string>
+
+    <!-- 登录即起 + 崩溃自动重启 + 重启电脑后自动恢复 -->
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/logs/frontend.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/logs/frontend.err.log</string>
+</dict>
+</plist>
