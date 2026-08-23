@@ -11,7 +11,11 @@ from types import SimpleNamespace
 
 import pandas as pd
 
-from lei_signal.api.opportunity_scan import list_scan, today_date
+from lei_signal.api.opportunity_scan import (
+    list_scan,
+    today_date,
+    upsert_scan_results,
+)
 from lei_signal.api.services import AnalysisEntry
 from lei_signal.api.signal_alerts_store import (
     SIDE_SELL,
@@ -146,3 +150,35 @@ def test_buy_table_rewritten_by_rescan(monkeypatch, tmp_path) -> None:
     run_signal_scan(clean, db, symbols=["600519.SS"], as_of="close")
     with closing(connect(db)) as conn:
         assert list_scan(conn, today_date()) == []  # none-verdict 过滤后当日重写，stale 失败行已清
+
+
+def test_empty_watchlist_clears_stale_buy_rows(tmp_path) -> None:
+    """空自选整体重写当日两表：stale 买点行被清掉，as_of meta 行照写。"""
+    db = str(tmp_path / "lab.db")
+    # upsert_scan_results 直取 best_scenario_cn/best_state/reward_risk_ratio/
+    # reward_risk_computable 四个属性（无 getattr 默认），SimpleNamespace 需带全
+    stale = SimpleNamespace(
+        symbol="X.SS", verdict="none", verdict_cn="", display_name="X",
+        best_scenario_cn=None, best_state=None, reward_risk_ratio=None,
+        reward_risk_computable=False,
+    )
+    with closing(connect(db)) as conn:
+        upsert_scan_results(conn, today_date(), [stale])
+    service = _FakeService({})
+    run_signal_scan(service, db, symbols=[], as_of="close")
+    with closing(connect(db)) as conn:
+        assert list_scan(conn, today_date()) == []  # stale 买点行被当日整体重写清掉
+        assert get_scan_as_of(conn, today_date()) == "close"
+        assert list_signal_alerts(conn, today_date(), side=SIDE_SELL) == []
+
+
+def test_dry_run_writes_nothing(monkeypatch, tmp_path) -> None:
+    """dry_run：两表零写入——卖点行不落、as_of meta 行不写、买点表也不动。"""
+    _none_review(monkeypatch)
+    db = str(tmp_path / "lab.db")
+    service = _FakeService({"600519.SS": _entry(result=_result_with_exit_event())})
+    run_signal_scan(service, db, symbols=["600519.SS"], as_of="close", dry_run=True)
+    with closing(connect(db)) as conn:
+        assert list_signal_alerts(conn, today_date(), side=SIDE_SELL) == []
+        assert get_scan_as_of(conn, today_date()) is None
+        assert list_scan(conn, today_date()) == []
