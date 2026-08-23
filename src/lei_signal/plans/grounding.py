@@ -23,6 +23,10 @@ RESEARCH_PROXY_MARKER = "判定方式为研究代理"
 
 _RULE_ID_PATTERN = re.compile(r"rule_id[:：]\s*([A-Za-z_][A-Za-z0-9_]*)")
 
+#: 数值接地：日期（整段豁免）与数值 token（整数/小数，尾部可带 %）。
+_DATE_RE = re.compile(r"\d{4}-\d{2}-\d{2}")
+_NUM_TOKEN_RE = re.compile(r"-?\d+(?:\.\d+)?%?")
+
 #: 渲染顺序：阻断优先，其后提醒、提示（规格 §13 语义）
 _SEVERITY_ORDER = {"block": 0, "remind": 1, "hint": 2}
 
@@ -145,10 +149,89 @@ def render_alerts(
                            context_min=context_min)
 
 
+# ---------------- 数值接地（讨论场景主校验） ----------------
+
+
+def collect_payload_numbers(payload: Any) -> frozenset[float]:
+    """递归抽取 payload 中的数值。str 不抽（避免 rule_id 片段混入）。"""
+    if isinstance(payload, bool):
+        return frozenset()
+    if isinstance(payload, (int, float)):
+        return frozenset({float(payload)})
+    if isinstance(payload, dict):
+        out: set[float] = set()
+        for v in payload.values():
+            out |= collect_payload_numbers(v)
+        return frozenset(out)
+    if isinstance(payload, (list, tuple)):
+        out = set()
+        for v in payload:
+            out |= collect_payload_numbers(v)
+        return frozenset(out)
+    return frozenset()
+
+
+def extract_market_numbers(text: str) -> list[float]:
+    """抽取需校验的行情数值。
+
+    豁免：日期、纯小整数（|n| < 100，序号/量词/次数）、圆圈数字。
+    校验：小数、百分数、绝对值 >= 100 的整数（价位）。
+    """
+    text = _DATE_RE.sub(" ", text)
+    text = re.sub(r"[①②③④⑤⑥⑦⑧⑨⑩]", " ", text)
+    out: list[float] = []
+    for tok in _NUM_TOKEN_RE.findall(text):
+        is_pct = tok.endswith("%")
+        num = float(tok.rstrip("%"))
+        has_decimal = "." in tok
+        if not (has_decimal or is_pct or abs(num) >= 100):
+            continue  # 序号/量词/次数豁免
+        out.append(num)
+    return out
+
+
+def verify_numeric_grounding(
+    text: str, allowed: frozenset[float], tolerance: float = 0.005
+) -> tuple[bool, str]:
+    """回答中的每个行情数值必须在白名单，或为其相对偏差/四舍五入。
+
+    相对偏差：n 可能是 (b-a)/a*100 形式的百分数（payload 任意两数之差）。
+    """
+    nums = extract_market_numbers(text)
+    base = [a for a in allowed if a != 0]
+    for n in nums:
+        ok = _within(n, allowed, tolerance)
+        if not ok and n > 0 and base:
+            # 百分比派生：n% ≈ 某两个白名单数的相对差
+            for i, a in enumerate(base):
+                for b in base[i + 1:]:
+                    if abs(abs(b - a) / a * 100 - n) <= max(0.1, tolerance * 100):
+                        ok = True
+                        break
+                if ok:
+                    break
+        if not ok:
+            return False, f"数值 {n} 不在上下文白名单"
+    return True, ""
+
+
+def _within(n: float, allowed: frozenset[float], tolerance: float) -> bool:
+    for a in allowed:
+        if a == 0:
+            if abs(n) < 1e-9:
+                return True
+        elif abs(n - a) / abs(a) <= tolerance:
+            return True
+    return False
+
+
 __all__ = [
     "FORBIDDEN_TERMS",
     "RESEARCH_PROXY_MARKER",
+    "collect_payload_numbers",
+    "extract_market_numbers",
     "render_alerts",
     "template_render",
     "verify_grounding",
+    "verify_numeric_grounding",
 ]
