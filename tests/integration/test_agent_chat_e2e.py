@@ -100,7 +100,27 @@ def test_invented_number_degrades(
         "symbol": "000300.SS", "message": "说说",
     }).json()
     assert r["grounded"] is False  # 编数字 → 降级模板
-    assert "rule_id:" not in r["reply"] or r["trace"]  # trace 走结构化字段
+    assert "rule_id:" not in r["reply"]  # FR-2 收紧：降级模板正文无工程标注
+
+
+def test_rule_id_echo_degrades(
+    client: TestClient, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """FR-2: LLM 回显「rule_id:」即使过白名单校验也降级——工程标注只走 trace 角标。
+
+    「rule_id: 见溯源角标」中 rule_id 后无 ASCII 标识符，``verify_grounding``
+    抽不到 rule_id（白名单不拒），数值校验也无数字可拒——只有 FR-2 新增的
+    ``"rule_id:" not in raw`` 能确定性拦下，防合法 rule_id 回显漏进默认 DOM。
+    """
+    monkeypatch.setattr(
+        llm, "_llm_call", lambda cfg, msgs: "结构确认成立（rule_id: 见溯源角标）"
+    )
+    r = client.post("/api/agent/chat", json={
+        "session_id": None, "context_kind": "symbol",
+        "symbol": "000300.SS", "message": "这个买点为什么是买点",
+    }).json()
+    assert r["grounded"] is False
+    assert "rule_id:" not in r["reply"]
 
 
 def test_llm_unavailable_still_replies(

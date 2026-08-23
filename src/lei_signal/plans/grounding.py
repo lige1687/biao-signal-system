@@ -153,7 +153,8 @@ def render_alerts(
 # ---------------- 数值接地（讨论场景主校验） ----------------
 
 #: 归一化：NFKC（全角数字/％/逗号 -> 半角）、零宽字符、千分位逗号、中文数字。
-_ZERO_WIDTH_RE = re.compile(r"[\u200b\u200c\u200d\ufeff]")
+#: 零宽族覆盖 U+200B/200C/200D + U+2060 词连接符 + U+00AD 软连字符 + U+FEFF。
+_ZERO_WIDTH_RE = re.compile(r"[\u200b\u200c\u200d\u2060\u00ad\ufeff]")
 _THOUSANDS_RE = re.compile(r"(?<=\d),(?=\d{3}\b)")  # 只剥数字间逗号
 _CN_RUN_RE = re.compile(r"[零一二两三四五六七八九十百千万亿]+")
 _CN_DIGIT = {"零": 0, "一": 1, "二": 2, "两": 2, "三": 3, "四": 4,

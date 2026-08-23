@@ -106,3 +106,13 @@ def test_zero_width_digit_split_hallucination_rejected():
 def test_zero_width_inside_whitelisted_number_still_passes():
     ok, _ = verify_numeric_grounding("关键位 87\u200b00", frozenset({8700.0}))
     assert ok  # 剔零宽后 8700 与白名单对上
+
+
+def test_word_joiner_and_soft_hyphen_digit_split_rejected():
+    """R-3: U+2060 词连接符与 U+00AD 软连字符切数字同属零宽族，不得绕过。"""
+    ok, reason = verify_numeric_grounding(
+        "关键位 43\u206021", frozenset({8700.0})
+    )
+    assert not ok and "4321" in reason
+    ok2, _ = verify_numeric_grounding("关键位 87\u00ad00", frozenset({8700.0}))
+    assert ok2

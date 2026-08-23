@@ -636,6 +636,10 @@ DISCUSSION_SYSTEM_PROMPT = """你是 LEI 交易系统的研究讨论伙伴（表
    invalidation_price/valid_until/thesis_cn/invalidation_criteria_cn/
    drawdown_playbook_cn/take_profit_plan_cn/stop_plan_cn）供前端渲染
    确认卡。落库必须等用户点确认，你不得代替确认。
+9. 回答中不得出现 rule_id 字样与研究代理标注字样（溯源信息由系统在别处
+   呈现）。回显用户提到的数字时必须冠以用户来源（如「你提到的 8700」），
+   并主动与材料中最接近的系统位连接给出偏差百分比，不得把用户数字说成
+   系统位。
 """
 
 

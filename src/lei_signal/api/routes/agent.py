@@ -285,6 +285,20 @@ def _build_trace(alerts: list) -> list[TraceItem]:
     ]
 
 
+def _discussion_txt_ok(raw: str, rule_ids: set[str]) -> tuple[bool, str]:
+    """讨论正文的文本校验：verify_grounding + 不得出现「rule_id:」工程标注。
+
+    后者是确定性加固：``verify_grounding`` 只拒白名单**外**的 rule_id，payload
+    本就喂了 structures/events 的 rule_id，LLM 回显一个合法 rule_id 会双校验
+    全过、默认 DOM 出现工程明文（FR-2）。溯源只走 trace 角标，正文一律不带。
+    仅用于 /agent/chat 讨论路径；plans/buy-point 老端点维持原校验不变。
+    """
+    ok, reason = verify_grounding(raw, rule_ids)
+    if ok and "rule_id:" in raw:
+        return False, "正文含 rule_id: 工程标注（溯源走 trace 角标）"
+    return ok, reason
+
+
 @router.post("/agent/chat", response_model=AgentChatReply)
 def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
     """统一讨论入口：多轮记忆 + 技术摘要全喂 + 数值接地。
@@ -347,7 +361,7 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
             if raw is not None:
                 ok_num, num_reason = verify_numeric_grounding(raw, allowed_nums)
                 rule_ids = {a.rule_id for a in alerts if a.rule_id}
-                ok_txt, txt_reason = verify_grounding(raw, rule_ids)
+                ok_txt, txt_reason = _discussion_txt_ok(raw, rule_ids)
                 if ok_num and ok_txt:
                     reply, grounded = raw, True
                 else:
@@ -358,7 +372,7 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
                     )
                     if raw2 is not None:
                         ok2n, _ = verify_numeric_grounding(raw2, allowed_nums)
-                        ok2t, _ = verify_grounding(raw2, rule_ids)
+                        ok2t, _ = _discussion_txt_ok(raw2, rule_ids)
                         if ok2n and ok2t:
                             reply, grounded = raw2, True
         except Exception:  # noqa: BLE001  网络层已在 llm.py 捕获返 None，此处兜真 bug 路径
