@@ -254,6 +254,9 @@ export const api = {
   signalsToday: () => request<SignalsToday>(`/signals/today`),
   refreshSignals: (asOf: "intraday" | "close" = "close") =>
     request<SignalsToday>(`/signals/today/refresh?as_of=${asOf}`, { method: "POST" }),
+  signalsDay: (day: string) => request<SignalsToday>(`/signals/day/${day}`),
+  replayDay: (day: string) =>
+    request<SignalsToday>(`/signals/day/${day}/replay`, { method: "POST" }),
   buyPointChat: (symbol: string, message: string) =>
     request<BuyPointChatReply>(
       `/symbols/${encodeURIComponent(symbol)}/buy-point-chat`,

@@ -1001,6 +1001,7 @@ export interface SignalsToday {
   as_of: string | null;
   generated_at: string;
   scanned: number;
+  available?: boolean;
   actionable: ScanItem[];
   waiting: ScanItem[];
   blocked: ScanItem[];

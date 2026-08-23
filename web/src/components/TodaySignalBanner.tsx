@@ -137,6 +137,28 @@ export default function TodaySignalBanner({
 }) {
   const qc = useQueryClient();
   const [open, setOpen] = useState(false);
+  // 回放模式：选了过去交易日则切换数据源（红点/今日查询不受影响）
+  const [replayDate, setReplayDate] = useState("");
+  const isReplay = replayDate !== "";
+  const dayQuery = useQuery({
+    queryKey: ["signalsDay", replayDate],
+    queryFn: () => api.signalsDay(replayDate),
+    enabled: isReplay,
+    staleTime: 5 * 60_000,
+    retry: false,
+  });
+  const replay = useMutation({
+    mutationFn: () => api.replayDay(replayDate),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["signalsDay", replayDate] });
+    },
+  });
+  const replayError: string | null =
+    isReplay && dayQuery.isError
+      ? "该日期不可用（非交易日或格式错误）"
+      : isReplay && replay.isError
+        ? "回放计算失败，请稍后重试"
+        : null;
   const { data, isError } = useQuery({
     queryKey: ["signalsToday"],
     queryFn: () => api.signalsToday(),
@@ -154,22 +176,29 @@ export default function TodaySignalBanner({
     },
   });
 
-  const asOf = data?.as_of ?? null;
-  const scanned = asOf != null;
-  const failed = isError && !data;
-  const scanTime = data?.generated_at
-    ? new Date(data.generated_at).toLocaleTimeString([], {
+  const active = isReplay ? dayQuery.data : data;
+  const asOf = active?.as_of ?? null;
+  // 回放日以查询结果为准（无快照/日期无效也要展开给出提示与补算入口，快照日含 available）；
+  // 今日口径不变（今日响应恒含 available=true，不能并入判定，否则未扫描日会被误判已扫描）。
+  const scanned = isReplay
+    ? active != null || dayQuery.isError
+    : asOf != null;
+  const failed =
+    (!isReplay && isError && !data) ||
+    (isReplay && dayQuery.isError && !dayQuery.data);
+  const scanTime = active?.generated_at
+    ? new Date(active.generated_at).toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
       })
     : null;
-  const buyA = data?.actionable ?? [];
-  const buyW = data?.waiting ?? [];
-  const buyB = data?.blocked ?? [];
-  const sellH = data?.sell_hard ?? [];
-  const sellWarn = data?.sell_warn ?? [];
-  const sellS = data?.sell_soft ?? [];
-  const unavailable = data?.unavailable ?? [];
+  const buyA = active?.actionable ?? [];
+  const buyW = active?.waiting ?? [];
+  const buyB = active?.blocked ?? [];
+  const sellH = active?.sell_hard ?? [];
+  const sellWarn = active?.sell_warn ?? [];
+  const sellS = active?.sell_soft ?? [];
+  const unavailable = active?.unavailable ?? [];
   const empty =
     buyA.length + buyW.length + buyB.length + sellH.length + sellWarn.length +
     sellS.length + unavailable.length === 0;
@@ -177,7 +206,8 @@ export default function TodaySignalBanner({
   return (
     <div className="sig-banner">
       <div className="sig-banner-head">
-        <b>🔔 今日自选信号</b>
+        <b>{isReplay ? `🔔 自选信号 · ${replayDate}` : "🔔 今日自选信号"}</b>
+        {isReplay && <span className="sig-asof replay">回放</span>}
         {scanned && (
           <span className={`sig-asof${asOf === "intraday" ? " intraday" : ""}`}>
             {asOf === "intraday" ? "盘中临时" : "收盘"}
@@ -201,13 +231,45 @@ export default function TodaySignalBanner({
           </span>
         )}
         <span className="sig-spacer" />
-        <button
-          className="btn small"
-          disabled={refresh.isPending}
-          onClick={() => refresh.mutate()}
-        >
-          {refresh.isPending ? "扫描中…" : "刷新"}
-        </button>
+        <input
+          type="date"
+          className="sig-date"
+          value={replayDate}
+          max={new Date(Date.now() - 86400_000).toISOString().slice(0, 10)}
+          onChange={(e) => {
+            setReplayDate(e.target.value);
+            setOpen(true);
+          }}
+          aria-label="选择回放交易日"
+        />
+        {isReplay ? (
+          <>
+            <button
+              className="btn small"
+              disabled={replay.isPending || !active}
+              onClick={() => replay.mutate()}
+            >
+              {replay.isPending ? "回放计算中…" : "回放计算"}
+            </button>
+            <button
+              className="btn small"
+              onClick={() => {
+                setReplayDate("");
+                setOpen(false);
+              }}
+            >
+              回到今天
+            </button>
+          </>
+        ) : (
+          <button
+            className="btn small"
+            disabled={refresh.isPending}
+            onClick={() => refresh.mutate()}
+          >
+            {refresh.isPending ? "扫描中…" : "刷新"}
+          </button>
+        )}
         {scanned && (
           <button
             className="btn small"
@@ -220,6 +282,19 @@ export default function TodaySignalBanner({
       </div>
       {open && scanned && (
         <div className="sig-groups">
+          {isReplay && (
+            <div className="muted sig-replay-note">
+              回放口径：当前自选 × 行情截至 {replayDate} 重算，含成分前视，仅形态参考，不构成买卖建议。
+            </div>
+          )}
+          {isReplay && active?.available === false && !replay.isPending && (
+            <div className="sig-empty">
+              该日无快照。点 [回放计算] 补算（约 1 分钟，算完永久保存）。
+            </div>
+          )}
+          {replayError && (
+            <div className="sig-empty" role="alert">{replayError}</div>
+          )}
           {buyA.length > 0 && (
             <Group title={`✅ 买·行动 ${buyA.length}`}>
               {buyA.map((it) => (
@@ -279,7 +354,9 @@ export default function TodaySignalBanner({
               </ul>
             </div>
           )}
-          {empty && <div className="muted sig-empty">当前窗口内无买卖信号。</div>}
+          {empty && active != null && active.available !== false && (
+            <div className="muted sig-empty">当前窗口内无买卖信号。</div>
+          )}
         </div>
       )}
     </div>
