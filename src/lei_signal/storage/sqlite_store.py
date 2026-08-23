@@ -668,15 +668,16 @@ class WriteReport:
 def connect(path: str | Path) -> sqlite3.Connection:
     """打开连接并应用迁移。
 
-    - ``timeout=5.0``：并发写（同一进程多线程 + 跨进程）时，后到的连接会等 5 秒
-      而不是立即 ``database is locked``。
+    - ``timeout=30.0``：并发写（同一进程多线程 + 跨进程）时，后到的连接会等 30 秒
+      而不是立即 ``database is locked``。5s 不够：生产库上 analyze 持久化
+      event_lifecycle_snapshots 的写事务可超 5s（实测 agent_chat 建会话曾撞锁）。
     - ``PRAGMA journal_mode = WAL``：多读单写场景下读写不再互斥。看盘页一次
       会拉 11+ 个标的，每个都要打开 lab.db，串行阻塞会卡到 60s+。WAL 让
-      读和写可以并发，唯一互斥的是「写 vs 写」，由 5s busy_timeout 兜底。
+      读和写可以并发，唯一互斥的是「写 vs 写」，由 busy_timeout 兜底。
     - 迁移必须 **只** 第一次开连接时跑一次（pragma journal_mode 是持久化的，
       后续连接会复用），避免并发连接重复 apply 互相抢锁。
     """
-    connection = sqlite3.connect(str(path), timeout=5.0)
+    connection = sqlite3.connect(str(path), timeout=30.0)
     connection.row_factory = sqlite3.Row
     connection.execute("PRAGMA foreign_keys = ON")
     connection.execute("PRAGMA journal_mode = WAL")
