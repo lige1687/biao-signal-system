@@ -289,7 +289,7 @@ export default function TodaySignalBanner({
           )}
           {isReplay && active?.available === false && !replay.isPending && (
             <div className="sig-empty">
-              该日无快照。点 [回放计算] 补算（约 1 分钟，算完永久保存）。
+              该日无快照。点 [回放计算] 补算（首次约 2-4 分钟，算完永久保存，之后秒开）。
             </div>
           )}
           {replayError && (
