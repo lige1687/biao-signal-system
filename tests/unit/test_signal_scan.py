@@ -11,7 +11,7 @@ from types import SimpleNamespace
 
 import pandas as pd
 
-from lei_signal.api.opportunity_scan import today_date
+from lei_signal.api.opportunity_scan import list_scan, today_date
 from lei_signal.api.services import AnalysisEntry
 from lei_signal.api.signal_alerts_store import (
     SIDE_SELL,
@@ -87,6 +87,10 @@ def test_sell_and_unavailable_rows_persisted(monkeypatch, tmp_path) -> None:
         assert len(unavailable) == 1
         assert unavailable[0].symbol == "bad.SS"
         assert "DATA_UNAVAILABLE" in (unavailable[0].error or "")
+        # 买点表同轮同步重写：bad.SS 失败行在；600519.SS none-verdict 被 only_with_candidates 过滤
+        buy_rows = list_scan(conn, today_date())
+        assert [r.symbol for r in buy_rows] == ["bad.SS"]
+        assert "DATA_UNAVAILABLE" in (buy_rows[0].error or "")
 
 
 def test_rescan_rewrites_same_day(monkeypatch, tmp_path) -> None:
@@ -122,3 +126,23 @@ def test_sell_uses_cached_entries_no_refetch(monkeypatch, tmp_path) -> None:
     service = _FakeService({"600519.SS": _entry(result=_result_with_exit_event())})
     run_signal_scan(service, db, symbols=["600519.SS"])
     assert service.get_many_calls == [True, False]  # run_opportunity_scan 一次 True，卖点一次 False
+
+
+def test_buy_table_rewritten_by_rescan(monkeypatch, tmp_path) -> None:
+    """二轮扫描整体重写当日买点表：上一轮的失败行不残留（设计 §3.2 两表整体重写）。"""
+    _none_review(monkeypatch)
+    db = str(tmp_path / "lab.db")
+    service = _FakeService({"bad.SS": _entry(error="DATA_UNAVAILABLE: 行情获取失败")})
+    run_signal_scan(service, db, symbols=["bad.SS"], as_of=AS_OF_INTRADAY)
+    with closing(connect(db)) as conn:
+        rows = list_scan(conn, today_date())
+        assert [r.symbol for r in rows] == ["bad.SS"]
+        assert "DATA_UNAVAILABLE" in (rows[0].error or "")
+
+    clean = _FakeService({"600519.SS": _entry(result=SimpleNamespace(
+        frame=pd.DataFrame({"close": [10.0] * 3}, index=pd.bdate_range("2026-08-19", periods=3)),
+        display_name="测试标的", events=[], structures=[], history=[],
+    ))})
+    run_signal_scan(clean, db, symbols=["600519.SS"], as_of="close")
+    with closing(connect(db)) as conn:
+        assert list_scan(conn, today_date()) == []  # none-verdict 过滤后当日重写，stale 失败行已清
