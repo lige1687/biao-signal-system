@@ -594,6 +594,37 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
             ON daily_opportunity_scan(scan_date, verdict);
         """,
     ),
+    (
+        16,
+        "016_signal_alerts",
+        """
+        -- 今日自选信号卖点表 (2026-08-23): 看盘主页「今日自选信号」横幅的数据源.
+        -- 卖点行来自 extract_sell_signals (纯提取, 不做新判定);
+        -- 买点行继续写 daily_opportunity_scan (既有表), 读 API 合并两表.
+        -- 当日重扫 = 先 DELETE 当日再 INSERT (与 daily_opportunity_scan 同语义).
+        -- side='meta' 的 as_of 行记录本次扫描口径 (intraday | close), 是"今日是否扫过"的唯一判据.
+        CREATE TABLE IF NOT EXISTS signal_alerts (
+            scan_date      TEXT NOT NULL,        -- YYYY-MM-DD (UTC date)
+            symbol         TEXT NOT NULL,
+            display_name   TEXT NOT NULL DEFAULT '',
+            side           TEXT NOT NULL,        -- sell | unavailable | meta
+            tier           TEXT NOT NULL,        -- hard | warn | soft | meta
+            kind           TEXT NOT NULL,        -- structure_invalidated | exit_proxy | top_structure_confirmed | key_wave_black | color_black | data_unavailable | as_of
+            kind_cn        TEXT NOT NULL DEFAULT '',
+            title          TEXT NOT NULL DEFAULT '',
+            reason_cn      TEXT NOT NULL DEFAULT '',
+            is_new         INTEGER NOT NULL DEFAULT 0,
+            key_prices     TEXT NOT NULL DEFAULT '{}',  -- JSON object {name: price}
+            provenance     TEXT NOT NULL DEFAULT 'system',
+            available_date TEXT NOT NULL DEFAULT '',
+            error          TEXT,
+            generated_at   TEXT NOT NULL,
+            PRIMARY KEY (scan_date, symbol, side, kind)
+        );
+        CREATE INDEX IF NOT EXISTS idx_signal_alerts_date_side_tier
+            ON signal_alerts(scan_date, side, tier);
+        """,
+    ),
 )
 
 
