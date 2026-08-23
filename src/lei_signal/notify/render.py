@@ -38,23 +38,43 @@ def _alert_line(alert: PlanAlert) -> str:
     return f"**{alert.code}** · {alert.next_step_cn or alert.code}"
 
 
-def _provenance_footer(alerts: list[PlanAlert]) -> str:
+#: 卡片末尾的溯源 note（markdown 引用块弱化；macos 纯文本渠道无害降级）。
+_NOTE_LINE = "> 研究代理判定 · 溯源见系统"
+
+
+def _provenance_footer(
+    alerts: list[PlanAlert], items: list[ActionItem] | None = None
+) -> str:
     """卡片底部一行小字：红线（研究代理标注）保留在 note，不占正文注意力。
 
+    related alerts 为空但待办（items）非空时同样挂：催办卡源 alert 本轮未
+    复现也不能裸发，红线要求每张发出的卡都能找到研究代理标注。
     飞书自定义机器人卡片的 elements 只消费 body_md（NotificationPayload 无
     note 通道），故用 markdown 引用块 ``> `` 前缀做视觉弱化。
     """
-    if not alerts:
+    if not alerts and not items:
         return ""
-    return "> 研究代理判定 · 溯源见系统"
+    return _NOTE_LINE
 
 
-def _with_note(body: str, alerts: list[PlanAlert]) -> str:
-    """正文末尾接一行 note。alerts 为空（正文无判定内容）时不加。"""
-    footer = _provenance_footer(alerts)
-    if not footer:
+def _append_note(body: str) -> str:
+    return f"{body}\n\n{_NOTE_LINE}" if body else _NOTE_LINE
+
+
+def _with_note(
+    body: str, alerts: list[PlanAlert], items: list[ActionItem] | None = None
+) -> str:
+    """正文末尾接一行 note。alerts 与 items 均空（无判定也无待办）时不加。"""
+    if not _provenance_footer(alerts, items):
         return body
-    return f"{body}\n\n{footer}" if body else footer
+    return _append_note(body)
+
+
+def _strip_trailing_note(body: str) -> tuple[str, bool]:
+    """剥掉段尾 note 行，返回 (剩余正文, 是否剥到)。merge 去重用。"""
+    if not body.endswith(_NOTE_LINE):
+        return body, False
+    return body[: -len(_NOTE_LINE)].rstrip(), True
 
 
 def _safe_body(body: str, alerts: list[PlanAlert]) -> tuple[str, frozenset[str]]:
@@ -105,7 +125,7 @@ def _action_payload(
 ) -> NotificationPayload:
     body, rule_ids = _action_detail(plan, item, alerts)
     related = [a for a in alerts if a.code == item.source_alert_code]
-    body = _with_note(body, related)
+    body = _with_note(body, related, [item])
     button = _action_button(
         plan, item, action_base_url=action_base_url, action_secret=action_secret
     )
@@ -157,7 +177,7 @@ def _summary_payload(
     body, safe_rule_ids = _safe_body(
         "\n\n".join(details), related_alerts + summary_alerts
     )
-    body = _with_note(body, related_alerts + summary_alerts)
+    body = _with_note(body, related_alerts + summary_alerts, items)
     return NotificationPayload(
         title=f"LEI 监督员 · {plan.symbol} 每日汇总",
         body_md=body,
@@ -239,7 +259,10 @@ def render_cycle(
 def merge_daily_summaries(
     payloads: list[NotificationPayload],
 ) -> NotificationPayload | None:
-    """将一轮监督中的 Tier 2 合并成一张卡，避免按计划刷屏。"""
+    """将一轮监督中的 Tier 2 合并成一张卡，避免按计划刷屏。
+
+    各段末尾的 note 行先剥掉，合并后在整卡末尾统一挂一次（单卡单 note）。
+    """
     summaries = [payload for payload in payloads if payload.tier == 2]
     if not summaries:
         return None
@@ -248,9 +271,19 @@ def merge_daily_summaries(
     if len(buttons) > 50:
         buttons = buttons[:50]
     rule_ids = frozenset(rule_id for payload in summaries for rule_id in payload.rule_ids)
+    parts: list[str] = []
+    note_found = False
+    for payload in summaries:
+        part, had_note = _strip_trailing_note(payload.body_md)
+        note_found = note_found or had_note
+        if part:
+            parts.append(part)
+    body = "\n\n---\n\n".join(parts)
+    if note_found:
+        body = _append_note(body)
     return NotificationPayload(
         title="LEI 监督员 · 每日待办汇总",
-        body_md="\n\n---\n\n".join(payload.body_md for payload in summaries),
+        body_md=body,
         tier=2,
         plan_id=plan_ids[0] if len(plan_ids) == 1 else "daily-summary",
         buttons=buttons,
