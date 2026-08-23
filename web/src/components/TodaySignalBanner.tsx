@@ -5,6 +5,7 @@
  *  点行 = 选中该标的 (不跳页): 买·行动自动打开买点分析抽屉, 卖点行展开右栏解释.
  *  [刷新] 调 POST /api/signals/today/refresh (按当前时间自动选 as_of).
  *  买·受阻默认折叠 (<details>); 数据不可用显式列出, 不静默.
+ *  获取失败显式红字提示 (不误显「今日尚未扫描」); 徽标旁给出上次扫描时刻.
  */
 import { useState, type ReactNode } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -18,7 +19,7 @@ const TIER_LABEL: Record<string, string> = {
 };
 
 const TIER_COLOR: Record<string, string> = {
-  hard: "var(--danger, #e5484d)",
+  hard: "var(--error, #e5484d)",
   warn: "var(--warn)",
   soft: "var(--text-faint)",
 };
@@ -136,7 +137,7 @@ export default function TodaySignalBanner({
 }) {
   const qc = useQueryClient();
   const [open, setOpen] = useState(false);
-  const { data } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ["signalsToday"],
     queryFn: () => api.signalsToday(),
     refetchInterval: 60_000,
@@ -155,6 +156,13 @@ export default function TodaySignalBanner({
 
   const asOf = data?.as_of ?? null;
   const scanned = asOf != null;
+  const failed = isError && !data;
+  const scanTime = data?.generated_at
+    ? new Date(data.generated_at).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      })
+    : null;
   const buyA = data?.actionable ?? [];
   const buyW = data?.waiting ?? [];
   const buyB = data?.blocked ?? [];
@@ -175,11 +183,23 @@ export default function TodaySignalBanner({
             {asOf === "intraday" ? "盘中临时" : "收盘"}
           </span>
         )}
-        <span className="muted">
-          {scanned
-            ? `买·行动 ${buyA.length} · 买·等待 ${buyW.length} · 卖·硬 ${sellH.length} · 卖·预警 ${sellWarn.length} · 卖·提醒 ${sellS.length}`
-            : "今日尚未扫描"}
-        </span>
+        {scanTime && <span className="muted">上次扫描 {scanTime}</span>}
+        {failed ? (
+          <span
+            style={{ color: "var(--error, #e5484d)", fontSize: "12px" }}
+            role="alert"
+          >
+            信号获取失败
+          </span>
+        ) : (
+          <span className="muted">
+            {scanned
+              ? `买·行动 ${buyA.length} · 买·等待 ${buyW.length} · 卖·硬 ${sellH.length} · 卖·预警 ${sellWarn.length} · 卖·提醒 ${sellS.length}`
+              : scanTime
+                ? `今日尚未扫描 · 上次扫描 ${scanTime}`
+                : "今日尚未扫描"}
+          </span>
+        )}
         <span className="sig-spacer" />
         <button
           className="btn small"
@@ -189,7 +209,11 @@ export default function TodaySignalBanner({
           {refresh.isPending ? "扫描中…" : "刷新"}
         </button>
         {scanned && (
-          <button className="btn small" onClick={() => setOpen((v) => !v)}>
+          <button
+            className="btn small"
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
             {open ? "收起 ▲" : "展开 ▼"}
           </button>
         )}

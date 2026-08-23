@@ -51,7 +51,8 @@ def _result_with_exit_event() -> SimpleNamespace:
         display_name="测试标的",
         events=[SimpleNamespace(
             rule_id="exit_ema20_costbasis", available_date=today,
-            reason_cn="抵扣价退出触发", evidence={"ema20": 10.5, "close_lag20": 10.8, "close": 10.1},
+            reason_cn="抵扣价退出触发",
+            evidence={"ema20": 10.5, "close_lag20": 10.8, "close": 10.1},
         )],
         structures=[],
         history=[],

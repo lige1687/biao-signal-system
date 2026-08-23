@@ -4,7 +4,6 @@ GET 只读库（买点 daily_opportunity_scan + 卖点 signal_alerts 合并）�
 POST refresh 现场重扫并落两表。不推通知（用户决策：只面板+红点）。
 """
 from contextlib import closing
-from datetime import UTC, datetime
 
 from fastapi import APIRouter, HTTPException, Request
 

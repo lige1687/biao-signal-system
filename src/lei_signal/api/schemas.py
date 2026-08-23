@@ -862,6 +862,7 @@ class PlansSummaryDTO(BaseModel):
 
     today_opportunities = 今日雷达中 actionable + waiting 的标的数
     （blocked 不计，环境阻断按规则不开新仓）。当日未扫描时为 0。
+    today_signal_total = 今日机会数 + 卖点数（hard+warn）合计，红点用。
     """
 
     open_actions: int
@@ -1014,5 +1015,5 @@ class WatchPromoteRequest(BaseModel):
 class WatchPromoteResponse(BaseModel):
     """POST /api/watch/{watch_id}/promote 响应体."""
 
-    plan: "PlanDTO"
-    watch: "WatchSubscriptionDTO"
+    plan: PlanDTO
+    watch: WatchSubscriptionDTO

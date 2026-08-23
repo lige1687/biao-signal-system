@@ -18,8 +18,6 @@ SIDE_SELL = "sell"
 SIDE_UNAVAILABLE = "unavailable"
 SIDE_META = "meta"
 
-_TIER_RANK = {"hard": 0, "warn": 1, "soft": 2}
-
 
 @dataclass(frozen=True, slots=True)
 class SignalAlertRow:
@@ -124,7 +122,10 @@ def list_signal_alerts(
 def get_scan_as_of(conn: sqlite3.Connection, scan_date: str) -> str | None:
     """当日扫描口径（intraday | close）；未扫描返回 None。"""
     row = conn.execute(
-        "SELECT title FROM signal_alerts WHERE scan_date = ? AND side = ? AND kind = 'as_of' LIMIT 1",
+        """
+        SELECT title FROM signal_alerts
+        WHERE scan_date = ? AND side = ? AND kind = 'as_of' LIMIT 1
+        """,
         (scan_date, SIDE_META),
     ).fetchone()
     return row["title"] if row else None
@@ -139,7 +140,10 @@ def count_sell_alerts(
     """当日卖点半数（红点用，默认只计 hard+warn，soft 不打扰）。"""
     placeholders = ",".join("?" for _ in tiers)
     row = conn.execute(
-        f"SELECT COUNT(*) FROM signal_alerts WHERE scan_date = ? AND side = ? AND tier IN ({placeholders})",  # noqa: S608
+        f"""
+        SELECT COUNT(*) FROM signal_alerts
+        WHERE scan_date = ? AND side = ? AND tier IN ({placeholders})
+        """,  # noqa: S608
         (scan_date, SIDE_SELL, *tiers),
     ).fetchone()
     return int(row[0]) if row else 0

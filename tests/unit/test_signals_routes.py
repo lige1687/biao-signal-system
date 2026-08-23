@@ -61,7 +61,11 @@ def test_today_signals_merges_buy_and_sell(tmp_path) -> None:
     body = resp.json()
     assert body["as_of"] == "close"
     assert len(body["actionable"]) == 1 and len(body["waiting"]) == 1
-    assert len(body["sell_hard"]) == 1 and len(body["sell_warn"]) == 1 and len(body["sell_soft"]) == 1
+    assert (
+        len(body["sell_hard"]) == 1
+        and len(body["sell_warn"]) == 1
+        and len(body["sell_soft"]) == 1
+    )
     assert body["sell_hard"][0]["provenance"] == "research_proxy"
     assert len(body["unavailable"]) == 1 and "DATA_UNAVAILABLE" in body["unavailable"][0]["error"]
 

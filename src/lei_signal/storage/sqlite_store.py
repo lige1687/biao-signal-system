@@ -609,7 +609,9 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
             display_name   TEXT NOT NULL DEFAULT '',
             side           TEXT NOT NULL,        -- sell | unavailable | meta
             tier           TEXT NOT NULL,        -- hard | warn | soft | meta
-            kind           TEXT NOT NULL,        -- structure_invalidated | exit_proxy | top_structure_confirmed | key_wave_black | color_black | data_unavailable | as_of
+            kind           TEXT NOT NULL,        -- structure_invalidated | exit_proxy |
+                                                  -- top_structure_confirmed | key_wave_black |
+                                                  -- color_black | data_unavailable | as_of
             kind_cn        TEXT NOT NULL DEFAULT '',
             title          TEXT NOT NULL DEFAULT '',
             reason_cn      TEXT NOT NULL DEFAULT '',
