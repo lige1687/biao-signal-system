@@ -30,6 +30,7 @@ import type {
   PromoteWatchResponse,
   ResolveResult,
   ScanResponse,
+  SignalsToday,
   SubscribeWatchRequest,
   SymbolDetail,
   TodayOpportunityResponse,
@@ -250,6 +251,9 @@ export const api = {
   todayOpportunities: () => request<TodayOpportunityResponse>(`/opportunities/today`),
   refreshTodayOpportunities: () =>
     request<TodayOpportunityResponse>(`/opportunities/today/refresh`, { method: "POST" }),
+  signalsToday: () => request<SignalsToday>(`/signals/today`),
+  refreshSignals: (asOf: "intraday" | "close" = "close") =>
+    request<SignalsToday>(`/signals/today/refresh?as_of=${asOf}`, { method: "POST" }),
   buyPointChat: (symbol: string, message: string) =>
     request<BuyPointChatReply>(
       `/symbols/${encodeURIComponent(symbol)}/buy-point-chat`,

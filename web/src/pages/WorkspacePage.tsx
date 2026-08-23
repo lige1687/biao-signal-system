@@ -27,6 +27,7 @@ import KlineChart, {
 } from "../components/KlineChart";
 import ResizeHandle from "../components/ResizeHandle";
 import TodayOverviewPanel from "../components/TodayOverviewPanel";
+import TodaySignalBanner from "../components/TodaySignalBanner";
 import TradeOpportunityPanel from "../components/TradeOpportunityPanel";
 import { prefillFromOpportunity } from "../components/CreatePlanDialog";
 import PlanCreateFlow from "../components/PlanCreateFlow";
@@ -141,6 +142,18 @@ export default function WorkspacePage() {
       setSelection(null); // 换标的时清空右栏，避免张冠李戴
     },
     [setParams],
+  );
+
+  const handleSignalPick = useCallback(
+    (symbol: string, side: "buy" | "sell") => {
+      selectSymbol(symbol);
+      if (side === "buy") {
+        setShowBuyPoint(true); // 买点行直接打开买点分析抽屉
+      } else {
+        setExpCollapsed(false); // 卖点行展开右栏解释
+      }
+    },
+    [selectSymbol],
   );
 
   const { data, isLoading, error, isFetching } = useQuery({
@@ -393,6 +406,8 @@ export default function WorkspacePage() {
             </div>
           )}
           {isLoading && <div className="loading">正在分析 {selected} …</div>}
+
+          <TodaySignalBanner onPick={handleSignalPick} />
 
           {data && (
             <>

@@ -2580,3 +2580,55 @@ a { color: var(--accent); text-decoration: none; }
 .flow-val.down { color: var(--down); }
 .flow-val.flat { color: var(--text-faint); }
 .drawer-actions { margin-top: 12px; display: flex; gap: 8px; }
+
+/* ---- 今日自选信号横幅 (TodaySignalBanner) ---- */
+.sig-banner {
+  border: 1px solid rgba(128, 128, 128, 0.35);
+  border-radius: 8px;
+  padding: 6px 10px;
+  margin-bottom: 8px;
+}
+.sig-banner-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.sig-spacer { flex: 1; }
+.sig-asof {
+  font-size: 12px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--lei-green);
+  color: #fff;
+}
+.sig-asof.intraday { background: var(--warn); }
+.sig-groups { margin-top: 8px; display: grid; gap: 8px; }
+.sig-group-head { font-weight: 600; margin: 4px 0; }
+.sig-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.sig-row { border-top: 1px dashed rgba(128, 128, 128, 0.35); padding: 4px 0; }
+.sig-row-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.sig-symbol {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.sig-tier { color: #fff; font-size: 12px; padding: 1px 6px; border-radius: 4px; }
+.sig-kind { color: var(--text-faint); font-size: 12px; }
+.sig-proxy {
+  font-size: 12px;
+  border: 1px solid var(--warn);
+  color: var(--warn);
+  border-radius: 4px;
+  padding: 0 4px;
+}
+.sig-new { font-size: 12px; color: var(--danger, #e5484d); }
+.sig-cont { font-size: 12px; color: var(--text-faint); }
+.sig-title { font-size: 13px; margin-top: 2px; }
+.sig-reason { font-size: 12px; color: var(--text-faint); margin-top: 2px; }
+.sig-prices { font-size: 12px; margin-top: 2px; display: flex; gap: 8px; }
+.sig-blocked summary { cursor: pointer; }
+.sig-empty { padding: 4px 0; }

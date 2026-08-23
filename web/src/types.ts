@@ -782,6 +782,7 @@ export interface PlansSummary {
   open_actions: number;
   active_plans: number;
   today_opportunities: number;
+  today_signal_total: number;
 }
 
 // ---- 买点审阅 / 扫描 ----
@@ -974,6 +975,39 @@ export interface TodayOpportunityResponse {
   actionable: ScanItem[];
   waiting: ScanItem[];
   blocked: ScanItem[];
+}
+
+export interface SignalAlert {
+  symbol: string;
+  display_name: string;
+  tier: "hard" | "warn" | "soft" | string;
+  kind: string;
+  kind_cn: string;
+  title: string;
+  reason_cn: string;
+  is_new: boolean;
+  key_prices: Record<string, number>;
+  provenance: string;
+  available_date: string | null;
+}
+
+export interface UnavailableItem {
+  symbol: string;
+  error: string | null;
+}
+
+export interface SignalsToday {
+  scan_date: string;
+  as_of: string | null;
+  generated_at: string;
+  scanned: number;
+  actionable: ScanItem[];
+  waiting: ScanItem[];
+  blocked: ScanItem[];
+  sell_hard: SignalAlert[];
+  sell_warn: SignalAlert[];
+  sell_soft: SignalAlert[];
+  unavailable: UnavailableItem[];
 }
 
 export interface BuyPointChatReply {

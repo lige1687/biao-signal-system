@@ -4,7 +4,7 @@ import { api } from "../api/client";
 
 /**
  * 极简全局顶栏。监督待办带红点（全库 open 待办数）；
- * 看盘入口带红点（今日机会数 = actionable + waiting）。
+ * 看盘入口带红点（买卖信号合计 = 买点机会 + 卖点硬/预警）。
  * 计数轮询 60s：待办由日终监督周期产生，不需要更快。
  */
 export default function TopNav() {
@@ -15,7 +15,7 @@ export default function TopNav() {
     staleTime: 30_000,
   });
   const open = data?.open_actions ?? 0;
-  const todayOpps = data?.today_opportunities ?? 0;
+  const todayOpps = data?.today_signal_total ?? data?.today_opportunities ?? 0;
 
   return (
     <nav className="top-nav">
