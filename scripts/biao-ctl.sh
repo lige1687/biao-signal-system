@@ -31,7 +31,7 @@ S=com.lei.sector.trend
 case "${1:-restart}" in
   status)
     echo "=== launchd agents（loaded 才说明在管）==="
-    launchctl list 2>/dev/null | grep -E "com\.lei\.(backend|frontend|ashare|sector)" || echo "  (无 com.lei.* 被 load —— 需先跑 install)"
+    launchctl list 2>/dev/null | grep -E "com\.lei\.(backend|frontend|ashare|sector|signal)" || echo "  (无 com.lei.* 被 load —— 需先跑 install)"
     echo
     echo "=== 端口探测（HTTP 200 = 活着）==="
     for p in 8000 5173; do
