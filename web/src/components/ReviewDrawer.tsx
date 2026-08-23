@@ -145,7 +145,19 @@ export default function ReviewDrawer({
                         {detScenarios.map((s, i) => (
                           <li key={i}>
                             {moduleCn(s.module)} · {directionCn(s.direction)} · {s.state}
-                            {s.rule_id && <span className="muted"> [{s.rule_id}]</span>}
+                            {s.rule_id && (
+                              <ProvenanceBadge
+                                items={[
+                                  {
+                                    label: `${moduleCn(s.module)} ${directionCn(s.direction)}`,
+                                    rule_id: s.rule_id,
+                                    evidence_cn: "",
+                                    research_proxy: false,
+                                    principle_source: null,
+                                  },
+                                ]}
+                              />
+                            )}
                           </li>
                         ))}
                       </ul>

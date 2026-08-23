@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { matchPath, useLocation } from "react-router-dom";
 import { api } from "../api/client";
 import AgentMarkdown from "./AgentMarkdown";
+import ProvenanceBadge from "./ProvenanceBadge";
 import { useAgentConsole } from "../App";
 import type { CreatePlanPayload, TraceItem } from "../types";
 
@@ -115,7 +116,12 @@ export default function AgentConsole() {
               <div className="who">{turn.who === "you" ? "你" : "agent"}</div>
               {turn.who === "agent" ? (
                 /* 控制台无主图上下文：onBp 置空、notableCount=0，「买点①」chip 渲染为不可点的暗态 */
-                <AgentMarkdown text={turn.text} onBp={() => undefined} notableCount={0} />
+                /* FR-3: plan-draft 围栏块从正文剔除（卡片已单独渲染原始 JSON），防裸 JSON 进对话流 */
+                <AgentMarkdown
+                  text={turn.text.replace(/```plan-draft[\s\S]*?```/g, "").trim()}
+                  onBp={() => undefined}
+                  notableCount={0}
+                />
               ) : (
                 <div className="msg">{turn.text}</div>
               )}
@@ -126,7 +132,7 @@ export default function AgentConsole() {
                 ) : null;
               })()}
               {turn.who === "agent" && turn.trace && turn.trace.length > 0 && (
-                <ProvLite trace={turn.trace} />
+                <ProvenanceBadge items={turn.trace} />
               )}
               {turn.who === "agent" && turn.grounded === false && (
                 <div className="grounded-tag warn">判定层数据直出（LLM 不可用或未过校验）</div>
@@ -161,26 +167,6 @@ export default function AgentConsole() {
         </div>
       </aside>
     </>
-  );
-}
-
-/** 回答尾部的溯源角标（轻量版，不引 ProvenanceBadge 的完整映射）。 */
-function ProvLite({ trace }: { trace: TraceItem[] }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <span className="prov-badge-wrap">
-      <button className="prov-badge" onClick={() => setOpen((v) => !v)}>ⓘ</button>
-      {open && (
-        <div className="prov-popover">
-          {trace.map((t, i) => (
-            <div key={i} className="prov-item">
-              <div>{t.label}</div>
-              {t.rule_id && <div className="muted">rule_id: {t.rule_id}</div>}
-            </div>
-          ))}
-        </div>
-      )}
-    </span>
   );
 }
 
