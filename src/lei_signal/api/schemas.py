@@ -774,6 +774,45 @@ class ScanResponse(BaseModel):
     items: list[ScanItemDTO] = []
 
 
+class SignalAlertDTO(BaseModel):
+    """统一信号面板的一行卖点提醒。"""
+
+    symbol: str
+    display_name: str = ""
+    tier: str  # hard | warn | soft
+    kind: str
+    kind_cn: str = ""
+    title: str = ""
+    reason_cn: str = ""
+    is_new: bool = False
+    key_prices: dict[str, float] = {}
+    provenance: str = "system"
+    available_date: str | None = None
+
+
+class UnavailableItemDTO(BaseModel):
+    """数据不可用清单的一项（显式 DATA_UNAVAILABLE，不静默）。"""
+
+    symbol: str
+    error: str | None = None
+
+
+class SignalsTodayResponse(BaseModel):
+    """今日自选信号（买点 + 卖点合并响应，看盘主页横幅数据源）。"""
+
+    scan_date: str
+    as_of: str | None = None
+    generated_at: str = ""
+    scanned: int = 0
+    actionable: list[ScanItemDTO] = []
+    waiting: list[ScanItemDTO] = []
+    blocked: list[ScanItemDTO] = []
+    sell_hard: list[SignalAlertDTO] = []
+    sell_warn: list[SignalAlertDTO] = []
+    sell_soft: list[SignalAlertDTO] = []
+    unavailable: list[UnavailableItemDTO] = []
+
+
 class TodayOpportunityResponse(BaseModel):
     """今日机会雷达：按 verdict 分组的当日扫描结果（dashboard 面板 + 红点数据源）。
 
@@ -828,6 +867,7 @@ class PlansSummaryDTO(BaseModel):
     open_actions: int
     active_plans: int
     today_opportunities: int = 0
+    today_signal_total: int = 0
 
 
 class ConformanceReportDTO(BaseModel):
