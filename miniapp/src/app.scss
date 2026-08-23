@@ -1,0 +1,146 @@
+page,
+view,
+text,
+scroll-view,
+button {
+  box-sizing: border-box;
+}
+
+page {
+  background: #0f1115;
+  color: #e6e8eb;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue',
+    Helvetica, sans-serif;
+  font-size: 26px;
+  line-height: 1.5;
+}
+
+// 通用容器
+.page {
+  min-height: 100vh;
+  padding: 20px 24px 40px;
+}
+
+// 通用卡片
+.card {
+  background: #16181d;
+  border: 1px solid #23262d;
+  border-radius: 16px;
+  padding: 22px 22px;
+  margin-bottom: 18px;
+}
+
+// 文本辅助
+.muted {
+  color: #8a8f98;
+}
+.dim {
+  color: #aeb4bd;
+}
+.tiny {
+  font-size: 22px;
+}
+.right {
+  text-align: right;
+}
+.row {
+  display: flex;
+  align-items: center;
+}
+.between {
+  justify-content: space-between;
+}
+.wrap {
+  flex-wrap: wrap;
+}
+
+// 涨跌色（A股惯例：红涨绿跌）
+.up {
+  color: #e33d47;
+}
+.down {
+  color: #0b9b64;
+}
+.flat {
+  color: #c9b24a;
+}
+
+// 三色（LEI 绿/灰/黑）
+.c-green {
+  color: #0b9b64;
+}
+.c-gray {
+  color: #8c96a8;
+}
+.c-black {
+  color: #1f2937;
+  background: #d7dbe0;
+  border-radius: 6px;
+  padding: 0 8px;
+}
+
+// 通用徽标
+.badge {
+  display: inline-block;
+  font-size: 20px;
+  line-height: 1;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #2c3038;
+  color: #c9cdd4;
+  background: #1d2026;
+  margin: 4px 6px 4px 0;
+}
+.badge-red {
+  border-color: #5a2530;
+  color: #ff8a93;
+  background: #2a1418;
+}
+.badge-green {
+  border-color: #1f5a40;
+  color: #4fd6a0;
+  background: #11241c;
+}
+.badge-gray {
+  border-color: #3a404b;
+  color: #aeb6c2;
+  background: #20242b;
+}
+.badge-warn {
+  border-color: #6b5a1f;
+  color: #f0cf6b;
+  background: #2a2410;
+}
+.badge-rp {
+  border-color: #2f4a6b;
+  color: #8fc0ff;
+  background: #122033;
+}
+.badge-intraday {
+  border-color: #6b4a1f;
+  color: #ffc06b;
+  background: #2a1f10;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #f2f4f7;
+  margin: 28px 0 14px;
+  padding-left: 14px;
+  border-left: 6px solid #e33d47;
+}
+
+.btn {
+  background: #e33d47;
+  color: #fff;
+  border-radius: 12px;
+  font-size: 26px;
+  padding: 14px 0;
+  text-align: center;
+}
+.btn-ghost {
+  background: #1d2026;
+  color: #c9cdd4;
+  border: 1px solid #2c3038;
+}

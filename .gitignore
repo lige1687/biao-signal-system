@@ -19,4 +19,16 @@ data_cache/
 
 # 运行日志与前端增量构建缓存
 logs/
+data/
 web/tsconfig.tsbuildinfo
+
+# 小程序：依赖与构建产物不入库
+miniapp/node_modules/
+miniapp/dist/
+
+# 预计算运行日志
+scripts/*.log
+scripts/*.err
+
+# 微信开发者工具本机私有配置
+project.private.config.json
