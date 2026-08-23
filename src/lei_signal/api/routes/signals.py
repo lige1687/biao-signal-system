@@ -154,7 +154,7 @@ def day_signals(request: Request, day: str) -> SignalsTodayResponse:
 def replay_day_signals(request: Request, day: str) -> SignalsTodayResponse:
     """回放补算：当前自选 × 行情截至该日重算（无前视），整体重写该日两表。
 
-    全自选约 30-60 秒，同步执行；幂等，重复调用整体重写。
+    全自选首次约 2-4 分钟（行情落缓存后后续更快），同步执行；幂等，重复调用整体重写。
     """
     from lei_signal.api.signal_replay import run_signal_replay  # noqa: PLC0415
 

@@ -153,11 +153,12 @@ export default function TodaySignalBanner({
       qc.invalidateQueries({ queryKey: ["signalsDay", replayDate] });
     },
   });
+  // request() 把后端 422 detail（含"最近的过去交易日是 YYYY-MM-DD"建议）放进 Error.message
   const replayError: string | null =
     isReplay && dayQuery.isError
-      ? "该日期不可用（非交易日或格式错误）"
+      ? (dayQuery.error as Error | null)?.message || "该日期不可用（非交易日或格式错误）"
       : isReplay && replay.isError
-        ? "回放计算失败，请稍后重试"
+        ? (replay.error as Error | null)?.message || "回放计算失败，请稍后重试"
         : null;
   const { data, isError } = useQuery({
     queryKey: ["signalsToday"],
