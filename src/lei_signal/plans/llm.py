@@ -447,8 +447,9 @@ def chat_ark(
 ) -> str | None:
     """接地问答：把监督上下文 + 用户问题一起喂给 ark，返回回复。失败返回 None。
 
-    与 call_ark 同一套 SYSTEM_PROMPT（接地铁律）与底层投递；区别仅在于 user 内容
-    追加了用户问题。回复仍须由调用方过 ``verify_grounding``（禁用词 + rule_id 白名单），
+    与 call_ark 同一套 SYSTEM_PROMPT（接地铁律）；投递走 ``_request_completion``
+    （与 ``_post_user_content`` 同构的双协议底层）。回复仍须由调用方过
+    ``verify_grounding``（禁用词 + rule_id 白名单），
     不过则降级模板--判定权始终在 Python，LLM 只表达。
     """
     content = (
@@ -457,7 +458,11 @@ def chat_ark(
         + json.dumps(prompt_payload, ensure_ascii=False, indent=2)
         + f"\n\n用户问题：{user_message}"
     )
-    return _post_user_content(content, config)
+    messages: list[dict] = [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": content},
+    ]
+    return _request_completion(config, messages)
 
 
 def chat_buy_point(
@@ -476,6 +481,100 @@ def chat_buy_point(
     )
     return _post_user_content(content, config, system_prompt=BUY_POINT_SYSTEM_PROMPT)
 
+
+def _request_completion(config: ArkConfig, messages: list[dict]) -> str | None:
+    """完整 messages 列表的统一请求：双协议、退避重试、text 抽取。
+
+    与 ``_post_user_content`` 同构（chat_ark 历史上走的就是那条路径），区别仅在
+    入参是完整 messages 列表而非单条 user 内容，供多轮对话复用：
+
+    - OpenAI 风格：messages 原样透传（含 system 角色）。
+    - Anthropic 风格：/v1/messages 不收 messages 内的 system 角色，把首条
+      system 消息提为顶层 ``system`` 字段，其余原样投递。
+
+    chat_ark 与 chat_discussion 共用此底层。任何失败返回 None（调用方降级）。
+    """
+    if config.style == STYLE_ANTHROPIC:
+        url = f"{config.base_url}/v1/messages"
+        headers = {
+            "x-api-key": config.api_key,
+            "anthropic-version": "2023-06-01",
+            "Content-Type": "application/json",
+        }
+        conversation = list(messages)
+        system_prompt: str | None = None
+        if conversation and conversation[0].get("role") == "system":
+            system_prompt = str(conversation[0].get("content", ""))
+            conversation = conversation[1:]
+        body: dict[str, Any] = {
+            "model": config.model,
+            "max_tokens": config.max_tokens,
+        }
+        if system_prompt is not None:
+            body["system"] = system_prompt
+        body["messages"] = conversation
+        extract = _extract_anthropic
+    else:
+        url = f"{config.base_url}/chat/completions"
+        headers = {
+            "Authorization": f"Bearer {config.api_key}",
+            "Content-Type": "application/json",
+        }
+        body = {
+            "model": config.model,
+            "messages": messages,
+            "temperature": 0.2,
+        }
+        extract = _extract_openai
+
+    try:
+        for attempt in range(config.retry_on_throttle + 1):
+            resp = requests.post(url, headers=headers, json=body, timeout=config.timeout)
+            if resp.status_code == 200:
+                text = extract(resp.json())
+                if text is None:
+                    # 200 但取不到 text：推理模型 thinking 占满 max_tokens、未产出
+                    # text block 是典型原因。此前静默 None 会误判为「LLM 不可用」。
+                    logger.warning(
+                        "ark 返回 200 但无 text block 可抽取（疑似 thinking 占满 "
+                        "max_tokens=%s，model=%s）；降级模板。",
+                        config.max_tokens,
+                        config.model,
+                    )
+                return text
+            # 429 限频 / 5xx 瞬时故障：退避重试；其他状态码直接放弃
+            throttled = resp.status_code == 429 or resp.status_code >= 500
+            if throttled and attempt < config.retry_on_throttle:
+                logger.info(
+                    "ark HTTP %s，第 %d/%d 次退避重试（model=%s）",
+                    resp.status_code,
+                    attempt + 1,
+                    config.retry_on_throttle,
+                    config.model,
+                )
+                time.sleep(config.retry_backoff_seconds * (2**attempt))
+                continue
+            logger.warning(
+                "ark HTTP %s，放弃（model=%s）。响应摘要：%s",
+                resp.status_code,
+                config.model,
+                getattr(resp, "text", "")[:200],
+            )
+            return None
+        logger.warning(
+            "ark 退避重试 %d 次仍失败（model=%s）",
+            config.retry_on_throttle + 1,
+            config.model,
+        )
+        return None
+    except (requests.RequestException, ValueError, KeyError, IndexError) as exc:
+        logger.warning(
+            "ark 调用异常：%s: %s（model=%s）",
+            type(exc).__name__,
+            exc,
+            config.model,
+        )
+        return None
 
 
 def make_ark_renderer(
@@ -507,6 +606,62 @@ def make_ark_renderer(
     return _render
 
 
+#: 讨论场景系统提示：技术全貌在手、讨论式解释、数值纪律不变。
+#: 溯源标注不由此 prompt 产出（由后端 trace 元数据生成，前端角标渲染）。
+DISCUSSION_SYSTEM_PROMPT = """你是 LEI 交易系统的研究讨论伙伴（表达层）。
+
+用户会就当前标的技术面与你讨论（比如「这个买点为什么是买点」）。
+你手里有一份确定性 Python 判定层算好的技术全貌：五维度判定、活跃结构、
+双均线、量能、筹码分布代理、MACD 事件、近期事件、买点审阅、活跃计划。
+
+职责：依据这份材料**讨论式地解释因果**——为什么这里构成/不构成系统定义的
+买点、各维度之间支持还是冲突、到什么情况才算触发。可以用自己的话讲，
+讲策略语言（道路/路牌/触发/失效），不发明体系外概念。
+
+铁律（违反即输出被丢弃）：
+1. 不得自行判断买点/信号。买点结论只能来自 buy_point_review 的 candidates；
+   讨论其他维度时结论也必须能落到给定的判定字段上。
+2. 禁止出现这些词：买入、卖出、建议买、该买、加仓、减仓、抄底。
+   用「参考」「条件成立」「系统定义的买点」「阻断原因」等中性表述。
+3. 数值只能照抄给定材料（价格、百分比、指标值）。不得计算新价位、
+   不得预测价格、不得推算日期。
+4. 筹码分布必须称「筹码分布代理」，不得声称真实持仓成本。
+5. 不输出总分、评级；不下买卖指令；不替用户决定是否落计划。
+6. 多轮对话：优先接着上文讲，用户问过的不重复展开；用户追问新维度时
+   从材料中取该维度细讲。
+7. 状态型条件（如多头排列未成立）不贴数字；价位型条件照抄 price。
+8. 若用户想落计划：说明五项交易假设需要他逐项确认，逐项给出基于策略的
+   建议值（只能引用材料内数值），收集完成后输出 ```plan-draft 代码块
+   （JSON，字段：module/direction/entry_rule_id/entry_trigger_cn/
+   invalidation_price/valid_until/thesis_cn/invalidation_criteria_cn/
+   drawdown_playbook_cn/take_profit_plan_cn/stop_plan_cn）供前端渲染
+   确认卡。落库必须等用户点确认，你不得代替确认。
+"""
+
+
+def chat_discussion(
+    payload: dict, history: list[dict], message: str, config: ArkConfig
+) -> str | None:
+    """讨论式多轮对话。history 最近 10 轮（升序）；失败返回 None。"""
+    trimmed = history[-20:]  # 10 轮 = 20 条消息
+    messages: list[dict] = [
+        {"role": "system", "content": DISCUSSION_SYSTEM_PROMPT},
+        {
+            "role": "user",
+            "content": (
+                f"当前标的技术材料：\n{json.dumps(payload, ensure_ascii=False, default=str)}"
+            ),
+        },
+        *trimmed,
+        {"role": "user", "content": message},
+    ]
+    return _llm_call(config, messages)
+
+
+#: 统一 LLM 请求入口别名：路由层与测试 monkeypatch 此名字即可不触网替换。
+_llm_call = _request_completion
+
+
 __all__ = [
     "DEFAULT_BASE_URL",
     "ENV_API_KEY",
@@ -516,12 +671,14 @@ __all__ = [
     "STYLE_ANTHROPIC",
     "STYLE_OPENAI",
     "BUY_POINT_SYSTEM_PROMPT",
+    "DISCUSSION_SYSTEM_PROMPT",
     "SYSTEM_PROMPT",
     "ArkConfig",
     "build_context_payload",
     "call_ark",
     "chat_ark",
     "chat_buy_point",
+    "chat_discussion",
     "load_ark_config",
     "make_ark_renderer",
 ]
