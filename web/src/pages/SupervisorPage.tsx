@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { api } from "../api/client";
 import AgentDrawer from "../components/AgentDrawer";
 import BuyPointDrawer from "../components/BuyPointDrawer";
+import ProvenanceBadge from "../components/ProvenanceBadge";
 import { directionCn, moduleCn } from "../modules";
 import type { ActionItem, Plan, PlanAlert } from "../types";
 
@@ -197,12 +198,20 @@ function PlanCard({ plan, onAsk }: { plan: Plan; onAsk: () => void }) {
           {ordered.map((a) => (
             <div key={a.code} style={{ marginBottom: 4 }}>
               <span>{SEVERITY_CN[a.severity] ?? a.severity}</span>{" "}
-              <span>{a.next_step_cn || a.code}</span>{" "}
-              <span className="muted">
-                [rule_id:{a.rule_id ?? "-"}]
-                {a.principle_source ? ` ${a.principle_source} | ` : " "}
-                判定方式为研究代理
-              </span>
+              <span>{a.next_step_cn || a.code}</span>
+              <ProvenanceBadge
+                items={[
+                  {
+                    label: a.next_step_cn || a.code,
+                    rule_id: a.rule_id ?? null,
+                    evidence_cn: Object.entries(a.evidence ?? {})
+                      .map(([k, v]) => `${k}=${v}`)
+                      .join("；"),
+                    research_proxy: true,
+                    principle_source: a.principle_source ?? null,
+                  },
+                ]}
+              />
             </div>
           ))}
         </div>

@@ -1,5 +1,9 @@
 import type {
   ActionItem,
+  AgentChatReply,
+  AgentChatRequest,
+  AgentMessageDTO,
+  AgentSessionDTO,
   AShareBreadthResponse,
   BreadthHistoryResponse,
   BuyPointChatReply,
@@ -262,6 +266,23 @@ export const api = {
       `/symbols/${encodeURIComponent(symbol)}/buy-point-chat`,
       { method: "POST", body: JSON.stringify({ message }) },
     ),
+  // ---- agent 统一会话 ----
+  agentChat: (body: AgentChatRequest) =>
+    request<AgentChatReply>(`/agent/chat`, {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  agentSessions: (symbol?: string) =>
+    request<AgentSessionDTO[]>(
+      `/agent/sessions${symbol ? `?symbol=${encodeURIComponent(symbol)}` : ""}`,
+    ),
+  agentSessionMessages: (sessionId: string) =>
+    request<AgentMessageDTO[]>(`/agent/sessions/${encodeURIComponent(sessionId)}/messages`),
+  agentCreateSession: (body: { symbol: string | null; title_cn: string }) =>
+    request<AgentSessionDTO>(`/agent/sessions`, {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
   // ---- 提醒订阅 (Step 2) ----
   subscribeWatch: (body: SubscribeWatchRequest) =>
     request<WatchSubscription>("/watch/subscribe", {

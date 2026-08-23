@@ -2645,3 +2645,20 @@ a { color: var(--accent); text-decoration: none; }
   font-size: 12px;
 }
 .sig-replay-note { padding: 4px 0; font-size: 12px; }
+
+/* ---- 溯源角标（ProvenanceBadge）：小、灰、不抢注意力 ---- */
+.prov-badge-wrap { position: relative; display: inline-flex; margin-left: 4px; }
+.prov-badge {
+  border: none; background: transparent; color: var(--text-faint);
+  font-size: 11px; cursor: pointer; padding: 0 2px; line-height: 1;
+}
+.prov-popover {
+  position: absolute; top: 18px; left: 0; z-index: 60;
+  background: var(--bg-panel); border: 1px solid var(--border);
+  border-radius: 6px; padding: 8px 10px; max-width: 340px;
+  font-size: 11px; line-height: 1.5;
+  box-shadow: var(--shadow);
+  text-align: left;
+}
+.prov-popover .muted { color: var(--text-faint); }
+.prov-item + .prov-item { margin-top: 6px; border-top: 1px dashed var(--border); padding-top: 6px; }

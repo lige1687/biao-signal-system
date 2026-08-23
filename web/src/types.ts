@@ -1220,3 +1220,42 @@ export interface SectorMembersResponse {
     in_kline_cache: boolean;
   }[];
 }
+
+// ---- agent 统一会话（spec 2026-08-23） ----
+
+export interface TraceItem {
+  label: string;
+  rule_id: string | null;
+  evidence_cn: string;
+  research_proxy: boolean;
+  principle_source: string | null;
+}
+
+export interface AgentChatRequest {
+  session_id: string | null;
+  context_kind: "symbol" | "global";
+  symbol: string | null;
+  message: string;
+}
+
+export interface AgentChatReply {
+  session_id: string;
+  reply: string;
+  grounded: boolean;
+  trace: TraceItem[];
+}
+
+export interface AgentSessionDTO {
+  session_id: string;
+  symbol: string | null;
+  title_cn: string;
+  last_active_at: string;
+  last_message_cn: string;
+}
+
+export interface AgentMessageDTO {
+  role: "user" | "assistant";
+  content: string;
+  grounded: boolean;
+  created_at: string;
+}
