@@ -111,3 +111,15 @@
 - 推送通知（macOS / 飞书）——如果以后想要，另起需求，复用 `notify/` 基础设施。
 - state 型 watch 订阅（`watch_subscriptions.py` 里的 TODO）——与本设计无关，不顺手实现。
 - 盘中高频轮询（<1 小时）——先用三个时刻跑稳，按需再加密。
+
+## 验收记录（2026-08-23）
+
+**代码门禁：** 全量 1056 passed / 1 skipped（新增 26 个单测）；ruff 对本功能全部新文件 "All checks passed!"；`tsc --noEmit` + `vite build` 零错误；Streamlit 目录零改动。
+
+**调度：** `com.lei.signal.scan` 已通过 `install_app_autostart.sh` 装载（交易日 11:35 / 14:45 / 15:05）；`biao-ctl status` 与安装脚本 echo 清单均含新 agent。
+
+**真实数据：** 全自选 11 个标的（9 指数/ETF + 板块），在线 `POST /api/signals/today/refresh?as_of=intraday` 成功：买·行动 0 / 买·等待 1 / 买·受阻 7；卖·硬 5（4 结构失效 + 1 退出代理）/ 卖·预警 2（顶部构造确认 + 反向关键性波动）/ 卖·提醒 0；数据不可用 0。退出代理行带「研究代理」徽标，预警行带「不必然反向」限定语。
+
+**浏览器验收：** 看盘主页中栏顶部横幅渲染正常——「盘中临时」徽标、「上次扫描 11:36 AM」、五档计数、展开分组列表、买·受阻 `<details>` 默认折叠、`aria-expanded` 正确；点击卖·硬「证券」行原地切换选中标的（`?symbol=TH881157.SECTOR`，不跳页）；顶栏「看盘」红点 = 8（买 1 + 卖 7，`today_signal_total`）。
+
+**实施过程备注：** 计划中「run_opportunity_scan 内部落库」的假设有误，已在 Task 3 修正为统一扫描自身重写两表（commit dd3fe60）；运维手册两处用户既有未提交改动曾被误带入提交，已退回工作区未提交状态（commit b643508）。遗留 backlog：S3a 可排除同窗口内已失效的顶部构造（当前无实例）；POST refresh 成功路径补测。
