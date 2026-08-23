@@ -149,3 +149,17 @@
 - 不改判定层任何阈值/规则；不做微信/邮件推送；不做语音/图片输入。
 - 不做多设备会话同步（本地 SQLite 单机为准）。
 - 飞书卡不做交互式折叠（平台能力限制，note 小字方案替代）。
+
+---
+
+## 8. 验收记录（2026-08-23，实机）
+
+- 交付：558912f..955577c，17 commits（9 任务 + 6 轮 fix + 终审 2 + nit 1）。
+- 门禁：pytest 1147 passed / 1 skipped（feature 净增 51 测试）；触碰文件 ruff/mypy 干净；web tsc --noEmit exit 0。
+- 终审：merge-ready（final-review.md §8 复核记录；FR-1/2/3 + R-3 + ReviewDrawer 顺手项闭合）。
+- 实机验收（biao restart 后 curl 生产后端，真实 DeepSeek）：
+  - 首问「这个买点为什么是买点」→ 讨论式回答（先纠正前提=环境阻断、再讲结构面为何像买点），grounded=True，正文无 rule_id:/研究代理明文；
+  - 第二轮「那筹码峰呢」→ 直接切筹码代理维度（POC/价值区/当前价，代理口径），多轮上下文生效，grounded=True；
+  - GET messages 4 条按序持久化；GET sessions 列表/标题/摘要正常。
+- 实机发现并修复：生产库写事务 >5s 致 agent_chat 撞 `database is locked` → connect busy_timeout 5s→30s（955577c 前一提交）。
+- 已知后续（backlog 见 .superpowers/sdd/progress.md Feature 3 段）：R-1 混合阿拉伯+中文单位数值绕过（fail-open 裁定）、全局 chips 数据支撑、会话恢复 UI 未接线、孤儿 draft 无管理面（既有缺口）、AgentDrawer 孤儿组件等，均为防御性/外观/重构类。
