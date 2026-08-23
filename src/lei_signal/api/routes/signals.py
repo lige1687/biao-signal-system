@@ -6,6 +6,7 @@ POST refresh 现场重扫并落两表。不推通知（用户决策：只面板+
 from __future__ import annotations
 
 from contextlib import closing
+from datetime import date, timedelta
 
 from fastapi import APIRouter, HTTPException, Request
 
@@ -106,10 +107,8 @@ def refresh_today_signals(request: Request, as_of: str = "close") -> SignalsToda
 
 def _validate_replay_day(raw: str) -> date:
     """校验回放日期：过去 + 交易日；否则 422 并给出建议。"""
-    from datetime import date as date_cls, timedelta
-
     try:
-        day = date_cls.fromisoformat(raw)
+        day = date.fromisoformat(raw)
     except ValueError:
         raise HTTPException(status_code=422, detail="日期格式应为 YYYY-MM-DD") from None
     if day.isoformat() != raw:  # 3.11+ 可解析 20260821 等变体，强制 YYYY-MM-DD
