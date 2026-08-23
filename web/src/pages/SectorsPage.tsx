@@ -1,14 +1,16 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import * as echarts from "echarts";
-import { sectorsApi, fundamentalsApi } from "../api/client";
+import { sectorsApi } from "../api/client";
 import { fmt, fmtYi, pctClass } from "../utils/format";
 import ColorBadge from "../components/ColorBadge";
+import CollapsiblePanel from "../components/CollapsiblePanel";
 import OverlayChart, { type OverlaySeries } from "../components/trend/OverlayChart";
 import type {
   SectorTrendRow,
   SectorHistoryPoint,
   SectorMembersResponse,
+  SectorWatchItem,
 } from "../types";
 
 // 阶段 → 红绿语义 tone（与 macro-chip 一致）：②上升=机会 / ①筑底=中性 / ③派发=谨慎 / ④下降=危险
@@ -43,7 +45,8 @@ type SortKey =
   | "rs_pctile_delta_20"
   | "b50"
   | "rs_chg_60"
-  | "main_net_inflow_yi";
+  | "main_net_inflow_yi"
+  | "flow_20d_main_yi";
 
 const SORTS: { key: SortKey; label: string }[] = [
   { key: "stage", label: "阶段" },
@@ -52,6 +55,7 @@ const SORTS: { key: SortKey; label: string }[] = [
   { key: "b50", label: "b50" },
   { key: "rs_chg_60", label: "RS60%" },
   { key: "main_net_inflow_yi", label: "主力净流入" },
+  { key: "flow_20d_main_yi", label: "20日主力净" },
 ];
 
 function loadStars(): string[] {
@@ -83,7 +87,10 @@ export default function SectorsPage() {
 
   const refreshMutation = useMutation({
     mutationFn: () => sectorsApi.trend(true, "all"),
-    onSuccess: (d) => queryClient.setQueryData(["sectorsTrend"], d),
+    onSuccess: (d) => {
+      queryClient.setQueryData(["sectorsTrend"], d);
+      queryClient.invalidateQueries({ queryKey: ["sectorsWatchlist"] });
+    },
   });
 
   const rows: SectorTrendRow[] = useMemo(() => data?.boards ?? [], [data]);
@@ -149,6 +156,89 @@ export default function SectorsPage() {
           <div className="fund-hint">请先在本机跑 scripts/precompute_sector_trend.py 生成快照。</div>
         </div>
       )}
+
+      <CollapsiblePanel title="📖 本页怎么看" defaultCollapsed={false} storageKey="sectors.help">
+        <div className="sectors-help">
+          <div className="help-section">
+            <h4>1. 今日板块观察（道路层）</h4>
+            <p>
+              按「均线方向是道路」分组回答三问：看哪个板块（分组即答案）、盯什么
+              （每条带「下一观察点」，如价格上穿 SMA60 还差百分之几）、依据
+              （点开板块可看阶段判定依据与三条件清单）。
+            </p>
+          </div>
+          <div className="help-section">
+            <h4>2. 板块轮动 RRG 图</h4>
+            <p>
+              横轴 = 相对强度（RS）百分位，0 最弱、100 最强；纵轴 = RS 近 20 日变化，+ 表示相对动能在改善。
+              右上为强势区、左下为弱势区；板块点从哪来、往哪去，比它在哪里更重要。
+            </p>
+            <div className="rrg-quadrants">
+              <span className="rrg-q lagging">左上·改善</span>
+              <span className="rrg-q leading">右上·领先</span>
+              <span className="rrg-q weakening">左下·滞后</span>
+              <span className="rrg-q weakening-strong">右下·走弱</span>
+            </div>
+            <ul>
+              <li>
+                <strong>颜色</strong>：绿=上升 / 蓝=筑底 / 黄=派发 / 红=下降 / 灰=样本不足（此为 LEI 阶段色，与 A 股红涨绿跌无关）
+              </li>
+              <li>
+                <strong>尾迹</strong>：显示该板块最近 8 个交易日的移动轨迹，帮助判断方向是否持续
+              </li>
+              <li>
+                <strong>分层</strong>：L1 是一级行业，L2 是二级细分；默认「仅 L1」减少噪声，可切换「L1+L2」看全貌
+              </li>
+            </ul>
+          </div>
+          <div className="help-section">
+            <h4>3. 趋势表关键列</h4>
+            <ul>
+              <li>
+                <strong>阶段</strong>：LEI 市场阶段 — 上升=机会 / 筑底=中性 / 派发=谨慎 / 下降=危险
+              </li>
+              <li>
+                <strong>LEI 色</strong>：长趋势颜色 — 绿=向上 / 灰=震荡 / 黑=向下 / 虚线=未知
+              </li>
+              <li>
+                <strong>RS 百分位</strong>：板块相对全 A 等权基准的强弱排名，数值越大相对越强势
+              </li>
+              <li>
+                <strong>RS20 变化</strong>：RS 百分位近 20 日的变化，+ 代表相对强度在改善
+              </li>
+              <li>
+                <strong>RS60%</strong>：板块近 60 个交易日涨跌幅
+              </li>
+              <li>
+                <strong>b50</strong>：成分股中站上 MA50 的比例，反映板块内部宽度与共识
+              </li>
+              <li>
+                <strong>nh60</strong>：60 日新高家数占比，衡量板块内创新高个股的广度
+              </li>
+              <li>
+                <strong>均线状态 / MACD</strong>：均线排列与 MACD 形态，作为阶段判定的辅助验证
+              </li>
+            </ul>
+          </div>
+          <div className="help-section">
+            <h4>4. 常用操作</h4>
+            <ul>
+              <li>点击表格任意行 → 打开趋势抽屉，查看该板块历史走势、宽度与主力资金流</li>
+              <li>点击行尾 ★ → 加入自选；再用「自选」过滤只看关注板块</li>
+              <li>「父子去重」默认开启：只保留产业链最高层，避免父板块被子板块重复刷屏</li>
+              <li>表格支持按阶段、RS 百分位、b50 等排序，快速定位当前强势或弱势方向</li>
+            </ul>
+          </div>
+        </div>
+      </CollapsiblePanel>
+
+      {/* ── 今日板块观察（道路层，策略溯源 trading-spec §2.2）── */}
+      <WatchlistPanel
+        onPick={(code) => {
+          const r = rows.find((b) => b.code === code);
+          if (r) setSelected(r);
+        }}
+      />
 
       {/* ── RRG 轮动象限 ── */}
       <h2 className="fund-section-title">
@@ -230,19 +320,20 @@ export default function SectorsPage() {
         <table className="event-table fund-table">
           <thead>
             <tr>
-              <th>板块(级别)</th>
-              <th className="num">阶段</th>
-              <th className="num">LEI色</th>
-              <th className="num">RS百分位</th>
-              <th className="num">RS20变化</th>
-              <th className="num">RS60%</th>
-              <th className="num">b50</th>
-              <th className="num">nh60</th>
-              <th className="num">均线状态</th>
-              <th className="num">MACD</th>
-              <th className="num">当日涨幅</th>
-              <th className="num">成分数</th>
-              <th className="num">PE</th>
+              <th title="板块名称与级别（L1=一级行业 / L2=二级细分 / L3=三级）">板块(级别)</th>
+              <th className="num" title="LEI 市场阶段：上升=机会 / 筑底=中性 / 派发=谨慎 / 下降=危险">阶段</th>
+              <th className="num" title="长趋势颜色：绿=向上 / 灰=震荡 / 黑=向下 / 虚线=未知">LEI色</th>
+              <th className="num" title="相对全 A 等权基准的强弱百分位，0 最弱、100 最强">RS百分位</th>
+              <th className="num" title="RS 百分位近 20 日变化，+ 表示相对强度在改善">RS20变化</th>
+              <th className="num" title="板块近 60 个交易日涨跌幅">RS60%</th>
+              <th className="num" title="成分股中站上 MA50 的比例，反映板块内部宽度">b50</th>
+              <th className="num" title="60 日新高家数占比，衡量板块内创新高广度">nh60</th>
+              <th className="num" title="均线排列状态（如多头排列 / 空头排列 / 均线纠结）">均线状态</th>
+              <th className="num" title="MACD 形态与背离提示，仅作辅助参考">MACD</th>
+              <th className="num" title="板块当日涨跌幅">当日涨幅</th>
+              <th className="num" title="近 20 日主力（超大+大单）累计净流入，单据规模代理（research_proxy）">20日主力净</th>
+              <th className="num" title="命中本板块规则的成分股数 / 总成分股数">成分数</th>
+              <th className="num" title="市盈率 TTM，负值表示亏损">PE</th>
               <th></th>
             </tr>
           </thead>
@@ -293,6 +384,16 @@ export default function SectorsPage() {
                   )}
                 </td>
                 <td className={`num ${pctClass(b.pct_change)}`}>{fmt(b.pct_change, 2, "%")}</td>
+                <td className={`num ${flowClass(b.flow_20d_main_yi)}`}>
+                  {b.flow_20d_main_yi == null ? (
+                    "-"
+                  ) : (
+                    <span title={b.flow_vs_stage_cn ? `阶段交叉验证：${b.flow_vs_stage_cn}` : undefined}>
+                      {b.flow_20d_main_yi.toFixed(1)}
+                      {b.flow_vs_stage_cn ? `（${b.flow_vs_stage_cn}）` : ""}
+                    </span>
+                  )}
+                </td>
                 <td className="num">
                   {b.hit_count}/{b.member_count}
                 </td>
@@ -312,7 +413,7 @@ export default function SectorsPage() {
             ))}
             {visibleRows.length === 0 && (
               <tr>
-                <td colSpan={14}>无匹配板块（请先运行预计算脚本）</td>
+                <td colSpan={15}>无匹配板块（请先运行预计算脚本）</td>
               </tr>
             )}
           </tbody>
@@ -333,11 +434,103 @@ export default function SectorsPage() {
   );
 }
 
+function flowClass(v: number | null): string {
+  if (v == null) return "";
+  return v > 0 ? "up" : v < 0 ? "down" : "";
+}
+
 function macdTone(status: string | null): string {
   if (!status) return "";
   if (status.includes("多头")) return "opportunity";
   if (status.includes("空头")) return "danger";
   return "neutral";
+}
+
+// ── 今日板块观察（道路层分组）：回答「看哪个板块 / 盯什么 / 依据」────────────
+function WatchlistPanel({ onPick }: { onPick: (code: string) => void }) {
+  const { data } = useQuery({
+    queryKey: ["sectorsWatchlist"],
+    queryFn: () => sectorsApi.watchlist(5),
+    staleTime: 5 * 60_000,
+  });
+  if (!data || data.groups.length === 0) return null;
+  return (
+    <>
+      <h2 className="fund-section-title">
+        今日板块观察{" "}
+        <span className="fund-count">
+          道路层 · 代表交易日 {data.trading_day}（research_proxy）
+        </span>
+      </h2>
+      <div className="watch-grid">
+        {data.groups.map((g) => (
+          <div key={g.key} className="watch-card">
+            <div className="watch-card-head">
+              <span className="watch-card-title">{g.title}</span>
+              <span className="watch-card-count">{g.items.length}</span>
+            </div>
+            <div className="watch-card-desc">{g.desc}</div>
+            <div className="watch-items">
+              {g.items.map((it) => (
+                <WatchItemRow key={it.code} item={it} onPick={onPick} />
+              ))}
+              {g.items.length === 0 && (
+                <div className="muted watch-empty">今日无符合板块</div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
+
+function WatchItemRow({
+  item,
+  onPick,
+}: {
+  item: SectorWatchItem;
+  onPick: (code: string) => void;
+}) {
+  return (
+    <div className="watch-item" onClick={() => onPick(item.code)}>
+      <div className="watch-item-head">
+        <span className="watch-item-name">
+          {item.name ?? item.code}
+          {item.flow_vs_stage_cn && (
+            <span
+              className={`flow-badge ${item.flow_vs_stage === "confirm" ? "fb-ok" : "fb-warn"}`}
+              title="资金交叉验证（单据规模代理，research_proxy）"
+            >
+              {item.flow_vs_stage_cn}
+            </span>
+          )}
+        </span>
+        <span className="watch-item-meta">
+          RS {fmt(item.rs_pctile, 0)}
+          {item.rs_pctile_delta_20 != null && (
+            <span className={pctClass(item.rs_pctile_delta_20)}>
+              {" "}
+              ({item.rs_pctile_delta_20 > 0 ? "+" : ""}
+              {fmt(item.rs_pctile_delta_20, 1)})
+            </span>
+          )}
+          {item.b50 != null && ` · b50 ${fmt(item.b50, 0)}`}
+        </span>
+      </div>
+      {item.next_watch && (
+        <div className={`watch-next ${item.next_watch_kind ?? ""}`}>
+          {item.next_watch}
+        </div>
+      )}
+      {(item.flow_20d_main_yi != null || item.flow_20d_retail_yi != null) && (
+        <div className="watch-flow">
+          20日主力 {fmtYi(item.flow_20d_main_yi)} · 散户 {fmtYi(item.flow_20d_retail_yi)}
+          {item.flow_note_cn ? ` · ${item.flow_note_cn}` : ""}
+        </div>
+      )}
+    </div>
+  );
 }
 
 // ── RRG 轮动象限（echarts scatter）────────────────────────────────────────
@@ -409,6 +602,11 @@ function RrgPanel({
       b.name,
       b.stage ?? "",
     ]);
+    const yValues = points.map((b) => b.rs_pctile_delta_20 ?? 0);
+    const yRawMax = Math.max(...yValues, 5);
+    const yRawMin = Math.min(...yValues, -5);
+    const yMax = Math.ceil(Math.max(yRawMax, Math.abs(yRawMin)) * 1.15);
+    const yMin = -yMax;
     const tailSeries = showTails
       ? points
           .filter((b) => tails[b.code]?.length)
@@ -434,6 +632,8 @@ function RrgPanel({
       },
       yAxis: {
         type: "value",
+        min: yMin,
+        max: yMax,
         name: "RS 20日变化",
         splitLine: { lineStyle: { color: "#2a2f3a" } },
       },
@@ -456,15 +656,65 @@ function RrgPanel({
             color: (p: any) => stageColor(p.data[4]),
           },
           z: 2,
+          markArea: {
+            silent: true,
+            data: [
+              [
+                {
+                  name: "领先",
+                  xAxis: 100,
+                  yAxis: yMax,
+                  itemStyle: { color: "rgba(46, 204, 113, 0.06)" },
+                  label: { color: "rgba(46,204,113,0.35)", fontSize: 16, fontWeight: "bold" },
+                },
+                { xAxis: 50, yAxis: 0 },
+              ],
+              [
+                {
+                  name: "改善",
+                  xAxis: 50,
+                  yAxis: yMax,
+                  itemStyle: { color: "rgba(91, 155, 213, 0.06)" },
+                  label: { color: "rgba(91,155,213,0.35)", fontSize: 16, fontWeight: "bold" },
+                },
+                { xAxis: 0, yAxis: 0 },
+              ],
+              [
+                {
+                  name: "走弱",
+                  xAxis: 100,
+                  yAxis: 0,
+                  itemStyle: { color: "rgba(224, 169, 58, 0.06)" },
+                  label: { color: "rgba(224,169,58,0.35)", fontSize: 16, fontWeight: "bold" },
+                },
+                { xAxis: 50, yAxis: yMin },
+              ],
+              [
+                {
+                  name: "滞后",
+                  xAxis: 50,
+                  yAxis: 0,
+                  itemStyle: { color: "rgba(224, 91, 91, 0.06)" },
+                  label: { color: "rgba(224,91,91,0.35)", fontSize: 16, fontWeight: "bold" },
+                },
+                { xAxis: 0, yAxis: yMin },
+              ],
+            ],
+          },
           markLine: {
             silent: true,
             symbol: "none",
             lineStyle: { color: "#5a6172", type: "dashed" },
-            data: [{ xAxis: 50 }, { yAxis: 0 }],
-            label: {
-              formatter: (p: any) =>
-                p.value?.xAxis === 50 ? "强/弱分界" : "改善/走弱分界",
-            },
+            data: [
+              {
+                xAxis: 50,
+                label: { formatter: "强/弱分界", position: "end", distance: 8 },
+              },
+              {
+                yAxis: 0,
+                label: { formatter: "改善/走弱分界", position: "end", distance: 8 },
+              },
+            ],
           },
         },
       ],
@@ -504,18 +754,13 @@ function SectorTrendDrawer({
     queryFn: () => sectorsApi.history(row.code, 250),
     staleTime: 5 * 60_000,
   });
-  const { data: flow } = useQuery({
-    queryKey: ["sectorFlow", row.code],
-    queryFn: () => fundamentalsApi.industryFlow(row.code, 60),
-    staleTime: 5 * 60_000,
-  });
 
   const dates = (hist?.points ?? []).map((p) => p.date);
   const series: OverlaySeries[] = [
     {
       name: "板块等权指数",
       values: (hist?.points ?? []).map((p) => p.close),
-      color: "#3a7bd5",
+      color: "#2563eb",
       axis: "left",
     },
     {
@@ -526,8 +771,6 @@ function SectorTrendDrawer({
       dashed: true,
     },
   ];
-
-  const lastFlow = flow?.points?.[flow.points.length - 1];
 
   return (
     <div className="drawer-overlay" onClick={onClose}>
@@ -545,6 +788,27 @@ function SectorTrendDrawer({
         </div>
         <div className="drawer-body trend-drawer-body">
           <OverlayChart dates={dates} series={series} height={320} />
+
+          {row.next_watch && (
+            <div className={`next-watch-banner ${row.next_watch_kind ?? ""}`}>
+              <span className="nw-label">下一观察点</span>
+              <span>{row.next_watch}</span>
+            </div>
+          )}
+          {row.checkpoints && row.checkpoints.length > 0 && (
+            <div className="checkpoint-list">
+              <h5>道路确立三条件（升级为上升需全部满足）</h5>
+              {row.checkpoints.map((c) => (
+                <div key={c.key} className="checkpoint">
+                  <span className={c.met ? "cp-met" : "cp-unmet"}>
+                    {c.met ? "✓" : "✗"}
+                  </span>
+                  <span className="cp-label">{c.label}</span>
+                  {c.detail && <span className="cp-detail">{c.detail}</span>}
+                </div>
+              ))}
+            </div>
+          )}
 
           <div className="trend-facts">
             <Fact label="阶段判定依据" value={(row.stage_basis ?? []).join("；") || "-"} />
@@ -565,17 +829,33 @@ function SectorTrendDrawer({
             <Fact label="判定口径" value="research_proxy（研究代理，非 LEI 原始规则）" />
           </div>
 
-          <h5>资金流（5/20/60 日主力净流入，亿元）</h5>
-          {lastFlow ? (
-            <div className="flow-bars">
-              <FlowBar label="超大单" v={lastFlow.super_large_yi} />
-              <FlowBar label="大单" v={lastFlow.large_yi} />
-              <FlowBar label="中单" v={lastFlow.medium_yi} />
-              <FlowBar label="小单" v={lastFlow.small_yi} />
-              <FlowBar label="主力净" v={lastFlow.main_yi} highlight />
-            </div>
+          <h5>
+            资金流（5/20/60 日累计，亿元 · 主力=超大+大单 / 散户=中+小单）
+            {row.flow_vs_stage_cn && (
+              <span
+                className={`flow-badge ${row.flow_vs_stage === "confirm" ? "fb-ok" : "fb-warn"}`}
+              >
+                {row.flow_vs_stage_cn}
+              </span>
+            )}
+          </h5>
+          {row.flow_20d_main_yi != null || row.flow_20d_retail_yi != null ? (
+            <>
+              {row.flow_note_cn && <div className="flow-struct">{row.flow_note_cn}</div>}
+              <div className="flow-grid">
+                <FlowBar label="5日·主力" v={row.flow_5d_main_yi} highlight />
+                <FlowBar label="5日·散户" v={row.flow_5d_retail_yi} />
+                <FlowBar label="20日·主力" v={row.flow_20d_main_yi} highlight />
+                <FlowBar label="20日·散户" v={row.flow_20d_retail_yi} />
+                <FlowBar label="60日·主力" v={row.flow_60d_main_yi} highlight />
+                <FlowBar label="60日·散户" v={row.flow_60d_retail_yi} />
+              </div>
+              <div className="muted" style={{ fontSize: 11, marginTop: 4 }}>
+                单据规模代理（非真实机构/散户身份），仅作阶段交叉验证，不参与判定、不构成买卖建议。
+              </div>
+            </>
           ) : (
-            <div className="muted">暂无资金流</div>
+            <div className="muted">资金流数据不可用（DATA_UNAVAILABLE，不冒充）</div>
           )}
 
           <div className="drawer-actions">

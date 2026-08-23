@@ -20,6 +20,7 @@ from lei_signal.api import config
 from lei_signal.api.market_context_service import MarketContextService
 from lei_signal.api.routes import (
     agent,
+    dailybrief,
     dashboard,
     feishu_webhook,
     fundamentals,
@@ -31,6 +32,7 @@ from lei_signal.api.routes import (
     watch_subscriptions,
     watchlist,
 )
+from lei_signal.api.preheat import default_symbols_fn, start_preheat
 from lei_signal.api.services import AnalysisService
 from lei_signal.env import load_env
 from lei_signal.api.sectors_service import SectorsService
@@ -83,6 +85,7 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
 
     app.include_router(dashboard.router)
     app.include_router(symbols.router)
+    app.include_router(dailybrief.router)
     app.include_router(opportunities.router)
     app.include_router(watchlist.router)
     app.include_router(watch_subscriptions.router)
@@ -94,6 +97,13 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
     app.include_router(sectors.router)
 
     _warm_a_share_breadth()
+    # 看盘缓存后台预热：按用户时效性要求定时强刷（盘中 12 分钟 / 收盘补一次 /
+    # 夜间仅指数组 / 基本面每日），页面打开永远命中内存缓存。规则见 preheat.py。
+    app.state.preheat_stop = start_preheat(
+        app.state.analysis_service,
+        app.state.fundamentals_service,
+        default_symbols_fn(app.state.watchlist_db_path),
+    )
 
     @app.get("/api/health")
     def health() -> dict[str, str]:

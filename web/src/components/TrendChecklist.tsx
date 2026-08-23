@@ -68,15 +68,10 @@ export function computeTrendChecklist(
 ): TrendCondition[] {
   const close = payload.lastClose ?? lastNum(payload.ohlc.map((b) => b[1]));
   const ema20 = lastNum(payload.ema20);
-  const ema60 = lastNum(payload.ema60);
   const ema120 = lastNum(payload.ema120);
-  const sma20 = lastNum(payload.sma20);
-  const sma60 = lastNum(payload.sma60);
-  const sma120 = lastNum(payload.sma120);
   const ref20 = lastNum(payload.ref20); // 20 周期抵扣价
   const [difPrev, difCur] = lastTwoNums(payload.macdDif);
   const [deaPrev, deaCur] = lastTwoNums(payload.macdDea);
-  const [histPrev, histCur] = lastTwoNums(payload.macdHist);
 
   // 1. 破线（系统资源 · LEI 颜色）：收盘 vs EMA20
   let breakLine: TrendCondition;
@@ -84,13 +79,13 @@ export function computeTrendChecklist(
     breakLine = mk("break_line", "破线", "数据不足", "unknown", "LEI 颜色", "system");
   } else if (close > ema20) {
     breakLine = mk("break_line", "破线", "站上 EMA20", "bull", "LEI 颜色", "system",
-      assessment?.color_cn ? `LEI 颜色 ${assessment.color_cn}` : undefined);
+      assessment?.color_cn || undefined);
   } else if (close < ema20) {
     breakLine = mk("break_line", "破线", "跌破 EMA20", "bear", "LEI 颜色", "system",
-      assessment?.color_cn ? `LEI 颜色 ${assessment.color_cn}` : undefined);
+      assessment?.color_cn || undefined);
   } else {
     breakLine = mk("break_line", "破线", "贴近 EMA20", "neutral", "LEI 颜色", "system",
-      assessment?.color_cn ? `LEI 颜色 ${assessment.color_cn}` : undefined);
+      assessment?.color_cn || undefined);
   }
 
   // 2. 均线拐头（系统资源 · 抵扣价）：close vs close_lag20
@@ -100,11 +95,11 @@ export function computeTrendChecklist(
   } else {
     const pct = close > 0 ? (close - ref20) / close : 0;
     if (pct > 0.001) {
-      maTurn = mk("ma_turn", "均线拐头", "MA20 向上", "bull", "抵扣价", "system", `抵扣价 ${fmt(ref20)}`);
+      maTurn = mk("ma_turn", "均线拐头", "MA20 向上", "bull", "抵扣价", "system", fmt(ref20));
     } else if (pct < -0.001) {
-      maTurn = mk("ma_turn", "均线拐头", "MA20 向下", "bear", "抵扣价", "system", `抵扣价 ${fmt(ref20)}`);
+      maTurn = mk("ma_turn", "均线拐头", "MA20 向下", "bear", "抵扣价", "system", fmt(ref20));
     } else {
-      maTurn = mk("ma_turn", "均线拐头", "MA20 走平", "neutral", "抵扣价", "system", `抵扣价 ${fmt(ref20)}`);
+      maTurn = mk("ma_turn", "均线拐头", "MA20 走平", "neutral", "抵扣价", "system", fmt(ref20));
     }
   }
 
@@ -130,41 +125,69 @@ export function computeTrendChecklist(
       `DIF ${fmt(difCur)} / DEA ${fmt(deaCur)}`, true);
   }
 
-  // 4. 多头排列（MACD 佐证 · 研究代理）：六线排列 + DIF 0 轴佐证（规格 §4.5）
+  // 4. 多头排列（MACD 佐证 · 研究代理）
+  // 口径（对齐系统正式规则 ma_full_alignment）：SMA20>SMA60>SMA120 且三线斜率
+  // 均向上 = 完整多头排列（空头对称），否则未完整排列。
+  // MACD 佐证 = DIF>0：DIF>0 ⟺ EMA12>EMA26（数学恒等的两线多头排列）。
+  // 数据审计（40 标的全历史）：完整多头排列成立日 98.8% 同时 DIF>0，
+  // 非排列日仅 38% DIF>0 --故 DIF>0 只作佐证、不作判定。
   let align: TrendCondition;
-  if (ema20 == null || ema60 == null || ema120 == null || sma20 == null || sma60 == null || sma120 == null) {
+  const [sma20Prev, sma20Cur] = lastTwoNums(payload.sma20);
+  const [sma60Prev, sma60Cur] = lastTwoNums(payload.sma60);
+  const [sma120Prev, sma120Cur] = lastTwoNums(payload.sma120);
+  const slopeUp = (cur: number | null, prev: number | null) =>
+    cur != null && prev != null && cur > prev;
+  if (sma20Cur == null || sma60Cur == null || sma120Cur == null) {
     align = mk("alignment", "多头排列", "数据不足", "unknown", "均线+MACD", "macd", undefined, true);
   } else {
-    const bullArr = ema20 > ema60 && ema60 > ema120 && sma20 > sma60 && sma60 > sma120;
-    const bearArr = ema20 < ema60 && ema60 < ema120 && sma20 < sma60 && sma60 < sma120;
+    const order = sma20Cur > sma60Cur && sma60Cur > sma120Cur;
+    const orderBear = sma20Cur < sma60Cur && sma60Cur < sma120Cur;
+    const slopesUp =
+      slopeUp(sma20Cur, sma20Prev) && slopeUp(sma60Cur, sma60Prev) && slopeUp(sma120Cur, sma120Prev);
+    const slopesDown =
+      sma20Prev != null && sma60Prev != null && sma120Prev != null &&
+      sma20Cur < sma20Prev && sma60Cur < sma60Prev && sma120Cur < sma120Prev;
     let status: string;
     let stance: Stance;
-    if (bullArr) { status = "多头排列"; stance = "bull"; }
-    else if (bearArr) { status = "空头排列"; stance = "bear"; }
-    else { status = "均线纠缠"; stance = "neutral"; }
+    if (order && slopesUp) { status = "完整多头排列"; stance = "bull"; }
+    else if (orderBear && slopesDown) { status = "完整空头排列"; stance = "bear"; }
+    else if (order || orderBear) { status = "有序未同向"; stance = "neutral"; }
+    else { status = "未完整排列"; stance = "neutral"; }
     const corrob = difCur != null ? (difCur > 0 ? "DIF>0 佐证" : "DIF<0 不佐证") : undefined;
     align = mk("alignment", "多头排列", status, stance, "均线+MACD", "macd", corrob, true);
   }
 
-  // 5. 乖离率（MACD 佐证 · 研究代理）：close vs EMA120 偏离 + 柱体扩散/收敛
+  // 5. 乖离率（MACD 佐证 · 研究代理）
+  // 均线扩散/密集 = |DIF|（EMA12-EMA26 两线间距）的同号趋势：放大=扩散、缩小=收敛。
+  // 这是一阶口径（乖离本身）；hist 是二阶动能，两者趋势 54% 的 bar 不一致，各答各的
+  // 问题，不能混用。DIF 变号那根 = EMA12 穿越 EMA26（两线交叉），不算扩散/收敛。
+  // 价格乖离 = bias_ema120 = close/EMA120-1（账本登记口径，rules.v1.yaml），
+  // |乖离|>=50% 为极端（bias_extreme=0.50，规格 §4.7 待确认值，极端是风险标记非方向支持）。
   let bias: TrendCondition;
-  if (close == null || ema120 == null || ema120 <= 0) {
+  if (close == null || ema120 == null || ema120 <= 0 || difCur == null) {
     bias = mk("bias", "乖离率", "数据不足", "unknown", "MACD", "macd", undefined, true);
   } else {
     const biasPct = (close / ema120 - 1) * 100;
-    const extreme = Math.abs(biasPct) >= 50; // 规格 §4.7：50% 以上为极端区域
-    const expanding = histCur != null && histPrev != null && Math.abs(histCur) > Math.abs(histPrev);
+    const difPct = (difCur / close) * 100; // 两线乖离 DIF/收盘，跨标的可比
+    const extreme = Math.abs(biasPct) >= 50;
+    const sameSignDif = difPrev != null && difCur * difPrev > 0;
+    const spreading = sameSignDif && difPrev != null && Math.abs(difCur) > Math.abs(difPrev);
     let status: string;
     let stance: Stance;
     if (extreme) {
-      status = "极端乖离"; stance = biasPct > 0 ? "bull" : "bear";
-    } else if (expanding) {
-      status = "乖离扩散"; stance = biasPct > 0 ? "bull" : "bear";
+      status = "极端乖离"; stance = "neutral";
+    } else if (!sameSignDif) {
+      status = difCur > 0 ? "两线乖离转正" : "两线乖离转负";
+      stance = difCur > 0 ? "bull" : "bear";
+    } else if (spreading) {
+      status = "均线乖离扩散"; stance = difCur > 0 ? "bull" : "bear";
     } else {
-      status = "乖离收敛"; stance = "neutral";
+      status = "均线乖离收敛"; stance = "neutral";
     }
+    const sign2 = difPct >= 0 ? "+" : "";
+    const sign120 = biasPct >= 0 ? "+" : "";
     bias = mk("bias", "乖离率", status, stance, "MACD", "macd",
-      `偏离 EMA120 ${biasPct >= 0 ? "+" : ""}${biasPct.toFixed(1)}%`, true);
+      `两线乖离 ${sign2}${difPct.toFixed(2)}% · EMA120 ${sign120}${biasPct.toFixed(1)}%`, true);
   }
 
   return [breakLine, maTurn, cross, align, bias];

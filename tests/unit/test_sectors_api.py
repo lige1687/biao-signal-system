@@ -129,7 +129,7 @@ def test_history_days_clamp(client):
     assert len(pts) == 2
     assert pts[0]["date"] == "2026-08-13"
     assert pts[0]["close"] == 1090.0
-    assert set(pts[0].keys()) == {"date", "close", "b50", "rs_pctile", "stage"}
+    assert set(pts[0].keys()) == {"date", "close", "b50", "rs_pctile", "rs_pctile_delta_20", "stage"}
 
 
 def test_members_ok_and_quote_degrade(client):

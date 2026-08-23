@@ -348,11 +348,18 @@ def _post_user_content(
     config: ArkConfig,
     *,
     system_prompt: str = SYSTEM_PROMPT,
+    thinking_budget: int | None = None,
 ) -> str | None:
     """发单轮 user 消息到 ark（system 可换）。
 
     call_ark / chat_ark / chat_buy_point 共用此底层：双协议、退避重试、
     thinking/text 抽取。任何失败返回 None（调用方降级）。
+
+    ``thinking_budget``：表达层纯改写任务用。实测 ark-code-latest（coding 网关）
+    强制开 thinking 且不支持 disabled：6000 max_tokens 会全部被 thinking 占用导致
+    无正文、16000 时 180s 读超时。Anthropic 协议支持
+    ``thinking: {"type": "enabled", "budget_tokens": N}`` 收敛思考预算（实测
+    budget 2048 + max_tokens 16000 约 4s 出正文）。
     """
     if config.style == STYLE_ANTHROPIC:
         url = f"{config.base_url}/v1/messages"
@@ -367,6 +374,8 @@ def _post_user_content(
             "system": system_prompt,
             "messages": [{"role": "user", "content": user_content}],
         }
+        if thinking_budget is not None:
+            body["thinking"] = {"type": "enabled", "budget_tokens": thinking_budget}
         extract = _extract_anthropic
     else:
         url = f"{config.base_url}/chat/completions"
@@ -385,6 +394,11 @@ def _post_user_content(
         extract = _extract_openai
 
     try:
+        # thinking_budget 路径走流式：coding 网关对长输入的非流式请求会长时间
+        # 无响应触发读超时，流式保持连接且能拿到增量 text_delta（实测可用）。
+        if thinking_budget is not None and config.style == STYLE_ANTHROPIC:
+            body["stream"] = True
+            return _post_streaming_anthropic(url, headers, body, config)
         for attempt in range(config.retry_on_throttle + 1):
             resp = requests.post(url, headers=headers, json=body, timeout=config.timeout)
             if resp.status_code == 200:
@@ -432,6 +446,54 @@ def _post_user_content(
             config.model,
         )
         return None
+
+
+def _post_streaming_anthropic(
+    url: str, headers: dict[str, str], body: dict[str, Any], config: ArkConfig
+) -> str | None:
+    """Anthropic 协议流式投递：累积 text_delta，thinking block 自动跳过。
+
+    失败（网络/非 200/空正文）返回 None，调用方降级模板。UTF-8 必须显式指定
+    （requests 对 SSE 的默认编码猜测会把中文拆成 mojibake）。
+    """
+    parts: list[str] = []
+    try:
+        with requests.post(
+            url, headers=headers, json=body,
+            stream=True, timeout=(10, config.timeout),
+        ) as resp:
+            if resp.status_code != 200:
+                logger.warning(
+                    "ark(流式) HTTP %s，放弃（model=%s）。响应摘要：%s",
+                    resp.status_code, config.model, resp.text[:200],
+                )
+                return None
+            resp.encoding = "utf-8"
+            in_text = False
+            for line in resp.iter_lines(decode_unicode=True):
+                if not line or not line.startswith("data:"):
+                    continue
+                try:
+                    event = json.loads(line[5:])
+                except ValueError:
+                    continue
+                etype = event.get("type")
+                if etype == "content_block_start":
+                    in_text = (event.get("content_block") or {}).get("type") == "text"
+                elif etype == "content_block_delta" and in_text:
+                    delta = event.get("delta") or {}
+                    if delta.get("type") == "text_delta":
+                        parts.append(delta.get("text") or "")
+    except requests.RequestException as exc:
+        logger.warning(
+            "ark(流式) 调用异常：%s: %s（model=%s）", type(exc).__name__, exc, config.model
+        )
+        return None
+    text = "".join(parts).strip()
+    if not text:
+        logger.warning("ark(流式) 无 text_delta 输出（model=%s）", config.model)
+        return None
+    return text
 
 
 def call_ark(prompt_payload: dict[str, Any], config: ArkConfig) -> str | None:

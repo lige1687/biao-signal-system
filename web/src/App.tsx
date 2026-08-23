@@ -5,6 +5,7 @@ import DashboardPage from "./pages/DashboardPage";
 import DetailPage from "./pages/DetailPage";
 import FundamentalsPage from "./pages/FundamentalsPage";
 import SectorsPage from "./pages/SectorsPage";
+import DailyBriefPage from "./pages/DailyBriefPage";
 import SupervisorPage from "./pages/SupervisorPage";
 import WorkspacePage from "./pages/WorkspacePage";
 import AgentConsole from "./components/AgentConsole";
@@ -57,6 +58,8 @@ export default function App() {
         <Route path="/fundamentals" element={<FundamentalsPage />} />
         {/* 行业板块趋势工作台：等权指数 / RS / 宽度 / 阶段（research_proxy） */}
         <Route path="/sectors" element={<SectorsPage />} />
+        {/* 收盘简报：环境异常 → 自选重点变化 → 板块观察池（research_proxy） */}
+        <Route path="/daily" element={<DailyBriefPage />} />
         {/* 监督待办：跨标的计划 + 待办 + 当日判定 */}
         <Route path="/plans" element={<SupervisorPage />} />
       </Routes>

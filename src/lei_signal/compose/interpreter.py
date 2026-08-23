@@ -145,6 +145,7 @@ def _append_macd_factor(
             "dif": reading.dif,
             "dea": reading.dea,
             "hist": reading.hist,
+            "prev_dif": reading.prev_dif,
             "cross": reading.cross,
             "status": reading.status,
         },

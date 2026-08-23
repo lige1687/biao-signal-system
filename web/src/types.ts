@@ -518,6 +518,46 @@ export interface GlobalPanel {
 
 export interface GlobalStripResponse {
   panels: GlobalPanel[];
+  /** 投资者情绪（NAAIM/AAII），来自 LEI_SENTIMENT_ROOT，与 Streamlit 市场环境页同源。 */
+  sentiment?: GlobalSentiment;
+}
+
+/** 单个情绪序列（NAAIM 或 AAII）的最新摘要。 */
+export interface GlobalSentimentSeries {
+  /** 分档枚举：extreme_low/low/neutral/high/extreme_high/unknown */
+  label: string;
+  label_cn: string;
+  survey_week: string | null;
+  available_at: string | null;
+  source: string | null;
+  license_status: string | null;
+  current_eligible: boolean;
+  // NAAIM 专用
+  exposure_index?: number | null;
+  percentile?: number | null;
+  // AAII 专用
+  bullish?: number | null;
+  neutral?: number | null;
+  bearish?: number | null;
+  bull_bear?: number | null;
+}
+
+/** 情绪总览：root_set 表示后端是否读到了 LEI_SENTIMENT_ROOT 环境变量。 */
+export interface GlobalSentiment {
+  root_set: boolean;
+  naaim: GlobalSentimentSeries | null;
+  aaii: GlobalSentimentSeries | null;
+}
+
+/** 前端手动录入一期情绪读数（POST /market-context/sentiment）。 */
+export interface SentimentIngest {
+  series: "naaim" | "aaii";
+  survey_week: string;
+  exposure?: number | null;
+  bullish?: number | null;
+  neutral?: number | null;
+  bearish?: number | null;
+  available_at?: string | null;
 }
 
 /** 真全A市场宽度（涨跌家数 + 可选 MA 上方占比）。
@@ -572,6 +612,8 @@ export interface ChartPayload {
   macdDif: (number | null)[];
   macdDea: (number | null)[];
   macdHist: (number | null)[];
+  /** MACD 副图事件日（金叉/死叉/上穿0轴/下穿0轴），后端 macd_strength 规则判定。 */
+  macdEvents: MacdEvent[];
   states: string[];
   volumes: number[];
   volStates: string[];
@@ -618,6 +660,21 @@ export interface StructureMark {
     confirmed_date: string | null;
     invalidated_date: string | null;
   };
+}
+
+/** MACD 副图事件日。研究代理：强度描述，不构成买卖点（macd-reading 口径）。 */
+export interface MacdEvent {
+  date: string;
+  type: "golden_cross" | "death_cross" | "zero_cross_up" | "zero_cross_down";
+  statusCn: string; // 金叉 / 死叉 / 上穿0轴 / 下穿0轴
+  dimension: string; // 支持 / 冲突
+  dif: number;
+  dea: number;
+  hist: number;
+  detailCn: string;
+  /** 盲区补齐：当日 LEI 颜色（破线）与 EMA20 斜率（均线拐头）。 */
+  colorCn: string;
+  slopeCn: string;
 }
 
 export interface SymbolDetail {
@@ -1094,7 +1151,38 @@ export interface RatesResponse {
   treasury: TreasuryYields;
   vix: { value: number; as_of: string } | null;
   margin: MarginData | null;
+  /** 股债收益差（Fed Model 口径）= 盈利收益率(1/PE_TTM×100) − 10Y 国债收益率（%）。 */
+  erp: { us: ErpData | null; cn: ErpData | null };
+  /** 估值分位对照（不受利率水平污染），用于校正股债收益差的债券端污染。 */
+  valuation: { us_cape: ValuationData | null; cn_pe: ValuationData | null };
   errors: string[];
+}
+
+/**
+ * 估值分位快照。
+ *
+ * percentile 用标定窗口（口径可比），percentile_full 用全史（长周期背景）——
+ * 两个都给，因为分位是取样窗口的函数，只报一个会误导。
+ */
+export interface ValuationData {
+  value: number; // 现值（CAPE 或 PE_TTM，倍）
+  as_of: string;
+  percentile: number; // 标定窗口内分位（0–100，越高越贵）
+  percentile_full: number; // 全史分位
+  calib_from: string; // 标定窗口起始年份，如 "1950"
+  calib_n: number; // 标定窗口样本数
+  full_from: string; // 全史起始年份
+  full_n: number;
+}
+
+/** 股债收益差（Fed Model 口径）单市场快照。ERP 的粗略代理，非严格 ERP。 */
+export interface ErpData {
+  earnings_yield: number; // 盈利收益率 %（1 / PE_TTM × 100）
+  risk_free: number; // 10Y 国债收益率 %
+  erp: number; // 股债收益差 %（= earnings_yield − risk_free）
+  as_of: string | null;
+  pe_ttm?: number | null; // A 股含 PE_TTM，美股无此字段
+  ey_source: string; // 盈利收益率数据来源
 }
 
 // ---- 宏观利率历史序列（趋势图）----
@@ -1158,6 +1246,11 @@ export interface SectorTrendRow {
   // 阶段：②上升=markup / ①筑底=accumulation / ③派发=distribution / ④下降=decline / null=样本不足
   stage: "accumulation" | "markup" | "distribution" | "decline" | null;
   stage_basis: string[];
+  // 道路层观察点（策略溯源 trading-spec §2.2「均线方向是道路」，research_proxy）
+  dist_to_sma60_pct: number | null; // (价格/SMA60−1)×100，负值=距上穿还差多少
+  checkpoints: SectorCheckpoint[]; // 道路确立三条件清单
+  next_watch: string | null; // 一句话「下一观察点」
+  next_watch_kind: "upgrade" | "risk" | "watch" | null;
   rs_pctile: number | null;
   rs_pctile_delta_20: number | null;
   rs_chg_20: number | null;
@@ -1185,6 +1278,17 @@ export interface SectorTrendRow {
   up_count: number | null;
   down_count: number | null;
   total_mv_yi: number | null;
+  // 资金流（单据规模代理：主力=超大+大单、散户=中+小单；research_proxy，只交叉验证不参与判定）
+  flow_5d_main_yi: number | null;
+  flow_20d_main_yi: number | null;
+  flow_60d_main_yi: number | null;
+  flow_5d_retail_yi: number | null;
+  flow_20d_retail_yi: number | null;
+  flow_60d_retail_yi: number | null;
+  flow_20d_struct: string | null;
+  flow_note_cn: string | null;
+  flow_vs_stage: "confirm" | "conflict" | null;
+  flow_vs_stage_cn: string | null;
   provenance: "research_proxy";
 }
 
@@ -1219,6 +1323,112 @@ export interface SectorMembersResponse {
     market_value_yi: number | null;
     in_kline_cache: boolean;
   }[];
+}
+
+// 道路确立三条件（价格>SMA60 / SMA60 斜率向上 / RS 强于基准）
+export interface SectorCheckpoint {
+  key: string;
+  label: string;
+  met: boolean;
+  detail: string | null;
+}
+
+export interface SectorWatchItem {
+  code: string;
+  name: string | null;
+  level: 1 | 2 | 3;
+  stage: string | null;
+  rs_pctile: number | null;
+  rs_pctile_delta_20: number | null;
+  b50: number | null;
+  dist_to_sma60_pct: number | null;
+  next_watch: string | null;
+  next_watch_kind: "upgrade" | "risk" | "watch" | null;
+  stage_basis: string[];
+  // 资金流交叉验证（单据规模代理，research_proxy）
+  flow_20d_main_yi: number | null;
+  flow_20d_retail_yi: number | null;
+  flow_vs_stage: "confirm" | "conflict" | null;
+  flow_vs_stage_cn: string | null;
+  flow_note_cn: string | null;
+}
+
+export interface SectorWatchlistResponse {
+  as_of: string;
+  trading_day: string;
+  groups: {
+    key: string;
+    title: string;
+    desc: string;
+    items: SectorWatchItem[];
+  }[];
+  research_proxy_note: string;
+}
+
+// ---- 收盘简报 (/api/daily-brief, research_proxy) ----
+export interface BriefAnomaly {
+  market: string;
+  metric: string;
+  value: number;
+  pctile_250d: number | null;
+  day_change: number | null;
+  note_cn: string;
+}
+
+export interface BriefWatchItem {
+  symbol: string;
+  display_name: string | null;
+  verdict: string | null;
+  verdict_cn: string | null;
+  changes: string[];
+  n_changes: number;
+  is_new: boolean;
+}
+
+export interface BriefPoolItem {
+  code: string;
+  name: string | null;
+  stage: string | null;
+  rs_pctile: number | null;
+  rs_pctile_delta_20: number | null;
+  pe_ttm: number | null;
+  flow_20d_main_yi: number | null;
+  flow_vs_stage_cn: string | null;
+  next_watch: string | null;
+  tags: string[];
+  streak: number;
+}
+
+export interface DailyBriefPayload {
+  date: string;
+  slot: string; // "1445" 盘中预判 | "1645" 收盘复核
+  generated_at: string;
+  env: {
+    anomalies: BriefAnomaly[];
+    breadth_context: {
+      market: string;
+      metric: string;
+      date: string | null;
+      value: number;
+      day_change: number | null;
+      pctile_250d: number | null;
+    }[];
+    macro: { line_cn?: string };
+  };
+  watchlist: {
+    items: BriefWatchItem[];
+    unchanged_count: number;
+    sector_watch_count: number;
+  };
+  pool: { items: BriefPoolItem[]; codes: string[] };
+  summary: { text: string; generated_by: "llm" | "template" };
+}
+
+export interface DailyBriefResponse {
+  date: string;
+  slot: string;
+  brief: DailyBriefPayload;
+  slots_available: string[];
 }
 
 // ---- agent 统一会话（spec 2026-08-23） ----

@@ -30,6 +30,15 @@ def trend(request: Request, refresh: bool = False, level: str = "all") -> dict:
     return data
 
 
+@router.get("/watchlist")
+def watchlist(request: Request, top_n: int = 5) -> dict:
+    """今日板块观察（道路层分组：上升/临近升级/筑底/动能/派发/下降）。miss → 404。"""
+    data = _service(request).watchlist(top_n=max(1, min(top_n, 20)))
+    if data is None:
+        raise HTTPException(status_code=404, detail=_NOT_PRECOMPUTED)
+    return data
+
+
 @router.get("/{code}/history")
 def history(request: Request, code: str, days: int = 250) -> dict:
     """单个板块历史序列（close / b50 / rs_pctile / stage），供趋势图与 RRG 尾迹。"""

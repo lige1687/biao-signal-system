@@ -1,8 +1,11 @@
 """标的级端点：符号解析、详情、市场环境徽章、刷新。"""
 from __future__ import annotations
 
+import os
 from datetime import date
 from typing import Any
+
+from pydantic import BaseModel
 
 import pandas as pd
 from fastapi import APIRouter, HTTPException, Query, Request
@@ -17,6 +20,7 @@ from lei_signal.api.card_mapper import (
 from lei_signal.api.config import DETAIL_MAX_BARS, RECENT_EVENTS_LIMIT
 from lei_signal.api.explanations import CONCEPTS, MARK_KIND_CONCEPTS, lookup
 from lei_signal.api.market_context_service import MarketContextDTO, MarketContextService
+from lei_signal.api.macd_events import build_macd_events
 from lei_signal.api.overview import build_today_overview
 from lei_signal.api.quotes import TencentQuoteProvider
 from lei_signal.api.routes.dashboard import assemble_dashboard
@@ -948,12 +952,15 @@ def _dense_breakout_scenario(result: AnalysisResult) -> ConditionalScenarioDTO |
         )
         recent_low = float(recent_window["low"].min()) if not recent_window.empty else None
         if recent_upper is not None and recent_low is not None:
-            range_note = f"近 {recompute_lookback} 日 high {recent_upper:.2f} / low {recent_low:.2f}"
+            range_note = (
+                f"近 {recompute_lookback} 日 high {recent_upper:.2f} / low {recent_low:.2f}"
+            )
         else:
             range_note = ""
         if recent_upper is not None and abs(recent_upper - locked_ref) > 0.01:
+            fallback_note = f"近 {recompute_lookback} 日 high 滚动"
             ref_note = (
-                f"当前密集区上沿 {recent_upper:.2f}（{range_note or f'近 {recompute_lookback} 日 high 滚动'}）"
+                f"当前密集区上沿 {recent_upper:.2f}（{range_note or fallback_note}）"
                 f"；原始锁定参考 {locked_ref:.2f}（B1 观察时锁定的密集区上沿，"
                 f"已脱节，仅作历史参考）"
             )
@@ -1469,6 +1476,11 @@ def _detail_dto(
         :RECENT_EVENTS_LIMIT
     ]
 
+    # MACD 副图事件（金叉/死叉/穿0轴）在 API 层合并进 chart：serialize_result
+    # 属于冻结的 Streamlit 目录（见 AGENTS.md），扩展数据一律在这里叠加。
+    chart = serialize_result(result, color_mode="red_green", max_bars=DETAIL_MAX_BARS)
+    chart["macdEvents"] = build_macd_events(result, max_bars=DETAIL_MAX_BARS)
+
     return SymbolDetailDTO(
         symbol=symbol,
         display_name=display_name,
@@ -1486,7 +1498,7 @@ def _detail_dto(
             data_warnings=list(report.warnings),
             calendar_note_cn=CALENDAR_NOTE_CN,
         ),
-        chart=serialize_result(result, color_mode="red_green", max_bars=DETAIL_MAX_BARS),
+        chart=chart,
         assessment=_assessment_dto(result),
         new_events=[
             event_dto(e, as_of=result.assessment.as_of) for e in result.assessment.new_events
@@ -1657,49 +1669,247 @@ def market_context_global_strip(request: Request) -> dict[str, Any]:
             })
         # CN_ALL_A 在下方用真全A源覆盖，这里跳过原假 B 系列
     # —— 全A(CN_ALL_A)：真全A涨跌家数，替换原 fixture/dapanyuntu 假样本 ——
-    from lei_signal.market_context.a_share_breadth import get_a_share_breadth
+    from lei_signal.market_context.a_share_breadth import (
+        get_a_share_breadth,
+        get_cached_ma_breadth,
+    )
 
-    b = get_a_share_breadth(include_ma=False)
+    # 全A(CN_ALL_A)：读「本机收盘后预计算的冻结快照」（B系列 + 收盘涨跌家数 + 交易日）。
+    # 磁盘文件缓存，重启不丢；次日整天与周末都直接读这份，不再实时重算。
+    # 仅当缓存缺失（首次部署/未跑预计算）才回退到实时涨跌家数，B 系列优雅降级为 None。
+    cached = get_cached_ma_breadth()
+    if cached:
+        ma20 = cached.get("ma20_pct")
+        ma50 = cached.get("ma50_pct")
+        ma200 = cached.get("ma200_pct")
+        up = cached.get("up") or 0
+        down = cached.get("down") or 0
+        flat = cached.get("flat") or 0
+        total = cached.get("total") or 0
+        up_pct = cached.get("up_pct")
+        adv_dec = cached.get("adv_dec_ratio")
+        limit_up = cached.get("limit_up") or 0
+        limit_down = cached.get("limit_down") or 0
+        as_of = cached.get("as_of")
+        trading_day = cached.get("date")
+        src_detail = cached.get("source") or "本机收盘后预计算(腾讯日K线)"
+        status = "ok"
+    else:
+        # 缓存缺失：实时涨跌家数兜底，B 系列为 None（绝不伪造）
+        b = get_a_share_breadth(include_ma=False)
+        ma20 = ma50 = ma200 = None
+        up, down, flat = b.up, b.down, b.flat
+        total = b.total
+        up_pct, adv_dec = b.up_pct, b.adv_dec_ratio
+        limit_up, limit_down = b.limit_up, b.limit_down
+        as_of = b.as_of
+        trading_day = None
+        src_detail = b.source_detail
+        status = b.data_status
+
     cn_all_entry: dict[str, Any] = {
         "market_id": "CN_ALL_A",
         "display_name": _GLOBAL_DISPLAY.get("CN_ALL_A", "全A"),
         "summary": "real_a_share",
-        "summary_cn": "真全A涨跌家数",
-        "data_status": b.data_status,
-        # MA 上方占比默认不拉（需正常网络环境），由前端"含 MA 占比"开关另行获取
-        "breadth_20": None,
-        "breadth_50": None,
-        "breadth_200": None,
+        "summary_cn": "真全A·涨跌家数+宽度" if ma20 is not None else "真全A涨跌家数(宽度待计算)",
+        "data_status": status,
+        # MA 上方占比：来自冻结快照（本机收盘后预计算），无缓存则 None
+        "breadth_20": ma20,
+        "breadth_50": ma50,
+        "breadth_200": ma200,
         "breadth_20_delta_5": None,
         "breadth_50_delta_5": None,
         "percentile_20": None,
         "percentile_50": None,
-        "long_regime": "unknown",
+        "long_regime": (
+            ("bull" if (ma200 or 0) >= 50 else "bear") if ma200 is not None else "unknown"
+        ),
         "heat_state": "unknown",
         "drawdown_from_ath": None,
-        "alerts": _ad_alerts(b.adv_dec_ratio),
-        "updated_at": b.as_of,
-        # 真全A涨跌家数（核心、最权威）
+        "alerts": _ad_alerts(adv_dec or 0) + (
+            _breadth_alerts(ma50, ma200, ma20) if ma20 is not None else []
+        ),
+        "updated_at": as_of,
+        # 真全A涨跌家数（来自冻结快照，核心、最权威）
         "is_real_a_share": True,
-        "up": b.up,
-        "down": b.down,
-        "flat": b.flat,
-        "total": b.total,
-        "up_pct": b.up_pct,
-        "adv_dec_ratio": b.adv_dec_ratio,
-        "limit_up": b.limit_up,
-        "limit_down": b.limit_down,
-        "source_detail": b.source_detail,
+        "up": up,
+        "down": down,
+        "flat": flat,
+        "total": total,
+        "up_pct": up_pct,
+        "adv_dec_ratio": adv_dec,
+        "limit_up": limit_up,
+        "limit_down": limit_down,
+        # 冻结快照元信息：前端展示"宽度·截至 X 收盘"
+        "breadth_as_of": as_of,
+        "breadth_trading_day": trading_day,
+        "breadth_source": src_detail,
+        "source_detail": src_detail,
     }
     out.insert(0, cn_all_entry)
-    return {"panels": out}
+    return {"panels": out, "sentiment": _build_sentiment_summary()}
+
+
+def _build_sentiment_summary() -> dict[str, Any]:
+    """Read NAAIM / AAII sentiment from ``LEI_SENTIMENT_ROOT`` and return a
+    summary for the React frontend.
+
+    Mirrors the logic in ``lei_signal.ui.app._render_sentiment_section`` so both
+    frontends agree. Returns ``present=False`` sub-objects when the root is unset
+    or a file is missing, and never raises on bad data (the UI degrades
+    gracefully).
+    """
+    root = os.environ.get("LEI_SENTIMENT_ROOT")
+    summary: dict[str, Any] = {"root_set": bool(root), "naaim": None, "aaii": None}
+    if not root:
+        return summary
+
+    from pathlib import Path
+
+    from lei_signal.market_context.sentiment import (
+        load_aaii_observations,
+        load_naaim_observations,
+    )
+
+    root_path = Path(root)
+    _SENT_LABEL_CN = {
+        "extreme_low": "极端悲观",
+        "low": "悲观",
+        "neutral": "中性",
+        "high": "乐观",
+        "extreme_high": "极端乐观",
+        "unknown": "样本不足",
+    }
+
+    def _find(series: str) -> Path | None:
+        for ext in (".csv", ".parquet"):
+            for name in (f"{series}{ext}", f"{series.upper()}{ext}"):
+                p = root_path / name
+                if p.exists():
+                    return p
+        return None
+
+    def _latest(obs):
+        return max(obs, key=lambda o: o.available_at) if obs else None
+
+    naaim_path = _find("naaim")
+    if naaim_path is not None:
+        try:
+            latest = _latest(load_naaim_observations(naaim_path))
+            if latest is not None:
+                summary["naaim"] = {
+                    "label": latest.label.value,
+                    "label_cn": _SENT_LABEL_CN.get(latest.label.value, latest.label.value),
+                    "exposure_index": latest.exposure_index,
+                    "percentile": latest.percentile,
+                    "survey_week": latest.survey_week.isoformat() if latest.survey_week else None,
+                    "available_at": latest.available_at.isoformat() if latest.available_at else None,
+                    "source": latest.source,
+                    "license_status": latest.license_status,
+                    "current_eligible": latest.current_eligible,
+                }
+        except Exception:  # noqa: BLE001 — bad data must not break the strip
+            pass
+
+    aaii_path = _find("aaii")
+    if aaii_path is not None:
+        try:
+            latest = _latest(load_aaii_observations(aaii_path))
+            if latest is not None:
+                summary["aaii"] = {
+                    "label": latest.label.value,
+                    "label_cn": _SENT_LABEL_CN.get(latest.label.value, latest.label.value),
+                    "bullish": latest.bullish,
+                    "neutral": latest.neutral,
+                    "bearish": latest.bearish,
+                    "bull_bear": latest.bull_bear,
+                    "survey_week": latest.survey_week.isoformat() if latest.survey_week else None,
+                    "available_at": latest.available_at.isoformat() if latest.available_at else None,
+                    "source": latest.source,
+                    "license_status": latest.license_status,
+                    "current_eligible": latest.current_eligible,
+                }
+        except Exception:  # noqa: BLE001
+            pass
+
+    return summary
+
+
+
+class SentimentIngest(BaseModel):
+    """前端手动录入一期情绪读数（NAAIM 暴露指数 / AAII 多空三值）。"""
+    series: str
+    survey_week: str
+    exposure: float | None = None
+    bullish: float | None = None
+    neutral: float | None = None
+    bearish: float | None = None
+    available_at: str | None = None
+
+
+def _append_sentiment_observation(
+    series: str,
+    survey_week: str,
+    *,
+    exposure: float | None = None,
+    bullish: float | None = None,
+    neutral: float | None = None,
+    bearish: float | None = None,
+    available_at: str | None = None,
+) -> "Path":
+    """写入一期情绪读数到 LEI_SENTIMENT_ROOT（复用 ingest_sentiment.py 的纯函数）。"""
+    import importlib.util
+    from pathlib import Path
+
+    repo_root = Path(__file__).resolve().parents[4]
+    script = repo_root / "scripts" / "round5_repro" / "ingest_sentiment.py"
+    spec = importlib.util.spec_from_file_location("ingest_sentiment_mod", str(script))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+
+    root = os.environ.get("LEI_SENTIMENT_ROOT") or str(mod.DEFAULT_ROOT)
+    root = Path(root)
+    if series == "naaim":
+        row = mod.build_naaim_row(
+            mod._parse_survey_week(survey_week), exposure, available_at=available_at,
+        )
+        path = mod.append_observation(root, "naaim", row, mod.NAAIM_COLUMNS, mod.NAAIM_FILENAME)
+    else:
+        row = mod.build_aaii_row(
+            mod._parse_survey_week(survey_week), bullish, neutral, bearish,
+            available_at=available_at,
+        )
+        path = mod.append_observation(root, "aaii", row, mod.AAII_COLUMNS, mod.AAII_FILENAME)
+    return path
+
+
+@router.post("/market-context/sentiment")
+def ingest_sentiment_endpoint(payload: SentimentIngest):
+    """前端「更新情绪」按钮：手动录入一期读数并写盘，随后 global-strip 自动反映。"""
+    series = payload.series.lower()
+    if series not in ("naaim", "aaii"):
+        raise HTTPException(status_code=400, detail="series 必须是 naaim 或 aaii")
+    if series == "naaim" and payload.exposure is None:
+        raise HTTPException(status_code=400, detail="naaim 需要 exposure")
+    if series == "aaii" and None in (payload.bullish, payload.neutral, payload.bearish):
+        raise HTTPException(status_code=400, detail="aaii 需要 bullish/neutral/bearish")
+    try:
+        path = _append_sentiment_observation(
+            series, payload.survey_week,
+            exposure=payload.exposure, bullish=payload.bullish,
+            neutral=payload.neutral, bearish=payload.bearish,
+            available_at=payload.available_at,
+        )
+    except Exception as exc:  # noqa: BLE001
+        raise HTTPException(status_code=500, detail=f"写入失败：{exc}")
+    return {"ok": True, "path": str(path)}
 
 
 @router.get("/market-context/breadth-history")
 def market_context_breadth_history(
     request: Request,
     market_id: str = Query(..., description="e.g. CN_ALL_A, SP500"),
-    lookback_days: int = Query(120, ge=1, le=1260),
+    lookback_days: int = Query(1260, ge=1, le=12600),
 ) -> dict:
     """Return the breadth history time-series for one global panel.
 
@@ -1711,6 +1921,46 @@ def market_context_breadth_history(
         mid = MarketId(market_id)
     except ValueError:
         return {"market_id": market_id, "error": "unknown_market", "history": []}
+    # 全A(CN_ALL_A) 走本机预计算落盘的真宽度历史（MA 上方占比），
+    # 不再返回原 fixture/dapanyuntu 假序列；缓存为空时返回空（趋势图显示占位）。
+    if mid == MarketId.CN_ALL_A:
+        from lei_signal.market_context.a_share_breadth import get_ma_breadth_history
+        # 全A 真宽度历史已预计算落盘（最多 ~1260 交易日），强制返回全量，
+        # 不被前端 lookback 截断，叠加图/趋势图才能铺满整个窗口。
+        hist = get_ma_breadth_history(lookback_days=12600)
+        return {
+            "market_id": market_id,
+            "lookback_days": lookback_days,
+            "history": [
+                {
+                    "date": h["date"],
+                    "breadth_20": h.get("ma20_pct"),
+                    "breadth_50": h.get("ma50_pct"),
+                    "breadth_200": h.get("ma200_pct"),
+                }
+                for h in hist
+            ],
+        }
+    # 标普500 走本机预计算落盘的真实宽度历史（成分股站上 MA 占比），
+    # 不再返回空（lab.db 无 SP500 快照）。无数据返回 []，前端标「数据缺失」。
+    if mid == MarketId.SP500:
+        from lei_signal.market_context.us_breadth import get_sp500_breadth_history
+        # 强制返回全量（最多 ~1260 交易日），不被前端 lookback 截断，
+        # 叠加图/趋势图才能铺满整个窗口，与 A股支路边对称。
+        hist = get_sp500_breadth_history(lookback_days=12600)
+        return {
+            "market_id": market_id,
+            "lookback_days": lookback_days,
+            "history": [
+                {
+                    "date": h["date"],
+                    "breadth_20": h.get("breadth_20"),
+                    "breadth_50": h.get("breadth_50"),
+                    "breadth_200": h.get("breadth_200"),
+                }
+                for h in hist
+            ],
+        }
     history = _market_context_service(request).get_breadth_history(
         mid, lookback_days=lookback_days,
     )
@@ -1752,8 +2002,13 @@ def market_context_a_share_breadth(
     }
 
 
-_HOT_THRESHOLD = 85.0
-_COLD_THRESHOLD = 15.0
+# 宽度极值阈值（% 站上均线个股占比）。
+# 行业通用标准：80% 超买 / 20% 超卖 / 50% 多空分界
+# （TradingView 宽度脚本、marketinout %Above50MA、thetrading.tools / pomegra.io
+#  等 quant 通用框架均以此为准）。华泰证券《A股择时之技术面指标测试》(2021)
+# 亦建议对 A 股采用默认/标准参数、警惕参数过拟合，故 A股/美股共用此标准值。
+_HOT_THRESHOLD = 80.0
+_COLD_THRESHOLD = 20.0
 
 
 def _breadth_alerts(
@@ -1764,10 +2019,10 @@ def _breadth_alerts(
     """Check breadth extremes and return alert dicts.
 
     Two tiers:
-    - **reversal**: B50 AND B200 both ≥85 (top) or both ≤15 (bottom).
+    - **reversal**: B50 AND B200 both ≥80 (top) or both ≤20 (bottom).
       These are the rare "both timeframes agree on an extreme" signals
       the user wants prominently highlighted.
-    - **stage**: B50 alone ≥85 or ≤15 (B200 not confirmed). Less strong,
+    - **stage**: B50 alone ≥80 or ≤20 (B200 not confirmed). Less strong,
       but still a warning that one timeframe is at an extreme.
 
     When B50 is unavailable (e.g. CN_ALL_A from dapanyuntu, which only
@@ -1792,7 +2047,7 @@ def _breadth_alerts(
                 "title": "⚠️ 反转顶部信号",
                 "desc": (
                     f"{medium_label}={medium:.1f}% 且 B200={b200:.1f}%，"
-                    "同时高于85%，大概率是趋势反转位置"
+                    "同时高于80%，大概率是趋势反转位置"
                 ),
             })
         elif medium <= _COLD_THRESHOLD and b200 <= _COLD_THRESHOLD:
@@ -1802,7 +2057,7 @@ def _breadth_alerts(
                 "title": "⚠️ 反转底部信号",
                 "desc": (
                     f"{medium_label}={medium:.1f}% 且 B200={b200:.1f}%，"
-                    "同时低于15%，大概率是趋势反转位置"
+                    "同时低于20%，大概率是趋势反转位置"
                 ),
             })
 
@@ -1814,7 +2069,7 @@ def _breadth_alerts(
                 "level": "stage",
                 "type": "stage_top",
                 "title": "阶段性顶部预警",
-                "desc": f"{medium_label}={medium:.1f}%，高于85%，大概率是阶段性顶部",
+                "desc": f"{medium_label}={medium:.1f}%，高于80%，大概率是阶段性顶部",
             })
     elif medium <= _COLD_THRESHOLD:
         already = any(a["type"] == "reversal_bottom" for a in alerts)
@@ -1823,7 +2078,7 @@ def _breadth_alerts(
                 "level": "stage",
                 "type": "stage_bottom",
                 "title": "短期底部预警",
-                "desc": f"{medium_label}={medium:.1f}%，低于15%，大概率是短期底部",
+                "desc": f"{medium_label}={medium:.1f}%，低于20%，大概率是短期底部",
             })
 
     return alerts

@@ -336,10 +336,12 @@ def fetch_ma_breadth(
     for series in cache.values():
         closes = [x[1] for x in series]
         last_dates.append(series[-1][0])
-        if len(closes) < 200:
-            continue
         s = pd.Series(closes)
+        # 分层阈值：B20 需≥20根 / B50 需≥50根 / B200 需≥200根，
+        # 最大化覆盖全A（次新股仅缺长周期均线，短周期仍计入），与 backfill 向量化口径一致。
         for w, key in ((20, "ma20"), (50, "ma50"), (200, "ma200")):
+            if len(closes) < w:
+                continue
             ma = s.rolling(w).mean().iloc[-1]
             eligible[key] += 1
             if s.iloc[-1] > ma:
@@ -418,7 +420,7 @@ def _compute_a_share_breadth(include_ma: bool = False) -> AShareBreadth:
                     trading_day=ma.get("trading_day", ""),
                     source="腾讯日K线(本机收盘后预计算)",
                 )
-                append_ma_breadth_history(ma20, ma50, ma200)
+                append_ma_breadth_history(ma20, ma50, ma200, trading_day=ma.get("trading_day"))
             else:
                 status = "partial"
                 detail += "; MA占比:历史K线源不可用(需正常网络环境)"
@@ -496,11 +498,15 @@ def get_cached_ma_breadth() -> dict | None:
 
 def append_ma_breadth_history(
     ma20: float | None, ma50: float | None, ma200: float | None,
-    max_points: int = 1260,
+    max_points: int = 1260, trading_day: str | None = None,
 ) -> None:
-    """把当日 MA 上方占比追加进历史序列（供趋势图）。同日多次运行则覆盖。"""
+    """把当日 MA 上方占比追加进历史序列（供趋势图）。同日多次运行则覆盖。
+
+    trading_day 传数据代表的交易日（来自 K 线最后一根日期）；缺省回落 now()。
+    不传时在周末运行会把周五的值写成周末日期，产生假数据点。
+    """
     p = _ma_history_path()
-    today = datetime.now().strftime("%Y-%m-%d")
+    today = trading_day or datetime.now().strftime("%Y-%m-%d")
     rec = {"date": today, "ma20_pct": ma20, "ma50_pct": ma50, "ma200_pct": ma200}
     hist: list[dict] = []
     try:

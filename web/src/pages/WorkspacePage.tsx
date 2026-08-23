@@ -2,7 +2,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { api } from "../api/client";
-import { fundamentalsApi } from "../api/client";
 import AddSymbolDialog from "../components/AddSymbolDialog";
 import AssessmentPanel from "../components/AssessmentPanel";
 import CollapsiblePanel from "../components/CollapsiblePanel";
@@ -18,8 +17,6 @@ import TradabilityPanel from "../components/TradabilityPanel";
 import ColorBadge from "../components/ColorBadge";
 import ExplanationPanel, { type Selection } from "../components/ExplanationPanel";
 import MarketBreadthStrip from "../components/MarketBreadthStrip";
-import MacroSnapshotPanel from "../components/MacroSnapshotPanel";
-import MarketBreadthSnapshotPanel from "../components/MarketBreadthSnapshotPanel";
 import KlineChart, {
   DEFAULT_DISPLAY,
   type ChartDisplay,
@@ -45,6 +42,7 @@ const MARK_SOURCE_CN: Record<MarkPick["kind"], string> = {
   bottom_line: "图上参考线 · C 点失效线",
   top_line: "图上参考线 · 顶部颈线",
   highlight_price: "买点分析 · 价位标注",
+  macd_event: "MACD 副图标记 · 强度事件",
 };
 
 const LINE_KINDS: ReadonlySet<MarkPick["kind"]> = new Set([
@@ -64,6 +62,8 @@ function resolveSelection(pick: MarkPick, detail: SymbolDetail): Selection {
   let explanation: Explanation | null = null;
   if (pick.kind === "key_volatility") {
     explanation = detail.concepts["key_volatility"] ?? null;
+  } else if (pick.kind === "macd_event") {
+    explanation = detail.concepts["macd_strength"] ?? null;
   } else if (LINE_KINDS.has(pick.kind)) {
     explanation = detail.concepts[detail.mark_concepts[pick.kind] ?? ""] ?? null;
   } else {
@@ -73,16 +73,24 @@ function resolveSelection(pick: MarkPick, detail: SymbolDetail): Selection {
       null;
   }
 
+  const macdEvent =
+    pick.kind === "macd_event"
+      ? detail.chart.macdEvents?.find((e) => e.date === pick.date)
+      : undefined;
   return {
-    source,
+    source:
+      pick.kind === "macd_event" && pick.macdStatusCn
+        ? `MACD 副图标记 · ${pick.macdStatusCn}（研究代理）`
+        : source,
     date: pick.date,
     price: pick.price ?? pick.level,
     explanation,
     structure,
     b1PivotDate: pick.pivotDate ?? undefined,
     b1DistancePct: pick.distancePct ?? undefined,
+    macdEvent,
     events: undefined,
-    eventsLoading: true,
+    eventsLoading: pick.kind !== "macd_event", // MACD 不产生事件，无需查询
   };
 }
 
@@ -101,9 +109,9 @@ export default function WorkspacePage() {
   const [addDialogGroup, setAddDialogGroup] = useState<number | null | undefined>(undefined);
   const [showCreatePlan, setShowCreatePlan] = useState(false);
   const [showBuyPoint, setShowBuyPoint] = useState(false);
-  // 右侧解释面板是否收起。买点分析打开时面板自动隐藏（与 agent 抽屉功能重叠、无用），
-  // 故 expVisible = !showBuyPoint && !expCollapsed。点图上标记时自动展开以便看解释。
-  const [expCollapsed, setExpCollapsed] = useState(false);
+  // 右侧解释面板是否收起。默认收起以给 K 线主图留出更大空间；
+  // 点图上标记时自动展开以便看解释。买点分析打开时面板自动隐藏。
+  const [expCollapsed, setExpCollapsed] = useState(true);
   const expVisible = !showBuyPoint && !expCollapsed;
   const [sidebarOpen, setSidebarOpen] = useState(true);
   // KlineChart 把「下载当前图为 PNG」的闭包回传到这里，按钮点的时候调它
@@ -122,13 +130,6 @@ export default function WorkspacePage() {
   const { data: dashboard, isLoading: cardsLoading } = useQuery({
     queryKey: ["cards"],
     queryFn: () => api.dashboard(),
-  });
-
-  // 宏观快照：国债收益率 + 两融余额
-  const { data: macroRates, isLoading: macroLoading } = useQuery({
-    queryKey: ["macro-rates"],
-    queryFn: () => fundamentalsApi.rates(),
-    staleTime: 10 * 60 * 1000, // 10 分钟缓存
   });
 
   const cards = dashboard?.cards ?? [];
@@ -435,7 +436,13 @@ export default function WorkspacePage() {
                   highlight={highlightSpec}
                   onDownload={(fn) => (downloadPngRef.current = fn)}
                 />
-                <TrendChecklist payload={data.chart} assessment={data.assessment} />
+                <CollapsiblePanel
+                  title="趋势转折 5 条件"
+                  defaultCollapsed={true}
+                  storageKey="ws.card.trendcheck"
+                >
+                  <TrendChecklist payload={data.chart} assessment={data.assessment} />
+                </CollapsiblePanel>
                 <div className="chart-legend">
                   {display.bottomMarks && (
                     <span>
@@ -517,17 +524,13 @@ export default function WorkspacePage() {
               </div>
 
               {data.today && (
-                <CollapsiblePanel title="今日概述" storageKey="ws.card.today">
+                <CollapsiblePanel title="今日概述" storageKey="ws.card.today" defaultCollapsed={true}>
                   <TodayOverviewPanel today={data.today} onPickConcept={pickConcept} />
                 </CollapsiblePanel>
               )}
 
-              <MacroSnapshotPanel data={macroRates ?? null} isLoading={macroLoading} />
-
-              <MarketBreadthSnapshotPanel />
-
               {data.assessment.trade_opportunities.length > 0 && (
-                <CollapsiblePanel title="潜在买点" storageKey="ws.card.trade">
+                <CollapsiblePanel title="潜在买点" storageKey="ws.card.trade" defaultCollapsed={true}>
                   <TradeOpportunityPanel
                     opportunities={data.assessment.trade_opportunities}
                     onSelect={setSelection}
@@ -536,7 +539,7 @@ export default function WorkspacePage() {
               )}
 
               {data.assessment.pullback_opportunities.length > 0 && (
-                <CollapsiblePanel title="首次回撤机会" storageKey="ws.card.pullback">
+                <CollapsiblePanel title="首次回撤机会" storageKey="ws.card.pullback" defaultCollapsed={true}>
                   <PullbackOpportunityPanel
                     opportunities={data.assessment.pullback_opportunities}
                     onSelect={setSelection}
@@ -545,7 +548,7 @@ export default function WorkspacePage() {
               )}
 
               {data.assessment.conditional_scenarios.length > 0 && (
-                <CollapsiblePanel title="条件化场景" storageKey="ws.card.conditional">
+                <CollapsiblePanel title="条件化场景" storageKey="ws.card.conditional" defaultCollapsed={true}>
                   <ConditionalScenarioPanel
                     scenarios={data.assessment.conditional_scenarios}
                     onSelect={setSelection}
@@ -554,7 +557,7 @@ export default function WorkspacePage() {
               )}
 
               {data.assessment.exit_signals.length > 0 && (
-                <CollapsiblePanel title="持仓退出" storageKey="ws.card.exit">
+                <CollapsiblePanel title="持仓退出" storageKey="ws.card.exit" defaultCollapsed={true}>
                   <ExitSignalPanel
                     exitSignals={data.assessment.exit_signals}
                     onSelect={setSelection}
@@ -563,12 +566,12 @@ export default function WorkspacePage() {
               )}
 
               {data.assessment.tradability && (
-                <CollapsiblePanel title="可交易性门禁" storageKey="ws.card.tradability">
+                <CollapsiblePanel title="可交易性门禁" storageKey="ws.card.tradability" defaultCollapsed={true}>
                   <TradabilityPanel tradability={data.assessment.tradability} />
                 </CollapsiblePanel>
               )}
 
-              <CollapsiblePanel title="当前观察" storageKey="ws.card.assessment">
+              <CollapsiblePanel title="当前观察" storageKey="ws.card.assessment" defaultCollapsed={true}>
                 <AssessmentPanel assessment={data.assessment} onPickConcept={pickConcept} />
               </CollapsiblePanel>
 
@@ -583,7 +586,7 @@ export default function WorkspacePage() {
               {data.color_backtest && <ColorBacktestPanel report={data.color_backtest} />}
 
               {data.new_events.length > 0 && (
-                <CollapsiblePanel title={`今日新事件（${data.new_events.length}）`} storageKey="ws.card.newevents">
+                <CollapsiblePanel title={`今日新事件（${data.new_events.length}）`} storageKey="ws.card.newevents" defaultCollapsed={true}>
                   <div className="panel">
                     {data.new_events.map((e) => (
                       <div

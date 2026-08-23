@@ -160,7 +160,7 @@ def fetch_sector_members(
     """
     today = datetime.now().strftime("%Y-%m-%d")
     if not force:
-        cached = _load_members_cache()
+        cached = load_members_cache()
         if cached and cached.get("date") == today:
             logger.info("成分股映射命中当日缓存，跳过取数")
             return cached["boards"]
@@ -202,7 +202,183 @@ def fetch_sector_members(
 
 
 # ════════════════════════════════════════════════════════════════════════════
-# 2) 层级判定与去重（纯函数，P1.1 b）
+# 1b) 板块资金流（网络取数；单据规模代理，非真实机构/散户身份）
+#     实测教训：push2his 高并发（6 线程）触发临时封禁（RemoteDisconnected），
+#     且系统代理白名单拒 push2his、push2delay 只返最近 1 日。因此采用
+#     **本地累积 + 双通道增量**：
+#     - 当日增量走 clist 批量排行（白名单 push2，5 页请求覆盖全板块五档）；
+#     - 历史回填才用 push2his 直连（缓存不足 days 的板块，并发 2 + 1s 抖动）；
+#     - 历史落 sector_flow_history.json，跨日稳定，直连被封也不影响每日累积。
+# ════════════════════════════════════════════════════════════════════════════
+def _flow_history_path() -> Path:
+    return ROOT / "sector_flow_history.json"
+
+
+def load_flow_history() -> dict[str, list[dict]]:
+    p = _flow_history_path()
+    if not p.exists():
+        return {}
+    try:
+        data = json.loads(p.read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
+    except Exception:  # noqa: BLE001 - 缓存损坏按空处理，重拉即可
+        return {}
+
+
+def _merge_flow_points(
+    cached: list[dict], new: list[dict], *, keep_days: int = 90
+) -> list[dict]:
+    """按日期合并（新值覆盖旧值），升序返回，最多保留 keep_days 天。"""
+    by_date = {p["date"]: p for p in cached if p.get("date")}
+    for p in new or []:
+        if p.get("date"):
+            by_date[p["date"]] = p
+    return [by_date[d] for d in sorted(by_date)][-keep_days:]
+
+
+def _yi(v) -> float | None:
+    return None if v in (None, "", "-") else round(float(v) / 1e8, 2)
+
+
+def _fetch_flow_daily_snapshot() -> dict:
+    """当日全板块五档资金流快照（clist 批量排行，走白名单 push2，约 5 页请求）。
+
+    返回 ``{"date": str|None, "points": {code: point}}``，point 结构与 fflow 日史
+    一致（main/small/medium/large/super_large_yi，单位亿）。日期不猜：取任一板块
+    delay fflow 最新点的服务器日期，失败则 date=None 且快照弃用（不可用不冒充）。
+    """
+    from lei_signal.fundamentals import sources
+
+    diff: list[dict] = []
+    for page in range(1, 10):
+        payload = sources._get_json(
+            sources._CLIST_URLS,
+            {
+                "pn": page, "pz": 100, "po": 1, "np": 1, "fltt": 2, "invt": 2,
+                "fid": "f62", "fs": "m:90+t:2+f:!50",
+                "fields": "f12,f14,f62,f66,f72,f78,f84",
+            },
+        )
+        data = payload.get("data") or {}
+        batch = data.get("diff") or []
+        diff.extend(batch)
+        if not batch or len(diff) >= (data.get("total") or 0):
+            break
+
+    points: dict[str, dict] = {}
+    for r in diff:
+        code = str(r.get("f12") or "").strip()
+        if not code:
+            continue
+        points[code] = {
+            "main_yi": _yi(r.get("f62")),
+            "small_yi": _yi(r.get("f84")),
+            "medium_yi": _yi(r.get("f78")),
+            "large_yi": _yi(r.get("f72")),
+            "super_large_yi": _yi(r.get("f66")),
+        }
+
+    date: str | None = None
+    if points:
+        try:
+            probe = sources.fetch_industry_flow(next(iter(points)), days=1)
+            if probe:
+                date = probe[-1].get("date")
+        except Exception:  # noqa: BLE001 - 日期拿不到就弃用快照
+            date = None
+    return {"date": date, "points": points}
+
+
+def fetch_sector_flows(
+    codes: list[str],
+    *,
+    days: int = 60,
+    concurrency: int = 2,
+    jitter: float = 1.0,
+) -> dict[str, list[dict]]:
+    """增量维护板块资金流历史缓存，返回合并后的全量日史。
+
+    1. 当日增量：clist 批量快照（稳定，5 页请求）；
+    2. 历史回填：仅缓存不足 ``days`` 的板块，push2his 直连全量拉
+       （先探一次直连可用性，被封则本轮跳过，等下个交易日再试）；
+    3. 合并去重（新值覆盖旧值）后原子落盘 ``sector_flow_history.json``。
+    """
+    from lei_signal.fundamentals import sources
+
+    cached_all = load_flow_history()
+
+    snap = _fetch_flow_daily_snapshot()
+    snap_date, snap_pts = snap["date"], snap["points"]
+
+    def _have(code: str) -> int:
+        n = len(cached_all.get(code) or [])
+        if snap_date and code in snap_pts:
+            last = (cached_all.get(code) or [{}])[-1].get("date")
+            if last != snap_date:
+                n += 1
+        return n
+
+    need_backfill = [c for c in codes if _have(c) < days]
+
+    fetched: dict[str, list[dict]] = {}
+    if need_backfill:
+        direct_ok = True
+        try:
+            sources._get_json(
+                sources._FLOW_URLS[:1],
+                {"lmt": 1, "klt": 101, "secid": f"90.{need_backfill[0]}",
+                 "fields1": "f1", "fields2": "f51"},
+                trust_env=False,
+            )
+        except Exception:  # noqa: BLE001 - 直连不可用则本轮不回填
+            direct_ok = False
+            logger.warning(
+                "push2his 直连不可用（可能临时封禁），%d 个板块历史回填延后",
+                len(need_backfill),
+            )
+        if direct_ok:
+            lock = threading.Lock()
+
+            def worker(code: str) -> None:
+                time.sleep(random.uniform(0, jitter))
+                try:
+                    pts = sources.fetch_industry_flow(code, days=days, prefer_direct=True)
+                except Exception as exc:  # noqa: BLE001 - 单板块失败不阻断其余
+                    logger.warning("板块 %s 资金流回填失败: %s", code, exc)
+                    pts = []
+                with lock:
+                    fetched[code] = pts
+
+            threads = []
+            for code in need_backfill:
+                t = threading.Thread(target=worker, args=(code,), daemon=True)
+                threads.append(t)
+                t.start()
+                while len([x for x in threads if x.is_alive()]) >= concurrency:
+                    time.sleep(0.01)
+            for t in threads:
+                t.join()
+
+    merged_all = {
+        code: _merge_flow_points(
+            cached_all.get(code) or [],
+            [
+                *(fetched.get(code) or []),
+                *(
+                    [{"date": snap_date, **snap_pts[code]}]
+                    if snap_date and code in snap_pts
+                    else []
+                ),
+            ],
+        )
+        for code in set(codes) | set(cached_all)
+    }
+    _save_atomic(merged_all, _flow_history_path())
+    return merged_all
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# 2) 层级判定和去重（纯函数，P1.1 b）
 # ════════════════════════════════════════════════════════════════════════════
 def classify_hierarchy(
     boards: dict[str, set[str]],
@@ -605,10 +781,198 @@ def classify_stage(
 
 
 # ════════════════════════════════════════════════════════════════════════════
+# 7b) 道路层观察点（纯函数，research_proxy）
+#     策略溯源：trading-spec-v1.md §2.2「均线运行方向是道路」——把 classify_stage
+#     的阶段切换条件输出成「当前满足状态 + 差多少」，回答「下一观察点是什么」。
+#     不新造条件、不新造参数，全部复用 classify_stage 的同一组输入（红线 4）。
+# ════════════════════════════════════════════════════════════════════════════
+def stage_checkpoints(
+    *,
+    stage: str | None,
+    idx_close: pd.Series | None,
+    sma60_series: pd.Series | None,
+    sma60_slope_sign: int | None,
+    ema20_slope_sign: int | None,
+    rs_above_ma20: bool | None,
+    breadth_divergence: bool,
+    hit_count: int,
+) -> dict:
+    """返回 ``{dist_to_sma60_pct, conditions, next_watch, next_watch_kind}``。
+
+    - conditions：道路确立（markup）三条件的满足清单，每条带中文与差距说明。
+    - next_watch：一句话「下一观察点」，kind ∈ upgrade / risk / watch / None。
+    - 样本不足 / SMA60 未成形 → conditions 空清单、next_watch=None（不可用不冒充）。
+    """
+    if (
+        idx_close is None or sma60_series is None
+        or hit_count < _MIN_HIT_FOR_INDEX
+        or len(idx_close) == 0
+        or sma60_series.dropna().empty
+    ):
+        return {
+            "dist_to_sma60_pct": None,
+            "conditions": [],
+            "next_watch": None,
+            "next_watch_kind": None,
+        }
+
+    last_idx = float(idx_close.iloc[-1])
+    last_sma60 = float(sma60_series.iloc[-1])
+    dist_pct = round((last_idx / last_sma60 - 1.0) * 100.0, 2)
+
+    conditions = [
+        {
+            "key": "price_above_sma60",
+            "label": "价格 > SMA60",
+            "met": last_idx > last_sma60,
+            "detail": f"{last_idx:.2f} vs SMA60 {last_sma60:.2f}（差 {dist_pct:+.2f}%）",
+        },
+        {
+            "key": "sma60_slope_up",
+            "label": "SMA60 斜率向上",
+            "met": (sma60_slope_sign or 0) > 0,
+            "detail": None if (sma60_slope_sign or 0) > 0 else "当前走平/向下",
+        },
+        {
+            "key": "rs_above_ma20",
+            "label": "RS 强于等权基准",
+            "met": bool(rs_above_ma20),
+            "detail": None if rs_above_ma20 else "相对强度在 MA20 下方",
+        },
+    ]
+    unmet: list[str] = [str(c["label"]) for c in conditions if not c["met"]]
+
+    next_watch: str | None = None
+    kind: str | None = None
+    if stage == "markup":
+        if breadth_divergence:
+            next_watch = "宽度背离已出现（价格新高但 b50 走弱）→ 警惕转入派发"
+            kind = "risk"
+        else:
+            next_watch = f"跌破 SMA60（当前高出 {dist_pct:.2f}%）→ 道路转弱的第一信号"
+            kind = "risk"
+    elif stage == "accumulation":
+        if unmet == ["价格 > SMA60"]:
+            next_watch = (
+                f"价格上穿 SMA60（还差 {abs(dist_pct):.2f}%）→ 升级为上升阶段"
+                "（SMA60 斜率与 RS 已就绪）"
+            )
+        elif unmet:
+            next_watch = f"待补齐：{'、'.join(unmet)} → 升级为上升阶段"
+        else:  # 三条全满足但被判为筑底：不应发生（classify_stage 会判 markup），保守兜底
+            next_watch = "三条件已满足，等待阶段重估"
+        kind = "upgrade"
+    elif stage == "distribution":
+        if breadth_divergence:
+            next_watch = (
+                "SMA60 斜率转向上且宽度背离消除 → 修复为上升；跌破 SMA60 → 转入下降"
+                f"（当前高出 {dist_pct:.2f}%）"
+            )
+        else:
+            next_watch = (
+                "SMA60 斜率转向上 → 修复为上升；跌破 SMA60 → 转入下降"
+                f"（当前高出 {dist_pct:.2f}%）"
+            )
+        kind = "watch"
+    elif stage == "decline":
+        next_watch = "RS 重新强于等权基准且 EMA20 斜率转正 → 进入筑底观察"
+        kind = "upgrade"
+    elif stage is None and unmet:
+        next_watch = f"未定阶段：待补齐 {'、'.join(unmet)} 后重估"
+        kind = "watch"
+
+    return {
+        "dist_to_sma60_pct": dist_pct,
+        "conditions": conditions,
+        "next_watch": next_watch,
+        "next_watch_kind": kind,
+    }
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# 7c) 资金流聚合 + 阶段交叉验证（纯函数，research_proxy）
+#     定位：路牌/交叉验证层——只印证或矛盾，绝不参与阶段判定、不出买卖点。
+#     口径：主力=超大单+大单、散户=中单+小单，为**单据规模代理**而非真实身份；
+#     只用符号判定，不设金额阈值（不新造参数，红线 4）。
+# ════════════════════════════════════════════════════════════════════════════
+def aggregate_flows(points: list[dict] | None) -> dict:
+    """由日级资金流点算 5/20/60 日累计主力与散户净流入（亿元）。
+
+    窗口不足 N 个交易日 → 该窗口 None（不冒充）；散户 = 中单 + 小单，
+    主力字段直接用东财 f52（= 超大 + 大单）。结构 struct 只看 20 日符号：
+    main_in_retail_out（吸筹形态）/ main_out_retail_in（派发形态）/
+    both_in（合力流入）/ both_out（合力流出）。
+    """
+    out: dict = {
+        "flow_5d_main_yi": None, "flow_20d_main_yi": None, "flow_60d_main_yi": None,
+        "flow_5d_retail_yi": None, "flow_20d_retail_yi": None, "flow_60d_retail_yi": None,
+        "flow_20d_struct": None, "flow_note_cn": None,
+    }
+    if not points:
+        return out
+
+    def _sum(vals: list) -> float | None:
+        clean = [v for v in vals if v is not None]
+        if len(clean) < len(vals) or not clean:
+            return None
+        return round(sum(clean), 2)
+
+    def _retail(p: dict) -> float | None:
+        m, s = p.get("medium_yi"), p.get("small_yi")
+        if m is None and s is None:
+            return None
+        return (m or 0) + (s or 0)
+
+    for window in (5, 20, 60):
+        if len(points) < window:
+            continue
+        tail = points[-window:]
+        out[f"flow_{window}d_main_yi"] = _sum([p.get("main_yi") for p in tail])
+        out[f"flow_{window}d_retail_yi"] = _sum([_retail(p) for p in tail])
+
+    main20 = out["flow_20d_main_yi"]
+    retail20 = out["flow_20d_retail_yi"]
+    if main20 is not None and retail20 is not None:
+        if main20 > 0 and retail20 < 0:
+            out["flow_20d_struct"] = "main_in_retail_out"
+            out["flow_note_cn"] = "吸筹形态（主力进·散户出）"
+        elif main20 < 0 and retail20 > 0:
+            out["flow_20d_struct"] = "main_out_retail_in"
+            out["flow_note_cn"] = "派发形态（主力出·散户进）"
+        elif main20 > 0 and retail20 > 0:
+            out["flow_20d_struct"] = "both_in"
+            out["flow_note_cn"] = "合力流入"
+        else:
+            out["flow_20d_struct"] = "both_out"
+            out["flow_note_cn"] = "合力流出"
+    return out
+
+
+def flow_vs_stage(stage: str | None, flow_20d_main_yi: float | None) -> str | None:
+    """主力 20 日净流入方向与阶段方向的交叉验证（只看符号）。
+
+    返回 ``confirm``（资金印证）/ ``conflict``（资金矛盾）/ None。
+    markup/accumulation 以主力流入为印证；distribution/decline 以流出为印证。
+    """
+    if stage is None or flow_20d_main_yi is None or flow_20d_main_yi == 0:
+        return None
+    inflow_confirms = stage in ("markup", "accumulation")
+    if flow_20d_main_yi > 0:
+        return "confirm" if inflow_confirms else "conflict"
+    return "conflict" if inflow_confirms else "confirm"
+
+
+_FLOW_VS_STAGE_CN = {"confirm": "资金印证", "conflict": "资金矛盾"}
+
+
+# ════════════════════════════════════════════════════════════════════════════
 # 8) 落盘产物（原子写，P1.1 h/i）
 # ════════════════════════════════════════════════════════════════════════════
-def _save_atomic(payload: dict, path: Path) -> None:
-    """照抄 a_share_breadth._save_codes 的 tmp.replace(p) 原子写（红线 8）。"""
+def _save_atomic(payload: dict | list, path: Path) -> None:
+    """照抄 a_share_breadth._save_codes 的 tmp.replace(p) 原子写（红线 8）。
+
+    ``list`` 用于逐日历史（sector_trend_history / sector_flow_history 均为数组）。
+    """
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
         tmp = path.with_name(path.name + ".tmp")
@@ -687,13 +1051,19 @@ def build_snapshot(
     wide: pd.DataFrame,
     daily_ref: dict[str, dict] | None = None,
     bench_hs300: pd.Series | None = None,
+    flows: dict[str, list[dict]] | None = None,
+    collect_series: bool = False,
 ) -> dict:
     """纯计算（不含网络）：由成员映射 + K线宽表产出当日全量快照。
 
     daily_ref: ``{code: {pct_change, pe_ttm, main_net_inflow_yi, up_count, down_count, total_mv_yi}}``
     来自 clist 当日快照（取数失败时可为 None，对应字段留 null）。
+    flows: ``{code: [日级资金流点]}``（fetch_sector_flows 产出，失败/缺失时资金流字段留 null）。
+    collect_series: True 时在快照挂 ``_series``（各板块 close/b50/rs_pctile 全量序列，
+    供 backfill_history 用；调用方用完须 pop，不落盘）。
     """
     daily_ref = daily_ref or {}
+    flows = flows or {}
     config = indicator_config()
 
     # 全A等权基准（与板块同口径：等权 vs 等权）
@@ -736,6 +1106,17 @@ def build_snapshot(
     levels = {c: hier[c]["level"] for c in boards_idx}
     rs = compute_rs_panel(boards_idx, bench_all, levels)
 
+    # 全量序列收集（backfill_history 用；不落快照）
+    _series: dict[str, dict] = {}
+    if collect_series:
+        for code in boards_idx:
+            _series[code] = {
+                "close": boards_idx[code],
+                "b50": (boards_breadth.get(code) or {}).get("b50"),
+                "rs_pctile": (rs.get(code) or {}).get("rs_pctile"),
+                "rs_pctile_delta_20": (rs.get(code) or {}).get("rs_pctile_delta_20"),
+            }
+
     # 组装行
     rows: list[dict] = []
     for code in canonical_codes:
@@ -755,6 +1136,10 @@ def build_snapshot(
             "hit_count": hit_count,
             "stage": None,
             "stage_basis": [],
+            "dist_to_sma60_pct": None,
+            "checkpoints": [],
+            "next_watch": None,
+            "next_watch_kind": None,
             "rs_pctile": None,
             "rs_pctile_delta_20": None,
             "rs_chg_20": None,
@@ -778,6 +1163,17 @@ def build_snapshot(
             "pct_change": ref.get("pct_change"),
             "pe_ttm": ref.get("pe_ttm"),
             "main_net_inflow_yi": ref.get("main_net_inflow_yi"),
+            # 资金流（单据规模代理，research_proxy；抓取失败全 null）
+            "flow_5d_main_yi": None,
+            "flow_20d_main_yi": None,
+            "flow_60d_main_yi": None,
+            "flow_5d_retail_yi": None,
+            "flow_20d_retail_yi": None,
+            "flow_60d_retail_yi": None,
+            "flow_20d_struct": None,
+            "flow_note_cn": None,
+            "flow_vs_stage": None,
+            "flow_vs_stage_cn": None,
             "up_count": ref.get("up_count"),
             "down_count": ref.get("down_count"),
             "total_mv_yi": ref.get("total_mv_yi"),
@@ -787,6 +1183,7 @@ def build_snapshot(
         if hit_count < _MIN_HIT_FOR_INDEX or code not in boards_idx:
             row["stage"] = None
             row["stage_basis"] = ["样本不足（命中成分股 < 5 只）"]
+            row.update(**aggregate_flows(flows.get(code)))
             rows.append(row)
             continue
 
@@ -805,9 +1202,23 @@ def build_snapshot(
             breadth_divergence=div,
             hit_count=hit_count,
         )
+        checkpoints = stage_checkpoints(
+            stage=stage,
+            idx_close=idx,
+            sma60_series=_sma60_from_close(idx, config),
+            sma60_slope_sign=trend.get("sma60_slope_sign"),
+            ema20_slope_sign=trend.get("ema20_slope_sign"),
+            rs_above_ma20=(rs[code]["rs_above_ma20"].iloc[-1] if code in rs else None),
+            breadth_divergence=div,
+            hit_count=hit_count,
+        )
         row.update(
             stage=stage,
             stage_basis=basis,
+            dist_to_sma60_pct=checkpoints["dist_to_sma60_pct"],
+            checkpoints=checkpoints["conditions"],
+            next_watch=checkpoints["next_watch"],
+            next_watch_kind=checkpoints["next_watch_kind"],
             b20=breadth["b20"],
             b50=breadth["b50"],
             b200=breadth["b200"],
@@ -830,6 +1241,13 @@ def build_snapshot(
         row["rs_chg_60"] = _round(_last(r.get("rs_chg_60")))
         row["rs_pctile"] = _round(_last(r.get("rs_pctile")))
         row["rs_pctile_delta_20"] = _round(_last(r.get("rs_pctile_delta_20")))
+
+        # 资金流聚合 + 阶段交叉验证（缺数保持 null，不冒充）
+        agg = aggregate_flows(flows.get(code))
+        row.update(**agg)
+        vs = flow_vs_stage(stage, agg["flow_20d_main_yi"])
+        row["flow_vs_stage"] = vs
+        row["flow_vs_stage_cn"] = _FLOW_VS_STAGE_CN.get(vs) if vs else None
         rows.append(row)
 
     as_of = datetime.now().strftime("%Y-%m-%d %H:%M")
@@ -849,10 +1267,67 @@ def build_snapshot(
         "research_proxy_note": (
             "板块趋势判定为研究代理（research_proxy）：等权指数为本机合成（非行情软件板块指数），"
             "以当前成分回溯含前视偏差（仅形态参考），不含北交所；MA200 留痕中。"
-            "所有判定不冒充 LEI 原始规则，不构成买卖建议。"
+            "资金流「主力=超大单+大单、散户=中单+小单」为单据规模代理而非真实机构/散户身份，"
+            "只作阶段交叉验证，不参与判定、不构成买卖建议。"
         ),
     }
+    if collect_series:
+        snapshot["_series"] = _series
     return snapshot
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# 8b) 历史回填：由当前 320 日窗口一次性补齐 sector_trend_history.json
+#     口径与快照声明一致：以当前成分回溯（含前视偏差，仅形态参考）。
+#     已有的逐日实录优先（同日不覆盖）——实录是 point-in-time 真值。
+# ════════════════════════════════════════════════════════════════════════════
+def backfill_history(
+    series_by_code: dict[str, dict], *, limit_days: int = 250
+) -> dict:
+    """用全量序列补历史缺失日期，返回 ``{"added": 新增天数, "total": 总天数}``。"""
+    hist: list[dict] = []
+    p = _history_path()
+    if p.exists():
+        try:
+            loaded = json.loads(p.read_text(encoding="utf-8"))
+            hist = loaded if isinstance(loaded, list) else []
+        except Exception:  # noqa: BLE001 - 损坏按空处理
+            hist = []
+    existing_dates = {rec.get("date") for rec in hist}
+
+    # 日期全集 = 各板块 close 序列索引的并集（升序）
+    all_dates: set[pd.Timestamp] = set()
+    for s in series_by_code.values():
+        close = s.get("close")
+        if close is not None:
+            all_dates.update(close.index)
+    new_dates = sorted(d for d in all_dates if d.strftime("%Y-%m-%d") not in existing_dates)
+    new_dates = new_dates[-limit_days:]
+
+    def _v(series, ts) -> float | None:
+        if series is None:
+            return None
+        try:
+            v = series.loc[ts]
+        except KeyError:
+            return None
+        return None if pd.isna(v) else round(float(v), 2)
+
+    for ts in new_dates:
+        dstr = ts.strftime("%Y-%m-%d")
+        boards_rec: dict[str, dict] = {}
+        for code, s in series_by_code.items():
+            boards_rec[code] = {
+                "stage": None,  # 历史阶段需逐日重算，回填只补形态序列
+                "rs_pctile": _v(s.get("rs_pctile"), ts),
+                "rs_pctile_delta_20": _v(s.get("rs_pctile_delta_20"), ts),
+                "b50": _v(s.get("b50"), ts),
+                "close": _v(s.get("close"), ts),
+            }
+        hist.append({"date": dstr, "boards": boards_rec})
+    hist.sort(key=lambda r: r.get("date", ""))
+    _save_atomic(hist, p)
+    return {"added": len(new_dates), "total": len(hist)}
 
 
 def _sma60_from_close(close: pd.Series, config: dict) -> pd.Series:
@@ -889,10 +1364,13 @@ def run_sector_trend(
     limit: int | None = None,
     no_save: bool = False,
     force: bool = False,
+    backfill: bool = False,
 ) -> dict:
     """端到端：成分股 → 读 parquet → 计算 → 原子写三份 json。
 
     返回快照 dict。取数失败抛异常（CLI 据此返回码 1）。
+    ``backfill=True`` 额外把 320 日窗口的 close/b50/RS 分位序列一次性回填进
+    ``sector_trend_history.json``（已有逐日实录优先，同日不覆盖）。
     """
     t0 = time.time()
     logger.info("▶ 拉取板块成分股映射…")
@@ -921,7 +1399,20 @@ def run_sector_trend(
         logger.warning("板块当日快照拉取失败（字段留 null）: %s", exc)
 
     bench_hs300 = _load_bench_hs300()
-    snapshot = build_snapshot(members, wide, daily_ref, bench_hs300)
+
+    # 板块资金流日史（单据规模代理；整体失败降级 null，不阻断快照）
+    flows: dict[str, list[dict]] = {}
+    try:
+        logger.info("▶ 拉取板块资金流日史…")
+        flows = fetch_sector_flows(list(members.keys()))
+        logger.info("  资金流命中 %d/%d 板块", sum(1 for v in flows.values() if v), len(flows))
+    except Exception as exc:  # noqa: BLE001 - 整体失败不阻断主快照
+        logger.warning("板块资金流整体拉取失败（字段留 null）: %s", exc)
+
+    snapshot = build_snapshot(
+        members, wide, daily_ref, bench_hs300, flows, collect_series=backfill
+    )
+    series = snapshot.pop("_series", None)  # 挂载序列永不落盘
 
     if not no_save:
         _save_atomic(snapshot, _snapshot_path())
@@ -933,6 +1424,12 @@ def run_sector_trend(
                 _members_path(),
             )
         logger.info("✓ 已落盘 sector_trend_snapshot.json + sector_trend_history.json")
+        if backfill and series is not None:
+            stats = backfill_history(series)
+            logger.info(
+                "✓ 历史回填完成：新增 %d 天（含前视偏差，仅形态参考），历史共 %d 天",
+                stats["added"], stats["total"],
+            )
 
     logger.info("⏱ 耗时 %.1fs", time.time() - t0)
     return snapshot
@@ -1003,6 +1500,7 @@ def load_members_cache() -> dict | None:
 
 __all__ = [
     "_prefix",
+    "aggregate_flows",
     "build_equal_weight_index",
     "breadth_divergence",
     "classify_hierarchy",
@@ -1011,11 +1509,15 @@ __all__ = [
     "compute_breadth_series",
     "compute_rs_panel",
     "fetch_sector_boards",
+    "fetch_sector_flows",
     "fetch_sector_members",
+    "flow_vs_stage",
+    "load_flow_history",
     "load_history",
     "load_kline_wide",
     "load_members_cache",
     "load_snapshot",
     "run_sector_trend",
+    "stage_checkpoints",
     "validate_hierarchy",
 ]

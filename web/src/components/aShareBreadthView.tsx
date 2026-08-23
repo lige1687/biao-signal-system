@@ -10,6 +10,12 @@ export function isRealAShare(p: GlobalPanel | null | undefined): boolean {
   return !!p && (p.is_real_a_share === true || p.up != null);
 }
 
+/** 判断一个 GlobalPanel 是否带真实 B 系列（MA 上方占比）数据。
+ *  CN_ALL_A 在本机预计算落盘后、或 SP500 原管道均会带此字段。 */
+export function hasBreadth(p: GlobalPanel | null | undefined): boolean {
+  return !!p && p.breadth_20 != null;
+}
+
 export function fmtPct(v: number | null | undefined, d = 1): string {
   return v == null ? "—" : `${v.toFixed(d)}%`;
 }
@@ -67,6 +73,20 @@ export function AShareSourceLine({ p }: { p: GlobalPanel }) {
     <div className="ab-source">
       <span className="ab-source-label">数据来源</span>
       <span className="ab-source-text">{p.source_detail || "—"}</span>
+    </div>
+  );
+}
+
+/** 冻结快照标签：宽度来自收盘后预计算的磁盘缓存，展示"截至 X 收盘"。 */
+export function BreadthAsOf({ p }: { p: GlobalPanel }) {
+  if (!p.breadth_trading_day) return null;
+  return (
+    <div className="ab-asof" title={`宽度快照计算于 ${p.breadth_as_of || "—"}`}>
+      <span className="ab-asof-dot" />
+      <span>宽度·截至 {p.breadth_trading_day} 收盘</span>
+      {p.breadth_as_of ? (
+        <span className="ab-asof-sub">（{p.breadth_as_of} 计算）</span>
+      ) : null}
     </div>
   );
 }

@@ -1234,8 +1234,12 @@ class THSBoardProvider:
     --------
     - 板块指数（成份股加权），不复权（指数无复权概念）。
     - 按年分片：每 年 一个 js 文件，拼接得到全历史（2018 至今 2000+ 根）。
-    - 盘中无当日 bar：同花顺收盘后才出当日 K（板块看收盘形态即可）。
-    - 字段顺序：日期,开,收,高,低,量,额,,,,标志位（注意收在高前）。
+    - 盘中当日 bar：年文件收盘后才写入，盘中用 ``today.js``（v4 实时行情）
+      的 开(7)/高(8)/低(9)/现价(11)/量(13) 合成当日形成中 bar 追加。
+      实测字段口径与年文件一致（2026-08-19 盘中验证：通信设备/半导体/
+      银行/电力涨跌方向与幅度互证自洽）。追加是尽力而为：today.js 失败、
+      日期未更新或 OHLC 不自洽时静默跳过，历史照常返回。
+    - 字段顺序：日期,开,高,低,收,量,额,,,,标志位（高在收前，解析时注意）。
 
     cookie 机制
     -----------
@@ -1251,6 +1255,7 @@ class THSBoardProvider:
 
     name = "ths_board"
     _LINE_URL = "https://d.10jqka.com.cn/v4/line/bk_{code}/01/{year}.js"
+    _TODAY_URL = "https://d.10jqka.com.cn/v4/line/bk_{code}/01/today.js"
     _CODE_RE = __import__("re").compile(r"TH(\d{6})", __import__("re").IGNORECASE)
     _THS_JS_PATH = (
         Path(__file__).resolve().parent / "assets" / "ths.js"
@@ -1333,6 +1338,60 @@ class THSBoardProvider:
             return []
         return [b.split(",") for b in data.split(";") if b.strip()]
 
+    def _fetch_today(self, code: str) -> dict[str, Any] | None:
+        """拉 today.js 实时行情；任何失败都返回 None（盘中增强是尽力而为）。"""
+        url = self._TODAY_URL.format(code=code)
+        headers = {
+            "Referer": "http://q.10jqka.com.cn",
+            "Host": "d.10jqka.com.cn",
+            "Cookie": f"v={self._compute_cookie()}",
+        }
+        try:
+            text = self._opener(url, headers)
+        except DataUnavailableError:
+            return None
+        start = text.find("{")
+        if start < 0:
+            return None
+        try:
+            payload = json.loads(text[start : text.rfind(")")])
+        except json.JSONDecodeError:
+            return None
+        quote = payload.get(f"bk_{code}")
+        return quote if isinstance(quote, dict) else None
+
+    def _augment_today(self, bars: pd.DataFrame, code: str) -> pd.DataFrame:
+        """盘中把 today.js 的当日形成中 bar 追加到年文件历史之后。
+
+        追加条件（不满足即原样返回，不抛错）：
+        - 日期比历史最后一根更新（盘前/假日 today.js 回的是旧日期）；
+        - OHLC 为正且自洽（high >= max(open, close)，low <= min(open, close)），
+          防止盘前未初始化的垃圾值混进分析管线。
+        """
+        quote = self._fetch_today(code)
+        if not quote:
+            return bars
+        try:
+            ts = pd.to_datetime(str(quote["1"]), format="%Y%m%d", errors="coerce")
+            open_ = float(quote["7"])
+            high = float(quote["8"])
+            low = float(quote["9"])
+            close = float(quote["11"])
+            volume = float(quote.get("13") or 0.0)
+        except (KeyError, TypeError, ValueError):
+            return bars
+        if pd.isna(ts) or ts <= bars.index[-1]:
+            return bars
+        if min(open_, high, low, close) <= 0.0:
+            return bars
+        if high < max(open_, close) or low > min(open_, close):
+            return bars
+        row = pd.DataFrame(
+            {"open": [open_], "high": [high], "low": [low], "close": [close], "volume": [volume]},
+            index=pd.DatetimeIndex([ts]),
+        )
+        return pd.concat([bars, row])
+
     def fetch(self, symbol: str, *, min_rows: int = 21) -> PriceData:
         m = self._CODE_RE.search(symbol)
         if m is None:
@@ -1370,6 +1429,8 @@ class THSBoardProvider:
             adjusted=False,
             min_rows=min_rows,
         )
+        # 盘中增强：today.js 的当日形成中 bar（尽力而为，失败不阻断历史返回）
+        bars = self._augment_today(bars, code)
         # 板块中文名：查静态表（labels.THS_INDUSTRY_NAMES），查不到回退代码
         display_name = bare
         try:

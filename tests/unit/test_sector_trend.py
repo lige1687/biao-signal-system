@@ -202,6 +202,277 @@ class TestStage:
 
 
 # ════════════════════════════════════════════════════════════════════════════
+# 3b) 道路层观察点（stage_checkpoints：条件清单 + 下一观察点）
+# ════════════════════════════════════════════════════════════════════════════
+class TestStageCheckpoints:
+    def _sma60(self, s):
+        return s.rolling(60, min_periods=60).mean()
+
+    def test_conditions_and_distance(self):
+        idx = _mk(np.linspace(100, 200, 300))
+        out = st.stage_checkpoints(
+            stage="markup", idx_close=idx, sma60_series=self._sma60(idx),
+            sma60_slope_sign=1, ema20_slope_sign=1, rs_above_ma20=True,
+            breadth_divergence=False, hit_count=10,
+        )
+        assert [c["key"] for c in out["conditions"]] == [
+            "price_above_sma60", "sma60_slope_up", "rs_above_ma20",
+        ]
+        assert all(c["met"] for c in out["conditions"])
+        # 价格远高于 SMA60 → dist 为正
+        assert out["dist_to_sma60_pct"] > 0
+        assert out["next_watch_kind"] == "risk"
+        assert "跌破 SMA60" in out["next_watch"]
+
+    def test_accumulation_only_price_missing(self):
+        # 筑底：SMA60 斜率向上、RS 强，仅价格在 SMA60 下方 → 升级观察点带差距
+        idx = _mk(np.linspace(200, 100, 300))
+        out = st.stage_checkpoints(
+            stage="accumulation", idx_close=idx, sma60_series=self._sma60(idx),
+            sma60_slope_sign=1, ema20_slope_sign=1, rs_above_ma20=True,
+            breadth_divergence=False, hit_count=10,
+        )
+        unmet = [c["label"] for c in out["conditions"] if not c["met"]]
+        assert unmet == ["价格 > SMA60"]
+        assert out["next_watch_kind"] == "upgrade"
+        assert "上穿 SMA60" in out["next_watch"] and "还差" in out["next_watch"]
+        assert out["dist_to_sma60_pct"] < 0
+
+    def test_accumulation_multiple_missing(self):
+        idx = _mk(np.linspace(200, 100, 300))
+        out = st.stage_checkpoints(
+            stage="accumulation", idx_close=idx, sma60_series=self._sma60(idx),
+            sma60_slope_sign=-1, ema20_slope_sign=0, rs_above_ma20=True,
+            breadth_divergence=False, hit_count=10,
+        )
+        unmet = [c["label"] for c in out["conditions"] if not c["met"]]
+        assert len(unmet) == 2
+        assert out["next_watch_kind"] == "upgrade"
+        assert "待补齐" in out["next_watch"]
+
+    def test_distribution_two_sided_watch(self):
+        idx = _mk(np.linspace(100, 200, 300))
+        out = st.stage_checkpoints(
+            stage="distribution", idx_close=idx, sma60_series=self._sma60(idx),
+            sma60_slope_sign=-1, ema20_slope_sign=-1, rs_above_ma20=True,
+            breadth_divergence=False, hit_count=10,
+        )
+        assert out["next_watch_kind"] == "watch"
+        assert "SMA60 斜率转向上" in out["next_watch"] and "转入下降" in out["next_watch"]
+
+    def test_decline_bottoming_watch(self):
+        idx = _mk(np.linspace(200, 100, 300))
+        out = st.stage_checkpoints(
+            stage="decline", idx_close=idx, sma60_series=self._sma60(idx),
+            sma60_slope_sign=-1, ema20_slope_sign=-1, rs_above_ma20=False,
+            breadth_divergence=False, hit_count=10,
+        )
+        assert out["next_watch_kind"] == "upgrade"
+        assert "筑底观察" in out["next_watch"]
+
+    def test_undefined_stage_lists_unmet(self):
+        idx = _mk(np.linspace(100, 200, 300))
+        out = st.stage_checkpoints(
+            stage=None, idx_close=idx, sma60_series=self._sma60(idx),
+            sma60_slope_sign=-1, ema20_slope_sign=-1, rs_above_ma20=False,
+            breadth_divergence=False, hit_count=10,
+        )
+        assert out["next_watch_kind"] == "watch"
+        assert "未定阶段" in out["next_watch"]
+
+    def test_markup_with_breadth_divergence_warns(self):
+        idx = _mk(np.linspace(100, 200, 300))
+        out = st.stage_checkpoints(
+            stage="markup", idx_close=idx, sma60_series=self._sma60(idx),
+            sma60_slope_sign=1, ema20_slope_sign=1, rs_above_ma20=True,
+            breadth_divergence=True, hit_count=10,
+        )
+        assert out["next_watch_kind"] == "risk"
+        assert "宽度背离" in out["next_watch"]
+
+    def test_insufficient_returns_empty(self):
+        out = st.stage_checkpoints(
+            stage=None, idx_close=None, sma60_series=None,
+            sma60_slope_sign=None, ema20_slope_sign=None, rs_above_ma20=None,
+            breadth_divergence=False, hit_count=2,
+        )
+        assert out["conditions"] == []
+        assert out["next_watch"] is None
+        assert out["next_watch_kind"] is None
+        assert out["dist_to_sma60_pct"] is None
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# 3c) 资金流聚合 + 阶段交叉验证（单据规模代理，sign-only 不设阈值）
+# ════════════════════════════════════════════════════════════════════════════
+def _flow_pt(main, small, medium, large=0.0, super_large=0.0):
+    return {
+        "main_yi": main, "small_yi": small, "medium_yi": medium,
+        "large_yi": large, "super_large_yi": super_large,
+    }
+
+
+class TestAggregateFlows:
+    def test_accumulation_structure(self):
+        # 20 日：主力净流入 + 散户净流出 → 吸筹形态
+        pts = [_flow_pt(main=1.0, small=-0.4, medium=-0.3) for _ in range(20)]
+        out = st.aggregate_flows(pts)
+        assert out["flow_20d_main_yi"] == 20.0
+        assert out["flow_20d_retail_yi"] == -14.0
+        assert out["flow_20d_struct"] == "main_in_retail_out"
+        assert "吸筹" in out["flow_note_cn"]
+
+    def test_distribution_structure(self):
+        pts = [_flow_pt(main=-1.0, small=0.4, medium=0.3) for _ in range(20)]
+        out = st.aggregate_flows(pts)
+        assert out["flow_20d_struct"] == "main_out_retail_in"
+        assert "派发" in out["flow_note_cn"]
+
+    def test_windows_and_insufficient(self):
+        # 60 点：三个窗口都有值；前 5 天单独构造验证 5 日窗口只看尾部
+        pts = [_flow_pt(main=1.0, small=1.0, medium=0.0) for _ in range(60)]
+        out = st.aggregate_flows(pts)
+        assert out["flow_5d_main_yi"] == 5.0
+        assert out["flow_20d_main_yi"] == 20.0
+        assert out["flow_60d_main_yi"] == 60.0
+        assert out["flow_20d_struct"] == "both_in"  # 主力与散户同向流入
+        # 不足 20 日 → 20/60 窗口 null（不冒充）
+        short = st.aggregate_flows(pts[:10])
+        assert short["flow_5d_main_yi"] == 5.0
+        assert short["flow_20d_main_yi"] is None
+        assert short["flow_60d_main_yi"] is None
+        assert st.aggregate_flows(None)["flow_5d_main_yi"] is None
+        assert st.aggregate_flows([])["flow_note_cn"] is None
+
+    def test_retail_combines_medium_and_small(self):
+        pts = [_flow_pt(main=0.0, small=0.6, medium=0.4) for _ in range(20)]
+        out = st.aggregate_flows(pts)
+        assert out["flow_20d_retail_yi"] == 20.0  # (0.6+0.4)*20
+
+
+class TestFlowVsStage:
+    def test_markup_and_accumulation_confirm_on_inflow(self):
+        assert st.flow_vs_stage("markup", 5.0) == "confirm"
+        assert st.flow_vs_stage("accumulation", 5.0) == "confirm"
+        assert st.flow_vs_stage("markup", -5.0) == "conflict"
+
+    def test_distribution_and_decline_confirm_on_outflow(self):
+        assert st.flow_vs_stage("distribution", -5.0) == "confirm"
+        assert st.flow_vs_stage("decline", -5.0) == "confirm"
+        assert st.flow_vs_stage("distribution", 5.0) == "conflict"
+        assert st.flow_vs_stage("decline", 5.0) == "conflict"
+
+    def test_none_cases(self):
+        assert st.flow_vs_stage(None, 5.0) is None
+        assert st.flow_vs_stage("markup", None) is None
+        assert st.flow_vs_stage("markup", 0.0) is None
+
+
+class TestFetchSectorFlows:
+    def test_network_isolated_backfill_and_increment(
+        self, monkeypatch, tmp_path
+    ):
+        """隔离网络 + 缓存目录：首次走回填、二次走 clist 快照增量、失败保留缓存。"""
+        monkeypatch.setattr(st, "ROOT", tmp_path)  # ROOT 是模块级常量，须直接 patch
+        from lei_signal.fundamentals import sources
+
+        # _get_json：直连探测成功；clist 请求返回 klines 结构（无 diff → 快照为空）
+        monkeypatch.setattr(
+            sources, "_get_json",
+            lambda *a, **k: {"data": {"klines": ["2026-08-21,1.0,2.0,3.0,4.0,5.0"]}},
+        )
+        wanted: dict[str, int] = {}
+
+        def fake(code, *, days=60, prefer_direct=True):
+            wanted[code] = days
+            if code == "B":
+                raise sources.FundamentalsSourceError("boom")
+            return [
+                {
+                    "date": (pd.Timestamp("2026-06-01") + pd.Timedelta(days=i)).strftime("%Y-%m-%d"),
+                    **_flow_pt(main=1.0, small=-0.5, medium=0.0),
+                }
+                for i in range(days)
+            ]
+
+        monkeypatch.setattr(sources, "fetch_industry_flow", fake)
+        out = st.fetch_sector_flows(["A", "B"], days=60, jitter=0)
+        assert len(out["A"]) == 60  # 本地无缓存 → push2his 全量回填
+        assert wanted["A"] == 60
+        assert out["B"] == []  # 单板块失败不阻断
+        assert len(st.load_flow_history()["A"]) == 60
+
+        # 第二次运行：缓存已满 → 不回填；走 clist 快照增量（_get_json 返回 diff）
+        clist_payload = {
+            "data": {
+                "total": 1,
+                "diff": [
+                    {"f12": "A", "f14": "甲", "f62": 8.5e8, "f66": 5e8,
+                     "f72": 3.5e8, "f78": -2e8, "f84": -6.5e8},
+                ],
+            }
+        }
+        monkeypatch.setattr(sources, "_get_json", lambda *a, **k: clist_payload)
+
+        def fake_date_probe(code, *, days=1, prefer_direct=True):
+            return [{"date": "2026-08-21", **_flow_pt(main=9.9, small=-9.9, medium=0.0)}]
+
+        monkeypatch.setattr(sources, "fetch_industry_flow", fake_date_probe)
+        out2 = st.fetch_sector_flows(["A", "B"], days=60, jitter=0)
+        assert len(out2["A"]) == 61  # 60 历史 + 1 快照日，未重复回填
+        assert out2["A"][-1]["date"] == "2026-08-21"
+        assert out2["A"][-1]["main_yi"] == 8.5  # clist f62 → 亿
+        assert out2["A"][-1]["super_large_yi"] == 5.0
+        assert out2["A"][-1]["small_yi"] == -6.5
+
+    def test_merge_flow_points(self):
+        cached = [{"date": "2026-08-01", "main_yi": 1.0},
+                  {"date": "2026-08-02", "main_yi": 2.0}]
+        new = [{"date": "2026-08-02", "main_yi": 9.9},  # 同日覆盖
+               {"date": "2026-08-03", "main_yi": 3.0}]
+        merged = st._merge_flow_points(cached, new)
+        assert [p["date"] for p in merged] == ["2026-08-01", "2026-08-02", "2026-08-03"]
+        assert merged[1]["main_yi"] == 9.9
+        big = [{"date": f"2026-01-{i:02d}", "main_yi": 1.0} for i in range(1, 10)]
+        assert len(st._merge_flow_points(big, [], keep_days=5)) == 5
+
+
+class TestBackfillHistory:
+    def test_backfill_preserves_recorded_and_fills_missing(self, monkeypatch, tmp_path):
+        """已有逐日实录同日不覆盖；缺失日期由序列补齐；NaN → None。"""
+        import json as _json
+
+        monkeypatch.setattr(st, "ROOT", tmp_path)
+        # 预置一条 08-20 实录（point-in-time 真值）
+        hist_path = tmp_path / "sector_trend_history.json"
+        hist_path.write_text(
+            _json.dumps([{"date": "2026-08-20",
+                          "boards": {"X": {"close": 111.11, "b50": 50.0}}}]),
+            encoding="utf-8",
+        )
+        dates = pd.date_range("2026-08-18", periods=3, freq="B")  # 18/19/20
+        series = {
+            "X": {
+                "close": pd.Series([10.0, 11.0, 12.0], index=dates),
+                "b50": pd.Series([np.nan, 40.0, 60.0], index=dates),
+                "rs_pctile": pd.Series([80.0, 85.0, 90.0], index=dates),
+                "rs_pctile_delta_20": None,
+            }
+        }
+        stats = st.backfill_history(series)
+        assert stats["added"] == 2  # 08-20 已有实录，只补 08-18/08-19
+        by_date = {
+            r["date"]: r["boards"].get("X", {})
+            for r in _json.loads(hist_path.read_text(encoding="utf-8"))
+        }
+        assert by_date["2026-08-20"]["close"] == 111.11  # 实录未被覆盖
+        assert by_date["2026-08-19"]["close"] == 11.0
+        assert by_date["2026-08-19"]["b50"] == 40.0
+        assert by_date["2026-08-18"]["b50"] is None  # NaN → None 不冒充
+        assert by_date["2026-08-18"]["stage"] is None
+
+
+# ════════════════════════════════════════════════════════════════════════════
 # 4) RS 相对强度
 # ════════════════════════════════════════════════════════════════════════════
 class TestRS:

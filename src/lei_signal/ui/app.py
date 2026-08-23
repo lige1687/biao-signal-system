@@ -1767,6 +1767,117 @@ def _render_rule_reference() -> None:
 
 # ---------------- 市场环境页 (Round 4) ----------------
 
+_SENTIMENT_LABEL_CN = {
+    "extreme_low": "极端悲观",
+    "low": "悲观",
+    "neutral": "中性",
+    "high": "乐观",
+    "extreme_high": "极端乐观",
+    "unknown": "样本不足",
+}
+
+
+def _find_sentiment_file(root, series: str):
+    """Locate naaim / aaii data files (csv or parquet, case-insensitive)."""
+    for ext in (".csv", ".parquet"):
+        for name in (f"{series}{ext}", f"{series.upper()}{ext}"):
+            p = root / name
+            if p.exists():
+                return p
+    return None
+
+
+def _render_sentiment_series(title: str, observations, kind: str, max_age_days: int) -> None:
+    """Render one sentiment series (NAAIM or AAII) from freshly loaded observations."""
+    if not observations:
+        st.caption(f"{title}：无可用观测")
+        return
+
+    latest = max(observations, key=lambda o: o.available_at)
+    label_cn = _SENTIMENT_LABEL_CN.get(latest.label.value, latest.label.value)
+
+    st.markdown(f"**{title}**")
+    if kind == "naaim":
+        c1, c2 = st.columns(2)
+        c1.metric("暴露指数", f"{latest.exposure_index:.1f}")
+        c2.metric(
+            "历史百分位",
+            f"{latest.percentile:.0f}%" if latest.percentile is not None else "—",
+        )
+    else:
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("看多", f"{latest.bullish:.0f}%")
+        c2.metric("中性", f"{latest.neutral:.0f}%")
+        c3.metric("看空", f"{latest.bearish:.0f}%")
+        c4.metric("多空差", f"{latest.bull_bear:+.0f}%")
+
+    st.caption(
+        f"分档：**{label_cn}** · 调查周 {latest.survey_week} · "
+        f"发布于 {latest.available_at:%Y-%m-%d %H:%M} UTC · 来源 {latest.source}"
+    )
+
+    if latest.license_status and "public_delayed" in latest.license_status.lower():
+        st.warning("该数据标注为 `public_delayed`（延迟数据），仅历史研究，不参与当前摘要。")
+    if not latest.current_eligible:
+        st.warning(
+            f"最新一期发布于 {latest.available_at:%Y-%m-%d}，已超过 {max_age_days} 天，"
+            "视为过期，不参与当前摘要。"
+        )
+
+
+def _render_sentiment_section() -> None:
+    """Render NAAIM / AAII sentiment from LEI_SENTIMENT_ROOT.
+
+    Independent of breadth/drawdown env vars: it only needs
+    ``LEI_SENTIMENT_ROOT``, so it renders even when those are unset.
+    """
+    from pathlib import Path
+
+    from lei_signal.market_context.sentiment import (
+        load_aaii_observations,
+        load_naaim_observations,
+    )
+
+    st.markdown("#### 情绪数据（NAAIM / AAII）")
+    root = os.environ.get("LEI_SENTIMENT_ROOT")
+    if not root:
+        st.info(
+            "未设置 `LEI_SENTIMENT_ROOT`（情绪数据文件目录）。设置后此处展示 "
+            "NAAIM / AAII 最新读数与分档。"
+        )
+        return
+
+    root_path = Path(root)
+    naaim_path = _find_sentiment_file(root_path, "naaim")
+    aaii_path = _find_sentiment_file(root_path, "aaii")
+    if naaim_path is None and aaii_path is None:
+        st.info(
+            f"`{root}` 下未找到 `naaim.csv` / `aaii.csv`。"
+            "可用 `scripts/round5_repro/ingest_sentiment.py` 生成。"
+        )
+        return
+
+    if naaim_path is None:
+        st.caption("NAAIM：无数据文件")
+    else:
+        try:
+            _render_sentiment_series(
+                "NAAIM 机构情绪", load_naaim_observations(naaim_path), "naaim", 14,
+            )
+        except Exception as exc:  # noqa: BLE001 — 坏数据不崩 UI
+            st.warning(f"NAAIM 数据加载失败：{exc}")
+
+    if aaii_path is None:
+        st.caption("AAII：无数据文件")
+    else:
+        try:
+            _render_sentiment_series(
+                "AAII 散户情绪", load_aaii_observations(aaii_path), "aaii", 10,
+            )
+        except Exception as exc:  # noqa: BLE001 — 坏数据不崩 UI
+            st.warning(f"AAII 数据加载失败：{exc}")
+
+
 def _render_market_context_tab(result: AnalysisResult) -> None:
     """Render the independent market context dashboard.
 
@@ -1815,9 +1926,13 @@ def _render_market_context_tab(result: AnalysisResult) -> None:
     )
     st.dataframe(env_df, use_container_width=True, hide_index=True)
 
+    # 情绪数据独立渲染：只需 LEI_SENTIMENT_ROOT，不依赖宽度/回撤的环境变量，
+    # 因此放在下面的早退判断之前展示。
+    _render_sentiment_section()
+
     if any(v == "未设置" for v in env_status.values()):
         st.warning(
-            "部分市场环境数据路径未设置。市场宽度、指数回撤与情绪数据不可用。"
+            "部分市场环境数据路径未设置。市场宽度与指数回撤数据不可用。"
             "请设置上述环境变量指向本地数据目录后刷新。"
         )
         st.info(
@@ -1840,9 +1955,7 @@ def _render_market_context_tab(result: AnalysisResult) -> None:
     st.markdown("#### 指数回撤")
     st.info("需要指数行情数据（LEI_INDEX_BARS_ROOT）")
 
-    # Sentiment placeholder
-    st.markdown("#### 情绪数据（NAAIM / AAII）")
-    st.info("需要情绪数据文件（LEI_SENTIMENT_ROOT）。NAAIM/AAII按实际发布时间可见。")
+    # Sentiment 已在上面独立渲染（不依赖宽度/回撤环境变量）。
 
     # Key disclaimer
     st.markdown("---")

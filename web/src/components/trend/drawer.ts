@@ -37,7 +37,7 @@ export function buildDrawer(p: {
     title: p.title,
     subtitle: `当前 ${curStr} · ${zone.label}（近 ${p.dates.length} ${p.periodLabel}）`,
     dates: p.dates,
-    series: [{ name: p.label, values: p.values, color: "#3a7bd5" }],
+    series: [{ name: p.label, values: p.values, color: "#2563eb" }],
     unit: p.unit,
     markLines: MARKLINES[p.key] ?? [],
     zones,

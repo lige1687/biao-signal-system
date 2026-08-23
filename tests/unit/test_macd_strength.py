@@ -4,6 +4,10 @@
 表示**强度**而不是转折趋势节点。趋势转折 5 步骤中，MACD 只能表达
 「交叉」与「多头排列+乖离率」；「破线」与「均线拐头」必须由系统既有的
 LEI 颜色与均线斜率补齐。金叉/死叉只是强度描述，不构成买点。
+
+测量分工（v1.1.0 口径）：交叉（定时）看 DIF×DEA / hist 符号；状态（强度）
+看 |DIF|（EMA12-EMA26 两线间距）的同号趋势。hist 是二阶动能，与一阶间距
+趋势过半数 bar 不一致，不能混用。
 """
 from __future__ import annotations
 
@@ -44,15 +48,27 @@ def test_dead_cross_is_conflict() -> None:
 
 
 def test_bullish_expansion_is_support() -> None:
-    """DIF 在 0 轴上方 + 柱体放大 = 乖离扩散 = 多头强度增强。"""
+    """DIF 在 0 轴上方 + 两线间距拉大 = 乖离扩散 = 多头强度增强。"""
     reading = _read(dif=1.5, dea=0.6, prev_dif=1.0, prev_dea=0.7)
     assert reading.cross == "无"
     assert reading.status == "多头扩散"
     assert reading.dimension_value == "支持"
 
 
+def test_expansion_uses_dif_gap_not_hist_momentum() -> None:
+    """v1.1.0 回归：柱体收缩（hist 二阶动能减小）但 |DIF| 间距拉大，仍是扩散。
+
+    dif 1.8->2.0（同号放大=乖离扩散），dea 1.0->1.9（hist 从 1.6 收缩到 0.2）。
+    旧口径按 |hist| 判会错标「收敛」；强度是状态量，必须看一阶间距 |DIF|。
+    """
+    reading = _read(dif=2.0, dea=1.9, prev_dif=1.8, prev_dea=1.0)
+    assert reading.cross == "无"
+    assert reading.status == "多头扩散"
+    assert reading.dimension_value == "支持"
+
+
 def test_bullish_contraction_is_neutral() -> None:
-    """柱体收缩 = 均线趋密集 = 强度衰减，只作中性，不作转折。"""
+    """两线间距缩小 = 均线趋密集 = 强度衰减，只作中性，不作转折。"""
     reading = _read(dif=1.0, dea=0.9, prev_dif=1.5, prev_dea=0.6)
     assert reading.status == "多头收敛"
     assert reading.dimension_value == "中性"
@@ -68,6 +84,29 @@ def test_bearish_contraction_is_neutral() -> None:
     reading = _read(dif=-1.0, dea=-0.9, prev_dif=-1.5, prev_dea=-0.6)
     assert reading.status == "空头收敛"
     assert reading.dimension_value == "中性"
+
+
+def test_zero_axis_cross_up_is_support() -> None:
+    """DIF 上穿 0 轴 = EMA12 上穿 EMA26（两线排列转多）。不是买点。"""
+    reading = _read(dif=0.4, dea=-0.1, prev_dif=-0.3, prev_dea=-0.5)
+    assert reading.cross == "无"  # DIF 两根都高于 DEA，无 DIF×DEA 交叉
+    assert reading.status == "上穿0轴"
+    assert reading.dimension_value == "支持"
+
+
+def test_zero_axis_cross_down_is_conflict() -> None:
+    """DIF 下穿 0 轴 = EMA12 下穿 EMA26（两线排列转空）。不是卖点。"""
+    reading = _read(dif=-0.1, dea=-0.3, prev_dif=0.2, prev_dea=0.1)
+    assert reading.cross == "无"  # DIF 两根都高于 DEA，无 DIF×DEA 交叉
+    assert reading.status == "下穿0轴"
+    assert reading.dimension_value == "冲突"
+
+
+def test_golden_cross_takes_priority_over_zero_axis() -> None:
+    """同日金叉 + 上穿 0 轴：金叉优先（更强的定时信号）。"""
+    reading = _read(dif=0.4, dea=0.1, prev_dif=-0.3, prev_dea=0.3)
+    assert reading.cross == "金叉"
+    assert reading.status == "金叉"
 
 
 def test_every_reading_carries_blind_spot_completion() -> None:
@@ -94,7 +133,7 @@ def test_warmup_and_missing_columns_return_none() -> None:
     first = read_macd_strength(_row(1.5, 0.6), None)
     assert first is not None
     assert first.cross == "无"
-    assert first.prev_hist is None
+    assert first.prev_dif is None
 
 
 # ---------------- 接入 build_assessment 的集成门禁 ----------------

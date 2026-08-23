@@ -44,6 +44,9 @@ import type {
   SectorTrendResponse,
   SectorHistoryPoint,
   SectorMembersResponse,
+  SectorWatchlistResponse,
+  DailyBriefResponse,
+  SentimentIngest,
 } from "../types";
 
 const BASE = "/api";
@@ -168,6 +171,11 @@ export const api = {
     ),
   marketContextGlobalStrip: () =>
     request<GlobalStripResponse>(`/market-context/global-strip`),
+  updateSentiment: (payload: SentimentIngest) =>
+    request<{ ok: boolean; path: string }>(`/market-context/sentiment`, {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
   marketContextBreadthHistory: (marketId: string, lookbackDays = 1260) =>
     request<BreadthHistoryResponse>(
       `/market-context/breadth-history?market_id=${encodeURIComponent(marketId)}&lookback_days=${lookbackDays}`,
@@ -322,7 +330,7 @@ export const fundamentalsApi = {
     ),
   rates: (refresh = false) =>
     request<RatesResponse>(`/fundamentals/rates${refresh ? "?refresh=true" : ""}`),
-  ratesHistory: (lookbackDays = 730) =>
+  ratesHistory: (lookbackDays = 1095) =>
     request<RatesHistoryResponse>(
       `/fundamentals/rates-history?lookback_days=${lookbackDays}`,
     ),
@@ -358,4 +366,14 @@ export const sectorsApi = {
     request<SectorMembersResponse>(
       `/sectors/${encodeURIComponent(code)}/members?limit=${limit}`,
     ),
+  watchlist: (topN = 5) =>
+    request<SectorWatchlistResponse>(`/sectors/watchlist?top_n=${topN}`),
+};
+
+// ---- 收盘简报 ----
+export const dailyBriefApi = {
+  latest: () => request<DailyBriefResponse>("/daily-brief/latest"),
+  byDate: (date: string) =>
+    request<DailyBriefResponse>(`/daily-brief/${encodeURIComponent(date)}`),
+  dates: () => request<{ dates: string[] }>("/daily-brief/dates"),
 };

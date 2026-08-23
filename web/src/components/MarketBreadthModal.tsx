@@ -4,9 +4,11 @@ import { api } from "../api/client";
 import type { ForwardStatBucket, GlobalPanel } from "../types";
 import {
   isRealAShare,
+  hasBreadth,
   AShareBar,
   AShareGrid,
   AShareSourceLine,
+  BreadthAsOf,
 } from "./aShareBreadthView";
 
 interface Props {
@@ -35,10 +37,10 @@ const HORIZON_LABELS: Record<string, string> = {
  * Modal opened by clicking a topbar strip panel.
  *
  * Layout:
- *   1. Alert banners (if B50/B200 triggered 85/15 extremes)
+ *   1. Alert banners (if B50/B200 triggered 80/20 extremes)
  *   2. Breadth grid (only cells with real data; null cells omitted)
  *   3. 牛/熊底色 (B200 > 50 = 牛, < 50 = 熊)
- *   4. 预警规则说明 (the 85/15 thresholds, always shown)
+ *   4. 预警规则说明 (the 80/20 thresholds, always shown)
  *   5. Forward-return table (only when percentile is available)
  */
 export default function MarketBreadthModal({ panel, onClose }: Props) {
@@ -82,10 +84,11 @@ export default function MarketBreadthModal({ panel, onClose }: Props) {
             <AShareBar p={panel} />
             <AShareGrid p={panel} />
             <AShareSourceLine p={panel} />
+            <BreadthAsOf p={panel} />
             <p className="muted breadth-modal-hint">
-              MA 上方占比（B20/B50/B200）与历史分位需正常网络环境逐只拉历史K线计算，
-              本接口默认不拉取；本机联网时可经
-              <code>/market-context/a-share-breadth?include_ma=true</code> 获取。
+              市场宽度（B20/B50/B200）由本机「收盘后预计算脚本」(<code>scripts/precompute_a_share_ma.py</code>
+              逐只拉腾讯日K线) 落盘到磁盘缓存，<code>/market-context/global-strip</code> 直接读取，
+              次日整天与周末均不重算。该快照已含收盘时点涨跌家数（非实时重算）。
             </p>
           </div>
         )}
@@ -140,19 +143,19 @@ export default function MarketBreadthModal({ panel, onClose }: Props) {
           <h3>宽度极端预警规则</h3>
           <div className="breadth-rules">
             <div className="breadth-rule">
-              <span className="rule-tag tag-stage-top">B50 ≥ 85%</span>
+              <span className="rule-tag tag-stage-top">B50 ≥ 80%</span>
               <span>阶段性顶部预警 — 大概率短期高点</span>
             </div>
             <div className="breadth-rule">
-              <span className="rule-tag tag-stage-bottom">B50 ≤ 15%</span>
+              <span className="rule-tag tag-stage-bottom">B50 ≤ 20%</span>
               <span>短期底部预警 — 大概率短期低点</span>
             </div>
             <div className="breadth-rule">
-              <span className="rule-tag tag-reversal-top">B50 + B200 同时 ≥ 85%</span>
+              <span className="rule-tag tag-reversal-top">B50 + B200 同时 ≥ 80%</span>
               <span>反转顶部信号 — 两个周期共振极热，大概率趋势反转</span>
             </div>
             <div className="breadth-rule">
-              <span className="rule-tag tag-reversal-bottom">B50 + B200 同时 ≤ 15%</span>
+              <span className="rule-tag tag-reversal-bottom">B50 + B200 同时 ≤ 20%</span>
               <span>反转底部信号 — 两个周期共振极冷，大概率趋势反转</span>
             </div>
             <div className="breadth-rule">
@@ -164,10 +167,10 @@ export default function MarketBreadthModal({ panel, onClose }: Props) {
               <span>熊市底色 — 长期趋势偏空</span>
             </div>
           </div>
-          {panel.breadth_50 == null && !hasB200 && !realA && (
+          {!hasBreadth(panel) && !realA && (
             <p className="muted breadth-modal-hint">
-              当前数据源只提供 B20（MA20 站上率），B50/B200 暂不可用。
-              预警将在 B50/B200 数据就绪后自动触发。
+              当前为实时涨跌家数口径；MA 上方占比（B20/B50/B200 宽度）需在本机联网运行
+              <code>scripts/precompute_a_share_ma.py</code> 预计算后才会显示并触发预警。
             </p>
           )}
         </div>

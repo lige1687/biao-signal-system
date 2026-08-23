@@ -3,6 +3,15 @@
 趋势转折 5 步骤中，MACD 只能表达「交叉」与「多头排列+乖离率」；
 「破线」与「均线拐头」由系统既有的 LEI 颜色与均线斜率补齐。
 不产生交易事件：金叉/死叉只是强度描述，不构成买点。
+
+测量分工（口径 v1.1.0，与提示条 TrendChecklist 一致）：
+- 交叉看 DIF 与 DEA：hist = 2*(DIF-DEA)，符号即 DIF×DEA 交叉状态，
+  是定时量（带通/加速度性质，领先间距极值）--只用于金叉/死叉判读。
+- 状态看 |DIF|：DIF 即 EMA12-EMA26 两线间距（乖离本身，一阶量），
+  同号趋势放大=均线扩散、缩小=密集。hist 幅度是二阶动能，
+  与 |DIF| 趋势过半数 bar 不一致，不能混作扩散判定。
+- DIF 穿越 0 轴 = EMA12 穿越 EMA26（两线排列翻转），是「交叉」步骤
+  的深层形态，单独成状态（上穿0轴/下穿0轴）。
 """
 from __future__ import annotations
 
@@ -25,6 +34,8 @@ StrengthStatus = Literal[
     "空头收敛",
     "金叉",
     "死叉",
+    "上穿0轴",
+    "下穿0轴",
     "数据不足",
 ]
 
@@ -37,7 +48,7 @@ class MacdStrengthReading:
     dif: float
     dea: float
     hist: float
-    prev_hist: float | None
+    prev_dif: float | None
     cross: Literal["金叉", "死叉", "无"]
     dimension_value: Literal["支持", "冲突", "中性"]
     label_cn: str
@@ -65,43 +76,54 @@ def read_macd_strength(
 
     dif_f, dea_f, hist_f = float(dif), float(dea), float(hist)
 
-    # 前一日柱体（用于扩散/密集判定）
-    prev_hist: float | None = None
+    # 前一日 DIF（两线间距，用于扩散/密集判定）。
+    # 实际不可达 None：首个有效读数在 slow-1+signal-1=33 根之后，
+    # 其前一日的 DIF（25 根起有效）必然存在；仅作防御。
+    prev_dif: float | None = None
     if prev_row is not None:
-        ph = prev_row.get("macd_hist")
-        if ph is not None and not pd.isna(ph):
-            prev_hist = float(ph)
+        pd_v = prev_row.get("macd_dif")
+        if pd_v is not None and not pd.isna(pd_v):
+            prev_dif = float(pd_v)
 
-    # 交叉：DIF 与 DEA 上下穿（MACD 能表达的「交叉」，强度转向信号）
+    # 交叉（定时）：DIF 与 DEA 上下穿（MACD 能表达的「交叉」，强度转向信号）
     cross: Literal["金叉", "死叉", "无"] = "无"
     if prev_row is not None:
-        prev_dif = prev_row.get("macd_dif")
         prev_dea = prev_row.get("macd_dea")
-        if (
-            prev_dif is not None
-            and prev_dea is not None
-            and not pd.isna(prev_dif)
-            and not pd.isna(prev_dea)
-        ):
-            prev_dif_f, prev_dea_f = float(prev_dif), float(prev_dea)
-            if prev_dif_f <= prev_dea_f and dif_f > dea_f:
-                cross = "金叉"
-            elif prev_dif_f >= prev_dea_f and dif_f < dea_f:
-                cross = "死叉"
+        if prev_dea is not None and not pd.isna(prev_dea):
+            prev_dea_f = float(prev_dea)
+            if prev_dif is not None:
+                if prev_dif <= prev_dea_f and dif_f > dea_f:
+                    cross = "金叉"
+                elif prev_dif >= prev_dea_f and dif_f < dea_f:
+                    cross = "死叉"
 
-    # 扩散/密集：hist 同号且幅度变化（MACD 能表达的「乖离扩散/密集」）
-    # hist 翻号已被 cross 捕获，故此处只处理同号情形。
+    # 0 轴交叉：DIF 穿越 0 轴 = EMA12 穿越 EMA26（两线排列翻转）
+    zero_cross: Literal["上穿0轴", "下穿0轴", "无"] = "无"
+    if prev_dif is not None:
+        if prev_dif <= 0.0 < dif_f:
+            zero_cross = "上穿0轴"
+        elif prev_dif >= 0.0 > dif_f:
+            zero_cross = "下穿0轴"
+
+    # 扩散/密集（状态）：|DIF|（两线间距）同号趋势。
+    # DIF 翻号已被 zero_cross 捕获，此处只处理同号情形。
     contracting = (
-        prev_hist is not None and hist_f * prev_hist > 0 and abs(hist_f) < abs(prev_hist)
+        prev_dif is not None and dif_f * prev_dif > 0 and abs(dif_f) < abs(prev_dif)
     )
 
-    bullish = dif_f > 0  # 多头排列乖离方向
+    bullish = dif_f > 0  # 多头排列乖离方向（EMA12 在 EMA26 上方）
 
     if cross == "金叉":
         status: StrengthStatus = "金叉"
         dimension_value: Literal["支持", "冲突", "中性"] = "支持"
     elif cross == "死叉":
         status = "死叉"
+        dimension_value = "冲突"
+    elif zero_cross == "上穿0轴":
+        status = "上穿0轴"
+        dimension_value = "支持"
+    elif zero_cross == "下穿0轴":
+        status = "下穿0轴"
         dimension_value = "冲突"
     elif bullish:
         status = "多头收敛" if contracting else "多头扩散"
@@ -115,11 +137,15 @@ def read_macd_strength(
     parts: list[str] = [f"DIF={dif_f:.4f}，DEA={dea_f:.4f}，柱={hist_f:.4f}"]
     if cross != "无":
         parts.append(f"当日{cross}（DIF 穿越 DEA，强度转向信号）")
-    elif prev_hist is not None:
-        if hist_f * prev_hist > 0 and abs(hist_f) > abs(prev_hist):
-            parts.append("柱体放大（乖离扩散）")
-        elif contracting:
-            parts.append("柱体收缩（乖离密集）")
+    elif zero_cross == "上穿0轴":
+        parts.append("DIF 上穿 0 轴 = EMA12 上穿 EMA26，两线排列转多")
+    elif zero_cross == "下穿0轴":
+        parts.append("DIF 下穿 0 轴 = EMA12 下穿 EMA26，两线排列转空")
+    elif prev_dif is not None and dif_f * prev_dif > 0:
+        if abs(dif_f) > abs(prev_dif):
+            parts.append("两线间距拉大（乖离扩散）")
+        else:
+            parts.append("两线间距缩小（乖离密集）")
     parts.append("多头排列乖离" if bullish else "空头排列乖离")
     detail_cn = "；".join(parts)
 
@@ -128,7 +154,7 @@ def read_macd_strength(
         dif=dif_f,
         dea=dea_f,
         hist=hist_f,
-        prev_hist=prev_hist,
+        prev_dif=prev_dif,
         cross=cross,
         dimension_value=dimension_value,
         label_cn=label_cn,

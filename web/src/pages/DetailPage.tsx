@@ -22,6 +22,7 @@ import KlineChart, {
 import { useBuyPointCoord } from "../hooks/useBuyPointCoord";
 import type {
   Explanation,
+  MacdEvent,
   StructureBrief,
   SymbolDetail,
 } from "../types";
@@ -35,6 +36,7 @@ const MARK_SOURCE_CN: Record<MarkPick["kind"], string> = {
   bottom_line: "图上参考线 · C 点失效线",
   top_line: "图上参考线 · 顶部颈线",
   highlight_price: "买点分析 · 价位标注",
+  macd_event: "MACD 副图标记 · 强度事件",
 };
 
 /** 横线类点击（B1 / C 点 / 颈线）：只有价位，没有日期。 */
@@ -56,6 +58,10 @@ function resolveSelection(pick: MarkPick, detail: SymbolDetail): Selection {
   let explanation: Explanation | null = null;
   if (pick.kind === "key_volatility") {
     explanation = detail.concepts["key_volatility"] ?? null;
+  } else if (pick.kind === "macd_event") {
+    // MACD 事件统一用 macd_strength 概念条目讲解；当日读数与盲区补齐
+    // 从 chart.macdEvents 回查，面板里单列一节。
+    explanation = detail.concepts["macd_strength"] ?? null;
   } else if (LINE_KINDS.has(pick.kind)) {
     // 横线优先解释「这条线是什么」（B1 / C 点 / 颈线概念），
     // 而不是它所属结构的形态——用户点的是线，不是菱形。
@@ -69,16 +75,24 @@ function resolveSelection(pick: MarkPick, detail: SymbolDetail): Selection {
 
   // 相关事件不在此处过滤：详情只带最近 60 条，点多年前的标记会得到空列表。
   // 改由 DetailPage 按 structure_id / 日期向 /events 端点按需查询后回填。
+  const macdEvent: MacdEvent | undefined =
+    pick.kind === "macd_event"
+      ? detail.chart.macdEvents?.find((e) => e.date === pick.date)
+      : undefined;
   return {
-    source,
+    source:
+      pick.kind === "macd_event" && pick.macdStatusCn
+        ? `MACD 副图标记 · ${pick.macdStatusCn}（研究代理）`
+        : source,
     date: pick.date,
     price: pick.price ?? pick.level,
     explanation,
     structure,
     b1PivotDate: pick.pivotDate ?? undefined,
     b1DistancePct: pick.distancePct ?? undefined,
+    macdEvent,
     events: undefined,
-    eventsLoading: true,
+    eventsLoading: pick.kind !== "macd_event", // MACD 不产生事件，无需查询
   };
 }
 

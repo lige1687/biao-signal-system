@@ -26,9 +26,14 @@ def rates(request: Request, refresh: bool = False) -> dict:
 
 
 @router.get("/rates-history")
-def rates_history(request: Request, lookback_days: int = 730) -> dict:
-    """宏观利率/VIX/两融 历史时间序列，供趋势图。lookback_days 默认 730。"""
-    return _service(request).rates_history(lookback_days=lookback_days)
+def rates_history(request: Request, lookback_days: int = 1095) -> dict:
+    """宏观利率/VIX/两融/股债收益差/估值分位 历史时间序列，供趋势图。
+
+    lookback_days 默认 1095（3 年），上限 7665（21 年）。各序列自身可得上限：
+    国债 1990 起 / VIX 1990 起 / 两融 2010 开闸 / 股债收益差 2005 起 /
+    CAPE 1871 起（月频）/ 沪深300 PE_TTM 2005 起。
+    """
+    return _service(request).rates_history(lookback_days=max(5, min(int(lookback_days), 7665)))
 
 
 @router.get("/macro-history")

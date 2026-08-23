@@ -1,4 +1,4 @@
-import type { EventItem, Explanation, StructureBrief } from "../types";
+import type { EventItem, Explanation, MacdEvent, StructureBrief } from "../types";
 
 /** 右侧解释面板要展示的一次「选中」。 */
 export interface Selection {
@@ -12,6 +12,8 @@ export interface Selection {
   /** B1 线专属：该前高的摆动日与当前距离 */
   b1PivotDate?: string;
   b1DistancePct?: number;
+  /** MACD 事件专属：当日读数与盲区补齐（LEI 颜色 + EMA20 斜率）。 */
+  macdEvent?: MacdEvent;
   /** 与该结构/该日绑定的事件，按可用日倒序（按需从 /events 端点加载） */
   events?: EventItem[];
   /** 事件仍在加载中 */
@@ -64,6 +66,10 @@ export default function ExplanationPanel({ selection, onClose }: Props) {
               <li>
                 <span className="mk mk-kv">│</span> 竖线 = 关键性波动（转绿/转黑）
               </li>
+              <li>
+                <span style={{ color: "#e33d47" }}>▲</span>
+                <span style={{ color: "#0b9b64" }}>▼</span> MACD 副图 = 金叉/死叉（强度，非买卖点）
+              </li>
             </ul>
           </div>
         </div>
@@ -77,6 +83,7 @@ export default function ExplanationPanel({ selection, onClose }: Props) {
     price,
     explanation,
     structure,
+    macdEvent,
     events,
     eventsLoading,
     b1PivotDate,
@@ -117,6 +124,34 @@ export default function ExplanationPanel({ selection, onClose }: Props) {
               <b>{b1DistancePct.toFixed(2)}%</b>
             </div>
           )}
+        </div>
+      )}
+
+      {macdEvent && (
+        <div className="exp-section">
+          <div className="exp-label">当日读数（rule_id=macd_strength）</div>
+          <div className="exp-kv">
+            <span>状态</span>
+            <b>
+              {macdEvent.statusCn}（{macdEvent.dimension}）
+            </b>
+          </div>
+          <div className="exp-kv">
+            <span>DIF / DEA / 柱</span>
+            <b>
+              {macdEvent.dif.toFixed(4)} / {macdEvent.dea.toFixed(4)} /{" "}
+              {macdEvent.hist.toFixed(4)}
+            </b>
+          </div>
+          <div className="exp-text">{macdEvent.detailCn}</div>
+          <div className="exp-kv">
+            <span>盲区补齐 · 破线</span>
+            <b>LEI 颜色 {macdEvent.colorCn}</b>
+          </div>
+          <div className="exp-kv">
+            <span>盲区补齐 · 均线拐头</span>
+            <b>EMA20 斜率 {macdEvent.slopeCn}</b>
+          </div>
         </div>
       )}
 

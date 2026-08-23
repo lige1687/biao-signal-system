@@ -17,6 +17,8 @@ export default function AddSymbolDialog({ groupId = null, onClose, onAdded }: Pr
   const [resolved, setResolved] = useState<ResolveResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  // 已成功添加的 code/symbol 集合：选择器里原地显示「✓ 已添加」，避免「点了不知道加没加上」。
+  const [addedCodes, setAddedCodes] = useState<ReadonlySet<string>>(() => new Set());
 
   const doResolve = async () => {
     if (!input.trim()) return;
@@ -32,13 +34,15 @@ export default function AddSymbolDialog({ groupId = null, onClose, onAdded }: Pr
     }
   };
 
-  const doAdd = async (symbol: string) => {
+  // close=false 用于选择器：添加后不关弹窗、原地标记「已添加」，方便连加多个。
+  const doAdd = async (symbol: string, close = true) => {
     setBusy(true);
     setError(null);
     try {
       await api.addWatchlist(symbol, groupId);
+      setAddedCodes((prev) => new Set(prev).add(symbol));
       onAdded();
-      onClose();
+      if (close) onClose();
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -136,11 +140,29 @@ export default function AddSymbolDialog({ groupId = null, onClose, onAdded }: Pr
             </div>
           </>
         ) : tab === "sector" ? (
-          <SectorPicker busy={busy} error={error} onPick={doAdd} onClose={onClose} />
+          <SectorPicker
+            busy={busy}
+            error={error}
+            addedCodes={addedCodes}
+            onPick={(s) => doAdd(s, false)}
+            onClose={onClose}
+          />
         ) : tab === "index" ? (
-          <IndexPicker busy={busy} error={error} onPick={doAdd} onClose={onClose} />
+          <IndexPicker
+            busy={busy}
+            error={error}
+            addedCodes={addedCodes}
+            onPick={(s) => doAdd(s, false)}
+            onClose={onClose}
+          />
         ) : (
-          <UsEtfPicker busy={busy} error={error} onPick={doAdd} onClose={onClose} />
+          <UsEtfPicker
+            busy={busy}
+            error={error}
+            addedCodes={addedCodes}
+            onPick={(s) => doAdd(s, false)}
+            onClose={onClose}
+          />
         )}
       </div>
     </div>
@@ -154,12 +176,14 @@ function PickerList({
   busy,
   hint,
   onPick,
+  addedCodes,
 }: {
   items: { code: string; name: string; symbol: string }[];
   q: string;
   busy: boolean;
   hint: string;
   onPick: (symbol: string) => void;
+  addedCodes: ReadonlySet<string>;
 }) {
   const filtered = useMemo(() => {
     const kw = q.trim();
@@ -177,18 +201,32 @@ function PickerList({
       <div className="hint">{hint}</div>
       <div className="sector-list">
         {filtered.length === 0 && <div className="muted">无匹配</div>}
-        {filtered.map((s) => (
-          <button
-            key={s.code}
-            className="sector-item"
-            disabled={busy}
-            onClick={() => onPick(s.symbol)}
-            title={`${s.name}（${s.symbol}）`}
-          >
-            <span className="si-name">{s.name}</span>
-            <span className="si-symbol">{s.symbol}</span>
-          </button>
-        ))}
+        {filtered.map((s) => {
+          const added = addedCodes.has(s.symbol);
+          return (
+            <div key={s.code} className={`sector-item${added ? " added" : ""}`}>
+              <button
+                type="button"
+                className="si-main"
+                disabled={busy}
+                onClick={() => onPick(s.symbol)}
+                title={`${s.name}（${s.symbol}）`}
+              >
+                <span className="si-name">{s.name}</span>
+                <span className="si-symbol">{s.symbol}</span>
+              </button>
+              <button
+                type="button"
+                className={`si-add${added ? " done" : ""}`}
+                disabled={busy || added}
+                onClick={() => onPick(s.symbol)}
+                title={added ? "已添加" : `添加 ${s.name}`}
+              >
+                {added ? "✓ 已添加" : "＋ 添加"}
+              </button>
+            </div>
+          );
+        })}
       </div>
     </>
   );
@@ -198,11 +236,13 @@ function PickerList({
 function SectorPicker({
   busy,
   error,
+  addedCodes,
   onPick,
   onClose,
 }: {
   busy: boolean;
   error: string | null;
+  addedCodes: ReadonlySet<string>;
   onPick: (symbol: string) => void;
   onClose: () => void;
 }) {
@@ -235,7 +275,8 @@ function SectorPicker({
           items={items}
           q={q}
           busy={busy}
-          hint="同花顺行业板块（收盘后更新当日K线）。点名称即添加。"
+          addedCodes={addedCodes}
+          hint="同花顺行业板块（收盘后更新当日K线）。点名称或右侧「＋ 添加」即加入自选。"
           onPick={onPick}
         />
       )}
@@ -252,11 +293,13 @@ function SectorPicker({
 function IndexPicker({
   busy,
   error,
+  addedCodes,
   onPick,
   onClose,
 }: {
   busy: boolean;
   error: string | null;
+  addedCodes: ReadonlySet<string>;
   onPick: (symbol: string) => void;
   onClose: () => void;
 }) {
@@ -289,7 +332,8 @@ function IndexPicker({
           items={items}
           q={q}
           busy={busy}
-          hint="策略/规模/主题指数（沪深300、中证500、中证红利、VIX…）。点名称即添加。"
+          addedCodes={addedCodes}
+          hint="策略/规模/主题指数（沪深300、中证500、中证红利、VIX…）。点名称或右侧「＋ 添加」即加入自选。"
           onPick={onPick}
         />
       )}
@@ -306,11 +350,13 @@ function IndexPicker({
 function UsEtfPicker({
   busy,
   error,
+  addedCodes,
   onPick,
   onClose,
 }: {
   busy: boolean;
   error: string | null;
+  addedCodes: ReadonlySet<string>;
   onPick: (symbol: string) => void;
   onClose: () => void;
 }) {
@@ -343,7 +389,8 @@ function UsEtfPicker({
           items={items}
           q={q}
           busy={busy}
-          hint="美股 ETF：宽基（SPY/QQQ）、行业（XLK/SMH）、风格、债券商品（TLT/GLD）。点名称即添加。"
+          addedCodes={addedCodes}
+          hint="美股 ETF：宽基（SPY/QQQ）、行业（XLK/SMH）、风格、债券商品（TLT/GLD）。点名称或右侧「＋ 添加」即加入自选。"
           onPick={onPick}
         />
       )}

@@ -113,14 +113,36 @@ class AnalysisService:
             return False
 
     def get(self, symbol: str, *, refresh: bool = False) -> AnalysisEntry:
-        """取单标的分析（缓存新鲜则直接返回）。per-symbol 锁防并发重入。"""
-        with self._lock_for(symbol):
-            entry = self._entries.get(symbol)
-            if entry is not None and not refresh and self._is_fresh(entry, symbol):
-                return entry
-            entry = self._run(symbol)
-            self._entries[symbol] = entry
+        """取单标的分析（缓存新鲜则直接返回）。per-symbol 锁防并发重入。
+
+        读请求（refresh=False）在锁被占时**不排队**：后台预热或他人请求正在
+        刷新该标的时，已有条目（哪怕已过期）先返回——预热间隔 12 分钟 < TTL，
+        「旧数据秒开」优于让页面卡在锁上等一轮抓取。无条目时照常阻塞等待
+        （冷缓存的首次数据必须等出来）。
+        """
+        lock = self._lock_for(symbol)
+        if refresh:
+            with lock:
+                return self._get_locked(symbol, refresh=True)
+        if lock.acquire(blocking=False):
+            try:
+                return self._get_locked(symbol, refresh=False)
+            finally:
+                lock.release()
+        entry = self._entries.get(symbol)
+        if entry is not None:
             return entry
+        with lock:
+            return self._get_locked(symbol, refresh=False)
+
+    def _get_locked(self, symbol: str, *, refresh: bool) -> AnalysisEntry:
+        """在持有 per-symbol 锁的前提下取数（调用方负责加锁）。"""
+        entry = self._entries.get(symbol)
+        if entry is not None and not refresh and self._is_fresh(entry, symbol):
+            return entry
+        entry = self._run(symbol)
+        self._entries[symbol] = entry
+        return entry
 
     def get_many(
         self, symbols: list[str], *, refresh: bool = False

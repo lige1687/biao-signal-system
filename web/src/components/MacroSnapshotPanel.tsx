@@ -46,9 +46,9 @@ function zoneToneColor(tone: string): string {
   switch (tone) {
     case "opportunity": return "#16a34a"; // green
     case "neutral": return "#6b7280";     // gray
-    case "caution": return "#f59e0b";     // amber
+    case "caution": return "#e36b1c";     // amber
     case "warning": return "#ea580c";      // orange
-    case "danger": return "#dc2626";       // red
+    case "danger": return "#e33d47";       // red
     default: return "#6b7280";
   }
 }
@@ -63,27 +63,27 @@ type MarkLine = { y: number; label: string; color: string };
 const METRIC_MARKLINES: Record<string, MarkLine[]> = {
   us_10y: [
     { y: 3.5, label: "3.5 宽松", color: "#16a34a" },
-    { y: 4.5, label: "4.5 甜蜜点", color: "#f59e0b" },
-    { y: 5.0, label: "5.0 危险", color: "#dc2626" },
+    { y: 4.5, label: "4.5 甜蜜点", color: "#e36b1c" },
+    { y: 5.0, label: "5.0 危险", color: "#e33d47" },
   ],
   cn_10y: [
     { y: 1.8, label: "1.8 资产荒", color: "#16a34a" },
     { y: 2.2, label: "2.2 合理", color: "#6b7280" },
-    { y: 2.5, label: "2.5 收紧", color: "#f59e0b" },
+    { y: 2.5, label: "2.5 收紧", color: "#e36b1c" },
   ],
   cn_us_spread_10y: [
     { y: 0, label: "0 多空分界", color: "#6b7280" },
-    { y: -1, label: "-1 深度倒挂", color: "#dc2626" },
+    { y: -1, label: "-1 深度倒挂", color: "#e33d47" },
   ],
   vix: [
     { y: 15, label: "15 低波动", color: "#16a34a" },
     { y: 20, label: "20 正常", color: "#6b7280" },
-    { y: 30, label: "30 恐慌", color: "#dc2626" },
+    { y: 30, label: "30 恐慌", color: "#e33d47" },
   ],
   margin_rzrqye: [
-    { y: 15000, label: "1.5万亿", color: "#f59e0b" },
+    { y: 15000, label: "1.5万亿", color: "#e36b1c" },
     { y: 22000, label: "2.2万亿", color: "#6b7280" },
-    { y: 28000, label: "2.8万亿", color: "#dc2626" },
+    { y: 28000, label: "2.8万亿", color: "#e33d47" },
   ],
 };
 
@@ -352,8 +352,8 @@ function buildMacroTrendOption(
         type: "line",
         data: series.values,
         showSymbol: false,
-        lineStyle: { width: 1.6, color: "#3a7bd5" },
-        itemStyle: { color: "#3a7bd5" },
+        lineStyle: { width: 1.6, color: "#2563eb" },
+        itemStyle: { color: "#2563eb" },
         markLine: {
           silent: true,
           symbol: "none",

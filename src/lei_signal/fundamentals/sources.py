@@ -11,8 +11,10 @@
 
 from __future__ import annotations
 
+import json
+import re
 import time
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 import requests
@@ -55,17 +57,28 @@ class FundamentalsSourceError(RuntimeError):
     """单个数据源取数失败。"""
 
 
-def _get_json(urls: str | tuple[str, ...], params: dict[str, Any]) -> dict[str, Any]:
-    """GET JSON：逐 host 尝试，每个 host 瞬断重试一次（东财对高频访问会短时空响应）。"""
+def _get_json(
+    urls: str | tuple[str, ...],
+    params: dict[str, Any],
+    *,
+    trust_env: bool = True,
+) -> dict[str, Any]:
+    """GET JSON：逐 host 尝试，每个 host 瞬断重试一次（东财对高频访问会短时空响应）。
+
+    ``trust_env=False`` 用独立 Session 绕过系统代理直连——本机代理为白名单模式，
+    push2his 被拒（ProxyError）而直连可达；默认 True 保持既有行为不变。
+    """
     if isinstance(urls, str):
         urls = (urls,)
+    session = requests.Session()
+    session.trust_env = trust_env
     last_exc: Exception | None = None
     for url in urls:
         for attempt in range(2):
             if attempt:
                 time.sleep(1.5)
             try:
-                resp = requests.get(url, params=params, headers=_HEADERS, timeout=_TIMEOUT)
+                resp = session.get(url, params=params, headers=_HEADERS, timeout=_TIMEOUT)
                 resp.raise_for_status()
                 payload = resp.json()
             except Exception as exc:  # noqa: BLE001 —— 网络/解析错误统一收口
@@ -144,21 +157,35 @@ def fetch_industry_boards() -> list[dict[str, Any]]:
     return boards
 
 
-def fetch_industry_flow(code: str, *, days: int = 20) -> list[dict[str, Any]]:
+def fetch_industry_flow(
+    code: str, *, days: int = 20, prefer_direct: bool = True
+) -> list[dict[str, Any]]:
     """单个行业板块的资金流历史（日级）。
 
     fields2 顺序：f51 日期, f52 主力净流入, f53 小单, f54 中单, f55 大单, f56 超大单。
+
+    取数顺序：先 **直连 push2his**（绕系统代理；白名单代理会拒 push2his，而 delay
+    镜像只返最近 1 日）；``prefer_direct=False`` 跳过直连（调用方已探明直连不可用），
+    直接走常规路径（代理 → push2delay，仅最近 1 日，用于每日增量累积）。
     """
-    payload = _get_json(
-        _FLOW_URLS,
-        {
-            "lmt": days,
-            "klt": 101,
-            "secid": f"90.{code}",
-            "fields1": "f1,f2,f3,f7",
-            "fields2": "f51,f52,f53,f54,f55,f56",
-        },
-    )
+    params = {
+        "lmt": days,
+        "klt": 101,
+        "secid": f"90.{code}",
+        "fields1": "f1,f2,f3,f7",
+        "fields2": "f51,f52,f53,f54,f55,f56",
+    }
+    payload: dict[str, Any] | None = None
+    if prefer_direct:
+        try:
+            payload = _get_json(_FLOW_URLS[:1], params, trust_env=False)
+        except FundamentalsSourceError:
+            payload = None
+        if payload is None:
+            payload = _get_json(_FLOW_URLS, params)
+    else:
+        # 调用方已探明直连不可用：只走 delay，避免对 push2his 的无效重试拖慢整体
+        payload = _get_json(_FLOW_URLS[1:], params)
     klines = (payload.get("data") or {}).get("klines") or []
     points: list[dict[str, Any]] = []
     for line in klines:
@@ -351,19 +378,519 @@ def fetch_treasury() -> dict[str, Any]:
     }
 
 
-def fetch_vix() -> dict[str, Any] | None:
-    """CBOE VIX 指数（恐慌指数），via yfinance。失败返回 None，由 service 降级。"""
-    try:
-        import yfinance as yf
+# VIX 走 Yahoo 公开 v8 图表 API（query1），**不走 yfinance 库**。
+# 原因同 data/providers.py:YahooV8PriceProvider：yfinance 用 query2 端点 +
+# cookie/crumb 机制，在共享 IP 段上会持续触发 IP 级 429（Too Many Requests，
+# 一次几十分钟）；query1 的 v8 图表端点限流阈值宽松得多，实测稳定可用。
+_YAHOO_CHART_URL = "https://query1.finance.yahoo.com/v8/finance/chart/"
+_YAHOO_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+    "Accept": "application/json,text/plain,*/*",
+}
 
-        hist = yf.Ticker("^VIX").history(period="5d")
-        if hist.empty:
-            return None
-        last = hist["Close"].dropna().iloc[-1]
-        as_of = str(hist.index[-1].date())
-        return {"value": round(float(last), 2), "as_of": as_of}
-    except Exception:  # noqa: BLE001 -- yfinance 限流/网络错误统一降级为"暂不可用"
-        return None
+
+def _fetch_yahoo_closes(symbol: str, params: dict[str, Any]) -> dict[str, float]:
+    """Yahoo v8 图表 API 取日线收盘价，返回 {date: close}（已剔除 null bar）。
+
+    失败统一抛 FundamentalsSourceError，由调用方决定降级策略。
+    """
+    url = f"{_YAHOO_CHART_URL}{requests.utils.quote(symbol)}"
+    try:
+        resp = requests.get(url, params=params, headers=_YAHOO_HEADERS, timeout=_TIMEOUT)
+        resp.raise_for_status()
+        payload = resp.json()
+    except requests.RequestException as exc:
+        raise FundamentalsSourceError(f"Yahoo v8 请求失败：{exc}") from exc
+    except ValueError as exc:  # JSON 解析失败
+        raise FundamentalsSourceError(f"Yahoo v8 返回非 JSON：{exc}") from exc
+
+    chart = payload.get("chart") or {}
+    if chart.get("error"):
+        desc = (chart["error"] or {}).get("description", "unknown")
+        raise FundamentalsSourceError(f"Yahoo v8 错误：{desc}")
+    results = chart.get("result") or []
+    if not results:
+        raise FundamentalsSourceError(f"Yahoo v8 无数据：{symbol}")
+
+    result = results[0]
+    stamps = result.get("timestamp") or []
+    quotes = (result.get("indicators") or {}).get("quote") or [{}]
+    closes = (quotes[0] or {}).get("close") or []
+    out: dict[str, float] = {}
+    # strict=False：两数组长度理论上一致，万一 Yahoo 返回不齐也只截到较短的，
+    # 不因数据异常打挂整个面板（本模块一贯的降级风格）。
+    for stamp, close in zip(stamps, closes, strict=False):
+        if stamp is None or close is None:
+            continue  # 停牌/未成交 bar
+        date = datetime.fromtimestamp(int(stamp), tz=UTC).date().isoformat()
+        out[date] = round(float(close), 2)
+    if not out:
+        raise FundamentalsSourceError(f"Yahoo v8 无可用收盘价：{symbol}")
+    return out
+
+
+def fetch_vix() -> dict[str, Any] | None:
+    """CBOE VIX 指数（恐慌指数），via Yahoo v8 图表 API。失败抛错，由 service 降级。
+
+    注意：以前这里把所有异常吞成 None，导致前端只显示"暂不可用"而 errors[]
+    为空——分不清限流、断网还是代码坏了。现在统一抛错让原因可见。
+    """
+    closes = _fetch_yahoo_closes("^VIX", {"interval": "1d", "range": "5d"})
+    as_of = max(closes)
+    return {"value": closes[as_of], "as_of": as_of}
+
+
+# ── 股权风险溢价 ERP（盈利收益率 − 10Y 国债）─────────────────────────────
+# ERP = Earnings Yield (1/PE_TTM × 100) − 10Y 国债收益率。
+# 美股盈利收益率 via multpl.com（S&P500 Earnings Yield，日频）；
+# A股盈利收益率 = 1 / 沪深300 PE_TTM × 100，PE via yfinance（000300.SS）。
+# 国债 10Y 复用 fetch_treasury()（东财 RPTA_WEB_TREASURYYIELD，中/美同源）。
+# ERP 升高 = 股票相对债券性价比提升（机会），转负 = 债券相对更具吸引力（股票偏贵）。
+
+_MULTIPL_EY_URL = "https://www.multpl.com/s-p-500-earnings-yield"
+_FRED_EY_SERIES = "SP500EY"  # FRED S&P500 Earnings Yield，作为 multpl 的 fallback
+
+
+def _fetch_multpl_earnings_yield() -> float:
+    """multpl.com S&P500 盈利收益率（%），带超时重试。解析首页 'Earnings Yield is X.XX%'。"""
+    last_exc: Exception | None = None
+    for attempt in range(3):
+        if attempt:
+            time.sleep(1.5)
+        try:
+            resp = requests.get(
+                _MULTIPL_EY_URL,
+                headers={**_HEADERS, "Referer": "https://www.multpl.com/"},
+                timeout=_TIMEOUT,
+            )
+            resp.raise_for_status()
+        except requests.RequestException as exc:
+            last_exc = exc
+            continue
+        m = re.search(r"Earnings Yield is\s*([\d.]+)%", resp.text)
+        if m:
+            return float(m.group(1))
+        last_exc = FundamentalsSourceError("multpl.com 未能解析盈利收益率")
+    raise FundamentalsSourceError(f"multpl.com: {last_exc}")
+
+
+def _fetch_fred_latest(series_id: str) -> float:
+    """FRED CSV 取最新非空值（官方序列，日频/月频均可）。"""
+    try:
+        resp = requests.get(
+            "https://fred.stlouisfed.org/graph/fredgraph.csv",
+            params={"id": series_id},
+            headers=_HEADERS,
+            timeout=_TIMEOUT,
+        )
+        resp.raise_for_status()
+    except requests.RequestException as exc:
+        raise FundamentalsSourceError(f"FRED {series_id}: {exc}") from exc
+    for line in reversed(resp.text.splitlines()):
+        if "," not in line:
+            continue
+        date, _, raw = line.partition(",")
+        v = _num(raw.strip().strip('"'))
+        if v is not None and date:
+            return v
+    raise FundamentalsSourceError(f"FRED {series_id} 无数据")
+
+
+def _yf_pe(symbol: str) -> float:
+    """yfinance 取 trailingPE。失败抛 FundamentalsSourceError（含限流 429）。"""
+    import yfinance as yf
+
+    try:
+        info = yf.Ticker(symbol).info
+        pe = info.get("trailingPE")
+    except Exception as exc:  # noqa: BLE001 —— yfinance 限流抛 YFRateLimitError 等
+        raise FundamentalsSourceError(f"yfinance {symbol}: {exc}") from exc
+    if pe is None:
+        raise FundamentalsSourceError(f"yfinance {symbol} 无 trailingPE")
+    return float(pe)
+
+
+def fetch_us_erp(treasury: dict[str, Any] | None = None) -> dict[str, Any]:
+    """美股股权风险溢价 ERP = S&P500 盈利收益率 − 美债 10Y（%）。
+
+    盈利收益率先尝试 multpl.com（日频，快），失败则 fallback 到 FRED SP500EY。
+    treasury 可由调用方传入（避免重复取数）；缺省时自取 fetch_treasury()。
+    """
+    if treasury is None:
+        treasury = fetch_treasury()
+    us10 = (treasury.get("us") or {}).get("us_10y")
+    if us10 is None:
+        raise FundamentalsSourceError("美债10Y缺失，无法计算美股ERP")
+    try:
+        ey = _fetch_multpl_earnings_yield()
+        ey_source = "multpl.com S&P500 Earnings Yield"
+    except FundamentalsSourceError:
+        ey = _fetch_fred_latest(_FRED_EY_SERIES)
+        ey_source = f"FRED {_FRED_EY_SERIES}"
+    return {
+        "earnings_yield": round(ey, 2),
+        "risk_free": round(float(us10), 2),
+        "erp": round(ey - float(us10), 2),
+        "as_of": (treasury.get("as_of_us") or None),
+        "ey_source": ey_source,
+    }
+
+
+# 东财估值接口（公开 token，与 akshare 同源）取指数最新 PE_TTM。
+_DCFM_VALUATION_URL = "http://dcfm.eastmoney.com/em_mutisvcexpandinterface/api/js/get"
+
+
+def _fetch_hs300_pe_dcfm() -> float:
+    """东财 dcfm 指数估值接口取沪深300最新 PE_TTM（HTTP/HTTPS 双源 + 重试）。"""
+    params = {
+        "st": "TDATE",
+        "sr": "-1",
+        "ps": "1",
+        "p": "1",
+        "type": "GZFX_SCTJ",
+        "token": "70f12f2f4f091e459a279469fe49eca5",
+        "source": "WEB",
+        "js": "(x)",
+        "filter": "(MKTCODE='000300')",
+    }
+    # HTTP 是公开接口原始协议；部分网络环境强制 HTTPS，故 HTTPS 作 fallback。
+    urls = (_DCFM_VALUATION_URL, _DCFM_VALUATION_URL.replace("http://", "https://"))
+    last_exc: Exception | None = None
+    for url in urls:
+        for attempt in range(2):
+            if attempt:
+                time.sleep(1.5)
+            try:
+                resp = requests.get(url, params=params, headers=_HEADERS, timeout=_TIMEOUT)
+                resp.raise_for_status()
+                text = resp.text.strip()
+                # js=(x) 可能返回被括号包裹的 JSON：([{...}]) 或 ({...})
+                if text.startswith("(") and text.endswith(")"):
+                    text = text[1:-1]
+                payload = json.loads(text)
+            except requests.RequestException as exc:
+                last_exc = exc
+                continue
+            except ValueError as exc:
+                last_exc = FundamentalsSourceError(f"东财指数估值返回非 JSON：{exc}")
+                continue
+            if not isinstance(payload, list) or not payload:
+                last_exc = FundamentalsSourceError("东财指数估值返回空")
+                continue
+            row = payload[0]
+            # 不同字段名兼容：公开接口常见 PE9（TTM）/ PE / 市盈率(TTM)
+            pe = _num(
+                row.get("PE9") or row.get("PE") or row.get("PE_TTM") or row.get("市盈率(TTM)")
+            )
+            if pe is None:
+                keys = list(row.keys())[:20]
+                last_exc = FundamentalsSourceError(f"东财指数估值无 PE 字段：{keys}")
+                continue
+            return float(pe)
+    raise FundamentalsSourceError(f"东财指数估值: {last_exc}")
+
+
+def _fetch_hs300_pe_akshare() -> float:
+    """akshare 乐咕乐股取沪深300最新滚动市盈率（可选依赖，未安装时直接抛错）。"""
+    try:
+        import akshare as ak
+    except ImportError as exc:
+        raise FundamentalsSourceError(f"akshare 未安装：{exc}") from exc
+    try:
+        df = ak.stock_index_pe_lg(symbol="沪深300")
+        pe = _num(df.iloc[-1].get("滚动市盈率"))
+    except Exception as exc:  # noqa: BLE001
+        raise FundamentalsSourceError(f"akshare 沪深300 PE: {exc}") from exc
+    if pe is None:
+        raise FundamentalsSourceError("akshare 沪深300 无滚动市盈率")
+    return float(pe)
+
+
+def _fetch_hs300_pe() -> tuple[float, str]:
+    """沪深300 PE_TTM 多源链：东财 dcfm → akshare（如已装）→ yfinance。"""
+    try:
+        return _fetch_hs300_pe_dcfm(), "东财 dcfm 沪深300 PE_TTM"
+    except FundamentalsSourceError:
+        pass
+    try:
+        return _fetch_hs300_pe_akshare(), "akshare 乐咕乐股 沪深300 滚动市盈率"
+    except FundamentalsSourceError:
+        pass
+    return _yf_pe("000300.SS"), "yfinance 000300.SS trailingPE"
+
+
+def fetch_cn_erp(treasury: dict[str, Any] | None = None) -> dict[str, Any]:
+    """A股股权风险溢价 ERP = 沪深300 盈利收益率 − 中债 10Y（%）。
+
+    沪深300 PE_TTM 多源降级：东财 dcfm（无额外依赖）→ akshare（如环境已装）
+    → yfinance（共享 IP 常触发 429，兜底）。
+    """
+    if treasury is None:
+        treasury = fetch_treasury()
+    cn10 = (treasury.get("cn") or {}).get("cn_10y")
+    if cn10 is None:
+        raise FundamentalsSourceError("中债10Y缺失，无法计算A股ERP")
+    pe, ey_source = _fetch_hs300_pe()
+    ey = round(100.0 / float(pe), 2)
+    return {
+        "earnings_yield": ey,
+        "risk_free": round(float(cn10), 2),
+        "erp": round(ey - float(cn10), 2),
+        "as_of": (treasury.get("as_of_cn") or None),
+        "pe_ttm": round(float(pe), 2),
+        "ey_source": ey_source,
+    }
+
+
+# ── ERP 历史走势（股债性价比长序列）────────────────────────────────────────
+# 口径：ERP = 盈利收益率(1/PE_TTM×100) − 10Y 国债收益率，与上方现值一致。
+# 历史：A股取乐咕乐股沪深300 PE_TTM 全史（2005-04 起，日频，与中证指数公司
+# 官方口径一致）；美股取 multpl.com 月度盈利收益率（溯源自 Robert Shiller
+# 耶鲁数据，1871 起），按 as-of 前向填充对齐到国债日频。
+
+
+def fetch_hs300_pe_history() -> dict[str, float]:
+    """沪深300 PE_TTM 全史日频（乐咕乐股，via akshare），升序 {date: pe}。
+
+    与现值链的 akshare 分支同源同口径（滚动市盈率），保证卡片与趋势图衔接一致。
+    akshare 未安装或接口失败时抛错，由 service 层降级。
+    """
+    try:
+        import akshare as ak
+    except ImportError as exc:
+        raise FundamentalsSourceError(f"akshare 未安装：{exc}") from exc
+    try:
+        df = ak.stock_index_pe_lg(symbol="沪深300")
+    except Exception as exc:  # noqa: BLE001
+        raise FundamentalsSourceError(f"akshare 沪深300 PE 历史: {exc}") from exc
+    out: dict[str, float] = {}
+    # strict=False：akshare 表格行与列对齐由其内部保证，长度不齐时截到较短侧。
+    for d, pe in zip(df["日期"], df["滚动市盈率"], strict=False):
+        pe = _num(pe)
+        if pe is not None and pe > 0:
+            out[str(d)] = float(pe)
+    if not out:
+        raise FundamentalsSourceError("沪深300 PE 历史无数据")
+    return out
+
+
+def fetch_cn_erp_history(
+    lookback_days: int = 730,
+    treasury_hist: dict[str, dict[str, float | None]] | None = None,
+) -> dict[str, float]:
+    """A股 ERP 历史日频 = 1/沪深300 PE_TTM×100 − 中债 10Y。
+
+    PE 与国债取交集日期（两侧都是交易日序列）；treasury_hist 可由调用方
+    传入避免重复翻页取数。
+    """
+    if treasury_hist is None:
+        treasury_hist = fetch_treasury_history(lookback_days)
+    cn10 = {d: v.get("cn_10y") for d, v in treasury_hist.items() if v.get("cn_10y") is not None}
+    if not cn10:
+        raise FundamentalsSourceError("中债10Y历史缺失，无法计算A股ERP历史")
+    pe_hist = fetch_hs300_pe_history()
+    out: dict[str, float] = {}
+    for d, pe in pe_hist.items():
+        r10 = cn10.get(d)
+        if r10 is not None:
+            out[d] = round(100.0 / pe - r10, 2)
+    if not out:
+        raise FundamentalsSourceError("A股ERP历史无交集日期")
+    return _tail_days(out, lookback_days)
+
+
+_MULTIPL_EY_TABLE_URL = "https://www.multpl.com/s-p-500-earnings-yield/table/by-month"
+_MULTIPL_CAPE_TABLE_URL = "https://www.multpl.com/shiller-pe/table/by-month"
+_MONTH_ABBR = {
+    "Jan": 1,
+    "Feb": 2,
+    "Mar": 3,
+    "Apr": 4,
+    "May": 5,
+    "Jun": 6,
+    "Jul": 7,
+    "Aug": 8,
+    "Sep": 9,
+    "Oct": 10,
+    "Nov": 11,
+    "Dec": 12,
+}
+
+
+def _fetch_multpl_monthly(url: str, *, require_percent: bool) -> dict[str, float]:
+    """抓 multpl.com 月度表格页，返回升序 {月初日期: 数值}。失败重试 3 次后抛错。
+
+    require_percent=True 时只接收带 ``%`` 的单元格（盈利收益率等百分比序列），
+    False 时接收裸数值（CAPE 等倍数序列）。
+
+    值单元格形如 ``<td>\\n&#x2002;\\n42.35\\n</td>``——**必须先剥 HTML 实体**：
+    em space 的实体写法 ``&#x2002;`` 本身含数字 2002，不剥的话裸数值正则会把
+    2002 当成读数抓走（实测整表变成同一个值 2002.0）。带 ``%`` 的序列因为正则
+    要求百分号而侥幸躲过，裸数值序列则必踩。
+    """
+    last_exc: Exception | None = None
+    for attempt in range(3):
+        if attempt:
+            time.sleep(1.5)
+        try:
+            resp = requests.get(
+                url,
+                headers={**_HEADERS, "Referer": "https://www.multpl.com/"},
+                timeout=_TIMEOUT,
+            )
+            resp.raise_for_status()
+        except requests.RequestException as exc:
+            last_exc = exc
+            continue
+        rows = re.findall(r"<td[^>]*>([^<]+)</td>\s*<td[^>]*>([^<]+)</td>", resp.text)
+        out: dict[str, float] = {}
+        for dstr, vstr in rows:
+            m = re.match(r"([A-Z][a-z]{2}) \d{1,2}, (\d{4})", dstr.strip())
+            if not m or m.group(1) not in _MONTH_ABBR:
+                continue
+            if require_percent:
+                v = re.search(r"(-?[\d.]+)%", vstr)
+            else:
+                clean = re.sub(r"&#x[0-9a-fA-F]+;|&\w+;", " ", vstr).replace(",", "")
+                v = re.search(r"(-?\d+\.?\d*)", clean)
+            if not v:
+                continue
+            month = _MONTH_ABBR[m.group(1)]
+            out[f"{m.group(2)}-{month:02d}-01"] = float(v.group(1))
+        if out:
+            return dict(sorted(out.items()))
+        last_exc = FundamentalsSourceError("multpl.com 月度表未能解析")
+    raise FundamentalsSourceError(f"multpl.com 月度表 {url}: {last_exc}")
+
+
+def fetch_us_ey_history() -> dict[str, float]:
+    """S&P500 盈利收益率月度全史（multpl.com 表格页），升序 {月初日期: ey%}。
+
+    multpl 的 EPS 序列溯源自 Robert Shiller（耶鲁）1871 年起的数据；月频是
+    盈利收益率的学术标准频率（EPS 随财报季跳变，价格月内波动平滑掉）。
+    """
+    return _fetch_multpl_monthly(_MULTIPL_EY_TABLE_URL, require_percent=True)
+
+
+def fetch_us_cape_history() -> dict[str, float]:
+    """S&P500 CAPE（Shiller PE）月度全史（multpl.com），升序 {月初日期: cape}。
+
+    CAPE = 实际价格 / 过去 10 年通胀调整后实际盈利均值（Robert Shiller，耶鲁）。
+    用 10 年平均盈利做分母，正是为了绕开 PE_TTM / Fed Model 口径在盈利拐点处的
+    失真——2009-03 金融危机大底 TTM 盈利崩塌快于股价，股债收益差误报「贵」，
+    而 CAPE 当月 13.3（全史 P66）正确指向便宜。作为不受利率水平污染的估值对照。
+    """
+    return _fetch_multpl_monthly(_MULTIPL_CAPE_TABLE_URL, require_percent=False)
+
+
+def _tail_days(series: dict[str, float], lookback_days: int) -> dict[str, float]:
+    """按自然日从尾部截取 lookback_days 天（各历史接口的统一口径）。"""
+    if not series:
+        return series
+    cutoff = (datetime.now(UTC) - timedelta(days=int(lookback_days))).date().isoformat()
+    return {d: v for d, v in series.items() if d >= cutoff}
+
+
+# ── 估值分位对照（不受利率水平污染）──────────────────────────────────────────
+# 存在理由：股债收益差（Fed Model 口径，即本模块 fetch_*_erp）在 1990 年后与
+# 名义 10Y 的相关系数实测 -0.83（R²≈0.69）——它有约七成方差由债券端解释，
+# 是「股债比价」而非「股票贵不贵」。这里补两个纯估值分位做对照：
+#   · 美股 CAPE（Shiller PE，10 年平均实际盈利，避开盈利拐点失真）
+#   · A股 沪深300 PE_TTM 自身分位（中债 10Y 区间窄，A股股债差 96% 由股票端
+#     驱动，故 PE 分位与之相关但仍能揭示「利率下行推高股债差」的假机会）
+# 两者与股债收益差**同时到极值**才是强信号；打架时说明「股票贵但债券更贵」，
+# 那是配置结论而非择时结论。
+
+#: 分位标定窗口起点。刻意不用全史——理由随各自序列注明，且两个数值都返回，
+#: 由前端同时披露，避免「分位是取样窗口的函数」这一点被藏起来。
+_CAPE_CALIB_FROM = "1950-01-01"
+_CN_PE_CALIB_FROM = "2010-01-01"
+
+
+def percentile_rank(values: list[float], x: float) -> float:
+    """x 在 values 中的百分位（≤x 的占比，0–100）。空序列返回 nan。"""
+    if not values:
+        return float("nan")
+    return round(100.0 * sum(1 for v in values if v <= x) / len(values), 1)
+
+
+def _valuation_snapshot(hist: dict[str, float], calib_from: str) -> dict[str, Any]:
+    """把「全史序列」压成一个估值分位快照。
+
+    percentile 用标定窗口（可比口径），percentile_full 用全史（长周期背景）；
+    两个都返回，前端并列展示——分位随取样窗口漂移是这类指标最大的坑，
+    只报一个数就等于把坑藏起来。
+    """
+    if not hist:
+        raise FundamentalsSourceError("估值历史为空")
+    as_of = max(hist)
+    value = float(hist[as_of])
+    calib = [v for d, v in hist.items() if d >= calib_from]
+    full = list(hist.values())
+    return {
+        "value": round(value, 2),
+        "as_of": as_of,
+        "percentile": percentile_rank(calib, value),
+        "percentile_full": percentile_rank(full, value),
+        "calib_from": calib_from[:4],
+        "calib_n": len(calib),
+        "full_from": min(hist)[:4],
+        "full_n": len(full),
+    }
+
+
+def fetch_us_cape(hist: dict[str, float] | None = None) -> dict[str, Any]:
+    """美股 CAPE 现值 + 分位快照。hist 可复用已取到的全史避免重复抓取。
+
+    标定窗口取 1950 年起：战后现代会计与指数编制口径，且涵盖 1970s 滞胀高利率、
+    2000 泡沫、2009 危机等多种利率/通胀环境（920 个月）。1871–1949 段口径不可比，
+    但仍保留在 percentile_full 里作长周期背景。
+    """
+    if hist is None:
+        hist = fetch_us_cape_history()
+    return _valuation_snapshot(hist, _CAPE_CALIB_FROM)
+
+
+def fetch_cn_pe(hist: dict[str, float] | None = None) -> dict[str, Any]:
+    """A股 沪深300 PE_TTM 现值 + 分位快照。hist 可复用已取到的全史。
+
+    标定窗口取 2010 年起：股权分置改革后全流通基本完成，与 2005–2007 小流通盘
+    时代的 PE 口径不可比——全史 P95≈34 几乎全部由 2007 泡沫单独贡献，用全史标定
+    会把「不贵」的门槛抬到失去分辨力。
+    """
+    if hist is None:
+        hist = fetch_hs300_pe_history()
+    return _valuation_snapshot(hist, _CN_PE_CALIB_FROM)
+
+
+def fetch_us_erp_history(
+    lookback_days: int = 730,
+    treasury_hist: dict[str, dict[str, float | None]] | None = None,
+) -> dict[str, float]:
+    """美股 ERP 历史 = S&P500 盈利收益率(月频) − 美债 10Y(日频)。
+
+    EY 是月频，按 as-of 前向填充对齐到国债日频日期：日度 ERP 变动来自利率端，
+    EY 随财报季月度跳变。这与 Fed Model 研究的标准做法一致。注意月度表滞后
+    于现值卡片的主页日频值（2026-08 实测约滞后数月），图末端与卡片可能有小差。
+    """
+    if treasury_hist is None:
+        treasury_hist = fetch_treasury_history(lookback_days)
+    us10 = {d: v.get("us_10y") for d, v in treasury_hist.items() if v.get("us_10y") is not None}
+    if not us10:
+        raise FundamentalsSourceError("美债10Y历史缺失，无法计算美股ERP历史")
+    ey_hist = fetch_us_ey_history()
+    ey_dates = sorted(ey_hist)
+    out: dict[str, float] = {}
+    # 双指针 as-of join：ey_dates 与 us10 均升序。
+    i = -1
+    for d in sorted(us10):
+        while i + 1 < len(ey_dates) and ey_dates[i + 1] <= d:
+            i += 1
+        if i >= 0:
+            out[d] = round(ey_hist[ey_dates[i]] - us10[d], 2)
+    if not out:
+        raise FundamentalsSourceError("美股ERP历史无交集日期")
+    return _tail_days(out, lookback_days)
 
 
 # ── 资金面：两融余额（东财数据中心，沪深合计）─────────────────────────────
@@ -427,7 +954,7 @@ def fetch_margin() -> dict[str, Any]:
 # ── 宏观指标历史序列（供趋势图使用）────────────────────────────────────────
 # 复用既有数据源取历史，不引新依赖：
 # - 国债（中/美 2/5/10/30Y + 利差）：东财 RPTA_WEB_TREASURYYIELD，放大 ps 取多日序列
-# - VIX：yfinance ^VIX.history()
+# - VIX：Yahoo v8 图表 API（query1，period1/period2 取日线，不走 yfinance）
 # - 两融余额：东财 RPTA_RZRQ_LSHJ 放大 pageSize 取多日序列
 
 
@@ -467,19 +994,30 @@ def fetch_treasury_history(lookback_days: int = 730) -> dict[str, dict[str, floa
 
 
 def fetch_vix_history(lookback_days: int = 730) -> dict[str, float]:
-    """CBOE VIX 历史日线（恐慌指数），via yfinance。失败抛错。"""
-    try:
-        import yfinance as yf
+    """CBOE VIX 历史日线（恐慌指数），via Yahoo v8 图表 API。失败抛错。
 
-        hist = yf.Ticker("^VIX").history(period=f"{min(int(lookback_days), 1500)}d")
-        if hist.empty:
-            raise FundamentalsSourceError("yfinance VIX 历史返回空")
-        out = {str(d.date()): round(float(v), 2) for d, v in hist["Close"].dropna().items()}
-        if not out:
-            raise FundamentalsSourceError("yfinance VIX 无可用数据")
-        return out
-    except Exception as exc:  # noqa: BLE001
-        raise FundamentalsSourceError(f"VIX 历史: {exc}") from exc
+    用 period1/period2 时间戳而非 range，两个原因：
+
+    1. ``range=730d`` 被 Yahoo 解释为 730 **根 K 线**（交易日），不是 730 个
+       自然日——实测返回 2023-10-30 起共 730 行，约 2.8 个自然年。这与国债/
+       两融历史的自然日口径不一致。改用时间戳后 lookback_days 就是字面意思。
+    2. ``range=max`` 会被 Yahoo 静默降频到**月线**（实测 dataGranularity=1mo，
+       1990-2026 仅 440 行），没法喂日频叠加图；而 period1/period2 在同样
+       20 年跨度上仍返回日线（实测 5,379 行，granularity=1d）。
+    """
+    # 用 aware UTC：naive utcnow().timestamp() 会被按本地时区解释
+    # （UTC+8 下偏 8 小时），跨零点时可能少算一天。
+    days = max(5, int(lookback_days))
+    end = datetime.now(UTC)
+    start = end - timedelta(days=days)
+    return _fetch_yahoo_closes(
+        "^VIX",
+        {
+            "interval": "1d",
+            "period1": int(start.timestamp()),
+            "period2": int(end.timestamp()),
+        },
+    )
 
 
 def fetch_margin_history(lookback_days: int = 730) -> dict[str, dict[str, float | None]]:
@@ -521,26 +1059,33 @@ FRED_INDEX_SERIES: dict[str, str] = {
 def fetch_cn_index_history(code: str, lookback_days: int = 5200) -> dict[str, float]:
     """A 股指数收盘日线（腾讯 ifzq），升序 {date: close}。
 
-    单页上限 800 根：先取最新一页，再以本页最旧一根的前一日为 end 向前翻页。
+    翻页拉全史：先取最新一页，再以本页最旧一根的前一日为 end 向前翻页。
+    腾讯返回为「最新在前」，故用 min/max 兼容排序，避免翻页方向算反导致只拿到近期一页。
     """
     out: dict[str, float] = {}
     end = ""
-    for _ in range(int(lookback_days) // 800 + 2):
+    for _ in range(max(12, int(lookback_days) // 250 + 5)):
         param = f"{code},day,,{end},800" if end else f"{code},day,,,800"
         payload = _get_json(_TENCENT_KLINE_URL, {"param": param})
         node = (payload.get("data") or {}).get(code) or {}
         days = node.get("day") or []
         if not days:
             break
+        page_dates: list[str] = []
         for row in days:
             v = _num(row[2]) if len(row) > 2 else None  # [date, open, close, ...]
             if row[0] and v is not None:
-                out[str(row[0])[:10]] = v
-        oldest = str(days[0][0])[:10]
-        if len(days) < 800 or len(out) >= int(lookback_days):
+                d = str(row[0])[:10]
+                out[d] = v
+                page_dates.append(d)
+        if len(out) >= int(lookback_days):
+            break
+        oldest = min(page_dates)
+        # 没有更早期数据（端点忽略 end 或已到头）则停止翻页，避免空转
+        if end and oldest >= end:
             break
         end = (datetime.strptime(oldest, "%Y-%m-%d") - timedelta(days=1)).strftime("%Y-%m-%d")
-        time.sleep(0.2)  # 翻页限速
+        time.sleep(0.15)  # 翻页限速
     if not out:
         raise FundamentalsSourceError(f"指数历史 {code} 无数据")
     return dict(sorted(out.items()))

@@ -165,6 +165,13 @@ def test_symbol_detail(client: TestClient) -> None:
     assert data["market_cn"] == "A股"
     assert data["chart"]["dates"]
     assert data["chart"]["ohlc"]
+    # MACD 副图事件合同：字段必须存在（单调上涨夹具下可能为空列表）
+    assert isinstance(data["chart"]["macdEvents"], list)
+    for ev in data["chart"]["macdEvents"]:
+        assert ev["type"] in ("golden_cross", "death_cross", "zero_cross_up", "zero_cross_down")
+        assert ev["date"] and ev["statusCn"] and ev["dimension"]
+        # 盲区补齐必须随事件下发（macd-reading 口径）
+        assert ev["colorCn"] and ev["slopeCn"]
     assert data["assessment"]["color_cn"] in ("绿色", "灰色", "黑色", "数据不足")
     assert data["assessment"]["stage_cn"]
     assert data["market_badge"]["summary"] in (

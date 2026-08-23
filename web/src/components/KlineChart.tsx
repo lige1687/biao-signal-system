@@ -37,7 +37,8 @@ export interface MarkPick {
     | "b1_line"
     | "bottom_line"
     | "top_line"
-    | "highlight_price";
+    | "highlight_price"
+    | "macd_event";
   /** 标记类点击带日期；横线类点击没有日期，用 level 表示价位 */
   date?: string;
   price?: number;
@@ -49,6 +50,8 @@ export interface MarkPick {
   distancePct?: number | null;
   /** 买点分析联动：高亮价位线点击时带回，与对话卡片同 id 双向联动。 */
   annoId?: string;
+  /** MACD 事件的中文名（金叉/死叉/上穿0轴/下穿0轴），供解释面板标题用。 */
+  macdStatusCn?: string;
 }
 
 /** 均线开关键。 */
@@ -71,12 +74,27 @@ export const MA_META: {
   { key: "sma20", label: "SMA20", color: "#2563eb", dashed: true },
   { key: "ema60", label: "EMA60", color: "#0b9b64", dashed: false },
   { key: "sma60", label: "SMA60", color: "#0b9b64", dashed: true },
-  { key: "ema120", label: "EMA120", color: "#dc2626", dashed: false },
-  { key: "sma120", label: "SMA120", color: "#dc2626", dashed: true },
+  { key: "ema120", label: "EMA120", color: "#e33d47", dashed: false },
+  { key: "sma120", label: "SMA120", color: "#e33d47", dashed: true },
 ];
 
 /** K 线着色模式。 */
 export type ColorMode = "red_green" | "lei_state";
+
+/**
+ * MACD 事件标记样式。红=强度增强方向（A股涨红），绿=强度减弱方向。
+ * 金叉/死叉用实心三角（DIF×DEA 交叉）；上/下穿0轴用空心圆（两线排列翻转，
+ * 空心与实心区分「排列翻转」和「交叉」两件不同的事）。
+ */
+const MACD_EVENT_META: Record<
+  "golden_cross" | "death_cross" | "zero_cross_up" | "zero_cross_down",
+  { symbol: string; rotate: number; color: string; hollow: boolean; legend: string }
+> = {
+  golden_cross: { symbol: "triangle", rotate: 0, color: "#e33d47", hollow: false, legend: "▲" },
+  death_cross: { symbol: "triangle", rotate: 180, color: "#0b9b64", hollow: false, legend: "▼" },
+  zero_cross_up: { symbol: "circle", rotate: 0, color: "#e33d47", hollow: true, legend: "○" },
+  zero_cross_down: { symbol: "circle", rotate: 0, color: "#0b9b64", hollow: true, legend: "○" },
+};
 
 /** 图上标记/参考线的显示开关。默认全关，避免遮挡看盘。 */
 export interface ChartDisplay {
@@ -275,12 +293,31 @@ export default function KlineChart({ payload, display, onPick, onDownload, highl
       {display.chipDist && (
         <div className="chip-legend">
           <span className="chip-leg-item">
-            <i className="chip-leg-swatch" style={{ background: "#f59e0b" }} />
+            <i className="chip-leg-swatch" style={{ background: "#e36b1c" }} />
             获利盘　价位 ≤ 当前价
           </span>
           <span className="chip-leg-item">
             <i className="chip-leg-swatch" style={{ background: "#6366f1" }} />
             套牢盘　价位高于当前价
+          </span>
+        </div>
+      )}
+      {display.macd && (
+        <div className="chip-legend macd-legend">
+          <span className="chip-leg-item" style={{ color: MACD_EVENT_META.golden_cross.color }}>
+            ▲ 金叉（DIF 上穿 DEA）
+          </span>
+          <span className="chip-leg-item" style={{ color: MACD_EVENT_META.death_cross.color }}>
+            ▼ 死叉（DIF 下穿 DEA）
+          </span>
+          <span className="chip-leg-item" style={{ color: MACD_EVENT_META.zero_cross_up.color }}>
+            ○ 上穿0轴（排列转多）
+          </span>
+          <span className="chip-leg-item" style={{ color: MACD_EVENT_META.zero_cross_down.color }}>
+            ○ 下穿0轴（排列转空）
+          </span>
+          <span className="chip-leg-item macd-leg-note">
+            研究代理 · 强度非转折 · 金叉/死叉不是买卖点
           </span>
         </div>
       )}
@@ -370,7 +407,7 @@ function buildKlineOption(
             fontSize: 10,
             fontWeight: 600,
             formatter: `${labelPrefix} ${line.yAxis.toFixed(2)}`,
-            backgroundColor: "rgba(255,255,255,0.85)",
+            backgroundColor: "rgba(255,255,255,0.95)",
             padding: [1, 3],
             borderRadius: 2,
           },
@@ -511,7 +548,7 @@ function buildKlineOption(
               fontSize: 10,
               fontWeight: 700,
               formatter: `${labelPrefix} ${line.yAxis.toFixed(2)}`,
-              backgroundColor: "rgba(255,255,255,0.92)",
+              backgroundColor: "rgba(255,255,255,0.95)",
               padding: [1, 3],
               borderRadius: 2,
             },
@@ -578,7 +615,7 @@ function buildKlineOption(
               fontSize: 11,
               fontWeight: 700,
               formatter: `${pl.label} ${pl.price.toFixed(2)}`,
-              backgroundColor: "rgba(255,255,255,0.92)",
+              backgroundColor: "rgba(255,255,255,0.95)",
               padding: [1, 4],
               borderRadius: 3,
             },
@@ -684,7 +721,7 @@ function buildKlineOption(
             const w = maxAmount > 0 ? (amount / maxAmount) * (cs.width * barW) : 0;
             if (w < 0.5) return;
             const profitable = price <= lastClose;
-            const color = profitable ? "#f59e0b" : "#6366f1";
+            const color = profitable ? "#e36b1c" : "#6366f1";
 
             // 峰值密集区：实色柱 + 贯穿实线 + 价格标签，明显高亮（不用虚线，虚线在 K 线上糊）
             if (peakSet.has(params.dataIndex)) {
@@ -759,7 +796,29 @@ function buildKlineOption(
 
     // ---- MACD 副图（研究代理强度指标）----
     // DIF/DEA 线 + 红绿柱 + 0 轴参考线。作强度/乖离解读，非转折（见 macd_strength）。
+    // 事件标记（▲金叉 ▼死叉 ○穿0轴）来自后端 macd_strength 判定（macdEvents），
+    // 前端不自算交叉——判定权在 Python 规则层（AGENTS.md 约束）。
     const macdOpacity = dim ? DIM_OPACITY : 1;
+    const macdMarkPoints = (d.macdEvents ?? []).map((ev) => {
+      const meta = MACD_EVENT_META[ev.type] ?? MACD_EVENT_META.golden_cross;
+      return {
+        coord: [ev.date, ev.dif] as [string, number],
+        symbol: meta.symbol,
+        symbolSize: 10,
+        symbolRotate: meta.rotate,
+        itemStyle: meta.hollow
+          ? { color: "#ffffff", borderColor: meta.color, borderWidth: 2, opacity: macdOpacity }
+          : { color: meta.color, borderColor: "#ffffff", borderWidth: 1, opacity: macdOpacity },
+        label: { show: false },
+        pick: { kind: "macd_event" as const, date: ev.date, macdStatusCn: ev.statusCn },
+        tooltip: {
+          formatter:
+            `MACD ${ev.statusCn} · ${ev.date}<br/>` +
+            `强度${ev.dimension}（研究代理）<br/>` +
+            `不是买卖点 · 点击查看讲解`,
+        },
+      };
+    });
     const macdSeries: object[] = showMacd
       ? [
           {
@@ -790,9 +849,10 @@ function buildKlineOption(
             yAxisIndex: 2,
             showSymbol: false,
             smooth: true,
-            lineStyle: { width: 1.3, color: "#f59e0b", opacity: macdOpacity },
-            itemStyle: { color: "#f59e0b" },
+            lineStyle: { width: 1.3, color: "#e36b1c", opacity: macdOpacity },
+            itemStyle: { color: "#e36b1c" },
             z: 3,
+            markPoint: { silent: false, data: macdMarkPoints },
           },
           {
             name: "DEA",
@@ -856,13 +916,35 @@ function buildKlineOption(
     if (zs > ze) [zs, ze] = [ze, zs];
 
     return {
-        backgroundColor: "transparent",
+        backgroundColor: "#ffffff",
         animation: false,
         legend: {
           data: [...maSeries.map((s) => s.name), ...(showMacd ? ["DIF", "DEA", "MACD柱"] : [])],
           textStyle: { color: "#5b6473", fontSize: 11 },
           top: 4,
         },
+        // MACD 子图内直接标注两根线（固定位置，dataZoom 不影响）。
+        // 左轴占 56px，故 left 用像素紧贴轴右侧；top 用百分比对齐 MACD 子图区（grid2: 72%–86%）。
+        graphic: showMacd
+          ? [
+              {
+                type: "text",
+                left: "60px",
+                top: "73.5%",
+                z: 100,
+                silent: true,
+                style: { text: "● DIF", fill: "#e36b1c", fontSize: 11, fontWeight: 600 },
+              },
+              {
+                type: "text",
+                left: "118px",
+                top: "73.5%",
+                z: 100,
+                silent: true,
+                style: { text: "● DEA", fill: "#8b5cf6", fontSize: 11, fontWeight: 600 },
+              },
+            ]
+          : [],
         tooltip: {
           trigger: "axis",
           axisPointer: { type: "cross" },
@@ -953,7 +1035,7 @@ function buildKlineOption(
             startValue: zs,
             endValue: ze,
             borderColor: "#dfe5ee",
-            backgroundColor: "transparent",
+            backgroundColor: "#ffffff",
             textStyle: { color: "#7b8494", fontSize: 10 },
           },
         ],

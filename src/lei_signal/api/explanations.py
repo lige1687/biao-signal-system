@@ -601,8 +601,8 @@ RULES: dict[str, Explanation] = {
     "macd_strength": {
         "title": "MACD 强度（研究代理）",
         "definition": "MACD 研究均线的扩散和密集状态，本质是乖离率，表示强度而非转折趋势节点。",
-        "formula": "DIF=EMA(12)-EMA(26)，DEA=EMA(9,DIF)，hist=2*(DIF-DEA)。趋势转折5步骤中 MACD 只能表达「交叉」(DIF/DEA 金叉死叉) 与「多头排列+乖离率」(DIF 的 0 轴方向 + 柱体幅度)；「破线」与「均线拐头」不能表达。",
-        "usage": "看强度不看拐点：柱体放大=乖离扩散(强)，收缩=密集(收敛)，金叉/死叉=强度转向信号。破线看 LEI 颜色，均线拐头看均线斜率补齐。金叉/死叉只是强度描述，不构成买点。",
+        "formula": "DIF=EMA(12)-EMA(26)，DEA=EMA(9,DIF)，hist=2*(DIF-DEA)。趋势转折5步骤中 MACD 只能表达「交叉」(DIF/DEA 金叉死叉；DIF 穿越 0 轴 = EMA12 穿越 EMA26) 与「多头排列+乖离率」(DIF 的 0 轴方向=两线排列；|DIF| 间距趋势=乖离扩散/密集)；「破线」与「均线拐头」不能表达。",
+        "usage": "看强度不看拐点：DIF 远离 0 轴=两线间距拉大=乖离扩散(强)，靠近 0 轴=密集(收敛)；金叉/死叉与穿越 0 轴=强度/排列转向描述。柱体 hist 是 DIF 与 DEA 交叉的可视化，不作扩散判定。破线看 LEI 颜色，均线拐头看均线斜率补齐。金叉/死叉只是强度描述，不构成买点。",
         "caveat": "研究代理：标准 12/26/9，非转折指标；不产生交易事件，不当买点。盲区(破线/拐头)由系统既有 LEI 颜色与均线斜率补齐。",
     },
 }
@@ -616,6 +616,7 @@ MARK_KIND_CONCEPTS: dict[str, str] = {
     "b1_line": "b1",
     "bottom_line": "c_point",
     "top_line": "neckline",
+    "macd_event": "macd_strength",
 }
 
 #: 无档位信息的规则 → 概念回退。``ema20_reclaim_rising`` 只有分档 sub_rule

@@ -524,3 +524,65 @@ def test_ths_board_provider_rejects_non_sector_symbol() -> None:
     assert p.supports("TH881278") is True
     assert p.supports("000001.SS") is False
     assert p.supports("BK0457") is False
+
+
+def test_ths_board_provider_appends_intraday_today_bar() -> None:
+    """盘中增强：today.js 日期比年文件新且 OHLC 自洽时，追加当日形成中 bar。
+
+    实测 today.js 字段（2026-08-19 盘中验证）：1=日期 7=开 8=高 9=低
+    11=现价 13=量。通信设备/半导体/银行/电力同日互证，与年文件口径一致。
+    """
+    from lei_signal.data.providers import THSBoardProvider
+
+    def fake_opener(url: str, headers: dict) -> str:  # noqa: ARG001
+        if "today" in url:
+            quote = (
+                '{"bk_881278":{"1":"20260106","7":"106.0","8":"107.5",'
+                '"9":"105.0","11":"107.0","13":1500,"19":"160000","dt":"1030"}}'
+            )
+            return f"quotebridge_v4_line_bk_881278_01_today({quote})"
+        if "2025" in url:
+            data = "20250102,100.0,105.0,99.0,104.0,1000,100000,,,,0"
+            return f'quotebridge_v4_line_bk_881278_01_2025({{"data":"{data}"}})'
+        data = "20260105,104.0,106.0,103.0,105.5,1200,120000,,,,0"
+        return f'quotebridge_v4_line_bk_881278_01_2026({{"data":"{data}"}})'
+
+    p = THSBoardProvider(opener=fake_opener, start_year=2025)  # type: ignore[arg-type]
+    p._cookie = "fake"  # type: ignore[assignment]
+    b = p.fetch("TH881278", min_rows=1).bars
+    assert len(b) == 3
+    last = b.iloc[-1]
+    assert b.index[-1] == pd.Timestamp("2026-01-06")
+    assert (last["open"], last["high"], last["low"], last["close"]) == (106.0, 107.5, 105.0, 107.0)
+    assert last["volume"] == 1500.0
+
+
+def test_ths_board_provider_skips_stale_or_bad_today_quote() -> None:
+    """today.js 追加的守门：日期不比历史新、或 OHLC 不自洽时不得追加。"""
+    from lei_signal.data.providers import THSBoardProvider
+
+    year_payload = (
+        '{"data":"20260105,104.0,106.0,103.0,105.5,1200,120000,,,,0"}'
+    )
+
+    def make_opener(today_body: str):
+        def fake_opener(url: str, headers: dict) -> str:  # noqa: ARG001
+            if "today" in url:
+                return f"quotebridge_v4_line_bk_881278_01_today({today_body})"
+            return f'quotebridge_v4_line_bk_881278_01_2026({year_payload})'
+
+        return fake_opener
+
+    # 日期与历史最后一根相同（盘前/收盘后已并入年文件）：不追加
+    same_day = json.dumps({"bk_881278": {"1": "20260105", "7": "106.0", "8": "107.0", "9": "105.0",
+                                          "11": "106.5", "13": 100}})
+    p = THSBoardProvider(opener=make_opener(same_day), start_year=2026)  # type: ignore[arg-type]
+    p._cookie = "fake"  # type: ignore[assignment]
+    assert len(p.fetch("TH881278", min_rows=1).bars) == 1
+
+    # OHLC 不自洽（high < open）：不追加
+    bad_ohlc = json.dumps({"bk_881278": {"1": "20260106", "7": "106.0", "8": "105.0", "9": "104.0",
+                                          "11": "105.5", "13": 100}})
+    p2 = THSBoardProvider(opener=make_opener(bad_ohlc), start_year=2026)  # type: ignore[arg-type]
+    p2._cookie = "fake"  # type: ignore[assignment]
+    assert len(p2.fetch("TH881278", min_rows=1).bars) == 1
