@@ -6,7 +6,9 @@ LLM 输出必须过 ``verify_grounding``（禁用词 + rule_id 白名单），�
 """
 from __future__ import annotations
 
+import json
 import logging
+import re
 from contextlib import closing
 
 from fastapi import APIRouter, HTTPException, Request
@@ -241,6 +243,63 @@ def _buy_point_template(review) -> str:  # noqa: ANN001
 
 # ---- 统一会话层（spec 2026-08-23）----
 
+#: 从用户消息中抽标的代码 token。lookahead/lookbehind 排除前后紧邻的字母数字
+#: （中文紧邻允许，「那515880那个」要能命中）；不用 \b（CJK 属 \w，边界不成立）。
+_SYMBOL_TOKEN_RE = re.compile(
+    r"(?<![A-Za-z0-9.])(?:TH\d{6}|SW\d{4}|BK\d{4}|\d{6})(?:\.(?:SS|SZ))?(?![A-Za-z0-9])"
+    r"|(?<![A-Za-z0-9])[A-Z]{2,5}(?:\.(?:SS|SZ))?(?![A-Za-z0-9])",
+    re.IGNORECASE,
+)
+#: 最多尝试验证的候选数——每次失败验证都是一次分析往返，控制成本。
+_MAX_SYMBOL_PROBES = 3
+
+
+def _resolve_symbol_from_message(message: str, service: object) -> str | None:
+    """从用户消息中提取**可分析**的标的（「515880那个」「看看 IGV」）。
+
+    全局会话里用户报代码时自动带出该标的技术材料，不再反问。
+    只返回 analysis_service 能成功分析的候选（普通英文词当代码会被分析失败
+    自然过滤）；含数字的候选（A股/ETF/板块）优先于纯字母（美股/ETF）。
+    """
+    from lei_signal.data.symbols import resolve_symbol  # noqa: PLC0415
+
+    tokens = _SYMBOL_TOKEN_RE.findall(message)
+    ordered = sorted(
+        dict.fromkeys(t.upper() for t in tokens),
+        key=lambda t: 0 if any(c.isdigit() for c in t) else 1,
+    )
+    for i, tok in enumerate(ordered):
+        if i >= _MAX_SYMBOL_PROBES:
+            break
+        try:
+            info = resolve_symbol(tok)
+        except ValueError:
+            continue
+        try:
+            entry = service.get(info.symbol)  # type: ignore[attr-defined]
+        except Exception:  # noqa: BLE001  # 分析服务自身兜底，双保险
+            continue
+        if getattr(entry, "result", None) is not None:
+            return info.symbol
+    return None
+
+
+def _last_resolved_symbol(history_rows: list) -> str | None:  # noqa: ANN001
+    """从会话最近的 assistant 消息 meta 继承标的。
+
+    「515880那个」之后追问「筹码呢」（无代码）仍有材料。
+    """
+    for m in reversed(history_rows):
+        if m.role != "assistant":
+            continue
+        try:
+            meta = json.loads(m.meta_json or "{}")
+        except json.JSONDecodeError:
+            return None
+        resolved = meta.get("resolved_symbol")
+        return resolved if isinstance(resolved, str) else None
+    return None
+
 
 def _degraded_reply(symbol: str, ctx_payload: dict) -> str:
     """LLM 不可用/校验失败时的模板直出（不含工程标注，标注走 trace）。"""
@@ -321,29 +380,42 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
         ctx_payload: dict = {}
         alerts: list = []
         service = getattr(request.app.state, "analysis_service", None)
-        if body.context_kind == "symbol" and body.symbol and service is not None:
-            entry = service.get(body.symbol)
+        # symbol 解析优先级：显式（symbol 上下文）> 消息中提取 > 会话继承。
+        # 全局会话里用户报代码（「515880那个」）也能带出技术材料，不再反问。
+        explicit = body.context_kind == "symbol" and body.symbol
+        symbol: str | None = body.symbol if explicit else None
+        if symbol is None and service is not None:
+            symbol = _resolve_symbol_from_message(body.message, service)
+            if symbol is None:
+                symbol = _last_resolved_symbol(history_rows)
+        if symbol is not None and service is not None:
+            entry = service.get(symbol)
             if entry.result is None:
-                raise HTTPException(status_code=502, detail=entry.error or "分析不可用")
-            from lei_signal.api.routes.opportunities import (  # noqa: PLC0415
-                buy_point_review,
-            )
-            review = buy_point_review(request, body.symbol)
-            plans = [
-                p for p in list_plans(conn, symbol=body.symbol)
-                if p.state in ("armed", "entered")
-            ]
-            open_items = [
-                i for p in plans for i in list_action_items(
-                    conn, p.plan_id, state="open"
+                if explicit:
+                    raise HTTPException(
+                        status_code=502, detail=entry.error or "分析不可用"
+                    )
+                symbol = None  # 提取/继承的代码分析失败不炸请求，退 global
+            else:
+                from lei_signal.api.routes.opportunities import (  # noqa: PLC0415
+                    buy_point_review,
                 )
-            ]
-            ctx_payload = build_discussion_context(
-                entry.result, review.model_dump(), plans, open_items
-            )
-            ctx = context_from_result(entry.result)
-            alerts = [a for p in plans for a in evaluate_plan(p, ctx)]
-        else:
+                review = buy_point_review(request, symbol)
+                plans = [
+                    p for p in list_plans(conn, symbol=symbol)
+                    if p.state in ("armed", "entered")
+                ]
+                open_items = [
+                    i for p in plans for i in list_action_items(
+                        conn, p.plan_id, state="open"
+                    )
+                ]
+                ctx_payload = build_discussion_context(
+                    entry.result, review.model_dump(), plans, open_items
+                )
+                ctx = context_from_result(entry.result)
+                alerts = [a for p in plans for a in evaluate_plan(p, ctx)]
+        if symbol is None:
             ctx_payload = {"context_kind": "global"}
 
     config = plans_llm.load_ark_config()
@@ -378,18 +450,18 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
         except Exception:  # noqa: BLE001  网络层已在 llm.py 捕获返 None，此处兜真 bug 路径
             logger.warning("讨论 chat LLM 段意外异常，走降级模板", exc_info=True)
 
-    symbol = body.symbol or ""
     if reply is None:
-        reply = _degraded_reply(symbol, ctx_payload)
+        reply = _degraded_reply(symbol or "", ctx_payload)
         grounded = False
 
     trace = _build_trace(alerts)
+    meta: dict = {"trace": [t.model_dump() for t in trace]}
+    if symbol is not None:
+        # 记住本轮生效的标的：后续轮「筹码呢」无代码也能继承材料
+        meta["resolved_symbol"] = symbol
     with closing(connect(_db_path(request))) as conn:
         append_message(conn, session.session_id, "user", body.message, True, {})
-        append_message(
-            conn, session.session_id, "assistant", reply, grounded,
-            {"trace": [t.model_dump() for t in trace]},
-        )
+        append_message(conn, session.session_id, "assistant", reply, grounded, meta)
     return AgentChatReply(
         session_id=session.session_id, reply=reply, grounded=grounded, trace=trace
     )

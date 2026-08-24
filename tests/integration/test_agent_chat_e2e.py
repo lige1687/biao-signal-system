@@ -248,3 +248,47 @@ def test_plans_filtered_to_armed_entered(
     })
     assert r.status_code == 200
     assert captured["states"] == ["entered", "armed"]
+
+
+def test_global_message_with_code_resolves_symbol(
+    client: TestClient, monkeypatch: pytest.MonkeyPatch
+):
+    """全局会话里用户报代码（「000300 怎么看」）→ 自动带出技术材料，不再反问。"""
+    captured = {}
+
+    def fake_call(cfg, messages):  # noqa: ANN001, ANN202
+        captured["material"] = next(
+            (m["content"] for m in messages if "技术材料" in str(m.get("content", ""))), ""
+        )
+        return "好的，已看到材料。"
+
+    monkeypatch.setattr(llm, "_llm_call", fake_call)
+    r = client.post("/api/agent/chat", json={
+        "session_id": None, "context_kind": "global",
+        "symbol": None, "message": "515880 怎么看",
+    })
+    assert r.status_code == 200
+    assert "515880.SS" in captured["material"]
+
+
+def test_symbol_inherited_across_turns(
+    client: TestClient, monkeypatch: pytest.MonkeyPatch
+):
+    """第一轮报代码，第二轮无代码追问 → 材料（resolved_symbol meta）继承。"""
+    captured = {}
+
+    def fake_call(cfg, messages):  # noqa: ANN001, ANN202
+        captured["material"] = str(messages)
+        return "收到。"
+
+    monkeypatch.setattr(llm, "_llm_call", fake_call)
+    first = client.post("/api/agent/chat", json={
+        "session_id": None, "context_kind": "global",
+        "symbol": None, "message": "515880 怎么看",
+    }).json()
+    second = client.post("/api/agent/chat", json={
+        "session_id": first["session_id"], "context_kind": "global",
+        "symbol": None, "message": "筹码呢",
+    })
+    assert second.status_code == 200
+    assert "515880.SS" in captured["material"]  # 第二轮仍有该标的材料
