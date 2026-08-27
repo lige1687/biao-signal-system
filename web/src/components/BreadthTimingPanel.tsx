@@ -47,6 +47,7 @@ interface FormState {
   high_edge: string;
   batch_ratio: string;
   band_step: string;
+  trigger_mode: string;
   sell_batches: string;
   sell_ratio: string;
   vol_target: string;
@@ -76,6 +77,7 @@ const DEFAULT_FORM: FormState = {
   high_edge: "",
   batch_ratio: "",
   band_step: "",
+  trigger_mode: "rebound",
   sell_batches: "",
   sell_ratio: "",
   vol_target: "",
@@ -166,6 +168,7 @@ export default function BreadthTimingPanel() {
         body.batches = form.batches;
         body.batch_ratio = form.batch_ratio.trim() === "" ? 1.0 : Number(form.batch_ratio);
         body.band_step = form.band_step.trim() === "" ? 10.0 : Number(form.band_step);
+        body.trigger_mode = form.trigger_mode;
         body.sell_batches = form.sell_batches.trim() === "" ? null : Number(form.sell_batches);
         body.sell_ratio = form.sell_ratio.trim() === "" ? null : Number(form.sell_ratio);
       }
@@ -552,6 +555,15 @@ export default function BreadthTimingPanel() {
                   {[3, 5, 8].map((n) => (
                     <option key={n} value={n}>{n} 批</option>
                   ))}
+                </select>
+              </label>
+              <label>
+                触发模式
+                <select value={form.trigger_mode} onChange={(e) => setForm({ ...form, trigger_mode: e.target.value })}>
+                  <option value="rebound">回升确认(防接飞刀)</option>
+                  <option value="immediate">进区即买(越跌越买)</option>
+                  <option value="extreme_confirm">离最低点回升(早入场)</option>
+                  <option value="linger">磨底K日后(时间确认)</option>
                 </select>
               </label>
               <label>
