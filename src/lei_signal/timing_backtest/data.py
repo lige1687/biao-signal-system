@@ -52,6 +52,7 @@ def _spec(symbol: str, name: str, market: str, breadth: str, source: str,
 _US_NOTE = "SP500 成分宽度（当前成分回算，早年有幸存者偏差）"
 _A = SURVIVORSHIP_NOTE
 _A_ETF = "含分红复权（源不可用时退新浪不复权），历史较短，" + SURVIVORSHIP_NOTE
+_IDX = "跟踪指数口径（无折算），对应 ETF 为执行载体"
 
 INSTRUMENTS: dict[str, InstrumentSpec] = {
     "000300": _spec("000300", "沪深300", "cn", "cn_all", "ak_index", "sh000300", 5.0, _A),
@@ -65,6 +66,28 @@ INSTRUMENTS: dict[str, InstrumentSpec] = {
     "510500": _spec("510500", "中证500ETF", "cn", "cn_all", "ak_etf", "510500", 5.0, _A_ETF),
     "512100": _spec("512100", "中证1000ETF", "cn", "cn_all", "ak_etf", "512100", 5.0, _A_ETF),
     "588000": _spec("588000", "科创50ETF", "cn", "cn_all", "ak_etf", "588000", 5.0, _A_ETF),
+    "512480": _spec("512480", "半导体ETF", "cn", "cn_all", "ak_etf", "512480", 5.0, _A_ETF),
+    "515880": _spec("515880", "通信ETF", "cn", "cn_all", "ak_etf", "515880", 5.0, _A_ETF),
+    "512400": _spec("512400", "有色ETF", "cn", "cn_all", "ak_etf", "512400", 5.0, _A_ETF),
+    "512880": _spec("512880", "证券ETF", "cn", "cn_all", "ak_etf", "512880", 5.0, _A_ETF),
+    "512010": _spec("512010", "医药ETF", "cn", "cn_all", "ak_etf", "512010", 5.0, _A_ETF),
+    "512800": _spec("512800", "银行ETF", "cn", "cn_all", "ak_etf", "512800", 5.0, _A_ETF),
+    "159928": _spec("159928", "消费ETF", "cn", "cn_all", "ak_etf", "159928", 5.0, _A_ETF),
+    "515030": _spec("515030", "新能车ETF", "cn", "cn_all", "ak_etf", "515030", 5.0, _A_ETF),
+    "515790": _spec("515790", "光伏ETF", "cn", "cn_all", "ak_etf", "515790", 5.0, _A_ETF),
+    "512660": _spec("512660", "军工ETF", "cn", "cn_all", "ak_etf", "512660", 5.0, _A_ETF),
+    "512690": _spec("512690", "酒ETF", "cn", "cn_all", "ak_etf", "512690", 5.0, _A_ETF),
+    "510880": _spec("510880", "红利ETF", "cn", "cn_all", "ak_etf", "510880", 5.0, _A_ETF),
+    "000933": _spec("000933", "中证医药(指数)", "cn", "cn_all", "ak_index", "sh000933", 1.0, _IDX),
+    "399975": _spec("399975", "证券公司(指数)", "cn", "cn_all", "ak_index", "sh399975", 1.0, _IDX),
+    "000932": _spec("000932", "中证消费(指数)", "cn", "cn_all", "ak_index", "sh000932", 1.0, _IDX),
+    "000819": _spec("000819", "有色金属(指数)", "cn", "cn_all", "ak_index", "sh000819", 1.0, _IDX),
+    "980017": _spec("980017", "国证芯片(指数)", "cn", "cn_all", "ak_index", "sh980017", 1.0, _IDX),
+    "399976": _spec("399976", "新能车(指数)", "cn", "cn_all", "ak_index", "sh399976", 1.0, _IDX),
+    "399967": _spec("399967", "中证军工(指数)", "cn", "cn_all", "ak_index", "sh399967", 1.0, _IDX),
+    "399997": _spec("399997", "中证白酒(指数)", "cn", "cn_all", "ak_index", "sh399997", 1.0, _IDX),
+    "399986": _spec("399986", "中证银行(指数)", "cn", "cn_all", "ak_index", "sh399986", 1.0, _IDX),
+    "000015": _spec("000015", "上证红利(指数)", "cn", "cn_all", "ak_index", "sh000015", 1.0, _IDX),
 }
 
 

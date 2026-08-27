@@ -35,7 +35,7 @@ def test_options(client):
     assert r.status_code == 200
     body = r.json()
     assert len(body["disclaimers"]) >= 3
-    assert len(body["instruments"]) == 11
+    assert len(body["instruments"]) >= 11
     assert {p["key"] for p in body["presets"]} >= {"cn_b200_ladder5", "us_b200_ladder5"}
 
 

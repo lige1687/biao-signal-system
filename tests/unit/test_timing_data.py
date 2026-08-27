@@ -78,10 +78,11 @@ def test_load_synthesizes_high_low_from_open_close(tmp_path):
 
 
 def test_registry_covers_instruments_with_breadth_pairing():
-    assert set(INSTRUMENTS) == {
+    core = {
         "000300", "399006", "^GSPC", "^IXIC", "SPY", "QQQ",
         "510300", "159915", "510500", "512100", "588000",
     }
+    assert core <= set(INSTRUMENTS)  # 行业 ETF 可持续扩充
     for spec in INSTRUMENTS.values():
         assert spec.breadth in ("cn_all", "sp500")
         assert spec.market in ("cn", "us")
