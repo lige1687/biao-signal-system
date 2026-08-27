@@ -19,7 +19,12 @@ TIMING_CACHE_DIR = Path(
     os.environ.get("LEI_TIMING_CACHE_DIR", str(Path.home() / ".lei_signal_lab/cache/timing"))
 )
 
-BREADTH_FILES = {"cn_all": "breadth_cn_all.parquet", "sp500": "breadth_sp500.parquet"}
+BREADTH_FILES = {
+    "cn_all": "breadth_cn_all.parquet",
+    "sp500": "breadth_sp500.parquet",
+    "cn_cyb": "breadth_cyb.parquet",
+    "cn_csi300": "breadth_csi300.parquet",
+}
 
 SURVIVORSHIP_NOTE = "全A宽度：当前存续成分回算，早年有幸存者偏差；底表为新浪不复权价"
 
@@ -57,6 +62,9 @@ INSTRUMENTS: dict[str, InstrumentSpec] = {
     "QQQ": _spec("QQQ", "QQQ(ETF)", "us", "sp500", "yf", "QQQ", 1.0, "含分红复权，" + _US_NOTE),
     "510300": _spec("510300", "沪深300ETF", "cn", "cn_all", "ak_etf", "510300", 5.0, _A_ETF),
     "159915": _spec("159915", "创业板ETF", "cn", "cn_all", "ak_etf", "159915", 5.0, _A_ETF),
+    "510500": _spec("510500", "中证500ETF", "cn", "cn_all", "ak_etf", "510500", 5.0, _A_ETF),
+    "512100": _spec("512100", "中证1000ETF", "cn", "cn_all", "ak_etf", "512100", 5.0, _A_ETF),
+    "588000": _spec("588000", "科创50ETF", "cn", "cn_all", "ak_etf", "588000", 5.0, _A_ETF),
 }
 
 

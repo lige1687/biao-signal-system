@@ -81,3 +81,13 @@ def test_cash_rate_accrues_on_idle_cash():
     assert zero.daily["equity"].iloc[-1] == pytest.approx(1.0)
     # 4 个计息日（第2日起）：(1+0.05/252)^4
     assert five_pct.daily["equity"].iloc[-1] == pytest.approx((1 + 0.05 / 252) ** 4)
+
+
+def test_min_trade_threshold_skips_small_adjustments():
+    target = pd.Series([0.0, 1.0, 0.96, 0.5, 0.0], index=_frame().index)
+    res = simulate(_frame(), target, fee_bps=0.0, min_trade=0.05)
+    # 第3日建仓1.0；第4日目标0.96（变4%<5%）跳过；第5日目标0.5（变50%）执行
+    assert res.daily["weight"].iloc[2] == pytest.approx(1.0)
+    assert res.daily["weight"].iloc[3] == pytest.approx(1.0)   # 跳过 4% 微调
+    assert res.daily["weight"].iloc[4] == pytest.approx(0.5)
+    assert [t["turnover"] for t in res.trades] == pytest.approx([1.0, 0.5])

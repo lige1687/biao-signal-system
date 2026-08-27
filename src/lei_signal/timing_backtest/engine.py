@@ -22,7 +22,11 @@ class TimingResult:
 
 
 def simulate(
-    aligned: pd.DataFrame, target: pd.Series, fee_bps: float, cash_rate: float = 0.0
+    aligned: pd.DataFrame,
+    target: pd.Series,
+    fee_bps: float,
+    cash_rate: float = 0.0,
+    min_trade: float = 0.0,
 ) -> TimingResult:
     open_ = aligned["open"].to_numpy(dtype=float)
     close = aligned["close"].to_numpy(dtype=float)
@@ -39,7 +43,7 @@ def simulate(
         if i > 0 and not np.isnan(tgt[i - 1]) and not np.isnan(open_[i]):
             desired = float(tgt[i - 1])
             delta = desired - weight
-            if abs(delta) > 1e-9:
+            if abs(delta) > max(1e-9, min_trade):
                 eq_open = cash + units * open_[i]
                 fee = eq_open * abs(delta) * fee_rate
                 eq_after = eq_open - fee

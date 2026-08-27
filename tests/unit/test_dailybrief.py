@@ -82,8 +82,10 @@ class TestSymbolDiff:
         d = db.diff_symbol_state(prev, curr)
         joined = " ".join(d["changes"])
         assert "维度翻转：结构" in joined
-        assert "新增冲突条件：resistance_b1" in joined
-        assert "支持条件消失：macd_strength" in joined
+        # 规则 ID 必须翻译成账本中文名，不得裸写英文 ID
+        assert "新增冲突条件：上方 B1 阻力" in joined
+        assert "支持条件消失：MACD 强度" in joined
+        assert "resistance_b1" not in joined and "macd_strength" not in joined
 
     def test_unchanged(self):
         s = self._state()

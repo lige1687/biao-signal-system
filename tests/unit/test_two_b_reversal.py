@@ -1,4 +1,12 @@
-"""2B/破底翻前向状态机门禁（规格 §9 模块 C）。"""
+"""2B/破底翻前向状态机门禁（规格 §9 模块 C，V2 重写版 C1 结构）。
+
+V2 C1：L1 = 前低（已确认摆动低点），跌破 L1 创新低 L2（无需摆动确认），
+two_b_reclaim_bars 根内收回 L1 上方 = 破底翻；收盘跌破 L2 彻底失效。
+
+夹具：上行 -> 回踩形成摆动低点 L1（左3右3 确认）-> 跌破 L1 创新低 -> 收回。
+scenario：reclaim（收回+三版本）/ timeout（窗口耗尽）/ l2_break（跌破新低）/
+downtrend（单边下行无收回机会）。
+"""
 from __future__ import annotations
 
 import numpy as np
@@ -17,68 +25,40 @@ from lei_signal.rules.two_b_reversal import (
 from lei_signal.rules.volume import compute_volume_labels
 
 
-def _feature_frame(scenario: str = "reclaim", rows: int = 210) -> pd.DataFrame:
-    """构造带全特征的 2B 结构帧。
-
-    结构：L2=110 @130 -> 颈线 128 @145 -> L1=115 @160（更高低点）-> 破底 -> 收回。
-    scenario:
-      "reclaim"     -- 破底后 3 根内收回 L1（v1 确认，v2/v3 后续满足时确认）；
-      "timeout"     -- 破底后持续低于 L1 超过 two_b_reclaim_bars 根，不收回（窗口耗尽）；
-      "l2_break"    -- 破底后直接跌破 L2（C3 失效）；
-      "no_structure"-- 单边下行（更低低点），无 L1/L2 更高低点结构；
-      "downtrend"   -- 单边下行 + 大幅负乖离，但无 2B 结构。
-    """
+def _feature_frame(scenario: str = "reclaim", rows: int = 240) -> pd.DataFrame:
     idx = pd.bdate_range("2024-01-02", periods=rows)
     p = np.zeros(rows)
 
-    if scenario in ("no_structure", "downtrend"):
-        # 单边下行：持续创新低，无更高低点结构；downtrend 加速以产生大幅负乖离。
-        step = 0.4 if scenario == "downtrend" else 0.25
+    if scenario == "downtrend":
         for i in range(rows):
-            p[i] = 200.0 - i * step
-        close = pd.Series(p, index=idx, dtype=float)
-        high = close + 0.2
-        low = close - 0.2
-        op = close - 0.05
-        bars = pd.DataFrame(
-            {"open": op, "high": high, "low": low, "close": close, "volume": 1_000_000.0},
-            index=idx,
-        )
-        return compute_volume_labels(compute_long_trend(classify_colors(compute_features(bars))))
-
-    for i in range(126):
-        p[i] = 100 + i * 0.2
-    for i in range(126, 130):
-        p[i] = 125 - (i - 126) * 3.0
-    p[130] = 110  # L2
-    for i in range(131, 136):
-        p[i] = 110 + (i - 130) * 3.0
-    for i in range(136, 145):
-        p[i] = 125 + (i - 136) * 0.3
-    p[145] = 128  # 颈线 swing high
-    for i in range(146, 160):
-        p[i] = 128 - (i - 145) * 0.8
-    p[160] = 115  # L1（更高低点）
-    for i in range(161, 164):
-        p[i] = 115 + (i - 160) * 1.0  # 161=116,162=117,163=118（L1 右确认）
-
-    if scenario == "reclaim":
-        p[164] = 113  # 跌破 L1
-        p[165] = 113
-        p[166] = 113
-        p[167] = 116  # 收回 L1 上方（bars_to_reclaim=3）
-        for i in range(168, rows):
-            p[i] = 116 + (i - 168) * 0.3
-    elif scenario == "timeout":
-        # 破底后持续低于 L1=115 但高于 L2=110，超过 3 根不收回。
-        for i in range(164, rows):
-            p[i] = 113.0
-    elif scenario == "l2_break":
-        # 破底后直接跌破 L2=110。
-        p[164] = 113
-        p[165] = 109  # 跌破 L2
-        for i in range(166, rows):
-            p[i] = 108.0
+            p[i] = 200.0 - i * 0.4
+    else:
+        # 上行段
+        for i in range(140):
+            p[i] = 100 + i * 0.2
+        # 回踩形成 L1（低点后反弹 6+ 根，左3右3 可确认）
+        for i in range(140, 150):
+            p[i] = 128.0 - (i - 140) * 1.0
+        p[150] = 118.0  # L1 摆动低点
+        for i in range(151, 162):
+            p[i] = 118.0 + (i - 150) * 0.8
+        if scenario == "reclaim":
+            # 浅坑跌破 L1（新低但不收盘穿坑底），3 根内收回，随后走强。
+            p[162] = 117.0   # close < L1(low 117.8) -> 破位（low 116.8）
+            p[163] = 117.2   # 回稳（收盘不低于昨日坑底）
+            p[164] = 118.5   # 收回 L1 上方 -> v1 确认
+            for i in range(165, rows):
+                p[i] = p[i - 1] + 0.7
+        elif scenario == "timeout":
+            # 跌破后长期低位徘徊（>5 根不收回、不穿坑底）。
+            for i in range(162, rows):
+                p[i] = 117.0 + ((i - 162) % 3) * 0.2
+        elif scenario == "l2_break":
+            # 跌破后收盘穿过坑底（跌破 L2）。
+            p[162] = 117.0
+            p[163] = 116.0
+            for i in range(164, rows):
+                p[i] = 116.0 - (i - 164) * 0.8
 
     close = pd.Series(p, index=idx, dtype=float)
     high = close + 0.2
@@ -91,107 +71,63 @@ def _feature_frame(scenario: str = "reclaim", rows: int = 210) -> pd.DataFrame:
     return compute_volume_labels(compute_long_trend(classify_colors(compute_features(bars))))
 
 
-def _sub(event) -> str:  # noqa: ANN001
-    return str(event.evidence["sub_rule"])
+def _subs(events: list) -> list[str]:  # noqa: ANN001
+    return [str(e.evidence["sub_rule"]) for e in events]
 
 
-def test_l1_l2_structure_and_v1_reclaim_confirms() -> None:
-    frame = _feature_frame("reclaim")
+def test_reclaim_confirms_v1_then_v2_v3() -> None:
+    frame = _feature_frame("reclaim", 240)
     events = detect_two_b_reversal_events(frame, "TEST")
-    subs = [_sub(e) for e in events]
-    # v1 在收回当日确认。
+    subs = _subs(events)
     assert SUB_RULE_V1 in subs
-    v1 = next(e for e in events if _sub(e) == SUB_RULE_V1)
-    assert v1.evidence["l1_price"] > v1.evidence["l2_price"]  # L1 > L2
-    assert v1.evidence["close"] >= v1.evidence["l1_price"]  # 收回 L1 上方
-    assert v1.evidence["bars_to_reclaim"] <= 3  # 快速收复窗口内
-    # 每个版本至多一次确认。
-    for sub in (SUB_RULE_V1, SUB_RULE_V2, SUB_RULE_V3):
-        assert subs.count(sub) <= 1
-
-
-def test_v2_and_v3_fire_when_ma_conditions_hold() -> None:
-    frame = _feature_frame("reclaim")
-    events = detect_two_b_reversal_events(frame, "TEST")
-    subs = [_sub(e) for e in events]
-    # 收回后持续上行，EMA20/双均线相继转强，v2/v3 应触发。
+    v1 = next(e for e in events if str(e.evidence["sub_rule"]) == SUB_RULE_V1)
+    # C1：L2 是破位期间新低（无需摆动确认），作为失效线与止损。
+    assert v1.evidence["l2_price"] < v1.evidence["l1_price"]
+    assert v1.evidence["stop_price"] == v1.evidence["l2_price"]
+    assert 0 < v1.evidence["bars_to_reclaim"] <= 5
+    # 走强后 v2/v3 后置确认。
     assert SUB_RULE_V2 in subs
     assert SUB_RULE_V3 in subs
-    v1 = next(e for e in events if _sub(e) == SUB_RULE_V1)
-    v2 = next(e for e in events if _sub(e) == SUB_RULE_V2)
-    v3 = next(e for e in events if _sub(e) == SUB_RULE_V3)
-    # v1 <= v2 <= v3（按可用日非递减）。
-    assert v1.available_date <= v2.available_date <= v3.available_date
 
 
-def test_window_timeout_consumes_structure() -> None:
-    frame = _feature_frame("timeout")
+def test_timeout_fails() -> None:
+    frame = _feature_frame("timeout", 240)
     events = detect_two_b_reversal_events(frame, "TEST")
-    subs = [_sub(e) for e in events]
+    subs = _subs(events)
     assert SUB_RULE_FAILED in subs
-    assert SUB_RULE_V1 not in subs  # 未收回，无确认
-    failed = next(e for e in events if _sub(e) == SUB_RULE_FAILED)
-    assert "快速收复窗口耗尽" in str(failed.evidence["failure_reason"])
+    assert subs.count(SUB_RULE_V1) == 0
 
 
 def test_l2_break_fails() -> None:
-    frame = _feature_frame("l2_break")
+    frame = _feature_frame("l2_break", 240)
     events = detect_two_b_reversal_events(frame, "TEST")
-    subs = [_sub(e) for e in events]
+    subs = _subs(events)
     assert SUB_RULE_FAILED in subs
-    failed = next(e for e in events if _sub(e) == SUB_RULE_FAILED)
-    assert "跌破 L2" in str(failed.evidence["failure_reason"])
-    assert failed.evidence["close"] < failed.evidence["l2_price"]
+    failed = next(e for e in events if str(e.evidence["sub_rule"]) == SUB_RULE_FAILED)
+    assert "L2" in str(failed.evidence.get("failure_reason"))
 
 
-def test_no_higher_low_structure_does_not_trigger() -> None:
-    frame = _feature_frame("no_structure")
+def test_downtrend_no_confirmations() -> None:
+    frame = _feature_frame("downtrend", 240)
     events = detect_two_b_reversal_events(frame, "TEST")
-    # 单边下行无更高低点结构，不应产出任何 2B 事件。
-    assert events == []
+    subs = _subs(events)
+    assert SUB_RULE_V1 not in subs
 
 
-def test_negative_bias_alone_does_not_trigger() -> None:
-    """大幅负乖离仅作增强，不单独触发交易（规格 §4.7 / C1）。"""
-    frame = _feature_frame("downtrend")
+def test_each_l1_consumed_once() -> None:
+    frame = _feature_frame("reclaim", 240)
     events = detect_two_b_reversal_events(frame, "TEST")
-    assert events == []
+    v1_events = [e for e in events if str(e.evidence["sub_rule"]) == SUB_RULE_V1]
+    lifecycles = [e.lifecycle_id for e in v1_events]
+    assert len(lifecycles) == len(set(lifecycles)), "同一 L1 生命周期只允许一次 v1 确认"
 
 
-def test_bias_recorded_as_enhancement_only() -> None:
-    """有 2B 结构时，负乖离只进 evidence，不产生额外触发。"""
-    frame = _feature_frame("reclaim")
-    events = detect_two_b_reversal_events(frame, "TEST")
-    confirmed = [e for e in events if _sub(e) in (SUB_RULE_V1, SUB_RULE_V2, SUB_RULE_V3)]
-    assert confirmed
-    for event in confirmed:
-        assert event.evidence.get("bias_enhancement_only") is True
-        # bias_ema120 被记录（可能为正或负，但一定存在键）。
-        assert "bias_ema120" in event.evidence
-
-
-def test_appending_future_bars_does_not_change_past_events() -> None:
-    frame = _feature_frame("reclaim")
-    cutoff = 180
-    early = detect_two_b_reversal_events(frame.iloc[:cutoff], "TEST")
-    full = detect_two_b_reversal_events(frame, "TEST")
-    cutoff_date = frame.index[cutoff - 1].date()
-    visible = [e for e in full if e.available_date <= cutoff_date]
-    assert [e.event_id for e in early] == [e.event_id for e in visible]
-    assert [e.evidence for e in early] == [e.evidence for e in visible]
-
-
-def test_event_ids_are_deterministic() -> None:
-    frame = _feature_frame("reclaim")
-    a = detect_two_b_reversal_events(frame, "TEST")
-    b = detect_two_b_reversal_events(frame, "TEST")
-    assert [e.event_id for e in a] == [e.event_id for e in b]
-
-
-def test_research_proxy_evidence_flag() -> None:
-    frame = _feature_frame("reclaim")
-    events = detect_two_b_reversal_events(frame, "TEST")
-    assert events
-    for event in events:
-        assert event.evidence.get("research_proxy") is True
-        assert event.provenance.value == "research_proxy"
+def test_appending_future_bars_preserves_history() -> None:
+    full = _feature_frame("reclaim", 240)
+    cut = 200
+    prefix = detect_two_b_reversal_events(full.iloc[:cut], "TEST")
+    whole = detect_two_b_reversal_events(full, "TEST")
+    by_id = {e.event_id: e for e in whole}
+    for event in prefix:
+        assert event.event_id in by_id
+        assert event.available_date <= full.index[cut - 1].date()

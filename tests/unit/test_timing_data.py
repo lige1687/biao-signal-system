@@ -77,8 +77,11 @@ def test_load_synthesizes_high_low_from_open_close(tmp_path):
     assert list(loaded["low"]) == [10, 10, 9, 10, 12]
 
 
-def test_registry_covers_eight_instruments_with_breadth_pairing():
-    assert set(INSTRUMENTS) == {"000300", "399006", "^GSPC", "^IXIC", "SPY", "QQQ", "510300", "159915"}
+def test_registry_covers_instruments_with_breadth_pairing():
+    assert set(INSTRUMENTS) == {
+        "000300", "399006", "^GSPC", "^IXIC", "SPY", "QQQ",
+        "510300", "159915", "510500", "512100", "588000",
+    }
     for spec in INSTRUMENTS.values():
         assert spec.breadth in ("cn_all", "sp500")
         assert spec.market in ("cn", "us")

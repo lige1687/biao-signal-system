@@ -90,16 +90,19 @@ def test_thresholds_live_in_config_not_code() -> None:
     """所有阈值必须来自配置。"""
     assert get_rule("swing_pivots").param("left") == 3
     assert get_rule("swing_pivots").param("right") == 3
-    assert get_rule("volume_proxies").param("up_surge_ratio") == 1.5
-    assert get_rule("volume_proxies").param("breakout_ratio") == 1.5
+    assert get_rule("volume_proxies").param("up_surge_ratio") == 2.0
+    assert get_rule("volume_proxies").param("breakout_ratio") == 2.0
     assert get_rule("volume_profile_proxy").param("window") == 120
     assert get_rule("volume_profile_proxy").param("value_area") == 0.70
     assert get_rule("resistance_b1").param("lookback_years") == 2
     assert get_rule("double_bottom").param("max_diff_atr") == 1.0
     pullback = get_rule("first_ma_pullback")
     assert pullback.param("ma_periods") == [20, 60, 120]
-    assert pullback.param("confirmation_window") == 3
-    assert pullback.param("min_separation_atr") == 1.0
+    # V2 模块 A 口径（3.0.0）：触碰距离 1 x ATR(20)，周线环境 + 两版入场
+    assert pullback.param("ma_touch_distance_atr") == 1.0
+    assert pullback.param("ma_touch_atr_period") == 20
+    assert pullback.param("weekly_environment") == "bull_alignment"
+    assert pullback.param("entry_variants") == ["early", "confirmed"]
 
 
 def test_indicator_config_declares_required_periods() -> None:
@@ -133,7 +136,7 @@ def test_state_machine_declares_all_stages_and_invariants() -> None:
 
 
 def test_ruleset_version_is_present() -> None:
-    assert ruleset_version() == "1.5.0"  # 1.5.0：macd_strength 扩散/收敛改 |DIF| 口径
+    assert ruleset_version() == "2.0.0"  # 2.0.0：切 V2 账本（V2.1 标定参数生效）
     assert load_ruleset()["source_video"].startswith("https://www.youtube.com/watch?v=7NkwlH6NOk8")
 
 

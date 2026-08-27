@@ -44,6 +44,9 @@ class TimingRunRequest(BaseModel):
     band_step: float = 10.0           # band 分批的宽度步长
     sell_batches: int | None = None   # 卖出批数（None=同买入）
     sell_ratio: float | None = None   # 卖出批次比（None=同买入）
+    trigger_mode: str = "rebound"     # rebound | immediate | extreme_confirm | linger
+    breadth: str | None = None        # 宽度来源覆盖（如 cn_cyb / cn_csi300）
+    min_trade: float = 0.0            # 最小调仓阈值（目标变化小于此值不执行）
     vol_target: float = 0.0           # 年化波动率目标（0=关闭，如 0.15）
     cash_rate: float = 0.0            # 空仓现金年化利率（如 0.02 = 2%）
     fee_bps: float | None = None      # None = 标的默认（A股 5bp / 美股 1bp）

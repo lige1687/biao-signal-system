@@ -35,7 +35,7 @@ def test_options(client):
     assert r.status_code == 200
     body = r.json()
     assert len(body["disclaimers"]) >= 3
-    assert len(body["instruments"]) == 8
+    assert len(body["instruments"]) == 11
     assert {p["key"] for p in body["presets"]} >= {"cn_b200_ladder5", "us_b200_ladder5"}
 
 
@@ -61,3 +61,12 @@ def test_run_data_unavailable_409(empty_client):
     r = empty_client.post("/api/timing-backtest/runs", json={"symbol": "^GSPC"})
     assert r.status_code == 409
     assert "DATA_UNAVAILABLE" in r.json()["detail"]
+
+
+def test_run_detail_404_and_roundtrip(client):
+    r = client.post("/api/timing-backtest/runs", json={"symbol": "000300"})
+    run_id = r.json()["run_id"]
+    detail = client.get(f"/api/timing-backtest/runs/{run_id}")
+    assert detail.status_code == 200
+    assert detail.json()["daily"]["equity"]
+    assert client.get("/api/timing-backtest/runs/nope").status_code == 404

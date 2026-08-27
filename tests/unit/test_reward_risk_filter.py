@@ -15,9 +15,11 @@ from lei_signal.rules.false_breakout_reclaim import (
     RULE_ID as FO_ID,
     SUB_RULE_CONFIRMED as FO_CONFIRMED,
 )
+from lei_signal.rules.gap_events import GapEvent
 from lei_signal.rules.reward_risk_filter import (
     TARGET_SWING_HIGH,
     TARGET_UNAVAILABLE,
+    TARGET_UNFILLED_GAP,
     compute_reward_risk,
 )
 
@@ -164,3 +166,58 @@ def test_reward_risk_backtest_buckets() -> None:
 def test_reward_risk_backtest_returns_none_without_entries() -> None:
     frame = _frame()
     assert build_reward_risk_backtest(frame, [], ()) is None
+
+
+# ---------------------------------------------------------------- 缺口档（第 2 优先级）
+
+def _up_gap(gap_date: date, zone_low: float, zone_high: float,
+            filled: date | None = None) -> GapEvent:
+    return GapEvent("up", gap_date, zone_low, zone_high, 2.0, filled_date=filled)
+
+
+def test_gap_target_used_when_no_swing_high() -> None:
+    """无摆动高点时，传入 gaps -> 目标 B = 未回补缺口上沿（规格 §10 第 2 档）。"""
+    frame = _frame()
+    entry = _pullback_entry(frame, 60, close=100.0, touch_position=59)
+    gap_day = frame.index[50].date()
+    gaps = [_up_gap(gap_day, zone_low=108.0, zone_high=112.0)]
+    result = compute_reward_risk(frame, entry, pivots=(), gaps=gaps)
+    assert result.computable
+    assert result.target_source == TARGET_UNFILLED_GAP
+    assert result.target_b == 112.0
+    assert result.reward_risk is not None and result.reward_risk > 0
+
+
+def test_gap_target_off_by_default() -> None:
+    """gaps=None（默认关）：目标不会来自缺口档，既有口径不变。"""
+    frame = _frame()
+    entry = _pullback_entry(frame, 60, close=100.0, touch_position=59)
+    gap_day = frame.index[50].date()
+    gaps = [_up_gap(gap_day, zone_low=108.0, zone_high=112.0)]
+    with_gaps = compute_reward_risk(frame, entry, pivots=(), gaps=gaps)
+    without = compute_reward_risk(frame, entry, pivots=())
+    assert with_gaps.target_source == TARGET_UNFILLED_GAP
+    assert without.target_source != TARGET_UNFILLED_GAP
+
+
+def test_gap_target_loses_to_swing_high() -> None:
+    """摆动高点优先级更高（规格 §10 第 1 档）。"""
+    frame = _frame()
+    pivots = (_swing_high_pivot(frame, 39, 130.0),)
+    entry = _pullback_entry(frame, 60, close=100.0, touch_position=59)
+    gap_day = frame.index[50].date()
+    gaps = [_up_gap(gap_day, zone_low=108.0, zone_high=112.0)]
+    result = compute_reward_risk(frame, entry, pivots, gaps=gaps)
+    assert result.target_source == TARGET_SWING_HIGH
+    assert result.target_b == 130.0
+
+
+def test_gap_target_ignores_filled_gap() -> None:
+    """信号日前已回补的缺口不作目标。"""
+    frame = _frame()
+    entry = _pullback_entry(frame, 60, close=100.0, touch_position=59)
+    gap_day = frame.index[50].date()
+    fill_day = frame.index[55].date()
+    gaps = [_up_gap(gap_day, zone_low=108.0, zone_high=112.0, filled=fill_day)]
+    result = compute_reward_risk(frame, entry, pivots=(), gaps=gaps)
+    assert result.target_source != TARGET_UNFILLED_GAP

@@ -14,6 +14,7 @@ from pathlib import Path
 import pandas as pd
 
 from lei_signal.timing_backtest.data import (
+    BREADTH_FILES,
     INSTRUMENTS,
     TIMING_CACHE_DIR,
     align_index_breadth,
@@ -58,6 +59,8 @@ DEFAULTS: dict = {
     "sell_batches": None,
     "sell_ratio": None,
     "trigger_mode": "rebound",
+    "breadth": None,
+    "min_trade": 0.0,
     "vol_target": 0.0,
     "cash_rate": 0.0,
     "fee_bps": None,
@@ -73,7 +76,12 @@ DISCLAIMERS = [
     "历史最优不等于未来最优，参数扫描结果存在过拟合风险，仅供研究",
 ]
 
-_BREADTH_LABELS = {"cn_all": "全A B20/B50/B200", "sp500": "SP500 B20/B50/B200"}
+_BREADTH_LABELS = {
+    "cn_all": "全A B20/B50/B200",
+    "sp500": "SP500 B20/B50/B200",
+    "cn_cyb": "创业板专属 B20/B50/B200",
+    "cn_csi300": "沪深300成分 B20/B50/B200",
+}
 
 
 class TimingDataUnavailable(RuntimeError):
@@ -162,11 +170,14 @@ def compute_run(cfg: dict, cache_dir: Path | None = None) -> dict:
         bars = load_index_bars(symbol, cache_dir=cache)
     except FileNotFoundError as e:
         raise TimingDataUnavailable(data_unavailable_detail(symbol)) from e
+    breadth_key = merged.get("breadth") or spec.breadth
+    if breadth_key not in BREADTH_FILES:
+        raise ValueError(f"未知宽度来源 {breadth_key}（可用：{', '.join(BREADTH_FILES)}）")
     try:
-        breadth = load_breadth(spec.breadth, cache_dir=cache)
+        breadth = load_breadth(breadth_key, cache_dir=cache)
     except FileNotFoundError as e:
         raise TimingDataUnavailable(
-            f"DATA_UNAVAILABLE: {spec.breadth} 宽度数据缺失，"
+            f"DATA_UNAVAILABLE: {breadth_key} 宽度数据缺失，"
             f"请先运行 scripts/backfill_timing_data.py（{e}）"
         ) from e
 
@@ -209,7 +220,8 @@ def compute_run(cfg: dict, cache_dir: Path | None = None) -> dict:
 
     fee = float(merged["fee_bps"]) if merged["fee_bps"] is not None else spec.fee_default_bps
     result = simulate(
-        window, target, fee_bps=fee, cash_rate=float(merged["cash_rate"])
+        window, target, fee_bps=fee, cash_rate=float(merged["cash_rate"]),
+        min_trade=float(merged["min_trade"]),
     )
     metrics = summarize_run(result.daily, result.trades)
 

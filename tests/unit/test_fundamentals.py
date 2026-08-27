@@ -588,3 +588,115 @@ def test_valuation_history_failure_surfaces_in_rates_history_errors(
     assert r["series"]["pe_cn"]["values"] == []
     assert any("A股PE历史" in e for e in r["errors"])
     assert not any("CAPE" in e for e in r["errors"])
+
+
+# ── 美国宏观（FRED）：派生计算 / 逐序列降级 / 缓存 / ETF 相对净值线 ─────────
+
+
+def _us_weekly_dates(n: int = 30) -> list[str]:
+    from datetime import date, timedelta
+
+    d0 = date(2026, 1, 3)
+    return [(d0 + timedelta(days=7 * i)).isoformat() for i in range(n)]
+
+
+def _us_monthly_dates(n: int = 26) -> list[str]:
+    # 从 2024-01 起的 n 个月（字符串序 = 时间序）
+    out = []
+    for i in range(n):
+        y, m = 2024 + i // 12, i % 12 + 1
+        out.append(f"{y:04d}-{m:02d}-01")
+    return out
+
+
+def _fake_fred(series_id: str, *, cosd: str | None = None) -> dict[str, float]:
+    weekly = {d: 200000.0 + i * 1000 for i, d in enumerate(_us_weekly_dates())}
+    monthly = {d: 150000.0 + i * 100 for i, d in enumerate(_us_monthly_dates())}
+    if series_id == "ICSA":
+        return weekly
+    if series_id == "CCSA":
+        return {d: 1700000.0 + i * 5000 for i, d in enumerate(_us_weekly_dates())}
+    if series_id == "WEI":
+        return {d: 2.0 + i * 0.01 for i, d in enumerate(_us_weekly_dates())}
+    if series_id == "BAMLH0A0HYM2":
+        return {"2026-08-24": 2.7, "2026-08-25": 2.69}
+    return monthly  # PAYEMS/HSN1F/CSUSHPINSA/TOTALSA/PPIFIS/CPIAUCSL/DGORDER
+
+
+def test_fetch_us_macro_derives_ma4_and_yoy(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(sources, "_FRED_PAUSE", 0)
+    monkeypatch.setattr(sources, "_fetch_fred_series", _fake_fred)
+
+    r = sources.fetch_us_macro()
+
+    assert r["errors"] == []
+    assert [it["key"] for it in r["items"]] == [s["key"] for s in sources._US_MACRO_SPEC]
+    # 初请：value = 最后 4 周均值，且 note 带本周值
+    icwa = next(it for it in r["items"] if it["key"] == "icwa")
+    last4 = sum(200000.0 + i * 1000 for i in range(26, 30)) / 4
+    assert icwa["value"] == pytest.approx(last4, abs=0.1)
+    assert "本周 22.9 万" in icwa["note_cn"]
+    # 非农同比：最后一点 vs 12 个月前
+    payems = next(it for it in r["items"] if it["key"] == "payems_yoy")
+    assert payems["value"] == pytest.approx((152500.0 / 151300.0 - 1) * 100, abs=0.01)
+    assert "月净增" in payems["note_cn"]
+    # 派生序列：yoy 首点为第 13 个月、ma4 首点为第 4 周
+    assert len(r["series"]["payems_yoy"]["values"]) == 26 - 12
+    assert len(r["series"]["icwa"]["values"]) == 30 - 3
+    assert r["as_of"] == max(it["date"] for it in r["items"])
+
+
+def test_fetch_us_macro_degrades_per_series(monkeypatch: pytest.MonkeyPatch) -> None:
+    def flaky(series_id: str, *, cosd: str | None = None) -> dict[str, float]:
+        if series_id == "WEI":
+            raise sources.FundamentalsSourceError("限流")
+        return _fake_fred(series_id)
+
+    monkeypatch.setattr(sources, "_FRED_PAUSE", 0)
+    monkeypatch.setattr(sources, "_fetch_fred_series", flaky)
+
+    r = sources.fetch_us_macro()
+
+    assert "wei" not in r["series"]
+    assert len(r["items"]) == len(sources._US_MACRO_SPEC) - 1
+    assert any("周经济指数" in e for e in r["errors"])
+
+
+def test_service_us_macro_cached(monkeypatch: pytest.MonkeyPatch) -> None:
+    calls = {"n": 0}
+
+    def fetch() -> dict:
+        calls["n"] += 1
+        return {"as_of": None, "items": [], "series": {}, "errors": []}
+
+    monkeypatch.setattr(sources, "fetch_us_macro", fetch)
+    svc = FundamentalsService()
+    svc.us_macro()
+    svc.us_macro()
+    assert calls["n"] == 1
+    svc.us_macro(refresh=True)
+    assert calls["n"] == 2
+
+
+def test_etf_strength_includes_rel_lines_and_xly_xlp(monkeypatch: pytest.MonkeyPatch) -> None:
+    """ETF 相对强度应带出相对净值线（起点=100）与可选/必选消费比价 XLY/XLP。"""
+    from datetime import date, timedelta
+
+    tickers = [t for t, _, _ in sources._ETF_SECTORS] + ["SPY"]
+    days = [(date(2026, 1, 5) + timedelta(days=i)).isoformat() for i in range(80)]
+    # 每个 ticker 恒定价格（100 + 序号）-> 相对比价恒定，便于断言
+    closes = {t: [(d, 100.0 + i) for d in days] for i, t in enumerate(tickers)}
+    monkeypatch.setattr(sources, "_yf_closes", lambda ts, period="6mo": closes)
+
+    r = sources.fetch_etf_strength()
+
+    assert r is not None
+    assert len(r["dates"]) == 80
+    assert len(r["items"]) == 11
+    xly = next(it for it in r["items"] if it["code"] == "XLY")
+    assert xly["rel_line"][0] == 100  # 窗口起点归一为 100
+    assert xly["rel_line"][-1] == 100  # 恒定价格 -> 恒定比价（跑平 SPY）
+    assert r["xly_xlp"] is not None
+    assert r["xly_xlp"]["ratio"] == pytest.approx(100.0 / 101.0, abs=1e-3)
+    assert r["xly_xlp"]["chg_1m"] == 0.0
+    assert r["xly_xlp"]["chg_3m"] == 0.0
