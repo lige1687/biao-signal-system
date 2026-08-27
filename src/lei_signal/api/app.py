@@ -23,6 +23,7 @@ from lei_signal.api.routes import (
     dashboard,
     feishu_webhook,
     fundamentals,
+    news,
     opportunities,
     plans,
     sectors,
@@ -34,6 +35,7 @@ from lei_signal.api.services import AnalysisService
 from lei_signal.env import load_env
 from lei_signal.api.sectors_service import SectorsService
 from lei_signal.fundamentals.service import FundamentalsService
+from lei_signal.newsfeed.service import NewsfeedService
 
 # 本地/launchd 运行前把 .env 注入 os.environ（不覆盖已设变量）。
 load_env()
@@ -79,6 +81,7 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
     app.state.market_context_service = _build_market_context_service()
     app.state.fundamentals_service = FundamentalsService()
     app.state.sectors_service = SectorsService()
+    app.state.newsfeed_service = NewsfeedService()
 
     app.include_router(dashboard.router)
     app.include_router(symbols.router)
@@ -90,6 +93,7 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
     app.include_router(feishu_webhook.router)
     app.include_router(fundamentals.router)
     app.include_router(sectors.router)
+    app.include_router(news.router)
 
     _warm_a_share_breadth()
 
