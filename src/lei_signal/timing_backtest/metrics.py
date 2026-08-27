@@ -20,7 +20,7 @@ def compute_performance(equity: pd.Series) -> dict[str, float]:
     ret = eq.pct_change().dropna()
     std = float(ret.std(ddof=1)) if len(ret) > 1 else 0.0
     vol = std * float(np.sqrt(TRADING_DAYS))
-    sharpe = float(ret.mean() / std * np.sqrt(TRADING_DAYS)) if std > 0 else 0.0
+    sharpe = float(ret.mean() / std * np.sqrt(TRADING_DAYS)) if std > 1e-12 else 0.0
     calmar = float(cagr / abs(mdd)) if mdd < 0 else 0.0
     return {"cagr": cagr, "mdd": mdd, "vol": vol, "sharpe": sharpe, "calmar": calmar}
 
