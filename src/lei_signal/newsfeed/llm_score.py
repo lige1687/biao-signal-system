@@ -14,9 +14,10 @@ from lei_signal.plans.llm import ArkConfig, load_ark_config, post_user_content
 
 logger = logging.getLogger(__name__)
 
-#: 打分输入截断（字）。字幕全文已在上游截 20000，这里再兜一道。
+#: 打分输入截断（字）。字幕全文入库保留 20000，但打分只需要开头足够判断；
+#: 长字幕批量进 prompt 会撑爆模型上下文（实测一批直播回放字幕 ≈ 10 万 token）。
 _SUMMARY_MAX = 500
-_CONTENT_MAX = 20000
+_CONTENT_MAX = 6000
 _BATCH_SIZE = 20
 
 _VALID_CATEGORIES = ("macro", "risk", "policy", "industry", "blogger")

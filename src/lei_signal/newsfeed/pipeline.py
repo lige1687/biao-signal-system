@@ -25,6 +25,8 @@ from lei_signal.newsfeed.store import NewsStore
 logger = logging.getLogger(__name__)
 
 _SCORE_BATCH = 20
+#: 批次字符预算：与 _SCORE_BATCH 双限制，防长字幕撑爆上下文。
+_SCORE_CHAR_BUDGET = 30000
 
 
 def _lookback_iso(days: int) -> str:
@@ -152,19 +154,58 @@ def _collect_all(
 
 
 def _score_all(store: NewsStore) -> int:
-    """未评分条目分批打分；批失败原样重试 1 次，仍失败放弃该批（保持未评分）。"""
+    """未评分条目分批打分。
+
+    批次按"条数 ≤20 且累计字符 ≤30000"双限制切分：长字幕（直播回放）
+    单条可达 2 万字，固定 20 条/批会撑爆模型上下文（2026-08-27 实测批
+    80-94 两次失败）。批失败原样重试 1 次，仍失败放弃该批（保持未评分）。
+    """
     total = 0
     rows = [dict(r) for r in store.fetch_unscored(limit=500)]
-    for start in range(0, len(rows), _SCORE_BATCH):
-        batch = rows[start : start + _SCORE_BATCH]
-        scores = score_items(batch)
-        if scores is None:
-            scores = score_items(batch)
-        if not scores:
-            logger.warning("newsfeed 打分批 %d-%d 两次失败，跳过", start, start + len(batch))
-            continue
-        total += store.apply_scores(scores)
+
+    def _row_weight(r: dict) -> int:
+        return (
+            len(r.get("title") or "")
+            + len(r.get("summary") or "")
+            + len(r.get("content") or "")
+        )
+
+    batch: list[dict] = []
+    weight = 0
+    failures = 0
+    for row in rows:
+        w = _row_weight(row)
+        if batch and (len(batch) >= _SCORE_BATCH or weight + w > _SCORE_CHAR_BUDGET):
+            if _run_score_batch(store, batch):
+                total += len(batch)
+            else:
+                failures += 1
+            batch, weight = [], 0
+        batch.append(row)
+        weight += w
+    if batch:
+        if _run_score_batch(store, batch):
+            total += len(batch)
+        else:
+            failures += 1
+    if failures:
+        logger.warning("newsfeed 打分 %d 个批失败（保持未评分态）", failures)
     return total
+
+
+def _run_score_batch(store: NewsStore, batch: list[dict]) -> bool:
+    scores = score_items(batch)
+    if scores is None:
+        scores = score_items(batch)
+    if not scores:
+        logger.warning(
+            "newsfeed 打分批 %d-%d 两次失败，跳过",
+            batch[0].get("id"),
+            batch[-1].get("id"),
+        )
+        return False
+    store.apply_scores(scores)
+    return True
 
 
 def run_pipeline(
