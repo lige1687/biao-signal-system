@@ -560,6 +560,24 @@ export interface SentimentIngest {
   available_at?: string | null;
 }
 
+/** 情绪历史观测（GET /market-context/sentiment/history，周频、按调查周升序）。 */
+export interface SentimentHistoryResponse {
+  series: string;
+  count?: number;
+  error?: string;
+  observations: {
+    survey_week: string;
+    available_at?: string | null; // 发布时间（周四），投影散点按它对齐避免前视
+    label: string;
+    percentile: number | null;
+    exposure_index?: number | null; // NAAIM 专用
+    bullish?: number | null; // AAII 专用
+    neutral?: number | null;
+    bearish?: number | null;
+    bull_bear?: number | null;
+  }[];
+}
+
 /** 真全A市场宽度（涨跌家数 + 可选 MA 上方占比）。
  *  后端 /market-context/a-share-breadth 返回；来源：腾讯快照+沪深交易所代码列表（涨跌家数）、
  *  akshare 东财历史K线（MA 占比，需正常网络环境）。 */
@@ -1231,6 +1249,31 @@ export interface EtfItem {
   bias: string; // risk_on | risk_off | neutral
   ret_1m: number;
   rel_1m: number; // 相对 SPY 的超额（%）
+  rel_line?: number[]; // 相对净值线（ETF/SPY 比价，起点=100）
+}
+
+// 可选/必选消费比价（XLY/XLP）：升 = 风险偏好、降 = 避险
+export interface XlyXlpRatio {
+  ratio: number;
+  chg_1m: number; // 比价 1 月变化（%）
+  chg_3m: number; // 比价 3 月变化（%）
+}
+
+// ---- 美国宏观（FRED 公开 CSV，就业/房产/汽车/WEI/物价/订单/信用利差）----
+export interface UsMacroItem {
+  key: string;
+  name_cn: string;
+  freq: string; // 周 | 月 | 日
+  date: string | null;
+  value: number | null;
+  note_cn: string;
+}
+
+export interface UsMacroResponse {
+  as_of: string | null;
+  items: UsMacroItem[];
+  series: Record<string, RatesHistorySeries>;
+  errors: string[];
 }
 
 // ---- 行业板块趋势工作台 (/api/sectors, research_proxy) ----
@@ -1375,6 +1418,18 @@ export interface BriefAnomaly {
   note_cn: string;
 }
 
+/** 自选当前状态快照（后端 extract_symbol_state 原样透传，展示用） */
+export interface BriefWatchState {
+  color: string | null;
+  color_cn: string | null;
+  stage_cn: string | null;
+  risk_state_cn: string | null;
+  dimensions: Record<string, string>;
+  support_rules: string[];
+  conflict_rules: string[];
+  new_event_count: number;
+}
+
 export interface BriefWatchItem {
   symbol: string;
   display_name: string | null;
@@ -1383,6 +1438,7 @@ export interface BriefWatchItem {
   changes: string[];
   n_changes: number;
   is_new: boolean;
+  state?: BriefWatchState | null;
 }
 
 export interface BriefPoolItem {
@@ -1413,7 +1469,14 @@ export interface DailyBriefPayload {
       day_change: number | null;
       pctile_250d: number | null;
     }[];
-    macro: { line_cn?: string };
+    macro: {
+      line_cn?: string;
+      raw?: {
+        margin?: { date?: string; rzye_yi?: number; rzrqye_yi?: number; rzyezb_pct?: number } | null;
+        vix?: { value?: number; as_of?: string } | null;
+        cn_us_spread_10y?: number | null;
+      };
+    };
   };
   watchlist: {
     items: BriefWatchItem[];
@@ -1468,6 +1531,118 @@ export interface AgentMessageDTO {
   content: string;
   grounded: boolean;
   created_at: string;
+}
+
+// ---------------- 回测工作台（/api/backtest） ----------------
+
+export interface BacktestOption {
+  value: number | string | null;
+  label: string;
+}
+
+export interface BacktestModule {
+  value: string;
+  label: string;
+  variants: Record<string, string>;
+}
+
+export interface BacktestOptions {
+  rr_levels: BacktestOption[];
+  modules: BacktestModule[];
+  entry_variants: BacktestOption[];
+  exit_variants: BacktestOption[];
+  fee_labels: BacktestOption[];
+  volume_confirm_windows?: BacktestOption[];
+  profile_filters?: BacktestOption[];
+  defaults: {
+    module?: string;
+    rr_min: number | null;
+    entry_variant: string;
+    exit_variant: string;
+    fee_label: string;
+  };
+  glossary: Record<string, { label: string; tip: string }>;
+  param_specs?: Record<string, {
+    label: string; default: number; levels: number[]; tip: string;
+  }>;
+}
+
+export interface BacktestRunSummary {
+  run_id: string;
+  created_at?: string;
+  status: string;
+  params?: Record<string, unknown>;
+  symbols_count?: number;
+  trade_count?: number | null;
+  expectancy_r?: number | null;
+  profit_factor?: number | null;
+  error?: string;
+}
+
+export interface BacktestMetrics {
+  label: string;
+  trade_count: number;
+  open_count: number;
+  win_rate: number | null;
+  avg_win_r: number | null;
+  avg_loss_r: number | null;
+  expectancy_r: number | null;
+  profit_factor: number | null;
+  max_consecutive_losses: number;
+  max_drawdown_1r: number;
+  avg_holding_bars: number | null;
+  total_r: number | null;
+}
+
+export interface BacktestTrade {
+  symbol: string;
+  entry_variant: string;
+  exit_variant: string;
+  is_first_touch: boolean;
+  ma_period: number;
+  signal_date: string;
+  entry_date: string;
+  entry_price: number;
+  stop_price: number;
+  target_price: number | null;
+  reward_risk: number | null;
+  exit_date: string | null;
+  exit_price: number | null;
+  exit_reason: string | null;
+  holding_bars: number;
+  r_gross: number | null;
+  r_net: number | null;
+  entry_reason?: string;
+}
+
+export interface BacktestRunResult {
+  run_id: string;
+  created_at: string;
+  status: string;
+  disclaimer: string;
+  params: {
+    symbols: string[] | "all";
+    rr_min: number | null;
+    entry_variant: string;
+    exit_variant: string;
+    fee_label: string;
+  };
+  data_range: {
+    start: string;
+    end: string;
+    symbols_count: number;
+    out_of_sample_start: string;
+  };
+  funnel: {
+    touched: number;
+    confirmed: number;
+    filtered_by_rr: number;
+    no_target: number;
+  };
+  groups: Record<"True" | "False", Record<string, BacktestMetrics[]>>;
+  per_symbol: Array<{ symbol: string; bars: number; trades: number }>;
+  trades: BacktestTrade[];
+  error?: string;
 }
 
 // ---- 宽度择时回测（timing backtest）----
@@ -1561,6 +1736,9 @@ export interface TimingSignal {
   as_of?: string;
   breadth_now?: number | null;
   weight_now?: number;
+  rs120?: number | null;
+  siphon?: boolean | null;
+  engine?: string | null;
   trigger?: string;
   levels?: number[];
   full_cagr?: number;

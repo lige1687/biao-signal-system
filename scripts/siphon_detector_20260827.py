@@ -79,7 +79,7 @@ def main() -> None:
 
     rows = []
     rs_cache: dict[tuple[str, int], pd.Series] = {}
-    for wid, sym, name, s, e, kind, note in WINDOWS:
+    for wid, sym, name, s, e, kind, _note in WINDOWS:
         if closes.get(sym) is None:
             continue
         if (sym, PRIMARY_N) not in rs_cache:
@@ -105,7 +105,7 @@ def main() -> None:
     for n in (60, 120, 250):
         for thr in (15.0, 20.0, 30.0):
             f_rates, e_rates = [], []
-            for wid, sym, name, s, e_, kind, note in WINDOWS:
+            for _wid, sym, _name, s, e_, kind, _note in WINDOWS:
                 if closes.get(sym) is None:
                     continue
                 key = (sym, n)
@@ -119,11 +119,11 @@ def main() -> None:
             fm = f"{sum(f_rates) / len(f_rates):.0%}" if f_rates else "--"
             em = f"{sum(e_rates) / len(e_rates):.0%}" if e_rates else "--"
             f2 = [float(fire_series(rs_cache[(sym2, n)].loc[s2:e2].dropna(), thr, 1).mean())
-                  for wid2, sym2, _, s2, e2, k2, _2 in WINDOWS
+                  for _w, sym2, _n, s2, e2, k2, _x in WINDOWS
                   if k2 == "F" and closes.get(sym2) is not None
                   and not rs_cache[(sym2, n)].loc[s2:e2].dropna().empty]
             e2 = [float(fire_series(rs_cache[(sym2, n)].loc[s2:e2].dropna(), thr, 1).mean())
-                  for wid2, sym2, _, s2, e2, k2, _2 in WINDOWS
+                  for _w, sym2, _n, s2, e2, k2, _x in WINDOWS
                   if k2 == "E" and closes.get(sym2) is not None
                   and not rs_cache[(sym2, n)].loc[s2:e2].dropna().empty]
             fm2 = f"{sum(f2) / len(f2):.0%}" if f2 else "--"
@@ -141,7 +141,8 @@ def main() -> None:
             rs_cache[(sym, PRIMARY_N)] = rs_series(closes[sym], ew, PRIMARY_N)
         rs = rs_cache[(sym, PRIMARY_N)]
         fired = bool(fire_series(rs, PRIMARY_THR, PERSIST).iloc[-1])
-        print(f"  {name}: RS120={rs.iloc[-1]:+.1f}pp → {'⚠️虹吸中·宽度引擎应下岗' if fired else '✓与全场同频'}")
+        state = "虹吸中·宽度引擎应下岗" if fired else "与全场同频"
+        print(f"  {name}: RS120={rs.iloc[-1]:+.1f}pp → {state}")
 
 
 if __name__ == "__main__":

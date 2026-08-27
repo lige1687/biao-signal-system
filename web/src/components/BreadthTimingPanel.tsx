@@ -415,6 +415,7 @@ export default function BreadthTimingPanel() {
                 <th>数据截至</th>
                 <th>宽度现值</th>
                 <th>目标仓位</th>
+                <th>引擎（RS提示灯）</th>
                 <th>触发条件</th>
                 <th>全史年化</th>
                 <th>回撤</th>
@@ -428,6 +429,20 @@ export default function BreadthTimingPanel() {
                   <td>{sg.breadth_now != null ? sg.breadth_now.toFixed(1) : "—"}</td>
                   <td style={{ fontWeight: 700 }}>
                     {sg.weight_now != null ? `${Math.round(sg.weight_now * 100)}%` : "—"}
+                  </td>
+                  <td
+                    style={{
+                      fontWeight: 700,
+                      color: sg.siphon ? "#e3745f" : undefined,
+                      whiteSpace: "normal",
+                      maxWidth: 170,
+                    }}
+                  >
+                    {sg.engine != null
+                      ? `${sg.engine}${
+                          sg.rs120 != null ? `（RS120 ${sg.rs120 > 0 ? "+" : ""}${sg.rs120}pp）` : ""
+                        }`
+                      : "—"}
                   </td>
                   <td style={{ whiteSpace: "normal", maxWidth: 380 }}>{sg.trigger ?? "—"}</td>
                   <td className={(sg.full_cagr ?? 0) > 0 ? "positive" : "negative"}>

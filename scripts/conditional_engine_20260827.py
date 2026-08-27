@@ -14,7 +14,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import pandas as pd
 
-from lei_signal.timing_backtest.data import INSTRUMENTS, align_index_breadth, load_breadth, load_index_bars
+from lei_signal.timing_backtest.data import (
+    align_index_breadth,
+    load_breadth,
+    load_index_bars,
+)
 from lei_signal.timing_backtest.engine import simulate
 from lei_signal.timing_backtest.metrics import summarize_run
 from lei_signal.timing_backtest.strategies import LadderParams, TrendGate, build_target

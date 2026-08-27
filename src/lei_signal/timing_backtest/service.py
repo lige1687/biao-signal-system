@@ -17,6 +17,7 @@ from lei_signal.timing_backtest.data import (
     BREADTH_FILES,
     INSTRUMENTS,
     TIMING_CACHE_DIR,
+    _read_parquet_cached,
     align_index_breadth,
     data_unavailable_detail,
     load_breadth,
@@ -366,6 +367,44 @@ EXEC_CONFIGS: list[dict] = [
                    "fee_bps": 1.0},
     },
     {
+        "key": "csi1000_attack", "label": "中证1000ETF · 进攻",
+        "params": {"symbol": "512100", "strategy": "ladder", "indicator": "b200",
+                   "n_bands": 3, "direction": "contrarian", "low_edge": 30.0,
+                   "high_edge": 70.0, "min_trade": 0.05, "fee_bps": 1.0},
+    },
+    {
+        "key": "innovdrug_attack", "label": "创新药ETF · 进攻",
+        "params": {"symbol": "159992", "strategy": "ladder", "indicator": "b200",
+                   "n_bands": 3, "direction": "contrarian", "low_edge": 30.0,
+                   "high_edge": 70.0, "min_trade": 0.05, "fee_bps": 1.0},
+    },
+    {
+        "key": "food_attack", "label": "食品饮料ETF · 进攻（MA200闸）",
+        "params": {"symbol": "515170", "strategy": "ladder", "indicator": "b200",
+                   "n_bands": 3, "direction": "contrarian", "low_edge": 30.0,
+                   "high_edge": 70.0, "gate_mode": "ma200", "min_trade": 0.05,
+                   "fee_bps": 1.0},
+    },
+    {
+        "key": "steel_attack", "label": "钢铁ETF · 进攻（MA200闸）",
+        "params": {"symbol": "515210", "strategy": "ladder", "indicator": "b200",
+                   "n_bands": 3, "direction": "contrarian", "low_edge": 30.0,
+                   "high_edge": 70.0, "gate_mode": "ma200", "min_trade": 0.05,
+                   "fee_bps": 1.0},
+    },
+    {
+        "key": "dividend_attack", "label": "红利ETF沪 · 低波进攻",
+        "params": {"symbol": "515180", "strategy": "ladder", "indicator": "b200",
+                   "n_bands": 3, "direction": "contrarian", "low_edge": 30.0,
+                   "high_edge": 70.0, "min_trade": 0.05, "fee_bps": 1.0},
+    },
+    {
+        "key": "comm_attack", "label": "通信指数 · 进攻（RS灯亮时技术引擎接管）",
+        "params": {"symbol": "980030", "strategy": "ladder", "indicator": "b200",
+                   "n_bands": 3, "direction": "contrarian", "low_edge": 30.0,
+                   "high_edge": 70.0, "min_trade": 0.05, "fee_bps": 1.0},
+    },
+    {
         "key": "hs300_defense", "label": "沪深300 · 攻守兼备（执行用510300）",
         "params": {"symbol": "000300", "strategy": "reversal", "indicator": "b200",
                    "low_extreme": 10.0, "high_extreme": 90.0, "confirm": 5.0,
@@ -391,8 +430,66 @@ EXEC_CONFIGS: list[dict] = [
 ]
 
 
+_SIPHON_N, _SIPHON_THR, _SIPHON_PERSIST = 120, 20.0, 10
+_EW_CACHE: dict[tuple[str, float], pd.Series] = {}
+
+
+def _equal_weight_index(parquet_name: str) -> pd.Series | None:
+    """市场等权净值（A股=全A底表，美股=SP500 底表；与宽度同源同偏差）。
+
+    底表缺失返回 None（提示灯静默，不阻塞信号构建）；缓存按 mtime 失效。
+    """
+    path = TIMING_CACHE_DIR.parent / parquet_name
+    if not path.exists():
+        return None
+    mtime = path.stat().st_mtime
+    key = (parquet_name, mtime)
+    if key not in _EW_CACHE:
+        wide = _read_parquet_cached(path)
+        ret = wide.pct_change(fill_method=None)
+        ew = (1 + ret.mean(axis=1, skipna=True).fillna(0)).cumprod()
+        _EW_CACHE.clear()
+        _EW_CACHE[key] = ew
+    return _EW_CACHE[key]
+
+
+def siphon_status(symbol: str, cache_dir: Path | None = None) -> dict:
+    """RS120 虹吸提示灯（第十三轮定案）：RS120>+20pp 连续10日 → 独立行情。
+
+    灯亮 = 该标的宽度引擎下岗、技术信号主导；灯灭 = 与全场同频，宽度引擎有效。
+    A股对比全A等权、美股对比 SP500 等权；数据不足时各字段为 None。
+    """
+    unknown = {"rs120": None, "siphon": None, "engine": None}
+    spec = INSTRUMENTS.get(symbol)
+    if spec is None:
+        return unknown
+    parquet = "a_share_klines_full.parquet" if spec.market == "cn" else "sp500_klines.parquet"
+    ew = _equal_weight_index(parquet)
+    if ew is None:
+        return unknown
+    try:
+        close = load_index_bars(symbol, cache_dir=cache_dir or TIMING_CACHE_DIR)["close"]
+    except FileNotFoundError:
+        return unknown
+    both = pd.concat([close, ew], axis=1, join="inner").dropna()
+    if len(both) < _SIPHON_N + _SIPHON_PERSIST:
+        return unknown
+    rs = (
+        both.iloc[:, 0] / both.iloc[:, 0].shift(_SIPHON_N)
+        - both.iloc[:, 1] / both.iloc[:, 1].shift(_SIPHON_N)
+    ).dropna() * 100
+    if rs.empty:
+        return unknown
+    fired = bool((rs > _SIPHON_THR).rolling(_SIPHON_PERSIST).min().iloc[-1])
+    return {
+        "rs120": round(float(rs.iloc[-1]), 1),
+        "siphon": fired,
+        "engine": "技术引擎·虹吸" if fired else "宽度引擎",
+    }
+
+
 def build_signals(cache_dir: Path | None = None) -> list[dict]:
-    """执行手册当前信号：每配置的最新宽度值、目标仓位、下一档位与近期调仓。"""
+    """执行手册当前信号：每配置的最新宽度值、目标仓位、引擎状态与近期调仓。"""
     out = []
     for cfg in EXEC_CONFIGS:
         params = cfg["params"]
@@ -437,6 +534,7 @@ def build_signals(cache_dir: Path | None = None) -> list[dict]:
             "as_of": daily["date"][-1],
             "breadth_now": breadth_now,
             "weight_now": weight_now,
+            **siphon_status(params["symbol"], cache_dir),
             "trigger": trigger,
             "levels": levels,
             "recent_trades": run["trades"][-3:],
