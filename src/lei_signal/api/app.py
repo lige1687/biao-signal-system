@@ -29,6 +29,7 @@ from lei_signal.api.routes import (
     sectors,
     signals,
     symbols,
+    timing_backtest,
     watch_subscriptions,
     watchlist,
 )
@@ -95,6 +96,7 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
     app.include_router(feishu_webhook.router)
     app.include_router(fundamentals.router)
     app.include_router(sectors.router)
+    app.include_router(timing_backtest.router)
 
     _warm_a_share_breadth()
     # 看盘缓存后台预热：按用户时效性要求定时强刷（盘中 12 分钟 / 收盘补一次 /
