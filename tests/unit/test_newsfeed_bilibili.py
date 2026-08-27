@@ -110,3 +110,50 @@ def test_fetch_subtitle_text_prefers_manual_zh(monkeypatch: pytest.MonkeyPatch, 
     monkeypatch.setattr(client._session, "get", fake_signed_get)
     text = client.fetch_subtitle_text(aid=1, cid=2)
     assert text == "大家好 今天讲英伟达财报"
+
+
+def test_parse_duration_text() -> None:
+    assert bili.parse_duration_text("8:30") == 510
+    assert bili.parse_duration_text("1:02:33") == 3753
+    assert bili.parse_duration_text("") is None
+    assert bili.parse_duration_text("abc") is None
+
+
+def test_skip_video_rules() -> None:
+    assert bili._skip_video(
+        {"title": "【直播回放】今晚大新闻 08点场", "duration": 7200},
+        title_blocklist=["直播回放"], max_duration_sec=1800,
+    ) is not None
+    assert bili._skip_video(
+        {"title": "超长横盘解读", "duration": 5400},
+        title_blocklist=["直播回放"], max_duration_sec=1800,
+    ) is not None
+    assert bili._skip_video(
+        {"title": "英伟达财报解读", "duration": 480},
+        title_blocklist=["直播回放"], max_duration_sec=1800,
+    ) is None
+    # 时长未知不按时长过滤（只按标题）
+    assert bili._skip_video(
+        {"title": "普通视频", "duration": None},
+        title_blocklist=["直播回放"], max_duration_sec=1800,
+    ) is None
+
+
+def test_fetch_new_up_items_skips_replay_but_advances_watermark(tmp_path, monkeypatch) -> None:
+    """直播回放被跳过，但水位要包含它（否则每次重跑重复检查）。"""
+    monkeypatch.setattr(bili.time, "sleep", lambda *_: None)
+    client = BilibiliClient(tmp_path / "c.json")
+    videos = [
+        {"bvid": "BV1normal", "title": "例行更新", "description": "d",
+         "created": 1756300800, "duration": 300},
+        {"bvid": "BV1replay", "title": "【直播回放】晚上八点场", "description": "d",
+         "created": 1756304400, "duration": 7200},
+    ]
+    monkeypatch.setattr(client, "fetch_up_videos", lambda mid, limit=5: videos)
+    monkeypatch.setattr(client, "fetch_video_detail",
+                        lambda bvid: {"aid": 1, "cid": 2, "title": "t", "desc": "",
+                                      "pubdate": 0, "owner_name": "UP"})
+    monkeypatch.setattr(client, "fetch_subtitle_text", lambda aid, cid: "字幕内容")
+    items, wm = bili.fetch_new_up_items(client, 1, "UP", None)
+    assert [i.title for i in items] == ["例行更新"]
+    assert bili._ts_to_iso(1756304400) == wm  # 水位含被跳过的直播回放

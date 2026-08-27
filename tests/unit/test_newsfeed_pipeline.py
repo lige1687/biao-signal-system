@@ -41,7 +41,7 @@ def _patch_sources(monkeypatch, *, em=None, sina=None, gnews=None, bili=None):
     monkeypatch.setattr(pipeline, "collect_rss",
                         lambda q, *, is_gnews, since_iso: (list(gnews or []), None))
     monkeypatch.setattr(pipeline, "fetch_new_up_items",
-                        lambda client, mid, name, since, lookback_iso=None: (
+                        lambda client, mid, name, since, lookback_iso=None, **kw: (
                             list(bili or []), None))
     monkeypatch.setattr(pipeline, "BilibiliClient", lambda *a, **k: object())
 
@@ -83,7 +83,7 @@ def test_pipeline_partial_when_one_source_fails(monkeypatch, tmp_path):
     monkeypatch.setattr(pipeline, "collect_rss",
                         lambda q, *, is_gnews, since_iso: ([], None))
     monkeypatch.setattr(pipeline, "fetch_new_up_items",
-                        lambda c, mid, name, since, lookback_iso=None: ([], None))
+                        lambda c, mid, name, since, lookback_iso=None, **kw: ([], None))
     monkeypatch.setattr(pipeline, "BilibiliClient", lambda *a, **k: object())
 
     result = run_pipeline(tmp_path / "p.db", config=_CFG, no_llm=True)

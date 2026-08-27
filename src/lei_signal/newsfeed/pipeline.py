@@ -144,6 +144,8 @@ def _collect_all(
                 name,
                 None if (full or wm_raw is None) else wm_raw,
                 lookback_iso=lookback if (full or wm_raw is None) else None,
+                title_blocklist=list(cfg.get("bili_title_blocklist") or ["直播回放"]),
+                max_duration_sec=cfg.get("bili_max_duration_sec", 1800),
             )
             _ingest(key, items, wm)
         except Exception as exc:  # noqa: BLE001

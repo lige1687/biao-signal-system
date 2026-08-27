@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import time
 import urllib.parse
 from datetime import UTC, datetime
@@ -22,6 +23,8 @@ import requests
 from lei_signal.newsfeed.models import NewsItem
 from lei_signal.newsfeed.normalize import compute_dedupe_key
 from lei_signal.newsfeed.sources import NewsSourceError
+
+logger = logging.getLogger(__name__)
 
 _MIXIN_TAB = [
     46, 47, 18, 2, 53, 8, 23, 32, 15, 50, 10, 31, 58, 3, 45, 35, 27, 43, 5, 49,
@@ -151,7 +154,7 @@ class BilibiliClient:
     # ---------------- 业务 ----------------
 
     def fetch_up_videos(self, mid: int, limit: int = 5) -> list[dict]:
-        """UP主最新投稿（按发布时间倒序）：bvid/title/description/created(秒)。"""
+        """UP主最新投稿（按发布时间倒序）：bvid/title/description/created(秒)/duration(秒)。"""
         payload = self._get_json(
             "https://api.bilibili.com/x/space/wbi/arc/search",
             {
@@ -170,6 +173,7 @@ class BilibiliClient:
                 "title": (v.get("title") or "").strip(),
                 "description": (v.get("description") or "").strip(),
                 "created": int(v.get("created") or 0),
+                "duration": parse_duration_text(v.get("length") or ""),
             }
             for v in vlist
             if v.get("bvid")
@@ -236,6 +240,29 @@ class BilibiliClient:
         return text[:_SUBTITLE_MAX_CHARS] or None
 
 
+def parse_duration_text(text: str) -> int | None:
+    """arc/search 的 length 字段（"MM:SS" 或 "H:MM:SS"）转秒；解析不了返回 None。"""
+    parts = text.strip().split(":")
+    if not 1 < len(parts) <= 3 or not all(p.isdigit() for p in parts):
+        return None
+    return sum(int(p) * 60**i for i, p in enumerate(reversed(parts)))
+
+
+def _skip_video(
+    v: dict, *, title_blocklist: list[str], max_duration_sec: int | None
+) -> str | None:
+    """过滤规则：命中返回原因文案，保留返回 None。直播回放动辄一两小时，
+    字幕 2 万字且信息密度低，用户只要每日例行的几分钟短视频。"""
+    title = v.get("title") or ""
+    for kw in title_blocklist:
+        if kw and kw in title:
+            return f"标题命中 {kw}"
+    duration = v.get("duration")
+    if max_duration_sec is not None and duration is not None and duration > max_duration_sec:
+        return f"时长 {duration}s > {max_duration_sec}s"
+    return None
+
+
 def fetch_new_up_items(
     client: BilibiliClient,
     mid: int,
@@ -243,24 +270,32 @@ def fetch_new_up_items(
     since_iso: str | None,
     *,
     lookback_iso: str | None = None,
+    title_blocklist: list[str] | None = None,
+    max_duration_sec: int | None = 1800,
 ) -> tuple[list[NewsItem], str | None]:
     """拉某 UP主 新投稿并组装 NewsItem（content=字幕全文，无字幕为 None）。
 
-    新水位 = 保留视频的最大 published_at（ISO）。lookback_iso 用于首跑
+    新水位 = 见到视频的最大 published_at（ISO）——**含被过滤的**：直播回放
+    跳过也要推水位，否则每次重跑都会重复检查它。lookback_iso 用于首跑
     限制回看范围（published_at >= lookback_iso 才保留）。
     """
     videos = client.fetch_up_videos(mid, limit=5)
+    blocklist = title_blocklist if title_blocklist is not None else ["直播回放"]
     items: list[NewsItem] = []
     newest: str | None = None
     for v in videos:
         if not v["created"]:
             continue
         published = _ts_to_iso(v["created"])
+        newest = published if newest is None else max(newest, published)
         if since_iso is not None and published <= since_iso:
             continue
         if lookback_iso is not None and published < lookback_iso:
             continue
-        newest = published if newest is None else max(newest, published)
+        skip_reason = _skip_video(v, title_blocklist=blocklist, max_duration_sec=max_duration_sec)
+        if skip_reason:
+            logger.info("bilibili 跳过 %s《%s》：%s", name, v.get("title", "")[:30], skip_reason)
+            continue
         detail = client.fetch_video_detail(v["bvid"])
         subtitle = None
         if detail.get("aid") and detail.get("cid"):
@@ -281,4 +316,9 @@ def fetch_new_up_items(
     return items, newest
 
 
-__all__ = ["BilibiliClient", "extract_mixin_key", "fetch_new_up_items"]
+__all__ = [
+    "BilibiliClient",
+    "extract_mixin_key",
+    "fetch_new_up_items",
+    "parse_duration_text",
+]
