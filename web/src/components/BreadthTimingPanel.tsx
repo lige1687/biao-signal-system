@@ -42,7 +42,15 @@ interface FormState {
   gate_mode: string;
   gate_cap: number;
   min_weight: number;
-  cash_rate: number;
+  gamma: string;
+  low_edge: string;
+  high_edge: string;
+  batch_ratio: string;
+  band_step: string;
+  sell_batches: string;
+  sell_ratio: string;
+  vol_target: string;
+  cash_rate: string;
   fee_bps: string;
   start: string;
   end: string;
@@ -63,7 +71,15 @@ const DEFAULT_FORM: FormState = {
   gate_mode: "off",
   gate_cap: 0,
   min_weight: 0,
-  cash_rate: 0,
+  gamma: "",
+  low_edge: "",
+  high_edge: "",
+  batch_ratio: "",
+  band_step: "",
+  sell_batches: "",
+  sell_ratio: "",
+  vol_target: "",
+  cash_rate: "",
   fee_bps: "",
   start: "",
   end: "",
@@ -128,7 +144,8 @@ export default function BreadthTimingPanel() {
         indicator: form.indicator,
         gate_mode: form.gate_mode,
         gate_cap: form.gate_cap,
-        cash_rate: form.cash_rate,
+        vol_target: form.vol_target.trim() === "" ? 0 : Number(form.vol_target) / 100,
+        cash_rate: form.cash_rate.trim() === "" ? 0 : Number(form.cash_rate) / 100,
         fee_bps: form.fee_bps.trim() === "" ? null : Number(form.fee_bps),
         start: form.start.trim() === "" ? null : form.start.trim(),
         end: form.end.trim() === "" ? null : form.end.trim(),
@@ -138,12 +155,19 @@ export default function BreadthTimingPanel() {
         body.edge_mode = form.edge_mode;
         body.direction = form.direction;
         body.min_weight = form.min_weight;
+        body.gamma = form.gamma.trim() === "" ? 1.0 : Number(form.gamma);
+        body.low_edge = form.low_edge.trim() === "" ? 0.0 : Number(form.low_edge);
+        body.high_edge = form.high_edge.trim() === "" ? 100.0 : Number(form.high_edge);
       } else {
         body.low_extreme = form.low_extreme;
         body.high_extreme = form.high_extreme;
         body.confirm = form.confirm;
         body.batch_mode = form.batch_mode;
         body.batches = form.batches;
+        body.batch_ratio = form.batch_ratio.trim() === "" ? 1.0 : Number(form.batch_ratio);
+        body.band_step = form.band_step.trim() === "" ? 10.0 : Number(form.band_step);
+        body.sell_batches = form.sell_batches.trim() === "" ? null : Number(form.sell_batches);
+        body.sell_ratio = form.sell_ratio.trim() === "" ? null : Number(form.sell_ratio);
       }
       const res = await timingBacktestApi.createRun(body);
       setResult(res);
@@ -455,6 +479,32 @@ export default function BreadthTimingPanel() {
                   onChange={(e) => setForm({ ...form, min_weight: Math.max(0, Math.min(100, Number(e.target.value))) / 100 })}
                 />
               </label>
+              <label>
+                陡度γ(&gt;1深极值重仓)
+                <input
+                  type="text"
+                  placeholder="1"
+                  value={form.gamma}
+                  onChange={(e) => setForm({ ...form, gamma: e.target.value })}
+                />
+              </label>
+              <label>
+                边界范围(低/高)
+                <input
+                  type="text"
+                  placeholder="如 15 / 85"
+                  style={{ width: 52 }}
+                  value={form.low_edge}
+                  onChange={(e) => setForm({ ...form, low_edge: e.target.value })}
+                />
+                <input
+                  type="text"
+                  placeholder="100"
+                  style={{ width: 52, marginLeft: 4 }}
+                  value={form.high_edge}
+                  onChange={(e) => setForm({ ...form, high_edge: e.target.value })}
+                />
+              </label>
             </>
           )}
           {form.strategy === "reversal" && (
@@ -504,6 +554,33 @@ export default function BreadthTimingPanel() {
                   ))}
                 </select>
               </label>
+              <label>
+                批次比例(&gt;1首批重)
+                <input
+                  type="text"
+                  placeholder="1（等分）"
+                  value={form.batch_ratio}
+                  onChange={(e) => setForm({ ...form, batch_ratio: e.target.value })}
+                />
+              </label>
+              <label>
+                卖出批数(空=同买入)
+                <input
+                  type="text"
+                  placeholder="同买入"
+                  value={form.sell_batches}
+                  onChange={(e) => setForm({ ...form, sell_batches: e.target.value })}
+                />
+              </label>
+              <label>
+                档位步长(宽度点)
+                <input
+                  type="text"
+                  placeholder="10"
+                  value={form.band_step}
+                  onChange={(e) => setForm({ ...form, band_step: e.target.value })}
+                />
+              </label>
             </>
           )}
           <label>
@@ -518,8 +595,17 @@ export default function BreadthTimingPanel() {
             <input
               type="text"
               placeholder="0"
-              value={form.cash_rate === 0 ? "" : String(Math.round(form.cash_rate * 10000) / 100)}
-              onChange={(e) => setForm({ ...form, cash_rate: e.target.value.trim() === "" ? 0 : Number(e.target.value) / 100 })}
+              value={form.cash_rate}
+              onChange={(e) => setForm({ ...form, cash_rate: e.target.value })}
+            />
+          </label>
+          <label>
+            波动率目标%(0=关)
+            <input
+              type="text"
+              placeholder="0"
+              value={form.vol_target}
+              onChange={(e) => setForm({ ...form, vol_target: e.target.value })}
             />
           </label>
           <label>
