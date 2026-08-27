@@ -51,13 +51,13 @@ LLM 归类，浏览可筛，快讯入库时先按关键词规则预分类（未�
   2. 归一化 + 去重（dedupe_key 唯一约束）→ 入库原始态
   3. LLM 批量整合（每批 ≤20 条）：类别 / 重要性 0-10 / 利多利空 / 涉及标的 / 一句话点评
   4. 生成"今日整合简报"（按类别归纳、同事件合并，结构化 JSON）
-  5. FTS 索引随触发器自动更新
+  5.（修订：放弃 FTS5，搜索用 LIKE 子串匹配，见 §6）
 ```
 
 模块结构：`src/lei_signal/newsfeed/`
 - `sources/`：`eastmoney.py`、`sina.py`、`gnews.py`、`rss.py`（通用 RSS，公众号复用）、`bilibili.py`（含 wbi 签名）
 - `normalize.py`：统一 `NewsItem` dataclass + dedupe_key 生成
-- `store.py`：SQLite 读写（迁移 016）+ FTS 查询
+- `store.py`：SQLite 读写（迁移 016）+ LIKE 子串查询
 - `llm_score.py`：批量打分 + 简报生成（复用 `plans/llm.py` 凭据体系）
 - `pipeline.py`：编排（水位管理、错误聚合、单项降级）
 - `service.py`：查询/触发 API 的服务层
@@ -100,12 +100,8 @@ CREATE TABLE IF NOT EXISTS news_items (
 CREATE INDEX idx_news_items_published ON news_items(published_at DESC);
 CREATE INDEX idx_news_items_category ON news_items(category);
 
--- 中文检索：trigram 分词器（默认 unicode61 对中文无效）
-CREATE VIRTUAL TABLE news_items_fts USING fts5(
-  title, summary, content, llm_note,
-  content='news_items', content_rowid='id', tokenize='trigram'
-);
--- AFTER INSERT / UPDATE OF title,summary,content,llm_note 触发器同步
+-- 修订（2026-08-27 实施前）：不建 FTS5 虚拟表。中文子串搜索用 LIKE '%kw%'（范围 title+summary+llm_note）。
+-- 理由：LIKE 天然支持中文子串；日增 <300 条全表扫毫秒级；免去 trigram 版本兼容与触发器维护。
 
 CREATE TABLE IF NOT EXISTS news_digests (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -184,7 +180,7 @@ CREATE TABLE IF NOT EXISTS news_runs (          -- 运行留痕（排障用）
 
 | 端点 | 说明 |
 |---|---|
-| `GET /api/news/items` | 参数：`category`、`q`（FTS5 MATCH）、`source`、`from`/`to`、`scored`（`all`\|`scored`\|`unscored`，默认 all）、`min_importance`、`limit`（默认 50，max 200）、`offset`。排序：已评分按 importance DESC, published_at DESC，未评分条目排在已评分之后按时间倒序；`scored=unscored` 时纯时间倒序。返回含 total |
+| `GET /api/news/items` | 参数：`category`、`q`（LIKE 子串，命中 title/summary/llm_note）、`source`、`from`/`to`、`scored`（`all`\|`scored`\|`unscored`，默认 all）、`min_importance`、`limit`（默认 50，max 200）、`offset`。排序：已评分按 importance DESC, published_at DESC，未评分条目排在已评分之后按时间倒序；`scored=unscored` 时纯时间倒序。返回含 total |
 | `GET /api/news/digests` | 最近 N 天简报（默认 7） |
 | `POST /api/news/run` | 手动触发整条管线（后台线程，立即返回 run_id） |
 | `GET /api/news/status` | 最近 run 状态 + 各源水位 + 计数（前端刷新按钮用） |
@@ -213,7 +209,7 @@ CREATE TABLE IF NOT EXISTS news_runs (          -- 运行留痕（排障用）
 
 ## 13. 测试策略（照 `tests/unit/test_fundamentals.py` 风格）
 
-- 纯逻辑单测（HTTP mock）：normalize/dedupe_key、关键词粗筛、LLM JSON 解析容错（截断/夹杂 markdown 代码块）、FTS 中文查询、水位增量、简报 payload 校验。
+- 纯逻辑单测（HTTP mock）：normalize/dedupe_key、关键词粗筛、LLM JSON 解析容错（截断/夹杂 markdown 代码块）、LIKE 中文搜索、水位增量、简报 payload 校验。
 - wbi 签名：给定已知 key+params 断言 w_rid（固定向量）。
 - E2E（不进 CI）：`scripts/dev_run_newsfeed_once.py` 用 `LEI_SQLITE_PATH` 指向临时库真实抓 4 位 UP主 + 快讯 + LLM（凭据来自 Desktop .env 的 ANTHROPIC_*）。
 
@@ -232,5 +228,5 @@ CREATE TABLE IF NOT EXISTS news_runs (          -- 运行留痕（排障用）
 | B站 AI 字幕需登录，无 SESSDA 命中率低 | 实施期用 4 位 UP主真实视频实测命中率；低则请用户提供 BILI_SESSDATA（P2） |
 | wewe-rss 微信读书 token 失效 | 运维手册记录重扫码步骤；失效期间该源停更不影响其他源 |
 | LLM JSON 输出不稳定 | 严格解析 + 重试 1 次 + 降级未评分态 |
-| trigram FTS 索引体积 | 中文 trigram 膨胀 ~3 倍，日增 <300 条可接受；不做分词器依赖 |
+| ~~trigram FTS 索引体积~~ | 已规避：改 LIKE 搜索，无索引膨胀问题 |
 | 两克隆分支分叉（data-sync vs feat/timing-backtest） | 本设计只在 lei-signal-sync 实施；合并时机由用户决定 |
