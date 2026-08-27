@@ -46,7 +46,15 @@ def test_min_eligible_guard():
 
 def test_align_intersection_and_cache_roundtrip(tmp_path):
     idx = pd.bdate_range("2025-01-01", periods=10)
-    bars = pd.DataFrame({"open": np.arange(10.0), "close": np.arange(10.0) + 1}, index=idx)
+    bars = pd.DataFrame(
+        {
+            "open": np.arange(10.0),
+            "high": np.arange(10.0) + 2,
+            "low": np.arange(10.0) - 2,
+            "close": np.arange(10.0) + 1,
+        },
+        index=idx,
+    )
     br = pd.DataFrame(
         {"b20": np.arange(7.0), "b50": np.arange(7.0), "b200": np.arange(7.0)},
         index=idx[:-3],
@@ -57,7 +65,16 @@ def test_align_intersection_and_cache_roundtrip(tmp_path):
     pd.testing.assert_frame_equal(loaded, bars, check_freq=False)
     merged = align_index_breadth(bars, load_breadth("cn_all", cache_dir=tmp_path))
     assert len(merged) == 7
-    assert list(merged.columns) == ["open", "close", "b20", "b50", "b200"]
+    assert list(merged.columns) == ["open", "high", "low", "close", "b20", "b50", "b200"]
+
+
+def test_load_synthesizes_high_low_from_open_close(tmp_path):
+    idx = pd.bdate_range("2025-01-01", periods=5)
+    df = pd.DataFrame({"open": [10, 12, 9, 11, 13], "close": [11, 10, 13, 10, 12]}, index=idx)
+    df.to_parquet(tmp_path / "Y.parquet")
+    loaded = load_index_bars("Y", cache_dir=tmp_path)
+    assert list(loaded["high"]) == [11, 12, 13, 11, 13]
+    assert list(loaded["low"]) == [10, 10, 9, 10, 12]
 
 
 def test_registry_covers_eight_instruments_with_breadth_pairing():

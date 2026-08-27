@@ -16,6 +16,7 @@ from lei_signal.timing_backtest.service import (
     build_options,
     execute_run,
     list_runs,
+    load_run,
 )
 
 router = APIRouter(prefix="/api/timing-backtest", tags=["timing-backtest"])
@@ -35,6 +36,8 @@ class TimingRunRequest(BaseModel):
     batches: int = 5
     gate_mode: str = "off"            # off | ma200
     gate_cap: float = 0.0
+    min_weight: float = 0.0           # 阶梯底仓（空仓档位也保留的最小仓位）
+    cash_rate: float = 0.0            # 空仓现金年化利率（如 0.02 = 2%）
     fee_bps: float | None = None      # None = 标的默认（A股 5bp / 美股 1bp）
     start: str | None = None          # YYYY-MM-DD
     end: str | None = None
@@ -53,6 +56,14 @@ def timing_run(req: TimingRunRequest) -> dict[str, Any]:
         raise HTTPException(status_code=409, detail=str(e)) from e
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
+@router.get("/runs/{run_id}")
+def timing_run_detail(run_id: str) -> dict[str, Any]:
+    run = load_run(run_id)
+    if run is None:
+        raise HTTPException(status_code=404, detail=f"运行记录不存在：{run_id}")
+    return run
 
 
 @router.get("/runs")

@@ -37,6 +37,8 @@ def test_execute_run_ladder_full_flow(fake_cache, tmp_path):
     assert "strategy_cagr" in m and "benchmark_cagr" in m and "excess_cagr" in m
     assert res["daily"]["date"][0] == res["daily"]["date"][0]  # 非空
     assert len(res["daily"]["equity"]) == len(res["daily"]["date"])
+    for key in ("open", "high", "low", "close", "weight", "breadth"):
+        assert len(res["daily"][key]) == len(res["daily"]["date"])
     files = list(runs_dir.glob("*.json"))
     assert len(files) == 1
 

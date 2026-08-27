@@ -74,7 +74,7 @@ def fetch_a_index(fetch_symbol: str) -> pd.DataFrame:
 
     df = ak.stock_zh_index_daily(symbol=fetch_symbol)
     df["date"] = pd.to_datetime(df["date"])
-    return df.set_index("date")[["open", "close"]].astype(float)
+    return df.set_index("date")[["open", "high", "low", "close"]].astype(float)
 
 
 def fetch_a_etf(code: str) -> pd.DataFrame:
@@ -91,8 +91,8 @@ def fetch_a_etf(code: str) -> pd.DataFrame:
                 start_date="19900101", end_date="20991231", adjust="qfq",
             )
             df["日期"] = pd.to_datetime(df["日期"])
-            return df.set_index("日期")[["开盘", "收盘"]].astype(float).rename(
-                columns={"开盘": "open", "收盘": "close"}
+            return df.set_index("日期")[["开盘", "最高", "最低", "收盘"]].astype(float).rename(
+                columns={"开盘": "open", "最高": "high", "最低": "low", "收盘": "close"}
             )
         except Exception as e:  # noqa: BLE001
             last_err = e
@@ -101,7 +101,7 @@ def fetch_a_etf(code: str) -> pd.DataFrame:
     prefix = "sh" if code.startswith("5") else "sz"
     df = ak.fund_etf_hist_sina(symbol=prefix + code)
     df["date"] = pd.to_datetime(df["date"])
-    return df.set_index("date")[["open", "close"]].astype(float)
+    return df.set_index("date")[["open", "high", "low", "close"]].astype(float)
 
 
 def fetch_us(fetch_symbol: str) -> pd.DataFrame:
@@ -110,8 +110,8 @@ def fetch_us(fetch_symbol: str) -> pd.DataFrame:
 
     hist = yf.Ticker(fetch_symbol).history(period="max", auto_adjust=True)
     hist.index = pd.to_datetime(hist.index).tz_localize(None)
-    return hist[["Open", "Close"]].astype(float).rename(
-        columns={"Open": "open", "Close": "close"}
+    return hist[["Open", "High", "Low", "Close"]].astype(float).rename(
+        columns={"Open": "open", "High": "high", "Low": "low", "Close": "close"}
     )
 
 

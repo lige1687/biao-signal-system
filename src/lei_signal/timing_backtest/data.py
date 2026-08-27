@@ -46,7 +46,7 @@ def _spec(symbol: str, name: str, market: str, breadth: str, source: str,
 
 _US_NOTE = "SP500 成分宽度（当前成分回算，早年有幸存者偏差）"
 _A = SURVIVORSHIP_NOTE
-_A_ETF = "含分红复权，历史较短，" + SURVIVORSHIP_NOTE
+_A_ETF = "含分红复权（源不可用时退新浪不复权），历史较短，" + SURVIVORSHIP_NOTE
 
 INSTRUMENTS: dict[str, InstrumentSpec] = {
     "000300": _spec("000300", "沪深300", "cn", "cn_all", "ak_index", "sh000300", 5.0, _A),
@@ -92,14 +92,23 @@ def load_breadth(market: str, cache_dir: Path | None = None) -> pd.DataFrame:
 def load_index_bars(symbol: str, cache_dir: Path | None = None) -> pd.DataFrame:
     spec = INSTRUMENTS.get(symbol)
     file = spec.data_file if spec is not None else f"{symbol}.parquet"
-    df = pd.read_parquet((cache_dir or TIMING_CACHE_DIR) / file)[["open", "close"]]
+    df = pd.read_parquet((cache_dir or TIMING_CACHE_DIR) / file)
+    # 兼容只有 open/close 的旧缓存：高低价由开收盘合成（足够画 K 线示意）
+    for col in ("open", "close"):
+        if col not in df.columns:
+            raise ValueError(f"{file} 缺少 {col} 列")
+    if "high" not in df.columns:
+        df["high"] = df[["open", "close"]].max(axis=1)
+    if "low" not in df.columns:
+        df["low"] = df[["open", "close"]].min(axis=1)
+    df = df[["open", "high", "low", "close"]]
     return df[~df.index.duplicated(keep="last")].sort_index()
 
 
 def align_index_breadth(index_df: pd.DataFrame, breadth_df: pd.DataFrame) -> pd.DataFrame:
-    """按日期交集对齐行情与宽度（列序固定：open, close, b20, b50, b200）。"""
+    """按日期交集对齐行情与宽度（列序固定：open, high, low, close, b20, b50, b200）。"""
     merged = index_df.join(breadth_df, how="inner").sort_index()
-    return merged[["open", "close", "b20", "b50", "b200"]]
+    return merged[["open", "high", "low", "close", "b20", "b50", "b200"]]
 
 
 def data_unavailable_detail(symbol: str) -> str:

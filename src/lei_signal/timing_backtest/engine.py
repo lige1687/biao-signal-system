@@ -2,8 +2,9 @@
 
 规则：
 - desired[i] = target[i-1]：T 日收盘数据只影响 T+1 开盘的调仓（无未来函数）
-- 调仓按 T+1 开盘价全量再平衡到目标权重；费用 = |调仓市值| × fee_bps×1e-4
-- 现金零收益；daily.weight 记录「当日执行的决策权重」（非市值漂移权重）
+- 调仓按 T+1 开盘价再平衡到目标权重；费用 = |调仓市值| × fee_bps×1e-4
+- 现金按 cash_rate 年化逐日计息（默认 0）
+- daily.weight 记录「当日执行的决策权重」（非市值漂移权重）
 - benchmark 与策略同口径：首个可执行日开盘全仓买入（扣一次费用）后持有
 """
 from __future__ import annotations
@@ -20,7 +21,9 @@ class TimingResult:
     trades: list[dict]   # date, prev_weight, new_weight, price, fee, turnover
 
 
-def simulate(aligned: pd.DataFrame, target: pd.Series, fee_bps: float) -> TimingResult:
+def simulate(
+    aligned: pd.DataFrame, target: pd.Series, fee_bps: float, cash_rate: float = 0.0
+) -> TimingResult:
     open_ = aligned["open"].to_numpy(dtype=float)
     close = aligned["close"].to_numpy(dtype=float)
     tgt = target.reindex(aligned.index).to_numpy(dtype=float)
@@ -56,6 +59,8 @@ def simulate(aligned: pd.DataFrame, target: pd.Series, fee_bps: float) -> Timing
                 weight = desired
         equity[i] = cash + units * close[i]
         weights[i] = weight
+        if cash_rate != 0.0 and cash > 0:
+            cash *= 1.0 + cash_rate / 252.0  # 空仓部分按年化 cash_rate 逐日计息
 
     if n > 1:
         bh_units = (1.0 - fee_rate) / open_[1]
@@ -63,7 +68,10 @@ def simulate(aligned: pd.DataFrame, target: pd.Series, fee_bps: float) -> Timing
     else:
         benchmark = np.ones(n)
 
-    passthrough = [c for c in ("open", "close", "b20", "b50", "b200") if c in aligned.columns]
+    passthrough = [
+        c for c in ("open", "high", "low", "close", "b20", "b50", "b200")
+        if c in aligned.columns
+    ]
     daily = aligned[passthrough].copy()
     daily["equity"] = equity
     daily["benchmark"] = benchmark

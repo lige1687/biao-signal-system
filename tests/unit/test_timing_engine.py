@@ -72,3 +72,12 @@ def test_trades_record_details():
     assert res.trades[0]["prev_weight"] == 0.0
     assert res.trades[0]["fee"] > 0.0
     assert res.trades[0]["turnover"] == pytest.approx(1.0)
+
+
+def test_cash_rate_accrues_on_idle_cash():
+    target = pd.Series([0.0] * 5, index=_frame().index)  # 全程空仓
+    zero = simulate(_frame(), target, fee_bps=0.0, cash_rate=0.0)
+    five_pct = simulate(_frame(), target, fee_bps=0.0, cash_rate=0.05)
+    assert zero.daily["equity"].iloc[-1] == pytest.approx(1.0)
+    # 4 个计息日（第2日起）：(1+0.05/252)^4
+    assert five_pct.daily["equity"].iloc[-1] == pytest.approx((1 + 0.05 / 252) ** 4)

@@ -49,6 +49,8 @@ DEFAULTS: dict = {
     "batches": 5,
     "gate_mode": "off",
     "gate_cap": 0.0,
+    "min_weight": 0.0,
+    "cash_rate": 0.0,
     "fee_bps": None,
     "start": None,
     "end": None,
@@ -169,6 +171,7 @@ def compute_run(cfg: dict, cache_dir: Path | None = None) -> dict:
     ladder = LadderParams(
         indicator=merged["indicator"], n_bands=int(merged["n_bands"]),
         edge_mode=merged["edge_mode"], direction=merged["direction"],
+        min_weight=float(merged["min_weight"]),
     ) if merged["strategy"] == "ladder" else None
     reversal = ReversalParams(
         indicator=merged["indicator"], low_extreme=float(merged["low_extreme"]),
@@ -181,7 +184,9 @@ def compute_run(cfg: dict, cache_dir: Path | None = None) -> dict:
     target = target_full.loc[window.index]
 
     fee = float(merged["fee_bps"]) if merged["fee_bps"] is not None else spec.fee_default_bps
-    result = simulate(window, target, fee_bps=fee)
+    result = simulate(
+        window, target, fee_bps=fee, cash_rate=float(merged["cash_rate"])
+    )
     metrics = summarize_run(result.daily, result.trades)
 
     yearly = []
@@ -211,6 +216,9 @@ def compute_run(cfg: dict, cache_dir: Path | None = None) -> dict:
             "equity": [round(float(v), 6) for v in result.daily["equity"]],
             "benchmark": [round(float(v), 6) for v in result.daily["benchmark"]],
             "weight": [round(float(v), 4) for v in result.daily["weight"]],
+            "open": [round(float(v), 4) for v in result.daily["open"]],
+            "high": [round(float(v), 4) for v in result.daily["high"]],
+            "low": [round(float(v), 4) for v in result.daily["low"]],
             "close": [round(float(v), 4) for v in result.daily["close"]],
             "breadth": [
                 None if pd.isna(v) else round(float(v), 2)
@@ -231,6 +239,18 @@ def execute_run(
         json.dumps(run, ensure_ascii=False), encoding="utf-8"
     )
     return run
+
+
+def load_run(run_id: str, runs_dir: Path | None = None) -> dict | None:
+    """读取单次运行记录（含 daily 曲线），不存在返回 None。"""
+    out_dir = runs_dir or RUNS_DIR
+    path = out_dir / f"{run_id}.json"
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return None
 
 
 def list_runs(limit: int = 50, runs_dir: Path | None = None) -> list[dict]:

@@ -18,6 +18,7 @@ class LadderParams:
     n_bands: int = 5
     edge_mode: str = "fixed"  # fixed | preq
     direction: str = "contrarian"  # contrarian | momentum
+    min_weight: float = 0.0  # 底仓：档位仓位线性压缩到 [min_weight, 1]
 
 
 @dataclass(frozen=True)
@@ -54,6 +55,8 @@ def ladder_target(
         levels = np.linspace(1.0, 0.0, n)
     else:
         levels = np.linspace(0.0, 1.0, n)
+    floor = float(np.clip(params.min_weight, 0.0, 1.0))
+    levels = floor + (1.0 - floor) * levels  # 底仓压缩：空仓档位也保留 min_weight
     idx_pos = np.searchsorted(edges, b.to_numpy(dtype=float), side="right")
     return pd.Series(levels[idx_pos], index=b.index)
 

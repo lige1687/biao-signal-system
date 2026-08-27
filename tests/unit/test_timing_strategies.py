@@ -96,3 +96,9 @@ def test_build_target_combines_gate():
     capped = t[(close < ma) & ma.notna()]
     assert (capped <= 1e-12).all()
     assert (t >= 0).all() and (t <= 1).all()
+
+
+def test_ladder_min_weight_floor():
+    t = ladder_target(_s([10, 25, 45, 65, 90]), LadderParams(n_bands=5, min_weight=0.5))
+    # 档位 [1,0.75,0.5,0.25,0] 压缩到 [1,0.875,0.75,0.625,0.5]
+    assert list(np.round(t.to_numpy(), 4)) == [1.0, 0.875, 0.75, 0.625, 0.5]
