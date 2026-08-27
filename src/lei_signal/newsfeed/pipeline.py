@@ -27,6 +27,8 @@ logger = logging.getLogger(__name__)
 _SCORE_BATCH = 20
 #: 批次字符预算：与 _SCORE_BATCH 双限制，防长字幕撑爆上下文。
 _SCORE_CHAR_BUDGET = 30000
+#: 允许 category=blogger 的源；其余源 LLM 判 blogger 时回落预分类。
+_BLOGGER_SOURCES = frozenset({"bilibili", "rss", "wechat"})
 
 
 def _lookback_iso(days: int) -> str:
@@ -206,6 +208,14 @@ def _run_score_batch(store: NewsStore, batch: list[dict]) -> bool:
             batch[-1].get("id"),
         )
         return False
+    # 「博主观点」只留给博主源（B站/公众号/RSS）：快讯与 gnews 的英文股评
+    # 专栏常被 LLM 判成 blogger，回落到入库时的预分类，避免博主 tab 被稀释。
+    by_id = {r["id"]: r for r in batch}
+    for s in scores:
+        if s.get("category") == "blogger":
+            src = (by_id.get(s["id"]) or {}).get("source")
+            if src not in _BLOGGER_SOURCES:
+                s["category"] = (by_id.get(s["id"]) or {}).get("category") or "industry"
     store.apply_scores(scores)
     return True
 

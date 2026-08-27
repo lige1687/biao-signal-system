@@ -119,3 +119,49 @@ def test_pipeline_saves_digest(monkeypatch, tmp_path):
     store = NewsStore(db)
     assert len(store.digests()) == 1
     store.close()
+
+
+def test_blogger_category_restricted_to_blogger_sources(monkeypatch, tmp_path):
+    """gnews 的英文股评被 LLM 判成 blogger 时，回落预分类 industry。"""
+    monkeypatch.setattr(
+        pipeline, "collect_eastmoney", lambda since: ([], None))
+    monkeypatch.setattr(pipeline, "collect_sina", lambda since: ([], None))
+    monkeypatch.setattr(pipeline, "collect_rss",
+                        lambda q, *, is_gnews, since_iso: ([], None))
+    monkeypatch.setattr(pipeline, "fetch_new_up_items",
+                        lambda c, mid, name, since, lookback_iso=None, **kw: ([], None))
+    monkeypatch.setattr(pipeline, "BilibiliClient", lambda *a, **k: object())
+    monkeypatch.setattr(pipeline, "generate_digest", lambda rows, config=None: None)
+
+    def fake_score(rows, config=None):
+        out = []
+        for r in rows:
+            # 模拟 LLM：所有条目都判成 blogger
+            out.append({"id": r["id"], "category": "blogger", "importance": 5,
+                        "direction": "neutral", "symbols": [], "note": "n"})
+        return out
+
+    monkeypatch.setattr(pipeline, "score_items", fake_score)
+
+    from lei_signal.newsfeed.store import NewsStore
+
+    db = tmp_path / "cat.db"
+    store = NewsStore(db)
+    store.insert_items([
+        {"source": "gnews", "source_name": "Reuters", "url": "http://x/1",
+         "category": "industry", "title": "NVIDIA remains a buy", "summary": "opinion",
+         "content": None, "published_at": "2026-08-27T10:00:00+08:00",
+         "dedupe_key": "g1"},
+        {"source": "bilibili", "source_name": "UP", "url": "http://x/2",
+         "category": "blogger", "title": "例行更新", "summary": "s",
+         "content": None, "published_at": "2026-08-27T11:00:00+08:00",
+         "dedupe_key": "g2"},
+    ])
+    store.close()
+
+    run_pipeline(db, config=_CFG, no_llm=False)
+    store = NewsStore(db)
+    cats = {r["title"]: r["category"] for r in store.query_items(limit=10)[0]}
+    store.close()
+    assert cats["NVIDIA remains a buy"] == "industry"  # 回落
+    assert cats["例行更新"] == "blogger"  # 博主源保留
