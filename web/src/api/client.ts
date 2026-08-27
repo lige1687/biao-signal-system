@@ -50,6 +50,7 @@ import type {
   TimingOptions,
   TimingRunResult,
   TimingRunSummary,
+  TimingSignal,
 } from "../types";
 
 const BASE = "/api";
@@ -384,6 +385,7 @@ export const dailyBriefApi = {
 // ---- 宽度择时回测 ----
 export const timingBacktestApi = {
   options: () => request<TimingOptions>("/timing-backtest/options"),
+  signals: () => request<TimingSignal[]>("/timing-backtest/signals"),
   createRun: (body: Record<string, string | number | null>) =>
     request<TimingRunResult>("/timing-backtest/runs", {
       method: "POST",

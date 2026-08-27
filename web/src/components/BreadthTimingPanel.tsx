@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as echarts from "echarts";
 import { timingBacktestApi } from "../api/client";
-import type { TimingOptions, TimingRunResult, TimingRunSummary } from "../types";
+import type { TimingOptions, TimingRunResult, TimingRunSummary, TimingSignal } from "../types";
 
 /**
  * 宽度择时回测面板（B20/B50/B200 → 阶梯/极值反转/趋势闸门）。
@@ -98,6 +98,7 @@ export default function BreadthTimingPanel() {
   const [compareIds, setCompareIds] = useState<string[]>([]);
   const [compareRuns, setCompareRuns] = useState<TimingRunResult[]>([]);
   const [onlyMajorTrades, setOnlyMajorTrades] = useState(true);
+  const [signals, setSignals] = useState<TimingSignal[]>([]);
 
   const equityRef = useRef<HTMLDivElement | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
@@ -107,6 +108,7 @@ export default function BreadthTimingPanel() {
   const klineInst = useRef<echarts.ECharts | null>(null);
 
   useEffect(() => {
+    timingBacktestApi.signals().then(setSignals).catch(() => undefined);
     timingBacktestApi.options().then((o) => {
       setOptions(o);
       const first = o.instruments.find((i) => i.data_start) ?? o.instruments[0];
@@ -402,6 +404,47 @@ export default function BreadthTimingPanel() {
           A股标的配全A宽度，美股标的配 SP500 成分宽度。
         </p>
       </div>
+
+      <section className="bt-section">
+        <h3>今日执行信号（按手册配置，含 5% 最小调仓与 ETF 费率）</h3>
+        <div className="bt-trades-scroll">
+          <table className="bt-table">
+            <thead>
+              <tr>
+                <th>配置</th>
+                <th>数据截至</th>
+                <th>宽度现值</th>
+                <th>目标仓位</th>
+                <th>触发条件</th>
+                <th>全史年化</th>
+                <th>回撤</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(signals ?? []).map((sg) => (
+                <tr key={sg.key}>
+                  <td>{sg.label}{sg.error ? `（${sg.error}）` : ""}</td>
+                  <td>{sg.as_of ?? "—"}</td>
+                  <td>{sg.breadth_now != null ? sg.breadth_now.toFixed(1) : "—"}</td>
+                  <td style={{ fontWeight: 700 }}>
+                    {sg.weight_now != null ? `${Math.round(sg.weight_now * 100)}%` : "—"}
+                  </td>
+                  <td style={{ whiteSpace: "normal", maxWidth: 380 }}>{sg.trigger ?? "—"}</td>
+                  <td className={(sg.full_cagr ?? 0) > 0 ? "positive" : "negative"}>
+                    {sg.full_cagr != null ? pct(sg.full_cagr) : "—"}
+                  </td>
+                  <td className="negative">{sg.full_mdd != null ? pct(sg.full_mdd) : "—"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="bt-meta">
+          宽度数据截至最近回填日（A 股 {signals.find((s) => s.symbol === "159915")?.as_of ?? "—"}，
+         美股 {signals.find((s) => s.symbol === "SPY")?.as_of ?? "—"}）；重跑
+          scripts/backfill_timing_data.py 可刷新。历史最优不等于未来最优。
+        </p>
+      </section>
 
       {error && <div className="fund-errors">{error}</div>}
 

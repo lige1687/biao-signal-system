@@ -70,3 +70,13 @@ def test_run_detail_404_and_roundtrip(client):
     assert detail.status_code == 200
     assert detail.json()["daily"]["equity"]
     assert client.get("/api/timing-backtest/runs/nope").status_code == 404
+
+
+def test_signals_endpoint(client):
+    r = client.get("/api/timing-backtest/signals")
+    assert r.status_code == 200
+    body = r.json()
+    assert len(body) >= 5
+    ok = [s for s in body if "error" not in s]
+    for s in ok:
+        assert {"label", "as_of", "breadth_now", "weight_now", "trigger"} <= set(s.keys())

@@ -1552,3 +1552,21 @@ export interface TimingRunSummary {
   params: Record<string, string | number | null>;
   metrics: Record<string, number>;
 }
+
+export interface TimingSignal {
+  key: string;
+  label: string;
+  symbol?: string;
+  indicator?: string;
+  as_of?: string;
+  breadth_now?: number | null;
+  weight_now?: number;
+  trigger?: string;
+  levels?: number[];
+  full_cagr?: number;
+  full_bh_cagr?: number;
+  full_mdd?: number;
+  n_trades?: number;
+  recent_trades?: TimingTrade[];
+  error?: string;
+}

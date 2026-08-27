@@ -14,6 +14,7 @@ from pydantic import BaseModel
 from lei_signal.timing_backtest.service import (
     TimingDataUnavailable,
     build_options,
+    build_signals,
     execute_run,
     list_runs,
     load_run,
@@ -52,6 +53,11 @@ class TimingRunRequest(BaseModel):
     fee_bps: float | None = None      # None = 标的默认（A股 5bp / 美股 1bp）
     start: str | None = None          # YYYY-MM-DD
     end: str | None = None
+
+
+@router.get("/signals")
+def timing_signals() -> list[dict[str, Any]]:
+    return build_signals()
 
 
 @router.get("/options")

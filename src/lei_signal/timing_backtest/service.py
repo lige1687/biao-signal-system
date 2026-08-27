@@ -29,6 +29,7 @@ from lei_signal.timing_backtest.strategies import (
     LadderParams,
     ReversalParams,
     TrendGate,
+    _fixed_edges,
     build_target,
 )
 
@@ -311,3 +312,106 @@ def list_runs(limit: int = 50, runs_dir: Path | None = None) -> list[dict]:
         )
     headers.sort(key=lambda h: h.get("created_at") or "", reverse=True)
     return headers[:limit]
+
+
+# 执行手册配置（ETF 可交易口径，全部带最小调仓阈值与真实费率）
+EXEC_CONFIGS: list[dict] = [
+    {
+        "key": "cyb_etf_attack", "label": "创业板ETF · 进攻主仓",
+        "params": {"symbol": "159915", "strategy": "ladder", "indicator": "b200",
+                   "n_bands": 3, "direction": "contrarian", "low_edge": 30.0,
+                   "high_edge": 70.0, "min_trade": 0.05, "fee_bps": 1.0},
+    },
+    {
+        "key": "star50_etf_attack", "label": "科创50ETF · 进攻",
+        "params": {"symbol": "588000", "strategy": "ladder", "indicator": "b200",
+                   "n_bands": 3, "direction": "contrarian", "low_edge": 30.0,
+                   "high_edge": 70.0, "min_trade": 0.05, "fee_bps": 1.0},
+    },
+    {
+        "key": "csi1000_etf_attack", "label": "中证1000ETF · 进攻",
+        "params": {"symbol": "512100", "strategy": "ladder", "indicator": "b200",
+                   "n_bands": 3, "direction": "contrarian", "low_edge": 30.0,
+                   "high_edge": 70.0, "min_trade": 0.05, "fee_bps": 1.0},
+    },
+    {
+        "key": "hs300_etf_defense", "label": "沪深300ETF · 攻守兼备",
+        "params": {"symbol": "510300", "strategy": "reversal", "indicator": "b200",
+                   "low_extreme": 10.0, "high_extreme": 90.0, "confirm": 5.0,
+                   "batch_mode": "band", "batches": 8, "batch_ratio": 0.6,
+                   "sell_batches": 1, "gate_mode": "ma200", "min_trade": 0.05,
+                   "fee_bps": 1.0},
+    },
+    {
+        "key": "spy_defense", "label": "SPY · 防守（长持底仓+控回撤）",
+        "params": {"symbol": "SPY", "strategy": "ladder", "indicator": "b200",
+                   "n_bands": 3, "direction": "momentum", "low_edge": 30.0,
+                   "high_edge": 70.0, "gamma": 1.5, "vol_target": 0.10,
+                   "gate_mode": "ma200", "min_trade": 0.05, "fee_bps": 1.0},
+    },
+    {
+        "key": "qqq_defense", "label": "QQQ · 防守（长持底仓+控回撤）",
+        "params": {"symbol": "QQQ", "strategy": "ladder", "indicator": "b200",
+                   "n_bands": 5, "direction": "momentum", "low_edge": 20.0,
+                   "high_edge": 80.0, "gamma": 1.5, "vol_target": 0.15,
+                   "min_weight": 0.3, "gate_mode": "ma200", "min_trade": 0.05,
+                   "fee_bps": 1.0},
+    },
+]
+
+
+def build_signals(cache_dir: Path | None = None) -> list[dict]:
+    """执行手册当前信号：每配置的最新宽度值、目标仓位、下一档位与近期调仓。"""
+    out = []
+    for cfg in EXEC_CONFIGS:
+        params = cfg["params"]
+        try:
+            run = compute_run(params, cache_dir=cache_dir)
+        except Exception as e:  # noqa: BLE001 - 单配置失败不挡其余
+            out.append({"key": cfg["key"], "label": cfg["label"], "error": str(e)[:80]})
+            continue
+        daily = run["daily"]
+        m = run["metrics"]
+        breadth_now = daily["breadth"][-1]
+        weight_now = daily["weight"][-1]
+        if params["strategy"] == "ladder":
+            edges = _fixed_edges(
+                int(params["n_bands"]),
+                float(params.get("low_edge", 0.0)),
+                float(params.get("high_edge", 100.0)),
+            )
+            known = breadth_now is not None
+            next_down = next(
+                (e for e in sorted(edges) if known and breadth_now < e), None
+            )
+            next_up = next(
+                (e for e in sorted(edges, reverse=True) if known and breadth_now > e),
+                None,
+            )
+            levels = [round(float(e), 1) for e in edges]
+            dn = f"{next_down:.0f}" if next_down else "—"
+            up = f"{next_up:.0f}" if next_up else "—"
+            trigger = f"B 下穿 {dn} 加仓 / 上穿 {up} 减仓"
+        else:
+            levels = [float(params["low_extreme"]), float(params["high_extreme"])]
+            trigger = (
+                f"B ≤ {params['low_extreme']} 后回升 {params['confirm']} 点分批买；"
+                f"B ≥ {params['high_extreme']} 后回落清仓"
+            )
+        out.append({
+            "key": cfg["key"],
+            "label": cfg["label"],
+            "symbol": params["symbol"],
+            "indicator": params["indicator"],
+            "as_of": daily["date"][-1],
+            "breadth_now": breadth_now,
+            "weight_now": weight_now,
+            "trigger": trigger,
+            "levels": levels,
+            "recent_trades": run["trades"][-3:],
+            "full_cagr": m["strategy_cagr"],
+            "full_bh_cagr": m["benchmark_cagr"],
+            "full_mdd": m["strategy_mdd"],
+            "n_trades": int(m["n_trades"]),
+        })
+    return out
