@@ -200,4 +200,48 @@ PRESETS: list[dict] = [
             "sell_batches": 1, "gate_mode": "ma200",
         },
     },
+    {
+        "key": "cyb_b200_ladder3_final",
+        "label": "创业板指 · 终版（三轮王，全维度稳健）",
+        "description": (
+            "年化 13.4% vs 9.0%（超额+4.4%/年），回撤-40%；"
+            "邻域100%正、5年滚动83%正、159915实盘口径超额+4.6%"
+        ),
+        "source": "终审 2026-08-27 docs/timing-sweep/final_report_20260827.md",
+        "params": {
+            "symbol": "399006", "strategy": "ladder", "indicator": "b200",
+            "n_bands": 3, "direction": "contrarian",
+            "low_edge": 30.0, "high_edge": 70.0, "gamma": 1.0,
+        },
+    },
+    {
+        "key": "us_b200_defense_final",
+        "label": "标普500 · 防守终版（回撤-14%）",
+        "description": (
+            "顺势三档+边界30/70+波动率目标10%+MA200闸门："
+            "回撤 -57%→-14%，Calmar≈2.4×（邻域2.0×）；收益让4个点"
+        ),
+        "source": "终审 2026-08-27 docs/timing-sweep/final_report_20260827.md",
+        "params": {
+            "symbol": "^GSPC", "strategy": "ladder", "indicator": "b200",
+            "n_bands": 3, "direction": "momentum",
+            "low_edge": 30.0, "high_edge": 70.0, "gamma": 1.5,
+            "vol_target": 0.10, "gate_mode": "ma200",
+        },
+    },
+    {
+        "key": "nq_b200_defense_final",
+        "label": "纳指 · 防守终版（回撤-16%，Calmar 3.3×）",
+        "description": (
+            "顺势五档+边界20/80+波动率目标15%+底仓30%+闸门："
+            "回撤 -78%→-16%，QQQ口径-19%；只做防守用"
+        ),
+        "source": "终审 2026-08-27 docs/timing-sweep/final_report_20260827.md",
+        "params": {
+            "symbol": "^IXIC", "strategy": "ladder", "indicator": "b200",
+            "n_bands": 5, "direction": "momentum",
+            "low_edge": 20.0, "high_edge": 80.0, "gamma": 1.5,
+            "vol_target": 0.15, "min_weight": 0.3, "gate_mode": "ma200",
+        },
+    },
 ]

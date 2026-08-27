@@ -1,0 +1,18 @@
+[
+  ["创业板·进攻终版（三轮王 +4.38%）",
+   {"symbol": "399006", "strategy": "ladder", "indicator": "b200", "n_bands": 3,
+    "direction": "contrarian", "edge_mode": "fixed", "low_edge": 30.0, "high_edge": 70.0, "gamma": 1.0}],
+  ["沪深300·攻守兼备（二轮王 Calmar4.7x）",
+   {"symbol": "000300", "strategy": "reversal", "indicator": "b200",
+    "low_extreme": 10.0, "high_extreme": 90.0, "confirm": 5.0,
+    "batch_mode": "band", "batches": 8, "batch_ratio": 0.6, "sell_batches": 1,
+    "gate_mode": "ma200"}],
+  ["纳指·防守终版（三轮王 Calmar3.3x）",
+   {"symbol": "^IXIC", "strategy": "ladder", "indicator": "b200", "n_bands": 5,
+    "direction": "momentum", "low_edge": 20.0, "high_edge": 80.0, "gamma": 1.5,
+    "vol_target": 0.15, "min_weight": 0.3, "gate_mode": "ma200"}],
+  ["标普·防守终版（三轮 回撤-14%）",
+   {"symbol": "^GSPC", "strategy": "ladder", "indicator": "b200", "n_bands": 3,
+    "direction": "momentum", "low_edge": 30.0, "high_edge": 70.0, "gamma": 1.5,
+    "vol_target": 0.10, "gate_mode": "ma200"}]
+]
