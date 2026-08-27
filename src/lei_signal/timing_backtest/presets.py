@@ -244,4 +244,40 @@ PRESETS: list[dict] = [
             "vol_target": 0.15, "min_weight": 0.3, "gate_mode": "ma200",
         },
     },
+    {
+        "key": "cn_b20_fast_defense",
+        "label": "沪深300 · B20 快防守（回撤-18%）",
+        "description": (
+            "快指标+中等极值30/70+确认3+闸门：出逃比终版更快，"
+            "回撤 -72%→-18%，年化 6.7%（低于终版 9.2%）"
+        ),
+        "source": "四轮扫描 2026-08-27 docs/timing-sweep/report4_20260827.md",
+        "params": {
+            "symbol": "000300", "strategy": "reversal", "indicator": "b20",
+            "low_extreme": 30.0, "high_extreme": 70.0, "confirm": 3.0,
+            "batch_mode": "band", "batches": 3, "gate_mode": "ma200",
+        },
+    },
+    {
+        "key": "us_b20_fast_defense",
+        "label": "标普500 · B20 快防守（回撤-12.9%，全场最浅）",
+        "description": "中等极值40/60+确认3+闸门，年化 4.6%——最灵敏的美股防守档",
+        "source": "四轮扫描 2026-08-27 docs/timing-sweep/report4_20260827.md",
+        "params": {
+            "symbol": "^GSPC", "strategy": "reversal", "indicator": "b20",
+            "low_extreme": 40.0, "high_extreme": 60.0, "confirm": 3.0,
+            "batch_mode": "time", "batches": 5, "gate_mode": "ma200",
+        },
+    },
+    {
+        "key": "nq_b50_fast_defense",
+        "label": "纳指 · B50 快防守（回撤-13.9%）",
+        "description": "中等极值45/55+确认3+闸门，年化 6.9%——比终版浅 2 个点回撤",
+        "source": "四轮扫描 2026-08-27 docs/timing-sweep/report4_20260827.md",
+        "params": {
+            "symbol": "^IXIC", "strategy": "reversal", "indicator": "b50",
+            "low_extreme": 45.0, "high_extreme": 55.0, "confirm": 3.0,
+            "batch_mode": "time", "batches": 3, "gate_mode": "ma200",
+        },
+    },
 ]

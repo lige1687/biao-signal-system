@@ -25,6 +25,7 @@ from lei_signal.timing_backtest.sweep import (  # noqa: E402
     build_grid,
     build_grid_v2,
     build_grid_v3,
+    build_grid_v4,
     robust_top,
     run_sweep,
 )
@@ -37,14 +38,14 @@ def main() -> None:
     ap.add_argument("--symbols", default="000300,399006,^GSPC,^IXIC")
     ap.add_argument("--indicators", default="b200,b50")
     ap.add_argument("--out", default="docs/timing-sweep")
-    ap.add_argument("--grid", default="v1", choices=["v1", "v2", "v3"],
+    ap.add_argument("--grid", default="v1", choices=["v1", "v2", "v3", "v4"],
                     help="v2=资金管理维度（档位范围/陡度/批次比例/卖出独立/波动率目标）")
     args = ap.parse_args()
 
     symbols = [s.strip() for s in args.symbols.split(",") if s.strip()]
     indicators = [i.strip() for i in args.indicators.split(",") if i.strip()]
     grid = (
-        {"v2": build_grid_v2, "v3": build_grid_v3}.get(args.grid, build_grid)
+        {"v2": build_grid_v2, "v3": build_grid_v3, "v4": build_grid_v4}.get(args.grid, build_grid)
     )(symbols, indicators)
     print(f"网格：{len(grid)} 组（{symbols} × {indicators}）")
 
@@ -52,8 +53,8 @@ def main() -> None:
     out_dir = Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
     today = date.today().strftime("%Y%m%d")
-    prefix = {"v1": "sweep", "v2": "sweep2", "v3": "sweep3"}[args.grid]
-    report_name = {"v1": "report", "v2": "report2", "v3": "report3"}[args.grid]
+    prefix = {"v1": "sweep", "v2": "sweep2", "v3": "sweep3", "v4": "sweep4"}[args.grid]
+    report_name = {"v1": "report", "v2": "report2", "v3": "report3", "v4": "report4"}[args.grid]
     csv_path = out_dir / f"{prefix}_{today}.csv"
     df.to_csv(csv_path, index=False)
 
