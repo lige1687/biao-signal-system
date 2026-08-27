@@ -17,7 +17,6 @@ def _client(tmp_path, monkeypatch):
     app = create_app()
     app.state.newsfeed_service = NewsfeedService(db_path=str(tmp_path / "api.db"))
     # 预置两条数据
-    svc = app.state.newsfeed_service
     from lei_signal.newsfeed.store import NewsStore
 
     store = NewsStore(tmp_path / "api.db")

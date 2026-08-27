@@ -4,7 +4,6 @@ from __future__ import annotations
 from lei_signal.newsfeed import llm_score
 from lei_signal.plans.llm import ArkConfig
 
-
 _CFG = ArkConfig(api_key="test", base_url="http://localhost:1", model="m")
 
 

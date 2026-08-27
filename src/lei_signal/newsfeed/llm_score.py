@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import json
 import logging
+from dataclasses import replace
 from typing import Any
 
 from lei_signal.plans.llm import ArkConfig, load_ark_config, post_user_content
@@ -24,19 +25,23 @@ _VALID_DIRECTIONS = ("bullish", "bearish", "neutral")
 SCORE_SYSTEM_PROMPT = """你是财经资讯编辑助手。对给定资讯逐条输出结构化评分 JSON 数组。
 铁律：
 1. 只依据给定文本判断，不引入外部信息。
-2. importance 0-10：对 A股/港股/美股投资者的决策影响（系统性事件 8-10，行业重大 6-8，常规数据 3-5，噪音 0-2）。
+2. importance 0-10：对 A股/港股/美股投资者的决策影响
+   （系统性事件 8-10，行业重大 6-8，常规数据 3-5，噪音 0-2）。
 3. category 从 macro/risk/policy/industry/blogger 选最贴切的一个。
 4. direction：bullish/bearish/neutral，拿不准用 neutral。
 5. symbols：涉及股票代码或简称，最多 3 个（如 ["NVDA","中际旭创"]），无则 []。
 6. note：一句话中文点评（≤60 字），只概括事实与含义，不给操作建议。
-输出：严格 JSON 数组，每项 {"id":<原样返回>,"category":"..","importance":<int>,"direction":"..","symbols":[..],"note":".."}。
+输出：严格 JSON 数组，每项
+{"id":<原样返回>,"category":"..","importance":<int>,"direction":"..","symbols":[..],"note":".."}。
 除 JSON 外不输出任何文字。"""
 
 DIGEST_SYSTEM_PROMPT = """你是财经资讯编辑。把当日已评分资讯整合成简报 JSON。
 铁律：只归纳合并给定条目，不添加外部信息；同一事件多源合并为一条；不给操作建议。
-输出：{"sections":[{"category":"macro|risk|policy|industry|blogger","headline":"≤12字","bullets":["每条≤40字"]}],
+输出：{"sections":[{"category":"macro|risk|policy|industry|blogger",
+"headline":"≤12字","bullets":["每条≤40字"]}],
 "top_events":[{"title":"..","importance":<int>,"why":"≤30字"}]}
-sections 只含有内容的类别，按 macro,risk,policy,industry,blogger 排序；top_events 取 importance 最高的至多 5 条。
+sections 只含有内容的类别，按 macro,risk,policy,industry,blogger 排序；
+top_events 取 importance 最高的至多 5 条。
 除 JSON 外不输出任何文字。"""
 
 
@@ -167,12 +172,25 @@ def score_items(rows: list[dict], config: ArkConfig | None = None) -> list[dict]
 
 
 def generate_digest(rows: list[dict], config: ArkConfig | None = None) -> dict | None:
-    """当日已评分条目 → 结构化简报。失败返回 None（调用方跳过，不阻断）。"""
+    """当日已评分条目 → 结构化简报。失败返回 None（调用方跳过，不阻断）。
+
+    推理模型 thinking 可能吃满默认 max_tokens 导致 200 无 text：这里把
+    max_tokens 提到 ≥12000 给思考留余量（简报正文本身很小）。
+    """
     if not rows:
         return None
     resolved = config or load_ark_config()
     if resolved is None:
         return None
+    if resolved.max_tokens < 12000 or resolved.timeout < 180.0:
+        # 推理模型 thinking 长：百行级输入 + 长思考会撞 90s 默认超时。
+        resolved = replace(
+            resolved,
+            max_tokens=max(resolved.max_tokens, 12000),
+            timeout=max(resolved.timeout, 180.0),
+        )
+    # 输入按重要性截 Top 60（调用方已按 importance DESC 排序）。
+    rows = rows[:60]
     payload = [
         {
             "title": (r.get("title") or "")[:120],

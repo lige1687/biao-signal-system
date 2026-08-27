@@ -6,7 +6,7 @@ from __future__ import annotations
 
 import re
 import xml.etree.ElementTree as ET
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from email.utils import parsedate_to_datetime
 from urllib.parse import quote_plus
 
@@ -33,7 +33,7 @@ _TITLE_SOURCE = re.compile(r"^(.*) - ([^-]{2,40})$")
 
 def _to_iso(dt: datetime) -> str:
     if dt.tzinfo is None:
-        dt = dt.replace(tzinfo=timezone.utc)
+        dt = dt.replace(tzinfo=UTC)
     return dt.astimezone().isoformat(timespec="seconds")
 
 

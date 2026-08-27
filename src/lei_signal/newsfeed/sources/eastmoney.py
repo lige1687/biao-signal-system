@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import requests
 
@@ -24,9 +24,14 @@ _TITLE_BRACKET = re.compile(r"^【(.+?)】")
 
 
 def _ms_to_iso(ms: int) -> str:
-    return datetime.fromtimestamp(ms / 1000, tz=timezone.utc).astimezone().isoformat(
+    return datetime.fromtimestamp(ms / 1000, tz=UTC).astimezone().isoformat(
         timespec="seconds"
     )
+
+
+def _norm_real_sort(raw: int) -> int:
+    """东财游标混用微秒(16位)/毫秒(13位)，统一到毫秒（水位与时间解析共用）。"""
+    return raw // 1000 if raw > 10**14 else raw
 
 
 def collect_eastmoney(since_ms: int | None, limit: int = 50) -> tuple[list[NewsItem], str | None]:
@@ -53,7 +58,7 @@ def collect_eastmoney(since_ms: int | None, limit: int = 50) -> tuple[list[NewsI
     newest: int | None = None
     for row in data.get("fastNewsList") or []:
         try:
-            ms = int(row["realSort"])
+            ms = _norm_real_sort(int(row["realSort"]))
         except (KeyError, TypeError, ValueError):
             continue
         if since_ms is not None and ms <= since_ms:

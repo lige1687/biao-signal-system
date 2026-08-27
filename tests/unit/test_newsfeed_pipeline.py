@@ -4,6 +4,7 @@ from __future__ import annotations
 from lei_signal.newsfeed import pipeline
 from lei_signal.newsfeed.models import NewsItem
 from lei_signal.newsfeed.pipeline import run_pipeline
+from lei_signal.newsfeed.sources import NewsSourceError
 
 _CFG = {
     "bili_ups": [{"mid": 1, "name": "测试UP"}],
@@ -31,9 +32,10 @@ def _em_items() -> list[NewsItem]:
     ]
 
 
-def _patch_sources(monkeypatch, *, em=_em_items(), sina=None, gnews=None, bili=None):
+def _patch_sources(monkeypatch, *, em=None, sina=None, gnews=None, bili=None):
+    em_items = _em_items() if em is None else em
     monkeypatch.setattr(pipeline, "collect_eastmoney",
-                        lambda since: (list(em), "1000"))
+                        lambda since: (list(em_items), "1000"))
     monkeypatch.setattr(pipeline, "collect_sina",
                         lambda since: (list(sina or []), None))
     monkeypatch.setattr(pipeline, "collect_rss",
@@ -74,7 +76,7 @@ def test_pipeline_filters_flash_noise_and_scores(monkeypatch, tmp_path):
 
 def test_pipeline_partial_when_one_source_fails(monkeypatch, tmp_path):
     def boom(since):
-        raise pipeline.NewsSourceError("风控")
+        raise NewsSourceError("风控")
 
     monkeypatch.setattr(pipeline, "collect_eastmoney", boom)
     monkeypatch.setattr(pipeline, "collect_sina", lambda since: ([], None))

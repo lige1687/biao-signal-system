@@ -16,7 +16,6 @@ from lei_signal.newsfeed.config_loader import load_config
 from lei_signal.newsfeed.llm_score import generate_digest, score_items
 from lei_signal.newsfeed.models import NewsItem
 from lei_signal.newsfeed.normalize import preclassify
-from lei_signal.newsfeed.sources import NewsSourceError
 from lei_signal.newsfeed.sources.bilibili import BilibiliClient, fetch_new_up_items
 from lei_signal.newsfeed.sources.eastmoney import collect_eastmoney
 from lei_signal.newsfeed.sources.rss import collect_rss
@@ -190,6 +189,9 @@ def run_pipeline(
             digest_rows = [dict(r) for r in store.scored_rows_for_digest(today)]
             if digest_rows:
                 digest = generate_digest(digest_rows)
+                if digest is None:
+                    # 推理模型 thinking 偶发吃满 token：原样重试 1 次。
+                    digest = generate_digest(digest_rows)
                 if digest is not None:
                     store.save_digest(today, digest)
                     digest_ok = True

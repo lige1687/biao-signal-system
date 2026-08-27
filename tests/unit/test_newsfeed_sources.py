@@ -5,10 +5,8 @@ import json
 
 import pytest
 
-from lei_signal.newsfeed.sources import NewsSourceError
+from lei_signal.newsfeed.sources import NewsSourceError, rss, sina
 from lei_signal.newsfeed.sources import eastmoney as em
-from lei_signal.newsfeed.sources import rss
-from lei_signal.newsfeed.sources import sina
 
 
 class _FakeResp:
@@ -59,6 +57,25 @@ def test_eastmoney_parse_filter_and_watermark(monkeypatch: pytest.MonkeyPatch) -
     assert items[0].title == "山西焦煤：西曲矿恢复生产"
     assert items[0].source == "eastmoney"
     assert items[0].published_at.startswith("20")
+
+
+def test_eastmoney_real_sort_microseconds(monkeypatch: pytest.MonkeyPatch) -> None:
+    """2026-08-27 实测：realSort 混用 16 位微秒与 13 位毫秒，需归一化。"""
+    body = {
+        "code": "1",
+        "data": {
+            "sortEnd": "1787833057036916",
+            "fastNewsList": [
+                {"summary": "【微秒游标】内容", "realSort": "1787833057036916"},
+                {"summary": "【毫秒游标】旧内容", "realSort": "1787800000000"},
+            ],
+        },
+    }
+    monkeypatch.setattr(em.requests, "get", lambda *a, **k: _FakeResp(body))
+    items, wm = em.collect_eastmoney(since_ms=1787800000000)
+    assert wm == "1787833057036"
+    assert len(items) == 1
+    assert items[0].title == "微秒游标"
 
 
 def test_eastmoney_network_error(monkeypatch: pytest.MonkeyPatch) -> None:

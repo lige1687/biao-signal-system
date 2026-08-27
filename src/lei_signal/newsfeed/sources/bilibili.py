@@ -14,7 +14,7 @@ import hashlib
 import json
 import time
 import urllib.parse
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import requests
@@ -51,7 +51,7 @@ def extract_mixin_key(img_url: str, sub_url: str) -> str:
 
 
 def _ts_to_iso(seconds: int) -> str:
-    return datetime.fromtimestamp(seconds, tz=timezone.utc).astimezone().isoformat(
+    return datetime.fromtimestamp(seconds, tz=UTC).astimezone().isoformat(
         timespec="seconds"
     )
 

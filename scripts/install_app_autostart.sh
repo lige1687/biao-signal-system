@@ -47,12 +47,14 @@ install_agent com.lei.backend
 install_agent com.lei.frontend
 install_agent com.lei.ashare.ma
 install_agent com.lei.sector.trend
+install_agent com.lei.newsfeed
 
 echo
 echo "✅ 全部就绪。现在的效果："
 echo "  • 看板后端(8000) + 前端(5173) 已经自动启动，崩溃会自愈，重启电脑后也会自己起来。"
 echo "  • 全A宽度预计算 每个交易日 16:30 自动跑（无需手动）。"
 echo "  • 行业板块趋势预计算 每个交易日 16:45 自动跑（/sectors 页数据源，无需手动）。"
+echo "  • 资讯流管线 每天 20:30 自动跑（快讯/B站/RSS 抓取 + LLM 打分整合，/news 页数据源）。"
 echo "  浏览器打开 http://localhost:5173 即可，以后不用再手动启动了。"
 echo
 echo "  如需临时停用某一项："
@@ -60,3 +62,4 @@ echo "    launchctl bootout gui/$(id -u)/com.lei.frontend    # 停用前端"
 echo "    launchctl bootout gui/$(id -u)/com.lei.backend     # 停用后端"
 echo "    launchctl bootout gui/$(id -u)/com.lei.ashare.ma   # 停用宽度预计算"
 echo "    launchctl bootout gui/$(id -u)/com.lei.sector.trend # 停用板块趋势预计算"
+echo "    launchctl bootout gui/$(id -u)/com.lei.newsfeed    # 停用资讯流管线"
