@@ -27,6 +27,69 @@ REVERSAL_BATCH_MODES = ("time", "band")
 REVERSAL_BATCHES = (3, 5, 8)
 GATES = ("off", "ma200")
 
+# 第二轮（资金管理维度）：档位范围收缩 / 陡度 / 批次比例 / 卖出独立分批 / 波动率目标
+LADDER_EDGES = ((0.0, 100.0), (15.0, 85.0), (25.0, 75.0))
+LADDER_GAMMAS = (0.7, 1.0, 1.5)
+VOL_TARGETS = (0.0, 0.15)
+REVERSAL_EXTREMES_V2 = ((10.0, 90.0), (15.0, 85.0), (20.0, 80.0), (30.0, 70.0))
+REVERSAL_BATCH_RATIOS = (0.6, 1.0, 1.6)
+REVERSAL_BATCHES_V2 = (3, 8)
+SELL_OVERRIDES = (None, 1)
+
+
+def build_grid_v2(symbols: list[str], indicators: list[str]) -> list[dict]:
+    """资金管理维度网格：档位范围 × 陡度 × 批次比例 × 卖出独立 × 闸门 × 波动率目标。"""
+    grid: list[dict] = []
+    for symbol in symbols:
+        if symbol not in INSTRUMENTS:
+            raise ValueError(f"未知标的 {symbol}")
+        for indicator in indicators:
+            for n_bands in LADDER_N_BANDS:
+                for lo, hi in LADDER_EDGES:
+                    for gamma in LADDER_GAMMAS:
+                        for direction in LADDER_DIRECTIONS:
+                            for gate in GATES:
+                                for vol in VOL_TARGETS:
+                                    grid.append(
+                                        {
+                                            "symbol": symbol,
+                                            "strategy": "ladder",
+                                            "indicator": indicator,
+                                            "n_bands": n_bands,
+                                            "edge_mode": "fixed",
+                                            "direction": direction,
+                                            "low_edge": lo,
+                                            "high_edge": hi,
+                                            "gamma": gamma,
+                                            "vol_target": vol,
+                                            "gate_mode": gate,
+                                            "gate_cap": 0.0,
+                                        }
+                                    )
+            for low, high in REVERSAL_EXTREMES_V2:
+                for batch_mode in REVERSAL_BATCH_MODES:
+                    for batches in REVERSAL_BATCHES_V2:
+                        for ratio in REVERSAL_BATCH_RATIOS:
+                            for sell_n in SELL_OVERRIDES:
+                                for gate in GATES:
+                                    grid.append(
+                                        {
+                                            "symbol": symbol,
+                                            "strategy": "reversal",
+                                            "indicator": indicator,
+                                            "low_extreme": low,
+                                            "high_extreme": high,
+                                            "confirm": 5.0,
+                                            "batch_mode": batch_mode,
+                                            "batches": batches,
+                                            "batch_ratio": ratio,
+                                            "sell_batches": sell_n,
+                                            "gate_mode": gate,
+                                            "gate_cap": 0.0,
+                                        }
+                                    )
+    return grid
+
 
 def build_grid(symbols: list[str], indicators: list[str]) -> list[dict]:
     grid: list[dict] = []

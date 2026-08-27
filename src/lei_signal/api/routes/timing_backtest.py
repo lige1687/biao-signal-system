@@ -37,6 +37,14 @@ class TimingRunRequest(BaseModel):
     gate_mode: str = "off"            # off | ma200
     gate_cap: float = 0.0
     min_weight: float = 0.0           # 阶梯底仓（空仓档位也保留的最小仓位）
+    gamma: float = 1.0                # 阶梯陡度：>1 深极值才重仓，<1 浅极值就重仓
+    low_edge: float = 0.0             # 阶梯边界下沿（满仓侧）
+    high_edge: float = 100.0          # 阶梯边界上沿（空仓侧）
+    batch_ratio: float = 1.0          # 批次资金比：>1 首批重(金字塔)，<1 递增
+    band_step: float = 10.0           # band 分批的宽度步长
+    sell_batches: int | None = None   # 卖出批数（None=同买入）
+    sell_ratio: float | None = None   # 卖出批次比（None=同买入）
+    vol_target: float = 0.0           # 年化波动率目标（0=关闭，如 0.15）
     cash_rate: float = 0.0            # 空仓现金年化利率（如 0.02 = 2%）
     fee_bps: float | None = None      # None = 标的默认（A股 5bp / 美股 1bp）
     start: str | None = None          # YYYY-MM-DD

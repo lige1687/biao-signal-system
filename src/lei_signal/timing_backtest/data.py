@@ -60,6 +60,20 @@ INSTRUMENTS: dict[str, InstrumentSpec] = {
 }
 
 
+_PARQUET_CACHE: dict[tuple[str, float], pd.DataFrame] = {}
+
+
+def _read_parquet_cached(path: Path) -> pd.DataFrame:
+    """进程内只读缓存（按 mtime 失效）——参数扫描会重复读同一文件上万次。"""
+    mtime = path.stat().st_mtime
+    key = (str(path), mtime)
+    if key not in _PARQUET_CACHE:
+        _PARQUET_CACHE[key] = pd.read_parquet(path)
+        for stale in [k for k in _PARQUET_CACHE if k[0] == str(path) and k != key]:
+            del _PARQUET_CACHE[stale]
+    return _PARQUET_CACHE[key]
+
+
 def compute_breadth_from_close_matrix(
     close_wide: pd.DataFrame,
     windows: tuple[int, ...] = (20, 50, 200),
@@ -83,7 +97,7 @@ def compute_breadth_from_close_matrix(
 
 def load_breadth(market: str, cache_dir: Path | None = None) -> pd.DataFrame:
     path = (cache_dir or TIMING_CACHE_DIR) / BREADTH_FILES[market]
-    df = pd.read_parquet(path)[["b20", "b50", "b200"]]
+    df = _read_parquet_cached(path)[["b20", "b50", "b200"]]
     df = df[~df.index.duplicated(keep="last")].sort_index()
     df.columns = ["b20", "b50", "b200"]
     return df
@@ -92,7 +106,7 @@ def load_breadth(market: str, cache_dir: Path | None = None) -> pd.DataFrame:
 def load_index_bars(symbol: str, cache_dir: Path | None = None) -> pd.DataFrame:
     spec = INSTRUMENTS.get(symbol)
     file = spec.data_file if spec is not None else f"{symbol}.parquet"
-    df = pd.read_parquet((cache_dir or TIMING_CACHE_DIR) / file)
+    df = _read_parquet_cached((cache_dir or TIMING_CACHE_DIR) / file)
     # 兼容只有 open/close 的旧缓存：高低价由开收盘合成（足够画 K 线示意）
     for col in ("open", "close"):
         if col not in df.columns:

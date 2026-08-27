@@ -1,6 +1,8 @@
-"""宽度择时策略：阶梯 / 极值反转 / 趋势闸门 → 逐日目标仓位（0-1）。
+"""宽度择时策略：阶梯 / 极值反转 / 趋势闸门 / 波动率目标 → 逐日目标仓位（0-1）。
 
 纯函数，只用当日及以前的数据（T 日收盘值 → T+1 开盘由引擎执行）。
+资金管理维度：批次比例（金字塔/等分/递增）、买卖分批独立、档位步长、
+阶梯陡度 gamma、档位边界收缩（low/high edge）、底仓、波动率目标。
 """
 from __future__ import annotations
 
@@ -19,6 +21,9 @@ class LadderParams:
     edge_mode: str = "fixed"  # fixed | preq
     direction: str = "contrarian"  # contrarian | momentum
     min_weight: float = 0.0  # 底仓：档位仓位线性压缩到 [min_weight, 1]
+    gamma: float = 1.0  # 陡度：>1 仅深极值才重仓（深价值），<1 浅极值就重仓（早重仓）
+    low_edge: float = 0.0  # 档位边界下沿（满仓侧），如 15
+    high_edge: float = 100.0  # 档位边界上沿（空仓侧），如 85
 
 
 @dataclass(frozen=True)
@@ -29,6 +34,10 @@ class ReversalParams:
     confirm: float = 5.0
     batch_mode: str = "time"  # time | band
     batches: int = 5
+    batch_ratio: float = 1.0  # 相邻批次资金比：>1 首批重（金字塔），<1 递增（越跌买越多）
+    band_step: float = 10.0  # band 模式每批之间的宽度点数
+    sell_batches: int | None = None  # 卖出分批数（None=同买入）
+    sell_ratio: float | None = None  # 卖出批次资金比（None=同买入）
 
 
 @dataclass(frozen=True)
@@ -37,8 +46,9 @@ class TrendGate:
     cap: float = 0.0  # 指数 < MA200 时的仓位上限
 
 
-def _fixed_edges(n_bands: int) -> np.ndarray:
-    return 100.0 * np.linspace(0, 1, n_bands + 1)[1:-1]
+def _fixed_edges(n_bands: int, low_edge: float = 0.0, high_edge: float = 100.0) -> np.ndarray:
+    span = np.linspace(0.0, 1.0, n_bands + 1)[1:-1]
+    return float(low_edge) + (float(high_edge) - float(low_edge)) * span
 
 
 def ladder_target(
@@ -46,7 +56,7 @@ def ladder_target(
 ) -> pd.Series:
     """B 值阶梯映射目标仓位：contrarian 低宽度高仓位；档边界值归属上一档（side=right）。"""
     n = max(2, int(params.n_bands))
-    edges = _fixed_edges(n)
+    edges = _fixed_edges(n, params.low_edge, params.high_edge)
     if params.edge_mode == "preq":
         obs = None if warmup_b is None else warmup_b.dropna()
         if obs is not None and len(obs) >= _PREQ_MIN_OBS:
@@ -55,26 +65,39 @@ def ladder_target(
         levels = np.linspace(1.0, 0.0, n)
     else:
         levels = np.linspace(0.0, 1.0, n)
+    gamma = float(params.gamma) if params.gamma and params.gamma > 0 else 1.0
+    levels = levels ** gamma
     floor = float(np.clip(params.min_weight, 0.0, 1.0))
     levels = floor + (1.0 - floor) * levels  # 底仓压缩：空仓档位也保留 min_weight
     idx_pos = np.searchsorted(edges, b.to_numpy(dtype=float), side="right")
     return pd.Series(levels[idx_pos], index=b.index)
 
 
-def reversal_target(b: pd.Series, params: ReversalParams) -> pd.Series:
-    """极值反转分批：跌破下极值后回升确认 → 分批买入；升破上极值后回落确认 → 分批卖出。
+def _batch_weights(n: int, ratio: float) -> np.ndarray:
+    """N 个批次的资金权重（和为 1）：ratio>1 首批重（金字塔），<1 递增（越跌买越多）。"""
+    exps = np.arange(max(1, n) - 1, -1, -1, dtype=float)  # 首批指数最大
+    w = np.power(float(ratio), exps)
+    return w / w.sum()
 
-    - 触发当日即成交第一批；time 模式每日 ±1/N，band 模式每 ±10 宽度点 ±1/N
-    - armed 触发即消费；需重新触及极值才能再武装
-    - B 冲上上极值会取消进行中的买入程序（顶部不再加仓）；
+
+def reversal_target(b: pd.Series, params: ReversalParams) -> pd.Series:
+    """极值反转分批：跌破下极值后回升确认 → 按批次权重分批买入；上极值回落确认 → 分批卖出。
+
+    - time 模式每日一批、band 模式每 band_step 个宽度点一批；触发当日即第一批
+    - 买卖批次独立（sell_batches/sell_ratio，None=沿用买入侧）
+    - armed 触发即消费；B 冲上上极值取消进行中的买入程序（顶部不再加仓）；
       B 崩至下极值不取消卖出程序（崩跌中继续减仓），只武装新一轮买入
     """
     vals = b.to_numpy(dtype=float)
-    step = 1.0 / max(1, int(params.batches))
-    target = 0.0
+    buy_w = _batch_weights(int(params.batches), params.batch_ratio)
+    sell_n = int(params.sell_batches) if params.sell_batches else int(params.batches)
+    sell_r = params.sell_ratio if params.sell_ratio is not None else params.batch_ratio
+    sell_w = _batch_weights(sell_n, sell_r)
+    step = max(1.0, float(params.band_step))
+
+    target, prog, anchor = 0.0, 0, 0.0
     armed_low = armed_high = False
     direction = 0  # +1 买入程序 / -1 卖出程序 / 0 空闲
-    anchor = 0.0
     out = np.zeros(len(vals))
     for i, x in enumerate(vals):
         if np.isnan(x):
@@ -86,30 +109,36 @@ def reversal_target(b: pd.Series, params: ReversalParams) -> pd.Series:
             armed_high = True
             direction = 0 if direction == 1 else direction  # 顶部取消买入程序
         if armed_low and direction != 1 and x >= params.low_extreme + params.confirm:
-            direction, anchor, armed_low = 1, x, False
-            if params.batch_mode == "band":  # 触发当日即第一批（与 time 模式一致）
-                target = min(1.0, target + step)
+            direction, anchor, prog, armed_low = 1, x, 0, False
         elif armed_high and direction != -1 and x <= params.high_extreme - params.confirm:
-            direction, anchor, armed_high = -1, x, False
-            if params.batch_mode == "band":
-                target = max(0.0, target - step)
+            direction, anchor, prog, armed_high = -1, x, 0, False
         if direction == 1:
-            if params.batch_mode == "time":
-                target = min(1.0, target + step)
+            if prog == 0:  # 触发当日即第一批
+                target = min(1.0, target + buy_w[0])
+                prog, anchor = 1, x
+            elif params.batch_mode == "time":
+                target = min(1.0, target + buy_w[prog])
+                prog += 1
             else:
-                while x - anchor >= 10.0 and target < 1.0:
-                    target = min(1.0, target + step)
-                    anchor += 10.0
-            if target >= 1.0:
+                while (x - anchor) >= step and prog < len(buy_w):
+                    target = min(1.0, target + buy_w[prog])
+                    prog += 1
+                    anchor += step
+            if prog >= len(buy_w):
                 direction = 0
         elif direction == -1:
-            if params.batch_mode == "time":
-                target = max(0.0, target - step)
+            if prog == 0:
+                target = max(0.0, target - sell_w[0])
+                prog, anchor = 1, x
+            elif params.batch_mode == "time":
+                target = max(0.0, target - sell_w[prog])
+                prog += 1
             else:
-                while anchor - x >= 10.0 and target > 0.0:
-                    target = max(0.0, target - step)
-                    anchor -= 10.0
-            if target <= 0.0:
+                while (anchor - x) >= step and prog < len(sell_w):
+                    target = max(0.0, target - sell_w[prog])
+                    prog += 1
+                    anchor -= step
+            if prog >= len(sell_w):
                 direction = 0
         out[i] = target
     return pd.Series(out, index=b.index)
@@ -128,12 +157,26 @@ def apply_gate(target: pd.Series, cap: pd.Series) -> pd.Series:
     return pd.Series(np.minimum(target.to_numpy(), cap.to_numpy()), index=target.index)
 
 
+def apply_vol_target(
+    close: pd.Series, target: pd.Series, vol_target: float, window: int = 20
+) -> pd.Series:
+    """波动率目标：按截至当日的已实现年化波动把仓位缩到 vol_target（只减不加）。"""
+    if vol_target <= 0:
+        return target
+    ret = close.pct_change()
+    realized = ret.rolling(window, min_periods=window).std() * np.sqrt(252.0)
+    scale = (vol_target / realized).clip(upper=1.0)
+    out = target * scale.fillna(1.0)
+    return pd.Series(np.clip(out.to_numpy(), 0.0, 1.0), index=target.index)
+
+
 def build_target(
     aligned: pd.DataFrame,
     ladder: LadderParams | None,
     reversal: ReversalParams | None,
     gate: TrendGate,
     warmup: pd.DataFrame | None,
+    vol_target: float = 0.0,
 ) -> pd.Series:
     if ladder is not None:
         warmup_b = (
@@ -146,4 +189,5 @@ def build_target(
         target = reversal_target(aligned[reversal.indicator], reversal)
     else:
         raise ValueError("ladder 与 reversal 至少提供一个")
-    return apply_gate(target, trend_gate_cap(aligned["close"], gate))
+    target = apply_gate(target, trend_gate_cap(aligned["close"], gate))
+    return apply_vol_target(aligned["close"], target, vol_target)

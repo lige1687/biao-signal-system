@@ -50,6 +50,14 @@ DEFAULTS: dict = {
     "gate_mode": "off",
     "gate_cap": 0.0,
     "min_weight": 0.0,
+    "gamma": 1.0,
+    "low_edge": 0.0,
+    "high_edge": 100.0,
+    "batch_ratio": 1.0,
+    "band_step": 10.0,
+    "sell_batches": None,
+    "sell_ratio": None,
+    "vol_target": 0.0,
     "cash_rate": 0.0,
     "fee_bps": None,
     "start": None,
@@ -171,16 +179,28 @@ def compute_run(cfg: dict, cache_dir: Path | None = None) -> dict:
     ladder = LadderParams(
         indicator=merged["indicator"], n_bands=int(merged["n_bands"]),
         edge_mode=merged["edge_mode"], direction=merged["direction"],
-        min_weight=float(merged["min_weight"]),
+        min_weight=float(merged["min_weight"]), gamma=float(merged["gamma"]),
+        low_edge=float(merged["low_edge"]), high_edge=float(merged["high_edge"]),
     ) if merged["strategy"] == "ladder" else None
     reversal = ReversalParams(
         indicator=merged["indicator"], low_extreme=float(merged["low_extreme"]),
         high_extreme=float(merged["high_extreme"]), confirm=float(merged["confirm"]),
         batch_mode=merged["batch_mode"], batches=int(merged["batches"]),
+        batch_ratio=float(merged["batch_ratio"]),
+        band_step=float(merged["band_step"]),
+        sell_batches=(
+            int(merged["sell_batches"]) if merged["sell_batches"] is not None else None
+        ),
+        sell_ratio=(
+            float(merged["sell_ratio"]) if merged["sell_ratio"] is not None else None
+        ),
     ) if merged["strategy"] == "reversal" else None
     gate = TrendGate(mode=merged["gate_mode"], cap=float(merged["gate_cap"]))
     warmup = aligned.loc[:start_ts].iloc[:-1]
-    target_full = build_target(aligned, ladder, reversal, gate, warmup)
+    target_full = build_target(
+        aligned, ladder, reversal, gate, warmup,
+        vol_target=float(merged["vol_target"]),
+    )
     target = target_full.loc[window.index]
 
     fee = float(merged["fee_bps"]) if merged["fee_bps"] is not None else spec.fee_default_bps

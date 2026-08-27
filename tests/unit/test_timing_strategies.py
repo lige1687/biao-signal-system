@@ -102,3 +102,66 @@ def test_ladder_min_weight_floor():
     t = ladder_target(_s([10, 25, 45, 65, 90]), LadderParams(n_bands=5, min_weight=0.5))
     # 档位 [1,0.75,0.5,0.25,0] 压缩到 [1,0.875,0.75,0.625,0.5]
     assert list(np.round(t.to_numpy(), 4)) == [1.0, 0.875, 0.75, 0.625, 0.5]
+
+
+def test_batch_weights_pyramid_and_reverse():
+    from lei_signal.timing_backtest.strategies import _batch_weights
+    w = _batch_weights(3, 2.0)   # 金字塔：首批重
+    assert list(np.round(w, 4)) == [0.5714, 0.2857, 0.1429]
+    assert w.sum() == pytest.approx(1.0)
+    w2 = _batch_weights(3, 0.5)  # 递增：越跌买越多
+    assert w2[0] < w2[1] < w2[2] and w2.sum() == pytest.approx(1.0)
+
+
+def test_reversal_pyramid_ratio_time():
+    b = _s([5, 5, 25, 30, 40])
+    t = reversal_target(b, ReversalParams(batch_mode="time", batches=3, batch_ratio=2.0))
+    # w=[4/7,2/7,1/7]：触发日 0.571 → 0.857 → 1.0
+    assert t.iloc[2] == pytest.approx(4 / 7)
+    assert t.iloc[3] == pytest.approx(6 / 7)
+    assert t.iloc[4] == 1.0
+
+
+def test_reversal_sell_batches_independent():
+    b = _s([5, 5, 25, 35, 45, 90, 70, 60])
+    t = reversal_target(
+        b, ReversalParams(batch_mode="time", batches=3, batch_ratio=1.0, sell_batches=1)
+    )
+    assert t.iloc[4] == 1.0            # 3 批买满
+    assert t.iloc[5] == 1.0            # armed_high，未确认不动
+    assert t.iloc[6] == 0.0            # 卖出 1 批 → 直接清仓
+    assert t.iloc[7] == 0.0
+
+
+def test_reversal_band_step():
+    b = _s([5, 5, 25, 31, 37, 43])
+    t = reversal_target(b, ReversalParams(batch_mode="band", batches=2, band_step=5.0))
+    assert t.iloc[2] == pytest.approx(0.5)  # 触发日第一批
+    assert t.iloc[3] == pytest.approx(1.0)  # +6 ≥ 5 → 第二批
+    assert t.iloc[4] == 1.0 and t.iloc[5] == 1.0
+
+
+def test_ladder_edge_shrink_and_gamma():
+    t = ladder_target(
+        _s([10, 35, 50, 65, 90, 86]),
+        LadderParams(n_bands=5, low_edge=15.0, high_edge=85.0),
+    )
+    # 边界 29/43/57/71：B=10→1.0, 35→0.75, 50→0.5, 65→0.25, 90→0.0
+    assert list(np.round(t.to_numpy(), 4)) == [1.0, 0.75, 0.5, 0.25, 0.0, 0.0]
+    t2 = ladder_target(_s([10, 25, 45, 65, 90]), LadderParams(n_bands=5, gamma=2.0))
+    # contrarian 档位 [1,.75,.5,.25,0] 经 gamma=2 → [1,.5625,.25,.0625,0]
+    assert list(np.round(t2.to_numpy(), 4)) == [1.0, 0.5625, 0.25, 0.0625, 0.0]
+
+
+def test_vol_target_scales_down_high_vol_only():
+    idx = pd.bdate_range("2024-01-01", periods=60)
+    rng = np.random.default_rng(5)
+    calm = pd.Series(100 * np.exp(rng.normal(0, 0.002, 60).cumsum()), index=idx)
+    wild = pd.Series(100 * np.exp(rng.normal(0, 0.03, 60).cumsum()), index=idx)
+    target = pd.Series(1.0, index=idx)
+    from lei_signal.timing_backtest.strategies import apply_vol_target
+    t_calm = apply_vol_target(calm, target, vol_target=0.15)
+    t_wild = apply_vol_target(wild, target, vol_target=0.15)
+    assert t_calm.iloc[-1] == pytest.approx(1.0)          # 低波动不缩
+    assert 0.0 < t_wild.iloc[-1] < 1.0                    # 高波动缩仓
+    assert t_calm.iloc[10] == pytest.approx(1.0)          # 窗口未成型不缩
