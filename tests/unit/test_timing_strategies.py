@@ -165,3 +165,59 @@ def test_vol_target_scales_down_high_vol_only():
     assert t_calm.iloc[-1] == pytest.approx(1.0)          # 低波动不缩
     assert 0.0 < t_wild.iloc[-1] < 1.0                    # 高波动缩仓
     assert t_calm.iloc[10] == pytest.approx(1.0)          # 窗口未成型不缩
+
+
+def test_trigger_immediate_buys_on_entry_and_deeper():
+    # B: 30 → 18（进底区当天即买第一批）→ 12（再跌 band_step=6 → 第二批）
+    b = _s([30, 18, 12, 40])
+    t = reversal_target(
+        b, ReversalParams(low_extreme=20, high_extreme=80, confirm=5.0,
+                          batch_mode="band", batches=2, band_step=6.0,
+                          trigger_mode="immediate"))
+    assert t.iloc[0] == 0.0
+    assert t.iloc[1] == pytest.approx(0.5)   # 进区即第一批
+    assert t.iloc[2] == pytest.approx(1.0)   # 再跌 6 点 → 第二批
+    assert t.iloc[3] == 1.0
+
+
+def test_trigger_immediate_sell_on_rise():
+    b = _s([60, 82, 88, 50])
+    t = reversal_target(
+        b, ReversalParams(low_extreme=20, high_extreme=80, confirm=5.0,
+                          batch_mode="band", batches=2, band_step=5.0,
+                          trigger_mode="immediate", sell_batches=1))
+    assert t.iloc[0] == 0.0 and t.iloc[1] == 0.0  # 无持仓时顶部不产生卖出
+    # 先构造持仓：手动跑一段买入
+    b2 = _s([30, 18, 12, 82, 87, 50])
+    t2 = reversal_target(
+        b2, ReversalParams(low_extreme=20, high_extreme=80, confirm=5.0,
+                           batch_mode="band", batches=2, band_step=6.0,
+                           trigger_mode="immediate", sell_batches=1))
+    assert t2.iloc[2] == 1.0        # 买满
+    assert t2.iloc[3] == 0.0        # 进顶区当天即触发、sell_batches=1 当日清仓
+    assert t2.iloc[4] == 0.0
+
+
+def test_trigger_extreme_confirm_earlier_than_rebound():
+    # 反弹模式：砸到 5 也要回升到 25 才买；extreme_confirm：从 5 回升 5 点（10）即买
+    b = _s([30, 5, 11, 15])
+    t_rb = reversal_target(
+        b, ReversalParams(low_extreme=20, high_extreme=80, confirm=5.0,
+                          batch_mode="time", batches=2, trigger_mode="rebound"))
+    t_ec = reversal_target(
+        b, ReversalParams(low_extreme=20, high_extreme=80, confirm=5.0,
+                          batch_mode="time", batches=2, trigger_mode="extreme_confirm"))
+    assert t_rb.iloc[2] == 0.0      # 11 < 25 未触发
+    assert t_ec.iloc[2] == pytest.approx(0.5)  # 11 ≥ 5+5 触发第一批
+    assert t_rb.iloc[3] == 0.0
+
+
+def test_trigger_linger_waits_days_in_zone():
+    # 在底区连续停留 confirm=3 日后才触发
+    b = _s([30, 15, 15, 15, 15])
+    t = reversal_target(
+        b, ReversalParams(low_extreme=20, high_extreme=80, confirm=3.0,
+                          batch_mode="time", batches=2, trigger_mode="linger"))
+    assert t.iloc[1] == 0.0 and t.iloc[2] == 0.0  # 停留 1、2 日
+    assert t.iloc[3] == pytest.approx(0.5)        # 第 3 日触发
+    assert t.iloc[4] == pytest.approx(1.0)

@@ -38,6 +38,7 @@ class ReversalParams:
     band_step: float = 10.0  # band 模式每批之间的宽度点数
     sell_batches: int | None = None  # 卖出分批数（None=同买入）
     sell_ratio: float | None = None  # 卖出批次资金比（None=同买入）
+    trigger_mode: str = "rebound"  # rebound | immediate | extreme_confirm | linger
 
 
 @dataclass(frozen=True)
@@ -81,12 +82,16 @@ def _batch_weights(n: int, ratio: float) -> np.ndarray:
 
 
 def reversal_target(b: pd.Series, params: ReversalParams) -> pd.Series:
-    """极值反转分批：跌破下极值后回升确认 → 按批次权重分批买入；上极值回落确认 → 分批卖出。
+    """极值反转分批：入场/出场触发模式可选，买卖批次独立。
 
-    - time 模式每日一批、band 模式每 band_step 个宽度点一批；触发当日即第一批
-    - 买卖批次独立（sell_batches/sell_ratio，None=沿用买入侧）
-    - armed 触发即消费；B 冲上上极值取消进行中的买入程序（顶部不再加仓）；
-      B 崩至下极值不取消卖出程序（崩跌中继续减仓），只武装新一轮买入
+    trigger_mode:
+    - rebound         跌进底部区后回升 confirm 点才买入（默认，防接飞刀）
+    - immediate       一进底部区即开始买入；band 模式下每再跌 band_step 加一批（越跌越买）
+    - extreme_confirm 锚定区间内实际最低点，自最低点回升 confirm 点才买入（更早入场）
+    - linger          在底部区连续停留 confirm 日后开始买入（时间确认）
+    卖出侧完全对称（顶部区 immediate = 越涨越卖）。
+    其余规则：触发当日即第一批；armed 触发即消费；B 冲上上极值取消进行中的
+    买入程序；B 崩至下极值不取消卖出程序。
     """
     vals = b.to_numpy(dtype=float)
     buy_w = _batch_weights(int(params.batches), params.batch_ratio)
@@ -94,24 +99,59 @@ def reversal_target(b: pd.Series, params: ReversalParams) -> pd.Series:
     sell_r = params.sell_ratio if params.sell_ratio is not None else params.batch_ratio
     sell_w = _batch_weights(sell_n, sell_r)
     step = max(1.0, float(params.band_step))
+    tmode = params.trigger_mode
+    confirm = max(1.0, float(params.confirm))
 
     target, prog, anchor = 0.0, 0, 0.0
     armed_low = armed_high = False
+    low_days = high_days = 0
+    run_min = float("inf")
+    run_max = float("-inf")
     direction = 0  # +1 买入程序 / -1 卖出程序 / 0 空闲
     out = np.zeros(len(vals))
     for i, x in enumerate(vals):
         if np.isnan(x):
             out[i] = target
             continue
-        if x <= params.low_extreme:
-            armed_low = True
-        if x >= params.high_extreme:
-            armed_high = True
-            direction = 0 if direction == 1 else direction  # 顶部取消买入程序
-        if armed_low and direction != 1 and x >= params.low_extreme + params.confirm:
+        in_low = x <= params.low_extreme
+        in_high = x >= params.high_extreme
+        if in_low:
+            if not armed_low:
+                armed_low, low_days, run_min = True, 0, x
+            low_days += 1
+            run_min = min(run_min, x)
+        else:
+            low_days = 0
+        if in_high:
+            if not armed_high:
+                armed_high, high_days, run_max = True, 0, x
+            high_days += 1
+            run_max = max(run_max, x)
+        else:
+            high_days = 0
+
+        if tmode == "immediate":
+            buy_fire = armed_low and direction != 1 and in_low
+            sell_fire = armed_high and direction != -1 and in_high
+        elif tmode == "extreme_confirm":
+            buy_fire = armed_low and direction != 1 and x >= run_min + confirm
+            sell_fire = armed_high and direction != -1 and x <= run_max - confirm
+        elif tmode == "linger":
+            buy_fire = armed_low and direction != 1 and low_days >= int(confirm)
+            sell_fire = armed_high and direction != -1 and high_days >= int(confirm)
+        else:  # rebound
+            buy_fire = armed_low and direction != 1 and x >= params.low_extreme + confirm
+            sell_fire = armed_high and direction != -1 and x <= params.high_extreme - confirm
+
+        if in_high and direction == 1:
+            direction = 0  # 顶部取消买入程序
+        if buy_fire:
             direction, anchor, prog, armed_low = 1, x, 0, False
-        elif armed_high and direction != -1 and x <= params.high_extreme - params.confirm:
+            run_min = float("inf")
+        elif sell_fire:
             direction, anchor, prog, armed_high = -1, x, 0, False
+            run_max = float("-inf")
+
         if direction == 1:
             if prog == 0:  # 触发当日即第一批
                 target = min(1.0, target + buy_w[0])
@@ -119,7 +159,12 @@ def reversal_target(b: pd.Series, params: ReversalParams) -> pd.Series:
             elif params.batch_mode == "time":
                 target = min(1.0, target + buy_w[prog])
                 prog += 1
-            else:
+            elif tmode == "immediate":  # 越跌越买
+                while (anchor - x) >= step and prog < len(buy_w):
+                    target = min(1.0, target + buy_w[prog])
+                    prog += 1
+                    anchor -= step
+            else:  # 跟随回升加批
                 while (x - anchor) >= step and prog < len(buy_w):
                     target = min(1.0, target + buy_w[prog])
                     prog += 1
@@ -133,7 +178,12 @@ def reversal_target(b: pd.Series, params: ReversalParams) -> pd.Series:
             elif params.batch_mode == "time":
                 target = max(0.0, target - sell_w[prog])
                 prog += 1
-            else:
+            elif tmode == "immediate":  # 越涨越卖
+                while (x - anchor) >= step and prog < len(sell_w):
+                    target = max(0.0, target - sell_w[prog])
+                    prog += 1
+                    anchor += step
+            else:  # 跟随回落加批
                 while (anchor - x) >= step and prog < len(sell_w):
                     target = max(0.0, target - sell_w[prog])
                     prog += 1

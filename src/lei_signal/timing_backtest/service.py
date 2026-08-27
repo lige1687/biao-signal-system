@@ -57,6 +57,7 @@ DEFAULTS: dict = {
     "band_step": 10.0,
     "sell_batches": None,
     "sell_ratio": None,
+    "trigger_mode": "rebound",
     "vol_target": 0.0,
     "cash_rate": 0.0,
     "fee_bps": None,
@@ -196,6 +197,7 @@ def compute_run(cfg: dict, cache_dir: Path | None = None) -> dict:
         sell_ratio=(
             float(merged["sell_ratio"]) if merged["sell_ratio"] is not None else None
         ),
+        trigger_mode=merged["trigger_mode"],
     ) if merged["strategy"] == "reversal" else None
     gate = TrendGate(mode=merged["gate_mode"], cap=float(merged["gate_cap"]))
     warmup = aligned.loc[:start_ts].iloc[:-1]

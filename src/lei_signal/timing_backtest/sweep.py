@@ -58,6 +58,33 @@ V4_CONFIRMS = (3.0, 5.0, 8.0)
 V5_INDICATORS = ("ad", "ad20")
 V5_EDGES = ((20.0, 80.0), (30.0, 70.0), (40.0, 60.0))
 
+# 第六轮（触发机制专项）：四种入场/出场触发模式
+V6_TRIGGER_MODES = ("rebound", "immediate", "extreme_confirm", "linger")
+
+
+def build_grid_v6(symbols: list[str], indicators: list[str]) -> list[dict]:
+    """触发机制网格：4 种触发模式 × 极值/确认/分批/闸门。"""
+    grid: list[dict] = []
+    for symbol in symbols:
+        if symbol not in INSTRUMENTS:
+            raise ValueError(f"未知标的 {symbol}")
+        for indicator in indicators:
+            for tmode in V6_TRIGGER_MODES:
+                for low, high in ((15.0, 85.0), (20.0, 80.0), (30.0, 70.0)):
+                    for confirm in (3.0, 5.0):
+                        for batch_mode in ("time", "band"):
+                            for batches in (3, 5, 8):
+                                for gate in ("off", "ma200"):
+                                    grid.append({
+                                        "symbol": symbol, "strategy": "reversal",
+                                        "indicator": indicator, "trigger_mode": tmode,
+                                        "low_extreme": low, "high_extreme": high,
+                                        "confirm": confirm, "batch_mode": batch_mode,
+                                        "batches": batches, "gate_mode": gate,
+                                        "gate_cap": 0.0,
+                                    })
+    return grid
+
 
 def build_grid_v5(symbols: list[str], indicators: list[str]) -> list[dict]:
     """AD 宽度专项：涨跌家数占比 × 主力策略形状（对照 B 系列结论）。"""
