@@ -47,6 +47,9 @@ import type {
   SectorWatchlistResponse,
   DailyBriefResponse,
   SentimentIngest,
+  TimingOptions,
+  TimingRunResult,
+  TimingRunSummary,
 } from "../types";
 
 const BASE = "/api";
@@ -376,4 +379,16 @@ export const dailyBriefApi = {
   byDate: (date: string) =>
     request<DailyBriefResponse>(`/daily-brief/${encodeURIComponent(date)}`),
   dates: () => request<{ dates: string[] }>("/daily-brief/dates"),
+};
+
+// ---- 宽度择时回测 ----
+export const timingBacktestApi = {
+  options: () => request<TimingOptions>("/timing-backtest/options"),
+  createRun: (body: Record<string, string | number | null>) =>
+    request<TimingRunResult>("/timing-backtest/runs", {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  listRuns: () => request<TimingRunSummary[]>("/timing-backtest/runs"),
+  getRun: (runId: string) => request<TimingRunResult>(`/timing-backtest/runs/${runId}`),
 };

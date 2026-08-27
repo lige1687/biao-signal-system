@@ -1469,3 +1469,83 @@ export interface AgentMessageDTO {
   grounded: boolean;
   created_at: string;
 }
+
+// ---- 宽度择时回测（timing backtest）----
+
+export interface TimingInstrument {
+  symbol: string;
+  name: string;
+  market: "cn" | "us";
+  breadth: "cn_all" | "sp500";
+  breadth_label: string;
+  fee_default_bps: number;
+  note: string;
+  data_start: string | null;
+  data_end: string | null;
+  breadth_start: string | null;
+}
+
+export interface TimingPreset {
+  key: string;
+  label: string;
+  description: string;
+  source: string;
+  params: Record<string, string | number | null>;
+}
+
+export interface TimingOptions {
+  instruments: TimingInstrument[];
+  indicators: Array<{ key: string; label: string }>;
+  strategies: {
+    ladder: {
+      defaults: Record<string, string | number>;
+      n_bands_choices: number[];
+      edge_mode_choices: string[];
+      direction_choices: string[];
+    };
+    reversal: {
+      defaults: Record<string, string | number>;
+      batch_mode_choices: string[];
+    };
+  };
+  gate: { mode_choices: string[]; defaults: Record<string, string | number> };
+  presets: TimingPreset[];
+  disclaimers: string[];
+}
+
+export interface TimingTrade {
+  date: string;
+  prev_weight: number;
+  new_weight: number;
+  price: number;
+  fee: number;
+  turnover: number;
+}
+
+export interface TimingRunResult {
+  run_id: string;
+  created_at: string;
+  symbol: string;
+  name: string;
+  params: Record<string, string | number | null>;
+  metrics: Record<string, number>;
+  yearly: Array<{ year: number; strategy: number; benchmark: number }>;
+  trades: TimingTrade[];
+  daily: {
+    date: string[];
+    equity: number[];
+    benchmark: number[];
+    weight: number[];
+    close: number[];
+    breadth: Array<number | null>;
+  };
+}
+
+export interface TimingRunSummary {
+  run_id: string;
+  created_at: string;
+  symbol: string;
+  name: string;
+  params: Record<string, string | number | null>;
+  metrics: Record<string, number>;
+}
