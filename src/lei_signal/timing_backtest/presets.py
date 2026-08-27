@@ -76,4 +76,32 @@ PRESETS: list[dict] = [
             "n_bands": 5, "gate_mode": "ma200", "gate_cap": 0.0,
         },
     },
+    {
+        "key": "cyb_b200_ladder9_sweep",
+        "label": "创业板指 · B200 九档逆势（扫描胜出）",
+        "description": (
+            "2026-08-27 参数扫描 480 组中唯一稳健胜出家族的最优组："
+            "全窗超额 +1.2%/年且前后半窗均为正"
+        ),
+        "source": "参数扫描 2026-08-27 docs/timing-sweep/report_20260827.md",
+        "params": {
+            "symbol": "399006", "strategy": "ladder", "indicator": "b200",
+            "n_bands": 9, "edge_mode": "fixed", "direction": "contrarian",
+            "gate_mode": "off",
+        },
+    },
+    {
+        "key": "cn_b50_reversal_dd_compress",
+        "label": "沪深300 · B50 反转+闸门（回撤压缩型）",
+        "description": (
+            "扫描中回撤最小组：最大回撤约 -72% 压到 -11%，"
+            "代价为年化跑输约 3%（非稳健胜出，用途是防守而非增强）"
+        ),
+        "source": "参数扫描 2026-08-27 docs/timing-sweep/report_20260827.md",
+        "params": {
+            "symbol": "000300", "strategy": "reversal", "indicator": "b50",
+            "low_extreme": 30.0, "high_extreme": 70.0, "confirm": 5.0,
+            "batch_mode": "band", "batches": 8, "gate_mode": "ma200",
+        },
+    },
 ]
