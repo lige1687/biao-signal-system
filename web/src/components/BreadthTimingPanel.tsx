@@ -41,6 +41,8 @@ interface FormState {
   batches: number;
   gate_mode: string;
   gate_cap: number;
+  min_weight: number;
+  cash_rate: number;
   fee_bps: string;
   start: string;
   end: string;
@@ -60,6 +62,8 @@ const DEFAULT_FORM: FormState = {
   batches: 5,
   gate_mode: "off",
   gate_cap: 0,
+  min_weight: 0,
+  cash_rate: 0,
   fee_bps: "",
   start: "",
   end: "",
@@ -75,11 +79,14 @@ export default function BreadthTimingPanel() {
   const [runs, setRuns] = useState<TimingRunSummary[]>([]);
   const [compareIds, setCompareIds] = useState<string[]>([]);
   const [compareRuns, setCompareRuns] = useState<TimingRunResult[]>([]);
+  const [onlyMajorTrades, setOnlyMajorTrades] = useState(true);
 
   const equityRef = useRef<HTMLDivElement | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
+  const klineRef = useRef<HTMLDivElement | null>(null);
   const equityInst = useRef<echarts.ECharts | null>(null);
   const overlayInst = useRef<echarts.ECharts | null>(null);
+  const klineInst = useRef<echarts.ECharts | null>(null);
 
   useEffect(() => {
     timingBacktestApi.options().then((o) => {
@@ -121,6 +128,7 @@ export default function BreadthTimingPanel() {
         indicator: form.indicator,
         gate_mode: form.gate_mode,
         gate_cap: form.gate_cap,
+        cash_rate: form.cash_rate,
         fee_bps: form.fee_bps.trim() === "" ? null : Number(form.fee_bps),
         start: form.start.trim() === "" ? null : form.start.trim(),
         end: form.end.trim() === "" ? null : form.end.trim(),
@@ -129,6 +137,7 @@ export default function BreadthTimingPanel() {
         body.n_bands = form.n_bands;
         body.edge_mode = form.edge_mode;
         body.direction = form.direction;
+        body.min_weight = form.min_weight;
       } else {
         body.low_extreme = form.low_extreme;
         body.high_extreme = form.high_extreme;
@@ -157,15 +166,20 @@ export default function BreadthTimingPanel() {
     };
     const a = mk(equityRef);
     const b = mk(overlayRef);
+    const c = mk(klineRef);
     equityInst.current = a?.inst ?? null;
     overlayInst.current = b?.inst ?? null;
+    klineInst.current = c?.inst ?? null;
     return () => {
       a?.ro.disconnect();
       b?.ro.disconnect();
+      c?.ro.disconnect();
       a?.inst.dispose();
       b?.inst.dispose();
+      c?.inst.dispose();
       equityInst.current = null;
       overlayInst.current = null;
+      klineInst.current = null;
     };
   }, []);
 
@@ -264,6 +278,69 @@ export default function BreadthTimingPanel() {
       true,
     );
   }, [result]);
+
+  // 图 3：K 线 + 买卖点（T+1 开盘成交价，箭头大小 = 调仓幅度）
+  useEffect(() => {
+    if (!klineInst.current || !result) return;
+    const d = result.daily;
+    const dateIdx = new Map<string, number>(d.date.map((dt, i) => [dt, i]));
+    const trades = onlyMajorTrades
+      ? result.trades.filter((t) => t.turnover >= 0.2)
+      : result.trades;
+    const buys = trades.filter((t) => t.new_weight > t.prev_weight);
+    const sells = trades.filter((t) => t.new_weight <= t.prev_weight);
+    const mkScatter = (list: typeof trades, color: string, rotate: number) => ({
+      name: rotate === 0 ? "买入" : "卖出",
+      type: "scatter" as const,
+      data: list
+        .map((t) => ({ value: [dateIdx.get(t.date) ?? NaN, t.price, t], idx: dateIdx.get(t.date) ?? NaN }))
+        .filter((p) => Number.isFinite(p.idx)),
+      symbol: "triangle",
+      symbolRotate: rotate,
+      symbolSize: (val: unknown[]) => {
+        const t = val[2] as { turnover: number } | undefined;
+        return 7 + Math.min(1, t?.turnover ?? 0.5) * 11;
+      },
+      itemStyle: { color },
+      z: 5,
+    });
+    klineInst.current.setOption(
+      {
+        tooltip: {
+          trigger: "axis",
+          axisPointer: { type: "cross" },
+        },
+        legend: { top: 0, textStyle: { fontSize: 11 }, data: ["买入", "卖出"] },
+        grid: { left: 52, right: 16, top: 30, bottom: 56 },
+        xAxis: {
+          type: "category",
+          data: d.date,
+          axisLabel: { fontSize: 10, hideOverlap: true },
+        },
+        yAxis: { scale: true, axisLabel: { fontSize: 10 } },
+        dataZoom: [
+          { type: "inside", start: 0, end: 100 },
+          { type: "slider", height: 18, bottom: 8 },
+        ],
+        series: [
+          {
+            name: "K线",
+            type: "candlestick",
+            data: d.date.map((_, i) => [d.open[i], d.close[i], d.low[i], d.high[i]]),
+            itemStyle: {
+              color: "#e04b4b",
+              color0: "#2eaa5e",
+              borderColor: "#e04b4b",
+              borderColor0: "#2eaa5e",
+            },
+          },
+          mkScatter(buys, "#e04b4b", 0),
+          mkScatter(sells, "#2eaa5e", 180),
+        ],
+      },
+      true,
+    );
+  }, [result, onlyMajorTrades]);
 
   const toggleCompare = async (runId: string) => {
     const next = compareIds.includes(runId)
@@ -367,6 +444,17 @@ export default function BreadthTimingPanel() {
                   <option value="momentum">{DIRECTION_CN.momentum}</option>
                 </select>
               </label>
+              <label>
+                底仓(0-100%)
+                <input
+                  type="number"
+                  min={0}
+                  max={100}
+                  step={5}
+                  value={Math.round(form.min_weight * 100)}
+                  onChange={(e) => setForm({ ...form, min_weight: Math.max(0, Math.min(100, Number(e.target.value))) / 100 })}
+                />
+              </label>
             </>
           )}
           {form.strategy === "reversal" && (
@@ -424,6 +512,15 @@ export default function BreadthTimingPanel() {
               <option value="off">{GATE_CN.off}</option>
               <option value="ma200">{GATE_CN.ma200}</option>
             </select>
+          </label>
+          <label>
+            现金年化利率(%)
+            <input
+              type="text"
+              placeholder="0"
+              value={form.cash_rate === 0 ? "" : String(Math.round(form.cash_rate * 10000) / 100)}
+              onChange={(e) => setForm({ ...form, cash_rate: e.target.value.trim() === "" ? 0 : Number(e.target.value) / 100 })}
+            />
           </label>
           <label>
             单边费率(bp)
@@ -484,6 +581,21 @@ export default function BreadthTimingPanel() {
           <section className="bt-section">
             <h3>点位 · 宽度 · 仓位（仓位为背景色带，右侧 0-100）</h3>
             <div ref={overlayRef} style={{ height: 280 }} />
+          </section>
+
+          <section className="bt-section">
+            <div className="bt-trades-head">
+              <h3>K线 · 买卖点（箭头在 T+1 开盘成交价上，大小=调仓幅度；滚轮/滑块缩放）</h3>
+              <label style={{ display: "flex", gap: 6, alignItems: "center", fontSize: 12 }}>
+                <input
+                  type="checkbox"
+                  checked={onlyMajorTrades}
+                  onChange={(e) => setOnlyMajorTrades(e.target.checked)}
+                />
+                只看 ≥20% 的大额调仓
+              </label>
+            </div>
+            <div ref={klineRef} style={{ height: 380 }} />
           </section>
 
           <section className="bt-section">

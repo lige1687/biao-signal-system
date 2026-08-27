@@ -1536,6 +1536,9 @@ export interface TimingRunResult {
     equity: number[];
     benchmark: number[];
     weight: number[];
+    open: number[];
+    high: number[];
+    low: number[];
     close: number[];
     breadth: Array<number | null>;
   };
