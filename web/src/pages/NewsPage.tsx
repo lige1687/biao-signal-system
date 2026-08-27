@@ -87,7 +87,7 @@ function ItemCard({ item }: { item: NewsItem }) {
       <div className="nf-card-head">
         <Stars importance={item.importance} />
         {item.category && (
-          <span className={`stage-chip nf-cat-${item.category}`}>
+          <span className={`nf-cat nf-cat-${item.category}`}>
             {CATEGORY_CN[item.category] ?? item.category}
           </span>
         )}
@@ -149,13 +149,13 @@ function DigestHeadline() {
         <div className="nf-tops">
           {tops.map((e, i) => (
             <div key={i} className="nf-top">
-              <span className="nf-top-rank">#{i + 1}</span>
-              <div>
-                <div className="nf-top-title">
-                  {e.title}
-                  <span className="nf-top-why">{e.why}</span>
+              <span className="nf-top-rank">{i + 1}</span>
+              <div className="nf-top-body">
+                <div className="nf-top-line">
+                  <span className="nf-top-title">{e.title}</span>
+                  <Stars importance={e.importance} />
                 </div>
-                <Stars importance={e.importance} />
+                <div className="nf-top-why">{e.why}</div>
               </div>
             </div>
           ))}
@@ -167,7 +167,7 @@ function DigestHeadline() {
           {sections.map((s) => (
             <div key={s.category} className="nf-digest-section">
               <div className="nf-digest-title">
-                <span className={`stage-chip nf-cat-${s.category}`}>
+                <span className={`nf-cat nf-cat-${s.category}`}>
                   {CATEGORY_CN[s.category] ?? s.category}
                 </span>
                 {s.headline}
@@ -211,25 +211,33 @@ function BloggerBoard() {
       .sort((a, b) => latestOf(b[1]).localeCompare(latestOf(a[1])));
   }, [data]);
   if (!groups.length) return null;
+  const AVATAR_HUES = 5;
   return (
     <div className="nf-bloggers">
       <h2 className="nf-section-title">
         博主观点 <span className="fund-count">近2天 · {groups.length} 位</span>
       </h2>
       <div className="nf-blogger-grid">
-        {groups.map(([name, items]) => (
+        {groups.map(([name, items], gi) => (
           <div key={name} className="nf-blogger">
-            <div className="nf-blogger-name">{name}</div>
+            <div className="nf-blogger-head">
+              <span className={`nf-avatar hue-${gi % AVATAR_HUES}`}>
+                {name.slice(0, 1)}
+              </span>
+              <span className="nf-blogger-name">{name}</span>
+            </div>
             {items.map((it) => (
               <div key={it.id} className="nf-blogger-item">
-                <span className="nf-blogger-day">{dayLabel(it.published_at)}</span>
-                {it.url ? (
-                  <a href={it.url} target="_blank" rel="noreferrer" className="nf-blogger-title">
-                    {it.title}
-                  </a>
-                ) : (
-                  <span className="nf-blogger-title">{it.title}</span>
-                )}
+                <div className="nf-blogger-item-row">
+                  <span className="nf-blogger-day">{dayLabel(it.published_at)}</span>
+                  {it.url ? (
+                    <a href={it.url} target="_blank" rel="noreferrer" className="nf-blogger-title">
+                      {it.title}
+                    </a>
+                  ) : (
+                    <span className="nf-blogger-title">{it.title}</span>
+                  )}
+                </div>
                 {it.llm_note && <div className="nf-blogger-note">{it.llm_note}</div>}
               </div>
             ))}
