@@ -89,6 +89,16 @@ INSTRUMENTS: dict[str, InstrumentSpec] = {
     "399986": _spec("399986", "中证银行(指数)", "cn", "cn_all", "ak_index", "sh399986", 1.0, _IDX),
     "000015": _spec("000015", "上证红利(指数)", "cn", "cn_all", "ak_index", "sh000015", 1.0, _IDX),
     "980030": _spec("980030", "通信(指数)", "cn", "cn_all", "ak_index", "sz980030", 1.0, _IDX),
+    "512200": _spec("512200", "房地产ETF", "cn", "cn_all", "ak_etf", "512200", 5.0, _A_ETF),
+    "512980": _spec("512980", "传媒ETF", "cn", "cn_all", "ak_etf", "512980", 5.0, _A_ETF),
+    "512720": _spec("512720", "计算机ETF", "cn", "cn_all", "ak_etf", "512720", 5.0, _A_ETF),
+    "159819": _spec("159819", "人工智能ETF", "cn", "cn_all", "ak_etf", "159819", 5.0, _A_ETF),
+    "159992": _spec("159992", "创新药ETF", "cn", "cn_all", "ak_etf", "159992", 5.0, _A_ETF),
+    "515170": _spec("515170", "食品饮料ETF", "cn", "cn_all", "ak_etf", "515170", 5.0, _A_ETF),
+    "159766": _spec("159766", "旅游ETF", "cn", "cn_all", "ak_etf", "159766", 5.0, _A_ETF),
+    "515180": _spec("515180", "红利ETF沪", "cn", "cn_all", "ak_etf", "515180", 5.0, _A_ETF),
+    "518880": _spec("518880", "黄金ETF", "cn", "cn_all", "ak_etf", "518880", 5.0, _A_ETF),
+    "515210": _spec("515210", "钢铁ETF", "cn", "cn_all", "ak_etf", "515210", 5.0, _A_ETF),
 }
 
 

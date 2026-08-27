@@ -353,6 +353,19 @@ EXEC_CONFIGS: list[dict] = [
                    "high_edge": 60.0, "min_trade": 0.05, "fee_bps": 1.0},
     },
     {
+        "key": "re_attack", "label": "房地产ETF · 进攻（低宽区年化+86%）",
+        "params": {"symbol": "512200", "strategy": "ladder", "indicator": "b200",
+                   "n_bands": 3, "direction": "contrarian", "low_edge": 30.0,
+                   "high_edge": 70.0, "min_trade": 0.05, "fee_bps": 1.0},
+    },
+    {
+        "key": "travel_attack", "label": "旅游ETF · 进攻",
+        "params": {"symbol": "159766", "strategy": "ladder", "indicator": "b200",
+                   "n_bands": 3, "direction": "contrarian", "low_edge": 30.0,
+                   "high_edge": 70.0, "gate_mode": "ma200", "min_trade": 0.05,
+                   "fee_bps": 1.0},
+    },
+    {
         "key": "hs300_defense", "label": "沪深300 · 攻守兼备（执行用510300）",
         "params": {"symbol": "000300", "strategy": "reversal", "indicator": "b200",
                    "low_extreme": 10.0, "high_extreme": 90.0, "confirm": 5.0,
