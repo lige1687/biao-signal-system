@@ -36,6 +36,75 @@ REVERSAL_BATCH_RATIOS = (0.6, 1.0, 1.6)
 REVERSAL_BATCHES_V2 = (3, 8)
 SELL_OVERRIDES = (None, 1)
 
+# 第三轮（终审深化）：胜出邻域细化
+V3_EDGES = ((20.0, 80.0), (25.0, 75.0), (30.0, 70.0))
+V3_GAMMAS_CN = (0.5, 0.7, 1.0)
+V3_GAMMAS_US = (0.7, 1.0, 1.5)
+V3_VOLS_CN = (0.0, 0.15, 0.20)
+V3_VOLS_US = (0.10, 0.15, 0.20)
+V3_MIN_W_CN = (0.0, 0.2)
+V3_MIN_W_US = (0.0, 0.3)
+V3_REV_EXTREMES = ((15.0, 85.0), (20.0, 80.0))
+V3_REV_BATCHES = (5, 8)
+V3_REV_RATIOS = (0.5, 0.6, 0.8)
+V3_REV_SELL = (1, 2)
+V3_REV_CONFIRMS = (5.0, 10.0)
+
+
+def build_grid_v3(symbols: list[str], indicators: list[str]) -> list[dict]:
+    """终审网格：A股=逆势阶梯细化+反转防守族；美股=顺势+波动率目标族。"""
+    grid: list[dict] = []
+    cn = [x for x in symbols if INSTRUMENTS[x].market == "cn"]
+    us = [x for x in symbols if INSTRUMENTS[x].market == "us"]
+    for symbol in symbols:
+        if symbol not in INSTRUMENTS:
+            raise ValueError(f"未知标的 {symbol}")
+    for symbol in cn:
+        for indicator in ("b200",):
+            for n_bands in (3, 5):
+                for lo, hi in V3_EDGES:
+                    for gamma in V3_GAMMAS_CN:
+                        for vol in V3_VOLS_CN:
+                            for gate in ("off", "ma200"):
+                                for mw in V3_MIN_W_CN:
+                                    grid.append({
+                                        "symbol": symbol, "strategy": "ladder",
+                                        "indicator": indicator, "n_bands": n_bands,
+                                        "direction": "contrarian", "edge_mode": "fixed",
+                                        "low_edge": lo, "high_edge": hi, "gamma": gamma,
+                                        "vol_target": vol, "min_weight": mw,
+                                        "gate_mode": gate, "gate_cap": 0.0,
+                                    })
+        for indicator in ("b200", "b50"):
+            for low, high in V3_REV_EXTREMES:
+                for batches in V3_REV_BATCHES:
+                    for ratio in V3_REV_RATIOS:
+                        for sell in V3_REV_SELL:
+                            for confirm in V3_REV_CONFIRMS:
+                                grid.append({
+                                    "symbol": symbol, "strategy": "reversal",
+                                    "indicator": indicator, "low_extreme": low,
+                                    "high_extreme": high, "confirm": confirm,
+                                    "batch_mode": "band", "batches": batches,
+                                    "batch_ratio": ratio, "sell_batches": sell,
+                                    "gate_mode": "ma200", "gate_cap": 0.0,
+                                })
+    for symbol in us:
+        for n_bands in (3, 5):
+            for lo, hi in V3_EDGES:
+                for gamma in V3_GAMMAS_US:
+                    for vol in V3_VOLS_US:
+                        for mw in V3_MIN_W_US:
+                            grid.append({
+                                "symbol": symbol, "strategy": "ladder",
+                                "indicator": "b200", "n_bands": n_bands,
+                                "direction": "momentum", "edge_mode": "fixed",
+                                "low_edge": lo, "high_edge": hi, "gamma": gamma,
+                                "vol_target": vol, "min_weight": mw,
+                                "gate_mode": "ma200", "gate_cap": 0.0,
+                            })
+    return grid
+
 
 def build_grid_v2(symbols: list[str], indicators: list[str]) -> list[dict]:
     """资金管理维度网格：档位范围 × 陡度 × 批次比例 × 卖出独立 × 闸门 × 波动率目标。"""
