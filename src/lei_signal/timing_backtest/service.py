@@ -137,9 +137,8 @@ def build_options(cache_dir: Path | None = None) -> dict:
     }
 
 
-def execute_run(
-    cfg: dict, cache_dir: Path | None = None, runs_dir: Path | None = None
-) -> dict:
+def compute_run(cfg: dict, cache_dir: Path | None = None) -> dict:
+    """执行一次回测并返回结果 dict（不落盘；execute_run/sweep 共用）。"""
     merged = {**DEFAULTS, **{k: v for k, v in cfg.items() if v is not None}}
     symbol = merged["symbol"]
     spec = INSTRUMENTS.get(symbol)
@@ -198,7 +197,7 @@ def execute_run(
         )
 
     indicator = merged["indicator"]
-    run = {
+    return {
         "run_id": f"{datetime.now():%Y%m%d_%H%M%S}_{uuid.uuid4().hex[:6]}",
         "created_at": datetime.now().isoformat(timespec="seconds"),
         "symbol": symbol,
@@ -219,6 +218,13 @@ def execute_run(
             ],
         },
     }
+
+
+def execute_run(
+    cfg: dict, cache_dir: Path | None = None, runs_dir: Path | None = None
+) -> dict:
+    """执行一次回测并落盘运行记录（页面/API 用）。"""
+    run = compute_run(cfg, cache_dir=cache_dir)
     out_dir = runs_dir or RUNS_DIR
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / f"{run['run_id']}.json").write_text(
