@@ -95,12 +95,28 @@ def compute_breadth_from_close_matrix(
     return out
 
 
+def compute_ad_breadth(
+    close_wide: pd.DataFrame, smooth: int = 20, min_eligible: int = 30
+) -> pd.DataFrame:
+    """涨跌家数宽度（系统 AShareBreadth 的 up_pct 口径，回算全历史）。
+
+    ad  = 当日收涨个股占比（0-100）；ad20 = ad 的 20 日均值（平滑版，类似 A/D 摆动）。
+    """
+    prev = close_wide.shift(1)
+    valid = close_wide.notna() & prev.notna()
+    up = ((close_wide > prev) & valid).sum(axis=1)
+    n = valid.sum(axis=1)
+    ad = (up / n.where(n > 0) * 100).astype(float).where(n >= min_eligible)
+    out = pd.DataFrame({"ad": ad, "ad20": ad.rolling(smooth, min_periods=5).mean()})
+    return out
+
+
 def load_breadth(market: str, cache_dir: Path | None = None) -> pd.DataFrame:
     path = (cache_dir or TIMING_CACHE_DIR) / BREADTH_FILES[market]
-    df = _read_parquet_cached(path)[["b20", "b50", "b200"]]
-    df = df[~df.index.duplicated(keep="last")].sort_index()
-    df.columns = ["b20", "b50", "b200"]
-    return df
+    raw = _read_parquet_cached(path)
+    cols = [c for c in ("b20", "b50", "b200", "ad", "ad20") if c in raw.columns]
+    df = raw[cols]
+    return df[~df.index.duplicated(keep="last")].sort_index()
 
 
 def load_index_bars(symbol: str, cache_dir: Path | None = None) -> pd.DataFrame:
@@ -120,9 +136,10 @@ def load_index_bars(symbol: str, cache_dir: Path | None = None) -> pd.DataFrame:
 
 
 def align_index_breadth(index_df: pd.DataFrame, breadth_df: pd.DataFrame) -> pd.DataFrame:
-    """按日期交集对齐行情与宽度（列序固定：open, high, low, close, b20, b50, b200）。"""
+    """按日期交集对齐行情与宽度（行情列 + 存在的宽度列，列序固定）。"""
     merged = index_df.join(breadth_df, how="inner").sort_index()
-    return merged[["open", "high", "low", "close", "b20", "b50", "b200"]]
+    breadth_cols = [c for c in ("b20", "b50", "b200", "ad", "ad20") if c in merged.columns]
+    return merged[["open", "high", "low", "close"] + breadth_cols]
 
 
 def data_unavailable_detail(symbol: str) -> str:

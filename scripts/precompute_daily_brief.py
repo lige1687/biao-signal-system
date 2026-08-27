@@ -72,7 +72,10 @@ def _macro_line() -> dict:
         parts.append(f"VIX {vix['value']:.1f}")
     if spread is not None:
         parts.append(f"中美10Y利差 {spread:+.2f}pct")
-    return {"line_cn": " · ".join(parts), "raw": {k: rates.get(k) for k in ("margin", "vix")}}
+    return {
+        "line_cn": " · ".join(parts),
+        "raw": {k: rates.get(k) for k in ("margin", "vix")} | {"cn_us_spread_10y": spread},
+    }
 
 
 def _build_env() -> dict:

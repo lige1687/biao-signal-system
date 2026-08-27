@@ -51,6 +51,7 @@ requests.Session.request = _no_proxy_req
 from lei_signal.timing_backtest.data import (  # noqa: E402
     INSTRUMENTS,
     TIMING_CACHE_DIR,
+    compute_ad_breadth,
     compute_breadth_from_close_matrix,
 )
 
@@ -122,7 +123,7 @@ def rebuild_cn_breadth() -> None:
             f"缺少 {src}，请先运行 scripts/backfill_breadth_full.py --market cn"
         )
     wide = pd.read_parquet(src)
-    out = compute_breadth_from_close_matrix(wide)
+    out = compute_breadth_from_close_matrix(wide).join(compute_ad_breadth(wide))
     _save(out, TIMING_CACHE_DIR / "breadth_cn_all.parquet")
 
 
@@ -137,6 +138,10 @@ def rebuild_us_breadth() -> None:
     df = df[["breadth_20", "breadth_50", "breadth_200"]].astype(float).rename(
         columns={"breadth_20": "b20", "breadth_50": "b50", "breadth_200": "b200"}
     )
+    # 美股涨跌家数宽度：直接从 SP500 成分收盘价矩阵重算全历史
+    klines = CACHE_ROOT / "sp500_klines.parquet"
+    if klines.exists():
+        df = df.join(compute_ad_breadth(pd.read_parquet(klines)))
     _save(df, TIMING_CACHE_DIR / "breadth_sp500.parquet")
 
 

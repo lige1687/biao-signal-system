@@ -54,6 +54,42 @@ V3_REV_CONFIRMS = (5.0, 10.0)
 V4_MID_EXTREMES = ((30.0, 70.0), (35.0, 65.0), (40.0, 60.0), (45.0, 55.0))
 V4_CONFIRMS = (3.0, 5.0, 8.0)
 
+# 第五轮（涨跌家数宽度 AD）：系统 AShareBreadth 的 up_pct 口径
+V5_INDICATORS = ("ad", "ad20")
+V5_EDGES = ((20.0, 80.0), (30.0, 70.0), (40.0, 60.0))
+
+
+def build_grid_v5(symbols: list[str], indicators: list[str]) -> list[dict]:
+    """AD 宽度专项：涨跌家数占比 × 主力策略形状（对照 B 系列结论）。"""
+    grid: list[dict] = []
+    for symbol in symbols:
+        if symbol not in INSTRUMENTS:
+            raise ValueError(f"未知标的 {symbol}")
+        market = INSTRUMENTS[symbol].market
+        for indicator in V5_INDICATORS:
+            for n_bands in (3, 5):
+                for lo, hi in V5_EDGES:
+                    for gate in ("off", "ma200"):
+                        grid.append({
+                            "symbol": symbol, "strategy": "ladder",
+                            "indicator": indicator, "n_bands": n_bands,
+                            "direction": "contrarian" if market == "cn" else "momentum",
+                            "edge_mode": "fixed", "low_edge": lo, "high_edge": hi,
+                            "gate_mode": gate, "gate_cap": 0.0,
+                        })
+            for low, high in ((20.0, 80.0), (30.0, 70.0), (40.0, 60.0)):
+                for confirm in (3.0, 5.0):
+                    for batches in (3, 5):
+                        for gate in ("off", "ma200"):
+                            grid.append({
+                                "symbol": symbol, "strategy": "reversal",
+                                "indicator": indicator, "low_extreme": low,
+                                "high_extreme": high, "confirm": confirm,
+                                "batch_mode": "time", "batches": batches,
+                                "gate_mode": gate, "gate_cap": 0.0,
+                            })
+    return grid
+
 
 def build_grid_v4(symbols: list[str], indicators: list[str]) -> list[dict]:
     """阶段性顶底网格：中等极值反转（不等极端值，吃中线波段）× 全指标。"""

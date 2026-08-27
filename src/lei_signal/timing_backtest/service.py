@@ -119,6 +119,8 @@ def build_options(cache_dir: Path | None = None) -> dict:
             {"key": "b20", "label": "B20 · 站上20日线占比"},
             {"key": "b50", "label": "B50 · 站上50日线占比"},
             {"key": "b200", "label": "B200 · 站上200日线占比"},
+            {"key": "ad", "label": "AD · 当日上涨家数占比"},
+            {"key": "ad20", "label": "AD20 · 上涨占比20日均值"},
         ],
         "strategies": {
             "ladder": {

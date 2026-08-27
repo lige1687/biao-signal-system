@@ -91,3 +91,26 @@ def test_data_unavailable_detail_mentions_script():
     msg = data_unavailable_detail("000300")
     assert "DATA_UNAVAILABLE" in msg and "backfill_timing_data" in msg
     assert "NOPE" not in msg or data_unavailable_detail("NOPE") == "未知标的 NOPE"
+
+
+def test_compute_ad_breadth_and_align_passthrough():
+    from lei_signal.timing_backtest.data import compute_ad_breadth
+
+    idx = pd.bdate_range("2024-01-01", periods=30)
+    up_stock = pd.Series(np.linspace(10, 40, 30), index=idx)      # 天天涨
+    down_stock = pd.Series(np.linspace(40, 10, 30), index=idx)    # 天天跌
+    flat_stock = pd.Series(np.full(30, 100.0), index=idx)         # 平
+    wide = pd.DataFrame({"UP": up_stock, "DOWN": down_stock, "FLAT": flat_stock})
+    out = compute_ad_breadth(wide, smooth=5, min_eligible=2)
+    # UP 涨、DOWN 跌、FLAT 平：首日无前值不计分母 → ad 首日 NaN，之后 = 1/3
+    assert np.isnan(out["ad"].iloc[0])
+    assert out["ad"].iloc[-1] == pytest.approx(100.0 / 3.0)
+    assert out["ad20"].iloc[-1] == pytest.approx(100.0 / 3.0)  # 平滑不改变常值
+    # ad 列能通过 align 透传
+    bars = pd.DataFrame(
+        {"open": np.arange(30.0), "high": np.arange(30.0) + 1,
+         "low": np.arange(30.0) - 1, "close": np.arange(30.0) + 0.5},
+        index=idx,
+    )
+    merged = align_index_breadth(bars, out)
+    assert list(merged.columns) == ["open", "high", "low", "close", "ad", "ad20"]
