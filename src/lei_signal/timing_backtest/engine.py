@@ -69,7 +69,7 @@ def simulate(
         benchmark = np.ones(n)
 
     passthrough = [
-        c for c in ("open", "high", "low", "close", "b20", "b50", "b200")
+        c for c in ("open", "high", "low", "close", "b20", "b50", "b200", "ad", "ad20")
         if c in aligned.columns
     ]
     daily = aligned[passthrough].copy()
