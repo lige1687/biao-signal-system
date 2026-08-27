@@ -88,6 +88,7 @@ INSTRUMENTS: dict[str, InstrumentSpec] = {
     "399997": _spec("399997", "中证白酒(指数)", "cn", "cn_all", "ak_index", "sh399997", 1.0, _IDX),
     "399986": _spec("399986", "中证银行(指数)", "cn", "cn_all", "ak_index", "sh399986", 1.0, _IDX),
     "000015": _spec("000015", "上证红利(指数)", "cn", "cn_all", "ak_index", "sh000015", 1.0, _IDX),
+    "980030": _spec("980030", "通信(指数)", "cn", "cn_all", "ak_index", "sz980030", 1.0, _IDX),
 }
 
 
