@@ -3547,128 +3547,6 @@ a { color: var(--accent); text-decoration: none; }
   .sx-rail { position: static; max-height: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); align-items: start; }
 }
 
-/* ---- sync 克隆独有样式（factor/newsfeed 页）---- */
-   与 Streamlit 研究页同底色：LEI 三色（绿 #0b9b64 / 灰 #8c96a8 / 黑 #1f2937）
-   本就是为白底设计的，在深色底上「黑」几乎不可见，因此统一走白底。 */
-  /* LEI 信号颜色（语义色，与涨跌红绿无关）。与后端 _STATE_COLORS 一致。 */
-  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  background: #fff;
-  display: flex; align-items: baseline; justify-content: space-between; gap: 8px;
-  background: none; border: 1px solid transparent; border-radius: 6px;
-  padding: 7px 10px; cursor: pointer; text-align: left; font-size: 13px;
-.sector-item:hover { background: var(--bg-soft); border-color: var(--border); }
-.sector-item:disabled { opacity: 0.5; cursor: default; }
-.sector-item .si-symbol { font-size: 11px; color: var(--text-faint); font-family: ui-monospace, monospace; }
-  border-left: 3px solid #c58a19; border-radius: 6px; box-shadow: var(--shadow); overflow: hidden;
-.mk-bottom { color: #0b9b64; }
-.mk-top { color: #dc2626; }
-  background: #fffbeb;
-.mk-neck { color: #dc2626; }
-.ws-center .kline { height: 480px; }
-  flex-direction: column;
-  color: #697586;
-  border: 1px solid #d3dbe7; border-radius: 999px;
-  background: #fff; color: #697586;
-  color: var(--text); background: #fff; border-color: #d3dbe7;
-.metric { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 6px 9px; }
-  background: #fff9e9; color: #80611d; font-size: 10px;
-  border-left: 3px solid #c58a19; background: #fff9e9; color: #705016;
-  border-left: 3px solid #c58a19; background: #fff9e9; color: #705016;
-.data-status-chip.status-complete { color: var(--lei-green, #0b9b64); border-color: currentColor; }
-  background: rgba(0,0,0,0.06);
-.divergence-chip.positive { color: var(--lei-green, #0b9b64); }
-  padding: 0 3px; border-radius: 3px; background: rgba(0,0,0,0.05);
-.strip-chip .down { color: var(--lei-green, #0b9b64); }
-  background: rgba(0,0,0,0.06); color: var(--text-faint);
-.strip-delta.down { color: var(--lei-green, #0b9b64); }
-  border-color: #dc2626;
-  color: #dc2626;
-  color: #dc2626;
-  color: #fff; background: #dc2626;
-  color: #fff; background: #0b9b64;
-  border: 1px solid #dc2626;
-  border: 1px solid #0b9b64;
-  color: #dc2626; background: rgba(220, 38, 38, 0.1);
-  color: #0b9b64; background: rgba(11, 155, 100, 0.1);
-.rule-tag.tag-reversal-top { color: #fff; background: #dc2626; }
-.rule-tag.tag-reversal-bottom { color: #fff; background: #0b9b64; }
-.rule-tag.tag-bull { color: #dc2626; background: rgba(220,38,38,0.08); border: 1px solid rgba(220,38,38,0.3); }
-.rule-tag.tag-bear { color: #0b9b64; background: rgba(11,155,100,0.08); border: 1px solid rgba(11,155,100,0.3); }
-/* 工作台内点机会行 = 切中栏标的，button 版需重置默认外观 */
-button.opp-symbol {
-  background: none; border: 0; padding: 0; cursor: pointer; font: inherit;
-}
-.fund-section-title { font-size: 15px; margin: 18px 0 10px; }
-.etf-card .fund-table { margin-top: 8px; }
-.etf-card .fund-table td, .etf-card .fund-table th { padding: 4px 8px; font-size: 12px; }
-.collapsible-panel__body .opp-panel,
-.collapsible-panel__body .watch-panel {
-.collapsible-panel__body .opp-panel,
-.collapsible-panel__body .watch-panel {
-/* 机会雷达/我的提醒的标题是 <b> 不是 <h3>，同样由折叠头承载 */
-.collapsible-panel__body .opp-panel-head b:first-child,
-.collapsible-panel__body .watch-panel-head b:first-child {
-  display: none !important;
-}
-.macro-chip.danger { background: #dc262618; color: #b91c1c; }
-.overlay-card h4 .macro-chip { margin-left: 8px; vertical-align: middle; }
-.b-status.status-unavailable { background: #dc262618; color: #b91c1c; }
-.overlay-card h4 { margin: 0 0 6px; font-size: 13px; font-weight: 600; }
-/* ---- 行业板块趋势工作台 ---- */
-/* ---- 因子观测台 /factors ---- */
-.fp-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 10px;
-  margin-bottom: 18px;
-}
-.fp-card {
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--bg-card);
-  padding: 10px 12px;
-  box-shadow: var(--shadow);
-}
-.fp-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.fp-card-label { font-weight: 600; }
-.fp-card-formula { color: var(--text-faint); margin: 4px 0 2px; }
-.fp-card-verdict { font-weight: 600; margin: 2px 0; }
-.fp-card-evi {
-  margin: 4px 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-.fp-card-usage { color: var(--text-dim); border-top: 1px dashed var(--border); padding-top: 4px; }
-.fp-verdict {
-  font-size: 11px;
-  border-radius: 4px;
-  padding: 1px 7px;
-  white-space: nowrap;
-.fp-verdict.v-pass { color: var(--lei-green); border-color: var(--lei-green); }
-.fp-verdict.v-weak { color: var(--accent); border-color: var(--accent); }
-.fp-verdict.v-inverse { color: var(--warn); border-color: var(--warn); }
-.fp-verdict.v-fail { color: var(--error); border-color: var(--error); }
-.fp-card.fp-v-fail { background: #fdf6f6; }
-.fp-pctcell { display: inline-flex; align-items: center; gap: 6px; }
-.fp-pctbar {
-  display: inline-block;
-  width: 52px;
-  height: 6px;
-  border-radius: 3px;
-  background: var(--border);
-  overflow: hidden;
-  vertical-align: middle;
-.fp-pctbar > span { display: block; height: 100%; background: var(--accent); }
-.fp-pctbar.hot > span { background: var(--warn); }
-.fp-hotnum { color: var(--warn); font-weight: 600; }
-.fp-trend { display: inline-flex; gap: 6px; font-size: 11px; }
-.fp-chips { display: inline-flex; gap: 4px; flex-wrap: wrap; }
-.fp-chip-warn { color: var(--warn); border-color: var(--warn); }
-.fp-chip-caution { color: var(--error); border-color: var(--error); }
-.fp-chip-dim { color: var(--text-faint); }
-.fp-name { color: var(--text-faint); font-size: 11px; }
 /* ================= newsfeed 资讯流（浅色主题，对齐 :root tokens）================= */
 
 /* ---- 顶部今日要点 ---- */
@@ -3846,3 +3724,6 @@ button.opp-symbol {
   display: flex; justify-content: space-between; gap: 10px;
   font-size: 11px; margin-top: 6px; color: var(--text-faint);
 }
+.fp-vol { font-size: 11px; }
+.fp-vol.up { color: var(--lei-green); }
+.fp-vol.down { color: var(--text-faint); }
