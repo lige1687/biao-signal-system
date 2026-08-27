@@ -144,4 +144,60 @@ PRESETS: list[dict] = [
             "n_bands": 5, "direction": "momentum", "gate_mode": "ma200",
         },
     },
+    {
+        "key": "cyb_b200_ladder3_shrink_v2",
+        "label": "创业板指 · B200 三档+边界25/75（二轮胜出）",
+        "description": (
+            "资金管理扫描胜出：档位边界收缩到 25-75 + gamma0.7（浅极值早重仓），"
+            "全窗超额 +3.8%/年且前后半窗为正，回撤 -42%"
+        ),
+        "source": "二轮扫描 2026-08-27 docs/timing-sweep/report2_20260827.md",
+        "params": {
+            "symbol": "399006", "strategy": "ladder", "indicator": "b200",
+            "n_bands": 3, "direction": "contrarian",
+            "low_edge": 25.0, "high_edge": 75.0, "gamma": 0.7,
+        },
+    },
+    {
+        "key": "nq_b200_momentum_vol_v2",
+        "label": "纳指 · 顺势+范围收缩+波动率目标（二轮防守王）",
+        "description": (
+            "Calmar≈基准3.2倍：回撤 -78%→-17%，年化 8.7%；"
+            "波动率目标15%是美股防守的关键增强"
+        ),
+        "source": "二轮扫描 2026-08-27 docs/timing-sweep/report2_20260827.md",
+        "params": {
+            "symbol": "^IXIC", "strategy": "ladder", "indicator": "b200",
+            "n_bands": 5, "direction": "momentum",
+            "low_edge": 25.0, "high_edge": 75.0, "gamma": 0.7,
+            "vol_target": 0.15, "gate_mode": "ma200",
+        },
+    },
+    {
+        "key": "us_b200_momentum_vol_v2",
+        "label": "标普500 · 顺势+范围收缩+波动率目标（二轮防守）",
+        "description": "Calmar≈基准2.1倍：回撤 -57%→-19%，年化 6.9%",
+        "source": "二轮扫描 2026-08-27 docs/timing-sweep/report2_20260827.md",
+        "params": {
+            "symbol": "^GSPC", "strategy": "ladder", "indicator": "b200",
+            "n_bands": 3, "direction": "momentum",
+            "low_edge": 25.0, "high_edge": 75.0, "gamma": 1.5,
+            "vol_target": 0.15, "gate_mode": "ma200",
+        },
+    },
+    {
+        "key": "cn_b200_reversal_v2",
+        "label": "沪深300 · 反转+闸门 v2（递增分批+一次清仓）",
+        "description": (
+            "Calmar≈基准4.7倍、全窗年化 9.2%：买入按 0.6 比率递增分批"
+            "（越跌买越多）、卖出一次清仓"
+        ),
+        "source": "二轮扫描 2026-08-27 docs/timing-sweep/report2_20260827.md",
+        "params": {
+            "symbol": "000300", "strategy": "reversal", "indicator": "b200",
+            "low_extreme": 10.0, "high_extreme": 90.0, "confirm": 5.0,
+            "batch_mode": "band", "batches": 8, "batch_ratio": 0.6,
+            "sell_batches": 1, "gate_mode": "ma200",
+        },
+    },
 ]
