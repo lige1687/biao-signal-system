@@ -104,4 +104,44 @@ PRESETS: list[dict] = [
             "batch_mode": "band", "batches": 8, "gate_mode": "ma200",
         },
     },
+    {
+        "key": "cn_b200_reversal_gate_balanced",
+        "label": "沪深300 · B200 反转+闸门（攻守兼备）",
+        "description": (
+            "防守口径全场最优：Calmar≈基准4.5倍，回撤 -72%→-27%，"
+            "全窗年化 9.4% 还高于持有 5.6%；但 2014 后超额转负（近年只剩防守价值）"
+        ),
+        "source": "防守型重筛 2026-08-27（docs/timing-sweep/sweep_20260827.csv）",
+        "params": {
+            "symbol": "000300", "strategy": "reversal", "indicator": "b200",
+            "low_extreme": 10.0, "high_extreme": 90.0, "confirm": 5.0,
+            "batch_mode": "time", "batches": 8, "gate_mode": "ma200",
+        },
+    },
+    {
+        "key": "us_b200_ladder5_momentum_gate",
+        "label": "标普500 · B200 五档顺势+闸门（美股防守）",
+        "description": (
+            "美股防守口径最优：回撤 -57%→-20%（基准的35%），年化 6.1%，"
+            "Calmar≈基准1.8倍；三窗口 Calmar 均稳定占优"
+        ),
+        "source": "防守型重筛 2026-08-27（docs/timing-sweep/sweep_20260827.csv）",
+        "params": {
+            "symbol": "^GSPC", "strategy": "ladder", "indicator": "b200",
+            "n_bands": 5, "direction": "momentum", "gate_mode": "ma200",
+        },
+    },
+    {
+        "key": "nq_b200_ladder5_momentum_gate",
+        "label": "纳指 · B200 五档顺势+闸门（美股防守）",
+        "description": (
+            "同族参数：回撤 -78%→-26%（基准的33%），年化 8.3%，"
+            "Calmar≈基准2.0倍"
+        ),
+        "source": "防守型重筛 2026-08-27（docs/timing-sweep/sweep_20260827.csv）",
+        "params": {
+            "symbol": "^IXIC", "strategy": "ladder", "indicator": "b200",
+            "n_bands": 5, "direction": "momentum", "gate_mode": "ma200",
+        },
+    },
 ]
