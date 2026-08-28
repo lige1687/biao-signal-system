@@ -116,3 +116,13 @@ def test_alert_state_missing_cache(tmp_path):
 
     assert alert_state("cn", cache_dir=tmp_path) is None
     assert alert_state("unknown_market") is None
+
+
+def test_build_portfolio_tolerates_failures(fake_cache):
+    from lei_signal.timing_backtest.service import build_portfolio, build_signals
+
+    sigs = build_signals(cache_dir=fake_cache)
+    pf = build_portfolio(cache_dir=fake_cache, signals=sigs)
+    assert "balanced_weight" in pf and "defensive_weight" in pf
+    # 大多数配置在 tmp 缓存下数据缺失 → 组合应为空但不崩溃
+    assert pf["n_sleeves"] == 0 or pf["balanced_weight"] is not None

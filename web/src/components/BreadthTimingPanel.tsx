@@ -1,7 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as echarts from "echarts";
 import { timingBacktestApi } from "../api/client";
-import type { TimingOptions, TimingRunResult, TimingRunSummary, TimingSignal } from "../types";
+import type {
+  TimingOptions,
+  TimingPortfolio,
+  TimingRunResult,
+  TimingRunSummary,
+  TimingSignal,
+} from "../types";
 
 /**
  * 宽度择时回测面板（B20/B50/B200 → 阶梯/极值反转/趋势闸门）。
@@ -99,6 +105,7 @@ export default function BreadthTimingPanel() {
   const [compareRuns, setCompareRuns] = useState<TimingRunResult[]>([]);
   const [onlyMajorTrades, setOnlyMajorTrades] = useState(true);
   const [signals, setSignals] = useState<TimingSignal[]>([]);
+  const [portfolio, setPortfolio] = useState<TimingPortfolio | null>(null);
 
   const equityRef = useRef<HTMLDivElement | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
@@ -109,6 +116,7 @@ export default function BreadthTimingPanel() {
 
   useEffect(() => {
     timingBacktestApi.signals().then(setSignals).catch(() => undefined);
+    timingBacktestApi.portfolio().then(setPortfolio).catch(() => undefined);
     timingBacktestApi.options().then((o) => {
       setOptions(o);
       const first = o.instruments.find((i) => i.data_start) ?? o.instruments[0];
@@ -407,6 +415,16 @@ export default function BreadthTimingPanel() {
 
       <section className="bt-section">
         <h3>今日执行信号（按手册配置，含 5% 最小调仓与 ETF 费率）</h3>
+        {portfolio && portfolio.balanced_weight != null && (
+          <p className="bt-meta" style={{ marginBottom: 8 }}>
+            组合仓位（A股进攻 {portfolio.n_sleeves} sleeve，截至 {portfolio.as_of ?? "—"}）：
+            <strong> 平衡型 {Math.round(portfolio.balanced_weight * 100)}%</strong>
+            {" ｜ "}
+            <strong>防守型 {Math.round((portfolio.defensive_weight ?? 0) * 100)}%</strong>
+            {` ｜ 满仓 ${portfolio.full_count ?? 0} · 空仓 ${portfolio.empty_count ?? 0}`}
+            {portfolio.siphon_count ? ` · 虹吸灯亮 ${portfolio.siphon_count}（技术引擎接管）` : ""}
+          </p>
+        )}
         <div className="bt-trades-scroll">
           <table className="bt-table">
             <thead>

@@ -572,3 +572,48 @@ def build_signals(cache_dir: Path | None = None) -> list[dict]:
             "n_trades": int(m["n_trades"]),
         })
     return out
+
+
+def build_portfolio(cache_dir: Path | None = None, signals: list[dict] | None = None) -> dict:
+    """组合层现状（第 19/20/21 轮）：A 股进攻 sleeve 的三档组合仓位。
+
+    - balanced_weight：进攻配置目标仓位均值（平衡型 = 第19轮冠军组合现值）
+    - defensive_weight：目标仓位 × (收盘>MA20) 的均值（防守型 = 协同组合现值）
+    - 宽度闸 sleeve（食品饮料/钢铁/旅游等 gate=ma200）其目标仓位已含闸门效应。
+    """
+    sigs = signals if signals is not None else build_signals(cache_dir)
+    sleeves = []
+    for s in sigs:
+        if s.get("error") or not str(s.get("key", "")).endswith("_attack"):
+            continue
+        sym = s.get("symbol", "")
+        if not sym[:1].isdigit():
+            continue
+        ma20_on = None
+        try:
+            close = load_index_bars(sym, cache_dir=cache_dir or TIMING_CACHE_DIR)["close"]
+            ma20_on = bool(close.iloc[-1] > close.rolling(20).mean().iloc[-1])
+        except FileNotFoundError:
+            pass
+        w = float(s.get("weight_now") or 0.0)
+        sleeves.append({
+            "key": s.get("key"), "symbol": sym, "label": s.get("label"),
+            "weight": w, "ma20_on": ma20_on,
+            "defensive_weight": (w if ma20_on else 0.0) if ma20_on is not None else w,
+            "engine": s.get("engine"), "alert": s.get("alert"),
+        })
+    atk = [x for x in sleeves if x["ma20_on"] is not None]
+    return {
+        "as_of": max((str(x.get("as_of")) for x in sigs if x.get("as_of")), default=None),
+        "balanced_weight": (
+            round(sum(x["weight"] for x in atk) / len(atk), 4) if atk else None
+        ),
+        "defensive_weight": (
+            round(sum(x["defensive_weight"] for x in atk) / len(atk), 4) if atk else None
+        ),
+        "n_sleeves": len(atk),
+        "full_count": sum(1 for x in atk if x["weight"] >= 0.95),
+        "empty_count": sum(1 for x in atk if x["weight"] <= 0.05),
+        "siphon_count": sum(1 for x in sleeves if x.get("engine") and "虹吸" in x["engine"]),
+        "sleeves": sleeves,
+    }

@@ -14,6 +14,7 @@ from pydantic import BaseModel
 from lei_signal.timing_backtest.service import (
     TimingDataUnavailable,
     build_options,
+    build_portfolio,
     build_signals,
     execute_run,
     list_runs,
@@ -58,6 +59,11 @@ class TimingRunRequest(BaseModel):
 @router.get("/signals")
 def timing_signals() -> list[dict[str, Any]]:
     return build_signals()
+
+
+@router.get("/portfolio")
+def timing_portfolio() -> dict[str, Any]:
+    return build_portfolio()
 
 
 @router.get("/options")

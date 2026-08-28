@@ -17,7 +17,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from lei_signal.timing_backtest.service import build_signals
+from lei_signal.timing_backtest.service import build_portfolio, build_signals
 
 SCORECARD_DIR = Path.home() / ".lei_signal_lab/timing_scorecard"
 
@@ -35,9 +35,17 @@ def as_of_key(signals: list[dict]) -> str:
 def main() -> None:
     force = "--force" in sys.argv
     signals = build_signals()
+    portfolio = build_portfolio(signals=signals)
     entry = {
         "ts": datetime.now().isoformat(timespec="seconds"),
         "as_of": as_of_key(signals),
+        "portfolio": {
+            "balanced_weight": portfolio.get("balanced_weight"),
+            "defensive_weight": portfolio.get("defensive_weight"),
+            "full_count": portfolio.get("full_count"),
+            "empty_count": portfolio.get("empty_count"),
+            "siphon_count": portfolio.get("siphon_count"),
+        },
         "signals": [
             {
                 "key": s.get("key"),

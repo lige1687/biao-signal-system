@@ -1276,6 +1276,56 @@ export interface UsMacroResponse {
   errors: string[];
 }
 
+// ---- 指标×股指 相关性图谱 (/api/fundamentals/correlation-map, research_proxy) ----
+export interface CorrelationRow {
+  indicator: string;
+  index: string;
+  n: number;
+  crit: number; // 5% 显著线
+  r_same: number | null;
+  r_lead1: number | null;
+  r_lead3: number | null;
+  r_index_leads: number | null;
+  kind: 'leading' | 'lagging' | 'mirror' | 'null';
+  kind_cn: string;
+  explain_cn: string;
+}
+
+export interface CorrelationMapResponse {
+  ok: boolean;
+  as_of: string;
+  method_cn: string;
+  rows: CorrelationRow[];
+  note_cn: string;
+}
+
+// ---- 仓位带建议 (/api/fundamentals/position-band, research_proxy) ----
+export interface PositionBandEvidence {
+  zone: string;
+  fwd_months: number;
+  n: number;
+  median_pct: number;
+  win_rate_pct: number;
+  annualized_pct: number;
+}
+
+export interface PositionBandResponse {
+  ok: boolean;
+  error?: string;
+  as_of: string;
+  erp: number;
+  zone: number; // 0=减仓带 1=中性 2=中性偏多 3=加仓带
+  zone_cn: string;
+  zone_tone: string;
+  action_cn: string;
+  delta_pp: number;
+  percentile_5y: number | null;
+  sample: { from: string; to: string; days: number };
+  evidence: PositionBandEvidence[];
+  rules_cn: string[];
+  caveats_cn: string[];
+}
+
 // ---- 行业板块趋势工作台 (/api/sectors, research_proxy) ----
 // 判定均为研究代理，不冒充 LEI 原始规则，不出买卖点。
 export interface SectorTrendRow {
@@ -1726,6 +1776,28 @@ export interface TimingRunSummary {
   name: string;
   params: Record<string, string | number | null>;
   metrics: Record<string, number>;
+}
+
+export interface TimingPortfolioSleeve {
+  key?: string;
+  symbol?: string;
+  label?: string;
+  weight?: number;
+  ma20_on?: boolean | null;
+  defensive_weight?: number;
+  engine?: string | null;
+  alert?: string | null;
+}
+
+export interface TimingPortfolio {
+  as_of?: string | null;
+  balanced_weight?: number | null;
+  defensive_weight?: number | null;
+  n_sleeves?: number;
+  full_count?: number;
+  empty_count?: number;
+  siphon_count?: number;
+  sleeves?: TimingPortfolioSleeve[];
 }
 
 export interface TimingSignal {

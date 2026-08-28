@@ -24,6 +24,8 @@ import type {
   MacroHistoryResponse,
   RatesResponse,
   RatesHistoryResponse,
+  UsMacroResponse,
+  XlyXlpRatio,
   MarketContextFull,
   MarketDataStatus,
   Plan,
@@ -34,6 +36,9 @@ import type {
   PromoteWatchResponse,
   ResolveResult,
   ScanResponse,
+  SentimentHistoryResponse,
+  PositionBandResponse,
+  CorrelationMapResponse,
   SignalsToday,
   SubscribeWatchRequest,
   SymbolDetail,
@@ -47,10 +52,14 @@ import type {
   SectorWatchlistResponse,
   DailyBriefResponse,
   SentimentIngest,
+  BacktestOptions,
+  BacktestRunSummary,
+  BacktestRunResult,
   TimingOptions,
   TimingRunResult,
   TimingRunSummary,
   TimingSignal,
+  TimingPortfolio,
 } from "../types";
 
 const BASE = "/api";
@@ -98,6 +107,42 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   return (await resp.json()) as T;
 }
 
+
+export const backtestApi = {
+  options: () => request<BacktestOptions>("/backtest/options"),
+  createRun: (body: {
+    symbols?: string[] | null;
+    module?: string;
+    rr_min?: number | null;
+    entry_variant?: string | null;
+    exit_variant: string;
+    fee_label: string;
+    overrides?: Record<string, number>;
+    volume_confirm?: boolean;
+    volume_confirm_window?: number;
+    profile_filter?: string;
+  }) =>
+    request<{ run_id: string }>("/backtest/runs", {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  listRuns: () => request<BacktestRunSummary[]>("/backtest/runs"),
+  getRun: (runId: string) => request<BacktestRunResult | BacktestRunSummary>(`/backtest/runs/${runId}`),
+};
+
+export const timingBacktestApi = {
+  options: () => request<TimingOptions>("/timing-backtest/options"),
+  signals: () => request<TimingSignal[]>("/timing-backtest/signals"),
+  portfolio: () => request<TimingPortfolio>("/timing-backtest/portfolio"),
+  createRun: (body: Record<string, string | number | null>) =>
+    request<TimingRunResult>("/timing-backtest/runs", {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  listRuns: () => request<TimingRunSummary[]>("/timing-backtest/runs"),
+  getRun: (runId: string) => request<TimingRunResult>(`/timing-backtest/runs/${runId}`),
+};
+
 export const api = {
   dashboard: (group?: "index" | "watchlist", refresh = false) => {
     const params = new URLSearchParams();
@@ -141,6 +186,7 @@ export const api = {
       sectors: { code: string; name: string; symbol: string }[];
       indices: { code: string; name: string; symbol: string }[];
       us_etfs: { code: string; name: string; symbol: string }[];
+      concepts: { code: string; name: string; symbol: string }[];
     }>(`/sectors`),
   events: (
     symbol: string,
@@ -175,6 +221,10 @@ export const api = {
     ),
   marketContextGlobalStrip: () =>
     request<GlobalStripResponse>(`/market-context/global-strip`),
+  marketContextSentimentHistory: (series: "naaim" | "aaii", limit = 1040) =>
+    request<SentimentHistoryResponse>(
+      `/market-context/sentiment/history?series=${series}&limit=${limit}`,
+    ),
   updateSentiment: (payload: SentimentIngest) =>
     request<{ ok: boolean; path: string }>(`/market-context/sentiment`, {
       method: "POST",
@@ -350,10 +400,20 @@ export const fundamentalsApi = {
     request<{ commodities: CommodityRatios | null }>(
       `/fundamentals/commodities${refresh ? "?refresh=true" : ""}`,
     ),
+  positionBand: () => request<PositionBandResponse>("/fundamentals/position-band"),
+  correlationMap: () => request<CorrelationMapResponse>("/fundamentals/correlation-map"),
   etfStrength: (refresh = false) =>
-    request<{ etf: { items: EtfItem[]; regime: string; spy_1m: number } | null }>(
-      `/fundamentals/etf-strength${refresh ? "?refresh=true" : ""}`,
-    ),
+    request<{
+      etf: {
+        dates?: string[];
+        items: EtfItem[];
+        regime: string;
+        spy_1m: number;
+        xly_xlp?: XlyXlpRatio | null;
+      } | null;
+    }>(`/fundamentals/etf-strength${refresh ? "?refresh=true" : ""}`),
+  usMacro: (refresh = false) =>
+    request<UsMacroResponse>(`/fundamentals/us-macro${refresh ? "?refresh=true" : ""}`),
 };
 
 // ---- 行业板块趋势工作台 ----
@@ -380,17 +440,4 @@ export const dailyBriefApi = {
   byDate: (date: string) =>
     request<DailyBriefResponse>(`/daily-brief/${encodeURIComponent(date)}`),
   dates: () => request<{ dates: string[] }>("/daily-brief/dates"),
-};
-
-// ---- 宽度择时回测 ----
-export const timingBacktestApi = {
-  options: () => request<TimingOptions>("/timing-backtest/options"),
-  signals: () => request<TimingSignal[]>("/timing-backtest/signals"),
-  createRun: (body: Record<string, string | number | null>) =>
-    request<TimingRunResult>("/timing-backtest/runs", {
-      method: "POST",
-      body: JSON.stringify(body),
-    }),
-  listRuns: () => request<TimingRunSummary[]>("/timing-backtest/runs"),
-  getRun: (runId: string) => request<TimingRunResult>(`/timing-backtest/runs/${runId}`),
 };
