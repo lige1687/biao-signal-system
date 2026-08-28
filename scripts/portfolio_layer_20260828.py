@@ -75,12 +75,11 @@ def main() -> None:
         print("  " + " | ".join(line))
 
     # 组合层面仓位暴露（冠军组合）：平均目标仓位的时间分布
-    df_budget = pd.DataFrame(
-        {sym: build_target(
-            align_index_breadth(load_index_bars(sym), load_breadth("cn_all")),
-            LADDER, None, TrendGate(), align_index_breadth(load_index_bars(sym), load_breadth("cn_all")).iloc[:0],
-        ) for sym, _ in SLEEVES}
-    )
+    budgets = {}
+    for sym, _ in SLEEVES:
+        aligned = align_index_breadth(load_index_bars(sym), load_breadth("cn_all"))
+        budgets[sym] = build_target(aligned, LADDER, None, TrendGate(), aligned.iloc[:0])
+    df_budget = pd.DataFrame(budgets)
     avg_pos = df_budget.mean(axis=1)
     print(
         f"\n冠军组合平均仓位: 全史均值 {avg_pos.mean():.0%} | 当前 {avg_pos.iloc[-1]:.0%} | "

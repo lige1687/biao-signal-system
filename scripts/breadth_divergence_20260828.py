@@ -17,11 +17,13 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-import numpy as np
 import pandas as pd
 
 from lei_signal.timing_backtest.data import (
-    TIMING_CACHE_DIR, align_index_breadth, load_breadth, load_index_bars,
+    TIMING_CACHE_DIR,
+    align_index_breadth,
+    load_breadth,
+    load_index_bars,
 )
 from lei_signal.timing_backtest.engine import simulate
 from lei_signal.timing_backtest.metrics import summarize_run
@@ -93,7 +95,8 @@ def event_study(label: str, close: pd.Series, b200: pd.Series, px_eval: pd.Serie
         for gap in (5.0, 10.0, 15.0):
             a = activations(top_divergence(close, b200, w=w, gap=gap))
             r = fwd(px_eval, 120)[a]
-            row.append(f"gap{gap:.0f}: {int(a.sum())}个/{r.median():+.0%}" if len(r) else f"gap{gap:.0f}: 0")
+            cell = f"gap{gap:.0f}: {int(a.sum())}个/{r.median():+.0%}" if len(r) else "0"
+            row.append(cell)
         print(f"    w={w}  " + "  ".join(row))
 
 
@@ -116,7 +119,8 @@ def strategy_test(symbol: str, name: str) -> None:
         ("2021抱团顶", aligned.loc["2020-06-01":"2021-12-31"]),
         ("本轮科技牛", aligned.loc["2024-09-20":]),
     ]
-    print(f"\n=== 策略检验 {name}({symbol}) {aligned.index[0].date()}→{aligned.index[-1].date()} ===")
+    head = f"=== 策略检验 {name}({symbol}) {aligned.index[0].date()}→{aligned.index[-1].date()} ==="
+    print(f"\n{head}")
     for wtag, win in wins:
         parts = []
         for vtag, tgt in variants:
