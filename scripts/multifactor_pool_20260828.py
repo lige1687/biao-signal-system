@@ -47,7 +47,9 @@ def perf(eq: pd.Series) -> str:
     return f"年化{p['cagr']:+6.1%}/回撤{p['mdd']:5.0%}/Calmar{p['calmar']:5.2f}"
 
 
-def factors(closes: dict[str, pd.Series], master: pd.Index, ew: pd.Series) -> dict[str, pd.DataFrame]:
+def factors(
+    closes: dict[str, pd.Series], master: pd.Index, ew: pd.Series
+) -> dict[str, pd.DataFrame]:
     px = pd.DataFrame({s: c.reindex(master).ffill() for s, c in closes.items()})
     ewmom = ew / ew.shift(120)
     mom = px / px.shift(120) - 1
