@@ -57,6 +57,8 @@ _IDX = "跟踪指数口径（无折算），对应 ETF 为执行载体"
 INSTRUMENTS: dict[str, InstrumentSpec] = {
     "000300": _spec("000300", "沪深300", "cn", "cn_all", "ak_index", "sh000300", 5.0, _A),
     "399006": _spec("399006", "创业板指", "cn", "cn_all", "ak_index", "sz399006", 5.0, _A),
+    "SH000001": _spec("SH000001", "上证指数", "cn", "cn_all", "ak_index", "sh000001", 1.0, _IDX),
+    "SZ399001": _spec("SZ399001", "深证成指", "cn", "cn_all", "ak_index", "sz399001", 1.0, _IDX),
     "^GSPC": _spec("^GSPC", "标普500", "us", "sp500", "yf", "^GSPC", 1.0, _US_NOTE),
     "^IXIC": _spec("^IXIC", "纳斯达克", "us", "sp500", "yf", "^IXIC", 1.0, _US_NOTE),
     "SPY": _spec("SPY", "SPY(ETF)", "us", "sp500", "yf", "SPY", 1.0, "含分红复权，" + _US_NOTE),
