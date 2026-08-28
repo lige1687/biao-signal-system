@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as echarts from "echarts";
 import { timingBacktestApi } from "../api/client";
+import TimingResearchReport from "./TimingResearchReport";
 import type {
   TimingOptions,
   TimingPortfolio,
@@ -106,6 +107,7 @@ export default function BreadthTimingPanel() {
   const [onlyMajorTrades, setOnlyMajorTrades] = useState(true);
   const [signals, setSignals] = useState<TimingSignal[]>([]);
   const [portfolio, setPortfolio] = useState<TimingPortfolio | null>(null);
+  const [view, setView] = useState<"panel" | "report">("panel");
 
   const equityRef = useRef<HTMLDivElement | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
@@ -405,6 +407,23 @@ export default function BreadthTimingPanel() {
 
   return (
     <div>
+      <div className="bt-tabs" style={{ marginBottom: 12 }}>
+        <button
+          className={`bt-tab ${view === "panel" ? "active" : ""}`}
+          onClick={() => setView("panel")}
+        >
+          执行操作台
+        </button>
+        <button
+          className={`bt-tab ${view === "report" ? "active" : ""}`}
+          onClick={() => setView("report")}
+        >
+          研究报告 · 23 轮总决算
+        </button>
+      </div>
+      {view === "report" && <TimingResearchReport />}
+      {view === "panel" && (
+      <div>
       <div className="header">
         <h1>宽度择时回测 · B20/B50/B200</h1>
         <p className="bt-sub">
@@ -883,6 +902,8 @@ export default function BreadthTimingPanel() {
           ))}
         </ul>
       </section>
+    </div>
+      )}
     </div>
   );
 }
