@@ -76,7 +76,9 @@ def test_execute_run_respects_window(fake_cache, tmp_path):
 def test_list_runs(fake_cache, tmp_path):
     runs_dir = tmp_path / "runs"
     execute_run({"symbol": "000300"}, cache_dir=fake_cache, runs_dir=runs_dir)
-    execute_run({"symbol": "000300", "strategy": "reversal"}, cache_dir=fake_cache, runs_dir=runs_dir)
+    execute_run(
+        {"symbol": "000300", "strategy": "reversal"}, cache_dir=fake_cache, runs_dir=runs_dir
+    )
     runs = list_runs(runs_dir=runs_dir)
     assert len(runs) == 2
     assert {"run_id", "created_at", "params", "metrics"} <= set(runs[0].keys())
@@ -91,3 +93,26 @@ def test_build_options(fake_cache):
     assert inst["^GSPC"]["data_start"] is None  # 无数据时显式 None
     assert len(opts["presets"]) >= 8
     assert opts["strategies"]["ladder"]["defaults"]["n_bands"] == 5
+
+
+def test_alert_state_thresholds(fake_cache):
+    from lei_signal.timing_backtest.service import alert_state
+
+    path = fake_cache / "breadth_cn_all.parquet"
+    b = pd.read_parquet(path)
+    b.loc[b.index[-1], ["b50", "b200"]] = 50.0
+    b.to_parquet(path)
+    assert alert_state("cn", cache_dir=fake_cache) is None
+    b.loc[b.index[-1], ["b50", "b200"]] = 18.0
+    b.to_parquet(path)
+    assert alert_state("cn", cache_dir=fake_cache) == "双≤20 定心丸"
+    b.loc[b.index[-1], ["b50", "b200"]] = 88.0
+    b.to_parquet(path)
+    assert alert_state("cn", cache_dir=fake_cache) == "双≥85 热度警戒"
+
+
+def test_alert_state_missing_cache(tmp_path):
+    from lei_signal.timing_backtest.service import alert_state
+
+    assert alert_state("cn", cache_dir=tmp_path) is None
+    assert alert_state("unknown_market") is None

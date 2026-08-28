@@ -441,7 +441,7 @@ export default function BreadthTimingPanel() {
                     {sg.engine != null
                       ? `${sg.engine}${
                           sg.rs120 != null ? `（RS120 ${sg.rs120 > 0 ? "+" : ""}${sg.rs120}pp）` : ""
-                        }`
+                        }${sg.alert ? ` · ${sg.alert}` : ""}`
                       : "—"}
                   </td>
                   <td style={{ whiteSpace: "normal", maxWidth: 380 }}>{sg.trigger ?? "—"}</td>

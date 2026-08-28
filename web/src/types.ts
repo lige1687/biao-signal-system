@@ -1739,6 +1739,7 @@ export interface TimingSignal {
   rs120?: number | null;
   siphon?: boolean | null;
   engine?: string | null;
+  alert?: string | null;
   trigger?: string;
   levels?: number[];
   full_cagr?: number;

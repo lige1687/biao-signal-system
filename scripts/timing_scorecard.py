@@ -23,7 +23,13 @@ SCORECARD_DIR = Path.home() / ".lei_signal_lab/timing_scorecard"
 
 
 def as_of_key(signals: list[dict]) -> str:
-    return "|".join(sorted({str(s.get("as_of")) for s in signals if s.get("as_of")}))
+    """去重键 = A 股信号的最新数据日（美股宽度刷新节奏独立，不并入键）。"""
+    cn_dates = [
+        str(s.get("as_of"))
+        for s in signals
+        if s.get("as_of") and str(s.get("symbol", "")[:1]).isdigit()
+    ]
+    return max(cn_dates) if cn_dates else ""
 
 
 def main() -> None:
@@ -42,6 +48,7 @@ def main() -> None:
                 "engine": s.get("engine"),
                 "rs120": s.get("rs120"),
                 "siphon": s.get("siphon"),
+                "alert": s.get("alert"),
                 "error": s.get("error"),
             }
             for s in signals

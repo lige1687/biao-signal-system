@@ -453,6 +453,29 @@ def _equal_weight_index(parquet_name: str) -> pd.Series | None:
     return _EW_CACHE[key]
 
 
+def alert_state(market: str, cache_dir: Path | None = None) -> str | None:
+    """系统双极值警报现值：双≤20（定心丸）/ 双≥85（热度警戒），取该市场宽度末行。"""
+    if market == "cn":
+        breadth_key = "cn_all"
+    elif market == "us":
+        breadth_key = "sp500"
+    else:
+        return None
+    try:
+        b = load_breadth(breadth_key, cache_dir=cache_dir or TIMING_CACHE_DIR)
+    except FileNotFoundError:
+        return None
+    if len(b) == 0 or "b50" not in b or "b200" not in b:
+        return None
+    last = b.iloc[-1]
+    b50, b200 = float(last["b50"]), float(last["b200"])
+    if b50 <= 20 and b200 <= 20:
+        return "双≤20 定心丸"
+    if b50 >= 85 and b200 >= 85:
+        return "双≥85 热度警戒"
+    return None
+
+
 def siphon_status(symbol: str, cache_dir: Path | None = None) -> dict:
     """RS120 虹吸提示灯（第十三轮定案）：RS120>+20pp 连续10日 → 独立行情。
 
@@ -491,6 +514,7 @@ def siphon_status(symbol: str, cache_dir: Path | None = None) -> dict:
 def build_signals(cache_dir: Path | None = None) -> list[dict]:
     """执行手册当前信号：每配置的最新宽度值、目标仓位、引擎状态与近期调仓。"""
     out = []
+    alerts: dict[str, str | None] = {}
     for cfg in EXEC_CONFIGS:
         params = cfg["params"]
         try:
@@ -500,6 +524,9 @@ def build_signals(cache_dir: Path | None = None) -> list[dict]:
             continue
         daily = run["daily"]
         m = run["metrics"]
+        market = INSTRUMENTS[params["symbol"]].market
+        if market not in alerts:
+            alerts[market] = alert_state(market, cache_dir)
         breadth_now = daily["breadth"][-1]
         weight_now = daily["weight"][-1]
         if params["strategy"] == "ladder":
@@ -535,6 +562,7 @@ def build_signals(cache_dir: Path | None = None) -> list[dict]:
             "breadth_now": breadth_now,
             "weight_now": weight_now,
             **siphon_status(params["symbol"], cache_dir),
+            "alert": alerts.get(market),
             "trigger": trigger,
             "levels": levels,
             "recent_trades": run["trades"][-3:],
