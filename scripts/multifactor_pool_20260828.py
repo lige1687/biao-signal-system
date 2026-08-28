@@ -22,7 +22,11 @@ import numpy as np
 import pandas as pd
 
 from lei_signal.timing_backtest.data import (
-    INSTRUMENTS, TIMING_CACHE_DIR, align_index_breadth, load_breadth, load_index_bars,
+    INSTRUMENTS,
+    TIMING_CACHE_DIR,
+    align_index_breadth,
+    load_breadth,
+    load_index_bars,
 )
 from lei_signal.timing_backtest.engine import simulate
 from lei_signal.timing_backtest.metrics import compute_performance
