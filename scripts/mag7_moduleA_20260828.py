@@ -68,7 +68,9 @@ def main() -> None:
     dr = res.get("data_range", {})
     print(f"\n数据 {dr.get('start')}→{dr.get('end')}，样本外起点 {dr.get('out_of_sample_start')}")
     funnel = res.get("funnel", {})
-    print(f"漏斗: 触碰{funnel.get('touched')} → 信号{funnel.get('confirmed')} → 盈亏比剔除{funnel.get('filtered_by_rr')}")
+    fun = (f"漏斗: 触碰{funnel.get('touched')} → 信号{funnel.get('confirmed')}"
+           f" → 盈亏比剔除{funnel.get('filtered_by_rr')}")
+    print(fun)
 
 
 if __name__ == "__main__":
