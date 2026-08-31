@@ -17,6 +17,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
+from lei_signal.timing_backtest.data import load_breadth
 from lei_signal.timing_backtest.service import build_portfolio, build_signals
 
 SCORECARD_DIR = Path.home() / ".lei_signal_lab/timing_scorecard"
@@ -36,9 +37,20 @@ def main() -> None:
     force = "--force" in sys.argv
     signals = build_signals()
     portfolio = build_portfolio(signals=signals)
+    zones = {}
+    for key in ("cn_all", "sp500"):
+        try:
+            b = load_breadth(key)
+            v = float(b["b200"].iloc[-1])
+            zones["cn" if key == "cn_all" else "us"] = (
+                "低" if v < 43.3 else ("高" if v >= 56.7 else "中")
+            )
+        except Exception:  # noqa: BLE001
+            zones["cn" if key == "cn_all" else "us"] = None
     entry = {
         "ts": datetime.now().isoformat(timespec="seconds"),
         "as_of": as_of_key(signals),
+        "breadth_zone": zones,
         "portfolio": {
             "balanced_weight": portfolio.get("balanced_weight"),
             "defensive_weight": portfolio.get("defensive_weight"),
