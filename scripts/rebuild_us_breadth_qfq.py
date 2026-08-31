@@ -32,11 +32,13 @@ def main() -> int:
 
     old_breadth = TIMING_CACHE_DIR / "breadth_sp500.parquet"
     old_klines = CACHE / "sp500_klines.parquet"
-    if old_breadth.exists():
+    if old_breadth.exists() and not old_breadth.with_suffix(".unadjusted.bak").exists():
         shutil.copy2(old_breadth, old_breadth.with_suffix(".unadjusted.bak"))
-    if old_klines.exists():
+    if old_klines.exists() and not old_klines.with_suffix(".unadjusted.bak").exists():
         shutil.copy2(old_klines, old_klines.with_suffix(".unadjusted.bak"))
 
+    # 裁到 1986-01 起：与旧口径同一起点，避免早年成分过少（<100 只）的噪声
+    new_b = new_b.loc["1986-01-01":]
     new_b.to_parquet(old_breadth)
     wide.to_parquet(old_klines)
 

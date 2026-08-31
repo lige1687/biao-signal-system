@@ -34,7 +34,8 @@ def fetch_ohlcv(t: str) -> pd.DataFrame | None:
         columns={"Open": "open", "High": "high", "Low": "low",
                  "Close": "close", "Volume": "volume"}
     )
-    return df if len(df) > 250 and df["close"].pct_change().min() > -0.40 else None
+    # -75% 仅挡拆股假摔；真实崩盘（如 AAPL 2000-09-29 -51.9%）必须保留
+    return df if len(df) > 250 and df["close"].pct_change().min() > -0.75 else None
 
 
 def main() -> int:

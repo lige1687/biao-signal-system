@@ -26,7 +26,7 @@ from lei_signal.timing_backtest.data import load_breadth
 POOL = Path.home() / ".lei_signal_lab/backtest_pool_us"
 MATRIX = Path.home() / ".lei_signal_lab/cache/us_qfq_matrix.parquet"
 GRID_RR = [None, 2.0, 3.0, 5.0]
-GRID_EXIT = ["a6_1_costbasis", "a6_2_top_plus_keywave", "structure_stop_C", "b3_dual"]
+GRID_EXIT = ["a6_1_costbasis", "a6_2_top_plus_keywave", "a6_3_structure_stop", "b3_dual"]
 MODULES = [("A", "early"), ("B", "ambush"), ("B", "breakout"), ("C", "v1"), ("D", None)]
 
 
