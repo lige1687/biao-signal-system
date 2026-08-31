@@ -66,6 +66,39 @@ def timing_portfolio() -> dict[str, Any]:
     return build_portfolio()
 
 
+@router.get("/etf-defense")
+def timing_etf_defense(symbol: str = "QQQ") -> dict[str, Any]:
+    """美股 ETF 保险对比：防守版（40/80+vol0.15+MA200 闸）净值 vs 持有净值。"""
+    from lei_signal.timing_backtest.service import compute_run
+
+    cfg = dict(
+        symbol=symbol, strategy="ladder", indicator="b200", n_bands=3,
+        direction="momentum", low_edge=40.0, high_edge=80.0, gamma=1.5,
+        vol_target=0.15, gate_mode="ma200", min_trade=0.05, fee_bps=10,
+        breadth="sp500",
+    )
+    try:
+        run = compute_run(cfg)
+    except (ValueError, Exception) as e:  # noqa: BLE001
+        raise HTTPException(status_code=409, detail=f"{type(e).__name__}: {e}") from e
+    m = run["metrics"]
+    daily = run["daily"]
+    return {
+        "symbol": symbol,
+        "name": run.get("name", symbol),
+        "start": daily["date"][0],
+        "end": daily["date"][-1],
+        "dates": daily["date"][::5],
+        "defense": [round(v, 4) for v in daily["equity"][::5]],
+        "hold": [round(v, 4) for v in daily["benchmark"][::5]],
+        "metrics": {
+            "defense_cagr": m["strategy_cagr"], "defense_mdd": m["strategy_mdd"],
+            "hold_cagr": m["benchmark_cagr"], "hold_mdd": m["benchmark_mdd"],
+            "n_trades": int(m["n_trades"]),
+        },
+    }
+
+
 @router.get("/options")
 def timing_options() -> dict[str, Any]:
     return build_options()

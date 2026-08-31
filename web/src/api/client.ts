@@ -60,6 +60,7 @@ import type {
   TimingRunSummary,
   TimingSignal,
   TimingPortfolio,
+  TimingEtfDefense,
 } from "../types";
 
 const BASE = "/api";
@@ -134,6 +135,8 @@ export const timingBacktestApi = {
   options: () => request<TimingOptions>("/timing-backtest/options"),
   signals: () => request<TimingSignal[]>("/timing-backtest/signals"),
   portfolio: () => request<TimingPortfolio>("/timing-backtest/portfolio"),
+  etfDefense: (symbol: string) =>
+    request<TimingEtfDefense>(`/timing-backtest/etf-defense?symbol=${symbol}`),
   createRun: (body: Record<string, string | number | null>) =>
     request<TimingRunResult>("/timing-backtest/runs", {
       method: "POST",

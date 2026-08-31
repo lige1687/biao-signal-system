@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import * as echarts from "echarts";
 import { timingBacktestApi } from "../api/client";
-import type { TimingPortfolio } from "../types";
+import type { TimingEtfDefense, TimingPortfolio } from "../types";
 
 /**
  * 宽度择时研究报告（23 轮回测总决算，2026-08-28）。
@@ -41,6 +42,92 @@ const LAYERS = [
   { name: "RS 虹吸灯", what: "RS120>20pp 持续10日 → 引擎切换", role: "切换：灯亮=技术信号接管" },
   { name: "审计入池", what: "三窗超额全正才入池", role: "资格：静态，不轮动" },
 ];
+
+const ETF_CHOICES = ["QQQ", "SPY", "SMH", "XLK", "XLE", "IWM", "GLD"];
+
+function EtfDefenseChart() {
+  const [symbol, setSymbol] = useState("QQQ");
+  const [data, setData] = useState<TimingEtfDefense | null>(null);
+  const [loading, setLoading] = useState(false);
+  const ref = useRef<HTMLDivElement | null>(null);
+  const inst = useRef<echarts.ECharts | null>(null);
+
+  useEffect(() => {
+    setLoading(true);
+    timingBacktestApi.etfDefense(symbol)
+      .then(setData)
+      .catch(() => setData(null))
+      .finally(() => setLoading(false));
+  }, [symbol]);
+
+  useEffect(() => {
+    if (!data || !ref.current) return;
+    if (!inst.current) {
+      inst.current = echarts.init(ref.current);
+    }
+    inst.current.setOption({
+      backgroundColor: "transparent",
+      tooltip: { trigger: "axis", valueFormatter: (v: number) => v.toFixed(2) },
+      legend: { data: ["防守版（40/80+波动控制）", "一直持有"], textStyle: { color: "#aaa" } },
+      grid: { left: 50, right: 20, top: 40, bottom: 40 },
+      xAxis: { type: "category", data: data.dates, axisLabel: { color: "#888" } },
+      yAxis: {
+        type: "log",
+        axisLabel: { color: "#888", formatter: (v: number) => String(v) },
+        splitLine: { lineStyle: { color: "#222" } },
+      },
+      series: [
+        {
+          name: "防守版（40/80+波动控制）", type: "line", data: data.defense,
+          showSymbol: false, lineStyle: { width: 2, color: "#4caf7d" },
+        },
+        {
+          name: "一直持有", type: "line", data: data.hold,
+          showSymbol: false, lineStyle: { width: 1.5, color: "#888" },
+        },
+      ],
+    });
+  }, [data]);
+
+  useEffect(() => {
+    const onResize = () => inst.current?.resize();
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      inst.current?.dispose();
+      inst.current = null;
+    };
+  }, []);
+
+  const m = data?.metrics;
+  return (
+    <section className="bt-section">
+      <h3>美股 ETF 保险对比（净值对数轴，切换标的）</h3>
+      <div className="bt-form" style={{ marginBottom: 8 }}>
+        <label>
+          标的
+          <select value={symbol} onChange={(e) => setSymbol(e.target.value)}>
+            {ETF_CHOICES.map((s) => (
+              <option key={s} value={s}>{s}</option>
+            ))}
+          </select>
+        </label>
+        {loading && <span className="bt-meta">计算中…（首次约 5 秒）</span>}
+      </div>
+      {m && (
+        <p className="bt-meta" style={{ marginBottom: 8 }}>
+          {data?.name}（{data?.start} → {data?.end}）：防守版 年化
+          <b className="positive"> {((m.defense_cagr ?? 0) * 100).toFixed(1)}%</b> / 回撤
+          <b className="positive"> {((m.defense_mdd ?? 0) * 100).toFixed(0)}%</b>
+          {" ｜ "}持有 年化 {((m.hold_cagr ?? 0) * 100).toFixed(1)}% / 回撤
+          <span className="negative"> {((m.hold_mdd ?? 0) * 100).toFixed(0)}%</span>
+          {` ｜ 调仓 ${m.n_trades ?? 0} 次`}
+        </p>
+      )}
+      <div ref={ref} style={{ width: "100%", height: 360 }} />
+    </section>
+  );
+}
 
 export default function TimingResearchReport() {
   const [pf, setPf] = useState<TimingPortfolio | null>(null);
@@ -124,6 +211,8 @@ export default function TimingResearchReport() {
           </tbody>
         </table>
       </section>
+
+      <EtfDefenseChart />
 
       <section className="bt-section">
         <h3>证伪清单（同样入册，防止重蹈）</h3>

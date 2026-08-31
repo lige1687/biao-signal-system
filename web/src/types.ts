@@ -1309,9 +1309,31 @@ export interface PositionBandEvidence {
   annualized_pct: number;
 }
 
+export interface PositionBandStrategy {
+  key: string;
+  name: string;
+  cagr_pct: number;
+  vol_pct: number;
+  maxdd_pct: number;
+  sharpe: number;
+  final_x: number;
+}
+
+export interface PositionBandBacktest {
+  from: string;
+  to: string;
+  months: number;
+  band_turns: number;
+  strategies: PositionBandStrategy[];
+  curve_dates: string[];
+  curves: Record<string, number[]>;
+  note_cn: string;
+}
+
 export interface PositionBandResponse {
   ok: boolean;
   error?: string;
+  backtest?: PositionBandBacktest;
   as_of: string;
   erp: number;
   zone: number; // 0=减仓带 1=中性 2=中性偏多 3=加仓带
@@ -1798,6 +1820,23 @@ export interface TimingPortfolio {
   empty_count?: number;
   siphon_count?: number;
   sleeves?: TimingPortfolioSleeve[];
+}
+
+export interface TimingEtfDefense {
+  symbol: string;
+  name?: string;
+  start?: string;
+  end?: string;
+  dates?: string[];
+  defense?: number[];
+  hold?: number[];
+  metrics?: {
+    defense_cagr?: number;
+    defense_mdd?: number;
+    hold_cagr?: number;
+    hold_mdd?: number;
+    n_trades?: number;
+  };
 }
 
 export interface TimingSignal {
