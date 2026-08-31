@@ -18,7 +18,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 import pandas as pd
 
 from lei_signal.timing_backtest.data import (
-    TIMING_CACHE_DIR, align_index_breadth, load_breadth, load_index_bars,
+    TIMING_CACHE_DIR,
+    align_index_breadth,
+    load_breadth,
+    load_index_bars,
 )
 from lei_signal.timing_backtest.engine import simulate
 from lei_signal.timing_backtest.metrics import compute_performance, summarize_run
