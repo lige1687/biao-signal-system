@@ -56,7 +56,11 @@ def main() -> None:
             return None
         return "低" if v < 43.3 else ("高" if v >= 56.7 else "中")
 
-    print(f"{'模块':<10} {'全部(清洗后)':<34} {'低区(<43.3)':<34} {'中区':<34} {'高区(≥56.7)':<34} {'宽度过滤(低+中)':<34}")
+    header = (
+        f"{'模块':<10} {'全部(清洗后)':<34} {'低区(<43.3)':<34} "
+        f"{'中区':<34} {'高区(≥56.7)':<34} {'宽度过滤(低+中)':<34}"
+    )
+    print(header)
     for tag, module, variant, exit_v in CONFIGS:
         res = execute_run(BacktestParams(
             symbols=tuple(MAG7), module=module, rr_min=3.0,
