@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import * as echarts from "echarts";
 import { timingBacktestApi } from "../api/client";
-import type { TimingEtfDefense, TimingPortfolio } from "../types";
+import type {
+  TimingEtfDefense,
+  TimingPortfolio,
+  TimingPortfolioEquity,
+} from "../types";
 
 /**
  * 宽度择时研究报告（23 轮回测总决算，2026-08-28）。
@@ -44,6 +48,80 @@ const LAYERS = [
 ];
 
 const ETF_CHOICES = ["QQQ", "SPY", "SMH", "XLK", "XLE", "IWM", "GLD"];
+
+function PortfolioEquityChart() {
+  const [data, setData] = useState<TimingPortfolioEquity | null>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
+  const inst = useRef<echarts.ECharts | null>(null);
+
+  useEffect(() => {
+    timingBacktestApi.portfolioEquity().then(setData).catch(() => setData(null));
+  }, []);
+
+  useEffect(() => {
+    if (!data || !ref.current) return;
+    if (!inst.current) inst.current = echarts.init(ref.current);
+    inst.current.setOption({
+      backgroundColor: "transparent",
+      tooltip: { trigger: "axis", valueFormatter: (v: number) => v.toFixed(2) },
+      legend: {
+        data: ["冠军组合（宽度三档）", "防守组合（+MA20闸）", "持有组合"],
+        textStyle: { color: "#aaa" },
+      },
+      grid: { left: 50, right: 20, top: 40, bottom: 40 },
+      xAxis: { type: "category", data: data.dates, axisLabel: { color: "#888" } },
+      yAxis: {
+        type: "log",
+        axisLabel: { color: "#888" },
+        splitLine: { lineStyle: { color: "#222" } },
+      },
+      series: [
+        {
+          name: "冠军组合（宽度三档）", type: "line", data: data.champion,
+          showSymbol: false, lineStyle: { width: 2.5, color: "#4caf7d" },
+        },
+        {
+          name: "防守组合（+MA20闸）", type: "line", data: data.synergy,
+          showSymbol: false, lineStyle: { width: 2, color: "#e3b341" },
+        },
+        {
+          name: "持有组合", type: "line", data: data.hold,
+          showSymbol: false, lineStyle: { width: 1.5, color: "#888" },
+        },
+      ],
+      dataZoom: [{ type: "inside" }, { type: "slider", height: 18, bottom: 6 }],
+    });
+  }, [data]);
+
+  useEffect(() => {
+    const onResize = () => inst.current?.resize();
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      inst.current?.dispose();
+      inst.current = null;
+    };
+  }, []);
+
+  const s = data?.stats ?? {};
+  const fmt = (x?: number) => (x == null ? "—" : `${(x * 100).toFixed(1)}%`);
+  const fmdd = (x?: number) => (x == null ? "—" : `${(x * 100).toFixed(0)}%`);
+  return (
+    <section className="bt-section">
+      <h3>A 股组合三档 · 24 年净值（8 指数 sleeve 等权，滚轮缩放）</h3>
+      <p className="bt-meta" style={{ marginBottom: 8 }}>
+        冠军组合 年化<b className="positive"> {fmt(s.champion?.cagr)}</b> / 回撤
+        <b className="positive"> {fmdd(s.champion?.mdd)}</b>
+        {" ｜ "}防守组合 年化 {fmt(s.synergy?.cagr)} / 回撤
+        <b className="positive"> {fmdd(s.synergy?.mdd)}</b>
+        {" ｜ "}持有组合 年化 {fmt(s.hold?.cagr)} / 回撤
+        <span className="negative"> {fmdd(s.hold?.mdd)}</span>
+        {"（2015 股灾段：冠军 +18.5% vs 持有 -51.8%）"}
+      </p>
+      <div ref={ref} style={{ width: "100%", height: 420 }} />
+    </section>
+  );
+}
 
 function EtfDefenseChart() {
   const [symbol, setSymbol] = useState("QQQ");
@@ -211,6 +289,8 @@ export default function TimingResearchReport() {
           </tbody>
         </table>
       </section>
+
+      <PortfolioEquityChart />
 
       <EtfDefenseChart />
 

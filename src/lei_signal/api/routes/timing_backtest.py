@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from typing import Any
 
+import pandas as pd
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
@@ -64,6 +65,64 @@ def timing_signals() -> list[dict[str, Any]]:
 @router.get("/portfolio")
 def timing_portfolio() -> dict[str, Any]:
     return build_portfolio()
+
+
+@router.get("/portfolio-equity")
+def timing_portfolio_equity() -> dict[str, Any]:
+    """A 股组合三档净值（持有/冠军三档/协同=冠军×MA20），8 指数 sleeve 等权。"""
+
+    from lei_signal.timing_backtest.data import (
+        align_index_breadth,
+        load_breadth,
+        load_index_bars,
+    )
+    from lei_signal.timing_backtest.engine import simulate
+    from lei_signal.timing_backtest.metrics import compute_performance
+    from lei_signal.timing_backtest.strategies import (
+        LadderParams,
+        TrendGate,
+        build_target,
+    )
+
+    sleeves = ["399006", "399975", "399976", "399997", "000819", "399986", "980030", "000300"]
+    ladder = LadderParams(
+        indicator="b200", n_bands=3, edge_mode="fixed", direction="contrarian",
+        min_weight=0.0, gamma=1.0, low_edge=30.0, high_edge=70.0,
+    )
+    champ_r, syn_r, hold_r = [], [], []
+    for sym in sleeves:
+        aligned = align_index_breadth(load_index_bars(sym), load_breadth("cn_all"))
+        budget = build_target(aligned, ladder, None, TrendGate(), aligned.iloc[:0])
+        tech = (aligned["close"] > aligned["close"].rolling(20).mean()).astype(float)
+        r1 = simulate(aligned, budget, fee_bps=10.0, cash_rate=0.0,
+                      min_trade=0.05).daily["equity"].pct_change().fillna(0)
+        r2 = simulate(aligned, budget * tech, fee_bps=10.0, cash_rate=0.0,
+                      min_trade=0.05).daily["equity"].pct_change().fillna(0)
+        r3 = simulate(aligned, pd.Series(1.0, index=aligned.index), fee_bps=10.0,
+                      cash_rate=0.0, min_trade=0.05).daily["equity"].pct_change().fillna(0)
+        champ_r.append(r1)
+        syn_r.append(r2)
+        hold_r.append(r3)
+    out = {}
+    for name, lst in [("champion", champ_r), ("synergy", syn_r), ("hold", hold_r)]:
+        eq = (1 + pd.concat(lst, axis=1).mean(axis=1)).cumprod()
+        out[name] = eq
+    dates = [d.strftime("%Y-%m-%d") for d in out["hold"].index]
+    step = 5
+    stats = {
+        n: {
+            "cagr": compute_performance(eq)["cagr"],
+            "mdd": compute_performance(eq)["mdd"],
+        }
+        for n, eq in out.items()
+    }
+    return {
+        "dates": dates[::step],
+        "champion": [round(float(v), 4) for v in out["champion"].values[::step]],
+        "synergy": [round(float(v), 4) for v in out["synergy"].values[::step]],
+        "hold": [round(float(v), 4) for v in out["hold"].values[::step]],
+        "stats": stats,
+    }
 
 
 @router.get("/etf-defense")

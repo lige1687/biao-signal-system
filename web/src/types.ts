@@ -1822,6 +1822,14 @@ export interface TimingPortfolio {
   sleeves?: TimingPortfolioSleeve[];
 }
 
+export interface TimingPortfolioEquity {
+  dates?: string[];
+  champion?: number[];
+  synergy?: number[];
+  hold?: number[];
+  stats?: Record<string, { cagr?: number; mdd?: number }>;
+}
+
 export interface TimingEtfDefense {
   symbol: string;
   name?: string;
