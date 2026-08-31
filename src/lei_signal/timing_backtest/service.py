@@ -413,10 +413,10 @@ EXEC_CONFIGS: list[dict] = [
                    "fee_bps": 1.0},
     },
     {
-        "key": "spy_defense", "label": "SPY · 防守（长持底仓+控回撤）",
+        "key": "spy_defense", "label": "SPY · 防守（长持底仓+控回撤，40/80 美股边界）",
         "params": {"symbol": "SPY", "strategy": "ladder", "indicator": "b200",
-                   "n_bands": 3, "direction": "momentum", "low_edge": 30.0,
-                   "high_edge": 70.0, "gamma": 1.5, "vol_target": 0.10,
+                   "n_bands": 3, "direction": "momentum", "low_edge": 40.0,
+                   "high_edge": 80.0, "gamma": 1.5, "vol_target": 0.15,
                    "gate_mode": "ma200", "min_trade": 0.05, "fee_bps": 1.0},
     },
     {
