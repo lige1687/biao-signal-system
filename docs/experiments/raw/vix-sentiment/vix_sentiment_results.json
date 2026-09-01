@@ -1,0 +1,416 @@
+{
+  "criteria": "JV1-JV4 frozen in run_vix_sentiment.py docstring (pre-registered)",
+  "date": "2026-09-01",
+  "experiment": "vix-sentiment trigger-layer event study",
+  "sensitivity_report_only": {
+    "S1_noqual": {
+      "base_252": 0.130988,
+      "mean_252": 0.128926,
+      "n": 285
+    },
+    "S1_spike110": {
+      "base_252": 0.130988,
+      "mean_252": 0.151062,
+      "n": 92
+    },
+    "S2_cooldown21": {
+      "base_252": 0.128728,
+      "mean_252": 0.090709,
+      "n": 71
+    },
+    "S3_thr85": {
+      "base_252": 0.078545,
+      "mean_252": 0.076777,
+      "n": 140
+    },
+    "S3_thr95": {
+      "base_252": 0.078545,
+      "mean_252": 0.044136,
+      "n": 63
+    }
+  },
+  "signals": {
+    "S1_term_recontango": {
+      "JV1_info": {
+        "edge_126": 0.006005,
+        "edge_252": -0.003839,
+        "pass": false
+      },
+      "JV2_placebo_252": {
+        "borderline": false,
+        "mean": 0.131111,
+        "n_placebo": 300,
+        "p90": 0.149273,
+        "p95": 0.153059,
+        "pass": false,
+        "redraws_total": 0
+      },
+      "JV3_gold_control": {
+        "baseline_mean": {
+          "21": 0.009021,
+          "63": 0.027025,
+          "126": 0.060097,
+          "252": 0.128127
+        },
+        "generalized_noise_suspicion": false,
+        "n": 129,
+        "signal_mean": {
+          "21": 0.005031,
+          "63": 0.010752,
+          "126": 0.059728,
+          "252": 0.123466
+        }
+      },
+      "JV4_naaim_report_only": {
+        "concordance": 1.0,
+        "details": [
+          {
+            "naaim_date": "2024-12-18",
+            "naaim_pct": 39.285714,
+            "signal_date": "2024-12-19"
+          },
+          {
+            "naaim_date": "2025-03-19",
+            "naaim_pct": 10.144928,
+            "signal_date": "2025-03-19"
+          },
+          {
+            "naaim_date": "2025-04-09",
+            "naaim_pct": 5.555556,
+            "signal_date": "2025-04-15"
+          },
+          {
+            "naaim_date": "2025-04-16",
+            "naaim_pct": 1.369863,
+            "signal_date": "2025-04-17"
+          },
+          {
+            "naaim_date": "2025-04-23",
+            "naaim_pct": 2.702703,
+            "signal_date": "2025-04-25"
+          },
+          {
+            "naaim_date": "2025-04-30",
+            "naaim_pct": 12.0,
+            "signal_date": "2025-05-02"
+          },
+          {
+            "naaim_date": "2026-03-11",
+            "naaim_pct": 12.5,
+            "signal_date": "2026-03-17"
+          },
+          {
+            "naaim_date": "2026-03-25",
+            "naaim_pct": 14.754098,
+            "signal_date": "2026-03-25"
+          },
+          {
+            "naaim_date": "2026-04-08",
+            "naaim_pct": 17.741935,
+            "signal_date": "2026-04-08"
+          }
+        ],
+        "n_naaim_pct_le_50": 9,
+        "n_signal_matched": 9,
+        "naaim_window": [
+          "2023-11-29",
+          "2026-05-20"
+        ]
+      },
+      "definition": "VIX9D/VIX: r_t<1.0 & r_{t-1}>=1.0 & max(r,10d)>=1.05",
+      "first_last": [
+        "2011-02-01",
+        "2026-06-18"
+      ],
+      "gspc": {
+        "baseline_mean": {
+          "21": 0.010554,
+          "63": 0.031071,
+          "126": 0.06165,
+          "252": 0.130988
+        },
+        "signal_mean": {
+          "21": 0.016414,
+          "63": 0.040347,
+          "126": 0.067655,
+          "252": 0.127149
+        },
+        "signal_median_252": 0.138019,
+        "win_rate_252": 0.844444
+      },
+      "n_signals": 180,
+      "n_with_252": 175,
+      "oos_tail_report_only": {
+        "n": 12,
+        "signal_mean": {
+          "21": 0.051999,
+          "63": 0.108231,
+          "126": 0.173746,
+          "252": 0.257525
+        }
+      },
+      "qqq_report_only": {
+        "baseline_mean": {
+          "21": 0.015792,
+          "63": 0.047663,
+          "126": 0.095818,
+          "252": 0.204561
+        },
+        "n": 180,
+        "signal_mean": {
+          "21": 0.022947,
+          "63": 0.05912,
+          "126": 0.106427,
+          "252": 0.207315
+        }
+      },
+      "sample": [
+        "2011-01-04",
+        "2026-08-31"
+      ],
+      "verdict": "FALSIFIED"
+    },
+    "S2_vix_vix3m_extreme": {
+      "JV1_info": {
+        "edge_126": -0.021922,
+        "edge_252": -0.043322,
+        "pass": false
+      },
+      "JV2_placebo_252": {
+        "borderline": false,
+        "mean": 0.120033,
+        "n_placebo": 300,
+        "p90": 0.14237,
+        "p95": 0.147928,
+        "pass": false,
+        "redraws_total": 0
+      },
+      "JV3_gold_control": {
+        "baseline_mean": {
+          "21": 0.009021,
+          "63": 0.027025,
+          "126": 0.060097,
+          "252": 0.128127
+        },
+        "generalized_noise_suspicion": false,
+        "n": 78,
+        "signal_mean": {
+          "21": 0.005169,
+          "63": 0.0168,
+          "126": 0.019,
+          "252": 0.056366
+        }
+      },
+      "JV4_naaim_report_only": {
+        "concordance": 0.0,
+        "details": [
+          {
+            "naaim_date": "2024-12-04",
+            "naaim_pct": 51.851852,
+            "signal_date": "2024-12-06"
+          },
+          {
+            "naaim_date": "2025-08-06",
+            "naaim_pct": 91.011236,
+            "signal_date": "2025-08-08"
+          },
+          {
+            "naaim_date": "2025-12-03",
+            "naaim_pct": 92.45283,
+            "signal_date": "2025-12-04"
+          },
+          {
+            "naaim_date": "2025-12-17",
+            "naaim_pct": 95.37037,
+            "signal_date": "2025-12-22"
+          },
+          {
+            "naaim_date": "2026-01-07",
+            "naaim_pct": 90.09009,
+            "signal_date": "2026-01-09"
+          }
+        ],
+        "n_naaim_pct_le_50": 0,
+        "n_signal_matched": 5,
+        "naaim_window": [
+          "2023-11-29",
+          "2026-05-20"
+        ]
+      },
+      "definition": "VIX/VIX3M expanding pctile <= 10, cooldown 10td",
+      "first_last": [
+        "2010-10-11",
+        "2026-08-06"
+      ],
+      "gspc": {
+        "baseline_mean": {
+          "21": 0.010946,
+          "63": 0.032072,
+          "126": 0.062433,
+          "252": 0.128728
+        },
+        "signal_mean": {
+          "21": 0.00599,
+          "63": 0.021275,
+          "126": 0.040511,
+          "252": 0.085406
+        },
+        "signal_median_252": 0.115568,
+        "win_rate_252": 0.733333
+      },
+      "n_signals": 105,
+      "n_with_252": 99,
+      "oos_tail_report_only": {
+        "n": 8,
+        "signal_mean": {
+          "21": 0.003118,
+          "63": -0.0218,
+          "126": 0.06253,
+          "252": 0.177935
+        }
+      },
+      "qqq_report_only": {
+        "baseline_mean": {
+          "21": 0.016216,
+          "63": 0.04839,
+          "126": 0.095823,
+          "252": 0.202143
+        },
+        "n": 105,
+        "signal_mean": {
+          "21": 0.010614,
+          "63": 0.035142,
+          "126": 0.071642,
+          "252": 0.137759
+        }
+      },
+      "sample": [
+        "2010-09-17",
+        "2026-08-31"
+      ],
+      "verdict": "FALSIFIED"
+    },
+    "S3_equitypc_extreme": {
+      "JV1_info": {
+        "edge_126": -0.009085,
+        "edge_252": -0.013724,
+        "pass": false
+      },
+      "JV2_placebo_252": {
+        "borderline": false,
+        "mean": 0.082807,
+        "n_placebo": 300,
+        "p90": 0.125657,
+        "p95": 0.131734,
+        "pass": false,
+        "redraws_total": 0
+      },
+      "JV3_gold_control": {
+        "baseline_mean": {
+          "21": 0.004011,
+          "63": 0.011459,
+          "126": 0.028036,
+          "252": 0.069271
+        },
+        "generalized_noise_suspicion": true,
+        "n": 42,
+        "signal_mean": {
+          "21": 0.009523,
+          "63": 0.02627,
+          "126": 0.057902,
+          "252": 0.117946
+        }
+      },
+      "JV4_naaim_report_only": {
+        "concordance": null,
+        "details": [],
+        "n_naaim_pct_le_50": 0,
+        "n_signal_matched": 0,
+        "naaim_window": [
+          "2023-11-29",
+          "2026-05-20"
+        ]
+      },
+      "definition": "equity P/C expanding pctile >= 90, cooldown 10td",
+      "first_last": [
+        "2005-03-16",
+        "2019-10-02"
+      ],
+      "gspc": {
+        "baseline_mean": {
+          "21": 0.006345,
+          "63": 0.019129,
+          "126": 0.038594,
+          "252": 0.078545
+        },
+        "signal_mean": {
+          "21": 0.01003,
+          "63": 0.022784,
+          "126": 0.029509,
+          "252": 0.064821
+        },
+        "signal_median_252": 0.139983,
+        "win_rate_252": 0.738739
+      },
+      "n_signals": 111,
+      "n_with_252": 111,
+      "oos_tail_report_only": {
+        "n": 0,
+        "signal_mean": {
+          "21": null,
+          "63": null,
+          "126": null,
+          "252": null
+        }
+      },
+      "qqq_report_only": {
+        "baseline_mean": {
+          "21": 0.01126,
+          "63": 0.034241,
+          "126": 0.070935,
+          "252": 0.152366
+        },
+        "n": 111,
+        "signal_mean": {
+          "21": 0.016376,
+          "63": 0.040929,
+          "126": 0.067021,
+          "252": 0.146161
+        }
+      },
+      "sample": [
+        "2004-10-20",
+        "2019-10-04"
+      ],
+      "verdict": "FALSIFIED"
+    }
+  },
+  "validation": {
+    "epc_range": [
+      "2003-10-21",
+      "2019-10-04"
+    ],
+    "epc_seg1_pcratioarchive_equity_n_valid": 50,
+    "epc_splice_seg2_seg3": {
+      "MAE": 0.010376,
+      "corr": 0.99096,
+      "overlap_days": 1409
+    },
+    "gold_range": [
+      "2013-07-29",
+      "2026-08-31"
+    ],
+    "gspc_range": [
+      "1985-01-02",
+      "2026-08-26"
+    ],
+    "vix3m_range": [
+      "2009-09-18",
+      "2026-08-31"
+    ],
+    "vix9d_range": [
+      "2011-01-04",
+      "2026-08-31"
+    ]
+  }
+}

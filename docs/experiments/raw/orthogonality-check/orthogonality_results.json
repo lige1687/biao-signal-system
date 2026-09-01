@@ -1,0 +1,181 @@
+{
+  "experiment": "orthogonality_check_new_signals_vs_b9_lei",
+  "config": {
+    "HOLD_TD_A2": 63,
+    "HOLD_TD_E1": 60,
+    "HEITI_LEG_CORR": -0.003,
+    "TOL_OD0": 0.01,
+    "LOW_CUT": 0.15,
+    "HIGH_CUT": 0.3,
+    "MIN_EVENTS": 3
+  },
+  "OD0_calibration": {
+    "b9_x_lei_pearson_recomputed": -0.0031,
+    "heiti_reported": -0.003,
+    "pass": true
+  },
+  "legs_window": [
+    "2017-03-27",
+    "2026-07-17"
+  ],
+  "legs_days": 2261,
+  "new_signal_arms": {
+    "A2_up": {
+      "n_events_in_window": 18,
+      "holding_days_pct": 0.3273,
+      "max_weight": 0.2222,
+      "pearson_vs_b9": -0.0001,
+      "pearson_vs_lei": 0.0019,
+      "spearman_vs_b9": 0.0096,
+      "spearman_vs_lei": -0.0115,
+      "verdict": "low_correlation_candidate",
+      "overlap_b9": {
+        "signal_days_pct": 0.1645,
+        "leg_active_days_pct": 0.7289,
+        "overlap_pct_of_signal_days": 0.8145
+      },
+      "overlap_lei": {
+        "signal_days_pct": 0.1645,
+        "leg_active_days_pct": 0.0765,
+        "overlap_pct_of_signal_days": 0.0753
+      },
+      "signal_days_in_window": [
+        "2021-02-25",
+        "2021-03-18",
+        "2022-01-18",
+        "2022-03-22",
+        "2022-04-11",
+        "2022-05-02",
+        "2022-06-13",
+        "2022-08-29",
+        "2022-09-19",
+        "2022-10-10",
+        "2022-10-31",
+        "2023-02-15",
+        "2023-08-16",
+        "2023-09-27",
+        "2023-10-17",
+        "2024-04-25",
+        "2024-10-14",
+        "2025-01-06",
+        "2026-03-27"
+      ]
+    },
+    "A2_down": {
+      "n_events_in_window": 17,
+      "holding_days_pct": 0.3171,
+      "max_weight": 0.1765,
+      "pearson_vs_b9": 0.0701,
+      "pearson_vs_lei": -0.0087,
+      "spearman_vs_b9": 0.0465,
+      "spearman_vs_lei": -0.0144,
+      "verdict": "low_correlation_candidate",
+      "overlap_b9": {
+        "signal_days_pct": 0.1734,
+        "leg_active_days_pct": 0.7289,
+        "overlap_pct_of_signal_days": 0.7526
+      },
+      "overlap_lei": {
+        "signal_days_pct": 0.1734,
+        "leg_active_days_pct": 0.0765,
+        "overlap_pct_of_signal_days": 0.0638
+      },
+      "signal_days_in_window": [
+        "2019-01-03",
+        "2019-05-31",
+        "2019-08-08",
+        "2019-08-28",
+        "2020-02-28",
+        "2020-03-20",
+        "2020-04-16",
+        "2022-07-13",
+        "2022-11-16",
+        "2022-12-06",
+        "2023-03-17",
+        "2023-04-06",
+        "2023-11-16",
+        "2023-12-06",
+        "2023-12-26",
+        "2024-08-02",
+        "2025-03-03"
+      ]
+    },
+    "A1_un_inversion_falsified_ref_only": {
+      "n_events_in_window": 1,
+      "holding_days_pct": 0.0279,
+      "max_weight": 1.0,
+      "pearson_vs_b9": 0.0353,
+      "pearson_vs_lei": -0.0091,
+      "verdict": "report_only(n_events=1<3)",
+      "note": "T1 已判负（us-treasury-CROSSCHECK 第二节），此行仅完整性参考"
+    },
+    "E1_deleverage_reversal_watch_only": {
+      "n_events_in_window": 6,
+      "holding_days_pct": 0.1256,
+      "max_weight": 0.3333,
+      "pearson_vs_b9": 0.2119,
+      "pearson_vs_lei": -0.013,
+      "spearman_vs_b9": 0.1994,
+      "spearman_vs_lei": 0.0137,
+      "verdict": "borderline_needs_mechanism_note",
+      "overlap_b9": {
+        "signal_days_pct": 0.0646,
+        "leg_active_days_pct": 0.7289,
+        "overlap_pct_of_signal_days": 0.6164
+      },
+      "overlap_lei": {
+        "signal_days_pct": 0.0646,
+        "leg_active_days_pct": 0.0765,
+        "overlap_pct_of_signal_days": 0.0753
+      },
+      "signal_days_in_window": [
+        "2022-04-25",
+        "2024-01-30",
+        "2025-01-27",
+        "2025-04-08",
+        "2026-02-13",
+        "2026-07-17"
+      ],
+      "note": "C 组 E1 反向现象（ashare-macro-ARCHIVE 三）：预注册方向写反未翻案，观察级；C 组预期与宽度警报同源→若判高相关即降级「确认辅助」；11/12 事件与双≤20 警报 ±10td 伴生（C 组事后辅助分析）"
+    },
+    "C2_down_main_impl_watch_only": {
+      "n_events_in_window": 7,
+      "holding_days_pct": 0.195,
+      "max_weight": 0.1429,
+      "pearson_vs_b9": 0.0507,
+      "pearson_vs_lei": -0.0072,
+      "spearman_vs_b9": 0.0129,
+      "spearman_vs_lei": -0.0048,
+      "verdict": "low_correlation_candidate",
+      "overlap_b9": {
+        "signal_days_pct": 0.1048,
+        "leg_active_days_pct": 0.7289,
+        "overlap_pct_of_signal_days": 0.7215
+      },
+      "overlap_lei": {
+        "signal_days_pct": 0.1048,
+        "leg_active_days_pct": 0.0765,
+        "overlap_pct_of_signal_days": 0.0633
+      },
+      "signal_days_in_window": [
+        "2019-01-03",
+        "2020-02-28",
+        "2022-07-13",
+        "2022-11-18",
+        "2023-11-16",
+        "2024-08-02",
+        "2025-03-03"
+      ],
+      "note": "正版 A 观察（其 ARCHIVE 三）：下行臂 n=23 过 ×1.15 波动线且12m +13.1% vs +9.7%，但其事件与模块 E 宽度极值高度同期、疑为底部利率镜像——A 组下一步 1 点名本任务送测（先验高相关预期不增量）；事件集为其 line95_down（持有 63td 与 A2_down同构保持可比）"
+    },
+    "AUX_C2down_vs_moduleE_coincidence": {
+      "c2_down_events_from": "1996-08-02",
+      "n_c2_down_total_full_history": 23,
+      "coincident_within_10td": 7,
+      "pct": 0.3043,
+      "module_e_v1_n": 33,
+      "note": "正版 A 下一步 1 的日期级交叉核验：C2 下行臂事件与模块 E v1 买入信号（B20&B50≤15）±10 交易日伴生率（沿用 C 组 E1 伴生统计口径）；辅助统计不进 OD 判定"
+    }
+  },
+  "matrix_note": "见 correlation_matrix_pearson.csv（全窗口 inner join）"
+}
