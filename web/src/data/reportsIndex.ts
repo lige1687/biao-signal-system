@@ -97,4 +97,14 @@ export const REPORTS_INDEX: ReportEntry[] = [
       "优化臂(再平衡 金15%卫30%) 12.27%/-22.4% 为13臂后验·七折引用≈8.5-9%；" +
       "证伪5项归档：卫星RR门槛(198→47笔)/TRD门/a6_3/b3/黄金闸；双跑 8/8 哈希一致",
   },
+  {
+    id: "lei-system-verdict",
+    team: "LEI组",
+    title: "主系统全档案：信号×仓位×终审×信息源（19 轮）",
+    href: "/reports/lei-zuhe-zhongshen-2026-09-01.html",
+    date: "2026-09-01",
+    topic: "仓位管理",
+    status: "mixed",
+    oneLine: "分账制候选 +8.4%/-9.7%/Calmar 0.87（2016-08~2026-08,引擎standard费,t+1开盘,vs现行221万/-15.7%）;WF零前视+12.0%/-27.1%;两档制/强平/RS倾斜/利率闸等10项证伪归档",
+  },
 ];
