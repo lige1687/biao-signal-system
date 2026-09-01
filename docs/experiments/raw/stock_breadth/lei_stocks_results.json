@@ -1,0 +1,162 @@
+{
+ "caveats": [
+  "腾讯/中微不在回测池",
+  "池价为腾讯源（模块系统自有口径）",
+  "A 模块未加 gate_a 过滤（宽度臂用预算乘数替代）"
+ ],
+ "stocks": {
+  "宁德时代": {
+   "HOLD": {
+    "cagr_pct": 41.44,
+    "final": 10052906,
+    "maxdd_pct": -66.52
+   },
+   "LEI": {
+    "cagr_pct": 1.52,
+    "final": 1105481,
+    "maxdd_pct": -4.47
+   },
+   "LEI_BREADTH": {
+    "cagr_pct": 0.6,
+    "final": 1040581,
+    "maxdd_pct": -2.39
+   },
+   "LEI减HOLD": {
+    "ann_pp": -39.92,
+    "dd_pp": 62.05
+   },
+   "cum_R": 10.4,
+   "n_trades": 4,
+   "symbol": "300750.SZ",
+   "模块统计": {
+    "A": {
+     "n": 5,
+     "sumR": 24.4,
+     "win": 0.6
+    },
+    "B'": {
+     "n": 0,
+     "sumR": 0.0,
+     "win": null
+    },
+    "C": {
+     "n": 3,
+     "sumR": 9.6,
+     "win": 0.67
+    },
+    "D": {
+     "n": 0,
+     "sumR": 0.0,
+     "win": null
+    }
+   }
+  },
+  "紫金矿业": {
+   "HOLD": {
+    "cagr_pct": 44.65,
+    "final": 39143209,
+    "maxdd_pct": -80.34
+   },
+   "LEI": {
+    "cagr_pct": 1.01,
+    "final": 1105894,
+    "maxdd_pct": -7.36
+   },
+   "LEI_BREADTH": {
+    "cagr_pct": -0.22,
+    "final": 978308,
+    "maxdd_pct": -6.71
+   },
+   "LEI减HOLD": {
+    "ann_pp": -43.64,
+    "dd_pp": 72.98
+   },
+   "cum_R": 10.7,
+   "n_trades": 9,
+   "symbol": "601899.SS",
+   "模块统计": {
+    "A": {
+     "n": 20,
+     "sumR": 61.1,
+     "win": 0.5
+    },
+    "B'": {
+     "n": 1,
+     "sumR": -0.3,
+     "win": 0.0
+    },
+    "C": {
+     "n": 3,
+     "sumR": 5.3,
+     "win": 0.67
+    },
+    "D": {
+     "n": 0,
+     "sumR": 0.0,
+     "win": null
+    }
+   }
+  },
+  "贵州茅台": {
+   "HOLD": {
+    "cagr_pct": 14.05,
+    "final": 3140651,
+    "maxdd_pct": -51.36
+   },
+   "LEI": {
+    "cagr_pct": 2.95,
+    "final": 1285555,
+    "maxdd_pct": -19.47
+   },
+   "LEI_BREADTH": {
+    "cagr_pct": 0.7,
+    "final": 1062431,
+    "maxdd_pct": -5.18
+   },
+   "LEI减HOLD": {
+    "ann_pp": -11.1,
+    "dd_pp": 31.89
+   },
+   "cum_R": 28.0,
+   "n_trades": 9,
+   "symbol": "600519.SS",
+   "模块统计": {
+    "A": {
+     "n": 6,
+     "sumR": 87.8,
+     "win": 0.83
+    },
+    "B'": {
+     "n": 6,
+     "sumR": -3.7,
+     "win": 0.0
+    },
+    "C": {
+     "n": 0,
+     "sumR": 0.0,
+     "win": null
+    },
+    "D": {
+     "n": 2,
+     "sumR": -1.9,
+     "win": 0.0
+    }
+   }
+  }
+ },
+ "verdict": {
+  "J1_回撤控制": {
+   "pass": true,
+   "wins": 3
+  },
+  "J2_超额底线": {
+   "pass": false,
+   "wins": 0
+  },
+  "J3_宽度协同": {
+   "pass": false,
+   "wins": 0
+  },
+  "VERDICT": "FAIL"
+ }
+}

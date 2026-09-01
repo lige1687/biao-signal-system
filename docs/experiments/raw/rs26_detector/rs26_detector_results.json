@@ -1,0 +1,260 @@
+{
+ "meta": {
+  "date": "2026-08-27",
+  "params": {
+   "cost": "10bp 单边",
+   "p_enter": 60,
+   "p_exit": 40,
+   "rs_weeks": 26,
+   "stop": "60日低点"
+  },
+  "protocol": "预注册见脚本 docstring"
+ },
+ "results": {
+  "创业板指": {
+   "事件": {
+    "E1_抱团牛": {
+     "fired": true,
+     "ok": true,
+     "on_weeks": 26,
+     "want": "fire"
+    },
+    "E2_科技牛": {
+     "fired": true,
+     "ok": true,
+     "on_weeks": 38,
+     "want": "fire"
+    },
+    "E3_疯牛危险区": {
+     "fired": true,
+     "ok": false,
+     "on_weeks": 4,
+     "want": "silent"
+    },
+    "E4_2021Q4高位段": {
+     "fired": false,
+     "ok": true,
+     "on_weeks": 0,
+     "want": "silent"
+    },
+    "PASS": true,
+    "score": 3
+   },
+   "全窗": {
+    "买入持有": {
+     "ann_pct": 8.47,
+     "calmar": 0.121,
+     "maxdd_pct": -69.74
+    },
+    "冠军": {
+     "ann_pct": 11.69,
+     "calmar": 0.308,
+     "maxdd_pct": -37.96
+    },
+    "判别器+60日止损": {
+     "ann_pct": 12.04,
+     "calmar": 0.317,
+     "maxdd_pct": -37.96
+    },
+    "判别器无止损": {
+     "ann_pct": 12.04,
+     "calmar": 0.317,
+     "maxdd_pct": -37.96
+    }
+   },
+   "危险区+股灾成本_带止损": {
+    "ann_pct": 83.26,
+    "calmar": 5.567,
+    "maxdd_pct": -14.95
+   },
+   "危险区+股灾成本_无止损": {
+    "ann_pct": 83.26,
+    "calmar": 5.567,
+    "maxdd_pct": -14.95
+   },
+   "科技牛窗": {
+    "买入持有": {
+     "ann_pct": 60.9,
+     "calmar": 2.09,
+     "maxdd_pct": -29.14
+    },
+    "冠军": {
+     "ann_pct": 40.6,
+     "calmar": 1.575,
+     "maxdd_pct": -25.79
+    },
+    "判别器+60日止损": {
+     "ann_pct": 49.76,
+     "calmar": 1.93,
+     "maxdd_pct": -25.79
+    },
+    "判别器无止损": {
+     "ann_pct": 49.76,
+     "calmar": 1.93,
+     "maxdd_pct": -25.79
+    }
+   },
+   "股灾段": {
+    "判别器+60日止损": {
+     "ann_pct": 80.41,
+     "calmar": 5.377,
+     "maxdd_pct": -14.95
+    },
+    "判别器无止损": {
+     "ann_pct": 80.41,
+     "calmar": 5.377,
+     "maxdd_pct": -14.95
+    }
+   },
+   "附录_2013创业板独立牛_ON周数": 7
+  },
+  "证券公司": {
+   "全窗": {
+    "买入持有": {
+     "ann_pct": -6.68,
+     "calmar": -0.092,
+     "maxdd_pct": -72.53
+    },
+    "冠军": {
+     "ann_pct": 11.89,
+     "calmar": 0.254,
+     "maxdd_pct": -46.83
+    },
+    "判别器+60日止损": {
+     "ann_pct": 6.99,
+     "calmar": 0.149,
+     "maxdd_pct": -46.83
+    },
+    "判别器无止损": {
+     "ann_pct": 6.84,
+     "calmar": 0.146,
+     "maxdd_pct": -46.83
+    }
+   },
+   "科技牛窗": {
+    "买入持有": {
+     "ann_pct": 14.6,
+     "calmar": 0.522,
+     "maxdd_pct": -27.95
+    },
+    "冠军": {
+     "ann_pct": 31.28,
+     "calmar": 3.6,
+     "maxdd_pct": -8.69
+    },
+    "判别器+60日止损": {
+     "ann_pct": 27.86,
+     "calmar": 1.342,
+     "maxdd_pct": -20.76
+    },
+    "判别器无止损": {
+     "ann_pct": 26.78,
+     "calmar": 1.203,
+     "maxdd_pct": -22.26
+    }
+   },
+   "股灾段": {
+    "判别器+60日止损": {
+     "ann_pct": 33.47,
+     "calmar": 2.001,
+     "maxdd_pct": -16.73
+    },
+    "判别器无止损": {
+     "ann_pct": 33.47,
+     "calmar": 2.001,
+     "maxdd_pct": -16.73
+    }
+   }
+  }
+ },
+ "verdict": {
+  "C4_events": true,
+  "VERDICT": "FAIL",
+  "any_arm_C123": false,
+  "arms": {
+   "判别器+60日止损": {
+    "C1": false,
+    "C1_improve_pp": 9.16,
+    "C2": true,
+    "C3": true,
+    "C3_dd": -14.95
+   },
+   "判别器无止损": {
+    "C1": false,
+    "C1_improve_pp": 9.16,
+    "C2": true,
+    "C3": true,
+    "C3_dd": -14.95
+   }
+  },
+  "events": {
+   "E1_抱团牛": {
+    "fired": true,
+    "ok": true,
+    "on_weeks": 26,
+    "want": "fire"
+   },
+   "E2_科技牛": {
+    "fired": true,
+    "ok": true,
+    "on_weeks": 38,
+    "want": "fire"
+   },
+   "E3_疯牛危险区": {
+    "fired": true,
+    "ok": false,
+    "on_weeks": 4,
+    "want": "silent"
+   },
+   "E4_2021Q4高位段": {
+    "fired": false,
+    "ok": true,
+    "on_weeks": 0,
+    "want": "silent"
+   },
+   "PASS": true,
+   "score": 3
+  },
+  "neighborhood": {
+   "rs13_p55": {
+    "C1": true,
+    "improve_pp": 26.4
+   },
+   "rs13_p60": {
+    "C1": true,
+    "improve_pp": 27.49
+   },
+   "rs13_p65": {
+    "C1": false,
+    "improve_pp": 12.76
+   },
+   "rs26_p55": {
+    "C1": false,
+    "improve_pp": 7.79
+   },
+   "rs26_p60": {
+    "C1": false,
+    "improve_pp": 9.16
+   },
+   "rs26_p65": {
+    "C1": false,
+    "improve_pp": 8.17
+   },
+   "rs52_p55": {
+    "C1": false,
+    "improve_pp": -6.56
+   },
+   "rs52_p60": {
+    "C1": false,
+    "improve_pp": -6.56
+   },
+   "rs52_p65": {
+    "C1": false,
+    "improve_pp": -6.56
+   }
+  },
+  "neighborhood_ok": false,
+  "neighborhood_pass_n": 2,
+  "sec_flag": true
+ }
+}

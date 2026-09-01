@@ -1,0 +1,456 @@
+{
+ "caveats": [
+  "全部为 2026 存续股（幸存者偏差偏乐观）",
+  "qfq 前复权",
+  "每只个股窗=上市与2010取晚者"
+ ],
+ "indices": {
+  "上证50": {
+   "ann_hold": 0.98,
+   "ann_tier": 5.43,
+   "dd_gap": 8.88,
+   "dd_hold": -45.41,
+   "dd_tier": -36.53,
+   "gap": 4.45,
+   "years": 16.0
+  },
+  "上证红利": {
+   "ann_hold": 1.0,
+   "ann_tier": 3.84,
+   "dd_gap": 18.88,
+   "dd_hold": -47.74,
+   "dd_tier": -28.86,
+   "gap": 2.84,
+   "years": 16.0
+  },
+  "中证1000": {
+   "ann_hold": 2.4,
+   "ann_tier": 7.93,
+   "dd_gap": 21.24,
+   "dd_hold": -72.35,
+   "dd_tier": -51.11,
+   "gap": 5.53,
+   "years": 11.4
+  },
+  "中证传媒": {
+   "ann_hold": -3.18,
+   "ann_tier": 3.92,
+   "dd_gap": 32.84,
+   "dd_hold": -83.64,
+   "dd_tier": -50.8,
+   "gap": 7.1,
+   "years": 11.4
+  },
+  "中证军工": {
+   "ann_hold": 6.08,
+   "ann_tier": 7.79,
+   "dd_gap": 25.69,
+   "dd_hold": -71.4,
+   "dd_tier": -45.71,
+   "gap": 1.71,
+   "years": 11.9
+  },
+  "中证医疗": {
+   "ann_hold": -6.12,
+   "ann_tier": 11.96,
+   "dd_gap": 23.13,
+   "dd_hold": -72.79,
+   "dd_tier": -49.66,
+   "gap": 18.08,
+   "years": 10.9
+  },
+  "中证家电": {
+   "ann_hold": -6.15,
+   "ann_tier": 11.68,
+   "dd_gap": 24.34,
+   "dd_hold": -69.7,
+   "dd_tier": -45.36,
+   "gap": 17.83,
+   "years": 10.8
+  },
+  "中证煤炭": {
+   "ann_hold": -0.34,
+   "ann_tier": 6.4,
+   "dd_gap": 14.89,
+   "dd_hold": -60.38,
+   "dd_tier": -45.49,
+   "gap": 6.74,
+   "years": 10.8
+  },
+  "中证白酒": {
+   "ann_hold": 6.17,
+   "ann_tier": 13.37,
+   "dd_gap": 22.66,
+   "dd_hold": -72.24,
+   "dd_tier": -49.58,
+   "gap": 7.2,
+   "years": 10.8
+  },
+  "中证计算机": {
+   "ann_hold": 9.18,
+   "ann_tier": 10.66,
+   "dd_gap": 24.28,
+   "dd_hold": -70.19,
+   "dd_tier": -45.91,
+   "gap": 1.48,
+   "years": 16.0
+  },
+  "中证银行": {
+   "ann_hold": 1.16,
+   "ann_tier": 6.94,
+   "dd_gap": 4.54,
+   "dd_hold": -37.08,
+   "dd_tier": -32.54,
+   "gap": 5.78,
+   "years": 10.9
+  },
+  "创业板指": {
+   "ann_hold": 8.93,
+   "ann_tier": 12.2,
+   "dd_gap": 31.78,
+   "dd_hold": -69.74,
+   "dd_tier": -37.96,
+   "gap": 3.27,
+   "years": 15.6
+  },
+  "国证地产": {
+   "ann_hold": -2.09,
+   "ann_tier": 3.44,
+   "dd_gap": 21.93,
+   "dd_hold": -77.67,
+   "dd_tier": -55.74,
+   "gap": 5.53,
+   "years": 13.5
+  },
+  "国证有色": {
+   "ann_hold": 5.73,
+   "ann_tier": 10.52,
+   "dd_gap": 10.96,
+   "dd_hold": -63.52,
+   "dd_tier": -52.56,
+   "gap": 4.79,
+   "years": 13.3
+  },
+  "国证钢铁": {
+   "ann_hold": -2.72,
+   "ann_tier": 0.35,
+   "dd_gap": 28.93,
+   "dd_hold": -70.4,
+   "dd_tier": -41.47,
+   "gap": 3.07,
+   "years": 11.2
+  },
+  "新能车": {
+   "ann_hold": 3.63,
+   "ann_tier": 15.59,
+   "dd_gap": 15.31,
+   "dd_hold": -67.84,
+   "dd_tier": -52.53,
+   "gap": 11.96,
+   "years": 10.9
+  },
+  "沪深300": {
+   "ann_hold": 1.83,
+   "ann_tier": 5.84,
+   "dd_gap": 14.1,
+   "dd_hold": -46.7,
+   "dd_tier": -32.6,
+   "gap": 4.01,
+   "years": 16.0
+  },
+  "证券公司": {
+   "ann_hold": -6.9,
+   "ann_tier": 11.89,
+   "dd_gap": 25.7,
+   "dd_hold": -72.53,
+   "dd_tier": -46.83,
+   "gap": 18.79,
+   "years": 10.9
+  }
+ },
+ "stocks": {
+  "万科A": {
+   "ann_hold": -4.65,
+   "ann_tier": 8.44,
+   "dd_gap": 19.96,
+   "dd_hold": -90.51,
+   "dd_tier": -70.55,
+   "gap": 13.09,
+   "years": 15.4
+  },
+  "东方财富": {
+   "ann_hold": 23.6,
+   "ann_tier": 26.17,
+   "dd_gap": 20.62,
+   "dd_hold": -82.26,
+   "dd_tier": -61.64,
+   "gap": 2.57,
+   "years": 15.6
+  },
+  "中信证券": {
+   "ann_hold": 4.65,
+   "ann_tier": 14.42,
+   "dd_gap": 24.96,
+   "dd_hold": -64.37,
+   "dd_tier": -39.41,
+   "gap": 9.77,
+   "years": 15.9
+  },
+  "中兴通讯": {
+   "ann_hold": 4.38,
+   "ann_tier": 13.09,
+   "dd_gap": 2.22,
+   "dd_hold": -72.09,
+   "dd_tier": -69.87,
+   "gap": 8.71,
+   "years": 15.7
+  },
+  "中国平安": {
+   "ann_hold": 7.22,
+   "ann_tier": 10.78,
+   "dd_gap": 8.71,
+   "dd_hold": -57.68,
+   "dd_tier": -48.97,
+   "gap": 3.56,
+   "years": 15.8
+  },
+  "中国神华": {
+   "ann_hold": 8.49,
+   "ann_tier": 10.42,
+   "dd_gap": 20.67,
+   "dd_hold": -57.75,
+   "dd_tier": -37.08,
+   "gap": 1.93,
+   "years": 15.7
+  },
+  "云南白药": {
+   "ann_hold": 7.89,
+   "ann_tier": 9.64,
+   "dd_gap": 6.75,
+   "dd_hold": -56.5,
+   "dd_tier": -49.75,
+   "gap": 1.75,
+   "years": 15.4
+  },
+  "五粮液": {
+   "ann_hold": 8.18,
+   "ann_tier": 12.86,
+   "dd_gap": 28.75,
+   "dd_hold": -76.02,
+   "dd_tier": -47.27,
+   "gap": 4.68,
+   "years": 15.8
+  },
+  "京东方A": {
+   "ann_hold": 3.58,
+   "ann_tier": 7.99,
+   "dd_gap": 3.94,
+   "dd_hold": -64.91,
+   "dd_tier": -60.97,
+   "gap": 4.41,
+   "years": 16.0
+  },
+  "伊利股份": {
+   "ann_hold": 14.54,
+   "ann_tier": 10.79,
+   "dd_gap": 3.3,
+   "dd_hold": -53.16,
+   "dd_tier": -49.86,
+   "gap": -3.75,
+   "years": 15.9
+  },
+  "保利发展": {
+   "ann_hold": 1.23,
+   "ann_tier": 10.82,
+   "dd_gap": 18.81,
+   "dd_hold": -72.88,
+   "dd_tier": -54.07,
+   "gap": 9.59,
+   "years": 16.0
+  },
+  "双汇发展": {
+   "ann_hold": 7.04,
+   "ann_tier": 7.29,
+   "dd_gap": 10.14,
+   "dd_hold": -61.05,
+   "dd_tier": -50.91,
+   "gap": 0.25,
+   "years": 15.2
+  },
+  "宁德时代": {
+   "ann_hold": 47.47,
+   "ann_tier": 45.23,
+   "dd_gap": 19.64,
+   "dd_hold": -62.88,
+   "dd_tier": -43.24,
+   "gap": -2.24,
+   "years": 7.9
+  },
+  "山西汾酒": {
+   "ann_hold": 15.82,
+   "ann_tier": 18.94,
+   "dd_gap": 18.18,
+   "dd_hold": -70.7,
+   "dd_tier": -52.52,
+   "gap": 3.12,
+   "years": 16.0
+  },
+  "山西焦煤": {
+   "ann_hold": -4.71,
+   "ann_tier": 3.79,
+   "dd_gap": 26.54,
+   "dd_hold": -83.75,
+   "dd_tier": -57.21,
+   "gap": 8.5,
+   "years": 15.9
+  },
+  "恒瑞医药": {
+   "ann_hold": 16.07,
+   "ann_tier": 15.25,
+   "dd_gap": 12.0,
+   "dd_hold": -70.99,
+   "dd_tier": -58.99,
+   "gap": -0.82,
+   "years": 16.0
+  },
+  "招商银行": {
+   "ann_hold": 9.9,
+   "ann_tier": 11.97,
+   "dd_gap": 4.31,
+   "dd_hold": -50.93,
+   "dd_tier": -46.62,
+   "gap": 2.07,
+   "years": 15.9
+  },
+  "格力电器": {
+   "ann_hold": 15.51,
+   "ann_tier": 15.68,
+   "dd_gap": 11.54,
+   "dd_hold": -52.74,
+   "dd_tier": -41.2,
+   "gap": 0.17,
+   "years": 15.4
+  },
+  "比亚迪": {
+   "ann_hold": 18.01,
+   "ann_tier": 17.93,
+   "dd_gap": 0.0,
+   "dd_hold": -58.38,
+   "dd_tier": -58.38,
+   "gap": -0.08,
+   "years": 14.5
+  },
+  "江西铜业": {
+   "ann_hold": 2.91,
+   "ann_tier": 7.57,
+   "dd_gap": 28.75,
+   "dd_hold": -74.09,
+   "dd_tier": -45.34,
+   "gap": 4.66,
+   "years": 16.0
+  },
+  "泸州老窖": {
+   "ann_hold": 8.72,
+   "ann_tier": 9.36,
+   "dd_gap": 10.62,
+   "dd_hold": -72.31,
+   "dd_tier": -61.69,
+   "gap": 0.64,
+   "years": 15.9
+  },
+  "海天味业": {
+   "ann_hold": 13.87,
+   "ann_tier": 11.89,
+   "dd_gap": 15.72,
+   "dd_hold": -72.39,
+   "dd_tier": -56.67,
+   "gap": -1.98,
+   "years": 12.1
+  },
+  "海康威视": {
+   "ann_hold": 16.44,
+   "ann_tier": 16.28,
+   "dd_gap": 6.85,
+   "dd_hold": -60.38,
+   "dd_tier": -53.53,
+   "gap": -0.16,
+   "years": 15.4
+  },
+  "爱尔眼科": {
+   "ann_hold": 16.73,
+   "ann_tier": 21.14,
+   "dd_gap": 27.07,
+   "dd_hold": -80.3,
+   "dd_tier": -53.23,
+   "gap": 4.41,
+   "years": 15.9
+  },
+  "片仔癀": {
+   "ann_hold": 18.57,
+   "ann_tier": 21.98,
+   "dd_gap": 32.4,
+   "dd_hold": -77.07,
+   "dd_tier": -44.67,
+   "gap": 3.41,
+   "years": 15.9
+  },
+  "立讯精密": {
+   "ann_hold": 29.33,
+   "ann_tier": 20.44,
+   "dd_gap": 3.3,
+   "dd_hold": -59.27,
+   "dd_tier": -55.97,
+   "gap": -8.89,
+   "years": 15.2
+  },
+  "紫金矿业": {
+   "ann_hold": 13.59,
+   "ann_tier": 10.74,
+   "dd_gap": 19.87,
+   "dd_hold": -67.21,
+   "dd_tier": -47.34,
+   "gap": -2.85,
+   "years": 15.9
+  },
+  "贵州茅台": {
+   "ann_hold": 18.12,
+   "ann_tier": 16.94,
+   "dd_gap": 9.26,
+   "dd_hold": -53.31,
+   "dd_tier": -44.05,
+   "gap": -1.18,
+   "years": 16.0
+  },
+  "金山办公": {
+   "ann_hold": 12.0,
+   "ann_tier": 13.05,
+   "dd_gap": -0.21,
+   "dd_hold": -67.82,
+   "dd_tier": -68.03,
+   "gap": 1.05,
+   "years": 6.5
+  },
+  "长江电力": {
+   "ann_hold": 12.15,
+   "ann_tier": 7.14,
+   "dd_gap": 9.88,
+   "dd_hold": -29.92,
+   "dd_tier": -20.04,
+   "gap": -5.01,
+   "years": 15.5
+  }
+ },
+ "summary": {
+  "G1": true,
+  "G2": false,
+  "VERDICT": "部分适配，按行业分列",
+  "index_gap_median": 5.53,
+  "index_pos_frac": 1.0,
+  "n_indices": 18,
+  "n_stocks": 30,
+  "stock_dd_gap_median": 11.77,
+  "stock_gap_mean": 2.05,
+  "stock_gap_median": 1.84,
+  "stock_pos_frac": 0.667
+ }
+}
