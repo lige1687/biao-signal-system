@@ -60,4 +60,14 @@ export const REPORTS_INDEX: ReportEntry[] = [
     status: "passed",
     oneLine: "B9九池认证：起点偏移31/31、参数高原24/24无孤峰、留一、安慰剂第100分位",
   },
+  {
+    id: "huanjing-cangwei",
+    team: "环境组",
+    title: "宽度×RV环境层做总仓位系数（含证伪档案）",
+    href: "/reports/huanjing-cangwei-2026-09-01.html",
+    date: "2026-09-01",
+    topic: "仓位管理",
+    status: "mixed",
+    oneLine: "2020-01→2026-08,11只宽指+行业ETF,月频t+1执行,单边10bp:目标波动缩放唯一通过(年化14.5→16.4%,Calmar 0.39→0.45);宽度阈值降档/2×2组合/SMA200退出全部证伪(年化跌至8.5-10.7%);注:证伪的是「宽度决定买多少」,与宽度组「宽度决定买什么」结论划界不冲突",
+  },
 ];
