@@ -198,11 +198,15 @@ function buildTrendOption(
     });
   }
 
-  // 默认窗口：数据 > defaultWindowDays 时只展开最后 defaultWindowDays；否则全展。
+  // 缩放：>60 个数据点即开启「滚轮缩放 + 底部滑块拖拽」；defaultWindowDays 只决定初始窗口。
+  // 数据一次给全量，缩放/拖拽纯本地完成，不触发任何重拉。
   const nDates = dates.length;
   let dataZoomOpt: echarts.EChartsOption["dataZoom"];
-  if (defaultWindowDays != null && nDates > defaultWindowDays) {
-    const startPct = Math.max(0, ((nDates - defaultWindowDays) / nDates) * 100);
+  if (nDates > 60) {
+    const startPct =
+      defaultWindowDays != null && nDates > defaultWindowDays
+        ? Math.max(0, ((nDates - defaultWindowDays) / nDates) * 100)
+        : 0;
     dataZoomOpt = [
       {
         type: "inside",
@@ -212,6 +216,7 @@ function buildTrendOption(
         moveOnMouseMove: true,
         moveOnMouseWheel: false,
       },
+      { type: "slider", start: startPct, end: 100, bottom: 4, height: 18 },
     ];
   }
 
@@ -223,7 +228,7 @@ function buildTrendOption(
     legend: multi
       ? { data: series.map((s) => s.name), top: 0, textStyle: { fontSize: 11 } }
       : undefined,
-    grid: { left: 46, right: 16, top: multi ? 30 : 18, bottom: 24 },
+    grid: { left: 46, right: 16, top: multi ? 30 : 18, bottom: dataZoomOpt ? 46 : 24 },
     xAxis: {
       type: "category",
       data: dates,

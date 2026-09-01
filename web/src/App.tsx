@@ -8,6 +8,8 @@ import SectorsPage from "./pages/SectorsPage";
 import DailyBriefPage from "./pages/DailyBriefPage";
 import SupervisorPage from "./pages/SupervisorPage";
 import WorkspacePage from "./pages/WorkspacePage";
+import BacktestPage from "./pages/BacktestPage";
+import ResearchPage from "./pages/ResearchPage";
 import AgentConsole from "./components/AgentConsole";
 
 // ---- AgentConsole 全局开合（模块级单例 store，避免引入状态库）----
@@ -59,6 +61,9 @@ export default function App() {
         {/* 行业板块趋势工作台：等权指数 / RS / 宽度 / 阶段（research_proxy） */}
         <Route path="/sectors" element={<SectorsPage />} />
         {/* 收盘简报：环境异常 → 自选重点变化 → 板块观察池（research_proxy） */}
+        <Route path="/backtest" element={<BacktestPage />} />
+        {/* 本轮研究展示：宽度/模块E/终审 轮次结果（静态数据页） */}
+        <Route path="/research" element={<ResearchPage />} />
         <Route path="/daily" element={<DailyBriefPage />} />
         {/* 监督待办：跨标的计划 + 待办 + 当日判定 */}
         <Route path="/plans" element={<SupervisorPage />} />

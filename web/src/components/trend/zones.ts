@@ -152,6 +152,105 @@ export const PPI_ZONES: readonly ZoneLevel[] = [
   { max: Infinity, label: "工业品过热", tone: "caution", note: "> 3%：工业品价格偏热" },
 ];
 
+/* ---- 美国宏观（FRED）区间 ---- */
+
+/** 初请失业金区间（4 周均值，人）。
+ * 绝对阈值随劳动人口增长长期上移（1970 年代 30 万 = 危机，如今 25 万以内才算强），
+ * 趋势比绝对值更重要：4 周均值持续上行 = 就业恶化的最灵敏先行信号。
+ */
+export const ICWA_ZONES: readonly ZoneLevel[] = [
+  { max: 200000, label: "就业强劲", tone: "opportunity", note: "≤ 20 万：历史上对应的失业率低位区间" },
+  { max: 250000, label: "正常", tone: "neutral", note: "20–25 万：劳动力市场常态" },
+  { max: 300000, label: "恶化信号", tone: "caution", note: "25–30 万：趋势上行阶段，裁员升温" },
+  { max: Infinity, label: "衰退信号", tone: "warning", note: "> 30 万：传统衰退经验阈值（绝对值随劳动人口增长上移，重在趋势）" },
+];
+
+/** 续请失业金区间（人）。2020 后结构性抬升，纵向比较为主。 */
+export const CCWA_ZONES: readonly ZoneLevel[] = [
+  { max: 1500000, label: "正常", tone: "neutral", note: "≤ 150 万：常态区间" },
+  { max: 2000000, label: "偏高", tone: "caution", note: "150–200 万：失业周期拉长，重返岗位变难" },
+  { max: Infinity, label: "恶化", tone: "warning", note: "> 200 万：持续攀升阶段（2020 峰值 2,492 万不可比）" },
+];
+
+/** 非农就业同比区间（%） */
+export const PAYEMS_YOY_ZONES: readonly ZoneLevel[] = [
+  { max: 0, label: "萎缩", tone: "danger", note: "< 0：同比转负，就业收缩（衰退区）" },
+  { max: 0.5, label: "走弱", tone: "caution", note: "0–0.5%：增长乏力，接近停滞" },
+  { max: 1.5, label: "正常", tone: "neutral", note: "0.5–1.5%：长期趋势增速（约等于劳动力增长）" },
+  { max: 2.5, label: "强劲", tone: "opportunity", note: "1.5–2.5%：扩张强劲" },
+  { max: Infinity, label: "过热", tone: "caution", note: "> 2.5%：过热，通常伴随后期回落" },
+];
+
+/** 新屋销售区间（千套，折年率）。 */
+export const HSALES_ZONES: readonly ZoneLevel[] = [
+  { max: 500, label: "低迷", tone: "warning", note: "< 50 万套：地产深度低迷（2009 底 27 万套）" },
+  { max: 650, label: "正常", tone: "neutral", note: "50–65 万套：常态区间" },
+  { max: 750, label: "强劲", tone: "opportunity", note: "65–75 万套：扩张良好" },
+  { max: Infinity, label: "高位", tone: "caution", note: "> 75 万套：高位（2021 低利率峰值约 100 万套）" },
+];
+
+/** Case-Shiller 全国房价同比区间（%） */
+export const CSHPI_YOY_ZONES: readonly ZoneLevel[] = [
+  { max: 0, label: "下跌", tone: "warning", note: "< 0：房价同比下跌（2008–2011）" },
+  { max: 3, label: "温和", tone: "neutral", note: "0–3%：长期通胀粘性水平" },
+  { max: 6, label: "偏热", tone: "caution", note: "3–6%：偏热（2020–2023 曾达 18% 为史诗级）" },
+  { max: Infinity, label: "过热", tone: "danger", note: "> 6%：过热，难持续" },
+];
+
+/** 汽车销量区间（百万辆，折年率） */
+export const ALTSA_ZONES: readonly ZoneLevel[] = [
+  { max: 14, label: "低迷", tone: "warning", note: "< 14：大件消费收缩（2009 底 9 万辆级）" },
+  { max: 16, label: "正常", tone: "neutral", note: "14–16：常态区间" },
+  { max: 17.5, label: "强劲", tone: "opportunity", note: "16–17.5：消费强劲" },
+  { max: Infinity, label: "高位", tone: "caution", note: "> 17.5：历史高位（2000 年代峰值 ~19）" },
+];
+
+/** WEI 周经济指数区间（%，GDP 同比增速的周频代理） */
+export const WEI_ZONES: readonly ZoneLevel[] = [
+  { max: -2, label: "深度收缩", tone: "danger", note: "< -2：衰退进行中（2020-04 峰值 -7.9）" },
+  { max: 0, label: "收缩", tone: "warning", note: "-2–0：负增长，0 为增长/收缩分界" },
+  { max: 1, label: "低迷", tone: "caution", note: "0–1：低速增长" },
+  { max: 2.5, label: "正常", tone: "neutral", note: "1–2.5：趋势增速附近" },
+  { max: 4, label: "扩张良好", tone: "opportunity", note: "2.5–4：扩张良好" },
+  { max: Infinity, label: "偏热", tone: "caution", note: "> 4：偏热" },
+];
+
+/** 美国最终需求 PPI 同比区间（%，PPIFIS 口径） */
+export const US_PPI_ZONES: readonly ZoneLevel[] = [
+  { max: 0, label: "通缩", tone: "warning", note: "< 0：工业品价格下行" },
+  { max: 2, label: "温和", tone: "neutral", note: "0–2%：温和" },
+  { max: 4, label: "偏高", tone: "caution", note: "2–4%：偏高（2022 峰值 ~11%）" },
+  { max: Infinity, label: "高通胀", tone: "danger", note: "> 4%：高通胀，货币收紧压力" },
+];
+
+/** 美国 CPI 同比区间（%） */
+export const US_CPI_ZONES: readonly ZoneLevel[] = [
+  { max: 0, label: "通缩", tone: "warning", note: "< 0：通缩压力" },
+  { max: 2, label: "低于目标", tone: "opportunity", note: "0–2%：低于联储 2% 目标，政策空间充裕" },
+  { max: 3, label: "目标上方", tone: "neutral", note: "2–3%：目标附近略偏高" },
+  { max: 4, label: "偏高", tone: "caution", note: "3–4%：偏高，紧缩压力" },
+  { max: Infinity, label: "高通胀", tone: "danger", note: "> 4%：高通胀（2022 峰值 9.1%）" },
+];
+
+/** 耐用品订单同比区间（%，替代未上架 FRED 的 ISM PMI） */
+export const DGORDER_YOY_ZONES: readonly ZoneLevel[] = [
+  { max: 0, label: "订单收缩", tone: "warning", note: "< 0：制造业订单萎缩" },
+  { max: 3, label: "温和", tone: "neutral", note: "0–3%：温和复苏" },
+  { max: 8, label: "扩张", tone: "opportunity", note: "3–8%：扩张期" },
+  { max: Infinity, label: "强劲/基数效应", tone: "caution", note: "> 8%：强劲，注意低基数扰动" },
+];
+
+/** 高收益债 OAS 利差区间（%）。
+ * 事件锚点：2008-11 峰 21.8%、2020-03 峰 10.9%、2022-10 高点 6.0%、常态 3–4.5%。
+ */
+export const HY_OAS_ZONES: readonly ZoneLevel[] = [
+  { max: 3, label: "宽松", tone: "neutral", note: "< 3%：信用定价宽松，风险偏好强（也可能自满）" },
+  { max: 4.5, label: "正常", tone: "neutral", note: "3–4.5%：常态区间" },
+  { max: 6, label: "偏紧", tone: "caution", note: "4.5–6%：信用趋紧（2022-10 加息高点 6.0）" },
+  { max: 8, label: "紧张", tone: "warning", note: "6–8%：信用显著紧张，> 6% 历史警戒" },
+  { max: Infinity, label: "危机模式", tone: "danger", note: "> 8%：危机级（2020-03 峰 10.9、2008-11 峰 21.8）" },
+];
+
 /**
  * 股权风险溢价 ERP 区间（盈利收益率 − 10Y 国债，单位 %）
  *
@@ -245,6 +344,33 @@ export const MARKLINES: Record<string, MarkLine[]> = {
   pmi: [{ y: 50, label: "50 荣枯线", color: "#6b7280" }],
   cpi: [{ y: 0, label: "0 通胀/通缩", color: "#6b7280" }],
   ppi: [{ y: 0, label: "0 通胀/通缩", color: "#6b7280" }],
+  // 美国宏观（FRED）
+  icwa: [
+    { y: 200000, label: "20万 强劲", color: "#16a34a" },
+    { y: 250000, label: "25万 正常", color: "#6b7280" },
+    { y: 300000, label: "30万 衰退阈值", color: "#dc2626" },
+  ],
+  ccwa: [{ y: 2000000, label: "200万 恶化", color: "#dc2626" }],
+  payems_yoy: [{ y: 0, label: "0 增长/收缩", color: "#dc2626" }],
+  hsales: [
+    { y: 500, label: "50万套 低迷", color: "#f59e0b" },
+    { y: 650, label: "65万套 正常", color: "#6b7280" },
+  ],
+  cshpi_yoy: [{ y: 0, label: "0 涨/跌", color: "#6b7280" }],
+  altsa: [{ y: 16, label: "16 正常上限", color: "#6b7280" }],
+  wei: [{ y: 0, label: "0 增长/收缩", color: "#dc2626" }],
+  ppiaco_yoy: [{ y: 0, label: "0 通胀/通缩", color: "#6b7280" }],
+  cpiaucsl_yoy: [
+    { y: 0, label: "0 通胀/通缩", color: "#dc2626" },
+    { y: 2, label: "2 联储目标", color: "#6b7280" },
+  ],
+  dgorder_yoy: [{ y: 0, label: "0 扩张/收缩", color: "#dc2626" }],
+  hy_oas: [
+    { y: 3, label: "3 宽松", color: "#16a34a" },
+    { y: 4.5, label: "4.5 正常上限", color: "#6b7280" },
+    { y: 6, label: "6 警戒", color: "#dc2626" },
+    { y: 8, label: "8 危机级", color: "#dc2626" },
+  ],
   erp_us: [
     { y: 0, label: "0 债溢线", color: "#e33d47" },
     { y: 1.9, label: "1.9 中位(P50)", color: "#6b7280" },
@@ -291,6 +417,17 @@ export const ZONES: Record<string, readonly ZoneLevel[]> = {
   erp_cn: ERP_CN_ZONES,
   cape_us: CAPE_US_ZONES,
   pe_cn: PE_CN_ZONES,
+  icwa: ICWA_ZONES,
+  ccwa: CCWA_ZONES,
+  payems_yoy: PAYEMS_YOY_ZONES,
+  hsales: HSALES_ZONES,
+  cshpi_yoy: CSHPI_YOY_ZONES,
+  altsa: ALTSA_ZONES,
+  wei: WEI_ZONES,
+  ppiaco_yoy: US_PPI_ZONES,
+  cpiaucsl_yoy: US_CPI_ZONES,
+  dgorder_yoy: DGORDER_YOY_ZONES,
+  hy_oas: HY_OAS_ZONES,
 };
 
 /* ---- 趋势图周期选项（利率/资金/ERP 抽屉共用）---- */
@@ -362,6 +499,28 @@ export const SOURCE_NOTES: Record<string, string> = {
   pmi: "数据来源：国家统计局月度 PMI（东方财富转引）。50 荣枯线为统计局官方定义。",
   cpi: "数据来源：国家统计局月度 CPI 同比（东方财富转引）。0/3% 为通缩/高通胀经验阈值。",
   ppi: "数据来源：国家统计局月度 PPI 同比（东方财富转引）。0 为通胀/通缩分界。",
+  icwa:
+    "数据来源：美国劳工部初请失业金人数 ICSA（FRED fredgraph.csv 公开接口，周频，经 4 周滚动均值平滑）。分档为历史事件锚点的经验归纳（绝对阈值随劳动人口增长长期上移），趋势比绝对值更重要。",
+  ccwa:
+    "数据来源：美国劳工部续请失业金人数 CCSA（FRED，周频）。2020 后水平结构性抬升，以纵向趋势比较为主。",
+  payems_yoy:
+    "数据来源：美国劳工部非农就业总人数 PAYEMS（FRED，月频，单位千人），同比由本系统计算。同比转负为就业萎缩信号。",
+  hsales:
+    "数据来源：美国普查局新屋销售 HSN1F（FRED，月频，千套折年率）。成屋销售 EXHOSLUSM495S 受 NAR 授权限制 FRED 仅存近 13 个月，故用 Census 新屋销售（1954 年起全史）。",
+  cshpi_yoy:
+    "数据来源：S&P/Case-Shiller 美国全国房价指数 CSUSHPINSA（FRED，月频，发布滞后约 2 个月），同比由本系统计算。",
+  altsa:
+    "数据来源：美联储 G.17 汽车总销量 TOTALSA（FRED，月频，百万辆折年率）。",
+  wei:
+    "数据来源：纽约联储每周经济指数 WEI（FRED，周频），11 项周度实体指标合成的 GDP 同比增速代理（Lewis-Mertens-Stock）。0 为增长/收缩分界。",
+  ppiaco_yoy:
+    "数据来源：美国劳工部最终需求 PPI PPIFIS（FRED，月频），同比由本系统计算。配铜金比看工业品通胀。",
+  cpiaucsl_yoy:
+    "数据来源：美国劳工部城市 CPI CPIAUCSL（FRED，月频，季调），同比由本系统计算。2% 为联储官方目标。配油金比看整体通胀。",
+  dgorder_yoy:
+    "数据来源：美国普查局耐用品新订单 DGORDER（FRED，月频，未剔除飞机与国防），同比由本系统计算。ISM 制造业 PMI 因 ISM 授权已从 FRED 下架（NAPM 404），以订单同比替代「制造业订单&采购」视角。",
+  hy_oas:
+    "数据来源：ICE BofA 美国高收益债期权调整利差 BAMLH0A0HYM2（FRED，日频）。事件锚点：2008-11 峰 21.8%、2020-03 峰 10.9%、2022-10 高点 6.0%。搭配 VIX 评估系统性风险。",
   erp_us:
     "股债收益差（Fed Model 口径）= S&P500 盈利收益率(1/PE_TTM×100) − 美债 10Y。\n\n" +
     "⚠️ 口径说明：这是 ERP（股权风险溢价）的粗略代理，不是严格 ERP。ERP 本身是不可观测的预期超额回报，估计方法有四类：① 历史已实现超额收益 ② 隐含 ERP（Damodaran 用贴现模型反解贴现率，美股典型 4%–6%）③ 调查法 ④ 本指标 E/P − 名义10Y。本指标是四者中最粗的一种，且用的是 TTM 滚动盈利而非前瞻盈利，与 ① ② ③ 的数值不可直接比。另注：「Fed Model」这个名字是 Ed Yardeni 起的，源自美联储 1997 年 Humphrey-Hawkins 报告里的一张图，美联储从未正式采纳过——方法论被广泛使用，但没有官方背书。\n\n" +

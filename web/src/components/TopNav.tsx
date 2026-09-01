@@ -28,6 +28,8 @@ export default function TopNav() {
       <NavLink to="/grid">卡片墙</NavLink>
       <NavLink to="/fundamentals">基本面</NavLink>
       <NavLink to="/sectors">行业板块</NavLink>
+      <NavLink to="/backtest">回测</NavLink>
+      <NavLink to="/research">本轮研究</NavLink>
       <NavLink to="/daily">日报</NavLink>
       <NavLink to="/plans">
         监督待办

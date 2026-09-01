@@ -1,10 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
-import { api } from "../api/client";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { api, sectorsApi } from "../api/client";
+import { sectorKeywordsForEtf } from "../data/sectorEtfMap";
 import AddSymbolDialog from "../components/AddSymbolDialog";
 import AssessmentPanel from "../components/AssessmentPanel";
-import CollapsiblePanel from "../components/CollapsiblePanel";
+import CollapsiblePanel, { type CollapsiblePanelHandle } from "../components/CollapsiblePanel";
 import ChartControls from "../components/ChartControls";
 import TrendChecklist from "../components/TrendChecklist";
 import ColorBacktestPanel from "../components/ColorBacktestPanel";
@@ -16,12 +17,16 @@ import ScenarioBacktestPanel from "../components/ScenarioBacktestPanel";
 import TradabilityPanel from "../components/TradabilityPanel";
 import ColorBadge from "../components/ColorBadge";
 import ExplanationPanel, { type Selection } from "../components/ExplanationPanel";
-import MarketBreadthStrip from "../components/MarketBreadthStrip";
+import MarketBreadthBadge from "../components/MarketBreadthBadge";
+import TodayDigestBar from "../components/TodayDigestBar";
 import KlineChart, {
   DEFAULT_DISPLAY,
+  effectiveDisplay,
   type ChartDisplay,
   type MarkPick,
 } from "../components/KlineChart";
+import { scopeMarkCounts } from "../components/klineStructureMarks";
+import { loadTimeframe } from "../components/klineTimeframe";
 import ResizeHandle from "../components/ResizeHandle";
 import TodayOverviewPanel from "../components/TodayOverviewPanel";
 import TodaySignalBanner from "../components/TodaySignalBanner";
@@ -50,6 +55,20 @@ const LINE_KINDS: ReadonlySet<MarkPick["kind"]> = new Set([
   "bottom_line",
   "top_line",
 ]);
+
+/** 板块阶段 chip 文案与色调（与 SectorsPage 的 STAGE_CN/STAGE_TONE 同口径）。 */
+const SECTOR_CHIP_CN: Record<string, string> = {
+  markup: "上升",
+  accumulation: "筑底",
+  distribution: "派发",
+  decline: "下降",
+};
+const SECTOR_CHIP_TONE: Record<string, string> = {
+  markup: "sector-up",
+  accumulation: "sector-base",
+  distribution: "sector-dist",
+  decline: "sector-down",
+};
 
 function resolveSelection(pick: MarkPick, detail: SymbolDetail): Selection {
   const source = MARK_SOURCE_CN[pick.kind];
@@ -103,9 +122,16 @@ function resolveSelection(pick: MarkPick, detail: SymbolDetail): Selection {
  */
 export default function WorkspacePage() {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const [params, setParams] = useSearchParams();
   const [selection, setSelection] = useState<Selection | null>(null);
-  const [display, setDisplay] = useState<ChartDisplay>(DEFAULT_DISPLAY);
+  // 周期默认日线，但沿用用户上次的选择（localStorage 持久化）。
+  const [display, setDisplay] = useState<ChartDisplay>(() => ({
+    ...DEFAULT_DISPLAY,
+    timeframe: loadTimeframe(),
+  }));
+  // 图例只描述「图上真的画了什么」：周/月线下日线专属项已隐藏，故读生效开关。
+  const legend = effectiveDisplay(display);
   const [addDialogGroup, setAddDialogGroup] = useState<number | null | undefined>(undefined);
   const [showCreatePlan, setShowCreatePlan] = useState(false);
   const [showBuyPoint, setShowBuyPoint] = useState(false);
@@ -116,6 +142,11 @@ export default function WorkspacePage() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   // KlineChart 把「下载当前图为 PNG」的闭包回传到这里，按钮点的时候调它
   const downloadPngRef = useRef<(() => void) | null>(null);
+  // 摘要条跳转：四个面板的命令式句柄（点击摘要段 → 展开并滚到对应面板）
+  const eventsPanelRef = useRef<CollapsiblePanelHandle>(null);
+  const tradePanelRef = useRef<CollapsiblePanelHandle>(null);
+  const exitPanelRef = useRef<CollapsiblePanelHandle>(null);
+  const tradabilityPanelRef = useRef<CollapsiblePanelHandle>(null);
   // 左栏宽度。读取 localStorage 让用户拖完一次后下次打开保持。
   const [sidebarWidth, setSidebarWidth] = useState<number>(() => {
     if (typeof window === "undefined") return 268;
@@ -239,16 +270,28 @@ export default function WorkspacePage() {
     [data],
   );
 
+  // 徽章计数按口径过滤（仅存活时只数 live），markTotals 提供总数显示「n/total」。
+  const markTotals = useMemo(() => {
+    const c = data?.chart;
+    return c
+      ? {
+          bottomMarks: c.bottomMarks.length,
+          topMarks: c.topMarks.length,
+          invalidatedMarks: c.invalidatedMarks.length,
+        }
+      : undefined;
+  }, [data]);
   const counts = useMemo(() => {
     const c = data?.chart;
+    const scoped = c ? scopeMarkCounts(c, display.marksScope) : null;
     return {
-      bottomMarks: c ? c.bottomMarks.length : 0,
-      topMarks: c ? c.topMarks.length : 0,
-      invalidatedMarks: c ? c.invalidatedMarks.length : 0,
+      bottomMarks: scoped ? scoped.bottomMarks : 0,
+      topMarks: scoped ? scoped.topMarks : 0,
+      invalidatedMarks: scoped ? scoped.invalidatedMarks : 0,
       keyVolatility: c ? c.keyVolatility.length : 0,
       levels: c ? (c.b1Line ? 1 : 0) + c.bottomLines.length + c.topLines.length : 0,
     };
-  }, [data]);
+  }, [data, display.marksScope]);
 
   const { lastClose, changePct, changeCls } = useMemo(() => {
     const close = data?.chart.lastClose ?? null;
@@ -261,6 +304,57 @@ export default function WorkspacePage() {
       changeCls: pct == null ? "flat" : pct > 0 ? "up" : pct < 0 ? "down" : "flat",
     };
   }, [data]);
+
+  // 今日摘要条：聚合既有数据（不新增任何判定）。
+  const digest = useMemo(() => {
+    const a = data?.assessment;
+    return {
+      events: data?.new_events.length ?? 0,
+      activeBuys: a?.trade_opportunities.filter((o) => o.is_active).length ?? 0,
+      exitSignals: a?.exit_signals.length ?? 0,
+      tradability: a?.tradability ?? null,
+    };
+  }, [data]);
+
+  // 反向联动：当前标的是映射内的行业 ETF 时，顶栏显示其所属板块的阶段。
+  // 只读板块趋势快照（已预计算、有缓存），点击跳板块页看完整判定。
+  const sectorKeywords = useMemo(
+    () => (selected ? sectorKeywordsForEtf(selected) : null),
+    [selected],
+  );
+  const { data: sectorTrend } = useQuery({
+    queryKey: ["sectorsTrend"],
+    queryFn: () => sectorsApi.trend(false, "all"),
+    staleTime: 5 * 60_000,
+    enabled: sectorKeywords != null,
+  });
+  const sectorChip = useMemo(() => {
+    if (!sectorKeywords || !sectorTrend?.boards) return null;
+    // 命中多级板块时取最宏观的（level 最小）；同 level 取第一个。
+    const hit = sectorTrend.boards
+      .filter((b) => sectorKeywords.some((k) => b.name.includes(k)))
+      .sort((a, b) => a.level - b.level)[0];
+    if (!hit) return null;
+    return { name: hit.name, stage: hit.stage as string | null };
+  }, [sectorKeywords, sectorTrend]);
+
+  // 摘要段点击 → 展开对应面板并平滑滚到其位置。
+  const jumpToPanel = useCallback(
+    (key: "events" | "buys" | "exits" | "tradability") => {
+      const map = {
+        events: ["ws-panel-events", eventsPanelRef],
+        buys: ["ws-panel-trade", tradePanelRef],
+        exits: ["ws-panel-exit", exitPanelRef],
+        tradability: ["ws-panel-tradability", tradabilityPanelRef],
+      } as const;
+      const [id, ref] = map[key];
+      ref.current?.expand();
+      requestAnimationFrame(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+    },
+    [],
+  );
 
   // 键盘上下键在当前可见列表中切换标的
   useEffect(() => {
@@ -291,7 +385,7 @@ export default function WorkspacePage() {
           {sidebarOpen ? "◀" : "▶"}
         </button>
         <strong>LEI 看盘系统</strong>
-        <MarketBreadthStrip />
+        <MarketBreadthBadge />
         {data && (
           <>
             <span className="ws-symbol">{data.display_name}</span>
@@ -317,6 +411,16 @@ export default function WorkspacePage() {
               >
                 {data.market_badge.summary_cn}
               </span>
+            )}
+            {sectorChip && (
+              <button
+                type="button"
+                className={`badge-chip sector-link-chip ${SECTOR_CHIP_TONE[sectorChip.stage ?? ""] ?? ""}`}
+                onClick={() => navigate("/sectors")}
+                title={`「${sectorChip.name}」板块阶段 · 点击打开板块趋势工作台（research_proxy）`}
+              >
+                {sectorChip.name} · {SECTOR_CHIP_CN[sectorChip.stage ?? ""] ?? "样本不足"}
+              </button>
             )}
           </>
         )}
@@ -412,6 +516,14 @@ export default function WorkspacePage() {
 
           {data && (
             <>
+              <TodayDigestBar
+                events={digest.events}
+                activeBuys={digest.activeBuys}
+                exitSignals={digest.exitSignals}
+                tradability={digest.tradability}
+                onJump={jumpToPanel}
+              />
+
               {data.meta.persist_warning && (
                 <div className="panel warn-panel">
                   <span className="stale-chip">未写入研究库</span>{" "}
@@ -427,6 +539,7 @@ export default function WorkspacePage() {
                   display={display}
                   onChange={setDisplay}
                   counts={counts}
+                  markTotals={markTotals}
                   onDownloadPng={() => downloadPngRef.current?.()}
                 />
                 <KlineChart
@@ -444,27 +557,27 @@ export default function WorkspacePage() {
                   <TrendChecklist payload={data.chart} assessment={data.assessment} />
                 </CollapsiblePanel>
                 <div className="chart-legend">
-                  {display.bottomMarks && (
+                  {legend.bottomMarks && (
                     <span>
                       <span className="mk mk-bottom">◆</span> 底部确认
                     </span>
                   )}
-                  {display.topMarks && (
+                  {legend.topMarks && (
                     <span>
                       <span className="mk mk-top">◆</span> 顶部确认
                     </span>
                   )}
-                  {display.invalidatedMarks && (
+                  {legend.invalidatedMarks && (
                     <span>
                       <span className="mk mk-dead">✕</span> 结构失效
                     </span>
                   )}
-                  {display.keyVolatility && (
+                  {legend.keyVolatility && (
                     <span>
                       <span className="mk mk-kv">▲</span> 关键性波动
                     </span>
                   )}
-                  {display.levels && (
+                  {legend.levels && (
                     <>
                       <span>
                         <span className="mk mk-b1">●</span> B1
@@ -477,7 +590,7 @@ export default function WorkspacePage() {
                       </span>
                     </>
                   )}
-                  {display.colorMode === "lei_state" && (
+                  {legend.colorMode === "lei_state" && (
                     <span className="muted">
                       LEI 着色：颜色=当日状态（绿/灰/黑）；涨跌方向看「今日概述」开高低收
                     </span>
@@ -500,11 +613,11 @@ export default function WorkspacePage() {
                     counts.invalidatedMarks ||
                     counts.keyVolatility ||
                     counts.levels
-                      ? display.bottomMarks ||
-                        display.topMarks ||
-                        display.invalidatedMarks ||
-                        display.keyVolatility ||
-                        display.levels
+                      ? legend.bottomMarks ||
+                        legend.topMarks ||
+                        legend.invalidatedMarks ||
+                        legend.keyVolatility ||
+                        legend.levels
                         ? "点标记/线右端圆点 → 右栏看解释"
                         : "信号标记默认隐藏，按上方开关显示"
                       : ""}
@@ -530,7 +643,7 @@ export default function WorkspacePage() {
               )}
 
               {data.assessment.trade_opportunities.length > 0 && (
-                <CollapsiblePanel title="潜在买点" storageKey="ws.card.trade" defaultCollapsed={true}>
+                <CollapsiblePanel id="ws-panel-trade" ref={tradePanelRef} title="潜在买点" storageKey="ws.card.trade" defaultCollapsed={true}>
                   <TradeOpportunityPanel
                     opportunities={data.assessment.trade_opportunities}
                     onSelect={setSelection}
@@ -557,7 +670,7 @@ export default function WorkspacePage() {
               )}
 
               {data.assessment.exit_signals.length > 0 && (
-                <CollapsiblePanel title="持仓退出" storageKey="ws.card.exit" defaultCollapsed={true}>
+                <CollapsiblePanel id="ws-panel-exit" ref={exitPanelRef} title="持仓退出" storageKey="ws.card.exit" defaultCollapsed={true}>
                   <ExitSignalPanel
                     exitSignals={data.assessment.exit_signals}
                     onSelect={setSelection}
@@ -566,7 +679,7 @@ export default function WorkspacePage() {
               )}
 
               {data.assessment.tradability && (
-                <CollapsiblePanel title="可交易性门禁" storageKey="ws.card.tradability" defaultCollapsed={true}>
+                <CollapsiblePanel id="ws-panel-tradability" ref={tradabilityPanelRef} title="可交易性门禁" storageKey="ws.card.tradability" defaultCollapsed={true}>
                   <TradabilityPanel tradability={data.assessment.tradability} />
                 </CollapsiblePanel>
               )}
@@ -586,7 +699,7 @@ export default function WorkspacePage() {
               {data.color_backtest && <ColorBacktestPanel report={data.color_backtest} />}
 
               {data.new_events.length > 0 && (
-                <CollapsiblePanel title={`今日新事件（${data.new_events.length}）`} storageKey="ws.card.newevents" defaultCollapsed={true}>
+                <CollapsiblePanel id="ws-panel-events" ref={eventsPanelRef} title={`今日新事件（${data.new_events.length}）`} storageKey="ws.card.newevents" defaultCollapsed={true}>
                   <div className="panel">
                     {data.new_events.map((e) => (
                       <div
