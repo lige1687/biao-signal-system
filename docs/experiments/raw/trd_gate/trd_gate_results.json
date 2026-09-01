@@ -1,0 +1,46 @@
+{
+ "arms_oos": {
+  "b200_gate_ref": {
+   "ann_pct": 2.26,
+   "calmar": 0.07,
+   "maxdd_pct": -32.59,
+   "sharpe": 0.22
+  },
+  "hold": {
+   "ann_pct": -3.42,
+   "calmar": -0.071,
+   "maxdd_pct": -47.89,
+   "sharpe": -0.06
+  },
+  "trd_gate": {
+   "ann_pct": -2.11,
+   "calmar": -0.067,
+   "maxdd_pct": -31.55,
+   "sharpe": -0.12
+  }
+ },
+ "experiment": "trd_gate_equity_bond",
+ "fit_quantiles": {
+  "q25": -0.1177,
+  "q75": 0.1985
+ },
+ "fit_window": [
+  "2015-06-16",
+  "2020-12-31"
+ ],
+ "lookback_days": 252,
+ "posterior_note": "档线由前半窗分位冻结，OOS 后半窗检验",
+ "verdict": {
+  "PASS_all": true,
+  "T1": true,
+  "T2": true
+ },
+ "verdict_rules": {
+  "T1": "trd Calmar >= hold Calmar x 1.5",
+  "T2": "trd ann >= hold ann - 2.0pp"
+ },
+ "window": [
+  "2021-01-01",
+  "2026-08-18"
+ ]
+}

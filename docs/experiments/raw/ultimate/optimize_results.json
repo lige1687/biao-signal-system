@@ -1,0 +1,131 @@
+{
+ "arms": {
+  "base_g10_s20": {
+   "ann_pct": 10.72,
+   "calmar": 0.411,
+   "maxdd_pct": -26.08,
+   "seg_dd_pct": -21.76,
+   "sharpe": 0.84
+  },
+  "base_g10_s30": {
+   "ann_pct": 11.0,
+   "calmar": 0.476,
+   "maxdd_pct": -23.12,
+   "seg_dd_pct": -20.54,
+   "sharpe": 0.88
+  },
+  "base_g15_s20": {
+   "ann_pct": 10.91,
+   "calmar": 0.439,
+   "maxdd_pct": -24.84,
+   "seg_dd_pct": -20.24,
+   "sharpe": 0.88
+  },
+  "base_g15_s30": {
+   "ann_pct": 11.16,
+   "calmar": 0.507,
+   "maxdd_pct": -22.02,
+   "seg_dd_pct": -19.28,
+   "sharpe": 0.91
+  },
+  "rebal_g10_s20": {
+   "ann_pct": 11.59,
+   "calmar": 0.44,
+   "maxdd_pct": -26.35,
+   "seg_dd_pct": -21.02,
+   "sharpe": 0.88
+  },
+  "rebal_g10_s30": {
+   "ann_pct": 12.13,
+   "calmar": 0.516,
+   "maxdd_pct": -23.48,
+   "seg_dd_pct": -19.96,
+   "sharpe": 0.91
+  },
+  "rebal_g15_s30": {
+   "ann_pct": 12.27,
+   "calmar": 0.549,
+   "maxdd_pct": -22.36,
+   "seg_dd_pct": -18.76,
+   "sharpe": 0.95
+  },
+  "rr2_g10_s20": {
+   "ann_pct": 9.62,
+   "calmar": 0.428,
+   "maxdd_pct": -22.49,
+   "seg_dd_pct": -22.49,
+   "sharpe": 0.85
+  },
+  "rr2_g10_s30": {
+   "ann_pct": 9.34,
+   "calmar": 0.439,
+   "maxdd_pct": -21.27,
+   "seg_dd_pct": -21.27,
+   "sharpe": 0.86
+  },
+  "rr2_rebal_g10_s20": {
+   "ann_pct": 10.18,
+   "calmar": 0.388,
+   "maxdd_pct": -26.22,
+   "seg_dd_pct": -20.56,
+   "sharpe": 0.81
+  },
+  "rr3_g10_s20": {
+   "ann_pct": 9.8,
+   "calmar": 0.419,
+   "maxdd_pct": -23.38,
+   "seg_dd_pct": -21.86,
+   "sharpe": 0.84
+  },
+  "rr3_g10_s30": {
+   "ann_pct": 9.62,
+   "calmar": 0.445,
+   "maxdd_pct": -21.6,
+   "seg_dd_pct": -20.3,
+   "sharpe": 0.87
+  }
+ },
+ "dedup_stats": {
+  "rr2": {
+   "dropped_total": 12,
+   "dup_exact": 4,
+   "input": 64,
+   "kept": 52,
+   "overlap_open": 8,
+   "rr_none_dropped": 14,
+   "same_day_module": 0
+  },
+  "rr3": {
+   "dropped_total": 9,
+   "dup_exact": 2,
+   "input": 40,
+   "kept": 31,
+   "overlap_open": 7,
+   "rr_none_dropped": 14,
+   "same_day_module": 0
+  }
+ },
+ "experiment": "ultimate_optimize_scan",
+ "posterior_note": "多臂后验比较找方向不定参数；最优臂七折引用",
+ "sat_stream_stats": {
+  "rr2": {
+   "cum_R": 115.2,
+   "final_eq_wan": 188.5,
+   "n_taken": 47
+  },
+  "rr3": {
+   "cum_R": 127.7,
+   "final_eq_wan": 205.7,
+   "n_taken": 30
+  },
+  "rr_none": {
+   "cum_R": 195.2,
+   "final_eq_wan": 297.9,
+   "n_taken": 198
+  }
+ },
+ "window": [
+  "2017-03-24",
+  "2026-08-18"
+ ]
+}

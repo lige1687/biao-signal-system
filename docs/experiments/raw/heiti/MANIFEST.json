@@ -1,0 +1,128 @@
+{
+ "team": "heiti（合体组）",
+ "archived_at": "2026-09-01",
+ "note": "本组 raw 数据分布在 raw/ 下 8 个实验目录（目录名无组前缀，报告引用原路径），本 MANIFEST 为统一入口。",
+ "reports_md": [
+  "docs/experiments/combined-certification-report-2026-08-31.md",
+  "docs/experiments/gold-expand-report-2026-08-31.md",
+  "docs/experiments/cash-leg-report-2026-08-31.md",
+  "docs/experiments/exit-matrix-report-2026-08-31.md",
+  "docs/experiments/signal-density-report-2026-08-31.md",
+  "docs/experiments/meta-scan-report-2026-08-31.md",
+  "docs/experiments/trd-gate-report-2026-08-31.md"
+ ],
+ "dependencies_not_in_this_commit": [
+  "scripts/run_portfolio_split.py / run_siphon_detector.py / backfill_a_share_klines.py（宽度组 WIP，工作区已还原）",
+  "src/lei_signal/backtest/*（宽度组 WIP，工作区已还原）",
+  "docs/experiments/raw/ 下宽度组既有目录（breadth_overlay/portfolio/full_stack 等）"
+ ],
+ "experiments": [
+  {
+   "experiment": "combined_cert",
+   "summary": "合体认证：B9+LEI分账 6/6 PASS",
+   "window": "2017-03-24~2026-07-17",
+   "script": "scripts/run_combined_cert.py",
+   "status": "passed",
+   "dual_run_sha256_seed0_eq_seed42": "d5fcf3a422a3d91c36e5a6ab56fc410f54448a94662e3a7a20f3290eaecea7f6",
+   "dual_run_note": "PYTHONHASHSEED=0 与 42 哈希一致",
+   "files": {
+    "combined_cert/combined_cert_results.json": "d5fcf3a422a3d91c36e5a6ab56fc410f54448a94662e3a7a20f3290eaecea7f6",
+    "combined_cert/combined_curves.csv": "ed3427db726913f2b7c0679f6129455471aff27074a462b69cf8da0f54970ab0"
+   }
+  },
+  {
+   "experiment": "gold_expand",
+   "summary": "黄金扩池 G5 FAIL→配置型可选",
+   "window": "2015-06-16~2026-08-18",
+   "script": "scripts/run_gold_expand.py",
+   "status": "mixed",
+   "dual_run_sha256_seed0_eq_seed42": "75e729e63ba9e80025ee4508adf4d6a0295f4fce99dd1cd0e060d04d855087d5",
+   "dual_run_note": "PYTHONHASHSEED=0 与 42 哈希一致",
+   "files": {
+    "gold_expand/gold_expand_results.json": "75e729e63ba9e80025ee4508adf4d6a0295f4fce99dd1cd0e060d04d855087d5",
+    "gold_expand/gold_curves.csv": "2bc3c6e3cedddb4d01514dc1be43dc73450fb59534c5c5a8a2be300182a93350",
+    "gold_expand/518880_close.parquet": "a92dfb18ec1956fbdc7186238b261b13e769896ec48d2d5e3925224fb1ab7525"
+   }
+  },
+  {
+   "experiment": "cash_leg",
+   "summary": "现金腿 +0.76pp 回撤零变化",
+   "window": "2015-06-16~2026-08-18",
+   "script": "scripts/run_cash_leg.py",
+   "status": "passed",
+   "dual_run_sha256_seed0_eq_seed42": "08a44aa0dcc61a3b02cea70fd86d7ed53820f9794b48c5f55123be93fdad2844",
+   "dual_run_note": "PYTHONHASHSEED=0 与 42 哈希一致",
+   "files": {
+    "cash_leg/cash_leg_results.json": "08a44aa0dcc61a3b02cea70fd86d7ed53820f9794b48c5f55123be93fdad2844",
+    "cash_leg/cash_curves.csv": "6caba30314b97b003e11e3b19c07b4ef908d44f230cec5906ccb7011fee257d3",
+    "cash_leg/511010_close.parquet": "b1188ff522e4b175fff661ea066dd92ca5599f0c5e40cb92f0c9a63f3d65009b",
+    "cash_leg/511990_close.parquet": "b64f7845ad87d56419fbe03f19bbcfac568043958dc2d598ac6f35905f51d87a"
+   }
+  },
+  {
+   "experiment": "exit_matrix",
+   "summary": "出场矩阵12组合：a6_1站得住 a6_3/b3证伪",
+   "window": "工作台窗口",
+   "script": "scripts/run_exit_matrix.py",
+   "status": "falsified",
+   "dual_run_sha256_seed0_eq_seed42": null,
+   "dual_run_note": "API 实验：12 个 run 已留痕于工作台 /api/backtest/runs（run_id 见 results JSON），不重跑避免重复生成记录",
+   "files": {
+    "exit_matrix/exit_matrix_results.json": "8e4d7a2cb231f116ab5c037d2a183dab69ca0cbe10c012fef209bd589f0c7293"
+   }
+  },
+  {
+   "experiment": "signal_density",
+   "summary": "破底翻密度脉冲9/9在大底（观察）",
+   "window": "2019-08~2026-06",
+   "script": "scripts/run_signal_density.py",
+   "status": "watch",
+   "dual_run_sha256_seed0_eq_seed42": "04c4f253c88073a07606829a9384223d720151fd898e5da8149d6d2f81ac54c4",
+   "dual_run_note": "PYTHONHASHSEED=0 与 42 哈希一致",
+   "files": {
+    "signal_density/signal_density_results.json": "04c4f253c88073a07606829a9384223d720151fd898e5da8149d6d2f81ac54c4",
+    "signal_density/monthly_density.csv": "5a72138cf1c37d4db4cb22b5bda9eb1dc5ca789c2ed8d8488fa59d914b40b565"
+   }
+  },
+  {
+   "experiment": "meta_scan",
+   "summary": "元扫描6假设：右尾利润/穿透/RR右尾",
+   "window": "2017-06~2026-08",
+   "script": "scripts/run_meta_scan.py",
+   "status": "passed",
+   "dual_run_sha256_seed0_eq_seed42": "4b3a7745a3681c3f76e81724912affa237e934e4313ac8caaff0ab9830fdbe75",
+   "dual_run_note": "PYTHONHASHSEED=0 与 42 哈希一致",
+   "files": {
+    "meta_scan/meta_scan_results.json": "4b3a7745a3681c3f76e81724912affa237e934e4313ac2caaff0ab9830fdbe75",
+    "meta_scan/merged_trades.csv": "88e224565e289617ac4c12967b5de1292305ae1e5f58c3993105c0ae6624fbba"
+   }
+  },
+  {
+   "experiment": "trd_gate",
+   "summary": "TRD股债门实质FAIL（判定缺陷如实披露）",
+   "window": "2021-01~2026-08 OOS",
+   "script": "scripts/run_trd_gate.py",
+   "status": "falsified",
+   "dual_run_sha256_seed0_eq_seed42": "2ce5db732ddcadb4ce1ae99095ce364186b422c5e3c01a593e385d7236e497b3",
+   "dual_run_note": "PYTHONHASHSEED=0 与 42 哈希一致",
+   "files": {
+    "trd_gate/trd_gate_results.json": "2ce5db732ddcadb4ce1ae99095ce364186b422c5e3c01a593e385d7236e497b3"
+   }
+  },
+  {
+   "experiment": "ultimate",
+   "summary": "终极组合合成+优化扫描13臂",
+   "window": "2017-03-24~2026-08-18",
+   "script": "scripts/run_ultimate_combo.py + scripts/run_optimize_ultimate.py",
+   "status": "passed",
+   "dual_run_sha256_seed0_eq_seed42": "db47a3cf74c516182652c95670b8320c404303452721b51112df51486a60b6af / 75524d972a5693ab8b6b89954fafd1f24fea7f6bb946a9fde198620c13d7a7a0",
+   "dual_run_note": "PYTHONHASHSEED=0 与 42 哈希一致",
+   "files": {
+    "ultimate/ultimate_results.json": "db47a3cf74c516182652c95670b8320c404303452721b51112df51486a60b6af",
+    "ultimate/ultimate_curves.csv": "457f8ea3f36a42753059aa75d6fdc05ea6e0efa2e1cd6a2e5047222b1647b270",
+    "ultimate/optimize_results.json": "75524d972a5693ab8b6b89954fafd1f24fea7f6bb946a9fde198620c13d7a7a0",
+    "ultimate/optimize_curves.csv": "3855a01407927bc71e2eb5ab36607896a9251cd4f6a27f8f26828d4d0de51e57"
+   }
+  }
+ ]
+}

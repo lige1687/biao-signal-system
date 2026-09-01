@@ -1,0 +1,60 @@
+{
+ "arms": {
+  "b9": {
+   "ann_pct": 8.52,
+   "calmar": 0.245,
+   "maxdd_pct": -34.73,
+   "seg_dd_pct": -28.79,
+   "sharpe": 0.57
+  },
+  "b9_cash": {
+   "ann_pct": 9.65,
+   "calmar": 0.278,
+   "maxdd_pct": -34.73,
+   "seg_dd_pct": -27.85,
+   "sharpe": 0.63
+  },
+  "combo20": {
+   "ann_pct": 9.94,
+   "calmar": 0.349,
+   "maxdd_pct": -28.51,
+   "seg_dd_pct": -25.32,
+   "sharpe": 0.74
+  },
+  "hold": {
+   "ann_pct": 3.7,
+   "calmar": 0.077,
+   "maxdd_pct": -47.89,
+   "seg_dd_pct": -44.95,
+   "sharpe": 0.28
+  },
+  "lei": {
+   "ann_pct": 14.5,
+   "calmar": 0.548,
+   "maxdd_pct": -26.48,
+   "seg_dd_pct": -22.15,
+   "sharpe": 0.61
+  },
+  "main_ult": {
+   "ann_pct": 10.15,
+   "calmar": 0.319,
+   "maxdd_pct": -31.84,
+   "seg_dd_pct": -24.53,
+   "sharpe": 0.71
+  },
+  "ultimate": {
+   "ann_pct": 11.14,
+   "calmar": 0.427,
+   "maxdd_pct": -26.08,
+   "seg_dd_pct": -21.74,
+   "sharpe": 0.87
+  }
+ },
+ "definition": "main = B9*0.9 + gold*0.1 with idle cash in 511010; ultimate = main*0.8 + LEI_fund_only*0.2",
+ "experiment": "ultimate_combo_display",
+ "no_new_params": true,
+ "window": [
+  "2017-03-24",
+  "2026-08-18"
+ ]
+}
