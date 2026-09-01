@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import FlagshipSection from "../components/FlagshipSection";
+import { REPORTS_INDEX } from "../data/reportsIndex";
 import * as echarts from "echarts";
 import {
   FALSIFIED,
@@ -110,21 +111,20 @@ export default function ResearchPage() {
       </div>
 
       <FlagshipSection />
-      <Section title="报告存档" sub="自包含离线 HTML · 仓库 web/public/reports/ · 拉库后可直接双击打开">
+      <Section title="报告存档" sub="多路回测统一归档 · 自包含离线 HTML · 仓库 web/public/reports/">
         <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 4 }}>
-          {[
-            ["旗舰三组合总览（净值·买卖点·仓位带，2026-09-01）", "/reports/flagship-2026-09-01.html"],
-            ["两只版逐笔调仓明细（139 笔，2026-09-01）", "/reports/duo-trades-2026-09-01.html"],
-            ["本轮总报告（宽度/ETF/虹吸全档案，2026-08-31）", "/reports/round-2026-08-31.html"],
-            ["上轮总报告（B 形态终审矩阵，2026-08-28）", "/reports/round-2026-08-28.html"],
-          ].map(([label, href]) => (
-            <a key={href} href={href} target="_blank" rel="noreferrer"
+          {REPORTS_INDEX.map((r) => (
+            <a key={r.id} href={r.href} target="_blank" rel="noreferrer"
                style={{ fontSize: 13, padding: "8px 12px", border: "1px solid var(--border)",
                         borderRadius: 8, textDecoration: "none", color: "var(--text-main)",
-                        background: "var(--bg-card)" }}>
-              📄 {label}
+                        background: "var(--bg-card)", maxWidth: 460 }}>
+              {r.status === "falsified" ? "❌" : r.status === "passed" ? "✅" : r.status === "watch" ? "👁" : "⚖️"}{" "}
+              [{r.team}] {r.title}
             </a>
           ))}
+        </div>
+        <div style={{ fontSize: 12, color: "var(--text-faint)", marginTop: 6 }}>
+          新增报告：HTML 放 web/public/reports/，条目追加到 web/src/data/reportsIndex.ts（只追加，不改别人的）。
         </div>
       </Section>
       <Section title="① 仓位方案比拼" sub="同样 100 万 · 同样十年 · 同样的买卖点，只有仓位管法不同">
