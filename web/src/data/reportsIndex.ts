@@ -41,14 +41,16 @@ export const REPORTS_INDEX: ReportEntry[] = [
     oneLine: "创业板×三档(43.3/56.7)+虹吸+纳指持有，周频信号次日执行，16年139笔，约1.4个月/次",
   },
   {
-    id: "breadth-round-0831",
-    team: "宽度组",
-    title: "总报告：宽度/ETF/虹吸全档案",
+    id: "lei-explore-round-0831",
+    team: "LEI 流",
+    title: "LEI 探索回合报告（终极组合/元特征/出场矩阵）",
     href: "/reports/round-2026-08-31.html",
     date: "2026-08-31",
-    topic: "宽度择时",
+    topic: "组合架构",
     status: "mixed",
-    oneLine: "M1流动性轴判负、融资余额虹吸双池全过、14行业适配地图、16+项证伪档案全记录",
+    oneLine:
+      "宽度组 2026-09-01 前误将本文件登记为本组总报告,经合体组冲突发现核对 <title> 后更正归属;" +
+      "内容为 LEI 探索回合:终极组合/元特征大扫描/出场变体矩阵,详见合体组 ARCHIVE",
   },
   {
     id: "breadth-round-0828",
