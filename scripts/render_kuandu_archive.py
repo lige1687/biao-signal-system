@@ -21,15 +21,21 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "src"))
 
-import pandas as pd
+import pandas as pd  # noqa: E402
 
-from lei_signal.timing_backtest.data import (
-    align_index_breadth, load_breadth, load_index_bars,
+from lei_signal.timing_backtest.data import (  # noqa: E402
+    align_index_breadth,
+    load_breadth,
+    load_index_bars,
 )
-from lei_signal.timing_backtest.engine import simulate
-from lei_signal.timing_backtest.metrics import compute_performance, summarize_run
-from lei_signal.timing_backtest.service import compute_run
-from lei_signal.timing_backtest.strategies import LadderParams, TrendGate, build_target
+from lei_signal.timing_backtest.engine import simulate  # noqa: E402
+from lei_signal.timing_backtest.metrics import compute_performance, summarize_run  # noqa: E402
+from lei_signal.timing_backtest.service import compute_run  # noqa: E402
+from lei_signal.timing_backtest.strategies import (  # noqa: E402
+    LadderParams,
+    TrendGate,
+    build_target,
+)
 
 RAW = REPO / "docs/experiments/raw/kuandu-quanzhan"
 OUT_HTML = REPO / "web/public/reports/kuandu-quanzhan-2026-09-01.html"
@@ -96,7 +102,6 @@ def build_payloads() -> dict[str, dict]:
                       .pct_change().fillna(0))
     for name, lst in (("champion", champ_r), ("synergy", syn_r), ("hold", hold_r)):
         curves[name] = (1 + pd.concat(lst, axis=1).mean(axis=1)).cumprod()
-    common = curves["hold"].loc["2015-06-16":]
     payloads["portfolio_3tier"] = {
         "name": "A股组合三档（8指数sleeve等权）",
         "criteria": CRITERIA["portfolio"] + " " + CRITERIA["synergy"],
@@ -204,9 +209,9 @@ def svg_chart(series: dict[str, list[float]], dates: list[str], w: int = 860,
         y = pad_t + ih * k / 4
         parts.append(f'<line x1="{pad_l}" y1="{y:.0f}" x2="{w - 12}" y2="{y:.0f}" '
                      f'stroke="#222" stroke-width="1"/>')
-        v = math.exp(math.log(hi) - (math.log(hi) - math.log(lo)) * k / 4) if log else hi - (hi - lo) * k / 4
+        v = math.exp(math.log(hi) - (math.log(hi) - math.log(lo)) * k / 4) if log else hi - (hi - lo) * k / 4  # noqa: E501
         parts.append(f'<text x="4" y="{y + 4:.0f}" fill="#777" font-size="10">{v:.1f}</text>')
-    for i, frac in enumerate((0.0, 0.25, 0.5, 0.75, 1.0)):
+    for _i, frac in enumerate((0.0, 0.25, 0.5, 0.75, 1.0)):
         x = pad_l + iw * frac
         parts.append(f'<text x="{x:.0f}" y="{h - 8}" fill="#777" font-size="10" '
                      f'text-anchor="middle">{dates[int(frac * (len(dates) - 1))][:7]}</text>')
@@ -220,7 +225,7 @@ def svg_chart(series: dict[str, list[float]], dates: list[str], w: int = 860,
     for name in series:
         c = colors.get(name, "#4c9be8")
         parts.append(f'<rect x="{lx}" y="{pad_t - 14}" width="10" height="4" fill="{c}"/>'
-                     f'<text x="{lx + 14}" y="{pad_t - 9}" fill="#aaa" font-size="11">{name}</text>')
+                     f'<text x="{lx + 14}" y="{pad_t - 9}" fill="#aaa" font-size="11">{name}</text>')  # noqa: E501
         lx += 110
     parts.append("</svg>")
     return "".join(parts)
@@ -292,7 +297,7 @@ def render_html(payloads: dict, double_hash: str) -> str:
         kpi_card("⑤ 美股·标普防守（40/80·vol0.15）", [
             ("年化", pc(us["instruments"]["^GSPC"]["metrics"]["strategy_cagr"])),
             ("最大回撤", pm(us["instruments"]["^GSPC"]["metrics"]["strategy_mdd"])),
-            ("Calmar", f"{us['instruments']['^GSPC']['metrics']['strategy_cagr'] / abs(us['instruments']['^GSPC']['metrics']['strategy_mdd']):.2f}"),
+            ("Calmar", f"{us['instruments']['^GSPC']['metrics']['strategy_cagr'] / abs(us['instruments']['^GSPC']['metrics']['strategy_mdd']):.2f}"),  # noqa: E501
             ("窗口", "1986→2026-08"), ("费用", "10bp"), ("时滞", "T收盘→T+1开盘"),
             ("对照·持有", f"{pc(us['instruments']['^GSPC']['metrics']['benchmark_cagr'])} / "
                           f"{pm(us['instruments']['^GSPC']['metrics']['benchmark_mdd'])}"),
@@ -300,7 +305,7 @@ def render_html(payloads: dict, double_hash: str) -> str:
         kpi_card("⑥ 美股·纳指防守（20/80·5档）", [
             ("年化", pc(ixic["metrics"]["strategy_cagr"])),
             ("最大回撤", pm(ixic["metrics"]["strategy_mdd"])),
-            ("Calmar", f"{ixic['metrics']['strategy_cagr'] / abs(ixic['metrics']['strategy_mdd']):.2f}"),
+            ("Calmar", f"{ixic['metrics']['strategy_cagr'] / abs(ixic['metrics']['strategy_mdd']):.2f}"),  # noqa: E501
             ("窗口", "1986→2026-08"), ("费用", "10bp"), ("时滞", "T收盘→T+1开盘"),
             ("对照·持有", f"{pc(ixic['metrics']['benchmark_cagr'])} / "
                           f"{pm(ixic['metrics']['benchmark_mdd'])}"),
@@ -308,49 +313,54 @@ def render_html(payloads: dict, double_hash: str) -> str:
         kpi_card("⑦ LEI双门·创业板（风控代表）", [
             ("年化", pc(lei["full"]["L3"]["strategy_cagr"])),
             ("最大回撤", pm(lei["full"]["L3"]["strategy_mdd"])),
-            ("Calmar", f"{lei['full']['L3']['strategy_cagr'] / abs(lei['full']['L3']['strategy_mdd']):.2f}"),
+            ("Calmar", f"{lei['full']['L3']['strategy_cagr'] / abs(lei['full']['L3']['strategy_mdd']):.2f}"),  # noqa: E501
             ("窗口", "2010-06→2026-08"), ("费用", "10bp"), ("时滞", "T收盘→T+1开盘"),
             ("2018压力窗", f"E0 {pm(lei['y2018']['E0']['mdd'])} → L3 "
-                           f"{pm(lei['y2018']['L3']['mdd'])}（纯宽度 {pc(lei['full']['E0']['strategy_cagr'])}）"),
+                           f"{pm(lei['y2018']['L3']['mdd'])}（纯宽度 {pc(lei['full']['E0']['strategy_cagr'])}）"),  # noqa: E501
         ]),
     ]
 
     falsified_rows = "".join(
         f"<tr><td>{n}</td><td>{h}</td><td>{r}</td></tr>"
         for n, h, r in [
-            ("宽度背离(顶/底)", "价格新高+宽度不新高=顶", "A股事件后120日+11.9%＞基准+7.1%（方向反）；美股+3.1%＜+5.9%但过弱；策略级与冠军逐窗相同（no-op）"),
-            ("动量/RS轮动入池", "月末买RS前5", "共同窗2015-06→ T5 -3.6%/-65% vs 静态冠军 +12.2%/-36%"),
-            ("多因子选股(5因子)", "因子Top5×宽度预算", "M1 +3.7%/M2 +6.2%/M3 +7.5% 全输全池等权 M0 +8.2%"),
-            ("高·上格改持有", "动量牛别空仓", "证券超额+16.3%→+5.6%，创业板回撤-41%→-57%（6标5差）"),
-            ("接刀格三补丁", "时间止损/深度档/斜率", "2018与2024事前不可区分：V1躲刀-37→-19但割V底+39.6→+7.1；V2/V3全窗劣化超限"),
-            ("宽度推力独立信号", "低位急升=启动", "事件后≈无条件基准(+13.0% vs +12.5%)；仅低位过滤(+13.0 vs 无推力+3.8)"),
+            ("宽度背离(顶/底)", "价格新高+宽度不新高=顶", "A股事件后120日+11.9%＞基准+7.1%（方向反）；美股+3.1%＜+5.9%但过弱；策略级与冠军逐窗相同（no-op）"),  # noqa: E501
+            ("动量/RS轮动入池", "月末买RS前5", "共同窗2015-06→ T5 -3.6%/-65% vs 静态冠军 +12.2%/-36%"),  # noqa: E501
+            ("多因子选股(5因子)", "因子Top5×宽度预算", "M1 +3.7%/M2 +6.2%/M3 +7.5% 全输全池等权 M0 +8.2%"),  # noqa: E501
+            ("高·上格改持有", "动量牛别空仓", "证券超额+16.3%→+5.6%，创业板回撤-41%→-57%（6标5差）"),  # noqa: E501
+            ("接刀格三补丁", "时间止损/深度档/斜率", "2018与2024事前不可区分：V1躲刀-37→-19但割V底+39.6→+7.1；V2/V3全窗劣化超限"),  # noqa: E501
+            ("宽度推力独立信号", "低位急升=启动", "事件后≈无条件基准(+13.0% vs +12.5%)；仅低位过滤(+13.0 vs 无推力+3.8)"),  # noqa: E501
             ("美股个股×宽度", "预算管个股", "12只三方向平均超额-8.6~-17.3pp/年"),
-            ("美股个股×慢门", "MA200/三色/长趋势", "回撤削减≈0（MSFT -69%→-29 仅防守版），年化损失2.4~11.9pp"),
+            ("美股个股×慢门", "MA200/三色/长趋势", "回撤削减≈0（MSFT -69%→-29 仅防守版），年化损失2.4~11.9pp"),  # noqa: E501
             ("美股个股×模块A默认", "系统平移", "108笔期望-0.65R/PF0.67（七姐妹）"),
-            ("美股个股×160组网格", "参数本土化", "分层117只：A仅2笔/B·D零信号/C最好19笔+0.54R——无一通过预注册线"),
-            ("宽度救活A模块(28轮)", "低中区过滤+0.50R", "★自我修正：分层样本仅2笔——小样本幻觉，29轮推翻"),
-            ("双指标仓位(B200+B50)", "叠加更优", "组合可把回撤再压3-8pp但超额腰斩；重复计数+边界抖动"),
+            ("美股个股×160组网格", "参数本土化", "分层117只：A仅2笔/B·D零信号/C最好19笔+0.54R——无一通过预注册线"),  # noqa: E501
+            ("宽度救活A模块(28轮)", "低中区过滤+0.50R", "★自我修正：分层样本仅2笔——小样本幻觉，29轮推翻"),  # noqa: E501
+            ("双指标仓位(B200+B50)", "叠加更优", "组合可把回撤再压3-8pp但超额腰斩；重复计数+边界抖动"),  # noqa: E501
         ])
 
     bug_rows = "".join(
         f"<tr><td>{n}</td><td>{b}</td><td>{a}</td></tr>"
         for n, b, a in [
-            ("ETF新浪未复权除权假摔", "医药-74%/酒-48%等假跌混入行业结论", "隔离8只+审计脚本(<-15%熔断)；行业结论全部改指数口径复核"),
-            ("美股宽度源未复权", "拆股假摔压低宽度：高区占比63%(错)", "代理通道yfinance复权重建：63%→75%，末日B200 71.4→74.6；旧数据备份.bak"),
-            ("美股复权价止损退化", "MSFT 1991单笔R=-121万污染总表", "剔除风险距离<10bp病态单(主配置剔19笔)；修复前模块A期望被严重低估"),
+            ("ETF新浪未复权除权假摔", "医药-74%/酒-48%等假跌混入行业结论", "隔离8只+审计脚本(<-15%熔断)；行业结论全部改指数口径复核"),  # noqa: E501
+            ("美股宽度源未复权", "拆股假摔压低宽度：高区占比63%(错)", "代理通道yfinance复权重建：63%→75%，末日B200 71.4→74.6；旧数据备份.bak"),  # noqa: E501
+            ("美股复权价止损退化", "MSFT 1991单笔R=-121万污染总表", "剔除风险距离<10bp病态单(主配置剔19笔)；修复前模块A期望被严重低估"),  # noqa: E501
             ("月度再平衡年化口径bug", "月行数被当日年化→+956%", "按12期/年重算→+11.8%"),
             ("RS因子DataFrame对齐bug", "M1/M3全空仓(全NaN)", "sub(axis=0)修正后结果恢复"),
-            ("28轮小样本幻觉", "七姐妹9笔+0.50R→'宽度救活A模块'", "分层117只复验仅2笔——证伪并入册（诚实条款#3事后选择声明）"),
-            ("组合全窗口径组成效应", "全窗冠军组合+4.6%<持有+7.9%", "早期仅沪深300单sleeve存活所致；共同窗口(8sleeve齐)+12.2% 才是真实水平"),
-            ("全A宽表尾巴停更", "断点续传按股跳过→老股不更新", "refresh_timing_matrix 每日从增量缓存拼新日期"),
+            ("28轮小样本幻觉", "七姐妹9笔+0.50R→'宽度救活A模块'", "分层117只复验仅2笔——证伪并入册（诚实条款#3事后选择声明）"),  # noqa: E501
+            ("组合全窗口径组成效应", "全窗冠军组合+4.6%<持有+7.9%", "早期仅沪深300单sleeve存活所致；共同窗口(8sleeve齐)+12.2% 才是真实水平"),  # noqa: E501
+            ("全A宽表尾巴停更", "断点续传按股跳过→老股不更新", "refresh_timing_matrix 每日从增量缓存拼新日期"),  # noqa: E501
         ])
 
     html = f"""<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
 <title>宽度全栈组 · 31轮总决算归档 2026-09-01</title><style>
-body{{background:#0b0d10;color:#d8dade;font-family:-apple-system,"PingFang SC",sans-serif;margin:0;padding:24px;max-width:980px}}
-h1{{font-size:22px}} h2{{font-size:17px;color:#7fd0a0;border-bottom:1px solid #233;padding-bottom:6px;margin-top:34px}}
+body{{background:#0b0d10;color:#d8dade;
+font-family:-apple-system,"PingFang SC",sans-serif;
+margin:0;padding:24px;max-width:980px}}
+h1{{font-size:22px}}
+h2{{font-size:17px;color:#7fd0a0;border-bottom:1px solid #233;
+padding-bottom:6px;margin-top:34px}}
 .sub{{color:#8a93a0;font-size:13px}}
-.card{{background:#12151a;border:1px solid #232830;border-radius:10px;padding:12px 14px;margin:10px 0}}
+.card{{background:#12151a;border:1px solid #232830;
+border-radius:10px;padding:12px 14px;margin:10px 0}}
 .ct{{font-weight:600;margin-bottom:8px}}
 .kg{{display:flex;flex-wrap:wrap;gap:8px}}
 .k{{flex:1 1 110px;background:#0f1115;border-radius:6px;padding:6px 8px}}
@@ -359,7 +369,8 @@ table{{border-collapse:collapse;width:100%;font-size:12px}}
 td,th{{border:1px solid #232830;padding:5px 7px;text-align:left;vertical-align:top}}
 th{{color:#9aa5b1;background:#12151a}}
 .pos{{color:#7fd0a0}} .neg{{color:#e3745f}}
-pre{{background:#12151a;border:1px solid #232830;border-radius:8px;padding:10px;font-size:12px;overflow-x:auto}}
+pre{{background:#12151a;border:1px solid #232830;
+border-radius:8px;padding:10px;font-size:12px;overflow-x:auto}}
 </style></head><body>
 <h1>宽度全栈组 · 31 轮回测总决算归档</h1>
 <p class="sub">2026-09-01 · 约7500+参数组 · 40+标的 · A股1990/美股1986起 · 全部判定标准事前预注册 ·
@@ -374,11 +385,15 @@ pre{{background:#12151a;border:1px solid #232830;border-radius:8px;padding:10px;
 <table><tr><th>bug</th><th>修复前</th><th>修复后</th></tr>{bug_rows}</table>
 <h2>五、诚实声明</h2>
 <ul style="font-size:13px;line-height:1.8">
-<li>全A宽度按当前存续个股回算（幸存者偏差，1990s最重）；美股宽度同样当前成分回溯（复权口径已修正）。</li>
-<li>冠军+3.8%~4.4%为历史选优值：5年滚动83%为正/中位+6.6%/最差-19.3%，未来预期按此打折。</li>
-<li>宽度超额是2010年后市场现象（35年检验：2006-16宽基输12pp/年）；疯牛主升段跑输是保费，2015股灾+18.5% vs -51.8%为理赔。</li>
+<li>全A宽度按当前存续个股回算（幸存者偏差，1990s最重）；
+美股宽度同样当前成分回溯（复权口径已修正）。</li>
+<li>冠军+3.8%~4.4%为历史选优值：5年滚动83%为正/中位+6.6%/最差-19.3%，
+未来预期按此打折。</li>
+<li>宽度超额是2010年后市场现象（35年检验：2006-16宽基输12pp/年）；
+疯牛主升段跑输是保费，2015股灾+18.5% vs -51.8%为理赔。</li>
 <li>美股个股三层全灭（宽度/慢门/模块A参数网格），负面结论与通过结论同等入库。</li>
-<li>信号T日收盘生成→T+1开盘执行（fuzz 30例无未来函数）；费用10bp双边（ETF执行载体另有5bp口径备注）。</li>
+<li>信号T日收盘生成→T+1开盘执行（fuzz 30例无未来函数）；
+费用10bp双边（ETF执行载体另有5bp口径备注）。</li>
 </ul>
 <h2>六、复现</h2>
 <pre>PYTHONHASHSEED=0  python3.11 scripts/render_kuandu_archive.py          # 重跑并落 raw JSON

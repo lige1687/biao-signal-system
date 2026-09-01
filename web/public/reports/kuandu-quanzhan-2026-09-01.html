@@ -1,9 +1,14 @@
 <!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
 <title>宽度全栈组 · 31轮总决算归档 2026-09-01</title><style>
-body{background:#0b0d10;color:#d8dade;font-family:-apple-system,"PingFang SC",sans-serif;margin:0;padding:24px;max-width:980px}
-h1{font-size:22px} h2{font-size:17px;color:#7fd0a0;border-bottom:1px solid #233;padding-bottom:6px;margin-top:34px}
+body{background:#0b0d10;color:#d8dade;
+font-family:-apple-system,"PingFang SC",sans-serif;
+margin:0;padding:24px;max-width:980px}
+h1{font-size:22px}
+h2{font-size:17px;color:#7fd0a0;border-bottom:1px solid #233;
+padding-bottom:6px;margin-top:34px}
 .sub{color:#8a93a0;font-size:13px}
-.card{background:#12151a;border:1px solid #232830;border-radius:10px;padding:12px 14px;margin:10px 0}
+.card{background:#12151a;border:1px solid #232830;
+border-radius:10px;padding:12px 14px;margin:10px 0}
 .ct{font-weight:600;margin-bottom:8px}
 .kg{display:flex;flex-wrap:wrap;gap:8px}
 .k{flex:1 1 110px;background:#0f1115;border-radius:6px;padding:6px 8px}
@@ -12,7 +17,8 @@ table{border-collapse:collapse;width:100%;font-size:12px}
 td,th{border:1px solid #232830;padding:5px 7px;text-align:left;vertical-align:top}
 th{color:#9aa5b1;background:#12151a}
 .pos{color:#7fd0a0} .neg{color:#e3745f}
-pre{background:#12151a;border:1px solid #232830;border-radius:8px;padding:10px;font-size:12px;overflow-x:auto}
+pre{background:#12151a;border:1px solid #232830;
+border-radius:8px;padding:10px;font-size:12px;overflow-x:auto}
 </style></head><body>
 <h1>宽度全栈组 · 31 轮回测总决算归档</h1>
 <p class="sub">2026-09-01 · 约7500+参数组 · 40+标的 · A股1990/美股1986起 · 全部判定标准事前预注册 ·
@@ -27,11 +33,15 @@ pre{background:#12151a;border:1px solid #232830;border-radius:8px;padding:10px;f
 <table><tr><th>bug</th><th>修复前</th><th>修复后</th></tr><tr><td>ETF新浪未复权除权假摔</td><td>医药-74%/酒-48%等假跌混入行业结论</td><td>隔离8只+审计脚本(<-15%熔断)；行业结论全部改指数口径复核</td></tr><tr><td>美股宽度源未复权</td><td>拆股假摔压低宽度：高区占比63%(错)</td><td>代理通道yfinance复权重建：63%→75%，末日B200 71.4→74.6；旧数据备份.bak</td></tr><tr><td>美股复权价止损退化</td><td>MSFT 1991单笔R=-121万污染总表</td><td>剔除风险距离<10bp病态单(主配置剔19笔)；修复前模块A期望被严重低估</td></tr><tr><td>月度再平衡年化口径bug</td><td>月行数被当日年化→+956%</td><td>按12期/年重算→+11.8%</td></tr><tr><td>RS因子DataFrame对齐bug</td><td>M1/M3全空仓(全NaN)</td><td>sub(axis=0)修正后结果恢复</td></tr><tr><td>28轮小样本幻觉</td><td>七姐妹9笔+0.50R→'宽度救活A模块'</td><td>分层117只复验仅2笔——证伪并入册（诚实条款#3事后选择声明）</td></tr><tr><td>组合全窗口径组成效应</td><td>全窗冠军组合+4.6%<持有+7.9%</td><td>早期仅沪深300单sleeve存活所致；共同窗口(8sleeve齐)+12.2% 才是真实水平</td></tr><tr><td>全A宽表尾巴停更</td><td>断点续传按股跳过→老股不更新</td><td>refresh_timing_matrix 每日从增量缓存拼新日期</td></tr></table>
 <h2>五、诚实声明</h2>
 <ul style="font-size:13px;line-height:1.8">
-<li>全A宽度按当前存续个股回算（幸存者偏差，1990s最重）；美股宽度同样当前成分回溯（复权口径已修正）。</li>
-<li>冠军+3.8%~4.4%为历史选优值：5年滚动83%为正/中位+6.6%/最差-19.3%，未来预期按此打折。</li>
-<li>宽度超额是2010年后市场现象（35年检验：2006-16宽基输12pp/年）；疯牛主升段跑输是保费，2015股灾+18.5% vs -51.8%为理赔。</li>
+<li>全A宽度按当前存续个股回算（幸存者偏差，1990s最重）；
+美股宽度同样当前成分回溯（复权口径已修正）。</li>
+<li>冠军+3.8%~4.4%为历史选优值：5年滚动83%为正/中位+6.6%/最差-19.3%，
+未来预期按此打折。</li>
+<li>宽度超额是2010年后市场现象（35年检验：2006-16宽基输12pp/年）；
+疯牛主升段跑输是保费，2015股灾+18.5% vs -51.8%为理赔。</li>
 <li>美股个股三层全灭（宽度/慢门/模块A参数网格），负面结论与通过结论同等入库。</li>
-<li>信号T日收盘生成→T+1开盘执行（fuzz 30例无未来函数）；费用10bp双边（ETF执行载体另有5bp口径备注）。</li>
+<li>信号T日收盘生成→T+1开盘执行（fuzz 30例无未来函数）；
+费用10bp双边（ETF执行载体另有5bp口径备注）。</li>
 </ul>
 <h2>六、复现</h2>
 <pre>PYTHONHASHSEED=0  python3.11 scripts/render_kuandu_archive.py          # 重跑并落 raw JSON
