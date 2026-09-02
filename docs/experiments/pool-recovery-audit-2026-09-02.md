@@ -488,7 +488,96 @@ TH881279.SECTOR, TH881280.SECTOR, TH881281.SECTOR, TSLA, XLK,
 - 生成时间：2026-09-02
 - 生成方式：Prompt O 阶段一执行产出（只读探索）
 - 是否修改 `src/` 生产代码：否
-- 是否 push：否（本地分支）
-- 是否产生新数据文件：否
+- 是否 push：阶段一写作时未 push；同日 15:32 本报告与两个快照目录已由
+  执行线程 commit（`d9dfa98`）并 push 至 origin/recovery/lei-round2，
+  见 §8 补记
+- 是否产生新数据文件：阶段一只读；快照目录系阶段二替代方案产物（§4.3）
 - 是否删除任何现有文件：否
 - 是否修改任何 ARCHIVE / SYNTHESIS 报告：否
+
+---
+
+## 8. 二次复核补记（2026-09-02 15:40，独立会话）
+
+> 第一执行线程于 15:32 完成 commit `d9dfa98`（盘点报告 + pool 快照 354
+> 文件 + runs 快照 34 JSON + 两份 README，共 391 文件）并 push 后收工。
+> 本节为**第二独立会话**对上述全部产出做交叉验证后的补记：先验证、
+> 后更正。本补记及三处文档更正**只 commit 到本地，未 push**。
+
+### 8.1 复核确认（全部通过）
+
+| 验证项 | 方法 | 结果 |
+|---|---|---|
+| 快照完整性 | `diff -rq` 原件 vs 快照 | **逐字节一致**（唯一差异 = 快照目录多出 README.md） |
+| 12 个 run 笔数 | 逐个解析 JSON | 1521×4 / 563×4 / 225×4，symbol 数 133/125/59，union=165，全对 |
+| 池子统计 | 177 个 meta.json 全量统计 | provider 分布 tencent 133 / ths_board 20 / eastmoney 9 / yfinance 7 / yahoo_v8 3 / parquet_cache+tencent_rt 3 / tencent_global 1 / parquet_cache+sina_rt 1；fetched_at 8-24(52)/8-25(39)/8-26(79)/8-31(7)；first_date 众数 2016-08-25(77)，min=1980-12-12 仅 AAPL，全对 |
+| 报告引用行号 | 逐条 sed 核对 | exit-matrix-report:24「53 标的」误写、:36-38 矩阵 1469/552/224；stop-loss-matrix:7-8「175 标的」；exit-structural:39 口径行——全部属实 |
+| 000568.SZ=tencent / 002326.SZ=eastmoney | meta 直读 | 属实（复权因子分歧点保留） |
+| stash@{0} / commit 52f5cb3 | git stash list / show --stat | 属实（WIP stash 在；52f5cb3 含 backtest 包 4560 行） |
+
+### 8.2 更正一：1469/552/224 的真实口径（初版解释数值上不成立）
+
+初版 README 把 1521→1469 的 52 笔差额解释为"只算 ma_period=20 主
+信号"——**该解释废弃**：A run ma_period=20 子集是 947 笔，不是 1469。
+
+实测正确口径（三个基准 run 的 exit_reason 分解）：
+
+| 模块 | JSON 全量 | 有效平仓（报告口径） | 差额构成 |
+|---|---|---|---|
+| A | 1521 | **1469** = 899 抵扣价 + 570 结构止损 | invalid_nonpositive_risk 45 + skipped_limit_up 1 + open_at_end 3 + signal_at_end 3 |
+| B | 563 | **552** = 473 + 79 | invalid 5 + skipped 1 + open_at_end 5 |
+| C | 225 | **224** = 222 + 2 | open_at_end 1 |
+
+与 stop-loss-matrix-ARCHIVE「基准出场构成：A=899 抵扣价+570 结构止损；
+B=473+79；C=222+2」**逐字一致**。已同步更正两份 README 与复现示例
+（更正后示例实测输出 1469/552/224，全 OK）。
+
+### 8.3 更正二（Q1 升级）：175 精确清单可以恢复，且已入仓
+
+本报告 §1/Q1 初版结论"175 标的的精确清单没有可 git 化的源文件"
+**已过时**：每个 8-31 run JSON 的 `per_symbol` 字段嵌有当时扫描的完整
+175 标的清单（`{symbol, bars, trades}` × 175，12 个 run 完全一致；
+`data_range.symbols_count=175` 佐证）。runs 快照入仓（`d9dfa98`）后，
+**175 精确清单已可脱离 `~/.lei_signal_lab/` 独立溯源**。Q1 的答案从
+"找不到权威清单"升级为"权威清单=run JSON 内嵌 per_symbol"。
+
+（顺带：`params.symbols` 字段是字符串 `'all'` 被错误拆成 `['a','l','l']`
+的记录器 bug，不构成清单来源。）
+
+### 8.4 更正三：177 vs 175 差异彻底解决（初版"来源未明"作废）
+
+§1.3 初版猜测"多的 2 个标的可能是 8-31 之后增补"——**不成立**：
+
+- **159165.SZ（127 根）/ 560390.SS（119 根）**：fetched_at 均为
+  **2026-08-24**，8-31 之前就在池目录里，但被 `load_pool_frames()` 的
+  `len(bars) < 300` 过滤规则（`src/lei_signal/backtest/runner.py`）
+  排除在扫描之外。
+- 对账恒等式：**pool 177 − 2（<300 根被过滤）= 175 扫描 = 133 A 有
+  信号 + 42 零信号**；12 个 run 有信号 union = 165；pool 中"12 个无
+  信号标的" = 10 个零信号 + 上述 2 个被过滤标的，全部对上。
+- 含义：**现有 pool 快照（177）与 8-31 口径（175）的差异是确定性的、
+  可机械复原的**（复现时按 per_symbol 清单取 175 即可），不存在
+  "不明来源的漂移"。
+
+### 8.5 Q3 补充：Time Machine 与全历史检索
+
+- Time Machine：本机配置了本地备份目标，但当前挂载失败
+  （`tmutil latestbackup` 报错），无法验证历史快照内容——鉴于数据
+  本体健在，不构成恢复依赖，仅记录在案。
+- `vt-signal-driven-sizing-ARCHIVE` 与 `time-stop-tail-aware-ARCHIVE`：
+  经 `git log --all` 全历史检索（含已删分支可达对象），**从未存在过**
+  （§0 表的判断从"工作区不存在"升级为"全历史不存在"）。Prompt O
+  对这两份文件的引用无本仓对应物；最接近的对应物是
+  `vt-grid-ARCHIVE-2026-09-01.md` 与 `raw/knife_timestop/`。
+
+### 8.6 修订后的三问答案汇总（覆盖 §4.1）
+
+| 问题 | 初版答案 | 复核后最终答案 |
+|---|---|---|
+| Q1: 175 清单权威留痕？ | 无显式清单文件 | **有**：run JSON 内嵌 `per_symbol` 175 条目（12 run 一致），已随 runs 快照入仓；与 177 目录的差异经 <300 根过滤规则完全对账 |
+| Q2: 数据源/口径？ | 混合 provider，时间窗报告与实际"矛盾"后自行更正为不矛盾 | 维持 §2.3 更正后结论；补充：`data_range.start=1980-12-12` 源于 AAPL 单标的最早起点，系 run JSON 自带字段，报告口径忠实转录 |
+| Q3: 逐笔记录可恢复？ | 完全可恢复 | 维持，且口径精确化：1469/552/224 = exit_reason 有效平仓过滤，机械可复现（8.2） |
+
+**最终结论不变**：不重建、不重抓；现有数据已入 git（`d9dfa98`），
+本任务闭环。遗留工程欠账（rules.v2.yaml 账本仍仅存活于服务进程内存）
+见 §4.3-D，超出本任务边界。

@@ -43,14 +43,25 @@
 报告口径在 `docs/experiments/exit-matrix-report-2026-08-31.md:36-38` 与
 `docs/experiments/stop-loss-matrix-ARCHIVE-2026-09-01.md:36-38`：
 
-| 模块 | 报告笔数 | JSON 实际 | 差额 | 解释 |
+| 模块 | 报告笔数 | JSON 实际 | 差额 | 差额构成（exit_reason 分解，2026-09-02 二次复核实测） |
 |---|---|---|---|---|
-| A | 1469 | 1521 | -52 | stop-loss-matrix 复刻 simulate_trade(a6_1) 时只算 ma_period=20 主信号（ma_period 分布 20=947, 60=432, 120=142） |
-| B | 552 | 563 | -11 | 同上，stop-loss-matrix 复刻子集 |
-| C | 224 | 225 | -1 | 同上 |
+| A | 1469 | 1521 | -52 | invalid_nonpositive_risk 45 + skipped_limit_up_at_entry 1 + open_at_end 3 + signal_at_end_not_entered 3 |
+| B | 552 | 563 | -11 | invalid_nonpositive_risk 5 + skipped_limit_up_at_entry 1 + open_at_end 5 |
+| C | 224 | 225 | -1 | open_at_end 1 |
 
-**8-31 矩阵 12 个 run 全部完整保留，逐笔明细可从 JSON 直接读出**，
-无需重跑。报告里 1469/552/224 是 stop-loss-matrix 后续复刻口径。
+**1469/552/224 = 有效平仓笔**（exit_reason ∈ {`exit_a6_1_costbasis`,
+`structure_stop_C`}）：A = 899 抵扣价 + 570 结构止损 = 1469；B = 473 + 79
+= 552；C = 222 + 2 = 224。与 stop-loss-matrix-ARCHIVE"基准出场构成：
+A=899 抵扣价+570 结构止损；B=473+79；C=222+2"**逐字一致**。JSON 里的
+1521/563/225 是信号记录全量（含未成交/无效条目），报告只数成交平仓的。
+
+> **更正痕（2026-09-02 二次复核）**：本节初版曾把 52 笔差额解释为
+> "复刻时只算 ma_period=20 主信号"——该解释数值上不成立（A run
+> ma_period=20 子集为 947 笔，不是 1469），已废弃，以 exit_reason
+> 分解为准。
+
+**8-31 矩阵 12 个 run 全部完整保留，逐笔明细可从 JSON 按 exit_reason
+过滤直接读出**，无需重跑。报告里 1469/552/224 是有效平仓口径。
 
 ### 2.3 trades 字段结构
 
@@ -128,13 +139,13 @@ print('symbols:', len(set(t['symbol'] for t in d['trades'])))
 print('first:', d['trades'][0]['symbol'], d['trades'][0]['signal_date'])
 "
 
-# 3. 复刻 stop-loss-matrix 报告的"无附加止损"子集（ma_period=20）
+# 3. 复刻 stop-loss-matrix 报告的"无附加止损"基准（有效平仓口径）
 python3 -c "
 import json
 d = json.load(open('docs/experiments/raw/backtest-runs-snapshot-2026-08-31/20260831-231254-88cb12.json'))
-a_subset = [t for t in d['trades'] if t['entry_variant']=='early' and t['ma_period']==20]
-print(f'A ma_period=20: {len(a_subset)} trades')
-# 应输出 947
+a_base = [t for t in d['trades'] if t['exit_reason'] in ('exit_a6_1_costbasis', 'structure_stop_C')]
+print(f'A 有效平仓: {len(a_base)} trades')
+# 应输出 1469（899 抵扣价 + 570 结构止损）
 "
 ```
 
