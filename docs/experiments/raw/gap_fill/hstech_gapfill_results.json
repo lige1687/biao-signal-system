@@ -1,0 +1,194 @@
+{
+ "criteria": {
+  "nature": "降级版：无宽度输入纯价格结构，与A股三档性质不同强度更弱；定性=回撤保险非择时增强（美股防守版先例）",
+  "mdd_improve_min": 0.15,
+  "ann_cost_max": 0.08,
+  "three_window": "中点切分，三窗MDD改善全为正",
+  "direction_control": "正向MDD改善>反向，否则判负",
+  "placebo": "块置换100次(seed=20260903)，真实MDD改善>95分位",
+  "fee_bps": 10.0,
+  "min_trade": 0.05,
+  "certification_cap": "短样本降级版有效≠冠军三档认证等级（6.1年单周期、无宽度）"
+ },
+ "data": {
+  "index": "hkHSTECH 腾讯海外源不复权 2020-07-27→2026-09-02 1502行 抓取2026-09-02",
+  "etf": "sh513180 腾讯qfq 2021-05-25→2026-09-02 1282行（Prompt W抓取复用）",
+  "index_feats": {
+   "ann_vol": 0.386,
+   "mdd": -0.74
+  },
+  "etf_feats": {
+   "ann_vol": 0.335,
+   "mdd": -0.62
+  },
+  "warmup_note": "前200交易日(2020-07→2021-05) MA200未成型不设限；闸生效始点≈ETF上市日（巧合披露）"
+ },
+ "arms": {
+  "M1_gate0": {
+   "full": {
+    "strategy_cagr": -0.015362661770680797,
+    "benchmark_cagr": -0.06950087723788034,
+    "excess_cagr": 0.054138215467199546,
+    "strategy_mdd": -0.5929635104947895,
+    "benchmark_mdd": -0.7439987501393301,
+    "calmar": -0.025908275127860154,
+    "avg_weight": 0.4573901464713715,
+    "n_trades": 62.0
+   },
+   "h1": {
+    "excess_cagr": 0.11244356072859452,
+    "strategy_mdd": -0.4819220852829177,
+    "benchmark_mdd": -0.7439987501393301
+   },
+   "h2": {
+    "excess_cagr": -0.011483322055493739,
+    "strategy_mdd": -0.2790909835394316,
+    "benchmark_mdd": -0.36320826711916754
+   },
+   "mdd_improve_full": 0.151,
+   "mdd_improve_h1": 0.2621,
+   "mdd_improve_h2": 0.0841,
+   "ann_cost": -0.0541
+  },
+  "M2_gate05": {
+   "full": {
+    "strategy_cagr": -0.03187091494975369,
+    "benchmark_cagr": -0.06950087723788034,
+    "excess_cagr": 0.03762996228812665,
+    "strategy_mdd": -0.6241668858242159,
+    "benchmark_mdd": -0.7439987501393301,
+    "calmar": -0.05106152805217786,
+    "avg_weight": 0.7283621837549934,
+    "n_trades": 62.0
+   },
+   "h1": {
+    "excess_cagr": 0.07311443041922072,
+    "strategy_mdd": -0.5445545063506317,
+    "benchmark_mdd": -0.7439987501393301
+   },
+   "h2": {
+    "excess_cagr": -0.003378342090720521,
+    "strategy_mdd": -0.30454514563558965,
+    "benchmark_mdd": -0.36320826711916754
+   },
+   "mdd_improve_full": 0.1198,
+   "mdd_improve_h1": 0.1994,
+   "mdd_improve_h2": 0.0587,
+   "ann_cost": -0.0376
+  },
+  "M3_gate0_vol15": {
+   "full": {
+    "strategy_cagr": 0.013721144613018765,
+    "benchmark_cagr": -0.06950087723788034,
+    "excess_cagr": 0.08322202185089911,
+    "strategy_mdd": -0.3279380903109206,
+    "benchmark_mdd": -0.7439987501393301,
+    "calmar": 0.04184065535055609,
+    "avg_weight": 0.22390932440512779,
+    "n_trades": 152.0
+   },
+   "h1": {
+    "excess_cagr": 0.1504872773228243,
+    "strategy_mdd": -0.24516482668359318,
+    "benchmark_mdd": -0.7439987501393301
+   },
+   "h2": {
+    "excess_cagr": 0.003464546241793931,
+    "strategy_mdd": -0.15548190768140413,
+    "benchmark_mdd": -0.36320826711916754
+   },
+   "mdd_improve_full": 0.4161,
+   "mdd_improve_h1": 0.4988,
+   "mdd_improve_h2": 0.2077,
+   "ann_cost": -0.0832
+  },
+  "M4_gate0_vol20": {
+   "full": {
+    "strategy_cagr": 0.011540423085681928,
+    "benchmark_cagr": -0.06950087723788034,
+    "excess_cagr": 0.08104130032356227,
+    "strategy_mdd": -0.409449756722001,
+    "benchmark_mdd": -0.7439987501393301,
+    "calmar": 0.028185199517696588,
+    "avg_weight": 0.29321254426333243,
+    "n_trades": 170.0
+   },
+   "h1": {
+    "excess_cagr": 0.14422948907227362,
+    "strategy_mdd": -0.31266753512911916,
+    "benchmark_mdd": -0.7439987501393301
+   },
+   "h2": {
+    "excess_cagr": 0.00690434041432697,
+    "strategy_mdd": -0.20345617222893653,
+    "benchmark_mdd": -0.36320826711916754
+   },
+   "mdd_improve_full": 0.3345,
+   "mdd_improve_h1": 0.4313,
+   "mdd_improve_h2": 0.1598,
+   "ann_cost": -0.081
+  },
+  "REV_gate0": {
+   "full": {
+    "strategy_cagr": -0.0563265112120972,
+    "benchmark_cagr": -0.06950087723788034,
+    "excess_cagr": 0.013174366025783146,
+    "strategy_mdd": -0.735292199294288,
+    "benchmark_mdd": -0.7439987501393301,
+    "calmar": -0.07660425510587184,
+    "avg_weight": 0.6744340878828229,
+    "n_trades": 61.0
+   },
+   "h1": {
+    "excess_cagr": 0.05287608388958187,
+    "strategy_mdd": -0.735292199294288,
+    "benchmark_mdd": -0.7439987501393301
+   },
+   "h2": {
+    "excess_cagr": -0.04143364025462681,
+    "strategy_mdd": -0.2675023591895407,
+    "benchmark_mdd": -0.36320826711916754
+   },
+   "mdd_improve_full": 0.0087,
+   "mdd_improve_h1": 0.0087,
+   "mdd_improve_h2": 0.0957,
+   "ann_cost": -0.0132
+  }
+ },
+ "placebo": {
+  "real": 0.151,
+  "p95": 0.4124,
+  "max": 0.4701,
+  "pass": false,
+  "head": [
+   0.4701,
+   0.4597,
+   0.4398,
+   0.4355,
+   0.4262
+  ]
+ },
+ "etf_disclosure": {
+  "M1_gate0": {
+   "strategy_cagr": -0.11460981718284824,
+   "benchmark_cagr": -0.10604887420207432,
+   "excess_cagr": -0.008560942980773922,
+   "strategy_mdd": -0.619837650312576,
+   "benchmark_mdd": -0.6195546950629235,
+   "avg_weight": 0.5475819032761311
+  },
+  "mdd_improve": -0.0003,
+  "ann_cost": 0.0086,
+  "rev_mdd_improve": 0.0,
+  "note": "513180 2021-05起，错过指数顶部段（-25%），口径差异如实呈现；不设通过线"
+ },
+ "verdict": {
+  "c1_mdd15pp": true,
+  "c2_three_window": true,
+  "c3_cost8pp": true,
+  "c4_direction": true,
+  "c5_placebo": false,
+  "overall": false,
+  "certification": "未通过预注册判定（见分项），如实判负"
+ }
+}
