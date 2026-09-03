@@ -1,0 +1,31 @@
+{
+  "fetched_at": "2026-09-02T18:20:00+08:00",
+  "erp_definition": "ERP = multpl S&P500 earnings yield(%) − FRED DGS10(%)，月频；与生产 fetch_us_erp() 同一定义（multpl EY − us10y），本任务提供历史序列",
+  "earnings_yield_source": {
+    "url": "https://www.multpl.com/s-p-500-earnings-yield/table/by-month",
+    "file": "us_ey_multpl.html",
+    "coverage": "1871-01 → 2026-09（月频，1869 行；当月带 † 估计标记）",
+    "convention": "行标签\"Mmm 1, YYYY\"记为该月月末（保守无前视：真实测度即使为月初也自下月起可用）",
+    "note": "生产 fetch_us_erp() 主源同族（multpl.com S&P500 Earnings Yield）；FRED SP500EY 端点已 404 弃用，故用 multpl 表"
+  },
+  "risk_free_source": {
+    "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10",
+    "file": "us10y_dgs10_daily.csv",
+    "coverage": "1962-01-02 → 2026-08-31（日频 16870 行），取每月末"
+  },
+  "yfinance_pe_note": "yfinance trailingPE 无历史序列（Prompt U 预判成立）——未使用，亦无插值/合成",
+  "signals": {
+    "defense": "已认证 SPY 档防守版（us_edges_GSPC.csv 40/80 vol0.15 gamma1.5 行 = raw/kuandu-quanzhan/us_defense.json 指标逐位一致）；宽度 parquet 已随 2026-09-01 回退丢失，事件由认证产物逐日 equity + raw/module_e/us_gspc_ohlc.parquet + 引擎精确机制束搜索反演（rms/天 2.93e-7，终值误差 4.4e-7，束宽 3/10/20 唯一）",
+    "module_e": "已认证信号清单 raw/module_e/us_event_signals_v1_hedge0.csv（33 笔）/ us_event_signals_v3_hedge50.csv（14 笔），只读复用"
+  },
+  "placebo_labels": "raw/valuation_overlay/pe_cyb50_lg.csv（Prompt T 创业板50 PE_TTM，只读复用）",
+  "runtime": {
+    "python": "3.14（/tmp/us_erp_venv 临时 venv）",
+    "pandas": "3.0.5",
+    "numpy": "2.5.2",
+    "scipy": "1.18.1",
+    "pyarrow": "25.0.1",
+    "note": "版本族与 Prompt T 相同；系统 python3 无 pandas（2026-09-01 回退后缺失）"
+  },
+  "repro": "PYTHONHASHSEED=0 python3 scripts/run_us_erp_overlay.py"
+}

@@ -1,0 +1,85 @@
+{
+ "anchor": {
+  "anchor_pass": true,
+  "exit_reason_breakdown": {
+   "exit_a6_1_costbasis": 473,
+   "invalid_nonpositive_risk": 5,
+   "open_at_end": 5,
+   "skipped_limit_up_at_entry": 1,
+   "structure_stop_C": 79
+  },
+  "exit_reason_match": true,
+  "expected_exit_reason": {
+   "exit_a6_1_costbasis": 473,
+   "invalid_nonpositive_risk": 5,
+   "open_at_end": 5,
+   "skipped_limit_up_at_entry": 1,
+   "structure_stop_C": 79
+  },
+  "per_symbol_count": 175,
+  "per_symbol_equals_pool_minus_2": true,
+  "pool_minus_2_count": 175,
+  "raw_count": 563
+ },
+ "data": {
+  "b_run_file": "20260831-231715-1bb6f2.json",
+  "n_closed": 552,
+  "n_with_rv20": 552,
+  "rv20_missing": 0
+ },
+ "delta_point_estimate": 0.32992262744667045,
+ "negative_control_shuffle": {
+  "n_shuffles": 1000,
+  "real_above_shuf_95": false,
+  "shuf_95_percentile": 0.5578527162381673,
+  "shuf_ci95": [
+   -0.663498979183204,
+   0.6687747885828251
+  ],
+  "shuf_median": -0.004649817428135403
+ },
+ "s1_p1_bootstrap": {
+  "ci95": [
+   -0.3120658894290438,
+   1.0470026320631727
+  ],
+  "ci_lower_gt_0": false,
+  "delta_boot_mean": 0.3339498531154167
+ },
+ "s1_p2_sample_size": {
+  "ge_30": true,
+  "high_n": 184
+ },
+ "s1_p3_high_positive": {
+  "gt_0": true,
+  "high_mean_r": 0.38358848657176575
+ },
+ "s1_pass": false,
+ "task": "S1: B 模块高波 vs 低波 r_net 差异显著性检验",
+ "terciles": {
+  "high": {
+   "mean_r": 0.38358848657176575,
+   "n": 184,
+   "rv20_range": [
+    0.23505711548065614,
+    0.9200802268317956
+   ]
+  },
+  "low": {
+   "mean_r": 0.053665859125095285,
+   "n": 184,
+   "rv20_range": [
+    0.04314211969970121,
+    0.15508422768326843
+   ]
+  },
+  "mid": {
+   "mean_r": 0.6383446224218303,
+   "n": 184,
+   "rv20_range": [
+    0.15548778298347166,
+    0.2346683410117799
+   ]
+  }
+ }
+}

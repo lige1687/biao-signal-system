@@ -1,0 +1,198 @@
+{
+ "S0_replication_gate": {
+  "1": {
+   "expR": 0.5989,
+   "expect": [
+    301,
+    0.599
+   ],
+   "match": true,
+   "n": 301
+  },
+  "2-3": {
+   "expR": 0.6176,
+   "expect": [
+    170,
+    0.618
+   ],
+   "match": true,
+   "n": 170
+  },
+  "4+": {
+   "expR": 1.0492,
+   "expect": [
+    88,
+    1.049
+   ],
+   "match": true,
+   "n": 88
+  },
+  "status": "S0_OK"
+ },
+ "date": "2026-09-02",
+ "experiment": "module_conflict_resonance_preregistration",
+ "prompt": "N (prompts-2026-09-01 收尾规约)",
+ "step1_H5_replication": {
+  "clusters": {
+   "n_days_group1": 286,
+   "n_days_group4plus": 17
+  },
+  "day_cluster_bootstrap": {
+   "ci95": [
+    -1.2662,
+    3.0238
+   ],
+   "p_one_sided": 0.3832
+  },
+  "delta_expR_4plus_minus_1": 0.4503,
+  "group_module_composition": {
+   "1": {
+    "A": 158,
+    "B'": 89,
+    "C": 54
+   },
+   "2-3": {
+    "A": 94,
+    "B'": 11,
+    "C": 65
+   },
+   "4+": {
+    "A": 31,
+    "C": 57
+   }
+  },
+  "group_stats": {
+   "1": {
+    "PF": 1.6498,
+    "expR": 0.5989,
+    "n": 301,
+    "win": 0.2658
+   },
+   "2-3": {
+    "PF": 1.7417,
+    "expR": 0.6176,
+    "n": 170,
+    "win": 0.3059
+   },
+   "4+": {
+    "PF": 3.225,
+    "expR": 1.0492,
+    "n": 88,
+    "win": 0.2614
+   }
+  },
+  "negative_control_200shuffles": {
+   "null_p95": 0.6275,
+   "pass": false,
+   "real_delta_percentile_in_null": 0.91
+  },
+  "sensitivity_descriptive": {
+   "3+ vs 1": {
+    "ci95_trade": [
+     -1.0876,
+     0.8752
+    ],
+    "delta": -0.1541,
+    "n": 154
+   },
+   "5+ vs 1": {
+    "ci95_trade": [
+     -1.194,
+     0.1779
+    ],
+    "delta": -0.4885,
+    "n": 48
+   }
+  },
+  "trade_bootstrap": {
+   "ci95": [
+    -0.8043,
+    1.9645
+   ],
+   "p_one_sided": 0.2769
+  },
+  "verdict": "H5R_FAIL"
+ },
+ "step2_resonance_conflict": {
+  "gate": "H5R_FAIL → 第二步假设检验按预注册纪律不执行"
+ },
+ "structural_audit": {
+  "Bp_C_min_signal_gap_days": {
+   "bins": {
+    "0": 0,
+    "1-5": 0,
+    "21-60": 0,
+    "6-20": 0,
+    ">60": 26
+   },
+   "median_min_gap": 607,
+   "per_symbol": {
+    "000596.SZ": 241,
+    "000625.SZ": 1604,
+    "000661.SZ": 1572,
+    "000725.SZ": 1757,
+    "000858.SZ": 2534,
+    "002008.SZ": 130,
+    "002050.SZ": 126,
+    "002230.SZ": 880,
+    "002304.SZ": 448,
+    "002415.SZ": 553,
+    "002475.SZ": 596,
+    "300003.SZ": 247,
+    "300014.SZ": 607,
+    "300073.SZ": 360,
+    "600196.SS": 122,
+    "600460.SS": 427,
+    "600600.SS": 2384,
+    "600703.SS": 2245,
+    "600745.SS": 551,
+    "600850.SS": 80,
+    "600893.SS": 3129,
+    "601238.SS": 246,
+    "601318.SS": 627,
+    "601899.SS": 2185,
+    "603160.SS": 608,
+    "603993.SS": 2386
+   }
+  },
+  "Bp_C_shared_symbols": 26,
+  "D_archive": {
+   "dedup_count": 1,
+   "dedup_note": "经济键去重：两条记录仅 entry_reason 波谷参照价不同，同一笔交易",
+   "raw_count": 2
+  },
+  "conflict_events": [
+   {
+    "legs": [
+     {
+      "module": "B'",
+      "r_net": -0.9696
+     },
+     {
+      "module": "D",
+      "r_net": -0.9633
+     }
+    ],
+    "modules": [
+     "B'",
+     "D"
+    ],
+    "signal_date": "2026-04-24",
+    "symbol": "600519.SS"
+   }
+  ],
+  "lifecycle_csv": {
+   "trades_510300_lifecycle_allmodule.csv": {
+    "multi_module_days": 0,
+    "trades": 24
+   },
+   "trades_518850_lifecycle_allmodule.csv": {
+    "multi_module_days": 0,
+    "trades": 42
+   }
+  },
+  "multi_module_keys_merged_ABC": 0,
+  "multi_module_keys_with_D": 1,
+  "resonance_events": []
+ }
+}
