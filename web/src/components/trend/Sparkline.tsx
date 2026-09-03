@@ -8,15 +8,19 @@ interface SparklineProps {
   /** 可选：在指定 y 值画一条淡色分界线，让小图也能感知「当前在哪一档」。 */
   markY?: number | null;
   onClick?: () => void;
+  /** 默认可见窗口（最近多少个交易日）。数据更多时只展开这一段，用户可用鼠标
+   *  滚轮缩小/拖拽平移查看更早数据；默认 756 ≈ 3 年（1260 个点≈5 年的密度太高）。 */
+  defaultWindowDays?: number;
 }
 
 /** 卡片级迷你趋势线：无坐标轴/网格，带淡色区域填充，可点击展开大图。 */
 export default function Sparkline({
   values,
-  color = "#3a7bd5",
+  color = "#2563eb",
   height = 48,
   markY = null,
   onClick,
+  defaultWindowDays = 756,
 }: SparklineProps) {
   const ref = useRef<HTMLDivElement>(null);
   const instRef = useRef<echarts.ECharts | null>(null);
@@ -34,9 +38,25 @@ export default function Sparkline({
     };
   }, []);
 
+  // 兜底：阻止浏览器把触控板「双指上下滑 / 双指捏合（Ctrl+滚轮）」抢去当页面滚动/页面缩放。
+  // React 的 onWheel 是 passive 监听，preventDefault 无效，必须用原生 non-passive 监听；
+  // ECharts 的 dataZoom.inside 在 canvas 上同样监听 wheel 并缩放，这里仅负责拦住浏览器默认行为。
   useEffect(() => {
-    instRef.current?.setOption(buildSparkOption(values, color, markY), true);
-  }, [values, color, markY]);
+    const el = ref.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, []);
+
+  useEffect(() => {
+    instRef.current?.setOption(
+      buildSparkOption(values, color, markY, defaultWindowDays),
+      true,
+    );
+  }, [values, color, markY, defaultWindowDays]);
 
   if (values.length < 2) {
     return <div className="sparkline sparkline-empty" style={{ height }}>—</div>;
@@ -46,10 +66,10 @@ export default function Sparkline({
     <div
       ref={ref}
       className="sparkline"
-      style={{ height, cursor: onClick ? "pointer" : "default" }}
+      style={{ height, cursor: onClick ? "grab" : "default" }}
       onClick={onClick}
       role={onClick ? "button" : undefined}
-      aria-label="点击查看大图"
+      aria-label="点击查看大图；可滚轮缩放、拖拽平移"
     />
   );
 }
@@ -58,6 +78,7 @@ function buildSparkOption(
   values: number[],
   color: string,
   markY: number | null,
+  defaultWindowDays: number,
 ): echarts.EChartsOption {
   const seriesOpt: echarts.LineSeriesOption = {
     type: "line",
@@ -85,6 +106,13 @@ function buildSparkOption(
       ],
     };
   }
+  // 默认只展开最近 defaultWindowDays 个交易日；用户可用鼠标滚轮缩小（看更早）或拖拽平移。
+  // start/end 是数据索引区间的百分比（0–100）；数据更少时直接全展。
+  const n = values.length;
+  const startPct =
+    n > defaultWindowDays
+      ? Math.max(0, ((n - defaultWindowDays) / n) * 100)
+      : 0;
   return {
     grid: { left: 0, right: 0, top: 3, bottom: 0 },
     xAxis: {
@@ -95,6 +123,17 @@ function buildSparkOption(
     },
     yAxis: { type: "value", show: false, scale: true },
     tooltip: { show: false },
+    // inside: 滚轮缩放 + 拖拽平移，无可见控件（适合迷你图）
+    dataZoom: [
+      {
+        type: "inside",
+        start: startPct,
+        end: 100,
+        zoomOnMouseWheel: true,
+        moveOnMouseMove: true,
+        moveOnMouseWheel: false,
+      },
+    ],
     series: [seriesOpt],
   };
 }

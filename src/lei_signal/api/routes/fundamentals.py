@@ -58,6 +58,15 @@ def etf_strength(request: Request, refresh: bool = False) -> dict:
     return _service(request).etf_strength(refresh=refresh)
 
 
+@router.get("/us-macro")
+def us_macro(request: Request, refresh: bool = False) -> dict:
+    """美国宏观（FRED 公开 CSV）：就业/房产/汽车/WEI/物价/订单/高收益债利差。
+
+    首次加载逐序列拉 FRED（约 15 秒，序列间限速），之后 6 小时走缓存。
+    """
+    return _service(request).us_macro(refresh=refresh)
+
+
 @router.get("/industry/{code}/flow")
 def industry_flow(request: Request, code: str, days: int = 20) -> dict:
     """单个行业板块资金流历史（日级，主力/超大/大/中/小单，单位亿元）。"""

@@ -4,6 +4,7 @@ import { api } from "../api/client";
 import { directionCn, moduleCn } from "../modules";
 import type { PlanAlert } from "../types";
 import CreatePlanDialog from "./CreatePlanDialog";
+import ProvenanceBadge from "./ProvenanceBadge";
 
 type Turn = { who: "you" | "agent"; text: string; grounded?: boolean };
 
@@ -144,7 +145,19 @@ export default function ReviewDrawer({
                         {detScenarios.map((s, i) => (
                           <li key={i}>
                             {moduleCn(s.module)} · {directionCn(s.direction)} · {s.state}
-                            {s.rule_id && <span className="muted"> [{s.rule_id}]</span>}
+                            {s.rule_id && (
+                              <ProvenanceBadge
+                                items={[
+                                  {
+                                    label: `${moduleCn(s.module)} ${directionCn(s.direction)}`,
+                                    rule_id: s.rule_id,
+                                    evidence_cn: "",
+                                    research_proxy: false,
+                                    principle_source: null,
+                                  },
+                                ]}
+                              />
+                            )}
                           </li>
                         ))}
                       </ul>
@@ -227,7 +240,19 @@ function IssueRow({ a }: { a: PlanAlert }) {
     <div className="rv-issue">
       <div className="rv-issue-head">
         <code>{a.code}</code>
-        {a.rule_id && <span className="muted">[rule_id:{a.rule_id}]</span>}
+        <ProvenanceBadge
+          items={[
+            {
+              label: a.next_step_cn || a.code,
+              rule_id: a.rule_id ?? null,
+              evidence_cn: Object.entries(a.evidence ?? {})
+                .map(([k, v]) => `${k}=${v}`)
+                .join("；"),
+              research_proxy: a.logic_provenance === "research_proxy",
+              principle_source: a.principle_source ?? null,
+            },
+          ]}
+        />
       </div>
       <div className="rv-issue-step">{a.next_step_cn || a.caveat_cn || "—"}</div>
     </div>

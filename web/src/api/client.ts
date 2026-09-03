@@ -1,5 +1,9 @@
 import type {
   ActionItem,
+  AgentChatReply,
+  AgentChatRequest,
+  AgentMessageDTO,
+  AgentSessionDTO,
   AShareBreadthResponse,
   BreadthHistoryResponse,
   BuyPointChatReply,
@@ -20,6 +24,8 @@ import type {
   MacroHistoryResponse,
   RatesResponse,
   RatesHistoryResponse,
+  UsMacroResponse,
+  XlyXlpRatio,
   MarketContextFull,
   MarketDataStatus,
   Plan,
@@ -30,6 +36,8 @@ import type {
   PromoteWatchResponse,
   ResolveResult,
   ScanResponse,
+  SentimentHistoryResponse,
+  SignalsToday,
   SubscribeWatchRequest,
   SymbolDetail,
   TodayOpportunityResponse,
@@ -39,6 +47,19 @@ import type {
   SectorTrendResponse,
   SectorHistoryPoint,
   SectorMembersResponse,
+  SectorWatchlistResponse,
+  DailyBriefResponse,
+  SentimentIngest,
+  BacktestOptions,
+  BacktestRunSummary,
+  BacktestRunResult,
+  TimingOptions,
+  TimingRunResult,
+  TimingRunSummary,
+  TimingSignal,
+  NewsDigest,
+  NewsItemsResponse,
+  NewsStatus,
 } from "../types";
 
 const BASE = "/api";
@@ -86,6 +107,41 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   return (await resp.json()) as T;
 }
 
+
+export const backtestApi = {
+  options: () => request<BacktestOptions>("/backtest/options"),
+  createRun: (body: {
+    symbols?: string[] | null;
+    module?: string;
+    rr_min?: number | null;
+    entry_variant?: string | null;
+    exit_variant: string;
+    fee_label: string;
+    overrides?: Record<string, number>;
+    volume_confirm?: boolean;
+    volume_confirm_window?: number;
+    profile_filter?: string;
+  }) =>
+    request<{ run_id: string }>("/backtest/runs", {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  listRuns: () => request<BacktestRunSummary[]>("/backtest/runs"),
+  getRun: (runId: string) => request<BacktestRunResult | BacktestRunSummary>(`/backtest/runs/${runId}`),
+};
+
+export const timingBacktestApi = {
+  options: () => request<TimingOptions>("/timing-backtest/options"),
+  signals: () => request<TimingSignal[]>("/timing-backtest/signals"),
+  createRun: (body: Record<string, string | number | null>) =>
+    request<TimingRunResult>("/timing-backtest/runs", {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  listRuns: () => request<TimingRunSummary[]>("/timing-backtest/runs"),
+  getRun: (runId: string) => request<TimingRunResult>(`/timing-backtest/runs/${runId}`),
+};
+
 export const api = {
   dashboard: (group?: "index" | "watchlist", refresh = false) => {
     const params = new URLSearchParams();
@@ -129,6 +185,7 @@ export const api = {
       sectors: { code: string; name: string; symbol: string }[];
       indices: { code: string; name: string; symbol: string }[];
       us_etfs: { code: string; name: string; symbol: string }[];
+      concepts: { code: string; name: string; symbol: string }[];
     }>(`/sectors`),
   events: (
     symbol: string,
@@ -163,6 +220,15 @@ export const api = {
     ),
   marketContextGlobalStrip: () =>
     request<GlobalStripResponse>(`/market-context/global-strip`),
+  marketContextSentimentHistory: (series: "naaim" | "aaii", limit = 1040) =>
+    request<SentimentHistoryResponse>(
+      `/market-context/sentiment/history?series=${series}&limit=${limit}`,
+    ),
+  updateSentiment: (payload: SentimentIngest) =>
+    request<{ ok: boolean; path: string }>(`/market-context/sentiment`, {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
   marketContextBreadthHistory: (marketId: string, lookbackDays = 1260) =>
     request<BreadthHistoryResponse>(
       `/market-context/breadth-history?market_id=${encodeURIComponent(marketId)}&lookback_days=${lookbackDays}`,
@@ -250,11 +316,34 @@ export const api = {
   todayOpportunities: () => request<TodayOpportunityResponse>(`/opportunities/today`),
   refreshTodayOpportunities: () =>
     request<TodayOpportunityResponse>(`/opportunities/today/refresh`, { method: "POST" }),
+  signalsToday: () => request<SignalsToday>(`/signals/today`),
+  refreshSignals: (asOf: "intraday" | "close" = "close") =>
+    request<SignalsToday>(`/signals/today/refresh?as_of=${asOf}`, { method: "POST" }),
+  signalsDay: (day: string) => request<SignalsToday>(`/signals/day/${day}`),
+  replayDay: (day: string) =>
+    request<SignalsToday>(`/signals/day/${day}/replay`, { method: "POST" }),
   buyPointChat: (symbol: string, message: string) =>
     request<BuyPointChatReply>(
       `/symbols/${encodeURIComponent(symbol)}/buy-point-chat`,
       { method: "POST", body: JSON.stringify({ message }) },
     ),
+  // ---- agent 统一会话 ----
+  agentChat: (body: AgentChatRequest) =>
+    request<AgentChatReply>(`/agent/chat`, {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  agentSessions: (symbol?: string) =>
+    request<AgentSessionDTO[]>(
+      `/agent/sessions${symbol ? `?symbol=${encodeURIComponent(symbol)}` : ""}`,
+    ),
+  agentSessionMessages: (sessionId: string) =>
+    request<AgentMessageDTO[]>(`/agent/sessions/${encodeURIComponent(sessionId)}/messages`),
+  agentCreateSession: (body: { symbol: string | null; title_cn: string }) =>
+    request<AgentSessionDTO>(`/agent/sessions`, {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
   // ---- 提醒订阅 (Step 2) ----
   subscribeWatch: (body: SubscribeWatchRequest) =>
     request<WatchSubscription>("/watch/subscribe", {
@@ -294,7 +383,7 @@ export const fundamentalsApi = {
     ),
   rates: (refresh = false) =>
     request<RatesResponse>(`/fundamentals/rates${refresh ? "?refresh=true" : ""}`),
-  ratesHistory: (lookbackDays = 730) =>
+  ratesHistory: (lookbackDays = 1095) =>
     request<RatesHistoryResponse>(
       `/fundamentals/rates-history?lookback_days=${lookbackDays}`,
     ),
@@ -311,9 +400,17 @@ export const fundamentalsApi = {
       `/fundamentals/commodities${refresh ? "?refresh=true" : ""}`,
     ),
   etfStrength: (refresh = false) =>
-    request<{ etf: { items: EtfItem[]; regime: string; spy_1m: number } | null }>(
-      `/fundamentals/etf-strength${refresh ? "?refresh=true" : ""}`,
-    ),
+    request<{
+      etf: {
+        dates?: string[];
+        items: EtfItem[];
+        regime: string;
+        spy_1m: number;
+        xly_xlp?: XlyXlpRatio | null;
+      } | null;
+    }>(`/fundamentals/etf-strength${refresh ? "?refresh=true" : ""}`),
+  usMacro: (refresh = false) =>
+    request<UsMacroResponse>(`/fundamentals/us-macro${refresh ? "?refresh=true" : ""}`),
 };
 
 // ---- 行业板块趋势工作台 ----
@@ -330,4 +427,84 @@ export const sectorsApi = {
     request<SectorMembersResponse>(
       `/sectors/${encodeURIComponent(code)}/members?limit=${limit}`,
     ),
+  watchlist: (topN = 5) =>
+    request<SectorWatchlistResponse>(`/sectors/watchlist?top_n=${topN}`),
+};
+
+// ---- 收盘简报 ----
+export const dailyBriefApi = {
+  latest: () => request<DailyBriefResponse>("/daily-brief/latest"),
+  byDate: (date: string) =>
+    request<DailyBriefResponse>(`/daily-brief/${encodeURIComponent(date)}`),
+  dates: () => request<{ dates: string[] }>("/daily-brief/dates"),
+};
+
+// ---- 因子观测台（factor panel，本机 WIP）----
+export interface FactorMeta {
+  label: string;
+  formula: string;
+  verdict: string;
+  verdict_level: "pass" | "weak" | "inverse" | "fail";
+  evidence: string;
+  usage: string;
+}
+
+export interface FactorRow {
+  code: string;
+  name: string | null;
+  group: string;
+  subgroup: string;
+  as_of: string;
+  close: number | null;
+  rv20_ann: number | null;
+  rv_pct: number | null;
+  mom_121: number | null;
+  mom_20: number | null;
+  mom_20_group_pct: number | null;
+  mom_121_rank?: number | null;
+  adx14: number | null;
+  vol_ok: boolean | null;
+  above_ema20: boolean | null;
+  above_ema120: boolean | null;
+  notes: string[];
+}
+
+export interface FactorPanelResponse {
+  generated_at: string;
+  provenance: string;
+  research_proxy_note: string;
+  study_date: string;
+  study_ref: string;
+  data_as_of: string | null;
+  counts: { symbols: number; sectors: number; skipped_too_short_or_broken: string[] };
+  market: {
+    market_rv_pct: number | null;
+    market_rv20_ann: number | null;
+    market_as_of: string | null;
+    market_basis: string;
+  } | null;
+  factors: Record<string, FactorMeta>;
+  symbols: FactorRow[];
+  sectors: FactorRow[];
+}
+
+export const factorsApi = {
+  panel: (refresh = false) =>
+    request<FactorPanelResponse>(`/factors/panel${refresh ? "?refresh=true" : ""}`),
+};
+
+export const newsApi = {
+  items: (params: {
+    category?: string; q?: string; source?: string; from?: string; to?: string;
+    scored?: string; min_importance?: number; limit?: number; offset?: number;
+  }) => {
+    const search = new URLSearchParams();
+    for (const [k, v] of Object.entries(params)) {
+      if (v !== undefined && v !== null && v !== "") search.set(k, String(v));
+    }
+    return request<NewsItemsResponse>(`/news/items?${search.toString()}`);
+  },
+  digests: (limit = 7) => request<{ digests: NewsDigest[] }>(`/news/digests?limit=${limit}`),
+  run: (full = false) => request<{ run: string }>(`/news/run${full ? "?full=true" : ""}`, { method: "POST" }),
+  status: () => request<NewsStatus>("/news/status"),
 };

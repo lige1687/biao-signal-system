@@ -10,21 +10,75 @@ interface Props {
   onAdded: () => void;
 }
 
-/** 添加自选：代码输入 或 板块/指数/美股ETF 选择器（四个 tab）。 */
+type CatKey = "industry" | "concept" | "index" | "usetf";
+
+const CATEGORIES: { key: CatKey; label: string }[] = [
+  { key: "industry", label: "行业板块" },
+  { key: "concept", label: "概念板块" },
+  { key: "index", label: "指数" },
+  { key: "usetf", label: "美股ETF" },
+];
+
+const CAT_LABEL: Record<CatKey, string> = {
+  industry: "行业",
+  concept: "概念",
+  index: "指数",
+  usetf: "美股ETF",
+};
+
+/** 目录渲染上限：全量约 660 条（90 行业 + 504 概念 + 指数 + ETF），避免一次性铺满 DOM。 */
+const MAX_ROWS = 200;
+
+interface CatalogItem {
+  code: string;
+  name: string;
+  symbol: string;
+  cat: CatKey;
+}
+
+/** 添加自选：统一搜索单入口——四类目录点选 + 任意代码解析，同一个搜索框。 */
 export default function AddSymbolDialog({ groupId = null, onClose, onAdded }: Props) {
-  const [tab, setTab] = useState<"code" | "sector" | "index" | "usetf">("code");
-  const [input, setInput] = useState("");
+  const [q, setQ] = useState("");
+  const [cat, setCat] = useState<CatKey | "all">("all");
   const [resolved, setResolved] = useState<ResolveResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  // 已成功添加的 symbol 集合：目录里原地显示「✓ 已添加」，避免「点了不知道加没加上」。
+  const [addedCodes, setAddedCodes] = useState<ReadonlySet<string>>(() => new Set());
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["sectors"],
+    queryFn: () => api.sectors(),
+    staleTime: Infinity,
+  });
+
+  const items = useMemo<CatalogItem[]>(() => {
+    const all: CatalogItem[] = [
+      ...(data?.sectors ?? []).map((s) => ({ ...s, cat: "industry" as const })),
+      ...(data?.concepts ?? []).map((s) => ({ ...s, cat: "concept" as const })),
+      ...(data?.indices ?? []).map((s) => ({ ...s, cat: "index" as const })),
+      ...(data?.us_etfs ?? []).map((s) => ({ ...s, cat: "usetf" as const })),
+    ];
+    const kw = q.trim();
+    const kwLower = kw.toLowerCase();
+    const filtered = kw
+      ? all.filter(
+          (s) =>
+            s.name.includes(kw) ||
+            s.code.toLowerCase().includes(kwLower) ||
+            s.symbol.toLowerCase().includes(kwLower),
+        )
+      : all;
+    return cat === "all" ? filtered : filtered.filter((s) => s.cat === cat);
+  }, [data, q, cat]);
 
   const doResolve = async () => {
-    if (!input.trim()) return;
+    if (!q.trim()) return;
     setBusy(true);
     setError(null);
     setResolved(null);
     try {
-      setResolved(await api.resolve(input.trim(), true));
+      setResolved(await api.resolve(q.trim(), true));
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -32,326 +86,147 @@ export default function AddSymbolDialog({ groupId = null, onClose, onAdded }: Pr
     }
   };
 
-  const doAdd = async (symbol: string) => {
+  // close=false 用于目录点选：添加后不关弹窗、原地标记「已添加」，方便连加多个。
+  const doAdd = async (symbol: string, close = true) => {
     setBusy(true);
     setError(null);
     try {
       await api.addWatchlist(symbol, groupId);
+      setAddedCodes((prev) => new Set(prev).add(symbol));
       onAdded();
-      onClose();
+      if (close) onClose();
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
       setBusy(false);
     }
   };
+
+  // 裸 0 开头 6 位码会被按深市股票解析（如 000905 → 000905.SZ），probe 失败时给出正确写法。
+  const shIndexHint =
+    resolved?.probe_ok === false && /^0\d{5}$/.test(q.trim())
+      ? `；沪市指数请带 .SS 后缀重试（如 ${q.trim()}.SS），中证指数也可用 .CSI 写法`
+      : "";
+
+  const shown = items.slice(0, MAX_ROWS);
 
   return (
     <div className="dialog-mask" onClick={onClose}>
       <div className="dialog" onClick={(e) => e.stopPropagation()}>
         <h3>添加自选</h3>
+        <input
+          type="text"
+          placeholder="搜索名称或代码（如 通信、931160、QQQ、BK1128）"
+          value={q}
+          autoFocus
+          onChange={(e) => {
+            setQ(e.target.value);
+            setResolved(null);
+            setError(null);
+          }}
+          onKeyDown={(e) => e.key === "Enter" && doResolve()}
+        />
         <div className="add-tabs">
-          <button
-            className={`add-tab ${tab === "code" ? "on" : ""}`}
-            onClick={() => setTab("code")}
-          >
-            代码 / ETF
+          <button className={`add-tab ${cat === "all" ? "on" : ""}`} onClick={() => setCat("all")}>
+            全部
           </button>
-          <button
-            className={`add-tab ${tab === "sector" ? "on" : ""}`}
-            onClick={() => setTab("sector")}
-          >
-            行业板块
-          </button>
-          <button
-            className={`add-tab ${tab === "index" ? "on" : ""}`}
-            onClick={() => setTab("index")}
-          >
-            策略指数
-          </button>
-          <button
-            className={`add-tab ${tab === "usetf" ? "on" : ""}`}
-            onClick={() => setTab("usetf")}
-          >
-            美股ETF
-          </button>
+          {CATEGORIES.map((c) => (
+            <button
+              key={c.key}
+              className={`add-tab ${cat === c.key ? "on" : ""}`}
+              onClick={() => setCat(c.key)}
+            >
+              {c.label}
+            </button>
+          ))}
+        </div>
+        <div className="hint">
+          目录点名称或「＋ 添加」即加（可连加）；任意代码（股票/ETF/指数/BK/SW/TH/美股）回车解析后添加。
         </div>
 
-        {tab === "code" ? (
-          <>
-            <input
-              type="text"
-              placeholder="如 QQQ、159915、600519.SS、0700.HK"
-              value={input}
-              autoFocus
-              onChange={(e) => {
-                setInput(e.target.value);
-                setResolved(null);
-              }}
-              onKeyDown={(e) => e.key === "Enter" && doResolve()}
-            />
-            <div className="hint">
-              沪市指数请带 .SS 后缀（如 000001.SS 上证指数）；裸 6 位代码按股票规则解析。
-            </div>
-            {error && (
-              <div className="resolve-result">
-                <span className="bad">{error}</span>
-              </div>
-            )}
-            {resolved && (
-              <div className="resolve-result">
-                <div>
-                  将添加：<b>{resolved.display_name ?? resolved.symbol}</b>（{resolved.symbol}
-                  {resolved.market_cn ? ` · ${resolved.market_cn}` : ""}）
-                </div>
-                {resolved.probe_ok === true && <div className="ok">✓ 行情数据可用</div>}
-                {resolved.probe_ok === false && (
-                  <div className="bad">
-                    行情暂不可用：{resolved.probe_error}（仍可添加，稍后重试）
-                  </div>
-                )}
-              </div>
-            )}
-            <div className="actions">
-              <button className="btn" onClick={onClose}>
-                取消
-              </button>
-              {!resolved ? (
-                <button
-                  className="btn primary"
-                  disabled={busy || !input.trim()}
-                  onClick={doResolve}
-                >
-                  {busy ? "解析中…" : "解析"}
-                </button>
-              ) : (
-                <button
-                  className="btn primary"
-                  disabled={busy}
-                  onClick={() => doAdd(resolved.symbol)}
-                >
-                  {busy ? "添加中…" : "确认添加"}
-                </button>
-              )}
-            </div>
-          </>
-        ) : tab === "sector" ? (
-          <SectorPicker busy={busy} error={error} onPick={doAdd} onClose={onClose} />
-        ) : tab === "index" ? (
-          <IndexPicker busy={busy} error={error} onPick={doAdd} onClose={onClose} />
-        ) : (
-          <UsEtfPicker busy={busy} error={error} onPick={doAdd} onClose={onClose} />
+        {error && (
+          <div className="resolve-result">
+            <span className="bad">{error}</span>
+          </div>
         )}
+        {resolved && (
+          <div className="resolve-result">
+            <div>
+              将添加：<b>{resolved.display_name ?? resolved.symbol}</b>（{resolved.symbol}
+              {resolved.market_cn ? ` · ${resolved.market_cn}` : ""}）
+            </div>
+            {resolved.probe_ok === true && <div className="ok">✓ 行情数据可用</div>}
+            {resolved.probe_ok === false && (
+              <div className="bad">
+                行情暂不可用：{resolved.probe_error}
+                {shIndexHint}（仍可添加，稍后重试）
+              </div>
+            )}
+          </div>
+        )}
+        {q.trim() && !resolved && (
+          <div className="resolve-row">
+            <span className="resolve-row-label">
+              目录里没有？按代码添加「<b>{q.trim()}</b>」
+            </span>
+            <button className="btn" disabled={busy} onClick={doResolve}>
+              {busy ? "解析中…" : "解析"}
+            </button>
+          </div>
+        )}
+
+        <div className="sector-list">
+          {isLoading ? (
+            <div className="muted">加载中…</div>
+          ) : shown.length === 0 ? (
+            <div className="muted">目录无匹配；可回车按代码解析添加</div>
+          ) : (
+            shown.map((s) => {
+              const added = addedCodes.has(s.symbol);
+              return (
+                <div key={`${s.cat}-${s.code}`} className={`sector-item${added ? " added" : ""}`}>
+                  <button
+                    type="button"
+                    className="si-main"
+                    disabled={busy}
+                    onClick={() => doAdd(s.symbol, false)}
+                    title={`${s.name}（${s.symbol}）`}
+                  >
+                    <span className="si-name">{s.name}</span>
+                    <span className="si-meta">
+                      <span className={`si-cat cat-${s.cat}`}>{CAT_LABEL[s.cat]}</span>
+                      <span className="si-symbol">{s.symbol}</span>
+                    </span>
+                  </button>
+                  <button
+                    type="button"
+                    className={`si-add${added ? " done" : ""}`}
+                    disabled={busy || added}
+                    onClick={() => doAdd(s.symbol, false)}
+                    title={added ? "已添加" : `添加 ${s.name}`}
+                  >
+                    {added ? "✓ 已添加" : "＋ 添加"}
+                  </button>
+                </div>
+              );
+            })
+          )}
+          {items.length > MAX_ROWS && (
+            <div className="muted">已显示前 {MAX_ROWS} 条，输入关键词缩小范围</div>
+          )}
+        </div>
+
+        <div className="actions">
+          <button className="btn" onClick={onClose}>
+            关闭
+          </button>
+          {resolved && (
+            <button className="btn primary" disabled={busy} onClick={() => doAdd(resolved.symbol)}>
+              {busy ? "添加中…" : "确认添加"}
+            </button>
+          )}
+        </div>
       </div>
     </div>
-  );
-}
-
-/** 板块/指数选择器共用：搜索 + 列表，点一下即添加。 */
-function PickerList({
-  items,
-  q,
-  busy,
-  hint,
-  onPick,
-}: {
-  items: { code: string; name: string; symbol: string }[];
-  q: string;
-  busy: boolean;
-  hint: string;
-  onPick: (symbol: string) => void;
-}) {
-  const filtered = useMemo(() => {
-    const kw = q.trim();
-    if (!kw) return items;
-    return items.filter(
-      (s) =>
-        s.name.includes(kw) ||
-        s.code.includes(kw) ||
-        s.symbol.includes(kw.toUpperCase()),
-    );
-  }, [items, q]);
-
-  return (
-    <>
-      <div className="hint">{hint}</div>
-      <div className="sector-list">
-        {filtered.length === 0 && <div className="muted">无匹配</div>}
-        {filtered.map((s) => (
-          <button
-            key={s.code}
-            className="sector-item"
-            disabled={busy}
-            onClick={() => onPick(s.symbol)}
-            title={`${s.name}（${s.symbol}）`}
-          >
-            <span className="si-name">{s.name}</span>
-            <span className="si-symbol">{s.symbol}</span>
-          </button>
-        ))}
-      </div>
-    </>
-  );
-}
-
-/** 板块选择器：搜索 + 列表，点一下即添加。 */
-function SectorPicker({
-  busy,
-  error,
-  onPick,
-  onClose,
-}: {
-  busy: boolean;
-  error: string | null;
-  onPick: (symbol: string) => void;
-  onClose: () => void;
-}) {
-  const [q, setQ] = useState("");
-  const { data, isLoading } = useQuery({
-    queryKey: ["sectors"],
-    queryFn: () => api.sectors(),
-    staleTime: Infinity,
-  });
-  const items = data?.sectors ?? [];
-
-  return (
-    <>
-      <input
-        type="text"
-        placeholder="搜索板块名或代码（如 电网、半导体、881121）"
-        value={q}
-        autoFocus
-        onChange={(e) => setQ(e.target.value)}
-      />
-      {error && (
-        <div className="resolve-result">
-          <span className="bad">{error}</span>
-        </div>
-      )}
-      {isLoading ? (
-        <div className="muted">加载中…</div>
-      ) : (
-        <PickerList
-          items={items}
-          q={q}
-          busy={busy}
-          hint="同花顺行业板块（收盘后更新当日K线）。点名称即添加。"
-          onPick={onPick}
-        />
-      )}
-      <div className="actions">
-        <button className="btn" onClick={onClose}>
-          关闭
-        </button>
-      </div>
-    </>
-  );
-}
-
-/** 策略指数选择器：规模/红利/主题/海外指数。 */
-function IndexPicker({
-  busy,
-  error,
-  onPick,
-  onClose,
-}: {
-  busy: boolean;
-  error: string | null;
-  onPick: (symbol: string) => void;
-  onClose: () => void;
-}) {
-  const [q, setQ] = useState("");
-  const { data, isLoading } = useQuery({
-    queryKey: ["sectors"],
-    queryFn: () => api.sectors(),
-    staleTime: Infinity,
-  });
-  const items = data?.indices ?? [];
-
-  return (
-    <>
-      <input
-        type="text"
-        placeholder="搜索指数名或代码（如 红利、500、000905）"
-        value={q}
-        autoFocus
-        onChange={(e) => setQ(e.target.value)}
-      />
-      {error && (
-        <div className="resolve-result">
-          <span className="bad">{error}</span>
-        </div>
-      )}
-      {isLoading ? (
-        <div className="muted">加载中…</div>
-      ) : (
-        <PickerList
-          items={items}
-          q={q}
-          busy={busy}
-          hint="策略/规模/主题指数（沪深300、中证500、中证红利、VIX…）。点名称即添加。"
-          onPick={onPick}
-        />
-      )}
-      <div className="actions">
-        <button className="btn" onClick={onClose}>
-          关闭
-        </button>
-      </div>
-    </>
-  );
-}
-
-/** 美股 ETF 选择器：宽基/行业/风格/债券商品。名称为「中文名 + 缩写」。 */
-function UsEtfPicker({
-  busy,
-  error,
-  onPick,
-  onClose,
-}: {
-  busy: boolean;
-  error: string | null;
-  onPick: (symbol: string) => void;
-  onClose: () => void;
-}) {
-  const [q, setQ] = useState("");
-  const { data, isLoading } = useQuery({
-    queryKey: ["sectors"],
-    queryFn: () => api.sectors(),
-    staleTime: Infinity,
-  });
-  const items = data?.us_etfs ?? [];
-
-  return (
-    <>
-      <input
-        type="text"
-        placeholder="搜索 ETF 名或代码（如 半导体、纳指、QQQ、GLD）"
-        value={q}
-        autoFocus
-        onChange={(e) => setQ(e.target.value)}
-      />
-      {error && (
-        <div className="resolve-result">
-          <span className="bad">{error}</span>
-        </div>
-      )}
-      {isLoading ? (
-        <div className="muted">加载中…</div>
-      ) : (
-        <PickerList
-          items={items}
-          q={q}
-          busy={busy}
-          hint="美股 ETF：宽基（SPY/QQQ）、行业（XLK/SMH）、风格、债券商品（TLT/GLD）。点名称即添加。"
-          onPick={onPick}
-        />
-      )}
-      <div className="actions">
-        <button className="btn" onClick={onClose}>
-          关闭
-        </button>
-      </div>
-    </>
   );
 }

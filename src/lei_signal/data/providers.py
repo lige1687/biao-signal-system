@@ -276,7 +276,14 @@ class EastmoneyPriceProvider:
     """
 
     name = "eastmoney"
-    _HOST = "https://push2his.eastmoney.com/api/qt/stock/kline/get"
+    # push2his 各号段主机在本机网络常被间歇掐断（同 EastmoneySectorProvider 的场景），
+    # 43 号段实测最稳，放首位；轮询逻辑见 _fetch_with_failover。
+    _HOSTS: tuple[str, ...] = (
+        "https://43.push2his.eastmoney.com/api/qt/stock/kline/get",
+        "https://push2his.eastmoney.com/api/qt/stock/kline/get",
+        "https://1.push2his.eastmoney.com/api/qt/stock/kline/get",
+        "https://push2hisdelay.eastmoney.com/api/qt/stock/kline/get",
+    )
 
     def __init__(
         self,
@@ -295,23 +302,26 @@ class EastmoneyPriceProvider:
         self._backoff = backoff
         self._sleep = sleep if sleep is not None else time.sleep
 
-    def _fetch_text(self, url: str) -> str:
-        """有界重试：瞬时网络中断不应等同于永久不可用。
+    def _fetch_with_failover(self, params: dict[str, str]) -> str:
+        """有界重试 + 主机轮询。
 
-        任何非 DataUnavailableError 的异常（例如 RemoteDisconnected、
-        socket.timeout）都在此统一转换，保证界面永远只看到 DATA_UNAVAILABLE，
-        而不是原始堆栈。
+        单主机连重 3 次不如把重试预算摊到不同号段主机（总尝试次数仍为
+        ``attempts``，测试口径不变）。任何非 DataUnavailableError 的异常
+        （RemoteDisconnected、socket.timeout 等）统一转换，保证界面只看到
+        DATA_UNAVAILABLE，而不是原始堆栈。
         """
         last: DataUnavailableError | None = None
-        for attempt in range(self._attempts):
+        for i in range(self._attempts):
+            host = self._HOSTS[i % len(self._HOSTS)]
+            url = f"{host}?{urllib.parse.urlencode(params)}"
             try:
                 return self._opener(url)
             except DataUnavailableError as exc:
                 last = exc
             except Exception as exc:  # noqa: BLE001 - 统一转为可显示错误
                 last = DataUnavailableError(f"东方财富请求失败：{exc}")
-            if attempt < self._attempts - 1:
-                self._sleep(self._backoff * (attempt + 1))
+            if i < self._attempts - 1:
+                self._sleep(self._backoff * (i + 1))
         assert last is not None
         raise last
 
@@ -347,8 +357,8 @@ class EastmoneyPriceProvider:
             "end": "20500101",
             "lmt": str(self._max_bars),
         }
-        url = f"{self._HOST}?{urllib.parse.urlencode(params)}"
-        payload = self._parse_payload(self._fetch_text(url), info.symbol)
+        text = self._fetch_with_failover(params)
+        payload = self._parse_payload(text, info.symbol)
         bars_raw, name = payload
         bars, report = validate_bars(
             bars_raw,

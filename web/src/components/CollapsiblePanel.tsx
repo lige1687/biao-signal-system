@@ -1,4 +1,10 @@
-import { useState, type ReactNode } from "react";
+import {
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useState,
+  type ReactNode,
+} from "react";
 
 interface Props {
   /** 折叠头显示的标题（通常就是被包裹卡片的标题）。 */
@@ -10,6 +16,14 @@ interface Props {
   defaultCollapsed?: boolean;
   /** 提供后折叠状态写入 localStorage，刷新/换标的后保持。 */
   storageKey?: string;
+  /** 可选 DOM id，供外部滚动定位（今日摘要条跳转用）。 */
+  id?: string;
+}
+
+/** 命令式句柄：供父组件在不关心内部状态的情况下强制展开面板。 */
+export interface CollapsiblePanelHandle {
+  /** 展开面板（忽略当前折叠状态，用于摘要条点击跳转）。 */
+  expand: () => void;
 }
 
 function readStored(key: string, fallback: boolean): boolean {
@@ -31,17 +45,10 @@ function readStored(key: string, fallback: boolean): boolean {
  * （children 仍是 truthy 的 React 元素），因此调用方需在数据为空时不渲染本组件。
  * 对于 `data.x && <Child/>` 这类字面量 false 子节点，本组件会直接返回 null。
  */
-export default function CollapsiblePanel({
-  title,
-  children,
-  summary,
-  defaultCollapsed = false,
-  storageKey,
-}: Props) {
-  // 字面量 false / null 子节点（如 `cond && <Child/>` 不成立时）直接不渲染，
-  // 避免出现「空折叠头」。
-  if (children == null || children === false) return null;
-
+const CollapsiblePanel = forwardRef<CollapsiblePanelHandle, Props>(function CollapsiblePanel(
+  { title, children, summary, defaultCollapsed = false, storageKey, id },
+  ref,
+) {
   const [collapsed, setCollapsed] = useState(() =>
     storageKey ? readStored(storageKey, defaultCollapsed) : defaultCollapsed,
   );
@@ -60,8 +67,29 @@ export default function CollapsiblePanel({
     });
   };
 
+  // 摘要条跳转：无视当前状态强制展开。
+  const expand = useCallback(() => {
+    setCollapsed((current) => {
+      if (!current) return current;
+      if (storageKey) {
+        try {
+          window.localStorage.setItem(storageKey, "0");
+        } catch {
+          /* 同上 */
+        }
+      }
+      return false;
+    });
+  }, [storageKey]);
+
+  useImperativeHandle(ref, () => ({ expand }), [expand]);
+
+  // 字面量 false / null 子节点（如 `cond && <Child/>` 不成立时）直接不渲染，
+  // 避免出现「空折叠头」。
+  if (children == null || children === false) return null;
+
   return (
-    <section className={`collapsible-panel${collapsed ? " is-collapsed" : ""}`}>
+    <section id={id} className={`collapsible-panel${collapsed ? " is-collapsed" : ""}`}>
       <button
         type="button"
         className="collapsible-panel__head"
@@ -79,4 +107,6 @@ export default function CollapsiblePanel({
       {!collapsed && <div className="collapsible-panel__body">{children}</div>}
     </section>
   );
-}
+});
+
+export default CollapsiblePanel;

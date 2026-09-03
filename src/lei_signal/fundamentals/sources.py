@@ -546,20 +546,10 @@ def fetch_cn_index_history(code: str, lookback_days: int = 5200) -> dict[str, fl
     return dict(sorted(out.items()))
 
 
-def fetch_fred_index_history(series_id: str) -> dict[str, float]:
-    """FRED 官方 CSV -> 升序 {date: value}（美联储圣路易斯联储）。"""
-    try:
-        resp = requests.get(
-            _FRED_CSV_URL,
-            params={"id": series_id},
-            headers=_HEADERS,
-            timeout=_TIMEOUT,
-        )
-        resp.raise_for_status()
-    except requests.RequestException as exc:
-        raise FundamentalsSourceError(f"FRED {series_id}: {exc}") from exc
+def _parse_fred_csv(text: str, series_id: str) -> dict[str, float]:
+    """FRED CSV 文本 -> 升序 {date: value}。缺值 '.' 跳过。"""
     out: dict[str, float] = {}
-    for i, line in enumerate(resp.text.splitlines()):
+    for i, line in enumerate(text.splitlines()):
         if i == 0 or "," not in line:
             continue  # 表头 / 空行
         date, _, raw = line.partition(",")
@@ -569,6 +559,247 @@ def fetch_fred_index_history(series_id: str) -> dict[str, float]:
     if not out:
         raise FundamentalsSourceError(f"FRED {series_id} 无数据")
     return out
+
+
+def _fetch_fred_series(series_id: str, *, cosd: str | None = None) -> dict[str, float]:
+    """FRED 官方 CSV -> 升序 {date: value}（美联储圣路易斯联储，无需 API key）。
+
+    cosd 限定起始日期控制拉取量；FRED 对连续请求会限流（HTTP 404/挑战页），
+    失败退避 4 秒重试一次。
+    """
+    params: dict[str, Any] = {"id": series_id}
+    if cosd:
+        params["cosd"] = cosd
+    last_exc: Exception | None = None
+    for attempt in range(2):
+        if attempt:
+            time.sleep(4.0)
+        try:
+            resp = requests.get(_FRED_CSV_URL, params=params, headers=_HEADERS, timeout=_TIMEOUT)
+            resp.raise_for_status()
+            return _parse_fred_csv(resp.text, series_id)
+        except (requests.RequestException, FundamentalsSourceError) as exc:
+            last_exc = exc
+    raise FundamentalsSourceError(f"FRED {series_id}: {last_exc}")
+
+
+def fetch_fred_index_history(series_id: str) -> dict[str, float]:
+    """FRED 官方 CSV -> 升序 {date: value}（美联储圣路易斯联储）。"""
+    return _fetch_fred_series(series_id)
+
+
+# ── 美国宏观（FRED 公开 CSV，无需 API key）──────────────────────────────
+# 对齐 themarketmemo「20 charts」缺口：就业（初请/续请/非农）、成屋销售、
+# Case-Shiller 房价、汽车销量、WEI 周经济指数、美国 PPI/CPI 同比（配铜金比/
+# 油金比）、耐用品订单（ISM PMI 因授权问题已从 FRED 下架——NAPM 404 实测，
+# 以耐用品订单同比替代「制造业订单&采购」视角）、高收益债利差（信用风险，
+# 搭配 VIX 评估系统性风险）。全部为公开序列，周/月频，缓存 6 小时。
+
+_FRED_PAUSE = 1.2  # 序列间限速，避免触发 FRED 连发限流
+
+# transform: level=原值 | ma4=4 周滚动均值（初请平滑）| yoy=同比 %
+_US_MACRO_SPEC: list[dict[str, Any]] = [
+    {
+        "key": "icwa",
+        "series": "ICSA",
+        "cosd": "2020-01-01",
+        "name_cn": "初请失业金",
+        "label": "初请失业金（4 周均值）",
+        "unit": "人",
+        "freq": "周",
+        "transform": "ma4",
+    },
+    {
+        "key": "ccwa",
+        "series": "CCSA",
+        "cosd": "2020-01-01",
+        "name_cn": "续请失业金",
+        "label": "续请失业金",
+        "unit": "人",
+        "freq": "周",
+        "transform": "level",
+    },
+    {
+        "key": "payems_yoy",
+        "series": "PAYEMS",
+        "cosd": "2014-01-01",
+        "name_cn": "非农就业同比",
+        "label": "非农就业同比",
+        "unit": "%",
+        "freq": "月",
+        "transform": "yoy",
+    },
+    {
+        "key": "hsales",
+        "series": "HSN1F",
+        "cosd": "2014-01-01",
+        "name_cn": "新屋销售",
+        "label": "新屋销售（折年率）",
+        "unit": "千套",
+        "freq": "月",
+        "transform": "level",
+    },
+    {
+        "key": "cshpi_yoy",
+        "series": "CSUSHPINSA",
+        "cosd": "2014-01-01",
+        "name_cn": "Case-Shiller 房价同比",
+        "label": "Case-Shiller 房价同比",
+        "unit": "%",
+        "freq": "月",
+        "transform": "yoy",
+    },
+    {
+        "key": "altsa",
+        "series": "TOTALSA",
+        "cosd": "2014-01-01",
+        "name_cn": "汽车销量",
+        "label": "汽车销量（折年率）",
+        "unit": "百万辆",
+        "freq": "月",
+        "transform": "level",
+    },
+    {
+        "key": "wei",
+        "series": "WEI",
+        "cosd": "2020-01-01",
+        "name_cn": "WEI 周经济指数",
+        "label": "WEI 周经济指数",
+        "unit": "%",
+        "freq": "周",
+        "transform": "level",
+    },
+    {
+        "key": "ppiaco_yoy",
+        "series": "PPIFIS",
+        "cosd": "2014-01-01",
+        "name_cn": "美 PPI 同比",
+        "label": "美国 PPI 同比（最终需求）",
+        "unit": "%",
+        "freq": "月",
+        "transform": "yoy",
+    },
+    {
+        "key": "cpiaucsl_yoy",
+        "series": "CPIAUCSL",
+        "cosd": "2014-01-01",
+        "name_cn": "美 CPI 同比",
+        "label": "美国 CPI 同比",
+        "unit": "%",
+        "freq": "月",
+        "transform": "yoy",
+    },
+    {
+        "key": "dgorder_yoy",
+        "series": "DGORDER",
+        "cosd": "2014-01-01",
+        "name_cn": "耐用品订单同比",
+        "label": "耐用品订单（新订单）同比",
+        "unit": "%",
+        "freq": "月",
+        "transform": "yoy",
+    },
+    {
+        "key": "hy_oas",
+        "series": "BAMLH0A0HYM2",
+        "cosd": "2020-01-01",
+        "name_cn": "高收益债利差",
+        "label": "高收益债 OAS 利差",
+        "unit": "%",
+        "freq": "日",
+        "transform": "level",
+    },
+]
+
+_US_NOTES: dict[str, str] = {
+    "icwa": "取 4 周均值过滤周度杂音；趋势持续上行 = 就业恶化先行信号",
+    "ccwa": "初请之后第二道风向标：持续攀升 = 失业周期拉长",
+    "payems_yoy": "同比转负为就业萎缩信号；月度净增骤降是衰退前兆",
+    "hsales": "折年率；成屋销售受 NAR 授权 FRED 仅存近一年，改用 Census 新屋销售（全史）",
+    "cshpi_yoy": "全国房价指数（发布滞后约 2 个月）；财富效应支撑消费",
+    "altsa": "折年率；大件可选消费风向标",
+    "wei": "纽约联储周频 GDP 同步代理（11 项周度指标合成），0 为增长/收缩分界",
+    "ppiaco_yoy": "最终需求口径（PPIFIS），配铜金比看工业品通胀",
+    "cpiaucsl_yoy": "配油金比看整体通胀",
+    "dgorder_yoy": "ISM PMI 因授权未上 FRED，以耐用品订单同比看制造业订单景气",
+    "hy_oas": "高收益债相对国债利差，搭配 VIX 评估系统性风险；>6% 历史警戒",
+}
+
+
+def _yoy_pct(points: list[tuple[str, float]]) -> list[tuple[str, float]]:
+    """月度序列转同比 %（索引距离 12 = 12 个月）。"""
+    return [
+        (d, round((v / points[i - 12][1] - 1) * 100, 2))
+        for i, (d, v) in enumerate(points)
+        if i >= 12
+    ]
+
+
+def _ma4(points: list[tuple[str, float]]) -> list[tuple[str, float]]:
+    """周度序列转 4 周滚动均值。"""
+    return [
+        (d, round(sum(v for _, v in points[i - 3 : i + 1]) / 4, 1))
+        for i, (d, _v) in enumerate(points)
+        if i >= 3
+    ]
+
+
+def _build_us_macro_item(
+    spec: dict[str, Any], raw: dict[str, float]
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    points = sorted(raw.items())
+    transform = spec["transform"]
+    if transform == "ma4":
+        derived = _ma4(points)
+    elif transform == "yoy":
+        derived = _yoy_pct(points)
+    else:
+        derived = [(d, round(v, 2)) for d, v in points]
+    if not derived:
+        raise FundamentalsSourceError(f"FRED {spec['series']} 派生序列为空")
+    note = _US_NOTES.get(spec["key"], "")
+    if spec["key"] == "icwa" and points:
+        note = f"本周 {points[-1][1] / 1e4:.1f} 万 · " + note
+    if spec["key"] == "payems_yoy" and len(points) >= 2:
+        # PAYEMS 单位千人：月净增 = 本月 - 上月
+        net = points[-1][1] - points[-2][1]
+        note = f"月净增 {net / 10:.1f} 万 · 总 {points[-1][1] / 1e5:.2f} 亿人 · " + note
+    item = {
+        "key": spec["key"],
+        "name_cn": spec["name_cn"],
+        "freq": spec["freq"],
+        "date": derived[-1][0],
+        "value": derived[-1][1],
+        "note_cn": note,
+    }
+    series = {
+        "label": spec["label"],
+        "unit": spec["unit"],
+        "dates": [d for d, _ in derived],
+        "values": [v for _, v in derived],
+    }
+    return item, series
+
+
+def fetch_us_macro() -> dict[str, Any]:
+    """美国宏观批量取数（FRED，就业/房产/汽车/WEI/物价/订单/信用利差）。
+
+    单序列失败只进 errors，其余照常返回；序列间 sleep 限速。
+    """
+    items: list[dict[str, Any]] = []
+    series: dict[str, Any] = {}
+    errors: list[str] = []
+    for spec in _US_MACRO_SPEC:
+        try:
+            raw = _fetch_fred_series(spec["series"], cosd=spec["cosd"])
+            item, ser = _build_us_macro_item(spec, raw)
+            items.append(item)
+            series[spec["key"]] = ser
+        except FundamentalsSourceError as exc:
+            errors.append(f"美国宏观 {spec['name_cn']}: {exc}")
+        time.sleep(_FRED_PAUSE)
+    as_of = max((it["date"] for it in items if it["date"]), default=None)
+    return {"as_of": as_of, "items": items, "series": series, "errors": errors}
 
 
 # ── 全球商品代理：铜金比 / 油金比（thememo 消费类，抽象化全球经济）─────────
@@ -593,6 +824,29 @@ def _yf_last(tickers: list[str], period: str = "3mo") -> dict[str, dict[str, flo
                 "last": float(s.iloc[-1]),
                 "prev_month": float(s.iloc[-22]) if len(s) >= 22 else float(s.iloc[0]),
             }
+        except Exception:  # noqa: BLE001
+            continue
+    if not out:
+        raise FundamentalsSourceError("yfinance 无可用收盘价")
+    return out
+
+
+def _yf_closes(tickers: list[str], period: str = "6mo") -> dict[str, list[tuple[str, float]]]:
+    """yf.download 一批 ticker 的日线收盘，返回 {ticker: [(date, close), ...]} 升序。"""
+    import pandas as pd
+    import yfinance as yf
+
+    data = yf.download(tickers, period=period, interval="1d", progress=False, group_by="ticker")
+    if data.empty:
+        raise FundamentalsSourceError("yfinance 返回空")
+    multi = isinstance(data.columns, pd.MultiIndex)
+    out: dict[str, list[tuple[str, float]]] = {}
+    for t in tickers:
+        try:
+            s = (data[t]["Close"] if multi else data["Close"]).dropna()
+            if len(s) < 2:
+                continue
+            out[t] = [(str(d.date()), float(v)) for d, v in s.items()]
         except Exception:  # noqa: BLE001
             continue
     if not out:
@@ -643,24 +897,36 @@ _ETF_SECTORS: list[tuple[str, str, str]] = [
 
 
 def fetch_etf_strength() -> dict[str, Any] | None:
-    """11 行业 ETF 相对 SPY 的 1 月相对强度，按强度排序。
+    """11 行业 ETF 相对 SPY 的相对强度线图 + 1 月相对强度排序。
 
-    risk_off 类（必选/医疗/公用）排在前列 = 市场避险；risk_on 类排在前列 = 风险偏好上升。
-    via yfinance，失败返回 None。
+    每个行业一条「相对净值线」：ETF/SPY 比价以窗口起点归一为 100，
+    线在 100 上方 = 期间跑赢 SPY。risk_off 类（必选/医疗/公用）整体在上方
+    = 市场避险；risk_on 类在上方 = 风险偏好上升。另给可选/必选消费比价
+    XLY/XLP：升 = 风险偏好、降 = 避险。via yfinance，失败返回 None。
     """
     try:
         tickers = [t for t, _, _ in _ETF_SECTORS] + ["SPY"]
-        px = _yf_last(tickers, period="3mo")
-        spy = px.get("SPY")
-        if not spy:
+        closes = _yf_closes(tickers, period="6mo")
+        if "SPY" not in closes:
             return None
-        spy_1m = spy["last"] / spy["prev_month"] - 1
+        px = {t: dict(pts) for t, pts in closes.items()}
+        # 对齐到所有行业的公共交易日（美股 ETF 交易日历一致，交集≈全集）
+        common = sorted(
+            set(px["SPY"]).intersection(*(px[t] for t, _, _ in _ETF_SECTORS if t in px))
+        )
+        n = len(common)
+        if n < 25:
+            return None
+        spy_line = [px["SPY"][d] for d in common]
+        spy_1m = spy_line[-1] / spy_line[n - 22] - 1
+
         items: list[dict[str, Any]] = []
         for code, name, bias in _ETF_SECTORS:
-            p = px.get(code)
-            if not p:
+            if code not in px:
                 continue
-            etf_1m = p["last"] / p["prev_month"] - 1
+            line = [px[code][d] for d in common]
+            base = line[0] / spy_line[0]
+            etf_1m = line[-1] / line[n - 22] - 1
             items.append(
                 {
                     "code": code,
@@ -668,6 +934,10 @@ def fetch_etf_strength() -> dict[str, Any] | None:
                     "bias": bias,
                     "ret_1m": round(etf_1m * 100, 2),
                     "rel_1m": round((etf_1m - spy_1m) * 100, 2),
+                    "rel_line": [
+                        round(v / s / base * 100, 2)
+                        for v, s in zip(line, spy_line, strict=True)
+                    ],
                 }
             )
         items.sort(key=lambda x: x["rel_1m"], reverse=True)
@@ -675,6 +945,27 @@ def fetch_etf_strength() -> dict[str, Any] | None:
             1, sum(1 for i in items if i["bias"] == "risk_off")
         )
         regime = "risk_off" if off_avg > 0 else "risk_on"
-        return {"items": items, "regime": regime, "spy_1m": round(spy_1m * 100, 2)}
+        xly_xlp: dict[str, Any] | None = None
+        if "XLY" in px and "XLP" in px:
+            xly_line = [px["XLY"][d] for d in common]
+            xlp_line = [px["XLP"][d] for d in common]
+            ratio = xly_line[-1] / xlp_line[-1]
+            q3 = max(0, n - 63)
+
+            def chg(idx: int) -> float:
+                return (ratio / (xly_line[idx] / xlp_line[idx]) - 1) * 100
+
+            xly_xlp = {
+                "ratio": round(ratio, 3),
+                "chg_1m": round(chg(n - 22), 2),
+                "chg_3m": round(chg(q3), 2),
+            }
+        return {
+            "dates": common,
+            "items": items,
+            "regime": regime,
+            "spy_1m": round(spy_1m * 100, 2),
+            "xly_xlp": xly_xlp,
+        }
     except Exception:  # noqa: BLE001
         return None

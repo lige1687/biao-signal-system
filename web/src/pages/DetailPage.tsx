@@ -16,12 +16,16 @@ import PlanCreateFlow from "../components/PlanCreateFlow";
 import BuyPointDrawer, { annoToIndex } from "../components/BuyPointDrawer";
 import KlineChart, {
   DEFAULT_DISPLAY,
+  effectiveDisplay,
   type ChartDisplay,
   type MarkPick,
 } from "../components/KlineChart";
+import { scopeMarkCounts } from "../components/klineStructureMarks";
+import { loadTimeframe } from "../components/klineTimeframe";
 import { useBuyPointCoord } from "../hooks/useBuyPointCoord";
 import type {
   Explanation,
+  MacdEvent,
   StructureBrief,
   SymbolDetail,
 } from "../types";
@@ -35,6 +39,7 @@ const MARK_SOURCE_CN: Record<MarkPick["kind"], string> = {
   bottom_line: "图上参考线 · C 点失效线",
   top_line: "图上参考线 · 顶部颈线",
   highlight_price: "买点分析 · 价位标注",
+  macd_event: "MACD 副图标记 · 强度事件",
 };
 
 /** 横线类点击（B1 / C 点 / 颈线）：只有价位，没有日期。 */
@@ -56,6 +61,10 @@ function resolveSelection(pick: MarkPick, detail: SymbolDetail): Selection {
   let explanation: Explanation | null = null;
   if (pick.kind === "key_volatility") {
     explanation = detail.concepts["key_volatility"] ?? null;
+  } else if (pick.kind === "macd_event") {
+    // MACD 事件统一用 macd_strength 概念条目讲解；当日读数与盲区补齐
+    // 从 chart.macdEvents 回查，面板里单列一节。
+    explanation = detail.concepts["macd_strength"] ?? null;
   } else if (LINE_KINDS.has(pick.kind)) {
     // 横线优先解释「这条线是什么」（B1 / C 点 / 颈线概念），
     // 而不是它所属结构的形态——用户点的是线，不是菱形。
@@ -69,16 +78,24 @@ function resolveSelection(pick: MarkPick, detail: SymbolDetail): Selection {
 
   // 相关事件不在此处过滤：详情只带最近 60 条，点多年前的标记会得到空列表。
   // 改由 DetailPage 按 structure_id / 日期向 /events 端点按需查询后回填。
+  const macdEvent: MacdEvent | undefined =
+    pick.kind === "macd_event"
+      ? detail.chart.macdEvents?.find((e) => e.date === pick.date)
+      : undefined;
   return {
-    source,
+    source:
+      pick.kind === "macd_event" && pick.macdStatusCn
+        ? `MACD 副图标记 · ${pick.macdStatusCn}（研究代理）`
+        : source,
     date: pick.date,
     price: pick.price ?? pick.level,
     explanation,
     structure,
     b1PivotDate: pick.pivotDate ?? undefined,
     b1DistancePct: pick.distancePct ?? undefined,
+    macdEvent,
     events: undefined,
-    eventsLoading: true,
+    eventsLoading: pick.kind !== "macd_event", // MACD 不产生事件，无需查询
   };
 }
 
@@ -93,7 +110,14 @@ export default function DetailPage() {
   const [expCollapsed, setExpCollapsed] = useState(false);
   const expVisible = !showBuyPoint && !expCollapsed;
   // 标记默认全关（见 DEFAULT_DISPLAY）：历史标记可达数百个，会严重干扰看盘。
-  const [display, setDisplay] = useState<ChartDisplay>(DEFAULT_DISPLAY);
+  // 周期默认日线，但沿用用户上次的选择（localStorage 持久化）。
+  const [display, setDisplay] = useState<ChartDisplay>(() => ({
+    ...DEFAULT_DISPLAY,
+    timeframe: loadTimeframe(),
+  }));
+  // 图例只能描述「图上真的画了什么」：周/月线下日线专属项已被隐藏，
+  // 因此图例一律读派生后的生效开关，避免出现「图例有、图上没有」。
+  const legend = effectiveDisplay(display);
   // KlineChart 把「下载当前图为 PNG」的闭包回传到这里，按钮点的时候调它
   const downloadPngRef = useRef<(() => void) | null>(null);
 
@@ -178,16 +202,28 @@ export default function DetailPage() {
     };
   }, [data]);
 
+  // 徽章计数按口径过滤（仅存活时只数 live），markTotals 提供总数显示「n/total」。
+  const markTotals = useMemo(() => {
+    const c = data?.chart;
+    return c
+      ? {
+          bottomMarks: c.bottomMarks.length,
+          topMarks: c.topMarks.length,
+          invalidatedMarks: c.invalidatedMarks.length,
+        }
+      : undefined;
+  }, [data]);
   const counts = useMemo(() => {
     const c = data?.chart;
+    const scoped = c ? scopeMarkCounts(c, display.marksScope) : null;
     return {
-      bottomMarks: c ? c.bottomMarks.length : 0,
-      topMarks: c ? c.topMarks.length : 0,
-      invalidatedMarks: c ? c.invalidatedMarks.length : 0,
+      bottomMarks: scoped ? scoped.bottomMarks : 0,
+      topMarks: scoped ? scoped.topMarks : 0,
+      invalidatedMarks: scoped ? scoped.invalidatedMarks : 0,
       keyVolatility: c ? c.keyVolatility.length : 0,
       levels: c ? (c.b1Line ? 1 : 0) + c.bottomLines.length + c.topLines.length : 0,
     };
-  }, [data]);
+  }, [data, display.marksScope]);
 
   /** 点徽章也能看解释（颜色/阶段/风险/生命周期）。 */
   const pickConcept = (key: string, sourceCn: string) => {
@@ -299,6 +335,7 @@ export default function DetailPage() {
                 display={display}
                 onChange={setDisplay}
                 counts={counts}
+                markTotals={markTotals}
                 onDownloadPng={() => downloadPngRef.current?.()}
               />
               <KlineChart
@@ -310,27 +347,27 @@ export default function DetailPage() {
               />
               <TrendChecklist payload={data.chart} assessment={data.assessment} />
               <div className="chart-legend">
-                {display.bottomMarks && (
+                {legend.bottomMarks && (
                   <span>
                     <span className="mk mk-bottom">◆</span> 底部确认
                   </span>
                 )}
-                {display.topMarks && (
+                {legend.topMarks && (
                   <span>
                     <span className="mk mk-top">◆</span> 顶部确认
                   </span>
                 )}
-                {display.invalidatedMarks && (
+                {legend.invalidatedMarks && (
                   <span>
                     <span className="mk mk-dead">✕</span> 结构失效
                   </span>
                 )}
-                {display.keyVolatility && (
+                {legend.keyVolatility && (
                   <span>
                     <span className="mk mk-kv">▲</span> 关键性波动
                   </span>
                 )}
-                {display.levels && (
+                {legend.levels && (
                   <>
                     <span>
                       <span className="mk mk-b1">●</span> B1 阻力线
@@ -343,17 +380,17 @@ export default function DetailPage() {
                     </span>
                   </>
                 )}
-                {display.colorMode === "lei_state" && (
+                {legend.colorMode === "lei_state" && (
                   <span className="muted">
                     LEI 着色模式：K 线颜色 = 当日绿/灰/黑状态（实体不再分空心/实心）
                   </span>
                 )}
                 <span className="muted">
-                  {display.bottomMarks ||
-                  display.topMarks ||
-                  display.invalidatedMarks ||
-                  display.keyVolatility ||
-                  display.levels
+                  {legend.bottomMarks ||
+                  legend.topMarks ||
+                  legend.invalidatedMarks ||
+                  legend.keyVolatility ||
+                  legend.levels
                     ? "点标记或线右端圆点 → 右侧看解释"
                     : "信号标记默认隐藏，按上方开关按需显示"}
                 </span>

@@ -219,6 +219,22 @@ def test_eastmoney_reports_last_error_after_exhausting_retries() -> None:
     assert len(attempts) == 3
 
 
+def test_eastmoney_rotates_hosts_across_retry_budget() -> None:
+    """重试预算摊到不同号段主机：单主机被掐时下一次尝试换主机，总次数仍为 attempts。"""
+    urls: list[str] = []
+
+    def always_fail(url: str) -> str:
+        urls.append(url)
+        raise DataUnavailableError("东方财富连接中断：RemoteDisconnected")
+
+    provider = EastmoneyPriceProvider(opener=always_fail, attempts=3, sleep=lambda _: None)
+    with pytest.raises(DataUnavailableError):
+        provider.fetch("159915")
+    hosts = {url.split("?")[0] for url in urls}
+    assert len(urls) == 3
+    assert len(hosts) == 3
+
+
 def test_yahoo_retries_rate_limit_then_succeeds() -> None:
     state: list[int] = []
 

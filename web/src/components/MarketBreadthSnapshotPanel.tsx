@@ -4,24 +4,27 @@ import { api } from "../api/client";
 import type { GlobalPanel } from "../types";
 import BreadthTrendChart from "./BreadthTrendChart";
 import {
-  AShareBar,
-  AShareGrid,
-  AShareSourceLine,
+  BreadthAsOf,
+  hasBreadth,
   isRealAShare,
-  fmtPct as fmtPctAD,
-  fmtNum as fmtNumAD,
 } from "./aShareBreadthView";
 
 /* ------------------------------------------------------------------ */
 /*  阈值与判断依据（全部标注来源）                                      */
 /* ------------------------------------------------------------------ */
 
-// 短期/中期宽度（20日、50日）极值框架
-// 来源：国内券商（中信/华泰）市场宽度周报常用阈值——20日宽度 >85% 阶段顶(超买)、<15% 短期底(超卖)
+// 压力位 / 机会位（短期/中期宽度 20日、50日 极值框架）
+// 来源（行业通用标准，非自定）：% 站上均线个股占比的广度极值以
+// 「80% 超买 / 20% 超卖 / 50% 多空分界」为准——
+// TradingView 官方宽度脚本、marketinout(%Above50MA)、thetrading.tools / pomegra.io
+// 等多家 quant 框架均以此为准。华泰证券《A股择时之技术面指标测试》(2021) 亦建议
+// 对 A 股采用默认/标准参数、警惕参数寻优过拟合，故 A股/美股共用此标准值。
+// 注：Martin Zweig Breadth Thrust 的 40%/61.5% 针对「涨跌家数比率」(另一类指标)，
+// 与本文「% 站上均线占比」不可混用，仅作整体解读参考。
 const SHORT_BREADTH_ZONES = [
-  { max: 15, label: "短期底/超卖（机会）", tone: "opportunity", note: "<15%：短期超卖，反弹概率较高（券商市场宽度框架）" },
-  { max: 85, label: "中性区", tone: "neutral", note: "15–85%：常态区，宽度本身不构成极值信号" },
-  { max: Infinity, label: "阶段顶/超买（风险）", tone: "danger", note: ">85%：阶段顶/超买，追高性价比低；与200日同处极端需警惕反转（券商框架）" },
+  { max: 20, label: "机会位（超卖）", tone: "opportunity", note: "≤20%：广度过冷、恐慌释放，短期反弹概率较高（压力/机会位框架）" },
+  { max: 80, label: "中性区", tone: "neutral", note: "20–80%：常态区，宽度本身不构成极值信号" },
+  { max: Infinity, label: "压力位（超买）", tone: "danger", note: "≥80%：广度过热、获利盘拥挤，阶段顶部 / 回调风险高（压力/机会位框架）" },
 ] as const;
 
 // 长期宽度（200日）框架：200日均线为长期多空分界
@@ -54,11 +57,11 @@ function findZone(value: number | null, zones: readonly Zone[]): Zone {
   return zones.find((z) => value <= z.max) ?? zones[zones.length - 1];
 }
 
-/** 短期/中期宽度着色（>85红 / <15绿 / 中间灰） */
+/** 短期/中期宽度着色（>80红 / <20绿 / 中间灰，行业通用 80/20 极值） */
 function shortBreadthTone(v: number | null): string {
   if (v == null) return "neutral";
-  if (v >= 85) return "danger";
-  if (v <= 15) return "opportunity";
+  if (v >= 80) return "danger";
+  if (v <= 20) return "opportunity";
   return "neutral";
 }
 
@@ -91,10 +94,9 @@ export default function MarketBreadthSnapshotPanel() {
   });
 
   const panels = data?.panels ?? [];
-  // 优先取全A(CN_ALL_A) 与 标普500(SP500)
+  // 全A(CN_ALL_A) + 美股(SP500) 双市场宽度，原提交版本即同时展示
   const cnAll = panels.find((p) => p.market_id === "CN_ALL_A") ?? null;
   const spx = panels.find((p) => p.market_id === "SP500") ?? null;
-  const primaryPanels = [cnAll, spx].filter(Boolean) as GlobalPanel[];
 
   return (
     <section className={`macro-snapshot market-breadth-snapshot${expanded ? " expanded" : ""}`}>
@@ -105,121 +107,146 @@ export default function MarketBreadthSnapshotPanel() {
         aria-expanded={expanded}
       >
         <span className="macro-chevron">{expanded ? "▾" : "▸"}</span>
-        <span className="macro-title">市场宽度 + 情绪</span>
+        <span className="macro-title">市场宽度</span>
         <span className="macro-badges">
-          {cnAll && isRealAShare(cnAll) ? (
-            <span className="macro-chip neutral" title="真全A·上涨家数占比">
-              全A涨 {fmtPctAD(cnAll.up_pct)} · 跌 {fmtNumAD(cnAll.down)}
-            </span>
-          ) : (
+          {cnAll && hasBreadth(cnAll) ? (
             <>
               {cnAll?.breadth_50 != null && (
-                <span className={`macro-chip ${shortBreadthTone(cnAll.breadth_50)}`} title="全A 50日宽度">
-                  全A50 {fmtPct(cnAll.breadth_50)}
+                <span className={`macro-chip ${shortBreadthTone(cnAll.breadth_50)}`} title="全A 50日宽度（真·MA上方占比）">
+                  50日 {fmtPct(cnAll.breadth_50)}
                 </span>
               )}
               {cnAll?.breadth_200 != null && (
-                <span className={`macro-chip ${longBreadthTone(cnAll.breadth_200)}`} title="全A 200日宽度">
-                  全A200 {fmtPct(cnAll.breadth_200)}
+                <span className={`macro-chip ${longBreadthTone(cnAll.breadth_200)}`} title="全A 200日宽度（真·MA上方占比）">
+                  200日 {fmtPct(cnAll.breadth_200)}
                 </span>
               )}
             </>
-          )}
+          ) : cnAll && isRealAShare(cnAll) ? (
+            <span className="macro-chip neutral" title="真全A·宽度计算中（收盘后预计算尚未跑）">
+              宽度计算中…
+            </span>
+          ) : null}
         </span>
-        <span className="macro-toggle">{expanded ? "收起" : "展开分析"}</span>
+        <span className="macro-toggle">{expanded ? "收起" : "展开"}</span>
       </button>
 
-      {/* ---- 紧凑模式：各市场宽度小卡 ---- */}
-      {!expanded && !isLoading && !error && (
+      {/* ---- 紧凑模式：全A + 美股 宽度小卡 ---- */}
+      {!expanded && !isLoading && !error && (cnAll || spx) && (
         <div className="macro-compact">
-          {primaryPanels.map((p) =>
-            isRealAShare(p) ? (
-              <RealAShareCard key={p.market_id} panel={p} />
-            ) : (
-              <BreadthMiniCard key={p.market_id} panel={p} />
-            ),
-          )}
+          {cnAll && <BreadthMiniCard panel={cnAll} />}
+          {spx && <BreadthMiniCard panel={spx} />}
         </div>
       )}
 
       {isLoading && !data && <div className="loading">正在加载市场宽度…</div>}
-      {error && <div className="fund-errors">市场宽度加载失败</div>}
+      {error && <span className="muted">市场宽度加载失败</span>}
 
-      {/* ---- 展开模式：趋势图 + 阈值说明 ---- */}
-      {expanded && primaryPanels.length > 0 && (
+      {/* ---- 展开模式：趋势图 + 压力/机会位说明 ---- */}
+      {expanded && (cnAll || spx) && (
         <div className="macro-expanded">
           <div className="breadth-trends">
-            {cnAll && isRealAShare(cnAll) ? (
-              <RealAShareDetail panel={cnAll} />
-            ) : (
-              cnAll && (
-                <BreadthTrendChart marketId="CN_ALL_A" displayName={cnAll.display_name} />
-              )
+            {cnAll && (
+              <BreadthTrendChart marketId="CN_ALL_A" displayName="全A 真宽度（MA上方占比）" />
             )}
-            {spx && (
-              <BreadthTrendChart marketId="SP500" displayName={spx.display_name} />
-            )}
+            {spx && <BreadthTrendChart marketId="SP500" displayName={spx.display_name} />}
           </div>
+          {cnAll && (
           <div className="macro-zones">
-            <h5>📊 判断依据与信息来源</h5>
+            <CurrentPosition panel={cnAll} />
 
             <div className="zone-block">
-              <strong>短期/中期宽度（20日、50日）</strong>
+              <strong>压力位 / 机会位（20日、50日宽度）</strong>
               <ol className="zone-levels">
                 {SHORT_BREADTH_ZONES.map((z) => (
                   <li key={z.label} style={{ color: toneColor(z.tone) }}>
-                    {z.label}{z.max !== Infinity ? `（≤ ${z.max}%）` : ""}：{z.note}
+                    {z.label}
+                    {z.max !== Infinity ? `（${z.max === 20 ? "≤" : "20–"}${z.max}%）` : ""}
+                    ：{z.note}
                   </li>
                 ))}
               </ol>
             </div>
 
             <div className="zone-block">
-              <strong>长期宽度（200日）</strong>
+              <strong>长期多空分界（200日宽度）</strong>
               <ol className="zone-levels">
                 {LONG_BREADTH_ZONES.map((z) => (
                   <li key={z.label} style={{ color: toneColor(z.tone) }}>
-                    {z.label}{z.max !== Infinity ? `（≤ ${z.max}%）` : ""}：{z.note}
+                    {z.label}：{z.note}
                   </li>
                 ))}
               </ol>
             </div>
 
             <div className="zone-block">
-              <strong>Zweig 广量冲力（整体解读）</strong>
+              <strong>经典广度理论（整体解读）</strong>
               <p className="zone-note">{ZWEIG_NOTE}</p>
             </div>
 
-            <div className="zone-block">
-              <strong>投资者情绪（待接入）</strong>
-              <p className="zone-note">
-                AAII 散户情绪（±25% 极值）、NAAIM 机构情绪（40%/100%）— 第二批接入（周报数据需配置）。
-                数据来源：美国散户协会 AAII 周报、NAAIM 机构敞口调查。
-              </p>
-            </div>
-
             <div className="macro-disclaimer">
-              ⚠️ 以上阈值为市场宽度分析经典框架与券商研报惯例的综合归纳，非交易指令。
-              市场宽度反映「上涨家数占比」，用于判断行情广度与健康度。
-              全A(CN_ALL_A) 已切换为真全A涨跌家数（腾讯快照+交易所代码列表，真全A口径，
-              非 fixture 假样本）；标普500 仍走原 B 系列占比口径。
-              当前数值来源：<code>/market-context/global-strip</code> 接口。
+              ⚠️ 宽度极值阈值采用行业通用标准：<b>80% 超买 / 20% 超卖 / 50% 多空分界</b>
+              （% 站上均线个股占比框架）。出处：TradingView 官方宽度脚本、marketinout(%Above50MA)、
+              thetrading.tools / pomegra.io 等多家 quant 框架；华泰证券《A股择时之技术面指标测试》(2021)
+              亦建议对 A 股采用标准/默认参数、警惕参数过拟合，故 A股/美股共用此标准值。
+              Martin Zweig Breadth Thrust 的 40%/61.5% 针对「涨跌家数比率」（另一类指标），
+              与本文「% 站上均线占比」不可混用，仅作整体解读参考；以上为分析框架归纳，非交易指令。
+              全A 真宽度(B20/B50/B200) = 站上对应均线个股占比，由本机「收盘后预计算」
+              （<code>scripts/precompute_a_share_ma.py</code> 逐只拉腾讯日K线）落盘，
+              <code>/market-context/global-strip</code> 直接读取，次日整天与周末不重算。
+              趋势图需每日收盘后积累（约 252 个交易日形成完整年线，初始阶段仅 1 个数据点属正常）。
             </div>
           </div>
+          )}
         </div>
       )}
     </section>
   );
 }
 
-/* ---- 紧凑小卡 ---- */
+/* ---- 当前所处位置（压力/机会/中性 + 长多/长空） ---- */
+function CurrentPosition({ panel }: { panel: GlobalPanel }) {
+  const b50Zone = findZone(panel.breadth_50, SHORT_BREADTH_ZONES);
+  const b200Zone = findZone(panel.breadth_200, LONG_BREADTH_ZONES);
+  return (
+    <div className="zone-block current-position">
+      <strong>当前位置</strong>
+      <div className="current-position-row">
+        <span>50日宽度 <b className={shortBreadthTone(panel.breadth_50)}>{fmtPct(panel.breadth_50)}</b></span>
+        <span className={`macro-chip ${shortBreadthTone(panel.breadth_50)}`}>{b50Zone.label}</span>
+      </div>
+      <div className="current-position-row">
+        <span>200日宽度 <b className={longBreadthTone(panel.breadth_200)}>{fmtPct(panel.breadth_200)}</b></span>
+        <span className={`macro-chip ${longBreadthTone(panel.breadth_200)}`}>{b200Zone.label}</span>
+      </div>
+      <div className="current-position-row">
+        <span>20日宽度 <b className={shortBreadthTone(panel.breadth_20)}>{fmtPct(panel.breadth_20)}</b></span>
+        {panel.breadth_20_delta_5 != null && (
+          <span className={`macro-chip ${shortBreadthTone(panel.breadth_20_delta_5 > 0 ? 50 : 50)}`}>
+            5日 {fmtDelta(panel.breadth_20_delta_5)}
+          </span>
+        )}
+      </div>
+      <BreadthAsOf p={panel} />
+    </div>
+  );
+}
+
+/* ---- 紧凑小卡：全A 真宽度 B20/B50/B200 ---- */
 function BreadthMiniCard({ panel }: { panel: GlobalPanel }) {
   const b50Zone = findZone(panel.breadth_50, SHORT_BREADTH_ZONES);
   const b200Zone = findZone(panel.breadth_200, LONG_BREADTH_ZONES);
+  const positionLabel = b50Zone.label.split("（")[0];
   return (
     <div className="macro-card breadth-mini">
       <div className="macro-head">
         <span className="macro-name">{panel.display_name} 市场宽度</span>
+        <span
+          className={`macro-chip ${shortBreadthTone(panel.breadth_50)}`}
+          title={b50Zone.note}
+        >
+          {positionLabel}
+        </span>
         <span className="macro-period">{panel.updated_at?.slice(0, 10)}</span>
       </div>
       <div className="breadth-row">
@@ -256,45 +283,6 @@ function BreadthMiniCard({ panel }: { panel: GlobalPanel }) {
           ))}
         </div>
       )}
-    </div>
-  );
-}
-
-/* ---- 真全A涨跌家数（替换原假 B 系列） ---- */
-function RealAShareCard({ panel }: { panel: GlobalPanel }) {
-  return (
-    <div className="macro-card breadth-mini a-share-card">
-      <div className="macro-head">
-        <span className="macro-name">{panel.display_name} 真全A涨跌家数</span>
-        <span className="macro-period">{panel.updated_at?.slice(0, 10)}</span>
-      </div>
-      <AShareBar p={panel} />
-      <AShareGrid p={panel} small />
-      {panel.alerts?.length > 0 && (
-        <div className="breadth-alerts">
-          {panel.alerts.map((a, i) => (
-            <div key={i}>· {a.title}{a.desc ? `：${a.desc}` : ""}</div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-/* ---- 展开详情：真全A涨跌家数 ---- */
-function RealAShareDetail({ panel }: { panel: GlobalPanel }) {
-  return (
-    <div className="breadth-trend-card a-share-detail">
-      <div className="breadth-trend-title">真全A · 涨跌家数（腾讯快照 + 交易所代码列表）</div>
-      <AShareBar p={panel} />
-      <AShareGrid p={panel} />
-      <AShareSourceLine p={panel} />
-      <div className="macro-disclaimer">
-        ⚠️ 涨跌家数为真全A口径（沪+深+北交所，受网络策略影响北交所可能偶发跳过），
-        非原 fixture 假样本、非行业等权 proxy。MA 上方占比（B20/B50/B200）需正常网络环境
-        逐只拉历史K线计算，本接口默认不拉取；可在本机联网时经
-        <code>/market-context/a-share-breadth?include_ma=true</code> 获取。
-      </div>
     </div>
   );
 }

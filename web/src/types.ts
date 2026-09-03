@@ -421,6 +421,9 @@ export interface MarketContextSnapshot {
   long_regime: string;
   heat_state: string;
   drawdown_from_ath: number | null;
+  market_rv20_ann: number | null;
+  market_rv_pct: number | null;
+  vol_regime: string;
   summary: string;
   reasons: string[];
   conflicts: string[];
@@ -518,6 +521,64 @@ export interface GlobalPanel {
 
 export interface GlobalStripResponse {
   panels: GlobalPanel[];
+  /** 投资者情绪（NAAIM/AAII），来自 LEI_SENTIMENT_ROOT，与 Streamlit 市场环境页同源。 */
+  sentiment?: GlobalSentiment;
+}
+
+/** 单个情绪序列（NAAIM 或 AAII）的最新摘要。 */
+export interface GlobalSentimentSeries {
+  /** 分档枚举：extreme_low/low/neutral/high/extreme_high/unknown */
+  label: string;
+  label_cn: string;
+  survey_week: string | null;
+  available_at: string | null;
+  source: string | null;
+  license_status: string | null;
+  current_eligible: boolean;
+  // NAAIM 专用
+  exposure_index?: number | null;
+  percentile?: number | null;
+  // AAII 专用
+  bullish?: number | null;
+  neutral?: number | null;
+  bearish?: number | null;
+  bull_bear?: number | null;
+}
+
+/** 情绪总览：root_set 表示后端是否读到了 LEI_SENTIMENT_ROOT 环境变量。 */
+export interface GlobalSentiment {
+  root_set: boolean;
+  naaim: GlobalSentimentSeries | null;
+  aaii: GlobalSentimentSeries | null;
+}
+
+/** 前端手动录入一期情绪读数（POST /market-context/sentiment）。 */
+export interface SentimentIngest {
+  series: "naaim" | "aaii";
+  survey_week: string;
+  exposure?: number | null;
+  bullish?: number | null;
+  neutral?: number | null;
+  bearish?: number | null;
+  available_at?: string | null;
+}
+
+/** 情绪历史观测（GET /market-context/sentiment/history，周频、按调查周升序）。 */
+export interface SentimentHistoryResponse {
+  series: string;
+  count?: number;
+  error?: string;
+  observations: {
+    survey_week: string;
+    available_at?: string | null; // 发布时间（周四），投影散点按它对齐避免前视
+    label: string;
+    percentile: number | null;
+    exposure_index?: number | null; // NAAIM 专用
+    bullish?: number | null; // AAII 专用
+    neutral?: number | null;
+    bearish?: number | null;
+    bull_bear?: number | null;
+  }[];
 }
 
 /** 真全A市场宽度（涨跌家数 + 可选 MA 上方占比）。
@@ -572,6 +633,8 @@ export interface ChartPayload {
   macdDif: (number | null)[];
   macdDea: (number | null)[];
   macdHist: (number | null)[];
+  /** MACD 副图事件日（金叉/死叉/上穿0轴/下穿0轴），后端 macd_strength 规则判定。 */
+  macdEvents: MacdEvent[];
   states: string[];
   volumes: number[];
   volStates: string[];
@@ -618,6 +681,21 @@ export interface StructureMark {
     confirmed_date: string | null;
     invalidated_date: string | null;
   };
+}
+
+/** MACD 副图事件日。研究代理：强度描述，不构成买卖点（macd-reading 口径）。 */
+export interface MacdEvent {
+  date: string;
+  type: "golden_cross" | "death_cross" | "zero_cross_up" | "zero_cross_down";
+  statusCn: string; // 金叉 / 死叉 / 上穿0轴 / 下穿0轴
+  dimension: string; // 支持 / 冲突
+  dif: number;
+  dea: number;
+  hist: number;
+  detailCn: string;
+  /** 盲区补齐：当日 LEI 颜色（破线）与 EMA20 斜率（均线拐头）。 */
+  colorCn: string;
+  slopeCn: string;
 }
 
 export interface SymbolDetail {
@@ -782,6 +860,7 @@ export interface PlansSummary {
   open_actions: number;
   active_plans: number;
   today_opportunities: number;
+  today_signal_total: number;
 }
 
 // ---- 买点审阅 / 扫描 ----
@@ -976,6 +1055,40 @@ export interface TodayOpportunityResponse {
   blocked: ScanItem[];
 }
 
+export interface SignalAlert {
+  symbol: string;
+  display_name: string;
+  tier: "hard" | "warn" | "soft" | string;
+  kind: string;
+  kind_cn: string;
+  title: string;
+  reason_cn: string;
+  is_new: boolean;
+  key_prices: Record<string, number>;
+  provenance: string;
+  available_date: string | null;
+}
+
+export interface UnavailableItem {
+  symbol: string;
+  error: string | null;
+}
+
+export interface SignalsToday {
+  scan_date: string;
+  as_of: string | null;
+  generated_at: string;
+  scanned: number;
+  available?: boolean;
+  actionable: ScanItem[];
+  waiting: ScanItem[];
+  blocked: ScanItem[];
+  sell_hard: SignalAlert[];
+  sell_warn: SignalAlert[];
+  sell_soft: SignalAlert[];
+  unavailable: UnavailableItem[];
+}
+
 export interface BuyPointChatReply {
   reply: string;
   grounded: boolean;
@@ -1059,7 +1172,38 @@ export interface RatesResponse {
   treasury: TreasuryYields;
   vix: { value: number; as_of: string } | null;
   margin: MarginData | null;
+  /** 股债收益差（Fed Model 口径）= 盈利收益率(1/PE_TTM×100) − 10Y 国债收益率（%）。 */
+  erp: { us: ErpData | null; cn: ErpData | null };
+  /** 估值分位对照（不受利率水平污染），用于校正股债收益差的债券端污染。 */
+  valuation: { us_cape: ValuationData | null; cn_pe: ValuationData | null };
   errors: string[];
+}
+
+/**
+ * 估值分位快照。
+ *
+ * percentile 用标定窗口（口径可比），percentile_full 用全史（长周期背景）——
+ * 两个都给，因为分位是取样窗口的函数，只报一个会误导。
+ */
+export interface ValuationData {
+  value: number; // 现值（CAPE 或 PE_TTM，倍）
+  as_of: string;
+  percentile: number; // 标定窗口内分位（0–100，越高越贵）
+  percentile_full: number; // 全史分位
+  calib_from: string; // 标定窗口起始年份，如 "1950"
+  calib_n: number; // 标定窗口样本数
+  full_from: string; // 全史起始年份
+  full_n: number;
+}
+
+/** 股债收益差（Fed Model 口径）单市场快照。ERP 的粗略代理，非严格 ERP。 */
+export interface ErpData {
+  earnings_yield: number; // 盈利收益率 %（1 / PE_TTM × 100）
+  risk_free: number; // 10Y 国债收益率 %
+  erp: number; // 股债收益差 %（= earnings_yield − risk_free）
+  as_of: string | null;
+  pe_ttm?: number | null; // A 股含 PE_TTM，美股无此字段
+  ey_source: string; // 盈利收益率数据来源
 }
 
 // ---- 宏观利率历史序列（趋势图）----
@@ -1108,6 +1252,31 @@ export interface EtfItem {
   bias: string; // risk_on | risk_off | neutral
   ret_1m: number;
   rel_1m: number; // 相对 SPY 的超额（%）
+  rel_line?: number[]; // 相对净值线（ETF/SPY 比价，起点=100）
+}
+
+// 可选/必选消费比价（XLY/XLP）：升 = 风险偏好、降 = 避险
+export interface XlyXlpRatio {
+  ratio: number;
+  chg_1m: number; // 比价 1 月变化（%）
+  chg_3m: number; // 比价 3 月变化（%）
+}
+
+// ---- 美国宏观（FRED 公开 CSV，就业/房产/汽车/WEI/物价/订单/信用利差）----
+export interface UsMacroItem {
+  key: string;
+  name_cn: string;
+  freq: string; // 周 | 月 | 日
+  date: string | null;
+  value: number | null;
+  note_cn: string;
+}
+
+export interface UsMacroResponse {
+  as_of: string | null;
+  items: UsMacroItem[];
+  series: Record<string, RatesHistorySeries>;
+  errors: string[];
 }
 
 // ---- 行业板块趋势工作台 (/api/sectors, research_proxy) ----
@@ -1123,6 +1292,11 @@ export interface SectorTrendRow {
   // 阶段：②上升=markup / ①筑底=accumulation / ③派发=distribution / ④下降=decline / null=样本不足
   stage: "accumulation" | "markup" | "distribution" | "decline" | null;
   stage_basis: string[];
+  // 道路层观察点（策略溯源 trading-spec §2.2「均线方向是道路」，research_proxy）
+  dist_to_sma60_pct: number | null; // (价格/SMA60−1)×100，负值=距上穿还差多少
+  checkpoints: SectorCheckpoint[]; // 道路确立三条件清单
+  next_watch: string | null; // 一句话「下一观察点」
+  next_watch_kind: "upgrade" | "risk" | "watch" | null;
   rs_pctile: number | null;
   rs_pctile_delta_20: number | null;
   rs_chg_20: number | null;
@@ -1150,6 +1324,17 @@ export interface SectorTrendRow {
   up_count: number | null;
   down_count: number | null;
   total_mv_yi: number | null;
+  // 资金流（单据规模代理：主力=超大+大单、散户=中+小单；research_proxy，只交叉验证不参与判定）
+  flow_5d_main_yi: number | null;
+  flow_20d_main_yi: number | null;
+  flow_60d_main_yi: number | null;
+  flow_5d_retail_yi: number | null;
+  flow_20d_retail_yi: number | null;
+  flow_60d_retail_yi: number | null;
+  flow_20d_struct: string | null;
+  flow_note_cn: string | null;
+  flow_vs_stage: "confirm" | "conflict" | null;
+  flow_vs_stage_cn: string | null;
   provenance: "research_proxy";
 }
 
@@ -1184,4 +1369,434 @@ export interface SectorMembersResponse {
     market_value_yi: number | null;
     in_kline_cache: boolean;
   }[];
+}
+
+// 道路确立三条件（价格>SMA60 / SMA60 斜率向上 / RS 强于基准）
+export interface SectorCheckpoint {
+  key: string;
+  label: string;
+  met: boolean;
+  detail: string | null;
+}
+
+export interface SectorWatchItem {
+  code: string;
+  name: string | null;
+  level: 1 | 2 | 3;
+  stage: string | null;
+  rs_pctile: number | null;
+  rs_pctile_delta_20: number | null;
+  b50: number | null;
+  dist_to_sma60_pct: number | null;
+  next_watch: string | null;
+  next_watch_kind: "upgrade" | "risk" | "watch" | null;
+  stage_basis: string[];
+  // 资金流交叉验证（单据规模代理，research_proxy）
+  flow_20d_main_yi: number | null;
+  flow_20d_retail_yi: number | null;
+  flow_vs_stage: "confirm" | "conflict" | null;
+  flow_vs_stage_cn: string | null;
+  flow_note_cn: string | null;
+}
+
+export interface SectorWatchlistResponse {
+  as_of: string;
+  trading_day: string;
+  groups: {
+    key: string;
+    title: string;
+    desc: string;
+    items: SectorWatchItem[];
+  }[];
+  research_proxy_note: string;
+}
+
+// ---- 收盘简报 (/api/daily-brief, research_proxy) ----
+export interface BriefAnomaly {
+  market: string;
+  metric: string;
+  value: number;
+  pctile_250d: number | null;
+  day_change: number | null;
+  note_cn: string;
+}
+
+/** 自选当前状态快照（后端 extract_symbol_state 原样透传，展示用） */
+export interface BriefWatchState {
+  color: string | null;
+  color_cn: string | null;
+  stage_cn: string | null;
+  risk_state_cn: string | null;
+  dimensions: Record<string, string>;
+  support_rules: string[];
+  conflict_rules: string[];
+  new_event_count: number;
+}
+
+export interface BriefWatchItem {
+  symbol: string;
+  display_name: string | null;
+  verdict: string | null;
+  verdict_cn: string | null;
+  changes: string[];
+  n_changes: number;
+  is_new: boolean;
+  state?: BriefWatchState | null;
+}
+
+export interface BriefPoolItem {
+  code: string;
+  name: string | null;
+  stage: string | null;
+  rs_pctile: number | null;
+  rs_pctile_delta_20: number | null;
+  pe_ttm: number | null;
+  flow_20d_main_yi: number | null;
+  flow_vs_stage_cn: string | null;
+  next_watch: string | null;
+  tags: string[];
+  streak: number;
+}
+
+export interface DailyBriefPayload {
+  date: string;
+  slot: string; // "1445" 盘中预判 | "1645" 收盘复核
+  generated_at: string;
+  env: {
+    anomalies: BriefAnomaly[];
+    breadth_context: {
+      market: string;
+      metric: string;
+      date: string | null;
+      value: number;
+      day_change: number | null;
+      pctile_250d: number | null;
+    }[];
+    macro: {
+      line_cn?: string;
+      raw?: {
+        margin?: { date?: string; rzye_yi?: number; rzrqye_yi?: number; rzyezb_pct?: number } | null;
+        vix?: { value?: number; as_of?: string } | null;
+        cn_us_spread_10y?: number | null;
+      };
+    };
+  };
+  watchlist: {
+    items: BriefWatchItem[];
+    unchanged_count: number;
+    sector_watch_count: number;
+  };
+  pool: { items: BriefPoolItem[]; codes: string[] };
+  summary: { text: string; generated_by: "llm" | "template" };
+}
+
+export interface DailyBriefResponse {
+  date: string;
+  slot: string;
+  brief: DailyBriefPayload;
+  slots_available: string[];
+}
+
+// ---- agent 统一会话（spec 2026-08-23） ----
+
+export interface TraceItem {
+  label: string;
+  rule_id: string | null;
+  evidence_cn: string;
+  research_proxy: boolean;
+  principle_source: string | null;
+}
+
+export interface AgentChatRequest {
+  session_id: string | null;
+  context_kind: "symbol" | "global";
+  symbol: string | null;
+  message: string;
+}
+
+export interface AgentChatReply {
+  session_id: string;
+  reply: string;
+  grounded: boolean;
+  trace: TraceItem[];
+}
+
+export interface AgentSessionDTO {
+  session_id: string;
+  symbol: string | null;
+  title_cn: string;
+  last_active_at: string;
+  last_message_cn: string;
+}
+
+export interface AgentMessageDTO {
+  role: "user" | "assistant";
+  content: string;
+  grounded: boolean;
+  created_at: string;
+}
+
+// ---------------- 回测工作台（/api/backtest） ----------------
+
+export interface BacktestOption {
+  value: number | string | null;
+  label: string;
+}
+
+export interface BacktestModule {
+  value: string;
+  label: string;
+  variants: Record<string, string>;
+}
+
+export interface BacktestOptions {
+  rr_levels: BacktestOption[];
+  modules: BacktestModule[];
+  entry_variants: BacktestOption[];
+  exit_variants: BacktestOption[];
+  fee_labels: BacktestOption[];
+  volume_confirm_windows?: BacktestOption[];
+  profile_filters?: BacktestOption[];
+  defaults: {
+    module?: string;
+    rr_min: number | null;
+    entry_variant: string;
+    exit_variant: string;
+    fee_label: string;
+  };
+  glossary: Record<string, { label: string; tip: string }>;
+  param_specs?: Record<string, {
+    label: string; default: number; levels: number[]; tip: string;
+  }>;
+}
+
+export interface BacktestRunSummary {
+  run_id: string;
+  created_at?: string;
+  status: string;
+  params?: Record<string, unknown>;
+  symbols_count?: number;
+  trade_count?: number | null;
+  expectancy_r?: number | null;
+  profit_factor?: number | null;
+  error?: string;
+}
+
+export interface BacktestMetrics {
+  label: string;
+  trade_count: number;
+  open_count: number;
+  win_rate: number | null;
+  avg_win_r: number | null;
+  avg_loss_r: number | null;
+  expectancy_r: number | null;
+  profit_factor: number | null;
+  max_consecutive_losses: number;
+  max_drawdown_1r: number;
+  avg_holding_bars: number | null;
+  total_r: number | null;
+}
+
+export interface BacktestTrade {
+  symbol: string;
+  entry_variant: string;
+  exit_variant: string;
+  is_first_touch: boolean;
+  ma_period: number;
+  signal_date: string;
+  entry_date: string;
+  entry_price: number;
+  stop_price: number;
+  target_price: number | null;
+  reward_risk: number | null;
+  exit_date: string | null;
+  exit_price: number | null;
+  exit_reason: string | null;
+  holding_bars: number;
+  r_gross: number | null;
+  r_net: number | null;
+  entry_reason?: string;
+}
+
+export interface BacktestRunResult {
+  run_id: string;
+  created_at: string;
+  status: string;
+  disclaimer: string;
+  params: {
+    symbols: string[] | "all";
+    rr_min: number | null;
+    entry_variant: string;
+    exit_variant: string;
+    fee_label: string;
+  };
+  data_range: {
+    start: string;
+    end: string;
+    symbols_count: number;
+    out_of_sample_start: string;
+  };
+  funnel: {
+    touched: number;
+    confirmed: number;
+    filtered_by_rr: number;
+    no_target: number;
+  };
+  groups: Record<"True" | "False", Record<string, BacktestMetrics[]>>;
+  per_symbol: Array<{ symbol: string; bars: number; trades: number }>;
+  trades: BacktestTrade[];
+  error?: string;
+}
+
+// ---- 宽度择时回测（timing backtest）----
+
+export interface TimingInstrument {
+  symbol: string;
+  name: string;
+  market: "cn" | "us";
+  breadth: "cn_all" | "sp500";
+  breadth_label: string;
+  fee_default_bps: number;
+  note: string;
+  data_start: string | null;
+  data_end: string | null;
+  breadth_start: string | null;
+}
+
+export interface TimingPreset {
+  key: string;
+  label: string;
+  description: string;
+  source: string;
+  params: Record<string, string | number | null>;
+}
+
+export interface TimingOptions {
+  instruments: TimingInstrument[];
+  indicators: Array<{ key: string; label: string }>;
+  strategies: {
+    ladder: {
+      defaults: Record<string, string | number>;
+      n_bands_choices: number[];
+      edge_mode_choices: string[];
+      direction_choices: string[];
+    };
+    reversal: {
+      defaults: Record<string, string | number>;
+      batch_mode_choices: string[];
+    };
+  };
+  gate: { mode_choices: string[]; defaults: Record<string, string | number> };
+  presets: TimingPreset[];
+  disclaimers: string[];
+}
+
+export interface TimingTrade {
+  date: string;
+  prev_weight: number;
+  new_weight: number;
+  price: number;
+  fee: number;
+  turnover: number;
+}
+
+export interface TimingRunResult {
+  run_id: string;
+  created_at: string;
+  symbol: string;
+  name: string;
+  params: Record<string, string | number | null>;
+  metrics: Record<string, number>;
+  yearly: Array<{ year: number; strategy: number; benchmark: number }>;
+  trades: TimingTrade[];
+  daily: {
+    date: string[];
+    equity: number[];
+    benchmark: number[];
+    weight: number[];
+    open: number[];
+    high: number[];
+    low: number[];
+    close: number[];
+    breadth: Array<number | null>;
+  };
+}
+
+export interface TimingRunSummary {
+  run_id: string;
+  created_at: string;
+  symbol: string;
+  name: string;
+  params: Record<string, string | number | null>;
+  metrics: Record<string, number>;
+}
+
+export interface TimingSignal {
+  key: string;
+  label: string;
+  symbol?: string;
+  indicator?: string;
+  as_of?: string;
+  breadth_now?: number | null;
+  weight_now?: number;
+  trigger?: string;
+  levels?: number[];
+  full_cagr?: number;
+  full_bh_cagr?: number;
+  full_mdd?: number;
+  n_trades?: number;
+  recent_trades?: TimingTrade[];
+  error?: string;
+}
+
+// ================= newsfeed 资讯流 =================
+
+export type NewsCategory = "macro" | "risk" | "policy" | "industry" | "blogger";
+
+export interface NewsItem {
+  id: number;
+  source: string;
+  source_name: string | null;
+  url: string | null;
+  category: string | null;
+  title: string;
+  summary: string | null;
+  content: string | null;
+  symbols: string[];
+  direction: string | null;
+  importance: number | null;
+  llm_note: string | null;
+  published_at: string;
+  scored_at: string | null;
+}
+
+export interface NewsItemsResponse {
+  items: NewsItem[];
+  total: number;
+}
+
+export interface NewsDigestPayload {
+  sections: { category: string; headline: string; bullets: string[] }[];
+  top_events: { title: string; importance: number; why: string }[];
+}
+
+export interface NewsDigest {
+  digest_date: string;
+  payload: NewsDigestPayload;
+  created_at: string;
+}
+
+export interface NewsRunInfo {
+  id: number;
+  started_at: string;
+  finished_at: string | null;
+  status: string;
+  stats: Record<string, unknown>;
+  errors: { source: string; error: string }[];
+}
+
+export interface NewsStatus {
+  last_run: NewsRunInfo | null;
+  counts: { total: number; scored: number };
+  trigger: Record<string, unknown>;
 }

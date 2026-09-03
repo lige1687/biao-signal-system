@@ -2,8 +2,9 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../api/client";
-import AgentDrawer from "../components/AgentDrawer";
+import { agentConsoleStore } from "../App";
 import BuyPointDrawer from "../components/BuyPointDrawer";
+import ProvenanceBadge from "../components/ProvenanceBadge";
 import { directionCn, moduleCn } from "../modules";
 import type { ActionItem, Plan, PlanAlert } from "../types";
 
@@ -197,12 +198,20 @@ function PlanCard({ plan, onAsk }: { plan: Plan; onAsk: () => void }) {
           {ordered.map((a) => (
             <div key={a.code} style={{ marginBottom: 4 }}>
               <span>{SEVERITY_CN[a.severity] ?? a.severity}</span>{" "}
-              <span>{a.next_step_cn || a.code}</span>{" "}
-              <span className="muted">
-                [rule_id:{a.rule_id ?? "-"}]
-                {a.principle_source ? ` ${a.principle_source} | ` : " "}
-                判定方式为研究代理
-              </span>
+              <span>{a.next_step_cn || a.code}</span>
+              <ProvenanceBadge
+                items={[
+                  {
+                    label: a.next_step_cn || a.code,
+                    rule_id: a.rule_id ?? null,
+                    evidence_cn: Object.entries(a.evidence ?? {})
+                      .map(([k, v]) => `${k}=${v}`)
+                      .join("；"),
+                    research_proxy: a.logic_provenance === "research_proxy",
+                    principle_source: a.principle_source ?? null,
+                  },
+                ]}
+              />
             </div>
           ))}
         </div>
@@ -220,7 +229,6 @@ function PlanCard({ plan, onAsk }: { plan: Plan; onAsk: () => void }) {
 }
 
 export default function SupervisorPage() {
-  const [askPlanId, setAskPlanId] = useState<string | null>(null);
   const [scanSymbol, setScanSymbol] = useState<string | null>(null);
   const [scanOpen, setScanOpen] = useState(false);
   const { data: armed, isLoading: l1 } = useQuery({
@@ -327,13 +335,9 @@ export default function SupervisorPage() {
         <PlanCard
           key={plan.plan_id}
           plan={plan}
-          onAsk={() => setAskPlanId(plan.plan_id)}
+          onAsk={() => agentConsoleStore.openConsole(plan.symbol)}
         />
       ))}
-
-      {askPlanId && (
-        <AgentDrawer planId={askPlanId} onClose={() => setAskPlanId(null)} />
-      )}
 
       {scanSymbol && (
         <BuyPointDrawer symbol={scanSymbol} onClose={() => setScanSymbol(null)} />

@@ -34,10 +34,16 @@ from lei_signal.market_context.sentiment import (
 from lei_signal.market_context.types import (
     ContextDataStatus,
     ContextSummary,
+    MarketContextEvent,
     MarketContextSnapshot,
     MarketId,
     SentimentLabel,
     UniverseSnapshot,
+    VolRegime,
+)
+from lei_signal.market_context.vol_regime import (
+    compute_market_vol_regime,
+    vol_event_type,
 )
 
 
@@ -160,6 +166,38 @@ def _analyze_single_market(
             ctx = replace(ctx, drawdown_from_ath=drawdown.drawdown_from_ath)
         except Exception:
             pass
+
+    # 2.5 Market volatility regime — research_proxy（2026-08-27 实证，F 节）。
+    # 独立分组维度：只发事件与读数，不参与 summary、不挡技术信号。
+    try:
+        vol = compute_market_vol_regime(bars_by_symbol, sessions, request.as_of)
+    except Exception:  # noqa: BLE001 —— 波动体制失败不影响宽度主读数
+        vol = None
+    if vol is not None:
+        regime_enum = VolRegime(vol.regime)
+        ctx = replace(
+            ctx,
+            market_rv20_ann=vol.rv20_ann,
+            market_rv_pct=vol.rv_pct,
+            vol_regime=regime_enum,
+        )
+        event_type = vol_event_type(vol.regime)
+        if event_type is not None:
+            event = MarketContextEvent(
+                market_id=market_id,
+                as_of=request.as_of,
+                available_at=request.as_of,
+                event_type=event_type,
+                event_version="research_market_vol.v1",
+                threshold_origin="empirical_research_2026_08_27",
+                evidence={
+                    "rv20_ann": round(vol.rv20_ann, 4),
+                    "rv_pct": round(vol.rv_pct, 4),
+                    "basis": "等权成分日收益，20日已实现波动率，3年滚动分位",
+                },
+                provenance=vol.provenance,
+            )
+            ctx = replace(ctx, extreme_events=(*ctx.extreme_events, event))
 
     # 3. Sentiment — only for US markets. Decision_at keyed, not load-time.
     if market_id in {MarketId.SP500, MarketId.NASDAQ_100, MarketId.RUSSELL_2000}:

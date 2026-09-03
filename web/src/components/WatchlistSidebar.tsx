@@ -56,6 +56,20 @@ function SideItem({
           <span className="si-symbol">{card.symbol}</span>
           <span className="spacer" style={{ flex: 1 }} />
           <span className="si-change flat">--</span>
+          {card.group === "watchlist" && (
+            <button
+              className="si-remove"
+              title="删除自选"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (confirm(`确认将「${card.display_name}」移出自选？`)) {
+                  onRemove(card.symbol);
+                }
+              }}
+            >
+              ✕
+            </button>
+          )}
         </div>
         <div className="si-err">{card.error.split("\n")[0].slice(0, 40)}</div>
       </div>
@@ -69,16 +83,30 @@ function SideItem({
         <span className="spacer" style={{ flex: 1 }} />
         <span className={`si-change ${change.cls}`}>{change.text}</span>
         {card.group === "watchlist" && (
-          <button
-            className="si-menu-btn"
-            onClick={(e) => {
-              e.stopPropagation();
-              setMenu(!menu);
-            }}
-            title="更多"
-          >
-            ⋯
-          </button>
+          <>
+            <button
+              className="si-remove"
+              title="删除自选"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (confirm(`确认将「${card.display_name}」移出自选？`)) {
+                  onRemove(card.symbol);
+                }
+              }}
+            >
+              ✕
+            </button>
+            <button
+              className="si-menu-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                setMenu(!menu);
+              }}
+              title="更多"
+            >
+              ⋯
+            </button>
+          </>
         )}
       </div>
       <div className="si-row2">
@@ -131,12 +159,14 @@ function SideItem({
 }
 
 /**
- * 左栏：分组折叠列表。点标的只切换中栏，不跳转页面——这样右栏解释与
- * 图表开关状态都不会因为「回首页再点进来」而丢失。
+ * 左栏：最左一条分组导航轨道 + 右侧当前组标的列表。
+ * 点轨道上的组即可切换右侧列表，不用再一个个收起/展开。
+ * 点标的只切换中栏，不跳转页面——这样右栏解释与图表开关状态
+ * 都不会因为「回首页再点进来」而丢失。
  */
 export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick }: Props) {
   const queryClient = useQueryClient();
-  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
+  const [activeKey, setActiveKey] = useState<string>("");
   const [newGroupName, setNewGroupName] = useState("");
   const [adding, setAdding] = useState(false);
   const [renaming, setRenaming] = useState<number | null>(null);
@@ -151,6 +181,9 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
     queryFn: () => api.groups(),
   });
 
+  const groupKey = (g: WatchlistGroup) =>
+    g.group_id == null ? `builtin:${g.name}` : `group:${g.group_id}`;
+
   const invalidate = () => {
     queryClient.invalidateQueries({ queryKey: ["groups"] });
     queryClient.invalidateQueries({ queryKey: ["cards"] });
@@ -158,10 +191,11 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
 
   const createGroup = useMutation({
     mutationFn: (name: string) => api.createGroup(name),
-    onSuccess: () => {
+    onSuccess: (group) => {
       setNewGroupName("");
       setAdding(false);
       invalidate();
+      setActiveKey(groupKey(group)); // 建组后直接切到新组
     },
   });
   const renameGroup = useMutation({
@@ -181,7 +215,10 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
   });
   const deleteGroup = useMutation({
     mutationFn: (id: number) => api.deleteGroup(id),
-    onSuccess: invalidate,
+    onSuccess: () => {
+      setActiveKey(""); // 让 activeKey 重新解析到剩余分组
+      invalidate();
+    },
   });
   const moveItem = useMutation({
     mutationFn: ({ symbol, groupId }: { symbol: string; groupId: number | null }) =>
@@ -195,109 +232,122 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
 
   const cardBySymbol = new Map(cards.map((c) => [c.symbol, c]));
 
+  // 首次加载后把轨道定位到「当前标的所在组」，否则第一个组。
+  useEffect(() => {
+    if (activeKey || groups.length === 0) return;
+    const target = groups.find((g) => g.symbols.includes(selected)) ?? groups[0];
+    if (target) setActiveKey(groupKey(target));
+  }, [activeKey, groups, selected]);
+
+  const activeGroup =
+    groups.find((g) => groupKey(g) === activeKey) ?? groups[0];
+  const activeGroupKey = activeGroup ? groupKey(activeGroup) : "";
+  const activeCards = activeGroup
+    ? activeGroup.symbols
+        .map((s) => cardBySymbol.get(s))
+        .filter((c): c is Card => Boolean(c))
+    : [];
+  // 在用户自建组里点「＋ 添加自选」，新标的默认落进当前组。
+  const addTargetGroupId =
+    activeGroup && !activeGroup.builtin && activeGroup.group_id != null
+      ? activeGroup.group_id
+      : null;
+
   return (
     <aside className="sidebar">
-      <div className="sb-head">
-        <span>自选与大盘</span>
-        <button
-          className="btn small"
-          onClick={() => setAdding(!adding)}
-          title="新建分组"
-        >
-          ＋组
-        </button>
-      </div>
-
-      {adding && (
-        <div className="sb-newgroup">
-          <input
-            type="text"
-            placeholder="分组名，如 科技"
-            value={newGroupName}
-            autoFocus
-            onChange={(e) => setNewGroupName(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && newGroupName.trim())
-                createGroup.mutate(newGroupName.trim());
-              if (e.key === "Escape") setAdding(false);
-            }}
-          />
-          <button
-            className="btn small primary"
-            disabled={!newGroupName.trim()}
-            onClick={() => createGroup.mutate(newGroupName.trim())}
-          >
-            建
-          </button>
-        </div>
-      )}
-
-      {groupFeedback && (
-        <div
-          className={`sb-feedback ${groupFeedback.kind}`}
-          role={groupFeedback.kind === "error" ? "alert" : "status"}
-          aria-live="polite"
-        >
-          <span>{groupFeedback.text}</span>
-          <button
-            type="button"
-            aria-label="关闭提示"
-            title="关闭"
-            onClick={() => setGroupFeedback(null)}
-          >
-            ×
-          </button>
-        </div>
-      )}
-
-      <div className="sb-scroll">
+      <nav className="sb-rail" aria-label="分组导航">
         {groups.map((g) => {
-          const key = g.group_id == null ? `builtin:${g.name}` : `group:${g.group_id}`;
-          const isCollapsed = collapsed[key];
-          const groupCards = g.symbols
-            .map((s) => cardBySymbol.get(s))
-            .filter((c): c is Card => Boolean(c));
-          const containsSelected = g.symbols.includes(selected);
-          const toggleGroup = () => {
-            setCollapsed((current) => ({ ...current, [key]: !isCollapsed }));
-          };
+          const key = groupKey(g);
           return (
-            <section
-              className={[
-                "sb-group",
-                isCollapsed ? "collapsed" : "expanded",
-                containsSelected ? "active-group" : "",
-                g.builtin ? "builtin-group" : "user-group",
-              ].filter(Boolean).join(" ")}
+            <button
               key={key}
+              type="button"
+              className={`sb-rail-btn${key === activeGroupKey ? " active" : ""}`}
+              title={`${g.name}（${g.symbols.length}）`}
+              onClick={() => setActiveKey(key)}
             >
+              {g.name.slice(0, 2).split("").map((ch, i) => (
+                <span key={i}>{ch}</span>
+              ))}
+            </button>
+          );
+        })}
+      </nav>
+
+      <div className="sb-main">
+        <div className="sb-head">
+          <span>自选与大盘</span>
+          <button
+            className="btn small"
+            onClick={() => setAdding(!adding)}
+            title="新建分组"
+          >
+            ＋组
+          </button>
+        </div>
+
+        {adding && (
+          <div className="sb-newgroup">
+            <input
+              type="text"
+              placeholder="分组名，如 科技"
+              value={newGroupName}
+              autoFocus
+              onChange={(e) => setNewGroupName(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && newGroupName.trim())
+                  createGroup.mutate(newGroupName.trim());
+                if (e.key === "Escape") setAdding(false);
+              }}
+            />
+            <button
+              className="btn small primary"
+              disabled={!newGroupName.trim()}
+              onClick={() => createGroup.mutate(newGroupName.trim())}
+            >
+              建
+            </button>
+          </div>
+        )}
+
+        {groupFeedback && (
+          <div
+            className={`sb-feedback ${groupFeedback.kind}`}
+            role={groupFeedback.kind === "error" ? "alert" : "status"}
+            aria-live="polite"
+          >
+            <span>{groupFeedback.text}</span>
+            <button
+              type="button"
+              aria-label="关闭提示"
+              title="关闭"
+              onClick={() => setGroupFeedback(null)}
+            >
+              ×
+            </button>
+          </div>
+        )}
+
+        <div className="sb-scroll">
+          {activeGroup && (
+            <section className="sb-group expanded">
               <div className="sb-group-head">
-                <button
-                  type="button"
-                  className="sb-group-toggle"
-                  aria-expanded={!isCollapsed}
-                  aria-label={isCollapsed ? `展开「${g.name}」` : `收起「${g.name}」`}
-                  title={isCollapsed ? `展开「${g.name}」` : `收起「${g.name}」`}
-                  onClick={toggleGroup}
-                >
-                  <span className={`caret ${isCollapsed ? "" : "open"}`}>▸</span>
-                </button>
-                {g.group_id != null && renaming === g.group_id ? (
+                {activeGroup.group_id != null && renaming === activeGroup.group_id ? (
                   <form
                     className="sb-rename-form"
                     onClick={(e) => e.stopPropagation()}
                     onSubmit={(e) => {
                       e.preventDefault();
                       const name = renameText.trim();
-                      if (g.group_id == null || !name || renameGroup.isPending) return;
-                      if (name === g.name) {
+                      if (activeGroup.group_id == null || !name || renameGroup.isPending) return;
+                      if (name === activeGroup.name) {
                         setRenaming(null);
                         setRenameText("");
                         setGroupFeedback({ kind: "success", text: "分组名称未变化" });
                         return;
                       }
                       setGroupFeedback(null);
-                      renameGroup.mutate({ id: g.group_id, name });
+                      renameGroup.mutate({ id: activeGroup.group_id, name });
                     }}
                   >
                     <input
@@ -333,23 +383,16 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
                     </button>
                   </form>
                 ) : (
-                  <button
-                    type="button"
-                    className="sb-group-name"
-                    title={isCollapsed ? `展开「${g.name}」` : `收起「${g.name}」`}
-                    onClick={toggleGroup}
-                  >
-                    {g.name}
-                  </button>
+                  <span className="sb-group-title">{activeGroup.name}</span>
                 )}
-                <span className="sb-count" aria-label={`${g.symbols.length} 个标的`}>
-                  {g.symbols.length}
+                <span className="sb-count" aria-label={`${activeGroup.symbols.length} 个标的`}>
+                  {activeGroup.symbols.length}
                 </span>
-                {!g.builtin && g.group_id != null && (
+                {!activeGroup.builtin && activeGroup.group_id != null && (
                   <span className="sb-group-actions" onClick={(e) => e.stopPropagation()}>
                     <button
                       title="添加标的到该组"
-                      onClick={() => onAddClick(g.group_id)}
+                      onClick={() => onAddClick(activeGroup.group_id)}
                     >
                       ＋
                     </button>
@@ -357,8 +400,8 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
                       title="重命名"
                       onClick={() => {
                         setGroupFeedback(null);
-                        setRenaming(g.group_id);
-                        setRenameText(g.name);
+                        setRenaming(activeGroup.group_id);
+                        setRenameText(activeGroup.name);
                       }}
                     >
                       ✎
@@ -366,8 +409,8 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
                     <button
                       title="删除分组（组内标的转为未分组，不会删除）"
                       onClick={() => {
-                        if (window.confirm(`删除分组「${g.name}」？组内标的将转为未分组，不会被删除。`))
-                          deleteGroup.mutate(g.group_id!);
+                        if (window.confirm(`删除分组「${activeGroup.name}」？组内标的将转为未分组，不会被删除。`))
+                          deleteGroup.mutate(activeGroup.group_id!);
                       }}
                     >
                       ✕
@@ -375,38 +418,37 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
                   </span>
                 )}
               </div>
-              {!isCollapsed && (
-                <div className="sb-items">
-                  {groupCards.length === 0 && (
-                    <div className="sb-empty">
-                      该组暂无标的
-                      {!g.builtin && (
-                        <button className="link" onClick={() => onAddClick(g.group_id)}>
-                          添加
-                        </button>
-                      )}
-                    </div>
-                  )}
-                  {groupCards.map((c) => (
-                    <SideItem
-                      key={c.symbol}
-                      card={c}
-                      active={c.symbol === selected}
-                      onSelect={() => onSelect(c.symbol)}
-                      groups={groups}
-                      onMove={(symbol, groupId) => moveItem.mutate({ symbol, groupId })}
-                      onRemove={(symbol) => removeItem.mutate(symbol)}
-                    />
-                  ))}
-                </div>
-              )}
-            </section>
-          );
-        })}
 
-        <button className="sb-add-symbol" onClick={() => onAddClick(null)}>
-          ＋ 添加自选
-        </button>
+              <div className="sb-items">
+                {activeCards.length === 0 && (
+                  <div className="sb-empty">
+                    该组暂无标的
+                    {!activeGroup.builtin && (
+                      <button className="link" onClick={() => onAddClick(activeGroup.group_id)}>
+                        添加
+                      </button>
+                    )}
+                  </div>
+                )}
+                {activeCards.map((c) => (
+                  <SideItem
+                    key={c.symbol}
+                    card={c}
+                    active={c.symbol === selected}
+                    onSelect={() => onSelect(c.symbol)}
+                    groups={groups}
+                    onMove={(symbol, groupId) => moveItem.mutate({ symbol, groupId })}
+                    onRemove={(symbol) => removeItem.mutate(symbol)}
+                  />
+                ))}
+              </div>
+            </section>
+          )}
+
+          <button className="sb-add-symbol" onClick={() => onAddClick(addTargetGroupId)}>
+            ＋ 添加自选
+          </button>
+        </div>
       </div>
     </aside>
   );

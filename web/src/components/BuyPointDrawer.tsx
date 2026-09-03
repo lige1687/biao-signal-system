@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { api } from "../api/client";
+import { agentConsoleStore } from "../App";
 import AgentMarkdown from "./AgentMarkdown";
+import ProvenanceBadge from "./ProvenanceBadge";
 import { moduleCn } from "../modules";
 import type {
   BuyPointCandidate,
@@ -295,6 +297,12 @@ export default function BuyPointDrawer({
           )}
         </div>
 
+        {/* 单轮 buyPointChat 保留作兜底（spec §5 老端点不删）；多轮深入讨论切全局控制台 */}
+        <div style={{ display: "flex", justifyContent: "flex-end", padding: "4px 10px 0" }}>
+          <button className="btn small" onClick={() => agentConsoleStore.openConsole(symbol)}>
+            到全局 agent 深入讨论（多轮）
+          </button>
+        </div>
         <div className="bp-input">
           <input
             value={input}
@@ -392,9 +400,26 @@ function CandidateCard({
           )}
           {c.next_step_cn && <div className="bp-next">下一步：{c.next_step_cn}</div>}
           {c.caveat_cn && <div className="bp-caveat">注意：{c.caveat_cn}</div>}
-          <div className="muted" style={{ fontSize: 11 }}>
-            rule_id:{c.rule_id ?? "-"} · 判定方式为研究代理
-          </div>
+          <ProvenanceBadge
+            items={[
+              {
+                label: c.scenario_cn,
+                rule_id: c.rule_id ?? null,
+                evidence_cn: [
+                  `关键价=${c.key_price ?? "-"}`,
+                  `止损=${c.invalidation_price ?? "-"}`,
+                  ...(c.satisfied_conditions.length > 0
+                    ? [`已满足=${c.satisfied_conditions.join("；")}`]
+                    : []),
+                  ...(c.missing_conditions.length > 0
+                    ? [`未满足=${c.missing_conditions.join("；")}`]
+                    : []),
+                ].join("；"),
+                research_proxy: c.research_proxy,
+                principle_source: null,
+              },
+            ]}
+          />
         </>
       )}
     </div>
