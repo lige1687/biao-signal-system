@@ -60,6 +60,7 @@ import type {
   NewsDigest,
   NewsItemsResponse,
   NewsStatus,
+  NewsWatchlistBrief,
 } from "../types";
 
 const BASE = "/api";
@@ -495,7 +496,8 @@ export const factorsApi = {
 
 export const newsApi = {
   items: (params: {
-    category?: string; q?: string; source?: string; from?: string; to?: string;
+    category?: string; q?: string; source?: string; symbol?: string;
+    direction?: string; from?: string; to?: string;
     scored?: string; min_importance?: number; limit?: number; offset?: number;
   }) => {
     const search = new URLSearchParams();
@@ -505,6 +507,8 @@ export const newsApi = {
     return request<NewsItemsResponse>(`/news/items?${search.toString()}`);
   },
   digests: (limit = 7) => request<{ digests: NewsDigest[] }>(`/news/digests?limit=${limit}`),
+  watchlistBrief: (days = 3) =>
+    request<NewsWatchlistBrief>(`/news/watchlist-brief?days=${days}`),
   run: (full = false) => request<{ run: string }>(`/news/run${full ? "?full=true" : ""}`, { method: "POST" }),
   status: () => request<NewsStatus>("/news/status"),
 };

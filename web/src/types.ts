@@ -1800,3 +1800,39 @@ export interface NewsStatus {
   counts: { total: number; scored: number };
   trigger: Record<string, unknown>;
 }
+
+/** 自选消息雷达：单只自选标的 × 近 N 天消息聚合（参考层）。 */
+export interface NewsWatchEntry {
+  symbol: string;
+  display_name: string | null;
+  market: string;
+  count: number;
+  bullish: number;
+  bearish: number;
+  neutral: number;
+  latest_at: string | null;
+  top: {
+    id: number;
+    title: string;
+    direction: string | null;
+    importance: number | null;
+    published_at: string;
+    url: string | null;
+    llm_note: string | null;
+  } | null;
+}
+
+/** 全局多空温度（近 N 天已评分条目的方向分布 + 重点事件）。 */
+export interface NewsMood {
+  bullish: number;
+  bearish: number;
+  neutral: number;
+  top_bullish: { title: string; importance: number }[];
+  top_bearish: { title: string; importance: number }[];
+}
+
+export interface NewsWatchlistBrief {
+  days: number;
+  items: NewsWatchEntry[];
+  mood: NewsMood;
+}

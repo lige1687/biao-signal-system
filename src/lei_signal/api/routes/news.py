@@ -6,9 +6,13 @@
 """
 from __future__ import annotations
 
+from contextlib import closing
+
 from fastapi import APIRouter, Request
 
+from lei_signal.api.watchlist import list_watchlist
 from lei_signal.newsfeed.service import NewsfeedService
+from lei_signal.storage.sqlite_store import connect
 
 router = APIRouter(prefix="/api/news", tags=["news"])
 
@@ -23,6 +27,8 @@ def items(
     category: str | None = None,
     q: str | None = None,
     source: str | None = None,
+    symbol: str | None = None,
+    direction: str | None = None,
     date_from: str | None = None,
     date_to: str | None = None,
     scored: str = "all",
@@ -30,12 +36,17 @@ def items(
     limit: int = 50,
     offset: int = 0,
 ) -> dict:
-    """条目列表：默认已评分按重要性降序在前，未评分垫底按时间倒序。"""
+    """条目列表：默认已评分按重要性降序在前，未评分垫底按时间倒序。
+
+    symbol/direction 是把消息对齐到自选与多空视角的结构化过滤，仍属参考层。
+    """
     return _service(request).items(
         {
             "category": category,
             "q": q,
             "source": source,
+            "symbol": symbol,
+            "direction": direction,
             "from": date_from,
             "to": date_to,
             "scored": scored,
@@ -44,6 +55,24 @@ def items(
             "offset": offset,
         }
     )
+
+
+@router.get("/watchlist-brief")
+def watchlist_brief(request: Request, days: int = 3) -> dict:
+    """自选标的 × 近 N 天消息聚合：每标的多空计数 + 最新一条 + 全局多空温度。
+
+    自选来自 watchlist 表（与 newsfeed 同库）；零消息标的不返回（零噪音）。
+    """
+    with closing(connect(request.app.state.watchlist_db_path)) as conn:
+        watch = [
+            {
+                "symbol": w.symbol,
+                "display_name": w.display_name,
+                "market": w.market,
+            }
+            for w in list_watchlist(conn)
+        ]
+    return _service(request).watchlist_brief(watch, days=days)
 
 
 @router.get("/digests")
