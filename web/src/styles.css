@@ -3862,6 +3862,20 @@ a { color: var(--accent); text-decoration: none; }
 .sig-news.bullish { border-color: rgba(227, 61, 71, 0.4); color: var(--up); }
 .sig-news.bearish { border-color: rgba(11, 155, 100, 0.4); color: var(--down); }
 .sig-news span { font-weight: 700; margin-left: 2px; }
+
+/* ---- 详情页近期消息 ---- */
+.rn-row { padding: 8px 0; border-top: 1px dashed var(--border); }
+.rn-row:first-child { border-top: none; }
+.rn-row-head { display: flex; align-items: baseline; gap: 8px; font-size: 12px; flex-wrap: wrap; }
+.rn-stars { color: #f59e0b; letter-spacing: 1.5px; font-size: 11.5px; }
+.rn-meta { color: var(--text-faint); font-size: 11px; margin-left: auto; }
+.rn-title { font-size: 13.5px; font-weight: 600; margin-top: 2px; line-height: 1.45; }
+.rn-title a { color: inherit; text-decoration: none; }
+.rn-title a:hover { color: var(--accent); }
+.rn-note {
+  font-size: 12.5px; color: var(--text-dim); margin-top: 2px; line-height: 1.5;
+  border-left: 2px solid var(--border-strong); padding-left: 8px;
+}
 .nf-radar-counts { display: flex; gap: 8px; font-weight: 700; font-size: 12px; align-items: center; }
 .nf-radar-top {
   color: var(--text-dim); font-size: 11.5px; line-height: 1.4;

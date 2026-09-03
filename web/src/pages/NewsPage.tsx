@@ -136,8 +136,10 @@ function ItemCard({ item, onPickSymbol }: { item: NewsItem; onPickSymbol: (s: st
   );
 }
 
-/** 顶部：今日要点（top_events 大卡）+ 分类归纳（折叠）。 */
-function DigestHeadline() {
+/** 顶部：今日要点（top_events 大卡）+ 分类归纳（折叠）。
+ *  2026-09-04：大卡带事件整体方向与影响标的（chips 可点击直达该标的消息流）；
+ *  旧简报无 symbols/direction 字段时自然降级为原样式。 */
+function DigestHeadline({ onPickSymbol }: { onPickSymbol: (s: string) => void }) {
   const { data } = useQuery({
     queryKey: ["newsDigests"],
     queryFn: () => newsApi.digests(3),
@@ -167,6 +169,21 @@ function DigestHeadline() {
                 <div className="nf-top-line">
                   <span className="nf-top-title">{e.title}</span>
                   <Stars importance={e.importance} />
+                  <DirectionTag direction={e.direction ?? null} />
+                  {(e.symbols ?? []).length > 0 && (
+                    <span className="nf-symbols">
+                      {(e.symbols ?? []).map((s) => (
+                        <button
+                          key={s}
+                          className="stage-chip neutral-info nf-symbol-chip"
+                          title={`只看「${s}」相关消息`}
+                          onClick={() => onPickSymbol(s)}
+                        >
+                          {s}
+                        </button>
+                      ))}
+                    </span>
+                  )}
                 </div>
                 <div className="nf-top-why">{e.why}</div>
               </div>
@@ -554,7 +571,7 @@ export default function NewsPage() {
         onPickSymbol={pickSymbol}
         onPickDirection={(d) => setDirectionFilter(d)}
       />
-      <DigestHeadline />
+      <DigestHeadline onPickSymbol={pickSymbol} />
       <BloggerBoard />
 
       <div className="nf-toolbar">

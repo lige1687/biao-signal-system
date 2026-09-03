@@ -40,9 +40,12 @@ DIGEST_SYSTEM_PROMPT = """你是财经资讯编辑。把当日已评分资讯整
 铁律：只归纳合并给定条目，不添加外部信息；同一事件多源合并为一条；不给操作建议。
 输出：{"sections":[{"category":"macro|risk|policy|industry|blogger",
 "headline":"≤12字","bullets":["每条≤40字"]}],
-"top_events":[{"title":"..","importance":<int>,"why":"≤30字"}]}
+"top_events":[{"title":"..","importance":<int>,"why":"≤30字",
+"symbols":["涉及股票代码或简称，最多3个，无则[]"],
+"direction":"bullish|bearish|neutral，事件整体方向，拿不准 neutral"}]}
 sections 只含有内容的类别，按 macro,risk,policy,industry,blogger 排序；
-top_events 取 importance 最高的至多 5 条。
+top_events 取 importance 最高的至多 5 条，symbols/direction 从合并条目中
+归纳（条目已有的标的优先保留）。
 除 JSON 外不输出任何文字。"""
 
 
@@ -124,14 +127,32 @@ def parse_digest(text: str) -> dict:
     for e in raw.get("top_events") or []:
         if not isinstance(e, dict) or not e.get("title"):
             continue
+        direction = str(e.get("direction", "")).strip()
+        symbols = e.get("symbols")
         top_events.append(
             {
                 "title": str(e["title"])[:60],
                 "importance": _clamp_importance(e.get("importance")),
                 "why": str(e.get("why", ""))[:40],
+                "symbols": [
+                    str(s)[:16]
+                    for s in (symbols if isinstance(symbols, list) else [])[:3]
+                ],
+                "direction": direction if direction in _VALID_DIRECTIONS else "neutral",
             }
         )
     return {"sections": sections[:5], "top_events": top_events[:5]}
+
+
+def _safe_json_list(raw: Any) -> list:
+    """symbols 列在 SQLite 是 JSON 文本，解码失败按空处理。"""
+    if isinstance(raw, list):
+        return raw
+    try:
+        v = json.loads(raw or "[]")
+        return v if isinstance(v, list) else []
+    except (json.JSONDecodeError, TypeError):
+        return []
 
 
 def _rows_to_prompt_payload(rows: list[dict]) -> list[dict]:
@@ -199,6 +220,8 @@ def generate_digest(rows: list[dict], config: ArkConfig | None = None) -> dict |
             "category": r.get("category"),
             "importance": r.get("importance"),
             "direction": r.get("direction"),
+            # symbols 是 JSON 文本（scored_rows_for_digest 已 SELECT），解码后透传给简报归纳
+            "symbols": _safe_json_list(r.get("symbols")),
             "source": r.get("source"),
         }
         for r in rows
