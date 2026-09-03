@@ -1111,12 +1111,17 @@ function FlowBar({ label, v, highlight }: { label: string; v: number | null; hig
 
 // ── 成分股抽屉 ──────────────────────────────────────────────────────────────
 function MembersDrawer({ code, onClose }: { code: string; onClose: () => void }) {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["sectorMembers", code],
     queryFn: () => sectorsApi.members(code, 50),
     staleTime: 5 * 60_000,
   });
   const members: SectorMembersResponse["members"] = data?.members ?? [];
+  const navigate = useNavigate();
+  const openSymbol = (symbol: string) => {
+    onClose();
+    navigate(`/?symbol=${encodeURIComponent(symbol)}`);
+  };
   return (
     <div className="drawer-overlay" onClick={onClose}>
       <div className="drawer-panel" onClick={(e) => e.stopPropagation()}>
@@ -1131,6 +1136,17 @@ function MembersDrawer({ code, onClose }: { code: string; onClose: () => void })
         <div className="drawer-body">
           {isLoading ? (
             <div className="muted">加载中…</div>
+          ) : error ? (
+            <div className="fund-errors">
+              成分股加载失败：{error instanceof Error ? error.message : String(error)}
+              <div>
+                <button className="btn small" style={{ marginTop: 8 }} onClick={() => refetch()}>
+                  重试
+                </button>
+              </div>
+            </div>
+          ) : members.length === 0 ? (
+            <div className="muted">该板块暂无成分股数据。</div>
           ) : (
             <table className="event-table fund-table">
               <thead>
@@ -1144,7 +1160,12 @@ function MembersDrawer({ code, onClose }: { code: string; onClose: () => void })
               </thead>
               <tbody>
                 {members.map((m) => (
-                  <tr key={m.symbol}>
+                  <tr
+                    key={m.symbol}
+                    style={{ cursor: "pointer" }}
+                    title="点击在看盘工作台打开该标的"
+                    onClick={() => openSymbol(m.symbol)}
+                  >
                     <td>{m.symbol}</td>
                     <td>{m.name ?? "-"}</td>
                     <td className={`num ${pctClass(m.pct_change)}`}>{fmt(m.pct_change, 2, "%")}</td>

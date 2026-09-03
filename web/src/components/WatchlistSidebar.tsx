@@ -189,6 +189,14 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
     queryClient.invalidateQueries({ queryKey: ["cards"] });
   };
 
+  // 统一失败反馈：操作失败时左栏底部提示条可见，而不是界面毫无动静
+  const onErrorWith = (action: string) => (error: unknown) => {
+    setGroupFeedback({
+      kind: "error",
+      text: `${action}失败：${error instanceof Error ? error.message : String(error)}`,
+    });
+  };
+
   const createGroup = useMutation({
     mutationFn: (name: string) => api.createGroup(name),
     onSuccess: (group) => {
@@ -197,6 +205,7 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
       invalidate();
       setActiveKey(groupKey(group)); // 建组后直接切到新组
     },
+    onError: onErrorWith("建组"),
   });
   const renameGroup = useMutation({
     mutationFn: ({ id, name }: { id: number; name: string }) => api.renameGroup(id, name),
@@ -206,12 +215,7 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
       setGroupFeedback({ kind: "success", text: `已改名为「${group.name}」` });
       invalidate();
     },
-    onError: (error) => {
-      setGroupFeedback({
-        kind: "error",
-        text: `改名失败：${error instanceof Error ? error.message : String(error)}`,
-      });
-    },
+    onError: onErrorWith("改名"),
   });
   const deleteGroup = useMutation({
     mutationFn: (id: number) => api.deleteGroup(id),
@@ -219,15 +223,18 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
       setActiveKey(""); // 让 activeKey 重新解析到剩余分组
       invalidate();
     },
+    onError: onErrorWith("删组"),
   });
   const moveItem = useMutation({
     mutationFn: ({ symbol, groupId }: { symbol: string; groupId: number | null }) =>
       api.moveToGroup(symbol, groupId),
     onSuccess: invalidate,
+    onError: onErrorWith("移动"),
   });
   const removeItem = useMutation({
     mutationFn: (symbol: string) => api.removeWatchlist(symbol),
     onSuccess: invalidate,
+    onError: onErrorWith("移除"),
   });
 
   const cardBySymbol = new Map(cards.map((c) => [c.symbol, c]));
@@ -448,6 +455,12 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
           <button className="sb-add-symbol" onClick={() => onAddClick(addTargetGroupId)}>
             ＋ 添加自选
           </button>
+          <div
+            style={{ padding: "6px 12px", fontSize: 11, opacity: 0.65 }}
+            title="不用鼠标，直接用方向键在自选列表里快速换标的"
+          >
+            ↑↓ 方向键切换标的
+          </div>
         </div>
       </div>
     </aside>

@@ -1932,11 +1932,11 @@ function MacroSection({
 /** 分区页签：原来 5 段纵向堆叠近万素深，「翻个东西要滚到最底」；改为点选直达。
  *  id 沿用锚点名并同步到 URL hash，刷新/深链保持当前分区。 */
 const FUND_SECTIONS: { id: string; label: string; tip: string }[] = [
-  { id: "fund-sec-market", label: "① 市场", tip: "宽度 + 情绪（最有用）" },
-  { id: "fund-sec-rates", label: "② 利率", tip: "价格的标尺 / 资本的成本" },
-  { id: "fund-sec-overlay", label: "②⁺ 叠加", tip: "利率 / 两融 × 股指（20 年级，可滑动缩放）" },
-  { id: "fund-sec-macro", label: "③ 消费", tip: "就业 / 物价 / 景气" },
-  { id: "fund-sec-usmacro", label: "③⁺ 美国宏观", tip: "就业 / 房产 / 汽车 / WEI / 物价 / 订单（FRED）" },
+  { id: "fund-sec-market", label: "市场", tip: "宽度 + 情绪（最有用）" },
+  { id: "fund-sec-rates", label: "利率", tip: "价格的标尺 / 资本的成本" },
+  { id: "fund-sec-overlay", label: "长周期叠加", tip: "利率 / 两融 × 股指（20 年级，可滑动缩放）" },
+  { id: "fund-sec-macro", label: "消费", tip: "就业 / 物价 / 景气" },
+  { id: "fund-sec-usmacro", label: "美国宏观", tip: "就业 / 房产 / 汽车 / WEI / 物价 / 订单（FRED）" },
 ];
 
 export default function FundamentalsPage() {
@@ -1976,13 +1976,12 @@ export default function FundamentalsPage() {
     queryFn: () => fundamentalsApi.macroHistory(60),
     staleTime: 30 * 60_000,
   });
-  const { data: commoditiesData } = useQuery({
+  const { data: commoditiesData, error: commoditiesError } = useQuery({
     queryKey: ["fundamentalsCommodities"],
     queryFn: () => fundamentalsApi.commodities(),
     staleTime: 30 * 60_000,
   });
 
-  // 硬刷新：overview + rates + commodities + etf 一起重拉。
   // 硬刷新：overview + rates + commodities + etf + us-macro 一起重拉。
   const refreshMutation = useMutation({
     mutationFn: async () => {
@@ -2012,6 +2011,9 @@ export default function FundamentalsPage() {
     ...(rates?.errors ?? []),
     ...(ratesHist?.errors ?? []),
     ...(macroHist?.errors ?? []),
+    ...(commoditiesError
+      ? [`大宗商品：${commoditiesError instanceof Error ? commoditiesError.message : String(commoditiesError)}`]
+      : []),
   ];
 
   return (
@@ -2083,7 +2085,7 @@ export default function FundamentalsPage() {
       {/* ── ②⁺ 长周期叠加 ── */}
       {activeSection === "fund-sec-overlay" && <OverlaySection />}
 
-      {/* ── ③ 消费 ── */}
+      {/* ── 消费 ── */}
       {activeSection === "fund-sec-macro" &&
         (ovLoading ? (
           <div className="macro-grid">{Array.from({ length: 3 }).map((_, i) => <div key={i} className="card-skeleton" />)}</div>
@@ -2094,7 +2096,12 @@ export default function FundamentalsPage() {
             commodities={commoditiesData?.commodities}
             onOpen={setDrawer}
           />
-        ) : null)}
+        ) : (
+          <div className="macro-card todo-card">
+            <div className="macro-head"><span className="macro-name">消费指标</span></div>
+            <div className="macro-note">暂无消费指标数据（数据源可能限流）。点右上角「刷新」重试。</div>
+          </div>
+        ))}
 
       {/* ── ③⁺ 美国宏观 ── */}
       {activeSection === "fund-sec-usmacro" && (

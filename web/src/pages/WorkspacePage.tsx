@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { api, sectorsApi } from "../api/client";
 import { sectorKeywordsForEtf } from "../data/sectorEtfMap";
 import AddSymbolDialog from "../components/AddSymbolDialog";
@@ -204,12 +204,15 @@ export default function WorkspacePage() {
     highlightSpec,
   } = useBuyPointCoord(selected, data?.chart, showBuyPoint);
 
+  const [refreshError, setRefreshError] = useState<string | null>(null);
   const refreshAll = useMutation({
     mutationFn: () => api.refresh(),
     onSuccess: (fresh) => {
+      setRefreshError(null);
       queryClient.setQueryData(["cards"], fresh);
       queryClient.invalidateQueries({ queryKey: ["detail", selected] });
     },
+    onError: (e) => setRefreshError(e instanceof Error ? e.message : String(e)),
   });
 
   const onPick = useCallback(
@@ -409,7 +412,7 @@ export default function WorkspacePage() {
                 className={`badge-chip ${data.market_badge.summary}`}
                 title={data.market_badge.reasons_cn.join("\n") || undefined}
               >
-                {data.market_badge.summary_cn}
+                市场环境：{data.market_badge.summary_cn}
               </span>
             )}
             {sectorChip && (
@@ -460,9 +463,6 @@ export default function WorkspacePage() {
             · {data?.meta.is_intraday_forming ? "盘中" : "已收盘"}
           </span>
         )}
-        <Link to="/grid" className="btn small" title="卡片墙总览">
-          总览
-        </Link>
         <button
           className="btn small primary"
           disabled={refreshAll.isPending}
@@ -471,6 +471,15 @@ export default function WorkspacePage() {
           {refreshAll.isPending ? "刷新中…" : "刷新"}
         </button>
       </div>
+
+      {refreshError && (
+        <div className="error-banner">
+          全量刷新失败：{refreshError}
+          <button className="btn small" style={{ marginLeft: 8 }} onClick={() => setRefreshError(null)}>
+            知道了
+          </button>
+        </div>
+      )}
 
       <div
         className={`ws-body ${sidebarOpen ? "" : "no-sidebar"}${expVisible ? "" : " exp-collapsed"}`}
@@ -504,6 +513,24 @@ export default function WorkspacePage() {
 
         <main className="ws-center">
           {cardsLoading && <div className="loading">正在加载自选与大盘…</div>}
+          {!cardsLoading && cards.length === 0 && (
+            <div className="panel" style={{ padding: 32, textAlign: "center" }}>
+              <div style={{ fontSize: 15, marginBottom: 8 }}>自选列表还是空的</div>
+              <div className="muted" style={{ marginBottom: 16 }}>
+                添加第一个标的后，这里会显示 K 线图、今日信号与解释面板。
+              </div>
+              <button className="btn primary" onClick={() => setAddDialogGroup(undefined)}>
+                添加自选标的
+              </button>
+            </div>
+          )}
+          {!cardsLoading && cards.length > 0 && !selected && (
+            <div className="panel" style={{ padding: 32, textAlign: "center" }}>
+              <div className="muted">
+                所有自选标的当前都不可用（数据源异常）。稍后点右上角「刷新」重试。
+              </div>
+            </div>
+          )}
           {error && (
             <div className="error-banner">
               {selected} 加载失败：
@@ -580,13 +607,13 @@ export default function WorkspacePage() {
                   {legend.levels && (
                     <>
                       <span>
-                        <span className="mk mk-b1">●</span> B1
+                        <span className="mk mk-b1">●</span> B1 第一阻力
                       </span>
                       <span>
-                        <span className="mk mk-cline">●</span> C 点
+                        <span className="mk mk-cline">●</span> C 点失效线
                       </span>
                       <span>
-                        <span className="mk mk-neck">●</span> 颈线
+                        <span className="mk mk-neck">●</span> 顶部颈线
                       </span>
                     </>
                   )}

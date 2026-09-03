@@ -11,6 +11,10 @@ import PullbackBacktestPanel from "../components/PullbackBacktestPanel";
 import PullbackOpportunityPanel from "../components/PullbackOpportunityPanel";
 import ExplanationPanel, { type Selection } from "../components/ExplanationPanel";
 import TradeOpportunityPanel from "../components/TradeOpportunityPanel";
+import CollapsiblePanel from "../components/CollapsiblePanel";
+import ConditionalScenarioPanel from "../components/ConditionalScenarioPanel";
+import ExitSignalPanel from "../components/ExitSignalPanel";
+import TradabilityPanel from "../components/TradabilityPanel";
 import { prefillFromOpportunity } from "../components/CreatePlanDialog";
 import PlanCreateFlow from "../components/PlanCreateFlow";
 import BuyPointDrawer, { annoToIndex } from "../components/BuyPointDrawer";
@@ -183,12 +187,23 @@ export default function DetailPage() {
     [data, symbol, showBuyPoint],
   );
 
+  const [manualRefreshing, setManualRefreshing] = useState(false);
+  const [refreshError, setRefreshError] = useState<string | null>(null);
   const doRefresh = async () => {
-    const fresh = await api.detail(symbol, true);
-    queryClient.setQueryData(["detail", symbol], fresh);
-    queryClient.invalidateQueries({ queryKey: ["cards"] });
-    setSelection(null);
+    setManualRefreshing(true);
+    setRefreshError(null);
+    try {
+      const fresh = await api.detail(symbol, true);
+      queryClient.setQueryData(["detail", symbol], fresh);
+      queryClient.invalidateQueries({ queryKey: ["cards"] });
+      setSelection(null);
+    } catch (e) {
+      setRefreshError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setManualRefreshing(false);
+    }
   };
+  const refreshBusy = isFetching || manualRefreshing;
 
   const { lastClose, changePct, changeCls } = useMemo(() => {
     const close = data?.chart.lastClose ?? null;
@@ -297,12 +312,21 @@ export default function DetailPage() {
               · {data.meta.is_intraday_forming ? "盘中" : "已收盘"}
               {data.meta.cache_fallback_used && " · 缓存兜底"}
             </span>
-            <button className="btn" disabled={isFetching} onClick={doRefresh}>
-              {isFetching ? "刷新中…" : "刷新"}
+            <button className="btn" disabled={refreshBusy} onClick={doRefresh}>
+              {refreshBusy ? "刷新中…" : "刷新"}
             </button>
           </>
         )}
       </div>
+
+      {refreshError && (
+        <div className="error-banner">
+          手动刷新失败：{refreshError}
+          <button className="btn small" style={{ marginLeft: 8 }} onClick={() => setRefreshError(null)}>
+            知道了
+          </button>
+        </div>
+      )}
 
       {error && (
         <div className="error-banner">
@@ -423,6 +447,28 @@ export default function DetailPage() {
             opportunities={data.assessment.pullback_opportunities}
             onSelect={setSelection}
           />
+
+          {/* 与看盘工作台同源的三个评估面板：从计划页/简报链入详情时也能看到退出与门禁 */}
+          {data.assessment.conditional_scenarios.length > 0 && (
+            <CollapsiblePanel title="条件化场景" storageKey="detail.card.conditional" defaultCollapsed={true}>
+              <ConditionalScenarioPanel
+                scenarios={data.assessment.conditional_scenarios}
+                onSelect={setSelection}
+              />
+            </CollapsiblePanel>
+          )}
+
+          {data.assessment.exit_signals.length > 0 && (
+            <CollapsiblePanel title="持仓退出" storageKey="detail.card.exit" defaultCollapsed={true}>
+              <ExitSignalPanel exitSignals={data.assessment.exit_signals} onSelect={setSelection} />
+            </CollapsiblePanel>
+          )}
+
+          {data.assessment.tradability && (
+            <CollapsiblePanel title="可交易性门禁" storageKey="detail.card.tradability" defaultCollapsed={true}>
+              <TradabilityPanel tradability={data.assessment.tradability} />
+            </CollapsiblePanel>
+          )}
 
           {/* 当前观察保留在图下方：它是「今天怎么看」的总结，不是逐点明细。 */}
           <AssessmentPanel

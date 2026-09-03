@@ -27,18 +27,22 @@ export default function TopNav() {
       </NavLink>
       <NavLink to="/fundamentals">基本面</NavLink>
       <NavLink to="/sectors">行业板块</NavLink>
-      <NavLink to="/factors">因子观测</NavLink>
+      <NavLink to="/factors">因子观测台</NavLink>
       <NavLink to="/news">资讯流</NavLink>
       <NavLink to="/backtest">回测</NavLink>
       <NavLink to="/research">本轮研究</NavLink>
-      <NavLink to="/daily">日报</NavLink>
+      <NavLink to="/daily">收盘简报</NavLink>
       <NavLink to="/plans">
         监督待办
         {open > 0 && <span className="nav-badge">{open}</span>}
       </NavLink>
       <span className="nav-spacer" />
-      <button className="btn small nav-agent" onClick={() => agentConsoleStore.openConsole(null)}>
-        agent
+      <button
+        className="btn small nav-agent"
+        onClick={() => agentConsoleStore.openConsole(null)}
+        title="AI 助手：问行情、查信号、复盘对话"
+      >
+        AI 助手
       </button>
     </nav>
   );

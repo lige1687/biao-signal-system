@@ -41,13 +41,23 @@ def dates() -> dict:
 
 
 @router.get("/{day}")
-def by_date(day: str) -> dict:
+def by_date(day: str, slot: str | None = None) -> dict:
+    """指定日期简报；带 ?slot= 时返回指定槽位（不存在则 404），否则收盘版优先。"""
     doc = db.load_brief(day)
     if not doc or not doc.get("versions"):
         raise HTTPException(status_code=404, detail=f"该日无简报: {day}")
-    for slot in (db.SLOT_CLOSE, db.SLOT_INTRADAY):
+    if slot:
         v = doc["versions"].get(slot)
+        if not v:
+            raise HTTPException(
+                status_code=404,
+                detail=f"该日无 {slot} 槽位简报: {day}（现有: {sorted(doc['versions'].keys())}）",
+            )
+        return {"date": doc["date"], "slot": slot, "brief": v,
+                "slots_available": sorted(doc["versions"].keys())}
+    for s in (db.SLOT_CLOSE, db.SLOT_INTRADAY):
+        v = doc["versions"].get(s)
         if v:
-            return {"date": doc["date"], "slot": slot, "brief": v,
+            return {"date": doc["date"], "slot": s, "brief": v,
                     "slots_available": sorted(doc["versions"].keys())}
     raise HTTPException(status_code=404, detail=f"该日无简报: {day}")

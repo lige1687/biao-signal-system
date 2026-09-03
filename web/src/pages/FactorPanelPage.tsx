@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { factorsApi, type FactorRow } from "../api/client";
 import { fmt, pctClass } from "../utils/format";
 
@@ -29,7 +29,7 @@ const GROUP_CN: Record<string, string> = {
   sector: "板块",
 };
 
-type SymSortKey = "code" | "rv_pct" | "mom_121" | "mom_20" | "adx14";
+type SymSortKey = "code" | "rv20_ann" | "rv_pct" | "mom_121" | "mom_20" | "adx14";
 
 /** RV 分位小色条：低波冷色 → 高波暖色，≥0.8 加警示描边。 */
 function PctBar({ v, warnAt = 0.8 }: { v: number | null; warnAt?: number }) {
@@ -99,6 +99,7 @@ function RiskChips({ row }: { row: FactorRow }) {
 }
 
 export default function FactorPanelPage() {
+  const queryClient = useQueryClient();
   const { data, error, isLoading } = useQuery({
     queryKey: ["factorPanel"],
     queryFn: () => factorsApi.panel(),
@@ -106,6 +107,8 @@ export default function FactorPanelPage() {
   });
   const [sortKey, setSortKey] = useState<SymSortKey>("rv_pct");
   const [sortDesc, setSortDesc] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [refreshError, setRefreshError] = useState<string | null>(null);
 
   const symbols = useMemo(() => {
     if (!data) return [];
@@ -151,12 +154,28 @@ export default function FactorPanelPage() {
         <span className="spacer" />
         <button
           className="btn primary"
-          onClick={() => factorsApi.panel(true).catch(() => undefined)}
+          disabled={refreshing}
+          onClick={async () => {
+            setRefreshing(true);
+            setRefreshError(null);
+            try {
+              await factorsApi.panel(true);
+              await queryClient.invalidateQueries({ queryKey: ["factorPanel"] });
+            } catch (e) {
+              setRefreshError(e instanceof Error ? e.message : String(e));
+            } finally {
+              setRefreshing(false);
+            }
+          }}
           title="重读磁盘快照（真正重算需跑 scripts/precompute_factor_panel.py）"
         >
-          刷新
+          {refreshing ? "刷新中…" : "刷新"}
         </button>
       </div>
+
+      {refreshError && (
+        <div className="fund-errors">刷新失败：{refreshError}</div>
+      )}
 
       {data && <div className="legend">{data.research_proxy_note}</div>}
 
@@ -216,7 +235,7 @@ export default function FactorPanelPage() {
                   {head("code", "代码")}
                   <th>组</th>
                   <th>收盘</th>
-                  {head("rv_pct", "RV20年化", "20日已实现波动率（年化）")}
+                  {head("rv20_ann", "RV20年化", "20日已实现波动率（年化）")}
                   {head("rv_pct", "RV 3年分位", "当前波动率在自身近3年历史的百分位")}
                   {head("mom_121", "12-1动量", "P(t-21)/P(t-252)-1，板块层有效/标的层参考")}
                   {head("mom_20", "20日动量", "反向因子：组内高分位=追高警示")}

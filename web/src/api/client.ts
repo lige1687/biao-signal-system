@@ -446,8 +446,10 @@ export const sectorsApi = {
 // ---- 收盘简报 ----
 export const dailyBriefApi = {
   latest: () => request<DailyBriefResponse>("/daily-brief/latest"),
-  byDate: (date: string) =>
-    request<DailyBriefResponse>(`/daily-brief/${encodeURIComponent(date)}`),
+  byDate: (date: string, slot?: string) =>
+    request<DailyBriefResponse>(
+      `/daily-brief/${encodeURIComponent(date)}${slot ? `?slot=${slot}` : ""}`,
+    ),
   dates: () => request<{ dates: string[] }>("/daily-brief/dates"),
 };
 

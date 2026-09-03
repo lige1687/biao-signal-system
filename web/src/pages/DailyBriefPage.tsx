@@ -178,12 +178,15 @@ export default function DailyBriefPage() {
 }
 
 function SlotView({ date, slot }: { date: string; slot: string }) {
-  const { data } = useQuery({
+  const { data, error } = useQuery({
     queryKey: ["dailyBrief", date, slot],
-    queryFn: () => dailyBriefApi.byDate(date),
+    queryFn: () => dailyBriefApi.byDate(date, slot),
     staleTime: 5 * 60_000,
   });
-  if (!data || data.slot !== slot) return <div className="muted">加载中…</div>;
+  if (error) {
+    return <div className="fund-errors">该槽位加载失败：{(error as Error).message}</div>;
+  }
+  if (!data) return <div className="muted">加载中…</div>;
   return <BriefBody brief={data.brief} />;
 }
 

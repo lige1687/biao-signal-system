@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import TopNav from "./components/TopNav";
 import AgentConsole from "./components/AgentConsole";
 import DetailPage from "./pages/DetailPage";
@@ -63,13 +63,16 @@ export default function App() {
         <Route path="/factors" element={<FactorPanelPage />} />
         {/* 资讯流：基本面消息检索与排序（宏观/风险/政策/行业 + 博主观点，参考层） */}
         <Route path="/news" element={<NewsPage />} />
-        {/* 收盘简报：环境异常 → 自选重点变化 → 板块观察池（research_proxy） */}
+        {/* 回测工作台：全池回测 + 宽度择时 */}
         <Route path="/backtest" element={<BacktestPage />} />
         {/* 本轮研究展示：宽度/模块E/终审 轮次结果（静态数据页） */}
         <Route path="/research" element={<ResearchPage />} />
+        {/* 收盘简报：环境异常 → 自选重点变化 → 板块观察池（research_proxy） */}
         <Route path="/daily" element={<DailyBriefPage />} />
         {/* 监督待办：跨标的计划 + 待办 + 当日判定 */}
         <Route path="/plans" element={<SupervisorPage />} />
+        {/* 未知路径兜底：回看盘工作台，避免白屏 */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       {/* 全局 agent 控制台：任何页面可唤起，上下文跟随当前路由 */}
       <AgentConsole />

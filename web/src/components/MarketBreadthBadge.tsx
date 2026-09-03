@@ -47,7 +47,7 @@ function pickPrimary(panels: GlobalPanel[]): GlobalPanel | null {
 }
 
 export default function MarketBreadthBadge() {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["marketContextGlobalStrip"],
     queryFn: () => api.marketContextGlobalStrip(),
     refetchInterval: 60_000,
@@ -59,6 +59,18 @@ export default function MarketBreadthBadge() {
   const panels = data?.panels ?? [];
   const primary = useMemo(() => pickPrimary(panels), [panels]);
 
+  if (error && !data) {
+    return (
+      <button
+        type="button"
+        className="breadth-badge missing"
+        title="宽度数据加载失败，点击重试"
+        onClick={() => refetch()}
+      >
+        宽度 加载失败 ↻
+      </button>
+    );
+  }
   if (isLoading && !data) {
     return <span className="breadth-badge loading">宽度 --</span>;
   }

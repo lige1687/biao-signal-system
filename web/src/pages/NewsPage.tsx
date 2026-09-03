@@ -17,7 +17,7 @@ import type { NewsItem, NewsMood, NewsWatchEntry } from "../types";
  *      点击标的直达该标的消息流（自动放宽到近30天全量）——把消息对齐到自选视角
  *   2. 今日要点 = 最新简报的 top_events（当天最关键的几条，大卡）+ 分类归纳（折叠）
  *   3. 博主观点 = 按博主分组（谁说了啥），每人近 2 天最新观点
- *   4. 关键消息 = 默认只看近 1 天 importance≥5，「显示全部」放宽；支持方向过滤（利多/利空）
+ *   4. 关键消息 = 默认只看近 1 天 importance≥6，「显示全部」放宽；支持方向过滤（利多/利空）
  */
 
 const CATEGORY_CN: Record<string, string> = {
@@ -401,7 +401,7 @@ function daysAgo(n: number): string {
 }
 
 export default function NewsPage() {
-  const [focus, setFocus] = useState(true); // 聚焦模式：近1天 + importance≥5
+  const [focus, setFocus] = useState(true); // 聚焦模式：近1天 + importance≥6
   const [category, setCategory] = useState<string>("");
   const [source, setSource] = useState<string>("");
   const [range, setRange] = useState<RangeKey>("1d");
@@ -412,6 +412,7 @@ export default function NewsPage() {
   const debounceRef = useRef<number | null>(null);
   const queryClient = useQueryClient();
   const [running, setRunning] = useState(false);
+  const [runError, setRunError] = useState<string | null>(null);
   const pollRef = useRef<number | null>(null);
 
   const effectiveRange: RangeKey = focus ? "1d" : range;
@@ -456,6 +457,7 @@ export default function NewsPage() {
   const onRefresh = async () => {
     if (running) return;
     setRunning(true);
+    setRunError(null);
     try {
       await newsApi.run();
       const started = Date.now();
@@ -475,7 +477,8 @@ export default function NewsPage() {
           /* 轮询失败继续 */
         }
       }, 3000);
-    } catch {
+    } catch (e) {
+      setRunError(e instanceof Error ? e.message : String(e));
       setRunning(false);
     }
   };
@@ -495,6 +498,15 @@ export default function NewsPage() {
           {running ? "抓取中…" : "立即刷新"}
         </button>
       </div>
+
+      {runError && (
+        <div className="fund-errors">
+          抓取启动失败：{runError}（通常是 LLM 配额或数据源限流，稍后再试）
+          <button className="btn small" style={{ marginLeft: 8 }} onClick={() => setRunError(null)}>
+            知道了
+          </button>
+        </div>
+      )}
 
       <WatchlistRadar
         selected={symbolFilter}

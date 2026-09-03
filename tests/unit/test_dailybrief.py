@@ -183,3 +183,43 @@ class TestPersistence:
         assert base["id"] == "d22-close"
         base2 = db.load_baseline_before("2026-08-22", "1645")
         assert base2["id"] == "d22-intraday"
+
+
+# ── 路由层：?slot= 槽位选择 ────────────────────────────────────────────────
+class TestByDateSlotParam:
+    """回归：前端 14:45/16:45 切换曾因 byDate 不带 slot 永远拿到收盘版，
+    导致 14:45 预判版整页卡在"加载中"。"""
+
+    def _client(self, tmp_path, monkeypatch):
+        from fastapi.testclient import TestClient
+
+        monkeypatch.setattr(db, "BRIEF_DIR", tmp_path)
+        db.save_brief_version("2026-09-03", "1445", {"id": "intraday"})
+        db.save_brief_version("2026-09-03", "1645", {"id": "close"})
+        from lei_signal.api.routes import dailybrief as route
+
+        from fastapi import FastAPI
+
+        app = FastAPI()
+        app.include_router(route.router)
+        return TestClient(app)
+
+    def test_slot_param_returns_requested_version(self, tmp_path, monkeypatch):
+        client = self._client(tmp_path, monkeypatch)
+        r = client.get("/api/daily-brief/2026-09-03?slot=1445")
+        assert r.status_code == 200
+        body = r.json()
+        assert body["slot"] == "1445" and body["brief"]["id"] == "intraday"
+        assert body["slots_available"] == ["1445", "1645"]
+
+    def test_default_prefers_close(self, tmp_path, monkeypatch):
+        client = self._client(tmp_path, monkeypatch)
+        body = client.get("/api/daily-brief/2026-09-03").json()
+        assert body["slot"] == "1645" and body["brief"]["id"] == "close"
+
+    def test_missing_slot_404(self, tmp_path, monkeypatch):
+        client = self._client(tmp_path, monkeypatch)
+        db.BRIEF_DIR  # noqa: B018 - 仅确认目录已 patch
+        r = client.get("/api/daily-brief/2026-09-03?slot=9999")
+        assert r.status_code == 404
+        assert "9999" in r.json()["detail"]
