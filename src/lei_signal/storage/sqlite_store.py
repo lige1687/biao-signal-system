@@ -594,8 +594,11 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
             ON daily_opportunity_scan(scan_date, verdict);
         """,
     ),
+    # 两线并行期各自把新迁移占在 16 号（signal_alerts / newsfeed），且 ordinal 是
+    # schema_migrations 主键——任一侧留在 16 都会撞另一侧已有库的主键。名字才是
+    # 幂等键（按名跳过），故 16 空出：signal_alerts=18、newsfeed=19。
     (
-        16,
+        18,
         "016_signal_alerts",
         """
         -- 今日自选信号卖点表 (2026-08-23): 看盘主页「今日自选信号」横幅的数据源.
@@ -652,6 +655,57 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
             ON agent_messages(session_id, message_id);
         CREATE INDEX IF NOT EXISTS idx_agent_sessions_symbol
             ON agent_sessions(symbol, last_active_at);
+        """,
+    ),
+    (
+        19,
+        "016_newsfeed",
+        """
+        -- 资讯流 (2026-08-27): 基本面消息检索与排序系统的存储.
+        -- 只追加: dedupe_key 唯一约束 + INSERT OR IGNORE, 重跑幂等.
+        -- LLM 打分是"补全"不是改写: importance IS NULL = 未评分, 按时间排序展示.
+        CREATE TABLE IF NOT EXISTS news_items (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            source TEXT NOT NULL,            -- eastmoney|sina|gnews|wechat|bilibili
+            source_name TEXT,                -- 公众号名 / UP主名 / 快讯频道名
+            dedupe_key TEXT NOT NULL UNIQUE,
+            url TEXT,
+            category TEXT,                   -- macro|risk|policy|industry|blogger
+            title TEXT NOT NULL,
+            summary TEXT,
+            content TEXT,                    -- 公众号正文 / B站字幕全文, 可 NULL
+            symbols TEXT,                    -- JSON array
+            direction TEXT,                  -- bullish|bearish|neutral
+            importance INTEGER,              -- 0-10, NULL=未评分
+            llm_note TEXT,
+            published_at TEXT NOT NULL,      -- ISO8601
+            ingested_at TEXT NOT NULL,
+            scored_at TEXT
+        );
+        CREATE INDEX IF NOT EXISTS idx_news_items_published ON news_items(published_at DESC);
+        CREATE INDEX IF NOT EXISTS idx_news_items_category ON news_items(category);
+
+        CREATE TABLE IF NOT EXISTS news_digests (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            digest_date TEXT NOT NULL UNIQUE,   -- YYYY-MM-DD (本地)
+            payload_json TEXT NOT NULL,
+            created_at TEXT NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS news_watermarks (
+            source_key TEXT PRIMARY KEY,
+            cursor_value TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS news_runs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            started_at TEXT NOT NULL,
+            finished_at TEXT,
+            status TEXT NOT NULL,            -- running|ok|partial|failed
+            stats_json TEXT,
+            errors_json TEXT
+        );
         """,
     ),
 )

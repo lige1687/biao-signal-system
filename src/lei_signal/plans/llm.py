@@ -639,6 +639,13 @@ def _request_completion(config: ArkConfig, messages: list[dict]) -> str | None:
         return None
 
 
+def post_user_content(
+    user_content: str, config: ArkConfig, *, system_prompt: str
+) -> str | None:
+    """公开版单轮调用：供 newsfeed 等参考层复用双协议投递骨架（不改监督员行为）。"""
+    return _post_user_content(user_content, config, system_prompt=system_prompt)
+
+
 def make_ark_renderer(
     *,
     plan: TradePlan | None = None,
@@ -747,4 +754,5 @@ __all__ = [
     "chat_discussion",
     "load_ark_config",
     "make_ark_renderer",
+    "post_user_content",
 ]
