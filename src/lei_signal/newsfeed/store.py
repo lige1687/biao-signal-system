@@ -83,6 +83,8 @@ class NewsStore:
         category: str | None = None,
         q: str | None = None,
         source: str | None = None,
+        symbol: str | None = None,
+        direction: str | None = None,
         date_from: str | None = None,
         date_to: str | None = None,
         scored: str = "all",
@@ -98,6 +100,15 @@ class NewsStore:
         if source:
             where.append("source = ?")
             args.append(source)
+        if direction:
+            where.append("direction = ?")
+            args.append(direction)
+        if symbol:
+            # 标的关联 = LLM 提取的 symbols 数组（JSON 文本）或标题/摘要里出现。
+            # SQLite LIKE 对 ASCII 大小写不敏感，代码匹配（NVDA/nvda）天然覆盖。
+            like = f"%{symbol}%"
+            where.append("(symbols LIKE ? OR title LIKE ? OR summary LIKE ?)")
+            args.extend([like, like, like])
         if date_from:
             where.append("published_at >= ?")
             args.append(date_from)
@@ -113,8 +124,8 @@ class NewsStore:
             where.append("importance IS NULL")
         if q:
             like = f"%{q}%"
-            where.append("(title LIKE ? OR summary LIKE ? OR llm_note LIKE ?)")
-            args.extend([like, like, like])
+            where.append("(title LIKE ? OR summary LIKE ? OR llm_note LIKE ? OR symbols LIKE ?)")
+            args.extend([like, like, like, like])
         wsql = (" WHERE " + " AND ".join(where)) if where else ""
         total = self._conn.execute(
             f"SELECT COUNT(*) FROM news_items{wsql}", args
@@ -131,6 +142,17 @@ class NewsStore:
             )
         )
         return rows, total
+
+    def scored_recent(self, date_from: str, limit: int = 1000) -> list[sqlite3.Row]:
+        """指定日期起的已评分条目（时间倒序），自选雷达聚合用。"""
+        return list(
+            self._conn.execute(
+                "SELECT * FROM news_items "
+                "WHERE importance IS NOT NULL AND published_at >= ? "
+                "ORDER BY published_at DESC LIMIT ?",
+                (date_from, limit),
+            )
+        )
 
     def scored_rows_for_digest(self, day_prefix: str, limit: int = 400) -> list[sqlite3.Row]:
         """取指定本地日期（YYYY-MM-DD 前缀）的已评分条目，按重要性倒序。"""

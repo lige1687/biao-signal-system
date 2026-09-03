@@ -78,6 +78,59 @@ def test_query_filters_and_chinese_like(tmp_path) -> None:
     store.close()
 
 
+def test_query_symbol_direction_and_symbols_like(tmp_path) -> None:
+    store = NewsStore(tmp_path / "n.db")
+    store.insert_items([
+        _item("k1", "英伟达财报大超预期", "2026-08-27T09:00:00+08:00"),
+        _item("k2", "降准落地", "2026-08-27T10:00:00+08:00"),
+        _item("k3", "某公司公告提到 NVDA 供应链", "2026-08-27T11:00:00+08:00"),
+    ])
+    ids = {r["title"]: r["id"] for r in store.fetch_unscored()}
+    store.apply_scores([
+        {"id": ids["英伟达财报大超预期"], "category": "industry", "importance": 8,
+         "direction": "bullish", "symbols": ["NVDA", "英伟达"], "note": ""},
+        {"id": ids["降准落地"], "category": "macro", "importance": 7,
+         "direction": "bullish", "symbols": [], "note": ""},
+        {"id": ids["某公司公告提到 NVDA 供应链"], "category": "industry", "importance": 5,
+         "direction": "bearish", "symbols": [], "note": ""},
+    ])
+    # symbol 过滤：symbols 数组命中 + 标题命中
+    rows, total = store.query_items(symbol="NVDA")
+    assert total == 2
+    assert {r["title"] for r in rows} == {"英伟达财报大超预期", "某公司公告提到 NVDA 供应链"}
+    rows, total = store.query_items(symbol="英伟达")
+    assert total == 1 and rows[0]["title"] == "英伟达财报大超预期"
+    # direction 过滤
+    rows, total = store.query_items(direction="bearish")
+    assert total == 1 and rows[0]["title"] == "某公司公告提到 NVDA 供应链"
+    # 组合：NVDA 且利多
+    rows, total = store.query_items(symbol="NVDA", direction="bullish")
+    assert total == 1 and rows[0]["title"] == "英伟达财报大超预期"
+    # q 搜索现在覆盖 symbols 列（"NVDA" 只出现在 k3 的 symbols 之外场景由 title 命中，
+    # 这里验证 q 命中 symbols JSON 文本本身）
+    rows, total = store.query_items(q='"NVDA"')
+    assert total == 1 and rows[0]["title"] == "英伟达财报大超预期"
+    store.close()
+
+
+def test_scored_recent(tmp_path) -> None:
+    store = NewsStore(tmp_path / "n.db")
+    store.insert_items([
+        _item("k1", "近3天", "2026-08-27T09:00:00+08:00"),
+        _item("k2", "更早", "2026-08-20T09:00:00+08:00"),
+    ])
+    ids = {r["title"]: r["id"] for r in store.fetch_unscored()}
+    store.apply_scores([
+        {"id": ids["近3天"], "category": "macro", "importance": 8,
+         "direction": "bullish", "symbols": [], "note": ""},
+        {"id": ids["更早"], "category": "macro", "importance": 8,
+         "direction": "neutral", "symbols": [], "note": ""},
+    ])
+    rows = store.scored_recent("2026-08-25")
+    assert [r["title"] for r in rows] == ["近3天"]
+    store.close()
+
+
 def test_watermark_runs_digest_roundtrip(tmp_path) -> None:
     store = NewsStore(tmp_path / "n.db")
     assert store.get_watermark("eastmoney") is None

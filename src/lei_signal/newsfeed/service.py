@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import threading
+from datetime import datetime, timedelta
 from typing import Any
 
 from lei_signal.api import config as api_config
@@ -42,6 +43,8 @@ class NewsfeedService:
                 category=_opt("category"),
                 q=_opt("q"),
                 source=_opt("source"),
+                symbol=_opt("symbol"),
+                direction=_opt("direction"),
                 date_from=_opt("from"),
                 date_to=_opt("to"),
                 scored=(_opt("scored") or "all"),
@@ -52,6 +55,109 @@ class NewsfeedService:
             return {"items": [_row_to_dict(r) for r in rows], "total": total}
         finally:
             store.close()
+
+    # ---------------- 自选雷达聚合 ----------------
+
+    @staticmethod
+    def _matches(entry: dict, title: str, row_symbols: list[str]) -> bool:
+        """标的匹配：LLM 提取的 symbols 双向包含，或标题出现标的/简称。"""
+        t = title.lower()
+        for m in entry["matchers"]:
+            if len(m) < 2:
+                continue
+            if m in t:
+                return True
+            for s in row_symbols:
+                s = s.strip().lower()
+                if not s or len(s) < 2:
+                    continue
+                if m in s or s in m:
+                    return True
+        return False
+
+    def watchlist_brief(
+        self, watch_items: list[dict[str, Any]], days: int = 3
+    ) -> dict[str, Any]:
+        """自选标的 × 近 N 天消息聚合 + 全局多空温度（参考层，非交易信号）。
+
+        watch_items 由路由层从 watchlist 表读取（跨模块取数不进 service）。
+        只统计已评分条目（direction 只在打分后才有意义），零消息标的不返回。
+        """
+        days = max(1, min(int(days), 30))
+        date_from = (
+            datetime.now().astimezone() - timedelta(days=days)
+        ).isoformat(timespec="seconds")
+        entries: list[dict[str, Any]] = []
+        for w in watch_items:
+            matchers = {w["symbol"].lower()}
+            name = (w.get("display_name") or "").strip()
+            if name:
+                matchers.add(name.lower())
+            entries.append(
+                {
+                    "symbol": w["symbol"],
+                    "display_name": w.get("display_name"),
+                    "market": w.get("market"),
+                    "matchers": sorted(matchers),
+                    "count": 0,
+                    "bullish": 0,
+                    "bearish": 0,
+                    "neutral": 0,
+                    "latest_at": None,
+                    "top": None,
+                }
+            )
+        mood = {"bullish": 0, "bearish": 0, "neutral": 0, "top_bullish": [], "top_bearish": []}
+        store = self._store()
+        try:
+            for row in store.scored_recent(date_from):
+                d = _row_to_dict(row)
+                direction = d.get("direction")
+                if direction not in ("bullish", "bearish", "neutral"):
+                    direction = "neutral"
+                mood[direction] = mood.get(direction, 0) + 1
+                if (d.get("importance") or 0) >= 6:
+                    key = "top_bullish" if direction == "bullish" else (
+                        "top_bearish" if direction == "bearish" else None
+                    )
+                    if key:
+                        mood[key].append({"title": d["title"], "importance": d["importance"]})
+                for e in entries:
+                    if not self._matches(e, d["title"], d["symbols"]):
+                        continue
+                    e["count"] += 1
+                    e[direction] = e.get(direction, 0) + 1
+                    if not e["latest_at"] or d["published_at"] > e["latest_at"]:
+                        e["latest_at"] = d["published_at"]
+                    if e["top"] is None or (d.get("importance") or 0) >= (e["top"]["importance"] or 0):
+                        e["top"] = {
+                            "id": d["id"],
+                            "title": d["title"],
+                            "direction": d.get("direction"),
+                            "importance": d.get("importance"),
+                            "published_at": d["published_at"],
+                            "url": d.get("url"),
+                            "llm_note": d.get("llm_note"),
+                        }
+        finally:
+            store.close()
+        mood["top_bullish"] = mood["top_bullish"][:5]
+        mood["top_bearish"] = mood["top_bearish"][:5]
+        hits = [
+            {k: v for k, v in e.items() if k != "matchers"}
+            for e in entries
+            if e["count"] > 0
+        ]
+        # 有消息的标的排前：利空/利多的净绝对值大的更靠前，再按消息数。
+        hits.sort(
+            key=lambda e: (
+                abs(e["bullish"] - e["bearish"]),
+                e["count"],
+                e["latest_at"] or "",
+            ),
+            reverse=True,
+        )
+        return {"days": days, "items": hits, "mood": mood}
 
     def digests(self, limit: int = 7) -> list[dict]:
         store = self._store()
