@@ -9,6 +9,7 @@ import {
   KPI_CARDS,
   MODULE_E,
   OPS_LINE,
+  SEMANTIC_CLOSEOUT,
   SESSION_META,
   SYMBOL_CARDS,
   WALK_FORWARD,
@@ -111,6 +112,36 @@ export default function ResearchPage() {
       </div>
 
       <FlagshipSection />
+      <Section
+        title="语义组合收口轮"
+        sub={`${SEMANTIC_CLOSEOUT.dateRange} · ${SEMANTIC_CLOSEOUT.meta}`}
+      >
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead>
+            <tr>
+              <th style={th}>方向</th><th style={th}>判定</th><th style={th}>关键发现</th><th style={th}>归档</th>
+            </tr>
+          </thead>
+          <tbody>
+            {SEMANTIC_CLOSEOUT.rows.map((r) => (
+              <tr
+                key={r.name}
+                style={r.name.includes("★") ? { background: "rgba(77,163,255,.08)" } : undefined}
+              >
+                <td style={{ ...td, fontWeight: 600, whiteSpace: "nowrap" }}>{r.name}</td>
+                <td style={{ ...td, whiteSpace: "nowrap" }}>{r.verdict}</td>
+                <td style={td}>{r.key}</td>
+                <td style={{ ...td, color: "var(--text-faint)", fontSize: 11 }}>
+                  {r.report}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div style={{ marginTop: 8, padding: "8px 12px", background: "var(--bg-main)", borderRadius: 8, fontSize: 13 }}>
+          {SEMANTIC_CLOSEOUT.takeaway}
+        </div>
+      </Section>
       <Section title="报告存档" sub="多路回测统一归档 · 自包含离线 HTML · 仓库 web/public/reports/">
         <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 4 }}>
           {REPORTS_INDEX.map((r) => (

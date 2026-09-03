@@ -95,3 +95,21 @@ export const FALSIFIED = [
 ];
 
 export const OPS_LINE = "模拟盘每日 18:00 自动出简报 · 每周五自动检查美股大底信号 · 全部结论需通过『当时视角』重考才算数";
+
+/** 2026-09-03~04 语义组合收口轮（追加区块，不改上方 08-27/28 内容）。
+ *  数值来自 docs/experiments/ 对应归档（预注册判定线 + 双跑哈希）。 */
+export const SEMANTIC_CLOSEOUT = {
+  dateRange: "2026-09-03 → 09-04",
+  meta: "8 个新组合语义全部做完前置验证或彻底收口 · 3 份决策级/边界级报告",
+  rows: [
+    { name: "主从关系（语义一）", verdict: "❌ 证伪", key: "创业板与中证1000 的信号由同一条全A宽度驱动——『同一个信号的两盏灯』，主从无意义", report: "master-slave-precheck-2026-09-03.md" },
+    { name: "多重确认（语义四）", verdict: "❌ 证伪", key: "唯一过样本线的组合两灯 99% 天数完全一致，分歧日几乎不存在——没有独立信息", report: "p1-increment-test-2026-09-03.md" },
+    { name: "时间尺度分层（语义五）", verdict: "⚖️ 证据不足", key: "等恐慌信号入场平均好 7.7pp，但 59% 的窗口等到关门也没等到——两项精确抵消", report: "timescale-layering-precheck-2026-09-03.md" },
+    { name: "隔夜联动（语义七）", verdict: "❌ 无增量", key: "美股隔夜信息 A股开盘价已全部定价，扣掉跳空后剩余影响为零到略反向", report: "overnight-gate2-increment-2026-09-03.md" },
+    { name: "反脆弱组合（语义三/八）", verdict: "❌ 证伪", key: "『补偿效应』全部来自 2025-26 一轮 AI 行情，另一段可检验时段三个全部跑输；三标的相关 0.79-0.96", report: "antifragile-event-study-2026-09-03.md" },
+    { name: "分批执行（语义九）", verdict: "⚖️ 收口", key: "时间分批判负后，价格阶梯中位 +6.1pp/81% 占优但带 V 型左尾（−6.9pp 中位），追涨兜底判负——只有交换没有免费午餐", report: "price-ladder-execution-2026-09-04.md" },
+    { name: "★ 二元+滞回 vs 现役三档", verdict: "✅ 判『换』", key: "现役四腿 8 层全面占优：Calmar 6/8 · 终值 8/8 · 回撤 8/8 不恶化 · 赢定投 8/8；边界=宽基域（行业 ETF 三档更稳）——待拍板", report: "binary-hysteresis-vs-t3-decision-2026-09-04.md" },
+    { name: "★ 择时有效边界", verdict: "✅ 划清", key: "12 只美股大盘股 40 年：择时引擎 14/14 输定投——宽度择时只对『跟随宽度的 A 股宽基』成立", report: "us-stocks-timing-boundary-2026-09-04.md" },
+  ],
+  takeaway: "一句话总纲：标的跟不跟全市场宽度走——跟，才配用宽度择时（A 股宽基换二元+滞回）；不跟（美股全境/个股/独立行业），不配用任何宽度择时。",
+};
