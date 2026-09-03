@@ -47,7 +47,7 @@
 |---|---|---|---|
 | N | prompt-N-module-conflict-resonance | module-conflict-resonance-ARCHIVE | ✅ |
 | O | prompt-O-pool-recovery | pool-recovery-audit | ✅ |
-| P | prompt-PQ（P：标普替代纳指） | **无** | ❌ 从未执行（=总纲债务五） |
+| P | prompt-PQ（P：标普替代纳指） | spx-vs-ndx-ARCHIVE-2026-09-03 | ✅ 已执行 09-03（标普版年化-1.9pp、回撤略浅） |
 | Q | prompt-PQ（Q：纯宽基vs行业篮子） | 无独立归档 | 〰️ 被 X 阶段三间接回答 |
 | R | prompt-R-full-pool-revalidation | full-pool-revalidation-ARCHIVE | ✅ |
 | S | prompt-S-b-module-reverse-vt | b-module-reverse-vt-ARCHIVE | ✅ |
@@ -57,11 +57,11 @@
 | W | prompt-W-holdings-correlation | holdings-correlation-study | ✅ |
 | X | prompt-X-broad-index-comprehensive | coverage-sync + broad-index 三份 | ✅ 四份产出齐全 |
 
-### 9-03 待发（本轮从总纲拆分，任务书已入库、尚未分发执行）
+### 9-03 本轮拆分（任务书已入库；Y 已执行，其余待分发）
 
 | 编号 | 任务书 | 内容 | 梯队 |
 |---|---|---|---|
-| Y | prompt-Y-pollution-recheck-2026-09-03 | 债务一+三：污染数据复核模块B+中证500重审 | 一 |
+| Y | prompt-Y-pollution-recheck-2026-09-03 | 债务一+三复核：模块B仍成立；510500证据不足 | 一 · ✅已执行 |
 | AE | prompt-AE-staged-entry-precheck-2026-09-03 | 语义九前置：分批执行叠加现有信号 | 一 |
 | Z | prompt-Z-antifragile-precheck-2026-09-03 | 语义三前置：反脆弱补偿效应事件研究 | 一 |
 | AA | prompt-AA-master-slave-precheck-2026-09-03 | 语义一前置：主从关系依赖性验证 | 二 |
@@ -151,6 +151,8 @@
 - `data-quality-jump-audit-2026-09-02.md` — 13处复权断裂审计（修平方法出处）
 - `holdings-correlation-study-2026-09-02.md` — 用户持仓×已验证标的相关性（任务W）
 - `pool-recovery-audit-2026-09-02.md` — 深池环境盘点（任务O）
+- `pollution-recheck-moduleB-csi500-2026-09-03.md` — 债务一+三复核（任务Y）
+- `spx-vs-ndx-ARCHIVE-2026-09-03.md` — 标普替代纳指全量对比（任务P）
 
 ## 3. raw/ 数据目录对照
 
@@ -175,14 +177,21 @@
 | gap_fill / holdings_correlation | broad-index-gap-fill / holdings-correlation |
 | ashare_axes / cross_check / etf_breadth / stock_breadth | —（未对账） |
 | backtest-runs-snapshot-2026-08-31 / pool-snapshot-2026-08-25 | 环境保全快照（非单一实验） |
+| pollution_recheck / spx_vs_ndx | pollution-recheck / spx-vs-ndx（任务Y/P，09-03） |
 
 ## 4. 悬案与未执行清单
 
-- **P（标普替代纳指）从未执行** — 任务书 `prompt-PQ` 在库，Q 部分被 X 阶段三
-  间接回答；是否补做等用户表态（总纲债务五）。
+- ~~P（标普替代纳指）~~ **已执行（09-03，spx-vs-ndx-ARCHIVE）** — 两只版换腿：
+  年化 15.9%→14.0%（-1.9pp）、回撤 -25.6%→-24.0%；防守版纳指档保险性价比更高
+  （13.8 vs 8.7）。附勘误：原防守版归档"纳指5档"标签与代码不符（实为3档）。
 - **数据断裂正式修复未立项** — `data-quality-jump-audit` 第7节，属生产数据
-  操作，等用户拍板（总纲债务二）。
-- **模块B 45% 收益复核、中证500 重审** — 已拆成任务 Y 待发（总纲债务一/三）。
+  操作，等用户拍板（总纲债务二）。新增两条待立项线索：①HEAD 引擎代码断链
+  （engine.py 引用已丢失模块，复现靠 git 悬空对象重建，gc 后会失效）；
+  ②512690 深池 2020-02-03 单日 +25.1% 超物理限制，不在审计 13 清单内。
+- **债务一/三已复核（09-03，pollution-recheck 归档）** — 模块B宽基正收益仍
+  成立（三跑分解），且审计 §5"b-adaptation 7宽基受污染"系跨数据源误推
+  （该实验用深池数据、深池无跳变；勘误登记于此，不改原归档）；中证500 重审
+  落"证据不足"中间态（翻案三条件仅过一条，判负触发条件也未命中）。
 - **总纲债务四（J–N/P–S/U–V 去向不明）已基本自解** — 23ca826 补齐了任务书
   原文和 J/K/L/M/T/U 归档，实际残留只有上面两条。
 - timing-sweep 时代引用的 `vt-signal / time-stop-tail` 两份后续归档，即

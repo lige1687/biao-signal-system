@@ -1,0 +1,458 @@
+{
+ "task": "债务一：模块B宽基7池 cb40/cl8% 污染重算（预注册）",
+ "original_archived": {
+  "source": "raw/b_adaptation/b_spectrum_summary.json + spectrum.log",
+  "N": 37,
+  "expR": 0.944,
+  "IS": 0.281,
+  "OOS": 2.326,
+  "top1": "512100.SS",
+  "top1_share": [
+   0.4,
+   0.5
+  ]
+ },
+ "params": {
+  "pool": [
+   "510050.SS",
+   "510300.SS",
+   "510500.SS",
+   "512100.SS",
+   "159901.SZ",
+   "159915.SZ",
+   "588000.SS"
+  ],
+  "module": "B",
+  "entry": "breakout",
+  "exit": "b3_dual",
+  "volume_confirm": false,
+  "cb": 40,
+  "cl": 0.08,
+  "rr_min": null,
+  "fee": "standard",
+  "limit_guard": true,
+  "oos_split": "数据末尾往前2年"
+ },
+ "env_rebuild": {
+  "engine_service_match_HEAD": {
+   "engine.py": true,
+   "service.py": true
+  },
+  "snapshot_sha256_16": {
+   "src/lei_signal/rules/first_ma_pullback.py": "cbad98a136135a93",
+   "src/lei_signal/rules/dense_breakout.py": "ffb37ff38e99c31c",
+   "src/lei_signal/backtest/engine.py": "ca9fe8344aa5580e",
+   "src/lei_signal/backtest/service.py": "95992b047728f719",
+   "configs/rules.v2.yaml": "c8f778734b9a36a5"
+  }
+ },
+ "forensics": {
+  "F1_jump_dates_in_pool": {
+   "510500.SS": [
+    {
+     "date": "2015-04-15",
+     "in_pool_range": false
+    },
+    {
+     "date": "2022-08-29",
+     "in_pool_range": true,
+     "pool_single_day": -0.0007
+    }
+   ],
+   "512100.SS": [
+    {
+     "date": "2022-09-05",
+     "in_pool_range": true,
+     "pool_single_day": 0.0104
+    }
+   ]
+  },
+  "F2_pool_absdaily_gt12pct": {
+   "510050.SS": {
+    "range": [
+     "2016-08-25",
+     "2026-08-25"
+    ],
+    "big_days": [],
+    "legal_20cm_board": false
+   },
+   "510300.SS": {
+    "range": [
+     "2016-08-24",
+     "2026-08-24"
+    ],
+    "big_days": [],
+    "legal_20cm_board": false
+   },
+   "510500.SS": {
+    "range": [
+     "2016-08-24",
+     "2026-08-24"
+    ],
+    "big_days": [],
+    "legal_20cm_board": false
+   },
+   "512100.SS": {
+    "range": [
+     "2016-11-04",
+     "2026-08-25"
+    ],
+    "big_days": [],
+    "legal_20cm_board": false
+   },
+   "159901.SZ": {
+    "range": [
+     "2016-08-25",
+     "2026-08-25"
+    ],
+    "big_days": [],
+    "legal_20cm_board": false
+   },
+   "159915.SZ": {
+    "range": [
+     "2016-08-24",
+     "2026-08-24"
+    ],
+    "big_days": [
+     {
+      "date": "2024-09-30",
+      "ret": 0.2
+     },
+     {
+      "date": "2024-10-08",
+      "ret": 0.1998
+     },
+     {
+      "date": "2024-10-09",
+      "ret": -0.1628
+     },
+     {
+      "date": "2025-04-07",
+      "ret": -0.1243
+     }
+    ],
+    "legal_20cm_board": true
+   },
+   "588000.SS": {
+    "range": [
+     "2020-11-16",
+     "2026-08-24"
+    ],
+    "big_days": [
+     {
+      "date": "2024-09-30",
+      "ret": 0.1995
+     },
+     {
+      "date": "2024-10-08",
+      "ret": 0.2
+     },
+     {
+      "date": "2024-10-18",
+      "ret": 0.1242
+     }
+    ],
+    "legal_20cm_board": true
+   }
+  },
+  "F3_pool_file_evidence": {
+   "510050.SS": {
+    "provider": "tencent",
+    "fetched_at_utc": "2026-08-25T11:58:36.004482+00:00",
+    "rows": 2427,
+    "file_mtime": "2026-08-25 19:58:36"
+   },
+   "510300.SS": {
+    "provider": "tencent",
+    "fetched_at_utc": "2026-08-24T15:56:48.832073+00:00",
+    "rows": 2427,
+    "file_mtime": "2026-08-25 00:19:18"
+   },
+   "510500.SS": {
+    "provider": "tencent",
+    "fetched_at_utc": "2026-08-25T11:58:28.143555+00:00",
+    "rows": 2427,
+    "file_mtime": "2026-08-25 19:58:28"
+   },
+   "512100.SS": {
+    "provider": "tencent",
+    "fetched_at_utc": "2026-08-25T11:58:32.044189+00:00",
+    "rows": 2382,
+    "file_mtime": "2026-08-25 19:58:32"
+   },
+   "159901.SZ": {
+    "provider": "tencent",
+    "fetched_at_utc": "2026-08-25T11:58:39.954255+00:00",
+    "rows": 2426,
+    "file_mtime": "2026-08-25 19:58:39"
+   },
+   "159915.SZ": {
+    "provider": "tencent",
+    "fetched_at_utc": "2026-08-24T15:56:45.259278+00:00",
+    "rows": 2426,
+    "file_mtime": "2026-08-25 00:19:18"
+   },
+   "588000.SS": {
+    "provider": "eastmoney",
+    "fetched_at_utc": "2026-08-24T15:49:06.932951+00:00",
+    "rows": 1401,
+    "file_mtime": "2026-08-25 00:19:18"
+   }
+  },
+  "F4_timing_same_dates": {
+   "510500.SS": [
+    {
+     "date": "2015-04-15",
+     "timing_single_day": 2.4855
+    },
+    {
+     "date": "2022-08-29",
+     "timing_single_day": -0.1274
+    }
+   ],
+   "512100.SS": [
+    {
+     "date": "2022-09-05",
+     "timing_single_day": 1.7627
+    }
+   ]
+  }
+ },
+ "pool_clean_no_jumps": true,
+ "flatten_logs": {
+  "510500.SS": [
+   {
+    "date": "2015-04-15",
+    "ratio": 3.4855,
+    "in_pool_range": true
+   },
+   {
+    "date": "2022-08-29",
+    "ratio": 0.8726,
+    "in_pool_range": true
+   }
+  ],
+  "512100.SS": [
+   {
+    "date": "2022-09-05",
+    "ratio": 2.7627,
+    "in_pool_range": true
+   }
+  ]
+ },
+ "runs": {
+  "RUN-R_pool_as_is": {
+   "tag": "RUN-R_pool_as_is",
+   "N": 37,
+   "expR": 0.9441,
+   "IS": 0.2809,
+   "OOS": 2.3257,
+   "profit_factor": 3.4467,
+   "win_rate": 0.3784,
+   "total_r": 34.9303,
+   "top1_symbol": "512100.SS",
+   "top1_total_r": 15.8302,
+   "top1_share": 0.4532,
+   "ex_512100_mean_r": 0.5457,
+   "by_symbol": [
+    {
+     "symbol": "512100.SS",
+     "N": 2,
+     "expR": 7.9151,
+     "total_r": 15.8302
+    },
+    {
+     "symbol": "510050.SS",
+     "N": 7,
+     "expR": 1.4223,
+     "total_r": 9.9563
+    },
+    {
+     "symbol": "159901.SZ",
+     "N": 7,
+     "expR": 0.7086,
+     "total_r": 4.9602
+    },
+    {
+     "symbol": "510500.SS",
+     "N": 11,
+     "expR": 0.258,
+     "total_r": 2.8376
+    },
+    {
+     "symbol": "510300.SS",
+     "N": 9,
+     "expR": 0.2514,
+     "total_r": 2.2627
+    },
+    {
+     "symbol": "588000.SS",
+     "N": 1,
+     "expR": -0.9167,
+     "total_r": -0.9167
+    }
+   ],
+   "trades_512100": [
+    {
+     "signal_date": "2025-06-05",
+     "entry_date": "2025-06-06",
+     "exit_reason": "exit_b3_dual",
+     "r_net": -0.1395
+    },
+    {
+     "signal_date": "2025-06-23",
+     "entry_date": "2025-06-24",
+     "exit_reason": "exit_b3_dual",
+     "r_net": 15.9697
+    }
+   ]
+  },
+  "RUN-P_pollution_counterfactual": {
+   "tag": "RUN-P_pollution_counterfactual",
+   "N": 37,
+   "expR": 0.9528,
+   "IS": 0.2954,
+   "OOS": 2.3223,
+   "profit_factor": 3.5257,
+   "win_rate": 0.3784,
+   "total_r": 35.2531,
+   "top1_symbol": "512100.SS",
+   "top1_total_r": 15.4968,
+   "top1_share": 0.4396,
+   "ex_512100_mean_r": 0.5811,
+   "by_symbol": [
+    {
+     "symbol": "512100.SS",
+     "N": 3,
+     "expR": 5.1656,
+     "total_r": 15.4968
+    },
+    {
+     "symbol": "510050.SS",
+     "N": 7,
+     "expR": 1.4223,
+     "total_r": 9.9563
+    },
+    {
+     "symbol": "159901.SZ",
+     "N": 7,
+     "expR": 0.7086,
+     "total_r": 4.9602
+    },
+    {
+     "symbol": "510500.SS",
+     "N": 10,
+     "expR": 0.3494,
+     "total_r": 3.4938
+    },
+    {
+     "symbol": "510300.SS",
+     "N": 9,
+     "expR": 0.2514,
+     "total_r": 2.2627
+    },
+    {
+     "symbol": "588000.SS",
+     "N": 1,
+     "expR": -0.9167,
+     "total_r": -0.9167
+    }
+   ],
+   "trades_512100": [
+    {
+     "signal_date": "2021-01-04",
+     "entry_date": "2021-01-05",
+     "exit_reason": "exit_b3_dual",
+     "r_net": -0.3333
+    },
+    {
+     "signal_date": "2025-06-05",
+     "entry_date": "2025-06-06",
+     "exit_reason": "exit_b3_dual",
+     "r_net": -0.1395
+    },
+    {
+     "signal_date": "2025-06-23",
+     "entry_date": "2025-06-24",
+     "exit_reason": "exit_b3_dual",
+     "r_net": 15.9697
+    }
+   ]
+  },
+  "RUN-F_flattened": {
+   "tag": "RUN-F_flattened",
+   "N": 38,
+   "expR": 0.8588,
+   "IS": 0.2195,
+   "OOS": 2.2439,
+   "profit_factor": 3.0585,
+   "win_rate": 0.3421,
+   "total_r": 32.6338,
+   "top1_symbol": "512100.SS",
+   "top1_total_r": 14.7577,
+   "top1_share": 0.4522,
+   "ex_512100_mean_r": 0.5107,
+   "by_symbol": [
+    {
+     "symbol": "512100.SS",
+     "N": 3,
+     "expR": 4.9192,
+     "total_r": 14.7577
+    },
+    {
+     "symbol": "510050.SS",
+     "N": 7,
+     "expR": 1.4223,
+     "total_r": 9.9563
+    },
+    {
+     "symbol": "159901.SZ",
+     "N": 7,
+     "expR": 0.7086,
+     "total_r": 4.9602
+    },
+    {
+     "symbol": "510300.SS",
+     "N": 9,
+     "expR": 0.2514,
+     "total_r": 2.2627
+    },
+    {
+     "symbol": "510500.SS",
+     "N": 11,
+     "expR": 0.1467,
+     "total_r": 1.6136
+    },
+    {
+     "symbol": "588000.SS",
+     "N": 1,
+     "expR": -0.9167,
+     "total_r": -0.9167
+    }
+   ],
+   "trades_512100": [
+    {
+     "signal_date": "2021-01-04",
+     "entry_date": "2021-01-05",
+     "exit_reason": "exit_b3_dual",
+     "r_net": -0.3333
+    },
+    {
+     "signal_date": "2025-06-05",
+     "entry_date": "2025-06-06",
+     "exit_reason": "exit_b3_dual",
+     "r_net": -0.3445
+    },
+    {
+     "signal_date": "2025-06-23",
+     "entry_date": "2025-06-24",
+     "exit_reason": "exit_b3_dual",
+     "r_net": 15.4355
+    }
+   ]
+  }
+ },
+ "reproduction_anchor_ok": true,
+ "verdict_pre_registered": "45%正收益仍成立",
+ "branch": "分支甲（池无跳变）"
+}
