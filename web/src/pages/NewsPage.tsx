@@ -1,7 +1,7 @@
-import { useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { newsApi } from "../api/client";
+import { api, newsApi } from "../api/client";
 import type { NewsItem, NewsMood, NewsWatchEntry } from "../types";
 
 /**
@@ -14,10 +14,13 @@ import type { NewsItem, NewsMood, NewsWatchEntry } from "../types";
  *
  * 页面结构（按信息优先级，2026-08-27 用户反馈调整 + 2026-09-03 交易联动）：
  *   1. 自选消息雷达 = 我的自选 × 近3天消息：多空温度计 + 每标的多空计数/最新一条，
+ *      卡片叠加该标的当前交易信号徽标（买·行动/卖·硬…）——消息与技术面同屏对照；
  *      点击标的直达该标的消息流（自动放宽到近30天全量）——把消息对齐到自选视角
  *   2. 今日要点 = 最新简报的 top_events（当天最关键的几条，大卡）+ 分类归纳（折叠）
  *   3. 博主观点 = 按博主分组（谁说了啥），每人近 2 天最新观点
  *   4. 关键消息 = 默认只看近 1 天 importance≥6，「显示全部」放宽；支持方向过滤（利多/利空）
+ *
+ * 交易联动入口：/news?symbol=NVDA 从看盘页信号行跳入，直接过滤该标的消息。
  */
 
 const CATEGORY_CN: Record<string, string> = {
@@ -258,6 +261,29 @@ function MoodBar({
   );
 }
 
+/** 标的 → 当前交易信号徽标（与看盘信号横幅同一数据源，卖点优先于买点）。 */
+function useSignalBadges(): Map<string, { label: string; cls: string }> {
+  const { data } = useQuery({
+    queryKey: ["signalsToday"],
+    queryFn: () => api.signalsToday(),
+    staleTime: 60_000,
+    retry: false,
+  });
+  return useMemo(() => {
+    const m = new Map<string, { label: string; cls: string }>();
+    if (!data) return m;
+    const put = (list: { symbol: string }[], label: string, cls: string) => {
+      for (const s of list) if (!m.has(s.symbol)) m.set(s.symbol, { label, cls });
+    };
+    put(data.sell_hard ?? [], "卖·硬", "nf-sig-hard");
+    put(data.actionable ?? [], "买·行动", "nf-sig-buy");
+    put(data.sell_warn ?? [], "卖·预警", "nf-sig-warn");
+    put(data.waiting ?? [], "买·等待", "nf-sig-wait");
+    put(data.sell_soft ?? [], "卖·提醒", "nf-sig-soft");
+    return m;
+  }, [data]);
+}
+
 /** 自选消息雷达：我的自选 × 近 N 天消息——多空温度计 + 标的卡（点击直达筛选）。 */
 function WatchlistRadar({
   selected,
@@ -275,6 +301,7 @@ function WatchlistRadar({
     queryFn: () => newsApi.watchlistBrief(3),
     staleTime: 5 * 60_000,
   });
+  const signals = useSignalBadges();
   if (!data || (data.items.length === 0 && data.mood.bullish + data.mood.bearish + data.mood.neutral === 0))
     return null;
   return (
@@ -282,51 +309,59 @@ function WatchlistRadar({
       <div className="nf-digest-head">
         <h2>自选消息雷达</h2>
         <span className="text-faint">
-          近{data.days}天 · {data.items.length} 个标的有消息 · 对齐看盘自选
+          近{data.days}天 · {data.items.length} 个标的有消息 · 对齐看盘自选与信号
         </span>
       </div>
       <MoodBar mood={data.mood} days={data.days} direction={direction} onPick={onPickDirection} />
       {data.items.length > 0 && (
         <div className="nf-radar-grid">
-          {data.items.map((e: NewsWatchEntry) => (
-            <div
-              key={e.symbol}
-              role="button"
-              tabIndex={0}
-              className={`nf-radar-card ${selected === e.symbol ? "active" : ""} ${
-                e.bearish > e.bullish ? "bearish" : e.bullish > e.bearish ? "bullish" : ""
-              }`}
-              title={`${e.symbol} · 共${e.count}条（利多${e.bullish}/中性${e.neutral}/利空${e.bearish}）`}
-              onClick={() => onPickSymbol(e.symbol)}
-              onKeyDown={(ev) => {
-                if (ev.key === "Enter" || ev.key === " ") onPickSymbol(e.symbol);
-              }}
-            >
-              <span className="nf-radar-name">{e.display_name ?? e.symbol}</span>
-              <span className="nf-radar-counts">
-                {e.bullish > 0 && <span className="up">↑{e.bullish}</span>}
-                {e.bearish > 0 && <span className="down">↓{e.bearish}</span>}
-                {e.bullish === 0 && e.bearish === 0 && (
-                  <span className="text-faint">{e.count}条</span>
-                )}
-              </span>
-              {e.top && (
-                <span className="nf-radar-top" title={e.top.llm_note ?? e.top.title}>
-                  {e.top.title}
+          {data.items.map((e: NewsWatchEntry) => {
+            const sig = signals.get(e.symbol);
+            const heavy = (e.top?.importance ?? 0) >= 8;
+            return (
+              <div
+                key={e.symbol}
+                role="button"
+                tabIndex={0}
+                className={`nf-radar-card ${selected === e.symbol ? "active" : ""} ${
+                  e.bearish > e.bullish ? "bearish" : e.bullish > e.bearish ? "bullish" : ""
+                }`}
+                title={`${e.symbol} · 共${e.count}条（利多${e.bullish}/中性${e.neutral}/利空${e.bearish}）`}
+                onClick={() => onPickSymbol(e.symbol)}
+                onKeyDown={(ev) => {
+                  if (ev.key === "Enter" || ev.key === " ") onPickSymbol(e.symbol);
+                }}
+              >
+                <span className="nf-radar-name-row">
+                  <span className="nf-radar-name">{e.display_name ?? e.symbol}</span>
+                  {sig && <span className={`nf-radar-signal ${sig.cls}`}>{sig.label}</span>}
                 </span>
-              )}
-              <span className="nf-radar-foot">
-                {e.latest_at && <span className="nf-radar-time">{dayLabel(e.latest_at)}</span>}
-                <Link
-                  to={`/symbol/${encodeURIComponent(e.symbol)}`}
-                  className="nf-radar-link"
-                  onClick={(ev) => ev.stopPropagation()}
-                >
-                  看盘 ↗
-                </Link>
-              </span>
-            </div>
-          ))}
+                <span className="nf-radar-counts">
+                  {e.bullish > 0 && <span className="up">↑{e.bullish}</span>}
+                  {e.bearish > 0 && <span className="down">↓{e.bearish}</span>}
+                  {heavy && <span className="nf-radar-heavy" title="最高分消息 ≥8 分">重磅</span>}
+                  {e.bullish === 0 && e.bearish === 0 && !heavy && (
+                    <span className="text-faint">{e.count}条</span>
+                  )}
+                </span>
+                {e.top && (
+                  <span className="nf-radar-top" title={e.top.llm_note ?? e.top.title}>
+                    {e.top.title}
+                  </span>
+                )}
+                <span className="nf-radar-foot">
+                  {e.latest_at && <span className="nf-radar-time">{dayLabel(e.latest_at)}</span>}
+                  <Link
+                    to={`/symbol/${encodeURIComponent(e.symbol)}`}
+                    className="nf-radar-link"
+                    onClick={(ev) => ev.stopPropagation()}
+                  >
+                    看盘 ↗
+                  </Link>
+                </span>
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
@@ -407,13 +442,27 @@ export default function NewsPage() {
   const [range, setRange] = useState<RangeKey>("1d");
   const [search, setSearch] = useState("");
   const [queryText, setQueryText] = useState("");
-  const [symbolFilter, setSymbolFilter] = useState(""); // 自选雷达/标的 chip 点击筛选
   const [directionFilter, setDirectionFilter] = useState(""); // 利多/利空专项排查
   const debounceRef = useRef<number | null>(null);
   const queryClient = useQueryClient();
   const [running, setRunning] = useState(false);
   const [runError, setRunError] = useState<string | null>(null);
   const pollRef = useRef<number | null>(null);
+
+  // 标的筛选以 URL ?symbol= 为唯一事实来源：看盘信号行 /news?symbol=XXX 跳入即生效，
+  // 刷新/分享链接保持状态；清除时清空查询串。
+  const [searchParams, setSearchParams] = useSearchParams();
+  const symbolFilter = searchParams.get("symbol") ?? "";
+  useEffect(() => {
+    if (symbolFilter) {
+      setFocus(false);
+      setRange("30d");
+    }
+  }, [symbolFilter]);
+  const pickSymbol = (s: string) => {
+    const next = symbolFilter === s ? "" : s;
+    setSearchParams(next ? { symbol: next } : {}, { replace: true });
+  };
 
   const effectiveRange: RangeKey = focus ? "1d" : range;
   const from = useMemo(() => {
@@ -438,15 +487,6 @@ export default function NewsPage() {
       }),
     staleTime: 60_000,
   });
-
-  /** 选中标的：自动放宽到近30天全量（雷达场景看的是"这只标的的消息史"）。 */
-  const pickSymbol = (s: string) => {
-    setSymbolFilter((prev) => (prev === s ? "" : s));
-    if (s !== symbolFilter) {
-      setFocus(false);
-      setRange("30d");
-    }
-  };
 
   const onSearchInput = (value: string) => {
     setSearch(value);
@@ -556,7 +596,7 @@ export default function NewsPage() {
           </button>
         </div>
         {symbolFilter && (
-          <button className="nf-filter-chip" onClick={() => setSymbolFilter("")}>
+          <button className="nf-filter-chip" onClick={() => pickSymbol(symbolFilter)}>
             标的：{symbolFilter} ✕
           </button>
         )}
