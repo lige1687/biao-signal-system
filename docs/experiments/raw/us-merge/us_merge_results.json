@@ -1,0 +1,121 @@
+{
+  "combo_5050": {
+    "cagr": 0.0694,
+    "calmar": 0.2117,
+    "max_dd": -0.3279
+  },
+  "config": {
+    "COMBO_FLAT": 1.0,
+    "COMBO_PASS": 1.1,
+    "CORR_HIGH": 0.6,
+    "CORR_LINE": 0.3,
+    "DEFENSE_DD_TOL": 0.03,
+    "OOS_CUT": "2024-09-01"
+  },
+  "leg1_defense": {
+    "cagr": 0.0497,
+    "calmar": 0.2667,
+    "max_dd": -0.1862
+  },
+  "leg2_module_e_v1h50": {
+    "cagr": 0.0857,
+    "calmar": 0.1635,
+    "max_dd": -0.5244
+  },
+  "n_months": 479,
+  "segments": {
+    "first_half": {
+      "combo50": {
+        "cagr": 0.0659,
+        "calmar": 0.2176,
+        "max_dd": -0.3027
+      },
+      "leg1": {
+        "cagr": 0.0513,
+        "calmar": 0.2953,
+        "max_dd": -0.1736
+      },
+      "leg2": {
+        "cagr": 0.0776,
+        "calmar": 0.1668,
+        "max_dd": -0.4651
+      }
+    },
+    "oos_2024_09": {
+      "combo50": {
+        "cagr": 0.1036,
+        "calmar": 1.6119,
+        "max_dd": -0.0643
+      },
+      "leg1": {
+        "cagr": 0.054,
+        "calmar": 0.9774,
+        "max_dd": -0.0552
+      },
+      "leg2": {
+        "cagr": 0.1532,
+        "calmar": 1.9795,
+        "max_dd": -0.0774
+      }
+    },
+    "second_half": {
+      "combo50": {
+        "cagr": 0.072,
+        "calmar": 0.2196,
+        "max_dd": -0.3279
+      },
+      "leg1": {
+        "cagr": 0.0476,
+        "calmar": 0.2554,
+        "max_dd": -0.1862
+      },
+      "leg2": {
+        "cagr": 0.0926,
+        "calmar": 0.1766,
+        "max_dd": -0.5244
+      }
+    }
+  },
+  "sensitivity": {
+    "leg1_only_for_reference": {
+      "cagr": 0.0497,
+      "calmar": 0.2667,
+      "max_dd": -0.1862
+    },
+    "no_rebalance_5050": {
+      "cagr": 0.0732,
+      "calmar": 0.206,
+      "max_dd": -0.3555
+    },
+    "w40": {
+      "cagr": 0.073,
+      "calmar": 0.1973,
+      "max_dd": -0.3698
+    },
+    "w60": {
+      "cagr": 0.0657,
+      "calmar": 0.2315,
+      "max_dd": -0.2839
+    }
+  },
+  "verdicts": {
+    "JCombo": {
+      "ratio_vs_best_single": 0.7938,
+      "verdict": "no_increment"
+    },
+    "JCorr": {
+      "pearson": 0.5718,
+      "spearman": 0.6779,
+      "verdict": "mid"
+    },
+    "JDefense": {
+      "combo_mdd": -0.3279,
+      "leg1_mdd": -0.1862,
+      "verdict": "defense_destroyed"
+    }
+  },
+  "window": [
+    "1986-10",
+    "2026-08"
+  ]
+}
