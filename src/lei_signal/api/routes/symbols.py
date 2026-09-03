@@ -22,6 +22,7 @@ from lei_signal.api.config import DETAIL_MAX_BARS, RECENT_EVENTS_LIMIT
 from lei_signal.api.explanations import CONCEPTS, MARK_KIND_CONCEPTS, lookup
 from lei_signal.api.market_context_service import MarketContextDTO, MarketContextService
 from lei_signal.api.macd_events import build_macd_events
+from lei_signal.api.news_marks import build_news_marks
 from lei_signal.api.overview import build_today_overview
 from lei_signal.api.quotes import TencentQuoteProvider
 from lei_signal.api.routes.dashboard import assemble_dashboard
@@ -1517,6 +1518,17 @@ def _detail_dto(
     # 属于冻结的 Streamlit 目录（见 AGENTS.md），扩展数据一律在这里叠加。
     chart = serialize_result(result, color_mode="red_green", max_bars=DETAIL_MAX_BARS)
     chart["macdEvents"] = build_macd_events(result, max_bars=DETAIL_MAX_BARS)
+    # 消息日标记（参考层）：该标的 importance≥6 的消息按交易日聚合上图，
+    # 消息面与技术面同屏对照；newsfeed 无数据/查询失败静默降级为空列表。
+    try:
+        chart["newsMarks"] = build_news_marks(
+            config.sqlite_path(),
+            symbol=symbol,
+            display_name=display_name,
+            dates=list(chart.get("dates") or []),
+        )
+    except Exception:  # noqa: BLE001 - 展示层增强，失败不影响详情主流程
+        chart["newsMarks"] = []
 
     return SymbolDetailDTO(
         symbol=symbol,

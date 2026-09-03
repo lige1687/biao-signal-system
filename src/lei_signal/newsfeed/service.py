@@ -108,8 +108,14 @@ class NewsfeedService:
                 }
             )
         mood = {"bullish": 0, "bearish": 0, "neutral": 0, "top_bullish": [], "top_bearish": []}
+        daily: dict[str, dict] = {}
         store = self._store()
         try:
+            trend_days = 7
+            trend_from = (
+                datetime.now().astimezone() - timedelta(days=trend_days)
+            ).strftime("%Y-%m-%d")
+            daily = {d["day"]: d for d in store.mood_by_day(trend_from)}
             for row in store.scored_recent(date_from):
                 d = _row_to_dict(row)
                 direction = d.get("direction")
@@ -143,6 +149,17 @@ class NewsfeedService:
             store.close()
         mood["top_bullish"] = mood["top_bullish"][:5]
         mood["top_bearish"] = mood["top_bearish"][:5]
+        # 逐日多空走势（近7天，缺数据的日期补零）——温度计的"拐点"维度
+        now = datetime.now().astimezone()
+        trend_days = 7
+        zero = {"bullish": 0, "bearish": 0, "neutral": 0}
+        mood["daily"] = [
+            {
+                "day": (now - timedelta(days=i)).strftime("%Y-%m-%d"),
+                **{k: daily.get((now - timedelta(days=i)).strftime("%Y-%m-%d"), zero)[k] for k in zero},
+            }
+            for i in range(trend_days - 1, -1, -1)
+        ]
         hits = [
             {k: v for k, v in e.items() if k != "matchers"}
             for e in entries

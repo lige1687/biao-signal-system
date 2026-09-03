@@ -117,6 +117,12 @@ def test_watchlist_brief(tmp_path, monkeypatch):
     assert body["mood"]["bullish"] >= 1 and body["mood"]["bearish"] >= 1
     assert body["mood"]["top_bullish"][0]["title"] == "英伟达新品发布"
     assert body["mood"]["top_bearish"][0]["title"] == "红利ETF 规模缩水"
+    # 逐日多空走势：近7天逐日补零，当天两条消息计入
+    daily = body["mood"]["daily"]
+    assert len(daily) == 7
+    assert [d["day"] for d in daily] == sorted(d["day"] for d in daily)
+    today = daily[-1]
+    assert today["bullish"] >= 1 and today["bearish"] >= 1
 
 
 def test_digests_and_status_and_run(tmp_path, monkeypatch):

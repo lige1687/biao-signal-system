@@ -635,6 +635,8 @@ export interface ChartPayload {
   macdHist: (number | null)[];
   /** MACD 副图事件日（金叉/死叉/上穿0轴/下穿0轴），后端 macd_strength 规则判定。 */
   macdEvents: MacdEvent[];
+  /** K 线消息日标记（importance≥6 按交易日聚合），参考层、非交易信号。 */
+  newsMarks?: NewsMark[];
   states: string[];
   volumes: number[];
   volStates: string[];
@@ -684,6 +686,15 @@ export interface StructureMark {
 }
 
 /** MACD 副图事件日。研究代理：强度描述，不构成买卖点（macd-reading 口径）。 */
+/** K 线消息日标记（后端 news_marks 聚合，importance≥6）。 */
+export interface NewsMark {
+  date: string;
+  direction: string; // bullish | bearish | neutral（当日最高分条目定调）
+  importance: number;
+  count: number;
+  titles: string[];
+}
+
 export interface MacdEvent {
   date: string;
   type: "golden_cross" | "death_cross" | "zero_cross_up" | "zero_cross_down";
@@ -1959,6 +1970,8 @@ export interface NewsMood {
   neutral: number;
   top_bullish: { title: string; importance: number }[];
   top_bearish: { title: string; importance: number }[];
+  /** 逐日多空走势（近7天，缺数据补零）——2026-09-04 起。 */
+  daily?: { day: string; bullish: number; bearish: number; neutral: number }[];
 }
 
 export interface NewsWatchlistBrief {

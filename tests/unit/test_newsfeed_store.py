@@ -134,6 +134,28 @@ def test_scored_recent(tmp_path) -> None:
     store.close()
 
 
+def test_mood_by_day(tmp_path) -> None:
+    store = NewsStore(tmp_path / "n.db")
+    store.insert_items([
+        _item("k1", "多", "2026-08-27T09:00:00+08:00"),
+        _item("k2", "空", "2026-08-27T10:00:00+08:00"),
+        _item("k3", "早于窗口", "2026-08-10T10:00:00+08:00"),
+    ])
+    ids = {r["title"]: r["id"] for r in store.fetch_unscored()}
+    store.apply_scores([
+        {"id": ids["多"], "category": "macro", "importance": 8,
+         "direction": "bullish", "symbols": [], "note": ""},
+        {"id": ids["空"], "category": "macro", "importance": 7,
+         "direction": "bearish", "symbols": [], "note": ""},
+        {"id": ids["早于窗口"], "category": "macro", "importance": 7,
+         "direction": "bullish", "symbols": [], "note": ""},
+    ])
+    rows = store.mood_by_day("2026-08-20")
+    assert len(rows) == 1
+    assert rows[0] == {"day": "2026-08-27", "bullish": 1, "bearish": 1, "neutral": 0}
+    store.close()
+
+
 def test_watermark_runs_digest_roundtrip(tmp_path) -> None:
     store = NewsStore(tmp_path / "n.db")
     assert store.get_watermark("eastmoney") is None

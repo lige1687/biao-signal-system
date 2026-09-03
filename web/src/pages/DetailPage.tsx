@@ -45,6 +45,7 @@ const MARK_SOURCE_CN: Record<MarkPick["kind"], string> = {
   top_line: "图上参考线 · 顶部颈线",
   highlight_price: "买点分析 · 价位标注",
   macd_event: "MACD 副图标记 · 强度事件",
+  news_mark: "K线标记 · 消息日（参考层）",
 };
 
 /** 横线类点击（B1 / C 点 / 颈线）：只有价位，没有日期。 */
