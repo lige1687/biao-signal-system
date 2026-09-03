@@ -6,11 +6,15 @@
  *  [刷新] 调 POST /api/signals/today/refresh (按当前时间自动选 as_of).
  *  买·受阻默认折叠 (<details>); 数据不可用显式列出, 不静默.
  *  获取失败显式红字提示 (不误显「今日尚未扫描」); 徽标旁给出上次扫描时刻.
+ *
+ *  2026-09-04 消息联动: 行头叠加 📰 近3天消息标记 (利多↑/利空↓计数),
+ *  点击直达 /news?symbol=… 看该标的消息流——技术信号 × 消息面同屏互查（参考层）.
  */
 import { useState, type ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { api } from "../api/client";
-import type { ScanItem, SignalAlert } from "../types";
+import { api, newsApi } from "../api/client";
+import type { NewsWatchEntry, ScanItem, SignalAlert } from "../types";
 
 const TIER_LABEL: Record<string, string> = {
   hard: "卖·硬",
@@ -36,12 +40,39 @@ const BUY_COLOR: Record<string, string> = {
   blocked: "var(--warn)",
 };
 
+/** 近3天消息标记：📰 + 方向计数（红↑利多/绿↓利空，与资讯流口径一致），点击跳消息流。 */
+function NewsMark({ entry, symbol }: { entry?: NewsWatchEntry; symbol: string }) {
+  const navigate = useNavigate();
+  if (!entry) return null;
+  const hint =
+    `近3天 ${entry.count} 条（利多${entry.bullish}/中性${entry.neutral}/利空${entry.bearish}）` +
+    (entry.top ? `\n最新：${entry.top.title}` : "");
+  const cls =
+    entry.bearish > entry.bullish ? "sig-news bearish" : entry.bullish > entry.bearish ? "sig-news bullish" : "sig-news";
+  return (
+    <button
+      className={cls}
+      title={hint}
+      onClick={(e) => {
+        e.stopPropagation();
+        navigate(`/news?symbol=${encodeURIComponent(symbol)}`);
+      }}
+    >
+      📰{entry.bullish > 0 && <span>↑{entry.bullish}</span>}
+      {entry.bearish > 0 && <span>↓{entry.bearish}</span>}
+      {entry.bullish === 0 && entry.bearish === 0 && <span> {entry.count}</span>}
+    </button>
+  );
+}
+
 function SellRow({
   it,
   onPick,
+  news,
 }: {
   it: SignalAlert;
   onPick: (symbol: string, side: "sell") => void;
+  news?: NewsWatchEntry;
 }) {
   return (
     <li className="sig-row">
@@ -64,6 +95,7 @@ function SellRow({
         ) : (
           <span className="sig-cont">持续</span>
         )}
+        <NewsMark entry={news} symbol={it.symbol} />
       </div>
       <div className="sig-title">{it.title}</div>
       <div className="sig-reason">{it.reason_cn}</div>
@@ -83,9 +115,11 @@ function SellRow({
 function BuyRow({
   it,
   onPick,
+  news,
 }: {
   it: ScanItem;
   onPick: (symbol: string, side: "buy") => void;
+  news?: NewsWatchEntry;
 }) {
   return (
     <li className="sig-row">
@@ -103,6 +137,7 @@ function BuyRow({
           <span className="sig-kind">R/R {it.reward_risk_ratio.toFixed(1)}</span>
         )}
         {it.has_active_plan && <span className="sig-cont">已有计划</span>}
+        <NewsMark entry={news} symbol={it.symbol} />
       </div>
       {it.best_scenario_cn && <div className="sig-title">{it.best_scenario_cn}</div>}
       {it.verdict === "blocked" && it.blocking_reasons.length > 0 && (
@@ -140,6 +175,16 @@ export default function TodaySignalBanner({
   // 回放模式：选了过去交易日则切换数据源（红点/今日查询不受影响）
   const [replayDate, setReplayDate] = useState("");
   const isReplay = replayDate !== "";
+  // 消息联动：近3天自选消息聚合（与 /news 页同 key 共享缓存，无额外请求）
+  const newsQuery = useQuery({
+    queryKey: ["newsWatchlistBrief"],
+    queryFn: () => newsApi.watchlistBrief(3),
+    staleTime: 5 * 60_000,
+    retry: false,
+  });
+  const newsBy = new Map<string, NewsWatchEntry>(
+    (newsQuery.data?.items ?? []).map((e) => [e.symbol, e]),
+  );
   const dayQuery = useQuery({
     queryKey: ["signalsDay", replayDate],
     queryFn: () => api.signalsDay(replayDate),
@@ -299,35 +344,35 @@ export default function TodaySignalBanner({
           {buyA.length > 0 && (
             <Group title={`✅ 买·行动 ${buyA.length}`}>
               {buyA.map((it) => (
-                <BuyRow key={it.symbol} it={it} onPick={onPick} />
+                <BuyRow key={it.symbol} it={it} onPick={onPick} news={newsBy.get(it.symbol)} />
               ))}
             </Group>
           )}
           {sellH.length > 0 && (
             <Group title={`🔻 卖·硬信号 ${sellH.length}`}>
               {sellH.map((it) => (
-                <SellRow key={`${it.symbol}-${it.kind}`} it={it} onPick={onPick} />
+                <SellRow key={`${it.symbol}-${it.kind}`} it={it} onPick={onPick} news={newsBy.get(it.symbol)} />
               ))}
             </Group>
           )}
           {buyW.length > 0 && (
             <Group title={`⏳ 买·等待 ${buyW.length}`}>
               {buyW.map((it) => (
-                <BuyRow key={it.symbol} it={it} onPick={onPick} />
+                <BuyRow key={it.symbol} it={it} onPick={onPick} news={newsBy.get(it.symbol)} />
               ))}
             </Group>
           )}
           {sellWarn.length > 0 && (
             <Group title={`⚠️ 卖·预警（不必然反向） ${sellWarn.length}`}>
               {sellWarn.map((it) => (
-                <SellRow key={`${it.symbol}-${it.kind}`} it={it} onPick={onPick} />
+                <SellRow key={`${it.symbol}-${it.kind}`} it={it} onPick={onPick} news={newsBy.get(it.symbol)} />
               ))}
             </Group>
           )}
           {sellS.length > 0 && (
             <Group title={`🌑 卖·提醒 ${sellS.length}`}>
               {sellS.map((it) => (
-                <SellRow key={`${it.symbol}-${it.kind}`} it={it} onPick={onPick} />
+                <SellRow key={`${it.symbol}-${it.kind}`} it={it} onPick={onPick} news={newsBy.get(it.symbol)} />
               ))}
             </Group>
           )}
@@ -338,7 +383,7 @@ export default function TodaySignalBanner({
               </summary>
               <ul className="sig-list">
                 {buyB.map((it) => (
-                  <BuyRow key={it.symbol} it={it} onPick={onPick} />
+                  <BuyRow key={it.symbol} it={it} onPick={onPick} news={newsBy.get(it.symbol)} />
                 ))}
               </ul>
             </details>
