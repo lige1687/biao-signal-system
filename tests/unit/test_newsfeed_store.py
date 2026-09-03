@@ -106,6 +106,9 @@ def test_query_symbol_direction_and_symbols_like(tmp_path) -> None:
     # 组合：NVDA 且利多
     rows, total = store.query_items(symbol="NVDA", direction="bullish")
     assert total == 1 and rows[0]["title"] == "英伟达财报大超预期"
+    # 多词（逗号分隔，任一命中）：板块代码 + 展示名双匹配
+    rows, total = store.query_items(symbol="TH881272.SECTOR,降准")
+    assert total == 1 and rows[0]["title"] == "降准落地"
     # q 搜索现在覆盖 symbols 列（"NVDA" 只出现在 k3 的 symbols 之外场景由 title 命中，
     # 这里验证 q 命中 symbols JSON 文本本身）
     rows, total = store.query_items(q='"NVDA"')

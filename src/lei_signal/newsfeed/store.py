@@ -105,10 +105,16 @@ class NewsStore:
             args.append(direction)
         if symbol:
             # 标的关联 = LLM 提取的 symbols 数组（JSON 文本）或标题/摘要里出现。
+            # 支持逗号分隔多词（任一命中）——板块代码 TH…SECTOR 不会出现在标题里，
+            # 调用方可传「代码,展示名」双匹配（雷达/详情页场景）。
             # SQLite LIKE 对 ASCII 大小写不敏感，代码匹配（NVDA/nvda）天然覆盖。
-            like = f"%{symbol}%"
-            where.append("(symbols LIKE ? OR title LIKE ? OR summary LIKE ?)")
-            args.extend([like, like, like])
+            terms = [t.strip() for t in symbol.split(",") if t.strip()][:5]
+            clauses: list[str] = []
+            for t in terms:
+                like = f"%{t}%"
+                clauses.append("(symbols LIKE ? OR title LIKE ? OR summary LIKE ?)")
+                args.extend([like, like, like])
+            where.append("(" + " OR ".join(clauses) + ")")
         if date_from:
             where.append("published_at >= ?")
             args.append(date_from)

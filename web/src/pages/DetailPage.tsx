@@ -15,6 +15,7 @@ import CollapsiblePanel from "../components/CollapsiblePanel";
 import ConditionalScenarioPanel from "../components/ConditionalScenarioPanel";
 import ExitSignalPanel from "../components/ExitSignalPanel";
 import TradabilityPanel from "../components/TradabilityPanel";
+import RecentNewsPanel from "../components/RecentNewsPanel";
 import { prefillFromOpportunity } from "../components/CreatePlanDialog";
 import PlanCreateFlow from "../components/PlanCreateFlow";
 import BuyPointDrawer, { annoToIndex } from "../components/BuyPointDrawer";
@@ -469,6 +470,9 @@ export default function DetailPage() {
               <TradabilityPanel tradability={data.assessment.tradability} />
             </CollapsiblePanel>
           )}
+
+          {/* 消息面参考层：该标的近14天资讯（组件内零消息不渲染；与信号同屏互查，互不改写） */}
+          <RecentNewsPanel symbol={symbol} displayName={data?.display_name} />
 
           {/* 当前观察保留在图下方：它是「今天怎么看」的总结，不是逐点明细。 */}
           <AssessmentPanel

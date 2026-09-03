@@ -1900,7 +1900,14 @@ export interface NewsItemsResponse {
 
 export interface NewsDigestPayload {
   sections: { category: string; headline: string; bullets: string[] }[];
-  top_events: { title: string; importance: number; why: string }[];
+  /** 2026-09-04 起简报事件带影响标的与整体方向；旧简报无这两个字段。 */
+  top_events: {
+    title: string;
+    importance: number;
+    why: string;
+    symbols?: string[];
+    direction?: string | null;
+  }[];
 }
 
 export interface NewsDigest {
