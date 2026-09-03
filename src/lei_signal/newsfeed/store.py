@@ -160,6 +160,21 @@ class NewsStore:
             )
         )
 
+    def mood_by_day(self, date_from: str, days: int = 7) -> list[dict]:
+        """近 N 天逐日多空计数（已评分条目），缺数据的日期由调用方补零。"""
+        rows = self._conn.execute(
+            "SELECT substr(published_at, 1, 10) AS day, direction, COUNT(*) AS n "
+            "FROM news_items WHERE importance IS NOT NULL AND published_at >= ? "
+            "AND direction IN ('bullish','bearish','neutral') "
+            "GROUP BY day, direction ORDER BY day",
+            (date_from,),
+        )
+        agg: dict[str, dict[str, int]] = {}
+        for r in rows:
+            d = agg.setdefault(r["day"], {"bullish": 0, "bearish": 0, "neutral": 0})
+            d[r["direction"]] = r["n"]
+        return [{"day": k, **agg[k]} for k in sorted(agg)]
+
     def scored_rows_for_digest(self, day_prefix: str, limit: int = 400) -> list[sqlite3.Row]:
         """取指定本地日期（YYYY-MM-DD 前缀）的已评分条目，按重要性倒序。"""
         return list(

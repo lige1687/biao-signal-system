@@ -215,6 +215,36 @@ function DigestHeadline({ onPickSymbol }: { onPickSymbol: (s: string) => void })
   );
 }
 
+/** 近7天逐日多空迷你走势：每天一根柱（上半红=利多/下半绿=利空），看情绪拐点。 */
+function MoodTrend({ daily }: { daily?: NewsMood["daily"] }) {
+  const days = daily ?? [];
+  if (days.length < 2) return null;
+  const max = Math.max(1, ...days.map((x) => x.bullish + x.bearish + x.neutral));
+  const unit = 26 / max; // 柱区固定高 26px，按比例分配
+  return (
+    <div className="nf-mood-trend" title="近7天逐日多空条数（上红=利多 下绿=利空）">
+      {days.map((x) => {
+        const total = x.bullish + x.bearish + x.neutral;
+        return (
+          <div key={x.day} className="nf-mood-tday" title={`${x.day} 利多${x.bullish}/中性${x.neutral}/利空${x.bearish}`}>
+            <div className="nf-mood-tbar">
+              <span
+                className="nf-mood-tseg up"
+                style={{ height: Math.max(x.bullish * unit, x.bullish > 0 ? 3 : 0) }}
+              />
+              <span
+                className="nf-mood-tseg down"
+                style={{ height: Math.max(x.bearish * unit, x.bearish > 0 ? 3 : 0) }}
+              />
+            </div>
+            <span className="nf-mood-tlabel">{total > 0 ? total : ""}</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 /** 多空温度计：近 N 天已评分条目的方向分布，点击条段直达方向过滤。 */
 function MoodBar({
   mood,
@@ -274,6 +304,7 @@ function MoodBar({
           </span>
         ))}
       </div>
+      <MoodTrend daily={mood.daily} />
     </div>
   );
 }

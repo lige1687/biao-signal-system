@@ -32,6 +32,9 @@ SCORE_SYSTEM_PROMPT = """你是财经资讯编辑助手。对给定资讯逐条�
 4. direction：bullish/bearish/neutral，拿不准用 neutral。
 5. symbols：涉及股票代码或简称，最多 3 个（如 ["NVDA","中际旭创"]），无则 []。
 6. note：一句话中文点评（≤60 字），只概括事实与含义，不给操作建议。
+   若该条带长文本（视频字幕/文章正文），note 改写为 ≤120 字的核心内容
+   摘要：博主/作者到底说了什么、多空倾向、提到的关键点位或标的——
+   读者只看 note 就能知道内容，不必点开原文。
 输出：严格 JSON 数组，每项
 {"id":<原样返回>,"category":"..","importance":<int>,"direction":"..","symbols":[..],"note":".."}。
 除 JSON 外不输出任何文字。"""
@@ -96,7 +99,7 @@ def parse_scores(text: str) -> list[dict]:
                     str(s)[:16]
                     for s in (symbols if isinstance(symbols, list) else [])[:3]
                 ],
-                "note": str(item.get("note", ""))[:120],
+                "note": str(item.get("note", ""))[:200],
             }
         )
     return out

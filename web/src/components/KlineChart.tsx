@@ -43,7 +43,8 @@ export interface MarkPick {
     | "bottom_line"
     | "top_line"
     | "highlight_price"
-    | "macd_event";
+    | "macd_event"
+    | "news_mark";
   /** 标记类点击带日期；横线类点击没有日期，用 level 表示价位 */
   date?: string;
   price?: number;
@@ -57,6 +58,10 @@ export interface MarkPick {
   annoId?: string;
   /** MACD 事件的中文名（金叉/死叉/上穿0轴/下穿0轴），供解释面板标题用。 */
   macdStatusCn?: string;
+  /** 消息日标记（news_mark）：当日多空定调与标题列表，供 tooltip/联动。 */
+  newsDirection?: string;
+  newsTitles?: string[];
+  newsImportance?: number;
 }
 
 /** 均线开关键。 */
@@ -973,6 +978,52 @@ function buildKlineOption(
         };
       }
     }
+
+    // ---- K 线消息日标记（参考层，非交易信号）----
+    // 后端 news_marks 把该标的 importance≥6 的消息按交易日聚合；前端只渲染，
+    // 不自算。菱形贴在当日 K 线最高价上方：红=利多↑ 绿=利空↓（中国惯例配色）。
+    const NEWS_MARK_COLOR: Record<string, string> = {
+      bullish: "#e33d47",
+      bearish: "#0b9b64",
+      neutral: "#8a93a3",
+    };
+    const newsMarkPoints = (d.newsMarks ?? [])
+      .map((m) => {
+        const i = d.dates.indexOf(m.date);
+        const high = i >= 0 ? d.ohlc[i]?.[3] : undefined;
+        if (high == null) return null; // 对不上交易日/K线数据就不打点
+        const color = NEWS_MARK_COLOR[m.direction] ?? NEWS_MARK_COLOR.neutral;
+        const dirCn =
+          m.direction === "bullish" ? "利多↑" : m.direction === "bearish" ? "利空↓" : "中性";
+        return {
+          coord: [m.date, high] as [string, number],
+          symbol: "diamond",
+          symbolSize: 11,
+          itemStyle: {
+            color: "#ffffff",
+            borderColor: color,
+            borderWidth: 2,
+            opacity: dim ? DIM_OPACITY : 1,
+          },
+          label: { show: false },
+          pick: {
+            kind: "news_mark" as const,
+            date: m.date,
+            newsDirection: dirCn,
+            newsTitles: m.titles,
+            newsImportance: m.importance,
+          },
+          tooltip: {
+            formatter:
+              `📰 ${dirCn} · 重要 ${m.importance}/10 · ${m.date}<br/>` +
+              m.titles.map((t) => `· ${t}`).join("<br/>") +
+              (m.count > m.titles.length ? `<br/>…共 ${m.count} 条<br/>` : "<br/>") +
+              `消息面参考层 · 非交易信号`,
+          },
+        };
+      })
+      .filter((p): p is NonNullable<typeof p> => p !== null);
+    markPointData.push(...newsMarkPoints);
 
     // ---- MACD 副图（研究代理强度指标）----
     // DIF/DEA 线 + 红绿柱 + 0 轴参考线。作强度/乖离解读，非转折（见 macd_strength）。

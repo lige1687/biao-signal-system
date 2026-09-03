@@ -3815,6 +3815,18 @@ a { color: var(--accent); text-decoration: none; }
 .nf-mood-down { background: var(--down); }
 .nf-mood-mid { background: #a8b0bd; }
 .nf-mood-legend { display: flex; gap: 14px; margin-top: 5px; font-size: 11.5px; color: var(--text-dim); }
+/* 近7天逐日多空迷你走势（情绪拐点） */
+.nf-mood-trend { display: flex; gap: 4px; align-items: flex-end; margin-top: 8px; }
+.nf-mood-tday { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.nf-mood-tbar {
+  display: flex; flex-direction: column; width: 12px; height: 26px;
+  border-radius: 2px; overflow: hidden; background: var(--bg);
+  justify-content: space-between;
+}
+.nf-mood-tseg { display: block; width: 100%; }
+.nf-mood-tseg.up { background: var(--up); }
+.nf-mood-tseg.down { background: var(--down); }
+.nf-mood-tlabel { font-size: 9px; color: var(--text-faint); line-height: 1; min-height: 9px; }
 .nf-mood-dot-up::before { content: "●"; color: var(--up); margin-right: 4px; }
 .nf-mood-dot-down::before { content: "●"; color: var(--down); margin-right: 4px; }
 .nf-mood-dot-mid::before { content: "●"; color: #a8b0bd; margin-right: 4px; }
