@@ -76,6 +76,8 @@
 | AU | 二元+滞回 vs 现役三档（决策级，AJ/AP 搁置的决策） | binary-hysteresis-vs-t3-decision-2026-09-04 | ✅ 判「换」（宽基域，待用户拍板） |
 | AV | 极端底部价格阶梯执行（R1 主臂+R2 追涨兜底） | price-ladder-execution-2026-09-04 | ✅ 交换结构（+6.1pp中位 vs V型左尾） |
 | AW | 宽度择时个股边界（12美股大盘股+SPY/QQQ） | us-stocks-timing-boundary-2026-09-04 | ✅ 判「无优势」（有效域=跟随宽度的宽基） |
+| AX | 换档决策走样本前向验证 + 相对痛苦度量 | switch-walkforward-and-pain-2026-09-04 | ✅ 判「保持」（6/11 压线；重选协议是 edge 一半） |
+| AY | A股个股面板×四引擎 + 跟随度分层（81只） | astock-panel-timing-2026-09-04 | ✅ 混合；机制线支持边界判据（跟随度连续谱） |
 
 不发（等条件）：语义二/六（总纲判高风险暂缓）、语义八（等 Z 结果）、
 债务二（等用户拍板立项）、债务五 P 部分（等用户表态是否有兴趣）。
@@ -187,6 +189,7 @@
 | backtest-runs-snapshot-2026-08-31 / pool-snapshot-2026-08-25 | 环境保全快照（非单一实验） |
 | pollution_recheck / spx_vs_ndx | pollution-recheck / spx-vs-ndx（任务Y/P，09-03） |
 | agent_AU-binary-hyst-vs-t3 / agent_AV-price-ladder / agent_AW-us-stocks-timing | binary-hysteresis-vs-t3-decision / price-ladder-execution / us-stocks-timing-boundary（09-04） |
+| agent_AX-walkforward-switch / agent_AY-astock-panel | switch-walkforward-and-pain / astock-panel-timing（09-04 晚） |
 
 ## 4. 悬案与未执行清单
 
