@@ -45,6 +45,14 @@ const HEAT_CN: Record<string, string> = {
   unknown: "未知",
 };
 
+/** 市场波动体制（research_proxy：LEI 信号对账显示高波期趋势类信号打折）。 */
+const VOL_REGIME_CN: Record<string, string> = {
+  high: "高波",
+  mid: "中波",
+  low: "低波",
+  unknown: "未知",
+};
+
 function fmtPct(v: number | null | undefined, digits = 1): string {
   if (v == null) return "--";
   return `${v.toFixed(digits)}%`;
@@ -248,6 +256,25 @@ function SnapshotGrid({
           conceptKey="drawdown_from_ath"
           onPick={onPickConcept}
         />
+        <SmallMetric
+          label="市场波动体制"
+          value={
+            snapshot.market_rv_pct == null
+              ? "留痕中"
+              : `${VOL_REGIME_CN[snapshot.vol_regime] ?? snapshot.vol_regime} ${
+                  Math.round(snapshot.market_rv_pct * 100)
+                }%`
+          }
+          conceptKey="vol_regime"
+          onPick={onPickConcept}
+          tone={
+            snapshot.vol_regime === "high"
+              ? "danger"
+              : snapshot.vol_regime === "low"
+                ? "opportunity"
+                : undefined
+          }
+        />
       </div>
 
       {snapshot.extreme_events.length > 0 && (
@@ -314,15 +341,17 @@ function SmallMetric({
   value,
   conceptKey,
   onPick,
+  tone,
 }: {
   label: string;
   value: string;
   conceptKey: string;
-  onPick?: (key: string, sourceCn: string) => void,
+  onPick?: (key: string, sourceCn: string) => void;
+  tone?: "danger" | "opportunity";
 }) {
   return (
     <div
-      className="breadth-small-metric"
+      className={`breadth-small-metric${tone ? ` metric-${tone}` : ""}`}
       onClick={() => onPick?.(conceptKey, `市场宽度 · ${label}`)}
     >
       <span className="muted">{label}</span>

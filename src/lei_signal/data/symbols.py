@@ -62,6 +62,13 @@ def resolve_symbol(raw: str) -> SymbolInfo:
             return SymbolInfo(f"{symbol}.SS", Market.CN_SH, symbol, "Asia/Shanghai")
         return SymbolInfo(f"{symbol}.SZ", Market.CN_SZ, symbol, "Asia/Shanghai")
 
+    # 中证指数官方写法：6 位数字 + .CSI（如 931160.CSI 中证通信设备、000905.CSI 中证500）。
+    # 归一化为 .SS，与既有指数清单（000905.SS 等）及腾讯/Yahoo 口径一致；
+    # 东财侧 93xxxx 的 secid 特判见 eastmoney_secid。
+    m = re.fullmatch(r"(\d{6})\.CSI", symbol)
+    if m:
+        return SymbolInfo(f"{m.group(1)}.SS", Market.CN_SH, m.group(1), "Asia/Shanghai")
+
     # 东财板块代码：BK + 4 位数字（如 BK0457 电网设备）。
     # .SECTOR 后缀避免与 A 股六位码 / ETF 混淆。
     if re.fullmatch(r"BK\d{4}", symbol):
@@ -109,6 +116,10 @@ def eastmoney_secid(info: SymbolInfo) -> str:
     """
     if not is_a_share(info):
         raise ValueError(f"{info.symbol} 不是 A 股标的，无法映射 secid")
+    # 中证 93xxxx 系列指数挂东财 market=2 行情位（实测 2.931160 有数据、1.931160 为空）。
+    # 沪市 9 开头的真实证券只有 900xxx B 股，北交所为 82/43/87/92 开头，93 段无冲突。
+    if re.fullmatch(r"93\d{4}", info.bare_code):
+        return f"2.{info.bare_code}"
     prefix = "1" if info.market is Market.CN_SH else "0"
     return f"{prefix}.{info.bare_code}"
 

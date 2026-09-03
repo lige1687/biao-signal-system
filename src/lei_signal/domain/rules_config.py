@@ -1,4 +1,4 @@
-"""规则账本加载器：所有阈值来自 configs/rules.v1.yaml，代码中不写死。"""
+"""规则账本加载器：所有阈值来自 configs/rules.v2.yaml，代码中不写死。"""
 from __future__ import annotations
 
 import functools
@@ -9,7 +9,7 @@ import yaml
 
 from lei_signal.domain.types import Provenance
 
-_CONFIG_NAME = "rules.v1.yaml"
+_CONFIG_NAME = "rules.v2.yaml"
 
 
 def _default_config_path() -> Path:

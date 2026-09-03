@@ -25,9 +25,10 @@ export default function TopNav() {
         看盘
         {todayOpps > 0 && <span className="nav-badge">{todayOpps}</span>}
       </NavLink>
-      <NavLink to="/grid">卡片墙</NavLink>
       <NavLink to="/fundamentals">基本面</NavLink>
       <NavLink to="/sectors">行业板块</NavLink>
+      <NavLink to="/factors">因子观测</NavLink>
+      <NavLink to="/news">资讯流</NavLink>
       <NavLink to="/backtest">回测</NavLink>
       <NavLink to="/research">本轮研究</NavLink>
       <NavLink to="/daily">日报</NavLink>

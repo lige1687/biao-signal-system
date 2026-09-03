@@ -36,6 +36,9 @@ from lei_signal.rules.lei_color import (
         ("000001", "000001.SZ"),
         ("0700.hk", "0700.HK"),
         ("159915.SZ", "159915.SZ"),
+        ("931160", "931160.SS"),
+        ("931160.CSI", "931160.SS"),
+        ("000905.CSI", "000905.SS"),
     ],
 )
 def test_normalize_symbol(raw: str, expected: str) -> None:
@@ -61,6 +64,15 @@ def test_eastmoney_secid_maps_exchange_prefix() -> None:
     assert eastmoney_secid(resolve_symbol("159915")) == "0.159915"
     with pytest.raises(ValueError, match="不是 A 股"):
         eastmoney_secid(resolve_symbol("QQQ"))
+
+
+def test_eastmoney_secid_routes_csi_93_series_to_market_2() -> None:
+    """中证 93xxxx 指数挂东财 market=2（实测 2.931160 有数据、1.931160 为空）；
+    900xxx 沪市 B 股与 399xxx 深市指数不受影响。"""
+    assert eastmoney_secid(resolve_symbol("931160")) == "2.931160"
+    assert eastmoney_secid(resolve_symbol("931160.CSI")) == "2.931160"
+    assert eastmoney_secid(resolve_symbol("900901")) == "1.900901"
+    assert eastmoney_secid(resolve_symbol("399006.SZ")) == "0.399006"
 
 
 # ---------------- EMA / SMA ----------------

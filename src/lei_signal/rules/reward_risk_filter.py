@@ -3,8 +3,10 @@
 入场前用信号时已存在的目标 B 计算盈亏比 R/R = (B - A) / (A - S)：
   A = 入场价（信号确认日收盘）；
   S = 失效价（入场依据的支撑/结构位被破坏的位置）；
-  B = 目标价，优先级：已确认摆动高点(B1) > 筹码峰VAH/POC > 区间另一侧高点；
-     无法客观确定 B 时标记“目标不可计算”，不事后选最优目标。
+  B = 目标价，优先级（规格 §10）：已确认摆动高点(B1) > 未回补缺口上沿
+     （账本 gap_events，经 gaps 参数启用、默认关）> 筹码峰VAH/POC >
+     区间另一侧高点；无法客观确定 B 时标记“目标不可计算”，不事后选最优目标。
+     （规格另有「均线密集区」档，尚未实装，见账本待办。）
 
 严格前向：目标 B 只用信号日及此前已确认的数据；追加未来行情不改变历史 R/R。
 本模块只计算，不做硬过滤（已确认）。不向主事件日志写事件——R/R 是入场信号的
@@ -20,6 +22,7 @@ import pandas as pd
 from lei_signal.domain.rules_config import RuleSpec, get_rule
 from lei_signal.domain.types import Pivot, SignalEvent
 from lei_signal.features.volume_profile import compute_volume_profile
+from lei_signal.rules.gap_events import GapEvent, unfilled_gap_target
 from lei_signal.rules.resistance_b1 import find_b1
 
 RULE_ID = "reward_risk_filter"
@@ -32,6 +35,7 @@ ENTRY_CONFIRMED_SUBS = (
 )
 
 TARGET_SWING_HIGH = "swing_high"
+TARGET_UNFILLED_GAP = "unfilled_gap"
 TARGET_VOLUME_PROFILE = "volume_profile"
 TARGET_RANGE_HIGH = "range_high"
 TARGET_UNAVAILABLE = "unavailable"
@@ -47,7 +51,7 @@ class RewardRiskResult:
     entry_price: float
     stop_price: float | None
     target_b: float | None
-    target_source: str | None  # swing_high | volume_profile | range_high | None
+    target_source: str | None  # swing_high | unfilled_gap | volume_profile | range_high | None
     reward_risk: float | None  # None = 不可计算（无目标或风险非正）
     computable: bool
     reason_cn: str
@@ -64,10 +68,20 @@ def _stop_price(frame: pd.DataFrame, entry_event: SignalEvent) -> float | None:
     """入场依据的失效价。按入场规则取客观支撑位，不事后调整。"""
     rule_id = entry_event.rule_id
     evidence = entry_event.evidence or {}
+    # V2 事件自带结构失效价（模块 A 回撤低点 / B 密集区结构 / C 假跌破新低 /
+    # D 假跌破低点，规格各模块失效定义）——优先于规则回退口径。
+    explicit_stop = evidence.get("stop_price")
+    if explicit_stop is not None:
+        return float(explicit_stop)
     if rule_id == "false_breakout_reclaim":
         ref = evidence.get("reference_price")
         return float(ref) if ref is not None else None
     if rule_id == "first_ma_pullback":
+        # V2 模块 A 事件自带结构低点失效价（回撤自触碰日起最低 low，§9 A5），
+        # 优先于回退口径（触碰日 low / 均线位）。
+        explicit_stop = evidence.get("stop_price")
+        if explicit_stop is not None:
+            return float(explicit_stop)
         touch_date_raw = evidence.get("touch_date")
         if touch_date_raw:
             try:
@@ -92,6 +106,7 @@ def _target_b(
     pivots: tuple[Pivot, ...],
     as_of: date,
     range_lookback: int,
+    gaps: list[GapEvent] | None = None,
 ) -> tuple[float | None, str | None]:
     """按优先级确定目标 B，只用信号日及此前已确认数据。"""
     # 1) 已确认摆动高点（B1 第一阻力）
@@ -99,14 +114,20 @@ def _target_b(
     if b1 is not None and b1.price > entry_price:
         return float(b1.price), TARGET_SWING_HIGH
 
-    # 2) 筹码分布代理 VAH/POC（高于入场价者，逐点计算避免未来泄漏）
+    # 2) 未回补缺口上沿（规格 §10 第 2 档；gaps 传入才启用，默认关）
+    if gaps is not None:
+        gap_target = unfilled_gap_target(gaps, as_of=as_of, entry_price=entry_price)
+        if gap_target is not None:
+            return float(gap_target[0]), TARGET_UNFILLED_GAP
+
+    # 3) 筹码分布代理 VAH/POC（高于入场价者，逐点计算避免未来泄漏）
     profile = compute_volume_profile(frame.iloc[: position + 1])
     if profile is not None:
         for candidate in (profile.vah, profile.poc):
             if candidate is not None and candidate > entry_price:
                 return float(candidate), TARGET_VOLUME_PROFILE
 
-    # 3) 区间另一侧：近 range_lookback 根已完成 K 线的最高 high
+    # 4) 区间另一侧：近 range_lookback 根已完成 K 线的最高 high
     start = max(0, position - range_lookback)
     window = frame["high"].iloc[start:position]
     if not window.empty:
@@ -121,8 +142,13 @@ def compute_reward_risk(
     frame: pd.DataFrame,
     entry_event: SignalEvent,
     pivots: tuple[Pivot, ...],
+    *,
+    gaps: list[GapEvent] | None = None,
 ) -> RewardRiskResult:
-    """计算单笔入场的盈亏比。严格前向，无未来泄漏。"""
+    """计算单笔入场的盈亏比。严格前向，无未来泄漏。
+
+    gaps 非空时目标 B 启用「未回补缺口」档（规格 §10 第 2 档）。
+    """
     spec = get_rule(RULE_ID)
     range_lookback = _params(spec)
 
@@ -152,6 +178,7 @@ def compute_reward_risk(
         pivots=pivots,
         as_of=entry_event.available_date,
         range_lookback=range_lookback,
+        gaps=gaps,
     )
 
     if stop_price is None or stop_price >= entry_price:
@@ -218,6 +245,7 @@ def compute_reward_risk_for_entries(
 
 TARGET_SOURCE_CN: dict[str | None, str] = {
     TARGET_SWING_HIGH: "已确认摆动高点（B1）",
+    TARGET_UNFILLED_GAP: "未回补缺口上沿",
     TARGET_VOLUME_PROFILE: "筹码分布代理 VAH/POC",
     TARGET_RANGE_HIGH: "区间另一侧高点",
     TARGET_UNAVAILABLE: "目标不可计算",
@@ -233,6 +261,7 @@ __all__ = [
     "TARGET_SOURCE_CN",
     "TARGET_SWING_HIGH",
     "TARGET_UNAVAILABLE",
+    "TARGET_UNFILLED_GAP",
     "TARGET_VOLUME_PROFILE",
     "RewardRiskResult",
     "compute_reward_risk",

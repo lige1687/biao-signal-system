@@ -144,21 +144,22 @@ def _rule_exit_position(
     *,
     entry_position: int,
     ma_period: int,
-    tolerance_pct: float,
-    tolerance_atr: float,
+    distance_atr: float,
+    atr20: pd.Series,
 ) -> int | None:
     ma_column = f"sma{ma_period}"
     slope_column = f"sma{ma_period}_slope"
     for position in range(entry_position + 1, len(frame)):
         row = frame.iloc[position]
-        ma_value = float(row[ma_column])
-        atr = float(row["atr14"])
-        tolerance = max(ma_value * tolerance_pct, atr * tolerance_atr)
         if str(row["signal_color"]) == "black":
             return position
         if float(row[slope_column]) <= 0:
             return position
-        if float(row["close"]) < ma_value - tolerance:
+        ma_value = float(row[ma_column])
+        atr = float(atr20.iloc[position])
+        if not pd.isna(atr) and atr > 0 and float(row["close"]) < (
+            ma_value - distance_atr * atr
+        ):
             return position
     return None
 
@@ -167,8 +168,8 @@ def _rule_exit_stats(
     frame: pd.DataFrame,
     entries: list[int],
     ma_period: int,
-    tolerance_pct: float,
-    tolerance_atr: float,
+    distance_atr: float,
+    atr20: pd.Series,
 ) -> tuple[PullbackPerformanceStats, int]:
     rows: list[tuple[float, float, float, int]] = []
     open_trades = 0
@@ -177,8 +178,8 @@ def _rule_exit_stats(
             frame,
             entry_position=entry,
             ma_period=ma_period,
-            tolerance_pct=tolerance_pct,
-            tolerance_atr=tolerance_atr,
+            distance_atr=distance_atr,
+            atr20=atr20,
         )
         if exit_position is None:
             open_trades += 1
@@ -217,9 +218,12 @@ def build_first_ma_pullback_backtest(
         return None
 
     spec = get_rule(RULE_ID)
-    periods = tuple(int(value) for value in spec.param("ma_periods"))
-    tolerance_pct = float(spec.param("touch_tolerance_pct"))
-    tolerance_atr = float(spec.param("touch_tolerance_atr"))
+    periods = tuple(int(value) for value in spec.param("ma_periods", [20, 60, 120]))
+    distance_atr = float(spec.param("ma_touch_distance_atr", 1.0))
+    atr_period = int(spec.param("ma_touch_atr_period", 20))
+    from lei_signal.features.indicators import average_true_range  # noqa: PLC0415
+
+    atr20 = average_true_range(frame, atr_period)
     sides: list[PullbackBacktestSide] = []
     for period in periods:
         entries = _confirmation_positions(frame, events, period)
@@ -228,16 +232,17 @@ def build_first_ma_pullback_backtest(
             frame,
             entries,
             period,
-            tolerance_pct,
-            tolerance_atr,
+            distance_atr,
+            atr20,
         )
         sides.append(
             PullbackBacktestSide(
                 ma_period=period,
                 title_cn=f"首次回撤 SMA{period}",
-                entry_rule_cn="首次回撤确认事件当日，以当时可见收盘价计入",
+                entry_rule_cn="回撤入场事件当日，以当时可见收盘价计入（V2 模块 A）",
                 exit_rule_cn=(
-                    f"首次出现转黑、SMA{period} 方向不再向上，或收盘跌破均线容差时退出"
+                    f"首次出现转黑、SMA{period} 方向不再向上，或收盘跌破 "
+                    f"SMA{period} − {distance_atr}×ATR({atr_period}) 时退出"
                 ),
                 total_signals=len(entries),
                 open_trades=open_trades,

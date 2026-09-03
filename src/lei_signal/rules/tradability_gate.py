@@ -86,7 +86,7 @@ class TradabilityResult:
 
 def _params(spec: RuleSpec) -> tuple[int, float, int, float, float, int, int, int, int, float]:
     return (
-        int(spec.param("minimum_consolidation_bars", 120)),
+        int(spec.param("minimum_consolidation_bars", 126)),
         float(spec.param("cluster_threshold", 0.02)),
         int(spec.param("entanglement_lookback", 20)),
         float(spec.param("acceleration_slope_pct", 0.03)),

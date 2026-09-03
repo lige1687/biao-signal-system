@@ -214,38 +214,38 @@ RULES: dict[str, Explanation] = {
         "next_step": "已是最高档；继续观察：触及 C → 永久失效；转黑 → 关闭本条转强。",
     },
     "first_ma_pullback": {
-        "title": "首次均线回撤（研究代理）",
-        "definition": "完整多头趋势成立后，价格先远离、再第一次返回 SMA20/60/120 的前向状态机。",
-        "formula": "趋势锚点 → 拉开距离 → 首次触碰 → 窗口内确认或失败；每轮每条均线只计一次",
-        "usage": "用于把趋势中继回撤转成可解释、可回测的条件化场景，不输出无条件买入指令。",
-        "invalidation": "转黑、均线方向或完整多头排列破坏、跌破均线容差，或确认窗口耗尽。",
-        "caveat": "研究代理：源自用户交易笔记，不是旧 Streamlit 泛化文案，也不冒充 LEI 原始规则。",
+        "title": "均线回撤（模块 A，研究代理）",
+        "definition": "时钟二类稳定上涨 + 双组多头排列 + 周线多头环境中，价格回撤至 SMA20/60/120 组附近的前向状态机（V2 重写版）。",
+        "formula": "A1 门禁 → 武装（站上均线）→ A2 触碰（Low≤SMA_N+1×ATR20 且 SMA 仍上行）→ A3 结构（底部构造或 EMA20 收复）→ A4 入场（早期/确认两版）→ A5 结构低点失效",
+        "usage": "用于把趋势中继回撤转成可解释、可回测的条件化场景；首次/非首次分别统计。",
+        "invalidation": "收盘跌破本轮回撤结构低点，或趋势生命周期重置（排列破坏/跌破SMA120/转黑）。",
+        "caveat": "研究代理：模块 A 的 V2 量化（规格 §9），不冒充 LEI 原始规则。",
     },
     "first_ma_pullback_touched": {
-        "title": "首次均线回撤 · 触碰观察",
-        "definition": "完整多头趋势成立并先远离目标均线后，价格第一次返回 SMA20/60/120 附近。",
-        "formula": "完整多头排列 + 三线方向向上 + 先满足百分比和 ATR 双重拉开距离 + 第一次 Low 触及均线容差",
-        "usage": "这是等待确认的观察状态，不是入场指令；重点看目标均线方向、多头排列和收盘能否重新站回均线上方。",
-        "invalidation": "确认窗口耗尽、收盘跌破目标均线容差、转黑或完整多头趋势破坏。",
-        "next_step": "等待最多 3 根已完成日 K 内收阳、收于目标均线上方且目标均线仍向上。",
-        "caveat": "研究代理：源自用户交易笔记，不是旧 Streamlit 文案，也不冒充 LEI 原始规则。",
+        "title": "均线回撤 · 触碰观察",
+        "definition": "回撤价格第一次（或后续）返回 SMA20/60/120 触碰带（Low≤SMA_N+1×ATR(20)）。",
+        "formula": "时钟二类 + 多头排列 + 周线环境 + close>close_lag_N（该 SMA 仍上行）+ Low 进入触碰带",
+        "usage": "这是等待 A3/A4 的观察状态，不是入场指令。",
+        "invalidation": "收盘跌破本轮回撤结构低点，或价格离开回撤区未触发入场。",
+        "next_step": "等待 A3（底部构造或 EMA20 收复）与 A4（站上 EMA20 且 EMA20 上行）。",
+        "caveat": "研究代理：触碰深度允许击穿均线，深度由 A5 结构失效兜底。",
     },
     "first_ma_pullback_confirmed": {
-        "title": "首次均线回撤 · 条件确认",
-        "definition": "首次触碰目标均线后，在确认窗口内重新站回均线上方，且完整多头趋势仍成立。",
-        "formula": "Close>=目标SMA + Close>Open + 目标SMA方向向上 + SMA20>SMA60>SMA120 + 绿色",
-        "usage": "可作为趋势中继的条件化做多参考；MA20/60/120 必须分开统计历史表现和风险。",
-        "invalidation": "首次转黑、目标 SMA 方向不再向上，或收盘跌破目标均线容差。",
-        "next_step": "结合市场环境、底部结构/C 点和该均线历史回测，决定是否继续观察或管理风险。",
-        "caveat": "研究代理；每次确认是独立事件研究样本，不等于单账户可同时执行。",
+        "title": "均线回撤 · 入场信号",
+        "definition": "回撤后满足 A3 结构条件并触发 A4 入场（早期版/确认版分别出事件）。",
+        "formula": "早期版=close>EMA20 且 EMA20 上行；确认版=再加 SMA20 上行（close>close_lag20）；A3=底部构造或 EMA20 收复",
+        "usage": "信号收盘生成、下一根开盘入场；回测按 A6 三版退出分别统计。",
+        "invalidation": "收盘跌破本轮回撤结构低点（stop_price），A/C 不得漂移（规格 §14）。",
+        "next_step": "以结构低点为失效价管理；目标 B 与盈亏比由 reward_risk_filter 计算。",
+        "caveat": "研究代理；早期/确认两版与首次/非首次必须分开统计表现。",
     },
     "first_ma_pullback_failed": {
-        "title": "首次均线回撤 · 失败/超时",
-        "definition": "本轮首次触碰已消耗，但确认条件没有成立，或趋势逻辑先被破坏。",
-        "formula": "确认窗口耗尽，或收盘跌破均线容差，或转黑/多头排列破坏",
-        "usage": "本轮该均线不再把第二次、第三次回撤冒充‘第一次’；等待新的趋势生命周期重启。",
+        "title": "均线回撤 · 失败",
+        "definition": "本轮回撤周期结束：结构低点被破坏、价格离开回撤区未触发入场，或趋势生命周期重置。",
+        "formula": "close 跌破回撤此前全部 low，或 close 回到触碰带上方而未入场，或排列破坏/跌破SMA120/转黑",
+        "usage": "等待重新武装后的下一轮触碰；新趋势生命周期会重新产生“首次”。",
         "invalidation": "失败事件是历史事实，不会被后续上涨改写。",
-        "caveat": "研究代理；失败不等于无条件卖出，只表示首次回撤预期未被确认。",
+        "caveat": "研究代理；失败不等于无条件卖出，只表示本轮回撤预期未被确认。",
     },
     "false_breakout_reclaim": {
         "title": "假突破快速收回（研究代理）",
@@ -288,7 +288,7 @@ RULES: dict[str, Explanation] = {
         "formula": "横盘识别(复用tradability_gate纠缠度) -> 收盘突破近N根最高high + 完整多头排列 -> 跌回上沿下方+SMA20下弯失效",
         "usage": "把“横盘后标志性突破”转成可解释、可回测的条件化做多场景，不输出无条件买入指令。",
         "invalidation": "确认后收盘跌回密集区上沿下方且 SMA20 方向向下弯曲，或完整多头排列破坏、转黑。",
-        "caveat": "研究代理：源自规格 §9 模块 B，横盘阈值复用 tradability_gate（待确认），不冒充 LEI 原始规则。",
+        "caveat": "研究代理：源自规格 §9 模块 B，横盘阈值复用 tradability_gate（V2 §17 已定（原则）：2%/126 交易日），不冒充 LEI 原始规则。",
     },
     "dense_breakout_watch": {
         "title": "密集区突破 · 横盘观察",
@@ -297,7 +297,7 @@ RULES: dict[str, Explanation] = {
         "usage": "观察状态，不是入场指令；横盘阶段不频繁交易，只等待价格收盘突破密集区上沿。",
         "invalidation": "密集区连续 entanglement_lookback 日消散（静默结束），或突破后跌回失效。",
         "next_step": "等待收盘突破密集区上沿且完整多头排列成立。",
-        "caveat": "研究代理；横盘阈值待确认（规格第 17 节），不冒充 LEI 原始规则。",
+        "caveat": "研究代理；横盘阈值已定（原则，V2 §17）：纠缠 2%、126 交易日；V2 时钟三类门禁（pending_v2）落地后切换口径。",
     },
     "dense_breakout_confirmed": {
         "title": "密集区突破 · 条件确认",
@@ -323,7 +323,7 @@ RULES: dict[str, Explanation] = {
         "formula": "L2/L1确认摆动低点+颈线 -> 跌破L1(不破L2) -> two_b_reclaim_bars根内收回L1 -> v1/v2/v3确认 -> 跌破L2失效",
         "usage": "把“破底翻”转成可解释、可回测的条件化做多场景，不输出无条件买入指令。三版本分别统计。",
         "invalidation": "收盘跌破 L2（结构最低点），2B 彻底失效；或快速收复窗口耗尽。",
-        "caveat": "研究代理：规格原文未提供 2B 结构定义，L1/L2 量化口径为研究代理，two_b_reclaim_bars 待确认，不冒充 LEI 原始规则。",
+        "caveat": "研究代理：V2 规格 §9 C1 已填实结构定义（L1=前低，跌破创新低 L2），代码仍为 v1 L1/L2 口径（pending_v2 重写排期）；two_b_reclaim_bars=5〔标定 V2.1，待彪哥确认〕，不冒充 LEI 原始规则。",
     },
     "two_b_reversal_v1_confirmed": {
         "title": "2B/破底翻 · v1 确认",
@@ -520,7 +520,7 @@ RULES: dict[str, Explanation] = {
         "formula": "Close < EMA20 且 Close < close_lag20；条件由不成立转成立的当日触发（上升沿）",
         "usage": "持仓退出参考，不是自动卖出指令；信号收盘后生成，下一交易日开盘执行。该条件与 LEI 黑色定义同构，但作为独立退出规则单独统计。",
         "invalidation": "退出触发为单次事件，不因后续价格回升而回溯改写。",
-        "caveat": "研究代理：源自规格 A6①，break_basis=close 待确认（规格第 17 节），不冒充 LEI 原始规则。",
+        "caveat": "研究代理：源自规格 A6①，break_basis=close 已定（拍板，V2 §17），不冒充 LEI 原始规则。",
     },
     "exit_ema20_costbasis_triggered": {
         "title": "抵扣价退出 · 触发",
@@ -536,7 +536,7 @@ RULES: dict[str, Explanation] = {
         "formula": "目标B优先级：已确认摆动高点 > 筹码峰VAH/POC > 区间另一侧高点；无法确定时标“目标不可计算”",
         "usage": "只计算展示，不做硬过滤。规格参考：R/R>3 比较理想，作者案例倾向 5 以上；R/R<3 时规格建议放弃，但本系统只标注不拦截。",
         "invalidation": "R/R 随入场价/失效价/目标变化而重算；目标 B 只用信号时已确认数据，不得事后选最优目标。",
-        "caveat": "研究代理：缺口与均线密集区两档目标尚未实现，待第二轮补齐；range_lookback/rr_min 待确认（规格第 17 节）。",
+        "caveat": "研究代理：缺口与均线密集区两档目标尚未实现（V2 §15 第四轮排期，gap_events pending_v2）；rr_min=3 已定（原则，V2 §17），range_lookback 待确认。",
     },
     "reward_risk_filter": {
         "title": "盈亏比计算（研究代理）",
@@ -558,7 +558,7 @@ RULES: dict[str, Explanation] = {
         "formula": "趋势类型=均线纠缠度+ATR分位+斜率分 横盘反复/横盘末期/趋势/加速衰竭；9条无交易条件逐条检查",
         "usage": "环境层阻断条件不成立才可交易；只算展示不做硬拦截。入场时条件（模块/入场目标失效/盈亏比）结合信号判断。",
         "invalidation": "随行情每日重算；不向主事件日志写每日事件，由界面读取当前状态。",
-        "caveat": "研究代理：cluster_threshold/minimum_consolidation_bars/acceleration/bias 待确认（规格第17节）；多周期(条件7)用日线颜色翻转代理，60min 未接入。",
+        "caveat": "研究代理：cluster_threshold=2% / minimum_consolidation_bars=126 已定（原则，V2 §17）；acceleration/bias 为 v1 判据，V2 时钟五类 s60 口径 pending_v2；多周期(条件7)用日线颜色翻转代理，60min 未接入。",
     },
     "tradability_gate": {
         "title": "可交易性门禁（研究代理）",
@@ -623,6 +623,10 @@ MARK_KIND_CONCEPTS: dict[str, str] = {
 #: 才有具体含义；没有档位时，说明「档位阶梯」这一概念本身。
 _RULE_FALLBACK_CONCEPTS: dict[str, str] = {
     "ema20_reclaim_rising": "stage",
+    # 无独立解释的规则 → 同概念解释（口径与既有概念库一致，不新造文案）
+    "resistance_b1": "b1",
+    "key_wave_black": "key_volatility",
+    "volume_profile_proxy": "volume_state",
 }
 
 

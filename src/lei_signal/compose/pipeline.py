@@ -57,6 +57,7 @@ from lei_signal.rules.long_trend import (
 )
 from lei_signal.rules.low_level_confirmation import detect_low_level_confirmation_events
 from lei_signal.rules.ma_full_alignment import detect_ma_alignment_events
+from lei_signal.rules.module_d_false_breakout import detect_module_d_events
 from lei_signal.rules.resistance_b1 import B1Resistance, find_b1
 from lei_signal.rules.reversals import detect_reversal_events
 from lei_signal.rules.top_structure import detect_top_structure_events, detect_top_structures
@@ -330,6 +331,8 @@ def analyze_bars(
     log.extend(detect_dense_breakout_events(frame, symbol))
     # 模块 C 2B/破底翻：L1/L2 结构 -> 破底翻三版本确认 -> 跌破 L2 失效（研究代理）。
     log.extend(detect_two_b_reversal_events(frame, symbol))
+    # 模块 D 假跌破反转（V2 正式口径，§15 第三轮；与 false_breakout_reclaim 分组不合并）
+    log.extend(detect_module_d_events(frame, symbol))
     # P2.1 假突破快速收回：突破前高/结构位后被打回，窗口内快速收回且不破坏趋势。
     log.extend(detect_false_breakout_reclaim_events(frame, symbol))
     # 模块 D2 做空镜像骨架：突破压力位后拉回 + sma20_slope<0 + 空头排列 -> 做空方向事件。

@@ -23,8 +23,8 @@ from lei_signal.events.log import make_event
 def compute_volume_labels(frame: pd.DataFrame) -> pd.DataFrame:
     """逐日量能标签。"""
     spec = get_rule("volume_proxies")
-    up_surge_ratio = float(spec.param("up_surge_ratio", 1.5))
-    bearish_ratio = float(spec.param("bearish_ratio", 1.5))
+    up_surge_ratio = float(spec.param("up_surge_ratio", 2.0))
+    bearish_ratio = float(spec.param("bearish_ratio", 2.0))
     lookback = int(spec.param("shrink_lookback", 3))
 
     result = frame.copy()
@@ -66,9 +66,9 @@ def detect_volume_events(
     spec = get_rule("volume_proxies")
     events: list[SignalEvent] = []
 
-    up_surge_ratio = float(spec.param("up_surge_ratio", 1.5))
-    breakout_ratio = float(spec.param("breakout_ratio", 1.5))
-    bearish_ratio = float(spec.param("bearish_ratio", 1.5))
+    up_surge_ratio = float(spec.param("up_surge_ratio", 2.0))
+    breakout_ratio = float(spec.param("breakout_ratio", 2.0))
+    bearish_ratio = float(spec.param("bearish_ratio", 2.0))
     structure_necklines = structure_necklines or {}
 
     definitions = (

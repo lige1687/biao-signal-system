@@ -3790,3 +3790,19 @@ a { color: var(--accent); text-decoration: none; }
 .fp-vol { font-size: 11px; }
 .fp-vol.up { color: var(--lei-green); }
 .fp-vol.down { color: var(--text-faint); }
+.fp-market-strip {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  background: var(--bg-card);
+  padding: 8px 12px;
+  font-size: 13px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+}
+.fp-market-strip.hot { border-left-color: var(--warn); }
+.fp-market-strip.hot strong { color: var(--warn); }
+.fp-market-ann { color: var(--text-faint); font-size: 12px; }
+.fp-market-dim { color: var(--text-faint); font-size: 11px; }
+.breadth-small-metric.metric-danger strong { color: var(--error); }
+.breadth-small-metric.metric-opportunity strong { color: var(--lei-green); }

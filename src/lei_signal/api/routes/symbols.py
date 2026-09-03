@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import os
 from datetime import date
+from pathlib import Path
 from typing import Any
 
 from pydantic import BaseModel
@@ -56,6 +57,9 @@ from lei_signal.data.providers import _classify_error, default_provider
 from lei_signal.data.symbols import MARKET_CN, resolve_symbol
 from lei_signal.data.validation import DataUnavailableError
 from lei_signal.domain.rules_config import get_rule
+from lei_signal.features.indicators import average_true_range
+from lei_signal.features.weekly_context import weekly_env_series
+from lei_signal.rules.clock_classifier import TYPE2_STEADY_UP, clock_series
 from lei_signal.domain.types import (
     COLOR_CN,
     STAGE_CN,
@@ -386,32 +390,45 @@ def _build_trade_opportunities(result: AnalysisResult) -> list[TradeOpportunityD
 
 
 def _build_pullback_opportunities(result: AnalysisResult) -> list[PullbackOpportunityDTO]:
+    """模块 A（V2，first_ma_pullback 3.x）回撤机会卡。
+
+    V2 语义：每个 (趋势生命周期, 均线, 触碰日) 是一个独立回撤周期；卡片展示
+    仍未失败周期的当前条件（时钟二类 / SMA 排列与方向 / 周线环境 / A4 触发态）。
+    """
     if result.frame.empty:
         return []
     last_day = result.frame.index[-1].date()
     row = result.frame.iloc[-1]
     spec = get_rule("first_ma_pullback")
-    tolerance_pct = float(spec.param("touch_tolerance_pct"))
-    tolerance_atr = float(spec.param("touch_tolerance_atr"))
-    confirmation_window = int(spec.param("confirmation_window"))
+    distance_atr = float(spec.param("ma_touch_distance_atr", 1.0))
+    atr_period = int(spec.param("ma_touch_atr_period", 20))
+    atr20 = average_true_range(result.frame, atr_period)
+    atr20_last = atr20.iloc[-1]
+    clock2_now = int(clock_series(result.frame).iloc[-1]) == TYPE2_STEADY_UP
+    weekly_now = bool(weekly_env_series(result.frame).iloc[-1])
     events = [event for event in result.events if event.rule_id == "first_ma_pullback"]
-    by_scope: dict[tuple[str, int], list] = {}
+    by_scope: dict[tuple[str, int, str], list] = {}
     for event in events:
         lifecycle_id = event.lifecycle_id
         period = int(event.evidence.get("ma_period", 0))
+        touch_day = str(event.evidence.get("touch_date") or event.available_date.isoformat())
         if lifecycle_id is None or period not in (20, 60, 120):
             continue
-        by_scope.setdefault((lifecycle_id, period), []).append(event)
+        by_scope.setdefault((lifecycle_id, period, touch_day), []).append(event)
 
     opportunities: list[PullbackOpportunityDTO] = []
-    for (lifecycle_id, period), group in by_scope.items():
+    for (lifecycle_id, period, _touch_day), group in by_scope.items():
         ordered = sorted(group, key=lambda event: (event.available_date, event.event_id))
         touched = next(
             (event for event in ordered if event.evidence.get("sub_rule") == PULLBACK_TOUCHED),
             None,
         )
         confirmed = next(
-            (event for event in ordered if event.evidence.get("sub_rule") == PULLBACK_CONFIRMED),
+            (
+                event
+                for event in ordered
+                if event.evidence.get("sub_rule") == PULLBACK_CONFIRMED
+            ),
             None,
         )
         failed = next(
@@ -422,55 +439,67 @@ def _build_pullback_opportunities(result: AnalysisResult) -> list[PullbackOpport
             continue
 
         ma_value = float(row[f"sma{period}"])
-        atr = float(row["atr14"])
         close = float(row["close"])
-        tolerance = max(ma_value * tolerance_pct, atr * tolerance_atr)
+        close_lag = row.get(f"close_lag{period}")
+        atr20_value = (
+            float(atr20_last) if pd.notna(atr20_last) and atr20_last > 0 else None
+        )
+        band = (
+            ma_value + distance_atr * atr20_value
+            if atr20_value is not None
+            else ma_value
+        )
         arrangement = bool(float(row["sma20"]) > float(row["sma60"]) > float(row["sma120"]))
-        ma_rising = float(row[f"sma{period}_slope"]) > 0
-        green = str(row["signal_color"]) == "green"
-        price_holds = close >= ma_value - tolerance
-        current_holds = arrangement and ma_rising and green and price_holds
+        ma_rising = (
+            pd.notna(close_lag) and close > float(close_lag)
+        )
+        in_zone = close <= band
+        current_holds = arrangement and ma_rising and clock2_now and weekly_now
 
-        # 确认事件只在确认条件至今仍成立时持续展示；历史确认仍保留在事件和回测中。
+        # 已入场的周期只在环境条件至今仍成立时持续展示；历史事件保留在事件日志与回测中。
         if confirmed is not None and not current_holds:
             continue
-        if confirmed is None:
-            bars_since_touch = sum(
-                1
-                for timestamp in result.frame.index
-                if touched.available_date <= timestamp.date() <= last_day
-            ) - 1
-            if bars_since_touch >= confirmation_window:
-                continue
 
         state = "confirmed" if confirmed is not None else "watch"
-        satisfied = ["完整多头排列保持"] if arrangement else []
+        is_first = bool(touched.evidence.get("is_first_touch", False))
+        satisfied: list[str] = ["完整多头排列保持"] if arrangement else []
         missing: list[str] = []
+        if clock2_now:
+            satisfied.append("日线时钟二类（稳定上涨）")
+        else:
+            missing.append("日线时钟不在二类（门禁阻断新入场）")
+        if weekly_now:
+            satisfied.append("周线多头环境")
+        else:
+            missing.append("周线多头环境不成立")
         if ma_rising:
-            satisfied.append(f"SMA{period} 方向向上")
+            satisfied.append(f"SMA{period} 仍处上行方向（抵扣价判据）")
         else:
-            missing.append(f"SMA{period} 方向不再向上")
-        if price_holds:
-            satisfied.append("收盘未跌破目标均线容差")
-        else:
-            missing.append("收盘已跌破目标均线容差")
-        if green:
-            satisfied.append("当前 LEI 为绿色")
-        else:
-            missing.append("当前 LEI 不是绿色")
-        if not arrangement:
-            missing.append("完整多头排列已破坏")
+            missing.append(f"SMA{period} 不再上行")
+        if confirmed is None and in_zone:
+            satisfied.append("价格仍在回撤触碰带内")
+        elif confirmed is None:
+            missing.append("收盘已离开回撤触碰带（周期将结束）")
 
+        anchor_date = lifecycle_id.rsplit(":", 1)[-1]
         source_event = confirmed or touched
         sub_rule = PULLBACK_CONFIRMED if confirmed is not None else PULLBACK_TOUCHED
+        entry_variant = str(confirmed.evidence.get("entry_variant", "")) if confirmed else ""
+        stop_price = (
+            confirmed or touched
+        ).evidence.get("stop_price")
         opportunities.append(
             PullbackOpportunityDTO(
                 state=state,
-                state_cn="条件确认" if confirmed is not None else "触碰待确认",
+                state_cn=(
+                    f"入场信号（A4 { '早期版' if entry_variant == 'early' else '确认版' }）"
+                    if confirmed is not None
+                    else ("首次触碰待入场" if is_first else "非首次触碰待入场")
+                ),
                 ma_period=period,
                 ma_name=f"SMA{period}",
                 lifecycle_id=lifecycle_id,
-                trend_anchor_date=str(touched.evidence.get("trend_anchor_date", "")),
+                trend_anchor_date=anchor_date,
                 touch_date=touched.available_date.isoformat(),
                 confirmed_date=confirmed.available_date.isoformat() if confirmed else None,
                 latest_date=last_day.isoformat(),
@@ -481,15 +510,17 @@ def _build_pullback_opportunities(result: AnalysisResult) -> list[PullbackOpport
                 satisfied_conditions=satisfied,
                 missing_conditions=missing,
                 next_step_cn=(
-                    "继续管理目标均线方向、均线容差和转黑风险。"
+                    "持仓以 A5 结构低点为失效价，按退出规则管理（A6 三版见回测分组）。"
                     if confirmed is not None
                     else (
-                        f"等待最多 {confirmation_window} 根日 K 内收阳、站回目标均线上方，"
-                        "且趋势条件保持。"
+                        "等待 A3（底部构造或 EMA20 收复）+ A4（站上 EMA20 且 EMA20 上行）触发；"
+                        "收盘跌破本轮回撤低点则周期失败。"
                     )
                 ),
                 invalidation_cn=(
-                    f"转黑、SMA{period} 方向不再向上、完整多头排列破坏，或收盘跌破均线容差。"
+                    f"收盘跌破本轮回撤结构低点"
+                    f"（{f'{stop_price:.2f}' if stop_price is not None else '见事件 stop_price'}）"
+                    f"，或趋势生命周期重置（SMA 排列破坏/跌破 SMA120/转黑）。"
                 ),
                 explanation=to_explanation_dto(
                     lookup(rule_id="first_ma_pullback", sub_rule=sub_rule)
@@ -498,7 +529,10 @@ def _build_pullback_opportunities(result: AnalysisResult) -> list[PullbackOpport
                 **_rr_fields(result, confirmed),
             )
         )
-    return sorted(opportunities, key=lambda item: (item.state != "confirmed", item.ma_period))
+    return sorted(
+        opportunities,
+        key=lambda item: (item.state != "confirmed", item.ma_period),
+    )
 
 
 def _alignment_kind(row: pd.Series) -> str | None:  # noqa: ANN001
@@ -994,7 +1028,8 @@ def _dense_breakout_scenario(result: AnalysisResult) -> ConditionalScenarioDTO |
                 ),
                 caveat_cn=(
                     f"研究代理：源自规格 §9 模块 B；{ref_note}。"
-                    "横盘阈值复用 tradability_gate（待确认），不冒充 LEI 原始规则。"
+                    "横盘阈值复用 tradability_gate（V2 §17 已定（原则）：2%/126 交易日），"
+                    "不冒充 LEI 原始规则。"
                 ),
                 explanation=to_explanation_dto(lookup(rule_id=DB_RULE_ID, sub_rule=sub)),
                 supporting_event=event_dto(source, as_of=result.assessment.as_of),
@@ -1067,8 +1102,9 @@ def _two_b_reversal_scenario(result: AnalysisResult) -> ConditionalScenarioDTO |
             next_step_cn="继续管理 L2 失效线；跌破 L2 即 2B 彻底失效。",
             invalidation_cn=f"收盘跌破 L2({l2:.4f})，2B 结构彻底失效。",
             caveat_cn=(
-                "研究代理：规格原文未提供 2B 结构定义，L1/L2 量化口径为研究代理，"
-                "two_b_reclaim_bars 待确认，不冒充 LEI 原始规则。"
+                "研究代理：V2 规格 §9 C1 已填实结构定义，代码仍为 v1 L1/L2 口径"
+                "（pending_v2 重写排期）；two_b_reclaim_bars=5〔标定 V2.1，待彪哥确认〕，"
+                "不冒充 LEI 原始规则。"
             ),
             explanation=to_explanation_dto(lookup(rule_id=TB_RULE_ID, sub_rule=sub_rule)),
             supporting_event=event_dto(best, as_of=result.assessment.as_of),
@@ -1193,9 +1229,10 @@ def _build_tradability(result: AnalysisResult) -> TradabilityDTO | None:
         ],
         research_proxy=True,
         caveat_cn=(
-            "研究代理：均线纠缠度+ATR分位+斜率分类，cluster_threshold/"
-            "minimum_consolidation_bars/acceleration/bias 等参数待确认（规格第17节）；"
-            "多周期(条件7)用日线颜色翻转代理，60min 未接入。"
+            "研究代理：均线纠缠度+ATR分位+斜率分类，cluster_threshold=2%/"
+            "minimum_consolidation_bars=126 已定（原则，V2 §17），acceleration/bias 为"
+            " v1 判据、V2 时钟五类口径 pending_v2；多周期(条件7)用日线颜色翻转代理，"
+            "60min 未接入。"
         ),
     )
 
@@ -1625,6 +1662,21 @@ def market_context_data_status(request: Request, market_id: str) -> dict:
     return _market_context_service(request).data_status(mid)
 
 
+def _a_share_breadth_derived() -> dict[str, Any]:
+    """CN_ALL_A 面板的 delta_5 / 百分位派生值（带 TTL，失败返回全 None）。"""
+    try:
+        from lei_signal.market_context.a_share_breadth import get_ma_breadth_derived
+
+        return {
+            "breadth_20_delta_5": d["breadth_20_delta_5"],
+            "breadth_50_delta_5": d["breadth_50_delta_5"],
+            "percentile_20": d["percentile_20"],
+            "percentile_50": d["percentile_50"],
+        } if (d := get_ma_breadth_derived()) else {}
+    except Exception:  # noqa: BLE001 — 派生值缺失不影响主面板
+        return {}
+
+
 @router.get("/market-context/global-strip")
 def market_context_global_strip(request: Request) -> dict[str, Any]:
     """Return the two global panels (CN_ALL_A + SP500) for the topbar strip.
@@ -1717,10 +1769,8 @@ def market_context_global_strip(request: Request) -> dict[str, Any]:
         "breadth_20": ma20,
         "breadth_50": ma50,
         "breadth_200": ma200,
-        "breadth_20_delta_5": None,
-        "breadth_50_delta_5": None,
-        "percentile_20": None,
-        "percentile_50": None,
+        # 5日变化 + 点时百分位：从预计算历史派生（TTL 缓存），无历史时为 None
+        **_a_share_breadth_derived(),
         "long_regime": (
             ("bull" if (ma200 or 0) >= 50 else "bear") if ma200 is not None else "unknown"
         ),
@@ -1748,6 +1798,66 @@ def market_context_global_strip(request: Request) -> dict[str, Any]:
     }
     out.insert(0, cn_all_entry)
     return {"panels": out, "sentiment": _build_sentiment_summary()}
+
+
+def _find_sentiment_file(series: str) -> "Path | None":
+    """在 LEI_SENTIMENT_ROOT 下找 naaim/aaii 数据文件（csv 或 parquet，大小写兼容）。"""
+    root = os.environ.get("LEI_SENTIMENT_ROOT")
+    if not root:
+        return None
+    root_path = Path(root)
+    for ext in (".csv", ".parquet"):
+        for name in (f"{series}{ext}", f"{series.upper()}{ext}"):
+            p = root_path / name
+            if p.exists():
+                return p
+    return None
+
+
+@router.get("/market-context/sentiment/history")
+def market_context_sentiment_history(
+    series: str = Query("naaim", description="naaim 或 aaii"),
+    limit: int = Query(1040, ge=10, le=5000, description="最多返回期数（周频，1040≈20年）"),
+) -> dict[str, Any]:
+    """NAAIM / AAII 全历史观测（按调查周升序），供前端画情绪历史曲线。
+
+    与 global-strip 的 sentiment 摘要同源（同一加载器）；坏数据不抛错，
+    返回空列表由前端优雅降级。
+    """
+    from lei_signal.market_context.sentiment import (
+        load_aaii_observations,
+        load_naaim_observations,
+    )
+
+    key = series.lower()
+    if key not in ("naaim", "aaii"):
+        return {"series": series, "error": "unknown_series", "observations": []}
+    path = _find_sentiment_file(key)
+    if path is None:
+        return {"series": key, "error": "file_not_found", "observations": []}
+    try:
+        obs = load_aaii_observations(path) if key == "aaii" else load_naaim_observations(path)
+    except Exception as exc:  # noqa: BLE001 — 坏数据不炸接口
+        return {"series": key, "error": f"load_failed: {exc}", "observations": []}
+    ordered = sorted(obs, key=lambda o: o.survey_week)[-limit:]
+    out: list[dict[str, Any]] = []
+    for o in ordered:
+        row: dict[str, Any] = {
+            "survey_week": o.survey_week.isoformat(),
+            # 发布时间（AAII/NAAIM 周四发布）：投影散点用它对齐标普入场价，避免前视
+            "available_at": o.available_at.isoformat() if o.available_at else None,
+            "label": o.label.value,
+            "percentile": o.percentile,
+        }
+        if key == "naaim":
+            row["exposure_index"] = o.exposure_index
+        else:
+            row["bullish"] = o.bullish
+            row["neutral"] = o.neutral
+            row["bearish"] = o.bearish
+            row["bull_bear"] = o.bull_bear
+        out.append(row)
+    return {"series": key, "count": len(out), "observations": out}
 
 
 def _build_sentiment_summary() -> dict[str, Any]:

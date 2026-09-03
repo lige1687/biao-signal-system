@@ -31,7 +31,8 @@ _ERP_HIST_TTL = 24 * 3600
 _VALUATION_TTL = 24 * 3600
 _COMMODITY_TTL = 12 * 3600
 _ETF_TTL = 12 * 3600
-_OVERLAY_TTL = 24 * 3600
+_OVERLAY_TTL = 24 * 3600# 美国宏观（FRED）：就业周更、物价/房月更、利差日更，统一 6 小时
+_US_MACRO_TTL = 6 * 3600
 
 
 class _TtlCache:
@@ -447,3 +448,12 @@ class FundamentalsService:
             self._cache.invalidate("etf")
         data, _ = self._cache.get_or_load("etf", _ETF_TTL, sources.fetch_etf_strength)
         return {"etf": data}
+
+    def us_macro(self, *, refresh: bool = False) -> dict[str, Any]:
+        """美国宏观（FRED）：就业/房产/汽车/WEI/物价/订单/信用利差。
+
+        fetch_us_macro 内部逐序列降级（失败项进 errors），整体不抛错。
+        """
+        if refresh:
+            self._cache.invalidate("us_macro")
+        return self._cache.get_or_load("us_macro", _US_MACRO_TTL, sources.fetch_us_macro)[0]

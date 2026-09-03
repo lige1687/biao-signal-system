@@ -62,6 +62,9 @@ import type {
   TimingPortfolio,
   TimingEtfDefense,
   TimingPortfolioEquity,
+  NewsDigest,
+  NewsItemsResponse,
+  NewsStatus,
 } from "../types";
 
 const BASE = "/api";
@@ -445,4 +448,74 @@ export const dailyBriefApi = {
   byDate: (date: string) =>
     request<DailyBriefResponse>(`/daily-brief/${encodeURIComponent(date)}`),
   dates: () => request<{ dates: string[] }>("/daily-brief/dates"),
+};
+
+// ---- 因子观测台（factor panel，本机 WIP）----
+export interface FactorMeta {
+  label: string;
+  formula: string;
+  verdict: string;
+  verdict_level: "pass" | "weak" | "inverse" | "fail";
+  evidence: string;
+  usage: string;
+}
+
+export interface FactorRow {
+  code: string;
+  name: string | null;
+  group: string;
+  subgroup: string;
+  as_of: string;
+  close: number | null;
+  rv20_ann: number | null;
+  rv_pct: number | null;
+  mom_121: number | null;
+  mom_20: number | null;
+  mom_20_group_pct: number | null;
+  mom_121_rank?: number | null;
+  adx14: number | null;
+  vol_ok: boolean | null;
+  above_ema20: boolean | null;
+  above_ema120: boolean | null;
+  notes: string[];
+}
+
+export interface FactorPanelResponse {
+  generated_at: string;
+  provenance: string;
+  research_proxy_note: string;
+  study_date: string;
+  study_ref: string;
+  data_as_of: string | null;
+  counts: { symbols: number; sectors: number; skipped_too_short_or_broken: string[] };
+  market: {
+    market_rv_pct: number | null;
+    market_rv20_ann: number | null;
+    market_as_of: string | null;
+    market_basis: string;
+  } | null;
+  factors: Record<string, FactorMeta>;
+  symbols: FactorRow[];
+  sectors: FactorRow[];
+}
+
+export const factorsApi = {
+  panel: (refresh = false) =>
+    request<FactorPanelResponse>(`/factors/panel${refresh ? "?refresh=true" : ""}`),
+};
+
+export const newsApi = {
+  items: (params: {
+    category?: string; q?: string; source?: string; from?: string; to?: string;
+    scored?: string; min_importance?: number; limit?: number; offset?: number;
+  }) => {
+    const search = new URLSearchParams();
+    for (const [k, v] of Object.entries(params)) {
+      if (v !== undefined && v !== null && v !== "") search.set(k, String(v));
+    }
+    return request<NewsItemsResponse>(`/news/items?${search.toString()}`);
+  },
+  digests: (limit = 7) => request<{ digests: NewsDigest[] }>(`/news/digests?limit=${limit}`),
+  run: (full = false) => request<{ run: string }>(`/news/run${full ? "?full=true" : ""}`, { method: "POST" }),
+  status: () => request<NewsStatus>("/news/status"),
 };

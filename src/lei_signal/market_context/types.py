@@ -89,6 +89,19 @@ class BreadthDirection(StrEnum):
     UNKNOWN = "unknown"
 
 
+class VolRegime(StrEnum):
+    """Market volatility regime (research_proxy, 2026-08-27 实证阈值).
+
+    等权成分日收益的 20 日已实现波动率 3 年滚动分位：≥0.8 high / ≤0.2 low。
+    LEI 信号对账：市场高波期信号 60 日均值 0.73% vs 低波期 4.98%（3755 条）。
+    """
+
+    HIGH = "high"
+    MID = "mid"
+    LOW = "low"
+    UNKNOWN = "unknown"
+
+
 class ContextSourceKind(StrEnum):
     """Data provenance classification — formal, external check, or research proxy."""
 
@@ -298,6 +311,11 @@ class MarketContextSnapshot:
 
     # Drawdown
     drawdown_from_ath: float | None = None
+
+    # Market volatility regime (research_proxy, 2026-08-27)
+    market_rv20_ann: float | None = None
+    market_rv_pct: float | None = None
+    vol_regime: VolRegime = VolRegime.UNKNOWN
 
     # Events
     extreme_events: tuple[MarketContextEvent, ...] = ()

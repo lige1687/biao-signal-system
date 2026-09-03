@@ -52,7 +52,7 @@ def macd(
     signal 根起算，追加未来数据不改变旧值（因果/增量）。
 
     只计算数值，不给出买卖含义。MACD 表达均线扩散/密集=乖离率=**强度**，
-    不是转折趋势节点（解读口径见 ``configs/rules.v1.yaml`` 的 ``macd_strength``）。
+    不是转折趋势节点（解读口径见 ``configs/rules.v2.yaml`` 的 ``macd_strength``）。
     """
     if fast <= 0 or slow <= 0 or signal <= 0:
         raise ValueError("fast/slow/signal 必须为正")

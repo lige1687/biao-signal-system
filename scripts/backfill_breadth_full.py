@@ -6,7 +6,7 @@
 
 落盘：
   ~/.lei_signal_lab/cache/sp500_ma_breadth_history.json  (美股, key: breadth_20/50/200)
-  ~/.lei_signal_lab/cache/a_share_ma_breadth_history.json (A股, key: ma20/50/200_pct)
+  ~/.lei_signal_lab/cache/a_share_ma_breadth_full_history.json (A股研究史33年,与live文件分离防互踩; key: ma20/50/200_pct)
   ~/.lei_signal_lab/cache/sp500_klines.parquet            (美股收盘价透视表, 断点续传)
   ~/.lei_signal_lab/cache/a_share_klines_full.parquet     (A股收盘价透视表, 断点续传)
 
@@ -243,7 +243,7 @@ def run_cn(workers: int, limit: int) -> None:
     # 项目原版格式（ma20_pct/ma50_pct/ma200_pct）
     out = [{"date": h["date"], "ma20_pct": h["breadth_20"],
             "ma50_pct": h["breadth_50"], "ma200_pct": h["breadth_200"]} for h in hist]
-    _write_json(out, CACHE / "a_share_ma_breadth_history.json")
+    _write_json(out, CACHE / "a_share_ma_breadth_full_history.json")
     logger.info("A股宽度：首 %s 末 %s", out[0]["date"], out[-1]["date"])
 
 

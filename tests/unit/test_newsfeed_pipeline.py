@@ -1,6 +1,8 @@
 """管线编排单元测试：mock 各源，验证粗筛/幂等/降级/LLM 步骤。"""
 from __future__ import annotations
 
+from datetime import datetime
+
 from lei_signal.newsfeed import pipeline
 from lei_signal.newsfeed.models import NewsItem
 from lei_signal.newsfeed.pipeline import run_pipeline
@@ -22,13 +24,13 @@ _CFG = {
 
 
 def _em_items() -> list[NewsItem]:
+    # 简报只收"当天"条目，日期必须动态生成，否则测试第二天起必挂
+    t = datetime.now().astimezone().isoformat(timespec="seconds")
     return [
         NewsItem(source="eastmoney", title="央行降准", summary="央行宣布降准",
-                 published_at="2026-08-27T10:00:00+08:00",
-                 dedupe_key="em1"),
+                 published_at=t, dedupe_key="em1"),
         NewsItem(source="eastmoney", title="公司更换审计机构", summary="无关键词噪音",
-                 published_at="2026-08-27T11:00:00+08:00",
-                 dedupe_key="em2"),
+                 published_at=t, dedupe_key="em2"),
     ]
 
 

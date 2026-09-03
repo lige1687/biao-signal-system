@@ -34,9 +34,6 @@ DASHBOARD_INDICES: tuple[DashboardIndex, ...] = (
     DashboardIndex("^KS11", "韩国KOSPI", "韩国"),
 )
 
-#: 符号 → 展示覆盖。自选股若与默认大盘同符号，同样套用覆盖名/市场标签。
-INDEX_OVERRIDES: dict[str, DashboardIndex] = {idx.symbol: idx for idx in DASHBOARD_INDICES}
-
 #: 可添加的策略/规模/主题指数清单（供前端「策略指数」选择器使用）。
 #: 全部实测数据可达（2026-08）。红利低波指数本身（930904）各源不覆盖，
 #: 用 ETF 512890 代替；中证红利/上证红利可作为红利策略的指数口径。
@@ -57,6 +54,9 @@ STRATEGY_INDICES: tuple[DashboardIndex, ...] = (
     DashboardIndex("399967.SZ", "中证军工", "A股"),
     DashboardIndex("399006.SZ", "创业板指", "A股"),
     DashboardIndex("399005.SZ", "创业板50", "A股"),
+    # 中证行业指数（93xxxx 系列挂东财 market=2 行情位，secid 特判见 symbols.py；
+    # 其余 93 系可代码直输添加，按需在此登记进选择器）
+    DashboardIndex("931160.SS", "通信设备（中证）", "A股"),
     # 海外
     DashboardIndex("^NDX", "纳斯达克100", "美股"),
     DashboardIndex("^DJI", "道琼斯", "美股"),
@@ -64,6 +64,13 @@ STRATEGY_INDICES: tuple[DashboardIndex, ...] = (
     DashboardIndex("^VIX", "恐慌指数VIX", "美股"),
     DashboardIndex("^HSI", "恒生指数", "港股"),
 )
+
+#: 符号 → 展示覆盖。自选股若与默认大盘/策略指数同符号，同样套用覆盖名/市场标签。
+#: 策略指数一并纳入：加自选后列表/解析卡片直接显示中文名与「A股」标签，
+#: 而不是等首次分析回填或误标「沪市」。
+INDEX_OVERRIDES: dict[str, DashboardIndex] = {
+    idx.symbol: idx for idx in (*DASHBOARD_INDICES, *STRATEGY_INDICES)
+}
 
 #: 可添加的美股 ETF 清单（供前端「美股ETF」选择器使用）。
 #: 全部实测数据可达（2026-08，49/49 成功，501 根日线）。

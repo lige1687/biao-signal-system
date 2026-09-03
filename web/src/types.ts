@@ -421,6 +421,9 @@ export interface MarketContextSnapshot {
   long_regime: string;
   heat_state: string;
   drawdown_from_ath: number | null;
+  market_rv20_ann: number | null;
+  market_rv_pct: number | null;
+  vol_regime: string;
   summary: string;
   reasons: string[];
   conflicts: string[];
@@ -1867,4 +1870,56 @@ export interface TimingSignal {
   n_trades?: number;
   recent_trades?: TimingTrade[];
   error?: string;
+}
+
+// ================= newsfeed 资讯流 =================
+
+export type NewsCategory = "macro" | "risk" | "policy" | "industry" | "blogger";
+
+export interface NewsItem {
+  id: number;
+  source: string;
+  source_name: string | null;
+  url: string | null;
+  category: string | null;
+  title: string;
+  summary: string | null;
+  content: string | null;
+  symbols: string[];
+  direction: string | null;
+  importance: number | null;
+  llm_note: string | null;
+  published_at: string;
+  scored_at: string | null;
+}
+
+export interface NewsItemsResponse {
+  items: NewsItem[];
+  total: number;
+}
+
+export interface NewsDigestPayload {
+  sections: { category: string; headline: string; bullets: string[] }[];
+  top_events: { title: string; importance: number; why: string }[];
+}
+
+export interface NewsDigest {
+  digest_date: string;
+  payload: NewsDigestPayload;
+  created_at: string;
+}
+
+export interface NewsRunInfo {
+  id: number;
+  started_at: string;
+  finished_at: string | null;
+  status: string;
+  stats: Record<string, unknown>;
+  errors: { source: string; error: string }[];
+}
+
+export interface NewsStatus {
+  last_run: NewsRunInfo | null;
+  counts: { total: number; scored: number };
+  trigger: Record<string, unknown>;
 }

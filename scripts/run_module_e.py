@@ -109,7 +109,7 @@ def load_cn_breadth() -> pd.DataFrame:
     df = pd.DataFrame(obj)
     df["date"] = pd.to_datetime(df["date"])
     df = df.set_index("date").sort_index()
-    br = df[["ma20_pct", "ma50_pct", "ma200_pct"]].astype(float) * 100.0
+    br = df[["ma20_pct", "ma50_pct", "ma200_pct"]].astype(float)  # 已是百分数
     br.columns = ["b20", "b50", "b200"]
     return br
 
@@ -192,6 +192,7 @@ def sim_module_e(price: pd.DataFrame, buy_exec: dict, breadth: pd.DataFrame,
     want_hedge_today = top_zone.shift(1, fill_value=False)  # 昨收状态今日执行
     cash, units = capital, 0.0
     hedge_units, hedge_px = 0.0, np.nan
+    hedge_realized = 0.0  # 已实现对冲盈亏累计（毛额；费用单独入 fees_paid）
     fees_paid = 0.0  # 对冲费用入权益、不动现金（防耗干分批现金）
     equity, trades, hedges, turnover = {}, [], [], 0.0
     for d in days:
@@ -210,25 +211,30 @@ def sim_module_e(price: pd.DataFrame, buy_exec: dict, breadth: pd.DataFrame,
                 and units > 0):  # 开对冲
             notional = units * op * hedge_ratio
             hedge_units, hedge_px = notional / op, op
-            cash -= notional * COST
+            fees_paid += notional * COST
             turnover += notional
             hedges.append({"entry_date": d.date().isoformat(),
                            "entry_open": round(op, 2),
                            "notional": round(notional, 2)})
         elif not hedging and hedge_units > 0.0:  # 平对冲
-            pnl = hedge_units * (hedge_px - op)
-            cash -= hedge_units * op * COST
+            gross = hedge_units * (hedge_px - op)
+            exit_fee = hedge_units * op * COST
+            hedge_realized += gross
+            fees_paid += exit_fee
             turnover += hedge_units * op
             hedges[-1].update({"exit_date": d.date().isoformat(),
                                "exit_open": round(op, 2),
-                               "pnl": round(pnl, 2)})
+                               "pnl": round(gross - exit_fee
+                                            - hedges[-1]["notional"] * COST, 2)})
             hedge_units, hedge_px = 0.0, np.nan
-        hedge_pnl = hedge_units * (hedge_px - cl) if hedge_units > 0 else 0.0
-        equity[d] = cash + units * cl + hedge_pnl
-    if hedge_units > 0:  # 末端未平仓按最后收盘标记
+        hedge_mark = hedge_units * (hedge_px - cl) if hedge_units > 0 else 0.0
+        equity[d] = (cash + units * cl + hedge_mark + hedge_realized
+                     - fees_paid)
+    if hedge_units > 0:  # 末端未平仓按最后收盘标记（费用已计）
         hedges[-1].update({"exit_date": None,
                            "pnl": round(hedge_units
-                                        * (hedge_px - price["close"].iloc[-1]), 2)})
+                                        * (hedge_px - price["close"].iloc[-1])
+                                        - hedges[-1]["notional"] * COST, 2)})
     return (pd.Series(equity).sort_index(), trades, hedges, turnover)
 
 
@@ -336,6 +342,7 @@ def run_market(tag: str, breadth: pd.DataFrame, price: pd.DataFrame,
             key = f"{v}_hedge{int(hr * 100)}"
             arms[key] = {
                 **summarize(key, eq, to),
+                "_equity": eq,
                 "n_signals": len(trades), "n_hedge_episodes": len(
                     [h for h in hedges if h.get("exit_date")]),
                 "hedge_pnl_sum": round(sum(h.get("pnl", 0) for h in hedges), 0),
@@ -360,6 +367,16 @@ def run_market(tag: str, breadth: pd.DataFrame, price: pd.DataFrame,
             st = arms[key]["event_study"]
             st["oos_signals"] = [s for s in st["signals"]
                                  if pd.Timestamp(s["exec_date"]) > OOS_CUT]
+    # ---- 月度权益曲线落盘（审计用）----
+    try:
+        cols = {"S0_bh": bh_eq, "S1_dca": s1_eq}
+        for key in ("v1_hedge0", "v1_hedge50", "v1_hedge100", "v3_hedge50"):
+            if key in arms:
+                cols[key] = arms[key]["_equity"]
+        monthly = pd.DataFrame(cols).resample("ME").last().dropna(how="all")
+        monthly.to_csv(RAW / f"{tag}_monthly_equity.csv")
+    except Exception:  # noqa: BLE001 — 落盘失败不阻断主流程
+        pass
     return res
 
 
@@ -383,8 +400,9 @@ def main() -> None:
                            > us["arms"]["v3_hedge50"]["event_study"]
                            ["baseline_all_days"]["12m"]["mean"]),
         "J3_hedge_pnl_pos": bool(v1["hedge_pnl_sum"] > 0),
+        # max_dd 为负数：回撤更浅 = 数值更大（更接近 0）
         "J3_hedge_reduces_dd": bool(v1["max_dd"]
-                                    < us["arms"]["v1_hedge0"]["max_dd"]),
+                                    > us["arms"]["v1_hedge0"]["max_dd"]),
     }
 
     # ---------- QQQ 交叉（宽度宇宙≠标的，口径近似）----------
@@ -409,7 +427,8 @@ def main() -> None:
 
     # ---------- A 股参考口径（1990 宽度 × 2005 起指数，不计判定）----------
     ref_br = load_cn_breadth_ref()
-    ref_px = fetch_ohlc("000300.SS", "2005-01-01", "cn_csi300_ohlc.parquet")
+    ref_px = pd.read_parquet(CACHE / "timing/000300.parquet")[["open", "close"]]
+    ref_px.index = pd.to_datetime(ref_px.index).tz_localize(None).normalize()
     ref = run_market("cn_ref", ref_br, ref_px, do_hedge=False)
 
     out = {
@@ -419,8 +438,14 @@ def main() -> None:
                    "oos_cut": str(OOS_CUT.date())},
         "us": us, "us_qqq_cross": qqq, "cn": cn, "cn_reference_only": ref,
     }
+    def _strip(obj):
+        if isinstance(obj, dict):
+            return {k: _strip(v) for k, v in obj.items()
+                    if not str(k).startswith("_")}
+        return obj
+
     (RAW / "module_e_results.json").write_text(
-        json.dumps(out, indent=2, ensure_ascii=False, default=str))
+        json.dumps(_strip(out), indent=2, ensure_ascii=False, default=str))
     # 明细 CSV
     for tag, blk in (("us", us), ("cn", cn), ("cn_ref", ref)):
         rows = []

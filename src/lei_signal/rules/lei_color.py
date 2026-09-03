@@ -1,6 +1,6 @@
 """LEI 绿灰黑三色。
 
-严格公式（configs/rules.v1.yaml::lei_color，provenance=lei_explicit）：
+严格公式（configs/rules.v2.yaml::lei_color，provenance=lei_explicit）：
     绿色 = Close(t) > EMA20(t) 且 Close(t) > Close(t-20)
     黑色 = Close(t) < EMA20(t) 且 Close(t) < Close(t-20)
     灰色 = 数据已就绪，但绿色与黑色均不成立

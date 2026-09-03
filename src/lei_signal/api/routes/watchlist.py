@@ -64,12 +64,12 @@ def get_watchlist(request: Request) -> list[WatchlistItemDTO]:
 
 @router.get("/sectors")
 def list_sectors() -> dict[str, list[dict[str, str]]]:
-    """可添加的板块/指数/ETF 清单，分三类返回。
-
-    供前端选择器候选框使用。``sectors`` = 同花顺 90 个行业板块；
-    ``indices`` = 策略/规模/主题指数（上证50、中证500、中证红利……）；
-    ``us_etfs`` = 美股 ETF（宽基/行业/风格/债券商品，全部实测数据可达）。
+    """统一添加目录：``sectors`` = 同花顺 90 个行业板块；
+    ``indices`` = 策略/规模/主题指数（上证50、中证500、931160 通信设备……）；
+    ``us_etfs`` = 美股 ETF；``concepts`` = 东财概念板块（约 500 个，TTL 缓存，
+    失败降级为空列表）。前端添加对话框的单一搜索框消费全部四组。
     """
+    from lei_signal.api import catalog
     from lei_signal.api.labels import THS_INDUSTRY_NAMES
 
     sectors = [
@@ -88,7 +88,13 @@ def list_sectors() -> dict[str, list[dict[str, str]]]:
         {"code": etf.symbol, "name": etf.display_name, "symbol": etf.symbol}
         for etf in config.US_ETFS
     ]
-    return {"sectors": sectors, "indices": indices, "us_etfs": us_etfs}
+    concepts = catalog.concept_boards()
+    return {
+        "sectors": sectors,
+        "indices": indices,
+        "us_etfs": us_etfs,
+        "concepts": concepts,
+    }
 
 
 @router.post("/watchlist", response_model=WatchlistItemDTO, status_code=201)

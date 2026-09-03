@@ -254,7 +254,7 @@ def _fetch_kline(sym: str) -> list[tuple[str, float]] | None:
     return None
 
 
-_KLINE_KEEP = 800  # 每只保留最近 N 个交易日收盘价（~3.2年，足够算 MA200 + 历史宽度）
+_KLINE_KEEP = 2600  # 每只保留最近 N 个交易日收盘价（~10.4年；2026-08 深回填后加深，防日常增量刷新把历史裁回 800）
 
 
 def _kline_cache_path() -> Path:
@@ -496,9 +496,65 @@ def get_cached_ma_breadth() -> dict | None:
         return None
 
 
+def get_ma_breadth_derived(ttl_seconds: int = 300) -> dict:
+    """从历史序列派生：5 日变化 + 点时百分位（1260 日窗口，与 SP500 口径同族）。
+
+    结果做 TTL 缓存（默认 5 分钟）：strip 每次刷新都会调，但历史文件只在
+    收盘后预计算时变一次，没必要每请求都重算 2600 点。
+    无历史/无当前快照时各字段为 None（前端按缺失展示，不冒充）。
+    """
+    now = time.time()
+    cached = _DERIVED_CACHE.get("v")
+    if cached and now - cached[0] < ttl_seconds:
+        return cached[1]
+
+    out: dict = {
+        "breadth_20_delta_5": None, "breadth_50_delta_5": None,
+        "percentile_20": None, "percentile_50": None,
+    }
+    try:
+        hist = get_ma_breadth_history(lookback_days=1400)
+        snap = get_cached_ma_breadth()
+        if hist and snap:
+            import pandas as pd
+
+            as_of = snap.get("trading_day") or hist[-1]["date"]
+            for key, cur, hist_key in (
+                ("breadth_20", snap.get("ma20_pct"), "ma20_pct"),
+                ("breadth_50", snap.get("ma50_pct"), "ma50_pct"),
+            ):
+                if cur is None:
+                    continue
+                s_hist = pd.Series(
+                    {h["date"]: h.get(hist_key) for h in hist if h.get(hist_key) is not None},
+                    dtype=float,
+                ).sort_index()
+                s_hist.index = pd.to_datetime(s_hist.index)
+                # 用历史末值对齐当前（快照代表交易日可能比历史末行晚半天）
+                vis = s_hist[s_hist.index <= pd.Timestamp(as_of)]
+                if len(vis) >= 6:
+                    out[f"{key}_delta_5"] = round(float(cur - vis.iloc[-5]), 2)
+                if len(vis) >= 250:
+                    from lei_signal.market_context.breadth import rolling_percentile_at
+
+                    pct = rolling_percentile_at(
+                        vis, as_of=pd.Timestamp(as_of).date(), lookback=1260, min_periods=250,
+                    )
+                    if pct is not None:
+                        out[f"percentile_{key.split('_')[1]}"] = round(float(pct), 1)
+    except Exception as e:  # noqa: BLE001 — 派生值失败不炸 strip
+        logger.warning("宽度派生值计算失败: %s", e)
+
+    _DERIVED_CACHE["v"] = (now, out)
+    return out
+
+
+_DERIVED_CACHE: dict = {}
+
+
 def append_ma_breadth_history(
     ma20: float | None, ma50: float | None, ma200: float | None,
-    max_points: int = 1260, trading_day: str | None = None,
+    max_points: int = 20000, trading_day: str | None = None,
 ) -> None:
     """把当日 MA 上方占比追加进历史序列（供趋势图）。同日多次运行则覆盖。
 

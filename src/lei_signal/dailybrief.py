@@ -21,7 +21,9 @@ import logging
 import os
 from pathlib import Path
 
+from lei_signal.api.labels import RISK_STATE_CN, RULE_CN
 from lei_signal.data.cache import DEFAULT_CACHE_DIR
+from lei_signal.domain.types import COLOR_CN, STAGE_CN
 
 logger = logging.getLogger(__name__)
 
@@ -165,15 +167,27 @@ def detect_breadth_anomalies(
 
 
 # ── ② 自选 · 状态抽取与 diff（纯函数）───────────────────────────────────────
+def _color_cn(color: object) -> str | None:
+    v = getattr(color, "value", color)
+    return COLOR_CN.get(v) if isinstance(v, str) else None
+
+
+def _rule_names(rule_ids: set[str]) -> str:
+    """规则 ID →「、」连接的中文名（账本未登记的保留原 ID，不冒充翻译）。"""
+    return "、".join(sorted(RULE_CN.get(r, r) for r in rule_ids))
+
+
 def extract_symbol_state(assessment) -> dict:
     """从 analyze 判定结果抽确定性状态（只取规则引擎输出，不新增判断）。"""
     sup = getattr(assessment, "supports", []) or []
     con = getattr(assessment, "conflicts", []) or []
+    stage = getattr(getattr(assessment, "stage", None), "value", None)
+    risk_state = getattr(getattr(assessment, "risk_state", None), "value", None)
     return {
         "color": getattr(getattr(assessment, "color", None), "value", None),
-        "color_cn": getattr(assessment, "color_cn", None),
-        "stage_cn": getattr(assessment, "stage_cn", None),
-        "risk_state_cn": getattr(assessment, "risk_state_cn", None),
+        "color_cn": _color_cn(getattr(assessment, "color", None)),
+        "stage_cn": STAGE_CN.get(stage, stage),
+        "risk_state_cn": RISK_STATE_CN.get(risk_state, risk_state),
         "dimensions": dict(getattr(assessment, "dimensions", {}) or {}),
         "support_rules": sorted({f.rule_id for f in sup if getattr(f, "rule_id", None)}),
         "conflict_rules": sorted({f.rule_id for f in con if getattr(f, "rule_id", None)}),
@@ -188,7 +202,7 @@ def diff_symbol_state(prev: dict | None, curr: dict) -> dict:
         return {"is_new": True, "changes": ["首次纳入简报（无基线）"], "n_changes": 1}
     if prev.get("color") != curr.get("color"):
         changes.append(
-            f"道路色变：{prev.get('color_cn') or prev.get('color')} → "
+            f"趋势颜色变化：{prev.get('color_cn') or prev.get('color')} → "
             f"{curr.get('color_cn') or curr.get('color')}"
         )
     for dim, val in curr.get("dimensions", {}).items():
@@ -200,13 +214,13 @@ def diff_symbol_state(prev: dict | None, curr: dict) -> dict:
     add_c = set(curr["conflict_rules"]) - set(prev.get("conflict_rules") or [])
     rm_c = set(prev.get("conflict_rules") or []) - set(curr["conflict_rules"])
     if add_s:
-        changes.append(f"新增支持条件：{','.join(sorted(add_s))}")
+        changes.append(f"新增支持条件：{_rule_names(add_s)}")
     if add_c:
-        changes.append(f"新增冲突条件：{','.join(sorted(add_c))}")
+        changes.append(f"新增冲突条件：{_rule_names(add_c)}")
     if rm_s:
-        changes.append(f"支持条件消失：{','.join(sorted(rm_s))}")
+        changes.append(f"支持条件消失：{_rule_names(rm_s)}")
     if rm_c:
-        changes.append(f"冲突条件消除：{','.join(sorted(rm_c))}")
+        changes.append(f"冲突条件消除：{_rule_names(rm_c)}")
     if curr.get("new_event_count"):
         changes.append(f"当日新增标志性事件 {curr['new_event_count']} 条")
     return {"is_new": False, "changes": changes, "n_changes": len(changes)}
@@ -308,7 +322,7 @@ def render_template(payload: dict) -> str:
         for a in anomalies:
             line = f"  ⚠ {a['note_cn']}"
             if a.get("day_change") is not None:
-                line += f"；较前日 {a['day_change']:+.1f}pct"
+                line += f"；较前日 {a['day_change']:+.1f} 个百分点"
             lines.append(line)
     else:
         lines.append("  环境无异常变动（宽度均在正常分位区间）")
@@ -339,9 +353,9 @@ def render_template(payload: dict) -> str:
             flow = it.get("flow_20d_main_yi")
             flow_s = f"{flow:+.0f}亿" if flow is not None else "-"
             head = f"  {it.get('name')}（连续{it.get('streak', 1)}天｜{tags}"
-            lines.append(f"{head}｜RS {it.get('rs_pctile') or '-'}｜PE {pe_s}｜20日主力 {flow_s}）")
+            lines.append(f"{head}｜强弱百分位 {it.get('rs_pctile') or '-'}｜市盈率 {pe_s}｜20日主力净流入 {flow_s}）")
             if it.get("next_watch"):
-                lines.append(f"    ↳ {it['next_watch']}")
+                lines.append(f"    ↳ {it['next_watch'].replace('SMA60', '60日线')}")
     else:
         lines.append("  当前无持续上榜板块")
     lines.append("")
@@ -362,6 +376,8 @@ DAILY_BRIEF_SYSTEM_PROMPT = """你是 LEI 交易系统的收盘简报表达层�
 3. 自选按 verdict 档位排序（actionable > waiting > blocked/none），不得跨档提权。
 4. 固定三段：市场环境（只讲异常，无异常一句带过）→ 自选重点变化 → 板块观察池；每段不超 6 行。
 5. 结尾固定一句「research_proxy 研究代理，非买卖建议」；slot=1445 时保留「预判（未收盘）」。
+6. 面向普通用户写通俗中文：不出现 pct、verdict、RS、SMA 等英文缩写
+   （百分比写「个百分点」，相对强度写「强弱百分位」，均线写「60日线」等）。
 """
 
 

@@ -1,16 +1,17 @@
 import { useSyncExternalStore } from "react";
 import { Route, Routes } from "react-router-dom";
 import TopNav from "./components/TopNav";
-import DashboardPage from "./pages/DashboardPage";
+import AgentConsole from "./components/AgentConsole";
 import DetailPage from "./pages/DetailPage";
+import FactorPanelPage from "./pages/FactorPanelPage";
 import FundamentalsPage from "./pages/FundamentalsPage";
+import NewsPage from "./pages/NewsPage";
 import SectorsPage from "./pages/SectorsPage";
 import DailyBriefPage from "./pages/DailyBriefPage";
 import SupervisorPage from "./pages/SupervisorPage";
 import WorkspacePage from "./pages/WorkspacePage";
 import BacktestPage from "./pages/BacktestPage";
 import ResearchPage from "./pages/ResearchPage";
-import AgentConsole from "./components/AgentConsole";
 
 // ---- AgentConsole 全局开合（模块级单例 store，避免引入状态库）----
 // 上下文标的由 AgentConsole 从 useLocation 自行解析（matchPath "/symbol/:symbol"），
@@ -52,14 +53,16 @@ export default function App() {
       <Routes>
         {/* 三栏看盘工作台：默认入口 */}
         <Route path="/" element={<WorkspacePage />} />
-        {/* 卡片墙总览：一屏扫全部标的时更直观 */}
-        <Route path="/grid" element={<DashboardPage />} />
         {/* 单标的详情页：保留独立链接入口 */}
         <Route path="/symbol/:symbol" element={<DetailPage />} />
         {/* 基本面参考：宏观 + 行业板块全景（参考层，不进技术信号） */}
         <Route path="/fundamentals" element={<FundamentalsPage />} />
         {/* 行业板块趋势工作台：等权指数 / RS / 宽度 / 阶段（research_proxy） */}
         <Route path="/sectors" element={<SectorsPage />} />
+        {/* 因子观测台：常见因子读数/分位/排名 + 实证评级留痕（research_proxy，不挡信号） */}
+        <Route path="/factors" element={<FactorPanelPage />} />
+        {/* 资讯流：基本面消息检索与排序（宏观/风险/政策/行业 + 博主观点，参考层） */}
+        <Route path="/news" element={<NewsPage />} />
         {/* 收盘简报：环境异常 → 自选重点变化 → 板块观察池（research_proxy） */}
         <Route path="/backtest" element={<BacktestPage />} />
         {/* 本轮研究展示：宽度/模块E/终审 轮次结果（静态数据页） */}
