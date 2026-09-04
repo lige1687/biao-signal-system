@@ -1,0 +1,115 @@
+{
+ "task": "模块B 美股核心 ETF 池数据（任务 BC 第一步）",
+ "fetched_at_utc": "2026-09-04T02:47:18.856625+00:00",
+ "provider": "YahooPriceProvider (yfinance period=max 1d auto_adjust actions=False)",
+ "pool_preregistered": [
+  "QQQ",
+  "SPY",
+  "DIA",
+  "IWM",
+  "XLK",
+  "XLF",
+  "XLV",
+  "XLE"
+ ],
+ "symbols": [
+  {
+   "symbol": "QQQ",
+   "ok": true,
+   "rows": 6915,
+   "start": "1999-03-10",
+   "end": "2026-09-03",
+   "adjusted": true,
+   "crosscheck": {
+    "ref": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/QQQ.parquet",
+    "overlap_days": 6908,
+    "daily_return_corr": 1.0,
+    "mean_abs_diff_pp": 3e-05,
+    "passed": true
+   },
+   "crosscheck_note": null,
+   "envelope_repair": {
+    "repaired_rows": 0,
+    "max_abs_violation_usd": 0.0
+   },
+   "corp_action_jumps": [],
+   "big_days_gt12pct": [
+    {
+     "date": "2000-01-07",
+     "ret": 0.1237
+    },
+    {
+     "date": "2001-01-03",
+     "ret": 0.1684
+    },
+    {
+     "date": "2008-10-13",
+     "ret": 0.1216
+    },
+    {
+     "date": "2025-04-09",
+     "ret": 0.12
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "ok": false,
+   "error": "SPY 行情存在非法 OHLC 关系，最早出现在 1993-02-12，共 29 行"
+  },
+  {
+   "symbol": "DIA",
+   "ok": false,
+   "error": "DIA 行情存在非法 OHLC 关系，最早出现在 1998-07-21，共 13 行"
+  },
+  {
+   "symbol": "IWM",
+   "ok": false,
+   "error": "没有找到 IWM 的日线行情，请检查代码和市场后缀"
+  },
+  {
+   "symbol": "XLK",
+   "ok": false,
+   "error": "XLK 行情存在非法 OHLC 关系，最早出现在 2002-05-22，共 6 行"
+  },
+  {
+   "symbol": "XLF",
+   "ok": false,
+   "error": "XLF 行情存在非法 OHLC 关系，最早出现在 1999-05-03，共 28 行"
+  },
+  {
+   "symbol": "XLV",
+   "ok": false,
+   "error": "XLV 行情存在非法 OHLC 关系，最早出现在 2002-07-18，共 4 行"
+  },
+  {
+   "symbol": "XLE",
+   "ok": false,
+   "error": "XLE 行情存在非法 OHLC 关系，最早出现在 2000-07-12，共 28 行"
+  }
+ ],
+ "pipeline_check": {
+  "symbol": "^GSPC",
+  "rows": 24786,
+  "range": [
+   "1927-12-30",
+   "2026-09-03"
+  ],
+  "ref": "/Users/yongbiaoli/.lei_signal_lab/cache/^GSPC.bars.parquet",
+  "overlap_days": 501,
+  "daily_return_corr": 1.0,
+  "mean_abs_diff_pp": 0.0,
+  "passed": true
+ },
+ "b20_label_source": {
+  "file": "pool/breadth_sp500_b20.parquet",
+  "origin": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/breadth_sp500.parquet",
+  "range": [
+   "1986-01-02",
+   "2026-08-27"
+  ],
+  "rows": 10242
+ },
+ "n_ok": 1,
+ "failures": []
+}

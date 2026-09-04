@@ -19,7 +19,10 @@
    何处存疑；注意其 §3/§4 写于 23ca826 补齐归档之前，部分"零归档"结论
    已过时，以本索引 §1 为准）
 4. `CROSS-GROUP-SYNTHESIS-2026-09-01.md` — 跨组统一视图与开放冲突清单
-5. 本索引
+5. `../system-architecture-and-decisions-2026-09-04.md` — **系统四轨架构
+   原型 + 决策台账（D1~D4 待拍板事项）+ 研究队列**（2026-09-04 起维护，
+   拍板与立项状态以它为准）
+6. 本索引
 
 ## 1. 任务编号总账（任务书 → 执行归档）
 
@@ -69,6 +72,16 @@
 | AC | prompt-AC-timescale-layering-precheck-2026-09-03 | 语义五前置：长短期信号分层 | 二 |
 | AD | prompt-AD-overnight-us-cn-precheck-2026-09-03 | 语义七前置：美股隔夜×次日A股关联 | 二 |
 
+### 9-04 轮（AU–AW，会话内自研自跑，预注册+双跑哈希同前例）
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| AU | 二元+滞回 vs 现役三档（决策级，AJ/AP 搁置的决策） | binary-hysteresis-vs-t3-decision-2026-09-04 | ✅ 判「换」（宽基域，待用户拍板） |
+| AV | 极端底部价格阶梯执行（R1 主臂+R2 追涨兜底） | price-ladder-execution-2026-09-04 | ✅ 交换结构（+6.1pp中位 vs V型左尾） |
+| AW | 宽度择时个股边界（12美股大盘股+SPY/QQQ） | us-stocks-timing-boundary-2026-09-04 | ✅ 判「无优势」（有效域=跟随宽度的宽基） |
+| AX | 换档决策走样本前向验证 + 相对痛苦度量 | switch-walkforward-and-pain-2026-09-04 | ✅ 判「保持」（6/11 压线；重选协议是 edge 一半） |
+| AY | A股个股面板×四引擎 + 跟随度分层（81只） | astock-panel-timing-2026-09-04 | ✅ 混合；机制线支持边界判据（跟随度连续谱） |
+
 不发（等条件）：语义二/六（总纲判高风险暂缓）、语义八（等 Z 结果）、
 债务二（等用户拍板立项）、债务五 P 部分（等用户表态是否有兴趣）。
 
@@ -76,6 +89,8 @@
 
 ### 元与跨组
 
+- `../system-architecture-and-decisions-2026-09-04.md` — 系统四轨架构原型 +
+  决策台账 + 研究队列（docs 根，2026-09-04 起的决策状态权威文件）
 - `CROSS-GROUP-SYNTHESIS-2026-09-01.md` — 跨组统一视图（五路归档汇总）
 - `coverage-sync-2026-09-02.md` — 跨机器任务覆盖对账 + stash 26份报告恢复
 - `FINAL-VERDICT-walkforward-2026-08-27.md` — walk-forward 时序终审（第十三轮）
@@ -178,6 +193,8 @@
 | ashare_axes / cross_check / etf_breadth / stock_breadth | —（未对账） |
 | backtest-runs-snapshot-2026-08-31 / pool-snapshot-2026-08-25 | 环境保全快照（非单一实验） |
 | pollution_recheck / spx_vs_ndx | pollution-recheck / spx-vs-ndx（任务Y/P，09-03） |
+| agent_AU-binary-hyst-vs-t3 / agent_AV-price-ladder / agent_AW-us-stocks-timing | binary-hysteresis-vs-t3-decision / price-ladder-execution / us-stocks-timing-boundary（09-04） |
+| agent_AX-walkforward-switch / agent_AY-astock-panel | switch-walkforward-and-pain / astock-panel-timing（09-04 晚） |
 
 ## 4. 悬案与未执行清单
 

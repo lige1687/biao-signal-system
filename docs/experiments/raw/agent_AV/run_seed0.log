@@ -1,0 +1,7 @@
+=== AV H1/H2 验证（预注册判定，跑前冻结线）===
+anchors: all_pass=True
+[H1] verdict=不成立 E0=0.726 E1=0.4792 delta=-0.2468 EF=1.0839 NF=40 etf_seg_consistent=True
+      reasons: ['delta=-0.2468<=0（独立样本无改善或恶化）', 'EF=1.0839>0 且 NF=40>=10（栖息地为正，方向反证）']
+[H2] verdict=证据不足 E0=0.726 E1=0.8606 delta=0.1345 EF=-0.4577 NF=10 etf_seg_consistent=True
+      reasons: ['delta=0.1345（未达+0.20成立线）', 'EF=-0.4577', 'NF=10']
+sha256(normalized_json) = e0a8ccbdecdfc1cffa01953be8950709b46818315d7f7ddcbd317c76a700bc22

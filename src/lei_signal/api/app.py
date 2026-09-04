@@ -17,7 +17,9 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from lei_signal.api import config
+from lei_signal.api.factor_service import FactorPanelService
 from lei_signal.api.market_context_service import MarketContextService
+from lei_signal.api.preheat import default_symbols_fn, start_preheat
 from lei_signal.api.routes import (
     agent,
     backtest,
@@ -36,11 +38,9 @@ from lei_signal.api.routes import (
     watch_subscriptions,
     watchlist,
 )
-from lei_signal.api.preheat import default_symbols_fn, start_preheat
+from lei_signal.api.sectors_service import SectorsService
 from lei_signal.api.services import AnalysisService
 from lei_signal.env import load_env
-from lei_signal.api.sectors_service import SectorsService
-from lei_signal.api.factor_service import FactorPanelService
 from lei_signal.fundamentals.service import FundamentalsService
 from lei_signal.newsfeed.service import NewsfeedService
 
