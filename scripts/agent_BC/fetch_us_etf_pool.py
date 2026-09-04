@@ -106,9 +106,9 @@ JUMP_LO = 1.0 / 1.5    # 下界
 BIG_DAY = 0.12         # 大幅日 |单日收益| 阈值（登记性质）
 
 ENV_REPAIR_MAX_USD = 0.01   # 包络微修复上限（绝对美元）；超过即硬失败
-NET_RETRY_ROUNDS = 4        # Yahoo 瞬时限流整轮重试
-NET_SYMBOL_SLEEP = 60.0     # 标的间隔（实测限流按静默期恢复，拉长间隔）
-NET_ROUND_SLEEP = 240.0     # 轮间隔
+NET_RETRY_ROUNDS = 3        # Yahoo 瞬时限流整轮重试
+NET_SYMBOL_SLEEP = 120.0    # 标的间隔（实测限流按静默期恢复，越慢越稳）
+NET_ROUND_SLEEP = 600.0     # 轮间隔（10 分钟静默）
 
 
 def fetch(provider: YahooPriceProvider, symbol: str) -> pd.DataFrame:
@@ -226,7 +226,7 @@ def fetch_all(provider: YahooPriceProvider,
 def main() -> None:
     RAW.mkdir(parents=True, exist_ok=True)
     POOL_DIR.mkdir(parents=True, exist_ok=True)
-    provider = YahooPriceProvider()
+    provider = YahooPriceProvider(attempts=1)  # 限流期内部重试只会火上浇油
 
     failures: list[str] = []
     manifest: dict = {

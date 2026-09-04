@@ -1,0 +1,4124 @@
+{
+ "task": "模块B（密集突破）美股核心 ETF 池边界测试（预注册域外复现）",
+ "params": {
+  "pool": [
+   "SPY",
+   "QQQ",
+   "DIA",
+   "IWM",
+   "XLK",
+   "XLF",
+   "XLV",
+   "XLE"
+  ],
+  "module": "B",
+  "cb": 40,
+  "cl": 0.08,
+  "entry": "breakout",
+  "exit": "b3_dual",
+  "volume_confirm": false,
+  "fee": "standard(单边5bp)",
+  "limit_guard": "True(is_cn_symbol门控→美股自动跳过,登记)",
+  "rr_min": null,
+  "data": "yfinance auto_adjust 全史，见 pool_manifest.json"
+ },
+ "env_snapshot_sha256_16": {
+  "src/lei_signal/rules/first_ma_pullback.py": "cbad98a136135a93",
+  "src/lei_signal/rules/dense_breakout.py": "ffb37ff38e99c31c",
+  "src/lei_signal/backtest/engine.py": "ca9fe8344aa5580e",
+  "src/lei_signal/backtest/service.py": "95992b047728f719",
+  "configs/rules.v2.yaml": "c8f778734b9a36a5"
+ },
+ "data_cross_checks": {
+  "original_lines_failed_and_disclosed": {
+   "X2_spy_vs_gspc_full": 0.98489,
+   "X3_qqq_vs_ixic": 0.96349,
+   "diagnosis": "参照系设计错误：复权ETF收益 vs 纯价格指数 + QQQ应对比^NDX"
+  },
+  "corrected_lines_frozen": {
+   "lines": {
+    "X1_gspc_vs_timingcache": 0.995,
+    "X2_spy_vs_gspc_2010plus": 0.995,
+    "X3_qqq_vs_ndx": 0.97
+   },
+   "measured": {
+    "X1_gspc_vs_timingcache": 1.0,
+    "X2_spy_vs_gspc_2010plus": 0.9986,
+    "X3_qqq_vs_ndx": 0.9803
+   },
+   "all_pass": true
+  }
+ },
+ "anchor_ETF": {
+  "N": 37,
+  "expR": 0.9441,
+  "top1_symbol": "512100.SS",
+  "top1_share": 0.4532,
+  "t512100_r_net": [
+   -0.1395,
+   15.9697
+  ],
+  "anchor_ok": true
+ },
+ "us_pool": {
+  "N": 197,
+  "expR": 0.189,
+  "IS": 0.2062,
+  "OOS": -0.0352,
+  "win_rate": 0.3959,
+  "avg_win_r": 1.7135,
+  "avg_loss_r": -0.8102,
+  "win_loss_ratio": 2.1149,
+  "profit_factor": 1.3862294364299874,
+  "total_r": 37.23857344206808,
+  "n_symbols_total": 8,
+  "n_symbols_positive": 4,
+  "positive_symbol_share": 0.5,
+  "etf_struct_reference_a_share": {
+   "win_rate": 0.3784,
+   "avg_win_r": 3.515,
+   "avg_loss_r": -0.621
+  },
+  "by_symbol": [
+   {
+    "symbol": "SPY",
+    "trade_count": 30,
+    "expectancy_r": 1.1462261907814395,
+    "total_r": 34.38678572344318
+   },
+   {
+    "symbol": "DIA",
+    "trade_count": 31,
+    "expectancy_r": 0.5256261521848336,
+    "total_r": 16.29441071772984
+   },
+   {
+    "symbol": "QQQ",
+    "trade_count": 16,
+    "expectancy_r": 0.4806364785637733,
+    "total_r": 7.6901836570203725
+   },
+   {
+    "symbol": "XLK",
+    "trade_count": 12,
+    "expectancy_r": 0.11233908718070273,
+    "total_r": 1.3480690461684328
+   },
+   {
+    "symbol": "XLF",
+    "trade_count": 32,
+    "expectancy_r": -0.13739165009759713,
+    "total_r": -4.396532803123108
+   },
+   {
+    "symbol": "IWM",
+    "trade_count": 20,
+    "expectancy_r": -0.22685307190544193,
+    "total_r": -4.5370614381088386
+   },
+   {
+    "symbol": "XLE",
+    "trade_count": 30,
+    "expectancy_r": -0.2223018915486024,
+    "total_r": -6.669056746458072
+   },
+   {
+    "symbol": "XLV",
+    "trade_count": 26,
+    "expectancy_r": -0.26454710440783535,
+    "total_r": -6.87822471460372
+   }
+  ],
+  "by_year": {
+   "1993": {
+    "expectancy_r": 0.06606308721725318,
+    "profit_factor": 1.105835998583323,
+    "trade_count": 2,
+    "total_r": 0.13212617443450636
+   },
+   "1994": {
+    "expectancy_r": -0.03357537654299049,
+    "profit_factor": 0.5289875187732175,
+    "trade_count": 4,
+    "total_r": -0.13430150617196196
+   },
+   "1995": {
+    "expectancy_r": 36.50877320223066,
+    "profit_factor": null,
+    "trade_count": 1,
+    "total_r": 36.50877320223066
+   },
+   "1998": {
+    "expectancy_r": 0.03224411850183295,
+    "profit_factor": null,
+    "trade_count": 1,
+    "total_r": 0.03224411850183295
+   },
+   "1999": {
+    "expectancy_r": -0.508899151631602,
+    "profit_factor": 0.026742080486918982,
+    "trade_count": 3,
+    "total_r": -1.5266974548948062
+   },
+   "2000": {
+    "expectancy_r": -0.10330377131190711,
+    "profit_factor": 0.644439712723026,
+    "trade_count": 19,
+    "total_r": -1.962771654926235
+   },
+   "2001": {
+    "expectancy_r": -0.29443234559020304,
+    "profit_factor": 0.08526836534835225,
+    "trade_count": 10,
+    "total_r": -2.9443234559020306
+   },
+   "2003": {
+    "expectancy_r": 1.9195944713048703,
+    "profit_factor": 5.9329866793836015,
+    "trade_count": 7,
+    "total_r": 13.437161299134091
+   },
+   "2004": {
+    "expectancy_r": -0.18206815641168306,
+    "profit_factor": 0.5825561147136009,
+    "trade_count": 7,
+    "total_r": -1.2744770948817814
+   },
+   "2005": {
+    "expectancy_r": -0.2019707516987786,
+    "profit_factor": 0.03395589801384633,
+    "trade_count": 7,
+    "total_r": -1.4137952618914502
+   },
+   "2006": {
+    "expectancy_r": -0.4502356637414329,
+    "profit_factor": 0.3462338561408507,
+    "trade_count": 10,
+    "total_r": -4.502356637414329
+   },
+   "2007": {
+    "expectancy_r": -0.43782215300755495,
+    "profit_factor": 0.28742459370311313,
+    "trade_count": 5,
+    "total_r": -2.189110765037775
+   },
+   "2008": {
+    "expectancy_r": -2.5276698060962532,
+    "profit_factor": 0.1367704430367219,
+    "trade_count": 4,
+    "total_r": -10.110679224385013
+   },
+   "2010": {
+    "expectancy_r": -0.07485898303369942,
+    "profit_factor": 0.7530593062675497,
+    "trade_count": 9,
+    "total_r": -0.6737308473032948
+   },
+   "2011": {
+    "expectancy_r": -0.22564108966045177,
+    "profit_factor": 0.15594523004937544,
+    "trade_count": 7,
+    "total_r": -1.5794876276231624
+   },
+   "2012": {
+    "expectancy_r": 0.17542174019634418,
+    "profit_factor": 1.5736018136376488,
+    "trade_count": 6,
+    "total_r": 1.0525304411780652
+   },
+   "2013": {
+    "expectancy_r": 4.739016267703545,
+    "profit_factor": 6.650990112534256,
+    "trade_count": 5,
+    "total_r": 23.695081338517724
+   },
+   "2014": {
+    "expectancy_r": -0.45022064607743945,
+    "profit_factor": 0.44283221215740914,
+    "trade_count": 3,
+    "total_r": -1.3506619382323184
+   },
+   "2015": {
+    "expectancy_r": -0.25476495733397053,
+    "profit_factor": 0.19950724196405803,
+    "trade_count": 11,
+    "total_r": -2.802414530673676
+   },
+   "2016": {
+    "expectancy_r": -0.3226877773120282,
+    "profit_factor": 0.0,
+    "trade_count": 4,
+    "total_r": -1.2907511092481128
+   },
+   "2017": {
+    "expectancy_r": -0.7297700718274003,
+    "profit_factor": 0.0,
+    "trade_count": 4,
+    "total_r": -2.919080287309601
+   },
+   "2018": {
+    "expectancy_r": -0.654611308483138,
+    "profit_factor": 0.0590902817732922,
+    "trade_count": 7,
+    "total_r": -4.582279159381966
+   },
+   "2019": {
+    "expectancy_r": -0.3437954040197284,
+    "profit_factor": 0.2388218441626107,
+    "trade_count": 6,
+    "total_r": -2.0627724241183705
+   },
+   "2021": {
+    "expectancy_r": -0.460147009692086,
+    "profit_factor": 0.05956217696790389,
+    "trade_count": 7,
+    "total_r": -3.221029067844602
+   },
+   "2022": {
+    "expectancy_r": -0.24211284895767776,
+    "profit_factor": 0.36866128393139774,
+    "trade_count": 25,
+    "total_r": -6.052821223941944
+   },
+   "2023": {
+    "expectancy_r": 2.7343021931640803,
+    "profit_factor": 13.68341102010529,
+    "trade_count": 8,
+    "total_r": 21.874417545312642
+   },
+   "2024": {
+    "expectancy_r": -3.5874501357394633,
+    "profit_factor": 0.0,
+    "trade_count": 3,
+    "total_r": -10.76235040721839
+   },
+   "2025": {
+    "expectancy_r": 0.18589568738387893,
+    "profit_factor": 1.816836899917584,
+    "trade_count": 8,
+    "total_r": 1.4871654990710315
+   },
+   "2026": {
+    "expectancy_r": 0.5937413755220906,
+    "profit_factor": null,
+    "trade_count": 4,
+    "total_r": 2.3749655020883624
+   }
+  }
+ },
+ "conditions": {
+  "anchor_ok": true,
+  "xchecks_pass": true,
+  "n_symbols_ok": true,
+  "N_ok": true,
+  "expR_positive": true,
+  "positive_symbol_share_gt_half": false,
+  "shape_same_type": true,
+  "shape_deformed": false
+ },
+ "habitat_labels_substitute_descriptive": {
+  "note": "AO 栖息地标签替代口径：rv60 同公式；b20sub=自身20日涨幅5年分位(替代A股权宜,b20宽度无美股对应物)",
+  "bucket_stats_rv60": {
+   "Q1[0,20)": {
+    "n": 40,
+    "mean_r": 0.9393,
+    "sum_r": 37.573
+   },
+   "Q2[20,40)": {
+    "n": 26,
+    "mean_r": -0.6397,
+    "sum_r": -16.6327
+   },
+   "Q3[40,60)": {
+    "n": 38,
+    "mean_r": 0.0525,
+    "sum_r": 1.9947
+   },
+   "Q4[60,80)": {
+    "n": 43,
+    "mean_r": 0.6935,
+    "sum_r": 29.8185
+   },
+   "Q5[80,100]": {
+    "n": 50,
+    "mean_r": -0.3103,
+    "sum_r": -15.5151
+   }
+  },
+  "bucket_stats_b20sub": {
+   "Q1[0,20)": {
+    "n": 38,
+    "mean_r": -0.2773,
+    "sum_r": -10.5378
+   },
+   "Q2[20,40)": {
+    "n": 34,
+    "mean_r": -0.1879,
+    "sum_r": -6.3884
+   },
+   "Q3[40,60)": {
+    "n": 39,
+    "mean_r": -0.1406,
+    "sum_r": -5.4842
+   },
+   "Q4[60,80)": {
+    "n": 47,
+    "mean_r": 0.43,
+    "sum_r": 20.2095
+   },
+   "Q5[80,100]": {
+    "n": 39,
+    "mean_r": 1.0113,
+    "sum_r": 39.4393
+   }
+  },
+  "trades": [
+   {
+    "symbol": "SPY",
+    "signal_date": "1993-08-31",
+    "r_net": -1.2484,
+    "rv60_pctl": 0.6,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 7.7,
+    "b20sub_pctl5y": 95.0,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "1993-09-22",
+    "r_net": 1.3805,
+    "rv60_pctl": 0.5,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 7.0,
+    "b20sub_pctl5y": 19.8,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "1994-04-05",
+    "r_net": -0.0905,
+    "rv60_pctl": 95.6,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 11.8,
+    "b20sub_pctl5y": 0.9,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "1994-04-25",
+    "r_net": -0.0963,
+    "rv60_pctl": 99.4,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 12.1,
+    "b20sub_pctl5y": 14.2,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "1994-05-17",
+    "r_net": 0.1508,
+    "rv60_pctl": 92.4,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 11.7,
+    "b20sub_pctl5y": 83.0,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "1994-08-12",
+    "r_net": -0.0983,
+    "rv60_pctl": 41.5,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 8.8,
+    "b20sub_pctl5y": 80.9,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "1995-01-16",
+    "r_net": 36.5088,
+    "rv60_pctl": 74.9,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 11.2,
+    "b20sub_pctl5y": 93.4,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "1998-10-29",
+    "r_net": 0.0322,
+    "rv60_pctl": 98.7,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 34.1,
+    "b20sub_pctl5y": 99.6,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "1999-10-28",
+    "r_net": 0.0419,
+    "rv60_pctl": 72.7,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 20.5,
+    "b20sub_pctl5y": 77.8,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "1999-11-12",
+    "r_net": -0.1115,
+    "rv60_pctl": 82.8,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 21.7,
+    "b20sub_pctl5y": 99.8,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "1999-11-22",
+    "r_net": -1.4572,
+    "rv60_pctl": 57.5,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 19.1,
+    "b20sub_pctl5y": 90.7,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2000-01-07",
+    "r_net": -0.8048,
+    "rv60_pctl": 51.7,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 18.3,
+    "b20sub_pctl5y": 64.7,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2000-03-16",
+    "r_net": -0.4424,
+    "rv60_pctl": 99.8,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 32.5,
+    "b20sub_pctl5y": 74.7,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2000-03-16",
+    "r_net": 0.0062,
+    "rv60_pctl": 99.8,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 36.9,
+    "b20sub_pctl5y": 90.2,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2000-04-10",
+    "r_net": -0.5943,
+    "rv60_pctl": 84.4,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 26.1,
+    "b20sub_pctl5y": 98.6,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2000-04-24",
+    "r_net": 0.8746,
+    "rv60_pctl": 94.4,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 33.9,
+    "b20sub_pctl5y": 65.8,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2000-05-30",
+    "r_net": 0.1621,
+    "rv60_pctl": 92.7,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 29.0,
+    "b20sub_pctl5y": 12.8,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2000-06-02",
+    "r_net": -0.3436,
+    "rv60_pctl": 78.5,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 28.3,
+    "b20sub_pctl5y": 72.0,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2000-06-15",
+    "r_net": -0.0359,
+    "rv60_pctl": 68.6,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 26.9,
+    "b20sub_pctl5y": 63.7,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2000-06-30",
+    "r_net": 1.324,
+    "rv60_pctl": 66.0,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 26.3,
+    "b20sub_pctl5y": 34.1,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2000-07-07",
+    "r_net": 0.1501,
+    "rv60_pctl": 72.9,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 23.5,
+    "b20sub_pctl5y": 36.4,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2000-07-14",
+    "r_net": -0.892,
+    "rv60_pctl": 48.4,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 21.5,
+    "b20sub_pctl5y": 40.0,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2000-07-20",
+    "r_net": -1.3308,
+    "rv60_pctl": 38.0,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 20.7,
+    "b20sub_pctl5y": 44.3,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2000-08-03",
+    "r_net": -0.4279,
+    "rv60_pctl": 32.9,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 20.4,
+    "b20sub_pctl5y": 43.9,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2000-10-05",
+    "r_net": -0.4112,
+    "rv60_pctl": 14.4,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 17.1,
+    "b20sub_pctl5y": 68.9,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2000-10-27",
+    "r_net": 0.8506,
+    "rv60_pctl": 40.3,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 17.3,
+    "b20sub_pctl5y": 37.2,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2000-10-30",
+    "r_net": 0.1266,
+    "rv60_pctl": 68.1,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 22.4,
+    "b20sub_pctl5y": 32.0,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2000-10-31",
+    "r_net": 0.0632,
+    "rv60_pctl": 47.7,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 19.7,
+    "b20sub_pctl5y": 37.6,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2000-11-14",
+    "r_net": -0.1031,
+    "rv60_pctl": 63.2,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 21.2,
+    "b20sub_pctl5y": 62.4,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2000-12-04",
+    "r_net": -0.1341,
+    "rv60_pctl": 61.4,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 19.7,
+    "b20sub_pctl5y": 28.4,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2001-01-03",
+    "r_net": -0.511,
+    "rv60_pctl": 78.5,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 23.9,
+    "b20sub_pctl5y": 68.8,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2001-01-30",
+    "r_net": -0.7406,
+    "rv60_pctl": 71.8,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 21.7,
+    "b20sub_pctl5y": 57.2,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2001-01-31",
+    "r_net": -0.2733,
+    "rv60_pctl": 69.8,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 27.6,
+    "b20sub_pctl5y": 20.0,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2001-02-26",
+    "r_net": -0.5903,
+    "rv60_pctl": 72.7,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 21.8,
+    "b20sub_pctl5y": 40.0,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2001-03-02",
+    "r_net": -0.4805,
+    "rv60_pctl": 42.1,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 25.2,
+    "b20sub_pctl5y": 67.8,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2001-03-06",
+    "r_net": -0.3844,
+    "rv60_pctl": 57.3,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 20.2,
+    "b20sub_pctl5y": 20.7,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2001-04-10",
+    "r_net": -0.1561,
+    "rv60_pctl": 56.2,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 24.1,
+    "b20sub_pctl5y": 56.3,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2001-04-17",
+    "r_net": -0.0552,
+    "rv60_pctl": 38.1,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 24.7,
+    "b20sub_pctl5y": 56.5,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2001-04-18",
+    "r_net": -0.0274,
+    "rv60_pctl": 83.3,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 25.8,
+    "b20sub_pctl5y": 96.7,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2001-04-26",
+    "r_net": 0.2745,
+    "rv60_pctl": 57.6,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 28.6,
+    "b20sub_pctl5y": 96.4,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2003-02-21",
+    "r_net": 0.2838,
+    "rv60_pctl": 13.7,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 21.8,
+    "b20sub_pctl5y": 66.9,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2003-03-07",
+    "r_net": -1.0575,
+    "rv60_pctl": 20.6,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 17.6,
+    "b20sub_pctl5y": 55.1,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2003-03-13",
+    "r_net": -0.6694,
+    "rv60_pctl": 27.7,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 18.2,
+    "b20sub_pctl5y": 58.3,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2003-04-10",
+    "r_net": -0.2613,
+    "rv60_pctl": 0.7,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 19.6,
+    "b20sub_pctl5y": 64.7,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2003-04-17",
+    "r_net": -0.7358,
+    "rv60_pctl": 0.7,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 19.5,
+    "b20sub_pctl5y": 39.2,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "QQQ",
+    "signal_date": "2003-04-23",
+    "r_net": 11.7982,
+    "rv60_pctl": 0.1,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 27.3,
+    "b20sub_pctl5y": 67.7,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2003-05-01",
+    "r_net": 4.0791,
+    "rv60_pctl": 0.1,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 16.2,
+    "b20sub_pctl5y": 35.1,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "QQQ",
+    "signal_date": "2004-06-23",
+    "r_net": -1.097,
+    "rv60_pctl": 6.7,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 18.3,
+    "b20sub_pctl5y": 69.3,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2004-06-25",
+    "r_net": -1.7478,
+    "rv60_pctl": 44.4,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 19.8,
+    "b20sub_pctl5y": 64.2,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "QQQ",
+    "signal_date": "2004-10-04",
+    "r_net": 0.2206,
+    "rv60_pctl": 16.9,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 19.0,
+    "b20sub_pctl5y": 75.5,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2004-10-06",
+    "r_net": -0.2083,
+    "rv60_pctl": 13.4,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 11.4,
+    "b20sub_pctl5y": 68.1,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2004-10-28",
+    "r_net": 1.4922,
+    "rv60_pctl": 22.6,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 11.8,
+    "b20sub_pctl5y": 58.8,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2004-11-11",
+    "r_net": 0.0589,
+    "rv60_pctl": 10.9,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 10.5,
+    "b20sub_pctl5y": 89.6,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2004-11-12",
+    "r_net": 0.007,
+    "rv60_pctl": 19.1,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 12.9,
+    "b20sub_pctl5y": 85.4,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2005-05-18",
+    "r_net": 0.0447,
+    "rv60_pctl": 18.6,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 17.1,
+    "b20sub_pctl5y": 70.1,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2005-05-23",
+    "r_net": -0.3936,
+    "rv60_pctl": 50.2,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 12.2,
+    "b20sub_pctl5y": 75.8,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2005-07-08",
+    "r_net": -0.1537,
+    "rv60_pctl": 55.6,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 12.3,
+    "b20sub_pctl5y": 42.0,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2005-07-28",
+    "r_net": -0.3539,
+    "rv60_pctl": 0.6,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 9.9,
+    "b20sub_pctl5y": 58.5,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2005-10-19",
+    "r_net": -0.4256,
+    "rv60_pctl": 15.3,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 9.5,
+    "b20sub_pctl5y": 49.2,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2005-10-24",
+    "r_net": -0.1366,
+    "rv60_pctl": 28.9,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 10.4,
+    "b20sub_pctl5y": 39.4,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2005-11-03",
+    "r_net": 0.005,
+    "rv60_pctl": 44.8,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 10.9,
+    "b20sub_pctl5y": 69.9,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2006-01-06",
+    "r_net": -1.157,
+    "rv60_pctl": 34.2,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 12.1,
+    "b20sub_pctl5y": 72.3,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "XLK",
+    "signal_date": "2006-01-06",
+    "r_net": -0.6406,
+    "rv60_pctl": 9.3,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 10.9,
+    "b20sub_pctl5y": 56.9,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "QQQ",
+    "signal_date": "2006-05-04",
+    "r_net": -1.9294,
+    "rv60_pctl": 13.2,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 13.1,
+    "b20sub_pctl5y": 34.5,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "XLK",
+    "signal_date": "2006-08-16",
+    "r_net": -0.0422,
+    "rv60_pctl": 65.8,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 17.8,
+    "b20sub_pctl5y": 85.2,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2006-08-21",
+    "r_net": -0.4385,
+    "rv60_pctl": 83.3,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 26.9,
+    "b20sub_pctl5y": 62.8,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2006-08-25",
+    "r_net": -0.8843,
+    "rv60_pctl": 82.5,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 26.8,
+    "b20sub_pctl5y": 45.0,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2006-09-05",
+    "r_net": -1.5474,
+    "rv60_pctl": 70.3,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 25.0,
+    "b20sub_pctl5y": 28.1,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2006-09-12",
+    "r_net": 1.6129,
+    "rv60_pctl": 54.0,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 12.6,
+    "b20sub_pctl5y": 80.0,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "QQQ",
+    "signal_date": "2006-09-26",
+    "r_net": 0.7715,
+    "rv60_pctl": 58.4,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 17.0,
+    "b20sub_pctl5y": 80.0,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2006-10-19",
+    "r_net": -0.2474,
+    "rv60_pctl": 66.7,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 24.7,
+    "b20sub_pctl5y": 84.5,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "QQQ",
+    "signal_date": "2007-04-24",
+    "r_net": 0.883,
+    "rv60_pctl": 54.0,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 14.9,
+    "b20sub_pctl5y": 66.4,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLK",
+    "signal_date": "2007-05-18",
+    "r_net": -1.0872,
+    "rv60_pctl": 51.9,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 13.8,
+    "b20sub_pctl5y": 78.0,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2007-08-02",
+    "r_net": -1.5119,
+    "rv60_pctl": 96.4,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 17.5,
+    "b20sub_pctl5y": 2.7,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2007-08-07",
+    "r_net": -0.2126,
+    "rv60_pctl": 99.8,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 22.0,
+    "b20sub_pctl5y": 5.5,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2007-08-17",
+    "r_net": -0.2604,
+    "rv60_pctl": 99.9,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 26.1,
+    "b20sub_pctl5y": 14.8,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2008-03-18",
+    "r_net": -1.3343,
+    "rv60_pctl": 99.5,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 35.8,
+    "b20sub_pctl5y": 33.3,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2008-03-24",
+    "r_net": 1.6019,
+    "rv60_pctl": 99.8,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 37.8,
+    "b20sub_pctl5y": 15.0,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2008-09-12",
+    "r_net": -9.6792,
+    "rv60_pctl": 82.3,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 25.2,
+    "b20sub_pctl5y": 15.9,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2008-09-18",
+    "r_net": -0.6991,
+    "rv60_pctl": 99.9,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 31.0,
+    "b20sub_pctl5y": 26.2,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2010-02-26",
+    "r_net": 0.0346,
+    "rv60_pctl": 15.0,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 22.7,
+    "b20sub_pctl5y": 73.3,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2010-04-01",
+    "r_net": -1.7282,
+    "rv60_pctl": 12.5,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 20.3,
+    "b20sub_pctl5y": 54.8,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2010-05-10",
+    "r_net": -0.1538,
+    "rv60_pctl": 17.8,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 21.7,
+    "b20sub_pctl5y": 22.2,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2010-05-27",
+    "r_net": -0.4813,
+    "rv60_pctl": 30.8,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 25.6,
+    "b20sub_pctl5y": 7.7,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2010-06-02",
+    "r_net": -0.3651,
+    "rv60_pctl": 42.3,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 28.8,
+    "b20sub_pctl5y": 8.2,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2010-06-10",
+    "r_net": 0.6719,
+    "rv60_pctl": 48.6,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 31.7,
+    "b20sub_pctl5y": 17.7,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2010-06-10",
+    "r_net": 0.5605,
+    "rv60_pctl": 65.7,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 17.5,
+    "b20sub_pctl5y": 8.1,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2010-07-13",
+    "r_net": 0.0132,
+    "rv60_pctl": 58.4,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 33.5,
+    "b20sub_pctl5y": 34.7,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2010-12-08",
+    "r_net": 0.7742,
+    "rv60_pctl": 2.2,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 20.3,
+    "b20sub_pctl5y": 60.0,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLK",
+    "signal_date": "2011-06-21",
+    "r_net": -0.6667,
+    "rv60_pctl": 7.3,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 13.1,
+    "b20sub_pctl5y": 23.8,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLK",
+    "signal_date": "2011-06-28",
+    "r_net": 0.2346,
+    "rv60_pctl": 14.6,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 14.2,
+    "b20sub_pctl5y": 18.1,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "QQQ",
+    "signal_date": "2011-07-19",
+    "r_net": -0.7702,
+    "rv60_pctl": 32.3,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 16.6,
+    "b20sub_pctl5y": 94.5,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2011-07-19",
+    "r_net": 0.0572,
+    "rv60_pctl": 24.1,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 13.9,
+    "b20sub_pctl5y": 79.0,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLK",
+    "signal_date": "2011-09-15",
+    "r_net": -0.0644,
+    "rv60_pctl": 77.2,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 31.2,
+    "b20sub_pctl5y": 53.8,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "QQQ",
+    "signal_date": "2011-10-14",
+    "r_net": -0.0865,
+    "rv60_pctl": 81.8,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 35.4,
+    "b20sub_pctl5y": 57.7,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "QQQ",
+    "signal_date": "2011-12-20",
+    "r_net": -0.2836,
+    "rv60_pctl": 70.8,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 27.3,
+    "b20sub_pctl5y": 63.2,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLK",
+    "signal_date": "2012-01-12",
+    "r_net": 1.8481,
+    "rv60_pctl": 64.7,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 23.5,
+    "b20sub_pctl5y": 65.7,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2012-01-18",
+    "r_net": 0.145,
+    "rv60_pctl": 64.0,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 23.9,
+    "b20sub_pctl5y": 94.6,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2012-07-26",
+    "r_net": 0.8944,
+    "rv60_pctl": 55.6,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 14.6,
+    "b20sub_pctl5y": 58.6,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2012-08-16",
+    "r_net": -0.7961,
+    "rv60_pctl": 50.6,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 15.8,
+    "b20sub_pctl5y": 66.7,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLK",
+    "signal_date": "2012-08-17",
+    "r_net": -0.6296,
+    "rv60_pctl": 54.2,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 17.4,
+    "b20sub_pctl5y": 89.6,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2012-09-06",
+    "r_net": -0.4093,
+    "rv60_pctl": 36.6,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 12.3,
+    "b20sub_pctl5y": 67.3,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2013-01-17",
+    "r_net": 10.342,
+    "rv60_pctl": 42.0,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 12.6,
+    "b20sub_pctl5y": 55.3,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2013-01-17",
+    "r_net": 17.5462,
+    "rv60_pctl": 10.1,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 15.0,
+    "b20sub_pctl5y": 74.0,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2013-02-13",
+    "r_net": -2.2605,
+    "rv60_pctl": 0.2,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 13.6,
+    "b20sub_pctl5y": 79.1,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2013-02-19",
+    "r_net": -1.4402,
+    "rv60_pctl": 4.3,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 10.3,
+    "b20sub_pctl5y": 67.3,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2013-11-21",
+    "r_net": -0.4923,
+    "rv60_pctl": 7.5,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 13.5,
+    "b20sub_pctl5y": 59.4,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2014-04-16",
+    "r_net": 1.0735,
+    "rv60_pctl": 23.5,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 14.2,
+    "b20sub_pctl5y": 82.7,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "QQQ",
+    "signal_date": "2014-06-18",
+    "r_net": -1.9533,
+    "rv60_pctl": 53.4,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 14.7,
+    "b20sub_pctl5y": 83.7,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2014-12-18",
+    "r_net": -0.4708,
+    "rv60_pctl": 87.1,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 14.8,
+    "b20sub_pctl5y": 37.6,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2015-05-04",
+    "r_net": 0.2186,
+    "rv60_pctl": 12.9,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 12.0,
+    "b20sub_pctl5y": 50.2,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2015-06-18",
+    "r_net": -0.2893,
+    "rv60_pctl": 18.2,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 10.1,
+    "b20sub_pctl5y": 29.6,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2015-07-13",
+    "r_net": -2.0451,
+    "rv60_pctl": 35.0,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 13.4,
+    "b20sub_pctl5y": 36.7,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2015-07-14",
+    "r_net": 0.1404,
+    "rv60_pctl": 40.1,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 11.1,
+    "b20sub_pctl5y": 44.9,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2015-07-28",
+    "r_net": 0.1461,
+    "rv60_pctl": 42.4,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 11.2,
+    "b20sub_pctl5y": 53.5,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "QQQ",
+    "signal_date": "2015-09-08",
+    "r_net": -0.5642,
+    "rv60_pctl": 99.9,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 24.3,
+    "b20sub_pctl5y": 4.6,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "QQQ",
+    "signal_date": "2015-09-15",
+    "r_net": 0.1258,
+    "rv60_pctl": 99.7,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 24.4,
+    "b20sub_pctl5y": 8.5,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "QQQ",
+    "signal_date": "2015-10-02",
+    "r_net": 0.0606,
+    "rv60_pctl": 99.9,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 25.4,
+    "b20sub_pctl5y": 40.3,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2015-10-05",
+    "r_net": -0.3827,
+    "rv60_pctl": 99.8,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 25.0,
+    "b20sub_pctl5y": 26.5,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2015-10-16",
+    "r_net": 0.007,
+    "rv60_pctl": 99.9,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 22.0,
+    "b20sub_pctl5y": 84.3,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLK",
+    "signal_date": "2015-10-22",
+    "r_net": -0.2195,
+    "rv60_pctl": 98.9,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 24.3,
+    "b20sub_pctl5y": 95.7,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2016-01-29",
+    "r_net": -0.1394,
+    "rv60_pctl": 92.1,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 18.4,
+    "b20sub_pctl5y": 4.6,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2016-02-04",
+    "r_net": -0.7766,
+    "rv60_pctl": 93.1,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 21.8,
+    "b20sub_pctl5y": 5.1,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2016-02-17",
+    "r_net": -0.1836,
+    "rv60_pctl": 93.1,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 19.7,
+    "b20sub_pctl5y": 67.7,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2016-02-22",
+    "r_net": -0.1912,
+    "rv60_pctl": 89.2,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 20.6,
+    "b20sub_pctl5y": 17.8,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "QQQ",
+    "signal_date": "2017-01-26",
+    "r_net": -1.608,
+    "rv60_pctl": 12.9,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 11.6,
+    "b20sub_pctl5y": 75.4,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2017-07-19",
+    "r_net": -0.5996,
+    "rv60_pctl": 1.0,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 12.0,
+    "b20sub_pctl5y": 66.0,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2017-07-25",
+    "r_net": -0.6746,
+    "rv60_pctl": 16.5,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 12.3,
+    "b20sub_pctl5y": 85.6,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2017-09-13",
+    "r_net": -0.0368,
+    "rv60_pctl": 2.1,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 11.5,
+    "b20sub_pctl5y": 72.1,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2018-05-14",
+    "r_net": -1.9079,
+    "rv60_pctl": 50.9,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 19.8,
+    "b20sub_pctl5y": 88.8,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2018-06-06",
+    "r_net": -0.4179,
+    "rv60_pctl": 75.9,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 17.4,
+    "b20sub_pctl5y": 81.0,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2018-07-10",
+    "r_net": 0.2201,
+    "rv60_pctl": 54.3,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 11.5,
+    "b20sub_pctl5y": 18.5,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2018-08-27",
+    "r_net": -1.1543,
+    "rv60_pctl": 19.6,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 12.3,
+    "b20sub_pctl5y": 56.0,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2018-09-19",
+    "r_net": -0.9599,
+    "rv60_pctl": 19.2,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 12.1,
+    "b20sub_pctl5y": 50.8,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2018-10-04",
+    "r_net": -0.43,
+    "rv60_pctl": 12.4,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 11.7,
+    "b20sub_pctl5y": 33.5,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2018-11-07",
+    "r_net": 0.0677,
+    "rv60_pctl": 58.8,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 17.3,
+    "b20sub_pctl5y": 40.9,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2019-01-18",
+    "r_net": -0.0016,
+    "rv60_pctl": 90.5,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 24.1,
+    "b20sub_pctl5y": 98.3,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2019-07-30",
+    "r_net": -2.0121,
+    "rv60_pctl": 64.7,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 16.2,
+    "b20sub_pctl5y": 50.8,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2019-09-10",
+    "r_net": 0.244,
+    "rv60_pctl": 86.6,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 19.3,
+    "b20sub_pctl5y": 77.3,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2019-10-04",
+    "r_net": -0.3607,
+    "rv60_pctl": 87.4,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 19.7,
+    "b20sub_pctl5y": 37.9,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2019-10-10",
+    "r_net": 0.4032,
+    "rv60_pctl": 87.8,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 19.9,
+    "b20sub_pctl5y": 7.8,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2019-11-01",
+    "r_net": -0.3355,
+    "rv60_pctl": 69.1,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 18.1,
+    "b20sub_pctl5y": 89.2,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2021-08-24",
+    "r_net": 0.0134,
+    "rv60_pctl": 35.5,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 18.5,
+    "b20sub_pctl5y": 53.6,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2021-09-23",
+    "r_net": -0.2023,
+    "rv60_pctl": 38.7,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 19.1,
+    "b20sub_pctl5y": 45.8,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2021-10-14",
+    "r_net": -0.1772,
+    "rv60_pctl": 23.6,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 17.5,
+    "b20sub_pctl5y": 54.0,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2021-11-12",
+    "r_net": -1.3581,
+    "rv60_pctl": 22.9,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 11.1,
+    "b20sub_pctl5y": 57.5,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2021-12-10",
+    "r_net": -0.3652,
+    "rv60_pctl": 51.3,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 14.0,
+    "b20sub_pctl5y": 31.5,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2021-12-22",
+    "r_net": 0.1906,
+    "rv60_pctl": 51.0,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 13.9,
+    "b20sub_pctl5y": 28.5,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2021-12-22",
+    "r_net": -1.3223,
+    "rv60_pctl": 31.5,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 12.3,
+    "b20sub_pctl5y": 86.5,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2022-01-28",
+    "r_net": 0.335,
+    "rv60_pctl": 41.6,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 12.9,
+    "b20sub_pctl5y": 2.4,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2022-01-31",
+    "r_net": 0.1147,
+    "rv60_pctl": 55.6,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 14.1,
+    "b20sub_pctl5y": 10.6,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2022-02-15",
+    "r_net": -0.3019,
+    "rv60_pctl": 64.0,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 15.4,
+    "b20sub_pctl5y": 22.6,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2022-02-25",
+    "r_net": 0.0629,
+    "rv60_pctl": 65.9,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 15.2,
+    "b20sub_pctl5y": 59.1,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2022-03-02",
+    "r_net": -0.3886,
+    "rv60_pctl": 69.1,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 15.6,
+    "b20sub_pctl5y": 32.7,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2022-03-09",
+    "r_net": 0.6708,
+    "rv60_pctl": 75.1,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 24.3,
+    "b20sub_pctl5y": 3.8,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2022-03-15",
+    "r_net": 0.0704,
+    "rv60_pctl": 75.5,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 16.6,
+    "b20sub_pctl5y": 64.8,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2022-03-16",
+    "r_net": 0.3562,
+    "rv60_pctl": 75.1,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 24.7,
+    "b20sub_pctl5y": 12.0,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2022-03-17",
+    "r_net": 0.1222,
+    "rv60_pctl": 74.8,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 16.9,
+    "b20sub_pctl5y": 23.1,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2022-04-19",
+    "r_net": 0.1524,
+    "rv60_pctl": 71.1,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 23.4,
+    "b20sub_pctl5y": 15.8,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2022-05-04",
+    "r_net": -0.7009,
+    "rv60_pctl": 87.0,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 20.8,
+    "b20sub_pctl5y": 12.2,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2022-05-17",
+    "r_net": -0.7075,
+    "rv60_pctl": 87.1,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 21.2,
+    "b20sub_pctl5y": 6.9,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2022-05-20",
+    "r_net": -0.0574,
+    "rv60_pctl": 87.8,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 22.0,
+    "b20sub_pctl5y": 15.4,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2022-06-22",
+    "r_net": 0.4548,
+    "rv60_pctl": 88.0,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 22.3,
+    "b20sub_pctl5y": 8.7,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLV",
+    "signal_date": "2022-10-13",
+    "r_net": -0.2166,
+    "rv60_pctl": 68.2,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 18.8,
+    "b20sub_pctl5y": 22.7,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2022-10-21",
+    "r_net": 0.2238,
+    "rv60_pctl": 78.5,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 24.3,
+    "b20sub_pctl5y": 49.1,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2022-10-28",
+    "r_net": 0.1657,
+    "rv60_pctl": 78.4,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 21.9,
+    "b20sub_pctl5y": 99.5,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2022-11-07",
+    "r_net": -0.1405,
+    "rv60_pctl": 78.9,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 25.0,
+    "b20sub_pctl5y": 88.2,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2022-11-11",
+    "r_net": -0.3438,
+    "rv60_pctl": 81.4,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 31.2,
+    "b20sub_pctl5y": 96.4,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2022-11-22",
+    "r_net": -1.6316,
+    "rv60_pctl": 75.5,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 26.9,
+    "b20sub_pctl5y": 92.2,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2022-11-30",
+    "r_net": -1.3874,
+    "rv60_pctl": 79.4,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 30.6,
+    "b20sub_pctl5y": 56.0,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2022-12-13",
+    "r_net": -1.5417,
+    "rv60_pctl": 65.7,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 26.1,
+    "b20sub_pctl5y": 34.0,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2022-12-21",
+    "r_net": -0.2034,
+    "rv60_pctl": 62.2,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 25.4,
+    "b20sub_pctl5y": 16.4,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2022-12-29",
+    "r_net": 0.8056,
+    "rv60_pctl": 64.7,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 27.3,
+    "b20sub_pctl5y": 12.3,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2022-12-29",
+    "r_net": -1.966,
+    "rv60_pctl": 51.1,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 23.5,
+    "b20sub_pctl5y": 13.8,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2023-01-06",
+    "r_net": -0.2151,
+    "rv60_pctl": 62.1,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 27.0,
+    "b20sub_pctl5y": 37.7,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2023-05-26",
+    "r_net": -0.4287,
+    "rv60_pctl": 24.9,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 13.1,
+    "b20sub_pctl5y": 19.5,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2023-06-02",
+    "r_net": 0.9713,
+    "rv60_pctl": 26.4,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 13.2,
+    "b20sub_pctl5y": 60.8,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "DIA",
+    "signal_date": "2023-11-20",
+    "r_net": 11.4344,
+    "rv60_pctl": 14.5,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 10.7,
+    "b20sub_pctl5y": 93.1,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLK",
+    "signal_date": "2023-12-08",
+    "r_net": 2.2449,
+    "rv60_pctl": 15.5,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 16.8,
+    "b20sub_pctl5y": 76.6,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "QQQ",
+    "signal_date": "2023-12-11",
+    "r_net": 1.9301,
+    "rv60_pctl": 22.6,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 16.5,
+    "b20sub_pctl5y": 63.2,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2023-12-11",
+    "r_net": 7.0184,
+    "rv60_pctl": 10.1,
+    "rv60_bucket": "Q1[0,20)",
+    "rv60_ann": 14.2,
+    "b20sub_pctl5y": 87.1,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2023-12-18",
+    "r_net": -1.0809,
+    "rv60_pctl": 29.6,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 12.3,
+    "b20sub_pctl5y": 82.1,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "IWM",
+    "signal_date": "2024-07-22",
+    "r_net": -6.4075,
+    "rv60_pctl": 21.2,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 18.2,
+    "b20sub_pctl5y": 92.3,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2024-11-18",
+    "r_net": -2.8897,
+    "rv60_pctl": 32.6,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 19.8,
+    "b20sub_pctl5y": 73.4,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "XLK",
+    "signal_date": "2024-11-21",
+    "r_net": -1.4652,
+    "rv60_pctl": 50.3,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 22.7,
+    "b20sub_pctl5y": 43.9,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2025-01-02",
+    "r_net": 0.2366,
+    "rv60_pctl": 22.0,
+    "rv60_bucket": "Q2[20,40)",
+    "rv60_ann": 18.7,
+    "b20sub_pctl5y": 12.6,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2025-03-07",
+    "r_net": 1.5019,
+    "rv60_pctl": 45.6,
+    "rv60_bucket": "Q3[40,60)",
+    "rv60_ann": 20.6,
+    "b20sub_pctl5y": 35.6,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2025-04-09",
+    "r_net": -0.5649,
+    "rv60_pctl": 85.3,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 36.5,
+    "b20sub_pctl5y": 15.0,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2025-04-17",
+    "r_net": 0.025,
+    "rv60_pctl": 92.1,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 39.3,
+    "b20sub_pctl5y": 3.9,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2025-04-25",
+    "r_net": -0.052,
+    "rv60_pctl": 99.9,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 33.4,
+    "b20sub_pctl5y": 17.2,
+    "b20sub_bucket": "Q1[0,20)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLE",
+    "signal_date": "2025-05-12",
+    "r_net": 0.0209,
+    "rv60_pctl": 91.5,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 39.7,
+    "b20sub_pctl5y": 76.5,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2025-06-06",
+    "r_net": -1.2038,
+    "rv60_pctl": 95.7,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 29.8,
+    "b20sub_pctl5y": 55.4,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "structure_stop_C"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2025-06-23",
+    "r_net": 1.5233,
+    "rv60_pctl": 94.4,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 29.6,
+    "b20sub_pctl5y": 46.5,
+    "b20sub_bucket": "Q3[40,60)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "QQQ",
+    "signal_date": "2026-04-08",
+    "r_net": 0.1927,
+    "rv60_pctl": 77.6,
+    "rv60_bucket": "Q4[60,80)",
+    "rv60_ann": 19.4,
+    "b20sub_pctl5y": 35.3,
+    "b20sub_bucket": "Q2[20,40)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLF",
+    "signal_date": "2026-04-08",
+    "r_net": 0.0731,
+    "rv60_pctl": 83.3,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 18.6,
+    "b20sub_pctl5y": 61.2,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "SPY",
+    "signal_date": "2026-04-14",
+    "r_net": 0.2733,
+    "rv60_pctl": 84.2,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 15.6,
+    "b20sub_pctl5y": 78.1,
+    "b20sub_bucket": "Q4[60,80)",
+    "exit_reason": "exit_b3_dual"
+   },
+   {
+    "symbol": "XLK",
+    "signal_date": "2026-04-24",
+    "r_net": 1.8359,
+    "rv60_pctl": 82.5,
+    "rv60_bucket": "Q5[80,100]",
+    "rv60_ann": 26.7,
+    "b20sub_pctl5y": 99.7,
+    "b20sub_bucket": "Q5[80,100]",
+    "exit_reason": "exit_b3_dual"
+   }
+  ]
+ },
+ "trades_detail": [
+  {
+   "symbol": "SPY",
+   "signal_date": "1993-08-31",
+   "entry_date": "1993-09-01",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.2484,
+   "holding_bars": 4
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "1993-09-22",
+   "entry_date": "1993-09-23",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 1.3805,
+   "holding_bars": 114
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "1994-04-05",
+   "entry_date": "1994-04-06",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.0905,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "1994-04-25",
+   "entry_date": "1994-04-26",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.0963,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "1994-05-17",
+   "entry_date": "1994-05-18",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.1508,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "1994-08-12",
+   "entry_date": "1994-08-15",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.0983,
+   "holding_bars": 29
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "1995-01-16",
+   "entry_date": "1995-01-17",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 36.5088,
+   "holding_bars": 322
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "1998-10-29",
+   "entry_date": "1998-10-30",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.0322,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "1999-10-28",
+   "entry_date": "1999-10-29",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.0419,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "1999-11-12",
+   "entry_date": "1999-11-15",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.1115,
+   "holding_bars": 67
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "1999-11-22",
+   "entry_date": "1999-11-23",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.4572,
+   "holding_bars": 5
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2000-01-07",
+   "entry_date": "2000-01-10",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.8048,
+   "holding_bars": 10
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2000-03-16",
+   "entry_date": "2000-03-17",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.4424,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2000-03-16",
+   "entry_date": "2000-03-17",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.0062,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2000-04-10",
+   "entry_date": "2000-04-11",
+   "exit_reason": "structure_stop_C",
+   "r_net": -0.5943,
+   "holding_bars": 2
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2000-04-24",
+   "entry_date": "2000-04-25",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.8746,
+   "holding_bars": 58
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2000-05-30",
+   "entry_date": "2000-05-31",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.1621,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2000-06-02",
+   "entry_date": "2000-06-05",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.3436,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2000-06-15",
+   "entry_date": "2000-06-16",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.0359,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2000-06-30",
+   "entry_date": "2000-07-03",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 1.324,
+   "holding_bars": 6
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2000-07-07",
+   "entry_date": "2000-07-10",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.1501,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2000-07-14",
+   "entry_date": "2000-07-17",
+   "exit_reason": "structure_stop_C",
+   "r_net": -0.892,
+   "holding_bars": 2
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2000-07-20",
+   "entry_date": "2000-07-21",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.3308,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2000-08-03",
+   "entry_date": "2000-08-04",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.4279,
+   "holding_bars": 22
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2000-10-05",
+   "entry_date": "2000-10-06",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.4112,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2000-10-27",
+   "entry_date": "2000-10-30",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.8506,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2000-10-30",
+   "entry_date": "2000-10-31",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.1266,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2000-10-31",
+   "entry_date": "2000-11-01",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.0632,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2000-11-14",
+   "entry_date": "2000-11-15",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.1031,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2000-12-04",
+   "entry_date": "2000-12-05",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.1341,
+   "holding_bars": 4
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2001-01-03",
+   "entry_date": "2001-01-04",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.511,
+   "holding_bars": 2
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2001-01-30",
+   "entry_date": "2001-01-31",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.7406,
+   "holding_bars": 15
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2001-01-31",
+   "entry_date": "2001-02-01",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.2733,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2001-02-26",
+   "entry_date": "2001-02-27",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.5903,
+   "holding_bars": 2
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2001-03-02",
+   "entry_date": "2001-03-05",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.4805,
+   "holding_bars": 8
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2001-03-06",
+   "entry_date": "2001-03-07",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.3844,
+   "holding_bars": 3
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2001-04-10",
+   "entry_date": "2001-04-11",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.1561,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2001-04-17",
+   "entry_date": "2001-04-18",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.0552,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2001-04-18",
+   "entry_date": "2001-04-19",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.0274,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2001-04-26",
+   "entry_date": "2001-04-27",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.2745,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2003-02-21",
+   "entry_date": "2003-02-24",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.2838,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2003-03-07",
+   "entry_date": "2003-03-10",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -1.0575,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2003-03-13",
+   "entry_date": "2003-03-14",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.6694,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2003-04-10",
+   "entry_date": "2003-04-11",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.2613,
+   "holding_bars": 3
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2003-04-17",
+   "entry_date": "2003-04-21",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.7358,
+   "holding_bars": 7
+  },
+  {
+   "symbol": "QQQ",
+   "signal_date": "2003-04-23",
+   "entry_date": "2003-04-24",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 11.7982,
+   "holding_bars": 221
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2003-05-01",
+   "entry_date": "2003-05-02",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 4.0791,
+   "holding_bars": 57
+  },
+  {
+   "symbol": "QQQ",
+   "signal_date": "2004-06-23",
+   "entry_date": "2004-06-24",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -1.097,
+   "holding_bars": 8
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2004-06-25",
+   "entry_date": "2004-06-28",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.7478,
+   "holding_bars": 6
+  },
+  {
+   "symbol": "QQQ",
+   "signal_date": "2004-10-04",
+   "entry_date": "2004-10-05",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.2206,
+   "holding_bars": 77
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2004-10-06",
+   "entry_date": "2004-10-07",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.2083,
+   "holding_bars": 2
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2004-10-28",
+   "entry_date": "2004-10-29",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 1.4922,
+   "holding_bars": 63
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2004-11-11",
+   "entry_date": "2004-11-12",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.0589,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2004-11-12",
+   "entry_date": "2004-11-15",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.007,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2005-05-18",
+   "entry_date": "2005-05-19",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.0447,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2005-05-23",
+   "entry_date": "2005-05-24",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.3936,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2005-07-08",
+   "entry_date": "2005-07-11",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.1537,
+   "holding_bars": 52
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2005-07-28",
+   "entry_date": "2005-07-29",
+   "exit_reason": "structure_stop_C",
+   "r_net": -0.3539,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2005-10-19",
+   "entry_date": "2005-10-20",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.4256,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2005-10-24",
+   "entry_date": "2005-10-25",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.1366,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2005-11-03",
+   "entry_date": "2005-11-04",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.005,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2006-01-06",
+   "entry_date": "2006-01-09",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.157,
+   "holding_bars": 9
+  },
+  {
+   "symbol": "XLK",
+   "signal_date": "2006-01-06",
+   "entry_date": "2006-01-09",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.6406,
+   "holding_bars": 10
+  },
+  {
+   "symbol": "QQQ",
+   "signal_date": "2006-05-04",
+   "entry_date": "2006-05-05",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.9294,
+   "holding_bars": 5
+  },
+  {
+   "symbol": "XLK",
+   "signal_date": "2006-08-16",
+   "entry_date": "2006-08-17",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.0422,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2006-08-21",
+   "entry_date": "2006-08-22",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.4385,
+   "holding_bars": 2
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2006-08-25",
+   "entry_date": "2006-08-28",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.8843,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2006-09-05",
+   "entry_date": "2006-09-06",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.5474,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2006-09-12",
+   "entry_date": "2006-09-13",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 1.6129,
+   "holding_bars": 121
+  },
+  {
+   "symbol": "QQQ",
+   "signal_date": "2006-09-26",
+   "entry_date": "2006-09-27",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.7715,
+   "holding_bars": 96
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2006-10-19",
+   "entry_date": "2006-10-20",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.2474,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "QQQ",
+   "signal_date": "2007-04-24",
+   "entry_date": "2007-04-25",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.883,
+   "holding_bars": 80
+  },
+  {
+   "symbol": "XLK",
+   "signal_date": "2007-05-18",
+   "entry_date": "2007-05-21",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -1.0872,
+   "holding_bars": 13
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2007-08-02",
+   "entry_date": "2007-08-03",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.5119,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2007-08-07",
+   "entry_date": "2007-08-08",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.2126,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2007-08-17",
+   "entry_date": "2007-08-20",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.2604,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2008-03-18",
+   "entry_date": "2008-03-19",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.3343,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2008-03-24",
+   "entry_date": "2008-03-25",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 1.6019,
+   "holding_bars": 80
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2008-09-12",
+   "entry_date": "2008-09-15",
+   "exit_reason": "structure_stop_C",
+   "r_net": -9.6792,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2008-09-18",
+   "entry_date": "2008-09-19",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.6991,
+   "holding_bars": 3
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2010-02-26",
+   "entry_date": "2010-03-01",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.0346,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2010-04-01",
+   "entry_date": "2010-04-05",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.7282,
+   "holding_bars": 24
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2010-05-10",
+   "entry_date": "2010-05-11",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.1538,
+   "holding_bars": 4
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2010-05-27",
+   "entry_date": "2010-05-28",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.4813,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2010-06-02",
+   "entry_date": "2010-06-03",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.3651,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2010-06-10",
+   "entry_date": "2010-06-11",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.6719,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2010-06-10",
+   "entry_date": "2010-06-11",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.5605,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2010-07-13",
+   "entry_date": "2010-07-14",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.0132,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2010-12-08",
+   "entry_date": "2010-12-09",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.7742,
+   "holding_bars": 70
+  },
+  {
+   "symbol": "XLK",
+   "signal_date": "2011-06-21",
+   "entry_date": "2011-06-22",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.6667,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLK",
+   "signal_date": "2011-06-28",
+   "entry_date": "2011-06-29",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.2346,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "QQQ",
+   "signal_date": "2011-07-19",
+   "entry_date": "2011-07-20",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.7702,
+   "holding_bars": 9
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2011-07-19",
+   "entry_date": "2011-07-20",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.0572,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLK",
+   "signal_date": "2011-09-15",
+   "entry_date": "2011-09-16",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.0644,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "QQQ",
+   "signal_date": "2011-10-14",
+   "entry_date": "2011-10-17",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.0865,
+   "holding_bars": 19
+  },
+  {
+   "symbol": "QQQ",
+   "signal_date": "2011-12-20",
+   "entry_date": "2011-12-21",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.2836,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLK",
+   "signal_date": "2012-01-12",
+   "entry_date": "2012-01-13",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 1.8481,
+   "holding_bars": 82
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2012-01-18",
+   "entry_date": "2012-01-19",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.145,
+   "holding_bars": 80
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2012-07-26",
+   "entry_date": "2012-07-27",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.8944,
+   "holding_bars": 70
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2012-08-16",
+   "entry_date": "2012-08-17",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.7961,
+   "holding_bars": 56
+  },
+  {
+   "symbol": "XLK",
+   "signal_date": "2012-08-17",
+   "entry_date": "2012-08-20",
+   "exit_reason": "structure_stop_C",
+   "r_net": -0.6296,
+   "holding_bars": 9
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2012-09-06",
+   "entry_date": "2012-09-07",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.4093,
+   "holding_bars": 47
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2013-01-17",
+   "entry_date": "2013-01-18",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 10.342,
+   "holding_bars": 155
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2013-01-17",
+   "entry_date": "2013-01-18",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 17.5462,
+   "holding_bars": 271
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2013-02-13",
+   "entry_date": "2013-02-14",
+   "exit_reason": "structure_stop_C",
+   "r_net": -2.2605,
+   "holding_bars": 4
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2013-02-19",
+   "entry_date": "2013-02-20",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.4402,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2013-11-21",
+   "entry_date": "2013-11-22",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.4923,
+   "holding_bars": 42
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2014-04-16",
+   "entry_date": "2014-04-17",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 1.0735,
+   "holding_bars": 83
+  },
+  {
+   "symbol": "QQQ",
+   "signal_date": "2014-06-18",
+   "entry_date": "2014-06-19",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -1.9533,
+   "holding_bars": 83
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2014-12-18",
+   "entry_date": "2014-12-19",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.4708,
+   "holding_bars": 10
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2015-05-04",
+   "entry_date": "2015-05-05",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.2186,
+   "holding_bars": 39
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2015-06-18",
+   "entry_date": "2015-06-19",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.2893,
+   "holding_bars": 5
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2015-07-13",
+   "entry_date": "2015-07-14",
+   "exit_reason": "structure_stop_C",
+   "r_net": -2.0451,
+   "holding_bars": 28
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2015-07-14",
+   "entry_date": "2015-07-15",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.1404,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2015-07-28",
+   "entry_date": "2015-07-29",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.1461,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "QQQ",
+   "signal_date": "2015-09-08",
+   "entry_date": "2015-09-09",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.5642,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "QQQ",
+   "signal_date": "2015-09-15",
+   "entry_date": "2015-09-16",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.1258,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "QQQ",
+   "signal_date": "2015-10-02",
+   "entry_date": "2015-10-05",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.0606,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2015-10-05",
+   "entry_date": "2015-10-06",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.3827,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2015-10-16",
+   "entry_date": "2015-10-19",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.007,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLK",
+   "signal_date": "2015-10-22",
+   "entry_date": "2015-10-23",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.2195,
+   "holding_bars": 51
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2016-01-29",
+   "entry_date": "2016-02-01",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.1394,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2016-02-04",
+   "entry_date": "2016-02-05",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.7766,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2016-02-17",
+   "entry_date": "2016-02-18",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.1836,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2016-02-22",
+   "entry_date": "2016-02-23",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.1912,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "QQQ",
+   "signal_date": "2017-01-26",
+   "entry_date": "2017-01-27",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.608,
+   "holding_bars": 2
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2017-07-19",
+   "entry_date": "2017-07-20",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.5996,
+   "holding_bars": 10
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2017-07-25",
+   "entry_date": "2017-07-26",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.6746,
+   "holding_bars": 12
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2017-09-13",
+   "entry_date": "2017-09-14",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.0368,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2018-05-14",
+   "entry_date": "2018-05-15",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.9079,
+   "holding_bars": 9
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2018-06-06",
+   "entry_date": "2018-06-07",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.4179,
+   "holding_bars": 9
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2018-07-10",
+   "entry_date": "2018-07-11",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.2201,
+   "holding_bars": 2
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2018-08-27",
+   "entry_date": "2018-08-28",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.1543,
+   "holding_bars": 11
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2018-09-19",
+   "entry_date": "2018-09-20",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.9599,
+   "holding_bars": 5
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2018-10-04",
+   "entry_date": "2018-10-05",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.43,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2018-11-07",
+   "entry_date": "2018-11-08",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.0677,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2019-01-18",
+   "entry_date": "2019-01-22",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.0016,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2019-07-30",
+   "entry_date": "2019-07-31",
+   "exit_reason": "structure_stop_C",
+   "r_net": -2.0121,
+   "holding_bars": 2
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2019-09-10",
+   "entry_date": "2019-09-11",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.244,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2019-10-04",
+   "entry_date": "2019-10-07",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.3607,
+   "holding_bars": 2
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2019-10-10",
+   "entry_date": "2019-10-11",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.4032,
+   "holding_bars": 3
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2019-11-01",
+   "entry_date": "2019-11-04",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.3355,
+   "holding_bars": 77
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2021-08-24",
+   "entry_date": "2021-08-25",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.0134,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2021-09-23",
+   "entry_date": "2021-09-24",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.2023,
+   "holding_bars": 3
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2021-10-14",
+   "entry_date": "2021-10-15",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.1772,
+   "holding_bars": 30
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2021-11-12",
+   "entry_date": "2021-11-15",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.3581,
+   "holding_bars": 4
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2021-12-10",
+   "entry_date": "2021-12-13",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.3652,
+   "holding_bars": 6
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2021-12-22",
+   "entry_date": "2021-12-23",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.1906,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2021-12-22",
+   "entry_date": "2021-12-23",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.3223,
+   "holding_bars": 10
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2022-01-28",
+   "entry_date": "2022-01-31",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.335,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2022-01-31",
+   "entry_date": "2022-02-01",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.1147,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2022-02-15",
+   "entry_date": "2022-02-16",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.3019,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2022-02-25",
+   "entry_date": "2022-02-28",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.0629,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2022-03-02",
+   "entry_date": "2022-03-03",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.3886,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2022-03-09",
+   "entry_date": "2022-03-10",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.6708,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2022-03-15",
+   "entry_date": "2022-03-16",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.0704,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2022-03-16",
+   "entry_date": "2022-03-17",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.3562,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2022-03-17",
+   "entry_date": "2022-03-18",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.1222,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2022-04-19",
+   "entry_date": "2022-04-20",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.1524,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2022-05-04",
+   "entry_date": "2022-05-05",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.7009,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2022-05-17",
+   "entry_date": "2022-05-18",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.7075,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2022-05-20",
+   "entry_date": "2022-05-23",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.0574,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2022-06-22",
+   "entry_date": "2022-06-23",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.4548,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLV",
+   "signal_date": "2022-10-13",
+   "entry_date": "2022-10-14",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.2166,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2022-10-21",
+   "entry_date": "2022-10-24",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.2238,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2022-10-28",
+   "entry_date": "2022-10-31",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.1657,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2022-11-07",
+   "entry_date": "2022-11-08",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.1405,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2022-11-11",
+   "entry_date": "2022-11-14",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.3438,
+   "holding_bars": 10
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2022-11-22",
+   "entry_date": "2022-11-23",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.6316,
+   "holding_bars": 8
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2022-11-30",
+   "entry_date": "2022-12-01",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.3874,
+   "holding_bars": 4
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2022-12-13",
+   "entry_date": "2022-12-14",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -1.5417,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2022-12-21",
+   "entry_date": "2022-12-22",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.2034,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2022-12-29",
+   "entry_date": "2022-12-30",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.8056,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2022-12-29",
+   "entry_date": "2022-12-30",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.966,
+   "holding_bars": 47
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2023-01-06",
+   "entry_date": "2023-01-09",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.2151,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2023-05-26",
+   "entry_date": "2023-05-30",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.4287,
+   "holding_bars": 2
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2023-06-02",
+   "entry_date": "2023-06-05",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.9713,
+   "holding_bars": 69
+  },
+  {
+   "symbol": "DIA",
+   "signal_date": "2023-11-20",
+   "entry_date": "2023-11-21",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 11.4344,
+   "holding_bars": 104
+  },
+  {
+   "symbol": "XLK",
+   "signal_date": "2023-12-08",
+   "entry_date": "2023-12-11",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 2.2449,
+   "holding_bars": 90
+  },
+  {
+   "symbol": "QQQ",
+   "signal_date": "2023-12-11",
+   "entry_date": "2023-12-12",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 1.9301,
+   "holding_bars": 92
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2023-12-11",
+   "entry_date": "2023-12-12",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 7.0184,
+   "holding_bars": 100
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2023-12-18",
+   "entry_date": "2023-12-19",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.0809,
+   "holding_bars": 11
+  },
+  {
+   "symbol": "IWM",
+   "signal_date": "2024-07-22",
+   "entry_date": "2024-07-23",
+   "exit_reason": "structure_stop_C",
+   "r_net": -6.4075,
+   "holding_bars": 9
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2024-11-18",
+   "entry_date": "2024-11-19",
+   "exit_reason": "structure_stop_C",
+   "r_net": -2.8897,
+   "holding_bars": 11
+  },
+  {
+   "symbol": "XLK",
+   "signal_date": "2024-11-21",
+   "entry_date": "2024-11-22",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -1.4652,
+   "holding_bars": 32
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2025-01-02",
+   "entry_date": "2025-01-03",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.2366,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2025-03-07",
+   "entry_date": "2025-03-10",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 1.5019,
+   "holding_bars": 10
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2025-04-09",
+   "entry_date": "2025-04-10",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.5649,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2025-04-17",
+   "entry_date": "2025-04-21",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.025,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2025-04-25",
+   "entry_date": "2025-04-28",
+   "exit_reason": "exit_b3_dual",
+   "r_net": -0.052,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLE",
+   "signal_date": "2025-05-12",
+   "entry_date": "2025-05-13",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.0209,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2025-06-06",
+   "entry_date": "2025-06-09",
+   "exit_reason": "structure_stop_C",
+   "r_net": -1.2038,
+   "holding_bars": 5
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2025-06-23",
+   "entry_date": "2025-06-24",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 1.5233,
+   "holding_bars": 88
+  },
+  {
+   "symbol": "QQQ",
+   "signal_date": "2026-04-08",
+   "entry_date": "2026-04-09",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.1927,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLF",
+   "signal_date": "2026-04-08",
+   "entry_date": "2026-04-09",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.0731,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "SPY",
+   "signal_date": "2026-04-14",
+   "entry_date": "2026-04-15",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 0.2733,
+   "holding_bars": 1
+  },
+  {
+   "symbol": "XLK",
+   "signal_date": "2026-04-24",
+   "entry_date": "2026-04-27",
+   "exit_reason": "exit_b3_dual",
+   "r_net": 1.8359,
+   "holding_bars": 64
+  }
+ ],
+ "verdict_pre_registered": "不复现（未达复现线：逐标的为正比例 4/8 未过半）"
+}
