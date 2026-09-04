@@ -1101,6 +1101,19 @@ class SizingAdviceDTO(BaseModel):
     disclaimer_cn: str = "档位只是建议，最终买多少由你决定。"
 
 
+class TradePreviewDTO(BaseModel):
+    """报单预解析（best-effort）：确认卡展示、用户可改字段后才落库。"""
+
+    fund_code: str | None = None
+    fund_name: str | None = None
+    side: str = "buy"
+    side_cn: str = "申购"
+    amount: float | None = None
+    trade_date: str = ""
+    missing: list[str] = []       # 缺什么（fund_code/amount/date...）
+    note_cn: str = "请核对以下信息，确认后记入基金台账；金额单位为元。"
+
+
 class CreateSessionRequest(BaseModel):
     symbol: str | None = None
     title_cn: str = ""
