@@ -1273,10 +1273,12 @@ def build_snapshot(
         heat_raw[code] = hv
         rows.append(row)
 
-    # 散户热度横截面分位 + 情境化警示（有效样本 < 20 不比分位，不冒充）
+    # 散户热度横截面分位 + 情境化警示
+    # 排名池按 rules.v2.yaml pctile_pool（l1_l2）：L3 细分不进池但按池定位显示
     heat_vals = [v for v in heat_raw.values() if v is not None]
+    heat_pool = retail_heat.heat_pool_values(rows, heat_cfg.get("pctile_pool", "l1_l2"))
     for row in rows:
-        pct = retail_heat.cross_section_pctile(row.get("heat_value"), heat_vals)
+        pct = retail_heat.cross_section_pctile(row.get("heat_value"), heat_pool)
         state = retail_heat.heat_state(pct, row.get("stage"), heat_cfg)
         row["heat_pctile"] = pct
         row["heat_hot"] = state["hot"]
@@ -1299,14 +1301,17 @@ def build_snapshot(
             "metric": heat_cfg["metric"],
             "metric_label_cn": retail_heat.METRIC_LABELS.get(heat_cfg["metric"]),
             "window_days": heat_cfg["window_days"],
+            "pctile_pool": heat_cfg.get("pctile_pool", "l1_l2"),
             "hot_pctile": heat_cfg["hot_pctile"],
             "cold_pctile": heat_cfg.get("cold_pctile"),
             "warn_stages": list(heat_cfg["warn_stages"]),
             "rule_version": heat_cfg["version"],
             "n_valid": len(heat_vals),
+            "n_pool": len(heat_pool),
             "note_cn": (
                 "资金面路牌预警（research_proxy）：东财五档零和，散户净流入≡主力净流出，"
-                "热度取小单−超大单分化；只标注、不构成买卖点。"
+                "热度取小单−超大单分化；排名池为一、二级行业（L3 按池定位不上榜）；"
+                "只标注、不构成买卖点。"
             ),
         },
         "boards": rows,

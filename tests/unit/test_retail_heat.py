@@ -100,6 +100,28 @@ class TestHeatState:
         assert mid["hot"] is False and mid["cold"] is False
 
 
+class TestHeatPool:
+    def test_l3_excluded_from_pool(self):
+        """l1_l2 池：三级细分板块不进分母，但自己仍有 heat_value 可定位。"""
+        rows = (
+            [{"level": 1, "heat_value": float(i)} for i in range(12)]
+            + [{"level": 2, "heat_value": float(20 + i)} for i in range(12)]
+            + [{"level": 3, "heat_value": 999.0}, {"level": 3, "heat_value": -999.0}]
+        )
+        pool = rh.heat_pool_values(rows, "l1_l2")
+        assert len(pool) == 24
+        assert 999.0 not in pool and -999.0 not in pool
+        # L3 极端值按池定位：999 → 满分位，-999 → 0 分位
+        assert rh.cross_section_pctile(999.0, pool) == 100.0
+        assert rh.cross_section_pctile(-999.0, pool) == 0.0
+
+    def test_all_mode_and_empty_fallback(self):
+        rows = [{"level": 3, "heat_value": 1.0}, {"level": 3, "heat_value": 2.0}]
+        assert rh.heat_pool_values(rows, "all") == [1.0, 2.0]
+        # 全是 L3 时池空回落全量（防御，不冒充）
+        assert rh.heat_pool_values(rows, "l1_l2") == [1.0, 2.0]
+
+
 class TestHeatConfig:
     def test_reads_ledger(self):
         cfg = rh.heat_config()

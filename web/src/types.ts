@@ -1461,11 +1461,13 @@ export interface SectorHeatMeta {
   metric: string;
   metric_label_cn: string;
   window_days: number;
+  pctile_pool: string; // 分位排名池（l1_l2 = 仅一、二级行业）
   hot_pctile: number;
   cold_pctile: number | null;
   warn_stages: string[];
   rule_version: string;
   n_valid: number;
+  n_pool: number;
   note_cn: string;
 }
 

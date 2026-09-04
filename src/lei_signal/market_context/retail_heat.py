@@ -68,6 +68,7 @@ def heat_config() -> dict:
             "window_days": int(rule.param("window_days", defaults["window_days"])),
             "hot_pctile": float(rule.param("hot_pctile", defaults["hot_pctile"])),
             "cold_pctile": float(rule.param("cold_pctile", defaults["cold_pctile"])),
+            "pctile_pool": rule.param("pctile_pool", "l1_l2"),
             "warn_stages": tuple(rule.param("warn_stages", list(defaults["warn_stages"]))),
             "version": rule.version,
         }
@@ -128,6 +129,26 @@ def cross_section_pctile(value: float | None, values: list[float]) -> float | No
     return round(
         ((arr < value).sum() + 0.5 * (arr == value).sum()) / len(arr) * 100.0, 1
     )
+
+
+def heat_pool_values(
+    rows: list[dict], pool_mode: str = "l1_l2"
+) -> list[float]:
+    """分位排名池：l1_l2 = 仅一、二级行业板块的 heat_value（rules.v2.yaml
+    retail_heat.pctile_pool）。三级细分板块成分少、行为极端、用户不可操作，
+    进池会霸占两端（2026-09-05 用户反馈）；L3 仍按池定位显示分位但不进池。
+    池空时回落全部有效值（防御，不冒充）。
+    """
+    vals_all = [r.get("heat_value") for r in rows]
+    vals_all = [v for v in vals_all if v is not None]
+    if pool_mode != "l1_l2":
+        return vals_all
+    pool = [
+        r.get("heat_value")
+        for r in rows
+        if (r.get("level") or 3) <= 2 and r.get("heat_value") is not None
+    ]
+    return pool if pool else vals_all
 
 
 def heat_state(

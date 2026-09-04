@@ -963,18 +963,21 @@ rules:
   # ---------------- 散户热度（板块层资金面预警，研究代理；不属 LEI 规则体系）----------------
   retail_heat:
     rule_id: "retail_heat"
-    version: "0.2.0"
+    version: "0.3.0"
     provenance: "research_proxy"
     params:
       metric: "diverge"          # 小单−超大单分化（筹码下移强度），口径定义见 market_context/retail_heat.py
       window_days: 20
+      pctile_pool: "l1_l2"       # 分位排名池：仅一级行业+二级行业（用户可认知的板块层）
       hot_pctile: 90             # 风险线：横截面分位过热阈值（回测校准值，来源见 note_cn）
       cold_pctile: 10            # 机会线：横截面分位过冷阈值（散户割肉·主力吸筹区，回测校准值）
       warn_stages: ["markup", "distribution"]   # 情境化：仅上升/派发阶段的过热亮警示
     formula: |
       ratio_d = (small_yi − super_large_yi) / 市值亿（市值 = 当日板块总市值 × close(t)/close(最新)，回溯近似）
       heat_value = mean(ratio_d, window_days 日)
-      heat_pctile = heat_value 当日全部有效板块横截面分位（0-100，并列取平均秩）
+      排名池 = pctile_pool 指定的板块集合（l1_l2 = 全部一级+二级行业）
+      heat_pctile = 本板块 heat_value 在排名池中的分位（0-100，并列平均秩；
+                    三级细分板块不进池，但按同一池定位显示分位，不上热度榜）
       heat_hot    = heat_pctile >= hot_pctile   （风险区：散户狂买·超大单派发）
       heat_cold   = heat_pctile <= cold_pctile  （机会区：散户割肉·超大单吸筹）
       heat_warning = heat_hot 且 阶段 ∈ warn_stages
@@ -983,6 +986,8 @@ rules:
       只标注、不做硬过滤、不出买卖点，不参与阶段判定。
       东财五档资金流零和（main+medium+small≈0，实测 2026-09-04），
       散户净流入≡主力净流出，独立信息在小单−超大单分化。
+      分位池取 l1_l2（2026-09-05 用户反馈）：三级细分板块成分股少、行为极端，
+      进池会霸占榜单两端且对使用者不可操作；大板块池内排名更有意义。
       hot/cold 阈值初值 90/10 为占位，回测校准（含机会线反向验证）后更新并提升
       version；回测依据与更新记录见 docs/experiments/retail-mania-threshold-2026-09-04.md。
       「机构」为超大单近似（单据规模代理，非真实身份）；「国家队」无数据口径，不冒充。
