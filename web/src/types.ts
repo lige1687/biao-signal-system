@@ -1446,7 +1446,25 @@ export interface SectorTrendRow {
   flow_note_cn: string | null;
   flow_vs_stage: "confirm" | "conflict" | null;
   flow_vs_stage_cn: string | null;
+  // 散户热度（资金面路牌预警，research_proxy；口径与阈值登记 rules.v2.yaml retail_heat 段）
+  heat_value: number | null; // 口径 20 日均值（小单−超大单分化 / 市值，无量纲）
+  heat_pctile: number | null; // 当日全部有效板块横截面分位 0-100（平均秩）
+  heat_hot: boolean; // 分位 ≥ 阈值（过热区）
+  heat_warning: boolean; // 过热 × 阶段 ∈ {上升, 派发} 的情境化警示
+  heat_note_cn: string | null;
   provenance: "research_proxy";
+}
+
+/** 快照级散户热度口径元信息（/api/sectors/trend 响应的 heat 段） */
+export interface SectorHeatMeta {
+  metric: string;
+  metric_label_cn: string;
+  window_days: number;
+  hot_pctile: number;
+  warn_stages: string[];
+  rule_version: string;
+  n_valid: number;
+  note_cn: string;
 }
 
 export interface SectorTrendResponse {
@@ -1454,6 +1472,7 @@ export interface SectorTrendResponse {
   date: string;
   trading_day: string;
   bench: { all_equal_close: number | null; hs300_close: number | null };
+  heat: SectorHeatMeta;
   boards: SectorTrendRow[];
   warnings: string[];
   errors: string[];

@@ -34,6 +34,7 @@ from lei_signal.data.cache import DEFAULT_CACHE_DIR
 from lei_signal.domain.rules_config import get_rule, indicator_config
 from lei_signal.domain.types import LONG_TREND_CN, SignalColor
 from lei_signal.features.indicators import compute_features
+from lei_signal.market_context import retail_heat
 from lei_signal.rules.lei_color import classify_colors
 from lei_signal.rules.long_trend import compute_long_trend
 from lei_signal.rules.macd_strength import read_macd_strength
@@ -226,9 +227,13 @@ def load_flow_history() -> dict[str, list[dict]]:
 
 
 def _merge_flow_points(
-    cached: list[dict], new: list[dict], *, keep_days: int = 90
+    cached: list[dict], new: list[dict], *, keep_days: int = 520
 ) -> list[dict]:
-    """按日期合并（新值覆盖旧值），升序返回，最多保留 keep_days 天。"""
+    """按日期合并（新值覆盖旧值），升序返回，最多保留 keep_days 天。
+
+    keep_days=520（约 2 年）：散户热度/回测需要尽量长的本地累积史，
+    东财 push2his 单次只给 120 天，跨日只能靠本地累积变长，故不短裁。
+    """
     by_date = {p["date"]: p for p in cached if p.get("date")}
     for p in new or []:
         if p.get("date"):
@@ -292,14 +297,15 @@ def _fetch_flow_daily_snapshot() -> dict:
 def fetch_sector_flows(
     codes: list[str],
     *,
-    days: int = 60,
+    days: int = 120,
     concurrency: int = 2,
     jitter: float = 1.0,
 ) -> dict[str, list[dict]]:
     """增量维护板块资金流历史缓存，返回合并后的全量日史。
 
     1. 当日增量：clist 批量快照（稳定，5 页请求）；
-    2. 历史回填：仅缓存不足 ``days`` 的板块，push2his 直连全量拉
+    2. 历史回填：仅缓存不足 ``days`` 的板块（默认 120 = 东财 push2his
+       单次可回填的最大深度），push2his 直连全量拉
        （先探一次直连可用性，被封则本轮跳过，等下个交易日再试）；
     3. 合并去重（新值覆盖旧值）后原子落盘 ``sector_flow_history.json``。
     """
@@ -1065,6 +1071,8 @@ def build_snapshot(
     daily_ref = daily_ref or {}
     flows = flows or {}
     config = indicator_config()
+    heat_cfg = retail_heat.heat_config()
+    heat_raw: dict[str, float | None] = {}
 
     # 全A等权基准（与板块同口径：等权 vs 等权）
     wide_aligned = _align_window(wide)
@@ -1174,6 +1182,12 @@ def build_snapshot(
             "flow_note_cn": None,
             "flow_vs_stage": None,
             "flow_vs_stage_cn": None,
+            # 散户热度（资金面路牌预警，research_proxy；口径与阈值见 rules.v2.yaml）
+            "heat_value": None,
+            "heat_pctile": None,
+            "heat_hot": False,
+            "heat_warning": False,
+            "heat_note_cn": None,
             "up_count": ref.get("up_count"),
             "down_count": ref.get("down_count"),
             "total_mv_yi": ref.get("total_mv_yi"),
@@ -1248,7 +1262,25 @@ def build_snapshot(
         vs = flow_vs_stage(stage, agg["flow_20d_main_yi"])
         row["flow_vs_stage"] = vs
         row["flow_vs_stage_cn"] = _FLOW_VS_STAGE_CN.get(vs) if vs else None
+
+        # 散户热度口径值（横截面分位在全部行组装后统一算）
+        hv = retail_heat.window_metric(
+            flows.get(code), boards_idx.get(code), ref.get("total_mv_yi"),
+            metric=heat_cfg["metric"], window=heat_cfg["window_days"],
+        )
+        row["heat_value"] = hv
+        heat_raw[code] = hv
         rows.append(row)
+
+    # 散户热度横截面分位 + 情境化警示（有效样本 < 20 不比分位，不冒充）
+    heat_vals = [v for v in heat_raw.values() if v is not None]
+    for row in rows:
+        pct = retail_heat.cross_section_pctile(row.get("heat_value"), heat_vals)
+        state = retail_heat.heat_state(pct, row.get("stage"), heat_cfg)
+        row["heat_pctile"] = pct
+        row["heat_hot"] = state["hot"]
+        row["heat_warning"] = state["warning"]
+        row["heat_note_cn"] = state["note_cn"]
 
     as_of = datetime.now().strftime("%Y-%m-%d %H:%M")
     trading_day = wide_aligned.index[-1].strftime("%Y-%m-%d") if not wide_aligned.empty else as_of
@@ -1260,6 +1292,19 @@ def build_snapshot(
         "bench": {
             "all_equal_close": _round_last(bench_all),
             "hs300_close": _round_last(bench_hs300) if bench_hs300 is not None else None,
+        },
+        "heat": {
+            "metric": heat_cfg["metric"],
+            "metric_label_cn": retail_heat.METRIC_LABELS.get(heat_cfg["metric"]),
+            "window_days": heat_cfg["window_days"],
+            "hot_pctile": heat_cfg["hot_pctile"],
+            "warn_stages": list(heat_cfg["warn_stages"]),
+            "rule_version": heat_cfg["version"],
+            "n_valid": len(heat_vals),
+            "note_cn": (
+                "资金面路牌预警（research_proxy）：东财五档零和，散户净流入≡主力净流出，"
+                "热度取小单−超大单分化；只标注、不构成买卖点。"
+            ),
         },
         "boards": rows,
         "warnings": warnings,

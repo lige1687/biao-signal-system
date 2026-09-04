@@ -2916,6 +2916,30 @@ a { color: var(--accent); text-decoration: none; }
 .flow-badge.fb-ok { background: rgba(46, 204, 113, 0.12); color: #15803d; }
 .flow-badge.fb-warn { background: rgba(224, 169, 58, 0.14); color: #b45309; }
 .flow-struct { font-size: 12px; margin: 6px 0 2px; color: var(--text-dim); }
+.flow-struct.warn { color: #b45309; font-weight: 600; }
+.flow-heat {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  margin-top: 8px;
+  font-size: 12px;
+}
+.flow-heat .fact-value b.caution { color: #b45309; }
+
+/* 主表「散户热度」列：分位数值 + 过热/警示态（资金面路牌预警，research_proxy） */
+.sx-heat { font-weight: 600; }
+.sx-heat.hot { color: #b45309; }
+.sx-heat.warn { color: #d24a43; }
+.sx-heat-flag {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 0 4px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  background: rgba(210, 74, 67, 0.14);
+  color: #d24a43;
+}
 .flow-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

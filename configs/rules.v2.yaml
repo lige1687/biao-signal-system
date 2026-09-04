@@ -937,6 +937,30 @@ rules:
       实现为「只算不强制」；人类 2026-08-04 明确定为只提示、永不拦截，文案「建议 >3，
       2–3 可接受」。此差异是人类决定非实现漂移，必须留出处。界面必须标注「研究代理」。
 
+  # ---------------- 散户热度（板块层资金面预警，研究代理；不属 LEI 规则体系）----------------
+  retail_heat:
+    rule_id: "retail_heat"
+    version: "0.1.0"
+    provenance: "research_proxy"
+    params:
+      metric: "diverge"          # 小单−超大单分化（筹码下移强度），口径定义见 market_context/retail_heat.py
+      window_days: 20
+      hot_pctile: 90             # 横截面分位过热阈值（回测校准值，来源见 note_cn）
+      warn_stages: ["markup", "distribution"]   # 情境化：仅上升/派发阶段的过热亮警示
+    formula: |
+      ratio_d = (small_yi − super_large_yi) / 市值亿（市值 = 当日板块总市值 × close(t)/close(最新)，回溯近似）
+      heat_value = mean(ratio_d, window_days 日)
+      heat_pctile = heat_value 当日全部有效板块横截面分位（0-100，并列取平均秩）
+      heat_warning = heat_pctile >= hot_pctile 且 阶段 ∈ warn_stages
+    note_cn: |
+      板块层资金面属「路牌」性质预警（先判断道路再观察路牌：只预警不必然反向）：
+      只标注、不做硬过滤、不出买卖点，不参与阶段判定。
+      东财五档资金流零和（main+medium+small≈0，实测 2026-09-04），
+      散户净流入≡主力净流出，独立信息在小单−超大单分化。
+      hot_pctile 初值 90 为占位，回测校准后更新并提升 version；
+      回测依据与更新记录见 docs/experiments/retail-mania-threshold-2026-09-04.md。
+      「机构」为超大单近似（单据规模代理，非真实身份）；「国家队」无数据口径，不冒充。
+
 # ---------------- 状态机 ----------------
 state_machine:
   version: "1.0.0"

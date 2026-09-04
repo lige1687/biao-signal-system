@@ -50,6 +50,7 @@ type SortKey =
   | "b50"
   | "nh60"
   | "flow_20d_main_yi"
+  | "heat_pctile"
   | "pe_ttm";
 
 /** 级别筛选：仅 L1（31 个一级行业）/ 含二级 / 全部层级。 */
@@ -336,6 +337,14 @@ export default function SectorsPage() {
                     onToggle={toggleSort}
                     tip="近 20 日主力（超大+大单）累计净流入（亿元，单据规模代理，覆盖约 14% 板块）"
                   />
+                  <SortableTh
+                    label="散户热度"
+                    sortKey="heat_pctile"
+                    cur={sortKey}
+                    asc={sortAsc}
+                    onToggle={toggleSort}
+                    tip="散户热度分位（0-100）：小单−超大单净流入分化（相对市值，20 日均），当日全部板块横截面排名。资金流零和（散户净流入≡主力净流出），热度高=筹码向小单集中；过热×上升/派发阶段亮警示。研究代理·只预警非买卖点"
+                  />
                   <th className="num" title="均线排列 · MACD 形态（辅助验证）">
                     均线/MACD
                   </th>
@@ -417,6 +426,22 @@ export default function SectorsPage() {
                         </span>
                       )}
                     </td>
+                    <td className="num">
+                      {b.heat_pctile == null ? (
+                        <span className="muted">-</span>
+                      ) : (
+                        <span
+                          className={`sx-heat${b.heat_warning ? " warn" : b.heat_hot ? " hot" : ""}`}
+                          title={
+                            b.heat_note_cn ??
+                            `散户热度分位 ${b.heat_pctile}（小单−超大单分化·20日·横截面，research_proxy）`
+                          }
+                        >
+                          {b.heat_pctile.toFixed(0)}
+                          {b.heat_warning && <b className="sx-heat-flag">过热</b>}
+                        </span>
+                      )}
+                    </td>
                     <td
                       className="num sx-tech"
                       title={
@@ -438,7 +463,7 @@ export default function SectorsPage() {
                 ))}
                 {visibleRows.length === 0 && (
                   <tr>
-                    <td colSpan={13} className="muted">
+                    <td colSpan={14} className="muted">
                       无匹配板块（请先运行预计算脚本）
                     </td>
                   </tr>
@@ -1070,8 +1095,24 @@ function SectorTrendDrawer({
                 <FlowBar label="60日·主力" v={row.flow_60d_main_yi} highlight />
                 <FlowBar label="60日·散户" v={row.flow_60d_retail_yi} />
               </div>
+              <div className="flow-heat">
+                <span className="fact-label">散户热度</span>
+                <span className="fact-value">
+                  {row.heat_pctile == null ? (
+                    "数据不足（窗口未满 20 日或板块指数缺失）"
+                  ) : (
+                    <>
+                      分位 <b className={row.heat_warning ? "down" : row.heat_hot ? "caution" : ""}>{row.heat_pctile.toFixed(0)}</b>
+                      /100
+                      {row.heat_warning ? "（过热×阶段警示）" : row.heat_hot ? "（过热区，阶段不匹配暂不警示）" : ""}
+                    </>
+                  )}
+                </span>
+              </div>
+              {row.heat_note_cn && <div className="flow-struct warn">{row.heat_note_cn}</div>}
               <div className="muted" style={{ fontSize: 11, marginTop: 4 }}>
                 单据规模代理（非真实机构/散户身份），仅作阶段交叉验证，不参与判定、不构成买卖建议。
+                五档资金流零和：散户净流入≡主力净流出，散户热度取小单−超大单分化口径。
               </div>
             </>
           ) : (
