@@ -1130,6 +1130,45 @@ class CopilotDispatchReply(BaseModel):
     note_cn: str = ""
 
 
+class FundTradeDTO(BaseModel):
+    """基金成交台账一行（手动报单，用户确认落库；不接券商）。"""
+
+    trade_id: str
+    fund_code: str
+    fund_name: str
+    side: str
+    side_cn: str
+    amount: float
+    trade_date: str
+    priced_nav: float | None
+    price_status: str          # pending | priced | failed
+    price_status_cn: str
+    plan_id: str | None = None
+    source: str = "web"
+    note: str = ""
+    created_at: str = ""
+
+
+class FundPositionDTO(BaseModel):
+    """单基金持仓汇总（份额/成本/最新净值/浮盈/已实现）。"""
+
+    fund_code: str
+    fund_name: str
+    shares: float
+    cost: float                     # 剩余成本（元）
+    latest_nav: float | None
+    latest_nav_date: str = ""
+    market_value: float | None      # shares × latest_nav（无净值则 None）
+    unrealized_pnl: float | None
+    realized_pnl: float = 0.0
+    note: str = ""
+
+
+class TradesResponseDTO(BaseModel):
+    trades: list[FundTradeDTO] = []
+    positions: list[FundPositionDTO] = []
+
+
 class CreateSessionRequest(BaseModel):
     symbol: str | None = None
     title_cn: str = ""
