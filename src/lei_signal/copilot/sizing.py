@@ -11,8 +11,20 @@ from lei_signal.domain.rules_config import get_rule
 _TIERS = ("试仓", "标准", "偏重")
 
 
+_PARAM_KEYS = (
+    "tier_trial_pct_max",
+    "tier_standard_pct_min",
+    "tier_standard_pct_max",
+    "tier_heavy_pct_min",
+    "single_symbol_cap_pct",
+    "same_group_soft_cap_pct",
+    "rr_tier_threshold",
+)
+
+
 def _params() -> dict:
-    return dict(get_rule("copilot_sizing").param)
+    rule = get_rule("copilot_sizing")
+    return {k: rule.param(k) for k in _PARAM_KEYS}
 
 
 def _tier_pct_cn(tier: str, p: dict) -> str:

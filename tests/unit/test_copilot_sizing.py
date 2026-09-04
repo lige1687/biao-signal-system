@@ -6,8 +6,9 @@ from lei_signal.copilot.sizing import build_sizing_advice
 
 def test_params_from_rules_yaml_not_hardcoded():
     adv = build_sizing_advice("515880", rr=3.4)
-    assert adv.cap_pct == 30.0
-    assert "30" in adv.tier_pct_cn
+    assert adv.cap_pct == 30.0                       # single_symbol_cap_pct
+    assert "10" in adv.tier_pct_cn and "15" in adv.tier_pct_cn  # 标准档区间来自账本
+    assert any("30%" in r for r in adv.reasons)      # 硬顶写进依据
 
 
 def test_rr_high_gives_standard_tier():
