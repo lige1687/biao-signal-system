@@ -19,6 +19,7 @@ from lei_signal.api.schemas import (
     FundTradeDTO,
     RecommendCardDTO,
     SizingAdviceDTO,
+    ReviewCardDTO,
     TradePreviewDTO,
     TradesResponseDTO,
 )
@@ -208,10 +209,18 @@ def dispatch(request: Request, body: CopilotDispatchRequest) -> CopilotDispatchR
             card={"card_type": "holdings", "data": data},
         )
     if intent.kind == "review":
+        from lei_signal.copilot import review as review_mod  # noqa: PLC0415
+
+        week_iso = review_mod.prev_iso_week(today_date())
+        with closing(connect(_db_path(request))) as conn:
+            card = review_mod.get_review(conn, "weekly", week_iso)
+            if card is None:
+                card = review_mod.build_weekly_review(conn, week_iso)
+                review_mod.save_review(conn, card)
+                conn.commit()
         return CopilotDispatchReply(
             intent="review",
-            chat_fallback=True,
-            note_cn="复盘流水线在 P3 接入；当前先用通用讨论回答。",
+            card={"card_type": "review", "data": card.model_dump()},
         )
     return CopilotDispatchReply(
         intent="chat",
@@ -345,3 +354,41 @@ def trades_list(request: Request) -> TradesResponseDTO:
                 conn, fetch_nav=trades_mod.fetch_nav_history
             ),
         )
+
+
+@router.get("/copilot/review/trade/{trade_id}", response_model=ReviewCardDTO)
+def trade_review(request: Request, trade_id: str) -> ReviewCardDTO:
+    """单笔复盘：首访组装+存库（含 GLM 叙事 best-effort），之后读缓存。"""
+    from lei_signal.copilot import review as review_mod  # noqa: PLC0415
+
+    with closing(connect(_db_path(request))) as conn:
+        card = review_mod.get_review(conn, "trade", trade_id)
+        if card is None:
+            card = review_mod.build_trade_review(conn, trade_id)
+            if card is None:
+                raise HTTPException(status_code=404, detail=f"成交不存在: {trade_id}")
+            card = review_mod.attach_narrative(
+                conn, card, config=plans_llm.load_ark_config()
+            )
+            review_mod.save_review(conn, card)
+            conn.commit()
+    return card
+
+
+@router.get("/copilot/review/weekly", response_model=ReviewCardDTO)
+def weekly_review(request: Request, week: str | None = None) -> ReviewCardDTO:
+    """周复盘：缺省上一完整 ISO 周。首访组装+存库，之后读缓存。"""
+    from lei_signal.api.opportunity_scan import today_date  # noqa: PLC0415
+    from lei_signal.copilot import review as review_mod  # noqa: PLC0415
+
+    week_iso = week or review_mod.prev_iso_week(today_date())
+    with closing(connect(_db_path(request))) as conn:
+        card = review_mod.get_review(conn, "weekly", week_iso)
+        if card is None:
+            card = review_mod.build_weekly_review(conn, week_iso)
+            card = review_mod.attach_narrative(
+                conn, card, config=plans_llm.load_ark_config()
+            )
+            review_mod.save_review(conn, card)
+            conn.commit()
+    return card

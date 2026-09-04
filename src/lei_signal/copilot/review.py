@@ -137,3 +137,104 @@ def get_review(
     if row is None:
         return None
     return ReviewCardDTO.model_validate_json(row["payload"])
+
+
+def _iso_week_of(day: str) -> str:
+    from datetime import date
+
+    d = date.fromisoformat(day[:10])
+    year, week, _ = d.isocalendar()
+    return f"{year}-W{week:02d}"
+
+
+def prev_iso_week(today: str | None = None) -> str:
+    """上一完整 ISO 周（周日跑周报取上周；today 为 YYYY-MM-DD）。"""
+    from datetime import date, timedelta
+
+    d = (date.fromisoformat(today) if today else date.today()) - timedelta(days=7)
+    return _iso_week_of(d.isoformat())
+
+
+def build_weekly_review(conn: sqlite3.Connection, week_iso: str) -> ReviewCardDTO:
+    rows = trades_mod.list_trades(conn)
+    in_week = [t for t in rows if _iso_week_of(t.trade_date) == week_iso]
+    sections: list[ReviewSectionDTO] = []
+    total_realized = 0.0
+    lines: list[str] = []
+    sells = [t for t in in_week if t.side == "sell"]
+    for t in in_week:
+        lines.append(
+            f"{t.trade_date} {t.side_cn} {t.fund_name} {t.amount:.0f} 元"
+            f"（{t.price_status_cn}）"
+        )
+    for t in sells:
+        info = trades_mod.realized_pnl_of(conn, t.trade_id)
+        if info.get("realized_pnl") is not None:
+            total_realized += info["realized_pnl"]
+    if not in_week:
+        lines.append("本周没有台账成交——没有记录就没有复盘，下周记得报单。")
+    sections.append(ReviewSectionDTO(
+        heading_cn=f"{week_iso} 操作清单", lines=lines,
+    ))
+    sections.append(ReviewSectionDTO(
+        heading_cn="本周结果",
+        lines=[
+            f"共 {len(in_week)} 笔（卖出 {len(sells)} 笔），"
+            f"已实现盈亏合计 {total_realized:+.0f} 元（大白话：落袋的部分）"
+        ],
+    ))
+    # 纪律面：本周进入终态的计划（exited/invalidated/superseded）
+    term_rows = conn.execute(
+        "SELECT symbol, state, exit_reason_rule_id, exited_on FROM trade_plans "
+        "WHERE state IN ('exited','invalidated','superseded') "
+        "AND exited_on IS NOT NULL"
+    ).fetchall()
+    term_lines = [
+        f"{r['symbol']} → {r['state']}"
+        + (f"（{r['exit_reason_rule_id']}）" if r["exit_reason_rule_id"] else "")
+        + f" @ {r['exited_on']}"
+        for r in term_rows
+        if _iso_week_of(str(r["exited_on"])) == week_iso
+    ]
+    sections.append(ReviewSectionDTO(
+        heading_cn="本周了结的计划（纪律面）",
+        lines=term_lines or ["本周无计划了结记录。"],
+    ))
+    return ReviewCardDTO(
+        review_id=f"rv_weekly_{week_iso}",
+        kind="weekly",
+        ref_key=week_iso,
+        title_cn=f"周复盘 · {week_iso}",
+        sections=sections,
+        realized_pnl=total_realized,
+    )
+
+
+def attach_narrative(
+    conn: sqlite3.Connection, review: ReviewCardDTO, *, config
+) -> ReviewCardDTO:
+    """GLM 复盘叙事（best-effort）：失败/无凭据保持模板，接地校验数值。"""
+    if config is None:
+        return review
+    from lei_signal.plans import llm as plans_llm  # noqa: PLC0415
+    from lei_signal.plans.grounding import (  # noqa: PLC0415
+        collect_payload_numbers,
+        verify_numeric_grounding,
+    )
+
+    raw = plans_llm.chat_copilot(
+        review.model_dump(),
+        "请把这份复盘讲成大白话总结，只陈述给定事实。",
+        config,
+        system_prompt=plans_llm.COPILOT_SYSTEM_PROMPT,
+    )
+    if raw is None:
+        return review
+    ok, _ = verify_numeric_grounding(
+        raw, collect_payload_numbers(review.model_dump())
+    )
+    if not ok:
+        return review
+    review.narrative = raw
+    review.grounded = True
+    return review
