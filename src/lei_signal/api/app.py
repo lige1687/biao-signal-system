@@ -23,6 +23,7 @@ from lei_signal.api.preheat import default_symbols_fn, start_preheat
 from lei_signal.api.routes import (
     agent,
     backtest,
+    copilot,
     dailybrief,
     dashboard,
     experiments,
@@ -111,6 +112,7 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
     app.include_router(portfolio.router)
     app.include_router(signals.router)
     app.include_router(agent.router)
+    app.include_router(copilot.router)
     app.include_router(feishu_webhook.router)
     app.include_router(fundamentals.router)
     app.include_router(sectors.router)
