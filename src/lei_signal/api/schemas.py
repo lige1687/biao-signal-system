@@ -1114,6 +1114,22 @@ class TradePreviewDTO(BaseModel):
     note_cn: str = "请核对以下信息，确认后记入基金台账；金额单位为元。"
 
 
+class CopilotDispatchRequest(BaseModel):
+    message: str = ""
+    symbol: str | None = None
+
+
+class CopilotDispatchReply(BaseModel):
+    """意图分发结果：命中流水线回 card/preview，否则 chat_fallback 走 /agent/chat。"""
+
+    intent: str
+    symbol: str | None = None
+    card: dict | None = None        # {card_type, data}
+    preview: TradePreviewDTO | None = None
+    chat_fallback: bool = False
+    note_cn: str = ""
+
+
 class CreateSessionRequest(BaseModel):
     symbol: str | None = None
     title_cn: str = ""

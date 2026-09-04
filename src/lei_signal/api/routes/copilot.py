@@ -12,9 +12,15 @@ from datetime import UTC, datetime
 from fastapi import APIRouter, HTTPException, Request
 
 from lei_signal.api.config import sqlite_path as default_db
-from lei_signal.api.schemas import RecommendCardDTO, SizingAdviceDTO
+from lei_signal.api.schemas import (
+    CopilotDispatchReply,
+    CopilotDispatchRequest,
+    RecommendCardDTO,
+    SizingAdviceDTO,
+)
 from lei_signal.copilot import journal
 from lei_signal.copilot.recommend import build_recommendation
+from lei_signal.plans.store import list_plans
 from lei_signal.storage.sqlite_store import connect
 
 logger = logging.getLogger(__name__)
@@ -137,4 +143,67 @@ def position_advice(request: Request, symbol: str) -> SizingAdviceDTO:
         symbol,
         rr,
         rr_computable=bool(best.reward_risk_computable) if best else False,
+    )
+
+
+@router.post("/copilot/dispatch", response_model=CopilotDispatchReply)
+def dispatch(request: Request, body: CopilotDispatchRequest) -> CopilotDispatchReply:
+    """一句话入口：规则识别意图 → 直达流水线（零 LLM）；识别不到回落通用讨论。"""
+    from lei_signal.api.opportunity_scan import today_date  # noqa: PLC0415
+    from lei_signal.copilot.intent import parse_intent, parse_trade_report  # noqa: PLC0415
+
+    intent = parse_intent(body.message)
+    if intent.kind == "recommend":
+        card = _recommend_card(request)
+        with closing(connect(_db_path(request))) as conn:
+            if card.items:
+                journal.save_recommendation(conn, card)
+                conn.commit()
+        return CopilotDispatchReply(
+            intent="recommend",
+            card={"card_type": "recommend", "data": card.model_dump()},
+            note_cn="推荐为排序结果，不构成新判定；点击标的可看买点审阅。",
+        )
+    if intent.kind == "trade_report":
+        preview = parse_trade_report(body.message, today=today_date())
+        return CopilotDispatchReply(
+            intent="trade_report",
+            preview=preview,
+            note_cn="已按你的话抽出信息，请核对后确认记入台账。",
+        )
+    if intent.kind == "holdings":
+        with closing(connect(_db_path(request))) as conn:
+            plans = [
+                {
+                    "plan_id": p.plan_id,
+                    "symbol": p.symbol,
+                    "state": p.state,
+                    "module": p.module,
+                    "direction": p.direction,
+                    "valid_until": p.valid_until,
+                }
+                for p in list_plans(conn)
+                if p.state in ("armed", "entered")
+            ]
+        data = {
+            "active_plans": plans,
+            "fund_positions": [],
+            "hint_cn": "基金持仓与真实盈亏在基金台账（P2）接入后在此展示；"
+                       "明细见「我的持仓」页。",
+        }
+        return CopilotDispatchReply(
+            intent="holdings",
+            card={"card_type": "holdings", "data": data},
+        )
+    if intent.kind == "review":
+        return CopilotDispatchReply(
+            intent="review",
+            chat_fallback=True,
+            note_cn="复盘流水线在 P3 接入；当前先用通用讨论回答。",
+        )
+    return CopilotDispatchReply(
+        intent="chat",
+        symbol=body.symbol,
+        chat_fallback=True,
+        note_cn="未命中快捷指令，已转通用讨论。",
     )
