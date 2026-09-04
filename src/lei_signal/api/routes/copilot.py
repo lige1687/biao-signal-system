@@ -10,6 +10,7 @@ from contextlib import closing
 from datetime import UTC, datetime
 
 from fastapi import APIRouter, HTTPException, Request
+from pydantic import BaseModel
 
 from lei_signal.api.config import sqlite_path as default_db
 from lei_signal.api.schemas import (
@@ -20,6 +21,7 @@ from lei_signal.api.schemas import (
 )
 from lei_signal.copilot import journal
 from lei_signal.copilot.recommend import build_recommendation
+from lei_signal.plans import llm as plans_llm
 from lei_signal.plans.store import list_plans
 from lei_signal.storage.sqlite_store import connect
 
@@ -207,3 +209,64 @@ def dispatch(request: Request, body: CopilotDispatchRequest) -> CopilotDispatchR
         chat_fallback=True,
         note_cn="未命中快捷指令，已转通用讨论。",
     )
+
+
+class ExplainRequest(BaseModel):
+    question: str = ""
+
+
+class ExplainReply(BaseModel):
+    reply: str
+    grounded: bool
+    card: RecommendCardDTO
+
+
+_EXPLAIN_DEFAULT_Q = "请概括今日推荐：先看什么、为什么、还缺什么条件。"
+
+
+def _explain_template(card: RecommendCardDTO) -> str:
+    lines = [
+        f"· {i.display_name}（{i.symbol}）[{i.verdict_cn}] " + "；".join(i.reasons[:3])
+        for i in card.items
+    ]
+    sectors = [f"· {s.name}（{s.stage_cn}）" for s in card.sectors]
+    return (
+        f"【今日推荐·数据直出】{card.run_date}\n"
+        + ("\n".join(lines) if lines else "今日无上榜标的。")
+        + ("\n板块：" + "、".join(sectors) + "\n" if sectors else "\n")
+        + "排序仅影响展示顺序，不构成新判定；技术结论以各标的买点审阅为准。"
+    )
+
+
+@router.post("/copilot/recommend/explain", response_model=ExplainReply)
+def explain_recommend(request: Request, body: ExplainRequest) -> ExplainReply:
+    """推荐讲解：一次 GLM 调用；数值/禁用词接地，失败降级模板直出。"""
+    from lei_signal.plans.grounding import (  # noqa: PLC0415
+        collect_payload_numbers,
+        verify_grounding,
+        verify_numeric_grounding,
+    )
+
+    card = _recommend_card(request)
+    config = plans_llm.load_ark_config()
+    reply: str | None = None
+    grounded = False
+    if config is not None:
+        payload = card.model_dump()
+        allowed_nums = collect_payload_numbers(payload)
+        raw = plans_llm.chat_copilot(
+            payload,
+            body.question.strip() or _EXPLAIN_DEFAULT_Q,
+            config,
+            system_prompt=plans_llm.COPILOT_SYSTEM_PROMPT,
+        )
+        if raw is not None:
+            ok_num, _ = verify_numeric_grounding(raw, allowed_nums)
+            ok_txt, _ = verify_grounding(raw, {""})  # 白名单空 = 只查禁用词
+            if ok_num and ok_txt:
+                reply, grounded = raw, True
+            else:
+                logger.warning("推荐讲解接地未过，降级模板")
+    if reply is None:
+        reply, grounded = _explain_template(card), False
+    return ExplainReply(reply=reply, grounded=grounded, card=card)
