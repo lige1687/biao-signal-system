@@ -105,6 +105,39 @@ def test_pipeline_no_llm_skips_scoring(monkeypatch, tmp_path):
 
 
 def test_pipeline_saves_digest(monkeypatch, tmp_path):
+    _patch_sources(monkeypatch, bili=[NewsItem(
+        source="bilibili", source_name="趋势天哥", url="https://b23.tv/z",
+        category="blogger", title="天哥视频",
+        summary=None, content=None,
+        published_at=datetime.now().astimezone().isoformat(timespec="seconds"),
+        dedupe_key="bt1")])
+    monkeypatch.setattr(pipeline, "score_items",
+                        lambda rows, config=None: [
+                            {"id": r["id"], "category": "blogger", "importance": 6,
+                             "direction": "bearish", "symbols": [], "note": "偏空观点"}
+                            for r in rows])
+    monkeypatch.setattr(pipeline, "generate_digest",
+                        lambda rows, config=None: {"sections": [], "top_events": []})
+    monkeypatch.setattr(pipeline, "generate_blogger_summaries",
+                        lambda rows, config=None: [
+                            {"name": "趋势天哥", "stance": "bearish", "summary": "偏空观望"}])
+    db = tmp_path / "p.db"
+    result = run_pipeline(db, config=_CFG, no_llm=False)
+    assert result["digest"] is True
+    import json
+
+    from lei_signal.newsfeed.store import NewsStore
+
+    store = NewsStore(db)
+    d = store.digests()
+    assert len(d) == 1
+    payload = json.loads(d[0]["payload_json"])
+    assert payload["bloggers"] == [{"name": "趋势天哥", "stance": "bearish", "summary": "偏空观望"}]
+    store.close()
+
+
+def test_pipeline_blogger_summary_failure_does_not_block_digest(monkeypatch, tmp_path):
+    """博主小结 LLM 失败：简报照常保存（不带 bloggers 字段）。"""
     _patch_sources(monkeypatch)
     monkeypatch.setattr(pipeline, "score_items",
                         lambda rows, config=None: [
@@ -113,13 +146,18 @@ def test_pipeline_saves_digest(monkeypatch, tmp_path):
                             for r in rows])
     monkeypatch.setattr(pipeline, "generate_digest",
                         lambda rows, config=None: {"sections": [], "top_events": []})
+    monkeypatch.setattr(pipeline, "generate_blogger_summaries",
+                        lambda rows, config=None: None)
     db = tmp_path / "p.db"
     result = run_pipeline(db, config=_CFG, no_llm=False)
     assert result["digest"] is True
+    import json
+
     from lei_signal.newsfeed.store import NewsStore
 
     store = NewsStore(db)
-    assert len(store.digests()) == 1
+    payload = json.loads(store.digests()[0]["payload_json"])
+    assert "bloggers" not in payload
     store.close()
 
 

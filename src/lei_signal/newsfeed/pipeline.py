@@ -13,7 +13,11 @@ from typing import Any
 
 from lei_signal.data.cache import DEFAULT_CACHE_DIR
 from lei_signal.newsfeed.config_loader import load_config
-from lei_signal.newsfeed.llm_score import generate_digest, score_items
+from lei_signal.newsfeed.llm_score import (
+    generate_blogger_summaries,
+    generate_digest,
+    score_items,
+)
 from lei_signal.newsfeed.models import NewsItem
 from lei_signal.newsfeed.normalize import preclassify
 from lei_signal.newsfeed.sources.bilibili import BilibiliClient, fetch_new_up_items
@@ -246,6 +250,12 @@ def run_pipeline(
                     # 推理模型 thinking 偶发吃满 token：原样重试 1 次。
                     digest = generate_digest(digest_rows)
                 if digest is not None:
+                    # 博主立场小结并入当日简报 payload（失败不阻断简报保存）。
+                    blogger_rows = [dict(r) for r in store.blogger_rows_recent(7)]
+                    if blogger_rows:
+                        bloggers = generate_blogger_summaries(blogger_rows)
+                        if bloggers:
+                            digest["bloggers"] = bloggers
                     store.save_digest(today, digest)
                     digest_ok = True
         status = "ok"

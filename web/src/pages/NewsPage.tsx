@@ -416,14 +416,35 @@ function WatchlistRadar({
   );
 }
 
-/** 博主观点板：按博主分组——"谁、哪天、说了啥"。 */
+/** 博主立场小结的展示口径（LLM 工序产物，参考层）。 */
+const STANCE_CN: Record<string, { label: string; cls: string }> = {
+  bullish: { label: "偏多", cls: "up" },
+  bearish: { label: "偏空", cls: "down" },
+  mixed: { label: "摇摆", cls: "mixed" },
+  neutral: { label: "中性", cls: "text-faint" },
+};
+
+/** 博主观点板：按博主分组——立场小结 + 多空计数 + 每期观点摘要（打分后自动出现）。 */
 function BloggerBoard() {
   const { data } = useQuery({
     queryKey: ["newsBloggerBoard"],
     queryFn: () =>
-      newsApi.items({ category: "blogger", from: daysAgo(2), limit: 40, scored: "all" }),
+      newsApi.items({ category: "blogger", from: daysAgo(7), limit: 60, scored: "all" }),
     staleTime: 5 * 60_000,
   });
+  // 当日简报里的博主立场小结（与今日要点共享缓存）
+  const { data: digestData } = useQuery({
+    queryKey: ["newsDigests"],
+    queryFn: () => newsApi.digests(1),
+    staleTime: 5 * 60_000,
+  });
+  const stanceBy = useMemo(
+    () =>
+      new Map(
+        (digestData?.digests?.[0]?.payload.bloggers ?? []).map((b) => [b.name, b]),
+      ),
+    [digestData],
+  );
   const groups = useMemo(() => {
     const byName = new Map<string, NewsItem[]>();
     for (const it of data?.items ?? []) {
@@ -431,13 +452,13 @@ function BloggerBoard() {
       if (!byName.has(name)) byName.set(name, []);
       byName.get(name)!.push(it);
     }
-    // 每人最多展示 3 条（最新的在前——API 已按重要性排序，组内改按时间）
+    // 每人最多展示 4 条（最新的在前——API 已按重要性排序，组内改按时间）
     const latestOf = (items: NewsItem[]) =>
       items.reduce((m, i) => (i.published_at > m ? i.published_at : m), "");
     return [...byName.entries()]
       .map(([name, items]) => [
         name,
-        [...items].sort((a, b) => b.published_at.localeCompare(a.published_at)).slice(0, 3),
+        [...items].sort((a, b) => b.published_at.localeCompare(a.published_at)).slice(0, 4),
       ] as [string, NewsItem[]])
       .sort((a, b) => latestOf(b[1]).localeCompare(latestOf(a[1])));
   }, [data]);
@@ -446,34 +467,54 @@ function BloggerBoard() {
   return (
     <div className="nf-bloggers">
       <h2 className="nf-section-title">
-        博主观点 <span className="fund-count">近2天 · {groups.length} 位</span>
+        博主观点 <span className="fund-count">近7天 · {groups.length} 位</span>
       </h2>
       <div className="nf-blogger-grid">
-        {groups.map(([name, items], gi) => (
-          <div key={name} className="nf-blogger">
-            <div className="nf-blogger-head">
-              <span className={`nf-avatar hue-${gi % AVATAR_HUES}`}>
-                {name.slice(0, 1)}
-              </span>
-              <span className="nf-blogger-name">{name}</span>
-            </div>
-            {items.map((it) => (
-              <div key={it.id} className="nf-blogger-item">
-                <div className="nf-blogger-item-row">
-                  <span className="nf-blogger-day">{dayLabel(it.published_at)}</span>
-                  {it.url ? (
-                    <a href={it.url} target="_blank" rel="noreferrer" className="nf-blogger-title">
-                      {it.title}
-                    </a>
-                  ) : (
-                    <span className="nf-blogger-title">{it.title}</span>
-                  )}
-                </div>
-                {it.llm_note && <div className="nf-blogger-note">{it.llm_note}</div>}
+        {groups.map(([name, items], gi) => {
+          const stance = stanceBy.get(name);
+          const s = stance ? STANCE_CN[stance.stance] : null;
+          const bull = items.filter((i) => i.direction === "bullish").length;
+          const bear = items.filter((i) => i.direction === "bearish").length;
+          return (
+            <div key={name} className="nf-blogger">
+              <div className="nf-blogger-head">
+                <span className={`nf-avatar hue-${gi % AVATAR_HUES}`}>
+                  {name.slice(0, 1)}
+                </span>
+                <span className="nf-blogger-name">{name}</span>
+                {s && (
+                  <span className={`nf-stance nf-stance-${stance!.stance}`} title="近7天立场（LLM 归纳，参考层）">
+                    {s.label}
+                  </span>
+                )}
+                <span className="nf-blogger-counts" title="近7天已评分条目的多空计数">
+                  {bull > 0 && <span className="up">↑{bull}</span>}
+                  {bear > 0 && <span className="down">↓{bear}</span>}
+                </span>
               </div>
-            ))}
-          </div>
-        ))}
+              {stance?.summary && (
+                <div className="nf-blogger-summary" title="近7天立场小结（LLM 归纳，参考层）">
+                  {stance.summary}
+                </div>
+              )}
+              {items.map((it) => (
+                <div key={it.id} className="nf-blogger-item">
+                  <div className="nf-blogger-item-row">
+                    <span className="nf-blogger-day">{dayLabel(it.published_at)}</span>
+                    {it.url ? (
+                      <a href={it.url} target="_blank" rel="noreferrer" className="nf-blogger-title">
+                        {it.title}
+                      </a>
+                    ) : (
+                      <span className="nf-blogger-title">{it.title}</span>
+                    )}
+                  </div>
+                  {it.llm_note && <div className="nf-blogger-note">{it.llm_note}</div>}
+                </div>
+              ))}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

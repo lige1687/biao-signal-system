@@ -126,3 +126,42 @@ def test_generate_digest(monkeypatch) -> None:
     assert llm_score.generate_digest([], _CFG) is None
     monkeypatch.setattr(llm_score, "post_user_content", lambda *a, **k: None)
     assert llm_score.generate_digest([{"title": "t"}], _CFG) is None
+
+
+# ── 博主立场小结（2026-09-05 落地）────────────────────────────────────
+def test_parse_blogger_summaries() -> None:
+    text = (
+        '[{"name":"松哥抓波段","stance":"bearish","summary":"整体偏空：科技受压，看黄金"},'
+        '{"name":"摇摆人","stance":"mixed","summary":"前后矛盾"},'
+        '{"name":"坏stance","stance":"very_bullish","summary":"x"},'
+        '{"no_name":"x"}]'
+    )
+    out = llm_score.parse_blogger_summaries(text)
+    assert out[0]["stance"] == "bearish" and out[0]["name"] == "松哥抓波段"
+    assert out[1]["stance"] == "mixed"
+    assert out[2]["stance"] == "neutral"  # 非白名单回落
+    assert len(out) == 3  # 无 name 条目丢弃
+
+
+def test_parse_blogger_summaries_garbage() -> None:
+    assert llm_score.parse_blogger_summaries("不是json") == []
+    assert llm_score.parse_blogger_summaries('{"a":1}') == []
+
+
+def test_generate_blogger_summaries_groups_and_filters(monkeypatch) -> None:
+    captured = {}
+
+    def fake_post(content, cfg, system_prompt):
+        captured["content"] = content
+        return ('[{"name":"天哥","stance":"bullish","summary":"s"},'
+                '{"name":"不存在","stance":"bullish","summary":"s"}]')
+
+    monkeypatch.setattr(llm_score, "post_user_content", fake_post)
+    rows = [
+        {"source_name": "天哥", "title": "t1", "llm_note": "n1", "direction": "bullish"},
+        {"source_name": "天哥", "title": "t2", "llm_note": "n2", "direction": "neutral"},
+        {"source_name": "松哥", "title": "t3", "llm_note": None, "direction": "bearish"},
+    ]
+    out = llm_score.generate_blogger_summaries(rows, _CFG)
+    assert [s["name"] for s in out] == ["天哥"]  # 未知博主过滤
+    assert '"name"' in captured["content"] and "t1" in captured["content"]

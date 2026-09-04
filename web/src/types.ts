@@ -1947,6 +1947,8 @@ export interface NewsDigestPayload {
     symbols?: string[];
     direction?: string | null;
   }[];
+  /** 2026-09-05 起附带博主立场小结（近7天归纳，LLM 工序）。 */
+  bloggers?: { name: string; stance: string; summary: string }[];
 }
 
 export interface NewsDigest {

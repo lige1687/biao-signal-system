@@ -160,6 +160,19 @@ class NewsStore:
             )
         )
 
+    def blogger_rows_recent(self, days: int = 7) -> list[sqlite3.Row]:
+        """近 N 天 blogger 类已评分条目（博主观点小结用，含 note/direction）。"""
+        return list(
+            self._conn.execute(
+                "SELECT source_name, title, llm_note, direction, importance, published_at "
+                "FROM news_items "
+                "WHERE importance IS NOT NULL AND category='blogger' "
+                "AND source_name IS NOT NULL AND published_at >= date('now', ?) "
+                "ORDER BY published_at DESC",
+                (f"-{int(days)} days",),
+            )
+        )
+
     def mood_by_day(self, date_from: str, days: int = 7) -> list[dict]:
         """近 N 天逐日多空计数（已评分条目），缺数据的日期由调用方补零。"""
         rows = self._conn.execute(

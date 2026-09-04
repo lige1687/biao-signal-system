@@ -52,6 +52,17 @@ top_events 取 importance 最高的至多 5 条，symbols/direction 从合并条
 除 JSON 外不输出任何文字。"""
 
 
+BLOGGER_SUMMARY_SYSTEM_PROMPT = """你是财经博主观点编辑。把每位博主近7天的内容归纳成"立场小结" JSON 数组。
+铁律：
+1. 只依据给定条目（标题+观点摘要+方向）归纳，不引入外部信息，不给操作建议。
+2. stance 从 bullish/bearish/neutral/mixed 选：立场前后矛盾或摇摆用 mixed，
+   没有明确多空用 neutral。
+3. summary ≤80 字中文：该博主当前立场 + 核心逻辑 + 关注的板块/点位
+   （如"整体偏空：科技股受涨价与外部压制，短期回避；看好黄金有色的中期机会"）。
+输出：严格 JSON 数组，每项 {"name":"..","stance":"..","summary":".."}。
+除 JSON 外不输出任何文字。"""
+
+
 def _extract_json_span(text: str, *, array: bool) -> str:
     """剥 ```json 围栏与前后杂字：取首个 [ 到末个 ]（或 { 到 }）。"""
     open_ch, close_ch = ("[", "]") if array else ("{", "}")
@@ -145,6 +156,72 @@ def parse_digest(text: str) -> dict:
             }
         )
     return {"sections": sections[:5], "top_events": top_events[:5]}
+
+
+_VALID_STANCES = ("bullish", "bearish", "neutral", "mixed")
+
+
+def parse_blogger_summaries(text: str) -> list[dict]:
+    """容错解析博主立场小结；坏条目丢弃。"""
+    try:
+        raw = json.loads(_extract_json_span(text, array=True))
+    except (ValueError, json.JSONDecodeError):
+        return []
+    if not isinstance(raw, list):
+        return []
+    out: list[dict] = []
+    for item in raw:
+        if not isinstance(item, dict) or not item.get("name"):
+            continue
+        stance = str(item.get("stance", "")).strip()
+        out.append(
+            {
+                "name": str(item["name"])[:40],
+                "stance": stance if stance in _VALID_STANCES else "neutral",
+                "summary": str(item.get("summary", ""))[:160],
+            }
+        )
+    return out
+
+
+def generate_blogger_summaries(
+    rows: list[dict], config: ArkConfig | None = None
+) -> list[dict] | None:
+    """按博主分组的近7天条目 → 每位博主的立场小结。失败返回 None（不阻断管线）。"""
+    by_name: dict[str, list[dict]] = {}
+    for r in rows:
+        name = (r.get("source_name") or "").strip()
+        if name:
+            by_name.setdefault(name, []).append(r)
+    if not by_name:
+        return None
+    resolved = config or load_ark_config()
+    if resolved is None:
+        return None
+    payload = [
+        {
+            "name": name,
+            "items": [
+                {
+                    "title": (r.get("title") or "")[:80],
+                    "note": (r.get("llm_note") or "")[:120],
+                    "direction": r.get("direction"),
+                }
+                for r in items[:8]  # 每位博主最多带 8 条，控 token
+            ],
+        }
+        for name, items in by_name.items()
+    ]
+    content = (
+        "把下面每位博主近7天的内容归纳成立场小结 JSON 数组（严格按系统提示格式）：\n"
+        + json.dumps(payload, ensure_ascii=False, indent=1)
+    )
+    text = post_user_content(content, resolved, system_prompt=BLOGGER_SUMMARY_SYSTEM_PROMPT)
+    if text is None:
+        return None
+    summaries = parse_blogger_summaries(text)
+    known = set(by_name)
+    return [s for s in summaries if s["name"] in known] or None
 
 
 def _safe_json_list(raw: Any) -> list:
@@ -241,9 +318,12 @@ def generate_digest(rows: list[dict], config: ArkConfig | None = None) -> dict |
 
 
 __all__ = [
+    "BLOGGER_SUMMARY_SYSTEM_PROMPT",
     "DIGEST_SYSTEM_PROMPT",
     "SCORE_SYSTEM_PROMPT",
+    "generate_blogger_summaries",
     "generate_digest",
+    "parse_blogger_summaries",
     "parse_digest",
     "parse_scores",
     "score_items",
