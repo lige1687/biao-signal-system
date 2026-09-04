@@ -66,6 +66,8 @@ import type {
   NewsItemsResponse,
   NewsStatus,
   NewsWatchlistBrief,
+  ExperimentsResponse,
+  ExperimentReportDetail,
 } from "../types";
 
 const BASE = "/api";
@@ -524,4 +526,10 @@ export const newsApi = {
     request<NewsWatchlistBrief>(`/news/watchlist-brief?days=${days}`),
   run: (full = false) => request<{ run: string }>(`/news/run${full ? "?full=true" : ""}`, { method: "POST" }),
   status: () => request<NewsStatus>("/news/status"),
+};
+
+export const experimentsApi = {
+  list: () => request<ExperimentsResponse>("/experiments"),
+  detail: (name: string) =>
+    request<ExperimentReportDetail>(`/experiments/${name}`),
 };

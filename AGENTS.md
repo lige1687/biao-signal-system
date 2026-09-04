@@ -31,6 +31,25 @@
   在 `src/lei_signal/api/` 层新建纯函数计算，再在 `routes/symbols.py::_detail_dto`
   里合并进 chart dict（先例：`macdEvents`，见 `src/lei_signal/api/macd_events.py`）。
 
+## 实验归档规约（2026-09-04 起强制，供「实验报告库」页面展示）
+
+所有实验/调研结案必须做到以下三条，缺一条即归档未完成：
+
+1. **报告文件落在 `docs/experiments/`**，文件名带日期
+   （`主题-YYYY-MM-DD.md`，结案封存加 `ARCHIVE` 段）；
+2. **正文含 `## 一句话结论（大白话）` 小节**（兼容历史变体
+   `## 0. 一句话结论`、`## 大白话总结`、`## 一句话大白话`）——列表页
+   的结论卡就是抽取的这一段；
+3. **在 `docs/experiments/registry.json` 登记**：`category` 必填（固定
+   枚举见文件 `categories`，不许自造）、`verdict` 选填
+   （passed=成立 / falsified=证伪 / mixed=有条件或证据不足 / watch=观察中）、
+   `oneLiner` 可选（自动抽取不满意时手工覆盖）。
+
+页面会倒逼执行：未登记的报告在「实验报告库」页标红「待分类」；
+没写结论小节的报告结论卡显示占位提示。顺手在
+`docs/experiments/INDEX.md` §1 字母账补一行（维护约定，非强制）。
+判定/分类口径的权威是 registry.json，INDEX 是人读导航。
+
 ## 其他既有约束（提醒）
 
 - 判定权在 Python 规则层；UI 只做展示，不在前端重新计算信号。

@@ -1,0 +1,526 @@
+{
+  "version": 1,
+  "note": "实验报告库登记簿：category 必填且取自固定枚举；verdict 选填 passed/falsified/mixed/watch。新实验归档时必须同步登记（见 AGENTS.md 归档规约）。",
+  "categories": [
+    "研究总纲",
+    "宽度择时",
+    "组合与仓位",
+    "模块与信号",
+    "出场与止损",
+    "美股与跨市场",
+    "宏观与情绪",
+    "语义组合",
+    "数据与质量",
+    "方法论与验证",
+    "任务书"
+  ],
+  "entries": {
+    "docs/experiments/CROSS-GROUP-SYNTHESIS-2026-09-01.md": {
+      "category": "研究总纲",
+      "oneLiner": "五路研究组的跨组统一视图：每组的核心通过与核心证伪一张表对照，开放冲突清单与合并建议——下一轮统一工作的起点。"
+    },
+    "docs/experiments/FINAL-VERDICT-walkforward-2026-08-27.md": {
+      "category": "方法论与验证",
+      "verdict": "passed",
+      "oneLiner": "只用过去数据做滚动考试（训练 3 年→验证 1 年，七折）：现役配置在 2020-2026 验证窗上站住了——同期沪深300 年化 1.4%，策略年化 10% 量级，这是系统最重要的防过拟合证据之一。"
+    },
+    "docs/experiments/INDEX.md": {
+      "category": "研究总纲",
+      "oneLiner": "docs/experiments 总索引：按任务编号和主题两条路查所有归档；新归档要顺手补行，机器可读版见同目录 registry.json。"
+    },
+    "docs/experiments/antifragile-event-study-2026-09-03.md": {
+      "category": "宽度择时",
+      "verdict": "falsified"
+    },
+    "docs/experiments/ashare-macro-ARCHIVE-2026-09-01.md": {
+      "category": "宏观与情绪",
+      "verdict": "falsified",
+      "oneLiner": "A股宏观变量（融资余额变化率/加速度）做触发层：三个预注册实验零通过，方向收案。"
+    },
+    "docs/experiments/astock-panel-timing-2026-09-04.md": {
+      "category": "美股与跨市场"
+    },
+    "docs/experiments/b-adaptation-report-2026-08-26.md": {
+      "category": "模块与信号"
+    },
+    "docs/experiments/b-module-reverse-vt-ARCHIVE-2026-09-02.md": {
+      "category": "模块与信号"
+    },
+    "docs/experiments/bcd-retrial-report-2026-08-26.md": {
+      "category": "模块与信号",
+      "verdict": "falsified",
+      "oneLiner": "B/C/D 三个模块的公平重测：C 模块加缩量过滤也没能从零轴劈开，ETF 池维持原判；个股池的复活判据也未达到。"
+    },
+    "docs/experiments/bform-dynamic-report-2026-08-28.md": {
+      "category": "模块与信号",
+      "verdict": "falsified"
+    },
+    "docs/experiments/bform-exploration-report-2026-08-28.md": {
+      "category": "美股与跨市场"
+    },
+    "docs/experiments/bform-final-review-report-2026-08-28.md": {
+      "category": "组合与仓位",
+      "verdict": "passed"
+    },
+    "docs/experiments/bform-global-report-2026-08-28.md": {
+      "category": "宽度择时",
+      "verdict": "passed"
+    },
+    "docs/experiments/binary-hysteresis-sensitivity-2026-09-03.md": {
+      "category": "宽度择时",
+      "verdict": "passed"
+    },
+    "docs/experiments/binary-hysteresis-vs-t3-decision-2026-09-04.md": {
+      "category": "组合与仓位",
+      "verdict": "passed"
+    },
+    "docs/experiments/binary-vs-tiered-vs-dca-2026-09-03.md": {
+      "category": "组合与仓位",
+      "verdict": "mixed"
+    },
+    "docs/experiments/breadth-input-comparison-2026-09-04.md": {
+      "category": "宽度择时",
+      "verdict": "falsified"
+    },
+    "docs/experiments/breadth-overlay-report-2026-08-27.md": {
+      "category": "宽度择时"
+    },
+    "docs/experiments/breadth-position-report-2026-08-27.md": {
+      "category": "宽度择时",
+      "verdict": "falsified"
+    },
+    "docs/experiments/broad-index-coverage-summary-2026-09-02.md": {
+      "category": "数据与质量"
+    },
+    "docs/experiments/broad-index-gap-fill-ARCHIVE-2026-09-02.md": {
+      "category": "宽度择时",
+      "verdict": "falsified",
+      "oneLiner": "两个零覆盖缺口（科创100、恒生科技）按同一框架补测：双双判负——宽度三档这套规则在这两个标的上不成立。"
+    },
+    "docs/experiments/broad-index-portfolio-and-signals-ARCHIVE-2026-09-02.md": {
+      "category": "宽度择时",
+      "oneLiner": "宽基指数家族普查（阶段三+四）：修平数据后 A股宽基彼此相关性极高（创业板×中证1000 达 0.85），新组合方向与技术组件矩阵在此登记——纯汇总未跑新回测。"
+    },
+    "docs/experiments/cash-leg-report-2026-08-31.md": {
+      "category": "组合与仓位"
+    },
+    "docs/experiments/combined-certification-report-2026-08-31.md": {
+      "category": "宽度择时"
+    },
+    "docs/experiments/coverage-sync-2026-09-02.md": {
+      "category": "数据与质量"
+    },
+    "docs/experiments/cross-market-pairing-ARCHIVE-2026-09-04.md": {
+      "category": "美股与跨市场"
+    },
+    "docs/experiments/cross-market-unify-ARCHIVE-2026-09-04.md": {
+      "category": "美股与跨市场"
+    },
+    "docs/experiments/csi500-fee-sensitivity-2026-09-03.md": {
+      "category": "组合与仓位",
+      "verdict": "mixed",
+      "oneLiner": "中证500 的判定对手续费高度敏感：把费率从 0 到 0.15% 逐档算一遍，结论的正负号在敏感带内翻转——所以既不给它翻案也不维持判负，收案为「证据不足」。"
+    },
+    "docs/experiments/data-quality-jump-audit-2026-09-02.md": {
+      "category": "数据与质量",
+      "oneLiner": "行情缓存审计：9 个标的 13 处「一天暴涨 200%+」式的复权断裂假跳变——相关历史回测数字须用修平版复核，本报告给出了逐处清单与修平方法。"
+    },
+    "docs/experiments/etf-expansion-log-2026-08-25.md": {
+      "category": "数据与质量"
+    },
+    "docs/experiments/etf-expansion-report-2026-08-25.md": {
+      "category": "数据与质量",
+      "verdict": "mixed",
+      "oneLiner": "标的池扩到 33 行业 ETF 的复核：A 模块在行业 ETF 池整体转负（黄金一只独占全部利润），指数与宽基子池结论维持——扩池不是免费午餐。"
+    },
+    "docs/experiments/exit-matrix-report-2026-08-31.md": {
+      "category": "出场与止损",
+      "verdict": "falsified"
+    },
+    "docs/experiments/exit-structural-stop-revival-ARCHIVE-2026-09-01.md": {
+      "category": "出场与止损"
+    },
+    "docs/experiments/exit-three-piece-ARCHIVE-2026-09-02.md": {
+      "category": "出场与止损"
+    },
+    "docs/experiments/experiment-log-2026-08-25.md": {
+      "category": "模块与信号",
+      "oneLiner": "自适应参数回测 4 轮细扫日志（90 跑）：B 网格与 A 敏感性的逐轮记录，最终拍板建议见 final-report。"
+    },
+    "docs/experiments/extreme-bottom-event-study-2026-09-03.md": {
+      "category": "组合与仓位",
+      "verdict": "passed"
+    },
+    "docs/experiments/extreme-bottom-staged-entry-validation-2026-09-03.md": {
+      "category": "组合与仓位",
+      "verdict": "falsified"
+    },
+    "docs/experiments/filters-round4-log-2026-08-25.md": {
+      "category": "模块与信号",
+      "oneLiner": "第四轮过滤器实验日志：量能确认/筹码过滤/五步状态机/缺口四组过滤器全部默认关闭落地，等独立实验逐个开关验证。"
+    },
+    "docs/experiments/filters-round4-report-2026-08-25.md": {
+      "category": "方法论与验证"
+    },
+    "docs/experiments/final-report-2026-08-25.md": {
+      "category": "模块与信号",
+      "verdict": "mixed",
+      "oneLiner": "多轮自适应参数回测最终报告（102 组参数组合）：原「A 启用时钟减半」的建议后来被扩池实验部分推翻（黄金 ETF 一只独占 +206R），本文保留为历史记录——提醒最优档要看去掉运气股后还剩什么。"
+    },
+    "docs/experiments/full-pool-revalidation-ARCHIVE-2026-09-02.md": {
+      "category": "方法论与验证"
+    },
+    "docs/experiments/full-stack-sim-report-2026-08-27.md": {
+      "category": "宽度择时"
+    },
+    "docs/experiments/gold-expand-report-2026-08-31.md": {
+      "category": "组合与仓位"
+    },
+    "docs/experiments/heiti-ARCHIVE-2026-08-31.md": {
+      "category": "组合与仓位",
+      "verdict": "mixed",
+      "oneLiner": "合体组归档：宽度腿+个股技术腿两套独立策略叠加的总账——叠加组合的成立条件、卫星腿细节与费用口径都在这里。"
+    },
+    "docs/experiments/holdings-correlation-study-2026-09-02.md": {
+      "category": "方法论与验证",
+      "oneLiner": "用户 6 个实际持仓与已验证规则标的的日收益相关性对账：判定哪些持仓可以复用现成的宽度择时规则做参考、哪些找不到对应，全部 27 个候选逐一列出不打埋伏。"
+    },
+    "docs/experiments/huanjing-ARCHIVE-2026-09-01.md": {
+      "category": "组合与仓位",
+      "verdict": "falsified",
+      "oneLiner": "环境层做总仓位系数（宽度×波动分位给整体加减仓）：未通过——环境读数适合做提示与分组，不适合做仓位开关，这一结论后来被多轮反复确认。"
+    },
+    "docs/experiments/hysteresis-binary-promotion-2026-09-04.md": {
+      "category": "组合与仓位",
+      "verdict": "passed"
+    },
+    "docs/experiments/knife-timestop-report-2026-08-27.md": {
+      "category": "出场与止损",
+      "verdict": "passed"
+    },
+    "docs/experiments/kuandu-quanzhan-ARCHIVE-2026-09-01.md": {
+      "category": "宽度择时",
+      "verdict": "passed",
+      "oneLiner": "宽度全栈组 31 轮回测总归档：两只版 15.9%年化/-25.6%回撤（16.2 年）、ETF 可交易版 12.5%/-20.1% 等通过项，与 16+ 项证伪清单——宽度择时的主证据库。"
+    },
+    "docs/experiments/lei-ARCHIVE-2026-09-01.md": {
+      "category": "模块与信号",
+      "oneLiner": "LEI 组 19 轮实验总归档（判定量约 70 组）：个股技术形态体系的核心结论与详细报告链入口，纪律与双跑哈希全留痕。"
+    },
+    "docs/experiments/lifecycle-report-2026-08-27.md": {
+      "category": "模块与信号"
+    },
+    "docs/experiments/m5-final-review-report-2026-08-28.md": {
+      "category": "模块与信号"
+    },
+    "docs/experiments/macd-strength-layering-ARCHIVE-2026-09-01.md": {
+      "category": "模块与信号"
+    },
+    "docs/experiments/master-slave-precheck-2026-09-03.md": {
+      "category": "宽度择时",
+      "verdict": "falsified"
+    },
+    "docs/experiments/meta-scan-report-2026-08-31.md": {
+      "category": "出场与止损",
+      "verdict": "passed"
+    },
+    "docs/experiments/module-b-filter-h1h2-validation-2026-09-04.md": {
+      "category": "模块与信号",
+      "verdict": "falsified"
+    },
+    "docs/experiments/module-b-regime-diagnosis-2026-09-03.md": {
+      "category": "模块与信号",
+      "verdict": "watch"
+    },
+    "docs/experiments/module-b-robustness-2026-09-03.md": {
+      "category": "模块与信号",
+      "verdict": "passed"
+    },
+    "docs/experiments/module-b-stock-pool-boundary-2026-09-03.md": {
+      "category": "模块与信号",
+      "verdict": "passed"
+    },
+    "docs/experiments/module-b-us-etf-boundary-2026-09-04.md": {
+      "category": "模块与信号",
+      "verdict": "falsified",
+      "oneLiner": "模块B 搬到美股 ETF：表面 +0.19，剔掉 1995 年一笔 SPY 大行情后 196 笔精确为零——不出海，这是 A 股市场结构特有的规律。"
+    },
+    "docs/experiments/module-conflict-resonance-ARCHIVE-2026-09-02.md": {
+      "category": "组合与仓位",
+      "verdict": "falsified"
+    },
+    "docs/experiments/module-e-report-2026-08-27.md": {
+      "category": "模块与信号"
+    },
+    "docs/experiments/multi-confirm-frequency-2026-09-03.md": {
+      "category": "美股与跨市场",
+      "verdict": "mixed"
+    },
+    "docs/experiments/orthogonality-check-2026-09-01.md": {
+      "category": "方法论与验证",
+      "oneLiner": "新信号与现有两条腿的相关性初筛：只回答「够不够独立」不回答「该不该加入」——低相关是必要条件不是充分条件，为后续组合实验划边界。"
+    },
+    "docs/experiments/overnight-gate2-increment-2026-09-03.md": {
+      "category": "美股与跨市场",
+      "verdict": "falsified"
+    },
+    "docs/experiments/overnight-us-cn-precheck-2026-09-03.md": {
+      "category": "美股与跨市场",
+      "verdict": "mixed"
+    },
+    "docs/experiments/p1-increment-test-2026-09-03.md": {
+      "category": "宽度择时",
+      "verdict": "falsified"
+    },
+    "docs/experiments/pollution-recheck-moduleB-csi500-2026-09-03.md": {
+      "category": "数据与质量",
+      "verdict": "passed",
+      "oneLiner": "数据污染疑案重审：模块B在宽基上唯一的正收益结果用的根本不是被污染的那套数据，干净数据重算后依然成立（但利润集中在两笔交易的弱点仍在）；中证500 的判负则翻案证据不足，落在中间地带。"
+    },
+    "docs/experiments/pool-recovery-audit-2026-09-02.md": {
+      "category": "数据与质量",
+      "oneLiner": "深池数据「消失」传闻盘点：数据其实完整在磁盘上，真正的欠账是没进 git——结论是不用重建，直接把现有数据入仓备份。"
+    },
+    "docs/experiments/portfolio-params-pool-report-2026-08-28.md": {
+      "category": "组合与仓位",
+      "verdict": "passed"
+    },
+    "docs/experiments/portfolio-report-2026-08-27.md": {
+      "category": "组合与仓位",
+      "verdict": "falsified"
+    },
+    "docs/experiments/portfolio-split-report-2026-08-28.md": {
+      "category": "宽度择时",
+      "verdict": "passed"
+    },
+    "docs/experiments/position-mapping-revival-ARCHIVE-2026-09-01.md": {
+      "category": "组合与仓位",
+      "verdict": "falsified",
+      "oneLiner": "「宽度低就减仓」的连续/平滑映射与逐标的条件化两个复活尝试：双双判负且后者更差——函数形式不是判负原因，宽度弱时全市场高度同步，逐标的减仓只是带滞后的整体减仓。"
+    },
+    "docs/experiments/price-ladder-execution-2026-09-04.md": {
+      "category": "组合与仓位",
+      "verdict": "passed"
+    },
+    "docs/experiments/prompt-AA-master-slave-precheck-2026-09-03.md": {
+      "category": "任务书"
+    },
+    "docs/experiments/prompt-AB-multi-confirm-frequency-2026-09-03.md": {
+      "category": "任务书"
+    },
+    "docs/experiments/prompt-AC-timescale-layering-precheck-2026-09-03.md": {
+      "category": "任务书"
+    },
+    "docs/experiments/prompt-AD-overnight-us-cn-precheck-2026-09-03.md": {
+      "category": "任务书"
+    },
+    "docs/experiments/prompt-AE-staged-entry-precheck-2026-09-03.md": {
+      "category": "任务书"
+    },
+    "docs/experiments/prompt-N-module-conflict-resonance-2026-09-01.md": {
+      "category": "任务书"
+    },
+    "docs/experiments/prompt-O-pool-recovery-2026-09-02.md": {
+      "category": "任务书"
+    },
+    "docs/experiments/prompt-PQ-broad-index-2026-09-02.md": {
+      "category": "任务书"
+    },
+    "docs/experiments/prompt-R-full-pool-revalidation-2026-09-02.md": {
+      "category": "任务书"
+    },
+    "docs/experiments/prompt-S-b-module-reverse-vt-2026-09-02.md": {
+      "category": "任务书"
+    },
+    "docs/experiments/prompt-T-valuation-overlay-2026-09-02.md": {
+      "category": "任务书"
+    },
+    "docs/experiments/prompt-U-us-erp-overlay-2026-09-02.md": {
+      "category": "任务书"
+    },
+    "docs/experiments/prompt-V-current-holdings-check-2026-09-02.md": {
+      "category": "任务书"
+    },
+    "docs/experiments/prompt-W-holdings-correlation-2026-09-02.md": {
+      "category": "任务书"
+    },
+    "docs/experiments/prompt-X-broad-index-comprehensive-2026-09-02.md": {
+      "category": "任务书"
+    },
+    "docs/experiments/prompt-Y-pollution-recheck-2026-09-03.md": {
+      "category": "任务书"
+    },
+    "docs/experiments/prompt-Z-antifragile-precheck-2026-09-03.md": {
+      "category": "任务书"
+    },
+    "docs/experiments/prompts-2026-09-01.md": {
+      "category": "任务书"
+    },
+    "docs/experiments/regime-gate-report-2026-08-27.md": {
+      "category": "方法论与验证"
+    },
+    "docs/experiments/rs26-detector-report-2026-08-27.md": {
+      "category": "模块与信号",
+      "verdict": "passed"
+    },
+    "docs/experiments/sector-layer-report-2026-08-27.md": {
+      "category": "模块与信号"
+    },
+    "docs/experiments/sector-rs-ARCHIVE-2026-09-02.md": {
+      "category": "模块与信号",
+      "verdict": "falsified",
+      "oneLiner": "板块相对强度（RS）加权：先做时间关系事件研究再谈加权，结果是板块级 RS 变化与板块内信号表现既不领先也不同步，标的级判负机制在板块尺度同样成立——不做板块加权。"
+    },
+    "docs/experiments/sentiment-gate-report-2026-08-28.md": {
+      "category": "宏观与情绪"
+    },
+    "docs/experiments/session-handoff-manifest-2026-09-04.md": {
+      "category": "研究总纲",
+      "oneLiner": "9-03~04 四批 25 项实验的交接总表：每项一行判定 + 报告路径；主线结论——语义组合层全部收口、模块B定位为 A 股内部工具、滞回二元拿到完整证据链等用户拍板是否替换现役三档。"
+    },
+    "docs/experiments/shrink-filter-report-2026-08-25.md": {
+      "category": "方法论与验证"
+    },
+    "docs/experiments/signal-density-report-2026-08-31.md": {
+      "category": "模块与信号"
+    },
+    "docs/experiments/siphon-detector-report-2026-08-27.md": {
+      "category": "宽度择时"
+    },
+    "docs/experiments/spx-vs-ndx-ARCHIVE-2026-09-03.md": {
+      "category": "美股与跨市场",
+      "verdict": "mixed",
+      "oneLiner": "现成两套框架里把美股腿从纳指换成标普500：年化低约 1.9 个百分点、回撤略浅一点点——差异不大，但没有理由换，维持纳指不动。"
+    },
+    "docs/experiments/stage-b200-report-2026-08-27.md": {
+      "category": "模块与信号"
+    },
+    "docs/experiments/staged-entry-precheck-2026-09-03-b.md": {
+      "category": "组合与仓位"
+    },
+    "docs/experiments/staged-entry-precheck-2026-09-03.md": {
+      "category": "组合与仓位",
+      "verdict": "falsified"
+    },
+    "docs/experiments/staged-exit-validation-2026-09-04.md": {
+      "category": "组合与仓位",
+      "verdict": "falsified"
+    },
+    "docs/experiments/stop-loss-matrix-ARCHIVE-2026-09-01.md": {
+      "category": "出场与止损",
+      "verdict": "falsified"
+    },
+    "docs/experiments/switch-walkforward-and-pain-2026-09-04.md": {
+      "category": "组合与仓位"
+    },
+    "docs/experiments/system-fragility-xray-2026-09-03.md": {
+      "category": "宽度择时",
+      "verdict": "passed"
+    },
+    "docs/experiments/time-stop-tail-aware-ARCHIVE-2026-09-02.md": {
+      "category": "出场与止损"
+    },
+    "docs/experiments/timescale-layering-precheck-2026-09-03.md": {
+      "category": "语义组合",
+      "verdict": "falsified"
+    },
+    "docs/experiments/todo-new-composition-semantics-2026-09-02.md": {
+      "category": "语义组合",
+      "oneLiner": "立项文档：列出新组合语义的候选方向（主从关系/多重确认/时间尺度分层等），区分「发明新的组合方式」与「调参换标的」——后续 AA~AE 系列任务书由此派生。"
+    },
+    "docs/experiments/top-structure-event-study-2026-09-03.md": {
+      "category": "模块与信号",
+      "verdict": "mixed"
+    },
+    "docs/experiments/trd-gate-report-2026-08-31.md": {
+      "category": "宏观与情绪",
+      "verdict": "falsified"
+    },
+    "docs/experiments/tsy10y-high-orthogonality-2026-09-03.md": {
+      "category": "美股与跨市场",
+      "verdict": "falsified"
+    },
+    "docs/experiments/us-erp-overlay-ARCHIVE-2026-09-02.md": {
+      "category": "美股与跨市场",
+      "verdict": "falsified",
+      "oneLiner": "美股版估值确认层（风险溢价分位）：与A股同框架检验同样未过线，估值读数给择时信号加不了确认信息。"
+    },
+    "docs/experiments/us-merge-ARCHIVE-2026-09-03.md": {
+      "category": "美股与跨市场"
+    },
+    "docs/experiments/us-stocks-timing-boundary-2026-09-04.md": {
+      "category": "美股与跨市场",
+      "verdict": "falsified"
+    },
+    "docs/experiments/us-treasury-ARCHIVE-2026-09-01.md": {
+      "category": "美股与跨市场"
+    },
+    "docs/experiments/us-treasury-CROSSCHECK-2026-09-01.md": {
+      "category": "美股与跨市场",
+      "oneLiner": "美债触发信号的独立冗余实现：与正版归档并行撞车后主动让位（结论以正版为准），保留价值是两套独立实现的事件集互相对照——交叉一致本身就是稳健性证据。"
+    },
+    "docs/experiments/us-treasury-r2-ARCHIVE-2026-09-03.md": {
+      "category": "美股与跨市场"
+    },
+    "docs/experiments/valuation-overlay-ARCHIVE-2026-09-02.md": {
+      "category": "宏观与情绪",
+      "verdict": "falsified",
+      "oneLiner": "用估值贵贱（PE分位）给宽度择时信号做确认层：主判定未过线——便宜的买入事件之后并不比贵的赚得多，通过清单为空。"
+    },
+    "docs/experiments/vix-sentiment-ARCHIVE-2026-09-01.md": {
+      "category": "宏观与情绪",
+      "verdict": "falsified",
+      "oneLiner": "VIX 期限结构与 Put-Call 比率做美股触发层：四个预注册判定全部未过——高频情绪读数不含可用的触发信息量。"
+    },
+    "docs/experiments/vt-grid-ARCHIVE-2026-09-01.md": {
+      "category": "组合与仓位",
+      "verdict": "watch",
+      "oneLiner": "目标波动缩放的落地细节网格（384 格）：vt 机制本身此前唯一通过，但落地细节（估计器/频率/费用）多个格子之间结果不稳，结论是细节选择比机制本身更敏感。"
+    },
+    "docs/experiments/vt-signal-driven-sizing-ARCHIVE-2026-09-02.md": {
+      "category": "组合与仓位",
+      "verdict": "falsified",
+      "oneLiner": "按波动率高低给单标的仓位打折：在 84 格网格里没能复现组合层的正效果，观察中的「高波期 C 模块不缩」也只对了一半——组合层参数搬不到单标的层。"
+    },
+    "docs/next-steps-master-plan-2026-09-02.md": {
+      "category": "研究总纲",
+      "oneLiner": "下一阶段研究的选题总入口：九个新组合语义方向 + 遗留技术债务 + 第五-七轮产出落地清单，与四轨架构台账配套使用。"
+    },
+    "docs/research-factor-backtest.md": {
+      "category": "研究总纲"
+    },
+    "docs/research-ma-deviation-us.md": {
+      "category": "研究总纲",
+      "verdict": "passed",
+      "oneLiner": "「跌得越深仓位越重」的偏离均线梯度加仓，在美股四大指数 30 年上验证有效，最终操作条款已收敛进 research-overview 总纲；本文是十五轮明细记录。"
+    },
+    "docs/research-momentum-and-system-integration.md": {
+      "category": "研究总纲",
+      "oneLiner": "外部动量研究 × 本系统现状的交叉调研：盘点出系统里其实没有 12-1 动量的直接实现，并梳理动量思想与现有规则体系的结合点——是研究素材不是系统规格。"
+    },
+    "docs/research-overview.md": {
+      "category": "研究总纲"
+    },
+    "docs/research-playbook.md": {
+      "category": "研究总纲",
+      "verdict": "falsified"
+    },
+    "docs/research-round5-cross-market.md": {
+      "category": "研究总纲"
+    },
+    "docs/research-round6-semantics.md": {
+      "category": "研究总纲"
+    },
+    "docs/research-round7-integration.md": {
+      "category": "研究总纲"
+    },
+    "docs/research-sentiment-us.md": {
+      "category": "研究总纲",
+      "oneLiner": "情绪指标（美股 AAII/NAAIM、A股两融/北向）七轮实战检验台账：绝大多数情绪读数不能直接当买卖触发，结论总表与已证伪清单在文末 L 章，新读者从那里读起。"
+    },
+    "docs/system-architecture-and-decisions-2026-09-04.md": {
+      "category": "研究总纲",
+      "oneLiner": "系统的「资产负债表」：四条轨（宽基择时/ETF轮动/技术信号/个股排雷）各自是什么、证据在哪、哪些决策在等拍板、下一步研究做什么；每次重大实验或拍板后更新。"
+    }
+  }
+}

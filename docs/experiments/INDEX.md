@@ -22,7 +22,9 @@
 5. `../system-architecture-and-decisions-2026-09-04.md` — **系统四轨架构
    原型 + 决策台账（D1~D4 待拍板事项）+ 研究队列**（2026-09-04 起维护，
    拍板与立项状态以它为准）
-6. 本索引
+6. 本索引（机器可读版：`registry.json`，分类/判定状态供「实验报告库」
+   页面使用，新归档须同步登记，见 AGENTS.md 归档规约）
+7. `session-handoff-manifest-2026-09-04.md` — 9-03~04 四批 25 项交接总表
 
 ## 1. 任务编号总账（任务书 → 执行归档）
 
@@ -60,7 +62,7 @@
 | W | prompt-W-holdings-correlation | holdings-correlation-study | ✅ |
 | X | prompt-X-broad-index-comprehensive | coverage-sync + broad-index 三份 | ✅ 四份产出齐全 |
 
-### 9-03 本轮拆分（任务书已入库；Y 已执行，其余待分发）
+### 9-03 本轮拆分（任务书已入库；已全部执行，见下方 9-03~04 会话四批节）
 
 | 编号 | 任务书 | 内容 | 梯队 |
 |---|---|---|---|
@@ -84,6 +86,40 @@
 
 不发（等条件）：语义二/六（总纲判高风险暂缓）、语义八（等 Z 结果）、
 债务二（等用户拍板立项）、债务五 P 部分（等用户表态是否有兴趣）。
+
+### 9-03~04 会话四批（Y–BC，交接总表：`session-handoff-manifest-2026-09-04.md`）
+
+> 调度会话四批 25 项，全部预注册+双跑哈希。**注意：本批代号与上方 9-04
+> AU–AY 节存在字母复用（两组会话各编各的），引用一律以文件名为准。**
+> 机器可读判定/分类见 `registry.json`，判定状态已登记。
+
+| 代号 | 报告 | 判定（大白话） |
+|---|---|---|
+| Y | pollution-recheck-moduleB-csi500-2026-09-03 | ✅ 模块B仍成立；中证500 证据不足不入池 |
+| Z | antifragile-event-study-2026-09-03 | ❌ 反脆弱补偿不成立 |
+| AA | master-slave-precheck-2026-09-03 | ❌ 主从依赖不成立（两信号 100% 同步） |
+| AB | multi-confirm-frequency-2026-09-03 | 〰️ 仅 P1 对过线但独立性存疑 |
+| AC | timescale-layering-precheck-2026-09-03 | ❌ 长短期分层不值得设计 |
+| AD | overnight-us-cn-precheck-2026-09-03 | 〰️ 关联存在但主通道是开盘跳空 |
+| AE | staged-entry-precheck-2026-09-03 | ❌ 分批买入证据不足 |
+| AF | p1-increment-test-2026-09-03 | ❌ 语义四实质关闭 |
+| AG | overnight-gate2-increment-2026-09-03 | ❌ 语义七关闭 |
+| AH | csi500-fee-sensitivity-2026-09-03 | 〰️ 费率敏感带内打平，不入池不变 |
+| AI | module-b-robustness-2026-09-03 | ✅ 稳健但压线（前三笔占 69%） |
+| AJ | binary-vs-tiered-vs-dca-2026-09-03 | 〰️ A股二元赢；美股 40 年定投碾压 |
+| AK | extreme-bottom-event-study-2026-09-03 | ✅ A股底部是过程非事件 |
+| AL | tsy10y-high-orthogonality-2026-09-03 | ❌ 不独立（重叠 94%），2027-03 复查 |
+| AM | extreme-bottom-staged-entry-validation-2026-09-03 | ❌ 语义九买入侧关闭 |
+| AN | top-structure-event-study-2026-09-03 | 〰️ 卖出警报偏磨顶、几乎非顶 |
+| AO | module-b-regime-diagnosis-2026-09-03 | 👁 栖息地仅登记（弱证据） |
+| AP | binary-hysteresis-sensitivity-2026-09-03 | ✅ 滞回带修复阈值脆弱性 |
+| AQ | module-b-stock-pool-boundary-2026-09-03 | ✅ 个股复现同型（15 只 +0.726） |
+| AR | system-fragility-xray-2026-09-03 | ✅ 系统体检：阴跌是唯一死穴 |
+| AV | module-b-filter-h1h2-validation-2026-09-04 | ❌ H1/H2 都不启用 |
+| AW | hysteresis-binary-promotion-2026-09-04 | ✅ 滞回二元候选成立，等拍板 |
+| AX | staged-exit-validation-2026-09-04 | ❌ 语义九卖出侧关闭 |
+| AY | breadth-input-comparison-2026-09-04 | ❌ 查重关闭（playbook 已测） |
+| BC | module-b-us-etf-boundary-2026-09-04 | ❌ 模块B不出海（剔 1995 后≈零） |
 
 ## 2. 归档按主题（每份文件只归一组，标题即内容摘要）
 

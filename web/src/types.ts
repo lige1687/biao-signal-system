@@ -1979,3 +1979,42 @@ export interface NewsWatchlistBrief {
   items: NewsWatchEntry[];
   mood: NewsMood;
 }
+
+/* ---- 实验报告库（/api/experiments）---- */
+
+export type ExperimentVerdict = "passed" | "falsified" | "mixed" | "watch" | "";
+
+export interface ExperimentReportItem {
+  name: string;       // 相对路径，作为 id
+  title: string;
+  date: string;       // YYYY-MM-DD
+  category: string;   // 固定枚举；「待分类」= 未登记
+  verdict: ExperimentVerdict;
+  archived: boolean;  // 文件名含 ARCHIVE（结案封存）
+  isPrompt: boolean;  // 任务书
+  oneLiner: string;   // 一句话结论（大白话）
+  bytes: number;
+  pending: boolean;   // 未在 registry.json 登记
+}
+
+export interface ExperimentsResponse {
+  items: ExperimentReportItem[];
+  categories: string[];
+  verdicts: string[];
+  stats: {
+    total: number;
+    pending: number;
+    archived: number;
+    byVerdict: Record<string, number>;
+    byCategory: Record<string, number>;
+  };
+}
+
+export interface ExperimentReportDetail {
+  name: string;
+  title: string;
+  oneLiner: string;
+  category: string;
+  verdict: string;
+  markdown: string;
+}

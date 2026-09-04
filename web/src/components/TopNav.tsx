@@ -31,6 +31,7 @@ export default function TopNav() {
       <NavLink to="/news">资讯流</NavLink>
       <NavLink to="/backtest">回测</NavLink>
       <NavLink to="/research">本轮研究</NavLink>
+      <NavLink to="/library">实验报告库</NavLink>
       <NavLink to="/daily">收盘简报</NavLink>
       <NavLink to="/plans">
         监督待办
