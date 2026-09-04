@@ -12,7 +12,7 @@ from datetime import UTC, datetime
 from fastapi import APIRouter, HTTPException, Request
 
 from lei_signal.api.config import sqlite_path as default_db
-from lei_signal.api.schemas import RecommendCardDTO
+from lei_signal.api.schemas import RecommendCardDTO, SizingAdviceDTO
 from lei_signal.copilot import journal
 from lei_signal.copilot.recommend import build_recommendation
 from lei_signal.storage.sqlite_store import connect
@@ -120,3 +120,21 @@ def get_recommend(
             journal.save_recommendation(conn, card)
             conn.commit()
     return card
+
+
+@router.get("/copilot/position-advice/{symbol}", response_model=SizingAdviceDTO)
+def position_advice(request: Request, symbol: str) -> SizingAdviceDTO:
+    """仓位档位建议：盈亏比取该标的买点审阅最优候选，只建议档位不算金额。"""
+    from lei_signal.api.routes.opportunities import buy_point_review  # noqa: PLC0415
+    from lei_signal.copilot.sizing import build_sizing_advice  # noqa: PLC0415
+
+    review = buy_point_review(request, symbol)
+    best = review.candidates[0] if review.candidates else None
+    if best is None and review.resonance_groups:
+        best = review.resonance_groups[0].candidates[0]
+    rr = best.reward_risk_ratio if best else None
+    return build_sizing_advice(
+        symbol,
+        rr,
+        rr_computable=bool(best.reward_risk_computable) if best else False,
+    )

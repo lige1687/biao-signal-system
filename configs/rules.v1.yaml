@@ -626,6 +626,29 @@ rules:
       实现为「只算不强制」；人类 2026-08-04 明确定为只提示、永不拦截，文案「建议 >3，
       2–3 可接受」。此差异是人类决定非实现漂移，必须留出处。界面必须标注「研究代理」。
 
+  copilot_sizing:
+    rule_id: "copilot_sizing"
+    version: "1.0.0"
+    provenance: "user_decision"
+    params:
+      tier_trial_pct_max: 5        # 试仓档上限（占总资金 %）
+      tier_standard_pct_min: 10    # 标准档下限
+      tier_standard_pct_max: 15    # 标准档上限
+      tier_heavy_pct_min: 20       # 偏重档下限
+      single_symbol_cap_pct: 30    # 单标的硬顶（用户口径：最喜欢也最多三成）
+      same_group_soft_cap_pct: 20  # 同板块已有敞口超过此值则降一档
+      rr_tier_threshold: 3.0       # 盈亏比达标准入标准/偏重档的参考线
+    formula: |
+      组合层建议（无技术判定权）：档位 = f(盈亏比, 同板块敞口)。
+      rr >= 3 且板块阶段 markup -> 偏重；rr >= 3 -> 标准；其余 -> 试仓。
+      same_group_exposure_pct >= same_group_soft_cap_pct 时整体降一档。
+      只建议档位与百分比区间，最终金额由用户决定。
+    note_cn: |
+      2026-09-05 用户拍板（plan-agent-superentry-v1 决策 D2）：系统给依据+档位
+      建议（试仓/标准/偏重，单标的封顶 30%），最终买多少用户定。档位是组合层
+      管理建议，无回测依据的部分按 advisor.py 口径标 observation/management，
+      不冒充技术判定。盈亏比参考线 3 对齐 reward_risk_filter.rr_min_ideal。
+
 # ---------------- 状态机 ----------------
 state_machine:
   version: "1.0.0"

@@ -1088,6 +1088,19 @@ class RecommendCardDTO(BaseModel):
     )
 
 
+class SizingAdviceDTO(BaseModel):
+    """仓位档位建议（组合层管理建议，最终金额由用户决定）。"""
+
+    symbol: str
+    tier: str                     # 试仓 | 标准 | 偏重
+    tier_pct_cn: str              # 如「10–15%（占总资金）」
+    cap_pct: float = 30.0         # 单标的硬顶 %
+    reasons: list[str] = []
+    strength: str = "observation" # observation=观察级（advisor.py 口径）
+    strength_cn: str = "观察级建议（无回测依据的组合层管理建议）"
+    disclaimer_cn: str = "档位只是建议，最终买多少由你决定。"
+
+
 class CreateSessionRequest(BaseModel):
     symbol: str | None = None
     title_cn: str = ""
