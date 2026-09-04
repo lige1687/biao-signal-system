@@ -240,6 +240,7 @@ def run_pipeline(
         per_source, errors = _collect_all(store, cfg, full=full, bili_client=bili_client)
         scored = 0
         digest_ok = False
+        pushed = 0
         if not no_llm:
             scored = _score_all(store)
             today = datetime.now().astimezone().strftime("%Y-%m-%d")
@@ -258,6 +259,13 @@ def run_pipeline(
                             digest["bloggers"] = bloggers
                     store.save_digest(today, digest)
                     digest_ok = True
+            # 重大事件推送（宏观线；参考层，best-effort 不阻断管线）
+            try:
+                from lei_signal.newsfeed.push import push_daily_brief
+
+                pushed = push_daily_brief(db_path)
+            except Exception as exc:  # noqa: BLE001 — 推送失败不影响抓取/打分
+                logger.warning("消息面推送失败: %s", exc)
         status = "ok"
         if errors and not per_source:
             status = "failed"
@@ -268,6 +276,7 @@ def run_pipeline(
             "per_source": per_source,
             "scored": scored,
             "digest": digest_ok,
+            "pushed": pushed,
         }
         store.finish_run(run_id, status, stats, errors)
         return {"run_id": run_id, "status": status, **stats, "errors": errors}
