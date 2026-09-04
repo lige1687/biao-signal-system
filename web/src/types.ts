@@ -1653,6 +1653,7 @@ export interface AgentChatReply {
   reply: string;
   grounded: boolean;
   trace: TraceItem[];
+  resolved_symbol?: string | null;
 }
 
 export interface AgentSessionDTO {

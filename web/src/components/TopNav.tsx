@@ -35,6 +35,7 @@ export default function TopNav() {
       <NavLink to="/daily">收盘简报</NavLink>
       <NavLink to="/portfolio">我的持仓</NavLink>
       <NavLink to="/ops">今日操作</NavLink>
+      <NavLink to="/agent">工作台</NavLink>
       <NavLink to="/plans">
         监督待办
         {open > 0 && <span className="nav-badge">{open}</span>}

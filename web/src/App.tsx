@@ -8,6 +8,7 @@ import FundamentalsPage from "./pages/FundamentalsPage";
 import NewsPage from "./pages/NewsPage";
 import SectorsPage from "./pages/SectorsPage";
 import DailyBriefPage from "./pages/DailyBriefPage";
+import AgentWorkspacePage from "./pages/AgentWorkspacePage";
 import OpsPage from "./pages/OpsPage";
 import SupervisorPage from "./pages/SupervisorPage";
 import PortfolioPage from "./pages/PortfolioPage";
@@ -77,6 +78,7 @@ export default function App() {
         {/* 监督待办：跨标的计划 + 待办 + 当日判定 */}
         <Route path="/plans" element={<SupervisorPage />} />
         <Route path="/ops" element={<OpsPage />} />
+        <Route path="/agent" element={<AgentWorkspacePage />} />
         {/* 我的持仓：基金/ETF 快照 + 赛道分组 + 系统结论（叙事标注层） */}
         <Route path="/portfolio" element={<PortfolioPage />} />
         {/* 未知路径兜底：回看盘工作台，避免白屏 */}

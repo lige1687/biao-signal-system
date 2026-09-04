@@ -463,7 +463,8 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
         append_message(conn, session.session_id, "user", body.message, True, {})
         append_message(conn, session.session_id, "assistant", reply, grounded, meta)
     return AgentChatReply(
-        session_id=session.session_id, reply=reply, grounded=grounded, trace=trace
+        session_id=session.session_id, reply=reply, grounded=grounded,
+        trace=trace, resolved_symbol=symbol,
     )
 
 
