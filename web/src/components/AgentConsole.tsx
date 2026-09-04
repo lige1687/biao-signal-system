@@ -3,17 +3,26 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { matchPath, useLocation } from "react-router-dom";
 import { api } from "../api/client";
 import AgentMarkdown from "./AgentMarkdown";
+import { CopilotCardDispatcher } from "./copilot/CopilotCards";
 import ProvenanceBadge from "./ProvenanceBadge";
 import { useAgentConsole } from "../App";
-import type { CreatePlanPayload, TraceItem } from "../types";
+import type { CreatePlanPayload, TraceItem, TradePreview } from "../types";
 
-type Turn = { who: "you" | "agent"; text: string; grounded?: boolean; trace?: TraceItem[] };
+type Turn = {
+  who: "you" | "agent";
+  text: string;
+  grounded?: boolean;
+  trace?: TraceItem[];
+  card?: { card_type: string; data: unknown } | null;
+  preview?: TradePreview | null;
+};
 
 /** 发起提问时捕获的上下文快照：回复落地前据此校验上下文未变，防止串扰。 */
 type AskVars = { message: string; symbol: string | null; sessionId: string | null; epoch: number };
 
 const SYMBOL_CHIPS = ["这个买点为什么是买点", "技术面讨论", "给这个买点建计划", "这个标的我的计划"];
-const GLOBAL_CHIPS = ["扫描自选买点", "今日待办", "市场环境怎么样"];
+/** 全局快捷指令：走 copilot dispatch（零 LLM 直达流水线），未命中回落通用讨论。 */
+const GLOBAL_CHIPS = ["今天看什么", "持仓速览", "我要报单", "本周复盘"];
 
 /**
  * 全局 agent 控制台：上下文跟随当前页面（详情页=该标的，其余=全局）。
@@ -91,6 +100,41 @@ export default function AgentConsole() {
     ask.mutate({ message: text, symbol, sessionId, epoch: epochRef.current });
   };
 
+  // copilot dispatch：全局快捷指令/自由输入先走规则意图路由（零 LLM），
+  // 命中流水线直接出卡片；chat_fallback 再转通用讨论（一次 LLM）。
+  const dispatch = useMutation({
+    mutationFn: (message: string) =>
+      api.copilotDispatch({ message, symbol: symbol ?? undefined }),
+    onSuccess: (reply, message) => {
+      if (reply.chat_fallback) {
+        send(message);
+        return;
+      }
+      setTurns((cur) => [
+        ...cur,
+        { who: "you", text: message },
+        {
+          who: "agent",
+          text: reply.note_cn,
+          card: reply.card,
+          preview: reply.preview,
+          grounded: true,
+        },
+      ]);
+    },
+    onError: (_e, message) => send(message),
+  });
+
+  const dispatchOrSend = (raw: string) => {
+    const text = raw.trim();
+    if (!text || dispatch.isPending || ask.isPending) return;
+    if (symbol) {
+      send(text); // 标的上下文的问题走通用讨论（带技术材料）
+      return;
+    }
+    dispatch.mutate(text);
+  };
+
   if (!open) return null;
   const chips = symbol ? SYMBOL_CHIPS : GLOBAL_CHIPS;
 
@@ -131,6 +175,12 @@ export default function AgentConsole() {
                   <PlanDraftCard draft={draft} symbol={symbol} />
                 ) : null;
               })()}
+              {turn.who === "agent" && (turn.card || turn.preview) && (
+                <CopilotCardDispatcher
+                  card={turn.card ?? null}
+                  preview={turn.preview ?? null}
+                />
+              )}
               {turn.who === "agent" && turn.trace && turn.trace.length > 0 && (
                 <ProvenanceBadge items={turn.trace} />
               )}
@@ -143,7 +193,12 @@ export default function AgentConsole() {
         </div>
         <div className="agent-chips">
           {chips.map((c) => (
-            <button key={c} className="btn small chip" disabled={ask.isPending} onClick={() => send(c)}>
+            <button
+              key={c}
+              className="btn small chip"
+              disabled={ask.isPending || dispatch.isPending}
+              onClick={() => (symbol ? send(c) : c === "我要报单" ? setInput("我") : dispatchOrSend(c))}
+            >
               {c}
             </button>
           ))}
@@ -156,12 +211,12 @@ export default function AgentConsole() {
               // IME 守卫：中文输入法组合中（选候选词）的 Enter 不发送。
               // isComposing 覆盖 Chrome/Firefox；keyCode 229 覆盖 Safari 组合态 keydown。
               if (e.key !== "Enter" || e.nativeEvent.isComposing || e.keyCode === 229) return;
-              send(input);
+              dispatchOrSend(input);
             }}
             placeholder={symbol ? "就这个标的讨论（多轮记忆）" : "问点什么"}
             disabled={ask.isPending}
           />
-          <button className="btn small primary" onClick={() => send(input)} disabled={ask.isPending || !input.trim()}>
+          <button className="btn small primary" onClick={() => dispatchOrSend(input)} disabled={ask.isPending || !input.trim()}>
             发送
           </button>
         </div>
