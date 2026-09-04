@@ -288,9 +288,40 @@ export function TradesLedgerView() {
               {t.price_status_cn}
               {t.priced_nav != null && ` @${t.priced_nav.toFixed(4)}`}
             </span>
+            {t.side === "sell" && t.price_status === "priced" && (
+              <ReviewFetcher tradeId={t.trade_id} />
+            )}
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+/** 复盘触发器：按需拉取单笔/周复盘卡。 */
+export function ReviewFetcher({
+  weekly,
+  tradeId,
+}: {
+  weekly?: boolean;
+  tradeId?: string;
+}) {
+  const [card, setCard] = useState<ReviewCard | null>(null);
+  const q = useMutation({
+    mutationFn: () =>
+      weekly ? api.copilotReviewWeekly() : api.copilotReviewTrade(tradeId!),
+    onSuccess: setCard,
+  });
+  return (
+    <div style={{ display: "inline" }}>
+      <button
+        className="btn small"
+        disabled={q.isPending || !!card}
+        onClick={() => q.mutate()}
+      >
+        {q.isPending ? "生成中…" : card ? "已生成" : weekly ? "本周复盘" : "复盘"}
+      </button>
+      {card && <ReviewCardView review={card} />}
     </div>
   );
 }

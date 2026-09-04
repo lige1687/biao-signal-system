@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import * as echarts from "echarts";
 import { portfolioApi } from "../api/client";
-import { TradesLedgerView } from "../components/copilot/CopilotCards";
+import { ReviewFetcher, TradesLedgerView } from "../components/copilot/CopilotCards";
 import InfoTip from "../components/InfoTip";
 import { fmtChange } from "../utils/format";
 import type { PortfolioAdvice, PortfolioGroup, PortfolioHolding } from "../types";
@@ -338,6 +338,9 @@ export default function PortfolioPage() {
             <GroupCard key={g.group_key} group={g} index={i} />
           ))}
         </div>
+      </div>
+      <div className="cp-row" style={{ justifyContent: "flex-end" }}>
+        <ReviewFetcher weekly />
       </div>
       <TradesLedgerView />
     </div>
