@@ -1,0 +1,108 @@
+"""每日操作清单组装（纯读，零 LLM）：页面与每日跑批推送共用。
+
+四段：① 持仓要处理的（EXIT 类待办 + 组合 observations）
+     ② 今日推荐（推荐账本当日存证，缺省 None）
+     ③ 计划待办催办（open 待办，EXIT 优先）
+     ④ 观察触发（当日扫描 waiting 项还缺什么）
+"""
+from __future__ import annotations
+
+import json
+import sqlite3
+from datetime import UTC, datetime
+
+from lei_signal.api.schemas import (
+    OpsCardDTO,
+    OpsLineDTO,
+    OpsTodoDTO,
+    RecommendCardDTO,
+)
+
+_KIND_CN = {"ENTER": "入场", "EXIT": "退出", "REVIEW": "复核"}
+
+
+def _now() -> str:
+    return datetime.now(UTC).isoformat()
+
+
+def build_ops_today(
+    conn: sqlite3.Connection,
+    *,
+    run_date: str,
+    recommend_card: RecommendCardDTO | None,
+) -> OpsCardDTO:
+    rows = conn.execute(
+        """SELECT a.action_id, a.plan_id, a.kind, a.due_from, a.nag_count,
+                  p.symbol
+           FROM plan_action_items a
+           JOIN trade_plans p ON p.plan_id = a.plan_id
+           WHERE a.state = 'open'
+           ORDER BY CASE a.kind WHEN 'EXIT' THEN 0 WHEN 'ENTER' THEN 1 ELSE 2 END,
+                    a.nag_count DESC"""
+    ).fetchall()
+    todos = [
+        OpsTodoDTO(
+            action_id=r["action_id"],
+            plan_id=r["plan_id"],
+            symbol=r["symbol"],
+            kind=r["kind"],
+            kind_cn=_KIND_CN.get(r["kind"], r["kind"]),
+            next_step_cn="见计划卡（判定层已给出 next_step）",
+            due_from=r["due_from"] or "",
+            nag_count=int(r["nag_count"] or 0),
+        )
+        for r in rows
+    ]
+    holdings: list[OpsLineDTO] = [
+        OpsLineDTO(
+            symbol=t.symbol,
+            text_cn=f"{t.kind_cn}待办（已催 {t.nag_count} 次）——按计划处理",
+        )
+        for t in todos
+        if t.kind == "EXIT"
+    ]
+    obs_row = conn.execute(
+        "SELECT value FROM portfolio_meta WHERE key = 'observations'"
+    ).fetchone()
+    if obs_row:
+        try:
+            for note in json.loads(obs_row["value"]) or []:
+                if isinstance(note, str):
+                    holdings.append(
+                        OpsLineDTO(symbol="-", text_cn=f"组合提示：{note}")
+                    )
+        except (TypeError, ValueError):
+            pass
+    watch: list[OpsLineDTO] = []
+    for r in conn.execute(
+        "SELECT symbol, display_name, missing_summary_cn FROM "
+        "daily_opportunity_scan WHERE scan_date = ? AND verdict = 'waiting'",
+        (run_date,),
+    ).fetchall():
+        watch.append(OpsLineDTO(
+            symbol=r["symbol"],
+            display_name=r["display_name"] or r["symbol"],
+            text_cn=(
+                f"还缺：{r['missing_summary_cn'] or '条件未齐'}"
+                "（条件成立即构成系统买点）"
+            ),
+        ))
+    exit_n = sum(1 for t in todos if t.kind == "EXIT")
+    enter_n = sum(1 for t in todos if t.kind == "ENTER")
+    parts = []
+    if exit_n:
+        parts.append(f"{exit_n} 个退出待办（最优先）")
+    if enter_n:
+        parts.append(f"{enter_n} 个入场待办")
+    if recommend_card and recommend_card.items:
+        parts.append(f"今日推荐 {len(recommend_card.items)} 个标的")
+    summary = "；".join(parts) + "。" if parts else "今日无必须处理的待办。"
+    return OpsCardDTO(
+        run_date=run_date,
+        generated_at=_now(),
+        holdings_actions=holdings,
+        recommendations=recommend_card,
+        plan_todos=todos,
+        watch_triggers=watch,
+        push_summary_cn=summary,
+    )

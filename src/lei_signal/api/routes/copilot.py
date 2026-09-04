@@ -17,6 +17,7 @@ from lei_signal.api.schemas import (
     CopilotDispatchReply,
     CopilotDispatchRequest,
     FundTradeDTO,
+    OpsCardDTO,
     RecommendCardDTO,
     SizingAdviceDTO,
     ReviewCardDTO,
@@ -392,3 +393,17 @@ def weekly_review(request: Request, week: str | None = None) -> ReviewCardDTO:
             review_mod.save_review(conn, card)
             conn.commit()
     return card
+
+
+@router.get("/ops/today", response_model=OpsCardDTO)
+def ops_today(request: Request) -> OpsCardDTO:
+    """每日操作清单（页面数据源；推送由 scripts/copilot_daily.py 同源组装）。"""
+    from lei_signal.api.opportunity_scan import today_date  # noqa: PLC0415
+    from lei_signal.copilot import ops as ops_mod  # noqa: PLC0415
+
+    run_date = today_date()
+    with closing(connect(_db_path(request))) as conn:
+        rec = journal.load_recommendation(conn, run_date)
+        return ops_mod.build_ops_today(
+            conn, run_date=run_date, recommend_card=rec
+        )

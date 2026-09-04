@@ -1188,6 +1188,35 @@ class ReviewCardDTO(BaseModel):
     grounded: bool = False
 
 
+class OpsTodoDTO(BaseModel):
+    action_id: str
+    plan_id: str
+    symbol: str
+    kind: str
+    kind_cn: str
+    next_step_cn: str = ""
+    due_from: str = ""
+    nag_count: int = 0
+
+
+class OpsLineDTO(BaseModel):
+    symbol: str
+    display_name: str = ""
+    text_cn: str
+
+
+class OpsCardDTO(BaseModel):
+    """每日操作清单（确定性组装，零 LLM；页面与推送共用）。"""
+
+    run_date: str
+    generated_at: str = ""
+    holdings_actions: list[OpsLineDTO] = []
+    recommendations: RecommendCardDTO | None = None
+    plan_todos: list[OpsTodoDTO] = []
+    watch_triggers: list[OpsLineDTO] = []
+    push_summary_cn: str = ""
+
+
 class CreateSessionRequest(BaseModel):
     symbol: str | None = None
     title_cn: str = ""
