@@ -29,6 +29,13 @@ const GROUP_CN: Record<string, string> = {
   sector: "板块",
 };
 
+/** 极简 markdown 加粗：`**x**` → <strong>（FACTOR_META 文本带 ** 语法，纯文本渲染会漏星号）。 */
+function mdBold(text: string): React.ReactNode {
+  return text.split(/\*\*(.+?)\*\*/g).map((p, i) =>
+    i % 2 === 1 ? <strong key={i}>{p}</strong> : <span key={i}>{p}</span>,
+  );
+}
+
 type SymSortKey = "code" | "rv20_ann" | "rv_pct" | "ivol_pct" | "mom_121" | "mom_20" | "adx14";
 
 /** RV 分位小色条：低波冷色 → 高波暖色，≥0.8 加警示描边。 */
@@ -228,9 +235,12 @@ export default function FactorPanelPage() {
                   </span>
                 </div>
                 <div className="fp-card-formula">{f.formula}</div>
-                <div className="fp-card-verdict">{f.verdict}</div>
-                <div className="fp-card-evi" title={f.evidence}>证据：{f.evidence}</div>
-                <div className="fp-card-usage">用法：{f.usage}</div>
+                <div className="fp-card-verdict">{mdBold(f.verdict)}</div>
+                <details className="fp-card-detail">
+                  <summary>证据与用法</summary>
+                  <div className="fp-card-evi">{mdBold(f.evidence)}</div>
+                  <div className="fp-card-usage">{mdBold(f.usage)}</div>
+                </details>
               </div>
             ))}
           </div>

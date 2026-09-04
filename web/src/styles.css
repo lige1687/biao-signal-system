@@ -3926,8 +3926,7 @@ a { color: var(--accent); text-decoration: none; }
 .fp-vol.up { color: var(--lei-green); }
 .fp-vol.down { color: var(--text-faint); }
 .fp-market-strip {
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
+  border: 1px solid var(--border);  border-left: 3px solid var(--accent);
   border-radius: 6px;
   background: var(--bg-card);
   padding: 8px 12px;
@@ -3939,6 +3938,57 @@ a { color: var(--accent); text-decoration: none; }
 .fp-market-strip.hot strong { color: var(--warn); }
 .fp-market-ann { color: var(--text-faint); font-size: 12px; }
 .fp-market-dim { color: var(--text-faint); font-size: 11px; }
+
+/* ---- 因子评级卡（实证留痕知识卡）---- */
+.fp-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 10px;
+  margin: 8px 0 18px;
+}
+.fp-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left-width: 3px;
+  border-radius: 10px;
+  padding: 10px 14px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.fp-card.fp-v-pass { border-left-color: var(--lei-green); }
+.fp-card.fp-v-weak { border-left-color: var(--warn); }
+.fp-card.fp-v-inverse { border-left-color: #7c3aed; }
+.fp-card.fp-v-fail { border-left-color: var(--text-faint); }
+.fp-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.fp-card-label { font-weight: 700; font-size: 13.5px; }
+.fp-verdict {
+  font-size: 11px; font-weight: 700; border-radius: 999px; padding: 2px 9px;
+  flex: none; line-height: 1.5;
+}
+.fp-verdict.v-pass { color: var(--lei-green); background: rgba(11, 155, 100, 0.10); }
+.fp-verdict.v-weak { color: var(--warn); background: rgba(180, 83, 9, 0.10); }
+.fp-verdict.v-inverse { color: #7c3aed; background: rgba(124, 58, 237, 0.10); }
+.fp-verdict.v-fail { color: var(--text-faint); background: var(--bg); }
+.fp-card-formula {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px; color: var(--text-faint);
+  background: var(--bg); border-radius: 5px; padding: 3px 8px;
+}
+.fp-card-verdict { font-size: 13px; font-weight: 600; line-height: 1.5; }
+.fp-card-verdict strong { color: var(--accent); }
+.fp-card-detail summary {
+  font-size: 12px; color: var(--text-faint); cursor: pointer; user-select: none;
+  border-top: 1px dashed var(--border); padding-top: 5px; margin-top: 2px;
+}
+.fp-card-detail summary::before { content: "▸ "; }
+.fp-card-detail[open] summary::before { content: "▾ "; }
+.fp-card-detail summary:hover { color: var(--accent); }
+.fp-card-detail[open] summary { margin-bottom: 4px; }
+.fp-card-evi, .fp-card-usage { font-size: 12px; color: var(--text-dim); line-height: 1.6; }
+.fp-card-evi { margin-bottom: 4px; }
+.fp-card-evi strong, .fp-card-usage strong { color: var(--text); }
 .breadth-small-metric.metric-danger strong { color: var(--error); }
 .breadth-small-metric.metric-opportunity strong { color: var(--lei-green); }
 
