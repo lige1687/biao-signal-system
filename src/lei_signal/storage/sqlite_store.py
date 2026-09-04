@@ -787,6 +787,55 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
             ON portfolio_fund_top10(holding_id);
         """,
     ),
+    (
+        22,
+        "022_copilot_tables",
+        """
+        -- Agent 超级入口（plan-agent-superentry-v1）三张表。
+        -- 边界变更记录（2026-09-05 用户拍板，决策 D1）：
+        --   基金成交台账允许记录金额（用户口头报单，手动确认落库）；
+        --   仍不接券商、不自动下单；个股交易暂缓；trade_plans 仍不存数量金额。
+        CREATE TABLE IF NOT EXISTS fund_trades (
+            trade_id     TEXT PRIMARY KEY,  -- ft_{fund_code}_{trade_date}_{hash8}
+            fund_code    TEXT NOT NULL,
+            fund_name    TEXT NOT NULL,
+            side         TEXT NOT NULL CHECK(side IN ('buy','sell')),
+            amount       REAL NOT NULL,     -- 金额（元），报单口径
+            trade_date   TEXT NOT NULL,     -- YYYY-MM-DD
+            priced_nav   REAL,              -- 系统定价（净值/收盘口径），NULL=未定价
+            price_status TEXT NOT NULL DEFAULT 'pending',  -- pending|priced|failed
+            plan_id      TEXT,              -- 可选关联 trade_plans.plan_id
+            source       TEXT NOT NULL DEFAULT 'web',      -- agent|web
+            note         TEXT NOT NULL DEFAULT '',
+            created_at   TEXT NOT NULL,
+            updated_at   TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_fund_trades_code
+            ON fund_trades(fund_code, trade_date);
+
+        CREATE TABLE IF NOT EXISTS trade_reviews (
+            review_id   TEXT PRIMARY KEY,   -- rv_{kind}_{ref_key}
+            kind        TEXT NOT NULL,      -- trade | weekly
+            ref_key     TEXT NOT NULL,      -- trade_id 或 ISO 周（2026-W36）
+            payload     TEXT NOT NULL,      -- JSON：复盘卡结构化数据
+            narrative   TEXT NOT NULL DEFAULT '',  -- GLM 叙事，空=模板
+            grounded    INTEGER NOT NULL DEFAULT 0,
+            created_at  TEXT NOT NULL,
+            updated_at  TEXT NOT NULL,
+            UNIQUE(kind, ref_key)
+        );
+
+        CREATE TABLE IF NOT EXISTS recommendation_journal (
+            journal_id  TEXT PRIMARY KEY,   -- rj_{run_date}
+            run_date    TEXT NOT NULL UNIQUE,
+            payload     TEXT NOT NULL,      -- JSON：RecommendCardDTO 完整输出
+            outcome     TEXT,               -- JSON：T+N 对账结果（可空）
+            outcome_at  TEXT,
+            created_at  TEXT NOT NULL,
+            updated_at  TEXT NOT NULL
+        );
+        """,
+    ),
 )
 
 

@@ -1044,6 +1044,48 @@ class AgentChatReply(BaseModel):
     reply: str
     grounded: bool
     trace: list[TraceItem] = []
+    resolved_symbol: str | None = None
+
+
+class RecommendItemDTO(BaseModel):
+    """今日推荐的单位。数值全部来自扫描/审阅既有字段，无新判定。"""
+
+    symbol: str
+    display_name: str = ""
+    verdict: str
+    verdict_cn: str = ""
+    best_scenario_cn: str | None = None
+    reward_risk_ratio: float | None = None
+    reward_risk_computable: bool = False
+    news_heat: int = 0
+    news_tags: list[str] = []
+    score: float = 0.0
+    reasons: list[str] = []
+
+
+class SectorPickDTO(BaseModel):
+    """板块推荐（阶段快照直读，只排序不判定）。"""
+
+    code: str
+    name: str = ""
+    stage: str = ""
+    stage_cn: str = ""
+    note: str = ""
+
+
+class RecommendCardDTO(BaseModel):
+    """今日推荐卡（流水线输出 + 存证账本载体）。"""
+
+    run_date: str
+    generated_at: str = ""
+    items: list[RecommendItemDTO] = []
+    sectors: list[SectorPickDTO] = []
+    sentiment_status: str = "暂未接入"
+    fundamental_note: str = "宏观/基本面按叙事标注展示，不参与技术判定"
+    disclaimer_cn: str = (
+        "排序仅影响展示顺序，不构成新判定；技术结论以各标的买点审阅为准。"
+        "消息面/基本面为叙事标注层，永不硬过滤信号。"
+    )
 
 
 class CreateSessionRequest(BaseModel):
