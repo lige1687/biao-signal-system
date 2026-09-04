@@ -287,6 +287,11 @@ def test_no_trading_execution_surface_exists() -> None:
     只检查**可执行代码**：移植说明的文档字符串里会提到旧项目的
     FundID/ProxyID/StrategyEngine，用于说明「这些没有被移植」，
     那是必要的溯源记录，不是执行域代码。
+
+    边界变更记录（2026-09-05 用户拍板，plan-agent-superentry-v1 决策 D1）：
+    fund_trades 基金成交台账允许记录金额（用户手动报单+确认卡确认落库），
+    仍不接券商、不自动下单、个股交易暂缓。禁用符号表本身不放宽——copilot
+    代码继续不得出现任何下单/账户类标识符。
     """
     import ast
     from pathlib import Path

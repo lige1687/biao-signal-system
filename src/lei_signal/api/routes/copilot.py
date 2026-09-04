@@ -16,8 +16,11 @@ from lei_signal.api.config import sqlite_path as default_db
 from lei_signal.api.schemas import (
     CopilotDispatchReply,
     CopilotDispatchRequest,
+    FundTradeDTO,
     RecommendCardDTO,
     SizingAdviceDTO,
+    TradePreviewDTO,
+    TradesResponseDTO,
 )
 from lei_signal.copilot import journal
 from lei_signal.copilot.recommend import build_recommendation
@@ -174,6 +177,8 @@ def dispatch(request: Request, body: CopilotDispatchRequest) -> CopilotDispatchR
             note_cn="已按你的话抽出信息，请核对后确认记入台账。",
         )
     if intent.kind == "holdings":
+        from lei_signal.copilot import trades as trades_mod  # noqa: PLC0415
+
         with closing(connect(_db_path(request))) as conn:
             plans = [
                 {
@@ -187,10 +192,15 @@ def dispatch(request: Request, body: CopilotDispatchRequest) -> CopilotDispatchR
                 for p in list_plans(conn)
                 if p.state in ("armed", "entered")
             ]
+            fund_positions = [
+                p.model_dump() for p in trades_mod.position_summary(
+                    conn, fetch_nav=trades_mod.fetch_nav_history
+                )
+            ]
         data = {
             "active_plans": plans,
-            "fund_positions": [],
-            "hint_cn": "基金持仓与真实盈亏在基金台账（P2）接入后在此展示；"
+            "fund_positions": fund_positions,
+            "hint_cn": "盈亏按报单日净值核算（大白话：落袋的算已实现，还在里的算浮动）；"
                        "明细见「我的持仓」页。",
         }
         return CopilotDispatchReply(
@@ -270,3 +280,68 @@ def explain_recommend(request: Request, body: ExplainRequest) -> ExplainReply:
     if reply is None:
         reply, grounded = _explain_template(card), False
     return ExplainReply(reply=reply, grounded=grounded, card=card)
+
+
+class TradeCreateRequest(BaseModel):
+    fund_code: str
+    fund_name: str
+    side: str
+    amount: float
+    trade_date: str
+    note: str = ""
+
+
+class TradePreviewRequest(BaseModel):
+    message: str
+
+
+@router.post("/copilot/trades/preview", response_model=TradePreviewDTO)
+def trades_preview(body: TradePreviewRequest) -> TradePreviewDTO:
+    """报单预解析 → 确认卡（零 LLM）。解析是 best-effort，落库走 /copilot/trades。"""
+    from lei_signal.api.opportunity_scan import today_date  # noqa: PLC0415
+    from lei_signal.copilot.intent import parse_trade_report  # noqa: PLC0415
+
+    return parse_trade_report(body.message, today=today_date())
+
+
+@router.post("/copilot/trades", response_model=FundTradeDTO)
+def trades_create(request: Request, body: TradeCreateRequest) -> FundTradeDTO:
+    """确认卡落库（结构化字段直传）+ 立即尝试定价。"""
+    from lei_signal.copilot import trades as trades_mod  # noqa: PLC0415
+
+    with closing(connect(_db_path(request))) as conn:
+        try:
+            trade = trades_mod.create_trade(
+                conn,
+                fund_code=body.fund_code.strip(),
+                fund_name=body.fund_name.strip() or body.fund_code.strip(),
+                side=body.side,
+                amount=body.amount,
+                trade_date=body.trade_date,
+                source="web",
+                note=body.note,
+            )
+        except ValueError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
+        trades_mod.price_pending_trades(
+            conn, fetch_nav=trades_mod.fetch_nav_history
+        )
+        conn.commit()
+        fresh = next(
+            (t for t in trades_mod.list_trades(conn) if t.trade_id == trade.trade_id),
+            trade,
+        )
+    return fresh
+
+
+@router.get("/copilot/trades", response_model=TradesResponseDTO)
+def trades_list(request: Request) -> TradesResponseDTO:
+    from lei_signal.copilot import trades as trades_mod  # noqa: PLC0415
+
+    with closing(connect(_db_path(request))) as conn:
+        return TradesResponseDTO(
+            trades=trades_mod.list_trades(conn),
+            positions=trades_mod.position_summary(
+                conn, fetch_nav=trades_mod.fetch_nav_history
+            ),
+        )
