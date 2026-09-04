@@ -2048,3 +2048,37 @@ export interface ExperimentReportDetail {
   verdict: string;
   markdown: string;
 }
+
+// ---- 我的持仓（/portfolio，2026-09-04）----
+
+export interface PortfolioHolding {
+  holding_id: string;
+  name: string;
+  code: string | null; // 截图未含代码，待补
+  market_value: number;
+  return_pct: number | null;
+  tags: string[];
+  note: string;
+}
+
+export interface PortfolioGroup {
+  group_key: string;
+  name: string;
+  market: string;
+  market_cn: string;
+  amount: number;
+  pct: number;
+  avg_return_pct: number | null; // 金额加权持有收益率（近似口径，组间粗比）
+  verdict_cn: string; // 系统怎么看（大白话结论）
+  verdict_basis: string;
+  holdings: PortfolioHolding[];
+}
+
+export interface PortfolioResponse {
+  as_of: string;
+  data_source_cn: string;
+  total_value: number;
+  holdings_count: number;
+  observations: string[];
+  groups: PortfolioGroup[];
+}

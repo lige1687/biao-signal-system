@@ -33,6 +33,7 @@ export default function TopNav() {
       <NavLink to="/research">本轮研究</NavLink>
       <NavLink to="/library">实验报告库</NavLink>
       <NavLink to="/daily">收盘简报</NavLink>
+      <NavLink to="/portfolio">我的持仓</NavLink>
       <NavLink to="/plans">
         监督待办
         {open > 0 && <span className="nav-badge">{open}</span>}

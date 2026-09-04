@@ -1064,3 +1064,38 @@ class AgentMessageDTO(BaseModel):
     content: str
     grounded: bool
     created_at: str
+
+
+# ---- 我的持仓（portfolio，2026-09-04）----
+
+
+class PortfolioHoldingDTO(BaseModel):
+    holding_id: str
+    name: str
+    code: str | None = None  # 截图未含代码，待补
+    market_value: float
+    return_pct: float | None = None
+    tags: list[str] = []
+    note: str = ""
+
+
+class PortfolioGroupDTO(BaseModel):
+    group_key: str
+    name: str
+    market: str
+    market_cn: str
+    amount: float                 # 组内市值合计（元）
+    pct: float                    # 占组合比例（%）
+    avg_return_pct: float | None  # 金额加权持有收益率（%），全部缺失时 None
+    verdict_cn: str               # 系统怎么看（大白话结论）
+    verdict_basis: str = ""       # 结论依据（文档指针，给开发者看）
+    holdings: list[PortfolioHoldingDTO] = []
+
+
+class PortfolioResponse(BaseModel):
+    as_of: str
+    data_source_cn: str
+    total_value: float
+    holdings_count: int
+    observations: list[str] = []  # 组合级提示（大白话）
+    groups: list[PortfolioGroupDTO] = []

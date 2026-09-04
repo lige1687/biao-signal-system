@@ -32,6 +32,7 @@ from lei_signal.api.routes import (
     news,
     opportunities,
     plans,
+    portfolio,
     sectors,
     signals,
     symbols,
@@ -93,6 +94,7 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
     app.state.analysis_service = analysis_service or AnalysisService(max_workers=8)
     app.state.watchlist_db_path = config.sqlite_path()
     app.state.plans_db_path = config.sqlite_path()
+    app.state.portfolio_db_path = config.sqlite_path()
     app.state.market_context_service = _build_market_context_service()
     app.state.fundamentals_service = FundamentalsService()
     app.state.sectors_service = SectorsService()
@@ -106,6 +108,7 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
     app.include_router(watchlist.router)
     app.include_router(watch_subscriptions.router)
     app.include_router(plans.router)
+    app.include_router(portfolio.router)
     app.include_router(signals.router)
     app.include_router(agent.router)
     app.include_router(feishu_webhook.router)

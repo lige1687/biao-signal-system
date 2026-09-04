@@ -708,6 +708,48 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
         );
         """,
     ),
+    (
+        20,
+        "020_portfolio",
+        """
+        -- 我的持仓（2026-09-04）：基金/ETF 持仓快照 + 赛道分组 + 分组结论。
+        -- 与 trade_plans 的边界：计划台账只记「状态机 + 价位」刻意不含金额；
+        -- 持仓台账反过来——只记「我实际拿着什么、值多少钱」，为持仓体检页
+        -- 提供数据。分组结论（verdict_cn）是已验证回测结论的大白话翻译，
+        -- 属展示/参考层（叙事标注），不参与任何信号判定。
+        CREATE TABLE IF NOT EXISTS portfolio_groups (
+            group_key     TEXT PRIMARY KEY,   -- us_index / us_tech_active / ...
+            name          TEXT NOT NULL,      -- 海外·纳指/标普指数
+            market        TEXT NOT NULL,      -- us / cn / hk / other
+            sort_order    INTEGER NOT NULL,
+            verdict_cn    TEXT NOT NULL,      -- 系统怎么看（大白话结论）
+            verdict_basis TEXT NOT NULL DEFAULT '',  -- 结论依据（实验/文档出处）
+            updated_at    TEXT NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS portfolio_holdings (
+            holding_id    TEXT PRIMARY KEY,   -- 稳定 slug（名称哈希），seed 幂等用
+            group_key     TEXT NOT NULL REFERENCES portfolio_groups(group_key),
+            name          TEXT NOT NULL,      -- 基金/ETF 全称
+            code          TEXT,               -- 基金代码（截图未含，待补；可空）
+            market_value  REAL NOT NULL,      -- 市值（元），快照口径
+            return_pct    REAL,               -- 持有收益率 %，可空
+            tags          TEXT NOT NULL DEFAULT '[]',  -- JSON 数组：QDII/定投/...
+            note          TEXT NOT NULL DEFAULT '',
+            as_of         TEXT NOT NULL,      -- 快照日期（截图日）
+            updated_at    TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_portfolio_holdings_group
+            ON portfolio_holdings(group_key);
+
+        -- 组合级元信息：数据来源说明 + 组合级提示（observations JSON 数组）
+        CREATE TABLE IF NOT EXISTS portfolio_meta (
+            key        TEXT PRIMARY KEY,      -- as_of / data_source_cn / observations
+            value      TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        """,
+    ),
 )
 
 
