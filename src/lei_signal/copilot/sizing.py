@@ -12,7 +12,7 @@ _TIERS = ("试仓", "标准", "偏重")
 
 
 def _params() -> dict:
-    return dict(get_rule("copilot_sizing").params)
+    return dict(get_rule("copilot_sizing").param)
 
 
 def _tier_pct_cn(tier: str, p: dict) -> str:

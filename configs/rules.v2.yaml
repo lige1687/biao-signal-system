@@ -937,28 +937,54 @@ rules:
       实现为「只算不强制」；人类 2026-08-04 明确定为只提示、永不拦截，文案「建议 >3，
       2–3 可接受」。此差异是人类决定非实现漂移，必须留出处。界面必须标注「研究代理」。
 
+  copilot_sizing:
+    rule_id: "copilot_sizing"
+    version: "1.0.0"
+    provenance: "user_decision"
+    params:
+      tier_trial_pct_max: 5        # 试仓档上限（占总资金 %）
+      tier_standard_pct_min: 10    # 标准档下限
+      tier_standard_pct_max: 15    # 标准档上限
+      tier_heavy_pct_min: 20       # 偏重档下限
+      single_symbol_cap_pct: 30    # 单标的硬顶（用户口径：最喜欢也最多三成）
+      same_group_soft_cap_pct: 20  # 同板块已有敞口超过此值则降一档
+      rr_tier_threshold: 3.0       # 盈亏比达标准入标准/偏重档的参考线
+    formula: |
+      组合层建议（无技术判定权）：档位 = f(盈亏比, 同板块敞口)。
+      rr >= 3 且板块阶段 markup -> 偏重；rr >= 3 -> 标准；其余 -> 试仓。
+      same_group_exposure_pct >= same_group_soft_cap_pct 时整体降一档。
+      只建议档位与百分比区间，最终金额由用户决定。
+    note_cn: |
+      2026-09-05 用户拍板（plan-agent-superentry-v1 决策 D2）：系统给依据+档位
+      建议（试仓/标准/偏重，单标的封顶 30%），最终买多少用户定。档位是组合层
+      管理建议，无回测依据的部分按 advisor.py 口径标 observation/management，
+      不冒充技术判定。盈亏比参考线 3 对齐 reward_risk_filter.rr_min_ideal。
+
   # ---------------- 散户热度（板块层资金面预警，研究代理；不属 LEI 规则体系）----------------
   retail_heat:
     rule_id: "retail_heat"
-    version: "0.1.0"
+    version: "0.2.0"
     provenance: "research_proxy"
     params:
       metric: "diverge"          # 小单−超大单分化（筹码下移强度），口径定义见 market_context/retail_heat.py
       window_days: 20
-      hot_pctile: 90             # 横截面分位过热阈值（回测校准值，来源见 note_cn）
+      hot_pctile: 90             # 风险线：横截面分位过热阈值（回测校准值，来源见 note_cn）
+      cold_pctile: 10            # 机会线：横截面分位过冷阈值（散户割肉·主力吸筹区，回测校准值）
       warn_stages: ["markup", "distribution"]   # 情境化：仅上升/派发阶段的过热亮警示
     formula: |
       ratio_d = (small_yi − super_large_yi) / 市值亿（市值 = 当日板块总市值 × close(t)/close(最新)，回溯近似）
       heat_value = mean(ratio_d, window_days 日)
       heat_pctile = heat_value 当日全部有效板块横截面分位（0-100，并列取平均秩）
-      heat_warning = heat_pctile >= hot_pctile 且 阶段 ∈ warn_stages
+      heat_hot    = heat_pctile >= hot_pctile   （风险区：散户狂买·超大单派发）
+      heat_cold   = heat_pctile <= cold_pctile  （机会区：散户割肉·超大单吸筹）
+      heat_warning = heat_hot 且 阶段 ∈ warn_stages
     note_cn: |
       板块层资金面属「路牌」性质预警（先判断道路再观察路牌：只预警不必然反向）：
       只标注、不做硬过滤、不出买卖点，不参与阶段判定。
       东财五档资金流零和（main+medium+small≈0，实测 2026-09-04），
       散户净流入≡主力净流出，独立信息在小单−超大单分化。
-      hot_pctile 初值 90 为占位，回测校准后更新并提升 version；
-      回测依据与更新记录见 docs/experiments/retail-mania-threshold-2026-09-04.md。
+      hot/cold 阈值初值 90/10 为占位，回测校准（含机会线反向验证）后更新并提升
+      version；回测依据与更新记录见 docs/experiments/retail-mania-threshold-2026-09-04.md。
       「机构」为超大单近似（单据规模代理，非真实身份）；「国家队」无数据口径，不冒充。
 
 # ---------------- 状态机 ----------------
