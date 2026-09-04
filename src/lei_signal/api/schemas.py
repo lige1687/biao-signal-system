@@ -1077,6 +1077,22 @@ class PortfolioHoldingDTO(BaseModel):
     return_pct: float | None = None
     tags: list[str] = []
     note: str = ""
+    # 季报穿透（无数据为 None；叙事标注层，不进信号）
+    top10_total_pct: float | None = None        # 前十大合计占净值 %
+    top10_by_market_pct: dict[str, float] = {}  # cn/hk/us/other -> 占净值 %
+    report_quarter: str | None = None
+
+
+class PortfolioAdviceDTO(BaseModel):
+    advice_id: str
+    priority: int
+    strength: str           # certified / candidate / observation / management
+    strength_cn: str
+    title_cn: str
+    detail_cn: str
+    evidence: list[dict] = []
+    trigger_cn: str = ""
+    execution_cn: str = ""
 
 
 class PortfolioGroupDTO(BaseModel):
@@ -1089,6 +1105,7 @@ class PortfolioGroupDTO(BaseModel):
     avg_return_pct: float | None  # 金额加权持有收益率（%），全部缺失时 None
     verdict_cn: str               # 系统怎么看（大白话结论）
     verdict_basis: str = ""       # 结论依据（文档指针，给开发者看）
+    real_market_share: dict[str, float] | None = None  # 穿透后市场分布（%）
     holdings: list[PortfolioHoldingDTO] = []
 
 
@@ -1098,4 +1115,5 @@ class PortfolioResponse(BaseModel):
     total_value: float
     holdings_count: int
     observations: list[str] = []  # 组合级提示（大白话）
+    advices: list[PortfolioAdviceDTO] = []  # 调仓建议（R1~R7）
     groups: list[PortfolioGroupDTO] = []

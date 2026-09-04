@@ -538,37 +538,10 @@ export const experimentsApi = {
 };
 
 // ---- 我的持仓（portfolio，2026-09-04）----
-export interface PortfolioHoldingDTO {
-  holding_id: string;
-  name: string;
-  code: string | null;
-  market_value: number;
-  return_pct: number | null;
-  tags: string[];
-  note: string;
-}
-
-export interface PortfolioGroupDTO {
-  group_key: string;
-  name: string;
-  market: string;
-  market_cn: string;
-  amount: number;
-  pct: number;
-  avg_return_pct: number | null;
-  verdict_cn: string;
-  verdict_basis: string;
-  holdings: PortfolioHoldingDTO[];
-}
-
-export interface PortfolioResponseDTO {
-  as_of: string;
-  data_source_cn: string;
-  total_value: number;
-  holdings_count: number;
-  observations: string[];
-  groups: PortfolioGroupDTO[];
-}
+// 类型唯一来源在 ../types.ts（含季报穿透与调仓建议字段），这里只做别名复用。
+import type {
+  PortfolioResponse as PortfolioResponseDTO,
+} from "../types";
 
 export const portfolioApi = {
   get: () => request<PortfolioResponseDTO>("/portfolio"),

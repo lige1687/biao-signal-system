@@ -750,6 +750,43 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
         );
         """,
     ),
+    (
+        21,
+        "021_portfolio_funddata",
+        """
+        -- 持仓基金数据层（2026-09-04 第二轮）：净值自动更新 + 季报穿透。
+        -- snapshot_nav/implied_shares/cost_value 三者一旦写定即视为锚点：
+        -- 之后每日市值 = implied_shares × 最新净值；收益 = 市值/cost_value - 1。
+        -- 锚点值不随后续刷新改动（错误修正走人工 SQL），保证口径可追溯。
+        CREATE TABLE IF NOT EXISTS portfolio_holdings_nav (
+            holding_id       TEXT PRIMARY KEY REFERENCES portfolio_holdings(holding_id),
+            code             TEXT NOT NULL,
+            snapshot_nav     REAL NOT NULL,     -- 快照日（或最近 ≤ as_of）单位净值
+            snapshot_nav_date TEXT NOT NULL,
+            implied_shares   REAL NOT NULL,     -- 反推份额 = 快照市值 / snapshot_nav
+            cost_value       REAL NOT NULL,     -- 推算投入成本 = 市值/(1+收益率)
+            latest_nav       REAL,
+            latest_nav_date  TEXT,
+            updated_at       TEXT NOT NULL
+        );
+
+        -- 季报穿透：每只基金最新一期季报的前十大持仓（只做叙事标注，不进信号）。
+        -- weight_pct = 占基金净值比例；market 由代码形态分类（A股6位/港股5位/美股字母）。
+        -- 刷新策略：每只基金只保留最新一期（重跑先 DELETE 该基金再 INSERT）。
+        CREATE TABLE IF NOT EXISTS portfolio_fund_top10 (
+            holding_id     TEXT NOT NULL REFERENCES portfolio_holdings(holding_id),
+            report_quarter TEXT NOT NULL,      -- 2026Q2
+            report_date    TEXT NOT NULL,      -- 2026-06-30
+            stock_code     TEXT NOT NULL,
+            stock_name     TEXT NOT NULL,
+            market         TEXT NOT NULL,      -- cn / hk / us / other
+            weight_pct     REAL NOT NULL,      -- 占净值 %
+            PRIMARY KEY (holding_id, stock_code)
+        );
+        CREATE INDEX IF NOT EXISTS idx_pf_top10_holding
+            ON portfolio_fund_top10(holding_id);
+        """,
+    ),
 )
 
 

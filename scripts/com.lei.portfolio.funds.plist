@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.lei.portfolio.funds</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/python3</string>
+        <string>scripts/update_portfolio_funds.py</string>
+        <string>--only</string>
+        <string>nav</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PYTHONPATH</key>
+        <string>/Users/yongbiaoli/Desktop/lei-signal-lab/src</string>
+    </dict>
+
+    <!-- 每日 20:05 刷新持仓基金净值（国内基金当日晚间出净值，QDII T+1~T+2，
+         未出净值的日子沿用上一次值）。季报穿透（top10）每季度手动跑一次即可：
+         python3 scripts/update_portfolio_funds.py --only top10 。带限速 0.8s/请求，
+         28 只基金约 40 秒，不会触发东财风控。 -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key><integer>20</integer>
+        <key>Minute</key><integer>5</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/logs/portfolio_funds.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/logs/portfolio_funds.err.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+</dict>
+</plist>

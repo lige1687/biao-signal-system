@@ -2059,6 +2059,9 @@ export interface PortfolioHolding {
   return_pct: number | null;
   tags: string[];
   note: string;
+  top10_total_pct: number | null; // 季报穿透：前十大占净值 %
+  top10_by_market_pct: Record<string, number>; // cn/hk/us/other -> 占净值 %
+  report_quarter: string | null;
 }
 
 export interface PortfolioGroup {
@@ -2071,7 +2074,20 @@ export interface PortfolioGroup {
   avg_return_pct: number | null; // 金额加权持有收益率（近似口径，组间粗比）
   verdict_cn: string; // 系统怎么看（大白话结论）
   verdict_basis: string;
+  real_market_share: Record<string, number> | null; // 穿透后市场分布（%）
   holdings: PortfolioHolding[];
+}
+
+export interface PortfolioAdvice {
+  advice_id: string;
+  priority: number;
+  strength: "certified" | "candidate" | "observation" | "management";
+  strength_cn: string;
+  title_cn: string;
+  detail_cn: string;
+  evidence: { label: string; ref: string }[];
+  trigger_cn: string;
+  execution_cn: string;
 }
 
 export interface PortfolioResponse {
@@ -2080,5 +2096,6 @@ export interface PortfolioResponse {
   total_value: number;
   holdings_count: number;
   observations: string[];
+  advices: PortfolioAdvice[];
   groups: PortfolioGroup[];
 }

@@ -1,9 +1,9 @@
-"""我的持仓 REST 路由（持仓体检页 v1）。
+"""我的持仓 REST 路由（持仓体检页）。
 
-v1 只读：GET /api/portfolio 返回整份快照（分组 + 持仓 + 组合级提示）。
-汇总（组金额/占比/加权收益率）在本层算好，前端只做展示——判定与口径
-在 Python 侧，与全站「UI 不重新计算」一致。分组结论是叙事标注层，
-不参与信号判定。
+GET /api/portfolio 返回整份快照：分组 + 持仓 + 组合级提示 + 季报穿透
+暴露 + 调仓建议（R1~R7）。汇总（组金额/占比/加权收益率）与建议判定
+都在 Python 层完成，前端只做展示——与全站「UI 不重新计算」一致。
+分组结论与穿透结果都是叙事标注层，不参与任何信号判定。
 """
 from __future__ import annotations
 
@@ -13,9 +13,16 @@ from fastapi import APIRouter, Request
 
 from lei_signal.api.config import sqlite_path as default_db
 from lei_signal.api.schemas import (
+    PortfolioAdviceDTO,
     PortfolioGroupDTO,
     PortfolioHoldingDTO,
     PortfolioResponse,
+)
+from lei_signal.portfolio.advisor import build_advices
+from lei_signal.portfolio.holdings_report import (
+    group_real_market_share,
+    load_exposures,
+    load_sector_stages,
 )
 from lei_signal.portfolio.models import MARKETS
 from lei_signal.portfolio.store import load_snapshot
@@ -34,14 +41,50 @@ def _db_path(request: Request) -> str:
 def get_portfolio(request: Request) -> PortfolioResponse:
     with closing(connect(_db_path(request))) as conn:
         snap = load_snapshot(conn)
+        exposures = load_exposures(conn)
+        sector_stages = load_sector_stages()
 
     holdings_by_group = snap["holdings_by_group"]
-    total_value = sum(h.market_value for hs in holdings_by_group.values() for h in hs)
+    all_holdings = [h for hs in holdings_by_group.values() for h in hs]
+    total_value = sum(h.market_value for h in all_holdings) or 1.0
+
+    # advisor 输入：轻量 dict（避免跨模块 dataclass 耦合）
+    adv_groups = [
+        {
+            "group_key": g.group_key, "name": g.name, "market": g.market,
+            "amount": sum(h.market_value for h in holdings_by_group.get(g.group_key, [])),
+            "pct": sum(h.market_value for h in holdings_by_group.get(g.group_key, []))
+            / total_value * 100,
+            "holding_ids": [h.holding_id for h in holdings_by_group.get(g.group_key, [])],
+        }
+        for g in snap["groups"]
+    ]
+    holdings_by_id = {h.holding_id: h for h in all_holdings}
+    adv_holdings = [
+        {
+            "holding_id": h.holding_id, "group_key": h.group_key, "name": h.name,
+            "market_value": h.market_value, "pct": h.market_value / total_value * 100,
+        }
+        for h in all_holdings
+    ]
+    group_share = {
+        g["group_key"]: group_real_market_share(
+            exposures, holdings_by_id, g["holding_ids"])
+        for g in adv_groups
+    }
+    advices = build_advices(
+        groups=adv_groups,
+        holdings=adv_holdings,
+        exposures=exposures,
+        group_market_share=group_share,
+        sector_stages=sector_stages,
+    )
 
     group_dtos: list[PortfolioGroupDTO] = []
     for g in snap["groups"]:
         hs = holdings_by_group.get(g.group_key, [])
         amount = sum(h.market_value for h in hs)
+        share = group_share.get(g.group_key)
         group_dtos.append(PortfolioGroupDTO(
             group_key=g.group_key,
             name=g.name,
@@ -52,7 +95,8 @@ def get_portfolio(request: Request) -> PortfolioResponse:
             avg_return_pct=_weighted_return(hs, amount),
             verdict_cn=g.verdict_cn,
             verdict_basis=g.verdict_basis,
-            holdings=[_to_holding_dto(h) for h in hs],
+            real_market_share=share,
+            holdings=[_to_holding_dto(h, exposures) for h in hs],
         ))
 
     # 分组已删但持仓残留：以「未分组」形式透出，不静默丢数据
@@ -66,23 +110,25 @@ def get_portfolio(request: Request) -> PortfolioResponse:
             market="other",
             market_cn="其他",
             amount=round(amount, 2),
-            pct=round(amount / total_value * 100, 1) if total_value > 0 else 0.0,
+            pct=round(amount / total_value * 100, 1),
             avg_return_pct=_weighted_return(orphans, amount),
             verdict_cn="持仓数据引用的分组不存在，请检查 portfolio_groups 表。",
-            holdings=[_to_holding_dto(h) for h in orphans],
+            holdings=[_to_holding_dto(h, exposures) for h in orphans],
         ))
 
     return PortfolioResponse(
         as_of=snap["as_of"],
         data_source_cn=snap["data_source_cn"],
         total_value=round(total_value, 2),
-        holdings_count=sum(len(hs) for hs in holdings_by_group.values()),
+        holdings_count=len(all_holdings),
         observations=list(snap["observations"]),
+        advices=[PortfolioAdviceDTO(**a.to_dict()) for a in advices],
         groups=group_dtos,
     )
 
 
-def _to_holding_dto(h):  # noqa: ANN001 - PortfolioHolding，避免循环导入再引类型
+def _to_holding_dto(h, exposures):  # noqa: ANN001
+    exp = exposures.get(h.holding_id)
     return PortfolioHoldingDTO(
         holding_id=h.holding_id,
         name=h.name,
@@ -91,6 +137,9 @@ def _to_holding_dto(h):  # noqa: ANN001 - PortfolioHolding，避免循环导入�
         return_pct=h.return_pct,
         tags=list(h.tags),
         note=h.note,
+        top10_total_pct=exp.top10_total_pct if exp else None,
+        top10_by_market_pct=exp.by_market_pct if exp else {},
+        report_quarter=exp.report_quarter if exp else None,
     )
 
 

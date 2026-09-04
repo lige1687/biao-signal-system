@@ -4147,3 +4147,32 @@ a { color: var(--accent); text-decoration: none; }
 .portfolio-table tr:last-child td { border-bottom: none; }
 .portfolio-table .num { text-align: right; font-variant-numeric: tabular-nums; }
 .portfolio-holding-note { font-size: 11px; color: var(--text-faint); margin-top: 1px; }
+
+/* ── 调仓建议卡 + 真实暴露 ── */
+.portfolio-advice-section { margin-bottom: 12px; }
+.portfolio-advice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 10px;
+}
+.portfolio-advice-card { padding: 12px 14px; border-left: 4px solid var(--border-strong); }
+.portfolio-advice-card.certified { border-left-color: var(--lei-green); }
+.portfolio-advice-card.candidate { border-left-color: var(--accent); }
+.portfolio-advice-card.observation { border-left-color: var(--lei-gray); }
+.portfolio-advice-card.management { border-left-color: var(--text-faint); }
+.portfolio-advice-head { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px; }
+.portfolio-advice-title { font-weight: 600; font-size: 13.5px; line-height: 1.5; }
+.portfolio-advice-detail { margin: 0 0 6px; font-size: 12.5px; line-height: 1.65; color: var(--text); }
+.portfolio-advice-evidence { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; }
+.portfolio-advice-ev {
+  font-size: 11px; color: var(--text-dim);
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 4px; padding: 1px 6px; cursor: help;
+}
+.portfolio-advice-actions { font-size: 12px; color: var(--text-dim); line-height: 1.6; }
+.portfolio-advice-k {
+  display: inline-block; font-size: 11px; color: var(--text-faint);
+  border: 1px solid var(--border); border-radius: 3px; padding: 0 4px; margin-right: 5px;
+}
+.portfolio-expo { font-size: 12px; color: var(--text-dim); white-space: nowrap; cursor: help; }
+.portfolio-real-share { margin-top: 6px; font-size: 12px; color: var(--accent); }

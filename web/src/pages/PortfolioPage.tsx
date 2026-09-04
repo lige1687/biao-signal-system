@@ -4,7 +4,7 @@ import * as echarts from "echarts";
 import { portfolioApi } from "../api/client";
 import InfoTip from "../components/InfoTip";
 import { fmtChange } from "../utils/format";
-import type { PortfolioGroup } from "../types";
+import type { PortfolioAdvice, PortfolioGroup, PortfolioHolding } from "../types";
 
 /**
  * 我的持仓（持仓体检页 v1，2026-09-04）。
@@ -20,6 +20,8 @@ const TIPS = {
   qdii: "QDII = 投海外市场的基金（要外汇额度，申赎比普通基金慢几天）。你买的纳指、标普、全球科技基金都属于这类。",
   dingtou: "定投 = 系统里登记了该基金在自动定期买入（App 截图标注）。定投中的基金操作纪律 = 按计划继续投，不因涨跌停投。",
   verdict: "「系统怎么看」= 把系统用历史数据反复检验过的结论，翻译成大白话。它只做参考与纪律提示，不构成买卖指令；未验证区域会明确标注。",
+  top10: "季报穿透 = 基金公司每季度公布前十大持仓，按市场分类后统计。「占净值比例」指这些股票市值占基金总净值的比重——前十大通常只覆盖四到六成仓位，所以这是部分口径的真实暴露，不是全部。",
+  adviceStrength: "证据强度：已认证 = 多轮历史回测+对照检验过线的结论；候选 = 边界结论已验证、但用到你的组合上是新应用；观察 = 数据标注（如季报），不做交易依据；管理建议 = 纯打理常识，无回测依据。",
 };
 
 /** 环形图配色：8 组固定色，与分组卡片左侧色条一一对应。 */
@@ -89,6 +91,74 @@ function ReturnCell({ v }: { v: number | null }) {
   return <span className={cls}>{text}</span>;
 }
 
+/** 市场代码 -> 短名（与后端 MARKET_CN 一致的展示层映射） */
+const MARKET_SHORT: Record<string, string> = { cn: "A股", hk: "港股", us: "美股", other: "其他" };
+
+/** 一只基金的真实暴露 chips（前十大口径）。 */
+function ExposureChips({ h }: { h: PortfolioHolding }) {
+  if (h.top10_total_pct == null) return <span className="flat">—</span>;
+  const parts = Object.entries(h.top10_by_market_pct)
+    .filter(([, v]) => v >= 1)
+    .map(([m, v]) => `${MARKET_SHORT[m] ?? m}${Math.round(v)}%`);
+  return (
+    <span className="portfolio-expo" title={`季报 ${h.report_quarter}；前十大合计占净值 ${h.top10_total_pct}%`}>
+      {parts.join(" · ")}
+    </span>
+  );
+}
+
+/** 组级真实分布行：名义分组 vs 穿透后。 */
+function GroupRealShare({ share }: { share: Record<string, number> | null }) {
+  if (!share) return null;
+  const parts = Object.entries(share).map(([m, v]) => `${MARKET_SHORT[m] ?? m}${v.toFixed(0)}%`);
+  return (
+    <div className="portfolio-real-share">
+      <InfoTip tip={TIPS.top10}>真实分布</InfoTip>：{parts.join(" · ")}
+    </div>
+  );
+}
+
+/** 建议强度徽章配色。 */
+const STRENGTH_CLS: Record<string, string> = {
+  certified: "pos",
+  candidate: "imp",
+  observation: "mid",
+  management: "muted-chip",
+};
+
+function AdviceCard({ a }: { a: PortfolioAdvice }) {
+  return (
+    <div className={`card portfolio-advice-card ${a.strength}`}>
+      <div className="portfolio-advice-head">
+        <span className={`chip ${STRENGTH_CLS[a.strength] ?? ""}`} title={TIPS.adviceStrength}>
+          {a.strength_cn}
+        </span>
+        <span className="portfolio-advice-title">{a.title_cn}</span>
+      </div>
+      <p className="portfolio-advice-detail">{a.detail_cn}</p>
+      {a.evidence.length > 0 && (
+        <div className="portfolio-advice-evidence">
+          {a.evidence.map((e, i) => (
+            <span key={i} className="portfolio-advice-ev" title={e.ref}>
+              ✓ {e.label}
+            </span>
+          ))}
+        </div>
+      )}
+      {(a.trigger_cn || a.execution_cn) && (
+        <div className="portfolio-advice-actions">
+          {a.trigger_cn && a.trigger_cn !== "—" && (
+            <div><span className="portfolio-advice-k">时机</span>{a.trigger_cn}</div>
+          )}
+          {a.execution_cn && a.execution_cn !== "—" && (
+            <div><span className="portfolio-advice-k">执行</span>{a.execution_cn}</div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function GroupCard({ group, index }: { group: PortfolioGroup; index: number }) {
   return (
     <div className="card portfolio-group-card" style={{ borderLeft: `4px solid ${colorForGroup(index)}` }}>
@@ -117,6 +187,7 @@ function GroupCard({ group, index }: { group: PortfolioGroup; index: number }) {
         {group.verdict_basis && group.verdict_basis !== "—" && (
           <div className="portfolio-verdict-basis">依据：{group.verdict_basis}</div>
         )}
+        <GroupRealShare share={group.real_market_share} />
       </div>
 
       <table className="portfolio-table">
@@ -126,6 +197,9 @@ function GroupCard({ group, index }: { group: PortfolioGroup; index: number }) {
             <th>代码</th>
             <th className="num">金额（元）</th>
             <th className="num">持有收益率</th>
+            <th>
+              <InfoTip tip={TIPS.top10}>真实暴露</InfoTip>
+            </th>
             <th>标签</th>
           </tr>
         </thead>
@@ -141,6 +215,7 @@ function GroupCard({ group, index }: { group: PortfolioGroup; index: number }) {
                 <td className="flat">{h.code ?? "待补"}</td>
                 <td className="num">{h.market_value.toLocaleString("zh-CN", { minimumFractionDigits: 2 })}</td>
                 <td className={`num ${ret.cls}`}>{ret.text}</td>
+                <td><ExposureChips h={h} /></td>
                 <td>
                   {h.tags.map((t) => (
                     <span key={t} className="tag" title={t === "QDII" ? TIPS.qdii : t === "定投" ? TIPS.dingtou : undefined}>
@@ -227,6 +302,23 @@ export default function PortfolioPage() {
               <li key={i}>{o}</li>
             ))}
           </ul>
+        </div>
+      )}
+
+      {/* 调仓建议：R1~R7 规则引擎输出（判定在后端，页面只展示） */}
+      {data.advices.length > 0 && (
+        <div className="portfolio-advice-section">
+          <div className="section-title">
+            <h2 style={{ fontSize: 15 }}>调仓建议</h2>
+            <span className="count">
+              按优先级排序 · {data.advices.length} 条 · 建议级非指令，采纳与否你拍板
+            </span>
+          </div>
+          <div className="portfolio-advice-grid">
+            {data.advices.map((a) => (
+              <AdviceCard key={a.advice_id} a={a} />
+            ))}
+          </div>
         </div>
       )}
 
