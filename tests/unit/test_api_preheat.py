@@ -13,7 +13,9 @@ from zoneinfo import ZoneInfo
 from lei_signal.api.preheat import (
     INDEX_INTERVAL,
     INTRADAY_INTERVAL,
+    OVERSEAS_INTERVAL,
     PreheatState,
+    _overseas_watchlist_symbols,
     due_actions,
     preheat_allowed,
 )
@@ -136,3 +138,50 @@ def test_preheat_allowed_env_switch() -> None:
     assert preheat_allowed({})
     assert not preheat_allowed({"LEI_PREHEAT_DISABLED": "1"})
     assert not preheat_allowed({"LEI_PREHEAT_DISABLED": "true"})
+
+
+def test_overseas_refreshed_off_hours_when_stale() -> None:
+    """非盘中时段非 A 股自选按自身间隔保温（夜间美股盘中也要命中缓存）。"""
+    now = sh_dt(*TUE, 20, 0)
+    stale = PreheatState(
+        full=now - timedelta(hours=3),
+        index=now - timedelta(minutes=5),
+        overseas=now - OVERSEAS_INTERVAL - timedelta(minutes=1),
+    )
+    fresh = PreheatState(
+        full=now - timedelta(hours=3),
+        index=now - timedelta(minutes=5),
+        overseas=now - timedelta(minutes=5),
+    )
+    assert "overseas" in due_actions(stale, now=now, calendar=CALENDAR)
+    assert "overseas" not in due_actions(fresh, now=now, calendar=CALENDAR)
+
+
+def test_overseas_cold_state_refreshes_off_hours() -> None:
+    """overseas 时钟从未设置时，非盘中首个 tick 即保温（含 launchd 重启后）。"""
+    now = sh_dt(*TUE, 22, 0)
+    state = PreheatState(full=now - timedelta(minutes=30), index=now - timedelta(minutes=5))
+    assert "overseas" in due_actions(state, now=now, calendar=CALENDAR)
+
+
+def test_overseas_skipped_when_full_due() -> None:
+    """全量刷新覆盖非 A 股自选，同 tick 不重复刷。"""
+    now = sh_dt(*TUE, 10, 0)
+    state = PreheatState(
+        full=now - INTRADAY_INTERVAL - timedelta(minutes=1),
+        index=now - INDEX_INTERVAL - timedelta(minutes=1),
+        overseas=now - OVERSEAS_INTERVAL - timedelta(minutes=1),
+    )
+    due = due_actions(state, now=now, calendar=CALENDAR)
+    assert "full" in due
+    assert "overseas" not in due
+
+
+def test_overseas_symbol_selection_filters_a_share_and_indices() -> None:
+    """保温清单只留非 A 股自选：剔除 A 股 ETF 与默认大盘指数组。"""
+
+    def symbols_fn() -> list[str]:
+        return ["000001.SS", "^GSPC", "SOXX", "159652.SZ", "TH881272.SECTOR"]
+
+    selected = _overseas_watchlist_symbols(symbols_fn)
+    assert selected == ["SOXX", "TH881272.SECTOR"]

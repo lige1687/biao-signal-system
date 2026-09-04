@@ -17,7 +17,9 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from lei_signal.api import config
+from lei_signal.api.factor_service import FactorPanelService
 from lei_signal.api.market_context_service import MarketContextService
+from lei_signal.api.preheat import default_symbols_fn, start_preheat
 from lei_signal.api.routes import (
     agent,
     backtest,
@@ -36,11 +38,9 @@ from lei_signal.api.routes import (
     watch_subscriptions,
     watchlist,
 )
-from lei_signal.api.preheat import default_symbols_fn, start_preheat
+from lei_signal.api.sectors_service import SectorsService
 from lei_signal.api.services import AnalysisService
 from lei_signal.env import load_env
-from lei_signal.api.sectors_service import SectorsService
-from lei_signal.api.factor_service import FactorPanelService
 from lei_signal.fundamentals.service import FundamentalsService
 from lei_signal.newsfeed.service import NewsfeedService
 
@@ -79,6 +79,13 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+        # 放行局域网 origin：手机/平板同 WiFi 经 http://<局域网IP>:8000 直连
+        # 静态站或 :5173 dev server 访问 API（IPv4 私网段，任意端口）。
+        allow_origin_regex=(
+            r"^https?://(localhost|127\.0\.0\.1|192\.168\.\d{1,3}\.\d{1,3}"
+            r"|10\.\d{1,3}\.\d{1,3}\.\d{1,3}"
+            r"|172\.(1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3})(:\d+)?$"
+        ),
         allow_methods=["GET", "POST", "PATCH", "DELETE"],
         allow_headers=["*"],
     )

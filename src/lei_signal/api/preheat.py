@@ -19,8 +19,13 @@ KeepAlive 重启后缓存清零，同样由重启后的首个请求买单。
   全量 ≥12 分钟则强刷。12 < 15 分钟 TTL，缓存永不过期，任何时刻打开都命中；
 - **交易日收盘窗** 15:00–15:20：距上次 ≥5 分钟则补刷收盘最终 bar。此后
   A 股条目由时段感知新鲜度直接持有到次日开盘，不再重复拉；
-- **其余时段**（收盘后/夜间/周末）：仅默认大盘指数组按 12 分钟间隔强刷。
+- **其余时段**（收盘后/夜间/周末）：默认大盘指数组按 12 分钟间隔强刷。
   海外指数夜里仍在交易，走「磁盘缓存 + 实时叠加」链路，开销低；
+- **非 A 股自选保温**（其余时段生效）：自选里的非 A 股标的（美股 ETF /
+  板块代理）走 900s 扁平 TTL，夜间（美股盘中）过期后首个用户请求要
+  现场等一轮抓取（Yahoo 慢/限流时可达分钟级）。故按 12 分钟后台保温，
+  同样 12 < 15 分钟 TTL，任何时刻打开都命中缓存。A 股自选收盘后数据
+  不变，由时段感知新鲜度持有到次日开盘，不在此档重复拉；
 - **基本面**：每天 15:35 之后刷一次（距上次 ≥11h），或距上次 ≥20h 兜底。
   配合 fundamentals TTL 放宽到 12–24h，页面全天命中缓存。
 
@@ -36,11 +41,13 @@ import threading
 import time
 from collections.abc import Callable
 from dataclasses import dataclass, field
-from datetime import UTC, datetime, time as dtime, timedelta
+from datetime import UTC, datetime, timedelta
+from datetime import time as dtime
 
 from lei_signal.api import config, session
 from lei_signal.api.routes.dashboard import dashboard_symbols
 from lei_signal.data.calendar import DEFAULT_TRADING_CALENDAR, TradingCalendar
+from lei_signal.data.symbols import is_a_share, resolve_symbol
 
 logger = logging.getLogger(__name__)
 
@@ -51,6 +58,9 @@ INTRADAY_INTERVAL = timedelta(minutes=12)
 CLOSING_INTERVAL = timedelta(minutes=5)
 #: 非盘中时段指数组刷新间隔（同样略小于海外指数的 15 分钟扁平 TTL）。
 INDEX_INTERVAL = timedelta(minutes=12)
+#: 非 A 股自选（美股 ETF / 板块代理）保温间隔。必须 < 900s 扁平 TTL：这些
+#: 标的夜间（美股盘中）过期后，首个用户请求会同步等一轮现场抓取。
+OVERSEAS_INTERVAL = timedelta(minutes=12)
 #: 基本面每日锚点：收盘数据（两融/国债等）落地后刷新。
 FUNDAMENTALS_PIN = dtime(15, 35)
 #: 基本面固定时刻触发的最小年龄（避免 20h 兜底刚刷过又重复刷）。
@@ -61,7 +71,8 @@ FUNDAMENTALS_MAX_AGE = timedelta(hours=20)
 #: 调度重算周期。60s 足够（间隔以分钟计），且睡眠唤醒后能立即自愈。
 _TICK_SECONDS = 60.0
 
-#: 刷新范围。full = 默认大盘 + 自选全量；index = 仅默认大盘；fundamentals = 基本面。
+#: 刷新范围。full = 默认大盘 + 自选全量；index = 仅默认大盘；
+#: overseas = 仅非 A 股自选（非盘中保温档）；fundamentals = 基本面。
 Scope = str
 
 _CLOSING_WINDOW_END = dtime(15, 20)
@@ -73,6 +84,7 @@ class PreheatState:
 
     full: datetime | None = None
     index: datetime | None = None
+    overseas: datetime | None = None
     fundamentals: datetime | None = None
     lock: threading.Lock = field(default_factory=threading.Lock, repr=False)
 
@@ -82,8 +94,8 @@ def due_actions(
 ) -> list[Scope]:
     """计算当前时刻应刷新的范围（纯函数，不执行抓取）。
 
-    返回顺序稳定：full → index → fundamentals。full 已 due 时 index 跳过
-    （全量覆盖指数组）。
+    返回顺序稳定：full → index → overseas → fundamentals。full 已 due 时
+    index/overseas 跳过（全量覆盖指数组与非 A 股自选）。
     """
     calendar = calendar or DEFAULT_TRADING_CALENDAR
     now = now or datetime.now(UTC)
@@ -109,6 +121,10 @@ def due_actions(
         if age_index is None or age_index >= INDEX_INTERVAL:
             due.append("index")
 
+        age_overseas = None if state.overseas is None else now - state.overseas
+        if age_overseas is None or age_overseas >= OVERSEAS_INTERVAL:
+            due.append("overseas")
+
     age_fund = None if state.fundamentals is None else now - state.fundamentals
     if (
         age_fund is None
@@ -123,7 +139,7 @@ def due_actions(
 def preheat_allowed(env: dict[str, str] | None = None) -> bool:
     """外部开关：LEI_PREHEAT_DISABLED 为真值时关闭预热线程。"""
     env = env if env is not None else os.environ
-    return not env.get("LEI_PREHEAT_DISABLED", "").lower() in ("1", "true", "yes")
+    return env.get("LEI_PREHEAT_DISABLED", "").lower() not in ("1", "true", "yes")
 
 
 def default_symbols_fn(db_path: str) -> Callable[[], list[str]]:
@@ -147,6 +163,34 @@ def _refresh_full(
 def _refresh_index(analysis_service: object) -> list[str]:
     symbols = [idx.symbol for idx in config.DASHBOARD_INDICES]
     analysis_service.get_many(symbols, refresh=True)  # type: ignore[attr-defined]
+    return symbols
+
+
+def _is_overseas(symbol: str) -> bool:
+    """是否非 A 股标的（美股 ETF / 海外指数 / 板块代理）。解析失败视为否。"""
+    try:
+        return not is_a_share(resolve_symbol(symbol))
+    except ValueError:
+        return False
+
+
+def _overseas_watchlist_symbols(symbols_fn: Callable[[], list[str]]) -> list[str]:
+    """非 A 股自选清单：默认大盘 + 自选里剔除 A 股与指数组（指数组由 index 档覆盖）。"""
+    index_symbols = {idx.symbol for idx in config.DASHBOARD_INDICES}
+    return [s for s in symbols_fn() if s not in index_symbols and _is_overseas(s)]
+
+
+def _refresh_overseas(
+    analysis_service: object, symbols_fn: Callable[[], list[str]]
+) -> list[str]:
+    """非盘中保温档：只刷非 A 股自选（美股 ETF / 板块代理）。
+
+    这些标的走 900s 扁平 TTL，夜间（美股盘中）过期后首个用户请求要现场
+    等一轮抓取（Yahoo 慢/限流时可达分钟级），由后台按间隔保温后秒开。
+    """
+    symbols = _overseas_watchlist_symbols(symbols_fn)
+    if symbols:
+        analysis_service.get_many(symbols, refresh=True)  # type: ignore[attr-defined]
     return symbols
 
 
@@ -174,13 +218,17 @@ def _run_loop(
                 started = time.monotonic()
                 if scope == "full":
                     symbols = _refresh_full(analysis_service, symbols_fn)
-                    # 全量覆盖指数组：index 时钟一并归零，收盘后无缝接续。
+                    # 全量覆盖指数组与非 A 股自选：两个时钟一并归零。
                     with state.lock:
-                        state.full = state.index = now
+                        state.full = state.index = state.overseas = now
                 elif scope == "index":
                     symbols = _refresh_index(analysis_service)
                     with state.lock:
                         state.index = now
+                elif scope == "overseas":
+                    symbols = _refresh_overseas(analysis_service, symbols_fn)
+                    with state.lock:
+                        state.overseas = now
                 else:
                     _refresh_fundamentals(fundamentals_service)
                     symbols = []
@@ -242,6 +290,7 @@ __all__ = [
     "FUNDAMENTALS_PIN_MIN_AGE",
     "INDEX_INTERVAL",
     "INTRADAY_INTERVAL",
+    "OVERSEAS_INTERVAL",
     "PreheatState",
     "default_symbols_fn",
     "due_actions",

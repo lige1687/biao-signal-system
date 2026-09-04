@@ -121,7 +121,7 @@ def build_clusters(b: pd.DataFrame, thr: tuple[float, float]):
 
 def measure(px: pd.Series, i: int) -> dict:
     c0 = float(px.iloc[i])
-    n_fwd = len(px) - 1 - i
+    n_fwd = len(px) - 1 - int(i)
     lim = min(CENSOR, n_fwd)
     row = {"n_fwd": n_fwd}
     for key, lvl in DEPTHS.items():

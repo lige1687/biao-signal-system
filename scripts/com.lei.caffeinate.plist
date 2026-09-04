@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.lei.caffeinate</string>
+
+    <!-- 看板 7x24 可达的前提：阻止系统闲置睡眠。
+         -i 阻止闲置睡眠，-m 阻止磁盘睡眠（屏幕仍可正常熄灭，不影响网络服务）。
+         注意：MacBook 合盖仍会睡眠，需保持开盖（或外接电源+外接显示器）。
+         停用：launchctl bootout gui/$(id -u)/com.lei.caffeinate -->
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/caffeinate</string>
+        <string>-ims</string>
+    </array>
+
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+</dict>
+</plist>
