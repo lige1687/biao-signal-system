@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { api } from "../../api/client";
 import type {
@@ -236,4 +236,61 @@ export function CopilotCardDispatcher({
   if (card.card_type === "review")
     return <ReviewCardView review={card.data as ReviewCard} />;
   return null;
+}
+
+/** 基金台账区（持仓页挂载）：真实成交 + 持仓盈亏速览。 */
+export function TradesLedgerView() {
+  const q = useQuery({
+    queryKey: ["copilotTrades"],
+    queryFn: () => api.copilotTrades(),
+  });
+  if (q.isLoading) return <div className="muted">台账加载中…</div>;
+  if (q.isError) return <div className="cp-error">台账加载失败</div>;
+  const { trades, positions } = q.data ?? { trades: [], positions: [] };
+  return (
+    <div className="cp-card">
+      <div className="cp-label">
+        基金台账（真实成交 · 确认后记账 · 按报单日净值定价）
+      </div>
+      {positions.length > 0 && (
+        <div className="cp-section">
+          <div className="cp-sub">持仓与盈亏</div>
+          {positions.map((p) => (
+            <div key={p.fund_code} className="cp-row">
+              <span className="cp-sym">{p.fund_name}（{p.fund_code}）</span>
+              <span className="muted">
+                份额 {p.shares.toFixed(2)} · 成本 {p.cost.toFixed(0)} 元
+                {p.market_value != null && <> · 现值 {p.market_value.toFixed(0)} 元</>}
+                {p.unrealized_pnl != null && (
+                  <> · 浮动 {p.unrealized_pnl >= 0 ? "+" : ""}{p.unrealized_pnl.toFixed(0)}</>
+                )}
+                {p.realized_pnl !== 0 && (
+                  <> · 已实现 {p.realized_pnl >= 0 ? "+" : ""}{p.realized_pnl.toFixed(0)} 元</>
+                )}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+      <div className="cp-section">
+        <div className="cp-sub">成交记录</div>
+        {trades.length === 0 && (
+          <div className="muted">
+            还没有记录。对 agent 说「我买了1万012414」即可报单。
+          </div>
+        )}
+        {trades.map((t) => (
+          <div key={t.trade_id} className="cp-row">
+            <span>{t.trade_date}</span>
+            <span className="cp-sym">{t.fund_name}</span>
+            <span>{t.side_cn} {t.amount.toFixed(0)} 元</span>
+            <span className="muted">
+              {t.price_status_cn}
+              {t.priced_nav != null && ` @${t.priced_nav.toFixed(4)}`}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
