@@ -2940,6 +2940,51 @@ a { color: var(--accent); text-decoration: none; }
   background: rgba(210, 74, 67, 0.14);
   color: #d24a43;
 }
+
+/* 右栏「散户热度榜」卡片：风险区/机会区双段 */
+.sx-heat-zone {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0 3px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.sx-heat-zone.risk {
+  background: rgba(210, 74, 67, 0.1);
+  color: #d24a43;
+}
+.sx-heat-zone.opp {
+  background: rgba(77, 127, 196, 0.1);
+  color: #4d7fc4;
+}
+.sx-heat-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 8px;
+  border: 0;
+  background: none;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: left;
+}
+.sx-heat-row:hover { background: rgba(0, 0, 0, 0.04); }
+.sx-heat-row .sx-heat-name { display: flex; align-items: center; gap: 5px; }
+.sx-heat-row .sx-heat-name em {
+  font-style: normal;
+  font-size: 10px;
+  color: var(--text-faint);
+}
+.sx-heat-row .sx-heat-val {
+  font-weight: 700;
+  color: #b45309;
+  font-variant-numeric: tabular-nums;
+}
+.sx-heat-row.warn .sx-heat-val { color: #d24a43; }
+.sx-heat-row.cold .sx-heat-val { color: #4d7fc4; }
 .flow-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

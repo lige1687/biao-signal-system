@@ -77,6 +77,7 @@ class TestCrossSectionPctile:
 class TestHeatState:
     CFG = {
         "hot_pctile": 90.0,
+        "cold_pctile": 10.0,
         "warn_stages": ("markup", "distribution"),
     }
 
@@ -88,6 +89,15 @@ class TestHeatState:
         assert rh.heat_state(95.0, None, self.CFG)["warning"] is False
         assert rh.heat_state(50.0, "markup", self.CFG)["hot"] is False
         assert rh.heat_state(None, "markup", self.CFG)["hot"] is False
+
+    def test_cold_zone(self):
+        s = rh.heat_state(5.0, "decline", self.CFG)
+        assert s["cold"] is True and s["hot"] is False and s["warning"] is False
+        assert "散户冰点" in (s["note_cn"] or "")
+        assert rh.heat_state(50.0, "markup", self.CFG)["cold"] is False
+        # 中性区间既不过热也不过冷
+        mid = rh.heat_state(50.0, None, self.CFG)
+        assert mid["hot"] is False and mid["cold"] is False
 
 
 class TestHeatConfig:

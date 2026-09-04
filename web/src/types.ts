@@ -1449,7 +1449,8 @@ export interface SectorTrendRow {
   // 散户热度（资金面路牌预警，research_proxy；口径与阈值登记 rules.v2.yaml retail_heat 段）
   heat_value: number | null; // 口径 20 日均值（小单−超大单分化 / 市值，无量纲）
   heat_pctile: number | null; // 当日全部有效板块横截面分位 0-100（平均秩）
-  heat_hot: boolean; // 分位 ≥ 阈值（过热区）
+  heat_hot: boolean; // 风险区：分位 ≥ hot_pctile（散户狂买·超大单派发）
+  heat_cold: boolean; // 机会区：分位 ≤ cold_pctile（散户割肉·超大单吸筹）
   heat_warning: boolean; // 过热 × 阶段 ∈ {上升, 派发} 的情境化警示
   heat_note_cn: string | null;
   provenance: "research_proxy";
@@ -1461,6 +1462,7 @@ export interface SectorHeatMeta {
   metric_label_cn: string;
   window_days: number;
   hot_pctile: number;
+  cold_pctile: number | null;
   warn_stages: string[];
   rule_version: string;
   n_valid: number;

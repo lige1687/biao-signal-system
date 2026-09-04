@@ -8,6 +8,7 @@ import { fmt, fmtYi, pctClass } from "../utils/format";
 import ColorBadge from "../components/ColorBadge";
 import OverlayChart, { type OverlaySeries } from "../components/trend/OverlayChart";
 import type {
+  SectorHeatMeta,
   SectorTrendRow,
   SectorHistoryPoint,
   SectorMembersResponse,
@@ -64,16 +65,37 @@ const LEVEL_MODES: { key: LevelMode; label: string; tip: string }[] = [
 
 /**
  * 重点板块种子清单（「重点+自选」视图 = 种子 ∪ ★自选；星标即可增删）。
- * 2026-09-05 用户指定：通信、半导体、创新药、有色。
- * 「创新药」是东财概念板块，不在行业体系（t:2），以行业近似：化学制药/生物制品/医药生物。
+ * 构成（2026-09-05 用户确认）：当前主流热门方向 + 持仓相关赛道
+ * （cn_info 信息产业/半导体/AI、cn_metal 有色、cn_green_other 绿电；见 portfolio_groups）。
+ * 「创新药」是东财概念板块不在行业体系，以 化学制药/生物制品/医药生物 近似；
+ * 港股恒生科技持仓：资金流接口不覆盖港股，热度榜不含，另有行情页参考。
  */
 const FOCUS_SEED: { code: string; note?: string }[] = [
-  { code: "BK1215", note: "通信（L1）" },
-  { code: "BK1036", note: "半导体（L2）" },
-  { code: "BK0465", note: "化学制药（创新药近似）" },
-  { code: "BK1044", note: "生物制品（创新药近似）" },
-  { code: "BK1216", note: "医药生物（L1）" },
-  { code: "BK0478", note: "有色金属（L1）" },
+  // 科技 / AI 主线（热门 + cn_info 持仓）
+  { code: "BK1215", note: "通信 L1" },
+  { code: "BK0448", note: "通信设备 L2" },
+  { code: "BK1201", note: "电子 L1" },
+  { code: "BK1036", note: "半导体 L2" },
+  { code: "BK1207", note: "计算机 L1" },
+  { code: "BK1037", note: "消费电子 L2" },
+  { code: "BK1038", note: "光学光电子 L2" },
+  // 医药（用户点名：创新药 → 行业近似）
+  { code: "BK1216", note: "医药生物 L1" },
+  { code: "BK0465", note: "化学制药 L2（创新药近似）" },
+  { code: "BK1044", note: "生物制品 L2（创新药近似）" },
+  // 周期 / 资源（热门 + cn_metal 持仓）
+  { code: "BK0478", note: "有色金属 L1" },
+  { code: "BK0732", note: "贵金属 L2" },
+  { code: "BK1617", note: "黄金 L3" },
+  { code: "BK1015", note: "能源金属 L2" },
+  // 绿电 / 新能源（cn_green_other 持仓）
+  { code: "BK1200", note: "电力设备 L1" },
+  { code: "BK1033", note: "电池 L2" },
+  { code: "BK0427", note: "公用事业 L1" },
+  // 大金融 / 军工（热门）
+  { code: "BK0473", note: "证券 L2" },
+  { code: "BK1283", note: "银行 L1" },
+  { code: "BK1204", note: "国防军工 L1" },
 ];
 const FOCUS_CODES = new Set(FOCUS_SEED.map((x) => x.code));
 
@@ -495,8 +517,10 @@ export default function SectorsPage() {
           </div>
         </div>
 
-        {/* ── 轮动层：RRG + 动能榜 + 今日观察（随主表级别口径联动）── */}
+        {/* ── 右栏：散户热度榜 + 轮动 RRG + 动能榜 + 今日观察（sticky）── */}
         <aside className="sx-rail">
+          <HeatBoardCard rows={rows} heat={data?.heat} onPick={pickByCode} />
+
           <section className="sx-rail-card">
             <div className="sx-rail-head">
               <span className="sx-rail-title">轮动 RRG</span>
@@ -533,6 +557,93 @@ export default function SectorsPage() {
       )}
       {membersCode && <MembersDrawer code={membersCode} onClose={() => setMembersCode(null)} />}
     </div>
+  );
+}
+
+// ── 散户热度榜：全板块视角，风险区/机会区双段 ────────────────────────────────
+// 阈值来自规则账本（快照 heat meta），当前为回测校准前的占位刻度：
+// 风险线=散户狂买·超大单派发；机会线=散户割肉·超大单吸筹（反向关注）。
+function HeatBoardCard({
+  rows,
+  heat,
+  onPick,
+}: {
+  rows: SectorTrendRow[];
+  heat: SectorHeatMeta | undefined | null;
+  onPick: (code: string) => void;
+}) {
+  const valid = rows.filter((b) => b.heat_pctile != null);
+  return (
+    <section className="sx-rail-card">
+      <div className="sx-rail-head">
+        <span className="sx-rail-title">散户热度榜</span>
+        <span className="sx-rail-sub">
+          {heat ? `${heat.window_days}日 · 小单−超大单分化` : "小单−超大单分化"}
+        </span>
+      </div>
+      {!heat || valid.length < 20 ? (
+        <div className="watch-empty">
+          数据累积中（热度需连续 20 个交易日资金流，覆盖 {valid.length}/{rows.length} 板块）
+        </div>
+      ) : (
+        <>
+          <div className="sx-heat-zone risk">
+            风险区 ≥{heat.hot_pctile.toFixed(0)}：散户狂买 · 超大单派发
+          </div>
+          {valid
+            .filter((b) => b.heat_hot)
+            .sort((a, b) => (b.heat_pctile ?? 0) - (a.heat_pctile ?? 0))
+            .slice(0, 10)
+            .map((b) => (
+              <button
+                key={b.code}
+                className={`sx-heat-row${b.heat_warning ? " warn" : ""}`}
+                onClick={() => onPick(b.code)}
+                title={b.heat_note_cn ?? `散户热度分位 ${b.heat_pctile}（research_proxy）`}
+              >
+                <span className="sx-heat-name">
+                  <i
+                    className="sx-lei-dot"
+                    style={{ background: b.stage ? STAGE_HEX[b.stage] : "#9aa4b2" }}
+                  />
+                  {b.name}
+                  <em>L{b.level}</em>
+                </span>
+                <span className="sx-heat-val">{b.heat_pctile?.toFixed(0)}</span>
+              </button>
+            ))}
+          <div className="sx-heat-zone opp">
+            机会区 ≤{(heat.cold_pctile ?? 0).toFixed(0)}：散户割肉 · 超大单吸筹
+          </div>
+          {valid
+            .filter((b) => b.heat_cold)
+            .sort((a, b) => (a.heat_pctile ?? 100) - (b.heat_pctile ?? 100))
+            .slice(0, 8)
+            .map((b) => (
+              <button
+                key={b.code}
+                className="sx-heat-row cold"
+                onClick={() => onPick(b.code)}
+                title={b.heat_note_cn ?? `散户热度分位 ${b.heat_pctile}（research_proxy）`}
+              >
+                <span className="sx-heat-name">
+                  <i
+                    className="sx-lei-dot"
+                    style={{ background: b.stage ? STAGE_HEX[b.stage] : "#9aa4b2" }}
+                  />
+                  {b.name}
+                  <em>L{b.level}</em>
+                </span>
+                <span className="sx-heat-val">{b.heat_pctile?.toFixed(0)}</span>
+              </button>
+            ))}
+          <div className="muted" style={{ fontSize: 11, marginTop: 6 }}>
+            覆盖 {heat.n_valid} 板块 · research_proxy（只预警非买卖点，阈值回测校准中）·
+            港股（恒生科技等）资金流不覆盖
+          </div>
+        </>
+      )}
+    </section>
   );
 }
 

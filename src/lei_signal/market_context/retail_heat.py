@@ -58,6 +58,7 @@ def heat_config() -> dict:
         "metric": "diverge",
         "window_days": 20,
         "hot_pctile": 90.0,
+        "cold_pctile": 10.0,
         "warn_stages": ("markup", "distribution"),
     }
     try:
@@ -66,6 +67,7 @@ def heat_config() -> dict:
             "metric": rule.param("metric", defaults["metric"]),
             "window_days": int(rule.param("window_days", defaults["window_days"])),
             "hot_pctile": float(rule.param("hot_pctile", defaults["hot_pctile"])),
+            "cold_pctile": float(rule.param("cold_pctile", defaults["cold_pctile"])),
             "warn_stages": tuple(rule.param("warn_stages", list(defaults["warn_stages"]))),
             "version": rule.version,
         }
@@ -131,8 +133,14 @@ def cross_section_pctile(value: float | None, values: list[float]) -> float | No
 def heat_state(
     heat_pctile: float | None, stage: str | None, cfg: dict
 ) -> dict:
-    """由分位 + 阶段得出热度档与情境化警示（只标注，不构成买卖点）。"""
-    out = {"hot": False, "warning": False, "note_cn": None}
+    """由分位 + 阶段得出热度档与情境化警示（只标注，不构成买卖点）。
+
+    - hot（风险区）：分位 ≥ hot_pctile——散户狂买·超大单派发；
+      其中阶段 ∈ warn_stages 时升级为 warning（情境化警示）。
+    - cold（机会区）：分位 ≤ cold_pctile——散户割肉·超大单吸筹，
+      反向关注信号（有效性由回测校准，页面标注研究代理）。
+    """
+    out = {"hot": False, "cold": False, "warning": False, "note_cn": None}
     if heat_pctile is None:
         return out
     if heat_pctile >= cfg["hot_pctile"]:
@@ -144,4 +152,10 @@ def heat_state(
                 f"散户过热（热度分位 {heat_pctile:.0f}）× {stage_cn}阶段："
                 "小单涌入、超大单派发的路牌预警（研究代理，非买卖点）"
             )
+    elif heat_pctile <= cfg.get("cold_pctile", 0.0):
+        out["cold"] = True
+        out["note_cn"] = (
+            f"散户冰点（热度分位 {heat_pctile:.0f}）：小单割肉、超大单吸筹的"
+            "反向关注区（研究代理，机会含义待回测校准）"
+        )
     return out

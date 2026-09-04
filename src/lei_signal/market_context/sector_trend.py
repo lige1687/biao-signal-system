@@ -1186,6 +1186,7 @@ def build_snapshot(
             "heat_value": None,
             "heat_pctile": None,
             "heat_hot": False,
+            "heat_cold": False,
             "heat_warning": False,
             "heat_note_cn": None,
             "up_count": ref.get("up_count"),
@@ -1279,6 +1280,7 @@ def build_snapshot(
         state = retail_heat.heat_state(pct, row.get("stage"), heat_cfg)
         row["heat_pctile"] = pct
         row["heat_hot"] = state["hot"]
+        row["heat_cold"] = state["cold"]
         row["heat_warning"] = state["warning"]
         row["heat_note_cn"] = state["note_cn"]
 
@@ -1298,6 +1300,7 @@ def build_snapshot(
             "metric_label_cn": retail_heat.METRIC_LABELS.get(heat_cfg["metric"]),
             "window_days": heat_cfg["window_days"],
             "hot_pctile": heat_cfg["hot_pctile"],
+            "cold_pctile": heat_cfg.get("cold_pctile"),
             "warn_stages": list(heat_cfg["warn_stages"]),
             "rule_version": heat_cfg["version"],
             "n_valid": len(heat_vals),
