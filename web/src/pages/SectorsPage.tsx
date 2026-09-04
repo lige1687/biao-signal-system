@@ -53,13 +53,29 @@ type SortKey =
   | "heat_pctile"
   | "pe_ttm";
 
-/** 级别筛选：仅 L1（31 个一级行业）/ 含二级 / 全部层级。 */
-type LevelMode = "l1" | "l2" | "all";
+/** 级别筛选：仅 L1（31 个一级行业）/ 含二级 / 全部层级 / 重点+自选。 */
+type LevelMode = "l1" | "l2" | "all" | "focus";
 const LEVEL_MODES: { key: LevelMode; label: string; tip: string }[] = [
-  { key: "l1", label: "仅L1", tip: "31 个一级行业，信号最干净（默认）" },
+  { key: "focus", label: "重点+自选", tip: "重点板块清单 ∪ ★自选：只看自己关注的方向（推荐）" },
+  { key: "l1", label: "仅L1", tip: "31 个一级行业，信号最干净" },
   { key: "l2", label: "含二级", tip: "加二级行业细分，看轮动更细" },
   { key: "all", label: "全部层级", tip: "含三级概念板块（噪声多，慎用）" },
 ];
+
+/**
+ * 重点板块种子清单（「重点+自选」视图 = 种子 ∪ ★自选；星标即可增删）。
+ * 2026-09-05 用户指定：通信、半导体、创新药、有色。
+ * 「创新药」是东财概念板块，不在行业体系（t:2），以行业近似：化学制药/生物制品/医药生物。
+ */
+const FOCUS_SEED: { code: string; note?: string }[] = [
+  { code: "BK1215", note: "通信（L1）" },
+  { code: "BK1036", note: "半导体（L2）" },
+  { code: "BK0465", note: "化学制药（创新药近似）" },
+  { code: "BK1044", note: "生物制品（创新药近似）" },
+  { code: "BK1216", note: "医药生物（L1）" },
+  { code: "BK0478", note: "有色金属（L1）" },
+];
+const FOCUS_CODES = new Set(FOCUS_SEED.map((x) => x.code));
 
 const STAGE_FILTERS: { key: string | null; label: string; tip: string }[] = [
   { key: null, label: "全部阶段", tip: "不按阶段筛选" },
@@ -89,7 +105,7 @@ export default function SectorsPage() {
   const [sortKey, setSortKey] = useState<SortKey>("rs_pctile");
   const [sortAsc, setSortAsc] = useState(false);
   const [keyword, setKeyword] = useState("");
-  const [levelMode, setLevelMode] = useState<LevelMode>("l1");
+  const [levelMode, setLevelMode] = useState<LevelMode>("focus");
   const [stageFilter, setStageFilter] = useState<string | null>(null);
   const [onlyStars, setOnlyStars] = useState(false);
   const [stars, setStars] = useState<string[]>(loadStars);
@@ -118,9 +134,15 @@ export default function SectorsPage() {
   const levelRows = useMemo(
     () =>
       rows.filter((b) =>
-        levelMode === "l1" ? b.level === 1 : levelMode === "l2" ? b.level <= 2 : true,
+        levelMode === "focus"
+          ? FOCUS_CODES.has(b.code) || stars.includes(b.code)
+          : levelMode === "l1"
+            ? b.level === 1
+            : levelMode === "l2"
+              ? b.level <= 2
+              : true,
       ),
-    [rows, levelMode],
+    [rows, levelMode, stars],
   );
 
   const visibleRows = useMemo(() => {

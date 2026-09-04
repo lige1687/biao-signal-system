@@ -195,7 +195,7 @@ def daily_diff_stats(trigger: pd.DataFrame, fwd: pd.DataFrame, *,
         d_down.append(float((f[m] < 0).mean() - (f[nb] < 0).mean()))
         d_ret.append(float(f[m].mean() - f[nb].mean()))
         n_trig.append(int(m.sum()))
-    if len(d_down) < 15:
+    if len(d_down) < (15 if min_trig >= 5 else 5):
         return None
     d_down = np.array(d_down)
     d_ret = np.array(d_ret)
@@ -233,6 +233,9 @@ def main() -> int:
     ap.add_argument("--bootstrap", type=int, default=1000)
     ap.add_argument("--min-valid", type=int, default=200,
                     help="当日有效板块数低于该值不计横截面（回填不满时可临时调低自检管道）")
+    ap.add_argument("--focus", type=str, default="",
+                    help="重点板块专项统计（BK 代码逗号分隔，如 BK1215,BK1036）。"
+                         "横截面分位仍用全板块口径，专项只额外输出该子集的触发统计")
     args = ap.parse_args()
     windows = [int(x) for x in args.windows.split(",")]
     horizons = [int(x) for x in args.horizons.split(",")]
@@ -263,16 +266,26 @@ def main() -> int:
     cold_base = {k: (v <= (1.0 - args.pctile)) for k, v in rank_panels.items()}
 
     results = []
+    focus_codes = [c.strip() for c in args.focus.split(",") if c.strip()]
+    focus_mask = None
+    if focus_codes:
+        cols = [c for c in focus_codes if c in close.columns]
+        focus_mask = pd.DataFrame(False, index=close.index, columns=close.columns)
+        focus_mask[cols] = True
+        print(f"重点板块专项: {len(cols)}/{len(focus_codes)} 个在面板中: {cols}")
     for (m, w), hot in hot_base.items():
         for h in horizons:
             fwd = (close.shift(-h) / close - 1.0).iloc[:-h]
             fwd = fwd.where(fwd.notna() & (fwd != 0))
-            for name, trig in (
-                ("hot", hot),
-                ("hot+ctx", hot & ctx_ok.reindex_like(hot).fillna(False)),
-                ("cold", cold_base[(m, w)]),
-            ):
-                st_ = daily_diff_stats(trig, fwd, bootstrap=args.bootstrap)
+            triggers = [("hot", hot, 5, 20),
+                        ("hot+ctx", hot & ctx_ok.reindex_like(hot).fillna(False), 5, 20),
+                        ("cold", cold_base[(m, w)], 5, 20)]
+            if focus_mask is not None:
+                # 重点子集板块数少，放宽门槛为描述性参考（统计功效低，不作显著性结论）
+                triggers.append(("hot·重点子集", hot & focus_mask, 1, 1))
+            for name, trig, min_t, min_b in triggers:
+                st_ = daily_diff_stats(trig, fwd, min_trig=min_t, min_base=min_b,
+                                       bootstrap=args.bootstrap)
                 if st_ is None:
                     continue
                 p_trig, p_base = raw_rates(trig, fwd)
