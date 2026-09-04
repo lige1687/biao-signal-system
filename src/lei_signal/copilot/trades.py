@@ -12,8 +12,8 @@ from __future__ import annotations
 
 import hashlib
 import sqlite3
+from collections.abc import Callable
 from datetime import UTC, datetime
-from typing import Callable
 
 from lei_signal.api.schemas import FundPositionDTO, FundTradeDTO
 from lei_signal.portfolio.funddata import NavPoint, fetch_nav_history
@@ -157,7 +157,7 @@ def position_summary(
             st["cost"] -= avg * shares_delta
     out: list[FundPositionDTO] = []
     for code, st in sorted(by_code.items()):
-        latest: NavPoint | None = None
+        latest: NavPoint | None
         try:
             navs = fetch_nav(code)
             latest = navs[0] if navs else None
@@ -203,10 +203,13 @@ def realized_pnl_of(conn: sqlite3.Connection, trade_id: str) -> dict:
             avg = cost / shares if shares > 0 else 0.0
             shares -= delta
             cost -= avg * delta
-    nav = float(row["priced_nav"]) if row["priced_nav"] is not None else None
-    if row["side"] != "sell" or nav is None:
-        return {"priced_nav": nav, "shares_sold": None, "avg_cost": None,
+    nav_or_none: float | None = (
+        float(row["priced_nav"]) if row["priced_nav"] is not None else None
+    )
+    if row["side"] != "sell" or nav_or_none is None:
+        return {"priced_nav": nav_or_none, "shares_sold": None, "avg_cost": None,
                 "realized_pnl": None}
+    nav = nav_or_none
     shares_sold = float(row["amount"]) / nav
     avg = cost / shares if shares > 0 else 0.0
     return {

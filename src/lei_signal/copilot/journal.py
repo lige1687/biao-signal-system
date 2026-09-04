@@ -110,6 +110,7 @@ def _outcome_changes(
     pairs = sorted(zip(
         pd.to_datetime(frame["date"]).dt.date.tolist(),
         frame["close"].astype(float).tolist(),
+        strict=False,
     ))
     base_i = max(
         (k for k, (d, _) in enumerate(pairs) if d <= _date.fromisoformat(run_date)),

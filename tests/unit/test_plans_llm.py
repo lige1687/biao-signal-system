@@ -31,6 +31,9 @@ RULESET = "1.3.0"
 
 #: 「无凭据」场景要清的全部变量：DS 优先级最高，不清会抢先返回配置。
 _ALL_CRED_VARS = (
+    "GLM_API_KEY",
+    "GLM_BASE_URL",
+    "GLM_MODEL",
     ENV_DEEPSEEK_API_KEY,
     ENV_API_KEY,
     "ANTHROPIC_AUTH_TOKEN",
@@ -116,7 +119,8 @@ def test_load_ark_config_returns_none_without_key(monkeypatch) -> None:  # noqa:
 
 def test_load_ark_config_falls_back_to_anthropic_env(monkeypatch) -> None:  # noqa: ANN001
     """ARK_API_KEY 缺失时复用 ANTHROPIC_AUTH_TOKEN（本机 Claude 用的就是 ark 网关）。"""
-    for var in (ENV_DEEPSEEK_API_KEY, ENV_API_KEY, ENV_BASE_URL, ENV_MODEL):
+    for var in (ENV_DEEPSEEK_API_KEY, ENV_API_KEY, ENV_BASE_URL, ENV_MODEL,
+                 "GLM_API_KEY", "GLM_BASE_URL", "GLM_MODEL"):
         monkeypatch.delenv(var, raising=False)
     monkeypatch.setenv("ANTHROPIC_AUTH_TOKEN", "fake-token-123")
     monkeypatch.setenv("ANTHROPIC_BASE_URL", "https://ark.cn-beijing.volces.com/api/coding")
@@ -128,7 +132,12 @@ def test_load_ark_config_falls_back_to_anthropic_env(monkeypatch) -> None:  # no
 
 
 def test_deepseek_key_takes_priority_over_ark(monkeypatch) -> None:  # noqa: ANN001
-    """配了 DEEPSEEK_API_KEY 就走 DS（OpenAI 兼容），不回退 ark。"""
+    """配了 DEEPSEEK_API_KEY 就走 DS（OpenAI 兼容），不回退 ark。
+
+    GLM 优先级更高（2026-09-05 起），须一并清掉，否则本机 .env 泄入时误判。
+    """
+    for var in ("GLM_API_KEY", "GLM_BASE_URL", "GLM_MODEL"):
+        monkeypatch.delenv(var, raising=False)
     monkeypatch.setenv(ENV_DEEPSEEK_API_KEY, "sk-ds-fake")
     monkeypatch.delenv(ENV_DEEPSEEK_BASE_URL, raising=False)
     monkeypatch.delenv(ENV_DEEPSEEK_MODEL, raising=False)
@@ -145,6 +154,8 @@ def test_deepseek_key_takes_priority_over_ark(monkeypatch) -> None:  # noqa: ANN
 
 def test_deepseek_base_url_and_model_overridable(monkeypatch) -> None:  # noqa: ANN001
     """DEEPSEEK_BASE_URL / DEEPSEEK_MODEL 可覆盖默认值，尾斜杠被去掉。"""
+    for var in ("GLM_API_KEY", "GLM_BASE_URL", "GLM_MODEL"):
+        monkeypatch.delenv(var, raising=False)
     monkeypatch.setenv(ENV_DEEPSEEK_API_KEY, "sk-ds-fake")
     monkeypatch.setenv(ENV_DEEPSEEK_BASE_URL, "https://ds.example.com/v1/")
     monkeypatch.setenv(ENV_DEEPSEEK_MODEL, "deepseek-reasoner")

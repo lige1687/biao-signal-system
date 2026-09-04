@@ -19,8 +19,8 @@ from lei_signal.api.schemas import (
     FundTradeDTO,
     OpsCardDTO,
     RecommendCardDTO,
-    SizingAdviceDTO,
     ReviewCardDTO,
+    SizingAdviceDTO,
     TradePreviewDTO,
     TradesResponseDTO,
 )
@@ -214,14 +214,14 @@ def dispatch(request: Request, body: CopilotDispatchRequest) -> CopilotDispatchR
 
         week_iso = review_mod.prev_iso_week(today_date())
         with closing(connect(_db_path(request))) as conn:
-            card = review_mod.get_review(conn, "weekly", week_iso)
-            if card is None:
-                card = review_mod.build_weekly_review(conn, week_iso)
-                review_mod.save_review(conn, card)
+            weekly = review_mod.get_review(conn, "weekly", week_iso)
+            if weekly is None:
+                weekly = review_mod.build_weekly_review(conn, week_iso)
+                review_mod.save_review(conn, weekly)
                 conn.commit()
         return CopilotDispatchReply(
             intent="review",
-            card={"card_type": "review", "data": card.model_dump()},
+            card={"card_type": "review", "data": weekly.model_dump()},
         )
     return CopilotDispatchReply(
         intent="chat",
