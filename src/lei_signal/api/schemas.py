@@ -1169,6 +1169,25 @@ class TradesResponseDTO(BaseModel):
     positions: list[FundPositionDTO] = []
 
 
+class ReviewSectionDTO(BaseModel):
+    heading_cn: str
+    lines: list[str] = []
+
+
+class ReviewCardDTO(BaseModel):
+    """复盘卡：纪律面（我照系统做了吗）与结果面（结果怎样）分开陈述。"""
+
+    review_id: str
+    kind: str                    # trade | weekly
+    ref_key: str
+    title_cn: str
+    sections: list[ReviewSectionDTO] = []
+    r_multiple: float | None = None
+    realized_pnl: float | None = None
+    narrative: str = ""          # GLM 叙事，空=模板
+    grounded: bool = False
+
+
 class CreateSessionRequest(BaseModel):
     symbol: str | None = None
     title_cn: str = ""
