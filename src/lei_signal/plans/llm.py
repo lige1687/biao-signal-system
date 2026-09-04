@@ -40,6 +40,15 @@ ENV_DEEPSEEK_API_KEY = "DEEPSEEK_API_KEY"
 ENV_DEEPSEEK_BASE_URL = "DEEPSEEK_BASE_URL"
 ENV_DEEPSEEK_MODEL = "DEEPSEEK_MODEL"
 
+#: GLM（智谱）端点与模型（OpenAI 兼容协议）。用户 2026-09-05 指定 GLM 为默认
+#: 表达层供应商（plan-agent-superentry-v1 决策 D7），优先级最高：
+#: 配了 GLM_API_KEY 就走 GLM，不再回退其他供应商。
+GLM_BASE_URL = "https://open.bigmodel.cn/api/paas/v4"
+GLM_MODEL = "glm-4.6"
+ENV_GLM_API_KEY = "GLM_API_KEY"
+ENV_GLM_BASE_URL = "GLM_BASE_URL"
+ENV_GLM_MODEL = "GLM_MODEL"
+
 #: 协议风格。ark 有两种网关：
 #:   openai    -> POST {base}/chat/completions，Bearer 鉴权（/api/v3）
 #:   anthropic -> POST {base}/v1/messages，x-api-key 鉴权（/api/coding）
@@ -202,15 +211,31 @@ def load_ark_config() -> ArkConfig | None:
     """从环境变量读表达层 LLM 配置。缺 API key 时返回 None（调用方降级模板）。
 
     优先级：
-    1. ``DEEPSEEK_API_KEY`` -> DeepSeek（OpenAI 兼容，Bearer，默认 deepseek-chat）；
-    2. ``ARK_*``；
-    3. ``ANTHROPIC_*``（本机 Claude Code 用的就是 ark 的 /api/coding 网关，
+    1. ``GLM_API_KEY`` -> GLM（用户 2026-09-05 指定默认，OpenAI 兼容）；
+    2. ``DEEPSEEK_API_KEY`` -> DeepSeek（OpenAI 兼容，Bearer，默认 deepseek-chat）；
+    3. ``ARK_*``；
+    4. ``ANTHROPIC_*``（本机 Claude Code 用的就是 ark 的 /api/coding 网关，
        复用同一凭据避免重复配置）。
 
     max_tokens / timeout 可用 ARK_MAX_TOKENS / ARK_TIMEOUT 覆盖默认值。
     """
     max_tokens = _env_int(ENV_MAX_TOKENS, 6000)
     timeout = _env_float(ENV_TIMEOUT, 90.0)
+
+    # GLM 最高优先（用户 2026-09-05 指定）：配了 GLM_API_KEY 就走 GLM，不回退。
+    glm_key = os.environ.get(ENV_GLM_API_KEY, "").strip()
+    if glm_key:
+        glm_base = (
+            os.environ.get(ENV_GLM_BASE_URL, "").strip() or GLM_BASE_URL
+        ).rstrip("/")
+        return ArkConfig(
+            api_key=glm_key,
+            base_url=glm_base,
+            model=os.environ.get(ENV_GLM_MODEL, "").strip() or GLM_MODEL,
+            style=STYLE_OPENAI,
+            max_tokens=max_tokens,
+            timeout=timeout,
+        )
 
     # DeepSeek 优先：配了就走 DS，不再回退 ark（避免两套凭据同时存在时行为不确定）。
     ds_key = os.environ.get(ENV_DEEPSEEK_API_KEY, "").strip()
@@ -733,6 +758,47 @@ def chat_discussion(
 
 #: 统一 LLM 请求入口别名：路由层与测试 monkeypatch 此名字即可不触网替换。
 _llm_call = _request_completion
+
+#: copilot 讲解系统提示：与监督员同一套铁律，面向流水线卡片而非 alert。
+COPILOT_SYSTEM_PROMPT = """你是 LEI 交易系统 Agent 超级入口的**表达层**。
+
+你拿到的是确定性 Python 流水线已算好的结构化卡片（今日推荐/仓位档位/复盘等）。
+你的职责：把它讲成简洁中文。判定已经做完，你没有判定权。
+
+铁律（违反即输出被丢弃）：
+1. 只能引用卡片里出现过的数值与标的。禁止编造数字、rule_id、日期。
+2. 禁止出现这些词：买入、卖出、建议买、该买、加仓、减仓、抄底。
+   用「条件已成立」「还缺条件」「系统定义的买点」「参考」等中性表述。
+3. 推荐是排序结果：必须讲清「排序仅影响展示顺序，不构成新判定，技术结论以各标的买点审阅为准」。
+4. 仓位是档位建议（试仓/标准/偏重）：最终金额由用户决定，必须带这句提示。
+5. 不输出总分、不预测价格走势、不推算任何日期。
+6. 研究代理结论必须标注「判定方式为研究代理」。
+7. 复盘叙事只陈述卡片给定事实（当初预案、实际执行、盈亏、R 倍数），不做评价性马后炮。
+"""
+
+
+def chat_copilot(
+    payload: dict, message: str, config: ArkConfig, *, system_prompt: str
+) -> str | None:
+    """copilot 讲解：单轮，system 由调用方给定（如 COPILOT_SYSTEM_PROMPT）。
+
+    数值接地由调用方负责（verify_numeric_grounding）；本函数只保证传输层
+    best-effort（走 ``_llm_call`` 统一入口，测试可 monkeypatch 不触网）：
+    任何失败返回 None，调用方降级模板。
+    """
+    messages: list[dict] = [
+        {"role": "system", "content": system_prompt},
+        {
+            "role": "user",
+            "content": (
+                "下面是系统判定层已算好的结构化卡片，请据此回答用户问题，"
+                "只能引用其中出现过的数值与标的：\n"
+                + json.dumps(payload, ensure_ascii=False, default=str)
+                + f"\n\n用户问题：{message}"
+            ),
+        },
+    ]
+    return _llm_call(config, messages)
 
 
 __all__ = [
