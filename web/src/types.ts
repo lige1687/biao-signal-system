@@ -2120,3 +2120,88 @@ export interface PortfolioResponse {
   advices: PortfolioAdvice[];
   groups: PortfolioGroup[];
 }
+
+// ---- Copilot（Agent 超级入口） ----
+export interface RecommendItem {
+  symbol: string;
+  display_name: string;
+  verdict: string;
+  verdict_cn: string;
+  best_scenario_cn: string | null;
+  reward_risk_ratio: number | null;
+  reward_risk_computable: boolean;
+  news_heat: number;
+  news_tags: string[];
+  score: number;
+  reasons: string[];
+}
+export interface SectorPick {
+  code: string; name: string; stage: string; stage_cn: string; note: string;
+}
+export interface RecommendCard {
+  run_date: string;
+  generated_at: string;
+  items: RecommendItem[];
+  sectors: SectorPick[];
+  sentiment_status: string;
+  fundamental_note: string;
+  disclaimer_cn: string;
+}
+export interface SizingAdvice {
+  symbol: string; tier: string; tier_pct_cn: string; cap_pct: number;
+  reasons: string[]; strength: string; strength_cn: string; disclaimer_cn: string;
+}
+export interface TradePreview {
+  fund_code: string | null; fund_name: string | null;
+  side: "buy" | "sell"; side_cn: string;
+  amount: number | null; trade_date: string;
+  missing: string[]; note_cn: string;
+}
+export interface FundTrade {
+  trade_id: string; fund_code: string; fund_name: string;
+  side: "buy" | "sell"; side_cn: string;
+  amount: number; trade_date: string;
+  priced_nav: number | null;
+  price_status: "pending" | "priced" | "failed"; price_status_cn: string;
+  plan_id: string | null; source: string; note: string; created_at: string;
+}
+export interface FundPosition {
+  fund_code: string; fund_name: string;
+  shares: number; cost: number;
+  latest_nav: number | null; latest_nav_date: string;
+  market_value: number | null; unrealized_pnl: number | null;
+  realized_pnl: number; note: string;
+}
+export interface CopilotDispatchReply {
+  intent: string; symbol: string | null;
+  card: { card_type: string; data: unknown } | null;
+  preview: TradePreview | null;
+  chat_fallback: boolean; note_cn: string;
+}
+export interface ExplainReply { reply: string; grounded: boolean; card: RecommendCard; }
+export interface ReviewSection { heading_cn: string; lines: string[]; }
+export interface ReviewCard {
+  review_id: string; kind: "trade" | "weekly"; ref_key: string; title_cn: string;
+  sections: ReviewSection[];
+  r_multiple: number | null; realized_pnl: number | null;
+  narrative: string; grounded: boolean;
+}
+export interface OpsTodo {
+  action_id: string; plan_id: string; symbol: string;
+  kind: string; kind_cn: string; next_step_cn: string;
+  due_from: string; nag_count: number;
+}
+export interface OpsLine { symbol: string; display_name: string; text_cn: string; }
+export interface OpsCard {
+  run_date: string; generated_at: string;
+  holdings_actions: OpsLine[];
+  recommendations: RecommendCard | null;
+  plan_todos: OpsTodo[];
+  watch_triggers: OpsLine[];
+  push_summary_cn: string;
+}
+
+export interface TradesResponse {
+  trades: FundTrade[];
+  positions: FundPosition[];
+}

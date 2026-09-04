@@ -1,5 +1,14 @@
 import type {
   ActionItem,
+  CopilotDispatchReply,
+  ExplainReply,
+  FundTrade,
+  OpsCard,
+  RecommendCard,
+  ReviewCard,
+  SizingAdvice,
+  TradePreview,
+  TradesResponse,
   AgentChatReply,
   AgentChatRequest,
   AgentMessageDTO,
@@ -136,6 +145,48 @@ export const backtestApi = {
     }),
   listRuns: () => request<BacktestRunSummary[]>("/backtest/runs"),
   getRun: (runId: string) => request<BacktestRunResult | BacktestRunSummary>(`/backtest/runs/${runId}`),
+
+  // ---- Copilot（Agent 超级入口） ----
+  copilotDispatch: (body: { message: string; symbol?: string | null }) =>
+    request<CopilotDispatchReply>(`/copilot/dispatch`, {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  copilotRecommend: () => request<RecommendCard>(`/copilot/recommend`),
+  copilotRecommendExplain: (question: string) =>
+    request<ExplainReply>(`/copilot/recommend/explain`, {
+      method: "POST",
+      body: JSON.stringify({ question }),
+    }),
+  copilotPositionAdvice: (symbol: string) =>
+    request<SizingAdvice>(
+      `/copilot/position-advice/${encodeURIComponent(symbol)}`,
+    ),
+  copilotTradesPreview: (message: string) =>
+    request<TradePreview>(`/copilot/trades/preview`, {
+      method: "POST",
+      body: JSON.stringify({ message }),
+    }),
+  copilotTradesCreate: (t: {
+    fund_code: string;
+    fund_name: string;
+    side: "buy" | "sell";
+    amount: number;
+    trade_date: string;
+    note?: string;
+  }) =>
+    request<FundTrade>(`/copilot/trades`, {
+      method: "POST",
+      body: JSON.stringify(t),
+    }),
+  copilotTrades: () => request<TradesResponse>(`/copilot/trades`),
+  copilotReviewTrade: (tradeId: string) =>
+    request<ReviewCard>(`/copilot/review/trade/${encodeURIComponent(tradeId)}`),
+  copilotReviewWeekly: (week?: string) =>
+    request<ReviewCard>(
+      `/copilot/review/weekly${week ? `?week=${encodeURIComponent(week)}` : ""}`,
+    ),
+  opsToday: () => request<OpsCard>(`/ops/today`),
 };
 
 export const timingBacktestApi = {
