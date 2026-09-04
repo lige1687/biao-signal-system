@@ -97,3 +97,74 @@ def load_outcome(conn: sqlite3.Connection, run_date: str) -> dict | None:
         return json.loads(row["outcome"])
     except (TypeError, ValueError):
         return None
+
+
+def _outcome_changes(
+    frame, run_date: str, horizons: tuple[int, ...]
+) -> dict[str, float]:
+    """run_date 收盘为基准的 T+N 收盘涨跌幅（百分点）。数据不足的档位跳过。"""
+    from datetime import date as _date
+
+    import pandas as pd
+
+    pairs = sorted(zip(
+        pd.to_datetime(frame["date"]).dt.date.tolist(),
+        frame["close"].astype(float).tolist(),
+    ))
+    base_i = max(
+        (k for k, (d, _) in enumerate(pairs) if d <= _date.fromisoformat(run_date)),
+        default=None,
+    )
+    if base_i is None or pairs[base_i][1] <= 0:
+        return {}
+    base = pairs[base_i][1]
+    out: dict[str, float] = {}
+    for h in horizons:
+        j = base_i + h
+        if j < len(pairs):
+            out[f"chg_{h}d"] = round((pairs[j][1] / base - 1.0) * 100.0, 2)
+    return out
+
+
+def score_journal_outcomes(
+    conn: sqlite3.Connection,
+    service,
+    *,
+    horizons: tuple[int, ...] = (1, 5, 20),
+    today: str | None = None,
+) -> int:
+    """给尚无 outcome 的推荐账本日补 T+N 对账（只补一次，幂等）。
+
+    前向存证口径（设计定稿 §5）：不做伪历史回测，从推荐次日起用真实行情
+    逐档打分；行情不足的档位跳过，已有 outcome 的日期不重打。
+    """
+    from datetime import UTC as _UTC
+    from datetime import datetime as _dt
+
+    today = today or _dt.now(_UTC).date().isoformat()
+    rows = conn.execute(
+        "SELECT run_date FROM recommendation_journal "
+        "WHERE outcome IS NULL AND run_date < ? ORDER BY run_date",
+        (today,),
+    ).fetchall()
+    written = 0
+    for row in rows:
+        run_date = row["run_date"]
+        card = load_recommendation(conn, run_date)
+        if card is None or not card.items:
+            continue
+        outcome: dict[str, dict[str, float]] = {}
+        for item in card.items:
+            try:
+                entry = service.get(item.symbol)
+            except Exception:  # noqa: BLE001  单标的失败不影响其余
+                continue
+            if getattr(entry, "result", None) is None:
+                continue
+            changes = _outcome_changes(entry.result.frame, run_date, horizons)
+            if changes:
+                outcome[item.symbol] = changes
+        if outcome:
+            save_outcome(conn, run_date, outcome)
+            written += 1
+    return written
