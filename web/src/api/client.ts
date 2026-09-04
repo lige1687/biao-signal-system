@@ -478,6 +478,9 @@ export interface FactorRow {
   mom_20: number | null;
   mom_20_group_pct: number | null;
   mom_121_rank?: number | null;
+  /** 特质波动率（仅 cn_stock 个股层，2026-09-04 落地）：60日超额收益年化 std + 个股截面分位。 */
+  ivol60_ann?: number | null;
+  ivol_pct?: number | null;
   adx14: number | null;
   vol_ok: boolean | null;
   above_ema20: boolean | null;

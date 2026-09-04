@@ -29,7 +29,7 @@ const GROUP_CN: Record<string, string> = {
   sector: "板块",
 };
 
-type SymSortKey = "code" | "rv20_ann" | "rv_pct" | "mom_121" | "mom_20" | "adx14";
+type SymSortKey = "code" | "rv20_ann" | "rv_pct" | "ivol_pct" | "mom_121" | "mom_20" | "adx14";
 
 /** RV 分位小色条：低波冷色 → 高波暖色，≥0.8 加警示描边。 */
 function PctBar({ v, warnAt = 0.8 }: { v: number | null; warnAt?: number }) {
@@ -81,6 +81,14 @@ function RiskChips({ row }: { row: FactorRow }) {
       text: "短线超买警示",
       tone: "caution",
       title: "实证：A股短动量为反向因子，组内高分位提示追高风险，与顶底结构判断互为印证",
+    });
+  }
+  if (row.ivol_pct != null && row.ivol_pct >= 0.8) {
+    chips.push({
+      text: "彩票股警示",
+      tone: "caution",
+      title:
+        "实证（F2/E2）：高特质波动个股 18 年系统性跑输（IC -0.09），裸标的层排雷有效；入口层提示，不作用于已确认信号",
     });
   }
   if (row.notes.some((n) => n.startsWith("数据较旧"))) {
@@ -237,6 +245,7 @@ export default function FactorPanelPage() {
                   <th>收盘</th>
                   {head("rv20_ann", "RV20年化", "20日已实现波动率（年化）")}
                   {head("rv_pct", "RV 3年分位", "当前波动率在自身近3年历史的百分位")}
+                  {head("ivol_pct", "IVOL分位", "特质波动率（个股层排雷）：60日超额收益（个股−等权市场）标准差年化，个股截面分位。≥80% 标红「彩票股警示」——实证 18 年高特质波动个股系统性跑输。仅个股层，不适用 ETF/板块；样本<3 只留空。")}
                   {head("mom_121", "12-1动量", "P(t-21)/P(t-252)-1，板块层有效/标的层参考")}
                   {head("mom_20", "20日动量", "反向因子：组内高分位=追高警示")}
                   <th>组内分位</th>
@@ -258,6 +267,17 @@ export default function FactorPanelPage() {
                     <td>{fmt(r.close, 3)}</td>
                     <td><Num v={r.rv20_ann} digits={1} suffix="%" /></td>
                     <td><PctBar v={r.rv_pct} /></td>
+                    <td>
+                      {r.subgroup === "cn_stock" ? (
+                        r.ivol_pct != null ? (
+                          <PctBar v={r.ivol_pct} />
+                        ) : (
+                          <span className="text-faint" title={r.ivol60_ann != null ? `年化 ${r.ivol60_ann}%（个股样本<3，不排名）` : "留痕中"}>留痕中</span>
+                        )
+                      ) : (
+                        <span className="text-faint" title="特质波动率仅个股层适用（ETF/板块不打分）">-</span>
+                      )}
+                    </td>
                     <td><Num v={r.mom_121 == null ? null : r.mom_121 * 100} digits={1} suffix="%" signed /></td>
                     <td><Num v={r.mom_20 == null ? null : r.mom_20 * 100} digits={1} suffix="%" signed /></td>
                     <td><PctBar v={r.mom_20_group_pct} /></td>

@@ -190,3 +190,63 @@ def test_route_panel_serves_snapshot(panel_env):
     assert body["provenance"] == "research_proxy"
     assert isinstance(body["symbols"], list) and isinstance(body["sectors"], list)
     assert body["research_proxy_note"]
+
+
+# ── IVOL（个股层排雷，2026-09-04 落地）──────────────────────────────────
+def _mk_osc_bars(n: int, *, up: float = 0.02, down: float = -0.01) -> pd.Series:
+    """交替涨跌的收盘序列（收益非常数，供 IVOL std 计算）。"""
+    c = 100.0
+    closes = []
+    for i in range(n):
+        c *= 1 + (up if i % 2 == 0 else down)
+        closes.append(c)
+    return pd.Series(closes, index=pd.bdate_range(start="2024-01-02", periods=n))
+
+
+def test_idio_vol_60_formula():
+    # 等权市场日收益恒定 0；个股超额收益交替 +2%/-1% → 有正的年化 std
+    rng = pd.Series([0.0] * 120, index=pd.bdate_range(start="2024-01-02", periods=120))
+    stock = _mk_osc_bars(120)
+    v = fp.idio_vol_60(stock, rng)
+    assert v is not None and v > 0.1  # 年化后显著为正
+
+
+def test_idio_vol_60_short_none():
+    rng = pd.Series([0.0] * 30)
+    assert fp.idio_vol_60(pd.Series([100.0] * 31), rng) is None
+
+
+def test_build_panel_ivol_needs_three_stocks(tmp_path, monkeypatch):
+    """个股 <3 只：ivol60 有值、截面分位留空（不排名，等扩池自动生效）。"""
+    monkeypatch.setattr(fp, "ROOT", tmp_path)
+    for j, g in enumerate((0.002, -0.001, 0.001)):
+        _mk_bars(320, growth=g).to_parquet(tmp_path / f"TH881X{j:02d}.SECTOR.bars.parquet")
+    pd.DataFrame({"close": _mk_osc_bars(320, up=0.02, down=-0.01)}).to_parquet(
+        tmp_path / "600AAA.SS.bars.parquet")
+    pd.DataFrame({"close": _mk_osc_bars(320, up=0.012, down=-0.002)}).to_parquet(
+        tmp_path / "002BBB.SZ.bars.parquet")
+    snap = fp.build_panel(cache_dir=tmp_path, now=pd.Timestamp("2024-06-03").to_pydatetime())
+    stocks = [r for r in snap["symbols"] if r["subgroup"] == "cn_stock"]
+    assert len(stocks) == 2
+    for r in stocks:
+        assert r["ivol60_ann"] is not None and r["ivol60_ann"] > 0
+        assert r["ivol_pct"] is None  # <3 只不排名
+    # ETF/板块不带 IVOL 字段（口径：不适用）
+    etfs = [r for r in snap["symbols"] if r["subgroup"] != "cn_stock"]
+    assert all("ivol60_ann" not in r for r in etfs)
+
+
+def test_build_panel_ivol_ranks_when_three_stocks(tmp_path, monkeypatch):
+    monkeypatch.setattr(fp, "ROOT", tmp_path)
+    for j, g in enumerate((0.002, -0.001, 0.001)):
+        _mk_bars(320, growth=g).to_parquet(tmp_path / f"TH881X{j:02d}.SECTOR.bars.parquet")
+    pd.DataFrame({"close": _mk_osc_bars(320, up=0.05, down=-0.04)}).to_parquet(
+        tmp_path / "600AAA.SS.bars.parquet")  # 高特质波动
+    pd.DataFrame({"close": _mk_osc_bars(320, up=0.012, down=-0.002)}).to_parquet(
+        tmp_path / "002BBB.SZ.bars.parquet")
+    pd.DataFrame({"close": _mk_osc_bars(320, up=0.006, down=-0.001)}).to_parquet(
+        tmp_path / "600CCC.SS.bars.parquet")
+    snap = fp.build_panel(cache_dir=tmp_path, now=pd.Timestamp("2024-06-03").to_pydatetime())
+    by_code = {r["code"]: r for r in snap["symbols"] if r["subgroup"] == "cn_stock"}
+    assert by_code["600AAA.SS"]["ivol_pct"] == 1.0  # 最高特质波动 → 分位 1.0（彩票股警示）
+    assert by_code["600CCC.SS"]["ivol_pct"] < by_code["002BBB.SZ"]["ivol_pct"]

@@ -30,6 +30,7 @@ import { loadTimeframe } from "../components/klineTimeframe";
 import ResizeHandle from "../components/ResizeHandle";
 import TodayOverviewPanel from "../components/TodayOverviewPanel";
 import TodaySignalBanner from "../components/TodaySignalBanner";
+import CrisisBanner from "../components/CrisisBanner";
 import TradeOpportunityPanel from "../components/TradeOpportunityPanel";
 import { prefillFromOpportunity } from "../components/CreatePlanDialog";
 import PlanCreateFlow from "../components/PlanCreateFlow";
@@ -481,6 +482,9 @@ export default function WorkspacePage() {
           </button>
         </div>
       )}
+
+      {/* 危机管理状态机（V4 刚崩警示/V3 出清企稳，研究代理，零触发不渲染） */}
+      <CrisisBanner />
 
       <div
         className={`ws-body ${sidebarOpen ? "" : "no-sidebar"}${expVisible ? "" : " exp-collapsed"}`}

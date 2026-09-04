@@ -9,12 +9,43 @@
  *
  *  2026-09-04 消息联动: 行头叠加 📰 近3天消息标记 (利多↑/利空↓计数),
  *  点击直达 /news?symbol=… 看该标的消息流——技术信号 × 消息面同屏互查（参考层）.
+ *  2026-09-04 体制路由: 展开区顶部显示「体制×模块」提示条（round6 E2，
+ *  市场RV分位高→C模块优先/低→D·B优先），展示层排序提示，不挡信号.
  */
 import { useState, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { api, newsApi } from "../api/client";
+import { api, factorsApi, newsApi } from "../api/client";
 import type { NewsWatchEntry, ScanItem, SignalAlert } from "../types";
+
+/** 体制×模块路由提示（round6 E2：路由池 +1.48%/56% vs 全池 +0.93%/51%）。
+ *  RV 口径 = 板块等权 20 日已实现波动率 3 年分位（与 vol_regime 同源分界 0.8/0.2）。
+ *  只做展示层排序提示，不改判定、不挡信号（红线）。数据缺/中段不显示。 */
+function RegimeRouteNote() {
+  const { data } = useQuery({
+    queryKey: ["factorPanel"],
+    queryFn: () => factorsApi.panel(),
+    staleTime: 5 * 60_000,
+    retry: false,
+  });
+  const rv = data?.market?.market_rv_pct;
+  if (rv == null) return null;
+  let text: string | null = null;
+  if (rv >= 0.8) {
+    text = `高波体制（RV ${Math.round(rv * 100)}% 分位）：C 模块（2B 破底翻 / 假突破）历史更适配，优先关注`;
+  } else if (rv <= 0.2) {
+    text = `低波体制（RV ${Math.round(rv * 100)}% 分位）：D / B 模块（假突破收回 / 密集突破）历史更适配，优先关注`;
+  }
+  if (!text) return null;
+  return (
+    <div
+      className="muted sig-replay-note"
+      title="round6 E2 语义组合研究：按体制路由看模块，路由池事件收益 +1.48%/胜率56% vs 全池 +0.93%/51%。研究代理，提示不挡信号。"
+    >
+      路由提示 · {text}（研究代理，提示不挡信号）
+    </div>
+  );
+}
 
 const TIER_LABEL: Record<string, string> = {
   hard: "卖·硬",
@@ -328,6 +359,7 @@ export default function TodaySignalBanner({
       </div>
       {open && scanned && (
         <div className="sig-groups">
+          <RegimeRouteNote />
           {isReplay && (
             <div className="muted sig-replay-note">
               回放口径：当前自选 × 行情截至 {replayDate} 重算，含成分前视，仅形态参考，不构成买卖建议。

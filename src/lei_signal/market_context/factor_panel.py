@@ -135,8 +135,8 @@ FACTOR_META: dict[str, dict] = {
         ),
     },
     "idio_vol": {
-        "label": "特质波动率（个股截面 · 知识卡）",
-        "formula": "60日超额收益（个股−等权市场）标准差，截面排名",
+        "label": "特质波动率（个股截面 · 已落地）",
+        "formula": "60日超额收益（个股−等权市场）标准差（年化），个股截面排名",
         "verdict": "实证最稳 · 个股排雷维度",
         "verdict_level": "pass",
         "evidence": (
@@ -145,8 +145,10 @@ FACTOR_META: dict[str, dict] = {
             "为两轮检验中最稳健的截面发现。"
         ),
         "usage": (
-            "本卡为个股截面知识留痕（不适用 ETF/板块标的打分）：若未来做个股层，"
-            "「低特质波动」进入排雷/选股维度；与标的层 RV 分位互为印证——避高波在两层都成立。"
+            "2026-09-04 落地为 ivol60_ann/ivol_pct 两列（仅 cn_stock 个股层，"
+            "不适用 ETF/板块——口径见总纲零-2 第3条）：截面分位≥0.8 标红"
+            "「彩票股警示」，入口层排雷，不作用于已确认信号（F2 边界）。"
+            "当前个股样本不足 3 只时分位留空（不排名），扩池后自动生效。"
         ),
     },
 }
@@ -300,6 +302,19 @@ def compute_symbol_factors(df: pd.DataFrame, now: datetime | None = None) -> dic
     return row
 
 
+def idio_vol_60(close: pd.Series, mkt_ret: pd.Series, window: int = 60) -> float | None:
+    """特质波动率：近 60 日超额收益（个股 − 等权市场）标准差，年化。
+
+    口径 = research-factor-backtest D1「60日超额收益标准差」（简单差，非回归
+    残差）。样本不足 window 日返回 None。
+    """
+    ret = close.astype(float).pct_change()
+    excess = (ret - mkt_ret).dropna()
+    if len(excess) < window:
+        return None
+    return _fmt(float(excess.iloc[-window:].std() * np.sqrt(252.0)), 4)
+
+
 def _group_percentile(rows: list[dict]) -> None:
     """同组内 mom_20 截面分位（反向警示用）。组内 <3 只不排名。"""
     for group in ("cn", "us", "sector"):
@@ -327,6 +342,7 @@ def build_panel(cache_dir: Path | None = None, name_map: dict[str, str] | None =
     rows: list[dict] = []
     skipped: list[str] = []
     sector_closes: dict[str, pd.Series] = {}
+    stock_closes: dict[str, pd.Series] = {}  # cn_stock 个股收盘（IVOL 用）
     for f in sorted(root.glob("*.bars.parquet")):
         code = f.name.split(".bars.parquet")[0]
         try:
@@ -341,6 +357,8 @@ def build_panel(cache_dir: Path | None = None, name_map: dict[str, str] | None =
         group, subgroup = classify_symbol(code)
         if group == "sector":
             sector_closes[code] = df["close"].astype(float)
+        if subgroup == "cn_stock":
+            stock_closes[code] = df["close"].astype(float)
         row = compute_symbol_factors(df, now=now)
         row.update({
             "code": code,
@@ -364,6 +382,26 @@ def build_panel(cache_dir: Path | None = None, name_map: dict[str, str] | None =
         market["market_rv_pct"] = _fmt(realized_vol_percentile(mkt_eq), 4)
         market["market_rv20_ann"] = _fmt(realized_vol(mkt_eq), 4)
         market["market_as_of"] = str(pd.Timestamp(sec.index[-1]).date())
+
+        # IVOL（个股层排雷，总纲零-2 第3条）：超额收益 = 个股 − 等权市场日收益。
+        mkt_ret = sec.pct_change().mean(axis=1)
+        stock_idx = [i for i, r in enumerate(rows) if r["subgroup"] == "cn_stock"]
+        for i in stock_idx:
+            code = rows[i]["code"]
+            close_i = stock_closes.get(code)
+            rows[i]["ivol60_ann"] = (
+                idio_vol_60(close_i, mkt_ret) if close_i is not None else None
+            )
+        # 个股截面分位（与实证口径一致：cn_stock 组内截面，<3 只不排名留空）
+        ranked = [i for i in stock_idx if rows[i].get("ivol60_ann") is not None]
+        for i in stock_idx:
+            rows[i]["ivol_pct"] = None
+        if len(ranked) >= 3:
+            vals = sorted(rows[i]["ivol60_ann"] for i in ranked)  # type: ignore[misc]
+            n = len(vals)
+            for i in ranked:
+                rank = sum(1 for x in vals if x <= rows[i]["ivol60_ann"])  # type: ignore[operator]
+                rows[i]["ivol_pct"] = round(rank / n, 4)
 
     _group_percentile(rows)
 
@@ -431,6 +469,7 @@ __all__ = [
     "build_panel",
     "classify_symbol",
     "compute_symbol_factors",
+    "idio_vol_60",
     "load_panel",
     "momentum_plain",
     "momentum_skip",

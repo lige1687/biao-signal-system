@@ -484,6 +484,15 @@ export interface BreadthAlert {
   desc: string;
 }
 
+/** 危机管理状态机事件（V4 刚崩警示 danger / V3 出清企稳 opportunity）。 */
+export interface CrisisAlert {
+  level: "danger" | "opportunity";
+  type: "crash_warning" | "capitulation_rebound";
+  title: string;
+  symbol?: string;
+  desc: string;
+}
+
 export interface GlobalPanel {
   market_id: string;
   display_name: string;
@@ -517,6 +526,25 @@ export interface GlobalPanel {
   drawdown_from_ath: number | null;
   alerts: BreadthAlert[];
   updated_at: string;
+  /** 危机管理状态机读数（V4 刚崩警示/V3 出清企稳，研究代理，2026-09-04 起）。 */
+  crisis_readings?: CrisisReading[];
+  crisis_alerts?: CrisisAlert[];
+}
+
+/** 危机管理状态机单指数读数（见后端 market_context/crisis_events.py 口径注释）。 */
+export interface CrisisReading {
+  symbol: string;
+  name: string;
+  as_of: string;
+  /** 收盘相对 60 日均线偏离（%）。 */
+  dev60_pct: number;
+  /** 全市场 MA50 上方占比（%）。 */
+  breadth_ma50_now: number;
+  breadth_delta_20: number | null;
+  breadth_pctile_1y: number | null;
+  breadth_delta_5: number | null;
+  breadth_as_of: string;
+  state: "crash_warning" | "capitulation_rebound" | "none";
 }
 
 export interface GlobalStripResponse {

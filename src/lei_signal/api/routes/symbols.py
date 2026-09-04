@@ -1674,6 +1674,23 @@ def market_context_data_status(request: Request, market_id: str) -> dict:
     return _market_context_service(request).data_status(mid)
 
 
+def _a_share_crisis() -> dict[str, Any]:
+    """危机管理状态机读数（V4 刚崩/V3 出清，研究代理）。失败静默降级为空。
+
+    数据均为本地日更文件（宽度 live 历史 + 指数 K 线缓存），模块内 300s TTL，
+    满足研究实证的日频扫描时效（round7 F3）。只发事件与读数，不挡信号。
+    """
+    try:
+        from lei_signal.market_context.crisis_events import get_crisis_states
+
+        c = get_crisis_states()
+        if not c:
+            return {}
+        return {"crisis_readings": c["readings"], "crisis_alerts": c["alerts"]}
+    except Exception:  # noqa: BLE001 — 危机读数缺失不影响主面板
+        return {}
+
+
 def _a_share_breadth_derived() -> dict[str, Any]:
     """CN_ALL_A 面板的 delta_5 / 百分位派生值（带 TTL，失败返回全 None）。"""
     try:
@@ -1783,6 +1800,8 @@ def market_context_global_strip(request: Request) -> dict[str, Any]:
         "breadth_200": ma200,
         # 5日变化 + 点时百分位：从预计算历史派生（TTL 缓存），无历史时为 None
         **_a_share_breadth_derived(),
+        # 危机管理状态机（V4 刚崩警示 / V3 出清企稳，研究代理，提示不挡信号）
+        **_a_share_crisis(),
         "long_regime": (
             ("bull" if (ma200 or 0) >= 50 else "bear") if ma200 is not None else "unknown"
         ),
