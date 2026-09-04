@@ -79,6 +79,13 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+        # 放行局域网 origin：手机/平板同 WiFi 经 http://<局域网IP>:8000 直连
+        # 静态站或 :5173 dev server 访问 API（IPv4 私网段，任意端口）。
+        allow_origin_regex=(
+            r"^https?://(localhost|127\.0\.0\.1|192\.168\.\d{1,3}\.\d{1,3}"
+            r"|10\.\d{1,3}\.\d{1,3}\.\d{1,3}"
+            r"|172\.(1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3})(:\d+)?$"
+        ),
         allow_methods=["GET", "POST", "PATCH", "DELETE"],
         allow_headers=["*"],
     )
