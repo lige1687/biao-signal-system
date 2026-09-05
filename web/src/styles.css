@@ -4635,3 +4635,9 @@ a { color: var(--accent); text-decoration: none; }
   font-size: 10.5px; color: var(--text-faint);
 }
 .ws-history-sym { font-family: var(--font-mono); }
+
+/* ---- 标的速览卡价位行 ---- */
+.ws-quick-levels { display: flex; flex-direction: column; gap: 4px; }
+.ws-quick-level { display: flex; gap: 8px; align-items: baseline; font-size: 12px; }
+.ws-quick-level .lv-down { color: var(--up); }   /* 中国惯例：跌破位偏暖警示 */
+.ws-quick-level .lv-up { color: var(--accent); }

@@ -22,14 +22,26 @@ type Turn = {
   /** 校验未过时的模板直出（附在流式原文之后） */
   fallback?: string;
   verifyNote?: string;
+  /** 标的速览卡（结合右栏 K 线读图用） */
+  quickCard?: QuickCard | null;
 };
 
+type QuickLevel = {
+  role: string; price: number; kind: "below" | "above";
+  dist_pct: number; from_cn: string;
+};
+type QuickCard = {
+  symbol: string; display_name: string; as_of?: string; close: number;
+  color_cn?: string; stage_cn?: string; risk_cn?: string;
+  levels: QuickLevel[]; note_cn?: string;
+};
 type StreamDone = {
   session_id: string;
   resolved_symbol: string | null;
   grounded: boolean;
   verify_note?: string;
   fallback?: string;
+  quick_card?: QuickCard | null;
 };
 
 /** 解析 SSE 字节流为事件序列（stage/token/done）。 */
@@ -140,6 +152,40 @@ function ThinkingRow() {
   );
 }
 
+/** 标的速览卡：总评徽标 + 关键价位与距离，配合右栏 K 线读图。 */
+function QuickCardView({ card }: { card: QuickCard }) {
+  return (
+    <div className="cp-card" style={{ marginTop: 6 }}>
+      <div className="cp-label">
+        {card.display_name}（{card.symbol}）· 收盘 {card.close} · {card.as_of}
+      </div>
+      <div className="cp-row">
+        {card.color_cn && <span className="cp-chip">{card.color_cn}</span>}
+        {card.stage_cn && <span className="cp-chip">阶段：{card.stage_cn}</span>}
+        {card.risk_cn && <span className="cp-chip">风险：{card.risk_cn}</span>}
+      </div>
+      {card.levels.length > 0 && (
+        <div className="ws-quick-levels">
+          {card.levels.map((lv, i) => (
+            <div className="ws-quick-level" key={i}>
+              <span className={lv.kind === "below" ? "lv-down" : "lv-up"}>
+                {lv.kind === "below" ? "↓" : "↑"}
+              </span>
+              <strong>{lv.role} {lv.price}</strong>
+              <span className="muted">
+                距现价 {lv.dist_pct}%{lv.from_cn ? ` · ${lv.from_cn}` : ""}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+      <div className="muted" style={{ fontSize: 10.5 }}>
+        {card.note_cn} · 右栏 K 线已联动，价位线以图上标注为准
+      </div>
+    </div>
+  );
+}
+
 function StageBar({ stages, active }: { stages: { key: string; text: string }[]; active: boolean }) {
   return (
     <div className="ws-stages" role="status" aria-label="调用链进度">
@@ -209,6 +255,7 @@ function TurnRow({ turn, animate }: { turn: Turn; animate: boolean }) {
       {turn.streaming && !turn.text && (
         <div className="muted" style={{ fontSize: 12 }}>等待 AI 输出…</div>
       )}
+      {!turn.streaming && turn.quickCard && <QuickCardView card={turn.quickCard} />}
       {turn.verifyNote && (
         <div className="cp-error" style={{ marginTop: 6 }}>{turn.verifyNote}</div>
       )}
@@ -483,6 +530,7 @@ export default function AgentWorkspacePage() {
             resolved: d.resolved_symbol ?? null,
             fallback: d.fallback,
             verifyNote: d.verify_note,
+            quickCard: d.quick_card ?? null,
             streaming: false,
           });
         }

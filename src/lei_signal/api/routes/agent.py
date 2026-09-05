@@ -657,6 +657,59 @@ def agent_session_messages(request: Request, session_id: str) -> list[AgentMessa
 __all__ = ["router"]
 
 
+
+def _quick_card(ctx_payload: dict, symbol: str | None) -> dict | None:
+    """标的速览卡（展示层）：总评徽标 + 上下各一关键价位与距离。
+
+    数值全部直读 ctx_payload；距离百分比为展示层算术（收盘与价位之比），
+    非判定层新数值。与右栏 K 线配合读图，AI 正文不必罗列价位清单。
+    """
+    if not symbol or not isinstance(ctx_payload, dict):
+        return None
+    a = ctx_payload.get("assessment") or {}
+    dual = ctx_payload.get("dual_ma") or {}
+    close = dual.get("close")
+    if close is None:
+        return None
+    card: dict = {
+        "symbol": symbol,
+        "display_name": ctx_payload.get("display_name") or symbol,
+        "as_of": ctx_payload.get("as_of"),
+        "close": close,
+        "color_cn": a.get("color_cn"),
+        "stage_cn": a.get("stage_cn"),
+        "risk_cn": a.get("risk_state_cn"),
+        "levels": [],
+    }
+    levels: list[dict] = []
+    for st in ctx_payload.get("structures") or []:
+        if not isinstance(st, dict):
+            continue
+        for role, key in (("失效位", "c_price"), ("阻力位", "neckline"),
+                               ("前高", "reference_high")):
+            price = (st.get("key_prices") or {}).get(key)
+            if price is None or not isinstance(price, (int, float)) or price <= 0:
+                continue
+            levels.append({
+                "role": role,
+                "price": float(price),
+                "kind": "below" if price < float(close) else "above",
+                "dist_pct": round(abs(float(close) / float(price) - 1) * 100, 2),
+                "from_cn": st.get("type_cn") or "",
+            })
+    below = sorted(
+        (v for v in levels if v["kind"] == "below"),
+        key=lambda x: -x["price"],
+    )[:2]
+    above = sorted(
+        (v for v in levels if v["kind"] == "above"),
+        key=lambda x: x["price"],
+    )[:1]
+    card["levels"] = below + above
+    card["note_cn"] = "价位直读系统结构（研究代理）；距离为展示层换算"
+    return card
+
+
 @router.post("/agent/chat/stream")
 def agent_chat_stream(request: Request, body: AgentChatRequest):
     """流式讨论入口：SSE 推送调用链阶段 + GLM 真·逐字正文 + 校验结果。
@@ -789,6 +842,7 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
                 "grounded": grounded,
                 **({"verify_note": verify_note} if verify_note else {}),
                 **({"fallback": fallback} if fallback else {}),
+                **({"quick_card": _quick_card(ctx_payload, symbol)} if symbol else {}),
             },
         )
 
