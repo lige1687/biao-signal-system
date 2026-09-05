@@ -6,6 +6,7 @@ LLM 输出必须过 ``verify_grounding``（禁用词 + rule_id 白名单），�
 """
 from __future__ import annotations
 
+import contextlib
 import json
 import logging
 import re
@@ -329,6 +330,55 @@ def _static_symbol_name(symbol: str, db_name: str | None) -> str:
     return OVERSEAS_NAME_CN.get(symbol, "")
 
 
+#: 口语别名 → 标的（目录名不含的常用说法）。命中优先级：自选 > 别名 > 目录精确子串。
+_CATALOG_ALIAS: dict[str, str] = {
+    "科创": "000688.SS",
+    "科创板": "000688.SS",
+    "科创50": "000688.SS",
+    "恒生科技": "^HSTECH",
+    "中概": "513050.SS",
+    "中概互联": "513050.SS",
+    "越南": "513880.SS",
+}
+
+
+def _resolve_symbol_by_catalog(message: str) -> str | None:
+    """目录搜索层：自选没命中时，按「目录名完整出现在话里」+ 口语别名解析。
+
+    「白酒板块现在怎么看」→ 目录名「白酒」完整在句中 → TH881273；
+    「科创板块现在怎么看」→ 别名表「科创」→ 000688.SS（科创50）。
+    不做模糊公共子串：目录词汇面大（90行业+500概念），2 字模糊串会
+    把「市场环境」误配到「环保工程」这类。命中的 symbol 由调用方交给
+    分析服务，失败自然回退全局。
+    """
+    from lei_signal.api import catalog as catalog_mod  # noqa: PLC0415
+    from lei_signal.api.config import STRATEGY_INDICES, US_ETFS  # noqa: PLC0415
+    from lei_signal.api.labels import THS_INDUSTRY_NAMES  # noqa: PLC0415
+
+    # 1) 口语别名（最长键优先，防「科创板」被「科创」截胡）
+    for alias in sorted(_CATALOG_ALIAS, key=len, reverse=True):
+        if alias in message:
+            return _CATALOG_ALIAS[alias]
+
+    # 2) 目录名完整出现在话里（行业/指数/美股ETF/概念）
+    entries: list[tuple[str, str]] = []  # (symbol, name)
+    entries += [(f"TH{code}", name) for code, name in THS_INDUSTRY_NAMES.items()]
+    entries += [(idx.symbol, idx.display_name) for idx in STRATEGY_INDICES]
+    entries += [(etf.symbol, etf.display_name) for etf in US_ETFS]
+    with contextlib.suppress(Exception):  # 概念目录缺席不影响其余三组
+        entries += [
+            (str(c.get("symbol", "")), str(c.get("name", "")))
+            for c in catalog_mod.concept_boards()
+            if c.get("symbol")
+        ]
+
+    best: tuple[int, str] | None = None  # (名称更长=更具体, symbol)
+    for symbol, name in entries:
+        if name and name in message and (best is None or len(name) > best[0]):
+            best = (len(name), symbol)
+    return best[1] if best else None
+
+
 def _resolve_symbol_by_name(message: str, watch_items: list) -> str | None:
     """中文名称模糊解析：说「通信设备」「纳指怎么样」也能带出对应标的。
 
@@ -495,6 +545,8 @@ def _prepare_discussion(
 
                 symbol = _resolve_symbol_by_name(body.message, list_watchlist(conn))
             if symbol is None:
+                symbol = _resolve_symbol_by_catalog(body.message)
+            if symbol is None:
                 symbol = _last_resolved_symbol(history_rows)
         if symbol is not None and service is not None and on_stage:
             on_stage("fetch", f"拉取 {symbol} 行情（首次约 1 分钟）")
@@ -546,6 +598,21 @@ def _prepare_discussion(
                 alerts = [a for p in plans for a in evaluate_plan(p, ctx)]
         if symbol is None:
             ctx_payload = {"context_kind": "global"}
+            # 全局兜底材料：宽度+融资一句话（叙事层），搜不到标的时
+            # 至少能答大盘环境，而不是两手一摊说没数据。
+            try:
+                from lei_signal.copilot import breadth as b  # noqa: PLC0415
+
+                ctx_payload["breadth_cn"] = b.a_share_breadth_cn()
+            except Exception:  # noqa: BLE001
+                ctx_payload["breadth_cn"] = None
+            try:
+                from lei_signal.copilot import sentiment as st  # noqa: PLC0415
+
+                m = st.margin_regime_cn()
+                ctx_payload["margin_cn"] = (m or {}).get("regime_cn")
+            except Exception:  # noqa: BLE001
+                ctx_payload["margin_cn"] = None
         return session.session_id, history_rows, ctx_payload, alerts, symbol
 
 

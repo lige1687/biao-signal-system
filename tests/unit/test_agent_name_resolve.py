@@ -70,3 +70,30 @@ def test_payload_symbol_numbers_whitelists_codes():
         "TH881129 当前状态偏弱，筹码峰约 9386.12。", allowed
     )
     assert ok, reason
+
+
+def test_catalog_layer_resolves_index_not_in_watchlist(monkeypatch):
+    """目录搜索层：自选没有的也能按中文名/别名命中（科创 case）。"""
+    from lei_signal.api.routes import agent as agent_mod
+
+    monkeypatch.setattr(
+        "lei_signal.api.catalog.concept_boards", lambda **kw: []
+    )
+    # 别名表：科创 → 科创50 指数
+    assert (
+        agent_mod._resolve_symbol_by_catalog("科创板块现在怎么看")
+        == "000688.SS"
+    )
+    # 目录名完整出现在话里：白酒 → TH 行业
+    assert agent_mod._resolve_symbol_by_catalog("白酒板块现在怎么看") == "TH881273"
+    # 无关文本不命中（曾把「市场环境」误配环保行业，模糊匹配已废）
+    assert agent_mod._resolve_symbol_by_catalog("市场环境怎么样") is None
+    assert agent_mod._resolve_symbol_by_catalog("大盘还能做吗") is None
+
+
+def test_catalog_alias_longest_key_wins():
+    from lei_signal.api.routes import agent as agent_mod
+
+    # 「科创板」比「科创」长，两者都指向同一标的，此处验证不截胡不崩
+    assert agent_mod._resolve_symbol_by_catalog("科创板") == "000688.SS"
+    assert agent_mod._resolve_symbol_by_catalog("聊聊科创") == "000688.SS"

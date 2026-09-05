@@ -53,6 +53,7 @@ STRATEGY_INDICES: tuple[DashboardIndex, ...] = (
     DashboardIndex("000977.SS", "人工智能", "A股"),
     DashboardIndex("399967.SZ", "中证军工", "A股"),
     DashboardIndex("399006.SZ", "创业板指", "A股"),
+    DashboardIndex("000688.SS", "科创50", "A股"),
     DashboardIndex("399005.SZ", "创业板50", "A股"),
     # 中证行业指数（93xxxx 系列挂东财 market=2 行情位，secid 特判见 symbols.py；
     # 其余 93 系可代码直输添加，按需在此登记进选择器）
