@@ -35,6 +35,7 @@ from lei_signal.api.routes import (
     plans,
     portfolio,
     sectors,
+    sentiment,
     signals,
     symbols,
     timing_backtest,
@@ -116,6 +117,7 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
     app.include_router(feishu_webhook.router)
     app.include_router(fundamentals.router)
     app.include_router(sectors.router)
+    app.include_router(sentiment.router)
     app.include_router(backtest.router)
     app.include_router(timing_backtest.router)
     app.include_router(factors.router)

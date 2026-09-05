@@ -1302,3 +1302,27 @@ class PortfolioResponse(BaseModel):
     observations: list[str] = []  # 组合级提示（大白话）
     advices: list[PortfolioAdviceDTO] = []  # 调仓建议（R1~R7）
     groups: list[PortfolioGroupDTO] = []
+
+
+# ── 基金净值序列对比（/portfolio/nav-series）─────────────────────────────
+# 补救重建（2026-09-05）：原定义随一次误操作 checkout 丢失（未提交），
+# 按 routes/portfolio.py::get_nav_series 用法与 funddata.fetch_nav_full
+# 字段重建；若与作者原版有出入，以作者版本为准直接覆盖。
+class FundNavItemDTO(BaseModel):
+    code: str
+    name: str = ""
+    dates: list[str] = []
+    unit_nav: list[float] = []
+    acc_nav: list[float] = []
+    day_pct: list[float] = []
+
+
+class FundNavErrorDTO(BaseModel):
+    code: str
+    reason_cn: str
+
+
+class FundNavSeriesResponse(BaseModel):
+    days: int = 0
+    items: list[FundNavItemDTO] = []
+    errors: list[FundNavErrorDTO] = []

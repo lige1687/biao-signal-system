@@ -992,6 +992,35 @@ rules:
       version；回测依据与更新记录见 docs/experiments/retail-mania-threshold-2026-09-04.md。
       「机构」为超大单近似（单据规模代理，非真实身份）；「国家队」无数据口径，不冒充。
 
+  # ---------------- 美国调查情绪与 VIX 分档（外部实证阈值引用，研究代理）----------------
+  us_survey_sentiment:
+    rule_id: "us_survey_sentiment"
+    version: "0.1.0"
+    provenance: "research_proxy"
+    params:
+      # AAII 官方 Bull-Bear Spread 定义与历史极值（aaii.com；历史均值约 +6.5pp）
+      bull_bear_spread_greed: 20      # 价差 > +20pp = 过度乐观（反向风险区）
+      bull_bear_spread_fear: -20      # 价差 < -20pp = 极度恐惧（反向机会区）
+      bullish_greed: 50               # 看多比例 > 50% = 过度乐观
+      bearish_fear: 50                # 看空比例 > 50% = 极度悲观（2009-03 极值 70.3% 恰在美股大底前 3 天）
+      zscore_extreme: 1.5             # 相对一年均值 ±1.5σ（MacroMicro 口径）
+      # VIX 惯例分档（市场通用口径）
+      vix_calm: 15                    # <15 低位自满
+      vix_normal: 20
+      vix_elevated: 25
+      vix_fear: 30                    # >30 恐慌区
+    formula: |
+      AAII 牛熊价差 = 看多% − 看空%；按上述阈值分档（贪婪/中性/恐惧）。
+      NAAIM 暴露指数：>100 极端乐观 / <40 极端悲观（NAAIM 惯例）。
+      VIX 按区间分档。
+    note_cn: |
+      阈值为外部实证引用非本系统回测：AAII 官方定义（价差±20pp、历史均值
+      +6.5pp）、2009-03-05 看空 70.3% 见底案例、Quantified Strategies/
+      Fidelity 回测（极端看空后 4 周收益高于平均）。告诫：极值需持续 2 周
+      以上或配合价格确认（SentimenTrader）；单一指标非最优。页面必须标注
+      「外部实证阈值」。数据源：LEI_SENTIMENT_ROOT 手动导入（naaim.csv/
+      aaii.csv），未设置时如实显示未接入。
+
 # ---------------- 状态机 ----------------
 state_machine:
   version: "1.0.0"
