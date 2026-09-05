@@ -17,7 +17,7 @@ import json
 import sqlite3
 from pathlib import Path
 
-_BREADTH_JSON = Path.home() / ".lei_signal_lab" / "cache" / "a_share_breadth_history.json"
+_BREADTH_JSON = Path.home() / ".lei_signal_lab" / "cache" / "a_share_ma_breadth_history.json"
 _US_DB = Path.home() / ".lei_signal_lab" / "lab.db"
 
 
