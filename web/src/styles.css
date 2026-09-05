@@ -4427,6 +4427,8 @@ a { color: var(--accent); text-decoration: none; }
 }
 .ws-live i { width: 6px; height: 6px; border-radius: 50%; background: var(--lei-green);
   animation: ws-breathe 2s ease-in-out infinite; }
+.ws-kline-box { flex: 1; min-height: 0; display: flex; }
+.ws-kline-box .kline { height: 100% !important; flex: 1; }
 .ws-kline-skeleton { flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
 .ws-kline-skeleton div {
   height: 64px; border-radius: 8px;
@@ -4437,8 +4439,9 @@ a { color: var(--accent); text-decoration: none; }
 
 /* 空态 */
 .ws-empty, .ws-hello { padding: 26px 8px; text-align: center; }
+.ws-hello { margin: auto 0; }
 .ws-empty { margin: auto; max-width: 300px; }
-.ws-empty-title, .ws-hello-title { font-size: 14px; font-weight: 600; margin: 0 0 6px; }
+.ws-empty-title, .ws-hello-title { font-size: 14.5px; font-weight: 600; margin: 0 0 6px; color: var(--text); }
 .ws-empty-chips { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-top: 10px; }
 
 @keyframes ws-blink { 50% { opacity: 0; } }

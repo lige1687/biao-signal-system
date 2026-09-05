@@ -92,7 +92,7 @@ function ThinkingRow() {
       <span className="ws-dots" aria-hidden>
         <i /><i /><i />
       </span>
-      正在读取系统判定
+      正在读取系统判定 · 首次分析新标的约需 1 分钟
     </div>
   );
 }
@@ -169,12 +169,14 @@ function SidePanel({
             </Link>
           </header>
           {detail.data ? (
-            <KlineChart
-              payload={detail.data.chart}
-              display={DEFAULT_DISPLAY}
-              onPick={() => undefined}
-              onDownload={() => undefined}
-            />
+            <div className="ws-kline-box">
+              <KlineChart
+                payload={detail.data.chart}
+                display={DEFAULT_DISPLAY}
+                onPick={() => undefined}
+                onDownload={() => undefined}
+              />
+            </div>
           ) : (
             <div className="ws-kline-skeleton" aria-label="K线加载中">
               <div /><div /><div />
@@ -282,12 +284,11 @@ export default function AgentWorkspacePage() {
   const dispatch = useMutation({
     mutationFn: (message: string) =>
       api.copilotDispatch({ message, symbol: symbol ?? undefined }),
-    onSuccess: (reply, message) => {
+    onSuccess: (reply) => {
       if (reply.chat_fallback) {
-        chat.mutate(message);
+        // 由下方 chat.mutate 接管（send 已推过 you 消息，这里不重复）
         return;
       }
-      pushTurn({ who: "you", text: message });
       pushTurn({
         who: "agent",
         text: reply.note_cn,
@@ -296,28 +297,40 @@ export default function AgentWorkspacePage() {
         grounded: true,
       });
     },
-    onError: (_e, message) => {
-      pushTurn({ who: "you", text: message });
-      chat.mutate(message);
+    onError: () => {
+      // dispatch 挂了（网络等）：由 send 的 fallback 路径走 chat
     },
   });
 
   const busy = dispatch.isPending || chat.isPending;
 
+  /** 报单类说法无论当前聊着哪个标的都必须走 dispatch（意图优先于上下文）。 */
+  const TRADE_HINT_RE = /买了|卖了|申购|赎回|报单|成交了/;
+
+  const runChat = (message: string) => chat.mutate(message);
+  const runDispatch = (message: string) => {
+    dispatch.mutate(message, {
+      onError: () => runChat(message),
+      onSuccess: (reply) => {
+        if (reply.chat_fallback) runChat(message);
+      },
+    });
+  };
+
   const send = (raw: string) => {
     const message = raw.trim();
     if (!message || busy) return;
     setInput("");
-    if (symbol) {
-      pushTurn({ who: "you", text: message });
-      chat.mutate(message);
+    pushTurn({ who: "you", text: message });
+    if (TRADE_HINT_RE.test(message) || !symbol) {
+      runDispatch(message);
       return;
     }
-    dispatch.mutate(message);
+    runChat(message);
   };
 
   const askExample = (q: string) => {
-    if (symbol) {
+    if (TRADE_HINT_RE.test(q)) {
       send(q);
       return;
     }
@@ -410,7 +423,7 @@ export default function AgentWorkspacePage() {
               e.preventDefault();
               send(input);
             }}
-            placeholder={symbol ? `就 ${symbol} 讨论，或随便问` : "问点什么，比如「通信设备怎么看」"}
+            placeholder={symbol ? `就 ${symbol} 讨论，或随便问` : "直接问；说标的名/代码，右栏出图"}
             disabled={busy}
           />
           <button
