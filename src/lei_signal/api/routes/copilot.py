@@ -417,8 +417,15 @@ def ops_today(request: Request) -> OpsCardDTO:
 @router.get("/copilot/sentiment")
 def get_sentiment() -> dict:
     """情绪面数据包：板块热度 + 两融环境（只读，叙事标注层）。"""
+    from lei_signal.copilot import breadth as breadth_mod  # noqa: PLC0415
     from lei_signal.copilot import sentiment as sentiment_mod  # noqa: PLC0415
 
     s_pack = sentiment_mod.load_sector_sentiment()
     s_pack["margin"] = sentiment_mod.margin_regime_cn()
+    s_pack["breadth"] = {
+        "a_share": breadth_mod.a_share_breadth(),
+        "us": breadth_mod.us_breadth(),
+        "a_share_cn": breadth_mod.a_share_breadth_cn(),
+        "us_cn": breadth_mod.us_breadth_cn(),
+    }
     return s_pack

@@ -76,6 +76,25 @@ def _payload_chars(payload: dict[str, Any]) -> int:
 
 
 
+def _breadth_block() -> dict:
+    """市场宽度叙事标注层：A股/美股占比直读大白话（不打分不判定）。
+
+    美股自 2026-08-14 断档（成分股行情源限流），如实标注截至日——
+    旧数不冒充当下（红线：数值直读，不推算）。"""
+    from lei_signal.copilot import breadth as breadth_mod  # noqa: PLC0415
+
+    out: dict = {"note_cn": "叙事标注层（research_proxy），不参与技术判定"}
+    try:
+        out["a_share_cn"] = breadth_mod.a_share_breadth_cn()
+    except Exception:  # noqa: BLE001
+        out["a_share_cn"] = None
+    try:
+        out["us_cn"] = breadth_mod.us_breadth_cn()
+    except Exception:  # noqa: BLE001
+        out["us_cn"] = None
+    return out
+
+
 def _news_block(
     news_brief: dict[str, Any] | None, symbol: str
 ) -> dict[str, Any]:
@@ -191,6 +210,7 @@ def build_discussion_context(
         "buy_point_review": review_dump,
         "plans": plan_rows,
         "news": _news_block(news_brief, result.symbol),
+        "breadth": _breadth_block(),
     }
     # 总量守卫：超预算时事件类先砍最旧（recent_events 按时间升序，最旧在头部）。
     while (
