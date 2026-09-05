@@ -4641,3 +4641,31 @@ a { color: var(--accent); text-decoration: none; }
 .ws-quick-level { display: flex; gap: 8px; align-items: baseline; font-size: 12px; }
 .ws-quick-level .lv-down { color: var(--up); }   /* 中国惯例：跌破位偏暖警示 */
 .ws-quick-level .lv-up { color: var(--accent); }
+
+/* ---- 情绪仪表盘 (/sentiment) ---- */
+.mood-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+.mood-card { padding: 10px 12px; }
+.mood-big {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 12px; margin: 6px 0 10px;
+  border: 1.5px solid; border-radius: 8px; background: rgba(255, 255, 255, 0.5);
+}
+.mood-big-state { font-size: 30px; font-weight: 800; line-height: 1; }
+.mood-big-cn { font-size: 13px; font-weight: 600; line-height: 1.4; }
+.mood-comp { display: flex; justify-content: space-between; font-size: 12.5px; padding: 4px 2px; border-top: 1px dashed rgba(0,0,0,0.06); }
+.mood-comp.big b { font-size: 13px; }
+.mood-comp.big { border-top: 1px dashed rgba(0,0,0,0.08); }
+.mood-note { font-size: 11px; margin-top: 8px; line-height: 1.6; }
+.mood-sector-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; margin-top: 8px; }
+.mood-sector-chip {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 5px 9px; border-radius: 5px; font-size: 12.5px;
+  border: 1px solid rgba(0,0,0,0.08); background: rgba(0,0,0,0.02);
+}
+.mood-sector-chip b { font-variant-numeric: tabular-nums; color: var(--text-dim); }
+.mood-sector-chip.hot { border-color: rgba(180, 83, 9, 0.4); background: rgba(180, 83, 9, 0.07); }
+.mood-sector-chip.hot b { color: #b45309; }
+.mood-sector-chip.warn { border-color: rgba(210, 74, 67, 0.5); background: rgba(210, 74, 67, 0.09); }
+.mood-sector-chip.warn b { color: #d24a43; }
+.mood-sector-chip.cold { border-color: rgba(77, 127, 196, 0.4); background: rgba(77, 127, 196, 0.07); }
+.mood-sector-chip.cold b { color: #4d7fc4; }

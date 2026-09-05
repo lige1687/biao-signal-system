@@ -1,4 +1,4 @@
-import type {
+import type { SentimentDashboard,
   ActionItem,
   CopilotDispatchReply,
   ExplainReply,
@@ -480,6 +480,12 @@ export const fundamentalsApi = {
 };
 
 // ---- 行业板块趋势工作台 ----
+
+// ---- 情绪仪表盘 ----
+export const sentimentApi = {
+  dashboard: () => request<SentimentDashboard>("/sentiment/dashboard"),
+};
+
 export const sectorsApi = {
   trend: (refresh = false, level = "all") =>
     request<SectorTrendResponse>(

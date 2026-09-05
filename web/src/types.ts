@@ -2234,3 +2234,65 @@ export interface TradesResponse {
   trades: FundTrade[];
   positions: FundPosition[];
 }
+
+// ---- 情绪仪表盘 (/api/sentiment) ----
+export interface MoodComponent {
+  label_cn: string;
+  ok: boolean;
+  value?: number;
+  unit?: string;
+  vote?: number;
+  as_of?: string;
+}
+export interface CnMood {
+  components: Record<string, MoodComponent>;
+  state: string | null;
+  state_cn: string;
+  note_cn: string;
+}
+export interface UsBreadth {
+  ok: boolean;
+  as_of?: string;
+  breadth_50?: number;
+  pctile_60d?: number | null;
+  state?: string | null;
+}
+export interface UsVix {
+  ok: boolean;
+  value?: number;
+  as_of?: string;
+  state_cn?: string;
+  thresholds?: number[];
+  source?: string;
+}
+export interface UsRiskAppetite {
+  ok: boolean;
+  chg_20d_pct?: number | null;
+  state_cn?: string;
+  as_of?: string;
+}
+export interface UsSurvey {
+  available: boolean;
+  root?: string | null;
+  hint_cn: string;
+  thresholds?: Record<string, number>;
+  threshold_source_cn?: string;
+  aaii?: { available: boolean; as_of: string; bullish: number; bearish: number; spread: number; state_cn: string };
+  naaim?: { available: boolean; as_of: string; exposure_index: number; state_cn: string; threshold_source_cn?: string };
+}
+export interface MoodSectorBoard {
+  code: string; name: string; level: number; stage: string | null;
+  heat_pctile: number | null; heat_hot?: boolean; heat_cold?: boolean;
+  heat_warning?: boolean; heat_note_cn?: string | null;
+}
+export interface SentimentDashboard {
+  cn_mood: CnMood;
+  us_mood: { breadth: UsBreadth; vix: UsVix; risk_appetite: UsRiskAppetite };
+  us_survey: UsSurvey;
+  sector_heat: {
+    available: boolean; as_of?: string;
+    meta?: { metric?: string; window_days?: number; rule_version?: string; n_pool?: number };
+    boards: MoodSectorBoard[];
+  };
+  disclaimer_cn: string;
+}

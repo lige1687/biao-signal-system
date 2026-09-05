@@ -27,6 +27,7 @@ export default function TopNav() {
     [
       { to: "/", label: "看盘", end: true, badge: todayOpps || undefined },
       { to: "/sectors", label: "行业板块" },
+      { to: "/sentiment", label: "情绪" },
     ],
     [
       { to: "/ops", label: "今日操作" },
