@@ -14,7 +14,7 @@ def test_glm_branch_takes_priority(monkeypatch):
     cfg = plans_llm.load_ark_config()
     assert cfg is not None
     assert cfg.api_key == "glm-test-key"
-    assert cfg.base_url == "https://open.bigmodel.cn/api/paas/v4"
+    assert cfg.base_url == "https://open.bigmodel.cn/api/coding/paas/v4"
     assert cfg.model == plans_llm.GLM_MODEL
     assert cfg.style == STYLE_OPENAI
 

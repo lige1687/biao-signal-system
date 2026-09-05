@@ -43,8 +43,12 @@ ENV_DEEPSEEK_MODEL = "DEEPSEEK_MODEL"
 #: GLM（智谱）端点与模型（OpenAI 兼容协议）。用户 2026-09-05 指定 GLM 为默认
 #: 表达层供应商（plan-agent-superentry-v1 决策 D7），优先级最高：
 #: 配了 GLM_API_KEY 就走 GLM，不再回退其他供应商。
-GLM_BASE_URL = "https://open.bigmodel.cn/api/paas/v4"
-GLM_MODEL = "glm-4.6"
+#: 端点必须用 **Coding Plan 专用网关**（/api/coding/paas/v4）：用户的 key 是
+#: 编码计划订阅，普通按量端点（/api/paas/v4）不认订阅额度，会报 1113 余额
+#: 不足。glm-5.3 为强制思考模型：正文在 message.content、思考在
+#: reasoning_content（分离字段，_extract_openai 只取 content，天然兼容）。
+GLM_BASE_URL = "https://open.bigmodel.cn/api/coding/paas/v4"
+GLM_MODEL = "glm-5.3"
 ENV_GLM_API_KEY = "GLM_API_KEY"
 ENV_GLM_BASE_URL = "GLM_BASE_URL"
 ENV_GLM_MODEL = "GLM_MODEL"
