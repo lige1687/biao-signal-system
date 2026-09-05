@@ -2,7 +2,7 @@
 
 推送什么（用户口径 2026-09-04）：
 1. 危机状态机事件（V4 刚崩警示 / V3 出清企稳，最高优先）——触发即推；
-2. 当日宏观/风险类重大消息（category ∈ {macro, risk} 且 importance ≥ 8）
+2. 当日宏观/风险类重大消息（category ∈ {macro, risk} 且 importance ≥ 7）
    ——美联储议息、非农、战争等系统性事件；
 3. 「影响窗口」：importance ≥ 9 的事件发布后 3 日内持续随推送出现
    （标"X日前 · 影响窗口"）——关键信息的影响不止当天。
@@ -23,8 +23,9 @@ from lei_signal.newsfeed.store import NewsStore
 
 logger = logging.getLogger(__name__)
 
-#: 当日重大事件门槛（宏观/风险类）。
-PUSH_IMPORTANCE = 8
+#: 当日重大事件门槛（宏观/风险类）。8→7（2026-09-05）：GLM 打分较 ark 保守，
+#: 非农/美联储/战争类系统性事件落在 7 分档（用户口径点名必推）。
+PUSH_IMPORTANCE = 7
 #: 影响窗口：≥9 分事件的持续天数（含发布日）。
 IMPACT_WINDOW_DAYS = 3
 
