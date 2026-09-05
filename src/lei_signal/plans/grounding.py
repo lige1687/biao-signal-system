@@ -155,7 +155,10 @@ def render_alerts(
 #: 归一化：NFKC（全角数字/％/逗号 -> 半角）、零宽字符、千分位逗号、中文数字。
 #: 零宽族覆盖 U+200B/200C/200D + U+2060 词连接符 + U+00AD 软连字符 + U+FEFF。
 _ZERO_WIDTH_RE = re.compile(r"[\u200b\u200c\u200d\u2060\u00ad\ufeff]")
-_THOUSANDS_RE = re.compile(r"(?<=\d),(?=\d{3}\b)")  # 只剥数字间逗号
+_THOUSANDS_RE = re.compile(r"(?<=\d),(?=\d{3}(?!\d))")  # 只剥数字间逗号
+# 注：边界用 (?!\d) 而非 \b——\b 在数字与汉字间不成立（汉字属 \w），
+# 「162,000人」这类后接中文的千分位曾因此漏剥，被切成 162/000 两个
+# 豁免级小整数，校验对它失明（2026-09-05 修复）。
 _CN_RUN_RE = re.compile(r"[零一二两三四五六七八九十百千万亿]+")
 _CN_DIGIT = {"零": 0, "一": 1, "二": 2, "两": 2, "三": 3, "四": 4,
              "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
@@ -273,8 +276,10 @@ def extract_market_numbers(text: str) -> list[float]:
     入口先归一化：NFKC（全角/％）、剔零宽字符、中文数字转阿拉伯（八千七百->8700）、
     剥千分位逗号（1,938.56->1938.56）；无法保守解析的中文数字片段跳过（=不校验）。
 
-    豁免：日期、纯小整数（|n| < 100，序号/量词/次数）、圆圈数字。
-    校验：小数、百分数、绝对值 >= 100 的整数（价位）、科学计数法。
+    豁免：日期、纯小整数（无小数点且 |n| < 1000：序号/量词/次数/天数，以及
+    金额单位换算后的口述约数——如材料是 $12.93 Billion 而表述为「约130亿」，
+    白名单只有原文 12.93，换算约数不构成编造）、圆圈数字。
+    校验：小数、百分数、绝对值 >= 1000 的整数（价位/大额精确数）、科学计数法。
     """
     text = _normalize_numeric_text(text)
     text = _DATE_RE.sub(" ", text)
@@ -284,8 +289,8 @@ def extract_market_numbers(text: str) -> list[float]:
         is_pct = tok.endswith("%")
         num = float(tok.rstrip("%"))
         has_decimal = "." in tok
-        if not (has_decimal or is_pct or abs(num) >= 100):
-            continue  # 序号/量词/次数豁免
+        if not (has_decimal or is_pct or abs(num) >= 1000):
+            continue  # 序号/量词/次数/单位换算约数豁免
         out.append(num)
     return out
 

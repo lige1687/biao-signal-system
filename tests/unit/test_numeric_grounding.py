@@ -116,3 +116,17 @@ def test_word_joiner_and_soft_hyphen_digit_split_rejected():
     assert not ok and "4321" in reason
     ok2, _ = verify_numeric_grounding("关键位 87\u00ad00", frozenset({8700.0}))
     assert ok2
+
+
+def test_three_digit_integer_exempt_but_decimal_and_large_checked():
+    """2026-09-05 豁免边界：无小数点且 <1000 的整数豁免（单位换算约数如
+    「$12.93 Billion」→「约130亿」的 130）；小数与 >=1000 整数仍校验。"""
+    from lei_signal.plans.grounding import extract_market_numbers
+
+    nums = extract_market_numbers("约130亿收购，12.93 Billion，新增162,000人")
+    assert 130.0 not in nums          # 三位整数约数：豁免
+    assert 12.93 in nums              # 小数：校验
+    assert 162000.0 in nums           # 六位精确数：校验
+    # 编造价位仍是重灾区（小数/大数），不受本次豁免影响
+    ok, _ = verify_numeric_grounding("关键位 9648.062", frozenset({8700.0}))
+    assert not ok
