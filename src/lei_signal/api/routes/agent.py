@@ -360,6 +360,32 @@ def _resolve_symbol_by_name(message: str, watch_items: list) -> str | None:
     return scored[0][1]
 
 
+def _payload_symbol_numbers(ctx_payload: dict) -> set[float]:
+    """上下文字符串里 ≥4 位的数字段（标的/板块代码，如 TH881129 的 881129）。
+
+    verify_numeric_grounding 用宽泛数字正则抽回复文本，代码串会被当数值；
+    这些数字来自系统材料本身，收集进白名单避免「提代码=编数字」的误伤。
+    """
+    nums: set[float] = set()
+
+    def walk(value: object) -> None:
+        if isinstance(value, str):
+            for token in re.findall(r"\d{4,}", value):
+                try:
+                    nums.add(float(token))
+                except ValueError:  # pragma: no cover - 纯数字正则不会走到
+                    continue
+        elif isinstance(value, dict):
+            for child in value.values():
+                walk(child)
+        elif isinstance(value, list):
+            for child in value:
+                walk(child)
+
+    walk(ctx_payload)
+    return nums
+
+
 def _last_resolved_symbol(history_rows: list) -> str | None:  # noqa: ANN001
     """从会话最近的 assistant 消息 meta 继承标的。
 
@@ -503,8 +529,13 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
     grounded = False
     # 数值白名单 = 技术材料数值 ∪ 本轮 user message 中出现的数字
     # （用户问「8700 是不是更好」、LLM 回显「你说的 8700」时不误降级）
-    allowed_nums = collect_payload_numbers(ctx_payload) | frozenset(
-        extract_market_numbers(body.message)
+    # ∪ 上下文字符串里的代码数字段（TH881129/515880 这类标的代码会被校验器
+    #   当数字抽取，它们本就来自系统材料，不进白名单就是误伤——glm-5.3 讲
+    #   板块时必带代码，曾因此整链降级）
+    allowed_nums = (
+        collect_payload_numbers(ctx_payload)
+        | frozenset(extract_market_numbers(body.message))
+        | frozenset(_payload_symbol_numbers(ctx_payload))
     )
     history = [{"role": m.role, "content": m.content} for m in history_rows]
     if config is not None:

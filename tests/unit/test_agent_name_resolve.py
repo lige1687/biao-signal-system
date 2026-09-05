@@ -52,3 +52,21 @@ def test_longest_match_wins():
 def test_no_false_positive_on_unrelated_text():
     assert _resolve_symbol_by_name("市场环境怎么样", WATCH) is None
     assert _resolve_symbol_by_name("复盘一下这周", WATCH) is None
+
+
+def test_payload_symbol_numbers_whitelists_codes():
+    """板块/标的代码里的数字进白名单（glm-5.3 提代码不再被当编数字）。"""
+    from lei_signal.api.routes.agent import _payload_symbol_numbers
+    from lei_signal.plans.grounding import verify_numeric_grounding
+
+    payload = {
+        "context_kind": "symbol",
+        "symbol": "TH881129.SECTOR",
+        "display_name": "通信设备",
+        "buy_point_review": {"candidates": [{"key_price": 9386.12}]},
+    }
+    allowed = frozenset({9386.12}) | frozenset(_payload_symbol_numbers(payload))
+    ok, reason = verify_numeric_grounding(
+        "TH881129 当前状态偏弱，筹码峰约 9386.12。", allowed
+    )
+    assert ok, reason
