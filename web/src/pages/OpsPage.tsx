@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { api } from "../api/client";
@@ -10,10 +11,39 @@ export default function OpsPage() {
     queryKey: ["opsToday"],
     queryFn: () => api.opsToday(),
     refetchInterval: 60_000,
+    retry: 2,
+    retryDelay: 4000,
   });
-  if (q.isLoading) return <div className="muted page">清单加载中…</div>;
+  const [slow, setSlow] = useState(false);
+  useEffect(() => {
+    if (!q.isLoading && !q.isFetching) return undefined;
+    setSlow(false);
+    const t = window.setTimeout(() => setSlow(true), 10_000);
+    return () => window.clearTimeout(t);
+  }, [q.isLoading, q.isFetching]);
+  if (q.isLoading)
+    return (
+      <div className="page" style={{ padding: "40px 18px", textAlign: "center" }}>
+        <div style={{ display: "flex", gap: 4, justifyContent: "center" }} aria-hidden>
+          <i className="ws-dot" /><i className="ws-dot" /><i className="ws-dot" />
+        </div>
+        <div style={{ marginTop: 10 }}>清单加载中…</div>
+        {slow && (
+          <div className="muted" style={{ marginTop: 6, fontSize: 12 }}>
+            等得有点久——后端可能在启动预热（约 1–3 分钟），页面会自动重试；也可稍后刷新。
+          </div>
+        )}
+      </div>
+    );
   if (q.isError || !q.data)
-    return <div className="cp-error page">清单加载失败，稍后重试。</div>;
+    return (
+      <div className="page" style={{ padding: "40px 18px", textAlign: "center" }}>
+        <div className="cp-error">清单加载失败。</div>
+        <button className="btn small" style={{ marginTop: 10 }} onClick={() => q.refetch()}>
+          重试
+        </button>
+      </div>
+    );
   const ops = q.data;
   return (
     <div className="page ops-page">
