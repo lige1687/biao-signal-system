@@ -95,6 +95,9 @@ def _breadth_block() -> dict:
     return out
 
 
+_DIR_CN = {"bullish": "利多", "bearish": "利空", "neutral": "中性"}
+
+
 def _news_block(
     news_brief: dict[str, Any] | None, symbol: str
 ) -> dict[str, Any]:
@@ -102,6 +105,9 @@ def _news_block(
 
     红线：只做「为什么」的叙事参考，不参与技术判定、不构成信号——键名里
     显式带 note_cn，LLM 引用时必须保留该口径。
+    字段对齐 NewsfeedService.watchlist_brief 的真实输出（2026-09-05 核实）：
+    item 的计数键是 bullish/bearish/neutral，最新一条在 top{title,direction}；
+    旧代码读 bull_count/latest_title 等不存在的键，个股叙事恒为空 dict。
     """
     if not isinstance(news_brief, dict):
         return {"note_cn": "消息面未接入本次材料"}
@@ -114,11 +120,18 @@ def _news_block(
         "note_cn": "叙事标注层（为什么），不参与技术判定、不构成信号",
     }
     if mine:
-        out["symbol_brief"] = {
+        top = mine.get("top") or {}
+        direction = top.get("direction")
+        symbol_brief: dict[str, Any] = {
             k: mine.get(k)
-            for k in ("bull_count", "bear_count", "latest_title", "latest_direction_cn")
+            for k in ("bullish", "bearish", "neutral")
             if mine.get(k) is not None
         }
+        if top.get("title"):
+            symbol_brief["latest_title"] = top["title"]
+        if direction:
+            symbol_brief["latest_direction_cn"] = _DIR_CN.get(direction, direction)
+        out["symbol_brief"] = symbol_brief or None
     else:
         out["symbol_brief"] = None  # 近期无已评分消息：如实说无，不硬凑
     if isinstance(mood, dict) and mood.get("bullish") is not None:
