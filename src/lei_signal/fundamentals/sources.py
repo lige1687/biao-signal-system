@@ -32,10 +32,11 @@ _CLIST_URLS = (
 )
 _FLOW_URLS = (
     "https://push2his.eastmoney.com/api/qt/stock/fflow/daykline/get",
-    # push2test 为备用历史集群（同 schema；2026-09-05 实测 push2his 因 IP 临时
-    # 封禁不可达时本节点可用，历史窗口约 88 个交易日），插在 delay 之前
-    "https://push2test.eastmoney.com/api/qt/stock/fflow/daykline/get",
     "https://push2delay.eastmoney.com/api/qt/stock/fflow/daykline/get",
+    # 教训（2026-09-05 实测）：push2test 备用集群看似可用但数据质量不合格——
+    # 日期稀疏（约 2/3 交易日）且部分日子数值与主源偏差/翻转（9-01 主力
+    # -98.6 vs 主源 -121.0），禁止用于历史回填。被封时宁可等解封或走每日
+    # clist 快照通道累积。
 )
 _DATACENTER_URL = "https://datacenter-web.eastmoney.com/api/data/v1/get"
 # 中美国债收益率：东财旧版 datacenter 接口（带公开 token），中美同源。
@@ -168,9 +169,8 @@ def fetch_industry_flow(
     fields2 顺序：f51 日期, f52 主力净流入, f53 小单, f54 中单, f55 大单, f56 超大单。
 
     取数顺序：先 **直连 push2his**（绕系统代理；白名单代理会拒 push2his，而 delay
-    镜像只返最近 1 日），push2his 不可达（如 IP 临时封禁）时直连回落 push2test
-    备用历史集群；``prefer_direct=False`` 跳过直连（调用方已探明直连不可用），
-    直接走常规路径（代理 → push2test → push2delay）。
+    镜像只返最近 1 日）；``prefer_direct=False`` 跳过直连（调用方已探明直连不可用），
+    直接走常规路径（代理 → push2delay，仅最近 1 日，用于每日增量累积）。
     """
     params = {
         "lmt": days,
@@ -182,13 +182,13 @@ def fetch_industry_flow(
     payload: dict[str, Any] | None = None
     if prefer_direct:
         try:
-            payload = _get_json(_FLOW_URLS[:2], params, trust_env=False)
+            payload = _get_json(_FLOW_URLS[:1], params, trust_env=False)
         except FundamentalsSourceError:
             payload = None
         if payload is None:
             payload = _get_json(_FLOW_URLS, params)
     else:
-        # 调用方已探明直连不可用：走 push2test/delay，避免对 push2his 的无效重试
+        # 调用方已探明直连不可用：只走 delay，避免对 push2his 的无效重试拖慢整体
         payload = _get_json(_FLOW_URLS[1:], params)
     klines = (payload.get("data") or {}).get("klines") or []
     points: list[dict[str, Any]] = []

@@ -57,7 +57,16 @@ def load_panels() -> dict:
         {r["date"]: {c: v.get("b50") for c, v in r["boards"].items()} for r in rows}
     ).T.sort_index()
     b50.index = pd.to_datetime(b50.index)
-    b50 = b50.reindex(close.index)
+
+    # 交易日历对齐与缺口处理：sector_trend_history 有洞（预计算个别日未跑，
+    # 实测 2026-08 下旬连缺数日），用 parquet 全市场交易日历补齐，指数/宽度
+    # 按持平前向填充（缺日≈无更新，日收益 0 近似）；同时过滤资金流源里偶发
+    # 的周末杂日（如 07-04/08-22）。
+    cal = pd.read_parquet(CACHE / "a_share_klines.parquet", columns=["date"])
+    days = pd.DatetimeIndex(sorted(set(pd.to_datetime(cal["date"]))))
+    days = days[(days >= close.index[0]) & (days <= close.index[-1])]
+    close = close.reindex(days).ffill()
+    b50 = b50.reindex(days).ffill()
 
     snap_row = {x["code"]: x for x in snap["boards"]}
     return {
