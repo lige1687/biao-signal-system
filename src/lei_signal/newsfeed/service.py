@@ -177,6 +177,71 @@ class NewsfeedService:
         )
         return {"days": days, "items": hits, "mood": mood}
 
+    def major_events_brief(
+        self,
+        *,
+        days: int = 3,
+        min_importance: int = 7,
+        limit: int = 8,
+    ) -> dict[str, Any]:
+        """重大事件简报（Agent 参考层，客观字段 only，2026-09-05 用户口径）。
+
+        用户点名要「影响资本开支」级别的产业大事（英伟达/谷歌资本开支类），
+        故类别扩到 macro/risk/industry/policy 四类（推送的宏观线仍只 macro/risk，
+        两套口径各自维护）。**只给标题/类别/方向/分数/时间**，不带 llm_note
+        主观小结——博主立场与 AI 观点不进 Agent（同日红线：叙事标注层）。
+        """
+        days = max(1, min(int(days), 7))
+        date_from = (
+            datetime.now().astimezone() - timedelta(days=days)
+        ).isoformat(timespec="seconds")
+        store = self._store()
+        try:
+            rows = store.major_rows(
+                categories=["macro", "risk", "industry", "policy"],
+                min_importance=max(1, int(min_importance)),
+                date_from=date_from,
+                limit=60,
+            )
+        finally:
+            store.close()
+        today = datetime.now().astimezone().strftime("%Y-%m-%d")
+        cat_cn = {
+            "macro": "宏观", "risk": "风险", "industry": "产业", "policy": "政策",
+        }
+        dir_cn = {"bullish": "利多", "bearish": "利空", "neutral": "中性"}
+        items = []
+        for r in rows[:max(1, int(limit))]:
+            d = dict(r)
+            day = str(d.get("published_at") or "")[:10]
+            if day == today:
+                when_cn = "今日"
+            else:
+                gap = (
+                    datetime.fromisoformat(today).date()
+                    - datetime.fromisoformat(day).date()
+                ).days if day else 99
+                when_cn = f"{gap}天前" if 0 < gap < 30 else day
+            items.append(
+                {
+                    "title": d.get("title") or "",
+                    "category": d.get("category"),
+                    "category_cn": cat_cn.get(d.get("category") or "", d.get("category") or ""),
+                    "direction": d.get("direction"),
+                    "direction_cn": dir_cn.get(d.get("direction") or "", "中性"),
+                    "importance": d.get("importance"),
+                    "published_at": d.get("published_at"),
+                    "when_cn": when_cn,
+                }
+            )
+        return {
+            "days": days,
+            "min_importance": max(1, int(min_importance)),
+            "available": bool(items),
+            "items": items,
+            "note_cn": "客观事件参考层（标题/类别/方向为资讯流AI评分），不参与技术判定",
+        }
+
     def digests(self, limit: int = 7) -> list[dict]:
         store = self._store()
         try:

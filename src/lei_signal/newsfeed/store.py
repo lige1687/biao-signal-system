@@ -168,6 +168,32 @@ class NewsStore:
             )
         )
 
+    def major_rows(
+        self,
+        *,
+        categories: list[str],
+        min_importance: int,
+        date_from: str,
+        limit: int = 40,
+    ) -> list[sqlite3.Row]:
+        """重大事件类条目（Agent 侧口径，2026-09-05 用户拍板）。
+
+        与 push.py 的宏观线（macro/risk）不同：用户点名要把「影响资本开支」
+        级别的产业事件（英伟达/谷歌资本开支类）也纳入，故类别集合由调用方
+        传入（Agent 侧 = macro/risk/industry/policy 四类）。只取客观字段
+        （标题/类别/方向/分数/时间），不含 llm_note——主观小结不进 Agent。
+        """
+        ph = ",".join("?" for _ in categories)
+        return list(
+            self._conn.execute(
+                "SELECT id, category, title, direction, importance, published_at "
+                f"FROM news_items WHERE importance IS NOT NULL "
+                f"AND category IN ({ph}) AND importance >= ? AND published_at >= ? "
+                "ORDER BY importance DESC, published_at DESC LIMIT ?",
+                [*categories, min_importance, date_from, limit],
+            )
+        )
+
     def clear_old_content(self, days: int = 7) -> int:
         """内容保留队列（2026-09-05 用户口径）：字幕/正文大字段保留 N 天，
         过期置 NULL 释放空间。只清 content——title/direction/importance 等

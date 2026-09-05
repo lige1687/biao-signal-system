@@ -2220,6 +2220,14 @@ export interface SentimentBlock {
   holdings_states: { group_cn: string; state_cn: string }[];
   note_cn: string;
 }
+/** 重大事件条目（客观字段 only：标题/类别/方向/分数/时间）。 */
+export interface MajorEvent {
+  title: string; category_cn: string; direction_cn: string;
+  importance: number; when_cn: string; published_at: string;
+}
+export interface MajorEventsBlock {
+  available: boolean; items: MajorEvent[]; note_cn: string;
+}
 export interface OpsCard {
   run_date: string; generated_at: string;
   holdings_actions: OpsLine[];
@@ -2227,6 +2235,7 @@ export interface OpsCard {
   plan_todos: OpsTodo[];
   watch_triggers: OpsLine[];
   sentiment: SentimentBlock | null;
+  major_events: MajorEventsBlock | null;
   push_summary_cn: string;
 }
 

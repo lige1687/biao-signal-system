@@ -4587,6 +4587,23 @@ a { color: var(--accent); text-decoration: none; }
 }
 .ops-section h3 { font-size: 13px; margin: 0 0 8px; color: var(--text); }
 
+/* 重大事件条目：分数/类别/方向/时间一行元信息 + 标题 */
+.ops-major {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 6px 0; border-bottom: 1px dashed var(--border);
+}
+.ops-major:last-child { border-bottom: none; }
+.ops-major-meta { display: flex; gap: 8px; align-items: baseline; font-size: 11px; }
+.ops-major-imp {
+  color: var(--warn, #c9a227); font-size: 11.5px; font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.ops-major-cat {
+  padding: 0 6px; border-radius: 999px; font-size: 10.5px;
+  background: var(--bg); border: 1px solid var(--border); color: var(--text-dim);
+}
+.ops-major-title { font-size: 12.5px; color: var(--text); line-height: 1.45; }
+
 /* ---- 调用链步骤条（流式回合） ---- */
 .ws-stages {
   display: flex; flex-direction: column; gap: 3px;

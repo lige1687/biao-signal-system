@@ -1,9 +1,10 @@
 """每日操作清单组装（纯读，零 LLM）：页面与每日跑批推送共用。
 
-四段：① 持仓要处理的（EXIT 类待办 + 组合 observations）
+五段：① 持仓要处理的（EXIT 类待办 + 组合 observations）
      ② 今日推荐（推荐账本当日存证，缺省 None）
      ③ 计划待办催办（open 待办，EXIT 优先）
      ④ 观察触发（当日扫描 waiting 项还缺什么）
+     ⑤ 重大事件（客观字段 only，newsfeed 侧组装后传入）
 """
 from __future__ import annotations
 
@@ -12,6 +13,7 @@ import sqlite3
 from datetime import UTC, datetime
 
 from lei_signal.api.schemas import (
+    MajorEventsBlockDTO,
     OpsCardDTO,
     OpsLineDTO,
     OpsTodoDTO,
@@ -30,6 +32,7 @@ def build_ops_today(
     *,
     run_date: str,
     recommend_card: RecommendCardDTO | None,
+    major_events: dict | None = None,
 ) -> OpsCardDTO:
     rows = conn.execute(
         """SELECT a.action_id, a.plan_id, a.kind, a.due_from, a.nag_count,
@@ -96,6 +99,9 @@ def build_ops_today(
         parts.append(f"{enter_n} 个入场待办")
     if recommend_card and recommend_card.items:
         parts.append(f"今日推荐 {len(recommend_card.items)} 个标的")
+    major_block = _build_major_events_block(major_events)
+    if major_block and major_block.available:
+        parts.append(f"重大事件 {len(major_block.items)} 条")
     summary = "；".join(parts) + "。" if parts else "今日无必须处理的待办。"
     return OpsCardDTO(
         run_date=run_date,
@@ -105,7 +111,37 @@ def build_ops_today(
         plan_todos=todos,
         watch_triggers=watch,
         sentiment=_build_sentiment_block(conn),
+        major_events=major_block,
         push_summary_cn=summary,
+    )
+
+
+def _build_major_events_block(major_events: dict | None) -> MajorEventsBlockDTO | None:
+    """重大事件区块：newsfeed service 的 major_events_brief 直转 DTO。
+
+    传入 None（服务未就绪/未接）时区块整体缺省，页面不显示该段；
+    客观字段 only 的口径在 service 层保证（无 llm_note）。
+    """
+    if not isinstance(major_events, dict):
+        return None
+    from lei_signal.api.schemas import MajorEventDTO
+
+    items = [
+        MajorEventDTO(
+            title=str(it.get("title") or ""),
+            category_cn=str(it.get("category_cn") or ""),
+            direction_cn=str(it.get("direction_cn") or ""),
+            importance=int(it.get("importance") or 0),
+            when_cn=str(it.get("when_cn") or ""),
+            published_at=str(it.get("published_at") or ""),
+        )
+        for it in (major_events.get("items") or [])
+        if isinstance(it, dict)
+    ]
+    return MajorEventsBlockDTO(
+        available=bool(major_events.get("available")),
+        items=items,
+        note_cn=str(major_events.get("note_cn") or ""),
     )
 
 

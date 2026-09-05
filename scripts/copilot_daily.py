@@ -108,9 +108,19 @@ def main() -> int:
         sector_rows = None
     news_brief = None
     try:
-        news_brief = NewsfeedService().watchlist_brief([], days=3) or None
+        newsfeed_svc = NewsfeedService()
+        news_brief = newsfeed_svc.watchlist_brief([], days=3) or None
     except Exception:  # noqa: BLE001
+        newsfeed_svc = None
         news_brief = None
+    major_events = None
+    try:
+        major_events = (
+            newsfeed_svc.major_events_brief()
+            if newsfeed_svc is not None else None
+        )
+    except Exception:  # noqa: BLE001
+        major_events = None
 
     card = build_recommendation(
         scan_items, run_date=run_date,
@@ -120,7 +130,8 @@ def main() -> int:
         if card.items:
             journal.save_recommendation(conn, card)
         ops_card = ops_mod.build_ops_today(
-            conn, run_date=run_date, recommend_card=card
+            conn, run_date=run_date, recommend_card=card,
+            major_events=major_events,
         )
         scored = journal.score_journal_outcomes(conn, service)
         conn.commit()

@@ -407,10 +407,18 @@ def ops_today(request: Request) -> OpsCardDTO:
     from lei_signal.copilot import ops as ops_mod  # noqa: PLC0415
 
     run_date = today_date()
+    major_events = None
+    svc = getattr(request.app.state, "newsfeed_service", None)
+    if svc is not None:
+        try:
+            major_events = svc.major_events_brief()
+        except Exception:  # noqa: BLE001 — 消息面失败不阻塞清单
+            major_events = None
     with closing(connect(_db_path(request))) as conn:
         rec = journal.load_recommendation(conn, run_date)
         return ops_mod.build_ops_today(
-            conn, run_date=run_date, recommend_card=rec
+            conn, run_date=run_date, recommend_card=rec,
+            major_events=major_events,
         )
 
 

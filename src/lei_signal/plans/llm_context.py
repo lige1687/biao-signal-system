@@ -142,12 +142,39 @@ def _news_block(
         }
     return out
 
+
+def _major_events_block(major_events: dict[str, Any] | None) -> dict[str, Any] | None:
+    """重大事件叙事块（客观字段 only，2026-09-05 用户口径）。
+
+    用户点名要「影响资本开支」级别的产业大事（英伟达/谷歌类），不要博主
+    观点等主观信息——service 层已保证只出标题/类别/方向/分数/时间。
+    传入 None（服务缺席）时整块不出，不硬凑。
+    """
+    if not isinstance(major_events, dict) or not major_events.get("available"):
+        return None
+    items = [
+        {
+            k: it.get(k)
+            for k in ("title", "category_cn", "direction_cn", "importance", "when_cn")
+            if it.get(k) is not None
+        }
+        for it in (major_events.get("items") or [])
+        if isinstance(it, dict) and it.get("title")
+    ]
+    if not items:
+        return None
+    return {
+        "note_cn": "客观事件参考（叙事层，不参与技术判定）",
+        "items": items,
+    }
+
 def build_discussion_context(
     result: AnalysisResult,
     review_dump: dict[str, Any] | None,
     plans: list[TradePlan],
     action_items: list[ActionItem],
     news_brief: dict[str, Any] | None = None,
+    major_events: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     a = result.assessment
     close = float(result.frame["close"].iloc[-1])
@@ -223,6 +250,7 @@ def build_discussion_context(
         "buy_point_review": review_dump,
         "plans": plan_rows,
         "news": _news_block(news_brief, result.symbol),
+        "major_events": _major_events_block(major_events),
         "breadth": _breadth_block(),
     }
     # 总量守卫：超预算时事件类先砍最旧（recent_events 按时间升序，最旧在头部）。

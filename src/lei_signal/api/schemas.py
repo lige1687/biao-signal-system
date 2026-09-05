@@ -1219,6 +1219,29 @@ class SentimentBlockDTO(BaseModel):
     note_cn: str = ""
 
 
+class MajorEventDTO(BaseModel):
+    """重大事件条目（客观字段 only：标题/类别/方向/分数/时间）。
+
+    2026-09-05 用户口径：影响资本开支级别的产业大事（英伟达/谷歌类）+
+    宏观/风险/政策，≥7 分；博主观点与 AI 主观小结（llm_note）不进 Agent。
+    """
+
+    title: str
+    category_cn: str = ""
+    direction_cn: str = ""
+    importance: int = 0
+    when_cn: str = ""
+    published_at: str = ""
+
+
+class MajorEventsBlockDTO(BaseModel):
+    """重大事件叙事区块（参考层，不参与技术判定）。"""
+
+    available: bool = False
+    items: list[MajorEventDTO] = []
+    note_cn: str = ""
+
+
 class OpsCardDTO(BaseModel):
     """每日操作清单（确定性组装，零 LLM；页面与推送共用）。"""
 
@@ -1229,6 +1252,7 @@ class OpsCardDTO(BaseModel):
     plan_todos: list[OpsTodoDTO] = []
     watch_triggers: list[OpsLineDTO] = []
     sentiment: SentimentBlockDTO | None = None
+    major_events: MajorEventsBlockDTO | None = None
     push_summary_cn: str = ""
 
 

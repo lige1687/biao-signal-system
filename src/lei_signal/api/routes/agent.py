@@ -575,12 +575,14 @@ def _prepare_discussion(
                 if on_stage:
                     on_stage("context", "组装技术材料与监督状态")
                 news_brief = None
+                major_events = None
                 try:
                     from lei_signal.newsfeed.service import (  # noqa: PLC0415
                         NewsfeedService,
                     )
 
-                    news_brief = NewsfeedService().watchlist_brief(
+                    _nf = NewsfeedService()
+                    news_brief = _nf.watchlist_brief(
                         [{
                             "symbol": symbol,
                             "display_name": getattr(entry.result, "display_name", "") or symbol,
@@ -588,11 +590,14 @@ def _prepare_discussion(
                         }],
                         days=5,
                     )
+                    major_events = _nf.major_events_brief()
                 except Exception:  # noqa: BLE001  消息面缺席不阻断技术材料
                     news_brief = None
+                    major_events = None
                 ctx_payload = build_discussion_context(
                     entry.result, review.model_dump(), plans, open_items,
                     news_brief=news_brief,
+                    major_events=major_events,
                 )
                 ctx = context_from_result(entry.result)
                 alerts = [a for p in plans for a in evaluate_plan(p, ctx)]
@@ -613,6 +618,16 @@ def _prepare_discussion(
                 ctx_payload["margin_cn"] = (m or {}).get("regime_cn")
             except Exception:  # noqa: BLE001
                 ctx_payload["margin_cn"] = None
+            # 重大事件（客观字段 only，2026-09-05 用户口径）：聊大盘环境时
+            # 带上「英伟达资本开支」级别的产业/宏观大事，叙事参考层。
+            try:
+                from lei_signal.newsfeed.service import (  # noqa: PLC0415
+                    NewsfeedService,
+                )
+
+                ctx_payload["major_events"] = NewsfeedService().major_events_brief()
+            except Exception:  # noqa: BLE001
+                ctx_payload["major_events"] = None
         return session.session_id, history_rows, ctx_payload, alerts, symbol
 
 

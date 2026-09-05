@@ -127,6 +127,29 @@ export default function OpsPage() {
           )}
         </section>
 
+        {ops.major_events?.available && ops.major_events.items.length > 0 && (
+          <section className="ops-section span-all">
+            <h3>⑥ 近3日重大事件（客观参考，不构成判定）</h3>
+            {ops.major_events.items.map((e, i) => (
+              <div key={i} className="cp-row ops-major">
+                <span className="ops-major-meta">
+                  <b className="ops-major-imp">{e.importance}分</b>
+                  <span className="ops-major-cat">{e.category_cn}</span>
+                  <span
+                    className={
+                      e.direction_cn === "利多" ? "up" : e.direction_cn === "利空" ? "down" : "muted"
+                    }
+                  >
+                    {e.direction_cn}
+                  </span>
+                  <span className="muted">{e.when_cn}</span>
+                </span>
+                <span className="ops-major-title">{e.title}</span>
+              </div>
+            ))}
+          </section>
+        )}
+
         <section className="ops-section span-all">
           <h3>② 今日推荐</h3>
           {ops.recommendations ? (
