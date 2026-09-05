@@ -296,8 +296,11 @@ def main() -> int:
             rolled = rolled.where(valid_day, other=np.nan)
             rank_panels[(m, w)] = rolled.rank(axis=1, pct=True)
 
-    hot_base = {k: (v >= args.pctile) for k, v in rank_panels.items()}
-    cold_base = {k: (v <= (1.0 - args.pctile)) for k, v in rank_panels.items()}
+    def _bool_panel(rank: pd.DataFrame, op, th: float) -> pd.DataFrame:
+        return (op(rank, th)).fillna(False).astype(bool)
+
+    hot_base = {k: _bool_panel(v, lambda a, b: a >= b, args.pctile) for k, v in rank_panels.items()}
+    cold_base = {k: _bool_panel(v, lambda a, b: a <= b, 1.0 - args.pctile) for k, v in rank_panels.items()}
 
     results = []
     focus_codes = [c.strip() for c in args.focus.split(",") if c.strip()]
