@@ -284,6 +284,62 @@ def _resolve_symbol_from_message(message: str, service: object) -> str | None:
     return None
 
 
+#: 中文口语片段里的常见废话词——先剔掉再做名字匹配，降低误命中。
+_NAME_STOPWORDS = frozenset((
+    "怎么看", "怎么样", "怎么", "现在", "觉得", "帮我", "看看", "看一下",
+    "分析", "一下", "买点", "这个", "那个", "什么", "如何", "今天", "昨天",
+    "还能", "可以", "没有", "自己", "走势", "情况", "问题", "意思",
+))
+_CJK_RUN_RE = re.compile(r"[\u4e00-\u9fa5]+")
+
+
+def _lcs_len(a: str, b: str) -> int:
+    """两串最长公共子串长度（名字都短，O(nm) 足够）。"""
+    best = 0
+    prev = [0] * (len(b) + 1)
+    for i in range(1, len(a) + 1):
+        cur = [0] * (len(b) + 1)
+        ai = a[i - 1]
+        for j in range(1, len(b) + 1):
+            if ai == b[j - 1]:
+                cur[j] = prev[j - 1] + 1
+                if cur[j] > best:
+                    best = cur[j]
+        prev = cur
+    return best
+
+
+def _resolve_symbol_by_name(message: str, watch_items: list) -> str | None:
+    """中文名称模糊解析：说「通信设备」「纳指怎么样」也能带出对应标的。
+
+    匹配对象是自选列表的 display_name（「通信ETF」「纳指ETF」…）。策略：
+    取消息里的连续中文片段，与名称做包含或最长公共子串匹配，公共部分
+    ≥2 字即命中（口语常带尾巴：「通信设备怎么看」vs「通信ETF」公共
+    「通信」2字 → 命中）。多命中取分高者（更具体优先）。整段命中停用词
+    的片段（「怎么看」）跳过。
+    """
+    scored: list[tuple[int, str]] = []
+    names = [
+        (w.symbol, str(w.display_name or "").strip())
+        for w in watch_items
+        if getattr(w, "display_name", None)
+    ]
+    for frag in _CJK_RUN_RE.findall(message):
+        if frag in _NAME_STOPWORDS:
+            continue
+        for symbol, name in names:
+            if frag == name or frag in name or name in frag:
+                score = max(len(frag), len(name))
+            else:
+                score = _lcs_len(frag, name)
+            if score >= 2:
+                scored.append((score, symbol))
+    if not scored:
+        return None
+    scored.sort(key=lambda t: -t[0])
+    return scored[0][1]
+
+
 def _last_resolved_symbol(history_rows: list) -> str | None:  # noqa: ANN001
     """从会话最近的 assistant 消息 meta 继承标的。
 
@@ -380,12 +436,16 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
         ctx_payload: dict = {}
         alerts: list = []
         service = getattr(request.app.state, "analysis_service", None)
-        # symbol 解析优先级：显式（symbol 上下文）> 消息中提取 > 会话继承。
-        # 全局会话里用户报代码（「515880那个」）也能带出技术材料，不再反问。
+        # symbol 解析优先级：显式（symbol 上下文）> 消息中代码 > 中文名称 > 会话继承。
+        # 全局会话里用户报代码（「515880那个」）或说名字（「通信设备」）都能带出材料。
         explicit = body.context_kind == "symbol" and body.symbol
         symbol: str | None = body.symbol if explicit else None
         if symbol is None and service is not None:
             symbol = _resolve_symbol_from_message(body.message, service)
+            if symbol is None:
+                from lei_signal.api.watchlist import list_watchlist  # noqa: PLC0415
+
+                symbol = _resolve_symbol_by_name(body.message, list_watchlist(conn))
             if symbol is None:
                 symbol = _last_resolved_symbol(history_rows)
         if symbol is not None and service is not None:
