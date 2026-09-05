@@ -149,10 +149,18 @@ def _build_sentiment_block(conn: sqlite3.Connection):
                 "group_cn": row["name"],
                 "state_cn": "；".join(states),
             })
+    from lei_signal.copilot import breadth as breadth_mod  # noqa: PLC0415
+
+    try:
+        a_cn = breadth_mod.a_share_breadth_cn()
+        u_cn = breadth_mod.us_breadth_cn()
+    except Exception:  # noqa: BLE001
+        a_cn = u_cn = None
     return SentimentBlockDTO(
         available=bool(pack.get("available")),
         margin_cn=(margin or {}).get("regime_cn", ""),
         margin_detail=margin,
+        breadth_cn="；".join(x for x in (a_cn, u_cn) if x) or None,
         hot_boards=hot,
         holdings_states=holdings_states,
         note_cn=pack.get("note_cn", "") or (

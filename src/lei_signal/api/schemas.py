@@ -1213,6 +1213,7 @@ class SentimentBlockDTO(BaseModel):
     available: bool = False
     margin_cn: str = ""              # 两融环境一句话
     margin_detail: dict | None = None
+    breadth_cn: str | None = None    # 市场宽度一句话（A股+美股直读）
     hot_boards: list[dict] = []      # [{name, heat_pctile, stage_cn}]
     holdings_states: list[dict] = [] # [{group_cn, state_cn}]
     note_cn: str = ""
