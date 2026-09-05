@@ -691,7 +691,10 @@ def _quick_card(ctx_payload: dict, symbol: str | None) -> dict | None:
             if price is None or not isinstance(price, (int, float)) or price <= 0:
                 continue
             levels.append({
-                "role": role,
+                # 方向优先于字段名：低于现价的统一叫「下方关键位」，
+                # 高于现价的才叫「上方阻力」，避免把下方支撑标成阻力。
+                "role": ("下方关键位" if float(price) < float(close)
+                         else ("上方阻力" if role == "阻力位" else role)),
                 "price": float(price),
                 "kind": "below" if price < float(close) else "above",
                 "dist_pct": round(abs(float(close) / float(price) - 1) * 100, 2),
