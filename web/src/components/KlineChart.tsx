@@ -229,6 +229,12 @@ export default function KlineChart({ payload, display, onPick, onDownload, highl
   // onPick 存进 ref，不进 setOption 的依赖，避免父组件 re-render 导致整图重建。
   const onPickRef = useRef(onPick);
   onPickRef.current = onPick;
+  // 最近一次 setOption 的完整 option：ResizeObserver 里 resize 后重发自愈用
+  //（echarts resize 会丢弃尚未完成的分帧渲染，大数据量下主体 K 线不再补画）。
+  const lastOptionRef = useRef<ReturnType<typeof buildKlineOption> | null>(null);
+  // 容器尺寸缓存与防抖句柄：尺寸没变不动作，变了等布局稳定再 resize+重发
+  const lastSizeRef = useRef({ w: 0, h: 0 });
+  const resizeTimerRef = useRef(0);
 
   const tf = display.timeframe;
   const isDaily = tf === "D";
@@ -323,14 +329,58 @@ export default function KlineChart({ payload, display, onPick, onDownload, highl
     };
     chart.on("dataZoom", onDataZoom as (params: unknown) => void);
 
-    const onResize = () => chart.resize();
+    const onResize = () => scheduleSelfHealingResize();
     window.addEventListener("resize", onResize);
-    // 容器尺寸变化（如买点侧栏滑入让主图变窄）也要 resize，否则标注位置错乱
-    const ro = new ResizeObserver(() => chart.resize());
-    ro.observe(ref.current);
+    // 容器尺寸变化（如买点侧栏滑入让主图变窄、骨架屏切换、字体加载后的布局微调）
+    // 也要 resize，否则标注位置错乱。
+    //
+    // 修复（2026-09-05）：echarts 的 resize() 会丢弃尚未完成的分帧渲染，大数据量
+    // 标的（如科创50 指数）首帧渲染窗口内被 resize 打断后，K 线/均线/MACD 主体
+    // 永不补画，页面上表现为「只剩信号标签飘在空白图上」。因此尺寸变化时在
+    // resize 之后补发一次完整 option（notMerge）；补发前读出当前 dataZoom 窗口
+    // 写回，不重置用户缩放位置。防抖 80ms 等布局稳定，拖拽分栏时不连续重发。
+    const scheduleSelfHealingResize = () => {
+      const el = ref.current;
+      const chart2 = chartRef.current;
+      if (!el || !chart2) return;
+      const w = el.clientWidth;
+      const h = el.clientHeight;
+      if (w === lastSizeRef.current.w && h === lastSizeRef.current.h) return;
+      lastSizeRef.current = { w, h };
+      window.clearTimeout(resizeTimerRef.current);
+      resizeTimerRef.current = window.setTimeout(() => {
+        const c = chartRef.current;
+        if (!c) return;
+        c.resize();
+        const opt = lastOptionRef.current;
+        if (!opt) return;
+        const dz = (
+          c.getOption()?.dataZoom as
+            Array<{ startValue?: number; endValue?: number }> | undefined
+        )?.[0];
+        const patch: { dataZoom?: Array<{ startValue?: number; endValue?: number }> } = {};
+        if (
+          dz && dz.startValue != null && dz.endValue != null &&
+          Array.isArray(opt.dataZoom)
+        ) {
+          patch.dataZoom = opt.dataZoom.map((z) => ({
+            ...z,
+            startValue: Math.round(dz.startValue!),
+            endValue: Math.round(dz.endValue!),
+          }));
+        }
+        c.setOption({ ...opt, ...patch }, { notMerge: true });
+      }, 80);
+    };
+    const ro = new ResizeObserver(() => scheduleSelfHealingResize());
+    if (ref.current) {
+      lastSizeRef.current = { w: ref.current.clientWidth, h: ref.current.clientHeight };
+      ro.observe(ref.current);
+    }
 
     return () => {
       window.removeEventListener("resize", onResize);
+      window.clearTimeout(resizeTimerRef.current);
       ro.disconnect();
       chart.off("click", onClick as (params: unknown) => void);
       chart.off("mouseover", onOver as (params: unknown) => void);
@@ -393,7 +443,9 @@ export default function KlineChart({ payload, display, onPick, onDownload, highl
       };
     }
     lastRenderRef.current = { tf, n };
-    chart.setOption(buildKlineOption(view, eff, effHighlight, zoom, mom121Series, dense), { notMerge: true });
+    const option = buildKlineOption(view, eff, effHighlight, zoom, mom121Series, dense);
+    lastOptionRef.current = option;
+    chart.setOption(option, { notMerge: true });
   }, [view, eff, effHighlight, tf, mom121Series, dense]);
 
   // 键盘平移：←/→ 一根，Shift+←/→ 半屏。与 ↑/↓ 切标的（WorkspacePage）互补，
