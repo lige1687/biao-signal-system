@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { api } from "../api/client";
 import AgentMarkdown from "../components/AgentMarkdown";
 import KlineChart, { DEFAULT_DISPLAY } from "../components/KlineChart";
 import { CopilotCardDispatcher } from "../components/copilot/CopilotCards";
 import ResizeHandle from "../components/ResizeHandle";
-import type { TradePreview } from "../types";
+import type { AgentMessageDTO, AgentSessionDTO, TradePreview } from "../types";
 
 type Turn = {
   who: "you" | "agent";
@@ -223,6 +223,69 @@ function TurnRow({ turn, animate }: { turn: Turn; animate: boolean }) {
   );
 }
 
+/** 历史对话侧栏：会话列表、点击恢复、新对话。 */
+function timeLabel(iso: string): string {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  const now = new Date();
+  const sameDay = d.toDateString() === now.toDateString();
+  const hm = `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+  if (sameDay) return hm;
+  if (d.getFullYear() === now.getFullYear())
+    return `${d.getMonth() + 1}月${d.getDate()}日`;
+  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+}
+
+function HistoryPanel({
+  activeId,
+  onPick,
+  onNew,
+}: {
+  activeId: string | null;
+  onPick: (s: AgentSessionDTO) => void;
+  onNew: () => void;
+}) {
+  const q = useQuery({
+    queryKey: ["agentSessions"],
+    queryFn: () => api.agentSessions(),
+    staleTime: 30_000,
+  });
+  const sessions = q.data ?? [];
+  return (
+    <aside className="ws-history">
+      <div className="ws-history-head">
+        <span>历史对话</span>
+        <button className="btn small" onClick={onNew}>
+          ＋ 新对话
+        </button>
+      </div>
+      <div className="ws-history-list">
+        {q.isLoading && <div className="muted" style={{ fontSize: 12, padding: 8 }}>加载中…</div>}
+        {!q.isLoading && sessions.length === 0 && (
+          <div className="muted" style={{ fontSize: 12, padding: 8 }}>
+            还没有历史对话。
+          </div>
+        )}
+        {sessions.map((sess) => (
+          <button
+            key={sess.session_id}
+            className={`ws-history-item ${sess.session_id === activeId ? "is-active" : ""}`}
+            onClick={() => onPick(sess)}
+          >
+            <div className="ws-history-title">
+              {sess.title_cn || "新会话"}
+            </div>
+            <div className="ws-history-meta">
+              {sess.symbol && <span className="ws-history-sym">{sess.symbol}</span>}
+              <span>{timeLabel(sess.last_active_at)}</span>
+            </div>
+          </button>
+        ))}
+      </div>
+    </aside>
+  );
+}
+
 function SidePanel({
   symbol,
   onAsk,
@@ -291,6 +354,8 @@ export default function AgentWorkspacePage() {
   const [input, setInput] = useState("");
   const [symbol, setSymbol] = useState<string | null>(null);
   const [sessionId, setSessionId] = useState<string | null>(null);
+  const queryClient = useQueryClient();
+  const [loadingHistory, setLoadingHistory] = useState(false);
   // 左右分栏：像素宽持久化（与买点侧栏 ResizeHandle 同模式）；窄屏自动单栏
   const [narrow, setNarrow] = useState(
     () => window.matchMedia("(max-width: 980px)").matches,
@@ -298,7 +363,7 @@ export default function AgentWorkspacePage() {
   const [leftPx, setLeftPx] = useState(() => {
     const saved = Number(localStorage.getItem("ws-left-px")) || 0;
     const def = Math.round(window.innerWidth * 0.55);
-    return Math.max(380, Math.min(window.innerWidth - 360, saved || def));
+    return Math.max(380, Math.min(window.innerWidth - 596, saved || def));
   });
   const saveLeftTimer = useRef(0);
   const changeLeft = (w: number) => {
@@ -339,6 +404,34 @@ export default function AgentWorkspacePage() {
   }, []);
 
   const pushTurn = (t: Turn) => setTurns((cur) => [...cur, t]);
+
+  /** 恢复历史会话：拉取消息流并映射为 turns（trace 不还原，保留接地徽标）。 */
+  const loadSession = async (sess: AgentSessionDTO) => {
+    if (busy || loadingHistory) return;
+    setLoadingHistory(true);
+    setSessionId(sess.session_id);
+    try {
+      const msgs: AgentMessageDTO[] = await api.agentSessionMessages(sess.session_id);
+      setTurns(
+        msgs.map((m) => ({
+          who: m.role === "user" ? ("you" as const) : ("agent" as const),
+          text: m.content,
+          grounded: m.grounded,
+        })),
+      );
+      // 恢复该会话最后讨论的标的（消息 meta 不含，退而求其次用会话 symbol）
+      setSymbol(sess.symbol ?? null);
+    } finally {
+      setLoadingHistory(false);
+    }
+  };
+
+  const newSession = () => {
+    if (busy) return;
+    setSessionId(null);
+    setTurns([]);
+    setSymbol(null);
+  };
 
   const [chatBusy, setChatBusy] = useState(false);
 
@@ -382,6 +475,7 @@ export default function AgentWorkspacePage() {
         } else if (event === "done") {
           const d = data as unknown as StreamDone;
           if (d.session_id) setSessionId(d.session_id);
+          void queryClient.invalidateQueries({ queryKey: ["agentSessions"] });
           if (d.resolved_symbol) setSymbol(d.resolved_symbol);
           patchLastAgent({
             text: text,
@@ -473,8 +567,15 @@ export default function AgentWorkspacePage() {
   return (
     <div
       className="ws-layout"
-      style={narrow ? undefined : { gridTemplateColumns: `${leftPx}px 10px 1fr` }}
+      style={
+        narrow
+          ? undefined
+          : { gridTemplateColumns: `236px ${leftPx}px 10px 1fr` }
+      }
     >
+      {!narrow && (
+        <HistoryPanel activeId={sessionId} onPick={loadSession} onNew={newSession} />
+      )}
       <section className="ws-chat">
         <header className="ws-toolbar">
           <div className="ws-brand">
@@ -510,6 +611,9 @@ export default function AgentWorkspacePage() {
         </header>
 
         <div className="ws-turns" ref={bodyRef}>
+          {loadingHistory && (
+            <div className="muted" style={{ fontSize: 12 }}>正在恢复对话…</div>
+          )}
           {turns.length === 0 && (
             <div className="ws-hello">
               <p className="ws-hello-title">说一句话开始</p>
@@ -570,7 +674,7 @@ export default function AgentWorkspacePage() {
           <ResizeHandle
             width={leftPx}
             min={380}
-            max={Math.max(420, window.innerWidth - 360)}
+            max={Math.max(420, window.innerWidth - 360 - 236)}
             onChange={changeLeft}
             cursor="col-resize"
           />
