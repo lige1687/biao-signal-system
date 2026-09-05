@@ -210,8 +210,20 @@ class NewsfeedService:
             "macro": "宏观", "risk": "风险", "industry": "产业", "policy": "政策",
         }
         dir_cn = {"bullish": "利多", "bearish": "利空", "neutral": "中性"}
+        # 同类限额：非农/议息一类系统性事件常被多条报道刷屏（2026-09-05
+        # 实测 8 条全被宏观占满，用户点名的产业大事被挤出），每类最多
+        # 4 条保住类别多样性；合并后仍按重要度降序。
+        per_cat_cap = 4
+        capped: list = []
+        seen_cat: dict[str, int] = {}
+        for r in rows:
+            c = r["category"] or ""
+            if seen_cat.get(c, 0) >= per_cat_cap:
+                continue
+            seen_cat[c] = seen_cat.get(c, 0) + 1
+            capped.append(r)
         items = []
-        for r in rows[:max(1, int(limit))]:
+        for r in capped[:max(1, int(limit))]:
             d = dict(r)
             day = str(d.get("published_at") or "")[:10]
             if day == today:

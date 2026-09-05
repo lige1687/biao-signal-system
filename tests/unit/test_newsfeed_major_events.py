@@ -89,6 +89,36 @@ def test_major_events_brief_empty(tmp_path):
     assert brief["items"] == []
 
 
+def test_major_events_brief_per_category_cap(tmp_path):
+    """同类刷屏限额：宏观塞满 9 条时，每类最多 4 条，产业大事不被挤出。"""
+    store = NewsStore(tmp_path / "cap.db")
+    today = datetime.now().astimezone()
+    rows, scores = [], []
+    for i in range(9):  # 9 条 8 分宏观（模拟非农刷屏）
+        rows.append({"source": "gnews", "source_name": "g", "url": None,
+                     "category": "macro", "title": f"宏观刷屏{i}",
+                     "summary": "", "content": None,
+                     "published_at": today.isoformat(timespec="seconds"),
+                     "dedupe_key": f"macro-{i}"})
+        scores.append({"id": i + 1, "category": "macro", "importance": 8,
+                       "direction": "neutral", "symbols": [], "note": "n"})
+    rows.append({"source": "gnews", "source_name": "g", "url": None,
+                 "category": "industry", "title": "英伟达资本开支上修",
+                 "summary": "", "content": None,
+                 "published_at": today.isoformat(timespec="seconds"),
+                 "dedupe_key": "ind-1"})
+    scores.append({"id": 10, "category": "industry", "importance": 7,
+                   "direction": "bullish", "symbols": [], "note": "n"})
+    store.insert_items(rows)
+    store.apply_scores(scores)
+    store.close()
+    brief = NewsfeedService(db_path=str(tmp_path / "cap.db")).major_events_brief()
+    cats = [i["category"] for i in brief["items"]]
+    assert cats.count("macro") == 4  # 9 条压到 4 条
+    assert "industry" in cats        # 产业大事保住位置
+    assert "英伟达资本开支上修" in [i["title"] for i in brief["items"]]
+
+
 def test_ops_major_events_block_passthrough():
     # None（服务缺席）→ 区块整体缺省，页面不显示该段
     assert _build_major_events_block(None) is None
