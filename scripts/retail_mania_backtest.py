@@ -44,8 +44,31 @@ CACHE = Path(os.environ.get("LEI_CACHE_ROOT", Path.home() / ".lei_signal_lab/cac
 
 
 # ─────────────────────────── 数据装载 ───────────────────────────
-def load_panels() -> dict:
-    flows = json.loads((CACHE / "sector_flow_history.json").read_text())
+def load_panels(flows_file: str | None = None) -> dict:
+    if flows_file:
+        # 腾讯源（scripts/tx_fund_flow_pilot.py 产出，个股聚合板块）：字段映射到
+        # 东财五档名（large = main − jumbo 推导）；超大单档划分腾讯略宽（实测
+        # 约 10% 偏差），结论以源内自洽为准，不与东财阈值直接混用。
+        raw = json.loads(Path(flows_file).read_text())
+        flows = {}
+        for code, pts in (raw.get("boards") or {}).items():
+            flows[code] = [
+                {
+                    "date": p["date"],
+                    "main_yi": p.get("main_yi"),
+                    "small_yi": p.get("small_yi"),
+                    "medium_yi": p.get("mid_yi"),
+                    "large_yi": (
+                        round(p["main_yi"] - p["jumbo_yi"], 2)
+                        if p.get("main_yi") is not None and p.get("jumbo_yi") is not None
+                        else None
+                    ),
+                    "super_large_yi": p.get("jumbo_yi"),
+                }
+                for p in pts
+            ]
+    else:
+        flows = json.loads((CACHE / "sector_flow_history.json").read_text())
     rows = json.loads((CACHE / "sector_trend_history.json").read_text())
     snap = json.loads((CACHE / "sector_trend_snapshot.json").read_text())
 
@@ -245,11 +268,13 @@ def main() -> int:
     ap.add_argument("--focus", type=str, default="",
                     help="重点板块专项统计（BK 代码逗号分隔，如 BK1215,BK1036）。"
                          "横截面分位仍用全板块口径，专项只额外输出该子集的触发统计")
+    ap.add_argument("--flows-file", type=str, default="",
+                    help="替代资金流数据文件（腾讯源 tx_sector_flow_pilot.json，字段自动映射）")
     args = ap.parse_args()
     windows = [int(x) for x in args.windows.split(",")]
     horizons = [int(x) for x in args.horizons.split(",")]
 
-    data = load_panels()
+    data = load_panels(args.flows_file or None)
     close, b50 = data["close"], data["b50"]
     print(f"close 面板: {close.shape[0]} 日 × {close.shape[1]} 板块 "
           f"({close.index[0].date()} ~ {close.index[-1].date()})")
