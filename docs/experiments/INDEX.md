@@ -194,6 +194,7 @@
 - `us-erp-overlay-ARCHIVE-2026-09-02.md` — 美股ERP（任务U）
 - `orthogonality-check-2026-09-01.md` — 新信号×两腿正交（任务D）
 - `macd-strength-layering-ARCHIVE-2026-09-01.md` — MACD强度分层（任务E）
+- `retail-mania-threshold-2026-09-04.md` — 板块散户热度阈值（进行中：口径/页面已上线，等数据回填出回测）
 
 ### 宽基/全池/持仓/数据质量专项（9-02）
 

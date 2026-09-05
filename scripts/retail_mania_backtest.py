@@ -299,6 +299,26 @@ def main() -> int:
         print("样本不足：无任何有效统计（资金流历史太短？）")
         return 1
 
+    # ── 十分位单调性（描述性，定阈值位置的核心依据）──
+    # 按当日横截面分位把全部板块日分十组（D10=最热），看未来收益/下跌概率
+    # 是否随热度单调——单调才有"阈值"可言；若中间组收益最好、两端都差，
+    # 说明热度与收益非线性，单阈值口径不成立。
+    print("\n## 十分位单调性（未来 10 日，D10=最热；描述性，未扣多重比较）")
+    for (m, w), rank in rank_panels.items():
+        fwd = (close.shift(-10) / close - 1.0).iloc[:-10]
+        fwd = fwd.where(fwd.notna() & (fwd != 0))
+        dec = np.floor(rank * 10).clip(upper=9)
+        cells = []
+        for k in range(10):
+            mask = (dec == k) & fwd.notna()
+            n = int(mask.sum().sum())
+            if n < 30:
+                cells.append("-")
+                continue
+            vals = fwd[mask].stack()
+            cells.append(f"{(vals < 0).mean() * 100:.0f}%/{vals.mean() * 100:+.2f}")
+        print(f"  {m:12s} w={w:2d}  P跌/均收益 D1..D10: {' | '.join(cells)}")
+
     res["显著"] = res["down"].apply(
         lambda d: "*" if (d["p"] < 0.05 and d["ci_lo"] > 0 or d["p"] < 0.05 and d["ci_hi"] < 0) else "")
     res = res.sort_values(["metric", "window", "trigger", "horizon"])
