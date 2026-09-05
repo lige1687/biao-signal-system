@@ -51,6 +51,8 @@ from lei_signal.plans.sessions import (
     list_messages,
     list_sessions,
 )
+from lei_signal.api.config import INDEX_OVERRIDES, OVERSEAS_NAME_CN
+from lei_signal.api.labels import THS_INDUSTRY_NAMES
 from lei_signal.plans.store import get_plan, list_action_items, list_plans
 from lei_signal.storage.sqlite_store import connect
 
@@ -309,32 +311,37 @@ def _lcs_len(a: str, b: str) -> int:
     return best
 
 
-def _resolve_symbol_by_name(
-    message: str, watch_items: list, service: object
-) -> str | None:
+def _static_symbol_name(symbol: str, db_name: str | None) -> str:
+    """标的中文名：DB 存的名 > TH 行业静态表 > 指数/海外静态表。零 IO。
+
+    生产库 watchlist 的 display_name 常为空（只存代码），取名全靠静态表；
+    特意**不走分析服务取名**——冷启动会逐标的拉行情（曾致 46s 请求 +
+    database is locked），名称联动必须是廉价操作。
+    """
+    name = str(db_name or "").strip()
+    if name:
+        return name
+    if symbol.startswith("TH") and symbol.endswith(".SECTOR"):
+        return THS_INDUSTRY_NAMES.get(symbol.split(".")[0][2:], "")
+    override = INDEX_OVERRIDES.get(symbol)
+    if override is not None:
+        return override.display_name
+    return OVERSEAS_NAME_CN.get(symbol, "")
+
+
+def _resolve_symbol_by_name(message: str, watch_items: list) -> str | None:
     """中文名称模糊解析：说「通信设备」「纳指怎么样」也能带出对应标的。
 
-    匹配对象是自选列表的 display_name（「通信ETF」「纳指ETF」…）；生产库
-    watchlist 的 display_name 可能为空（只存代码），此时从分析服务的结果
-    惰性取名（get 有 TTL 缓存，且看盘页常访问多为热缓存）。策略：
-    取消息里的连续中文片段，与名称做包含或最长公共子串匹配，公共部分
-    ≥2 字即命中（口语常带尾巴：「通信设备怎么看」vs「通信ETF」公共
-    「通信」2字 → 命中）。多命中取分高者（更具体优先）。整段命中停用词
-    的片段（「怎么看」）跳过。
+    匹配对象是自选列表的中文名（DB display_name，缺失时静态表取名：
+    「通信设备（中证）」「通信ETF」…）。策略：取消息里的连续中文片段，
+    与名称做包含或最长公共子串匹配，公共部分 ≥2 字即命中（口语常带尾巴：
+    「通信设备怎么看」vs「通信ETF」公共「通信」2字 → 命中）。多命中取
+    分高者（更具体优先）。整段命中停用词的片段（「怎么看」）跳过。
     """
     scored: list[tuple[int, str]] = []
     names: list[tuple[str, str]] = []
     for w in watch_items:
-        name = str(getattr(w, "display_name", "") or "").strip()
-        if not name:
-            # display_name 缺失：从分析结果取名（含 TH 板块的中文名）
-            try:
-                entry = service.get(w.symbol)  # type: ignore[attr-defined]
-                result = getattr(entry, "result", None)
-                if result is not None:
-                    name = str(getattr(result, "display_name", "") or "").strip()
-            except Exception:  # noqa: BLE001  取名失败不阻断解析
-                name = ""
+        name = _static_symbol_name(w.symbol, getattr(w, "display_name", None))
         if name:
             names.append((w.symbol, name))
     for frag in _CJK_RUN_RE.findall(message):
@@ -458,9 +465,7 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
             if symbol is None:
                 from lei_signal.api.watchlist import list_watchlist  # noqa: PLC0415
 
-                symbol = _resolve_symbol_by_name(
-                    body.message, list_watchlist(conn), service
-                )
+                symbol = _resolve_symbol_by_name(body.message, list_watchlist(conn))
             if symbol is None:
                 symbol = _last_resolved_symbol(history_rows)
         if symbol is not None and service is not None:
