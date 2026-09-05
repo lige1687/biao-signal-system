@@ -75,11 +75,47 @@ def _payload_chars(payload: dict[str, Any]) -> int:
     return len(json.dumps(payload, ensure_ascii=False, default=str))
 
 
+
+def _news_block(
+    news_brief: dict[str, Any] | None, symbol: str
+) -> dict[str, Any]:
+    """消息面叙事标注层：该标的多空计数/最新标题 + 全局多空温度。
+
+    红线：只做「为什么」的叙事参考，不参与技术判定、不构成信号——键名里
+    显式带 note_cn，LLM 引用时必须保留该口径。
+    """
+    if not isinstance(news_brief, dict):
+        return {"note_cn": "消息面未接入本次材料"}
+    items = news_brief.get("items") or []
+    mine = next(
+        (i for i in items if isinstance(i, dict) and i.get("symbol") == symbol), None
+    )
+    mood = news_brief.get("mood") or {}
+    out: dict[str, Any] = {
+        "note_cn": "叙事标注层（为什么），不参与技术判定、不构成信号",
+    }
+    if mine:
+        out["symbol_brief"] = {
+            k: mine.get(k)
+            for k in ("bull_count", "bear_count", "latest_title", "latest_direction_cn")
+            if mine.get(k) is not None
+        }
+    else:
+        out["symbol_brief"] = None  # 近期无已评分消息：如实说无，不硬凑
+    if isinstance(mood, dict) and mood.get("bullish") is not None:
+        out["market_mood"] = {
+            "bullish": mood.get("bullish"),
+            "bearish": mood.get("bearish"),
+            "neutral": mood.get("neutral"),
+        }
+    return out
+
 def build_discussion_context(
     result: AnalysisResult,
     review_dump: dict[str, Any] | None,
     plans: list[TradePlan],
     action_items: list[ActionItem],
+    news_brief: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     a = result.assessment
     close = float(result.frame["close"].iloc[-1])
@@ -154,6 +190,7 @@ def build_discussion_context(
         "recent_events": recent,
         "buy_point_review": review_dump,
         "plans": plan_rows,
+        "news": _news_block(news_brief, result.symbol),
     }
     # 总量守卫：超预算时事件类先砍最旧（recent_events 按时间升序，最旧在头部）。
     while (

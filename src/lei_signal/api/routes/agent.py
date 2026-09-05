@@ -522,8 +522,25 @@ def _prepare_discussion(
                 ]
                 if on_stage:
                     on_stage("context", "组装技术材料与监督状态")
+                news_brief = None
+                try:
+                    from lei_signal.newsfeed.service import (  # noqa: PLC0415
+                        NewsfeedService,
+                    )
+
+                    news_brief = NewsfeedService().watchlist_brief(
+                        [{
+                            "symbol": symbol,
+                            "display_name": getattr(entry.result, "display_name", "") or symbol,
+                            "market": "",
+                        }],
+                        days=5,
+                    )
+                except Exception:  # noqa: BLE001  消息面缺席不阻断技术材料
+                    news_brief = None
                 ctx_payload = build_discussion_context(
-                    entry.result, review.model_dump(), plans, open_items
+                    entry.result, review.model_dump(), plans, open_items,
+                    news_brief=news_brief,
                 )
                 ctx = context_from_result(entry.result)
                 alerts = [a for p in plans for a in evaluate_plan(p, ctx)]
