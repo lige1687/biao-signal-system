@@ -569,6 +569,7 @@ export const newsApi = {
     category?: string; q?: string; source?: string; symbol?: string;
     direction?: string; from?: string; to?: string;
     scored?: string; min_importance?: number; limit?: number; offset?: number;
+    with_content?: boolean;
   }) => {
     const search = new URLSearchParams();
     for (const [k, v] of Object.entries(params)) {
@@ -593,8 +594,14 @@ export const experimentsApi = {
 // 类型唯一来源在 ../types.ts（含季报穿透与调仓建议字段），这里只做别名复用。
 import type {
   PortfolioResponse as PortfolioResponseDTO,
+  FundNavSeries,
 } from "../types";
 
 export const portfolioApi = {
   get: () => request<PortfolioResponseDTO>("/portfolio"),
+  // 净值对比（涨跌幅视角）：codes 上限 8（后端校验），days=0 表示成立以来全量
+  navSeries: (codes: string[], days: number) =>
+    request<FundNavSeries>(
+      `/portfolio/nav-series?codes=${codes.map(encodeURIComponent).join(",")}&days=${days}`,
+    ),
 };

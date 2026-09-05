@@ -429,7 +429,10 @@ function BloggerBoard() {
   const { data } = useQuery({
     queryKey: ["newsBloggerBoard"],
     queryFn: () =>
-      newsApi.items({ category: "blogger", from: daysAgo(7), limit: 60, scored: "all" }),
+      newsApi.items({
+        category: "blogger", from: daysAgo(7), limit: 60, scored: "all",
+        with_content: true, // 展开详情显示字幕全文（content 大字段按需请求）
+      }),
     staleTime: 5 * 60_000,
   });
   // 当日简报里的博主立场小结（与今日要点共享缓存）
@@ -510,6 +513,12 @@ function BloggerBoard() {
                     )}
                   </div>
                   {it.llm_note && <div className="nf-blogger-note">{it.llm_note}</div>}
+                  {it.content && (
+                    <details className="nf-blogger-content">
+                      <summary>字幕全文（{Math.round(it.content.length / 1000)}k 字）</summary>
+                      <div className="nf-blogger-content-body">{it.content}</div>
+                    </details>
+                  )}
                 </div>
               ))}
             </div>

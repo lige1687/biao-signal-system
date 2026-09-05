@@ -35,10 +35,12 @@ def items(
     min_importance: int | None = None,
     limit: int = 50,
     offset: int = 0,
+    with_content: bool = False,
 ) -> dict:
     """条目列表：默认已评分按重要性降序在前，未评分垫底按时间倒序。
 
     symbol/direction 是把消息对齐到自选与多空视角的结构化过滤，仍属参考层。
+    with_content=true 才带字幕/正文大字段（博主板展开详情用）。
     """
     return _service(request).items(
         {
@@ -53,6 +55,7 @@ def items(
             "min_importance": min_importance,
             "limit": limit,
             "offset": offset,
+            "with_content": with_content,
         }
     )
 

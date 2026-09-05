@@ -195,3 +195,40 @@ def test_scored_rows_for_digest(tmp_path) -> None:
     rows = store.scored_rows_for_digest("2026-08-27")
     assert [r["title"] for r in rows] == ["a"]
     store.close()
+
+
+def test_query_items_content_trim_and_include(tmp_path) -> None:
+    """with_content=False（默认）裁掉 content 大字段；True 时带出。"""
+    store = NewsStore(tmp_path / "n.db")
+    store.insert_items([_item("k1", "带正文", "2026-08-27T09:00:00+08:00")])
+    rows = store.query_items()[0]
+    assert rows[0]["content"] is None  # 默认裁掉
+    rows2 = store.query_items(include_content=True)[0]
+    # _item 不写 content → NULL；换一条带 content 验证带出
+    store.insert_items([{**_item("k2", "字幕条", "2026-08-27T10:00:00+08:00"),
+                         "content": "字幕正文" * 100}])
+    rows3 = store.query_items(include_content=True)[0]
+    by_title = {r["title"]: r for r in rows3}
+    assert len(by_title["字幕条"]["content"] or "") == 400
+    assert all(r["content"] is None for r in store.query_items()[0])
+    store.close()
+
+
+def test_clear_old_content_keeps_recent(tmp_path) -> None:
+    """content 保留队列：7 天前置 NULL，元数据保留；近期不动。"""
+    from datetime import datetime, timedelta
+
+    def _ts(days_ago: int) -> str:
+        return (datetime.now().astimezone() - timedelta(days=days_ago)).isoformat(timespec="seconds")
+
+    store = NewsStore(tmp_path / "n.db")
+    store.insert_items([
+        {**_item("old", "旧字幕", _ts(10)), "content": "x" * 100},
+        {**_item("new", "新字幕", _ts(1)), "content": "y" * 100},
+    ])
+    assert store.clear_old_content(days=7) == 1
+    rows = {r["title"]: r for r in store.query_items(include_content=True)[0]}
+    assert rows["旧字幕"]["content"] is None and rows["旧字幕"]["title"] == "旧字幕"
+    assert rows["新字幕"]["content"] == "y" * 100
+    assert store.clear_old_content(days=7) == 0  # 幂等
+    store.close()

@@ -51,6 +51,7 @@ class NewsfeedService:
                 min_importance=_opt("min_importance", int),
                 limit=limit,
                 offset=offset,
+                include_content=params.get("with_content") in (True, "true", "1"),
             )
             return {"items": [_row_to_dict(r) for r in rows], "total": total}
         finally:

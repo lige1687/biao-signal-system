@@ -91,7 +91,10 @@ class NewsStore:
         min_importance: int | None = None,
         limit: int = 50,
         offset: int = 0,
+        include_content: bool = False,
     ) -> tuple[list[sqlite3.Row], int]:
+        """条目查询。include_content=True 才带 content 大字段（字幕/正文，
+        单条可达 2 万字）——默认裁掉，列表响应保持轻量；博主板展开详情用。"""
         where: list[str] = []
         args: list = []
         if category:
@@ -136,14 +139,19 @@ class NewsStore:
         total = self._conn.execute(
             f"SELECT COUNT(*) FROM news_items{wsql}", args
         ).fetchone()[0]
-        # 默认排序：已评分在前（importance 降序），未评分垫底按时间倒序。
+        # 默认排序：已评分按 importance DESC 在前，未评分垫底按时间倒序。
         if scored == "unscored":
             order = "published_at DESC"
         else:
             order = "(importance IS NULL) ASC, importance DESC, published_at DESC"
+        cols = "*" if include_content else (
+            "id, source, source_name, dedupe_key, url, category, title, summary, "
+            "NULL AS content, symbols, direction, importance, llm_note, "
+            "published_at, ingested_at, scored_at"
+        )
         rows = list(
             self._conn.execute(
-                f"SELECT * FROM news_items{wsql} ORDER BY {order} LIMIT ? OFFSET ?",
+                f"SELECT {cols} FROM news_items{wsql} ORDER BY {order} LIMIT ? OFFSET ?",
                 args + [limit, offset],
             )
         )
@@ -159,6 +167,21 @@ class NewsStore:
                 (date_from, limit),
             )
         )
+
+    def clear_old_content(self, days: int = 7) -> int:
+        """内容保留队列（2026-09-05 用户口径）：字幕/正文大字段保留 N 天，
+        过期置 NULL 释放空间。只清 content——title/direction/importance 等
+        元数据保留（温度计走势、K线消息标记、聚合统计仍可用）。
+        幂等：已 NULL 的行不重复处理。
+        """
+        cur = self._conn.execute(
+            "UPDATE news_items SET content=NULL "
+            "WHERE content IS NOT NULL "
+            "AND published_at < date('now', ?)",
+            (f"-{int(days)} days",),
+        )
+        self._conn.commit()
+        return cur.rowcount
 
     def blogger_rows_recent(self, days: int = 7) -> list[sqlite3.Row]:
         """近 N 天 blogger 类已评分条目（博主观点小结用，含 note/direction）。"""

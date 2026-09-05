@@ -3835,6 +3835,21 @@ a { color: var(--accent); text-decoration: none; }
   line-height: 1.55; overflow-wrap: anywhere;
 }
 
+/* 每期视频的字幕全文展开（点开看详细内容，2026-09-05 用户口径） */
+.nf-blogger-content { margin: 4px 0 2px 40px; }
+.nf-blogger-content summary {
+  font-size: 11.5px; color: var(--text-faint); cursor: pointer; user-select: none;
+}
+.nf-blogger-content summary::before { content: "▸ "; }
+.nf-blogger-content[open] summary::before { content: "▾ "; }
+.nf-blogger-content summary:hover { color: var(--accent); }
+.nf-blogger-content-body {
+  font-size: 12px; color: var(--text-dim); line-height: 1.7;
+  background: var(--bg); border-radius: 8px; padding: 8px 12px;
+  margin-top: 4px; white-space: pre-wrap; overflow-wrap: anywhere;
+  max-height: 360px; overflow-y: auto;
+}
+
 /* ---- 工具栏：分段 tabs + 搜索 ---- */
 .nf-toolbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 18px 0 12px; }
 .nf-focus-btn {

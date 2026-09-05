@@ -238,6 +238,9 @@ def run_pipeline(
     try:
         run_id = store.start_run()
         per_source, errors = _collect_all(store, cfg, full=full, bili_client=bili_client)
+        # 内容保留队列：字幕/正文大字段保留 7 天（2026-09-05 用户口径），
+        # 过期清理；评分元数据保留。放在抓取后、打分前（打分只读近期条目）。
+        store.clear_old_content(days=7)
         scored = 0
         digest_ok = False
         pushed = 0
