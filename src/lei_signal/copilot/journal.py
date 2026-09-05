@@ -107,11 +107,14 @@ def _outcome_changes(
 
     import pandas as pd
 
-    pairs = sorted(zip(
-        pd.to_datetime(frame["date"]).dt.date.tolist(),
-        frame["close"].astype(float).tolist(),
-        strict=False,
-    ))
+    # 日期在 frame 索引上（AnalysisService 的口径：列只有 OHLCV+指标）。
+    # 任何形态异常（空表/无 close/索引不可解析）都返回空：跳过该标的，不猜数。
+    try:
+        dates = pd.to_datetime(frame.index).date.tolist()
+        closes = frame["close"].astype(float).tolist()
+    except (KeyError, TypeError, ValueError):
+        return {}
+    pairs = sorted(zip(dates, closes, strict=True))
     base_i = max(
         (k for k, (d, _) in enumerate(pairs) if d <= _date.fromisoformat(run_date)),
         default=None,

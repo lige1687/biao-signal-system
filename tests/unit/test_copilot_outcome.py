@@ -27,12 +27,9 @@ class _FakeService:
         return _FakeEntry(self._frames[symbol])
 
 
-def _frame(closes):  # 2026-09-01 起逐个交易日
+def _frame(closes):  # 2026-09-01 起逐个交易日；日期在索引（生产口径）
     dates = pd.bdate_range("2026-09-01", periods=len(closes))
-    return pd.DataFrame({
-        "date": dates.strftime("%Y-%m-%d"),
-        "close": closes,
-    })
+    return pd.DataFrame({"close": closes}, index=dates)
 
 
 def _card(run_date: str) -> RecommendCardDTO:
