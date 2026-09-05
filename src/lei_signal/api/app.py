@@ -143,7 +143,11 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
             candidate = _WEB_DIST / full_path
             if full_path and candidate.is_file():
                 return FileResponse(candidate)
-            return FileResponse(_WEB_DIST / "index.html")
+            # HTML 不缓存（避免引用旧 hash 的 assets）；assets 文件名带内容
+            # hash 可长缓存，部署后浏览器必然拿到新入口。
+            return FileResponse(_WEB_DIST / "index.html", headers={
+                "Cache-Control": "no-cache, must-revalidate",
+            })
 
     return app
 
