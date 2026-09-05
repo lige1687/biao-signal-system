@@ -661,16 +661,51 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
         return f"event: {event}\ndata: {_json.dumps(data, ensure_ascii=False)}\n\n"
 
     def _generate() -> Iterator[str]:
-        stages: list[tuple[str, str]] = []
+        import queue as _queue
+        import threading as _threading
+
+        # 准备段（解析/行情/材料）在后台线程跑，阶段事件经队列实时推给客户端：
+        # 用户在等待的第一秒就能看到「识别标的→拉取行情」逐条点亮，而不是
+        # 全部跑完才收到一串。
+        q: _queue.Queue[tuple] = _queue.Queue()
 
         def on_stage(key: str, text: str) -> None:
-            stages.append((key, text))
+            q.put(("stage", (key, text)))
 
-        session_id, history_rows, ctx_payload, alerts, symbol = (
-            _prepare_discussion(request, body, on_stage=on_stage)
-        )
-        for key, text in stages:
-            yield _sse("stage", {"key": key, "text": text})
+        def _work() -> None:
+            try:
+                q.put((
+                    "prepared",
+                    _prepare_discussion(request, body, on_stage=on_stage),
+                ))
+            except Exception as exc:  # noqa: BLE001
+                q.put(("error", exc))
+
+        _threading.Thread(target=_work, daemon=True).start()
+
+        prepared = None
+        while True:
+            try:
+                kind, payload = q.get(timeout=180)
+            except _queue.Empty:
+                yield _sse("done", {
+                    "session_id": "", "resolved_symbol": None, "grounded": False,
+                    "verify_note": "准备阶段超时（180s），请稍后重试。",
+                })
+                return
+            if kind == "stage":
+                yield _sse("stage", {"key": payload[0], "text": payload[1]})
+            elif kind == "error":
+                yield _sse("done", {
+                    "session_id": "", "resolved_symbol": None, "grounded": False,
+                    "verify_note": f"准备阶段失败：{payload}",
+                })
+                return
+            else:
+                prepared = payload
+                break
+
+        session_id, history_rows, ctx_payload, alerts, symbol = prepared
 
         config = plans_llm.load_ark_config()
         pieces: list[str] = []
