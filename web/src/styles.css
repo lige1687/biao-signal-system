@@ -4247,33 +4247,171 @@ a { color: var(--accent); text-decoration: none; }
 .portfolio-real-share { margin-top: 6px; font-size: 12px; color: var(--accent); }
 
 /* ---- Copilot 卡片 ---- */
-.cp-card { border: 1px solid #d8d8d8; border-radius: 10px;
+.cp-card { border: 1px solid var(--border); border-radius: 10px;
   padding: 10px 12px; margin: 8px 0; display: flex; flex-direction: column; gap: 6px;
-  background: #fafafa; }
+  background: var(--bg); }
 .cp-label { font-weight: 600; font-size: 12px; }
 .cp-row { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; font-size: 12px; }
 .cp-sym { font-weight: 600; color: inherit; }
-.cp-chip { border: 1px solid #ccc; border-radius: 999px; padding: 0 8px; font-size: 11px; }
+.cp-chip { border: 1px solid var(--border-strong); border-radius: 999px; padding: 0 8px; font-size: 11px; }
 .cp-form { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .cp-form input { font-size: 12px; padding: 4px 6px; }
-.cp-narrative { border-left: 3px solid #bbb; padding-left: 8px; font-size: 12px; }
+.cp-narrative { border-left: 3px solid var(--border-strong); padding-left: 8px; font-size: 12px; }
 .cp-section { margin: 4px 0; }
 .cp-sub { font-weight: 600; font-size: 12px; margin-bottom: 2px; }
 .cp-link { font-size: 12px; }
-.cp-error { color: #b00; font-size: 12px; }
+.cp-error { color: var(--error); font-size: 12px; }
 
-/* ---- Agent 工作台 ---- */
-.ws-layout { display: grid; grid-template-columns: minmax(360px, 1fr) minmax(320px, 1fr);
-  gap: 12px; height: calc(100vh - 90px); padding: 12px; }
-.ws-chat { display: flex; flex-direction: column; min-height: 0;
-  border: 1px solid #ddd; border-radius: 12px; }
-.ws-quick { display: flex; gap: 8px; padding: 8px; flex-wrap: wrap; align-items: center;
-  border-bottom: 1px solid #eee; }
-.ws-turns { flex: 1; overflow-y: auto; padding: 10px; display: flex;
-  flex-direction: column; gap: 10px; }
-.ws-you { align-self: flex-end; background: #e8f0fe; border-radius: 10px;
-  padding: 6px 10px; max-width: 85%; font-size: 13px; }
-.ws-agent { align-self: flex-start; max-width: 95%; font-size: 13px; }
-.ws-side { border: 1px solid #ddd; border-radius: 12px; overflow: hidden;
-  min-height: 0; }
-@media (max-width: 900px) { .ws-layout { grid-template-columns: 1fr; } }
+/* ---- Agent 工作台（对话流 + 联动K线）----
+   设计约定：用户侧=右侧 accent 胶囊；agent 侧=无框区块（左引导线+背景色差），
+   阴影只给吸顶工具条，不做逐条消息卡片。唯一动效：思考呼吸 + 打字机光标。 */
+.ws-layout {
+  display: grid;
+  grid-template-columns: minmax(380px, 7fr) minmax(300px, 5fr);
+  gap: 14px;
+  height: calc(100vh - 84px);
+  padding: 14px 16px;
+}
+.ws-chat {
+  display: flex; flex-direction: column; min-height: 0;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.ws-toolbar {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 2;
+  background: var(--bg-panel);
+  border-radius: 14px 14px 0 0;
+  box-shadow: var(--shadow);
+}
+.ws-brand { font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 7px; }
+.ws-brand-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.ws-quick { display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; }
+.ws-quick .chip.is-used { opacity: 0.45; }
+
+.ws-turns { flex: 1; overflow-y: auto; padding: 16px 18px; display: flex; flex-direction: column; gap: 14px; }
+
+/* 用户消息：右侧胶囊 */
+.ws-you-wrap { display: flex; justify-content: flex-end; }
+.ws-you {
+  max-width: 78%;
+  background: var(--accent); color: #fff;
+  padding: 7px 13px; border-radius: 16px 16px 4px 16px;
+  font-size: 13px; line-height: 1.55; white-space: pre-wrap;
+}
+
+/* agent 回复：无框区块 + 左引导线 */
+.ws-agent {
+  max-width: 96%;
+  padding: 2px 0 2px 12px;
+  border-left: 2px solid var(--border-strong);
+  font-size: 13px;
+  animation: ws-fade-in 0.24s ease-out;
+}
+.ws-agent-head { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; min-height: 18px; }
+.ws-sym-chip {
+  font-size: 11px; font-family: var(--font-mono);
+  border: 1px solid var(--border-strong); border-radius: 999px;
+  padding: 1px 8px; color: var(--accent); text-decoration: none;
+}
+.ws-badge { font-size: 10.5px; border-radius: 999px; padding: 1px 7px; }
+.ws-badge.ok { color: var(--lei-green); background: rgba(11,155,100,.09); }
+.ws-badge.tpl { color: var(--text-faint); background: var(--bg-card-hover); }
+.ws-skip {
+  margin-left: auto; border: none; background: none; cursor: pointer;
+  font-size: 11px; color: var(--text-faint); padding: 0;
+}
+.ws-skip:hover { color: var(--accent); }
+
+/* 打字机输出：完成前用纯文本，完成后切 markdown 渲染 */
+.ws-typing {
+  margin: 0; white-space: pre-wrap; word-break: break-word;
+  font-family: inherit; font-size: 13px; line-height: 1.6;
+}
+.ws-caret { color: var(--accent); animation: ws-blink 0.9s steps(1) infinite; }
+
+/* 思考态：本页唯一的“呼吸”记忆点 */
+.ws-thinking {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text-dim);
+  padding-left: 14px;
+}
+.ws-dots { display: inline-flex; gap: 3px; }
+.ws-dots i {
+  width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+  animation: ws-breathe 1.2s ease-in-out infinite;
+}
+.ws-dots i:nth-child(2) { animation-delay: 0.18s; }
+.ws-dots i:nth-child(3) { animation-delay: 0.36s; }
+
+/* 输入区 */
+.ws-inputbar {
+  display: flex; gap: 10px; align-items: flex-end;
+  padding: 12px 14px; border-top: 1px solid var(--border);
+  background: var(--bg-panel); border-radius: 0 0 14px 14px;
+}
+.ws-inputbar textarea {
+  flex: 1; resize: none; border: 1px solid var(--border);
+  border-radius: 10px; padding: 8px 12px;
+  font-family: inherit; font-size: 13px; line-height: 1.5;
+  background: var(--bg); color: var(--text);
+  max-height: 96px;
+}
+.ws-inputbar textarea:focus {
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+.ws-inputbar textarea:disabled { opacity: 0.6; }
+.ws-send { flex-shrink: 0; height: 34px; padding: 0 16px; }
+
+/* 右栏：K线联动面板 */
+.ws-side {
+  display: flex; flex-direction: column; min-height: 0;
+  background: var(--bg-panel);
+  border: 1px solid var(--border); border-radius: 14px;
+  overflow: hidden;
+}
+.ws-side-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-bottom: 1px solid var(--border);
+}
+.ws-side-title { display: flex; flex-direction: column; line-height: 1.25; }
+.ws-side-title strong { font-size: 13px; }
+.ws-side-title .muted { font-size: 11px; font-family: var(--font-mono); }
+.ws-live {
+  margin-left: auto; display: flex; align-items: center; gap: 5px;
+  font-size: 11px; color: var(--text-dim);
+}
+.ws-live i { width: 6px; height: 6px; border-radius: 50%; background: var(--lei-green);
+  animation: ws-breathe 2s ease-in-out infinite; }
+.ws-kline-skeleton { flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.ws-kline-skeleton div {
+  height: 64px; border-radius: 8px;
+  background: linear-gradient(90deg, var(--bg-card-hover) 25%, var(--bg) 50%, var(--bg-card-hover) 75%);
+  background-size: 200% 100%;
+  animation: ws-shimmer 1.4s linear infinite;
+}
+
+/* 空态 */
+.ws-empty, .ws-hello { padding: 26px 8px; text-align: center; }
+.ws-empty { margin: auto; max-width: 300px; }
+.ws-empty-title, .ws-hello-title { font-size: 14px; font-weight: 600; margin: 0 0 6px; }
+.ws-empty-chips { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-top: 10px; }
+
+@keyframes ws-blink { 50% { opacity: 0; } }
+@keyframes ws-breathe { 0%, 100% { opacity: 0.25; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-2px); } }
+@keyframes ws-shimmer { to { background-position: -200% 0; } }
+@keyframes ws-fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ws-caret, .ws-dots i, .ws-live i, .ws-kline-skeleton div { animation: none; }
+  .ws-agent { animation: none; }
+}
+
+@media (max-width: 980px) {
+  .ws-layout { grid-template-columns: 1fr; height: auto; }
+  .ws-side { min-height: 420px; order: -1; }
+}
