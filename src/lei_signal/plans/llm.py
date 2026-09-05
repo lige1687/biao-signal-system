@@ -15,6 +15,7 @@ import json
 import logging
 import os
 import time
+from collections.abc import Iterator
 from dataclasses import dataclass
 from typing import Any
 
@@ -826,3 +827,81 @@ __all__ = [
     "make_ark_renderer",
     "post_user_content",
 ]
+
+
+def _request_completion_stream(
+    config: ArkConfig, messages: list[dict]
+) -> Iterator[str]:
+    """OpenAI 兼容流式请求：逐段 yield 正文 token（思考模型的 reasoning 增量跳过）。
+
+    仅支持 openai 风格（GLM/DeepSeek 走这里）；anthropic 风格退化为一次性
+    yield 完整正文（复用 _request_completion）。任何失败直接结束迭代器
+    （调用方据已收 token 判断是否完整），不抛异常——流式路径 best-effort。
+    """
+    if config.style != STYLE_OPENAI:
+        text = _request_completion(config, messages)
+        if text:
+            yield text
+        return
+    url = f"{config.base_url}/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {config.api_key}",
+        "Content-Type": "application/json",
+    }
+    body = {
+        "model": config.model,
+        "messages": messages,
+        "temperature": 0.2,
+        "stream": True,
+    }
+    try:
+        resp = requests.post(
+            url, headers=headers, json=body, timeout=config.timeout, stream=True,
+        )
+        if resp.status_code != 200:
+            logger.warning(
+                "流式请求 HTTP %s（model=%s）：%s",
+                resp.status_code, config.model, resp.text[:200],
+            )
+            return
+        resp.encoding = "utf-8"
+        for line in resp.iter_lines(decode_unicode=True):
+            if not line or not line.startswith("data:"):
+                continue
+            data = line[5:].strip()
+            if data == "[DONE]":
+                return
+            try:
+                chunk = json.loads(data)
+            except (ValueError, TypeError):
+                continue
+            choices = chunk.get("choices") or []
+            if not choices:
+                continue
+            delta = choices[0].get("delta") or {}
+            piece = delta.get("content")
+            if piece:
+                yield str(piece)
+    except requests.RequestException as exc:
+        logger.warning(
+            "流式请求异常：%s: %s（model=%s）", type(exc).__name__, exc, config.model,
+        )
+
+
+def chat_discussion_stream(
+    payload: dict, history: list[dict], message: str, config: ArkConfig
+) -> Iterator[str]:
+    """讨论式多轮对话·流式版：与 chat_discussion 同构 messages，逐 token 产出。"""
+    trimmed = history[-20:]
+    messages: list[dict] = [
+        {"role": "system", "content": DISCUSSION_SYSTEM_PROMPT},
+        {
+            "role": "user",
+            "content": (
+                f"当前标的技术材料：\n{json.dumps(payload, ensure_ascii=False, default=str)}"
+            ),
+        },
+        *trimmed,
+        {"role": "user", "content": message},
+    ]
+    yield from _request_completion_stream(config, messages)

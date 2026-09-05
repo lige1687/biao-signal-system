@@ -460,13 +460,13 @@ def _discussion_txt_ok(raw: str, rule_ids: set[str]) -> tuple[bool, str]:
     return ok, reason
 
 
-@router.post("/agent/chat", response_model=AgentChatReply)
-def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
-    """统一讨论入口：多轮记忆 + 技术摘要全喂 + 数值接地。
+def _prepare_discussion(
+    request: Request, body: AgentChatRequest, on_stage=None
+) -> tuple[str, list, dict, list, str | None]:
+    """agent_chat 与流式版共用的准备段（一个连接内完成）。
 
-    连接策略：全程至多两次开关——先读写会话与上下文原料（一次），LLM 往返
-    不持连接，回复落库再开一次。load_ark_config/chat_discussion 经
-    ``plans_llm`` 模块属性调用（测试 monkeypatch 点），语义与直接调用一致。
+    返回 (session_id, history_rows, ctx_payload, alerts, symbol)。
+    阶段回调 ``on_stage``（可选）用于流式路径向 UI 报告调用链进度。
     """
     with closing(connect(_db_path(request))) as conn:
         if body.session_id:
@@ -486,6 +486,8 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
         # 全局会话里用户报代码（「515880那个」）或说名字（「通信设备」）都能带出材料。
         explicit = body.context_kind == "symbol" and body.symbol
         symbol: str | None = body.symbol if explicit else None
+        if on_stage:
+            on_stage("resolve", "识别标的与意图")
         if symbol is None and service is not None:
             symbol = _resolve_symbol_from_message(body.message, service)
             if symbol is None:
@@ -494,6 +496,8 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
                 symbol = _resolve_symbol_by_name(body.message, list_watchlist(conn))
             if symbol is None:
                 symbol = _last_resolved_symbol(history_rows)
+        if symbol is not None and service is not None and on_stage:
+            on_stage("fetch", f"拉取 {symbol} 行情（首次约 1 分钟）")
         if symbol is not None and service is not None:
             entry = service.get(symbol)
             if entry.result is None:
@@ -516,6 +520,8 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
                         conn, p.plan_id, state="open"
                     )
                 ]
+                if on_stage:
+                    on_stage("context", "组装技术材料与监督状态")
                 ctx_payload = build_discussion_context(
                     entry.result, review.model_dump(), plans, open_items
                 )
@@ -523,6 +529,20 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
                 alerts = [a for p in plans for a in evaluate_plan(p, ctx)]
         if symbol is None:
             ctx_payload = {"context_kind": "global"}
+        return session.session_id, history_rows, ctx_payload, alerts, symbol
+
+
+@router.post("/agent/chat", response_model=AgentChatReply)
+def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
+    """统一讨论入口：多轮记忆 + 技术摘要全喂 + 数值接地。
+
+    连接策略：全程至多两次开关——先读写会话与上下文原料（一次），LLM 往返
+    不持连接，回复落库再开一次。load_ark_config/chat_discussion 经
+    ``plans_llm`` 模块属性调用（测试 monkeypatch 点），语义与直接调用一致。
+    """
+    session_id, history_rows, ctx_payload, alerts, symbol = _prepare_discussion(
+        request, body
+    )
 
     config = plans_llm.load_ark_config()
     reply: str | None = None
@@ -571,10 +591,10 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
         # 记住本轮生效的标的：后续轮「筹码呢」无代码也能继承材料
         meta["resolved_symbol"] = symbol
     with closing(connect(_db_path(request))) as conn:
-        append_message(conn, session.session_id, "user", body.message, True, {})
-        append_message(conn, session.session_id, "assistant", reply, grounded, meta)
+        append_message(conn, session_id, "user", body.message, True, {})
+        append_message(conn, session_id, "assistant", reply, grounded, meta)
     return AgentChatReply(
-        session_id=session.session_id, reply=reply, grounded=grounded,
+        session_id=session_id, reply=reply, grounded=grounded,
         trace=trace, resolved_symbol=symbol,
     )
 
@@ -618,3 +638,110 @@ def agent_session_messages(request: Request, session_id: str) -> list[AgentMessa
 
 
 __all__ = ["router"]
+
+
+@router.post("/agent/chat/stream")
+def agent_chat_stream(request: Request, body: AgentChatRequest):
+    """流式讨论入口：SSE 推送调用链阶段 + GLM 真·逐字正文 + 校验结果。
+
+    事件协议（data 均为 JSON）：
+      stage {key, text}      阶段推进（resolve/fetch/context/llm/verify）
+      token {t}              正文增量（AI 原文流式）
+      done  {session_id, resolved_symbol, grounded, verify_note?, fallback?}
+    数值/禁用词校验在聚合全文后执行：未过校验时 done 携带 verify_note 与
+    模板 fallback，前端在原文下方并排展示模板直出——红线不因流式而放松。
+    LLM 不可用（无凭据/网络失败零 token）时直接推模板 fallback。
+    """
+    import json as _json
+    from collections.abc import Iterator
+
+    from fastapi.responses import StreamingResponse  # noqa: PLC0415
+
+    def _sse(event: str, data: dict) -> str:
+        return f"event: {event}\ndata: {_json.dumps(data, ensure_ascii=False)}\n\n"
+
+    def _generate() -> Iterator[str]:
+        stages: list[tuple[str, str]] = []
+
+        def on_stage(key: str, text: str) -> None:
+            stages.append((key, text))
+
+        session_id, history_rows, ctx_payload, alerts, symbol = (
+            _prepare_discussion(request, body, on_stage=on_stage)
+        )
+        for key, text in stages:
+            yield _sse("stage", {"key": key, "text": text})
+
+        config = plans_llm.load_ark_config()
+        pieces: list[str] = []
+        if config is not None:
+            yield _sse("stage", {"key": "llm", "text": "AI 组织语言（逐字输出）"})
+            for piece in plans_llm.chat_discussion_stream(
+                ctx_payload,
+                [{"role": m.role, "content": m.content} for m in history_rows],
+                body.message,
+                config,
+            ):
+                pieces.append(piece)
+                yield _sse("token", {"t": piece})
+
+        full = "".join(pieces).strip()
+        grounded = False
+        verify_note = ""
+        fallback = ""
+        if full:
+            from lei_signal.plans.grounding import (  # noqa: PLC0415
+                collect_payload_numbers,
+                verify_numeric_grounding,
+            )
+
+            allowed_nums = (
+                collect_payload_numbers(ctx_payload)
+                | frozenset(extract_market_numbers(body.message))
+                | frozenset(_payload_symbol_numbers(ctx_payload))
+            )
+            rule_ids = {a.rule_id for a in alerts if a.rule_id}
+            ok_num, num_reason = verify_numeric_grounding(full, allowed_nums)
+            ok_txt, txt_reason = _discussion_txt_ok(full, rule_ids)
+            if ok_num and ok_txt:
+                grounded = True
+            else:
+                verify_note = (
+                    f"以上 AI 流式原文未过溯源校验（{txt_reason or num_reason}），"
+                    "请以下方模板直出为准。"
+                )
+        if not full or not grounded:
+            fallback = _degraded_reply(symbol or "", ctx_payload)
+
+        trace = _build_trace(alerts)
+        meta: dict = {"trace": [t.model_dump() for t in trace]}
+        if symbol is not None:
+            meta["resolved_symbol"] = symbol
+        try:
+            with closing(connect(_db_path(request))) as conn:
+                append_message(conn, session_id, "user", body.message, True, {})
+                append_message(
+                    conn, session_id, "assistant", full or fallback, grounded, meta
+                )
+        except Exception:  # noqa: BLE001  落库失败不断流（锁窗口下次再试不可行，丢历史可接受）
+            yield _sse(
+                "done", {"session_id": session_id, "resolved_symbol": symbol,
+                         "grounded": grounded, "verify_note": "会话记录保存失败（不影响本次回复）",
+                         "fallback": fallback})
+            return
+        yield _sse(
+            "done",
+            {
+                "session_id": session_id,
+                "resolved_symbol": symbol,
+                "grounded": grounded,
+                **({"verify_note": verify_note} if verify_note else {}),
+                **({"fallback": fallback} if fallback else {}),
+            },
+        )
+
+    return StreamingResponse(
+        _generate(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+    )

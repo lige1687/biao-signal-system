@@ -15,7 +15,50 @@ type Turn = {
   resolved?: string | null;
   card?: { card_type: string; data: unknown } | null;
   preview?: TradePreview | null;
+  /** 流式进行中的回合：正文实时追加、打字机禁用 */
+  streaming?: boolean;
+  /** 调用链阶段（流式回合专属） */
+  stages?: { key: string; text: string }[];
+  /** 校验未过时的模板直出（附在流式原文之后） */
+  fallback?: string;
+  verifyNote?: string;
 };
+
+type StreamDone = {
+  session_id: string;
+  resolved_symbol: string | null;
+  grounded: boolean;
+  verify_note?: string;
+  fallback?: string;
+};
+
+/** 解析 SSE 字节流为事件序列（stage/token/done）。 */
+async function* readSse(
+  body: ReadableStream<Uint8Array>,
+): AsyncGenerator<{ event: string; data: Record<string, unknown> }> {
+  const reader = body.getReader();
+  const decoder = new TextDecoder();
+  let buf = "";
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buf += decoder.decode(value, { stream: true });
+    let idx: number;
+    while ((idx = buf.indexOf("\n\n")) >= 0) {
+      const frame = buf.slice(0, idx).trim();
+      buf = buf.slice(idx + 2);
+      let event = "";
+      let data = "{}";
+      for (const line of frame.split("\n")) {
+        if (line.startsWith("event: ")) event = line.slice(7).trim();
+        else if (line.startsWith("data: ")) data = line.slice(6);
+      }
+      if (event) {
+        yield { event, data: JSON.parse(data) as Record<string, unknown> };
+      }
+    }
+  }
+}
 
 const QUICK = [
   { label: "今天看什么", kind: "recommend" },
@@ -97,8 +140,33 @@ function ThinkingRow() {
   );
 }
 
+function StageBar({ stages, active }: { stages: { key: string; text: string }[]; active: boolean }) {
+  return (
+    <div className="ws-stages" role="status" aria-label="调用链进度">
+      {stages.map((st, i) => (
+        <div className="ws-stage" key={st.key + String(i)}>
+          <span className="ws-stage-dot">
+            {i < stages.length - 1 || !active ? "✓" : <i />}
+          </span>
+          {st.text}
+        </div>
+      ))}
+      {active && stages.length === 0 && (
+        <div className="ws-stage">
+          <span className="ws-stage-dot"><i /></span>
+          建立会话…
+        </div>
+      )}
+    </div>
+  );
+}
+
 function TurnRow({ turn, animate }: { turn: Turn; animate: boolean }) {
-  const tw = useTypewriter(turn.text ?? "", animate && turn.who === "agent");
+  const streamed = turn.who === "agent" && turn.streaming !== undefined;
+  const tw = useTypewriter(
+    turn.text ?? "",
+    animate && turn.who === "agent" && !streamed,
+  );
   if (turn.who === "you") {
     return (
       <div className="ws-you-wrap">
@@ -108,24 +176,29 @@ function TurnRow({ turn, animate }: { turn: Turn; animate: boolean }) {
   }
   return (
     <div className="ws-agent">
+      {(turn.stages?.length || turn.streaming) && (
+        <StageBar stages={turn.stages ?? []} active={!!turn.streaming} />
+      )}
       <div className="ws-agent-head">
-        {turn.resolved && (
+        {turn.resolved && !turn.streaming && (
           <Link to={`/symbol/${turn.resolved}`} className="ws-sym-chip">
             {turn.resolved}
           </Link>
         )}
-        {turn.grounded === false && (
+        {!turn.streaming && turn.grounded === false && (
           <span className="ws-badge tpl">判定层数据直出</span>
         )}
-        {turn.grounded === true && <span className="ws-badge ok">已接地</span>}
-        {!tw.done && (
+        {!turn.streaming && turn.grounded === true && (
+          <span className="ws-badge ok">已接地</span>
+        )}
+        {!streamed && !tw.done && (
           <button className="ws-skip" onClick={tw.skip}>
             跳过动画
           </button>
         )}
       </div>
       {turn.text &&
-        (tw.done ? (
+        (streamed || tw.done ? (
           <AgentMarkdown text={turn.text} onBp={() => undefined} notableCount={0} />
         ) : (
           <pre className="ws-typing">
@@ -133,6 +206,18 @@ function TurnRow({ turn, animate }: { turn: Turn; animate: boolean }) {
             <span className="ws-caret" aria-hidden>▍</span>
           </pre>
         ))}
+      {turn.streaming && !turn.text && (
+        <div className="muted" style={{ fontSize: 12 }}>等待 AI 输出…</div>
+      )}
+      {turn.verifyNote && (
+        <div className="cp-error" style={{ marginTop: 6 }}>{turn.verifyNote}</div>
+      )}
+      {turn.fallback && (
+        <div className="cp-narrative" style={{ marginTop: 6 }}>
+          <span className="muted">模板直出：</span>
+          <AgentMarkdown text={turn.fallback} onBp={() => undefined} notableCount={0} />
+        </div>
+      )}
       <CopilotCardDispatcher card={turn.card ?? null} preview={turn.preview ?? null} />
     </div>
   );
@@ -255,31 +340,69 @@ export default function AgentWorkspacePage() {
 
   const pushTurn = (t: Turn) => setTurns((cur) => [...cur, t]);
 
-  const chat = useMutation({
-    mutationFn: (message: string) =>
-      api.agentChat({
-        session_id: sessionId,
-        context_kind: symbol ? "symbol" : "global",
-        symbol,
-        message,
-      }),
-    onSuccess: (r) => {
-      setSessionId(r.session_id);
-      if (r.resolved_symbol) setSymbol(r.resolved_symbol);
-      pushTurn({
-        who: "agent",
-        text: r.reply,
-        grounded: r.grounded,
-        resolved: r.resolved_symbol ?? null,
+  const [chatBusy, setChatBusy] = useState(false);
+
+  const patchLastAgent = (patch: Partial<Turn>) =>
+    setTurns((cur) => {
+      const next = [...cur];
+      for (let i = next.length - 1; i >= 0; i -= 1) {
+        if (next[i].who === "agent") {
+          next[i] = { ...next[i], ...patch };
+          break;
+        }
+      }
+      return next;
+    });
+
+  /** 流式对话：SSE 阶段/token/done 实时驱动调用链步骤条与逐字渲染。 */
+  const runChatStream = async (message: string) => {
+    setChatBusy(true);
+    pushTurn({ who: "agent", text: "", streaming: true, stages: [] });
+    try {
+      const resp = await fetch("/api/agent/chat/stream", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          session_id: sessionId,
+          context_kind: symbol ? "symbol" : "global",
+          symbol,
+          message,
+        }),
       });
-    },
-    onError: (e) =>
-      pushTurn({
-        who: "agent",
+      if (!resp.ok || !resp.body) throw new Error(`HTTP ${resp.status}`);
+      let text = "";
+      let stages: { key: string; text: string }[] = [];
+      for await (const { event, data } of readSse(resp.body)) {
+        if (event === "stage") {
+          stages = [...stages, { key: String(data.key), text: String(data.text) }];
+          patchLastAgent({ stages });
+        } else if (event === "token") {
+          text += String(data.t ?? "");
+          patchLastAgent({ text });
+        } else if (event === "done") {
+          const d = data as unknown as StreamDone;
+          if (d.session_id) setSessionId(d.session_id);
+          if (d.resolved_symbol) setSymbol(d.resolved_symbol);
+          patchLastAgent({
+            text: text,
+            grounded: d.grounded,
+            resolved: d.resolved_symbol ?? null,
+            fallback: d.fallback,
+            verifyNote: d.verify_note,
+            streaming: false,
+          });
+        }
+      }
+    } catch (e) {
+      patchLastAgent({
         text: `取回失败：${e instanceof Error ? e.message : String(e)}`,
         grounded: false,
-      }),
-  });
+        streaming: false,
+      });
+    } finally {
+      setChatBusy(false);
+    }
+  };
 
   const dispatch = useMutation({
     mutationFn: (message: string) =>
@@ -302,12 +425,14 @@ export default function AgentWorkspacePage() {
     },
   });
 
-  const busy = dispatch.isPending || chat.isPending;
+  const busy = dispatch.isPending || chatBusy;
 
   /** 报单类说法无论当前聊着哪个标的都必须走 dispatch（意图优先于上下文）。 */
   const TRADE_HINT_RE = /买了|卖了|申购|赎回|报单|成交了/;
 
-  const runChat = (message: string) => chat.mutate(message);
+  const runChat = (message: string) => {
+    void runChatStream(message);
+  };
   const runDispatch = (message: string) => {
     dispatch.mutate(message, {
       onError: () => runChat(message),
@@ -336,7 +461,7 @@ export default function AgentWorkspacePage() {
     }
     // 空态示例：直接走通用讨论（能触发中文名解析联动）
     pushTurn({ who: "you", text: q });
-    chat.mutate(q);
+    void runChatStream(q);
   };
 
   const lastAgentIdx = useMemo(() => {
