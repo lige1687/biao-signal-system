@@ -13,7 +13,9 @@ from contextlib import closing
 
 from fastapi import APIRouter, HTTPException, Request
 
+from lei_signal.api.config import INDEX_OVERRIDES, OVERSEAS_NAME_CN
 from lei_signal.api.config import sqlite_path as default_db
+from lei_signal.api.labels import THS_INDUSTRY_NAMES
 from lei_signal.api.routes.plans import _to_alert_dto
 from lei_signal.api.schemas import (
     AgentChatReply,
@@ -51,8 +53,6 @@ from lei_signal.plans.sessions import (
     list_messages,
     list_sessions,
 )
-from lei_signal.api.config import INDEX_OVERRIDES, OVERSEAS_NAME_CN
-from lei_signal.api.labels import THS_INDUSTRY_NAMES
 from lei_signal.plans.store import get_plan, list_action_items, list_plans
 from lei_signal.storage.sqlite_store import connect
 
