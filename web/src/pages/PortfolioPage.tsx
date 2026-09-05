@@ -269,9 +269,9 @@ export default function PortfolioPage() {
 
   return (
     <div className="page">
-      <div className="section-title">
+      <div className="page-head">
         <h1>我的持仓</h1>
-        <span className="count">
+        <span className="ph-meta">
           {data.holdings_count} 只 · 数据截至 {data.as_of} · {data.data_source_cn}
         </span>
       </div>
@@ -310,7 +310,7 @@ export default function PortfolioPage() {
       {data.advices.length > 0 && (
         <div className="portfolio-advice-section">
           <div className="section-title">
-            <h2 style={{ fontSize: 15 }}>调仓建议</h2>
+            <h2>调仓建议</h2>
             <span className="count">
               按优先级排序 · {data.advices.length} 条 · 建议级非指令，采纳与否你拍板
             </span>
@@ -328,7 +328,7 @@ export default function PortfolioPage() {
         <div className="portfolio-chart-col">
           <div className="card">
             <div className="section-title" style={{ marginTop: 0 }}>
-              <h2 style={{ fontSize: 15 }}>钱在哪儿</h2>
+              <h2>钱在哪儿</h2>
             </div>
             <AllocationRing groups={data.groups} />
           </div>

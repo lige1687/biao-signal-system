@@ -248,11 +248,13 @@ export default function SupervisorPage() {
   const plans = [...(entered ?? []), ...(armed ?? [])];
 
   return (
-    <div className="page" style={{ padding: "14px 18px" }}>
-      <h2 style={{ margin: "0 0 4px" }}>监督待办</h2>
-      <p className="muted" style={{ fontSize: 12, margin: "0 0 14px" }}>
-        活跃计划（entered / armed）与当日判定。待办的「已执行 / 推迟」与飞书回执写同一套状态机。
-      </p>
+    <div className="page">
+      <div className="page-head">
+        <h1>监督待办</h1>
+        <span className="ph-meta">
+          活跃计划（entered / armed）与当日判定。待办的「已执行 / 推迟」与飞书回执写同一套状态机。
+        </span>
+      </div>
 
       <div className="sv-scan">
         <button

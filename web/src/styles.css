@@ -45,8 +45,9 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
-  font-size: 14px;
-  line-height: 1.5;
+  /* 盯盘终端密度基准：13px（14px 对多列表格/宽表明显偏大） */
+  font-size: 13px;
+  line-height: 1.45;
   /* 数字等宽：金融数据密集场景必备，列对齐、价格跳动不抖动 */
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum";
@@ -68,30 +69,46 @@ a { color: var(--accent); text-decoration: none; }
 .page {
   max-width: 1760px;
   margin: 0 auto;
-  padding: 16px 24px 48px;
+  padding: 10px 16px 40px;
 }
 
 /* ---------- 头部 ---------- */
+/* 密度收紧：页头只承担「我在哪 + 关键元信息 + 操作」，高度约砍 1/3 */
 .header {
   display: flex;
-  align-items: center;
-  gap: 16px;
+  align-items: baseline;
+  gap: 12px;
   flex-wrap: wrap;
-  padding: 8px 0 16px;
+  padding: 6px 0 9px;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
-.header h1 { font-size: 18px; margin: 0; font-weight: 600; }
-.header .generated { color: var(--text-faint); font-size: 12px; }
+.header h1 { font-size: 15px; margin: 0; font-weight: 600; line-height: 1.3; }
+.header .generated { color: var(--text-faint); font-size: 11.5px; }
 .header .spacer { flex: 1; }
+
+/* 统一页头（供原本裸 h2 的页面用）：与 .header 同一视觉语言 */
+.page-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 6px 0 9px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 10px;
+}
+.page-head h1,
+.page-head h2 { font-size: 15px; margin: 0; font-weight: 600; line-height: 1.3; }
+.page-head .ph-meta { color: var(--text-faint); font-size: 11.5px; }
+.page-head .spacer { flex: 1; }
 
 .btn {
   background: var(--bg-card);
   color: var(--text);
   border: 1px solid var(--border);
   border-radius: 6px;
-  padding: 6px 14px;
-  font-size: 13px;
+  padding: 4px 12px;
+  font-size: 12.5px;
   cursor: pointer;
   transition: background 0.15s;
 }
@@ -103,35 +120,35 @@ a { color: var(--accent); text-decoration: none; }
 
 .legend {
   display: flex;
-  gap: 14px;
+  gap: 12px;
   align-items: center;
   flex-wrap: wrap;
-  font-size: 12px;
+  font-size: 11.5px;
   color: var(--text-dim);
   background: var(--bg-panel);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 8px 14px;
-  margin-bottom: 20px;
+  padding: 6px 12px;
+  margin-bottom: 12px;
 }
 .legend .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 4px; vertical-align: -1px; }
 
 /* ---------- 分区标题 ---------- */
 .section-title {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
-  margin: 24px 0 12px;
+  margin: 14px 0 8px;
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.section-title .count { color: var(--text-faint); font-weight: 400; font-size: 13px; }
+.section-title .count { color: var(--text-faint); font-weight: 400; font-size: 12px; }
 
 /* ---------- 卡片墙 ---------- */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
 }
 
 .card {
@@ -139,19 +156,19 @@ a { color: var(--accent); text-decoration: none; }
   border: 1px solid var(--border);
   border-radius: 10px;
   box-shadow: var(--shadow);
-  padding: 14px 16px 10px;
+  padding: 10px 12px 8px;
   cursor: pointer;
   transition: background 0.15s, transform 0.1s;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 .card:hover { background: var(--bg-card-hover); transform: translateY(-1px); }
 .card.error { cursor: default; opacity: 0.85; border-color: var(--error); }
 .card.error:hover { background: var(--bg-card); transform: none; }
 
 .card .row { display: flex; align-items: baseline; gap: 8px; }
-.card .name { font-size: 15px; font-weight: 600; }
+.card .name { font-size: 14px; font-weight: 600; }
 .card .symbol { color: var(--text-faint); font-size: 11px; }
 .card .tag {
   font-size: 10px;
@@ -161,8 +178,8 @@ a { color: var(--accent); text-decoration: none; }
   padding: 1px 5px;
   white-space: nowrap;
 }
-.card .price { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
-.card .change { font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.card .price { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.card .change { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
 .up { color: var(--up); }
 .down { color: var(--down); }
 .flat { color: var(--text-dim); }
@@ -355,15 +372,15 @@ a { color: var(--accent); text-decoration: none; }
   border: 1px solid var(--border);
   border-radius: 10px;
   box-shadow: var(--shadow);
-  padding: 16px 18px;
-  margin-bottom: 16px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
 }
-.panel h3 { margin: 0 0 12px; font-size: 15px; }
+.panel h3 { margin: 0 0 8px; font-size: 14px; }
 .panel .muted { color: var(--text-faint); font-size: 12px; }
 
 .kline-wrap {
   background: var(--bg-panel); border: 1px solid var(--border);
-  border-radius: 10px; padding: 8px; margin-bottom: 16px; box-shadow: var(--shadow);
+  border-radius: 10px; padding: 6px; margin-bottom: 10px; box-shadow: var(--shadow);
 }
 .kline { width: 100%; height: 560px; }
 .chip-legend {
@@ -605,10 +622,11 @@ a { color: var(--accent); text-decoration: none; }
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
 
-.event-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.event-table th, .event-table td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--border); }
-.event-table th { color: var(--text-faint); font-weight: 500; font-size: 12px; }
+.event-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.event-table th, .event-table td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--border); }
+.event-table th { color: var(--text-faint); font-weight: 500; font-size: 11.5px; white-space: nowrap; }
 .event-table tr.today td { background: #eff6ff; }
+.event-table tbody tr:hover { background: var(--bg-card-hover); }
 .sev-chip { font-size: 11px; border-radius: 4px; padding: 1px 6px; border: 1px solid var(--border); color: var(--text-dim); white-space: nowrap; }
 .sev-chip.important { color: var(--warn); border-color: var(--warn); }
 .sev-chip.critical { color: var(--error); border-color: var(--error); }
@@ -1887,23 +1905,28 @@ a { color: var(--accent); text-decoration: none; }
 
 /* ---- TopNav ---- */
 .top-nav {
-  display: flex; align-items: center; gap: 4px; height: 38px; padding: 0 14px;
+  display: flex; align-items: center; gap: 2px; height: 38px; padding: 0 14px;
   border-bottom: 1px solid var(--border); background: var(--bg-panel);
   position: sticky; top: 0; z-index: 50;
 }
-.top-nav .brand { font-weight: 700; font-size: 14px; margin-right: 14px; color: var(--accent); }
+.top-nav .brand { font-weight: 700; font-size: 14px; margin-right: 10px; color: var(--accent); letter-spacing: 0.5px; }
+/* 按交易动线分组：盯盘 / 持仓·执行 / 信息 / 研究；竖线分隔、无组名标签 */
+.top-nav .nav-group { display: flex; align-items: center; gap: 1px; }
+.top-nav .nav-sep { width: 1px; height: 16px; background: var(--border); margin: 0 9px; flex: none; }
 .top-nav a {
-  padding: 4px 12px; font-size: 13px; border-radius: 4px; color: var(--text);
+  padding: 3px 9px; font-size: 12.5px; border-radius: 4px; color: var(--text-dim);
   text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+  white-space: nowrap;
 }
-.top-nav a:hover { background: var(--bg-card-hover); }
+.top-nav a:hover { background: var(--bg-card-hover); color: var(--text); }
 .top-nav a.active { background: var(--accent); color: #fff; }
 .top-nav .nav-badge {
   background: var(--warn); color: #fff; border-radius: 9px;
-  font-size: 10px; min-width: 16px; height: 16px; padding: 0 4px;
+  font-size: 10px; min-width: 15px; height: 15px; padding: 0 4px;
   display: inline-flex; align-items: center; justify-content: center; font-weight: 700;
 }
 .top-nav .nav-spacer { flex: 1; }
+.top-nav .nav-ai { display: flex; align-items: center; gap: 6px; }
 
 /* ---- AgentDrawer（右侧抽屉）---- */
 .drawer-overlay {
@@ -2367,7 +2390,7 @@ a { color: var(--accent); text-decoration: none; }
 .sector-link-chip.sector-dist { border-color: #d97706; color: #b45309; }
 .sector-link-chip.sector-down { border-color: #dc2626; color: #dc2626; }
 
-.fund-section-title { font-size: 15px; margin: 18px 0 10px; scroll-margin-top: 56px; }
+.fund-section-title { font-size: 14px; margin: 12px 0 8px; scroll-margin-top: 56px; }
 .fund-count { font-size: 12px; color: var(--text-faint); font-weight: 400; }
 
 /* 分区锚点导航：sticky 吸顶，scrollspy 高亮当前分区 */
@@ -2518,7 +2541,7 @@ a { color: var(--accent); text-decoration: none; }
   gap: 8px;
   width: 100%;
   box-sizing: border-box;
-  padding: 11px 14px;
+  padding: 7px 12px;
   background: transparent;
   border: none;
   border-radius: 0;
@@ -2539,9 +2562,9 @@ a { color: var(--accent); text-decoration: none; }
   transition: transform 0.15s ease;
 }
 .collapsible-panel.is-collapsed .collapsible-chevron { transform: rotate(-90deg); }
-.collapsible-panel__title { font-weight: 600; font-size: 14px; }
-.collapsible-panel__summary { margin-left: auto; color: var(--text-faint); font-size: 12px; }
-.collapsible-panel__body { padding: 12px 14px 14px; }
+.collapsible-panel__title { font-weight: 600; font-size: 13px; }
+.collapsible-panel__summary { margin-left: auto; color: var(--text-faint); font-size: 11.5px; }
+.collapsible-panel__body { padding: 10px 12px 12px; }
 /* 被包裹的卡片只去掉「外层卡片壳」（边框/背景/阴影/圆角），
    保留内部 padding 与子元素间距，避免布局塌陷/文字堆叠。
    内部 <h3> 标题由折叠容器统一承载，故隐藏。 */
@@ -4244,6 +4267,20 @@ a { color: var(--accent); text-decoration: none; }
   border: 1px solid var(--border); border-radius: 3px; padding: 0 4px; margin-right: 5px;
 }
 .portfolio-expo { font-size: 12px; color: var(--text-dim); white-space: nowrap; cursor: help; }
+
+/* ── 基金净值对比（涨跌幅视角，展示层工具） ── */
+.fnav-card { padding: 14px 20px; margin-bottom: 12px; }
+.fnav-controls { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin: 2px 0 10px; }
+.fnav-controls .seg-btn { font-size: 12px; }
+.fnav-picks { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.fnav-picks .chip { font-size: 12px; }
+.fnav-empty {
+  padding: 42px 0; text-align: center; color: var(--text-faint); font-size: 13px;
+  border: 1px dashed var(--border); border-radius: 8px;
+}
+.fnav-hint { font-size: 12px; color: var(--text-faint); margin-top: 6px; }
+.fnav-errors { font-size: 12px; color: #b45309; margin-top: 6px; line-height: 1.6; }
+.fnav-note { font-size: 12px; color: var(--text-faint); margin-top: 10px; line-height: 1.7; }
 .portfolio-real-share { margin-top: 6px; font-size: 12px; color: var(--accent); }
 
 /* ---- Copilot 卡片 ---- */
@@ -4415,3 +4452,89 @@ a { color: var(--accent); text-decoration: none; }
   .ws-layout { grid-template-columns: 1fr; height: auto; }
   .ws-side { min-height: 420px; order: -1; }
 }
+
+/* ================= 2026-09 密度与一致性重构（frontend-design / web-design-guidelines） ================= */
+
+/* 全局无障碍：用户偏好减少动效时，停掉所有装饰性动画（脉冲/呼吸/shimmer） */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- ResearchPage（本轮研究）：内联样式全部收编，密度与其他页对齐 ---- */
+.rs-page { max-width: 1440px; }
+.rs-lede {
+  color: var(--text-dim); font-size: 12.5px; margin: 0 0 10px; line-height: 1.6;
+}
+.rs-section {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+  padding: 10px 12px 12px; margin: 0 0 10px;
+}
+.rs-section .section-title { margin: 0 0 8px; }
+.rs-kpi-value {
+  font-size: 22px; font-weight: 700; margin: 4px 0 2px;
+  font-variant-numeric: tabular-nums; line-height: 1.2;
+}
+.rs-kpi-value.tone-warn { color: #d9a441; }
+.rs-kpi-value.tone-down { color: var(--down); }
+.rs-kpi-value.tone-up { color: var(--up); }
+.rs-kpi-sub { font-size: 11.5px; color: var(--text-faint); }
+.rs-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.rs-table th {
+  text-align: left; padding: 4px 8px; color: var(--text-faint);
+  font-weight: 500; font-size: 11.5px; border-bottom: 1px solid var(--border); white-space: nowrap;
+}
+.rs-table td {
+  padding: 4px 8px; border-bottom: 1px solid var(--border);
+  font-variant-numeric: tabular-nums;
+}
+.rs-table td.strong { font-weight: 600; }
+.rs-table td.faint { color: var(--text-faint); font-size: 11.5px; }
+.rs-table tr.star { background: rgba(77, 163, 255, 0.08); }
+.rs-table tbody tr:hover { background: var(--bg-card-hover); }
+.rs-takeaway {
+  margin-top: 8px; padding: 8px 12px; background: var(--bg); border-radius: 8px;
+  font-size: 12.5px; line-height: 1.6;
+}
+.rs-report-wall { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.rs-report-link {
+  font-size: 12px; padding: 5px 10px; border: 1px solid var(--border);
+  border-radius: 8px; text-decoration: none; color: var(--text);
+  background: var(--bg-card); max-width: 440px;
+}
+.rs-report-link:hover { border-color: var(--accent); color: var(--accent); }
+.rs-note { font-size: 11.5px; color: var(--text-faint); margin-top: 6px; }
+.rs-conclusion-list { margin: 8px 0 0; padding-left: 18px; font-size: 12.5px; color: var(--text-dim); }
+.rs-lesson { margin-top: 8px; font-size: 12.5px; color: #b98a1d; }
+.rs-falsified {
+  display: inline-block; margin: 3px; opacity: 0.72;
+  text-decoration: line-through;
+}
+.rs-chart { width: 100%; height: 240px; }
+
+/* ---- OpsPage（今日操作）：四段网格化，密度对齐 ---- */
+.ops-page { max-width: 1160px; }
+.ops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 10px; align-items: start; }
+.ops-section {
+  background: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px;
+  padding: 10px 12px;
+}
+.ops-section h3 { margin: 0 0 8px; font-size: 13.5px; font-weight: 600; }
+.ops-section.span-all { grid-column: 1 / -1; }
+.ops-empty { color: var(--text-faint); font-size: 12px; padding: 2px 0; }
+@media (max-width: 720px) { .ops-grid { grid-template-columns: 1fr; } }
+
+/* 标题层级统一：section-title / page-head 内的 h1·h2 不再吃浏览器默认大字号 */
+.section-title h1, .section-title h2 { font-size: 14px; font-weight: 600; margin: 0; line-height: 1.35; }
+
+/* 详情页 / 板块页头与统一页头同一视觉等级 */
+.detail-header { padding: 6px 0 10px; margin-bottom: 10px; gap: 12px; }
+.detail-header h1 { font-size: 15px; }
+.detail-header .price { font-size: 20px; }
+.detail-header .change { font-size: 14px; }
+.sx-header { padding: 6px 0 9px; margin-bottom: 10px; }
+.sx-title h1 { font-size: 15px; }
