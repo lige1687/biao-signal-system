@@ -411,15 +411,21 @@ def _resolve_symbol_by_name(message: str, watch_items: list) -> str | None:
 
 
 def _payload_symbol_numbers(ctx_payload: dict) -> set[float]:
-    """上下文字符串里 ≥4 位的数字段（标的/板块代码，如 TH881129 的 881129）。
+    """上下文字符串里的数字段（标的/板块代码 + 消息标题内嵌数值）。
 
-    verify_numeric_grounding 用宽泛数字正则抽回复文本，代码串会被当数值；
-    这些数字来自系统材料本身，收集进白名单避免「提代码=编数字」的误伤。
+    verify_numeric_grounding 用宽泛数字正则抽回复文本，代码串/标题数字会被
+    当数值；这些数字来自系统材料本身，收集进白名单避免「提代码/引标题=
+    编数字」的误伤。2026-09-05 扩展：改用 extract_market_numbers 抽取——
+    它会先剥千分位逗号（标题「162,000」裸正则只能抽出 162/000 两个碎段，
+    AI 照抄 162000 时反被拒）；豁免口径同校验器，两边对称。
     """
+    from lei_signal.plans.grounding import extract_market_numbers  # noqa: PLC0415
+
     nums: set[float] = set()
 
     def walk(value: object) -> None:
         if isinstance(value, str):
+            nums.update(extract_market_numbers(value))
             for token in re.findall(r"\d{4,}", value):
                 try:
                     nums.add(float(token))
