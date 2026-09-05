@@ -330,8 +330,9 @@ def fetch_sector_flows(
     if need_backfill:
         direct_ok = True
         try:
+            # 探测直连可用性：push2his → push2test 备用历史集群（任一通即可）
             sources._get_json(
-                sources._FLOW_URLS[:1],
+                sources._FLOW_URLS[:2],
                 {"lmt": 1, "klt": 101, "secid": f"90.{need_backfill[0]}",
                  "fields1": "f1", "fields2": "f51"},
                 trust_env=False,
@@ -339,7 +340,7 @@ def fetch_sector_flows(
         except Exception:  # noqa: BLE001 - 直连不可用则本轮不回填
             direct_ok = False
             logger.warning(
-                "push2his 直连不可用（可能临时封禁），%d 个板块历史回填延后",
+                "push2his/push2test 直连均不可用（可能临时封禁），%d 个板块历史回填延后",
                 len(need_backfill),
             )
         if direct_ok:
