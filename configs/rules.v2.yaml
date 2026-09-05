@@ -25,7 +25,7 @@
 # 〔标定 V2.1，待彪哥确认〕= 规格作者未给数值、V2.1 讨论稿标定的默认值（规格 §17）：
 # 确认前按默认值执行、不得视为作者标准；全部保留规格 §17 敏感性测试。
 
-ruleset_version: "2.0.0"
+ruleset_version: "2.1.0"
 source_video: "https://www.youtube.com/watch?v=7NkwlH6NOk8"
 spec_source: "docs/trading-spec-v2.md"
 source_manual: "docs/handbook-30-videos.md"
@@ -963,7 +963,7 @@ rules:
   # ---------------- 散户热度（板块层资金面预警，研究代理；不属 LEI 规则体系）----------------
   retail_heat:
     rule_id: "retail_heat"
-    version: "0.3.0"
+    version: "0.4.0"
     provenance: "research_proxy"
     params:
       metric: "diverge"          # 小单−超大单分化（筹码下移强度），口径定义见 market_context/retail_heat.py
@@ -988,8 +988,12 @@ rules:
       散户净流入≡主力净流出，独立信息在小单−超大单分化。
       分位池取 l1_l2（2026-09-05 用户反馈）：三级细分板块成分股少、行为极端，
       进池会霸占榜单两端且对使用者不可操作；大板块池内排名更有意义。
-      hot/cold 阈值初值 90/10 为占位，回测校准（含机会线反向验证）后更新并提升
-      version；回测依据与更新记录见 docs/experiments/retail-mania-threshold-2026-09-04.md。
+      【结案 2026-09-05，verdict=falsified】246 交易日全量回测：过热无短期
+      下跌预警价值（隔日抽样不稳健）、冰点无机会含义——hot/cold 阈值仅作
+      展示分档（中性措辞：情绪提示/冰点），不得用于风险或机会判定。
+      存活子发现（环境组合）：CN 情绪冰点 × 散户过热 = 20 日胜率 81%/
+      超额胜率 64%，作为独立实验预注册验证中，验证通过前不进判定层。
+      详见 docs/experiments/retail-mania-threshold-2026-09-04.md ARCHIVE 段。
       「机构」为超大单近似（单据规模代理，非真实身份）；「国家队」无数据口径，不冒充。
 
   # ---------------- 美国调查情绪与 VIX 分档（外部实证阈值引用，研究代理）----------------
@@ -1020,6 +1024,137 @@ rules:
       以上或配合价格确认（SentimenTrader）；单一指标非最优。页面必须标注
       「外部实证阈值」。数据源：LEI_SENTIMENT_ROOT 手动导入（naaim.csv/
       aaii.csv），未设置时如实显示未接入。
+
+  # ---------------- 脆弱性差值（指数平静 vs 个股深跌，文主任增量 #2）----------------
+  vulnerability_spread:
+    rule_id: "vulnerability_spread"
+    version: "0.1.0"
+    provenance: "research_proxy"
+    params:
+      index_symbols: ["000001.SS", "000300.SS"]   # 上证/沪深300（本地 bars 缓存可用的指数）
+      index_names_cn: ["上证指数", "沪深300"]
+      windows: [60, 120]              # 回撤窗口（日）
+      percentile_window: 750          # spread 滚动分位窗口（≈3 年）
+      percentile_min_periods: 250     # 分位最少样本（不足则分位不可用）
+      min_eligible: 300               # 当日有效个股数下限（过滤早年样本过少）
+      fragile_spread_pp: -5.0         # spread ≤ -5pp 且分位 ≥ 90 → 「脆弱性拉大」
+      fragile_percentile: 90.0
+    formula: |
+      W 日窗口：个股 dd = close / rolling_max(close, W) − 1（全A 截面，ffill 对齐）；
+      中位数回撤 = 当日有效个股 dd 的中位数（均值同时算，中位数为主）；
+      指数 dd 同口径；spread = 中位数回撤 − 指数回撤（百分点，负 = 个股跌更深）；
+      分位 = spread 在近 percentile_window 日的滚动百分位（点时可见，无前视）；
+      fragile = spread ≤ fragile_spread_pp 且 分位 ≥ fragile_percentile。
+    note_cn: |
+      来源：文主任调研 2026-09-05（小红书博主「文主任」笔记：指数回撤与市场中位数
+      个股回撤的差值历史上必然收敛——差值拉大=指数的平静是假象，要么指数补跌、
+      要么个股补涨）。市场环境层叙事标注：只提示「路牌可靠性打折」，永不参与技术
+      判定、不做硬过滤、不挡信号。阈值 -5pp/90 分位为假设初值，待 A 股数据自测
+      校准；是否有效待观察。数据：本地全A收盘矩阵（a_share_klines_full 33年研究
+      全史 + live 缓存尾部合并）+ 指数日线（本地 bars 缓存，无网络依赖）。
+      界面必须标注「研究代理」。
+
+  # ---------------- 偏离度分位提醒（过热/超跌路牌，文主任增量 #3）----------------
+  deviation_percentile_alert:
+    rule_id: "deviation_percentile_alert"
+    version: "0.1.0"
+    provenance: "research_proxy"
+    params:
+      ma_windows: [20, 60, 200]       # 偏离基准均线（EMA）
+      percentile_windows: [756, 1260] # 滚动分位窗口（≈3年/5年，交易日）
+      percentile_min_periods: 250     # 分位最少样本（不足则该窗口分位不可用）
+      extreme_high: 0.95              # 分位 ≥95% 视为向上极端（过热警戒）
+      extreme_low: 0.05               # 分位 ≤5% 视为向下极端（超跌机会区）
+      consecutive_days_min: 3         # 连续极端 ≥3 天才提醒（过滤单日毛刺）
+      # 监控标的（沿用系统本地 bars 缓存可用的指数；创业板指 399006.SZ 本地无日线，
+      # 进清单后如实标注数据缺失）
+      watch_symbols: ["000001.SS", "000300.SS", "399006.SZ", "^HSTECH", "^IXIC", "^GSPC"]
+      watch_names_cn: ["上证指数", "沪深300", "创业板指", "恒生科技", "纳斯达克", "标普500"]
+      # 过热参照初值（文主任口径：沪深300 +15% / 上证 +13% / 标普 +8~12%——
+      # 均为「假设初值」，A股是否成立待自测；提醒本身按分位+连续天数触发，
+      # 这组绝对偏离值仅作为文案里的参照提示，不作触发条件）
+      overheat_reference_pct:
+        "000001.SS": 13.0
+        "000300.SS": 15.0
+        "^GSPC": 12.0
+    formula: |
+      偏离度 = close/EMA(N) − 1（N=20/60/200，仅用当日及此前数据）；
+      分位 = 偏离度在近 percentile_windows 日的滚动百分位（点时可见）；
+      极端日 = 分位 ≥ extreme_high 或 ≤ extreme_low；
+      提醒 = 连续极端天数 ≥ consecutive_days_min 时落库一条 signpost 事件
+      （kind=deviation_extreme，方向=向上过热/向下超跌）。
+    note_cn: |
+      来源：文主任调研 2026-09-05（偏离度=(收盘−均线)/均线，看 20/60/200 日三档，
+      换算历史分位并统计连续极端天数；+15%/+13% 等绝对值为其美股/沪深300 参照，
+      一律为假设初值，待 A 股数据自测校准）。性质=路牌：只预警、不必然反向；
+      高偏离可磨 3-6 个月才回归，给不出买卖点；不参与任何模块触发、不作反向信号。
+      数据：本地指数 bars 缓存（海外指数历史较短时按可用样本算分位并在页面标注）。
+
+  # ---------------- 跌破200日线分步检查清单（文主任增量 #4，道路层分级预警）----------------
+  ma200_break_checklist:
+    rule_id: "ma200_break_checklist"
+    version: "0.1.0"
+    provenance: "research_proxy"
+    params:
+      ma_period: 200
+      cross_ma_short: 50          # d5 检查③：50/200 死叉判定用
+      d3_watch_days: 3            # 跌破后第 3 个交易日仍未收回 → 观望提醒
+      d5_check_days: 5            # 第 5 天查三项
+      d5_drop_pct: -3.0           # ①自跌破日收盘累计跌幅 ≤ -3%
+      d5_below_ma_pct: -2.0       # ②收盘低于 SMA200 达 2% 且 SMA200 斜率向下
+      slope_lookback: 5           # ②斜率 = SMA200 相比 N 日前
+      d10_warn_days: 10           # 第 10 天仍未收回 → 明确预警
+      d20_risk_days: 20           # 第 20 天仍未收回 → 系统性风险提示
+    formula: |
+      跌破日（上升沿，每个跌破回合一次）：close(t) < SMA200(t) 且 close(t-1) >= SMA200(t-1)；
+      回合内逐日计数（跌破日=第0天，只用当日及此前数据）：
+        收回 = 任一收盘 >= 当日 SMA200 → 回合静默结束；
+        d3_watch  = 第 d3_watch_days 天仍未收回；
+        d5_check  = 第 d5_check_days 天仍未收回且三项任一命中：
+          ① close(t)/close(跌破日) − 1 ≤ d5_drop_pct
+          ② close(t) ≤ SMA200(t)×(1+d5_below_ma_pct/100) 且 SMA200(t) < SMA200(t−slope_lookback)
+          ③ SMA50(t) < SMA200(t)（50/200 死叉状态成立）；
+        d10_warn  = 第 d10_warn_days 天仍未收回；
+        d20_risk  = 第 d20_risk_days 天仍未收回；
+      每回合各档事件至多各发一次。
+    note_cn: |
+      来源：文主任调研 2026-09-05（对标普 1928-2026 的 295 次跌破统计：58% 五天收回、
+      仅 5.8% 成熊；清单=3天观望→5天查三项→10天不回明确预警→20天不回系统性风险）。
+      A 股自测（docs/experiments/ma200-breakdown-checklist-astock-2026-09-05.md，verdict=mixed）：
+      时间结构成立（四指数 377 次跌破：5天收回60%、20天收回78%、20天再跌>10% 仅9%），
+      故落时间分档；博主「急速跌破最安全/缓慢阴跌最危险」在 A 股方向相反，形态分组不落地。
+      d5 三项阈值为博主口径假设初值，待 A 股条件概率复测校准。
+      道路层分级预警：只预警、绝不等于翻空信号；不改动 lei_color/趋势状态机判定。
+      界面必须标注「研究代理」。
+    events:
+      - ma200_break_started
+      - ma200_break_d3_watch
+      - ma200_break_d5_check
+      - ma200_break_d10_warn
+      - ma200_break_d20_risk
+
+  # ---------------- L1-L6 市场难度分级（文主任增量 #6，实验台评分卡）----------------
+  risk_grade_l1l6:
+    rule_id: "risk_grade_l1l6"
+    version: "0.1.0"
+    provenance: "research_proxy"
+    params:
+      weight_breadth: 0.40         # 宽度 B50 三年分位（越弱分越高）
+      weight_rv: 0.40              # 市场已实现波动 756 日分位（越高分越高）
+      weight_breadth_delta: 0.20   # 宽度 5 日变化（下行恶化加分，[-20,0]pp 归一）
+      grade_bands: [20, 35, 50, 65, 80]   # 评分 → L1..L6 六档分界
+      portfolio_top_frac: 0.30     # 实验台因子组合 long-only 比例（前 30%）
+    formula: |
+      score = 0.40×(1−B50分位) + 0.40×RV分位 + 0.20×宽度5日恶化度；
+      L1: score≤20 … L5: 65<score≤80，L6: score>80（高分=市场难度高）；
+      周度（每周最后交易日）取档，历史回放点时计算（无前视）。
+    note_cn: |
+      来源：文主任调研 2026-09-05（其 L1-L6 周度风险分级=宽度/波动/情绪等信号
+      合成的难度分级）。本实现为 A 股参数自定的评分卡（灵感来源，非照抄）：
+      情绪分量因无 A 股长历史情绪序列暂缺，用宽度+波动+宽度趋势三项。
+      只做市场环境叙事标注（实验台展示），不参与任何技术判定、不做硬过滤、
+      不挡信号。分档后验为重叠样本描述统计，非独立事件检验。
+      界面必须标注「实验·研究代理」。
 
 # ---------------- 状态机 ----------------
 state_machine:

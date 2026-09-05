@@ -588,7 +588,7 @@ function HeatBoardCard({
       ) : (
         <>
           <div className="sx-heat-zone risk">
-            风险区 ≥{heat.hot_pctile.toFixed(0)}：散户狂买 · 超大单派发
+            情绪高位 ≥{heat.hot_pctile.toFixed(0)}：散户买入最集中（中性参考）
           </div>
           {valid
             .filter((b) => b.heat_hot && b.level <= 2)
@@ -613,7 +613,7 @@ function HeatBoardCard({
               </button>
             ))}
           <div className="sx-heat-zone opp">
-            机会区 ≤{(heat.cold_pctile ?? 0).toFixed(0)}：散户割肉 · 超大单吸筹
+            情绪冰点 ≤{(heat.cold_pctile ?? 0).toFixed(0)}：散户流出最集中（中性参考）
           </div>
           {valid
             .filter((b) => b.heat_cold && b.level <= 2)
@@ -638,8 +638,7 @@ function HeatBoardCard({
               </button>
             ))}
           <div className="muted" style={{ fontSize: 11, marginTop: 6 }}>
-            仅一、二级行业上榜（排名池 {heat.n_pool} 个；细分板块热度见主表）· research_proxy
-            （只预警非买卖点，阈值回测校准中）· 港股（恒生科技等）资金流不覆盖
+            仅一、二级行业上榜（排名池 {heat.n_pool} 个；细分板块热度见主表）· research_proxy（回测结案：过热/冰点均无短期预警价值，仅作情绪参考，非买卖点）· 港股资金流不覆盖
           </div>
         </>
       )}

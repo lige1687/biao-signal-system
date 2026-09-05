@@ -170,13 +170,13 @@ def heat_state(
             out["warning"] = True
             stage_cn = {"markup": "上升", "distribution": "派发"}.get(stage, stage)
             out["note_cn"] = (
-                f"散户过热（热度分位 {heat_pctile:.0f}）× {stage_cn}阶段："
-                "小单涌入、超大单派发的路牌预警（研究代理，非买卖点）"
+                f"散户买入集中（热度分位 {heat_pctile:.0f}）× {stage_cn}阶段："
+                "情绪提示（回测结案：过热无短期下跌预警价值，中性参考；研究代理）"
             )
     elif heat_pctile <= cfg.get("cold_pctile", 0.0):
         out["cold"] = True
         out["note_cn"] = (
-            f"散户冰点（热度分位 {heat_pctile:.0f}）：小单割肉、超大单吸筹的"
-            "反向关注区（研究代理，机会含义待回测校准）"
+            f"散户冰点（热度分位 {heat_pctile:.0f}）：小单流出最集中"
+            "（回测结案：无机会含义，中性参考；研究代理）"
         )
     return out
