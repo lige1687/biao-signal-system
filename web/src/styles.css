@@ -4305,10 +4305,13 @@ a { color: var(--accent); text-decoration: none; }
 .ws-layout {
   display: grid;
   grid-template-columns: minmax(380px, 7fr) minmax(300px, 5fr);
-  gap: 14px;
+  gap: 0 14px;
   height: calc(100vh - 84px);
   padding: 14px 16px;
 }
+/* 中间拖把列：gap 已留 14px，拖把本体贴中线 */
+.ws-split { display: flex; align-items: stretch; justify-content: center; }
+.ws-split .resize-handle { width: 6px; height: 100%; margin: 0 -3px; z-index: 3; }
 .ws-chat {
   display: flex; flex-direction: column; min-height: 0;
   background: var(--bg-panel);
@@ -4450,6 +4453,7 @@ a { color: var(--accent); text-decoration: none; }
 
 @media (max-width: 980px) {
   .ws-layout { grid-template-columns: 1fr; height: auto; }
+  .ws-split { display: none; }
   .ws-side { min-height: 420px; order: -1; }
 }
 

@@ -5,6 +5,7 @@ import { api } from "../api/client";
 import AgentMarkdown from "../components/AgentMarkdown";
 import KlineChart, { DEFAULT_DISPLAY } from "../components/KlineChart";
 import { CopilotCardDispatcher } from "../components/copilot/CopilotCards";
+import ResizeHandle from "../components/ResizeHandle";
 import type { TradePreview } from "../types";
 
 type Turn = {
@@ -203,6 +204,28 @@ export default function AgentWorkspacePage() {
   const [input, setInput] = useState("");
   const [symbol, setSymbol] = useState<string | null>(null);
   const [sessionId, setSessionId] = useState<string | null>(null);
+  // 左右分栏：像素宽持久化（与买点侧栏 ResizeHandle 同模式）；窄屏自动单栏
+  const [narrow, setNarrow] = useState(
+    () => window.matchMedia("(max-width: 980px)").matches,
+  );
+  const [leftPx, setLeftPx] = useState(() => {
+    const saved = Number(localStorage.getItem("ws-left-px")) || 0;
+    const def = Math.round(window.innerWidth * 0.55);
+    return Math.max(380, Math.min(window.innerWidth - 360, saved || def));
+  });
+  const saveLeftTimer = useRef(0);
+  const changeLeft = (w: number) => {
+    setLeftPx(w);
+    window.clearTimeout(saveLeftTimer.current);
+    saveLeftTimer.current = window.setTimeout(
+      () => localStorage.setItem("ws-left-px", String(w)),
+      300,
+    );
+  };
+  const resetLeft = () => {
+    localStorage.removeItem("ws-left-px");
+    setLeftPx(Math.round(window.innerWidth * 0.55));
+  };
   const bodyRef = useRef<HTMLDivElement | null>(null);
   const taRef = useRef<HTMLTextAreaElement | null>(null);
   const usedQuick = useRef<Set<string>>(new Set());
@@ -220,6 +243,13 @@ export default function AgentWorkspacePage() {
     ta.style.height = "auto";
     ta.style.height = `${Math.min(ta.scrollHeight, 96)}px`;
   }, [input]);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 980px)");
+    const update = () => setNarrow(mq.matches);
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   const pushTurn = (t: Turn) => setTurns((cur) => [...cur, t]);
 
@@ -303,7 +333,10 @@ export default function AgentWorkspacePage() {
   }, [turns]);
 
   return (
-    <div className="ws-layout">
+    <div
+      className="ws-layout"
+      style={narrow ? undefined : { gridTemplateColumns: `${leftPx}px 10px 1fr` }}
+    >
       <section className="ws-chat">
         <header className="ws-toolbar">
           <div className="ws-brand">
@@ -390,6 +423,21 @@ export default function AgentWorkspacePage() {
         </footer>
       </section>
 
+      {!narrow && (
+        <div
+          className="ws-split"
+          onDoubleClick={resetLeft}
+          title="拖动调整左右比例，双击恢复默认"
+        >
+          <ResizeHandle
+            width={leftPx}
+            min={380}
+            max={Math.max(420, window.innerWidth - 360)}
+            onChange={changeLeft}
+            cursor="col-resize"
+          />
+        </div>
+      )}
       <SidePanel symbol={symbol} onAsk={askExample} />
     </div>
   );
