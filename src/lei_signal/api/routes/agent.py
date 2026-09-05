@@ -309,21 +309,34 @@ def _lcs_len(a: str, b: str) -> int:
     return best
 
 
-def _resolve_symbol_by_name(message: str, watch_items: list) -> str | None:
+def _resolve_symbol_by_name(
+    message: str, watch_items: list, service: object
+) -> str | None:
     """中文名称模糊解析：说「通信设备」「纳指怎么样」也能带出对应标的。
 
-    匹配对象是自选列表的 display_name（「通信ETF」「纳指ETF」…）。策略：
+    匹配对象是自选列表的 display_name（「通信ETF」「纳指ETF」…）；生产库
+    watchlist 的 display_name 可能为空（只存代码），此时从分析服务的结果
+    惰性取名（get 有 TTL 缓存，且看盘页常访问多为热缓存）。策略：
     取消息里的连续中文片段，与名称做包含或最长公共子串匹配，公共部分
     ≥2 字即命中（口语常带尾巴：「通信设备怎么看」vs「通信ETF」公共
     「通信」2字 → 命中）。多命中取分高者（更具体优先）。整段命中停用词
     的片段（「怎么看」）跳过。
     """
     scored: list[tuple[int, str]] = []
-    names = [
-        (w.symbol, str(w.display_name or "").strip())
-        for w in watch_items
-        if getattr(w, "display_name", None)
-    ]
+    names: list[tuple[str, str]] = []
+    for w in watch_items:
+        name = str(getattr(w, "display_name", "") or "").strip()
+        if not name:
+            # display_name 缺失：从分析结果取名（含 TH 板块的中文名）
+            try:
+                entry = service.get(w.symbol)  # type: ignore[attr-defined]
+                result = getattr(entry, "result", None)
+                if result is not None:
+                    name = str(getattr(result, "display_name", "") or "").strip()
+            except Exception:  # noqa: BLE001  取名失败不阻断解析
+                name = ""
+        if name:
+            names.append((w.symbol, name))
     for frag in _CJK_RUN_RE.findall(message):
         if frag in _NAME_STOPWORDS:
             continue
@@ -445,7 +458,9 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
             if symbol is None:
                 from lei_signal.api.watchlist import list_watchlist  # noqa: PLC0415
 
-                symbol = _resolve_symbol_by_name(body.message, list_watchlist(conn))
+                symbol = _resolve_symbol_by_name(
+                    body.message, list_watchlist(conn), service
+                )
             if symbol is None:
                 symbol = _last_resolved_symbol(history_rows)
         if symbol is not None and service is not None:
