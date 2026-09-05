@@ -68,11 +68,19 @@ def pick_sectors(sector_rows: list[dict] | None, top_n: int) -> list[SectorPickD
     out: list[SectorPickDTO] = []
     for row in ranked[:top_n]:
         stage = str(row.get("stage", "") or "")
+        heat_parts = []
+        for flag_key, label in (("heat_hot", "过热警示"), ("heat_cold", "冰点")):
+            if row.get(flag_key):
+                heat_parts.append(label)
+        pctile = row.get("heat_pctile")
+        if pctile is not None:
+            heat_parts.append(f"{pctile}分位" if not heat_parts else f"{pctile}分位")
         out.append(SectorPickDTO(
             code=str(row.get("code", "")),
             name=str(row.get("name", "") or ""),
             stage=stage,
             stage_cn=STAGE_CN.get(stage, stage or "未知"),
+            heat_state_cn="、".join(heat_parts) or None,
             note="阶段快照直读；排序不构成判定（plan-agent-superentry §4.A）",
         ))
     return out
@@ -84,6 +92,8 @@ def build_recommendation(
     run_date: str,
     sector_rows: list[dict] | None = None,
     news_brief: dict | None = None,
+    sentiment_index: dict | None = None,
+    sentiment_available: bool = False,
     generated_at: str = "",
     top_symbols: int = 5,
     top_sectors: int = 3,
@@ -104,6 +114,12 @@ def build_recommendation(
         ]
         if it.missing_summary_cn:
             reasons.append(f"还缺：{it.missing_summary_cn}")
+        # 情绪面：只标注不评分（回测阈值未定案，定案后是否参与排序另行决策）
+        sentiment_cn = None
+        if sentiment_index:
+            from lei_signal.copilot import sentiment as sentiment_mod  # noqa: PLC0415
+
+            sentiment_cn = sentiment_mod.symbol_sentiment_cn(it.symbol, sentiment_index)
         items.append(RecommendItemDTO(
             symbol=it.symbol,
             display_name=it.display_name or it.symbol,
@@ -114,6 +130,7 @@ def build_recommendation(
             reward_risk_computable=it.reward_risk_computable,
             news_heat=heat,
             news_tags=tags,
+            sentiment_cn=sentiment_cn,
             score=round(score, 3),
             reasons=reasons,
         ))
@@ -123,4 +140,8 @@ def build_recommendation(
         generated_at=generated_at,
         items=items[:top_symbols],
         sectors=pick_sectors(sector_rows, top_sectors),
+        sentiment_status=(
+            "已接入（只标注不评分）" if sentiment_available
+            else "数据累积中（约需 20 个交易日资金流）"
+        ),
     )

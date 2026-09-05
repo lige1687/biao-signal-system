@@ -28,6 +28,11 @@ export function RecommendCardView({ card }: { card: RecommendCard }) {
             {it.display_name}
           </Link>
           <span className={`badge v-${it.verdict}`}>{it.verdict_cn}</span>
+          {it.sentiment_cn && (
+            <span className="cp-chip" title="散户情绪叙事标注（不参与判定）">
+              {it.sentiment_cn}
+            </span>
+          )}
           <span className="muted">{it.reasons.slice(0, 3).join("；")}</span>
         </div>
       ))}

@@ -96,6 +96,38 @@ export default function OpsPage() {
         </section>
 
         <section className="ops-section span-all">
+          <h3>⑤ 情绪面（叙事标注，不构成判定）</h3>
+          {ops.sentiment?.margin_cn && (
+            <div className="cp-row">
+              <span className="cp-sym">融资环境</span>
+              <span className="muted">{ops.sentiment.margin_cn}</span>
+            </div>
+          )}
+          {ops.sentiment?.hot_boards?.length ? (
+            <div className="cp-row">
+              <span className="cp-sym">过热警示</span>
+              <span className="muted">
+                {ops.sentiment.hot_boards
+                  .map((b) => `${b.name}（${b.heat_pctile}分位）`)
+                  .join("、")}
+              </span>
+            </div>
+          ) : null}
+          {ops.sentiment?.holdings_states?.map((h) => (
+            <div className="cp-row" key={h.group_cn}>
+              <span className="cp-sym">{h.group_cn}</span>
+              <span className="muted">{h.state_cn}</span>
+            </div>
+          ))}
+          {ops.sentiment && !ops.sentiment.available && (
+            <div className="ops-empty" style={{ fontSize: 11 }}>
+              {ops.sentiment.note_cn ||
+                "情绪面：数据累积中（约需 20 个交易日资金流）"}
+            </div>
+          )}
+        </section>
+
+        <section className="ops-section span-all">
           <h3>② 今日推荐</h3>
           {ops.recommendations ? (
             <RecommendCardView card={ops.recommendations} />

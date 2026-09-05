@@ -113,11 +113,16 @@ def _recommend_card(request: Request, *, refresh: bool = False) -> RecommendCard
         with closing(connect(db)) as conn:
             upsert_scan_results(conn, scan_date, scan_items)
             conn.commit()
+    from lei_signal.copilot import sentiment as sentiment_mod  # noqa: PLC0415
+
+    s_pack = sentiment_mod.load_sector_sentiment()
     return build_recommendation(
         scan_items,
         run_date=scan_date,
         sector_rows=_sector_rows(request),
         news_brief=_news_brief(request),
+        sentiment_index=sentiment_mod.build_symbol_index(s_pack),
+        sentiment_available=bool(s_pack.get("available")),
         generated_at=datetime.now(UTC).isoformat(),
     )
 
@@ -407,3 +412,13 @@ def ops_today(request: Request) -> OpsCardDTO:
         return ops_mod.build_ops_today(
             conn, run_date=run_date, recommend_card=rec
         )
+
+
+@router.get("/copilot/sentiment")
+def get_sentiment() -> dict:
+    """情绪面数据包：板块热度 + 两融环境（只读，叙事标注层）。"""
+    from lei_signal.copilot import sentiment as sentiment_mod  # noqa: PLC0415
+
+    s_pack = sentiment_mod.load_sector_sentiment()
+    s_pack["margin"] = sentiment_mod.margin_regime_cn()
+    return s_pack

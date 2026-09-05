@@ -2124,6 +2124,22 @@ export interface PortfolioResponse {
   groups: PortfolioGroup[];
 }
 
+// ---- 基金净值对比（涨跌幅视角，展示层） ----
+export interface FundNavItem {
+  code: string;
+  name: string;
+  dates: string[];                    // 该基金自己的交易日轴（升序）
+  unit_nav: number[];                 // 单位净值（分红除息日人为跳水）
+  acc_nav: number[];                  // 累计净值（分红加回，看涨跌幅默认口径）
+  day_pct: (number | null)[];         // 当日净值增长率 %
+}
+
+export interface FundNavSeries {
+  days: number;                       // 生效窗口（0 = 成立以来全量）
+  items: FundNavItem[];
+  errors: { code: string; reason_cn: string }[];
+}
+
 // ---- Copilot（Agent 超级入口） ----
 export interface RecommendItem {
   symbol: string;
@@ -2135,11 +2151,13 @@ export interface RecommendItem {
   reward_risk_computable: boolean;
   news_heat: number;
   news_tags: string[];
+  sentiment_cn: string | null;
   score: number;
   reasons: string[];
 }
 export interface SectorPick {
-  code: string; name: string; stage: string; stage_cn: string; note: string;
+  code: string; name: string; stage: string; stage_cn: string;
+  heat_state_cn: string | null; note: string;
 }
 export interface RecommendCard {
   run_date: string;
@@ -2195,12 +2213,20 @@ export interface OpsTodo {
   due_from: string; nag_count: number;
 }
 export interface OpsLine { symbol: string; display_name: string; text_cn: string; }
+export interface SentimentBlock {
+  available: boolean; margin_cn: string;
+  margin_detail: Record<string, unknown> | null;
+  hot_boards: { name: string; heat_pctile: number | null; stage_cn: string }[];
+  holdings_states: { group_cn: string; state_cn: string }[];
+  note_cn: string;
+}
 export interface OpsCard {
   run_date: string; generated_at: string;
   holdings_actions: OpsLine[];
   recommendations: RecommendCard | null;
   plan_todos: OpsTodo[];
   watch_triggers: OpsLine[];
+  sentiment: SentimentBlock | null;
   push_summary_cn: string;
 }
 

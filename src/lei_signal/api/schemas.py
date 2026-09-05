@@ -1059,6 +1059,7 @@ class RecommendItemDTO(BaseModel):
     reward_risk_computable: bool = False
     news_heat: int = 0
     news_tags: list[str] = []
+    sentiment_cn: str | None = None   # 情绪面叙事标注（只标注不评分）
     score: float = 0.0
     reasons: list[str] = []
 
@@ -1070,6 +1071,7 @@ class SectorPickDTO(BaseModel):
     name: str = ""
     stage: str = ""
     stage_cn: str = ""
+    heat_state_cn: str | None = None  # 散户热度叙事标注（偏热/冰点，中性措辞）
     note: str = ""
 
 
@@ -1205,6 +1207,17 @@ class OpsLineDTO(BaseModel):
     text_cn: str
 
 
+class SentimentBlockDTO(BaseModel):
+    """情绪面叙事区块（只标注，不构成判定/买卖点）。"""
+
+    available: bool = False
+    margin_cn: str = ""              # 两融环境一句话
+    margin_detail: dict | None = None
+    hot_boards: list[dict] = []      # [{name, heat_pctile, stage_cn}]
+    holdings_states: list[dict] = [] # [{group_cn, state_cn}]
+    note_cn: str = ""
+
+
 class OpsCardDTO(BaseModel):
     """每日操作清单（确定性组装，零 LLM；页面与推送共用）。"""
 
@@ -1214,6 +1227,7 @@ class OpsCardDTO(BaseModel):
     recommendations: RecommendCardDTO | None = None
     plan_todos: list[OpsTodoDTO] = []
     watch_triggers: list[OpsLineDTO] = []
+    sentiment: SentimentBlockDTO | None = None
     push_summary_cn: str = ""
 
 

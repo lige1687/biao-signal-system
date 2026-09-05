@@ -104,5 +104,59 @@ def build_ops_today(
         recommendations=recommend_card,
         plan_todos=todos,
         watch_triggers=watch,
+        sentiment=_build_sentiment_block(conn),
         push_summary_cn=summary,
+    )
+
+
+def _build_sentiment_block(conn: sqlite3.Connection):
+    """情绪面区块：两融一句话 + 过热Top3 + 持仓赛道状态（只标注）。
+
+    板块热度快照重建期 available=False，只回融资环境并提示累积中——
+    措辞中性（偏热/冰点），不写方向性结论（红线见 handoff 文档 §4）。
+    """
+    from lei_signal.api.schemas import SentimentBlockDTO  # noqa: PLC0415
+    from lei_signal.copilot import sentiment as sentiment_mod  # noqa: PLC0415
+    from lei_signal.portfolio.advisor import GROUP_SECTORS  # noqa: PLC0415
+
+    pack = sentiment_mod.load_sector_sentiment()
+    by_board = pack.get("by_board") or {}
+    name_index = {
+        (rec.get("name") or ""): rec for rec in by_board.values()
+        if isinstance(rec, dict)
+    }
+    margin = sentiment_mod.margin_regime_cn()
+    hot = [
+        {
+            "name": b.get("name"),
+            "heat_pctile": b.get("heat_pctile"),
+            "stage_cn": b.get("stage_cn"),
+        }
+        for b in (pack.get("hot_boards") or [])[:3]
+        if isinstance(b, dict)
+    ]
+    holdings_states: list[dict] = []
+    for row in conn.execute(
+        "SELECT group_key, name FROM portfolio_groups ORDER BY sort_order"
+    ).fetchall():
+        states = []
+        for sector_name in GROUP_SECTORS.get(row["group_key"], []):
+            rec = name_index.get(sector_name)
+            if rec is not None:
+                states.append(f"{sector_name}{rec.get('state_cn') or ''}")
+        if states:
+            holdings_states.append({
+                "group_cn": row["name"],
+                "state_cn": "；".join(states),
+            })
+    return SentimentBlockDTO(
+        available=bool(pack.get("available")),
+        margin_cn=(margin or {}).get("regime_cn", ""),
+        margin_detail=margin,
+        hot_boards=hot,
+        holdings_states=holdings_states,
+        note_cn=pack.get("note_cn", "") or (
+            "情绪面：数据累积中（约需 20 个交易日资金流）"
+            if not pack.get("available") else ""
+        ),
     )
