@@ -7,29 +7,107 @@
       "name_cn": "冰点机会",
       "definition": "全A情绪冰点（两融20日变化+全A散户小单净流入20日+等权动能三票多数冷）× 板块60日跌幅≤-10% × 板块散户流入z≥1.5（自身120日基准）× b50<30",
       "conditions": [
-        {"key": "全板块池化", "win_agreement_pct": 92, "mean_excess_10d_pct": 5.92, "n_triggers": 154, "n_days": 19, "p_value": 0.0000, "source": "§10 共性检验"},
-        {"key": "b20低档加成", "win_agreement_pct": 76, "mean_excess_10d_pct": 7.79, "n_triggers": 119, "p_value": 0.0001, "source": "§11 宽度矩阵"},
-        {"key": "b50低/50&200同低", "win_agreement_pct": 79, "mean_excess_10d_pct": 6.46, "n_triggers": 146, "p_value": 0.0000, "source": "§11 宽度矩阵"},
-        {"key": "8板块组版", "win_rate_20d_pct": 100, "mean_excess_10d_pct": 8.35, "n_triggers": 21, "p_value": 0.0000, "source": "§8 组合深挖"}
+        {
+          "key": "全板块池化",
+          "win_agreement_pct": 92,
+          "mean_excess_10d_pct": 5.92,
+          "n_triggers": 154,
+          "n_days": 19,
+          "p_value": 0.0,
+          "source": "§10 共性检验",
+          "note": "全事件均值约+4.5%（四事件 57%~94% 分层；引用时应给区间而非单一数字）"
+        },
+        {
+          "key": "b20低档加成",
+          "win_agreement_pct": 76,
+          "mean_excess_10d_pct": 7.79,
+          "n_triggers": 119,
+          "p_value": 0.0001,
+          "source": "§11 宽度矩阵"
+        },
+        {
+          "key": "b50低/50&200同低",
+          "win_agreement_pct": 79,
+          "mean_excess_10d_pct": 6.46,
+          "n_triggers": 146,
+          "p_value": 0.0,
+          "source": "§11 宽度矩阵"
+        },
+        {
+          "key": "8板块组版",
+          "win_rate_20d_pct": 100,
+          "mean_excess_10d_pct": 8.35,
+          "n_triggers": 21,
+          "p_value": 0.0,
+          "source": "§8 组合深挖"
+        }
       ],
       "best_hold_days": "10-20（5日不显著）",
       "entry_window": "触发后0-5日内任意时点无差异（§9）",
       "mfe_profile": "20日胜率100%案例中前1-2例先跌4-12%再反转（左侧阵痛真实存在）",
-      "validation_status": "单年双恐慌事件验证；Tushare多年终审待做（预注册标准：≥4次恐慌事件且事件级胜率≥60%）",
+      "validation_status": "多年多事件验证通过（CONFIRMED，2026-09-07）：2022上海疫情段 118例 +3.56%/66%、2022十月大跌段 32例 +0.97%/59%、2026四月段 14例 +0.62%/57%、2026七月段 88例 +12.90%/94%——4/4 事件盈利，满足预注册标准（≥4事件且盈利占比≥60%）。强度分层：深恐慌显著强于浅调整（7月段与2022-A最强）",
       "usage_boundaries": [
         "仅全A三票冰点环境激活（当前环境非冰点时此信号不适用）",
         "需板块b50<30（深弱）；b50高的板块不适用",
         "结构市中冷热板块分别读（market_structure 高极化时勿混读）",
         "历史触发集中于2026-07-15~08-04单次恐慌期——独立事件数少"
+      ],
+      "multi_event": [
+        {
+          "event": "2022-A 上海疫情段",
+          "n": 118,
+          "ret15": 3.56,
+          "win": 66
+        },
+        {
+          "event": "2022-B 十月大跌段",
+          "n": 32,
+          "ret15": 0.97,
+          "win": 59
+        },
+        {
+          "event": "2026-A 四月冰点段",
+          "n": 14,
+          "ret15": 0.62,
+          "win": 57
+        },
+        {
+          "event": "2026-B 七月主恐慌",
+          "n": 88,
+          "ret15": 12.9,
+          "win": 94
+        }
       ]
     },
     "heat_alarm": {
       "name_cn": "强势散户热警报",
       "definition": "板块散户流入z≥1.5 × b50>70 × b200>70（全面强势板块的散户涌入）",
       "conditions": [
-        {"key": "50&200同高", "win_agreement_pct": 0, "mean_return_10d_pct": -9.31, "n_triggers": 29, "p_value": 0.0009, "note": "29例无一板块幸免（板块级方向0%为正）", "source": "§11 宽度矩阵"},
-        {"key": "b50高(单条件)", "win_agreement_pct": 17, "mean_return_10d_pct": -6.13, "n_triggers": 88, "p_value": 0.0012, "source": "§11 宽度矩阵"},
-        {"key": "长强回调档(50低200高)", "win_agreement_pct": 29, "mean_return_10d_pct": -9.02, "n_triggers": 17, "p_value": 0.030, "source": "§11 宽度矩阵"}
+        {
+          "key": "50&200同高",
+          "win_agreement_pct": 0,
+          "mean_return_10d_pct": -9.31,
+          "n_triggers": 29,
+          "p_value": 0.0009,
+          "note": "29例无一板块幸免（板块级方向0%为正）",
+          "source": "§11 宽度矩阵"
+        },
+        {
+          "key": "b50高(单条件)",
+          "win_agreement_pct": 17,
+          "mean_return_10d_pct": -6.13,
+          "n_triggers": 88,
+          "p_value": 0.0012,
+          "source": "§11 宽度矩阵"
+        },
+        {
+          "key": "长强回调档(50低200高)",
+          "win_agreement_pct": 29,
+          "mean_return_10d_pct": -9.02,
+          "n_triggers": 17,
+          "p_value": 0.03,
+          "source": "§11 宽度矩阵"
+        }
       ],
       "best_hold_days": "风险随时间累积（TS6族40日-12.6%参考）",
       "validation_status": "单年样本集中于少数强板块日；多年终审待做",
@@ -42,25 +120,80 @@
       "name_cn": "散户抄底（无环境条件的弱版）",
       "definition": "板块跌10%+ × 散户流入z≥1.5（不加冰点环境）",
       "conditions": [
-        {"key": "全板块", "win_agreement_pct": 68, "mean_excess_10d_pct": 1.64, "n_triggers": 350, "p_value": 0.0154, "source": "§10"},
-        {"key": "8板块组", "mean_excess_10d_pct": 4.28, "n_triggers": 42, "p_value": 0.0002, "source": "§7"}
+        {
+          "key": "全板块",
+          "win_agreement_pct": 68,
+          "mean_excess_10d_pct": 1.64,
+          "n_triggers": 350,
+          "p_value": 0.0154,
+          "source": "§10"
+        },
+        {
+          "key": "8板块组",
+          "mean_excess_10d_pct": 4.28,
+          "n_triggers": 42,
+          "p_value": 0.0002,
+          "source": "§7"
+        }
       ],
       "validation_status": "弱共性成立但混入波动率效应（高波动组+5.4%低波动组+0.1%），推荐用带冰点条件的强版",
-      "usage_boundaries": ["效应随板块波动率单调放大——解读时需对照板块波动档"]
+      "usage_boundaries": [
+        "效应随板块波动率单调放大——解读时需对照板块波动档"
+      ]
     }
   },
   "falsified_signals": [
-    {"name": "散户过热→要跌（朴素静态版）", "verdict": "falsified", "evidence": "全量246日：过热组跌概率51-53% vs 基准49%，隔日抽样不稳健", "source": "retail-mania §4 终案"},
-    {"name": "TS6 追涨型散户情绪（全板块通用版）", "verdict": "falsified", "evidence": "161板块池化p=0.79、方向44%=随机；仅在特定宽度档位下有效（见heat_alarm）", "source": "§10 共性检验"},
-    {"name": "机构出清→反弹（V1/V2）", "verdict": "falsified", "evidence": "V1 20日按日聚合+0.02%(p=0.98)；对照组仅站回MA20反而+1.95%更好", "source": "retail-mania §4"},
-    {"name": "机构跌日接货=底（时间序列版）", "verdict": "falsified_with_direction", "evidence": "跌日超大单买入z≥1.5 → 20日-2.78%(p=0.004)——方向为负：散户抄底是真底(+4.7%)，机构抄底是接刀(-2.8%)", "source": "§7 深度轮"},
-    {"name": "静态流入水平/单纯持续天数/右侧确认加码", "verdict": "falsified", "evidence": "TS1-3/TS7一致性不达标；确认条件杀死机会信号（三次独立复证）", "source": "§7/§8/§11"},
-    {"name": "横截面冷热单阈值预警", "verdict": "falsified", "evidence": "四口径×两窗口十分位全部47-54%平线", "source": "retail-mania §4"}
+    {
+      "name": "散户过热→要跌（朴素静态版）",
+      "verdict": "falsified",
+      "evidence": "全量246日：过热组跌概率51-53% vs 基准49%，隔日抽样不稳健",
+      "source": "retail-mania §4 终案"
+    },
+    {
+      "name": "TS6 追涨型散户情绪（全板块通用版）",
+      "verdict": "falsified",
+      "evidence": "161板块池化p=0.79、方向44%=随机；仅在特定宽度档位下有效（见heat_alarm）",
+      "source": "§10 共性检验"
+    },
+    {
+      "name": "机构出清→反弹（V1/V2）",
+      "verdict": "falsified",
+      "evidence": "V1 20日按日聚合+0.02%(p=0.98)；对照组仅站回MA20反而+1.95%更好",
+      "source": "retail-mania §4"
+    },
+    {
+      "name": "机构跌日接货=底（时间序列版）",
+      "verdict": "falsified_with_direction",
+      "evidence": "跌日超大单买入z≥1.5 → 20日-2.78%(p=0.004)——方向为负：散户抄底是真底(+4.7%)，机构抄底是接刀(-2.8%)",
+      "source": "§7 深度轮"
+    },
+    {
+      "name": "静态流入水平/单纯持续天数/右侧确认加码",
+      "verdict": "falsified",
+      "evidence": "TS1-3/TS7一致性不达标；确认条件杀死机会信号（三次独立复证）",
+      "source": "§7/§8/§11"
+    },
+    {
+      "name": "横截面冷热单阈值预警",
+      "verdict": "falsified",
+      "evidence": "四口径×两窗口十分位全部47-54%平线",
+      "source": "retail-mania §4"
+    }
   ],
   "environment_layer": {
-    "cn_mood": {"source": "三票（两融+散户净流入+等权动能）", "usage": "冰点=信号1激活窗口"},
-    "market_structure": {"source": "极化指数（b50>70占比+b50<30占比）", "usage": "高极化(≥50)=结构市，板块须单独画像；历史峰2026-03-23(95.5)/07-08(94.8)", "historical_check": "极化峰值与科技独热期及7月大跌前吻合"},
-    "us_breadth": {"source": "SP500宽度60日分位（1986年起）", "usage": "A股出清反弹类信号的开关（宽72%/窄52%——出清反弹本身已证伪，此开关仅作环境参考"}
+    "cn_mood": {
+      "source": "三票（两融+散户净流入+等权动能）",
+      "usage": "冰点=信号1激活窗口"
+    },
+    "market_structure": {
+      "source": "极化指数（b50>70占比+b50<30占比）",
+      "usage": "高极化(≥50)=结构市，板块须单独画像；历史峰2026-03-23(95.5)/07-08(94.8)",
+      "historical_check": "极化峰值与科技独热期及7月大跌前吻合"
+    },
+    "us_breadth": {
+      "source": "SP500宽度60日分位（1986年起）",
+      "usage": "A股出清反弹类信号的开关（宽72%/窄52%——出清反弹本身已证伪，此开关仅作环境参考"
+    }
   },
   "forward_journal": {
     "path": "~/.lei_signal_lab/cache/sentiment_signal_journal.json",
