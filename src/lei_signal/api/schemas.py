@@ -1220,6 +1220,8 @@ class SentimentBlockDTO(BaseModel):
     breadth_cn: str | None = None    # 市场宽度一句话（A股+美股直读）
     hot_boards: list[dict] = []      # [{name, heat_pctile, stage_cn}]
     holdings_states: list[dict] = [] # [{group_cn, state_cn}]
+    #: 情绪信号触发状态（2026-09-06 接入）：冰点机会/热警报的激活情况
+    signal_lines: list[dict] = []    # [{group_cn, state_cn}]
     note_cn: str = ""
 
 

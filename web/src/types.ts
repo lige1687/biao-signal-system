@@ -2271,6 +2271,7 @@ export interface SentimentBlock {
   margin_detail: Record<string, unknown> | null;
   hot_boards: { name: string; heat_pctile: number | null; stage_cn: string }[];
   holdings_states: { group_cn: string; state_cn: string }[];
+  signal_lines?: { group_cn: string; state_cn: string }[];
   note_cn: string;
 }
 /** 重大事件条目（客观字段 only：标题/类别/方向/分数/时间）。 */

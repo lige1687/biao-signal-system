@@ -145,8 +145,58 @@ def _build_major_events_block(major_events: dict | None) -> MajorEventsBlockDTO 
     )
 
 
+def _sentiment_signal_lines() -> list[dict]:
+    """情绪信号触发状态（2026-09-06 接入，交易链路主动可见位）。
+
+    只报「激活/未激活 + 依据」，不做买卖指令（证据账本 confidence 口径）：
+    - 冰点机会（正向，92%板块同向/154例）：需全A三票冰点环境——
+      环境不满足时如实报「信号不存在」，不打折；
+    - 强势散户热警报（风险，29例无一幸免）：需板块热度数据（重建期
+      如实报监控中）。
+    """
+    try:
+        from lei_signal.market_context import market_mood as mm  # noqa: PLC0415
+
+        cn = mm.cn_mood() or {}
+        state = str(cn.get("state") or "")
+        heat = mm.sector_heat_boards() or {}
+        n_boards = len((heat.get("boards")) or [])
+        lines: list[dict] = []
+        if state == "cold":
+            lines.append({
+                "group_cn": "冰点机会",
+                "state_cn": (
+                    f"环境满足（全A三票冰点），扫描深弱板块中（热度覆盖 "
+                    f"{n_boards} 板块）" if n_boards else
+                    "环境满足（全A三票冰点），但板块热度数据重建中，"
+                    "信号明细暂不可算"
+                ),
+            })
+        else:
+            lines.append({
+                "group_cn": "冰点机会",
+                "state_cn": (
+                    f"未激活——当前全A情绪「{cn.get('state_cn') or state}」，"
+                    "该信号只在全市场冰点时存在（历史同条件 10 日超额约"
+                    "+6~8%、154 例、92% 板块同向；非冰点环境不适用）"
+                ),
+            })
+        lines.append({
+            "group_cn": "散户热警报",
+            "state_cn": (
+                f"监控中（热度覆盖 {n_boards} 板块）" if n_boards else
+                "监控中——板块热度数据重建中（约 20 个交易日），恢复后"
+                "自动扫描「全面强势板块+散户涌入」形态（历史 29 例无一"
+                "板块幸免、10 日平均 -9%）"
+            ),
+        })
+        return lines
+    except Exception:  # noqa: BLE001 — 情绪信号缺席不阻塞清单
+        return []
+
+
 def _build_sentiment_block(conn: sqlite3.Connection):
-    """情绪面区块：两融一句话 + 过热Top3 + 持仓赛道状态（只标注）。
+    """情绪面区块：两融一句话 + 过热Top3 + 持仓赛道状态 + 信号触发状态（只标注）。
 
     板块热度快照重建期 available=False，只回融资环境并提示累积中——
     措辞中性（偏热/冰点），不写方向性结论（红线见 handoff 文档 §4）。
@@ -199,6 +249,7 @@ def _build_sentiment_block(conn: sqlite3.Connection):
         breadth_cn="；".join(x for x in (a_cn, u_cn) if x) or None,
         hot_boards=hot,
         holdings_states=holdings_states,
+        signal_lines=_sentiment_signal_lines(),
         note_cn=pack.get("note_cn", "") or (
             "情绪面：数据累积中（约需 20 个交易日资金流）"
             if not pack.get("available") else ""

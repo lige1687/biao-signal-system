@@ -341,6 +341,45 @@
      "conclusion_cn": "宽度降档+虹吸豁免与砍脆皮叠加是推荐组合：同样的钱，年化基本不变、回撤减半；两头验证都对（降的在亏、豁的在赚）"
     }
    ]
+  },
+  {
+   "id": "exp-2026-09-06-sentiment-signals",
+   "report": "docs/experiments/retail-mania-threshold-2026-09-04.md",
+   "date": "2026-09-06",
+   "verdict": "passed",
+   "one_liner_cn": "两条经验证的散户情绪信号：冰点机会（全A冰点×深弱板块×散户逆势涌入，10日超额+6~8%、154例92%同向）与强势散户热警报（双高板块散户涌入，29例无一幸免-9%）。",
+   "findings": [
+    {
+     "match": {
+      "signal": "sentiment_regime",
+      "regime": "icepoint_pick"
+     },
+     "direction": "positive",
+     "confidence": "defined",
+     "metrics_cn": "全板块池化：10日超额+5.9%、154例、92%板块同向（p<0.0001）；b20低档加成版 +7.8%；最佳持有10-20日；验证=单年双恐慌事件，多年终审待做",
+     "conclusion_cn": "冰点机会是恐慌中的黄金坑信号——但硬边界：全A不在冰点时信号不存在（不是变弱是不适用）"
+    },
+    {
+     "match": {
+      "signal": "sentiment_regime",
+      "regime": "heat_alarm"
+     },
+     "direction": "negative",
+     "confidence": "defined",
+     "metrics_cn": "50&200日宽度同高的全面强势板块+散户涌入：10日平均-9.3%、29例无一板块幸免（p=0.0009）；风险随持有时间累积",
+     "conclusion_cn": "强势板块的散户热是接最后一棒——必须双宽度同高才报；反弹初档/弱势板块的散户涌入是承接不是警报（历史为正）"
+    },
+    {
+     "match": {
+      "signal": "sentiment_regime",
+      "regime": "naive_heat"
+     },
+     "direction": "negative",
+     "confidence": "defined",
+     "metrics_cn": "朴素版「散户过热就要跌」：过热组跌概率51-53% vs 基准49%，不稳健——已证伪",
+     "conclusion_cn": "禁止引用「散户过热就要跌」的朴素说法——热要分背景（恐慌中买对/狂欢中买错）"
+    }
+   ]
   }
  ]
 }

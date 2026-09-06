@@ -119,6 +119,12 @@ export default function OpsPage() {
               <span className="muted">{h.state_cn}</span>
             </div>
           ))}
+          {ops.sentiment?.signal_lines?.map((l) => (
+            <div className="cp-row" key={l.group_cn}>
+              <span className="cp-sym">{l.group_cn}</span>
+              <span className="muted">{l.state_cn}</span>
+            </div>
+          ))}
           {ops.sentiment && !ops.sentiment.available && (
             <div className="ops-empty" style={{ fontSize: 11 }}>
               {ops.sentiment.note_cn ||
