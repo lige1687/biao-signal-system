@@ -32,6 +32,7 @@ import argparse
 import os
 import sys
 import time
+from pathlib import Path
 
 SRC = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src")
 if SRC not in sys.path:
@@ -79,6 +80,24 @@ def main() -> int:
         print("  后端 /api/sectors/* 直接读冻结快照（重启不丢）；刷新页面即见板块趋势。")
     else:
         print("  [--no-save] 未落盘")
+
+    # 腾讯聚合资金流当日追加（散户情绪终版信号的数据源；失败不阻断主流程）
+    if not args.no_save:
+        try:
+            import subprocess
+            from datetime import datetime as _dt
+
+            today = _dt.now().strftime("%Y-%m-%d")
+            r = subprocess.run(
+                [sys.executable, str(Path(__file__).resolve().parent / "tx_fund_flow_pilot.py"),
+                 "--mode", "byday", "--boards", "all_l1l2",
+                 "--start", today, "--end", today, "--conc", "6"],
+                capture_output=True, text=True, timeout=900,
+                env={**os.environ, "PYTHONPATH": str(Path(__file__).resolve().parents[1] / "src")},
+            )
+            print("✓ 腾讯资金流当日追加：" + (r.stdout.strip().splitlines()[-1] if r.stdout.strip() else "无输出"))
+        except Exception as exc:  # noqa: BLE001
+            print(f"  ⚠ 腾讯资金流当日追加失败（不影响主快照）: {exc}")
 
     print(f"⏱ 耗时 {time.time() - t0:.1f}s")
     return 0

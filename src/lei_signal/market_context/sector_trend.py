@@ -35,6 +35,7 @@ from lei_signal.domain.rules_config import get_rule, indicator_config
 from lei_signal.domain.types import LONG_TREND_CN, SignalColor
 from lei_signal.features.indicators import compute_features
 from lei_signal.market_context import retail_heat
+from lei_signal.market_context import sentiment_signals as ssig
 from lei_signal.rules.lei_color import classify_colors
 from lei_signal.rules.long_trend import compute_long_trend
 from lei_signal.rules.macd_strength import read_macd_strength
@@ -1059,6 +1060,7 @@ def build_snapshot(
     bench_hs300: pd.Series | None = None,
     flows: dict[str, list[dict]] | None = None,
     collect_series: bool = False,
+    sentiment_ctx: dict | None = None,
 ) -> dict:
     """纯计算（不含网络）：由成员映射 + K线宽表产出当日全量快照。
 
@@ -1189,6 +1191,11 @@ def build_snapshot(
             "heat_cold": False,
             "heat_warning": False,
             "heat_note_cn": None,
+            # 散户情绪终版信号（research_proxy，实验 retail-sentiment-ts 终裁）
+            "sig_retail_z": None,
+            "sig_icepoint_pick": False,
+            "sig_heat_alarm": False,
+            "sig_note_cn": None,
             "up_count": ref.get("up_count"),
             "down_count": ref.get("down_count"),
             "total_mv_yi": ref.get("total_mv_yi"),
@@ -1271,6 +1278,25 @@ def build_snapshot(
         )
         row["heat_value"] = hv
         heat_raw[code] = hv
+
+        # 散户情绪终版信号：z 基于腾讯聚合史（同源 120 日基准），b200 内部自算
+        if sentiment_ctx:
+            tx_pts = (sentiment_ctx.get("tx_flows") or {}).get(code)
+            z = ssig.retail_z(
+                tx_pts, boards_idx.get(code), ref.get("total_mv_yi"),
+                window=sentiment_ctx.get("sig_window", 20),
+                base=sentiment_ctx.get("sig_base", 120),
+            ) if tx_pts else None
+            r60 = None
+            if len(idx) >= 61:
+                r60v = float(idx.pct_change(60).iloc[-1]) * 100
+                r60 = round(r60v, 1) if not pd.isna(r60v) else None
+            row.update(ssig.signal_state(
+                z=z, r60_pct=r60, b50=row.get("b50"),
+                b200=sentiment_ctx.get("b200_last", {}).get(code),
+                cn_cold=sentiment_ctx.get("cn_cold"),
+                cfg=sentiment_ctx.get("cfg"),
+            ))
         rows.append(row)
 
     # 散户热度横截面分位 + 情境化警示
@@ -1315,6 +1341,17 @@ def build_snapshot(
             ),
         },
         "boards": rows,
+        "sentiment_signals": {
+            "available": bool(sentiment_ctx),
+            "cn_cold": (sentiment_ctx or {}).get("cn_cold"),
+            "z_source": "tx_sector_flow_pilot（腾讯聚合，同源120日z基准）",
+            "experiment_ref": "docs/experiments/retail-sentiment-ts-2026-09-05.md §10/§11",
+            "note_cn": (
+                "信号1 冰点机会=全A冰点×板块跌10%+×散户z≥1.5×b50<30（10日超额+6.5~7.8%，"
+                "79%板块同向）；信号2 强势散户热警报=散户z≥1.5×b50>70×b200>70（10日-9.3%，"
+                "29例0板块幸免）。research_proxy：单年双事件样本、多年复验待做、非买卖点。"
+            ),
+        },
         "warnings": warnings,
         "errors": [],
         "research_proxy_note": (
@@ -1462,8 +1499,27 @@ def run_sector_trend(
     except Exception as exc:  # noqa: BLE001 - 整体失败不阻断主快照
         logger.warning("板块资金流整体拉取失败（字段留 null）: %s", exc)
 
+    # 散户情绪终版信号上下文：腾讯聚合史 + b200 尾值 + 全A情绪（网络单点失败降级）
+    sentiment_ctx: dict = {}
+    try:
+        from lei_signal.market_context.market_mood import cn_mood
+
+        sentiment_ctx["cn_cold"] = cn_mood().get("state") == "冷"
+        sentiment_ctx["tx_flows"] = ssig.load_tx_flows(ROOT)
+        sentiment_ctx["b200_last"] = ssig.compute_b200_last(
+            wide, members, {c for c, info in classify_hierarchy(
+                {c: set(m["members"]) for c, m in members.items()},
+                {c: (m.get("name") or "") for c, m in members.items()},
+            ).items() if info["canonical"]}
+        )
+        sentiment_ctx["cfg"] = ssig._cfg()
+    except Exception as exc:  # noqa: BLE001 - 信号层失败不阻断主快照
+        logger.warning("散户情绪信号上下文构造失败（信号字段留空）: %s", exc)
+        sentiment_ctx = {}
+
     snapshot = build_snapshot(
-        members, wide, daily_ref, bench_hs300, flows, collect_series=backfill
+        members, wide, daily_ref, bench_hs300, flows, collect_series=backfill,
+        sentiment_ctx=sentiment_ctx or None,
     )
     series = snapshot.pop("_series", None)  # 挂载序列永不落盘
 

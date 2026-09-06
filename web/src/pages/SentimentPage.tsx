@@ -110,6 +110,25 @@ export default function SentimentPage() {
         </section>
       </div>
 
+      {/* ── 终版情绪信号（实验验证，触发板块清单） ── */}
+      <section className="sx-rail-card" style={{ marginTop: 14 }}>
+        <div className="sx-rail-head">
+          <span className="sx-rail-title">情绪信号</span>
+          <span className="sx-rail-sub">
+            冰点机会 / 强势散户热警报（research_proxy · 实验验证 · 非买卖点）
+          </span>
+        </div>
+        <div className="mood-comp big">
+          <span>全A情绪环境</span>
+          <b>{data.cn_mood.state === "冷" ? "冰点（信号1激活窗口）" : `${data.cn_mood.state ?? "?"}（信号1需冰点环境）`}</b>
+        </div>
+        <div className="muted mood-note">
+          信号1「冰点机会」：全A情绪冰点时，已跌10%+且散户仍在逆势涌入、宽度深的板块（回测 10 日超额 +6.5~7.8%、79% 板块同向）→ 下方网格中标记「冰点关注」；
+          信号2「强势散户热警报」：全面强势板块（b50/b200 &gt; 70）的散户涌入（回测 10 日 -9.3%、无一板块幸免）→ 标记「强热」。
+          单年双事件样本，多年复验待做；只提示不构成买卖点（实验归档：实验报告库 retail-sentiment-ts）。
+        </div>
+      </section>
+
       {/* ── A股板块散户热度（仅一、二级行业） ── */}
       <section className="sx-rail-card" style={{ marginTop: 14 }}>
         <div className="sx-rail-head">
@@ -123,9 +142,9 @@ export default function SentimentPage() {
         {data.sector_heat.available ? (
           <div className="mood-sector-grid">
             {data.sector_heat.boards.slice(0, 40).map((b) => (
-              <div key={b.code} className={`mood-sector-chip${b.heat_warning ? " warn" : b.heat_hot ? " hot" : b.heat_cold ? " cold" : ""}`}
-                   title={b.heat_note_cn ?? `散户热度分位 ${b.heat_pctile}（research_proxy）`}>
-                <span>{b.name}</span>
+              <div key={b.code} className={`mood-sector-chip${b.sig_heat_alarm ? " warn" : b.sig_icepoint_pick ? " ice" : b.heat_warning ? " warn" : b.heat_hot ? " hot" : b.heat_cold ? " cold" : ""}`}
+                   title={(b as { sig_note_cn?: string | null }).sig_note_cn ?? b.heat_note_cn ?? `散户热度分位 ${b.heat_pctile}（research_proxy）`}>
+                <span>{b.name}{b.sig_heat_alarm ? " ⚠强热" : b.sig_icepoint_pick ? " ❄冰点关注" : ""}</span>
                 <b>{b.heat_pctile?.toFixed(0)}</b>
               </div>
             ))}

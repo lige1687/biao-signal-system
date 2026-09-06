@@ -529,6 +529,54 @@ export interface GlobalPanel {
   /** 危机管理状态机读数（V4 刚崩警示/V3 出清企稳，研究代理，2026-09-04 起）。 */
   crisis_readings?: CrisisReading[];
   crisis_alerts?: CrisisAlert[];
+  /** 脆弱性差值（文主任增量 #2，研究代理：个股中位数回撤 vs 指数回撤，只标注不挡信号）。 */
+  vulnerability_as_of?: string;
+  vulnerability_primary?: {
+    index_symbol: string;
+    window: number;
+    spread_pct: number | null;
+    spread_percentile: number | null;
+    fragile: boolean;
+  };
+  vulnerability_readings?: Array<{
+    index_symbol: string;
+    index_name_cn: string;
+    window: number;
+    as_of: string;
+    index_dd_pct: number | null;
+    median_dd_pct: number | null;
+    spread_pct: number | null;
+    spread_percentile: number | null;
+    fragile: boolean;
+    data_status: string;
+    note_cn: string;
+  }>;
+  /** 偏离度分位提醒（文主任增量 #3，路牌：只预警不必然反向）。 */
+  price_deviation_as_of?: string;
+  price_deviation_disclaimer_cn?: string;
+  price_deviation_active_alerts?: Array<{
+    date: string;
+    symbol: string;
+    name_cn: string;
+    ma_window: number;
+    direction: "overheat" | "oversold";
+    percentile: number | null;
+    consecutive_days: number;
+    message_cn: string;
+  }>;
+  price_deviation_readings?: Array<{
+    symbol: string;
+    name_cn: string;
+    ma_window: number;
+    as_of: string;
+    deviation_pct: number | null;
+    percentile_3y: number | null;
+    percentile_5y: number | null;
+    consecutive_extreme_days: number;
+    extreme_direction: string | null;
+    data_status: string;
+    note_cn: string;
+  }>;
 }
 
 /** 危机管理状态机单指数读数（见后端 market_context/crisis_events.py 口径注释）。 */
@@ -1453,6 +1501,11 @@ export interface SectorTrendRow {
   heat_cold: boolean; // 机会区：分位 ≤ cold_pctile（散户割肉·超大单吸筹）
   heat_warning: boolean; // 过热 × 阶段 ∈ {上升, 派发} 的情境化警示
   heat_note_cn: string | null;
+  // 散户情绪终版信号（实验 retail-sentiment-ts 终裁，research_proxy）
+  sig_retail_z: number | null; // 散户流入强度 20日均值 z（自身120日基准，腾讯聚合源）
+  sig_icepoint_pick: boolean; // 冰点机会：全A冰点×板块跌10%+×散户逆势涌入×b50<30
+  sig_heat_alarm: boolean; // 强势散户热警报：散户z≥1.5×b50>70×b200>70
+  sig_note_cn: string | null;
   provenance: "research_proxy";
 }
 
@@ -2293,6 +2346,8 @@ export interface MoodSectorBoard {
   code: string; name: string; level: number; stage: string | null;
   heat_pctile: number | null; heat_hot?: boolean; heat_cold?: boolean;
   heat_warning?: boolean; heat_note_cn?: string | null;
+  sig_retail_z?: number | null; sig_icepoint_pick?: boolean; sig_heat_alarm?: boolean;
+  sig_note_cn?: string | null;
 }
 export interface SentimentDashboard {
   cn_mood: CnMood;
@@ -2304,4 +2359,48 @@ export interface SentimentDashboard {
     boards: MoodSectorBoard[];
   };
   disclaimer_cn: string;
+}
+
+
+// ── 信号含金量表（/api/research/signal-edge，2026-09-05 文主任增量 #1）──
+export interface SignalEdgeHorizon {
+  horizon: number;
+  sample_count: number;
+  incomplete_count: number;
+  win_rate: number | null;
+  baseline_win_rate: number | null;
+  excess_win_rate: number | null;
+  mean_return: number | null;
+  baseline_mean_return: number | null;
+  excess_mean_return: number | null;
+  payoff: number | null;
+  baseline_payoff: number | null;
+}
+
+export interface SignalEdgeRow {
+  key: string;
+  label_cn: string;
+  group: string; // trigger=入场触发 | signpost=预警路牌
+  direction_cn: string;
+  total_signals: number;
+  horizons: SignalEdgeHorizon[];
+}
+
+export interface SignalEdgeResponse {
+  n_symbols: number;
+  start_date: string;
+  end_date: string;
+  symbols_used: string[];
+  symbols_failed: string[];
+  disclaimer_cn: string;
+  rows: SignalEdgeRow[];
+}
+
+/** 快照级散户情绪终版信号元信息 */
+export interface SentimentSignalMeta {
+  available: boolean;
+  cn_cold: boolean | null;
+  z_source: string;
+  experiment_ref: string;
+  note_cn: string;
 }

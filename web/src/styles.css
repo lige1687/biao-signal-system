@@ -4686,3 +4686,18 @@ a { color: var(--accent); text-decoration: none; }
 .mood-sector-chip.warn b { color: #d24a43; }
 .mood-sector-chip.cold { border-color: rgba(77, 127, 196, 0.4); background: rgba(77, 127, 196, 0.07); }
 .mood-sector-chip.cold b { color: #4d7fc4; }
+
+/* ── 脆弱性 chip（文主任增量 #2，研究代理，只提示不挡信号）── */
+.vuln-chip {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  margin: 2px 4px 0 0;
+}
+.vuln-chip.tone-warn { border-color: var(--lei-yellow, #d9a406); }
+.vuln-chip.tone-hot { border-color: var(--lei-red, #e33d47); }
+.vuln-chip.tone-warn .strip-chip-val, .vuln-chip.tone-hot .strip-chip-val { color: var(--lei-yellow, #d9a406); }
+.vuln-chip.tone-hot .strip-chip-val { color: var(--lei-red, #e33d47); }
+
+.sx-heat-flag.alarm { background: rgba(210, 74, 67, 0.18); color: #d24a43; margin-left: 2px; }
+.sx-heat-flag.ice { background: rgba(77, 127, 196, 0.16); color: #4d7fc4; margin-left: 2px; }

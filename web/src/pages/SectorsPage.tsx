@@ -483,6 +483,8 @@ export default function SectorsPage() {
                         >
                           {b.heat_pctile.toFixed(0)}
                           {b.heat_warning && <b className="sx-heat-flag">过热</b>}
+                          {b.sig_heat_alarm && <b className="sx-heat-flag alarm" title={b.sig_note_cn ?? undefined}>强热</b>}
+                          {b.sig_icepoint_pick && <b className="sx-heat-flag ice" title={b.sig_note_cn ?? undefined}>冰点关注</b>}
                         </span>
                       )}
                     </td>
