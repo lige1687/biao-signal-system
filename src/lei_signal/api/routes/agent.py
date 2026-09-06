@@ -597,11 +597,15 @@ def _prepare_discussion(
         if symbol is None and service is not None:
             symbol = _resolve_symbol_from_message(body.message, service)
             if symbol is None:
+                # 目录层（人工维护的精确别名/目录名）先于自选模糊匹配：
+                # 说「恒生科技」「科创50」这类专名时，自选名的 2 字模糊
+                # 子串不该截走（2026-09-06：「恒生科技」曾被「科技 XLK」
+                # 的 LCS 命中截走）。
+                symbol = _resolve_symbol_by_catalog(body.message)
+            if symbol is None:
                 from lei_signal.api.watchlist import list_watchlist  # noqa: PLC0415
 
                 symbol = _resolve_symbol_by_name(body.message, list_watchlist(conn))
-            if symbol is None:
-                symbol = _resolve_symbol_by_catalog(body.message)
             if symbol is None:
                 symbol = _last_resolved_symbol(history_rows)
         if symbol is not None and service is not None and on_stage:
