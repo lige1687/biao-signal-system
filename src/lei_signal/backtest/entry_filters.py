@@ -227,6 +227,8 @@ def filter_specs_by_bias(
 __all__ = [
     "PROFILE_MODES",
     "filter_specs_by_acceleration",
+    "filter_specs_by_min_stop_distance",
+    "transform_stop_atr_buffer",
     "filter_specs_by_bias",
     "filter_specs_by_gap_momentum",
     "filter_specs_by_profile",
@@ -266,6 +268,82 @@ def filter_specs_by_acceleration(
     dropped = 0
     for spec in specs:
         if bool(hot.iloc[spec.signal_position]):
+            dropped += 1
+        else:
+            kept.append(spec)
+    return kept, dropped
+
+
+def transform_stop_atr_buffer(
+    frame: pd.DataFrame,
+    specs: list[EntrySpec],
+    *,
+    atr_mult: float,
+    rr_min: float | None = 3.0,
+) -> tuple[list[EntrySpec], int, int]:
+    """止损 ATR 缓冲（用户口径 2026-09-06）：结构低点下方再留 k×ATR(20)。
+
+    止损 = 结构低点 − k×ATR20（信号日值）。随后按新止损**重算账面盈亏比**
+    并重过 rr_min——止损放宽后不再满足门槛的信号自然淘汰（弱信号重定价，
+    与「止损下限」同一哲学：不砍信号，让纪律过滤重新说话）。
+    ATR 口径与规则层一致（average_true_range 简单平均，indicators.py 单源）。
+    返回 (新specs, 因rr淘汰数, ATR缺失跳过数)。
+    """
+    from dataclasses import replace
+
+    from lei_signal.features.indicators import average_true_range
+
+    if atr_mult <= 0:
+        raise ValueError(f"atr_mult 必须为正: {atr_mult}")
+    atr = average_true_range(frame, 20)
+    out: list[EntrySpec] = []
+    dropped_rr = 0
+    skipped = 0
+    for spec in specs:
+        a = atr.iloc[spec.signal_position]
+        if pd.isna(a) or a <= 0:
+            skipped += 1
+            out.append(spec)  # ATR 缺失（历史早期）：保持原样，不静默丢信号
+            continue
+        stop = float(spec.stop_price)
+        entry_ref = float(spec.entry_ref_price or 0) or None
+        new_stop = stop - atr_mult * float(a)
+        if entry_ref is not None and entry_ref <= new_stop:
+            dropped_rr += 1  # 缓冲后风险非正：淘汰
+            continue
+        new_rr = None
+        if spec.target_price is not None and entry_ref:
+            new_rr = (spec.target_price - entry_ref) / (entry_ref - new_stop)
+        if rr_min is not None and (new_rr is None or new_rr < rr_min):
+            dropped_rr += 1
+            continue
+        out.append(
+            replace(
+                spec,
+                stop_price=new_stop,
+                reward_risk=new_rr,
+            )
+        )
+    return out, dropped_rr, skipped
+
+
+def filter_specs_by_min_stop_distance(
+    specs: list[EntrySpec],
+    *,
+    min_distance: float,
+) -> tuple[list[EntrySpec], int]:
+    """止损距离下限（用户口径 2026-09-06「太近的单子不做」）。
+
+    信号日口径：entry_ref_price 与 stop_price 距离占比 < min_distance
+    （如 0.01=1%）直接不做——小钱不赚，尾部事故（跳空放大）不要。
+    """
+    if not (0 < min_distance < 0.5):
+        raise ValueError(f"min_distance 需在 (0, 0.5): {min_distance}")
+    kept: list[EntrySpec] = []
+    dropped = 0
+    for spec in specs:
+        ref = float(spec.entry_ref_price or 0)
+        if ref > 0 and (ref - spec.stop_price) / ref < min_distance:
             dropped += 1
         else:
             kept.append(spec)

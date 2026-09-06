@@ -67,6 +67,8 @@ class RunRequest(BaseModel):
     # 极端加速阻断（规格 §13-6；默认关；0.25 = 信号日前60日涨幅≥25% 不入场）：
     accel_filter: float | None = None
     accel_lookback: int = 60
+    stop_atr_buffer: float | None = None   # 结构低点下方再留 k×ATR20
+    min_stop_distance: float | None = None # 止损距离下限（0.01=1%）
 
 
 @router.get("/options")
@@ -156,6 +158,8 @@ def create_run(request: RunRequest) -> dict[str, str]:
         bias_filter=request.bias_filter,
         accel_filter=request.accel_filter,
         accel_lookback=request.accel_lookback,
+        stop_atr_buffer=request.stop_atr_buffer,
+        min_stop_distance=request.min_stop_distance,
         gap_target=request.gap_target,
         gap_momentum=request.gap_momentum,
         gap_momentum_lookback=request.gap_momentum_lookback,

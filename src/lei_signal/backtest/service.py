@@ -33,6 +33,8 @@ from lei_signal.backtest.engine import (
 from lei_signal.backtest.entry_filters import (
     PROFILE_MODES,
     filter_specs_by_acceleration,
+    filter_specs_by_min_stop_distance,
+    transform_stop_atr_buffer,
     filter_specs_by_bias,
     filter_specs_by_gap_momentum,
     filter_specs_by_profile,
@@ -303,6 +305,10 @@ class BacktestParams:
     accel_filter: float | None = None        # None=关；0.25 = 信号日前60日涨幅≥25% 阻断
     accel_lookback: int = 60
 
+    # 止损口径（用户口径 2026-09-06，默认关）：
+    stop_atr_buffer: float | None = None     # None=关；1.0 = 结构低点下方再留1×ATR20
+    min_stop_distance: float | None = None   # None=关；0.01 = 止损距离<1%的信号不做
+
     def validate(self) -> None:
         if self.module not in MODULE_ENTRY_CONTRACT:
             raise ValueError(f"未知交易模块: {self.module}")
@@ -440,6 +446,9 @@ def _execute_run_unlocked(params: BacktestParams) -> dict[str, Any]:
     volume_filtered_total = profile_filtered_total = gap_filtered_total = shrink_filtered_total = 0
     bias_filtered_total = 0
     accel_filtered_total = 0
+    stop_atr_dropped_total = 0
+    stop_atr_skipped_total = 0
+    min_stop_dropped_total = 0
     use_gaps = params.gap_target or params.gap_momentum
     for symbol, frame in sorted(frames.items()):
         prepared = prepare_frame(frame)
@@ -508,6 +517,19 @@ def _execute_run_unlocked(params: BacktestParams) -> dict[str, Any]:
                 lookback=params.accel_lookback,
             )
             accel_filtered_total += dropped
+        if params.stop_atr_buffer is not None:
+            specs, dropped_a, skipped_a = transform_stop_atr_buffer(
+                frame, specs,
+                atr_mult=params.stop_atr_buffer,
+                rr_min=params.rr_min,
+            )
+            stop_atr_dropped_total += dropped_a
+            stop_atr_skipped_total += skipped_a
+        if params.min_stop_distance is not None:
+            specs, dropped_m = filter_specs_by_min_stop_distance(
+                specs, min_distance=params.min_stop_distance
+            )
+            min_stop_dropped_total += dropped_m
         market = (
             "cn"
             if symbol.endswith((".SS", ".SZ")) or symbol.startswith("TH")
@@ -569,6 +591,9 @@ def _execute_run_unlocked(params: BacktestParams) -> dict[str, Any]:
             "filtered_by_gap": gap_filtered_total,
             "filtered_by_bias": bias_filtered_total,
             "filtered_by_accel": accel_filtered_total,
+            "stop_atr_dropped": stop_atr_dropped_total,
+            "stop_atr_skipped": stop_atr_skipped_total,
+            "min_stop_dropped": min_stop_dropped_total,
         },
         "groups": {
             str(net): {
