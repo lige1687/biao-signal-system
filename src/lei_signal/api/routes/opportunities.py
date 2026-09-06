@@ -327,13 +327,40 @@ def build_review(
     assessment = _assessment_dto(result)
     frame = result.frame
     last_close = float(frame.iloc[-1]["close"]) if len(frame) else None
-    return _review_from_assessment(
+    review = _review_from_assessment(
         assessment,
         last_close=last_close,
         symbol=symbol,
         display_name=display_name or symbol,
         active_plan_ids=active_plan_ids,
     )
+    # C模块×下跌型标的降级（2026-09-06 用户拍板）：两次独立回测验证
+    # （八ETF池：C在下跌型全亏；自选池：下跌型C单6笔全亏-9.5R）——
+    # 候选剔除、降为观察说明；技术信号仍在（判定层未动），推荐与
+    # 计划链路不再自动采用。
+    try:
+        from lei_signal.copilot.fit import classify_regime, measure_regime  # noqa: PLC0415
+
+        regime = classify_regime(measure_regime(frame))
+        if regime == "downtrend":
+            kept = [c for c in review.candidates if (c.module or "C") != "C"]
+            if len(kept) != len(review.candidates):
+                review.candidates = kept
+                review.degraded_cn = (
+                    "C模块（破底翻抄底）候选已降为观察：该标的近一年为下跌型，"
+                    "历史回测中C模块在此形态下反复亏损（八ETF池与自选池两次独立"
+                    "验证同向）——不自动进推荐，等待趋势型买点或大级别反转确认"
+                )
+                if not kept and not review.resonance_groups:
+                    tradable = (
+                        bool(review.tradability.tradable)
+                        if review.tradability else False
+                    )
+                    review.verdict = VERDICT_WAITING if tradable else VERDICT_BLOCKED
+                    review.verdict_cn = _VERDICT_CN[review.verdict]
+    except Exception:  # noqa: BLE001 — 形态判定缺席不影响审阅
+        pass
+    return review
 
 
 def _review_from_assessment(

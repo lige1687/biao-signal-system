@@ -746,6 +746,9 @@ class BuyPointReviewDTO(BaseModel):
     #: 仅 verdict=actionable 时给出
     suggested_plan: SuggestedPlanDTO | None = None
     has_active_plan: bool = False
+    #: 候选降级说明（2026-09-06 用户拍板：C模块在下跌型标的上降为观察，
+    #: 不自动进推荐——两次独立回测验证：八ETF池与自选池同向）
+    degraded_cn: str | None = None
     active_plan_ids: list[str] = []
     ruleset_version: str = ""
     disclaimer_cn: str = ""
@@ -1060,6 +1063,7 @@ class RecommendItemDTO(BaseModel):
     news_heat: int = 0
     news_tags: list[str] = []
     sentiment_cn: str | None = None   # 情绪面叙事标注（只标注不评分）
+    winrate_cn: str | None = None     # 该标的历史胜率标注（叙事参考）
     score: float = 0.0
     reasons: list[str] = []
 
@@ -1351,3 +1355,37 @@ class FundNavSeriesResponse(BaseModel):
     days: int = 0
     items: list[FundNavItemDTO] = []
     errors: list[FundNavErrorDTO] = []
+
+
+# ── 信号含金量表（/api/research/signal-edge，2026-09-05 文主任增量 #1）──
+class SignalEdgeHorizonDTO(BaseModel):
+    horizon: int                        # 持有期（日）
+    sample_count: int = 0               # 完成样本数
+    incomplete_count: int = 0           # 未完成样本（不进胜率）
+    win_rate: float | None = None       # 出现后 N 日内上涨比例 (0~1)
+    baseline_win_rate: float | None     # 无条件基准胜率（不看信号随便做）
+    excess_win_rate: float | None       # 超额胜率（信号−基准，含金量本体）
+    mean_return: float | None           # 平均收益 %
+    baseline_mean_return: float | None
+    excess_mean_return: float | None
+    payoff: float | None                # 盈亏比=平均赚的幅度/平均亏的幅度
+    baseline_payoff: float | None
+
+
+class SignalEdgeRowDTO(BaseModel):
+    key: str
+    label_cn: str
+    group: str                          # trigger=入场触发 | signpost=预警路牌
+    direction_cn: str
+    total_signals: int = 0
+    horizons: list[SignalEdgeHorizonDTO] = []
+
+
+class SignalEdgeResponse(BaseModel):
+    n_symbols: int = 0
+    start_date: str = ""
+    end_date: str = ""
+    symbols_used: list[str] = []
+    symbols_failed: list[str] = []
+    disclaimer_cn: str = ""
+    rows: list[SignalEdgeRowDTO] = []
