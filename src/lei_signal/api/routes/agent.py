@@ -600,11 +600,55 @@ def _prepare_discussion(
                 except Exception:  # noqa: BLE001  消息面缺席不阻断技术材料
                     news_brief = None
                     major_events = None
+                # 回测经验（叙事层，不参与判定）：该标的池类型的历史结论，
+                # 供 AI 引用「同类信号在这个池上历史成绩如何」。
+                experience_items: list = []
+                try:
+                    from lei_signal.copilot import experience as exp_mod  # noqa: PLC0415
+
+                    experience_items = exp_mod.experience_for_symbol(symbol)
+                except Exception:  # noqa: BLE001
+                    experience_items = []
+                # 横向机会：当前标的无系统买点候选时，带出当日扫描表里
+                # 其他 actionable/waiting 标的（用户口径 2026-09-05：聊 A
+                # 没买点时应主动提示 B/C 有观察价值，引导开下一个讨论）。
+                alternatives: list = []
+                review_dump = review.model_dump()
+                if not (review_dump.get("candidates") or []):
+                    try:
+                        from lei_signal.api.opportunity_scan import (  # noqa: PLC0415
+                            list_scan,
+                            today_date,
+                        )
+
+                        alt_rows = list_scan(
+                            conn, today_date()
+                        )
+                        alternatives = [
+                            {
+                                "symbol": r.symbol,
+                                "display_name": r.display_name or r.symbol,
+                                "verdict_cn": r.verdict_cn,
+                                "missing_summary_cn": r.missing_summary_cn,
+                            }
+                            for r in alt_rows
+                            if r.symbol != symbol
+                            and r.verdict in ("actionable", "waiting")
+                        ][:5]
+                    except Exception:  # noqa: BLE001
+                        alternatives = []
                 ctx_payload = build_discussion_context(
-                    entry.result, review.model_dump(), plans, open_items,
+                    entry.result, review_dump, plans, open_items,
                     news_brief=news_brief,
                     major_events=major_events,
                 )
+                if experience_items:
+                    ctx_payload["experience"] = {
+                        "note_cn": "历史经验叙事层（回测定案报告），不参与技术判定",
+                        "items": experience_items,
+                    }
+                if alternatives:
+                    ctx_payload["alternatives"] = alternatives
                 ctx = context_from_result(entry.result)
                 alerts = [a for p in plans for a in evaluate_plan(p, ctx)]
         if symbol is None:

@@ -437,3 +437,23 @@ def get_sentiment() -> dict:
         "us_cn": breadth_mod.us_breadth_cn(),
     }
     return s_pack
+
+
+@router.get("/copilot/experience")
+def get_experience(
+    signal: str | None = None,
+    pool: str | None = None,
+) -> dict:
+    """回测经验索引查询（条件→历史结果，叙事层不参与判定）。
+
+    signal/pool 取值见 docs/experiments/EXPERIENCE-INDEX.md 受控词表；
+    支持任意 match 键的子集匹配（两个显式参数外预留 conditions 透传）。
+    """
+    from lei_signal.copilot import experience as exp_mod  # noqa: PLC0415
+
+    conditions: dict[str, str] = {}
+    if signal:
+        conditions["signal"] = signal
+    if pool:
+        conditions["pool"] = pool
+    return exp_mod.query_experience(conditions)
