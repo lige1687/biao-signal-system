@@ -133,15 +133,39 @@ def test_three_digit_integer_exempt_but_decimal_and_large_checked():
 
 
 def test_unit_conversion_derivation_accepted():
-    """2026-09-05：Billion↔亿 口述换算（12.93B→129.3亿）是 ×10 精确换算，
-    不算编造；编造的无关数字仍拒绝。"""
+    """2026-09-05：消息面标题金额的单位换算（12.93B→129.3亿）在**白名单收集层**
+    预扩换算族（agent._payload_symbol_numbers），verify 层不做通用放水——
+    任何价位 ×10 都放水的做法已被回滚（test_invented_number_degrades 守住）。"""
     ok, _ = verify_numeric_grounding(
-        "Nvidia 收购 Hugging Face 金额 129.3 亿", frozenset({12.93})
+        "Nvidia 收购 Hugging Face 金额 129.3 亿",
+        frozenset({12.93, 129.3, 1293.0, 1.293, 0.1293}),
     )
     assert ok
-    # ×100 换算（百万→亿）同样接受
-    ok2, _ = verify_numeric_grounding("融资 5.2 亿", frozenset({520.0}))
-    assert ok2
-    # 无关编造仍拒
-    ok3, reason = verify_numeric_grounding("关键位 8888.5", frozenset({12.93, 520.0}))
+    # verify 层本身不放水：白名单只有 12.93 时 129.3 仍拒
+    ok2, _ = verify_numeric_grounding("关键位 129.3", frozenset({12.93}))
+    assert not ok2
+    # 编造大数仍拒（价位白名单未扩）
+    ok3, reason = verify_numeric_grounding("关键位 99999.99", frozenset({9999.999}))
     assert not ok3
+
+
+def test_payload_symbol_numbers_expands_narrative_units():
+    """收集层：major_events/news 标题数字预扩换算族；价位树不扩。"""
+    from lei_signal.api.routes.agent import _payload_symbol_numbers
+
+    nums = _payload_symbol_numbers({
+        "symbol": "TH881129.SECTOR",
+        "major_events": {"items": [
+            {"title": "NVIDIA Buying Hugging Face For 12.93 Billion", "importance": 7},
+        ]},
+        "dual_ma": {"close": 1577.36},
+    })
+    def approx_in(v: float) -> bool:
+        return any(abs(v - n) <= abs(v) * 1e-9 + 1e-12 for n in nums)
+
+    for expect in (12.93, 129.3, 1293.0, 1.293):
+        assert approx_in(expect), expect
+    # 本函数只扫字符串（数值字段由 collect_payload_numbers 负责进白名单）；
+    # 价位树即使以字符串出现也不扩换算族：1577.36×10 不进白名单
+    nums2 = _payload_symbol_numbers({"dual_ma": {"close_str": "1577.36"}})
+    assert 15773.6 not in nums2

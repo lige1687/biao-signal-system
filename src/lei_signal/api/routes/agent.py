@@ -432,25 +432,39 @@ def _payload_symbol_numbers(ctx_payload: dict) -> set[float]:
     编数字」的误伤。2026-09-05 扩展：改用 extract_market_numbers 抽取——
     它会先剥千分位逗号（标题「162,000」裸正则只能抽出 162/000 两个碎段，
     AI 照抄 162000 时反被拒）；豁免口径同校验器，两边对称。
+
+    消息面叙事子树（news/major_events）的数字额外预扩单位换算族
+    （×10/×100/÷10/÷100）：标题金额常以 Billion/百万 计，AI 口述换算成
+    亿（12.93B→129.3亿）是精确换算不是编造；价位类白名单不扩，保持严格
+    （曾试过在 verify 层做通用换算派生，任何价位×10 都被放水，已回滚）。
     """
     from lei_signal.plans.grounding import extract_market_numbers  # noqa: PLC0415
 
+    narrative_keys = {"news", "major_events"}
     nums: set[float] = set()
 
-    def walk(value: object) -> None:
+    def expand_units(v: float) -> None:
+        for k in (10.0, 100.0, 0.1, 0.01):
+            nums.add(v * k)
+
+    def walk(value: object, narrative: bool = False) -> None:
         if isinstance(value, str):
-            nums.update(extract_market_numbers(value))
+            got = list(extract_market_numbers(value))
+            nums.update(got)
+            if narrative:
+                for v in got:
+                    expand_units(v)
             for token in re.findall(r"\d{4,}", value):
                 try:
                     nums.add(float(token))
                 except ValueError:  # pragma: no cover - 纯数字正则不会走到
                     continue
         elif isinstance(value, dict):
-            for child in value.values():
-                walk(child)
+            for key, child in value.items():
+                walk(child, narrative=narrative or key in narrative_keys)
         elif isinstance(value, list):
             for child in value:
-                walk(child)
+                walk(child, narrative=narrative)
 
     walk(ctx_payload)
     return nums
