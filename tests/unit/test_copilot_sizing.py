@@ -86,3 +86,11 @@ def test_siphon_regime_detection():
     assert s is True and diff > 20
     s2, _ = siphon_regime(flat, flat)
     assert s2 is False
+
+
+def test_cross_border_not_adjusted_by_a_share_breadth():
+    """QDII/海外标的不适用A股宽度（2026-09-06 用户纠错）：纯函数层
+    用 breadth=None 表达（路由层负责市场判定），None 即不调节。"""
+    out = build_sizing_advice("513100.SS", 4.0, breadth_ma200_pct=None)
+    assert out.tier == "标准"
+    assert not any("宽度" in r for r in out.reasons)

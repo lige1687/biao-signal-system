@@ -155,16 +155,25 @@ def position_advice(request: Request, symbol: str) -> SizingAdviceDTO:
     if best is None and review.resonance_groups:
         best = review.resonance_groups[0].candidates[0]
     rr = best.reward_risk_ratio if best else None
-    # 宽度环境（叙事层同一数据源：A股 ma200 占比）
+    # 宽度环境（叙事层同一数据源：A股 ma200 占比）。
+    # 市场适用性（2026-09-06 用户纠错）：只对 A 股标的生效——跨境 QDII
+    # （513xxx 纳指/标普/恒生科技等）与美股/港股不适用 A 股宽度调节
+    # （美股有自己的宽度通道，数据另源，缺时不硬套）。
     breadth_ma200 = None
-    try:
-        from lei_signal.copilot import breadth as breadth_mod  # noqa: PLC0415
+    is_cross_border = symbol.startswith("513")  # 跨境 QDII：纳指/标普/恒科/中概等
+    applies = (
+        (symbol.endswith((".SS", ".SZ")) or symbol.startswith("TH"))
+        and not is_cross_border
+    )
+    if applies:
+        try:
+            from lei_signal.copilot import breadth as breadth_mod  # noqa: PLC0415
 
-        b = breadth_mod.a_share_breadth()
-        if isinstance(b, dict):
-            breadth_ma200 = b.get("ma200_pct")
-    except Exception:  # noqa: BLE001
-        breadth_ma200 = None
+            b = breadth_mod.a_share_breadth()
+            if isinstance(b, dict):
+                breadth_ma200 = b.get("ma200_pct")
+        except Exception:  # noqa: BLE001
+            breadth_ma200 = None
     # RS 虹吸（标的 vs 沪深300，分析服务缓存取日线）
     siphon = False
     try:
