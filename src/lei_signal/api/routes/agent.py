@@ -742,6 +742,19 @@ def _prepare_discussion(
                 ctx_payload["margin_cn"] = (m or {}).get("regime_cn")
             except Exception:  # noqa: BLE001
                 ctx_payload["margin_cn"] = None
+            # 散户情绪信号材料（2026-09-06 接入，prompt-sentiment-ai 口径）：
+            # 两融三票情绪 + 市场结构极化 + 板块热度触发，纯叙事标注层。
+            try:
+                from lei_signal.market_context import market_mood as mm
+
+                ctx_payload["sentiment_dashboard"] = {
+                    "cn_mood": mm.cn_mood(),
+                    "market_structure": mm.market_structure(),
+                    "sector_heat": mm.sector_heat_boards(),
+                    "note_cn": "情绪面叙事层（research_proxy）：不参与技术判定、不构成买卖点",
+                }
+            except Exception:  # noqa: BLE001 — 情绪缺席不阻断
+                ctx_payload["sentiment_dashboard"] = None
             # 重大事件（客观字段 only，2026-09-05 用户口径）：聊大盘环境时
             # 带上「英伟达资本开支」级别的产业/宏观大事，叙事参考层。
             try:
