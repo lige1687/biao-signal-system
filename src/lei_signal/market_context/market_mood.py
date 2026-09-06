@@ -258,3 +258,131 @@ def sector_heat_boards() -> dict:
     return {
         "available": bool(rows), "as_of": snap.get("as_of"), "meta": meta, "boards": rows,
     }
+
+
+# ─────────────────────── 市场结构分化（结构市识别） ───────────────────────
+def market_structure() -> dict:
+    """板块热度结构：极化指数 + 热/冷板块群（结构市识别）。
+
+    极化 = 同时存在 b50>70（强）与 b50<30（弱）的板块占比之和；高极化 +
+    整体中性 = 结构市（部分板块狂欢、部分冰点），此时板块必须按自身画像
+    单独对待，不能用整体环境一概而论（用户 2026-09-06 提出）。
+    历史序列：sector_trend_history 的 b50（246 交易日）。
+    """
+    try:
+        rows = json.loads((_CACHE / "sector_trend_history.json").read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {"available": False}
+    l1l2 = None
+    try:
+        snap = json.loads((_CACHE / "sector_trend_snapshot.json").read_text(encoding="utf-8"))
+        l1l2 = {b["code"] for b in snap.get("boards", []) if (b.get("level") or 3) <= 2}
+    except (OSError, json.JSONDecodeError):
+        l1l2 = None
+
+    series = []
+    for r in rows:
+        vals = [v.get("b50") for c, v in (r.get("boards") or {}).items()
+                if v.get("b50") is not None and (l1l2 is None or c in l1l2)]
+        if len(vals) < 50:
+            continue
+        strong = sum(1 for x in vals if x > 70) / len(vals) * 100
+        weak = sum(1 for x in vals if x < 30) / len(vals) * 100
+        series.append({"date": r["date"], "strong_pct": round(strong, 1),
+                       "weak_pct": round(weak, 1),
+                       "polar": round(strong + weak, 1),
+                       "median_b50": round(sorted(vals)[len(vals) // 2], 1)})
+    if not series:
+        return {"available": False}
+    last = series[-1]
+    # 当前热/冷板块群（强/弱名单，来自快照）
+    groups = {"strong": [], "weak": []}
+    try:
+        for b in snap.get("boards", []):
+            if (b.get("level") or 3) > 2 or b.get("b50") is None:
+                continue
+            item = {"name": b["name"], "b50": b["b50"], "code": b["code"]}
+            if b["b50"] > 70:
+                groups["strong"].append(item)
+            elif b["b50"] < 30:
+                groups["weak"].append(item)
+        groups["strong"].sort(key=lambda x: -x["b50"])
+        groups["weak"].sort(key=lambda x: x["b50"])
+    except Exception:  # noqa: BLE001
+        pass
+    pol = last["polar"]
+    state = ("结构市（强弱的板块同时大量存在，板块须单独画像，勿用整体环境一概而论）"
+             if pol >= 50 else ("单边市（板块同涨同跌，整体环境权重更高）" if pol <= 25
+                                else "中度分化"))
+    return {
+        "available": True, "as_of": last["date"], "state_cn": state,
+        "polar": pol, "strong_pct": last["strong_pct"], "weak_pct": last["weak_pct"],
+        "median_b50": last["median_b50"],
+        "series": series[-120:],
+        "strong_boards": groups["strong"][:10], "weak_boards": groups["weak"][:10],
+        "note_cn": "极化指数 = b50>70 板块占比 + b50<30 占比（一、二级行业池）。"
+                   "高极化 + 中位中性 = 结构市：热板块按警报读、冷板块按机会读，分别对待。",
+    }
+
+
+def board_profile(code: str) -> dict:
+    """单板块情绪画像：自身热度（z）/ 相对热度（横截面分位）/ 趋势档位 / 信号 + 语义读法。"""
+    try:
+        snap = json.loads((_CACHE / "sector_trend_snapshot.json").read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {"available": False}
+    row = next((b for b in snap.get("boards", []) if b.get("code") == code), None)
+    if not row:
+        return {"available": False}
+    z = row.get("sig_retail_z")
+    pct = row.get("heat_pctile")
+    b50, b200 = row.get("b50"), None
+    try:
+        import pandas as pd
+        df = pd.read_parquet(_CACHE / "a_share_klines.parquet")
+        wide = df.pivot(index="date", columns="symbol", values="close").sort_index()
+        members = json.loads((_CACHE / "sector_members.json").read_text(encoding="utf-8"))["boards"]
+        b200 = self_b200(wide, members, code)
+    except Exception:  # noqa: BLE001
+        pass
+    tier = None
+    if b50 is not None and b200 is not None:
+        if b50 > 70 and b200 > 70:
+            tier = "全面强势"
+        elif b50 > 50 and b200 < 30:
+            tier = "反弹初"
+        elif b50 < 50 and b200 > 70:
+            tier = "回调中"
+        elif b50 < 30:
+            tier = "深度弱势"
+    reading = []
+    if z is not None and z >= 1.5 and tier == "全面强势":
+        reading.append("散户涌入+全面强势=警报形态（回测-9.3%档）")
+    if z is not None and z >= 1.5 and tier in ("深度弱势", None) and (row.get("sig_icepoint_pick")):
+        reading.append("冰点机会形态（回测+6.5~7.8%档）")
+    if pct is not None and pct >= 85:
+        reading.append("相对全市场热度前15%（拥挤区，注意区分结构市背景）")
+    if pct is not None and pct <= 15:
+        reading.append("相对全市场热度后15%（冰点区）")
+    return {
+        "available": True, "code": code, "name": row.get("name"),
+        "self_z": z, "cross_pctile": pct, "b50": b50, "b200": b200,
+        "tier_cn": tier, "stage": row.get("stage"),
+        "sig_icepoint_pick": row.get("sig_icepoint_pick"),
+        "sig_heat_alarm": row.get("sig_heat_alarm"),
+        "reading_cn": reading or ["无特殊形态（中性区）"],
+    }
+
+
+def self_b200(wide, members: dict, code: str) -> float | None:
+    ma200 = wide.rolling(200, min_periods=200).mean()
+    above = (wide > ma200).where(wide.notna())
+    mem = [s for s in members.get(code, {}).get("members", []) if s in wide.columns]
+    if len(mem) < 5:
+        return None
+    sub = above[mem].dropna(how="all")
+    if len(sub) < 55 or sub.empty:
+        return None
+    last = sub.iloc[-1]
+    n = last.notna().sum()
+    return round(float(last.sum() / n * 100), 1) if n >= 5 else None

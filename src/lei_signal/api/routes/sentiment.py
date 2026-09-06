@@ -25,9 +25,16 @@ def dashboard() -> dict:
         },
         "us_survey": market_mood.us_survey_latest(),
         "sector_heat": market_mood.sector_heat_boards(),
+        "market_structure": market_mood.market_structure(),
         "disclaimer_cn": (
             "情绪面为叙事标注层（research_proxy）：只描述环境与状态，"
             "不参与技术判定、不构成买卖点。阈值来源在各项内标注"
             "（本系统回测 / 外部实证引用）。"
         ),
     }
+
+
+@router.get("/board/{code}")
+def board_profile(code: str) -> dict:
+    """单板块情绪画像：自身热度/相对热度/趋势档位/信号 + 语义读法。"""
+    return market_mood.board_profile(code)

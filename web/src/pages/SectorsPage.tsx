@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import * as echarts from "echarts";
-import { sectorsApi } from "../api/client";
+import { sectorsApi, sentimentApi } from "../api/client";
 import { etfsForSector } from "../data/sectorEtfMap";
 import { fmt, fmtYi, pctClass } from "../utils/format";
 import ColorBadge from "../components/ColorBadge";
@@ -1211,6 +1211,10 @@ function SectorTrendDrawer({
           </div>
 
           <h5>
+            情绪画像（自身热度 / 相对热度 / 趋势档位 · research_proxy）
+          </h5>
+          <BoardProfileLine code={row.code} />
+          <h5>
             资金流（5/20/60 日累计，亿元 · 主力=超大+大单 / 散户=中+小单）
             {row.flow_vs_stage_cn && (
               <span className={`flow-badge ${row.flow_vs_stage === "confirm" ? "fb-ok" : "fb-warn"}`}>
@@ -1260,6 +1264,27 @@ function SectorTrendDrawer({
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function BoardProfileLine({ code }: { code: string }) {
+  const { data } = useQuery({
+    queryKey: ["sentimentBoardProfile", code],
+    queryFn: () => sentimentApi.boardProfile(code),
+    staleTime: 10 * 60_000,
+  });
+  if (!data?.available) return <div className="muted">画像数据不可用</div>;
+  const z = data.self_z == null ? "-" : data.self_z.toFixed(2);
+  const pct = data.cross_pctile == null ? "-" : data.cross_pctile.toFixed(0);
+  return (
+    <div className="flow-heat" style={{ flexWrap: "wrap", gap: 12 }}>
+      <span>自身热度 z <b>{z}</b></span>
+      <span>相对全市场分位 <b>{pct}</b></span>
+      <span>档位 <b>{data.tier_cn ?? "-"}</b>（b50={data.b50?.toFixed(0) ?? "-"} / b200={data.b200?.toFixed(0) ?? "-"}）</span>
+      {data.reading_cn?.map((r, i) => (
+        <span key={i} className="muted">{r}</span>
+      ))}
     </div>
   );
 }

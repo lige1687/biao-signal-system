@@ -1,5 +1,6 @@
-import type { SentimentDashboard,
+import type { BoardProfile, SentimentDashboard,
   ActionItem,
+  SignalEdgeResponse,
   CopilotDispatchReply,
   ExplainReply,
   FundTrade,
@@ -148,11 +149,21 @@ export const backtestApi = {
 
 };
 
+// 信号含金量表（研究层，2026-09-05 文主任增量 #1）
+export const researchApi = {
+  signalEdge: (opts?: { symbols?: string[]; refresh?: boolean }) => {
+    const qs = new URLSearchParams();
+    if (opts?.symbols?.length) qs.set("symbols", opts.symbols.join(","));
+    if (opts?.refresh) qs.set("refresh", "true");
+    const q = qs.toString();
+    return request<SignalEdgeResponse>(`/research/signal-edge${q ? `?${q}` : ""}`);
+  },
+};
+
 export const timingBacktestApi = {
   options: () => request<TimingOptions>("/timing-backtest/options"),
   signals: () => request<TimingSignal[]>("/timing-backtest/signals"),
-  portfolio: () => request<TimingPortfolio>("/timing-backtest/portfolio"),
-  etfDefense: (symbol: string) =>
+  portfolio: () => request<TimingPortfolio>("/timing-backtest/portfolio"),  etfDefense: (symbol: string) =>
     request<TimingEtfDefense>(`/timing-backtest/etf-defense?symbol=${symbol}`),
   portfolioEquity: () => request<TimingPortfolioEquity>("/timing-backtest/portfolio-equity"),
   createRun: (body: Record<string, string | number | null>) =>
@@ -484,6 +495,8 @@ export const fundamentalsApi = {
 // ---- 情绪仪表盘 ----
 export const sentimentApi = {
   dashboard: () => request<SentimentDashboard>("/sentiment/dashboard"),
+  boardProfile: (code: string) =>
+    request<BoardProfile>(`/sentiment/board/${encodeURIComponent(code)}`),
 };
 
 export const sectorsApi = {
@@ -568,7 +581,70 @@ export interface FactorPanelResponse {
 export const factorsApi = {
   panel: (refresh = false) =>
     request<FactorPanelResponse>(`/factors/panel${refresh ? "?refresh=true" : ""}`),
+  // 因子实验台（文主任增量 #6：组合回测 + L1-L6 分级 + 估值分位，独立快照）
+  lab: () => request<FactorLabSnapshot>(`/factors/lab`),
 };
+
+/** 因子实验台快照（/factors/lab，2026-09-05 文主任增量 #6）。 */
+export interface FactorLabSnapshot {
+  generated_at: string;
+  provenance: string;
+  note_cn: string;
+  portfolios?: {
+    title_cn: string;
+    top_frac: number;
+    benchmark_cn: string;
+    note_cn: string;
+    restricted: string[];
+    portfolios: Array<{
+      label: string;
+      n_months: number;
+      start?: string;
+      end?: string;
+      total_return_pct?: number;
+      cagr_pct?: number | null;
+      benchmark_total_pct?: number;
+      benchmark_cagr_pct?: number | null;
+      excess_cagr_pct?: number | null;
+      by_year_pct?: Record<string, number>;
+    }>;
+    available?: boolean;
+    reason_cn?: string;
+  };
+  risk_grades?: {
+    available: boolean;
+    reason_cn?: string;
+    as_of?: string;
+    current?: {
+      date: string;
+      score: number;
+      grade: string;
+      b50_pct: number;
+      rv_pct: number;
+    };
+    weights?: Record<string, number>;
+    bands?: number[];
+    by_grade?: Record<string, {
+      n_days: number;
+      fwd_rv20_mean_pct: number;
+      fwd_ret20_mean_pct: number;
+    }>;
+    history?: Array<{ date: string; score: number; grade: string }>;
+    note_cn?: string;
+  };
+  valuation?: {
+    available: boolean;
+    reason_cn?: string;
+    as_of?: string;
+    chips?: Array<{
+      index_code: string;
+      name_cn: string;
+      pe_ttm: number;
+      pe_percentile: number;
+    }>;
+    note_cn?: string;
+  };
+}
 
 export const newsApi = {
   items: (params: {
@@ -610,4 +686,59 @@ export const portfolioApi = {
     request<FundNavSeries>(
       `/portfolio/nav-series?codes=${codes.map(encodeURIComponent).join(",")}&days=${days}`,
     ),
+};
+
+// ---- 认知与心态（mindset，2026-09-05）----
+// 判断题卡片：调研观点逐条评价（认可/中立/不认可），认可项进篮子温习；
+// 纯个人知识管理，与信号判定无关。类型内联于此（页面从本文件导入）。
+export type MindsetStatus = "unevaluated" | "agree" | "neutral" | "disagree";
+export type MindsetCategory = "认知" | "心态" | "纪律" | "复盘";
+
+export interface MindsetItem {
+  id: string;
+  category: MindsetCategory | string;
+  text: string;
+  quote: string | null;
+  source: string;
+  origin: string;
+  status: MindsetStatus;
+  review_count: number;
+  last_reviewed_at: string | null;
+  created_at: string;
+}
+
+export interface MindsetSummary {
+  total: number;
+  unevaluated: number;
+  agree: number;
+  neutral: number;
+  disagree: number;
+  by_category: Record<string, number>;
+}
+
+export interface MindsetListResponse {
+  items: MindsetItem[];
+  summary: MindsetSummary;
+}
+
+export const mindsetApi = {
+  list: (params?: { status?: MindsetStatus; category?: string }) => {
+    const search = new URLSearchParams();
+    if (params?.status) search.set("status", params.status);
+    if (params?.category) search.set("category", params.category);
+    const qs = search.toString();
+    return request<MindsetListResponse>(`/mindset/items${qs ? `?${qs}` : ""}`);
+  },
+  setStatus: (id: string, status: MindsetStatus) =>
+    request<MindsetItem>(`/mindset/items/${id}/status`, {
+      method: "PATCH",
+      body: JSON.stringify({ status }),
+    }),
+  create: (payload: { category: MindsetCategory; text: string; quote?: string; source?: string }) =>
+    request<MindsetItem>("/mindset/items", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
+  remove: (id: string) => request<void>(`/mindset/items/${id}`, { method: "DELETE" }),
+  reviewNext: () => request<MindsetItem | null>("/mindset/review/next"),
 };

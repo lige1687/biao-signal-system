@@ -51,7 +51,38 @@ export default function SentimentPage() {
           <div className="muted mood-note">{data.cn_mood.note_cn}</div>
         </section>
 
-        {/* ── 美股情绪 ── */}
+        {/* ── 市场结构分化 ── */}
+      <section className="sx-rail-card mood-card">
+        <div className="sx-rail-head"><span className="sx-rail-title">市场结构</span>
+          <span className="sx-rail-sub">板块强弱分化（结构市识别）</span></div>
+        {data.market_structure?.available ? (
+          <>
+            <div className="mood-comp big">
+              <span>结构状态</span>
+              <b>{data.market_structure.state_cn}</b>
+            </div>
+            <div className="mood-comp">
+              <span>极化指数（强占比+弱占比）</span>
+              <b>{data.market_structure.polar?.toFixed(0)}</b>
+            </div>
+            <div className="mood-comp">
+              <span>强势板块占比 / 弱势占比 / 中位b50</span>
+              <b>{data.market_structure.strong_pct?.toFixed(0)}% / {data.market_structure.weak_pct?.toFixed(0)}% / {data.market_structure.median_b50?.toFixed(0)}</b>
+            </div>
+            <div className="mood-comp">
+              <span>最强群（b50&gt;70 前5）</span>
+              <b>{(data.market_structure.strong_boards ?? []).slice(0, 5).map(b => b.name).join("、")}</b>
+            </div>
+            <div className="mood-comp">
+              <span>最弱群（b50&lt;30 前5）</span>
+              <b>{(data.market_structure.weak_boards ?? []).slice(0, 5).map(b => b.name).join("、")}</b>
+            </div>
+            <div className="muted mood-note">{data.market_structure.note_cn}</div>
+          </>
+        ) : <div className="muted">结构数据不可用</div>}
+      </section>
+
+      {/* ── 美股情绪 ── */}
         <section className="sx-rail-card mood-card">
           <div className="sx-rail-head"><span className="sx-rail-title">美股情绪</span>
             <span className="sx-rail-sub">宽度 + VIX + 风险偏好</span></div>

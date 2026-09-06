@@ -2358,6 +2358,7 @@ export interface SentimentDashboard {
     meta?: { metric?: string; window_days?: number; rule_version?: string; n_pool?: number };
     boards: MoodSectorBoard[];
   };
+  market_structure: MarketStructure;
   disclaimer_cn: string;
 }
 
@@ -2403,4 +2404,27 @@ export interface SentimentSignalMeta {
   z_source: string;
   experiment_ref: string;
   note_cn: string;
+}
+
+export interface MarketStructure {
+  available: boolean;
+  as_of?: string;
+  state_cn?: string;
+  polar?: number;
+  strong_pct?: number;
+  weak_pct?: number;
+  median_b50?: number;
+  strong_boards?: { name: string; b50: number; code: string }[];
+  weak_boards?: { name: string; b50: number; code: string }[];
+  series?: { date: string; polar: number; strong_pct: number; weak_pct: number; median_b50: number }[];
+  note_cn?: string;
+}
+export interface BoardProfile {
+  available: boolean;
+  code?: string; name?: string;
+  self_z?: number | null; cross_pctile?: number | null;
+  b50?: number | null; b200?: number | null; tier_cn?: string | null;
+  stage?: string | null;
+  sig_icepoint_pick?: boolean; sig_heat_alarm?: boolean;
+  reading_cn?: string[];
 }
