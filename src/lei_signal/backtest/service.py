@@ -32,6 +32,7 @@ from lei_signal.backtest.engine import (
 )
 from lei_signal.backtest.entry_filters import (
     PROFILE_MODES,
+    filter_specs_by_acceleration,
     filter_specs_by_bias,
     filter_specs_by_gap_momentum,
     filter_specs_by_profile,
