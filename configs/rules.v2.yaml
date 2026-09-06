@@ -937,6 +937,35 @@ rules:
       实现为「只算不强制」；人类 2026-08-04 明确定为只提示、永不拦截，文案「建议 >3，
       2–3 可接受」。此差异是人类决定非实现漂移，必须留出处。界面必须标注「研究代理」。
 
+  breadth_position:
+    rule_id: "breadth_position"
+    version: "0.1.0"
+    provenance: "experiment_kuandu_quanzhan_2026-09-01"
+    params:
+      low_line: 43.3     # 低档下界（宽度全栈组验证的 B200 三档边界，同源）
+      high_line: 56.7    # 高档上界（本层暂不用：只降不升，保守单向）
+    formula: |
+      仓位建议的环境调节（组合层建议，无技术判定权）：
+      ma200 占比 < low_line → 档位降一档；虹吸独立行情豁免（siphon 段）。
+      只降不升（加仓档待另验证后拍板）。
+    note_cn: |
+      2026-09-06 用户拍板接入：宽度弱市仓位降档，依据宽度全栈组 31 轮回测
+      （16年 A股等权篮子验证低档减仓规则）。虹吸豁免见 siphon 段。
+
+  siphon:
+    rule_id: "siphon"
+    version: "0.1.0"
+    provenance: "experiment_kuandu_quanzhan_2026-09-01"
+    params:
+      rs_pp: 20          # RS 虹吸阈值：120日收益差超此百分点视为独立行情
+    formula: |
+      标的120日收益 − 基准(沪深300)120日收益 > rs_pp 且 5 日前同样成立
+      （归档规则为持续10日，实现取简化近似，代码注释标明差异）→ 独立行情。
+    note_cn: |
+      RS 虹吸灯（宽度全栈归档，误报率 8%，2026-05 起灯亮通信）：结构性
+      牛市中强势赛道不受全市场宽度压制——2026-09-06 用户口径「每一轮牛市
+      不一样，这一轮可能是虹吸；价格是最公平的信息反映」。
+
   copilot_sizing:
     rule_id: "copilot_sizing"
     version: "1.0.0"

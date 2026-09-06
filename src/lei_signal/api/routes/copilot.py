@@ -142,19 +142,46 @@ def get_recommend(
 
 @router.get("/copilot/position-advice/{symbol}", response_model=SizingAdviceDTO)
 def position_advice(request: Request, symbol: str) -> SizingAdviceDTO:
-    """仓位档位建议：盈亏比取该标的买点审阅最优候选，只建议档位不算金额。"""
+    """仓位档位建议：盈亏比取该标的买点审阅最优候选，只建议档位不算金额。
+
+    2026-09-06 接入宽度环境调节（弱市降一档）+ RS 虹吸豁免（独立行情不压
+    仓位）——依据宽度全栈组验证与用户「分标的、价格最公平」口径。
+    """
     from lei_signal.api.routes.opportunities import buy_point_review  # noqa: PLC0415
-    from lei_signal.copilot.sizing import build_sizing_advice  # noqa: PLC0415
+    from lei_signal.copilot.sizing import build_sizing_advice, siphon_regime  # noqa: PLC0415
 
     review = buy_point_review(request, symbol)
     best = review.candidates[0] if review.candidates else None
     if best is None and review.resonance_groups:
         best = review.resonance_groups[0].candidates[0]
     rr = best.reward_risk_ratio if best else None
+    # 宽度环境（叙事层同一数据源：A股 ma200 占比）
+    breadth_ma200 = None
+    try:
+        from lei_signal.copilot import breadth as breadth_mod  # noqa: PLC0415
+
+        b = breadth_mod.a_share_breadth()
+        if isinstance(b, dict):
+            breadth_ma200 = b.get("ma200_pct")
+    except Exception:  # noqa: BLE001
+        breadth_ma200 = None
+    # RS 虹吸（标的 vs 沪深300，分析服务缓存取日线）
+    siphon = False
+    try:
+        service = getattr(request.app.state, "analysis_service", None)
+        if service is not None:
+            entry = service.get(symbol)
+            bench = service.get("000300.SS")
+            if entry.result is not None and bench.result is not None:
+                siphon, _ = siphon_regime(entry.result.frame, bench.result.frame)
+    except Exception:  # noqa: BLE001
+        siphon = False
     return build_sizing_advice(
         symbol,
         rr,
         rr_computable=bool(best.reward_risk_computable) if best else False,
+        breadth_ma200_pct=breadth_ma200,
+        siphon=siphon,
     )
 
 
