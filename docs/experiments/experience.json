@@ -1,176 +1,257 @@
 {
-  "version": 1,
-  "note_cn": "回测/实验定案结论的机器可查索引（条件→历史结果）。格式与受控词表见 EXPERIENCE-INDEX.md。查询做 match 键值子集匹配。",
-  "entries": [
+ "version": 1,
+ "note_cn": "回测/实验定案结论的机器可查索引（条件→历史结果）。格式与受控词表见 EXPERIENCE-INDEX.md。查询做 match 键值子集匹配。",
+ "entries": [
+  {
+   "id": "exp-2026-08-25-a-pool-expansion",
+   "report": "docs/experiments/etf-expansion-report-2026-08-25.md",
+   "date": "2026-08-25",
+   "verdict": "mixed",
+   "one_liner_cn": "A 稳健档在行业 ETF 池整体转负（黄金独占全部利润），真正稳健的是宽基/指数子池。",
+   "findings": [
     {
-      "id": "exp-2026-08-25-a-pool-expansion",
-      "report": "docs/experiments/etf-expansion-report-2026-08-25.md",
-      "date": "2026-08-25",
-      "verdict": "mixed",
-      "one_liner_cn": "A 稳健档在行业 ETF 池整体转负（黄金独占全部利润），真正稳健的是宽基/指数子池。",
-      "findings": [
-        {
-          "match": {"signal": "module_A_stable", "pool": "industry_etf"},
-          "direction": "negative",
-          "confidence": "defined",
-          "metrics_cn": "33 行业 ETF 池全段每笔平均 -0.353 倍风险金额，样本外 -0.764（191 笔）；利润集中度极端（最赚一只独占全部利润）",
-          "conclusion_cn": "A 稳健档（稳定上升趋势回调买点）出现在行业 ETF 上时，历史整体亏损——建议关闭推荐或降为观察"
-        },
-        {
-          "match": {"signal": "module_A_stable", "pool": "broad_base_etf"},
-          "direction": "positive",
-          "confidence": "defined",
-          "metrics_cn": "宽基子池全段 +0.38R~+0.43R；沪深300ETF(510300) 单标的样本外 +2.26R（26 笔）",
-          "conclusion_cn": "A 稳健档在宽基/指数类标的上历史站得住，是唯一值得推荐的子池"
-        },
-        {
-          "match": {"signal": "module_B_breakout", "pool": "industry_etf"},
-          "direction": "neutral",
-          "confidence": "observed",
-          "metrics_cn": "国内行业 ETF 集群 0 信号，无投影",
-          "conclusion_cn": "B 模块（密集突破）在国内行业 ETF 池无历史信号，维持默认不推荐"
-        }
-      ]
+     "match": {
+      "signal": "module_A_stable",
+      "pool": "industry_etf"
+     },
+     "direction": "negative",
+     "confidence": "defined",
+     "metrics_cn": "33 行业 ETF 池全段每笔平均 -0.353 倍风险金额，样本外 -0.764（191 笔）；利润集中度极端（最赚一只独占全部利润）",
+     "conclusion_cn": "A 稳健档（稳定上升趋势回调买点）出现在行业 ETF 上时，历史整体亏损——建议关闭推荐或降为观察"
     },
     {
-      "id": "exp-2026-09-03-module-b-robustness",
-      "report": "docs/experiments/module-b-robustness-2026-09-03.md",
-      "date": "2026-09-03",
-      "verdict": "passed",
-      "one_liner_cn": "模块 B（密集突破）是干净数据上唯一平均每笔赚钱的主动入场规则，判定稳健但压线、低冗余。",
-      "findings": [
-        {
-          "match": {"signal": "module_B_breakout", "pool": "etf_mixed"},
-          "direction": "positive",
-          "confidence": "defined",
-          "metrics_cn": "37 笔，胜率 37.8%（每 10 笔不到 4 笔赚钱），但赚钱笔平均一笔 +3.5 倍风险金额、亏钱笔平均只 -0.62；逐年剔除/逐标的剔除全部仍为正；三条预注册及格线全过（第一条压线）",
-          "conclusion_cn": "B 模块（横盘很久后向上突破、预设位置认小亏）历史整体成立，是「多次小亏、偶尔大赚」的形态结构；但利润头部集中（最赚三笔占 69% 盈利、2025 年占 57%），属低冗余稳健"
-        }
-      ]
+     "match": {
+      "signal": "module_A_stable",
+      "pool": "broad_base_etf"
+     },
+     "direction": "positive",
+     "confidence": "defined",
+     "metrics_cn": "宽基子池全段 +0.38R~+0.43R；沪深300ETF(510300) 单标的样本外 +2.26R（26 笔）",
+     "conclusion_cn": "A 稳健档在宽基/指数类标的上历史站得住，是唯一值得推荐的子池"
     },
     {
-      "id": "exp-2026-08-31-exit-matrix",
-      "report": "docs/experiments/exit-matrix-report-2026-08-31.md",
-      "date": "2026-08-31",
-      "verdict": "passed",
-      "one_liner_cn": "现行默认出场（抵扣价退出）经 3 模块×4 出场全矩阵检验站得住；纯结构止损三模块全灾难。",
-      "findings": [
-        {
-          "match": {"signal": "exit_rule", "dimension": "exit"},
-          "direction": "positive",
-          "confidence": "defined",
-          "metrics_cn": "A6①（收盘同时跌破 EMA20 与 20 日抵扣价，次日退出）在 B'/C 模块最优；A 模块被 a6_2（顶部构造+关键性波动）小幅反超（每笔 +1.302 vs +1.179 倍风险金额）",
-          "conclusion_cn": "现行默认退出（跌破 EMA20+抵扣价就走）历史检验站得住，维持默认；a6_2 在 A 模块 +0.12R 优势不跨模块泛化，列为观察候选"
-        },
-        {
-          "match": {"signal": "exit_rule", "dimension": "exit", "regime": "pure_structure_stop"},
-          "direction": "negative",
-          "confidence": "defined",
-          "metrics_cn": "A6③ 纯结构止损（只在初始结构止损触发时退出）三模块全灾难（盈利能力 ≤0.02），B3 双条件退出三模块全劣",
-          "conclusion_cn": "只用初始止损、不带趋势跟随退出端的做法历史证明是灾难，已进证伪清单——不建议任何「买入后只等止损」的计划"
-        }
-      ]
-    },
-    {
-      "id": "exp-2026-09-01-breadth-fullstack",
-      "report": "docs/experiments/kuandu-quanzhan-ARCHIVE-2026-09-01.md",
-      "date": "2026-09-01",
-      "verdict": "passed",
-      "one_liner_cn": "宽度档位管仓位（B200 三档）31 轮回测总归档：等权篮子 15.9% 年化/-25.6% 回撤（16.2 年）。",
-      "findings": [
-        {
-          "match": {"signal": "breadth_regime", "pool": "a_share_basket"},
-          "direction": "positive",
-          "confidence": "defined",
-          "metrics_cn": "8 指数等权篮子 2015-06→2026-08 +12.2%/-36% vs 买入持有 +2.6%/-46%；2015 股灾段 +18.5% vs -51.8%；ETF 可交易版 12.5% 年化",
-          "conclusion_cn": "宽度三档（低档加仓、高档减仓）在 A 股指数等权篮子上历史大幅跑赢买入持有且回撤减半——环境档位信息有价值，可用于仓位调节"
-        },
-        {
-          "match": {"signal": "breadth_regime", "regime": "double_low"},
-          "direction": "positive",
-          "confidence": "defined",
-          "metrics_cn": "双宽度 ≤20（极端冰点）后 120 日 13/13 标的全部上涨（A股 +29%/美股 +37%），两市场扩样本、零调参",
-          "conclusion_cn": "宽度双冰点（两个市场同时极端超卖）后历史上 120 日内全部上涨过——极端冰点环境是机会区而非风险区"
-        },
-        {
-          "match": {"signal": "combo_overlay"},
-          "direction": "positive",
-          "confidence": "defined",
-          "metrics_cn": "合体组（宽度择时腿+LEI 执行纪律腿，80/20 分账）：年化 7.75→9.43%、最深回撤 -34.7%→-28.5%、两腿日收益相关 -0.003（互相独立）；留一检验 9/9",
-          "conclusion_cn": "环境择时腿与个股执行纪律腿是两套互相独立的买卖方法，叠加后收益回撤同时改善——组合视角下两条腿都有保留价值（来源 heiti-ARCHIVE-2026-08-31）"
-        }
-      ]
-    },
-    {
-      "id": "exp-2026-09-05-retail-sentiment-ts",
-      "report": "docs/experiments/retail-sentiment-ts-2026-09-05.md",
-      "date": "2026-09-05",
-      "verdict": "passed",
-      "one_liner_cn": "散户过热要跌是对的，但要分两种：追涨的热（危险，10 日跌概率 72%）与抄底的热（机会，比平时多赚 3-4 个点）。",
-      "findings": [
-        {
-          "match": {"signal": "sentiment_regime", "regime": "chasing_heat"},
-          "direction": "negative",
-          "confidence": "defined",
-          "metrics_cn": "TS6 追涨型高温（最近 20 个上涨日里散户次日追买力度冲历史高位）后 10 日下跌概率 72%（基准 54%），8 板块 6 个方向一致",
-          "conclusion_cn": "散户跟着上涨追买的热是危险的热——出现追涨型过热状态后短期跌概率显著升高，叙事标注时应警示"
-        },
-        {
-          "match": {"signal": "sentiment_regime", "regime": "bottom_fishing"},
-          "direction": "positive",
-          "confidence": "defined",
-          "metrics_cn": "下跌途中散户持续涌入（抄底的热）后 10 日只有 38% 概率跌，平均比平时多赚 3~4 个百分点",
-          "conclusion_cn": "散户在下跌途中抄底的热是机会不是风险——冰点/抄底状态叙事标注时不应写成看空"
-        }
-      ]
-    },
-    {
-      "id": "exp-2026-09-03-multi-confirm",
-      "report": "docs/experiments/multi-confirm-frequency-2026-09-03.md",
-      "date": "2026-09-03",
-      "verdict": "mixed",
-      "one_liner_cn": "「技术信号×宏观信号两盏灯同时亮」历史上几乎不发生（0-3 次），多确认设想基本不可行。",
-      "findings": [
-        {
-          "match": {"signal": "combo_overlay", "dimension": "confirmation"},
-          "direction": "negative",
-          "confidence": "defined",
-          "metrics_cn": "六组技术×宏观测 pairing 同日同向 0~3 次（预注册线 ≥20 次才有检验价值），两组整段历史一次没有，平均错开 170~246 天",
-          "conclusion_cn": "等「技术买点+宏观消息同时确认」再动手的设想历史不可行——两盏灯几乎不同时亮，不能作为入场前置条件"
-        }
-      ]
-    },
-    {
-      "id": "exp-2026-09-04-staged-exit",
-      "report": "docs/experiments/staged-exit-validation-2026-09-04.md",
-      "date": "2026-09-04",
-      "verdict": "neutral",
-      "one_liner_cn": "宽度减仓信号触发后，一次性降到位 vs 分 1/3/6 个月慢慢减：历史上无实质差异。",
-      "findings": [
-        {
-          "match": {"signal": "breadth_regime", "dimension": "risk"},
-          "direction": "neutral",
-          "confidence": "defined",
-          "metrics_cn": "2010 年以来 30 次真实降档触发，三档分批全部判无实质差异；减仓信号中位数 4 个交易日后档位又变，89 个分批程序只有 1 个走完全程",
-          "conclusion_cn": "宽度降档信号的执行方式（一次到位还是分批）历史无差异，且信号本身在档位线附近频繁抖动——执行层不必追求分批精细度"
-        }
-      ]
-    },
-    {
-      "id": "exp-2026-08-27-walkforward-final",
-      "report": "docs/experiments/FINAL-VERDICT-walkforward-2026-08-27.md",
-      "date": "2026-08-27",
-      "verdict": "mixed",
-      "one_liner_cn": "七折滚动考试（只用过去数据选参数）：逐折重选 4.8% 年化但回撤不过线；零前视冻结版 10% 年化但回撤爆表。",
-      "findings": [
-        {
-          "match": {"signal": "combo_overlay", "regime": "walkforward"},
-          "direction": "neutral",
-          "confidence": "defined",
-          "metrics_cn": "2020-01→2026-08 同期沪深300 年化 1.43%/最深回撤 -45.6%；自适应逐折重选 4.80%/-36.9%（回撤不过预注册线）；零前视冻结 10.01%/-54.0%（后验追加诊断）",
-          "conclusion_cn": "现役配置家族在滚动考试中收益为正但回撤控制未达预注册线——引用时如实说「收益站住、回撤压线未过」，不得说「全面通过」"
-        }
-      ]
+     "match": {
+      "signal": "module_B_breakout",
+      "pool": "industry_etf"
+     },
+     "direction": "neutral",
+     "confidence": "observed",
+     "metrics_cn": "国内行业 ETF 集群 0 信号，无投影",
+     "conclusion_cn": "B 模块（密集突破）在国内行业 ETF 池无历史信号，维持默认不推荐"
     }
-  ]
+   ]
+  },
+  {
+   "id": "exp-2026-09-03-module-b-robustness",
+   "report": "docs/experiments/module-b-robustness-2026-09-03.md",
+   "date": "2026-09-03",
+   "verdict": "passed",
+   "one_liner_cn": "模块 B（密集突破）是干净数据上唯一平均每笔赚钱的主动入场规则，判定稳健但压线、低冗余。",
+   "findings": [
+    {
+     "match": {
+      "signal": "module_B_breakout",
+      "pool": "etf_mixed"
+     },
+     "direction": "positive",
+     "confidence": "defined",
+     "metrics_cn": "37 笔，胜率 37.8%（每 10 笔不到 4 笔赚钱），但赚钱笔平均一笔 +3.5 倍风险金额、亏钱笔平均只 -0.62；逐年剔除/逐标的剔除全部仍为正；三条预注册及格线全过（第一条压线）",
+     "conclusion_cn": "B 模块（横盘很久后向上突破、预设位置认小亏）历史整体成立，是「多次小亏、偶尔大赚」的形态结构；但利润头部集中（最赚三笔占 69% 盈利、2025 年占 57%），属低冗余稳健"
+    }
+   ]
+  },
+  {
+   "id": "exp-2026-08-31-exit-matrix",
+   "report": "docs/experiments/exit-matrix-report-2026-08-31.md",
+   "date": "2026-08-31",
+   "verdict": "passed",
+   "one_liner_cn": "现行默认出场（抵扣价退出）经 3 模块×4 出场全矩阵检验站得住；纯结构止损三模块全灾难。",
+   "findings": [
+    {
+     "match": {
+      "signal": "exit_rule",
+      "dimension": "exit"
+     },
+     "direction": "positive",
+     "confidence": "defined",
+     "metrics_cn": "A6①（收盘同时跌破 EMA20 与 20 日抵扣价，次日退出）在 B'/C 模块最优；A 模块被 a6_2（顶部构造+关键性波动）小幅反超（每笔 +1.302 vs +1.179 倍风险金额）",
+     "conclusion_cn": "现行默认退出（跌破 EMA20+抵扣价就走）历史检验站得住，维持默认；a6_2 在 A 模块 +0.12R 优势不跨模块泛化，列为观察候选"
+    },
+    {
+     "match": {
+      "signal": "exit_rule",
+      "dimension": "exit",
+      "regime": "pure_structure_stop"
+     },
+     "direction": "negative",
+     "confidence": "defined",
+     "metrics_cn": "A6③ 纯结构止损（只在初始结构止损触发时退出）三模块全灾难（盈利能力 ≤0.02），B3 双条件退出三模块全劣",
+     "conclusion_cn": "只用初始止损、不带趋势跟随退出端的做法历史证明是灾难，已进证伪清单——不建议任何「买入后只等止损」的计划"
+    }
+   ]
+  },
+  {
+   "id": "exp-2026-09-01-breadth-fullstack",
+   "report": "docs/experiments/kuandu-quanzhan-ARCHIVE-2026-09-01.md",
+   "date": "2026-09-01",
+   "verdict": "passed",
+   "one_liner_cn": "宽度档位管仓位（B200 三档）31 轮回测总归档：等权篮子 15.9% 年化/-25.6% 回撤（16.2 年）。",
+   "findings": [
+    {
+     "match": {
+      "signal": "breadth_regime",
+      "pool": "a_share_basket"
+     },
+     "direction": "positive",
+     "confidence": "defined",
+     "metrics_cn": "8 指数等权篮子 2015-06→2026-08 +12.2%/-36% vs 买入持有 +2.6%/-46%；2015 股灾段 +18.5% vs -51.8%；ETF 可交易版 12.5% 年化",
+     "conclusion_cn": "宽度三档（低档加仓、高档减仓）在 A 股指数等权篮子上历史大幅跑赢买入持有且回撤减半——环境档位信息有价值，可用于仓位调节"
+    },
+    {
+     "match": {
+      "signal": "breadth_regime",
+      "regime": "double_low"
+     },
+     "direction": "positive",
+     "confidence": "defined",
+     "metrics_cn": "双宽度 ≤20（极端冰点）后 120 日 13/13 标的全部上涨（A股 +29%/美股 +37%），两市场扩样本、零调参",
+     "conclusion_cn": "宽度双冰点（两个市场同时极端超卖）后历史上 120 日内全部上涨过——极端冰点环境是机会区而非风险区"
+    },
+    {
+     "match": {
+      "signal": "combo_overlay"
+     },
+     "direction": "positive",
+     "confidence": "defined",
+     "metrics_cn": "合体组（宽度择时腿+LEI 执行纪律腿，80/20 分账）：年化 7.75→9.43%、最深回撤 -34.7%→-28.5%、两腿日收益相关 -0.003（互相独立）；留一检验 9/9",
+     "conclusion_cn": "环境择时腿与个股执行纪律腿是两套互相独立的买卖方法，叠加后收益回撤同时改善——组合视角下两条腿都有保留价值（来源 heiti-ARCHIVE-2026-08-31）"
+    }
+   ]
+  },
+  {
+   "id": "exp-2026-09-05-retail-sentiment-ts",
+   "report": "docs/experiments/retail-sentiment-ts-2026-09-05.md",
+   "date": "2026-09-05",
+   "verdict": "passed",
+   "one_liner_cn": "散户过热要跌是对的，但要分两种：追涨的热（危险，10 日跌概率 72%）与抄底的热（机会，比平时多赚 3-4 个点）。",
+   "findings": [
+    {
+     "match": {
+      "signal": "sentiment_regime",
+      "regime": "chasing_heat"
+     },
+     "direction": "negative",
+     "confidence": "defined",
+     "metrics_cn": "TS6 追涨型高温（最近 20 个上涨日里散户次日追买力度冲历史高位）后 10 日下跌概率 72%（基准 54%），8 板块 6 个方向一致",
+     "conclusion_cn": "散户跟着上涨追买的热是危险的热——出现追涨型过热状态后短期跌概率显著升高，叙事标注时应警示"
+    },
+    {
+     "match": {
+      "signal": "sentiment_regime",
+      "regime": "bottom_fishing"
+     },
+     "direction": "positive",
+     "confidence": "defined",
+     "metrics_cn": "下跌途中散户持续涌入（抄底的热）后 10 日只有 38% 概率跌，平均比平时多赚 3~4 个百分点",
+     "conclusion_cn": "散户在下跌途中抄底的热是机会不是风险——冰点/抄底状态叙事标注时不应写成看空"
+    }
+   ]
+  },
+  {
+   "id": "exp-2026-09-03-multi-confirm",
+   "report": "docs/experiments/multi-confirm-frequency-2026-09-03.md",
+   "date": "2026-09-03",
+   "verdict": "mixed",
+   "one_liner_cn": "「技术信号×宏观信号两盏灯同时亮」历史上几乎不发生（0-3 次），多确认设想基本不可行。",
+   "findings": [
+    {
+     "match": {
+      "signal": "combo_overlay",
+      "dimension": "confirmation"
+     },
+     "direction": "negative",
+     "confidence": "defined",
+     "metrics_cn": "六组技术×宏观测 pairing 同日同向 0~3 次（预注册线 ≥20 次才有检验价值），两组整段历史一次没有，平均错开 170~246 天",
+     "conclusion_cn": "等「技术买点+宏观消息同时确认」再动手的设想历史不可行——两盏灯几乎不同时亮，不能作为入场前置条件"
+    }
+   ]
+  },
+  {
+   "id": "exp-2026-09-04-staged-exit",
+   "report": "docs/experiments/staged-exit-validation-2026-09-04.md",
+   "date": "2026-09-04",
+   "verdict": "neutral",
+   "one_liner_cn": "宽度减仓信号触发后，一次性降到位 vs 分 1/3/6 个月慢慢减：历史上无实质差异。",
+   "findings": [
+    {
+     "match": {
+      "signal": "breadth_regime",
+      "dimension": "risk"
+     },
+     "direction": "neutral",
+     "confidence": "defined",
+     "metrics_cn": "2010 年以来 30 次真实降档触发，三档分批全部判无实质差异；减仓信号中位数 4 个交易日后档位又变，89 个分批程序只有 1 个走完全程",
+     "conclusion_cn": "宽度降档信号的执行方式（一次到位还是分批）历史无差异，且信号本身在档位线附近频繁抖动——执行层不必追求分批精细度"
+    }
+   ]
+  },
+  {
+   "id": "exp-2026-08-27-walkforward-final",
+   "report": "docs/experiments/FINAL-VERDICT-walkforward-2026-08-27.md",
+   "date": "2026-08-27",
+   "verdict": "mixed",
+   "one_liner_cn": "七折滚动考试（只用过去数据选参数）：逐折重选 4.8% 年化但回撤不过线；零前视冻结版 10% 年化但回撤爆表。",
+   "findings": [
+    {
+     "match": {
+      "signal": "combo_overlay",
+      "regime": "walkforward"
+     },
+     "direction": "neutral",
+     "confidence": "defined",
+     "metrics_cn": "2020-01→2026-08 同期沪深300 年化 1.43%/最深回撤 -45.6%；自适应逐折重选 4.80%/-36.9%（回撤不过预注册线）；零前视冻结 10.01%/-54.0%（后验追加诊断）",
+     "conclusion_cn": "现役配置家族在滚动考试中收益为正但回撤控制未达预注册线——引用时如实说「收益站住、回撤压线未过」，不得说「全面通过」"
+    }
+   ]
+  },
+  {
+   "id": "exp-2026-09-06-etf-eight-twoyear",
+   "report": "docs/experiments/etf-eight-twoyear-2026-09-06.md",
+   "date": "2026-09-06",
+   "verdict": "mixed",
+   "one_liner_cn": "核心八ETF两年闭环：A趋势回调+93R独扛利润，C破底翻在震荡上行ETF净亏-22R。",
+   "findings": [
+    {
+     "match": {
+      "signal": "module_A_stable",
+      "pool": "etf_mixed"
+     },
+     "direction": "positive",
+     "confidence": "defined",
+     "metrics_cn": "近两年 8 核心ETF 去重后 24 笔，胜率 25%，累计 +92.6R（每笔平均 +3.86 倍风险金）；赚钱结构=多次小亏+偶尔大赚（最大单笔黄金 +48.5R）",
+     "conclusion_cn": "A 趋势回调买点近两年在核心 ETF 池整体成立且是唯一利润来源，维持主战场"
+    },
+    {
+     "match": {
+      "signal": "module_C_2b",
+      "pool": "etf_mixed"
+     },
+     "direction": "negative",
+     "confidence": "observed",
+     "metrics_cn": "同窗 25 笔，胜率 16%，累计 -21.7R；恒生科技 10 笔全亏（最大连亏 7）、白酒 3 笔全亏、标普 4 笔全亏；亏损模式=入场 1-2 根被趋势扫掉",
+     "conclusion_cn": "C 破底翻反转在震荡上行的 ETF 上系统性失灵（观察级，待专项验证）——此类形态 ETF 上的 C 信号建议降级为观察"
+    },
+    {
+     "match": {
+      "signal": "module_B_breakout",
+      "pool": "etf_mixed"
+     },
+     "direction": "neutral",
+     "confidence": "observed",
+     "metrics_cn": "近两年 0 信号（与扩池实验一致）",
+     "conclusion_cn": "B 密集突破近两年在核心 ETF 池无触发，无新证据"
+    }
+   ]
+  }
+ ]
 }
