@@ -313,7 +313,7 @@ def _lcs_len(a: str, b: str) -> int:
 
 
 def _static_symbol_name(symbol: str, db_name: str | None) -> str:
-    """标的中文名：DB 存的名 > TH 行业静态表 > 指数/海外静态表。零 IO。
+    """标的中文名：DB 存的名 > TH 行业静态表 > 自选补充表 > 指数/海外静态表。零 IO。
 
     生产库 watchlist 的 display_name 常为空（只存代码），取名全靠静态表；
     特意**不走分析服务取名**——冷启动会逐标的拉行情（曾致 46s 请求 +
@@ -324,6 +324,9 @@ def _static_symbol_name(symbol: str, db_name: str | None) -> str:
         return name
     if symbol.startswith("TH") and symbol.endswith(".SECTOR"):
         return THS_INDUSTRY_NAMES.get(symbol.split(".")[0][2:], "")
+    watch_name = _WATCH_NAME_CN.get(symbol)
+    if watch_name:
+        return watch_name
     override = INDEX_OVERRIDES.get(symbol)
     if override is not None:
         return override.display_name
@@ -339,6 +342,17 @@ _CATALOG_ALIAS: dict[str, str] = {
     "中概": "513050.SS",
     "中概互联": "513050.SS",
     "越南": "513880.SS",
+}
+
+#: 自选中文名补充表（2026-09-05）：watchlist 的 display_name 常为空，
+#: TH 行业板块有 THS_INDUSTRY_NAMES 兜底，但 ETF/个股/部分海外没有——
+#: 「通信ETF」这类自然名此前对 515880 解析不到（名字链全空）。
+#: **维护点**：自选新增非 TH 板块标的时，若 DB 未写 display_name 需在此补。
+_WATCH_NAME_CN: dict[str, str] = {
+    "515880.SS": "通信ETF",
+    "512890.SS": "红利低波ETF",
+    "601689.SS": "拓普集团",
+    "IGV": "美国软件IGV",
 }
 
 
