@@ -48,6 +48,11 @@ def trading_days(start: str, end: str) -> list[str]:
     return sorted(d for d in days if start <= d <= end)
 
 
+# node 直调本地 npx 缓存包（npx 冷启动在批量下超时；实测 node 直调稳定）
+_PKG = Path.home() / ".npm/_npx/f124025a92f4edba/node_modules/westock-data-skillhub/scripts/index.js"
+_CMD_BASE = ["node", str(_PKG)] if _PKG.exists() else ["npx", "-y", "westock-data-skillhub@1.0.3"]
+
+
 def fetch_batch(syms: list[str], date: str) -> dict[str, dict]:
     for attempt in (1, 2):
         try:
@@ -122,15 +127,17 @@ def main() -> int:
 
     def work(day: str) -> None:
         day_rows: dict[str, dict] = {}
+        # 历史窗口宽容口径：早年未上市的批次整体失败是常态（新股占两成），
+        # 单批失败只丢该批；覆盖门槛以「当年已上市」估计值（全量 60%）判整日
         n_fail_batch = 0
         for i in range(0, len(all_syms), args.batch):
             want = all_syms[i:i + args.batch]
             rows = fetch_batch(want, day)
             if len(rows) < len(want) * 0.5:
-                n_fail_batch += 1  # 单批失败宽容：只丢该批股票，不丢整天
+                n_fail_batch += 1
                 continue
             day_rows.update(rows)
-        if len(day_rows) < len(all_syms) * 0.7 or n_fail_batch > 10:
+        if len(day_rows) < len(all_syms) * 0.5 or n_fail_batch > 30:
             return
         # 按板块聚合
         for b in board_list:
