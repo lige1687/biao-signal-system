@@ -429,7 +429,12 @@ def _resolve_symbol_by_name(message: str, watch_items: list) -> str | None:
         if frag in _NAME_STOPWORDS:
             continue
         for symbol, name in names:
-            if frag == name or frag in name or name in frag:
+            # name in frag（名字被更长的话包含）仅对中文名 >=3 字开放：
+            # 「科技 XLK」的中文部分只有 2 字，会被「恒生科技」这类长词
+            # 误包含（2026-09-06 真机：「恒生科技」被截到 XLK）。
+            name_cn = "".join(ch for ch in name if "\u4e00" <= ch <= "\u9fa5")
+            name_in_ok = len(name_cn) >= 3 and name_cn in frag
+            if frag == name or frag in name or name_in_ok:
                 score = max(len(frag), len(name))
             else:
                 score = _lcs_len(frag, name)
