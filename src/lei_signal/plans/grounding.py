@@ -301,6 +301,9 @@ def verify_numeric_grounding(
     """回答中的每个行情数值必须在白名单，或为其相对偏差/四舍五入。
 
     相对偏差：n 可能是 (b-a)/a*100 形式的百分数（payload 任意两数之差）。
+    单位换算派生（2026-09-05）：n ≈ a×10^k（k∈{±1,±2}）——消息标题金额
+    常用 Billion/百万，口述换算成亿（12.93B→129.3亿）是 ×10 精确换算，
+    不是编造。容差：换算值的 0.5% + 0.05 绝对兜底。
     """
     nums = extract_market_numbers(text)
     base = [a for a in allowed if a != 0]
@@ -311,6 +314,16 @@ def verify_numeric_grounding(
             for i, a in enumerate(base):
                 for b in base[i + 1:]:
                     if abs(abs(b - a) / a * 100 - n) <= max(0.1, tolerance * 100):
+                        ok = True
+                        break
+                if ok:
+                    break
+        if not ok and n > 0 and base:
+            # 单位换算派生：n ≈ a×10^k
+            for a in base:
+                for k in (1, -1, 2, -2):
+                    scaled = a * 10**k
+                    if abs(n - scaled) <= max(0.05, abs(scaled) * tolerance):
                         ok = True
                         break
                 if ok:

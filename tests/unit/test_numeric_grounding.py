@@ -130,3 +130,18 @@ def test_three_digit_integer_exempt_but_decimal_and_large_checked():
     # 编造价位仍是重灾区（小数/大数），不受本次豁免影响
     ok, _ = verify_numeric_grounding("关键位 9648.062", frozenset({8700.0}))
     assert not ok
+
+
+def test_unit_conversion_derivation_accepted():
+    """2026-09-05：Billion↔亿 口述换算（12.93B→129.3亿）是 ×10 精确换算，
+    不算编造；编造的无关数字仍拒绝。"""
+    ok, _ = verify_numeric_grounding(
+        "Nvidia 收购 Hugging Face 金额 129.3 亿", frozenset({12.93})
+    )
+    assert ok
+    # ×100 换算（百万→亿）同样接受
+    ok2, _ = verify_numeric_grounding("融资 5.2 亿", frozenset({520.0}))
+    assert ok2
+    # 无关编造仍拒
+    ok3, reason = verify_numeric_grounding("关键位 8888.5", frozenset({12.93, 520.0}))
+    assert not ok3
