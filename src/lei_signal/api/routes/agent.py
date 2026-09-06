@@ -408,6 +408,15 @@ def _resolve_symbol_by_name(message: str, watch_items: list) -> str | None:
         name = _static_symbol_name(w.symbol, getattr(w, "display_name", None))
         if name:
             names.append((w.symbol, name))
+    # 第一档：完整名字直接出现在消息里（含中英混合名如「通信ETF」——CJK
+    # 分段会把 ETF 切掉，单靠中文片段匹配时更长的中文名会抢分：说「通信ETF」
+    # 曾被「通信设备（中证）」以 8>5 截走、解析到无数据源的指数后整体退
+    # global）。名字完整出现是最强信号，以 100+名字长度 显著胜出。
+    # 名字与消息都去空格再比：「半导体 SOXX」对「半导体SOXX」也要命中。
+    msg_flat = message.replace(" ", "")
+    for symbol, name in names:
+        if name and name.replace(" ", "") in msg_flat:
+            scored.append((100 + len(name), symbol))
     for frag in _CJK_RUN_RE.findall(message):
         if frag in _NAME_STOPWORDS:
             continue
