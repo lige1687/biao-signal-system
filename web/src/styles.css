@@ -4701,3 +4701,26 @@ a { color: var(--accent); text-decoration: none; }
 
 .sx-heat-flag.alarm { background: rgba(210, 74, 67, 0.18); color: #d24a43; margin-left: 2px; }
 .sx-heat-flag.ice { background: rgba(77, 127, 196, 0.16); color: #4d7fc4; margin-left: 2px; }
+
+.nav-mood-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-left: 5px; vertical-align: 1px; box-shadow: 0 0 4px currentColor; animation: nav-mood-pulse 2s infinite; }
+@keyframes nav-mood-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.45; } }
+
+/* 情绪页·行动区 */
+.mood-action { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+.mood-light { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 8px; background: rgba(0,0,0,0.03); font-weight: 600; }
+.mood-light-dot { width: 12px; height: 12px; border-radius: 50%; }
+.mood-card.action { border-left: 4px solid #4d7fc4; }
+.mood-card.action.alarm { border-left-color: #d24a43; }
+.mood-card-head { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.mood-card-head .spacer { flex: 1; }
+.mood-hold-tag { font-size: 10.5px; padding: 1px 6px; border-radius: 4px; background: rgba(77,127,196,0.15); color: #4d7fc4; font-weight: 700; }
+.mood-hold-tag.danger { background: rgba(210,74,67,0.15); color: #d24a43; }
+.mood-etf-badge { font-size: 10.5px; padding: 1px 6px; border-radius: 4px; border: 1px solid rgba(0,0,0,0.15); color: var(--text-dim); }
+.mood-card-facts { display: flex; gap: 14px; font-size: 12.5px; margin-top: 6px; }
+.mood-card-body { font-size: 12.5px; margin-top: 6px; line-height: 1.6; color: var(--text-dim); }
+.mood-card-win { font-size: 12px; margin-top: 6px; font-weight: 600; color: #15803d; }
+.mood-card.action.alarm .mood-card-win { color: #d24a43; }
+.mood-holding { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding: 6px 2px; }
+.mood-hold-chip { font-size: 11.5px; padding: 2px 8px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.1); }
+.mood-hold-chip.danger { border-color: #d24a43; color: #d24a43; background: rgba(210,74,67,0.08); font-weight: 700; }
+.mood-hold-chip.watch { border-color: #b45309; color: #b45309; background: rgba(180,83,9,0.07); }

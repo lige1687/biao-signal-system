@@ -26,6 +26,7 @@ def dashboard() -> dict:
         "us_survey": market_mood.us_survey_latest(),
         "sector_heat": market_mood.sector_heat_boards(),
         "market_structure": market_mood.market_structure(),
+        "action": market_mood.build_action(),
         "disclaimer_cn": (
             "情绪面为叙事标注层（research_proxy）：只描述环境与状态，"
             "不参与技术判定、不构成买卖点。阈值来源在各项内标注"
@@ -56,3 +57,14 @@ def confidence() -> dict:
     if not p.exists():
         return {"available": False}
     return _json.loads(p.read_text(encoding="utf-8"))
+
+
+@router.get("/light")
+def light() -> dict:
+    """状态灯（读冻结快照，无网络，供顶部导航轮询）。"""
+    a = market_mood.build_action()
+    return {"light": a.get("light", "gray"),
+            "n_picks": len(a.get("opportunity_cards") or []),
+            "n_alarms": len(a.get("alarm_cards") or []),
+            "holding_danger": sum(1 for h in a.get("holding_risk") or [] if h["state"] == "danger"),
+            "available": a.get("available", False)}

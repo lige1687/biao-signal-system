@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { sentimentApi } from "../api/client";
+import { etfsForSector } from "../data/sectorEtfMap";
 
 /* ── 情绪仪表盘页：全A / 美股 / 美国调查情绪 / A股板块散户热度 ───────────
  * 一切为叙事标注（research_proxy）：只描述环境与状态，不参与技术判定、
@@ -29,6 +30,66 @@ export default function SentimentPage() {
           )}
         </div>
       </div>
+
+            {/* ── 行动区：状态灯/操作卡/持仓风险（第一屏只回答"今天要不要行动"） ── */}
+      {data.action?.available && (
+        <section className="mood-action">
+          {data.action.light === "gray" && (
+            <div className="mood-light gray">
+              <span className="mood-light-dot" style={{ background: "#9aa4b2" }} />
+              当前无情绪信号触发（安静期）
+              {data.cn_mood.state && data.cn_mood.state !== "冷" && (
+                <span className="muted"> · 冰点窗口未开启（全A情绪{data.cn_mood.state}）</span>
+              )}
+            </div>
+          )}
+          {(data.action.opportunity_cards ?? []).map((c) => (
+            <div key={c.code} className="mood-card action pick">
+              <div className="mood-card-head">
+                <b>❄ 冰点机会 · {c.name}</b>
+                {c.holding && <span className="mood-hold-tag">持仓相关</span>}
+                <span className="spacer" />
+                {(etfsForSector(c.name) ?? []).slice(0, 2).map((e) => (
+                  <span key={e.symbol} className="mood-etf-badge">{e.name}</span>
+                ))}
+              </div>
+              <div className="mood-card-facts">
+                <span>散户热度 z <b>{c.z?.toFixed(2) ?? "-"}</b></span>
+                <span>宽度 b50 <b>{c.b50?.toFixed(0) ?? "-"}</b></span>
+                <span>阶段 <b>{c.stage ?? "-"}</b></span>
+              </div>
+              <div className="mood-card-body">{c.plan_cn}</div>
+              <div className="mood-card-win">{c.win_rate_cn}</div>
+            </div>
+          ))}
+          {(data.action.alarm_cards ?? []).map((c) => (
+            <div key={c.code} className="mood-card action alarm">
+              <div className="mood-card-head">
+                <b>⚠ 强势散户热警报 · {c.name}</b>
+                {c.holding && <span className="mood-hold-tag danger">持仓相关</span>}
+                <span className="spacer" />
+                {(etfsForSector(c.name) ?? []).slice(0, 2).map((e) => (
+                  <span key={e.symbol} className="mood-etf-badge">{e.name}</span>
+                ))}
+              </div>
+              <div className="mood-card-facts">
+                <span>散户热度 z <b>{c.z?.toFixed(2) ?? "-"}</b></span>
+                <span>宽度 b50 <b>{c.b50?.toFixed(0) ?? "-"}</b></span>
+              </div>
+              <div className="mood-card-body">{c.plan_cn}</div>
+              <div className="mood-card-win">{c.win_rate_cn}</div>
+            </div>
+          ))}
+          <div className="mood-holding">
+            <div className="sx-rail-title" style={{ fontSize: 12 }}>持仓风险</div>
+            {(data.action.holding_risk ?? []).map((h) => (
+              <span key={h.code} className={`mood-hold-chip ${h.state}`}
+                    title={h.detail_cn}>{h.name}</span>
+            ))}
+          </div>
+          <div className="muted mood-note">{data.action.note_cn}</div>
+        </section>
+      )}
 
       <div className="mood-grid">
         {/* ── 全A情绪 ── */}

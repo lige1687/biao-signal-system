@@ -1,4 +1,4 @@
-import type { BoardProfile, SentimentDashboard,
+import type { BoardProfile, SentimentDashboard, SentimentLight,
   ActionItem,
   SignalEdgeResponse,
   CopilotDispatchReply,
@@ -497,6 +497,7 @@ export const sentimentApi = {
   dashboard: () => request<SentimentDashboard>("/sentiment/dashboard"),
   boardProfile: (code: string) =>
     request<BoardProfile>(`/sentiment/board/${encodeURIComponent(code)}`),
+  light: () => request<SentimentLight>("/sentiment/light"),
 };
 
 export const sectorsApi = {

@@ -2360,6 +2360,7 @@ export interface SentimentDashboard {
     boards: MoodSectorBoard[];
   };
   market_structure: MarketStructure;
+  action: SentimentAction;
   disclaimer_cn: string;
 }
 
@@ -2428,4 +2429,22 @@ export interface BoardProfile {
   stage?: string | null;
   sig_icepoint_pick?: boolean; sig_heat_alarm?: boolean;
   reading_cn?: string[];
+}
+
+export interface SentimentActionCard {
+  code: string; name: string; level?: number | null;
+  z: number | null; r60_pct?: number | null; b50?: number | null;
+  stage?: string | null; plan_cn: string; win_rate_cn: string; holding?: boolean;
+}
+export interface SentimentAction {
+  available: boolean; light: "blue" | "red" | "gray";
+  cn_cold: boolean | null; cn_ready?: unknown;
+  opportunity_cards: SentimentActionCard[];
+  alarm_cards: SentimentActionCard[];
+  holding_risk: { code: string; name: string; state: "danger" | "watch" | "safe"; detail_cn: string; z: number | null; b50: number | null }[];
+  note_cn: string;
+}
+export interface SentimentLight {
+  light: "blue" | "red" | "gray";
+  n_picks: number; n_alarms: number; holding_danger: number; available: boolean;
 }

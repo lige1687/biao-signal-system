@@ -386,3 +386,88 @@ def self_b200(wide, members: dict, code: str) -> float | None:
     last = sub.iloc[-1]
     n = last.notna().sum()
     return round(float(last.sum() / n * 100), 1) if n >= 5 else None
+
+
+# ─────────────────────── 行动区（状态灯/预备进度/操作卡/持仓风险） ───────────────────────
+_HOLDING_BOARDS = {
+    "BK1215", "BK1036", "BK1207", "BK1201",          # cn_info 通信/半导体/计算机/电子
+    "BK0478", "BK0732", "BK1015",                    # cn_metal 有色/贵金属/能源金属
+    "BK1200", "BK1033", "BK0427",                    # cn_green_other 电力设备/电池/公用事业
+    "BK0465", "BK1044", "BK1216",                    # 医药（创新药近似）
+    "BK1277",                                        # 白酒
+}
+
+
+def _snap() -> dict:
+    return json.loads((_CACHE / "sector_trend_snapshot.json").read_text(encoding="utf-8"))
+
+
+def build_action() -> dict:
+    """行动区数据（全部读冻结快照，无网络）。
+
+    light: blue=冰点机会窗口开启 / red=有强热警报 / gray=无信号
+    cn_ready: 三票预备进度（几票冷/共几票，含每票名称）
+    opportunity_cards / alarm_cards: 操作卡原始件（胜率文案含证据账本数字）
+    holding_risk: 持仓赛道板块的 危险/注意/安全 分级
+    """
+    try:
+        snap = _snap()
+    except (OSError, json.JSONDecodeError):
+        return {"available": False, "light": "gray"}
+    boards = snap.get("boards", [])
+    meta = snap.get("sentiment_signals") or {}
+
+    picks = [b for b in boards if b.get("sig_icepoint_pick")]
+    alarms = [b for b in boards if b.get("sig_heat_alarm")]
+
+    def card(b: dict, kind: str) -> dict:
+        z = b.get("sig_retail_z")
+        if kind == "pick":
+            plan = ("操作参考（回测口径）：一周内任意时点入场 → 持有 15 日 → "
+                    "中途不设紧止盈（回测：紧止盈把 95% 胜率洗成 60%）→ "
+                    "36 日前必须离场（收益峰在第 14-16 日，36 日后转负）")
+            win = ("历史同条件：10日超额 +5.9~7.8%、92% 板块同向（154 例，p<0.0001；"
+                   "2026-07 恐慌期 21 例 20 日全胜）")
+        else:
+            plan = ("操作参考（回测口径）：警惕/回避——历史同形态 10 日 -9.3%、"
+                    "29 例无一板块幸免；风险随时间累积，无短线博反弹价值")
+            win = ("历史同条件：-9.3%（p=0.0009，单年样本；边界：仅 50&200 同高档，"
+                   "反弹初档散户热为正向勿误读）")
+        return {
+            "code": b["code"], "name": b["name"], "level": b.get("level"),
+            "z": z, "r60_pct": None, "b50": b.get("b50"),
+            "stage": b.get("stage"), "plan_cn": plan, "win_rate_cn": win,
+            "holding": b["code"] in _HOLDING_BOARDS,
+        }
+
+    # 持仓风险
+    cn_cold = meta.get("cn_cold")
+    holding = []
+    for b in boards:
+        if b["code"] not in _HOLDING_BOARDS:
+            continue
+        z, b50 = b.get("sig_retail_z"), b.get("b50")
+        if b.get("sig_heat_alarm"):
+            state, detail = "danger", "强热警报触发（散户涌入×全面强势）"
+        elif b.get("sig_icepoint_pick"):
+            state, detail = "watch", "冰点机会候选（观察）"
+        elif z is not None and z >= 1.0 and b50 is not None and b50 > 70:
+            state, detail = "watch", f"警报预备（散户z={z}、b50={b50:.0f}偏高，缺 b200 条件）"
+        else:
+            state, detail = "safe", "无情绪风险形态"
+        holding.append({"code": b["code"], "name": b["name"], "state": state,
+                        "detail_cn": detail, "z": z, "b50": b50})
+    order = {"danger": 0, "watch": 1, "safe": 2}
+    holding.sort(key=lambda x: order.get(x["state"], 9))
+
+    light = "blue" if picks else ("red" if alarms else "gray")
+    return {
+        "available": True, "light": light,
+        "cn_cold": cn_cold,
+        "cn_ready": None,  # 三票明细在 cn_mood（网络）——轻端点不带，前端 dashboard 合并
+        "opportunity_cards": [card(b, "pick") for b in picks],
+        "alarm_cards": [card(b, "alarm") for b in alarms],
+        "holding_risk": holding,
+        "note_cn": "行动区为研究代理展示（research_proxy）：操作参考来自单年回测与"
+                   "2026-07 单次恐慌期验证，多年终审进行中，非买卖点。",
+    }

@@ -1,3 +1,4 @@
+import { sentimentApi } from "../api/client";
 import { useQuery } from "@tanstack/react-query";
 import { NavLink } from "react-router-dom";
 import { api } from "../api/client";
@@ -10,10 +11,16 @@ import { agentConsoleStore } from "../App";
  * 监督待办带红点（全库 open 待办数）；看盘入口带红点（买卖信号合计）。
  * 计数轮询 60s：待办由日终监督周期产生，不需要更快。
  */
-type NavItem = { to: string; label: string; end?: boolean; badge?: number };
+type NavItem = { to: string; label: string; end?: boolean; badge?: number; dot?: string };
 type NavGroup = NavItem[];
 
 export default function TopNav() {
+  const { data: moodLight } = useQuery({
+    queryKey: ["sentimentLight"],
+    queryFn: () => sentimentApi.light(),
+    refetchInterval: 5 * 60_000,
+    staleTime: 5 * 60_000,
+  });
   const { data } = useQuery({
     queryKey: ["plansSummary"],
     queryFn: () => api.plansSummary(),
@@ -27,7 +34,9 @@ export default function TopNav() {
     [
       { to: "/", label: "看盘", end: true, badge: todayOpps || undefined },
       { to: "/sectors", label: "行业板块" },
-      { to: "/sentiment", label: "情绪" },
+      { to: "/sentiment", label: "情绪", dot: moodLight?.available && moodLight.light !== "gray"
+        ? (moodLight.light === "blue" ? "#4d7fc4" : "#d24a43")
+        : undefined },
     ],
     [
       { to: "/ops", label: "今日操作" },
@@ -39,6 +48,7 @@ export default function TopNav() {
       { to: "/factors", label: "因子观测台" },
       { to: "/news", label: "资讯流" },
       { to: "/daily", label: "收盘简报" },
+      { to: "/mindset", label: "认知心态" },
     ],
     [
       { to: "/backtest", label: "回测" },
@@ -50,6 +60,10 @@ export default function TopNav() {
   const link = (item: NavItem) => (
     <NavLink key={item.to} to={item.to} end={item.end}>
       {item.label}
+      {(item as { dot?: string }).dot && (
+        <span className="nav-mood-dot" style={{ background: (item as { dot?: string }).dot }}
+              title={item.dot === "#4d7fc4" ? "冰点机会窗口开启" : "情绪警报触发"} />
+      )}
       {item.badge != null && item.badge > 0 && <span className="nav-badge">{item.badge}</span>}
     </NavLink>
   );
