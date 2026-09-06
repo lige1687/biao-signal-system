@@ -252,6 +252,35 @@
      "conclusion_cn": "B 密集突破近两年在核心 ETF 池无触发，无新证据"
     }
    ]
+  },
+  {
+   "id": "exp-2026-09-06-ai-three-tier",
+   "report": "docs/experiments/ai-three-tier-decision-2026-09-06.md",
+   "date": "2026-09-06",
+   "verdict": "falsified",
+   "one_liner_cn": "AI否决权/自由仓位权在趋势系统上完败（砍掉大赚笔），有效参与是窄规则+信息层。",
+   "findings": [
+    {
+     "match": {
+      "signal": "combo_overlay",
+      "dimension": "ai_decision"
+     },
+     "direction": "negative",
+     "confidence": "defined",
+     "metrics_cn": "75笔核心池信号，AI否决式判定砍掉93%（含全部四笔+31R~+48.5R大赚），子集-4.6R vs 纯系统+174.5R",
+     "conclusion_cn": "不给AI逐笔否决权/自由仓位权——趋势系统33%胜率靠大赚笔活命，逐笔求安全必然杀死利润"
+    },
+    {
+     "match": {
+      "signal": "combo_overlay",
+      "dimension": "ai_role"
+     },
+     "direction": "positive",
+     "confidence": "defined",
+     "metrics_cn": "窄规则版（只砍止损<0.5%）：尾部压61%、利润保留47%、风险调整比4.0（纯系统3.3）",
+     "conclusion_cn": "AI参与的正确形态：发现窄规则→固化引擎→AI回信息层（解释/提醒/发现新规律）"
+    }
+   ]
   }
  ]
 }
