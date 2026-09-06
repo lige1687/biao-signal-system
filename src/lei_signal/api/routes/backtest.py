@@ -64,6 +64,10 @@ class RunRequest(BaseModel):
     # 深乖离增强（BCD 重测轮，默认关）：
     bias_filter: float | None = None        # None=关；-0.15 = 低于 EMA120 15% 以上才入
 
+    # 极端加速阻断（规格 §13-6；默认关；0.25 = 信号日前60日涨幅≥25% 不入场）：
+    accel_filter: float | None = None
+    accel_lookback: int = 60
+
 
 @router.get("/options")
 def backtest_options() -> dict[str, Any]:
@@ -150,6 +154,8 @@ def create_run(request: RunRequest) -> dict[str, str]:
         shrink_prior=request.shrink_prior,
         volume_filter_vr_max=request.volume_filter_vr_max,
         bias_filter=request.bias_filter,
+        accel_filter=request.accel_filter,
+        accel_lookback=request.accel_lookback,
         gap_target=request.gap_target,
         gap_momentum=request.gap_momentum,
         gap_momentum_lookback=request.gap_momentum_lookback,

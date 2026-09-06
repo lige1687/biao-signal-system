@@ -226,9 +226,47 @@ def filter_specs_by_bias(
 
 __all__ = [
     "PROFILE_MODES",
+    "filter_specs_by_acceleration",
     "filter_specs_by_bias",
     "filter_specs_by_gap_momentum",
     "filter_specs_by_profile",
     "filter_specs_by_shrink",
     "filter_specs_by_volume",
 ]
+
+
+def filter_specs_by_acceleration(
+    frame: pd.DataFrame,
+    specs: list[EntrySpec],
+    *,
+    ret_max: float,
+    lookback: int = 60,
+) -> tuple[list[EntrySpec], int]:
+    """极端加速阻断（规格 §13 无交易条件 6：「处于极端加速阶段」不开新仓）。
+
+    信号日 close 较 lookback 日前涨幅 >= ret_max → 阻断入场。
+    定标依据（2026-09-06 八ETF两年闭环）：阈值 25%/60 日——挡掉的 6 笔
+    全为亏损合计 -7.6R，四笔大赚（+48.5/+38.2/+31.7/+15.6R，前 60 日
+    涨幅 2%~21%）全部保留；科创 2026-07 两笔顶部大亏（前 60 日 +50%）
+    同口径被挡。已知盲区：缓涨型顶部拐点（红利 2024-12，前 60 日仅
+    +14%）不属加速、本过滤不覆盖——如实标注，勿声称全能。
+    """
+    if not (0 < ret_max < 1):
+        raise ValueError(f"ret_max 需在 (0,1) 区间（如 0.25）: {ret_max}")
+    if lookback < 5:
+        raise ValueError(f"lookback 过短: {lookback}")
+    close = frame["close"].astype(float)
+    pos = pd.Series(range(len(close)), index=close.index)
+    ret = (
+        close / close.shift(lookback) - 1.0
+    )
+    hot = (ret >= ret_max).fillna(False)
+
+    kept: list[EntrySpec] = []
+    dropped = 0
+    for spec in specs:
+        if bool(hot.iloc[spec.signal_position]):
+            dropped += 1
+        else:
+            kept.append(spec)
+    return kept, dropped

@@ -298,6 +298,10 @@ class BacktestParams:
     # 深乖离增强（BCD 重测轮，规格 §4.7/§9 C1；默认关）：
     bias_filter: float | None = None         # None=关；-0.15 = 信号日低于 EMA120 15% 以上才入
 
+    # 极端加速阻断（规格 §13 无交易条件 6；默认关，2026-09-06 实测定标）：
+    accel_filter: float | None = None        # None=关；0.25 = 信号日前60日涨幅≥25% 阻断
+    accel_lookback: int = 60
+
     def validate(self) -> None:
         if self.module not in MODULE_ENTRY_CONTRACT:
             raise ValueError(f"未知交易模块: {self.module}")
@@ -335,6 +339,13 @@ class BacktestParams:
             raise ValueError(
                 f"bias_filter 必须为负（深乖离档，如 -0.15）: {self.bias_filter}"
             )
+
+        if self.accel_filter is not None and not (0 < self.accel_filter < 1):
+            raise ValueError(
+                f"accel_filter 需在 (0,1) 区间（如 0.25）: {self.accel_filter}"
+            )
+        if self.accel_lookback < 5:
+            raise ValueError(f"accel_lookback 过短: {self.accel_lookback}")
 
 
 def _metrics_dict(metrics: Any) -> dict:  # noqa: ANN401 - Metrics dataclass
@@ -427,6 +438,7 @@ def _execute_run_unlocked(params: BacktestParams) -> dict[str, Any]:
     touched_total = confirmed_total = filtered_rr_total = no_target_total = 0
     volume_filtered_total = profile_filtered_total = gap_filtered_total = shrink_filtered_total = 0
     bias_filtered_total = 0
+    accel_filtered_total = 0
     use_gaps = params.gap_target or params.gap_momentum
     for symbol, frame in sorted(frames.items()):
         prepared = prepare_frame(frame)
@@ -488,6 +500,13 @@ def _execute_run_unlocked(params: BacktestParams) -> dict[str, Any]:
                 frame, specs, bias_max=params.bias_filter
             )
             bias_filtered_total += dropped
+        if params.accel_filter is not None:
+            specs, dropped = filter_specs_by_acceleration(
+                frame, specs,
+                ret_max=params.accel_filter,
+                lookback=params.accel_lookback,
+            )
+            accel_filtered_total += dropped
         market = (
             "cn"
             if symbol.endswith((".SS", ".SZ")) or symbol.startswith("TH")
@@ -548,6 +567,7 @@ def _execute_run_unlocked(params: BacktestParams) -> dict[str, Any]:
             "filtered_by_profile": profile_filtered_total,
             "filtered_by_gap": gap_filtered_total,
             "filtered_by_bias": bias_filtered_total,
+            "filtered_by_accel": accel_filtered_total,
         },
         "groups": {
             str(net): {
