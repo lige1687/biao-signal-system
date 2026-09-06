@@ -646,6 +646,16 @@ def _prepare_discussion(
                     experience_items = exp_mod.experience_for_symbol(symbol)
                 except Exception:  # noqa: BLE001
                     experience_items = []
+                # 形态×打法适配（用户口径 2026-09-06：给一个标的要主动说
+                # 「它现在的形态适合什么打法」，不无脑等信号触发）：
+                # 近一年涨法画像（稳涨/急涨/下跌/震荡）+ 历史经验联动。
+                fit_block = None
+                try:
+                    from lei_signal.copilot import fit as fit_mod  # noqa: PLC0415
+
+                    fit_block = fit_mod.fit_advice(entry.result.frame)
+                except Exception:  # noqa: BLE001
+                    fit_block = None
                 # 横向机会：当前标的无系统买点候选时，带出当日扫描表里
                 # 其他 actionable/waiting 标的（用户口径 2026-09-05：聊 A
                 # 没买点时应主动提示 B/C 有观察价值，引导开下一个讨论）。
@@ -684,6 +694,8 @@ def _prepare_discussion(
                         "note_cn": "历史经验叙事层（回测定案报告），不参与技术判定",
                         "items": experience_items,
                     }
+                if fit_block and fit_block.get("available"):
+                    ctx_payload["fit"] = fit_block
                 if alternatives:
                     ctx_payload["alternatives"] = alternatives
                 ctx = context_from_result(entry.result)
