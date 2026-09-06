@@ -414,8 +414,16 @@ def _resolve_symbol_by_name(message: str, watch_items: list) -> str | None:
     # global）。名字完整出现是最强信号，以 100+名字长度 显著胜出。
     # 名字与消息都去空格再比：「半导体 SOXX」对「半导体SOXX」也要命中。
     msg_flat = message.replace(" ", "")
+    full_hits: list[tuple[int, str, str]] = []
     for symbol, name in names:
         if name and name.replace(" ", "") in msg_flat:
+            full_hits.append((len(name), symbol, name))
+    # 短名是另一个更长名字的真子串时，第一档作废——用户说的很可能是长名
+    # （「通信」嵌在「通信设备ETF」里：说「通信设备」不该被「通信」截走；
+    # 竞争检查对全部自选名做，不限于也进第一档的名字）。
+    all_names = [n for _, n in names if n]
+    for _, symbol, name in full_hits:
+        if not any(other != name and name in other for other in all_names):
             scored.append((100 + len(name), symbol))
     for frag in _CJK_RUN_RE.findall(message):
         if frag in _NAME_STOPWORDS:
@@ -696,6 +704,14 @@ def _prepare_discussion(
                     }
                 if fit_block and fit_block.get("available"):
                     ctx_payload["fit"] = fit_block
+                try:
+                    from lei_signal.copilot import winrate as winrate_mod  # noqa: PLC0415
+
+                    _w = winrate_mod.winrate_for(symbol)
+                    if _w:
+                        ctx_payload["winrate"] = _w
+                except Exception:  # noqa: BLE001
+                    pass
                 if alternatives:
                     ctx_payload["alternatives"] = alternatives
                 ctx = context_from_result(entry.result)

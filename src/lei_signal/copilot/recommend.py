@@ -120,6 +120,16 @@ def build_recommendation(
             from lei_signal.copilot import sentiment as sentiment_mod  # noqa: PLC0415
 
             sentiment_cn = sentiment_mod.symbol_sentiment_cn(it.symbol, sentiment_index)
+        # 历史胜率标注（2026-09-06 用户口径：给信号时带"这笔胜率怎么样"）：
+        # 标注层叙事参考，不评分不过滤。
+        winrate_cn = None
+        try:
+            from lei_signal.copilot import winrate as winrate_mod  # noqa: PLC0415
+
+            w = winrate_mod.winrate_for(it.symbol)
+            winrate_cn = (w or {}).get("winrate_cn")
+        except Exception:  # noqa: BLE001
+            winrate_cn = None
         items.append(RecommendItemDTO(
             symbol=it.symbol,
             display_name=it.display_name or it.symbol,
@@ -131,6 +141,7 @@ def build_recommendation(
             news_heat=heat,
             news_tags=tags,
             sentiment_cn=sentiment_cn,
+            winrate_cn=winrate_cn,
             score=round(score, 3),
             reasons=reasons,
         ))
