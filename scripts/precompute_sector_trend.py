@@ -99,6 +99,22 @@ def main() -> int:
         except Exception as exc:  # noqa: BLE001
             print(f"  ⚠ 腾讯资金流当日追加失败（不影响主快照）: {exc}")
 
+    # 散户情绪信号存证 + 触发推送（秒级；失败不阻断）
+    if not args.no_save:
+        try:
+            import subprocess as _sp
+
+            r2 = _sp.run(
+                [sys.executable, str(Path(__file__).resolve().parent / "sentiment_journal.py"), "record"],
+                capture_output=True, text=True, timeout=120,
+                env={**os.environ, "PYTHONPATH": str(Path(__file__).resolve().parents[1] / "src")},
+            )
+            tail = (r2.stdout or r2.stderr or "").strip().splitlines()
+            if tail:
+                print("✓ 情绪信号存证：" + tail[-1])
+        except Exception as exc:  # noqa: BLE001
+            print(f"  ⚠ 情绪信号存证失败（不影响主快照）: {exc}")
+
     print(f"⏱ 耗时 {time.time() - t0:.1f}s")
     return 0
 
