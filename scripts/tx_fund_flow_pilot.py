@@ -33,17 +33,19 @@ CACHE = Path(os.environ.get("LEI_CACHE_ROOT", Path.home() / ".lei_signal_lab/cac
 
 
 def trading_days(start: str, end: str) -> list[str]:
+    """交易日历：个股 parquet（近年）∪ 沪深300日线索引（更早年份）。"""
     import pandas as pd
 
-    df = pd.read_parquet(CACHE / "a_share_klines.parquet", columns=["date"])
-    days = sorted(set(df["date"].astype(str)))
-    return [d for d in days if start <= d <= end]
-
-
-# npx 并发会因 npm 缓存锁批量失败（实测 12 并发全军覆没）；优先用 npx 缓存
-# 的包入口直接 node 调用（无锁、省 ~1.5s/批），回落 npx。
-_PKG = Path.home() / ".npm/_npx/f124025a92f4edba/node_modules/westock-data-skillhub/scripts/index.js"
-_CMD_BASE = ["node", str(_PKG)] if _PKG.exists() else ["npx", "-y", "westock-data-skillhub@1.0.3"]
+    days: set[str] = set()
+    p1 = CACHE / "a_share_klines.parquet"
+    if p1.exists():
+        days |= set(pd.read_parquet(p1, columns=["date"])["date"].astype(str))
+    p2 = CACHE / "000300.SS.bars.parquet"
+    if p2.exists():
+        bars = pd.read_parquet(p2)
+        idx = bars.index if "date" not in bars.columns else pd.to_datetime(bars["date"])
+        days |= {str(pd.Timestamp(d).date()) for d in idx}
+    return sorted(d for d in days if start <= d <= end)
 
 
 def fetch_batch(syms: list[str], date: str) -> dict[str, dict]:

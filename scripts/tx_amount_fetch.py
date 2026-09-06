@@ -70,6 +70,7 @@ def main() -> int:
             return 0
 
     frames: list[pd.DataFrame] = []
+    frames_c: list[pd.DataFrame] = []
     lock_n = {"done": 0}
 
     def work(i: int) -> None:
@@ -80,6 +81,8 @@ def main() -> int:
         try:
             piv = df.pivot_table(index="date", columns="symbol", values="amount", aggfunc="sum")
             frames.append(piv)
+            piv_c = df.pivot_table(index="date", columns="symbol", values="last", aggfunc="sum")
+            frames_c.append(piv_c)
         except Exception:
             return
         lock_n["done"] += 1
@@ -92,6 +95,16 @@ def main() -> int:
     if not frames:
         print("抓取失败")
         return 1
+    merged_c = pd.concat(frames_c, axis=1)
+    merged_c = merged_c[sorted(merged_c.columns)]
+    merged_c.index = pd.to_datetime(merged_c.index)
+    merged_c = merged_c.sort_index()
+    OUT_C = CACHE / "tx_close_panel.parquet"
+    if OUT_C.exists():
+        oldc = pd.read_parquet(OUT_C)
+        merged_c = pd.concat([oldc, merged_c]).groupby(level=0).last().sort_index()
+    merged_c.to_parquet(OUT_C)
+
     merged = pd.concat(frames, axis=1)
     merged = merged[sorted(merged.columns)]
     merged.index = pd.to_datetime(merged.index)
