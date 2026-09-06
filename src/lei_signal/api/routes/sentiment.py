@@ -38,3 +38,21 @@ def dashboard() -> dict:
 def board_profile(code: str) -> dict:
     """单板块情绪画像：自身热度/相对热度/趋势档位/信号 + 语义读法。"""
     return market_mood.board_profile(code)
+
+
+@router.get("/confidence")
+def confidence() -> dict:
+    """证据账本：全部信号的 条件胜率/样本量/验证状态/适用边界 + 证伪清单。
+
+    供 AI（超级入口等）引用信号时的置信度依据——按账本约定，引用任何
+    信号必须同时给出条件胜率、样本量与适用边界。
+    """
+    import json as _json
+    from pathlib import Path as _Path
+
+    from lei_signal.data.cache import DEFAULT_CACHE_DIR as _DC
+
+    p = _Path(__file__).resolve().parents[4] / "configs" / "sentiment_evidence.json"
+    if not p.exists():
+        return {"available": False}
+    return _json.loads(p.read_text(encoding="utf-8"))

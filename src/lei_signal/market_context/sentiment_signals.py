@@ -139,14 +139,16 @@ def signal_state(*, z: float | None, r60_pct: float | None, b50: float | None,
         out["sig_heat_alarm"] = True
         out["sig_note_cn"] = (
             f"强势板块散户涌入警报：散户流入强度 z={z}（自身历史高位）且宽度 "
-            f"b50={b50:.0f}/b200={b200:.0f} 全面偏强——回测此形态 10 日 -9.3%、"
-            "29 例 0 板块幸免（research_proxy，单年样本，非买卖点）")
+            f"b50={b50:.0f}/b200={b200:.0f} 全面偏强——历史同条件：10 日 -9.3%、"
+            "29 例 0 板块幸免（p=0.0009，单年样本）；边界：仅 50&200 同高档，"
+            "反弹初档散户热为正向勿报；research_proxy，非买卖点")
     # 信号1：全A冰点 × 深弱 × 散户逆势涌入
     if cn_cold and hot and r60_pct is not None and b50 is not None \
             and r60_pct <= cfg["ice_r60_max"] and b50 < cfg["ice_b50_max"]:
         out["sig_icepoint_pick"] = True
         out["sig_note_cn"] = (
             f"冰点机会标注：全A情绪冰点 × 板块60日{r60_pct:.0f}% × 散户逆势涌入"
-            f"（z={z}）× b50={b50:.0f}——回测 10 日超额 +6.5~7.8%、79% 板块同向"
-            "（research_proxy，单年双事件样本，非买卖点）")
+            f"（z={z}）× b50={b50:.0f}——历史同条件：10日超额 +5.9~7.8%、"
+            "92% 板块同向（154 例，p<0.0001，单年双事件验证、多年终审待做）；"
+            "适用边界：仅冰点环境×深弱板块；research_proxy，非买卖点")
     return out
