@@ -124,8 +124,10 @@ const STAGE_TONE: Record<string, string> = {
   上涨: "up", 派发: "warn", 下跌: "down", 筑底: "info",
 };
 function StageBadge({ stageCn }: { stageCn: string }) {
-  const tone = STAGE_TONE[stageCn];
-  if (!tone) return <span className="macro-chip neutral">阶段未知</span>;
+  // stage_cn 可能带括号后缀（"派发（冲高回落）"），按前缀匹配色调
+  const key = Object.keys(STAGE_TONE).find((k) => stageCn.startsWith(k));
+  const tone = key ? STAGE_TONE[key] : undefined;
+  if (!tone) return <span className="macro-chip neutral">阶段待定</span>;
   const cls = tone === "up" ? "opportunity" : tone === "down" ? "danger" : tone === "warn" ? "caution" : "info";
   return <span className={`macro-chip ${cls}`}>{stageCn}</span>;
 }
@@ -134,6 +136,11 @@ function ZoneChip({ zone }: { zone: SectorBoardRow["zone"] }) {
   if (zone === "opportunity") return <span className="macro-chip info">机会位</span>;
   if (zone === "risk") return <span className="macro-chip danger">压力位</span>;
   return <span className="macro-chip neutral">常态区</span>;
+}
+
+/** 系统术语轻度人话化：SMA60/EMA20 → 60日/20日均线（阶段体系语言保留）。 */
+function humanize(text: string): string {
+  return text.replace(/SMA60/g, "60日均线").replace(/EMA20/g, "20日均线");
 }
 
 /* ── 持仓相关板块卡 ── */
@@ -153,7 +160,7 @@ function HoldingBoardCard({ b }: { b: SectorBoardRow }) {
       </div>
       <PositionBar b50={b.b50} />
       <div className="sb-next">
-        {b.sig_note_cn ?? b.next_watch ?? `${b.member_count ?? "?"} 只成分股 · 下一观察点待系统更新`}
+        {humanize(b.sig_note_cn ?? b.next_watch ?? `${b.member_count ?? "?"} 只成分股 · 下一观察点待系统更新`)}
       </div>
     </div>
   );
@@ -328,7 +335,7 @@ export default function SentimentSectorBlock({ view, heatAvailable, heatHint }: 
                   <ZoneChip zone={b.zone} />
                 </div>
                 <PositionBar b50={b.b50} />
-                <div className="sb-next">{b.sig_note_cn ?? b.next_watch ?? ""}</div>
+                <div className="sb-next">{humanize(b.sig_note_cn ?? b.next_watch ?? "")}</div>
               </div>
             ))}
           </div>
