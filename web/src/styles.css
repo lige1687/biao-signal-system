@@ -4724,3 +4724,34 @@ a { color: var(--accent); text-decoration: none; }
 .mood-hold-chip { font-size: 11.5px; padding: 2px 8px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.1); }
 .mood-hold-chip.danger { border-color: #d24a43; color: #d24a43; background: rgba(210,74,67,0.08); font-weight: 700; }
 .mood-hold-chip.watch { border-color: #b45309; color: #b45309; background: rgba(180,83,9,0.07); }
+
+/* ---- 全局情绪信号横幅（信号激活时才出现，2026-09-06） ---- */
+.sent-banner-wrap {
+  position: sticky; top: 0; z-index: 60;
+  display: flex; flex-direction: column; gap: 0;
+}
+.sent-banner {
+  display: flex; align-items: baseline; gap: 12px; width: 100%;
+  padding: 10px 18px; border: none; cursor: pointer;
+  font-size: 13px; line-height: 1.45; text-align: left;
+}
+.sent-banner-title { font-weight: 700; font-size: 13.5px; white-space: nowrap; }
+.sent-banner-body { flex: 1; }
+.sent-banner-go { white-space: nowrap; font-weight: 600; text-decoration: underline; }
+/* 冰点环境：冰蓝色系（机会型提醒，醒目但不恐吓） */
+.sent-banner-warn {
+  background: linear-gradient(90deg, #0e4c6e, #1170a0);
+  color: #eaf6ff;
+}
+/* 热警报：暖红（风险型提醒） */
+.sent-banner-alert {
+  background: linear-gradient(90deg, #8a1f28, #c2323d);
+  color: #fff2f2;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sent-banner { animation: sent-banner-in 0.35s ease-out; }
+  @keyframes sent-banner-in {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: none; }
+  }
+}

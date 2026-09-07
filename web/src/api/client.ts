@@ -82,7 +82,7 @@ import type { BoardProfile, SentimentDashboard, SentimentLight,
 
 const BASE = "/api";
 
-async function request<T>(path: string, init?: RequestInit): Promise<T> {
+export async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const resp = await fetch(`${BASE}${path}`, {
     headers: { "Content-Type": "application/json" },
     ...init,

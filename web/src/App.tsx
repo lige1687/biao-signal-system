@@ -1,6 +1,7 @@
 import { useSyncExternalStore } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import TopNav from "./components/TopNav";
+import SentimentAlertBanner from "./components/SentimentAlertBanner";
 import AgentConsole from "./components/AgentConsole";
 import DetailPage from "./pages/DetailPage";
 import FactorPanelPage from "./pages/FactorPanelPage";
@@ -10,6 +11,7 @@ import SectorsPage from "./pages/SectorsPage";
 import DailyBriefPage from "./pages/DailyBriefPage";
 import AgentWorkspacePage from "./pages/AgentWorkspacePage";
 import SentimentPage from "./pages/SentimentPage";
+import MindsetPage from "./pages/MindsetPage";
 import OpsPage from "./pages/OpsPage";
 import SupervisorPage from "./pages/SupervisorPage";
 import PortfolioPage from "./pages/PortfolioPage";
@@ -55,6 +57,7 @@ export default function App() {
   return (
     <>
       <TopNav />
+      <SentimentAlertBanner />
       <Routes>
         {/* 三栏看盘工作台：默认入口 */}
         <Route path="/" element={<WorkspacePage />} />
@@ -83,6 +86,8 @@ export default function App() {
         <Route path="/sentiment" element={<SentimentPage />} />
         {/* 我的持仓：基金/ETF 快照 + 赛道分组 + 系统结论（叙事标注层） */}
         <Route path="/portfolio" element={<PortfolioPage />} />
+        {/* 认知与心态：调研观点判断题卡片 + 温习篮子（纯认知沉淀，不进判定） */}
+        <Route path="/mindset" element={<MindsetPage />} />
         {/* 未知路径兜底：回看盘工作台，避免白屏 */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
