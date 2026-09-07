@@ -42,6 +42,12 @@ def board_profile(code: str) -> dict:
     return market_mood.board_profile(code)
 
 
+@router.get("/board/{code}/chart")
+def board_chart(code: str) -> dict:
+    """单板块「价格 × 情绪」对照图序列（板块卡点开的抽屉）。"""
+    return market_mood.board_chart_series(code)
+
+
 @router.get("/confidence")
 def confidence() -> dict:
     """证据账本：全部信号的 条件胜率/样本量/验证状态/适用边界 + 证伪清单。

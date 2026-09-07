@@ -424,6 +424,67 @@ def sector_boards_view() -> dict:
     }
 
 
+def board_chart_series(code: str) -> dict:
+    """单板块「价格 × 情绪」对照图序列（点开板块卡的抽屉用）。
+
+    三条线：板块指数收盘（前端换算涨跌幅）、情绪强度 b50（0-100，
+    板块内站上半年线股票占比）、散户小单净流入 20 日合计（亿元，
+    腾讯资金流试点数据 2021 起——用户看「跌的时候散户在买还是卖」）。
+    全部读缓存 JSON，无网络。
+    """
+    try:
+        rows = json.loads((_CACHE / "sector_trend_history.json").read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {"available": False}
+    name = None
+    try:
+        snap = _snap()
+        name = next((b.get("name") for b in snap.get("boards", []) if b.get("code") == code), None)
+    except (OSError, json.JSONDecodeError):
+        pass
+
+    close: dict[str, float] = {}
+    b50: dict[str, float] = {}
+    for r in rows:
+        b = (r.get("boards") or {}).get(code)
+        if not b:
+            continue
+        d = r["date"]
+        if b.get("close") is not None:
+            close[d] = b["close"]
+        if b.get("b50") is not None:
+            b50[d] = b["b50"]
+
+    retail20: dict[str, float] = {}
+    try:
+        tx = json.loads((_CACHE / "tx_sector_flow_pilot.json").read_text(encoding="utf-8"))
+        pts = (tx.get("boards") or tx).get(code) or []
+        s = pd.Series({pd.to_datetime(p["date"]): p.get("small_yi") for p in pts
+                       if p.get("small_yi") is not None}).sort_index()
+        r20 = s.rolling(20, min_periods=10).sum()
+        for ts, v in r20.dropna().items():
+            retail20[ts.strftime("%Y-%m-%d")] = round(float(v), 1)
+    except (OSError, json.JSONDecodeError):
+        pass
+
+    dates = sorted(set(close) | set(b50) | set(retail20))
+    if not dates:
+        return {"available": False}
+    return {
+        "available": True, "code": code, "name": name,
+        "dates": dates,
+        "close": [close.get(d) for d in dates],
+        "b50": [b50.get(d) for d in dates],
+        "retail20": [retail20.get(d) for d in dates],
+        "n_retail": len(retail20),
+        "note_cn": "三条线怎么看：蓝线=板块指数涨跌（左轴，起点=100）；橙线=情绪强度"
+                   "（右轴 0-100，板块内站上半年线的股票占比，≤20 机会位 / ≥80 压力位）；"
+                   "柱=散户小单净流入近20天合计（散户越买越猛柱越高）。"
+                   "典型看點：指数下跌但散户柱还在放大=散户逆势接刀；"
+                   "指数新高+强度掉头向下=上涨家数在减少（隐患）。",
+    }
+
+
 def board_profile(code: str) -> dict:
     """单板块情绪画像：自身热度（z）/ 相对热度（横截面分位）/ 趋势档位 / 信号 + 语义读法。"""
     try:
