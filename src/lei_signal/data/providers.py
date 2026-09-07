@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import json
 import re
+import threading
 import time
 import urllib.error
 import urllib.parse
@@ -1230,6 +1231,12 @@ class SohuSectorProvider:
         return df[["open", "high", "low", "close", "volume"]]
 
 
+# 进程级 MiniRacer 单例（见 THSBoardProvider._compute_cookie 注释：
+# V8 address_pool 二次实例化会 FATAL 崩掉整个进程）
+_MINI_RACER: dict[str, Any] = {}
+_MINI_RACER_LOCK = threading.Lock()
+
+
 class THSBoardProvider:
     """同花顺行业板块日线（主用源）。
 
@@ -1292,7 +1299,13 @@ class THSBoardProvider:
         return bool(cls._CODE_RE.search(symbol))
 
     def _compute_cookie(self) -> str:
-        """用 ths.js 算 v cookie（py_mini_racer 执行混淆 JS）。"""
+        """用 ths.js 算 v cookie（py_mini_racer 执行混淆 JS）。
+
+        2026-09-07 生产修复：MiniRacer 实例必须进程级单例——V8 的
+        address_pool 只能初始化一次，第二次 ``MiniRacer()`` 直接
+        ``[FATAL:address_pool_manager] Check failed`` 整个进程崩掉
+        （uvicorn 每次重算 cookie 都 new 一个，崩过多次）。
+        """
         import time as _time
         if self._cookie and (_time.time() - self._cookie_at) < self._COOKIE_TTL:
             return self._cookie
@@ -1302,10 +1315,11 @@ class THSBoardProvider:
             raise DataUnavailableError(
                 "同花顺板块需要 py_mini_racer（pip install py_mini_racer）"
             ) from exc
-        js_text = self._THS_JS_PATH.read_text(encoding="utf-8")
-        racer = py_mini_racer.MiniRacer()
-        racer.eval(js_text)
-        token = racer.call("v")
+        with _MINI_RACER_LOCK:
+            if _MINI_RACER.get("inst") is None:
+                _MINI_RACER["inst"] = py_mini_racer.MiniRacer()
+                _MINI_RACER["inst"].eval(self._THS_JS_PATH.read_text(encoding="utf-8"))
+        token = _MINI_RACER["inst"].call("v")  # type: ignore[union-attr]
         if not isinstance(token, str) or not token:
             raise DataUnavailableError("同花顺 ths.js 算出的 v cookie 为空")
         self._cookie = token
