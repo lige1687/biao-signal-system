@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { sentimentApi } from "../api/client";
 import { etfsForSector } from "../data/sectorEtfMap";
+import SentimentSectorBlock from "../components/SentimentSectorBlock";
 import type { SentimentDashboard } from "../types";
 
 /* ── 情绪仪表盘页：全A / 美股 / 美国调查情绪 / A股板块散户热度 ───────────
@@ -73,6 +74,15 @@ export default function SentimentPage() {
       {/* ── 第一屏结论条：一句话回答"现在怎样、要不要行动" ── */}
       <VerdictBar data={data} />
 
+      {/* ── 板块情绪主区块（用户重点：图表化、持仓优先、推荐观察） ── */}
+      {data.sector_boards?.available && (
+        <SentimentSectorBlock
+          view={data.sector_boards}
+          heatAvailable={data.sector_heat.available}
+          heatHint="散户热度分位（散户相对大资金的活跃度）数据重建中，约 9 月底恢复后叠加到各板块"
+        />
+      )}
+
       {/* ── 行动区：有信号时给操作卡 + 持仓风险 ── */}
       {data.action?.available && (nPicks > 0 || nAlarms > 0 || holdDanger.length > 0) && (
         <section className="mood-action">
@@ -137,39 +147,6 @@ export default function SentimentPage() {
 
       {/* ── 两个经过历史验证的情绪信号：结构化卡片，激活/未激活一眼可见 ── */}
       <SignalCards cn={cn} />
-
-      {/* ── A股板块散户热度（仅一、二级行业） ── */}
-      <section className="sx-rail-card" style={{ marginTop: 14 }}>
-        <div className="sx-rail-head">
-          <span className="sx-rail-title">A股板块散户热度</span>
-          <span className="sx-rail-sub">
-            {data.sector_heat.available
-              ? `散户小单vs超大单 · 近${data.sector_heat.meta?.window_days}天 · 只看大板块（${data.sector_heat.boards.length}个有数据）`
-              : "数据重建中"}
-          </span>
-        </div>
-        {data.sector_heat.available ? (
-          <div className="mood-sector-grid">
-            {data.sector_heat.boards.slice(0, 40).map((b) => (
-              <div key={b.code} className={`mood-sector-chip${b.sig_heat_alarm ? " warn" : b.sig_icepoint_pick ? " ice" : b.heat_warning ? " warn" : b.heat_hot ? " hot" : b.heat_cold ? " cold" : ""}`}
-                   title={(b as { sig_note_cn?: string | null }).sig_note_cn ?? b.heat_note_cn ?? `散户热度分位 ${b.heat_pctile}`}>
-                <span>{b.name}{b.sig_heat_alarm ? " ⚠强热" : b.sig_icepoint_pick ? " ❄冰点关注" : ""}</span>
-                <b>{b.heat_pctile?.toFixed(0)}</b>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="muted" style={{ padding: "10px 8px", lineHeight: 1.8 }}>
-            板块资金流数据正在每日自动累积（需要连续 20 个交易日的数据才能算热度，约 9 月底恢复）。
-            恢复后这里会显示：每个大板块的散户热度分位（0–100，越高表示散户相对大资金越活跃），
-            红色=散户过热、蓝色=散户冰点。
-          </div>
-        )}
-        <div className="muted mood-note">
-          怎么看：数字=散户热度分位（近20天散户小单相对超大单的活跃程度，在所有大板块里排名）。
-          高≠必跌、低≠必涨，只作参考背景；红/蓝标记含义同上。
-        </div>
-      </section>
 
       <div className="muted mood-note" style={{ marginTop: 10 }}>{data.disclaimer_cn}</div>
     </div>

@@ -2359,9 +2359,39 @@ export interface SentimentDashboard {
     meta?: { metric?: string; window_days?: number; rule_version?: string; n_pool?: number };
     boards: MoodSectorBoard[];
   };
+  /** 板块情绪主视图（2026-09-07：大板块全量 + 持仓标记 + 推荐观察）。 */
+  sector_boards: SectorBoardsView;
   market_structure: MarketStructure;
   action: SentimentAction;
   disclaimer_cn: string;
+}
+
+/** 情绪页板块视图里的大板块行。 */
+export interface SectorBoardRow {
+  code: string; name: string;
+  b20: number | null; b50: number; b200: number | null;
+  zone: "opportunity" | "risk" | "neutral";
+  stage: string | null; stage_cn: string;
+  pct_change: number | null; rs_pctile: number | null;
+  long_trend_cn: string | null;
+  next_watch: string | null; next_watch_kind: string | null;
+  holding: boolean;
+  sig_icepoint_pick: boolean; sig_heat_alarm: boolean;
+  sig_note_cn: string | null;
+  member_count: number | null;
+}
+export interface SectorRecommendation {
+  code: string; name: string; b50: number; stage_cn: string;
+  holding: boolean; zone: string;
+  kind: "opportunity" | "risk" | "upgrade_watch";
+  reason_cn: string;
+}
+export interface SectorBoardsView {
+  available: boolean; as_of?: string;
+  n_boards: number; n_holding: number;
+  boards: SectorBoardRow[];
+  recommendations: SectorRecommendation[];
+  zone_note_cn: string;
 }
 
 

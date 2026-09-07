@@ -4764,6 +4764,45 @@ a { color: var(--accent); text-decoration: none; }
 .mood-signal-body p { font-size: 12.5px; line-height: 1.7; margin: 8px 0 0; color: var(--text-dim); }
 .mood-signal-body p b { color: var(--text); }
 
+/* 情绪页·板块主区块（2026-09-07 二次重做：图表化 + 持仓优先 + 推荐观察） */
+.sb-main { padding: 14px 16px; }
+.sb-sub-title { font-size: 13px; font-weight: 700; margin: 4px 0 8px; }
+.sb-breadth-block { border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+.sb-breadth-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.sb-hold-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+.sb-hold-card {
+  border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px;
+  background: var(--bg-panel);
+}
+.sb-hold-card.z-risk { border-color: rgba(210,74,67,0.5); background: rgba(210,74,67,0.05); }
+.sb-hold-card.z-opp { border-color: rgba(77,127,196,0.5); background: rgba(77,127,196,0.05); }
+.sb-hold-card.watched-card { border-color: rgba(8,145,178,0.55); background: rgba(8,145,178,0.05); }
+.sb-card-head { display: flex; align-items: center; gap: 6px; font-size: 13.5px; flex-wrap: wrap; }
+.sb-card-head .spacer { flex: 1; }
+.sb-card-head b { font-size: 13.5px; }
+.sb-big-row { display: flex; align-items: baseline; gap: 8px; margin: 6px 0 4px; }
+.sb-big-num { font-size: 26px; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1; }
+.sb-big-num i { font-style: normal; font-size: 13px; font-weight: 600; color: var(--text-dim); }
+.sb-pct { font-size: 11.5px; }
+.sb-posbar {
+  position: relative; height: 12px; border-radius: 6px; margin: 6px 0 4px;
+  background: linear-gradient(90deg,
+    rgba(77,127,196,0.35) 0%, rgba(77,127,196,0.35) 20%,
+    rgba(0,0,0,0.07) 20%, rgba(0,0,0,0.07) 80%,
+    rgba(210,74,67,0.35) 80%, rgba(210,74,67,0.35) 100%);
+}
+.sb-posbar-mark {
+  position: absolute; top: -4px; width: 4px; height: 20px; border-radius: 2px;
+  background: #1f2937; transform: translateX(-2px); box-shadow: 0 0 0 1px rgba(255,255,255,0.9);
+}
+.sb-posbar-tick { position: absolute; top: 2px; height: 8px; width: 1px; background: rgba(0,0,0,0.25); }
+.sb-next { font-size: 11px; color: var(--text-faint); line-height: 1.5; margin-top: 2px; }
+.sb-rec-list { display: flex; flex-direction: column; gap: 8px; }
+.sb-rec-card { border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+.sb-rec-card.watched { border-color: rgba(8,145,178,0.55); background: rgba(8,145,178,0.05); }
+.sb-rec-body { font-size: 12.5px; line-height: 1.65; color: var(--text-dim); margin-top: 4px; }
+.sb-rec-meta { font-size: 11px; color: var(--text-faint); margin-top: 4px; }
+
 /* ---- 全局情绪信号横幅（信号激活时才出现，2026-09-06） ---- */
 .sent-banner-wrap {
   position: sticky; top: 0; z-index: 60;
