@@ -212,7 +212,7 @@ function VerdictBar({ data }: { data: SentimentDashboard }) {
           全A情绪 <b style={{ color: MOOD_TONE[cn.state ?? "中"] }}>{cn.state ?? "?"}</b>
           {" · "}美股宽度 {data.us_mood.breadth.ok ? `${data.us_mood.breadth.breadth_50}%（${data.us_mood.breadth.state === "宽" ? "偏强" : "偏弱"}）` : "不可用"}
           {data.market_structure?.available && data.market_structure.polar != null && (
-            <>{" · "}A股 <b>{(data.market_structure.polar ?? 0) >= 50 ? "结构市（强弱分化）" : "整体市"}</b></>
+            <>{" · "}A股 <b>{(data.market_structure.polar ?? 0) >= 50 ? "结构市（强弱分化）" : (data.market_structure.polar ?? 0) >= 25 ? "中度分化" : "单边市"}</b></>
           )}
         </div>
       </div>
@@ -291,20 +291,25 @@ function MarketStructureCard({ data }: { data: SentimentDashboard }) {
       </section>
     );
   }
-  const isStruct = (ms.polar ?? 0) >= 50;
+  const polar = ms.polar ?? 0;
+  const isStruct = polar >= 50;
+  const isMid = polar >= 25 && !isStruct;
+  const structLabel = isStruct ? "结构市" : isMid ? "中度分化" : "单边市";
   return (
     <section className="sx-rail-card mood-card">
       <CardHead
         title="A股市场结构"
-        badge={<Badge tone={isStruct ? "caution" : "neutral"}>{isStruct ? "结构市" : "整体市"}</Badge>}
+        badge={<Badge tone={isStruct ? "caution" : "neutral"}>{structLabel}</Badge>}
         verdict={isStruct
           ? "强弱板块同时大量存在——别用大盘一刀切，板块要单独看"
-          : "板块涨跌比较同步，大盘环境可作整体参考"}
+          : isMid
+            ? "板块有一定分化，但还没到「各走各的」的程度"
+            : "板块涨跌比较同步，大盘环境可作整体参考"}
         verdictColor={isStruct ? "#b45309" : "#4b5563"}
       />
       <Row name="强弱分化度" strong
         hint="强势板块占比+弱势板块占比。大于50=结构市（一半以上板块处于明显强或明显弱），说明市场分化严重"
-        value={<>{ms.polar?.toFixed(0)}<span className="muted">（≥50 即结构市）</span></>} />
+        value={<>{polar.toFixed(0)}<span className="muted">（≥50 即结构市）</span></>} />
       <Row name="强势板块占比 / 弱势板块占比"
         hint="板块内站上50日线的股票占比>70%算强势板块，<30%算弱势板块"
         value={`${ms.strong_pct?.toFixed(0)}% / ${ms.weak_pct?.toFixed(0)}%`} />
