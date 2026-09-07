@@ -73,6 +73,7 @@ async function* readSse(
 }
 
 const QUICK = [
+  { label: "最近机会", kind: "scout" },
   { label: "今天看什么", kind: "recommend" },
   { label: "持仓速览", kind: "holdings" },
   { label: "我要报单", kind: "trade" },

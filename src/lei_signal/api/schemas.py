@@ -1262,6 +1262,28 @@ class OpsCardDTO(BaseModel):
     push_summary_cn: str = ""
 
 
+class ScoutItemDTO(BaseModel):
+    """机会侦察条目：既有信号/已验证规则的聚合展示（叙事参考层）。"""
+
+    symbol: str | None = None
+    display_name: str = ""
+    kind: str                       # trend / ambush / sentiment
+    kind_cn: str
+    verdict_cn: str = ""
+    detail_cn: str = ""
+    winrate_cn: str | None = None
+
+
+class ScoutCardDTO(BaseModel):
+    """看看最近机会：趋势信号 / 埋伏位 / 情绪信号三类聚合（零 LLM）。"""
+
+    available: bool = False
+    trend: list[ScoutItemDTO] = []
+    ambush: list[ScoutItemDTO] = []
+    sentiment: list[ScoutItemDTO] = []
+    note_cn: str = ""
+
+
 class CreateSessionRequest(BaseModel):
     symbol: str | None = None
     title_cn: str = ""

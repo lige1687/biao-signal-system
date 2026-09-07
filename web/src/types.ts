@@ -2293,6 +2293,14 @@ export interface OpsCard {
   push_summary_cn: string;
 }
 
+export interface ScoutItem {
+  symbol?: string | null; display_name: string; kind: string; kind_cn: string;
+  verdict_cn?: string; detail_cn?: string; winrate_cn?: string | null;
+}
+export interface ScoutCard {
+  available: boolean; trend: ScoutItem[]; ambush: ScoutItem[];
+  sentiment: ScoutItem[]; note_cn: string;
+}
 export interface TradesResponse {
   trades: FundTrade[];
   positions: FundPosition[];

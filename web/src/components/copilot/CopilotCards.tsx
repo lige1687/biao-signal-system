@@ -240,7 +240,63 @@ export function CopilotCardDispatcher({
     return <HoldingsCardView data={card.data as HoldingsData} />;
   if (card.card_type === "review")
     return <ReviewCardView review={card.data as ReviewCard} />;
+  if (card.card_type === "scout")
+    return <ScoutCardView data={card.data as ScoutCard} />;
   return null;
+}
+
+type ScoutItem = {
+  symbol?: string | null; display_name: string; kind: string; kind_cn: string;
+  verdict_cn?: string; detail_cn?: string; winrate_cn?: string | null;
+};
+type ScoutCard = {
+  available: boolean; trend: ScoutItem[]; ambush: ScoutItem[];
+  sentiment: ScoutItem[]; note_cn: string;
+};
+
+/** 机会侦察卡：趋势信号/埋伏位/情绪信号三类聚合（叙事参考层）。 */
+export function ScoutCardView({ data }: { data: ScoutCard }) {
+  const groups: [string, ScoutItem[]][] = [
+    ["① 趋势信号（系统判定）", data.trend],
+    ["② 定投埋伏位（下跌型×筹码密集区）", data.ambush],
+    ["③ 情绪信号", data.sentiment],
+  ];
+  return (
+    <div className="cp-card">
+      <div className="cp-label">最近机会扫描（每项带历史依据 · 叙事参考层）</div>
+      {!data.available && (
+        <div className="ops-empty">当前三类机会均未激活——空仓等待也是一种操作。</div>
+      )}
+      {groups.map(([title, items]) =>
+        items.length === 0 ? null : (
+          <div key={title} style={{ marginTop: 10 }}>
+            <div className="cp-label" style={{ opacity: 0.85 }}>{title}</div>
+            {items.map((it, i) => (
+              <div key={i} className="cp-row" style={{ alignItems: "baseline" }}>
+                <span className="cp-sym">
+                  {it.display_name || it.kind_cn}
+                </span>
+                <span style={{ flex: 1 }}>
+                  <span className={it.kind === "ambush" ? "cp-up" : ""}>
+                    {it.verdict_cn}
+                  </span>
+                  {it.detail_cn && (
+                    <span className="muted"> — {it.detail_cn}</span>
+                  )}
+                  {it.winrate_cn && (
+                    <div className="muted" style={{ fontSize: 11, marginTop: 2 }}>
+                      历史：{it.winrate_cn}
+                    </div>
+                  )}
+                </span>
+              </div>
+            ))}
+          </div>
+        ),
+      )}
+      <div className="muted" style={{ fontSize: 11, marginTop: 8 }}>{data.note_cn}</div>
+    </div>
+  );
 }
 
 /** 基金台账区（持仓页挂载）：真实成交 + 持仓盈亏速览。 */

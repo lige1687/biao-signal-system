@@ -201,6 +201,28 @@ def dispatch(request: Request, body: CopilotDispatchRequest) -> CopilotDispatchR
     from lei_signal.copilot.intent import parse_intent, parse_trade_report  # noqa: PLC0415
 
     intent = parse_intent(body.message)
+    if intent.kind == "scout":
+        from lei_signal.api.schemas import ScoutCardDTO, ScoutItemDTO  # noqa: PLC0415
+        from lei_signal.copilot.scout import scout  # noqa: PLC0415
+
+        with closing(connect(_db_path(request))) as conn:
+            pack = scout(request, conn)
+        def _items(rows: list[dict]) -> list[ScoutItemDTO]:
+            return [ScoutItemDTO(**r) for r in rows if isinstance(r, dict)]
+        card = ScoutCardDTO(
+            available=pack.get("available", False),
+            trend=_items(pack.get("trend") or []),
+            ambush=_items(pack.get("ambush") or []),
+            sentiment=_items(pack.get("sentiment") or []),
+            note_cn=pack.get("note_cn", ""),
+        )
+        note = (
+            "当下机会扫描：趋势信号 X 项、埋伏位 Y 项、情绪信号 Z 项——"
+            "每项带历史依据，详见卡片。"
+        ).replace("X", str(len(card.trend))).replace("Y", str(len(card.ambush))).replace("Z", str(len(card.sentiment)))
+        if not card.available:
+            note = "扫了一圈：当前没有符合条件的机会（趋势信号、埋伏位、情绪信号均未激活）——空仓等待也是一种操作。"
+        return CopilotDispatchReply(note_cn=note, card={"card_type": "scout", "data": card.model_dump()})
     if intent.kind == "recommend":
         card = _recommend_card(request)
         with closing(connect(_db_path(request))) as conn:
