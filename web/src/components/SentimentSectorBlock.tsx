@@ -463,16 +463,10 @@ export default function SentimentSectorBlock({ view, heatAvailable, heatHint }: 
         </div>
       </div>
 
-      {/* 持仓相关板块（优先展示） */}
-      <div className="sb-sub-title" style={{ marginTop: 14 }}>持仓相关板块（{holdings.length} 个 · 点卡片看对照图）</div>
-      <div className="sb-hold-grid">
-        {holdings.map((b) => <HoldingBoardCard key={b.code} b={b} onOpen={() => open(b)} />)}
-      </div>
-
-      {/* 我的观察（用户自己选的） */}
+      {/* 我的观察（用户自己选的——用户口径 2026-09-07：放最上边） */}
       {watchedBoards.length > 0 && (
         <>
-          <div className="sb-sub-title" style={{ marginTop: 14 }}>我的观察（{watchedBoards.length} 个 · 自己选的，可随时移除 · 点卡片看对照图）</div>
+          <div className="sb-sub-title" style={{ marginTop: 14 }}>★ 我的观察（{watchedBoards.length} 个 · 自己选的，可随时移除 · 点卡片看对照图）</div>
           <div className="sb-hold-grid">
             {watchedBoards.map((b) => (
               <div key={b.code} className="sb-hold-card watched-card clickable" onClick={() => open(b)} title="点开：价格 × 情绪对照图">
@@ -493,6 +487,12 @@ export default function SentimentSectorBlock({ view, heatAvailable, heatHint }: 
           </div>
         </>
       )}
+
+      {/* 持仓相关板块 */}
+      <div className="sb-sub-title" style={{ marginTop: 14 }}>持仓相关板块（{holdings.length} 个 · 点卡片看对照图）</div>
+      <div className="sb-hold-grid">
+        {holdings.map((b) => <HoldingBoardCard key={b.code} b={b} onOpen={() => open(b)} />)}
+      </div>
 
       {/* 推荐观察（阈值触发，用户决定加不加） */}
       <div className="sb-sub-title" style={{ marginTop: 14 }}>
@@ -567,18 +567,10 @@ export function UsSectorBlock({ view }: { view: SectorBoardsView }) {
         </span>
       </div>
 
-      {/* 全部行业卡（点开看对照图） */}
-      <div className="sb-sub-title" style={{ marginTop: 4 }}>全部行业（点卡片看「价格 × 情绪」对照图）</div>
-      <div className="sb-hold-grid">
-        {boards.map((b) => (
-          <BoardCard key={b.code} b={b} onOpen={() => open(b)} pctLabel="近20日" />
-        ))}
-      </div>
-
-      {/* 我的观察 */}
+      {/* 我的观察（用户口径：放最上边；与 A股共用观察列表） */}
       {watched.length > 0 && (
         <>
-          <div className="sb-sub-title" style={{ marginTop: 14 }}>我的观察（{watched.length} 个 · 与 A股共用观察列表）</div>
+          <div className="sb-sub-title" style={{ marginTop: 4 }}>★ 我的观察（{watched.length} 个 · 与 A股共用观察列表 · 点卡片看对照图）</div>
           <div className="sb-hold-grid">
             {watched.map((b) => (
               <div key={b.code} className="sb-hold-card watched-card clickable" onClick={() => open(b)} title="点开：价格 × 情绪对照图">
@@ -599,6 +591,14 @@ export function UsSectorBlock({ view }: { view: SectorBoardsView }) {
           </div>
         </>
       )}
+
+      {/* 全部行业卡（点开看对照图） */}
+      <div className="sb-sub-title" style={{ marginTop: 14 }}>全部行业（点卡片看「价格 × 情绪」对照图）</div>
+      <div className="sb-hold-grid">
+        {boards.map((b) => (
+          <BoardCard key={b.code} b={b} onOpen={() => open(b)} pctLabel="近20日" />
+        ))}
+      </div>
 
       {/* 推荐观察 */}
       <div className="sb-sub-title" style={{ marginTop: 14 }}>
