@@ -45,9 +45,9 @@ export default function OpsPage() {
         </button>
       </div>
     );
-  const ops = q.data;
-  // K线联动选中态：默认取第一个出现的标的（计划待办优先，其次观察/持仓）
+  // K线联动选中态：必须在所有 early-return 之前（React hook 规则）
   const [picked, setPicked] = useState<string | null>(null);
+  const ops = q.data;
   const firstSym =
     ops.plan_todos[0]?.symbol ??
     ops.watch_triggers[0]?.symbol ??
