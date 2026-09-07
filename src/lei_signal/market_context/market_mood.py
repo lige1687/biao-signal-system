@@ -288,7 +288,11 @@ def market_structure() -> dict:
     l1l2 = None
     try:
         snap = json.loads((_CACHE / "sector_trend_snapshot.json").read_text(encoding="utf-8"))
-        l1l2 = {b["code"] for b in snap.get("boards", []) if (b.get("level") or 3) <= 2}
+        # 大板块池 = 一、二级行业 且成分股 ≥30 只：7 只的「渔业」、6 只的
+        # 「国有大型银行Ⅲ」这类窄板块 b50 一只股票就能从 80% 跳到 100%，
+        # 进强/弱榜只会制造噪声（用户口径：通信、有色级别才算大板块）。
+        l1l2 = {b["code"] for b in snap.get("boards", [])
+                if (b.get("level") or 3) <= 2 and (b.get("member_count") or 0) >= 30}
     except (OSError, json.JSONDecodeError):
         l1l2 = None
 
@@ -307,11 +311,13 @@ def market_structure() -> dict:
     if not series:
         return {"available": False}
     last = series[-1]
-    # 当前热/冷板块群（强/弱名单，来自快照）
+    # 当前热/冷板块群（强/弱名单，来自快照；同用大板块池）
     groups = {"strong": [], "weak": []}
     try:
         for b in snap.get("boards", []):
             if (b.get("level") or 3) > 2 or b.get("b50") is None:
+                continue
+            if (b.get("member_count") or 0) < 30:
                 continue
             item = {"name": b["name"], "b50": b["b50"], "code": b["code"]}
             if b["b50"] > 70:
@@ -332,7 +338,7 @@ def market_structure() -> dict:
         "median_b50": last["median_b50"],
         "series": series[-120:],
         "strong_boards": groups["strong"][:10], "weak_boards": groups["weak"][:10],
-        "note_cn": "极化指数 = b50>70 板块占比 + b50<30 占比（一、二级行业池）。"
+        "note_cn": "极化指数 = b50>70 板块占比 + b50<30 占比（一、二级行业且成分股≥30只的大板块池）。"
                    "高极化 + 中位中性 = 结构市：热板块按警报读、冷板块按机会读，分别对待。",
     }
 
