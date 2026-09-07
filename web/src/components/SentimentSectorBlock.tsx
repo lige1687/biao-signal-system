@@ -81,9 +81,10 @@ function BoardChartDrawer({ code, name, onClose, us }: { code: string; name: str
         { type: "value", name: "情绪强度%", min: 0, max: 100, nameTextStyle: { fontSize: 10 }, splitLine: { show: false } },
         { type: "value", show: false, scale: true }, // 散户净流入柱的隐藏轴
       ],
+      // 默认窗口=最近一年（约250交易日），用户口径 2026-09-07；拖滑块看更长
       dataZoom: [
-        { type: "inside" },
-        { type: "slider", height: 14, bottom: 10 },
+        { type: "inside", start: Math.max(0, 100 - (250 / data.dates.length) * 100), end: 100 },
+        { type: "slider", height: 14, bottom: 10, start: Math.max(0, 100 - (250 / data.dates.length) * 100), end: 100 },
       ],
       series: [
         {
