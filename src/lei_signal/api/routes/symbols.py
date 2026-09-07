@@ -2066,8 +2066,8 @@ def market_context_breadth_history(
     # 不再返回原 fixture/dapanyuntu 假序列；缓存为空时返回空（趋势图显示占位）。
     if mid == MarketId.CN_ALL_A:
         from lei_signal.market_context.a_share_breadth import get_ma_breadth_history
-        # 全A 真宽度历史已预计算落盘（最多 ~1260 交易日），强制返回全量，
-        # 不被前端 lookback 截断，叠加图/趋势图才能铺满整个窗口。
+        # 读侧合并 33 年研究全史 + live 尾部（合并逻辑在 get_ma_breadth_history 内），
+        # 强制返回全量，不被前端 lookback 截断，叠加图/趋势图才能铺满整个窗口。
         hist = get_ma_breadth_history(lookback_days=12600)
         return {
             "market_id": market_id,

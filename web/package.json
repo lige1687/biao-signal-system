@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "test:structure-controls": "esbuild src/components/klineStructureMarks.ts --bundle --platform=node --format=esm --outfile=/tmp/lei-kline-structure-marks.mjs && node run-structure-regression.mjs",
+    "test:factor-panel": "esbuild src/pages/factorPanelLogic.ts --bundle --platform=node --format=esm --outfile=/tmp/lei-factor-panel-logic.mjs && node run-factor-panel-regression.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
