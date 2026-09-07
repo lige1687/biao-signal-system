@@ -162,7 +162,63 @@ def main() -> int:
         logging.info(
             "无推送级事件（exit=%s actionable=%s）", has_exit, has_actionable
         )
+
+    # 情绪信号推送（2026-09-06 用户口径：冰点+宽度的「入口外提醒」）——
+    # 全A三票冰点环境出现即推（一天不等的黄金坑前提），宽度读数附上
+    # 佐证；热警报在板块热度数据可用时自动扫描（数据重建期如实跳过）。
+    try:
+        _push_sentiment_signals(run_date, args.dry_run, _notifiers(args.dry_run))
+    except Exception as exc:  # noqa: BLE001 — 情绪推送失败不阻断跑批
+        print(f"[sentiment-push] 失败：{exc}", file=sys.stderr)
     return 0
+
+
+def _push_sentiment_signals(run_date: str, dry_run: bool, notifiers) -> None:
+    from lei_signal.notify.base import NotificationPayload
+
+    from lei_signal.market_context import market_mood as mm
+
+    cn = mm.cn_mood() or {}
+    if str(cn.get("state")) != "cold":
+        logging.info("情绪信号推送：全A非冰点（%s），无冰点级提醒", cn.get("state"))
+        return
+    breadth_note = ""
+    try:
+        from lei_signal.copilot import breadth as breadth_mod
+
+        b = breadth_mod.a_share_breadth() or {}
+        if b.get("available"):
+            breadth_note = (
+                f"\n宽度佐证：20日线上方 {b.get('ma20_pct', 0):.0f}%、"
+                f"200日线上方 {b.get('ma200_pct', 0):.0f}%"
+                f"（历史双≤20% 后 120 日 13/13 标的上涨）"
+            )
+    except Exception:  # noqa: BLE001
+        breadth_note = ""
+    heat = mm.sector_heat_boards() or {}
+    boards = heat.get("boards") or []
+    scan_note = (
+        f"\n板块扫描：热度覆盖 {len(boards)} 个（冰点机会明细=深弱板块×"
+        "散户逆势涌入，历史 10 日超额 +6~8%、154 例 92% 同向）"
+        if boards else
+        "\n板块热度数据重建中，冰点机会明细暂不可算——但环境本身已值得留意"
+    )
+    payload = NotificationPayload(
+        title=f"❄ 情绪面·全A冰点环境出现（{run_date}）",
+        body_md=(
+            f"全A情绪三票冰点：{cn.get('state_cn') or '多数冷'}。"
+            f"{breadth_note}{scan_note}"
+            "\n\n*研究代理·叙事层信号，不构成买卖点；冰点机会需板块级"
+            "四条件齐备，详情问 Agent 或看 /ops*"
+        ),
+        tier=1,
+        plan_id="sentiment-icepoint",
+    )
+    for notifier in notifiers:
+        try:
+            notifier.send(payload)
+        except Exception as exc:  # noqa: BLE001
+            print(f"[{type(notifier).__name__}] 情绪推送失败：{exc}", file=sys.stderr)
 
 
 if __name__ == "__main__":

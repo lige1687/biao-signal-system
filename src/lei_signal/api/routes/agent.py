@@ -713,6 +713,28 @@ def _prepare_discussion(
                     }
                 if fit_block and fit_block.get("available"):
                     ctx_payload["fit"] = fit_block
+                # 情绪信号状态（2026-09-06 用户口径：讨论中主动提醒）：
+                # 标的讨论也带全A情绪环境与两条信号的激活状态——AI 依据
+                # 提示词规则在激活/警报时必须主动提，不等用户问。
+                try:
+                    from lei_signal.market_context import market_mood as mm
+
+                    _cn = mm.cn_mood() or {}
+                    _heat = mm.sector_heat_boards() or {}
+                    ctx_payload["sentiment_signals"] = {
+                        "cn_mood": {
+                            "state": _cn.get("state"),
+                            "state_cn": _cn.get("state_cn"),
+                        },
+                        "icepoint_active": str(_cn.get("state")) == "cold",
+                        "heat_boards_n": len(_heat.get("boards") or []),
+                        "note_cn": (
+                            "情绪信号状态层：冰点机会只在 icepoint_active=true "
+                            "时存在；热警报需板块热度数据"
+                        ),
+                    }
+                except Exception:  # noqa: BLE001
+                    pass
                 try:
                     from lei_signal.copilot import winrate as winrate_mod  # noqa: PLC0415
 
