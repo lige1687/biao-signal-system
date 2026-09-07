@@ -380,6 +380,55 @@
      "conclusion_cn": "禁止引用「散户过热就要跌」的朴素说法——热要分背景（恐慌中买对/狂欢中买错）"
     }
    ]
+  },
+  {
+   "id": "exp-2026-09-07-ambush-dca-exit",
+   "report": "docs/experiments/ambush-dca-exit-2026-09-07.md",
+   "date": "2026-09-07",
+   "verdict": "mixed",
+   "one_liner_cn": "定投埋伏×退出：无万能解；GLM自主版=回撤优化器（全标的回撤改善、收益居中、极度保守）。",
+   "findings": [
+    {
+     "match": {
+      "signal": "exit_rule",
+      "dimension": "dca_exit"
+     },
+     "direction": "mixed",
+     "confidence": "defined",
+     "metrics_cn": "5标的×4退出变体+GLM版（127次决策存档）：半导体不退出2.58倍最优（止盈全踏空）；恒科趋势止盈1.53最优；白酒医药五年不反转怎么退都亏（0.7~0.94倍）",
+     "conclusion_cn": "定投退出方式由后续走势决定（事前不可知）——烂标的的问题在标的不在投法"
+    },
+    {
+     "match": {
+      "signal": "combo_overlay",
+      "dimension": "ai_dca_exit"
+     },
+     "direction": "positive",
+     "confidence": "defined",
+     "metrics_cn": "GLM版全标的回撤改善4~17pp（白酒-31→-24/恒科-32→-15/沪深300-20→-16），收益居中（比规则止盈少踏空比死拿少挨跌）；行为=110hold/7sell_half/0clear",
+     "conclusion_cn": "GLM自主性适合低频防守型位置（定投退出辅助），不适合方向裁决——保守性在定投是美德在趋势信号是致命伤"
+    },
+    {
+     "match": {
+      "signal": "exit_rule",
+      "dimension": "dca_entry_chip"
+     },
+     "direction": "positive",
+     "confidence": "defined",
+     "metrics_cn": "下跌型×跌进筹码价值区下沿(VAL×1.02)触发定投：10/10格全胜或平（倍数+5~14%），投入周数减半（白酒98→60/恒科67→23），回撤不变或改善；贴POC口径失败（半山腰开投回撤恶化）",
+     "conclusion_cn": "定投埋伏的触发用「跌穿价值区下沿」——多数持仓者已套牢、接的是带血筹码，避开下跌初期的贵筹码；不要用贴近密集价（碰到≠跌穿）"
+    },
+    {
+     "match": {
+      "signal": "exit_rule",
+      "dimension": "dca_exit_menu"
+     },
+     "direction": "mixed",
+     "confidence": "defined",
+     "metrics_cn": "8标的×5臂：趋势止盈收益1.29~1.91倍回撤-19~-31%；筹码止盈(涨进VAH分批清)回撤-4~-14%收益1.02~1.30；白酒等永不反转标的筹码止盈是唯一锁利途径(1.12 vs 0.77)；自适应切换证伪(信息时序)、慢牛标的零触发",
+     "conclusion_cn": "定投埋伏退出按风险偏好二选一：要收益等转稳涨分批清、要浅回撤涨进套牢区就走；烂标的只有后者能锁利；Agent盯形态做切换建议"
+    }
+   ]
   }
  ]
 }

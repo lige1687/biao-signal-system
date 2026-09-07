@@ -948,6 +948,32 @@ function BreadthSparkCard({
     );
   }
 
+  // 全部宽度缺失时（快照行是空壳）：明确说"中断+恢复方式"，不摆一张
+  // 只有横杠的空卡让用户以为页面坏了（2026-09-07 用户截图反馈）。
+  if (cur == null) {
+    return (
+      <div className="macro-card metric-card">
+        <div className="macro-head">
+          <span className="macro-name">{panel.display_name} 宽度</span>
+          <span className="macro-chip muted-chip">数据中断</span>
+        </div>
+        <div className="macro-note" style={{ lineHeight: 1.7 }}>
+          宽度数据暂不可用（成分股行情源中断）。<br />
+          <span className="muted">
+            宽度 = 指数成分股里站上 N 日均线的比例，用来判断市场整体冷热。
+            数据恢复后本卡自动显示。
+          </span>
+        </div>
+        {b50.length >= 2 && (
+          <>
+            <div className="macro-note">历史最后读数（{points[points.length - 1]?.date}）：</div>
+            <Sparkline values={b50} height={56} />
+          </>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="macro-card metric-card clickable" onClick={open}>
       <div className="macro-head">
@@ -957,6 +983,9 @@ function BreadthSparkCard({
       <div className="macro-value">{cur != null ? `${cur.toFixed(1)}%` : "-"}</div>
       <div className="macro-note">
         20日 {panel.breadth_20?.toFixed(0) ?? "-"}% · 200日 {panel.breadth_200?.toFixed(0) ?? "-"}%
+        {(panel.breadth_as_of || panel.breadth_trading_day) && (
+          <span className="muted">（{(panel.breadth_as_of || panel.breadth_trading_day) as string}）</span>
+        )}
       </div>
       {b50.length >= 2 ? (
         <Sparkline values={b50} height={56} />
