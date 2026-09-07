@@ -16,6 +16,8 @@ export default function OpsPage() {
     retryDelay: 4000,
   });
   const [slow, setSlow] = useState(false);
+  // K线联动选中态：必须位于所有 early-return 之前（React hook 规则）
+  const [picked, setPicked] = useState<string | null>(null);
   useEffect(() => {
     if (!q.isLoading && !q.isFetching) return undefined;
     setSlow(false);
@@ -45,8 +47,6 @@ export default function OpsPage() {
         </button>
       </div>
     );
-  // K线联动选中态：必须在所有 early-return 之前（React hook 规则）
-  const [picked, setPicked] = useState<string | null>(null);
   const ops = q.data;
   const firstSym =
     ops.plan_todos[0]?.symbol ??
