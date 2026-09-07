@@ -343,6 +343,87 @@ def market_structure() -> dict:
     }
 
 
+# ─────────────── 板块情绪视图（2026-09-07 二次重做：板块为主角、图表化） ───────────────
+_STAGE_CN = {"markup": "上涨", "distribution": "派发（冲高回落）",
+             "decline": "下跌", "accumulation": "筑底", None: "—"}
+
+
+def sector_boards_view() -> dict:
+    """情绪页板块主视图：大板块全量 + 持仓标记 + 推荐观察。
+
+    口径与 market_structure 同池（一、二级行业且成分股 ≥30 只——用户
+    2026-09-07：「通信、有色级别」，渔业/汽车服务这类窄板块不上榜）。
+
+    推荐观察（research_proxy，只推荐不代做，用户手动选加不加）：
+    - 机会位：b50 ≤ 20（板块内只有两成股票站上半年线，深度弱势；
+      阈值框架与基本面页宽度卡一致：≤20 机会位 / ≥80 压力位）；
+    - 压力位：b50 ≥ 80 且阶段处于派发（获利盘拥挤 + 冲高回落，追高风险）；
+    - 转强预警：阶段下跌/筑底 但系统给出 upgrade 观察点（next_watch）。
+    """
+    try:
+        snap = _snap()
+    except (OSError, json.JSONDecodeError):
+        return {"available": False}
+    boards = []
+    for b in snap.get("boards", []):
+        if (b.get("level") or 3) > 2 or (b.get("member_count") or 0) < 30:
+            continue
+        if b.get("b50") is None:
+            continue
+        b50 = float(b["b50"])
+        zone = ("opportunity" if b50 <= 20
+                else "risk" if b50 >= 80 else "neutral")
+        boards.append({
+            "code": b["code"], "name": b["name"],
+            "b20": b.get("b20"), "b50": b50, "b200": b.get("b200"),
+            "zone": zone,
+            "stage": b.get("stage"), "stage_cn": _STAGE_CN.get(b.get("stage"), "—"),
+            "pct_change": b.get("pct_change"), "rs_pctile": b.get("rs_pctile"),
+            "long_trend_cn": b.get("long_trend_cn"),
+            "next_watch": b.get("next_watch"), "next_watch_kind": b.get("next_watch_kind"),
+            "holding": b["code"] in _HOLDING_BOARDS,
+            "sig_icepoint_pick": bool(b.get("sig_icepoint_pick")),
+            "sig_heat_alarm": bool(b.get("sig_heat_alarm")),
+            "sig_note_cn": b.get("sig_note_cn"),
+            "member_count": b.get("member_count"),
+        })
+    boards.sort(key=lambda x: -x["b50"])
+
+    recs: list[dict] = []
+    for b in boards:
+        b50 = b["b50"]
+        base = {k: b[k] for k in ("code", "name", "b50", "stage_cn", "holding", "zone")}
+        if b50 <= 20:
+            base.update(kind="opportunity",
+                        reason_cn=(f"板块内只有 {b50:.0f}% 的股票站上半年线——深度弱势区（机会位，"
+                                   "阈值 ≤20%）。历史上这种状态配合市场情绪冰点常是反弹起点，"
+                                   "可先加入观察，等右侧信号出现再动手。"))
+            recs.append(base)
+        elif b50 >= 80 and b.get("stage") == "distribution":
+            base.update(kind="risk",
+                        reason_cn=(f"板块内 {b50:.0f}% 的股票走强但阶段已是派发（冲高回落）——"
+                                   "获利盘拥挤 + 涨不动（压力位，阈值 ≥80%），追高风险大，"
+                                   "持仓相关的话考虑执行纪律。"))
+            recs.append(base)
+        elif b.get("next_watch_kind") == "upgrade" and b.get("stage") in ("decline", "accumulation"):
+            base.update(kind="upgrade_watch",
+                        reason_cn=(f"虽还在{b['stage_cn']}阶段，但已接近转强观察点：{b.get('next_watch') or '待确认'}。"
+                                   "转强确认前可先加入观察。"))
+            recs.append(base)
+    order = {"opportunity": 0, "risk": 1, "upgrade_watch": 2}
+    recs.sort(key=lambda r: order.get(r["kind"], 9))
+    return {
+        "available": True, "as_of": snap.get("as_of"),
+        "n_boards": len(boards),
+        "n_holding": sum(1 for b in boards if b["holding"]),
+        "boards": boards,
+        "recommendations": recs[:10],
+        "zone_note_cn": "区域阈值与基本面页宽度卡同框架：≤20% 机会位（深度弱势）、"
+                        "≥80% 压力位（过热拥挤）；中间为常态区。b50 = 板块内站上"
+                        "50日均线（半年线）的股票占比。",
+    }
+
+
 def board_profile(code: str) -> dict:
     """单板块情绪画像：自身热度（z）/ 相对热度（横截面分位）/ 趋势档位 / 信号 + 语义读法。"""
     try:

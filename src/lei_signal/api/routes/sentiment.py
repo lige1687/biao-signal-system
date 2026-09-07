@@ -25,6 +25,7 @@ def dashboard() -> dict:
         },
         "us_survey": market_mood.us_survey_latest(),
         "sector_heat": market_mood.sector_heat_boards(),
+        "sector_boards": market_mood.sector_boards_view(),
         "market_structure": market_mood.market_structure(),
         "action": market_mood.build_action(),
         "disclaimer_cn": (
