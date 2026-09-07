@@ -73,6 +73,15 @@ def main() -> int:
     print("tail 5:")
     for h in hist[-5:]:
         print(" ", h)
+
+    # 顺带刷新美股行业宽度（情绪页「美股板块」数据，2026-09-07 起）
+    try:
+        sys.path.insert(0, str(REPO / "scripts"))
+        from precompute_us_sector_breadth import main as _us_main
+        rc = _us_main()
+        print(f"US sector breadth refresh rc={rc}")
+    except Exception as exc:  # noqa: BLE001 —— 行业宽度失败不影响主流程
+        print(f"WARN: US sector breadth 刷新失败：{exc}")
     return 0
 
 
