@@ -40,21 +40,30 @@ def scout_trend(conn: Any) -> list[dict]:
     return out[:5]
 
 
-def scout_ambush(service: Any, symbols: list[str]) -> list[dict]:
+def scout_ambush(symbols: list[str]) -> list[dict]:
     """埋伏机会：下跌型 × 现价距筹码价值区下沿 ≤5%（接近/已跌穿）。
 
-    纯只读计算（fit 形态 + volume_profile 的 VAL），分析失败跳过不炸。
+    数据源用回测池 parquet 直读（毫秒级、内存可控）——不走分析服务：
+    2026-09-07 真机教训，逐自选重分析曾把后端 OOM（SIGKILL -9）。
+    形态与 VAL 均「截至最新一根」计算，无未来数据。
     """
+    from pathlib import Path
+
+    import pandas as pd
+
     from lei_signal.copilot.fit import classify_regime, measure_regime
     from lei_signal.features.volume_profile import compute_volume_profile
 
+    pool = Path.home() / ".lei_signal_lab" / "backtest_pool"
     out = []
     for sym in symbols:
+        f = pool / f"{sym}.bars.parquet"
+        if not f.exists():
+            continue
         try:
-            entry = service.get(sym)
-            if entry.result is None:
-                continue
-            frame = entry.result.frame
+            df = pd.read_parquet(f)
+            df.index = pd.to_datetime(df.index)
+            frame = df.iloc[-400:]  # 取近400根：形态窗口250+筹码窗口120
             m = measure_regime(frame)
             regime = classify_regime(m)
             if regime != "downtrend":
@@ -70,7 +79,7 @@ def scout_ambush(service: Any, symbols: list[str]) -> list[dict]:
             state = "已跌穿埋伏区" if dist <= 2 else f"距埋伏区 {dist:.1f}%"
             out.append({
                 "symbol": sym,
-                "display_name": getattr(entry.result, "display_name", "") or sym,
+                "display_name": sym,
                 "kind": "ambush",
                 "kind_cn": "定投埋伏位",
                 "verdict_cn": state,
@@ -115,11 +124,17 @@ def scout(request: Any, conn: Any) -> dict:
     from lei_signal.api.watchlist import list_watchlist
     from lei_signal.copilot import winrate as winrate_mod
 
-    service = getattr(request.app.state, "analysis_service", None)
     symbols = [w.symbol for w in list_watchlist(conn)]
     trend = scout_trend(conn)
-    ambush = scout_ambush(service, symbols) if service else []
+    ambush = scout_ambush(symbols)
     sentiment = scout_sentiment()
+    for item in ambush:
+        try:
+            from lei_signal.api.routes.agent import _static_symbol_name  # noqa: PLC0415
+
+            item["display_name"] = _static_symbol_name(item["symbol"], "") or item["symbol"]
+        except Exception:  # noqa: BLE001
+            pass
     for item in trend + ambush:
         try:
             w = winrate_mod.winrate_for(item["symbol"])

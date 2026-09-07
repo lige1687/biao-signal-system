@@ -485,6 +485,102 @@ def board_chart_series(code: str) -> dict:
     }
 
 
+# ─────────────── 美股行业情绪视图（2026-09-07：对标A股板块情绪） ───────────────
+def us_sector_boards_view() -> dict:
+    """美股 11 个 GICS 行业：宽度强度 + 相对大盘 + 推荐观察。
+
+    数据来自 precompute_us_sector_breadth.py 落盘的 us_sector_breadth.json
+    （成分股行情 + Wikipedia 行业表）。阈值同全系统宽度框架：
+    b50 ≤20 机会位 / ≥80 压力位。
+    """
+    try:
+        data = json.loads((_CACHE / "us_sector_breadth.json").read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {"available": False}
+    sp_ew = {p["date"]: p["index"] for p in data.get("sp500_ew", [])}
+    sp_dates = sorted(sp_ew)
+
+    def _chg20(series: list[dict], key: str = "index") -> float | None:
+        pts = [p for p in series if p.get(key) is not None]
+        if len(pts) < 21:
+            return None
+        return float(pts[-1][key] / pts[-21][key] - 1) * 100
+
+    sp_chg = _chg20([{"index": sp_ew[d]} for d in sp_dates] if sp_dates else [])
+    boards = []
+    for s in data.get("sectors", []):
+        last = s.get("last") or {}
+        b50 = last.get("b50")
+        if b50 is None:
+            continue
+        chg = _chg20(s.get("series", []))
+        rs20 = (chg - sp_chg) if (chg is not None and sp_chg is not None) else None
+        zone = "opportunity" if b50 <= 20 else ("risk" if b50 >= 80 else "neutral")
+        stage_cn = ("领先大盘" if rs20 is not None and rs20 > 1
+                    else "落后大盘" if rs20 is not None and rs20 < -1 else "与大盘同步")
+        boards.append({
+            "code": s["key"], "name": s["name_cn"], "etf": s.get("etf"),
+            "b20": last.get("b20"), "b50": float(b50), "b200": last.get("b200"),
+            "zone": zone,
+            "stage": None, "stage_cn": stage_cn,
+            "pct_change": round(chg, 2) if chg is not None else None,
+            "rs_pctile": None, "long_trend_cn": None,
+            "next_watch": None, "next_watch_kind": None,
+            "holding": False,
+            "sig_icepoint_pick": False, "sig_heat_alarm": False,
+            "sig_note_cn": None,
+            "member_count": s.get("n"),
+        })
+    boards.sort(key=lambda x: -x["b50"])
+
+    recs = []
+    for b in boards:
+        if b["zone"] == "opportunity":
+            recs.append({**{k: b[k] for k in ("code", "name", "b50", "stage_cn", "holding", "zone")},
+                         "kind": "opportunity",
+                         "reason_cn": (f"{b['name']}行业只有 {b['b50']:.0f}% 的成分股站上半年线——深度弱势"
+                                       "（机会位，阈值 ≤20%）。美股行业轮动明显，弱势行业出清后常有修复，"
+                                       "可先加入观察。")})
+        elif b["zone"] == "risk":
+            recs.append({**{k: b[k] for k in ("code", "name", "b50", "stage_cn", "holding", "zone")},
+                         "kind": "risk",
+                         "reason_cn": (f"{b['name']}行业 {b['b50']:.0f}% 的成分股走强——拥挤度高"
+                                       "（压力位，阈值 ≥80%），追高风险大；持有相关标的考虑执行纪律。")})
+    return {
+        "available": bool(boards), "as_of": data.get("as_of"),
+        "n_boards": len(boards), "n_holding": 0,
+        "boards": boards, "recommendations": recs[:6],
+        "zone_note_cn": "美股行业口径：GICS 11 行业，b50 = 行业内站上 50 日均线的成分股占比"
+                        "（≥80% 压力位 / ≤20% 机会位）；相对大盘 = 近20天等权行业指数 vs 标普500等权。"
+                        "成分股快照 2026-08-04（Wikipedia），存在个别调仓滞后。",
+    }
+
+
+def us_sector_chart(key: str) -> dict:
+    """美股行业「价格 × 宽度」对照图序列（抽屉）。"""
+    try:
+        data = json.loads((_CACHE / "us_sector_breadth.json").read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {"available": False}
+    s = next((x for x in data.get("sectors", []) if x.get("key") == key), None)
+    if not s:
+        return {"available": False}
+    sp_ew = {p["date"]: p["index"] for p in data.get("sp500_ew", [])}
+    dates = [p["date"] for p in s["series"]]
+    return {
+        "available": True, "code": key, "name": s["name_cn"], "etf": s.get("etf"),
+        "dates": dates,
+        "close": [p.get("index") for p in s["series"]],
+        "b50": [p.get("b50") for p in s["series"]],
+        "ref_close": [sp_ew.get(d) for d in dates],  # 标普500等权参考线
+        "retail20": [], "n_retail": 0,
+        "note_cn": "怎么看：蓝线=行业等权指数涨跌（起点=100）；橙线=行业宽度（右轴 0-100，"
+                   "站上半年线成分股占比，≤20 机会位 / ≥80 压力位）；灰虚线=标普500等权（对照，"
+                   "蓝线在灰线上方=该行业跑赢大盘）。美股无散户资金流分档数据，"
+                   "散户维度用 AAII/NAAIM 问卷（见上方情绪卡）。",
+    }
+
+
 def board_profile(code: str) -> dict:
     """单板块情绪画像：自身热度（z）/ 相对热度（横截面分位）/ 趋势档位 / 信号 + 语义读法。"""
     try:

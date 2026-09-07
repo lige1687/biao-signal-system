@@ -37,14 +37,14 @@ function useWatchBoards() {
   return { watch, toggle };
 }
 
-/* ── 板块「价格 × 情绪」对照图抽屉（点开板块卡） ──────────────────────
+/* ── 板块「价格 × 情绪」对照图抽屉（点开板块卡；us=美股行业模式） ──────
  * 双轴：左=板块指数涨跌（起点=100），右=情绪强度 b50（0-100 带 20/80 阈值
- * 与色带）；散户小单净流入 20 日合计画成柱（隐藏第三轴自适应刻度）。 */
-function BoardChartDrawer({ code, name, onClose }: { code: string; name: string; onClose: () => void }) {
+ * 与色带）；A股加散户小单净流入柱，美股加标普500等权参考线。 */
+function BoardChartDrawer({ code, name, onClose, us }: { code: string; name: string; onClose: () => void; us?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const { data, isLoading, error } = useQuery({
-    queryKey: ["sentBoardChart", code],
-    queryFn: () => sentimentApi.boardChart(code),
+    queryKey: ["sentBoardChart", us ? "us" : "cn", code],
+    queryFn: () => (us ? sentimentApi.usBoardChart(code) : sentimentApi.boardChart(code)),
     staleTime: 30 * 60_000,
   });
 
@@ -64,6 +64,12 @@ function BoardChartDrawer({ code, name, onClose }: { code: string; name: string;
     // 涨跌幅口径：以窗口内第一个有效收盘为 100（直观比较涨跌幅度）
     const first = data.close.find((v) => v != null) ?? null;
     const rebase = data.close.map((v) => (v != null && first ? Number(((v / first) * 100).toFixed(2)) : null));
+    // 美股模式：标普500等权参考线（同样起点=100，看形态谁在上谁跑赢）
+    const refRaw = data.ref_close ?? [];
+    const refFirst = refRaw.find((v) => v != null) ?? null;
+    const refSeries = refRaw.some((v) => v != null) && refFirst
+      ? refRaw.map((v) => (v != null ? Number(((v / refFirst) * 100).toFixed(2)) : null))
+      : null;
     inst.setOption({
       animation: false,
       grid: { left: 56, right: 52, top: 34, bottom: 52 },
@@ -84,6 +90,14 @@ function BoardChartDrawer({ code, name, onClose }: { code: string; name: string;
           name: "板块指数", type: "line", yAxisIndex: 0, data: rebase, showSymbol: false,
           lineStyle: { width: 2.2, color: "#2563eb" }, itemStyle: { color: "#2563eb" }, z: 10,
         },
+        ...(refSeries
+          ? [{
+              name: us ? "标普500等权(对照)" : "参考线", type: "line" as const, yAxisIndex: 0,
+              data: refSeries, showSymbol: false,
+              lineStyle: { width: 1.2, type: "dashed" as const, color: "#9aa4b2" },
+              itemStyle: { color: "#9aa4b2" }, z: 8,
+            }]
+          : []),
         {
           name: "情绪强度b50", type: "line", yAxisIndex: 1, data: data.b50, showSymbol: false, connectNulls: true,
           lineStyle: { width: 1.8, color: "#b45309" }, itemStyle: { color: "#b45309" }, z: 9,
@@ -102,23 +116,25 @@ function BoardChartDrawer({ code, name, onClose }: { code: string; name: string;
             ],
           },
         },
-        {
-          name: "散户净流入(20日,亿)", type: "bar", yAxisIndex: 2, data: data.retail20,
-          barMaxWidth: 6, itemStyle: { color: "rgba(77,127,196,0.35)" }, z: 2,
-        },
+        ...(!us
+          ? [{
+              name: "散户净流入(20日,亿)", type: "bar" as const, yAxisIndex: 2, data: data.retail20,
+              barMaxWidth: 6, itemStyle: { color: "rgba(77,127,196,0.35)" }, z: 2,
+            }]
+          : []),
       ],
     });
     return () => {
       ro.disconnect();
       inst.dispose();
     };
-  }, [data]);
+  }, [data, us]);
 
   return (
     <div className="drawer-overlay" onClick={onClose}>
       <div className="drawer-panel trend-drawer-panel" onClick={(e) => e.stopPropagation()}>
         <div className="drawer-head">
-          <h2>{name} · 价格 × 情绪对照</h2>
+          <h2>{name} · 价格 × 情绪对照{us ? "（美股行业）" : ""}</h2>
           <button type="button" className="btn mini" onClick={onClose}>关闭</button>
         </div>
         <div className="drawer-body trend-drawer-body">
@@ -129,10 +145,12 @@ function BoardChartDrawer({ code, name, onClose }: { code: string; name: string;
             <>
               <div ref={ref} style={{ width: "100%", height: 440 }} />
               <div className="muted mood-note">{data.note_cn}</div>
-              <div className="muted mood-note">
-                散户净流入数据点 {data.n_retail} 个（腾讯资金流，2021 起；部分板块覆盖不全时柱会断续）。
-                情绪强度 b50 数据自 2025-08 起（板块趋势历史重建后覆盖更长）。全部为研究参考，不构成买卖点。
-              </div>
+              {!us && (
+                <div className="muted mood-note">
+                  散户净流入数据点 {data.n_retail} 个（腾讯资金流，2021 起；部分板块覆盖不全时柱会断续）。
+                  情绪强度 b50 数据自 2025-08 起（板块趋势历史重建后覆盖更长）。全部为研究参考，不构成买卖点。
+                </div>
+              )}
             </>
           )}
         </div>
@@ -226,13 +244,14 @@ function PositionBar({ b50 }: { b50: number }) {
 
 const STAGE_TONE: Record<string, string> = {
   上涨: "up", 派发: "warn", 下跌: "down", 筑底: "info",
+  领先大盘: "up", 落后大盘: "down", 与大盘同步: "neutral",
 };
 function StageBadge({ stageCn }: { stageCn: string }) {
   // stage_cn 可能带括号后缀（"派发（冲高回落）"），按前缀匹配色调
   const key = Object.keys(STAGE_TONE).find((k) => stageCn.startsWith(k));
   const tone = key ? STAGE_TONE[key] : undefined;
   if (!tone) return <span className="macro-chip neutral">阶段待定</span>;
-  const cls = tone === "up" ? "opportunity" : tone === "down" ? "danger" : tone === "warn" ? "caution" : "info";
+  const cls = tone === "up" ? "opportunity" : tone === "down" ? "danger" : tone === "warn" ? "caution" : tone === "info" ? "info" : "neutral";
   return <span className={`macro-chip ${cls}`}>{stageCn}</span>;
 }
 
@@ -247,8 +266,8 @@ function humanize(text: string): string {
   return text.replace(/SMA60/g, "60日均线").replace(/EMA20/g, "20日均线");
 }
 
-/* ── 持仓相关板块卡 ── */
-function HoldingBoardCard({ b, onOpen }: { b: SectorBoardRow; onOpen: () => void }) {
+/* ── 板块卡（A股持仓卡与美股行业卡共用；pctLabel 区分口径） ── */
+function BoardCard({ b, onOpen, pctLabel = "今日" }: { b: SectorBoardRow; onOpen: () => void; pctLabel?: string }) {
   return (
     <div
       className={`sb-hold-card clickable${b.zone === "risk" ? " z-risk" : b.zone === "opportunity" ? " z-opp" : ""}`}
@@ -257,6 +276,7 @@ function HoldingBoardCard({ b, onOpen }: { b: SectorBoardRow; onOpen: () => void
     >
       <div className="sb-card-head">
         <b>{b.name}</b>
+        {b.etf && <span className="mood-etf-badge">{b.etf}</span>}
         <StageBadge stageCn={b.stage_cn} />
         {b.sig_heat_alarm && <span className="macro-chip danger">⚠散户过热</span>}
         {b.sig_icepoint_pick && <span className="macro-chip info">❄冰点关注</span>}
@@ -264,15 +284,18 @@ function HoldingBoardCard({ b, onOpen }: { b: SectorBoardRow; onOpen: () => void
       <div className="sb-big-row">
         <span className="sb-big-num">{b.b50.toFixed(0)}<i>%</i></span>
         <ZoneChip zone={b.zone} />
-        <span className="muted sb-pct">{b.pct_change != null ? `${b.pct_change > 0 ? "+" : ""}${b.pct_change.toFixed(1)}% 今日` : ""}</span>
+        <span className="muted sb-pct">{b.pct_change != null ? `${b.pct_change > 0 ? "+" : ""}${b.pct_change.toFixed(1)}% ${pctLabel}` : ""}</span>
       </div>
       <PositionBar b50={b.b50} />
       <div className="sb-next">
-        {humanize(b.sig_note_cn ?? b.next_watch ?? `${b.member_count ?? "?"} 只成分股 · 下一观察点待系统更新`)}
+        {humanize(b.sig_note_cn ?? b.next_watch ?? `${b.member_count ?? "?"} 只成分股 · 点卡片看对照图`)}
       </div>
     </div>
   );
 }
+
+// 兼容旧引用（A股持仓区）
+const HoldingBoardCard = BoardCard;
 
 /* ── 推荐观察卡 ── */
 const REC_META: Record<SectorRecommendation["kind"], { icon: string; label: string; cls: string }> = {
@@ -504,6 +527,113 @@ export default function SentimentSectorBlock({ view, heatAvailable, heatHint }: 
         <BoardChartDrawer
           code={openBoard.code}
           name={openBoard.name}
+          onClose={() => setOpenBoard(null)}
+        />
+      )}
+    </section>
+  );
+}
+
+/* ══════════════ 美股板块情绪（11 GICS 行业，对标 A股，2026-09-07） ══════════════ */
+export function UsSectorBlock({ view }: { view: SectorBoardsView }) {
+  const { watch, toggle } = useWatchBoards();
+  const [openBoard, setOpenBoard] = useState<{ code: string; name: string } | null>(null);
+  const boards = useMemo(() => [...view.boards].sort((a, b) => b.b50 - a.b50), [view.boards]);
+  const watched = useMemo(
+    () => boards.filter((b) => watch.has(b.code)),
+    [boards, watch],
+  );
+  const open = (b: { code: string; name: string }) => setOpenBoard(b);
+
+  if (!view.available) {
+    return (
+      <section className="sx-rail-card" style={{ marginTop: 14 }}>
+        <div className="sx-rail-head">
+          <span className="sx-rail-title">美股板块情绪</span>
+          <span className="sx-rail-sub">数据待生成（scripts/precompute_us_sector_breadth.py）</span>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="sx-rail-card sb-main" style={{ marginTop: 14 }}>
+      <div className="sx-rail-head">
+        <span className="sx-rail-title">美股板块情绪</span>
+        <span className="sx-rail-sub">
+          11 个行业（标普500成分股）· 更新 {view.as_of ?? "—"} · 强度 = 行业内站上半年线的股票占比
+        </span>
+      </div>
+
+      {/* 全部行业卡（点开看对照图） */}
+      <div className="sb-sub-title" style={{ marginTop: 4 }}>全部行业（点卡片看「价格 × 情绪」对照图）</div>
+      <div className="sb-hold-grid">
+        {boards.map((b) => (
+          <BoardCard key={b.code} b={b} onOpen={() => open(b)} pctLabel="近20日" />
+        ))}
+      </div>
+
+      {/* 我的观察 */}
+      {watched.length > 0 && (
+        <>
+          <div className="sb-sub-title" style={{ marginTop: 14 }}>我的观察（{watched.length} 个 · 与 A股共用观察列表）</div>
+          <div className="sb-hold-grid">
+            {watched.map((b) => (
+              <div key={b.code} className="sb-hold-card watched-card clickable" onClick={() => open(b)} title="点开：价格 × 情绪对照图">
+                <div className="sb-card-head">
+                  <b>★ {b.name}</b>
+                  {b.etf && <span className="mood-etf-badge">{b.etf}</span>}
+                  <StageBadge stageCn={b.stage_cn} />
+                  <span className="spacer" />
+                  <button type="button" className="btn mini" onClick={(e) => { e.stopPropagation(); toggle(b.code); }}>移除</button>
+                </div>
+                <div className="sb-big-row">
+                  <span className="sb-big-num">{b.b50.toFixed(0)}<i>%</i></span>
+                  <ZoneChip zone={b.zone} />
+                </div>
+                <PositionBar b50={b.b50} />
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {/* 推荐观察 */}
+      <div className="sb-sub-title" style={{ marginTop: 14 }}>
+        推荐观察（{view.recommendations.length} 条 · 阈值触发，是否关注由你定）
+      </div>
+      {view.recommendations.length === 0 ? (
+        <div className="muted" style={{ padding: "4px 2px" }}>当前没有行业触发阈值。</div>
+      ) : (
+        <div className="sb-rec-list">
+          {view.recommendations.map((r) => (
+            <RecommendationCard
+              key={`${r.kind}-${r.code}`}
+              r={r}
+              watched={watch.has(r.code)}
+              onToggle={() => toggle(r.code)}
+              onOpen={() => open(r)}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* 强度排行 */}
+      <div className="sb-sub-title" style={{ marginTop: 16 }}>
+        行业强度排行（强→弱 · ★=我的观察 · 点柱子看对照图）
+      </div>
+      <AllBoardsChart boards={boards} watch={watch} onOpen={open} height={380} />
+
+      <div className="muted mood-note">
+        {view.zone_note_cn}
+        · 散户维度说明：美股没有分档资金流数据，散户情绪看上方 AAII/NAAIM 问卷卡；本区看行业间强弱与拥挤度。
+      </div>
+
+      {openBoard && (
+        <BoardChartDrawer
+          code={openBoard.code}
+          name={openBoard.name}
+          us
           onClose={() => setOpenBoard(null)}
         />
       )}

@@ -4833,3 +4833,49 @@ a { color: var(--accent); text-decoration: none; }
     to { opacity: 1; transform: none; }
   }
 }
+
+/* ---- 今日操作页：左清单 + 右K线联动（2026-09-07） ---- */
+.ops-with-kline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(360px, 38vw, 560px);
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 1180px) {
+  .ops-with-kline { grid-template-columns: 1fr; }
+}
+.ops-main { min-width: 0; }
+.ops-pick {
+  background: none; border: none; padding: 2px 8px; margin: -2px -8px;
+  border-radius: 6px; cursor: pointer; font: inherit;
+  color: var(--accent, #2563eb); font-weight: 600;
+}
+.ops-pick:hover { background: var(--bg, #f0f3f8); }
+.ops-pick.is-active {
+  background: var(--accent, #2563eb); color: #fff;
+}
+.ops-kline-side {
+  position: sticky; top: 12px;
+  background: var(--bg-panel, #fff); border: 1px solid var(--border, #dfe5ee);
+  border-radius: 12px; padding: 10px 12px; min-height: 520px;
+}
+.ops-kline-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 2px 2px 8px;
+}
+.ops-kline-title { display: flex; flex-direction: column; line-height: 1.25; }
+.ops-kline-title strong { font-size: 13px; }
+.ops-kline-title .muted { font-size: 11px; font-family: var(--font-mono, monospace); }
+.ops-kline-box { flex: 1; min-height: 0; display: flex; }
+.ops-kline-box .kline { height: 100% !important; flex: 1; min-height: 480px; }
+.ops-kline-skeleton { flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.ops-kline-skeleton div {
+  flex: 1; border-radius: 8px;
+  background: linear-gradient(90deg, #eef1f6 25%, #f7f9fc 50%, #eef1f6 75%);
+  background-size: 200% 100%;
+  animation: ops-skel 1.2s infinite;
+}
+@keyframes ops-skel { to { background-position: -200% 0; } }
+.ops-kline-empty {
+  margin: auto; text-align: center; color: var(--text-dim, #7b8494); font-size: 13px;
+}

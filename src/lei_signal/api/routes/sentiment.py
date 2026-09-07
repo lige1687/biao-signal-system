@@ -26,6 +26,7 @@ def dashboard() -> dict:
         "us_survey": market_mood.us_survey_latest(),
         "sector_heat": market_mood.sector_heat_boards(),
         "sector_boards": market_mood.sector_boards_view(),
+        "us_sector_boards": market_mood.us_sector_boards_view(),
         "market_structure": market_mood.market_structure(),
         "action": market_mood.build_action(),
         "disclaimer_cn": (
@@ -46,6 +47,12 @@ def board_profile(code: str) -> dict:
 def board_chart(code: str) -> dict:
     """单板块「价格 × 情绪」对照图序列（板块卡点开的抽屉）。"""
     return market_mood.board_chart_series(code)
+
+
+@router.get("/us-board/{key}/chart")
+def us_board_chart(key: str) -> dict:
+    """美股行业「价格 × 宽度」对照图序列。"""
+    return market_mood.us_sector_chart(key)
 
 
 @router.get("/confidence")

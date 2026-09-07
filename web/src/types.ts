@@ -2369,6 +2369,8 @@ export interface SentimentDashboard {
   };
   /** 板块情绪主视图（2026-09-07：大板块全量 + 持仓标记 + 推荐观察）。 */
   sector_boards: SectorBoardsView;
+  /** 美股 11 GICS 行业情绪视图（2026-09-07：对标 A股）。 */
+  us_sector_boards: SectorBoardsView;
   market_structure: MarketStructure;
   action: SentimentAction;
   disclaimer_cn: string;
@@ -2377,6 +2379,7 @@ export interface SentimentDashboard {
 /** 情绪页板块视图里的大板块行。 */
 export interface SectorBoardRow {
   code: string; name: string;
+  etf?: string | null;
   b20: number | null; b50: number; b200: number | null;
   zone: "opportunity" | "risk" | "neutral";
   stage: string | null; stage_cn: string;
@@ -2478,6 +2481,8 @@ export interface BoardChartSeries {
   b50: (number | null)[];
   retail20: (number | null)[];
   n_retail: number;
+  /** 参考对照线（美股行业图=标普500等权指数）。 */
+  ref_close?: (number | null)[];
   note_cn?: string;
 }
 

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { sentimentApi } from "../api/client";
 import { etfsForSector } from "../data/sectorEtfMap";
-import SentimentSectorBlock from "../components/SentimentSectorBlock";
+import SentimentSectorBlock, { UsSectorBlock } from "../components/SentimentSectorBlock";
 import type { SentimentDashboard } from "../types";
 
 /* ── 情绪仪表盘页：全A / 美股 / 美国调查情绪 / A股板块散户热度 ───────────
@@ -82,6 +82,9 @@ export default function SentimentPage() {
           heatHint="散户热度分位（散户相对大资金的活跃度）数据重建中，约 9 月底恢复后叠加到各板块"
         />
       )}
+
+      {/* ── 美股板块情绪（11 GICS 行业，对标 A股） ── */}
+      {data.us_sector_boards?.available && <UsSectorBlock view={data.us_sector_boards} />}
 
       {/* ── 行动区：有信号时给操作卡 + 持仓风险 ── */}
       {data.action?.available && (nPicks > 0 || nAlarms > 0 || holdDanger.length > 0) && (

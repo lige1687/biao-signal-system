@@ -499,6 +499,8 @@ export const sentimentApi = {
     request<BoardProfile>(`/sentiment/board/${encodeURIComponent(code)}`),
   boardChart: (code: string) =>
     request<BoardChartSeries>(`/sentiment/board/${encodeURIComponent(code)}/chart`),
+  usBoardChart: (key: string) =>
+    request<BoardChartSeries>(`/sentiment/us-board/${encodeURIComponent(key)}/chart`),
   light: () => request<SentimentLight>("/sentiment/light"),
 };
 
