@@ -222,7 +222,10 @@ def dispatch(request: Request, body: CopilotDispatchRequest) -> CopilotDispatchR
         ).replace("X", str(len(card.trend))).replace("Y", str(len(card.ambush))).replace("Z", str(len(card.sentiment)))
         if not card.available:
             note = "扫了一圈：当前没有符合条件的机会（趋势信号、埋伏位、情绪信号均未激活）——空仓等待也是一种操作。"
-        return CopilotDispatchReply(note_cn=note, card={"card_type": "scout", "data": card.model_dump()})
+        return CopilotDispatchReply(
+            intent="scout", note_cn=note,
+            card={"card_type": "scout", "data": card.model_dump()},
+        )
     if intent.kind == "recommend":
         card = _recommend_card(request)
         with closing(connect(_db_path(request))) as conn:
