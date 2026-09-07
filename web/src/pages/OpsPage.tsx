@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { api } from "../api/client";
 import { RecommendCardView } from "../components/copilot/CopilotCards";
+import SymbolKlinePanel from "../components/SymbolKlinePanel";
 
 /** 每日操作清单页（/ops）：确定性组装的四段，收盘后自动生成。
  *  短清单段并排成网格提高密度；推荐卡跨整行。 */
@@ -45,6 +46,15 @@ export default function OpsPage() {
       </div>
     );
   const ops = q.data;
+  // K线联动选中态：默认取第一个出现的标的（计划待办优先，其次观察/持仓）
+  const [picked, setPicked] = useState<string | null>(null);
+  const firstSym =
+    ops.plan_todos[0]?.symbol ??
+    ops.watch_triggers[0]?.symbol ??
+    ops.holdings_actions.find((l) => l.symbol !== "-")?.symbol ??
+    null;
+  const active = picked ?? firstSym ?? null;
+  const pick = (sym: string | null) => setPicked(sym);
   return (
     <div className="page ops-page">
       <div className="page-head">
@@ -52,16 +62,21 @@ export default function OpsPage() {
         <span className="ph-meta">{ops.push_summary_cn}</span>
       </div>
 
-      <div className="ops-grid">
+      <div className="ops-with-kline">
+      <div className="ops-main"> <div className="ops-grid">
         <section className="ops-section">
           <h3>① 持仓要处理的</h3>
           {ops.holdings_actions.length === 0 && <div className="ops-empty">暂无。</div>}
           {ops.holdings_actions.map((l, i) => (
             <div key={i} className="cp-row">
               {l.symbol !== "-" && (
-                <Link to={`/symbol/${l.symbol}`} className="cp-sym">
+                <button
+                  className={`cp-sym ops-pick ${active === l.symbol ? "is-active" : ""}`}
+                  onClick={() => pick(l.symbol)}
+                  title="点我看K线"
+                >
                   {l.display_name || l.symbol}
-                </Link>
+                </button>
               )}
               <span>{l.text_cn}</span>
             </div>
@@ -73,7 +88,13 @@ export default function OpsPage() {
           {ops.plan_todos.length === 0 && <div className="ops-empty">暂无待办。</div>}
           {ops.plan_todos.map((t) => (
             <div key={t.action_id} className="cp-row">
-              <Link to={`/symbol/${t.symbol}`} className="cp-sym">{t.symbol}</Link>
+              <button
+                className={`cp-sym ops-pick ${active === t.symbol ? "is-active" : ""}`}
+                onClick={() => pick(t.symbol)}
+                title="点我看K线"
+              >
+                {t.symbol}
+              </button>
               <span className={t.kind === "EXIT" ? "cp-error" : ""}>
                 {t.kind_cn}待办 · 已催 {t.nag_count} 次 · 可执行自 {t.due_from || "-"}
               </span>
@@ -87,9 +108,13 @@ export default function OpsPage() {
           {ops.watch_triggers.length === 0 && <div className="ops-empty">暂无观察项。</div>}
           {ops.watch_triggers.map((l, i) => (
             <div key={i} className="cp-row">
-              <Link to={`/symbol/${l.symbol}`} className="cp-sym">
+              <button
+                className={`cp-sym ops-pick ${active === l.symbol ? "is-active" : ""}`}
+                onClick={() => pick(l.symbol)}
+                title="点我看K线"
+              >
                 {l.display_name || l.symbol}
-              </Link>
+              </button>
               <span className="muted">{l.text_cn}</span>
             </div>
           ))}
@@ -164,6 +189,8 @@ export default function OpsPage() {
             <div className="ops-empty">今日尚未生成推荐（收盘后自动生成）。</div>
           )}
         </section>
+      </div></div>
+      <SymbolKlinePanel symbol={active} emptyHint="点左侧任意标的名，这里出它的K线" />
       </div>
     </div>
   );
