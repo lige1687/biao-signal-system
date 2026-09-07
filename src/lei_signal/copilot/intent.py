@@ -16,6 +16,7 @@ from lei_signal.api.schemas import TradePreviewDTO
 #: 意图关键词表（顺序即优先级：报单优先于推荐，避免「买了什么好」误判）。
 _INTENT_RULES: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("trade_report", ("买了", "卖了", "申购", "赎回", "报单", "下单了", "成交了")),
+    ("scout", ("最近机会", "看看机会", "发掘机会", "机会扫描", "扫扫机会")),
     ("recommend", ("今天看什么", "推荐", "有什么机会", "扫一下自选", "标的雷达")),
     ("holdings", ("持仓", "我的仓位", "持仓速览")),
     ("review", ("复盘", "周报", "这周做得怎么样")),
