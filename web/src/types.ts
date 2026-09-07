@@ -2461,6 +2461,18 @@ export interface BoardProfile {
   reading_cn?: string[];
 }
 
+/** 板块「价格 × 情绪」对照图序列（/api/sentiment/board/{code}/chart）。 */
+export interface BoardChartSeries {
+  available: boolean;
+  code?: string; name?: string | null;
+  dates: string[];
+  close: (number | null)[];
+  b50: (number | null)[];
+  retail20: (number | null)[];
+  n_retail: number;
+  note_cn?: string;
+}
+
 export interface SentimentActionCard {
   code: string; name: string; level?: number | null;
   z: number | null; r60_pct?: number | null; b50?: number | null;

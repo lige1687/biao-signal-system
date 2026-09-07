@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import * as echarts from "echarts";
-import { api } from "../api/client";
+import { api, sentimentApi } from "../api/client";
 import type { SectorBoardRow, SectorBoardsView, SectorRecommendation } from "../types";
 
 /* ── 情绪页·板块主区块（2026-09-07 二次重做）──────────────────────────
@@ -35,6 +35,110 @@ function useWatchBoards() {
     });
   };
   return { watch, toggle };
+}
+
+/* ── 板块「价格 × 情绪」对照图抽屉（点开板块卡） ──────────────────────
+ * 双轴：左=板块指数涨跌（起点=100），右=情绪强度 b50（0-100 带 20/80 阈值
+ * 与色带）；散户小单净流入 20 日合计画成柱（隐藏第三轴自适应刻度）。 */
+function BoardChartDrawer({ code, name, onClose }: { code: string; name: string; onClose: () => void }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["sentBoardChart", code],
+    queryFn: () => sentimentApi.boardChart(code),
+    staleTime: 30 * 60_000,
+  });
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  useEffect(() => {
+    if (!ref.current || !data?.available || data.dates.length < 2) return;
+    const inst = echarts.init(ref.current, undefined, { renderer: "canvas" });
+    const ro = new ResizeObserver(() => inst.resize());
+    ro.observe(ref.current);
+    // 涨跌幅口径：以窗口内第一个有效收盘为 100（直观比较涨跌幅度）
+    const first = data.close.find((v) => v != null) ?? null;
+    const rebase = data.close.map((v) => (v != null && first ? Number(((v / first) * 100).toFixed(2)) : null));
+    inst.setOption({
+      animation: false,
+      grid: { left: 56, right: 52, top: 34, bottom: 52 },
+      tooltip: { trigger: "axis", order: "valueDesc" },
+      legend: { top: 2, textStyle: { fontSize: 11 }, itemWidth: 16 },
+      xAxis: { type: "category", data: data.dates, axisLabel: { fontSize: 10 } },
+      yAxis: [
+        { type: "value", name: "指数(起点100)", nameTextStyle: { fontSize: 10 }, scale: true },
+        { type: "value", name: "情绪强度%", min: 0, max: 100, nameTextStyle: { fontSize: 10 }, splitLine: { show: false } },
+        { type: "value", show: false, scale: true }, // 散户净流入柱的隐藏轴
+      ],
+      dataZoom: [
+        { type: "inside" },
+        { type: "slider", height: 14, bottom: 10 },
+      ],
+      series: [
+        {
+          name: "板块指数", type: "line", yAxisIndex: 0, data: rebase, showSymbol: false,
+          lineStyle: { width: 2.2, color: "#2563eb" }, itemStyle: { color: "#2563eb" }, z: 10,
+        },
+        {
+          name: "情绪强度b50", type: "line", yAxisIndex: 1, data: data.b50, showSymbol: false, connectNulls: true,
+          lineStyle: { width: 1.8, color: "#b45309" }, itemStyle: { color: "#b45309" }, z: 9,
+          markLine: {
+            silent: true, symbol: "none", label: { fontSize: 10, position: "insideEndTop" },
+            data: [
+              { yAxis: 80, lineStyle: { color: "#d24a43", type: "dashed" }, label: { formatter: "压力位80", color: "#d24a43" } },
+              { yAxis: 20, lineStyle: { color: "#15803d", type: "dashed" }, label: { formatter: "机会位20", color: "#15803d" } },
+            ],
+          },
+          markArea: {
+            silent: true,
+            data: [
+              [{ yAxis: 80, itemStyle: { color: "rgba(210,74,67,0.06)" } }, { yAxis: 100 }],
+              [{ yAxis: 0, itemStyle: { color: "rgba(21,128,61,0.06)" } }, { yAxis: 20 }],
+            ],
+          },
+        },
+        {
+          name: "散户净流入(20日,亿)", type: "bar", yAxisIndex: 2, data: data.retail20,
+          barMaxWidth: 6, itemStyle: { color: "rgba(77,127,196,0.35)" }, z: 2,
+        },
+      ],
+    });
+    return () => {
+      ro.disconnect();
+      inst.dispose();
+    };
+  }, [data]);
+
+  return (
+    <div className="drawer-overlay" onClick={onClose}>
+      <div className="drawer-panel trend-drawer-panel" onClick={(e) => e.stopPropagation()}>
+        <div className="drawer-head">
+          <h2>{name} · 价格 × 情绪对照</h2>
+          <button type="button" className="btn mini" onClick={onClose}>关闭</button>
+        </div>
+        <div className="drawer-body trend-drawer-body">
+          {isLoading && <div className="muted" style={{ padding: 20 }}>加载板块历史中…</div>}
+          {error && <div className="muted" style={{ padding: 20 }}>加载失败：{(error as Error).message}</div>}
+          {data && !data.available && <div className="muted" style={{ padding: 20 }}>该板块暂无历史数据。</div>}
+          {data?.available && (
+            <>
+              <div ref={ref} style={{ width: "100%", height: 440 }} />
+              <div className="muted mood-note">{data.note_cn}</div>
+              <div className="muted mood-note">
+                散户净流入数据点 {data.n_retail} 个（腾讯资金流，2021 起；部分板块覆盖不全时柱会断续）。
+                情绪强度 b50 数据自 2025-08 起（板块趋势历史重建后覆盖更长）。全部为研究参考，不构成买卖点。
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 /* ── 市场宽度图（从基本面叠图搬来的口径：3条宽度线 + 20/80 阈值 + 色带） ── */
@@ -144,9 +248,13 @@ function humanize(text: string): string {
 }
 
 /* ── 持仓相关板块卡 ── */
-function HoldingBoardCard({ b }: { b: SectorBoardRow }) {
+function HoldingBoardCard({ b, onOpen }: { b: SectorBoardRow; onOpen: () => void }) {
   return (
-    <div className={`sb-hold-card${b.zone === "risk" ? " z-risk" : b.zone === "opportunity" ? " z-opp" : ""}`}>
+    <div
+      className={`sb-hold-card clickable${b.zone === "risk" ? " z-risk" : b.zone === "opportunity" ? " z-opp" : ""}`}
+      onClick={onOpen}
+      title="点开：价格 × 情绪对照图"
+    >
       <div className="sb-card-head">
         <b>{b.name}</b>
         <StageBadge stageCn={b.stage_cn} />
@@ -173,18 +281,26 @@ const REC_META: Record<SectorRecommendation["kind"], { icon: string; label: stri
   upgrade_watch: { icon: "📈", label: "接近转强", cls: "neutral" },
 };
 
-function RecommendationCard({ r, watched, onToggle }: {
-  r: SectorRecommendation; watched: boolean; onToggle: () => void;
+function RecommendationCard({ r, watched, onToggle, onOpen }: {
+  r: SectorRecommendation; watched: boolean; onToggle: () => void; onOpen: () => void;
 }) {
   const meta = REC_META[r.kind];
   return (
-    <div className={`sb-rec-card${watched ? " watched" : ""}`}>
+    <div
+      className={`sb-rec-card clickable${watched ? " watched" : ""}`}
+      onClick={onOpen}
+      title="点开：价格 × 情绪对照图"
+    >
       <div className="sb-card-head">
         <b>{meta.icon} {r.name}</b>
         <span className={`macro-chip ${meta.cls}`}>{meta.label}</span>
         {r.holding && <span className="mood-hold-tag">持仓相关</span>}
         <span className="spacer" />
-        <button type="button" className={`btn mini${watched ? "" : " primary"}`} onClick={onToggle}>
+        <button
+          type="button"
+          className={`btn mini${watched ? "" : " primary"}`}
+          onClick={(e) => { e.stopPropagation(); onToggle(); }}
+        >
           {watched ? "✓ 已观察 · 移除" : "+ 加入观察"}
         </button>
       </div>
@@ -195,8 +311,8 @@ function RecommendationCard({ r, watched, onToggle }: {
 }
 
 /* ── 全部大板块排行图（横向条形 + 20/80 阈值线 + 持仓/观察高亮） ── */
-function AllBoardsChart({ boards, watch, height = 560 }: {
-  boards: SectorBoardRow[]; watch: Set<string>; height?: number;
+function AllBoardsChart({ boards, watch, onOpen, height = 560 }: {
+  boards: SectorBoardRow[]; watch: Set<string>; onOpen: (b: SectorBoardRow) => void; height?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const sorted = useMemo(() => [...boards].sort((a, b) => b.b50 - a.b50), [boards]);
@@ -206,6 +322,11 @@ function AllBoardsChart({ boards, watch, height = 560 }: {
     const inst = echarts.init(ref.current, undefined, { renderer: "canvas" });
     const ro = new ResizeObserver(() => inst.resize());
     ro.observe(ref.current);
+    const onBarClick = (params: { dataIndex?: number }) => {
+      const b = sorted[params.dataIndex ?? -1];
+      if (b) onOpen(b);
+    };
+    inst.on("click", onBarClick);
     inst.setOption({
       animation: false,
       grid: { left: 6, right: 40, top: 10, bottom: 40, containLabel: true },
@@ -262,10 +383,11 @@ function AllBoardsChart({ boards, watch, height = 560 }: {
       }],
     });
     return () => {
+      inst.off("click", onBarClick);
       ro.disconnect();
       inst.dispose();
     };
-  }, [sorted, watch]);
+  }, [sorted, watch, onOpen]);
 
   return <div ref={ref} style={{ width: "100%", height }} />;
 }
@@ -276,8 +398,13 @@ export default function SentimentSectorBlock({ view, heatAvailable, heatHint }: 
 }) {
   const { watch, toggle } = useWatchBoards();
   const [breadthTab, setBreadthTab] = useState<"CN_ALL_A" | "SP500">("CN_ALL_A");
+  const [openBoard, setOpenBoard] = useState<{ code: string; name: string } | null>(null);
   const holdings = useMemo(() => view.boards.filter((b) => b.holding).sort((a, b) => b.b50 - a.b50), [view.boards]);
-  const watchedBoards = useMemo(() => view.boards.filter((b) => watch.has(b.code)), [view.boards, watch]);
+  const watchedBoards = useMemo(
+    () => view.boards.filter((b) => watch.has(b.code)).sort((a, b) => b.b50 - a.b50),
+    [view.boards, watch],
+  );
+  const open = (b: { code: string; name: string }) => setOpenBoard(b);
 
   if (!view.available) {
     return (
@@ -312,23 +439,23 @@ export default function SentimentSectorBlock({ view, heatAvailable, heatHint }: 
       </div>
 
       {/* 持仓相关板块（优先展示） */}
-      <div className="sb-sub-title" style={{ marginTop: 14 }}>持仓相关板块（{holdings.length} 个）</div>
+      <div className="sb-sub-title" style={{ marginTop: 14 }}>持仓相关板块（{holdings.length} 个 · 点卡片看对照图）</div>
       <div className="sb-hold-grid">
-        {holdings.map((b) => <HoldingBoardCard key={b.code} b={b} />)}
+        {holdings.map((b) => <HoldingBoardCard key={b.code} b={b} onOpen={() => open(b)} />)}
       </div>
 
       {/* 我的观察（用户自己选的） */}
       {watchedBoards.length > 0 && (
         <>
-          <div className="sb-sub-title" style={{ marginTop: 14 }}>我的观察（{watchedBoards.length} 个 · 自己选的，可随时移除）</div>
+          <div className="sb-sub-title" style={{ marginTop: 14 }}>我的观察（{watchedBoards.length} 个 · 自己选的，可随时移除 · 点卡片看对照图）</div>
           <div className="sb-hold-grid">
-            {watchedBoards.sort((a, b) => b.b50 - a.b50).map((b) => (
-              <div key={b.code} className="sb-hold-card watched-card">
+            {watchedBoards.map((b) => (
+              <div key={b.code} className="sb-hold-card watched-card clickable" onClick={() => open(b)} title="点开：价格 × 情绪对照图">
                 <div className="sb-card-head">
                   <b>★ {b.name}</b>
                   <StageBadge stageCn={b.stage_cn} />
                   <span className="spacer" />
-                  <button type="button" className="btn mini" onClick={() => toggle(b.code)}>移除</button>
+                  <button type="button" className="btn mini" onClick={(e) => { e.stopPropagation(); toggle(b.code); }}>移除</button>
                 </div>
                 <div className="sb-big-row">
                   <span className="sb-big-num">{b.b50.toFixed(0)}<i>%</i></span>
@@ -351,21 +478,35 @@ export default function SentimentSectorBlock({ view, heatAvailable, heatHint }: 
       ) : (
         <div className="sb-rec-list">
           {view.recommendations.map((r) => (
-            <RecommendationCard key={`${r.kind}-${r.code}`} r={r} watched={watch.has(r.code)} onToggle={() => toggle(r.code)} />
+            <RecommendationCard
+              key={`${r.kind}-${r.code}`}
+              r={r}
+              watched={watch.has(r.code)}
+              onToggle={() => toggle(r.code)}
+              onOpen={() => open(r)}
+            />
           ))}
         </div>
       )}
 
       {/* 全部大板块排行 */}
       <div className="sb-sub-title" style={{ marginTop: 16 }}>
-        全部大板块排行（{view.n_boards} 个 · 强度从高到低 · 蓝边=持仓相关 · ★=我的观察）
+        全部大板块排行（{view.n_boards} 个 · 强度从高到低 · 蓝边=持仓相关 · ★=我的观察 · 点柱子看对照图）
       </div>
-      <AllBoardsChart boards={view.boards} watch={watch} />
+      <AllBoardsChart boards={view.boards} watch={watch} onOpen={open} />
 
       <div className="muted mood-note">
         {view.zone_note_cn}
         {!heatAvailable && ` · ${heatHint}`}
       </div>
+
+      {openBoard && (
+        <BoardChartDrawer
+          code={openBoard.code}
+          name={openBoard.name}
+          onClose={() => setOpenBoard(null)}
+        />
+      )}
     </section>
   );
 }
