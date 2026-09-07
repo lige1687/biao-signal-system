@@ -29,10 +29,8 @@ from lei_signal.features.volume_profile import compute_volume_profile
 
 POOL = Path.home() / ".lei_signal_lab" / "backtest_pool"
 TARGETS = {
-    "510300.SS": ("沪深300ETF", "宽基"), "588000.SS": ("科创50ETF", "宽基"),
-    "512690.SS": ("白酒ETF", "行业"), "512010.SS": ("医药ETF", "行业"),
-    "512480.SS": ("半导体ETF", "行业"), "513180.SS": ("恒生科技", "QDII"),
-    "513100.SS": ("纳指ETF", "QDII"), "518850.SS": ("黄金ETF", "商品"),
+    "159915.SZ": ("创业板ETF", "宽基"), "510500.SS": ("中证500ETF", "宽基"),
+    "512100.SS": ("中证1000ETF", "宽基"),
 }
 START, END = "2021-01-04", "2026-08-24"
 FEE = 0.001
@@ -147,7 +145,7 @@ def main() -> None:
             out[sym][arm] = r
             print(f"{name:9s}{kind:4s}{label:12s}{r['invested']:>5.0f}"
                   f"{str(r['multiple']):>6s}{r['mdd']:>7.1f}%{r['cycles']:>4d}")
-    Path("/tmp/ambush_cycle_results.json").write_text(json.dumps(out, ensure_ascii=False, indent=1))
+    Path("/tmp/ambush_wide_results.json").write_text(json.dumps(out, ensure_ascii=False, indent=1))
     print("\n已存 /tmp/ambush_cycle_results.json")
 
 
