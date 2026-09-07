@@ -88,12 +88,13 @@ function BoardChartDrawer({ code, name, onClose, us }: { code: string; name: str
       series: [
         {
           name: "板块指数", type: "line", yAxisIndex: 0, data: rebase, showSymbol: false,
+          connectNulls: true, // 趋势历史隔天有缺档（当日快照未跑），连线才是真实走势
           lineStyle: { width: 2.2, color: "#2563eb" }, itemStyle: { color: "#2563eb" }, z: 10,
         },
         ...(refSeries
           ? [{
               name: us ? "标普500等权(对照)" : "参考线", type: "line" as const, yAxisIndex: 0,
-              data: refSeries, showSymbol: false,
+              data: refSeries, showSymbol: false, connectNulls: true,
               lineStyle: { width: 1.2, type: "dashed" as const, color: "#9aa4b2" },
               itemStyle: { color: "#9aa4b2" }, z: 8,
             }]
