@@ -380,6 +380,35 @@
      "conclusion_cn": "禁止引用「散户过热就要跌」的朴素说法——热要分背景（恐慌中买对/狂欢中买错）"
     }
    ]
+  },
+  {
+   "id": "exp-2026-09-07-ambush-dca-exit",
+   "report": "docs/experiments/ambush-dca-exit-2026-09-07.md",
+   "date": "2026-09-07",
+   "verdict": "mixed",
+   "one_liner_cn": "定投埋伏×退出：无万能解；GLM自主版=回撤优化器（全标的回撤改善、收益居中、极度保守）。",
+   "findings": [
+    {
+     "match": {
+      "signal": "exit_rule",
+      "dimension": "dca_exit"
+     },
+     "direction": "mixed",
+     "confidence": "defined",
+     "metrics_cn": "5标的×4退出变体+GLM版（127次决策存档）：半导体不退出2.58倍最优（止盈全踏空）；恒科趋势止盈1.53最优；白酒医药五年不反转怎么退都亏（0.7~0.94倍）",
+     "conclusion_cn": "定投退出方式由后续走势决定（事前不可知）——烂标的的问题在标的不在投法"
+    },
+    {
+     "match": {
+      "signal": "combo_overlay",
+      "dimension": "ai_dca_exit"
+     },
+     "direction": "positive",
+     "confidence": "defined",
+     "metrics_cn": "GLM版全标的回撤改善4~17pp（白酒-31→-24/恒科-32→-15/沪深300-20→-16），收益居中（比规则止盈少踏空比死拿少挨跌）；行为=110hold/7sell_half/0clear",
+     "conclusion_cn": "GLM自主性适合低频防守型位置（定投退出辅助），不适合方向裁决——保守性在定投是美德在趋势信号是致命伤"
+    }
+   ]
   }
  ]
 }
