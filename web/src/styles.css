@@ -2643,6 +2643,7 @@ a { color: var(--accent); text-decoration: none; }
   white-space: nowrap;
 }
 .macro-chip.opportunity { background: #16a34a18; color: #15803d; }
+.macro-chip.info { background: #4d7fc418; color: #1c5d94; }
 .macro-chip.neutral { background: #6b728018; color: #4b5563; }
 .macro-chip.caution { background: #f59e0b18; color: #b45309; }
 .macro-chip.warning { background: #ea580c18; color: #c2410c; }
@@ -4724,6 +4725,44 @@ a { color: var(--accent); text-decoration: none; }
 .mood-hold-chip { font-size: 11.5px; padding: 2px 8px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.1); }
 .mood-hold-chip.danger { border-color: #d24a43; color: #d24a43; background: rgba(210,74,67,0.08); font-weight: 700; }
 .mood-hold-chip.watch { border-color: #b45309; color: #b45309; background: rgba(180,83,9,0.07); }
+
+/* 情绪页·可读性重做（2026-09-07）：结论条 + 卡片头部 + 信号卡 */
+.mood-verdictbar {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 18px; border-radius: 10px; margin-bottom: 14px;
+  border: 1px solid var(--border);
+}
+.mood-verdictbar-icon { font-size: 26px; line-height: 1; }
+.mood-verdictbar-main { font-size: 15px; font-weight: 700; line-height: 1.5; }
+.mood-verdictbar-sub { font-size: 12px; margin-top: 4px; color: var(--text-dim); }
+.mood-verdictbar.info { background: rgba(77,127,196,0.09); border-color: rgba(77,127,196,0.45); }
+.mood-verdictbar.info .mood-verdictbar-main { color: #1c5d94; }
+.mood-verdictbar.danger { background: rgba(210,74,67,0.09); border-color: rgba(210,74,67,0.5); }
+.mood-verdictbar.danger .mood-verdictbar-main { color: #b0362f; }
+.mood-verdictbar.caution { background: rgba(180,83,9,0.08); border-color: rgba(180,83,9,0.4); }
+.mood-verdictbar.caution .mood-verdictbar-main { color: #9a4a08; }
+.mood-verdictbar.neutral { background: rgba(0,0,0,0.03); border-color: var(--border); }
+.mood-verdictbar.neutral .mood-verdictbar-main { color: var(--text-dim); }
+
+.mood-head2 { margin-bottom: 8px; }
+.mood-head2-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.mood-verdict { font-size: 13px; font-weight: 700; line-height: 1.5; margin-top: 6px; }
+.mood-q {
+  display: inline-block; margin-left: 4px; width: 13px; height: 13px; line-height: 13px;
+  text-align: center; border-radius: 50%; font-size: 9.5px; font-weight: 700;
+  background: rgba(0,0,0,0.08); color: var(--text-faint); cursor: help; vertical-align: 1px;
+}
+.mood-comp span { cursor: help; }
+
+.mood-signal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 12px; margin-top: 8px; }
+.mood-signal-card {
+  border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px;
+  background: var(--bg-panel);
+}
+.mood-signal-card.on-blue { border-color: rgba(77,127,196,0.55); background: rgba(77,127,196,0.06); }
+.mood-signal-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 13.5px; }
+.mood-signal-body p { font-size: 12.5px; line-height: 1.7; margin: 8px 0 0; color: var(--text-dim); }
+.mood-signal-body p b { color: var(--text); }
 
 /* ---- 全局情绪信号横幅（信号激活时才出现，2026-09-06） ---- */
 .sent-banner-wrap {

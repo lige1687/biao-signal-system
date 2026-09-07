@@ -76,21 +76,29 @@ def _all_a_equal_index() -> pd.Series | None:
 
 
 def cn_mood() -> dict:
-    """全A情绪：三成分 + 多数票合成。任一成分缺失标注 degraded。"""
+    """全A情绪：三成分 + 多数票合成。任一成分缺失标注 degraded。
+
+    成分两类口径：pct=变化率（×100 配 %）；amount=金额（亿元原值配 亿，
+    2026-09-07 修复：此前小单净流入 20 日合计被当百分比格式化成 +1017654%）。
+    """
     comp: dict[str, dict] = {}
-    for key, fn, label in (
-        ("margin20", _margin_chg20, "融资余额20日变化"),
-        ("retail_small20", _cn_small_flow20, "全A散户小单净流入20日合计"),
-        ("equal_mom20", _all_a_equal_index, "全A等权指数20日动能"),
+    for key, fn, label, kind in (
+        ("margin20", _margin_chg20, "融资余额20日变化", "pct"),
+        ("retail_small20", _cn_small_flow20, "全A散户小单净流入20日合计", "amount"),
+        ("equal_mom20", _all_a_equal_index, "全A等权指数20日动能", "pct"),
     ):
         s = fn()
         if s is None or s.dropna().empty:
             comp[key] = {"label_cn": label, "ok": False}
             continue
         last = float(s.dropna().iloc[-1])
+        if kind == "amount":
+            value, unit = round(last, 0), "亿"
+        else:
+            value, unit = round(last * 100, 2), "%"
         comp[key] = {
-            "label_cn": label, "ok": True, "value": round(last * 100, 2),
-            "unit": "%", "vote": int(np.sign(last)),
+            "label_cn": label, "ok": True, "value": value,
+            "unit": unit, "vote": int(np.sign(last)),
             "as_of": str(s.dropna().index[-1].date()),
         }
     votes = [c["vote"] for c in comp.values() if c.get("ok")]
@@ -234,7 +242,11 @@ def us_survey_latest() -> dict:
             obs = senti.load_naaim_observations(p)
             o = obs[-1]
             expo = float(o.exposure_index)  # type: ignore[attr-defined]
-            state = "机构极端乐观" if expo > 100 else ("机构极端悲观" if expo < 40 else "中性")
+            # 85–100 区间历史罕见（均值约 60–70），98+ 却标「中性」会误导，
+            # 按 NAAIM 惯例外推一档「偏乐观（接近自满）」。
+            state = ("机构极端乐观" if expo > 100
+                     else "机构偏乐观（接近自满）" if expo >= 85
+                     else "机构极端悲观" if expo < 40 else "中性")
             out["naaim"] = {"available": True, "as_of": str(o.survey_week),  # type: ignore[attr-defined]
                             "exposure_index": expo, "state_cn": state,
                             "threshold_source_cn": "NAAIM 惯例（>100 极端乐观 / <40 极端悲观）"}
