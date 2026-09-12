@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+import os
 import threading
 import time
 from dataclasses import dataclass
@@ -14,7 +16,12 @@ from tools.agent_delegate.core import (
     read_json,
     task_paths,
 )
-from tools.agent_delegate.runner import recover_interrupted_tasks, request_stop, run_task
+from tools.agent_delegate.runner import (
+    _filtered_environment,
+    recover_interrupted_tasks,
+    request_stop,
+    run_task,
+)
 
 FIXTURE = Path(__file__).parents[1] / "fixtures" / "fake_agent_provider.py"
 
@@ -235,3 +242,34 @@ def test_recovery_marks_only_orphaned_active_tasks(task_factory) -> None:
     assert recovered == [orphaned.task_id]
     assert read_json(orphaned.paths.state)["state"] == "interrupted"
     assert read_json(queued.paths.state)["state"] == "queued"
+
+
+def test_cc_provider_loads_only_required_runtime_env_from_settings(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    settings = tmp_path / ".claude" / "settings.json"
+    settings.parent.mkdir()
+    settings.write_text(
+        json.dumps(
+            {
+                "env": {
+                    "ANTHROPIC_AUTH_TOKEN": "private-token",
+                    "ANTHROPIC_BASE_URL": "https://provider.invalid",
+                    "IWENCAI_API_KEY": "must-not-leak",
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setenv("HOME", str(tmp_path))
+    for name in tuple(os.environ):
+        if name.startswith(("ANTHROPIC_", "CLAUDE_CODE_")):
+            monkeypatch.delenv(name)
+
+    cc_environment = _filtered_environment(provider_name="cc")
+    zcode_environment = _filtered_environment(provider_name="zcode")
+
+    assert cc_environment["ANTHROPIC_AUTH_TOKEN"] == "private-token"
+    assert cc_environment["ANTHROPIC_BASE_URL"] == "https://provider.invalid"
+    assert "IWENCAI_API_KEY" not in cc_environment
+    assert "ANTHROPIC_AUTH_TOKEN" not in zcode_environment

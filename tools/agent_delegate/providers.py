@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from .core import TaskPaths, TaskRequest, ValidationError
+from .core import TaskPaths, TaskRequest, ValidationError, read_json
 
 DEFAULT_CC = "/opt/homebrew/bin/claude"
 DEFAULT_NODE = "/opt/homebrew/Cellar/node@22/22.22.1_1/bin/node"
@@ -130,13 +130,45 @@ def doctor_checks(config: ProviderConfig | None = None) -> list[DoctorCheck]:
     """Check local binaries without prompting or invoking a model."""
 
     selected = config or ProviderConfig.from_environment()
-    return [
-        _run_doctor_command([selected.cc, "--version"], provider="cc"),
-        _run_doctor_command(
-            [selected.node, selected.zcode_script, "doctor", "--json"],
+    cc_check = _run_doctor_command([selected.cc, "--version"], provider="cc")
+    zcode_check = _run_doctor_command(
+        [selected.node, selected.zcode_script, "doctor", "--json"],
+        provider="zcode",
+    )
+    configured_path = os.environ.get("AGENT_DELEGATE_ZCODE_CONFIG")
+    home = os.environ.get("HOME")
+    zcode_config = (
+        Path(configured_path).expanduser()
+        if configured_path
+        else Path(home) / ".zcode" / "cli" / "config.json"
+        if home
+        else None
+    )
+    has_zcode_model = False
+    if zcode_config is not None:
+        try:
+            value = read_json(zcode_config)
+        except (OSError, ValueError, json.JSONDecodeError):
+            value = None
+        model = value.get("model") if isinstance(value, dict) else None
+        main_model = model.get("main") if isinstance(model, dict) else None
+        has_zcode_model = (
+            isinstance(main_model, dict)
+            and isinstance(main_model.get("provider"), str)
+            and bool(main_model["provider"].strip())
+            and isinstance(main_model.get("model"), str)
+            and bool(main_model["model"].strip())
+        )
+    if zcode_check.ok and not has_zcode_model:
+        location = str(zcode_config) if zcode_config is not None else "~/.zcode/cli/config.json"
+        zcode_check = DoctorCheck(
             provider="zcode",
-        ),
-    ]
+            ok=False,
+            version=zcode_check.version,
+            detail=f"CLI model config missing: {location}",
+            command=zcode_check.command,
+        )
+    return [cc_check, zcode_check]
 
 
 def build_provider_argv(
@@ -176,19 +208,16 @@ def build_provider_argv(
         return [
             selected.node,
             selected.zcode_script,
+            "--prompt",
+            request.task_text,
             "--cwd",
             str(paths.workspace),
             "--mode",
             "plan",
-            "--max-turns",
-            str(request.max_turns),
-            "--print",
             "--json",
             "--no-color",
             "--disallowed-tools",
             "Bash,Edit,Write,Agent,Task,mcp__*",
-            "--prompt",
-            request.task_text,
         ]
     if request.provider == "fake":
         if not selected.fake:

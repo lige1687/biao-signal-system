@@ -113,7 +113,34 @@ def _release_lock(descriptor: int) -> None:
         os.close(descriptor)
 
 
-def _filtered_environment(*, provider: bool = False) -> dict[str, str]:
+def _cc_settings_environment(home: str | None) -> dict[str, str]:
+    if not home:
+        return {}
+    configured = os.environ.get("AGENT_DELEGATE_CC_SETTINGS")
+    settings_path = (
+        Path(configured).expanduser()
+        if configured
+        else Path(home) / ".claude/settings.json"
+    )
+    try:
+        if settings_path.stat().st_size > 1024 * 1024:
+            return {}
+        value = read_json(settings_path)
+    except (OSError, ValueError, json.JSONDecodeError):
+        return {}
+    configured_environment = value.get("env") if isinstance(value, dict) else None
+    if not isinstance(configured_environment, dict):
+        return {}
+    return {
+        key: item
+        for key, item in configured_environment.items()
+        if isinstance(key, str)
+        and isinstance(item, str)
+        and key.startswith(("ANTHROPIC_", "CLAUDE_CODE_"))
+    }
+
+
+def _filtered_environment(*, provider_name: str | None = None) -> dict[str, str]:
     names = {
         "HOME",
         "PATH",
@@ -124,23 +151,40 @@ def _filtered_environment(*, provider: bool = False) -> dict[str, str]:
         "SHELL",
         "TERM",
     }
-    if provider:
-        names.update(
+    environment = {name: os.environ[name] for name in names if name in os.environ}
+    if provider_name == "cc":
+        environment.update(_cc_settings_environment(environment.get("HOME")))
+        environment.update(
             {
-                "ANTHROPIC_API_KEY",
-                "ANTHROPIC_AUTH_TOKEN",
-                "CLAUDE_CODE_OAUTH_TOKEN",
-                "ZAI_API_KEY",
-                "ZHIPUAI_API_KEY",
-                "HTTP_PROXY",
-                "HTTPS_PROXY",
-                "NO_PROXY",
-                "http_proxy",
-                "https_proxy",
-                "no_proxy",
+                name: value
+                for name, value in os.environ.items()
+                if name.startswith(("ANTHROPIC_", "CLAUDE_CODE_"))
             }
         )
-    return {name: os.environ[name] for name in names if name in os.environ}
+    elif provider_name == "zcode":
+        environment.update(
+            {
+                name: value
+                for name, value in os.environ.items()
+                if name.startswith(("ZAI_", "ZHIPUAI_"))
+            }
+        )
+    if provider_name:
+        environment.update(
+            {
+                name: os.environ[name]
+                for name in (
+                    "HTTP_PROXY",
+                    "HTTPS_PROXY",
+                    "NO_PROXY",
+                    "http_proxy",
+                    "https_proxy",
+                    "no_proxy",
+                )
+                if name in os.environ
+            }
+        )
+    return environment
 
 
 def _stream_reader(
@@ -385,7 +429,7 @@ def _execute_locked(
     process = subprocess.Popen(
         argv,
         cwd=paths.workspace,
-        env=_filtered_environment(provider=True),
+        env=_filtered_environment(provider_name=request.provider),
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,

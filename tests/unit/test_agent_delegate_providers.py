@@ -8,9 +8,11 @@ import pytest
 
 from tools.agent_delegate.core import TaskRequest, ValidationError, task_paths
 from tools.agent_delegate.providers import (
+    DoctorCheck,
     ProviderConfig,
     _extract_version,
     build_provider_argv,
+    doctor_checks,
     extract_final_result,
     parse_provider_line,
     provider_stdin,
@@ -79,8 +81,9 @@ def test_zcode_review_argv_never_uses_yolo(tmp_path: Path) -> None:
     assert "yolo" not in argv
     assert pair(argv, "--cwd") == str(paths.workspace)
     assert pair(argv, "--prompt") == current.task_text
-    assert "--print" in argv
     assert "--json" in argv
+    assert "--print" not in argv
+    assert "--max-turns" not in argv
     assert "Bash" in pair(argv, "--disallowed-tools")
     assert provider_stdin(current) is None
 
@@ -136,3 +139,25 @@ def test_zcode_doctor_version_uses_nested_cli_value() -> None:
     output = json.dumps({"cli": {"name": "zcode", "version": "0.16.3"}})
 
     assert _extract_version("zcode", output) == "0.16.3"
+
+
+def test_doctor_reports_missing_zcode_cli_model_config(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("HOME", str(tmp_path))
+    config_path = tmp_path / ".zcode" / "cli" / "config.json"
+    config_path.parent.mkdir(parents=True)
+    config_path.write_text(json.dumps({"plugins": {}}), encoding="utf-8")
+
+    def successful_command(command: list[str], *, provider: str) -> DoctorCheck:
+        return DoctorCheck(provider, True, "test-version", "binary ok", tuple(command))
+
+    monkeypatch.setattr(
+        "tools.agent_delegate.providers._run_doctor_command", successful_command
+    )
+
+    checks = {check.provider: check for check in doctor_checks(config())}
+
+    assert checks["cc"].ok is True
+    assert checks["zcode"].ok is False
+    assert "model config missing" in checks["zcode"].detail
