@@ -33,7 +33,13 @@ from .core import (
     validate_request,
 )
 from .providers import ProviderConfig, build_provider_argv, doctor_checks
-from .runner import guard_process_group, recover_interrupted_tasks, request_stop, run_task
+from .runner import (
+    guard_process_group,
+    launch_provider,
+    recover_interrupted_tasks,
+    request_stop,
+    run_task,
+)
 
 TERMINAL_STATES = frozenset(
     {"completed", "failed", "stopped", "timed_out", "interrupted"}
@@ -490,19 +496,39 @@ def _run_public_command(args: argparse.Namespace) -> int:
 
 
 def _run_internal(arguments: Sequence[str]) -> int | None:
-    if not arguments or arguments[0] not in {"_run", "_guard"}:
+    if not arguments or arguments[0] not in {"_run", "_guard", "_launch"}:
         return None
     parser = argparse.ArgumentParser(add_help=False)
-    parser.add_argument("internal_command", choices=("_run", "_guard"))
+    parser.add_argument("internal_command", choices=("_run", "_guard", "_launch"))
     parser.add_argument("--task-id")
     parser.add_argument("--state-root")
     parser.add_argument("--runner-pid", type=int)
     parser.add_argument("--provider-pgid", type=int)
+    parser.add_argument("--ready-fd", type=int)
+    parser.add_argument("--release-fd", type=int)
+    parser.add_argument("--command-file")
+    parser.add_argument("--cwd")
     args = parser.parse_args(arguments)
     if args.internal_command == "_guard":
         if args.runner_pid is None or args.provider_pgid is None:
             parser.error("_guard requires --runner-pid and --provider-pgid")
-        return guard_process_group(args.runner_pid, args.provider_pgid)
+        return guard_process_group(args.runner_pid, args.provider_pgid, ready_fd=args.ready_fd)
+    if args.internal_command == "_launch":
+        if (
+            args.runner_pid is None
+            or args.release_fd is None
+            or not args.command_file
+            or not args.cwd
+        ):
+            parser.error(
+                "_launch requires --runner-pid, --release-fd, --command-file, and --cwd"
+            )
+        return launch_provider(
+            args.runner_pid,
+            args.release_fd,
+            Path(args.command_file),
+            Path(args.cwd),
+        )
     if not args.task_id or not args.state_root:
         parser.error("_run requires --task-id and --state-root")
     return run_task(Path(args.state_root).expanduser(), args.task_id)

@@ -113,11 +113,7 @@ def test_cc_result_parser_requires_result_event() -> None:
 
 
 def test_zcode_parser_accepts_nested_structured_result_but_not_plain_text() -> None:
-    lines = [
-        "starting up",
-        json.dumps({"type": "progress", "message": {"text": "reading"}}),
-        json.dumps({"data": {"output": {"content": [{"text": "review done"}]}}}),
-    ]
+    lines = [json.dumps({"data": {"output": {"content": [{"text": "review done"}]}}})]
 
     assert extract_final_result("zcode", lines) == "review done"
     assert extract_final_result("zcode", ["plain final answer"]) is None
@@ -128,8 +124,18 @@ def test_zcode_parser_accepts_nested_structured_result_but_not_plain_text() -> N
     }
 
 
-def test_zcode_progress_message_is_not_a_final_result() -> None:
-    lines = [json.dumps({"type": "progress", "message": "reading files"})]
+def test_zcode_untyped_object_inside_jsonl_is_not_a_final_result() -> None:
+    lines = [
+        json.dumps({"type": "progress", "message": "reading"}),
+        json.dumps({"message": "ambiguous untyped event"}),
+    ]
+
+    assert extract_final_result("zcode", lines) is None
+
+
+@pytest.mark.parametrize("event_type", ["progress", "warning", "status", "tool_call"])
+def test_zcode_nonterminal_message_is_not_a_final_result(event_type: str) -> None:
+    lines = [json.dumps({"type": event_type, "message": "not a final answer"})]
 
     assert extract_final_result("zcode", lines) is None
 

@@ -10,6 +10,7 @@ import json
 import os
 import queue
 import re
+import select
 import signal
 import subprocess
 import sys
@@ -271,9 +272,18 @@ def guard_process_group(
     runner_pid: int,
     provider_process_group_id: int,
     grace_seconds: float = STOP_GRACE_SECONDS,
+    ready_fd: int | None = None,
 ) -> int:
     """Independently stop the provider if this guardian loses its runner parent."""
 
+    if ready_fd is not None:
+        try:
+            os.write(ready_fd, b"1")
+        except OSError:
+            return 1
+        finally:
+            with suppress(OSError):
+                os.close(ready_fd)
     while True:
         exists = _group_exists(provider_process_group_id)
         if exists is False:
@@ -291,24 +301,127 @@ def guard_process_group(
 
 def _start_guardian(provider_process_group_id: int) -> subprocess.Popen[bytes]:
     script = Path(__file__).resolve().parents[2] / "scripts" / "agent_delegate.py"
-    return subprocess.Popen(
-        [
-            sys.executable,
-            str(script),
-            "_guard",
-            "--runner-pid",
-            str(os.getpid()),
-            "--provider-pgid",
-            str(provider_process_group_id),
-        ],
-        cwd=script.parents[1],
-        env=_filtered_environment(),
-        stdin=subprocess.DEVNULL,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-        start_new_session=True,
-        close_fds=True,
-    )
+    ready_read_fd, ready_write_fd = os.pipe()
+    try:
+        guardian = subprocess.Popen(
+            [
+                sys.executable,
+                str(script),
+                "_guard",
+                "--runner-pid",
+                str(os.getpid()),
+                "--provider-pgid",
+                str(provider_process_group_id),
+                "--ready-fd",
+                str(ready_write_fd),
+            ],
+            cwd=script.parents[1],
+            env=_filtered_environment(),
+            pass_fds=(ready_write_fd,),
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            start_new_session=True,
+            close_fds=True,
+        )
+    except OSError:
+        os.close(ready_read_fd)
+        raise
+    finally:
+        os.close(ready_write_fd)
+    readable, _, _ = select.select([ready_read_fd], [], [], 2.0)
+    ready = os.read(ready_read_fd, 1) if readable else b""
+    os.close(ready_read_fd)
+    if not ready or guardian.poll() is not None:
+        with suppress(ProcessLookupError):
+            guardian.terminate()
+        with suppress(subprocess.TimeoutExpired):
+            guardian.wait(timeout=1)
+        raise OSError("guardian failed to become ready")
+    return guardian
+
+
+def launch_provider(
+    runner_pid: int,
+    release_fd: int,
+    command_file: Path,
+    cwd: Path,
+) -> int:
+    """Wait inertly for the runner to establish a guardian, then exec the provider."""
+
+    try:
+        while True:
+            if os.getppid() != runner_pid:
+                return 1
+            readable, _, _ = select.select([release_fd], [], [], 0.1)
+            if not readable:
+                continue
+            released = os.read(release_fd, 1)
+            if not released or os.getppid() != runner_pid:
+                return 1
+            command_document = read_json(command_file)
+            if not isinstance(command_document, dict):
+                raise ValueError("invalid provider command document")
+            command = command_document.get("argv")
+            if not isinstance(command, list) or not command or not all(
+                isinstance(part, str) and part for part in command
+            ):
+                raise ValueError("invalid provider command")
+            os.chdir(cwd)
+            os.execvpe(command[0], command, os.environ)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        message = f"provider launcher failed: {type(exc).__name__}\n".encode()
+        with suppress(OSError):
+            os.write(2, message)
+        return 127
+    finally:
+        with suppress(OSError):
+            os.close(release_fd)
+
+
+def _start_blocked_provider(
+    argv: list[str],
+    paths: TaskPaths,
+    provider_environment: dict[str, str],
+) -> tuple[subprocess.Popen[bytes], int]:
+    """Start an inert launcher that cannot invoke the provider until released."""
+
+    command_file = paths.root / "provider-command.json"
+    atomic_write_json(command_file, {"argv": argv})
+    release_read_fd, release_write_fd = os.pipe()
+    script = Path(__file__).resolve().parents[2] / "scripts" / "agent_delegate.py"
+    try:
+        process = subprocess.Popen(
+            [
+                sys.executable,
+                str(script),
+                "_launch",
+                "--runner-pid",
+                str(os.getpid()),
+                "--release-fd",
+                str(release_read_fd),
+                "--command-file",
+                str(command_file.resolve()),
+                "--cwd",
+                str(paths.workspace.resolve()),
+            ],
+            cwd=script.parents[1],
+            env=provider_environment,
+            pass_fds=(release_read_fd,),
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=False,
+            start_new_session=True,
+            close_fds=True,
+            shell=False,
+        )
+    except OSError:
+        os.close(release_write_fd)
+        raise
+    finally:
+        os.close(release_read_fd)
+    return process, release_write_fd
 
 
 def _relative_contains(parent_value: str, child_value: str) -> bool:
@@ -558,17 +671,10 @@ def _execute_locked(
     argv = build_provider_argv(
         provider_request, paths, ProviderConfig.from_environment()
     )
-    process = subprocess.Popen(
+    process, release_fd = _start_blocked_provider(
         argv,
-        cwd=paths.workspace,
-        env=_filtered_environment(provider_name=request.provider),
-        stdin=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=False,
-        start_new_session=True,
-        close_fds=True,
-        shell=False,
+        paths,
+        _filtered_environment(provider_name=request.provider),
     )
     assert process.stdin is not None
     assert process.stdout is not None
@@ -577,40 +683,57 @@ def _execute_locked(
     try:
         guardian = _start_guardian(process_group_id)
     except OSError:
+        os.close(release_fd)
         _cleanup_group(process_group_id, 0.1)
         process.wait(timeout=2)
         raise
+    try:
+        output_events: queue.Queue[tuple[str, bytes | None]] = queue.Queue(maxsize=512)
+        threads = [
+            threading.Thread(
+                target=_stream_reader,
+                args=(process.stdout, "stdout", output_events),
+                daemon=True,
+            ),
+            threading.Thread(
+                target=_stream_reader,
+                args=(process.stderr, "stderr", output_events),
+                daemon=True,
+            ),
+        ]
+        for thread in threads:
+            thread.start()
 
-    output_events: queue.Queue[tuple[str, bytes | None]] = queue.Queue(maxsize=512)
-    threads = [
-        threading.Thread(
-            target=_stream_reader,
-            args=(process.stdout, "stdout", output_events),
+        prompt = provider_stdin(provider_request)
+        input_thread = threading.Thread(
+            target=_provider_input_writer,
+            args=(process.stdin, prompt),
             daemon=True,
-        ),
-        threading.Thread(
-            target=_stream_reader,
-            args=(process.stderr, "stderr", output_events),
-            daemon=True,
-        ),
-    ]
-    for thread in threads:
-        thread.start()
-
-    prompt = provider_stdin(provider_request)
-    input_thread = threading.Thread(
-        target=_provider_input_writer,
-        args=(process.stdin, prompt),
-        daemon=True,
-    )
-    input_thread.start()
-    _update_state(
-        paths,
-        state,
-        provider_pid=process.pid,
-        guardian_pid=guardian.pid,
-        latest_activity="provider started",
-    )
+        )
+        input_thread.start()
+        _update_state(
+            paths,
+            state,
+            provider_pid=process.pid,
+            guardian_pid=guardian.pid,
+            latest_activity="provider starting under guardian",
+        )
+        os.write(release_fd, b"1")
+        os.close(release_fd)
+        release_fd = -1
+        _update_state(paths, state, latest_activity="provider started")
+    except Exception:
+        if release_fd >= 0:
+            with suppress(OSError):
+                os.close(release_fd)
+        _cleanup_group(process_group_id, 0.1)
+        with suppress(subprocess.TimeoutExpired):
+            process.wait(timeout=2)
+        with suppress(ProcessLookupError):
+            guardian.terminate()
+        with suppress(subprocess.TimeoutExpired):
+            guardian.wait(timeout=1)
+        raise
 
     stdout_lines: deque[str] = deque(maxlen=MAX_CAPTURED_LINES)
     finished_streams: set[str] = set()

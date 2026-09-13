@@ -318,6 +318,17 @@ def _json_objects(lines: list[str]) -> list[Any]:
     return objects
 
 
+def _single_json_object(lines: list[str]) -> dict[str, Any] | None:
+    joined = "\n".join(lines).strip()
+    if not joined:
+        return None
+    try:
+        value = json.loads(joined)
+    except json.JSONDecodeError:
+        return None
+    return value if isinstance(value, dict) else None
+
+
 def extract_final_result(provider: str, lines: list[str]) -> str | None:
     """Extract only a structured final result from captured provider output."""
 
@@ -328,12 +339,17 @@ def extract_final_result(provider: str, lines: list[str]) -> str | None:
                 return _content_text(event.get("result"))
         return None
     if provider == "zcode":
+        single_object = _single_json_object(lines)
+        if single_object is not None and "type" not in single_object:
+            for key in ("result", "output", "text", "message"):
+                if (text := _find_key(single_object, key)) is not None:
+                    return text
         for event in reversed(objects):
-            if isinstance(event, dict) and event.get("type") in {
-                "progress",
-                "status",
-                "tool",
-                "tool_call",
+            if not isinstance(event, dict) or event.get("type") not in {
+                "result",
+                "completed",
+                "complete",
+                "final",
             }:
                 continue
             for key in ("result", "output", "text", "message"):

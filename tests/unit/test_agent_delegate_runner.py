@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 import os
+import select
+import sys
 import threading
 import time
 from dataclasses import dataclass
@@ -18,6 +20,7 @@ from tools.agent_delegate.core import (
 )
 from tools.agent_delegate.runner import (
     _filtered_environment,
+    _start_blocked_provider,
     recover_interrupted_tasks,
     request_stop,
     run_task,
@@ -165,6 +168,37 @@ def test_large_stdin_cannot_block_timeout(
 
     assert time.monotonic() - started < 5
     assert read_json(task.paths.state)["state"] == "timed_out"
+
+
+def test_blocked_launcher_cannot_invoke_provider_before_release(task_factory) -> None:
+    task = task_factory()
+    task.paths.workspace.mkdir(parents=True)
+    process, release_fd = _start_blocked_provider(
+        [sys.executable, str(FIXTURE), "--scenario", "normal"],
+        task.paths,
+        _filtered_environment(),
+    )
+    assert process.stdin is not None
+    assert process.stdout is not None
+    process.stdin.close()
+
+    try:
+        readable, _, _ = select.select([process.stdout], [], [], 0.25)
+        assert readable == []
+        assert process.poll() is None
+
+        os.write(release_fd, b"1")
+        os.close(release_fd)
+        release_fd = -1
+        stdout = process.stdout.read().decode()
+        assert process.wait(timeout=3) == 0
+        assert '"type": "result"' in stdout
+    finally:
+        if release_fd >= 0:
+            os.close(release_fd)
+        if process.poll() is None:
+            os.killpg(process.pid, 9)
+            process.wait(timeout=3)
 
 
 def test_large_stderr_does_not_deadlock_and_is_bounded(task_factory) -> None:
