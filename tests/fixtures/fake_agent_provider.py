@@ -25,10 +25,25 @@ def emit(value: dict[str, object], *, partial: bool = False) -> None:
 
 
 def main() -> int:
+    argument_scenario = (
+        sys.argv[sys.argv.index("--scenario") + 1]
+        if "--scenario" in sys.argv
+        else None
+    )
+    if argument_scenario == "block-stdin":
+        signal.signal(signal.SIGTERM, signal.SIG_IGN)
+        while True:
+            time.sleep(0.1)
     task = sys.stdin.read()
     match = re.search(r"scenario:\s*([a-z-]+)", task)
-    scenario = match.group(1) if match else "normal"
+    scenario = argument_scenario or (match.group(1) if match else "normal")
     emit({"type": "progress", "message": "fixture started"})
+
+    if scenario == "require-contract":
+        required = ("## Goal", "## Read scope", "## Prohibited actions", "## Required return")
+        if not all(heading in task for heading in required):
+            sys.stderr.write("task contract missing\n")
+            return 9
 
     if scenario == "empty":
         return 0

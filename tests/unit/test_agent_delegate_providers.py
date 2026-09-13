@@ -128,6 +128,12 @@ def test_zcode_parser_accepts_nested_structured_result_but_not_plain_text() -> N
     }
 
 
+def test_zcode_progress_message_is_not_a_final_result() -> None:
+    lines = [json.dumps({"type": "progress", "message": "reading files"})]
+
+    assert extract_final_result("zcode", lines) is None
+
+
 def test_unknown_structured_event_does_not_invent_activity() -> None:
     event = parse_provider_line("cc", json.dumps({"type": "mystery", "value": 1}))
 

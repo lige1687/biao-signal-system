@@ -12,11 +12,13 @@ import queue
 import re
 import signal
 import subprocess
+import sys
 import tempfile
 import threading
 import time
 from collections import deque
 from contextlib import suppress
+from dataclasses import replace
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, BinaryIO
@@ -30,6 +32,7 @@ from .core import (
     read_json,
     redact_text,
     snapshot_tree,
+    task_document,
     task_paths,
     validate_request,
 )
@@ -193,8 +196,9 @@ def _stream_reader(
     events: queue.Queue[tuple[str, bytes | None]],
 ) -> None:
     buffer = bytearray()
+    read_chunk = getattr(stream, "read1", stream.read)
     try:
-        while chunk := stream.read(64 * 1024):
+        while chunk := read_chunk(64 * 1024):
             buffer.extend(chunk)
             while True:
                 newline = buffer.find(b"\n")
@@ -210,6 +214,17 @@ def _stream_reader(
             events.put((channel, bytes(buffer)))
     finally:
         events.put((channel, None))
+        stream.close()
+
+
+def _provider_input_writer(stream: BinaryIO, prompt: str | None) -> None:
+    try:
+        if prompt is not None:
+            stream.write(prompt.encode("utf-8"))
+            stream.flush()
+    except (BrokenPipeError, OSError):
+        pass
+    finally:
         stream.close()
 
 
@@ -250,6 +265,50 @@ def _cleanup_group(process_group_id: int, grace_seconds: float) -> str:
             return "unknown"
         time.sleep(0.02)
     return "incomplete"
+
+
+def guard_process_group(
+    runner_pid: int,
+    provider_process_group_id: int,
+    grace_seconds: float = STOP_GRACE_SECONDS,
+) -> int:
+    """Independently stop the provider if this guardian loses its runner parent."""
+
+    while True:
+        exists = _group_exists(provider_process_group_id)
+        if exists is False:
+            return 0
+        if exists is None:
+            return 1
+        if os.getppid() != runner_pid:
+            return (
+                0
+                if _cleanup_group(provider_process_group_id, grace_seconds) == "confirmed"
+                else 1
+            )
+        time.sleep(0.1)
+
+
+def _start_guardian(provider_process_group_id: int) -> subprocess.Popen[bytes]:
+    script = Path(__file__).resolve().parents[2] / "scripts" / "agent_delegate.py"
+    return subprocess.Popen(
+        [
+            sys.executable,
+            str(script),
+            "_guard",
+            "--runner-pid",
+            str(os.getpid()),
+            "--provider-pgid",
+            str(provider_process_group_id),
+        ],
+        cwd=script.parents[1],
+        env=_filtered_environment(),
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        start_new_session=True,
+        close_fds=True,
+    )
 
 
 def _relative_contains(parent_value: str, child_value: str) -> bool:
@@ -395,6 +454,60 @@ def _update_state(paths: TaskPaths, document: dict[str, Any], **changes: Any) ->
     atomic_write_json(paths.state, document)
 
 
+def _finish_before_provider(
+    request: TaskRequest,
+    paths: TaskPaths,
+    state: dict[str, Any],
+    *,
+    started_monotonic: float,
+) -> int:
+    changes = {"added": [], "modified": [], "deleted": []}
+    verification = {"state": "skipped", "commands": []}
+    atomic_write_json(paths.verification, verification)
+    _atomic_write_text(paths.patch, "")
+    result = {
+        "task_id": request.task_id,
+        "provider": request.provider,
+        "mode": request.mode,
+        "state": "stopped",
+        "reason": "stop_requested",
+        "provider_exit_code": None,
+        "final_answer": None,
+        "changes": changes,
+        "scope_violations": [],
+        "verification": verification,
+        "cleanup_status": "confirmed",
+        "review_status": "not_ready",
+    }
+    atomic_write_json(paths.result, result)
+    _write_handoff(
+        paths,
+        final_answer=None,
+        changes=changes,
+        verification=verification,
+        reason="stop_requested",
+    )
+    finished_at = _now()
+    _update_state(
+        paths,
+        state,
+        state="stopped",
+        reason="stop_requested",
+        started_at=state.get("started_at", finished_at),
+        finished_at=finished_at,
+        runner_pid=os.getpid(),
+        runner_heartbeat_at=finished_at,
+        latest_activity="task stopped before provider start",
+        elapsed_seconds=round(time.monotonic() - started_monotonic, 1),
+        cleanup_status="confirmed",
+        changes=changes,
+        scope_violations=[],
+        verification_state="skipped",
+        review_status="not_ready",
+    )
+    return 1
+
+
 def _execute_locked(
     state_root: Path,
     request: TaskRequest,
@@ -403,6 +516,13 @@ def _execute_locked(
     state = read_json(paths.state) if paths.state.exists() else {"task_id": request.task_id}
     started_at = _now()
     started_monotonic = time.monotonic()
+    if paths.stop_request.exists():
+        return _finish_before_provider(
+            request,
+            paths,
+            state,
+            started_monotonic=started_monotonic,
+        )
     _update_state(
         paths,
         state,
@@ -421,11 +541,23 @@ def _execute_locked(
     if not paths.workspace.exists():
         create_workspace_snapshot(request, paths)
     baseline = read_json(paths.baseline)
+    canonical_task = task_document(request)
+    _atomic_write_text(paths.task_md, canonical_task)
+    if paths.stop_request.exists():
+        return _finish_before_provider(
+            request,
+            paths,
+            state,
+            started_monotonic=started_monotonic,
+        )
     paths.events.touch(exist_ok=True)
     paths.stdout.touch(exist_ok=True)
     paths.stderr.touch(exist_ok=True)
 
-    argv = build_provider_argv(request, paths, ProviderConfig.from_environment())
+    provider_request = replace(request, task_text=canonical_task)
+    argv = build_provider_argv(
+        provider_request, paths, ProviderConfig.from_environment()
+    )
     process = subprocess.Popen(
         argv,
         cwd=paths.workspace,
@@ -442,21 +574,12 @@ def _execute_locked(
     assert process.stdout is not None
     assert process.stderr is not None
     process_group_id = process.pid
-    _update_state(
-        paths,
-        state,
-        provider_pid=process.pid,
-        latest_activity="provider started",
-    )
-    prompt = provider_stdin(request)
     try:
-        if prompt is not None:
-            process.stdin.write(prompt.encode("utf-8"))
-            process.stdin.flush()
-    except BrokenPipeError:
-        pass
-    finally:
-        process.stdin.close()
+        guardian = _start_guardian(process_group_id)
+    except OSError:
+        _cleanup_group(process_group_id, 0.1)
+        process.wait(timeout=2)
+        raise
 
     output_events: queue.Queue[tuple[str, bytes | None]] = queue.Queue(maxsize=512)
     threads = [
@@ -473,6 +596,21 @@ def _execute_locked(
     ]
     for thread in threads:
         thread.start()
+
+    prompt = provider_stdin(provider_request)
+    input_thread = threading.Thread(
+        target=_provider_input_writer,
+        args=(process.stdin, prompt),
+        daemon=True,
+    )
+    input_thread.start()
+    _update_state(
+        paths,
+        state,
+        provider_pid=process.pid,
+        guardian_pid=guardian.pid,
+        latest_activity="provider started",
+    )
 
     stdout_lines: deque[str] = deque(maxlen=MAX_CAPTURED_LINES)
     finished_streams: set[str] = set()
@@ -547,9 +685,15 @@ def _execute_locked(
             next_heartbeat = time.monotonic() + HEARTBEAT_SECONDS
 
     exit_code = process.wait()
+    input_thread.join(timeout=0.2)
     for thread in threads:
         thread.join(timeout=0.2)
     cleanup_status = _cleanup_group(process_group_id, STOP_GRACE_SECONDS)
+    try:
+        guardian.wait(timeout=1)
+    except subprocess.TimeoutExpired:
+        guardian.terminate()
+        guardian.wait(timeout=1)
 
     after = snapshot_tree(paths.workspace)
     changes = diff_snapshots(baseline, after)
@@ -695,7 +839,7 @@ def _pid_is_alive(pid: int | None) -> bool:
 
 
 def recover_interrupted_tasks(state_root: Path) -> list[str]:
-    """Mark orphaned non-terminal tasks without signaling any recorded PID."""
+    """Mark orphaned tasks and record whether their guardian finished cleanup."""
 
     recovered: list[str] = []
     tasks_root = Path(state_root) / "tasks"
@@ -708,11 +852,21 @@ def recover_interrupted_tasks(state_root: Path) -> list[str]:
         ):
             continue
         paths = task_paths(Path(state_root), state_path.parent.name)
+        provider_pid = state.get("provider_pid")
+        cleanup_status = "confirmed"
+        if isinstance(provider_pid, int):
+            deadline = time.monotonic() + 1.0
+            while time.monotonic() < deadline and _group_exists(provider_pid) is True:
+                time.sleep(0.05)
+            cleanup_status = (
+                "confirmed" if _group_exists(provider_pid) is False else "unknown"
+            )
         _update_state(
             paths,
             state,
             state="interrupted",
             reason="runner_missing",
+            cleanup_status=cleanup_status,
             finished_at=_now(),
             latest_activity="runner is no longer alive",
         )

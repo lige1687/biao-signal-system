@@ -8,12 +8,14 @@ import hashlib
 import json
 import os
 import secrets
+import shlex
 import subprocess
 import sys
 import tempfile
 import time
 from collections.abc import Iterator, Sequence
 from contextlib import contextmanager
+from dataclasses import replace
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -26,11 +28,12 @@ from .core import (
     default_state_root,
     read_json,
     redact_text,
+    task_document,
     task_paths,
     validate_request,
 )
 from .providers import ProviderConfig, build_provider_argv, doctor_checks
-from .runner import recover_interrupted_tasks, request_stop, run_task
+from .runner import guard_process_group, recover_interrupted_tasks, request_stop, run_task
 
 TERMINAL_STATES = frozenset(
     {"completed", "failed", "stopped", "timed_out", "interrupted"}
@@ -111,7 +114,11 @@ def _new_task_id(state_root: Path) -> str:
 def _make_request(args: argparse.Namespace, state_root: Path, *, dry_run: bool) -> TaskRequest:
     task_id = "task_000000000000" if dry_run else _new_task_id(state_root)
     request_id = args.request_id or ("dry-run" if dry_run else f"req-{secrets.token_hex(8)}")
-    source = str(Path(args.cwd).expanduser().resolve())
+    source_path = Path(args.cwd).expanduser().resolve()
+    canonical_state_root = state_root.resolve(strict=False)
+    if canonical_state_root == source_path or source_path in canonical_state_root.parents:
+        raise ValidationError("state root must be outside the source workspace")
+    source = str(source_path)
     request = TaskRequest(
         task_id=task_id,
         request_id=request_id,
@@ -162,47 +169,20 @@ def _find_request_id(state_root: Path, request_id: str) -> tuple[str, str] | Non
     return None
 
 
-def _task_document(request: TaskRequest) -> str:
-    reads = "\n".join(f"- {path}" for path in request.read_paths)
-    writes = (
-        "\n".join(f"- {path}" for path in request.write_paths)
-        if request.write_paths
-        else "- None; this is a review-only task."
-    )
-    verification = (
-        "\n".join(f"- {json.dumps(command)}" for command in request.verify_commands)
-        if request.verify_commands
-        else "- No command requested."
-    )
-    return (
-        "# Delegated task\n\n"
-        "## Goal\n\n"
-        f"{request.task_text}\n\n"
-        "## Read scope\n\n"
-        f"{reads}\n\n"
-        "## Write scope\n\n"
-        f"{writes}\n\n"
-        "## Prohibited actions\n\n"
-        "- Do not access paths outside this task-owned workspace.\n"
-        "- Do not delegate to another agent.\n"
-        "- Do not commit, push, deploy, or contact people.\n"
-        "- Do not expand the task or request additional permissions.\n\n"
-        "## Acceptance evidence\n\n"
-        f"{verification}\n\n"
-        "## Required return\n\n"
-        "Return a conclusion, claimed file changes, verification results, and unresolved items.\n"
-    )
-
-
 def _dashboard_command(script: Path, state_root: Path) -> str:
-    return f"{sys.executable} {script} dashboard --state-root {state_root}"
+    return shlex.join(
+        [sys.executable, str(script), "dashboard", "--state-root", str(state_root)]
+    )
 
 
 def _start(args: argparse.Namespace) -> int:
     state_root = Path(args.state_root).expanduser()
     request = _make_request(args, state_root, dry_run=args.dry_run)
     provisional_paths = task_paths(state_root, request.task_id)
-    argv = build_provider_argv(request, provisional_paths, ProviderConfig.from_environment())
+    provider_request = replace(request, task_text=task_document(request))
+    argv = build_provider_argv(
+        provider_request, provisional_paths, ProviderConfig.from_environment()
+    )
     if args.dry_run:
         _json_print(
             {
@@ -241,7 +221,7 @@ def _start(args: argparse.Namespace) -> int:
         paths = task_paths(state_root, request.task_id)
         paths.root.mkdir(parents=True)
         atomic_write_json(paths.request, request.to_dict())
-        _atomic_write_text(paths.task_md, _task_document(request))
+        _atomic_write_text(paths.task_md, task_document(request))
         atomic_write_json(
             paths.state,
             {
@@ -510,13 +490,21 @@ def _run_public_command(args: argparse.Namespace) -> int:
 
 
 def _run_internal(arguments: Sequence[str]) -> int | None:
-    if not arguments or arguments[0] != "_run":
+    if not arguments or arguments[0] not in {"_run", "_guard"}:
         return None
     parser = argparse.ArgumentParser(add_help=False)
-    parser.add_argument("_run")
-    parser.add_argument("--task-id", required=True)
-    parser.add_argument("--state-root", required=True)
+    parser.add_argument("internal_command", choices=("_run", "_guard"))
+    parser.add_argument("--task-id")
+    parser.add_argument("--state-root")
+    parser.add_argument("--runner-pid", type=int)
+    parser.add_argument("--provider-pgid", type=int)
     args = parser.parse_args(arguments)
+    if args.internal_command == "_guard":
+        if args.runner_pid is None or args.provider_pgid is None:
+            parser.error("_guard requires --runner-pid and --provider-pgid")
+        return guard_process_group(args.runner_pid, args.provider_pgid)
+    if not args.task_id or not args.state_root:
+        parser.error("_run requires --task-id and --state-root")
     return run_task(Path(args.state_root).expanduser(), args.task_id)
 
 

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import signal
 import subprocess
 import sys
 import time
@@ -201,3 +202,79 @@ def test_real_provider_edit_mode_is_rejected_before_task_creation(cli, source: P
     assert result.returncode == 2
     assert "not enabled" in result.stderr
     assert not cli.state_root.exists()
+
+
+def test_state_root_inside_source_is_rejected_before_copy(cli, source: Path) -> None:
+    nested_state = source / ".delegate-state"
+
+    result = cli(
+        "start",
+        "--dry-run",
+        "--provider",
+        "cc",
+        "--cwd",
+        str(source),
+        "--task",
+        "Review everything",
+        "--read-path",
+        ".",
+        "--state-root",
+        str(nested_state),
+    )
+
+    assert result.returncode == 2
+    assert "state root" in result.stderr
+    assert not nested_state.exists()
+
+
+def test_provider_receives_the_full_task_contract(cli, source: Path) -> None:
+    started = cli(
+        *start_args(source, task="scenario: require-contract"),
+        "--request-id",
+        "req-contract",
+    )
+    task_id = json.loads(started.stdout)["task_id"]
+
+    state = wait_for_terminal(cli.state_root, task_id)
+
+    assert state["state"] == "completed"
+
+
+def _process_is_alive(pid: int) -> bool:
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    return True
+
+
+def test_guardian_kills_provider_if_runner_is_killed(cli, source: Path) -> None:
+    started = cli(
+        *start_args(source, task="scenario: ignore-term"),
+        "--request-id",
+        "req-guardian",
+        "--timeout",
+        "30",
+    )
+    task_id = json.loads(started.stdout)["task_id"]
+    paths = task_paths(cli.state_root, task_id)
+    deadline = time.monotonic() + 5
+    state: dict = {}
+    while time.monotonic() < deadline:
+        state = read_json(paths.state)
+        if state.get("runner_pid") and state.get("provider_pid"):
+            break
+        time.sleep(0.05)
+    runner_pid = int(state["runner_pid"])
+    provider_pid = int(state["provider_pid"])
+    assert int(state["guardian_pid"]) > 0
+
+    try:
+        os.kill(runner_pid, signal.SIGKILL)
+        deadline = time.monotonic() + 5
+        while time.monotonic() < deadline and _process_is_alive(provider_pid):
+            time.sleep(0.05)
+        assert not _process_is_alive(provider_pid)
+    finally:
+        if _process_is_alive(provider_pid):
+            os.killpg(provider_pid, signal.SIGKILL)

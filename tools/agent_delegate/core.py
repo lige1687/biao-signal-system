@@ -140,6 +140,40 @@ def task_paths(state_root: Path, task_id: str) -> TaskPaths:
     )
 
 
+def task_document(request: TaskRequest) -> str:
+    """Build the canonical provider-visible task contract."""
+
+    reads = "\n".join(f"- {path}" for path in request.read_paths)
+    writes = (
+        "\n".join(f"- {path}" for path in request.write_paths)
+        if request.write_paths
+        else "- None; this is a review-only task."
+    )
+    verification = (
+        "\n".join(f"- {json.dumps(command)}" for command in request.verify_commands)
+        if request.verify_commands
+        else "- No command requested."
+    )
+    return (
+        "# Delegated task\n\n"
+        "## Goal\n\n"
+        f"{request.task_text}\n\n"
+        "## Read scope\n\n"
+        f"{reads}\n\n"
+        "## Write scope\n\n"
+        f"{writes}\n\n"
+        "## Prohibited actions\n\n"
+        "- Do not access paths outside this task-owned workspace.\n"
+        "- Do not delegate to another agent.\n"
+        "- Do not commit, push, deploy, or contact people.\n"
+        "- Do not expand the task or request additional permissions.\n\n"
+        "## Acceptance evidence\n\n"
+        f"{verification}\n\n"
+        "## Required return\n\n"
+        "Return a conclusion, claimed file changes, verification results, and unresolved items.\n"
+    )
+
+
 def _relative_path(value: str, *, kind: str) -> Path:
     if not isinstance(value, str) or not value.strip():
         raise ValidationError(f"{kind} path must not be empty")
@@ -258,6 +292,10 @@ def create_workspace_snapshot(request: TaskRequest, paths: TaskPaths) -> dict[st
 
     validate_request(request)
     source = Path(request.source_cwd).expanduser()
+    workspace = paths.workspace.resolve(strict=False)
+    canonical_source = source.resolve()
+    if workspace == canonical_source or canonical_source in workspace.parents:
+        raise ValidationError("state root and task workspace must be outside the source workspace")
     if paths.workspace.exists():
         raise ValidationError(f"task workspace already exists: {paths.workspace}")
     paths.workspace.mkdir(parents=True)

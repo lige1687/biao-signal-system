@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import subprocess
 import sys
 from dataclasses import dataclass
@@ -222,7 +223,9 @@ def build_provider_argv(
     if request.provider == "fake":
         if not selected.fake:
             raise ValidationError("fake provider path is not configured")
-        return [sys.executable, selected.fake]
+        match = re.search(r"scenario:\s*([a-z-]+)", request.task_text)
+        scenario = match.group(1) if match else "normal"
+        return [sys.executable, selected.fake, "--scenario", scenario]
     raise ValidationError(f"unsupported provider: {request.provider}")
 
 
@@ -326,6 +329,13 @@ def extract_final_result(provider: str, lines: list[str]) -> str | None:
         return None
     if provider == "zcode":
         for event in reversed(objects):
+            if isinstance(event, dict) and event.get("type") in {
+                "progress",
+                "status",
+                "tool",
+                "tool_call",
+            }:
+                continue
             for key in ("result", "output", "text", "message"):
                 if (text := _find_key(event, key)) is not None:
                     return text

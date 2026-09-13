@@ -50,6 +50,7 @@ def task_factory(tmp_path: Path):
         write_paths: tuple[str, ...] = (),
         timeout_seconds: int = 10,
         verify_commands: tuple[tuple[str, ...], ...] = (),
+        task_text: str | None = None,
     ) -> PreparedTask:
         nonlocal counter
         counter += 1
@@ -68,7 +69,7 @@ def task_factory(tmp_path: Path):
             provider="fake",
             mode=mode,
             source_cwd=str(source),
-            task_text=f"scenario: {scenario}",
+            task_text=task_text or f"scenario: {scenario}",
             read_paths=("allowed", "outside"),
             write_paths=write_paths,
             verify_commands=verify_commands,
@@ -147,6 +148,23 @@ def test_timeout_escalates_and_records_cleanup(
     state = read_json(task.paths.state)
     assert state["state"] == "timed_out"
     assert state["cleanup_status"] == "confirmed"
+
+
+def test_large_stdin_cannot_block_timeout(
+    task_factory, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr("tools.agent_delegate.runner.STOP_GRACE_SECONDS", 0.1)
+    task = task_factory(
+        scenario="block-stdin",
+        task_text="scenario: block-stdin\n" + ("x" * (1024 * 1024)),
+        timeout_seconds=1,
+    )
+
+    started = time.monotonic()
+    assert run_task(task.state_root, task.task_id) == 1
+
+    assert time.monotonic() - started < 5
+    assert read_json(task.paths.state)["state"] == "timed_out"
 
 
 def test_large_stderr_does_not_deadlock_and_is_bounded(task_factory) -> None:
@@ -230,6 +248,19 @@ def test_stop_request_ends_running_process_group(
     assert state["cleanup_status"] == "confirmed"
 
 
+def test_queued_stop_never_starts_provider(task_factory) -> None:
+    task = task_factory(scenario="normal")
+    request_stop(task.paths, "cancel before start")
+
+    assert run_task(task.state_root, task.task_id) == 1
+
+    state = read_json(task.paths.state)
+    assert state["state"] == "stopped"
+    assert "provider_pid" not in state
+    assert not task.paths.workspace.exists()
+    assert task.paths.result.is_file()
+
+
 def test_recovery_marks_only_orphaned_active_tasks(task_factory) -> None:
     queued = task_factory()
     orphaned = task_factory()
@@ -241,6 +272,7 @@ def test_recovery_marks_only_orphaned_active_tasks(task_factory) -> None:
 
     assert recovered == [orphaned.task_id]
     assert read_json(orphaned.paths.state)["state"] == "interrupted"
+    assert read_json(orphaned.paths.state)["cleanup_status"] == "confirmed"
     assert read_json(queued.paths.state)["state"] == "queued"
 
 
