@@ -53,6 +53,9 @@ type Turn = {
   };
   /** done 且 answer_state=incomplete：可重试再生成 */
   incompleteDone?: boolean;
+  /** 2026-09-15 提问稳定性：done answer_state=failed 且 retryable——
+   *  准备/保存失败（如数据库被后台任务占用），问题已保留，可同 cid 重试 */
+  failedRetryable?: boolean;
   /** 历史恢复的回答带未完成标记（answer_incomplete） */
   answerIncomplete?: { reason?: string; reason_cn?: string } | null;
 };
@@ -108,7 +111,7 @@ function TurnRow({ turn, onOpen, onChart, onAsk, expanded = false, sessionId, on
       <span className="ar-answer-meta">{working ? "正在整理" : turn.history ? "历史记录" : turn.grounded === true ? "依据系统数据" : turn.grounded === false ? "系统结果 / 请查看说明" : ""}</span>
     </header>
     {turn.stages?.length ? <details className="ar-progress"><summary>{working ? turn.stages[turn.stages.length - 1]?.text : "查看处理过程"}</summary>
-      <ol>{turn.stages.map((s, i) => <li key={`${s.key}-${i}`}>{s.text}</li>)}</ol></details> : working && <p className="ar-working" role="status">正在读取资料，首次分析可能需要一些时间…</p>}
+      <ol>{turn.stages.map((s, i) => <li key={`${s.key}-${i}`}>{s.text}</li>)}</ol></details> : working && <p className="ar-working" role="status">已提交，等待系统确认…</p>}
     {working && turn.factsReady && <p className="ar-working" role="status">系统资料已就绪（见下方卡片），AI 解释仍在生成…</p>}
     {turn.fallback && <p className="ar-notice">本次采用系统提供的结果，请结合下方说明查看。</p>}
     <AnswerText text={fullText} markdown={markdown} expanded={expanded || working || selfExpanded} />
@@ -151,6 +154,9 @@ function TurnRow({ turn, onOpen, onChart, onAsk, expanded = false, sessionId, on
     {!working && turn.answerIncomplete && <p className="ar-notice">此回答当时未完成（{turn.answerIncomplete.reason_cn ?? "生成中断"}）；历史保留的是当时的部分原文，可重新提问生成。</p>}
     {!working && turn.incompleteDone && turn.requestBody && onRetryIncomplete && (
       <p><button className="btn small" onClick={()=>onRetryIncomplete(turn)}>重试生成这个回答（复用原问题与依据，不新增记录）</button></p>
+    )}
+    {!working && turn.failedRetryable && turn.requestBody && onRetryIncomplete && (
+      <p><button className="btn small" onClick={()=>onRetryIncomplete(turn)}>重试这个问题（沿用原请求，不重复记录）</button></p>
     )}
     {!working && <footer className="ar-answer-actions">
       {onOpen && !turn.preview && <button onClick={onOpen}>展开到资料区</button>}
@@ -327,7 +333,14 @@ export default function AgentWorkspacePage() {
       let completed=false;const stages:NonNullable<Turn["stages"]>=[];
       for await(const event of readAgentEvents(response.body)) {
         if(ticket!==requestId.current)return;
-        if(event.event === "stage") {stages.push({key:String(event.data.key),text:String(event.data.text)});patch(id,{stages:[...stages]});}
+        if(event.event === "stage") {
+          const key=String(event.data.key);
+          // 等待心跳（服务端每 5 秒一条真实阶段）：同键连续只保留最新一条，
+          // 过程列表不被「已等待 N 秒」刷屏
+          if(key==="waiting"&&stages.length&&stages[stages.length-1].key==="waiting")stages[stages.length-1]={key,text:String(event.data.text)};
+          else stages.push({key,text:String(event.data.text)});
+          patch(id,{stages:[...stages]});
+        }
         else if(event.event === "prepared") {
           // 可靠性一期：资料就绪即渲染（不等模型）。字段与 done 同源，
           // done 到达时覆盖为终值，不产生第二份记录。
@@ -339,7 +352,7 @@ export default function AgentWorkspacePage() {
         else if(event.event === "error")throw new Error(String(event.data.message??event.data.error??"分析服务暂时不可用"));
         else if(event.event === "done") {
           completed=true;
-          const d=event.data as {session_id?:string;resolved_symbol?:string|null;grounded?:boolean;fallback?:string;verify_note?:string;quick_card?:QuickCard;evidence_card?:EvidenceCard|null;plan_artifact?:PlanArtifact|null;question_id?:number|null;next_steps?:NextStep[]|null;answer_state?:string};
+          const d=event.data as {session_id?:string;resolved_symbol?:string|null;grounded?:boolean;fallback?:string;verify_note?:string;quick_card?:QuickCard;evidence_card?:EvidenceCard|null;plan_artifact?:PlanArtifact|null;question_id?:number|null;next_steps?:NextStep[]|null;answer_state?:string;retryable?:boolean};
           if(d.session_id)setSessionId(d.session_id);
           if(d.resolved_symbol){
             setSymbol(d.resolved_symbol);
@@ -351,13 +364,16 @@ export default function AgentWorkspacePage() {
             }
           }
           // 补修二：done 不都是完整答案——incomplete 按失败态展示并允许同 cid 重试
+          // 2026-09-15：answer_state=failed（准备/保存失败）同样按失败态，
+          // retryable=true 时给出同 cid 重试入口（问题已保留，不重复记录）
           const incomplete = d.answer_state === "incomplete";
-          patch(id,{text:received,resolved:d.resolved_symbol,grounded:d.grounded,fallback:d.fallback,verifyNote:d.verify_note,quickCard:d.quick_card,evidenceCard:d.evidence_card??null,planArtifact:d.plan_artifact??null,questionId:d.question_id??null,nextSteps:d.next_steps??null,status:incomplete?"failed":"complete",incompleteDone:incomplete});
+          const failed = d.answer_state === "failed";
+          patch(id,{text:received,resolved:d.resolved_symbol,grounded:d.grounded,fallback:d.fallback,verifyNote:d.verify_note,quickCard:d.quick_card,evidenceCard:d.evidence_card??null,planArtifact:d.plan_artifact??null,questionId:d.question_id??null,nextSteps:d.next_steps??null,status:(incomplete||failed)?"failed":"complete",incompleteDone:incomplete,failedRetryable:failed&&d.retryable===true});
           void queryClient.invalidateQueries({queryKey:["agentSessions"]});
         }
       }
       if(!completed)throw new Error("连接提前结束，已保留收到的内容，可继续提问。");
-    } catch(e){if(ticket===requestId.current)patch(id,{status:"failed",error:`未能完成：${e instanceof Error?e.message:String(e)}`});}
+    } catch(e){if(ticket===requestId.current)patch(id,{status:"failed",failedRetryable:true,error:`未能完成：${e instanceof Error?e.message:String(e)}（可点「重试」沿用原请求再试，不重复记录）`});}
     finally {if(ticket===requestId.current){if(!outerLockHeld){requestLock.current=false;setBusy(false);}abortRef.current=null;activeTurn.current=null;}}
   };
   /** U1 返修（主控复核 2026-09-13）：直接说"帮我补测"与点"准备补测"按钮

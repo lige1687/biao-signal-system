@@ -62,6 +62,8 @@ type Turn = {
   };
   /** done 且 answer_state=incomplete：可重试再生成 */
   incompleteDone?: boolean;
+  /** 2026-09-15 提问稳定性：done answer_state=failed 且 retryable——可同 cid 重试 */
+  failedRetryable?: boolean;
 };
 
 const SYMBOL_CHIPS = ["这个买点为什么是买点", "技术面讨论", "给这个买点建计划", "这个标的我的计划"];
@@ -95,7 +97,7 @@ function ConsoleTurnView({ index, turn, symbol, sessionId, navigate, registerRef
         <div className="muted" role="status">
           {turn.factsReady
             ? "系统资料已就绪（见下方依据卡），AI 解释仍在生成…"
-            : (turn.stages?.[turn.stages.length - 1]?.text ?? "正在读取资料…")}
+            : (turn.stages?.[turn.stages.length - 1]?.text ?? "已提交，等待系统确认…")}
         </div>
       )}
       {turn.who === "you" && <div className="msg">{turn.text}</div>}
@@ -188,6 +190,13 @@ function ConsoleTurnView({ index, turn, symbol, sessionId, navigate, registerRef
         <p>
           <button className="btn small" onClick={() => onRetryIncomplete(turn)}>
             重试生成这个回答（复用原问题与依据，不新增记录）
+          </button>
+        </p>
+      )}
+      {turn.status === "failed" && turn.failedRetryable && turn.requestBody && (
+        <p>
+          <button className="btn small" onClick={() => onRetryIncomplete(turn)}>
+            重试这个问题（沿用原请求，不重复记录）
           </button>
         </p>
       )}
@@ -290,7 +299,13 @@ export default function AgentConsole() {
         // 迟到防护：期间切标的/开新会话（世代已变）→ 丢弃后续事件，不串入新会话
         if (generationRef.current !== gen) { controller.abort(); return; }
         if (event.event === "stage") {
-          stages.push({ key: String(event.data.key), text: String(event.data.text) });
+          const key = String(event.data.key);
+          // 等待心跳：同键连续只保留最新一条（与工作台同一规则）
+          if (key === "waiting" && stages.length && stages[stages.length - 1].key === "waiting") {
+            stages[stages.length - 1] = { key, text: String(event.data.text) };
+          } else {
+            stages.push({ key, text: String(event.data.text) });
+          }
           patchTurn({ stages: [...stages] });
         } else if (event.event === "prepared") {
           const p = event.data as {
@@ -315,14 +330,17 @@ export default function AgentConsole() {
             session_id?: string; resolved_symbol?: string | null; grounded?: boolean;
             fallback?: string; verify_note?: string; question_id?: number | null;
             plan_artifact?: PlanArtifact | null; next_steps?: NextStep[] | null;
-            answer_state?: string;
+            answer_state?: string; retryable?: boolean;
           };
           if (d.session_id) setSessionId(d.session_id);
-          // done 不都是完整答案（补修二）：incomplete 按失败态展示，可同 cid 重试
+          // done 不都是完整答案（补修二）：incomplete 按失败态展示，可同 cid 重试；
+          // 2026-09-15：answer_state=failed（准备/保存失败）同样按失败态，
+          // retryable=true 时给同 cid 重试入口（问题已保留，不重复记录）
           const incomplete = d.answer_state === "incomplete";
+          const failed = d.answer_state === "failed";
           patchTurn({
             text: received || (d.fallback ?? ""),
-            status: incomplete ? "failed" : "complete",
+            status: (incomplete || failed) ? "failed" : "complete",
             grounded: d.grounded,
             fallback: d.fallback,
             verifyNote: d.verify_note,
@@ -331,12 +349,14 @@ export default function AgentConsole() {
             planArtifact: d.plan_artifact ?? null,
             nextSteps: d.next_steps ?? null,
             incompleteDone: incomplete,
+            failedRetryable: failed && d.retryable === true,
           });
         }
       }
       if (!completed && generationRef.current === gen) {
         patchTurn({
           status: "failed",
+          failedRetryable: true,
           text: received,
           verifyNote: "连接提前结束；已保留收到的内容。重试同一问题会复用原问题，不会重复记录。",
         });
@@ -345,8 +365,9 @@ export default function AgentConsole() {
       if (generationRef.current !== gen) return;
       patchTurn({
         status: "failed",
+        failedRetryable: true,
         text: received,
-        verifyNote: `未能完成：${e instanceof Error ? e.message : String(e)}`,
+        verifyNote: `未能完成：${e instanceof Error ? e.message : String(e)}（可点「重试」沿用原请求再试，不重复记录）`,
       });
     } finally {
       // 世代已变时由 resetConversation 负责清 pending，避免盖掉新请求的忙态
