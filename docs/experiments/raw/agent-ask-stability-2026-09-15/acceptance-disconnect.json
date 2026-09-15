@@ -1,0 +1,45 @@
+{
+ "checks": {
+  "got_first_token": {
+   "ok": true,
+   "detail": 13.0
+  },
+  "first_generation_started": {
+   "ok": true,
+   "detail": 1
+  },
+  "claim_released_after_real_disconnect": {
+   "ok": true,
+   "detail": "pending"
+  },
+  "retry_answered": {
+   "ok": true,
+   "detail": "answered"
+  },
+  "model_called_twice": {
+   "ok": true,
+   "detail": 2
+  },
+  "no_duplicate_question": {
+   "ok": true,
+   "detail": 1
+  },
+  "claim_answered": {
+   "ok": true,
+   "detail": "answered"
+  }
+ },
+ "failures": 0,
+ "first": {
+  "got_token_at_s": 13.0,
+  "model_calls_after_first": 1
+ },
+ "state_after_disconnect": "pending",
+ "retry": {
+  "seconds": 12.19,
+  "answer_state": "answered",
+  "model_calls": 2,
+  "user_messages": 1,
+  "claim": "answered"
+ }
+}

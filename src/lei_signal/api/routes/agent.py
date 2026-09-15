@@ -2123,8 +2123,9 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
     resume = outcome.kind == "resume"
 
     def _release_claim() -> None:
-        """失败收场时把生成权放回 pending：同身份重试立即恢复（与流式同源）。"""
-        if not outcome.claim_cid:
+        """失败收场时把生成权放回 pending：同身份重试立即恢复（与流式同源）。
+        无 claim_state_at（非本次领取）不动，防误伤重试者的新领取。"""
+        if not outcome.claim_cid or not outcome.claim_state_at:
             return
         try:
             from lei_signal.copilot.chat_identity import (  # noqa: PLC0415
@@ -2426,6 +2427,53 @@ def _quick_card(ctx_payload: dict, symbol: str | None) -> dict | None:
     return card
 
 
+class _StreamState:
+    """流式请求中后台工作者与消费者共用的结束/归属状态（S1，2026-09-15）。
+
+    cancelled：消费者已断开/退出（finally 里无条件置位）——工作者晚取得
+    生成权时据此立即收尾，不开始准备/生成；
+    outcome：工作者的领号结果（生成权归属的唯一载体，claim_state_at CAS）；
+    terminal：消费者已到终态（含失败 done）——finally 不再重复释放。"""
+
+    __slots__ = ("lock", "cancelled", "outcome", "terminal")
+
+    def __init__(self) -> None:
+        import threading
+
+        self.lock = threading.Lock()
+        self.cancelled = False
+        self.outcome = None
+        self.terminal = False
+
+
+def _http_disconnect_poll(request: Request) -> bool:
+    """同步轮询真实 HTTP 客户端是否已断开（S1 矩阵 5）。
+
+    真实断开时 uvicorn 不会及时把 GeneratorExit 送进响应生成器（实测：
+    客户端断开后同步生成器长期悬挂、claim 无人收尾）。ASGI 服务器会把
+    ``http.disconnect`` 放进 receive 通道——这里以近零超时取一条消息
+    （没有消息=仍连接），经 ``anyio.from_thread.run`` 回到事件循环执行。
+
+    只在 anyio 工作线程内有效（生产=StreamingResponse 的线程池迭代器）；
+    主线程手动驱动生成器的测试/探针环境没有 anyio token，异常一律按
+    「未断开」处理——那些环境由 close()/finally 路径负责收尾。"""
+    try:
+        import asyncio as _asyncio  # noqa: PLC0415
+
+        import anyio  # noqa: PLC0415
+
+        async def _poll() -> bool:
+            try:
+                message = await _asyncio.wait_for(request.receive(), 0.001)
+            except _asyncio.TimeoutError:
+                return False
+            return message.get("type") == "http.disconnect"
+
+        return bool(anyio.from_thread.run(_poll))
+    except Exception:  # noqa: BLE001  非 anyio 工作线程/通道不可用=按未断开
+        return False
+
+
 @router.post("/agent/chat/stream")
 def agent_chat_stream(request: Request, body: AgentChatRequest):
     """流式讨论入口：SSE 推送调用链阶段 + GLM 真·逐字正文 + 校验结果。
@@ -2465,11 +2513,46 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
         def on_stage(key: str, text: str) -> None:
             q.put(("stage", (key, text)))
 
+        # S1（主控复验 2026-09-15）：后台工作者与流消费者**共用**结束/取消
+        # 状态与生成权归属。消费者提前退出（断连/停止）时，工作者之后晚取得
+        # 的生成权也必须收尾——否则 claim 卡在 generating，同身份重试被
+        # 「回答正在生成」错误地挡满租约。清理只放自己的领取（claim_state_at
+        # CAS），绝不触碰重试者的新领取；无消费者后不开始准备/生成。
+        shared = _StreamState()
+
+        def _release_claim(out) -> None:
+            """失败/断连收场：把生成权放回 pending，同身份重试可立即恢复
+            （不等 600 秒租约）。只放自己的领取——无 claim_state_at（非本次
+            领取/replay/incomplete 出口）一律不动，防误伤重试者的新领取。"""
+            if (out is None or not getattr(out, "claim_cid", None)
+                    or not getattr(out, "claim_state_at", None)):
+                return
+            try:
+                from lei_signal.copilot.chat_identity import (  # noqa: PLC0415
+                    release_generation,
+                )
+
+                with closing(connect(_db_path(request))) as conn:
+                    release_generation(
+                        conn, out.claim_cid,
+                        expected_state_at=out.claim_state_at)
+            except Exception:  # noqa: BLE001
+                logger.exception(
+                    "agent_chat_stream 释放生成权失败（cid=%s…）",
+                    str(getattr(out, "claim_cid", ""))[:8])
+
         def _work() -> None:
             try:
                 # 契约1：统一事务入口在准备/建模之前裁决（重试复用/409/
                 # 未完成/恢复）
                 outcome = _enter_chat(request, body)
+                with shared.lock:
+                    shared.outcome = outcome
+                    gone = shared.cancelled
+                if gone:
+                    # 消费者已断开：晚领号也收尾；不开始准备/生成（S1 矩阵1/2）
+                    _release_claim(outcome)
+                    return
                 q.put(("entered", outcome))
                 if outcome.kind in ("proceed", "resume"):
                     q.put((
@@ -2503,25 +2586,6 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
                 _json.dumps(summary, ensure_ascii=False, sort_keys=True),
             )
 
-        def _release_claim(out) -> None:
-            """失败/断连收场：把生成权放回 pending，同身份重试可立即恢复
-            （不等 600 秒租约）。CAS 防误伤新主； best-effort，不掩盖主流程。"""
-            if out is None or not getattr(out, "claim_cid", None):
-                return
-            try:
-                from lei_signal.copilot.chat_identity import (  # noqa: PLC0415
-                    release_generation,
-                )
-
-                with closing(connect(_db_path(request))) as conn:
-                    release_generation(
-                        conn, out.claim_cid,
-                        expected_state_at=getattr(out, "claim_state_at", None))
-            except Exception:  # noqa: BLE001
-                logger.exception(
-                    "agent_chat_stream 释放生成权失败（cid=%s…）",
-                    str(getattr(out, "claim_cid", ""))[:8])
-
         def _fail_payload(note: str, *, out=None, session_id: str = "",
                           symbol: str | None = None,
                           retryable: bool = True) -> dict:
@@ -2542,21 +2606,28 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
                         symbol)
             return payload
 
-        # 提交即回执（任务书 §三）：不等内容，先告诉用户「已收到问题」。
-        yield _sse("stage", {"key": "received", "text": "已收到问题，正在登记请求"})
-
         import time as _time
+
+        def _mark_terminal() -> None:
+            with shared.lock:
+                shared.terminal = True
 
         prepared = None
         outcome = None
-        terminal = False  # 到达终态（含失败 done）；异常/断连时 finally 释放生成权
         phase = "identity"  # identity=登记中；prepare=准备资料中（心跳文案据此区分）
         wait_started = _time.monotonic()
         try:
+            # 提交即回执（任务书 §三）：不等内容，先告诉用户「已收到问题」。
+            # 在 try 内：首条 yield 即断开时 finally 仍会标记取消并收尾（S1）。
+            yield _sse("stage", {"key": "received", "text": "已收到问题，正在登记请求"})
             while True:
                 try:
                     kind, payload = q.get(timeout=5)
                 except _queue.Empty:
+                    if _http_disconnect_poll(request):
+                        # 真实 HTTP 断开（S1 矩阵 5）：立刻退出，finally
+                        # 标记取消并收尾生成权；不等服务器写失败才发现。
+                        return
                     waited = int(_time.monotonic() - wait_started)
                     if waited > 180:
                         logger.warning(
@@ -2568,7 +2639,7 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
                             "准备阶段超时（等待 180 秒仍未就绪）。问题已保留，"
                             "可点「重试」继续，不会重复记录。",
                             out=outcome))
-                        terminal = True
+                        _mark_terminal()
                         return
                     # 真实阶段心跳（不虚构进度/倒计时）：数据库等待如实说
                     # 「等待系统处理」，绝不描述成「AI 正在思考」。
@@ -2600,7 +2671,7 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
                         isinstance(exc, HTTPException) and exc.status_code < 500)
                     yield _sse("done", _fail_payload(
                         note, out=outcome, retryable=retryable))
-                    terminal = True
+                    _mark_terminal()
                     return
                 elif kind == "entered":
                     outcome = payload
@@ -2625,7 +2696,7 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
                         _log_timing("stream_replay",
                                     p.get("session_id") or outcome.session_id,
                                     p.get("resolved_symbol"))
-                        terminal = True
+                        _mark_terminal()
                         return
                     if outcome.kind == "incomplete":
                         # S4：未完成明确出口（不复用下一问题/补测卡）
@@ -2642,7 +2713,7 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
                         })
                         _log_timing("stream_incomplete",
                                     p.get("session_id") or outcome.session_id, None)
-                        terminal = True
+                        _mark_terminal()
                         return
                 else:
                     prepared = payload
@@ -2689,7 +2760,7 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
                         f"（{type(exc).__name__}），AI 解释没有开始。"
                         "问题已保留——可点「重试」继续，不会重复记录。",
                         out=outcome, session_id=session_id, symbol=symbol))
-                    terminal = True
+                    _mark_terminal()
                     return
                 timing.mark("question_saved")
                 if appended == "duplicate":
@@ -2704,7 +2775,7 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
                         "timing_ms": timing.summary(),
                     })
                     _log_timing("stream_duplicate", session_id, symbol)
-                    terminal = True
+                    _mark_terminal()
                     return
 
             # 03B-R3 S5：整理计划类问题生成服务端产物（原问题绑定）
@@ -2730,6 +2801,10 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
                             break
                         if not pieces:
                             timing.mark("first_token")
+                        if _http_disconnect_poll(request):
+                            # 真实客户端断开（S1 矩阵 5）：停止继续生成，
+                            # finally 收尾（历史只留问题，不落假回答）
+                            return
                         pieces.append(piece)
                         yield _sse("token", {"t": piece})
                 except GeneratorExit:
@@ -2831,7 +2906,7 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
                     "（系统数据库暂时不可用）。以上内容本次有效；"
                     "需要留档可点「重试」对同一问题重新生成，不会重复记录。",
                     out=outcome, session_id=session_id, symbol=symbol))
-                terminal = True
+                _mark_terminal()
                 return
             timing.mark("answer_saved")
             yield _sse(
@@ -2852,14 +2927,19 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
                 },
             )
             _log_timing("stream", session_id, symbol)
-            terminal = True
+            _mark_terminal()
         finally:
-            if not terminal:
-                # 断连/异常等未到终态的出口：把生成权放回 pending——同身份
-                # 重试立即恢复，不再被 600 秒租约挡在「回答正在生成」。
-                _release_claim(outcome)
+            # S1：消费者退出（断连/停止/异常）一律标记取消——工作者晚领号
+            # 时据此收尾；未达终态且生成权已领则放回 pending（CAS 只放自己
+            # 的领取，重试者的新领取不受影响）。
+            with shared.lock:
+                shared.cancelled = True
+                _out = shared.outcome
+                _term = shared.terminal
+            if not _term:
+                _release_claim(_out)
                 _log_timing("stream_aborted",
-                            outcome.session_id if outcome else None, None)
+                            _out.session_id if _out else None, None)
 
     return StreamingResponse(
         _generate(),
