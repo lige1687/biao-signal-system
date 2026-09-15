@@ -5,7 +5,9 @@
 """
 from __future__ import annotations
 
+import json
 import logging
+import re
 from contextlib import closing
 from datetime import UTC, datetime
 
@@ -510,7 +512,7 @@ def get_experience(
     signal/pool 取值见 docs/experiments/EXPERIENCE-INDEX.md 受控词表；
     支持任意 match 键的子集匹配（两个显式参数外预留 conditions 透传）。
     """
-    from lei_signal.copilot import experience as exp_mod  # noqa: PLC0415
+    from lei_signal.copilot import experience as exp_mod
 
     conditions: dict[str, str] = {}
     if signal:
@@ -518,3 +520,263 @@ def get_experience(
     if pool:
         conditions["pool"] = pool
     return exp_mod.query_experience(conditions)
+
+
+# ------------------------------------------------------------------
+# 03B：统一入口解析 + 按需补测（总控协议 §2/§5，2026-09-08）
+# ------------------------------------------------------------------
+
+
+class ResolveRequest(BaseModel):
+    message: str
+    client_request_id: str | None = None
+    session_id: str | None = None
+    selected_symbol: str | None = None
+
+
+def _resolve_symbol_with_ambiguity(request: Request, body: ResolveRequest):
+    """标的解析（03B §2 优先级）：本轮明确 → 当前选中 → 会话最近。
+    明确名称命中多个不同标的 → 澄清，不猜。返回 (symbol, source, ambiguities)。
+
+    03B-R2 契约1（r3）：**对象识别与资料可用性分离**——消息里语法合法的
+    代码就是对象，即使该标的还没有缓存行情（fetch=False 探不到）也仍解析
+    为它（缺数据走正式分析路径获取或明示缺口），不回退成选中的另一个标的。"""
+    from lei_signal.api.routes.agent import (
+        _resolve_symbol_by_catalog,
+        _resolve_symbol_by_name,
+        _symbol_candidates_from_message,
+    )
+
+    service = getattr(request.app.state, "analysis_service", None)
+    db = getattr(request.app.state, "plans_db_path", None) or _db_path(request)
+    explicit = _symbol_candidates_from_message(body.message)
+    if len(explicit) == 1:
+        return explicit[0], "message", []
+    if len(explicit) > 1:
+        # 明确说出多个不同代码 → 先澄清，不边问边猜
+        return None, "ambiguous", explicit
+    from lei_signal.copilot.subjects import named_subject, asks_for_sector
+
+    named = named_subject(body.message or "")
+    if named:
+        return named, "message", []
+    if asks_for_sector(body.message or ""):
+        return None, "none", []
+    if service is not None and not re.search(r"\d{6}", body.message or ""):
+        # 名称歧义检测：完整名出现在话里的不同标的 > 1 → 先澄清
+        from lei_signal.api.watchlist import list_watchlist
+
+        with closing(connect(db)) as conn:
+            watch = list_watchlist(conn)
+        names: dict[str, str] = {}
+        for w in watch:
+            from lei_signal.api.routes.agent import _static_symbol_name
+
+            nm = _static_symbol_name(w.symbol, getattr(w, "display_name", None))
+            if nm:
+                names[nm] = w.symbol
+        flat = (body.message or "").replace(" ", "")
+        hits = {sym for nm, sym in names.items() if nm and nm in flat}
+        if len(hits) > 1:
+            return None, "ambiguous", sorted(hits)
+    if service is not None:
+        by_catalog = _resolve_symbol_by_catalog(body.message or "")
+        if by_catalog:
+            try:
+                entry = service.get(by_catalog, fetch=False)
+                if getattr(entry, "result", None) is not None:
+                    return by_catalog, "message", []
+            except Exception:  # noqa: BLE001
+                pass
+    if body.selected_symbol:
+        return body.selected_symbol, "selected", []
+    if body.session_id:
+        with closing(connect(db)) as conn:
+            from lei_signal.plans.sessions import list_messages
+            from lei_signal.plans.sessions import get_session
+
+            if get_session(conn, body.session_id) is not None:
+                msgs = list_messages(conn, body.session_id, limit=20)
+                for m in reversed(msgs):
+                    if m.role != "assistant":
+                        continue
+                    try:
+                        meta = json.loads(m.meta_json or "{}")
+                    except (TypeError, ValueError):
+                        continue
+                    sym = meta.get("resolved_symbol")
+                    if isinstance(sym, str) and sym:
+                        return sym, "session", []
+    return None, "none", []
+
+
+@router.post("/copilot/resolve")
+def copilot_resolve(request: Request, body: ResolveRequest) -> dict:
+    """统一入口解析（03B §2）：意图/主题/标的/用途/澄清。
+
+    零 LLM、零写入、不启动回测、不建任何记录。"""
+    import re as _re
+
+    from lei_signal.copilot import resolve as resolve_mod
+    from lei_signal.copilot import semantic_states
+    from lei_signal.data_provenance import winrate_evidence_ref
+
+    from lei_signal.copilot.subjects import display_name, asks_for_sector
+
+    parsed = resolve_mod.parse_request(body.message)
+    symbol, source, ambiguities = _resolve_symbol_with_ambiguity(request, body)
+    clarification = list(parsed["need_clarification"])
+    if not symbol and asks_for_sector(body.message):
+        clarification.append({"kind": "sector_unknown", "question_cn":
+            "没有找到这个板块，请提供完整板块名称；不会用相近名称的ETF代替。"})
+    if ambiguities:
+        clarification.append({
+            "kind": "symbol_ambiguous",
+            "question_cn": "提到多个标的，请说明想聊哪一个：" + "、".join(ambiguities),
+        })
+
+    states = semantic_states.states_for_topic(parsed["topic"])
+    evidence = None
+    plan_count = None
+    db = getattr(request.app.state, "plans_db_path", None) or _db_path(request)
+    if symbol:
+        evidence = winrate_evidence_ref(symbol).to_dict()
+        with closing(connect(db)) as conn:
+            from lei_signal.plans.store import list_plans
+
+            plan_count = sum(
+                1 for p in list_plans(conn, symbol=symbol)
+                if p.state in ("armed", "entered"))
+    return {
+        "intent": parsed["intent"],
+        "topic": parsed["topic"],
+        "resolved_symbol": symbol,
+        "display_name": (display_name(symbol) if symbol else None),
+        "subject_source": source if symbol else ("ambiguous" if ambiguities else "none"),
+        "purpose": parsed["purpose"],
+        "clarification": clarification,
+        "discussion_context": {
+            "states": [
+                {"id": s["id"], "label_cn": s["label_cn"],
+                 "missing_behavior": s["missing_behavior"],
+                 "forbidden_claims": s["forbidden_claims"]}
+                for s in states
+            ],
+            "evidence": evidence,
+            "active_plan_count": plan_count,
+            "client_request_id": body.client_request_id,
+        },
+    }
+
+
+class BacktestRequestIn(BaseModel):
+    session_id: str
+    question_id: int
+    client_request_id: str
+    symbol: str | None = None
+    # 03B-R2 契约2：模块与退出方式必须由用户明确选择（不默认 A、前端不再
+    # 统一固定同一退出值）；缺项在 pydantic 层即 422
+    module: str
+    entry_variant: str | None = None
+    exit_variant: str
+    rr_min: float | None = 3.0
+    fee_label: str = "standard"
+    data_cutoff: str | None = None  # R4：截止必须实际作用到引擎输入
+
+
+@router.post("/copilot/backtest-requests")
+def create_backtest_request(request: Request, body: BacktestRequestIn) -> dict:
+    """按需补测（03B §5 + R1/R2 返修）：单标的、一套已明确的既有方法；
+    服务端校验问题归属/对象绑定/方法与模块合法性，持久保存（queued）后
+    由单任务队列原子领取执行。多标的/空标的/缺方法/非法方法 → 422。"""
+    from lei_signal.backtest.service import MODULE_ENTRY_CONTRACT
+    from lei_signal.copilot.backtest_requests import (
+        BacktestRequestConflict,
+        BacktestRequestError,
+        create_request,
+        start_request_worker,
+    )
+
+    symbol = (body.symbol or "").strip()
+    if not symbol:
+        raise HTTPException(status_code=422, detail={
+            "code": "BACKTEST_SYMBOL_REQUIRED",
+            "message": "补测需要明确一个标的；symbols=None/空/多标的在此入口一律拒绝"})
+    if not body.module:
+        raise HTTPException(status_code=422, detail={
+            "code": "MISSING_METHOD",
+            "message": "缺少交易模块：请明确 A 回调 / B 突破 / C 2B / D 假突破（不默认 A）"})
+    if body.module.upper() not in MODULE_ENTRY_CONTRACT:
+        raise HTTPException(status_code=422, detail={
+            "code": "INVALID_METHOD",
+            "message": f"未知交易模块: {body.module}（合法：A/B/C/D）"})
+    with closing(connect(_db_path(request))) as conn:
+        # 服务端校验归属：question_id 必须是该会话的 user 消息
+        q = conn.execute(
+            "SELECT role, session_id, meta_json FROM agent_messages "
+            "WHERE message_id = ?", (body.question_id,)).fetchone()
+        if q is None or q["role"] != "user" or q["session_id"] != body.session_id:
+            raise HTTPException(status_code=422, detail={
+                "code": "QUESTION_OWNERSHIP",
+                "message": "question_id 与会话归属不符（不能信任任意旧消息 ID）"})
+        # R1/R2：绑定校验——原问题绑定 A 却外传 B → 422 零创建（先记录新
+        # 问题才可换对象）；原问题明确方法与请求方法不符 → 422
+        try:
+            snap = (json.loads(q["meta_json"] or "{}").get("discussion_v1") or {})
+        except ValueError:
+            snap = {}
+        snap_symbol = snap.get("symbol")
+        if snap_symbol and snap_symbol != symbol:
+            raise HTTPException(status_code=422, detail={
+                "code": "OBJECT_MISMATCH",
+                "message": (f"原问题绑定 {snap_symbol}，请求却绑定 {symbol}；"
+                            "请先就新对象提出新问题，再补测")})
+        # 方法归属：请求显式模块优先（来源=request，用户的新选择即新选择）；
+        # 原问题的明确方法已保存在快照 method/method_source，供审计对照。
+        try:
+            out = create_request(
+                conn, session_id=body.session_id, question_id=body.question_id,
+                client_request_id=body.client_request_id, symbol=symbol,
+                module=body.module, entry_variant=body.entry_variant,
+                exit_variant=body.exit_variant, rr_min=body.rr_min,
+                fee_label=body.fee_label, data_cutoff=body.data_cutoff)
+        except BacktestRequestError as exc:
+            raise HTTPException(status_code=422, detail={
+                "code": "BACKTEST_INVALID", "message": str(exc)}) from exc
+        except BacktestRequestConflict as exc:
+            raise HTTPException(status_code=409, detail={
+                "code": "BACKTEST_CONFLICT", "message": str(exc)}) from exc
+        conn.commit()
+    # R5：仅 queued 领取执行；completed 重试只读原结果，不重跑引擎
+    if out["status"] == "queued":
+        start_request_worker(_db_path(request), out["request_id"])
+        out = get_backtest_request(request, out["request_id"])
+    return out
+
+
+@router.get("/copilot/backtest-requests/{request_id}")
+def get_backtest_request(request: Request, request_id: str) -> dict:
+    from lei_signal.copilot.backtest_requests import get_request
+
+    with closing(connect(_db_path(request))) as conn:
+        out = get_request(conn, request_id)
+    if out is None:
+        raise HTTPException(status_code=404, detail=f"补测请求不存在: {request_id}")
+    return out
+
+
+@router.get("/copilot/backtest-requests")
+def list_backtest_requests(request: Request, session_id: str | None = None,
+                           limit: int = 50) -> dict:
+    """任务列表（03B-R2 契约4）：session_id 省略时跨会话取最近任务——
+    页面恢复以**服务端列表为权威**，localStorage 只是提示。"""
+    from lei_signal.copilot.backtest_requests import (
+        list_requests,
+        list_requests_any,
+    )
+
+    with closing(connect(_db_path(request))) as conn:
+        rows = (list_requests_any(conn, limit=max(1, min(limit, 100)))
+                if session_id is None else
+                list_requests(conn, session_id, limit=max(1, min(limit, 100))))
+        return {"requests": rows}

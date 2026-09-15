@@ -38,7 +38,6 @@ export function prefillFromOpportunity(opp: TradeOpportunity | null): PlanPrefil
 }
 
 const MODULES = ["A", "B", "C", "D"] as const;
-const RULESET = "1.3.0";
 
 /** 五项交易假设：写不出来=计划没想清楚，提交时强制非空。 */
 const PLAYBOOK: { key: keyof CreatePlanPayload; label: string; hint: string }[] = [
@@ -54,7 +53,7 @@ const EXIT_PLAYBOOK_KEYS = ["take_profit_plan_cn", "stop_plan_cn"];
 
 /** 常用盯盘信号：只列系统已注册且语义清楚的 rule_id。 */
 const WATCH_SIGNALS: { id: string; label: string }[] = [
-  { id: "lei_color", label: "LEI 颜色转换（灰转绿 / 转黑）" },
+  { id: "lei_color", label: "BIAO 颜色转换（灰转绿 / 转黑）" },
   { id: "dual_ma_bull_confirmed", label: "双均线共同确认（转强）" },
   { id: "exit_ema20_costbasis", label: "A6① 抵扣价退出（跌破 EMA20+抵扣价）" },
   { id: "top_structure", label: "顶部结构确认" },
@@ -154,6 +153,17 @@ export default function CreatePlanDialog({
 
   const toNum = (s: string) => (s.trim() ? Number(s) : null);
 
+  // 计划流程 P1（2026-09-13）：规则集版本改由服务端权威提供（不再写死
+  // 1.3.0——写死版本使确认必然 409 RULESET_VERSION_CHANGED）。未加载成功
+  // 前不可提交；失败给重新读取，不以空版本提交规避 409。
+  const ruleset = useQuery({
+    queryKey: ["rulesetVersion"],
+    queryFn: api.rulesetVersion,
+    staleTime: 60_000,
+    enabled: true,
+  });
+  const rulesetVersion = ruleset.data?.ruleset_version ?? null;
+
   // create：建 draft（不自动确认），交给父组件打开核对抽屉。
   const create = useMutation({
     mutationFn: async () => {
@@ -161,7 +171,7 @@ export default function CreatePlanDialog({
         symbol,
         module,
         direction,
-        ruleset_version: RULESET,
+        ruleset_version: rulesetVersion ?? "",
         reason: reason.trim(),
         valid_until: validUntil.trim(),
         entry_rule_id: entryRuleId.trim() || null,
@@ -227,9 +237,14 @@ export default function CreatePlanDialog({
 
   const playbookReady = PLAYBOOK.every((p) => playbook[p.key].trim());
   const canSubmit =
-    playbookReady && Boolean(validUntil.trim()) && !create.isPending && !saveEdit.isPending;
+    playbookReady && Boolean(validUntil.trim()) && Boolean(rulesetVersion)
+    && !create.isPending && !saveEdit.isPending;
 
   const submit = () => {
+    if (!rulesetVersion) {
+      setError("规则集版本尚未读取成功——请点「重新读取」，不能以空版本创建（确认会被拒绝）。");
+      return;
+    }
     if (!playbookReady) {
       setError("五项交易假设必须全部填写--写不出来说明计划没想清楚。");
       return;
@@ -248,7 +263,7 @@ export default function CreatePlanDialog({
       api.createHoldingWatch({
         symbol,
         direction,
-        ruleset_version: RULESET,
+        ruleset_version: rulesetVersion!,
         valid_until: validUntil.trim(),
         take_profit_plan_cn: playbook.take_profit_plan_cn.trim(),
         stop_plan_cn: playbook.stop_plan_cn.trim(),
@@ -274,14 +289,21 @@ export default function CreatePlanDialog({
   const hasTrigger = Boolean(
     takeProfitPrice.trim() || stopPrice.trim() || watchSignals.length > 0,
   );
+  // C1（2026-09-13 主控复核）：持仓监督与技术入场同一版本守卫——读不到
+  // 权威版本不能提交（不用空版本规避确认 409）。
   const canSubmitHolding =
     exitPlaybookReady &&
     Boolean(validUntil.trim()) &&
     hasTrigger &&
+    Boolean(rulesetVersion) &&
     !createHolding.isPending &&
     !saveEdit.isPending;
 
   const submitHolding = () => {
+    if (!rulesetVersion) {
+      setError("规则集版本尚未读取成功——请点「重新读取」，不能以空版本创建。");
+      return;
+    }
     if (!exitPlaybookReady) {
       setError("止盈预案与止损预案必须写明，否则价位到了仍会临场改主意。");
       return;
@@ -303,6 +325,15 @@ export default function CreatePlanDialog({
     setWatchSignals((cur) =>
       cur.includes(id) ? cur.filter((s) => s !== id) : [...cur, id],
     );
+
+  const rulesetNotice = ruleset.isLoading
+    ? <div className="muted" style={{ fontSize: 12 }}>正在读取规则集版本…</div>
+    : ruleset.isError
+      ? <div className="cp-error" role="alert">
+          规则集版本读取失败，暂不能创建。
+          <button type="button" className="btn small" onClick={() => ruleset.refetch()}>重新读取</button>
+        </div>
+      : null;
 
   const field = (label: string, node: React.ReactNode, hint?: string) => (
     <label className="cp-field">
@@ -347,6 +378,7 @@ export default function CreatePlanDialog({
           </div>
         )}
 
+        {rulesetNotice}
         {mode === "entry" ? (
           <p className="cp-intro">
             入场相关字段已从当前信号预填（仅取系统已算出的数值，不预算法新数）；

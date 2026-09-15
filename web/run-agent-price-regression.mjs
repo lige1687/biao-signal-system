@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import { findPriceMentions, validPriceLevels, priceLineKind, priceAxisBounds } from '/tmp/lei-agent-price-links.mjs';
+const levels=[{role:'下方关键位',price:1.256,kind:'below',dist_pct:2,from_cn:'底部构造'},{role:'上方阻力',price:1.4,kind:'above',dist_pct:3,from_cn:'顶部构造'}];
+assert.equal(findPriceMentions('下方关键位 **1.256**，上方阻力为 1.400。',levels).length,2);
+assert.equal(findPriceMentions('代码1256，上涨1.256%，日期2026-09-08，任意价1.4。',levels).length,0);
+assert.equal(findPriceMentions('下方关键位1.25。',levels).length,0,'do not round unknown prices into a match');
+assert.equal(findPriceMentions('下方关键位 1.256%',levels).length,0);
+assert.equal(findPriceMentions('下方关键位 **1.256**%',levels).length,0);
+assert.equal(findPriceMentions('下方关键位 1.256', [...levels,{...levels[0],from_cn:'另一结构'}]).length,0,'ambiguous source must not auto link');
+assert.equal(validPriceLevels([...levels,{...levels[0],price:NaN},{...levels[0],price:0}]).length,2);
+assert.equal(priceLineKind(levels[0]),'reference','a lower reference is not automatically a stop');
+assert.equal(priceLineKind({...levels[0],role:'失效位'}),'stop');
+const bounds=priceAxisBounds(1,1.1,[1.256]);
+assert.ok(bounds.min<1 && bounds.max>1.256,'focused level outside candles remains visible');
+assert.equal(priceAxisBounds(1,2,[]),null);
+console.log('Agent price links: provenance matching, ambiguity, exact precision, roles and visible bounds passed.');

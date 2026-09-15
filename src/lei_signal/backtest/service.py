@@ -9,6 +9,7 @@
 """
 from __future__ import annotations
 
+import hashlib
 import threading
 import uuid
 from dataclasses import asdict, dataclass
@@ -384,12 +385,18 @@ def _trade_dict(trade: Trade) -> dict:
     }
 
 
-def execute_run(params: BacktestParams) -> dict[str, Any]:
+def execute_run(params: BacktestParams,
+                frames: dict[str, pd.DataFrame] | None = None) -> dict[str, Any]:
     """同步执行一次参数化回测。调用方负责放后台线程。
 
     overrides 非空时：全局锁内把账本替换为覆盖版本运行（检测器从账本读参，
     无需改代码），事件缓存按覆盖指纹隔离，跑完恢复原账本。参数实验（规格
     §16/§17 敏感性）与正式参数（拍板入账本）由此分离。
+
+    ``frames``（03B-R1，2026-09-08，向后兼容的显式输入）：调用方提供已按
+    截止裁剪并计算特征的行情（如补测的冻结输入副本）；提供时不读全局池，
+    且数据/事件/枢轴缓存按数据内容指纹隔离——不同输入不互借旧事件。
+    None = 既有行为（回测池全量）。
     """
     params.validate()
     import contextlib
@@ -422,11 +429,54 @@ def execute_run(params: BacktestParams) -> dict[str, Any]:
                 _OVERRIDES_ACTIVE = False
 
     with _patched_ledger():
-        return _execute_run_unlocked(params)
+        return _execute_run_unlocked(params, frames=frames)
 
 
-def _execute_run_unlocked(params: BacktestParams) -> dict[str, Any]:
-    frames = _cached_frames()
+def _overrides_fingerprint(params: BacktestParams) -> str:
+    """overrides 参数指纹（原有事件缓存键的一部分）。"""
+    return ";".join(f"{k}={v}" for k, v in sorted(params.overrides))
+
+
+def _ruleset_version_str() -> str:
+    try:
+        from lei_signal.domain.rules_config import ruleset_version
+
+        return ruleset_version()
+    except Exception:  # noqa: BLE001
+        return ""
+
+
+def _ruleset_content_hash() -> str | None:
+    """规则文件内容摘要（R4：规则身份=版本+实际内容，不只版本号）。
+
+    03B-R2（r7）：读**实际启用**的账本路径（rules_config 公共适配器，
+    当前为 rules.v2.yaml，参数覆盖运行时为覆盖版本），不再固定 v1 路径。
+    """
+    from lei_signal.domain.rules_config import _default_config_path
+
+    try:
+        return hashlib.sha256(_default_config_path().read_bytes()).hexdigest()
+    except OSError:
+        return None
+
+
+def _frame_content_digest(frame: pd.DataFrame) -> str:
+    """单标的行情内容摘要（03B-R2 r8）：覆盖全部 OHLCV 值、日期与列定义，
+    且**按行序**哈希——只改高/低/量、或打乱收盘顺序但总和不变，都会得到
+    不同摘要（旧的「长度+首尾日期+尾收盘+收盘总和」口径会漏判）。"""
+    h = hashlib.sha256()
+    h.update(f"cols:{','.join(str(c) for c in frame.columns)}".encode("utf-8"))
+    row_hash = pd.util.hash_pandas_object(frame, index=True).to_numpy()
+    h.update(f"rows:{len(row_hash)}".encode("utf-8"))
+    for v in row_hash:
+        h.update(int(v).to_bytes(8, "little"))
+    return h.hexdigest()[:16]
+
+
+def _execute_run_unlocked(params: BacktestParams,
+                          frames: dict[str, pd.DataFrame] | None = None) -> dict[str, Any]:
+    if frames is None:
+        frames = _cached_frames()
     if params.symbols is not None:
         missing = [s for s in params.symbols if s not in frames]
         selected = {s: f for s, f in frames.items() if s in params.symbols}
@@ -439,6 +489,16 @@ def _execute_run_unlocked(params: BacktestParams) -> dict[str, Any]:
     oos_start = last_date - timedelta(days=365 * 2)
     benchmarks = _benchmark_clock(frames)
     fee = FeeModel.from_ledger(params.fee_label)
+
+    # R4（03B-R1）：数据内容指纹——缓存（事件/枢轴/缺口/筹码）按输入数据内容隔离，
+    # 不同数据（如排队期间源变更、不同截止裁剪）不互借旧事件。
+    # 03B-R2（r8）：指纹=全 OHLCV 内容按行序哈希；规则文件内容一并进缓存身份
+    # （同数据不同规则不得互借事件；参数覆盖运行时读覆盖版账本）。
+    fp_src = "|".join(
+        f"{sym}:{_frame_content_digest(fr)}" for sym, fr in sorted(frames.items()))
+    data_fingerprint = hashlib.sha256(fp_src.encode("utf-8")).hexdigest()[:16]
+    cache_fp = (f"{_overrides_fingerprint(params)}"
+                f";rules:{_ruleset_content_hash()};data:{data_fingerprint}")
 
     trades: list[Trade] = []
     per_symbol: list[dict] = []
@@ -453,7 +513,7 @@ def _execute_run_unlocked(params: BacktestParams) -> dict[str, Any]:
     for symbol, frame in sorted(frames.items()):
         prepared = prepare_frame(frame)
         fingerprint = ";".join(f"{k}={v}" for k, v in sorted(params.overrides))
-        events = _cached_events(symbol, frame, params.module, fingerprint)
+        events = _cached_events(symbol, frame, params.module, cache_fp)
         touched_total += sum(
             1 for e in events
             if str(e.evidence.get("sub_rule", "")).endswith(("_touched", "_watch"))
@@ -463,13 +523,13 @@ def _execute_run_unlocked(params: BacktestParams) -> dict[str, Any]:
             if "confirmed" in str(e.evidence.get("sub_rule", ""))
             and "strict" not in str(e.evidence.get("sub_rule", ""))
         )
-        gaps = _cached_gaps(symbol, frame) if use_gaps else None
+        gaps = _cached_gaps(symbol, frame, cache_fp) if use_gaps else None
         specs, filtered_rr, no_target = entry_specs_from_events(
             frame, events, symbol,
             module=params.module,
             entry_variant=params.entry_variant,
             rr_min=params.rr_min,
-            pivots=_cached_pivots(symbol, frame),
+            pivots=_cached_pivots(symbol, frame, cache_fp),
             gaps=gaps if params.gap_target else None,
         )
         filtered_rr_total += filtered_rr
@@ -489,12 +549,13 @@ def _execute_run_unlocked(params: BacktestParams) -> dict[str, Any]:
             )
             shrink_filtered_total += dropped
         if params.profile_filter != "none":
+            # 03B-R2：筹码缓存按（规则+数据）缓存身份分桶，不同输入不互借代理结果
             specs, dropped = filter_specs_by_profile(
                 frame,
                 specs,
                 mode=params.profile_filter,
                 prepared=prepared,
-                cache=_PROFILE_CACHE,
+                cache=_PROFILE_CACHE.setdefault(cache_fp, {}),
             )
             profile_filtered_total += dropped
         if params.gap_momentum:
@@ -553,26 +614,15 @@ def _execute_run_unlocked(params: BacktestParams) -> dict[str, Any]:
         "created_at": datetime.now().isoformat(timespec="seconds"),
         "status": "done",
         "disclaimer": RESEARCH_DISCLAIMER,
+        # R4（03B-R1）：全量实际生效参数（asdict 展开不再漏存 accel/stop 等）
+        # + 规则版本与规则文件内容摘要 + 数据内容指纹。只补新运行，不倒填旧运行。
         "params": {
-            "symbols": list(params.symbols) if params.symbols else "all",
-            "module": params.module,
-            "rr_min": params.rr_min,
-            "entry_variant": params.entry_variant,
-            "exit_variant": params.exit_variant,
-            "fee_label": params.fee_label,
-            "limit_guard": params.limit_guard,
-            "overrides": dict(params.overrides) if params.overrides else {},
-            "volume_confirm": params.volume_confirm,
-            "volume_confirm_window": params.volume_confirm_window,
-            "profile_filter": params.profile_filter,
-            "gap_target": params.gap_target,
-            "gap_momentum": params.gap_momentum,
-            "gap_momentum_lookback": params.gap_momentum_lookback,
-            "volume_filter": params.volume_filter,
-            "shrink_recent": params.shrink_recent,
-            "shrink_prior": params.shrink_prior,
-            "volume_filter_vr_max": params.volume_filter_vr_max,
-            "bias_filter": params.bias_filter,
+            **{k: (list(v) if k == "symbols" and v else
+                   [list(o) for o in v] if k == "overrides" and v else v)
+               for k, v in asdict(params).items()},
+            "ruleset_version": _ruleset_version_str(),
+            "ruleset_sha256": _ruleset_content_hash(),
+            "data_fingerprint": data_fingerprint,
         },
         "data_range": {
             "start": first_date.isoformat(),
@@ -638,7 +688,8 @@ _FRAME_CACHE: dict[str, pd.DataFrame] | None = None
 _EVENT_CACHE: dict[str, list] = {}
 _PIVOT_CACHE: dict[str, tuple] = {}
 _GAP_CACHE: dict[str, list] = {}
-_PROFILE_CACHE: dict[tuple[str, int, int], object] = {}
+#: 筹码代理缓存按 cache_fp（规则+数据指纹）分桶：{cache_fp: {内部键: 结果}}
+_PROFILE_CACHE: dict[str, dict] = {}
 _STATE_LOCK = threading.Lock()
 _RUN_STATE: dict[str, dict[str, str]] = {}
 
@@ -677,21 +728,23 @@ def _cached_events(
     return _EVENT_CACHE[key]
 
 
-def _cached_pivots(symbol: str, frame: pd.DataFrame) -> tuple:
-    if symbol not in _PIVOT_CACHE:
+def _cached_pivots(symbol: str, frame: pd.DataFrame, fp: str = "") -> tuple:
+    key = (fp, symbol)
+    if key not in _PIVOT_CACHE:
         from lei_signal.features.pivots import confirmed_pivots
 
-        _PIVOT_CACHE[symbol] = confirmed_pivots(frame)
-    return _PIVOT_CACHE[symbol]
+        _PIVOT_CACHE[key] = confirmed_pivots(frame)
+    return _PIVOT_CACHE[key]
 
 
-def _cached_gaps(symbol: str, frame: pd.DataFrame) -> list:
-    """缺口事件按标的缓存（缺口口径不受 overrides 白名单影响，直接复用）。"""
-    if symbol not in _GAP_CACHE:
+def _cached_gaps(symbol: str, frame: pd.DataFrame, fp: str = "") -> list:
+    """缺口事件按（数据指纹, 标的）缓存。"""
+    key = (fp, symbol)
+    if key not in _GAP_CACHE:
         from lei_signal.rules.gap_events import detect_gaps
 
-        _GAP_CACHE[symbol] = detect_gaps(frame)
-    return _GAP_CACHE[symbol]
+        _GAP_CACHE[key] = detect_gaps(frame)
+    return _GAP_CACHE[key]
 
 
 def new_run_id() -> str:

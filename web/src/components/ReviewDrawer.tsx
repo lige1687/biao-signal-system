@@ -48,8 +48,19 @@ export default function ReviewDrawer({
       const body = (e as Error & { body?: unknown }).body as
         | { detail?: { message?: string } }
         | undefined;
-      const msg = body?.detail?.message;
-      setError(msg ?? (e instanceof Error ? e.message : String(e)));
+      const code = (body as { detail?: { code?: string } } | undefined)?.detail?.code;
+      const msg = body?.detail?.message ?? (e instanceof Error ? e.message : String(e));
+      // C3（2026-09-13 主控复核）：按错误代码区分——版本冲突必须另建草稿
+      // （普通编辑不改版本，原地重试只会循环 409）；字段/符合性引导编辑原
+      // 草稿；分析不可用引导稍后重试。
+      if (code === "RULESET_VERSION_CHANGED") {
+        setError(msg
+          + "——请按当前依据重新核对并另建新草稿（旧计划保留，不会自动更新版本）；可从讨论或「建立执行计划」入口发起。");
+      } else if (code === "ANALYSIS_UNAVAILABLE") {
+        setError(msg + "（草稿已保留）：稍后重试确认。");
+      } else {
+        setError(msg + "（可直接点「编辑计划」补齐后重试，无需新建计划）");
+      }
       refetch();
     },
   });

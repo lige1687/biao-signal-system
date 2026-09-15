@@ -88,6 +88,72 @@ def test_stream_tokens_and_grounded_done(app, monkeypatch):
     assert "fallback" not in done
 
 
+def test_stream_interrupted_partial_keeps_text_and_marks_incomplete(app, monkeypatch):
+    """可靠性一期：流式中断后部分正文保留、明确标记未完成、不给完整模板。"""
+    monkeypatch.setenv("GLM_API_KEY", "k")
+    monkeypatch.setattr(
+        agent_routes.plans_llm, "load_ark_config",
+        lambda: plans_llm.ArkConfig(api_key="k"),
+    )
+
+    def fake_stream(payload, history, message, config):
+        yield "按系统数据，先说结论。"
+        yield plans_llm.STREAM_INTERRUPTED
+
+    monkeypatch.setattr(
+        agent_routes.plans_llm, "chat_discussion_stream", fake_stream
+    )
+    with TestClient(app) as c:
+        with c.stream(
+            "POST", "/api/agent/chat/stream",
+            json={"context_kind": "global", "message": "随便说说"},
+        ) as r:
+            text = "".join(chunk for chunk in r.iter_text())
+    events = _parse_sse(text)
+    tokens = [d["t"] for e, d in events if e == "token"]
+    assert tokens == ["按系统数据，先说结论。"]
+    done = next(d for e, d in events if e == "done")
+    assert done["grounded"] is False
+    assert "未完成" in done["verify_note"]
+    # 部分正文不叠加完整模板（模板只在零正文/校验失败时兜底）
+    assert "fallback" not in done
+
+
+def test_stream_prepared_event_precedes_tokens_and_done(app, monkeypatch):
+    """可靠性一期（2026-09-14）：资料就绪先发 prepared（不等模型）。
+
+    前端据此先渲染系统事实卡；prepared 字段与 done 同名同源，不是第二套证据。
+    """
+    monkeypatch.setenv("GLM_API_KEY", "k")
+    monkeypatch.setattr(
+        agent_routes.plans_llm, "load_ark_config",
+        lambda: plans_llm.ArkConfig(api_key="k"),
+    )
+
+    def fake_stream(payload, history, message, config):
+        yield "第一段。"
+
+    monkeypatch.setattr(
+        agent_routes.plans_llm, "chat_discussion_stream", fake_stream
+    )
+    with TestClient(app) as c:
+        with c.stream(
+            "POST", "/api/agent/chat/stream",
+            json={"context_kind": "global", "message": "随便说说"},
+        ) as r:
+            text = "".join(chunk for chunk in r.iter_text())
+    events = _parse_sse(text)
+    kinds = [e for e, _ in events]
+    assert "prepared" in kinds
+    assert kinds.index("prepared") < kinds.index("token")
+    assert kinds.index("prepared") < kinds.index("done")
+    prepared = next(d for e, d in events if e == "prepared")
+    assert prepared["session_id"]
+    assert "resolved_symbol" in prepared
+    assert "quick_card" in prepared and "evidence_card" in prepared
+    assert "next_steps" in prepared
+
+
 def test_stream_verify_fail_appends_fallback(app, monkeypatch):
     monkeypatch.setenv("GLM_API_KEY", "k")
     monkeypatch.setattr(

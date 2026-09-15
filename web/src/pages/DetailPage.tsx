@@ -406,7 +406,7 @@ export default function DetailPage() {
                     </span>
                   </>
                 )}
-                {legend.colorMode === "lei_state" && (
+                {legend.colorMode === "biao_state" && (
                   <span className="muted">
                     LEI 着色模式：K 线颜色 = 当日绿/灰/黑状态（实体不再分空心/实心）
                   </span>

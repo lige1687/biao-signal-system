@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import { ResultContext, ResultSymbol } from "../agent/ResultContext";
 import { api } from "../../api/client";
 import type {
   RecommendCard,
@@ -11,6 +12,7 @@ import type {
 
 /** 推荐卡：前5标的+前3板块，symbol 可点击跳详情；「让AI讲讲」按需一次调用。 */
 export function RecommendCardView({ card }: { card: RecommendCard }) {
+  const context = useContext(ResultContext);
   const [narrative, setNarrative] = useState<string | null>(null);
   const explain = useMutation({
     mutationFn: () => api.copilotRecommendExplain(""),
@@ -24,16 +26,14 @@ export function RecommendCardView({ card }: { card: RecommendCard }) {
       {card.items.length === 0 && <div className="muted">今日无上榜标的。</div>}
       {card.items.map((it) => (
         <div key={it.symbol} className="cp-row">
-          <Link to={`/symbol/${it.symbol}`} className="cp-sym">
-            {it.display_name}
-          </Link>
+          <ResultSymbol symbol={it.symbol}>{it.display_name}</ResultSymbol>
           <span className={`badge v-${it.verdict}`}>{it.verdict_cn}</span>
           {it.sentiment_cn && (
             <span className="cp-chip" title="散户情绪叙事标注（不参与判定）">
               {it.sentiment_cn}
             </span>
           )}
-          <span className="muted">{it.reasons.slice(0, 3).join("；")}</span>
+          <span className="muted">{it.reasons.join("；")}</span>
         </div>
       ))}
       {card.sectors.length > 0 && (
@@ -53,19 +53,21 @@ export function RecommendCardView({ card }: { card: RecommendCard }) {
           {narrative}
         </div>
       )}
-      <button
+      {!context.readOnly && <button
         className="btn small"
         disabled={explain.isPending || !!narrative}
-        onClick={() => explain.mutate()}
+        onClick={() => context.ask ? context.ask(`请解释 ${card.run_date} 的关注清单（${card.items.map(it => it.symbol).join("、")}），说明触发条件与失效位。`) : explain.mutate()}
       >
         {explain.isPending ? "生成中…" : narrative ? "已讲解" : "让AI讲讲"}
-      </button>
+      </button>}
+      {explain.isError && <p className="cp-error" role="alert">讲解读取失败，请重试。</p>}
     </div>
   );
 }
 
 /** 报单确认卡：字段可改，确认后才落库（设计定稿 D1 红线）。 */
 export function TradeConfirmCard({ preview }: { preview: TradePreview }) {
+  const { readOnly } = useContext(ResultContext);
   const qc = useQueryClient();
   const [code, setCode] = useState(preview.fund_code ?? "");
   const [name, setName] = useState(preview.fund_name ?? "");
@@ -97,24 +99,27 @@ export function TradeConfirmCard({ preview }: { preview: TradePreview }) {
         {missingHint}。金额单位为元；定价按报单日基金净值（ETF按单位净值）。
       </div>
       <div className="cp-form">
-        <input value={code} onChange={(e) => setCode(e.target.value)} placeholder="基金代码（6位）" />
-        <input value={name} onChange={(e) => setName(e.target.value)} placeholder="基金名称" />
-        <input value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="金额（元）" />
-        <input value={date} onChange={(e) => setDate(e.target.value)} placeholder="日期 YYYY-MM-DD" />
+        <label>基金代码<input value={code} onChange={(e) => setCode(e.target.value)} placeholder="6位代码" inputMode="numeric" disabled={create.isPending || create.isSuccess || readOnly} /></label>
+        <label>基金名称<input value={name} onChange={(e) => setName(e.target.value)} placeholder="基金名称" disabled={create.isPending || create.isSuccess || readOnly} /></label>
+        <label>成交金额（元）<input value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="实际成交金额" inputMode="decimal" disabled={create.isPending || create.isSuccess || readOnly} /></label>
+        <label>成交日期<input type="date" value={date} onChange={(e) => setDate(e.target.value)} disabled={create.isPending || create.isSuccess || readOnly} /></label>
       </div>
       <button
         className="btn small primary"
         disabled={
+          readOnly ||
           create.isPending ||
           create.isSuccess ||
           !/^\d{6}$/.test(code.trim()) ||
           !(Number(amount) > 0) ||
+          !Number.isFinite(Number(amount)) ||
           !/^\d{4}-\d{2}-\d{2}$/.test(date)
         }
         onClick={() => create.mutate()}
       >
         {create.isPending ? "记账中…" : create.isSuccess ? "已记账" : "确认记账"}
       </button>
+      {create.isSuccess && <p role="status">已记入基金台账。<Link to="/portfolio">查看成交记录</Link></p>}
       {create.error && (
         <div className="cp-error">
           {create.error instanceof Error ? create.error.message : String(create.error)}
@@ -146,25 +151,21 @@ export interface HoldingsData {
 export function HoldingsCardView({ data }: { data: HoldingsData }) {
   return (
     <div className="cp-card">
-      <div className="cp-label">持仓速览</div>
-      {data.fund_positions.map((p) => (
-        <div key={p.fund_code} className="cp-row">
-          <span className="cp-sym">{p.fund_name}</span>
-          <span className="muted">
-            份额 {p.shares.toFixed(2)}
-            {p.market_value != null && <> · 现值 {p.market_value.toFixed(0)} 元</>}
-            {p.unrealized_pnl != null && (
-              <> · 浮动 {p.unrealized_pnl >= 0 ? "+" : ""}{p.unrealized_pnl.toFixed(0)}</>
-            )}
-            {p.realized_pnl !== 0 && (
-              <> · 已实现 {p.realized_pnl >= 0 ? "+" : ""}{p.realized_pnl.toFixed(0)}</>
-            )}
-          </span>
-        </div>
-      ))}
+      <div className="cp-label ar-holdings-title">持仓速览</div>
+      {data.fund_positions.length > 0 && <div className="ar-table-wrap" role="region" aria-label="基金持仓明细，可横向滚动" tabIndex={0}><table className="ar-data-table">
+        <caption className="ar-result-hint">基金持仓 · 金额单位为元</caption>
+        <thead><tr><th>基金</th><th className="num">份额</th><th className="num">现值</th><th className="num">浮动盈亏</th><th className="num">已实现盈亏</th></tr></thead>
+        <tbody>{data.fund_positions.map(p => <tr key={p.fund_code}>
+          <td><strong>{p.fund_name}</strong><div className="muted">{p.fund_code}</div></td>
+          <td className="num">{p.shares.toFixed(2)}</td>
+          <td className="num">{p.market_value?.toFixed(2) ?? "—"}</td>
+          <td className="num">{p.unrealized_pnl == null ? "—" : `${p.unrealized_pnl > 0 ? "+" : ""}${p.unrealized_pnl.toFixed(2)}`}</td>
+          <td className="num">{p.realized_pnl > 0 ? "+" : ""}{p.realized_pnl.toFixed(2)}</td>
+        </tr>)}</tbody>
+      </table></div>}
       {data.active_plans.map((p) => (
         <div key={p.plan_id} className="cp-row">
-          <Link to={`/symbol/${p.symbol}`} className="cp-sym">{p.symbol}</Link>
+          <ResultSymbol symbol={p.symbol}>{p.symbol}</ResultSymbol>
           <span className="muted">
             计划 {p.state} · 有效期至 {p.valid_until}
           </span>
@@ -184,13 +185,13 @@ export function ReviewCardView({ review }: { review: ReviewCard }) {
   return (
     <div className="cp-card">
       <div className="cp-label">{review.title_cn}</div>
-      {review.sections.map((s) => (
-        <div key={s.heading_cn} className="cp-section">
-          <div className="cp-sub">{s.heading_cn}</div>
+      {review.sections.map((s, index) => (
+        <details key={s.heading_cn} className="cp-section ar-card-group" open={index === 0}>
+          <summary>{s.heading_cn}<small>{s.lines.length} 项</small></summary>
           {s.lines.map((l, i) => (
             <div key={i} style={{ fontSize: 12 }}>{l}</div>
           ))}
-        </div>
+        </details>
       ))}
       {review.r_multiple != null && (
         <div style={{ fontSize: 12 }}>
@@ -242,7 +243,7 @@ export function CopilotCardDispatcher({
     return <ReviewCardView review={card.data as ReviewCard} />;
   if (card.card_type === "scout")
     return <ScoutCardView data={card.data as ScoutCard} />;
-  return null;
+  return <p className="cp-error" role="status">已收到功能结果，当前界面暂不支持此类型的展示。</p>;
 }
 
 type ScoutItem = {
@@ -269,13 +270,11 @@ export function ScoutCardView({ data }: { data: ScoutCard }) {
       )}
       {groups.map(([title, items]) =>
         items.length === 0 ? null : (
-          <div key={title} style={{ marginTop: 10 }}>
-            <div className="cp-label" style={{ opacity: 0.85 }}>{title}</div>
+          <details key={title} className="ar-card-group" open>
+            <summary>{title}<small>{items.length} 项</small></summary>
             {items.map((it, i) => (
               <div key={i} className="cp-row" style={{ alignItems: "baseline" }}>
-                <span className="cp-sym">
-                  {it.display_name || it.kind_cn}
-                </span>
+                {it.symbol ? <ResultSymbol symbol={it.symbol}>{it.display_name || it.kind_cn}</ResultSymbol> : <span className="cp-sym">{it.display_name || it.kind_cn}</span>}
                 <span style={{ flex: 1 }}>
                   <span className={it.kind === "ambush" ? "cp-up" : ""}>
                     {it.verdict_cn}
@@ -291,7 +290,7 @@ export function ScoutCardView({ data }: { data: ScoutCard }) {
                 </span>
               </div>
             ))}
-          </div>
+          </details>
         ),
       )}
       <div className="muted" style={{ fontSize: 11, marginTop: 8 }}>{data.note_cn}</div>

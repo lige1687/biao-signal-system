@@ -50,6 +50,9 @@ def test_exit_todo_ranked_first(conn):
         symbol="515880", module="A", direction="long",
         ruleset_version="test",
         reason="t", valid_until="2026-10-01",
+        # 总控决定 1（2026-09-08）：技术 entry 确认必须有明确失效价；
+        # 本用例断言的是 EXIT 待办排序，与失效价无关，故补齐合法值
+        invalidation_price=1.0,
         thesis_cn="t", invalidation_criteria_cn="t", drawdown_playbook_cn="t",
         take_profit_plan_cn="t", stop_plan_cn="t",
     )

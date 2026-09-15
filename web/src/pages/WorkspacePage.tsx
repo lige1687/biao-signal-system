@@ -622,7 +622,7 @@ export default function WorkspacePage() {
                       </span>
                     </>
                   )}
-                  {legend.colorMode === "lei_state" && (
+                  {legend.colorMode === "biao_state" && (
                     <span className="muted">
                       LEI 着色：颜色=当日状态（绿/灰/黑）；涨跌方向看「今日概述」开高低收
                     </span>

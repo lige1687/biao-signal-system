@@ -5,6 +5,8 @@ CRUD + 触发判定 + 待办。判定权在 plans/ 判定层（Python），本�
 """
 from __future__ import annotations
 
+import json
+import sqlite3
 from contextlib import closing
 from datetime import UTC, datetime
 
@@ -45,6 +47,7 @@ from lei_signal.plans.store import (
     set_exited,
     update_action_item,
     update_draft,
+    validate_entry_confirm_fields,
 )
 from lei_signal.storage.sqlite_store import connect
 
@@ -94,9 +97,213 @@ def _to_action_dto(i) -> ActionItemDTO:  # noqa: ANN001
     )
 
 
+def _draft_request_hash(body: CreatePlanRequest) -> str:
+    """03B-R3 S6：草稿请求编号绑定的**完整业务内容摘要**——原会话/问题/
+    对象/全部计划字段。任何字段或归属变化都会改变摘要（409）。产物由原
+    问题决定（摘要已含问题号），不重复计入。"""
+    import hashlib
+
+    payload = {
+        "source_session_id": body.source_session_id or "",
+        "source_question_id": body.source_question_id,
+        "symbol": body.symbol,
+        "module": body.module, "direction": body.direction,
+        "ruleset_version": body.ruleset_version, "reason": body.reason,
+        "valid_until": body.valid_until,
+        "entry_rule_id": body.entry_rule_id,
+        "entry_lifecycle_id": body.entry_lifecycle_id,
+        "entry_trigger_cn": body.entry_trigger_cn,
+        "entry_price_ref": body.entry_price_ref,
+        "invalidation_price": body.invalidation_price,
+        "target_b_price": body.target_b_price,
+        "target_b_source": body.target_b_source,
+        "reward_risk_at_plan": body.reward_risk_at_plan,
+        "thesis_cn": body.thesis_cn,
+        "invalidation_criteria_cn": body.invalidation_criteria_cn,
+        "drawdown_playbook_cn": body.drawdown_playbook_cn,
+        "take_profit_plan_cn": body.take_profit_plan_cn,
+        "stop_plan_cn": body.stop_plan_cn,
+    }
+    canonical = json.dumps(payload, ensure_ascii=False, sort_keys=True,
+                           separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def _verify_discussion_source(conn, body: CreatePlanRequest) -> tuple[dict, str | None]:
+    """03B-R3 S5：保存前由**服务端**核对原问题归属与冻结依据——不信任客户端
+    自报 source_refs。返回 (冻结 source_refs, artifact_id)。校验失败抛 ValueError
+    （映射 409/422）。"""
+    if not body.source_question_id:
+        raise ValueError("REQ_SOURCE_INVALID:对话式保存必须携带原问题（source_question_id）")
+    qrow = conn.execute(
+        "SELECT session_id, meta_json FROM agent_messages "
+        "WHERE message_id = ? AND role = 'user'",
+        (body.source_question_id,)).fetchone()
+    if qrow is None:
+        raise ValueError(f"REQ_SOURCE_INVALID:原问题不存在（message_id="
+                         f"{body.source_question_id}），不能凭空声称讨论来源")
+    if body.source_session_id and body.source_session_id != qrow["session_id"]:
+        raise ValueError(
+            f"REQ_SOURCE_CONFLICT:原问题属于会话 {qrow['session_id']}，"
+            f"与传入会话 {body.source_session_id} 不一致")
+    try:
+        snap = (json.loads(qrow["meta_json"] or "{}") or {}).get("discussion_v1") or {}
+    except json.JSONDecodeError:
+        snap = {}
+    q_symbol = snap.get("symbol")
+    if q_symbol and q_symbol != body.symbol:
+        raise ValueError(
+            f"REQ_SOURCE_CONFLICT:原问题绑定标的 {q_symbol}，草稿却是 "
+            f"{body.symbol}；不能跨对象保存")
+    # 服务端计划产物：优先取该问题**精确绑定**的回答上的产物（S5）
+    artifact = None
+    arow = conn.execute(
+        "SELECT meta_json FROM agent_messages "
+        "WHERE question_id = ? AND role = 'assistant' "
+        "ORDER BY message_id DESC LIMIT 1", (body.source_question_id,)).fetchone()
+    if arow is not None:
+        try:
+            artifact = (json.loads(arow["meta_json"] or "{}") or {}).get("plan_artifact")
+        except json.JSONDecodeError:
+            artifact = None
+    if artifact is not None:
+        if artifact.get("symbol") != body.symbol:
+            raise ValueError(
+                f"REQ_SOURCE_CONFLICT:服务端计划产物绑定标的 "
+                f"{artifact.get('symbol')}，草稿却是 {body.symbol}")
+        refs = {
+            "artifact_id": artifact.get("artifact_id"),
+            "ruleset": artifact.get("ruleset_ref"),
+            "evidence_refs": artifact.get("evidence_refs") or [],
+            "rule_refs": artifact.get("rule_refs") or [],
+            "origin_symbol": body.symbol,
+            "origin_question_id": body.source_question_id,
+            "fields": artifact.get("fields") or {},
+            "frozen_at": artifact.get("created_at"),
+            "note_cn": "依据取自服务端计划产物冻结（不读今天的规则充当当时依据）",
+        }
+        return refs, artifact.get("artifact_id")
+    # 旧记录/非整理计划类问题：无产物 → 依据取自**提问快照冻结**，如实标注
+    refs = {
+        "artifact_id": None,
+        "ruleset": None,
+        "evidence_refs": snap.get("evidence_refs") or [],
+        "rule_refs": snap.get("rule_refs") or [],
+        "origin_symbol": body.symbol,
+        "origin_question_id": body.source_question_id,
+        "fields": {},
+        "note_cn": "该问题无服务端计划产物（非整理计划类问题或旧记录）；"
+                   "依据取自提问快照冻结，来源可考",
+    }
+    return refs, None
+
+
 @router.post("/plans", response_model=PlanDTO, status_code=201)
 def post_plan(request: Request, body: CreatePlanRequest) -> PlanDTO:
+    """建计划草稿。03B-R3 S5/S6：携带 client_request_id 的对话式保存——
+    服务端核对原问题归属（不信任客户端 source_refs）并冻结产物依据；
+    编号绑定完整业务摘要：同编号同内容返回原 draft，换任何字段/归属 409；
+    草稿+绑定+编号同一事务，竞争失败不留孤立草稿。非讨论手动建草稿
+    （无编号）原入口保留，不声称讨论来源。"""
     with closing(connect(_db_path(request))) as conn:
+        if body.client_request_id:
+            # S6：同编号先比完整业务摘要（比 plan_id 更严：内容变了即冲突）
+            existing = conn.execute(
+                "SELECT * FROM agent_plan_draft_bindings "
+                "WHERE client_request_id = ?",
+                (body.client_request_id,)).fetchone()
+            if existing is not None:
+                if existing["request_hash"] and existing["request_hash"] != \
+                        _draft_request_hash(body):
+                    raise HTTPException(status_code=409, detail={
+                        "code": "DRAFT_REQUEST_CONFLICT",
+                        "message": ("相同草稿编号已用于不同业务内容/归属"
+                                    "（对象或任一计划字段不同）；请换编号"),
+                    })
+                plan = get_plan(conn, existing["plan_id"])
+                if plan is not None:
+                    return _to_plan_dto(plan)
+            try:
+                refs, artifact_id = _verify_discussion_source(conn, body)
+            except ValueError as exc:
+                msg = str(exc)
+                code, _, detail = msg.partition(":")
+                status = 409 if code == "REQ_SOURCE_CONFLICT" else 422
+                raise HTTPException(status_code=status, detail={
+                    "code": code, "message": detail or msg}) from exc
+            request_hash = _draft_request_hash(body)
+            conn.execute("BEGIN IMMEDIATE")
+            try:
+                # 事务内复查（并发同编号：只有一个能创建草稿+绑定）
+                row2 = conn.execute(
+                    "SELECT * FROM agent_plan_draft_bindings "
+                    "WHERE client_request_id = ?",
+                    (body.client_request_id,)).fetchone()
+                if row2 is not None:
+                    conn.rollback()
+                    if row2["request_hash"] and row2["request_hash"] != request_hash:
+                        raise HTTPException(status_code=409, detail={
+                            "code": "DRAFT_REQUEST_CONFLICT",
+                            "message": "相同草稿编号已用于不同业务内容/归属；请换编号",
+                        })
+                    plan = get_plan(conn, row2["plan_id"])
+                    if plan is not None:
+                        return _to_plan_dto(plan)
+                refs.setdefault("ruleset", None)
+                plan = create_plan(
+                    conn, symbol=body.symbol, module=body.module,
+                    direction=body.direction,
+                    ruleset_version=body.ruleset_version, reason=body.reason,
+                    valid_until=body.valid_until, entry_rule_id=body.entry_rule_id,
+                    entry_lifecycle_id=body.entry_lifecycle_id,
+                    entry_trigger_cn=body.entry_trigger_cn,
+                    entry_price_ref=body.entry_price_ref,
+                    invalidation_price=body.invalidation_price,
+                    target_b_price=body.target_b_price,
+                    target_b_source=body.target_b_source,
+                    reward_risk_at_plan=body.reward_risk_at_plan,
+                    thesis_cn=body.thesis_cn,
+                    invalidation_criteria_cn=body.invalidation_criteria_cn,
+                    drawdown_playbook_cn=body.drawdown_playbook_cn,
+                    take_profit_plan_cn=body.take_profit_plan_cn,
+                    stop_plan_cn=body.stop_plan_cn,
+                    commit=False)
+                from datetime import UTC, datetime
+
+                refs["invalidation_price_origin"] = (
+                    "suggested_plan" if artifact_id and
+                    plan.invalidation_price is not None else
+                    ("user_draft" if plan.invalidation_price is not None
+                     else "missing"))
+                conn.execute(
+                    "INSERT INTO agent_plan_draft_bindings (client_request_id, "
+                    "plan_id, session_id, question_id, symbol, source_refs_json, "
+                    "request_hash, created_at) VALUES (?,?,?,?,?,?,?,?)",
+                    (body.client_request_id, plan.plan_id,
+                     body.source_session_id or qrow_session(conn, body), body.source_question_id,
+                     plan.symbol,
+                     json.dumps(refs, ensure_ascii=False),
+                     request_hash, datetime.now(UTC).isoformat()))
+                conn.commit()
+            except HTTPException:
+                raise
+            except sqlite3.IntegrityError:
+                conn.rollback()
+                row3 = conn.execute(
+                    "SELECT * FROM agent_plan_draft_bindings "
+                    "WHERE client_request_id = ?",
+                    (body.client_request_id,)).fetchone()
+                if row3 is not None:
+                    if row3["request_hash"] and row3["request_hash"] != request_hash:
+                        raise HTTPException(status_code=409, detail={
+                            "code": "DRAFT_REQUEST_CONFLICT",
+                            "message": "相同草稿编号已用于不同业务内容/归属；请换编号",
+                        }) from None
+                    plan = get_plan(conn, row3["plan_id"])
+                    if plan is not None:
+                        return _to_plan_dto(plan)
+                raise
+            return _to_plan_dto(plan)
         plan = create_plan(
             conn, symbol=body.symbol, module=body.module, direction=body.direction,
             ruleset_version=body.ruleset_version, reason=body.reason,
@@ -110,6 +317,17 @@ def post_plan(request: Request, body: CreatePlanRequest) -> PlanDTO:
             take_profit_plan_cn=body.take_profit_plan_cn, stop_plan_cn=body.stop_plan_cn,
         )
         return _to_plan_dto(plan)
+
+
+def qrow_session(conn, body) -> str | None:  # noqa: ANN001
+    """服务端可靠反查原 session（工作台未传 source_session_id 时的兜底）。"""
+    if body.source_question_id:
+        row = conn.execute(
+            "SELECT session_id FROM agent_messages WHERE message_id = ?",
+            (body.source_question_id,)).fetchone()
+        if row is not None:
+            return row["session_id"]
+    return body.source_session_id or ""
 
 
 @router.post("/plans/holding-watch", response_model=PlanDTO, status_code=201)
@@ -181,8 +399,14 @@ def update_draft_endpoint(
 def confirm(request: Request, plan_id: str) -> PlanDTO:
     """draft -> armed（entry）/ entered（holding_watch）。
 
-    先过草稿符合性硬阻断：有硬项 -> 422 + 报告。分析服务不可用时降级（不阻断），
-    以保持离线可用；线上正常路径下硬阻断生效。
+    04B 确认边界（总控决定 2026-09-08，修复 p1：分析缺席时缺失效价计划被放行）：
+    - 字段缺失/非法（技术 entry 缺失效价、价格 NaN/Inf/零/负）-> 422
+      ``INVALIDATION_PRICE_REQUIRED``，先于分析依赖判断（store 层共享校验）；
+    - 分析服务缺席/无结果/调用异常 -> 503 ``ANALYSIS_UNAVAILABLE``「暂时无法核实，
+      请保留草稿后重试」——不再降级放行，state 与确认审计均不变；
+    - 已过期 -> 409 ``PLAN_EXPIRED``；规则集版本不符 -> 409 ``RULESET_VERSION_CHANGED``
+      （版本未知不拦，与监督员 hint 同口径）；符合性硬阻断维持 422（既有客户端
+      ConfirmPlanError 约定），detail 一律带结构化 code。
     """
     with closing(connect(_db_path(request))) as conn:
         plan = get_plan(conn, plan_id)
@@ -190,25 +414,88 @@ def confirm(request: Request, plan_id: str) -> PlanDTO:
             raise HTTPException(status_code=404, detail=f"计划不存在: {plan_id}")
         if plan.state != "draft":
             raise HTTPException(
-                status_code=422, detail=f"只有 draft 可确认，当前 state={plan.state}"
+                status_code=422,
+                detail={
+                    "code": "PLAN_NOT_DRAFT",
+                    "message": f"只有 draft 可确认，当前 state={plan.state}",
+                },
             )
-        service = getattr(request.app.state, "analysis_service", None)
-        if service is not None:
-            entry = service.get(plan.symbol)
-            if entry.result is not None:
-                ctx = context_from_result(entry.result)
-                report = evaluate_draft_conformance(plan, ctx)
-                if not report.can_confirm:
-                    raise HTTPException(
-                        status_code=422,
-                        detail={
-                            "message": "存在硬阻断项，无法确认",
-                            "hard_issues": [
-                                _to_alert_dto(a).model_dump()
-                                for a in report.hard_issues
-                            ],
-                        },
-                    )
+        try:
+            validate_entry_confirm_fields(plan)
+        except ValueError as exc:
+            raise HTTPException(
+                status_code=422,
+                detail={"code": "INVALIDATION_PRICE_REQUIRED", "message": str(exc)},
+            ) from exc
+        today = datetime.now(UTC).date().isoformat()
+        if plan.valid_until and plan.valid_until < today:
+            raise HTTPException(
+                status_code=409,
+                detail={
+                    "code": "PLAN_EXPIRED",
+                    "message": (
+                        f"计划有效期至 {plan.valid_until}，已过期；"
+                        "请修改有效期或重建草稿后再确认"
+                    ),
+                },
+            )
+
+    # 分析依赖：缺席/无结果/异常一律 503，不允许跳过符合性检查继续确认
+    service = getattr(request.app.state, "analysis_service", None)
+    if service is None:
+        raise HTTPException(
+            status_code=503,
+            detail={
+                "code": "ANALYSIS_UNAVAILABLE",
+                "message": "暂时无法核实，请保留草稿后重试",
+                "reason": "分析服务未就绪",
+            },
+        )
+    try:
+        entry = service.get(plan.symbol)
+    except Exception as exc:  # noqa: BLE001 依赖故障是可重试状态，不是计划问题
+        raise HTTPException(
+            status_code=503,
+            detail={
+                "code": "ANALYSIS_UNAVAILABLE",
+                "message": "暂时无法核实，请保留草稿后重试",
+                "reason": f"分析调用失败：{exc}",
+            },
+        ) from exc
+    if entry is None or getattr(entry, "result", None) is None:
+        raise HTTPException(
+            status_code=503,
+            detail={
+                "code": "ANALYSIS_UNAVAILABLE",
+                "message": "暂时无法核实，请保留草稿后重试",
+                "reason": getattr(entry, "error", None) or "分析无结果",
+            },
+        )
+    ctx = context_from_result(entry.result)
+    if plan.ruleset_version and plan.ruleset_version != ctx.ruleset_version:
+        raise HTTPException(
+            status_code=409,
+            detail={
+                "code": "RULESET_VERSION_CHANGED",
+                "message": (
+                    f"计划基于规则集 {plan.ruleset_version}，当前为 "
+                    f"{ctx.ruleset_version}；请复核后重建草稿"
+                ),
+            },
+        )
+    report = evaluate_draft_conformance(plan, ctx)
+    if not report.can_confirm:
+        raise HTTPException(
+            status_code=422,
+            detail={
+                "code": "CONFORMANCE_HARD_BLOCK",
+                "message": "存在硬阻断项，无法确认",
+                "hard_issues": [
+                    _to_alert_dto(a).model_dump() for a in report.hard_issues
+                ],
+            },
+        )
+    with closing(connect(_db_path(request))) as conn:
         try:
             if plan.plan_kind == PLAN_KIND_HOLDING_WATCH:
                 entered_on = datetime.now(UTC).date().isoformat()
@@ -220,8 +507,24 @@ def confirm(request: Request, plan_id: str) -> PlanDTO:
         except KeyError as exc:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
         except ValueError as exc:
-            raise HTTPException(status_code=422, detail=str(exc)) from exc
+            raise HTTPException(
+                status_code=422,
+                detail={"code": "PLAN_INVALID", "message": str(exc)},
+            ) from exc
         return _to_plan_dto(confirmed)
+
+
+@router.get("/plans/ruleset-version")
+def plans_ruleset_version() -> dict[str, str]:
+    """计划流程 P1（2026-09-13）：新建计划的规则集版本的**服务端权威来源**。
+
+    前端创建/编辑计划时从这里读取当前激活版本（domain.rules_config），
+    不再使用写死常量；读取失败由前端要求重试，不允许用空版本提交
+    （空版本会在确认时被 RULESET_VERSION_CHANGED 拒绝）。只读，无副作用。
+    """
+    from lei_signal.domain.rules_config import ruleset_version
+
+    return {"ruleset_version": ruleset_version()}
 
 
 @router.get("/plans/summary", response_model=PlansSummaryDTO)

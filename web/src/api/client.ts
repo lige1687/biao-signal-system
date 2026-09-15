@@ -59,6 +59,8 @@ import type { BoardProfile, BoardChartSeries, SentimentDashboard, SentimentLight
   SectorTrendResponse,
   SectorHistoryPoint,
   SectorMembersResponse,
+  CopilotResolveReply,
+  BacktestRequestStatus,
   SectorWatchlistResponse,
   DailyBriefResponse,
   SentimentIngest,
@@ -78,6 +80,7 @@ import type { BoardProfile, BoardChartSeries, SentimentDashboard, SentimentLight
   NewsWatchlistBrief,
   ExperimentsResponse,
   ExperimentReportDetail,
+  LearningResponse,
 } from "../types";
 
 const BASE = "/api";
@@ -104,8 +107,10 @@ export async function request<T>(path: string, init?: RequestInit): Promise<T> {
       /* 保持默认错误 */
     }
     const err = new Error(detail);
-    // 保留完整响应体，供调用方读取结构化错误（如 422 的 hard_issues）。
+    // 保留完整响应体与状态码，供调用方读取结构化错误
+    // （如 confirm 的 503 ANALYSIS_UNAVAILABLE / 409 PLAN_EXPIRED / 422 hard_issues）。
     (err as Error & { body?: unknown }).body = body;
+    (err as Error & { status?: number }).status = resp.status;
     throw err;
   }
   if (resp.status === 204) return undefined as T;
@@ -298,6 +303,10 @@ export const api = {
     }),
   confirmPlan: (planId: string) =>
     request<Plan>(`/plans/${encodeURIComponent(planId)}/confirm`, { method: "POST" }),
+  // 计划流程 P1（2026-09-13）：新建计划的规则集版本唯一权威来源（服务端
+  // rules_config）。读取失败调用方必须要求重试，不得用空版本/写死常量提交。
+  rulesetVersion: () =>
+    request<{ ruleset_version: string }>("/plans/ruleset-version"),
   conformance: (planId: string) =>
     request<ConformanceReport>(
       `/plans/${encodeURIComponent(planId)}/conformance`,
@@ -410,6 +419,41 @@ export const api = {
       method: "POST",
       body: JSON.stringify(body),
     }),
+  // ---- 03B：统一解析 + 按需补测 ----
+  copilotResolve: (body: {
+    message: string;
+    client_request_id?: string | null;
+    session_id?: string | null;
+    selected_symbol?: string | null;
+  }) =>
+    request<CopilotResolveReply>(`/copilot/resolve`, {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  copilotBacktestRequest: (body: {
+    session_id: string;
+    question_id: number;
+    client_request_id: string;
+    symbol: string;
+    module: string;
+    entry_variant?: string | null;
+    exit_variant: string;
+    rr_min?: number | null;
+    fee_label?: string;
+  }) =>
+    request<BacktestRequestStatus>(`/copilot/backtest-requests`, {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  copilotBacktestStatus: (requestId: string) =>
+    request<BacktestRequestStatus>(
+      `/copilot/backtest-requests/${encodeURIComponent(requestId)}`,
+    ),
+  /** 03B-R2 契约4：跨会话最近任务（页面恢复以服务端为权威） */
+  copilotBacktestList: (sessionId?: string | null) =>
+    request<{ requests: BacktestRequestStatus[] }>(
+      `/copilot/backtest-requests${sessionId ? `?session_id=${encodeURIComponent(sessionId)}` : ""}`,
+    ),
   copilotRecommend: () => request<RecommendCard>(`/copilot/recommend`),
   copilotRecommendExplain: (question: string) =>
     request<ExplainReply>(`/copilot/recommend/explain`, {
@@ -445,7 +489,6 @@ export const api = {
       `/copilot/review/weekly${week ? `?week=${encodeURIComponent(week)}` : ""}`,
     ),
   opsToday: () => request<OpsCard>(`/ops/today`),
-
 };
 
 // ---- 基本面参考层 ----
@@ -675,6 +718,13 @@ export const experimentsApi = {
   list: () => request<ExperimentsResponse>("/experiments"),
   detail: (name: string) =>
     request<ExperimentReportDetail>(`/experiments/${name}`),
+};
+
+// ---- 文献学习库（learning，2026-09-08）----
+// 只读单接口：全量内容一次拉取，筛选/排序/深链接全在前端做。
+// 学习展示层，不产生交易结论，无写接口。
+export const learningApi = {
+  get: () => request<LearningResponse>("/learning"),
 };
 
 // ---- 我的持仓（portfolio，2026-09-04）----

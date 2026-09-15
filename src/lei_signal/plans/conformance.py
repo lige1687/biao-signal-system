@@ -9,6 +9,7 @@
 """
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -139,12 +140,20 @@ def _entry_issues(
             caveat_cn="规格§13无交易条件；可交易性判定为研究代理",
             next_step_cn="环境阻断，按规则不该开新仓",
         ))
-    if plan.invalidation_price is None:
+    # 04B（2026-09-08）：None/NaN/Inf/零/负均视为「无有效失效价」——此前只查
+    # is None，NaN 参与比较恒为 False 会溜过击穿判定。
+    invalidation_valid = (
+        plan.invalidation_price is not None
+        and math.isfinite(plan.invalidation_price)
+        and plan.invalidation_price > 0
+    )
+    if not invalidation_valid:
         hard.append(_issue(
             code=MISSING_INVALIDATION, severity=SEVERITY_BLOCK,
             rule_id=PLAN_DISCIPLINE_RULE, ctx=ctx, evidence={},
             principle_source="规格 §13 第 3 条 原文",
-            next_step_cn="未填失效价（§13第3条：入场依据/失效位必须入场前定义）",
+            next_step_cn="未填有效失效价（§13第3条：入场依据/失效位必须入场前定义；"
+                         "需为正的有限数值）",
         ))
     elif ctx.current_close is not None:
         # 新仓判定比 monitor 更严：当前价已到/越过失效价即不该开仓（含 ==）。

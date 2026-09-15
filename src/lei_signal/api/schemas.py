@@ -4,9 +4,10 @@
 """
 from __future__ import annotations
 
+import math
 from typing import Any
 
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 
 
 class SparkPoint(BaseModel):
@@ -499,8 +500,22 @@ class RefreshRequest(BaseModel):
 # ---------------- 计划台账（监督员 v1）----------------
 
 
+def _validate_invalidation_price(v: float | None) -> float | None:
+    """失效价模型层校验（04B，与 plans.store.check_finite_positive_price 同一口径）：
+    None（缺失，草稿允许）放行；NaN/Inf/零/负数在 JSON 解析层即 422，不落库。"""
+    if v is None:
+        return v
+    if not math.isfinite(v) or v <= 0:
+        raise ValueError("invalidation_price 必须为正的有限数值（缺失请传 null）")
+    return v
+
+
 class CreatePlanRequest(BaseModel):
-    """建计划草案。draft 阶段允许五项预案/valid_until/reason 为空，确认时校验。"""
+    """建计划草案。draft 阶段允许五项预案/valid_until/reason 为空，确认时校验。
+
+    03B-R2 契约1：对话式保存可携带来源绑定——相同 client_request_id 重复
+    保存返回**原 draft**（同 plan_id）；服务端记录原问题/会话/规则与证据
+    引用（source_refs），草稿不再脱离提问依据存在。"""
 
     symbol: str
     module: str  # A/B/C/D
@@ -521,6 +536,15 @@ class CreatePlanRequest(BaseModel):
     drawdown_playbook_cn: str = ""
     take_profit_plan_cn: str = ""
     stop_plan_cn: str = ""
+    # ---- 来源绑定（对话式保存专用，表单手工建计划可不传）----
+    client_request_id: str | None = None
+    source_session_id: str | None = None
+    source_question_id: int | None = None
+    source_refs: dict | None = None
+
+    _invalidation_price = field_validator("invalidation_price")(
+        _validate_invalidation_price
+    )
 
 
 class RevisionRequest(BaseModel):
@@ -916,6 +940,10 @@ class DraftUpdateRequest(BaseModel):
     stop_price: float | None = None
     watch_signal_rule_ids: list[str] | None = None
 
+    _invalidation_price = field_validator("invalidation_price")(
+        _validate_invalidation_price
+    )
+
 
 # ========================================================================
 # Step 2: 提醒订阅 (watch_subscription)
@@ -1040,6 +1068,7 @@ class AgentChatRequest(BaseModel):
     context_kind: str = "symbol"  # symbol | global
     symbol: str | None = None
     message: str = ""
+    client_request_id: str | None = None  # 03B：幂等键，随快照保存
 
 
 class AgentChatReply(BaseModel):
@@ -1048,6 +1077,15 @@ class AgentChatReply(BaseModel):
     grounded: bool
     trace: list[TraceItem] = []
     resolved_symbol: str | None = None
+    question_id: int | None = None  # 03B：本次 user 消息 ID（补测绑定原问题用）
+    evidence_card: dict | None = None  # 03B-R1：四分区证据卡（服务端结构化产物）
+    # 03B-R3 S5：服务端计划产物（真实 suggested_plan + 用户明确字段）
+    plan_artifact: dict | None = None
+    # 03B-R3 S4：回答状态 answered/pending/generating（未完成明确出口）
+    answer_state: str | None = None
+    # UX 第一期（2026-09-13）：下一步动作建议（纯展示层转换，≤3 个；
+    # 来自既有事实——观察条件/补测比较结果/买点候选；draft_cn 带标的防串扰）
+    next_steps: list[dict] = []
 
 
 class RecommendItemDTO(BaseModel):
@@ -1292,6 +1330,7 @@ class CreateSessionRequest(BaseModel):
 class AgentSessionDTO(BaseModel):
     session_id: str
     symbol: str | None
+    display_name: str | None = None
     title_cn: str
     last_active_at: str
     last_message_cn: str = ""
@@ -1302,6 +1341,23 @@ class AgentMessageDTO(BaseModel):
     content: str
     grounded: bool
     created_at: str
+    # 03B-R2 契约1/3：会话历史可恢复问题归属、证据卡与草稿/任务绑定
+    # （旧消费方只读前四个字段，新字段均可选）
+    message_id: int | None = None
+    question_id: int | None = None          # 精确列绑定（03B-R3 S4）；None=归属不可考
+    resolved_symbol: str | None = None      # assistant 消息：本轮生效对象
+    evidence_card: dict | None = None       # assistant 消息：四分区证据卡
+    system_generated: bool = False          # 补测完成卡等系统生成消息
+    message_kind: str = ""                  # ''=普通回答/降级；'backtest_result' 等
+    plan_artifact: dict | None = None       # 03B-R3 S5：服务端计划产物
+    plan_draft: dict | None = None          # 该问题下已保存的草稿绑定
+    next_steps: list[dict] = []             # UX 第一期：当时的下一步动作（历史同款恢复）
+    # 主控复核 2026-09-15 补修二：回答未完成原因（流中断/未正常收尾/截断）；
+    # None=完成。历史/恢复据此区分「未完成」与其他未过校验的回答
+    answer_incomplete: dict | None = None
+    # 二轮复验 2026-09-15 遗漏二：原问题重试身份（可核实的 cid+原始三输入）；
+    # None=旧记录不可考或已完成，明确不可原问题重试
+    retry: dict | None = None
 
 
 # ---- 我的持仓（portfolio，2026-09-04）----

@@ -196,7 +196,11 @@ def test_user_number_echo_stays_grounded(
 def test_global_context_degraded_copy(
     client: TestClient, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """M-4：global 上下文降级不输出「【】数据日 -」空段，给全局会话专属文案。"""
+    """M-4：global 上下文降级不输出「【】数据日 -」空段，给全局会话专属文案。
+
+    UX 第一期（2026-09-13）：专属文案升级为「市场概况 + 可行下一步」
+    （宽度/融资环境直读上下文，不硬凑标的内容），断言随新契约更新。
+    """
     monkeypatch.setattr(llm, "load_ark_config", lambda: None)
     r = client.post("/api/agent/chat", json={
         "session_id": None, "context_kind": "global",
@@ -205,7 +209,10 @@ def test_global_context_degraded_copy(
     assert r.status_code == 200
     reply = r.json()["reply"]
     assert "数据日 -" not in reply
-    assert "全局会话" in reply
+    assert "AI 讲解暂时不可用" in reply
+    assert "接下来可以" in reply
+    # 全局会话没有标的技术材料：不得出现空标的段
+    assert "【】" not in reply
 
 
 def test_plans_filtered_to_armed_entered(
@@ -232,7 +239,9 @@ def test_plans_filtered_to_armed_entered(
     ]
     captured: dict = {}
 
-    def fake_build_ctx(result, review, plans, open_items):  # noqa: ANN001
+    def fake_build_ctx(result, review, plans, open_items, **_):  # noqa: ANN001
+        # 生产调用已新增 news_brief/major_events（资讯与大事摘要）。本用例断言
+        # 的是计划状态过滤（armed/entered），与新增入参无关，故容忍扩展。
         captured["states"] = [p.state for p in plans]
         return {"context_kind": "symbol"}
 

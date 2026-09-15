@@ -836,6 +836,316 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
         );
         """,
     ),
+    (
+        23,
+        "023_agent_observation_ledger",
+        """
+        -- Agent 观察存证账本（总任务书 §3.6 前向验证闭环统一机制）。
+        -- 两张表只增不改事实字段：agent_observations 记「当时说了什么」
+        -- （不可变；重试相同内容去重、内容变化另记修订并回链原记录），
+        -- agent_observation_outcomes 按 (observation, evaluation_version,
+        -- horizon) 一行一档，pending/ready/missing_data/not_applicable。
+        -- 旧 recommendation_journal / sentiment_signal_journal.json 原样保留
+        -- （兼容读），历史通过 observation.backfill_* 幂等迁入，不删除不覆盖。
+        CREATE TABLE IF NOT EXISTS agent_observations (
+            observation_id     TEXT PRIMARY KEY,  -- obs_{source_type}_{record_id}_{hash8}
+            schema_version     INTEGER NOT NULL DEFAULT 1,
+            source_type        TEXT NOT NULL,     -- recommendation | sentiment_day | …
+            source_record_id   TEXT NOT NULL,     -- 来源侧记录键（如 run_date）
+            scope              TEXT NOT NULL DEFAULT '',   -- 数据范围（如 a_share_etf / cn_sector）
+            strategy           TEXT NOT NULL DEFAULT '',   -- 适用策略（不跨场景混算）
+            instrument_id      TEXT,              -- 对象标的/板块；组级主张可空
+            event_group_id     TEXT NOT NULL,     -- 同一次展示批次（同批重试同 id）
+            observed_at        TEXT NOT NULL,     -- 事实所属交易日（run_date）
+            available_at       TEXT,              -- 底层数据可用时点（不可考=unknown）
+            emitted_at         TEXT NOT NULL,     -- 实际展示时点（不可考=unknown）
+            input_hash         TEXT NOT NULL DEFAULT 'unknown',
+            payload_hash       TEXT NOT NULL,     -- 内容摘要 sha256 前 16 位
+            payload            TEXT NOT NULL,     -- JSON：当时展示内容摘要
+            claim              TEXT NOT NULL DEFAULT '',
+            horizons           TEXT NOT NULL DEFAULT '[]',  -- JSON: [1,5,20] / [10,20]
+            baseline           TEXT,              -- 基准 id；NULL=无基准（不得标超额）
+            direction          TEXT,              -- up | down | NULL=无方向主张
+            layer              TEXT NOT NULL DEFAULT 'observation',
+            evaluation_kind    TEXT NOT NULL,     -- fwd_close_change_v1 等
+            evaluation_version TEXT NOT NULL,
+            rule_refs          TEXT NOT NULL DEFAULT '[]',
+            evidence_refs      TEXT NOT NULL DEFAULT '[]',
+            supersedes_id      TEXT,              -- 修订：指向被本条取代的原记录
+            superseded_by      TEXT,              -- 回链字段（唯一允许更新的事实外字段）
+            legacy             INTEGER NOT NULL DEFAULT 0,  -- 1=历史迁移，部分字段不可考
+            created_at         TEXT NOT NULL,
+            updated_at         TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_agent_obs_source
+            ON agent_observations(source_type, source_record_id);
+        CREATE INDEX IF NOT EXISTS idx_agent_obs_group
+            ON agent_observations(event_group_id);
+
+        CREATE TABLE IF NOT EXISTS agent_observation_outcomes (
+            observation_id     TEXT NOT NULL,
+            evaluation_version TEXT NOT NULL,
+            horizon            INTEGER NOT NULL,  -- 天数（1/5/20/10…）
+            status             TEXT NOT NULL DEFAULT 'pending'
+                CHECK(status IN ('pending','ready','missing_data','not_applicable')),
+            base_price         REAL,              -- 起算价（信号日收盘）
+            base_available_at  TEXT,
+            due_date           TEXT,              -- 评价到期日（拿到行情才回填；不可伪造）
+            eval_date          TEXT,              -- 实际评价日（=到期日所在的行情日）
+            eval_price         REAL,
+            change_pct         REAL,              -- 带符号涨跌（百分点）
+            baseline_change_pct REAL,             -- 基准同期涨跌；NULL=无基准
+            hit                INTEGER,           -- 方向命中 1/0；无方向主张=NULL
+            note               TEXT NOT NULL DEFAULT '',
+            evaluated_at       TEXT,
+            PRIMARY KEY (observation_id, evaluation_version, horizon)
+        );
+        CREATE INDEX IF NOT EXISTS idx_agent_obs_outcomes_status
+            ON agent_observation_outcomes(status);
+        """,
+    ),
+    (
+        24,
+        "024_agent_observation_v12",
+        """
+        -- 观察账本 v1.2 返修增量（总控 00-review-contract-v1.2 §3/§4/§6）。
+        -- 不改 023 已部署结构，只加列/加表；旧字段兼容读取，旧行新列取默认值。
+        -- record_type：display_batch=完整展示批次（无评价期限、不进分母）；
+        --               claim=单对象可评价主张。023 旧行默认 claim。
+        ALTER TABLE agent_observations ADD COLUMN record_type TEXT NOT NULL DEFAULT 'claim';
+        -- 研究样本键：来源/策略/标的/观察日/主张类别方向/规则/评价配置 共同决定；
+        -- 纯措辞或展示修订不改变 sample_key，不增加研究样本（v1.2 §4）。
+        ALTER TABLE agent_observations ADD COLUMN sample_key TEXT;
+        -- 评价配置摘要（改方法=新版本，不给新方法借旧成绩）
+        ALTER TABLE agent_observations ADD COLUMN eval_config_hash TEXT;
+        -- 批次链：前一展示批次（A→B→A 保留完整顺序）
+        ALTER TABLE agent_observations ADD COLUMN previous_batch_id TEXT;
+        -- 批次成员（claim observation_id 列表 JSON；当前对象集合从当前批次读取）
+        ALTER TABLE agent_observations ADD COLUMN batch_members TEXT NOT NULL DEFAULT '[]';
+        -- 来源质量：ok=上线后真实前向 | legacy=历史迁入 | unknown=无法考证 |
+        --           available_rows=按行参考口径。legacy 不与真实前向样本合并。
+        ALTER TABLE agent_observations ADD COLUMN legacy_quality TEXT;
+        -- 展示状态：shown=实际展示 | not_shown=仅生成过程（不进前向统计）
+        ALTER TABLE agent_observations ADD COLUMN display_status TEXT NOT NULL DEFAULT 'shown';
+        CREATE INDEX IF NOT EXISTS idx_agent_obs_sample
+            ON agent_observations(sample_key);
+
+        -- 结果行补充：评价口径类型冗余（便查，不参与身份）
+        ALTER TABLE agent_observation_outcomes ADD COLUMN evaluation_kind TEXT NOT NULL DEFAULT '';
+
+        -- 旧推荐账本版本绑定（v1.2 §6：旧读接口必须返回与当前卡片版本匹配的成绩，
+        -- 先保全唯一旧原文和成绩，再更新兼容视图）：
+        --   payload_hash=当前卡片内容摘要；outcome_payload_hash=成绩归属的卡片摘要；
+        --   两者不等 → load_outcome 明确返回 None（无匹配结果），旧版本进 history 表。
+        ALTER TABLE recommendation_journal ADD COLUMN payload_hash TEXT;
+        ALTER TABLE recommendation_journal ADD COLUMN outcome_payload_hash TEXT;
+        CREATE TABLE IF NOT EXISTS recommendation_journal_history (
+            run_date     TEXT NOT NULL,
+            seq          INTEGER NOT NULL,
+            payload      TEXT NOT NULL,
+            outcome      TEXT,
+            payload_hash TEXT NOT NULL,
+            saved_at     TEXT NOT NULL,
+            PRIMARY KEY (run_date, seq)
+        );
+        """,
+    ),
+    (
+        25,
+        "025_agent_observation_refs_frozen",
+        """
+        -- 联合收尾（2026-09-08，P4/P7/P3）：引用与评价配置真正落库。
+        -- 不改 023/024 已部署结构，只加列；旧行新列取默认值（NULL/[]）。
+        -- 评价配置完整正文（不只摘要）：恢复「当时怎么算」所需全部信息。
+        ALTER TABLE agent_observations ADD COLUMN eval_config_json TEXT;
+        -- 冻结引用（写入时快照，之后材料更新不回写旧记录；v1.2 §1）：
+        --   rule_refs_frozen     = [RuleRef.to_dict()]（rule_id/version/config_hash）
+        --   evidence_refs_frozen = [EvidenceRef.to_dict()]（id/版本/来源材料哈希/兼容性）
+        --   data_refs_frozen     = [MarketDataRef.to_dict()]（数据引用含日期）
+        ALTER TABLE agent_observations ADD COLUMN rule_refs_frozen TEXT;
+        ALTER TABLE agent_observations ADD COLUMN evidence_refs_frozen TEXT;
+        ALTER TABLE agent_observations ADD COLUMN data_refs_frozen TEXT;
+        -- 首次实际展示时间（P3：生成未展示不算；真正展示时落时间，不覆盖）
+        ALTER TABLE agent_observations ADD COLUMN first_shown_at TEXT;
+
+        -- 023 旧行补来源质量标记：无 sample_key/引用冻结的旧记录按 unknown
+        -- 隔离（v1.2：无法考证不默认 ok，不与真实前向样本合并）。
+        UPDATE agent_observations
+           SET legacy_quality = 'unknown'
+         WHERE legacy_quality IS NULL AND sample_key IS NULL;
+        """,
+    ),
+    (
+        26,
+        "026_agent_observation_batch_members",
+        """
+        -- 09R2 成员可见性契约（总控定稿 2026-09-08）：三层事实分别保存——
+        -- 主张（全局首展/冻结依据）、展示批次（成员构成/修订链/批次首展）、
+        -- **批次成员展示**（某条主张在这一批内是否、何时真正展示）。
+        -- 只承担展示归属，不是第二套主张/成绩或交易账本。
+        CREATE TABLE IF NOT EXISTS agent_observation_batch_members (
+            batch_id        TEXT NOT NULL,   -- 展示批次（agent_observations.observation_id）
+            observation_id  TEXT NOT NULL,   -- 成员主张（agent_observations.observation_id）
+            member_key      TEXT NOT NULL DEFAULT '',
+                -- 完整业务成员身份 SHA256（含 claim_class；不含 input_hash/冻结引用）
+            member_identity_version TEXT NOT NULL DEFAULT 'v1',
+            business_member_json TEXT NOT NULL DEFAULT '{}',
+                -- 规范化业务成员原文（member_key 的输入，供审计/重排）
+            first_shown_at  TEXT,            -- 该成员在该批首次实际展示；未展示为空
+                -- 只允许空→真实时点，不覆盖首次值
+            visibility_quality TEXT NOT NULL DEFAULT 'known'
+                CHECK(visibility_quality IN ('known','unknown')),
+                -- known+空时间=明确尚未展示；unknown+空时间=旧资料无法证明
+            created_at      TEXT NOT NULL,
+            updated_at      TEXT NOT NULL,
+            PRIMARY KEY (batch_id, observation_id)
+        );
+        CREATE INDEX IF NOT EXISTS idx_aobm_member
+            ON agent_observation_batch_members(member_key);
+        CREATE INDEX IF NOT EXISTS idx_aobm_obs
+            ON agent_observation_batch_members(observation_id);
+
+        -- 旧数据诚实回填（§6）：旧库只有「成员构成」（batch_members 列），
+        -- 没有逐批展示事实；claim_class 未落库，业务成员键无法唯一重建——
+        -- 一律回填为 unknown + 空 key + 空时间，不冒充 known，不补今天。
+        -- 旧批次因此不参与成员级可见集合（完整视图经主张全局状态照常可查，
+        -- 原值保留）；新写入的批次由应用层写 known 关系。
+        INSERT OR IGNORE INTO agent_observation_batch_members
+            (batch_id, observation_id, member_key, member_identity_version,
+             business_member_json, first_shown_at, visibility_quality,
+             created_at, updated_at)
+        SELECT b.observation_id, je.value, '', 'legacy', '{}', NULL, 'unknown',
+               b.created_at, b.created_at
+          FROM agent_observations b, json_each(b.batch_members) je
+         WHERE b.record_type = 'display_batch'
+           AND b.batch_members IS NOT NULL
+           AND je.value <> '';
+        """,
+    ),
+    (
+        27,
+        "027_agent_backtest_requests",
+        """
+        -- 03B 按需补测（2026-09-08 总控协议 §3/§5）：讨论内单标的固定配置
+        -- 补测任务的持久绑定——只存任务状态与归属，不算成绩、不取代观察账本。
+        CREATE TABLE IF NOT EXISTS agent_backtest_requests (
+            request_id        TEXT PRIMARY KEY,   -- btr_{hash}
+            client_request_id TEXT NOT NULL,      -- 调用方幂等键
+            session_id        TEXT NOT NULL,      -- agent_sessions.session_id
+            question_id       INTEGER NOT NULL,   -- agent_messages.message_id（原问题）
+            symbol            TEXT NOT NULL,      -- 单标的（多标的/空在此入口拒绝）
+            method            TEXT NOT NULL,      -- 模块/方法标识（A/B/C/D）
+            entry_variant     TEXT,
+            exit_variant      TEXT NOT NULL,
+            canonical_config_json TEXT NOT NULL,  -- 全部实际消费参数（含引擎默认）
+            config_hash       TEXT NOT NULL,      -- 规范化配置摘要
+            ruleset_version   TEXT NOT NULL DEFAULT '',
+            data_cutoff       TEXT NOT NULL DEFAULT '',  -- 送入引擎的数据截止日
+            input_refs_json   TEXT NOT NULL DEFAULT '[]',-- 数据文件路径+内容摘要等
+            run_id            TEXT NOT NULL DEFAULT '',  -- 预留稳定 run_id
+            result_ref        TEXT NOT NULL DEFAULT '',  -- 结果文件路径
+            status            TEXT NOT NULL DEFAULT 'queued'
+                CHECK(status IN ('queued','running','completed','failed','interrupted')),
+            error             TEXT,
+            backfilled        INTEGER NOT NULL DEFAULT 0, -- 完成卡是否已回填原问题
+            created_at        TEXT NOT NULL,
+            updated_at        TEXT NOT NULL,
+            UNIQUE (session_id, client_request_id)
+        );
+        CREATE INDEX IF NOT EXISTS idx_abr_session
+            ON agent_backtest_requests(session_id, created_at);
+        """,
+    ),
+    (
+        28,
+        "028_agent_chat_and_draft_identity",
+        """
+        -- 03B-R2 契约1（2026-09-08 收尾协议）：请求与草稿的身份固定——
+        -- 精确字段 + 数据库唯一约束，取代全库 LIKE 模糊查询；并发首撞由
+        -- 主键约束兜底（同一请求编号只能领到一个问题）。
+        CREATE TABLE IF NOT EXISTS agent_chat_requests (
+            client_request_id TEXT PRIMARY KEY,   -- 调用方幂等键（全局唯一）
+            session_id        TEXT NOT NULL,      -- 归属会话（首次为空时由领号事务创建）
+            question_id       INTEGER NOT NULL DEFAULT 0, -- 0=已领号未落问题（崩溃窗口续用）
+            request_hash      TEXT NOT NULL,      -- 业务内容摘要（消息+上下文+对象；不含会话归属）
+            created_at        TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_acr_session
+            ON agent_chat_requests(session_id);
+
+        -- 计划草稿绑定：每张卡绑定创建它的原问题/标的/规则与证据引用；
+        -- 相同 client_request_id 重复保存返回原 draft（刷新/历史重开同 plan_id）。
+        CREATE TABLE IF NOT EXISTS agent_plan_draft_bindings (
+            client_request_id TEXT PRIMARY KEY,
+            plan_id           TEXT NOT NULL,      -- trade_plans.plan_id
+            session_id        TEXT NOT NULL DEFAULT '',
+            question_id       INTEGER,
+            symbol            TEXT NOT NULL,
+            source_refs_json  TEXT NOT NULL DEFAULT '{}', -- 规则/证据引用（保存时服务端冻结）
+            created_at        TEXT NOT NULL,
+            UNIQUE (plan_id, client_request_id)
+        );
+        CREATE INDEX IF NOT EXISTS idx_apdb_question
+            ON agent_plan_draft_bindings(question_id);
+
+        -- 回填登记：request_id 主键=数据库唯一约束领取回填权——同一补测
+        -- 请求全生命周期最多一条完成卡（并发 GET/worker 恢复、标志位重置
+        -- 都不会产生第二张卡）。
+        CREATE TABLE IF NOT EXISTS agent_backtest_backfills (
+            request_id  TEXT PRIMARY KEY,
+            message_id  INTEGER NOT NULL DEFAULT 0,
+            created_at  TEXT NOT NULL
+        );
+        """,
+    ),
+    (
+        29,
+        "029_answer_binding_and_run_manifest",
+        """
+        -- 03B-R3（2026-09-08 收尾协议 S4/S1/S3）：回答按原问题**精确绑定**
+        -- 与运行清单可核对。旧行为「取问题之后第一条 assistant」会在多问题
+        -- 交错/补测卡插入时认错回答；恢复只查非空会采纳错配产物。
+        ALTER TABLE agent_messages ADD COLUMN question_id INTEGER;
+        -- 回答归属的原问题（旧记录 NULL=归属不可考，展示标未知，不补猜）；
+        ALTER TABLE agent_messages ADD COLUMN message_kind TEXT NOT NULL DEFAULT '';
+        -- 消息种类：''=普通回答/降级；'backtest_result'=补测完成卡等系统消息；
+        ALTER TABLE agent_messages ADD COLUMN source_request_id TEXT NOT NULL DEFAULT '';
+        -- 系统消息的来源请求（补测完成卡=原 request_id）。
+        CREATE INDEX IF NOT EXISTS idx_am_question ON agent_messages(question_id);
+
+        ALTER TABLE agent_chat_requests ADD COLUMN answer_message_id INTEGER;
+        -- 精确绑定的原回答消息号（重试/历史都按它取，不按相邻位置猜）；
+        ALTER TABLE agent_chat_requests ADD COLUMN answer_state TEXT NOT NULL DEFAULT 'pending';
+        -- 回答状态机：pending=已领号未生成；generating=恢复生成中（原子领取）；
+        -- answered=已生成并绑定。崩溃窗口留在 pending/generating，可按固定
+        -- 逻辑恢复原问题，不复用下一问题。
+        ALTER TABLE agent_chat_requests ADD COLUMN state_at TEXT NOT NULL DEFAULT '';
+        -- 状态变更时间（generating 租约：超时且无绑定回答可被重试领取恢复）。
+
+        ALTER TABLE agent_backtest_requests ADD COLUMN run_manifest_json TEXT NOT NULL DEFAULT '';
+        -- 运行清单：请求/运行/对象集合/完整配置摘要/冻结原始输入摘要/
+        -- 截止后引擎实际输入摘要/规则摘要；结果文件写入同一清单并在恢复时
+        -- 逐项核对（原始 Parquet 摘要与引擎特征表摘要分开，不混比）。
+
+        ALTER TABLE agent_plan_draft_bindings ADD COLUMN request_hash TEXT NOT NULL DEFAULT '';
+        -- 03B-R3 S6：草稿请求编号绑定的完整业务内容摘要——同编号同内容返
+        -- 原 draft；换任何字段/归属 409（不再只按编号返回旧草稿）。
+        """,
+    ),
+    (
+        30,
+        "030_chat_retry_identity",
+        """
+        -- 主控二轮复验（2026-09-15 遗漏二）：历史恢复需要**可核实的重试身份**。
+        -- 领号时保存原始请求三输入（消息原文/上下文类型/传入对象），配合
+        -- 029 已有的 source_request_id（回答行上的编号），历史接口可为
+        -- incomplete 回答投影「原问题重试」所需的最小身份；旧记录/已完成
+        -- 问题不投影（不可考=明确不可原问题重试，不伪造字段）。
+        ALTER TABLE agent_chat_requests ADD COLUMN request_message TEXT NOT NULL DEFAULT '';
+        ALTER TABLE agent_chat_requests ADD COLUMN request_context_kind TEXT NOT NULL DEFAULT '';
+        ALTER TABLE agent_chat_requests ADD COLUMN request_symbol TEXT NOT NULL DEFAULT '';
+        """,
+    ),
 )
 
 

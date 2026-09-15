@@ -130,8 +130,8 @@ export default function ChartControls({
             红涨绿跌
           </button>
           <button
-            className={`seg-btn ${eff.colorMode === "lei_state" ? "on" : ""}`}
-            onClick={() => setMode("lei_state")}
+            className={`seg-btn ${eff.colorMode === "biao_state" ? "on" : ""}`}
+            onClick={() => setMode("biao_state")}
             disabled={!isDaily}
             title={isDaily ? "按当日 LEI 三色着色（颜色只表达状态，涨跌看今日概述）" : dailyOnlyTitle}
           >

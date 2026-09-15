@@ -363,6 +363,18 @@ def build_review(
     return review
 
 
+def _legal_entry_candidate(confirmed: list) -> Any | None:
+    """计划流程 P3（2026-09-13）：从已确认候选中按原顺序取第一个**合法
+    入场候选**——入场规则可映射到 A/B/C/D 且映射模块与候选自身模块一致。
+    规则、模块、方向、生命周期、触发与结构失效位随同一候选走；无合法候选
+    返回 None（不给预填，保留观察/待补）。不扩 MODULE_MAP、不放松确认。"""
+    for c in confirmed:
+        mapped = module_of(c.rule_id) if c.rule_id else None
+        if mapped is not None and (c.module or mapped) == mapped:
+            return c
+    return None
+
+
 def _review_from_assessment(
     assessment: Any,
     *,
@@ -442,19 +454,25 @@ def _review_from_assessment(
 
     suggested: SuggestedPlanDTO | None = None
     if verdict == VERDICT_ACTIONABLE:
-        best = confirmed[0]
-        suggested = SuggestedPlanDTO(
-            symbol=symbol,
-            module=best.module or "A",
-            direction=best.direction,
-            entry_rule_id=best.rule_id,
-            entry_lifecycle_id=best.lifecycle_id,
-            entry_trigger_cn=best.scenario_cn,
-            invalidation_price=best.invalidation_price,
-            target_b_price=best.reward_risk_target,
-            target_b_source=best.reward_risk_target_source_cn,
-            reward_risk_at_plan=best.reward_risk_ratio,
-        )
+        # 计划流程任务 P3（2026-09-13 主控裁决）：预填只取**入场规则可映射到
+        # A/B/C/D 且与候选自身模块一致**的合法候选（规则、模块、方向、生命
+        # 周期、触发与结构失效位来自同一候选）；早期信号（如 ema20_reclaim_
+        # rising）不因 `module or "A"` 兜底被冒充成完整入场计划。无合法候选
+        # → 不给预填（保留观察/待补说明），不扩 MODULE_MAP、不放松确认。
+        best = _legal_entry_candidate(confirmed)
+        if best is not None:
+            suggested = SuggestedPlanDTO(
+                symbol=symbol,
+                module=best.module or module_of(best.rule_id) or "",
+                direction=best.direction,
+                entry_rule_id=best.rule_id,
+                entry_lifecycle_id=best.lifecycle_id,
+                entry_trigger_cn=best.scenario_cn,
+                invalidation_price=best.invalidation_price,
+                target_b_price=best.reward_risk_target,
+                target_b_source=best.reward_risk_target_source_cn,
+                reward_risk_at_plan=best.reward_risk_ratio,
+            )
 
     # watch_conditions 用 recent (含共振), 不再混入过期结构
     watch = _watch_conditions(recent) if verdict != VERDICT_ACTIONABLE else []

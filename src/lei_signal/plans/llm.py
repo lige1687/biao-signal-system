@@ -199,8 +199,19 @@ class ArkConfig:
 
 
 def _infer_style(base_url: str) -> str:
-    """按网关路径推断协议风格。/api/coding 是 Anthropic 兼容，/api/v3 是 OpenAI 兼容。"""
-    return STYLE_ANTHROPIC if "/coding" in base_url else STYLE_OPENAI
+    """按网关路径推断协议风格。
+
+    火山方舟的 Coding Plan（``/api/coding``）与 Agent Plan（``/api/plan``）
+    同属 **Anthropic 兼容** 网关：走 ``{base}/v1/messages`` + ``x-api-key`` 鉴权；
+    实测 ``/api/plan/chat/completions`` 返回 404，即 OpenAI 风格在 Agent Plan 上不通。
+    ``/api/v3`` 等才是 OpenAI 兼容（``{base}/chat/completions`` + Bearer）。
+
+    2026-09-10：系统凭据由 ark2（Coding Plan）切到 ark-agent（Agent Plan），
+    此处同步补 ``/plan`` 判定，否则 base_url 一换就全部 404。
+    """
+    if "/coding" in base_url or "/plan" in base_url:
+        return STYLE_ANTHROPIC
+    return STYLE_OPENAI
 
 
 def _env_int(name: str, default: int) -> int:
@@ -491,15 +502,21 @@ def _post_user_content(
         return None
 
 
-def _post_streaming_anthropic(
+def _iter_anthropic_stream(
     url: str, headers: dict[str, str], body: dict[str, Any], config: ArkConfig
-) -> str | None:
-    """Anthropic 协议流式投递：累积 text_delta，thinking block 自动跳过。
+) -> Iterator[str]:
+    """Anthropic 协议 SSE 流：逐段 yield 正文 text_delta（thinking 增量跳过）。
 
-    失败（网络/非 200/空正文）返回 None，调用方降级模板。UTF-8 必须显式指定
-    （requests 对 SSE 的默认编码猜测会把中文拆成 mojibake）。
+    连接超时 10s、读超时 config.timeout——SSE 下读超时按「字节间隔」计，
+    思考期间网关持续推送增量事件即不会触发；这是非流式请求做不到的
+    （非流式必须等全文，思考型模型长输入会整段沉默到读超时）。
+    完成契约（主控复核 2026-09-15）：只有收到 ``message_stop`` 才算协议正常
+    收尾；流内 ``error`` 事件、连接关闭缺 ``message_stop``、网络异常分别以
+    对应 reason 的 :class:`StreamInterrupt` 收尾，不冒充完成。``stop_reason=
+    max_tokens`` 视为额度截断（协议正常但正文被截），同样产出标记。
     """
-    parts: list[str] = []
+    saw_message_stop = False
+    truncated = False
     try:
         with requests.post(
             url, headers=headers, json=body,
@@ -510,7 +527,7 @@ def _post_streaming_anthropic(
                     "ark(流式) HTTP %s，放弃（model=%s）。响应摘要：%s",
                     resp.status_code, config.model, resp.text[:200],
                 )
-                return None
+                return
             resp.encoding = "utf-8"
             in_text = False
             for line in resp.iter_lines(decode_unicode=True):
@@ -526,12 +543,54 @@ def _post_streaming_anthropic(
                 elif etype == "content_block_delta" and in_text:
                     delta = event.get("delta") or {}
                     if delta.get("type") == "text_delta":
-                        parts.append(delta.get("text") or "")
+                        piece = delta.get("text") or ""
+                        if piece:
+                            yield piece
+                elif etype == "message_delta":
+                    stop_reason = (event.get("delta") or {}).get("stop_reason")
+                    if stop_reason == "max_tokens":
+                        truncated = True
+                elif etype == "message_stop":
+                    saw_message_stop = True
+                elif etype == "error":
+                    logger.warning(
+                        "ark(流式) 服务端错误事件：%s（model=%s）",
+                        json.dumps(event, ensure_ascii=False)[:200], config.model,
+                    )
+                    yield StreamInterrupt("server_error_event")
+                    return
+        if not saw_message_stop:
+            logger.warning(
+                "ark(流式) 连接关闭但未收到 message_stop（model=%s）", config.model,
+            )
+            yield StreamInterrupt("no_completion_marker")
+            return
+        if truncated:
+            logger.warning("ark(流式) 正文被 max_tokens 截断（model=%s）", config.model)
+            yield StreamInterrupt("max_tokens_truncated")
     except requests.RequestException as exc:
         logger.warning(
             "ark(流式) 调用异常：%s: %s（model=%s）", type(exc).__name__, exc, config.model
         )
-        return None
+        yield StreamInterrupt("connection_interrupted")
+
+
+def _post_streaming_anthropic(
+    url: str, headers: dict[str, str], body: dict[str, Any], config: ArkConfig
+) -> str | None:
+    """Anthropic 协议流式投递：累积 text_delta 返回完整正文（买点路径共用）。
+
+    失败（网络/非 200/空正文/未正常收尾/流内错误）返回 None，调用方降级
+    模板——与既有失败降级语义一致。唯一例外：``max_tokens_truncated``（协议
+    正常收尾、正文被额度截断）沿用原行为返回已收正文，不因此改为降级。
+    """
+    parts: list[str] = []
+    for piece in _iter_anthropic_stream(url, headers, body, config):
+        if isinstance(piece, StreamInterrupt):
+            if piece.reason == "max_tokens_truncated":
+                continue  # 保持原语义：截断正文照常返回，不在买点路径降级
+            return None
+        parts.append(piece)
     text = "".join(parts).strip()
     if not text:
         logger.warning("ark(流式) 无 text_delta 输出（model=%s）", config.model)
@@ -731,16 +790,39 @@ DISCUSSION_SYSTEM_PROMPT = """你是 LEI 交易系统的研究讨论伙伴（表
 职责：依据这份材料**讨论式地解释因果**——为什么这里构成/不构成系统定义的
 买点、各维度之间支持还是冲突、到什么情况才算触发。
 
+【讨论对象】
+使用材料中的 display_name，首次出现写“名称（代码）”，之后用名称，不得只报代码。
+context_kind=sector 是行业板块整体观察，按 sector 字段解释阶段、相对强弱与宽度
+（成分股站上相应均线的比例），不是ETF。没有个券买点审阅不等于板块没有机会，
+不得编造ETF持仓、产品买卖计划或套用ETF胜率。资料日期只用 as_of，不把生成日期当行情日。
+
 【说话方式（用户明确要求，与接地铁律同级）】
 1. 第一行永远是一句话结论，大白话直给，例：「短期还在跌势里，但已经跌到
    前期大底附近，先别急着动手，等站上 5 日线再说」。禁止用判断句开头再解释。
-2. 正文最多 5 个要点，每个要点 1–2 句。先说事实，再说它意味着什么。
-3. 关键价位一次回复最多报 3 个，每个价位必须跟一句大白话说明它是什么
+2. 首屏（第一段，约 150–300 字）按四件事组织，短问题可以自然段表达、
+   不强迫分四点，但四件事都要能读到：
+   ① 现在怎么看：标的名称/代码、所依据的数据日期、系统当前状态，
+     并交代这是针对哪类问题或哪种交易方法说的；
+     数据日期不是今天的，必须同强度说明「这是 X 日期的数据，不能直接
+     代表今天」，不得用「当前」描述旧数据（可靠性一期 2026-09-14）；
+   ② 机会与风险：已有事实支持什么、哪里冲突。没有可核实的机会就如实说，
+     不为了填满版式硬凑利好；
+   ③ 历史依据够不够：说「适用于这次问题 / 与这次问题不一致（仅可参考）/
+     暂不能确定是否适用」之一并给一句原因；现成统计保持原数值和原范围；
+   ④ 接下来可以做什么：来自材料的观察条件或补测建议；没有明确触发价
+     就不编数字。用户说「先不买、只观察」时，给可观察的既有条件与值得
+     回来讨论的变化，不要求用户先选打法或补测。
+3. 正文不出现工程标识：运行编号、资料路径、方法代码（如 a6_1_costbasis、
+   模块字母编号）、exact/unknown 等英文枚举一律不写——它们由系统在依据卡
+   里展示。compatibility 类信息用上面的中文说法表达。
+   「R」第一次出现时解释为「相当于每笔预定风险金额的多少倍」，不得写成
+   收益率或百分比。
+4. 关键价位一次回复最多报 3 个，每个价位必须跟一句大白话说明它是什么
    （例：「9648 是上一波反弹的高点，站上去才算真转强」）。禁止罗列价位清单。
-4. 用平实词：转强 / 转弱 / 横盘 / 跌破 / 站上 / 接近 / 远离 / 风险升高 / 风险降低。
+5. 用平实词：转强 / 转弱 / 横盘 / 跌破 / 站上 / 接近 / 远离 / 风险升高 / 风险降低。
    禁止连环比喻和造词（如「道路红转绿而失速」「路牌被拆」连用）——一个比喻
    最多出现一次，且必须马上跟平实解释。
-5. 用户问什么答什么，别把材料里的所有维度都倒一遍。
+6. 用户问什么答什么，别把材料里的所有维度都倒一遍。
    **情绪信号状态必须主动提**：材料带 sentiment_signals 时，若冰点环境
    激活（icepoint_active）或该标的板块处于散户热警报形态，回复必须
    主动点出并带胜率样本（用户口径 2026-09-06：讨论中提醒，不等问）；
@@ -750,7 +832,14 @@ DISCUSSION_SYSTEM_PROMPT = """你是 LEI 交易系统的研究讨论伙伴（表
    与经验结论），再谈具体买点——急涨型明确提醒「趋势回调打法历史上在这
    种形态上吃不到肉，别硬套」；下跌型明确「不抢反弹」。这是用户对
    「主动判断适合什么打法」的明确要求，优先级高于逐条报判定。
-6. 去 AI 味（每次输出都自查一遍）：
+7. 详细材料（逐条事件、全部结构、统计明细）放到首屏之后：正文解释意义，
+   来源与明细交给系统依据卡，不和卡片机械重复同一句话。
+8. 能力边界如实说（UX 第一期 2026-09-13）：补测目前只支持这些退出方式——
+   按 20 日线和成本区退出 / 顶部构造后关键波动退出 / 只按初始止损退出
+   （B 另有专用双条件退出）。用户点到其他退出方式（例如 ATR 止损）时，
+   明确说「这项比较暂未支持」，可以讨论思路，但禁止声称已经比较过、
+   也禁止擅自换成别的退出规则来代替。
+9. 去 AI 味（每次输出都自查一遍）：
    - 删填充词与开场白（"值得注意的是""总而言之""不难发现"），直接说事；
    - 打破三段式排比和"不是A而是B"的公式句，两项就两项，别凑三项；
    - 句长要有变化，别每句都一样长一样稳；段落收尾别都落在总结腔上；
@@ -805,6 +894,28 @@ def chat_discussion(
 
 #: 统一 LLM 请求入口别名：路由层与测试 monkeypatch 此名字即可不触网替换。
 _llm_call = _request_completion
+
+class StreamInterrupt:
+    """流式未完成标记（主控复核 2026-09-15 固定补修一）。
+
+    流以**非正常方式**结束或被截断时，流式迭代器在已产出内容之后产出本类
+    实例；调用方据此把回答标记为「未完成」，不再依赖「Python 迭代器没抛
+    异常」来判定完成。``reason`` 为稳定枚举：
+    - ``connection_interrupted``：网络异常中断；
+    - ``no_completion_marker``：连接关闭但未收到协议正常结束标记
+      （anthropic 缺 ``message_stop`` / openai 缺 ``[DONE]``）；
+    - ``server_error_event``：服务端在流内下发错误事件（anthropic ``error``）；
+    - ``max_tokens_truncated``：输出额度截断（anthropic ``stop_reason=max_tokens``
+      / openai ``finish_reason=length``）——协议上正常收尾，但正文被截断。
+    """
+
+    def __init__(self, reason: str) -> None:
+        self.reason = reason
+
+
+#: 兼容别名：网络中断哨兵的单例（历史代码与测试用 ``is`` 比较仍可用；
+#: 新代码建议 ``isinstance(piece, StreamInterrupt)`` 并读取 ``reason``）。
+STREAM_INTERRUPTED = StreamInterrupt("connection_interrupted")
 
 #: copilot 讲解系统提示：与监督员同一套铁律，面向流水线卡片而非 alert。
 COPILOT_SYSTEM_PROMPT = """你是 LEI 交易系统 Agent 超级入口的**表达层**。
@@ -874,16 +985,30 @@ __all__ = [
 def _request_completion_stream(
     config: ArkConfig, messages: list[dict]
 ) -> Iterator[str]:
-    """OpenAI 兼容流式请求：逐段 yield 正文 token（思考模型的 reasoning 增量跳过）。
+    """流式请求：逐段 yield 正文增量（思考模型的 reasoning 增量跳过）。
 
-    仅支持 openai 风格（GLM/DeepSeek 走这里）；anthropic 风格退化为一次性
-    yield 完整正文（复用 _request_completion）。任何失败直接结束迭代器
+    2026-09-14（讨论可靠性一期）：anthropic 风格不再退化为一次性非流式请求。
+    此前非 OpenAI 风格直接走 ``_request_completion``，思考型模型长输入在
+    thinking 期间整段无字节，稳定触发读超时（实测 /api/plan + ark-code-latest
+    180s 超时，见 docs/experiments/agent-real-conversation-case-2026-09-14.md）；
+    现按 ``_iter_anthropic_stream`` 同构 SSE 增量投递。任何失败直接结束迭代器
     （调用方据已收 token 判断是否完整），不抛异常——流式路径 best-effort。
     """
-    if config.style != STYLE_OPENAI:
-        text = _request_completion(config, messages)
-        if text:
-            yield text
+    if config.style == STYLE_ANTHROPIC:
+        url = f"{config.base_url}/v1/messages"
+        headers = {
+            "x-api-key": config.api_key,
+            "anthropic-version": "2023-06-01",
+            "Content-Type": "application/json",
+        }
+        conversation = list(messages)
+        body: dict[str, Any] = {"model": config.model, "max_tokens": config.max_tokens}
+        if conversation and conversation[0].get("role") == "system":
+            body["system"] = str(conversation[0].get("content", ""))
+            conversation = conversation[1:]
+        body["messages"] = conversation
+        body["stream"] = True
+        yield from _iter_anthropic_stream(url, headers, body, config)
         return
     url = f"{config.base_url}/chat/completions"
     headers = {
@@ -896,6 +1021,8 @@ def _request_completion_stream(
         "temperature": 0.2,
         "stream": True,
     }
+    saw_done = False
+    truncated = False
     try:
         resp = requests.post(
             url, headers=headers, json=body, timeout=config.timeout, stream=True,
@@ -907,23 +1034,52 @@ def _request_completion_stream(
             )
             return
         resp.encoding = "utf-8"
-        for line in resp.iter_lines(decode_unicode=True):
-            if not line or not line.startswith("data:"):
-                continue
-            data = line[5:].strip()
-            if data == "[DONE]":
-                return
-            try:
-                chunk = json.loads(data)
-            except (ValueError, TypeError):
-                continue
-            choices = chunk.get("choices") or []
-            if not choices:
-                continue
-            delta = choices[0].get("delta") or {}
-            piece = delta.get("content")
-            if piece:
-                yield str(piece)
+        try:
+            for line in resp.iter_lines(decode_unicode=True):
+                if not line or not line.startswith("data:"):
+                    continue
+                data = line[5:].strip()
+                if data == "[DONE]":
+                    saw_done = True
+                    break
+                try:
+                    chunk = json.loads(data)
+                except (ValueError, TypeError):
+                    continue
+                # 二轮复验（2026-09-15 遗漏一）：OpenAI 风格流内顶层 error 事件——
+                # 立即以 server_error_event 收尾并返回，后续的 [DONE]/EOF 不得
+                # 把已下发的服务错误洗成正常完成。
+                if isinstance(chunk, dict) and chunk.get("error"):
+                    logger.warning(
+                        "流式请求服务端错误事件：%s（model=%s）",
+                        json.dumps(chunk, ensure_ascii=False)[:200], config.model,
+                    )
+                    yield StreamInterrupt("server_error_event")
+                    return
+                choices = chunk.get("choices") or []
+                if not choices:
+                    continue
+                if choices[0].get("finish_reason") == "length":
+                    truncated = True
+                delta = choices[0].get("delta") or {}
+                piece = delta.get("content")
+                if piece:
+                    yield str(piece)
+        except requests.RequestException as exc:
+            # 中途断流：已产出内容保留，再以哨兵告知调用方「未完成」
+            logger.warning(
+                "流式请求中断：%s: %s（model=%s）", type(exc).__name__, exc, config.model,
+            )
+            yield StreamInterrupt("connection_interrupted")
+            return
+        if not saw_done:
+            # 连接正常关闭但缺 [DONE]：不得当作模型正常收尾（主控复核 2026-09-15）
+            logger.warning("流式连接关闭但未收到 [DONE]（model=%s）", config.model)
+            yield StreamInterrupt("no_completion_marker")
+            return
+        if truncated:
+            logger.warning("流式正文被 max_tokens 截断（model=%s）", config.model)
+            yield StreamInterrupt("max_tokens_truncated")
     except requests.RequestException as exc:
         logger.warning(
             "流式请求异常：%s: %s（model=%s）", type(exc).__name__, exc, config.model,

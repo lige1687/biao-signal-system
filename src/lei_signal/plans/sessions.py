@@ -40,6 +40,10 @@ class AgentMessage:
     grounded: bool
     meta_json: str
     created_at: str
+    # 03B-R3 S4：回答精确绑定列（旧行/旧调用方为 None/""=归属不可考）
+    question_id: int | None = None
+    message_kind: str = ""
+    source_request_id: str = ""
 
 
 def create_session(
@@ -112,6 +116,24 @@ def append_message(
     )
 
 
+def set_message_meta(conn: sqlite3.Connection, message_id: int,
+                     meta: dict) -> None:
+    """一次性写入消息 meta（03B：user 消息落库后回填 discussion_v1 快照，
+    含 question_id 自身）。只允许写一次——已有非空 meta 不覆盖。"""
+    row = conn.execute(
+        "SELECT meta_json FROM agent_messages WHERE message_id = ?",
+        (message_id,)).fetchone()
+    if row is None:
+        raise ValueError(f"消息不存在: {message_id}")
+    if row["meta_json"] and row["meta_json"] not in ("{}", ""):
+        return  # 已有 meta：不可变，不覆盖
+    conn.execute(
+        "UPDATE agent_messages SET meta_json = ? WHERE message_id = ?",
+        (json.dumps(meta, ensure_ascii=False), message_id),
+    )
+    conn.commit()
+
+
 def list_messages(
     conn: sqlite3.Connection, session_id: str, limit: int = 20
 ) -> list[AgentMessage]:
@@ -124,6 +146,9 @@ def list_messages(
     ).fetchall()
     return [
         AgentMessage(r["message_id"], r["session_id"], r["role"], r["content"],
-                     bool(r["grounded"]), r["meta_json"], r["created_at"])
+                     bool(r["grounded"]), r["meta_json"], r["created_at"],
+                     question_id=(r["question_id"] if r["question_id"] is not None else None),
+                     message_kind=r["message_kind"] or "",
+                     source_request_id=r["source_request_id"] or "")
         for r in rows
     ]

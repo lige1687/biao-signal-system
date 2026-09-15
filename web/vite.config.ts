@@ -5,9 +5,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: true,
-    port: 5173,
+    // 端口与后端代理可用环境变量覆盖（UX 第一期 2026-09-13：隔离预览用，
+    // 不占用 8000/5173；不设时行为与原来完全一致）。
+    port: Number(process.env.LEI_WEB_PORT ?? 5173),
     proxy: {
-      "/api": "http://127.0.0.1:8000",
+      "/api": process.env.LEI_API_PROXY ?? "http://127.0.0.1:8000",
     },
   },
   build: {

@@ -1,4 +1,9 @@
-"""草稿符合性核对路由：/conformance + /confirm 硬阻断 + PUT /draft。"""
+"""草稿符合性核对路由：/conformance + /confirm 硬阻断 + PUT /draft。
+
+2026-09-08（03B-R2 回归修整）：RULESET 改读**实际启用账本**的版本（不再
+硬编码 1.3.0——账本升版会让 confirm 撞 RULESET_VERSION_CHANGED 409）；
+缺失效价确认的 422 断言对齐 04B 结构化拒绝（INVALIDATION_PRICE_REQUIRED）。
+"""
 from __future__ import annotations
 
 import pandas as pd
@@ -10,11 +15,12 @@ from lei_signal.compose.pipeline import analyze_bars
 from lei_signal.data.providers import PriceData
 from lei_signal.data.symbols import resolve_symbol
 from lei_signal.data.validation import validate_bars
+from lei_signal.domain.rules_config import ruleset_version
 from lei_signal.plans.store import confirm_plan, create_plan, get_plan
 from lei_signal.storage.sqlite_store import connect
 
 SYMBOL = "000001.SS"
-RULESET = "1.3.0"
+RULESET = ruleset_version()
 
 
 def _bars(n: int = 80) -> pd.DataFrame:
@@ -84,13 +90,12 @@ def test_conformance_returns_structure(tmp_path) -> None:  # noqa: ANN001
 
 
 def test_confirm_hard_blocks_on_missing_invalidation(tmp_path) -> None:  # noqa: ANN001
-    # 缺失效价 -> 硬阻断，confirm 422
+    # 缺失效价 -> 04B 结构化拒绝（store 层共享校验），confirm 422
     client = _make_client(tmp_path, plan_kwargs={"invalidation_price": None})
     resp = client.post(f"/api/plans/{client.plan_id}/confirm")  # type: ignore[attr-defined]
     assert resp.status_code == 422
     detail = resp.json()["detail"]
-    codes = {i["code"] for i in detail.get("hard_issues", [])}
-    assert "MISSING_INVALIDATION" in codes
+    assert detail["code"] == "INVALIDATION_PRICE_REQUIRED"
 
 
 def test_confirm_hard_blocks_on_module_mismatch(tmp_path) -> None:  # noqa: ANN001

@@ -1,0 +1,518 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "D-literature",
+      "kind": "directional",
+      "title": "从论文中找到适合我们的新方法",
+      "purpose": "优先近期研究，同时保留与系统高度相关的经典。候选不限于 A/B/C/D；每个候选要说明适合什么场景、增加什么价值、何时失效。",
+      "priority": "high",
+      "owner": "用户与 Codex",
+      "next_action": "先授权近期论文筛选；研究结论可以是不采纳，不以新增模块数量当成绩。"
+    },
+    {
+      "id": "D-evidence",
+      "kind": "directional",
+      "title": "让每个系统结论都有可靠依据",
+      "purpose": "把目录摘要、实验原文、配置和数据来源对齐，分清预先约定的检验与后来追加的比较。",
+      "priority": "high",
+      "owner": "用户与 Codex",
+      "next_action": "先复核已发现的目录与原文差异，再核对完整试验记录。"
+    },
+    {
+      "id": "D-increment",
+      "kind": "directional",
+      "title": "证明升级比简单做法多带来了什么",
+      "purpose": "改善方向、触发、退出和风险控制时，分别查清收益来源，避免只是增加条件。",
+      "priority": "high",
+      "owner": "用户与 Codex",
+      "next_action": "先查已有报告覆盖；只补没有被回答的问题。"
+    },
+    {
+      "id": "D-forward",
+      "kind": "directional",
+      "title": "用之后的新行情检验实际效果",
+      "purpose": "保存规则确定后出现的所有信号与人工执行选择，跟踪真实可执行性和等待成本。",
+      "priority": "high",
+      "owner": "用户与 Codex",
+      "next_action": "先确定观察协议与起点，再建设记录；不拿反复见过的历史冒充新证据。"
+    },
+    {
+      "id": "D-tracking",
+      "kind": "directional",
+      "title": "让所有升级目标和进度长期可追踪",
+      "purpose": "方向、具体工作、授权、证据与验收都留在一个可持续更新的台账里。",
+      "priority": "high",
+      "owner": "用户与 Codex",
+      "next_action": "本轮建设完成后由用户验收；后续每次推进前后对照本台账。"
+    },
+    {
+      "id": "K-classics",
+      "kind": "concrete",
+      "parent_id": "D-literature",
+      "title": "完成首轮经典论文与系统对照",
+      "purpose": "已完成的历史研究：辨认趋势、图形、行业强弱、止损及验证方法的关联和边界。",
+      "priority": "medium",
+      "owner": "Codex（按授权推进）",
+      "status": "done",
+      "next_action": "作为近期论文研究的起点；不重复检索。",
+      "evidence": "12篇论文、12条中文笔记已核验；只完成文献对照，没有复现各篇论文回测。",
+      "milestones": [
+        {
+          "id": "m1",
+          "title": "12篇书目与来源核验",
+          "done": true
+        },
+        {
+          "id": "m2",
+          "title": "12条中文笔记存入 Zotero",
+          "done": true
+        },
+        {
+          "id": "m3",
+          "title": "对照报告在实验库归档",
+          "done": true
+        }
+      ],
+      "links": [
+        {
+          "label": "12篇论文对照报告",
+          "url": "/library?report=docs%2Fexperiments%2Flei-academic-literature-ARCHIVE-2026-09-08.md"
+        },
+        {
+          "label": "Zotero专题",
+          "url": "zotero://select/library/collections/EN7QZYKX"
+        }
+      ],
+      "recorded_at": "2026-09-08",
+      "initial_note": "历史成果：前一轮已完成并报告给用户；不表示近期论文筛选或新模块已经完成。"
+    },
+    {
+      "id": "K-recent",
+      "kind": "concrete",
+      "parent_id": "D-literature",
+      "title": "筛选近期论文并建立适配清单",
+      "purpose": "执行时以最近三年为主，优先最近十二个月；核验发表与修订日期、原文、代码或数据，并同时查反向证据。",
+      "priority": "high",
+      "owner": "Codex（按授权推进）",
+      "status": "awaiting_approval",
+      "next_action": "待授权：先完成文献筛选，不改规则、不运行大批回测。",
+      "evidence": "",
+      "milestones": [
+        {
+          "id": "m1",
+          "title": "记录检索日期、范围和所有入选理由",
+          "done": false
+        },
+        {
+          "id": "m2",
+          "title": "每个候选说明场景、机制、数据要求、成本与失效条件",
+          "done": false
+        },
+        {
+          "id": "m3",
+          "title": "标明已发表或预印本及可复现程度",
+          "done": false
+        },
+        {
+          "id": "m4",
+          "title": "更新 Zotero 和中文对照报告，提出少量候选或说明无合适增量",
+          "done": false
+        }
+      ],
+      "links": [
+        {
+          "label": "12篇论文对照报告",
+          "url": "/library?report=docs%2Fexperiments%2Flei-academic-literature-ARCHIVE-2026-09-08.md"
+        }
+      ],
+      "recorded_at": "2026-09-08",
+      "initial_note": "根据 2026-09-08 用户讨论登记。未开始的工作等待逐项授权。"
+    },
+    {
+      "id": "K-newmodules",
+      "kind": "concrete",
+      "parent_id": "D-literature",
+      "title": "把合适候选写成独立新模块提案",
+      "purpose": "不限于 A/B/C/D；候选必须与现有系统形成明确互补。无法追溯现有规格时，作为体系扩展提案，而非冒充原有规则。",
+      "priority": "medium",
+      "owner": "Codex（按授权推进）",
+      "status": "planned",
+      "next_action": "待近期论文结果，再授权具体提案；尚未选定或实现任何新模块。",
+      "evidence": "",
+      "milestones": [
+        {
+          "id": "m1",
+          "title": "先完成近期论文筛选并说明为什么值得新增",
+          "done": false
+        },
+        {
+          "id": "m2",
+          "title": "写清入场、退出、失效和无交易条件",
+          "done": false
+        },
+        {
+          "id": "m3",
+          "title": "列出数据可得性、简单对照及预先约定的通过标准",
+          "done": false
+        },
+        {
+          "id": "m4",
+          "title": "明确拟修改的策略层与规格条款，交用户决定",
+          "done": false
+        }
+      ],
+      "links": [
+        {
+          "label": "12篇论文对照报告",
+          "url": "/library?report=docs%2Fexperiments%2Flei-academic-literature-ARCHIVE-2026-09-08.md"
+        }
+      ],
+      "recorded_at": "2026-09-08",
+      "initial_note": "根据 2026-09-08 用户讨论登记。未开始的工作等待逐项授权。"
+    },
+    {
+      "id": "K-verdict-audit",
+      "kind": "concrete",
+      "parent_id": "D-evidence",
+      "title": "核对目录“通过”与实验原文差异",
+      "purpose": "先处理 2026-08-27 历史报告的主要检验与追加比较，避免把部件结果概括为整个系统通过。",
+      "priority": "high",
+      "owner": "Codex（按授权推进）",
+      "status": "awaiting_approval",
+      "next_action": "待授权：复核这份报告及对应登记，不重跑或改规则。",
+      "evidence": "",
+      "milestones": [
+        {
+          "id": "m1",
+          "title": "核对原文、配置来源及原始输出",
+          "done": false
+        },
+        {
+          "id": "m2",
+          "title": "把主要检验与追加比较分开解释",
+          "done": false
+        },
+        {
+          "id": "m3",
+          "title": "修正经证据确认的目录摘要并保留变更依据",
+          "done": false
+        }
+      ],
+      "links": [
+        {
+          "label": "待复核的历史报告",
+          "url": "/library?report=docs%2Fexperiments%2FFINAL-VERDICT-walkforward-2026-08-27.md"
+        },
+        {
+          "label": "12篇论文对照报告",
+          "url": "/library?report=docs%2Fexperiments%2Flei-academic-literature-ARCHIVE-2026-09-08.md"
+        }
+      ],
+      "recorded_at": "2026-09-08",
+      "initial_note": "根据 2026-09-08 用户讨论登记。未开始的工作等待逐项授权。"
+    },
+    {
+      "id": "K-trial-ledger",
+      "kind": "concrete",
+      "parent_id": "D-evidence",
+      "title": "补齐试过哪些规则和版本的记录",
+      "purpose": "最终赢家要连同试过的失败版本一起评价；先盘点现有日志，避免重做已有工作。",
+      "priority": "medium",
+      "owner": "Codex（按授权推进）",
+      "status": "planned",
+      "next_action": "待授权：先盘点并提交方案，再决定是否追加计算。",
+      "evidence": "",
+      "milestones": [
+        {
+          "id": "m1",
+          "title": "列出规则、参数、筛选和数据版本",
+          "done": false
+        },
+        {
+          "id": "m2",
+          "title": "标记主要比较、事后追加及重复利用的历史",
+          "done": false
+        },
+        {
+          "id": "m3",
+          "title": "提出适合本项目的整批候选验证方案",
+          "done": false
+        }
+      ],
+      "links": [
+        {
+          "label": "12篇论文对照报告",
+          "url": "/library?report=docs%2Fexperiments%2Flei-academic-literature-ARCHIVE-2026-09-08.md"
+        }
+      ],
+      "recorded_at": "2026-09-08",
+      "initial_note": "根据 2026-09-08 用户讨论登记。未开始的工作等待逐项授权。"
+    },
+    {
+      "id": "K-data-boundary",
+      "kind": "concrete",
+      "parent_id": "D-evidence",
+      "title": "核对数据代理与真实可交易条件",
+      "purpose": "优先检查板块历史成分、价格复权、真实分钟数据与日线代理的区别，说明影响哪些结论。",
+      "priority": "medium",
+      "owner": "Codex（按授权推进）",
+      "status": "planned",
+      "next_action": "待授权：数据审计与方案；涉及生产缓存修复另列具体目标。",
+      "evidence": "",
+      "milestones": [
+        {
+          "id": "m1",
+          "title": "列出数据限制与受影响的规则或报告",
+          "done": false
+        },
+        {
+          "id": "m2",
+          "title": "确认已有修复与仍欠缺部分",
+          "done": false
+        },
+        {
+          "id": "m3",
+          "title": "分别提出可用、仅观察、需补数据的处理建议",
+          "done": false
+        }
+      ],
+      "links": [
+        {
+          "label": "12篇论文对照报告",
+          "url": "/library?report=docs%2Fexperiments%2Flei-academic-literature-ARCHIVE-2026-09-08.md"
+        }
+      ],
+      "recorded_at": "2026-09-08",
+      "initial_note": "根据 2026-09-08 用户讨论登记。未开始的工作等待逐项授权。"
+    },
+    {
+      "id": "K-baseline",
+      "kind": "concrete",
+      "parent_id": "D-increment",
+      "title": "比较完整模块与简单趋势、普通突破",
+      "purpose": "同标的、同日期、同费用和可比风险承担，辨认复杂条件增加了什么。",
+      "priority": "high",
+      "owner": "Codex（按授权推进）",
+      "status": "awaiting_approval",
+      "next_action": "待授权：先做覆盖核对和实验方案；回测范围随后明确。",
+      "evidence": "",
+      "milestones": [
+        {
+          "id": "m1",
+          "title": "核对已有拆分实验，避免重复",
+          "done": false
+        },
+        {
+          "id": "m2",
+          "title": "固定对照方案与主要判断标准",
+          "done": false
+        },
+        {
+          "id": "m3",
+          "title": "分别报告方向、入场条件、退出和仓位贡献",
+          "done": false
+        },
+        {
+          "id": "m4",
+          "title": "结果无改善也完整归档",
+          "done": false
+        }
+      ],
+      "links": [
+        {
+          "label": "12篇论文对照报告",
+          "url": "/library?report=docs%2Fexperiments%2Flei-academic-literature-ARCHIVE-2026-09-08.md"
+        }
+      ],
+      "recorded_at": "2026-09-08",
+      "initial_note": "根据 2026-09-08 用户讨论登记。未开始的工作等待逐项授权。"
+    },
+    {
+      "id": "K-b-concentration",
+      "kind": "concrete",
+      "parent_id": "D-increment",
+      "title": "跟踪 B 模块对少数大赢家的依赖",
+      "purpose": "已有37笔历史样本的优势余量很小；以已有证据和新增交易跟踪为主，避免继续从小样本挑条件。",
+      "priority": "medium",
+      "owner": "Codex（按授权推进）",
+      "status": "planned",
+      "next_action": "待授权：制定跟踪方案，不重复从原37笔里优化。",
+      "evidence": "",
+      "milestones": [
+        {
+          "id": "m1",
+          "title": "复用现有赢家集中度结果",
+          "done": false
+        },
+        {
+          "id": "m2",
+          "title": "记录等待时间、连续亏损及同一行情的交易关联",
+          "done": false
+        },
+        {
+          "id": "m3",
+          "title": "约定新增数据后的复核条件",
+          "done": false
+        }
+      ],
+      "links": [
+        {
+          "label": "B模块集中度报告",
+          "url": "/library?report=docs%2Fexperiments%2Fmodule-b-robustness-2026-09-03.md"
+        }
+      ],
+      "recorded_at": "2026-09-08",
+      "initial_note": "根据 2026-09-08 用户讨论登记。未开始的工作等待逐项授权。"
+    },
+    {
+      "id": "K-risk-attribution",
+      "kind": "concrete",
+      "parent_id": "D-increment",
+      "title": "分清风险改善与少参与市场的代价",
+      "purpose": "止损和仓位调整要同时看少亏、少赚、持有时间与再次参与；尊重已被否定的方向。",
+      "priority": "medium",
+      "owner": "Codex（按授权推进）",
+      "status": "planned",
+      "next_action": "待授权：先复核已有材料；新试验单独列范围。",
+      "evidence": "",
+      "milestones": [
+        {
+          "id": "m1",
+          "title": "查已有止损和仓位研究覆盖",
+          "done": false
+        },
+        {
+          "id": "m2",
+          "title": "建立同成本、可比风险承担的简单对照",
+          "done": false
+        },
+        {
+          "id": "m3",
+          "title": "报告收益、跌幅、空仓时间和执行成本",
+          "done": false
+        }
+      ],
+      "links": [
+        {
+          "label": "12篇论文对照报告",
+          "url": "/library?report=docs%2Fexperiments%2Flei-academic-literature-ARCHIVE-2026-09-08.md"
+        }
+      ],
+      "recorded_at": "2026-09-08",
+      "initial_note": "根据 2026-09-08 用户讨论登记。未开始的工作等待逐项授权。"
+    },
+    {
+      "id": "K-forward-protocol",
+      "kind": "concrete",
+      "parent_id": "D-forward",
+      "title": "确定新行情验证协议与起点",
+      "purpose": "规则确定以后发生的数据才是后续检验；区分历史反复研究和真正新增记录。",
+      "priority": "high",
+      "owner": "Codex（按授权推进）",
+      "status": "awaiting_approval",
+      "next_action": "待授权：先写协议，获准后再建设或接入记录。",
+      "evidence": "",
+      "milestones": [
+        {
+          "id": "m1",
+          "title": "明确要跟踪的配置、版本与起始时间",
+          "done": false
+        },
+        {
+          "id": "m2",
+          "title": "记录全部触发、失效和未执行信号",
+          "done": false
+        },
+        {
+          "id": "m3",
+          "title": "写清观察期限、复核条件及暂停条件",
+          "done": false
+        }
+      ],
+      "links": [
+        {
+          "label": "12篇论文对照报告",
+          "url": "/library?report=docs%2Fexperiments%2Flei-academic-literature-ARCHIVE-2026-09-08.md"
+        }
+      ],
+      "recorded_at": "2026-09-08",
+      "initial_note": "根据 2026-09-08 用户讨论登记。未开始的工作等待逐项授权。"
+    },
+    {
+      "id": "K-human-effect",
+      "kind": "concrete",
+      "parent_id": "D-forward",
+      "title": "分开记录系统信号与人工选择",
+      "purpose": "机械回测不等于人工执行；需要知道人的筛选、延迟和漏单到底带来什么影响。",
+      "priority": "medium",
+      "owner": "Codex（按授权推进）",
+      "status": "planned",
+      "next_action": "待新行情协议明确，再授权记录设计与接入。",
+      "evidence": "",
+      "milestones": [
+        {
+          "id": "m1",
+          "title": "定义系统触发与人工执行的两份对照记录",
+          "done": false
+        },
+        {
+          "id": "m2",
+          "title": "记录选择理由、时间及真实执行限制",
+          "done": false
+        },
+        {
+          "id": "m3",
+          "title": "提出比较结果的方式并保护原始记录",
+          "done": false
+        }
+      ],
+      "links": [
+        {
+          "label": "12篇论文对照报告",
+          "url": "/library?report=docs%2Fexperiments%2Flei-academic-literature-ARCHIVE-2026-09-08.md"
+        }
+      ],
+      "recorded_at": "2026-09-08",
+      "initial_note": "根据 2026-09-08 用户讨论登记。未开始的工作等待逐项授权。"
+    },
+    {
+      "id": "K-okr-page",
+      "kind": "concrete",
+      "parent_id": "D-tracking",
+      "title": "建立系统待升级页面与长期台账",
+      "purpose": "本次已授权：在现有界面加入两类目标、进展、证据与逐项授权记录，并登记这次讨论。",
+      "priority": "high",
+      "owner": "Codex（按授权推进）",
+      "status": "review",
+      "next_action": "等待用户体验并验收页面；随后按具体目标授权推进。",
+      "evidence": "页面已接入主导航，5个方向与12个具体目标已保存；12项接口和报告库检查通过，前端构建通过。隔离环境实际验证新增、编辑、刷新、逐项授权、开始推进、完成勾选、提交验收、验收完成和导出；390像素窄屏无横向溢出，表单可操作，Escape可关闭。正式接口与页面已核验，报告可从目标直接打开。详细检查记录：docs/okr/verification-2026-09-08.md。",
+      "milestones": [
+        {
+          "id": "m1",
+          "title": "两类目标与本轮讨论均已登记",
+          "done": true
+        },
+        {
+          "id": "m2",
+          "title": "新增、编辑、更新记录可持久保存",
+          "done": true
+        },
+        {
+          "id": "m3",
+          "title": "逐项授权、撤回与验收流程可用",
+          "done": true
+        },
+        {
+          "id": "m4",
+          "title": "桌面、窄屏及实际页面检查通过",
+          "done": true
+        }
+      ],
+      "links": [],
+      "recorded_at": "2026-09-08",
+      "initial_note": "2026-09-08 页面建设和检查已完成，提交用户验收；具体研究工作仍等待逐项授权。",
+      "authorization_scope": "2026-09-08 用户要求建设系统待升级 OKR 页面、登记讨论目标及长期跟踪规约；不包含执行待授权研究。"
+    }
+  ]
+}

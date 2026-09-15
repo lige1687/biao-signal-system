@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { findPriceMentions, type AgentPriceLevel } from "./agent/priceLinks";
 
 /** 圆圈数字，与 BuyPointDrawer 一致。 */
 const CIRCLED = "①②③④⑤⑥⑦⑧⑨⑩";
@@ -22,7 +23,23 @@ function renderInline(
   text: string,
   onBp: (index: number) => void,
   notableCount: number,
+  priceLevels: AgentPriceLevel[] = [],
+  onPrice?: (level: AgentPriceLevel) => void,
 ): ReactNode[] {
+  const mentions = onPrice ? findPriceMentions(text, priceLevels) : [];
+  const plain = (fragment: string, offset: number): ReactNode => {
+    const parts: ReactNode[] = [];
+    let cursor = 0;
+    for (const mention of mentions) {
+      const from = mention.start - offset, to = mention.end - offset;
+      if (from < 0 || to > fragment.length) continue;
+      parts.push(fragment.slice(cursor, from));
+      parts.push(<button key={mention.start} type="button" className="ar-price-link" onClick={() => onPrice?.(mention.level)} aria-label={`${mention.level.role} ${mention.level.price}，在图上定位`} title={`系统价位 · ${mention.level.from_cn}`}>{fragment.slice(from, to)}<span aria-hidden="true"> ↗</span></button>);
+      cursor = to;
+    }
+    parts.push(fragment.slice(cursor));
+    return parts;
+  };
   // 同时匹配三种行内元素；用捕获组区分类型
   const re = /(\*\*([^*]+)\*\*)|(`([^`]+)`)|(买点\s*([①②③④⑤⑥⑦⑧⑨⑩]|[1-9][0-9]?|一|二|三|四|五|六|七|八|九|十))/g;
   const out: ReactNode[] = [];
@@ -30,11 +47,11 @@ function renderInline(
   let key = 0;
   for (const m of text.matchAll(re)) {
     const start = m.index ?? 0;
-    if (start > last) out.push(text.slice(last, start));
+    if (start > last) out.push(plain(text.slice(last, start), last));
     if (m[2] != null) {
-      out.push(<strong key={`b${key++}`}>{m[2]}</strong>);
+      out.push(<strong key={`b${key++}`}>{plain(m[2], start + 2)}</strong>);
     } else if (m[4] != null) {
-      out.push(<code key={`c${key++}`} className="md-code">{m[4]}</code>);
+      out.push(<code key={`c${key++}`} className="md-code">{plain(m[4], start + 1)}</code>);
     } else if (m[5] != null) {
       const idx = parseBpIndex(m[6]);
       const inRange = idx != null && idx < notableCount;
@@ -51,7 +68,7 @@ function renderInline(
     }
     last = start + m[0].length;
   }
-  if (last < text.length) out.push(text.slice(last));
+  if (last < text.length) out.push(plain(text.slice(last), last));
   return out;
 }
 
@@ -66,10 +83,14 @@ export default function AgentMarkdown({
   text,
   onBp,
   notableCount,
+  priceLevels = [],
+  onPrice,
 }: {
   text: string;
   onBp: (index: number) => void;
   notableCount: number;
+  priceLevels?: AgentPriceLevel[];
+  onPrice?: (level: AgentPriceLevel) => void;
 }) {
   const lines = text.split("\n");
   const blocks: ReactNode[] = [];
@@ -97,7 +118,7 @@ export default function AgentMarkdown({
     const h = /^(#{1,6})\s+(.*)$/.exec(trimmed);
     if (h) {
       const level = h[1].length;
-      const content = renderInline(h[2], onBp, notableCount);
+      const content = renderInline(h[2], onBp, notableCount, priceLevels, onPrice);
       if (level <= 2) {
         blocks.push(<h4 key={key++} className="md-h2">{content}</h4>);
       } else if (level === 3) {
@@ -118,7 +139,7 @@ export default function AgentMarkdown({
       }
       blocks.push(
         <blockquote key={key++} className="md-quote">
-          {renderInline(quoteLines.join(" "), onBp, notableCount)}
+          {renderInline(quoteLines.join(" "), onBp, notableCount, priceLevels, onPrice)}
         </blockquote>,
       );
       continue;
@@ -129,7 +150,7 @@ export default function AgentMarkdown({
       const items: ReactNode[] = [];
       while (i < lines.length && /^[-*+]\s+/.test(lines[i].trim())) {
         const item = lines[i].trim().replace(/^[-*+]\s+/, "");
-        items.push(<li key={items.length}>{renderInline(item, onBp, notableCount)}</li>);
+        items.push(<li key={items.length}>{renderInline(item, onBp, notableCount, priceLevels, onPrice)}</li>);
         i++;
       }
       blocks.push(<ul key={key++} className="md-ul">{items}</ul>);
@@ -141,7 +162,7 @@ export default function AgentMarkdown({
       const items: ReactNode[] = [];
       while (i < lines.length && /^\d+[.、]\s+/.test(lines[i].trim())) {
         const item = lines[i].trim().replace(/^\d+[.、]\s+/, "");
-        items.push(<li key={items.length}>{renderInline(item, onBp, notableCount)}</li>);
+        items.push(<li key={items.length}>{renderInline(item, onBp, notableCount, priceLevels, onPrice)}</li>);
         i++;
       }
       blocks.push(<ol key={key++} className="md-ol">{items}</ol>);
@@ -162,7 +183,7 @@ export default function AgentMarkdown({
       para.push(lines[i].trim());
       i++;
     }
-    blocks.push(<p key={key++} className="md-p">{renderInline(para.join(" "), onBp, notableCount)}</p>);
+    blocks.push(<p key={key++} className="md-p">{renderInline(para.join(" "), onBp, notableCount, priceLevels, onPrice)}</p>);
   }
 
   return <div className="md-body">{blocks}</div>;

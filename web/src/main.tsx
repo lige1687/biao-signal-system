@@ -3,7 +3,12 @@ import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
+import { migrateStorageKeys } from "./utils/storageMigration";
 import "./styles.css";
+import "./workspace-design.css";
+
+// 品牌改名后把旧键名下的本地设置（关注板块/星级/阈值）搬到新键名，避免用户设置丢失。
+migrateStorageKeys();
 
 const queryClient = new QueryClient({
   defaultOptions: {

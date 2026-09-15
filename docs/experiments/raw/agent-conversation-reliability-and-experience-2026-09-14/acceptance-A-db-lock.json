@@ -1,0 +1,344 @@
+[
+  {
+    "t": "2026-09-14T20:11:35.936",
+    "event": "attempt1:request_sent",
+    "since_start_s": 0.0
+  },
+  {
+    "t": "2026-09-14T20:11:35.943",
+    "event": "attempt1:http_status",
+    "data": 200,
+    "since_start_s": 0.008
+  },
+  {
+    "t": "2026-09-14T20:12:06.967",
+    "event": "attempt1:done",
+    "data": {
+      "session_id": "",
+      "resolved_symbol": null,
+      "grounded": false,
+      "verify_note": "准备阶段失败：database is locked"
+    },
+    "since_start_s": 31.031
+  },
+  {
+    "t": "2026-09-14T20:12:10.314",
+    "event": "lock_released_retry_next"
+  },
+  {
+    "t": "2026-09-14T20:12:10.315",
+    "event": "attempt2:request_sent",
+    "since_start_s": 0.0
+  },
+  {
+    "t": "2026-09-14T20:12:10.319",
+    "event": "attempt2:http_status",
+    "data": 200,
+    "since_start_s": 0.004
+  },
+  {
+    "t": "2026-09-14T20:12:10.327",
+    "event": "attempt2:stage",
+    "data": {
+      "key": "resolve",
+      "text": "识别标的与意图"
+    },
+    "since_start_s": 0.013
+  },
+  {
+    "t": "2026-09-14T20:12:10.333",
+    "event": "attempt2:stage",
+    "data": {
+      "key": "fetch",
+      "text": "拉取 510300.SS 行情（首次约 1 分钟）"
+    },
+    "since_start_s": 0.018
+  },
+  {
+    "t": "2026-09-14T20:12:10.405",
+    "event": "attempt2:stage",
+    "data": {
+      "key": "context",
+      "text": "组装技术材料与监督状态"
+    },
+    "since_start_s": 0.091
+  },
+  {
+    "t": "2026-09-14T20:12:22.097",
+    "event": "attempt2:prepared",
+    "data": {
+      "session_id": "sess_42f5172eba3e",
+      "resolved_symbol": "510300.SS",
+      "quick_card": {
+        "symbol": "510300.SS",
+        "display_name": "510300.SS",
+        "as_of": "2026-09-04",
+        "close": 4.616,
+        "color_cn": "黑色",
+        "stage_cn": "关键风险",
+        "risk_cn": "有效顶部+黑色",
+        "levels": [
+          {
+            "role": "下方关键位",
+            "price": 4.587,
+            "kind": "below",
+            "dist_pct": 0.63,
+            "from_cn": "顶部结构"
+          },
+          {
+            "role": "下方关键位",
+            "price": 4.553,
+            "kind": "below",
+            "dist_pct": 1.38,
+            "from_cn": "更高低点底部"
+          },
+          {
+            "role": "上方阻力",
+            "price": 4.777,
+            "kind": "above",
+            "dist_pct": 3.37,
+            "from_cn": "顶部结构"
+          }
+        ],
+        "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+      },
+      "evidence_card": {
+        "facts": {
+          "symbol": "510300.SS",
+          "as_of": "2026-09-04",
+          "verdict_cn": "当前无机会",
+          "buy_point_candidate_n": 0
+        },
+        "history_and_scope": {
+          "winrate_evidence": {
+            "schema_version": "provenance/1.2",
+            "id": "module_winrate:510300.SS",
+            "source_path": "docs/experiments/module_winrate.json",
+            "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+            "source_version": "1",
+            "status": "unverified",
+            "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+            "statistic_kind": "trade_r_stats",
+            "strategy_scope": [
+              "technical_execution"
+            ],
+            "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+            "compatibility": "unknown",
+            "evidence_id": "module_winrate:510300.SS",
+            "source": "docs/experiments/module_winrate.json",
+            "strategies": [
+              "technical_execution"
+            ],
+            "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+          },
+          "comparison_config": {
+            "symbol": "510300.SS",
+            "module": {
+              "value": "A",
+              "source": "engine_default"
+            },
+            "exit_variant": {
+              "value": "a6_1_costbasis",
+              "source": "engine_default"
+            },
+            "entry_variant": {
+              "value": null,
+              "source": "engine_default"
+            },
+            "rr_min": {
+              "value": 3.0,
+              "source": "engine_default"
+            },
+            "fee_label": {
+              "value": "standard",
+              "source": "engine_default"
+            },
+            "ruleset_sha256": {
+              "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+              "source": "current_active_ledger"
+            },
+            "window": null,
+            "window_state": "unverified",
+            "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+          },
+          "matched_runs": [],
+          "supporting_runs": [],
+          "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+        },
+        "explanations": {
+          "kinds": [
+            "news",
+            "major_events",
+            "sentiment",
+            "experience"
+          ],
+          "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+        },
+        "pending_conditions": []
+      },
+      "next_steps": [
+        {
+          "kind": "expand_evidence",
+          "label_cn": "查看依据详情"
+        },
+        {
+          "kind": "prepare_backtest",
+          "label_cn": "准备补测",
+          "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+        }
+      ]
+    },
+    "since_start_s": 11.782
+  },
+  {
+    "t": "2026-09-14T20:12:22.101",
+    "event": "attempt2:stage",
+    "data": {
+      "key": "llm",
+      "text": "AI 组织语言（逐字输出）"
+    },
+    "since_start_s": 11.786
+  },
+  {
+    "t": "2026-09-14T20:12:22.105",
+    "event": "attempt2:done",
+    "data": {
+      "session_id": "sess_42f5172eba3e",
+      "resolved_symbol": "510300.SS",
+      "grounded": false,
+      "question_id": 1,
+      "evidence_card": {
+        "facts": {
+          "symbol": "510300.SS",
+          "as_of": "2026-09-04",
+          "verdict_cn": "当前无机会",
+          "buy_point_candidate_n": 0
+        },
+        "history_and_scope": {
+          "winrate_evidence": {
+            "schema_version": "provenance/1.2",
+            "id": "module_winrate:510300.SS",
+            "source_path": "docs/experiments/module_winrate.json",
+            "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+            "source_version": "1",
+            "status": "unverified",
+            "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+            "statistic_kind": "trade_r_stats",
+            "strategy_scope": [
+              "technical_execution"
+            ],
+            "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+            "compatibility": "unknown",
+            "evidence_id": "module_winrate:510300.SS",
+            "source": "docs/experiments/module_winrate.json",
+            "strategies": [
+              "technical_execution"
+            ],
+            "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+          },
+          "comparison_config": {
+            "symbol": "510300.SS",
+            "module": {
+              "value": "A",
+              "source": "engine_default"
+            },
+            "exit_variant": {
+              "value": "a6_1_costbasis",
+              "source": "engine_default"
+            },
+            "entry_variant": {
+              "value": null,
+              "source": "engine_default"
+            },
+            "rr_min": {
+              "value": 3.0,
+              "source": "engine_default"
+            },
+            "fee_label": {
+              "value": "standard",
+              "source": "engine_default"
+            },
+            "ruleset_sha256": {
+              "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+              "source": "current_active_ledger"
+            },
+            "window": null,
+            "window_state": "unverified",
+            "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+          },
+          "matched_runs": [],
+          "supporting_runs": [],
+          "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+        },
+        "explanations": {
+          "kinds": [
+            "news",
+            "major_events",
+            "sentiment",
+            "experience"
+          ],
+          "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+        },
+        "pending_conditions": []
+      },
+      "plan_artifact": null,
+      "answer_state": "answered",
+      "next_steps": [
+        {
+          "kind": "expand_evidence",
+          "label_cn": "查看依据详情"
+        },
+        {
+          "kind": "prepare_backtest",
+          "label_cn": "准备补测",
+          "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+        }
+      ],
+      "fallback": "510300.SS（510300.SS）：按系统数据，现在不构成可执行的入场计划——按规则本轮不适合讨论开新仓。\n系统给出的原因是：1.无法明确当前趋势类型、7.多周期杂乱。\n注意：AI 讲解暂时不可用。以下是系统按 2026-09-04 数据直接给出的事实——今天是 2026-09-14，这是过去的数据，不能直接代表今天；先用最新数据核实再谈下一步。\n系统状态：黑色 / 关键风险 / 风险关注 有效顶部+黑色。\n参考：成交最密集的价位在 4.9087（筹码分布代理，不是真实持仓成本）。\n历史依据：现在不能给这次判断附上可靠的胜率——现有记录不足以核实是否是同一种做法（明细见下方依据卡）。\n接下来可以先核实这个标的的最新数据；想继续讨论的话，说一个你关心的条件或价位，系统有对应事实时再展开。",
+      "quick_card": {
+        "symbol": "510300.SS",
+        "display_name": "510300.SS",
+        "as_of": "2026-09-04",
+        "close": 4.616,
+        "color_cn": "黑色",
+        "stage_cn": "关键风险",
+        "risk_cn": "有效顶部+黑色",
+        "levels": [
+          {
+            "role": "下方关键位",
+            "price": 4.587,
+            "kind": "below",
+            "dist_pct": 0.63,
+            "from_cn": "顶部结构"
+          },
+          {
+            "role": "下方关键位",
+            "price": 4.553,
+            "kind": "below",
+            "dist_pct": 1.38,
+            "from_cn": "更高低点底部"
+          },
+          {
+            "role": "上方阻力",
+            "price": 4.777,
+            "kind": "above",
+            "dist_pct": 3.37,
+            "from_cn": "顶部结构"
+          }
+        ],
+        "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+      }
+    },
+    "since_start_s": 11.791
+  },
+  {
+    "t": "2026-09-14T20:12:22.107",
+    "event": "db_counts",
+    "data": {
+      "messages": 2,
+      "sessions": 1,
+      "trade_plans": 0,
+      "fund_trades": 0
+    }
+  }
+]

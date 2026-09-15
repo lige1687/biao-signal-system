@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import re
 import sqlite3
 import uuid
@@ -174,6 +175,43 @@ def _row_to_annotation(row: sqlite3.Row) -> Annotation:
 # ---------------------------------------------------------------- 计划主体
 
 
+def check_finite_positive_price(field: str, value: float | None) -> float | None:
+    """价格字段共享校验（store / API / 模型层同一口径，2026-09-08 总控决定 1）。
+
+    None = 信息不全：草稿允许，是否必填由各确认流程决定（技术 entry 的
+    失效价必填，持仓盯盘不适用）。提供值必须是有限正数——
+    bool / NaN / Inf / 零 / 负数一律 ValueError，不得作为有效价格。
+    """
+    if value is None:
+        return None
+    if (
+        isinstance(value, bool)
+        or not isinstance(value, (int, float))
+        or not math.isfinite(float(value))
+        or float(value) <= 0
+    ):
+        raise ValueError(
+            f"{field} 必须为正的有限数值（缺失请传 null），得到 {value!r}"
+        )
+    return float(value)
+
+
+def validate_entry_confirm_fields(plan: TradePlan) -> None:
+    """技术入场计划确认前的字段级校验（不依赖分析服务，store 与 HTTP 共享）。
+
+    总控决定 1（2026-09-08）：技术 entry 计划确认必须有明确失效价；
+    校验放在计划业务层，API 复用，不依赖 LLM 提示词或 HTTP 表层检查。
+    holding_watch 沿自身要求（至少一个退出触发），不适用本条。
+    """
+    if plan.plan_kind != PLAN_KIND_ENTRY:
+        return
+    if plan.invalidation_price is None:
+        raise ValueError(
+            "技术入场计划必须有明确失效价（invalidation_price），请补全后再确认"
+        )
+    check_finite_positive_price("invalidation_price", plan.invalidation_price)
+
+
 def create_plan(
     conn: sqlite3.Connection,
     *,
@@ -202,10 +240,14 @@ def create_plan(
     watch_signal_rule_ids: tuple[str, ...] | list[str] | None = None,
     plan_id: str | None = None,
     source: str = PLAN_SOURCE_USER,
+    commit: bool = True,
 ) -> TradePlan:
     """创建 draft 计划。draft 阶段允许五项预案/valid_until/reason 为空。"""
     if direction not in ("long", "short"):
         raise ValueError(f"direction 必须为 long/short，得到 {direction}")
+    if plan_kind == PLAN_KIND_ENTRY:
+        # 缺失（None）允许留到确认时校验；提供值非法（NaN/Inf/零/负）当场拒绝
+        check_finite_positive_price("invalidation_price", invalidation_price)
     if plan_kind not in PLAN_KINDS:
         raise ValueError(f"plan_kind 必须为 {PLAN_KINDS} 之一，得到 {plan_kind}")
     if source not in PLAN_SOURCES:
@@ -242,7 +284,10 @@ def create_plan(
         old_value=None, new_value=json.dumps(snapshot, ensure_ascii=False),
         verdict=VERDICT_SNAPSHOT, verdict_reason_cn="创建快照", changed_by="system",
     )
-    conn.commit()
+    if commit:
+        # 03B-R3 S5/S6：对话式保存需要「草稿+绑定+编号」同一事务——
+        # 调用方传 commit=False 自己在事务内提交，避免中途提交留下孤立草稿
+        conn.commit()
     return get_plan(conn, plan_id)  # type: ignore[return-value]
 
 
@@ -261,12 +306,14 @@ def _snapshot_value(field: str, invalidation_price: float | None, thesis_cn: str
 
 
 def confirm_plan(conn: sqlite3.Connection, plan_id: str) -> TradePlan:
-    """draft -> armed。armed 必须五项预案 + reason + valid_until 全部非空。"""
+    """draft -> armed。armed 必须五项预案 + reason + valid_until 全部非空；
+    技术 entry 计划还必须有明确且合法（有限正数）的失效价（04B，2026-09-08）。"""
     plan = get_plan(conn, plan_id)
     if plan is None:
         raise KeyError(f"计划不存在: {plan_id}")
     if plan.state != PLAN_DRAFT:
         raise ValueError(f"只有 draft 可确认，当前 state={plan.state}")
+    validate_entry_confirm_fields(plan)
     missing = [f for f in (PLAYBOOK_FIELDS + ("reason", "valid_until")) if not getattr(plan, f)]
     if missing:
         raise ValueError(f"armed 必填字段为空: {missing}")
@@ -332,6 +379,8 @@ def update_draft(
     }
     if "direction" in safe and safe["direction"] not in ("long", "short"):
         raise ValueError(f"direction 必须为 long/short，得到 {safe['direction']}")
+    if safe.get("invalidation_price") is not None:
+        check_finite_positive_price("invalidation_price", safe["invalidation_price"])
     if "watch_signal_rule_ids" in safe:
         ids = safe["watch_signal_rule_ids"]
         safe["watch_signal_rule_ids"] = _join_rule_ids(
@@ -709,6 +758,7 @@ def update_action_item(
 __all__ = [
     "add_annotation",
     "append_revision",
+    "check_finite_positive_price",
     "confirm_holding_watch",
     "confirm_plan",
     "count_open_action_items",
@@ -726,4 +776,5 @@ __all__ = [
     "transition_state",
     "update_action_item",
     "upsert_action_item",
+    "validate_entry_confirm_fields",
 ]

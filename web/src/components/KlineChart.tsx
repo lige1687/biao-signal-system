@@ -1,3 +1,4 @@
+import { priceAxisBounds } from "./agent/priceLinks";
 import * as echarts from "echarts/core";
 import { BarChart, CandlestickChart, CustomChart, LineChart } from "echarts/charts";
 import {
@@ -89,7 +90,7 @@ export const MA_META: {
 ];
 
 /** K 线着色模式。 */
-export type ColorMode = "red_green" | "lei_state";
+export type ColorMode = "red_green" | "biao_state";
 
 /** 筹码峰计算口径。 */
 export type ChipMode = "full" | "decay";
@@ -132,7 +133,7 @@ export interface ChartDisplay {
   /**
    * K 线周期：日（默认，后端原始数据）/ 周 / 月。
    * 周月由前端聚合日线得到，**只是展示视图**：所有日线口径的判定
-   * （LEI 三色、结构标记、参考线、MACD 事件、关键性波动）在聚合视图下
+   * （BIAO 三色、结构标记、参考线、MACD 事件、关键性波动）在聚合视图下
    * 一律隐藏，见 effectiveDisplay。
    */
   timeframe: Timeframe;
@@ -187,7 +188,7 @@ export const DEFAULT_DISPLAY: ChartDisplay = {
   chipDist: true, // 默认开筹码峰（CYQ）
   chipMode: "full", // 默认全历史口径（维持原行为：纯累计、不衰减）
   macd: true, // 默认开 MACD 副图
-  colorMode: "lei_state", // 默认 LEI 黑绿灰着色（颜色=当日状态）
+  colorMode: "biao_state", // 默认 BIAO 黑绿灰着色（颜色=当日状态）
   timeframe: "D", // 默认日线；用户选择由 ChartControls 持久化到 localStorage
   marksScope: "alive", // 默认仅存活结构：失效标记是看盘噪音，研究时再切「全部」
 };
@@ -200,7 +201,7 @@ export interface HighlightPriceLine {
   price: number;
   label: string; // 如「买点① 关键价」「止损」
   color: string;
-  kind: "entry" | "stop" | "target"; // 决定线型
+  kind: "entry" | "stop" | "target" | "reference"; // 决定线型
 }
 
 export interface HighlightSpec {
@@ -211,6 +212,8 @@ export interface HighlightSpec {
   structureIds: string[];
   /** true = 其余标记/均线调暗，突出高亮项。 */
   dimOthers: boolean;
+  /** Agent 定位时把参考线纳入纵轴显示范围；默认沿用原来的缩放。 */
+  ensureVisible?: boolean;
 }
 
 interface Props {
@@ -489,7 +492,7 @@ export default function KlineChart({ payload, display, onPick, onDownload, highl
       {!isDaily && (
         <div className="chip-legend tf-note">
           <span className="chip-leg-item">
-            {timeframeLabel(tf)}线为日线聚合视图，LEI 信号与结构标记仅日线模式可用
+            {timeframeLabel(tf)}线为日线聚合视图，BIAO 信号与结构标记仅日线模式可用
             （开/收取区间首末日、高/低取区间极值、量为区间求和；均线在聚合数据上重算，
             MACD 副图与关键性波动不显示）
           </span>
@@ -803,7 +806,7 @@ function buildKlineOption(
       // 3) 买点价位线（关键价/止损/目标）：加粗亮线 + 起点标签 + 可点把手
       for (const pl of hl.priceLines) {
         const lineType =
-          pl.kind === "entry" ? "solid" : pl.kind === "stop" ? "dashed" : "dotted";
+          pl.kind === "entry" || pl.kind === "reference" ? "solid" : pl.kind === "stop" ? "dashed" : "dotted";
         const isEntry = pl.kind === "entry";
         markLineData.push({
           yAxis: pl.price,
@@ -825,7 +828,7 @@ function buildKlineOption(
             borderRadius: 3,
             fontSize: 11,
             fontWeight: 700,
-            formatter: `${pl.label} ${pl.price.toFixed(2)}`,
+            formatter: `${pl.label} ${pl.price}`,
           },
         });
         if (lastDate) {
@@ -842,14 +845,14 @@ function buildKlineOption(
               color: pl.color,
               fontSize: 11,
               fontWeight: 700,
-              formatter: `${pl.label} ${pl.price.toFixed(2)}`,
+              formatter: `${pl.label} ${pl.price}`,
               backgroundColor: "rgba(255,255,255,0.95)",
               padding: [1, 4],
               borderRadius: 3,
             },
             pick: { kind: "highlight_price", level: pl.price, annoId: pl.annoId },
             tooltip: {
-              formatter: `${pl.label} ${pl.price.toFixed(2)}<br/>点击高亮对应买点`,
+              formatter: `${pl.label.replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]!))} ${pl.price}<br/>系统参考价位`,
             },
           });
         }
@@ -858,14 +861,14 @@ function buildKlineOption(
 
     // ---- K 线着色 ----
     // red_green：中国惯例红涨绿跌，看涨跌用。
-    // lei_state：按当日 LEI 三色（绿/灰/黑）着色，看信号状态段落用。
+    // biao_state：按当日 BIAO 三色（绿/灰/黑）着色，看信号状态段落用。
     //            此模式**不**用空心/实心区分涨跌——颜色只表达「当日状态」，
     //            涨跌方向需另看今日概述里的"开/高/低/收"四项，混在 K 线里
     //            会让本就低调的黑灰绿更看不清。
-    const isLei = display.colorMode === "lei_state";
-    const ohlcSeriesData = isLei
+    const isBiao = display.colorMode === "biao_state";
+    const ohlcSeriesData = isBiao
       ? d.ohlc.map((bar, i) => {
-          // LEI 模式：颜色只表达「当日状态（绿/灰/黑）」，
+          // BIAO 模式：颜色只表达「当日状态（绿/灰/黑）」，
           // 实体统一实心 + 较细的同色描边；不再用空心表示涨跌，
           // 否则「黑」色 K 线的空心几乎看不见。
           const state = d.states[i] ?? "unknown";
@@ -1366,6 +1369,10 @@ function buildKlineOption(
         yAxis: [
           {
             scale: true,
+            ...(hl?.ensureVisible ? {
+              min: (extent: {min:number;max:number}) => priceAxisBounds(extent.min,extent.max,hl.priceLines.map(p=>p.price))?.min ?? extent.min,
+              max: (extent: {min:number;max:number}) => priceAxisBounds(extent.min,extent.max,hl.priceLines.map(p=>p.price))?.max ?? extent.max,
+            } : {}),
             gridIndex: 0,
             axisLine: { show: false },
             axisLabel: { color: "#7b8494", fontSize: 10 },
@@ -1401,7 +1408,7 @@ function buildKlineOption(
             data: ohlcSeriesData,
             xAxisIndex: 0,
             yAxisIndex: 0,
-            itemStyle: isLei
+            itemStyle: isBiao
               ? undefined
               : { color: up, color0: down, borderColor: up, borderColor0: down },
             markLine: { silent: true, symbol: "none", data: markLineData },
