@@ -1,0 +1,41 @@
+{
+  "cursor_write": {
+    "transaction_open": true,
+    "tracked": [
+      {
+        "site": "__main__:35 <module>",
+        "thread": "MainThread",
+        "state": "write_lock",
+        "db": "/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/tmpfke65z2o/tx.db",
+        "held_ms": 0
+      }
+    ],
+    "ok": true
+  },
+  "deferred_begin_without_write": {
+    "tracked": [
+      {
+        "site": "__main__:46 <module>",
+        "thread": "MainThread",
+        "state": "tx_open_no_write",
+        "db": "/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/tmpfke65z2o/tx.db",
+        "held_ms": 0
+      }
+    ],
+    "ok": true
+  },
+  "failed_waiter_registered_as_writer": {
+    "error": "database is locked",
+    "tracked": [],
+    "ok": true
+  },
+  "commit_failure": {
+    "transaction_still_open": false,
+    "uncommitted_rows": 0
+  },
+  "commit_failure_native": {
+    "transaction_still_open": false,
+    "uncommitted_rows": 0
+  },
+  "commit_failure_matches_native": true
+}

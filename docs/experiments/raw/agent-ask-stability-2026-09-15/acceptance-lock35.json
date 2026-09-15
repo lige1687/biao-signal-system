@@ -4,7 +4,7 @@
   "first_event_received_fast": {
    "ok": true,
    "detail": {
-    "t": 0.06,
+    "t": 0.04,
     "event": "stage",
     "key": "received",
     "text": "已收到问题，正在登记请求",
@@ -14,7 +14,7 @@
   },
   "waiting_heartbeats_during_hold": {
    "ok": true,
-   "detail": "6 heartbeats, first at 5.070048499997938s"
+   "detail": "6 heartbeats, first at 5.05739345800248s"
   },
   "waiting_not_described_as_ai": {
    "ok": true,
@@ -22,7 +22,7 @@
   },
   "fails_after_busy_timeout_before_release": {
    "ok": true,
-   "detail": 31.911114499991527
+   "detail": 32.05318387501757
   },
   "failed_done_truthful_and_retryable": {
    "ok": true,
@@ -59,10 +59,10 @@
  },
  "failures": 0,
  "lock35": {
-  "waited_total_s": 31.91,
+  "waited_total_s": 32.06,
   "timeline": [
    {
-    "t": 0.06,
+    "t": 0.04,
     "event": "stage",
     "key": "received",
     "text": "已收到问题，正在登记请求",
@@ -70,7 +70,7 @@
     "retryable": null
    },
    {
-    "t": 5.07,
+    "t": 5.06,
     "event": "stage",
     "key": "waiting",
     "text": "等待系统处理：正在登记请求（数据库繁忙时需排队，已等待 5 秒）",
@@ -78,7 +78,7 @@
     "retryable": null
    },
    {
-    "t": 10.08,
+    "t": 10.07,
     "event": "stage",
     "key": "waiting",
     "text": "等待系统处理：正在登记请求（数据库繁忙时需排队，已等待 10 秒）",
@@ -86,7 +86,7 @@
     "retryable": null
    },
    {
-    "t": 15.09,
+    "t": 15.08,
     "event": "stage",
     "key": "waiting",
     "text": "等待系统处理：正在登记请求（数据库繁忙时需排队，已等待 15 秒）",
@@ -118,7 +118,7 @@
     "retryable": null
    },
    {
-    "t": 31.91,
+    "t": 32.05,
     "event": "done",
     "key": null,
     "text": "准备阶段失败：系统数据库正被后台任务占用，等待后仍不可用（database is locked）。你的问题已保留——可点「重试」继续，不会重复记录。",
@@ -131,31 +131,31 @@
    "retryable": true,
    "verify_note": "准备阶段失败：系统数据库正被后台任务占用，等待后仍不可用（database is locked）。你的问题已保留——可点「重试」继续，不会重复记录。",
    "timing_ms": {
-    "total_ms": 31851,
+    "total_ms": 32009,
     "marks_ms": {
      "received": 0,
-     "failed": 31851
+     "failed": 32009
     },
     "spans_ms": {}
    }
   }
  },
  "retry_after_release": {
-  "seconds": 12.47,
+  "seconds": 11.4,
   "answer_state": "answered",
   "timing_ms": {
-   "total_ms": 12441,
+   "total_ms": 11380,
    "marks_ms": {
     "received": 0,
-    "identity": 21,
-    "prep_resolve": 10750,
-    "prep_global_material": 12409,
-    "prep_done": 12409,
-    "prepared": 12409,
-    "material_sent": 12410,
-    "question_saved": 12440,
-    "llm_end": 12440,
-    "answer_saved": 12441
+    "identity": 4,
+    "prep_resolve": 10048,
+    "prep_global_material": 11344,
+    "prep_done": 11345,
+    "prepared": 11345,
+    "material_sent": 11345,
+    "question_saved": 11379,
+    "llm_end": 11379,
+    "answer_saved": 11380
    },
    "spans_ms": {}
   }
@@ -163,18 +163,18 @@
  "cold_vs_replay": {
   "cold_seconds": 0.45,
   "cold_timing_ms": {
-   "total_ms": 430,
+   "total_ms": 434,
    "marks_ms": {
     "received": 0,
     "identity": 1,
     "prep_resolve": 10,
-    "prep_global_material": 423,
-    "prep_done": 423,
-    "prepared": 423,
-    "material_sent": 423,
-    "question_saved": 429,
-    "llm_end": 429,
-    "answer_saved": 430
+    "prep_global_material": 430,
+    "prep_done": 430,
+    "prepared": 431,
+    "material_sent": 431,
+    "question_saved": 433,
+    "llm_end": 433,
+    "answer_saved": 434
    },
    "spans_ms": {}
   },
