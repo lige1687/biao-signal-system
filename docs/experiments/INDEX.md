@@ -28,6 +28,8 @@
 
 ## 1. 任务编号总账（任务书 → 执行归档）
 
+- [提问提速与等待反馈主控复验（固定补修单）](controller-ask-stability-review-2026-09-15.md)：提速保留，三组缺口待修，暂不合入。
+
 - AGENT-NAMES-MAIN：[名称、板块识别与主分支收口](agent-subject-names-and-main-2026-09-15.md) — 名称加代码，板块不替换成ETF；已采用Agent改动集中至本地main。
 - AGENT-ASK-STABILITY：[提问稳定性与等待体验](agent-ask-stability-and-waiting-2026-09-15.md) — 提交即回执、排队如实告知；每问重算12秒的情绪数据已修（重复提问准备12.4s→0.4s）；失败/断连可立即重试；写锁日志能指认进程内持锁任务。
 

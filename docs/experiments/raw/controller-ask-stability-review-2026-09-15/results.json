@@ -1,0 +1,38 @@
+{
+  "cursor_write": {
+    "transaction_open": true,
+    "tracked": []
+  },
+  "deferred_begin_without_write": [
+    {
+      "site": "__main__:26 <module>",
+      "thread": "MainThread",
+      "held_ms": 0,
+      "explicit": true
+    }
+  ],
+  "failed_waiter_registered_as_writer": {
+    "error": "database is locked",
+    "tracked": [
+      {
+        "site": "__main__:33 <module>",
+        "thread": "MainThread",
+        "held_ms": 24,
+        "explicit": false
+      }
+    ]
+  },
+  "commit_failure": {
+    "transaction_still_open": true,
+    "uncommitted_rows": 1
+  },
+  "commit_failure_native": {
+    "transaction_still_open": false,
+    "uncommitted_rows": 0
+  },
+  "close_after_receipt_before_identity": {
+    "received": true,
+    "state_after_worker_finished": "generating",
+    "retry_kind": "incomplete"
+  }
+}
