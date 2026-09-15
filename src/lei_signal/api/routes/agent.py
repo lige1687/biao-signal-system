@@ -367,9 +367,11 @@ def _static_symbol_name(symbol: str, db_name: str | None) -> str:
 
 
 #: 口语别名 → 标的（目录名不含的常用说法）。命中优先级：自选 > 别名 > 目录精确子串。
+#: 主控裁决（2026-09-15）：别名只收**用户明确指定的产品/指数**；
+#: 「科创」「科创板」这类整个板块的泛指不再静默映射到科创50指数——
+#: 板块整体没有唯一可核实对象时，由 resolve 层澄清（科创50 只作可选
+#: 观察参考并明确它不代表整个板块），不用指数顶替板块。
 _CATALOG_ALIAS: dict[str, str] = {
-    "科创": "000688.SS",
-    "科创板": "000688.SS",
     "科创50": "000688.SS",
     "恒生科技": "^HSTECH",
     "中概": "513050.SS",
@@ -392,28 +394,34 @@ _WATCH_NAME_CN: dict[str, str] = {
 def _resolve_symbol_by_catalog(message: str) -> str | None:
     """目录搜索层：自选没命中时，按「目录名完整出现在话里」+ 口语别名解析。
 
-    「白酒板块现在怎么看」→ 目录名「白酒」完整在句中 → TH881273；
-    「科创板块现在怎么看」→ 别名表「科创」→ 000688.SS（科创50）。
+    「白酒板块现在怎么看」→ 板块名「白酒」完整在句中 → TH881273；
+    「科创50指数现在怎么看」→ 别名表「科创50」→ 000688.SS。
     不做模糊公共子串：目录词汇面大（90行业+500概念），2 字模糊串会
     把「市场环境」误配到「环保工程」这类。命中的 symbol 由调用方交给
     分析服务，失败自然回退全局。
+
+    主控裁决（2026-09-15）：用户**明确指定**的对象（板块专名/别名/目录
+    全名）优先于笼统的「板块/版块/行业」关键词——「科创50板块」里的
+    科创50是指数身份，不被板块二字截断；而「科创板块/科创板整体」没有
+    唯一可核实对象 → None（由 resolve 层澄清，不用指数/ETF 顶替板块）。
     """
     from lei_signal.api import catalog as catalog_mod  # noqa: PLC0415
     from lei_signal.api.config import STRATEGY_INDICES, US_ETFS  # noqa: PLC0415
     from lei_signal.api.labels import THS_INDUSTRY_NAMES  # noqa: PLC0415
 
-    from lei_signal.copilot.subjects import named_subject, asks_for_sector
+    from lei_signal.copilot.subjects import named_subject
 
+    # 1) 板块专名（通信板块→BK1215 等，含「板块」二字的真实板块）
     named = named_subject(message)
-    if named or asks_for_sector(message):
+    if named:
         return named
 
-    # 1) 口语别名（最长键优先，防「科创板」被「科创」截胡）
+    # 2) 口语别名（最长键优先；明确对象优先于「板块」关键词）
     for alias in sorted(_CATALOG_ALIAS, key=len, reverse=True):
         if alias in message:
             return _CATALOG_ALIAS[alias]
 
-    # 2) 目录名完整出现在话里（行业/指数/美股ETF/概念）
+    # 3) 目录名完整出现在话里（行业/指数/美股ETF/概念）
     entries: list[tuple[str, str]] = []  # (symbol, name)
     entries += [(f"TH{code}", name) for code, name in THS_INDUSTRY_NAMES.items()]
     entries += [(idx.symbol, idx.display_name) for idx in STRATEGY_INDICES]

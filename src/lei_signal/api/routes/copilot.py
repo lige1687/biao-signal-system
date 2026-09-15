@@ -560,6 +560,12 @@ def _resolve_symbol_with_ambiguity(request: Request, body: ResolveRequest):
     named = named_subject(body.message or "")
     if named:
         return named, "message", []
+    # 主控裁决（2026-09-15）：用户明确指定的对象（别名/目录全名，如
+    # 「科创50板块」里的科创50）优先于笼统的「板块」关键词——先按目录
+    # 层解析，确实没有唯一对象才落「板块问法无对象」的澄清路径。
+    catalog_hit = _resolve_symbol_by_catalog(body.message or "")
+    if catalog_hit:
+        return catalog_hit, "message", []
     if asks_for_sector(body.message or ""):
         return None, "none", []
     if service is not None and not re.search(r"\d{6}", body.message or ""):
@@ -610,6 +616,23 @@ def _resolve_symbol_with_ambiguity(request: Request, body: ResolveRequest):
     return None, "none", []
 
 
+#: 板块泛指 → 可选的指数观察参考（主控裁决 2026-09-15）。
+#: 仅登记有明确产品定义的项；（泛指词, 指数代码, 指数名）。这不是
+#: 「板块→指数」的静默顶替：只在澄清文案里作为可选项给出，并明确
+#: 指数不代表整个板块。
+_SECTOR_AREA_INDEX_REF: tuple[tuple[str, str, str], ...] = (
+    ("科创", "000688.SS", "科创50"),
+)
+
+
+def _sector_area_index_reference(message: str) -> tuple[str, str, str] | None:
+    """消息含板块泛指词时给出可选的指数观察参考；无登记返回 None。"""
+    for area_word, ref_symbol, ref_name in _SECTOR_AREA_INDEX_REF:
+        if area_word in (message or ""):
+            return ref_symbol, ref_name, area_word
+    return None
+
+
 @router.post("/copilot/resolve")
 def copilot_resolve(request: Request, body: ResolveRequest) -> dict:
     """统一入口解析（03B §2）：意图/主题/标的/用途/澄清。
@@ -627,8 +650,26 @@ def copilot_resolve(request: Request, body: ResolveRequest) -> dict:
     symbol, source, ambiguities = _resolve_symbol_with_ambiguity(request, body)
     clarification = list(parsed["need_clarification"])
     if not symbol and asks_for_sector(body.message):
-        clarification.append({"kind": "sector_unknown", "question_cn":
-            "没有找到这个板块，请提供完整板块名称；不会用相近名称的ETF代替。"})
+        # 主控裁决（2026-09-15）：「科创板块/科创板整体」这类泛指没有唯一
+        # 可核实对象——简短澄清，可让用户选择科创50作为观察参考，并明确
+        # 它不代表整个科创板；不得恢复「任意板块→ETF/指数」的静默顶替。
+        area_ref = _sector_area_index_reference(body.message)
+        if area_ref is not None:
+            ref_symbol, ref_name, area_word = area_ref
+            clarification.append({
+                "kind": "sector_ambiguous_index_reference",
+                "question_cn": (
+                    f"「{area_word}」是板块泛指，系统里没有唯一可核实的"
+                    f"对应对象，不能直接给出它的判定。如果你想看的是"
+                    f"{ref_name}（{ref_symbol}），可以把它作为观察参考——"
+                    f"注意它是 50 只成分股组成的指数，不代表整个板块。"
+                    f"要按{ref_name}继续，请直接说「{ref_name}」。"),
+                "reference_symbol": ref_symbol,
+                "reference_name": ref_name,
+            })
+        else:
+            clarification.append({"kind": "sector_unknown", "question_cn":
+                "没有找到这个板块，请提供完整板块名称；不会用相近名称的ETF代替。"})
     if ambiguities:
         clarification.append({
             "kind": "symbol_ambiguous",
