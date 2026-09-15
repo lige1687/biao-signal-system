@@ -193,7 +193,7 @@ function HistoryPanel({ activeId, onPick, onNew, onClose, disabled }: { onClose:
   </aside>;
 }
 
-function ChartResource({ resource, onFocus }: { resource: Extract<Resource,{kind:"chart"}>; onFocus: (focus?:AgentPriceFocus)=>void }) {
+function ChartResource({ resource, displayName, onFocus }: { displayName?: string | null; resource: Extract<Resource,{kind:"chart"}>; onFocus: (focus?:AgentPriceFocus)=>void }) {
   const [colorMode, setColorMode] = useState(DEFAULT_DISPLAY.colorMode);
   const detail = useQuery({queryKey:["detail",resource.symbol],queryFn:()=>api.detail(resource.symbol),staleTime:60_000});
   const c = detail.data;
@@ -204,7 +204,7 @@ function ChartResource({ resource, onFocus }: { resource: Extract<Resource,{kind
     structureIds: [], dimOthers: false, ensureVisible: true,
   } : undefined;
   return <div className="ar-chart-resource">
-    <header><div><strong>{c?.display_name ?? resource.symbol}</strong><span>{resource.symbol}</span></div>
+    <header><div><strong>{subjectLabel(resource.symbol, displayName || c?.display_name)}</strong></div>
       <Link to={`/?symbol=${encodeURIComponent(resource.symbol)}`} className="cp-link">打开看盘页 ↗</Link></header>
     {c && <div className="ar-chart-status"><ColorBadge color={c.assessment.color} colorCn={c.assessment.color_cn} descriptive /><span>数据日期 {c.meta.last_bar_date ?? c.meta.data_time ?? "未提供"}</span></div>}
     {focus && <section className="ar-chart-focus" aria-label="当前定位价位">
@@ -491,7 +491,7 @@ export default function AgentWorkspacePage() {
       </main>
       {resource && <aside className="ar-resource" aria-label="资料区"><header className="ar-resource-head"><strong>研究资料</strong><div><button className={pinned?"selected":""} onClick={()=>setPinned(v=>!v)} aria-pressed={pinned}>{pinned?"已固定":"固定"}</button><button onClick={()=>setWideResource(v=>!v)}>{wideResource?"还原":"放大"}</button><button onClick={()=>setResource(null)} aria-label="关闭资料区">×</button></div></header>
         <div className="ar-resource-tabs">{(chartSelection || symbol) && <button className={resource.kind === "chart"?"selected":""} onClick={()=>chartSelection?setResource(chartSelection):symbol&&inspect(symbol)}>标的图表</button>}{latest && <button className={resource.kind === "result"?"selected":""} onClick={()=>setResource({kind:"result",id:latest.id})}>对话结果</button>}<span>{pinned?"保持当前资料":"随分析展开"}</span></div>
-        <div className="ar-resource-content">{resource.kind === "chart"?<ChartResource key={resource.symbol} resource={resource} onFocus={focus=>inspect(resource.symbol,focus)}/>:selectedResult?<ResultContext.Provider value={{inspectSymbol:inspect,ask:draft,readOnly:true}}><TurnRow turn={selectedResult} onChart={inspect} onAsk={draft} expanded sessionId={sessionId} onPrepareBacktest={openSetupPanel} onSetupSubmit={submitSetup} onSetupCancel={(id)=>patch(id,{setupPanel:null})} onRetryIncomplete={retryIncomplete} /></ResultContext.Provider>:<p className="ar-footnote">选择一条回复查看详情。</p>}</div>
+        <div className="ar-resource-content">{resource.kind === "chart"?<ChartResource key={resource.symbol} resource={resource} displayName={[...turns].reverse().find(t=>t.resolved===resource.symbol)?.evidenceCard?.facts?.display_name} onFocus={focus=>inspect(resource.symbol,focus)}/>:selectedResult?<ResultContext.Provider value={{inspectSymbol:inspect,ask:draft,readOnly:true}}><TurnRow turn={selectedResult} onChart={inspect} onAsk={draft} expanded sessionId={sessionId} onPrepareBacktest={openSetupPanel} onSetupSubmit={submitSetup} onSetupCancel={(id)=>patch(id,{setupPanel:null})} onRetryIncomplete={retryIncomplete} /></ResultContext.Provider>:<p className="ar-footnote">选择一条回复查看详情。</p>}</div>
       </aside>}
     </div>
   </ResultContext.Provider>;

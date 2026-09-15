@@ -1,0 +1,32 @@
+....................................................F..                  [100%]
+=================================== FAILURES ===================================
+_ test_run_identifiers_do_not_hide_independent_symbols[\u770bRUN\uff0crun_id=20260909-180000-abcdef-expected2] _
+
+message = '看RUN，run_id=20260909-180000-abcdef', expected = ['RUN']
+
+    @pytest.mark.parametrize('message, expected', [
+        ('看518880，run_id=20260909-180000-518880', ['518880.SS']),
+        ('run_id=20260909-180000-518880，另外看518880', ['518880.SS']),
+        ('看RUN，run_id=20260909-180000-abcdef', ['RUN']),
+        ('run_id=20260909-180000-abcdef 和 20260909-190000-600000', []),
+        ('看518880与600000，run_id=20260909-180000-600000',
+         ['518880.SS', '600000.SS']),
+    ])
+    def test_run_identifiers_do_not_hide_independent_symbols(message, expected):
+        probed = []
+    
+        def resolve(token):
+            probed.append(token)
+            return SimpleNamespace(symbol=token + '.SS' if token.isdigit() else token)
+    
+        with patch('lei_signal.data.symbols.resolve_symbol', side_effect=resolve):
+>           assert _symbol_candidates_from_message(message) == expected
+E           AssertionError: assert [] == ['RUN']
+E             
+E             Right contains one more item: 'RUN'
+E             Use -v to get more diff
+
+tests/unit/test_discussion_identifier_spans.py:26: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_discussion_identifier_spans.py::test_run_identifiers_do_not_hide_independent_symbols[\u770bRUN\uff0crun_id=20260909-180000-abcdef-expected2]
+1 failed, 54 passed in 42.40s
