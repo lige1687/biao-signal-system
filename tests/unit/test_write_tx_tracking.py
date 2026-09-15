@@ -46,6 +46,35 @@ def test_connect_returns_tracked_connection(tmp_path):
     conn.close()
 
 
+def test_successful_write_does_not_count_lock_wait_as_hold(tmp_path):
+    db = str(tmp_path / "wait.db")
+    holder = sqlite3.connect(db, check_same_thread=False)
+    holder.execute("CREATE TABLE t(x)")
+    holder.execute("BEGIN IMMEDIATE")
+    conn = _raw(db)
+
+    def release():
+        time.sleep(0.3)
+        holder.commit()
+
+    worker = threading.Thread(target=release)
+    worker.start()
+    try:
+        start = time.perf_counter()
+        conn.execute("INSERT INTO t VALUES(1)")
+        elapsed_ms = (time.perf_counter() - start) * 1000
+        snapshot = active_writers_snapshot(db=db)
+        assert elapsed_ms >= 200
+        assert len(snapshot) == 1
+        assert snapshot[0]["state"] == STATE_WRITE_LOCK
+        assert snapshot[0]["held_ms"] < elapsed_ms / 2
+    finally:
+        conn.rollback()
+        conn.close()
+        worker.join()
+        holder.close()
+
+
 def test_explicit_begin_immediate_registers_write_lock(tmp_path):
     db = str(tmp_path / "t.db")
     conn = connect(db)

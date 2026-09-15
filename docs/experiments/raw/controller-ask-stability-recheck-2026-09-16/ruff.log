@@ -1,0 +1,32 @@
+SIM105 Use `contextlib.suppress(sqlite3.Error)` instead of `try`-`except`-`pass`
+   --> src/lei_signal/storage/write_tx.py:357:13
+    |
+355 |               return super().__exit__(exc_type, exc_val, exc_tb)
+356 |           finally:
+357 | /             try:
+358 | |                 self._sync_tx(
+359 | |                     _caller_site(),
+360 | |                     how="with_exit" if exc_type is None else "with_exit_exc")
+361 | |             except sqlite3.Error:
+362 | |                 pass  # 同步失败不掩盖原生异常
+    | |____________________^
+363 |
+364 |       def close(self) -> None:
+    |
+help: Replace `try`-`except`-`pass` with `with contextlib.suppress(sqlite3.Error): ...`
+
+SIM117 [*] Use a single `with` statement with multiple contexts instead of nested `with` statements
+   --> tests/unit/test_write_tx_tracking.py:196:5
+    |
+194 |       assert conn.execute("SELECT COUNT(*) FROM rule_registry"
+195 |                           " WHERE rule_id='r5'").fetchone()[0] == 1
+196 | /     with pytest.raises(RuntimeError):
+197 | |         with conn:
+    | |__________________^
+198 |               conn.execute("INSERT INTO rule_registry(rule_id, rule_version,"
+199 |                            " provenance) VALUES('r6','v1','test')")
+    |
+help: Combine `with` statements
+
+Found 2 errors.
+[*] 1 fixable with the `--fix` option.

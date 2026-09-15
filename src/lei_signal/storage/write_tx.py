@@ -225,7 +225,8 @@ class TrackedConnection(sqlite3.Connection):
         """按真实事务状态同步登记。
 
         ``wrote=True`` 表示刚有写语句成功：事务从「开着未写」升级为
-        「已取得写锁」，持锁起点近似为该语句开始（``since``）。"""
+        「已取得写锁」，持锁计时从语句成功返回开始（``since``）；
+        语句执行期间无法拆分等待与计算，不计入已确认的持锁时长。"""
         if self.in_transaction:
             with _registry_guard:
                 cur = _registry.get(id(self))
@@ -295,7 +296,7 @@ class TrackedConnection(sqlite3.Connection):
             started = time.perf_counter()
             cur = call(sql, *args)  # 失败（如等锁超时）不登记——等待方不是持锁者
             elapsed_ms = int((time.perf_counter() - started) * 1000)
-            self._sync_tx(site, wrote=True, since=started, how="write")
+            self._sync_tx(site, wrote=True, since=time.perf_counter(), how="write")
             if elapsed_ms >= SLOW_WAIT_MS:
                 # 单条写语句慢：可能是等锁也可能是语句本身耗时，无法区分，如实写
                 logger.info(
