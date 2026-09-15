@@ -75,7 +75,7 @@ def test_small_flow20_first_file_wins_on_overlap(flow_cache):
     # 20 日窗口合计：sum_{i=5..24} (3*i + 30) = 3*sum(5..24) + 20*30
     expected = 3 * sum(range(5, 25)) + 20 * 30
     assert abs(new.iloc[-1] - expected) < 1e-6
-    assert 9999.0 * 3 * 20 != new.iloc[-1]  # history 的重复值没有覆盖 pilot
+    assert new.iloc[-1] != 9999.0 * 3 * 20  # history 的重复值没有覆盖 pilot
 
 
 def test_small_flow20_missing_files_returns_none(tmp_path, monkeypatch):

@@ -70,13 +70,12 @@ def _claim_state(db: str, cid: str = CID) -> str | None:
 
 
 def test_first_event_is_received_and_done_carries_timing(app):
-    with TestClient(app["app"]) as c:
-        with c.stream(
-            "POST", "/api/agent/chat/stream",
-            json={"context_kind": "global", "message": "市场环境怎么样",
-                  "client_request_id": "stab-recv-1"},
-        ) as r:
-            text = "".join(chunk for chunk in r.iter_text())
+    with TestClient(app["app"]) as c, c.stream(
+        "POST", "/api/agent/chat/stream",
+        json={"context_kind": "global", "message": "市场环境怎么样",
+              "client_request_id": "stab-recv-1"},
+    ) as r:
+        text = "".join(chunk for chunk in r.iter_text())
     events = _parse_sse(text)
     assert events[0][0] == "stage"
     assert events[0][1]["key"] == "received"
@@ -109,13 +108,12 @@ def test_lock_hold_shows_waiting_then_succeeds_after_release(app, monkeypatch):
     t.start()
     try:
         started = time.perf_counter()
-        with TestClient(app["app"]) as c:
-            with c.stream(
-                "POST", "/api/agent/chat/stream",
-                json={"context_kind": "global", "message": "市场环境怎么样",
-                      "client_request_id": "stab-lock-7s"},
-            ) as r:
-                text = "".join(chunk for chunk in r.iter_text())
+        with TestClient(app["app"]) as c, c.stream(
+            "POST", "/api/agent/chat/stream",
+            json={"context_kind": "global", "message": "市场环境怎么样",
+                  "client_request_id": "stab-lock-7s"},
+        ) as r:
+            text = "".join(chunk for chunk in r.iter_text())
         elapsed = time.perf_counter() - started
     finally:
         t.join()
@@ -152,13 +150,12 @@ def test_prepare_lock_timeout_fails_retryable_and_releases_claim(app, monkeypatc
         "INSERT INTO rule_registry(rule_id, rule_version, provenance)"
         " VALUES('hold-long','v1','test')")
     try:
-        with TestClient(app["app"]) as c:
-            with c.stream(
-                "POST", "/api/agent/chat/stream",
-                json={"context_kind": "global", "message": "市场环境怎么样",
-                      "client_request_id": CID},
-            ) as r:
-                text = "".join(chunk for chunk in r.iter_text())
+        with TestClient(app["app"]) as c, c.stream(
+            "POST", "/api/agent/chat/stream",
+            json={"context_kind": "global", "message": "市场环境怎么样",
+                  "client_request_id": CID},
+        ) as r:
+            text = "".join(chunk for chunk in r.iter_text())
     finally:
         holder.commit()
         holder.close()
@@ -172,13 +169,12 @@ def test_prepare_lock_timeout_fails_retryable_and_releases_claim(app, monkeypatc
     assert _claim_state(db) is None
 
     # 锁已释放：同 cid 立即重试正常走通（不重复记录）
-    with TestClient(app["app"]) as c:
-        with c.stream(
-            "POST", "/api/agent/chat/stream",
-            json={"context_kind": "global", "message": "市场环境怎么样",
-                  "client_request_id": CID},
-        ) as r:
-            text2 = "".join(chunk for chunk in r.iter_text())
+    with TestClient(app["app"]) as c, c.stream(
+        "POST", "/api/agent/chat/stream",
+        json={"context_kind": "global", "message": "市场环境怎么样",
+              "client_request_id": CID},
+    ) as r:
+        text2 = "".join(chunk for chunk in r.iter_text())
     done2 = next(d for e, d in _parse_sse(text2) if e == "done")
     assert done2.get("answer_state") != "failed"
     conn = sqlite3.connect(db)
@@ -238,13 +234,12 @@ def test_disconnect_releases_claim_and_retry_regenerates(app, monkeypatch):
     assert _claim_state(db=app["db"]) == "pending"
 
     # 同 cid 重试：立即恢复生成（resume），不重复建问题
-    with TestClient(app["app"]) as c:
-        with c.stream(
-            "POST", "/api/agent/chat/stream",
-            json={"context_kind": "global", "message": "市场环境怎么样",
-                  "client_request_id": CID},
-        ) as r:
-            text = "".join(chunk for chunk in r.iter_text())
+    with TestClient(app["app"]) as c, c.stream(
+        "POST", "/api/agent/chat/stream",
+        json={"context_kind": "global", "message": "市场环境怎么样",
+              "client_request_id": CID},
+    ) as r:
+        text = "".join(chunk for chunk in r.iter_text())
     done = next(d for e, d in _parse_sse(text) if e == "done")
     assert done["answer_state"] == "answered"
     assert calls["n"] == 2

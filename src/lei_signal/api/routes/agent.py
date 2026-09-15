@@ -2235,11 +2235,15 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
     next_steps = _build_next_steps(ctx_payload, symbol)
     if next_steps:
         meta["next_steps"] = next_steps
-    with closing(connect(_db_path(request))) as conn:
-        _append_answer(conn, session_id=session_id, question_id=question_id,
-                       content=reply, grounded=grounded, meta=meta,
-                       claim_cid=outcome.claim_cid,
-                       source_request_id=outcome.claim_cid or "")
+    try:
+        with closing(connect(_db_path(request))) as conn:
+            _append_answer(conn, session_id=session_id, question_id=question_id,
+                           content=reply, grounded=grounded, meta=meta,
+                           claim_cid=outcome.claim_cid,
+                           source_request_id=outcome.claim_cid or "")
+    except Exception:
+        _release_claim()  # 保存失败不把 claim 卡在 generating（重试可立即恢复）
+        raise
     timing.mark("answer_saved")
     logger.info(
         "agent_ask_timing mode=plain session=%s symbol=%s %s",

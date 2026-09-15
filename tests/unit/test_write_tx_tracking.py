@@ -16,7 +16,6 @@ import time
 
 import pytest
 
-from lei_signal.storage import write_tx
 from lei_signal.storage.sqlite_store import connect
 from lei_signal.storage.write_tx import (
     TrackedConnection,
@@ -83,10 +82,11 @@ def test_lock_failure_log_identifies_holder(tmp_path, caplog):
     # 等待方把 busy_timeout 压到 100ms，避免测试真的等 30 秒
     waiter = sqlite3.connect(db, timeout=0.1, factory=TrackedConnection)
     waiter.row_factory = sqlite3.Row
-    with caplog.at_level(logging.WARNING, logger="lei_signal.storage.write_tx"):
-        with pytest.raises(sqlite3.OperationalError, match="locked"):
-            waiter.execute("BEGIN IMMEDIATE")
-    conn_sql = "SELECT 1"  # noqa: F841  占位：确认等待方之后仍可用
+    with (
+        caplog.at_level(logging.WARNING, logger="lei_signal.storage.write_tx"),
+        pytest.raises(sqlite3.OperationalError, match="locked"),
+    ):
+        waiter.execute("BEGIN IMMEDIATE")
     holder.commit()
     waiter.execute("SELECT 1").fetchone()
     holder.close()
