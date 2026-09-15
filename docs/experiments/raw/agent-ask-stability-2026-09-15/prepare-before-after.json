@@ -1,0 +1,33 @@
+{
+  "note": "准备段修前/修后实测（同一台机器、同一条全局问题『市场环境怎么样』、临时业务库、无模型 fallback 路径）。修前=main@90df76b6，修后=agent-ask-stability-20260915 分支。所有数字来自服务端 done 事件的 timing_ms 与直接函数计时，未发任何模型请求。",
+  "full_request_global_question": {
+    "before": {
+      "total_ms": 23272,
+      "marks_ms": {"received": 0, "identity": 2, "prep_resolve": 11089, "prep_global_material": 23240, "prep_done": 23240, "prepared": 23241, "material_sent": 23241, "question_saved": 23271, "llm_end": 23271, "answer_saved": 23272},
+      "comment": "resolve 段 11.1s = 目录数据一次性加载（每进程仅首次）；global_material 段 12.15s = cn_mood 每次全量重算"
+    },
+    "after_first_in_process": {
+      "total_ms": 11303,
+      "marks_ms": {"received": 0, "identity": 2, "prep_resolve": 9715, "prep_global_material": 11269, "prep_done": 11270, "prepared": 11270, "material_sent": 11270, "question_saved": 11302, "llm_end": 11302, "answer_saved": 11303},
+      "comment": "仍含目录一次性加载 9.7s（每进程仅首次，未在本轮处理）；global_material 段降到 1.55s（margin 首抓 + 向量化 small_flow）"
+    },
+    "after_repeat": {
+      "total_ms": 413,
+      "marks_ms": {"received": 0, "identity": 1, "prep_resolve": 9, "prep_global_material": 409, "prep_done": 409, "prepared": 409, "material_sent": 409, "question_saved": 411, "llm_end": 411, "answer_saved": 413},
+      "comment": "重复提问：修前同场景约 12.4s（cn_mood 每次都重算 12.0s），修后 0.41s，约 30 倍"
+    }
+  },
+  "hot_spot_components_real_data": {
+    "cn_mood": {"before_1": 12.15, "before_2": 12.01, "after_1": 1.23, "after_2": 0.31, "unit": "seconds", "state_unchanged": "冷"},
+    "_cn_small_flow20": {"before": 10.90, "after": 0.14, "unit": "seconds", "equivalence": "真实缓存文件 A/B：差 ≤1e-11 浮点序噪声，下游取整后完全一致；合并语义（同一 (date,code) 先出现者为准）单测锁定"},
+    "_margin_chg20_fetch": {"before": 0.99, "after_first": 0.99, "after_repeat": 0.0, "unit": "seconds", "mechanism": "fetch_margin_history 进程内 TTL 记忆化（900s，失败不缓存）"},
+    "margin_regime_cn": {"before_1": 0.95, "before_2": 0.37, "after_1": 0.30, "after_2": 0.0, "unit": "seconds"},
+    "symbol_path_blocks": {"build_review": 0.09, "fit_advice": 0.00, "experience_for_symbol": 0.00, "winrate_for": 0.00, "unit": "seconds", "comment": "标的讨论路径的其余材料块实测都很便宜，不设第二套缓存"}
+  },
+  "lifecycle_batch_negative_result": {
+    "claim_checked": "历史注释称 analyze 持久化 event_lifecycle_snapshots 写事务可超 5s（connect 注释，源自一次撞锁推断）",
+    "experiment": "合成生产量级库（60 万 signal_events / 100 万 lifecycle 快照，226MB），2500 事件：逐行(旧) vs 批量(IN+executemany)",
+    "result_ms": {"row_wise_old": 73, "batched_new": 78, "empty_db_2000_events": {"old": 13, "new": 12}},
+    "conclusion": "批量化没有可测收益（0.9-1.1x，噪声内）——该写事务不是语句数瓶颈；历史『5 秒』更可能是写锁排队等待（busy_timeout 队列），而非持锁计算。批量改动已回退，不交付无证据收益的变更。锁等待由 write_tx 的 slow_wait/lock_failed 日志直接在运行中指认。"
+  }
+}

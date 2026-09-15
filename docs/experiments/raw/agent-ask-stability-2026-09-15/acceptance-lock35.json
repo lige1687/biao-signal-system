@@ -1,0 +1,193 @@
+{
+ "hold_seconds": 35,
+ "checks": {
+  "first_event_received_fast": {
+   "ok": true,
+   "detail": {
+    "t": 0.06,
+    "event": "stage",
+    "key": "received",
+    "text": "已收到问题，正在登记请求",
+    "answer_state": null,
+    "retryable": null
+   }
+  },
+  "waiting_heartbeats_during_hold": {
+   "ok": true,
+   "detail": "6 heartbeats, first at 5.070048499997938s"
+  },
+  "waiting_not_described_as_ai": {
+   "ok": true,
+   "detail": "no AI wording in waiting heartbeats"
+  },
+  "fails_after_busy_timeout_before_release": {
+   "ok": true,
+   "detail": 31.911114499991527
+  },
+  "failed_done_truthful_and_retryable": {
+   "ok": true,
+   "detail": {
+    "answer_state": "failed",
+    "retryable": true,
+    "note": "准备阶段失败：系统数据库正被后台任务占用，等待后仍不可用（database is locked）。你的问题已保留——可点"
+   }
+  },
+  "retry_succeeds_after_release": {
+   "ok": true,
+   "detail": "answered"
+  },
+  "no_duplicate_question": {
+   "ok": true,
+   "detail": "user messages=1"
+  },
+  "claim_answered": {
+   "ok": true,
+   "detail": "answered"
+  },
+  "cold_completed": {
+   "ok": true,
+   "detail": "answered"
+  },
+  "replay_is_replay": {
+   "ok": true,
+   "detail": true
+  },
+  "replay_much_faster": {
+   "ok": true,
+   "detail": "cold=0.45s replay=0.02s"
+  }
+ },
+ "failures": 0,
+ "lock35": {
+  "waited_total_s": 31.91,
+  "timeline": [
+   {
+    "t": 0.06,
+    "event": "stage",
+    "key": "received",
+    "text": "已收到问题，正在登记请求",
+    "answer_state": null,
+    "retryable": null
+   },
+   {
+    "t": 5.07,
+    "event": "stage",
+    "key": "waiting",
+    "text": "等待系统处理：正在登记请求（数据库繁忙时需排队，已等待 5 秒）",
+    "answer_state": null,
+    "retryable": null
+   },
+   {
+    "t": 10.08,
+    "event": "stage",
+    "key": "waiting",
+    "text": "等待系统处理：正在登记请求（数据库繁忙时需排队，已等待 10 秒）",
+    "answer_state": null,
+    "retryable": null
+   },
+   {
+    "t": 15.09,
+    "event": "stage",
+    "key": "waiting",
+    "text": "等待系统处理：正在登记请求（数据库繁忙时需排队，已等待 15 秒）",
+    "answer_state": null,
+    "retryable": null
+   },
+   {
+    "t": 20.09,
+    "event": "stage",
+    "key": "waiting",
+    "text": "等待系统处理：正在登记请求（数据库繁忙时需排队，已等待 20 秒）",
+    "answer_state": null,
+    "retryable": null
+   },
+   {
+    "t": 25.1,
+    "event": "stage",
+    "key": "waiting",
+    "text": "等待系统处理：正在登记请求（数据库繁忙时需排队，已等待 25 秒）",
+    "answer_state": null,
+    "retryable": null
+   },
+   {
+    "t": 30.11,
+    "event": "stage",
+    "key": "waiting",
+    "text": "等待系统处理：正在登记请求（数据库繁忙时需排队，已等待 30 秒）",
+    "answer_state": null,
+    "retryable": null
+   },
+   {
+    "t": 31.91,
+    "event": "done",
+    "key": null,
+    "text": "准备阶段失败：系统数据库正被后台任务占用，等待后仍不可用（database is locked）。你的问题已保留——可点「重试」继续，不会重复记录。",
+    "answer_state": "failed",
+    "retryable": true
+   }
+  ],
+  "done_payload": {
+   "answer_state": "failed",
+   "retryable": true,
+   "verify_note": "准备阶段失败：系统数据库正被后台任务占用，等待后仍不可用（database is locked）。你的问题已保留——可点「重试」继续，不会重复记录。",
+   "timing_ms": {
+    "total_ms": 31851,
+    "marks_ms": {
+     "received": 0,
+     "failed": 31851
+    },
+    "spans_ms": {}
+   }
+  }
+ },
+ "retry_after_release": {
+  "seconds": 12.47,
+  "answer_state": "answered",
+  "timing_ms": {
+   "total_ms": 12441,
+   "marks_ms": {
+    "received": 0,
+    "identity": 21,
+    "prep_resolve": 10750,
+    "prep_global_material": 12409,
+    "prep_done": 12409,
+    "prepared": 12409,
+    "material_sent": 12410,
+    "question_saved": 12440,
+    "llm_end": 12440,
+    "answer_saved": 12441
+   },
+   "spans_ms": {}
+  }
+ },
+ "cold_vs_replay": {
+  "cold_seconds": 0.45,
+  "cold_timing_ms": {
+   "total_ms": 430,
+   "marks_ms": {
+    "received": 0,
+    "identity": 1,
+    "prep_resolve": 10,
+    "prep_global_material": 423,
+    "prep_done": 423,
+    "prepared": 423,
+    "material_sent": 423,
+    "question_saved": 429,
+    "llm_end": 429,
+    "answer_saved": 430
+   },
+   "spans_ms": {}
+  },
+  "replay_seconds": 0.02,
+  "replayed": true,
+  "replay_timing_ms": {
+   "total_ms": 1,
+   "marks_ms": {
+    "received": 0,
+    "identity": 1,
+    "answer_saved": 1
+   },
+   "spans_ms": {}
+  }
+ }
+}

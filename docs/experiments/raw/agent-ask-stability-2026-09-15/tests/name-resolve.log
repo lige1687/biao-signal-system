@@ -1,0 +1,26 @@
+.......F.                                                                [100%]
+=================================== FAILURES ===================================
+______________ test_catalog_layer_resolves_index_not_in_watchlist ______________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1147629d0>
+
+    def test_catalog_layer_resolves_index_not_in_watchlist(monkeypatch):
+        """目录搜索层：自选没有的也能按中文名/别名命中（科创 case）。"""
+        from lei_signal.api.routes import agent as agent_mod
+    
+        monkeypatch.setattr(
+            "lei_signal.api.catalog.concept_boards", lambda **kw: []
+        )
+        # 别名表：科创 → 科创50 指数
+>       assert (
+            agent_mod._resolve_symbol_by_catalog("科创板块现在怎么看")
+            == "000688.SS"
+        )
+E       AssertionError: assert None == '000688.SS'
+E        +  where None = <function _resolve_symbol_by_catalog at 0x11472bba0>('科创板块现在怎么看')
+E        +    where <function _resolve_symbol_by_catalog at 0x11472bba0> = <module 'lei_signal.api.routes.agent' from '/Users/yongbiaoli/lei-agent-main-consolidation-20260915/src/lei_signal/api/routes/agent.py'>._resolve_symbol_by_catalog
+
+tests/unit/test_agent_name_resolve.py:83: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_agent_name_resolve.py::test_catalog_layer_resolves_index_not_in_watchlist
+1 failed, 8 passed in 0.85s
