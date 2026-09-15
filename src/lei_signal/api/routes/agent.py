@@ -1684,6 +1684,7 @@ def _prepare_discussion(
     request: Request, body: AgentChatRequest, on_stage=None,
     session_id: str | None = None,
     resume_question_id: int | None = None,
+    timing=None,
 ) -> tuple[str, list, dict, list, str | None]:
     """agent_chat 与流式版共用的准备段（一个连接内完成）。
 
@@ -1692,7 +1693,12 @@ def _prepare_discussion(
 
     返回 (session_id, history_rows, ctx_payload, alerts, symbol)。
     阶段回调 ``on_stage``（可选）用于流式路径向 UI 报告调用链进度。
+    ``timing``（可选，AskTiming）：分段计时——行情准备、材料组装、叙事块
+    各自耗时进 spans（2026-09-15 agent-ask-stability，回答「准备慢在哪」）。
     """
+    from lei_signal.api.ask_timing import NULL_TIMING  # noqa: PLC0415
+
+    tm = timing if timing is not None else NULL_TIMING
     with closing(connect(_db_path(request))) as conn:
         session = get_session(conn, session_id)
         if session is None:
@@ -1741,6 +1747,7 @@ def _prepare_discussion(
                 subject_source = "session"
         from lei_signal.copilot.subjects import sector_context, asks_for_sector
 
+        tm.mark("prep_resolve")
         sector_payload = sector_context(symbol) if symbol else None
         if sector_payload is not None:
             window_sel = (_read_frozen_window_for_question(conn, resume_question_id)
@@ -1748,11 +1755,13 @@ def _prepare_discussion(
                           _resolve_window_for_question(conn, body, symbol, session_id, body.message))
             if on_stage:
                 on_stage("context", f"读取{sector_payload['display_name']}板块资料")
+            tm.mark("prep_sector")
             return session.session_id, history_rows, sector_payload, [], symbol, window_sel
         if symbol is not None and service is not None and on_stage:
             on_stage("fetch", f"拉取 {symbol} 行情（首次约 1 分钟）")
         if symbol is not None and service is not None:
             entry = service.get(symbol)
+            tm.mark("prep_analysis")
             if entry.result is None:
                 if explicit and subject_source == "selected":
                     raise HTTPException(
@@ -1764,6 +1773,7 @@ def _prepare_discussion(
                     buy_point_review,
                 )
                 review = buy_point_review(request, symbol)
+                tm.mark("prep_review")
                 plans = [
                     p for p in list_plans(conn, symbol=symbol)
                     if p.state in ("armed", "entered")
@@ -1775,6 +1785,7 @@ def _prepare_discussion(
                 ]
                 if on_stage:
                     on_stage("context", "组装技术材料与监督状态")
+                tm.mark("prep_plans")
                 news_brief = None
                 major_events = None
                 try:
@@ -1795,6 +1806,7 @@ def _prepare_discussion(
                 except Exception:  # noqa: BLE001  消息面缺席不阻断技术材料
                     news_brief = None
                     major_events = None
+                tm.mark("prep_news")
                 # 回测经验（叙事层，不参与判定）：该标的池类型的历史结论，
                 # 供 AI 引用「同类信号在这个池上历史成绩如何」。
                 experience_items: list = []
@@ -1814,6 +1826,7 @@ def _prepare_discussion(
                     fit_block = fit_mod.fit_advice(entry.result.frame)
                 except Exception:  # noqa: BLE001
                     fit_block = None
+                tm.mark("prep_extras")  # 经验叙事 + 形态适配
                 # 横向机会：当前标的无系统买点候选时，带出当日扫描表里
                 # 其他 actionable/waiting 标的（用户口径 2026-09-05：聊 A
                 # 没买点时应主动提示 B/C 有观察价值，引导开下一个讨论）。
@@ -1849,6 +1862,7 @@ def _prepare_discussion(
                 )
                 ctx_payload["display_name"] = _static_symbol_name(
                     symbol, ctx_payload.get("display_name")) or "名称待核实"
+                tm.mark("prep_context")
                 if experience_items:
                     ctx_payload["experience"] = {
                         "note_cn": "历史经验叙事层（回测定案报告），不参与技术判定",
@@ -1891,6 +1905,7 @@ def _prepare_discussion(
                         ctx_payload["winrate"] = _w
                 except Exception:  # noqa: BLE001
                     pass
+                tm.mark("prep_sentiment_winrate")  # 情绪信号 + 胜率材料
                 # 03B-R3 T1：本问题窗口选择一次生成（冻结与比较共用同一份）。
                 # 恢复已有问题：用原问题快照冻结的选择，不按当前会话最新历史
                 # 重选（z4）；新问题：对象确定后统一解析一次（u2 显示/冻结一致）。
@@ -1938,6 +1953,7 @@ def _prepare_discussion(
                     ctx_payload["evidence_card"] = card
                 except Exception:  # noqa: BLE001 证据卡缺席不阻断讨论
                     pass
+                tm.mark("prep_evidence")
                 if alternatives:
                     ctx_payload["alternatives"] = alternatives
                 ctx = context_from_result(entry.result)
@@ -1989,12 +2005,14 @@ def _prepare_discussion(
                 ctx_payload["major_events"] = NewsfeedService().major_events_brief()
             except Exception:  # noqa: BLE001
                 ctx_payload["major_events"] = None
+            tm.mark("prep_global_material")  # 全局兜底材料（宽度/两融/情绪/大事）
         # R3（03B-R1）：按主题装载既有适配器数据（DCA/情绪/证据/心态/资金），
         # 两个路径（有标的/全局）都消费；目录说明不代替实际数据。
         from lei_signal.copilot import resolve as resolve_mod
 
         parsed_topic = resolve_mod.parse_request(body.message)["topic"]
         ctx_payload.update(_topic_blocks(parsed_topic, symbol))
+        tm.mark("prep_done")  # 主题块（DCA/情绪/证据/心态/资金）之后准备完成
         # window_sel 已在构建证据卡前统一算好（冻结与比较共用同一份依据）
         return session.session_id, history_rows, ctx_payload, alerts, symbol, window_sel
 
@@ -2089,7 +2107,12 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
             next_steps=p.get("next_steps") or [],
         )
 
+    from lei_signal.api.ask_timing import AskTiming  # noqa: PLC0415
+
+    timing = AskTiming()
+    timing.mark("received")
     outcome = _enter_chat(request, body)
+    timing.mark("identity")
     if outcome.kind == "replay":
         return _reply_from_payload(outcome.replay_reply or {})
     if outcome.kind == "incomplete":
@@ -2098,21 +2121,47 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
         return _reply_from_payload(outcome.incomplete_reply or {})
 
     resume = outcome.kind == "resume"
-    (session_id, history_rows, ctx_payload, alerts, symbol,
-     window_sel) = _prepare_discussion(
-        request, body, session_id=outcome.session_id,
-        resume_question_id=outcome.question_id if resume else None,
-    )
+
+    def _release_claim() -> None:
+        """失败收场时把生成权放回 pending：同身份重试立即恢复（与流式同源）。"""
+        if not outcome.claim_cid:
+            return
+        try:
+            from lei_signal.copilot.chat_identity import (  # noqa: PLC0415
+                release_generation,
+            )
+
+            with closing(connect(_db_path(request))) as conn:
+                release_generation(conn, outcome.claim_cid,
+                                   expected_state_at=outcome.claim_state_at)
+        except Exception:  # noqa: BLE001
+            logger.exception("agent_chat 释放生成权失败")
+
+    try:
+        (session_id, history_rows, ctx_payload, alerts, symbol,
+         window_sel) = _prepare_discussion(
+            request, body, session_id=outcome.session_id,
+            resume_question_id=outcome.question_id if resume else None,
+            timing=timing,
+        )
+    except Exception:
+        _release_claim()  # 准备失败不把 claim 卡在 generating 600 秒
+        raise
+    timing.mark("prepared")
     question_id: int | None = outcome.question_id if resume else None
     if not resume:
         # 03B：先落 user 消息 + discussion_v1 快照（回测绑定需要 question_id）；
         # 并发双发在写事务内收口：输家直接复用赢家的原问题，不产生第二个问题
-        with closing(connect(_db_path(request))) as conn:
-            appended, user_msg, dup = _append_user_for_claim(
-                conn, outcome, body, symbol,
-                review_dump=ctx_payload.get("buy_point_review"),
-                as_of=ctx_payload.get("as_of"), window_sel=window_sel)
-            question_id = user_msg.message_id if user_msg is not None else None
+        try:
+            with closing(connect(_db_path(request))) as conn:
+                appended, user_msg, dup = _append_user_for_claim(
+                    conn, outcome, body, symbol,
+                    review_dump=ctx_payload.get("buy_point_review"),
+                    as_of=ctx_payload.get("as_of"), window_sel=window_sel)
+                question_id = user_msg.message_id if user_msg is not None else None
+        except Exception:
+            _release_claim()
+            raise
         if appended == "duplicate":
             dup = dup or {}
             return AgentChatReply(
@@ -2191,6 +2240,11 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
                        content=reply, grounded=grounded, meta=meta,
                        claim_cid=outcome.claim_cid,
                        source_request_id=outcome.claim_cid or "")
+    timing.mark("answer_saved")
+    logger.info(
+        "agent_ask_timing mode=plain session=%s symbol=%s %s",
+        session_id, symbol or "-",
+        json.dumps(timing.summary(), ensure_ascii=False, sort_keys=True))
     return AgentChatReply(
         session_id=session_id, reply=reply, grounded=grounded,
         trace=trace, resolved_symbol=symbol,
@@ -2385,12 +2439,19 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
 
     from fastapi.responses import StreamingResponse  # noqa: PLC0415
 
+    from lei_signal.api.ask_timing import AskTiming  # noqa: PLC0415
+
     def _sse(event: str, data: dict) -> str:
         return f"event: {event}\ndata: {_json.dumps(data, ensure_ascii=False)}\n\n"
 
     def _generate() -> Iterator[str]:
         import queue as _queue
         import threading as _threading
+
+        # 分段计时（任务书 §一）：收到→身份登记→资料准备→资料展示→
+        # 模型首字→回答保存；汇总进 done 与服务端日志，回答「慢在哪一段」。
+        timing = AskTiming()
+        timing.mark("received")
 
         # 准备段（解析/行情/材料）在后台线程跑，阶段事件经队列实时推给客户端：
         # 用户在等待的第一秒就能看到「识别标的→拉取行情」逐条点亮，而不是
@@ -2413,7 +2474,8 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
                             request, body, on_stage=on_stage,
                             session_id=outcome.session_id,
                             resume_question_id=outcome.question_id
-                            if outcome.kind == "resume" else None),
+                            if outcome.kind == "resume" else None,
+                            timing=timing),
                     ))
             except Exception as exc:  # noqa: BLE001
                 # 可靠性一期（2026-09-14）：准备段失败必须留服务端日志。
@@ -2427,241 +2489,373 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
 
         _threading.Thread(target=_work, daemon=True).start()
 
-        prepared = None
-        outcome = None
-        while True:
+        def _log_timing(mode: str, session_id: str | None,
+                        symbol: str | None) -> None:
+            """单请求分段耗时汇总进服务端日志（不含问题原文/密钥/SQL 参数）。"""
+            summary = timing.summary()
+            logger.info(
+                "agent_ask_timing mode=%s session=%s symbol=%s %s",
+                mode, session_id or "-", symbol or "-",
+                _json.dumps(summary, ensure_ascii=False, sort_keys=True),
+            )
+
+        def _release_claim(out) -> None:
+            """失败/断连收场：把生成权放回 pending，同身份重试可立即恢复
+            （不等 600 秒租约）。CAS 防误伤新主； best-effort，不掩盖主流程。"""
+            if out is None or not getattr(out, "claim_cid", None):
+                return
             try:
-                kind, payload = q.get(timeout=180)
-            except _queue.Empty:
-                logger.warning(
-                    "agent_chat_stream 准备段超时180s（session=%s message=%r）",
-                    body.session_id, body.message[:50],
+                from lei_signal.copilot.chat_identity import (  # noqa: PLC0415
+                    release_generation,
                 )
-                yield _sse("done", {
-                    "session_id": "", "resolved_symbol": None, "grounded": False,
-                    "verify_note": "准备阶段超时（180s），请稍后重试。",
-                })
-                return
-            if kind == "stage":
-                yield _sse("stage", {"key": payload[0], "text": payload[1]})
-            elif kind == "error":
-                yield _sse("done", {
-                    "session_id": "", "resolved_symbol": None, "grounded": False,
-                    "verify_note": f"准备阶段失败：{payload}",
-                })
-                return
-            elif kind == "entered":
-                outcome = payload
-                if outcome.kind == "replay":
-                    p = outcome.replay_reply or {}
-                    yield _sse("token", {"t": p.get("reply") or ""})
-                    yield _sse("done", {
-                        "session_id": p.get("session_id") or outcome.session_id or "",
-                        "resolved_symbol": p.get("resolved_symbol"),
-                        "grounded": bool(p.get("grounded")),
-                        "question_id": p.get("question_id"),
-                        "evidence_card": p.get("evidence_card"),
-                        "plan_artifact": p.get("plan_artifact"),
-                        "answer_state": p.get("answer_state") or "answered",
-                        "next_steps": p.get("next_steps") or [],
-                        "replayed": True,
-                    })
-                    return
-                if outcome.kind == "incomplete":
-                    # S4：未完成明确出口（不复用下一问题/补测卡）
-                    p = outcome.incomplete_reply or {}
-                    yield _sse("token", {"t": p.get("reply") or ""})
-                    yield _sse("done", {
-                        "session_id": p.get("session_id") or outcome.session_id or "",
-                        "resolved_symbol": None,
-                        "grounded": False,
-                        "question_id": p.get("question_id"),
-                        "answer_state": p.get("answer_state") or "pending",
-                        "incomplete": True,
-                    })
-                    return
-            else:
-                prepared = payload
-                break
 
-        (session_id, history_rows, ctx_payload, alerts, symbol,
-         window_sel) = prepared
-        resume = outcome.kind == "resume"
-        question_id: int | None = outcome.question_id if resume else None
-
-        # 可靠性一期（2026-09-14）：系统资料就绪即推送，不等模型。字段与
-        # done 同名同源（不是第二套证据），前端据此先渲染事实卡并提示
-        # 「资料已就绪，AI 解释仍在生成」；done 仍是唯一的最终完成信号。
-        yield _sse("prepared", {
-            "session_id": session_id,
-            "resolved_symbol": symbol,
-            "quick_card": _quick_card(ctx_payload, symbol),
-            "evidence_card": ctx_payload.get("evidence_card"),
-            "next_steps": _build_next_steps(ctx_payload, symbol),
-        })
-
-        if not resume:
-            # 03B：先落 user 消息 + discussion_v1 快照（回测绑定需要 question_id）；
-            # 编号已在进入时领取——并发双发在此收口，输家复用赢家原问题
-            try:
                 with closing(connect(_db_path(request))) as conn:
-                    appended, user_msg, dup = _append_user_for_claim(
-                        conn, outcome, body, symbol,
-                        review_dump=ctx_payload.get("buy_point_review"),
-                        as_of=ctx_payload.get("as_of"), window_sel=window_sel)
-                    question_id = (
-                        user_msg.message_id if user_msg is not None else None)
-            except Exception as exc:  # noqa: BLE001
-                # 落库失败不假装开始回答：资料已展示，如实说明历史没存上，
-                # 重试同一问题走既有 replay/resume 身份（不重复建问题）。
+                    release_generation(
+                        conn, out.claim_cid,
+                        expected_state_at=getattr(out, "claim_state_at", None))
+            except Exception:  # noqa: BLE001
                 logger.exception(
-                    "agent_chat_stream 问题落库失败（session=%s）", session_id)
-                yield _sse("done", {
-                    "session_id": session_id,
-                    "resolved_symbol": symbol,
-                    "grounded": False,
-                    "verify_note": (
-                        "系统资料已在上方展示；但本次问题未能写入历史记录"
-                        f"（{type(exc).__name__}），AI 解释没有开始。"
-                        "请稍后重试同一问题。"
-                    ),
-                })
-                return
-            if appended == "duplicate":
-                dup = dup or {}
-                yield _sse("done", {
-                    "session_id": dup.get("session_id") or session_id,
-                    "resolved_symbol": dup.get("resolved_symbol"),
-                    "grounded": bool(dup.get("grounded")),
-                    "question_id": dup.get("question_id"),
-                    "evidence_card": dup.get("evidence_card"),
-                    "replayed": True,
-                })
-                return
+                    "agent_chat_stream 释放生成权失败（cid=%s…）",
+                    str(getattr(out, "claim_cid", ""))[:8])
 
-        # 03B-R3 S5：整理计划类问题生成服务端产物（原问题绑定）
-        _maybe_plan_artifact(request, session_id, question_id, body, symbol,
-                             ctx_payload)
-
-        config = plans_llm.load_ark_config()
-        pieces: list[str] = []
-        interrupt_reason = ""
-        if config is not None:
-            yield _sse("stage", {"key": "llm", "text": "AI 组织语言（逐字输出）"})
-            for piece in plans_llm.chat_discussion_stream(
-                ctx_payload,
-                [{"role": m.role, "content": m.content} for m in history_rows],
-                body.message,
-                config,
-            ):
-                # 完成契约（主控复核 2026-09-15 固定补修一）：流未正常收尾/
-                # 被截断都以 StreamInterrupt 收尾，原因入落库与提示
-                if isinstance(piece, plans_llm.StreamInterrupt):
-                    interrupt_reason = piece.reason
-                    break
-                pieces.append(piece)
-                yield _sse("token", {"t": piece})
-
-        _INCOMPLETE_CN = {
-            "connection_interrupted": "连接中断",
-            "no_completion_marker": "连接提前关闭（未收到正常结束标记）",
-            "server_error_event": "模型服务返回错误事件",
-            "max_tokens_truncated": "输出额度截断",
-        }
-        interrupted = bool(interrupt_reason)
-        full = "".join(pieces).strip()
-        grounded = False
-        verify_note = ""
-        fallback = ""
-        if interrupted:
-            reason_cn = _INCOMPLETE_CN.get(interrupt_reason, interrupt_reason)
-            if full:
-                # 有部分正文：保留已收到内容，如实标记解释未完成；不再叠加完整模板
-                grounded = False
-                verify_note = (
-                    f"AI 讲解未完成（{reason_cn}）；以上是已收到的部分，"
-                    "上方系统资料仍然可用。可重试同一问题重新生成"
-                    "（不会重复记录）。"
-                )
-            else:
-                verify_note = f"AI 讲解未完成（{reason_cn}），系统改用模板直出。"
-        if full and not interrupted:
-            from lei_signal.plans.grounding import (  # noqa: PLC0415
-                collect_payload_numbers,
-                verify_numeric_grounding,
-            )
-
-            allowed_nums = (
-                collect_payload_numbers(ctx_payload)
-                | frozenset(extract_market_numbers(body.message))
-                | frozenset(_payload_symbol_numbers(ctx_payload))
-            )
-            rule_ids = {a.rule_id for a in alerts if a.rule_id}
-            ok_num, num_reason = verify_numeric_grounding(full, allowed_nums)
-            ok_txt, txt_reason = _discussion_txt_ok(full, rule_ids)
-            if ok_num and ok_txt:
-                grounded = True
-            else:
-                verify_note = (
-                    f"以上 AI 流式原文未过溯源校验（{txt_reason or num_reason}），"
-                    "请以下方模板直出为准。"
-                )
-        if (not full or not grounded) and not (interrupted and full):
-            fallback = _degraded_reply(symbol or "", ctx_payload)
-
-        trace = _build_trace(alerts)
-        meta: dict = {"trace": [t.model_dump() for t in trace]}
-        if symbol is not None:
-            meta["resolved_symbol"] = symbol
-        # 契约3：同一证据产物进历史（r6：流式路径同样持久化，恢复不依赖模型复述）
-        if ctx_payload.get("evidence_card") is not None:
-            meta["evidence_card"] = ctx_payload["evidence_card"]
-        # 03B-R3 S5：服务端计划产物随流式回答持久化/下发
-        if ctx_payload.get("plan_artifact") is not None:
-            meta["plan_artifact"] = ctx_payload["plan_artifact"]
-        # UX 第一期：下一步动作随流式回答持久化/下发（与普通路径同一函数）
-        next_steps = _build_next_steps(ctx_payload, symbol)
-        if next_steps:
-            meta["next_steps"] = next_steps
-        if interrupted:
-            # 补修二：未完成原因进持久化 meta（历史/恢复可区分未完成与其他）
-            meta["answer_incomplete"] = {
-                "reason": interrupt_reason,
-                "reason_cn": _INCOMPLETE_CN.get(interrupt_reason, interrupt_reason),
-            }
-        try:
-            with closing(connect(_db_path(request))) as conn:
-                # S4：流式完成回答同样按 question_id 精确绑定（列+claim 状态）；
-                # interrupted 时 claim 记 incomplete（重试重新生成，不回放半截话）
-                _append_answer(
-                    conn, session_id=session_id, question_id=question_id,
-                    content=full or fallback, grounded=grounded, meta=meta,
-                    claim_cid=outcome.claim_cid, incomplete=interrupted,
-                    source_request_id=outcome.claim_cid or "")
-        except Exception:  # noqa: BLE001  落库失败不断流（锁窗口下次再试不可行，丢历史可接受）
-            yield _sse(
-                "done", {"session_id": session_id, "resolved_symbol": symbol,
-                         "grounded": grounded,
-                         "answer_state": "incomplete" if interrupted else "answered",
-                         "verify_note": "会话记录保存失败（不影响本次回复）",
-                         "fallback": fallback})
-            return
-        yield _sse(
-            "done",
-            {
+        def _fail_payload(note: str, *, out=None, session_id: str = "",
+                          symbol: str | None = None,
+                          retryable: bool = True) -> dict:
+            """可重试的失败出口（任务书 §三）：失败如实说明、保留问题、
+            给明确重试入口；不假装开始回答，也不把数据库等待说成 AI 思考。"""
+            _release_claim(out)
+            timing.mark("failed")
+            payload = {
                 "session_id": session_id,
                 "resolved_symbol": symbol,
-                "grounded": grounded,
-                "question_id": question_id,
+                "grounded": False,
+                "answer_state": "failed",
+                "retryable": retryable,
+                "verify_note": note,
+                "timing_ms": timing.summary(),
+            }
+            _log_timing("stream_failed", session_id or (out.session_id if out else ""),
+                        symbol)
+            return payload
+
+        # 提交即回执（任务书 §三）：不等内容，先告诉用户「已收到问题」。
+        yield _sse("stage", {"key": "received", "text": "已收到问题，正在登记请求"})
+
+        import time as _time
+
+        prepared = None
+        outcome = None
+        terminal = False  # 到达终态（含失败 done）；异常/断连时 finally 释放生成权
+        phase = "identity"  # identity=登记中；prepare=准备资料中（心跳文案据此区分）
+        wait_started = _time.monotonic()
+        try:
+            while True:
+                try:
+                    kind, payload = q.get(timeout=5)
+                except _queue.Empty:
+                    waited = int(_time.monotonic() - wait_started)
+                    if waited > 180:
+                        logger.warning(
+                            "agent_chat_stream 准备段超时180s"
+                            "（session=%s message=%r）",
+                            body.session_id, body.message[:50],
+                        )
+                        yield _sse("done", _fail_payload(
+                            "准备阶段超时（等待 180 秒仍未就绪）。问题已保留，"
+                            "可点「重试」继续，不会重复记录。",
+                            out=outcome))
+                        terminal = True
+                        return
+                    # 真实阶段心跳（不虚构进度/倒计时）：数据库等待如实说
+                    # 「等待系统处理」，绝不描述成「AI 正在思考」。
+                    if phase == "identity":
+                        text = ("等待系统处理：正在登记请求"
+                                f"（数据库繁忙时需排队，已等待 {waited} 秒）")
+                    else:
+                        text = f"仍在读取系统资料（已等待 {waited} 秒）"
+                    yield _sse("stage", {"key": "waiting", "text": text})
+                    continue
+                if kind == "stage":
+                    yield _sse("stage", {"key": payload[0], "text": payload[1]})
+                elif kind == "error":
+                    exc = payload
+                    import sqlite3 as _sqlite3  # noqa: PLC0415
+
+                    if isinstance(exc, _sqlite3.OperationalError) and \
+                            "locked" in str(exc).lower():
+                        note = (
+                            "准备阶段失败：系统数据库正被后台任务占用，"
+                            "等待后仍不可用（database is locked）。"
+                            "你的问题已保留——可点「重试」继续，不会重复记录。"
+                        )
+                    elif isinstance(exc, HTTPException):
+                        note = f"准备阶段失败：{exc.detail}"
+                    else:
+                        note = f"准备阶段失败：{exc}"
+                    retryable = not (
+                        isinstance(exc, HTTPException) and exc.status_code < 500)
+                    yield _sse("done", _fail_payload(
+                        note, out=outcome, retryable=retryable))
+                    terminal = True
+                    return
+                elif kind == "entered":
+                    outcome = payload
+                    timing.mark("identity")
+                    phase = "prepare"
+                    if outcome.kind == "replay":
+                        p = outcome.replay_reply or {}
+                        yield _sse("token", {"t": p.get("reply") or ""})
+                        timing.mark("answer_saved")
+                        yield _sse("done", {
+                            "session_id": p.get("session_id") or outcome.session_id or "",
+                            "resolved_symbol": p.get("resolved_symbol"),
+                            "grounded": bool(p.get("grounded")),
+                            "question_id": p.get("question_id"),
+                            "evidence_card": p.get("evidence_card"),
+                            "plan_artifact": p.get("plan_artifact"),
+                            "answer_state": p.get("answer_state") or "answered",
+                            "next_steps": p.get("next_steps") or [],
+                            "replayed": True,
+                            "timing_ms": timing.summary(),
+                        })
+                        _log_timing("stream_replay",
+                                    p.get("session_id") or outcome.session_id,
+                                    p.get("resolved_symbol"))
+                        terminal = True
+                        return
+                    if outcome.kind == "incomplete":
+                        # S4：未完成明确出口（不复用下一问题/补测卡）
+                        p = outcome.incomplete_reply or {}
+                        yield _sse("token", {"t": p.get("reply") or ""})
+                        yield _sse("done", {
+                            "session_id": p.get("session_id") or outcome.session_id or "",
+                            "resolved_symbol": None,
+                            "grounded": False,
+                            "question_id": p.get("question_id"),
+                            "answer_state": p.get("answer_state") or "pending",
+                            "incomplete": True,
+                            "timing_ms": timing.summary(),
+                        })
+                        _log_timing("stream_incomplete",
+                                    p.get("session_id") or outcome.session_id, None)
+                        terminal = True
+                        return
+                else:
+                    prepared = payload
+                    timing.mark("prepared")
+                    break
+
+            (session_id, history_rows, ctx_payload, alerts, symbol,
+             window_sel) = prepared
+            resume = outcome.kind == "resume"
+            question_id: int | None = outcome.question_id if resume else None
+
+            # 可靠性一期（2026-09-14）：系统资料就绪即推送，不等模型。字段与
+            # done 同名同源（不是第二套证据），前端据此先渲染事实卡并提示
+            # 「资料已就绪，AI 解释仍在生成」；done 仍是唯一的最终完成信号。
+            # 下一步动作在此处算一次，done 复用同一份（不重复推导）。
+            next_steps = _build_next_steps(ctx_payload, symbol)
+            yield _sse("prepared", {
+                "session_id": session_id,
+                "resolved_symbol": symbol,
+                "quick_card": _quick_card(ctx_payload, symbol),
                 "evidence_card": ctx_payload.get("evidence_card"),
-                "plan_artifact": ctx_payload.get("plan_artifact"),
-                "answer_state": "incomplete" if interrupted else "answered",
                 "next_steps": next_steps,
-                **({"verify_note": verify_note} if verify_note else {}),
-                **({"fallback": fallback} if fallback else {}),
-                **({"quick_card": _quick_card(ctx_payload, symbol)} if symbol else {}),
-            },
-        )
+            })
+            timing.mark("material_sent")
+
+            if not resume:
+                # 03B：先落 user 消息 + discussion_v1 快照（回测绑定需要 question_id）；
+                # 编号已在进入时领取——并发双发在此收口，输家复用赢家原问题
+                try:
+                    with closing(connect(_db_path(request))) as conn:
+                        appended, user_msg, dup = _append_user_for_claim(
+                            conn, outcome, body, symbol,
+                            review_dump=ctx_payload.get("buy_point_review"),
+                            as_of=ctx_payload.get("as_of"), window_sel=window_sel)
+                        question_id = (
+                            user_msg.message_id if user_msg is not None else None)
+                except Exception as exc:  # noqa: BLE001
+                    # 落库失败不假装开始回答：资料已展示，如实说明历史没存上；
+                    # 释放生成权，重试同一问题立即恢复（不重复建问题）。
+                    logger.exception(
+                        "agent_chat_stream 问题落库失败（session=%s）", session_id)
+                    yield _sse("done", _fail_payload(
+                        "系统资料已在上方展示；但本次问题未能写入历史记录"
+                        f"（{type(exc).__name__}），AI 解释没有开始。"
+                        "问题已保留——可点「重试」继续，不会重复记录。",
+                        out=outcome, session_id=session_id, symbol=symbol))
+                    terminal = True
+                    return
+                timing.mark("question_saved")
+                if appended == "duplicate":
+                    dup = dup or {}
+                    yield _sse("done", {
+                        "session_id": dup.get("session_id") or session_id,
+                        "resolved_symbol": dup.get("resolved_symbol"),
+                        "grounded": bool(dup.get("grounded")),
+                        "question_id": dup.get("question_id"),
+                        "evidence_card": dup.get("evidence_card"),
+                        "replayed": True,
+                        "timing_ms": timing.summary(),
+                    })
+                    _log_timing("stream_duplicate", session_id, symbol)
+                    terminal = True
+                    return
+
+            # 03B-R3 S5：整理计划类问题生成服务端产物（原问题绑定）
+            _maybe_plan_artifact(request, session_id, question_id, body, symbol,
+                                 ctx_payload)
+
+            config = plans_llm.load_ark_config()
+            pieces: list[str] = []
+            interrupt_reason = ""
+            if config is not None:
+                yield _sse("stage", {"key": "llm", "text": "生成解释（AI 逐字输出）"})
+                try:
+                    for piece in plans_llm.chat_discussion_stream(
+                        ctx_payload,
+                        [{"role": m.role, "content": m.content} for m in history_rows],
+                        body.message,
+                        config,
+                    ):
+                        # 完成契约（主控复核 2026-09-15 固定补修一）：流未正常收尾/
+                        # 被截断都以 StreamInterrupt 收尾，原因入落库与提示
+                        if isinstance(piece, plans_llm.StreamInterrupt):
+                            interrupt_reason = piece.reason
+                            break
+                        if not pieces:
+                            timing.mark("first_token")
+                        pieces.append(piece)
+                        yield _sse("token", {"t": piece})
+                except GeneratorExit:
+                    # 客户端断连/停止接收：不再产出事件；finally 释放生成权，
+                    # 历史只留问题不落假回答（既有「停止接收」语义）。
+                    raise
+                except Exception:  # noqa: BLE001
+                    # 模型迭代器意外抛错（网络层已在 llm.py 收敛，这里是真 bug
+                    # 兜底）：按未完成收场——部分正文保留、claim 记 incomplete，
+                    # 不让异常逃出流、把 claim 卡在 generating。
+                    logger.exception(
+                        "agent_chat_stream 模型流意外异常（session=%s）", session_id)
+                    interrupt_reason = interrupt_reason or "generation_error"
+            timing.mark("llm_end")
+
+            _INCOMPLETE_CN = {
+                "connection_interrupted": "连接中断",
+                "no_completion_marker": "连接提前关闭（未收到正常结束标记）",
+                "server_error_event": "模型服务返回错误事件",
+                "max_tokens_truncated": "输出额度截断",
+                "generation_error": "生成过程出现异常",
+            }
+            interrupted = bool(interrupt_reason)
+            full = "".join(pieces).strip()
+            grounded = False
+            verify_note = ""
+            fallback = ""
+            if interrupted:
+                reason_cn = _INCOMPLETE_CN.get(interrupt_reason, interrupt_reason)
+                if full:
+                    # 有部分正文：保留已收到内容，如实标记解释未完成；不再叠加完整模板
+                    grounded = False
+                    verify_note = (
+                        f"AI 讲解未完成（{reason_cn}）；以上是已收到的部分，"
+                        "上方系统资料仍然可用。可重试同一问题重新生成"
+                        "（不会重复记录）。"
+                    )
+                else:
+                    verify_note = f"AI 讲解未完成（{reason_cn}），系统改用模板直出。"
+            if full and not interrupted:
+                from lei_signal.plans.grounding import (  # noqa: PLC0415
+                    collect_payload_numbers,
+                    verify_numeric_grounding,
+                )
+
+                allowed_nums = (
+                    collect_payload_numbers(ctx_payload)
+                    | frozenset(extract_market_numbers(body.message))
+                    | frozenset(_payload_symbol_numbers(ctx_payload))
+                )
+                rule_ids = {a.rule_id for a in alerts if a.rule_id}
+                ok_num, num_reason = verify_numeric_grounding(full, allowed_nums)
+                ok_txt, txt_reason = _discussion_txt_ok(full, rule_ids)
+                if ok_num and ok_txt:
+                    grounded = True
+                else:
+                    verify_note = (
+                        f"以上 AI 流式原文未过溯源校验（{txt_reason or num_reason}），"
+                        "请以下方模板直出为准。"
+                    )
+            if (not full or not grounded) and not (interrupted and full):
+                fallback = _degraded_reply(symbol or "", ctx_payload)
+
+            trace = _build_trace(alerts)
+            meta: dict = {"trace": [t.model_dump() for t in trace]}
+            if symbol is not None:
+                meta["resolved_symbol"] = symbol
+            # 契约3：同一证据产物进历史（r6：流式路径同样持久化，恢复不依赖模型复述）
+            if ctx_payload.get("evidence_card") is not None:
+                meta["evidence_card"] = ctx_payload["evidence_card"]
+            # 03B-R3 S5：服务端计划产物随流式回答持久化/下发
+            if ctx_payload.get("plan_artifact") is not None:
+                meta["plan_artifact"] = ctx_payload["plan_artifact"]
+            # UX 第一期：下一步动作随流式回答持久化/下发（与 prepared 同一份）
+            if next_steps:
+                meta["next_steps"] = next_steps
+            if interrupted:
+                # 补修二：未完成原因进持久化 meta（历史/恢复可区分未完成与其他）
+                meta["answer_incomplete"] = {
+                    "reason": interrupt_reason,
+                    "reason_cn": _INCOMPLETE_CN.get(interrupt_reason, interrupt_reason),
+                }
+            try:
+                with closing(connect(_db_path(request))) as conn:
+                    # S4：流式完成回答同样按 question_id 精确绑定（列+claim 状态）；
+                    # interrupted 时 claim 记 incomplete（重试重新生成，不回放半截话）
+                    _append_answer(
+                        conn, session_id=session_id, question_id=question_id,
+                        content=full or fallback, grounded=grounded, meta=meta,
+                        claim_cid=outcome.claim_cid, incomplete=interrupted,
+                        source_request_id=outcome.claim_cid or "")
+            except Exception:  # noqa: BLE001
+                # 保存失败不谎报已回答：如实说「回答已生成但未能写入历史」，
+                # 释放生成权——同身份重试立即对原问题重新生成（不重复记录）。
+                logger.exception(
+                    "agent_chat_stream 回答落库失败（session=%s）", session_id)
+                yield _sse("done", _fail_payload(
+                    "本次回答已生成但未能写入历史记录"
+                    "（系统数据库暂时不可用）。以上内容本次有效；"
+                    "需要留档可点「重试」对同一问题重新生成，不会重复记录。",
+                    out=outcome, session_id=session_id, symbol=symbol))
+                terminal = True
+                return
+            timing.mark("answer_saved")
+            yield _sse(
+                "done",
+                {
+                    "session_id": session_id,
+                    "resolved_symbol": symbol,
+                    "grounded": grounded,
+                    "question_id": question_id,
+                    "evidence_card": ctx_payload.get("evidence_card"),
+                    "plan_artifact": ctx_payload.get("plan_artifact"),
+                    "answer_state": "incomplete" if interrupted else "answered",
+                    "next_steps": next_steps,
+                    "timing_ms": timing.summary(),
+                    **({"verify_note": verify_note} if verify_note else {}),
+                    **({"fallback": fallback} if fallback else {}),
+                    **({"quick_card": _quick_card(ctx_payload, symbol)} if symbol else {}),
+                },
+            )
+            _log_timing("stream", session_id, symbol)
+            terminal = True
+        finally:
+            if not terminal:
+                # 断连/异常等未到终态的出口：把生成权放回 pending——同身份
+                # 重试立即恢复，不再被 600 秒租约挡在「回答正在生成」。
+                _release_claim(outcome)
+                _log_timing("stream_aborted",
+                            outcome.session_id if outcome else None, None)
 
     return StreamingResponse(
         _generate(),
