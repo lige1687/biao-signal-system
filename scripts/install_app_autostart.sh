@@ -27,7 +27,7 @@ done
 
 install_agent () {
     local name="$1"
-    local src="$SCRIPT_DIR/$name.plist"
+    local src="$SCRIPT_DIR/launchd/$name.plist"
     local dst="$AGENTS/$name.plist"
     echo "▶ 安装 $name"
     cp "$src" "$dst"

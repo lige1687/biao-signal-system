@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.lei.sentiment.weekly</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/yongbiaoli/.workbuddy/binaries/python/envs/default/bin/python3</string>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/fetch_sentiment_weekly.py</string>
+  </array>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>LEI_SENTIMENT_ROOT</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/data/sentiment</string>
+  </dict>
+
+  <key>WorkingDirectory</key>
+  <string>/Users/yongbiaoli/Desktop/lei-signal-lab</string>
+
+  <!-- 情绪周更：NAAIM 周四 07:00 UTC（北京 15:00）/ AAII 08:00 UTC（北京 16:00）发布后抓取；
+       周五上午兜底重试一次（脚本按 survey_week 去重，重复跑安全）。
+       launchd Weekday: 0/7=周日,1=周一,…,4=周四,5=周五,6=周六 -->
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict><key>Weekday</key><integer>4</integer><key>Hour</key><integer>17</integer><key>Minute</key><integer>5</integer></dict>
+    <dict><key>Weekday</key><integer>5</integer><key>Hour</key><integer>10</integer><key>Minute</key><integer>5</integer></dict>
+  </array>
+
+  <key>StandardOutPath</key>
+  <string>/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/logs/fetch_sentiment_weekly.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/logs/fetch_sentiment_weekly.err.log</string>
+
+  <key>RunAtLoad</key>
+  <false/>
+</dict>
+</plist>

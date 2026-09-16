@@ -9,7 +9,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PLIST_SRC="$SCRIPT_DIR/com.lei.ashare.ma.plist"
+PLIST_SRC="$SCRIPT_DIR/launchd/com.lei.ashare.ma.plist"
 PLIST_DST="$HOME/Library/LaunchAgents/com.lei.ashare.ma.plist"
 VENV_PY="/Users/yongbiaoli/.workbuddy/binaries/python/envs/default/bin/python3"
 

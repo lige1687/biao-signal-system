@@ -46,7 +46,7 @@ CACHE = Path(os.environ.get("LEI_CACHE_ROOT", Path.home() / ".lei_signal_lab/cac
 # ─────────────────────────── 数据装载 ───────────────────────────
 def load_panels(flows_file: str | None = None) -> dict:
     if flows_file:
-        # 腾讯源（scripts/tx_fund_flow_pilot.py 产出，个股聚合板块）：字段映射到
+        # 腾讯源（scripts/archive/tx_fund_flow_pilot.py 产出，个股聚合板块）：字段映射到
         # 东财五档名（large = main − jumbo 推导）；超大单档划分腾讯略宽（实测
         # 约 10% 偏差），结论以源内自洽为准，不与东财阈值直接混用。
         raw = json.loads(Path(flows_file).read_text())
