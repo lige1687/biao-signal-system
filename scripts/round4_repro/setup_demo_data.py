@@ -232,7 +232,7 @@ def main() -> None:
     print(f"\nThen restart Streamlit.")
     print(f"\nNote: This is RESEARCH_PROXY data (current constituents backfilled).")
     print(f"Point-in-time historical constituents would be needed for FORMAL.")
-    print(f"See ROUND4_DELIVERY_REPORT.md for details.")
+    print(f"See docs/archive/rounds/ROUND4_DELIVERY_REPORT.md for details.")
 
 
 if __name__ == "__main__":

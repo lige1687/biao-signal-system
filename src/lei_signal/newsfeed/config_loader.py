@@ -1,4 +1,4 @@
-"""newsfeed 配置加载：仓库根 ``config/newsfeed.json``，缺文件/缺键用默认值兜底。"""
+"""newsfeed 配置加载：仓库根 ``configs/newsfeed.json``，缺文件/缺键用默认值兜底。"""
 from __future__ import annotations
 
 import json
@@ -9,7 +9,7 @@ from typing import Any
 logger = logging.getLogger(__name__)
 
 _REPO_ROOT = Path(__file__).resolve().parents[3]
-_CONFIG_PATH = _REPO_ROOT / "config" / "newsfeed.json"
+_CONFIG_PATH = _REPO_ROOT / "configs" / "newsfeed.json"
 
 DEFAULT_CONFIG: dict[str, Any] = {
     "bili_ups": [],

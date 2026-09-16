@@ -1,6 +1,6 @@
 """Round 3 修复 1 + 修复 2：逐结构分层状态机门禁。
 
-本文件锁定 ``ROUND3_IMPLEMENTATION_PLAN.md`` 第 3 节的状态转换真值表。
+本文件锁定 ``docs/archive/rounds/ROUND3_IMPLEMENTATION_PLAN.md`` 第 3 节的状态转换真值表。
 
 为什么断言写得这么死
 --------------------

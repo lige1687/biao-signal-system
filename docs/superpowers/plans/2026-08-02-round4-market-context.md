@@ -58,7 +58,7 @@ tests/integration/test_market_context_real_replay.py
 scripts/round4_repro/repro1_point_in_time_membership.py
 scripts/round4_repro/repro2_context_does_not_block.py
 scripts/round4_repro/repro3_release_time_alignment.py
-ROUND4_DELIVERY_REPORT.md
+docs/archive/rounds/ROUND4_DELIVERY_REPORT.md
 ```
 
 Modify only where required:

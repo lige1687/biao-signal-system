@@ -454,7 +454,7 @@ def _resolve_opportunity(
       * 已确认结构上的 ``joint_confirmed`` → ``JOINT_CONFIRMED``
       * 已确认结构上的 ``long_trend_improved`` → ``TREND_REINFORCED``
 
-    真值表 13 行（见 ``ROUND3_IMPLEMENTATION_PLAN.md``）逐条对应。
+    真值表 13 行（见 ``docs/archive/rounds/ROUND3_IMPLEMENTATION_PLAN.md``）逐条对应。
     """
     reasons: list[str] = []
     if not live_bottoms:
