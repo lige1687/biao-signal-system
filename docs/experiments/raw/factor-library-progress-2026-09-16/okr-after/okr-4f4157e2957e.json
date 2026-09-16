@@ -1,0 +1,339 @@
+{
+ "title": "因子库后续：外部资源适配与分批接入",
+ "purpose": "把外部因子建议作为 v0 后续候选，统一接口和验收，不统一用途。先核对 v0 验收及具体缺口，再逐批申请范围；登记不授权研究、采购或生产采用。四类待办详见关联文档；不要求全部接入，不以新增因子数量或历史收益为完成标准。与 K-data-boundary、K-recent、K-newmodules 协作复用已有证据，避免重复立项。",
+ "parent_id": "okr-cd1a0bd5532c",
+ "priority": "medium",
+ "owner": "待逐项安排执行 Agent；原主控复核",
+ "target_date": null,
+ "next_action": "按已明确用途选择外部复用：定义参考、计算/诊断工具、基础数据、基准收益、归因模型输入分别核验。方向探索v1.2收尾后维持'暂不整包安装、先定位具体复用需求'：Alphalens-reloaded隔离适配为优先评估候选（未授权）；双均线B0不强制Alphalens/IC、不安装Qlib、不增加新因子；下一候选与外部采用留待资料资格和研究问题明确后单独授权。",
+ "evidence": "2026-09-09 用户要求：加入后续待办和显示文档，OKR关联计划，执行时同步更新OKR。本次授权仅为登记与关联；外部建议尚未接入，无新增市场数据、因子或账户路径。本条完成标准为各类候选的有证据取舍，不强制建设全部候选。\n2026-09-15用户认可外部因子可用于基准、风险与归因，不要求全部参与交易。已关联新的主控方向与B0计划；只补充待办方向，原四项完成标准不变，不新增采购、联网、安装、接入或运行权限。\n2026-09-16：因子库方向探索提案经主控三轮复核（v1.0→v1.2）文档收尾通过：外部工具证据按工具分项列示（Qlib数学/依赖行为核对、FactorHub历史只读接口调用，均不宣称已接入本地消费者），两份后续接入草案仍是未授权草案；外围另有外部流派融合三轮设计文档（registry登记watch、零回测）作并行候选，与本目标的外部资源适配分属不同线、不混计。四项完成标准不变。",
+ "milestones": [
+  {
+   "id": "data",
+   "title": "数据基础：明确历史成员、分红拆分或退出数据的实际缺口，形成小范围供应商核验结论与采用/不采用依据",
+   "done": false
+  },
+  {
+   "id": "returns",
+   "title": "收益解释：明确适配资产与频率，仅在有需求时核验基础收益或外部因子序列；记录适用和不可用范围",
+   "done": false
+  },
+  {
+   "id": "execution",
+   "title": "执行条件：对折溢价、价差和流动性候选明确时间语义与资料资格，决定是否值得单独接入",
+   "done": false
+  },
+  {
+   "id": "methods",
+   "title": "候选方法：根据 v0 证据逐项决定风险调整动量、趋势形态及后置模型是否立项；无增量可停止",
+   "done": false
+  }
+ ],
+ "links": [
+  {
+   "label": "后续待办与执行同步规则",
+   "url": "/library?report=docs%2Fexperiments%2Ffactor-library-external-backlog-2026-09-09.md"
+  },
+  {
+   "label": "v0 执行计划入口（本次不改范围）",
+   "url": "/library?report=docs%2Fexperiments%2Ffactor-library-v0-task-2026-09-09.md"
+  },
+  {
+   "label": "复用已有数据核验目标",
+   "url": "/upgrades?goal=K-data-boundary"
+  },
+  {
+   "label": "复用已有新模块提案目标",
+   "url": "/upgrades?goal=K-newmodules"
+  },
+  {
+   "label": "自有因子体系目标与首轮执行计划",
+   "url": "/library?report=docs%2Fexperiments%2Ffactor-research-workbench-mandate-2026-09-14.md"
+  },
+  {
+   "label": "自有因子与信号研究方向",
+   "url": "/upgrades?goal=okr-cd1a0bd5532c"
+  },
+  {
+   "label": "A阶段主控复核与B0长任务入口",
+   "url": "/library?report=docs%2Fexperiments%2Ffactor-unit-readiness-controller-review-2026-09-15.md"
+  },
+  {
+   "label": "因子库方向探索主控复核（v1.2收尾）",
+   "url": "/library?report=docs%2Fexperiments%2Ffactor-library-direction-controller-review-2026-09-16.md"
+  },
+  {
+   "label": "因子库建设进度总览（2026-09-16）",
+   "url": "/library?report=docs%2Fexperiments%2Ffactor-library-progress-2026-09-16.md"
+  }
+ ],
+ "kind": "concrete",
+ "id": "okr-4f4157e2957e",
+ "version": 9,
+ "status": "planned",
+ "created_at": "2026-09-09T13:02:04+00:00",
+ "updated_at": "2026-09-16T11:54:01+00:00",
+ "authorization": {
+  "granted": false,
+  "scope": "",
+  "at": null
+ },
+ "history": [
+  {
+   "at": "2026-09-09T13:02:04+00:00",
+   "action": "created",
+   "note": "目标已登记，登记不会启动执行。"
+  },
+  {
+   "at": "2026-09-10T15:53:55+00:00",
+   "action": "note",
+   "note": "2026-09-10 用户要求评估 alphalens-reloaded、Qlib Alpha158，并将 vectorbt / Backtrader / LEAN 留作后续按需评估。已更新关联的 factor-library-external-backlog-2026-09-09.md 至待办规格 v1.1.0：补初评修正、公式参考边界及触发条件。仅文档待办与官方源码核对；未安装、未新增因子/数据/账户路径，不代表数据基础已验收。保留原授权、里程碑与完成进度；具体实施另行授权。",
+   "from_status": "planned",
+   "to_status": "planned",
+   "scope": ""
+  },
+  {
+   "at": "2026-09-10T16:43:18+00:00",
+   "action": "note",
+   "note": "2026-09-10 第二轮交付，仅追加证据，未改完成勾选、授权或目标范围。报告：docs/experiments/research-data-provenance-round2-2026-09-10.md；原始证据：docs/experiments/raw/research-data-provenance-round2-2026-09-10/。本轮针对 data 里程碑（明确历史成员、分红拆分或退出数据的实际缺口）补充可核证据：(1) 独立复核上一轮六项主张，5项确认、1项纠正——受保护文件聚合哈希数字正确但未记录排序规则，非C locale下shell复算结果不同，已补齐算法说明；(2) 新取深圳证券交易所官方交易日历22个月/664天，与冻结价格零冲突，确认周末调休不开市，并可区分休市与单产品缺报价（389个交易日中248天属后者）；(3) 新增研究专用 .SH/.SS 身份映射，映射前后产品数14、行数18916、日期范围均平衡。仍存缺口：日历只覆盖冻结区间82个月中的22个，其余一律未知不回退为工作日；来源不提供开休市安排的发布时刻，无法回答当时是否已知；公司行动21/21缺 available_at，归因用途继续不放行；官方核查结果未回流（登记表哈希与当前文件一致已证实）；prices.csv 生成代码未封存（source_code_sha256 反查指向 repro_factor_backtest.py，该文件不含 prices.csv 引用）。本轮未安装 Alphalens/Qlib、未运行 Alpha158、未测因子、未跑账户、未接入任何既有消费者。里程碑完成度不变，仍需另行授权。",
+   "from_status": "planned",
+   "to_status": "planned",
+   "scope": "数据基础第二轮：独立复核、交易日历与身份映射"
+  },
+  {
+   "at": "2026-09-11T06:54:10+00:00",
+   "action": "note",
+   "note": "2026-09-10 第三轮交付，仅追加证据，未改完成勾选、授权或目标范围。报告：docs/experiments/research-calendar-completion-2026-09-10.md；证据：docs/experiments/raw/research-calendar-completion-2026-09-10/。(1) 交易日历补到冻结区间全部82个月（2495天、1652个交易日），与冻结价格全区间1652天零冲突；14只中13只从上市首日起与官方交易日逐日一致；唯一缺口512890在2021-10-22由该日1拆2加停牌一天完整解释（公告2021-10-13、登记日10-21、复牌10-25，价格1.639→0.801），日历/价格/公司行动三份来源互证。(2) 部分发布时间证据：2026年休市安排由上证公告〔2025〕45号于2025-12-22公布，春节公告原文写明系据该通知转述；故2026年日期自2025-12-22起可知，2019—2025年未取得年度通知，一律保持未知，不得假设同样提前公布。(3) 跨所交叉验证：2026-02上交所公告与深交所接口逐日完全一致（各14个非交易日）；仅核1个月，其余81个月未核；且发布时间证据来自上交所而逐日标志来自深交所，发布方不同。(4) 重要纠正：第二轮判断「补齐日历可同时解锁ranking/research_signal/comparison三个用途」错误。实测补齐后四个受限用途裁决一个都没变，仅calendar_coverage_partial消失；symbol_convention_mismatch（13只）、action_available_at_unknown（21/21）、zero_volume_days、starts_after_window四项阻断仍在。日历缺口是必要条件之一而非充分条件。(5) 具体化既有隐患代价：factor_runtime.py:164静默丢弃trading_halt，丢掉它则2021-10-22成为来路不明缺口；本轮未改该文件（在保护清单内）。外部请求67次（自设上限75，含3次失败全部留档）；896个受保护文件零改动；165项测试全过。未测因子、未跑账户、未接入任何既有消费者、未修改任何登记对象。完成度不变。",
+   "from_status": "planned",
+   "to_status": "planned",
+   "scope": "第三轮：交易日历补齐（data 里程碑证据）"
+  },
+  {
+   "at": "2026-09-14T11:02:59+00:00",
+   "action": "edited",
+   "note": "目标内容已更新；范围或完成标准改变时需重新授权。",
+   "before": {
+    "parent_id": "D-evidence",
+    "next_action": "暂不执行。先核对 v0 实际交付与验收；需要推进时只选择一个明确问题，冻结子计划、数据预算、对象版本和验收标准，取得用户授权并同步本条 OKR。",
+    "links": [
+     {
+      "label": "后续待办与执行同步规则",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-library-external-backlog-2026-09-09.md"
+     },
+     {
+      "label": "v0 执行计划入口（本次不改范围）",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-library-v0-task-2026-09-09.md"
+     },
+     {
+      "label": "复用已有数据核验目标",
+      "url": "/upgrades?goal=K-data-boundary"
+     },
+     {
+      "label": "复用已有新模块提案目标",
+      "url": "/upgrades?goal=K-newmodules"
+     }
+    ]
+   },
+   "after": {
+    "parent_id": "okr-cd1a0bd5532c",
+    "next_action": "2026-09-14：作为自有因子体系的后续外部资源专项保留。当前先执行通用研究能力首轮；不以本条资料补齐为总前置，外部库/数据采用仍按具体需求另授权。",
+    "links": [
+     {
+      "label": "后续待办与执行同步规则",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-library-external-backlog-2026-09-09.md"
+     },
+     {
+      "label": "v0 执行计划入口（本次不改范围）",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-library-v0-task-2026-09-09.md"
+     },
+     {
+      "label": "复用已有数据核验目标",
+      "url": "/upgrades?goal=K-data-boundary"
+     },
+     {
+      "label": "复用已有新模块提案目标",
+      "url": "/upgrades?goal=K-newmodules"
+     },
+     {
+      "label": "自有因子体系目标与首轮执行计划",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-research-workbench-mandate-2026-09-14.md"
+     },
+     {
+      "label": "自有因子与信号研究方向",
+      "url": "/upgrades?goal=okr-cd1a0bd5532c"
+     }
+    ]
+   }
+  },
+  {
+   "at": "2026-09-14T11:02:59+00:00",
+   "action": "note",
+   "note": "用户明确主目标是自有因子体系；本条外部资源任务保留历史和4项未完成标准，仅关联新方向并后置，不新增外部执行授权。",
+   "from_status": "planned",
+   "to_status": "planned",
+   "scope": "仅目标关联和下一步；完成度不变"
+  },
+  {
+   "at": "2026-09-15T04:13:02+00:00",
+   "action": "edited",
+   "note": "进展已更新。",
+   "before": {
+    "next_action": "2026-09-14：作为自有因子体系的后续外部资源专项保留。当前先执行通用研究能力首轮；不以本条资料补齐为总前置，外部库/数据采用仍按具体需求另授权。",
+    "evidence": "2026-09-09 用户要求：加入后续待办和显示文档，OKR关联计划，执行时同步更新OKR。本次授权仅为登记与关联；外部建议尚未接入，无新增市场数据、因子或账户路径。本条完成标准为各类候选的有证据取舍，不强制建设全部候选。",
+    "links": [
+     {
+      "label": "后续待办与执行同步规则",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-library-external-backlog-2026-09-09.md"
+     },
+     {
+      "label": "v0 执行计划入口（本次不改范围）",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-library-v0-task-2026-09-09.md"
+     },
+     {
+      "label": "复用已有数据核验目标",
+      "url": "/upgrades?goal=K-data-boundary"
+     },
+     {
+      "label": "复用已有新模块提案目标",
+      "url": "/upgrades?goal=K-newmodules"
+     },
+     {
+      "label": "自有因子体系目标与首轮执行计划",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-research-workbench-mandate-2026-09-14.md"
+     },
+     {
+      "label": "自有因子与信号研究方向",
+      "url": "/upgrades?goal=okr-cd1a0bd5532c"
+     }
+    ]
+   },
+   "after": {
+    "next_action": "按已明确用途选择外部复用：定义参考、计算/诊断工具、基础数据、基准收益、归因模型输入分别核验。双均线B0不强制Alphalens/IC、不安装Qlib、不增加新因子；下一候选与外部采用留待资料资格和研究问题明确后单独授权。",
+    "evidence": "2026-09-09 用户要求：加入后续待办和显示文档，OKR关联计划，执行时同步更新OKR。本次授权仅为登记与关联；外部建议尚未接入，无新增市场数据、因子或账户路径。本条完成标准为各类候选的有证据取舍，不强制建设全部候选。\n2026-09-15用户认可外部因子可用于基准、风险与归因，不要求全部参与交易。已关联新的主控方向与B0计划；只补充待办方向，原四项完成标准不变，不新增采购、联网、安装、接入或运行权限。",
+    "links": [
+     {
+      "label": "后续待办与执行同步规则",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-library-external-backlog-2026-09-09.md"
+     },
+     {
+      "label": "v0 执行计划入口（本次不改范围）",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-library-v0-task-2026-09-09.md"
+     },
+     {
+      "label": "复用已有数据核验目标",
+      "url": "/upgrades?goal=K-data-boundary"
+     },
+     {
+      "label": "复用已有新模块提案目标",
+      "url": "/upgrades?goal=K-newmodules"
+     },
+     {
+      "label": "自有因子体系目标与首轮执行计划",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-research-workbench-mandate-2026-09-14.md"
+     },
+     {
+      "label": "自有因子与信号研究方向",
+      "url": "/upgrades?goal=okr-cd1a0bd5532c"
+     },
+     {
+      "label": "A阶段主控复核与B0长任务入口",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-unit-readiness-controller-review-2026-09-15.md"
+     }
+    ]
+   }
+  },
+  {
+   "at": "2026-09-16T11:54:01+00:00",
+   "action": "edited",
+   "note": "进展已更新。",
+   "before": {
+    "next_action": "按已明确用途选择外部复用：定义参考、计算/诊断工具、基础数据、基准收益、归因模型输入分别核验。双均线B0不强制Alphalens/IC、不安装Qlib、不增加新因子；下一候选与外部采用留待资料资格和研究问题明确后单独授权。",
+    "evidence": "2026-09-09 用户要求：加入后续待办和显示文档，OKR关联计划，执行时同步更新OKR。本次授权仅为登记与关联；外部建议尚未接入，无新增市场数据、因子或账户路径。本条完成标准为各类候选的有证据取舍，不强制建设全部候选。\n2026-09-15用户认可外部因子可用于基准、风险与归因，不要求全部参与交易。已关联新的主控方向与B0计划；只补充待办方向，原四项完成标准不变，不新增采购、联网、安装、接入或运行权限。",
+    "links": [
+     {
+      "label": "后续待办与执行同步规则",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-library-external-backlog-2026-09-09.md"
+     },
+     {
+      "label": "v0 执行计划入口（本次不改范围）",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-library-v0-task-2026-09-09.md"
+     },
+     {
+      "label": "复用已有数据核验目标",
+      "url": "/upgrades?goal=K-data-boundary"
+     },
+     {
+      "label": "复用已有新模块提案目标",
+      "url": "/upgrades?goal=K-newmodules"
+     },
+     {
+      "label": "自有因子体系目标与首轮执行计划",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-research-workbench-mandate-2026-09-14.md"
+     },
+     {
+      "label": "自有因子与信号研究方向",
+      "url": "/upgrades?goal=okr-cd1a0bd5532c"
+     },
+     {
+      "label": "A阶段主控复核与B0长任务入口",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-unit-readiness-controller-review-2026-09-15.md"
+     }
+    ]
+   },
+   "after": {
+    "next_action": "按已明确用途选择外部复用：定义参考、计算/诊断工具、基础数据、基准收益、归因模型输入分别核验。方向探索v1.2收尾后维持'暂不整包安装、先定位具体复用需求'：Alphalens-reloaded隔离适配为优先评估候选（未授权）；双均线B0不强制Alphalens/IC、不安装Qlib、不增加新因子；下一候选与外部采用留待资料资格和研究问题明确后单独授权。",
+    "evidence": "2026-09-09 用户要求：加入后续待办和显示文档，OKR关联计划，执行时同步更新OKR。本次授权仅为登记与关联；外部建议尚未接入，无新增市场数据、因子或账户路径。本条完成标准为各类候选的有证据取舍，不强制建设全部候选。\n2026-09-15用户认可外部因子可用于基准、风险与归因，不要求全部参与交易。已关联新的主控方向与B0计划；只补充待办方向，原四项完成标准不变，不新增采购、联网、安装、接入或运行权限。\n2026-09-16：因子库方向探索提案经主控三轮复核（v1.0→v1.2）文档收尾通过：外部工具证据按工具分项列示（Qlib数学/依赖行为核对、FactorHub历史只读接口调用，均不宣称已接入本地消费者），两份后续接入草案仍是未授权草案；外围另有外部流派融合三轮设计文档（registry登记watch、零回测）作并行候选，与本目标的外部资源适配分属不同线、不混计。四项完成标准不变。",
+    "links": [
+     {
+      "label": "后续待办与执行同步规则",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-library-external-backlog-2026-09-09.md"
+     },
+     {
+      "label": "v0 执行计划入口（本次不改范围）",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-library-v0-task-2026-09-09.md"
+     },
+     {
+      "label": "复用已有数据核验目标",
+      "url": "/upgrades?goal=K-data-boundary"
+     },
+     {
+      "label": "复用已有新模块提案目标",
+      "url": "/upgrades?goal=K-newmodules"
+     },
+     {
+      "label": "自有因子体系目标与首轮执行计划",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-research-workbench-mandate-2026-09-14.md"
+     },
+     {
+      "label": "自有因子与信号研究方向",
+      "url": "/upgrades?goal=okr-cd1a0bd5532c"
+     },
+     {
+      "label": "A阶段主控复核与B0长任务入口",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-unit-readiness-controller-review-2026-09-15.md"
+     },
+     {
+      "label": "因子库方向探索主控复核（v1.2收尾）",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-library-direction-controller-review-2026-09-16.md"
+     },
+     {
+      "label": "因子库建设进度总览（2026-09-16）",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-library-progress-2026-09-16.md"
+     }
+    ]
+   }
+  },
+  {
+   "at": "2026-09-16T11:54:01+00:00",
+   "action": "note",
+   "note": "2026-09-16进度记录（记录整理agent）：方向探索v1.2收尾后同步外部复用现状——按用途分项核验的原则不变，暂不整包安装；Alphalens-reloaded隔离适配列为优先评估候选但未授权；外围外部流派三轮设计文档（watch、零回测）仅作并行候选导航。四项完成标准与授权状态不变。",
+   "from_status": "planned",
+   "to_status": "planned",
+   "scope": ""
+  }
+ ],
+ "progress": {
+  "done": 0,
+  "total": 4
+ }
+}

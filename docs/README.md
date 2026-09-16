@@ -20,8 +20,8 @@
 - **应用线（data-sync）历史文档**
   - `handoff-*.md` / `plan-*.md` — 各轮交接与方案（agent-supervisor、买入点、
     板块页等）
-  - `PROJECT-HANDOFF-2026-08-27-v2.md` / `SYSTEM-VALUE-SUMMARY-2026-08-31.md`
-  - `broad-index-summary-plain-2026-09-02.md` — 宽基结论大白话版
+  - `archive/handoffs-plans/PROJECT-HANDOFF-2026-08-27-v2.md` / `archive/handoffs-plans/SYSTEM-VALUE-SUMMARY-2026-08-31.md`
+  - `archive/handoffs-plans/broad-index-summary-plain-2026-09-02.md` — 宽基结论大白话版
 - 其他：`reports/`（HTML 报告迁移说明）、`superpowers/`（skill 相关）
 
 看不懂某份文档在讲什么，先查 `experiments/INDEX.md` 对应行的一句话摘要，

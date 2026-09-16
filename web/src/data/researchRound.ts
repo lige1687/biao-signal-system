@@ -14,7 +14,7 @@ export const SESSION_META = {
     "docs/experiments/breadth-overlay-report-2026-08-27.md",
     "docs/experiments/sentiment-gate-report-2026-08-28.md",
     "docs/experiments/FINAL-VERDICT-walkforward-2026-08-27.md",
-    "docs/PROJECT-HANDOFF-2026-08-27-v2.md",
+    "docs/archive/handoffs-plans/PROJECT-HANDOFF-2026-08-27-v2.md",
   ],
 };
 

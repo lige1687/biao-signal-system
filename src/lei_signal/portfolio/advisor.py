@@ -109,7 +109,7 @@ def build_advices(
             ),
             evidence=[
                 _ev("宽基篮子二十年回测：年化 +12pp vs 拿着不动、回撤 -49.6%→-34.7%",
-                    "experiments/SYSTEM-VALUE-SUMMARY-2026-08-31.md §二；8 道终审"),
+                    "docs/archive/handoffs-plans/SYSTEM-VALUE-SUMMARY-2026-08-31.md §二；8 道终审"),
                 _ev("选池靠结构分散（宽基+缓周期+成长异质），不靠押单一行业",
                     "SYSTEM-VALUE-SUMMARY §四 元规律 2"),
             ],

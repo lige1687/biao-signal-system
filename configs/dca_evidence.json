@@ -1,14 +1,26 @@
 {
   "version": "2026-09-08-r2",
-  "note": "定投证据账本：/api/dca 接口与 AI 讲解层引用数字的唯一来源。新实验归档后在此登记（登记时同步写 source 与日期）。判定/分类权威在 docs/experiments/registry.json，本文件只登记被接口引用的数字。结构规约（r2 起，由第十七/十八轮与外部评审落地）：每条数字附 metrics 结构化字段 + window + fee_bps + registered + status；status 枚举 active/downgraded/single_window/unverified——single_window=仅单一窗口单一路径支撑、引用时必须带窗口说明，downgraded=已被后续复验降级，unverified=无 raw 归档可对账。数字与 raw 归档的一致性由 scripts/dca_evidence_lint.py 强制校验，登记后必须跑 lint 全绿。",
+  "note": "定投证据账本：/api/dca 接口与 AI 讲解层引用数字的唯一来源。新实验归档后在此登记（登记时同步写 source 与日期）。判定/分类权威在 docs/experiments/registry.json，本文件只登记被接口引用的数字。结构规约（r2 起，由第十七/十八轮与外部评审落地）：每条数字附 metrics 结构化字段 + window + fee_bps + registered + status；status 枚举 active/downgraded/single_window/unverified——single_window=仅单一窗口单一路径支撑、引用时必须带窗口说明，downgraded=已被后续复验降级，unverified=无 raw 归档可对账。数字与 raw 归档的一致性校验脚本（dca_evidence_lint.py）已遗失待重建；登记时人工核对 raw 归档路径与数字一致。",
   "state_expectations": {
     "deep20": {
       "label": "深超跌（距年线≤−20%）",
-      "horizon_stats": {"3m": "中位+9.7%/胜率81%", "6m": "中位+12.8%/胜率95%/P10+1.9%", "12m": "中位+10.3%/胜率77%"},
+      "horizon_stats": {
+        "3m": "中位+9.7%/胜率81%",
+        "6m": "中位+12.8%/胜率95%/P10+1.9%",
+        "12m": "中位+10.3%/胜率77%"
+      },
       "n": 193,
       "n_episodes": 11,
-      "episode_bootstrap_6m": {"median_q05": 0.0909, "median_q95": 0.2261, "win_q05": 0.8881, "win_q95": 0.9844},
-      "episode_bootstrap_12m": {"median_q05": 0.037, "median_q95": 0.3008},
+      "episode_bootstrap_6m": {
+        "median_q05": 0.0909,
+        "median_q95": 0.2261,
+        "win_q05": 0.8881,
+        "win_q95": 0.9844
+      },
+      "episode_bootstrap_12m": {
+        "median_q05": 0.037,
+        "median_q95": 0.3008
+      },
       "source": "dca-entry-timing-table-2026-09-07",
       "episode_source": "dca-deep20-episodes-2026-09-08",
       "window": "1994-2026，8指数周观测（周观测重叠，见 note）",
@@ -23,11 +35,20 @@
     },
     "bottom_zone": {
       "label": "底部区域（惨档×回撤≤−15%×年线下方）",
-      "horizon_stats": {"3m": "中位+1.6%/胜率56%", "6m": "中位+3.7%/胜率59%", "12m": "中位+4.6%/胜率61%/P10−16.8%"},
+      "horizon_stats": {
+        "3m": "中位+1.6%/胜率56%",
+        "6m": "中位+3.7%/胜率59%",
+        "12m": "中位+4.6%/胜率61%/P10−16.8%"
+      },
       "n": 1855,
       "n_episodes": 16,
       "episode_share_median12m_positive": 0.625,
-      "episode_bootstrap_12m": {"median_q05": 0.0168, "median_q95": 0.1123, "win_q05": 0.5389, "win_q95": 0.6736},
+      "episode_bootstrap_12m": {
+        "median_q05": 0.0168,
+        "median_q95": 0.1123,
+        "win_q05": 0.5389,
+        "win_q95": 0.6736
+      },
       "source": "dca-entry-timing-table-2026-09-07",
       "episode_source": "dca-deep20-episodes-2026-09-08",
       "window": "1995-2026，8指数周观测",
@@ -42,7 +63,11 @@
     },
     "tier_low": {
       "label": "宽度惨档（b200<43.3）",
-      "horizon_stats": {"3m": "中位+1.0%/胜率54%", "6m": "中位+2.2%/胜率55%", "12m": "中位+2.0%/胜率54%"},
+      "horizon_stats": {
+        "3m": "中位+1.0%/胜率54%",
+        "6m": "中位+2.2%/胜率55%",
+        "12m": "中位+2.0%/胜率54%"
+      },
       "n": 3142,
       "source": "dca-entry-timing-table-2026-09-07",
       "window": "1994-2026，8指数周观测",
@@ -56,7 +81,9 @@
     },
     "tier_high": {
       "label": "宽度热档（b200>56.7）",
-      "horizon_stats": {"12m": "中位+9.6%/胜率63%/P10−27.9%"},
+      "horizon_stats": {
+        "12m": "中位+9.6%/胜率63%/P10−27.9%"
+      },
       "n": 2278,
       "source": "dca-entry-timing-table-2026-09-07",
       "window": "1994-2026，8指数周观测",
@@ -70,7 +97,10 @@
     },
     "gap_over_30": {
       "label": "距年线≥+30%（继续持有的前瞻，出场视角）",
-      "horizon_stats": {"6m": "中位−6.2%/胜率44%", "12m": "中位−12.4%/胜率31%"},
+      "horizon_stats": {
+        "6m": "中位−6.2%/胜率44%",
+        "12m": "中位−12.4%/胜率31%"
+      },
       "n": 429,
       "source": "dca-entry-timing-table-2026-09-07（出场侧补行）",
       "window": "1994-2026，8指数周观测",
@@ -83,7 +113,12 @@
   },
   "combos": {
     "cross_asset_4_standard": {
-      "legs": ["沪深300", "创业板", "黄金", "纳指"],
+      "legs": [
+        "沪深300",
+        "创业板",
+        "黄金",
+        "纳指"
+      ],
       "perf_5y_window": "年化15.88%/最大回撤−9.7%（等权·季度再平衡·W5=2020-11-16→2026-08-27 单一路径）",
       "metrics": {
         "xirr_5y_single_path": 0.1588,
@@ -96,11 +131,30 @@
         "mdd_grid_median": -0.1519
       },
       "robustness": {
-        "V1_vs_hs300_flat": {"median_pp": 10.81, "pos_share": 1.0, "jan_starts": "8/8", "verdict": "成立"},
-        "V2_rebal_increment": {"median_pp": 0.62, "pos_share": 1.0, "verdict": "成立"},
-        "V3_quarterly_vs_monthly": {"median_pp": 0.05, "verdict": "季度≈月度确认（第九轮『完胜』改口径为等价+省费）"},
-        "V4_weight_neighborhood": {"median_pp": 3.01, "verdict": "权重敏感：往沪深300倾斜40%显著变差；等权的稳健来自不偏向最弱的腿"},
-        "endpoint_sensitivity_5y_xirr": {"2026-03-27": 0.1474, "2026-05-27": 0.1884, "2026-08-27": 0.1588}
+        "V1_vs_hs300_flat": {
+          "median_pp": 10.81,
+          "pos_share": 1.0,
+          "jan_starts": "8/8",
+          "verdict": "成立"
+        },
+        "V2_rebal_increment": {
+          "median_pp": 0.62,
+          "pos_share": 1.0,
+          "verdict": "成立"
+        },
+        "V3_quarterly_vs_monthly": {
+          "median_pp": 0.05,
+          "verdict": "季度≈月度确认（第九轮『完胜』改口径为等价+省费）"
+        },
+        "V4_weight_neighborhood": {
+          "median_pp": 3.01,
+          "verdict": "权重敏感：往沪深300倾斜40%显著变差；等权的稳健来自不偏向最弱的腿"
+        },
+        "endpoint_sensitivity_5y_xirr": {
+          "2026-03-27": 0.1474,
+          "2026-05-27": 0.1884,
+          "2026-08-27": 0.1588
+        }
       },
       "window": "W5=2020-11-16→2026-08-27（单路径）；长窗2013-07-29→2026-08-27（13.1年）；起点网格2013-09~2021-08月度96起点（每条≥5年）",
       "fee_bps": 10,
@@ -114,7 +168,12 @@
       "note": "15.88%/−9.7%是5.8年窗单一路径（起点由科创50上市日决定、终点在2024-09反弹后），被窗口抬高的部分已在第十八轮量化：13年整装12.14%/回撤−23.8%（含2015崩盘与2018熊市）；96个月度起点中位13.86%[P10 12.23%, P90 15.70%]；终点±3个月单路径年化在14.7%~18.8%间晃。引用时以中位+区间为主数字，单路径数字必须带窗口说明。"
     },
     "cross_asset_4_aggressive": {
-      "legs": ["沪深300", "科创50", "黄金", "纳指"],
+      "legs": [
+        "沪深300",
+        "科创50",
+        "黄金",
+        "纳指"
+      ],
       "perf_5y_window": "年化17.57%/最大回撤−13.1%（等权·季度再平衡·W5=2020-11-16→2026-08-27 单一路径）",
       "metrics": {
         "xirr_5y_single_path": 0.1757,
@@ -161,17 +220,62 @@
     "note": "历史中位+22~27%出自第十三轮统一+30%出场口径，终版分标的菜单（蓝筹30/成长50）未经整装端到端复跑（登记待办）；且为中位数口径（+30%止盈达标即赢的设计使中位偏乐观，第十三轮已登记），引用时同时报均值/最差单笔。"
   },
   "falsified_knobs": [
-    {"knob": "定投择时加减码（宽度/冰点/五族情绪）", "evidence": "dca-methods/-sentiment-timing/-industry-longwindow/-sentiment-timing 2026-09-06~08", "registered": "2026-09-08"},
-    {"knob": "估值分段加码（PE/PB分位<30%×2/>70%×0.5）", "evidence": "dca-sentiment-valuation-2026-09-07：方向8/8为正但幅度+0~0.9%趋零", "note": "严格口径=幅度过小不采用，非方向证伪", "registered": "2026-09-08"},
-    {"knob": "等好状态再投的门控", "evidence": "dca-trigger-gating-2026-09-07：深超跌门控2/16", "registered": "2026-09-08"},
-    {"knob": "年线/宽度清仓总开关", "evidence": "dca-combos-exit-2026-09-07：0/14、2/14", "registered": "2026-09-08"},
-    {"knob": "系统买点后分批/定投窗口", "evidence": "dca-entry-execution-2026-09-07：8/8负增量", "registered": "2026-09-08"},
-    {"knob": "组合内给腿加止盈（全额/部分）", "evidence": "dca-joint-policy-2026-09-08：0/12，再平衡即止盈", "registered": "2026-09-08"},
-    {"knob": "统一止损−20%于浅入场", "evidence": "dca-adaptive-exits-2026-09-08：bottom入场中位27%→3%", "registered": "2026-09-08"}
+    {
+      "knob": "定投择时加减码（宽度/冰点/五族情绪）",
+      "evidence": "dca-methods/-sentiment-timing/-industry-longwindow/-sentiment-timing 2026-09-06~08",
+      "registered": "2026-09-08"
+    },
+    {
+      "knob": "估值分段加码（PE/PB分位<30%×2/>70%×0.5）",
+      "evidence": "dca-sentiment-valuation-2026-09-07：方向8/8为正但幅度+0~0.9%趋零",
+      "note": "严格口径=幅度过小不采用，非方向证伪",
+      "registered": "2026-09-08"
+    },
+    {
+      "knob": "等好状态再投的门控",
+      "evidence": "dca-trigger-gating-2026-09-07：深超跌门控2/16",
+      "registered": "2026-09-08"
+    },
+    {
+      "knob": "年线/宽度清仓总开关",
+      "evidence": "dca-combos-exit-2026-09-07：0/14、2/14",
+      "registered": "2026-09-08"
+    },
+    {
+      "knob": "系统买点后分批/定投窗口",
+      "evidence": "dca-entry-execution-2026-09-07：8/8负增量",
+      "registered": "2026-09-08"
+    },
+    {
+      "knob": "组合内给腿加止盈（全额/部分）",
+      "evidence": "dca-joint-policy-2026-09-08：0/12，再平衡即止盈",
+      "registered": "2026-09-08"
+    },
+    {
+      "knob": "统一止损−20%于浅入场",
+      "evidence": "dca-adaptive-exits-2026-09-08：bottom入场中位27%→3%",
+      "registered": "2026-09-08"
+    }
   ],
   "risk_preference_options": [
-    {"option": "全额止盈+年线回场（组合内）", "trade": "终值−0.4%换回撤−13.1%→−8.3%", "source": "dca-joint-policy-2026-09-08", "status": "single_window", "registered": "2026-09-08"},
-    {"option": "宽度热清仓开关", "trade": "回撤显著变浅、终值大幅下降", "source": "dca-combos-exit-2026-09-07", "registered": "2026-09-08"},
-    {"option": "−20%统一止损", "trade": "最差−43%→−23%、浅入场中位塌缩", "source": "dca-adaptive-exits-2026-09-08", "registered": "2026-09-08"}
+    {
+      "option": "全额止盈+年线回场（组合内）",
+      "trade": "终值−0.4%换回撤−13.1%→−8.3%",
+      "source": "dca-joint-policy-2026-09-08",
+      "status": "single_window",
+      "registered": "2026-09-08"
+    },
+    {
+      "option": "宽度热清仓开关",
+      "trade": "回撤显著变浅、终值大幅下降",
+      "source": "dca-combos-exit-2026-09-07",
+      "registered": "2026-09-08"
+    },
+    {
+      "option": "−20%统一止损",
+      "trade": "最差−43%→−23%、浅入场中位塌缩",
+      "source": "dca-adaptive-exits-2026-09-08",
+      "registered": "2026-09-08"
+    }
   ]
 }
