@@ -28,6 +28,9 @@
 
 ## 1. 任务编号总账（任务书 → 执行归档）
 
+- [连续讨论ZCode第二轮独立复核](controller-zcode-continuity-r2-2026-09-17.md)：混合句归属与否定固定收口。
+
+
 - [连续讨论ZCode第一轮独立复核](controller-zcode-continuity-2026-09-17.md)：41项通过，G1/G2固定补修。
 
 
