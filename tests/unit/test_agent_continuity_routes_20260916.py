@@ -236,3 +236,45 @@ def test_r2_amount_correction_consistent(client):
     third = _chat(client, sid, "那这笔钱怎么安排？", "r2-amt-3")
     assert "5000" in third["reply"]
     assert "10000" not in third["reply"]
+
+
+# ---------------- 三轮收口（主控复核 2026-09-17）：撤销须本人肯定、用途同界 ----------------
+
+def _last_stored_reply(client_test: TestClient, sid: str) -> str:
+    msgs = client_test.get(f"/api/agent/sessions/{sid}/messages").json()
+    return [m for m in msgs if m["role"] == "assistant"][-1]["content"]
+
+
+def test_r3_negated_self_clear_preserves_holding(client):
+    """「我已经持有了 → 我没有清仓」：否定清仓动作不清除持仓背景，
+    后续问题仍按持仓管理口径回答，且落库回答与接口回答一致。"""
+    client, db = client
+    sid = _mk_session(db)
+    _chat(client, sid, "我已经持有了", "r3-ngc-1")
+    _chat(client, sid, "我没有清仓", "r3-ngc-2")
+    third = _chat(client, sid, "那现在重点看哪里？", "r3-ngc-3")
+    assert "从持仓管理角度讲" in third["reply"]
+    assert third["reply"] == _last_stored_reply(client, sid)
+
+
+def test_r3_friend_clear_does_not_touch_own_background(client):
+    """「我已经持有了 → 朋友清仓了」：第三人清仓不动本人持仓背景。"""
+    client, db = client
+    sid = _mk_session(db)
+    _chat(client, sid, "我已经持有了", "r3-fc-1")
+    _chat(client, sid, "朋友清仓了", "r3-fc-2")
+    third = _chat(client, sid, "那现在重点看哪里？", "r3-fc-3")
+    assert "从持仓管理角度讲" in third["reply"]
+    assert third["reply"] == _last_stored_reply(client, sid)
+
+
+def test_r3_friend_purpose_not_user_background(client):
+    """「朋友有一万元闲钱」：金额与用途都不进本人背景——后续资金问题
+    不把朋友的闲钱当作用户已声明用途（不出现「你说过…闲钱」）。"""
+    client, db = client
+    sid = _mk_session(db)
+    _chat(client, sid, "朋友有一万元闲钱", "r3-fp-1")
+    second = _chat(client, sid, "那这笔钱怎么安排？", "r3-fp-2")
+    assert "10000" not in second["reply"]
+    assert "你说过这是一笔已有的闲钱" not in second["reply"]
+    assert second["reply"] == _last_stored_reply(client, sid)

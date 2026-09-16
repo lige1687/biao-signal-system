@@ -1,5 +1,11 @@
 # 连续讨论补修收口：e461d838 独立复验通过，零产品代码改动结案
 
+> **三轮修订（2026-09-17，同任务 round=2）**：主控复核发现冻结目标内的三处
+> 残余并已在本轮修复——G1 概念放行曾覆盖肯定执行要求（已修 `agentUx.ts`）、
+> G2 撤销/用途未核本人与肯定陈述（已修 `resolve.py`）、G3 本报告三处文案
+> 纠错（本轮已改）。详见 §7 三轮补修；§1–§6 为 round=1 原始记录，按要求
+> 原样保留（其中 §6 的两处表述已在 §7 标注作废并以 §7 为准）。
+
 ## 一句话结论（大白话）
 
 主控点名的两件事，这一轮独立复验全部成立，**本轮没有改任何产品代码，只补了证据**。
@@ -85,10 +91,11 @@
 
 - 单分支提交（本报告与证据为分支上新提交）；只新增报告/raw/交接文件，
   零产品代码改动（`git show --stat` 可复核）。
-- 回归：连续讨论两套测试 41 通过；与 cfix2 同口径全量回归（名称/主题/03B/契约/
-  stream/copilot_ops/稳定性/重试/e2e + 连续讨论）**144 通过、1 已知 xfail**
-  （`tests/integration/test_agent_chat_e2e.py` 校验器百分比派生缺口，
-  xfail(strict) 留痕——保持原边界，不是全绿，不隐瞒）。
+- 回归：连续讨论两套测试 41 通过；与 cfix2 同口径的 **13 文件相关回归**
+  （名称/主题/03B/契约/stream/copilot_ops/稳定性/重试/e2e + 连续讨论）
+  **144 通过、1 已知 xfail**（`tests/integration/test_agent_chat_e2e.py`
+  校验器百分比派生缺口，xfail(strict) 留痕——保持原边界，不是全绿；
+  这是 13 个相关测试文件的范围，**不是全仓测试**）。
 - 前端：`npm run test:agent-ux` 通过；`npm run build`（含 tsc）通过。
 - 归置检查（只读）：借用运行仓 `scripts/check_repo_hygiene.py` 原函数与白名单，
   将检查根重定向到本工作区（方法记录于
@@ -123,7 +130,7 @@
 PYTHONPATH=src /opt/homebrew/bin/python3.11 -m pytest -q \
   tests/unit/test_agent_continuity_20260916.py \
   tests/unit/test_agent_continuity_routes_20260916.py
-# 全量回归（144 通过、1 已知 xfail）
+# 连续讨论 13 文件相关回归（144 通过、1 已知 xfail；非全仓测试）
 PYTHONPATH=src /opt/homebrew/bin/python3.11 -m pytest -q \
   tests/unit/test_agent_continuity_20260916.py tests/unit/test_agent_continuity_routes_20260916.py \
   tests/unit/test_agent_name_resolve.py tests/unit/test_agent_subject_names.py \
@@ -155,20 +162,83 @@ PYTHONPATH=src /opt/homebrew/bin/python3.11 docs/experiments/raw/agent-continuit
   - `d465b558` 连续讨论四处修复（基线轮）
   - `6292b527` / `ecb6fdb4` / `143d1c1e` 冻结案例、基线与报告（docs）
   - `b1dc3270` 两处陈旧 e2e 断言修复（既有基线失败）
-  - `0e5cba80` C1–C3 补修；`ba16af38` docs；`e461d838` 二轮补修（本轮被验对象）
-  - `25926877` 本轮收口提交（报告+raw 证据+registry/INDEX 登记+交接归档，
-    29 文件纯新增，零产品代码改动）
+  - `0e5cba80` C1–C3 补修；`ba16af38` docs；`e461d838` **实施提交**（两项
+    固定收口的产品实现，本轮被验对象）
+  - 交付提交（纯文档与证据，无产品代码）：round=1 交付为 `f4e8c960`；
+    round=2 按主控复核补修后以分支**顶提交为准**（以 `git log` 现查，
+    本报告不引用自身哈希——round=1 曾自引 `25926877`，因 amend 漂移作废，
+    此处记录该教训：交付提交区分「实施」与「交付」，交付哈希只作当时点记录）。
 - **运行目录只读差异清单**
   （`raw/agent-continuity-zcode-closeout-2026-09-17/runtime-dir-readonly-diff.json`，
   运行目录未被写入）：与本分支 11 个关键文件对应的运行目录文件中，
-  9 个内容不同（运行目录落后于本分支，采用即以本分支为准）、2 个测试文件运行目录
-  不存在（新增）；`configs/`、`src/lei_signal/ui/`、`.env*` 本分支未触碰。
+  9 个内容不同、2 个测试文件运行目录不存在（新增）。**这只是差异记录——
+  运行目录存在并行因子改动，不能据此判定运行仓落后或本分支可直接覆盖；
+  差异待主控与并行因子负责人定向核对后再定采用方式。**
+  `configs/`、`src/lei_signal/ui/`、`.env*` 本分支未触碰。
 - 台账（升级库）由主控更新，本轮未写共享升级库。
+
+## 7. 三轮补修（主控复核 round=2，同任务同一冻结目标）
+
+主控独立复核（`docs/experiments/controller-zcode-continuity-2026-09-17.md`，
+失败证据 `raw/controller-zcode-continuity-2026-09-17/`，原样保留未覆盖）发现
+冻结目标内三处残余；本轮只修这三处，不扩项。
+
+### G1 修复：概念放行不再覆盖肯定的执行要求
+
+- 反例： 「请解释一下用ATR止损回测，比较收益」「先聊聊，再帮我用ATR止损补测」
+  修前均放行（null）。修复（`web/src/utils/agentUx.ts`）：新增肯定执行动作词表
+  `ATR_EXEC_RE`（补测/回测/测一下/复跑/重新测/再测/比较）+ 就近否定表
+  `ATR_EXEC_NEGATED_RE`——执行动作未被否定时，概念词（解释/聊聊）不再放行；
+  纯概念与明确否定执行（「是什么意思？我不要求回测」「不想做比较」）继续放行。
+  只收**动作词**：胜率/收益是话题词不是执行要求，不进表（「对收益的意义」须放行）。
+- 保留：原继续讨论草稿、真实证券 ATR 识别、两入口共用函数，均未动。
+- 证据：主控 `atr-probe.mjs` 同逻辑修后复跑三例全过
+  （`raw/agent-continuity-zcode-closeout-r2-2026-09-17/atr_probe_rerun.mjs`
+  + `atr-rerun-results.json`；主控目录原始失败结果未覆盖）；
+  前端回归新增 4 断言后 `npm run test:agent-ux` 通过。
+- 两入口浏览器链（隔离服务，临时库，无模型；
+  `ui_atr_mixed_chain.py` + `atr-mixed-notes.json` + `atr-mixed-requests.json`
+  + 截图 5 张）：两例混合问法均诚实拦截、**无任何非 GET backtest 流量**
+  （唯一 backtest 请求是面板配置 `GET /api/backtest/options`，非任务创建）、
+  页面无补测任务卡、工作台上下文保持通信ETF；纯概念在两入口均正常讨论
+  （工作台新答案卡+后端请求证据；控制台轮数净增+新请求 200）。
+- 开发过程记录：首轮浏览器脚本两次假阳性/假阴性（等待条件被旧卡提前满足、
+  一次漏发 Enter），修正断言后全绿；这些脚本迭代只发生在本轮 raw 目录内。
+
+### G2 修复：撤销须本人肯定陈述，用途与金额同界
+
+- 反例修复（`src/lei_signal/copilot/resolve.py`）：
+  1. 「我没有清仓/还没卖出」——否定清仓动作＝仍在持有，不清除
+     （新增 `_CLEAR_ACTION_NEG_RE` 就近否定守卫）；
+  2. 「朋友清仓了/朋友已经卖了」——第三人主语不清除本人背景
+     （`detect_fact_correction` 增加 `_THIRD_PERSON_RE` 守卫，
+     `budget_cleared` 同界）;
+  3. 「朋友有一万元闲钱」——用途不再入本人背景（`parse_request` 用途提取
+     加假设/第三人守卫），且不再追问用途（澄清条件同界）。
+- 正例保留：本人肯定清仓（我清仓了/我已经卖了/我已经不持有了）仍清除；
+  本人闲钱用途、金额更正（不是一万是五千）不变；r1 全部既有正反例不回退。
+- 证据：主控 G2 探针同逻辑修后复跑三查全过
+  （`controller_probe_rerun.py/json`，主控原件未动）；
+  新增单测 `test_r3_correction_needs_own_affirmative_statement`、
+  `test_r3_background_preserved_against_foreign_or_negated_clear`，
+  新增路由测试 3 例（真实临时库+精确 question_id，均核对接口回答与
+  **落库回答逐字一致**）；连续讨论两套测试 **46 passed**。
+
+### G3 纠错（本报告文案）
+
+1. §6 提交清单：区分**实施提交**（`e461d838`，产品实现）与**交付提交**
+   （纯文档证据；round=1 实际交付 `f4e8c960`，曾误写 `25926877`——amend
+   漂移，已作废并记录教训：交付哈希以分支顶 `git log` 现查为准）。
+2. §6 运行目录差异：删去「运行目录落后于本分支、采用即以本分支为准」的
+   可覆盖推论，改为「差异待定向核对（运行目录存在并行因子改动）」。
+3. §3/§5 「144 项全量回归」改为「13 文件相关回归（非全仓测试）」。
 
 ## ARCHIVE
 
-category：数据与质量；verdict：watch（e461d838 两项固定收口经独立复验成立：
-两入口 ATR 链页面+请求证据、真实库身份矩阵、41+144 项测试与 1 项已知 xfail
-边界一致；整包合入待主控复验裁决）。本轮零产品代码改动；未改判定层、
-资金纪律、模型配置；未新增交易/因子能力；不代表收益提升；未部署、未合 main、
-未写真实库与运行目录。
+category：数据与质量；verdict：mixed（round=1 复验 e461d838 两项收口成立；
+round=2 主控复核新增反例证实冻结目标内尚有边界残余，本轮已修复并有
+函数级/路由级/两入口浏览器证据：G1 混合问法拦截且零任务提交、G2 撤销与
+用途的本人·肯定边界、G3 文案纠错；46+149 项相关回归与 1 项已知 xfail
+边界一致；合入仍待主控复验裁决）。判定层、资金纪律、模型配置未动；
+未新增交易/因子能力；不代表收益提升；未部署、未合 main、未写真实库与
+运行目录；主控原始失败证据原样保留。

@@ -221,6 +221,10 @@ _HOLDING_CASH_RE = re.compile(
 _HOLDING_CLEAR_RE = re.compile(
     r"没(有)?持有|没买|未持有|不再持有|不持有了|不持有|已经卖了|已卖出|"
     r"清仓|割肉|止盈离场|暂时没持仓")
+#: 三轮收口（主控复核 2026-09-17）：**否定清仓动作**不是撤销——
+#: 「我没有清仓/还没卖出」= 仍在持有，不得清除既有持仓事实。
+_CLEAR_ACTION_NEG_RE = re.compile(
+    r"(?:没|无|未|别|不|勿)[^，。；,.;?!？！]{0,4}(?:清仓|割肉|止盈离场|卖)")
 _BUDGET_CLEAR_RE = re.compile(
     r"没(有)?[^，。；,.;?!？！]{0,8}(预算|闲钱|资金|那么多钱|这个钱)|"
     r"不(是|要)[^，。；,.;?!？！]{0,6}(万|千|元|块)")
@@ -251,17 +255,25 @@ def detect_stance(message: str) -> str | None:
 
 
 def detect_fact_correction(message: str) -> dict[str, bool]:
-    """用户本条消息是否明确**撤销**此前声明的事实（C3 背景记忆清除用）。
+    """用户本条消息是否明确**撤销**自己此前声明的事实（C3 背景记忆清除用）。
 
     ``holding_cleared``：说了没持有/已卖出/清仓等；
-    ``budget_cleared``：说了没有预算/没有那笔钱等。只认明确撤销，沉默不算。"""
+    ``budget_cleared``：说了没有预算/没有那笔钱等。只认明确撤销，沉默不算。
+    三轮收口（主控复核 2026-09-17）：撤销须是**本人的、肯定的**陈述——
+    第三人主语（「朋友清仓了」）不动本人的背景；否定清仓动作
+    （「我没有清仓/还没卖出」）是仍在持有，同样不清除；假设句维持原有不放行。"""
     text = (message or "").strip()
     if not text:
         return {"holding_cleared": False, "budget_cleared": False}
     hypothetical = bool(_HOLDING_HYPOTHETICAL_RE.search(text))
+    third_person = bool(_THIRD_PERSON_RE.search(text))
+    negated_action = bool(_CLEAR_ACTION_NEG_RE.search(text))
     return {
-        "holding_cleared": bool(_HOLDING_CLEAR_RE.search(text)) and not hypothetical,
-        "budget_cleared": bool(_BUDGET_CLEAR_RE.search(text)) and not hypothetical,
+        "holding_cleared": (bool(_HOLDING_CLEAR_RE.search(text))
+                            and not hypothetical and not third_person
+                            and not negated_action),
+        "budget_cleared": (bool(_BUDGET_CLEAR_RE.search(text))
+                           and not hypothetical and not third_person),
     }
 
 
@@ -374,7 +386,11 @@ def parse_request(message: str) -> dict[str, Any]:
         budget = _parse_loose_budget(text)
 
     # ---- 资金用途（R2：按钱的来源区分——闲钱优先于定投动词）----
-    if _PURPOSE_SPARE_RE.search(text):
+    # 三轮收口（主控复核 2026-09-17）：用途与金额同界——假设句、第三人主语
+    # 的钱（「朋友有一万元闲钱」「如果我有一万闲钱」）不提取为用户用途。
+    if (_HYPOTHETICAL_RE2.search(text) or _THIRD_PERSON_RE.search(text)):
+        purpose = "unknown"
+    elif _PURPOSE_SPARE_RE.search(text):
         purpose = "spare_cash"
     elif _PURPOSE_DCA_RE.search(text):
         purpose = "income_dca"
@@ -384,8 +400,11 @@ def parse_request(message: str) -> dict[str, Any]:
         purpose = "unknown"
 
     # ---- 澄清：用途不明且本次要给投入方案（钱怎么用）----
+    # 三轮收口：第三人/假设的钱不追问用途（不能让用户替朋友或假设情形分类）。
     need_clarification: list[dict[str, str]] = []
-    if purpose == "unknown" and topic in ("money", "dca") and intent == "discussion":
+    if (purpose == "unknown" and topic in ("money", "dca") and intent == "discussion"
+            and not _HYPOTHETICAL_RE2.search(text)
+            and not _THIRD_PERSON_RE.search(text)):
         need_clarification.append({
             "kind": "purpose",
             "question_cn": "这笔钱是持续投入的新收入，还是已有的闲钱分批？",

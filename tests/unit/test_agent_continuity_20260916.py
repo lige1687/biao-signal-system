@@ -421,6 +421,53 @@ def test_c3_new_semantic_guards():
     assert c2["budget_cleared"] is True
 
 
+def test_r3_correction_needs_own_affirmative_statement():
+    """三轮收口（主控复核 2026-09-17）：撤销须是本人的、肯定的陈述。
+
+    - 「我没有清仓/还没卖出」是否定清仓动作＝仍在持有，不清除；
+    - 「朋友清仓了/朋友已经卖了」第三人主语，不动本人背景；
+    - 本人肯定清仓（我清仓了/我已经卖了/我已经不持有了）仍清除；
+    - 用途与金额同界：「朋友有一万元闲钱」用途不入本人背景、不追问用途，
+      本人闲钱用途保留，金额更正正例不变。"""
+    # 否定清仓动作不清除
+    assert resolve_mod.detect_fact_correction("我没有清仓")["holding_cleared"] is False
+    assert resolve_mod.detect_fact_correction("还没卖出")["holding_cleared"] is False
+    # 第三人不代表本人撤销
+    assert resolve_mod.detect_fact_correction("朋友清仓了")["holding_cleared"] is False
+    assert resolve_mod.detect_fact_correction("朋友已经卖了")["holding_cleared"] is False
+    assert resolve_mod.detect_fact_correction("朋友没有那么多钱")["budget_cleared"] is False
+    # 本人肯定撤销保留
+    for text in ("我清仓了", "我已经卖了", "我已经不持有了"):
+        assert resolve_mod.detect_fact_correction(text)["holding_cleared"] is True, text
+    # 用途边界
+    p = resolve_mod.parse_request("朋友有一万元闲钱")
+    assert p["budget"] is None and p["purpose"] == "unknown"
+    assert p["need_clarification"] == []  # 不追着用户替朋友的钱分类用途
+    assert resolve_mod.parse_request("如果我有一万闲钱怎么安排")["purpose"] == "unknown"
+    assert resolve_mod.parse_request("我有一万闲钱，想分批放")["purpose"] == "spare_cash"
+    assert resolve_mod.parse_request("不是一万，是五千")["budget"]["amount"] == 5_000.0
+
+
+def test_r3_background_preserved_against_foreign_or_negated_clear():
+    """三轮收口：背景绑定链上，否定清仓/第三人清仓都不得抹去既有本人事实。"""
+    from lei_signal.api.routes.agent import _user_background
+
+    def _rows_with(coro_text: str):
+        return [
+            _user_row("我已经持有了", 1),
+            _bound_assistant_row("515880.SS", 1),
+            _user_row(coro_text, 2),
+            _bound_assistant_row("515880.SS", 2),
+        ]
+
+    for coro_text in ("我没有清仓", "朋友清仓了"):
+        bg = _user_background(_rows_with(coro_text), "515880.SS")
+        assert bg.get("holding") is True, coro_text
+    # 本人明确清仓仍清除（正例保留）
+    bg_self = _user_background(_rows_with("我清仓了"), "515880.SS")
+    assert bg_self.get("holding") in (None, False)
+
+
 # ---------------- 案例5/10a：resolve 澄清 ----------------
 
 def _resolve_client(tmp_path):

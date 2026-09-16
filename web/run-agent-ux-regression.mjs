@@ -64,6 +64,15 @@ assert.equal(detectUnsupportedExitRequest('解释一下 ATR 止损的思路'), n
 assert.equal(detectUnsupportedExitRequest('如果换成ATR止损，胜率会有什么变化？'), 'ATR 止损');
 assert.equal(detectUnsupportedExitRequest('用ATR止损补测一下效果如何'), 'ATR 止损');
 
+// 三轮收口（主控复核 2026-09-17）：概念词不能放行**肯定的**补测/比较要求。
+assert.equal(detectUnsupportedExitRequest('请解释一下用ATR止损回测，比较收益'), 'ATR 止损');
+assert.equal(detectUnsupportedExitRequest('先聊聊，再帮我用ATR止损补测'), 'ATR 止损');
+// 纯概念与明确否定执行的说法继续放行（正例保留）。
+assert.equal(detectUnsupportedExitRequest('请解释一下ATR止损对收益的意义'), null,
+  'pure concept without execution verbs still passes');
+assert.equal(detectUnsupportedExitRequest('先聊聊思路就好，我不想做比较'), null,
+  'negated execution request still passes');
+
 // 支持清单（拦截文案与面板共用）：不含 ATR，不用"成本区"含糊词（U4）
 for (const term of ['同时跌破20日指数均线与抵扣价', '关键性波动', '初始结构止损']) {
   assert.ok(SUPPORTED_EXITS_CN.includes(term), `supported list mentions ${term}`);

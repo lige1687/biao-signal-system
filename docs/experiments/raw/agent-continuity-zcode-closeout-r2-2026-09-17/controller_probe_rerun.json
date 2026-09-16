@@ -1,0 +1,37 @@
+{
+  "negated_clear": {
+    "inputs": [
+      "我已经持有了",
+      "我没有清仓"
+    ],
+    "background": {
+      "holding": true,
+      "stated": [
+        "持有"
+      ]
+    }
+  },
+  "friend_clear": {
+    "inputs": [
+      "我已经持有了",
+      "朋友清仓了"
+    ],
+    "background": {
+      "holding": true,
+      "stated": [
+        "持有"
+      ]
+    }
+  },
+  "friend_purpose": {
+    "inputs": [
+      "朋友有一万元闲钱"
+    ],
+    "background": {}
+  },
+  "checks": {
+    "negated_clear_preserves": true,
+    "friend_clear_preserves": true,
+    "friend_purpose_not_mine": true
+  }
+}

@@ -110,6 +110,14 @@ export function expectancyCn(r: number | null | undefined): string {
  * 只是不得捏造已回测结果。 */
 const ATR_CONCEPT_RE =
   /是什么意思|什么意思|是什么|聊聊|讨论|思路|解释|只讨论|不要求回测|不做数值比较|了解/;
+/** 肯定的补测/比较/换用要求（三轮收口 2026-09-17）：这类明确执行**动作词**
+ * 未被否定时，即使句中出现「解释/聊聊」也不放行——概念标记只保护纯概念与
+ * 明确否定执行的问法（「请解释一下用ATR止损回测，比较收益」仍须拦截）。
+ * 只收动作词：胜率/收益是话题词不是执行要求（「对收益的意义」纯概念须放行）。 */
+const ATR_EXEC_RE =
+  /补测|回测|测一下|复跑|重新测|再测|比较/;
+const ATR_EXEC_NEGATED_RE =
+  /(?:不|没|无|别|勿)[^，。；,.;?!？！]{0,4}(?:回测|补测|测一下|复跑|重新测|再测|比较)/;
 
 export function detectUnsupportedExitRequest(message: string): string | null {
   const t = (message || "").replace(/\s+/g, "");
@@ -121,7 +129,9 @@ export function detectUnsupportedExitRequest(message: string): string | null {
   // 收口一：区分「要求执行/比较未支持的退出方法」与「概念解释/只讨论思路」。
   // 概念讨论放行（继续讨论草稿「我想先聊聊思路…只讨论思路，不做数值比较」
   // 与「ATR止损是什么意思？我不要求回测」都属此类）；显式比较/换用请求仍拦截。
-  if (ATR_CONCEPT_RE.test(t)) return null;
+  // 三轮收口：肯定的补测/比较/换用要求不因「解释/聊聊」等概念词放行。
+  const execAffirmative = ATR_EXEC_RE.test(t) && !ATR_EXEC_NEGATED_RE.test(t);
+  if (!execAffirmative && ATR_CONCEPT_RE.test(t)) return null;
   return "ATR 止损";
 }
 

@@ -31,7 +31,7 @@
 - [连续讨论ZCode第一轮独立复核](controller-zcode-continuity-2026-09-17.md)：41项通过，G1/G2固定补修。
 
 
-- [连续讨论补修收口（ZCode执行轮）](agent-continuity-zcode-closeout-2026-09-17.md)：e461d838独立复验成立——两入口ATR链页面+请求证据、真实库身份矩阵全过；144项回归+1已知xfail；零代码改动，待主控复验合入。
+- [连续讨论补修收口（ZCode执行轮）](agent-continuity-zcode-closeout-2026-09-17.md)：round1复验e461d838两项收口成立；round2修主控复核三处残余（概念放行不盖执行要求/撤销用途本人肯定边界/文案纠错）；46+149项相关回归+1已知xfail。待主控复验。
 
 - [连续讨论补修二轮复验](controller-agent-continuity-cfix-review-2026-09-16.md)：保留比较修复，收口ATR继续讨论与记忆归属。
 
