@@ -67,6 +67,10 @@ assert.equal(detectUnsupportedExitRequest('用ATR止损补测一下效果如何'
 // 三轮收口（主控复核 2026-09-17）：概念词不能放行**肯定的**补测/比较要求。
 assert.equal(detectUnsupportedExitRequest('请解释一下用ATR止损回测，比较收益'), 'ATR 止损');
 assert.equal(detectUnsupportedExitRequest('先聊聊，再帮我用ATR止损补测'), 'ATR 止损');
+// r4 复核（主控三轮 2026-09-17）：否定按分句核实，一个动作被否定不得取消
+// 另一个动作——先否定比较再肯定回测仍拦截；两者都否定是纯概念。
+assert.equal(detectUnsupportedExitRequest('先解释ATR止损，不用比较，直接帮我回测'), 'ATR 止损');
+assert.equal(detectUnsupportedExitRequest('不用比较，也不回测，ATR止损是什么意思'), null);
 // 纯概念与明确否定执行的说法继续放行（正例保留）。
 assert.equal(detectUnsupportedExitRequest('请解释一下ATR止损对收益的意义'), null,
   'pure concept without execution verbs still passes');

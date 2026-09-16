@@ -278,3 +278,31 @@ def test_r3_friend_purpose_not_user_background(client):
     assert "10000" not in second["reply"]
     assert "你说过这是一笔已有的闲钱" not in second["reply"]
     assert second["reply"] == _last_stored_reply(client, sid)
+
+
+# ---- 三轮收口（主控复核 r3）：分句级组合场景（路由级真实绑定链） ----
+
+def test_r4_own_clear_inside_mixed_clause(client):
+    """「我已经持有了 → 朋友还持有，但我已经清仓了」：本人分句清仓生效，
+    后续不再按持仓管理口径回答；落库回答与接口回答一致。"""
+    client, db = client
+    sid = _mk_session(db)
+    _chat(client, sid, "我已经持有了", "r4-mix-1")
+    _chat(client, sid, "朋友还持有，但我已经清仓了", "r4-mix-2")
+    third = _chat(client, sid, "那现在重点看哪里？", "r4-mix-3")
+    assert "从持仓管理角度讲" not in third["reply"]
+    assert third["reply"] == _last_stored_reply(client, sid)
+
+
+def test_r4_income_purpose_after_negated_spare(client):
+    """「我有一万闲钱 → 我没有闲钱，这是每月工资定投」：闲钱用途撤销、
+    本人定投用途生效（不重复追问用途），旧金额不再出现。"""
+    client, db = client
+    sid = _mk_session(db)
+    _chat(client, sid, "我有一万闲钱，能不能买一点？", "r4-inc-1")
+    _chat(client, sid, "我没有闲钱，这是每月工资定投", "r4-inc-2")
+    third = _chat(client, sid, "那这笔钱怎么安排？", "r4-inc-3")
+    assert "10000" not in third["reply"]  # 撤销后旧金额不再出现
+    assert "持续投入的新收入" in third["reply"]  # 本人定投用途生效
+    assert "你说过这是一笔已有的闲钱" not in third["reply"]
+    assert third["reply"] == _last_stored_reply(client, sid)

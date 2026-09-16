@@ -1,12 +1,19 @@
 # 交接：连续讨论补修收口（ZCode 执行轮，2026-09-17）
 
-> **round=2 修订**：主控复核（`controller-zcode-continuity-2026-09-17.md`）
+> **round=3 修订（最后一轮）**：主控第二轮复核（
+> `controller-zcode-continuity-r2-2026-09-17.md`）证实 round=2 的整句级
+> 守卫在一句多事时互相误伤；本轮把否定与归属判断改为**分句级**
+> （`resolve.py` 的 `_clause_spans`/`_own_clause` 共用结构 +
+> `agentUx.ts` 的 `hasAffirmativeExec` 逐动作核实），报告新增 §9。
+> 修后证据在 `docs/experiments/raw/agent-continuity-zcode-closeout-r3-2026-09-17/`
+> （主控 mixed 探针复跑、ATR 混合 4 例复跑、两入口浏览器链、r3 指纹、
+> 回归日志）；主控两轮失败证据原样保留未覆盖。
+>
+> **round=2 修订**：主控第一轮复核（`controller-zcode-continuity-2026-09-17.md`）
 > 三处残余已修复——G1 `web/src/utils/agentUx.ts`（肯定执行要求不被概念词
 > 放行）、G2 `src/lei_signal/copilot/resolve.py`（撤销须本人肯定陈述、用途
 > 与金额同界）、G3 报告文案纠错。修后证据在
-> `docs/experiments/raw/agent-continuity-zcode-closeout-r2-2026-09-17/`
-> （含两入口混合问法浏览器链、主控探针修后复跑、r2 指纹）；主控原始失败
-> 证据 `raw/controller-zcode-continuity-2026-09-17/` 原样保留未覆盖。
+> `docs/experiments/raw/agent-continuity-zcode-closeout-r2-2026-09-17/`。
 > 下方为 round=1 原始交接，原样保留。
 
 ## 给谁看

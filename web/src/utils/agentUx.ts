@@ -110,14 +110,26 @@ export function expectancyCn(r: number | null | undefined): string {
  * 只是不得捏造已回测结果。 */
 const ATR_CONCEPT_RE =
   /是什么意思|什么意思|是什么|聊聊|讨论|思路|解释|只讨论|不要求回测|不做数值比较|了解/;
-/** 肯定的补测/比较/换用要求（三轮收口 2026-09-17）：这类明确执行**动作词**
- * 未被否定时，即使句中出现「解释/聊聊」也不放行——概念标记只保护纯概念与
- * 明确否定执行的问法（「请解释一下用ATR止损回测，比较收益」仍须拦截）。
- * 只收动作词：胜率/收益是话题词不是执行要求（「对收益的意义」纯概念须放行）。 */
-const ATR_EXEC_RE =
-  /补测|回测|测一下|复跑|重新测|再测|比较/;
-const ATR_EXEC_NEGATED_RE =
-  /(?:不|没|无|别|勿)[^，。；,.;?!？！]{0,4}(?:回测|补测|测一下|复跑|重新测|再测|比较)/;
+/** 肯定的补测/比较/换用要求（三轮收口 2026-09-17；r3 复核改**分句核实**）：
+ * 对每个执行动作分别核实是否被否定——一个动作被否定不得取消另一动作
+ * （「不用比较，直接帮我回测」仍拦截）；只收动作词：胜率/收益是话题词
+ * 不是执行要求（「对收益的意义」纯概念须放行）。 */
+const ATR_EXEC_RE = /补测|回测|测一下|复跑|重新测|再测|比较/g;
+const ATR_EXEC_NEG_TAIL_RE =
+  /(?:不|没|无|别|勿|非)[^，。；,.;:;?!？！]{0,4}$/;
+
+function hasAffirmativeExec(t: string): boolean {
+  ATR_EXEC_RE.lastIndex = 0;
+  let m: RegExpExecArray | null;
+  while ((m = ATR_EXEC_RE.exec(t)) !== null) {
+    const before = t.slice(0, m.index);
+    const cut = Math.max(...["，", ",", "。", "；", ";", "？", "?", "！", "!", "：", ":"]
+      .map((p) => before.lastIndexOf(p)));
+    const clausePrefix = cut >= 0 ? before.slice(cut + 1) : before;
+    if (!ATR_EXEC_NEG_TAIL_RE.test(clausePrefix)) return true;
+  }
+  return false;
+}
 
 export function detectUnsupportedExitRequest(message: string): string | null {
   const t = (message || "").replace(/\s+/g, "");
@@ -129,8 +141,9 @@ export function detectUnsupportedExitRequest(message: string): string | null {
   // 收口一：区分「要求执行/比较未支持的退出方法」与「概念解释/只讨论思路」。
   // 概念讨论放行（继续讨论草稿「我想先聊聊思路…只讨论思路，不做数值比较」
   // 与「ATR止损是什么意思？我不要求回测」都属此类）；显式比较/换用请求仍拦截。
-  // 三轮收口：肯定的补测/比较/换用要求不因「解释/聊聊」等概念词放行。
-  const execAffirmative = ATR_EXEC_RE.test(t) && !ATR_EXEC_NEGATED_RE.test(t);
+  // r3 复核：肯定执行按**分句**核实——任一动作未否定即拦截，
+  // 概念词（解释/聊聊）只保护纯概念与明确否定执行的问法。
+  const execAffirmative = hasAffirmativeExec(t);
   if (!execAffirmative && ATR_CONCEPT_RE.test(t)) return null;
   return "ATR 止损";
 }

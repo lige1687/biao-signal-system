@@ -468,6 +468,59 @@ def test_r3_background_preserved_against_foreign_or_negated_clear():
     assert bg_self.get("holding") in (None, False)
 
 
+def test_r4_clause_level_guards():
+    """三轮收口（主控复核 r3 2026-09-17）：判断单位从整句改为分句。
+
+    - 撤销：第三人分句不阻止同句本人更新（「朋友还持有，但我已经清仓了」
+      → 撤销生效）；本人否定分句不清除，第三人分句也不替本人清除
+      （「我没清仓，朋友清仓了」→ 保留）；
+    - 用途：否定分句不建立、后续本人肯定分句可更新（「我没有闲钱，这是
+      每月工资定投」→ income_dca）；第三人分句不提取（「朋友有闲钱，我
+      每月工资定投」→ income_dca 而非 spare_cash/unknown）；
+    - 假设与金额更正、既有正例全部保持。"""
+    # 撤销：分句化
+    assert resolve_mod.detect_fact_correction(
+        "朋友还持有，但我已经清仓了")["holding_cleared"] is True
+    assert resolve_mod.detect_fact_correction(
+        "我没清仓，朋友清仓了")["holding_cleared"] is False
+    assert resolve_mod.detect_fact_correction("我打算清仓")["holding_cleared"] is False
+    assert resolve_mod.detect_fact_correction(
+        "朋友没买，我已经不持有了")["holding_cleared"] is True
+    # 用途：分句化
+    assert resolve_mod.parse_request("我没有闲钱，这是每月工资定投")["purpose"] == "income_dca"
+    assert resolve_mod.parse_request("朋友有闲钱，我每月工资定投")["purpose"] == "income_dca"
+    assert resolve_mod.parse_request("我没有闲钱")["purpose"] == "unknown"
+    p = resolve_mod.parse_request("我没有闲钱，这是每月工资定投")
+    assert p["need_clarification"] == []  # 用途已明不再追问
+    # 假设分句不建本人事实；金额更正与既有正例保持
+    p2 = resolve_mod.parse_request("如果我有一万闲钱怎么安排")
+    assert p2["purpose"] == "unknown" and p2["budget"] is None
+    assert resolve_mod.parse_request("不是一万，是五千")["budget"]["amount"] == 5_000.0
+
+
+def test_r4_background_clause_level_chain():
+    """三轮收口：组合句在真实绑定链上的背景效果。"""
+    from lei_signal.api.routes.agent import _user_background
+
+    def _rows(*texts: str):
+        rows = []
+        for i, t in enumerate(texts, start=1):
+            rows.append(_user_row(t, i))
+            rows.append(_bound_assistant_row("515880.SS", i))
+        return rows
+
+    bg = _user_background(_rows("我已经持有了", "朋友还持有，但我已经清仓了"),
+                          "515880.SS")
+    assert bg.get("holding") in (None, False)  # 本人分句清仓生效
+    bg2 = _user_background(_rows("我有一万闲钱", "我没有闲钱，这是每月工资定投"),
+                           "515880.SS")
+    assert bg2.get("purpose") == "income_dca"  # 否定闲钱+本人定投用途
+    assert bg2.get("budget") is None  # 旧一万随撤销消失（本条无新金额）
+    bg3 = _user_background(_rows("我已经持有了", "我没清仓，朋友清仓了"),
+                           "515880.SS")
+    assert bg3.get("holding") is True  # 本人否定+第三人描述都不清本人持仓
+
+
 # ---------------- 案例5/10a：resolve 澄清 ----------------
 
 def _resolve_client(tmp_path):

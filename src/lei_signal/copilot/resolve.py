@@ -59,6 +59,23 @@ _TOPIC_RULES: tuple[tuple[str, re.Pattern[str]], ...] = (
 _PURPOSE_DCA_RE = re.compile(r"每月|新收入|工资|定投")
 _PURPOSE_SPARE_RE = re.compile(r"闲钱|分批")
 _PURPOSE_TECH_RE = re.compile(r"买它|买这个|技术交易|按计划买|(这个|它|该标的).{0,6}(买|加仓|参与)")
+#: 三轮收口（主控复核 r3）：分句内用途词**紧前方**被否定时不建立该用途
+#: （「我没有闲钱」不建闲钱用途；「闲钱」之前 5 字内出现否定词即算）。
+_PURPOSE_NEG_TAIL_RE = re.compile(r"(?:不|没|无|未|别|勿|非)[^，。；,.;:;?!？！]{0,4}$")
+_PURPOSE_RULES: tuple[tuple[str, re.Pattern[str]], ...] = (
+    ("spare_cash", _PURPOSE_SPARE_RE),
+    ("income_dca", _PURPOSE_DCA_RE),
+    ("technical_trade", _PURPOSE_TECH_RE),
+)
+
+
+def _establish_purpose(clause: str) -> str | None:
+    """一个本人分句里的肯定用途；被否定的用途词不算（沿用 R2 优先级）。"""
+    for name, pat in _PURPOSE_RULES:
+        m = pat.search(clause)
+        if m and not _PURPOSE_NEG_TAIL_RE.search(clause[:m.start()]):
+            return name
+    return None
 
 # 03B-R3 S2：退出方式的**后端统一识别**（与前端 parseBacktestExit 同一套
 # 口径：退出1/抵扣价→a6_1；退出2/关键波动→a6_2；退出3/初始止损→a6_3）。
@@ -146,6 +163,29 @@ _CN_CONT_DIGITS = set("一二两三四五六七八九十百千万亿")
 _HYPOTHETICAL_RE2 = re.compile(r"如果|假如|假设|要是|会不会|要不要")
 _THIRD_PERSON_RE = re.compile(
     r"朋友|同事|家人|亲戚|同学|别人|人家|我妈|我爸|他有|她有|他们|客户|领导")
+#: 三轮收口（主控复核 r3 2026-09-17）：整句级否定/人物守卫在一句多事时
+#: 互相误伤——统一改为**分句**核实：按标点切分后逐分句判断归属与否定。
+_CLAUSE_SPLIT_RE = re.compile(r"[，。；,;.!！?？\n：:]+")
+
+
+def _clause_spans(text: str) -> list[tuple[int, int, str]]:
+    """[(start, end, 分句)]，保留原文位置（空白分句丢弃）。"""
+    spans: list[tuple[int, int, str]] = []
+    start = 0
+    for m in _CLAUSE_SPLIT_RE.finditer(text or ""):
+        if m.start() > start:
+            spans.append((start, m.start(), text[start:m.start()]))
+        start = m.end()
+    if text and start < len(text):
+        spans.append((start, len(text), text[start:]))
+    return spans
+
+
+def _own_clause(clause: str) -> bool:
+    """分句是否可归属本人：含第三人/假设标记的分句不是本人陈述
+    （「朋友…」「如果…」）；无标记分句按既有约定视为本人陈述，
+    不向更远处猜归属。"""
+    return not (_THIRD_PERSON_RE.search(clause) or _HYPOTHETICAL_RE2.search(clause))
 
 
 def _budget_guard_ok(text: str, m: re.Match[str]) -> bool:
@@ -162,11 +202,12 @@ def _budget_guard_ok(text: str, m: re.Match[str]) -> bool:
     before = text[max(0, m.start() - 3):m.start()]
     if any(w in before for w in _BUDGET_NEG_BEFORE):
         return False  # 「我没有一万元预算」「不用一万」：否定不是事实
-    prefix = text[:m.start()]
-    if _HYPOTHETICAL_RE2.search(prefix):
-        return False  # 「如果我有一万元」：假设不是事实（可作本轮讨论假设）
-    if _THIRD_PERSON_RE.search(prefix):
-        return False  # 「朋友有一万元闲钱」：第三人的钱不是用户事实
+    # 三轮收口：归属按金额所在**分句**核实（「朋友有一万，我五千」里
+    # 五千是本人事实，朋友的一万不是）。
+    clause = next((t for s, e, t in _clause_spans(text)
+                   if s <= m.start() < e), text)
+    if not _own_clause(clause):
+        return False  # 「朋友有一万元」「如果我有一万元」：非本人事实
     return True
 
 
@@ -259,22 +300,25 @@ def detect_fact_correction(message: str) -> dict[str, bool]:
 
     ``holding_cleared``：说了没持有/已卖出/清仓等；
     ``budget_cleared``：说了没有预算/没有那笔钱等。只认明确撤销，沉默不算。
-    三轮收口（主控复核 2026-09-17）：撤销须是**本人的、肯定的**陈述——
-    第三人主语（「朋友清仓了」）不动本人的背景；否定清仓动作
-    （「我没有清仓/还没卖出」）是仍在持有，同样不清除；假设句维持原有不放行。"""
+    三轮收口（主控复核 r3 2026-09-17）：判断单位从整句改为**分句**——只从
+    本人、肯定的分句提取撤销；第三人分句既不清本人，也不阻止同句其他分句
+    的本人更新（「朋友还持有，但我已经清仓了」→ 撤销生效）；否定清仓动作
+    的分句（「我没清仓」）不撤销，也不影响其他分句；假设/意愿分句不撤销。"""
     text = (message or "").strip()
     if not text:
         return {"holding_cleared": False, "budget_cleared": False}
-    hypothetical = bool(_HOLDING_HYPOTHETICAL_RE.search(text))
-    third_person = bool(_THIRD_PERSON_RE.search(text))
-    negated_action = bool(_CLEAR_ACTION_NEG_RE.search(text))
-    return {
-        "holding_cleared": (bool(_HOLDING_CLEAR_RE.search(text))
-                            and not hypothetical and not third_person
-                            and not negated_action),
-        "budget_cleared": (bool(_BUDGET_CLEAR_RE.search(text))
-                           and not hypothetical and not third_person),
-    }
+    holding_cleared = False
+    budget_cleared = False
+    for _s, _e, clause in _clause_spans(text):
+        if not _own_clause(clause):
+            continue
+        if (not holding_cleared and _HOLDING_CLEAR_RE.search(clause)
+                and not _HOLDING_HYPOTHETICAL_RE.search(clause)
+                and not _CLEAR_ACTION_NEG_RE.search(clause)):
+            holding_cleared = True
+        if not budget_cleared and _BUDGET_CLEAR_RE.search(clause):
+            budget_cleared = True
+    return {"holding_cleared": holding_cleared, "budget_cleared": budget_cleared}
 
 
 def parse_exit_choice(text: str) -> str | None:
@@ -386,18 +430,18 @@ def parse_request(message: str) -> dict[str, Any]:
         budget = _parse_loose_budget(text)
 
     # ---- 资金用途（R2：按钱的来源区分——闲钱优先于定投动词）----
-    # 三轮收口（主控复核 2026-09-17）：用途与金额同界——假设句、第三人主语
-    # 的钱（「朋友有一万元闲钱」「如果我有一万闲钱」）不提取为用户用途。
-    if (_HYPOTHETICAL_RE2.search(text) or _THIRD_PERSON_RE.search(text)):
-        purpose = "unknown"
-    elif _PURPOSE_SPARE_RE.search(text):
-        purpose = "spare_cash"
-    elif _PURPOSE_DCA_RE.search(text):
-        purpose = "income_dca"
-    elif _PURPOSE_TECH_RE.search(text):
-        purpose = "technical_trade"
-    else:
-        purpose = "unknown"
+    # 三轮收口（主控复核 r3 2026-09-17）：用途按**分句**提取——被否定的
+    # 用途词不建立该用途（「我没有闲钱」），第三人/假设分句不提取
+    # （「朋友有闲钱」），本人肯定分句可更新（「…这是每月工资定投」）；
+    # 含糊无归属不猜。与撤销共用同一套分句/归属判断，不各建一套整句守卫。
+    purpose = "unknown"
+    for _s, _e, clause in _clause_spans(text):
+        if not _own_clause(clause):
+            continue
+        established = _establish_purpose(clause)
+        if established:
+            purpose = established
+            break
 
     # ---- 澄清：用途不明且本次要给投入方案（钱怎么用）----
     # 三轮收口：第三人/假设的钱不追问用途（不能让用户替朋友或假设情形分类）。
