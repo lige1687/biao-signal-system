@@ -20,8 +20,8 @@ SYMBOL = "000300.SS"
 
 
 def _fake_analyze(symbol: str, **kwargs):  # noqa: ANN002, ANN003
-    """fixture 分析：tests/000300.SS.bars.parquet（1500 根，真实指标链）。"""
-    bars = pd.read_parquet(Path("tests/000300.SS.bars.parquet"))
+    """fixture 分析：tests/fixtures/kline/000300.SS.bars.parquet（1500 根，真实指标链）。"""
+    bars = pd.read_parquet(Path("tests/fixtures/kline/000300.SS.bars.parquet"))
     frame, report = validate_bars(bars, symbol=symbol, provider="fixture", adjusted=True)
     info = resolve_symbol(symbol)
     price_data = PriceData(

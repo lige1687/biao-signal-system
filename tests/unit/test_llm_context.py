@@ -10,7 +10,7 @@ from lei_signal.compose.pipeline import analyze_bars
 from lei_signal.domain.types import StructureStatus
 from lei_signal.plans.llm_context import build_discussion_context
 
-FIXTURE = Path(__file__).resolve().parents[1] / "000300.SS.bars.parquet"
+FIXTURE = Path(__file__).resolve().parents[1] / "fixtures" / "kline" / "000300.SS.bars.parquet"
 
 
 @lru_cache(maxsize=1)

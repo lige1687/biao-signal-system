@@ -194,7 +194,7 @@ def test_valid_until_expiry_creates_review_not_change_state(tmp_path) -> None:  
 def test_context_from_result_on_fixture() -> None:
     """fixture 路径产出的 MonitorContext 非空（dry-run 取数基础）。"""
     from lei_signal.compose.pipeline import analyze_bars
-    bars = pd.read_parquet(Path("tests/000001.SS.bars.parquet"))
+    bars = pd.read_parquet(Path("tests/fixtures/kline/000001.SS.bars.parquet"))
     result = analyze_bars("000001.SS", bars)
     ctx = context_from_result(result, cache_fallback_used=False)
     assert ctx.last_bar_date
@@ -204,7 +204,7 @@ def test_context_from_result_on_fixture() -> None:
 
 def test_context_from_result_fixture_marks_stale() -> None:
     from lei_signal.compose.pipeline import analyze_bars
-    bars = pd.read_parquet(Path("tests/000001.SS.bars.parquet"))
+    bars = pd.read_parquet(Path("tests/fixtures/kline/000001.SS.bars.parquet"))
     result = analyze_bars("000001.SS", bars)
     ctx = context_from_result(result, cache_fallback_used=True)
     assert ctx.cache_fallback_used is True

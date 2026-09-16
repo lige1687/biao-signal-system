@@ -81,7 +81,7 @@ def test_no_actionable_means_no_push(tmp_path, monkeypatch) -> None:  # noqa: AN
     conn.close()
 
     # mock 取数：返回 fixture bars + 盘中价（不会触发 INVALIDATION_BREACHED）
-    bars = pd.read_parquet(Path("tests/000001.SS.bars.parquet")).iloc[-30:]
+    bars = pd.read_parquet(Path("tests/fixtures/kline/000001.SS.bars.parquet")).iloc[-30:]
     quote = QuoteSnapshot(symbol="600519.SS", price=99999.0, open=99999.0,
                           high=99999.0, low=99999.0)
 
@@ -128,7 +128,7 @@ def test_intraday_does_not_write_db(tmp_path) -> None:  # noqa: ANN001
     items_before = list_action_items(conn, plan.plan_id)
     conn.close()
 
-    bars = pd.read_parquet(Path("tests/000001.SS.bars.parquet")).iloc[-30:]
+    bars = pd.read_parquet(Path("tests/fixtures/kline/000001.SS.bars.parquet")).iloc[-30:]
     quote = QuoteSnapshot(symbol="600519.SS", price=3820.0, open=3800.0,
                           high=3830.0, low=3790.0)
     with patch("scripts.intraday_check.default_provider") as mock_provider, \

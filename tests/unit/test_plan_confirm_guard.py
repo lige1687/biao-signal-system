@@ -91,7 +91,7 @@ def entry_payload(**over) -> dict:  # noqa: ANN003
 
 @pytest.fixture(scope="module")
 def real_result():
-    bars = pd.read_parquet(Path("tests/000001.SS.bars.parquet"))
+    bars = pd.read_parquet(Path("tests/fixtures/kline/000001.SS.bars.parquet"))
     return analyze_bars("000001.SS", bars)
 
 

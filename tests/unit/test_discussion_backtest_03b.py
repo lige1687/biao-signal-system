@@ -69,7 +69,7 @@ def _prepared(raw):
 
 @pytest.fixture(scope="module")
 def real_result():
-    bars = pd.read_parquet(Path("tests/000001.SS.bars.parquet"))
+    bars = pd.read_parquet(Path("tests/fixtures/kline/000001.SS.bars.parquet"))
     return analyze_bars(SYMBOL, bars)
 
 
@@ -542,7 +542,7 @@ def test_s14_no_forward_grades_and_determinism(env, real_result, llm_fixed):  # 
     n_journal = conn.execute("SELECT COUNT(*) FROM recommendation_journal").fetchone()[0]
     conn.close()
     assert n_out == 0 and n_journal == 0
-    bars = pd.read_parquet(Path("tests/000001.SS.bars.parquet"))
+    bars = pd.read_parquet(Path("tests/fixtures/kline/000001.SS.bars.parquet"))
     assert (analyze_bars(SYMBOL, bars).assessment.as_of
             == analyze_bars(SYMBOL, bars).assessment.as_of)
 

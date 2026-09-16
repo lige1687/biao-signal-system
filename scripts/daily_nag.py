@@ -43,7 +43,7 @@ from lei_signal.storage.sqlite_store import connect  # noqa: E402
 # 本地/launchd 运行前把 .env 注入 os.environ（不覆盖已设变量）。
 load_env()
 
-DEFAULT_FIXTURE_DIR = _PROJECT_ROOT / "tests"
+DEFAULT_FIXTURE_DIR = _PROJECT_ROOT / "tests" / "fixtures" / "kline"
 
 
 def fetch_context(symbol: str, *, fixture_dir: Path | None = None):  # noqa: ANN201

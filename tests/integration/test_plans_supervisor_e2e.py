@@ -21,7 +21,7 @@ RULESET = "1.3.0"
 
 def test_supervisor_on_real_fixture_000001(tmp_path) -> None:  # noqa: ANN001
     """000001.SS 趋势可交易标的：建计划 -> 跑监督 -> 产出 alert 与待办，非退化。"""
-    bars = pd.read_parquet(Path("tests/000001.SS.bars.parquet"))
+    bars = pd.read_parquet(Path("tests/fixtures/kline/000001.SS.bars.parquet"))
     result = analyze_bars("000001.SS", bars)
     ctx = context_from_result(result, cache_fallback_used=False)
 
@@ -60,7 +60,7 @@ def test_supervisor_on_real_fixture_000001(tmp_path) -> None:  # noqa: ANN001
 
 def test_supervisor_on_blocked_fixture_000300(tmp_path) -> None:  # noqa: ANN001
     """000300.SS 趋势不明阻断：建计划跑监督应产 ENTRY_BLOCKED_BY_TRADABILITY。"""
-    bars = pd.read_parquet(Path("tests/000300.SS.bars.parquet"))
+    bars = pd.read_parquet(Path("tests/fixtures/kline/000300.SS.bars.parquet"))
     result = analyze_bars("000300.SS", bars)
     ctx = context_from_result(result, cache_fallback_used=False)
 
