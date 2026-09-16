@@ -92,6 +92,50 @@
 新建或实质重做的收益实验报告使用
 `docs/research/experiment-report-template.md`，并保留末尾最小决策卡。
 
+## 文件归置规约（2026-09-16 目录治理后强制，对所有 agent 生效）
+
+2026-09-16 完成一次性目录治理（见 `docs/experiments/repo-governance-2026-09-16.md`）。
+此后**新建文件前先想归属**：放错位置的内容会被
+`python3 scripts/check_repo_hygiene.py` 报警，任务结案前必须跑一次并全绿。
+
+### 目录地图（什么东西放哪）
+
+| 内容 | 去处 | 备注 |
+|---|---|---|
+| 实验结案报告 | `docs/experiments/主题-YYYY-MM-DD.md` | 按上文归档规约三件套登记 |
+| 实验原始数据/复现产物 | `docs/experiments/raw/<实验名>-<日期>/` | 报告的 raw 对照 |
+| 一次性研究脚本 | 随实验放 `docs/experiments/raw/<实验名>/`，或 `scripts/archive/` | **不放 scripts/ 根层** |
+| 生产脚本（定时任务/被代码调用） | `scripts/` 根层 | 新增须同步登记 launchd 或调用方 |
+| launchd 定时任务配置 | `scripts/launchd/` | 重装机器靠它恢复 |
+| 子代理工作区 | `scripts/agents/<代理ID>/` | 交接验收后**删除**，产物进报告 |
+| 测试夹具 | `tests/fixtures/<类别>/` | 不落 tests/ 根层 |
+| 运维文档 | `docs/ops/` | |
+| 交接/计划类过程文档 | `docs/archive/handoffs-plans/` | 不再新增到 docs 根层 |
+| 研究规范/契约/定义 | `docs/research/` | 被 AGENTS.md 引用的权威文件 |
+
+### 生命周期（做完了删什么、留什么）
+
+- **删**：子代理工作区（交接验收后）；临时脚本与中间产物（结案报告已记录
+  结论与复现路径后）；根层/目录里的一次性日志。
+- **留**：结案报告、raw 数据、研究契约、失败与证伪的历史（既有约束）。
+- 归档不等于删除：`scripts/archive/`、`docs/archive/` 是留痕区，git 历史可追溯；
+  需要腾空间时先问用户，不自行清理归档。
+
+### 白名单（根目录与 scripts/、docs/、tests/ 根层只允许这些）
+
+- 仓库根层：README、AGENTS、CLAUDE、pyproject、.env*、.gitignore、
+  project.config.json、工具配置目录。新文件一律进子目录。
+- `scripts/` 根层：仅生产脚本、研究工具链、backfill 运维工具、安装/控制脚本。
+  白名单登记在 `scripts/check_repo_hygiene.py` 的 `SCRIPTS_KEEP`。
+- `docs/` 根层：仅 trading-spec、research 系列、system-architecture、
+  next-steps-master-plan 等被代码/登记簿消费的权威文档（清单同上脚本 `DOCS_KEEP`）。
+- `tests/` 根层：仅 `__init__.py` 与标准子目录。
+
+### 破坏性边界（沿用治理时的红线）
+
+`docs/experiments/` 及其 `raw/` 的既有路径**不挪不改名**——API 按精确路径扫描、
+registry.json 按路径登记、研究契约对部分文件钉了 sha256。挪动即静默破坏。
+
 ## 其他既有约束（提醒）
 
 ### 系统待升级目标台账（2026-09-08 用户决定）
