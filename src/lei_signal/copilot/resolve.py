@@ -43,7 +43,10 @@ _EXISTING_RE = re.compile(r"持仓|我的仓位|持仓速览|复盘|周报|这�
 
 _TOPIC_RULES: tuple[tuple[str, re.Pattern[str]], ...] = (
     ("plan", re.compile(r"整理成计划|保存草稿|落计划|建计划|生成计划|做个计划")),
-    ("money", re.compile(r"资金|投多少|仓位多少|多少预算|金额|投一点|买多少")),
+    # 连续讨论一轮（2026-09-16）：口语资金问法「能不能买一点/能买吗」归入资金主题，
+    # 让用途澄清与资金纪律块能接上；「买点」二字单独出现不算资金问题（买点是技术概念）。
+    ("money", re.compile(r"资金|投多少|仓位多少|多少预算|金额|投一点|买多少|"
+                         r"买一点|能不能买|能买吗|可以买吗|能买不")),
     ("dca", re.compile(r"定投|闲钱|每月|新收入|工资|分批投")),
     ("sentiment", re.compile(r"情绪|冰点|强热|恐慌|热警报|散户")),
     ("mindset", re.compile(r"心态|拿不住|怕跌|慌|睡不着")),
@@ -99,6 +102,90 @@ def _extract_run_id(text: str) -> str | None:
     if not m:
         return None
     return m.group(1) or m.group(2)
+
+
+_CN_DIGIT = {"一": 1, "二": 2, "两": 2, "三": 3, "四": 4, "五": 5,
+             "六": 6, "七": 7, "八": 8, "九": 9}
+#: 口语金额：阿拉伯带单位 或 中文数字+万/千（可带 元/块 收尾）
+_LOOSE_BUDGET_RE = re.compile(
+    r"(?<![\d.])(\d+(?:\.\d+)?)\s*(万|千|w|W|k|K)\s*(?:元|块)?"
+    r"|([一二两三四五六七八九]?十?[一二两三四五六七八九半]?)\s*(万|千)"
+    r"([一二两三四五六七八九])?\s*(?:元|块)?")
+
+
+def _cn_head_to_number(head: str) -> float | None:
+    """中文小数字头 → 数值：一/十/十二/二十/二十五/两万五的「两五」段。失败 None。"""
+    if not head:
+        return None
+    if head == "半":
+        return 0.5
+    if "十" in head:
+        left, _, right = head.partition("十")
+        tens = _CN_DIGIT.get(left, 1) if left else 1
+        ones = _CN_DIGIT.get(right, 0) if right else 0
+        if (left and left not in _CN_DIGIT) or (right and right not in _CN_DIGIT):
+            return None
+        return float(tens * 10 + ones)
+    if head in _CN_DIGIT:
+        return float(_CN_DIGIT[head])
+    # 「两万五」的尾段「两五」= 2.5 万（口语省略「十」前的单位）
+    if len(head) == 2 and head[0] in _CN_DIGIT and head[1] in _CN_DIGIT:
+        return _CN_DIGIT[head[0]] + _CN_DIGIT[head[1]] / 10.0
+    return None
+
+
+def _parse_loose_budget(text: str) -> dict[str, Any] | None:
+    """不带「预算」前缀的口语金额识别（2026-09-16 连续讨论一轮）。
+
+    只在带明确单位时采信：阿拉伯数字必须跟 万/千/w/k；中文数字必须跟 万/千。
+    不匹配裸数字（515880 这类代码、2024 这类年份自然出局）。"""
+    for m in _LOOSE_BUDGET_RE.finditer(text or ""):
+        if m.group(1) is not None:
+            value = float(m.group(1))
+            unit = m.group(2)
+            if unit in ("万", "w", "W"):
+                value *= 10_000.0
+            elif unit in ("千", "k", "K"):
+                value *= 1_000.0
+            return {"amount": value, "currency": "CNY",
+                    "note_cn": "用户本条消息明确提供"}
+        head, unit_cn, tail = m.group(3), m.group(4), m.group(5)
+        if not head:
+            continue
+        base = _cn_head_to_number(head)
+        if base is None:
+            continue
+        # 「两万五/三千五」口语省略：单位后的尾数 = 十分之一个单位
+        if tail:
+            base += _CN_DIGIT[tail] / 10.0
+        return {"amount": base * (10_000.0 if unit_cn == "万" else 1_000.0),
+                "currency": "CNY", "note_cn": "用户本条消息明确提供（中文数字换算）"}
+    return None
+
+
+#: 持仓语境（连续讨论一轮 2026-09-16）：用户声明已持有当前对象。
+#: 只识别明确的持有陈述；「持仓速览/我的仓位」是 existing_action 功能词，
+#: 不算语境声明；否定/假设先行（没买/如果持有）不算。
+_HOLDING_RE = re.compile(r"我已经持有|我已持有|我持有|已经持有|持有着|"
+                         r"我手里有|我手上有|被套|套牢|重仓|轻仓")
+_HOLDING_NEG_RE = re.compile(r"没(有)?持有|没买|未持有|如果.*持有|假如.*持有|"
+                             r"要不要持有|想持有|打算持有|持仓速览|我的仓位|持仓情况")
+
+
+def detect_stance(message: str) -> str | None:
+    """用户本条消息声明的讨论立场。当前只有 ``holding``（已持有）。
+
+    立场只影响**解释口径**（持仓管理视角而非首次买入视角），不改变技术规则、
+    不写真实计划或成交；按消息逐条识别，不做跨轮继承——恢复历史时不把旧
+    意图当成今天的新授权（执行书 §4）。"""
+    text = (message or "").strip()
+    if not text:
+        return None
+    if _HOLDING_NEG_RE.search(text):
+        return None
+    if _HOLDING_RE.search(text):
+        return "holding"
+    return None
 
 
 def parse_exit_choice(text: str) -> str | None:
@@ -203,6 +290,11 @@ def parse_request(message: str) -> dict[str, Any]:
         amount = float(bm.group(1).replace(",", "").replace("，", ""))
         budget = {"amount": amount, "currency": "CNY",
                   "note_cn": "用户本条消息明确提供"}
+    if budget is None:
+        # 连续讨论一轮（2026-09-16）：不带「预算」前缀的口语金额也识别——
+        # 阿拉伯数字必须带单位（1万/5千/3w/5k，裸数字不猜，避免误吃代码/日期）；
+        # 中文数字（一万/两万五/十万/一千块）按字面换算。
+        budget = _parse_loose_budget(text)
 
     # ---- 资金用途（R2：按钱的来源区分——闲钱优先于定投动词）----
     if _PURPOSE_SPARE_RE.search(text):
@@ -240,4 +332,4 @@ def parse_request(message: str) -> dict[str, Any]:
     }
 
 
-__all__ = ["parse_request", "INTENTS", "TOPICS", "PURPOSES"]
+__all__ = ["parse_request", "detect_stance", "INTENTS", "TOPICS", "PURPOSES"]

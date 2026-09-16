@@ -1035,6 +1035,135 @@ def _server_plan_artifact(conn, session_id: str, question_id: int,
     }
 
 
+#: 连续讨论一轮（2026-09-16）：「板块 → 对应ETF/产品」追问的确定性识别。
+#: 系统目录没有可核实的板块→产品跟踪关系资料，这类问题的诚实答案是完全
+#: 确定的，不走模型（防止凭名称猜跟踪关系或擅自选定产品）。
+_SECTOR_PRODUCT_RE = re.compile(r"ETF|基金|产品|可以买的|能买的")
+_SECTOR_RELATION_RE = re.compile(
+    r"对应|跟踪|相关|哪些|哪个|有没有|关联|挂钩|可以买|能买")
+
+#: 「和刚才相比有什么变化」类比较追问（案例8）。
+_COMPARISON_RE = re.compile(
+    r"和(刚才|之前|此前|上次)|有(什么|啥)变化|有什么不一样|比.*变化|"
+    r"更新了吗|有新(数据|资料|消息|情况)|数据(有)?更新")
+
+
+def _sector_product_relation_reply(ctx_payload: dict, message: str) -> str | None:
+    """板块语境下问「对应的ETF/有哪些产品」→ 确定性诚实回答（案例2）。
+
+    系统目录不存在板块→ETF 的可核实跟踪关系（已核实：目录只有板块与产品
+    各自的名称，没有跟踪/对应关系数据）。如实说明，不仅凭名称猜、不自动选一个。
+    """
+    if ctx_payload.get("context_kind") != "sector":
+        return None
+    if not (_SECTOR_PRODUCT_RE.search(message) and _SECTOR_RELATION_RE.search(message)):
+        return None
+    name = ctx_payload.get("display_name") or "该"
+    as_of = ctx_payload.get("as_of") or "未知"
+    return (
+        f"你问的「对应的ETF」：系统目录里没有可核实的「{name}板块 → ETF/产品」"
+        "跟踪关系资料——我不会仅凭名称相近猜哪个产品跟踪这个板块，也不替你选定"
+        "某一个产品。\n"
+        "想继续的话：直接说具体产品的名称或代码，我按那个产品自己的系统资料来讲"
+        f"（不会把板块的整体统计当成某个产品的成绩）。{name}板块本身的观察仍按"
+        f"截至 {as_of} 的板块资料。")
+
+
+def _previous_turn_facts(history_rows: list) -> list[dict]:
+    """会话历史中 assistant 轮的可比事实（对象/资料日期/结论），新→旧排序。"""
+    facts: list[dict] = []
+    for m in reversed(history_rows):
+        if m.role != "assistant":
+            continue
+        try:
+            meta = json.loads(m.meta_json or "{}")
+        except (TypeError, ValueError):
+            continue
+        resolved = meta.get("resolved_symbol")
+        card = meta.get("evidence_card") or {}
+        f = card.get("facts") or {}
+        facts.append({
+            "symbol": resolved if isinstance(resolved, str) else None,
+            "display_name": f.get("display_name"),
+            "as_of": f.get("as_of"),
+            "verdict_cn": f.get("verdict_cn"),
+            "candidate_n": f.get("buy_point_candidate_n"),
+        })
+    return facts
+
+
+def _comparison_reply(history_rows: list, symbol: str | None,
+                      ctx_payload: dict, message: str) -> str | None:
+    """「和刚才相比有什么变化」→ 确定性比较回答（案例8）。
+
+    同份资料（as_of 相同）就明确说没有新数据，不制造「刚刚出现」的机会；
+    资料日期变了就说明更新的日期与可核实的变化字段（系统结论/候选数）；
+    对象已切换就说清楚比的是哪两份资料。全部直读历史证据卡与当前材料，
+    不经过模型——比较结论完全由数据日期决定，不需要也不允许发挥。
+    """
+    if not _COMPARISON_RE.search(message):
+        return None
+    prev = _previous_turn_facts(history_rows)
+    cur_name = ctx_payload.get("display_name") or symbol or "当前对象"
+    cur_as_of = ctx_payload.get("as_of")
+    cur_card = ctx_payload.get("evidence_card") or {}
+    cur_facts = cur_card.get("facts") or {}
+    cur_verdict = cur_facts.get("verdict_cn")
+    if not prev:
+        return ("这是本会话里我能看到的第一份资料，没有可比较的之前状态。"
+                f"当前 {cur_name} 的资料截至 {cur_as_of or '未知'}。")
+    last = prev[0]
+    last_name = last.get("display_name") or last.get("symbol") or "上一个对象"
+    if symbol and last.get("symbol") and last["symbol"] != symbol:
+        return (
+            f"刚才聊的是 {last_name}（资料截至 {last.get('as_of') or '未知'}），"
+            f"现在这份是 {cur_name}（资料截至 {cur_as_of or '未知'}）——两个对象的"
+            "资料不是同一份，不能互相比新旧。"
+            + (f"{cur_name} 当前的系统结论：{cur_verdict}。" if cur_verdict else ""))
+    same_object = [p for p in prev if not symbol or p.get("symbol") in (None, symbol)]
+    last_same = same_object[0] if same_object else last
+    prev_as_of = last_same.get("as_of")
+    if prev_as_of and cur_as_of and prev_as_of == cur_as_of:
+        verdict_bit = f"系统结论仍是：{cur_verdict}。" if cur_verdict else ""
+        return (
+            f"没有新数据：和刚才一样，{cur_name} 还是截至 {cur_as_of} 的同一份资料，"
+            f"系统状态没有变化。{verdict_bit}"
+            "这不是刚出现的新情况——要有新资料（下一个数据日之后）再谈变化。")
+    if prev_as_of and cur_as_of and prev_as_of != cur_as_of:
+        changes: list[str] = []
+        if last_same.get("verdict_cn") and cur_verdict \
+                and last_same["verdict_cn"] != cur_verdict:
+            changes.append(f"系统结论从「{last_same['verdict_cn']}」变成「{cur_verdict}」")
+        elif cur_verdict:
+            changes.append(f"系统结论维持「{cur_verdict}」")
+        prev_n, cur_n = last_same.get("candidate_n"), cur_facts.get("buy_point_candidate_n")
+        if isinstance(prev_n, int) and isinstance(cur_n, int) and prev_n != cur_n:
+            changes.append(f"买点候选数从 {prev_n} 个变成 {cur_n} 个")
+        change_txt = "；".join(changes) if changes else "明细字段无可见变化"
+        return (f"资料有更新：刚才是截至 {prev_as_of}，现在是截至 {cur_as_of}。"
+                f"变化：{change_txt}。")
+    # 日期缺失无法证明新旧：如实说不可比，不猜。
+    return (f"刚才的资料日期（{prev_as_of or '未知'}）与当前（{cur_as_of or '未知'}）"
+            "无法完整核实是否为同一份，不能断言有没有变化；"
+            "按当前资料，" + (f"系统结论：{cur_verdict}。" if cur_verdict else "没有新结论。"))
+
+
+def _deterministic_reply(history_rows: list, symbol: str | None,
+                         ctx_payload: dict, message: str) -> str | None:
+    """答案完全由确定性事实决定的问题类型，直接系统作答（不走模型）。
+
+    连续讨论一轮（2026-09-16）：板块→产品关系追问（案例2）、与刚才比较的
+    变化追问（案例8）。这些回答的「诚实版本」不依赖表达发挥，交给模型反而
+    有编造风险；产出按普通回答落库（grounded=True，依据系统数据）。
+    """
+    if not message:
+        return None
+    rel = _sector_product_relation_reply(ctx_payload, message)
+    if rel is not None:
+        return rel
+    return _comparison_reply(history_rows, symbol, ctx_payload, message)
+
+
 def _degraded_reply(symbol: str, ctx_payload: dict) -> str:
     """AI 讲解不可用/校验失败时的系统直出（可靠性一期 2026-09-14 改写）。
 
@@ -1071,9 +1200,60 @@ def _degraded_reply(symbol: str, ctx_payload: dict) -> str:
     blocked = bool(trad) and not trad.get("tradable") and bool(
         trad.get("blocking_reasons"))
 
+    # 连续讨论一轮（2026-09-16）：用户声明的立场与问题主题决定第一句的
+    # 讲法——已持有按持仓管理讲（案例6），资金问题先正面回答再给纪律与
+    # 最关键缺失信息（案例7）；都不改变判定层结论，只换解释口径。
+    stance = (ctx_payload.get("discussion_stance") or {}).get("kind")
+    q_topic = ctx_payload.get("question_topic")
+    if stance == "holding":
+        lines = [
+            f"{display}（{symbol}）：你说已经持有了——这次就从持仓管理角度讲，"
+            "不按首次买入说。",
+        ]
+        if blocked:
+            lines.append(
+                f"系统当前状态：{'、'.join(trad['blocking_reasons'])}——"
+                "这是环境层面的提醒，不是让你立刻动作。")
+        elif candidates:
+            c0 = candidates[0]
+            lines.append(
+                f"系统当前有 {len(candidates)} 个买点候选在观察中，最近的"
+                f"「{c0.get('scenario_cn', '')}」（{c0.get('state_cn', '')}）"
+                "——持仓语境下它们只是参照，不是新的入场引导。")
+        else:
+            lines.append("系统当前没有新的买点候选；持仓期间重点看失效位与观察条件。")
+        lines.append(
+            "你没有给成本价和资金信息，这段讨论里也没有你的成交信息——我不编这些；"
+            "具体的退出位以你自己确认过的计划为准。这里没有记录任何成交。")
+    elif q_topic == "money":
+        budget = ctx_payload.get("user_budget") or {}
+        amt = budget.get("amount")
+        amt_txt = f"{amt:g} 元" if isinstance(amt, (int, float)) else "这笔钱"
+        if blocked:
+            verdict_line = (
+                f"先回答能不能买：按系统数据，{display}（{symbol}）现在按规则"
+                f"不适合开新仓——{'、'.join(trad['blocking_reasons'])}。")
+        elif candidates:
+            c0 = candidates[0]
+            verdict_line = (
+                f"先回答能不能买：{display}（{symbol}）现在有 {len(candidates)} 个"
+                f"系统定义的买点候选，最近的「{c0.get('scenario_cn', '')}」状态"
+                f"「{c0.get('state_cn', '')}」——还不等于可以直接行动。")
+        else:
+            verdict_line = (
+                f"先回答能不能买：按系统数据，{display}（{symbol}）现在没有"
+                "系统定义的买点候选。")
+        lines = [
+            verdict_line,
+            f"{amt_txt}怎么安排由你决定；系统纪律是盈亏比不足 3 的机会放弃"
+            "（研究代理口径），仓位档位只是参考。",
+            "还差一项关键信息：这笔钱是持续投入的新收入，还是已有的闲钱？"
+            "这影响怎么分批，先确认这一项再细聊。",
+            "现在只是讨论——没有确认任何计划，也不会替你下单。",
+        ]
     # ① 先回答这次问题：第一句就是大白话结论（只重组既有判定字段，
     # 不做新判定；候选状态/价位照抄，不加解释性定语）。
-    if candidates:
+    elif candidates:
         c0 = candidates[0]
         lines = [
             f"{display}（{symbol}）：按系统数据，目前有 {len(candidates)} 个"
@@ -1102,8 +1282,11 @@ def _degraded_reply(symbol: str, ctx_payload: dict) -> str:
             "先用最新数据核实再谈下一步。"
         )
     else:
+        # 连续讨论一轮（日期口径）：当天数据不说「今日收盘」——系统未核实
+        # 交易日历与发布规则，是否收盘如实标未知，不凭文件时间猜。
         lines.append(
-            f"数据日 {as_of}。AI 讲解暂时不可用，以下是系统直接给出的数据事实。"
+            f"截至 {as_of} 的数据（是否已收盘系统未单独核实，不凭更新时间猜）。"
+            "AI 讲解暂时不可用，以下是系统直接给出的数据事实。"
         )
 
     # 系统标签（颜色/阶段/风险）是细节，不再当第一句。
@@ -1113,7 +1296,8 @@ def _degraded_reply(symbol: str, ctx_payload: dict) -> str:
     )
 
     # ③ 机会与风险：有候选列候选（阻断原因已进第一句，不重复）。
-    if candidates:
+    # 持仓语境不列入场向的「机会」行，避免把持仓管理答成首次买入。
+    if candidates and stance != "holding":
         for c in candidates[:2]:
             lines.append(
                 f"机会：{c.get('scenario_cn', '')}目前[{c.get('state_cn', '')}]，"
@@ -2018,8 +2202,24 @@ def _prepare_discussion(
         # 两个路径（有标的/全局）都消费；目录说明不代替实际数据。
         from lei_signal.copilot import resolve as resolve_mod
 
-        parsed_topic = resolve_mod.parse_request(body.message)["topic"]
+        parsed = resolve_mod.parse_request(body.message)
+        parsed_topic = parsed["topic"]
         ctx_payload.update(_topic_blocks(parsed_topic, symbol))
+        # 连续讨论一轮（2026-09-16）：主题与用户声明立场进材料——模型按
+        # 持仓/资金语境调整解释口径，降级直出同样按语境分支。立场逐条
+        # 识别不继承（恢复历史≠今天的新授权）；判定层规则不因立场改变。
+        ctx_payload["question_topic"] = parsed_topic
+        if parsed.get("budget"):
+            ctx_payload["user_budget"] = parsed["budget"]
+        stance = resolve_mod.detect_stance(body.message)
+        if stance == "holding" and ctx_payload.get("context_kind") != "sector":
+            ctx_payload["discussion_stance"] = {
+                "kind": "holding",
+                "note_cn": ("用户声明已持有该标的：从持仓管理角度解释（当前系统"
+                            "状态、失效位与观察条件），不按首次买入引导；用户未"
+                            "提供成本与资金信息，不得编造；不记录成交；有既有"
+                            "计划时结合计划状态讲。"),
+            }
         tm.mark("prep_done")  # 主题块（DCA/情绪/证据/心态/资金）之后准备完成
         # window_sel 已在构建证据卡前统一算好（冻结与比较共用同一份依据）
         return session.session_id, history_rows, ctx_payload, alerts, symbol, window_sel
@@ -2187,9 +2387,12 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
     # 03B-R3 S5：整理计划类问题生成服务端产物（原问题绑定，模型不参与构造）
     _maybe_plan_artifact(request, session_id, question_id, body, symbol, ctx_payload)
 
-    config = plans_llm.load_ark_config()
-    reply: str | None = None
-    grounded = False
+    # 连续讨论一轮（2026-09-16）：答案完全由确定性事实决定的问题（板块→产品
+    # 关系、与刚才比较）直接系统作答，不走模型也不走降级模板。
+    det_reply = _deterministic_reply(history_rows, symbol, ctx_payload, body.message)
+    config = plans_llm.load_ark_config() if det_reply is None else None
+    reply: str | None = det_reply
+    grounded = det_reply is not None
     # 数值白名单 = 技术材料数值 ∪ 本轮 user message 中出现的数字
     # （用户问「8700 是不是更好」、LLM 回显「你说的 8700」时不误降级）
     # ∪ 上下文字符串里的代码数字段（TH881129/515880 这类标的代码会被校验器
@@ -2790,9 +2993,18 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
             _maybe_plan_artifact(request, session_id, question_id, body, symbol,
                                  ctx_payload)
 
-            config = plans_llm.load_ark_config()
+            # 连续讨论一轮（2026-09-16）：确定性作答（板块→产品关系、与刚才
+            # 比较）不走模型——正文一条 token 下发，grounded=True（依据系统
+            # 数据），跳过后续模型校验（自己的系统文案不过模型接地校验器）。
+            det_reply = _deterministic_reply(history_rows, symbol, ctx_payload,
+                                             body.message)
+            config = plans_llm.load_ark_config() if det_reply is None else None
             pieces: list[str] = []
             interrupt_reason = ""
+            if det_reply is not None:
+                timing.mark("first_token")
+                pieces.append(det_reply)
+                yield _sse("token", {"t": det_reply})
             if config is not None:
                 yield _sse("stage", {"key": "llm", "text": "生成解释（AI 逐字输出）"})
                 try:
@@ -2837,7 +3049,8 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
             }
             interrupted = bool(interrupt_reason)
             full = "".join(pieces).strip()
-            grounded = False
+            # 确定性作答自带 grounded（系统数据直出）；模型路径仍须过校验。
+            grounded = det_reply is not None and bool(full) and not interrupted
             verify_note = ""
             fallback = ""
             if interrupted:
@@ -2852,7 +3065,7 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
                     )
                 else:
                     verify_note = f"AI 讲解未完成（{reason_cn}），系统改用模板直出。"
-            if full and not interrupted:
+            if full and not interrupted and det_reply is None:
                 from lei_signal.plans.grounding import (  # noqa: PLC0415
                     collect_payload_numbers,
                     verify_numeric_grounding,

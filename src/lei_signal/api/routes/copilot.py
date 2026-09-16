@@ -649,7 +649,13 @@ def copilot_resolve(request: Request, body: ResolveRequest) -> dict:
     parsed = resolve_mod.parse_request(body.message)
     symbol, source, ambiguities = _resolve_symbol_with_ambiguity(request, body)
     clarification = list(parsed["need_clarification"])
-    if not symbol and asks_for_sector(body.message):
+    # 连续讨论一轮（2026-09-16，案例5）：对象已从消息/页面/会话继承核实，
+    # 就不再追问「想补测哪个标的」——缺必要信息只问最关键的一项，已知项不重复问。
+    if symbol:
+        clarification = [c for c in clarification
+                         if c.get("kind") != "backtest_symbol"]
+    if not symbol and (asks_for_sector(body.message)
+                       or _sector_area_index_reference(body.message) is not None):
         # 主控裁决（2026-09-15）：「科创板块/科创板整体」这类泛指没有唯一
         # 可核实对象——简短澄清，可让用户选择科创50作为观察参考，并明确
         # 它不代表整个科创板；不得恢复「任意板块→ETF/指数」的静默顶替。
