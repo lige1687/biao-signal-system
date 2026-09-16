@@ -28,6 +28,8 @@
 
 ## 1. 任务编号总账（任务书 → 执行归档）
 
+- [连续讨论补修二轮复验](controller-agent-continuity-cfix-review-2026-09-16.md)：保留比较修复，收口ATR继续讨论与记忆归属。
+
 - [连续讨论体验主控复验](controller-agent-continuity-review-2026-09-16.md)：三组固定补修及因子/数值校验裁决，暂不合入。
 
 - [连续讨论三组固定补修](agent-experience-continuity-cfixes-2026-09-16.md)：C1比较冻结字段/C2窄匹配+ATR全意图诚实说明/C3事实守卫与会话背景；34项测试全绿，表达部分改善，待复验。
