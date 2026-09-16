@@ -1,0 +1,4520 @@
+{
+ "synthetic": true,
+ "base": "http://127.0.0.1:8022",
+ "started_at": "2026-09-16T18:30:56+0800",
+ "chain_A": [
+  {
+   "case": "case1",
+   "message": "通信板块最近怎么看？",
+   "resolve": {
+    "intent": "discussion",
+    "topic": "overview",
+    "resolved_symbol": "BK1215.SECTOR",
+    "clarification": [],
+    "need_clarification": null
+   },
+   "stream": {
+    "client_request_id": "fc2616a3-f27c-4a34-aa9a-e7c15a360d42",
+    "marks_ms": {
+     "received": 2.6,
+     "prepared": 36.8,
+     "done": 41.6
+    },
+    "received_text": "",
+    "done": {
+     "session_id": "sess_c2c236845d4c",
+     "resolved_symbol": "BK1215.SECTOR",
+     "grounded": false,
+     "question_id": 1,
+     "evidence_card": {
+      "facts": {
+       "symbol": "BK1215.SECTOR",
+       "display_name": "通信",
+       "subject_kind": "sector",
+       "as_of": "2026-09-14",
+       "verdict_cn": "板块阶段：派发",
+       "sector_summary_cn": "成分股站上50日均线的比例：61.48%"
+      },
+      "history_and_scope": {
+       "note_cn": "这是行业板块整体观察，不是ETF或可直接交易的产品；合成指数以当前成分回看历史，仅作形态参考，不据此产生买卖计划或借用ETF胜率。"
+      },
+      "explanations": {
+       "note_cn": "宽度指成分股中站上相应均线的比例；缺失数据不补造。"
+      },
+      "pending_conditions": [
+       "SMA60 斜率转向上 → 修复为上升；跌破 SMA60 → 转入下降（当前高出 2.56%）"
+      ]
+     },
+     "plan_artifact": null,
+     "answer_state": "answered",
+     "next_steps": [
+      {
+       "kind": "expand_evidence",
+       "label_cn": "查看板块依据"
+      }
+     ],
+     "timing_ms": {
+      "total_ms": 38,
+      "marks_ms": {
+       "received": 0,
+       "identity": 2,
+       "prep_resolve": 12,
+       "prep_sector": 33,
+       "prepared": 34,
+       "material_sent": 34,
+       "question_saved": 36,
+       "llm_end": 36,
+       "answer_saved": 38
+      },
+      "spans_ms": {}
+     },
+     "fallback": "通信板块（BK1215.SECTOR）：资料日期 2026-09-14，阶段为派发。AI讲解暂不可用，请核对下方板块资料；这不是ETF买卖建议。",
+     "quick_card": {
+      "symbol": "BK1215.SECTOR",
+      "display_name": "通信",
+      "as_of": "2026-09-14",
+      "close": 1631.56,
+      "color_cn": "灰",
+      "stage_cn": "派发",
+      "risk_cn": "板块观察，非买卖信号",
+      "levels": [],
+      "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+     }
+    },
+    "events": [
+     {
+      "event": "stage",
+      "t": 0.003,
+      "data": {
+       "key": "received",
+       "text": "已收到问题，正在登记请求"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.006,
+      "data": {
+       "key": "resolve",
+       "text": "识别标的与意图"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.036,
+      "data": {
+       "key": "context",
+       "text": "读取通信板块资料"
+      }
+     },
+     {
+      "event": "prepared",
+      "t": 0.037,
+      "data": {
+       "session_id": "sess_c2c236845d4c",
+       "resolved_symbol": "BK1215.SECTOR",
+       "quick_card": {
+        "symbol": "BK1215.SECTOR",
+        "display_name": "通信",
+        "as_of": "2026-09-14",
+        "close": 1631.56,
+        "color_cn": "灰",
+        "stage_cn": "派发",
+        "risk_cn": "板块观察，非买卖信号",
+        "levels": [],
+        "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+       },
+       "evidence_card": {
+        "facts": {
+         "symbol": "BK1215.SECTOR",
+         "display_name": "通信",
+         "subject_kind": "sector",
+         "as_of": "2026-09-14",
+         "verdict_cn": "板块阶段：派发",
+         "sector_summary_cn": "成分股站上50日均线的比例：61.48%"
+        },
+        "history_and_scope": {
+         "note_cn": "这是行业板块整体观察，不是ETF或可直接交易的产品；合成指数以当前成分回看历史，仅作形态参考，不据此产生买卖计划或借用ETF胜率。"
+        },
+        "explanations": {
+         "note_cn": "宽度指成分股中站上相应均线的比例；缺失数据不补造。"
+        },
+        "pending_conditions": [
+         "SMA60 斜率转向上 → 修复为上升；跌破 SMA60 → 转入下降（当前高出 2.56%）"
+        ]
+       },
+       "next_steps": [
+        {
+         "kind": "expand_evidence",
+         "label_cn": "查看板块依据"
+        }
+       ]
+      }
+     },
+     {
+      "event": "done",
+      "t": 0.042,
+      "data": {
+       "session_id": "sess_c2c236845d4c",
+       "resolved_symbol": "BK1215.SECTOR",
+       "grounded": false,
+       "question_id": 1,
+       "evidence_card": {
+        "facts": {
+         "symbol": "BK1215.SECTOR",
+         "display_name": "通信",
+         "subject_kind": "sector",
+         "as_of": "2026-09-14",
+         "verdict_cn": "板块阶段：派发",
+         "sector_summary_cn": "成分股站上50日均线的比例：61.48%"
+        },
+        "history_and_scope": {
+         "note_cn": "这是行业板块整体观察，不是ETF或可直接交易的产品；合成指数以当前成分回看历史，仅作形态参考，不据此产生买卖计划或借用ETF胜率。"
+        },
+        "explanations": {
+         "note_cn": "宽度指成分股中站上相应均线的比例；缺失数据不补造。"
+        },
+        "pending_conditions": [
+         "SMA60 斜率转向上 → 修复为上升；跌破 SMA60 → 转入下降（当前高出 2.56%）"
+        ]
+       },
+       "plan_artifact": null,
+       "answer_state": "answered",
+       "next_steps": [
+        {
+         "kind": "expand_evidence",
+         "label_cn": "查看板块依据"
+        }
+       ],
+       "timing_ms": {
+        "total_ms": 38,
+        "marks_ms": {
+         "received": 0,
+         "identity": 2,
+         "prep_resolve": 12,
+         "prep_sector": 33,
+         "prepared": 34,
+         "material_sent": 34,
+         "question_saved": 36,
+         "llm_end": 36,
+         "answer_saved": 38
+        },
+        "spans_ms": {}
+       },
+       "fallback": "通信板块（BK1215.SECTOR）：资料日期 2026-09-14，阶段为派发。AI讲解暂不可用，请核对下方板块资料；这不是ETF买卖建议。",
+       "quick_card": {
+        "symbol": "BK1215.SECTOR",
+        "display_name": "通信",
+        "as_of": "2026-09-14",
+        "close": 1631.56,
+        "color_cn": "灰",
+        "stage_cn": "派发",
+        "risk_cn": "板块观察，非买卖信号",
+        "levels": [],
+        "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+       }
+      }
+     }
+    ],
+    "aborted": false
+   },
+   "session_id": "sess_c2c236845d4c",
+   "current_symbol": "BK1215.SECTOR"
+  },
+  {
+   "case": "case2",
+   "message": "有哪些对应的ETF？",
+   "resolve": {
+    "intent": "discussion",
+    "topic": "overview",
+    "resolved_symbol": "BK1215.SECTOR",
+    "clarification": [],
+    "need_clarification": null
+   },
+   "stream": {
+    "client_request_id": "ca28dc89-14d4-4bcd-b205-8004e2cb73c0",
+    "marks_ms": {
+     "received": 2.1,
+     "prepared": 40.1,
+     "first_token": 42.2,
+     "done": 44.2
+    },
+    "received_text": "你问的「对应的ETF」：系统目录里没有可核实的「通信板块 → ETF/产品」跟踪关系资料——我不会仅凭名称相近猜哪个产品跟踪这个板块，也不替你选定某一个产品。\n想继续的话：直接说具体产品的名称或代码，我按那个产品自己的系统资料来讲（不会把板块的整体统计当成某个产品的成绩）。通信板块本身的观察仍按截至 2026-09-14 的板块资料。",
+    "done": {
+     "session_id": "sess_c2c236845d4c",
+     "resolved_symbol": "BK1215.SECTOR",
+     "grounded": true,
+     "question_id": 3,
+     "evidence_card": {
+      "facts": {
+       "symbol": "BK1215.SECTOR",
+       "display_name": "通信",
+       "subject_kind": "sector",
+       "as_of": "2026-09-14",
+       "verdict_cn": "板块阶段：派发",
+       "sector_summary_cn": "成分股站上50日均线的比例：61.48%"
+      },
+      "history_and_scope": {
+       "note_cn": "这是行业板块整体观察，不是ETF或可直接交易的产品；合成指数以当前成分回看历史，仅作形态参考，不据此产生买卖计划或借用ETF胜率。"
+      },
+      "explanations": {
+       "note_cn": "宽度指成分股中站上相应均线的比例；缺失数据不补造。"
+      },
+      "pending_conditions": [
+       "SMA60 斜率转向上 → 修复为上升；跌破 SMA60 → 转入下降（当前高出 2.56%）"
+      ]
+     },
+     "plan_artifact": null,
+     "answer_state": "answered",
+     "next_steps": [
+      {
+       "kind": "expand_evidence",
+       "label_cn": "查看板块依据"
+      }
+     ],
+     "timing_ms": {
+      "total_ms": 42,
+      "marks_ms": {
+       "received": 0,
+       "identity": 2,
+       "prep_resolve": 14,
+       "prep_sector": 37,
+       "prepared": 38,
+       "material_sent": 38,
+       "question_saved": 40,
+       "first_token": 40,
+       "llm_end": 40,
+       "answer_saved": 42
+      },
+      "spans_ms": {}
+     },
+     "quick_card": {
+      "symbol": "BK1215.SECTOR",
+      "display_name": "通信",
+      "as_of": "2026-09-14",
+      "close": 1631.56,
+      "color_cn": "灰",
+      "stage_cn": "派发",
+      "risk_cn": "板块观察，非买卖信号",
+      "levels": [],
+      "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+     }
+    },
+    "events": [
+     {
+      "event": "stage",
+      "t": 0.002,
+      "data": {
+       "key": "received",
+       "text": "已收到问题，正在登记请求"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.006,
+      "data": {
+       "key": "resolve",
+       "text": "识别标的与意图"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.04,
+      "data": {
+       "key": "context",
+       "text": "读取通信板块资料"
+      }
+     },
+     {
+      "event": "prepared",
+      "t": 0.04,
+      "data": {
+       "session_id": "sess_c2c236845d4c",
+       "resolved_symbol": "BK1215.SECTOR",
+       "quick_card": {
+        "symbol": "BK1215.SECTOR",
+        "display_name": "通信",
+        "as_of": "2026-09-14",
+        "close": 1631.56,
+        "color_cn": "灰",
+        "stage_cn": "派发",
+        "risk_cn": "板块观察，非买卖信号",
+        "levels": [],
+        "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+       },
+       "evidence_card": {
+        "facts": {
+         "symbol": "BK1215.SECTOR",
+         "display_name": "通信",
+         "subject_kind": "sector",
+         "as_of": "2026-09-14",
+         "verdict_cn": "板块阶段：派发",
+         "sector_summary_cn": "成分股站上50日均线的比例：61.48%"
+        },
+        "history_and_scope": {
+         "note_cn": "这是行业板块整体观察，不是ETF或可直接交易的产品；合成指数以当前成分回看历史，仅作形态参考，不据此产生买卖计划或借用ETF胜率。"
+        },
+        "explanations": {
+         "note_cn": "宽度指成分股中站上相应均线的比例；缺失数据不补造。"
+        },
+        "pending_conditions": [
+         "SMA60 斜率转向上 → 修复为上升；跌破 SMA60 → 转入下降（当前高出 2.56%）"
+        ]
+       },
+       "next_steps": [
+        {
+         "kind": "expand_evidence",
+         "label_cn": "查看板块依据"
+        }
+       ]
+      }
+     },
+     {
+      "event": "token",
+      "t": 0.042,
+      "data": {}
+     },
+     {
+      "event": "done",
+      "t": 0.044,
+      "data": {
+       "session_id": "sess_c2c236845d4c",
+       "resolved_symbol": "BK1215.SECTOR",
+       "grounded": true,
+       "question_id": 3,
+       "evidence_card": {
+        "facts": {
+         "symbol": "BK1215.SECTOR",
+         "display_name": "通信",
+         "subject_kind": "sector",
+         "as_of": "2026-09-14",
+         "verdict_cn": "板块阶段：派发",
+         "sector_summary_cn": "成分股站上50日均线的比例：61.48%"
+        },
+        "history_and_scope": {
+         "note_cn": "这是行业板块整体观察，不是ETF或可直接交易的产品；合成指数以当前成分回看历史，仅作形态参考，不据此产生买卖计划或借用ETF胜率。"
+        },
+        "explanations": {
+         "note_cn": "宽度指成分股中站上相应均线的比例；缺失数据不补造。"
+        },
+        "pending_conditions": [
+         "SMA60 斜率转向上 → 修复为上升；跌破 SMA60 → 转入下降（当前高出 2.56%）"
+        ]
+       },
+       "plan_artifact": null,
+       "answer_state": "answered",
+       "next_steps": [
+        {
+         "kind": "expand_evidence",
+         "label_cn": "查看板块依据"
+        }
+       ],
+       "timing_ms": {
+        "total_ms": 42,
+        "marks_ms": {
+         "received": 0,
+         "identity": 2,
+         "prep_resolve": 14,
+         "prep_sector": 37,
+         "prepared": 38,
+         "material_sent": 38,
+         "question_saved": 40,
+         "first_token": 40,
+         "llm_end": 40,
+         "answer_saved": 42
+        },
+        "spans_ms": {}
+       },
+       "quick_card": {
+        "symbol": "BK1215.SECTOR",
+        "display_name": "通信",
+        "as_of": "2026-09-14",
+        "close": 1631.56,
+        "color_cn": "灰",
+        "stage_cn": "派发",
+        "risk_cn": "板块观察，非买卖信号",
+        "levels": [],
+        "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+       }
+      }
+     }
+    ],
+    "aborted": false
+   },
+   "session_id": "sess_c2c236845d4c",
+   "current_symbol": "BK1215.SECTOR"
+  },
+  {
+   "case": "case3",
+   "message": "就看515880，现在怎么看？",
+   "resolve": {
+    "intent": "discussion",
+    "topic": "overview",
+    "resolved_symbol": "515880.SS",
+    "clarification": [],
+    "need_clarification": null
+   },
+   "stream": {
+    "client_request_id": "d1e5576c-af64-45c4-b451-bcb6da73d1f5",
+    "marks_ms": {
+     "received": 1.4,
+     "prepared": 1397.3,
+     "done": 1401.8
+    },
+    "received_text": "",
+    "done": {
+     "session_id": "sess_c2c236845d4c",
+     "resolved_symbol": "515880.SS",
+     "grounded": false,
+     "question_id": 5,
+     "evidence_card": {
+      "facts": {
+       "symbol": "515880.SS",
+       "display_name": "通信ETF",
+       "as_of": "2026-09-16",
+       "verdict_cn": "环境阻断",
+       "buy_point_candidate_n": 0
+      },
+      "history_and_scope": {
+       "winrate_evidence": {
+        "schema_version": "provenance/1.2",
+        "id": "module_winrate:515880.SS",
+        "source_path": "docs/experiments/module_winrate.json",
+        "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+        "source_version": "1",
+        "status": "unverified",
+        "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+        "statistic_kind": "trade_r_stats",
+        "strategy_scope": [
+         "technical_execution"
+        ],
+        "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+        "compatibility": "unknown",
+        "evidence_id": "module_winrate:515880.SS",
+        "source": "docs/experiments/module_winrate.json",
+        "strategies": [
+         "technical_execution"
+        ],
+        "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+       },
+       "comparison_config": {
+        "symbol": "515880.SS",
+        "module": {
+         "value": "A",
+         "source": "engine_default"
+        },
+        "exit_variant": {
+         "value": "a6_1_costbasis",
+         "source": "engine_default"
+        },
+        "entry_variant": {
+         "value": null,
+         "source": "engine_default"
+        },
+        "rr_min": {
+         "value": 3.0,
+         "source": "engine_default"
+        },
+        "fee_label": {
+         "value": "standard",
+         "source": "engine_default"
+        },
+        "ruleset_sha256": {
+         "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+         "source": "current_active_ledger"
+        },
+        "window": null,
+        "window_state": "unverified",
+        "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+       },
+       "matched_runs": [],
+       "supporting_runs": [],
+       "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+      },
+      "explanations": {
+       "kinds": [
+        "news",
+        "major_events",
+        "sentiment",
+        "experience"
+       ],
+       "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+      },
+      "pending_conditions": [
+       "底部结构尚未确认"
+      ]
+     },
+     "plan_artifact": null,
+     "answer_state": "answered",
+     "next_steps": [
+      {
+       "kind": "expand_evidence",
+       "label_cn": "查看依据详情"
+      },
+      {
+       "kind": "ask_conditions",
+       "label_cn": "看看还需满足什么条件",
+       "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+      },
+      {
+       "kind": "prepare_backtest",
+       "label_cn": "准备补测",
+       "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+      }
+     ],
+     "timing_ms": {
+      "total_ms": 1400,
+      "marks_ms": {
+       "received": 0,
+       "identity": 1,
+       "prep_resolve": 2,
+       "prep_analysis": 2,
+       "prep_review": 67,
+       "prep_plans": 67,
+       "prep_news": 89,
+       "prep_extras": 91,
+       "prep_context": 108,
+       "prep_sentiment_winrate": 1292,
+       "prep_evidence": 1300,
+       "prep_done": 1395,
+       "prepared": 1395,
+       "material_sent": 1396,
+       "question_saved": 1398,
+       "llm_end": 1398,
+       "answer_saved": 1400
+      },
+      "spans_ms": {}
+     },
+     "fallback": "通信ETF（515880.SS）：按系统数据，现在不构成可执行的入场计划——按规则本轮不适合讨论开新仓。\n系统给出的原因是：1.无法明确当前趋势类型、7.多周期杂乱。\n截至 2026-09-16 的数据（是否已收盘系统未单独核实，不凭更新时间猜）。AI 讲解暂时不可用，以下是系统直接给出的数据事实。\n系统状态：绿色 / 风险关注 / 风险关注 有效顶部。\n参考：成交最密集的价位在 0.66775（筹码分布代理，不是真实持仓成本）。\n历史依据：现在不能给这次判断附上可靠的胜率——现有记录不足以核实是否是同一种做法（明细见下方依据卡）。\n接下来先观察这些条件，哪条变化了再回来讨论：底部结构尚未确认。",
+     "quick_card": {
+      "symbol": "515880.SS",
+      "display_name": "通信ETF",
+      "as_of": "2026-09-16",
+      "close": 0.69,
+      "color_cn": "绿色",
+      "stage_cn": "风险关注",
+      "risk_cn": "有效顶部",
+      "levels": [
+       {
+        "role": "下方关键位",
+        "price": 0.634,
+        "kind": "below",
+        "dist_pct": 8.83,
+        "from_cn": "顶部结构"
+       },
+       {
+        "role": "下方关键位",
+        "price": 0.629,
+        "kind": "below",
+        "dist_pct": 9.7,
+        "from_cn": "更高低点底部"
+       },
+       {
+        "role": "上方阻力",
+        "price": 0.695,
+        "kind": "above",
+        "dist_pct": 0.72,
+        "from_cn": "更高低点底部"
+       }
+      ],
+      "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+     }
+    },
+    "events": [
+     {
+      "event": "stage",
+      "t": 0.001,
+      "data": {
+       "key": "received",
+       "text": "已收到问题，正在登记请求"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.004,
+      "data": {
+       "key": "resolve",
+       "text": "识别标的与意图"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.004,
+      "data": {
+       "key": "fetch",
+       "text": "拉取 515880.SS 行情（首次约 1 分钟）"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.069,
+      "data": {
+       "key": "context",
+       "text": "组装技术材料与监督状态"
+      }
+     },
+     {
+      "event": "prepared",
+      "t": 1.397,
+      "data": {
+       "session_id": "sess_c2c236845d4c",
+       "resolved_symbol": "515880.SS",
+       "quick_card": {
+        "symbol": "515880.SS",
+        "display_name": "通信ETF",
+        "as_of": "2026-09-16",
+        "close": 0.69,
+        "color_cn": "绿色",
+        "stage_cn": "风险关注",
+        "risk_cn": "有效顶部",
+        "levels": [
+         {
+          "role": "下方关键位",
+          "price": 0.634,
+          "kind": "below",
+          "dist_pct": 8.83,
+          "from_cn": "顶部结构"
+         },
+         {
+          "role": "下方关键位",
+          "price": 0.629,
+          "kind": "below",
+          "dist_pct": 9.7,
+          "from_cn": "更高低点底部"
+         },
+         {
+          "role": "上方阻力",
+          "price": 0.695,
+          "kind": "above",
+          "dist_pct": 0.72,
+          "from_cn": "更高低点底部"
+         }
+        ],
+        "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+       },
+       "evidence_card": {
+        "facts": {
+         "symbol": "515880.SS",
+         "display_name": "通信ETF",
+         "as_of": "2026-09-16",
+         "verdict_cn": "环境阻断",
+         "buy_point_candidate_n": 0
+        },
+        "history_and_scope": {
+         "winrate_evidence": {
+          "schema_version": "provenance/1.2",
+          "id": "module_winrate:515880.SS",
+          "source_path": "docs/experiments/module_winrate.json",
+          "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+          "source_version": "1",
+          "status": "unverified",
+          "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+          "statistic_kind": "trade_r_stats",
+          "strategy_scope": [
+           "technical_execution"
+          ],
+          "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+          "compatibility": "unknown",
+          "evidence_id": "module_winrate:515880.SS",
+          "source": "docs/experiments/module_winrate.json",
+          "strategies": [
+           "technical_execution"
+          ],
+          "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+         },
+         "comparison_config": {
+          "symbol": "515880.SS",
+          "module": {
+           "value": "A",
+           "source": "engine_default"
+          },
+          "exit_variant": {
+           "value": "a6_1_costbasis",
+           "source": "engine_default"
+          },
+          "entry_variant": {
+           "value": null,
+           "source": "engine_default"
+          },
+          "rr_min": {
+           "value": 3.0,
+           "source": "engine_default"
+          },
+          "fee_label": {
+           "value": "standard",
+           "source": "engine_default"
+          },
+          "ruleset_sha256": {
+           "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+           "source": "current_active_ledger"
+          },
+          "window": null,
+          "window_state": "unverified",
+          "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+         },
+         "matched_runs": [],
+         "supporting_runs": [],
+         "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+        },
+        "explanations": {
+         "kinds": [
+          "news",
+          "major_events",
+          "sentiment",
+          "experience"
+         ],
+         "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+        },
+        "pending_conditions": [
+         "底部结构尚未确认"
+        ]
+       },
+       "next_steps": [
+        {
+         "kind": "expand_evidence",
+         "label_cn": "查看依据详情"
+        },
+        {
+         "kind": "ask_conditions",
+         "label_cn": "看看还需满足什么条件",
+         "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+        },
+        {
+         "kind": "prepare_backtest",
+         "label_cn": "准备补测",
+         "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+        }
+       ]
+      }
+     },
+     {
+      "event": "done",
+      "t": 1.402,
+      "data": {
+       "session_id": "sess_c2c236845d4c",
+       "resolved_symbol": "515880.SS",
+       "grounded": false,
+       "question_id": 5,
+       "evidence_card": {
+        "facts": {
+         "symbol": "515880.SS",
+         "display_name": "通信ETF",
+         "as_of": "2026-09-16",
+         "verdict_cn": "环境阻断",
+         "buy_point_candidate_n": 0
+        },
+        "history_and_scope": {
+         "winrate_evidence": {
+          "schema_version": "provenance/1.2",
+          "id": "module_winrate:515880.SS",
+          "source_path": "docs/experiments/module_winrate.json",
+          "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+          "source_version": "1",
+          "status": "unverified",
+          "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+          "statistic_kind": "trade_r_stats",
+          "strategy_scope": [
+           "technical_execution"
+          ],
+          "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+          "compatibility": "unknown",
+          "evidence_id": "module_winrate:515880.SS",
+          "source": "docs/experiments/module_winrate.json",
+          "strategies": [
+           "technical_execution"
+          ],
+          "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+         },
+         "comparison_config": {
+          "symbol": "515880.SS",
+          "module": {
+           "value": "A",
+           "source": "engine_default"
+          },
+          "exit_variant": {
+           "value": "a6_1_costbasis",
+           "source": "engine_default"
+          },
+          "entry_variant": {
+           "value": null,
+           "source": "engine_default"
+          },
+          "rr_min": {
+           "value": 3.0,
+           "source": "engine_default"
+          },
+          "fee_label": {
+           "value": "standard",
+           "source": "engine_default"
+          },
+          "ruleset_sha256": {
+           "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+           "source": "current_active_ledger"
+          },
+          "window": null,
+          "window_state": "unverified",
+          "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+         },
+         "matched_runs": [],
+         "supporting_runs": [],
+         "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+        },
+        "explanations": {
+         "kinds": [
+          "news",
+          "major_events",
+          "sentiment",
+          "experience"
+         ],
+         "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+        },
+        "pending_conditions": [
+         "底部结构尚未确认"
+        ]
+       },
+       "plan_artifact": null,
+       "answer_state": "answered",
+       "next_steps": [
+        {
+         "kind": "expand_evidence",
+         "label_cn": "查看依据详情"
+        },
+        {
+         "kind": "ask_conditions",
+         "label_cn": "看看还需满足什么条件",
+         "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+        },
+        {
+         "kind": "prepare_backtest",
+         "label_cn": "准备补测",
+         "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+        }
+       ],
+       "timing_ms": {
+        "total_ms": 1400,
+        "marks_ms": {
+         "received": 0,
+         "identity": 1,
+         "prep_resolve": 2,
+         "prep_analysis": 2,
+         "prep_review": 67,
+         "prep_plans": 67,
+         "prep_news": 89,
+         "prep_extras": 91,
+         "prep_context": 108,
+         "prep_sentiment_winrate": 1292,
+         "prep_evidence": 1300,
+         "prep_done": 1395,
+         "prepared": 1395,
+         "material_sent": 1396,
+         "question_saved": 1398,
+         "llm_end": 1398,
+         "answer_saved": 1400
+        },
+        "spans_ms": {}
+       },
+       "fallback": "通信ETF（515880.SS）：按系统数据，现在不构成可执行的入场计划——按规则本轮不适合讨论开新仓。\n系统给出的原因是：1.无法明确当前趋势类型、7.多周期杂乱。\n截至 2026-09-16 的数据（是否已收盘系统未单独核实，不凭更新时间猜）。AI 讲解暂时不可用，以下是系统直接给出的数据事实。\n系统状态：绿色 / 风险关注 / 风险关注 有效顶部。\n参考：成交最密集的价位在 0.66775（筹码分布代理，不是真实持仓成本）。\n历史依据：现在不能给这次判断附上可靠的胜率——现有记录不足以核实是否是同一种做法（明细见下方依据卡）。\n接下来先观察这些条件，哪条变化了再回来讨论：底部结构尚未确认。",
+       "quick_card": {
+        "symbol": "515880.SS",
+        "display_name": "通信ETF",
+        "as_of": "2026-09-16",
+        "close": 0.69,
+        "color_cn": "绿色",
+        "stage_cn": "风险关注",
+        "risk_cn": "有效顶部",
+        "levels": [
+         {
+          "role": "下方关键位",
+          "price": 0.634,
+          "kind": "below",
+          "dist_pct": 8.83,
+          "from_cn": "顶部结构"
+         },
+         {
+          "role": "下方关键位",
+          "price": 0.629,
+          "kind": "below",
+          "dist_pct": 9.7,
+          "from_cn": "更高低点底部"
+         },
+         {
+          "role": "上方阻力",
+          "price": 0.695,
+          "kind": "above",
+          "dist_pct": 0.72,
+          "from_cn": "更高低点底部"
+         }
+        ],
+        "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+       }
+      }
+     }
+    ],
+    "aborted": false
+   },
+   "session_id": "sess_c2c236845d4c",
+   "current_symbol": "515880.SS"
+  },
+  {
+   "case": "case4",
+   "message": "先别买，什么情况值得再看？",
+   "resolve": {
+    "intent": "discussion",
+    "topic": "overview",
+    "resolved_symbol": "515880.SS",
+    "clarification": [],
+    "need_clarification": null
+   },
+   "stream": {
+    "client_request_id": "9d4bda80-1fce-4bd2-a037-75613ee3c38f",
+    "marks_ms": {
+     "received": 1.5,
+     "prepared": 492.5,
+     "done": 496.6
+    },
+    "received_text": "",
+    "done": {
+     "session_id": "sess_c2c236845d4c",
+     "resolved_symbol": "515880.SS",
+     "grounded": false,
+     "question_id": 7,
+     "evidence_card": {
+      "facts": {
+       "symbol": "515880.SS",
+       "display_name": "通信ETF",
+       "as_of": "2026-09-16",
+       "verdict_cn": "环境阻断",
+       "buy_point_candidate_n": 0
+      },
+      "history_and_scope": {
+       "winrate_evidence": {
+        "schema_version": "provenance/1.2",
+        "id": "module_winrate:515880.SS",
+        "source_path": "docs/experiments/module_winrate.json",
+        "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+        "source_version": "1",
+        "status": "unverified",
+        "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+        "statistic_kind": "trade_r_stats",
+        "strategy_scope": [
+         "technical_execution"
+        ],
+        "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+        "compatibility": "unknown",
+        "evidence_id": "module_winrate:515880.SS",
+        "source": "docs/experiments/module_winrate.json",
+        "strategies": [
+         "technical_execution"
+        ],
+        "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+       },
+       "comparison_config": {
+        "symbol": "515880.SS",
+        "module": {
+         "value": "A",
+         "source": "engine_default"
+        },
+        "exit_variant": {
+         "value": "a6_1_costbasis",
+         "source": "engine_default"
+        },
+        "entry_variant": {
+         "value": null,
+         "source": "engine_default"
+        },
+        "rr_min": {
+         "value": 3.0,
+         "source": "engine_default"
+        },
+        "fee_label": {
+         "value": "standard",
+         "source": "engine_default"
+        },
+        "ruleset_sha256": {
+         "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+         "source": "current_active_ledger"
+        },
+        "window": null,
+        "window_state": "unverified",
+        "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+       },
+       "matched_runs": [],
+       "supporting_runs": [],
+       "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+      },
+      "explanations": {
+       "kinds": [
+        "news",
+        "major_events",
+        "sentiment",
+        "experience"
+       ],
+       "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+      },
+      "pending_conditions": [
+       "底部结构尚未确认"
+      ]
+     },
+     "plan_artifact": null,
+     "answer_state": "answered",
+     "next_steps": [
+      {
+       "kind": "expand_evidence",
+       "label_cn": "查看依据详情"
+      },
+      {
+       "kind": "ask_conditions",
+       "label_cn": "看看还需满足什么条件",
+       "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+      },
+      {
+       "kind": "prepare_backtest",
+       "label_cn": "准备补测",
+       "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+      }
+     ],
+     "timing_ms": {
+      "total_ms": 495,
+      "marks_ms": {
+       "received": 0,
+       "identity": 1,
+       "prep_resolve": 10,
+       "prep_analysis": 10,
+       "prep_review": 75,
+       "prep_plans": 75,
+       "prep_news": 83,
+       "prep_extras": 83,
+       "prep_context": 95,
+       "prep_sentiment_winrate": 429,
+       "prep_evidence": 429,
+       "prep_done": 489,
+       "prepared": 490,
+       "material_sent": 491,
+       "question_saved": 493,
+       "llm_end": 493,
+       "answer_saved": 495
+      },
+      "spans_ms": {}
+     },
+     "fallback": "通信ETF（515880.SS）：按系统数据，现在不构成可执行的入场计划——按规则本轮不适合讨论开新仓。\n系统给出的原因是：1.无法明确当前趋势类型、7.多周期杂乱。\n截至 2026-09-16 的数据（是否已收盘系统未单独核实，不凭更新时间猜）。AI 讲解暂时不可用，以下是系统直接给出的数据事实。\n系统状态：绿色 / 风险关注 / 风险关注 有效顶部。\n参考：成交最密集的价位在 0.66775（筹码分布代理，不是真实持仓成本）。\n历史依据：现在不能给这次判断附上可靠的胜率——现有记录不足以核实是否是同一种做法（明细见下方依据卡）。\n接下来先观察这些条件，哪条变化了再回来讨论：底部结构尚未确认。",
+     "quick_card": {
+      "symbol": "515880.SS",
+      "display_name": "通信ETF",
+      "as_of": "2026-09-16",
+      "close": 0.69,
+      "color_cn": "绿色",
+      "stage_cn": "风险关注",
+      "risk_cn": "有效顶部",
+      "levels": [
+       {
+        "role": "下方关键位",
+        "price": 0.634,
+        "kind": "below",
+        "dist_pct": 8.83,
+        "from_cn": "顶部结构"
+       },
+       {
+        "role": "下方关键位",
+        "price": 0.629,
+        "kind": "below",
+        "dist_pct": 9.7,
+        "from_cn": "更高低点底部"
+       },
+       {
+        "role": "上方阻力",
+        "price": 0.695,
+        "kind": "above",
+        "dist_pct": 0.72,
+        "from_cn": "更高低点底部"
+       }
+      ],
+      "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+     }
+    },
+    "events": [
+     {
+      "event": "stage",
+      "t": 0.001,
+      "data": {
+       "key": "received",
+       "text": "已收到问题，正在登记请求"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.004,
+      "data": {
+       "key": "resolve",
+       "text": "识别标的与意图"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.012,
+      "data": {
+       "key": "fetch",
+       "text": "拉取 515880.SS 行情（首次约 1 分钟）"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.077,
+      "data": {
+       "key": "context",
+       "text": "组装技术材料与监督状态"
+      }
+     },
+     {
+      "event": "prepared",
+      "t": 0.493,
+      "data": {
+       "session_id": "sess_c2c236845d4c",
+       "resolved_symbol": "515880.SS",
+       "quick_card": {
+        "symbol": "515880.SS",
+        "display_name": "通信ETF",
+        "as_of": "2026-09-16",
+        "close": 0.69,
+        "color_cn": "绿色",
+        "stage_cn": "风险关注",
+        "risk_cn": "有效顶部",
+        "levels": [
+         {
+          "role": "下方关键位",
+          "price": 0.634,
+          "kind": "below",
+          "dist_pct": 8.83,
+          "from_cn": "顶部结构"
+         },
+         {
+          "role": "下方关键位",
+          "price": 0.629,
+          "kind": "below",
+          "dist_pct": 9.7,
+          "from_cn": "更高低点底部"
+         },
+         {
+          "role": "上方阻力",
+          "price": 0.695,
+          "kind": "above",
+          "dist_pct": 0.72,
+          "from_cn": "更高低点底部"
+         }
+        ],
+        "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+       },
+       "evidence_card": {
+        "facts": {
+         "symbol": "515880.SS",
+         "display_name": "通信ETF",
+         "as_of": "2026-09-16",
+         "verdict_cn": "环境阻断",
+         "buy_point_candidate_n": 0
+        },
+        "history_and_scope": {
+         "winrate_evidence": {
+          "schema_version": "provenance/1.2",
+          "id": "module_winrate:515880.SS",
+          "source_path": "docs/experiments/module_winrate.json",
+          "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+          "source_version": "1",
+          "status": "unverified",
+          "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+          "statistic_kind": "trade_r_stats",
+          "strategy_scope": [
+           "technical_execution"
+          ],
+          "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+          "compatibility": "unknown",
+          "evidence_id": "module_winrate:515880.SS",
+          "source": "docs/experiments/module_winrate.json",
+          "strategies": [
+           "technical_execution"
+          ],
+          "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+         },
+         "comparison_config": {
+          "symbol": "515880.SS",
+          "module": {
+           "value": "A",
+           "source": "engine_default"
+          },
+          "exit_variant": {
+           "value": "a6_1_costbasis",
+           "source": "engine_default"
+          },
+          "entry_variant": {
+           "value": null,
+           "source": "engine_default"
+          },
+          "rr_min": {
+           "value": 3.0,
+           "source": "engine_default"
+          },
+          "fee_label": {
+           "value": "standard",
+           "source": "engine_default"
+          },
+          "ruleset_sha256": {
+           "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+           "source": "current_active_ledger"
+          },
+          "window": null,
+          "window_state": "unverified",
+          "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+         },
+         "matched_runs": [],
+         "supporting_runs": [],
+         "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+        },
+        "explanations": {
+         "kinds": [
+          "news",
+          "major_events",
+          "sentiment",
+          "experience"
+         ],
+         "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+        },
+        "pending_conditions": [
+         "底部结构尚未确认"
+        ]
+       },
+       "next_steps": [
+        {
+         "kind": "expand_evidence",
+         "label_cn": "查看依据详情"
+        },
+        {
+         "kind": "ask_conditions",
+         "label_cn": "看看还需满足什么条件",
+         "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+        },
+        {
+         "kind": "prepare_backtest",
+         "label_cn": "准备补测",
+         "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+        }
+       ]
+      }
+     },
+     {
+      "event": "done",
+      "t": 0.497,
+      "data": {
+       "session_id": "sess_c2c236845d4c",
+       "resolved_symbol": "515880.SS",
+       "grounded": false,
+       "question_id": 7,
+       "evidence_card": {
+        "facts": {
+         "symbol": "515880.SS",
+         "display_name": "通信ETF",
+         "as_of": "2026-09-16",
+         "verdict_cn": "环境阻断",
+         "buy_point_candidate_n": 0
+        },
+        "history_and_scope": {
+         "winrate_evidence": {
+          "schema_version": "provenance/1.2",
+          "id": "module_winrate:515880.SS",
+          "source_path": "docs/experiments/module_winrate.json",
+          "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+          "source_version": "1",
+          "status": "unverified",
+          "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+          "statistic_kind": "trade_r_stats",
+          "strategy_scope": [
+           "technical_execution"
+          ],
+          "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+          "compatibility": "unknown",
+          "evidence_id": "module_winrate:515880.SS",
+          "source": "docs/experiments/module_winrate.json",
+          "strategies": [
+           "technical_execution"
+          ],
+          "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+         },
+         "comparison_config": {
+          "symbol": "515880.SS",
+          "module": {
+           "value": "A",
+           "source": "engine_default"
+          },
+          "exit_variant": {
+           "value": "a6_1_costbasis",
+           "source": "engine_default"
+          },
+          "entry_variant": {
+           "value": null,
+           "source": "engine_default"
+          },
+          "rr_min": {
+           "value": 3.0,
+           "source": "engine_default"
+          },
+          "fee_label": {
+           "value": "standard",
+           "source": "engine_default"
+          },
+          "ruleset_sha256": {
+           "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+           "source": "current_active_ledger"
+          },
+          "window": null,
+          "window_state": "unverified",
+          "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+         },
+         "matched_runs": [],
+         "supporting_runs": [],
+         "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+        },
+        "explanations": {
+         "kinds": [
+          "news",
+          "major_events",
+          "sentiment",
+          "experience"
+         ],
+         "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+        },
+        "pending_conditions": [
+         "底部结构尚未确认"
+        ]
+       },
+       "plan_artifact": null,
+       "answer_state": "answered",
+       "next_steps": [
+        {
+         "kind": "expand_evidence",
+         "label_cn": "查看依据详情"
+        },
+        {
+         "kind": "ask_conditions",
+         "label_cn": "看看还需满足什么条件",
+         "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+        },
+        {
+         "kind": "prepare_backtest",
+         "label_cn": "准备补测",
+         "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+        }
+       ],
+       "timing_ms": {
+        "total_ms": 495,
+        "marks_ms": {
+         "received": 0,
+         "identity": 1,
+         "prep_resolve": 10,
+         "prep_analysis": 10,
+         "prep_review": 75,
+         "prep_plans": 75,
+         "prep_news": 83,
+         "prep_extras": 83,
+         "prep_context": 95,
+         "prep_sentiment_winrate": 429,
+         "prep_evidence": 429,
+         "prep_done": 489,
+         "prepared": 490,
+         "material_sent": 491,
+         "question_saved": 493,
+         "llm_end": 493,
+         "answer_saved": 495
+        },
+        "spans_ms": {}
+       },
+       "fallback": "通信ETF（515880.SS）：按系统数据，现在不构成可执行的入场计划——按规则本轮不适合讨论开新仓。\n系统给出的原因是：1.无法明确当前趋势类型、7.多周期杂乱。\n截至 2026-09-16 的数据（是否已收盘系统未单独核实，不凭更新时间猜）。AI 讲解暂时不可用，以下是系统直接给出的数据事实。\n系统状态：绿色 / 风险关注 / 风险关注 有效顶部。\n参考：成交最密集的价位在 0.66775（筹码分布代理，不是真实持仓成本）。\n历史依据：现在不能给这次判断附上可靠的胜率——现有记录不足以核实是否是同一种做法（明细见下方依据卡）。\n接下来先观察这些条件，哪条变化了再回来讨论：底部结构尚未确认。",
+       "quick_card": {
+        "symbol": "515880.SS",
+        "display_name": "通信ETF",
+        "as_of": "2026-09-16",
+        "close": 0.69,
+        "color_cn": "绿色",
+        "stage_cn": "风险关注",
+        "risk_cn": "有效顶部",
+        "levels": [
+         {
+          "role": "下方关键位",
+          "price": 0.634,
+          "kind": "below",
+          "dist_pct": 8.83,
+          "from_cn": "顶部结构"
+         },
+         {
+          "role": "下方关键位",
+          "price": 0.629,
+          "kind": "below",
+          "dist_pct": 9.7,
+          "from_cn": "更高低点底部"
+         },
+         {
+          "role": "上方阻力",
+          "price": 0.695,
+          "kind": "above",
+          "dist_pct": 0.72,
+          "from_cn": "更高低点底部"
+         }
+        ],
+        "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+       }
+      }
+     }
+    ],
+    "aborted": false
+   },
+   "session_id": "sess_c2c236845d4c",
+   "current_symbol": "515880.SS"
+  },
+  {
+   "case": "case5",
+   "message": "刚才那个依据够吗，不够补测。",
+   "resolve": {
+    "intent": "backtest_request",
+    "topic": "evidence",
+    "resolved_symbol": "515880.SS",
+    "clarification": [],
+    "need_clarification": null
+   },
+   "chat": {
+    "status": 200,
+    "elapsed_ms": 488.9,
+    "body": {
+     "session_id": "sess_c2c236845d4c",
+     "reply": "通信ETF（515880.SS）：按系统数据，现在不构成可执行的入场计划——按规则本轮不适合讨论开新仓。\n系统给出的原因是：1.无法明确当前趋势类型、7.多周期杂乱。\n截至 2026-09-16 的数据（是否已收盘系统未单独核实，不凭更新时间猜）。AI 讲解暂时不可用，以下是系统直接给出的数据事实。\n系统状态：绿色 / 风险关注 / 风险关注 有效顶部。\n参考：成交最密集的价位在 0.66775（筹码分布代理，不是真实持仓成本）。\n历史依据：现在不能给这次判断附上可靠的胜率——现有记录不足以核实是否是同一种做法（明细见下方依据卡）。\n接下来先观察这些条件，哪条变化了再回来讨论：底部结构尚未确认。",
+     "grounded": false,
+     "trace": [],
+     "resolved_symbol": "515880.SS",
+     "question_id": 9,
+     "evidence_card": {
+      "facts": {
+       "symbol": "515880.SS",
+       "display_name": "通信ETF",
+       "as_of": "2026-09-16",
+       "verdict_cn": "环境阻断",
+       "buy_point_candidate_n": 0
+      },
+      "history_and_scope": {
+       "winrate_evidence": {
+        "schema_version": "provenance/1.2",
+        "id": "module_winrate:515880.SS",
+        "source_path": "docs/experiments/module_winrate.json",
+        "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+        "source_version": "1",
+        "status": "unverified",
+        "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+        "statistic_kind": "trade_r_stats",
+        "strategy_scope": [
+         "technical_execution"
+        ],
+        "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+        "compatibility": "unknown",
+        "evidence_id": "module_winrate:515880.SS",
+        "source": "docs/experiments/module_winrate.json",
+        "strategies": [
+         "technical_execution"
+        ],
+        "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+       },
+       "comparison_config": {
+        "symbol": "515880.SS",
+        "module": {
+         "value": "A",
+         "source": "engine_default"
+        },
+        "exit_variant": {
+         "value": "a6_1_costbasis",
+         "source": "engine_default"
+        },
+        "entry_variant": {
+         "value": null,
+         "source": "engine_default"
+        },
+        "rr_min": {
+         "value": 3.0,
+         "source": "engine_default"
+        },
+        "fee_label": {
+         "value": "standard",
+         "source": "engine_default"
+        },
+        "ruleset_sha256": {
+         "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+         "source": "current_active_ledger"
+        },
+        "window": null,
+        "window_state": "unverified",
+        "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+       },
+       "matched_runs": [],
+       "supporting_runs": [],
+       "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+      },
+      "explanations": {
+       "kinds": [
+        "news",
+        "major_events",
+        "sentiment",
+        "experience"
+       ],
+       "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+      },
+      "pending_conditions": [
+       "底部结构尚未确认"
+      ]
+     },
+     "plan_artifact": null,
+     "answer_state": "answered",
+     "next_steps": [
+      {
+       "kind": "expand_evidence",
+       "label_cn": "查看依据详情"
+      },
+      {
+       "kind": "ask_conditions",
+       "label_cn": "看看还需满足什么条件",
+       "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+      },
+      {
+       "kind": "prepare_backtest",
+       "label_cn": "准备补测",
+       "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+      }
+     ]
+    }
+   },
+   "setup_panel_would_open": true,
+   "session_id": "sess_c2c236845d4c",
+   "current_symbol": "515880.SS"
+  },
+  {
+   "case": "case6",
+   "message": "我已经持有了。",
+   "resolve": {
+    "intent": "discussion",
+    "topic": "overview",
+    "resolved_symbol": "515880.SS",
+    "clarification": [],
+    "need_clarification": null
+   },
+   "stream": {
+    "client_request_id": "0b9cb7d8-7a1b-4987-9329-e8532b212335",
+    "marks_ms": {
+     "received": 1.3,
+     "prepared": 487.7,
+     "done": 492.3
+    },
+    "received_text": "",
+    "done": {
+     "session_id": "sess_c2c236845d4c",
+     "resolved_symbol": "515880.SS",
+     "grounded": false,
+     "question_id": 11,
+     "evidence_card": {
+      "facts": {
+       "symbol": "515880.SS",
+       "display_name": "通信ETF",
+       "as_of": "2026-09-16",
+       "verdict_cn": "环境阻断",
+       "buy_point_candidate_n": 0
+      },
+      "history_and_scope": {
+       "winrate_evidence": {
+        "schema_version": "provenance/1.2",
+        "id": "module_winrate:515880.SS",
+        "source_path": "docs/experiments/module_winrate.json",
+        "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+        "source_version": "1",
+        "status": "unverified",
+        "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+        "statistic_kind": "trade_r_stats",
+        "strategy_scope": [
+         "technical_execution"
+        ],
+        "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+        "compatibility": "unknown",
+        "evidence_id": "module_winrate:515880.SS",
+        "source": "docs/experiments/module_winrate.json",
+        "strategies": [
+         "technical_execution"
+        ],
+        "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+       },
+       "comparison_config": {
+        "symbol": "515880.SS",
+        "module": {
+         "value": "A",
+         "source": "engine_default"
+        },
+        "exit_variant": {
+         "value": "a6_1_costbasis",
+         "source": "engine_default"
+        },
+        "entry_variant": {
+         "value": null,
+         "source": "engine_default"
+        },
+        "rr_min": {
+         "value": 3.0,
+         "source": "engine_default"
+        },
+        "fee_label": {
+         "value": "standard",
+         "source": "engine_default"
+        },
+        "ruleset_sha256": {
+         "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+         "source": "current_active_ledger"
+        },
+        "window": null,
+        "window_state": "unverified",
+        "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+       },
+       "matched_runs": [],
+       "supporting_runs": [],
+       "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+      },
+      "explanations": {
+       "kinds": [
+        "news",
+        "major_events",
+        "sentiment",
+        "experience"
+       ],
+       "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+      },
+      "pending_conditions": [
+       "底部结构尚未确认"
+      ]
+     },
+     "plan_artifact": null,
+     "answer_state": "answered",
+     "next_steps": [
+      {
+       "kind": "expand_evidence",
+       "label_cn": "查看依据详情"
+      },
+      {
+       "kind": "ask_conditions",
+       "label_cn": "看看还需满足什么条件",
+       "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+      },
+      {
+       "kind": "prepare_backtest",
+       "label_cn": "准备补测",
+       "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+      }
+     ],
+     "timing_ms": {
+      "total_ms": 490,
+      "marks_ms": {
+       "received": 0,
+       "identity": 1,
+       "prep_resolve": 9,
+       "prep_analysis": 9,
+       "prep_review": 72,
+       "prep_plans": 72,
+       "prep_news": 75,
+       "prep_extras": 76,
+       "prep_context": 88,
+       "prep_sentiment_winrate": 420,
+       "prep_evidence": 421,
+       "prep_done": 485,
+       "prepared": 486,
+       "material_sent": 486,
+       "question_saved": 489,
+       "llm_end": 489,
+       "answer_saved": 490
+      },
+      "spans_ms": {}
+     },
+     "fallback": "通信ETF（515880.SS）：你说已经持有了——这次就从持仓管理角度讲，不按首次买入说。\n系统当前状态：1.无法明确当前趋势类型、7.多周期杂乱——这是环境层面的提醒，不是让你立刻动作。\n你没有给成本价和资金信息，这段讨论里也没有你的成交信息——我不编这些；具体的退出位以你自己确认过的计划为准。这里没有记录任何成交。\n截至 2026-09-16 的数据（是否已收盘系统未单独核实，不凭更新时间猜）。AI 讲解暂时不可用，以下是系统直接给出的数据事实。\n系统状态：绿色 / 风险关注 / 风险关注 有效顶部。\n参考：成交最密集的价位在 0.66775（筹码分布代理，不是真实持仓成本）。\n历史依据：现在不能给这次判断附上可靠的胜率——现有记录不足以核实是否是同一种做法（明细见下方依据卡）。\n接下来先观察这些条件，哪条变化了再回来讨论：底部结构尚未确认。",
+     "quick_card": {
+      "symbol": "515880.SS",
+      "display_name": "通信ETF",
+      "as_of": "2026-09-16",
+      "close": 0.69,
+      "color_cn": "绿色",
+      "stage_cn": "风险关注",
+      "risk_cn": "有效顶部",
+      "levels": [
+       {
+        "role": "下方关键位",
+        "price": 0.634,
+        "kind": "below",
+        "dist_pct": 8.83,
+        "from_cn": "顶部结构"
+       },
+       {
+        "role": "下方关键位",
+        "price": 0.629,
+        "kind": "below",
+        "dist_pct": 9.7,
+        "from_cn": "更高低点底部"
+       },
+       {
+        "role": "上方阻力",
+        "price": 0.695,
+        "kind": "above",
+        "dist_pct": 0.72,
+        "from_cn": "更高低点底部"
+       }
+      ],
+      "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+     }
+    },
+    "events": [
+     {
+      "event": "stage",
+      "t": 0.001,
+      "data": {
+       "key": "received",
+       "text": "已收到问题，正在登记请求"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.004,
+      "data": {
+       "key": "resolve",
+       "text": "识别标的与意图"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.011,
+      "data": {
+       "key": "fetch",
+       "text": "拉取 515880.SS 行情（首次约 1 分钟）"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.074,
+      "data": {
+       "key": "context",
+       "text": "组装技术材料与监督状态"
+      }
+     },
+     {
+      "event": "prepared",
+      "t": 0.488,
+      "data": {
+       "session_id": "sess_c2c236845d4c",
+       "resolved_symbol": "515880.SS",
+       "quick_card": {
+        "symbol": "515880.SS",
+        "display_name": "通信ETF",
+        "as_of": "2026-09-16",
+        "close": 0.69,
+        "color_cn": "绿色",
+        "stage_cn": "风险关注",
+        "risk_cn": "有效顶部",
+        "levels": [
+         {
+          "role": "下方关键位",
+          "price": 0.634,
+          "kind": "below",
+          "dist_pct": 8.83,
+          "from_cn": "顶部结构"
+         },
+         {
+          "role": "下方关键位",
+          "price": 0.629,
+          "kind": "below",
+          "dist_pct": 9.7,
+          "from_cn": "更高低点底部"
+         },
+         {
+          "role": "上方阻力",
+          "price": 0.695,
+          "kind": "above",
+          "dist_pct": 0.72,
+          "from_cn": "更高低点底部"
+         }
+        ],
+        "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+       },
+       "evidence_card": {
+        "facts": {
+         "symbol": "515880.SS",
+         "display_name": "通信ETF",
+         "as_of": "2026-09-16",
+         "verdict_cn": "环境阻断",
+         "buy_point_candidate_n": 0
+        },
+        "history_and_scope": {
+         "winrate_evidence": {
+          "schema_version": "provenance/1.2",
+          "id": "module_winrate:515880.SS",
+          "source_path": "docs/experiments/module_winrate.json",
+          "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+          "source_version": "1",
+          "status": "unverified",
+          "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+          "statistic_kind": "trade_r_stats",
+          "strategy_scope": [
+           "technical_execution"
+          ],
+          "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+          "compatibility": "unknown",
+          "evidence_id": "module_winrate:515880.SS",
+          "source": "docs/experiments/module_winrate.json",
+          "strategies": [
+           "technical_execution"
+          ],
+          "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+         },
+         "comparison_config": {
+          "symbol": "515880.SS",
+          "module": {
+           "value": "A",
+           "source": "engine_default"
+          },
+          "exit_variant": {
+           "value": "a6_1_costbasis",
+           "source": "engine_default"
+          },
+          "entry_variant": {
+           "value": null,
+           "source": "engine_default"
+          },
+          "rr_min": {
+           "value": 3.0,
+           "source": "engine_default"
+          },
+          "fee_label": {
+           "value": "standard",
+           "source": "engine_default"
+          },
+          "ruleset_sha256": {
+           "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+           "source": "current_active_ledger"
+          },
+          "window": null,
+          "window_state": "unverified",
+          "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+         },
+         "matched_runs": [],
+         "supporting_runs": [],
+         "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+        },
+        "explanations": {
+         "kinds": [
+          "news",
+          "major_events",
+          "sentiment",
+          "experience"
+         ],
+         "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+        },
+        "pending_conditions": [
+         "底部结构尚未确认"
+        ]
+       },
+       "next_steps": [
+        {
+         "kind": "expand_evidence",
+         "label_cn": "查看依据详情"
+        },
+        {
+         "kind": "ask_conditions",
+         "label_cn": "看看还需满足什么条件",
+         "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+        },
+        {
+         "kind": "prepare_backtest",
+         "label_cn": "准备补测",
+         "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+        }
+       ]
+      }
+     },
+     {
+      "event": "done",
+      "t": 0.492,
+      "data": {
+       "session_id": "sess_c2c236845d4c",
+       "resolved_symbol": "515880.SS",
+       "grounded": false,
+       "question_id": 11,
+       "evidence_card": {
+        "facts": {
+         "symbol": "515880.SS",
+         "display_name": "通信ETF",
+         "as_of": "2026-09-16",
+         "verdict_cn": "环境阻断",
+         "buy_point_candidate_n": 0
+        },
+        "history_and_scope": {
+         "winrate_evidence": {
+          "schema_version": "provenance/1.2",
+          "id": "module_winrate:515880.SS",
+          "source_path": "docs/experiments/module_winrate.json",
+          "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+          "source_version": "1",
+          "status": "unverified",
+          "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+          "statistic_kind": "trade_r_stats",
+          "strategy_scope": [
+           "technical_execution"
+          ],
+          "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+          "compatibility": "unknown",
+          "evidence_id": "module_winrate:515880.SS",
+          "source": "docs/experiments/module_winrate.json",
+          "strategies": [
+           "technical_execution"
+          ],
+          "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+         },
+         "comparison_config": {
+          "symbol": "515880.SS",
+          "module": {
+           "value": "A",
+           "source": "engine_default"
+          },
+          "exit_variant": {
+           "value": "a6_1_costbasis",
+           "source": "engine_default"
+          },
+          "entry_variant": {
+           "value": null,
+           "source": "engine_default"
+          },
+          "rr_min": {
+           "value": 3.0,
+           "source": "engine_default"
+          },
+          "fee_label": {
+           "value": "standard",
+           "source": "engine_default"
+          },
+          "ruleset_sha256": {
+           "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+           "source": "current_active_ledger"
+          },
+          "window": null,
+          "window_state": "unverified",
+          "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+         },
+         "matched_runs": [],
+         "supporting_runs": [],
+         "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+        },
+        "explanations": {
+         "kinds": [
+          "news",
+          "major_events",
+          "sentiment",
+          "experience"
+         ],
+         "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+        },
+        "pending_conditions": [
+         "底部结构尚未确认"
+        ]
+       },
+       "plan_artifact": null,
+       "answer_state": "answered",
+       "next_steps": [
+        {
+         "kind": "expand_evidence",
+         "label_cn": "查看依据详情"
+        },
+        {
+         "kind": "ask_conditions",
+         "label_cn": "看看还需满足什么条件",
+         "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+        },
+        {
+         "kind": "prepare_backtest",
+         "label_cn": "准备补测",
+         "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+        }
+       ],
+       "timing_ms": {
+        "total_ms": 490,
+        "marks_ms": {
+         "received": 0,
+         "identity": 1,
+         "prep_resolve": 9,
+         "prep_analysis": 9,
+         "prep_review": 72,
+         "prep_plans": 72,
+         "prep_news": 75,
+         "prep_extras": 76,
+         "prep_context": 88,
+         "prep_sentiment_winrate": 420,
+         "prep_evidence": 421,
+         "prep_done": 485,
+         "prepared": 486,
+         "material_sent": 486,
+         "question_saved": 489,
+         "llm_end": 489,
+         "answer_saved": 490
+        },
+        "spans_ms": {}
+       },
+       "fallback": "通信ETF（515880.SS）：你说已经持有了——这次就从持仓管理角度讲，不按首次买入说。\n系统当前状态：1.无法明确当前趋势类型、7.多周期杂乱——这是环境层面的提醒，不是让你立刻动作。\n你没有给成本价和资金信息，这段讨论里也没有你的成交信息——我不编这些；具体的退出位以你自己确认过的计划为准。这里没有记录任何成交。\n截至 2026-09-16 的数据（是否已收盘系统未单独核实，不凭更新时间猜）。AI 讲解暂时不可用，以下是系统直接给出的数据事实。\n系统状态：绿色 / 风险关注 / 风险关注 有效顶部。\n参考：成交最密集的价位在 0.66775（筹码分布代理，不是真实持仓成本）。\n历史依据：现在不能给这次判断附上可靠的胜率——现有记录不足以核实是否是同一种做法（明细见下方依据卡）。\n接下来先观察这些条件，哪条变化了再回来讨论：底部结构尚未确认。",
+       "quick_card": {
+        "symbol": "515880.SS",
+        "display_name": "通信ETF",
+        "as_of": "2026-09-16",
+        "close": 0.69,
+        "color_cn": "绿色",
+        "stage_cn": "风险关注",
+        "risk_cn": "有效顶部",
+        "levels": [
+         {
+          "role": "下方关键位",
+          "price": 0.634,
+          "kind": "below",
+          "dist_pct": 8.83,
+          "from_cn": "顶部结构"
+         },
+         {
+          "role": "下方关键位",
+          "price": 0.629,
+          "kind": "below",
+          "dist_pct": 9.7,
+          "from_cn": "更高低点底部"
+         },
+         {
+          "role": "上方阻力",
+          "price": 0.695,
+          "kind": "above",
+          "dist_pct": 0.72,
+          "from_cn": "更高低点底部"
+         }
+        ],
+        "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+       }
+      }
+     }
+    ],
+    "aborted": false
+   },
+   "session_id": "sess_c2c236845d4c",
+   "current_symbol": "515880.SS"
+  },
+  {
+   "case": "case7",
+   "message": "我有一万元，能不能买一点？",
+   "resolve": {
+    "intent": "discussion",
+    "topic": "money",
+    "resolved_symbol": "515880.SS",
+    "clarification": [
+     {
+      "kind": "purpose",
+      "question_cn": "这笔钱是持续投入的新收入，还是已有的闲钱分批？"
+     }
+    ],
+    "need_clarification": null
+   },
+   "stream": {
+    "client_request_id": "8294d9eb-7b3d-45d4-a24a-2af550b726f9",
+    "marks_ms": {
+     "received": 1.2,
+     "prepared": 481.3,
+     "done": 485.5
+    },
+    "received_text": "",
+    "done": {
+     "session_id": "sess_c2c236845d4c",
+     "resolved_symbol": "515880.SS",
+     "grounded": false,
+     "question_id": 13,
+     "evidence_card": {
+      "facts": {
+       "symbol": "515880.SS",
+       "display_name": "通信ETF",
+       "as_of": "2026-09-16",
+       "verdict_cn": "环境阻断",
+       "buy_point_candidate_n": 0
+      },
+      "history_and_scope": {
+       "winrate_evidence": {
+        "schema_version": "provenance/1.2",
+        "id": "module_winrate:515880.SS",
+        "source_path": "docs/experiments/module_winrate.json",
+        "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+        "source_version": "1",
+        "status": "unverified",
+        "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+        "statistic_kind": "trade_r_stats",
+        "strategy_scope": [
+         "technical_execution"
+        ],
+        "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+        "compatibility": "unknown",
+        "evidence_id": "module_winrate:515880.SS",
+        "source": "docs/experiments/module_winrate.json",
+        "strategies": [
+         "technical_execution"
+        ],
+        "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+       },
+       "comparison_config": {
+        "symbol": "515880.SS",
+        "module": {
+         "value": "A",
+         "source": "engine_default"
+        },
+        "exit_variant": {
+         "value": "a6_1_costbasis",
+         "source": "engine_default"
+        },
+        "entry_variant": {
+         "value": null,
+         "source": "engine_default"
+        },
+        "rr_min": {
+         "value": 3.0,
+         "source": "engine_default"
+        },
+        "fee_label": {
+         "value": "standard",
+         "source": "engine_default"
+        },
+        "ruleset_sha256": {
+         "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+         "source": "current_active_ledger"
+        },
+        "window": null,
+        "window_state": "unverified",
+        "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+       },
+       "matched_runs": [],
+       "supporting_runs": [],
+       "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+      },
+      "explanations": {
+       "kinds": [
+        "news",
+        "major_events",
+        "sentiment",
+        "experience"
+       ],
+       "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+      },
+      "pending_conditions": [
+       "底部结构尚未确认"
+      ]
+     },
+     "plan_artifact": null,
+     "answer_state": "answered",
+     "next_steps": [
+      {
+       "kind": "expand_evidence",
+       "label_cn": "查看依据详情"
+      },
+      {
+       "kind": "ask_conditions",
+       "label_cn": "看看还需满足什么条件",
+       "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+      },
+      {
+       "kind": "prepare_backtest",
+       "label_cn": "准备补测",
+       "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+      }
+     ],
+     "timing_ms": {
+      "total_ms": 484,
+      "marks_ms": {
+       "received": 0,
+       "identity": 1,
+       "prep_resolve": 10,
+       "prep_analysis": 10,
+       "prep_review": 75,
+       "prep_plans": 75,
+       "prep_news": 78,
+       "prep_extras": 78,
+       "prep_context": 90,
+       "prep_sentiment_winrate": 420,
+       "prep_evidence": 420,
+       "prep_done": 479,
+       "prepared": 479,
+       "material_sent": 480,
+       "question_saved": 482,
+       "llm_end": 482,
+       "answer_saved": 484
+      },
+      "spans_ms": {}
+     },
+     "fallback": "先回答能不能买：按系统数据，通信ETF（515880.SS）现在按规则不适合开新仓——1.无法明确当前趋势类型、7.多周期杂乱。\n10000 元怎么安排由你决定；系统纪律是盈亏比不足 3 的机会放弃（研究代理口径），仓位档位只是参考。\n还差一项关键信息：这笔钱是持续投入的新收入，还是已有的闲钱？这影响怎么分批，先确认这一项再细聊。\n现在只是讨论——没有确认任何计划，也不会替你下单。\n截至 2026-09-16 的数据（是否已收盘系统未单独核实，不凭更新时间猜）。AI 讲解暂时不可用，以下是系统直接给出的数据事实。\n系统状态：绿色 / 风险关注 / 风险关注 有效顶部。\n参考：成交最密集的价位在 0.66775（筹码分布代理，不是真实持仓成本）。\n历史依据：现在不能给这次判断附上可靠的胜率——现有记录不足以核实是否是同一种做法（明细见下方依据卡）。\n接下来先观察这些条件，哪条变化了再回来讨论：底部结构尚未确认。",
+     "quick_card": {
+      "symbol": "515880.SS",
+      "display_name": "通信ETF",
+      "as_of": "2026-09-16",
+      "close": 0.69,
+      "color_cn": "绿色",
+      "stage_cn": "风险关注",
+      "risk_cn": "有效顶部",
+      "levels": [
+       {
+        "role": "下方关键位",
+        "price": 0.634,
+        "kind": "below",
+        "dist_pct": 8.83,
+        "from_cn": "顶部结构"
+       },
+       {
+        "role": "下方关键位",
+        "price": 0.629,
+        "kind": "below",
+        "dist_pct": 9.7,
+        "from_cn": "更高低点底部"
+       },
+       {
+        "role": "上方阻力",
+        "price": 0.695,
+        "kind": "above",
+        "dist_pct": 0.72,
+        "from_cn": "更高低点底部"
+       }
+      ],
+      "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+     }
+    },
+    "events": [
+     {
+      "event": "stage",
+      "t": 0.001,
+      "data": {
+       "key": "received",
+       "text": "已收到问题，正在登记请求"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.004,
+      "data": {
+       "key": "resolve",
+       "text": "识别标的与意图"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.011,
+      "data": {
+       "key": "fetch",
+       "text": "拉取 515880.SS 行情（首次约 1 分钟）"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.077,
+      "data": {
+       "key": "context",
+       "text": "组装技术材料与监督状态"
+      }
+     },
+     {
+      "event": "prepared",
+      "t": 0.481,
+      "data": {
+       "session_id": "sess_c2c236845d4c",
+       "resolved_symbol": "515880.SS",
+       "quick_card": {
+        "symbol": "515880.SS",
+        "display_name": "通信ETF",
+        "as_of": "2026-09-16",
+        "close": 0.69,
+        "color_cn": "绿色",
+        "stage_cn": "风险关注",
+        "risk_cn": "有效顶部",
+        "levels": [
+         {
+          "role": "下方关键位",
+          "price": 0.634,
+          "kind": "below",
+          "dist_pct": 8.83,
+          "from_cn": "顶部结构"
+         },
+         {
+          "role": "下方关键位",
+          "price": 0.629,
+          "kind": "below",
+          "dist_pct": 9.7,
+          "from_cn": "更高低点底部"
+         },
+         {
+          "role": "上方阻力",
+          "price": 0.695,
+          "kind": "above",
+          "dist_pct": 0.72,
+          "from_cn": "更高低点底部"
+         }
+        ],
+        "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+       },
+       "evidence_card": {
+        "facts": {
+         "symbol": "515880.SS",
+         "display_name": "通信ETF",
+         "as_of": "2026-09-16",
+         "verdict_cn": "环境阻断",
+         "buy_point_candidate_n": 0
+        },
+        "history_and_scope": {
+         "winrate_evidence": {
+          "schema_version": "provenance/1.2",
+          "id": "module_winrate:515880.SS",
+          "source_path": "docs/experiments/module_winrate.json",
+          "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+          "source_version": "1",
+          "status": "unverified",
+          "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+          "statistic_kind": "trade_r_stats",
+          "strategy_scope": [
+           "technical_execution"
+          ],
+          "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+          "compatibility": "unknown",
+          "evidence_id": "module_winrate:515880.SS",
+          "source": "docs/experiments/module_winrate.json",
+          "strategies": [
+           "technical_execution"
+          ],
+          "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+         },
+         "comparison_config": {
+          "symbol": "515880.SS",
+          "module": {
+           "value": "A",
+           "source": "engine_default"
+          },
+          "exit_variant": {
+           "value": "a6_1_costbasis",
+           "source": "engine_default"
+          },
+          "entry_variant": {
+           "value": null,
+           "source": "engine_default"
+          },
+          "rr_min": {
+           "value": 3.0,
+           "source": "engine_default"
+          },
+          "fee_label": {
+           "value": "standard",
+           "source": "engine_default"
+          },
+          "ruleset_sha256": {
+           "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+           "source": "current_active_ledger"
+          },
+          "window": null,
+          "window_state": "unverified",
+          "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+         },
+         "matched_runs": [],
+         "supporting_runs": [],
+         "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+        },
+        "explanations": {
+         "kinds": [
+          "news",
+          "major_events",
+          "sentiment",
+          "experience"
+         ],
+         "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+        },
+        "pending_conditions": [
+         "底部结构尚未确认"
+        ]
+       },
+       "next_steps": [
+        {
+         "kind": "expand_evidence",
+         "label_cn": "查看依据详情"
+        },
+        {
+         "kind": "ask_conditions",
+         "label_cn": "看看还需满足什么条件",
+         "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+        },
+        {
+         "kind": "prepare_backtest",
+         "label_cn": "准备补测",
+         "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+        }
+       ]
+      }
+     },
+     {
+      "event": "done",
+      "t": 0.486,
+      "data": {
+       "session_id": "sess_c2c236845d4c",
+       "resolved_symbol": "515880.SS",
+       "grounded": false,
+       "question_id": 13,
+       "evidence_card": {
+        "facts": {
+         "symbol": "515880.SS",
+         "display_name": "通信ETF",
+         "as_of": "2026-09-16",
+         "verdict_cn": "环境阻断",
+         "buy_point_candidate_n": 0
+        },
+        "history_and_scope": {
+         "winrate_evidence": {
+          "schema_version": "provenance/1.2",
+          "id": "module_winrate:515880.SS",
+          "source_path": "docs/experiments/module_winrate.json",
+          "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+          "source_version": "1",
+          "status": "unverified",
+          "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+          "statistic_kind": "trade_r_stats",
+          "strategy_scope": [
+           "technical_execution"
+          ],
+          "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+          "compatibility": "unknown",
+          "evidence_id": "module_winrate:515880.SS",
+          "source": "docs/experiments/module_winrate.json",
+          "strategies": [
+           "technical_execution"
+          ],
+          "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+         },
+         "comparison_config": {
+          "symbol": "515880.SS",
+          "module": {
+           "value": "A",
+           "source": "engine_default"
+          },
+          "exit_variant": {
+           "value": "a6_1_costbasis",
+           "source": "engine_default"
+          },
+          "entry_variant": {
+           "value": null,
+           "source": "engine_default"
+          },
+          "rr_min": {
+           "value": 3.0,
+           "source": "engine_default"
+          },
+          "fee_label": {
+           "value": "standard",
+           "source": "engine_default"
+          },
+          "ruleset_sha256": {
+           "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+           "source": "current_active_ledger"
+          },
+          "window": null,
+          "window_state": "unverified",
+          "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+         },
+         "matched_runs": [],
+         "supporting_runs": [],
+         "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+        },
+        "explanations": {
+         "kinds": [
+          "news",
+          "major_events",
+          "sentiment",
+          "experience"
+         ],
+         "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+        },
+        "pending_conditions": [
+         "底部结构尚未确认"
+        ]
+       },
+       "plan_artifact": null,
+       "answer_state": "answered",
+       "next_steps": [
+        {
+         "kind": "expand_evidence",
+         "label_cn": "查看依据详情"
+        },
+        {
+         "kind": "ask_conditions",
+         "label_cn": "看看还需满足什么条件",
+         "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+        },
+        {
+         "kind": "prepare_backtest",
+         "label_cn": "准备补测",
+         "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+        }
+       ],
+       "timing_ms": {
+        "total_ms": 484,
+        "marks_ms": {
+         "received": 0,
+         "identity": 1,
+         "prep_resolve": 10,
+         "prep_analysis": 10,
+         "prep_review": 75,
+         "prep_plans": 75,
+         "prep_news": 78,
+         "prep_extras": 78,
+         "prep_context": 90,
+         "prep_sentiment_winrate": 420,
+         "prep_evidence": 420,
+         "prep_done": 479,
+         "prepared": 479,
+         "material_sent": 480,
+         "question_saved": 482,
+         "llm_end": 482,
+         "answer_saved": 484
+        },
+        "spans_ms": {}
+       },
+       "fallback": "先回答能不能买：按系统数据，通信ETF（515880.SS）现在按规则不适合开新仓——1.无法明确当前趋势类型、7.多周期杂乱。\n10000 元怎么安排由你决定；系统纪律是盈亏比不足 3 的机会放弃（研究代理口径），仓位档位只是参考。\n还差一项关键信息：这笔钱是持续投入的新收入，还是已有的闲钱？这影响怎么分批，先确认这一项再细聊。\n现在只是讨论——没有确认任何计划，也不会替你下单。\n截至 2026-09-16 的数据（是否已收盘系统未单独核实，不凭更新时间猜）。AI 讲解暂时不可用，以下是系统直接给出的数据事实。\n系统状态：绿色 / 风险关注 / 风险关注 有效顶部。\n参考：成交最密集的价位在 0.66775（筹码分布代理，不是真实持仓成本）。\n历史依据：现在不能给这次判断附上可靠的胜率——现有记录不足以核实是否是同一种做法（明细见下方依据卡）。\n接下来先观察这些条件，哪条变化了再回来讨论：底部结构尚未确认。",
+       "quick_card": {
+        "symbol": "515880.SS",
+        "display_name": "通信ETF",
+        "as_of": "2026-09-16",
+        "close": 0.69,
+        "color_cn": "绿色",
+        "stage_cn": "风险关注",
+        "risk_cn": "有效顶部",
+        "levels": [
+         {
+          "role": "下方关键位",
+          "price": 0.634,
+          "kind": "below",
+          "dist_pct": 8.83,
+          "from_cn": "顶部结构"
+         },
+         {
+          "role": "下方关键位",
+          "price": 0.629,
+          "kind": "below",
+          "dist_pct": 9.7,
+          "from_cn": "更高低点底部"
+         },
+         {
+          "role": "上方阻力",
+          "price": 0.695,
+          "kind": "above",
+          "dist_pct": 0.72,
+          "from_cn": "更高低点底部"
+         }
+        ],
+        "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+       }
+      }
+     }
+    ],
+    "aborted": false
+   },
+   "session_id": "sess_c2c236845d4c",
+   "current_symbol": "515880.SS"
+  },
+  {
+   "case": "case8",
+   "message": "和刚才相比有什么变化？",
+   "resolve": {
+    "intent": "discussion",
+    "topic": "overview",
+    "resolved_symbol": "515880.SS",
+    "clarification": [],
+    "need_clarification": null
+   },
+   "stream": {
+    "client_request_id": "dcafdb3e-5458-4545-953a-50a4b40ecdcc",
+    "marks_ms": {
+     "received": 1.3,
+     "prepared": 470.6,
+     "first_token": 472.8,
+     "done": 474.8
+    },
+    "received_text": "没有新数据：和刚才一样，通信ETF 还是截至 2026-09-16 的同一份资料，系统状态没有变化。系统结论仍是：环境阻断。这不是刚出现的新情况——要有新资料（下一个数据日之后）再谈变化。",
+    "done": {
+     "session_id": "sess_c2c236845d4c",
+     "resolved_symbol": "515880.SS",
+     "grounded": true,
+     "question_id": 15,
+     "evidence_card": {
+      "facts": {
+       "symbol": "515880.SS",
+       "display_name": "通信ETF",
+       "as_of": "2026-09-16",
+       "verdict_cn": "环境阻断",
+       "buy_point_candidate_n": 0
+      },
+      "history_and_scope": {
+       "winrate_evidence": {
+        "schema_version": "provenance/1.2",
+        "id": "module_winrate:515880.SS",
+        "source_path": "docs/experiments/module_winrate.json",
+        "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+        "source_version": "1",
+        "status": "unverified",
+        "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+        "statistic_kind": "trade_r_stats",
+        "strategy_scope": [
+         "technical_execution"
+        ],
+        "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+        "compatibility": "unknown",
+        "evidence_id": "module_winrate:515880.SS",
+        "source": "docs/experiments/module_winrate.json",
+        "strategies": [
+         "technical_execution"
+        ],
+        "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+       },
+       "comparison_config": {
+        "symbol": "515880.SS",
+        "module": {
+         "value": "A",
+         "source": "engine_default"
+        },
+        "exit_variant": {
+         "value": "a6_1_costbasis",
+         "source": "engine_default"
+        },
+        "entry_variant": {
+         "value": null,
+         "source": "engine_default"
+        },
+        "rr_min": {
+         "value": 3.0,
+         "source": "engine_default"
+        },
+        "fee_label": {
+         "value": "standard",
+         "source": "engine_default"
+        },
+        "ruleset_sha256": {
+         "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+         "source": "current_active_ledger"
+        },
+        "window": null,
+        "window_state": "unverified",
+        "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+       },
+       "matched_runs": [],
+       "supporting_runs": [],
+       "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+      },
+      "explanations": {
+       "kinds": [
+        "news",
+        "major_events",
+        "sentiment",
+        "experience"
+       ],
+       "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+      },
+      "pending_conditions": [
+       "底部结构尚未确认"
+      ]
+     },
+     "plan_artifact": null,
+     "answer_state": "answered",
+     "next_steps": [
+      {
+       "kind": "expand_evidence",
+       "label_cn": "查看依据详情"
+      },
+      {
+       "kind": "ask_conditions",
+       "label_cn": "看看还需满足什么条件",
+       "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+      },
+      {
+       "kind": "prepare_backtest",
+       "label_cn": "准备补测",
+       "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+      }
+     ],
+     "timing_ms": {
+      "total_ms": 473,
+      "marks_ms": {
+       "received": 0,
+       "identity": 1,
+       "prep_resolve": 9,
+       "prep_analysis": 9,
+       "prep_review": 72,
+       "prep_plans": 72,
+       "prep_news": 74,
+       "prep_extras": 74,
+       "prep_context": 85,
+       "prep_sentiment_winrate": 408,
+       "prep_evidence": 409,
+       "prep_done": 468,
+       "prepared": 469,
+       "material_sent": 469,
+       "question_saved": 471,
+       "first_token": 471,
+       "llm_end": 471,
+       "answer_saved": 473
+      },
+      "spans_ms": {}
+     },
+     "quick_card": {
+      "symbol": "515880.SS",
+      "display_name": "通信ETF",
+      "as_of": "2026-09-16",
+      "close": 0.69,
+      "color_cn": "绿色",
+      "stage_cn": "风险关注",
+      "risk_cn": "有效顶部",
+      "levels": [
+       {
+        "role": "下方关键位",
+        "price": 0.634,
+        "kind": "below",
+        "dist_pct": 8.83,
+        "from_cn": "顶部结构"
+       },
+       {
+        "role": "下方关键位",
+        "price": 0.629,
+        "kind": "below",
+        "dist_pct": 9.7,
+        "from_cn": "更高低点底部"
+       },
+       {
+        "role": "上方阻力",
+        "price": 0.695,
+        "kind": "above",
+        "dist_pct": 0.72,
+        "from_cn": "更高低点底部"
+       }
+      ],
+      "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+     }
+    },
+    "events": [
+     {
+      "event": "stage",
+      "t": 0.001,
+      "data": {
+       "key": "received",
+       "text": "已收到问题，正在登记请求"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.004,
+      "data": {
+       "key": "resolve",
+       "text": "识别标的与意图"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.011,
+      "data": {
+       "key": "fetch",
+       "text": "拉取 515880.SS 行情（首次约 1 分钟）"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.073,
+      "data": {
+       "key": "context",
+       "text": "组装技术材料与监督状态"
+      }
+     },
+     {
+      "event": "prepared",
+      "t": 0.471,
+      "data": {
+       "session_id": "sess_c2c236845d4c",
+       "resolved_symbol": "515880.SS",
+       "quick_card": {
+        "symbol": "515880.SS",
+        "display_name": "通信ETF",
+        "as_of": "2026-09-16",
+        "close": 0.69,
+        "color_cn": "绿色",
+        "stage_cn": "风险关注",
+        "risk_cn": "有效顶部",
+        "levels": [
+         {
+          "role": "下方关键位",
+          "price": 0.634,
+          "kind": "below",
+          "dist_pct": 8.83,
+          "from_cn": "顶部结构"
+         },
+         {
+          "role": "下方关键位",
+          "price": 0.629,
+          "kind": "below",
+          "dist_pct": 9.7,
+          "from_cn": "更高低点底部"
+         },
+         {
+          "role": "上方阻力",
+          "price": 0.695,
+          "kind": "above",
+          "dist_pct": 0.72,
+          "from_cn": "更高低点底部"
+         }
+        ],
+        "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+       },
+       "evidence_card": {
+        "facts": {
+         "symbol": "515880.SS",
+         "display_name": "通信ETF",
+         "as_of": "2026-09-16",
+         "verdict_cn": "环境阻断",
+         "buy_point_candidate_n": 0
+        },
+        "history_and_scope": {
+         "winrate_evidence": {
+          "schema_version": "provenance/1.2",
+          "id": "module_winrate:515880.SS",
+          "source_path": "docs/experiments/module_winrate.json",
+          "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+          "source_version": "1",
+          "status": "unverified",
+          "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+          "statistic_kind": "trade_r_stats",
+          "strategy_scope": [
+           "technical_execution"
+          ],
+          "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+          "compatibility": "unknown",
+          "evidence_id": "module_winrate:515880.SS",
+          "source": "docs/experiments/module_winrate.json",
+          "strategies": [
+           "technical_execution"
+          ],
+          "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+         },
+         "comparison_config": {
+          "symbol": "515880.SS",
+          "module": {
+           "value": "A",
+           "source": "engine_default"
+          },
+          "exit_variant": {
+           "value": "a6_1_costbasis",
+           "source": "engine_default"
+          },
+          "entry_variant": {
+           "value": null,
+           "source": "engine_default"
+          },
+          "rr_min": {
+           "value": 3.0,
+           "source": "engine_default"
+          },
+          "fee_label": {
+           "value": "standard",
+           "source": "engine_default"
+          },
+          "ruleset_sha256": {
+           "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+           "source": "current_active_ledger"
+          },
+          "window": null,
+          "window_state": "unverified",
+          "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+         },
+         "matched_runs": [],
+         "supporting_runs": [],
+         "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+        },
+        "explanations": {
+         "kinds": [
+          "news",
+          "major_events",
+          "sentiment",
+          "experience"
+         ],
+         "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+        },
+        "pending_conditions": [
+         "底部结构尚未确认"
+        ]
+       },
+       "next_steps": [
+        {
+         "kind": "expand_evidence",
+         "label_cn": "查看依据详情"
+        },
+        {
+         "kind": "ask_conditions",
+         "label_cn": "看看还需满足什么条件",
+         "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+        },
+        {
+         "kind": "prepare_backtest",
+         "label_cn": "准备补测",
+         "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+        }
+       ]
+      }
+     },
+     {
+      "event": "token",
+      "t": 0.473,
+      "data": {}
+     },
+     {
+      "event": "done",
+      "t": 0.475,
+      "data": {
+       "session_id": "sess_c2c236845d4c",
+       "resolved_symbol": "515880.SS",
+       "grounded": true,
+       "question_id": 15,
+       "evidence_card": {
+        "facts": {
+         "symbol": "515880.SS",
+         "display_name": "通信ETF",
+         "as_of": "2026-09-16",
+         "verdict_cn": "环境阻断",
+         "buy_point_candidate_n": 0
+        },
+        "history_and_scope": {
+         "winrate_evidence": {
+          "schema_version": "provenance/1.2",
+          "id": "module_winrate:515880.SS",
+          "source_path": "docs/experiments/module_winrate.json",
+          "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+          "source_version": "1",
+          "status": "unverified",
+          "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+          "statistic_kind": "trade_r_stats",
+          "strategy_scope": [
+           "technical_execution"
+          ],
+          "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+          "compatibility": "unknown",
+          "evidence_id": "module_winrate:515880.SS",
+          "source": "docs/experiments/module_winrate.json",
+          "strategies": [
+           "technical_execution"
+          ],
+          "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+         },
+         "comparison_config": {
+          "symbol": "515880.SS",
+          "module": {
+           "value": "A",
+           "source": "engine_default"
+          },
+          "exit_variant": {
+           "value": "a6_1_costbasis",
+           "source": "engine_default"
+          },
+          "entry_variant": {
+           "value": null,
+           "source": "engine_default"
+          },
+          "rr_min": {
+           "value": 3.0,
+           "source": "engine_default"
+          },
+          "fee_label": {
+           "value": "standard",
+           "source": "engine_default"
+          },
+          "ruleset_sha256": {
+           "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+           "source": "current_active_ledger"
+          },
+          "window": null,
+          "window_state": "unverified",
+          "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+         },
+         "matched_runs": [],
+         "supporting_runs": [],
+         "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+        },
+        "explanations": {
+         "kinds": [
+          "news",
+          "major_events",
+          "sentiment",
+          "experience"
+         ],
+         "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+        },
+        "pending_conditions": [
+         "底部结构尚未确认"
+        ]
+       },
+       "plan_artifact": null,
+       "answer_state": "answered",
+       "next_steps": [
+        {
+         "kind": "expand_evidence",
+         "label_cn": "查看依据详情"
+        },
+        {
+         "kind": "ask_conditions",
+         "label_cn": "看看还需满足什么条件",
+         "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+        },
+        {
+         "kind": "prepare_backtest",
+         "label_cn": "准备补测",
+         "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+        }
+       ],
+       "timing_ms": {
+        "total_ms": 473,
+        "marks_ms": {
+         "received": 0,
+         "identity": 1,
+         "prep_resolve": 9,
+         "prep_analysis": 9,
+         "prep_review": 72,
+         "prep_plans": 72,
+         "prep_news": 74,
+         "prep_extras": 74,
+         "prep_context": 85,
+         "prep_sentiment_winrate": 408,
+         "prep_evidence": 409,
+         "prep_done": 468,
+         "prepared": 469,
+         "material_sent": 469,
+         "question_saved": 471,
+         "first_token": 471,
+         "llm_end": 471,
+         "answer_saved": 473
+        },
+        "spans_ms": {}
+       },
+       "quick_card": {
+        "symbol": "515880.SS",
+        "display_name": "通信ETF",
+        "as_of": "2026-09-16",
+        "close": 0.69,
+        "color_cn": "绿色",
+        "stage_cn": "风险关注",
+        "risk_cn": "有效顶部",
+        "levels": [
+         {
+          "role": "下方关键位",
+          "price": 0.634,
+          "kind": "below",
+          "dist_pct": 8.83,
+          "from_cn": "顶部结构"
+         },
+         {
+          "role": "下方关键位",
+          "price": 0.629,
+          "kind": "below",
+          "dist_pct": 9.7,
+          "from_cn": "更高低点底部"
+         },
+         {
+          "role": "上方阻力",
+          "price": 0.695,
+          "kind": "above",
+          "dist_pct": 0.72,
+          "from_cn": "更高低点底部"
+         }
+        ],
+        "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+       }
+      }
+     }
+    ],
+    "aborted": false
+   },
+   "session_id": "sess_c2c236845d4c",
+   "current_symbol": "515880.SS"
+  }
+ ],
+ "case9": {
+  "switch_sector": {
+   "client_request_id": "b0d2ecee-8477-42a2-92d2-d64753f9f170",
+   "marks_ms": {
+    "received": 1.2,
+    "prepared": 58.3,
+    "done": 62.1
+   },
+   "received_text": "",
+   "done": {
+    "session_id": "sess_7abd28d0e9c0",
+    "resolved_symbol": "BK1215.SECTOR",
+    "grounded": false,
+    "question_id": 17,
+    "evidence_card": {
+     "facts": {
+      "symbol": "BK1215.SECTOR",
+      "display_name": "通信",
+      "subject_kind": "sector",
+      "as_of": "2026-09-14",
+      "verdict_cn": "板块阶段：派发",
+      "sector_summary_cn": "成分股站上50日均线的比例：61.48%"
+     },
+     "history_and_scope": {
+      "note_cn": "这是行业板块整体观察，不是ETF或可直接交易的产品；合成指数以当前成分回看历史，仅作形态参考，不据此产生买卖计划或借用ETF胜率。"
+     },
+     "explanations": {
+      "note_cn": "宽度指成分股中站上相应均线的比例；缺失数据不补造。"
+     },
+     "pending_conditions": [
+      "SMA60 斜率转向上 → 修复为上升；跌破 SMA60 → 转入下降（当前高出 2.56%）"
+     ]
+    },
+    "plan_artifact": null,
+    "answer_state": "answered",
+    "next_steps": [
+     {
+      "kind": "expand_evidence",
+      "label_cn": "查看板块依据"
+     }
+    ],
+    "timing_ms": {
+     "total_ms": 60,
+     "marks_ms": {
+      "received": 0,
+      "identity": 1,
+      "prep_resolve": 9,
+      "prep_sector": 56,
+      "prepared": 57,
+      "material_sent": 57,
+      "question_saved": 59,
+      "llm_end": 59,
+      "answer_saved": 60
+     },
+     "spans_ms": {}
+    },
+    "fallback": "通信板块（BK1215.SECTOR）：资料日期 2026-09-14，阶段为派发。AI讲解暂不可用，请核对下方板块资料；这不是ETF买卖建议。",
+    "quick_card": {
+     "symbol": "BK1215.SECTOR",
+     "display_name": "通信",
+     "as_of": "2026-09-14",
+     "close": 1631.56,
+     "color_cn": "灰",
+     "stage_cn": "派发",
+     "risk_cn": "板块观察，非买卖信号",
+     "levels": [],
+     "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+    }
+   },
+   "events": [
+    {
+     "event": "stage",
+     "t": 0.001,
+     "data": {
+      "key": "received",
+      "text": "已收到问题，正在登记请求"
+     }
+    },
+    {
+     "event": "stage",
+     "t": 0.003,
+     "data": {
+      "key": "resolve",
+      "text": "识别标的与意图"
+     }
+    },
+    {
+     "event": "stage",
+     "t": 0.058,
+     "data": {
+      "key": "context",
+      "text": "读取通信板块资料"
+     }
+    },
+    {
+     "event": "prepared",
+     "t": 0.058,
+     "data": {
+      "session_id": "sess_7abd28d0e9c0",
+      "resolved_symbol": "BK1215.SECTOR",
+      "quick_card": {
+       "symbol": "BK1215.SECTOR",
+       "display_name": "通信",
+       "as_of": "2026-09-14",
+       "close": 1631.56,
+       "color_cn": "灰",
+       "stage_cn": "派发",
+       "risk_cn": "板块观察，非买卖信号",
+       "levels": [],
+       "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+      },
+      "evidence_card": {
+       "facts": {
+        "symbol": "BK1215.SECTOR",
+        "display_name": "通信",
+        "subject_kind": "sector",
+        "as_of": "2026-09-14",
+        "verdict_cn": "板块阶段：派发",
+        "sector_summary_cn": "成分股站上50日均线的比例：61.48%"
+       },
+       "history_and_scope": {
+        "note_cn": "这是行业板块整体观察，不是ETF或可直接交易的产品；合成指数以当前成分回看历史，仅作形态参考，不据此产生买卖计划或借用ETF胜率。"
+       },
+       "explanations": {
+        "note_cn": "宽度指成分股中站上相应均线的比例；缺失数据不补造。"
+       },
+       "pending_conditions": [
+        "SMA60 斜率转向上 → 修复为上升；跌破 SMA60 → 转入下降（当前高出 2.56%）"
+       ]
+      },
+      "next_steps": [
+       {
+        "kind": "expand_evidence",
+        "label_cn": "查看板块依据"
+       }
+      ]
+     }
+    },
+    {
+     "event": "done",
+     "t": 0.062,
+     "data": {
+      "session_id": "sess_7abd28d0e9c0",
+      "resolved_symbol": "BK1215.SECTOR",
+      "grounded": false,
+      "question_id": 17,
+      "evidence_card": {
+       "facts": {
+        "symbol": "BK1215.SECTOR",
+        "display_name": "通信",
+        "subject_kind": "sector",
+        "as_of": "2026-09-14",
+        "verdict_cn": "板块阶段：派发",
+        "sector_summary_cn": "成分股站上50日均线的比例：61.48%"
+       },
+       "history_and_scope": {
+        "note_cn": "这是行业板块整体观察，不是ETF或可直接交易的产品；合成指数以当前成分回看历史，仅作形态参考，不据此产生买卖计划或借用ETF胜率。"
+       },
+       "explanations": {
+        "note_cn": "宽度指成分股中站上相应均线的比例；缺失数据不补造。"
+       },
+       "pending_conditions": [
+        "SMA60 斜率转向上 → 修复为上升；跌破 SMA60 → 转入下降（当前高出 2.56%）"
+       ]
+      },
+      "plan_artifact": null,
+      "answer_state": "answered",
+      "next_steps": [
+       {
+        "kind": "expand_evidence",
+        "label_cn": "查看板块依据"
+       }
+      ],
+      "timing_ms": {
+       "total_ms": 60,
+       "marks_ms": {
+        "received": 0,
+        "identity": 1,
+        "prep_resolve": 9,
+        "prep_sector": 56,
+        "prepared": 57,
+        "material_sent": 57,
+        "question_saved": 59,
+        "llm_end": 59,
+        "answer_saved": 60
+       },
+       "spans_ms": {}
+      },
+      "fallback": "通信板块（BK1215.SECTOR）：资料日期 2026-09-14，阶段为派发。AI讲解暂不可用，请核对下方板块资料；这不是ETF买卖建议。",
+      "quick_card": {
+       "symbol": "BK1215.SECTOR",
+       "display_name": "通信",
+       "as_of": "2026-09-14",
+       "close": 1631.56,
+       "color_cn": "灰",
+       "stage_cn": "派发",
+       "risk_cn": "板块观察，非买卖信号",
+       "levels": [],
+       "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+      }
+     }
+    }
+   ],
+   "aborted": false
+  },
+  "reload_session_A": {
+   "status": 200,
+   "body": [
+    {
+     "role": "user",
+     "content": "通信板块最近怎么看？",
+     "grounded": true,
+     "created_at": "2026-09-16T10:30:56+00:00",
+     "message_id": 1,
+     "question_id": 1,
+     "resolved_symbol": null,
+     "evidence_card": null,
+     "system_generated": false,
+     "message_kind": "",
+     "plan_artifact": null,
+     "plan_draft": null,
+     "next_steps": [],
+     "answer_incomplete": null,
+     "retry": null
+    },
+    {
+     "role": "assistant",
+     "content": "通信板块（BK1215.SECTOR）：资料日期 2026-09-14，阶段为派发。AI讲解暂不可用，请核对下方板块资料；这不是ETF买卖建议。",
+     "grounded": false,
+     "created_at": "2026-09-16T10:30:56+00:00",
+     "message_id": 2,
+     "question_id": 1,
+     "resolved_symbol": "BK1215.SECTOR",
+     "evidence_card": {
+      "facts": {
+       "symbol": "BK1215.SECTOR",
+       "display_name": "通信",
+       "subject_kind": "sector",
+       "as_of": "2026-09-14",
+       "verdict_cn": "板块阶段：派发",
+       "sector_summary_cn": "成分股站上50日均线的比例：61.48%"
+      },
+      "history_and_scope": {
+       "note_cn": "这是行业板块整体观察，不是ETF或可直接交易的产品；合成指数以当前成分回看历史，仅作形态参考，不据此产生买卖计划或借用ETF胜率。"
+      },
+      "explanations": {
+       "note_cn": "宽度指成分股中站上相应均线的比例；缺失数据不补造。"
+      },
+      "pending_conditions": [
+       "SMA60 斜率转向上 → 修复为上升；跌破 SMA60 → 转入下降（当前高出 2.56%）"
+      ]
+     },
+     "system_generated": false,
+     "message_kind": "",
+     "plan_artifact": null,
+     "plan_draft": null,
+     "next_steps": [
+      {
+       "kind": "expand_evidence",
+       "label_cn": "查看板块依据"
+      }
+     ],
+     "answer_incomplete": null,
+     "retry": null
+    },
+    {
+     "role": "user",
+     "content": "有哪些对应的ETF？",
+     "grounded": true,
+     "created_at": "2026-09-16T10:31:08+00:00",
+     "message_id": 3,
+     "question_id": 3,
+     "resolved_symbol": null,
+     "evidence_card": null,
+     "system_generated": false,
+     "message_kind": "",
+     "plan_artifact": null,
+     "plan_draft": null,
+     "next_steps": [],
+     "answer_incomplete": null,
+     "retry": null
+    },
+    {
+     "role": "assistant",
+     "content": "你问的「对应的ETF」：系统目录里没有可核实的「通信板块 → ETF/产品」跟踪关系资料——我不会仅凭名称相近猜哪个产品跟踪这个板块，也不替你选定某一个产品。\n想继续的话：直接说具体产品的名称或代码，我按那个产品自己的系统资料来讲（不会把板块的整体统计当成某个产品的成绩）。通信板块本身的观察仍按截至 2026-09-14 的板块资料。",
+     "grounded": true,
+     "created_at": "2026-09-16T10:31:08+00:00",
+     "message_id": 4,
+     "question_id": 3,
+     "resolved_symbol": "BK1215.SECTOR",
+     "evidence_card": {
+      "facts": {
+       "symbol": "BK1215.SECTOR",
+       "display_name": "通信",
+       "subject_kind": "sector",
+       "as_of": "2026-09-14",
+       "verdict_cn": "板块阶段：派发",
+       "sector_summary_cn": "成分股站上50日均线的比例：61.48%"
+      },
+      "history_and_scope": {
+       "note_cn": "这是行业板块整体观察，不是ETF或可直接交易的产品；合成指数以当前成分回看历史，仅作形态参考，不据此产生买卖计划或借用ETF胜率。"
+      },
+      "explanations": {
+       "note_cn": "宽度指成分股中站上相应均线的比例；缺失数据不补造。"
+      },
+      "pending_conditions": [
+       "SMA60 斜率转向上 → 修复为上升；跌破 SMA60 → 转入下降（当前高出 2.56%）"
+      ]
+     },
+     "system_generated": false,
+     "message_kind": "",
+     "plan_artifact": null,
+     "plan_draft": null,
+     "next_steps": [
+      {
+       "kind": "expand_evidence",
+       "label_cn": "查看板块依据"
+      }
+     ],
+     "answer_incomplete": null,
+     "retry": null
+    },
+    {
+     "role": "user",
+     "content": "就看515880，现在怎么看？",
+     "grounded": true,
+     "created_at": "2026-09-16T10:31:10+00:00",
+     "message_id": 5,
+     "question_id": 5,
+     "resolved_symbol": null,
+     "evidence_card": null,
+     "system_generated": false,
+     "message_kind": "",
+     "plan_artifact": null,
+     "plan_draft": null,
+     "next_steps": [],
+     "answer_incomplete": null,
+     "retry": null
+    },
+    {
+     "role": "assistant",
+     "content": "通信ETF（515880.SS）：按系统数据，现在不构成可执行的入场计划——按规则本轮不适合讨论开新仓。\n系统给出的原因是：1.无法明确当前趋势类型、7.多周期杂乱。\n截至 2026-09-16 的数据（是否已收盘系统未单独核实，不凭更新时间猜）。AI 讲解暂时不可用，以下是系统直接给出的数据事实。\n系统状态：绿色 / 风险关注 / 风险关注 有效顶部。\n参考：成交最密集的价位在 0.66775（筹码分布代理，不是真实持仓成本）。\n历史依据：现在不能给这次判断附上可靠的胜率——现有记录不足以核实是否是同一种做法（明细见下方依据卡）。\n接下来先观察这些条件，哪条变化了再回来讨论：底部结构尚未确认。",
+     "grounded": false,
+     "created_at": "2026-09-16T10:31:10+00:00",
+     "message_id": 6,
+     "question_id": 5,
+     "resolved_symbol": "515880.SS",
+     "evidence_card": {
+      "facts": {
+       "symbol": "515880.SS",
+       "display_name": "通信ETF",
+       "as_of": "2026-09-16",
+       "verdict_cn": "环境阻断",
+       "buy_point_candidate_n": 0
+      },
+      "history_and_scope": {
+       "winrate_evidence": {
+        "schema_version": "provenance/1.2",
+        "id": "module_winrate:515880.SS",
+        "source_path": "docs/experiments/module_winrate.json",
+        "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+        "source_version": "1",
+        "status": "unverified",
+        "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+        "statistic_kind": "trade_r_stats",
+        "strategy_scope": [
+         "technical_execution"
+        ],
+        "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+        "compatibility": "unknown",
+        "evidence_id": "module_winrate:515880.SS",
+        "source": "docs/experiments/module_winrate.json",
+        "strategies": [
+         "technical_execution"
+        ],
+        "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+       },
+       "comparison_config": {
+        "symbol": "515880.SS",
+        "module": {
+         "value": "A",
+         "source": "engine_default"
+        },
+        "exit_variant": {
+         "value": "a6_1_costbasis",
+         "source": "engine_default"
+        },
+        "entry_variant": {
+         "value": null,
+         "source": "engine_default"
+        },
+        "rr_min": {
+         "value": 3.0,
+         "source": "engine_default"
+        },
+        "fee_label": {
+         "value": "standard",
+         "source": "engine_default"
+        },
+        "ruleset_sha256": {
+         "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+         "source": "current_active_ledger"
+        },
+        "window": null,
+        "window_state": "unverified",
+        "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+       },
+       "matched_runs": [],
+       "supporting_runs": [],
+       "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+      },
+      "explanations": {
+       "kinds": [
+        "news",
+        "major_events",
+        "sentiment",
+        "experience"
+       ],
+       "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+      },
+      "pending_conditions": [
+       "底部结构尚未确认"
+      ]
+     },
+     "system_generated": false,
+     "message_kind": "",
+     "plan_artifact": null,
+     "plan_draft": null,
+     "next_steps": [
+      {
+       "kind": "expand_evidence",
+       "label_cn": "查看依据详情"
+      },
+      {
+       "kind": "ask_conditions",
+       "label_cn": "看看还需满足什么条件",
+       "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+      },
+      {
+       "kind": "prepare_backtest",
+       "label_cn": "准备补测",
+       "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+      }
+     ],
+     "answer_incomplete": null,
+     "retry": null
+    },
+    {
+     "role": "user",
+     "content": "先别买，什么情况值得再看？",
+     "grounded": true,
+     "created_at": "2026-09-16T10:31:10+00:00",
+     "message_id": 7,
+     "question_id": 7,
+     "resolved_symbol": null,
+     "evidence_card": null,
+     "system_generated": false,
+     "message_kind": "",
+     "plan_artifact": null,
+     "plan_draft": null,
+     "next_steps": [],
+     "answer_incomplete": null,
+     "retry": null
+    },
+    {
+     "role": "assistant",
+     "content": "通信ETF（515880.SS）：按系统数据，现在不构成可执行的入场计划——按规则本轮不适合讨论开新仓。\n系统给出的原因是：1.无法明确当前趋势类型、7.多周期杂乱。\n截至 2026-09-16 的数据（是否已收盘系统未单独核实，不凭更新时间猜）。AI 讲解暂时不可用，以下是系统直接给出的数据事实。\n系统状态：绿色 / 风险关注 / 风险关注 有效顶部。\n参考：成交最密集的价位在 0.66775（筹码分布代理，不是真实持仓成本）。\n历史依据：现在不能给这次判断附上可靠的胜率——现有记录不足以核实是否是同一种做法（明细见下方依据卡）。\n接下来先观察这些条件，哪条变化了再回来讨论：底部结构尚未确认。",
+     "grounded": false,
+     "created_at": "2026-09-16T10:31:10+00:00",
+     "message_id": 8,
+     "question_id": 7,
+     "resolved_symbol": "515880.SS",
+     "evidence_card": {
+      "facts": {
+       "symbol": "515880.SS",
+       "display_name": "通信ETF",
+       "as_of": "2026-09-16",
+       "verdict_cn": "环境阻断",
+       "buy_point_candidate_n": 0
+      },
+      "history_and_scope": {
+       "winrate_evidence": {
+        "schema_version": "provenance/1.2",
+        "id": "module_winrate:515880.SS",
+        "source_path": "docs/experiments/module_winrate.json",
+        "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+        "source_version": "1",
+        "status": "unverified",
+        "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+        "statistic_kind": "trade_r_stats",
+        "strategy_scope": [
+         "technical_execution"
+        ],
+        "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+        "compatibility": "unknown",
+        "evidence_id": "module_winrate:515880.SS",
+        "source": "docs/experiments/module_winrate.json",
+        "strategies": [
+         "technical_execution"
+        ],
+        "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+       },
+       "comparison_config": {
+        "symbol": "515880.SS",
+        "module": {
+         "value": "A",
+         "source": "engine_default"
+        },
+        "exit_variant": {
+         "value": "a6_1_costbasis",
+         "source": "engine_default"
+        },
+        "entry_variant": {
+         "value": null,
+         "source": "engine_default"
+        },
+        "rr_min": {
+         "value": 3.0,
+         "source": "engine_default"
+        },
+        "fee_label": {
+         "value": "standard",
+         "source": "engine_default"
+        },
+        "ruleset_sha256": {
+         "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+         "source": "current_active_ledger"
+        },
+        "window": null,
+        "window_state": "unverified",
+        "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+       },
+       "matched_runs": [],
+       "supporting_runs": [],
+       "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+      },
+      "explanations": {
+       "kinds": [
+        "news",
+        "major_events",
+        "sentiment",
+        "experience"
+       ],
+       "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+      },
+      "pending_conditions": [
+       "底部结构尚未确认"
+      ]
+     },
+     "system_generated": false,
+     "message_kind": "",
+     "plan_artifact": null,
+     "plan_draft": null,
+     "next_steps": [
+      {
+       "kind": "expand_evidence",
+       "label_cn": "查看依据详情"
+      },
+      {
+       "kind": "ask_conditions",
+       "label_cn": "看看还需满足什么条件",
+       "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+      },
+      {
+       "kind": "prepare_backtest",
+       "label_cn": "准备补测",
+       "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+      }
+     ],
+     "answer_incomplete": null,
+     "retry": null
+    },
+    {
+     "role": "user",
+     "content": "刚才那个依据够吗，不够补测。",
+     "grounded": true,
+     "created_at": "2026-09-16T10:31:11+00:00",
+     "message_id": 9,
+     "question_id": 9,
+     "resolved_symbol": null,
+     "evidence_card": null,
+     "system_generated": false,
+     "message_kind": "",
+     "plan_artifact": null,
+     "plan_draft": null,
+     "next_steps": [],
+     "answer_incomplete": null,
+     "retry": null
+    },
+    {
+     "role": "assistant",
+     "content": "通信ETF（515880.SS）：按系统数据，现在不构成可执行的入场计划——按规则本轮不适合讨论开新仓。\n系统给出的原因是：1.无法明确当前趋势类型、7.多周期杂乱。\n截至 2026-09-16 的数据（是否已收盘系统未单独核实，不凭更新时间猜）。AI 讲解暂时不可用，以下是系统直接给出的数据事实。\n系统状态：绿色 / 风险关注 / 风险关注 有效顶部。\n参考：成交最密集的价位在 0.66775（筹码分布代理，不是真实持仓成本）。\n历史依据：现在不能给这次判断附上可靠的胜率——现有记录不足以核实是否是同一种做法（明细见下方依据卡）。\n接下来先观察这些条件，哪条变化了再回来讨论：底部结构尚未确认。",
+     "grounded": false,
+     "created_at": "2026-09-16T10:31:11+00:00",
+     "message_id": 10,
+     "question_id": 9,
+     "resolved_symbol": "515880.SS",
+     "evidence_card": {
+      "facts": {
+       "symbol": "515880.SS",
+       "display_name": "通信ETF",
+       "as_of": "2026-09-16",
+       "verdict_cn": "环境阻断",
+       "buy_point_candidate_n": 0
+      },
+      "history_and_scope": {
+       "winrate_evidence": {
+        "schema_version": "provenance/1.2",
+        "id": "module_winrate:515880.SS",
+        "source_path": "docs/experiments/module_winrate.json",
+        "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+        "source_version": "1",
+        "status": "unverified",
+        "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+        "statistic_kind": "trade_r_stats",
+        "strategy_scope": [
+         "technical_execution"
+        ],
+        "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+        "compatibility": "unknown",
+        "evidence_id": "module_winrate:515880.SS",
+        "source": "docs/experiments/module_winrate.json",
+        "strategies": [
+         "technical_execution"
+        ],
+        "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+       },
+       "comparison_config": {
+        "symbol": "515880.SS",
+        "module": {
+         "value": "A",
+         "source": "engine_default"
+        },
+        "exit_variant": {
+         "value": "a6_1_costbasis",
+         "source": "engine_default"
+        },
+        "entry_variant": {
+         "value": null,
+         "source": "engine_default"
+        },
+        "rr_min": {
+         "value": 3.0,
+         "source": "engine_default"
+        },
+        "fee_label": {
+         "value": "standard",
+         "source": "engine_default"
+        },
+        "ruleset_sha256": {
+         "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+         "source": "current_active_ledger"
+        },
+        "window": null,
+        "window_state": "unverified",
+        "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+       },
+       "matched_runs": [],
+       "supporting_runs": [],
+       "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+      },
+      "explanations": {
+       "kinds": [
+        "news",
+        "major_events",
+        "sentiment",
+        "experience"
+       ],
+       "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+      },
+      "pending_conditions": [
+       "底部结构尚未确认"
+      ]
+     },
+     "system_generated": false,
+     "message_kind": "",
+     "plan_artifact": null,
+     "plan_draft": null,
+     "next_steps": [
+      {
+       "kind": "expand_evidence",
+       "label_cn": "查看依据详情"
+      },
+      {
+       "kind": "ask_conditions",
+       "label_cn": "看看还需满足什么条件",
+       "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+      },
+      {
+       "kind": "prepare_backtest",
+       "label_cn": "准备补测",
+       "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+      }
+     ],
+     "answer_incomplete": null,
+     "retry": null
+    },
+    {
+     "role": "user",
+     "content": "我已经持有了。",
+     "grounded": true,
+     "created_at": "2026-09-16T10:31:11+00:00",
+     "message_id": 11,
+     "question_id": 11,
+     "resolved_symbol": null,
+     "evidence_card": null,
+     "system_generated": false,
+     "message_kind": "",
+     "plan_artifact": null,
+     "plan_draft": null,
+     "next_steps": [],
+     "answer_incomplete": null,
+     "retry": null
+    },
+    {
+     "role": "assistant",
+     "content": "通信ETF（515880.SS）：你说已经持有了——这次就从持仓管理角度讲，不按首次买入说。\n系统当前状态：1.无法明确当前趋势类型、7.多周期杂乱——这是环境层面的提醒，不是让你立刻动作。\n你没有给成本价和资金信息，这段讨论里也没有你的成交信息——我不编这些；具体的退出位以你自己确认过的计划为准。这里没有记录任何成交。\n截至 2026-09-16 的数据（是否已收盘系统未单独核实，不凭更新时间猜）。AI 讲解暂时不可用，以下是系统直接给出的数据事实。\n系统状态：绿色 / 风险关注 / 风险关注 有效顶部。\n参考：成交最密集的价位在 0.66775（筹码分布代理，不是真实持仓成本）。\n历史依据：现在不能给这次判断附上可靠的胜率——现有记录不足以核实是否是同一种做法（明细见下方依据卡）。\n接下来先观察这些条件，哪条变化了再回来讨论：底部结构尚未确认。",
+     "grounded": false,
+     "created_at": "2026-09-16T10:31:11+00:00",
+     "message_id": 12,
+     "question_id": 11,
+     "resolved_symbol": "515880.SS",
+     "evidence_card": {
+      "facts": {
+       "symbol": "515880.SS",
+       "display_name": "通信ETF",
+       "as_of": "2026-09-16",
+       "verdict_cn": "环境阻断",
+       "buy_point_candidate_n": 0
+      },
+      "history_and_scope": {
+       "winrate_evidence": {
+        "schema_version": "provenance/1.2",
+        "id": "module_winrate:515880.SS",
+        "source_path": "docs/experiments/module_winrate.json",
+        "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+        "source_version": "1",
+        "status": "unverified",
+        "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+        "statistic_kind": "trade_r_stats",
+        "strategy_scope": [
+         "technical_execution"
+        ],
+        "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+        "compatibility": "unknown",
+        "evidence_id": "module_winrate:515880.SS",
+        "source": "docs/experiments/module_winrate.json",
+        "strategies": [
+         "technical_execution"
+        ],
+        "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+       },
+       "comparison_config": {
+        "symbol": "515880.SS",
+        "module": {
+         "value": "A",
+         "source": "engine_default"
+        },
+        "exit_variant": {
+         "value": "a6_1_costbasis",
+         "source": "engine_default"
+        },
+        "entry_variant": {
+         "value": null,
+         "source": "engine_default"
+        },
+        "rr_min": {
+         "value": 3.0,
+         "source": "engine_default"
+        },
+        "fee_label": {
+         "value": "standard",
+         "source": "engine_default"
+        },
+        "ruleset_sha256": {
+         "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+         "source": "current_active_ledger"
+        },
+        "window": null,
+        "window_state": "unverified",
+        "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+       },
+       "matched_runs": [],
+       "supporting_runs": [],
+       "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+      },
+      "explanations": {
+       "kinds": [
+        "news",
+        "major_events",
+        "sentiment",
+        "experience"
+       ],
+       "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+      },
+      "pending_conditions": [
+       "底部结构尚未确认"
+      ]
+     },
+     "system_generated": false,
+     "message_kind": "",
+     "plan_artifact": null,
+     "plan_draft": null,
+     "next_steps": [
+      {
+       "kind": "expand_evidence",
+       "label_cn": "查看依据详情"
+      },
+      {
+       "kind": "ask_conditions",
+       "label_cn": "看看还需满足什么条件",
+       "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+      },
+      {
+       "kind": "prepare_backtest",
+       "label_cn": "准备补测",
+       "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+      }
+     ],
+     "answer_incomplete": null,
+     "retry": null
+    },
+    {
+     "role": "user",
+     "content": "我有一万元，能不能买一点？",
+     "grounded": true,
+     "created_at": "2026-09-16T10:31:12+00:00",
+     "message_id": 13,
+     "question_id": 13,
+     "resolved_symbol": null,
+     "evidence_card": null,
+     "system_generated": false,
+     "message_kind": "",
+     "plan_artifact": null,
+     "plan_draft": null,
+     "next_steps": [],
+     "answer_incomplete": null,
+     "retry": null
+    },
+    {
+     "role": "assistant",
+     "content": "先回答能不能买：按系统数据，通信ETF（515880.SS）现在按规则不适合开新仓——1.无法明确当前趋势类型、7.多周期杂乱。\n10000 元怎么安排由你决定；系统纪律是盈亏比不足 3 的机会放弃（研究代理口径），仓位档位只是参考。\n还差一项关键信息：这笔钱是持续投入的新收入，还是已有的闲钱？这影响怎么分批，先确认这一项再细聊。\n现在只是讨论——没有确认任何计划，也不会替你下单。\n截至 2026-09-16 的数据（是否已收盘系统未单独核实，不凭更新时间猜）。AI 讲解暂时不可用，以下是系统直接给出的数据事实。\n系统状态：绿色 / 风险关注 / 风险关注 有效顶部。\n参考：成交最密集的价位在 0.66775（筹码分布代理，不是真实持仓成本）。\n历史依据：现在不能给这次判断附上可靠的胜率——现有记录不足以核实是否是同一种做法（明细见下方依据卡）。\n接下来先观察这些条件，哪条变化了再回来讨论：底部结构尚未确认。",
+     "grounded": false,
+     "created_at": "2026-09-16T10:31:12+00:00",
+     "message_id": 14,
+     "question_id": 13,
+     "resolved_symbol": "515880.SS",
+     "evidence_card": {
+      "facts": {
+       "symbol": "515880.SS",
+       "display_name": "通信ETF",
+       "as_of": "2026-09-16",
+       "verdict_cn": "环境阻断",
+       "buy_point_candidate_n": 0
+      },
+      "history_and_scope": {
+       "winrate_evidence": {
+        "schema_version": "provenance/1.2",
+        "id": "module_winrate:515880.SS",
+        "source_path": "docs/experiments/module_winrate.json",
+        "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+        "source_version": "1",
+        "status": "unverified",
+        "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+        "statistic_kind": "trade_r_stats",
+        "strategy_scope": [
+         "technical_execution"
+        ],
+        "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+        "compatibility": "unknown",
+        "evidence_id": "module_winrate:515880.SS",
+        "source": "docs/experiments/module_winrate.json",
+        "strategies": [
+         "technical_execution"
+        ],
+        "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+       },
+       "comparison_config": {
+        "symbol": "515880.SS",
+        "module": {
+         "value": "A",
+         "source": "engine_default"
+        },
+        "exit_variant": {
+         "value": "a6_1_costbasis",
+         "source": "engine_default"
+        },
+        "entry_variant": {
+         "value": null,
+         "source": "engine_default"
+        },
+        "rr_min": {
+         "value": 3.0,
+         "source": "engine_default"
+        },
+        "fee_label": {
+         "value": "standard",
+         "source": "engine_default"
+        },
+        "ruleset_sha256": {
+         "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+         "source": "current_active_ledger"
+        },
+        "window": null,
+        "window_state": "unverified",
+        "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+       },
+       "matched_runs": [],
+       "supporting_runs": [],
+       "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+      },
+      "explanations": {
+       "kinds": [
+        "news",
+        "major_events",
+        "sentiment",
+        "experience"
+       ],
+       "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+      },
+      "pending_conditions": [
+       "底部结构尚未确认"
+      ]
+     },
+     "system_generated": false,
+     "message_kind": "",
+     "plan_artifact": null,
+     "plan_draft": null,
+     "next_steps": [
+      {
+       "kind": "expand_evidence",
+       "label_cn": "查看依据详情"
+      },
+      {
+       "kind": "ask_conditions",
+       "label_cn": "看看还需满足什么条件",
+       "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+      },
+      {
+       "kind": "prepare_backtest",
+       "label_cn": "准备补测",
+       "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+      }
+     ],
+     "answer_incomplete": null,
+     "retry": null
+    },
+    {
+     "role": "user",
+     "content": "和刚才相比有什么变化？",
+     "grounded": true,
+     "created_at": "2026-09-16T10:31:12+00:00",
+     "message_id": 15,
+     "question_id": 15,
+     "resolved_symbol": null,
+     "evidence_card": null,
+     "system_generated": false,
+     "message_kind": "",
+     "plan_artifact": null,
+     "plan_draft": null,
+     "next_steps": [],
+     "answer_incomplete": null,
+     "retry": null
+    },
+    {
+     "role": "assistant",
+     "content": "没有新数据：和刚才一样，通信ETF 还是截至 2026-09-16 的同一份资料，系统状态没有变化。系统结论仍是：环境阻断。这不是刚出现的新情况——要有新资料（下一个数据日之后）再谈变化。",
+     "grounded": true,
+     "created_at": "2026-09-16T10:31:12+00:00",
+     "message_id": 16,
+     "question_id": 15,
+     "resolved_symbol": "515880.SS",
+     "evidence_card": {
+      "facts": {
+       "symbol": "515880.SS",
+       "display_name": "通信ETF",
+       "as_of": "2026-09-16",
+       "verdict_cn": "环境阻断",
+       "buy_point_candidate_n": 0
+      },
+      "history_and_scope": {
+       "winrate_evidence": {
+        "schema_version": "provenance/1.2",
+        "id": "module_winrate:515880.SS",
+        "source_path": "docs/experiments/module_winrate.json",
+        "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+        "source_version": "1",
+        "status": "unverified",
+        "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+        "statistic_kind": "trade_r_stats",
+        "strategy_scope": [
+         "technical_execution"
+        ],
+        "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+        "compatibility": "unknown",
+        "evidence_id": "module_winrate:515880.SS",
+        "source": "docs/experiments/module_winrate.json",
+        "strategies": [
+         "technical_execution"
+        ],
+        "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+       },
+       "comparison_config": {
+        "symbol": "515880.SS",
+        "module": {
+         "value": "A",
+         "source": "engine_default"
+        },
+        "exit_variant": {
+         "value": "a6_1_costbasis",
+         "source": "engine_default"
+        },
+        "entry_variant": {
+         "value": null,
+         "source": "engine_default"
+        },
+        "rr_min": {
+         "value": 3.0,
+         "source": "engine_default"
+        },
+        "fee_label": {
+         "value": "standard",
+         "source": "engine_default"
+        },
+        "ruleset_sha256": {
+         "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+         "source": "current_active_ledger"
+        },
+        "window": null,
+        "window_state": "unverified",
+        "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+       },
+       "matched_runs": [],
+       "supporting_runs": [],
+       "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+      },
+      "explanations": {
+       "kinds": [
+        "news",
+        "major_events",
+        "sentiment",
+        "experience"
+       ],
+       "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+      },
+      "pending_conditions": [
+       "底部结构尚未确认"
+      ]
+     },
+     "system_generated": false,
+     "message_kind": "",
+     "plan_artifact": null,
+     "plan_draft": null,
+     "next_steps": [
+      {
+       "kind": "expand_evidence",
+       "label_cn": "查看依据详情"
+      },
+      {
+       "kind": "ask_conditions",
+       "label_cn": "看看还需满足什么条件",
+       "draft_cn": "关于 515880.SS，现在距离系统定义的买点还缺哪些条件？分别要到什么价位或什么状态才算满足？"
+      },
+      {
+       "kind": "prepare_backtest",
+       "label_cn": "准备补测",
+       "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+      }
+     ],
+     "answer_incomplete": null,
+     "retry": null
+    }
+   ]
+  },
+  "abort_first": {
+   "client_request_id": "98e3dcf4-4196-40d7-a5fa-e116a7f5d568",
+   "marks_ms": {
+    "received": 1.1
+   },
+   "received_text": "",
+   "done": null,
+   "events": [
+    {
+     "event": "stage",
+     "t": 0.001,
+     "data": {
+      "key": "received",
+      "text": "已收到问题，正在登记请求"
+     }
+    }
+   ],
+   "aborted": true
+  },
+  "retry_same_cid": {
+   "client_request_id": "98e3dcf4-4196-40d7-a5fa-e116a7f5d568",
+   "marks_ms": {
+    "received": 1.1,
+    "first_token": 2.2,
+    "done": 2.4
+   },
+   "received_text": "该问题的回答尚未生成完成（回答正在生成或重试中）；请稍后重试，系统将只对原问题恢复生成。",
+   "done": {
+    "session_id": "sess_c2c236845d4c",
+    "resolved_symbol": null,
+    "grounded": false,
+    "question_id": null,
+    "answer_state": "generating",
+    "incomplete": true,
+    "timing_ms": {
+     "total_ms": 1,
+     "marks_ms": {
+      "received": 0,
+      "identity": 1
+     },
+     "spans_ms": {}
+    }
+   },
+   "events": [
+    {
+     "event": "stage",
+     "t": 0.001,
+     "data": {
+      "key": "received",
+      "text": "已收到问题，正在登记请求"
+     }
+    },
+    {
+     "event": "token",
+     "t": 0.002,
+     "data": {}
+    },
+    {
+     "event": "done",
+     "t": 0.002,
+     "data": {
+      "session_id": "sess_c2c236845d4c",
+      "resolved_symbol": null,
+      "grounded": false,
+      "question_id": null,
+      "answer_state": "generating",
+      "incomplete": true,
+      "timing_ms": {
+       "total_ms": 1,
+       "marks_ms": {
+        "received": 0,
+        "identity": 1
+       },
+       "spans_ms": {}
+      }
+     }
+    }
+   ],
+   "aborted": false
+  }
+ },
+ "case_B": [
+  {
+   "case": "case10a",
+   "message": "科创板整体怎么看？",
+   "resolve": {
+    "intent": "discussion",
+    "resolved_symbol": null,
+    "clarification": [
+     {
+      "kind": "sector_ambiguous_index_reference",
+      "question_cn": "「科创」是板块泛指，系统里没有唯一可核实的对应对象，不能直接给出它的判定。如果你想看的是科创50（000688.SS），可以把它作为观察参考——注意它是 50 只成分股组成的指数，不代表整个板块。要按科创50继续，请直接说「科创50」。",
+      "reference_symbol": "000688.SS",
+      "reference_name": "科创50"
+     }
+    ]
+   },
+   "stream": {
+    "client_request_id": "42de668a-1fc8-4577-bf4c-e9a86a5ae741",
+    "marks_ms": {
+     "received": 2.8,
+     "prepared": 837.4,
+     "done": 844.3
+    },
+    "received_text": "",
+    "done": {
+     "session_id": "sess_d21412f50d68",
+     "resolved_symbol": null,
+     "grounded": false,
+     "question_id": 19,
+     "evidence_card": null,
+     "plan_artifact": null,
+     "answer_state": "answered",
+     "next_steps": [],
+     "timing_ms": {
+      "total_ms": 841,
+      "marks_ms": {
+       "received": 0,
+       "identity": 1,
+       "prep_resolve": 11,
+       "prep_global_material": 833,
+       "prep_done": 833,
+       "prepared": 834,
+       "material_sent": 834,
+       "question_saved": 840,
+       "llm_end": 840,
+       "answer_saved": 841
+      },
+      "spans_ms": {}
+     },
+     "fallback": "AI 讲解暂时不可用，以下是系统直接给出的市场概况。\n市场宽度：A股宽度：约三成的个股在20日线上方（29%），约一半的个股在50日线上方（52%），约两成的个股在200日线上方（23%）\n融资环境：融资收缩期（散户去杠杆）\n接下来可以：说一个标的名称或代码进入具体讨论，或稍后再试 AI 讲解。"
+    },
+    "events": [
+     {
+      "event": "stage",
+      "t": 0.003,
+      "data": {
+       "key": "received",
+       "text": "已收到问题，正在登记请求"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.006,
+      "data": {
+       "key": "resolve",
+       "text": "识别标的与意图"
+      }
+     },
+     {
+      "event": "prepared",
+      "t": 0.837,
+      "data": {
+       "session_id": "sess_d21412f50d68",
+       "resolved_symbol": null,
+       "quick_card": null,
+       "evidence_card": null,
+       "next_steps": []
+      }
+     },
+     {
+      "event": "done",
+      "t": 0.844,
+      "data": {
+       "session_id": "sess_d21412f50d68",
+       "resolved_symbol": null,
+       "grounded": false,
+       "question_id": 19,
+       "evidence_card": null,
+       "plan_artifact": null,
+       "answer_state": "answered",
+       "next_steps": [],
+       "timing_ms": {
+        "total_ms": 841,
+        "marks_ms": {
+         "received": 0,
+         "identity": 1,
+         "prep_resolve": 11,
+         "prep_global_material": 833,
+         "prep_done": 833,
+         "prepared": 834,
+         "material_sent": 834,
+         "question_saved": 840,
+         "llm_end": 840,
+         "answer_saved": 841
+        },
+        "spans_ms": {}
+       },
+       "fallback": "AI 讲解暂时不可用，以下是系统直接给出的市场概况。\n市场宽度：A股宽度：约三成的个股在20日线上方（29%），约一半的个股在50日线上方（52%），约两成的个股在200日线上方（23%）\n融资环境：融资收缩期（散户去杠杆）\n接下来可以：说一个标的名称或代码进入具体讨论，或稍后再试 AI 讲解。"
+      }
+     }
+    ],
+    "aborted": false
+   }
+  },
+  {
+   "case": "case10b",
+   "message": "科创50板块怎么看？",
+   "resolve": {
+    "intent": "discussion",
+    "resolved_symbol": "000688.SS",
+    "clarification": []
+   },
+   "stream": {
+    "client_request_id": "d3f16b8e-dfd3-413a-8f80-8351ab401009",
+    "marks_ms": {
+     "received": 1.1,
+     "prepared": 411.0,
+     "done": 414.8
+    },
+    "received_text": "",
+    "done": {
+     "session_id": "sess_9262aeb389ce",
+     "resolved_symbol": null,
+     "grounded": false,
+     "question_id": 21,
+     "evidence_card": null,
+     "plan_artifact": null,
+     "answer_state": "answered",
+     "next_steps": [],
+     "timing_ms": {
+      "total_ms": 413,
+      "marks_ms": {
+       "received": 0,
+       "identity": 1,
+       "prep_resolve": 9,
+       "prep_analysis": 9,
+       "prep_global_material": 409,
+       "prep_done": 409,
+       "prepared": 409,
+       "material_sent": 410,
+       "question_saved": 412,
+       "llm_end": 412,
+       "answer_saved": 413
+      },
+      "spans_ms": {}
+     },
+     "fallback": "AI 讲解暂时不可用，以下是系统直接给出的市场概况。\n市场宽度：A股宽度：约三成的个股在20日线上方（29%），约一半的个股在50日线上方（52%），约两成的个股在200日线上方（23%）\n融资环境：融资收缩期（散户去杠杆）\n接下来可以：说一个标的名称或代码进入具体讨论，或稍后再试 AI 讲解。"
+    },
+    "events": [
+     {
+      "event": "stage",
+      "t": 0.001,
+      "data": {
+       "key": "received",
+       "text": "已收到问题，正在登记请求"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.003,
+      "data": {
+       "key": "resolve",
+       "text": "识别标的与意图"
+      }
+     },
+     {
+      "event": "stage",
+      "t": 0.011,
+      "data": {
+       "key": "fetch",
+       "text": "拉取 000688.SS 行情（首次约 1 分钟）"
+      }
+     },
+     {
+      "event": "prepared",
+      "t": 0.411,
+      "data": {
+       "session_id": "sess_9262aeb389ce",
+       "resolved_symbol": null,
+       "quick_card": null,
+       "evidence_card": null,
+       "next_steps": []
+      }
+     },
+     {
+      "event": "done",
+      "t": 0.415,
+      "data": {
+       "session_id": "sess_9262aeb389ce",
+       "resolved_symbol": null,
+       "grounded": false,
+       "question_id": 21,
+       "evidence_card": null,
+       "plan_artifact": null,
+       "answer_state": "answered",
+       "next_steps": [],
+       "timing_ms": {
+        "total_ms": 413,
+        "marks_ms": {
+         "received": 0,
+         "identity": 1,
+         "prep_resolve": 9,
+         "prep_analysis": 9,
+         "prep_global_material": 409,
+         "prep_done": 409,
+         "prepared": 409,
+         "material_sent": 410,
+         "question_saved": 412,
+         "llm_end": 412,
+         "answer_saved": 413
+        },
+        "spans_ms": {}
+       },
+       "fallback": "AI 讲解暂时不可用，以下是系统直接给出的市场概况。\n市场宽度：A股宽度：约三成的个股在20日线上方（29%），约一半的个股在50日线上方（52%），约两成的个股在200日线上方（23%）\n融资环境：融资收缩期（散户去杠杆）\n接下来可以：说一个标的名称或代码进入具体讨论，或稍后再试 AI 讲解。"
+      }
+     }
+    ],
+    "aborted": false
+   }
+  }
+ ]
+}

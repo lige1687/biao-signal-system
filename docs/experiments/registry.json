@@ -15,7 +15,11 @@
   "任务书"
  ],
  "entries": {
-  "docs/experiments/controller-ask-stability-closeout-2026-09-16.md": {"category": "数据与质量", "verdict": "passed", "oneLiner": "固定补修独立复验通过；主控补齐成功写入的等待计时，断开重试不重复问题，统一合入本地main，运行版未更新。"},
+  "docs/experiments/controller-ask-stability-closeout-2026-09-16.md": {
+   "category": "数据与质量",
+   "verdict": "passed",
+   "oneLiner": "固定补修独立复验通过；主控补齐成功写入的等待计时，断开重试不重复问题，统一合入本地main，运行版未更新。"
+  },
   "docs/experiments/controller-ask-stability-review-2026-09-15.md": {
    "category": "数据与质量",
    "verdict": "mixed",
@@ -763,6 +767,11 @@
    "category": "数据与质量",
    "verdict": "passed",
    "oneLiner": "提问提交即回执、数据库排队每5秒如实告知；每个问题曾重算12秒的情绪数据已修（无模型资料准备：进程首次23.3→11.3秒、重复提问约12.4→0.4秒，非完整AI回答速度）；失败/断连后可立即重试同一问题，真实断开时登记必有人收尾；写锁日志区分等待/开启/持锁并指认同库持锁任务；科创50板块保留指数身份、科创板块给澄清。真实锁根治与模型整段耗时未动。"
+  },
+  "docs/experiments/agent-experience-continuity-2026-09-16.md": {
+   "category": "数据与质量",
+   "verdict": "watch",
+   "oneLiner": "连续讨论四处答非所问修复（板块对应ETF/持仓语境/资金提问/变化比较）+日期口径与科创板澄清；真实模型5次计数验证全过；数值校验器百分比派生放行过宽单列待裁。"
   }
  }
 }

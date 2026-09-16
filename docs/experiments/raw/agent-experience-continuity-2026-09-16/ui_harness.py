@@ -29,17 +29,19 @@ def _launch(p):
     return p.chromium.launch(channel="chrome", headless=True)
 
 
-def wait_answer_done(page, timeout_s: int = 60) -> None:
-    """等当前回答到达终态：出现动作条（工作台）或动作区（控制台）。"""
+def wait_answer_done(page, prev_done: int = 0, timeout_s: int = 90) -> None:
+    """等**本轮**回答到达终态：终态标志（动作条/直出标签）数量超过提问前的
+    数量——不能用全页存在性判断，否则上一轮的终态会让等待提前返回。"""
     t0 = time.monotonic()
     while time.monotonic() - t0 < timeout_s:
-        if page.locator("text=复制文字").count() > 0:
-            return
-        if page.locator("text=判定层数据直出").count() > 0 or \
-           page.locator("text=依据系统数据").count() > 0:
-            time.sleep(0.5)
+        n = page.locator("text=复制文字").count()
+        if n > prev_done:
             return
         time.sleep(0.5)
+
+
+def _done_count(page) -> int:
+    return page.locator("text=复制文字").count()
 
 
 def workspace_cases(page, label: str, notes: dict) -> None:
@@ -48,8 +50,9 @@ def workspace_cases(page, label: str, notes: dict) -> None:
     for case_id, question in (("case1", CASE1), ("case3", CASE3), ("case4", CASE4)):
         box = page.locator("#agent-question")
         box.fill(question)
+        n0 = _done_count(page)
         box.press("Enter")
-        wait_answer_done(page)
+        wait_answer_done(page, prev_done=n0)
         time.sleep(0.8)
         answers = page.locator("article.ar-answer")
         last = answers.last
@@ -71,7 +74,15 @@ def console_cases(page, label: str, notes: dict) -> None:
         box = page.locator(".agent-console input")
         box.fill(question)
         box.press("Enter")
-        wait_answer_done(page)
+        # 控制台无「复制文字」动作条：等本轮判定标签出现且工作态结束
+        t0 = time.monotonic()
+        while time.monotonic() - t0 < 90:
+            working = page.locator(".agent-console .turn", has_text="仍在生成").count()
+            if page.locator(".agent-console .turn", has_text="正在整理").count() == 0 and working == 0:
+                if page.locator(".agent-console .turn", has_text="数据直出").count() > 0 or \
+                   page.locator(".agent-console .turn", has_text="依据系统数据").count() > 0:
+                    break
+            time.sleep(0.5)
         time.sleep(0.8)
         turns = page.locator(".agent-console .turn")
         texts = [turns.nth(i).inner_text() for i in range(turns.count())]
