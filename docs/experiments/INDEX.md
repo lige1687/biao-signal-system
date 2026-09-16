@@ -28,6 +28,8 @@
 
 ## 1. 任务编号总账（任务书 → 执行归档）
 
+- [连续讨论补修收口（ZCode执行轮）](agent-continuity-zcode-closeout-2026-09-17.md)：e461d838独立复验成立——两入口ATR链页面+请求证据、真实库身份矩阵全过；144项回归+1已知xfail；零代码改动，待主控复验合入。
+
 - [连续讨论补修二轮复验](controller-agent-continuity-cfix-review-2026-09-16.md)：保留比较修复，收口ATR继续讨论与记忆归属。
 
 - [连续讨论二轮补修](agent-experience-continuity-cfix2-2026-09-17.md)：ATR概念讨论可达+指标词不截对象（两入口浏览器链）；语义守卫+question_id精确归属；41+134项测试全绿。待复验。
