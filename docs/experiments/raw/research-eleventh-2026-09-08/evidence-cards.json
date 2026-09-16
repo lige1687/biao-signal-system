@@ -1,0 +1,172 @@
+[
+  {
+    "user_question": "修复后，后来行情还会改写当年判断吗？",
+    "conclusion": "原定366次真实历史检查及168次连续日期补充均一致；修复前后差异完整保留，没有收益结论。",
+    "evidence_ref": {
+      "schema_version": "provenance/1.2",
+      "id": "acd-repair-history",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/protocol.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/history-diagnostic/run-lock.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/history-diagnostic/summary.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/continuous-results/summary.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/runtime-audit-lock.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/old-new-event-comparison.json"
+      ],
+      "source_hash": [
+        "7e4cc170585669b91452517f2ba57bed1cc9dfe69c1da8cc5b60afb66fbb8505",
+        "afc3386365d110f52240f52767588d95de4c8367fe358970ef34d496e62838a5",
+        "a25629f69fe2094a5ab3b93f75a620d249d9112e9bd4f00679d0a8d0d35ba511",
+        "b2448d9da5c2aae2faa637f7d0ce69fa42c9bfaa56cb709a67878f392940a8c1",
+        "5f0af44a0ca1e395379e3dd1b56785b9bd2edc1967730e181bcb2cd4cfb4f21e",
+        "cd3318fca6a6e3c8684aa1099f7b6c3bc080c4e84c5d312ac75d454a3afc8b83"
+      ],
+      "source_version": "research-eleventh/2026-09-08",
+      "status": "mixed",
+      "window": "2015-01-01—2026-06-30",
+      "statistic_kind": "isolated_repair_fixed_history_validation",
+      "strategy_scope": [],
+      "limitations": "固定及连续日期存在重叠，不是独立未来行情；受控指标反例不证明真实市场发生频率；未运行收益或完整账户；待定义的策略流程未补造；连续日期原数据指纹在运行中补记且核对旧封存值，不冒称全部启动前登记；一项缺输入接口契约有明确变更，生产调用方尚未适配；本批未新增论文全文阅读，生产未采用；OKR按单独确认记录",
+      "compatibility": "unknown",
+      "evidence_id": "acd-repair-history",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/protocol.md",
+      "strategies": [],
+      "note": "固定及连续日期存在重叠，不是独立未来行情；受控指标反例不证明真实市场发生频率；未运行收益或完整账户；待定义的策略流程未补造；连续日期原数据指纹在运行中补记且核对旧封存值，不冒称全部启动前登记；一项缺输入接口契约有明确变更，生产调用方尚未适配；本批未新增论文全文阅读，生产未采用；OKR按单独确认记录"
+    },
+    "market_data_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "source_id": "frozen_four_fund_nominal",
+        "instrument_id": "510300,159915,518880,513100",
+        "market": "CN",
+        "observed_at": null,
+        "available_at": null,
+        "generated_at": null,
+        "last_valid_at": null,
+        "health": "unknown",
+        "reason": "第八批名义历史与已知行动；真实交易日历等完整制度未齐",
+        "calendar_ref": null,
+        "as_of_cutoff": null,
+        "source_policy_ref": null,
+        "reference_lag_trading_days": null,
+        "source": "frozen_four_fund_nominal",
+        "completeness": "unknown",
+        "lag_trading_days": null,
+        "input_manifest": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/history-diagnostic/run-lock.json",
+        "sha256": "afc3386365d110f52240f52767588d95de4c8367fe358970ef34d496e62838a5"
+      }
+    ],
+    "rule_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "rule_id": "__ruleset__",
+        "version": "2.1.0",
+        "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/research-package/configs/rules.v2.yaml",
+        "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+        "definition_ref": "策略§3.2/§9A/C/D/§10/§13；A3.0.0、C3.0.0、D2.0.0，未修改参数",
+        "fallback_note": ""
+      }
+    ],
+    "research": {
+      "run_id": "research-eleventh-2026-09-08",
+      "production_adopted": false,
+      "independent_market_episodes": null,
+      "independently_reviewed": true,
+      "review_scope": "核心结构独立手工预期/固定1024短序列；驱动静态及重复编号检查；C/D删记录固定3条原因抽检；非独立账户验证",
+      "status": "limited",
+      "limitations": [
+        "固定及连续日期存在重叠，不是独立未来行情",
+        "受控指标反例不证明真实市场发生频率",
+        "未运行收益或完整账户；待定义的策略流程未补造",
+        "连续日期原数据指纹在运行中补记且核对旧封存值，不冒称全部启动前登记",
+        "一项缺输入接口契约有明确变更，生产调用方尚未适配",
+        "本批未新增论文全文阅读，生产未采用；OKR按单独确认记录"
+      ]
+    }
+  },
+  {
+    "user_question": "怎样确认修复没有把正确行为一起删掉？",
+    "conclusion": "64项合并检查通过；独立手工预期及1024种短行情覆盖历史保留、后来失效、后续新结构。旧失败、一项输入异常接口变更及证据局限均保留。",
+    "evidence_ref": {
+      "schema_version": "provenance/1.2",
+      "id": "acd-repair-independent",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/complete-regression-tests.txt",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/history-review/strict-independent-results.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/history-review/driver-independent-review-2026-09-08.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/a-fix/integration-eleventh-fixed.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/cd-fix/history-diff-explanation.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/input-contract-change.md"
+      ],
+      "source_hash": [
+        "83a74429b1185766b0bed99ee22175467f615c16bd21e20e34e180fde022a557",
+        "45b1c16be2bada4974f03e8991de2cf1f8ac60da269b2e30a007103b7f82656e",
+        "65a9930d40bd9739aa50c48807c3b4b4a9f18b7cd52e0ce01a2c37532bd170e0",
+        "fefdc9aa198479d6b02c1d2364b8273798b7cdc0aa8ceb639848067f9532358e",
+        "719d66595c6acb0c43516a0f37a9b162a7c1bd5d759df657058646caee7b5d28",
+        "aff1f0e41fb97cd6dd140e06a21ce3b896dca9c68f7bd781892b9e12f543e288"
+      ],
+      "source_version": "research-eleventh/2026-09-08",
+      "status": "mixed",
+      "window": "2015-01-01—2026-06-30",
+      "statistic_kind": "regression_counterexamples_and_independent_finite_checks",
+      "strategy_scope": [],
+      "limitations": "固定及连续日期存在重叠，不是独立未来行情；受控指标反例不证明真实市场发生频率；未运行收益或完整账户；待定义的策略流程未补造；连续日期原数据指纹在运行中补记且核对旧封存值，不冒称全部启动前登记；一项缺输入接口契约有明确变更，生产调用方尚未适配；本批未新增论文全文阅读，生产未采用；OKR按单独确认记录",
+      "compatibility": "unknown",
+      "evidence_id": "acd-repair-independent",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/complete-regression-tests.txt",
+      "strategies": [],
+      "note": "固定及连续日期存在重叠，不是独立未来行情；受控指标反例不证明真实市场发生频率；未运行收益或完整账户；待定义的策略流程未补造；连续日期原数据指纹在运行中补记且核对旧封存值，不冒称全部启动前登记；一项缺输入接口契约有明确变更，生产调用方尚未适配；本批未新增论文全文阅读，生产未采用；OKR按单独确认记录"
+    },
+    "market_data_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "source_id": "frozen_four_fund_nominal",
+        "instrument_id": "510300,159915,518880,513100",
+        "market": "CN",
+        "observed_at": null,
+        "available_at": null,
+        "generated_at": null,
+        "last_valid_at": null,
+        "health": "unknown",
+        "reason": "第八批名义历史与已知行动；真实交易日历等完整制度未齐",
+        "calendar_ref": null,
+        "as_of_cutoff": null,
+        "source_policy_ref": null,
+        "reference_lag_trading_days": null,
+        "source": "frozen_four_fund_nominal",
+        "completeness": "unknown",
+        "lag_trading_days": null,
+        "input_manifest": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/history-diagnostic/run-lock.json",
+        "sha256": "afc3386365d110f52240f52767588d95de4c8367fe358970ef34d496e62838a5"
+      }
+    ],
+    "rule_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "rule_id": "__ruleset__",
+        "version": "2.1.0",
+        "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/research-package/configs/rules.v2.yaml",
+        "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+        "definition_ref": "策略§3.2/§9A/C/D/§10/§13；A3.0.0、C3.0.0、D2.0.0，未修改参数",
+        "fallback_note": ""
+      }
+    ],
+    "research": {
+      "run_id": "research-eleventh-2026-09-08",
+      "production_adopted": false,
+      "independent_market_episodes": null,
+      "independently_reviewed": true,
+      "review_scope": "核心结构独立手工预期/固定1024短序列；驱动静态及重复编号检查；C/D删记录固定3条原因抽检；非独立账户验证",
+      "status": "limited",
+      "limitations": [
+        "固定及连续日期存在重叠，不是独立未来行情",
+        "受控指标反例不证明真实市场发生频率",
+        "未运行收益或完整账户；待定义的策略流程未补造",
+        "连续日期原数据指纹在运行中补记且核对旧封存值，不冒称全部启动前登记",
+        "一项缺输入接口契约有明确变更，生产调用方尚未适配",
+        "本批未新增论文全文阅读，生产未采用；OKR按单独确认记录"
+      ]
+    }
+  }
+]

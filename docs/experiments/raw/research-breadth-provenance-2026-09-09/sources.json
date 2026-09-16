@@ -1,0 +1,127 @@
+{
+  "audit_date": "2026-09-09",
+  "scope": "a_share_breadth_33y_snapshot.json provenance only; no return run, no market download, no breadth recomputation",
+  "strategy_layer": "market_context_cash_budget",
+  "artifact": {
+    "path": "docs/experiments/raw/breadth_overlay/a_share_breadth_33y_snapshot.json",
+    "sha256": "8fabf1882d1d04fa2912bfa7545d4c1216a23e964d0981b1addc7042f43b33ca",
+    "rows": 8109,
+    "first_date": "1993-04-22",
+    "last_date": "2026-08-18",
+    "b200_first_non_null": "1993-12-21",
+    "git_first_added_commit": "5c8b35b0b6b411e80b12ec6de418d504e025392f",
+    "git_first_added_commit_time": "2026-09-01T11:13:57+08:00"
+  },
+  "identical_copies": [
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_ma_breadth_full_history.json",
+      "sha256": "8fabf1882d1d04fa2912bfa7545d4c1216a23e964d0981b1addc7042f43b33ca",
+      "mtime": "2026-08-27T23:30:44+08:00",
+      "status": "byte_identical"
+    },
+    {
+      "path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/raw/breadth_overlay/a_share_breadth_33y_snapshot.json",
+      "sha256": "8fabf1882d1d04fa2912bfa7545d4c1216a23e964d0981b1addc7042f43b33ca",
+      "status": "byte_identical_copy_not_independent_source"
+    }
+  ],
+  "generation_log": {
+    "path": "scripts/logs/backfill_breadth_cn_20260827_r3.log",
+    "finished_at": "2026-08-27T22:39:07+08:00",
+    "input_shape": [8707, 5207],
+    "universe_count": 5543,
+    "todo_count": 336,
+    "todo_success_count": 0,
+    "output_rows": 8109,
+    "output_first_date": "1993-04-22",
+    "output_last_date": "2026-08-18",
+    "binding": "high_confidence_metadata_match_without_output_hash"
+  },
+  "universe": {
+    "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_codes_cached.json",
+    "sha256_current": "cf6ea5486a358be0cba7e74d2de3ee10a782237b2faea8862864ba6b29e8a237",
+    "mtime": "2026-08-16T23:57:54+08:00",
+    "count": 5543,
+    "unique_count": 5543,
+    "construction_in_code": "ak.stock_info_a_code_name(), then six-digit filter",
+    "membership_model": "single_current_universe_retrojected_over_history",
+    "has_point_in_time_membership": false,
+    "has_listing_delisting_events": false,
+    "binding": "log path and count match; current bytes observed with an earlier mtime, but no universe hash was recorded by the run"
+  },
+  "price_panel": {
+    "expected_path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_klines_full.parquet",
+    "generation_log_shape": [8707, 5207],
+    "original_input_preserved": false,
+    "current_shape": [8714, 5211],
+    "current_sha256": "5ad045c518d0bb4394d8c8cb946d207ad9b5b1454e5a776b1a3766c62b475b04",
+    "current_mtime": "2026-08-28T00:08:04+08:00",
+    "reason_not_bound": "current file is newer than generation and has different shape"
+  },
+  "price_source_rule": {
+    "api": "ak.stock_zh_a_daily",
+    "upstream_named_by_script": "akshare Sina source",
+    "field": "close",
+    "adjust": "qfq",
+    "raw_vendor_response_preserved": false,
+    "adjustment_factor_snapshot_preserved": false,
+    "impact_on_price_above_ma": "unknown; missing version prevents reproduction, but qfq alone does not prove future-information impact because a uniform scale leaves price-above-MA unchanged"
+  },
+  "breadth_rule": {
+    "windows": [20, 50, 200],
+    "internal_gap_handling": "forward-fill for moving-average calculation only",
+    "eligibility": "original close non-null and moving average non-null on date",
+    "minimum_eligible_per_window": 50,
+    "pre_listing_handling": "leading nulls remain null and are excluded",
+    "point_in_time_delisting_handling": "not implemented",
+    "artifact_binding": "code evidence only; run did not record script hash"
+  },
+  "code_provenance": {
+    "script_path": "scripts/backfill_breadth_full.py",
+    "first_git_commit": "407573b453232840bf84d84208ff4ef370620b5d",
+    "first_git_commit_time": "2026-08-23T23:58:00+08:00",
+    "actual_executed_sha_recorded": false,
+    "environment_versions_recorded": false
+  },
+  "claims": [
+    {
+      "claim": "The archived artifact is byte-identical to the retained full-history result file",
+      "status": "confirmed"
+    },
+    {
+      "claim": "The 2026-08-27 r3 run produced the archived bytes",
+      "status": "strongly_supported_not_hash_bound"
+    },
+    {
+      "claim": "The current price panel is the exact generation input",
+      "status": "refuted_by_timestamp_and_shape"
+    },
+    {
+      "claim": "The series is point-in-time all-A breadth including historical delistings",
+      "status": "not_supported"
+    },
+    {
+      "claim": "The series uses qfq close prices under the retained generator rule",
+      "status": "supported_by_code_not_artifact_metadata"
+    },
+    {
+      "claim": "Any era can be unconditionally certified as point-in-time all-A",
+      "status": "not_supported"
+    }
+  ],
+  "supported_periods": {
+    "artifact_values": "B20 1993-04-22..2026-08-18; B50 1993-05-24..2026-08-18; B200 1993-12-21..2026-08-18",
+    "conditional_description": "history calculated from the 2026-era cached universe and available cached price columns",
+    "unconditional_point_in_time_all_a": null,
+    "legacy_b9_frozen_input_window": "2015-06-16..2026-08-18, conditional historical example only"
+  },
+  "minimum_gaps": [
+    "Recover or declare unrecoverable the 8707x5207 panel used before 2026-08-27T22:39:07+08:00 and record its SHA256",
+    "Freeze the candidate universe with hash, fetch timestamp, akshare version and upstream response provenance",
+    "Bind executed script bytes, Git commit and Python/pandas/akshare/pyarrow versions",
+    "Add point-in-time listing, delisting, suspension and market-migration membership events",
+    "Freeze price/adjustment inputs and acquisition timestamps",
+    "Emit a sidecar manifest with all input hashes, code identity, generation time and daily denominator counts"
+  ],
+  "search_limit_reached": true
+}

@@ -1,0 +1,166 @@
+{
+  "account_checks": {
+    "sh510300:hold": {
+      "account_id": "sh510300-hold-fee0.001",
+      "reported_final_equity": 161227.9692,
+      "daily_last_equity": 161227.9692,
+      "reported_max_drawdown_abs": 0.4502663165325872,
+      "daily_recomputed_max_drawdown": 0.4502663165325872,
+      "reported_buys_plus_sells": 1,
+      "trade_rows": 1
+    },
+    "sh510300:breadth_three_tier": {
+      "account_id": "sh510300-breadth_three_tier-fee0.001",
+      "reported_final_equity": 245024.6469,
+      "daily_last_equity": 245024.6469,
+      "reported_max_drawdown_abs": 0.309440206807735,
+      "daily_recomputed_max_drawdown": 0.309440206807735,
+      "reported_buys_plus_sells": 98,
+      "trade_rows": 98
+    },
+    "sh510300:H1_weekly_binary_hysteresis": {
+      "account_id": "sh510300-H1_weekly_binary_hysteresis-fee0.001",
+      "reported_final_equity": 245119.4939,
+      "daily_last_equity": 245119.4939,
+      "reported_max_drawdown_abs": 0.30955750201307897,
+      "daily_recomputed_max_drawdown": 0.30955750201307897,
+      "reported_buys_plus_sells": 49,
+      "trade_rows": 49
+    },
+    "sh510300:H2_weekly_breadth_trend_participation": {
+      "account_id": "sh510300-H2_weekly_breadth_trend_participation-fee0.001",
+      "reported_final_equity": 237630.5985,
+      "daily_last_equity": 237630.5985,
+      "reported_max_drawdown_abs": 0.37160249251316635,
+      "daily_recomputed_max_drawdown": 0.37160249251316635,
+      "reported_buys_plus_sells": 54,
+      "trade_rows": 54
+    },
+    "sz159915:hold": {
+      "account_id": "sz159915-hold-fee0.001",
+      "reported_final_equity": 305994.1776,
+      "daily_last_equity": 305994.1776,
+      "reported_max_drawdown_abs": 0.6955747344221259,
+      "daily_recomputed_max_drawdown": 0.6955747344221259,
+      "reported_buys_plus_sells": 1,
+      "trade_rows": 1
+    },
+    "sz159915:breadth_three_tier": {
+      "account_id": "sz159915-breadth_three_tier-fee0.001",
+      "reported_final_equity": 395056.0335,
+      "daily_last_equity": 395056.0335,
+      "reported_max_drawdown_abs": 0.3733560529469302,
+      "daily_recomputed_max_drawdown": 0.3733560529469302,
+      "reported_buys_plus_sells": 98,
+      "trade_rows": 98
+    },
+    "sz159915:H1_weekly_binary_hysteresis": {
+      "account_id": "sz159915-H1_weekly_binary_hysteresis-fee0.001",
+      "reported_final_equity": 393688.4891,
+      "daily_last_equity": 393688.4891,
+      "reported_max_drawdown_abs": 0.37300096405458083,
+      "daily_recomputed_max_drawdown": 0.37300096405458083,
+      "reported_buys_plus_sells": 49,
+      "trade_rows": 49
+    },
+    "sz159915:H2_weekly_breadth_trend_participation": {
+      "account_id": "sz159915-H2_weekly_breadth_trend_participation-fee0.001",
+      "reported_final_equity": 447877.6384,
+      "daily_last_equity": 447877.6384,
+      "reported_max_drawdown_abs": 0.534822551683725,
+      "daily_recomputed_max_drawdown": 0.534822551683725,
+      "reported_buys_plus_sells": 49,
+      "trade_rows": 49
+    }
+  },
+  "width_h1_h2_comparisons": [
+    {
+      "symbol": "sh510300",
+      "width_minus_hold": 83796.6777,
+      "h1_minus_width": 94.84700000000885,
+      "h2_minus_width": -7394.0484,
+      "width_trade_rows": 98,
+      "h1_trade_rows": 49,
+      "h2_trade_rows": 54
+    },
+    {
+      "symbol": "sz159915",
+      "width_minus_hold": 89061.85590000002,
+      "h1_minus_width": -1367.5444000000134,
+      "h2_minus_width": 52821.60489999998,
+      "width_trade_rows": 98,
+      "h1_trade_rows": 49,
+      "h2_trade_rows": 49
+    }
+  ],
+  "dca_check": {
+    "quarterly": {
+      "last_equity": 1822644.6340000003,
+      "max_drawdown_from_nav": 0.28792662485103393,
+      "dated_contribution_annualized_recomputed": 0.1445629114842092,
+      "positive_contribution_dates": 674
+    },
+    "hold": {
+      "last_equity": 1772556.0425,
+      "max_drawdown_from_nav": 0.33837259805515285,
+      "dated_contribution_annualized_recomputed": 0.1406893749563306,
+      "positive_contribution_dates": 674
+    },
+    "quarterly_minus_hold": 50088.59150000033,
+    "drawdown_improvement_pp": 5.044597320411892,
+    "reported_annualized_difference_pp": 0.3873536527878585,
+    "independently_recomputed_annualized_difference_pp": 0.3873536527878585
+  },
+  "invested_capital_two_path_checks": [
+    {
+      "account_id": "sh510300-R1-fee10bp",
+      "trade_factor_product": 1.583042979589652,
+      "curve_last_value": 1.5830429795896517,
+      "difference": 2.220446049250313e-16,
+      "calendar_span_days": 4198,
+      "calendar_annualized_recomputed": 0.040775369659703076,
+      "max_drawdown_recomputed": 0.25226235192847757,
+      "idle_consecutive_pairs": 1921,
+      "idle_pairs_unchanged": 1921,
+      "all_idle_pairs_unchanged": true
+    },
+    {
+      "account_id": "sz159915-R1-risk1-fee20bp",
+      "trade_factor_product": 5.000679102330771,
+      "curve_last_value": 5.000679102330776,
+      "difference": -4.440892098500626e-15,
+      "calendar_span_days": 4198,
+      "calendar_annualized_recomputed": 0.1503222447005268,
+      "max_drawdown_recomputed": 0.5114568862146016,
+      "idle_consecutive_pairs": 2023,
+      "idle_pairs_unchanged": 2023,
+      "all_idle_pairs_unchanged": true
+    }
+  ],
+  "full_vs_reduced_size_pair_summary_from_saved_results": [
+    {
+      "symbol": "sh510300",
+      "fee_per_side": 0.001,
+      "max_daily_curve_difference": 2.6645352591003757e-15,
+      "same_unit_capital_performance": true
+    },
+    {
+      "symbol": "sh510300",
+      "fee_per_side": 0.002,
+      "max_daily_curve_difference": 4.440892098500626e-15,
+      "same_unit_capital_performance": true
+    },
+    {
+      "symbol": "sz159915",
+      "fee_per_side": 0.001,
+      "max_daily_curve_difference": 4.440892098500626e-15,
+      "same_unit_capital_performance": true
+    },
+    {
+      "symbol": "sz159915",
+      "fee_per_side": 0.002,
+      "max_daily_curve_difference": 9.769962616701378e-15,
+      "same_unit_capital_performance": true
+    }
+  ]
+}

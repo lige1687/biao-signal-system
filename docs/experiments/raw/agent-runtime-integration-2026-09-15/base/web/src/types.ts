@@ -1,0 +1,2780 @@
+// 与后端 lei_signal/api/schemas.py 对齐的 DTO 类型。
+
+export interface SparkPoint {
+  date: string;
+  close: number;
+}
+
+export interface Explanation {
+  title: string;
+  definition: string;
+  formula: string;
+  usage: string;
+  invalidation: string;
+  next_step: string;
+  caveat: string;
+}
+
+export interface StructureBrief {
+  structure_id: string;
+  structure_type: string;
+  structure_type_cn: string;
+  side: "bottom" | "top";
+  status: string;
+  status_cn: string;
+  c_price: number | null;
+  neckline: number | null;
+  detected_date: string;
+  confirmed_date: string | null;
+  invalidated_date: string | null;
+  invalidated_reason: string | null;
+  distance_to_c_pct: number | null;
+  explanation: Explanation | null;
+}
+
+export interface EventItem {
+  event_id: string;
+  rule_id: string;
+  rule_cn: string;
+  sub_rule: string | null;
+  sub_rule_cn: string | null;
+  direction: string;
+  direction_cn: string;
+  severity: string;
+  severity_cn: string;
+  reason_cn: string;
+  event_date: string;
+  available_date: string;
+  structure_id: string | null;
+  lifecycle_id: string | null;
+  is_new_today: boolean;
+  evidence: Record<string, unknown>;
+  invalidation: Record<string, unknown>;
+  explanation: Explanation | null;
+}
+
+export interface Card {
+  symbol: string;
+  display_name: string;
+  market_cn: string;
+  group: "index" | "watchlist";
+  price: number | null;
+  prev_close: number | null;
+  change_pct: number | null;
+  data_time: string | null;
+  last_bar_date: string | null;
+  is_intraday_forming: boolean;
+  provider: string | null;
+  stale: boolean;
+  error: string | null;
+  persist_warning: string | null;
+  color: string | null;
+  color_cn: string | null;
+  color_since: string | null;
+  color_days: number | null;
+  key_change_cn: string | null;
+  key_change_date: string | null;
+  stage: string | null;
+  stage_cn: string | null;
+  risk_state: string | null;
+  risk_state_cn: string | null;
+  primary_structure: StructureBrief | null;
+  b1_price: number | null;
+  distance_to_b1_pct: number | null;
+  sparkline: SparkPoint[];
+}
+
+export interface DashboardResponse {
+  generated_at: string;
+  quote_ttl_seconds: number;
+  cards: Card[];
+  disclaimer_cn: string;
+}
+
+export interface WatchlistItem {
+  symbol: string;
+  display_name: string | null;
+  market: string;
+  market_cn: string;
+  note: string | null;
+  sort_order: number;
+  added_at: string;
+  group_id: number | null;
+}
+
+export interface WatchlistGroup {
+  group_id: number | null;
+  name: string;
+  sort_order: number;
+  builtin: boolean;
+  symbols: string[];
+}
+
+export interface Metric {
+  key: string;
+  label_cn: string;
+  value: number | null;
+  text: string | null;
+  unit: string;
+  tone: "neutral" | "up" | "down" | "warn";
+  hint_cn: string;
+  concept: string | null;
+}
+
+export interface TodayOverview {
+  as_of: string;
+  quote_available: boolean;
+  quote_note_cn: string;
+  price: Metric[];
+  technical: Metric[];
+  volume: Metric[];
+  capital: Metric[];
+  signal: Metric[];
+}
+
+export interface ColorPerformance {
+  key: string;
+  label_cn: string;
+  sample_count: number;
+  win_rate: number | null;
+  mean_return: number | null;
+  median_return: number | null;
+  mean_mfe: number | null;
+  mean_mae: number | null;
+  mean_holding_days: number | null;
+}
+
+export interface ColorBacktestSide {
+  side: "long" | "short";
+  title_cn: string;
+  entry_rule_cn: string;
+  exit_rule_cn: string;
+  total_signals: number;
+  open_trades: number;
+  stats: ColorPerformance[];
+}
+
+export interface ColorBacktest {
+  start_date: string;
+  end_date: string;
+  total_bars: number;
+  long: ColorBacktestSide;
+  short: ColorBacktestSide;
+  methodology_cn: string;
+}
+
+export interface PullbackPerformance {
+  key: string;
+  label_cn: string;
+  sample_count: number;
+  incomplete_count: number;
+  win_rate: number | null;
+  mean_return: number | null;
+  median_return: number | null;
+  mean_mfe: number | null;
+  mean_mae: number | null;
+  mean_holding_days: number | null;
+}
+
+export interface PullbackBacktestSide {
+  ma_period: number;
+  title_cn: string;
+  entry_rule_cn: string;
+  exit_rule_cn: string;
+  total_signals: number;
+  open_trades: number;
+  stats: PullbackPerformance[];
+}
+
+export interface PullbackBacktest {
+  start_date: string;
+  end_date: string;
+  total_bars: number;
+  research_disclaimer_cn: string;
+  sides: PullbackBacktestSide[];
+}
+
+export interface ScenarioBacktestSide {
+  key: string;
+  title_cn: string;
+  entry_rule_cn: string;
+  exit_rule_cn: string;
+  total_signals: number;
+  open_trades: number;
+  stats: PullbackPerformance[];
+}
+
+export interface ScenarioBacktest {
+  scenario_id: string;
+  scenario_cn: string;
+  start_date: string;
+  end_date: string;
+  total_bars: number;
+  research_disclaimer_cn: string;
+  sides: ScenarioBacktestSide[];
+}
+
+export interface ConditionalScenario {
+  scenario_id: string;
+  scenario_cn: string;
+  direction: "long" | "short";
+  direction_cn: string;
+  state: "watch" | "confirmed" | "weakened" | "invalidated";
+  state_cn: string;
+  anchor_date: string;
+  trigger_date: string | null;
+  latest_date: string;
+  key_price: number;
+  reference_price: number | null;
+  distance_pct: number | null;
+  current_conditions_confirmed: boolean;
+  satisfied_conditions: string[];
+  missing_conditions: string[];
+  next_step_cn: string;
+  invalidation_cn: string;
+  caveat_cn: string;
+  research_proxy: boolean;
+  explanation: Explanation | null;
+  supporting_event: EventItem | null;
+  reward_risk_ratio: number | null;
+  reward_risk_target: number | null;
+  reward_risk_target_source_cn: string | null;
+  reward_risk_computable: boolean;
+}
+
+export interface ResolveResult {
+  symbol: string;
+  market: string;
+  market_cn: string;
+  bare_code: string;
+  timezone: string;
+  display_name: string | null;
+  probe_ok: boolean | null;
+  probe_error: string | null;
+}
+
+export interface Factor {
+  dimension: string;
+  label_cn: string;
+  detail_cn: string;
+  rule_id: string;
+}
+
+export interface RiskAlert {
+  priority: number;
+  code: string;
+  label_cn: string;
+  detail_cn: string;
+}
+
+export interface PullbackOpportunity {
+  state: "watch" | "confirmed";
+  state_cn: string;
+  ma_period: number;
+  ma_name: string;
+  lifecycle_id: string;
+  trend_anchor_date: string;
+  touch_date: string;
+  confirmed_date: string | null;
+  latest_date: string;
+  ma_value: number;
+  close: number;
+  distance_to_ma_pct: number;
+  current_conditions_confirmed: boolean;
+  satisfied_conditions: string[];
+  missing_conditions: string[];
+  next_step_cn: string;
+  invalidation_cn: string;
+  research_proxy: boolean;
+  explanation: Explanation | null;
+  supporting_event: EventItem | null;
+  reward_risk_ratio: number | null;
+  reward_risk_target: number | null;
+  reward_risk_target_source_cn: string | null;
+  reward_risk_computable: boolean;
+}
+
+export interface TradeOpportunity {
+  direction: "long";
+  direction_cn: string;
+  state: "watch" | "confirmed" | "weakened";
+  state_cn: string;
+  structure: StructureBrief;
+  lifecycle_id: string;
+  reached_tier: string;
+  reached_tier_cn: string;
+  reached_tier_rank: number;
+  opened_on: string;
+  last_upgraded_on: string;
+  is_buy_reference: boolean;
+  is_active: boolean;
+  current_conditions_confirmed: boolean;
+  satisfied_conditions: string[];
+  missing_conditions: string[];
+  next_step_cn: string;
+  invalidation_cn: string;
+  b1_price: number | null;
+  distance_to_b1_pct: number | null;
+  explanation: Explanation | null;
+  supporting_event: EventItem | null;
+}
+
+export interface ExitSignal {
+  rule_id: string;
+  rule_cn: string;
+  sub_rule: string | null;
+  sub_rule_cn: string | null;
+  direction: string;
+  direction_cn: string;
+  state: "active" | "inactive";
+  state_cn: string;
+  last_trigger_date: string | null;
+  close: number | null;
+  reference_values: Record<string, number>;
+  reason_cn: string;
+  invalidation_cn: string;
+  research_proxy: boolean;
+  explanation: Explanation | null;
+  supporting_event: EventItem | null;
+}
+
+export interface ConditionCheck {
+  code: string;
+  label_cn: string;
+  blocked: boolean;
+  detail_cn: string;
+}
+
+export interface Tradability {
+  trend_type: string;
+  trend_type_cn: string;
+  tradable: boolean;
+  blocking_reasons: string[];
+  condition_checks: ConditionCheck[];
+  research_proxy: boolean;
+  caveat_cn: string;
+}
+
+export interface Assessment {
+  as_of: string;
+  color: string;
+  color_cn: string;
+  stage: string;
+  stage_cn: string;
+  opportunity_stage: string;
+  opportunity_stage_cn: string;
+  risk_state: string;
+  risk_state_cn: string;
+  stage_change_reason_cn: string;
+  dimensions: Record<string, string>;
+  supports: Factor[];
+  conflicts: Factor[];
+  risks: RiskAlert[];
+  joint_confirmed_now: boolean;
+  trade_opportunities: TradeOpportunity[];
+  pullback_opportunities: PullbackOpportunity[];
+  conditional_scenarios: ConditionalScenario[];
+  exit_signals: ExitSignal[];
+  tradability: Tradability | null;
+}
+
+export interface Meta {
+  provider: string | null;
+  adjusted: boolean | null;
+  data_time: string | null;
+  last_bar_date: string | null;
+  is_intraday_forming: boolean;
+  cache_fallback_used: boolean;
+  cache_age_seconds: number | null;
+  sqlite_persisted: boolean | null;
+  persist_warning: string | null;
+  data_warnings: string[];
+  calendar_note_cn: string;
+}
+
+export interface MarketBadge {
+  summary: string;
+  summary_cn: string;
+  data_status: string;
+  reasons_cn: string[];
+}
+
+export interface MarketContextSnapshot {
+  market_id: string;
+  as_of: string;
+  available_at: string;
+  universe_version: string;
+  breadth_20: number | null;
+  breadth_50: number | null;
+  breadth_200: number | null;
+  breadth_20_delta_5: number | null;
+  breadth_50_delta_5: number | null;
+  breadth_200_delta_20: number | null;
+  coverage_20: number;
+  coverage_50: number;
+  coverage_200: number;
+  constituent_count: number;
+  percentile_20: number | null;
+  percentile_50: number | null;
+  percentile_200: number | null;
+  breadth_direction: string;
+  long_regime: string;
+  heat_state: string;
+  drawdown_from_ath: number | null;
+  market_rv20_ann: number | null;
+  market_rv_pct: number | null;
+  vol_regime: string;
+  summary: string;
+  reasons: string[];
+  conflicts: string[];
+  extreme_events: { event_type: string; evidence: Record<string, unknown>; threshold_origin: string }[];
+  divergence_events: { event_type: string; evidence: Record<string, unknown> }[];
+  naaim_label: string;
+  aaii_label: string;
+  naaim_current_eligible: boolean;
+  aaii_current_eligible: boolean;
+  source_kind: string;
+  provenance: string;
+  data_status: string;
+}
+
+export interface MarketContextFull {
+  symbol: string;
+  as_of: string;
+  summary: string;
+  summary_cn: string;
+  data_status: string;
+  reasons_cn: string[];
+  conflicts_cn: string[];
+  source_kind: string;
+  provenance: string;
+  updated_at: string;
+  snapshots: MarketContextSnapshot[];
+}
+
+export interface BreadthHistoryPoint {
+  date: string;
+  breadth_20: number | null;
+  breadth_50: number | null;
+  breadth_200: number | null;
+  coverage_20: number | null;
+  coverage_50: number | null;
+  coverage_200: number | null;
+}
+
+export interface BreadthHistoryResponse {
+  market_id: string;
+  lookback_days: number;
+  history: BreadthHistoryPoint[];
+}
+
+export interface MarketDataStatus {
+  market_id: string;
+  universe_source: string;
+  universe_source_version: string;
+  universe_source_kind: string;
+  universe_count: number;
+  fixtures_root: string;
+}
+
+export interface BreadthAlert {
+  level: "reversal" | "stage";
+  type: string;
+  title: string;
+  desc: string;
+}
+
+/** 危机管理状态机事件（V4 刚崩警示 danger / V3 出清企稳 opportunity）。 */
+export interface CrisisAlert {
+  level: "danger" | "opportunity";
+  type: "crash_warning" | "capitulation_rebound";
+  title: string;
+  symbol?: string;
+  desc: string;
+}
+
+export interface GlobalPanel {
+  market_id: string;
+  display_name: string;
+  summary: string;
+  summary_cn: string;
+  data_status: string;
+  // 真全A涨跌家数（CN_ALL_A 走真源；标普500 等无此字段）
+  is_real_a_share?: boolean;
+  up?: number | null;
+  down?: number | null;
+  flat?: number | null;
+  total?: number | null;
+  up_pct?: number | null;
+  adv_dec_ratio?: number | null;
+  limit_up?: number | null;
+  limit_down?: number | null;
+  // 冻结快照元信息（CN_ALL_A 宽度来自收盘后预计算的磁盘缓存）
+  breadth_as_of?: string | null;
+  breadth_trading_day?: string | null;
+  breadth_source?: string | null;
+  source_detail?: string;
+  breadth_20: number | null;
+  breadth_50: number | null;
+  breadth_200: number | null;
+  breadth_20_delta_5: number | null;
+  breadth_50_delta_5: number | null;
+  percentile_20: number | null;
+  percentile_50: number | null;
+  long_regime: string;
+  heat_state: string;
+  drawdown_from_ath: number | null;
+  alerts: BreadthAlert[];
+  updated_at: string;
+  /** 危机管理状态机读数（V4 刚崩警示/V3 出清企稳，研究代理，2026-09-04 起）。 */
+  crisis_readings?: CrisisReading[];
+  crisis_alerts?: CrisisAlert[];
+  /** 脆弱性差值（文主任增量 #2，研究代理：个股中位数回撤 vs 指数回撤，只标注不挡信号）。 */
+  vulnerability_as_of?: string;
+  vulnerability_primary?: {
+    index_symbol: string;
+    window: number;
+    spread_pct: number | null;
+    spread_percentile: number | null;
+    fragile: boolean;
+  };
+  vulnerability_readings?: Array<{
+    index_symbol: string;
+    index_name_cn: string;
+    window: number;
+    as_of: string;
+    index_dd_pct: number | null;
+    median_dd_pct: number | null;
+    spread_pct: number | null;
+    spread_percentile: number | null;
+    fragile: boolean;
+    data_status: string;
+    note_cn: string;
+  }>;
+  /** 偏离度分位提醒（文主任增量 #3，路牌：只预警不必然反向）。 */
+  price_deviation_as_of?: string;
+  price_deviation_disclaimer_cn?: string;
+  price_deviation_active_alerts?: Array<{
+    date: string;
+    symbol: string;
+    name_cn: string;
+    ma_window: number;
+    direction: "overheat" | "oversold";
+    percentile: number | null;
+    consecutive_days: number;
+    message_cn: string;
+  }>;
+  price_deviation_readings?: Array<{
+    symbol: string;
+    name_cn: string;
+    ma_window: number;
+    as_of: string;
+    deviation_pct: number | null;
+    percentile_3y: number | null;
+    percentile_5y: number | null;
+    consecutive_extreme_days: number;
+    extreme_direction: string | null;
+    data_status: string;
+    note_cn: string;
+  }>;
+}
+
+/** 危机管理状态机单指数读数（见后端 market_context/crisis_events.py 口径注释）。 */
+export interface CrisisReading {
+  symbol: string;
+  name: string;
+  as_of: string;
+  /** 收盘相对 60 日均线偏离（%）。 */
+  dev60_pct: number;
+  /** 全市场 MA50 上方占比（%）。 */
+  breadth_ma50_now: number;
+  breadth_delta_20: number | null;
+  breadth_pctile_1y: number | null;
+  breadth_delta_5: number | null;
+  breadth_as_of: string;
+  state: "crash_warning" | "capitulation_rebound" | "none";
+}
+
+export interface GlobalStripResponse {
+  panels: GlobalPanel[];
+  /** 投资者情绪（NAAIM/AAII），来自 LEI_SENTIMENT_ROOT，与 Streamlit 市场环境页同源。 */
+  sentiment?: GlobalSentiment;
+}
+
+/** 单个情绪序列（NAAIM 或 AAII）的最新摘要。 */
+export interface GlobalSentimentSeries {
+  /** 分档枚举：extreme_low/low/neutral/high/extreme_high/unknown */
+  label: string;
+  label_cn: string;
+  survey_week: string | null;
+  available_at: string | null;
+  source: string | null;
+  license_status: string | null;
+  current_eligible: boolean;
+  // NAAIM 专用
+  exposure_index?: number | null;
+  percentile?: number | null;
+  // AAII 专用
+  bullish?: number | null;
+  neutral?: number | null;
+  bearish?: number | null;
+  bull_bear?: number | null;
+}
+
+/** 情绪总览：root_set 表示后端是否读到了 LEI_SENTIMENT_ROOT 环境变量。 */
+export interface GlobalSentiment {
+  root_set: boolean;
+  naaim: GlobalSentimentSeries | null;
+  aaii: GlobalSentimentSeries | null;
+}
+
+/** 前端手动录入一期情绪读数（POST /market-context/sentiment）。 */
+export interface SentimentIngest {
+  series: "naaim" | "aaii";
+  survey_week: string;
+  exposure?: number | null;
+  bullish?: number | null;
+  neutral?: number | null;
+  bearish?: number | null;
+  available_at?: string | null;
+}
+
+/** 情绪历史观测（GET /market-context/sentiment/history，周频、按调查周升序）。 */
+export interface SentimentHistoryResponse {
+  series: string;
+  count?: number;
+  error?: string;
+  observations: {
+    survey_week: string;
+    available_at?: string | null; // 发布时间（周四），投影散点按它对齐避免前视
+    label: string;
+    percentile: number | null;
+    exposure_index?: number | null; // NAAIM 专用
+    bullish?: number | null; // AAII 专用
+    neutral?: number | null;
+    bearish?: number | null;
+    bull_bear?: number | null;
+  }[];
+}
+
+/** 真全A市场宽度（涨跌家数 + 可选 MA 上方占比）。
+ *  后端 /market-context/a-share-breadth 返回；来源：腾讯快照+沪深交易所代码列表（涨跌家数）、
+ *  akshare 东财历史K线（MA 占比，需正常网络环境）。 */
+export interface AShareBreadthResponse {
+  as_of: string;
+  up: number;
+  down: number;
+  flat: number;
+  total: number;
+  up_pct: number | null; // 上涨家数占比 %
+  adv_dec_ratio: number | null; // 涨跌比 = up / down
+  limit_up: number;
+  limit_down: number;
+  ma20_pct: number | null; // MA20 上方占比 %（券商金工口径，需联网）
+  ma50_pct: number | null;
+  ma200_pct: number | null;
+  data_status: string; // ok | partial | unavailable
+  source_detail: string;
+}
+
+export interface ForwardStatBucket {
+  n: number;
+  median: number | null;
+  mean: number | null;
+  hit_rate: number | null;
+  min: number | null;
+  max: number | null;
+}
+
+export interface ForwardStatsResponse {
+  market_id: string;
+  percentile: number;
+  bucket_half_width: number;
+  bucket_size: number;
+  min_samples: number;
+  stats: Record<string, ForwardStatBucket>;
+}
+
+// echarts_kline.serialize_result 输出（关键字段）
+export interface ChartPayload {
+  dates: string[];
+  ohlc: [number, number, number, number][]; // [open, close, low, high]
+  ema20: (number | null)[];
+  sma20: (number | null)[];
+  ema60: (number | null)[];
+  ema120: (number | null)[];
+  sma60: (number | null)[];
+  sma120: (number | null)[];
+  ref20: (number | null)[];
+  macdDif: (number | null)[];
+  macdDea: (number | null)[];
+  macdHist: (number | null)[];
+  /** MACD 副图事件日（金叉/死叉/上穿0轴/下穿0轴），后端 macd_strength 规则判定。 */
+  macdEvents: MacdEvent[];
+  /** K 线消息日标记（importance≥6 按交易日聚合），参考层、非交易信号。 */
+  newsMarks?: NewsMark[];
+  states: string[];
+  volumes: number[];
+  volStates: string[];
+  volColors: string[];
+  b1Line: LevelLine | null;
+  bottomLines: LevelLine[];
+  topLines: LevelLine[];
+  bottomMarks: StructureMark[];
+  topMarks: StructureMark[];
+  invalidatedMarks: StructureMark[];
+  keyVolatility: { date: string; state: string; label: string }[];
+  colorMode: string;
+  stateColors: Record<string, string>;
+  priceUp: string;
+  priceDown: string;
+  symbol: string;
+  displayName: string;
+  lastClose: number | null;
+}
+
+/** 图上的水平参考线（B1 / C 点 / 顶部颈线），带身份供点击解释。 */
+export interface LevelLine {
+  yAxis: number;
+  color: string;
+  dash: string;
+  width: number;
+  label_cn?: string;
+  structure_id?: string;
+  structure_type?: string;
+  pivot_date?: string | null;
+  distance_pct?: number | null;
+}
+
+export interface StructureMark {
+  date: string;
+  price: number;
+  label: string;
+  live?: boolean;
+  info: {
+    structure_id: string;
+    structure_type: string;
+    source_rule: string;
+    detected_date: string | null;
+    confirmed_date: string | null;
+    invalidated_date: string | null;
+  };
+}
+
+/** MACD 副图事件日。研究代理：强度描述，不构成买卖点（macd-reading 口径）。 */
+/** K 线消息日标记（后端 news_marks 聚合，importance≥6）。 */
+export interface NewsMark {
+  date: string;
+  direction: string; // bullish | bearish | neutral（当日最高分条目定调）
+  importance: number;
+  count: number;
+  titles: string[];
+}
+
+export interface MacdEvent {
+  date: string;
+  type: "golden_cross" | "death_cross" | "zero_cross_up" | "zero_cross_down";
+  statusCn: string; // 金叉 / 死叉 / 上穿0轴 / 下穿0轴
+  dimension: string; // 支持 / 冲突
+  dif: number;
+  dea: number;
+  hist: number;
+  detailCn: string;
+  /** 盲区补齐：当日 BIAO 颜色（破线）与 EMA20 斜率（均线拐头）。 */
+  colorCn: string;
+  slopeCn: string;
+}
+
+export interface SymbolDetail {
+  symbol: string;
+  display_name: string;
+  market_cn: string;
+  meta: Meta;
+  chart: ChartPayload;
+  assessment: Assessment;
+  new_events: EventItem[];
+  recent_events: EventItem[];
+  live_structures: StructureBrief[];
+  closed_structures: StructureBrief[];
+  market_badge: MarketBadge | null;
+  today: TodayOverview | null;
+  color_backtest: ColorBacktest | null;
+  first_ma_pullback_backtest: PullbackBacktest | null;
+  scenario_backtests: ScenarioBacktest[];
+  concepts: Record<string, Explanation>;
+  mark_concepts: Record<string, string>;
+  disclaimer_cn: string;
+}
+
+// ---- 计划台账 / 监督员 agent（对齐 schemas.py）----
+
+export interface Plan {
+  plan_id: string;
+  symbol: string;
+  module: string; // A/B/C/D
+  direction: string; // long/short
+  entry_rule_id: string | null;
+  entry_lifecycle_id: string | null;
+  entry_trigger_cn: string | null;
+  entry_price_ref: number | null;
+  invalidation_price: number | null;
+  target_b_price: number | null;
+  target_b_source: string | null;
+  reward_risk_at_plan: number | null;
+  valid_until: string;
+  state: string; // draft/armed/entered/exited/...
+  ruleset_version: string;
+  reason: string;
+  thesis_cn: string;
+  invalidation_criteria_cn: string;
+  drawdown_playbook_cn: string;
+  take_profit_plan_cn: string;
+  stop_plan_cn: string;
+  entered_on: string | null;
+  exited_on: string | null;
+  plan_kind: string; // entry | holding_watch
+  take_profit_price: number | null;
+  stop_price: number | null;
+  watch_signal_rule_ids: string[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CreateHoldingWatchPayload {
+  symbol: string;
+  direction: string;
+  ruleset_version: string;
+  valid_until: string;
+  take_profit_plan_cn: string;
+  stop_plan_cn: string;
+  take_profit_price?: number | null;
+  stop_price?: number | null;
+  watch_signal_rule_ids?: string[];
+  entered_on?: string | null;
+  module?: string;
+  reason?: string;
+}
+
+export interface ActionItem {
+  action_id: string;
+  plan_id: string;
+  kind: string; // ENTER/EXIT/REVIEW
+  source_alert_code: string;
+  state: string; // open/done/deferred/expired
+  due_from: string | null;
+  nag_count: number;
+  resume_on: string | null;
+  closed_on: string | null;
+  close_kind: string | null;
+}
+
+export interface PlanAlert {
+  code: string;
+  severity: string; // block/remind/hint
+  rule_id: string | null;
+  evidence: Record<string, unknown>;
+  principle_source: string | null;
+  logic_provenance: string;
+  caveat_cn: string;
+  actionable_from: string;
+  data_as_of: string;
+  next_step_cn: string;
+  action_kind: string | null;
+}
+
+export interface CreatePlanPayload {
+  symbol: string;
+  module: string;
+  direction: string;
+  ruleset_version: string;
+  reason?: string;
+  valid_until?: string;
+  entry_rule_id?: string | null;
+  entry_lifecycle_id?: string | null;
+  entry_trigger_cn?: string | null;
+  entry_price_ref?: number | null;
+  invalidation_price?: number | null;
+  target_b_price?: number | null;
+  target_b_source?: string | null;
+  reward_risk_at_plan?: number | null;
+  thesis_cn?: string;
+  invalidation_criteria_cn?: string;
+  drawdown_playbook_cn?: string;
+  take_profit_plan_cn?: string;
+  stop_plan_cn?: string;
+  /** 03B-R2 契约1：来源绑定（相同编号重复保存返回原 draft） */
+  client_request_id?: string | null;
+  source_session_id?: string | null;
+  source_question_id?: number | null;
+  source_refs?: Record<string, unknown>;
+}
+
+export interface PlanChatReply {
+  reply: string;
+  grounded: boolean;
+  plan_id: string;
+  alerts: PlanAlert[];
+}
+
+/** 草稿符合性核对报告（对齐 ConformanceReportDTO）。 */
+export interface ConformanceReport {
+  can_confirm: boolean;
+  hard_issues: PlanAlert[]; // 阻断确认
+  soft_issues: PlanAlert[]; // 仅提醒
+  system_detected: Record<string, unknown>; // 系统实测 module/direction/场景
+}
+
+/** 编辑 draft 字段的载荷（对齐 DraftUpdateRequest，全可选）。 */
+export interface DraftUpdatePayload {
+  module?: string;
+  direction?: string;
+  valid_until?: string;
+  reason?: string;
+  entry_rule_id?: string | null;
+  entry_lifecycle_id?: string | null;
+  entry_trigger_cn?: string | null;
+  entry_price_ref?: number | null;
+  invalidation_price?: number | null;
+  target_b_price?: number | null;
+  target_b_source?: string | null;
+  reward_risk_at_plan?: number | null;
+  thesis_cn?: string;
+  invalidation_criteria_cn?: string;
+  drawdown_playbook_cn?: string;
+  take_profit_plan_cn?: string;
+  stop_plan_cn?: string;
+  take_profit_price?: number | null;
+  stop_price?: number | null;
+  watch_signal_rule_ids?: string[];
+}
+
+export interface PlansSummary {
+  open_actions: number;
+  active_plans: number;
+  today_opportunities: number;
+  today_signal_total: number;
+}
+
+// ---- 买点审阅 / 扫描 ----
+
+export interface BuyPointCandidate {
+  scenario_id: string;
+  scenario_cn: string;
+  module: string | null;
+  direction: string;
+  state: string;
+  state_cn: string;
+  rule_id: string | null;
+  lifecycle_id: string | null;
+  satisfied_conditions: string[];
+  missing_conditions: string[];
+  key_price: number | null;
+  invalidation_price: number | null;
+  invalidation_cn: string;
+  reward_risk_ratio: number | null;
+  reward_risk_target: number | null;
+  reward_risk_computable: boolean;
+  next_step_cn: string;
+  caveat_cn: string;
+  research_proxy: boolean;
+  last_state_change_date: string | null;
+  opened_date: string | null;
+}
+
+export interface ResonanceGroup {
+  level: number;
+  tolerance_pct: number;
+  rule_ids: string[];
+  candidates: BuyPointCandidate[];
+}
+
+export interface HistoricalStructure {
+  rule_id: string | null;
+  lifecycle_id: string | null;
+  state: string;
+  state_cn: string;
+  scenario_cn: string;
+  direction: string;
+  opened_date: string | null;
+  last_state_change_date: string | null;
+  days_since: number;
+  key_price: number | null;
+  note: string;
+}
+
+export interface WatchCondition {
+  text_cn: string;
+  kind: string; // price | state
+  price: number | null;
+  as_signal_rule_ids: string[];
+}
+
+// ---- Step 2: 提醒订阅 ----
+export type WatchState =
+  | "active"
+  | "pending_confirmation"
+  | "dismissed"
+  | "promoted";
+
+export interface WatchSubscription {
+  watch_id: string;
+  symbol: string;
+  direction: string;
+  module: string;
+  source_candidate_id: string | null;
+  source_rule_id: string | null;
+  level: number | null;
+  watch_kind: string; // price | state
+  watch_text_cn: string;
+  as_signal_rule_ids: string[];
+  state: WatchState;
+  created_at: string;
+  last_checked_at: string | null;
+  triggered_at: string | null;
+  triggered_price: number | null;
+  triggered_reason_cn: string | null;
+  promoted_plan_id: string | null;
+  dismissed_at: string | null;
+  dismissed_reason: string | null;
+}
+
+// ---- Step 3: 从 watch 落计划 (POST /api/watch/{id}/promote) ----
+// 与 src/lei_signal/api/schemas.py:WatchPromoteRequest 字段一一对应.
+// 后端硬编码 plan_kind=entry / ruleset_version=watch_promoted_v1, 客户端不可改.
+export interface PromoteWatchRequest {
+  module?: string | null;
+  direction?: string | null;
+  valid_until: string;              // required (armed 必填)
+  reason: string;                   // required (armed 必填)
+  entry_rule_id?: string | null;
+  entry_lifecycle_id?: string | null;
+  entry_trigger_cn?: string | null;
+  entry_price_ref?: number | null;
+  invalidation_price?: number | null;
+  target_b_price?: number | null;
+  target_b_source?: string | null;
+  reward_risk_at_plan?: number | null;
+  thesis_cn: string;                // required
+  invalidation_criteria_cn: string; // required
+  drawdown_playbook_cn: string;     // required
+  take_profit_plan_cn: string;      // required
+  stop_plan_cn: string;             // required
+  watch_signal_rule_ids?: string[] | null;
+  auto_enter?: boolean;             // 后端默认 true
+}
+
+export interface PromoteWatchResponse {
+  plan: Plan;
+  watch: WatchSubscription;
+}
+
+export interface SubscribeWatchRequest {
+  symbol: string;
+  direction: string;
+  module: string;
+  watch_kind: string;
+  watch_text_cn: string;
+  level: number | null;
+  source_candidate_id: string | null;
+  source_rule_id: string | null;
+  as_signal_rule_ids: string[];
+}
+
+export interface CheckReport {
+  total_active: number;
+  triggered_count: number;
+  triggered_watch_ids: string[];
+  skipped: Array<{ watch_id: string; reason: string }>;
+  checked_at: string;
+}
+
+export interface SuggestedPlan {
+  symbol: string;
+  module: string;
+  direction: string;
+  entry_rule_id: string | null;
+  entry_lifecycle_id: string | null;
+  invalidation_price: number | null;
+  target_b_price: number | null;
+  reward_risk_at_plan: number | null;
+}
+
+export interface BuyPointReview {
+  symbol: string;
+  display_name: string;
+  as_of: string;
+  last_close: number | null;
+  verdict: string; // actionable | blocked | waiting | none
+  verdict_cn: string;
+  summary_cn: string;
+  candidates: BuyPointCandidate[];
+  resonance_groups: ResonanceGroup[];
+  historical_structures: HistoricalStructure[];
+  watch_conditions: WatchCondition[];
+  suggested_plan: SuggestedPlan | null;
+  has_active_plan: boolean;
+  ruleset_version: string;
+  disclaimer_cn: string;
+}
+
+export interface ScanItem {
+  symbol: string;
+  display_name: string;
+  verdict: string;
+  verdict_cn: string;
+  best_scenario_cn: string | null;
+  best_state: string | null;
+  reward_risk_ratio: number | null;
+  reward_risk_computable: boolean;
+  blocking_reasons: string[];
+  missing_summary_cn: string;
+  has_active_plan: boolean;
+  error: string | null;
+}
+
+export interface ScanResponse {
+  generated_at: string;
+  scanned: number;
+  items: ScanItem[];
+}
+
+export interface TodayOpportunityResponse {
+  scan_date: string;
+  scanned: number;
+  generated_at: string;
+  actionable: ScanItem[];
+  waiting: ScanItem[];
+  blocked: ScanItem[];
+}
+
+export interface SignalAlert {
+  symbol: string;
+  display_name: string;
+  tier: "hard" | "warn" | "soft" | string;
+  kind: string;
+  kind_cn: string;
+  title: string;
+  reason_cn: string;
+  is_new: boolean;
+  key_prices: Record<string, number>;
+  provenance: string;
+  available_date: string | null;
+}
+
+export interface UnavailableItem {
+  symbol: string;
+  error: string | null;
+}
+
+export interface SignalsToday {
+  scan_date: string;
+  as_of: string | null;
+  generated_at: string;
+  scanned: number;
+  available?: boolean;
+  actionable: ScanItem[];
+  waiting: ScanItem[];
+  blocked: ScanItem[];
+  sell_hard: SignalAlert[];
+  sell_warn: SignalAlert[];
+  sell_soft: SignalAlert[];
+  unavailable: UnavailableItem[];
+}
+
+export interface BuyPointChatReply {
+  reply: string;
+  grounded: boolean;
+  symbol: string;
+  review: BuyPointReview | null;
+}
+
+// ---- 基本面参考层 (/api/fundamentals) ----
+
+export interface MacroIndicator {
+  key: string; // pmi | cpi | ppi
+  name_cn: string;
+  period: string | null;
+  value: number | null;
+  yoy: number | null;
+  note_cn: string;
+}
+
+export interface IndustryBoard {
+  code: string; // 东财 BK 代码
+  name: string;
+  latest: number | null;
+  pct_change: number | null;
+  turnover_rate: number | null;
+  pe_ttm: number | null;
+  total_mv_yi: number | null;
+  main_net_inflow_yi: number | null;
+  main_net_inflow_pct: number | null;
+  up_count: number | null;
+  down_count: number | null;
+}
+
+export interface FundamentalsOverview {
+  generated_at: string;
+  macro: MacroIndicator[];
+  boards: IndustryBoard[];
+  board_count: number;
+  errors: string[];
+  disclaimer_cn: string;
+}
+
+export interface IndustryFlowPoint {
+  date: string;
+  main_yi: number | null;
+  small_yi: number | null;
+  medium_yi: number | null;
+  large_yi: number | null;
+  super_large_yi: number | null;
+}
+
+export interface IndustryFlowResponse {
+  code: string;
+  days: number;
+  points: IndustryFlowPoint[];
+}
+
+// ---- 利率面板 (/api/fundamentals/rates) ----
+
+export interface TreasurySide {
+  cn_2y: number | null;
+  cn_5y: number | null;
+  cn_10y: number | null;
+  cn_30y: number | null;
+  cn_10_2_spread: number | null;
+  us_2y: number | null;
+  us_5y: number | null;
+  us_10y: number | null;
+  us_30y: number | null;
+  us_10_2_spread: number | null;
+}
+
+export interface TreasuryYields {
+  as_of_cn: string | null;
+  as_of_us: string | null;
+  cn: TreasurySide;
+  us: TreasurySide;
+  cn_us_spread_10y: number | null;
+}
+
+export interface RatesResponse {
+  treasury: TreasuryYields;
+  vix: { value: number; as_of: string } | null;
+  margin: MarginData | null;
+  /** 股债收益差（Fed Model 口径）= 盈利收益率(1/PE_TTM×100) − 10Y 国债收益率（%）。 */
+  erp: { us: ErpData | null; cn: ErpData | null };
+  /** 估值分位对照（不受利率水平污染），用于校正股债收益差的债券端污染。 */
+  valuation: { us_cape: ValuationData | null; cn_pe: ValuationData | null };
+  errors: string[];
+}
+
+/**
+ * 估值分位快照。
+ *
+ * percentile 用标定窗口（口径可比），percentile_full 用全史（长周期背景）——
+ * 两个都给，因为分位是取样窗口的函数，只报一个会误导。
+ */
+export interface ValuationData {
+  value: number; // 现值（CAPE 或 PE_TTM，倍）
+  as_of: string;
+  percentile: number; // 标定窗口内分位（0–100，越高越贵）
+  percentile_full: number; // 全史分位
+  calib_from: string; // 标定窗口起始年份，如 "1950"
+  calib_n: number; // 标定窗口样本数
+  full_from: string; // 全史起始年份
+  full_n: number;
+}
+
+/** 股债收益差（Fed Model 口径）单市场快照。ERP 的粗略代理，非严格 ERP。 */
+export interface ErpData {
+  earnings_yield: number; // 盈利收益率 %（1 / PE_TTM × 100）
+  risk_free: number; // 10Y 国债收益率 %
+  erp: number; // 股债收益差 %（= earnings_yield − risk_free）
+  as_of: string | null;
+  pe_ttm?: number | null; // A 股含 PE_TTM，美股无此字段
+  ey_source: string; // 盈利收益率数据来源
+}
+
+// ---- 宏观利率历史序列（趋势图）----
+export interface RatesHistorySeries {
+  label: string;
+  unit: string;
+  dates: string[];
+  values: number[];
+}
+
+export interface RatesHistoryResponse {
+  as_of: string;
+  series: Record<string, RatesHistorySeries>;
+  errors: string[];
+}
+
+// ---- 宏观月度历史序列（PMI/CPI/PPI，趋势图）----
+export interface MacroHistoryResponse {
+  as_of: string;
+  series: Record<string, RatesHistorySeries>;
+  errors: string[];
+}
+
+// ---- 资金面 / 商品 / ETF 相对强度 ----
+
+export interface MarginData {
+  date: string;
+  rzye_yi: number | null; // 融资余额（亿）
+  rqye_yi: number | null; // 融券余额（亿）
+  rzrqye_yi: number | null; // 融资融券余额（亿）
+  buy_yi: number | null; // 融资买入额（亿）
+  rzyezb_pct: number | null; // 融资余额占流通市值比（%）--标准风险口径
+}
+
+export interface CommodityRatios {
+  copper_gold: number;
+  crude_gold: number;
+  copper: number;
+  gold: number;
+  crude: number;
+}
+
+export interface EtfItem {
+  code: string;
+  name: string;
+  bias: string; // risk_on | risk_off | neutral
+  ret_1m: number;
+  rel_1m: number; // 相对 SPY 的超额（%）
+  rel_line?: number[]; // 相对净值线（ETF/SPY 比价，起点=100）
+}
+
+// 可选/必选消费比价（XLY/XLP）：升 = 风险偏好、降 = 避险
+export interface XlyXlpRatio {
+  ratio: number;
+  chg_1m: number; // 比价 1 月变化（%）
+  chg_3m: number; // 比价 3 月变化（%）
+}
+
+// ---- 美国宏观（FRED 公开 CSV，就业/房产/汽车/WEI/物价/订单/信用利差）----
+export interface UsMacroItem {
+  key: string;
+  name_cn: string;
+  freq: string; // 周 | 月 | 日
+  date: string | null;
+  value: number | null;
+  note_cn: string;
+}
+
+export interface UsMacroResponse {
+  as_of: string | null;
+  items: UsMacroItem[];
+  series: Record<string, RatesHistorySeries>;
+  errors: string[];
+}
+
+// ---- 指标×股指 相关性图谱 (/api/fundamentals/correlation-map, research_proxy) ----
+export interface CorrelationRow {
+  indicator: string;
+  index: string;
+  n: number;
+  crit: number; // 5% 显著线
+  r_same: number | null;
+  r_lead1: number | null;
+  r_lead3: number | null;
+  r_index_leads: number | null;
+  kind: 'leading' | 'lagging' | 'mirror' | 'null';
+  kind_cn: string;
+  explain_cn: string;
+}
+
+export interface CorrelationMapResponse {
+  ok: boolean;
+  as_of: string;
+  method_cn: string;
+  rows: CorrelationRow[];
+  note_cn: string;
+}
+
+// ---- 仓位带建议 (/api/fundamentals/position-band, research_proxy) ----
+export interface PositionBandEvidence {
+  zone: string;
+  fwd_months: number;
+  n: number;
+  median_pct: number;
+  win_rate_pct: number;
+  annualized_pct: number;
+}
+
+export interface PositionBandStrategy {
+  key: string;
+  name: string;
+  cagr_pct: number;
+  vol_pct: number;
+  maxdd_pct: number;
+  sharpe: number;
+  final_x: number;
+}
+
+export interface PositionBandBacktest {
+  from: string;
+  to: string;
+  months: number;
+  band_turns: number;
+  strategies: PositionBandStrategy[];
+  curve_dates: string[];
+  curves: Record<string, number[]>;
+  note_cn: string;
+}
+
+export interface PositionBandResponse {
+  ok: boolean;
+  error?: string;
+  backtest?: PositionBandBacktest;
+  as_of: string;
+  erp: number;
+  zone: number; // 0=减仓带 1=中性 2=中性偏多 3=加仓带
+  zone_cn: string;
+  zone_tone: string;
+  action_cn: string;
+  delta_pp: number;
+  percentile_5y: number | null;
+  sample: { from: string; to: string; days: number };
+  evidence: PositionBandEvidence[];
+  rules_cn: string[];
+  caveats_cn: string[];
+}
+
+// ---- 行业板块趋势工作台 (/api/sectors, research_proxy) ----
+// 判定均为研究代理，不冒充 BIAO 原始规则，不出买卖点。
+export interface SectorTrendRow {
+  code: string;
+  name: string;
+  level: 1 | 2 | 3;
+  aliases: string[];
+  parent: string | null;
+  member_count: number;
+  hit_count: number;
+  // 阶段：②上升=markup / ①筑底=accumulation / ③派发=distribution / ④下降=decline / null=样本不足
+  stage: "accumulation" | "markup" | "distribution" | "decline" | null;
+  stage_basis: string[];
+  // 道路层观察点（策略溯源 trading-spec §2.2「均线方向是道路」，research_proxy）
+  dist_to_sma60_pct: number | null; // (价格/SMA60−1)×100，负值=距上穿还差多少
+  checkpoints: SectorCheckpoint[]; // 道路确立三条件清单
+  next_watch: string | null; // 一句话「下一观察点」
+  next_watch_kind: "upgrade" | "risk" | "watch" | null;
+  rs_pctile: number | null;
+  rs_pctile_delta_20: number | null;
+  rs_chg_20: number | null;
+  rs_chg_60: number | null;
+  rs_above_ma20: boolean | null;
+  b20: number | null;
+  b50: number | null;
+  b200: number | null; // MA200 留痕中（320 日窗口内仅 121 天），前端显示「留痕中」
+  nh60: number | null;
+  breadth_divergence: boolean;
+  signal_color: string | null; // green | gray | black | unknown
+  signal_color_cn: string | null;
+  ema20_slope_pct: number | null; // 跨板块可排序（百分比口径）
+  long_trend_cn: string | null;
+  macd_status: string | null;
+  macd_label_cn: string | null;
+  macd_detail_cn: string | null;
+  macd_dimension: string | null;
+  alignment_cn: string | null;
+  close: number | null; // 板块等权指数最新收盘（供抽屉主图）
+  // 当日参考（来自 clist 快照，非趋势判定依据）
+  pct_change: number | null;
+  pe_ttm: number | null;
+  main_net_inflow_yi: number | null;
+  up_count: number | null;
+  down_count: number | null;
+  total_mv_yi: number | null;
+  // 资金流（单据规模代理：主力=超大+大单、散户=中+小单；research_proxy，只交叉验证不参与判定）
+  flow_5d_main_yi: number | null;
+  flow_20d_main_yi: number | null;
+  flow_60d_main_yi: number | null;
+  flow_5d_retail_yi: number | null;
+  flow_20d_retail_yi: number | null;
+  flow_60d_retail_yi: number | null;
+  flow_20d_struct: string | null;
+  flow_note_cn: string | null;
+  flow_vs_stage: "confirm" | "conflict" | null;
+  flow_vs_stage_cn: string | null;
+  // 散户热度（资金面路牌预警，research_proxy；口径与阈值登记 rules.v2.yaml retail_heat 段）
+  heat_value: number | null; // 口径 20 日均值（小单−超大单分化 / 市值，无量纲）
+  heat_pctile: number | null; // 当日全部有效板块横截面分位 0-100（平均秩）
+  heat_hot: boolean; // 风险区：分位 ≥ hot_pctile（散户狂买·超大单派发）
+  heat_cold: boolean; // 机会区：分位 ≤ cold_pctile（散户割肉·超大单吸筹）
+  heat_warning: boolean; // 过热 × 阶段 ∈ {上升, 派发} 的情境化警示
+  heat_note_cn: string | null;
+  // 散户情绪终版信号（实验 retail-sentiment-ts 终裁，research_proxy）
+  sig_retail_z: number | null; // 散户流入强度 20日均值 z（自身120日基准，腾讯聚合源）
+  sig_icepoint_pick: boolean; // 冰点机会：全A冰点×板块跌10%+×散户逆势涌入×b50<30
+  sig_heat_alarm: boolean; // 强势散户热警报：散户z≥1.5×b50>70×b200>70
+  sig_note_cn: string | null;
+  provenance: "research_proxy";
+}
+
+/** 快照级散户热度口径元信息（/api/sectors/trend 响应的 heat 段） */
+export interface SectorHeatMeta {
+  metric: string;
+  metric_label_cn: string;
+  window_days: number;
+  pctile_pool: string; // 分位排名池（l1_l2 = 仅一、二级行业）
+  hot_pctile: number;
+  cold_pctile: number | null;
+  warn_stages: string[];
+  rule_version: string;
+  n_valid: number;
+  n_pool: number;
+  note_cn: string;
+}
+
+export interface SectorTrendResponse {
+  as_of: string;
+  date: string;
+  trading_day: string;
+  bench: { all_equal_close: number | null; hs300_close: number | null };
+  heat: SectorHeatMeta;
+  boards: SectorTrendRow[];
+  warnings: string[];
+  errors: string[];
+  research_proxy_note: string; // 常驻声明：等权合成/当前成分回溯含前视/不含北交所/MA200留痕中
+}
+
+export interface SectorHistoryPoint {
+  date: string;
+  close: number | null;
+  b50: number | null;
+  rs_pctile: number | null;
+  rs_pctile_delta_20: number | null;
+  stage: string | null;
+}
+
+export interface SectorMembersResponse {
+  as_of: string;
+  code: string;
+  name: string | null;
+  members: {
+    symbol: string;
+    name: string | null;
+    pct_change: number | null;
+    market_value_yi: number | null;
+    in_kline_cache: boolean;
+  }[];
+}
+
+// 道路确立三条件（价格>SMA60 / SMA60 斜率向上 / RS 强于基准）
+export interface SectorCheckpoint {
+  key: string;
+  label: string;
+  met: boolean;
+  detail: string | null;
+}
+
+export interface SectorWatchItem {
+  code: string;
+  name: string | null;
+  level: 1 | 2 | 3;
+  stage: string | null;
+  rs_pctile: number | null;
+  rs_pctile_delta_20: number | null;
+  b50: number | null;
+  dist_to_sma60_pct: number | null;
+  next_watch: string | null;
+  next_watch_kind: "upgrade" | "risk" | "watch" | null;
+  stage_basis: string[];
+  // 资金流交叉验证（单据规模代理，research_proxy）
+  flow_20d_main_yi: number | null;
+  flow_20d_retail_yi: number | null;
+  flow_vs_stage: "confirm" | "conflict" | null;
+  flow_vs_stage_cn: string | null;
+  flow_note_cn: string | null;
+}
+
+export interface SectorWatchlistResponse {
+  as_of: string;
+  trading_day: string;
+  groups: {
+    key: string;
+    title: string;
+    desc: string;
+    items: SectorWatchItem[];
+  }[];
+  research_proxy_note: string;
+}
+
+// ---- 收盘简报 (/api/daily-brief, research_proxy) ----
+export interface BriefAnomaly {
+  market: string;
+  metric: string;
+  value: number;
+  pctile_250d: number | null;
+  day_change: number | null;
+  note_cn: string;
+}
+
+/** 自选当前状态快照（后端 extract_symbol_state 原样透传，展示用） */
+export interface BriefWatchState {
+  color: string | null;
+  color_cn: string | null;
+  stage_cn: string | null;
+  risk_state_cn: string | null;
+  dimensions: Record<string, string>;
+  support_rules: string[];
+  conflict_rules: string[];
+  new_event_count: number;
+}
+
+export interface BriefWatchItem {
+  symbol: string;
+  display_name: string | null;
+  verdict: string | null;
+  verdict_cn: string | null;
+  changes: string[];
+  n_changes: number;
+  is_new: boolean;
+  state?: BriefWatchState | null;
+}
+
+export interface BriefPoolItem {
+  code: string;
+  name: string | null;
+  stage: string | null;
+  rs_pctile: number | null;
+  rs_pctile_delta_20: number | null;
+  pe_ttm: number | null;
+  flow_20d_main_yi: number | null;
+  flow_vs_stage_cn: string | null;
+  next_watch: string | null;
+  tags: string[];
+  streak: number;
+}
+
+export interface DailyBriefPayload {
+  date: string;
+  slot: string; // "1445" 盘中预判 | "1645" 收盘复核
+  generated_at: string;
+  env: {
+    anomalies: BriefAnomaly[];
+    breadth_context: {
+      market: string;
+      metric: string;
+      date: string | null;
+      value: number;
+      day_change: number | null;
+      pctile_250d: number | null;
+    }[];
+    macro: {
+      line_cn?: string;
+      raw?: {
+        margin?: { date?: string; rzye_yi?: number; rzrqye_yi?: number; rzyezb_pct?: number } | null;
+        vix?: { value?: number; as_of?: string } | null;
+        cn_us_spread_10y?: number | null;
+      };
+    };
+  };
+  watchlist: {
+    items: BriefWatchItem[];
+    unchanged_count: number;
+    sector_watch_count: number;
+  };
+  pool: { items: BriefPoolItem[]; codes: string[] };
+  summary: { text: string; generated_by: "llm" | "template" };
+}
+
+export interface DailyBriefResponse {
+  date: string;
+  slot: string;
+  brief: DailyBriefPayload;
+  slots_available: string[];
+}
+
+// ---- agent 统一会话（spec 2026-08-23） ----
+
+export interface TraceItem {
+  label: string;
+  rule_id: string | null;
+  evidence_cn: string;
+  research_proxy: boolean;
+  principle_source: string | null;
+}
+
+export interface AgentChatRequest {
+  session_id: string | null;
+  context_kind: "symbol" | "global";
+  symbol: string | null;
+  message: string;
+  client_request_id?: string | null;
+}
+
+export interface AgentChatReply {
+  session_id: string;
+  reply: string;
+  grounded: boolean;
+  trace: TraceItem[];
+  resolved_symbol?: string | null;
+  question_id?: number | null;
+  /** 03B-R2 契约3：服务端四分区证据卡（重试复用同样返回） */
+  evidence_card?: EvidenceCard | null;
+  /** 03B-R3 S5：服务端计划产物（真实 suggested_plan + 字段来源） */
+  plan_artifact?: PlanArtifact | null;
+  /** 03B-R3 S4：回答状态 answered/pending/generating */
+  answer_state?: string | null;
+}
+
+/** 03B-R3 S5：服务端计划产物（模型只解释，不是产物来源） */
+export interface PlanArtifact {
+  kind?: string;
+  artifact_id?: string;
+  question_id?: number | null;
+  session_id?: string | null;
+  symbol?: string | null;
+  fields: Record<string, { value?: unknown; source?: string; note_cn?: string }>;
+  ruleset_ref?: Record<string, unknown>;
+  evidence_refs?: Record<string, unknown>[];
+  rule_refs?: Record<string, unknown>[];
+  created_at?: string;
+  note_cn?: string;
+}
+
+/** 03B-R2 契约3：服务端结构化证据卡（同一产物：模型输入/即时卡/历史恢复）。 */
+export interface EvidenceCard {
+  facts?: {
+    symbol?: string;
+    as_of?: string | null;
+    verdict_cn?: string | null;
+    buy_point_candidate_n?: number;
+  };
+  history_and_scope?: {
+    winrate_evidence?: Record<string, unknown>;
+    matched_runs?: MatchedBacktestRun[];
+    /** 03B-R3 S2：本问题的完整方法比较配置（来源逐项记录） */
+    comparison_config?: Record<string, unknown>;
+    supporting_runs?: string[];
+    note_cn?: string;
+  };
+  explanations?: { kinds?: string[]; note_cn?: string };
+  pending_conditions?: (string | null)[];
+}
+
+export interface MatchedBacktestRun {
+  request_id: string;
+  run_id: string;
+  symbol: string;
+  module: string;
+  exit_variant: string;
+  entry_variant?: string | null;
+  data_cutoff?: string;
+  ruleset_version?: string;
+  completed_at?: string;
+  module_matches_question: boolean;
+  /** 03B-R3 S2：公共引用契约 exact/incompatible/unknown */
+  compatibility?: "exact" | "incompatible" | "unknown" | "reference";
+  supports_question?: boolean;
+  input_verified?: boolean;
+  window_note_cn?: string;
+  run_window?: { data_cutoff?: string; data_range?: Record<string, unknown> };
+  differences_cn: string[];
+  summary?: {
+    trade_count?: number | null;
+    win_rate?: number | null;
+    expectancy_r?: number | null;
+    profit_factor?: number | null;
+    zero_trades?: boolean;
+  };
+  data_range?: { start?: string; end?: string };
+}
+
+// ---------------- 03B：统一解析 + 按需补测（/api/copilot） ----------------
+
+export interface CopilotClarification {
+  kind: string;
+  question_cn: string;
+}
+
+export interface CopilotResolveReply {
+  intent: "discussion" | "trade_report" | "discovery" | "backtest_request" | "existing_action";
+  topic: string;
+  resolved_symbol: string | null;
+  subject_source: string;
+  purpose: string;
+  clarification: CopilotClarification[];
+  discussion_context: {
+    states: { id: string; label_cn: string; missing_behavior: string; forbidden_claims: string[] }[];
+    evidence: Record<string, unknown> | null;
+    active_plan_count: number | null;
+    client_request_id: string | null;
+  };
+}
+
+export interface BacktestRequestStatus {
+  request_id: string;
+  client_request_id: string;
+  session_id: string;
+  question_id: number;
+  symbol: string;
+  method: string;
+  entry_variant: string | null;
+  exit_variant: string;
+  status: "queued" | "running" | "completed" | "failed" | "interrupted";
+  run_id: string;
+  error: string | null;
+  backfilled: boolean;
+  config: Record<string, unknown>;
+  config_hash: string;
+  data_cutoff: string;
+  input_refs: Record<string, unknown>[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AgentSessionDTO {
+  session_id: string;
+  symbol: string | null;
+  title_cn: string;
+  last_active_at: string;
+  last_message_cn: string;
+}
+
+export interface AgentMessageDTO {
+  role: "user" | "assistant";
+  content: string;
+  grounded: boolean;
+  created_at: string;
+  /** 03B-R2 契约1/3：历史可恢复问题归属、证据卡与草稿绑定 */
+  message_id?: number | null;
+  question_id?: number | null;
+  resolved_symbol?: string | null;
+  evidence_card?: EvidenceCard | null;
+  system_generated?: boolean;
+  message_kind?: string;
+  /** 03B-R3 S5：服务端计划产物（历史恢复同一产物） */
+  plan_artifact?: PlanArtifact | null;
+  plan_draft?: { plan_id: string; symbol: string; client_request_id: string } | null;
+}
+
+// ---------------- 回测工作台（/api/backtest） ----------------
+
+export interface BacktestOption {
+  value: number | string | null;
+  label: string;
+}
+
+export interface BacktestModule {
+  value: string;
+  label: string;
+  variants: Record<string, string>;
+}
+
+export interface BacktestOptions {
+  rr_levels: BacktestOption[];
+  modules: BacktestModule[];
+  entry_variants: BacktestOption[];
+  exit_variants: BacktestOption[];
+  fee_labels: BacktestOption[];
+  volume_confirm_windows?: BacktestOption[];
+  profile_filters?: BacktestOption[];
+  defaults: {
+    module?: string;
+    rr_min: number | null;
+    entry_variant: string;
+    exit_variant: string;
+    fee_label: string;
+  };
+  glossary: Record<string, { label: string; tip: string }>;
+  param_specs?: Record<string, {
+    label: string; default: number; levels: number[]; tip: string;
+  }>;
+}
+
+export interface BacktestRunSummary {
+  run_id: string;
+  created_at?: string;
+  status: string;
+  params?: Record<string, unknown>;
+  symbols_count?: number;
+  trade_count?: number | null;
+  expectancy_r?: number | null;
+  profit_factor?: number | null;
+  error?: string;
+}
+
+export interface BacktestMetrics {
+  label: string;
+  trade_count: number;
+  open_count: number;
+  win_rate: number | null;
+  avg_win_r: number | null;
+  avg_loss_r: number | null;
+  expectancy_r: number | null;
+  profit_factor: number | null;
+  max_consecutive_losses: number;
+  max_drawdown_1r: number;
+  avg_holding_bars: number | null;
+  total_r: number | null;
+}
+
+export interface BacktestTrade {
+  symbol: string;
+  entry_variant: string;
+  exit_variant: string;
+  is_first_touch: boolean;
+  ma_period: number;
+  signal_date: string;
+  entry_date: string;
+  entry_price: number;
+  stop_price: number;
+  target_price: number | null;
+  reward_risk: number | null;
+  exit_date: string | null;
+  exit_price: number | null;
+  exit_reason: string | null;
+  holding_bars: number;
+  r_gross: number | null;
+  r_net: number | null;
+  entry_reason?: string;
+}
+
+export interface BacktestRunResult {
+  run_id: string;
+  created_at: string;
+  status: string;
+  disclaimer: string;
+  params: {
+    symbols: string[] | "all";
+    rr_min: number | null;
+    entry_variant: string;
+    exit_variant: string;
+    fee_label: string;
+  };
+  data_range: {
+    start: string;
+    end: string;
+    symbols_count: number;
+    out_of_sample_start: string;
+  };
+  funnel: {
+    touched: number;
+    confirmed: number;
+    filtered_by_rr: number;
+    no_target: number;
+  };
+  groups: Record<"True" | "False", Record<string, BacktestMetrics[]>>;
+  per_symbol: Array<{ symbol: string; bars: number; trades: number }>;
+  trades: BacktestTrade[];
+  error?: string;
+}
+
+// ---- 宽度择时回测（timing backtest）----
+
+export interface TimingInstrument {
+  symbol: string;
+  name: string;
+  market: "cn" | "us";
+  breadth: "cn_all" | "sp500";
+  breadth_label: string;
+  fee_default_bps: number;
+  note: string;
+  data_start: string | null;
+  data_end: string | null;
+  breadth_start: string | null;
+}
+
+export interface TimingPreset {
+  key: string;
+  label: string;
+  description: string;
+  source: string;
+  params: Record<string, string | number | null>;
+}
+
+export interface TimingOptions {
+  instruments: TimingInstrument[];
+  indicators: Array<{ key: string; label: string }>;
+  strategies: {
+    ladder: {
+      defaults: Record<string, string | number>;
+      n_bands_choices: number[];
+      edge_mode_choices: string[];
+      direction_choices: string[];
+    };
+    reversal: {
+      defaults: Record<string, string | number>;
+      batch_mode_choices: string[];
+    };
+  };
+  gate: { mode_choices: string[]; defaults: Record<string, string | number> };
+  presets: TimingPreset[];
+  disclaimers: string[];
+}
+
+export interface TimingTrade {
+  date: string;
+  prev_weight: number;
+  new_weight: number;
+  price: number;
+  fee: number;
+  turnover: number;
+}
+
+export interface TimingRunResult {
+  run_id: string;
+  created_at: string;
+  symbol: string;
+  name: string;
+  params: Record<string, string | number | null>;
+  metrics: Record<string, number>;
+  yearly: Array<{ year: number; strategy: number; benchmark: number }>;
+  trades: TimingTrade[];
+  daily: {
+    date: string[];
+    equity: number[];
+    benchmark: number[];
+    weight: number[];
+    open: number[];
+    high: number[];
+    low: number[];
+    close: number[];
+    breadth: Array<number | null>;
+  };
+}
+
+export interface TimingRunSummary {
+  run_id: string;
+  created_at: string;
+  symbol: string;
+  name: string;
+  params: Record<string, string | number | null>;
+  metrics: Record<string, number>;
+}
+
+export interface TimingPortfolioSleeve {
+  key?: string;
+  symbol?: string;
+  label?: string;
+  weight?: number;
+  ma20_on?: boolean | null;
+  defensive_weight?: number;
+  engine?: string | null;
+  alert?: string | null;
+}
+
+export interface TimingPortfolio {
+  as_of?: string | null;
+  balanced_weight?: number | null;
+  defensive_weight?: number | null;
+  n_sleeves?: number;
+  full_count?: number;
+  empty_count?: number;
+  siphon_count?: number;
+  sleeves?: TimingPortfolioSleeve[];
+}
+
+export interface TimingPortfolioEquity {
+  dates?: string[];
+  champion?: number[];
+  synergy?: number[];
+  hold?: number[];
+  stats?: Record<string, { cagr?: number; mdd?: number }>;
+}
+
+export interface TimingEtfDefense {
+  symbol: string;
+  name?: string;
+  start?: string;
+  end?: string;
+  dates?: string[];
+  defense?: number[];
+  hold?: number[];
+  metrics?: {
+    defense_cagr?: number;
+    defense_mdd?: number;
+    hold_cagr?: number;
+    hold_mdd?: number;
+    n_trades?: number;
+  };
+}
+
+export interface TimingSignal {
+  key: string;
+  label: string;
+  symbol?: string;
+  indicator?: string;
+  as_of?: string;
+  breadth_now?: number | null;
+  weight_now?: number;
+  rs120?: number | null;
+  siphon?: boolean | null;
+  engine?: string | null;
+  alert?: string | null;
+  trigger?: string;
+  levels?: number[];
+  full_cagr?: number;
+  full_bh_cagr?: number;
+  full_mdd?: number;
+  n_trades?: number;
+  recent_trades?: TimingTrade[];
+  error?: string;
+}
+
+// ================= newsfeed 资讯流 =================
+
+export type NewsCategory = "macro" | "risk" | "policy" | "industry" | "blogger";
+
+export interface NewsItem {
+  id: number;
+  source: string;
+  source_name: string | null;
+  url: string | null;
+  category: string | null;
+  title: string;
+  summary: string | null;
+  content: string | null;
+  symbols: string[];
+  direction: string | null;
+  importance: number | null;
+  llm_note: string | null;
+  published_at: string;
+  scored_at: string | null;
+}
+
+export interface NewsItemsResponse {
+  items: NewsItem[];
+  total: number;
+}
+
+export interface NewsDigestPayload {
+  sections: { category: string; headline: string; bullets: string[] }[];
+  /** 2026-09-04 起简报事件带影响标的与整体方向；旧简报无这两个字段。 */
+  top_events: {
+    title: string;
+    importance: number;
+    why: string;
+    symbols?: string[];
+    direction?: string | null;
+  }[];
+  /** 2026-09-05 起附带博主立场小结（近7天归纳，LLM 工序）。 */
+  bloggers?: { name: string; stance: string; summary: string }[];
+}
+
+export interface NewsDigest {
+  digest_date: string;
+  payload: NewsDigestPayload;
+  created_at: string;
+}
+
+export interface NewsRunInfo {
+  id: number;
+  started_at: string;
+  finished_at: string | null;
+  status: string;
+  stats: Record<string, unknown>;
+  errors: { source: string; error: string }[];
+}
+
+export interface NewsStatus {
+  last_run: NewsRunInfo | null;
+  counts: { total: number; scored: number };
+  trigger: Record<string, unknown>;
+}
+
+/** 自选消息雷达：单只自选标的 × 近 N 天消息聚合（参考层）。 */
+export interface NewsWatchEntry {
+  symbol: string;
+  display_name: string | null;
+  market: string;
+  count: number;
+  bullish: number;
+  bearish: number;
+  neutral: number;
+  latest_at: string | null;
+  top: {
+    id: number;
+    title: string;
+    direction: string | null;
+    importance: number | null;
+    published_at: string;
+    url: string | null;
+    llm_note: string | null;
+  } | null;
+}
+
+/** 全局多空温度（近 N 天已评分条目的方向分布 + 重点事件）。 */
+export interface NewsMood {
+  bullish: number;
+  bearish: number;
+  neutral: number;
+  top_bullish: { title: string; importance: number }[];
+  top_bearish: { title: string; importance: number }[];
+  /** 逐日多空走势（近7天，缺数据补零）——2026-09-04 起。 */
+  daily?: { day: string; bullish: number; bearish: number; neutral: number }[];
+}
+
+export interface NewsWatchlistBrief {
+  days: number;
+  items: NewsWatchEntry[];
+  mood: NewsMood;
+}
+
+/* ---- 实验报告库（/api/experiments）---- */
+
+export type ExperimentVerdict = "passed" | "falsified" | "mixed" | "watch" | "";
+
+export interface ExperimentReportItem {
+  name: string;       // 相对路径，作为 id
+  title: string;
+  date: string;       // YYYY-MM-DD
+  category: string;   // 固定枚举；「待分类」= 未登记
+  verdict: ExperimentVerdict;
+  archived: boolean;  // 文件名含 ARCHIVE（结案封存）
+  isPrompt: boolean;  // 任务书
+  oneLiner: string;   // 一句话结论（大白话）
+  bytes: number;
+  pending: boolean;   // 未在 registry.json 登记
+}
+
+export interface ExperimentsResponse {
+  items: ExperimentReportItem[];
+  categories: string[];
+  verdicts: string[];
+  stats: {
+    total: number;
+    pending: number;
+    archived: number;
+    byVerdict: Record<string, number>;
+    byCategory: Record<string, number>;
+  };
+}
+
+export interface ExperimentReportDetail {
+  name: string;
+  title: string;
+  oneLiner: string;
+  category: string;
+  verdict: string;
+  markdown: string;
+}
+
+// ---- 我的持仓（/portfolio，2026-09-04）----
+
+export interface PortfolioHolding {
+  holding_id: string;
+  name: string;
+  code: string | null; // 截图未含代码，待补
+  market_value: number;
+  return_pct: number | null;
+  tags: string[];
+  note: string;
+  top10_total_pct: number | null; // 季报穿透：前十大占净值 %
+  top10_by_market_pct: Record<string, number>; // cn/hk/us/other -> 占净值 %
+  report_quarter: string | null;
+}
+
+export interface PortfolioGroup {
+  group_key: string;
+  name: string;
+  market: string;
+  market_cn: string;
+  amount: number;
+  pct: number;
+  avg_return_pct: number | null; // 金额加权持有收益率（近似口径，组间粗比）
+  verdict_cn: string; // 系统怎么看（大白话结论）
+  verdict_basis: string;
+  real_market_share: Record<string, number> | null; // 穿透后市场分布（%）
+  holdings: PortfolioHolding[];
+}
+
+export interface PortfolioAdvice {
+  advice_id: string;
+  priority: number;
+  strength: "certified" | "candidate" | "observation" | "management";
+  strength_cn: string;
+  title_cn: string;
+  detail_cn: string;
+  evidence: { label: string; ref: string }[];
+  trigger_cn: string;
+  execution_cn: string;
+}
+
+export interface PortfolioResponse {
+  as_of: string;
+  data_source_cn: string;
+  total_value: number;
+  holdings_count: number;
+  observations: string[];
+  advices: PortfolioAdvice[];
+  groups: PortfolioGroup[];
+}
+
+// ---- 基金净值对比（涨跌幅视角，展示层） ----
+export interface FundNavItem {
+  code: string;
+  name: string;
+  dates: string[];                    // 该基金自己的交易日轴（升序）
+  unit_nav: number[];                 // 单位净值（分红除息日人为跳水）
+  acc_nav: number[];                  // 累计净值（分红加回，看涨跌幅默认口径）
+  day_pct: (number | null)[];         // 当日净值增长率 %
+}
+
+export interface FundNavSeries {
+  days: number;                       // 生效窗口（0 = 成立以来全量）
+  items: FundNavItem[];
+  errors: { code: string; reason_cn: string }[];
+}
+
+// ---- Copilot（Agent 超级入口） ----
+export interface RecommendItem {
+  symbol: string;
+  display_name: string;
+  verdict: string;
+  verdict_cn: string;
+  best_scenario_cn: string | null;
+  reward_risk_ratio: number | null;
+  reward_risk_computable: boolean;
+  news_heat: number;
+  news_tags: string[];
+  sentiment_cn: string | null;
+  score: number;
+  reasons: string[];
+}
+export interface SectorPick {
+  code: string; name: string; stage: string; stage_cn: string;
+  heat_state_cn: string | null; note: string;
+}
+export interface RecommendCard {
+  run_date: string;
+  generated_at: string;
+  items: RecommendItem[];
+  sectors: SectorPick[];
+  sentiment_status: string;
+  fundamental_note: string;
+  disclaimer_cn: string;
+}
+export interface SizingAdvice {
+  symbol: string; tier: string; tier_pct_cn: string; cap_pct: number;
+  reasons: string[]; strength: string; strength_cn: string; disclaimer_cn: string;
+}
+export interface TradePreview {
+  fund_code: string | null; fund_name: string | null;
+  side: "buy" | "sell"; side_cn: string;
+  amount: number | null; trade_date: string;
+  missing: string[]; note_cn: string;
+}
+export interface FundTrade {
+  trade_id: string; fund_code: string; fund_name: string;
+  side: "buy" | "sell"; side_cn: string;
+  amount: number; trade_date: string;
+  priced_nav: number | null;
+  price_status: "pending" | "priced" | "failed"; price_status_cn: string;
+  plan_id: string | null; source: string; note: string; created_at: string;
+}
+export interface FundPosition {
+  fund_code: string; fund_name: string;
+  shares: number; cost: number;
+  latest_nav: number | null; latest_nav_date: string;
+  market_value: number | null; unrealized_pnl: number | null;
+  realized_pnl: number; note: string;
+}
+export interface CopilotDispatchReply {
+  intent: string; symbol: string | null;
+  card: { card_type: string; data: unknown } | null;
+  preview: TradePreview | null;
+  chat_fallback: boolean; note_cn: string;
+}
+export interface ExplainReply { reply: string; grounded: boolean; card: RecommendCard; }
+export interface ReviewSection { heading_cn: string; lines: string[]; }
+export interface ReviewCard {
+  review_id: string; kind: "trade" | "weekly"; ref_key: string; title_cn: string;
+  sections: ReviewSection[];
+  r_multiple: number | null; realized_pnl: number | null;
+  narrative: string; grounded: boolean;
+}
+export interface OpsTodo {
+  action_id: string; plan_id: string; symbol: string;
+  kind: string; kind_cn: string; next_step_cn: string;
+  due_from: string; nag_count: number;
+}
+export interface OpsLine { symbol: string; display_name: string; text_cn: string; }
+export interface SentimentBlock {
+  available: boolean; margin_cn: string;
+  margin_detail: Record<string, unknown> | null;
+  hot_boards: { name: string; heat_pctile: number | null; stage_cn: string }[];
+  holdings_states: { group_cn: string; state_cn: string }[];
+  signal_lines?: { group_cn: string; state_cn: string }[];
+  note_cn: string;
+}
+/** 重大事件条目（客观字段 only：标题/类别/方向/分数/时间）。 */
+export interface MajorEvent {
+  title: string; category_cn: string; direction_cn: string;
+  importance: number; when_cn: string; published_at: string;
+}
+export interface MajorEventsBlock {
+  available: boolean; items: MajorEvent[]; note_cn: string;
+}
+export interface OpsCard {
+  run_date: string; generated_at: string;
+  holdings_actions: OpsLine[];
+  recommendations: RecommendCard | null;
+  plan_todos: OpsTodo[];
+  watch_triggers: OpsLine[];
+  sentiment: SentimentBlock | null;
+  major_events: MajorEventsBlock | null;
+  push_summary_cn: string;
+}
+
+// ---- 前向存证账本 (/api/copilot/observations，只读) ----
+export interface ObservationBucket {
+  source_type: string;
+  strategy: string;
+  evaluation_kind: string;
+  evaluation_kind_stored: string;
+  evaluation_version: string;
+  is_reference_version: boolean;
+  direction: string | null;
+  horizon_days: number;
+  legacy_quality: string;
+  rule_refs?: string[];          // 分组维度：规则引用（不同规则不同组）
+  eval_config_hash?: string | null;  // 分组维度：评价配置摘要
+  n_observations: number;   // 展示记录数
+  n_samples: number;        // 研究样本数（同事件改措辞不重复计）
+  n_ready_observations: number;
+  n_ready_samples: number;
+  n_pending: number;
+  n_missing: number;
+  n_not_applicable: number;
+  n_conflict_samples: number;
+  avg_change_pct: number | null;
+  min_change_pct: number | null; max_change_pct: number | null;
+  first_eval_date: string | null; last_eval_date: string | null;
+  has_baseline: boolean;
+  n_hit_samples?: number; hit_rate_pct?: number;
+}
+export interface ObservationOutcome {
+  evaluation_version: string;       // 评价口径版本（严格/参考分版本）
+  is_reference_version: boolean;    // 参考口径（按行情行数）单列
+  horizon: number;
+  status: string;
+  status_cn: string;                // 已评价/待到期/缺数据/不可评价
+  change_pct: number | null;
+  eval_date: string | null;
+}
+export interface ObservationRecent {
+  observation_id: string;
+  source_type: string;
+  source_record_id: string;
+  instrument_id: string | null;
+  claim: string;
+  direction: string | null;
+  observed_at: string;
+  emitted_at: string;
+  legacy: boolean;
+  record_type: string;
+  batch_members: string[];
+  superseded: boolean;
+  legacy_quality: string;
+  display_status: string;
+  first_shown_at: string | null;    // 首次实际展示时间（未展示=null）
+  payload: Record<string, unknown>;
+  outcomes: ObservationOutcome[];   // 结构化分版本结果（不再拼无版本单串）
+}
+export interface ScoutItem {
+  symbol?: string | null; display_name: string; kind: string; kind_cn: string;
+  verdict_cn?: string; detail_cn?: string; winrate_cn?: string | null;
+}
+export interface ScoutCard {
+  available: boolean; trend: ScoutItem[]; ambush: ScoutItem[];
+  sentiment: ScoutItem[]; note_cn: string;
+}
+export interface TradesResponse {
+  trades: FundTrade[];
+  positions: FundPosition[];
+}
+
+// ---- 情绪仪表盘 (/api/sentiment) ----
+export interface MoodComponent {
+  label_cn: string;
+  ok: boolean;
+  value?: number;
+  unit?: string;
+  vote?: number;
+  as_of?: string;
+}
+export interface CnMood {
+  components: Record<string, MoodComponent>;
+  state: string | null;
+  state_cn: string;
+  note_cn: string;
+}
+export interface UsBreadth {
+  ok: boolean;
+  as_of?: string;
+  breadth_50?: number;
+  pctile_60d?: number | null;
+  state?: string | null;
+}
+export interface UsVix {
+  ok: boolean;
+  value?: number;
+  as_of?: string;
+  state_cn?: string;
+  thresholds?: number[];
+  source?: string;
+}
+export interface UsRiskAppetite {
+  ok: boolean;
+  chg_20d_pct?: number | null;
+  state_cn?: string;
+  as_of?: string;
+}
+export interface UsSurvey {
+  available: boolean;
+  root?: string | null;
+  hint_cn: string;
+  thresholds?: Record<string, number>;
+  threshold_source_cn?: string;
+  aaii?: { available: boolean; as_of: string; bullish: number; bearish: number; spread: number; state_cn: string };
+  naaim?: { available: boolean; as_of: string; exposure_index: number; state_cn: string; threshold_source_cn?: string };
+}
+export interface MoodSectorBoard {
+  code: string; name: string; level: number; stage: string | null;
+  heat_pctile: number | null; heat_hot?: boolean; heat_cold?: boolean;
+  heat_warning?: boolean; heat_note_cn?: string | null;
+  sig_retail_z?: number | null; sig_icepoint_pick?: boolean; sig_heat_alarm?: boolean;
+  sig_note_cn?: string | null;
+}
+export interface SentimentDashboard {
+  cn_mood: CnMood;
+  us_mood: { breadth: UsBreadth; vix: UsVix; risk_appetite: UsRiskAppetite };
+  us_survey: UsSurvey;
+  sector_heat: {
+    available: boolean; as_of?: string;
+    meta?: { metric?: string; window_days?: number; rule_version?: string; n_pool?: number };
+    boards: MoodSectorBoard[];
+  };
+  /** 板块情绪主视图（2026-09-07：大板块全量 + 持仓标记 + 推荐观察）。 */
+  sector_boards: SectorBoardsView;
+  /** 美股 11 GICS 行业情绪视图（2026-09-07：对标 A股）。 */
+  us_sector_boards: SectorBoardsView;
+  market_structure: MarketStructure;
+  action: SentimentAction;
+  disclaimer_cn: string;
+}
+
+/** 情绪页板块视图里的大板块行。 */
+export interface SectorBoardRow {
+  code: string; name: string;
+  etf?: string | null;
+  b20: number | null; b50: number; b200: number | null;
+  zone: "opportunity" | "risk" | "neutral";
+  stage: string | null; stage_cn: string;
+  pct_change: number | null; rs_pctile: number | null;
+  long_trend_cn: string | null;
+  next_watch: string | null; next_watch_kind: string | null;
+  holding: boolean;
+  sig_icepoint_pick: boolean; sig_heat_alarm: boolean;
+  sig_note_cn: string | null;
+  member_count: number | null;
+}
+export interface SectorRecommendation {
+  code: string; name: string; b50: number; stage_cn: string;
+  holding: boolean; zone: string;
+  kind: "opportunity" | "risk" | "upgrade_watch";
+  reason_cn: string;
+}
+export interface SectorBoardsView {
+  available: boolean; as_of?: string;
+  n_boards: number; n_holding: number;
+  boards: SectorBoardRow[];
+  recommendations: SectorRecommendation[];
+  zone_note_cn: string;
+}
+
+
+// ── 信号含金量表（/api/research/signal-edge，2026-09-05 文主任增量 #1）──
+export interface SignalEdgeHorizon {
+  horizon: number;
+  sample_count: number;
+  incomplete_count: number;
+  win_rate: number | null;
+  baseline_win_rate: number | null;
+  excess_win_rate: number | null;
+  mean_return: number | null;
+  baseline_mean_return: number | null;
+  excess_mean_return: number | null;
+  payoff: number | null;
+  baseline_payoff: number | null;
+}
+
+export interface SignalEdgeRow {
+  key: string;
+  label_cn: string;
+  group: string; // trigger=入场触发 | signpost=预警路牌
+  direction_cn: string;
+  total_signals: number;
+  horizons: SignalEdgeHorizon[];
+}
+
+export interface SignalEdgeResponse {
+  n_symbols: number;
+  start_date: string;
+  end_date: string;
+  symbols_used: string[];
+  symbols_failed: string[];
+  disclaimer_cn: string;
+  rows: SignalEdgeRow[];
+}
+
+/** 快照级散户情绪终版信号元信息 */
+export interface SentimentSignalMeta {
+  available: boolean;
+  cn_cold: boolean | null;
+  z_source: string;
+  experiment_ref: string;
+  note_cn: string;
+}
+
+export interface MarketStructure {
+  available: boolean;
+  as_of?: string;
+  state_cn?: string;
+  polar?: number;
+  strong_pct?: number;
+  weak_pct?: number;
+  median_b50?: number;
+  strong_boards?: { name: string; b50: number; code: string }[];
+  weak_boards?: { name: string; b50: number; code: string }[];
+  series?: { date: string; polar: number; strong_pct: number; weak_pct: number; median_b50: number }[];
+  note_cn?: string;
+}
+export interface BoardProfile {
+  available: boolean;
+  code?: string; name?: string;
+  self_z?: number | null; cross_pctile?: number | null;
+  b50?: number | null; b200?: number | null; tier_cn?: string | null;
+  stage?: string | null;
+  sig_icepoint_pick?: boolean; sig_heat_alarm?: boolean;
+  reading_cn?: string[];
+}
+
+/** 板块「价格 × 情绪」对照图序列（/api/sentiment/board/{code}/chart）。 */
+export interface BoardChartSeries {
+  available: boolean;
+  code?: string; name?: string | null;
+  dates: string[];
+  close: (number | null)[];
+  b50: (number | null)[];
+  retail20: (number | null)[];
+  n_retail: number;
+  /** 参考对照线（美股行业图=标普500等权指数）。 */
+  ref_close?: (number | null)[];
+  note_cn?: string;
+}
+
+export interface SentimentActionCard {
+  code: string; name: string; level?: number | null;
+  z: number | null; r60_pct?: number | null; b50?: number | null;
+  stage?: string | null; plan_cn: string; win_rate_cn: string; holding?: boolean;
+}
+export interface SentimentAction {
+  available: boolean; light: "blue" | "red" | "gray";
+  cn_cold: boolean | null; cn_ready?: unknown;
+  opportunity_cards: SentimentActionCard[];
+  alarm_cards: SentimentActionCard[];
+  holding_risk: { code: string; name: string; state: "danger" | "watch" | "safe"; detail_cn: string; z: number | null; b50: number | null }[];
+  note_cn: string;
+}
+export interface SentimentLight {
+  light: "blue" | "red" | "gray";
+  n_picks: number; n_alarms: number; holding_danger: number; available: boolean;
+}
+
+// ---- 文献学习库（learning，2026-09-08）----
+// 数据唯一来源：后端只读接口 GET /api/learning，背后是
+// docs/literature-learning/learning-seed.json 固定内容文件（字段约定见
+// 该目录 README）。纯学习展示层：不参与道路/路牌/技术入场/过滤判定。
+export interface LearningPaper {
+  id: string;
+  title: string;
+  authors: string[];
+  year: number;
+  publication_kind: string; // journalArticle / report / workingPaper…
+  venue: string | null;
+  doi: string | null;
+  source_url: string | null;
+  zotero_item_key: string | null;
+  zotero_uri: string | null;
+  selection_label: string;
+  reading_level: string;
+  read_version: string | null;
+  source_locator: string;
+  checked_at: string;
+  replication_status: string;
+}
+
+export interface LearningExample {
+  kind: string; // 「教学假设，不是真实回测」——必须原样展示，不冒充实测
+  text: string;
+}
+
+export interface LearningMethodAcceptance {
+  origin: string; // 作者原方法 or 本库整理，二选一的明确说明
+  checks: string[];
+  /** null = 未提取已核实的作者数值门槛；不得显示为 0 或「已通过」。 */
+  paper_numeric_threshold: number | null;
+  threshold_note: string;
+}
+
+export interface LearningEntry {
+  id: string;
+  paper_id: string;
+  title: string;
+  category: string; // 实验方法 / 判断标准 / 经典理论 / 投资启示
+  question: string;
+  author_finding_summary: string;
+  our_learning: string;
+  example: LearningExample;
+  practice_steps: string[];
+  method_acceptance: LearningMethodAcceptance;
+  applicability: string;
+  related_paper_ids: string[];
+  local_research_path: string | null;
+  /** 后端核对 docs/ 内报告真实存在后才为 true；false 时不渲染死链。 */
+  local_research_available?: boolean;
+  system_relation: string;
+  adoption_status: string;
+  content_status: string;
+  priority: 1 | 2 | 3;
+  review_question: string;
+  answer_hint: string;
+  updated_at: string;
+}
+
+export interface LearningPath {
+  id: string;
+  title: string;
+  entry_ids: string[];
+}
+
+export interface LearningStats {
+  papers: number;
+  entries: number;
+  paths: number;
+  byCategory: Record<string, number>;
+  byPriority: Record<string, number>;
+  integrity: {
+    orphanEntryIds: string[];
+    missingRelatedIds: string[];
+    brokenPathIds: string[];
+  };
+}
+
+export interface LearningResponse {
+  schema_version: string;
+  purpose: string;
+  updated_at: string;
+  categories: string[];
+  reading_paths: LearningPath[];
+  papers: LearningPaper[];
+  entries: LearningEntry[];
+  stats: LearningStats;
+}

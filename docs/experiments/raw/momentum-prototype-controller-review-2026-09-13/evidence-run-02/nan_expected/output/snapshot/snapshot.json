@@ -1,0 +1,95 @@
+{
+ "schema_version": "research-data-snapshot/1.0",
+ "transform_version": "research-data-snapshot/1.0",
+ "mode": "import",
+ "protocol_id": null,
+ "derived_from": {
+  "original_snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/evidence-run-02/nan_expected/orig-snapshot",
+  "original_snapshot_json_sha256": "89263f350f0fd6d3afd92991cd07a6f100b5afbcb2db62de190813e4d9a7a989",
+  "actions_sha256": "237a40f85a57f219e0592edb3b8590a4d3a898e35fc68742403f224b54a2bf2d",
+  "evidence_bundle": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/evidence-run-02/nan_expected/evidence-bundle.json",
+   "sha256": "3f332827bb8481b89b80594ee0c70b46e8e1b1ec9f9ca3bc420bd9347b79e98d"
+  },
+  "momentum_protocol": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/evidence-run-02/nan_expected/protocol-test.json",
+   "sha256": "185f571d9896de0923c88f0dd6fb37a833950fe256000c6b7e64ad1d6c373593"
+  },
+  "transform": "economic_index = reconstructed_economic_index(名义close, adapt_company_events(冻结行动))；基准为原首次有效报价 I=1；名义 OHLCV 与日期行逐字节保留，缺失保持缺失",
+  "derived_at": "2026-09-13T14:10:50.198854+00:00",
+  "derived_at_note": "本次派生时刻，不是数据的对外可用时刻"
+ },
+ "timing": {
+  "derived_at": "2026-09-13T14:10:50.198864+00:00"
+ },
+ "instruments": [
+  {
+   "instrument_id": "510300.SS",
+   "rows": 320,
+   "first_date": "2025-01-02",
+   "last_date": "2026-03-25",
+   "normalized": {
+    "path": "normalized/510300.SS.csv",
+    "sha256": "ff18bd55cafe161cfeae9cd935e7abd3f90fdcead52a2eb69b52b398f008e0dc"
+   },
+   "raw_responses": [],
+   "provider_report": {
+    "provider": "t",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": []
+   }
+  },
+  {
+   "instrument_id": "159915.SZ",
+   "rows": 320,
+   "first_date": "2025-01-02",
+   "last_date": "2026-03-25",
+   "normalized": {
+    "path": "normalized/159915.SZ.csv",
+    "sha256": "2fb09399cf1109b52cb1ac1c5e6435036f2bf9dcd3b99fdaff82fd2b57b3f3e9"
+   },
+   "raw_responses": [],
+   "provider_report": {
+    "provider": "t",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": []
+   }
+  }
+ ],
+ "market_data_refs": {},
+ "semantics": {
+  "fields": {
+   "date": "交易日",
+   "open": "开盘",
+   "high": "最高",
+   "low": "最低",
+   "close": "名义收盘",
+   "volume": "量",
+   "economic_index": "事后重建经济指数（名义价+已生效分红/拆分连接，首值 I=1）；historical_reconstruction_only=true，不得当作历史可知输入"
+  },
+  "currency": "CNY",
+  "price_basis": "nominal_close",
+  "trading_calendar": {
+   "authority": "none"
+  },
+  "historical_reconstruction_only": true,
+  "available_at_note": "未知 available_at 保持 null，不因补列被清除"
+ },
+ "code_identity": {},
+ "known_gaps": [],
+ "uses": [
+  "description",
+  "ranking",
+  "research_signal",
+  "attribution",
+  "comparison",
+  "diagnostic"
+ ],
+ "uses_basis": {},
+ "not_for": [
+  "production_trade"
+ ],
+ "authorization": {}
+}

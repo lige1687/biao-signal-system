@@ -1,0 +1,25 @@
+已按要求只实现并使用了两个文件：
+
+- `month_blocks.py`
+- `test_month_blocks.py`
+
+实现要点：
+- `draw_indices(months, block_length, repetitions, seed)`：
+  - 参数类型严格校验为整数且拒绝 `bool`
+  - 校验 `months >= block_length >= 1`、`repetitions >= 1`
+  - 用 `np.random.default_rng(seed)` 每次重复独立采 `ceil(months/block_length)` 个起点（均匀在 `[0, months-block_length]`）
+  - 每块按 `start + np.arange(block_length)` 生成，拼接后截断到 `months`
+  - 返回 `np.ndarray`，形状 `(repetitions, months)`，`dtype int`
+
+测试覆盖：
+- 边界条件（含非法范围、长度关系）
+- 种子确定性
+- 不越界
+- 块内连续（含末块截断）
+- `block_length == months` 时每行为 `0..months-1`
+- `block_length == 1`/`months == 1`
+- 错误输入（bool、非整数）
+
+`unittest` 结果（简短）：
+- `python -m unittest -q`：当前环境不存在 `python`
+- `python3 -m unittest -q test_month_blocks.py`：`Ran 8 tests`，`OK`

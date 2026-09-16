@@ -1,0 +1,52 @@
+{
+ "schema_version": "momentum-research-prototype-manifest/1.0",
+ "generated_at": "2026-09-13T09:58:36.417379+00:00",
+ "generated_at_note": "本次运行时刻，不得当作数据的对外可用时刻",
+ "mode": "synthetic",
+ "synthetic": true,
+ "historical_reconstruction_only": false,
+ "protocol": {
+  "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-momentum-prototype-2026-09-13/protocol.json",
+  "sha256": "7d7562f7d350038643ce4d099254d7bcc2c95ffdc137e1707e843b30eca8da1f",
+  "protocol_id": "momentum-research-prototype-2026-09-13"
+ },
+ "target_id": "protocol:momentum-next-close-21-session@1.0.0",
+ "objects": {
+  "primary": "mixed.momentum.raw@1.0.0",
+  "dependency": "mixed.price.economic@1.0.0",
+  "type": "feature（身份引用，完整卡见协议文件）"
+ },
+ "code_hashes": {
+  "momentum_prototype": "26f49a57033797231e095d62c7655324736c98156ed336ae77b7957b5f56278c",
+  "run_momentum_research_prototype": "59c6ffd8cb36ea03b51f556b0ecd9f5cedbfb26244453e65a451277f2c2504e0"
+ },
+ "inputs": null,
+ "observations": {
+  "count": 14,
+  "first": "2024-01-31",
+  "last": "2025-02-28"
+ },
+ "unknown_available_at": [],
+ "failures": [],
+ "identity_errors": [],
+ "skipped_stages": {},
+ "offline_guard": {
+  "self_check_blocked": true,
+  "blocked_with": "RuntimeError"
+ },
+ "statuses": {
+  "computation_run": true,
+  "research_qualification": "qualified_for_this_mode",
+  "validity": "not_tested_by_this_run",
+  "production": "not_authorized",
+  "policy": "not_applicable_no_account_policy"
+ },
+ "outputs": {
+  "quality.json": "857b58c71e2b3ac228c8fc03c9bf4be9c98fb3927aec110ac47e2f40bf361a08",
+  "values.csv": "d70ace1019761a7b5743bee20d6695fbd1cd42ecfe93f99d2d8e0329e719d629",
+  "missing.csv": "a90dd31120ea13f1410e08e8125c74d36e14b4bc9a336c94fe6ce3628c5222fd",
+  "targets.csv": "effe903437aa5c3083aed5ee912e6084be1598e318e66fe13b4ccd907a6e1372",
+  "rank-diagnostic.csv": "4c1e3cec22eb769f2c9305f9ad75dd106d39e945b6cf8aba3ff19181e25b31ab",
+  "report.md": "7d449849662411d496b3d89b4844da336bad68d6902feece7bbfbf828e680efe"
+ }
+}

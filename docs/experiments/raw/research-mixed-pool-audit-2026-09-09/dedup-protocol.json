@@ -1,0 +1,94 @@
+{
+  "id": "mixed-pool-fixed-direction-representatives-v1",
+  "frozen_at": "2026-09-09T09:43:17.776447+00:00",
+  "status": "historical research after seeing original14 results; not unseen-market validation",
+  "question": "Does fast recovery retain return/drawdown advantage after removing repeated broad economic directions by a fixed non-return rule?",
+  "source_protocol": "docs/experiments/raw/research-mixed-defense-2026-09-09/protocol.json",
+  "source_protocol_sha256": "caabc661516f84af660046c93ad529ed61a40888e05519f7806b830a04dc398f",
+  "source_engine_sha256": "bcffccf19eec6ccb7dbd0a1f3c6092a321f1baa9c6b946dd8cddbc03c6ec8928",
+  "start": "2020-12-01",
+  "end": "2026-06-30",
+  "initial_cash": 1000000,
+  "fees": [
+    0.001,
+    0.002
+  ],
+  "methods": [
+    "no_exit_100",
+    "no_exit_75",
+    "fast_reentry_exit",
+    "equal"
+  ],
+  "only_change": "eligible candidate universe: retain oldest exchange-listed ETF in each of three predeclared groups, ties symbol ascending; all other candidates retained. Ranking/RV filter/trade clocks/273 real quotes/actions/fees/lot/recovery budgets unchanged.",
+  "groups": [
+    {
+      "group": "沪深300",
+      "members": [
+        "510300",
+        "515130"
+      ],
+      "retained": "510300",
+      "listing_dates": {
+        "510300": "2012-05-28",
+        "515130": "2020-05-11"
+      },
+      "tracking": "both 000300; exact same-index group"
+    },
+    {
+      "group": "通信",
+      "members": [
+        "515050",
+        "515880"
+      ],
+      "retained": "515880",
+      "listing_dates": {
+        "515050": "2019-10-16",
+        "515880": "2019-09-06"
+      },
+      "tracking": "931079 versus 931160; different indexes in related economic direction, NOT exact duplicates"
+    },
+    {
+      "group": "有色金属",
+      "members": [
+        "512400",
+        "159652"
+      ],
+      "retained": "512400",
+      "listing_dates": {
+        "512400": "2017-09-01",
+        "159652": "2023-02-08"
+      },
+      "tracking": "000819 versus 000811; different indexes in related economic direction, NOT exact duplicates"
+    }
+  ],
+  "symbols": [
+    "510300",
+    "512400",
+    "515300",
+    "518850",
+    "588000",
+    "515170",
+    "516220",
+    "512890",
+    "515880",
+    "513870",
+    "562590"
+  ],
+  "excluded": [
+    "515130",
+    "515050",
+    "159652"
+  ],
+  "red_low_vol": "515300 and512890 track different style indexes, remain separate; no exhaustive all-holdings independence claimed",
+  "selection_rule_limit": "Fixed representation is a concentration sensitivity comparison, not a historically complete available universe. Two direction substitutions remove distinct index designs as well as duplicate exposure; difference cannot be attributed solely to removing identical holdings.",
+  "acceptance": [
+    "Original three core controls reproduce old funds/cash/trades; equal reproduces old equal benchmark",
+    "excluded symbols never selected/held",
+    "four methods twofees exactly8 complete cash paths",
+    "full history annual/phase/profit contribution/recovery length; no winner-dependent retuning",
+    "same-day equal representative availability, no new liquidity threshold"
+  ],
+  "next_separate_stage": "historical security master including delisted/merged funds, historical tracking objectives, price/action completeness; no new expanded-pool return until universe rule and source sufficiency frozen",
+  "source_evidence": "pool-sources official-source audit; six listing/index identity checks received before this lock, holdings overlap supplement pending; no strategy returns seen",
+  "okr_updated": false
+}

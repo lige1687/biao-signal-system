@@ -1,0 +1,287 @@
+{
+  "schema_version": "1.0.0",
+  "audited_on": "2026-09-09",
+  "timezone": "Asia/Shanghai",
+  "mode": "read_only_local_inventory",
+  "overall_status": "input_observation_only",
+  "signal_generation_allowed": false,
+  "virtual_trading_allowed": false,
+  "backfill_as_live_observation_allowed": false,
+  "standards": [
+    "docs/research/experiment-backtest-principles.md@1.0",
+    "docs/research/definition-standard.md@1.0.0",
+    "docs/research/breadth-freeze-observation-2026-09-09.md"
+  ],
+  "candidates": [
+    {
+      "definition_ref": "policy.breadth.all_a.w3@1.0.0",
+      "instrument": "159915",
+      "status": "blocked_input_observation_only",
+      "latest_potential_raw_market_date": "2026-09-08",
+      "blockers": [
+        "日常全A输入没有冻结定义所需的逐日成员身份和版本",
+        "快照eligible是MA20分母，未保存共同E200分母及90%覆盖率",
+        "个股最后缓存日可能不同，快照整体日期不能证明每个成员都来自同一市场日",
+        "带来源元数据的159915名义行情只到2022-06-17",
+        "缺持续更新且可核取得时间的ETF公司行动和交易限制链"
+      ]
+    },
+    {
+      "definition_ref": "policy.breadth.csi300.w0@1.0.0",
+      "instrument": "510300",
+      "status": "blocked_input_observation_only",
+      "latest_potential_raw_market_date": "2026-09-04",
+      "blockers": [
+        "沪深300宽度缓存按当前成分股回看历史，不是逐日历史成员链",
+        "现有动态成员及匹配宽度只到2026-06-30",
+        "当前宽度缓存缺逐日成员版本、90%覆盖率和来源取得时间",
+        "ETF腾讯行情虽到2026-09-04，仍缺配套的持续公司行动和交易限制资格链"
+      ]
+    },
+    {
+      "definition_ref": "baseline.etf_price200@1.0.0",
+      "instruments": ["510300", "159915"],
+      "status": "blocked_input_observation_only",
+      "blockers": [
+        "timing ETF文件的实际价格分支未留sidecar：可能是Eastmoney前复权，也可能是新浪未复权",
+        "冻结定义要求连续信号价与名义成交价及公司行动分开，现有当前文件不能证明该口径",
+        "159915带来源元数据的名义行情严重过期",
+        "当前观察尚未建立行动、停牌和限价输入的真实取得时间链"
+      ]
+    }
+  ],
+  "required_daily_fields": {
+    "breadth": [
+      "market_date: date",
+      "member_symbol: string",
+      "membership_version: string",
+      "membership_effective_at: timestamp",
+      "member_close: number",
+      "member_close_date: date",
+      "eligible_common_200: integer",
+      "pool_total: integer",
+      "coverage: number",
+      "valid: boolean",
+      "b200: number|null",
+      "source_acquired_at: timestamp",
+      "source_sha256: string"
+    ],
+    "etf": [
+      "market_date: date",
+      "symbol: string",
+      "nominal_open: number",
+      "nominal_close: number",
+      "volume: number",
+      "source_acquired_at: timestamp",
+      "source_sha256: string",
+      "announcement_date: date",
+      "record_date: date",
+      "effective_date: date",
+      "pay_date: date|null",
+      "cash_per_unit_or_split_ratio: number",
+      "restriction_type: string",
+      "restriction_effective_at: timestamp"
+    ]
+  },
+  "sources": [
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_klines.parquet",
+      "role": "当前全A个股收盘原料",
+      "format": "parquet long",
+      "fields": ["symbol:string", "date:date", "close:number"],
+      "rows": 4063419,
+      "first_date": "2023-01-09",
+      "latest_date": "2026-09-08",
+      "file_mtime": "2026-09-09T16:41:37.955189+08:00",
+      "sha256": "118f95d42e640bad1df07b21c48eb341e73f9b83a60a0c5805772e6ace412a2b",
+      "fit": "partial_raw_only",
+      "gap": "缺逐日成员版本、成员统一市场日与取得时间"
+    },
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_codes.json",
+      "role": "当前全A代码列表",
+      "format": "json",
+      "fields": ["date:date", "codes:list[string]"],
+      "members": 5215,
+      "latest_date": "2026-09-09",
+      "file_mtime": "2026-09-09T15:50:18.851999+08:00",
+      "sha256": "9cee3855d0149f87a3f8b1ebfe072307f3966e2524eec4c7e167763c35742379",
+      "fit": "current_identity_only",
+      "gap": "只有当前名单日期，没有取得时刻、历史成员版本或生效时刻"
+    },
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_ma_breadth.json",
+      "role": "日常界面全A宽度快照",
+      "format": "json",
+      "fields": ["as_of:timestamp", "date:date", "ma20_pct:number", "ma50_pct:number", "ma200_pct:number", "eligible:integer"],
+      "latest_date": "2026-09-08",
+      "source_as_of": "2026-09-08 16:41",
+      "file_mtime": "2026-09-08T16:41:36.581418+08:00",
+      "sha256": "dc1143ba077c9c13eb8e5a7ae5fc4cfe378fce956410634de54a51b8e141df13",
+      "fit": "mismatch_blocked",
+      "gap": "eligible对应MA20而非B200共同分母；无成员版本、覆盖率和逐成员市场日期"
+    },
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/breadth_cn_all.parquet",
+      "role": "日常全A历史宽度",
+      "format": "parquet wide time series",
+      "fields": ["index:date", "b20:number", "n20:integer", "b50:number", "n50:integer", "b200:number", "n200:integer", "ad:number", "ad20:number"],
+      "rows": 8714,
+      "first_date": "1990-12-19",
+      "latest_date": "2026-08-27",
+      "file_mtime": "2026-08-28T01:48:44.981414+08:00",
+      "sha256": "860724b234ddcf2753b12d01b1e52a20ef132e2d0e99d9f5f8ec254b630cda79",
+      "fit": "mismatch_blocked",
+      "gap": "各均线独立分母且无冻结成员覆盖资格；不能替换共同E200口径"
+    },
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/breadth_csi300.parquet",
+      "role": "日常沪深300历史宽度",
+      "format": "parquet wide time series",
+      "fields": ["index:date", "b20:number", "n20:integer", "b50:number", "n50:integer", "b200:number", "n200:integer", "ad:number", "ad20:number"],
+      "rows": 8707,
+      "first_date": "1990-12-19",
+      "latest_date": "2026-08-18",
+      "file_mtime": "2026-08-27T19:54:44.630473+08:00",
+      "sha256": "0a1fd8b2f9a32c4cd23570495f6dfd5a1c28f7d311b287eacadda4f29d0d2edb",
+      "fit": "mismatch_blocked",
+      "gap": "当前成分股回看历史，非逐日历史成分；缺成员版本和90%覆盖资格"
+    },
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/510300.parquet",
+      "role": "510300 timing价格",
+      "format": "parquet OHLC",
+      "fields": ["index:date", "open:number", "high:number", "low:number", "close:number"],
+      "rows": 3465,
+      "first_date": "2012-05-28",
+      "latest_date": "2026-08-27",
+      "file_mtime": "2026-08-28T00:10:51.153267+08:00",
+      "sha256": "a6d518e02313f03cb98ebd69a3e459c9382bd85864f5b1d86771c3c04665fcb4",
+      "fit": "mismatch_blocked",
+      "gap": "实际采用前复权或未复权回落分支未记录，且无独立行动链"
+    },
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/159915.parquet",
+      "role": "159915 timing价格",
+      "format": "parquet OHLC",
+      "fields": ["index:date", "open:number", "high:number", "low:number", "close:number"],
+      "rows": 3573,
+      "first_date": "2011-12-09",
+      "latest_date": "2026-08-27",
+      "file_mtime": "2026-08-28T00:11:03.954372+08:00",
+      "sha256": "f6d5010501fd14cf10941407ca9e6954c6d0fbcc48d631027839f45ac0d8af37",
+      "fit": "mismatch_blocked",
+      "gap": "实际采用前复权或未复权回落分支未记录，且无独立行动链"
+    },
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/510300.SS.bars.parquet",
+      "role": "带来源元数据的510300行情",
+      "format": "parquet OHLCV",
+      "fields": ["index:date", "open:number", "high:number", "low:number", "close:number", "volume:number"],
+      "rows": 640,
+      "first_date": "2024-01-15",
+      "latest_date": "2026-09-04",
+      "provider": "tencent",
+      "source_fetched_at": "2026-09-05T03:38:29.092637+00:00",
+      "sha256": "31c1ece5d9c7867973025cee7aab79c7a69d91e9e3b6af1553b93cbef8811556",
+      "fit": "partial_raw_only",
+      "gap": "没有配套的持续行动、停牌和限价资格输入"
+    },
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/159915.SZ.bars.parquet",
+      "role": "带来源元数据的159915行情",
+      "format": "parquet OHLCV",
+      "fields": ["index:date", "open:number", "high:number", "low:number", "close:number", "volume:number"],
+      "rows": 120,
+      "first_date": "2022-01-03",
+      "latest_date": "2022-06-17",
+      "provider": "local_upload",
+      "source_fetched_at": "2026-09-08T14:54:28.849587+00:00",
+      "sha256": "0afe7ad955490b701ab37b2ce1f0553f42e12e0f5e23b6257a31dfa28a40cf44",
+      "fit": "unusable_stale",
+      "gap": "不能支持当前观察"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/breadth_all_a.parquet",
+      "role": "冻结历史全A宽度",
+      "format": "parquet time series",
+      "fields": ["index:date", "pool_total:integer", "quoted:integer", "eligible:integer", "coverage:number", "valid:boolean", "b50:number|null", "b200:number|null"],
+      "rows": 2813,
+      "first_date": "2014-12-01",
+      "latest_date": "2026-06-30",
+      "sha256": "c4c8e32925fb87d1fe39729d2ffb4a357e3537cf84b6c41bf9ae5fa5d0d24ed8",
+      "fit": "historical_identity_and_warmup_only",
+      "gap": "研究截止后无记录，不能补写实时信号"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/breadth_csi300.parquet",
+      "role": "冻结历史沪深300宽度",
+      "format": "parquet time series",
+      "fields": ["index:date", "pool_total:integer", "quoted:integer", "eligible:integer", "coverage:number", "valid:boolean", "b50:number|null", "b200:number|null"],
+      "rows": 2813,
+      "first_date": "2014-12-01",
+      "latest_date": "2026-06-30",
+      "sha256": "63fa7f0ef837c161194fb8f1f17140069074812085c8b449b93aa4d5f2998a58",
+      "fit": "historical_identity_and_warmup_only",
+      "gap": "研究截止后无记录，不能补写实时信号"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/csi300_membership_daily.parquet",
+      "role": "冻结沪深300逐日成员身份",
+      "format": "parquet long",
+      "fields": ["date:date", "symbol:string", "version:string"],
+      "rows": 843900,
+      "first_date": "2014-12-01",
+      "latest_date": "2026-06-30",
+      "sha256": "a45d53bf4e445438f534bd2019ec30ecd911f6bfb09272a9c663c7e01026bc30",
+      "fit": "historical_identity_only",
+      "gap": "缺2026-07-01之后逐日成员链及真实取得时间"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12/inputs/actions.json",
+      "role": "冻结历史ETF公司行动",
+      "format": "json events",
+      "fields": ["symbol:string", "type:string", "announcement_date:date", "record_date:date", "effective_date:date", "pay_date:date|null", "cash:number|null", "ratio:number|null"],
+      "events": 14,
+      "sha256": "42803eceab514880d34918dbf4e04b64eac2a90749ccedb791b214e904ff2789",
+      "fit": "historical_only",
+      "gap": "静态研究事件集，不是带观察取得时间的持续行动源"
+    }
+  ],
+  "implementation_findings": [
+    {
+      "path": "src/lei_signal/market_context/a_share_breadth.py",
+      "finding": "当前快照在更新后遍历全部缓存值，未限定为当天代码列表；各股票可来自不同最后日期，且只保存MA20的eligible。"
+    },
+    {
+      "path": "scripts/precompute_a_share_ma.py",
+      "finding": "工作日收盘后更新全A页面缓存，不生成沪深300冻结候选状态。"
+    },
+    {
+      "path": "scripts/backfill_csi300_breadth.py",
+      "finding": "用当前沪深300成分回看历史且最低有效数150，与冻结逐日成员和90%覆盖门槛不同。"
+    },
+    {
+      "path": "src/lei_signal/timing_backtest/data.py",
+      "finding": "20/50/200日宽度使用各自有效分母及最低30只门槛，与冻结共同E200分母不同。"
+    },
+    {
+      "path": "scripts/backfill_timing_data.py",
+      "finding": "ETF优先Eastmoney前复权，失败回落新浪未复权；输出没有记录实际采用分支。"
+    }
+  ],
+  "allowed_now": [
+    "记录实际读取时刻、文件mtime、市场最新日期和SHA-256",
+    "记录每个候选的阻塞原因",
+    "保留截至2026-06-30冻结输入作为历史身份和预热依据"
+  ],
+  "required_before_signal_observation": [
+    "为全A和沪深300建立与冻结定义一致的成员身份及生效时间",
+    "按共同200日有效成员计算并保存pool_total、eligible、coverage和valid",
+    "保证每个成员收盘属于明确的同一市场日，缺失不沿用旧价产生新信号",
+    "为两只ETF建立有来源取得时间的名义OHLCV、公司行动、停牌和限价输入",
+    "为连续信号价记录行动连接方法和实际来源分支",
+    "从首次全部条件具备的真实时点开始记录，不倒填过去信号"
+  ],
+  "plain_language_warning": "日常界面和冻结候选都出现200日宽度这个名字，但成员、分母和日期处理不同；当前不得互相替代。"
+}

@@ -1,0 +1,4813 @@
+{
+  "schema_version": "1.0.0",
+  "version": "1.1.0",
+  "standard": "docs/research/definition-standard.md",
+  "created": "2026-09-09",
+  "profiles": {
+    "mixed": {
+      "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+      "not_for": [
+        "production_trade",
+        "unique_alpha_claim",
+        "prediction_from_contemporaneous_fit"
+      ],
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "economic_index"
+        ],
+        "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+        "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+        "frequency": "daily_valid_quotes",
+        "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+      },
+      "universe": {
+        "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+        "eligibility": "计算按有效报价；月选需当日有报价且累计>=273；当前存续池有选择偏差",
+        "warmup": "按每个对象窗口，不以日历天补足",
+        "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+        "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+        "degrade": "缺报价不发新信号；未确认资料不得生产"
+      },
+      "time": {
+        "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+        "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+        "decision_at": "不得早于available_at",
+        "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+      },
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "公式一致不证明市场有效；旧消费者未迁移"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "not_tested_by_normalization",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "mixed_code",
+        "mixed_protocol",
+        "mixed_prices",
+        "mixed_actions",
+        "mixed_pool"
+      ]
+    },
+    "breadth": {
+      "scope": "给定日期成员集合的宽度研究，身份须附全A/沪深300/创业板指数及名单版本",
+      "not_for": [
+        "production_trade",
+        "unique_alpha_claim",
+        "prediction_from_contemporaneous_fit"
+      ],
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "P_signal",
+          "membership_by_date"
+        ],
+        "price_basis": "指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+        "currency": "各股票同尺度比值；无量纲，非投资收益",
+        "frequency": "daily",
+        "calendar": "SMA按各股有效报价；宽度输出按显式交易日历，不前填"
+      },
+      "universe": {
+        "version": "etf-confirmation-v1；breadth_inputs及csi_members",
+        "eligibility": "当日成员且当日真实报价且至少200有效收盘；B50/B200共用E200",
+        "warmup": "200有效收盘（包含当日）",
+        "missing": "停牌/缺报价不纳入当日E；新股不足200不合格；全无合格返回缺失原因",
+        "quality_gate": "eligible/当日成员总数>=0.90；等于0.90有效",
+        "degrade": "无名单/无合格/覆盖不足时两个宽度均缺失，不返回0"
+      },
+      "time": {
+        "observation_time": "t股票收盘",
+        "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+        "decision_at": "不得早于available_at",
+        "execution_at": "下一个允许成交的ETF开盘；周目标与确认各自有时钟",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+      },
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "共同分母不消除成员变更影响；输入成员必须当时生效且可知"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "not_tested_by_normalization",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "breadth_code",
+        "breadth_protocol",
+        "breadth_prepare",
+        "breadth_inputs",
+        "breadth_quality"
+      ]
+    }
+  },
+  "sources": {
+    "mixed_code": {
+      "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-execution/run.py",
+      "sha256": "b79a61db75eafb4c1944a1f158daeecbc987e61ea66f51eb4e7ca90966a7be26"
+    },
+    "mixed_protocol": {
+      "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-protocol.json",
+      "sha256": "21da388351b933b9008381a703017ebc75ec6448ef4eb5edba45ca6d5a84e1f5"
+    },
+    "mixed_prices": {
+      "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/prices.csv",
+      "sha256": "de467734be6c2ccbabed6fd39dc04b36fc6b78ee0ab731defd31ded4b83eb850"
+    },
+    "mixed_actions": {
+      "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/normalized-actions.json",
+      "sha256": "097043b2c622a308b602a961b666129f575a35083a8ede6d7bfa1cf16ea1ce81"
+    },
+    "mixed_pool": {
+      "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/candidate-pool.json",
+      "sha256": "c9da91c99e3449b25bcdb7f339aa1626261e0724092b0c05fd5f6a5fd5b9f430"
+    },
+    "defense_code": {
+      "path": "docs/experiments/raw/research-mixed-defense-2026-09-09/execution/run.py",
+      "sha256": "bcffccf19eec6ccb7dbd0a1f3c6092a321f1baa9c6b946dd8cddbc03c6ec8928"
+    },
+    "defense_protocol": {
+      "path": "docs/experiments/raw/research-mixed-defense-2026-09-09/protocol.json",
+      "sha256": "caabc661516f84af660046c93ad529ed61a40888e05519f7806b830a04dc398f"
+    },
+    "defense_results": {
+      "path": "docs/experiments/raw/research-mixed-defense-2026-09-09/execution/summary.json",
+      "sha256": "6671b965d27f3527e35aacafb3b3e3182e57e9a1019c2312c69bcb1e1cb808e0"
+    },
+    "breadth_code": {
+      "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/research_engine.py",
+      "sha256": "3799f05c131179a79916505709d3aff94ced40350ddf10c51704f7ca11215f56"
+    },
+    "breadth_protocol": {
+      "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/protocol.md",
+      "sha256": "a1b991c102c37a73d491e842e68cf7fe0a3e4ba6e2c83759e78575a480875f8d"
+    },
+    "breadth_prepare": {
+      "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepare_data.py",
+      "sha256": "16e0f937a68c09a70eb672ee76c766a26793aced5a77ba34f0433753a5e12f7b"
+    },
+    "breadth_runner": {
+      "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/run_backtest.py",
+      "sha256": "16cfba9450bdba0cf54d70467a74682ecc8d275f7a455266bf17b5644fbb4dbd"
+    },
+    "breadth_quality": {
+      "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/data_quality.json",
+      "sha256": "f9b3b7889e44d1dad3908ae7542fbc3c65b82effc98247eec6bd342049f91f86"
+    },
+    "breadth_results": {
+      "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/results/summary.csv",
+      "sha256": "ded9e114f639d49c42f50457eef50b3c4c188c5c837fb6e76b890659be4ba2f4"
+    },
+    "breadth_inputs": {
+      "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/input_fingerprints.json",
+      "sha256": "be140f67549f3e0073c366ddacb23e3884320e5a4bbe46bcbb541f08ce5aaf0f"
+    },
+    "csi_members": {
+      "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/csi300_membership_daily.parquet",
+      "sha256": "a45d53bf4e445438f534bd2019ec30ecd911f6bfb09272a9c663c7e01026bc30"
+    },
+    "breadth_legacy": {
+      "path": "src/lei_signal/market_context/breadth.py",
+      "sha256": "eee72e0a3f07f393f721c2790930e753d0d5b8e1717ceba8729f70cca10405e7"
+    },
+    "all_a_legacy": {
+      "path": "src/lei_signal/market_context/a_share_breadth.py",
+      "sha256": "1c224f23bdbfd468da4c81af6a4e1eaa856b93c336d200203d80c8ef13fb0f2b"
+    },
+    "dca_code": {
+      "path": "docs/experiments/raw/research-fifth-2026-09-08/study/cash_engine.py",
+      "sha256": "2809f119bae9e3f7a3d53ccd88ca9b7925711181bcd058662f3987fe026ba317"
+    },
+    "dca_protocol": {
+      "path": "docs/experiments/raw/research-fifth-2026-09-08/study/protocol.md",
+      "sha256": "df2f260e1a8c89d7616f719db3e64cacf4c037186c427a8e1affa8639174ad3b"
+    },
+    "dca_lock": {
+      "path": "docs/experiments/raw/research-fifth-2026-09-08/study/run-lock.json",
+      "sha256": "c04fef9d653e062175742fdc872ca58460f9a9a5bb9550705251779138c7eaad"
+    },
+    "hold_protocol": {
+      "path": "docs/experiments/raw/research-dividend-reinvestment-2026-09-09/execution/protocol.md",
+      "sha256": "e3fbc96a136c14ebae5f3fb0e6274ad196db218f8668cdc92cf562140297b0c6"
+    },
+    "hold_code": {
+      "path": "docs/experiments/raw/research-dividend-reinvestment-2026-09-09/execution/run_accounts_attempt03.py",
+      "sha256": "513dded51bb64f8421d6f58ca76b22a4d3bb3c2772af8a61e22f30aafaaddc53"
+    },
+    "concentration_code": {
+      "path": "docs/experiments/raw/research-mixed-pool-audit-2026-09-09/controller/group_accounting.py",
+      "sha256": "97bf8a052e55bc8f431617d9ffa492275cddef102f45a5b365fbc415972dd531"
+    },
+    "dedup_protocol": {
+      "path": "docs/experiments/raw/research-mixed-pool-audit-2026-09-09/dedup-protocol.json",
+      "sha256": "31d7a59b216f71577683f80ef89d9a41d7e2dd79c1655ed19836310d622da303"
+    },
+    "etf_510300": {
+      "path": "docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12/inputs/bars/sh510300-nominal.csv",
+      "sha256": "d11357f678570ff9698e39799fd4db81ed825c3c05f7bb4c876e895a5c66d0bf"
+    },
+    "etf_159915": {
+      "path": "docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12/inputs/bars/sz159915-nominal.csv",
+      "sha256": "dc15f1c722114cf0f67d3c63d123b91fce27d60a9c41c4796a058b7b05fdece0"
+    },
+    "etf_actions": {
+      "path": "docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12/inputs/actions.json",
+      "sha256": "42803eceab514880d34918dbf4e04b64eac2a90749ccedb791b214e904ff2789"
+    },
+    "etf_restrictions": {
+      "path": "docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12/inputs/dated-restrictions.json",
+      "sha256": "06d01e93347bbf7341111d29118e20aeb22d37c5d872c5cb2257dd78404225c7"
+    },
+    "etf_limits": {
+      "path": "docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12/inputs/price-limit-regimes.json",
+      "sha256": "e674d7748f2c26f604432d5e529f4849f9ca799319ce8b738d619c64c8924617"
+    },
+    "price50_protocol": {
+      "path": "docs/experiments/raw/research-breadth-price50-decision-2026-09-09/protocol.md",
+      "sha256": "66f8788594977d126aa8b5c5a40af5ba0be973d1f5e5579c7c447a3a472edea3"
+    }
+  },
+  "objects": [
+    {
+      "id": "mixed.price.economic",
+      "version": "1.0.0",
+      "name": "混合池信号经济价格",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "research_signal",
+        "attribution"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "相邻有效报价间按已生效事件连接；I0=1；factor=(nominal_close*split_multiplier+cash_equivalent)/previous_nominal_close",
+        "parameters": {
+          "base": 1,
+          "event_order": "effective_date,event_id；reverse合并：split时mult*=ratio,cash*=ratio；dividend时cash+=amount"
+        },
+        "endpoints": "prev有效报价之后、当前报价当日及之前的生效事件",
+        "unit": "index_level",
+        "direction": "高值只表示累计变化",
+        "transforms": "分红/拆分校正；不再复权或加汇率"
+      },
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "旧事件缺精确available_at；新economic_index适配要求带时区事件时间。除息连接不等于当天分红可花"
+      },
+      "universe": {
+        "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格"
+      }
+    },
+    {
+      "id": "mixed.asset.total_return",
+      "version": "1.0.0",
+      "name": "混合池单产品经济总回报",
+      "type": "factor_return",
+      "profile": "mixed",
+      "uses": [
+        "attribution",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "mixed.price.economic@1.0.0"
+      ],
+      "definition": {
+        "formula": "I_i(t)/I_i(prev)-1",
+        "parameters": {
+          "gross": true,
+          "fees": 0,
+          "base_currency": "CNY"
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "逐产品收益序列而非通用市场因子；不预设沪深300解释混合池；无风险序列未提供，非严格超额收益"
+      },
+      "universe": {
+        "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格"
+      }
+    },
+    {
+      "id": "mixed.momentum.raw",
+      "version": "1.0.0",
+      "name": "252至21有效报价涨幅",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "ranking",
+        "description",
+        "research_signal"
+      ],
+      "dependencies": [
+        "mixed.price.economic@1.0.0"
+      ],
+      "definition": {
+        "formula": "I(t-21)/I(t-252)-1",
+        "parameters": {
+          "long_lag": 252,
+          "skip_lag": 21
+        },
+        "endpoints": "自身有效报价行位移；第253条首次可算；不含最近21条",
+        "unit": "fraction",
+        "direction": "降序排序，负分允许",
+        "transforms": "无标准化、无截尾、无年化"
+      },
+      "universe": {
+        "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格"
+      },
+      "status": {
+        "implementation": "isolated_formula_or_selection_compared_with_legacy; consumers_not_migrated"
+      }
+    },
+    {
+      "id": "mixed.rv20",
+      "version": "1.0.0",
+      "name": "20期简单收益的样本波动",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "mixed.asset.total_return@1.0.0"
+      ],
+      "definition": {
+        "formula": "std(I_t/I_prev-1 over last20,ddof=1)*sqrt(252)",
+        "parameters": {
+          "window": 20,
+          "ddof": 1,
+          "annualization": 252
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "universe": {
+        "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格"
+      },
+      "status": {
+        "implementation": "isolated_formula_or_selection_compared_with_legacy; consumers_not_migrated"
+      }
+    },
+    {
+      "id": "mixed.rv_percentile",
+      "version": "1.0.0",
+      "name": "自身波动历史分位",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "mixed.rv20@1.0.0"
+      ],
+      "definition": {
+        "formula": "average_rank(current RV20 within last756 slots)/nonmissing_count",
+        "parameters": {
+          "window": 756,
+          "minimum": 252,
+          "include_current": true,
+          "ties": "average"
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "universe": {
+        "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格"
+      },
+      "status": {
+        "implementation": "isolated_formula_or_selection_compared_with_legacy; consumers_not_migrated"
+      }
+    },
+    {
+      "id": "mixed.volatility_allowed",
+      "version": "1.0.0",
+      "name": "历史波动过滤状态",
+      "type": "state_signal",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description"
+      ],
+      "dependencies": [
+        "mixed.rv_percentile@1.0.0"
+      ],
+      "definition": {
+        "formula": "isNaN(rv_percentile) OR rv_percentile<0.8",
+        "parameters": {
+          "exclude_at_or_above": 0.8,
+          "nan": "pass_legacy"
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "boolean",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      }
+    },
+    {
+      "id": "mixed.eligible",
+      "version": "1.0.0",
+      "name": "混合池月选资格",
+      "type": "state_signal",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "mixed.price.economic@1.0.0"
+      ],
+      "definition": {
+        "formula": "current_valid_quote AND count_valid_quotes_through_t>=273",
+        "parameters": {
+          "minimum_quotes": 273
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "boolean",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "status": {
+        "implementation": "isolated_formula_or_selection_compared_with_legacy; consumers_not_migrated"
+      }
+    },
+    {
+      "id": "mixed.momentum.rank",
+      "version": "1.0.0",
+      "name": "横截面动量有序名单",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "ranking",
+        "description"
+      ],
+      "dependencies": [
+        "mixed.eligible@1.0.0",
+        "mixed.momentum.raw@1.0.0"
+      ],
+      "definition": {
+        "formula": "sort(eligible finite momentum,key=(-score,symbol))",
+        "parameters": {
+          "ties": "exact equality then symbol ascending"
+        },
+        "endpoints": "月末并集决策日同截面；缺当日报价无资格",
+        "unit": "ordered_symbol_list",
+        "direction": "高分在前",
+        "transforms": "排序；无百分位、无近似相等容差"
+      }
+    },
+    {
+      "id": "mixed.top3",
+      "version": "1.0.0",
+      "name": "过滤后前三名单",
+      "type": "state_signal",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "mixed.momentum.rank@1.0.0",
+        "mixed.volatility_allowed@1.0.0"
+      ],
+      "definition": {
+        "formula": "first3(filter(mixed.momentum.rank,mixed.volatility_allowed))",
+        "parameters": {
+          "n": 3,
+          "fewer": "全部取用",
+          "none": "空名单",
+          "duplicate_direction": "full14允许相关方向重复"
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "ordered_symbol_list",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "status": {
+        "implementation": "isolated_formula_or_selection_compared_with_legacy; consumers_not_migrated"
+      }
+    },
+    {
+      "id": "mixed.target.equal",
+      "version": "1.0.0",
+      "name": "入选产品目标比例",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "mixed.top3@1.0.0"
+      ],
+      "definition": {
+        "formula": "w_i=allocation/len(selected), other=0",
+        "parameters": {
+          "allocation": [
+            1,
+            0.75
+          ],
+          "no_candidates": "全现金"
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "symbol_weight_map",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "目标比例不是实际持仓比例；两个allocation必须在具体策略中固定"
+      }
+    },
+    {
+      "id": "trend.sma50",
+      "version": "1.0.0",
+      "name": "50有效报价简单均线",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "mixed.price.economic@1.0.0"
+      ],
+      "definition": {
+        "formula": "SMA50=sum(last 50 valid P_signal including t)/50",
+        "parameters": {
+          "window": 50,
+          "min_periods": 50
+        },
+        "endpoints": "[t-49,t]有效报价，包含t",
+        "unit": "same_as_P_signal",
+        "direction": "描述平均价格，不单独表示方向",
+        "transforms": "算术均值；无EMA权重"
+      },
+      "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+      "universe": {
+        "eligibility": "输入产品合法有效报价；计算不要求273月选资格",
+        "warmup": "按SMA窗口；距离和状态继承依赖SMA"
+      },
+      "status": {
+        "implementation": "synthetic_boundary_verified; not_full_policy_verification"
+      }
+    },
+    {
+      "id": "trend.distance50",
+      "version": "1.0.0",
+      "name": "相对50日均线距离",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "trend.sma50@1.0.0"
+      ],
+      "definition": {
+        "formula": "P_signal/SMA50-1",
+        "parameters": {
+          "window": 50
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+      "universe": {
+        "eligibility": "输入产品合法有效报价；计算不要求273月选资格",
+        "warmup": "按SMA窗口；距离和状态继承依赖SMA"
+      },
+      "status": {
+        "implementation": "synthetic_boundary_verified; not_full_policy_verification"
+      }
+    },
+    {
+      "id": "trend.above50",
+      "version": "1.0.0",
+      "name": "严格站上50日均线",
+      "type": "state_signal",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description"
+      ],
+      "dependencies": [
+        "trend.sma50@1.0.0"
+      ],
+      "definition": {
+        "formula": "P_signal>SMA50",
+        "parameters": {
+          "equal": false
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "boolean",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+      "universe": {
+        "eligibility": "输入产品合法有效报价；计算不要求273月选资格",
+        "warmup": "按SMA窗口；距离和状态继承依赖SMA"
+      },
+      "status": {
+        "implementation": "synthetic_boundary_verified; not_full_policy_verification"
+      }
+    },
+    {
+      "id": "trend.cross_up50",
+      "version": "1.0.0",
+      "name": "本次上穿50日均线事件",
+      "type": "state_signal",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "trend.sma50@1.0.0"
+      ],
+      "definition": {
+        "formula": "P_t>SMA50_t AND P_prev<=SMA50_prev",
+        "parameters": {
+          "equal_current": false,
+          "previous": "上一有效报价",
+          "missing_previous": "缺失"
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "boolean",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "synthetic_boundary_verified; not_full_policy_verification",
+        "effectiveness": "definition_only_no_strategy_test",
+        "production": "not_authorized"
+      },
+      "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+      "universe": {
+        "eligibility": "输入产品合法有效报价；计算不要求273月选资格",
+        "warmup": "按SMA窗口；距离和状态继承依赖SMA"
+      }
+    },
+    {
+      "id": "trend.sma200",
+      "version": "1.0.0",
+      "name": "200有效报价简单均线",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "mixed.price.economic@1.0.0"
+      ],
+      "definition": {
+        "formula": "SMA200=sum(last 200 valid P_signal including t)/200",
+        "parameters": {
+          "window": 200,
+          "min_periods": 200
+        },
+        "endpoints": "[t-199,t]有效报价，包含t",
+        "unit": "same_as_P_signal",
+        "direction": "描述平均价格，不单独表示方向",
+        "transforms": "算术均值；无EMA权重"
+      },
+      "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+      "universe": {
+        "eligibility": "输入产品合法有效报价；计算不要求273月选资格",
+        "warmup": "按SMA窗口；距离和状态继承依赖SMA"
+      },
+      "status": {
+        "implementation": "isolated_formula_or_selection_compared_with_legacy; consumers_not_migrated"
+      }
+    },
+    {
+      "id": "trend.distance200",
+      "version": "1.0.0",
+      "name": "相对200日均线距离",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "trend.sma200@1.0.0"
+      ],
+      "definition": {
+        "formula": "P_signal/SMA200-1",
+        "parameters": {
+          "window": 200
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+      "universe": {
+        "eligibility": "输入产品合法有效报价；计算不要求273月选资格",
+        "warmup": "按SMA窗口；距离和状态继承依赖SMA"
+      },
+      "status": {
+        "implementation": "synthetic_boundary_verified; not_full_policy_verification"
+      }
+    },
+    {
+      "id": "trend.above200",
+      "version": "1.0.0",
+      "name": "严格站上200日均线",
+      "type": "state_signal",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description"
+      ],
+      "dependencies": [
+        "trend.sma200@1.0.0"
+      ],
+      "definition": {
+        "formula": "P_signal>SMA200",
+        "parameters": {
+          "equal": false
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "boolean",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+      "universe": {
+        "eligibility": "输入产品合法有效报价；计算不要求273月选资格",
+        "warmup": "按SMA窗口；距离和状态继承依赖SMA"
+      },
+      "status": {
+        "implementation": "synthetic_boundary_verified; not_full_policy_verification"
+      }
+    },
+    {
+      "id": "trend.cross_up200",
+      "version": "1.0.0",
+      "name": "本次上穿200日均线事件",
+      "type": "state_signal",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "trend.sma200@1.0.0"
+      ],
+      "definition": {
+        "formula": "P_t>SMA200_t AND P_prev<=SMA200_prev",
+        "parameters": {
+          "equal_current": false,
+          "previous": "上一有效报价",
+          "missing_previous": "缺失"
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "boolean",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "synthetic_boundary_verified; not_full_policy_verification",
+        "effectiveness": "definition_only_no_strategy_test",
+        "production": "not_authorized"
+      },
+      "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+      "universe": {
+        "eligibility": "输入产品合法有效报价；计算不要求273月选资格",
+        "warmup": "按SMA窗口；距离和状态继承依赖SMA"
+      }
+    },
+    {
+      "id": "trend.recovered200",
+      "version": "1.0.0",
+      "name": "站回或等于200日均线",
+      "type": "state_signal",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description"
+      ],
+      "dependencies": [
+        "trend.sma200@1.0.0"
+      ],
+      "definition": {
+        "formula": "P_signal>=SMA200",
+        "parameters": {
+          "equal": true
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "boolean",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+      "universe": {
+        "eligibility": "输入产品合法有效报价；计算不要求273月选资格",
+        "warmup": "按SMA窗口；距离和状态继承依赖SMA"
+      },
+      "status": {
+        "implementation": "synthetic_boundary_verified; not_full_policy_verification"
+      }
+    },
+    {
+      "id": "breadth.all_a.b50.common",
+      "version": "1.0.0",
+      "name": "all_a B50共同分母（比例）",
+      "type": "state_signal",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "count(P>SMA50 in E200)/count(E200)",
+        "parameters": {
+          "window": 50,
+          "eligible_window": 200,
+          "minimum_coverage": 0.9,
+          "strict_above": true
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "scope": "当前缓存列回溯全A（非完整历史存续表）",
+      "universe": {
+        "version": "冻结全A面板列首末非缺失区间，已含事后存续偏差",
+        "eligibility": "当日成员且当日真实报价且至少200有效收盘；B50/B200共用E200",
+        "warmup": "200有效收盘（包含当日）",
+        "missing": "停牌/缺报价不纳入当日E；新股不足200不合格；全无合格返回缺失原因",
+        "quality_gate": "eligible/当日成员总数>=0.90；等于0.90有效",
+        "degrade": "无名单/无合格/覆盖不足时两个宽度均缺失，不返回0"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "isolated_fraction_adapter; legacy_percent_mapped",
+        "effectiveness": "level_definition_not_return_factor",
+        "production": "not_authorized"
+      },
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "共同分母不消除成员变更影响；输入成员必须当时生效且可知"
+      }
+    },
+    {
+      "id": "breadth.all_a.b50.legacy_percent",
+      "version": "1.0.0",
+      "name": "all_a B50冻结百分数口径",
+      "type": "state_signal",
+      "profile": "breadth",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "breadth.all_a.b50.common@1.0.0"
+      ],
+      "definition": {
+        "formula": "100 * fraction B50",
+        "parameters": {
+          "scale": 100
+        },
+        "endpoints": "同common版本；只换单位",
+        "unit": "percent",
+        "direction": "严格高于自身均线比例",
+        "transforms": "乘100，不能再按0至1阈值处理"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "legacy_frozen_mapped",
+        "effectiveness": "not_tested_by_normalization",
+        "production": "not_authorized"
+      }
+    },
+    {
+      "id": "breadth.all_a.delta50_20",
+      "version": "1.0.0",
+      "name": "all_a B50二十行变化",
+      "type": "feature",
+      "profile": "breadth",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "breadth.all_a.b50.common@1.0.0"
+      ],
+      "definition": {
+        "formula": "fraction B50_t - fraction B50_{t-20}",
+        "parameters": {
+          "lag": 20
+        },
+        "endpoints": "显式同一交易日历第t及t-20行；不跳过缺失行；成员变更影响另列",
+        "unit": "fraction_difference",
+        "direction": "+0.05=增加5个百分点；不是相对增长5%",
+        "transforms": "一阶端点差；不年化、不除以旧值"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "frozen_W1_W2_negative_evidence; not_all_breadth_invalid",
+        "production": "not_authorized"
+      }
+    },
+    {
+      "id": "breadth.all_a.b200.common",
+      "version": "1.0.0",
+      "name": "all_a B200共同分母（比例）",
+      "type": "state_signal",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "count(P>SMA200 in E200)/count(E200)",
+        "parameters": {
+          "window": 200,
+          "eligible_window": 200,
+          "minimum_coverage": 0.9,
+          "strict_above": true
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "scope": "当前缓存列回溯全A（非完整历史存续表）",
+      "universe": {
+        "version": "冻结全A面板列首末非缺失区间，已含事后存续偏差",
+        "eligibility": "当日成员且当日真实报价且至少200有效收盘；B50/B200共用E200",
+        "warmup": "200有效收盘（包含当日）",
+        "missing": "停牌/缺报价不纳入当日E；新股不足200不合格；全无合格返回缺失原因",
+        "quality_gate": "eligible/当日成员总数>=0.90；等于0.90有效",
+        "degrade": "无名单/无合格/覆盖不足时两个宽度均缺失，不返回0"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "isolated_fraction_adapter; legacy_percent_mapped",
+        "effectiveness": "level_definition_not_return_factor",
+        "production": "not_authorized"
+      },
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "共同分母不消除成员变更影响；输入成员必须当时生效且可知"
+      }
+    },
+    {
+      "id": "breadth.all_a.b200.legacy_percent",
+      "version": "1.0.0",
+      "name": "all_a B200冻结百分数口径",
+      "type": "state_signal",
+      "profile": "breadth",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "breadth.all_a.b200.common@1.0.0"
+      ],
+      "definition": {
+        "formula": "100 * fraction B200",
+        "parameters": {
+          "scale": 100
+        },
+        "endpoints": "同common版本；只换单位",
+        "unit": "percent",
+        "direction": "严格高于自身均线比例",
+        "transforms": "乘100，不能再按0至1阈值处理"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "legacy_frozen_mapped",
+        "effectiveness": "not_tested_by_normalization",
+        "production": "not_authorized"
+      }
+    },
+    {
+      "id": "breadth.all_a.delta200_20",
+      "version": "1.0.0",
+      "name": "all_a B200二十行变化",
+      "type": "feature",
+      "profile": "breadth",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "breadth.all_a.b200.common@1.0.0"
+      ],
+      "definition": {
+        "formula": "fraction B200_t - fraction B200_{t-20}",
+        "parameters": {
+          "lag": 20
+        },
+        "endpoints": "显式同一交易日历第t及t-20行；不跳过缺失行；成员变更影响另列",
+        "unit": "fraction_difference",
+        "direction": "+0.05=增加5个百分点；不是相对增长5%",
+        "transforms": "一阶端点差；不年化、不除以旧值"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "frozen_W1_W2_negative_evidence; not_all_breadth_invalid",
+        "production": "not_authorized"
+      }
+    },
+    {
+      "id": "breadth.csi300.b50.common",
+      "version": "1.0.0",
+      "name": "csi300 B50共同分母（比例）",
+      "type": "state_signal",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "count(P>SMA50 in E200)/count(E200)",
+        "parameters": {
+          "window": 50,
+          "eligible_window": 200,
+          "minimum_coverage": 0.9,
+          "strict_above": true
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "scope": "沪深300指数300成分（20交易日探测成员链）",
+      "universe": {
+        "version": "csi_members指纹：查询历史300名单，20交易日探测，可能漏段内往返",
+        "eligibility": "当日成员且当日真实报价且至少200有效收盘；B50/B200共用E200",
+        "warmup": "200有效收盘（包含当日）",
+        "missing": "停牌/缺报价不纳入当日E；新股不足200不合格；全无合格返回缺失原因",
+        "quality_gate": "eligible/当日成员总数>=0.90；等于0.90有效",
+        "degrade": "无名单/无合格/覆盖不足时两个宽度均缺失，不返回0"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "isolated_formula_compared_on_member_change_sample; consumers_not_migrated",
+        "effectiveness": "level_definition_not_return_factor",
+        "production": "not_authorized"
+      },
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "共同分母不消除成员变更影响；输入成员必须当时生效且可知"
+      }
+    },
+    {
+      "id": "breadth.csi300.b50.legacy_percent",
+      "version": "1.0.0",
+      "name": "csi300 B50冻结百分数口径",
+      "type": "state_signal",
+      "profile": "breadth",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "breadth.csi300.b50.common@1.0.0"
+      ],
+      "definition": {
+        "formula": "100 * fraction B50",
+        "parameters": {
+          "scale": 100
+        },
+        "endpoints": "同common版本；只换单位",
+        "unit": "percent",
+        "direction": "严格高于自身均线比例",
+        "transforms": "乘100，不能再按0至1阈值处理"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "legacy_frozen_mapped",
+        "effectiveness": "not_tested_by_normalization",
+        "production": "not_authorized"
+      }
+    },
+    {
+      "id": "breadth.csi300.delta50_20",
+      "version": "1.0.0",
+      "name": "csi300 B50二十行变化",
+      "type": "feature",
+      "profile": "breadth",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "breadth.csi300.b50.common@1.0.0"
+      ],
+      "definition": {
+        "formula": "fraction B50_t - fraction B50_{t-20}",
+        "parameters": {
+          "lag": 20
+        },
+        "endpoints": "显式同一交易日历第t及t-20行；不跳过缺失行；成员变更影响另列",
+        "unit": "fraction_difference",
+        "direction": "+0.05=增加5个百分点；不是相对增长5%",
+        "transforms": "一阶端点差；不年化、不除以旧值"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "frozen_W1_W2_negative_evidence; not_all_breadth_invalid",
+        "production": "not_authorized"
+      }
+    },
+    {
+      "id": "breadth.csi300.b200.common",
+      "version": "1.0.0",
+      "name": "csi300 B200共同分母（比例）",
+      "type": "state_signal",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "count(P>SMA200 in E200)/count(E200)",
+        "parameters": {
+          "window": 200,
+          "eligible_window": 200,
+          "minimum_coverage": 0.9,
+          "strict_above": true
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "scope": "沪深300指数300成分（20交易日探测成员链）",
+      "universe": {
+        "version": "csi_members指纹：查询历史300名单，20交易日探测，可能漏段内往返",
+        "eligibility": "当日成员且当日真实报价且至少200有效收盘；B50/B200共用E200",
+        "warmup": "200有效收盘（包含当日）",
+        "missing": "停牌/缺报价不纳入当日E；新股不足200不合格；全无合格返回缺失原因",
+        "quality_gate": "eligible/当日成员总数>=0.90；等于0.90有效",
+        "degrade": "无名单/无合格/覆盖不足时两个宽度均缺失，不返回0"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "isolated_formula_compared_on_member_change_sample; consumers_not_migrated",
+        "effectiveness": "level_definition_not_return_factor",
+        "production": "not_authorized"
+      },
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "共同分母不消除成员变更影响；输入成员必须当时生效且可知"
+      }
+    },
+    {
+      "id": "breadth.csi300.b200.legacy_percent",
+      "version": "1.0.0",
+      "name": "csi300 B200冻结百分数口径",
+      "type": "state_signal",
+      "profile": "breadth",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "breadth.csi300.b200.common@1.0.0"
+      ],
+      "definition": {
+        "formula": "100 * fraction B200",
+        "parameters": {
+          "scale": 100
+        },
+        "endpoints": "同common版本；只换单位",
+        "unit": "percent",
+        "direction": "严格高于自身均线比例",
+        "transforms": "乘100，不能再按0至1阈值处理"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "legacy_frozen_mapped",
+        "effectiveness": "not_tested_by_normalization",
+        "production": "not_authorized"
+      }
+    },
+    {
+      "id": "breadth.csi300.delta200_20",
+      "version": "1.0.0",
+      "name": "csi300 B200二十行变化",
+      "type": "feature",
+      "profile": "breadth",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "breadth.csi300.b200.common@1.0.0"
+      ],
+      "definition": {
+        "formula": "fraction B200_t - fraction B200_{t-20}",
+        "parameters": {
+          "lag": 20
+        },
+        "endpoints": "显式同一交易日历第t及t-20行；不跳过缺失行；成员变更影响另列",
+        "unit": "fraction_difference",
+        "direction": "+0.05=增加5个百分点；不是相对增长5%",
+        "transforms": "一阶端点差；不年化、不除以旧值"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "frozen_W1_W2_negative_evidence; not_all_breadth_invalid",
+        "production": "not_authorized"
+      }
+    },
+    {
+      "id": "breadth.chinext.b50.common",
+      "version": "1.0.0",
+      "name": "chinext B50共同分母（比例）",
+      "type": "state_signal",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "count(P>SMA50 in E200)/count(E200)",
+        "parameters": {
+          "window": 50,
+          "eligible_window": 200,
+          "minimum_coverage": 0.9,
+          "strict_above": true
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "scope": "创业板指数100成分；不是全创业板市场",
+      "universe": {
+        "version": "blocked：2017-10-09反推101只，成员链未闭合",
+        "eligibility": "当日成员且当日真实报价且至少200有效收盘；B50/B200共用E200",
+        "warmup": "200有效收盘（包含当日）",
+        "missing": "停牌/缺报价不纳入当日E；新股不足200不合格；全无合格返回缺失原因",
+        "quality_gate": "eligible/当日成员总数>=0.90；等于0.90有效",
+        "degrade": "无名单/无合格/覆盖不足时两个宽度均缺失，不返回0"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "blocked_membership_chain",
+        "implementation": "isolated_fraction_adapter; legacy_percent_mapped",
+        "effectiveness": "level_definition_not_return_factor",
+        "production": "not_authorized"
+      },
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "合成算法检查不算真实创业板证据；旧自身4路径未跑"
+      }
+    },
+    {
+      "id": "breadth.chinext.b50.legacy_percent",
+      "version": "1.0.0",
+      "name": "chinext B50冻结百分数口径",
+      "type": "state_signal",
+      "profile": "breadth",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "breadth.chinext.b50.common@1.0.0"
+      ],
+      "definition": {
+        "formula": "100 * fraction B50",
+        "parameters": {
+          "scale": 100
+        },
+        "endpoints": "同common版本；只换单位",
+        "unit": "percent",
+        "direction": "严格高于自身均线比例",
+        "transforms": "乘100，不能再按0至1阈值处理"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "blocked_membership_chain",
+        "implementation": "legacy_frozen_mapped",
+        "effectiveness": "not_tested_by_normalization",
+        "production": "not_authorized"
+      }
+    },
+    {
+      "id": "breadth.chinext.delta50_20",
+      "version": "1.0.0",
+      "name": "chinext B50二十行变化",
+      "type": "feature",
+      "profile": "breadth",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "breadth.chinext.b50.common@1.0.0"
+      ],
+      "definition": {
+        "formula": "fraction B50_t - fraction B50_{t-20}",
+        "parameters": {
+          "lag": 20
+        },
+        "endpoints": "显式同一交易日历第t及t-20行；不跳过缺失行；成员变更影响另列",
+        "unit": "fraction_difference",
+        "direction": "+0.05=增加5个百分点；不是相对增长5%",
+        "transforms": "一阶端点差；不年化、不除以旧值"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "blocked_membership_chain",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "unrun",
+        "production": "not_authorized"
+      }
+    },
+    {
+      "id": "breadth.chinext.b200.common",
+      "version": "1.0.0",
+      "name": "chinext B200共同分母（比例）",
+      "type": "state_signal",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "count(P>SMA200 in E200)/count(E200)",
+        "parameters": {
+          "window": 200,
+          "eligible_window": 200,
+          "minimum_coverage": 0.9,
+          "strict_above": true
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "scope": "创业板指数100成分；不是全创业板市场",
+      "universe": {
+        "version": "blocked：2017-10-09反推101只，成员链未闭合",
+        "eligibility": "当日成员且当日真实报价且至少200有效收盘；B50/B200共用E200",
+        "warmup": "200有效收盘（包含当日）",
+        "missing": "停牌/缺报价不纳入当日E；新股不足200不合格；全无合格返回缺失原因",
+        "quality_gate": "eligible/当日成员总数>=0.90；等于0.90有效",
+        "degrade": "无名单/无合格/覆盖不足时两个宽度均缺失，不返回0"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "blocked_membership_chain",
+        "implementation": "isolated_fraction_adapter; legacy_percent_mapped",
+        "effectiveness": "level_definition_not_return_factor",
+        "production": "not_authorized"
+      },
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "合成算法检查不算真实创业板证据；旧自身4路径未跑"
+      }
+    },
+    {
+      "id": "breadth.chinext.b200.legacy_percent",
+      "version": "1.0.0",
+      "name": "chinext B200冻结百分数口径",
+      "type": "state_signal",
+      "profile": "breadth",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "breadth.chinext.b200.common@1.0.0"
+      ],
+      "definition": {
+        "formula": "100 * fraction B200",
+        "parameters": {
+          "scale": 100
+        },
+        "endpoints": "同common版本；只换单位",
+        "unit": "percent",
+        "direction": "严格高于自身均线比例",
+        "transforms": "乘100，不能再按0至1阈值处理"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "blocked_membership_chain",
+        "implementation": "legacy_frozen_mapped",
+        "effectiveness": "not_tested_by_normalization",
+        "production": "not_authorized"
+      }
+    },
+    {
+      "id": "breadth.chinext.delta200_20",
+      "version": "1.0.0",
+      "name": "chinext B200二十行变化",
+      "type": "feature",
+      "profile": "breadth",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "breadth.chinext.b200.common@1.0.0"
+      ],
+      "definition": {
+        "formula": "fraction B200_t - fraction B200_{t-20}",
+        "parameters": {
+          "lag": 20
+        },
+        "endpoints": "显式同一交易日历第t及t-20行；不跳过缺失行；成员变更影响另列",
+        "unit": "fraction_difference",
+        "direction": "+0.05=增加5个百分点；不是相对增长5%",
+        "transforms": "一阶端点差；不年化、不除以旧值"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "blocked_membership_chain",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "unrun",
+        "production": "not_authorized"
+      }
+    },
+    {
+      "id": "breadth.production.independent",
+      "version": "1.0.0",
+      "name": "生产通用宽度独立分母（映射）",
+      "type": "state_signal",
+      "profile": "breadth",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "100 * above_N / eligible_N",
+        "parameters": {
+          "windows": [
+            20,
+            50,
+            200
+          ],
+          "max_stale_sessions": 5
+        },
+        "endpoints": "独立N观察，含旧状态容忍",
+        "unit": "percent",
+        "direction": "高=更多站上",
+        "transforms": "无"
+      },
+      "sources": [
+        "breadth_legacy"
+      ],
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "consumer_specific",
+        "implementation": "legacy_not_migrated",
+        "effectiveness": "not_tested_by_normalization",
+        "production": "not_authorized"
+      },
+      "universe": {
+        "version": "etf-confirmation-v1；breadth_inputs及csi_members",
+        "eligibility": "每N独立分母，最多5交易日旧状态",
+        "warmup": "200有效收盘（包含当日）",
+        "missing": "覆盖不足仍返回值并标INCOMPLETE",
+        "quality_gate": "eligible/当日成员总数>=0.90；等于0.90有效",
+        "degrade": "不得接入共同分母消费者"
+      }
+    },
+    {
+      "id": "breadth.daily_all_a.independent",
+      "version": "1.0.0",
+      "name": "日常全A独立分母（映射）",
+      "type": "state_signal",
+      "profile": "breadth",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "100*above_N/eligible_N",
+        "parameters": {
+          "windows": [
+            20,
+            50,
+            200
+          ],
+          "min_symbols": 100
+        },
+        "endpoints": "当前报价和N均线分别有效",
+        "unit": "percent",
+        "direction": "高=更多站上",
+        "transforms": "无"
+      },
+      "sources": [
+        "all_a_legacy"
+      ],
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "legacy_not_migrated",
+        "effectiveness": "not_tested_by_normalization",
+        "production": "not_authorized"
+      },
+      "universe": {
+        "version": "当前全A缓存名单；各N独立",
+        "eligibility": "当前真实报价和各N均线有值；历史回填默认至少100只",
+        "warmup": "200有效收盘（包含当日）",
+        "missing": "按N独立缺失，不共用200日",
+        "quality_gate": "eligible/当日成员总数>=0.90；等于0.90有效",
+        "degrade": "不能替换common版本"
+      }
+    },
+    {
+      "id": "breadth.three_tier",
+      "version": "1.0.0",
+      "name": "低宽度多投入三档目标",
+      "type": "state_signal",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "description"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "B<0.433=>1; 0.433<=B<0.567=>0.5; B>=0.567=>0",
+        "parameters": {
+          "low": 0.433,
+          "high": 0.567,
+          "missing": "缺失"
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "scope": "接入时必须引用具体U、B200版本；映射本身不是完整交易策略"
+    },
+    {
+      "id": "cash.zero",
+      "version": "1.0.0",
+      "name": "资金模拟现金无息",
+      "type": "factor_return",
+      "profile": "mixed",
+      "uses": [
+        "attribution",
+        "comparison"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "r_cash(t)=0",
+        "parameters": {
+          "annual_rate": 0
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "cash_balance"
+        ],
+        "price_basis": "名义人民币现金；不含应收",
+        "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+        "frequency": "daily_valid_quotes",
+        "calendar": "自然日"
+      },
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "模拟假设；不是风险调整模型的无风险利率，未提供risk-free序列"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "simulation_assumption",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "not_tested_by_normalization",
+        "production": "not_authorized"
+      },
+      "universe": {
+        "version": "绑定模拟账户",
+        "eligibility": "所有等待现金，不是ETF候选",
+        "warmup": "无",
+        "missing": "现金记录缺失不得假装为0",
+        "quality_gate": "假设现金利息为0，不是观察所得市场无风险收益",
+        "degrade": "风险调整模型另需合格无风险序列"
+      },
+      "time": {
+        "observation_time": "账户记账周期",
+        "execution_at": "非买卖信号"
+      }
+    },
+    {
+      "id": "risk.product_account_weight",
+      "version": "1.0.0",
+      "name": "产品占完整账户比例",
+      "type": "risk_metric",
+      "profile": "mixed",
+      "uses": [
+        "diagnostic",
+        "attribution"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "market_value_i/equity",
+        "parameters": {
+          "denominator": "cash+receivables+market_values"
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "sources": [
+        "concentration_code"
+      ],
+      "input": {
+        "fields": [
+          "units",
+          "nominal_close",
+          "cash",
+          "receivable"
+        ],
+        "price_basis": "实际份额*名义最后有效收盘，拆分调整旧价",
+        "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+        "frequency": "calendar_day_valuation",
+        "calendar": "自然日重复估值"
+      },
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "不是目标权重；不是市场beta估计"
+      },
+      "scope": "绑定账户及互斥经济方向的实际持仓或贡献，不继承选强入选资格",
+      "universe": {
+        "version": "账户持仓与concentration_code互斥方向映射",
+        "eligibility": "所有实际持仓均入账，包括后续不再满足入选条件的持仓",
+        "warmup": "无；区间统计须有完整账户账本",
+        "missing": "缺估值需按原协议标价并标明；缺账不得输出完整比例",
+        "quality_gate": "市值+现金+应收核对权益；方向只允许单一归属",
+        "degrade": "分母无效不报比例，保留金额与缺失原因"
+      },
+      "time": {
+        "observation_time": "账户日终估值或明确的统计区间",
+        "execution_at": "风险描述不自动触发交易"
+      }
+    },
+    {
+      "id": "risk.direction_account_weight",
+      "version": "1.0.0",
+      "name": "经济方向占完整账户比例",
+      "type": "risk_metric",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "risk.product_account_weight@1.0.0"
+      ],
+      "definition": {
+        "formula": "sum(product market_value for exclusive group)/equity",
+        "parameters": {
+          "grouping": "concentration_code内固定互斥映射；均值按自然日"
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "sources": [
+        "concentration_code",
+        "dedup_protocol"
+      ],
+      "scope": "绑定账户及互斥经济方向的实际持仓或贡献，不继承选强入选资格",
+      "universe": {
+        "version": "账户持仓与concentration_code互斥方向映射",
+        "eligibility": "所有实际持仓均入账，包括后续不再满足入选条件的持仓",
+        "warmup": "无；区间统计须有完整账户账本",
+        "missing": "缺估值需按原协议标价并标明；缺账不得输出完整比例",
+        "quality_gate": "市值+现金+应收核对权益；方向只允许单一归属",
+        "degrade": "分母无效不报比例，保留金额与缺失原因"
+      },
+      "input": {
+        "fields": [
+          "units",
+          "nominal_close",
+          "cash",
+          "receivable"
+        ],
+        "price_basis": "实际份额*名义最后有效收盘，拆分调整旧价",
+        "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+        "frequency": "calendar_day_valuation",
+        "calendar": "自然日重复估值"
+      },
+      "time": {
+        "observation_time": "账户日终估值或明确的统计区间",
+        "execution_at": "风险描述不自动触发交易"
+      }
+    },
+    {
+      "id": "risk.product_invested_weight",
+      "version": "1.0.0",
+      "name": "产品占在场资产比例",
+      "type": "risk_metric",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "risk.product_account_weight@1.0.0"
+      ],
+      "definition": {
+        "formula": "market_value_i/sum(market_values)",
+        "parameters": {
+          "zero_invested": "缺失原因no_invested_assets"
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "research_adapter_only",
+        "effectiveness": "not_tested_by_normalization",
+        "production": "not_authorized"
+      },
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "辅助风险视角，不得取代完整账户资金分母"
+      },
+      "scope": "绑定账户及互斥经济方向的实际持仓或贡献，不继承选强入选资格",
+      "universe": {
+        "version": "账户持仓与concentration_code互斥方向映射",
+        "eligibility": "所有实际持仓均入账，包括后续不再满足入选条件的持仓",
+        "warmup": "无；区间统计须有完整账户账本",
+        "missing": "缺估值需按原协议标价并标明；缺账不得输出完整比例",
+        "quality_gate": "市值+现金+应收核对权益；方向只允许单一归属",
+        "degrade": "分母无效不报比例，保留金额与缺失原因"
+      },
+      "input": {
+        "fields": [
+          "units",
+          "nominal_close",
+          "cash",
+          "receivable"
+        ],
+        "price_basis": "实际份额*名义最后有效收盘，拆分调整旧价",
+        "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+        "frequency": "calendar_day_valuation",
+        "calendar": "自然日重复估值"
+      },
+      "time": {
+        "observation_time": "账户日终估值或明确的统计区间",
+        "execution_at": "风险描述不自动触发交易"
+      }
+    },
+    {
+      "id": "risk.profit_direction_share",
+      "version": "1.0.0",
+      "name": "经济方向利润占比（非持仓比例）",
+      "type": "risk_metric",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "group_net_pnl/(equity_end-initial_cash)",
+        "parameters": {
+          "group_pnl": "净卖出-含费买入+已获得分红权益+期末市值",
+          "near_zero": "不输出占比，报告金额"
+        },
+        "endpoints": "冻结实验起止区间，非单日t；该版本无外部入金",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "sources": [
+        "concentration_code"
+      ],
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "重叠视角不得再相加；可能负数或>100%；不是集中收益因子"
+      },
+      "scope": "绑定账户及互斥经济方向的实际持仓或贡献，不继承选强入选资格",
+      "universe": {
+        "version": "账户持仓与concentration_code互斥方向映射",
+        "eligibility": "所有实际持仓均入账，包括后续不再满足入选条件的持仓",
+        "warmup": "无；区间统计须有完整账户账本",
+        "missing": "缺估值需按原协议标价并标明；缺账不得输出完整比例",
+        "quality_gate": "市值+现金+应收核对权益；方向只允许单一归属",
+        "degrade": "分母无效不报比例，保留金额与缺失原因"
+      },
+      "input": {
+        "fields": [
+          "net_sale",
+          "purchase_including_fees",
+          "dividend_entitlement",
+          "ending_market_value",
+          "initial_cash",
+          "ending_equity"
+        ],
+        "price_basis": "绑定账户净损益账；不是P_signal",
+        "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+        "frequency": "calendar_day_valuation",
+        "calendar": "自然日重复估值"
+      },
+      "time": {
+        "observation_time": "账户日终估值或明确的统计区间",
+        "execution_at": "风险描述不自动触发交易"
+      }
+    },
+    {
+      "id": "mixed.no_exit_100",
+      "version": "1.0.0",
+      "name": "满额选强参照",
+      "type": "benchmark",
+      "profile": "mixed",
+      "uses": [
+        "comparison"
+      ],
+      "dependencies": [
+        "mixed.top3@1.0.0",
+        "cash.zero@1.0.0"
+      ],
+      "definition": {
+        "formula": "完整账户权益=现金+应收+实际份额*名义估值；收益来自该policy执行",
+        "parameters": {
+          "initial": 1000000,
+          "allocation": 1,
+          "fees": [
+            0.001,
+            0.002
+          ]
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "sources": [
+        "mixed_code",
+        "mixed_protocol",
+        "defense_code",
+        "defense_protocol",
+        "defense_results",
+        "mixed_prices",
+        "mixed_actions",
+        "mixed_pool"
+      ],
+      "policy": {
+        "selection": "当月动态273报价资格；动量排序、RV过滤、前三；负分允许，同分代码升序",
+        "weights": "月度总目标100%，各入选产品1/N，月间漂移；无候选全现金",
+        "cash": "初始1000000 CNY，外部流量0，cash_interest0，现金和应收计权益；分红登记获权/除息应收/支付日开盘前到账近似",
+        "fees": "每边0.001主方案与0.002压力方案；实际成交金额计费，无最低费；整100份含费向下取整；不得混合两费用",
+        "rebalance": "每月输入并集最后收盘；下一并集开盘一次目标；月度目标替换旧待单；完成机会后不逐日补零头",
+        "execution": "full-execution/run.py::simulate或defense_code::simulate；先卖后买，按开盘权益定金额；缺价/零量/单价锁定/已知限制延期；资金不足按比例缩量；期末收盘持仓不虚构清仓",
+        "exit": "只在月调仓减少/删除名单；无日线止损",
+        "reentry": "下次月调仓；无每日买回",
+        "investability": "产品可买，但有限存续池+理想日线开盘+不完整限制资料，仅研究可执行近似"
+      },
+      "validation": {
+        "method": "协议与执行逐项映射；本轮仅指标/选择复算，完整账户历史结果引用旧封存，未重新跑",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "mapped_legacy非完整迁移；月末输入末行需已结束月份，部分月不能装作完成月"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "historical_results_exist_limited_pool_no_new_effectiveness_claim",
+        "production": "not_authorized"
+      }
+    },
+    {
+      "id": "mixed.no_exit_75",
+      "version": "1.0.0",
+      "name": "月度75%选强参照",
+      "type": "benchmark",
+      "profile": "mixed",
+      "uses": [
+        "comparison"
+      ],
+      "dependencies": [
+        "mixed.top3@1.0.0",
+        "cash.zero@1.0.0"
+      ],
+      "definition": {
+        "formula": "完整账户权益=现金+应收+实际份额*名义估值；收益来自该policy执行",
+        "parameters": {
+          "initial": 1000000,
+          "allocation": 0.75,
+          "fees": [
+            0.001,
+            0.002
+          ]
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "sources": [
+        "mixed_code",
+        "mixed_protocol",
+        "defense_code",
+        "defense_protocol",
+        "defense_results",
+        "mixed_prices",
+        "mixed_actions",
+        "mixed_pool"
+      ],
+      "policy": {
+        "selection": "当月动态273报价资格；动量排序、RV过滤、前三；负分允许，同分代码升序",
+        "weights": "月度总目标75%，各入选产品1/N，月间漂移；无候选全现金",
+        "cash": "初始1000000 CNY，外部流量0，cash_interest0，现金和应收计权益；分红登记获权/除息应收/支付日开盘前到账近似",
+        "fees": "每边0.001主方案与0.002压力方案；实际成交金额计费，无最低费；整100份含费向下取整；不得混合两费用",
+        "rebalance": "每月输入并集最后收盘；下一并集开盘一次目标；月度目标替换旧待单；完成机会后不逐日补零头",
+        "execution": "full-execution/run.py::simulate或defense_code::simulate；先卖后买，按开盘权益定金额；缺价/零量/单价锁定/已知限制延期；资金不足按比例缩量；期末收盘持仓不虚构清仓",
+        "exit": "只在月调仓减少/删除名单；无日线止损",
+        "reentry": "下次月调仓；无每日买回",
+        "investability": "产品可买，但有限存续池+理想日线开盘+不完整限制资料，仅研究可执行近似"
+      },
+      "validation": {
+        "method": "协议与执行逐项映射；本轮仅指标/选择复算，完整账户历史结果引用旧封存，未重新跑",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "mapped_legacy非完整迁移；月末输入末行需已结束月份，部分月不能装作完成月"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "historical_results_exist_limited_pool_no_new_effectiveness_claim",
+        "production": "not_authorized"
+      }
+    },
+    {
+      "id": "mixed.monthly_reentry_exit",
+      "version": "1.0.0",
+      "name": "SMA200退出/原月度回补参照",
+      "type": "benchmark",
+      "profile": "mixed",
+      "uses": [
+        "comparison"
+      ],
+      "dependencies": [
+        "mixed.top3@1.0.0",
+        "cash.zero@1.0.0",
+        "trend.sma200@1.0.0"
+      ],
+      "definition": {
+        "formula": "完整账户权益=现金+应收+实际份额*名义估值；收益来自该policy执行",
+        "parameters": {
+          "initial": 1000000,
+          "allocation": 1,
+          "fees": [
+            0.001,
+            0.002
+          ]
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "sources": [
+        "mixed_code",
+        "mixed_protocol",
+        "defense_code",
+        "defense_protocol",
+        "defense_results",
+        "mixed_prices",
+        "mixed_actions",
+        "mixed_pool"
+      ],
+      "policy": {
+        "selection": "当月动态273报价资格；动量排序、RV过滤、前三；负分允许，同分代码升序",
+        "weights": "月度总目标100%，各入选产品1/N，月间漂移；无候选全现金",
+        "cash": "初始1000000 CNY，外部流量0，cash_interest0，现金和应收计权益；分红登记获权/除息应收/支付日开盘前到账近似",
+        "fees": "每边0.001主方案与0.002压力方案；实际成交金额计费，无最低费；整100份含费向下取整；不得混合两费用",
+        "rebalance": "每月输入并集最后收盘；下一并集开盘一次目标；月度目标替换旧待单；完成机会后不逐日补零头",
+        "execution": "full-execution/run.py::simulate或defense_code::simulate；先卖后买，按开盘权益定金额；缺价/零量/单价锁定/已知限制延期；资金不足按比例缩量；期末收盘持仓不虚构清仓",
+        "exit": "持有且economic_index<SMA200有效收盘触发，下一并集日开盘尝试全清；=不卖；月末买入不要求SMA",
+        "reentry": "下次月调仓；无每日买回",
+        "investability": "产品可买，但有限存续池+理想日线开盘+不完整限制资料，仅研究可执行近似"
+      },
+      "validation": {
+        "method": "协议与执行逐项映射；本轮仅指标/选择复算，完整账户历史结果引用旧封存，未重新跑",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "mapped_legacy非完整迁移；月末输入末行需已结束月份，部分月不能装作完成月"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "historical_results_exist_limited_pool_no_new_effectiveness_claim",
+        "production": "not_authorized"
+      }
+    },
+    {
+      "id": "mixed.fast_reentry_exit",
+      "version": "1.0.0",
+      "name": "SMA200退出/快速回补参照",
+      "type": "benchmark",
+      "profile": "mixed",
+      "uses": [
+        "comparison"
+      ],
+      "dependencies": [
+        "mixed.top3@1.0.0",
+        "cash.zero@1.0.0",
+        "trend.sma200@1.0.0",
+        "trend.recovered200@1.0.0"
+      ],
+      "definition": {
+        "formula": "完整账户权益=现金+应收+实际份额*名义估值；收益来自该policy执行",
+        "parameters": {
+          "initial": 1000000,
+          "allocation": 1,
+          "fees": [
+            0.001,
+            0.002
+          ]
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "sources": [
+        "mixed_code",
+        "mixed_protocol",
+        "defense_code",
+        "defense_protocol",
+        "defense_results",
+        "mixed_prices",
+        "mixed_actions",
+        "mixed_pool"
+      ],
+      "policy": {
+        "selection": "当月动态273报价资格；动量排序、RV过滤、前三；负分允许，同分代码升序",
+        "weights": "月度总目标100%，各入选产品1/N，月间漂移；无候选全现金",
+        "cash": "初始1000000 CNY，外部流量0，cash_interest0，现金和应收计权益；分红登记获权/除息应收/支付日开盘前到账近似",
+        "fees": "每边0.001主方案与0.002压力方案；实际成交金额计费，无最低费；整100份含费向下取整；不得混合两费用",
+        "rebalance": "每月输入并集最后收盘；下一并集开盘一次目标；月度目标替换旧待单；完成机会后不逐日补零头",
+        "execution": "full-execution/run.py::simulate或defense_code::simulate；先卖后买，按开盘权益定金额；缺价/零量/单价锁定/已知限制延期；资金不足按比例缩量；期末收盘持仓不虚构清仓",
+        "exit": "持有且economic_index<SMA200有效收盘触发，下一并集日开盘尝试全清；=不卖；月末买入不要求SMA",
+        "reentry": "当月名单内实际SMA全清且净卖款预算>0、当前零持仓；收盘economic_index>=SMA200后下一可执行开盘，用该产品最近一次净卖款含费整百买回；不用其他现金/后续分红；买后清预算；等待又跌破则撤单留预算；月调仓优先清旧预算与队列；无每日重排或新RV过滤",
+        "investability": "产品可买，但有限存续池+理想日线开盘+不完整限制资料，仅研究可执行近似"
+      },
+      "validation": {
+        "method": "协议与执行逐项映射；本轮仅指标/选择复算，完整账户历史结果引用旧封存，未重新跑",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "mapped_legacy非完整迁移；月末输入末行需已结束月份，部分月不能装作完成月"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "historical_results_exist_limited_pool_no_new_effectiveness_claim",
+        "production": "not_authorized"
+      }
+    },
+    {
+      "id": "mixed.equal",
+      "version": "1.0.0",
+      "name": "同池月度平均配置参照",
+      "type": "benchmark",
+      "profile": "mixed",
+      "uses": [
+        "comparison"
+      ],
+      "dependencies": [
+        "mixed.eligible@1.0.0",
+        "cash.zero@1.0.0"
+      ],
+      "definition": {
+        "formula": "完整账户权益=现金+应收+实际份额*名义估值；收益来自该policy执行",
+        "parameters": {
+          "initial": 1000000,
+          "allocation": 1,
+          "fees": [
+            0.001,
+            0.002
+          ]
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "sources": [
+        "mixed_code",
+        "mixed_protocol",
+        "defense_code",
+        "defense_protocol",
+        "defense_results",
+        "mixed_prices",
+        "mixed_actions",
+        "mixed_pool"
+      ],
+      "policy": {
+        "selection": "当月全部动态合格产品，不用动量/RV；无SMA入场过滤",
+        "weights": "月度总目标100%，各入选产品1/N，月间漂移；无候选全现金",
+        "cash": "初始1000000 CNY，外部流量0，cash_interest0，现金和应收计权益；分红登记获权/除息应收/支付日开盘前到账近似",
+        "fees": "每边0.001主方案与0.002压力方案；实际成交金额计费，无最低费；整100份含费向下取整；不得混合两费用",
+        "rebalance": "每月输入并集最后收盘；下一并集开盘一次目标；月度目标替换旧待单；完成机会后不逐日补零头",
+        "execution": "full-execution/run.py::simulate或defense_code::simulate；先卖后买，按开盘权益定金额；缺价/零量/单价锁定/已知限制延期；资金不足按比例缩量；期末收盘持仓不虚构清仓",
+        "exit": "只在月调仓减少/删除名单；无日线止损",
+        "reentry": "下次月调仓；无每日买回",
+        "investability": "产品可买，但有限存续池+理想日线开盘+不完整限制资料，仅研究可执行近似"
+      },
+      "validation": {
+        "method": "协议与执行逐项映射；本轮仅指标/选择复算，完整账户历史结果引用旧封存，未重新跑",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "mapped_legacy非完整迁移；月末输入末行需已结束月份，部分月不能装作完成月"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "historical_results_exist_limited_pool_no_new_effectiveness_claim",
+        "production": "not_authorized"
+      }
+    },
+    {
+      "id": "mixed.equal_sma200",
+      "version": "1.0.0",
+      "name": "同池平均配置加SMA200退出",
+      "type": "benchmark",
+      "profile": "mixed",
+      "uses": [
+        "comparison"
+      ],
+      "dependencies": [
+        "mixed.eligible@1.0.0",
+        "cash.zero@1.0.0",
+        "trend.sma200@1.0.0"
+      ],
+      "definition": {
+        "formula": "完整账户权益=现金+应收+实际份额*名义估值；收益来自该policy执行",
+        "parameters": {
+          "initial": 1000000,
+          "allocation": 1,
+          "fees": [
+            0.001,
+            0.002
+          ]
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "sources": [
+        "mixed_code",
+        "mixed_protocol",
+        "defense_code",
+        "defense_protocol",
+        "defense_results",
+        "mixed_prices",
+        "mixed_actions",
+        "mixed_pool"
+      ],
+      "policy": {
+        "selection": "当月全部动态合格产品，不用动量/RV；无SMA入场过滤",
+        "weights": "月度总目标100%，各入选产品1/N，月间漂移；无候选全现金",
+        "cash": "初始1000000 CNY，外部流量0，cash_interest0，现金和应收计权益；分红登记获权/除息应收/支付日开盘前到账近似",
+        "fees": "每边0.001主方案与0.002压力方案；实际成交金额计费，无最低费；整100份含费向下取整；不得混合两费用",
+        "rebalance": "每月输入并集最后收盘；下一并集开盘一次目标；月度目标替换旧待单；完成机会后不逐日补零头",
+        "execution": "full-execution/run.py::simulate或defense_code::simulate；先卖后买，按开盘权益定金额；缺价/零量/单价锁定/已知限制延期；资金不足按比例缩量；期末收盘持仓不虚构清仓",
+        "exit": "持有且economic_index<SMA200有效收盘触发，下一并集日开盘尝试全清；=不卖；月末买入不要求SMA",
+        "reentry": "下次月调仓；无每日买回",
+        "investability": "产品可买，但有限存续池+理想日线开盘+不完整限制资料，仅研究可执行近似"
+      },
+      "validation": {
+        "method": "协议与执行逐项映射；本轮仅指标/选择复算，完整账户历史结果引用旧封存，未重新跑",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "mapped_legacy非完整迁移；月末输入末行需已结束月份，部分月不能装作完成月"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "historical_results_exist_limited_pool_no_new_effectiveness_claim",
+        "production": "not_authorized"
+      }
+    },
+    {
+      "id": "baseline.etf_hold_reinvest",
+      "version": "1.0.0",
+      "name": "宽度研究B0含分红持有",
+      "type": "benchmark",
+      "profile": "breadth",
+      "uses": [
+        "comparison"
+      ],
+      "dependencies": [
+        "cash.zero@1.0.0"
+      ],
+      "definition": {
+        "formula": "按绑定执行policy计算完整账户日账",
+        "parameters": {
+          "initial": 1000000,
+          "fees": [
+            0.001,
+            0.002
+          ]
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "固定510300或159915，不选产品",
+        "weights": "首次100%；以后仅到账分红触发全部可用现金含费整百买回",
+        "cash": "初始100万元CNY，外部流量0，利息0；名义份额/现金/应收；登记日权益/除息应收/支付日开盘前可用近似",
+        "fees": "每边0.001主费用、0.002压力；100份取整，不虚构期末卖费",
+        "rebalance": "初次开盘；正分红支付日开盘前记入现金，同日有合法开盘即可再买，否则延期",
+        "execution": "breadth_runner::simulate；名义开盘、缺价/停牌/限价延期、100份与现金限制；B0可支付日同日开盘，其余收盘信号最早后日开盘",
+        "exit": "不卖出",
+        "reentry": "分红支付触发，不是趋势回补",
+        "investability": "实际ETF与研究日线成交近似；行情/成员资料B，不等于实际容量验收"
+      },
+      "sources": [
+        "breadth_runner",
+        "breadth_protocol",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "historical_results_exist; not_recomputed_this_round",
+        "production": "not_authorized"
+      },
+      "validation": {
+        "limitations": "冻结协议写支付日后的首个交易日，但代码允许支付日同日开盘；保留设计/实际差异，不改旧结果"
+      },
+      "scope": "固定510300或159915的完整ETF账户；不使用股票宽度成员资格",
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "volume",
+          "actions",
+          "restrictions",
+          "price_limit_regimes"
+        ],
+        "price_basis": "ETF连续信号价由breadth_runner::continuous_close连接；账户只用名义价、份额、现金和应收",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "自然日记账；真实ETF报价决定可交易日期；股票宽度日历另列"
+      },
+      "universe": {
+        "version": "固定510300或159915；ETF输入来源指纹；不动态选池",
+        "eligibility": "固定ETF自身上市且有当日可交易开盘；不受股票成分数量或宽度覆盖率约束",
+        "warmup": "持有/月度50%无SMA预热；价格趋势另需窗口；旧状态比较在不足窗口时为false",
+        "missing": "缺开盘/停牌/达到限价延期；估值沿用经公司行动调整的最近价；不得把估值旧价用于新信号",
+        "quality_gate": "名义行情、公司行动及交易限制资料有限；历史到达时间未确认",
+        "degrade": "无法成交延期；缺失历史可得时间仅限研究"
+      },
+      "time": {
+        "observation_time": "固定初次开盘/日收盘/支付日（按policy分别定义）",
+        "available_at": "名义行情/行动资料取得后；支付日开盘前到账是假设，历史实际时刻未获确认",
+        "decision_at": "首次配置预定；价格/月末信号在收盘后；分红到账按policy",
+        "execution_at": "按policy；每日开盘受现金/整手/交易限制；非所有动作一概延到下一日",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-09-09映射冻结旧版，不改变消费者"
+      }
+    },
+    {
+      "id": "baseline.etf_price200",
+      "version": "1.0.0",
+      "name": "宽度研究B1自身SMA200趋势",
+      "type": "benchmark",
+      "profile": "breadth",
+      "uses": [
+        "comparison"
+      ],
+      "dependencies": [
+        "etf.trend.above200@1.0.0",
+        "cash.zero@1.0.0"
+      ],
+      "definition": {
+        "formula": "按绑定执行policy计算完整账户日账",
+        "parameters": {
+          "initial": 1000000,
+          "fees": [
+            0.001,
+            0.002
+          ]
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "固定510300或159915，不选产品",
+        "weights": "close>SMA200为100%，否则0%；=为0",
+        "cash": "初始100万元CNY，外部流量0，利息0；名义份额/现金/应收；登记日权益/除息应收/支付日开盘前可用近似",
+        "fees": "每边0.001主费用、0.002压力；100份取整，不虚构期末卖费",
+        "rebalance": "日收盘状态改变后下一开盘执行",
+        "execution": "breadth_runner::simulate；名义开盘、缺价/停牌/限价延期、100份与现金限制；B0可支付日同日开盘，其余收盘信号最早后日开盘",
+        "exit": "<=SMA200则0",
+        "reentry": ">SMA200则100%",
+        "investability": "实际ETF与研究日线成交近似；行情/成员资料B，不等于实际容量验收"
+      },
+      "sources": [
+        "breadth_runner",
+        "breadth_protocol",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "historical_results_exist; not_recomputed_this_round",
+        "production": "not_authorized"
+      },
+      "validation": {
+        "method": "代码/协议映射；定义复算不重跑整套账户",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "B0支付后下一开盘与专项支付日开盘是不同版本，不互称"
+      },
+      "scope": "固定510300或159915的完整ETF账户；不使用股票宽度成员资格",
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "volume",
+          "actions",
+          "restrictions",
+          "price_limit_regimes"
+        ],
+        "price_basis": "ETF连续信号价由breadth_runner::continuous_close连接；账户只用名义价、份额、现金和应收",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "自然日记账；真实ETF报价决定可交易日期；股票宽度日历另列"
+      },
+      "universe": {
+        "version": "固定510300或159915；ETF输入来源指纹；不动态选池",
+        "eligibility": "固定ETF自身上市且有当日可交易开盘；不受股票成分数量或宽度覆盖率约束",
+        "warmup": "持有/月度50%无SMA预热；价格趋势另需窗口；旧状态比较在不足窗口时为false",
+        "missing": "缺开盘/停牌/达到限价延期；估值沿用经公司行动调整的最近价；不得把估值旧价用于新信号",
+        "quality_gate": "名义行情、公司行动及交易限制资料有限；历史到达时间未确认",
+        "degrade": "无法成交延期；缺失历史可得时间仅限研究"
+      },
+      "time": {
+        "observation_time": "固定初次开盘/日收盘/支付日（按policy分别定义）",
+        "available_at": "名义行情/行动资料取得后；支付日开盘前到账是假设，历史实际时刻未获确认",
+        "decision_at": "首次配置预定；价格/月末信号在收盘后；分红到账按policy",
+        "execution_at": "按policy；每日开盘受现金/整手/交易限制；非所有动作一概延到下一日",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-09-09映射冻结旧版，不改变消费者"
+      }
+    },
+    {
+      "id": "baseline.etf_monthly50",
+      "version": "1.0.0",
+      "name": "宽度研究B2月度50%参照",
+      "type": "benchmark",
+      "profile": "breadth",
+      "uses": [
+        "comparison"
+      ],
+      "dependencies": [
+        "cash.zero@1.0.0"
+      ],
+      "definition": {
+        "formula": "按绑定执行policy计算完整账户日账",
+        "parameters": {
+          "initial": 1000000,
+          "fees": [
+            0.001,
+            0.002
+          ]
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "固定510300或159915，不选产品",
+        "weights": "月末定50%，月间漂移",
+        "cash": "初始100万元CNY，外部流量0，利息0；名义份额/现金/应收；登记日权益/除息应收/支付日开盘前可用近似",
+        "fees": "每边0.001主费用、0.002压力；100份取整，不虚构期末卖费",
+        "rebalance": "月末收盘决定，下一开盘恢复50%",
+        "execution": "breadth_runner::simulate；名义开盘、缺价/停牌/限价延期、100份与现金限制；B0可支付日同日开盘，其余收盘信号最早后日开盘",
+        "exit": "仅目标调整",
+        "reentry": "仅月末目标",
+        "investability": "实际ETF与研究日线成交近似；行情/成员资料B，不等于实际容量验收"
+      },
+      "sources": [
+        "breadth_runner",
+        "breadth_protocol",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "historical_results_exist; not_recomputed_this_round",
+        "production": "not_authorized"
+      },
+      "validation": {
+        "method": "代码/协议映射；定义复算不重跑整套账户",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "B0支付后下一开盘与专项支付日开盘是不同版本，不互称"
+      },
+      "scope": "固定510300或159915的完整ETF账户；不使用股票宽度成员资格",
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "volume",
+          "actions",
+          "restrictions",
+          "price_limit_regimes"
+        ],
+        "price_basis": "ETF连续信号价由breadth_runner::continuous_close连接；账户只用名义价、份额、现金和应收",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "自然日记账；真实ETF报价决定可交易日期；股票宽度日历另列"
+      },
+      "universe": {
+        "version": "固定510300或159915；ETF输入来源指纹；不动态选池",
+        "eligibility": "固定ETF自身上市且有当日可交易开盘；不受股票成分数量或宽度覆盖率约束",
+        "warmup": "持有/月度50%无SMA预热；价格趋势另需窗口；旧状态比较在不足窗口时为false",
+        "missing": "缺开盘/停牌/达到限价延期；估值沿用经公司行动调整的最近价；不得把估值旧价用于新信号",
+        "quality_gate": "名义行情、公司行动及交易限制资料有限；历史到达时间未确认",
+        "degrade": "无法成交延期；缺失历史可得时间仅限研究"
+      },
+      "time": {
+        "observation_time": "固定初次开盘/日收盘/支付日（按policy分别定义）",
+        "available_at": "名义行情/行动资料取得后；支付日开盘前到账是假设，历史实际时刻未获确认",
+        "decision_at": "首次配置预定；价格/月末信号在收盘后；分红到账按policy",
+        "execution_at": "按policy；每日开盘受现金/整手/交易限制；非所有动作一概延到下一日",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-09-09映射冻结旧版，不改变消费者"
+      }
+    },
+    {
+      "id": "baseline.hold_paid_cash",
+      "version": "1.0.0",
+      "name": "旧首12持有分红留现金",
+      "type": "benchmark",
+      "profile": "breadth",
+      "uses": [
+        "comparison"
+      ],
+      "dependencies": [
+        "cash.zero@1.0.0"
+      ],
+      "definition": {
+        "formula": "按绑定执行policy计算完整账户日账",
+        "parameters": {
+          "initial": 100000,
+          "fees": [
+            0.001,
+            0.002
+          ]
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "固定510300或159915，不选产品",
+        "weights": "首次全部可用资金含费整百份买入",
+        "cash": "初始10万元CNY，外部流量0，利息0；名义份额/现金/应收；登记日权益/除息应收/支付日开盘前可用近似",
+        "fees": "每边0.001主费用、0.002压力；100份取整，不虚构期末卖费",
+        "rebalance": "首次后无主动再平衡",
+        "execution": "hold_code::simulate；名义开盘按冻结限制/涨跌幅核可交易性，整百份与资金约束，缺价延期",
+        "exit": "不卖",
+        "reentry": "不再投分红，留现金",
+        "investability": "实际ETF与研究日线成交近似；行情/成员资料B，不等于实际容量验收"
+      },
+      "sources": [
+        "hold_protocol",
+        "hold_code"
+      ],
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "historical_results_exist; not_recomputed_this_round",
+        "production": "not_authorized"
+      },
+      "validation": {
+        "method": "代码/协议映射；定义复算不重跑整套账户",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "B0支付后下一开盘与专项支付日开盘是不同版本，不互称"
+      },
+      "scope": "固定510300或159915的完整ETF账户；不使用股票宽度成员资格",
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "volume",
+          "actions",
+          "restrictions",
+          "price_limit_regimes"
+        ],
+        "price_basis": "ETF连续信号价由breadth_runner::continuous_close连接；账户只用名义价、份额、现金和应收",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "自然日记账；真实ETF报价决定可交易日期；股票宽度日历另列"
+      },
+      "universe": {
+        "version": "固定510300或159915；ETF输入来源指纹；不动态选池",
+        "eligibility": "固定ETF自身上市且有当日可交易开盘；不受股票成分数量或宽度覆盖率约束",
+        "warmup": "持有/月度50%无SMA预热；价格趋势另需窗口；旧状态比较在不足窗口时为false",
+        "missing": "缺开盘/停牌/达到限价延期；估值沿用经公司行动调整的最近价；不得把估值旧价用于新信号",
+        "quality_gate": "名义行情、公司行动及交易限制资料有限；历史到达时间未确认",
+        "degrade": "无法成交延期；缺失历史可得时间仅限研究"
+      },
+      "time": {
+        "observation_time": "固定初次开盘/日收盘/支付日（按policy分别定义）",
+        "available_at": "名义行情/行动资料取得后；支付日开盘前到账是假设，历史实际时刻未获确认",
+        "decision_at": "首次配置预定；价格/月末信号在收盘后；分红到账按policy",
+        "execution_at": "按policy；每日开盘受现金/整手/交易限制；非所有动作一概延到下一日",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-09-09映射冻结旧版，不改变消费者"
+      }
+    },
+    {
+      "id": "baseline.hold_payment_open",
+      "version": "1.0.0",
+      "name": "专项分红支付日开盘再投",
+      "type": "benchmark",
+      "profile": "breadth",
+      "uses": [
+        "comparison"
+      ],
+      "dependencies": [
+        "cash.zero@1.0.0"
+      ],
+      "definition": {
+        "formula": "按绑定执行policy计算完整账户日账",
+        "parameters": {
+          "initial": 100000,
+          "fees": [
+            0.001,
+            0.002
+          ]
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "固定510300或159915，不选产品",
+        "weights": "首次全部；正分红到账后全部可用现金买回",
+        "cash": "初始10万元CNY，外部流量0，利息0；名义份额/现金/应收；登记日权益/除息应收/支付日开盘前可用近似",
+        "fees": "每边0.001主费用、0.002压力；100份取整，不虚构期末卖费",
+        "rebalance": "支付日开盘前到账、当日可成交开盘最早再买；不足一手等下一正支付，不日追买",
+        "execution": "hold_code::simulate；名义开盘按冻结限制/涨跌幅核可交易性，整百份与资金约束，缺价延期",
+        "exit": "不卖",
+        "reentry": "无权益不触发，多支付合单，延期期间保留",
+        "investability": "实际ETF与研究日线成交近似；行情/成员资料B，不等于实际容量验收"
+      },
+      "sources": [
+        "hold_protocol",
+        "hold_code"
+      ],
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "historical_results_exist; not_recomputed_this_round",
+        "production": "not_authorized"
+      },
+      "validation": {
+        "method": "代码/协议映射；定义复算不重跑整套账户",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "B0支付后下一开盘与专项支付日开盘是不同版本，不互称"
+      },
+      "scope": "固定510300或159915的完整ETF账户；不使用股票宽度成员资格",
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "volume",
+          "actions",
+          "restrictions",
+          "price_limit_regimes"
+        ],
+        "price_basis": "ETF连续信号价由breadth_runner::continuous_close连接；账户只用名义价、份额、现金和应收",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "自然日记账；真实ETF报价决定可交易日期；股票宽度日历另列"
+      },
+      "universe": {
+        "version": "固定510300或159915；ETF输入来源指纹；不动态选池",
+        "eligibility": "固定ETF自身上市且有当日可交易开盘；不受股票成分数量或宽度覆盖率约束",
+        "warmup": "持有/月度50%无SMA预热；价格趋势另需窗口；旧状态比较在不足窗口时为false",
+        "missing": "缺开盘/停牌/达到限价延期；估值沿用经公司行动调整的最近价；不得把估值旧价用于新信号",
+        "quality_gate": "名义行情、公司行动及交易限制资料有限；历史到达时间未确认",
+        "degrade": "无法成交延期；缺失历史可得时间仅限研究"
+      },
+      "time": {
+        "observation_time": "固定初次开盘/日收盘/支付日（按policy分别定义）",
+        "available_at": "名义行情/行动资料取得后；支付日开盘前到账是假设，历史实际时刻未获确认",
+        "decision_at": "首次配置预定；价格/月末信号在收盘后；分红到账按policy",
+        "execution_at": "按policy；每日开盘受现金/整手/交易限制；非所有动作一概延到下一日",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-09-09映射冻结旧版，不改变消费者"
+      }
+    },
+    {
+      "id": "policy.breadth.all_a.w0",
+      "version": "1.0.0",
+      "name": "all_a周三档+W0",
+      "type": "policy/strategy",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "comparison"
+      ],
+      "dependencies": [
+        "breadth.all_a.b200.common@1.0.0",
+        "breadth.three_tier@1.0.0",
+        "cash.zero@1.0.0"
+      ],
+      "definition": {
+        "formula": "三档周目标+增持确认+完整账户执行",
+        "parameters": {
+          "variant": "W0",
+          "band": 0.05
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "固定510300或159915，不选产品",
+        "weights": "B200三档1/0.5/0；与实际仓位差绝对值<0.05不调，=0.05调",
+        "cash": "初始100万元CNY，外部流量0，利息0；名义份额/现金/应收；登记日权益/除息应收/支付日开盘前可用近似",
+        "fees": "每边0.001主费用、0.002压力；100份取整，不虚构期末卖费",
+        "rebalance": "每自然周最后有效宽度决定下一周首可成交开盘；整周无有效则无信号并撤待买",
+        "execution": "breadth_runner中run_account；下一可成交ETF开盘、缺价/限制延期、先减后增、不往返",
+        "exit": "目标减少不受确认限制；确认后转负不自动卖",
+        "reentry": "目标增加直接执行",
+        "investability": "实际ETF与研究日线成交近似；行情/成员资料B，不等于实际容量验收"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "frozen_evidence_only",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "breadth_protocol",
+        "breadth_runner",
+        "breadth_results",
+        "breadth_quality",
+        "breadth_inputs",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "validation": {
+        "method": "既有协议/结果映射；本轮仅宽度与条件算法复算",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "在固定日历上W3 runner rolling50并不dropna；输入cont已去缺值时才与有效报价SMA50等价"
+      },
+      "scope": "全A缓存列及首末报价回溯集合宽度信号；510300与159915分别执行账户；信号集合与可交易ETF分开，不是同一个资格域",
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "volume",
+          "actions",
+          "restrictions",
+          "price_limit_regimes",
+          "signal_member_close",
+          "signal_membership_by_date",
+          "breadth_b50",
+          "breadth_b200"
+        ],
+        "price_basis": "信号成分股价口径见依赖宽度卡；ETF价格确认用etf.price.continuous；账户用名义价/真实份额",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "宽度按成员有效报价；Delta按ETF连续价日历reindex后shift20；账户自然日、开盘交易"
+      },
+      "universe": {
+        "execution_instrument": "固定510300或159915，信号资格不能代替ETF成交资格"
+      }
+    },
+    {
+      "id": "policy.breadth.all_a.w1",
+      "version": "1.0.0",
+      "name": "all_a周三档+W1",
+      "type": "policy/strategy",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "comparison"
+      ],
+      "dependencies": [
+        "breadth.all_a.b200.common@1.0.0",
+        "breadth.three_tier@1.0.0",
+        "cash.zero@1.0.0",
+        "breadth.all_a.delta50_20@1.0.0"
+      ],
+      "definition": {
+        "formula": "三档周目标+增持确认+完整账户执行",
+        "parameters": {
+          "variant": "W1",
+          "band": 0.05
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "固定510300或159915，不选产品",
+        "weights": "B200三档1/0.5/0；与实际仓位差绝对值<0.05不调，=0.05调",
+        "cash": "初始100万元CNY，外部流量0，利息0；名义份额/现金/应收；登记日权益/除息应收/支付日开盘前可用近似",
+        "fees": "每边0.001主费用、0.002压力；100份取整，不虚构期末卖费",
+        "rebalance": "每自然周最后有效宽度决定下一周首可成交开盘；整周无有效则无信号并撤待买",
+        "execution": "breadth_runner中run_account；下一可成交ETF开盘、缺价/限制延期、先减后增、不往返",
+        "exit": "目标减少不受确认限制；确认后转负不自动卖",
+        "reentry": "B50差20>0只限制增加含首次；待买每天复核，目标改变更新/取消，确认后下一可成交开盘",
+        "investability": "实际ETF与研究日线成交近似；行情/成员资料B，不等于实际容量验收"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "negative_in_frozen_comparison",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "breadth_protocol",
+        "breadth_runner",
+        "breadth_results",
+        "breadth_quality",
+        "breadth_inputs",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "validation": {
+        "method": "既有协议/结果映射；本轮仅宽度与条件算法复算",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "在固定日历上W3 runner rolling50并不dropna；输入cont已去缺值时才与有效报价SMA50等价"
+      },
+      "scope": "全A缓存列及首末报价回溯集合宽度信号；510300与159915分别执行账户；信号集合与可交易ETF分开，不是同一个资格域",
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "volume",
+          "actions",
+          "restrictions",
+          "price_limit_regimes",
+          "signal_member_close",
+          "signal_membership_by_date",
+          "breadth_b50",
+          "breadth_b200"
+        ],
+        "price_basis": "信号成分股价口径见依赖宽度卡；ETF价格确认用etf.price.continuous；账户用名义价/真实份额",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "宽度按成员有效报价；Delta按ETF连续价日历reindex后shift20；账户自然日、开盘交易"
+      },
+      "universe": {
+        "execution_instrument": "固定510300或159915，信号资格不能代替ETF成交资格"
+      }
+    },
+    {
+      "id": "policy.breadth.all_a.w2",
+      "version": "1.0.0",
+      "name": "all_a周三档+W2",
+      "type": "policy/strategy",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "comparison"
+      ],
+      "dependencies": [
+        "breadth.all_a.b200.common@1.0.0",
+        "breadth.three_tier@1.0.0",
+        "cash.zero@1.0.0",
+        "breadth.all_a.delta200_20@1.0.0"
+      ],
+      "definition": {
+        "formula": "三档周目标+增持确认+完整账户执行",
+        "parameters": {
+          "variant": "W2",
+          "band": 0.05
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "固定510300或159915，不选产品",
+        "weights": "B200三档1/0.5/0；与实际仓位差绝对值<0.05不调，=0.05调",
+        "cash": "初始100万元CNY，外部流量0，利息0；名义份额/现金/应收；登记日权益/除息应收/支付日开盘前可用近似",
+        "fees": "每边0.001主费用、0.002压力；100份取整，不虚构期末卖费",
+        "rebalance": "每自然周最后有效宽度决定下一周首可成交开盘；整周无有效则无信号并撤待买",
+        "execution": "breadth_runner中run_account；下一可成交ETF开盘、缺价/限制延期、先减后增、不往返",
+        "exit": "目标减少不受确认限制；确认后转负不自动卖",
+        "reentry": "B200差20>0只限制增加含首次；待买每天复核，目标改变更新/取消，确认后下一可成交开盘",
+        "investability": "实际ETF与研究日线成交近似；行情/成员资料B，不等于实际容量验收"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "negative_in_frozen_comparison",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "breadth_protocol",
+        "breadth_runner",
+        "breadth_results",
+        "breadth_quality",
+        "breadth_inputs",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "validation": {
+        "method": "既有协议/结果映射；本轮仅宽度与条件算法复算",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "在固定日历上W3 runner rolling50并不dropna；输入cont已去缺值时才与有效报价SMA50等价"
+      },
+      "scope": "全A缓存列及首末报价回溯集合宽度信号；510300与159915分别执行账户；信号集合与可交易ETF分开，不是同一个资格域",
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "volume",
+          "actions",
+          "restrictions",
+          "price_limit_regimes",
+          "signal_member_close",
+          "signal_membership_by_date",
+          "breadth_b50",
+          "breadth_b200"
+        ],
+        "price_basis": "信号成分股价口径见依赖宽度卡；ETF价格确认用etf.price.continuous；账户用名义价/真实份额",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "宽度按成员有效报价；Delta按ETF连续价日历reindex后shift20；账户自然日、开盘交易"
+      },
+      "universe": {
+        "execution_instrument": "固定510300或159915，信号资格不能代替ETF成交资格"
+      }
+    },
+    {
+      "id": "policy.breadth.all_a.w3",
+      "version": "1.0.0",
+      "name": "all_a周三档+W3",
+      "type": "policy/strategy",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "comparison"
+      ],
+      "dependencies": [
+        "breadth.all_a.b200.common@1.0.0",
+        "breadth.three_tier@1.0.0",
+        "cash.zero@1.0.0",
+        "etf.trend.above50@1.0.0"
+      ],
+      "definition": {
+        "formula": "三档周目标+增持确认+完整账户执行",
+        "parameters": {
+          "variant": "W3",
+          "band": 0.05
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "固定510300或159915，不选产品",
+        "weights": "B200三档1/0.5/0；与实际仓位差绝对值<0.05不调，=0.05调",
+        "cash": "初始100万元CNY，外部流量0，利息0；名义份额/现金/应收；登记日权益/除息应收/支付日开盘前可用近似",
+        "fees": "每边0.001主费用、0.002压力；100份取整，不虚构期末卖费",
+        "rebalance": "每自然周最后有效宽度决定下一周首可成交开盘；整周无有效则无信号并撤待买",
+        "execution": "breadth_runner中run_account；下一可成交ETF开盘、缺价/限制延期、先减后增、不往返",
+        "exit": "目标减少不受确认限制；确认后转负不自动卖",
+        "reentry": "ETF连续收盘>SMA50只限制增加含首次；待买每天复核，目标改变更新/取消，确认后下一可成交开盘",
+        "investability": "实际ETF与研究日线成交近似；行情/成员资料B，不等于实际容量验收"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "frozen_evidence_only",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "breadth_protocol",
+        "breadth_runner",
+        "breadth_results",
+        "breadth_quality",
+        "breadth_inputs",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "validation": {
+        "method": "既有协议/结果映射；本轮仅宽度与条件算法复算",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "在固定日历上W3 runner rolling50并不dropna；输入cont已去缺值时才与有效报价SMA50等价"
+      },
+      "scope": "全A缓存列及首末报价回溯集合宽度信号；510300与159915分别执行账户；信号集合与可交易ETF分开，不是同一个资格域",
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "volume",
+          "actions",
+          "restrictions",
+          "price_limit_regimes",
+          "signal_member_close",
+          "signal_membership_by_date",
+          "breadth_b50",
+          "breadth_b200"
+        ],
+        "price_basis": "信号成分股价口径见依赖宽度卡；ETF价格确认用etf.price.continuous；账户用名义价/真实份额",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "宽度按成员有效报价；Delta按ETF连续价日历reindex后shift20；账户自然日、开盘交易"
+      },
+      "universe": {
+        "execution_instrument": "固定510300或159915，信号资格不能代替ETF成交资格"
+      }
+    },
+    {
+      "id": "policy.breadth.csi300.w0",
+      "version": "1.0.0",
+      "name": "csi300周三档+W0",
+      "type": "policy/strategy",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "comparison"
+      ],
+      "dependencies": [
+        "breadth.csi300.b200.common@1.0.0",
+        "breadth.three_tier@1.0.0",
+        "cash.zero@1.0.0"
+      ],
+      "definition": {
+        "formula": "三档周目标+增持确认+完整账户执行",
+        "parameters": {
+          "variant": "W0",
+          "band": 0.05
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "固定510300或159915，不选产品",
+        "weights": "B200三档1/0.5/0；与实际仓位差绝对值<0.05不调，=0.05调",
+        "cash": "初始100万元CNY，外部流量0，利息0；名义份额/现金/应收；登记日权益/除息应收/支付日开盘前可用近似",
+        "fees": "每边0.001主费用、0.002压力；100份取整，不虚构期末卖费",
+        "rebalance": "每自然周最后有效宽度决定下一周首可成交开盘；整周无有效则无信号并撤待买",
+        "execution": "breadth_runner中run_account；下一可成交ETF开盘、缺价/限制延期、先减后增、不往返",
+        "exit": "目标减少不受确认限制；确认后转负不自动卖",
+        "reentry": "目标增加直接执行",
+        "investability": "实际ETF与研究日线成交近似；行情/成员资料B，不等于实际容量验收"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "frozen_evidence_only",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "breadth_protocol",
+        "breadth_runner",
+        "breadth_results",
+        "breadth_quality",
+        "breadth_inputs",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "validation": {
+        "method": "既有协议/结果映射；本轮仅宽度与条件算法复算",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "在固定日历上W3 runner rolling50并不dropna；输入cont已去缺值时才与有效报价SMA50等价"
+      },
+      "scope": "沪深300历史动态成员宽度信号；执行510300；信号集合与可交易ETF分开，不是同一个资格域",
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "volume",
+          "actions",
+          "restrictions",
+          "price_limit_regimes",
+          "signal_member_close",
+          "signal_membership_by_date",
+          "breadth_b50",
+          "breadth_b200"
+        ],
+        "price_basis": "信号成分股价口径见依赖宽度卡；ETF价格确认用etf.price.continuous；账户用名义价/真实份额",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "宽度按成员有效报价；Delta按ETF连续价日历reindex后shift20；账户自然日、开盘交易"
+      },
+      "universe": {
+        "execution_instrument": "固定510300或159915，信号资格不能代替ETF成交资格"
+      }
+    },
+    {
+      "id": "policy.breadth.csi300.w1",
+      "version": "1.0.0",
+      "name": "csi300周三档+W1",
+      "type": "policy/strategy",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "comparison"
+      ],
+      "dependencies": [
+        "breadth.csi300.b200.common@1.0.0",
+        "breadth.three_tier@1.0.0",
+        "cash.zero@1.0.0",
+        "breadth.csi300.delta50_20@1.0.0"
+      ],
+      "definition": {
+        "formula": "三档周目标+增持确认+完整账户执行",
+        "parameters": {
+          "variant": "W1",
+          "band": 0.05
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "固定510300或159915，不选产品",
+        "weights": "B200三档1/0.5/0；与实际仓位差绝对值<0.05不调，=0.05调",
+        "cash": "初始100万元CNY，外部流量0，利息0；名义份额/现金/应收；登记日权益/除息应收/支付日开盘前可用近似",
+        "fees": "每边0.001主费用、0.002压力；100份取整，不虚构期末卖费",
+        "rebalance": "每自然周最后有效宽度决定下一周首可成交开盘；整周无有效则无信号并撤待买",
+        "execution": "breadth_runner中run_account；下一可成交ETF开盘、缺价/限制延期、先减后增、不往返",
+        "exit": "目标减少不受确认限制；确认后转负不自动卖",
+        "reentry": "B50差20>0只限制增加含首次；待买每天复核，目标改变更新/取消，确认后下一可成交开盘",
+        "investability": "实际ETF与研究日线成交近似；行情/成员资料B，不等于实际容量验收"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "negative_in_frozen_comparison",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "breadth_protocol",
+        "breadth_runner",
+        "breadth_results",
+        "breadth_quality",
+        "breadth_inputs",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "validation": {
+        "method": "既有协议/结果映射；本轮仅宽度与条件算法复算",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "在固定日历上W3 runner rolling50并不dropna；输入cont已去缺值时才与有效报价SMA50等价"
+      },
+      "scope": "沪深300历史动态成员宽度信号；执行510300；信号集合与可交易ETF分开，不是同一个资格域",
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "volume",
+          "actions",
+          "restrictions",
+          "price_limit_regimes",
+          "signal_member_close",
+          "signal_membership_by_date",
+          "breadth_b50",
+          "breadth_b200"
+        ],
+        "price_basis": "信号成分股价口径见依赖宽度卡；ETF价格确认用etf.price.continuous；账户用名义价/真实份额",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "宽度按成员有效报价；Delta按ETF连续价日历reindex后shift20；账户自然日、开盘交易"
+      },
+      "universe": {
+        "execution_instrument": "固定510300或159915，信号资格不能代替ETF成交资格"
+      }
+    },
+    {
+      "id": "policy.breadth.csi300.w2",
+      "version": "1.0.0",
+      "name": "csi300周三档+W2",
+      "type": "policy/strategy",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "comparison"
+      ],
+      "dependencies": [
+        "breadth.csi300.b200.common@1.0.0",
+        "breadth.three_tier@1.0.0",
+        "cash.zero@1.0.0",
+        "breadth.csi300.delta200_20@1.0.0"
+      ],
+      "definition": {
+        "formula": "三档周目标+增持确认+完整账户执行",
+        "parameters": {
+          "variant": "W2",
+          "band": 0.05
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "固定510300或159915，不选产品",
+        "weights": "B200三档1/0.5/0；与实际仓位差绝对值<0.05不调，=0.05调",
+        "cash": "初始100万元CNY，外部流量0，利息0；名义份额/现金/应收；登记日权益/除息应收/支付日开盘前可用近似",
+        "fees": "每边0.001主费用、0.002压力；100份取整，不虚构期末卖费",
+        "rebalance": "每自然周最后有效宽度决定下一周首可成交开盘；整周无有效则无信号并撤待买",
+        "execution": "breadth_runner中run_account；下一可成交ETF开盘、缺价/限制延期、先减后增、不往返",
+        "exit": "目标减少不受确认限制；确认后转负不自动卖",
+        "reentry": "B200差20>0只限制增加含首次；待买每天复核，目标改变更新/取消，确认后下一可成交开盘",
+        "investability": "实际ETF与研究日线成交近似；行情/成员资料B，不等于实际容量验收"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "negative_in_frozen_comparison",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "breadth_protocol",
+        "breadth_runner",
+        "breadth_results",
+        "breadth_quality",
+        "breadth_inputs",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "validation": {
+        "method": "既有协议/结果映射；本轮仅宽度与条件算法复算",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "在固定日历上W3 runner rolling50并不dropna；输入cont已去缺值时才与有效报价SMA50等价"
+      },
+      "scope": "沪深300历史动态成员宽度信号；执行510300；信号集合与可交易ETF分开，不是同一个资格域",
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "volume",
+          "actions",
+          "restrictions",
+          "price_limit_regimes",
+          "signal_member_close",
+          "signal_membership_by_date",
+          "breadth_b50",
+          "breadth_b200"
+        ],
+        "price_basis": "信号成分股价口径见依赖宽度卡；ETF价格确认用etf.price.continuous；账户用名义价/真实份额",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "宽度按成员有效报价；Delta按ETF连续价日历reindex后shift20；账户自然日、开盘交易"
+      },
+      "universe": {
+        "execution_instrument": "固定510300或159915，信号资格不能代替ETF成交资格"
+      }
+    },
+    {
+      "id": "policy.breadth.csi300.w3",
+      "version": "1.0.0",
+      "name": "csi300周三档+W3",
+      "type": "policy/strategy",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "comparison"
+      ],
+      "dependencies": [
+        "breadth.csi300.b200.common@1.0.0",
+        "breadth.three_tier@1.0.0",
+        "cash.zero@1.0.0",
+        "etf.trend.above50@1.0.0"
+      ],
+      "definition": {
+        "formula": "三档周目标+增持确认+完整账户执行",
+        "parameters": {
+          "variant": "W3",
+          "band": 0.05
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "固定510300或159915，不选产品",
+        "weights": "B200三档1/0.5/0；与实际仓位差绝对值<0.05不调，=0.05调",
+        "cash": "初始100万元CNY，外部流量0，利息0；名义份额/现金/应收；登记日权益/除息应收/支付日开盘前可用近似",
+        "fees": "每边0.001主费用、0.002压力；100份取整，不虚构期末卖费",
+        "rebalance": "每自然周最后有效宽度决定下一周首可成交开盘；整周无有效则无信号并撤待买",
+        "execution": "breadth_runner中run_account；下一可成交ETF开盘、缺价/限制延期、先减后增、不往返",
+        "exit": "目标减少不受确认限制；确认后转负不自动卖",
+        "reentry": "ETF连续收盘>SMA50只限制增加含首次；待买每天复核，目标改变更新/取消，确认后下一可成交开盘",
+        "investability": "实际ETF与研究日线成交近似；行情/成员资料B，不等于实际容量验收"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "frozen_evidence_only",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "breadth_protocol",
+        "breadth_runner",
+        "breadth_results",
+        "breadth_quality",
+        "breadth_inputs",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "validation": {
+        "method": "既有协议/结果映射；本轮仅宽度与条件算法复算",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "在固定日历上W3 runner rolling50并不dropna；输入cont已去缺值时才与有效报价SMA50等价"
+      },
+      "scope": "沪深300历史动态成员宽度信号；执行510300；信号集合与可交易ETF分开，不是同一个资格域",
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "volume",
+          "actions",
+          "restrictions",
+          "price_limit_regimes",
+          "signal_member_close",
+          "signal_membership_by_date",
+          "breadth_b50",
+          "breadth_b200"
+        ],
+        "price_basis": "信号成分股价口径见依赖宽度卡；ETF价格确认用etf.price.continuous；账户用名义价/真实份额",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "宽度按成员有效报价；Delta按ETF连续价日历reindex后shift20；账户自然日、开盘交易"
+      },
+      "universe": {
+        "execution_instrument": "固定510300或159915，信号资格不能代替ETF成交资格"
+      }
+    },
+    {
+      "id": "policy.breadth.chinext.w0",
+      "version": "1.0.0",
+      "name": "chinext周三档+W0",
+      "type": "policy/strategy",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "comparison"
+      ],
+      "dependencies": [
+        "breadth.chinext.b200.common@1.0.0",
+        "breadth.three_tier@1.0.0",
+        "cash.zero@1.0.0"
+      ],
+      "definition": {
+        "formula": "三档周目标+增持确认+完整账户执行",
+        "parameters": {
+          "variant": "W0",
+          "band": 0.05
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "固定510300或159915，不选产品",
+        "weights": "B200三档1/0.5/0；与实际仓位差绝对值<0.05不调，=0.05调",
+        "cash": "初始100万元CNY，外部流量0，利息0；名义份额/现金/应收；登记日权益/除息应收/支付日开盘前可用近似",
+        "fees": "每边0.001主费用、0.002压力；100份取整，不虚构期末卖费",
+        "rebalance": "每自然周最后有效宽度决定下一周首可成交开盘；整周无有效则无信号并撤待买",
+        "execution": "breadth_runner中run_account；下一可成交ETF开盘、缺价/限制延期、先减后增、不往返",
+        "exit": "目标减少不受确认限制；确认后转负不自动卖",
+        "reentry": "目标增加直接执行",
+        "investability": "实际ETF与研究日线成交近似；行情/成员资料B，不等于实际容量验收"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "blocked_membership_chain",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "unrun",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "breadth_protocol",
+        "breadth_runner",
+        "breadth_results",
+        "breadth_quality",
+        "breadth_inputs",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "validation": {
+        "method": "既有协议/结果映射；本轮仅宽度与条件算法复算",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "在固定日历上W3 runner rolling50并不dropna；输入cont已去缺值时才与有效报价SMA50等价"
+      },
+      "scope": "创业板指数（100成员）宽度提案；拟执行159915，成员链失败，冻结旧账户未运行；信号集合与可交易ETF分开，不是同一个资格域",
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "volume",
+          "actions",
+          "restrictions",
+          "price_limit_regimes",
+          "signal_member_close",
+          "signal_membership_by_date",
+          "breadth_b50",
+          "breadth_b200"
+        ],
+        "price_basis": "信号成分股价口径见依赖宽度卡；ETF价格确认用etf.price.continuous；账户用名义价/真实份额",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "宽度按成员有效报价；Delta按ETF连续价日历reindex后shift20；账户自然日、开盘交易"
+      },
+      "universe": {
+        "execution_instrument": "固定510300或159915，信号资格不能代替ETF成交资格"
+      }
+    },
+    {
+      "id": "policy.breadth.chinext.w1",
+      "version": "1.0.0",
+      "name": "chinext周三档+W1",
+      "type": "policy/strategy",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "comparison"
+      ],
+      "dependencies": [
+        "breadth.chinext.b200.common@1.0.0",
+        "breadth.three_tier@1.0.0",
+        "cash.zero@1.0.0",
+        "breadth.chinext.delta50_20@1.0.0"
+      ],
+      "definition": {
+        "formula": "三档周目标+增持确认+完整账户执行",
+        "parameters": {
+          "variant": "W1",
+          "band": 0.05
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "固定510300或159915，不选产品",
+        "weights": "B200三档1/0.5/0；与实际仓位差绝对值<0.05不调，=0.05调",
+        "cash": "初始100万元CNY，外部流量0，利息0；名义份额/现金/应收；登记日权益/除息应收/支付日开盘前可用近似",
+        "fees": "每边0.001主费用、0.002压力；100份取整，不虚构期末卖费",
+        "rebalance": "每自然周最后有效宽度决定下一周首可成交开盘；整周无有效则无信号并撤待买",
+        "execution": "breadth_runner中run_account；下一可成交ETF开盘、缺价/限制延期、先减后增、不往返",
+        "exit": "目标减少不受确认限制；确认后转负不自动卖",
+        "reentry": "B50差20>0只限制增加含首次；待买每天复核，目标改变更新/取消，确认后下一可成交开盘",
+        "investability": "实际ETF与研究日线成交近似；行情/成员资料B，不等于实际容量验收"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "blocked_membership_chain",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "unrun",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "breadth_protocol",
+        "breadth_runner",
+        "breadth_results",
+        "breadth_quality",
+        "breadth_inputs",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "validation": {
+        "method": "既有协议/结果映射；本轮仅宽度与条件算法复算",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "在固定日历上W3 runner rolling50并不dropna；输入cont已去缺值时才与有效报价SMA50等价"
+      },
+      "scope": "创业板指数（100成员）宽度提案；拟执行159915，成员链失败，冻结旧账户未运行；信号集合与可交易ETF分开，不是同一个资格域",
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "volume",
+          "actions",
+          "restrictions",
+          "price_limit_regimes",
+          "signal_member_close",
+          "signal_membership_by_date",
+          "breadth_b50",
+          "breadth_b200"
+        ],
+        "price_basis": "信号成分股价口径见依赖宽度卡；ETF价格确认用etf.price.continuous；账户用名义价/真实份额",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "宽度按成员有效报价；Delta按ETF连续价日历reindex后shift20；账户自然日、开盘交易"
+      },
+      "universe": {
+        "execution_instrument": "固定510300或159915，信号资格不能代替ETF成交资格"
+      }
+    },
+    {
+      "id": "policy.breadth.chinext.w2",
+      "version": "1.0.0",
+      "name": "chinext周三档+W2",
+      "type": "policy/strategy",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "comparison"
+      ],
+      "dependencies": [
+        "breadth.chinext.b200.common@1.0.0",
+        "breadth.three_tier@1.0.0",
+        "cash.zero@1.0.0",
+        "breadth.chinext.delta200_20@1.0.0"
+      ],
+      "definition": {
+        "formula": "三档周目标+增持确认+完整账户执行",
+        "parameters": {
+          "variant": "W2",
+          "band": 0.05
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "固定510300或159915，不选产品",
+        "weights": "B200三档1/0.5/0；与实际仓位差绝对值<0.05不调，=0.05调",
+        "cash": "初始100万元CNY，外部流量0，利息0；名义份额/现金/应收；登记日权益/除息应收/支付日开盘前可用近似",
+        "fees": "每边0.001主费用、0.002压力；100份取整，不虚构期末卖费",
+        "rebalance": "每自然周最后有效宽度决定下一周首可成交开盘；整周无有效则无信号并撤待买",
+        "execution": "breadth_runner中run_account；下一可成交ETF开盘、缺价/限制延期、先减后增、不往返",
+        "exit": "目标减少不受确认限制；确认后转负不自动卖",
+        "reentry": "B200差20>0只限制增加含首次；待买每天复核，目标改变更新/取消，确认后下一可成交开盘",
+        "investability": "实际ETF与研究日线成交近似；行情/成员资料B，不等于实际容量验收"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "blocked_membership_chain",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "unrun",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "breadth_protocol",
+        "breadth_runner",
+        "breadth_results",
+        "breadth_quality",
+        "breadth_inputs",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "validation": {
+        "method": "既有协议/结果映射；本轮仅宽度与条件算法复算",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "在固定日历上W3 runner rolling50并不dropna；输入cont已去缺值时才与有效报价SMA50等价"
+      },
+      "scope": "创业板指数（100成员）宽度提案；拟执行159915，成员链失败，冻结旧账户未运行；信号集合与可交易ETF分开，不是同一个资格域",
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "volume",
+          "actions",
+          "restrictions",
+          "price_limit_regimes",
+          "signal_member_close",
+          "signal_membership_by_date",
+          "breadth_b50",
+          "breadth_b200"
+        ],
+        "price_basis": "信号成分股价口径见依赖宽度卡；ETF价格确认用etf.price.continuous；账户用名义价/真实份额",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "宽度按成员有效报价；Delta按ETF连续价日历reindex后shift20；账户自然日、开盘交易"
+      },
+      "universe": {
+        "execution_instrument": "固定510300或159915，信号资格不能代替ETF成交资格"
+      }
+    },
+    {
+      "id": "policy.breadth.chinext.w3",
+      "version": "1.0.0",
+      "name": "chinext周三档+W3",
+      "type": "policy/strategy",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "comparison"
+      ],
+      "dependencies": [
+        "breadth.chinext.b200.common@1.0.0",
+        "breadth.three_tier@1.0.0",
+        "cash.zero@1.0.0",
+        "etf.trend.above50@1.0.0"
+      ],
+      "definition": {
+        "formula": "三档周目标+增持确认+完整账户执行",
+        "parameters": {
+          "variant": "W3",
+          "band": 0.05
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "固定510300或159915，不选产品",
+        "weights": "B200三档1/0.5/0；与实际仓位差绝对值<0.05不调，=0.05调",
+        "cash": "初始100万元CNY，外部流量0，利息0；名义份额/现金/应收；登记日权益/除息应收/支付日开盘前可用近似",
+        "fees": "每边0.001主费用、0.002压力；100份取整，不虚构期末卖费",
+        "rebalance": "每自然周最后有效宽度决定下一周首可成交开盘；整周无有效则无信号并撤待买",
+        "execution": "breadth_runner中run_account；下一可成交ETF开盘、缺价/限制延期、先减后增、不往返",
+        "exit": "目标减少不受确认限制；确认后转负不自动卖",
+        "reentry": "ETF连续收盘>SMA50只限制增加含首次；待买每天复核，目标改变更新/取消，确认后下一可成交开盘",
+        "investability": "实际ETF与研究日线成交近似；行情/成员资料B，不等于实际容量验收"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "blocked_membership_chain",
+        "implementation": "mapped_legacy_not_migrated",
+        "effectiveness": "unrun",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "breadth_protocol",
+        "breadth_runner",
+        "breadth_results",
+        "breadth_quality",
+        "breadth_inputs",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "validation": {
+        "method": "既有协议/结果映射；本轮仅宽度与条件算法复算",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "在固定日历上W3 runner rolling50并不dropna；输入cont已去缺值时才与有效报价SMA50等价"
+      },
+      "scope": "创业板指数（100成员）宽度提案；拟执行159915，成员链失败，冻结旧账户未运行；信号集合与可交易ETF分开，不是同一个资格域",
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "volume",
+          "actions",
+          "restrictions",
+          "price_limit_regimes",
+          "signal_member_close",
+          "signal_membership_by_date",
+          "breadth_b50",
+          "breadth_b200"
+        ],
+        "price_basis": "信号成分股价口径见依赖宽度卡；ETF价格确认用etf.price.continuous；账户用名义价/真实份额",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "宽度按成员有效报价；Delta按ETF连续价日历reindex后shift20；账户自然日、开盘交易"
+      },
+      "universe": {
+        "execution_instrument": "固定510300或159915，信号资格不能代替ETF成交资格"
+      }
+    },
+    {
+      "id": "baseline.dca_quarterly",
+      "version": "1.0.0",
+      "name": "四ETF每周投入、季度调整",
+      "type": "benchmark",
+      "profile": "mixed",
+      "uses": [
+        "comparison"
+      ],
+      "dependencies": [
+        "cash.zero@1.0.0"
+      ],
+      "definition": {
+        "formula": "cash_engine::simulate固定三方案；总权益包含现金、应收、份额；不混用入金回报和净值表现",
+        "parameters": {},
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "510300/159915/518880/513100四人民币场内ETF；单基金用510300",
+        "weights": "每周新资金各25%；目标份额按下述公式",
+        "cash": "2013-07-30—2026-06-30，每周一00:00收到1000元，未到的钱不可用；各产品独立现金；现金无息；账户单位剔除入金影响，另算资金加权回报",
+        "fees": "base每边0.001；固定情景另列周10000/每边0.0001/现金年息0.02；100份取整，无最低费",
+        "rebalance": "季度开始日置待调整，全部产品都可交易才执行；budget=现金+旧参考价市值（不含应收）；target_i=floor(budget*(1-2*fee)/N/reference_i/100)*100；参考为上个有效收盘并处理当日除息拆分",
+        "execution": "dca_code::simulate：自然日循环；先卖后按代码顺序买，资金限制；开盘相对参考达到限幅减0.00051则延期；已知停牌/迟开禁止；其他日每天用各自现金买足整手；支付日前应收不可花",
+        "exit": "仅季度重平衡卖出",
+        "reentry": "现金可用且可成交即按每日现金买入，不是技术回补",
+        "investability": "4实际ETF；理想开盘、假设支付日开盘前可用、停牌档案有限"
+      },
+      "scope": "长期投入四ETF；黄金、海外单列经济方向",
+      "sources": [
+        "dca_protocol",
+        "dca_code",
+        "dca_lock"
+      ],
+      "input": {
+        "fields": [
+          "date",
+          "nominal_open",
+          "nominal_close",
+          "actions",
+          "weekly_flows"
+        ],
+        "price_basis": "名义价、登记/除息/支付事件、真实份额；无用复权价替代现金账",
+        "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+        "frequency": "calendar_day_account",
+        "calendar": "自然日循环；周一入金；各ETF独立真实报价；季度首日待调仓并等待全部产品可交易"
+      },
+      "time": {
+        "observation_time": "目标参考上一有效收盘；周一零点入金，季度日历",
+        "available_at": "按旧现金引擎假设；历史实际供应商到达时间未提供",
+        "decision_at": "不得早于available_at",
+        "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "mapped_legacy_not_recomputed_this_round",
+        "effectiveness": "existing_historical_comparison_only",
+        "production": "not_authorized"
+      },
+      "validation": {
+        "method": "读取真实现金引擎/冻结协议；未重算完整13年",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "参数情景不能混排；应收不进季度可支配budget，仍进总权益"
+      },
+      "universe": {
+        "version": "dca_lock 固定510300/159915/518880/513100；single仅510300",
+        "eligibility": "固定账户产品，上市且有真实可交易开盘；没有273条月选门槛",
+        "warmup": "无指标预热；从协议起始日期运行资金流",
+        "missing": "缺开盘/停牌/达到限价延期；估值沿用经公司行动调整的最近价；不得把估值旧价用于新信号",
+        "quality_gate": "长期名义价格与行动质量限制见dca_lock；不更换历史名单",
+        "degrade": "无法成交延期；缺失历史可得时间仅限研究"
+      }
+    },
+    {
+      "id": "baseline.dca_hold",
+      "version": "1.0.0",
+      "name": "四ETF每周投入、从不卖出",
+      "type": "benchmark",
+      "profile": "mixed",
+      "uses": [
+        "comparison"
+      ],
+      "dependencies": [
+        "cash.zero@1.0.0"
+      ],
+      "definition": {
+        "formula": "cash_engine::simulate固定三方案；总权益包含现金、应收、份额；不混用入金回报和净值表现",
+        "parameters": {},
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "510300/159915/518880/513100四人民币场内ETF；单基金用510300",
+        "weights": "每周新资金各25%；目标份额按下述公式",
+        "cash": "2013-07-30—2026-06-30，每周一00:00收到1000元，未到的钱不可用；各产品独立现金；现金无息；账户单位剔除入金影响，另算资金加权回报",
+        "fees": "base每边0.001；固定情景另列周10000/每边0.0001/现金年息0.02；100份取整，无最低费",
+        "rebalance": "无季度重分配；每天各自现金买整百份，收到分红可用于该产品",
+        "execution": "dca_code::simulate：自然日循环；先卖后按代码顺序买，资金限制；开盘相对参考达到限幅减0.00051则延期；已知停牌/迟开禁止；其他日每天用各自现金买足整手；支付日前应收不可花",
+        "exit": "无",
+        "reentry": "现金可用且可成交即按每日现金买入，不是技术回补",
+        "investability": "4实际ETF；理想开盘、假设支付日开盘前可用、停牌档案有限"
+      },
+      "scope": "长期投入四ETF；黄金、海外单列经济方向",
+      "sources": [
+        "dca_protocol",
+        "dca_code",
+        "dca_lock"
+      ],
+      "input": {
+        "fields": [
+          "date",
+          "nominal_open",
+          "nominal_close",
+          "actions",
+          "weekly_flows"
+        ],
+        "price_basis": "名义价、登记/除息/支付事件、真实份额；无用复权价替代现金账",
+        "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+        "frequency": "calendar_day_account",
+        "calendar": "自然日循环；周一入金；各ETF独立真实报价；季度首日待调仓并等待全部产品可交易"
+      },
+      "time": {
+        "observation_time": "目标参考上一有效收盘；周一零点入金，季度日历",
+        "available_at": "按旧现金引擎假设；历史实际供应商到达时间未提供",
+        "decision_at": "不得早于available_at",
+        "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "mapped_legacy_not_recomputed_this_round",
+        "effectiveness": "existing_historical_comparison_only",
+        "production": "not_authorized"
+      },
+      "validation": {
+        "method": "读取真实现金引擎/冻结协议；未重算完整13年",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "参数情景不能混排；应收不进季度可支配budget，仍进总权益"
+      },
+      "universe": {
+        "version": "dca_lock 固定510300/159915/518880/513100；single仅510300",
+        "eligibility": "固定账户产品，上市且有真实可交易开盘；没有273条月选门槛",
+        "warmup": "无指标预热；从协议起始日期运行资金流",
+        "missing": "缺开盘/停牌/达到限价延期；估值沿用经公司行动调整的最近价；不得把估值旧价用于新信号",
+        "quality_gate": "长期名义价格与行动质量限制见dca_lock；不更换历史名单",
+        "degrade": "无法成交延期；缺失历史可得时间仅限研究"
+      }
+    },
+    {
+      "id": "baseline.dca_single",
+      "version": "1.0.0",
+      "name": "每周投入沪深300",
+      "type": "benchmark",
+      "profile": "mixed",
+      "uses": [
+        "comparison"
+      ],
+      "dependencies": [
+        "cash.zero@1.0.0"
+      ],
+      "definition": {
+        "formula": "cash_engine::simulate固定三方案；总权益包含现金、应收、份额；不混用入金回报和净值表现",
+        "parameters": {},
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "account_path",
+        "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+        "transforms": "无"
+      },
+      "policy": {
+        "selection": "仅510300",
+        "weights": "每周100%新钱",
+        "cash": "2013-07-30—2026-06-30，每周一00:00收到1000元，未到的钱不可用；各产品独立现金；现金无息；账户单位剔除入金影响，另算资金加权回报",
+        "fees": "base每边0.001；固定情景另列周10000/每边0.0001/现金年息0.02；100份取整，无最低费",
+        "rebalance": "无季度调仓，现金可用每日整手买",
+        "execution": "dca_code::simulate：自然日循环；先卖后按代码顺序买，资金限制；开盘相对参考达到限幅减0.00051则延期；已知停牌/迟开禁止；其他日每天用各自现金买足整手；支付日前应收不可花",
+        "exit": "无",
+        "reentry": "现金可用且可成交即按每日现金买入，不是技术回补",
+        "investability": "510300实际ETF；理想开盘与到账假设，未做容量验收"
+      },
+      "scope": "仅510300长期持续投入账户",
+      "sources": [
+        "dca_protocol",
+        "dca_code",
+        "dca_lock"
+      ],
+      "input": {
+        "fields": [
+          "date",
+          "nominal_open",
+          "nominal_close",
+          "actions",
+          "weekly_flows"
+        ],
+        "price_basis": "名义价、登记/除息/支付事件、真实份额；无用复权价替代现金账",
+        "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+        "frequency": "calendar_day_account",
+        "calendar": "自然日循环；周一入金；各ETF独立真实报价；季度首日待调仓并等待全部产品可交易"
+      },
+      "time": {
+        "observation_time": "目标参考上一有效收盘；周一零点入金，季度日历",
+        "available_at": "按旧现金引擎假设；历史实际供应商到达时间未提供",
+        "decision_at": "不得早于available_at",
+        "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "mapped_legacy_not_recomputed_this_round",
+        "effectiveness": "existing_historical_comparison_only",
+        "production": "not_authorized"
+      },
+      "validation": {
+        "method": "读取真实现金引擎/冻结协议；未重算完整13年",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "参数情景不能混排；应收不进季度可支配budget，仍进总权益"
+      },
+      "universe": {
+        "version": "dca_lock 固定510300/159915/518880/513100；single仅510300",
+        "eligibility": "固定账户产品，上市且有真实可交易开盘；没有273条月选门槛",
+        "warmup": "无指标预热；从协议起始日期运行资金流",
+        "missing": "缺开盘/停牌/达到限价延期；估值沿用经公司行动调整的最近价；不得把估值旧价用于新信号",
+        "quality_gate": "长期名义价格与行动质量限制见dca_lock；不更换历史名单",
+        "degrade": "无法成交延期；缺失历史可得时间仅限研究"
+      }
+    },
+    {
+      "id": "etf.price.continuous",
+      "version": "1.0.0",
+      "profile": "mixed",
+      "name": "宽度账户ETF连续信号价格（旧版映射）",
+      "type": "feature",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "scope": "仅breadth_runner中510300/159915价格趋势；非资产总回报序列",
+      "definition": {
+        "formula": "L_first=C_first; ref=C_previous-cash_on_current_effective_date; ref/=split_ratio_on_current_effective_date; if ref>0 then L_t=L_prev*C_t/ref else L_t=L_prev",
+        "parameters": {
+          "first_level": "first_nominal_close",
+          "same_day_event": "dict按日期最后一条覆盖；分红先减，拆分再除",
+          "gap_actions": "仅报价当日生效事件，缺报价期间事件不跨区间累计"
+        },
+        "endpoints": "相邻ETF输入报价行；SMA按此序列rolling行数，包含当日",
+        "unit": "continuous_price_level",
+        "direction": "连续价描述；不是严格总回报",
+        "transforms": "与mixed.price.economic不同；不默认标准化或填报价"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "volume",
+          "actions",
+          "restrictions",
+          "price_limit_regimes"
+        ],
+        "price_basis": "ETF连续信号价由breadth_runner::continuous_close连接；账户只用名义价、份额、现金和应收",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "自然日记账；真实ETF报价决定可交易日期；股票宽度日历另列"
+      },
+      "universe": {
+        "version": "固定510300或159915；ETF输入来源指纹；不动态选池",
+        "eligibility": "固定ETF自身上市且有当日可交易开盘；不受股票成分数量或宽度覆盖率约束",
+        "warmup": "持有/月度50%无SMA预热；价格趋势另需窗口；旧状态比较在不足窗口时为false",
+        "missing": "缺开盘/停牌/达到限价延期；估值沿用经公司行动调整的最近价；不得把估值旧价用于新信号",
+        "quality_gate": "名义行情、公司行动及交易限制资料有限；历史到达时间未确认",
+        "degrade": "无法成交延期；缺失历史可得时间仅限研究"
+      },
+      "dependencies": [],
+      "sources": [
+        "breadth_runner",
+        "breadth_protocol",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "status": {
+        "definition_clarity": "explicit_legacy_with_limitations",
+        "implementation": "mapped_legacy_not_migrated",
+        "data_qualification": "event_arrival_and_quote_gap_action_handling_unverified",
+        "effectiveness": "not_tested_by_normalization",
+        "production": "not_authorized"
+      },
+      "validation": {
+        "method": "冻结continuous_close源码核对；未独立复算该价格连接，不能宣称全部价格合法",
+        "limitations": "同日多事件按字典覆盖、缺报价期间行动不累计；ref<=0不更新level；保留旧行为，不当作合格总回报数据"
+      }
+    },
+    {
+      "id": "etf.trend.sma50",
+      "version": "1.0.0",
+      "name": "ETF连续价SMA50（宽度旧账户）",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "etf.price.continuous@1.0.0"
+      ],
+      "definition": {
+        "formula": "continuous_close.rolling(50,min_periods=50).mean()",
+        "parameters": {
+          "window": 50,
+          "min_periods": 50
+        },
+        "endpoints": "最近50个ETF输入报价行含t；本版不是先dropna压缩",
+        "unit": "same_as_P_signal",
+        "direction": "描述平均价格，不单独表示方向",
+        "transforms": "算术均值；无EMA权重"
+      },
+      "scope": "仅etf.price.continuous，不得替换为混合池经济指数",
+      "universe": {
+        "version": "固定510300或159915；ETF输入来源指纹；不动态选池",
+        "eligibility": "固定ETF自身上市且有当日可交易开盘；不受股票成分数量或宽度覆盖率约束",
+        "warmup": "50个输入报价行；rolling含当日，缺值窗口不足不产生均值",
+        "missing": "缺开盘/停牌/达到限价延期；估值沿用经公司行动调整的最近价；不得把估值旧价用于新信号",
+        "quality_gate": "名义行情、公司行动及交易限制资料有限；历史到达时间未确认",
+        "degrade": "无法成交延期；缺失历史可得时间仅限研究"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "continuous_close"
+        ],
+        "price_basis": "etf.price.continuous@1.0.0",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "自然日记账；真实ETF报价决定可交易日期；股票宽度日历另列"
+      },
+      "sources": [
+        "breadth_runner",
+        "breadth_protocol",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "status": {
+        "implementation": "mapped_legacy_not_migrated"
+      }
+    },
+    {
+      "id": "etf.trend.above50",
+      "version": "1.0.0",
+      "name": "ETF连续价在SMA50上方（旧布尔比较）",
+      "type": "state_signal",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "etf.trend.sma50@1.0.0"
+      ],
+      "definition": {
+        "formula": "continuous_close>SMA50; 均值缺失时旧比较返回false",
+        "parameters": {
+          "strict": true,
+          "missing_mean": false
+        },
+        "endpoints": "含t；不是上穿事件",
+        "unit": "boolean",
+        "direction": "true为均线上方，等于为false",
+        "transforms": "无；缺失均值的false仅是legacy行为"
+      },
+      "scope": "仅etf.price.continuous，不得替换为混合池经济指数",
+      "universe": {
+        "version": "固定510300或159915；ETF输入来源指纹；不动态选池",
+        "eligibility": "固定ETF自身上市且有当日可交易开盘；不受股票成分数量或宽度覆盖率约束",
+        "warmup": "50个输入报价行；rolling含当日，缺值窗口不足不产生均值",
+        "missing": "缺开盘/停牌/达到限价延期；估值沿用经公司行动调整的最近价；不得把估值旧价用于新信号",
+        "quality_gate": "名义行情、公司行动及交易限制资料有限；历史到达时间未确认",
+        "degrade": "无法成交延期；缺失历史可得时间仅限研究"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "continuous_close"
+        ],
+        "price_basis": "etf.price.continuous@1.0.0",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "自然日记账；真实ETF报价决定可交易日期；股票宽度日历另列"
+      },
+      "sources": [
+        "breadth_runner",
+        "breadth_protocol",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "status": {
+        "implementation": "mapped_legacy_not_migrated"
+      }
+    },
+    {
+      "id": "etf.trend.sma200",
+      "version": "1.0.0",
+      "name": "ETF连续价SMA200（宽度旧账户）",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "etf.price.continuous@1.0.0"
+      ],
+      "definition": {
+        "formula": "continuous_close.rolling(200,min_periods=200).mean()",
+        "parameters": {
+          "window": 200,
+          "min_periods": 200
+        },
+        "endpoints": "最近200个ETF输入报价行含t；本版不是先dropna压缩",
+        "unit": "same_as_P_signal",
+        "direction": "描述平均价格，不单独表示方向",
+        "transforms": "算术均值；无EMA权重"
+      },
+      "scope": "仅etf.price.continuous，不得替换为混合池经济指数",
+      "universe": {
+        "version": "固定510300或159915；ETF输入来源指纹；不动态选池",
+        "eligibility": "固定ETF自身上市且有当日可交易开盘；不受股票成分数量或宽度覆盖率约束",
+        "warmup": "200个输入报价行；rolling含当日，缺值窗口不足不产生均值",
+        "missing": "缺开盘/停牌/达到限价延期；估值沿用经公司行动调整的最近价；不得把估值旧价用于新信号",
+        "quality_gate": "名义行情、公司行动及交易限制资料有限；历史到达时间未确认",
+        "degrade": "无法成交延期；缺失历史可得时间仅限研究"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "continuous_close"
+        ],
+        "price_basis": "etf.price.continuous@1.0.0",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "自然日记账；真实ETF报价决定可交易日期；股票宽度日历另列"
+      },
+      "sources": [
+        "breadth_runner",
+        "breadth_protocol",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "status": {
+        "implementation": "mapped_legacy_not_migrated"
+      }
+    },
+    {
+      "id": "etf.trend.above200",
+      "version": "1.0.0",
+      "name": "ETF连续价在SMA200上方（旧布尔比较）",
+      "type": "state_signal",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "etf.trend.sma200@1.0.0"
+      ],
+      "definition": {
+        "formula": "continuous_close>SMA200; 均值缺失时旧比较返回false",
+        "parameters": {
+          "strict": true,
+          "missing_mean": false
+        },
+        "endpoints": "含t；不是上穿事件",
+        "unit": "boolean",
+        "direction": "true为均线上方，等于为false",
+        "transforms": "无；缺失均值的false仅是legacy行为"
+      },
+      "scope": "仅etf.price.continuous，不得替换为混合池经济指数",
+      "universe": {
+        "version": "固定510300或159915；ETF输入来源指纹；不动态选池",
+        "eligibility": "固定ETF自身上市且有当日可交易开盘；不受股票成分数量或宽度覆盖率约束",
+        "warmup": "200个输入报价行；rolling含当日，缺值窗口不足不产生均值",
+        "missing": "缺开盘/停牌/达到限价延期；估值沿用经公司行动调整的最近价；不得把估值旧价用于新信号",
+        "quality_gate": "名义行情、公司行动及交易限制资料有限；历史到达时间未确认",
+        "degrade": "无法成交延期；缺失历史可得时间仅限研究"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "continuous_close"
+        ],
+        "price_basis": "etf.price.continuous@1.0.0",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "自然日记账；真实ETF报价决定可交易日期；股票宽度日历另列"
+      },
+      "sources": [
+        "breadth_runner",
+        "breadth_protocol",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "status": {
+        "implementation": "mapped_legacy_not_migrated"
+      }
+    },
+    {
+      "scope": "510300与159915的冻结历史研究；不等同旧B1/SMA200，也不是宽度确认条件",
+      "not_for": [
+        "production_trade",
+        "ranking",
+        "attribution"
+      ],
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "actions",
+          "restrictions",
+          "price_limit_regimes"
+        ],
+        "price_basis": "etf.price.continuous@1.0.0的冻结ETF连续价算法；账户用名义开收盘与独立公司行动。只在有报价日连接恰好该日生效的动作；非报价日行动尚未泛化支持。",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "自然日记账；真实ETF报价决定可交易日期；股票宽度日历另列"
+      },
+      "universe": {
+        "version": "first12冻结510300/159915名义行情及行动；固定2018-07-05—2026-06-30",
+        "eligibility": "固定ETF自身上市且有当日可交易开盘；不受股票成分数量或宽度覆盖率约束",
+        "warmup": "含当日最近50条有效连续收盘；不足返回缺失且不发指令",
+        "missing": "信号不填缺报价；账户缺开盘/受限订单延期；同日新收盘状态改变替换旧订单；其余沿冻结B1执行",
+        "quality_gate": "有限冻结ETF输入；历史到达时间未知，不依赖股票宽度覆盖率",
+        "degrade": "未覆盖的公司行动/报价异常阻断适用性；不能自动推广至其他产品"
+      },
+      "time": {
+        "observation_time": "ETF有效报价日收盘后",
+        "available_at": "冻结输入实际到达时间未知；本次重算时已取得，不伪造历史available_at",
+        "decision_at": "有效收盘后，首次或二元状态变化时",
+        "execution_at": "严格晚于信号日的下一允许开盘",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-09-09研究定义登记；不追溯改生产"
+      },
+      "validation": {
+        "method": "合成相等/预热/缺报价/行动连接测试，并在运行后保存全部状态变化、成交和资金账",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "docs/experiments/raw/research-breadth-price50-decision-2026-09-09/execution/test_price50.py"
+        ],
+        "limitations": "仅绑定本轮两ETF冻结输入；纯50日跌回均线会退出，W3价格确认转负本身不退出。完整方案差不能全部归于宽度；旧消费者未迁移。"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_etf_inputs_historical_availability_unknown",
+        "implementation": "isolated_adapter_pre_result_definition",
+        "effectiveness": "not_yet_evaluated_at_definition_freeze",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "price50_protocol",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "id": "etf.trend.price50.state",
+      "version": "1.0.0",
+      "name": "ETF连续价格50日均线二元状态",
+      "type": "state_signal",
+      "uses": [
+        "research_signal",
+        "description",
+        "comparison"
+      ],
+      "dependencies": [
+        "etf.price.continuous@1.0.0"
+      ],
+      "definition": {
+        "formula": "当日连续价格close严格大于截至当日最近50条有效报价的简单平均值时为1，否则为0；不足50条为缺失",
+        "parameters": {
+          "window_valid_quotes": 50,
+          "comparison": "strict_gt",
+          "equal_target": 0,
+          "missing_before_window": true
+        },
+        "endpoints": "均线含当日；第50条有效连续价格首次可评价",
+        "unit": "boolean",
+        "direction": "1表示目标持有，0表示目标现金",
+        "transforms": "按已生效现金分红和拆分连接原名义收盘为连续价格；停牌/缺报价不补行"
+      }
+    },
+    {
+      "scope": "固定两只ETF、两档费用的完整可投资历史参照账户",
+      "not_for": [
+        "production_trade",
+        "ranking",
+        "attribution"
+      ],
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "nominal_open",
+          "nominal_close",
+          "actions",
+          "restrictions",
+          "price_limit_regimes"
+        ],
+        "price_basis": "etf.price.continuous@1.0.0的冻结ETF连续价算法；账户用名义开收盘与独立公司行动。只在有报价日连接恰好该日生效的动作；非报价日行动尚未泛化支持。",
+        "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+        "frequency": "daily_account_calendar",
+        "calendar": "自然日记账；真实ETF报价决定可交易日期；股票宽度日历另列"
+      },
+      "universe": {
+        "version": "first12冻结510300/159915名义行情及行动；固定2018-07-05—2026-06-30",
+        "eligibility": "固定ETF自身上市且有当日可交易开盘；不受股票成分数量或宽度覆盖率约束",
+        "warmup": "含当日最近50条有效连续收盘；不足返回缺失且不发指令",
+        "missing": "信号不填缺报价；账户缺开盘/受限订单延期；同日新收盘状态改变替换旧订单；其余沿冻结B1执行",
+        "quality_gate": "有限冻结ETF输入；历史到达时间未知，不依赖股票宽度覆盖率",
+        "degrade": "未覆盖的公司行动/报价异常阻断适用性；不能自动推广至其他产品"
+      },
+      "time": {
+        "observation_time": "ETF有效报价日收盘后",
+        "available_at": "冻结输入实际到达时间未知；本次重算时已取得，不伪造历史available_at",
+        "decision_at": "有效收盘后，首次或二元状态变化时",
+        "execution_at": "严格晚于信号日的下一允许开盘",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-09-09研究定义登记；不追溯改生产"
+      },
+      "validation": {
+        "method": "边界测试、运行前后输入哈希、四账户信号/订单/资金/公司行动/汇总核账",
+        "tolerance": {
+          "absolute": 1e-08,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "docs/experiments/raw/research-breadth-price50-decision-2026-09-09/execution/test_price50.py"
+        ],
+        "limitations": "仅绑定本轮两ETF冻结输入；纯50日跌回均线会退出，W3价格确认转负本身不退出。完整方案差不能全部归于宽度；旧消费者未迁移。"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_etf_inputs_historical_availability_unknown",
+        "implementation": "isolated_adapter_pre_result_definition",
+        "effectiveness": "not_yet_evaluated_at_definition_freeze",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "price50_protocol",
+        "etf_510300",
+        "etf_159915",
+        "etf_actions",
+        "etf_restrictions",
+        "etf_limits"
+      ],
+      "id": "benchmark.etf.price_sma50_binary_account",
+      "version": "1.0.0",
+      "name": "ETF纯50日价格二元账户参照",
+      "type": "benchmark",
+      "uses": [
+        "comparison"
+      ],
+      "dependencies": [
+        "etf.trend.price50.state@1.0.0",
+        "cash.zero@1.0.0"
+      ],
+      "definition": {
+        "formula": "目标仓位=etf.trend.price50.state；只在首次有效状态及以后状态改变时发指令",
+        "parameters": {
+          "targets": [
+            0,
+            1
+          ],
+          "lot": 100,
+          "initial_cash": 1000000,
+          "external_deposits": 0
+        },
+        "endpoints": "2018-07-05至2026-06-30",
+        "unit": "account_path",
+        "direction": "不预设相对宽度策略优劣",
+        "transforms": "无每日再平衡"
+      },
+      "policy": {
+        "selection": "固定510300或159915，不选产品",
+        "weights": "状态1目标100%，状态0目标0%；=SMA50为0；不足50条不发指令",
+        "cash": "初始100万元CNY，外部流量0，利息0；名义份额/现金/应收；登记日权益/除息应收/支付日开盘前可用近似",
+        "fees": "每边0.001主费用、0.002压力；100份取整，不虚构期末卖费",
+        "rebalance": "首次有效收盘及其后状态改变后生成订单；不每日恢复比例，分红到账不单独触发买入",
+        "execution": "本批execution/run_price50.py隔离适配；名义开盘、现金费用、100份、停牌限价延期；新状态可替换受限旧单",
+        "exit": "收盘状态变0后下一允许开盘全部退出；不假设当天收盘成交",
+        "reentry": "以后收盘状态变1后下一允许开盘重新投入",
+        "investability": "真实ETF历史账户近似；价差/容量/历史到达时间未验，不授权交易"
+      }
+    }
+  ],
+  "models": [],
+  "model_policy": {
+    "risk_free": "not_provided",
+    "fit_status": "not_run",
+    "reason": "本轮只核定义；无适配因子模型需求，现金0不等于无风险0，禁止B200水平充当收益因子"
+  },
+  "consumers": {
+    "integrated": [
+      "scripts/verify_research_definitions.py",
+      "tests/unit/test_research_definitions.py"
+    ],
+    "legacy_mapped": [
+      "mixed_code",
+      "defense_code",
+      "breadth_runner",
+      "breadth_legacy",
+      "all_a_legacy",
+      "dca_code",
+      "hold_code"
+    ],
+    "migration": "冻结/生产消费者均只映射，不回填新版本伪造合规"
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-09-09",
+      "change": "首次登记；原冻结对象是legacy映射；common比例版及严格正价/时间检查为隔离适配；算法核验不升级有效性或生产授权；发布前独立审阅修正对象单位/资格继承，拆开两种连续价格与同日分红再投的设计实现差异；保留run-01草稿证据"
+    },
+    {
+      "version": "1.1.0",
+      "date": "2026-09-09",
+      "change": "新增纯50有效报价状态及完整ETF二元账户两个研究定义；旧对象版本、公式、来源保持。"
+    }
+  ],
+  "standard_version": "1.0.0"
+}

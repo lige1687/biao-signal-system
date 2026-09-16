@@ -1,0 +1,205 @@
+{
+  "status": "failed",
+  "scope": {
+    "rule_review": "synthetic strict-inequality/priority tests plus independent event-order implementation",
+    "numeric_coverage": "8 complete paths (4 old regression + 4 new executor), 330 frozen entries x 2 exit rules",
+    "executor_fixed_entry_target_available": false
+  },
+  "locked_file_checks": {
+    "count": 71,
+    "all_match": false,
+    "mismatches": [
+      {
+        "lock": "review-lock.json",
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-r1-exit-contribution-2026-09-09/independent-review/independent_check.py",
+        "match": false
+      }
+    ]
+  },
+  "complete_account_checks": [
+    {
+      "symbol": "sh510300",
+      "fee": 0.001,
+      "rule": "original",
+      "daily_rows": 4199,
+      "target_daily_rows": 4199,
+      "daily_max_abs_diff": {
+        "equity": 0.0,
+        "cash": 0.0,
+        "shares": 0.0,
+        "receivable": 0.0,
+        "fees": 0.0
+      },
+      "trade_sequence_exact": true,
+      "roundtrip_dates_exact": true,
+      "independent_trade_count": 165,
+      "target_trade_count": 165
+    },
+    {
+      "symbol": "sh510300",
+      "fee": 0.001,
+      "rule": "structure_only",
+      "daily_rows": 4199,
+      "target_daily_rows": 4199,
+      "daily_max_abs_diff": {
+        "equity": 0.0,
+        "cash": 0.0,
+        "shares": 0.0,
+        "receivable": 0.0,
+        "fees": 0.0
+      },
+      "trade_sequence_exact": true,
+      "roundtrip_dates_exact": true,
+      "independent_trade_count": 1,
+      "target_trade_count": 1
+    },
+    {
+      "symbol": "sh510300",
+      "fee": 0.002,
+      "rule": "original",
+      "daily_rows": 4199,
+      "target_daily_rows": 4199,
+      "daily_max_abs_diff": {
+        "equity": 0.0,
+        "cash": 0.0,
+        "shares": 0.0,
+        "receivable": 0.0,
+        "fees": 0.0
+      },
+      "trade_sequence_exact": true,
+      "roundtrip_dates_exact": true,
+      "independent_trade_count": 165,
+      "target_trade_count": 165
+    },
+    {
+      "symbol": "sh510300",
+      "fee": 0.002,
+      "rule": "structure_only",
+      "daily_rows": 4199,
+      "target_daily_rows": 4199,
+      "daily_max_abs_diff": {
+        "equity": 0.0,
+        "cash": 0.0,
+        "shares": 0.0,
+        "receivable": 0.0,
+        "fees": 0.0
+      },
+      "trade_sequence_exact": true,
+      "roundtrip_dates_exact": true,
+      "independent_trade_count": 1,
+      "target_trade_count": 1
+    },
+    {
+      "symbol": "sz159915",
+      "fee": 0.001,
+      "rule": "original",
+      "daily_rows": 4199,
+      "target_daily_rows": 4199,
+      "daily_max_abs_diff": {
+        "equity": 0.0,
+        "cash": 0.0,
+        "shares": 0.0,
+        "receivable": 0.0,
+        "fees": 0.0
+      },
+      "trade_sequence_exact": true,
+      "roundtrip_dates_exact": true,
+      "independent_trade_count": 163,
+      "target_trade_count": 163
+    },
+    {
+      "symbol": "sz159915",
+      "fee": 0.001,
+      "rule": "structure_only",
+      "daily_rows": 4199,
+      "target_daily_rows": 4199,
+      "daily_max_abs_diff": {
+        "equity": 0.0,
+        "cash": 0.0,
+        "shares": 0.0,
+        "receivable": 0.0,
+        "fees": 0.0
+      },
+      "trade_sequence_exact": true,
+      "roundtrip_dates_exact": true,
+      "independent_trade_count": 3,
+      "target_trade_count": 3
+    },
+    {
+      "symbol": "sz159915",
+      "fee": 0.002,
+      "rule": "original",
+      "daily_rows": 4199,
+      "target_daily_rows": 4199,
+      "daily_max_abs_diff": {
+        "equity": 0.0,
+        "cash": 0.0,
+        "shares": 0.0,
+        "receivable": 0.0,
+        "fees": 0.0
+      },
+      "trade_sequence_exact": true,
+      "roundtrip_dates_exact": true,
+      "independent_trade_count": 163,
+      "target_trade_count": 163
+    },
+    {
+      "symbol": "sz159915",
+      "fee": 0.002,
+      "rule": "structure_only",
+      "daily_rows": 4199,
+      "target_daily_rows": 4199,
+      "daily_max_abs_diff": {
+        "equity": 0.0,
+        "cash": 0.0,
+        "shares": 0.0,
+        "receivable": 0.0,
+        "fees": 0.0
+      },
+      "trade_sequence_exact": true,
+      "roundtrip_dates_exact": true,
+      "independent_trade_count": 3,
+      "target_trade_count": 3
+    }
+  ],
+  "fixed_original_checks": {
+    "entries": 330,
+    "comparisons": 330,
+    "mismatch_count": 0,
+    "mismatches": []
+  },
+  "fixed_structure_only_inventory": [
+    {
+      "symbol": "sh510300",
+      "fee": 0.001,
+      "frozen_entries": 83,
+      "changed_under_structure_only": 81,
+      "open_at_end_under_structure_only": 16
+    },
+    {
+      "symbol": "sh510300",
+      "fee": 0.002,
+      "frozen_entries": 83,
+      "changed_under_structure_only": 81,
+      "open_at_end_under_structure_only": 16
+    },
+    {
+      "symbol": "sz159915",
+      "fee": 0.001,
+      "frozen_entries": 82,
+      "changed_under_structure_only": 81,
+      "open_at_end_under_structure_only": 25
+    },
+    {
+      "symbol": "sz159915",
+      "fee": 0.002,
+      "frozen_entries": 82,
+      "changed_under_structure_only": 81,
+      "open_at_end_under_structure_only": 25
+    }
+  ],
+  "limitations": [
+    "Executor fixed-entry phase13 target has not arrived, so structure-only fixed paths are independently generated but not yet cross-compared.",
+    "Performance interpretation and invested-capital metrics are outside this checkpoint."
+  ]
+}

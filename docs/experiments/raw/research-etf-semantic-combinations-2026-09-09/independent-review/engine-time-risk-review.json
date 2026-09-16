@@ -1,0 +1,56 @@
+{
+  "status": "prepared_before_new_returns",
+  "source_engine": "docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/engine.py",
+  "risks": [
+    {
+      "id": "same_c1_clock",
+      "severity": "critical",
+      "check": "All four groups retain the original C1 reclaim signal_date; no C2/C3 later confirmation date becomes entry time."
+    },
+    {
+      "id": "auxiliary_as_of",
+      "severity": "critical",
+      "check": "Support and dual-MA state carry source/confirmation dates no later than the C1 signal date; engine itself does not enforce this."
+    },
+    {
+      "id": "target_point_in_time",
+      "severity": "critical",
+      "check": "Target source and confirmation predate or equal signal date and use then-current units; missing target is not filled from future bars."
+    },
+    {
+      "id": "config_semantics",
+      "severity": "critical",
+      "check": "New groups explicitly choose acceptance and sizing; old engine config_id branches must not accidentally impose ACD 3R/1% rules or diagnostic target bypass."
+    },
+    {
+      "id": "product_schedule",
+      "severity": "high",
+      "check": "Next-open planning uses the candidate ETF's quote calendar, not a union calendar if products share an account."
+    },
+    {
+      "id": "open_information",
+      "severity": "high",
+      "check": "Open availability uses only open, prior known close, effective action and dated restriction; same-day high/low/close are unavailable."
+    },
+    {
+      "id": "exit_precedence",
+      "severity": "high",
+      "check": "Structure failure, target and black-state precedence and trigger price are fixed before returns; strict comparisons and next allowed open are verified."
+    },
+    {
+      "id": "action_units",
+      "severity": "high",
+      "check": "Entry-day levels already use current units; later dividend/split actions transform stop/target once, while record/ex/pay rights remain distinct."
+    },
+    {
+      "id": "prior_evidence_visibility",
+      "severity": "critical",
+      "check": "At each decision date only outcomes resolved earlier are visible; unresolved paths remain explicit and never enter win/loss statistics."
+    },
+    {
+      "id": "fast_exit_bias",
+      "severity": "critical",
+      "check": "When exit variants have different durations, any comparison used for selection uses the same pre-fixed mature historical opportunity cohort."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+ "S1-a-date-tamper-binding-untouched": {
+  "rejected_as_expected": true,
+  "rejected_reasons": [
+   "事实与已核抽取输出不一致：ex_date 记录='2021-10-23' vs 抽取='2021-10-22'；改动后的事实（含已核时间值）不得作为已核事实消费",
+   "事实指纹与已核登记不一致（产品/日期/金额/已核时间值在核验后被改动）；该记录不得作为已核事实消费"
+  ]
+ },
+ "S1-b-shrink-fields-passes": {
+  "defect_present": false,
+  "note": "消费中的拆分日被移出核验范围后，改动日期通过"
+ },
+ "S1-c-time-value-tamper-passes": {
+  "defect_present": false,
+  "note": "已核时间值不在绑定合同内，改动通过"
+ },
+ "S2-reference-row-removed-still-complete": {
+  "exit_code": 2,
+  "manifest_written": false,
+  "complete_consistent": null,
+  "defect_present": false,
+  "note": "少一个正式参考键仍报完整一致：算法没有独立键集合基准"
+ },
+ "_meta": {
+  "purpose": "S1/S2 反例：repro-run-01=v1.1 包/旧接口留证（缺陷在）；repro-run-02=v1.2 包/新接口验证反转",
+  "date": "2026-09-13",
+  "bundle_schema": "1.2",
+  "s3_note": "task2_extract_facts_v2.py 旧版对正式位置 write_text 直接覆盖（代码事实，repro-run-01 留证）；新版已改排他写+字节比较，见 rework-s123/bundle-v1.2 复现记录"
+ }
+}

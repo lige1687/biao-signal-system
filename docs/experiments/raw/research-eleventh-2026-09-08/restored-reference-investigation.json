@@ -1,0 +1,87 @@
+{
+  "reason": "Initial comparison wrongly required exact pre-repair source ID. Repair preserves first publication, so old Dec31 recalculation ID may differ from actual Dec30 published ID. Event stability within repaired implementation still compares all fields.",
+  "traces": [
+    {
+      "as_of": "2015-12-29",
+      "implementation": "old",
+      "structures": []
+    },
+    {
+      "as_of": "2015-12-29",
+      "implementation": "fixed",
+      "structures": []
+    },
+    {
+      "as_of": "2015-12-30",
+      "implementation": "old",
+      "structures": [
+        {
+          "side": "bottom",
+          "confirmed_date": "2015-12-30",
+          "reference_price": 1.5,
+          "trigger_price": 1.59,
+          "final_price": 1.612,
+          "reference_date": "2015-12-25",
+          "contained_bars_merged": 3,
+          "structure_id": "strict_bottom:2015-12-30",
+          "invalidated_date": null,
+          "invalidated_reason": null
+        }
+      ]
+    },
+    {
+      "as_of": "2015-12-30",
+      "implementation": "fixed",
+      "structures": [
+        {
+          "side": "bottom",
+          "confirmed_date": "2015-12-30",
+          "reference_price": 1.5,
+          "trigger_price": 1.59,
+          "final_price": 1.612,
+          "reference_date": "2015-12-25",
+          "contained_bars_merged": 3,
+          "structure_id": "strict_bottom:2015-12-30",
+          "invalidated_date": null,
+          "invalidated_reason": null
+        }
+      ]
+    },
+    {
+      "as_of": "2015-12-31",
+      "implementation": "old",
+      "structures": [
+        {
+          "side": "bottom",
+          "confirmed_date": "2015-12-31",
+          "reference_price": 1.5,
+          "trigger_price": 1.59,
+          "final_price": 1.617,
+          "reference_date": "2015-12-25",
+          "contained_bars_merged": 3,
+          "structure_id": "strict_bottom:2015-12-31",
+          "invalidated_date": null,
+          "invalidated_reason": null
+        }
+      ]
+    },
+    {
+      "as_of": "2015-12-31",
+      "implementation": "fixed",
+      "structures": [
+        {
+          "side": "bottom",
+          "confirmed_date": "2015-12-30",
+          "reference_price": 1.5,
+          "trigger_price": 1.59,
+          "final_price": 1.612,
+          "reference_date": "2015-12-25",
+          "contained_bars_merged": 3,
+          "structure_id": "strict_bottom:2015-12-30",
+          "invalidated_date": null,
+          "invalidated_reason": null
+        }
+      ]
+    }
+  ]
+}

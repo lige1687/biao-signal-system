@@ -1,0 +1,18 @@
+{
+  "definition_reference": "breadth.csi300.b50.common@1.0.0",
+  "entity_axis": "universe",
+  "value_type": "fraction_bounded",
+  "evaluation_cutoff": "2030-01-01 15:00:00+08:00",
+  "protocol": {
+    "protocol_id": "factor-lab-demo-2-state",
+    "version": "1.2.0",
+    "kind": "state_diagnostic",
+    "data_mode": "synthetic",
+    "sha256": "65c5974162c23fc8effc2c5c220c2413ae2cda002c5a41ff041dbffa938e6e8f"
+  },
+  "feature_time_semantics": "synthetic_immediate_at_decision",
+  "feature_time_semantics_note": "not_verified_row_level：本接口只检查调用者声明的feature_available_lag_days（默认0=即时可得假设），未逐行比较feature_available_at与decision_at；未知/未支持时间语义不得获得已核验结论",
+  "diagnostic": "cross_section_ic",
+  "status": "not_applicable",
+  "reason": "universe 共同状态同日对所有产品相同；复制成横截面不是独立证据"
+}

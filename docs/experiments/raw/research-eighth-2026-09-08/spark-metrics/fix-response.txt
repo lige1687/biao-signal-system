@@ -1,0 +1,32 @@
+已按要求只改了这两文件：`metrics.py`、`test_metrics.py`，未改 `first-pass/*`。
+
+### 修复内容
+
+- `metrics.py`
+  - 修复 `worst_below_funding`：
+    - 以前只取最后一天 `min(last_equity - last_funding, 0.0)`
+    - 现在改为：遍历所有历史行取最小 `equity - total_funding`（不高于 0）
+  - 修复回撤天数锚点：
+    - 引入 `hwm_date`（最近高点日期）
+    - 回撤开始日期使用“最近高点日”而不是“首个跌破日”
+    - unresolved（尾部未回到高点）也按最近高点锚定
+  - 添加日期顺序校验：
+    - 严格要求 `daily` 日期严格递增且不重复
+    - 发现重复/降序直接抛 `ValueError("daily dates must be strictly increasing")`
+
+### 测试更新（`test_metrics.py`）
+
+- 调整了原有回撤测试以匹配新定义（将恢复型回撤从 `3` 更新为 `4`）
+- 新增测试覆盖你要求的场景：
+  - 历史最差 `worst_below_funding`（示例中的 `-50`）
+  - 回撤恢复情形：按“上一个高点”计时
+  - 回撤未恢复尾巴情形：按“上一个高点”计时
+  - 全部 NAV 平坦时回撤时长为 `0`
+  - 日期重复/逆序时拒绝计算
+
+### 验证
+
+- 先验（改前）`python3 -m unittest -q` 通过旧测试集（9 个）。
+- 修改后 `python3 -m unittest -q`：`Ran 14 tests in 0.000s`，`OK`。  
+
+如果你愿意，我可以再补一条边界测试：只有一行 `daily` 时 `longest_drawdown_days` 和 `unrecovered_at_end` 的返回值是否符合你们显示规范。

@@ -1,0 +1,65 @@
+{
+  "principles_version": "1.0.0",
+  "definition_standard_version": "1.0.0",
+  "registry_version": "1.0.0",
+  "registry_sha256": "c4f8db585cc25a10c5fcdd2b04ea4d3735194631a6a3805ccaa49170f41dc531",
+  "definition_refs": [
+    "breadth.csi300.b50.common@1.0.0",
+    "breadth.csi300.b200.common@1.0.0"
+  ],
+  "dependency_closure": [
+    "breadth.csi300.b200.common@1.0.0",
+    "breadth.csi300.b50.common@1.0.0"
+  ],
+  "codes": [
+    {
+      "path": "scripts/verify_research_definitions.py",
+      "sha256": "d0aa6009b748ea4117f59c74fde400a8be46c3213c98da8d162ce257361c9b99"
+    },
+    {
+      "path": "src/lei_signal/research/definitions.py",
+      "sha256": "208d5584ed973b5ff378f43549db3ab9cbf8a24b317220ec77c9c9adfce5bf76"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "docs/experiments/raw/definition-normalization-2026-09-09/run-01/breadth-input.csv",
+      "sha256": "e6a1acff1583c3a0928f49edecfe4f6631ea18e6b9ef23ca40b961a490a38e48"
+    },
+    {
+      "path": "docs/experiments/raw/definition-normalization-2026-09-09/run-01/breadth-members.csv",
+      "sha256": "94eaad03b21c1f539d633f4be73f150066f65dadf09eace4c3fc30e88a23629b"
+    },
+    {
+      "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/csi300_membership_daily.parquet",
+      "sha256": "a45d53bf4e445438f534bd2019ec30ecd911f6bfb09272a9c663c7e01026bc30"
+    }
+  ],
+  "data_cutoff": "2025-06-18T15:00:00+08:00",
+  "available_at": "2026-09-09T19:33:50.617648+08:00",
+  "decision_at": "2026-09-09T19:33:50.617648+08:00",
+  "protocol": {
+    "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/protocol.md",
+    "sha256": "a1b991c102c37a73d491e842e68cf7fe0a3e4ba6e2c83759e78575a480875f8d"
+  },
+  "pool_version": "csi300/frozen20-session-probe-v1",
+  "quality": "real_frozen_csi300_B; 20-session membership probes, historical availability unknown",
+  "production_authorization": "not_authorized",
+  "historical_available_at": "unknown: sources do not certify vendor arrival timestamps",
+  "execution_protocol": "definition replay only; no trades executed",
+  "output_schema": {
+    "b50": "fraction",
+    "b200": "fraction",
+    "coverage": "fraction",
+    "eligible": "stock_count",
+    "missing_reason": "membership_missing/no_eligible_quotes/coverage_below_minimum/null"
+  },
+  "legacy_code": {
+    "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/research_engine.py",
+    "sha256": "3799f05c131179a79916505709d3aff94ced40350ddf10c51704f7ca11215f56"
+  },
+  "source_cache": {
+    "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_klines_full.parquet",
+    "sha256": "5ad045c518d0bb4394d8c8cb946d207ad9b5b1454e5a776b1a3766c62b475b04"
+  }
+}

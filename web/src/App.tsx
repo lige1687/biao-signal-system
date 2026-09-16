@@ -19,24 +19,32 @@ import WorkspacePage from "./pages/WorkspacePage";
 import BacktestPage from "./pages/BacktestPage";
 import ResearchPage from "./pages/ResearchPage";
 import ReportsLibraryPage from "./pages/ReportsLibraryPage";
+import LearningLibraryPage from "./pages/LearningLibraryPage";
+import UpgradesPage from "./pages/UpgradesPage";
 
 // ---- AgentConsole 全局开合（模块级单例 store，避免引入状态库）----
 // 上下文标的由 AgentConsole 从 useLocation 自行解析（matchPath "/symbol/:symbol"），
 // 这里的 symbol 只作为 openConsole 的参数留存，不污染 DetailPage。
-type ConsoleState = { open: boolean; symbol: string | null };
+type ConsoleState = { open: boolean; symbol: string | null; draft: string | null; draftSeq: number };
 const listeners = new Set<() => void>();
 const closeConsole = () => {
-  consoleState = { open: false, symbol: consoleState.symbol };
+  consoleState = { ...consoleState, open: false };
   snapshot = { ...consoleState, closeConsole };
   listeners.forEach((l) => l());
 };
-let consoleState: ConsoleState = { open: false, symbol: null };
+let consoleState: ConsoleState = { open: false, symbol: null, draft: null, draftSeq: 0 };
 // useSyncExternalStore 的 getSnapshot 必须返回稳定引用（每次新建字面量会无限重渲染），
 // 因此快照缓存在模块级，仅在状态变更时重建。
 let snapshot: ConsoleState & { closeConsole: () => void } = { ...consoleState, closeConsole };
 export const agentConsoleStore = {
-  openConsole(symbol: string | null) {
-    consoleState = { open: true, symbol };
+  /** draft：预填到输入框的问题草稿（如持仓页「问助手」），只放入输入框，不自动发送。 */
+  openConsole(symbol: string | null, draft?: string) {
+    consoleState = {
+      open: true,
+      symbol,
+      draft: draft ?? null,
+      draftSeq: consoleState.draftSeq + (draft ? 1 : 0),
+    };
     snapshot = { ...consoleState, closeConsole };
     listeners.forEach((l) => l());
   },
@@ -77,6 +85,9 @@ export default function App() {
         <Route path="/research" element={<ResearchPage />} />
         {/* 实验报告库：全量实验/调研文档统一浏览（登记簿分类 + 一句话结论） */}
         <Route path="/library" element={<ReportsLibraryPage />} />
+        {/* 文献学习库：以论文为线索的学习目录（只读学习层，不参与交易判定） */}
+        <Route path="/learning" element={<LearningLibraryPage />} />
+        <Route path="/upgrades" element={<UpgradesPage />} />
         {/* 收盘简报：环境异常 → 自选重点变化 → 板块观察池（research_proxy） */}
         <Route path="/daily" element={<DailyBriefPage />} />
         {/* 监督待办：跨标的计划 + 待办 + 当日判定 */}

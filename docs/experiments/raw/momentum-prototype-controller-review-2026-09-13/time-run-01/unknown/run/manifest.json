@@ -1,0 +1,78 @@
+{
+ "schema_version": "momentum-research-prototype-manifest/1.0",
+ "generated_at": "2026-09-13T09:59:54.549140+00:00",
+ "generated_at_note": "本次运行时刻，不得当作数据的对外可用时刻",
+ "mode": "qualified-research",
+ "synthetic": false,
+ "historical_reconstruction_only": false,
+ "protocol": {
+  "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/time-run-01/unknown/protocol-test.json",
+  "sha256": "9f1a920c3e6a8b95e6ad035df46dc872c1e1ff16b2165242ea30cd20dc7f60c4",
+  "protocol_id": "momentum-research-prototype-2026-09-13"
+ },
+ "target_id": "protocol:momentum-next-close-21-session@1.0.0",
+ "objects": {
+  "primary": "mixed.momentum.raw@1.0.0",
+  "dependency": "mixed.price.economic@1.0.0",
+  "type": "feature（身份引用，完整卡见协议文件）"
+ },
+ "code_hashes": {
+  "momentum_prototype": "26f49a57033797231e095d62c7655324736c98156ed336ae77b7957b5f56278c",
+  "run_momentum_research_prototype": "59c6ffd8cb36ea03b51f556b0ecd9f5cedbfb26244453e65a451277f2c2504e0"
+ },
+ "inputs": {
+  "snapshot_dir": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/time-run-01/unknown/snapshot",
+   "sha256": "34fc9acbc510d00a2984a0d6ee37877f6798dbf3721b3be9ffab431404a752d5",
+   "verified_file": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/time-run-01/unknown/snapshot/snapshot.json"
+  },
+  "calendar": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/time-run-01/unknown/calendar.json",
+   "sha256": "4a7bbfb76e3856acd5863f3218bcc3274a83bc8541f36c55da396d53365cc0a7",
+   "verified_file": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/time-run-01/unknown/calendar.json"
+  },
+  "publication": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/time-run-01/unknown/publication.json",
+   "sha256": "39cb3a8bebaf38e671a493505cc44f87130860c9cf18095218e36c6cf728f1d3",
+   "verified_file": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/time-run-01/unknown/publication.json"
+  },
+  "actions": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/time-run-01/unknown/actions.json",
+   "sha256": "186666f0b093e02106c4439521253422172f15379b241dd12ffb94feaa24b5f1",
+   "verified_file": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/time-run-01/unknown/actions.json"
+  },
+  "registry": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definitions.v1.json",
+   "sha256": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05"
+  }
+ },
+ "observations": {
+  "count": 0,
+  "first": null,
+  "last": null
+ },
+ "unknown_available_at": [],
+ "failures": [],
+ "identity_errors": [],
+ "skipped_stages": {
+  "economic-reconstruction": "研究资格未满足，拒绝运行：研究信号用途未获允许：action_available_at_unknown: 1/1 条行动缺少 available_at（其中 0 条有 announcement_date 可作「不晚于该日已公布」的下界，1 条完全未知）；下界不等于精确到达时刻，一律不写入 available_at。本批只能用于历史重建，不得声称当时可知",
+  "targets": "研究资格未满足，拒绝运行：研究信号用途未获允许：action_available_at_unknown: 1/1 条行动缺少 available_at（其中 0 条有 announcement_date 可作「不晚于该日已公布」的下界，1 条完全未知）；下界不等于精确到达时刻，一律不写入 available_at。本批只能用于历史重建，不得声称当时可知",
+  "rank-diagnostic": "研究资格未满足，拒绝运行：研究信号用途未获允许：action_available_at_unknown: 1/1 条行动缺少 available_at（其中 0 条有 announcement_date 可作「不晚于该日已公布」的下界，1 条完全未知）；下界不等于精确到达时刻，一律不写入 available_at。本批只能用于历史重建，不得声称当时可知"
+ },
+ "offline_guard": {
+  "self_check_blocked": true,
+  "blocked_with": "RuntimeError"
+ },
+ "statuses": {
+  "computation_run": false,
+  "research_qualification": "rejected",
+  "validity": "not_tested_by_this_run",
+  "production": "not_authorized",
+  "policy": "not_applicable_no_account_policy"
+ },
+ "outputs": {
+  "quality.json": "75923c844bfab9d7a9649b7242617a6b921043cb283faee6cdde2ba9c12e85f6",
+  "skipped-stages.json": "4e87826d2856502615c851f8ead1a877e96e48b2ec9f085a51cb3c0dcd3ec064",
+  "report.md": "a28d74c13df9bfd34fb825edec4ae9322065afc6194671ebffa53bc18e5f4da6"
+ }
+}

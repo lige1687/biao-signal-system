@@ -1,0 +1,35 @@
+{
+  "as_of": "2026-09-08",
+  "scope": "read-only local qualification inventory; no network and no return run",
+  "progress_since_prior_inventory": {
+    "corporate_action_material": "none found for either 510050 or 510500",
+    "price_progress": "Tencent OHLCV pool files now end 2026-09-01 with 2433 rows each; this is not action qualification",
+    "qualification_change": false
+  },
+  "products": [
+    {
+      "id": "510050.SS",
+      "status": "blocked_before_complete_capital_returns",
+      "files": [
+        {"path":"docs/experiments/raw/exit_three_piece/pool/510050.SS.bars.parquet","provider":"tencent","fields":["open","high","low","close","volume"],"rows":2433,"first":"2016-08-24","last":"2026-09-01"},
+        {"path":"docs/experiments/raw/etf_breadth/sh510050_close.parquet","fields":["close"],"rows":5232,"first":"2005-02-23","last":"2026-08-31"}
+      ],
+      "action_package_found": false,
+      "exact_gaps": ["nominal OHLCV for 2015-01-01 through 2016-08-23","cash dividend history","split/conversion history","adjustment basis for each local series","suspension and exchange calendar","price-limit regimes","100-unit execution","actual costs"]
+    },
+    {
+      "id": "510500.SS",
+      "status": "blocked_before_complete_capital_returns",
+      "files": [
+        {"path":"docs/experiments/raw/exit_three_piece/pool/510500.SS.bars.parquet","provider":"tencent","fields":["open","high","low","close","volume"],"rows":2433,"first":"2016-08-24","last":"2026-09-01"},
+        {"path":"docs/experiments/raw/etf_breadth/sh510500_close.parquet","fields":["close"],"rows":3270,"first":"2013-03-15","last":"2026-08-31"}
+      ],
+      "action_package_found": false,
+      "known_breaks_requiring_official_mapping": [{"date":"2015-04-15","ratio":3.4855},{"date":"2022-08-29","ratio":0.8726}],
+      "exact_gaps": ["nominal OHLCV for 2015-01-01 through 2016-08-23","official mapping for two known breaks","complete cash dividend and split/conversion history","three-series reconciliation: deep pool vs long close vs E01/timing cache","suspension and exchange calendar","price-limit regimes","100-unit execution","actual costs"],
+      "old_t3_evidence": "temporary flattened series remained mixed/evidence-insufficient; flattening is not a holder wealth reconstruction",
+      "old_evidence_path": "docs/experiments/raw/pollution_recheck/csi500_510500_recheck.json"
+    }
+  ],
+  "release_order": ["build official action packages", "build/freeze nominal OHLCV", "reconcile local series", "freeze execution constraints", "run accounting boundary cases", "only then run complete-capital increment comparisons"]
+}

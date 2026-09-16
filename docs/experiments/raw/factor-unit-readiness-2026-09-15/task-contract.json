@@ -1,0 +1,47 @@
+{
+ "task": "factor-unit-readiness-2026-09-15 (A阶段)",
+ "task_doc": "docs/superpowers/plans/2026-09-15-factor-unit-readiness-glm.md",
+ "design_doc": "docs/superpowers/specs/2026-09-15-factor-unit-research-design.md",
+ "started_at": "2026-09-15T11:15:07.005016+08:00",
+ "repo_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+ "branch_expected": "codex/factor-unit-research-20260915",
+ "branch_actual": "codex/factor-unit-research-20260915",
+ "head_expected": "8ba16576b75e605aa1b0d0902568c760c4b99095",
+ "head_actual": "8ba16576b75e605aa1b0d0902568c760c4b99095",
+ "head_note": "HEAD 与预期一致；工作区存在大量他人未提交成果，全部保留，不暂存不提交不回滚。",
+ "spec_sha_check": "7/7 与任务书表格一致",
+ "archive_code_keys_check": "15/15 与当前仓库及归档文件一致（单次核验，未重跑正式案例）",
+ "allowed_write_paths": [
+  "docs/experiments/factor-unit-readiness-2026-09-15.md",
+  "docs/experiments/raw/factor-unit-readiness-2026-09-15/",
+  "docs/experiments/registry.json (仅新增本报告条目)",
+  "docs/experiments/INDEX.md (仅导航一行)"
+ ],
+ "forbidden": [
+  "src/",
+  "现有scripts/与tests/",
+  "definitions.v1.json",
+  "规则账本",
+  "旧raw",
+  "旧报告",
+  "git提交/切换/reset/clean/stash"
+ ],
+ "scope_limits": {
+  "A_stage_only": true,
+  "no_network": true,
+  "no_secrets": true,
+  "no_payment": true,
+  "no_install": true,
+  "no_real_indicator_target_stats": true,
+  "no_account_backtest": true,
+  "no_production_or_okr_write": true,
+  "input_snapshot_budget": 12,
+  "prior_report_budget": 8
+ },
+ "boundary_notes": [
+  "合成小例全部标 synthetic；不把合成结论混入真实资料",
+  "宽度美国对象仅核标普500历史成员数据是否存在；无则标未登记",
+  "双均线协议为 proposal_not_executable，不运行真实因子统计",
+  "v1.2.0 合成原型保持冻结，不重开修复"
+ ]
+}

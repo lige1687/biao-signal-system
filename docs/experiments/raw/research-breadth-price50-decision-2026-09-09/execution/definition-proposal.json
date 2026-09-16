@@ -1,0 +1,76 @@
+{
+  "proposal_status": "local_complete_card_pending_central_registry_review",
+  "standard": "docs/research/definition-standard.md@1.0.0",
+  "objects": [
+    {
+      "id": "etf.trend.price50.state",
+      "version": "1.0.0",
+      "name": "ETF连续价格50日均线二元状态",
+      "type": "state_signal",
+      "uses": ["research_signal", "description", "comparison"],
+      "not_for": ["production_trade", "ranking", "attribution"],
+      "scope": "510300与159915的冻结历史研究；不等同旧B1/SMA200，也不是宽度确认条件",
+      "definition": {
+        "formula": "当日连续价格close严格大于截至当日最近50条有效报价的简单平均值时为1，否则为0；不足50条为缺失",
+        "parameters": {"window_valid_quotes": 50, "comparison": "strict_gt", "equal_target": 0, "missing_before_window": true},
+        "endpoints": "均线含当日；第50条有效连续价格首次可评价",
+        "unit": "boolean",
+        "direction": "1表示目标持有，0表示目标现金",
+        "transforms": "按已生效现金分红和拆分连接原名义收盘为连续价格；停牌/缺报价不补行"
+      },
+      "input": {
+        "fields": ["date", "nominal close", "cash dividend effective_date/cash", "split effective_date/ratio"],
+        "price_action_basis": "原ETF名义行情；当前有效报价日连接恰好在该日生效的行动；本批510300全部13项生效日均有报价，159915无行动，因此与冻结输入相符；不推广为跨无报价日通用实现",
+        "currency": "CNY",
+        "frequency": "ETF有效日线报价",
+        "calendar": "各ETF自身有效报价日；账户另按上海自然日日历记账",
+        "sources": [
+          {"path": "docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12/inputs/bars/sh510300-nominal.csv", "sha256": "d11357f678570ff9698e39799fd4db81ed825c3c05f7bb4c876e895a5c66d0bf"},
+          {"path": "docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12/inputs/bars/sz159915-nominal.csv", "sha256": "dc15f1c722114cf0f67d3c63d123b91fce27d60a9c41c4796a058b7b05fdece0"},
+          {"path": "docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12/inputs/actions.json", "sha256": "42803eceab514880d34918dbf4e04b64eac2a90749ccedb791b214e904ff2789"}
+        ]
+      },
+      "universe": {
+        "pool": ["510300", "159915"],
+        "history_version": "first12 frozen nominal bars/actions",
+        "eligibility": "本对象只需50条有效连续价格；账户评价区间2018-07-05至2026-06-30",
+        "warmup": "使用研究起点前已有冻结报价，但不足50条时保持缺失和现金",
+        "missing": "缺报价日不生成价格状态；沿用上一账户持仓并等待下一有效收盘",
+        "quality": "原输入行为可解释但资料仍为B级；不升级成历史完整数据"
+      },
+      "time": {
+        "observation": "有效报价日收盘后",
+        "available": "该收盘后；历史事件真实逐条到达时间未知",
+        "earliest_decision": "同一收盘后",
+        "earliest_execution": "下一允许交易日开盘",
+        "timezone": "Asia/Shanghai",
+        "effective_date": "2018-07-05"
+      },
+      "dependencies": [],
+      "validation": {
+        "method": "合成相等/预热/缺报价/行动连接测试，并在运行后保存全部状态变化、成交和资金账",
+        "tolerance": {"absolute": 1e-10, "relative": 1e-10, "integer": 0},
+        "tests": ["docs/experiments/raw/research-breadth-price50-decision-2026-09-09/execution/test_price50.py"],
+        "limitations": "不是连续多日确认；冻结行动缺历史available_at，因此只作历史修订口径研究"
+      },
+      "status": {"definition_clarity": "complete_local_proposal", "data_qualification": "B", "implementation": "prepared_not_yet_real_run", "effectiveness": "unknown", "production": "not_authorized"}
+    },
+    {
+      "id": "benchmark.etf.price_sma50_binary_account",
+      "version": "1.0.0",
+      "name": "ETF纯50日价格二元账户参照",
+      "type": "benchmark",
+      "uses": ["comparison"],
+      "not_for": ["production_trade", "ranking", "attribution"],
+      "scope": "固定两只ETF、两档费用的完整可投资历史参照账户",
+      "definition": {"formula": "目标仓位=etf.trend.price50.state；只在首次有效状态及以后状态改变时发指令", "parameters": {"targets": [0, 1], "lot": 100, "initial_cash": 1000000, "external_deposits": 0}, "endpoints": "2018-07-05至2026-06-30", "unit": "account_path", "direction": "不预设相对宽度策略优劣", "transforms": "无每日再平衡"},
+      "input": {"fields": ["signal state", "nominal OHLCV", "actions", "dated restrictions", "price-limit regimes"], "price_action_basis": "信号用连续收盘，成交和估值用名义开盘/收盘，公司行动独立入账", "currency": "CNY", "frequency": "自然日日账和有效报价日决策", "calendar": "Asia/Shanghai自然日及ETF有效报价日", "sources": [{"path": "docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12/inputs/dated-restrictions.json", "sha256": "06d01e93347bbf7341111d29118e20aeb22d37c5d872c5cb2257dd78404225c7"}, {"path": "docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12/inputs/price-limit-regimes.json", "sha256": "e674d7748f2c26f604432d5e529f4849f9ca799319ce8b738d619c64c8924617"}]},
+      "universe": {"pool": ["510300", "159915"], "history_version": "first12 frozen ETF inputs", "eligibility": "四个独立账户：两只ETF乘每边0.1%/0.2%", "warmup": "仅供50条有效连续价格状态；不继承仓位", "missing": "受限或缺开盘订单延后；新收盘状态替换旧未成交指令", "quality": "B级历史研究"},
+      "time": {"observation": "有效报价日收盘后", "available": "收盘后", "earliest_decision": "收盘后", "earliest_execution": "下一允许开盘", "timezone": "Asia/Shanghai", "effective_date": "2018-07-05"},
+      "dependencies": ["etf.trend.price50.state@1.0.0"],
+      "policy": {"selection": "单ETF，无排序", "weight": "状态1目标100%，状态0目标0%", "cash": "零利息，分红到账不单独触发买入", "fees": [0.001, 0.002], "rebalance": "只在首次有效状态或状态变化后", "execution": "下一允许开盘、100份单位、费用内现金限制", "exit": "状态变0时全部退出", "reentry": "以后状态变1时重新进入", "investability": "历史价格模型可计算；真实价差、容量未验"},
+      "validation": {"method": "边界测试、运行前后输入哈希、四账户信号/订单/资金/公司行动/汇总核账", "tolerance": {"absolute": 1e-8, "relative": 1e-10, "integer": 0}, "tests": ["docs/experiments/raw/research-breadth-price50-decision-2026-09-09/execution/test_price50.py"], "limitations": "纯50日状态跌回均线会退出；W3价格确认转负本身不触发退出，且宽度只限制新增投入，因此两者不是严格单变量对照"},
+      "status": {"definition_clarity": "complete_local_proposal", "data_qualification": "B", "implementation": "prepared_not_yet_real_run", "effectiveness": "unknown", "production": "not_authorized"}
+    }
+  ]
+}

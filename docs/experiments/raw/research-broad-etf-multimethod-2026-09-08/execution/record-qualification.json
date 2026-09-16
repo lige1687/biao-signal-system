@@ -1,0 +1,57 @@
+{
+  "type": "record_qualification_without_financial_change",
+  "dated_restrictions_path": "docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12/inputs/dated-restrictions.json",
+  "dated_restrictions_sha256": "06d01e93347bbf7341111d29118e20aeb22d37c5d872c5cb2257dd78404225c7",
+  "corrections": [
+    {
+      "account_id": "sz159915-H1_weekly_binary_hysteresis-fee0.001",
+      "source_file": "docs/experiments/raw/research-broad-etf-multimethod-2026-09-08/execution/account-results/sz159915-H1_weekly_binary_hysteresis-fee0.001/rejected.json",
+      "source_sha256": "4a2cf2a882c92d651e92e5ac1eaf5f6067ff774c742d76d7d5ee8798397ea0a3",
+      "row_index_zero_based": 364,
+      "date": "2021-02-08",
+      "original_reason": "missing_quote",
+      "qualified_reason": "known_open_unavailable",
+      "classification": "official_suspension",
+      "financial_change": false
+    },
+    {
+      "account_id": "sz159915-H1_weekly_binary_hysteresis-fee0.002",
+      "source_file": "docs/experiments/raw/research-broad-etf-multimethod-2026-09-08/execution/account-results/sz159915-H1_weekly_binary_hysteresis-fee0.002/rejected.json",
+      "source_sha256": "58751e88afc11d7aef35f1719c15ecd9c1b7a661e9d467238d1017faad317a9a",
+      "row_index_zero_based": 364,
+      "date": "2021-02-08",
+      "original_reason": "missing_quote",
+      "qualified_reason": "known_open_unavailable",
+      "classification": "official_suspension",
+      "financial_change": false
+    },
+    {
+      "account_id": "sz159915-H2_weekly_breadth_trend_participation-fee0.001",
+      "source_file": "docs/experiments/raw/research-broad-etf-multimethod-2026-09-08/execution/account-results/sz159915-H2_weekly_breadth_trend_participation-fee0.001/rejected.json",
+      "source_sha256": "0ea94721416bb0ddfe15f619960160d4c0649337fff67732cb5a6adbd4d525e8",
+      "row_index_zero_based": 365,
+      "date": "2021-02-08",
+      "original_reason": "missing_quote",
+      "qualified_reason": "known_open_unavailable",
+      "classification": "official_suspension",
+      "financial_change": false
+    },
+    {
+      "account_id": "sz159915-H2_weekly_breadth_trend_participation-fee0.002",
+      "source_file": "docs/experiments/raw/research-broad-etf-multimethod-2026-09-08/execution/account-results/sz159915-H2_weekly_breadth_trend_participation-fee0.002/rejected.json",
+      "source_sha256": "38e26e4d65f21a413e06f94df447fe504a3f0d442f0a164cbfd321aacc8a635e",
+      "row_index_zero_based": 365,
+      "date": "2021-02-08",
+      "original_reason": "missing_quote",
+      "qualified_reason": "known_open_unavailable",
+      "classification": "official_suspension",
+      "financial_change": false
+    }
+  ],
+  "H1_date_semantics": {
+    "signal_date": "breadth_source_date; not week-end confirmation timestamp",
+    "decision_date_derivation": "eligible_date minus one calendar day (completed-week Sunday)",
+    "earliest_execution": "eligible_date next Monday; full independent account recomputation matched"
+  },
+  "original_run_files_unchanged": true
+}

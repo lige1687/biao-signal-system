@@ -1,0 +1,27 @@
+{
+ "symbol": "515050",
+ "listing_date": "2019-10-16",
+ "qualification": "task_verified_fact_only",
+ "provenance": {
+  "original_path": "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/sources/515050-listing.pdf",
+  "original_sha256": "014bb99ca6f9a5d8a1d4bfe0967e1f3c4d85f0b5632dbd9104ae81d5da9bec9c",
+  "locator": {
+   "page": 1,
+   "section": "上市交易公告书（提示性公告/基本信息）"
+  },
+  "extract_rule": "task2_extract_facts.py：上市交易日取自官方上市(交易)公告书正文；区别于成立日/募集日",
+  "time_evidence": {
+   "kind": "published_date_bound",
+   "available_at": null,
+   "published_date": "2019-10-16",
+   "not_before": "2026-01-01",
+   "not_after": "2019-01-01",
+   "timezone": "Asia/Shanghai",
+   "basis": "公告日期/上网日期为公布下界；精确 available_at 不据此填写"
+  },
+  "limitations": [
+   "上市交易日已核，尚需与快照首报价日期相容性核对（Task 4/5）",
+   "历史可得性未证明"
+  ]
+ }
+}

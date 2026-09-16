@@ -1,0 +1,108 @@
+{
+  "synthetic_probe_only": true,
+  "validation": {
+    "changed_fact_same_original": {
+      "validated": 1,
+      "rejected": [],
+      "bridge_products": [
+        "515050.SS"
+      ]
+    },
+    "no_bridge_use": {
+      "validated": 1,
+      "rejected": [],
+      "bridge_products": [
+        "515050.SS"
+      ]
+    },
+    "nan_cash": {
+      "validated": 1,
+      "rejected": []
+    },
+    "reversed_bounds": {
+      "validated": 1,
+      "rejected": [],
+      "bridge_products": [
+        "515050.SS"
+      ]
+    },
+    "bad_original_pdf_sha": {
+      "validated": 1,
+      "rejected": []
+    }
+  },
+  "prepare": {
+    "control": {
+      "exit": 0,
+      "result": {
+        "checked": 6,
+        "mismatch": 0,
+        "run04_unique_keys": 6,
+        "tolerance": "atol=rtol=1e-12"
+      }
+    },
+    "missing_key": {
+      "exit": 0,
+      "result": {
+        "checked": 6,
+        "mismatch": 0,
+        "run04_unique_keys": 7,
+        "tolerance": "atol=rtol=1e-12"
+      }
+    },
+    "nan_expected": {
+      "exit": 0,
+      "result": {
+        "checked": 6,
+        "mismatch": 0,
+        "run04_unique_keys": 6,
+        "tolerance": "atol=rtol=1e-12"
+      }
+    }
+  },
+  "real_values": {
+    "old_rows": 772,
+    "new_rows": 772,
+    "missing": 0,
+    "extra": 0,
+    "max_abs": 0.0,
+    "old_sha": "0db2492a11372fae827465debcddf81e25b0016ea4fd219be6f0894cf471a0b5"
+  },
+  "protected": {
+    "count": 6,
+    "changed": [
+      "round",
+      "file_count",
+      "aggregate_sha256",
+      "aggregate_algorithm",
+      "prev_round_files_changed",
+      "files"
+    ]
+  },
+  "manifests": {
+    "run-02": {
+      "output_mismatches": [],
+      "protocol": {
+        "path": "docs/experiments/raw/research-momentum-prototype-2026-09-13/protocol.json",
+        "sha256": "7ad3c33055acbd613525fafa8e5ec1316821624c209a442a276c7a51f336e150",
+        "protocol_id": "momentum-research-prototype-2026-09-13"
+      }
+    },
+    "run-05": {
+      "output_mismatches": [],
+      "protocol": {
+        "path": "docs/experiments/raw/research-fixed-etf-evidence-integration-2026-09-13/protocol.json",
+        "sha256": "669f956a9b8b5b96e8d8ccd0fd953769733d5c85834b5b68ec21f1d085475dac",
+        "protocol_id": "fixed-etf-evidence-integration-2026-09-13"
+      }
+    },
+    "run-06": {
+      "output_mismatches": [],
+      "protocol": {
+        "path": "docs/experiments/raw/research-fixed-etf-evidence-integration-2026-09-13/protocol.json",
+        "sha256": "669f956a9b8b5b96e8d8ccd0fd953769733d5c85834b5b68ec21f1d085475dac",
+        "protocol_id": "fixed-etf-evidence-integration-2026-09-13"
+      }
+    }
+  }
+}

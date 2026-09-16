@@ -1,0 +1,933 @@
+{
+  "scope": "independent old-rule replay of fixed historical records; not entry regeneration or investable performance",
+  "total": {
+    "rows": 2309,
+    "status_counts": {
+      "closed": 2245,
+      "invalid_risk_not_valid_trade": 50,
+      "not_entered_limit": 2,
+      "entered_not_closed": 9,
+      "not_entered_at_end": 3
+    },
+    "old_exit_reason_counts": {
+      "structure_stop_C": 651,
+      "exit_a6_1_costbasis": 1594,
+      "invalid_nonpositive_risk": 50,
+      "skipped_limit_up_at_entry": 2,
+      "open_at_end": 9,
+      "signal_at_end_not_entered": 3
+    },
+    "signal_date_covered": {
+      "checked": 2309,
+      "matched": 2309,
+      "different": 0
+    },
+    "entry_date_covered": {
+      "checked": 2309,
+      "matched": 2309,
+      "different": 0
+    },
+    "exit_date_covered": {
+      "checked": 2295,
+      "matched": 2295,
+      "different": 0
+    },
+    "entry_open_match": {
+      "checked": 2306,
+      "matched": 2306,
+      "different": 0
+    },
+    "exit_open_match": {
+      "checked": 2295,
+      "matched": 2295,
+      "different": 0
+    },
+    "entry_is_next_bar": {
+      "checked": 2254,
+      "matched": 2254,
+      "different": 0
+    },
+    "holding_bars_match": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "stored_r_gross_match": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "stored_r_net_match": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "snapshot_r_net_match": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "last_signal_close_placeholder_match": {
+      "checked": 3,
+      "matched": 3,
+      "different": 0
+    },
+    "replay_all_fields_match": {
+      "checked": 1766,
+      "matched": 1766,
+      "different": 0
+    },
+    "replay_entry_date_match": {
+      "checked": 1766,
+      "matched": 1766,
+      "different": 0
+    },
+    "replay_entry_price_match": {
+      "checked": 1766,
+      "matched": 1766,
+      "different": 0
+    },
+    "replay_exit_date_match": {
+      "checked": 1766,
+      "matched": 1766,
+      "different": 0
+    },
+    "replay_exit_price_match": {
+      "checked": 1766,
+      "matched": 1766,
+      "different": 0
+    },
+    "replay_exit_reason_match": {
+      "checked": 1766,
+      "matched": 1766,
+      "different": 0
+    },
+    "replay_holding_bars_match": {
+      "checked": 1766,
+      "matched": 1766,
+      "different": 0
+    },
+    "replay_r_gross_match": {
+      "checked": 1766,
+      "matched": 1766,
+      "different": 0
+    },
+    "replay_r_net_match": {
+      "checked": 1766,
+      "matched": 1766,
+      "different": 0
+    },
+    "replay_deferred_records": 3,
+    "both_exit_conditions_records": 252,
+    "max_abs_entry_open_difference": 0.0,
+    "max_abs_exit_open_difference": 0.0,
+    "max_abs_stored_r_gross_difference": 0.0,
+    "max_abs_stored_r_net_difference": 4.547473508864641e-13
+  },
+  "by_module": {
+    "A": {
+      "rows": 1521,
+      "status_counts": {
+        "closed": 1469,
+        "invalid_risk_not_valid_trade": 45,
+        "not_entered_limit": 1,
+        "entered_not_closed": 3,
+        "not_entered_at_end": 3
+      },
+      "old_exit_reason_counts": {
+        "structure_stop_C": 570,
+        "exit_a6_1_costbasis": 899,
+        "invalid_nonpositive_risk": 45,
+        "skipped_limit_up_at_entry": 1,
+        "open_at_end": 3,
+        "signal_at_end_not_entered": 3
+      },
+      "signal_date_covered": {
+        "checked": 1521,
+        "matched": 1521,
+        "different": 0
+      },
+      "entry_date_covered": {
+        "checked": 1521,
+        "matched": 1521,
+        "different": 0
+      },
+      "exit_date_covered": {
+        "checked": 1514,
+        "matched": 1514,
+        "different": 0
+      },
+      "entry_open_match": {
+        "checked": 1518,
+        "matched": 1518,
+        "different": 0
+      },
+      "exit_open_match": {
+        "checked": 1514,
+        "matched": 1514,
+        "different": 0
+      },
+      "entry_is_next_bar": {
+        "checked": 1472,
+        "matched": 1472,
+        "different": 0
+      },
+      "holding_bars_match": {
+        "checked": 1469,
+        "matched": 1469,
+        "different": 0
+      },
+      "stored_r_gross_match": {
+        "checked": 1469,
+        "matched": 1469,
+        "different": 0
+      },
+      "stored_r_net_match": {
+        "checked": 1469,
+        "matched": 1469,
+        "different": 0
+      },
+      "snapshot_r_net_match": {
+        "checked": 1469,
+        "matched": 1469,
+        "different": 0
+      },
+      "last_signal_close_placeholder_match": {
+        "checked": 3,
+        "matched": 3,
+        "different": 0
+      },
+      "replay_all_fields_match": {
+        "checked": 1086,
+        "matched": 1086,
+        "different": 0
+      },
+      "replay_entry_date_match": {
+        "checked": 1086,
+        "matched": 1086,
+        "different": 0
+      },
+      "replay_entry_price_match": {
+        "checked": 1086,
+        "matched": 1086,
+        "different": 0
+      },
+      "replay_exit_date_match": {
+        "checked": 1086,
+        "matched": 1086,
+        "different": 0
+      },
+      "replay_exit_price_match": {
+        "checked": 1086,
+        "matched": 1086,
+        "different": 0
+      },
+      "replay_exit_reason_match": {
+        "checked": 1086,
+        "matched": 1086,
+        "different": 0
+      },
+      "replay_holding_bars_match": {
+        "checked": 1086,
+        "matched": 1086,
+        "different": 0
+      },
+      "replay_r_gross_match": {
+        "checked": 1086,
+        "matched": 1086,
+        "different": 0
+      },
+      "replay_r_net_match": {
+        "checked": 1086,
+        "matched": 1086,
+        "different": 0
+      },
+      "replay_deferred_records": 2,
+      "both_exit_conditions_records": 212,
+      "max_abs_entry_open_difference": 0.0,
+      "max_abs_exit_open_difference": 0.0,
+      "max_abs_stored_r_gross_difference": 0.0,
+      "max_abs_stored_r_net_difference": 4.547473508864641e-13
+    },
+    "B": {
+      "rows": 563,
+      "status_counts": {
+        "closed": 552,
+        "not_entered_limit": 1,
+        "entered_not_closed": 5,
+        "invalid_risk_not_valid_trade": 5
+      },
+      "old_exit_reason_counts": {
+        "exit_a6_1_costbasis": 473,
+        "structure_stop_C": 79,
+        "skipped_limit_up_at_entry": 1,
+        "open_at_end": 5,
+        "invalid_nonpositive_risk": 5
+      },
+      "signal_date_covered": {
+        "checked": 563,
+        "matched": 563,
+        "different": 0
+      },
+      "entry_date_covered": {
+        "checked": 563,
+        "matched": 563,
+        "different": 0
+      },
+      "exit_date_covered": {
+        "checked": 557,
+        "matched": 557,
+        "different": 0
+      },
+      "entry_open_match": {
+        "checked": 563,
+        "matched": 563,
+        "different": 0
+      },
+      "exit_open_match": {
+        "checked": 557,
+        "matched": 557,
+        "different": 0
+      },
+      "entry_is_next_bar": {
+        "checked": 557,
+        "matched": 557,
+        "different": 0
+      },
+      "holding_bars_match": {
+        "checked": 552,
+        "matched": 552,
+        "different": 0
+      },
+      "stored_r_gross_match": {
+        "checked": 552,
+        "matched": 552,
+        "different": 0
+      },
+      "stored_r_net_match": {
+        "checked": 552,
+        "matched": 552,
+        "different": 0
+      },
+      "snapshot_r_net_match": {
+        "checked": 552,
+        "matched": 552,
+        "different": 0
+      },
+      "last_signal_close_placeholder_match": {
+        "checked": 0,
+        "matched": 0,
+        "different": 0
+      },
+      "replay_all_fields_match": {
+        "checked": 500,
+        "matched": 500,
+        "different": 0
+      },
+      "replay_entry_date_match": {
+        "checked": 500,
+        "matched": 500,
+        "different": 0
+      },
+      "replay_entry_price_match": {
+        "checked": 500,
+        "matched": 500,
+        "different": 0
+      },
+      "replay_exit_date_match": {
+        "checked": 500,
+        "matched": 500,
+        "different": 0
+      },
+      "replay_exit_price_match": {
+        "checked": 500,
+        "matched": 500,
+        "different": 0
+      },
+      "replay_exit_reason_match": {
+        "checked": 500,
+        "matched": 500,
+        "different": 0
+      },
+      "replay_holding_bars_match": {
+        "checked": 500,
+        "matched": 500,
+        "different": 0
+      },
+      "replay_r_gross_match": {
+        "checked": 500,
+        "matched": 500,
+        "different": 0
+      },
+      "replay_r_net_match": {
+        "checked": 500,
+        "matched": 500,
+        "different": 0
+      },
+      "replay_deferred_records": 1,
+      "both_exit_conditions_records": 39,
+      "max_abs_entry_open_difference": 0.0,
+      "max_abs_exit_open_difference": 0.0,
+      "max_abs_stored_r_gross_difference": 0.0,
+      "max_abs_stored_r_net_difference": 2.4001634013615103e-14
+    },
+    "C": {
+      "rows": 225,
+      "status_counts": {
+        "closed": 224,
+        "entered_not_closed": 1
+      },
+      "old_exit_reason_counts": {
+        "exit_a6_1_costbasis": 222,
+        "structure_stop_C": 2,
+        "open_at_end": 1
+      },
+      "signal_date_covered": {
+        "checked": 225,
+        "matched": 225,
+        "different": 0
+      },
+      "entry_date_covered": {
+        "checked": 225,
+        "matched": 225,
+        "different": 0
+      },
+      "exit_date_covered": {
+        "checked": 224,
+        "matched": 224,
+        "different": 0
+      },
+      "entry_open_match": {
+        "checked": 225,
+        "matched": 225,
+        "different": 0
+      },
+      "exit_open_match": {
+        "checked": 224,
+        "matched": 224,
+        "different": 0
+      },
+      "entry_is_next_bar": {
+        "checked": 225,
+        "matched": 225,
+        "different": 0
+      },
+      "holding_bars_match": {
+        "checked": 224,
+        "matched": 224,
+        "different": 0
+      },
+      "stored_r_gross_match": {
+        "checked": 224,
+        "matched": 224,
+        "different": 0
+      },
+      "stored_r_net_match": {
+        "checked": 224,
+        "matched": 224,
+        "different": 0
+      },
+      "snapshot_r_net_match": {
+        "checked": 224,
+        "matched": 224,
+        "different": 0
+      },
+      "last_signal_close_placeholder_match": {
+        "checked": 0,
+        "matched": 0,
+        "different": 0
+      },
+      "replay_all_fields_match": {
+        "checked": 180,
+        "matched": 180,
+        "different": 0
+      },
+      "replay_entry_date_match": {
+        "checked": 180,
+        "matched": 180,
+        "different": 0
+      },
+      "replay_entry_price_match": {
+        "checked": 180,
+        "matched": 180,
+        "different": 0
+      },
+      "replay_exit_date_match": {
+        "checked": 180,
+        "matched": 180,
+        "different": 0
+      },
+      "replay_exit_price_match": {
+        "checked": 180,
+        "matched": 180,
+        "different": 0
+      },
+      "replay_exit_reason_match": {
+        "checked": 180,
+        "matched": 180,
+        "different": 0
+      },
+      "replay_holding_bars_match": {
+        "checked": 180,
+        "matched": 180,
+        "different": 0
+      },
+      "replay_r_gross_match": {
+        "checked": 180,
+        "matched": 180,
+        "different": 0
+      },
+      "replay_r_net_match": {
+        "checked": 180,
+        "matched": 180,
+        "different": 0
+      },
+      "replay_deferred_records": 0,
+      "both_exit_conditions_records": 1,
+      "max_abs_entry_open_difference": 0.0,
+      "max_abs_exit_open_difference": 0.0,
+      "max_abs_stored_r_gross_difference": 0.0,
+      "max_abs_stored_r_net_difference": 2.6645352591003757e-15
+    }
+  },
+  "true_entered_only": {
+    "rows": 2254,
+    "status_counts": {
+      "closed": 2245,
+      "entered_not_closed": 9
+    },
+    "old_exit_reason_counts": {
+      "structure_stop_C": 651,
+      "exit_a6_1_costbasis": 1594,
+      "open_at_end": 9
+    },
+    "signal_date_covered": {
+      "checked": 2254,
+      "matched": 2254,
+      "different": 0
+    },
+    "entry_date_covered": {
+      "checked": 2254,
+      "matched": 2254,
+      "different": 0
+    },
+    "exit_date_covered": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "entry_open_match": {
+      "checked": 2254,
+      "matched": 2254,
+      "different": 0
+    },
+    "exit_open_match": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "entry_is_next_bar": {
+      "checked": 2254,
+      "matched": 2254,
+      "different": 0
+    },
+    "holding_bars_match": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "stored_r_gross_match": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "stored_r_net_match": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "snapshot_r_net_match": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "last_signal_close_placeholder_match": {
+      "checked": 0,
+      "matched": 0,
+      "different": 0
+    },
+    "replay_all_fields_match": {
+      "checked": 1726,
+      "matched": 1726,
+      "different": 0
+    },
+    "replay_entry_date_match": {
+      "checked": 1726,
+      "matched": 1726,
+      "different": 0
+    },
+    "replay_entry_price_match": {
+      "checked": 1726,
+      "matched": 1726,
+      "different": 0
+    },
+    "replay_exit_date_match": {
+      "checked": 1726,
+      "matched": 1726,
+      "different": 0
+    },
+    "replay_exit_price_match": {
+      "checked": 1726,
+      "matched": 1726,
+      "different": 0
+    },
+    "replay_exit_reason_match": {
+      "checked": 1726,
+      "matched": 1726,
+      "different": 0
+    },
+    "replay_holding_bars_match": {
+      "checked": 1726,
+      "matched": 1726,
+      "different": 0
+    },
+    "replay_r_gross_match": {
+      "checked": 1726,
+      "matched": 1726,
+      "different": 0
+    },
+    "replay_r_net_match": {
+      "checked": 1726,
+      "matched": 1726,
+      "different": 0
+    },
+    "replay_deferred_records": 3,
+    "both_exit_conditions_records": 252,
+    "max_abs_entry_open_difference": 0.0,
+    "max_abs_exit_open_difference": 0.0,
+    "max_abs_stored_r_gross_difference": 0.0,
+    "max_abs_stored_r_net_difference": 4.547473508864641e-13
+  },
+  "true_closed_only": {
+    "rows": 2245,
+    "status_counts": {
+      "closed": 2245
+    },
+    "old_exit_reason_counts": {
+      "structure_stop_C": 651,
+      "exit_a6_1_costbasis": 1594
+    },
+    "signal_date_covered": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "entry_date_covered": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "exit_date_covered": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "entry_open_match": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "exit_open_match": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "entry_is_next_bar": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "holding_bars_match": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "stored_r_gross_match": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "stored_r_net_match": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "snapshot_r_net_match": {
+      "checked": 2245,
+      "matched": 2245,
+      "different": 0
+    },
+    "last_signal_close_placeholder_match": {
+      "checked": 0,
+      "matched": 0,
+      "different": 0
+    },
+    "replay_all_fields_match": {
+      "checked": 1718,
+      "matched": 1718,
+      "different": 0
+    },
+    "replay_entry_date_match": {
+      "checked": 1718,
+      "matched": 1718,
+      "different": 0
+    },
+    "replay_entry_price_match": {
+      "checked": 1718,
+      "matched": 1718,
+      "different": 0
+    },
+    "replay_exit_date_match": {
+      "checked": 1718,
+      "matched": 1718,
+      "different": 0
+    },
+    "replay_exit_price_match": {
+      "checked": 1718,
+      "matched": 1718,
+      "different": 0
+    },
+    "replay_exit_reason_match": {
+      "checked": 1718,
+      "matched": 1718,
+      "different": 0
+    },
+    "replay_holding_bars_match": {
+      "checked": 1718,
+      "matched": 1718,
+      "different": 0
+    },
+    "replay_r_gross_match": {
+      "checked": 1718,
+      "matched": 1718,
+      "different": 0
+    },
+    "replay_r_net_match": {
+      "checked": 1718,
+      "matched": 1718,
+      "different": 0
+    },
+    "replay_deferred_records": 3,
+    "both_exit_conditions_records": 252,
+    "max_abs_entry_open_difference": 0.0,
+    "max_abs_exit_open_difference": 0.0,
+    "max_abs_stored_r_gross_difference": 0.0,
+    "max_abs_stored_r_net_difference": 4.547473508864641e-13
+  },
+  "symbols": 165,
+  "data_end_distribution": {
+    "2026-08-24": 53,
+    "2026-08-25": 104,
+    "2022-12-02": 1,
+    "2026-08-28": 7
+  },
+  "problem_quality": [
+    {
+      "symbol": "AAPL",
+      "rows": 11520,
+      "start": "1980-12-12",
+      "end": "2026-08-28",
+      "monotonic": true,
+      "duplicate_dates": 0,
+      "missing_ohlcv": 4,
+      "nonfinite_ohlcv": 4,
+      "nonpositive_ohlc": 0,
+      "high_below_low": 0,
+      "open_close_outside_range": 0,
+      "metadata": {
+        "symbol": "AAPL",
+        "kind": "bars",
+        "provider": "yfinance",
+        "rows": 11520,
+        "fetched_at": "2026-08-31T08:12:09.000209+00:00",
+        "first_date": "1980-12-12 00:00:00",
+        "last_date": "2026-08-28 00:00:00"
+      }
+    },
+    {
+      "symbol": "AMZN",
+      "rows": 7368,
+      "start": "1997-05-15",
+      "end": "2026-08-28",
+      "monotonic": true,
+      "duplicate_dates": 0,
+      "missing_ohlcv": 4,
+      "nonfinite_ohlcv": 4,
+      "nonpositive_ohlc": 0,
+      "high_below_low": 0,
+      "open_close_outside_range": 0,
+      "metadata": {
+        "symbol": "AMZN",
+        "kind": "bars",
+        "provider": "yfinance",
+        "rows": 7368,
+        "fetched_at": "2026-08-31T08:12:13.849367+00:00",
+        "first_date": "1997-05-15 00:00:00",
+        "last_date": "2026-08-28 00:00:00"
+      }
+    },
+    {
+      "symbol": "GOOGL",
+      "rows": 5542,
+      "start": "2004-08-19",
+      "end": "2026-08-28",
+      "monotonic": true,
+      "duplicate_dates": 0,
+      "missing_ohlcv": 4,
+      "nonfinite_ohlcv": 4,
+      "nonpositive_ohlc": 0,
+      "high_below_low": 0,
+      "open_close_outside_range": 0,
+      "metadata": {
+        "symbol": "GOOGL",
+        "kind": "bars",
+        "provider": "yfinance",
+        "rows": 5542,
+        "fetched_at": "2026-08-31T08:12:12.973880+00:00",
+        "first_date": "2004-08-19 00:00:00",
+        "last_date": "2026-08-28 00:00:00"
+      }
+    },
+    {
+      "symbol": "META",
+      "rows": 3590,
+      "start": "2012-05-18",
+      "end": "2026-08-28",
+      "monotonic": true,
+      "duplicate_dates": 0,
+      "missing_ohlcv": 4,
+      "nonfinite_ohlcv": 4,
+      "nonpositive_ohlc": 0,
+      "high_below_low": 0,
+      "open_close_outside_range": 0,
+      "metadata": {
+        "symbol": "META",
+        "kind": "bars",
+        "provider": "yfinance",
+        "rows": 3590,
+        "fetched_at": "2026-08-31T08:12:14.588004+00:00",
+        "first_date": "2012-05-18 00:00:00",
+        "last_date": "2026-08-28 00:00:00"
+      }
+    },
+    {
+      "symbol": "MSFT",
+      "rows": 10194,
+      "start": "1986-03-13",
+      "end": "2026-08-28",
+      "monotonic": true,
+      "duplicate_dates": 0,
+      "missing_ohlcv": 4,
+      "nonfinite_ohlcv": 4,
+      "nonpositive_ohlc": 0,
+      "high_below_low": 0,
+      "open_close_outside_range": 0,
+      "metadata": {
+        "symbol": "MSFT",
+        "kind": "bars",
+        "provider": "yfinance",
+        "rows": 10194,
+        "fetched_at": "2026-08-31T08:12:10.322521+00:00",
+        "first_date": "1986-03-13 00:00:00",
+        "last_date": "2026-08-28 00:00:00"
+      }
+    },
+    {
+      "symbol": "NVDA",
+      "rows": 6943,
+      "start": "1999-01-22",
+      "end": "2026-08-28",
+      "monotonic": true,
+      "duplicate_dates": 0,
+      "missing_ohlcv": 4,
+      "nonfinite_ohlcv": 4,
+      "nonpositive_ohlc": 0,
+      "high_below_low": 0,
+      "open_close_outside_range": 0,
+      "metadata": {
+        "symbol": "NVDA",
+        "kind": "bars",
+        "provider": "yfinance",
+        "rows": 6943,
+        "fetched_at": "2026-08-31T08:12:11.737131+00:00",
+        "first_date": "1999-01-22 00:00:00",
+        "last_date": "2026-08-28 00:00:00"
+      }
+    },
+    {
+      "symbol": "TSLA",
+      "rows": 4067,
+      "start": "2010-06-29",
+      "end": "2026-08-28",
+      "monotonic": true,
+      "duplicate_dates": 0,
+      "missing_ohlcv": 4,
+      "nonfinite_ohlcv": 4,
+      "nonpositive_ohlc": 0,
+      "high_below_low": 0,
+      "open_close_outside_range": 0,
+      "metadata": {
+        "symbol": "TSLA",
+        "kind": "bars",
+        "provider": "yfinance",
+        "rows": 4067,
+        "fetched_at": "2026-08-31T08:12:15.718427+00:00",
+        "first_date": "2010-06-29 00:00:00",
+        "last_date": "2026-08-28 00:00:00"
+      }
+    },
+    {
+      "symbol": "^KS11",
+      "rows": 2447,
+      "start": "2016-08-24",
+      "end": "2026-08-24",
+      "monotonic": true,
+      "duplicate_dates": 0,
+      "missing_ohlcv": 1,
+      "nonfinite_ohlcv": 1,
+      "nonpositive_ohlc": 0,
+      "high_below_low": 0,
+      "open_close_outside_range": 0,
+      "metadata": {
+        "symbol": "^KS11",
+        "kind": "bars",
+        "provider": "parquet_cache+sina_rt",
+        "rows": 2447,
+        "fetched_at": "2026-08-24T16:07:29.222312+00:00",
+        "first_date": "2016-08-24 00:00:00",
+        "last_date": "2026-08-24 00:00:00"
+      }
+    }
+  ],
+  "replay_difference_rows": 543,
+  "self_checks": {
+    "passed": true,
+    "checks": [
+      "structure_priority_and_both_conditions",
+      "defer_cn_sale",
+      "no_us_sale_limit",
+      "cn_entry_limit",
+      "no_us_entry_limit",
+      "invalid_risk",
+      "last_bar_signal",
+      "last_bar_pending_exit",
+      "open_end",
+      "ema_seed_and_update",
+      "low_price_fee",
+      "high_price_fee"
+    ]
+  },
+  "frozen_inputs_unchanged": true,
+  "original_inputs_unchanged": true,
+  "finished_at_utc": "2026-09-08T05:03:51.749308+00:00"
+}

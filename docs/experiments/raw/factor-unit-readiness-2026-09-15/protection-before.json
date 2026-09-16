@@ -1,0 +1,65 @@
+{
+ "purpose": "factor-unit-readiness-2026-09-15 保护面基线（写入前快照）",
+ "captured_at": "2026-09-15T11:15:07.005016+08:00",
+ "note": "本基线只记录写前状态；终检复算差异并区分归属，不回滚他人改动。",
+ "sections": {
+  "specs_from_task_table": {
+   "AGENTS.md": "ca9621eec126a03c71a4f0dc3373fee958e729746520c5d133e95e3fbc550142",
+   "docs/research/experiment-backtest-principles.md": "ac5a676c0635441b66f656c8e1249b69bade36365cc9065ed6341a610b6a53c6",
+   "docs/research/definition-standard.md": "3406feaea2bbb8d23a91ddc8fa0c85e62ff86437bdf443d459f2c97b0e99cd5c",
+   "docs/research/ai-execution-contract.md": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962",
+   "docs/research/experiment-report-template.md": "cae2853f81841de6f424c6bda10e6708dd35574ebb8a325088fe507c5755d54e",
+   "docs/research/definitions.v1.json": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05",
+   "docs/superpowers/specs/2026-09-15-factor-unit-research-design.md": "d12a5aa220ab750884b878f92193b6e141560cf4305241fe45828243e0087912"
+  },
+  "v1_2_0_code_archive": {
+   "manifest": "b62a26edbbcc75cf9a324ea4c43a643e426ae66db6bc50ad62b917f47725fe68",
+   "code_files": {
+    "src/lei_signal/research/factor_lab/__init__.py": "ea269601b6b4fa5f1bb70f2dff555aca5a7afa236babc8005a8b4e7fd2d036c4",
+    "src/lei_signal/research/factor_lab/contracts.py": "d9ff0e864a8f4600c134972e9815acc2143f1b7227e17de570fed4901e0988bc",
+    "src/lei_signal/research/factor_lab/adapters.py": "27596fd66d918cacf9db7a6ae2cdd11b408d7d46f3c9889ac2d35a42e7748020",
+    "src/lei_signal/research/factor_lab/diagnostics.py": "da84ca7b13502a9669e09d5c0c3b610b75e557a3b939742d8ac400f037b99cc8",
+    "src/lei_signal/research/factor_lab/validation.py": "815769ca7440782f9275167562d81ba6e11baf955b7b5e1ef9f8137f87d290b6",
+    "src/lei_signal/research/factor_lab/attribution.py": "6d9b756cda1dfc8b6d6c9de8f8a12ecbd4adbe1fc28e30eba962e64437f47e93",
+    "src/lei_signal/research/factor_lab/runner.py": "97b49d9e14d5740a2b7f8e04cbb5a4d18e32d59e819e4a804d1d068f39f23917",
+    "scripts/run_factor_lab.py": "17a7bc63bc97893f24ee72861836d64e65298b18b4d53c67041ef999cc4613d5",
+    "src/lei_signal/research/definitions.py": "b6d5a35532644c371ffbfc541a21bd52c05114db9fcb1cc3071c1965ed41ad59",
+    "src/lei_signal/research/momentum_prototype.py": "5425e4f5494710041ae42816bf259ac7cdc1ed6aaef01986ac1d3d34d90e568f",
+    "src/lei_signal/research/factor_diagnostics.py": "70de5549e2831a4353d5000e011e5c93ef4c9798ce4909da943d079997d73a08",
+    "src/lei_signal/rules/dual_ma.py": "5c41da87036e0e318bacab663aa5509d73f99f301f805a76559b016b99aa3f7c",
+    "src/lei_signal/rules/lei_color.py": "ae6f3a2547cc37dd1ebdfea1bea206f932defdd8cd90d4061630914c0fc9d4d7",
+    "src/lei_signal/features/indicators.py": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+    "src/lei_signal/domain/rules_config.py": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031"
+   },
+   "keys_verified_against_repo": "15/15 match"
+  },
+  "final_protocols": {
+   "docs/experiments/raw/factor-lab-final-closeout-2026-09-15/protocol-1-numerical.json": "7c7d9d86fcbf8331377c9c2f57ed9d04547798ac8a5a69b9477c3ed78cc5171b",
+   "docs/experiments/raw/factor-lab-final-closeout-2026-09-15/protocol-2-state.json": "7b3cd8aaa58c337023ab1e68ffed589d46e9bfd081f9feb91c60bfc24baeee11",
+   "docs/experiments/raw/factor-lab-final-closeout-2026-09-15/protocol-3-attribution.json": "955aeb94d419d4eef5eb508f45b7945bab0a851574ac141f90765c916a0c62c7"
+  },
+  "formal_run_manifests": {
+   "docs/experiments/raw/factor-lab-final-closeout-2026-09-15/runs/final-1-numerical-run-01/manifest.json": "5b75190d8e5f385352eba7c8d1cdac64c6b7286ddf107c956d81c45ded4b2bff",
+   "docs/experiments/raw/factor-lab-final-closeout-2026-09-15/runs/final-2-state-run-01/manifest.json": "fbe1138b2e56b96eeae9fa7e8ea3968fe1b333ee2e2f0ab35294fce61dcb5ddc",
+   "docs/experiments/raw/factor-lab-final-closeout-2026-09-15/runs/final-3-attribution-run-01/manifest.json": "59b823a6691ee2c94a102ce6c2de7b0ef3fabd12a177bfb71b345ea545dc845b"
+  },
+  "first_round_six_tests": {
+   "tests/unit/test_factor_lab_contracts.py": "76dbee3b3b6864a4a411ea33a8b9568da8c48b11151929ab17a671e02e2fdbae",
+   "tests/unit/test_factor_lab_adapters.py": "de2be6db2f4026c05f4a9de7e7555b1e9a659b832a3f4610e7514f884bc7eed2",
+   "tests/unit/test_factor_lab_diagnostics.py": "a13d4655cc4fd3f164699c887c9a8f73d7b0e5433c4d74e2a069ee9437aaa4e2",
+   "tests/unit/test_factor_lab_validation.py": "c9635d76a607754e06613be45873ee6f8a9bf5444b67d9e18c89974df9c5266a",
+   "tests/unit/test_factor_lab_attribution.py": "d9fc02408b293b816d2bef8ee54f8cd46283d5c029a171816260e427e1c27dd8",
+   "tests/integration/test_factor_lab_cli.py": "db4959ba4aa0c1f90588cc1458923c196264fab843b9e3f97748591c9f414a50"
+  },
+  "first_read_frozen_materials": {
+   "docs/trading-spec-v1.md": "dd75d70cd22b103e815d3b314b47c36731230aa268d05e42fa447ba55e639798",
+   "configs/rules.v1.yaml": "9be26a1626fdf6351478b40b388907e9d8128f74b6bd4aa2b8ff4a850cfdcfd2",
+   "configs/rules.v2.yaml": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+   ".claude/skills/macd-reading/SKILL.md": "4a75dea4cb8f0ad2d1cb450c1d4237d87cc5c5b7f50f3eacda10880164c731ab",
+   "docs/plan-sector-trend-page.md": "921a483e16081fa975216a6f498a6af8654508df65be4feed64d8d593c24b23d",
+   "docs/research/factor-lab-usage.md": "4a46172f3dda08ce19ab9a795a9431d7f3a6399655c9c9672a9729e09ce5f148",
+   "docs/experiments/factor-lab-final-controller-decision-2026-09-15.md": "69a545da6a1876652b8865929a9450cdff9e69d8353d0109bb288f7bdc9a90b0",
+   "docs/superpowers/plans/2026-09-15-factor-unit-readiness-glm.md": "4c23957dc9c73f8b3d1c555f0cd76675d65cb98b15a792895beb67a487c06d16"
+  }
+ }
+}

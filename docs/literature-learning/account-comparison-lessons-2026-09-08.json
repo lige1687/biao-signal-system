@@ -1,0 +1,42 @@
+{
+  "schema_version": "learning-followup/1",
+  "date": "2026-09-08",
+  "merge_policy": "按文献与条目ID增量合并，不覆盖旧条目或阅读状态；本批未写页面或Zotero",
+  "reading_updates": [],
+  "entries": [
+    {
+      "id": "sullivan1999-account-concentration-20260908",
+      "paper_id": "sullivan1999",
+      "title": "账面盈利要追问：来自哪几笔，是否已经卖出",
+      "category": "实验方法",
+      "body_markdown": "先列出全部试过的方案，再追问最好结果由哪些交易和时期贡献，才能避免只记住一个漂亮数字。文献索引`sullivan1999`支持保留整个尝试集合的比较思想；以下持仓拆分是我们的适配，未声称复现作者全部统计检验。\n\n本地12组中，A20早期和共同确认都多出约23.45万元。但相同三笔未卖出持仓贡献23.41万元，已经卖出的交易分别仅合计赚322.53和633.92元。两组高度重叠，不能当成两次独立成功。C1虽然总账略赚，15笔已卖出交易却全部亏损，靠一笔仍持有黄金使总额为正。\n\n可借鉴的验收方法：全部组别保留；已结束与仍持有分列；每笔价格变化、已发生费用、分红相加应与总账一致；按财富变化真正发生的年份记录贡献；明确未卖出部分是否扣了未来卖出成本。看到集中于少数持仓，不自动删除它们，也不直接断言方法无效，而是降低结论的确定程度。\n\n本次只用初始失效退出，没有到目标止盈；结束交易天然偏向触发失效的路径。故也不能只凭已卖出交易胜率判断完整交易策略。正确的研究问题应同时看全账户、仍承担的风险和未结束持仓。\n\n作者并没有规定我们的3倍、1%或12组数字。本批未新增原文阅读，也没有估算未来盈利概率。",
+      "method_acceptance": {
+        "origin": "论文比较思想的本地适配，具体账户与工程验收由本系统制定",
+        "paper_numeric_threshold": null,
+        "automatic_adoption": false
+      },
+      "evidence_paths": [
+        "docs/experiments/acd-limited-account-comparison-2026-09-08.md",
+        "docs/experiments/raw/research-twelfth-2026-09-08/precision-fix/comparison.json",
+        "docs/experiments/raw/research-seventh-2026-09-08/paper-methods/METHODS.md"
+      ]
+    },
+    {
+      "id": "cederburg2020-risk-budget-exposure-20260908",
+      "paper_id": "cederburg2020",
+      "title": "相同计划亏损上限，不等于承担同样的市场风险",
+      "category": "实验方法",
+      "body_markdown": "比较两个办法时，需要知道它们实际拿了多少钱参与涨跌。文献索引`cederburg2020`讨论风险调整组合以及事后表现和当时可执行方法的区别；以下资金解释是本系统的适配，不是作者的完整组合算法。\n\n本地12组都给每笔同样的计划上限：前一日该基金账户财富的1%。但失效距离、可用现金和能买到的信号不同，实际持仓差别很大。A20平均约21.9%财富持有基金，C1约17.5%，有4组从未买入。全现金的零跌幅，不能解释为已经证明了更好的风险控制。\n\n可借鉴的比较方法：相同到账资金、成本、历史范围；同时列实际持仓比例、费用、从高点的最大投资跌幅、已卖出和未卖出结果。计划亏损不是损失保证，开盘跳空与费用可令实际损失超过计划。不同初始失效位置还会改变哪些信号能达到3倍，以及可以买多少；不能把最终财富差额全归因于入场本身。\n\n本地另一个验收例子：4.591、4.563、4.675的盈利/风险数学上恰好3，程序小数误差却误拒绝。保留首轮失败，按原十进制数字修复，重新核全部账户，才证实收益未变。这是工程验收经验，不是论文作者提供的数值规则。\n\n这些检查能解释历史差异，不能把已看过的历史变成新的未来考验；只有账本相等也不能证明规则定义完整。",
+      "method_acceptance": {
+        "origin": "论文比较思想的本地适配，具体账户与工程验收由本系统制定",
+        "paper_numeric_threshold": null,
+        "automatic_adoption": false
+      },
+      "evidence_paths": [
+        "docs/experiments/acd-limited-account-comparison-2026-09-08.md",
+        "docs/experiments/raw/research-twelfth-2026-09-08/precision-fix/comparison.json",
+        "docs/experiments/raw/research-seventh-2026-09-08/paper-methods/METHODS.md"
+      ]
+    }
+  ]
+}

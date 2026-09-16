@@ -1,0 +1,362 @@
+import { useEffect, useRef, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
+import { api, backtestApi } from "../api/client";
+import AgentMarkdown from "../components/AgentMarkdown";
+import EvidenceCardView from "../components/EvidenceCardView";
+import PlanDraftCard, { parsePlanDraft, planDraftFromArtifact } from "../components/PlanDraftCard";
+import ColorBadge from "../components/ColorBadge";
+import KlineChart, { DEFAULT_DISPLAY, type HighlightSpec } from "../components/KlineChart";
+import { CopilotCardDispatcher } from "../components/copilot/CopilotCards";
+import { findPriceMentions, validPriceLevels, priceLineKind, type AgentPriceLevel, type AgentPriceFocus } from "../components/agent/priceLinks";
+import { ResultContext } from "../components/agent/ResultContext";
+import { parseBacktestExit, parseBacktestModule, resolveRoute } from "../utils/resolveRoute";
+import { phaseLabelCn, pollTask, recoverActiveTasks, taskStatusTextCn, trackTask } from "../utils/backtestTasks";
+import { readAgentEvents, replyPreview, shouldFollowOutput } from "./agentWorkspaceLogic";
+import type { AgentSessionDTO, BacktestRequestStatus, CopilotResolveReply, EvidenceCard, PlanArtifact, TradePreview } from "../types";
+import "./agent-workspace.css";
+
+type QuickCard = {
+  symbol: string; display_name: string; as_of?: string; close: number;
+  color_cn?: string; stage_cn?: string; risk_cn?: string;
+  levels: AgentPriceLevel[];
+  note_cn?: string;
+};
+type Turn = {
+  id: string; who: "you" | "agent"; text: string; createdAt: string;
+  grounded?: boolean; resolved?: string | null;
+  card?: { card_type: string; data: unknown } | null;
+  preview?: TradePreview | null; quickCard?: QuickCard | null;
+  status?: "working" | "complete" | "failed" | "stopped";
+  stages?: { key: string; text: string }[];
+  fallback?: string; verifyNote?: string; error?: string; history?: boolean;
+  evidenceCard?: EvidenceCard | null; questionId?: number | null;
+  taskId?: string; detailRun?: string | null; planArtifact?: PlanArtifact | null;
+};
+type Resource = { kind: "chart"; symbol: string; focus?: AgentPriceFocus } | { kind: "result"; id: string };
+const QUICK = [
+  { label: "最近机会", hint: "查看系统已发现的机会", kind: "scout" },
+  { label: "今天看什么", hint: "整理今日关注清单", kind: "recommend" },
+  { label: "持仓速览", hint: "持仓与进行中的计划", kind: "holdings" },
+  { label: "记录基金成交", hint: "填写后核对确认", kind: "trade" },
+  { label: "本周复盘", hint: "回顾交易与执行记录", kind: "review" },
+];
+const TITLES: Record<string, string> = { scout: "机会扫描", recommend: "今日关注清单", holdings: "持仓速览", review: "交易复盘", sizing: "仓位档位" };
+const titleOf = (turn: Turn) => turn.preview ? "基金成交确认" : turn.card ? TITLES[turn.card.card_type] ?? "功能结果" : turn.quickCard ? `${turn.quickCard.display_name} · 分析` : "分析回复";
+
+function QuickCardView({ card, onChart }: { card: QuickCard; onChart: (symbol: string, focus?: AgentPriceFocus) => void }) {
+  const color = ({ "绿色": "green", "灰色": "gray", "黑色": "black" } as Record<string, string>)[card.color_cn ?? ""] ?? "unknown";
+  return <section className="ar-quick-card" aria-label={`${card.display_name}关键数据`}>
+    <header><div><strong>{card.display_name}</strong><span>{card.symbol} · {card.as_of ?? "数据日期未提供"}</span></div>
+      {card.color_cn && <ColorBadge color={color} colorCn={card.color_cn} descriptive />}</header>
+    <dl className="ar-metrics"><div><dt>收盘价</dt><dd>{card.close}</dd></div>
+      {card.stage_cn && <div><dt>当前阶段</dt><dd>{card.stage_cn}</dd></div>}
+      {card.risk_cn && <div><dt>风险关注</dt><dd>{card.risk_cn}</dd></div>}</dl>
+    {validPriceLevels(card.levels).length > 0 && <div className="ar-levels">{validPriceLevels(card.levels).map((level, i) => <button key={i} onClick={() => onChart(card.symbol, {level, levels:validPriceLevels(card.levels), asOf:card.as_of})} title={`在图上定位该价位 · ${level.from_cn}`}>
+      <span>{level.role}</span><strong>{level.price}</strong><span>距现价 {level.dist_pct}%</span><span>查看图表 ↗</span>
+    </button>)}</div>}
+    {card.note_cn && <p className="ar-footnote">{card.note_cn}</p>}
+  </section>;
+}
+
+function TurnRow({ turn, onOpen, onChart, onAsk, expanded = false, sessionId }: {
+  turn: Turn; onOpen?: () => void; onChart: (symbol: string, focus?: AgentPriceFocus) => void;
+  onAsk: (message: string) => void; expanded?: boolean; sessionId?: string | null;
+}) {
+  const [copied, setCopied] = useState(false);
+  const [copyError, setCopyError] = useState(false);
+  const fullText = turn.fallback || turn.text;
+  const { lead, rest } = replyPreview(fullText);
+  const working = turn.status === "working";
+  const card = !working && turn.quickCard && (!turn.resolved || turn.quickCard.symbol === turn.resolved) ? turn.quickCard : null;
+  const markdown = (text: string) => <AgentMarkdown text={text} onBp={() => undefined} notableCount={0}
+    priceLevels={card ? validPriceLevels(card.levels) : []}
+    onPrice={card ? level => onChart(card.symbol, {level, levels:validPriceLevels(card.levels), asOf:card.as_of}) : undefined} />;
+  if (turn.who === "you") return <div className="ar-user-message"><span>你</span><p>{turn.text}</p></div>;
+  return <article className={`ar-answer ${working ? "is-working" : ""}`}>
+    <header className="ar-answer-head"><div><span className="ar-agent-mark" aria-hidden="true">L</span><strong>{titleOf(turn)}</strong></div>
+      <span className="ar-answer-meta">{working ? "正在整理" : turn.history ? "历史记录" : turn.grounded === true ? "依据系统数据" : turn.grounded === false ? "系统结果 / 请查看说明" : ""}</span>
+    </header>
+    {turn.stages?.length ? <details className="ar-progress"><summary>{working ? turn.stages[turn.stages.length - 1]?.text : "查看处理过程"}</summary>
+      <ol>{turn.stages.map((s, i) => <li key={`${s.key}-${i}`}>{s.text}</li>)}</ol></details> : working && <p className="ar-working" role="status">正在读取资料，首次分析可能需要一些时间…</p>}
+    {turn.fallback && <p className="ar-notice">本次采用系统提供的结果，请结合下方说明查看。</p>}
+    {lead && <div className="ar-lead">{markdown(lead)}</div>}
+    {rest && (expanded || working || !lead || rest.length < 650 ? <div className="ar-body">{markdown(rest)}</div> :
+      <details className="ar-details"><summary>展开完整分析与依据</summary><div className="ar-body">{markdown(rest)}</div></details>)}
+    {turn.quickCard && !working && <QuickCardView card={turn.quickCard} onChart={onChart} />}
+    {turn.evidenceCard && !working && <EvidenceCardView card={turn.evidenceCard} />}
+    <CopilotCardDispatcher card={turn.card ?? null} preview={expanded ? null : turn.preview ?? null} />
+    {!working && (() => {
+      const bound = turn.resolved;
+      if (turn.planArtifact && bound) {
+        const adapted = planDraftFromArtifact(turn.planArtifact);
+        return adapted ? <PlanDraftCard draft={adapted.draft} symbol={bound} questionId={turn.questionId} sessionId={sessionId} artifact={turn.planArtifact} /> : null;
+      }
+      const draft = parsePlanDraft(turn.text);
+      return draft && bound ? <PlanDraftCard draft={draft} symbol={bound} questionId={turn.questionId} sessionId={sessionId} legacy /> : null;
+    })()}
+    {turn.detailRun && <Link className="btn small" to={`/backtest?run=${encodeURIComponent(turn.detailRun)}`}>查看该次回测详情（{turn.detailRun}）</Link>}
+    {turn.verifyNote && <p className="ar-notice">{turn.verifyNote}</p>}
+    {turn.error && <p className="ar-notice" role="alert">{turn.error}</p>}
+    {!working && <footer className="ar-answer-actions">
+      {onOpen && !turn.preview && <button onClick={onOpen}>展开到资料区</button>}
+      {turn.resolved && <button onClick={() => onChart(turn.resolved!)}>查看图表</button>}
+      <button onClick={() => onAsk(`关于${turn.resolved ?? turn.quickCard?.symbol ?? ""}「${titleOf(turn)}」，请进一步解释依据。`)}>继续追问</button>
+      {fullText && <button onClick={async () => {
+        try { await navigator.clipboard.writeText(fullText); setCopied(true); setCopyError(false); }
+        catch { setCopyError(true); }
+      }}>{copied ? "已复制" : "复制文字"}</button>}
+      {copyError && <span role="status">复制失败，可选中文字复制</span>}
+      <time dateTime={turn.createdAt}>{new Date(turn.createdAt).toLocaleString("zh-CN", {month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"})}</time>
+    </footer>}
+  </article>;
+}
+
+function HistoryPanel({ activeId, onPick, onNew, onClose, disabled }: { onClose: () => void; activeId: string | null; onPick: (s: AgentSessionDTO) => void; onNew: () => void; disabled: boolean }) {
+  const [search, setSearch] = useState("");
+  const q = useQuery({ queryKey: ["agentSessions"], queryFn: () => api.agentSessions(), staleTime: 30_000 });
+  const sessions = (q.data ?? []).filter(s => `${s.title_cn} ${s.symbol ?? ""} ${s.last_message_cn}`.toLowerCase().includes(search.toLowerCase()));
+  const today = new Date().toLocaleDateString("zh-CN");
+  let previous = "";
+  return <aside className="ar-history" aria-label="历史对话">
+    <div className="ar-history-head"><strong>我的对话</strong><button className="btn small" disabled={disabled} onClick={onNew}>＋ 新对话</button><button className="ar-icon-btn" onClick={onClose} aria-label="关闭历史对话">×</button></div>
+    <label className="ar-search"><span className="ar-sr-only">搜索历史对话</span><input value={search} onChange={e => setSearch(e.target.value)} placeholder="搜索标题或标的" type="search" /></label>
+    <div className="ar-history-list">
+      {q.isLoading && <p className="ar-footnote">正在读取历史…</p>}
+      {q.isError && <div className="ar-notice">历史读取失败。<button onClick={() => q.refetch()}>重试</button></div>}
+      {!q.isLoading && !q.isError && !sessions.length && <p className="ar-footnote">{search ? "没有匹配的对话" : "新的研究从一段对话开始"}</p>}
+      {sessions.map(s => {
+        const date = new Date(s.last_active_at).toLocaleDateString("zh-CN");
+        const group = date === today ? "今天" : date;
+        const show = group !== previous; previous = group;
+        return <div key={s.session_id}>{show && <div className="ar-history-date">{group}</div>}
+          <button className={`ar-history-item ${s.session_id === activeId ? "is-active" : ""}`} disabled={disabled} onClick={() => onPick(s)} aria-current={s.session_id === activeId ? "true" : undefined}>
+            <span>{s.title_cn || "新对话"}</span><small>{s.symbol ?? "全局研究"} · {new Date(s.last_active_at).toLocaleTimeString("zh-CN",{hour:"2-digit",minute:"2-digit"})}</small>
+          </button></div>;
+      })}
+    </div>
+    <div className="ar-history-footer">BIAO 研究工作台<br/><span>系统给出判定，AI 帮你读懂依据</span></div>
+  </aside>;
+}
+
+function ChartResource({ resource, onFocus }: { resource: Extract<Resource,{kind:"chart"}>; onFocus: (focus?:AgentPriceFocus)=>void }) {
+  const [colorMode, setColorMode] = useState(DEFAULT_DISPLAY.colorMode);
+  const detail = useQuery({queryKey:["detail",resource.symbol],queryFn:()=>api.detail(resource.symbol),staleTime:60_000});
+  const c = detail.data;
+  const focus = resource.focus;
+  const highlight: HighlightSpec | undefined = focus ? {
+    priceLines: [{ annoId: "agent-level", price: focus.level.price, label: focus.level.role,
+      color: priceLineKind(focus.level) === "stop" ? "#a74422" : "#2458c6", kind: priceLineKind(focus.level) }],
+    structureIds: [], dimOthers: false, ensureVisible: true,
+  } : undefined;
+  return <div className="ar-chart-resource">
+    <header><div><strong>{c?.display_name ?? resource.symbol}</strong><span>{resource.symbol}</span></div>
+      <Link to={`/?symbol=${encodeURIComponent(resource.symbol)}`} className="cp-link">打开看盘页 ↗</Link></header>
+    {c && <div className="ar-chart-status"><ColorBadge color={c.assessment.color} colorCn={c.assessment.color_cn} descriptive /><span>数据日期 {c.meta.last_bar_date ?? c.meta.data_time ?? "未提供"}</span></div>}
+    {focus && <section className="ar-chart-focus" aria-label="当前定位价位">
+      <header><div><strong>{focus.level.role} {focus.level.price}</strong><span>回复日期 {focus.asOf ?? "未提供"}</span></div><button onClick={()=>onFocus(undefined)}>清除定位</button></header>
+      <div>{focus.levels.map((level,i)=><button key={i} aria-pressed={level===focus.level} onClick={()=>onFocus({...focus,level})}>{level.role} {level.price}</button>)}</div>
+    </section>}
+    <div className="ar-chart-controls"><span>K线着色</span><button className={colorMode === "biao_state" ? "selected" : ""} onClick={()=>setColorMode("biao_state")}>黑灰绿状态</button><button className={colorMode === "red_green" ? "selected" : ""} onClick={()=>setColorMode("red_green")}>红涨绿跌</button></div>
+    {detail.isError ? <div className="ar-notice" role="alert">图表读取失败。<button onClick={()=>detail.refetch()}>重新读取</button></div> : !c ? <div className="ar-resource-loading" role="status">正在加载图表…</div> :
+      <KlineChart payload={c.chart} display={{...DEFAULT_DISPLAY,colorMode}} highlight={highlight} />}
+    {focus && <div className="ar-footnote"><p>价位来源：{focus.level.from_cn || "系统结构"}。系统计算的参考价位（研究代理），不代表已经触发买卖。</p>
+      {focus.asOf && c?.meta.last_bar_date && focus.asOf !== c.meta.last_bar_date && <p className="ar-notice">回复与图表日期不同，请核对后使用。</p>}</div>}
+  </div>;
+}
+
+export default function AgentWorkspacePage() {
+  const queryClient = useQueryClient();
+  const [turns, setTurns] = useState<Turn[]>([]);
+  const [input, setInput] = useState("");
+  const [symbol, setSymbol] = useState<string | null>(null);
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  const [loadingHistory, setLoadingHistory] = useState(false);
+  const [historyError, setHistoryError] = useState("");
+  const [historyOpen, setHistoryOpen] = useState(() => window.innerWidth > 1100);
+  const [resource, setResource] = useState<Resource | null>(null);
+  const [chartSelection, setChartSelection] = useState<Extract<Resource,{kind:"chart"}> | null>(null);
+  const [pinned, setPinned] = useState(false);
+  const pinnedRef = useRef(pinned); pinnedRef.current = pinned;
+  const [wideResource, setWideResource] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const requestId = useRef(0);
+  const generationRef = useRef(0);
+  const requestLock = useRef(false);
+  const abortRef = useRef<AbortController | null>(null);
+  const activeTurn = useRef<string | null>(null);
+  const taRef = useRef<HTMLTextAreaElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
+  const followRef = useRef(true);
+  const [hasNew, setHasNew] = useState(false);
+  const latest = turns.filter(t=>t.who === "agent" && t.status !== "working" && !t.preview).slice(-1)[0];
+  const selectedResult = resource?.kind === "result" ? turns.find(t=>t.id === resource.id) : null;
+  const patch = (id:string, value:Partial<Turn>) => setTurns(cur=>cur.map(t=>t.id === id ? {...t,...value}:t));
+
+  useEffect(()=>()=>{requestId.current++; abortRef.current?.abort();},[]);
+  useEffect(()=>{
+    if (!turns.length) { bodyRef.current?.scrollTo({top:0}); return; }
+    if (followRef.current) bodyRef.current?.scrollTo({top:bodyRef.current.scrollHeight});
+    else setHasNew(true);
+  },[turns]);
+  useEffect(()=>{const el=taRef.current;if(el){el.style.height="auto";el.style.height=`${Math.min(el.scrollHeight,160)}px`;}},[input]);
+  const toBottom = () => {followRef.current=true;setHasNew(false);bodyRef.current?.scrollTo({top:bodyRef.current.scrollHeight});};
+  const draft = (message:string) => {setInput(message);if(window.innerWidth<=1100){setResource(null);setHistoryOpen(false);}taRef.current?.focus();};
+  const inspect = (s:string, focus?:AgentPriceFocus) => {const next = {kind:"chart" as const,symbol:s,focus};setChartSelection(next);setResource(next);};
+
+  const newSession = () => {
+    if(requestLock.current)return;
+    generationRef.current += 1;
+    requestId.current++;setLoadingHistory(false);
+    setSessionId(null);setTurns([]);setSymbol(null);setResource(null);setChartSelection(null);setPinned(false);setInput("");setHistoryError("");setHasNew(false);followRef.current=true;taRef.current?.focus();
+  };
+  const loadSession = async (s:AgentSessionDTO) => {
+    if(requestLock.current || loadingHistory)return;
+    generationRef.current += 1;
+    const ticket=++requestId.current;setLoadingHistory(true);setHistoryError("");
+    try {
+      const messages=await api.agentSessionMessages(s.session_id);
+      if(ticket!==requestId.current)return;
+      followRef.current=true;setHasNew(false);
+      setTurns(messages.map((m,i)=>({id:`${s.session_id}-${i}`,who:m.role === "user"?"you":"agent",text:m.content,grounded:m.grounded,createdAt:m.created_at,history:true,status:"complete",resolved:m.resolved_symbol??null,evidenceCard:m.evidence_card??null,planArtifact:m.plan_artifact??null,questionId:m.question_id??null})));
+      setSessionId(s.session_id);setSymbol(s.symbol);setResource(s.symbol?{kind:"chart",symbol:s.symbol}:null);setChartSelection(s.symbol?{kind:"chart",symbol:s.symbol}:null);setPinned(false);setInput("");
+      if(window.innerWidth<=1100)setHistoryOpen(false);
+    } catch(e){if(ticket===requestId.current)setHistoryError(`历史对话读取失败：${e instanceof Error?e.message:String(e)}`);}
+    finally{if(ticket===requestId.current)setLoadingHistory(false);}
+  };
+  const onTaskStatus = (st: BacktestRequestStatus) => setTurns(cur => {
+    const idx=cur.findIndex(t=>t.taskId===st.request_id);
+    if(idx<0)return [...cur,{id:`task-${st.request_id}`,who:"agent",text:taskStatusTextCn(st),createdAt:new Date().toISOString(),grounded:true,status:"complete",taskId:st.request_id,detailRun:st.status==="completed"?st.run_id:null}];
+    if(cur[idx].text===taskStatusTextCn(st))return cur;
+    const next=[...cur];next[idx]={...next[idx],text:taskStatusTextCn(st),detailRun:st.status==="completed"?st.run_id:null};return next;
+  });
+  useEffect(()=>{const gen=generationRef.current;void recoverActiveTasks(()=>generationRef.current===gen,st=>{if(generationRef.current===gen)onTaskStatus(st);});},[]);
+
+  const executeMessage = async (raw:string, forceDispatch=false, userAlreadyPushed=false, forceChat=false, symbolOverride?:string|null, outerLockHeld=false) => {
+    const message=raw.trim();if(!message || (!outerLockHeld && requestLock.current) || loadingHistory)return;
+    if(!outerLockHeld){requestLock.current=true;setBusy(true);}
+    setInput("");followRef.current=true;setHasNew(false);
+    const ticket=++requestId.current;const id=crypto.randomUUID();const createdAt=new Date().toISOString();activeTurn.current=id;
+    setTurns(cur=>[...cur,...(userAlreadyPushed?[]:[{id:crypto.randomUUID(),who:"you" as const,text:message,createdAt}]),{id,who:"agent",text:"",createdAt,status:"working",stages:[]}]);
+    let received="";
+    try {
+      const effectiveSymbol=symbolOverride===undefined?symbol:symbolOverride;
+      if(!forceChat && (forceDispatch || !effectiveSymbol || /买了|卖了|申购|赎回|报单|成交了/.test(message))) {
+        const result=await api.copilotDispatch({message,symbol:effectiveSymbol});
+        if(ticket!==requestId.current)return;
+        if(!result.chat_fallback) {
+          patch(id,{text:result.note_cn,card:result.card,preview:result.preview,grounded:true,status:"complete",resolved:result.symbol});
+          return;
+        }
+      }
+      const controller=new AbortController();abortRef.current=controller;
+      const clientRequestId=crypto.randomUUID();
+      const response=await fetch("/api/agent/chat/stream",{method:"POST",headers:{"Content-Type":"application/json"},signal:controller.signal,body:JSON.stringify({session_id:sessionId,context_kind:effectiveSymbol?"symbol":"global",symbol:effectiveSymbol,message,client_request_id:clientRequestId})});
+      if(!response.ok || !response.body)throw new Error(`服务返回 ${response.status}`);
+      let completed=false;const stages:NonNullable<Turn["stages"]>=[];
+      for await(const event of readAgentEvents(response.body)) {
+        if(ticket!==requestId.current)return;
+        if(event.event === "stage") {stages.push({key:String(event.data.key),text:String(event.data.text)});patch(id,{stages:[...stages]});}
+        else if(event.event === "token") {received+=String(event.data.t??"");patch(id,{text:received});}
+        else if(event.event === "error")throw new Error(String(event.data.message??event.data.error??"分析服务暂时不可用"));
+        else if(event.event === "done") {
+          completed=true;
+          const d=event.data as {session_id?:string;resolved_symbol?:string|null;grounded?:boolean;fallback?:string;verify_note?:string;quick_card?:QuickCard;evidence_card?:EvidenceCard|null;plan_artifact?:PlanArtifact|null;question_id?:number|null};
+          if(d.session_id)setSessionId(d.session_id);
+          if(d.resolved_symbol){
+            setSymbol(d.resolved_symbol);
+            if(!pinnedRef.current) {
+              const card = d.quick_card?.symbol === d.resolved_symbol ? d.quick_card : undefined;
+              const levels = card ? validPriceLevels(card.levels) : [];
+              const mention = findPriceMentions(d.fallback || received, levels)[0];
+              inspect(d.resolved_symbol, mention && card ? {level:mention.level, levels, asOf:card.as_of} : undefined);
+            }
+          }
+          patch(id,{text:received,resolved:d.resolved_symbol,grounded:d.grounded,fallback:d.fallback,verifyNote:d.verify_note,quickCard:d.quick_card,evidenceCard:d.evidence_card??null,planArtifact:d.plan_artifact??null,questionId:d.question_id??null,status:"complete"});
+          void queryClient.invalidateQueries({queryKey:["agentSessions"]});
+        }
+      }
+      if(!completed)throw new Error("连接提前结束，已保留收到的内容，可继续提问。");
+    } catch(e){if(ticket===requestId.current)patch(id,{status:"failed",error:`未能完成：${e instanceof Error?e.message:String(e)}`});}
+    finally {if(ticket===requestId.current){if(!outerLockHeld){requestLock.current=false;setBusy(false);}abortRef.current=null;activeTurn.current=null;}}
+  };
+  const handleBacktest = async (message:string,r:CopilotResolveReply,gen:number) => {
+    const guard=()=>generationRef.current===gen;
+    try {
+      const reply=await api.agentChat({session_id:sessionId,context_kind:symbol?"symbol":"global",symbol,message,client_request_id:crypto.randomUUID()});
+      if(!guard())return;
+      setSessionId(reply.session_id);if(reply.resolved_symbol)setSymbol(reply.resolved_symbol);
+      setTurns(cur=>[...cur,{id:crypto.randomUUID(),who:"agent",text:reply.reply,createdAt:new Date().toISOString(),grounded:reply.grounded,status:"complete",resolved:reply.resolved_symbol??null,evidenceCard:reply.evidence_card??null,planArtifact:reply.plan_artifact??null,questionId:reply.question_id??null}]);
+      const module=parseBacktestModule(message);
+      if(!module){setTurns(cur=>[...cur,{id:crypto.randomUUID(),who:"agent",text:"请说明要补测的模块：A 回调 / B 突破 / C 2B / D 假突破（例：补测一下 模块A）。不默认选 A。",createdAt:new Date().toISOString(),status:"complete"}]);return;}
+      if(!reply.question_id||!r.resolved_symbol){setTurns(cur=>[...cur,{id:crypto.randomUUID(),who:"agent",text:!reply.question_id?"会话未建立，无法绑定补测任务。":"请先说明补测哪个标的（一次只跑一个标的）。",createdAt:new Date().toISOString(),status:"complete"}]);return;}
+      let exit=parseBacktestExit(message);const explicit=exit!=null;
+      if(!exit){try{exit=(await backtestApi.options()).defaults?.exit_variant||"a6_1_costbasis";}catch{exit="a6_1_costbasis";}}
+      const task=await api.copilotBacktestRequest({session_id:reply.session_id,question_id:reply.question_id,client_request_id:crypto.randomUUID(),symbol:r.resolved_symbol,module,exit_variant:exit});
+      if(!guard())return;
+      trackTask({requestId:task.request_id,sessionId:task.session_id,questionId:task.question_id,symbol:task.symbol});
+      setTurns(cur=>[...cur,{id:`task-${task.request_id}`,who:"agent",text:`已创建补测任务 ${task.request_id}（${task.symbol} · 模块${task.method} · 退出 ${task.exit_variant}${explicit?"":"，系统默认；可用「退出1/2/3」指定"} · 状态 ${phaseLabelCn(task.status)}）；完成后结果自动回到这里。`,createdAt:new Date().toISOString(),grounded:true,status:"complete",taskId:task.request_id,detailRun:task.status==="completed"?task.run_id:null}]);
+      pollTask(task.request_id,guard,onTaskStatus);
+    }catch(e){if(guard())setTurns(cur=>[...cur,{id:crypto.randomUUID(),who:"agent",text:`补测创建失败：${e instanceof Error?e.message:String(e)}`,createdAt:new Date().toISOString(),status:"failed"}]);}
+  };
+  const send = async (raw:string, forceDispatch=false) => {
+    const message=raw.trim();if(!message||requestLock.current||loadingHistory)return;
+    requestLock.current=true;setBusy(true);
+    const gen=generationRef.current;
+    try{
+      if(forceDispatch){await executeMessage(message,true,false,false,undefined,true);return;}
+      setInput("");setTurns(cur=>[...cur,{id:crypto.randomUUID(),who:"you",text:message,createdAt:new Date().toISOString()}]);
+      const route=await resolveRoute({message,sessionId,symbol});if(!guardGeneration(gen))return;
+      if(route.resolve.resolved_symbol)setSymbol(route.resolve.resolved_symbol);
+      route.resolve.clarification.forEach(c=>setTurns(cur=>[...cur,{id:crypto.randomUUID(),who:"agent",text:c.question_cn,createdAt:new Date().toISOString(),grounded:true,status:"complete"}]));
+      if(route.action==="backtest"){await handleBacktest(message,route.resolve,gen);return;}
+      await executeMessage(message,route.action==="dispatch",true,route.action==="chat",route.resolve.resolved_symbol??symbol,true);
+    }catch{if(guardGeneration(gen))await executeMessage(message,false,true,false,undefined,true);}
+    finally{requestLock.current=false;setBusy(false);}
+  };
+  const guardGeneration=(gen:number)=>generationRef.current===gen;
+  const stopReceiving = () => {
+    requestId.current++;generationRef.current+=1;abortRef.current?.abort();abortRef.current=null;requestLock.current=false;setBusy(false);
+    if(activeTurn.current)patch(activeTurn.current,{status:"stopped",error:"已停止接收。后台可能仍在完成分析，可稍后查看历史记录。"});
+    activeTurn.current=null;
+  };
+  const quick = (kind:string,label:string) => {
+    if(kind === "trade"){draft("我买了 ");return;}
+    void send(label,true);
+  };
+
+  return <ResultContext.Provider value={{inspectSymbol:inspect,ask:draft}}>
+    <div className={`ar-workspace ${historyOpen?"has-history":""} ${resource?"has-resource":""} ${wideResource?"wide-resource":""}`}>
+      {historyOpen && <HistoryPanel activeId={sessionId} onPick={loadSession} onNew={newSession} onClose={()=>setHistoryOpen(false)} disabled={busy||loadingHistory} />}
+      <main className="ar-chat">
+        <header className="ar-toolbar"><div><button className="ar-icon-btn" onClick={()=>setHistoryOpen(v=>!v)} aria-label={historyOpen?"收起历史对话":"展开历史对话"} aria-expanded={historyOpen}>☰</button><h1>研究工作台</h1><span className="ar-toolbar-caption">把问题说清，把依据看清</span></div>
+          <div>{(symbol||latest) && <button className="btn small" onClick={()=>resource?setResource(null):symbol?inspect(symbol):latest&&setResource({kind:"result",id:latest.id})}>{resource?"收起资料":"查看资料"}</button>}<button className="btn small" disabled={busy} onClick={newSession}>新对话</button></div></header>
+        {historyError && <p className="ar-notice" role="alert">{historyError}</p>}
+        <div className="ar-messages" ref={bodyRef} onScroll={()=>{const el=bodyRef.current;if(el){followRef.current=shouldFollowOutput(el.scrollTop,el.clientHeight,el.scrollHeight);if(followRef.current)setHasNew(false);}}}>
+          {turns.some(t=>t.history) && <p className="ar-footnote">历史对话目前恢复文字内容；右侧图表展示当前数据。</p>}
+          {loadingHistory && <div className="ar-working" role="status">正在恢复对话…</div>}
+          {!turns.length && !loadingHistory && <div className="ar-welcome"><span className="ar-welcome-mark" aria-hidden="true">BIAO</span><h2>今天，从哪个问题开始？</h2><p>查看机会、讨论标的，或回顾你的交易。<br/>分析与资料会在这里逐步展开。</p>
+            <div className="ar-start-actions">{QUICK.filter(q=>q.kind!=="recommend").map(q=><button key={q.kind} onClick={()=>quick(q.kind,q.label)}><strong>{q.label}</strong><span>{q.hint}</span><b aria-hidden="true">↗</b></button>)}</div>
+            <div className="ar-examples"><span>也可以直接问</span>{["通信设备怎么看","515880 现在是什么阶段"].map(q=><button key={q} onClick={()=>draft(q)}>{q}</button>)}</div>
+          </div>}
+          {turns.map(turn=><TurnRow key={turn.id} turn={turn} onOpen={()=>setResource({kind:"result",id:turn.id})} onChart={inspect} onAsk={draft} sessionId={sessionId} />)}
+        </div>
+        {hasNew && <button className="ar-new-output" onClick={toBottom}>回到最新回复 ↓</button>}
+        <footer className="ar-composer">
+          <div className="ar-composer-context"><span>当前讨论</span><strong>{symbol??"全局研究"}</strong>{symbol && <button disabled={busy} onClick={()=>setSymbol(null)}>切回全局</button>}<span className="ar-context-hint">{resource?.kind === "chart" && resource.symbol!==symbol?`正在查看 ${resource.symbol}，提问仍沿用当前讨论`:""}</span></div>
+          <div className="ar-input-box"><label className="ar-sr-only" htmlFor="agent-question">输入问题</label><textarea id="agent-question" ref={taRef} rows={2} value={input} onChange={e=>setInput(e.target.value)}
+            onKeyDown={e=>{if(e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing && e.keyCode!==229){e.preventDefault();if(!busy)void send(input);}}}
+            placeholder={busy?"可以先写下一条问题，当前回复完成后再发送":"输入问题，或说出标的名称 / 代码…"} />
+            <div className="ar-input-bottom"><span>Enter 发送 · Shift + Enter 换行</span>{busy?<button className="btn ar-stop" onClick={stopReceiving}>停止接收</button>:<button className="btn primary" disabled={!input.trim()||loadingHistory} onClick={()=>void send(input)}>发送 ↑</button>}</div>
+          </div>
+          <div className="ar-composer-tools">{QUICK.map(q=><button key={q.kind} disabled={busy||loadingHistory} onClick={()=>quick(q.kind,q.label)}>{q.label}</button>)}</div>
+          {input.startsWith("我买了") && <p className="ar-footnote">填写实际成交，例如“我买了1万元012414”。发送后先核对确认卡，确认后才记入基金台账。</p>}
+        </footer>
+      </main>
+      {resource && <aside className="ar-resource" aria-label="资料区"><header className="ar-resource-head"><strong>研究资料</strong><div><button className={pinned?"selected":""} onClick={()=>setPinned(v=>!v)} aria-pressed={pinned}>{pinned?"已固定":"固定"}</button><button onClick={()=>setWideResource(v=>!v)}>{wideResource?"还原":"放大"}</button><button onClick={()=>setResource(null)} aria-label="关闭资料区">×</button></div></header>
+        <div className="ar-resource-tabs">{(chartSelection || symbol) && <button className={resource.kind === "chart"?"selected":""} onClick={()=>chartSelection?setResource(chartSelection):symbol&&inspect(symbol)}>标的图表</button>}{latest && <button className={resource.kind === "result"?"selected":""} onClick={()=>setResource({kind:"result",id:latest.id})}>对话结果</button>}<span>{pinned?"保持当前资料":"随分析展开"}</span></div>
+        <div className="ar-resource-content">{resource.kind === "chart"?<ChartResource key={resource.symbol} resource={resource} onFocus={focus=>inspect(resource.symbol,focus)}/>:selectedResult?<ResultContext.Provider value={{inspectSymbol:inspect,ask:draft,readOnly:true}}><TurnRow turn={selectedResult} onChart={inspect} onAsk={draft} expanded sessionId={sessionId} /></ResultContext.Provider>:<p className="ar-footnote">选择一条回复查看详情。</p>}</div>
+      </aside>}
+    </div>
+  </ResultContext.Provider>;
+}

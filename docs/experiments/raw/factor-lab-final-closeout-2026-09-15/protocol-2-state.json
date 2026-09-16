@@ -1,0 +1,176 @@
+{
+  "protocol_id": "factor-lab-demo-2-state",
+  "version": "1.2.0",
+  "kind": "state_diagnostic",
+  "data_mode": "synthetic",
+  "synthetic": true,
+  "timezone": "Asia/Shanghai",
+  "evaluation_cutoff": "2030-01-01T15:00:00+08:00",
+  "case": "state",
+  "title": "②双均线候选/共同分母宽度+状态诊断（终版）",
+  "expectation_tolerance_abs": 1e-06,
+  "registry": {
+    "version": "1.2.0",
+    "canonical_sha256": "6773ef5a75c5a2209612cf27452a05fdfc0067d1e9bd579c133737dc580de007"
+  },
+  "code_identity": {
+    "scripts/run_factor_lab.py": "17a7bc63bc97893f24ee72861836d64e65298b18b4d53c67041ef999cc4613d5",
+    "src/lei_signal/domain/rules_config.py": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031",
+    "src/lei_signal/features/indicators.py": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+    "src/lei_signal/research/definitions.py": "b6d5a35532644c371ffbfc541a21bd52c05114db9fcb1cc3071c1965ed41ad59",
+    "src/lei_signal/research/factor_diagnostics.py": "70de5549e2831a4353d5000e011e5c93ef4c9798ce4909da943d079997d73a08",
+    "src/lei_signal/research/factor_lab/__init__.py": "ea269601b6b4fa5f1bb70f2dff555aca5a7afa236babc8005a8b4e7fd2d036c4",
+    "src/lei_signal/research/factor_lab/adapters.py": "27596fd66d918cacf9db7a6ae2cdd11b408d7d46f3c9889ac2d35a42e7748020",
+    "src/lei_signal/research/factor_lab/attribution.py": "6d9b756cda1dfc8b6d6c9de8f8a12ecbd4adbe1fc28e30eba962e64437f47e93",
+    "src/lei_signal/research/factor_lab/contracts.py": "d9ff0e864a8f4600c134972e9815acc2143f1b7227e17de570fed4901e0988bc",
+    "src/lei_signal/research/factor_lab/diagnostics.py": "da84ca7b13502a9669e09d5c0c3b610b75e557a3b939742d8ac400f037b99cc8",
+    "src/lei_signal/research/factor_lab/runner.py": "97b49d9e14d5740a2b7f8e04cbb5a4d18e32d59e819e4a804d1d068f39f23917",
+    "src/lei_signal/research/factor_lab/validation.py": "815769ca7440782f9275167562d81ba6e11baf955b7b5e1ef9f8137f87d290b6",
+    "src/lei_signal/research/momentum_prototype.py": "5425e4f5494710041ae42816bf259ac7cdc1ed6aaef01986ac1d3d34d90e568f",
+    "src/lei_signal/rules/dual_ma.py": "5c41da87036e0e318bacab663aa5509d73f99f301f805a76559b016b99aa3f7c",
+    "src/lei_signal/rules/lei_color.py": "ae6f3a2547cc37dd1ebdfea1bea206f932defdd8cd90d4061630914c0fc9d4d7"
+  },
+  "definition_cards_sha256": {
+    "candidate:lei.dual_ma.bull_state@draft-1": "3d0d7f7a77f21dd58ce9f85601944483c4ecd3876b19ae7792c0d972ef73f8ea",
+    "breadth.csi300.b50.common@1.0.0": "95c95b9d188934e02a45d3bc461b17e99786aa84abcecf44abc96ad604a79887",
+    "breadth.csi300.b200.common@1.0.0": "2c0f989a2d1d9d16db5d0505aeae4ffb01230c5950ca7986a4e19423697f0463"
+  },
+  "data_declarations": {
+    "price_scale": "arbitrary_positive_units_synthetic",
+    "calendar": "pandas_bdate_range_synthetic_not_exchange_calendar",
+    "timezone": "Asia/Shanghai",
+    "currency": "synthetic_units_not_cny"
+  },
+  "expectation_source": {
+    "path": "independent-expectations-v2.json",
+    "sha256": "a49dfc6ec59aaa485382890c7fb640b66c520220ac9813e4b7fb36f19f9c707c"
+  },
+  "expectations": {
+    "dm_a_not_ready_rows": 20,
+    "dm_a_state_true_rows": 30,
+    "dm_a_state_false_rows": 15,
+    "dm_a_state_at_row21": 0,
+    "dm_a_state_at_row25": 0,
+    "dm_a_state_at_last_row": 1,
+    "dm_b_not_ready_rows": 20,
+    "dm_b_state_true_rows": 0,
+    "dm_b_state_false_rows": 45,
+    "dm_b_state_at_last_row": 0,
+    "b50_first_valid_date": "2018-10-05",
+    "b50_valid_days": 60,
+    "b50_coverage_missing_days": 1,
+    "b50_at_first_valid": 0.6666666666666666,
+    "b50_day_before_change": 0.6666666666666666,
+    "b50_at_change": 0.75,
+    "b200_first_valid_date": "2018-10-05",
+    "b200_valid_days": 60,
+    "b200_coverage_missing_days": 1,
+    "b200_at_first_valid": 0.6666666666666666,
+    "b200_at_change": 0.75,
+    "constant_breadth_ic_status": "not_applicable",
+    "so_dm_a_true_n": 8,
+    "so_dm_a_false_n": 15,
+    "so_dm_b_true_n": 0,
+    "so_dm_b_false_n": 23,
+    "ts_m1_status": "descriptive_only",
+    "ts_m1_n": 39
+  },
+  "expectation_basis": "必查集合与期望值完全来自 independent-expectations-v2.json 的protocol_expectations 段（独立算术脚本产出，哈希冻结）；协议不得声明或裁剪 required_checks（runner 拒绝该字段）",
+  "attempt_history": [
+    {
+      "attempt": "closeout-protocol-v1.2.0",
+      "outcome": "success",
+      "reason": "S2收口：必查集合改由独立期望产物权威化；v1.1.1协议保留为上一版冻结历史"
+    }
+  ],
+  "inputs": {
+    "bars_dm_a": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_bars_dm_a.csv",
+      "sha256": "824142ed06ee0e9f6b55d0bb599b0f7acdaea6a5076f3133c31147715eb85487",
+      "format": "bars"
+    },
+    "bars_dm_b": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_bars_dm_b.csv",
+      "sha256": "cee05419e8e096f27853f6d22ad2234fd7fb1ff6ae4fd522e8f40db8ea072d1d",
+      "format": "bars"
+    },
+    "state_breadth_close": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_breadth_close.csv",
+      "sha256": "374da151042a538f4915fd8578c3f205450f3380277aa9d4cca57f42e8f530ca",
+      "format": "wide_prices"
+    },
+    "state_membership": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_membership.json",
+      "sha256": "cc18619c78aca9f043adfd81dc44f8ed81fdf86578a3c5c60d5b79e4506523d7",
+      "format": "membership"
+    }
+  },
+  "state_candidate": {
+    "reference": "candidate:lei.dual_ma.bull_state@draft-1",
+    "note": "源代码绑定候选，不冒充已登记因子"
+  },
+  "breadth": {
+    "close": "state_breadth_close",
+    "membership": "state_membership",
+    "references": {
+      "b50": "breadth.csi300.b50.common@1.0.0",
+      "b200": "breadth.csi300.b200.common@1.0.0"
+    },
+    "note": "合成成员链，不得称真实沪深300证据"
+  },
+  "diagnostics": {
+    "type": "state_outcomes"
+  },
+  "diagnostic_requests": {
+    "constant_breadth_ic": {
+      "batch": "b50",
+      "diagnostics": {
+        "type": "cross_section_ic"
+      }
+    },
+    "state_outcomes": {
+      "batch": "dm",
+      "diagnostics": {
+        "type": "state_outcomes"
+      }
+    },
+    "time_series_state": {
+      "batch": "b200",
+      "diagnostics": {
+        "type": "time_series_state",
+        "target_entities": [
+          "m1"
+        ]
+      }
+    }
+  },
+  "expectations_probe": {
+    "state_rows": {
+      "dm_a": {
+        "dm_a_state_at_row21": [
+          "2019-01-29",
+          true
+        ],
+        "dm_a_state_at_row25": [
+          "2019-02-04",
+          true
+        ],
+        "dm_a_state_at_last_row": [
+          "2019-04-01",
+          true
+        ]
+      },
+      "dm_b": {
+        "dm_b_state_at_last_row": [
+          "2019-04-01",
+          true
+        ]
+      }
+    },
+    "breadth": {
+      "change_date": "2018-11-05",
+      "day_before_date": "2018-11-02"
+    },
+    "breadth_close_input": "state_breadth_close"
+  }
+}

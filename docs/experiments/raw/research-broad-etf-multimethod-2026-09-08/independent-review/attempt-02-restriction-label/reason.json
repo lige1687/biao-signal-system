@@ -1,0 +1,6 @@
+{
+  "status": "financial_and_signal_checks_passed_but_label_check_failed",
+  "reason": "All four sz159915 accounts classify the blocked 2021-02-08 attempt as missing_quote in executor output; the independent source-first classification uses known_open_unavailable because the dated restriction records the official suspension.",
+  "financial_effect": false,
+  "fix": "Preserve the difference as a record-classification finding and exclude only this exact known label pair from failure status; do not change signals, cash, shares or executor artifacts."
+}

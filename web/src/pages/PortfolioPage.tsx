@@ -1,10 +1,13 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 import * as echarts from "echarts";
-import { portfolioApi } from "../api/client";
+import { api, portfolioApi } from "../api/client";
 import { ReviewFetcher, TradesLedgerView } from "../components/copilot/CopilotCards";
 import InfoTip from "../components/InfoTip";
+import { agentConsoleStore } from "../App";
 import { fmtChange } from "../utils/format";
+import { classifySymbol, mapHoldingsToSymbols, type HoldingSymbolMap, type SymbolSource } from "../utils/portfolioSymbols";
 import type { PortfolioAdvice, PortfolioGroup, PortfolioHolding } from "../types";
 
 /**
@@ -160,7 +163,44 @@ function AdviceCard({ a }: { a: PortfolioAdvice }) {
   );
 }
 
-function GroupCard({ group, index }: { group: PortfolioGroup; index: number }) {
+/** 「问助手」草稿：带基金名称、可用代码与快照来源，放入输入框由用户编辑后发送，不自动发送。 */
+function askDraftFor(h: PortfolioHolding, map: HoldingSymbolMap | undefined, asOf: string): string {
+  const codePart = h.code ? `基金代码 ${h.code}` : "基金代码未记录";
+  const symbolPart = map ? `；系统里对应的行情标的是「${map.displayName}」${map.symbol}` : "";
+  return `我在「我的持仓」里持有「${h.name}」（${codePart}${symbolPart}；持仓为 ${asOf} 的截图快照，金额与收益是当时的、不是实时）。请按系统数据讲讲：它现在是什么阶段、道路状态如何，有哪些触发条件和失效位要注意？`;
+}
+
+/** 单个持仓的「看图 / 问助手」入口；无法可靠映射时明确提示，不给假入口。 */
+function HoldingActions({ h, map, asOf }: { h: PortfolioHolding; map: HoldingSymbolMap | undefined; asOf: string }) {
+  const ask = (
+    <button
+      type="button"
+      className="btn small portfolio-action"
+      title="把问题草稿放进助手输入框，可编辑后再发送；不会自动发送"
+      onClick={() => agentConsoleStore.openConsole(null, askDraftFor(h, map, asOf))}
+    >
+      问助手
+    </button>
+  );
+  if (!map) {
+    return (
+      <span className="portfolio-unmapped" title="该基金（场外代码或未收录）没有可靠对应的行情标的——场外基金代码不能直接当作行情代码，为避免跳到错误标的，这里不提供看图。">
+        无对应行情标的 {ask}
+      </span>
+    );
+  }
+  return (
+    <span className="portfolio-actions">
+      <Link className="btn small portfolio-action" to={`/?symbol=${encodeURIComponent(map.symbol)}`}
+        title={`打开看盘页：${map.displayName} ${map.symbol}（代码+市场+产品类型一致，名称互相包含核对）`}>
+        看图
+      </Link>
+      {ask}
+    </span>
+  );
+}
+
+function GroupCard({ group, index, symbolMap, asOf }: { group: PortfolioGroup; index: number; symbolMap: Map<string, HoldingSymbolMap>; asOf: string }) {
   return (
     <div className="card portfolio-group-card" style={{ borderLeft: `4px solid ${colorForGroup(index)}` }}>
       <div className="portfolio-group-head">
@@ -202,6 +242,7 @@ function GroupCard({ group, index }: { group: PortfolioGroup; index: number }) {
               <InfoTip tip={TIPS.top10}>真实暴露</InfoTip>
             </th>
             <th>标签</th>
+            <th>行情 / 助手</th>
           </tr>
         </thead>
         <tbody>
@@ -224,6 +265,7 @@ function GroupCard({ group, index }: { group: PortfolioGroup; index: number }) {
                     </span>
                   ))}
                 </td>
+                <td><HoldingActions h={h} map={symbolMap.get(h.holding_id)} asOf={asOf} /></td>
               </tr>
             );
           })}
@@ -239,6 +281,44 @@ export default function PortfolioPage() {
     queryFn: portfolioApi.get,
     staleTime: 5 * 60_000,
   });
+
+  // 映射来源只用已有数据：用户自选票（与看盘页同一份缓存）+ 美股 ETF 目录。
+  // 不逐只 probe 行情接口（场外代码可能撞上不相关的场内证券，见 portfolioSymbols）。
+  const { data: dashboard } = useQuery({
+    queryKey: ["cards"],
+    queryFn: () => api.dashboard(),
+    staleTime: 60_000,
+  });
+  const { data: catalog } = useQuery({
+    queryKey: ["sectors"],
+    queryFn: () => api.sectors(),
+    staleTime: Infinity,
+  });
+
+  const symbolMap = useMemo(() => {
+    if (!data) return new Map<string, HoldingSymbolMap>();
+    // 来源身份：自选中只有标识符自证为境内场内基金（段+后缀一致）的才给
+    // cn_exchange_fund；字母代码/指数/板块一律 insufficient（普通自选不自动
+    // 视为美股 ETF）。us_etfs 是明确的美股 ETF 目录，给 us_etf_catalog。
+    const sources: SymbolSource[] = [
+      ...(dashboard?.cards ?? [])
+        .filter((c) => !c.error)
+        .map((c) => ({
+          symbol: c.symbol,
+          name: c.display_name,
+          identity: c.group === "watchlist" ? classifySymbol(c.symbol) : ("insufficient" as const),
+        })),
+      ...(catalog?.us_etfs ?? []).map((s) => ({
+        symbol: s.symbol,
+        name: s.name,
+        identity: "us_etf_catalog" as const,
+      })),
+    ];
+    return mapHoldingsToSymbols(
+      data.groups.flatMap((g) => g.holdings),
+      sources,
+    );
+  }, [data, dashboard, catalog]);
 
   const totalText = useMemo(
     () => (data ? `¥${data.total_value.toLocaleString("zh-CN", { minimumFractionDigits: 2 })}` : "--"),
@@ -274,6 +354,11 @@ export default function PortfolioPage() {
         <span className="ph-meta">
           {data.holdings_count} 只 · 数据截至 {data.as_of} · {data.data_source_cn}
         </span>
+      </div>
+
+      {/* 历史快照声明：放首屏醒目位置，明确金额/收益是截图当时口径，不伪装成实时持仓 */}
+      <div className="portfolio-asof-banner" role="note">
+        本页为 <strong>{data.as_of}</strong> 的持仓快照（{data.data_source_cn}），金额与收益是当时的记录，<strong>不是实时持仓</strong>；「看图」打开的是行情标的的最新图表，两者日期不同属正常。
       </div>
 
       {/* 组合总览条 */}
@@ -335,7 +420,7 @@ export default function PortfolioPage() {
         </div>
         <div className="portfolio-groups-col">
           {data.groups.map((g, i) => (
-            <GroupCard key={g.group_key} group={g} index={i} />
+            <GroupCard key={g.group_key} group={g} index={i} symbolMap={symbolMap} asOf={data.as_of} />
           ))}
         </div>
       </div>

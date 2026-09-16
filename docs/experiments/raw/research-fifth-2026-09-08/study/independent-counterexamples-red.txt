@@ -1,0 +1,29 @@
+test_bad_event_sequence_rejected (__main__.HistoryChecks.test_bad_event_sequence_rejected) ... ok
+test_duplicate_event_rejected (__main__.HistoryChecks.test_duplicate_event_rejected) ... ok
+test_impossible_split_date_rejected (__main__.HistoryChecks.test_impossible_split_date_rejected) ... FAIL
+test_late_resume_blocks_open_not_close_mark (__main__.HistoryChecks.test_late_resume_blocks_open_not_close_mark) ... ok
+test_limit_change_only_from_effective_date (__main__.HistoryChecks.test_limit_change_only_from_effective_date) ... ok
+test_nonfinite_close_rejected (__main__.HistoryChecks.test_nonfinite_close_rejected) ... ok
+test_same_economic_event_different_id_rejected (__main__.HistoryChecks.test_same_economic_event_different_id_rejected) ... FAIL
+test_split_during_missing_day_then_resume (__main__.HistoryChecks.test_split_during_missing_day_then_resume) ... ok
+
+======================================================================
+FAIL: test_impossible_split_date_rejected (__main__.HistoryChecks.test_impossible_split_date_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fifth-2026-09-08/study/test_history_rules.py", line 20, in test_impossible_split_date_rejected
+    with self.assertRaises(ValueError):run(prices(),events=[e])
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_same_economic_event_different_id_rejected (__main__.HistoryChecks.test_same_economic_event_different_id_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fifth-2026-09-08/study/test_history_rules.py", line 17, in test_same_economic_event_different_id_rejected
+    with self.assertRaises(ValueError):run(prices(),events=[e,dict(e,event_id='other')])
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.001s
+
+FAILED (failures=2)

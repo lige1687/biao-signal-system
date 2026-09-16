@@ -1,0 +1,43 @@
+{
+  "schema_version": "research-data-snapshot/1.0",
+  "transform_version": "research-data-snapshot/1.0",
+  "mode": "import",
+  "fixture": "SYNTHETIC ALGORITHM TEST ONLY",
+  "semantics": {
+    "fields": [
+      "date",
+      "open",
+      "high",
+      "low",
+      "close",
+      "volume",
+      "economic_index"
+    ],
+    "currency": "CNY",
+    "price_basis": "nominal_close",
+    "trading_calendar": {
+      "authority": "none"
+    }
+  },
+  "uses": [
+    "description",
+    "diagnostic"
+  ],
+  "not_for": [
+    "production_trade"
+  ],
+  "market_data_refs": {},
+  "instruments": [
+    {
+      "instrument_id": "510300.SS",
+      "rows": 2,
+      "first_date": "2026-06-01",
+      "last_date": "2026-06-02",
+      "normalized": {
+        "path": "prices.csv",
+        "sha256": "6f5f656ccdfc209baa079a01ca452572b77ae51f93ce233d930710689acba213"
+      },
+      "raw_responses": []
+    }
+  ]
+}

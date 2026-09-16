@@ -1,0 +1,31 @@
+{
+  "checks": 4347,
+  "failures": [],
+  "protected_count": 121,
+  "full_delta": 0.007015924582548178,
+  "equal_year_delta": -0.006644577824980216,
+  "counterexamples": {
+    "wrong_object_and_use_accepted": true,
+    "overlap_excluded_row_count": {
+      "legal": 7,
+      "audited": 8
+    },
+    "synthetic_provenance": {
+      "actual_symbol": "SYN",
+      "card_symbol": "510300",
+      "input": {
+        "base_dir": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16",
+        "observations_csv_sha256": "1dfe4c206212c31809f53f4b66bb40b3dd4ec193b03daf37c1540f8307eb9d5d"
+      },
+      "method": {
+        "stability": "全期+逐年+留一年+等权年度差",
+        "overlap": "相邻交易日区间级重叠审计",
+        "resampling": "circular_block_bootstrap L63/L126 各2000次 PCG64 seed 20260916 成对同索引"
+      }
+    },
+    "empty": "ValueError: n(len(frame)) 必须为正（收到 0）",
+    "one_group_runner": "TypeError: unsupported format string passed to NoneType.__format__",
+    "usage_example": "IndexError: list index out of range"
+  },
+  "no_new_market_run": true
+}

@@ -1,0 +1,76 @@
+{
+  "as_of": "2026-09-08",
+  "status": "screened_no_return_run",
+  "external_sources": [
+    {
+      "id": "sepp_lucic_2026",
+      "official_url": "https://arxiv.org/abs/2607.19497",
+      "borrow": ["compare trend frequency with trading costs explicit", "test low-frequency persistence"],
+      "do_not_copy": ["contract universe", "shorting", "volatility scaling", "fitted span", "paper performance"]
+    },
+    {
+      "id": "jeon_masturzo_2025",
+      "official_url": "https://media.researchaffiliates.com/1099_stop_the_losses_e389db6127.pdf",
+      "borrow": ["define exit and reentry jointly", "include delayed execution and costs", "report return drag and risk change together"],
+      "do_not_copy": ["5 percent stop", "0.5 percent reentry", "volatility grid", "252-day momentum", "futures and FX construction", "paper performance"]
+    }
+  ],
+  "selected_candidates": [
+    {
+      "id": "H1_binary_breadth_hysteresis_complete_etf",
+      "state_machine": {
+        "initial_target": 0,
+        "eligible_date_floor": "2015-01-01",
+        "enter": "3 * completed_week_last_non_null_B200 <= 130 => target 1",
+        "exit": "while target 1, 3 * completed_week_last_non_null_B200 > 136 => target 0",
+        "between_lines": "retain prior state",
+        "missing_week": "no new target",
+        "partial_terminal_week": "unconfirmed and unexecutable"
+      },
+      "execution": "first eligible open of next natural week with all first12 account rules",
+      "baseline": "breadth_three_tier",
+      "new_accounts": 4,
+      "prior_evidence_warning": "fixed parameter previously won only 5 of 11 historical segments; prior proxy/panel work is not a new success",
+      "paper_boundary": "neither paper supplies or validates 130/3 and 136/3 B200 thresholds"
+    },
+    {
+      "id": "H2_breadth_max_simple60_state",
+      "trend_state": "daily original simple60 strict state machine from in-period flat state; use the last valid ETF close no later than completed-week Sunday decision_date, independently of breadth_source_date",
+      "breadth_target": "completed-week last non-null B200: below 43.3 => 1; [43.3,56.7) => 0.5; at least 56.7 => 0",
+      "combined_target": "max(breadth_target, trend_state)",
+      "missing_week": "no target without original breadth observation",
+      "partial_terminal_week": "unconfirmed and unexecutable",
+      "execution": "first eligible open of next natural week with all first12 account rules",
+      "baseline": "breadth_three_tier",
+      "new_accounts": 4,
+      "provenance_warning": "proposed after observing 2025 under-participation; same-history improvement is not new validation or paper evidence"
+    }
+  ],
+  "deferred_candidate": {
+    "id": "I1_month_end_simple60",
+    "status": "defined_but_not_run",
+    "definition": "only the final valid close of each completed natural month can update the prior-60-valid-close channel state; next eligible open execution",
+    "reason": "less decision-ready than frozen binary hysteresis; do not activate after viewing H1/H2 returns"
+  },
+  "overlap_screen": {
+    "already_complete": ["buy_hold", "breadth_three_tier", "daily simple60 on sh510300 and sz159915 at two fees"],
+    "H1": "tested on proxies and older panels, not first12 nominal-price/action/dividend/100-unit complete accounts",
+    "H2": "breadth and trend tested separately, exact weekly max complete ETF account not found",
+    "exact_first12_complete_account_found": false
+  },
+  "account_count": {
+    "new": 8,
+    "existing_references": 12,
+    "new_formula": "2 methods x 2 products x 2 fee rates"
+  },
+  "common_constraints": {
+    "period": "2015-01-01 through 2026-06-30",
+    "initial_cash": 100000,
+    "products": ["sh510300", "sz159915"],
+    "one_way_fee_rates": [0.001, 0.002],
+    "no_leverage": true,
+    "no_parameter_search": true,
+    "no_return_run_in_screening": true,
+    "independent_cash_share_receivable_rebuild_required": true
+  }
+}

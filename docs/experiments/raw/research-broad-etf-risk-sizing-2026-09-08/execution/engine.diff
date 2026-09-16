@@ -1,0 +1,31 @@
+--- ../../research-broad-etf-technical-2026-09-08/execution/engine.py	2026-09-08 21:55:53
++++ engine.py	2026-09-08 22:25:08
+@@ -13,11 +13,13 @@
+ def simulate(prices, actions, candidates, exit_observations, *, start, end,
+              weekly_per_symbol=250, initial_per_symbol=0, fee=.001, config_id, limits,
+              limit_changes=None, blocked_dates=None, exit_rule=None,
+-             explicit_config_set=None):
++             explicit_config_set=None, risk_sized_config_set=None):
+     diagnostic_configs={'R0','R1'}
+     is_diagnostic_config=config_id in diagnostic_configs
+     explicit_config_set=set(explicit_config_set or ())
+     is_explicit_config=config_id in explicit_config_set
++    risk_sized_config_set=set(risk_sized_config_set or ())
++    uses_risk_sizing=config_id=='P7' or is_explicit_config or config_id in risk_sized_config_set
+     if config_id not in ['P'+str(i) for i in range(8)] and not is_diagnostic_config and not is_explicit_config:raise ValueError('Unknown configuration')
+     if start>end or not _finite(fee) or fee<0 or fee>=1:raise ValueError('Invalid window or fee')
+     if not _finite(weekly_per_symbol) or weekly_per_symbol<0:raise ValueError('Invalid funding')
+@@ -201,11 +203,11 @@
+                             else:
+                                 o['open_rr']=(o['target']-ep)/(ep-o['stop'])
+                                 if o['open_rr']<3:reason='open_rr_below3'
+-                risk_budget=risk_reference[s]*.01 if config_id=='P7' or is_explicit_config else None
++                risk_budget=risk_reference[s]*.01 if uses_risk_sizing else None
+                 qty=0
+                 if not reason:
+                     qty=math.floor(max(0.,cash[s])/(ep*(1+fee))/100)*100
+-                    if config_id=='P7' or is_explicit_config:qty=min(qty,math.floor(max(0.,risk_budget)/(ep-o['stop'])/100+1e-12)*100)
++                    if uses_risk_sizing:qty=min(qty,math.floor(max(0.,risk_budget)/(ep-o['stop'])/100+1e-12)*100)
+                     if qty<=0:reason='insufficient_cash_or_risk_lot'
+                 o['attempts'].append(dict(date=d,reason=reason or 'filled',open_price=ep,open_rr=o.get('open_rr'),risk_budget=risk_budget,previous_product_equity=risk_reference[s]))
+                 if reason:rejection(o,reason,d)

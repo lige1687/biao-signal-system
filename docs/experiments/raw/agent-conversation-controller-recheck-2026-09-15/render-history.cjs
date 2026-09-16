@@ -1,0 +1,23 @@
+const fs=require('fs'),path=require('path');
+const web='/Users/yongbiaoli/lei-agent-ux-20260913/web';
+const ts=require(web+'/node_modules/typescript');
+const esbuild=require(web+'/node_modules/esbuild');
+const source=fs.readFileSync(web+'/src/pages/AgentWorkspacePage.tsx','utf8');
+const sf=ts.createSourceFile('page.tsx',source,ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);
+const fn=sf.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text==='TurnRow');
+if(!fn)throw Error('TurnRow missing');
+const code=`const React=require(${JSON.stringify(web+'/node_modules/react')});
+const {useState}=React;
+const {renderToStaticMarkup}=require(${JSON.stringify(web+'/node_modules/react-dom/server')});
+const titleOf=()=>"测试回答";
+const AgentMarkdown=({text})=>React.createElement('p',null,text);
+const AnswerText=({text})=>React.createElement('p',null,text);
+const CopilotCardDispatcher=()=>null;
+const parsePlanDraft=()=>null;
+${fn.getText(sf)}
+const base={id:'history1',who:'agent',text:'部分正文',status:'complete',history:true,createdAt:'2026-09-15T00:00:00Z',grounded:false,answerIncomplete:{reason:'connection_interrupted',reason_cn:'连接中断'}};
+const render=t=>renderToStaticMarkup(React.createElement(TurnRow,{turn:t,onAsk:()=>{},onChart:()=>{},onRetryIncomplete:()=>{}}));
+const history=render(base),live=render({...base,history:false,status:'failed',incompleteDone:true,requestBody:{message:'问',symbol:null,session_id:null,context_kind:'global'},clientRequestId:'fixed'});
+console.log(JSON.stringify({history_incomplete_label:history.includes('此回答当时未完成'),history_retry_button:history.includes('重试生成这个回答'),live_retry_button:live.includes('重试生成这个回答'),method:'Actual TurnRow body rendered with presentational children stubbed; history shape follows current load mapping'},null,2));`;
+const transformed=esbuild.transformSync(code,{loader:'tsx',format:'cjs',jsx:'transform'}).code;
+new Function('require',transformed)(require);

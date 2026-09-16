@@ -1,0 +1,182 @@
+test_buy_on_ex_date_gets_no_old_dividend (__main__.CashChecks.test_buy_on_ex_date_gets_no_old_dividend) ... ERROR
+test_cash_interest_not_assigned_to_receivable (__main__.CashChecks.test_cash_interest_not_assigned_to_receivable) ... ERROR
+test_close_information_does_not_change_same_open_orders (__main__.CashChecks.test_close_information_does_not_change_same_open_orders) ... ERROR
+test_dividend_receivable_not_spendable (__main__.CashChecks.test_dividend_receivable_not_spendable) ... ERROR
+test_fees_lots_and_nonnegative_cash (__main__.CashChecks.test_fees_lots_and_nonnegative_cash) ... ERROR
+test_flat_funding_is_not_profit (__main__.CashChecks.test_flat_funding_is_not_profit) ... ERROR
+test_missing_day_is_not_relabelled (__main__.CashChecks.test_missing_day_is_not_relabelled) ... ERROR
+test_open_limit_blocks_trade (__main__.CashChecks.test_open_limit_blocks_trade) ... ERROR
+test_quarterly_flat_assets_only_lose_fees (__main__.CashChecks.test_quarterly_flat_assets_only_lose_fees) ... ERROR
+test_record_date_missing_stops_for_held_asset (__main__.CashChecks.test_record_date_missing_stops_for_held_asset) ... ERROR
+test_same_flows_across_arms (__main__.CashChecks.test_same_flows_across_arms) ... ERROR
+test_split_conserves_wealth (__main__.CashChecks.test_split_conserves_wealth) ... ERROR
+
+======================================================================
+ERROR: test_buy_on_ex_date_gets_no_old_dividend (__main__.CashChecks.test_buy_on_ex_date_gets_no_old_dividend)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 41, in test_buy_on_ex_date_gets_no_old_dividend
+    r=run(p,events=e,end='2023-01-06')
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 14, in run
+    return simulate(p,kw.pop('events',[]),start=kw.pop('start','2023-01-02'),end=kw.pop('end','2023-01-12'),weekly=kw.pop('weekly',1000),fee=kw.pop('fee',0),cash_rate=kw.pop('cash_rate',0),rebalance=kw.pop('rebalance',False),limits={s:10 for s in p},**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/cash_engine.py", line 2, in simulate
+    raise NotImplementedError('Research ledger is not yet implemented')
+NotImplementedError: Research ledger is not yet implemented
+
+======================================================================
+ERROR: test_cash_interest_not_assigned_to_receivable (__main__.CashChecks.test_cash_interest_not_assigned_to_receivable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 73, in test_cash_interest_not_assigned_to_receivable
+    p=prices(value=100);a=run(p,end='2023-01-08',cash_rate=.02)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 14, in run
+    return simulate(p,kw.pop('events',[]),start=kw.pop('start','2023-01-02'),end=kw.pop('end','2023-01-12'),weekly=kw.pop('weekly',1000),fee=kw.pop('fee',0),cash_rate=kw.pop('cash_rate',0),rebalance=kw.pop('rebalance',False),limits={s:10 for s in p},**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/cash_engine.py", line 2, in simulate
+    raise NotImplementedError('Research ledger is not yet implemented')
+NotImplementedError: Research ledger is not yet implemented
+
+======================================================================
+ERROR: test_close_information_does_not_change_same_open_orders (__main__.CashChecks.test_close_information_does_not_change_same_open_orders)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 68, in test_close_information_does_not_change_same_open_orders
+    a=run(p,end='2023-04-03',weekly=4000,rebalance=True)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 14, in run
+    return simulate(p,kw.pop('events',[]),start=kw.pop('start','2023-01-02'),end=kw.pop('end','2023-01-12'),weekly=kw.pop('weekly',1000),fee=kw.pop('fee',0),cash_rate=kw.pop('cash_rate',0),rebalance=kw.pop('rebalance',False),limits={s:10 for s in p},**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/cash_engine.py", line 2, in simulate
+    raise NotImplementedError('Research ledger is not yet implemented')
+NotImplementedError: Research ledger is not yet implemented
+
+======================================================================
+ERROR: test_dividend_receivable_not_spendable (__main__.CashChecks.test_dividend_receivable_not_spendable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 32, in test_dividend_receivable_not_spendable
+    r=run(p,events=e,end='2023-01-06')
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 14, in run
+    return simulate(p,kw.pop('events',[]),start=kw.pop('start','2023-01-02'),end=kw.pop('end','2023-01-12'),weekly=kw.pop('weekly',1000),fee=kw.pop('fee',0),cash_rate=kw.pop('cash_rate',0),rebalance=kw.pop('rebalance',False),limits={s:10 for s in p},**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/cash_engine.py", line 2, in simulate
+    raise NotImplementedError('Research ledger is not yet implemented')
+NotImplementedError: Research ledger is not yet implemented
+
+======================================================================
+ERROR: test_fees_lots_and_nonnegative_cash (__main__.CashChecks.test_fees_lots_and_nonnegative_cash)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 22, in test_fees_lots_and_nonnegative_cash
+    r=run(prices(),fee=.01,weekly=1050)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 14, in run
+    return simulate(p,kw.pop('events',[]),start=kw.pop('start','2023-01-02'),end=kw.pop('end','2023-01-12'),weekly=kw.pop('weekly',1000),fee=kw.pop('fee',0),cash_rate=kw.pop('cash_rate',0),rebalance=kw.pop('rebalance',False),limits={s:10 for s in p},**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/cash_engine.py", line 2, in simulate
+    raise NotImplementedError('Research ledger is not yet implemented')
+NotImplementedError: Research ledger is not yet implemented
+
+======================================================================
+ERROR: test_flat_funding_is_not_profit (__main__.CashChecks.test_flat_funding_is_not_profit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 19, in test_flat_funding_is_not_profit
+    r=run(prices()); self.assertAlmostEqual(r['daily'][-1]['equity'],2000)
+      ^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 14, in run
+    return simulate(p,kw.pop('events',[]),start=kw.pop('start','2023-01-02'),end=kw.pop('end','2023-01-12'),weekly=kw.pop('weekly',1000),fee=kw.pop('fee',0),cash_rate=kw.pop('cash_rate',0),rebalance=kw.pop('rebalance',False),limits={s:10 for s in p},**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/cash_engine.py", line 2, in simulate
+    raise NotImplementedError('Research ledger is not yet implemented')
+NotImplementedError: Research ledger is not yet implemented
+
+======================================================================
+ERROR: test_missing_day_is_not_relabelled (__main__.CashChecks.test_missing_day_is_not_relabelled)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 52, in test_missing_day_is_not_relabelled
+    r=run(p,end='2023-01-04'); self.assertEqual(r['trades'][0]['date'],'2023-01-03')
+      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 14, in run
+    return simulate(p,kw.pop('events',[]),start=kw.pop('start','2023-01-02'),end=kw.pop('end','2023-01-12'),weekly=kw.pop('weekly',1000),fee=kw.pop('fee',0),cash_rate=kw.pop('cash_rate',0),rebalance=kw.pop('rebalance',False),limits={s:10 for s in p},**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/cash_engine.py", line 2, in simulate
+    raise NotImplementedError('Research ledger is not yet implemented')
+NotImplementedError: Research ledger is not yet implemented
+
+======================================================================
+ERROR: test_open_limit_blocks_trade (__main__.CashChecks.test_open_limit_blocks_trade)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 56, in test_open_limit_blocks_trade
+    r=simulate(p,[],start='2023-01-02',end='2023-01-04',weekly=1000,fee=0,cash_rate=0,rebalance=False,limits={'x':.10})
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/cash_engine.py", line 2, in simulate
+    raise NotImplementedError('Research ledger is not yet implemented')
+NotImplementedError: Research ledger is not yet implemented
+
+======================================================================
+ERROR: test_quarterly_flat_assets_only_lose_fees (__main__.CashChecks.test_quarterly_flat_assets_only_lose_fees)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 60, in test_quarterly_flat_assets_only_lose_fees
+    r=run(p,end='2023-04-10',weekly=4100,fee=.001,rebalance=True)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 14, in run
+    return simulate(p,kw.pop('events',[]),start=kw.pop('start','2023-01-02'),end=kw.pop('end','2023-01-12'),weekly=kw.pop('weekly',1000),fee=kw.pop('fee',0),cash_rate=kw.pop('cash_rate',0),rebalance=kw.pop('rebalance',False),limits={s:10 for s in p},**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/cash_engine.py", line 2, in simulate
+    raise NotImplementedError('Research ledger is not yet implemented')
+NotImplementedError: Research ledger is not yet implemented
+
+======================================================================
+ERROR: test_record_date_missing_stops_for_held_asset (__main__.CashChecks.test_record_date_missing_stops_for_held_asset)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 78, in test_record_date_missing_stops_for_held_asset
+    with self.assertRaises(ValueError):run(p,events=e)
+                                       ^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 14, in run
+    return simulate(p,kw.pop('events',[]),start=kw.pop('start','2023-01-02'),end=kw.pop('end','2023-01-12'),weekly=kw.pop('weekly',1000),fee=kw.pop('fee',0),cash_rate=kw.pop('cash_rate',0),rebalance=kw.pop('rebalance',False),limits={s:10 for s in p},**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/cash_engine.py", line 2, in simulate
+    raise NotImplementedError('Research ledger is not yet implemented')
+NotImplementedError: Research ledger is not yet implemented
+
+======================================================================
+ERROR: test_same_flows_across_arms (__main__.CashChecks.test_same_flows_across_arms)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 64, in test_same_flows_across_arms
+    a=run(p,end='2023-04-10',rebalance=True);b=run(p,end='2023-04-10');c=run({'x':p['x']},end='2023-04-10')
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 14, in run
+    return simulate(p,kw.pop('events',[]),start=kw.pop('start','2023-01-02'),end=kw.pop('end','2023-01-12'),weekly=kw.pop('weekly',1000),fee=kw.pop('fee',0),cash_rate=kw.pop('cash_rate',0),rebalance=kw.pop('rebalance',False),limits={s:10 for s in p},**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/cash_engine.py", line 2, in simulate
+    raise NotImplementedError('Research ledger is not yet implemented')
+NotImplementedError: Research ledger is not yet implemented
+
+======================================================================
+ERROR: test_split_conserves_wealth (__main__.CashChecks.test_split_conserves_wealth)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 47, in test_split_conserves_wealth
+    r=run(p,events=[dict(symbol='x',type='split',ex_date='2023-01-04',ratio=5,event_id='s')],end='2023-01-06')
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/test_cash_engine.py", line 14, in run
+    return simulate(p,kw.pop('events',[]),start=kw.pop('start','2023-01-02'),end=kw.pop('end','2023-01-12'),weekly=kw.pop('weekly',1000),fee=kw.pop('fee',0),cash_rate=kw.pop('cash_rate',0),rebalance=kw.pop('rebalance',False),limits={s:10 for s in p},**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/study/cash_engine.py", line 2, in simulate
+    raise NotImplementedError('Research ledger is not yet implemented')
+NotImplementedError: Research ledger is not yet implemented
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.003s
+
+FAILED (errors=12)

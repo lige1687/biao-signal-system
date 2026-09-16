@@ -1,0 +1,520 @@
+[
+  {
+    "id": "E01",
+    "label": "initial False never counts toward consolidation",
+    "status": "pass",
+    "details": {
+      "actual": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2
+      ],
+      "expected": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "id": "E02",
+    "label": "20-bar interruption retains existing age",
+    "status": "pass",
+    "details": {
+      "actual": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ]
+    }
+  },
+  {
+    "id": "E03",
+    "label": "21st absent bar resets; no new age until true",
+    "status": "pass",
+    "details": {
+      "actual": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "id": "E04",
+    "label": "full OHLC first watch requires126 valid sideways bars",
+    "status": "pass",
+    "details": {
+      "effective_sideways_bars_at_watch": 126,
+      "watch_position": 244
+    }
+  },
+  {
+    "id": "E05",
+    "label": "exact3 accepted",
+    "status": "pass",
+    "details": {
+      "open": 10.0,
+      "target": 13.0,
+      "stop": 9.0,
+      "expected": "open_at_end",
+      "actual_reason": "open_at_end",
+      "exit_date": null,
+      "r_net": null,
+      "meta": {
+        "entry_reason": "",
+        "entry_accepted": true,
+        "actual_reward_risk": 3.0
+      }
+    }
+  },
+  {
+    "id": "E06",
+    "label": "below3 rejected",
+    "status": "pass",
+    "details": {
+      "open": 10.0,
+      "target": 12.999,
+      "stop": 9.0,
+      "expected": "skipped_actual_reward_risk_below_3",
+      "actual_reason": "skipped_actual_reward_risk_below_3",
+      "exit_date": null,
+      "r_net": null,
+      "meta": {
+        "entry_reason": "",
+        "entry_accepted": false,
+        "actual_reward_risk": 2.9990000000000006
+      }
+    }
+  },
+  {
+    "id": "E07",
+    "label": "missing target rejected",
+    "status": "pass",
+    "details": {
+      "open": 10.0,
+      "target": null,
+      "stop": 9.0,
+      "expected": "skipped_target_unavailable_at_entry",
+      "actual_reason": "skipped_target_unavailable_at_entry",
+      "exit_date": null,
+      "r_net": null,
+      "meta": {
+        "entry_reason": "",
+        "entry_accepted": false,
+        "actual_reward_risk": null
+      }
+    }
+  },
+  {
+    "id": "E08",
+    "label": "open equal stop rejected as unentered",
+    "status": "pass",
+    "details": {
+      "open": 9.0,
+      "target": 14.0,
+      "stop": 9.0,
+      "expected": "skipped_open_at_or_below_stop",
+      "actual_reason": "skipped_open_at_or_below_stop",
+      "exit_date": null,
+      "r_net": null,
+      "meta": {
+        "entry_reason": "",
+        "entry_accepted": false,
+        "actual_reward_risk": null
+      }
+    }
+  },
+  {
+    "id": "E09",
+    "label": "open below stop rejected as unentered",
+    "status": "pass",
+    "details": {
+      "open": 8.9,
+      "target": 14.0,
+      "stop": 9.0,
+      "expected": "skipped_open_at_or_below_stop",
+      "actual_reason": "skipped_open_at_or_below_stop",
+      "exit_date": null,
+      "r_net": null,
+      "meta": {
+        "entry_reason": "",
+        "entry_accepted": false,
+        "actual_reward_risk": null
+      }
+    }
+  },
+  {
+    "id": "E10",
+    "label": "NaN open rejected",
+    "status": "pass",
+    "details": {
+      "open": NaN,
+      "target": 14.0,
+      "stop": 9.0,
+      "expected": "skipped_invalid_entry_price",
+      "actual_reason": "skipped_invalid_entry_price",
+      "exit_date": null,
+      "r_net": null,
+      "meta": {
+        "entry_reason": "",
+        "entry_accepted": false,
+        "actual_reward_risk": null
+      }
+    }
+  },
+  {
+    "id": "E11",
+    "label": "infinite target rejected",
+    "status": "pass",
+    "details": {
+      "open": 10.0,
+      "target": Infinity,
+      "stop": 9.0,
+      "expected": "skipped_invalid_target_price",
+      "actual_reason": "skipped_invalid_target_price",
+      "exit_date": null,
+      "r_net": null,
+      "meta": {
+        "entry_reason": "",
+        "entry_accepted": false,
+        "actual_reward_risk": null
+      }
+    }
+  },
+  {
+    "id": "E12",
+    "label": "NaN stop rejected",
+    "status": "pass",
+    "details": {
+      "open": 10.0,
+      "target": 14.0,
+      "stop": NaN,
+      "expected": "skipped_invalid_stop_price",
+      "actual_reason": "skipped_invalid_stop_price",
+      "exit_date": null,
+      "r_net": null,
+      "meta": {
+        "entry_reason": "",
+        "entry_accepted": false,
+        "actual_reward_risk": null
+      }
+    }
+  },
+  {
+    "id": "E13",
+    "label": "target equal open rejected",
+    "status": "pass",
+    "details": {
+      "open": 10.0,
+      "target": 10.0,
+      "stop": 9.0,
+      "expected": "skipped_target_not_above_entry",
+      "actual_reason": "skipped_target_not_above_entry",
+      "exit_date": null,
+      "r_net": null,
+      "meta": {
+        "entry_reason": "",
+        "entry_accepted": false,
+        "actual_reward_risk": null
+      }
+    }
+  },
+  {
+    "id": "E14",
+    "label": "public entry helper and engine reject consistently",
+    "status": "pass",
+    "details": [
+      {
+        "helper": {
+          "accepted": true,
+          "reason": "accepted",
+          "entry_price": 10.0,
+          "stop_price": 9.0,
+          "target_price": 13.0,
+          "actual_reward_risk": 3.0
+        },
+        "engine": "open_at_end",
+        "accepted_matches": true,
+        "reason_matches": true
+      },
+      {
+        "helper": {
+          "accepted": false,
+          "reason": "skipped_actual_reward_risk_below_3",
+          "entry_price": 10.9,
+          "stop_price": 9.0,
+          "target_price": 14.0,
+          "actual_reward_risk": 1.6315789473684206
+        },
+        "engine": "skipped_actual_reward_risk_below_3",
+        "accepted_matches": true,
+        "reason_matches": true
+      },
+      {
+        "helper": {
+          "accepted": false,
+          "reason": "skipped_open_at_or_below_stop",
+          "entry_price": 9.0,
+          "stop_price": 9.0,
+          "target_price": 14.0,
+          "actual_reward_risk": null
+        },
+        "engine": "skipped_open_at_or_below_stop",
+        "accepted_matches": true,
+        "reason_matches": true
+      },
+      {
+        "helper": {
+          "accepted": false,
+          "reason": "skipped_target_unavailable_at_entry",
+          "entry_price": 10.0,
+          "stop_price": 9.0,
+          "target_price": null,
+          "actual_reward_risk": null
+        },
+        "engine": "skipped_target_unavailable_at_entry",
+        "accepted_matches": true,
+        "reason_matches": true
+      },
+      {
+        "helper": {
+          "accepted": false,
+          "reason": "skipped_invalid_target_price",
+          "entry_price": 10.0,
+          "stop_price": 9.0,
+          "target_price": null,
+          "actual_reward_risk": null
+        },
+        "engine": "skipped_invalid_target_price",
+        "accepted_matches": true,
+        "reason_matches": true
+      }
+    ]
+  },
+  {
+    "id": "E15",
+    "label": "public B3 helper preserves dual actions and limits alignment to ambush",
+    "status": "pass",
+    "details": [
+      {
+        "variant": "breakout",
+        "actual": false,
+        "expected": false
+      },
+      {
+        "variant": "ambush",
+        "actual": true,
+        "expected": true
+      },
+      {
+        "variant": "breakout",
+        "actual": true,
+        "expected": true
+      },
+      {
+        "variant": "breakout",
+        "actual": false,
+        "expected": false
+      }
+    ]
+  },
+  {
+    "id": "E16",
+    "label": "no next bar remains unentered",
+    "status": "pass",
+    "details": {
+      "actual_reason": "signal_at_end_not_entered"
+    }
+  }
+]

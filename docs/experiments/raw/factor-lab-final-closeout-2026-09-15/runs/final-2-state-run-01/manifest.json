@@ -1,0 +1,122 @@
+{
+  "task": "factor-research-workbench-v1 / concentrated-repair",
+  "synthetic": true,
+  "title": "合成算法验证，非真实收益/有效性证据",
+  "production_authorization": "not_authorized",
+  "effectiveness_claim": "none；本运行不证明任何因子有效",
+  "spec_bindings": {
+    "experiment_backtest_principles": "docs/research/experiment-backtest-principles.md@v1.1",
+    "definition_standard": "docs/research/definition-standard.md@1.1.0",
+    "ai_execution_contract": "docs/research/ai-execution-contract.md@1.0.1",
+    "experiment_report_template": "docs/research/experiment-report-template.md@1.1.0",
+    "plan": "docs/superpowers/plans/2026-09-14-factor-research-workbench-v1.md@1.0.0",
+    "repair_plan": "docs/superpowers/plans/2026-09-14-factor-lab-concentrated-repair.md@1.0.0"
+  },
+  "registry": {
+    "version": "1.2.0",
+    "canonical_sha256": "6773ef5a75c5a2209612cf27452a05fdfc0067d1e9bd579c133737dc580de007"
+  },
+  "definition_cards_sha256": {
+    "candidate:lei.dual_ma.bull_state@draft-1": "3d0d7f7a77f21dd58ce9f85601944483c4ecd3876b19ae7792c0d972ef73f8ea",
+    "breadth.csi300.b50.common@1.0.0": "95c95b9d188934e02a45d3bc461b17e99786aa84abcecf44abc96ad604a79887",
+    "breadth.csi300.b200.common@1.0.0": "2c0f989a2d1d9d16db5d0505aeae4ffb01230c5950ca7986a4e19423697f0463"
+  },
+  "code_identity": {
+    "scripts/run_factor_lab.py": "17a7bc63bc97893f24ee72861836d64e65298b18b4d53c67041ef999cc4613d5",
+    "src/lei_signal/domain/rules_config.py": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031",
+    "src/lei_signal/features/indicators.py": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+    "src/lei_signal/research/definitions.py": "b6d5a35532644c371ffbfc541a21bd52c05114db9fcb1cc3071c1965ed41ad59",
+    "src/lei_signal/research/factor_diagnostics.py": "70de5549e2831a4353d5000e011e5c93ef4c9798ce4909da943d079997d73a08",
+    "src/lei_signal/research/factor_lab/__init__.py": "ea269601b6b4fa5f1bb70f2dff555aca5a7afa236babc8005a8b4e7fd2d036c4",
+    "src/lei_signal/research/factor_lab/adapters.py": "27596fd66d918cacf9db7a6ae2cdd11b408d7d46f3c9889ac2d35a42e7748020",
+    "src/lei_signal/research/factor_lab/attribution.py": "6d9b756cda1dfc8b6d6c9de8f8a12ecbd4adbe1fc28e30eba962e64437f47e93",
+    "src/lei_signal/research/factor_lab/contracts.py": "d9ff0e864a8f4600c134972e9815acc2143f1b7227e17de570fed4901e0988bc",
+    "src/lei_signal/research/factor_lab/diagnostics.py": "da84ca7b13502a9669e09d5c0c3b610b75e557a3b939742d8ac400f037b99cc8",
+    "src/lei_signal/research/factor_lab/runner.py": "97b49d9e14d5740a2b7f8e04cbb5a4d18e32d59e819e4a804d1d068f39f23917",
+    "src/lei_signal/research/factor_lab/validation.py": "815769ca7440782f9275167562d81ba6e11baf955b7b5e1ef9f8137f87d290b6",
+    "src/lei_signal/research/momentum_prototype.py": "5425e4f5494710041ae42816bf259ac7cdc1ed6aaef01986ac1d3d34d90e568f",
+    "src/lei_signal/rules/dual_ma.py": "5c41da87036e0e318bacab663aa5509d73f99f301f805a76559b016b99aa3f7c",
+    "src/lei_signal/rules/lei_color.py": "ae6f3a2547cc37dd1ebdfea1bea206f932defdd8cd90d4061630914c0fc9d4d7"
+  },
+  "protocol": {
+    "path": "protocol-2-state.json",
+    "version": "1.2.0",
+    "file_sha256": "7b3cd8aaa58c337023ab1e68ffed589d46e9bfd081f9feb91c60bfc24baeee11",
+    "canonical_sha256": "65c5974162c23fc8effc2c5c220c2413ae2cda002c5a41ff041dbffa938e6e8f"
+  },
+  "data_declarations": {
+    "price_scale": "arbitrary_positive_units_synthetic",
+    "calendar": "pandas_bdate_range_synthetic_not_exchange_calendar",
+    "timezone": "Asia/Shanghai",
+    "currency": "synthetic_units_not_cny"
+  },
+  "inputs": {
+    "bars_dm_a": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_bars_dm_a.csv",
+      "sha256": "824142ed06ee0e9f6b55d0bb599b0f7acdaea6a5076f3133c31147715eb85487"
+    },
+    "bars_dm_b": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_bars_dm_b.csv",
+      "sha256": "cee05419e8e096f27853f6d22ad2234fd7fb1ff6ae4fd522e8f40db8ea072d1d"
+    },
+    "state_breadth_close": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_breadth_close.csv",
+      "sha256": "374da151042a538f4915fd8578c3f205450f3380277aa9d4cca57f42e8f530ca"
+    },
+    "state_membership": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_membership.json",
+      "sha256": "cc18619c78aca9f043adfd81dc44f8ed81fdf86578a3c5c60d5b79e4506523d7"
+    }
+  },
+  "targets_effective": {
+    "entry_offset": 1,
+    "exit_offset": 22
+  },
+  "split_protocol": null,
+  "segment_cutoffs": null,
+  "attempt_history": [
+    {
+      "attempt": "closeout-protocol-v1.2.0",
+      "outcome": "success",
+      "reason": "S2收口：必查集合改由独立期望产物权威化；v1.1.1协议保留为上一版冻结历史"
+    }
+  ],
+  "executor_model": "not_declared_in_protocol（实际模型见执行报告）",
+  "outputs": {
+    "diagnostics_constant_breadth_ic.json": "9b12373018a3c739a11f7ac50bd4ec1c693bd2e1f5f7013bfa1df04370ac1bc4",
+    "diagnostics_state_outcomes.json": "0557bd323c4798eb0eed17c7f97a7b3e9bb4447c262537e383508f5c5a11604e",
+    "diagnostics_time_series_state.json": "749aef17cd666cbd1861367b7d12f40aea7f44d0c461913536af13f40d8dbeab",
+    "protocol.source.json": "7b3cd8aaa58c337023ab1e68ffed589d46e9bfd081f9feb91c60bfc24baeee11",
+    "quality.json": "9f0931dfed006d311ad5e4427418430652874ccfd85f587c0ab8b82ae2f24531",
+    "run.log": "5b566bd5606593ba6f339e35dec21b71c7ca48f8e12f83d3da32c26b3f6e387b",
+    "summary.md": "17c324b175813c58017e7d22fda2484da30b319074b91f7dcbc0a49189f08ed1",
+    "targets_state_outcomes.csv": "31edb49908ff5ee3c6bd4040cc85a97040aa5863a0bcf9541ab59a88a2681628",
+    "targets_time_series.csv": "82d18bc416866feceff125e7a453a566925fafadf941f6b4fc79acc9306c35b5",
+    "values_b200.csv": "a2e0e38f8841c3d60f074df014dc3e329678b9daf636ca8aa1cb8b5665579d0a",
+    "values_b200.meta.json": "146650929e3383e0d55f3a3c0c29ab85fe37337dc61a90e49a7c95cd7ee0eac8",
+    "values_b50.csv": "a2e0e38f8841c3d60f074df014dc3e329678b9daf636ca8aa1cb8b5665579d0a",
+    "values_b50.meta.json": "ac13b5cfbf3797af728ea531ecab7838c547d1eda109f3fdddea4d9e9cbeb0af",
+    "values_dm.csv": "52385526d6314494010de226dd69d587b24331e1f5707a199f6c464f7734e121",
+    "values_dm.meta.json": "89ffd0a0d3fa82fbf58d0580f382e324e1921358f77604628dd93fade325369c"
+  },
+  "artifact_metadata": {
+    "dm": {
+      "reference": "candidate:lei.dual_ma.bull_state@draft-1",
+      "unit": "boolean",
+      "entity_axis": "instrument",
+      "synthetic": true
+    },
+    "b50": {
+      "reference": "breadth.csi300.b50.common@1.0.0",
+      "unit": "fraction",
+      "entity_axis": "universe",
+      "synthetic": true
+    },
+    "b200": {
+      "reference": "breadth.csi300.b200.common@1.0.0",
+      "unit": "fraction",
+      "entity_axis": "universe",
+      "synthetic": true
+    }
+  }
+}

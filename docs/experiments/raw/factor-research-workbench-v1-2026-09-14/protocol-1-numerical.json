@@ -1,0 +1,190 @@
+{
+  "protocol_id": "factor-lab-demo-1-numerical",
+  "version": "1.0.0",
+  "kind": "predictive_diagnostic",
+  "data_mode": "synthetic",
+  "synthetic": true,
+  "timezone": "Asia/Shanghai",
+  "evaluation_cutoff": "2030-01-01T15:00:00+08:00",
+  "case": "numerical",
+  "title": "①多产品数值与排名研究：同一API适配3/5实体、手算IC、时间切分",
+  "expectation_tolerance_abs": 1e-06,
+  "attempt_history": [
+    {
+      "attempt": "fixture-v1",
+      "outcome": "abandoned",
+      "reason": "合成产品代码 'X' 与复用 build_marks 的6位代码 zfill 假设冲突；协议冻结前改用 '100001' 重建夹具（未运行任何正式案例）"
+    },
+    {
+      "attempt": "fixture-v2",
+      "outcome": "success",
+      "reason": "当前 synthetic_inputs 内容；期望全部来自独立手算脚本"
+    }
+  ],
+  "inputs": {
+    "prices_3": {
+      "path": "synthetic_inputs/numerical_prices_3.csv",
+      "sha256": "6c23da1210949916b49ac9de0f9f518e6a14771152d61eb1184b60769ee01af3",
+      "format": "wide_prices"
+    },
+    "prices_5": {
+      "path": "synthetic_inputs/numerical_prices_5.csv",
+      "sha256": "8a32ad90031cd6466133f8b9a60c88cf9d0ddbff451cd9a8ec56b272a1b8eb89",
+      "format": "wide_prices"
+    }
+  },
+  "calculations": [
+    {
+      "id": "mom3",
+      "reference": "mixed.momentum.raw@1.0.0",
+      "input": "prices_3",
+      "evaluate_with_targets": true
+    },
+    {
+      "id": "mom5",
+      "reference": "mixed.momentum.raw@1.0.0",
+      "input": "prices_5",
+      "evaluate_with_targets": true
+    },
+    {
+      "id": "rv3",
+      "reference": "mixed.rv20@1.0.0",
+      "input": "prices_3"
+    },
+    {
+      "id": "d50_3",
+      "reference": "trend.distance50@1.0.0",
+      "input": "prices_3"
+    },
+    {
+      "id": "d200_3",
+      "reference": "trend.distance200@1.0.0",
+      "input": "prices_3"
+    }
+  ],
+  "targets": {
+    "source": "prices_3",
+    "entry_offset": 1,
+    "exit_offset": 22,
+    "observations": {
+      "start": "2017-12-20",
+      "end": "2018-01-24"
+    },
+    "note": "固定 t+1→t+22 经济价格变化；是测量目标，不是可成交开盘或完整账户收益"
+  },
+  "diagnostics": {
+    "type": "cross_section_ic",
+    "min_pairs": 3,
+    "quantiles": {
+      "q": 2
+    }
+  },
+  "validation": {
+    "split": {
+      "dev": [
+        "2017-12-20",
+        "2017-12-29"
+      ],
+      "validation": [
+        "2018-01-01",
+        "2018-01-10"
+      ],
+      "holdout": [
+        "2018-01-11",
+        "2018-01-24"
+      ]
+    },
+    "seen": {
+      "dev": true,
+      "validation": true,
+      "holdout": false
+    },
+    "preprocessing": "none"
+  },
+  "trials": [
+    {
+      "trial_id": "t-001",
+      "definition_reference": "mixed.momentum.raw@1.0.0",
+      "parameters": {},
+      "split_id": "s1",
+      "outcome": "abandoned",
+      "selection_basis": "夹具v1放弃（符号冲突），非结果挑选",
+      "seen_segments": [
+        "dev"
+      ],
+      "run_version": "fixture-v1"
+    },
+    {
+      "trial_id": "t-002",
+      "definition_reference": "mixed.momentum.raw@1.0.0",
+      "parameters": {},
+      "split_id": "s1",
+      "outcome": "success",
+      "selection_basis": "预注册合成演示；无参数挑选",
+      "seen_segments": [
+        "dev"
+      ],
+      "run_version": "fixture-v2"
+    }
+  ],
+  "checks": {
+    "price_scale_invariance": {
+      "input": "prices_3",
+      "reference": "mixed.momentum.raw@1.0.0",
+      "factor": 2.0
+    },
+    "append_future_invariance": {
+      "input": "prices_3",
+      "reference": "mixed.rv20@1.0.0",
+      "keep_rows": 280
+    }
+  },
+  "expectations_probe": {
+    "row252_date": "2017-12-20",
+    "primary_id": "mom3",
+    "secondary_id": "mom5",
+    "first_valid_probe": {
+      "calculation": "mom3",
+      "entity": "alpha"
+    },
+    "value_probes": {
+      "momentum_alpha_row252": {
+        "calculation": "mom3",
+        "entity": "alpha"
+      },
+      "rv20_alpha_row252": {
+        "calculation": "rv3",
+        "entity": "alpha"
+      },
+      "distance50_alpha_row252": {
+        "calculation": "d50_3",
+        "entity": "alpha"
+      },
+      "distance200_alpha_row252": {
+        "calculation": "d200_3",
+        "entity": "alpha"
+      }
+    },
+    "audit_pairs_from": "mom3",
+    "audit_targets_of": "prices_3"
+  },
+  "expectations": {
+    "momentum_first_valid_row": 253,
+    "momentum_alpha_row252": 8.95949559,
+    "rv20_alpha_row252": 5.923488742023525e-09,
+    "distance50_alpha_row252": 0.2630064816900779,
+    "distance200_alpha_row252": 1.2937180362899454,
+    "ic_mean_3": 1.0,
+    "n_periods_3": 26,
+    "min_n_3": 3,
+    "ic_mean_5": 1.0,
+    "min_n_5": 4,
+    "max_n_5": 5,
+    "scale_invariance_max_diff": 0.0,
+    "append_invariance_max_diff": 0.0,
+    "dev_label_crossing_n": 24,
+    "validation_label_crossing_n": 24,
+    "trial_history_status": "provided"
+  },
+  "expectation_basis": "全部期望取自 independent-expectations.json（derive_expectations.py 独立算术，不 import lei_signal）：等比增长路径的动量/目标排序完全一致 → 每期IC=1；epsilon缺5天 → 5实体某些期n=4；标签窗21天 → dev/validation各8个观察日×3实体=24个样本对跨段（审计按样本对计数）。"
+}

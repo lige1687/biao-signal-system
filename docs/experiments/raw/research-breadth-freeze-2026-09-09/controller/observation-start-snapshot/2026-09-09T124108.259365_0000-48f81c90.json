@@ -1,0 +1,77 @@
+{
+  "recorded_at": "2026-09-09T12:41:08.259365+00:00",
+  "timezone": "Asia/Shanghai",
+  "rules_frozen_at": "2026-09-09T12:41:08.221177+00:00",
+  "stage": "input_observation_only",
+  "signal_observation_started": false,
+  "reason": "Matching point-in-time live inputs and initialization have not been approved by a documented readiness check. File change is not a signal.",
+  "inputs": [
+    {
+      "id": "all_a_quotes",
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_klines.parquet",
+      "purpose": "日常逐股报价，当前观察不代表已匹配研究源",
+      "exists": true,
+      "sha256": "118f95d42e640bad1df07b21c48eb341e73f9b83a60a0c5805772e6ace412a2b",
+      "bytes": 11332700,
+      "mtime_ns": 1788943297955188861,
+      "stable_during_read": true
+    },
+    {
+      "id": "all_a_codes",
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_codes.json",
+      "purpose": "当前股票列表，非历史完整名单",
+      "exists": true,
+      "sha256": "9cee3855d0149f87a3f8b1ebfe072307f3966e2524eec4c7e167763c35742379",
+      "bytes": 66753,
+      "mtime_ns": 1788942618851999111,
+      "stable_during_read": true
+    },
+    {
+      "id": "daily_breadth",
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_ma_breadth.json",
+      "purpose": "日常算法不等于冻结共同200分母",
+      "exists": true,
+      "sha256": "dc1143ba077c9c13eb8e5a7ae5fc4cfe378fce956410634de54a51b8e141df13",
+      "bytes": 371,
+      "mtime_ns": 1788856896581418318,
+      "stable_during_read": true
+    },
+    {
+      "id": "csi300_history",
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/csi300_ma_breadth_history.json",
+      "purpose": "当前成分回溯，不等于历史名单",
+      "exists": true,
+      "sha256": "65b6ea1bacab734c0747e417fd5bcb6659802fb8c95ae2dc6c59b0ae19ed7588",
+      "bytes": 302964,
+      "mtime_ns": 1787884329131070392,
+      "stable_during_read": true
+    },
+    {
+      "id": "frozen_all_a",
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/breadth_all_a.parquet",
+      "purpose": "封存历史只到2026-06-30",
+      "exists": true,
+      "sha256": "c4c8e32925fb87d1fe39729d2ffb4a357e3537cf84b6c41bf9ae5fa5d0d24ed8",
+      "bytes": 137089,
+      "mtime_ns": 1788949080277128684,
+      "stable_during_read": true
+    },
+    {
+      "id": "frozen_csi300",
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/breadth_csi300.parquet",
+      "purpose": "封存历史只到2026-06-30",
+      "exists": true,
+      "sha256": "63fa7f0ef837c161194fb8f1f17140069074812085c8b449b93aa4d5f2998a58",
+      "bytes": 67860,
+      "mtime_ns": 1788948984872225274,
+      "stable_during_read": true
+    }
+  ],
+  "config_sha256": "07dee2f1871b82ed30c89b6e391a4caa47847c9e2e793b8c118782627ed84df8",
+  "changed_since_previous_record": true,
+  "source_bytes_archived": false,
+  "historical_available_at": "unknown; file mtime is not market availability",
+  "signals": null,
+  "trades": null,
+  "returns": null
+}

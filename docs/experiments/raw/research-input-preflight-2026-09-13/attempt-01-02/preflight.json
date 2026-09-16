@@ -1,0 +1,194 @@
+{
+ "schema_version": "research-input-preflight/1.0",
+ "request": {
+  "snapshot_dir": "docs/experiments/raw/research-identity-wiring-2026-09-10/canonical-snapshot-v2",
+  "calendar_path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+  "publication_path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-evidence.json",
+  "actions_path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/normalized-actions.json",
+  "registry_path": "docs/research/definitions.v1.json",
+  "refs": [],
+  "use": "description",
+  "evaluation_start": "2019-09-02",
+  "evaluation_end": "2026-06-30"
+ },
+ "integrity": {
+  "verified": true,
+  "hash_mismatches": [],
+  "instruments": [
+   "159652.SZ",
+   "510300.SS",
+   "512400.SS",
+   "512890.SS",
+   "513870.SS",
+   "515050.SS",
+   "515130.SS",
+   "515170.SS",
+   "515300.SS",
+   "515880.SS",
+   "516220.SS",
+   "518850.SS",
+   "562590.SS",
+   "588000.SS"
+  ],
+  "rows": 18916,
+  "first_date": "2019-09-02",
+  "last_date": "2026-06-30",
+  "per_instrument_fields": {
+   "159652.SZ": {
+    "missing_declared_fields": [],
+    "rows": 822
+   },
+   "510300.SS": {
+    "missing_declared_fields": [],
+    "rows": 1652
+   },
+   "512400.SS": {
+    "missing_declared_fields": [],
+    "rows": 1652
+   },
+   "512890.SS": {
+    "missing_declared_fields": [],
+    "rows": 1651
+   },
+   "513870.SS": {
+    "missing_declared_fields": [],
+    "rows": 643
+   },
+   "515050.SS": {
+    "missing_declared_fields": [],
+    "rows": 1626
+   },
+   "515130.SS": {
+    "missing_declared_fields": [],
+    "rows": 1489
+   },
+   "515170.SS": {
+    "missing_declared_fields": [],
+    "rows": 1321
+   },
+   "515300.SS": {
+    "missing_declared_fields": [],
+    "rows": 1640
+   },
+   "515880.SS": {
+    "missing_declared_fields": [],
+    "rows": 1648
+   },
+   "516220.SS": {
+    "missing_declared_fields": [],
+    "rows": 1286
+   },
+   "518850.SS": {
+    "missing_declared_fields": [],
+    "rows": 1470
+   },
+   "562590.SS": {
+    "missing_declared_fields": [],
+    "rows": 654
+   },
+   "588000.SS": {
+    "missing_declared_fields": [],
+    "rows": 1362
+   }
+  },
+  "date_index_note": "日期以 datetime64 索引承载，与快照声明的 date 字段一一对应；索引类型 datetime64[ns]"
+ },
+ "calendar": {
+  "loaded": true,
+  "authority": "exchange_official",
+  "publisher": "深圳证券交易所（SZSE）",
+  "coverage_complete": true,
+  "missing_months": [],
+  "day_incomplete_months": [],
+  "invalid_records": 0
+ },
+ "data_uses": {
+  "description": {
+   "verdict": "usable",
+   "declared": true,
+   "default_accepted": true,
+   "reason": "",
+   "blockers": {
+    "fixable": [],
+    "structural": []
+   }
+  },
+  "ranking": {
+   "verdict": "conditional",
+   "declared": true,
+   "default_accepted": false,
+   "reason": "starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "blockers": {
+    "fixable": [
+     "starts_after_window"
+    ],
+    "structural": []
+   }
+  },
+  "research_signal": {
+   "verdict": "conditional",
+   "declared": true,
+   "default_accepted": false,
+   "reason": "zero_volume_days: 存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）; action_available_at_unknown: 21/21 条行动缺少 available_at（其中 3 条有 announcement_date 可作「不晚于该日已公布」的下界，18 条完全未知）；下界不等于精确到达时刻，一律不写入 available_at。本批只能用于历史重建，不得声称当时可知",
+   "blockers": {
+    "fixable": [
+     "action_available_at_unknown",
+     "zero_volume_days"
+    ],
+    "structural": []
+   }
+  },
+  "attribution": {
+   "verdict": "conditional",
+   "declared": true,
+   "default_accepted": false,
+   "reason": "zero_volume_days: 存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）; action_available_at_unknown: 21/21 条行动缺少 available_at（其中 3 条有 announcement_date 可作「不晚于该日已公布」的下界，18 条完全未知）；下界不等于精确到达时刻，一律不写入 available_at。本批只能用于历史重建，不得声称当时可知",
+   "blockers": {
+    "fixable": [
+     "action_available_at_unknown",
+     "zero_volume_days"
+    ],
+    "structural": []
+   }
+  },
+  "comparison": {
+   "verdict": "conditional",
+   "declared": true,
+   "default_accepted": false,
+   "reason": "starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "blockers": {
+    "fixable": [
+     "starts_after_window"
+    ],
+    "structural": []
+   }
+  },
+  "diagnostic": {
+   "verdict": "usable",
+   "declared": true,
+   "default_accepted": true,
+   "reason": "",
+   "blockers": {
+    "fixable": [],
+    "structural": []
+   }
+  }
+ },
+ "registry": {
+  "loaded": true,
+  "container_version": "1.2.0",
+  "objects": 81,
+  "sources": 34,
+  "sources_verified": true
+ },
+ "objects": {},
+ "request_satisfied": true,
+ "errors": [],
+ "limitations": [
+  "日历路径与哈希不等于发布时点已获证明；跨所与年度覆盖限制照旧保留",
+  "既有机器绑定限制：validate_registry 仍要求 standard_version==1.0.0，而正文标准已为 1.1.0；如实保留，不改版本字符串冒充迁移",
+  "request_satisfied=true 仅表示本次已实现的输入检查满足，不等于公式实现、历史可得时点、因子有效或交易授权"
+ ],
+ "calculation_run": false,
+ "production_authorized": false
+}

@@ -1,0 +1,20 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_________________________ test_c3_dca_topic_real_state _________________________
+
+env = namespace(client=<starlette.testclient.TestClient object at 0x110e8a410>, db='/private/var/folders/l3/zrwg12bn3lz_zny9...of-yongbiaoli/pytest-370/test_c3_dca_topic_real_state0/env'), app=<fastapi.applications.FastAPI object at 0x10fcc1350>)
+
+    def test_c3_dca_topic_real_state(env):
+        with patch.object(Path, "home", return_value=env.tmp):
+            blocks = agent_routes._topic_blocks("dca", SYMBOL)
+        state = json.dumps(blocks["dca_state"], ensure_ascii=False)
+        assert "signals" in state
+        assert any(isinstance(x, (list, dict)) for x in blocks["dca_state"].values())
+>       assert blocks["dca_evidence_refs"]["meta"]["refs"]  # 可引用研究（含哈希）
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'meta'
+
+tests/unit/test_discussion_contract_r2.py:479: KeyError
+=========================== short test summary info ============================
+FAILED tests/unit/test_discussion_contract_r2.py::test_c3_dca_topic_real_state
+1 failed in 4.88s

@@ -1,0 +1,36 @@
+{
+  "generated_at_utc": "2026-09-08T06:26:01.602314+00:00",
+  "window": [
+    "2015-01-01",
+    "2026-06-30"
+  ],
+  "status": "conditionally_ready_for_known_event_daily_price_approximation",
+  "price_mode": "cash_proportional_v1",
+  "formal_strategy_price_convention_changed": false,
+  "formal_all_action_coverage_complete": false,
+  "formal_exchange_calendar_complete": false,
+  "formal_intraday_status_complete": false,
+  "absolute_volume_unit_verified": false,
+  "known_company_action_data_ready": true,
+  "ordinary_price_checks_unexplained_violations": 0,
+  "blocked_dates_ref": "execution-parameters.json",
+  "requires_before_account_simulation": [
+    "root must freeze same-day-resale policy",
+    "root must verify technical-account implementation and cash/entitlement handling",
+    "must accept documented incompleteness and label limited simulation"
+  ],
+  "hard_stop_on": [
+    "input hash change",
+    "unexplained action/price discontinuity",
+    "trading blocked dates",
+    "absolute-volume sizing without verified unit",
+    "same-day full OHLC used for opening decisions",
+    "need full execution-service claim while coverage incomplete"
+  ],
+  "not_computed": [
+    "candidates",
+    "positions",
+    "strategy returns",
+    "account returns"
+  ]
+}

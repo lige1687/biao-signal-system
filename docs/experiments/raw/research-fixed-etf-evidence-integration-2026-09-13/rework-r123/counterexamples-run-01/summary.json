@@ -1,0 +1,174 @@
+{
+ "R1-0-control": {
+  "validated_ids": [
+   "512890-official-split",
+   "515050-listing-announcement",
+   "515050-official-split",
+   "515300-515300_20231214_MO7U",
+   "515300-515300_20240618_QXY9",
+   "515300-515300_20240913_SAOV",
+   "515300-515300_20241128_QVEK",
+   "515300-515300_20250612_HGW2",
+   "515300-515300_20250915_NN2J",
+   "515880-official-split",
+   "562590-listing-announcement"
+  ],
+  "bridge_products": [
+   "515050.SS",
+   "562590.SS"
+  ],
+  "tamper_detected": false,
+  "note": "control",
+  "rejected_reasons": {}
+ },
+ "R1-1-listing-date-tampered": {
+  "validated_ids": [
+   "512890-official-split",
+   "515050-listing-announcement",
+   "515050-official-split",
+   "515300-515300_20231214_MO7U",
+   "515300-515300_20240618_QXY9",
+   "515300-515300_20240913_SAOV",
+   "515300-515300_20241128_QVEK",
+   "515300-515300_20250612_HGW2",
+   "515300-515300_20250915_NN2J",
+   "515880-official-split",
+   "562590-listing-announcement"
+  ],
+  "bridge_products": [
+   "515050.SS",
+   "562590.SS"
+  ],
+  "tamper_detected": false,
+  "note": "反例被接受（缺陷在）",
+  "rejected_reasons": {}
+ },
+ "R1-2-listing-without-bridge-purpose": {
+  "validated_ids": [
+   "512890-official-split",
+   "515050-listing-announcement",
+   "515050-official-split",
+   "515300-515300_20231214_MO7U",
+   "515300-515300_20240618_QXY9",
+   "515300-515300_20240913_SAOV",
+   "515300-515300_20241128_QVEK",
+   "515300-515300_20250612_HGW2",
+   "515300-515300_20250915_NN2J",
+   "515880-official-split",
+   "562590-listing-announcement"
+  ],
+  "bridge_products": [
+   "515050.SS",
+   "562590.SS"
+  ],
+  "tamper_detected": false,
+  "note": "反例被接受（缺陷在）",
+  "rejected_reasons": {}
+ },
+ "R1-3-amounts-string-nan": {
+  "validated_ids": [
+   "512890-official-split",
+   "515050-listing-announcement",
+   "515050-official-split",
+   "515300-515300_20231214_MO7U",
+   "515300-515300_20240618_QXY9",
+   "515300-515300_20240913_SAOV",
+   "515300-515300_20241128_QVEK",
+   "515300-515300_20250612_HGW2",
+   "515300-515300_20250915_NN2J",
+   "515880-official-split",
+   "562590-listing-announcement"
+  ],
+  "bridge_products": [
+   "515050.SS",
+   "562590.SS"
+  ],
+  "tamper_detected": false,
+  "note": "反例被接受（缺陷在）",
+  "rejected_reasons": {}
+ },
+ "R1-4-inverted-time-range": {
+  "validated_ids": [
+   "512890-official-split",
+   "515050-listing-announcement",
+   "515050-official-split",
+   "515300-515300_20231214_MO7U",
+   "515300-515300_20240618_QXY9",
+   "515300-515300_20240913_SAOV",
+   "515300-515300_20241128_QVEK",
+   "515300-515300_20250612_HGW2",
+   "515300-515300_20250915_NN2J",
+   "515880-official-split",
+   "562590-listing-announcement"
+  ],
+  "bridge_products": [
+   "515050.SS",
+   "562590.SS"
+  ],
+  "tamper_detected": false,
+  "note": "反例被接受（缺陷在）",
+  "rejected_reasons": {}
+ },
+ "R1-5-referenced-pdf-hash-zeros": {
+  "validated_ids": [
+   "512890-official-split",
+   "515050-listing-announcement",
+   "515050-official-split",
+   "515300-515300_20231214_MO7U",
+   "515300-515300_20240618_QXY9",
+   "515300-515300_20240913_SAOV",
+   "515300-515300_20241128_QVEK",
+   "515300-515300_20250612_HGW2",
+   "515300-515300_20250915_NN2J",
+   "515880-official-split",
+   "562590-listing-announcement"
+  ],
+  "bridge_products": [
+   "515050.SS",
+   "562590.SS"
+  ],
+  "tamper_detected": false,
+  "note": "反例被接受（缺陷在）",
+  "rejected_reasons": {}
+ },
+ "R2-0-control": {
+  "exit_code": 0,
+  "manifest_written": true,
+  "reference_rows": 6,
+  "stdout_tail": [
+   "binding: {\"mixed.momentum.raw@1.0.0\": {\"directly_satisfiable\": true, \"missing_fields\": []}, \"mixed.price.economic@1.0.0\": {\"directly_satisfiable\": true, \"missing_fields\": []}}",
+   "momentum keys: checked=6 mismatch=0"
+  ],
+  "defect_present": false
+ },
+ "R2-1-extra-reference-key": {
+  "exit_code": 0,
+  "manifest_written": true,
+  "reference_rows": 7,
+  "stdout_tail": [
+   "binding: {\"mixed.momentum.raw@1.0.0\": {\"directly_satisfiable\": true, \"missing_fields\": []}, \"mixed.price.economic@1.0.0\": {\"directly_satisfiable\": true, \"missing_fields\": []}}",
+   "momentum keys: checked=6 mismatch=0"
+  ],
+  "defect_present": true
+ },
+ "R2-2-nan-reference-value": {
+  "exit_code": 0,
+  "manifest_written": true,
+  "reference_rows": 6,
+  "stdout_tail": [
+   "binding: {\"mixed.momentum.raw@1.0.0\": {\"directly_satisfiable\": true, \"missing_fields\": []}, \"mixed.price.economic@1.0.0\": {\"directly_satisfiable\": true, \"missing_fields\": []}}",
+   "momentum keys: checked=6 mismatch=0"
+  ],
+  "defect_present": true
+ },
+ "R4-1-codes-deleted-still-runs": {
+  "exit_code": 0,
+  "manifest_written": true,
+  "defect_present": true,
+  "note": "实际执行的两文件（prepare CLI/qualification_bundle）不在 codes 时仍退出 0"
+ },
+ "_meta": {
+  "purpose": "返修前复现主控 §11.3/§11.4/§11.5 反例；原文件未动",
+  "date": "2026-09-13"
+ }
+}

@@ -381,98 +381,82 @@ export default function WorkspacePage() {
 
   return (
     <div className="workspace">
-      <div className="ws-top">
-        <button
-          className="btn small"
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-          title={sidebarOpen ? "收起自选栏" : "展开自选栏"}
-        >
-          {sidebarOpen ? "◀" : "▶"}
-        </button>
-        <strong>LEI 看盘系统</strong>
-        <MarketBreadthBadge />
-        {data && (
-          <>
+      <header className="ws-top">
+        <div className="ws-context-row">
+          <div className="ws-context-title">
+            <button className="btn small ws-sidebar-toggle"
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              aria-expanded={sidebarOpen}
+              title={sidebarOpen ? "收起自选栏" : "展开自选栏"}>
+              {sidebarOpen ? "◀" : "▶"}
+            </button>
+            <h1>看盘</h1>
+            <span className="ws-context-caption">趋势 · 结构 · 触发条件</span>
+          </div>
+          <div className="ws-context-tools">
+            <MarketBreadthBadge />
+            {dashboard && <span className="ws-data-time" title="行情数据时间（盘中为实时快照，只代表行情刷新时刻）">
+              行情 {data?.meta.data_time
+                ? new Date(data.meta.data_time).toLocaleTimeString("zh-CN", { hour12: false })
+                : "--"} · {data?.meta.is_intraday_forming ? "盘中" : "已收盘"}
+            </span>}
+            {data && <span className="ws-data-time" title="系统信号按该日收盘数据判定；与行情时间、信号扫描时间不是同一个时间">
+              信号判定日 {data.assessment.as_of}
+            </span>}
+            <button className="btn small" disabled={refreshAll.isPending}
+              onClick={() => refreshAll.mutate()}>
+              {refreshAll.isPending ? "刷新中…" : "刷新"}
+            </button>
+          </div>
+        </div>
+        {data && <div className="ws-quote-row">
+          <div className="ws-instrument">
             <span className="ws-symbol">{data.display_name}</span>
-            <span className="muted">{data.symbol}</span>
-            {data.market_cn && <span className="tag">{data.market_cn}</span>}
-            <span className={`price ${changeCls}`}>
-              {lastClose != null ? lastClose.toFixed(2) : "--"}
-            </span>
+            <span className="ws-instrument-meta">{data.symbol}{data.market_cn ? ` · ${data.market_cn}` : ""}</span>
+          </div>
+          <div className="ws-quote" aria-label="最新价格与涨跌幅">
+            <span className={`price ${changeCls}`}>{lastClose != null ? lastClose.toFixed(2) : "--"}</span>
             <span className={`change ${changeCls}`}>
               {changePct != null ? `${changePct > 0 ? "+" : ""}${changePct.toFixed(2)}%` : "--"}
             </span>
-            <span
-              onClick={() => pickConcept("signal_color", "顶栏 · LEI 颜色")}
-              style={{ cursor: "pointer" }}
-              title="点击查看解释"
-            >
-              <ColorBadge color={data.assessment.color} colorCn={data.assessment.color_cn} />
-            </span>
-            {data.market_badge && (
-              <span
-                className={`badge-chip ${data.market_badge.summary}`}
-                title={data.market_badge.reasons_cn.join("\n") || undefined}
-              >
-                市场环境：{data.market_badge.summary_cn}
-              </span>
-            )}
-            {sectorChip && (
-              <button
-                type="button"
-                className={`badge-chip sector-link-chip ${SECTOR_CHIP_TONE[sectorChip.stage ?? ""] ?? ""}`}
-                onClick={() => navigate("/sectors")}
-                title={`「${sectorChip.name}」板块阶段 · 点击打开板块趋势工作台（research_proxy）`}
-              >
-                {sectorChip.name} · {SECTOR_CHIP_CN[sectorChip.stage ?? ""] ?? "样本不足"}
-              </button>
-            )}
-          </>
-        )}
-        <span style={{ flex: 1 }} />
-        {data && (
-          <button
-            className="btn small"
-            onClick={() => setShowCreatePlan(true)}
-            title="基于当前信号建立执行计划"
-          >
-            建立执行计划
+          </div>
+          <button className="ws-state" onClick={() => pickConcept("signal_color", "顶栏 · BIAO 颜色")}
+            title="查看道路状态的解释">
+            <span className="ws-state-label">道路状态</span>
+            <ColorBadge color={data.assessment.color} colorCn={data.assessment.color_cn} descriptive />
           </button>
-        )}
-        {data && (
-          <button
-            className="btn small"
-            onClick={() => setShowBuyPoint(true)}
-            title="买点分析"
-          >
-            买点分析
-          </button>
-        )}
-        {data && !showBuyPoint && (
-          <button
-            className="btn small"
-            onClick={() => setExpCollapsed((c) => !c)}
-            title={expCollapsed ? "展开右侧解释面板" : "收起右侧解释面板"}
-          >
-            {expCollapsed ? "解释" : "收起解释"}
-          </button>
-        )}
-        {dashboard && (
-          <span className="muted" style={{ fontSize: 11 }}>
-            {data?.meta.data_time
-              ? new Date(data.meta.data_time).toLocaleTimeString("zh-CN", { hour12: false })
-              : "--"}{" "}
-            · {data?.meta.is_intraday_forming ? "盘中" : "已收盘"}
+          <span className="badge-chip ws-stage-chip"
+            title={data.assessment.stage_change_reason_cn
+              ? `当前阶段 · 系统判定：${data.assessment.stage_change_reason_cn}`
+              : "当前阶段 · 系统判定，详细依据见下方「当前观察」"}>
+            阶段 {data.assessment.stage_cn}
           </span>
-        )}
-        <button
-          className="btn small primary"
-          disabled={refreshAll.isPending}
-          onClick={() => refreshAll.mutate()}
-        >
-          {refreshAll.isPending ? "刷新中…" : "刷新"}
-        </button>
-      </div>
+          <div className="ws-quote-context">
+            {data.market_badge && <span className={`badge-chip ${data.market_badge.summary}`}
+              title={data.market_badge.reasons_cn.join("\n") || undefined}>
+              市场环境：{data.market_badge.summary_cn}
+            </span>}
+            {sectorChip && <button type="button"
+              className={`badge-chip sector-link-chip ${SECTOR_CHIP_TONE[sectorChip.stage ?? ""] ?? ""}`}
+              onClick={() => navigate("/sectors")}
+              title={`「${sectorChip.name}」板块阶段 · 点击打开板块趋势工作台（研究代理）`}>
+              {sectorChip.name} · {SECTOR_CHIP_CN[sectorChip.stage ?? ""] ?? "样本不足"}
+            </button>}
+          </div>
+          <div className="ws-quote-actions">
+            {!showBuyPoint && <button className="btn small"
+              onClick={() => setExpCollapsed((c) => !c)}
+              aria-expanded={!expCollapsed}
+              title={expCollapsed ? "展开右侧解释面板" : "收起右侧解释面板"}>
+              {expCollapsed ? "解释" : "收起解释"}
+            </button>}
+            <button className="btn small" onClick={() => setShowCreatePlan(true)}
+              title="基于当前信号建立执行计划">建立执行计划</button>
+            <button className="btn small primary" onClick={() => setShowBuyPoint(true)}
+              title="买点分析">买点分析</button>
+          </div>
+        </div>}
+      </header>
 
       {refreshError && (
         <div className="error-banner">
@@ -622,9 +606,9 @@ export default function WorkspacePage() {
                       </span>
                     </>
                   )}
-                  {legend.colorMode === "lei_state" && (
+                  {legend.colorMode === "biao_state" && (
                     <span className="muted">
-                      LEI 着色：颜色=当日状态（绿/灰/黑）；涨跌方向看「今日概述」开高低收
+                      BIAO 着色：颜色=当日状态（绿/灰/黑）；涨跌方向看「今日概述」开高低收
                     </span>
                   )}
                   {/* 量能颜色图例：与下方柱状图一一对应 */}

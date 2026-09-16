@@ -1,0 +1,47 @@
+--- docs/experiments/raw/research-tenth-2026-09-08/cd-contract/research-package/src/lei_signal/rules/two_b_reversal.py	2026-09-08 15:44:06
++++ docs/experiments/raw/research-eleventh-2026-09-08/research-package/src/lei_signal/rules/two_b_reversal.py	2026-09-08 16:02:15
+@@ -161,6 +161,7 @@
+     reclaim_state: pd.Series,
+     joint_state: pd.Series,
+     start_position: int,
++    superseded_position: int | None = None,
+ ) -> list[SignalEvent]:
+     """单个前低 L1 的 2B 循环：跌破 -> 创新低 L2 -> 收回 -> 三版本 / 失效。"""
+     events: list[SignalEvent] = []
+@@ -176,6 +177,14 @@
+     v_done = {SUB_RULE_V1: False, SUB_RULE_V2: False, SUB_RULE_V3: False}
+ 
+     for position in range(start_position, len(frame)):
++        # 新的已确认前低只阻止旧参照在此后新建流程。若旧流程已经破位，
++        # 后来出现新前低时是否终止尚无策略定义，因此继续沿用既有流程。
++        if (
++            not broken_down
++            and superseded_position is not None
++            and position >= superseded_position
++        ):
++            return events
+         row = frame.iloc[position]
+         close = float(row["close"])
+         low = float(row["low"])
+@@ -302,16 +311,20 @@
+     by_day = {timestamp.date(): position for position, timestamp in enumerate(frame.index)}
+ 
+     events: list[SignalEvent] = []
+-    for l1 in lows:
++    for low_number, l1 in enumerate(lows):
+         start_position = by_day.get(l1.available_date)
+         if start_position is None:
+             continue
++        superseded_position = None
++        if low_number + 1 < len(lows):
++            superseded_position = by_day.get(lows[low_number + 1].available_date)
+         events.extend(
+             _scan_l1(
+                 frame, symbol, spec,
+                 l1=l1, reclaim_bars=reclaim_bars,
+                 reclaim_state=reclaim_state, joint_state=joint_state,
+                 start_position=start_position,
++                superseded_position=superseded_position,
+             )
+         )
+     events.sort(key=lambda e: (e.available_date, e.event_id))

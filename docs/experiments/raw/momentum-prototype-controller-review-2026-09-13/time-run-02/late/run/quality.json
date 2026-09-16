@@ -1,0 +1,117 @@
+{
+ "integrity": {
+  "verified": true,
+  "hash_mismatches": [],
+  "instruments": 2,
+  "rows": 604
+ },
+ "sources_verified": true,
+ "sources_error": null,
+ "uses": {
+  "description": {
+   "verdict": "usable",
+   "declared": true,
+   "default_accepted": true,
+   "reason": ""
+  },
+  "ranking": {
+   "verdict": "usable",
+   "declared": true,
+   "default_accepted": true,
+   "reason": ""
+  },
+  "research_signal": {
+   "verdict": "usable",
+   "declared": true,
+   "default_accepted": true,
+   "reason": ""
+  }
+ },
+ "objects": {
+  "mixed.momentum.raw@1.0.0": {
+   "missing_fields": [],
+   "directly_satisfiable": true
+  },
+  "mixed.price.economic@1.0.0": {
+   "missing_fields": [],
+   "directly_satisfiable": true
+  }
+ },
+ "coverage": {
+  "complete": true,
+  "missing_months": [],
+  "day_incomplete_months": []
+ },
+ "action_findings": [
+  {
+   "level": "info",
+   "code": "action_acquired_after_effective",
+   "instrument": "510300.SS",
+   "message": "available_at 晚于生效日：属生效后取得，可用于注明修订性质的历史重建，但不证明生效日之前已可知",
+   "evidence": {
+    "index": 0,
+    "event_id": "SYNTH-TIME-DIV",
+    "symbol": "510300.SS",
+    "type": "cash_dividend"
+   }
+  },
+  {
+   "level": "info",
+   "code": "coverage_unproven",
+   "instrument": null,
+   "message": "没有行动记录不等于已证明该期间没有分红、拆分或停牌；本文件缺连续官方「无其他行动」证明",
+   "evidence": {}
+  }
+ ],
+ "price_findings": [
+  {
+   "code": "action_acquired_after_effective",
+   "instrument": "510300.SS",
+   "message": "available_at 晚于生效日：属生效后取得，可用于注明修订性质的历史重建，但不证明生效日之前已可知",
+   "evidence": {
+    "index": 0,
+    "event_id": "SYNTH-TIME-DIV",
+    "symbol": "510300.SS",
+    "type": "cash_dividend"
+   }
+  },
+  {
+   "code": "coverage_unproven",
+   "instrument": null,
+   "message": "没有行动记录不等于已证明该期间没有分红、拆分或停牌；本文件缺连续官方「无其他行动」证明",
+   "evidence": {}
+  }
+ ],
+ "identity_errors": [],
+ "time_violations": [
+  {
+   "product": "510300.SS",
+   "event_id": "SYNTH-TIME-DIV",
+   "effective_date": "2025-06-16",
+   "available_at": "2030-01-01 10:00:00+08:00",
+   "observation_date": "2025-06-30",
+   "reason": "available_at（2030-01-01 10:00:00+08:00）晚于观察日 2025-06-30 的决策时点"
+  }
+ ],
+ "input_times": {
+  "snapshot_timing": null,
+  "per_instrument_fetched_at": {
+   "510300.SS": {
+    "fetched_at": null,
+    "first_date": "2025-01-02",
+    "last_date": "2026-02-27"
+   },
+   "159915.SZ": {
+    "fetched_at": null,
+    "first_date": "2025-01-02",
+    "last_date": "2026-02-27"
+   }
+  },
+  "actions_available_at": {
+   "declared": 1,
+   "unknown": 0,
+   "note": "行动原始记录的 available_at 未知条目只能事后重建，不冒充历史可知输入"
+  }
+ },
+ "policy": "not_applicable_no_account_policy"
+}

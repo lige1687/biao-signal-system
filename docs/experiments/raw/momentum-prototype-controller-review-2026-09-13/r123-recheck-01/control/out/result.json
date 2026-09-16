@@ -1,0 +1,46 @@
+{
+ "evidence_bundle": {
+  "schema_version": "fixed-etf-evidence-bundle/1.1",
+  "validated": 1,
+  "unresolved": 0,
+  "conflicts": 0
+ },
+ "econ_stats": {
+  "510300.SS": {
+   "rows": 260,
+   "economic_index_filled": 260,
+   "economic_index_blank": 0,
+   "close_dropped_nonpositive_or_nan": 0,
+   "unknown_available_at_events": []
+  },
+  "159915.SZ": {
+   "rows": 260,
+   "economic_index_filled": 260,
+   "economic_index_blank": 0,
+   "close_dropped_nonpositive_or_nan": 0,
+   "unknown_available_at_events": []
+  }
+ },
+ "binding": {
+  "mixed.momentum.raw@1.0.0": {
+   "directly_satisfiable": true,
+   "missing_fields": []
+  },
+  "mixed.price.economic@1.0.0": {
+   "directly_satisfiable": true,
+   "missing_fields": []
+  }
+ },
+ "momentum_key_check": {
+  "unique_reference_keys": 16,
+  "checked": 16,
+  "mismatch": 0,
+  "duplicate_reference_rows": [],
+  "invalid_reference_values": [],
+  "missing_in_derived": [],
+  "unknown_product_keys": [],
+  "tolerance": "atol=rtol=1e-12（双方均为有限值后才比较）",
+  "complete_consistent": true
+ },
+ "observation_cutoff_assumption": "观察/决策截点 15:00 为按收盘设置的保守测试假设，不是已证实的数据到达时间或实盘决策时刻"
+}

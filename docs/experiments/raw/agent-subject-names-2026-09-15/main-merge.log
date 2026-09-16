@@ -1,0 +1,446 @@
+Updating 6edce256..cb71cad6
+Fast-forward
+ config/newsfeed.json                               |  111 +-
+ configs/dca_evidence.json                          |  177 +
+ configs/semantic_states.v1.json                    |  234 +
+ .../agent-03b-runtime-integration-2026-09-09.md    |   81 +
+ ...-conversation-controller-closeout-2026-09-15.md |   43 +
+ ...t-conversation-controller-recheck-2026-09-15.md |   69 +
+ ...nt-conversation-controller-review-2026-09-15.md |   80 +
+ ...sation-reliability-and-experience-2026-09-14.md |  189 +
+ ...gent-plan-flow-controller-recheck-2026-09-14.md |   53 +
+ ...agent-plan-flow-controller-review-2026-09-13.md |   98 +
+ ...gent-plan-review-and-confirmation-2026-09-13.md |   67 +
+ ...an-review-and-confirmation-cfixes-2026-09-13.md |   66 +
+ .../agent-runtime-deployment-2026-09-15.md         |   57 +
+ ...t-runtime-integration-preparation-2026-09-15.md |   73 +
+ ...er-experience-controller-closeout-2026-09-13.md |   66 +
+ ...ser-experience-controller-recheck-2026-09-13.md |   77 +
+ ...user-experience-controller-review-2026-09-13.md |  107 +
+ .../agent-user-experience-phase1-2026-09-13.md     |  107 +
+ ...ent-user-experience-phase1-rework-2026-09-13.md |  108 +
+ ...nt-user-experience-phase1-rework2-2026-09-13.md |   58 +
+ docs/experiments/dca-adaptive-exits-2026-09-08.md  |  110 +
+ docs/experiments/dca-combos-exit-2026-09-07.md     |  131 +
+ docs/experiments/dca-deep20-episodes-2026-09-08.md |  122 +
+ .../dca-entry-timing-table-2026-09-07.md           |  125 +
+ .../dca-final-form-assembly-2026-09-08.md          |  136 +
+ docs/experiments/dca-joint-policy-2026-09-08.md    |  103 +
+ docs/experiments/dca-kc-rebal-core-2026-09-07.md   |  136 +
+ .../deployment-manifest.json                       |  296 +
+ .../code-changes-fixround.diff                     | 1632 ++++++
+ .../fingerprints.md                                |   25 +
+ .../acceptance-A-db-lock.json                      |  344 ++
+ .../acceptance-B1-timings.json                     |   17 +
+ .../acceptance-B2-timings.json                     |   10 +
+ .../acceptance-C-full-transcript.json              |  457 ++
+ .../acceptance-C-rounds.json                       |   41 +
+ .../acceptance-D-result.json                       |   24 +
+ .../acceptance-E-before-after.json                 |    5 +
+ .../acceptance-R2-history-retry.json               |   18 +
+ .../baseline/model-timeout-app-config.log          |    2 +
+ .../baseline/runtime-log-excerpts.md               |   16 +
+ .../code-changes.diff                              |  979 ++++
+ .../environment-iso-real-C.json                    |   15 +
+ .../environment-iso-real.json                      |   19 +
+ .../environment-iso-stub.json                      |   19 +
+ .../environment.json                               |   24 +
+ .../inputs-and-acceptance.md                       |   64 +
+ .../repro_db_lock.py                               |   96 +
+ .../screens/B1-done.png                            |  Bin 0 -> 175437 bytes
+ .../screens/B1-facts-ready.png                     |  Bin 0 -> 149630 bytes
+ .../screens/B2-facts-ready.png                     |  Bin 0 -> 162178 bytes
+ .../screens/B2-failed-kept.png                     |  Bin 0 -> 195790 bytes
+ .../screens/C-round1.png                           |  Bin 0 -> 175263 bytes
+ .../screens/C-round2.png                           |  Bin 0 -> 249285 bytes
+ .../screens/C-round3.png                           |  Bin 0 -> 249353 bytes
+ .../screens/C-round4.png                           |  Bin 0 -> 249314 bytes
+ .../screens/D-console-after-switch.png             |  Bin 0 -> 53302 bytes
+ .../screens/D-console-facts.png                    |  Bin 0 -> 211377 bytes
+ .../screens/D-ws-after-reload.png                  |  Bin 0 -> 274313 bytes
+ .../screens/D-ws-facts.png                         |  Bin 0 -> 158686 bytes
+ .../screens/D-ws-new-session-no-late.png           |  Bin 0 -> 114795 bytes
+ .../screens/D-ws-p2-facts.png                      |  Bin 0 -> 158686 bytes
+ .../screens/D-ws-restored.png                      |  Bin 0 -> 274313 bytes
+ .../screens/R2-after-retry.png                     |  Bin 0 -> 175893 bytes
+ .../screens/R2-final-restore.png                   |  Bin 0 -> 256866 bytes
+ .../screens/R2-history-retry-visible.png           |  Bin 0 -> 175404 bytes
+ .../screens/R2-interrupted.png                     |  Bin 0 -> 179889 bytes
+ .../serve_iso.py                                   |  125 +
+ .../server-A.log                                   |   13 +
+ .../server-A.pid                                   |    1 +
+ .../server-B.log                                   |    2 +
+ .../server-B.pid                                   |    1 +
+ .../server-C.log                                   |    1 +
+ .../server-C.pid                                   |    1 +
+ .../server-D.log                                   |    1 +
+ .../server-D.pid                                   |    1 +
+ .../server-R2.log                                  |    2 +
+ .../server-R2.pid                                  |    1 +
+ .../stub-B.log                                     |    3 +
+ .../stub-B2.log                                    |   69 +
+ .../stub-D.log                                     |   15 +
+ .../stub-D.pid                                     |    1 +
+ .../stub-R2.log                                    |   72 +
+ .../stub-R2.pid                                    |    1 +
+ .../stub.pid                                       |    1 +
+ .../stub_model.py                                  |   97 +
+ .../tests/front-regressions.log                    |    6 +
+ .../tests/tests-record.md                          |   13 +
+ .../ui_harness.py                                  |  176 +
+ .../ui_harness_d.py                                |  146 +
+ .../ui_harness_r2.py                               |   96 +
+ .../RESULTS-C.json                                 |   69 +
+ .../RESULTS.json                                   |  359 ++
+ .../c-fixes-draft-restore.png                      |  Bin 0 -> 283093 bytes
+ .../g2-armed.png                                   |  Bin 0 -> 312297 bytes
+ .../identity-c-fixes.json                          |    5 +
+ .../identity.json                                  |   10 +
+ .../verify-c-run.log                               |   16 +
+ .../verify-run.log                                 |   16 +
+ .../verify_all.py                                  |  298 +
+ .../verify_c_fixes.py                              |  353 ++
+ .../manifest.json                                  |  267 +
+ .../BASELINE.md                                    |   15 +
+ .../FINGERPRINTS.json                              |   96 +
+ .../SCENARIO-INPUTS.md                             |   83 +
+ .../preview/fake_llm.py                            |   88 +
+ .../preview/preview_server.py                      |   99 +
+ .../screens/00-welcome-1440.png                    |  Bin 0 -> 240640 bytes
+ .../screens/01-scene1-answer-top.png               |  Bin 0 -> 563380 bytes
+ .../screens/01-scene1-lead.png                     |  Bin 0 -> 424567 bytes
+ .../screens/01b-scene1-evidence-actions.png        |  Bin 0 -> 583930 bytes
+ .../screens/02-scene2-degraded.png                 |  Bin 0 -> 599130 bytes
+ .../screens/04-scene4-setup-panel.png              |  Bin 0 -> 622495 bytes
+ .../screens/04b-scene4-selected.png                |  Bin 0 -> 627631 bytes
+ .../screens/04c-scene4-task-created.png            |  Bin 0 -> 625802 bytes
+ .../screens/05-scene5-atr-unsupported.png          |  Bin 0 -> 572936 bytes
+ .../screens/06-scene6-draft-bound.png              |  Bin 0 -> 561142 bytes
+ .../screens/08-scene8-history-restore.png          |  Bin 0 -> 687906 bytes
+ .../screens/09-console-answer.png                  |  Bin 0 -> 315970 bytes
+ .../screens/09b-console-setup-panel.png            |  Bin 0 -> 554334 bytes
+ .../screens/10-console-atr.png                     |  Bin 0 -> 694367 bytes
+ .../screens/11-narrow-390.png                      |  Bin 0 -> 115087 bytes
+ .../R2-EVIDENCE.json                               |   86 +
+ .../identity.json                                  |    5 +
+ .../r2-after-confirm.png                           |  Bin 0 -> 223804 bytes
+ .../r2-history-restore.png                         |  Bin 0 -> 210355 bytes
+ .../r2_plan_flow.py                                |  114 +
+ .../r2c-complete-plan-armed.png                    |  Bin 0 -> 249370 bytes
+ .../r2c-run.log                                    |   13 +
+ .../r2c_complete_plan_confirm.py                   |  102 +
+ .../controller-probes-original-run.json            |   11 +
+ .../controller-probes-original.cjs                 |   42 +
+ .../identity.json                                  |   10 +
+ .../narrow-390-answer-expanded.png                 |  Bin 0 -> 137412 bytes
+ .../narrow-390-panel.png                           |  Bin 0 -> 114295 bytes
+ .../narrow_flow.py                                 |   81 +
+ .../rework-probes-run.err                          |    0
+ .../rework-probes-run.json                         |   60 +
+ .../rework-probes.mjs                              |  156 +
+ .../scene8-history-restore.png                     |  Bin 0 -> 610918 bytes
+ .../scene8-plan-draft.png                          |  Bin 0 -> 614519 bytes
+ .../u1-atr-continue-discussion.png                 |  Bin 0 -> 495480 bytes
+ .../u3-late-response-clean.png                     |  Bin 0 -> 305453 bytes
+ .../u4-scene7-details-expanded.png                 |  Bin 0 -> 818179 bytes
+ .../dca_complete_trades_results.json               | 5697 ++++++++++++++++++++
+ .../deep20_episode_results.json                    |  587 ++
+ .../entry_timing_state_table.json                  |  603 +++
+ .../final_form_assembly_results.json               | 4824 +++++++++++++++++
+ .../dca_joint_policy_results.json                  |  222 +
+ docs/experiments/registry.json                     | 1415 ++---
+ docs/literature-learning/learning-seed.json        | 1279 +++++
+ docs/okr/README.md                                 |   24 +
+ docs/okr/initial.json                              |  518 ++
+ .../plans/2026-09-13-cross-agent-delegation.md     |  473 ++
+ .../plans/2026-09-15-agent-subject-names.md        |    9 +
+ .../2026-09-13-cross-agent-delegation-design.md    |  171 +
+ src/lei_signal/api/app.py                          |   37 +
+ src/lei_signal/api/learning_library.py             |  111 +
+ src/lei_signal/api/routes/agent.py                 | 1739 +++++-
+ src/lei_signal/api/routes/copilot.py               |  264 +-
+ src/lei_signal/api/routes/dca.py                   |  305 ++
+ src/lei_signal/api/routes/learning.py              |   27 +
+ src/lei_signal/api/routes/opportunities.py         |   44 +-
+ src/lei_signal/api/routes/plans.py                 |  345 +-
+ src/lei_signal/api/routes/symbols.py               |    4 +-
+ src/lei_signal/api/routes/upgrades.py              |   57 +
+ src/lei_signal/api/schemas.py                      |   60 +-
+ src/lei_signal/api/upgrade_models.py               |   91 +
+ src/lei_signal/api/upgrades_store.py               |  212 +
+ src/lei_signal/backtest/service.py                 |  127 +-
+ src/lei_signal/copilot/backtest_requests.py        | 1033 ++++
+ src/lei_signal/copilot/chat_identity.py            |  389 ++
+ src/lei_signal/copilot/resolve.py                  |  243 +
+ src/lei_signal/copilot/semantic_states.py          |   90 +
+ src/lei_signal/copilot/subjects.py                 |  163 +
+ src/lei_signal/data_provenance.py                  |  646 +++
+ src/lei_signal/dca/__init__.py                     |   10 +
+ src/lei_signal/dca/presets.py                      |   85 +
+ src/lei_signal/dca/service.py                      |  366 ++
+ src/lei_signal/dca/state.py                        |  282 +
+ src/lei_signal/plans/conformance.py                |   13 +-
+ src/lei_signal/plans/llm.py                        |  238 +-
+ src/lei_signal/plans/sessions.py                   |   27 +-
+ src/lei_signal/plans/store.py                      |   55 +-
+ src/lei_signal/storage/sqlite_store.py             |  310 ++
+ tests/integration/test_agent_chat_e2e.py           |   15 +-
+ tests/unit/test_agent_incomplete_retry.py          |  210 +
+ tests/unit/test_agent_stream.py                    |   66 +
+ tests/unit/test_agent_subject_names.py             |  141 +
+ tests/unit/test_agent_ux_phase1.py                 |  245 +
+ tests/unit/test_copilot_ops.py                     |    3 +
+ tests/unit/test_discussion_backtest_03b.py         |  586 ++
+ tests/unit/test_discussion_contract_r2.py          |  618 +++
+ tests/unit/test_discussion_identifier_spans.py     |   29 +
+ tests/unit/test_llm_anthropic_stream.py            |  194 +
+ tests/unit/test_llm_stream_completion.py           |  195 +
+ tests/unit/test_plan_confirm_guard.py              |  332 ++
+ tests/unit/test_plan_review_flow_p1.py             |  161 +
+ tests/unit/test_plans_conformance_routes.py        |   15 +-
+ web/package.json                                   |   12 +-
+ web/run-agent-price-regression.mjs                 |   16 +
+ web/run-agent-tasks-regression.mjs                 |   38 +
+ web/run-agent-ux-regression.mjs                    |   97 +
+ web/run-agent-workspace-regression.mjs             |   19 +
+ web/run-evidence-card-regression.mjs               |   95 +
+ web/src/App.tsx                                    |    5 +
+ web/src/api/client.ts                              |   54 +-
+ web/src/api/upgrades.ts                            |   27 +
+ web/src/components/AgentConsole.tsx                |  747 ++-
+ web/src/components/AgentMarkdown.tsx               |   39 +-
+ web/src/components/ChartControls.tsx               |    4 +-
+ web/src/components/ColorBadge.tsx                  |    9 +-
+ web/src/components/CreatePlanDialog.tsx            |   42 +-
+ web/src/components/EvidenceCardView.tsx            |  138 +
+ web/src/components/KlineChart.tsx                  |   35 +-
+ web/src/components/PlanDraftCard.tsx               |  434 ++
+ web/src/components/ReviewDrawer.tsx                |   15 +-
+ web/src/components/agent/AnswerText.tsx            |   35 +
+ web/src/components/agent/BacktestSetupPanel.tsx    |  145 +
+ web/src/components/agent/NextStepsBar.tsx          |   61 +
+ web/src/components/agent/ResultContext.tsx         |   16 +
+ web/src/components/agent/priceLinks.ts             |   46 +
+ web/src/components/copilot/CopilotCards.tsx        |   79 +-
+ web/src/main.tsx                                   |    5 +
+ web/src/pages/AgentWorkspacePage.tsx               | 1139 ++--
+ web/src/pages/DetailPage.tsx                       |    2 +-
+ web/src/pages/LearningLibraryPage.tsx              |  468 ++
+ web/src/pages/MindsetPage.tsx                      |  432 ++
+ web/src/pages/UpgradesPage.tsx                     |  197 +
+ web/src/pages/WorkspacePage.tsx                    |    2 +-
+ web/src/pages/agent-workspace.css                  |  220 +
+ web/src/pages/agentWorkspaceLogic.ts               |   44 +
+ web/src/pages/upgrades.css                         |   72 +
+ web/src/styles.css                                 |  306 +-
+ web/src/types.ts                                   |  302 +-
+ web/src/utils/agentUx.ts                           |  168 +
+ web/src/utils/backtestTasks.ts                     |  232 +
+ web/src/utils/resolveRoute.ts                      |   56 +
+ web/src/utils/storageMigration.ts                  |   35 +
+ web/src/workspace-design.css                       |  205 +
+ web/vite.config.ts                                 |    6 +-
+ 240 files changed, 40335 insertions(+), 1955 deletions(-)
+ create mode 100644 configs/dca_evidence.json
+ create mode 100644 configs/semantic_states.v1.json
+ create mode 100644 docs/experiments/agent-03b-runtime-integration-2026-09-09.md
+ create mode 100644 docs/experiments/agent-conversation-controller-closeout-2026-09-15.md
+ create mode 100644 docs/experiments/agent-conversation-controller-recheck-2026-09-15.md
+ create mode 100644 docs/experiments/agent-conversation-controller-review-2026-09-15.md
+ create mode 100644 docs/experiments/agent-conversation-reliability-and-experience-2026-09-14.md
+ create mode 100644 docs/experiments/agent-plan-flow-controller-recheck-2026-09-14.md
+ create mode 100644 docs/experiments/agent-plan-flow-controller-review-2026-09-13.md
+ create mode 100644 docs/experiments/agent-plan-review-and-confirmation-2026-09-13.md
+ create mode 100644 docs/experiments/agent-plan-review-and-confirmation-cfixes-2026-09-13.md
+ create mode 100644 docs/experiments/agent-runtime-deployment-2026-09-15.md
+ create mode 100644 docs/experiments/agent-runtime-integration-preparation-2026-09-15.md
+ create mode 100644 docs/experiments/agent-user-experience-controller-closeout-2026-09-13.md
+ create mode 100644 docs/experiments/agent-user-experience-controller-recheck-2026-09-13.md
+ create mode 100644 docs/experiments/agent-user-experience-controller-review-2026-09-13.md
+ create mode 100644 docs/experiments/agent-user-experience-phase1-2026-09-13.md
+ create mode 100644 docs/experiments/agent-user-experience-phase1-rework-2026-09-13.md
+ create mode 100644 docs/experiments/agent-user-experience-phase1-rework2-2026-09-13.md
+ create mode 100644 docs/experiments/dca-adaptive-exits-2026-09-08.md
+ create mode 100644 docs/experiments/dca-combos-exit-2026-09-07.md
+ create mode 100644 docs/experiments/dca-deep20-episodes-2026-09-08.md
+ create mode 100644 docs/experiments/dca-entry-timing-table-2026-09-07.md
+ create mode 100644 docs/experiments/dca-final-form-assembly-2026-09-08.md
+ create mode 100644 docs/experiments/dca-joint-policy-2026-09-08.md
+ create mode 100644 docs/experiments/dca-kc-rebal-core-2026-09-07.md
+ create mode 100644 docs/experiments/raw/agent-03b-runtime-integration-2026-09-09/deployment-manifest.json
+ create mode 100644 docs/experiments/raw/agent-conversation-fixes-2026-09-15/code-changes-fixround.diff
+ create mode 100644 docs/experiments/raw/agent-conversation-fixes-2026-09-15/fingerprints.md
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/acceptance-A-db-lock.json
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/acceptance-B1-timings.json
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/acceptance-B2-timings.json
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/acceptance-C-full-transcript.json
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/acceptance-C-rounds.json
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/acceptance-D-result.json
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/acceptance-E-before-after.json
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/acceptance-R2-history-retry.json
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/baseline/model-timeout-app-config.log
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/baseline/runtime-log-excerpts.md
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/code-changes.diff
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/environment-iso-real-C.json
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/environment-iso-real.json
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/environment-iso-stub.json
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/environment.json
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/inputs-and-acceptance.md
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/repro_db_lock.py
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/screens/B1-done.png
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/screens/B1-facts-ready.png
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/screens/B2-facts-ready.png
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/screens/B2-failed-kept.png
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/screens/C-round1.png
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/screens/C-round2.png
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/screens/C-round3.png
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/screens/C-round4.png
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/screens/D-console-after-switch.png
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/screens/D-console-facts.png
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/screens/D-ws-after-reload.png
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/screens/D-ws-facts.png
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/screens/D-ws-new-session-no-late.png
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/screens/D-ws-p2-facts.png
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/screens/D-ws-restored.png
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/screens/R2-after-retry.png
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/screens/R2-final-restore.png
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/screens/R2-history-retry-visible.png
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/screens/R2-interrupted.png
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/serve_iso.py
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/server-A.log
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/server-A.pid
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/server-B.log
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/server-B.pid
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/server-C.log
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/server-C.pid
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/server-D.log
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/server-D.pid
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/server-R2.log
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/server-R2.pid
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/stub-B.log
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/stub-B2.log
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/stub-D.log
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/stub-D.pid
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/stub-R2.log
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/stub-R2.pid
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/stub.pid
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/stub_model.py
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/tests/front-regressions.log
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/tests/tests-record.md
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/ui_harness.py
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/ui_harness_d.py
+ create mode 100644 docs/experiments/raw/agent-conversation-reliability-and-experience-2026-09-14/ui_harness_r2.py
+ create mode 100644 docs/experiments/raw/agent-plan-review-and-confirmation-2026-09-13/RESULTS-C.json
+ create mode 100644 docs/experiments/raw/agent-plan-review-and-confirmation-2026-09-13/RESULTS.json
+ create mode 100644 docs/experiments/raw/agent-plan-review-and-confirmation-2026-09-13/c-fixes-draft-restore.png
+ create mode 100644 docs/experiments/raw/agent-plan-review-and-confirmation-2026-09-13/g2-armed.png
+ create mode 100644 docs/experiments/raw/agent-plan-review-and-confirmation-2026-09-13/identity-c-fixes.json
+ create mode 100644 docs/experiments/raw/agent-plan-review-and-confirmation-2026-09-13/identity.json
+ create mode 100644 docs/experiments/raw/agent-plan-review-and-confirmation-2026-09-13/verify-c-run.log
+ create mode 100644 docs/experiments/raw/agent-plan-review-and-confirmation-2026-09-13/verify-run.log
+ create mode 100644 docs/experiments/raw/agent-plan-review-and-confirmation-2026-09-13/verify_all.py
+ create mode 100644 docs/experiments/raw/agent-plan-review-and-confirmation-2026-09-13/verify_c_fixes.py
+ create mode 100644 docs/experiments/raw/agent-runtime-integration-2026-09-15/manifest.json
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/BASELINE.md
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/FINGERPRINTS.json
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/SCENARIO-INPUTS.md
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/preview/fake_llm.py
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/preview/preview_server.py
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/screens/00-welcome-1440.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/screens/01-scene1-answer-top.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/screens/01-scene1-lead.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/screens/01b-scene1-evidence-actions.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/screens/02-scene2-degraded.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/screens/04-scene4-setup-panel.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/screens/04b-scene4-selected.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/screens/04c-scene4-task-created.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/screens/05-scene5-atr-unsupported.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/screens/06-scene6-draft-bound.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/screens/08-scene8-history-restore.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/screens/09-console-answer.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/screens/09b-console-setup-panel.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/screens/10-console-atr.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-2026-09-13/screens/11-narrow-390.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-r2-plan/R2-EVIDENCE.json
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-r2-plan/identity.json
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-r2-plan/r2-after-confirm.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-r2-plan/r2-history-restore.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-r2-plan/r2_plan_flow.py
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-r2-plan/r2c-complete-plan-armed.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-r2-plan/r2c-run.log
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-r2-plan/r2c_complete_plan_confirm.py
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-rework-2026-09-13/controller-probes-original-run.json
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-rework-2026-09-13/controller-probes-original.cjs
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-rework-2026-09-13/identity.json
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-rework-2026-09-13/narrow-390-answer-expanded.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-rework-2026-09-13/narrow-390-panel.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-rework-2026-09-13/narrow_flow.py
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-rework-2026-09-13/rework-probes-run.err
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-rework-2026-09-13/rework-probes-run.json
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-rework-2026-09-13/rework-probes.mjs
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-rework-2026-09-13/scene8-history-restore.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-rework-2026-09-13/scene8-plan-draft.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-rework-2026-09-13/u1-atr-continue-discussion.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-rework-2026-09-13/u3-late-response-clean.png
+ create mode 100644 docs/experiments/raw/agent-user-experience-phase1-rework-2026-09-13/u4-scene7-details-expanded.png
+ create mode 100644 docs/experiments/raw/dca-complete-trades-2026-09-07/dca_complete_trades_results.json
+ create mode 100644 docs/experiments/raw/dca-deep20-episodes-2026-09-08/deep20_episode_results.json
+ create mode 100644 docs/experiments/raw/dca-entry-timing-table-2026-09-07/entry_timing_state_table.json
+ create mode 100644 docs/experiments/raw/dca-final-form-assembly-2026-09-08/final_form_assembly_results.json
+ create mode 100644 docs/experiments/raw/dca-joint-policy-2026-09-08/dca_joint_policy_results.json
+ create mode 100644 docs/literature-learning/learning-seed.json
+ create mode 100644 docs/okr/README.md
+ create mode 100644 docs/okr/initial.json
+ create mode 100644 docs/superpowers/plans/2026-09-13-cross-agent-delegation.md
+ create mode 100644 docs/superpowers/plans/2026-09-15-agent-subject-names.md
+ create mode 100644 docs/superpowers/specs/2026-09-13-cross-agent-delegation-design.md
+ create mode 100644 src/lei_signal/api/learning_library.py
+ create mode 100644 src/lei_signal/api/routes/dca.py
+ create mode 100644 src/lei_signal/api/routes/learning.py
+ create mode 100644 src/lei_signal/api/routes/upgrades.py
+ create mode 100644 src/lei_signal/api/upgrade_models.py
+ create mode 100644 src/lei_signal/api/upgrades_store.py
+ create mode 100644 src/lei_signal/copilot/backtest_requests.py
+ create mode 100644 src/lei_signal/copilot/chat_identity.py
+ create mode 100644 src/lei_signal/copilot/resolve.py
+ create mode 100644 src/lei_signal/copilot/semantic_states.py
+ create mode 100644 src/lei_signal/copilot/subjects.py
+ create mode 100644 src/lei_signal/data_provenance.py
+ create mode 100644 src/lei_signal/dca/__init__.py
+ create mode 100644 src/lei_signal/dca/presets.py
+ create mode 100644 src/lei_signal/dca/service.py
+ create mode 100644 src/lei_signal/dca/state.py
+ create mode 100644 tests/unit/test_agent_incomplete_retry.py
+ create mode 100644 tests/unit/test_agent_subject_names.py
+ create mode 100644 tests/unit/test_agent_ux_phase1.py
+ create mode 100644 tests/unit/test_discussion_backtest_03b.py
+ create mode 100644 tests/unit/test_discussion_contract_r2.py
+ create mode 100644 tests/unit/test_discussion_identifier_spans.py
+ create mode 100644 tests/unit/test_llm_anthropic_stream.py
+ create mode 100644 tests/unit/test_llm_stream_completion.py
+ create mode 100644 tests/unit/test_plan_confirm_guard.py
+ create mode 100644 tests/unit/test_plan_review_flow_p1.py
+ create mode 100644 web/run-agent-price-regression.mjs
+ create mode 100644 web/run-agent-tasks-regression.mjs
+ create mode 100644 web/run-agent-ux-regression.mjs
+ create mode 100644 web/run-agent-workspace-regression.mjs
+ create mode 100644 web/run-evidence-card-regression.mjs
+ create mode 100644 web/src/api/upgrades.ts
+ create mode 100644 web/src/components/EvidenceCardView.tsx
+ create mode 100644 web/src/components/PlanDraftCard.tsx
+ create mode 100644 web/src/components/agent/AnswerText.tsx
+ create mode 100644 web/src/components/agent/BacktestSetupPanel.tsx
+ create mode 100644 web/src/components/agent/NextStepsBar.tsx
+ create mode 100644 web/src/components/agent/ResultContext.tsx
+ create mode 100644 web/src/components/agent/priceLinks.ts
+ create mode 100644 web/src/pages/LearningLibraryPage.tsx
+ create mode 100644 web/src/pages/MindsetPage.tsx
+ create mode 100644 web/src/pages/UpgradesPage.tsx
+ create mode 100644 web/src/pages/agent-workspace.css
+ create mode 100644 web/src/pages/agentWorkspaceLogic.ts
+ create mode 100644 web/src/pages/upgrades.css
+ create mode 100644 web/src/utils/agentUx.ts
+ create mode 100644 web/src/utils/backtestTasks.ts
+ create mode 100644 web/src/utils/resolveRoute.ts
+ create mode 100644 web/src/utils/storageMigration.ts
+ create mode 100644 web/src/workspace-design.css

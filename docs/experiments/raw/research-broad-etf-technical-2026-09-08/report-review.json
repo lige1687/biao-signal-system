@@ -1,0 +1,40 @@
+{
+  "review_date": "2026-09-08",
+  "scope": "read_only_final_report_review",
+  "accounts_rerun": false,
+  "verdict": "pass_pending_root_final_manifest",
+  "checks": {
+    "headline_and_primary_tables_match_results_json": true,
+    "two_fee_ending_equity_table_matches_results_json": true,
+    "annual_claims_match_annual_json": true,
+    "independent_review_counts_match": true,
+    "fees_described_per_side_and_already_deducted": true,
+    "realized_and_open_position_pnl_separated": true,
+    "attribution_respects_different_sizing_and_exit_rules": true,
+    "zero_trade_accounts_not_claimed_as_stable": true,
+    "historical_and_scope_limits_stated": true,
+    "existing_markdown_local_links_checked": 12,
+    "existing_markdown_local_links_missing": 0,
+    "remote_links_format_checked": 4,
+    "remote_links_reopened_in_this_review": false
+  },
+  "coverage": {
+    "profiles": 48,
+    "annual_rows": 576,
+    "calendar_daily_rows": 201552,
+    "trades": 982,
+    "positions": 496,
+    "closed_positions": 486,
+    "open_positions": 10,
+    "candidate_source_rows": 1134
+  },
+  "presentation_note": "The main report shows all 48 ending-equity values; complete second-fee metrics are distributed across linked human-readable and machine-readable files rather than one inline table.",
+  "delivery_dependency": {
+    "path": "docs/experiments/raw/research-broad-etf-technical-2026-09-08/final-manifest.json",
+    "status_at_review_completion": "not_yet_generated_by_design",
+    "reason": "The final manifest must be generated after report-review.md and report-review.json stop changing.",
+    "owner": "root delivery verification"
+  },
+  "open_numeric_or_attribution_findings": [],
+  "writes_after_this_file": "none by this reviewer"
+}

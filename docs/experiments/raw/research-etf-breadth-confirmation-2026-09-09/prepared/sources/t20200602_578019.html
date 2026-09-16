@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="utf-8">
+<title>关于调整深证成指、创业板指、深证100等指数样本股的公告</title>
+<script>
+  if(location.protocol == 'https:'){
+    document.write('<link href="https://res.szse.cn/common/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />');
+  }else{
+    document.write('<link href="http://res.static.szse.cn/common/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />');
+  }
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
+<meta http-equiv="cache-control" content="max-age=0">
+<meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="expires" content="Web, 26 Feb 1997 08:21:57 GMT">
+<meta http-equiv="pragma" content="no-cache">
+<meta name="author" content="www.szse.cn">
+<meta name="description" content="深交所官网">
+<meta name="keywords" content="深交所,深交所官网,深圳证券交易所,交易所,交易所官网,深圳证券交易所官网">
+<meta name="renderer" content=webkit>
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google" value="notranslate"> 
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="email=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="screen-orientation" content="portrait">
+<meta name="full-screen" content="yes">
+<meta name="browermode" content="application">
+<meta name="x5-orientation" content="portrait">
+<meta name="HandheldFriendly" content="true">
+<script type="text/javascript">
+	var u = navigator.userAgent;
+	var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;//android终端
+
+	function addElementMeta(name,  content) {
+		var head = document.getElementsByTagName('head')[0];
+		var meta = document.createElement('meta');
+
+		meta.setAttribute('name', name);
+		meta.setAttribute('content', content);
+		head.appendChild(meta);
+	}
+	if(isAndroid) {
+		addElementMeta('x5-fullscreen', 'true');
+		addElementMeta('x5-page-mode', 'app');
+	}
+</script> 
+    <script>
+  (function () {
+    var _versionDate = new Date().getTime();
+    if (location.protocol == 'https:') {
+      var _path = 'https://res.szse.cn';
+    } else {
+      var _path = 'http://res.static.szse.cn';
+    }
+    // _path = _path.replace(".static.", ".");
+    //var _path = 'http://res.szse.cn';
+    //document.write( " <script src='" + _path + "/common/js/first.js?random=" + _versionDate + "'> <\/script> ");
+    var _host = 'http://www.szse.cn';
+    if (location.protocol == 'https:') {
+      _host = 'https://www.szse.cn';
+    }
+
+
+    var backDomain = 'http://www.sse.org.cn'
+    var reg = /([a-zA-Z0-9][-a-zA-Z0-9]{0,62})((\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+)\.?(:\d+)?/;
+    if (backDomain && window.location.host.match(reg)[2] === backDomain.match(reg)[2]) {
+      _host = 'http://www.sse.org.cn';
+      _path = 'http://res.static.sse.org.cn';
+      if (location.protocol == 'https:') {
+        _host = 'https://www.sse.org.cn';
+        _path = 'https://res.static.sse.org.cn';
+      }
+
+    }
+
+    _path = _path.replace(".static.", ".");
+
+    document.write(" <script src='" + _host + "/szsePath.js?random=" + _versionDate + "'> <\/script> "
+      + " <script src='" + _path + "/common/js/concatversion.js?random=" + _versionDate + "'> <\/script> ");
+  }());
+</script>
+
+<script>
+
+  function backDomainLinkSwitch(value, type) {
+    var _port = location.port ? (":" + location.port) : "";
+    var reg = /([a-zA-Z0-9][-a-zA-Z0-9]{0,62})((\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+)\.?(:\d+)?/;
+    var urlRegx = /(.*)(http:|https:)(\/\/)(([a-zA-Z0-9][-a-zA-Z0-9]{0,62})((\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+))\.?(:\d+)?(.*)/;
+
+    // html字符串替换
+    if (type == 'str') {
+      var strArr = value.split("=");
+      strArr = strArr.map(function (v) {
+        var host = reg.test(v) ? v.match(reg)[0] : null;
+        if (pathObj.szseHosts.indexOf(host) > -1) {
+          if (window.location.protocol == 'https:' && urlRegx.test(v)) {
+            v = v.replace(urlRegx, '$1https:$3$4' + _port + '$9');
+          };
+          if (pathObj.current_host === pathObj.back_host) {
+            v = v.replace(pathObj.main_host, pathObj.back_host);
+          }
+        }
+        return v
+      });
+      value = strArr.join("=");
+      return value;
+    }
+
+    // a标签地址替换
+    if (type === 'A') {
+      var eleA = document.querySelectorAll(value);
+      for (var i = 0; i < eleA.length; i++) {
+        var href = eleA[i].getAttribute("href");
+        var host = reg.test(href) ? href.match(reg)[0] : null;
+        if (href && pathObj.szseHosts.indexOf(host) > -1) {
+          if (window.location.protocol == 'https:') {
+            href = href.replace(urlRegx, '$1https:$3$4' + _port + '$9');
+          };
+          if (pathObj.current_host === pathObj.back_host) {
+            href = href.replace(pathObj.main_host, pathObj.back_host);
+          }
+          eleA[i].setAttribute('href', href);
+        }
+      }
+    }
+
+    // 单链接替换
+    if (type === "link") {
+      if (window.location.protocol == 'https:' && !!value) {
+        value = value.replace(urlRegx, '$1https:$3$4' + _port + '$9');
+      };
+      if (pathObj.current_host === pathObj.back_host) {
+        var host = reg.test(value) ? value.match(reg)[0] : null;
+        if (value && pathObj.szseHosts.indexOf(host) > -1) {
+          value = value.replace(pathObj.main_host, pathObj.back_host);
+        }
+      }
+      return value;
+    }
+
+    // 背景图地址更换
+    if (type === "background") {
+      var eleBg = document.querySelectorAll(value);
+      for (var i = 0; i < eleBg.length; i++) {
+        var href = eleBg[i].style.backgroundImage;
+        if (window.location.protocol == 'https:' && !!href) {
+          href = href.replace(urlRegx, '$1https:$3$4' + _port + '$9');
+        };
+        var host = reg.test(href) ? href.match(reg)[0] : null;
+        if (href && pathObj.szseHosts.indexOf(host) > -1) {
+          if (pathObj.current_host === pathObj.back_host) {
+            href = href.replace(pathObj.main_host, pathObj.back_host);
+          }
+          eleBg[i].style.backgroundImage = href;
+        }
+      }
+    }
+
+  }
+
+</script>
+
+<script>
+   if(document.cookie.indexOf('ft_language=1')>-1){
+    var style = document.createElement('style');
+    style.textContent='body{visibility:hidden;}';
+    document.head.appendChild(style);
+  }
+</script>
+<script>
+    addComCssFile()
+</script>
+<script>
+        changeVertion('/modules/report/css/report.css', 'css');
+        changeVertion('/modules/aboutus_column/introduction/css/journal.css', 'css');
+    </script>
+    <script>
+  changeVertion('/lib/validator/validator.min.css', 'css');
+  changeVertion('/common/plugins/css/index.min.css', 'css');
+  changeVertion('/common/css/form.css', 'css');
+  changeVertion('/common/css/articleDetailUtil.css','css');
+</script>
+</head>
+  <body class="article-body">
+    <script>
+  navMenuAJAX('/application/publicindex/header/index.html', '/application/publicindex/header/index.html', 'header', 'www');
+</script>
+<div class="g-locationnav">
+    <div class="banner-wrap">
+      <img src="http://res.static.szse.cn/common/images/legalrules-banner.jpg" />
+    </div>
+    <div class="g-container">
+      <div class="g-banner-txt">
+            <h2 class="hidden-xs">本所公告</h2>
+            <p>
+              <img src="http://res.static.szse.cn/common/icon/er-banneradr.png" />位置：<a href="../" class="CurrChnlCls">信息披露</a>/<a href="./" class="CurrChnlCls">本所公告</a>
+            </p>
+          </div>
+    </div>
+</div>
+  
+      <div class="g-container-wrap">
+            <div class="g-container">
+<!--startprint-->
+                <div class="news-detail-con g-conbox"> 
+                	<div class="des-header">
+                  <h2 class="title">关于调整深证成指、创业板指、深证100等指数样本股的公告</h2>
+                  		<script>
+                  			var curSubTitle ='';
+                  			if(curSubTitle != ''){
+                  				document.write('<h4 style="text-align: center;" class="sub-title"><i class=""></i><span class="">'+curSubTitle+'</span></h4>')
+                  			}                  		
+                  		</script>
+              <div class="time">时间：<span>2020-06-02</span></div>
+              <div class="des-switchsize">
+                字体：
+                <span class="bigger">大</span>
+                <span class="medium">中</span>
+                <span class="smaller">小</span>
+              </div>
+    					
+        	</div>
+    				 <div class="des-content" id="desContent">
+                       <p></p>
+<p class="MsoNormal" style="line-height: 200%; font-size: 16px; text-indent: 2em;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">根据指数编制规则，深圳证券交易所和深圳证券信息有限公司决定于<span lang="EN-US">2020</span>年<span lang="EN-US">6</span>月<span lang="EN-US">15</span>日对深证成指、创业板指、深证<span lang="EN-US">100</span>等指数实施样本股定期调整。部分指数样本股调整名单见下表，其他深证指数样本股调整名单参见国证指数网（<span lang="EN-US">www.cnindex.com.cn</span>）。<span lang="EN-US"><o:p></o:p></span></span></p>
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; layout-grid-mode: char; mso-layout-grid-align: none;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">深证成份指数样本股调整名单<span lang="EN-US"><o:p></o:p></span></span></p>
+<div align="center">
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="492" style="border-collapse: collapse; mso-table-layout-alt: fixed; border: none; mso-border-alt: solid windowtext .5pt; mso-yfti-tbllook: 1184; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt; mso-border-insideh: .5pt solid windowtext; mso-border-insidev: .5pt solid windowtext;">
+<tbody>
+<tr style="mso-yfti-irow: 0; mso-yfti-firstrow: yes; height: 19.8pt;">
+<td width="246" nowrap="nowrap" colspan="2" style="width: 184.5pt; border: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">调入名单<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="246" colspan="2" style="width: 184.5pt; border: solid windowtext 1.0pt; border-left: none; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">调出名单<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 1; height: 19.8pt;">
+<td width="123" nowrap="nowrap" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">证券代码<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" nowrap="nowrap" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">证券简称<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">证券代码<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" nowrap="nowrap" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">证券简称<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 2; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">000785<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">居然之家<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">000006<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">深振业Ａ<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 3; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">000810<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">创维数字<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">000040<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">东旭蓝天<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 4; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">000958<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">东方能源<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">000088<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">盐 田 港<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 5; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">001914<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">招商积余<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">000429<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">粤高速Ａ<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 6; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002064<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">华峰氨纶<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">000525<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">红 太 阳<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 7; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002100<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">天康生物<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">000766<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">通化金马<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 8; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002124<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">天邦股份<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">000848<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">承德露露<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 9; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002194<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">武汉凡谷<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">000901<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">航天科技<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 10; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002216<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">三全食品<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">000980<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">众泰汽车<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 11; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002243<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">通产丽星<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002047<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">宝鹰股份<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 12; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002250<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">联化科技<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002280<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">联络互动<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 13; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002409<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">雅克科技<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002285<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">世 联 行<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 14; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002436<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">兴森科技<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002358<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">森源电气<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 15; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002459<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">晶澳科技<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002366<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">台海核电<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 16; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002568<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">百润股份<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002421<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">达实智能<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 17; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002675<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">东诚药业<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002437<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">誉衡药业<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 18; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002683<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">宏大爆破<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002488<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">金固股份<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 19; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002705<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">新宝股份<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002567<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">唐 人 神<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 20; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002791<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">坚朗五金<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002573<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">清新环境<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 21; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002950<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">奥美医疗<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002608<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">江苏国信<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 22; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002961<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">瑞达期货<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002610<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">爱康科技<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 23; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002966<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">苏州银行<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002614<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">奥 佳 华<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 24; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300223<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">北京君正<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002618<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">丹邦科技<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 25; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300326<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">凯 利 泰<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002672<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">东江环保<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 26; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300379<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">东 方 通<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002681<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">*ST</span><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">奋达<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 27; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300456<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">赛微电子<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300145<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">中金环境<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 28; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300502<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">新 易 盛<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300159<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">新研股份<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 29; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300775<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">三角防务<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300197<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">铁汉生态<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 30; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300777<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">中简科技<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300203<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">聚光科技<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 31; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300782<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">卓 胜 微<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300222<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">科大智能<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 32; mso-yfti-lastrow: yes; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300783<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">三只松鼠<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300367<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">东方网力<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="MsoNormal" style="text-indent: 18.0pt; mso-char-indent-count: 1.5; line-height: 200%; layout-grid-mode: char; mso-layout-grid-align: none;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; layout-grid-mode: char; mso-layout-grid-align: none;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">创业板指数样本股调整名单<span lang="EN-US"><o:p></o:p></span></span></p>
+<div align="center">
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="492" style="border-collapse: collapse; mso-table-layout-alt: fixed; border: none; mso-border-alt: solid windowtext .5pt; mso-yfti-tbllook: 1184; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt; mso-border-insideh: .5pt solid windowtext; mso-border-insidev: .5pt solid windowtext;">
+<tbody>
+<tr style="mso-yfti-irow: 0; mso-yfti-firstrow: yes; height: 19.8pt;">
+<td width="246" nowrap="nowrap" colspan="2" style="width: 184.5pt; border: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">调入名单<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="246" colspan="2" style="width: 184.5pt; border: solid windowtext 1.0pt; border-left: none; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">调出名单<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 1; height: 19.8pt;">
+<td width="123" nowrap="nowrap" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">证券代码<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" nowrap="nowrap" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">证券简称<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">证券代码<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" nowrap="nowrap" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">证券简称<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 2; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300223<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">北京君正<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300068<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">南都电源<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 3; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300451<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">创业慧康<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300170<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">汉得信息<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 4; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300770<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">新媒股份<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300203<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">聚光科技<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 5; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300775<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">三角防务<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300222<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">科大智能<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 6; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300782<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">卓 胜 微<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300377<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">赢 时 胜<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 7; mso-yfti-lastrow: yes; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300783<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">三只松鼠<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300634<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">彩讯股份<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="MsoNormal" style="text-indent: 18.0pt; mso-char-indent-count: 1.5; line-height: 200%; layout-grid-mode: char; mso-layout-grid-align: none;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; layout-grid-mode: char; mso-layout-grid-align: none;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">深证<span lang="EN-US">100</span>指数样本股调整名单<span lang="EN-US"><o:p></o:p></span></span></p>
+<div align="center">
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="492" style="border-collapse: collapse; mso-table-layout-alt: fixed; border: none; mso-border-alt: solid windowtext .5pt; mso-yfti-tbllook: 1184; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt; mso-border-insideh: .5pt solid windowtext; mso-border-insidev: .5pt solid windowtext;">
+<tbody>
+<tr style="mso-yfti-irow: 0; mso-yfti-firstrow: yes; height: 19.8pt;">
+<td width="246" nowrap="nowrap" colspan="2" style="width: 184.5pt; border: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">调入名单<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="246" colspan="2" style="width: 184.5pt; border: solid windowtext 1.0pt; border-left: none; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">调出名单<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 1; height: 19.8pt;">
+<td width="123" nowrap="nowrap" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">证券代码<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" nowrap="nowrap" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">证券简称<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">证券代码<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" nowrap="nowrap" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">证券简称<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 2; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">000708<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">中信特钢<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="top" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">000413<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="top" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">东旭光电<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 3; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002050<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">三花智控<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="top" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">000540<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="top" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">中天金融<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 4; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002371<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">北方华创<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="top" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">000709<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="top" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">河钢股份<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 5; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002555<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">三七互娱<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="top" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">000728<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="top" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">国元证券<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 6; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002624<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">完美世界<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="top" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002081<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="top" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">金 螳 螂<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 7; mso-yfti-lastrow: yes; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">300014<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">亿纬锂能<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="top" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002958<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="top" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">青农商行<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="MsoNormal" style="text-indent: 18.0pt; mso-char-indent-count: 1.5; line-height: 200%; layout-grid-mode: char; mso-layout-grid-align: none;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; layout-grid-mode: char; mso-layout-grid-align: none;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">中小板指数样本股调整名单<span lang="EN-US"><o:p></o:p></span></span></p>
+<div align="center">
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="492" style="border-collapse: collapse; mso-table-layout-alt: fixed; border: none; mso-border-alt: solid windowtext .5pt; mso-yfti-tbllook: 1184; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt; mso-border-insideh: .5pt solid windowtext; mso-border-insidev: .5pt solid windowtext;">
+<tbody>
+<tr style="mso-yfti-irow: 0; mso-yfti-firstrow: yes; height: 19.8pt;">
+<td width="246" nowrap="nowrap" colspan="2" style="width: 184.5pt; border: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">调入名单<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="246" colspan="2" style="width: 184.5pt; border: solid windowtext 1.0pt; border-left: none; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">调出名单<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 1; height: 19.8pt;">
+<td width="123" nowrap="nowrap" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">证券代码<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" nowrap="nowrap" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">证券简称<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">证券代码<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" nowrap="nowrap" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; background: white; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">证券简称<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 2; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002185<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">华天科技<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002038<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">双鹭药业<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 3; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002353<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">杰瑞股份<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002085<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">万丰奥威<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 4; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002414<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">高德红外<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002092<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">中泰化学<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 5; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002690<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">美亚光电<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002310<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">东方园林<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 6; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002901<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">大博医疗<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002583<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">海 能 达<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+<tr style="mso-yfti-irow: 7; mso-yfti-lastrow: yes; height: 19.8pt;">
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002966<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">苏州银行<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+<td width="123" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">002608<o:p></o:p></span></p>
+</td>
+<td width="123" nowrap="nowrap" valign="bottom" style="width: 92.25pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt; height: 19.8pt;">
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 200%; mso-pagination: widow-orphan;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">江苏国信<span lang="EN-US"><o:p></o:p></span></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="MsoNormal" style="text-indent: 18.0pt; mso-char-indent-count: 1.5; line-height: 200%; layout-grid-mode: char; mso-layout-grid-align: none;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="line-height: 200%; font-size: 16px; text-indent: 2em;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">特此公告。<span lang="EN-US"><o:p></o:p></span></span></p>
+<p class="MsoNormal" style="text-indent: 18.0pt; mso-char-indent-count: 1.5; line-height: 200%; layout-grid-mode: char; mso-layout-grid-align: none;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" align="right" style="text-align: right; text-indent: 27.75pt; line-height: 200%;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">深圳证券交易所&nbsp; &nbsp;&nbsp;<span lang="EN-US"><o:p></o:p></span></span></p>
+<p class="MsoNormal" align="right" style="text-align: right; text-indent: 27.75pt; line-height: 200%;"><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">深圳证券信息有限公司&nbsp; &nbsp;&nbsp;<span lang="EN-US"><o:p></o:p></span></span></p>
+<p class="MsoNormal" align="right" style="text-align: right; line-height: 200%;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span>2020</span><span style="font-size: 12.0pt; line-height: 200%; font-family: 宋体; mso-ascii-theme-font: minor-fareast; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast;">年<span lang="EN-US">6</span>月<span lang="EN-US">2</span>日&nbsp; &nbsp;&nbsp;<span lang="EN-US"><o:p></o:p></span></span></p>
+<p></p>
+                    </div>
+                    <script>
+                        var oldCon = document.getElementById("desContent").innerHTML;
+                        oldCon = oldCon.replace(/(o:p)|(u:p)/gi,'span');
+                        oldCon = oldCon.replace(/&lt;!--\[endif\]--&gt;/g,"");
+                        document.getElementById("desContent").innerHTML = oldCon;
+                    </script>
+<!--endprint-->
+    				<div class="des-footer">
+    					<div class="article-page display-none">
+                   
+    						
+    					</div>
+    					<div class="article-btn">
+    						<a href="javascript:void(0);" class="btn btn-gray art-print">打印</a>
+        						<a href="javascript:void(0);" target="_blank" class="btn btn-gray ml10 art-collect">收藏</a>
+        						<a href="javascript:void(0);" class="btn btn-gray ml10 art-close">关闭</a>
+    					</div>
+    				</div>  
+				</div>
+     
+            </div>
+      </div>
+
+    <script>
+  changeVertion('/common/js/toggleBig5.js', 'js');
+  navMenuAJAX('/application/publicindex/footer/index.html','/application/publicindex/footer/index.html', 'footer','www');
+  addComJsFile();
+</script>
+    <script>
+  (function () {
+    var _versionDate = new Date().getTime();
+
+    var _host = 'http://www.szse.cn';
+    if (location.protocol == 'https:') {
+      _host = 'https://www.szse.cn';
+    }
+
+    var backDomain = 'http://www.sse.org.cn'
+    var reg = /([a-zA-Z0-9][-a-zA-Z0-9]{0,62})((\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+)\.?(:\d+)?/;
+    if (backDomain && window.location.host.match(reg)[2] === backDomain.match(reg)[2]) {
+      _host = 'http://www.sse.org.cn';
+      if (location.protocol == 'https:') {
+        _host = 'https://www.sse.org.cn';
+      }
+
+    }
+    document.write(" <script src='" + _host + "/dynamicmodule/index/sysconfig.js?random=" + _versionDate + "'> <\/script> ");
+
+  }());
+</script>
+    <script>
+    	var articleDetail = {
+    		docTitle:'关于调整深证成指、创业板指、深证100等指数样本股的公告',
+    		subDocTitle:'',
+    		docAbstract:'',
+                articleId:'578019',
+		channelCode:'announcement',
+    channelId : '211'
+    	}
+    </script>
+    <script>
+    	changeVertion('/common/js/articleDetail.js','js');
+    </script>
+    <script>
+  changeVertion('/lib/validator/jquery.validate.js', 'js');
+  changeVertion('/common/js/jquery.validate_extend.js', 'js');
+  changeVertion('/lib/webuploader-0.1.5/webuploader.js', 'js');
+  changeVertion('/common/plugins/index.min.js', 'js');
+  changeVertion('/common/js/articleDetailUtil.js','js');
+</script>
+  </body>
+</html>
+
+
+

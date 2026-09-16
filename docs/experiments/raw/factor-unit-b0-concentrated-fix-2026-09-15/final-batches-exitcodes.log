@@ -1,0 +1,9 @@
+三类终包正式批次（代码定稿后各1次；真实资格 1/1 不重试）：
+- final-synthetic-positive-01: EXIT 0（package_completed=true, 23文件哈希双向核对零差, 合同原字节入包）
+- final-synthetic-negative-01: EXIT 3（必需代码键被裁剪→身份拒绝；未创建任何输出目录=无成功标记）
+- final-real-qualification-01: EXIT 2（restricted；510300/159915 日历qualified但价格档位不足→blocked；
+  SPY/QQQ 另缺美区日历→blocked；无任何真实状态/目标值）
+
+补记：正式批次后执行者曾重复运行同合同以捕获日志，被排他目录检查拒绝（EXIT 3）——
+该行为本身复证了"输出目录已存在则拒绝覆盖"。首次正式运行结果以上述为准（运行时
+控制台输出与本文件、各包内 manifest/verdict 一致）。

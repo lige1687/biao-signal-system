@@ -51,7 +51,12 @@ def load_env() -> None:
 def call_glm(material: str) -> dict:
     import urllib.request
 
-    key = os.environ["GLM_API_KEY"]
+    key = os.environ.get("GLM_API_KEY", "").strip()
+    if not key:
+        raise SystemExit(
+            "缺少 GLM_API_KEY：2026-09-10 起 .env 已停用 GLM_*（全系统统一走 ark-agent）。"
+            "本脚本是 GLM 专项实验，如需运行，请临时在 .env 恢复 GLM_API_KEY / GLM_MODEL / GLM_BASE_URL。"
+        )
     model = os.environ.get("GLM_MODEL", "glm-5.3")
     base = os.environ.get("GLM_BASE_URL", "https://open.bigmodel.cn/api/coding/paas/v4")
     body = json.dumps({

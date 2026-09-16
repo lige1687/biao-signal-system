@@ -1,0 +1,100 @@
+{
+  "observed_at": "2026-09-15T09:31:03.330433+00:00",
+  "reviewed_at": "2026-09-15T09:31:54.823027+00:00",
+  "record": "docs/research/observations/breadth-v1/records/2026-09-15T093103.330433_0000-d1900329.json",
+  "readiness_reference": "docs/experiments/raw/research-breadth-freeze-2026-09-09/readiness/readiness.json",
+  "readiness_sha256": "a1cd7cfbbd0bda574e95352f89362dc7a64a04bfa27bf23d99807b8d0a1c94fb",
+  "facts": [
+    {
+      "id": "source-01",
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_klines.parquet",
+      "sha256": "490e124c8b218795cc9da04c58b5e6ed45d9b4d763c4856a565398939f344591",
+      "rows": 4065183,
+      "columns": [
+        "symbol",
+        "date",
+        "close"
+      ],
+      "latest_date": "2026-09-15",
+      "member_latest_date_counts": {
+        "2026-08-28": 1,
+        "2026-08-31": 1,
+        "2026-09-03": 1,
+        "2026-09-04": 1,
+        "2026-09-09": 2,
+        "2026-09-10": 1,
+        "2026-09-11": 3,
+        "2026-09-14": 5204,
+        "2026-09-15": 3
+      }
+    },
+    {
+      "id": "source-02",
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_codes.json",
+      "sha256": "7e183e661350bb7b3193092ad9d92540fca765227b0ebc3cc86151e9ed56e378",
+      "data": {
+        "date": "2026-09-15",
+        "codes": 5562
+      }
+    },
+    {
+      "id": "source-03",
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_ma_breadth.json",
+      "sha256": "17bb410b22be82fba6fbce4a16661eb3744435cd428f7b9da205018c2beef425",
+      "data": {
+        "as_of": "2026-09-15 16:41",
+        "date": "2026-09-15",
+        "ma20_pct": 29.33384526780572,
+        "ma50_pct": 51.663781496441615,
+        "ma200_pct": 22.65397318826501,
+        "eligible": 5209,
+        "up": 1120,
+        "down": 4376,
+        "flat": 66,
+        "total": 5562,
+        "up_pct": 20.136641495864797,
+        "adv_dec_ratio": 0.25594149908592323,
+        "limit_up": 41,
+        "limit_down": 43,
+        "source": "腾讯日K线(本机收盘后预计算)"
+      }
+    },
+    {
+      "id": "source-08",
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/510300.SS.bars.parquet",
+      "sha256": "6f14fd60218009ac7f904d7b8e7a057d89b0fcfd77b3b636454bfa8cc4f76556",
+      "rows": 641,
+      "columns": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "latest_date": "2026-09-15 00:00:00",
+      "metadata": {
+        "symbol": "510300.SS",
+        "kind": "bars",
+        "provider": "tencent",
+        "rows": 641,
+        "fetched_at": "2026-09-15T02:37:05.557274+00:00",
+        "first_date": "2024-01-23 00:00:00",
+        "last_date": "2026-09-15 00:00:00"
+      },
+      "metadata_sha256": "bcc5fd77d78212f8bcad84f4ec124f00f36ae6d997bad21bd30ce46243064673"
+    }
+  ],
+  "unstable_after_review": [],
+  "qualification": {
+    "common_200_denominator": "日常快照仍未提供冻结研究的共同200日分母、覆盖率及逐成员日期证明。",
+    "historical_membership": "当前代码列表更新不等于历史成员及生效时间链齐备。",
+    "etf_nominal_prices_and_actions": "510300行情更新需与公司行动和名义成交价身份配套；行动源及其他监测ETF文件未变，原资格缺口仍在。",
+    "availability": "记录实际读取时刻；来源日期、文件修改时间和元数据取得时间不倒填为过去已观察。",
+    "stage": "input_observation_only",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "decision": "没有匹配输入齐备的新证据，保持输入观察，不通知常规刷新。",
+  "scope": "原冻结观察续跑；无回测、参数修改、OKR更新、自动交易或自动状态切换。"
+}

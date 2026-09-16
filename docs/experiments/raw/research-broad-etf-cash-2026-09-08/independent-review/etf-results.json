@@ -1,0 +1,142 @@
+{
+  "status": "passed_with_record_classification_findings",
+  "accounts": 12,
+  "daily_and_trade_rows_checked": 50904,
+  "row_failures": 0,
+  "completed_signal_accounts_failed": 0,
+  "summary_accounts_failed": 0,
+  "executor_extra_terminal_records": 4,
+  "rejection_account_mismatches": 2,
+  "rejection_checks": [
+    {
+      "account_id": "sh510300-breadth_three_tier-fee0.001",
+      "independent_count": 652,
+      "executor_financial_period_count": 652,
+      "executor_total_count": 653,
+      "ordered_match": true,
+      "differences": []
+    },
+    {
+      "account_id": "sh510300-breadth_three_tier-fee0.002",
+      "independent_count": 652,
+      "executor_financial_period_count": 652,
+      "executor_total_count": 653,
+      "ordered_match": true,
+      "differences": []
+    },
+    {
+      "account_id": "sh510300-hold-fee0.001",
+      "independent_count": 0,
+      "executor_financial_period_count": 0,
+      "executor_total_count": 0,
+      "ordered_match": true,
+      "differences": []
+    },
+    {
+      "account_id": "sh510300-hold-fee0.002",
+      "independent_count": 0,
+      "executor_financial_period_count": 0,
+      "executor_total_count": 0,
+      "ordered_match": true,
+      "differences": []
+    },
+    {
+      "account_id": "sh510300-simple_60_close_breakout-fee0.001",
+      "independent_count": 13,
+      "executor_financial_period_count": 13,
+      "executor_total_count": 13,
+      "ordered_match": true,
+      "differences": []
+    },
+    {
+      "account_id": "sh510300-simple_60_close_breakout-fee0.002",
+      "independent_count": 13,
+      "executor_financial_period_count": 13,
+      "executor_total_count": 13,
+      "ordered_match": true,
+      "differences": []
+    },
+    {
+      "account_id": "sz159915-breadth_three_tier-fee0.001",
+      "independent_count": 654,
+      "executor_financial_period_count": 654,
+      "executor_total_count": 655,
+      "ordered_match": false,
+      "differences": [
+        {
+          "index": 332,
+          "independent": [
+            "2021-02-08",
+            "2021-02-05",
+            "known_open_unavailable"
+          ],
+          "executor": [
+            "2021-02-08",
+            "2021-02-05",
+            "missing_quote"
+          ]
+        }
+      ]
+    },
+    {
+      "account_id": "sz159915-breadth_three_tier-fee0.002",
+      "independent_count": 654,
+      "executor_financial_period_count": 654,
+      "executor_total_count": 655,
+      "ordered_match": false,
+      "differences": [
+        {
+          "index": 332,
+          "independent": [
+            "2021-02-08",
+            "2021-02-05",
+            "known_open_unavailable"
+          ],
+          "executor": [
+            "2021-02-08",
+            "2021-02-05",
+            "missing_quote"
+          ]
+        }
+      ]
+    },
+    {
+      "account_id": "sz159915-hold-fee0.001",
+      "independent_count": 0,
+      "executor_financial_period_count": 0,
+      "executor_total_count": 0,
+      "ordered_match": true,
+      "differences": []
+    },
+    {
+      "account_id": "sz159915-hold-fee0.002",
+      "independent_count": 0,
+      "executor_financial_period_count": 0,
+      "executor_total_count": 0,
+      "ordered_match": true,
+      "differences": []
+    },
+    {
+      "account_id": "sz159915-simple_60_close_breakout-fee0.001",
+      "independent_count": 18,
+      "executor_financial_period_count": 18,
+      "executor_total_count": 18,
+      "ordered_match": true,
+      "differences": []
+    },
+    {
+      "account_id": "sz159915-simple_60_close_breakout-fee0.002",
+      "independent_count": 18,
+      "executor_financial_period_count": 18,
+      "executor_total_count": 18,
+      "ordered_match": true,
+      "differences": []
+    }
+  ],
+  "input_hashes_unchanged": true,
+  "first_row_failures": [],
+  "signal_failures": [],
+  "summary_failures": [],
+  "width_boundary_finding": "All 588 confirmed completed-week signals match. Executor additionally records the 2026-06-30 Tuesday observation as eligible 2026-07-06 in four breadth accounts. The week was unfinished at period end, so independent review does not classify it as a confirmed weekly signal. It has no cash or trade effect.",
+  "restriction_record_finding": "For both sz159915 breadth fee accounts, the 2021-02-08 blocked attempt is financially handled identically but executor labels it missing_quote; the locked dated restriction identifies an official suspension, so independent review classifies it known_open_unavailable."
+}

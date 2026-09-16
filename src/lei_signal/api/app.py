@@ -30,6 +30,7 @@ from lei_signal.api.routes import (
     factors,
     feishu_webhook,
     fundamentals,
+    learning,
     news,
     opportunities,
     plans,
@@ -39,6 +40,7 @@ from lei_signal.api.routes import (
     signals,
     symbols,
     timing_backtest,
+    upgrades,
     watch_subscriptions,
     watchlist,
 )
@@ -78,8 +80,40 @@ _REPO_ROOT = Path(__file__).resolve().parents[3]
 _WEB_DIST = _REPO_ROOT / "web" / "dist"
 
 
+def _install_validation_error_handler(app: FastAPI) -> None:
+    """04B（2026-09-08）：请求校验错误的 input 含 NaN/Infinity 时，默认处理器
+    序列化 422 响应自身会崩（starlette JSONResponse 拒绝非有限值）→ 500。
+    把 errors 里的非有限浮点替换为字符串标记，保证非法价格等输入得到结构化
+    422 而不是 500；有限输入的行为与默认处理器完全一致。
+    """
+    from fastapi.exceptions import RequestValidationError  # noqa: PLC0415
+    from fastapi.responses import JSONResponse  # noqa: PLC0415
+
+    def _sanitize_non_finite(obj):  # noqa: ANN001
+        import math as _math
+
+        if isinstance(obj, float) and not _math.isfinite(obj):
+            return repr(obj)
+        if isinstance(obj, list):
+            return [_sanitize_non_finite(x) for x in obj]
+        if isinstance(obj, dict):
+            return {k: _sanitize_non_finite(v) for k, v in obj.items()}
+        return obj
+
+    @app.exception_handler(RequestValidationError)
+    async def _validation_error_handler(request, exc):  # noqa: ANN001
+        from fastapi.encoders import jsonable_encoder  # noqa: PLC0415
+
+        return JSONResponse(
+            status_code=422,
+            content={"detail": _sanitize_non_finite(
+                jsonable_encoder(exc.errors()))},
+        )
+
+
 def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
     app = FastAPI(title="LEI 看盘系统", version="0.1.0")
+    _install_validation_error_handler(app)
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
@@ -123,6 +157,9 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
     app.include_router(factors.router)
     app.include_router(news.router)
     app.include_router(experiments.router)
+    # 文献学习库：只读学习目录（learning-seed.json），不参与交易判定
+    app.include_router(learning.router)
+    app.include_router(upgrades.router)
 
     _warm_a_share_breadth()
     # 看盘缓存后台预热：按用户时效性要求定时强刷（盘中 12 分钟 / 收盘补一次 /

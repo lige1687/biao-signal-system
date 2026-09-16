@@ -1,0 +1,38 @@
+B007 Loop control variable `symbol` not used within loop body
+   --> scripts/check_factor_unit_readiness.py:221:13
+    |
+219 |         members = set((contract.get("universe") or {}).get("members") or [])
+220 |         evidence_paths: dict[str, Path] = {}
+221 |         for symbol, entry in (contract.get("data_identity") or {}).items():
+    |             ^^^^^^
+222 |             ref = entry.get("price_basis_evidence")
+223 |             if isinstance(ref, dict) and ref.get("path"):
+    |
+help: Rename unused `symbol` to `_symbol`
+
+B007 Loop control variable `ev_rel` not used within loop body
+   --> scripts/check_factor_unit_readiness.py:226:13
+    |
+224 |                 evidence_paths[str(ref["path"])] = REPO / str(ref["path"])
+225 |         vendor_paths: dict[str, Path] = {}
+226 |         for ev_rel, ev_src in evidence_paths.items():
+    |             ^^^^^^
+227 |             try:
+228 |                 payload = json.loads(ev_src.read_text())
+    |
+help: Rename unused `ev_rel` to `_ev_rel`
+
+F401 [*] `copy` imported but unused
+  --> tests/unit/test_factor_unit_four_fixes.py:13:8
+   |
+11 | from __future__ import annotations
+12 |
+13 | import copy
+   |        ^^^^
+14 | import hashlib
+15 | import json
+   |
+help: Remove unused import: `copy`
+
+Found 3 errors.
+[*] 1 fixable with the `--fix` option (1 hidden fix can be enabled with the `--unsafe-fixes` option).

@@ -1,0 +1,99 @@
+{
+  "protocol_id": "research-input-preflight-2026-09-13",
+  "plan_version": "1.0.0",
+  "research_family": "research-data-foundation",
+  "scope": "离线研究输入检查入口：是哪批数据、能用于什么、缺什么、哪些旧程序尚未接入",
+
+  "specs": {
+    "principles": {"path": "docs/research/experiment-backtest-principles.md", "version": "v1.1"},
+    "definition_standard": {"path": "docs/research/definition-standard.md", "version": "1.1.0"},
+    "execution_contract": {"path": "docs/research/ai-execution-contract.md", "version": "1.0.1"},
+    "report_template": {"path": "docs/research/experiment-report-template.md", "version": "1.1.0"},
+    "registry": {"path": "docs/research/definitions.v1.json", "note": "每对象精确 id@version，不解析 latest"}
+  },
+
+  "fixed_inputs": {
+    "snapshot_dir": "docs/experiments/raw/research-identity-wiring-2026-09-10/canonical-snapshot-v2",
+    "calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+    "publication": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-evidence.json",
+    "actions": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/normalized-actions.json",
+    "evaluation_start": "2019-09-02",
+    "evaluation_end": "2026-06-30",
+    "pool_expectation": {"symbols": 14, "rows": 18916, "verify_by_reading": true}
+  },
+
+  "uses_enum": ["description", "ranking", "research_signal", "attribution", "comparison", "diagnostic"],
+
+  "first_refs": [
+    "mixed.price.economic@1.0.0",
+    "mixed.momentum.raw@1.0.0",
+    "trend.sma200@1.0.0"
+  ],
+
+  "four_independent_results": [
+    "快照是否完整（integrity）",
+    "该批数据是否满足所请求用途的现有质量与声明检查（data_uses）",
+    "对象是否允许该用途且实际输入满足其字段检查（objects）",
+    "是否已计算/是否有效/是否获准交易（本轮后三项均不获得肯定结论）"
+  ],
+
+  "writable_paths": [
+    "src/lei_signal/research/input_preflight.py",
+    "scripts/check_research_input.py",
+    "tests/unit/test_research_input_preflight.py",
+    "tests/integration/test_research_input_preflight_cli.py",
+    "docs/experiments/research-input-preflight-2026-09-13.md",
+    "docs/experiments/raw/research-input-preflight-2026-09-13/**",
+    "docs/experiments/registry.json",
+    "docs/experiments/INDEX.md",
+    "docs/experiments/research-data-foundation-summary-2026-09-10.md"
+  ],
+
+  "protected_and_readonly": {
+    "note": "以下本轮只读；896 项基线见 protected-check.txt（已复核零改动）",
+    "modules": [
+      "src/lei_signal/research/data_quality.py",
+      "src/lei_signal/research/data_snapshot.py",
+      "src/lei_signal/research/trading_calendar.py",
+      "src/lei_signal/research/symbol_identity.py",
+      "src/lei_signal/research/definitions.py",
+      "src/lei_signal/research/factor_runtime.py",
+      "src/lei_signal/research/factor_diagnostics.py",
+      "src/lei_signal/research/factor_account_adapter.py",
+      "scripts/run_research_data_snapshot.py",
+      "scripts/run_factor_library_v0.py"
+    ],
+    "counterexamples_readonly": [
+      "docs/experiments/raw/research-data-foundation-controller-review-2026-09-13/listing-explicit-synthetic.json",
+      "docs/experiments/raw/research-data-foundation-controller-review-2026-09-13/listing-qualification-omitted.json"
+    ]
+  },
+
+  "explicitly_not": [
+    "不把名义收盘价改名成 economic_index",
+    "不因以后可以计算就说现在已经提供该字段",
+    "不恢复已被否决的『合成材料等于真实资格』逻辑",
+    "不运行因子计算、账户、收益回测、参数搜索",
+    "不安装或运行 Qlib/Alphalens",
+    "不启用 allow_conditional / accept_structural；新命令不暴露这些开关",
+    "不下载任何资料；联网预算 0",
+    "不把 combine_checks 当成新质量规则或可信标签入口；命令不接受调用者传布尔值",
+    "不宣称 JSON 记录格式等于通用协议校验器已存在",
+    "不要求全部数据用途放行才收工"
+  ],
+
+  "exit_codes": {
+    "0": "请求的检查满足",
+    "2": "检查完成但请求被拒（是有价值的检查结果，不是崩溃）",
+    "3": "输入/参数/解析或运行失败"
+  },
+
+  "resource_limits": {
+    "network": 0,
+    "new_dependencies": 0,
+    "account_paths": 0,
+    "real_input_checks_max": 8,
+    "full_regressions_max": 3,
+    "wall_clock_hours_max": 6
+  }
+}

@@ -28,6 +28,276 @@
 
 ## 1. 任务编号总账（任务书 → 执行归档）
 
+- 2026-09-16：[因子证据可靠性v1](factor-evidence-reliability-v1-2026-09-16.md) → [主控复核](factor-evidence-controller-review-2026-09-16.md)：真实历史主要数字接受，协议/合成身份与缺组输出限定返修；零真实重跑，无有效性或生产授权。
+
+- 2026-09-16：[外部候选接入设计（第三轮）](external-schools-integration-design-2026-09-16.md)：五候选（筹码剖面/波动收缩箱体/52周高/剩余动量/宽度推力）各交付规格挂点+数据代码现实+定义草案+差异表+对照设计五件套；数据全就绪、C3最便宜（2024-09-30硬检验）、D1/D2复用封存账户引擎；推荐首批C3事件清点+C1描述；零回测待授权。
+
+- 2026-09-16：[外部流派融合深度调研（第二轮）](external-schools-deep-dive-2026-09-16.md)：最重要发现是把自家规格未实现章节用成熟工具补上（成交量剖面→§11筹码、波动收缩/箱体→§4.6+B模块，零边界成本）；C1/C2/C3精确口径与A股证据补齐；缠论/Wyckoff同构只吸收概念，Ichimoku/三重滤网/波浪类不引入；仍零回测待授权。
+
+- 2026-09-16：[因子库方向探索主控复核](factor-library-direction-controller-review-2026-09-16.md)：v1.2限定文档收尾通过，无必需返修；方向部分采用，未授权后续实验。
+
+- 2026-09-16：[买前判断与信息取舍：系统扩展方向讨论](practical-pretrade-direction-2026-09-16.md)：先串起关注清单、买前卡与条件变化，再补ETF产品资料；方向建议，尚未开发或验证收益。
+
+- 2026-09-16：[外部技术流派融合候选盘点](external-schools-fusion-candidates-2026-09-16.md)：零回测调研；首批候选 52周新高距离/剩余动量/宽度推力（均结合因子线），次批 RSI-2 简单对照、双动量绝对腿、ATR 通道；已覆盖者不重复，全部待逐项授权。
+
+- 2026-09-16：[B1首次真实描述](b1-dual-ma-first-real-description-2026-09-16.md) → [主控复核](b1-controller-review-2026-09-16.md) → [限定收口](b1-closeout-controller-2026-09-16.md)：数字及补件接受，流程偏差保留；不重跑真实统计，不代表因子有效。
+
+- 2026-09-16：[首轮结果解释R1–R4收口](factor-unit-interpretation-closeout-2026-09-16.md)：27项教学核验通过；本并行线收口，不重开研究引擎返修。
+
+- 2026-09-15：[首轮结果解释主控复核](factor-unit-interpretation-controller-2026-09-15.md)：部分采用；教学区间计数与过强表述限定修订，不修改研究引擎。
+
+- 2026-09-15：[510300离线复用交付](510300-offline-reuse-2026-09-15.md) → [主控复核](510300-offline-reuse-controller-2026-09-15.md)：固定输入包接受；有限文案收尾，真实统计未启动。
+
+- 2026-09-15：[双均线四项修复与510300数据方案主控复核](factor-unit-four-fixes-controller-2026-09-15.md) — 限定收口；1558交易日可离线复用，真实统计未启动。
+
+- [B0剩余四项限定修复任务书](../superpowers/plans/2026-09-15-factor-unit-four-fixes-glm.md) — 用户明确授权恢复四项修复；交接区分执行者声明与用户授权，零联网、B1仍暂停。
+
+- [B0剩余四项限定修复执行交付](factor-unit-four-fixes-2026-09-15.md) — 执行者声明四反例反转（待主控独立核验）：自填证据不再升级含分红资格、稀疏同一合法集合、pd.NA可接入、证据随包+旧包补件；真实目标仍blocked、B1未启动、零联网。
+
+- [B0集中修复主控限定裁决](factor-unit-b0-fix-controller-review-2026-09-15.md) — 87测试通过，多项旧反例关闭；真实资格与统计尚有限制，保留可信部分、暂停B1，无自动新返修。
+
+- [B0主控复核](factor-unit-b0-controller-review-2026-09-15.md) — 收盘价适配保留，资格/统计集中修复；[原GLM下一轮任务书](../superpowers/plans/2026-09-15-factor-unit-b0-concentrated-fix-glm.md)。
+
+- [因子A阶段主控复核与B0方向](factor-unit-readiness-controller-review-2026-09-15.md) — 盘点有限接收；[B0长任务prompt](../superpowers/plans/2026-09-15-factor-unit-close-adapter-glm.md)：收盘价适配、四市场来源裁定，真实统计另行确认。
+
+- AGENT-NAMES-MAIN：[名称、板块识别与主分支收口](agent-subject-names-and-main-2026-09-15.md) — 名称加代码，板块不替换成ETF；已采用Agent改动集中至本地main。
+
+- [新GLM因子独立研究A阶段执行prompt](../superpowers/plans/2026-09-15-factor-unit-readiness-glm.md)：原目录/专用分支已准备，三族定义与美A数据资格盘点，真实研究不自动运行。
+
+- [因子A阶段盘点交付：三族档案与美A数据资格](factor-unit-readiness-2026-09-15.md)：三族定义档案+旧证据边界建齐；四载体长日频价格已确认，复权/volume/美股市历三阻断未解；双均线协议建议 proposal_not_executable，本轮零真实统计。
+
+- [双均线B0：收盘价适配与真实输入冻结](factor-unit-close-adapter-2026-09-15.md)：close-only适配建好测通（R1–R6全落地，44新测试）；四输入来源三档全为producer_candidate_only，主目标四票blocked；冻结候选包+b1-run-request交主控，B1未开算。
+
+- [双均线B0集中修复：R1–R4反例关闭](factor-unit-b0-concentrated-fix-2026-09-15.md)：资格"填上就算"路径全堵（证据/日历/必需键闭合）、统计消费完整合同（截止/共同集合）、冻结包含合同原件；撤回除息日推断并作废159915错位比对；真实资格仍退出2，新申请仅510300。
+
+- AGENT-RUNTIME-DEPLOY：[运行版更新与真实使用验收](agent-runtime-deployment-2026-09-15.md) — 已应用，第二次问答与历史恢复通过；数据库锁和日期表述待处理。
+
+- [自有因子独立研究首批方案](factor-unit-research-proposal-2026-09-15.md)：三类定义/资料盘点，建议双均线先做美A研究；设计待确认，未启动真实运行。
+
+- [Agent运行版合入准备](agent-runtime-integration-preparation-2026-09-15.md)：33文件无冲突，候选验证通过，备份/回退方案就绪，实际更新待确认。
+
+- [Agent问答补修收口与试用条件](agent-conversation-controller-closeout-2026-09-15.md)：两处遗漏通过，不再返修；待定向合入和运行检查后试用。
+
+- [因子工具首轮限定收口与能力说明](factor-lab-final-controller-decision-2026-09-15.md)：S1–S4指定反例通过，保留合成原型；终版源码归档待补，无真实有效性或生产授权。
+
+- [因子工具集中返修主控复核](factor-lab-repair-controller-review-2026-09-15.md)：S1–S4最后一轮限定收尾，内含完整返还执行agent的任务与终版运行条件。
+
+- [Agent中断补修二轮复验](agent-conversation-controller-recheck-2026-09-15.md)：主路径通过；流内错误与历史重试按钮两处遗漏，固定范围收口。
+
+- [Agent真实讨论一期主控复核](agent-conversation-controller-review-2026-09-15.md)：实际回答有进步；固定补修中断识别与历史重试，锁根因保留未知。
+
+- [通用因子工具主控初审](factor-lab-controller-review-2026-09-14.md)：94项新测试复跑通过，独立反例仍需R1–R4集中返修；[执行任务书](../superpowers/plans/2026-09-14-factor-lab-concentrated-repair.md)。
+
+- [因子研究工具复用短名单](research-tool-reuse-shortlist-2026-09-14.md)：Alphalens和统计组件优先按需复用，ETF供数独立比较，回测框架后置；未安装或扩当前任务。
+
+- [FactorHub API与MCP复用实测](factorhub-api-reuse-review-2026-09-14.md)：13次只读请求，区分可复用供数与仍需自建的研究判断；限流后停止，未安装或接入生产。
+
+- [Agent下一阶段与因子库分工](agent-conversation-next-stage-2026-09-14.md)：先做好真实问答，首批因子实际交付后再评接入；附固定范围执行任务书。
+
+- [Agent真实首问效果初测](agent-real-conversation-case-2026-09-14.md)：运行版数据库锁、隔离模型180秒超时；评价备用回答，未冒称多轮通过。
+
+- [自有因子研究体系：目标、OKR与首轮任务](factor-research-workbench-mandate-2026-09-14.md)：通用计算/检验/过拟合风险/归因工具优先，固定ETF补证后置；未验收、无生产权限。
+- [Factor Lab最后一轮收尾执行报告](factor-lab-final-closeout-2026-09-15.md)：S1–S4反例先行失败后修复转通过；必查集合由独立期望产物权威化；终版3案例62项期望全过、145测试、371回归；v1.1.0不可复放已纠正表述；待主控复核。
+- [Factor Lab集中返修执行报告](factor-lab-concentrated-repair-2026-09-14.md)：R1–R4反例先行失败后修复并全部转为通过测试；3个正式案例62项期望全过、132测试、358回归；仍仅合成验证，无有效性/授权声明，待主控回调复核。
+- [通用因子研究能力首轮执行报告](factor-research-workbench-v1-2026-09-14.md)：factor_lab六模块+CLI+3类合成端到端+94测试+316回归；仅合成算法验证，不证明因子有效；待主控回调复核，OKR由主控更新。
+
+- [计划流程C1—C3主控复核](agent-plan-flow-controller-recheck-2026-09-14.md)：固定功能项通过，合入前留单行文案补丁和归档清理，不再重做整轮。
+
+- [计划流程主控复核](agent-plan-flow-controller-review-2026-09-13.md)：主流程保留，固定C1—C3版本分支/重试/错误指引补修；未合入。
+
+- [Agent体验一期主控收口](agent-user-experience-controller-closeout-2026-09-13.md)：R1通过，R2调查接受但完整计划未通过；既有计划流程问题转独立[任务书](../prompts/agent-plan-review-and-confirmation-2026-09-13.md)，不再重做已通过体验交互。
+
+- [2026-09-13 Qlib Alpha158 主控审核与收口意见](/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/qlib-alpha158-controller-review-2026-09-13.md)：§8确认[执行报告v1.1.1](/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/qlib-alpha158-definition-review-2026-09-12.md)六项纠正及三处文案收尾完成；定义审阅已收口，无剩余必修项，初审返修历史保留。整体暂不引入，不代表Qlib已接入、因子有效或获准交易。
+
+- [2026-09-10规范包合并](governance-pack-merge-2026-09-10.md)：权威路径、版本、冲突与模板映射；旧v0只映射不改规则，接口未接入项单列。
+
+- [因子库后续：外部资源适配与分批接入](factor-library-external-backlog-2026-09-09.md)：四类待办已关联系统待升级台账；不扩大 v0，按具体问题逐项授权，执行时同步 OKR。
+
+- [宽度候选收口与输入观察启动](breadth-freeze-start-2026-09-09.md)：固定两项候选；10项补证先查两区间40日，输入观察已启动，正式信号尚未就绪。
+
+### 9-10 规范包合并与数据基础
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| AGENT-UX-recheck-20260913 | Agent体验第一期二轮复核 | [剩余两项](agent-user-experience-controller-recheck-2026-09-13.md) | mixed；主要交互已收口，仅文案小修和计划确认验证 |
+| AGENT-UX-controller-20260913 | Agent体验第一期主控复核 | [固定返修单](agent-user-experience-controller-review-2026-09-13.md) | mixed；保留改进，修U1—U4与原页面验证，未合入 |
+| 固定ETF证据接入 | 数据与质量 | [固定ETF池证据与研究输入贯通执行报告](fixed-etf-evidence-integration-2026-09-13.md) | mixed；主控§13（2026-09-14）确认S1–S3工程收尾通过，必修项无；420项回归与772键独立核算通过。数据资格未解除，预算偏差保留，无预测有效性或生产授权。 |
+| 动量研究样板主控复核 | 方法论与验证 | [书面复核与集中返修单](momentum-prototype-controller-review-2026-09-13.md) | mixed；最新§13（2026-09-14）确认S1–S3工程收尾通过，停止返修，必修项无。420项回归与独立772键核算通过；资料限制仍保留，后续真实运行须另授权。 |
+| 因子研究工作台v1（执行者交付） | 方法论与验证 | [通用因子研究能力首轮执行报告](factor-research-workbench-v1-2026-09-14.md) | mixed；待主控回调复核。factor_lab六模块+CLI落地：6对象+双均线候选同一API、IC/状态/宽度诊断分流、试验史/时间切分/标签跨段检查、三层归因入口；3类合成端到端50项手算期望全过，94项测试、316项相关回归。仅合成验证，不证明因子有效，无生产授权；OKR由主控更新。 |
+| 因子研究工作台v1集中返修 | 方法论与验证 | [R1–R4集中返修执行报告](factor-lab-concentrated-repair-2026-09-14.md) | mixed；待主控回调复核。时间资格实际消费统计、运行前冻结合同核对、比较合同固定必查（未知降级）、空期望拒绝；正式运行3案例62项期望全过、132测试、358回归；无有效性/授权声明。 |
+| 因子研究工作台v1最后一轮收尾 | 方法论与验证 | [S1–S4收尾执行报告](factor-lab-final-closeout-2026-09-15.md) | mixed；待主控复核。分侧输入身份不得自比、必查集合独立权威化、审计/诊断共享合法集合、JSON严格可解析；终版批次62项期望全过、145测试、371回归；无有效性/授权声明。 |
+| 动量研究样板 | 方法论与验证 | [已有动量指标研究样板执行报告](momentum-research-prototype-2026-09-13.md) | mixed；主控§10部分确认R1/R2，仍有全标签排除、期内晚取得标注和历史版本说明待收尾；368项回归，run-09绑定v1.0.4，772真实值仍按原v1.0.2封存。真实预测仍受限，不证明指标有效，无生产授权。 |
+| 研究输入入口主控复核 | 数据与质量 | [书面复核与集中收尾单](/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/research-input-preflight-controller-review-2026-09-13.md) | mixed；最新§10确认来源拒绝修复、295项回归和真实0/2/2；manifest输出失败已由动量样板轮 Task 1 收尾（四类写盘失败+--protocol校验测试固化）。 |
+| 研究输入验收入口 | 数据与质量 | [因子开工前离线验收](research-input-preflight-2026-09-13.md) | mixed；主控部分确认，暂不整体验收。真实0/2/2复现，另发现来源哈希失败仍放行；见主控集中收尾单。 |
+| 验收入口集中收尾 | 数据与质量 | [F1-F4 修复交付](research-input-preflight-fix-2026-09-13.md) | mixed；主控确认来源拒绝修复、295项回归和真实0/2/2；manifest写盘失败仍有遗漏，见主控§10，不能声称所有出口已补齐。 |
+| **★ 数据地基总报告（历史总账）** | 方法论与验证 | [总报告与待审事项](research-data-foundation-summary-2026-09-10.md) | 六轮总账及失败史；“排序/对照缺陷清零”已撤回。最新结论见9-13主控§11：有限修复收口，真实数据仍只有描述/诊断可用。 |
+| 主控复核四类漏放修复 | 数据与质量 | [修复与重新交付](research-controller-fixes-2026-09-11.md) | mixed；四类反例全部复现并固化测试；**撤回「数据缺陷已清零」**，当前真实状态：描述/诊断可用，排序/对照各余1项未确认问题，研究信号/归因仍不可用；总报告已加纠正说明。 |
+| 主控复核三处遗漏修复 | 数据与质量 | [修复补充报告](research-controller-fixes-2026-09-11-02.md) | mixed；2026-09-13主控部分确认、仍需返修；上市来源及直接价格入口仍可漏放，测试分支需纠正。执行者原主张保留在正文，当前判断见下行。 |
+| 主控返修单 R1-R3 修复 | 数据与质量 | [修复交付](research-controller-fixes-2026-09-13.md) | mixed；当轮R2/R3确认、R1返修的历史证据；后续-02已由主控§11确认有限收口，不再把旧返修当当前任务。 |
+| R1 剩余问题：资格与日期分离 | 数据与质量 | [日期自洽与证据资格分离](research-controller-fixes-2026-09-13-02.md) | mixed；主控§11确认有限修复：8判断全拒、253项回归通过，日期诊断保留，真实数据仍受限；无新增代码必修项。 |
+| 数据基础主控复核（9-13） | 数据与质量 | [书面复核与执行要求](/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/research-data-foundation-controller-review-2026-09-13.md) | §11的R1/R2/R3限定收口保持。后续[离线输入验收长任务](/Users/yongbiaoli/Desktop/lei-signal-lab/docs/superpowers/plans/2026-09-13-research-input-preflight.md)已另交实现、待新主控单集中收尾；不因此重开旧修复或新增授权。 |
+| 数据基础第二轮 | 数据与质量 | [独立复核·交易日历·身份映射](research-data-provenance-round2-2026-09-10.md) | mixed；6项主张5项确认、1项纠正（聚合哈希未记排序规则已补）；深交所官方日历22个月与冻结价格零冲突；.SH/.SS 显式映射账目平衡。日历仍缺60个月、无法回答「当时是否已知休市安排」，行动21/21缺可得时间，归因不放行。 |
+| 日历补齐与发布时间 | 数据与质量 | [交易日历补齐·发布时间证据](research-calendar-completion-2026-09-10.md) | mixed；日历补到82/82月，全区间1652天零冲突，唯一缺口由512890拆分加停牌完整解释；2026年休市安排2025-12-22已公布，2026-02两所一致。但纠正上一轮：四个受限用途裁决一个都没变，另三项阻断仍在。 |
+| 身份映射接入与阻断分类 | 数据与质量 | [身份接入·用途阻断分类](research-identity-wiring-2026-09-10.md) | mixed；规范标签快照使13条代码错配清零且数值逐值不变；查清前三轮裁决不变的根因——固有属性与可修缺陷混筐，已分开：排序/对照可修缺陷清零，研究信号/归因仍余2项且接受固有属性不放行。行动时点细化为3条有下界18条全未知。 |
+| **数据基础统一交接（历史）** | 方法论与验证 | [五轮自查与统一交接](research-data-foundation-audit-and-handoff-2026-09-10.md) | 保留五轮自查证据；旧“排序/对照可修缺陷清零”不再作为当前结论。最新受限状态和有限修复收口见9-13主控§11。 |
+| 研究数据获取与快照 | 数据与质量 | [获取/导入→快照→校验→离线复用](research-data-provenance-2026-09-10.md) | mixed；闭环跑通并留全部来源指纹与请求时刻，855个受保护文件未变；查出 .SH/.SS 代码约定冲突已拦截。仍缺公司行动到达时间与真实交易所日历，资料判为有条件可用；未测因子、无收益结论、未接入既有消费者。 |
+
+### 9-09 总控评审后的有限迭代
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| 宽度固定50日对手 | [两只宽基：宽度是否值得保留](breadth-price50-decision-2026-09-09.md) | 2026-09-09 | 四条新账户、日期资格与18对持仓差额；保留有限候选，不自动扩参数 |
+| 小型研究因子库v0计划 | 统一计算、固定波动过滤对照、完整资金解释与独立验收 | [执行任务书](factor-library-v0-task-2026-09-09.md) | 计划已执行，交付见下一行。 |
+| 小型研究因子库v0交付 | 批量计算库、E11逐行兼容、8路径0.01元核账、E11−E10条件依赖 | [交付报告](factor-library-v0-delivery-2026-09-09.md) | mixed；过滤在选强路径整段增收但回撤更深、分段方向相反；工程交付待主控独立验收，未授权生产。 |
+| 因子、信号与基准定义规范化 | 76个对象定义卡、来源映射、研究隔离复算与流程入口 | [定义登记与复算](definition-normalization-ARCHIVE-2026-09-09.md) | mixed；32项单元/报告回归通过，两条小例逐值一致；旧消费者未迁移，未证明策略有效，不改生产或OKR。 |
+| ETF宽度来源与转强确认 | 510300/159915，全A与历史成分来源、W0—W3、三种简单参照、双费用 | [完整回测](etf-breadth-source-and-confirmation-backtest-2026-09-09.md) | mixed；18/22主路径完成，暂缓本轮固定宽度转强过滤但不淘汰宽度；宽度加价格确认与沪深300自身宽度保留验证，创业板历史成分链C级暂停。 |
+| 混合池四方案完整评价 | 固定11只四方案分期、恢复曲线、自身48次回补与历史资格来源 | [完整结果](mixed-four-way-evaluation-2026-09-09.md) | mixed；前段防守改善、后段近满额波动且收益较低；无新策略或修复后收益。 |
+| 混合池集中度与回补核账 | 原回补49次核账、时期及方向贡献、11只固定代表池双费用 | [完整结果](mixed-pool-concentration-audit-2026-09-09.md) | mixed；11只保留近满额收益及较浅回撤，后期与方向集中仍待更广历史池核验 |
+| 混合池防守方式两对照 | 原月度回补、快速回补与75%简单投入；同池全期双费用 | [完整结果](mixed-pool-defense-comparison-2026-09-09.md) | mixed；快速回补23.01%/23.27%，高费20.85%/25.70%；75%削弱原退出收益理由，快回补回撤优势不稳固。 |
+| ETF轮动四组重建 | 14只可交易ETF与7只行业、动态入池、逐年贡献和月度回补 | [完整结果](rotation-reconstructed-four-way-2026-09-09.md) | mixed；14只选强加退出17.31%/21.60%，7只行业未胜简单平均；旧34.38%未复现，12主路径已独立核对。 |
+| 34.38%旧轮动优先复核 | 原运行恢复、上游实际函数反例与17代码数据版本审计 | [复核结论](rotation-3438-reproducibility-audit-2026-09-09.md) | mixed；原成绩不可复现，上游隐含每日调整已证实但未绑定原E3，无新增历史收益，OKR未改。 |
+| 两项收益范围审核 | 旧轮动34.38%与四ETF定投14.46%的年限、代码及实际运行材料 | [审核补充](two-strategy-scope-review-2026-09-09.md) | mixed；四ETF可定位，旧轮动实际名单与准确日期未恢复，不更新OKR。 |
+| 按标的研究总方向 | 汇总宽基、红利、行业、黄金与海外的特性、已有收益证据和后续优先级 | [总方向表](etf-research-direction-map-2026-09-09.md) | mixed；只汇总与安排，行业新批保留准备资料，未新增收益或更新OKR。 |
+| 语义组合首批 | 同C1收复日位置/方向四组与三种退出，48完整流程、126固定路径 | [组合与退出报告](etf-semantic-combinations-2026-09-09.md) / [方法学习](../literature-learning/semantic-comparison-methods-2026-09-09.md) | mixed；仅18个不同可执行机会，E2为事后追加诊断，OKR未改。 |
+| R1单退出贡献 | 只取消道路退出，4新完整路径＋330固定原买入双版本 | [技术退出报告](r1-road-exit-contribution-2026-09-09.md) / [论文方法学习](../literature-learning/r1-exit-contribution-lessons-2026-09-09.md) | mixed；核心金额/退出/新投入曲线独立核对，不支持统一升级，OKR未改。 |
+| 分红公平参照 | 2ETF×2费用，到账后分红再买 | [分红再投入比较](etf-dividend-reinvestment-reference-2026-09-09.md) | mixed；4新路径独立核对通过，宽度优势仍有来源限制，OKR未改。 |
+| 宽度来源审计 | 追查股票范围、原价格和生成版本 | [来源审计](breadth-source-provenance-audit-2026-09-09.md) | mixed；来源缺口明确，旧收益限有条件研究，不改OKR。 |
+| AGENT-03B-runtime-integration | 讨论、补测与计划链定向合入 | [运行目录交付](agent-03b-runtime-integration-2026-09-09.md) | passed；已合入实际lab，保留新工作台；双入口与落地核查通过 |
+
+### 9-09 给总控的全任务交接
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| 总控评审落实 | 宽度来源、分红再投入公平参照、技术单环节及旧宽度定义补充 | [落实与接续安排](research-controller-review-response-2026-09-09.md) | watch；事实核对和计划修订完成，4条新参照尚未运行，OKR未改。 |
+| 研究全任务总交接 | 截至9月8日的全部增量与非增量、收益、证据限制与三条接续优先线 | [完整交接稿](research-controller-handoff-all-results-2026-09-09.md) | 汇总已核，mixed；研究未全部完成，无新增回测，OKR未改。 |
+| 研究总交接独立评审 | 关键金额另算、宽度来源与公平比较、下一批方向裁决 | [总控评审](research-handoff-controller-review-2026-09-09.md) | mixed；方向有条件采纳，尚非完整体系或生产采用验证；OKR未改。 |
+
+### 9-08 宽基与ETF主战场专项
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| 宽基ETF专项·投入资金更正 | 剔除未交易现金的分母影响，核原数量与缩量单位表现，明确研究欠账 | [指标与进度更正](invested-capital-performance-correction-2026-09-08.md) | 指标独立核对通过；缩量没有交易增益，完整研究未完成，OKR未改。 |
+| 宽基ETF专项·组合设计追问 | 解释缩量收益代价，明确基础投资与技术交易的资金分工 | [解释与设计](broad-etf-combination-design-2026-09-08.md) | watch；只复核已有交易，组合比例及完整资金协议待固定，无新增收益，OKR未改。 |
+| 宽基ETF专项第五批·数量增量 | R1候选和退出不变，仅1%计划风险缩量；4新账户＋4旧参照 | [资金缩量报告](broad-etf-risk-sizing-increment-2026-09-08.md) / [学习条目](../literature-learning/broad-etf-risk-sizing-lessons-2026-09-08.md) | 独立资金及订单核对完成；mixed；明显少跌但收益代价大，未证实通用升级；OKR不变。 |
+| 宽基ETF专项第四批·技术48账户 | 两只ETF十个A/C/D版本与两个简单参照×两费用 | [技术资金比较](broad-etf-technical-capital-comparison-2026-09-08.md) / [学习条目](../literature-learning/broad-etf-technical-lessons-2026-09-08.md) | 独立资金与订单核对完成；mixed；机会少、投入及退出不同，简单道路有产品差异；OKR保持确认值。 |
+| 宽基ETF专项第三批·增量决策 | 二元缓冲周度适配与趋势再参与，8新增账户/两费用 | [增量决策报告](broad-etf-increment-decision-comparison-2026-09-08.md) / [学习条目](../literature-learning/broad-etf-increment-lessons-2026-09-08.md) | 独立资金核对完成；mixed；交易可减半但无统一收益风险改善，两个记录口径差异另有说明；OKR仅按确认更新至2/4。 |
+| 宽基ETF专项第二批·首12账户 | 沪深300/创业板ETF持有、宽度、简单突破×两费用 | [完整账户报告](broad-etf-first12-account-comparison-2026-09-08.md) / [学习条目](../literature-learning/broad-etf-account-lessons-2026-09-08.md) | 独立资金/成交核算完成；mixed；宽度全期领先但2025明显踏空；六宽基及技术模块扩测尚未完成，OKR保持已确认值。 |
+| 宽基ETF专项第二批·旧基准 | 旧九指数份额现金重建与真正持有对照 | [资金核查](broad-breadth-cash-reconciliation-2026-09-08.md) | 已独立核对；mixed；宽度旧优势保留，ETF首12另行比较。 |
+| 宽基ETF专项第一批 | 六宽基四行业总计划、覆盖清单、旧宽度A/B基准复现 | [启动报告](broad-etf-research-plan-and-baseline-2026-09-08.md) / [工作计划](../superpowers/plans/2026-09-08-broad-index-etf-research.md) | 计划与本批起点检查已交；mixed；OKR已确认登记进行中0/4，首12ETF账户另批执行。 |
+
+### 9-08 第十四批顶部退出有效期
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| 研究第十四批 | 顶部失效消费方反例、隔离修复及真实识别器链路检查 | [核查报告](a-top-lifecycle-consumer-audit-2026-09-08.md) | 已归档；mixed；10项检查通过，完整收益未运行，同日口径待答复，OKR未更新。 |
+
+### 9-08 研究成果盘点
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| 研究盘点 | 定投、闲钱投入、结构缓冲和A退出的积极结果与证据边界 | [成就与限制](research-promising-directions-review-2026-09-08.md) | 已归档；mixed；候选不等于升级，不更新OKR程度。 |
+
+### 9-08 第十三批A道路退出与重新参与
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| 研究第十三批 | 六A×两退出完整账户、固定17买入与原文方法核读 | [退出报告](a-road-exit-account-comparison-2026-09-08.md) / [学习补充](../literature-learning/exit-and-reentry-lessons-2026-09-08.md) | 已归档；mixed；A20少跌但少赚，其余四组无差异；OKR证据待具体确认。 |
+
+### 9-08 第十二批修复后有限账户比较
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| 研究第十二批 | A/C/D与简单参照12配置、全账户及独立核查 | [账户报告](acd-limited-account-comparison-2026-09-08.md) / [学习补充](../literature-learning/account-comparison-lessons-2026-09-08.md) | 已归档；mixed；收益集中与零成交完整保留，完整策略仍未完成；本批OKR证据待确认。 |
+
+### 9-08 第十一批隔离修复与历史复测
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| 研究第十一批 | A/C/D已证实问题修复、原日期与连续日期复测 | [修复报告](acd-repair-validation-2026-09-08.md) | 已归档；mixed；366+168次历史检查通过；完整收益对照仍待续。 |
+
+### 9-08 第十批信息时点与定义核查
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| 研究第十批 | A/C/D原始事件、历史一致性与修复验收 | [诊断报告](acd-information-qualification-2026-09-08.md) | 已归档；mixed；366次检查，A两个真实日期差异；修复与完整账户待续，OKR未更新。 |
+
+### 9-08 第九批诊断与研究交接
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| 研究第九批 | 两组入场纪律诊断、B六事件区间溯源 | [诊断报告](entry-discipline-and-b-zone-diagnosis-2026-09-08.md) | 已归档；mixed；全部资金和成交核对；不改变正式纪律。 |
+| 研究交接 | 05—08、ATR、论文、完整模块的已交与未完成清单 | [统一交接](research-local-phase-closeout-2026-09-08.md) / [学习内容补充交接](../literature-learning/research-followups-handoff-2026-09-08.md) | 有限研究已交，完整系统和未来验证仍未完成；K-baseline已按确认更新3/4。 |
+
+### 9-08 第八批有限技术账户
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| 研究第八批 | 修正B研究差异、固定8配置、全现金核算与独立重建 | [第八批报告](technical-account-limited-comparison-2026-09-08.md) / [学习补充](../literature-learning/technical-comparison-lessons-2026-09-08.md) | 已归档；mixed；交易极少，未证明升级有效；OKR拟更新待确认。 |
+
+### 9-08 第七批论文方法落实
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| 研究第七批 | 论文原文方法、实际年月盈亏、B规则与价格转换前提核验 | [第七批报告](paper-methods-applied-checks-2026-09-08.md) / [学习补充](../literature-learning/paper-method-followup-2026-09-08.md) | 已归档；mixed；独立重算一致，完整技术账户仍有规则和数据定义前提。 |
+
+### 9-08 文献对照
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| 文献对照 | 系统与专业金融论文的关联、区别及可借鉴方法 | [对照报告](lei-academic-literature-ARCHIVE-2026-09-08.md) | 已归档；12篇论文及中文笔记已存 Zotero；非新回测 |
+| 研究负责人任务审阅 | 逐环节效果、完整交易与论文方法的研究安排 | [审阅与补充建议](research-lead-task-review-2026-09-08.md) | 已审阅；研究待授权 |
+| 文献学习库 | 18篇文献、20条学习内容与独立页面开发交接 | [交接稿](literature-learning-library-handoff-2026-09-08.md) | 内容已备；页面未开发 |
+
+### 9-08 研究负责人首轮
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| 研究首轮 | 九环节证据、近期论文、真实小范围复现与独立复核 | [首轮报告](research-first-round-ARCHIVE-2026-09-08.md) | 五项成果已交，待验收；部分旧证据需收窄 |
+| E01 | 旧定投目标退出的成交时间与完整资金复验 | [冻结方案](research-first-experiment-protocol-2026-09-08.md) / [执行结果](ambush-complete-menu-review-2026-09-08.md) | 原146机会与64路径已复核，研究待验收 |
+
+### 9-08 新版统一研究首批
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| 新版研究 | 出场与止损 | [ambush-complete-menu-review-2026-09-08.md](ambush-complete-menu-review-2026-09-08.md) | 已交有限研究；mixed，后续范围见总览 |
+| 新版研究 | 方法论与验证 | [dca-instrument-measurement-review-2026-09-08.md](dca-instrument-measurement-review-2026-09-08.md) | 已交有限研究；mixed，后续范围见总览 |
+| 新版研究 | 宏观与情绪 | [sentiment-combination-feasibility-review-2026-09-08.md](sentiment-combination-feasibility-review-2026-09-08.md) | 已交有限研究；mixed，后续范围见总览 |
+| 新版研究 | 方法论与验证 | [ai-defense-evidence-audit-2026-09-08.md](ai-defense-evidence-audit-2026-09-08.md) | 已交有限研究；mixed，后续范围见总览 |
+| 新版研究 | 研究总纲 | [research-unified-progress-2026-09-08.md](research-unified-progress-2026-09-08.md) | 已交有限研究；mixed，后续范围见总览 |
+
+### 9-08 05—08第二批推进
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| 05—08第二批 | 出场与止损 | [ambush-pending-boundaries-2026-09-08.md](ambush-pending-boundaries-2026-09-08.md) | 补齐未成交及取消记录，8类检查通过、64账户原结果不变；没有新的策略收益。 |
+| 05—08第二批 | 数据与质量 | [dca-split-data-audit-2026-09-08.md](dca-split-data-audit-2026-09-08.md) | 纳指基金约80%跳降与1拆5对应；近期价格有了明确来源，长历史三对照仍未运行。 |
+| 05—08第二批 | 语义组合 | [sentiment-four-input-audit-2026-09-08.md](sentiment-four-input-audit-2026-09-08.md) | 半导体无完整可算日，有色96日无四条件同时触发；资料不足以验证新增机会收益。 |
+| 05—08第二批 | 方法论与验证 | [ai-future-validation-protocol-2026-09-08.md](ai-future-validation-protocol-2026-09-08.md) | 解释与退出两份未来方案及记录模板已备；偏好、最小改善幅度和观察量尚待冻结。 |
+| 05—08第二批 | 研究总纲 | [research-05-08-progress-2026-09-08.md](research-05-08-progress-2026-09-08.md) | 05记录补齐、06拆分核查、07完整条件资料及08未来方案已交；后两项仍有未完成标准。 |
+
+### 9-08 05—08第三批推进
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| 第三批研究 | 数据与质量 | [dca-long-data-cash-boundary-2026-09-08.md](dca-long-data-cash-boundary-2026-09-08.md) | 四基金长历史价格已取回；单次分红对账确认前复权比值不同于保留现金的持有财富，长历史三对照仍未运行。 |
+| 第三批研究 | 语义组合 | [icepoint-legacy-replay-2026-09-08.md](icepoint-legacy-replay-2026-09-08.md) | 旧四区间252条价格观察全部复现，但实际只测两条件，不能证明完整冰点四条件有效。 |
+| 第三批研究 | 方法论与验证 | [ai-explanation-exercise-pack-2026-09-08.md](ai-explanation-exercise-pack-2026-09-08.md) | 8份解释练习、答案依据和来源已备，尚未运行模型或评价用户理解。 |
+| 第三批研究 | 研究总纲 | [research-third-progress-2026-09-08.md](research-third-progress-2026-09-08.md) | 长价格取得、分红计量、旧252条观察复现及8份解释练习已交；完整组合收益与AI效果尚未验证。 |
+
+### 9-08 05—08第四批推进
+
+| 批次 | 类别 | 报告 | 状态 |
+|---|---|---|---|
+| 第四批研究 | 组合与仓位 | [实际基金现金三对照](dca-actual-fund-cash-comparison-2026-09-08.md) | 三年同资金对照已交：季度调整多赚但没有减少最大跌幅；长期仍待资料 |
+| 第四批研究 | 研究总纲 | [第四批全貌](research-fourth-progress-2026-09-08.md) | 12固定情景与基础账户独立核查完成；更早历史与其他未决事项保持记录 |
+
+### 9-08 第五批与06研究交付
+
+| 批次 | 类别 | 报告 | 状态 |
+|---|---|---|---|
+| 第五批 | 组合与仓位 | [近13年实际资金比较](dca-long-cash-study-closeout-2026-09-08.md) | 21次固定比较完成；长期季度方案有条件支持，2020—2022仍亏损，提交待验收 |
+| 交付总览 | 研究总纲 | [05—08总交接](research-05-08-delivery-handoff-2026-09-08.md) | 已交证据、未定偏好、缺失资料与未来观察分开；附三个按文献索引的本地学习例子 |
+
 ### 9-01 轮（A–M，任务书合订本：`prompts-2026-09-01.md`）
 
 | 编号 | 任务 | 执行归档 | 状态 |
@@ -154,6 +424,15 @@
 | AX | staged-exit-validation-2026-09-04 | ❌ 语义九卖出侧关闭 |
 | AY | breadth-input-comparison-2026-09-04 | ❌ 查重关闭（playbook 已测） |
 | BC | module-b-us-etf-boundary-2026-09-04 | ❌ 模块B不出海（剔 1995 后≈零） |
+
+### 9-08 第六批退出基准与ATR
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| 第六批基准 | 2309条旧记录、价格与时间退出重复计数 | [完整核验](exit-baseline-full-audit-2026-09-08.md) | 研究已交；真实成本仍缺，OKR待用户确认 |
+| 第六批ATR | 0.5ATR固定机会、相同资金与计划风险 | [有限比较](atr-buffer-opportunity-study-2026-09-08.md) | 55416行及独立复核已交；mixed，未接生产 |
+| 第六批交接 | 已完成证据、学习实例与剩余依赖 | [统一交接](research-sixth-handoff-2026-09-08.md) | 整体仍有未完成项；OKR待确认 |
+
 
 ## 2. 归档按主题（每份文件只归一组，标题即内容摘要）
 

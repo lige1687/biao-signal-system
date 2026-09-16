@@ -1,0 +1,59 @@
+{
+  "checks": {
+    "four_accounts": true,
+    "unique_accounts": true,
+    "candidate_objects_exact_order": true,
+    "locked_files_unchanged": true,
+    "lock_same_before_after": true,
+    "daily_complete": true,
+    "funding_exact": true,
+    "ending_components": true,
+    "fees_match": true,
+    "risk_budgets_use_prior_equity": true,
+    "quantities_within_risk_and_cash": true
+  },
+  "source_lock_sha256": "be43adaba201acaf205249b748d520930987278965b644931ead45fe214e6dcd",
+  "accounts": [
+    {
+      "account_id": "sh510300-R1-risk1-fee10bp",
+      "last_equity": 104094.22700000006,
+      "net_gain": 4094.227000000057,
+      "max_drawdown": 0.08402349986167201,
+      "mean_exposure": 0.1064400886394067,
+      "buys": 83,
+      "sells": 82,
+      "fees": 3425.873
+    },
+    {
+      "account_id": "sh510300-R1-risk1-fee20bp",
+      "last_equity": 100638.1608,
+      "net_gain": 638.1607999999978,
+      "max_drawdown": 0.09924493462763877,
+      "mean_exposure": 0.10645517425267903,
+      "buys": 83,
+      "sells": 82,
+      "fees": 6743.539200000003
+    },
+    {
+      "account_id": "sz159915-R1-risk1-fee10bp",
+      "last_equity": 139998.0331,
+      "net_gain": 39998.0331,
+      "max_drawdown": 0.11655298716662557,
+      "mean_exposure": 0.07223253358173602,
+      "buys": 82,
+      "sells": 81,
+      "fees": 2673.6669
+    },
+    {
+      "account_id": "sz159915-R1-risk1-fee20bp",
+      "last_equity": 136910.96239999996,
+      "net_gain": 36910.96239999996,
+      "max_drawdown": 0.12421319487441083,
+      "mean_exposure": 0.07218680062533787,
+      "buys": 82,
+      "sells": 81,
+      "fees": 5288.437600000003
+    }
+  ],
+  "scope": "execution invariants; independent candidate/exit/account reconstruction is performed separately"
+}

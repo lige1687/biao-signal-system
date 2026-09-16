@@ -1,0 +1,97 @@
+{
+  "account_ids_unique": true,
+  "all_tables_account_ids_subset": {
+    "equity": true,
+    "trades": true,
+    "orders": true,
+    "signals": true,
+    "actions": true,
+    "annual": true,
+    "per_symbol": true,
+    "accounts": true
+  },
+  "reconciliations": [
+    {
+      "account_id": "full14-equal-fee0.001",
+      "final_diff": 0.0,
+      "fee_diff": -5.4569682106375694e-12,
+      "attribution_diff": 2.3283064365386963e-10
+    },
+    {
+      "account_id": "full14-momentum_top3-fee0.001",
+      "final_diff": 0.0,
+      "fee_diff": 1.4551915228366852e-11,
+      "attribution_diff": -1.862645149230957e-09
+    },
+    {
+      "account_id": "full14-equal_sma200-fee0.001",
+      "final_diff": 0.0,
+      "fee_diff": 7.275957614183426e-11,
+      "attribution_diff": -2.5029294192790985e-09
+    },
+    {
+      "account_id": "full14-momentum_top3_sma200-fee0.001",
+      "final_diff": 0.0,
+      "fee_diff": 1.4551915228366852e-11,
+      "attribution_diff": 2.7939677238464355e-09
+    },
+    {
+      "account_id": "full14-equal-fee0.002",
+      "final_diff": 0.0,
+      "fee_diff": -9.094947017729282e-12,
+      "attribution_diff": 0.0
+    },
+    {
+      "account_id": "full14-momentum_top3-fee0.002",
+      "final_diff": 0.0,
+      "fee_diff": 0.0,
+      "attribution_diff": 6.984919309616089e-10
+    },
+    {
+      "account_id": "full14-equal_sma200-fee0.002",
+      "final_diff": 0.0,
+      "fee_diff": 2.0372681319713593e-10,
+      "attribution_diff": 2.0954757928848267e-09
+    },
+    {
+      "account_id": "full14-momentum_top3_sma200-fee0.002",
+      "final_diff": 0.0,
+      "fee_diff": 5.820766091346741e-11,
+      "attribution_diff": 3.259629011154175e-09
+    },
+    {
+      "account_id": "industry7-equal-fee0.001",
+      "final_diff": 0.0,
+      "fee_diff": 1.8189894035458565e-12,
+      "attribution_diff": 4.656612873077393e-10
+    },
+    {
+      "account_id": "industry7-momentum_top3-fee0.001",
+      "final_diff": 0.0,
+      "fee_diff": -7.275957614183426e-12,
+      "attribution_diff": 4.656612873077393e-10
+    },
+    {
+      "account_id": "industry7-equal_sma200-fee0.001",
+      "final_diff": 0.0,
+      "fee_diff": 0.0,
+      "attribution_diff": -1.3969838619232178e-09
+    },
+    {
+      "account_id": "industry7-momentum_top3_sma200-fee0.001",
+      "final_diff": 0.0,
+      "fee_diff": 0.0,
+      "attribution_diff": -1.3969838619232178e-09
+    }
+  ],
+  "decision_source": {
+    "momentum": "economic_index.shift(21)/shift(252)-1",
+    "rv": "20-return sample std; rolling max756 min252 average percentile; exclude >=0.8",
+    "eligibility": "273 actual valid closes and current decision-date quote"
+  },
+  "execution_blocks": {
+    "locked_one_price_limit": 24,
+    "missing_quote": 64912,
+    "zero_volume_or_halt": 24
+  }
+}

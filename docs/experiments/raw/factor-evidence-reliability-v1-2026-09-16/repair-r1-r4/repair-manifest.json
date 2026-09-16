@@ -1,0 +1,69 @@
+{
+ "purpose": "R1–R4 限定返修：修后源码原字节快照与新旧哈希对照",
+ "date": "2026-09-16",
+ "code_snapshot": [
+  {
+   "path": "src/lei_signal/research/factor_evidence/__init__.py",
+   "old_sha256_v1.0.0": "54c8ff4ef0af9308ca61a26e1ef7d5fda07b8b3f897a2e01aa7123917fc26cca",
+   "new_sha256_repaired": "54c8ff4ef0af9308ca61a26e1ef7d5fda07b8b3f897a2e01aa7123917fc26cca",
+   "changed": false,
+   "change": "无改动"
+  },
+  {
+   "path": "src/lei_signal/research/factor_evidence/contract.py",
+   "old_sha256_v1.0.0": "e2c6215559d074f81998e7f181ba51ebe6e2ea9935edb4d043a741d8a7a21b91",
+   "new_sha256_repaired": "20106f89e963d029ff2d00f334603c3b15f742dbb209646bfcb3184655b44f05",
+   "changed": true,
+   "change": "R1：新增 OBJECT_REF/FIXED_USE 常量并在 validate_protocol 逐值绑定顶层对象/用途"
+  },
+  {
+   "path": "src/lei_signal/research/factor_evidence/observations.py",
+   "old_sha256_v1.0.0": "37d812b2c76e723b9950eac983ecf5d61cecb6ad531164d2de75d2b714cf185c",
+   "new_sha256_repaired": "5eb79b7e7802a0f65e2fd156571044e616d04db81cc5285aa5c085e0fdda0783",
+   "changed": true,
+   "change": "R2：validate_observations 明确拒绝多标的输入（不做隐式合并）"
+  },
+  {
+   "path": "src/lei_signal/research/factor_evidence/stability.py",
+   "old_sha256_v1.0.0": "f54f68be3a517b8c77ef44e781ad130aac3a06fa2bc719976da9b6394fdfa166",
+   "new_sha256_repaired": "e794e7a3194adea1fbbcbb213a889f21bc05c0e3cc931cdb7b5d0787e401ead4",
+   "changed": true,
+   "change": "R2：overlap_audit 主结果改为共同合法集合；新增 all_rows_with_endpoints 独立视角；稀疏锚点沿原轴推进并分类应有/可审计/缺失原因；非法行保留原轴位置"
+  },
+  {
+   "path": "src/lei_signal/research/factor_evidence/resampling.py",
+   "old_sha256_v1.0.0": "5542d778f1fc5b87505b8b3d1f862e4c1c04f842195bf041e3c1043b70573c94",
+   "new_sha256_repaired": "7aa68db259d082091d75b74ae912c16ff3c59b01b3a2ba36c22f684dd6243535",
+   "changed": true,
+   "change": "R2：空表返回结构化 not_estimable:empty_frame（资料不足，不再是参数异常）"
+  },
+  {
+   "path": "src/lei_signal/research/factor_evidence/runner.py",
+   "old_sha256_v1.0.0": "0695cd902cf759943bfede7d858ebf047fcf38dd1d0175da19dece96a8c7ba6d",
+   "new_sha256_repaired": "06611433debb1fe423b41f180b3d5c65aed969430a56bab9e832a241898954af",
+   "changed": true,
+   "change": "R1/R2/R4：_resolve_identity 真实/合成分离（合成不冒用 B1 身份，冲突写盘前拒绝）；单组/缺组完成诚实 not_estimable 报告；报告模板组内百分比/组间百分点并全字段 None 安全；main 资料不足出口 2；卡片记录实际 L/reps/seed"
+  },
+  {
+   "path": "scripts/run_factor_evidence_reliability.py",
+   "old_sha256_v1.0.0": "4976b6e696281712c33fcf7c4c2b00e8a283986b6001c9709c3fc88e7460141b",
+   "new_sha256_repaired": "4976b6e696281712c33fcf7c4c2b00e8a283986b6001c9709c3fc88e7460141b",
+   "changed": false,
+   "change": "无改动"
+  },
+  {
+   "path": "src/lei_signal/research/trading_calendar.py",
+   "old_sha256_v1.0.0": "4651fa7d0e1e20aeaf3b40d9446f3ea76ec0eac037bbe965c018c3e5ccb6389e",
+   "new_sha256_repaired": "4651fa7d0e1e20aeaf3b40d9446f3ea76ec0eac037bbe965c018c3e5ccb6389e",
+   "changed": false,
+   "change": "无改动"
+  }
+ ],
+ "unchanged_keys": [
+  "src/lei_signal/research/factor_evidence/__init__.py",
+  "scripts/run_factor_evidence_reliability.py",
+  "src/lei_signal/research/trading_calendar.py"
+ ],
+ "binding": "旧 run-01 与 freeze/1.0.0 绑定旧字节；本轮修复仅由合成测试证明，未经真实运行；未来正式真实运行须另建新版本协议绑定本快照（需主控授权）",
+ "old_protocol_still_at": "protocol-v1.0.0.json（未重签未覆写；其 code_identity 与修后代码不再一致属诚实漂移拒绝）"
+}

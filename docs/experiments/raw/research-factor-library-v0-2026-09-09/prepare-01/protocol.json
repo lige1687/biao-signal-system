@@ -1,0 +1,224 @@
+{
+  "study": "factor-library-v0",
+  "prepared_at": "2026-09-09T12:34:21.120204+00:00",
+  "plan": "docs/superpowers/plans/2026-09-09-factor-library-v0.md@1.0.0",
+  "principles_version": "1.0",
+  "definition_standard_version": "1.0.0",
+  "registry": {
+    "path": "docs/research/definitions.v1.json",
+    "version": "1.1.0",
+    "object_count": 78,
+    "frozen_snapshot": "frozen-definitions.v1.0.0.json",
+    "frozen_snapshot_sha256": "d0f9e0038123b61a83699c52d67a80561f2bfe36b24a7c1f25575f5da78c209e"
+  },
+  "accounts": {
+    "symbols": [
+      "510300",
+      "512400",
+      "515050",
+      "515130",
+      "515300",
+      "518850",
+      "588000",
+      "515170",
+      "516220",
+      "159652",
+      "512890",
+      "515880",
+      "513870",
+      "562590"
+    ],
+    "start": "2020-12-01",
+    "end": "2026-06-30",
+    "initial_cash": 1000000,
+    "external_flows": 0,
+    "cash_interest": 0,
+    "lot": 100,
+    "fees": [
+      0.001,
+      0.002
+    ],
+    "max_new_paths": 8,
+    "monthly_rebalance": true,
+    "inter_month_rebalance": false,
+    "sma_exit": false,
+    "fast_reentry": false,
+    "warmup": "original full14 preparation inputs; dynamic 273 valid-quote eligibility; 252/21 momentum"
+  },
+  "variants": {
+    "E00": {
+      "rank_top3": false,
+      "volatility_filter": false,
+      "allocation": "eligible_equal"
+    },
+    "E01": {
+      "rank_top3": false,
+      "volatility_filter": true,
+      "allocation": "eligible_equal"
+    },
+    "E10": {
+      "rank_top3": true,
+      "volatility_filter": false,
+      "allocation": "top3_equal"
+    },
+    "E11": {
+      "rank_top3": true,
+      "volatility_filter": true,
+      "allocation": "top3_equal"
+    }
+  },
+  "variant_rules": {
+    "eligibility": "current valid quote AND valid_count>=273 AND finite momentum",
+    "negative_momentum": "allowed",
+    "ties": "exact score equality, symbol code ascending",
+    "nan_rv_percentile": "pass_legacy with explicit count output",
+    "rv_exclusion": "exclude rv_percentile >= 0.8 exactly",
+    "no_candidates": "all cash, empty selection, zero weights",
+    "duplicate_economic_directions": "allowed; not removed",
+    "filter_then_rank": "volatility filter applied before top3; filtered products never backfilled"
+  },
+  "comparisons": {
+    "primary": "E11-E10: adding the volatility filter inside the existing strength policy",
+    "secondary": "E01-E00: filter effect without ranking; interaction description only",
+    "label_rule": "E10-E00 changes both ranking and concentration; label as policy difference, never pure momentum premium"
+  },
+  "frozen_sources": {
+    "mixed_prices": {
+      "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/prices.csv",
+      "sha256": "de467734be6c2ccbabed6fd39dc04b36fc6b78ee0ab731defd31ded4b83eb850"
+    },
+    "mixed_actions": {
+      "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/normalized-actions.json",
+      "sha256": "097043b2c622a308b602a961b666129f575a35083a8ede6d7bfa1cf16ea1ce81"
+    },
+    "mixed_pool": {
+      "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/candidate-pool.json",
+      "sha256": "c9da91c99e3449b25bcdb7f339aa1626261e0724092b0c05fd5f6a5fd5b9f430"
+    },
+    "defense_code": {
+      "path": "docs/experiments/raw/research-mixed-defense-2026-09-09/execution/run.py",
+      "sha256": "bcffccf19eec6ccb7dbd0a1f3c6092a321f1baa9c6b946dd8cddbc03c6ec8928"
+    },
+    "defense_protocol": {
+      "path": "docs/experiments/raw/research-mixed-defense-2026-09-09/protocol.json",
+      "sha256": "caabc661516f84af660046c93ad529ed61a40888e05519f7806b830a04dc398f"
+    },
+    "defense_results": {
+      "path": "docs/experiments/raw/research-mixed-defense-2026-09-09/execution/summary.json",
+      "sha256": "6671b965d27f3527e35aacafb3b3e3182e57e9a1019c2312c69bcb1e1cb808e0"
+    },
+    "concentration_code": {
+      "path": "docs/experiments/raw/research-mixed-pool-audit-2026-09-09/controller/group_accounting.py",
+      "sha256": "97bf8a052e55bc8f431617d9ffa492275cddef102f45a5b365fbc415972dd531"
+    }
+  },
+  "defense_baseline_results": {
+    "path": "docs/experiments/raw/research-mixed-defense-2026-09-09/execution/summary.json",
+    "sha256": "6671b965d27f3527e35aacafb3b3e3182e57e9a1019c2312c69bcb1e1cb808e0"
+  },
+  "compatibility_replays": "at most 2 (E11 at each fee), legacy function replay for compatibility only, not new evidence",
+  "stop_conditions": [
+    "source fingerprint drift",
+    "E11 legacy compatibility mismatch",
+    "account reconciliation beyond CNY 0.01"
+  ],
+  "phases": [
+    {
+      "label": "2020Dec-2024",
+      "start": "2020-12-01",
+      "end": "2024-12-31"
+    },
+    {
+      "label": "2025-2026Jun",
+      "start": "2025-01-01",
+      "end": "2026-06-30"
+    }
+  ],
+  "phase_rule": "cut one continuous path only; no fresh cash injection or position reset at phase start",
+  "completed_months": {
+    "decision_months": {
+      "2020-11": "2020-11-30",
+      "2020-12": "2020-12-31",
+      "2021-01": "2021-01-29",
+      "2021-02": "2021-02-26",
+      "2021-03": "2021-03-31",
+      "2021-04": "2021-04-30",
+      "2021-05": "2021-05-31",
+      "2021-06": "2021-06-30",
+      "2021-07": "2021-07-30",
+      "2021-08": "2021-08-31",
+      "2021-09": "2021-09-30",
+      "2021-10": "2021-10-29",
+      "2021-11": "2021-11-30",
+      "2021-12": "2021-12-31",
+      "2022-01": "2022-01-28",
+      "2022-02": "2022-02-28",
+      "2022-03": "2022-03-31",
+      "2022-04": "2022-04-29",
+      "2022-05": "2022-05-31",
+      "2022-06": "2022-06-30",
+      "2022-07": "2022-07-29",
+      "2022-08": "2022-08-31",
+      "2022-09": "2022-09-30",
+      "2022-10": "2022-10-31",
+      "2022-11": "2022-11-30",
+      "2022-12": "2022-12-30",
+      "2023-01": "2023-01-31",
+      "2023-02": "2023-02-28",
+      "2023-03": "2023-03-31",
+      "2023-04": "2023-04-28",
+      "2023-05": "2023-05-31",
+      "2023-06": "2023-06-30",
+      "2023-07": "2023-07-31",
+      "2023-08": "2023-08-31",
+      "2023-09": "2023-09-28",
+      "2023-10": "2023-10-31",
+      "2023-11": "2023-11-30",
+      "2023-12": "2023-12-29",
+      "2024-01": "2024-01-31",
+      "2024-02": "2024-02-29",
+      "2024-03": "2024-03-29",
+      "2024-04": "2024-04-30",
+      "2024-05": "2024-05-31",
+      "2024-06": "2024-06-28",
+      "2024-07": "2024-07-31",
+      "2024-08": "2024-08-30",
+      "2024-09": "2024-09-30",
+      "2024-10": "2024-10-31",
+      "2024-11": "2024-11-29",
+      "2024-12": "2024-12-31",
+      "2025-01": "2025-01-27",
+      "2025-02": "2025-02-28",
+      "2025-03": "2025-03-31",
+      "2025-04": "2025-04-30",
+      "2025-05": "2025-05-30",
+      "2025-06": "2025-06-30",
+      "2025-07": "2025-07-31",
+      "2025-08": "2025-08-29",
+      "2025-09": "2025-09-30",
+      "2025-10": "2025-10-31",
+      "2025-11": "2025-11-28",
+      "2025-12": "2025-12-31",
+      "2026-01": "2026-01-30",
+      "2026-02": "2026-02-27",
+      "2026-03": "2026-03-31",
+      "2026-04": "2026-04-30",
+      "2026-05": "2026-05-29",
+      "2026-06": "2026-06-30"
+    },
+    "months_without_any_union_quote": [],
+    "observed_last_input_date": "2026-06-30",
+    "declared_end_from_frozen_protocol": "2026-06-30",
+    "final_month_complete_by_protocol_declaration": true,
+    "calendar_limitation": "Union dates are those with at least one quote among the 14 products; a session missing for the whole pool cannot be distinguished from a non-session. Historical real-exchange calendar qualification is not certified here."
+  },
+  "data_layers": {
+    "numerical_reconstruction": "qualified: nominal prices and normalized actions match frozen source hashes",
+    "historical_point_in_time_availability": "not_certified: 0/21 events carry available_at; strict economic_index availability checks cannot be satisfied; historical reconstruction only",
+    "actual_execution_capacity": "not_accepted: frozen protocol evidence limits apply (surviving pool, duplicated exposures)",
+    "reconstruction_time": "2026-09-09T12:34:21.143700+00:00",
+    "reconstruction_time_note": "this run time labels today's historical rebuild, not a historical availability claim"
+  },
+  "production_authorization": "not_authorized",
+  "okr_update": false
+}

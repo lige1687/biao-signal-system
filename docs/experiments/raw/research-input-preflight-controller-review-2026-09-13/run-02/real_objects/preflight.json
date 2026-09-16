@@ -1,0 +1,1251 @@
+{
+ "schema_version": "research-input-preflight/1.0",
+ "request": {
+  "snapshot_dir": "docs/experiments/raw/research-identity-wiring-2026-09-10/canonical-snapshot-v2",
+  "calendar_path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+  "publication_path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-evidence.json",
+  "actions_path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/normalized-actions.json",
+  "registry_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definitions.v1.json",
+  "refs": [
+   "mixed.price.economic@1.0.0",
+   "mixed.momentum.raw@1.0.0",
+   "trend.sma200@1.0.0"
+  ],
+  "use": "description",
+  "evaluation_start": "2019-09-02",
+  "evaluation_end": "2026-06-30"
+ },
+ "input_times": {
+  "snapshot_timing": {
+   "started_at": "2026-09-10T00:00:00+00:00",
+   "finished_at": "2026-09-10T00:00:15+00:00",
+   "note": "started_at/finished_at 是本次运行时刻；不得当作数据的对外可用时刻。"
+  },
+  "time_semantics": {
+   "observed_at": "数据自身观察日（日线收盘）",
+   "available_at": "来源对外可用时刻；未核实一律 null 并给 reason",
+   "generated_at": "本地标准化产物生成时刻",
+   "fetched_at": "本次取得时刻；导入模式为 null",
+   "rule": "后来取得的历史资料只证明本次取得了该版本，不证明历史当天就拿得到"
+  },
+  "per_instrument": {
+   "159652.SZ": {
+    "fetched_at": null,
+    "first_date": "2023-02-08",
+    "last_date": "2026-06-30"
+   },
+   "510300.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-02",
+    "last_date": "2026-06-30"
+   },
+   "512400.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-02",
+    "last_date": "2026-06-30"
+   },
+   "512890.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-02",
+    "last_date": "2026-06-30"
+   },
+   "513870.SS": {
+    "fetched_at": null,
+    "first_date": "2023-11-02",
+    "last_date": "2026-06-30"
+   },
+   "515050.SS": {
+    "fetched_at": null,
+    "first_date": "2019-10-16",
+    "last_date": "2026-06-30"
+   },
+   "515130.SS": {
+    "fetched_at": null,
+    "first_date": "2020-05-11",
+    "last_date": "2026-06-30"
+   },
+   "515170.SS": {
+    "fetched_at": null,
+    "first_date": "2021-01-13",
+    "last_date": "2026-06-30"
+   },
+   "515300.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-19",
+    "last_date": "2026-06-30"
+   },
+   "515880.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-06",
+    "last_date": "2026-06-30"
+   },
+   "516220.SS": {
+    "fetched_at": null,
+    "first_date": "2021-03-10",
+    "last_date": "2026-06-30"
+   },
+   "518850.SS": {
+    "fetched_at": null,
+    "first_date": "2020-06-05",
+    "last_date": "2026-06-30"
+   },
+   "562590.SS": {
+    "fetched_at": null,
+    "first_date": "2023-10-18",
+    "last_date": "2026-06-30"
+   },
+   "588000.SS": {
+    "fetched_at": null,
+    "first_date": "2020-11-16",
+    "last_date": "2026-06-30"
+   }
+  },
+  "available_at": null,
+  "available_at_note": "历史到达时间未知；保持 null，不用本次生成时刻顶替"
+ },
+ "integrity": {
+  "verified": true,
+  "hash_mismatches": [],
+  "instruments": [
+   "159652.SZ",
+   "510300.SS",
+   "512400.SS",
+   "512890.SS",
+   "513870.SS",
+   "515050.SS",
+   "515130.SS",
+   "515170.SS",
+   "515300.SS",
+   "515880.SS",
+   "516220.SS",
+   "518850.SS",
+   "562590.SS",
+   "588000.SS"
+  ],
+  "rows": 18916,
+  "first_date": "2019-09-02",
+  "last_date": "2026-06-30",
+  "per_instrument_fields": {
+   "159652.SZ": {
+    "missing_declared_fields": [],
+    "rows": 822
+   },
+   "510300.SS": {
+    "missing_declared_fields": [],
+    "rows": 1652
+   },
+   "512400.SS": {
+    "missing_declared_fields": [],
+    "rows": 1652
+   },
+   "512890.SS": {
+    "missing_declared_fields": [],
+    "rows": 1651
+   },
+   "513870.SS": {
+    "missing_declared_fields": [],
+    "rows": 643
+   },
+   "515050.SS": {
+    "missing_declared_fields": [],
+    "rows": 1626
+   },
+   "515130.SS": {
+    "missing_declared_fields": [],
+    "rows": 1489
+   },
+   "515170.SS": {
+    "missing_declared_fields": [],
+    "rows": 1321
+   },
+   "515300.SS": {
+    "missing_declared_fields": [],
+    "rows": 1640
+   },
+   "515880.SS": {
+    "missing_declared_fields": [],
+    "rows": 1648
+   },
+   "516220.SS": {
+    "missing_declared_fields": [],
+    "rows": 1286
+   },
+   "518850.SS": {
+    "missing_declared_fields": [],
+    "rows": 1470
+   },
+   "562590.SS": {
+    "missing_declared_fields": [],
+    "rows": 654
+   },
+   "588000.SS": {
+    "missing_declared_fields": [],
+    "rows": 1362
+   }
+  },
+  "date_index_note": "日期以 datetime64 索引承载，与快照声明的 date 字段一一对应；索引类型 datetime64[ns]",
+  "empty_instruments": false
+ },
+ "calendar": {
+  "loaded": true,
+  "authority": "exchange_official",
+  "publisher": "深圳证券交易所（SZSE）",
+  "coverage_complete": true,
+  "missing_months": [],
+  "day_incomplete_months": [],
+  "invalid_records": 0
+ },
+ "data_uses": {
+  "description": {
+   "verdict": "usable",
+   "declared": true,
+   "default_accepted": true,
+   "reason": "",
+   "blockers": {
+    "fixable": [],
+    "structural": []
+   }
+  },
+  "ranking": {
+   "verdict": "conditional",
+   "declared": true,
+   "default_accepted": false,
+   "reason": "starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "blockers": {
+    "fixable": [
+     "starts_after_window"
+    ],
+    "structural": []
+   }
+  },
+  "research_signal": {
+   "verdict": "conditional",
+   "declared": true,
+   "default_accepted": false,
+   "reason": "zero_volume_days: 存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）; action_available_at_unknown: 21/21 条行动缺少 available_at（其中 3 条有 announcement_date 可作「不晚于该日已公布」的下界，18 条完全未知）；下界不等于精确到达时刻，一律不写入 available_at。本批只能用于历史重建，不得声称当时可知",
+   "blockers": {
+    "fixable": [
+     "action_available_at_unknown",
+     "zero_volume_days"
+    ],
+    "structural": []
+   }
+  },
+  "attribution": {
+   "verdict": "conditional",
+   "declared": true,
+   "default_accepted": false,
+   "reason": "zero_volume_days: 存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）; action_available_at_unknown: 21/21 条行动缺少 available_at（其中 3 条有 announcement_date 可作「不晚于该日已公布」的下界，18 条完全未知）；下界不等于精确到达时刻，一律不写入 available_at。本批只能用于历史重建，不得声称当时可知",
+   "blockers": {
+    "fixable": [
+     "action_available_at_unknown",
+     "zero_volume_days"
+    ],
+    "structural": []
+   }
+  },
+  "comparison": {
+   "verdict": "conditional",
+   "declared": true,
+   "default_accepted": false,
+   "reason": "starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "blockers": {
+    "fixable": [
+     "starts_after_window"
+    ],
+    "structural": []
+   }
+  },
+  "diagnostic": {
+   "verdict": "usable",
+   "declared": true,
+   "default_accepted": true,
+   "reason": "",
+   "blockers": {
+    "fixable": [],
+    "structural": []
+   }
+  }
+ },
+ "registry": {
+  "loaded": true,
+  "container_version": "1.2.0",
+  "objects": 81,
+  "sources": 34,
+  "sources_verified": true
+ },
+ "objects": {
+  "mixed.price.economic@1.0.0": {
+   "ref": "mixed.price.economic@1.0.0",
+   "resolved": true,
+   "purpose_allowed": true,
+   "card_uses": [
+    "description",
+    "research_signal",
+    "attribution"
+   ],
+   "contract_digest": "d310853944aec5449128c20462294828592c7f7cdeff7532098b82049f771e21",
+   "binding": {
+    "resolved": true,
+    "id": "mixed.price.economic",
+    "version": "1.0.0",
+    "type": "feature",
+    "uses": [
+     "description",
+     "research_signal",
+     "attribution"
+    ],
+    "not_for": [
+     "production_trade",
+     "unique_alpha_claim",
+     "prediction_from_contemporaneous_fit"
+    ],
+    "contract_digest": "d310853944aec5449128c20462294828592c7f7cdeff7532098b82049f771e21",
+    "required_fields": [
+     "date",
+     "economic_index",
+     "symbol"
+    ],
+    "missing_fields": [
+     "economic_index"
+    ],
+    "directly_satisfiable": false,
+    "reasons": [
+     "缺少输入字段 ['economic_index']"
+    ]
+   },
+   "missing_fields": [
+    "economic_index"
+   ],
+   "directly_satisfiable": false,
+   "resolved_cards": {
+    "mixed.price.economic@1.0.0": {
+     "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+     "not_for": [
+      "production_trade",
+      "unique_alpha_claim",
+      "prediction_from_contemporaneous_fit"
+     ],
+     "input": {
+      "fields": [
+       "date",
+       "symbol",
+       "economic_index"
+      ],
+      "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+      "frequency": "daily_valid_quotes",
+      "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+     },
+     "universe": {
+      "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+      "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格",
+      "warmup": "按每个对象窗口，不以日历天补足",
+      "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+      "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+      "degrade": "缺报价不发新信号；未确认资料不得生产"
+     },
+     "time": {
+      "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+      "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "decision_at": "不得早于available_at",
+      "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+     },
+     "validation": {
+      "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+      "tolerance": {
+       "absolute": 1e-10,
+       "relative": 1e-10,
+       "integer": 0
+      },
+      "tests": [
+       "tests/unit/test_research_definitions.py"
+      ],
+      "limitations": "旧事件缺精确available_at；新economic_index适配要求带时区事件时间。除息连接不等于当天分红可花"
+     },
+     "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "limited_frozen_sources",
+      "implementation": "mapped_legacy_not_migrated",
+      "effectiveness": "not_tested_by_normalization",
+      "production": "not_authorized"
+     },
+     "sources": [
+      "mixed_code",
+      "mixed_protocol",
+      "mixed_prices",
+      "mixed_actions",
+      "mixed_pool"
+     ],
+     "id": "mixed.price.economic",
+     "version": "1.0.0",
+     "name": "混合池信号经济价格",
+     "type": "feature",
+     "profile": "mixed",
+     "uses": [
+      "description",
+      "research_signal",
+      "attribution"
+     ],
+     "dependencies": [],
+     "definition": {
+      "formula": "相邻有效报价间按已生效事件连接；I0=1；factor=(nominal_close*split_multiplier+cash_equivalent)/previous_nominal_close",
+      "parameters": {
+       "base": 1,
+       "event_order": "effective_date,event_id；reverse合并：split时mult*=ratio,cash*=ratio；dividend时cash+=amount"
+      },
+      "endpoints": "prev有效报价之后、当前报价当日及之前的生效事件",
+      "unit": "index_level",
+      "direction": "高值只表示累计变化",
+      "transforms": "分红/拆分校正；不再复权或加汇率"
+     }
+    }
+   }
+  },
+  "mixed.momentum.raw@1.0.0": {
+   "ref": "mixed.momentum.raw@1.0.0",
+   "resolved": true,
+   "purpose_allowed": true,
+   "card_uses": [
+    "ranking",
+    "description",
+    "research_signal"
+   ],
+   "contract_digest": "4a73747acd27aa90ff0fbf5909028ba661d1a7a785fc8c694fb54319b52eb5b5",
+   "binding": {
+    "resolved": true,
+    "id": "mixed.momentum.raw",
+    "version": "1.0.0",
+    "type": "feature",
+    "uses": [
+     "ranking",
+     "description",
+     "research_signal"
+    ],
+    "not_for": [
+     "production_trade",
+     "unique_alpha_claim",
+     "prediction_from_contemporaneous_fit"
+    ],
+    "contract_digest": "4a73747acd27aa90ff0fbf5909028ba661d1a7a785fc8c694fb54319b52eb5b5",
+    "required_fields": [
+     "date",
+     "economic_index",
+     "symbol"
+    ],
+    "missing_fields": [
+     "economic_index"
+    ],
+    "directly_satisfiable": false,
+    "reasons": [
+     "缺少输入字段 ['economic_index']"
+    ]
+   },
+   "missing_fields": [
+    "economic_index"
+   ],
+   "directly_satisfiable": false,
+   "resolved_cards": {
+    "mixed.momentum.raw@1.0.0": {
+     "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+     "not_for": [
+      "production_trade",
+      "unique_alpha_claim",
+      "prediction_from_contemporaneous_fit"
+     ],
+     "input": {
+      "fields": [
+       "date",
+       "symbol",
+       "economic_index"
+      ],
+      "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+      "frequency": "daily_valid_quotes",
+      "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+     },
+     "universe": {
+      "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+      "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格",
+      "warmup": "按每个对象窗口，不以日历天补足",
+      "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+      "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+      "degrade": "缺报价不发新信号；未确认资料不得生产"
+     },
+     "time": {
+      "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+      "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "decision_at": "不得早于available_at",
+      "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+     },
+     "validation": {
+      "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+      "tolerance": {
+       "absolute": 1e-10,
+       "relative": 1e-10,
+       "integer": 0
+      },
+      "tests": [
+       "tests/unit/test_research_definitions.py"
+      ],
+      "limitations": "公式一致不证明市场有效；旧消费者未迁移"
+     },
+     "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "limited_frozen_sources",
+      "implementation": "isolated_formula_or_selection_compared_with_legacy; consumers_not_migrated",
+      "effectiveness": "not_tested_by_normalization",
+      "production": "not_authorized"
+     },
+     "sources": [
+      "mixed_code",
+      "mixed_protocol",
+      "mixed_prices",
+      "mixed_actions",
+      "mixed_pool"
+     ],
+     "id": "mixed.momentum.raw",
+     "version": "1.0.0",
+     "name": "252至21有效报价涨幅",
+     "type": "feature",
+     "profile": "mixed",
+     "uses": [
+      "ranking",
+      "description",
+      "research_signal"
+     ],
+     "dependencies": [
+      "mixed.price.economic@1.0.0"
+     ],
+     "definition": {
+      "formula": "I(t-21)/I(t-252)-1",
+      "parameters": {
+       "long_lag": 252,
+       "skip_lag": 21
+      },
+      "endpoints": "自身有效报价行位移；第253条首次可算；不含最近21条",
+      "unit": "fraction",
+      "direction": "降序排序，负分允许",
+      "transforms": "无标准化、无截尾、无年化"
+     }
+    },
+    "mixed.price.economic@1.0.0": {
+     "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+     "not_for": [
+      "production_trade",
+      "unique_alpha_claim",
+      "prediction_from_contemporaneous_fit"
+     ],
+     "input": {
+      "fields": [
+       "date",
+       "symbol",
+       "economic_index"
+      ],
+      "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+      "frequency": "daily_valid_quotes",
+      "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+     },
+     "universe": {
+      "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+      "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格",
+      "warmup": "按每个对象窗口，不以日历天补足",
+      "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+      "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+      "degrade": "缺报价不发新信号；未确认资料不得生产"
+     },
+     "time": {
+      "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+      "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "decision_at": "不得早于available_at",
+      "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+     },
+     "validation": {
+      "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+      "tolerance": {
+       "absolute": 1e-10,
+       "relative": 1e-10,
+       "integer": 0
+      },
+      "tests": [
+       "tests/unit/test_research_definitions.py"
+      ],
+      "limitations": "旧事件缺精确available_at；新economic_index适配要求带时区事件时间。除息连接不等于当天分红可花"
+     },
+     "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "limited_frozen_sources",
+      "implementation": "mapped_legacy_not_migrated",
+      "effectiveness": "not_tested_by_normalization",
+      "production": "not_authorized"
+     },
+     "sources": [
+      "mixed_code",
+      "mixed_protocol",
+      "mixed_prices",
+      "mixed_actions",
+      "mixed_pool"
+     ],
+     "id": "mixed.price.economic",
+     "version": "1.0.0",
+     "name": "混合池信号经济价格",
+     "type": "feature",
+     "profile": "mixed",
+     "uses": [
+      "description",
+      "research_signal",
+      "attribution"
+     ],
+     "dependencies": [],
+     "definition": {
+      "formula": "相邻有效报价间按已生效事件连接；I0=1；factor=(nominal_close*split_multiplier+cash_equivalent)/previous_nominal_close",
+      "parameters": {
+       "base": 1,
+       "event_order": "effective_date,event_id；reverse合并：split时mult*=ratio,cash*=ratio；dividend时cash+=amount"
+      },
+      "endpoints": "prev有效报价之后、当前报价当日及之前的生效事件",
+      "unit": "index_level",
+      "direction": "高值只表示累计变化",
+      "transforms": "分红/拆分校正；不再复权或加汇率"
+     }
+    }
+   }
+  },
+  "trend.sma200@1.0.0": {
+   "ref": "trend.sma200@1.0.0",
+   "resolved": true,
+   "purpose_allowed": true,
+   "card_uses": [
+    "description",
+    "diagnostic"
+   ],
+   "contract_digest": "77455540aa2dc2dda7a46b4871eb0bdef4655859d12ebbdeafce04a9ba5b7ef3",
+   "binding": {
+    "resolved": true,
+    "id": "trend.sma200",
+    "version": "1.0.0",
+    "type": "feature",
+    "uses": [
+     "description",
+     "diagnostic"
+    ],
+    "not_for": [
+     "production_trade",
+     "unique_alpha_claim",
+     "prediction_from_contemporaneous_fit"
+    ],
+    "contract_digest": "77455540aa2dc2dda7a46b4871eb0bdef4655859d12ebbdeafce04a9ba5b7ef3",
+    "required_fields": [
+     "date",
+     "economic_index",
+     "symbol"
+    ],
+    "missing_fields": [
+     "economic_index"
+    ],
+    "directly_satisfiable": false,
+    "reasons": [
+     "缺少输入字段 ['economic_index']"
+    ]
+   },
+   "missing_fields": [
+    "economic_index"
+   ],
+   "directly_satisfiable": false,
+   "resolved_cards": {
+    "trend.sma200@1.0.0": {
+     "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+     "not_for": [
+      "production_trade",
+      "unique_alpha_claim",
+      "prediction_from_contemporaneous_fit"
+     ],
+     "input": {
+      "fields": [
+       "date",
+       "symbol",
+       "economic_index"
+      ],
+      "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+      "frequency": "daily_valid_quotes",
+      "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+     },
+     "universe": {
+      "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+      "eligibility": "输入产品合法有效报价；计算不要求273月选资格",
+      "warmup": "按SMA窗口；距离和状态继承依赖SMA",
+      "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+      "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+      "degrade": "缺报价不发新信号；未确认资料不得生产"
+     },
+     "time": {
+      "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+      "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "decision_at": "不得早于available_at",
+      "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+     },
+     "validation": {
+      "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+      "tolerance": {
+       "absolute": 1e-10,
+       "relative": 1e-10,
+       "integer": 0
+      },
+      "tests": [
+       "tests/unit/test_research_definitions.py"
+      ],
+      "limitations": "公式一致不证明市场有效；旧消费者未迁移"
+     },
+     "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "limited_frozen_sources",
+      "implementation": "isolated_formula_or_selection_compared_with_legacy; consumers_not_migrated",
+      "effectiveness": "not_tested_by_normalization",
+      "production": "not_authorized"
+     },
+     "sources": [
+      "mixed_code",
+      "mixed_protocol",
+      "mixed_prices",
+      "mixed_actions",
+      "mixed_pool"
+     ],
+     "id": "trend.sma200",
+     "version": "1.0.0",
+     "name": "200有效报价简单均线",
+     "type": "feature",
+     "profile": "mixed",
+     "uses": [
+      "description",
+      "diagnostic"
+     ],
+     "dependencies": [
+      "mixed.price.economic@1.0.0"
+     ],
+     "definition": {
+      "formula": "SMA200=sum(last 200 valid P_signal including t)/200",
+      "parameters": {
+       "window": 200,
+       "min_periods": 200
+      },
+      "endpoints": "[t-199,t]有效报价，包含t",
+      "unit": "same_as_P_signal",
+      "direction": "描述平均价格，不单独表示方向",
+      "transforms": "算术均值；无EMA权重"
+     }
+    },
+    "mixed.price.economic@1.0.0": {
+     "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+     "not_for": [
+      "production_trade",
+      "unique_alpha_claim",
+      "prediction_from_contemporaneous_fit"
+     ],
+     "input": {
+      "fields": [
+       "date",
+       "symbol",
+       "economic_index"
+      ],
+      "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+      "frequency": "daily_valid_quotes",
+      "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+     },
+     "universe": {
+      "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+      "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格",
+      "warmup": "按每个对象窗口，不以日历天补足",
+      "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+      "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+      "degrade": "缺报价不发新信号；未确认资料不得生产"
+     },
+     "time": {
+      "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+      "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "decision_at": "不得早于available_at",
+      "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+     },
+     "validation": {
+      "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+      "tolerance": {
+       "absolute": 1e-10,
+       "relative": 1e-10,
+       "integer": 0
+      },
+      "tests": [
+       "tests/unit/test_research_definitions.py"
+      ],
+      "limitations": "旧事件缺精确available_at；新economic_index适配要求带时区事件时间。除息连接不等于当天分红可花"
+     },
+     "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "limited_frozen_sources",
+      "implementation": "mapped_legacy_not_migrated",
+      "effectiveness": "not_tested_by_normalization",
+      "production": "not_authorized"
+     },
+     "sources": [
+      "mixed_code",
+      "mixed_protocol",
+      "mixed_prices",
+      "mixed_actions",
+      "mixed_pool"
+     ],
+     "id": "mixed.price.economic",
+     "version": "1.0.0",
+     "name": "混合池信号经济价格",
+     "type": "feature",
+     "profile": "mixed",
+     "uses": [
+      "description",
+      "research_signal",
+      "attribution"
+     ],
+     "dependencies": [],
+     "definition": {
+      "formula": "相邻有效报价间按已生效事件连接；I0=1；factor=(nominal_close*split_multiplier+cash_equivalent)/previous_nominal_close",
+      "parameters": {
+       "base": 1,
+       "event_order": "effective_date,event_id；reverse合并：split时mult*=ratio,cash*=ratio；dividend时cash+=amount"
+      },
+      "endpoints": "prev有效报价之后、当前报价当日及之前的生效事件",
+      "unit": "index_level",
+      "direction": "高值只表示累计变化",
+      "transforms": "分红/拆分校正；不再复权或加汇率"
+     }
+    }
+   }
+  }
+ },
+ "findings": [
+  {
+   "level": "info",
+   "code": "product_internal_gap",
+   "message": "产品在自身首末报价之间缺 1 个交易日的报价，其中 1 天与登记的停牌记录逐日匹配；不自动等于数据错误，也不自动等于停牌",
+   "instrument": "512890.SS",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "research_signal",
+    "comparison"
+   ],
+   "evidence": {
+    "dates": [],
+    "count": 0,
+    "explained_by_halt": [
+     "2021-10-22"
+    ],
+    "explained_count": 1,
+    "explained_by": [
+     {
+      "date": "2021-10-22",
+      "event_id": "512890-halt-2021-10-22"
+     }
+    ],
+    "cause": "halt",
+    "note": "首次报价之前、最后报价之后的资格与上市证据相关，不在本检查范围；停牌解释只说明数据缺口来源，不等于当时可交易"
+   },
+   "structural": false
+  },
+  {
+   "level": "warn",
+   "code": "zero_volume_days",
+   "message": "存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）",
+   "instrument": "159652.SZ",
+   "field": "volume",
+   "affects_uses": [
+    "research_signal",
+    "attribution"
+   ],
+   "evidence": {
+    "days": 5
+   },
+   "structural": false
+  },
+  {
+   "level": "warn",
+   "code": "starts_after_window",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "instrument": "159652.SZ",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison"
+   ],
+   "evidence": {
+    "first_date": "2023-02-08",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   },
+   "structural": false
+  },
+  {
+   "level": "warn",
+   "code": "starts_after_window",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "instrument": "513870.SS",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison"
+   ],
+   "evidence": {
+    "first_date": "2023-11-02",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   },
+   "structural": false
+  },
+  {
+   "level": "warn",
+   "code": "starts_after_window",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "instrument": "515050.SS",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison"
+   ],
+   "evidence": {
+    "first_date": "2019-10-16",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   },
+   "structural": false
+  },
+  {
+   "level": "warn",
+   "code": "starts_after_window",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "instrument": "515130.SS",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison"
+   ],
+   "evidence": {
+    "first_date": "2020-05-11",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   },
+   "structural": false
+  },
+  {
+   "level": "warn",
+   "code": "starts_after_window",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "instrument": "515170.SS",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison"
+   ],
+   "evidence": {
+    "first_date": "2021-01-13",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   },
+   "structural": false
+  },
+  {
+   "level": "warn",
+   "code": "starts_after_window",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "instrument": "515300.SS",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison"
+   ],
+   "evidence": {
+    "first_date": "2019-09-19",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   },
+   "structural": false
+  },
+  {
+   "level": "warn",
+   "code": "starts_after_window",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "instrument": "515880.SS",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison"
+   ],
+   "evidence": {
+    "first_date": "2019-09-06",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   },
+   "structural": false
+  },
+  {
+   "level": "warn",
+   "code": "starts_after_window",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "instrument": "516220.SS",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison"
+   ],
+   "evidence": {
+    "first_date": "2021-03-10",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   },
+   "structural": false
+  },
+  {
+   "level": "warn",
+   "code": "starts_after_window",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "instrument": "518850.SS",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison"
+   ],
+   "evidence": {
+    "first_date": "2020-06-05",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   },
+   "structural": false
+  },
+  {
+   "level": "warn",
+   "code": "starts_after_window",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "instrument": "562590.SS",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison"
+   ],
+   "evidence": {
+    "first_date": "2023-10-18",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   },
+   "structural": false
+  },
+  {
+   "level": "warn",
+   "code": "starts_after_window",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "instrument": "588000.SS",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison"
+   ],
+   "evidence": {
+    "first_date": "2020-11-16",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   },
+   "structural": false
+  },
+  {
+   "level": "warn",
+   "code": "action_available_at_unknown",
+   "message": "21/21 条行动缺少 available_at（其中 3 条有 announcement_date 可作「不晚于该日已公布」的下界，18 条完全未知）；下界不等于精确到达时刻，一律不写入 available_at。本批只能用于历史重建，不得声称当时可知",
+   "instrument": null,
+   "field": null,
+   "affects_uses": [
+    "research_signal",
+    "attribution"
+   ],
+   "evidence": {
+    "without_available_at": 21,
+    "with_announcement_lower_bound": 3,
+    "fully_unknown": 18,
+    "total": 21,
+    "lower_bound_semantics": "announcement_date 只证明不晚于该日已公布，不证明该日之前不可知，也不是带时区的真实到达时刻"
+   },
+   "structural": false
+  },
+  {
+   "level": "info",
+   "code": "action_announcement_lower_bound_available",
+   "message": "3 条行动带 announcement_date，可作可得性下界；这是现有本地资料中唯一的时点线索",
+   "instrument": null,
+   "field": null,
+   "affects_uses": [],
+   "evidence": {
+    "count": 3
+   },
+   "structural": false
+  },
+  {
+   "level": "info",
+   "code": "coverage_unproven",
+   "message": "没有行动记录不等于已证明该期间没有分红、拆分或停牌；本文件缺连续官方「无其他行动」证明",
+   "instrument": null,
+   "field": null,
+   "affects_uses": [
+    "attribution"
+   ],
+   "evidence": {},
+   "structural": false
+  }
+ ],
+ "request_satisfied": false,
+ "errors": [],
+ "limitations": [
+  "日历路径与哈希不等于发布时点已获证明；跨所与年度覆盖限制照旧保留",
+  "既有机器绑定限制：validate_registry 仍要求 standard_version==1.0.0，而正文标准已为 1.1.0；如实保留，不改版本字符串冒充迁移",
+  "以下对象未满足字段/用途检查：['mixed.price.economic@1.0.0', 'mixed.momentum.raw@1.0.0', 'trend.sma200@1.0.0']；这是已实现的机械字段检查的结论，不是完整公式语义证明",
+  "request_satisfied=true 仅表示本次已实现的输入检查满足，不等于公式实现、历史可得时点、因子有效或交易授权"
+ ],
+ "calculation_run": false,
+ "production_authorized": false
+}

@@ -1,0 +1,71 @@
+{
+  "scope": "two fixed sector ETFs only; no payoff and no full-market download",
+  "requests": {
+    "tencent": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get; param shCODE,day,,,800,qfq; returned qfqday only",
+    "sina": "https://money.finance.sina.com.cn/quotes_service/api/json_v2.php/CN_MarketData.getKLineData; scale=240, ma=no, datalen=1500; project provider documents adjusted=false"
+  },
+  "files": [
+    {
+      "path": "raw-responses/sina-sh512170-day-1500.json",
+      "sha256": "a872185a91858582eddef5931f9c802fcf5765020661faadc242daa3c8e848e5",
+      "bytes": 153634
+    },
+    {
+      "path": "raw-responses/sina-sh512400-day-1500.json",
+      "sha256": "bb4fab84a8b37ba516b3e14875a6e3ac08add501d9eeb14f7b5eebef3df51ef9",
+      "bytes": 152655
+    },
+    {
+      "path": "raw-responses/tencent-sh512170-both.json",
+      "sha256": "ad917e0b0963c6f8b8835019044ff911c0836990568429895640ea59ddd53510",
+      "bytes": 51175
+    },
+    {
+      "path": "raw-responses/tencent-sh512170-day.json",
+      "sha256": "f5e52c889ed3b84f61a65ac405336365629a8a141cdc0e969bac8cc50b17ae8a",
+      "bytes": 66
+    },
+    {
+      "path": "raw-responses/tencent-sh512400-both.json",
+      "sha256": "19a3c1dd778edccc2596a0730b0191f0d8bc970d79ca80f2e0135dee30c5d6a1",
+      "bytes": 50336
+    },
+    {
+      "path": "raw-responses/tencent-sh512400-day.json",
+      "sha256": "20d5257a78ee213c522fbda02f4b54fd33de18a057707ac6185116f3a15bc159",
+      "bytes": 66
+    },
+    {
+      "path": "inputs/512170.SS-sina-unadjusted.parquet",
+      "sha256": "10451e971d93d52542804d9f3ead2570ed3a9dab2ca6f1c5ea6f3c668849e618",
+      "bytes": 47370
+    },
+    {
+      "path": "inputs/512400.SS-sina-unadjusted.parquet",
+      "sha256": "6a4d0d561594ebc3a13337edda61f6241a63e5d6d307f91a099cd7514735d93b",
+      "bytes": 50101
+    }
+  ],
+  "external_sources": [
+    {
+      "path": "scripts/backfill_tencent_paged.py",
+      "sha256": "472ebcb35a65f3277bd6a5e1edfbf4b1131e27599b82a26c4d95e04ff9012403"
+    },
+    {
+      "path": "src/lei_signal/data/providers.py",
+      "sha256": "69c7a09954bbf2c6c8b8a8d90474bbdce43be26b03cae8dc6993711718a3805c"
+    },
+    {
+      "path": "docs/experiments/raw/research-broad-etf-plan-2026-09-08/etf-coverage-inventory.json",
+      "sha256": "c0bbc2a40c0a9518fbc991d5f4a9c81a22d3fedbbf8cc0a6bbd7b9e2b4c0ae1e"
+    },
+    {
+      "path": "docs/experiments/etf-expansion-report-2026-08-25.md",
+      "sha256": "dccb2b63d9613d6477a7fa9d454383faa82780149b6ed2536d2716bccf4b6b03"
+    },
+    {
+      "path": "docs/experiments/sector-rs-ARCHIVE-2026-09-02.md",
+      "sha256": "e4d629689fc94f8f84a34bf4289b4d2652fe3e1ab27b1e263a6efda1a3eadc42"
+    }
+  ]
+}

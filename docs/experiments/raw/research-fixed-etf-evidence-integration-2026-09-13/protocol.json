@@ -1,0 +1,408 @@
+{
+ "protocol_id": "fixed-etf-evidence-integration-2026-09-13",
+ "protocol_version": "1.0.4",
+ "plan_version": "1.0.0",
+ "date": "2026-09-13",
+ "research_family": "research-data-foundation",
+ "parent_protocol": {
+  "protocol_id": "momentum-research-prototype-2026-09-13",
+  "version": "1.0.5",
+  "sha256": "c42110c1deb2441415eff85669d986378f536c9f83f839c0bf5d300791024a3d"
+ },
+ "goal": "把仓库已保存的官方材料接成固定14只ETF的可追溯资格证据，再接到现有动量研究输入；事实已核、当时可知、用途允许、实现可用、预测有效与生产授权分列。默认全离线。",
+ "target_id": "protocol:momentum-next-close-21-session@1.0.0",
+ "target_note": "沿用原任务唯一未来观察目标；协议测量项，不是登记表对象。",
+ "revisions": [
+  {
+   "version": "1.0.0",
+   "date": "2026-09-13",
+   "note": "初版冻结（原件保留于 protocol-v1.0.0.json）；其下 run-03/run-04 为该版本下的首次真实输入检查/历史诊断与资格拒绝。"
+  },
+  {
+   "version": "1.0.1",
+   "date": "2026-09-13",
+   "changes": [
+    "Task 5 补全：CLI 的 listing 桥接接线与 out 目录创建修正，codes 中 run_momentum_research_prototype 哈希随之更新；其父动量协议同步升 v1.0.7。v1.0.0 下的 run-03/04 封存保留，按纠错预算以新编号 run-05/run-06 复跑一次。"
+   ],
+   "impact": "测量参数与输入不变；发现文案变化限于已核上市事实（日期自洽），资格授予仍归底层闸门。"
+  },
+  {
+   "version": "1.0.2",
+   "date": "2026-09-13",
+   "changes": [
+    "主控复核 v1.3.0 §11 R1–R4 集中返修：证据包升 v1.1（事实绑定/指纹/引用原件哈希/文内时间字段；515050 公布日修正为 2019-10-11、512890 补登记日 2021-10-21 与拆分日 2021-10-22 并以落款 10-25 为公布参照）；桥接消费强制 listing_evidence_bridge 用途与同产品日期冲突排除；派生比对改双向键集核对（缺键/重复/非有限分别可见）；codes 十键刷新为当前哈希并新增 derived_reference 声明；协议以排他创建保存（已存在即失败）。"
+   ],
+   "impact": "固定池/区间/对象/目标/公式不变；run-03~06 封存保留。版本断点如实保留：run-02 所引 7ad3c330 与旧动量 v1.0.4、本任务 v1.0.0（54a306d7）均不可恢复，旧产物按有限历史证据保留，不靠新版本洗成终版。"
+  },
+  {
+   "version": "1.0.3",
+   "date": "2026-09-13",
+   "changes": [
+    "inputs.snapshot_dir 由 run-02 派生快照改回原始名义快照（canonical-snapshot-v2，与动量 v1.0.7 冻结一致；其余输入逐字段相同）：派生入口的输入必须是名义快照，v1.0.2 直接继承 v1.0.1 的消费侧输入导致 run-07 追加出第二列 economic_index 而被读回核验拒绝（run-07 保留失败留痕）。"
+   ],
+   "impact": "测量参数/对象/目标/公式不变；v1.0.2 文件保留不覆盖。"
+  },
+  {
+   "version": "1.0.4",
+   "date": "2026-09-13",
+   "changes": [
+    "主控复核 v1.4.0 §12 S1–S3 收尾：证据包升 v1.2——已核时间值 time_evidence.published_date 与消费必需字段（按三类事实固定，不可由输入删减）一并纳入 fact_binding 指纹与抽取输出比对（S1）；codes 十键不变（实现改动以现行哈希为准，由派生/动量入口强制核验）；v1.1 包保留，在新接口下不再作为已核事实消费。"
+   ],
+   "impact": "固定池/区间/对象/目标/公式不变；零真实派生、零真实运行。run-08 超预算偏差声明见执行报告 §10.3；证据产物由 task2_extract_facts_v2.py 排他写保护（S3）。"
+  }
+ ],
+ "research_evidence": {
+  "path": "docs/experiments/raw/research-fixed-etf-evidence-integration-2026-09-13/evidence-bundle-v1.2.json",
+  "sha256": "dfc19f0c7a2a51c570f49fb2f590c5f2745a9cba2d4578cc17487775ad41c25e"
+ },
+ "objects": {
+  "primary": "mixed.momentum.raw@1.0.0",
+  "dependency": "mixed.price.economic@1.0.0",
+  "type": "feature（描述数值，不是可投资的因子收益组合）",
+  "cards": {
+   "mixed.momentum.raw@1.0.0": {
+    "card": {
+     "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+     "not_for": [
+      "production_trade",
+      "unique_alpha_claim",
+      "prediction_from_contemporaneous_fit"
+     ],
+     "input": {
+      "fields": [
+       "date",
+       "symbol",
+       "economic_index"
+      ],
+      "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+      "frequency": "daily_valid_quotes",
+      "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+     },
+     "universe": {
+      "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+      "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格",
+      "warmup": "按每个对象窗口，不以日历天补足",
+      "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+      "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+      "degrade": "缺报价不发新信号；未确认资料不得生产"
+     },
+     "time": {
+      "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+      "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "decision_at": "不得早于available_at",
+      "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+     },
+     "validation": {
+      "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+      "tolerance": {
+       "absolute": 1e-10,
+       "relative": 1e-10,
+       "integer": 0
+      },
+      "tests": [
+       "tests/unit/test_research_definitions.py"
+      ],
+      "limitations": "公式一致不证明市场有效；旧消费者未迁移"
+     },
+     "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "limited_frozen_sources",
+      "implementation": "isolated_formula_or_selection_compared_with_legacy; consumers_not_migrated",
+      "effectiveness": "not_tested_by_normalization",
+      "production": "not_authorized"
+     },
+     "sources": [
+      "mixed_code",
+      "mixed_protocol",
+      "mixed_prices",
+      "mixed_actions",
+      "mixed_pool"
+     ],
+     "id": "mixed.momentum.raw",
+     "version": "1.0.0",
+     "name": "252至21有效报价涨幅",
+     "type": "feature",
+     "profile": "mixed",
+     "uses": [
+      "ranking",
+      "description",
+      "research_signal"
+     ],
+     "dependencies": [
+      "mixed.price.economic@1.0.0"
+     ],
+     "definition": {
+      "formula": "I(t-21)/I(t-252)-1",
+      "parameters": {
+       "long_lag": 252,
+       "skip_lag": 21
+      },
+      "endpoints": "自身有效报价行位移；第253条首次可算；不含最近21条",
+      "unit": "fraction",
+      "direction": "降序排序，负分允许",
+      "transforms": "无标准化、无截尾、无年化"
+     }
+    },
+    "recursive_dependencies": [
+     "mixed.momentum.raw@1.0.0",
+     "mixed.price.economic@1.0.0"
+    ]
+   },
+   "mixed.price.economic@1.0.0": {
+    "card": {
+     "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+     "not_for": [
+      "production_trade",
+      "unique_alpha_claim",
+      "prediction_from_contemporaneous_fit"
+     ],
+     "input": {
+      "fields": [
+       "date",
+       "symbol",
+       "economic_index"
+      ],
+      "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+      "frequency": "daily_valid_quotes",
+      "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+     },
+     "universe": {
+      "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+      "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格",
+      "warmup": "按每个对象窗口，不以日历天补足",
+      "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+      "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+      "degrade": "缺报价不发新信号；未确认资料不得生产"
+     },
+     "time": {
+      "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+      "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "decision_at": "不得早于available_at",
+      "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+     },
+     "validation": {
+      "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+      "tolerance": {
+       "absolute": 1e-10,
+       "relative": 1e-10,
+       "integer": 0
+      },
+      "tests": [
+       "tests/unit/test_research_definitions.py"
+      ],
+      "limitations": "旧事件缺精确available_at；新economic_index适配要求带时区事件时间。除息连接不等于当天分红可花"
+     },
+     "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "limited_frozen_sources",
+      "implementation": "mapped_legacy_not_migrated",
+      "effectiveness": "not_tested_by_normalization",
+      "production": "not_authorized"
+     },
+     "sources": [
+      "mixed_code",
+      "mixed_protocol",
+      "mixed_prices",
+      "mixed_actions",
+      "mixed_pool"
+     ],
+     "id": "mixed.price.economic",
+     "version": "1.0.0",
+     "name": "混合池信号经济价格",
+     "type": "feature",
+     "profile": "mixed",
+     "uses": [
+      "description",
+      "research_signal",
+      "attribution"
+     ],
+     "dependencies": [],
+     "definition": {
+      "formula": "相邻有效报价间按已生效事件连接；I0=1；factor=(nominal_close*split_multiplier+cash_equivalent)/previous_nominal_close",
+      "parameters": {
+       "base": 1,
+       "event_order": "effective_date,event_id；reverse合并：split时mult*=ratio,cash*=ratio；dividend时cash+=amount"
+      },
+      "endpoints": "prev有效报价之后、当前报价当日及之前的生效事件",
+      "unit": "index_level",
+      "direction": "高值只表示累计变化",
+      "transforms": "分红/拆分校正；不再复权或加汇率"
+     }
+    },
+    "recursive_dependencies": [
+     "mixed.price.economic@1.0.0"
+    ]
+   }
+  }
+ },
+ "specs": {
+  "principles": {
+   "path": "docs/research/experiment-backtest-principles.md",
+   "version": "v1.1",
+   "sha256": "ac5a676c0635441b66f656c8e1249b69bade36365cc9065ed6341a610b6a53c6"
+  },
+  "definition_standard": {
+   "path": "docs/research/definition-standard.md",
+   "version": "1.1.0",
+   "sha256": "3406feaea2bbb8d23a91ddc8fa0c85e62ff86437bdf443d459f2c97b0e99cd5c"
+  },
+  "execution_contract": {
+   "path": "docs/research/ai-execution-contract.md",
+   "version": "1.0.1",
+   "sha256": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962"
+  },
+  "report_template": {
+   "path": "docs/research/experiment-report-template.md",
+   "version": "1.1.0",
+   "sha256": "cae2853f81841de6f424c6bda10e6708dd35574ebb8a325088fe507c5755d54e"
+  },
+  "registry": {
+   "path": "docs/research/definitions.v1.json",
+   "version": "1.2.0",
+   "sha256": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05"
+  }
+ },
+ "codes": {
+  "data_quality": {
+   "path": "src/lei_signal/research/data_quality.py",
+   "sha256": "ddad2ecfd676e0c1c9dbc3787afcc29024c53581f3eb664a97167f2e9fc8f783"
+  },
+  "data_snapshot": {
+   "path": "src/lei_signal/research/data_snapshot.py",
+   "sha256": "748f75249190d89619b84498c7efe336f27f0a23e3cc0b3b5c3fff947393dc49"
+  },
+  "definitions": {
+   "path": "src/lei_signal/research/definitions.py",
+   "sha256": "b6d5a35532644c371ffbfc541a21bd52c05114db9fcb1cc3071c1965ed41ad59"
+  },
+  "factor_runtime": {
+   "path": "src/lei_signal/research/factor_runtime.py",
+   "sha256": "1f596f29aff27973ea55b55c49efd3c4c6fb1fdd200946a8618c272dad822579"
+  },
+  "momentum_prototype": {
+   "path": "src/lei_signal/research/momentum_prototype.py",
+   "sha256": "5425e4f5494710041ae42816bf259ac7cdc1ed6aaef01986ac1d3d34d90e568f"
+  },
+  "run_momentum_research_prototype": {
+   "path": "scripts/run_momentum_research_prototype.py",
+   "sha256": "908ac1a1c023c5d5db1ed4dceac8999b66b65b55a0faff727cc8ea9b71243e7e"
+  },
+  "symbol_identity": {
+   "path": "src/lei_signal/research/symbol_identity.py",
+   "sha256": "8e47e252bc7a6061e93d34ec1195ba83e57fce43ff6be9542236c3a2e28c1269"
+  },
+  "trading_calendar": {
+   "path": "src/lei_signal/research/trading_calendar.py",
+   "sha256": "4651fa7d0e1e20aeaf3b40d9446f3ea76ec0eac037bbe965c018c3e5ccb6389e"
+  },
+  "qualification_bundle": {
+   "path": "src/lei_signal/research/qualification_bundle.py",
+   "sha256": "a24f38b5ae7a70b8979c51e3d9fe96eadad2393fdb2f0bfcf764f6edcb0540c7"
+  },
+  "prepare_momentum_qualified_inputs": {
+   "path": "scripts/prepare_momentum_qualified_inputs.py",
+   "sha256": "b702653b301f1e58a3bd73a5961838ad13c3640f59a7df3a0bba111ef43c5686"
+  }
+ },
+ "inputs": {
+  "snapshot_dir": {
+   "path": "docs/experiments/raw/research-identity-wiring-2026-09-10/canonical-snapshot-v2",
+   "sha256": "d4e6518b957d06a50189a574cbd547a98e479bae872a284c0718febff781ce27"
+  },
+  "calendar": {
+   "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+   "sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1"
+  },
+  "publication": {
+   "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-evidence.json",
+   "sha256": "657ef122c62aefcf8d580e5e20e85beac8b1a0979c399f3529ae30d6b245ef02"
+  },
+  "actions": {
+   "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/normalized-actions.json",
+   "sha256": "097043b2c622a308b602a961b666129f575a35083a8ede6d7bfa1cf16ea1ce81"
+  },
+  "evidence_bundle": {
+   "path": "docs/experiments/raw/research-fixed-etf-evidence-integration-2026-09-13/evidence-bundle-v1.2.json",
+   "sha256": "dfc19f0c7a2a51c570f49fb2f590c5f2745a9cba2d4578cc17487775ad41c25e"
+  },
+  "evaluation_start": "2019-09-02",
+  "evaluation_end": "2026-06-30",
+  "pool_expectation": {
+   "symbols": 14,
+   "rows": 18916,
+   "verify_by_reading": true
+  }
+ },
+ "code_version": {
+  "git_head": "8ba16576b75e605aa1b0d0902568c760c4b99095",
+  "python_version": "3.11.7",
+  "dependencies": "pandas, numpy, pdfplumber, pytest, ruff（零新增依赖，零网络请求）"
+ },
+ "formula": {
+  "momentum": "M(t)=I(t-21)/I(t-252)-1（按该产品自身有效报价位置；首次需 253 条）",
+  "target": "Y(t)=I(x)/I(e)-1，e 为 t 之后第一个交易日，x 为 e 之后第 21 个交易日",
+  "diagnostic": "Spearman 等价：两列各自并列平均名次，再算名次的 Pearson 相关"
+ },
+ "target_parameters": {
+  "next_session_offset": 1,
+  "exit_session_offset": 22,
+  "momentum_long_lag": 252,
+  "momentum_skip_lag": 21,
+  "note": "与实现常量逐一核对；协议声明与算法不一致时运行入口拒绝"
+ },
+ "time_semantics": {
+  "observation_dates": "评价区间内各完整月份的最后交易日；月份不完整不推断月末",
+  "evaluation_window": "2019-09-02 ~ 2026-06-30",
+  "observation_cutoff_assumption": "15:00 为按收盘设置的保守测试截点，不是已证实的数据到达时间或实盘决策时刻；真实资格不得凭该字段获准",
+  "available_at": "t 收盘最早只能在其实际可得后用于决策；证据包只记公布日期下界，不据此填写精确 available_at；未知保持 null",
+  "historical_reconstruction_only": "派生快照的 economic_index 为事后重建列；晚取得/未知行动在历史模式如实标注，在预测模式拒绝"
+ },
+ "modes": {
+  "synthetic": {
+   "description": "合成夹具验证算法与时间安排正确；不伪装真实资料",
+   "exit": {
+    "0": "模式完整完成",
+    "2": "质量限制导致研究拒绝",
+    "3": "失败"
+   }
+  },
+  "historical-diagnostic": {
+   "description": "派生快照上的历史数值诊断；不写真实 targets/rank",
+   "exit": {
+    "0": "诊断完整完成",
+    "2": "资料限制拒绝",
+    "3": "失败"
+   }
+  },
+  "qualified-research": {
+   "description": "仅当全部实际资格满足才运行；当前预期受限即拒绝",
+   "exit": {
+    "0": "预测诊断放行",
+    "2": "资格/资料限制拒绝",
+    "3": "失败"
+   }
+  }
+ },
+ "tolerance": {
+  "absolute": 1e-12,
+  "relative": 1e-12,
+  "integer": 0
+ },
+ "explicitly_not": [
+  "不新增交易因子对象/行情/产品；不动生产、账户、OKR",
+  "不使用 allow_conditional/accept_structural 放行",
+  "不以文件哈希一致、官方域名或自填 trusted=true 当作历史事实真实性证明",
+  "不承诺真实预测本轮可跑；合法结果可以是『更多事实已核，预测仍受限』",
+  "联网定向补公告只写待授权范围，本轮绝不执行"
+ ],
+ "derived_reference": {
+  "path": "docs/experiments/raw/research-momentum-prototype-2026-09-13/run-04/values.csv",
+  "sha256": "0db2492a11372fae827465debcddf81e25b0016ea4fd219be6f0894cf471a0b5"
+ }
+}

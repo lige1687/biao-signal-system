@@ -1,0 +1,99 @@
+{
+  "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/run_portfolio_split.py",
+  "source_sha256": "af5cae26d1f1f5fa8c48e6448035bd59ed4ce02bd2d60c496539c1bd62ab1d17",
+  "loaded_function": "simulate",
+  "method": "original AST function vs directly held constant shares",
+  "fixture_constants": {
+    "COST": 0.001,
+    "BAND": 0.05
+  },
+  "cases": [
+    {
+      "name": "two_assets_roundtrip",
+      "prices": {
+        "a": [
+          100.0,
+          104.0,
+          100.0
+        ],
+        "b": [
+          100.0,
+          96.0,
+          100.0
+        ]
+      },
+      "original_curve": [
+        0.999,
+        0.999,
+        1.0006009615384615
+      ],
+      "constant_shares_curve": [
+        0.9990000000000001,
+        0.9990000000000001,
+        0.9990000000000001
+      ],
+      "original_end": 1.0006009615384615,
+      "constant_shares_end": 0.999,
+      "difference": 0.001600961538461454,
+      "max_abs_weight_drift": 0.020000000000000018,
+      "same": false
+    },
+    {
+      "name": "one_asset_roundtrip",
+      "prices": {
+        "a": [
+          100.0,
+          104.0,
+          100.0
+        ]
+      },
+      "original_curve": [
+        0.999,
+        1.03896,
+        0.9990000000000001
+      ],
+      "constant_shares_curve": [
+        0.9990000000000001,
+        1.03896,
+        0.9990000000000001
+      ],
+      "original_end": 0.9990000000000001,
+      "constant_shares_end": 0.999,
+      "difference": 1.1102230246251565e-16,
+      "max_abs_weight_drift": 0.0,
+      "same": true
+    },
+    {
+      "name": "two_assets_flat",
+      "prices": {
+        "a": [
+          100.0,
+          100.0,
+          100.0
+        ],
+        "b": [
+          100.0,
+          100.0,
+          100.0
+        ]
+      },
+      "original_curve": [
+        0.999,
+        0.999,
+        0.999
+      ],
+      "constant_shares_curve": [
+        0.9990000000000001,
+        0.9990000000000001,
+        0.9990000000000001
+      ],
+      "original_end": 0.999,
+      "constant_shares_end": 0.999,
+      "difference": 0.0,
+      "max_abs_weight_drift": 0.0,
+      "same": true
+    }
+  ],
+  "finding": "original stored weights do not drift with relative asset prices; below-band no-order path differs from constant shares",
+  "scope": "synthetic accounting diagnostic only; not a historical return correction or proof all old relative conclusions fail"
+}

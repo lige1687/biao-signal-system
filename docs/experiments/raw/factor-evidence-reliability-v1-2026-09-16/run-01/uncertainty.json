@@ -1,0 +1,49 @@
+{
+ "note": "两种L并排完整展示，不取有利一个；范围为条件性95%重抽范围",
+ "resampling": {
+  "L63": {
+   "n": 1516,
+   "block_length": 63,
+   "k": 25,
+   "reps": 2000,
+   "seed": 20260916,
+   "rng": "PCG64",
+   "start_draw": "integers(0, n, size=(reps, k)) 单次调用；每重复 k=ceil(n/L) 个起点，均匀于 [0,n)",
+   "index_rule": "(start+j) % n, j=0..L-1，按块拼接后截到 n 行；同一索引用于 state/main/合法性",
+   "numpy_version": "2.1.1",
+   "quantile_method": "linear",
+   "range_name": "条件性95%重抽范围",
+   "min_valid_reps": 1900,
+   "interpretation": "只作为假设条件下的历史敏感性诊断；不是有效概率/显著通过/独立样本数，不用过零作机械采纳判决",
+   "valid_reps": 2000,
+   "null_reps": 0,
+   "point_estimate": 0.007015924582548178,
+   "quantile_lower": -0.011451556357610146,
+   "quantile_upper": 0.025059851156885894,
+   "not_estimable_reason": null,
+   "range_withheld_reason": null
+  },
+  "L126": {
+   "n": 1516,
+   "block_length": 126,
+   "k": 13,
+   "reps": 2000,
+   "seed": 20260916,
+   "rng": "PCG64",
+   "start_draw": "integers(0, n, size=(reps, k)) 单次调用；每重复 k=ceil(n/L) 个起点，均匀于 [0,n)",
+   "index_rule": "(start+j) % n, j=0..L-1，按块拼接后截到 n 行；同一索引用于 state/main/合法性",
+   "numpy_version": "2.1.1",
+   "quantile_method": "linear",
+   "range_name": "条件性95%重抽范围",
+   "min_valid_reps": 1900,
+   "interpretation": "只作为假设条件下的历史敏感性诊断；不是有效概率/显著通过/独立样本数，不用过零作机械采纳判决",
+   "valid_reps": 2000,
+   "null_reps": 0,
+   "point_estimate": 0.007015924582548178,
+   "quantile_lower": -0.010096523276206137,
+   "quantile_upper": 0.023003541803217113,
+   "not_estimable_reason": null,
+   "range_withheld_reason": null
+  }
+ }
+}

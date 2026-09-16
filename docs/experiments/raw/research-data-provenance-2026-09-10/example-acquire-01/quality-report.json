@@ -1,0 +1,67 @@
+{
+ "findings": [
+  {
+   "level": "warn",
+   "code": "no_qualified_calendar",
+   "message": "无合格交易日历：不推断缺失交易日，不把工作日当交易日。跨标的同日对齐与覆盖率分母均无权威依据",
+   "instrument": null,
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "research_signal",
+    "comparison"
+   ],
+   "evidence": {
+    "calendar_authority": "none"
+   }
+  }
+ ],
+ "verdicts": [
+  {
+   "use": "description",
+   "verdict": "usable",
+   "reasons": []
+  },
+  {
+   "use": "ranking",
+   "verdict": "conditional",
+   "reasons": [
+    "no_qualified_calendar: 无合格交易日历：不推断缺失交易日，不把工作日当交易日。跨标的同日对齐与覆盖率分母均无权威依据"
+   ]
+  },
+  {
+   "use": "research_signal",
+   "verdict": "conditional",
+   "reasons": [
+    "no_qualified_calendar: 无合格交易日历：不推断缺失交易日，不把工作日当交易日。跨标的同日对齐与覆盖率分母均无权威依据"
+   ]
+  },
+  {
+   "use": "attribution",
+   "verdict": "usable",
+   "reasons": []
+  },
+  {
+   "use": "comparison",
+   "verdict": "conditional",
+   "reasons": [
+    "no_qualified_calendar: 无合格交易日历：不推断缺失交易日，不把工作日当交易日。跨标的同日对齐与覆盖率分母均无权威依据"
+   ]
+  },
+  {
+   "use": "diagnostic",
+   "verdict": "usable",
+   "reasons": []
+  }
+ ],
+ "counts": {
+  "instruments": 2,
+  "rows_total": 120,
+  "findings_by_level": {
+   "info": 0,
+   "warn": 1,
+   "block": 0
+  }
+ },
+ "blocked_instruments": []
+}

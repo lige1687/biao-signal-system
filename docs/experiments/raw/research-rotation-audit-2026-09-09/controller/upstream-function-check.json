@@ -1,0 +1,19 @@
+{
+  "scope": "Executed the actual upstream function extracted by AST, not a copy of the reviewer formula. Does not bind upstream implementation to missing E3 run.",
+  "source": "scripts/repro_factor_backtest.py",
+  "sha256": "3dcb1696c435a6e3512f3f6cb8d7445751a9e1cbf686784eb6bb53f5af4c6785",
+  "fee_isolated_to_zero": true,
+  "old_curve": [
+    1.0,
+    1.5,
+    1.125
+  ],
+  "fixed_units_no_trade_curve": [
+    1.0,
+    1.5,
+    1.0
+  ],
+  "actual_day_one_rebalancing_turnover_in_initial_capital": 0.5,
+  "old_target_weight_change_after_initial": 0.0,
+  "findings": "Monthly constant target weights implement implicit daily rebalancing while unchanged target rows record no trades. Error direction and magnitude for 34.38% remain unknown."
+}

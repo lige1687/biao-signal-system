@@ -1,0 +1,640 @@
+{
+ "flat_50d": {
+  "ok": {
+   "data_mode": "synthetic",
+   "overlapping_windows": true,
+   "overlap_note": "每日期滚动的21日未来窗口互相重叠，不得当作独立多次成功；状态真假差异是历史关联描述，不是因果或可成交利润",
+   "no_claims": [
+    "strategy_return",
+    "annualization",
+    "IC",
+    "significance",
+    "risk_adjusted_alpha"
+   ],
+   "symbols": {
+    "SYN": {
+     "observations_in_window": 50,
+     "observations_outside_window": 0,
+     "state_true": 50,
+     "state_false": 0,
+     "state_unknown": 0,
+     "target_missing": {
+      "tail_immature": 22
+     },
+     "tail_immature": 22,
+     "comparison": {
+      "n": 28,
+      "definition": "状态已知 ∧ 主目标合法 ∧ 标签收盘≤截止（共同合法集合）"
+     },
+     "true_group": {
+      "n": 28,
+      "mean": 0.0,
+      "median": 0.0,
+      "up_ratio": 0.0,
+      "aux_n": 28,
+      "aux_mean": 0.0,
+      "aux_worst": 0.0
+     },
+     "false_group": {
+      "n": 0,
+      "mean": null,
+      "median": null,
+      "up_ratio": null,
+      "aux_n": 0,
+      "aux_mean": null,
+      "aux_worst": null
+     },
+     "background": {
+      "n": 28,
+      "n_unknown_state": 0,
+      "note": "全资产观察背景（含未知状态），与主比较不是同一集合，不混称",
+      "stat": {
+       "n": 28,
+       "mean": 0.0,
+       "median": 0.0,
+       "up_ratio": 0.0,
+       "aux_n": 28,
+       "aux_mean": 0.0,
+       "aux_worst": 0.0
+      }
+     },
+     "by_year": {
+      "2020": {
+       "true": {
+        "n": 28,
+        "mean": 0.0,
+        "median": 0.0,
+        "up_ratio": 0.0,
+        "aux_n": 28,
+        "aux_mean": 0.0,
+        "aux_worst": 0.0
+       },
+       "false": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "up_ratio": null,
+        "aux_n": 0,
+        "aux_mean": null,
+        "aux_worst": null
+       }
+      }
+     },
+     "state_segments": {
+      "true_segments": 1,
+      "false_segments": 0,
+      "longest_true": 50,
+      "longest_false": 0
+     },
+     "sparse_view": {
+      "anchor_session": "2020-01-01",
+      "step": 23,
+      "slots": [
+       {
+        "session": "2020-01-01",
+        "state": true,
+        "main": 0.0,
+        "aux": 0.0,
+        "skipped": false,
+        "skipped_reason": null
+       },
+       {
+        "session": "2020-01-24",
+        "state": true,
+        "main": 0.0,
+        "aux": 0.0,
+        "skipped": false,
+        "skipped_reason": null
+       },
+       {
+        "session": "2020-02-16",
+        "state": true,
+        "main": null,
+        "aux": null,
+        "skipped": true,
+        "skipped_reason": "tail_immature"
+       }
+      ],
+      "true_slots_up": 0,
+      "false_slots_down": 0,
+      "aux_n": 2,
+      "note": "锚点来自合同预声明；未知/缺格跳过不顺延；与主比较同一合法集合，未成熟/未知不展示不记分"
+     }
+    }
+   }
+  }
+ },
+ "up_100d_short_window": {
+  "ok": {
+   "data_mode": "synthetic",
+   "overlapping_windows": true,
+   "overlap_note": "每日期滚动的21日未来窗口互相重叠，不得当作独立多次成功；状态真假差异是历史关联描述，不是因果或可成交利润",
+   "no_claims": [
+    "strategy_return",
+    "annualization",
+    "IC",
+    "significance",
+    "risk_adjusted_alpha"
+   ],
+   "symbols": {
+    "SYN": {
+     "observations_in_window": 40,
+     "observations_outside_window": 60,
+     "state_true": 40,
+     "state_false": 0,
+     "state_unknown": 0,
+     "target_missing": {},
+     "tail_immature": 0,
+     "comparison": {
+      "n": 40,
+      "definition": "状态已知 ∧ 主目标合法 ∧ 标签收盘≤截止（共同合法集合）"
+     },
+     "true_group": {
+      "n": 40,
+      "mean": 0.17590006705091993,
+      "median": 0.1742768595041323,
+      "up_ratio": 1.0,
+      "aux_n": 40,
+      "aux_mean": 0.0,
+      "aux_worst": 0.0
+     },
+     "false_group": {
+      "n": 0,
+      "mean": null,
+      "median": null,
+      "up_ratio": null,
+      "aux_n": 0,
+      "aux_mean": null,
+      "aux_worst": null
+     },
+     "background": {
+      "n": 40,
+      "n_unknown_state": 0,
+      "note": "全资产观察背景（含未知状态），与主比较不是同一集合，不混称",
+      "stat": {
+       "n": 40,
+       "mean": 0.17590006705091993,
+       "median": 0.1742768595041323,
+       "up_ratio": 1.0,
+       "aux_n": 40,
+       "aux_mean": 0.0,
+       "aux_worst": 0.0
+      }
+     },
+     "by_year": {
+      "2020": {
+       "true": {
+        "n": 40,
+        "mean": 0.17590006705091993,
+        "median": 0.1742768595041323,
+        "up_ratio": 1.0,
+        "aux_n": 40,
+        "aux_mean": 0.0,
+        "aux_worst": 0.0
+       },
+       "false": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "up_ratio": null,
+        "aux_n": 0,
+        "aux_mean": null,
+        "aux_worst": null
+       }
+      }
+     },
+     "state_segments": {
+      "true_segments": 1,
+      "false_segments": 0,
+      "longest_true": 40,
+      "longest_false": 0
+     },
+     "sparse_view": {
+      "anchor_session": "2020-01-01",
+      "step": 23,
+      "slots": [
+       {
+        "session": "2020-01-01",
+        "state": true,
+        "main": 0.20792079207920788,
+        "aux": 0.0,
+        "skipped": false,
+        "skipped_reason": null
+       },
+       {
+        "session": "2020-01-24",
+        "state": true,
+        "main": 0.1693548387096775,
+        "aux": 0.0,
+        "skipped": false,
+        "skipped_reason": null
+       },
+       {
+        "session": "2020-02-16",
+        "state": null,
+        "main": null,
+        "aux": null,
+        "skipped": true,
+        "skipped_reason": "missing_row"
+       },
+       {
+        "session": "2020-03-10",
+        "state": null,
+        "main": null,
+        "aux": null,
+        "skipped": true,
+        "skipped_reason": "missing_row"
+       },
+       {
+        "session": "2020-04-02",
+        "state": null,
+        "main": null,
+        "aux": null,
+        "skipped": true,
+        "skipped_reason": "missing_row"
+       }
+      ],
+      "true_slots_up": 2,
+      "false_slots_down": 0,
+      "aux_n": 2,
+      "note": "锚点来自合同预声明；未知/缺格跳过不顺延；与主比较同一合法集合，未成熟/未知不展示不记分"
+     }
+    }
+   }
+  }
+ },
+ "mixed_unknown_aux_missing": {
+  "ok": {
+   "data_mode": "synthetic",
+   "overlapping_windows": true,
+   "overlap_note": "每日期滚动的21日未来窗口互相重叠，不得当作独立多次成功；状态真假差异是历史关联描述，不是因果或可成交利润",
+   "no_claims": [
+    "strategy_return",
+    "annualization",
+    "IC",
+    "significance",
+    "risk_adjusted_alpha"
+   ],
+   "symbols": {
+    "D": {
+     "observations_in_window": 30,
+     "observations_outside_window": 0,
+     "state_true": 15,
+     "state_false": 10,
+     "state_unknown": 5,
+     "target_missing": {
+      "tail_immature": 22,
+      "path_missing": 8
+     },
+     "tail_immature": 22,
+     "comparison": {
+      "n": 8,
+      "definition": "状态已知 ∧ 主目标合法 ∧ 标签收盘≤截止（共同合法集合）"
+     },
+     "true_group": {
+      "n": 0,
+      "mean": null,
+      "median": null,
+      "up_ratio": null,
+      "aux_n": 0,
+      "aux_mean": null,
+      "aux_worst": null
+     },
+     "false_group": {
+      "n": 8,
+      "mean": 0.0,
+      "median": 0.0,
+      "up_ratio": 0.0,
+      "aux_n": 0,
+      "aux_mean": null,
+      "aux_worst": null
+     },
+     "background": {
+      "n": 8,
+      "n_unknown_state": 0,
+      "note": "全资产观察背景（含未知状态），与主比较不是同一集合，不混称",
+      "stat": {
+       "n": 8,
+       "mean": 0.0,
+       "median": 0.0,
+       "up_ratio": 0.0,
+       "aux_n": 0,
+       "aux_mean": null,
+       "aux_worst": null
+      }
+     },
+     "by_year": {
+      "2020": {
+       "true": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "up_ratio": null,
+        "aux_n": 0,
+        "aux_mean": null,
+        "aux_worst": null
+       },
+       "false": {
+        "n": 8,
+        "mean": 0.0,
+        "median": 0.0,
+        "up_ratio": 0.0,
+        "aux_n": 0,
+        "aux_mean": null,
+        "aux_worst": null
+       }
+      }
+     },
+     "state_segments": {
+      "true_segments": 1,
+      "false_segments": 1,
+      "longest_true": 15,
+      "longest_false": 10
+     },
+     "sparse_view": {
+      "anchor_session": "2020-01-01",
+      "step": 23,
+      "slots": [
+       {
+        "session": "2020-01-01",
+        "state": false,
+        "main": 0.0,
+        "aux": null,
+        "skipped": false,
+        "skipped_reason": null
+       },
+       {
+        "session": "2020-01-24",
+        "state": true,
+        "main": null,
+        "aux": null,
+        "skipped": true,
+        "skipped_reason": "tail_immature"
+       }
+      ],
+      "true_slots_up": 0,
+      "false_slots_down": 0,
+      "aux_n": 0,
+      "note": "锚点来自合同预声明；未知/缺格跳过不顺延；与主比较同一合法集合，未成熟/未知不展示不记分"
+     }
+    }
+   }
+  }
+ },
+ "all_outside_window": {
+  "ok": {
+   "data_mode": "synthetic",
+   "overlapping_windows": true,
+   "overlap_note": "每日期滚动的21日未来窗口互相重叠，不得当作独立多次成功；状态真假差异是历史关联描述，不是因果或可成交利润",
+   "no_claims": [
+    "strategy_return",
+    "annualization",
+    "IC",
+    "significance",
+    "risk_adjusted_alpha"
+   ],
+   "symbols": {
+    "SYN": {
+     "observations_in_window": 0,
+     "observations_outside_window": 50,
+     "state_true": 0,
+     "state_false": 0,
+     "state_unknown": 0,
+     "target_missing": {},
+     "tail_immature": 0,
+     "comparison": {
+      "n": 0,
+      "definition": "状态已知 ∧ 主目标合法 ∧ 标签收盘≤截止（共同合法集合）"
+     },
+     "true_group": {
+      "n": 0,
+      "mean": null,
+      "median": null,
+      "up_ratio": null,
+      "aux_n": 0,
+      "aux_mean": null,
+      "aux_worst": null
+     },
+     "false_group": {
+      "n": 0,
+      "mean": null,
+      "median": null,
+      "up_ratio": null,
+      "aux_n": 0,
+      "aux_mean": null,
+      "aux_worst": null
+     },
+     "background": {
+      "n": 0,
+      "n_unknown_state": 0,
+      "note": "全资产观察背景（含未知状态），与主比较不是同一集合，不混称",
+      "stat": {
+       "n": 0,
+       "mean": null,
+       "median": null,
+       "up_ratio": null,
+       "aux_n": 0,
+       "aux_mean": null,
+       "aux_worst": null
+      }
+     },
+     "by_year": {},
+     "state_segments": {
+      "true_segments": 0,
+      "false_segments": 0,
+      "longest_true": 0,
+      "longest_false": 0
+     },
+     "sparse_view": {
+      "anchor_session": "2020-01-01",
+      "step": 23,
+      "slots": [
+       {
+        "session": "2020-01-01",
+        "state": null,
+        "main": null,
+        "aux": null,
+        "skipped": true,
+        "skipped_reason": "missing_row"
+       },
+       {
+        "session": "2020-01-24",
+        "state": null,
+        "main": null,
+        "aux": null,
+        "skipped": true,
+        "skipped_reason": "missing_row"
+       },
+       {
+        "session": "2020-02-16",
+        "state": null,
+        "main": null,
+        "aux": null,
+        "skipped": true,
+        "skipped_reason": "missing_row"
+       }
+      ],
+      "true_slots_up": 0,
+      "false_slots_down": 0,
+      "aux_n": 0,
+      "note": "锚点来自合同预声明；未知/缺格跳过不顺延；与主比较同一合法集合，未成熟/未知不展示不记分"
+     }
+    }
+   }
+  }
+ },
+ "empty_input": {
+  "ok": {
+   "data_mode": "synthetic",
+   "symbols": {},
+   "overlap_note": "21日未来窗口互相重叠，不得当作独立多次成功",
+   "no_claims": [
+    "strategy_return",
+    "annualization",
+    "IC",
+    "significance",
+    "risk_adjusted_alpha"
+   ]
+  }
+ },
+ "cross_year": {
+  "ok": {
+   "data_mode": "synthetic",
+   "overlapping_windows": true,
+   "overlap_note": "每日期滚动的21日未来窗口互相重叠，不得当作独立多次成功；状态真假差异是历史关联描述，不是因果或可成交利润",
+   "no_claims": [
+    "strategy_return",
+    "annualization",
+    "IC",
+    "significance",
+    "risk_adjusted_alpha"
+   ],
+   "symbols": {
+    "SYN": {
+     "observations_in_window": 40,
+     "observations_outside_window": 0,
+     "state_true": 40,
+     "state_false": 0,
+     "state_unknown": 0,
+     "target_missing": {
+      "tail_immature": 22
+     },
+     "tail_immature": 22,
+     "comparison": {
+      "n": 18,
+      "definition": "状态已知 ∧ 主目标合法 ∧ 标签收盘≤截止（共同合法集合）"
+     },
+     "true_group": {
+      "n": 18,
+      "mean": 0.1922130875418874,
+      "median": 0.19178482068390323,
+      "up_ratio": 1.0,
+      "aux_n": 18,
+      "aux_mean": 0.0,
+      "aux_worst": 0.0
+     },
+     "false_group": {
+      "n": 0,
+      "mean": null,
+      "median": null,
+      "up_ratio": null,
+      "aux_n": 0,
+      "aux_mean": null,
+      "aux_worst": null
+     },
+     "background": {
+      "n": 18,
+      "n_unknown_state": 0,
+      "note": "全资产观察背景（含未知状态），与主比较不是同一集合，不混称",
+      "stat": {
+       "n": 18,
+       "mean": 0.1922130875418874,
+       "median": 0.19178482068390323,
+       "up_ratio": 1.0,
+       "aux_n": 18,
+       "aux_mean": 0.0,
+       "aux_worst": 0.0
+      }
+     },
+     "by_year": {
+      "2019": {
+       "true": {
+        "n": 17,
+        "mean": 0.19305114553288577,
+        "median": 0.19266055045871555,
+        "up_ratio": 1.0,
+        "aux_n": 17,
+        "aux_mean": 0.0,
+        "aux_worst": 0.0
+       },
+       "false": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "up_ratio": null,
+        "aux_n": 0,
+        "aux_mean": null,
+        "aux_worst": null
+       }
+      },
+      "2020": {
+       "true": {
+        "n": 1,
+        "mean": 0.17796610169491522,
+        "median": 0.17796610169491522,
+        "up_ratio": 1.0,
+        "aux_n": 1,
+        "aux_mean": 0.0,
+        "aux_worst": 0.0
+       },
+       "false": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "up_ratio": null,
+        "aux_n": 0,
+        "aux_mean": null,
+        "aux_worst": null
+       }
+      }
+     },
+     "state_segments": {
+      "true_segments": 1,
+      "false_segments": 0,
+      "longest_true": 40,
+      "longest_false": 0
+     },
+     "sparse_view": {
+      "anchor_session": "2019-12-15",
+      "step": 23,
+      "slots": [
+       {
+        "session": "2019-12-15",
+        "state": true,
+        "main": 0.20792079207920788,
+        "aux": 0.0,
+        "skipped": false,
+        "skipped_reason": null
+       },
+       {
+        "session": "2020-01-07",
+        "state": true,
+        "main": null,
+        "aux": null,
+        "skipped": true,
+        "skipped_reason": "tail_immature"
+       }
+      ],
+      "true_slots_up": 1,
+      "false_slots_down": 0,
+      "aux_n": 1,
+      "note": "锚点来自合同预声明；未知/缺格跳过不顺延；与主比较同一合法集合，未成熟/未知不展示不记分"
+     }
+    }
+   }
+  }
+ },
+ "real_mode_rejected": {
+  "error": "ValueError: B0 describe_states 仅接受 data_mode='synthetic'；真实模式未实现（改字符串不构成真实身份，也不是放行开关）"
+ }
+}

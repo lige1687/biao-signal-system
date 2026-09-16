@@ -1,0 +1,402 @@
+{
+ "findings": [
+  {
+   "level": "warn",
+   "code": "no_qualified_calendar",
+   "message": "无合格交易日历：不推断缺失交易日，不把工作日当交易日。跨标的同日对齐与覆盖率分母均无权威依据",
+   "instrument": null,
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "research_signal",
+    "comparison"
+   ],
+   "evidence": {
+    "calendar_authority": "none"
+   }
+  },
+  {
+   "level": "warn",
+   "code": "zero_volume_days",
+   "message": "存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）",
+   "instrument": "159652.SZ",
+   "field": "volume",
+   "affects_uses": [
+    "research_signal",
+    "attribution"
+   ],
+   "evidence": {
+    "days": 5
+   }
+  },
+  {
+   "level": "warn",
+   "code": "symbol_convention_mismatch",
+   "message": "'510300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '510300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+   "instrument": "510300.SH",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison",
+    "attribution"
+   ],
+   "evidence": {
+    "given": "510300.SH",
+    "resolved": "510300.SH",
+    "market": "other",
+    "repo_canonical_example": "510300.SS"
+   }
+  },
+  {
+   "level": "warn",
+   "code": "symbol_convention_mismatch",
+   "message": "'512400.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512400.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+   "instrument": "512400.SH",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison",
+    "attribution"
+   ],
+   "evidence": {
+    "given": "512400.SH",
+    "resolved": "512400.SH",
+    "market": "other",
+    "repo_canonical_example": "510300.SS"
+   }
+  },
+  {
+   "level": "warn",
+   "code": "symbol_convention_mismatch",
+   "message": "'512890.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512890.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+   "instrument": "512890.SH",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison",
+    "attribution"
+   ],
+   "evidence": {
+    "given": "512890.SH",
+    "resolved": "512890.SH",
+    "market": "other",
+    "repo_canonical_example": "510300.SS"
+   }
+  },
+  {
+   "level": "warn",
+   "code": "symbol_convention_mismatch",
+   "message": "'513870.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '513870.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+   "instrument": "513870.SH",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison",
+    "attribution"
+   ],
+   "evidence": {
+    "given": "513870.SH",
+    "resolved": "513870.SH",
+    "market": "other",
+    "repo_canonical_example": "510300.SS"
+   }
+  },
+  {
+   "level": "warn",
+   "code": "symbol_convention_mismatch",
+   "message": "'515050.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515050.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+   "instrument": "515050.SH",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison",
+    "attribution"
+   ],
+   "evidence": {
+    "given": "515050.SH",
+    "resolved": "515050.SH",
+    "market": "other",
+    "repo_canonical_example": "510300.SS"
+   }
+  },
+  {
+   "level": "warn",
+   "code": "symbol_convention_mismatch",
+   "message": "'515130.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515130.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+   "instrument": "515130.SH",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison",
+    "attribution"
+   ],
+   "evidence": {
+    "given": "515130.SH",
+    "resolved": "515130.SH",
+    "market": "other",
+    "repo_canonical_example": "510300.SS"
+   }
+  },
+  {
+   "level": "warn",
+   "code": "symbol_convention_mismatch",
+   "message": "'515170.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515170.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+   "instrument": "515170.SH",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison",
+    "attribution"
+   ],
+   "evidence": {
+    "given": "515170.SH",
+    "resolved": "515170.SH",
+    "market": "other",
+    "repo_canonical_example": "510300.SS"
+   }
+  },
+  {
+   "level": "warn",
+   "code": "symbol_convention_mismatch",
+   "message": "'515300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+   "instrument": "515300.SH",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison",
+    "attribution"
+   ],
+   "evidence": {
+    "given": "515300.SH",
+    "resolved": "515300.SH",
+    "market": "other",
+    "repo_canonical_example": "510300.SS"
+   }
+  },
+  {
+   "level": "warn",
+   "code": "symbol_convention_mismatch",
+   "message": "'515880.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515880.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+   "instrument": "515880.SH",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison",
+    "attribution"
+   ],
+   "evidence": {
+    "given": "515880.SH",
+    "resolved": "515880.SH",
+    "market": "other",
+    "repo_canonical_example": "510300.SS"
+   }
+  },
+  {
+   "level": "warn",
+   "code": "symbol_convention_mismatch",
+   "message": "'516220.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '516220.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+   "instrument": "516220.SH",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison",
+    "attribution"
+   ],
+   "evidence": {
+    "given": "516220.SH",
+    "resolved": "516220.SH",
+    "market": "other",
+    "repo_canonical_example": "510300.SS"
+   }
+  },
+  {
+   "level": "warn",
+   "code": "symbol_convention_mismatch",
+   "message": "'518850.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '518850.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+   "instrument": "518850.SH",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison",
+    "attribution"
+   ],
+   "evidence": {
+    "given": "518850.SH",
+    "resolved": "518850.SH",
+    "market": "other",
+    "repo_canonical_example": "510300.SS"
+   }
+  },
+  {
+   "level": "warn",
+   "code": "symbol_convention_mismatch",
+   "message": "'562590.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '562590.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+   "instrument": "562590.SH",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison",
+    "attribution"
+   ],
+   "evidence": {
+    "given": "562590.SH",
+    "resolved": "562590.SH",
+    "market": "other",
+    "repo_canonical_example": "510300.SS"
+   }
+  },
+  {
+   "level": "warn",
+   "code": "symbol_convention_mismatch",
+   "message": "'588000.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '588000.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+   "instrument": "588000.SH",
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "comparison",
+    "attribution"
+   ],
+   "evidence": {
+    "given": "588000.SH",
+    "resolved": "588000.SH",
+    "market": "other",
+    "repo_canonical_example": "510300.SS"
+   }
+  },
+  {
+   "level": "warn",
+   "code": "action_available_at_unknown",
+   "message": "21/21 条行动缺少 available_at；保持未知，不补造为收盘或本次抓取时刻。本批只能用于历史重建，不得声称当时可知",
+   "instrument": null,
+   "field": null,
+   "affects_uses": [
+    "research_signal",
+    "attribution"
+   ],
+   "evidence": {
+    "without_available_at": 21,
+    "total": 21
+   }
+  },
+  {
+   "level": "info",
+   "code": "coverage_unproven",
+   "message": "没有行动记录不等于已证明该期间没有分红、拆分或停牌；本文件缺连续官方「无其他行动」证明",
+   "instrument": null,
+   "field": null,
+   "affects_uses": [
+    "attribution"
+   ],
+   "evidence": {}
+  }
+ ],
+ "verdicts": [
+  {
+   "use": "description",
+   "verdict": "usable",
+   "reasons": []
+  },
+  {
+   "use": "ranking",
+   "verdict": "conditional",
+   "reasons": [
+    "no_qualified_calendar: 无合格交易日历：不推断缺失交易日，不把工作日当交易日。跨标的同日对齐与覆盖率分母均无权威依据",
+    "symbol_convention_mismatch: '510300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '510300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '512400.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512400.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '512890.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512890.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '513870.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '513870.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515050.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515050.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515130.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515130.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515170.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515170.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515880.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515880.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '516220.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '516220.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '518850.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '518850.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '562590.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '562590.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '588000.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '588000.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法"
+   ]
+  },
+  {
+   "use": "research_signal",
+   "verdict": "conditional",
+   "reasons": [
+    "no_qualified_calendar: 无合格交易日历：不推断缺失交易日，不把工作日当交易日。跨标的同日对齐与覆盖率分母均无权威依据",
+    "zero_volume_days: 存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）",
+    "action_available_at_unknown: 21/21 条行动缺少 available_at；保持未知，不补造为收盘或本次抓取时刻。本批只能用于历史重建，不得声称当时可知"
+   ]
+  },
+  {
+   "use": "attribution",
+   "verdict": "conditional",
+   "reasons": [
+    "zero_volume_days: 存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）",
+    "symbol_convention_mismatch: '510300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '510300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '512400.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512400.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '512890.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512890.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '513870.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '513870.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515050.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515050.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515130.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515130.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515170.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515170.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515880.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515880.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '516220.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '516220.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '518850.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '518850.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '562590.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '562590.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '588000.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '588000.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "action_available_at_unknown: 21/21 条行动缺少 available_at；保持未知，不补造为收盘或本次抓取时刻。本批只能用于历史重建，不得声称当时可知"
+   ]
+  },
+  {
+   "use": "comparison",
+   "verdict": "conditional",
+   "reasons": [
+    "no_qualified_calendar: 无合格交易日历：不推断缺失交易日，不把工作日当交易日。跨标的同日对齐与覆盖率分母均无权威依据",
+    "symbol_convention_mismatch: '510300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '510300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '512400.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512400.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '512890.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512890.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '513870.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '513870.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515050.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515050.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515130.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515130.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515170.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515170.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515880.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515880.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '516220.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '516220.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '518850.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '518850.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '562590.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '562590.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '588000.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '588000.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法"
+   ]
+  },
+  {
+   "use": "diagnostic",
+   "verdict": "usable",
+   "reasons": []
+  }
+ ],
+ "counts": {
+  "part_0": {
+   "instruments": 14,
+   "rows_total": 18916,
+   "findings_by_level": {
+    "info": 0,
+    "warn": 15,
+    "block": 0
+   }
+  },
+  "part_1": {
+   "total": 21,
+   "unique_ids": 21,
+   "by_type": {
+    "cash_dividend": 17,
+    "split": 3,
+    "trading_halt": 1
+   },
+   "without_available_at": 21,
+   "findings_by_level": {
+    "info": 1,
+    "warn": 1,
+    "block": 0
+   }
+  }
+ },
+ "blocked_instruments": []
+}

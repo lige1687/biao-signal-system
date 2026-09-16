@@ -1,0 +1,43 @@
+{
+ "status": "restricted",
+ "reasons": [
+  "510300: 主目标 total_return_wealth 需要 price_basis_verified；当前 producer_candidate_only → 目标阻断，不得开算",
+  "159915: 主目标 total_return_wealth 需要 price_basis_verified；当前 producer_candidate_only → 目标阻断，不得开算",
+  "US: 无本地可核日历来源 → 交易日目标保持 blocked（不从报价日期或周一至周五反推日历）",
+  "SPY: 主目标 total_return_wealth 需要 price_basis_verified；当前 producer_candidate_only → 目标阻断，不得开算",
+  "US: 无本地可核日历来源 → 交易日目标保持 blocked（不从报价日期或周一至周五反推日历）",
+  "QQQ: 主目标 total_return_wealth 需要 price_basis_verified；当前 producer_candidate_only → 目标阻断，不得开算",
+  "资料不足：声明用途（historical_description 的既定目标）当前不可执行，仅保留资格诊断"
+ ],
+ "notes": [
+  "510300: available_at 未知（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格",
+  "159915: available_at 未知（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格",
+  "SPY: available_at 未知（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格",
+  "QQQ: available_at 未知（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格"
+ ],
+ "allowed_uses": [],
+ "markets": {
+  "510300": {
+   "price_basis": "producer_candidate_only",
+   "calendar": "declared_local",
+   "target": "blocked"
+  },
+  "159915": {
+   "price_basis": "producer_candidate_only",
+   "calendar": "declared_local",
+   "target": "blocked"
+  },
+  "SPY": {
+   "price_basis": "producer_candidate_only",
+   "calendar": "unverified",
+   "target": "blocked"
+  },
+  "QQQ": {
+   "price_basis": "producer_candidate_only",
+   "calendar": "unverified",
+   "target": "blocked"
+  }
+ },
+ "data_mode": "real",
+ "generated_at": "2026-09-15T13:43:09.300121+08:00"
+}

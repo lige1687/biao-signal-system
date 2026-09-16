@@ -1,0 +1,18 @@
+^D................F......                                                  [100%]
+=================================== FAILURES ===================================
+_________________________ test_c3_dca_topic_real_state _________________________
+
+env = namespace(client=<starlette.testclient.TestClient object at 0x1277bed50>, db='/private/tmp/lei-03b-runtime-integration...b-runtime-integration-r2/test_c3_dca_topic_real_state0/env'), app=<fastapi.applications.FastAPI object at 0x1257d23d0>)
+
+    def test_c3_dca_topic_real_state(env):
+        with patch.object(Path, "home", return_value=env.tmp):
+            blocks = agent_routes._topic_blocks("dca", SYMBOL)
+        state = json.dumps(blocks["dca_state"], ensure_ascii=False)
+>       assert "signals" in state
+E       assert 'signals' in '{"available": false, "error": "No module named \'lei_signal.dca\'", "note_cn": "定投状态适配器当前不可用——如实缺口，不编状态"}'
+
+tests/unit/test_discussion_contract_r2.py:477: AssertionError
+- generated xml file: /Users/yongbiaoli/lei-signal-integration-20260909/docs/experiments/raw/agent-03b-runtime-integration-2026-09-09/backend-verification/regression-r2-junit.xml -
+=========================== short test summary info ============================
+FAILED tests/unit/test_discussion_contract_r2.py::test_c3_dca_topic_real_state
+1 failed, 22 passed in 350.81s (0:05:50)

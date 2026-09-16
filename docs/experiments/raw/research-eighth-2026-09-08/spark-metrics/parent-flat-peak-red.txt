@@ -1,0 +1,24 @@
+test_equal_peak_moves_recovery_anchor (test_parent_review.ParentReview.test_equal_peak_moves_recovery_anchor) ... FAIL
+test_historical_loss_and_peak_anchor (test_parent_review.ParentReview.test_historical_loss_and_peak_anchor) ... ok
+test_recovered_equal_peak_precedes_new_decline (test_parent_review.ParentReview.test_recovered_equal_peak_precedes_new_decline) ... FAIL
+
+======================================================================
+FAIL: test_equal_peak_moves_recovery_anchor (test_parent_review.ParentReview.test_equal_peak_moves_recovery_anchor)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/spark-metrics/test_parent_review.py", line 11, in test_equal_peak_moves_recovery_anchor
+    self.assertEqual(r['longest_drawdown_days'],1)
+AssertionError: 10 != 1
+
+======================================================================
+FAIL: test_recovered_equal_peak_precedes_new_decline (test_parent_review.ParentReview.test_recovered_equal_peak_precedes_new_decline)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/spark-metrics/test_parent_review.py", line 14, in test_recovered_equal_peak_precedes_new_decline
+    self.assertEqual(r['longest_drawdown_days'],2)
+AssertionError: 3 != 2
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+FAILED (failures=2)

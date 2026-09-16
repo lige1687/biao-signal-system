@@ -1,0 +1,42 @@
+Implemented with minimal scoped changes in:
+
+- [engine.py](/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/engine.py)
+- [test_diagnostic.py](/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/test_diagnostic.py)
+
+What changed:
+
+- Added diagnostic config support (`R0`, `R1`) in `simulate` config validation, leaving `P0`–`P7` logic untouched.
+- In candidate signal gate for `R0/R1`:
+  - Kept candidate rejection reason handling except allowed bypass only when `signal_accepted=False` and `signal_reject_reason` is one of:
+    - `target_unavailable`
+    - `signal_reward_risk_below_3`
+  - Still rejects all other false/empty signal rejection reasons.
+  - Removed diagnostic target presence and target-based RR gating at signal stage.
+  - Added strict requirement for `stop > 0` (finite) and `signal_ref > stop` for `R0/R1`, with fallback `signal_ref = bars[s][d]['close']` when synthetic `signal_ref` is absent.
+- In execution (open) stage for `R0/R1`:
+  - Kept `stop` positivity checks and `open > stop` rejection.
+  - Removed hard target presence and open RR `< 3` rejection.
+  - Still computes `open_rr` for audit when target is finite, but does not use it for rejection.
+- Added `diagnostic_reference_only=True` to `orders` and `trades` for `R0/R1`, and preserved in `roundtrips` and `daily` rows.
+- Preserved all original candidate fields by extending `candidate_metadata` instead of replacing:
+  - Added `diagnostic_reference_only`
+  - Added/recorded `original_candidate_id` and `original_config_id` in `R0/R1`
+  - Fallbacks: `original_candidate_id` -> input `candidate_id`; `original_config_id` -> `P0` for `R0`, `P5` for `R1`
+- Did not modify `engine_baseline.py`, `test_baseline.py`, `input-hashes.json`, or this prompt.
+- No changes to P0–P7 behavior path.
+
+Test artifacts/logs:
+
+- Created targeted diagnostic tests first, then ran baseline + diagnostic tests.
+- Failing baseline-before-implementation snapshot: [spark-red.txt](/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/spark-red.txt)
+- Passing final snapshot: [spark-tests.txt](/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/spark-tests.txt)
+
+Validation result:
+
+- `python3 -B -m unittest test_diagnostic.py test_baseline.py` now passes.
+- 30 tests total passed (23 original + 7 new targeted diagnostic cases).
+- Old `P0`–`P7` baseline coverage is still green in the same run.
+
+Uncertainty:
+
+- None in implementation behavior. One minor assumption enforced: `R0` maps `original_config_id` fallback to `P0`, `R1` maps to `P5`.

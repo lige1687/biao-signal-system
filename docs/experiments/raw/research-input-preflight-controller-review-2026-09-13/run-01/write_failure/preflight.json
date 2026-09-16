@@ -1,0 +1,144 @@
+{
+ "schema_version": "research-input-preflight/1.0",
+ "request": {
+  "snapshot_dir": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-input-preflight-controller-review-2026-09-13/run-01/synthetic-snapshot",
+  "calendar_path": null,
+  "publication_path": null,
+  "actions_path": null,
+  "registry_path": null,
+  "refs": [],
+  "use": "description",
+  "evaluation_start": "2026-06-01",
+  "evaluation_end": "2026-06-02"
+ },
+ "integrity": {
+  "verified": true,
+  "hash_mismatches": [],
+  "instruments": [
+   "510300.SS"
+  ],
+  "rows": 2,
+  "first_date": "2026-06-01",
+  "last_date": "2026-06-02",
+  "per_instrument_fields": {
+   "510300.SS": {
+    "missing_declared_fields": [],
+    "rows": 2
+   }
+  },
+  "date_index_note": "日期以 datetime64 索引承载，与快照声明的 date 字段一一对应；索引类型 datetime64[ns]"
+ },
+ "calendar": {
+  "loaded": false
+ },
+ "data_uses": {
+  "description": {
+   "verdict": "usable",
+   "declared": true,
+   "default_accepted": true,
+   "reason": "",
+   "blockers": {
+    "fixable": [],
+    "structural": []
+   }
+  },
+  "ranking": {
+   "verdict": "conditional",
+   "declared": false,
+   "default_accepted": false,
+   "reason": "not_declared: 产物自身声明的用途不含 ranking",
+   "blockers": {
+    "fixable": [
+     "no_qualified_calendar"
+    ],
+    "structural": []
+   }
+  },
+  "research_signal": {
+   "verdict": "conditional",
+   "declared": false,
+   "default_accepted": false,
+   "reason": "not_declared: 产物自身声明的用途不含 research_signal",
+   "blockers": {
+    "fixable": [
+     "no_qualified_calendar"
+    ],
+    "structural": []
+   }
+  },
+  "attribution": {
+   "verdict": "usable",
+   "declared": false,
+   "default_accepted": false,
+   "reason": "not_declared: 产物自身声明的用途不含 attribution",
+   "blockers": {
+    "fixable": [],
+    "structural": []
+   }
+  },
+  "comparison": {
+   "verdict": "conditional",
+   "declared": false,
+   "default_accepted": false,
+   "reason": "not_declared: 产物自身声明的用途不含 comparison",
+   "blockers": {
+    "fixable": [
+     "no_qualified_calendar"
+    ],
+    "structural": []
+   }
+  },
+  "diagnostic": {
+   "verdict": "usable",
+   "declared": true,
+   "default_accepted": true,
+   "reason": "",
+   "blockers": {
+    "fixable": [],
+    "structural": []
+   }
+  }
+ },
+ "registry": {
+  "loaded": false
+ },
+ "objects": {},
+ "findings": [
+  {
+   "level": "warn",
+   "code": "no_qualified_calendar",
+   "message": "无合格交易日历：不推断缺失交易日，不把工作日当交易日。跨标的同日对齐与覆盖率分母均无权威依据",
+   "instrument": null,
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "research_signal",
+    "comparison"
+   ],
+   "evidence": {
+    "calendar_authority": "none"
+   },
+   "structural": false
+  },
+  {
+   "level": "info",
+   "code": "coverage_denominator_unknown",
+   "message": "无权威日历，评价期覆盖率没有可信分母，只报绝对条数",
+   "instrument": "510300.SS",
+   "field": null,
+   "affects_uses": [],
+   "evidence": {
+    "rows_in_window": 2
+   },
+   "structural": false
+  }
+ ],
+ "request_satisfied": true,
+ "errors": [],
+ "limitations": [
+  "未提供日历：所有依赖日历的检查按无合格日历降级",
+  "request_satisfied=true 仅表示本次已实现的输入检查满足，不等于公式实现、历史可得时点、因子有效或交易授权"
+ ],
+ "calculation_run": false,
+ "production_authorized": false
+}

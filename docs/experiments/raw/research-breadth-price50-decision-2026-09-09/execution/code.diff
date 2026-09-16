@@ -1,0 +1,138 @@
+--- old/run_backtest.py
++++ execution/run_price50.py
+@@ -1,4 +1,4 @@
+-"""Run the frozen breadth-source and confirmation accounts. Research only."""
++"""Run the frozen, pure 50-valid-quote price benchmark accounts. Research only."""
+ from __future__ import annotations
+ 
+ import csv
+@@ -6,6 +6,7 @@
+ import json
+ import math
+ import sys
++import argparse
+ from collections import defaultdict
+ from datetime import date, timedelta
+ from decimal import Decimal, ROUND_FLOOR
+@@ -19,8 +20,7 @@
+ sys.dont_write_bytecode = True
+ D = Decimal
+ HERE = Path(__file__).resolve().parent
+-ROOT = HERE.parents[3]
+-PREP = HERE / "prepared"
++ROOT = HERE.parents[4]
+ OUT = HERE / "results"
+ OLD = ROOT / "docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12"
+ START = "2018-07-05"  # first qualified All-A date; all comparisons use this common start
+@@ -152,6 +152,23 @@
+     if variant == "W3":
+         return cont > cont.rolling(50, min_periods=50).mean()
+     raise ValueError(variant)
++
++
++def price50_targets(continuous: pd.Series) -> tuple[pd.Series, pd.Series]:
++    """Binary target from the last 50 valid closes; equality maps to cash."""
++    valid = continuous.dropna().astype(float)
++    sma = valid.rolling(50, min_periods=50).mean()
++    target = (valid > sma).astype(float)
++    target[sma.isna()] = np.nan
++    return target.reindex(continuous.index), sma.reindex(continuous.index)
++
++
++def state_change_order(previous: float | None, target: float, day: pd.Timestamp):
++    """A newer close state replaces any older unfilled order."""
++    if previous is not None and target == previous:
++        return previous, None
++    return target, {"kind": "target", "signal_date": day, "target": target,
++                    "band": False, "reason": "price_sma50_state"}
+ 
+ 
+ def drawdown_intervals(daily: pd.DataFrame):
+@@ -192,7 +209,9 @@
+     variant = method if method.startswith("W") else None
+     confirm = confirmation_series(variant, width, cont_all).reindex(bars.index) if variant else None
+     w_events = weekly_events(width, bars.index, START, END) if variant else {}
+-    b1 = (cont_all > cont_all.rolling(200, min_periods=200).mean()).astype(float).reindex(bars.index)
++    # This is a new benchmark identity: 50 valid continuous-price closes, not old B1/SMA200.
++    price50_all, sma50 = price50_targets(cont_all)
++    price50 = price50_all.reindex(bars.index)
+     month_ends = set(pd.Series(bars.index, index=bars.index).groupby(bars.index.to_period("M")).max())
+     cash, recv, units = INITIAL, D("0"), D("0")
+     fee = D(str(fee_rate))
+@@ -327,12 +346,14 @@
+                     elif bool(confirm.loc[day]) if day in confirm.index and pd.notna(confirm.loc[day]) else False:
+                         order = {"kind": "target", "signal_date": day, "target": raw_target, "band": True, "confirmed": True, "reason": "confirmed_waiting_buy"}
+                         waiting["confirmation_date"] = day
+-            elif method == "B1":
+-                target = float(b1.loc[day])
+-                if b1_state is None or target != b1_state:
+-                    b1_state = target
+-                    order = {"kind": "target", "signal_date": day, "target": target, "band": False, "reason": "price_sma200_state"}
+-                    signals.append({"date": day, "kind": "price_sma200_state", "target": target})
++            elif method == "P50":
++                if pd.notna(price50.loc[day]):
++                    target = float(price50.loc[day])
++                    b1_state, new_order = state_change_order(b1_state, target, day)
++                    if new_order is not None:
++                        order = new_order
++                        signals.append({"date": day, "kind": "price_sma50_state", "target": target,
++                                        "close": float(cont_all.loc[day]), "sma50": float(sma50.loc[day])})
+             elif method == "B2" and day in month_ends:
+                 order = {"kind": "target", "signal_date": day, "target": 0.5, "band": False, "reason": "month_end_50pct"}
+                 signals.append({"date": day, "kind": "month_end_50pct", "target": 0.5})
+@@ -386,29 +407,24 @@
+ 
+ 
+ def main():
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--qualification-approved", type=Path, required=True,
++                        help="Controller-written qualification decision JSON; required before real accounts run")
++    args = parser.parse_args()
++    gate = load_json(args.qualification_approved)
++    protocol_hash = hashlib.sha256((HERE.parent / "protocol.md").read_bytes()).hexdigest()
++    if gate.get("approved") is not True or gate.get("protocol_sha256") != protocol_hash:
++        raise RuntimeError("qualification gate is absent, false, or for a different protocol")
+     OUT.mkdir(parents=True, exist_ok=True)
+-    quality = load_json(PREP / "data_quality.json")
+-    widths = {
+-        "all_a": pd.read_parquet(PREP / "breadth_all_a.parquet"),
+-        "csi300": pd.read_parquet(PREP / "breadth_csi300.parquet"),
+-    }
+-    account_specs = []
+-    for symbol in ["510300", "159915"]:
+-        sources = ["all_a"] + (["csi300"] if symbol == "510300" else [])
+-        for source in sources:
+-            for variant in ["W0", "W1", "W2", "W3"]:
+-                account_specs.append((symbol, source, variant))
+-        for baseline in ["B0", "B1", "B2"]:
+-            account_specs.append((symbol, "baseline", baseline))
++    account_specs = [(symbol, "price50", "P50") for symbol in ["510300", "159915"]]
+     all_summaries, all_annual = [], []
+     for fee in [0.001, 0.002]:
+         fee_dir = OUT / ("fee-10bp" if fee == 0.001 else "fee-20bp")
+         fee_dir.mkdir(exist_ok=True)
+         for symbol, source, method in account_specs:
+             account_id = f"{symbol}-{source}-{method}-{int(fee*10000)}bp"
+-            width = widths.get(source)
+-            summary, daily, trades, signals, rejects, waits, dd = simulate(symbol, method, fee, width)
+-            summary.update(account_id=account_id, width_source=source, data_grade=(quality.get(source, {}).get("grade") if source != "baseline" else "reference"))
++            summary, daily, trades, signals, rejects, waits, dd = simulate(symbol, method, fee, None)
++            summary.update(account_id=account_id, width_source=None, data_grade="B_research_only")
+             all_summaries.append(summary)
+             all_annual.extend(annual_rows(daily, account_id))
+             daily.to_parquet(fee_dir / f"{account_id}-daily.parquet", index=False)
+@@ -433,11 +449,11 @@
+             period_rows.append({"account_id": s["account_id"], "period": label, "start_equity": start_eq, "end_equity": float(g.equity.iloc[-1]), "return": float(g.equity.iloc[-1] / start_eq - 1)})
+     pd.DataFrame(period_rows).to_csv(OUT / "periods.csv", index=False)
+     save_json(OUT / "matrix_status.json", {
+-        "planned_main_paths": 22, "completed_main_paths_10bp": len(account_specs),
++        "planned_main_paths": 2, "completed_main_paths_10bp": len(account_specs),
+         "completed_stress_paths_20bp": len(account_specs),
+-        "paused": ["159915-own-index-W0/W1/W2/W3"],
++        "benchmark_definition": "benchmark.etf.price_sma50_binary_account@1.0.0",
+         "common_start": START, "common_end": END,
+-        "reason": quality["chinext"]["reason"],
++        "qualification_gate": str(args.qualification_approved),
+     })
+ 
+ 

@@ -1,0 +1,157 @@
+{
+  "scope": "摘要核算＋第13轮单标的成交时序复核＋第18轮两个单路径会计复核；不是整套回测复现",
+  "round13": {
+    "summary_groups": 20,
+    "trade_rows": 730,
+    "unique_entries": 142,
+    "summary_max_abs_difference": 0,
+    "overlap_pairs": 128,
+    "target_pairs": 21,
+    "archive_matches": 21,
+    "nonforced_same_day_signals": 15,
+    "changed_exits": 10,
+    "mean_paired_delta": 0.017631651014487656
+  },
+  "round18": {
+    "grid": [
+      {
+        "arm": "FQ",
+        "n": 96,
+        "median": 0.13856500824456286,
+        "p10": 0.12229691905180207,
+        "p90": 0.15703952387875397,
+        "minimum": 0.12149658641973005,
+        "maximum": 0.18155969123288485,
+        "summary_max_abs_diff": 0.0
+      },
+      {
+        "arm": "FM",
+        "n": 96,
+        "median": 0.1381076555588111,
+        "p10": 0.12209802702319517,
+        "p90": 0.15594661858076841,
+        "minimum": 0.1213023385766846,
+        "maximum": 0.18014623696476184,
+        "summary_max_abs_diff": 0.0
+      },
+      {
+        "arm": "NR",
+        "n": 96,
+        "median": 0.13232415889713256,
+        "p10": 0.11925849272360944,
+        "p90": 0.14856749001328384,
+        "minimum": 0.11755989375587894,
+        "maximum": 0.17018577353558217,
+        "summary_max_abs_diff": 0.0
+      },
+      {
+        "arm": "W4",
+        "n": 96,
+        "median": 0.10846767449387762,
+        "p10": 0.09578171157245585,
+        "p90": 0.12258637598258348,
+        "minimum": 0.09495395408965412,
+        "maximum": 0.14657616522875994,
+        "summary_max_abs_diff": 0.0
+      },
+      {
+        "arm": "B3",
+        "n": 96,
+        "median": 0.03135527809375571,
+        "p10": 0.030281761324956524,
+        "p90": 0.036370792839583,
+        "minimum": 0.029086492274061126,
+        "maximum": 0.05425264848719136,
+        "summary_max_abs_diff": 0.0
+      }
+    ],
+    "cases": {
+      "W5": {
+        "start": "2020-11-16",
+        "end": "2026-08-26",
+        "n_dates": 1353,
+        "archived": {
+          "final": 1.5697011216242525,
+          "xirr": 0.15880196363691856,
+          "mdd": -0.0967325102404486,
+          "target_final": 1.5703,
+          "pass": true
+        },
+        "original_rerun": {
+          "final": 1.5697011216242525,
+          "xirr": 0.15880196363691856,
+          "mdd": -0.0967325102404486,
+          "years": 5.774127310061601
+        },
+        "accounting_check": {
+          "final": 1.5697011216242525,
+          "external_deposits": 1.0000000000000042,
+          "old_recorded_debits": 0.9966216216216258,
+          "ending_cash": 0.0033783783783783786,
+          "old_xirr": 0.15880196363691856,
+          "external_flow_xirr": 0.15755320621819358,
+          "raw_wealth_mdd": -0.0967325102404486,
+          "deposit_adjusted_mdd": -0.2338042403132382,
+          "account_identity_max_error": 1.1102230246251565e-16
+        },
+        "abs_rerun_final_vs_archive": 0.0,
+        "abs_independent_ledger_final_vs_original": 0.0
+      },
+      "long": {
+        "start": "2013-07-29",
+        "end": "2026-08-26",
+        "n_dates": 3075,
+        "archived": {
+          "final": 2.31764528602191,
+          "xirr": 0.1214050754929078,
+          "mdd": -0.23790644489874424,
+          "years": 13.075975359342916
+        },
+        "original_rerun": {
+          "final": 2.31764528602191,
+          "xirr": 0.1214050754929078,
+          "mdd": -0.23790644489874424,
+          "years": 13.075975359342916
+        },
+        "accounting_check": {
+          "final": 2.31764528602191,
+          "external_deposits": 0.9999999999999948,
+          "old_recorded_debits": 0.9985096870342723,
+          "ending_cash": 0.0014903129657228018,
+          "old_xirr": 0.1214050754929078,
+          "external_flow_xirr": 0.12116950716180674,
+          "raw_wealth_mdd": -0.23790644489874424,
+          "deposit_adjusted_mdd": -0.30008839568026346,
+          "account_identity_max_error": 2.7755575615628914e-17
+        },
+        "abs_rerun_final_vs_archive": 0.0,
+        "abs_independent_ledger_final_vs_original": 0.0
+      }
+    }
+  },
+  "synthetic": {
+    "final": 1.0000000000000002,
+    "external_deposits": 1.0000000000000009,
+    "old_recorded_debits": 0.9807692307692316,
+    "ending_cash": 0.019230769230769232,
+    "old_xirr": 0.04028634326084746,
+    "external_flow_xirr": -7.216449660063518e-16,
+    "raw_wealth_mdd": -2.220446049250313e-16,
+    "deposit_adjusted_mdd": -1.2212453270876722e-15,
+    "account_identity_max_error": 1.1102230246251565e-16,
+    "original_engine": {
+      "final": 1.0000000000000002,
+      "xirr": 0.04028634326084746,
+      "mdd": -2.220446049250313e-16,
+      "years": 0.9883641341546886
+    },
+    "deposit_mask_example": {
+      "before": 100.0,
+      "after_price_fall": 80.0,
+      "new_deposit": 100.0,
+      "reported_account_balance": 180.0,
+      "raw_balance_return": 0.8,
+      "investment_return_excluding_deposit": -0.2
+    }
+  }
+}

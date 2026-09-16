@@ -1,0 +1,107 @@
+{
+ "schema_version": "research-use-measurement/1.1",
+ "snapshot": "docs/experiments/raw/research-identity-wiring-2026-09-10/canonical-snapshot-v2",
+ "cross_checks_enabled": [
+  "declared_uses",
+  "declared_currency",
+  "calendar_object_required"
+ ],
+ "declared_uses": [
+  "description",
+  "ranking",
+  "research_signal",
+  "attribution",
+  "comparison",
+  "diagnostic"
+ ],
+ "measurement": {
+  "description": {
+   "verdict": "usable",
+   "blockers": {
+    "fixable": [],
+    "structural": []
+   },
+   "with_accept_structural": "放行(usable)"
+  },
+  "ranking": {
+   "verdict": "conditional",
+   "blockers": {
+    "fixable": [],
+    "structural": [
+     "starts_after_window"
+    ]
+   },
+   "with_accept_structural": "放行(conditional)"
+  },
+  "research_signal": {
+   "verdict": "conditional",
+   "blockers": {
+    "fixable": [
+     "action_available_at_unknown",
+     "zero_volume_days"
+    ],
+    "structural": []
+   },
+   "with_accept_structural": "拒绝(conditional)"
+  },
+  "attribution": {
+   "verdict": "conditional",
+   "blockers": {
+    "fixable": [
+     "action_available_at_unknown",
+     "zero_volume_days"
+    ],
+    "structural": []
+   },
+   "with_accept_structural": "拒绝(conditional)"
+  },
+  "comparison": {
+   "verdict": "conditional",
+   "blockers": {
+    "fixable": [],
+    "structural": [
+     "starts_after_window"
+    ]
+   },
+   "with_accept_structural": "放行(conditional)"
+  },
+  "diagnostic": {
+   "verdict": "usable",
+   "blockers": {
+    "fixable": [],
+    "structural": []
+   },
+   "with_accept_structural": "放行(usable)"
+  }
+ },
+ "counts": {
+  "part_0": {
+   "instruments": 14,
+   "rows_total": 18916,
+   "findings_by_level": {
+    "info": 0,
+    "warn": 12,
+    "block": 0
+   }
+  },
+  "part_1": {
+   "total": 21,
+   "unique_ids": 21,
+   "by_type": {
+    "cash_dividend": 17,
+    "split": 3,
+    "trading_halt": 1
+   },
+   "without_available_at": 21,
+   "with_announcement_lower_bound": 3,
+   "findings_by_level": {
+    "info": 2,
+    "warn": 1,
+    "block": 0
+   }
+  }
+ },
+ "authorization": {
+  "production_trade": false
+ }
+}

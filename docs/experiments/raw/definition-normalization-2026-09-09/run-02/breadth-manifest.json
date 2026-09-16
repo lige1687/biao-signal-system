@@ -1,0 +1,77 @@
+{
+  "principles_version": "1.0.0",
+  "definition_standard_version": "1.0.0",
+  "registry_version": "1.0.0",
+  "registry_file": {
+    "path": "docs/research/definitions.v1.json",
+    "sha256": "1626c0b4f414de09fbb2f523daffa73c8db0018048cf860cc5f40c3b1414de7a"
+  },
+  "standard_file": {
+    "path": "docs/research/definition-standard.md",
+    "sha256": "b12fe66d7b13e41a4e11b17b77c9e2251e98d2655ee00a7b8d53881a3f0c5ade"
+  },
+  "registry_canonical_sha256": "f59fe3eb1c38e7dac69f2c5aac0e37d137d1db66d7afb29096d78dea60a17ab2",
+  "definition_refs": [
+    "breadth.csi300.b50.common@1.0.0",
+    "breadth.csi300.b200.common@1.0.0"
+  ],
+  "dependency_closure": [
+    "breadth.csi300.b200.common@1.0.0",
+    "breadth.csi300.b50.common@1.0.0"
+  ],
+  "codes": [
+    {
+      "path": "scripts/verify_research_definitions.py",
+      "sha256": "79592e307b91decd9364fff7a1cf964cc087b43354cf6d15300f28595a26f1a7"
+    },
+    {
+      "path": "src/lei_signal/research/definitions.py",
+      "sha256": "1e465d3c24dea5999522376663e1976054b50f9f0e545e689caa27e9aee60599"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "docs/experiments/raw/definition-normalization-2026-09-09/run-02/breadth-input.csv",
+      "sha256": "e6a1acff1583c3a0928f49edecfe4f6631ea18e6b9ef23ca40b961a490a38e48"
+    },
+    {
+      "path": "docs/experiments/raw/definition-normalization-2026-09-09/run-02/breadth-members.csv",
+      "sha256": "94eaad03b21c1f539d633f4be73f150066f65dadf09eace4c3fc30e88a23629b"
+    },
+    {
+      "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/csi300_membership_daily.parquet",
+      "sha256": "a45d53bf4e445438f534bd2019ec30ecd911f6bfb09272a9c663c7e01026bc30"
+    },
+    {
+      "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/breadth_csi300.parquet",
+      "sha256": "63fa7f0ef837c161194fb8f1f17140069074812085c8b449b93aa4d5f2998a58"
+    }
+  ],
+  "data_cutoff": "2025-06-18T15:00:00+08:00",
+  "available_at": "2026-09-09T19:46:01.877725+08:00",
+  "decision_at": "2026-09-09T19:46:01.877725+08:00",
+  "protocol": {
+    "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/protocol.md",
+    "sha256": "a1b991c102c37a73d491e842e68cf7fe0a3e4ba6e2c83759e78575a480875f8d"
+  },
+  "pool_version": "csi300/frozen20-session-probe-v1",
+  "quality": "real_frozen_csi300_B; 20-session membership probes, historical availability unknown",
+  "production_authorization": "not_authorized",
+  "historical_available_at": "unknown: sources do not certify vendor arrival timestamps",
+  "execution_protocol": "definition replay only; no trades executed",
+  "output_schema": {
+    "b50": "fraction",
+    "b200": "fraction",
+    "coverage": "fraction",
+    "eligible": "stock_count",
+    "missing_reason": "membership_missing/no_eligible_quotes/coverage_below_minimum/null"
+  },
+  "legacy_code": {
+    "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/research_engine.py",
+    "sha256": "3799f05c131179a79916505709d3aff94ced40350ddf10c51704f7ca11215f56"
+  },
+  "source_cache": {
+    "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_klines_full.parquet",
+    "sha256": "5ad045c518d0bb4394d8c8cb946d207ad9b5b1454e5a776b1a3766c62b475b04"
+  }
+}

@@ -1,0 +1,630 @@
+{
+ "purpose": "factor-evidence-reliability v1 开工保护基线（只读指纹，不搬走原文件）",
+ "recorded_at": "2026-09-16",
+ "branch": "codex/factor-unit-research-20260915",
+ "head": "8ba16576b75e605aa1b0d0902568c760c4b99095",
+ "coverage": {
+  "factor_lab_py": "src/lei_signal/research/factor_lab/ 全部 .py（递归）",
+  "factor_unit_py": "src/lei_signal/research/factor_unit/ 全部 .py",
+  "rules": [
+   "configs/rules.v1.yaml",
+   "configs/rules.v2.yaml"
+  ],
+  "definitions": "docs/research/definitions.v1.json",
+  "b1_raw_all_files": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/ 全部文件（递归）",
+  "b1_reports": [
+   "b1-controller-review-2026-09-16.md",
+   "b1-closeout-controller-2026-09-16.md",
+   "b1-dual-ma-first-real-description-2026-09-16.md（执行报告）"
+  ],
+  "standards_and_identity": "五份研究规范、候选卡、本任务书及派发文件、TradingCalendar"
+ },
+ "file_count": 121,
+ "files": [
+  {
+   "path": "src/lei_signal/research/factor_lab/__init__.py",
+   "sha256": "ea269601b6b4fa5f1bb70f2dff555aca5a7afa236babc8005a8b4e7fd2d036c4",
+   "bytes": 747
+  },
+  {
+   "path": "src/lei_signal/research/factor_lab/adapters.py",
+   "sha256": "27596fd66d918cacf9db7a6ae2cdd11b408d7d46f3c9889ac2d35a42e7748020",
+   "bytes": 14993
+  },
+  {
+   "path": "src/lei_signal/research/factor_lab/attribution.py",
+   "sha256": "6d9b756cda1dfc8b6d6c9de8f8a12ecbd4adbe1fc28e30eba962e64437f47e93",
+   "bytes": 20659
+  },
+  {
+   "path": "src/lei_signal/research/factor_lab/contracts.py",
+   "sha256": "d9ff0e864a8f4600c134972e9815acc2143f1b7227e17de570fed4901e0988bc",
+   "bytes": 6895
+  },
+  {
+   "path": "src/lei_signal/research/factor_lab/diagnostics.py",
+   "sha256": "da84ca7b13502a9669e09d5c0c3b610b75e557a3b939742d8ac400f037b99cc8",
+   "bytes": 18927
+  },
+  {
+   "path": "src/lei_signal/research/factor_lab/runner.py",
+   "sha256": "97b49d9e14d5740a2b7f8e04cbb5a4d18e32d59e819e4a804d1d068f39f23917",
+   "bytes": 43228
+  },
+  {
+   "path": "src/lei_signal/research/factor_lab/validation.py",
+   "sha256": "815769ca7440782f9275167562d81ba6e11baf955b7b5e1ef9f8137f87d290b6",
+   "bytes": 17926
+  },
+  {
+   "path": "src/lei_signal/research/factor_unit/__init__.py",
+   "sha256": "72c20484fbeb7b11a1a556ef20a09c58883dd97b4088dc5bc0a83409bdc1eeec",
+   "bytes": 251
+  },
+  {
+   "path": "src/lei_signal/research/factor_unit/b1_contract.py",
+   "sha256": "a1a245e446cff3a2e752a7c55824926ac74f6d547e33c03429c21e540a517a3c",
+   "bytes": 18364
+  },
+  {
+   "path": "src/lei_signal/research/factor_unit/b1_description.py",
+   "sha256": "0030e00f57b173ee15862490d008d61e6c8984a3ed87c2f2afef4da6a7060358",
+   "bytes": 10520
+  },
+  {
+   "path": "src/lei_signal/research/factor_unit/close_state.py",
+   "sha256": "b0efb324a2ef65d1f415c19be4f50b96ebf25f140da0c31b2b759d68ef04db10",
+   "bytes": 4384
+  },
+  {
+   "path": "src/lei_signal/research/factor_unit/description_core.py",
+   "sha256": "a7875dd3fbede43aea4db5f30c94786e8a3ff027a6594f9d5284c4b2eedb7e3d",
+   "bytes": 14071
+  },
+  {
+   "path": "src/lei_signal/research/factor_unit/state_description.py",
+   "sha256": "2f0359b5435d08b1f1c3773ee4b185a334ce45ba1c537a3091ba6e93765ecc76",
+   "bytes": 7491
+  },
+  {
+   "path": "src/lei_signal/research/factor_unit/study_contract.py",
+   "sha256": "43d099752d7451c127f7ba138ce254689420209b3d75b6f1ab88d8a0c2cb2c8c",
+   "bytes": 26465
+  },
+  {
+   "path": "configs/rules.v1.yaml",
+   "sha256": "9be26a1626fdf6351478b40b388907e9d8128f74b6bd4aa2b8ff4a850cfdcfd2",
+   "bytes": 36540
+  },
+  {
+   "path": "configs/rules.v2.yaml",
+   "sha256": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+   "bytes": 77474
+  },
+  {
+   "path": "docs/research/definitions.v1.json",
+   "sha256": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05",
+   "bytes": 207737
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/baseline/ai-execution-contract.md",
+   "sha256": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962",
+   "bytes": 5188
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/baseline/baseline-sha256.txt",
+   "sha256": "2af3634ebd6df91b65758c0caa0ee536c3bebdf24b5f49efe9723838c1a37bb0",
+   "bytes": 1187
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/baseline/callers-rg.txt",
+   "sha256": "684d47854bb6eaf3d5a439ed58ec727b638d1b38e60cb3731661ad8cc7ef0f53",
+   "bytes": 2800
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/baseline/candidate-card.md",
+   "sha256": "907d17631e27011423bebbf068bcb2bbc6e1b44a184618597cf54f868e066dc1",
+   "bytes": 3097
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/baseline/capture_old_behavior.py",
+   "sha256": "0c41ddc6654bc2c916fc624406e2793f2d332a48a6384ade873b8fd8b1b297b1",
+   "bytes": 4633
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/baseline/definition-standard.md",
+   "sha256": "3406feaea2bbb8d23a91ddc8fa0c85e62ff86437bdf443d459f2c97b0e99cd5c",
+   "bytes": 14002
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/baseline/experiment-backtest-principles.md",
+   "sha256": "ac5a676c0635441b66f656c8e1249b69bade36365cc9065ed6341a610b6a53c6",
+   "bytes": 21561
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/baseline/experiment-report-template.md",
+   "sha256": "cae2853f81841de6f424c6bda10e6708dd35574ebb8a325088fe507c5755d54e",
+   "bytes": 12378
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/baseline/git-status-scoped.txt",
+   "sha256": "804c151563f9770d4cb9aba8856eb6402cb972b6f7d974fe88ce9f7ac6eb99e5",
+   "bytes": 545
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/baseline/input-package-manifest.json",
+   "sha256": "8d39a83eec833c13f14ee78ad36899b6ae49f32f64b024c33ee75474bc3a6ae7",
+   "bytes": 4222
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/baseline/old-behavior-baseline.json",
+   "sha256": "9f6fed0b668311188f34c9de6a129a83e4a37a941a309797680c90dc68a1e341",
+   "bytes": 15439
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/baseline/state_description.before-extraction.py",
+   "sha256": "b1394792ad22e64ebf3702143e80bf3566508c75ff3a0ee3ffaf101f7e2609c0",
+   "bytes": 17728
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/baseline/task-book.md",
+   "sha256": "0afb4ae14920b4c04207458763df9df02ae05bfe43e693a9289c604214770e89",
+   "bytes": 21975
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/closeout-run-log.md",
+   "sha256": "f292162dd3309a6a4a238d5d7e9436adb521ea082541936632e81869b03832c2",
+   "bytes": 1460
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/dev-test.log",
+   "sha256": "ee87dbb1f1d6692c443b9fd4602139369b2a6f3c63af737721dd8820f8351fad",
+   "bytes": 989
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/freeze/code-snapshot/configs/rules.v2.yaml",
+   "sha256": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+   "bytes": 77474
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/freeze/code-snapshot/scripts/run_b1_dual_ma_description.py",
+   "sha256": "a4c0b92acf108ac824851b542e97868feaa2ca57a554bd793af7f5bac800249c",
+   "bytes": 11744
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/freeze/code-snapshot/src/lei_signal/domain/canonical.py",
+   "sha256": "3e406f77dfa3f03c7ff4d2fe1989dd117a47e448d137d5ccce76d61864ee06a9",
+   "bytes": 6941
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/freeze/code-snapshot/src/lei_signal/domain/rules_config.py",
+   "sha256": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031",
+   "bytes": 2987
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/freeze/code-snapshot/src/lei_signal/domain/types.py",
+   "sha256": "88ea22c7100068d8be9e50a342e024fb18aadc7139409aeae71f3bc1719dffd9",
+   "bytes": 8142
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/freeze/code-snapshot/src/lei_signal/events/log.py",
+   "sha256": "b71c4c09405ee67f4d16a1c0d22dbd098ffb5078433184a9e7eb39a006e961fa",
+   "bytes": 5630
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/freeze/code-snapshot/src/lei_signal/features/indicators.py",
+   "sha256": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+   "bytes": 6733
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/freeze/code-snapshot/src/lei_signal/research/factor_unit/__init__.py",
+   "sha256": "72c20484fbeb7b11a1a556ef20a09c58883dd97b4088dc5bc0a83409bdc1eeec",
+   "bytes": 251
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/freeze/code-snapshot/src/lei_signal/research/factor_unit/b1_contract.py",
+   "sha256": "c0481125a82d27171d41cbc4e9aa7bff77562407dace883a288ee86e0d147651",
+   "bytes": 15071
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/freeze/code-snapshot/src/lei_signal/research/factor_unit/b1_description.py",
+   "sha256": "0030e00f57b173ee15862490d008d61e6c8984a3ed87c2f2afef4da6a7060358",
+   "bytes": 10520
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/freeze/code-snapshot/src/lei_signal/research/factor_unit/close_state.py",
+   "sha256": "b0efb324a2ef65d1f415c19be4f50b96ebf25f140da0c31b2b759d68ef04db10",
+   "bytes": 4384
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/freeze/code-snapshot/src/lei_signal/research/factor_unit/description_core.py",
+   "sha256": "a7875dd3fbede43aea4db5f30c94786e8a3ff027a6594f9d5284c4b2eedb7e3d",
+   "bytes": 14071
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/freeze/code-snapshot/src/lei_signal/research/factor_unit/state_description.py",
+   "sha256": "2f0359b5435d08b1f1c3773ee4b185a334ce45ba1c537a3091ba6e93765ecc76",
+   "bytes": 7491
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/freeze/code-snapshot/src/lei_signal/research/trading_calendar.py",
+   "sha256": "4651fa7d0e1e20aeaf3b40d9446f3ea76ec0eac037bbe965c018c3e5ccb6389e",
+   "bytes": 16645
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/freeze/code-snapshot/src/lei_signal/rules/dual_ma.py",
+   "sha256": "5c41da87036e0e318bacab663aa5509d73f99f301f805a76559b016b99aa3f7c",
+   "bytes": 8724
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/freeze/code-snapshot/src/lei_signal/rules/lei_color.py",
+   "sha256": "ae6f3a2547cc37dd1ebdfea1bea206f932defdd8cd90d4061630914c0fc9d4d7",
+   "bytes": 3924
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/freeze/environment.json",
+   "sha256": "05b6214fe2676e6ffcbb1f493411d0044c3f86670dd5de7ea6e3a96ab4d76936",
+   "bytes": 314
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/freeze_build.py",
+   "sha256": "89265c20f3ca8bd08079f06a8414fdcc25395a7b032b96b9ad50fe573d0b941a",
+   "bytes": 5345
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/protocol-v1.0.0.json",
+   "sha256": "636171734bf363b30a0821b19256c5dc16507600b97d1a98a61766802b249477",
+   "bytes": 6187
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/protocol-v1.0.1.json",
+   "sha256": "00a16465e5232d3760cedbe9bccb5332b05e4f777f1732e8911ee586974c3af2",
+   "bytes": 6217
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/reaggregate.py",
+   "sha256": "b4e2b9ce034feaec5cdccfd78ecaf41cf94f7310a60fef2f01f8d396c9d8c4e3",
+   "bytes": 4590
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/environment.json",
+   "sha256": "a6f3b72560a7eebf197ed8e616ca69472ca93044736396f14c4db7257cb3059b",
+   "bytes": 307
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/input-package/assemble.py",
+   "sha256": "c2b079e8c66c0940814c12b2156f55625cbe9bb4b9686cdfba7456f8e496a280",
+   "bytes": 4327
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/input-package/calendar.json",
+   "sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+   "bytes": 296252
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/input-package/fetch-manifest.json",
+   "sha256": "5ba8a51d93dcca331204b4df71aa47f5b15a76dedee8ee3ab951689e0979f0c4",
+   "bytes": 13834
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/input-package/manifest.json",
+   "sha256": "8d39a83eec833c13f14ee78ad36899b6ae49f32f64b024c33ee75474bc3a6ae7",
+   "bytes": 4222
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/input-package/originals/sh510300-2013.json",
+   "sha256": "7465f640a561d6cbf9279546a0fd714f73a9bdcde7b7d5b70c4a319a9cb6b9f9",
+   "bytes": 31239
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/input-package/originals/sh510300-2015.json",
+   "sha256": "a4d14c593c8a35d31cab5a76d1eb54311750d8661f26c3b240921713dcb6c9a3",
+   "bytes": 32349
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/input-package/originals/sh510300-2017.json",
+   "sha256": "59984078ea8a3da16e5925d4e950f71092883c5fc84dc5b52a2e831248a23e1b",
+   "bytes": 32039
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/input-package/originals/sh510300-2019.json",
+   "sha256": "0383041afeab893aacc0f0323f2ac355a51060c69fb4152fd418433e9b5a567b",
+   "bytes": 32070
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/input-package/originals/sh510300-2021.json",
+   "sha256": "52b6f7428b28202f50776e81eb2b7c6fd6a11454cd6fa4628de1bd80ba27e5c6",
+   "bytes": 32139
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/input-package/originals/sh510300-2023.json",
+   "sha256": "f046a5c5682e1a2923eff0aea2b9bc174ab9bfd0ddf8d219e04df5cd1b179409",
+   "bytes": 32206
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/input-package/originals/sh510300-2025.json",
+   "sha256": "e5f6ef5d81d1b370aeb6ccc86b61dca2558cd8e2ec7af2e842a75352c8e4eebc",
+   "bytes": 27518
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/input-package/prices.csv",
+   "sha256": "bc8582af3ac7b4c2f00a5b51d81754606179347cc3811c911d7579242cb56703",
+   "bytes": 75138
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/input-package/quality.json",
+   "sha256": "f23cc85f32c6d1917450900758f96afe27611157aa614dc34d5f6d96ddaebfb7",
+   "bytes": 2872
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/input-package/source-decision.csv",
+   "sha256": "8446f99dd14ba3a8397bd474afc5181126c4f4083c90b5d5d33750ee1a482ae5",
+   "bytes": 401
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/input-package/task-protocol.md",
+   "sha256": "895f950152fbdfee15049cd7304074bb3320dbe0d3364c4337c4d9574332dace",
+   "bytes": 3356
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/manifest.json",
+   "sha256": "ca7154fc9bdde40c54490a37c8de47acfaaf138911735b1d6dac0c67bf614fde",
+   "bytes": 5423
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/observations.csv",
+   "sha256": "1dfe4c206212c31809f53f4b66bb40b3dd4ec193b03daf37c1540f8307eb9d5d",
+   "bytes": 159898
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/protocol.source.json",
+   "sha256": "00a16465e5232d3760cedbe9bccb5332b05e4f777f1732e8911ee586974c3af2",
+   "bytes": 6217
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/quality.json",
+   "sha256": "f50175f54cfd172218ba80bd7212e3b4fd5b20eea37cc9498623aa4b964b532f",
+   "bytes": 4563
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/report.md",
+   "sha256": "cf8fe4a40c88ca40e732eeb218f778222a42c91bb95c9021a589a3c3775fc25c",
+   "bytes": 2664
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/source-snapshot/configs/rules.v2.yaml",
+   "sha256": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+   "bytes": 77474
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/source-snapshot/scripts/run_b1_dual_ma_description.py",
+   "sha256": "a4c0b92acf108ac824851b542e97868feaa2ca57a554bd793af7f5bac800249c",
+   "bytes": 11744
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/source-snapshot/src/lei_signal/domain/canonical.py",
+   "sha256": "3e406f77dfa3f03c7ff4d2fe1989dd117a47e448d137d5ccce76d61864ee06a9",
+   "bytes": 6941
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/source-snapshot/src/lei_signal/domain/rules_config.py",
+   "sha256": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031",
+   "bytes": 2987
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/source-snapshot/src/lei_signal/domain/types.py",
+   "sha256": "88ea22c7100068d8be9e50a342e024fb18aadc7139409aeae71f3bc1719dffd9",
+   "bytes": 8142
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/source-snapshot/src/lei_signal/events/log.py",
+   "sha256": "b71c4c09405ee67f4d16a1c0d22dbd098ffb5078433184a9e7eb39a006e961fa",
+   "bytes": 5630
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/source-snapshot/src/lei_signal/features/indicators.py",
+   "sha256": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+   "bytes": 6733
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/source-snapshot/src/lei_signal/research/factor_unit/__init__.py",
+   "sha256": "72c20484fbeb7b11a1a556ef20a09c58883dd97b4088dc5bc0a83409bdc1eeec",
+   "bytes": 251
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/source-snapshot/src/lei_signal/research/factor_unit/b1_contract.py",
+   "sha256": "c0481125a82d27171d41cbc4e9aa7bff77562407dace883a288ee86e0d147651",
+   "bytes": 15071
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/source-snapshot/src/lei_signal/research/factor_unit/b1_description.py",
+   "sha256": "0030e00f57b173ee15862490d008d61e6c8984a3ed87c2f2afef4da6a7060358",
+   "bytes": 10520
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/source-snapshot/src/lei_signal/research/factor_unit/close_state.py",
+   "sha256": "b0efb324a2ef65d1f415c19be4f50b96ebf25f140da0c31b2b759d68ef04db10",
+   "bytes": 4384
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/source-snapshot/src/lei_signal/research/factor_unit/description_core.py",
+   "sha256": "a7875dd3fbede43aea4db5f30c94786e8a3ff027a6594f9d5284c4b2eedb7e3d",
+   "bytes": 14071
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/source-snapshot/src/lei_signal/research/factor_unit/state_description.py",
+   "sha256": "2f0359b5435d08b1f1c3773ee4b185a334ce45ba1c537a3091ba6e93765ecc76",
+   "bytes": 7491
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/source-snapshot/src/lei_signal/research/trading_calendar.py",
+   "sha256": "4651fa7d0e1e20aeaf3b40d9446f3ea76ec0eac037bbe965c018c3e5ccb6389e",
+   "bytes": 16645
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/source-snapshot/src/lei_signal/rules/dual_ma.py",
+   "sha256": "5c41da87036e0e318bacab663aa5509d73f99f301f805a76559b016b99aa3f7c",
+   "bytes": 8724
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/source-snapshot/src/lei_signal/rules/lei_color.py",
+   "sha256": "ae6f3a2547cc37dd1ebdfea1bea206f932defdd8cd90d4061630914c0fc9d4d7",
+   "bytes": 3924
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/states.csv",
+   "sha256": "9dd5c0c06d367dae0d7bbff1d199b685aa50b867d85fe4c871ca3d1134051d27",
+   "bytes": 36830
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/summary.json",
+   "sha256": "ce4c51ba5e0d7bb7f7e10630b07fc106a59c98f0d4f57ac290f861164c9bfcf7",
+   "bytes": 18753
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-log.md",
+   "sha256": "bee3cb3e37a540ed75be692e6c652c382ce7cf7c2c56c9d3e9877ad40645ff60",
+   "bytes": 2640
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/supplement/build_supplement.py",
+   "sha256": "564c406bf0570ed7f9a960aedccff0e334a5dbac5689877b04e90be056749794",
+   "bytes": 8213
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/supplement/freeze-history/freeze_build.before-closeout.py",
+   "sha256": "b2c1131f75018e49a63f9b6c44a95af80b61ca4a86b15e1590cdba4f4c5db169",
+   "bytes": 4970
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/supplement/full-file-listing.json",
+   "sha256": "320f4c3139c8edbb92b812217310d646df68685cbaf10b4a83ff161b9ca8a453",
+   "bytes": 4718
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/supplement/gaps.md",
+   "sha256": "9bee02e729e5e36977647e8648d456bd3a817a33020ebbbc1c2f1526e3f2b427",
+   "bytes": 2507
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/supplement/observations.csv.meta.json",
+   "sha256": "5aedc0a6d9253ea9ef8599482ba7fde4ee01b7d7023ced58e150ff6e1a2e03c0",
+   "bytes": 1350
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/supplement/standards/2026-09-16-b1-dual-ma-first-real-description.md",
+   "sha256": "0afb4ae14920b4c04207458763df9df02ae05bfe43e693a9289c604214770e89",
+   "bytes": 21975
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/supplement/standards/ai-execution-contract.md",
+   "sha256": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962",
+   "bytes": 5188
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/supplement/standards/candidate-card-dual-ma-bull-state-draft-1.md",
+   "sha256": "907d17631e27011423bebbf068bcb2bbc6e1b44a184618597cf54f868e066dc1",
+   "bytes": 3097
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/supplement/standards/definition-standard.md",
+   "sha256": "3406feaea2bbb8d23a91ddc8fa0c85e62ff86437bdf443d459f2c97b0e99cd5c",
+   "bytes": 14002
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/supplement/standards/definitions.v1.json",
+   "sha256": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05",
+   "bytes": 207737
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/supplement/standards/experiment-backtest-principles.md",
+   "sha256": "ac5a676c0635441b66f656c8e1249b69bade36365cc9065ed6341a610b6a53c6",
+   "bytes": 21561
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/supplement/standards/experiment-report-template.md",
+   "sha256": "cae2853f81841de6f424c6bda10e6708dd35574ebb8a325088fe507c5755d54e",
+   "bytes": 12378
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/supplement/states.csv.meta.json",
+   "sha256": "1c4bf5a6464195895173c565e08c31f68435c3999ca3e5907372335a8ea47c0e",
+   "bytes": 1007
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/supplement/supplement-manifest.json",
+   "sha256": "982baa52667b35c732f39c3007a808a57db96acf977248bb3b834e1ede95c592",
+   "bytes": 2823
+  },
+  {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/supplement/verify_supplement.py",
+   "sha256": "ba763611c56669e16ab2698c98084f2183fdf4f78e55047562718317161083ca",
+   "bytes": 2501
+  },
+  {
+   "path": "docs/experiments/b1-controller-review-2026-09-16.md",
+   "sha256": "62a3e63d22deb41caf58be75f735712832a9505fca2bf39552ab41f4d1631087",
+   "bytes": 9683
+  },
+  {
+   "path": "docs/experiments/b1-closeout-controller-2026-09-16.md",
+   "sha256": "7ba4484223b027f3156e0355a1d64a55b19656a7e1fb8b3b987fa86e7e102f64",
+   "bytes": 7022
+  },
+  {
+   "path": "docs/experiments/b1-dual-ma-first-real-description-2026-09-16.md",
+   "sha256": "b54ef5d112e28b191a89eaa6a8fa190b43067e26820b02ca7760ef4cb52a7c90",
+   "bytes": 18850
+  },
+  {
+   "path": "docs/research/experiment-backtest-principles.md",
+   "sha256": "ac5a676c0635441b66f656c8e1249b69bade36365cc9065ed6341a610b6a53c6",
+   "bytes": 21561
+  },
+  {
+   "path": "docs/research/definition-standard.md",
+   "sha256": "3406feaea2bbb8d23a91ddc8fa0c85e62ff86437bdf443d459f2c97b0e99cd5c",
+   "bytes": 14002
+  },
+  {
+   "path": "docs/research/ai-execution-contract.md",
+   "sha256": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962",
+   "bytes": 5188
+  },
+  {
+   "path": "docs/research/experiment-report-template.md",
+   "sha256": "cae2853f81841de6f424c6bda10e6708dd35574ebb8a325088fe507c5755d54e",
+   "bytes": 12378
+  },
+  {
+   "path": "docs/experiments/raw/factor-research-workbench-v1-2026-09-14/candidate-card-dual-ma-bull-state-draft-1.md",
+   "sha256": "907d17631e27011423bebbf068bcb2bbc6e1b44a184618597cf54f868e066dc1",
+   "bytes": 3097
+  },
+  {
+   "path": "docs/superpowers/plans/2026-09-16-factor-evidence-reliability-v1.md",
+   "sha256": "77fb4152b6e415903bab427a25f823ac1d4b906cedf487ce7f47c01c71a61fc5",
+   "bytes": 18207
+  },
+  {
+   "path": "docs/superpowers/plans/2026-09-16-factor-evidence-reliability-v1.contract.json",
+   "sha256": "fdf3502d80c34cd1c3d6add60835bb36ec5d766b0f2804bbc631927eca757412",
+   "bytes": 3483
+  },
+  {
+   "path": "docs/superpowers/plans/2026-09-16-factor-evidence-reliability-v1.dispatch.md",
+   "sha256": "cec349485551f443753f2dd1cf0c17e35a41938bfeb0bd2a37a9b0f3e62f5986",
+   "bytes": 1916
+  },
+  {
+   "path": "docs/superpowers/plans/2026-09-16-factor-evidence-reliability-v1.dispatch-status.md",
+   "sha256": "b148a9b5804f5cf0373535de8ece28d78c3c6f8ed92e83c63ab812e761c52093",
+   "bytes": 1592
+  },
+  {
+   "path": "src/lei_signal/research/trading_calendar.py",
+   "sha256": "4651fa7d0e1e20aeaf3b40d9446f3ea76ec0eac037bbe965c018c3e5ccb6389e",
+   "bytes": 16645
+  }
+ ]
+}

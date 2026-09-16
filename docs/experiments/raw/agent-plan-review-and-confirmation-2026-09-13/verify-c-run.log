@@ -1,0 +1,16 @@
+PASS | C1.a discussion path: load-failure blocks save with retry hint | disabled=True hint=True
+PASS | C1.a recovery enables save | disabled=False
+PASS | C1.b entry form: load-failure blocks submit with hint | disabled=True
+PASS | C1.b entry form: recovery enables submit | disabled=False
+PASS | C1.c holding form: load-failure blocks submit with hint | disabled=True
+PASS | C1.c holding form: recovery enables submit | disabled=False
+PASS | C2.1 lost-response enters unknown-result state | server_plan_id=plan_TH881272_SECTOR_20260913160146_
+PASS | C2.2 retry reuses snapshot: same plan_id, original version, no duplicate | id_in_card=True idempotent=True version=2.1.0
+PASS | C3.a 422 guides editing the same draft | 齐并核对 | plan_id: plan_TH881272_SECTOR_20260913160146_e368b375（草稿在库；可点「补齐并核对」继续处理) | 草稿已保存但未激活。技术入场计划必须有明确失效价（invalidation_price），请补全后再确认——可点「补齐并核对」修改本草稿后重试（不需要新建计划）。
+PASS | C3.b 503 guides retry-later (injected response) | 缺失——保存为待补草稿可以，但确认会被拒绝（04B 边界）。 | 确认生效 | 补齐并核对 | plan_id: plan_TH881272_SECTOR_20260913160146_e368b375（草稿在库；可点「补齐并核对」继续处理) | 暂时无法核实（草稿已保留，不会丢失）：分析服务暂时缺席（合成注入测试）。可稍后重试确认。
+PASS | C3.c 409 guides rebuild (not in-place edit) | 确认生效 | 补齐并核对 | plan_id: plan_TH881272_SECTOR_20260913160146_e368b375（草稿在库；可点「补齐并核对」继续处理) | 草稿已保存但未激活。计划基于规则集 1.3.0，当前为 2.1.0；请复核后重建草稿——请按当前依据重新核对并另建新草稿（本计划保留，不会自动更新版本）；可从讨论或「建立执行计划」入口发起。
+PASS | G4.x draft history restore shows saved state, no re-save | binding=True draftShown=True noResave=True
+PASS | G5.1 console actually opens review drawer for the saved plan | drawer=True
+
+TOTAL: 13/13 PASS
+VERIFY_EXIT=0

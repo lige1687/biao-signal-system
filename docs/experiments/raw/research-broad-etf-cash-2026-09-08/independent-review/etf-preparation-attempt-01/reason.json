@@ -1,0 +1,7 @@
+{
+  "status": "superseded_before_account_comparison",
+  "difference": "Independent preparation had 588 weekly records while executor retained 589.",
+  "cause": "The independent script excluded the 2026-06-30 observation because its eligible execution date, 2026-07-06, is after the account window.",
+  "effect_on_accounts": "none; the eligible date is outside the simulation window",
+  "correction": "Retain all signals formed by an in-window observation, including a terminal unexecuted signal, because the protocol requires every formed signal to be saved."
+}

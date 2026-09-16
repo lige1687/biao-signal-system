@@ -1,0 +1,658 @@
+# LEI 信号系统规则账本 v1
+#
+# provenance 取值：
+#   lei_explicit    - LEI 视频明确讲出的规则
+#   lei_inferred    - 根据视频画面与数学关系复原
+#   existing_backtest - 旧回测采用的工程定义
+#   research_proxy  - 为量化建立的代理指标，不冒充作者原始规则
+#   user_config     - 用户自行选择的参数或阈值
+#
+# 任何 research_proxy 必须在界面标注「研究代理」。
+# 阈值只能在此文件调整，且必须同时提升 version。禁止为迎合回测结果修改公式。
+
+ruleset_version: "1.5.0"
+source_video: "https://www.youtube.com/watch?v=7NkwlH6NOk8"
+
+indicators:
+  ema_periods: [20, 60, 120]
+  sma_periods: [20, 60, 120]
+  ema_seed: "first_window_sma"   # alpha = 2/(period+1)，以首窗口 SMA 作为种子
+  atr_period: 14
+  atr_method: "simple_average"   # 非 Wilder 平滑；与旧回测 spec 8.9 一致
+  lag_periods: [20, 60, 120]
+  # MACD（研究代理）：标准 12/26/9。DIF=EMA(fast)-EMA(slow)，
+  # DEA=EMA(signal,DIF)，hist=2*(DIF-DEA)。作强度/乖离解读，非转折。
+  macd_fast: 12
+  macd_slow: 26
+  macd_signal: 9
+
+rules:
+  # ---------------- LEI 三色 ----------------
+  lei_color:
+    rule_id: "lei_color"
+    version: "1.0.0"
+    provenance: "lei_explicit"
+    formula: |
+      green = Close(t) > EMA20(t) and Close(t) > Close(t-20)
+      black = Close(t) < EMA20(t) and Close(t) < Close(t-20)
+      gray  = ready and not green and not black
+      unknown = 不足 21 根
+    note_cn: "灰色表示均线方向分歧，需要关注；不等于卖出。"
+    events: [lei_color_green_started, lei_color_gray_started, lei_color_black_started]
+
+  # ---------------- 短周期 ----------------
+  ema20_reclaim_rising:
+    rule_id: "ema20_reclaim_rising"
+    version: "1.0.0"
+    provenance: "lei_explicit"
+    formula: |
+      Close(t-1) <= EMA20(t-1) and Close(t) > EMA20(t) and EMA20(t) > EMA20(t-1)
+    note_cn: "早期转强。不要求与共同确认同一天。"
+
+  dual_ma_bull_confirmed:
+    rule_id: "dual_ma_bull_confirmed"
+    version: "1.0.0"
+    provenance: "lei_explicit"
+    formula: |
+      Close > EMA20 and Close > SMA20 and EMA20 > EMA20(t-1)
+      and SMA20 > SMA20(t-1) and color == green
+    note_cn: "读取当前状态，不要求 EMA20 穿越与 SMA20 确认同一天发生。"
+
+  dual_ma_spread:
+    rule_id: "dual_ma_spread"
+    version: "1.0.0"
+    provenance: "lei_inferred"
+    formula: |
+      spread = abs(EMA20 - SMA20) / Close
+      expanding = spread 连续两日扩大且颜色为绿或黑
+      contracting = spread 连续两日收窄
+      cross = EMA20 与 SMA20 相对位置改变
+    note_cn: "辅助信号，不单独决定趋势方向。"
+
+  # ---------------- 长周期背景 ----------------
+  long_trend:
+    rule_id: "long_trend"
+    version: "1.0.0"
+    provenance: "lei_inferred"
+    formula: |
+      long_bull = EMA60 > EMA120
+      long_bear = EMA60 < EMA120
+      long_improving = (EMA60 上升 或 EMA120 上升) 且 (EMA60-EMA120) 向多头方向改善
+      long_stable_bull = EMA60 > EMA120 且两者均不下降
+      long_deteriorating = (EMA60-EMA120) 向空头方向恶化
+    note_cn: "只作独立背景。绝对不得写入底部结构识别器作为硬门槛。"
+    weekly_rule: "周线只在本周最后一个已完成交易日后生效，禁止把周五数据泄漏给周一至周四。"
+
+  # ---------------- 摆动点 ----------------
+  swing_pivots:
+    rule_id: "swing_pivots"
+    version: "1.0.0"
+    provenance: "existing_backtest"
+    ported_from: "licai@a25eae9 src/trading_v11/indicators/pivots.py"
+    params:
+      left: 3
+      right: 3
+    formula: |
+      摆动高点：high 在 left+1+right 窗口内是唯一严格最高
+      摆动低点：low  在 left+1+right 窗口内是唯一严格最低
+      available_date = 右侧第 right 根 K 线的日期（确认日）
+    note_cn: "历史研究必须使用确认日期，不得使用尚未确认的拐点。参数写入 rule_version。"
+
+  # ---------------- 反转 K 线 ----------------
+  bullish_engulfing:
+    rule_id: "bullish_engulfing"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    formula: |
+      Close(t-1) < Open(t-1)
+      and Close(t) > Open(t)
+      and Open(t) <= Close(t-1)
+      and Close(t) >= Open(t-1)
+    note_cn: "阳线反包。即使 EMA60<EMA120、周线未改善也必须独立保存，不得被 Block。"
+
+  bullish_outside_reversal:
+    rule_id: "bullish_outside_reversal"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    formula: |
+      Low(t) <= Low(t-1) and Close(t) >= High(t-1) and Close(t) > Open(t)
+    note_cn: "阳线外包反转。独立事件，不得被长周期趋势 Block。"
+
+  bearish_engulfing:
+    rule_id: "bearish_engulfing"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    formula: |
+      Close(t-1) > Open(t-1)
+      and Close(t) < Open(t)
+      and Open(t) >= Close(t-1)
+      and Close(t) <= Open(t-1)
+    note_cn: "阴线反包，独立风险事件。"
+
+  bearish_outside_reversal:
+    rule_id: "bearish_outside_reversal"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    formula: |
+      High(t) >= High(t-1) and Close(t) <= Low(t-1) and Close(t) < Open(t)
+    note_cn: "阴线外包反转，独立风险事件。"
+
+  # ---------------- 底部结构 ----------------
+  higher_low_bottom:
+    rule_id: "higher_low_bottom"
+    version: "1.0.0"
+    provenance: "lei_explicit"
+    formula: |
+      连续两个确认摆动低点，第二低点 > 第一低点
+      颈线 = 两低点之间的最高价
+      收盘突破颈线时确认
+      C = 结构最低点（第一低点）
+    note_cn: "不得加入日线/周线长趋势硬门槛。"
+
+  double_bottom:
+    rule_id: "double_bottom"
+    version: "1.0.0"
+    provenance: "lei_inferred"
+    params:
+      max_diff_atr: 1.0
+    formula: |
+      两确认低点价差 <= 第二低点处 1 ATR
+      颈线 = 两低点之间最高价
+      收盘突破颈线时确认
+      C = 两低点较低者
+    note_cn: "1 ATR 容差为 research_proxy 量化口径。"
+
+  bullish_reversal_bottom:
+    rule_id: "bullish_reversal_bottom"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    formula: |
+      由 bullish_engulfing 或 bullish_outside_reversal 独立形成候选底部
+      C = 反转 K 线的最低价
+      不要求先出现双底
+    note_cn: "解决「第二根阳线直接反包但系统完全没记录」的问题。"
+
+  bottom_c_lifecycle:
+    rule_id: "bottom_c_lifecycle"
+    version: "1.0.0"
+    provenance: "lei_explicit"
+    formula: |
+      自确认日的下一交易日起：
+        Low(t) <= C  -> bottom_C_touched，结构永久失效
+        Close(t) < C -> bottom_C_close_broken
+    note_cn: "触及 C 后旧结构永久失效；后续上涨不能复活，只能形成新结构。"
+
+  # ---------------- 顶部结构 ----------------
+  top_structure:
+    rule_id: "top_structure"
+    version: "1.0.0"
+    provenance: "existing_backtest"
+    formula: |
+      连续两个确认摆动高点，第二高点 < 第一高点
+      颈线 = 两高点之间的最低价
+      收盘跌破颈线时确认顶部警报
+      后续 High > 第一高点 -> top_warning_invalidated_by_new_high
+    note_cn: "只产生风险提示，不自动卖出。失效后不得继续参与 Top+Black。"
+
+  # ---------------- 关键性波动 ----------------
+  key_wave_black:
+    rule_id: "key_wave_black"
+    version: "1.0.0"
+    provenance: "lei_explicit"
+    formula: |
+      key_black = Close < EMA20 and Close < Close(t-20)
+      top_plus_black = 存在有效顶部警报 且 处于黑色
+      black_without_top = 无有效顶部结构 且 处于黑色
+    note_cn: "两个版本必须分别保存和统计，不能只保留表现较好的版本。"
+
+  # ---------------- 量能 ----------------
+  volume_proxies:
+    rule_id: "volume_proxies"
+    version: "1.1.0"
+    provenance: "research_proxy"
+    params:
+      window: 20
+      up_surge_ratio: 1.5
+      breakout_ratio: 1.5
+      bearish_ratio: 1.5
+      shrink_lookback: 3
+    formula: |
+      volume_ratio20 = Volume / mean(Volume, 20)
+      volume_up_surge = Close 上涨 且 volume_ratio20 >= up_surge_ratio
+      breakout_volume = Close 突破某个明确结构颈线 且 volume_ratio20 >= breakout_ratio
+      pullback_shrink = 当前 Close 下跌 且 最近 shrink_lookback 日均量 < 前 shrink_lookback 日均量
+      bearish_expansion = Close 下跌 且 volume_ratio20 >= bearish_ratio
+    note_cn: |
+      阈值 1.5 为研究代理。volume_up_surge 不要求结构颈线；
+      breakout_volume 必须有结构颈线才会被记录（防止把「放量上行」错叫为「放量突破」）。
+      pullback_shrink 是简单滚动代理（仅比较最近两段均量），不是真正的趋势分段。
+    events:
+      - volume_up_surge
+      - breakout_volume
+      - pullback_shrink
+      - bearish_expansion
+
+  # ---------------- 筹码分布代理 ----------------
+  volume_profile_proxy:
+    rule_id: "volume_profile_proxy"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    params:
+      window: 120
+      bins: 50
+      value_area: 0.70
+      support_zone_pct: 0.05
+    formula: |
+      把最近 120 根 K 线成交量均匀分配到 low..high 覆盖的价格箱
+      POC = 代理量最大的价格箱
+      VAL/VAH = 覆盖 70% 代理量的价值区下/上沿
+      overhead_supply_ratio = 当前价以上箱体代理量占比
+      support_density = 当前价下方 5% 区间代理量占比
+    note_cn: "OHLCV 无法知道真实持仓成本。界面必须写「筹码分布代理」，不得声称真实持仓成本。"
+
+  # ---------------- MACD 强度（研究代理，强度非转折）----------------
+  macd_strength:
+    rule_id: "macd_strength"
+    version: "1.1.0"
+    provenance: "research_proxy"
+    params:
+      fast: 12
+      slow: 26
+      signal: 9
+    formula: |
+      DIF = EMA(close, fast) - EMA(close, slow)
+      DEA = EMA(DIF, signal)
+      hist = 2 * (DIF - DEA)
+      解读口径（只作强度/乖离，不作转折）：
+        交叉（定时）：DIF 与 DEA 上下穿（金叉/死叉）-- MACD 能表达；
+          hist 符号即 DIF×DEA 交叉状态（加速度量，只用于交叉判读，不作扩散判定）；
+          DIF 穿越 0 轴 = EMA12 穿越 EMA26（上穿0轴/下穿0轴，两线排列翻转）
+        多头排列乖离（状态）：DIF 相对 0 轴方向（排列）+ |DIF| 同号趋势
+          （两线间距拉大=扩散、缩小=密集）-- MACD 能表达
+        破线（close 破均线）-- MACD 不能表达，由 LEI 颜色（close vs EMA20 vs close_lag20）补齐
+        均线拐头 -- MACD 不能表达，由均线斜率（ema20_slope / sma slopes）补齐
+      不产生交易事件：金叉/死叉只是强度描述，不构成买点。
+    note_cn: |
+      MACD 研究均线的扩散和密集状态，本质是乖离率，表示强度而非转折趋势节点。
+      测量分工：交叉（定时）看 DIF×DEA（hist 符号）；强度（状态）看 |DIF| 两线间距趋势--
+      DIF 即 EMA12-EMA26 间距（一阶乖离本身），hist 是二阶动能，两者过半数 bar 趋势
+      不一致，不能混用。状态描述词配一阶量。
+      趋势转折 5 步骤中，MACD 只能表达「交叉」与「多头排列+乖离率」；
+      「破线」与「均线拐头」需由系统既有的 LEI 颜色与均线斜率补齐，
+      方可用 MACD 观察趋势强度。界面必须标注「研究代理」，并明示盲区补齐来源。
+
+  # ---------------- 趋势后的首次均线回撤 ----------------
+  first_ma_pullback:
+    rule_id: "first_ma_pullback"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    params:
+      ma_periods: [20, 60, 120]
+      trend_slope_lookback: 3
+      min_separation_pct: 0.02
+      min_separation_atr: 1.0
+      touch_tolerance_pct: 0.01
+      touch_tolerance_atr: 0.50
+      confirmation_window: 3
+      max_trend_age_bars: 180
+      require_green_confirmation: true
+    formula: |
+      trend_anchor = SMA20 > SMA60 > SMA120，且三条 SMA 相比 trend_slope_lookback 日前均上升，
+                     且 Close > SMA20，且 LEI 颜色为 green；
+      trend_lifecycle = trend_anchor 从 false 进入 true 时开启；跌破 SMA120、SMA60 不再上升、
+                        SMA20 <= SMA60、SMA60 <= SMA120 或颜色转 black 时重置；
+                        最长 max_trend_age_bars 根，且需等待趋势锚点重新 false -> true 才可重开；
+      armed(period) = 趋势锚点后，Close 与目标 SMA 的距离同时满足
+                      distance_pct >= min_separation_pct
+                      且 distance_atr >= min_separation_atr；
+      first_touch(period) = armed 后第一次 Low <= SMA(period) + tolerance，且
+                            Close >= SMA(period) - tolerance；
+      confirmed(period) = first_touch 当日或随后 confirmation_window-1 根内，
+                          Close >= SMA(period)，Close > Open，目标 SMA 方向仍向上，
+                          完整多头排列仍成立，且颜色为 green；
+      failed(period) = 首次触碰后确认窗口耗尽，或 Close < SMA(period)-tolerance，
+                       或趋势生命周期重置；
+      每个 trend_lifecycle、每条 SMA 只允许一次 first_touch；confirmed/failed 后均视为已消耗，
+      第二次回撤不得重新标为“第一次”。
+    note_cn: |
+      “第一次回撤 MA20/60/120”是用户交易笔记的研究代理量化，不是旧 Streamlit 泛化文案，
+      也不冒充 LEI 原始规则。初版采用完整多头排列、ATR 与百分比双重阈值、最多 3 根确认窗口。
+      所有事件只能使用当日及此前已完成日 K；界面必须标注“研究代理”，并显示趋势锚点、
+      首次触碰、确认条件和客观失效。
+    events:
+      - first_ma_pullback_touched
+      - first_ma_pullback_confirmed
+      - first_ma_pullback_failed
+
+  # ---------------- P2.1 假突破快速收回 ----------------
+  false_breakout_reclaim:
+    rule_id: "false_breakout_reclaim"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    params:
+      reference_lookback: 20        # 参考位 = 此前 reference_lookback 根已完成日 K 的最高 high
+      breakout_pct: 0.01            # 收盘超过参考位该比例才算有效突破
+      fail_breakdown_pct: 0.01      # 收盘跌破参考位该比例才算真跌破（假突破失败）
+      reclaim_window: 3             # 被打回后，最多等待该根已完成日 K 内重新收回
+      require_green: true           # 收回时 LEI 颜色需为 green
+    formula: |
+      reference(t) = max(high) over [t-reference_lookback, t-1]，仅用已完成日 K，无未来泄漏；
+      breakout(t) = Close(t) >= reference(t)*(1+breakout_pct) 且前一日 Close < reference*(1+breakout_pct)；
+      进入 breakout 观察后：
+        shaken(t) = Low(t) <= reference(t)（盘中已被打回参考位下方）；
+        confirmed(t) = shaken 之后、reclaim_window-1 根内 Close(t) >= reference(t)，
+                      且完整多头排列保持、LEI 为 green；
+        failed(t) = Close(t) < reference(t)*(1-fail_breakdown_pct)（真跌破），
+                   或 reclaim_window 窗口耗尽仍未收回；
+      每次有效突破独立计数；confirm/fail 后本轮消耗，下一次突破需收盘先回落参考位下方再重新站上。
+    note_cn: |
+      “假突破快速收回”是用户交易笔记的研究代理量化：突破前高/结构颈线后被打回，但很快重新
+      收回且不破坏趋势，视为洗盘后延续。不是旧 Streamlit 泛化文案，也不冒充 LEI 原始规则。
+      所有判断只使用当日及此前已完成日 K；界面必须标注“研究代理”，并显示参考位、突破日、
+      被打回与收回条件、客观失效。
+    events:
+      - false_breakout_reclaim_watch
+      - false_breakout_reclaim_confirmed
+      - false_breakout_reclaim_failed
+
+  # ---------------- P2.3 完整均线排列 + EMA 斜率加速度 ----------------
+  ma_full_alignment:
+    rule_id: "ma_full_alignment"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    params:
+      periods: [20, 60, 120]
+      slope_lookback: 1            # 斜率 = 当前均线 - slope_lookback 日前均线
+      accel_lookback: 1            # 加速度 = 当前斜率 - accel_lookback 日前斜率
+      ema_slope_period: 20         # 用于斜率/加速度的 EMA 周期
+    formula: |
+      bullish_alignment = SMA20 > SMA60 > SMA120 且三条 SMA 斜率均 > 0；
+      bearish_alignment = SMA20 < SMA60 < SMA120 且三条 SMA 斜率均 < 0；
+      alignment_start = 非排列 -> 排列 的切换日，按方向产生 bullish/bearish 事件；
+      alignment_broken = 排列 -> 非排列 的切换日；
+      ema20_slope_pct(t) = (EMA20(t) - EMA20(t-slope_lookback)) / EMA20(t-slope_lookback)；
+      ema20_accel_pct(t) = ema20_slope_pct(t) - ema20_slope_pct(t-accel_lookback)；
+      斜率/加速度为研究代理指标，仅作确认维度，不单独产生买卖指令。
+    note_cn: |
+      “完整均线排列 + 斜率加速度”是用户交易笔记的研究代理量化：把 20/60/120 完整多头/空头
+      排列作为场景卡底层确认维度，并用 EMA20 斜率与加速度标准化描述动能变化。不是旧 Streamlit
+      泛化文案，也不冒充 LEI 原始规则。界面必须标注“研究代理”，并展示排列方向、破坏条件与
+      斜率/加速度当前值及客观失效。
+    events:
+      - ma_alignment_bullish_start
+      - ma_alignment_bearish_start
+      - ma_alignment_broken
+
+  # ---------------- P2.2 日线信号后的次级别确认（日线代理）----------------
+  low_level_confirmation:
+    rule_id: "low_level_confirmation"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    params:
+      confirmation_window: 2       # 日线信号触发后，最多等待该根已完成日 K 内出现次级别确认特征
+      reclaim_tolerance_pct: 0.005 # 盘中刺穿参考位但收盘收回的容差
+    formula: |
+      触发：当日存在日线做多信号（首次回撤确认 / 双均线共同确认 / 结构绑定 EMA 转强到达
+            结构确认或以上档位）；
+      次级别确认特征（日线 OHLC 代理，因系统当前未接入 60 分钟数据）：
+        intraday_reclaim = Low(t) <= reference_level*(1+reclaim_tolerance_pct)
+                            且 Close(t) >= reference_level，即盘中刺穿参考位但收盘收回；
+        reversal_candle  = 当日出现 bullish_engulfing 或 bullish_outside_reversal；
+      确认：触发后 confirmation_window-1 根内出现 intraday_reclaim 或 reversal_candle，
+            且收盘仍站在触发参考位上方；
+      未出现则为“观察”，等待；触发信号失效或收盘跌破参考位则本轮消耗。
+    note_cn: |
+      “次级别确认”是用户交易笔记的研究代理量化：日线信号触发后用更低级别确认增强可信度。
+      当前系统仅接入日线，真 60 分钟数据尚未连接，因此用日线 OHLC 的“盘中刺穿后收回”与
+      反转 K 线作为次级别确认的日线代理，并在界面明确标注“日线代理 / 未接 60 分钟”。
+      不是旧 Streamlit 泛化文案，也不冒充 LEI 原始规则。
+    events:
+      - low_level_confirmation_watch
+      - low_level_confirmation_confirmed
+
+  # ---------------- 模块 B：均线密集区突破（规格 §9 模块 B，研究代理）----------------
+  dense_breakout:
+    rule_id: "dense_breakout"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    params:
+      breakout_lookback: 60          # 密集区上沿=近 N 根已完成日 K 最高 high（待确认）
+      require_full_alignment: true   # B2 突破时需完整多头排列成立
+      dense_recompute_lookback: 90   # 场景卡 key_price 重算窗口=近 N 日 high 滚动（视觉口径）
+    formula: |
+      横盘密集区阈值（cluster_threshold / minimum_consolidation_bars / entanglement_lookback）
+      复用 tradability_gate，不在此重复声明，单一来源避免漂移；
+      B1 环境：entanglement = (max(六线)-min(六线))/close；
+        consolidating = entanglement <= cluster_threshold 且近 entanglement_lookback 日均纠缠
+                        <= cluster_threshold*1.5 且 position >= minimum_consolidation_bars；
+        consolidating 由 false -> true 时开启一个密集区生命周期，产 watch 事件；
+      B2 多头触发：生命周期内，reference(t) = max(high) over [t-breakout_lookback, t-1]（仅已完成日 K），
+        close(t) > reference(t) 且完整多头排列成立（SMA20>SMA60>SMA120 且三线斜率均>0）时
+        产 confirmed 事件，下一根 K 线开盘入场；记录突破日 reference 为 breakout_reference；
+      B3 失效：确认后 close(t) < breakout_reference（跌回密集区）且 sma20_slope(t) < 0
+        （20 均线组向下弯曲）时产 failed 事件，本轮生命周期结束；
+      每个密集区生命周期内只允许一次突破确认（consumed 语义）；密集区若连续
+      entanglement_lookback 日不再 consolidating 则静默结束、允许新密集区开启。
+    note_cn: |
+      “均线密集区突破”是规格 §9 模块 B 的研究代理量化：横盘阶段只等待标志性动作——价格收盘
+      突破密集区上沿且完整多头排列成立。横盘阈值复用 tradability_gate（cluster_threshold/
+      minimum_consolidation_bars 待确认，规格第 17 节），breakout_lookback 为待确认默认值。
+      不是旧 Streamlit 泛化文案，也不冒充 LEI 原始规则。所有判断只使用当日及此前已完成日 K；
+      界面必须标注“研究代理”，并显示密集区识别、突破参考位、确认条件与客观失效。
+    events:
+      - dense_breakout_watch
+      - dense_breakout_confirmed
+      - dense_breakout_failed
+
+  # ---------------- 模块 C：2B / 破底翻反转（规格 §9 模块 C，研究代理）----------------
+  two_b_reversal:
+    rule_id: "two_b_reversal"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    params:
+      two_b_reclaim_bars: 3          # 2B 快速收复最大 K 线数（待确认，规格第 17 节）
+    formula: |
+      C1 结构（研究代理量化口径，规格原文未提供 2B 结构定义）：
+        L2 = 更低的确认摆动低点；L1 = 更高的确认摆动低点（L1 > L2，且 L1 在 L2 之后）；
+        两低点之间需存在一个确认摆动高点（颈线）；结构在 L1.available_date（三左三右确认日）可用；
+      C2 入场（三版本分别产事件，信号在站上当日生成，下一根开盘入场）：
+        breakdown(t) = close(t) < L1 且 close(t) > L2（跌破 L1 但未跌破 L2，即假跌破/破底）；
+        reclaim(t) = breakdown 之后 two_b_reclaim_bars 根内 close(t) >= L1（破底翻）；
+        v1_confirmed = reclaim 当日（收盘站上 L1）；
+        v2_confirmed = reclaim 当日或之后 EMA20 拐头向上（复用 ema20_reclaim_state）；
+        v3_confirmed = reclaim 当日或之后 EMA20 与 SMA20 共同向上（复用 dual_ma_bull_state）；
+        超过 two_b_reclaim_bars 仍未 reclaim -> 本轮 2B 消耗（failed，快速收复窗口耗尽）；
+      C3 失效：close(t) < L2（重新跌破结构最低点）-> failed，2B 彻底失效；
+      每个 L1/L2 结构只允许一次 2B 确认（consumed 语义）：一次破底只计一次翻；
+      大幅负乖离（bias_ema120）仅作 evidence 增强记录，不单独触发交易（规格 §4.7 / C1）。
+    note_cn: |
+      “2B/破底翻”是规格 §9 模块 C 的研究代理量化：规格原文未提供 2B 具体结构定义（[原文未提供]），
+      L1/L2 结构、快速收复窗口、三版本入场均为研究代理量化口径，必须标 research_proxy。
+      L1/L2 用 confirmed_pivots 三左三右确认的摆动低点；EMA20/双均线确认复用 dual_ma 既有状态。
+      two_b_reclaim_bars=3 为待确认默认值（规格第 17 节）。所有判断只使用当日及此前已完成日 K；
+      界面必须标注“研究代理”，并显示 L1/L2、颈线、破底/收复窗口、三版本入场条件与客观失效。
+    events:
+      - two_b_reversal_v1_confirmed
+      - two_b_reversal_v2_confirmed
+      - two_b_reversal_v3_confirmed
+      - two_b_reversal_failed
+
+  holding_watch_guard:
+    rule_id: "holding_watch_guard"
+    version: "1.1.0"
+    provenance: "research_proxy"
+    params:
+      proximity_atr: 1.0   # 接近预警带宽（ATR 倍数）：|close-预设价| <= proximity_atr*atr 且未击穿时提醒
+    formula: |
+      持仓盯盘（plan_kind=holding_watch）退出提醒的承载规则（不产生入场信号）：
+        TAKE_PROFIT_REACHED / STOP_PRICE_BREACHED / SIGNAL_WATCH_TRIGGERED；
+        接近预警（未击穿，仅在 atr 可用时）：TAKE_PROFIT_APPROACHING / STOP_PRICE_APPROACHING。
+      方向感知比较（只用当日可见收盘价或 14:45 盘中快照价）：
+        long ：达到止盈 = close >= take_profit_price；击穿止损 = close <= stop_price；
+        short：达到止盈 = close <= take_profit_price；击穿止损 = close >= stop_price；
+        信号触发 = watch_signal_rule_ids 任一 rule_id 出现在当日 new_events。
+      接近预警 = 未击穿/未达到 且 |close - 预设价| <= proximity_atr * atr（atr=None 跳过）：
+        先到先报——已达到止盈或已击穿止损时不再发 APPROACHING，避免与击穿提醒重复。
+      止损击穿为 block（纪律最硬：不得事后下移止损，语义同规格 §14）；
+      止盈达到、接近预警与信号触发为 remind（提示到点/临近，退出与否仍由人决定）。
+      三者 action_kind=EXIT，产 EXIT 待办，走既有催办/回执链路。
+    note_cn: |
+      “持仓盯盘”是人类 2026-08-05 明确的新增用法：标的已在场内，不需要再论证入场
+      理由，只要价位或信号到了就提醒。触发条件（止盈价/止损价/信号 rule_id）由人
+      自填，属 user_config 性质；本规则只承载“比较与提醒”这一层判定，标 research_proxy。
+      仍然只记价位与状态，不记数量/金额/账户。止损击穿沿用规格 §14「不得在亏损后
+      移动原定失效价」的纪律强度，故为 block；界面必须标注“研究代理”。
+      接近预警（2026-08-06）：人类要求“在 ATR 范围内就去提醒”，而非等到精确击穿。
+      proximity_atr 默认 1.0（1 倍 ATR），可在本账本调；atr 不可用时静默跳过，不阻断。
+
+  # ---------------- B1 第一阻力 ----------------
+  resistance_b1:
+    rule_id: "resistance_b1"
+    version: "1.1.0"
+    provenance: "lei_explicit"
+    params:
+      lookback_years: 2   # 真实过去两年（≈ 730 自然日）
+    formula: |
+      B1 = 信号发生前已确认、过去两年内、时间上最近、价格高于当时收盘价的摆动高点
+    note_cn: "B1 是第一阻力，不是强制止盈目标，也不是 3R 入场门槛。B1 不存在仍允许产生信号。"
+
+  # ---------------- A6① 抵扣价退出（研究代理）----------------
+  exit_ema20_costbasis:
+    rule_id: "exit_ema20_costbasis"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    params:
+      costbasis_period: 20      # 抵扣价周期，对应 close_lag20（规格 A6①）
+      break_basis: "close"      # 待确认：规格第 17 节 break_basis，初版用收盘确认
+    formula: |
+      condition(t) = Close(t) < EMA20(t) 且 Close(t) < close_lag{costbasis_period}(t)；
+      exit_triggered(t) = condition 由 false -> true 的当日（上升沿触发，单次事件）；
+      信号在 t 收盘后生成，最早 t+1 开盘执行（研究口径以 t 收盘后计入）；
+      仅依赖当日及此前已完成日 K，追加未来行情不改变历史触发点。
+    note_cn: |
+      “抵扣价退出”是规格 A6① 的研究代理量化：持仓期间收盘同时跌破 EMA20 与 20 日抵扣价
+      （=20 周期前收盘）即触发退出。该条件与 LEI 黑色定义同构，但作为独立退出规则单独
+      成事件、可回测、可展示，不冒充 LEI 原始规则。界面必须标注“研究代理”。
+      break_basis=close 待确认（规格第 17 节）。
+    events:
+      - exit_ema20_costbasis_triggered
+
+  # ---------------- 盈亏比计算（规格第 10 节，研究代理，只算不强制）----------------
+  reward_risk_filter:
+    rule_id: "reward_risk_filter"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    params:
+      range_lookback: 60          # 区间另一侧高点的回看根数（待确认）
+      rr_min_ideal: 3             # 规格参考：盈亏比大于 3 比较理想
+      rr_min_strong: 5            # 规格参考：作者案例倾向 5 以上
+    formula: |
+      A = 入场价（信号确认日收盘）；S = 失效价（入场依据的支撑/结构位被破坏处）；
+      B = 目标价，优先级（只用信号时已存在、已确认的数据）：
+        1) 已确认摆动高点（B1 第一阻力，available_date <= 信号日）；
+        2) 筹码分布代理价值区上沿 VAH / 成交量峰 POC（高于入场价者）；
+        3) 区间另一侧：近 range_lookback 根已完成的最高 high；
+      R/R = (B - A) / (A - S)，要求 A > S 且 B > A；
+      无法客观确定 B 时标记“目标不可计算”，不事后选最优目标；
+      只计算展示，不做硬过滤（已确认）；回测分别看 R/R≥3 与 R/R≥5 两组。
+    note_cn: |
+      “盈亏比计算”是规格第 10 节的研究代理量化：入场前用信号时已存在的目标算 R/R。
+      目标 B 优先级遵循规格（摆动高点 > 缺口 > 均线密集区 > 筹码峰 > 区间另一侧）；
+      当前系统缺口(gap_definition)与均线密集区(cluster_threshold)尚未实现，故跳过这两档，
+      待第二轮补齐后接入。无法客观确定 B 时标“目标不可计算”，绝不事后选最优目标。
+      只算不强制（已确认）。界面必须标注“研究代理”。range_lookback/rr_min_* 待确认（规格第 17 节）。
+    events:
+      - reward_risk_computed
+
+  # ---------------- 可交易性门禁与趋势类型分类（规格第 13 节 + 第 2.2 节，研究代理）----------------
+  tradability_gate:
+    rule_id: "tradability_gate"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    params:
+      cluster_threshold: 0.02          # 六线纠缠度阈值（待确认，规格参考 ~2%）
+      minimum_consolidation_bars: 120  # 横盘最短时间（待确认，规格参考 ~6 个月≈120 交易日）
+      entanglement_lookback: 20        # 判断纠缠持续性的回看根数
+      acceleration_slope_pct: 0.03     # EMA20 日斜率（占价比）超过此值视为加速（待确认）
+      bias_extreme: 0.50               # 收盘相对 EMA120 乖离超过此值视为极端（待确认，规格参考 50%）
+      atr_percentile_window: 120       # ATR 分位的回看窗口
+      messy_color_flip_lookback: 20    # 多周期杂乱：颜色翻转计数窗口
+      messy_color_flip_threshold: 4    # 窗口内翻转次数超过此值视为杂乱
+      signature_action_lookback: 10    # 标志性动作（放量）回看根数
+      signature_volume_ratio: 1.5      # 放量倍数阈值
+    formula: |
+      趋势类型分类（只依赖当日及此前已完成日 K）：
+        entanglement = (max(六线) - min(六线)) / close，六线= SMA/EMA 20/60/120；
+        ema20_slope_pct = ema20_slope / ema20；bias_ema120 = close/ema120 - 1；
+        insufficient_data = position < minimum_consolidation_bars 或均线缺失；
+        exhaustion（加速衰竭）= ema20_slope_pct >= acceleration_slope_pct 且 bias_ema120 >= bias_extreme；
+        consolidating = entanglement <= cluster_threshold 且近 entanglement_lookback 日均纠缠 <= cluster_threshold*1.5；
+        late_consolidation（横盘末期）= consolidating 且 ATR 分位 <= 0.25（波动压缩将破）；
+        ranging（横盘反复）= consolidating 且非末期；
+        trending（趋势）= 完整多头/空头排列 且 |ema20_slope_pct| 方向一致；
+        unclear（趋势类型不明）= 既非上述任一明确类型。
+      9 条无交易条件（规格第 13 节逐条）：
+        1 趋势类型不明(unclear/insufficient) 2 模块不明(入场时判) 3 入场/目标/失效不能定义(入场时判)
+        4 盈亏比<3(只算不强制，入场时标注) 5 横盘反复且无标志性动作 6 极端加速无持仓
+        7 多周期杂乱(窗口内颜色翻转>=阈值) 8 数据不足(<120 或均线缺失) 9 依赖未来K线(系统前向，不触发)。
+      可交易性 = 环境条件(1/5/6/7/8)均不阻断；入场时条件(2/3/4)结合信号判断、只算不强制。
+    note_cn: |
+      “可交易性门禁 + 趋势类型分类”是规格第 13 节（无交易条件）与第 2.2 节（道路/路牌）的研究代理
+      量化：用均线纠缠度 + ATR 分位 + 斜率把行情分成横盘反复/横盘末期/趋势/加速衰竭，并逐条落地
+      9 条无交易条件作为横切层。cluster_threshold/minimum_consolidation_bars/acceleration_slope_pct/
+      bias_extreme 等均为待确认默认值（规格第 17 节），不得回测调参后冒充作者标准。界面必须标注
+      “研究代理”。多周期(条件7)当前用日线颜色翻转代理，60min 未接入。
+    events:
+      - tradability_evaluated
+
+  # ---------------- 计划纪律守卫（规格 §14 + §13，研究代理，两层标注）----------------
+  plan_discipline_guard:
+    rule_id: "plan_discipline_guard"
+    version: "1.0.0"
+    provenance: "research_proxy"
+    params:
+      rr_min_ideal: 3             # 与 reward_risk_filter 对齐；只 hint 不拦（决策 3）
+    formula: |
+      监督员 plan-level alert 的承载规则（不产生交易信号）：
+        INVALIDATION_BREACHED / PLAN_EXPIRING / PLAN_STALE_RULESET /
+        PLAN_ORPHANED / MODULE_NOT_IMPLEMENTED / DATA_STALE / ENTRY_CONDITIONS_LOST。
+      两层标注（决策 2）：原则引规格原文，判定逻辑标 research_proxy。
+    note_cn: |
+      规格第 14 节「任何时候不得在交易已经亏损后更换入场理由，从而移动原定失效价」
+      是裸句（全文【原系统原则】/【回测代理】标记两者皆无），但它是整个监督员最硬的一条
+      纪律。两层标注：原则出处标「规格 §14 原文」，可执行判定（方向分类器 + 硬规则）
+      标 research_proxy + caveat，既不削弱权威又不违反红线 2。
+      R/R 口径（决策 3）：规格 §13 第 4 条把「盈亏比小于 3」列为无交易条件，round1
+      实现为「只算不强制」；人类 2026-08-04 明确定为只提示、永不拦截，文案「建议 >3，
+      2–3 可接受」。此差异是人类决定非实现漂移，必须留出处。界面必须标注「研究代理」。
+
+# ---------------- 状态机 ----------------
+state_machine:
+  version: "1.0.0"
+  provenance: "lei_inferred"
+  stages:
+    - no_clue          # 无线索
+    - bottom_watch     # 底部观察
+    - structure_confirmed  # 结构确认
+    - early_strength   # 早期转强
+    - joint_confirmed  # 共同确认
+    - trend_reinforced # 趋势增强
+    - risk_watch       # 风险关注
+    - key_risk         # 关键风险
+    - invalidated      # 失效
+  invariants:
+    - "先前信号不因其他条件当天未满足而被丢弃。"
+    - "共同确认读取当前状态，不要求当天重新穿越 EMA20。"
+    - "长趋势改善时可从共同确认升级为趋势增强，不要求新的 EMA20 交叉。"
+    - "触及 C 永久终止关联底部结构，后续上涨不能复活。"
+    - "同一标的可同时保留多个底部来源；选最近有效结构为主结构，但不删除其他。"
+    - "顶部与底部可暂时并存，界面显示冲突，不静默覆盖。"
+
+# ---------------- 风险提示优先级（仅决定排序，不自动卖出）----------------
+risk_priority:
+  - c_touched_or_broken
+  - top_plus_black
+  - black
+  - active_top_structure
+  - turned_gray
+  - volume_conflict

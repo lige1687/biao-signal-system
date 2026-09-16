@@ -1,0 +1,111 @@
+{
+  "task": "factor-research-workbench-v1 / concentrated-repair",
+  "synthetic": true,
+  "title": "合成算法验证，非真实收益/有效性证据",
+  "production_authorization": "not_authorized",
+  "effectiveness_claim": "none；本运行不证明任何因子有效",
+  "spec_bindings": {
+    "experiment_backtest_principles": "docs/research/experiment-backtest-principles.md@v1.1",
+    "definition_standard": "docs/research/definition-standard.md@1.1.0",
+    "ai_execution_contract": "docs/research/ai-execution-contract.md@1.0.1",
+    "experiment_report_template": "docs/research/experiment-report-template.md@1.1.0",
+    "plan": "docs/superpowers/plans/2026-09-14-factor-research-workbench-v1.md@1.0.0",
+    "repair_plan": "docs/superpowers/plans/2026-09-14-factor-lab-concentrated-repair.md@1.0.0"
+  },
+  "registry": {
+    "version": "1.2.0",
+    "canonical_sha256": "6773ef5a75c5a2209612cf27452a05fdfc0067d1e9bd579c133737dc580de007"
+  },
+  "definition_cards_sha256": {
+    "candidate:lei.dual_ma.bull_state@draft-1": "3d0d7f7a77f21dd58ce9f85601944483c4ecd3876b19ae7792c0d972ef73f8ea",
+    "breadth.csi300.b50.common@1.0.0": "95c95b9d188934e02a45d3bc461b17e99786aa84abcecf44abc96ad604a79887",
+    "breadth.csi300.b200.common@1.0.0": "2c0f989a2d1d9d16db5d0505aeae4ffb01230c5950ca7986a4e19423697f0463"
+  },
+  "code_identity": {
+    "scripts/run_factor_lab.py": "17a7bc63bc97893f24ee72861836d64e65298b18b4d53c67041ef999cc4613d5",
+    "src/lei_signal/domain/rules_config.py": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031",
+    "src/lei_signal/features/indicators.py": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+    "src/lei_signal/research/definitions.py": "b6d5a35532644c371ffbfc541a21bd52c05114db9fcb1cc3071c1965ed41ad59",
+    "src/lei_signal/research/factor_diagnostics.py": "70de5549e2831a4353d5000e011e5c93ef4c9798ce4909da943d079997d73a08",
+    "src/lei_signal/research/factor_lab/__init__.py": "ea269601b6b4fa5f1bb70f2dff555aca5a7afa236babc8005a8b4e7fd2d036c4",
+    "src/lei_signal/research/factor_lab/adapters.py": "27596fd66d918cacf9db7a6ae2cdd11b408d7d46f3c9889ac2d35a42e7748020",
+    "src/lei_signal/research/factor_lab/attribution.py": "033960c686d54f41ef2b33f42825668039456ed00aded0d31969e0f9e064f997",
+    "src/lei_signal/research/factor_lab/contracts.py": "d9ff0e864a8f4600c134972e9815acc2143f1b7227e17de570fed4901e0988bc",
+    "src/lei_signal/research/factor_lab/diagnostics.py": "21bdd86594e31412dc1244e0c1ab113b00cab1cc86e73370c70c051c15357728",
+    "src/lei_signal/research/factor_lab/runner.py": "e2e497712e30b9f8bb0722c7f7aa8cc620fc5edae27c6452f961c9c210c31cf5",
+    "src/lei_signal/research/factor_lab/validation.py": "6ea914ef032a2fdf71924a9f8ac7658e2f8fcedaa3ba45d647f01fe8e4ffb5a1",
+    "src/lei_signal/research/momentum_prototype.py": "5425e4f5494710041ae42816bf259ac7cdc1ed6aaef01986ac1d3d34d90e568f",
+    "src/lei_signal/rules/dual_ma.py": "5c41da87036e0e318bacab663aa5509d73f99f301f805a76559b016b99aa3f7c",
+    "src/lei_signal/rules/lei_color.py": "ae6f3a2547cc37dd1ebdfea1bea206f932defdd8cd90d4061630914c0fc9d4d7"
+  },
+  "protocol": {
+    "path": "protocol-2-state.json",
+    "version": "1.1.0",
+    "file_sha256": "5ea3676758244d252cdd2d98a25c760e17b3f00bbfb1398c92dd5ad10ba1aaa6",
+    "canonical_sha256": "57d2f33afeae298d52645c7dd871cdc11c29dee078538d5592fb18a4bcc8e149"
+  },
+  "data_declarations": {
+    "price_scale": "arbitrary_positive_units_synthetic",
+    "calendar": "pandas_bdate_range_synthetic_not_exchange_calendar",
+    "timezone": "Asia/Shanghai",
+    "currency": "synthetic_units_not_cny"
+  },
+  "inputs": {
+    "bars_dm_a": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_bars_dm_a.csv",
+      "sha256": "824142ed06ee0e9f6b55d0bb599b0f7acdaea6a5076f3133c31147715eb85487"
+    },
+    "bars_dm_b": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_bars_dm_b.csv",
+      "sha256": "cee05419e8e096f27853f6d22ad2234fd7fb1ff6ae4fd522e8f40db8ea072d1d"
+    },
+    "state_breadth_close": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_breadth_close.csv",
+      "sha256": "374da151042a538f4915fd8578c3f205450f3380277aa9d4cca57f42e8f530ca"
+    },
+    "state_membership": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_membership.json",
+      "sha256": "cc18619c78aca9f043adfd81dc44f8ed81fdf86578a3c5c60d5b79e4506523d7"
+    }
+  },
+  "targets_effective": {
+    "entry_offset": 1,
+    "exit_offset": 22
+  },
+  "split_protocol": null,
+  "segment_cutoffs": null,
+  "attempt_history": [
+    {
+      "attempt": "repair-fixture-reuse",
+      "outcome": "success",
+      "reason": "复用首轮 synthetic_inputs（哈希冻结）；本轮未改夹具"
+    },
+    {
+      "attempt": "protocol-v1.1.0-freeze",
+      "outcome": "success",
+      "reason": "按集中返修任务书增强合同后冻结；期望仍取自独立算术文件"
+    }
+  ],
+  "executor_model": "not_declared_in_protocol（实际模型见执行报告）",
+  "outputs": {},
+  "artifact_metadata": {
+    "dm": {
+      "reference": "candidate:lei.dual_ma.bull_state@draft-1",
+      "unit": "boolean",
+      "entity_axis": "instrument",
+      "synthetic": true
+    },
+    "b50": {
+      "reference": "breadth.csi300.b50.common@1.0.0",
+      "unit": "fraction",
+      "entity_axis": "universe",
+      "synthetic": true
+    },
+    "b200": {
+      "reference": "breadth.csi300.b200.common@1.0.0",
+      "unit": "fraction",
+      "entity_axis": "universe",
+      "synthetic": true
+    }
+  }
+}

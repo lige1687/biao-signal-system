@@ -1,0 +1,74 @@
+{
+  "status": "passed",
+  "numeric_reconstruction": {
+    "status": "passed",
+    "accounts": 4,
+    "daily_rows": 16796,
+    "buys": 28,
+    "reinvestment_buys": 24,
+    "field_differences": 0
+  },
+  "code_review": {
+    "status": "passed",
+    "rule_consistency": "passed",
+    "code_quality": "passed_with_minor_serialization_note",
+    "findings": [],
+    "evidence": {
+      "final_diff_reviewed": "engine.diff",
+      "final_code_lock_entries": 4,
+      "final_code_lock_unchanged": true,
+      "unit_tests": "8 passed while explicitly importing final run_accounts_attempt03.py",
+      "old_hold_regression": "4 accounts daily/trades identical, regenerated with final run_accounts_attempt03.py",
+      "attempt_history": "attempt-01 and attempt-02 retained by executor",
+      "supplemental_files": [
+        "execution/final-attempt03-verification.log",
+        "execution/old-hold-regression-attempt03.json"
+      ]
+    },
+    "minor_note": "payment_sources is a structured list in memory but CSV stores its Python text representation. It is complete and independently matched after safe literal parsing, though JSON text would be easier for other tools. This does not change funds or decisions.",
+    "terminal_pending": {
+      "accounts_with_pending": 0,
+      "assessment": "No terminal pending reinvestment exists in these four realized paths, so terminal payment-source preservation is not exercised by historical output; it is covered only by the frozen boundary test."
+    }
+  },
+  "coverage": {
+    "accounts": 4,
+    "calendar_daily_rows": 16796,
+    "total_buys": 28,
+    "initial_buys": 4,
+    "dividend_reinvestment_buys": 24,
+    "monthly_rows": 552,
+    "annual_rows": 48,
+    "independent_generation": "All four new paths were generated from raw bars, actions, restrictions and fee/lot rules; execution fills were comparison targets, not simulator inputs."
+  },
+  "integrity": {
+    "initial_protocol_and_execution_inputs_checked": 9,
+    "unchanged": true,
+    "final_execution_result_files_checked": 38,
+    "unchanged_after_review": true,
+    "final_execution_code_lock_unchanged": true,
+    "differences": [],
+    "supplemental_evidence": {
+      "docs/experiments/raw/research-dividend-reinvestment-2026-09-09/execution/final-attempt03-verification.log": "0a8556bc7b21c98bc78929c097c39e3c331eec1bc8cd7f1c0e402942eb0f0e14",
+      "docs/experiments/raw/research-dividend-reinvestment-2026-09-09/execution/old-hold-regression-attempt03.json": "36f542e5e83d1812fb137530deb86998495382cd8aab6d19220f1b80d9803609"
+    }
+  },
+  "failed_review_attempts": [
+    {
+      "id": "01",
+      "reason": "payment_sources list was serialized as CSV text"
+    },
+    {
+      "id": "02",
+      "reason": "initial target begins on first quoted day, not research start"
+    },
+    {
+      "id": "03",
+      "reason": "signed drawdown compared with positive magnitude"
+    },
+    {
+      "id": "04",
+      "reason": "CSV empty text represents null recovery fields"
+    }
+  ]
+}

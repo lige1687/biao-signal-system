@@ -1,0 +1,144 @@
+{
+  "protocol_id": "factor-lab-demo-2-state",
+  "version": "1.0.0",
+  "kind": "state_diagnostic",
+  "data_mode": "synthetic",
+  "synthetic": true,
+  "timezone": "Asia/Shanghai",
+  "evaluation_cutoff": "2030-01-01T15:00:00+08:00",
+  "case": "state",
+  "title": "②双均线候选/共同分母宽度+状态诊断：常数宽度横向IC不适用",
+  "expectation_tolerance_abs": 1e-06,
+  "attempt_history": [
+    {
+      "attempt": "fixture-v1",
+      "outcome": "abandoned",
+      "reason": "合成产品代码 'X' 与复用 build_marks 的6位代码 zfill 假设冲突；协议冻结前改用 '100001' 重建夹具（未运行任何正式案例）"
+    },
+    {
+      "attempt": "fixture-v2",
+      "outcome": "success",
+      "reason": "当前 synthetic_inputs 内容；期望全部来自独立手算脚本"
+    }
+  ],
+  "inputs": {
+    "bars_dm_a": {
+      "path": "synthetic_inputs/state_bars_dm_a.csv",
+      "sha256": "824142ed06ee0e9f6b55d0bb599b0f7acdaea6a5076f3133c31147715eb85487",
+      "format": "bars"
+    },
+    "bars_dm_b": {
+      "path": "synthetic_inputs/state_bars_dm_b.csv",
+      "sha256": "cee05419e8e096f27853f6d22ad2234fd7fb1ff6ae4fd522e8f40db8ea072d1d",
+      "format": "bars"
+    },
+    "state_breadth_close": {
+      "path": "synthetic_inputs/state_breadth_close.csv",
+      "sha256": "374da151042a538f4915fd8578c3f205450f3380277aa9d4cca57f42e8f530ca",
+      "format": "wide_prices"
+    },
+    "state_membership": {
+      "path": "synthetic_inputs/state_membership.json",
+      "sha256": "cc18619c78aca9f043adfd81dc44f8ed81fdf86578a3c5c60d5b79e4506523d7",
+      "format": "membership"
+    }
+  },
+  "state_candidate": {
+    "reference": "candidate:lei.dual_ma.bull_state@draft-1",
+    "note": "源代码绑定候选，不冒充已登记因子"
+  },
+  "breadth": {
+    "close": "state_breadth_close",
+    "membership": "state_membership",
+    "references": {
+      "b50": "breadth.csi300.b50.common@1.0.0",
+      "b200": "breadth.csi300.b200.common@1.0.0"
+    },
+    "note": "合成成员链，不得称真实沪深300证据"
+  },
+  "diagnostics": {
+    "type": "state_outcomes"
+  },
+  "diagnostic_requests": {
+    "constant_breadth_ic": {
+      "batch": "b50",
+      "diagnostics": {
+        "type": "cross_section_ic"
+      }
+    },
+    "state_outcomes": {
+      "batch": "dm",
+      "diagnostics": {
+        "type": "state_outcomes"
+      }
+    },
+    "time_series_state": {
+      "batch": "b200",
+      "diagnostics": {
+        "type": "time_series_state",
+        "target_entities": [
+          "m1"
+        ]
+      }
+    }
+  },
+  "extra_card_references": [
+    "breadth.csi300.b50.common@1.0.0",
+    "breadth.csi300.b200.common@1.0.0"
+  ],
+  "expectations_probe": {
+    "state_rows": {
+      "dm_a": {
+        "dm_a_state_at_row21": [
+          "2019-01-29",
+          true
+        ],
+        "dm_a_state_at_row25": [
+          "2019-02-04",
+          true
+        ],
+        "dm_a_state_at_last_row": [
+          "2019-04-01",
+          true
+        ]
+      },
+      "dm_b": {
+        "dm_b_state_at_last_row": [
+          "2019-04-01",
+          true
+        ]
+      }
+    },
+    "breadth": {
+      "change_date": "2018-11-05",
+      "day_before_date": "2018-11-02"
+    },
+    "breadth_close_input": "state_breadth_close"
+  },
+  "expectations": {
+    "dm_a_not_ready_rows": 20,
+    "dm_a_state_true_rows": 30,
+    "dm_a_state_false_rows": 15,
+    "dm_a_state_at_row21": 0,
+    "dm_a_state_at_row25": 0,
+    "dm_a_state_at_last_row": 1,
+    "dm_b_not_ready_rows": 20,
+    "dm_b_state_true_rows": 0,
+    "dm_b_state_false_rows": 45,
+    "dm_b_state_at_last_row": 0,
+    "breadth_first_valid_date": "2018-10-05",
+    "breadth_valid_days": 60,
+    "breadth_coverage_missing_days": 1,
+    "breadth_b50_at_first_valid": 0.666666666667,
+    "breadth_b50_day_before_change": 0.666666666667,
+    "breadth_b50_at_change": 0.75,
+    "constant_breadth_ic_status": "not_applicable",
+    "so_dm_a_true_n": 8,
+    "so_dm_a_false_n": 15,
+    "so_dm_b_true_n": 0,
+    "so_dm_b_false_n": 23,
+    "ts_m1_status": "descriptive_only",
+    "ts_m1_n": 39
+  },
+  "expectation_basis": "状态计数取自 independent-expectations.json（独立EMA/SMA/颜色/状态算术）；状态结果分组的可用样本按'观察日t需满足t+22在65根内(t<=42)'手算：dm_a真=35..42共8、假=20..34共15、dm_b假=20..42共23；宽度跨日期诊断可用样本=合格日199..249∩t<=237=39。"
+}

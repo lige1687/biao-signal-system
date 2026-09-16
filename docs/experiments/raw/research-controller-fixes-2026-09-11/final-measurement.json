@@ -1,0 +1,106 @@
+{
+ "schema_version": "research-use-measurement/2.0",
+ "supersedes": "research-identity-wiring-2026-09-10/final-measurement-v3.json",
+ "snapshot": "docs/experiments/raw/research-identity-wiring-2026-09-10/canonical-snapshot-v2",
+ "measurement": {
+  "description": {
+   "verdict": "usable",
+   "blockers": {
+    "fixable": [],
+    "structural": []
+   },
+   "result": "放行(usable)"
+  },
+  "ranking": {
+   "verdict": "conditional",
+   "blockers": {
+    "fixable": [
+     "product_internal_gap",
+     "starts_after_window"
+    ],
+    "structural": []
+   },
+   "result": "拒绝(conditional)"
+  },
+  "research_signal": {
+   "verdict": "conditional",
+   "blockers": {
+    "fixable": [
+     "action_available_at_unknown",
+     "product_internal_gap",
+     "zero_volume_days"
+    ],
+    "structural": []
+   },
+   "result": "拒绝(conditional)"
+  },
+  "attribution": {
+   "verdict": "conditional",
+   "blockers": {
+    "fixable": [
+     "action_available_at_unknown",
+     "zero_volume_days"
+    ],
+    "structural": []
+   },
+   "result": "拒绝(conditional)"
+  },
+  "comparison": {
+   "verdict": "conditional",
+   "blockers": {
+    "fixable": [
+     "product_internal_gap",
+     "starts_after_window"
+    ],
+    "structural": []
+   },
+   "result": "拒绝(conditional)"
+  },
+  "diagnostic": {
+   "verdict": "usable",
+   "blockers": {
+    "fixable": [],
+    "structural": []
+   },
+   "result": "放行(usable)"
+  }
+ },
+ "binding": {
+  "mixed.momentum.raw@1.0.0": {
+   "directly_satisfiable": false,
+   "missing_fields": [
+    "economic_index"
+   ]
+  }
+ },
+ "counts": {
+  "part_0": {
+   "instruments": 14,
+   "rows_total": 18916,
+   "findings_by_level": {
+    "info": 0,
+    "warn": 13,
+    "block": 0
+   }
+  },
+  "part_1": {
+   "total": 21,
+   "unique_ids": 21,
+   "by_type": {
+    "cash_dividend": 17,
+    "split": 3,
+    "trading_halt": 1
+   },
+   "without_available_at": 21,
+   "with_announcement_lower_bound": 3,
+   "findings_by_level": {
+    "info": 2,
+    "warn": 1,
+    "block": 0
+   }
+  }
+ },
+ "authorization": {
+  "production_trade": false
+ }
+}

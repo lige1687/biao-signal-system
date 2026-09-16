@@ -1,0 +1,75 @@
+{
+  "recorded_at": "2026-09-08T02:51:25.219459+00:00",
+  "scope": "local bounded research; no parameter search; known historical data",
+  "trials": [
+    {
+      "id": "E01-stageA",
+      "definition": "146 fixed old opportunities × old/previous-close × fees10/20",
+      "result_rows": 584,
+      "baseline_exact": 146,
+      "versions": [
+        "run_e01_v1.py",
+        "run_e01.py"
+      ],
+      "corrections": "missing-open arrangements persisted; syntax error fixed before run; 73 real result files unchanged",
+      "production_changes": false
+    },
+    {
+      "id": "E01-stageB",
+      "definition": "8 instruments ×4 entry methods ×2 fees, one budget each",
+      "paths": 64,
+      "accepted_plans_across_fees": 390,
+      "event_streams": 32,
+      "events": 580,
+      "independent_market_events": null
+    },
+    {
+      "id": "E02",
+      "definition": "fixed A30,B3growth50,Cdeadline; fees10/20; no more variants",
+      "single_paths": 876,
+      "continuous_paths": 192,
+      "main": "B-A",
+      "secondary": "C-A",
+      "corrections": "reason target30→target50, numeric file hashes unchanged; old script and old action/plan files preserved",
+      "independent_review_scope": "64 baseline daily+40 negative controls+one target50 arithmetic+label correction"
+    },
+    {
+      "id": "06",
+      "definition": "source and measurement audit, reuse two first-round ledgers; arithmetic principal summary only",
+      "new_trades": 0,
+      "long_history_experiment": "not run: metadata/product/timing prerequisites absent"
+    },
+    {
+      "id": "07",
+      "definition": "4 fixed windows ×8 objects ×2 states",
+      "descriptive_rows": 64,
+      "returns_computed": false,
+      "full_four_condition_overlap": "unknown"
+    },
+    {
+      "id": "08",
+      "definition": "5 objects × none/cached_close/cached_next_open/legacy_mechanical_trend",
+      "result_rows": 20,
+      "daily_paths": 15,
+      "model_calls": 0,
+      "mechanical_budget_issue": "HStech52 vs67",
+      "interpretation": "fixed actions, not model reproduction; source prompt hindsight not bound to cache version"
+    }
+  ],
+  "known_failures": [
+    "E01 missing-open pending actions lost in v1; corrected and independently checked",
+    "E01 edit syntax error before execution; corrected",
+    "E02 target50 reason label initially target30; label-only correction with preserved v1",
+    "localhost:8000 unavailable at final sync; existing upgrades store used, no app startup"
+  ],
+  "not_run": [
+    "new ATR grid",
+    "other asset exit menu",
+    "cash interest2%",
+    "step-up allocation",
+    "06 long-history new return simulation",
+    "07 full signal return test",
+    "new AI model calls",
+    "future automated observation"
+  ]
+}

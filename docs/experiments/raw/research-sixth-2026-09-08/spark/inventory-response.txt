@@ -1,0 +1,135 @@
+import argparse
+import json
+import os
+from collections import Counter, defaultdict
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from typing import Any
+
+
+def _norm(v: Any) -> Any:
+    try:
+        hash(v)
+        return v
+    except TypeError:
+        return json.dumps(v, sort_keys=True, ensure_ascii=False)
+
+
+def summarize_json_tree(root: str) -> dict:
+    root = Path(root)
+    files = []
+    if root.is_file():
+        files = [root]
+    else:
+        for p in root.rglob("*.json"):
+            if p.is_file():
+                files.append(p)
+
+    required = ("symbol", "signal_date")
+    optional = ("entry_variant", "exit_variant")
+
+    summary = {
+        "scanned_path": str(root),
+        "files_scanned": len(files),
+        "files_loaded": 0,
+        "json_errors": [],
+        "candidate_trade_dicts": 0,
+        "missing_optional_identity": {k: 0 for k in optional},
+        "key_counts": {},
+        "duplicates": [],
+        "total_duplicates_overcount": 0,
+    }
+
+    dup = defaultdict(int)
+    key_seen = Counter()
+
+    def visit(obj: Any):
+        if isinstance(obj, dict):
+            for k in obj.keys():
+                key_seen[k] += 1
+            has_req = all(k in obj for k in required)
+            if has_req:
+                summary["candidate_trade_dicts"] += 1
+                miss = [k for k in optional if k not in obj]
+                if miss:
+                    for k in miss:
+                        summary["missing_optional_identity"][k] += 1
+                else:
+                    key = (
+                        obj["symbol"],
+                        obj["signal_date"],
+                        _norm(obj["entry_variant"]),
+                        _norm(obj["exit_variant"]),
+                    )
+                    dup[key] += 1
+            for v in obj.values():
+                visit(v)
+        elif isinstance(obj, list):
+            for x in obj:
+                visit(x)
+
+    for fp in files:
+        try:
+            with open(fp, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            summary["files_loaded"] += 1
+            visit(data)
+        except Exception as e:
+            summary["json_errors"].append({"file": str(fp), "error": repr(e)})
+
+    for (symbol, signal_date, entry_variant, exit_variant), n in sorted(dup.items()):
+        if n > 1:
+            summary["duplicates"].append({
+                "symbol": symbol,
+                "signal_date": signal_date,
+                "entry_variant": entry_variant,
+                "exit_variant": exit_variant,
+                "count": n,
+            })
+            summary["total_duplicates_overcount"] += n - 1
+
+    summary["key_counts"] = dict(sorted(key_seen.items()))
+    return summary
+
+
+def _write(path: Path, obj: Any):
+    path.write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def run_self_test():
+    with TemporaryDirectory() as d:
+        p = Path(d)
+        _write(p / "a.json", {"items": [
+            {"symbol": "AAA", "signal_date": "2026-09-08", "entry_variant": "A", "exit_variant": "E", "x": 1},
+            {"symbol": "AAA", "signal_date": "2026-09-08", "x": 2},  # missing identity fields
+            {"symbol": "AAA", "signal_date": "2026-09-08", "entry_variant": "A", "exit_variant": "E", "y": 3},
+            {"symbol": "BBB", "signal_date": "2026-09-08", "entry_variant": "B", "exit_variant": "F"},
+        ]})
+        _write(p / "b.json", {"payload": {"symbol": "XXX", "signal_date": "2026-09-07", "entry_variant": "A", "exit_variant": "F"}})
+        _write(p / "bad.json", "{ not json")
+        s = summarize_json_tree(d)
+        assert s["candidate_trade_dicts"] == 5
+        assert any(d["file"].endswith("bad.json") for d in s["json_errors"])
+        assert s["missing_optional_identity"]["entry_variant"] == 1
+        assert s["missing_optional_identity"]["exit_variant"] == 1
+        assert any(x["count"] == 2 for x in s["duplicates"])
+        print(json.dumps(s, ensure_ascii=False, indent=2, sort_keys=True))
+
+
+def main():
+    ap = argparse.ArgumentParser(description="Inventory nested JSON dicts with symbol+signal_date.")
+    ap.add_argument("path", nargs="?", help="Directory or JSON file path.")
+    ap.add_argument("--self-test", action="store_true", help="Run synthetic nested-data self-test.")
+    args = ap.parse_args()
+
+    if args.self_test:
+        run_self_test()
+        return
+    if not args.path:
+        raise SystemExit("path is required unless --self-test is used")
+
+    print(json.dumps(summarize_json_tree(args.path), ensure_ascii=False, indent=2, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

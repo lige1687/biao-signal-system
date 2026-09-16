@@ -1,0 +1,194 @@
+[
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/docs/trading-spec-v1.md",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/docs/trading-spec-v1.md",
+    "line": 1,
+    "function": null,
+    "sha256": "dd75d70cd22b103e815d3b314b47c36731230aa268d05e42fa447ba55e639798",
+    "purpose": "最高策略来源：分层、B、目标、九条、时点"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/configs/rules.v1.yaml",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/configs/rules.v1.yaml",
+    "line": 1,
+    "function": null,
+    "sha256": "9be26a1626fdf6351478b40b388907e9d8128f74b6bd4aa2b8ff4a850cfdcfd2",
+    "purpose": "留存旧账本，避免错误当成当前生效规则"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/configs/rules.v2.yaml",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/configs/rules.v2.yaml",
+    "line": 1,
+    "function": null,
+    "sha256": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+    "purpose": "实际加载版本及各规则provenance"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/domain/rules_config.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/src/lei_signal/domain/rules_config.py",
+    "line": 15,
+    "function": "_default_config_path",
+    "sha256": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031",
+    "purpose": "实际配置路径"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/api/routes/backtest.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/src/lei_signal/api/routes/backtest.py",
+    "line": 41,
+    "function": "RunRequest",
+    "sha256": "167cad0d1e149a41d70c2e4786bf1b29e9840da959179c9731b7ad50ebb013e6",
+    "purpose": "参数默认；create_run负责交给服务"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/backtest/service.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/src/lei_signal/backtest/service.py",
+    "line": 280,
+    "function": "BacktestParams",
+    "sha256": "8b69e97f92970c8c78afec2590e3841a5cf4e6d40198be6062bb17cb519e2f5f",
+    "purpose": "参数与验证；可选过滤默认关闭"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/backtest/service.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/src/lei_signal/backtest/service.py",
+    "line": 428,
+    "function": "_execute_run_unlocked",
+    "sha256": "8b69e97f92970c8c78afec2590e3841a5cf4e6d40198be6062bb17cb519e2f5f",
+    "purpose": "主执行链：事件、目标、可选过滤、逐笔"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/backtest/service.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/src/lei_signal/backtest/service.py",
+    "line": 653,
+    "function": "_cached_events",
+    "sha256": "8b69e97f92970c8c78afec2590e3841a5cf4e6d40198be6062bb17cb519e2f5f",
+    "purpose": "模块B实际调用dense检测器"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/backtest/service.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/src/lei_signal/backtest/service.py",
+    "line": 105,
+    "function": "_overrides_yaml",
+    "sha256": "8b69e97f92970c8c78afec2590e3841a5cf4e6d40198be6062bb17cb519e2f5f",
+    "purpose": "覆盖白名单与临时账本机制"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/backtest/runner.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/src/lei_signal/backtest/runner.py",
+    "line": 101,
+    "function": "load_pool_frames",
+    "sha256": "3c8d9865ffa939bbde503c52cf1dab54f20a5eb516dc9fa4f27dc9e5d44f8d9d",
+    "purpose": "历史行情→特征→颜色，少于300根跳过"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/features/indicators.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/src/lei_signal/features/indicators.py",
+    "line": 106,
+    "function": "compute_features",
+    "sha256": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+    "purpose": "日线滚动指标与预热"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/rules/clock_classifier.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/src/lei_signal/rules/clock_classifier.py",
+    "line": 97,
+    "function": "clock_series",
+    "sha256": "3ce68b924292fdc5977df12a0f70ae3480db2d01d6bd3a9f4ba9845e5c2e84af",
+    "purpose": "SMA方向时钟"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/rules/dense_breakout.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/src/lei_signal/rules/dense_breakout.py",
+    "line": 105,
+    "function": "_state_age_series",
+    "sha256": "ffb37ff38e99c31c4f4723a2046290a326c6c9086121c14dabd3a714c5764c3b",
+    "purpose": "初始False计龄与短暂离开计龄"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/rules/dense_breakout.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/src/lei_signal/rules/dense_breakout.py",
+    "line": 231,
+    "function": "detect_dense_breakout_events",
+    "sha256": "ffb37ff38e99c31c4f4723a2046290a326c6c9086121c14dabd3a714c5764c3b",
+    "purpose": "B1/B2/B3完整事件状态"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/backtest/engine.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/src/lei_signal/backtest/engine.py",
+    "line": 192,
+    "function": "entry_specs_from_events",
+    "sha256": "ca9fe8344aa5580edfa95d14104dc889645cf9d5d389f632bdd9c5417e331d62",
+    "purpose": "模块契约、目标、信号风险比"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/backtest/engine.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/src/lei_signal/backtest/engine.py",
+    "line": 283,
+    "function": "simulate_trade",
+    "sha256": "ca9fe8344aa5580edfa95d14104dc889645cf9d5d389f632bdd9c5417e331d62",
+    "purpose": "next-open、结构优先、B3无条件排列分支"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/rules/reward_risk_filter.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/src/lei_signal/rules/reward_risk_filter.py",
+    "line": 101,
+    "function": "_target_b",
+    "sha256": "1161e49a62271bac23711e43f4f10a314b96128ec19fbbe9d888d271b6fab7eb",
+    "purpose": "目标优先级、历史前缀"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/rules/resistance_b1.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/src/lei_signal/rules/resistance_b1.py",
+    "line": 46,
+    "function": "find_b1",
+    "sha256": "dc221c6cc3fe7855184d35ae43246149083a0acf5e23b4067b38452c00431209",
+    "purpose": "摆动高点的最早确认日期限制"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/rules/tradability_gate.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/src/lei_signal/rules/tradability_gate.py",
+    "line": 204,
+    "function": "evaluate_tradability",
+    "sha256": "64bd55ba3b7384f1c1d6f03a311a75a6ac5143c689cbd799dc1f20e99e255518",
+    "purpose": "九条展示评估；四项False占位"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/api/routes/symbols.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/src/lei_signal/api/routes/symbols.py",
+    "line": 1219,
+    "function": null,
+    "sha256": "c3fa4c552be34c91c058b8a541a57ca6a9e19c2e047929f0bff99aa503ca7772",
+    "purpose": "evaluate_tradability仅用于展示DTO"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/tests/unit/test_dense_breakout.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/tests/unit/test_dense_breakout.py",
+    "line": 1,
+    "function": null,
+    "sha256": "b434c96c6511ff9c5611ff05cb5bcb64c87827b7a088838057190e628c097850",
+    "purpose": "既有B测试复制备查；本次未重跑该套测试"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/tests/unit/test_tradability_gate.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/tests/unit/test_tradability_gate.py",
+    "line": 1,
+    "function": null,
+    "sha256": "5432438cc2e8b6487c3818c35f9421d77da0b82101cdf30924f9256b100612dd",
+    "purpose": "既有展示评估测试复制备查"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/tests/unit/test_reward_risk_filter.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/tests/unit/test_reward_risk_filter.py",
+    "line": 1,
+    "function": null,
+    "sha256": "f0ee4d59b78d8c7e63976fb8b32bc45d8ddb9277be6eb3fef20d8af3ea2c8954",
+    "purpose": "既有目标测试复制备查"
+  },
+  {
+    "source": "/Users/yongbiaoli/lei-signal-sync/tests/unit/test_backtest_engine.py",
+    "snapshot": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/tests/unit/test_backtest_engine.py",
+    "line": 1,
+    "function": null,
+    "sha256": "3f5677bcdb20cf941e93d5e062e53c265f47fafc971590e8e6c7344e478961de",
+    "purpose": "既有逐笔引擎测试复制备查"
+  }
+]

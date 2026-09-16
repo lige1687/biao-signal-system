@@ -1,0 +1,54 @@
+{
+  "date": "2026-09-08",
+  "scope": "G1 current B rules qualification only",
+  "audit_status": "completed_with_gaps",
+  "complete_B_qualified": false,
+  "recommended_name": "B研究代理",
+  "current_ruleset_version": "2.1.0",
+  "current_dense_rule_version": "2.0.0",
+  "synthetic_cases": 16,
+  "status_counts": {
+    "pass": 14,
+    "finding": 2,
+    "fixture_error": 0
+  },
+  "existing_case_diagnostics": 1,
+  "findings": [
+    {
+      "id": "G1-F1",
+      "source": "S09",
+      "kind": "event_engine_semantic_mismatch",
+      "description": "突破版也触发埋伏专用排列退出",
+      "production_changed": false
+    },
+    {
+      "id": "G1-F2",
+      "source": "S11",
+      "kind": "signal_reference_vs_executed_price_gap",
+      "description": "信号风险比4、实际开盘1.6315789474仍入场；未满足后续方案实际成交≥3要求",
+      "production_changed": false
+    },
+    {
+      "id": "G1-F3",
+      "source": "S02 intermediate-state diagnostic",
+      "kind": "initial_warmup_age",
+      "description": "首次有效横盘已有寿命15；观察日有效横盘112、状态寿命126",
+      "production_changed": false
+    }
+  ],
+  "nine_conditions_fully_enforced": false,
+  "historical_candidate_runs": 0,
+  "performance_verdict": null,
+  "historical_effect_size_measured": false,
+  "production_modified": false,
+  "okr_modified": false,
+  "registry_modified": false,
+  "subtask_only_registration": "parent consolidates",
+  "remaining": [
+    "明确原样代理或修正研究版本，冻结选择",
+    "修正版本需要自己的合成核验，不能复用此处作为通过",
+    "逐项明确九条输入与执行范围，不接占位False冒充判断",
+    "G2及数据/资金等资格由主研究另查"
+  ],
+  "source_drift_note": "最终源仓库storage/sqlite_store.py并发新增表；规则文件与全部复制件未变，结论仅针对冻结版本"
+}

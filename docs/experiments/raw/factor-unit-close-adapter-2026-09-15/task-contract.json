@@ -1,0 +1,26 @@
+{
+ "task": "factor-unit-close-adapter-2026-09-15 (B0)",
+ "task_doc": "docs/superpowers/plans/2026-09-15-factor-unit-close-adapter-glm.md",
+ "controller_review": "docs/experiments/factor-unit-readiness-controller-review-2026-09-15.md v1.0.0",
+ "started_at": "2026-09-15T12:51:14.797959+08:00",
+ "head": "8ba16576b75e605aa1b0d0902568c760c4b99095",
+ "branch": "codex/factor-unit-research-20260915",
+ "scope": "B0离线：close-only适配+来源裁定+合同校验+合成描述+资格CLI+冻结候选包；B1真实统计禁止启动",
+ "constraints": [
+  "零联网/零安装/零密钥",
+  "不修改factor_lab v1.2.0与run_factor_lab.py",
+  "不修改definitions.v1.json",
+  "不跑宽度/情绪新表现",
+  "不加窗口网格",
+  "registry/INDEX只新增本报告",
+  "A阶段报告只加顶部纠正指针",
+  "A阶段raw不改"
+ ],
+ "budget": {
+  "回归完整运行": "≤2",
+  "合成端到端正式批次": "1(正/负各1)",
+  "纠错批次": "≤1(已定位工程错误)",
+  "真实资格检查批次": "≤1(四市场)",
+  "来源追踪日志": "≤8"
+ }
+}

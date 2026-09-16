@@ -1,0 +1,44 @@
+{
+ "status": "restricted",
+ "reasons": [
+  "510300: 真实模式 total_return_wealth 需要更高价格档位（当前 producer_candidate_only）；缺可回查材料继续 restricted，不编造",
+  "159915: 真实模式 total_return_wealth 需要更高价格档位（当前 producer_candidate_only）；缺可回查材料继续 restricted，不编造",
+  "SPY: 真实模式 total_return_wealth 需要更高价格档位（当前 producer_candidate_only）；缺可回查材料继续 restricted，不编造",
+  "SPY: US 无日历材料（真实source与合成schedule均为空）→ 目标 blocked",
+  "QQQ: 真实模式 total_return_wealth 需要更高价格档位（当前 producer_candidate_only）；缺可回查材料继续 restricted，不编造",
+  "QQQ: US 无日历材料（真实source与合成schedule均为空）→ 目标 blocked",
+  "资料不足：声明用途（historical_description 的既定目标）当前不可执行，仅保留资格诊断"
+ ],
+ "notes": [
+  "510300: available_at 未知/未证（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格",
+  "159915: available_at 未知/未证（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格",
+  "SPY: available_at 未知/未证（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格",
+  "QQQ: available_at 未知/未证（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格"
+ ],
+ "allowed_uses": [],
+ "markets": {
+  "510300": {
+   "price_basis": "producer_candidate_only",
+   "calendar": "qualified",
+   "target": "blocked"
+  },
+  "159915": {
+   "price_basis": "producer_candidate_only",
+   "calendar": "qualified",
+   "target": "blocked"
+  },
+  "SPY": {
+   "price_basis": "producer_candidate_only",
+   "calendar": "blocked",
+   "target": "blocked"
+  },
+  "QQQ": {
+   "price_basis": "producer_candidate_only",
+   "calendar": "blocked",
+   "target": "blocked"
+  }
+ },
+ "data_mode": "real",
+ "generated_at": "2026-09-15T17:01:34.813024+08:00",
+ "qualification_status": "restricted"
+}

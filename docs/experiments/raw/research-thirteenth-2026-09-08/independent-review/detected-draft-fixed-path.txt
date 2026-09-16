@@ -1,0 +1,38 @@
+def fixed_position_path(base, prices, actions, observations, settings, method):
+    symbol, entry, end = base["symbol"], base["entry_date"], "2026-06-30"
+    buy = next(t for t in read(BASE / base["config_id"] / "roundtrips.json") if t["position_id"] == base["position_id"])
+    entry_trade = next(t for t in pd.read_csv(BASE / base["config_id"] / "trades.csv").to_dict("records") if t["position_id"] == base["position_id"] and t["side"] == "buy")
+    shares = float(entry_trade["shares"]); initial_shares = shares
+    entry_notional = float(entry_trade["notional"]); buy_fee = float(entry_trade["fee"])
+    stop = float(base["initial_stop"]); cash = -(entry_notional + buy_fee); dividends = 0.; sell_fee = 0.; exit_notional = 0.
+    pending = None; events = []; exit_date = None; exit_price = None
+    dates = sorted(d for d in prices[symbol] if entry <= d <= end)
+    previous_dates = [d for d in prices[symbol] if d < entry]
+    reference = float(prices[symbol][max(previous_dates)]["close"])
+    for day in dates:
+        for action in sorted((a for a in actions if a["symbol"] == symbol and a["ex_date"] == day), key=lambda x:x["event_id"]):
+            if action["type"] == "split":
+                shares *= action["ratio"]; stop /= action["ratio"]; reference /= action["ratio"]
+                events.append({"date":day,"kind":"split","event_id":action["event_id"],"shares_after":shares,"stop_after":stop})
+            else:
+                amount = shares * action["cash_per_share"]; dividends += amount; cash += amount; stop *= (reference-action["cash_per_share"])/reference; reference -= action["cash_per_share"]
+                events.append({"date":day,"kind":"cash_dividend","event_id":action["event_id"],"amount":amount,"stop_after":stop})
+        if pending and day > pending["signal_date"]:
+            block = unavailable(symbol, day, prices, reference, settings)
+            pending["attempts"].append({"date":day,"reason":block or "filled"})
+            if block is None:
+                exit_date=day;exit_price=float(prices[symbol][day]["open"]);exit_notional=shares*exit_price;sell_fee=exit_notional*.001;cash+=exit_notional-sell_fee
+                events.append({"date":day,"kind":"sell","reason":pending["reason"],"shares":shares,"price":exit_price,"fee":sell_fee})
+                shares=0.;break
+        close=float(prices[symbol][day]["close"]); reference=close
+        if pending is None:
+            reason = "structure_stop" if close < stop else None
+            if reason is None and method == "T": reason = ema_cost_exit({}, observations[symbol].get(day,{}), close)
+            if reason:
+                pending={"signal_date":day,"reason":reason,"attempts":[]}
+                events.append({"date":day,"kind":"exit_signal","reason":reason,"close":close,"stop":stop,"observation":deepcopy(observations[symbol].get(day,{}))})
+    mark_date = exit_date or max(d for d in prices[symbol] if d <= end)
+    mark = 0. if exit_date else shares*float(prices[symbol][mark_date]["close"])
+    pnl = exit_notional + mark + dividends - entry_notional - buy_fee - sell_fee
+    return {"config_id":base["config_id"],"position_id":base["position_id"],"candidate_id":base["candidate_id"],"symbol":symbol,"method":method,"entry_date":entry,"entry_price":float(entry_trade["price"]),"initial_shares":initial_shares,"final_shares":shares,"initial_stop":float(base["initial_stop"]),"final_stop":stop,"exit_signal_date":pending["signal_date"] if pending else None,"exit_reason":pending["reason"] if pending else None,"exit_attempts":pending["attempts"] if pending else [],"exit_date":exit_date,"exit_price":exit_price,"entry_notional":entry_notional,"buy_fee":buy_fee,"sell_fee":sell_fee,"dividends":dividends,"exit_notional":exit_notional,"terminal_market_value":mark,"terminal_value_from_entry_cash":cash+mark,"net_pnl":pnl,"baseline_net_pnl":float(base["net_pnl"]),"events":events}
+

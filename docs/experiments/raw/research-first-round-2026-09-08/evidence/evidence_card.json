@@ -1,0 +1,100 @@
+{
+  "evidence_refs": [
+    {
+      "schema_version": "provenance/1.2",
+      "id": "research-first-round:module-result-compatibility",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-first-round-2026-09-08/evidence/snapshot/scripts/build_module_winrate.py",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-first-round-2026-09-08/evidence/snapshot/src/lei_signal/copilot/winrate.py",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-first-round-2026-09-08/evidence/probe-results.json"
+      ],
+      "source_hash": [
+        "9204005b8d7bdd6b4ce0a02a73f603ff247f36bd43e79f374c81b74c8a5c3945",
+        "55d881581cebd9233610a552bf0f9ed1caa058af2cf116becda502a081d774a1",
+        "eaccc29868ecccba6f67d66e2e79b7a15f2de94a73c5aa18093d41f9d95dfe7d"
+      ],
+      "source_version": "2026-09-08-frozen-source",
+      "status": "unverified",
+      "window": "合成数据日期2026-08-03；非历史收益窗口",
+      "statistic_kind": "implementation_probe",
+      "strategy_scope": [
+        "technical_execution"
+      ],
+      "limitations": "只检查引用兼容性；未运行真实收益回测，不能用于当前机会胜率。",
+      "compatibility": "unknown",
+      "evidence_id": "research-first-round:module-result-compatibility",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-first-round-2026-09-08/evidence/snapshot/scripts/build_module_winrate.py",
+      "strategies": [
+        "technical_execution"
+      ],
+      "note": "只检查引用兼容性；未运行真实收益回测，不能用于当前机会胜率。"
+    }
+  ],
+  "data_refs": [
+    {
+      "schema_version": "provenance/1.2",
+      "source_id": "probe.py:synthetic_prices",
+      "instrument_id": "FIXTURE",
+      "market": "synthetic",
+      "observed_at": null,
+      "available_at": null,
+      "generated_at": null,
+      "last_valid_at": null,
+      "health": "unknown",
+      "reason": "合成最小复例，不是市场行情；不能证明当前状态",
+      "calendar_ref": null,
+      "as_of_cutoff": null,
+      "source_policy_ref": null,
+      "reference_lag_trading_days": null,
+      "source": "probe.py:synthetic_prices",
+      "completeness": "unknown",
+      "lag_trading_days": null
+    }
+  ],
+  "rule_refs": [
+    {
+      "schema_version": "provenance/1.2",
+      "rule_id": "__ruleset__",
+      "version": "2.1.0",
+      "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-first-round-2026-09-08/evidence/snapshot/configs/rules.v2.yaml",
+      "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+      "definition_ref": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-first-round-2026-09-08/evidence/snapshot/configs/rules.v2.yaml",
+      "fallback_note": ""
+    }
+  ],
+  "research_extension": {
+    "question": "同一标的A模块旧成绩，能否回答换退出方法后的本次胜率？",
+    "plain_conclusion": "不能。现表没有完整方法配置，且同日同标的不同模块会因输入顺序丢失。",
+    "claim_type": "fact",
+    "support_state": "evidence_insufficient",
+    "independent_review": "本轮独立合成复例；总控尚未验收，未验证收益。",
+    "source_run_ids": [],
+    "trade_count": null,
+    "independent_event_count": null,
+    "unknown_reason": "合成程序例证，不是实盘或历史交易样本。",
+    "matching": {
+      "symbol": "FIXTURE",
+      "module": "A",
+      "entry_variant": null,
+      "exit_variant": null,
+      "condition_definition": null,
+      "holding_horizon": null,
+      "rule_version": "当前规则仅证明读取版本，不能补作旧回测版本",
+      "fees": null,
+      "data_window": null
+    },
+    "can_answer": [
+      "这份旧表为什么不够回答新退出问题",
+      "应补齐哪些配置与原始结果"
+    ],
+    "cannot_answer": [
+      "现在是否该买",
+      "新退出的胜率",
+      "与情绪基本面叠加后的胜率"
+    ],
+    "related_transfer_risk": {
+      "dca_ambush": "configs/dca_evidence.json 的 ambush_template 混有统一退出成绩与分标的菜单；条目自己已注明未联合复跑。",
+      "dca_assembly": "combos.cross_asset_4_standard 引用第18轮原始结果；新代码修复不会自动更新冻结旧成绩，需重新复现并登记版本。"
+    }
+  }
+}

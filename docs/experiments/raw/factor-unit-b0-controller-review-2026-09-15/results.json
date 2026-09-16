@@ -1,0 +1,41 @@
+{
+  "contract_control": "ok",
+  "nonexistent_price_evidence": "ok",
+  "markdown_as_calendar_without_hash": "ok",
+  "invalid_timestamp_and_dummy_source": "ok",
+  "cli_deleted_required_code_keys": {
+    "exit": 0,
+    "stdout": "NOTE: 510300: available_at 未知（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格\nNOTE: 159915: available_at 未知（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格\nNOTE: SPY: available_at 未知（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格\nNOTE: QQQ: available_at 未知（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格\nNOTE: 存在 pending_controller_freeze 目标（510300, 159915, SPY, QQQ）：资料齐备待主控冻结协议；不自动启动执行\nEXIT 0: 本轮声明用途资料齐备（不自动启动B1）\n"
+  },
+  "past_cutoff_and_population": {
+    "cutoff": "2019-01-01T15:00:00+08:00",
+    "unconditional_n": 8,
+    "true_n": 3,
+    "false_n": 0
+  },
+  "string_false_counted_true": 30,
+  "all_dates_outside_schedule": "KeyError: ['main']",
+  "protection": {
+    "count": 42,
+    "changed": [
+      "docs/experiments/factor-unit-readiness-2026-09-15.md"
+    ]
+  },
+  "packages": {
+    "b0-synthetic-positive-01": {
+      "files": 15,
+      "hash_errors": [],
+      "contains_contract_bytes": false
+    },
+    "b0-synthetic-negative-01": {
+      "files": 14,
+      "hash_errors": [],
+      "contains_contract_bytes": false
+    },
+    "b0-real-readiness-check-01": {
+      "files": 15,
+      "hash_errors": [],
+      "contains_contract_bytes": false
+    }
+  }
+}

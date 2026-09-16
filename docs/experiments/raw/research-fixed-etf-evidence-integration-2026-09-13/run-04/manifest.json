@@ -1,0 +1,113 @@
+{
+ "schema_version": "momentum-research-prototype-manifest/1.0",
+ "generated_at": "2026-09-13T12:11:11.685726+00:00",
+ "generated_at_note": "本次运行时刻，不得当作数据的对外可用时刻",
+ "mode": "qualified-research",
+ "synthetic": false,
+ "historical_reconstruction_only": false,
+ "protocol": {
+  "path": "docs/experiments/raw/research-fixed-etf-evidence-integration-2026-09-13/protocol.json",
+  "sha256": "54a306d7b1b9576fd74a40b2b5b8c8308b2a99c6b1ed969b3efb245883576b3b",
+  "protocol_id": "fixed-etf-evidence-integration-2026-09-13"
+ },
+ "target_id": "protocol:momentum-next-close-21-session@1.0.0",
+ "objects": {
+  "primary": "mixed.momentum.raw@1.0.0",
+  "dependency": "mixed.price.economic@1.0.0",
+  "type": "feature（身份引用，完整卡见协议文件）"
+ },
+ "code_hashes": {
+  "momentum_prototype": "5425e4f5494710041ae42816bf259ac7cdc1ed6aaef01986ac1d3d34d90e568f",
+  "run_momentum_research_prototype": "af9211b9de7a737a800517af2825bf5ec653ffadf0de256926f6f4c396c013a3"
+ },
+ "inputs": {
+  "snapshot_dir": {
+   "path": "docs/experiments/raw/research-fixed-etf-evidence-integration-2026-09-13/run-02/snapshot",
+   "sha256": "d43f8b2f57e56961fb834db9a783b6ff9c9d84b7329c64e410e74ec8bb74ed75",
+   "verified_file": "docs/experiments/raw/research-fixed-etf-evidence-integration-2026-09-13/run-02/snapshot/snapshot.json"
+  },
+  "calendar": {
+   "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+   "sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+   "verified_file": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json"
+  },
+  "publication": {
+   "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-evidence.json",
+   "sha256": "657ef122c62aefcf8d580e5e20e85beac8b1a0979c399f3529ae30d6b245ef02",
+   "verified_file": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-evidence.json"
+  },
+  "actions": {
+   "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/normalized-actions.json",
+   "sha256": "097043b2c622a308b602a961b666129f575a35083a8ede6d7bfa1cf16ea1ce81",
+   "verified_file": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/normalized-actions.json"
+  },
+  "registry": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definitions.v1.json",
+   "sha256": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05"
+  }
+ },
+ "observations": {
+  "count": 0,
+  "first": null,
+  "last": null
+ },
+ "unknown_available_at": [],
+ "late_available_at": [],
+ "observation_cutoff_assumption": "观察/决策截点 15:00 为按收盘设置的保守测试假设，不是已证实的数据到达时间或实盘决策时刻",
+ "failures": [],
+ "identity_errors": [
+  {
+   "scope": "mapping",
+   "error": "'510300' 与 '510300.SS' 映射到同一规范身份 '510300.SS'"
+  },
+  {
+   "scope": "mapping",
+   "error": "'512890' 与 '512890.SS' 映射到同一规范身份 '512890.SS'"
+  },
+  {
+   "scope": "mapping",
+   "error": "'515300' 与 '515300.SS' 映射到同一规范身份 '515300.SS'"
+  },
+  {
+   "scope": "mapping",
+   "error": "'512400' 与 '512400.SS' 映射到同一规范身份 '512400.SS'"
+  },
+  {
+   "scope": "mapping",
+   "error": "'515880' 与 '515880.SS' 映射到同一规范身份 '515880.SS'"
+  },
+  {
+   "scope": "mapping",
+   "error": "'515050' 与 '515050.SS' 映射到同一规范身份 '515050.SS'"
+  }
+ ],
+ "research_evidence": {
+  "path": "docs/experiments/raw/research-fixed-etf-evidence-integration-2026-09-13/evidence-bundle.json",
+  "sha256": "c7b4259f0ea24883b5b7d46880216d57ee123772a126910f12007885a2dce144",
+  "validated": 11,
+  "unresolved": 1,
+  "conflicts": 1,
+  "note": "证据包已通过任务级校验；不等于历史可得性已证明或预测资格已获准"
+ },
+ "skipped_stages": {
+  "economic-reconstruction": "研究资格未满足，拒绝运行：排序用途未获允许：starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市；研究信号用途未获允许：zero_volume_days: 存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）; action_available_at_unknown: 21/21 条行动缺少 available_at（其中 3 条有 announcement_date 可作「不晚于该日已公布」的下界，18 条完全未知）；下界不等于精确到达时刻，一律不写入 available_at。本批只能用于历史重建，不得声称当时可知",
+  "targets": "研究资格未满足，拒绝运行：排序用途未获允许：starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市；研究信号用途未获允许：zero_volume_days: 存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）; action_available_at_unknown: 21/21 条行动缺少 available_at（其中 3 条有 announcement_date 可作「不晚于该日已公布」的下界，18 条完全未知）；下界不等于精确到达时刻，一律不写入 available_at。本批只能用于历史重建，不得声称当时可知",
+  "rank-diagnostic": "研究资格未满足，拒绝运行：排序用途未获允许：starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市；研究信号用途未获允许：zero_volume_days: 存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）; action_available_at_unknown: 21/21 条行动缺少 available_at（其中 3 条有 announcement_date 可作「不晚于该日已公布」的下界，18 条完全未知）；下界不等于精确到达时刻，一律不写入 available_at。本批只能用于历史重建，不得声称当时可知"
+ },
+ "offline_guard": {
+  "self_check_blocked": true,
+  "blocked_with": "RuntimeError"
+ },
+ "statuses": {
+  "computation_run": false,
+  "research_qualification": "rejected",
+  "validity": "not_tested_by_this_run",
+  "production": "not_authorized",
+  "policy": "not_applicable_no_account_policy"
+ },
+ "outputs": {
+  "quality.json": "72f2d3fa377fa805610ac592b1f3a86e14d783b90ccff717f2bc424d9962c47c",
+  "skipped-stages.json": "ea4b56f5b1fc3652ea9db058151798dbd852bd411c9ea4e6b5db74ae7e16928c",
+  "report.md": "c803bca10452384345ac2e4850f09e735b969180cd205314272facde00d92124"
+ }
+}

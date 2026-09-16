@@ -1,0 +1,184 @@
+{
+  "artifact_id": "mom5",
+  "metadata": {
+    "reference": "mixed.momentum.raw@1.0.0",
+    "card": {
+      "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+      "not_for": [
+        "production_trade",
+        "unique_alpha_claim",
+        "prediction_from_contemporaneous_fit"
+      ],
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "economic_index"
+        ],
+        "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+        "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+        "frequency": "daily_valid_quotes",
+        "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+      },
+      "universe": {
+        "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+        "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格",
+        "warmup": "按每个对象窗口，不以日历天补足",
+        "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+        "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+        "degrade": "缺报价不发新信号；未确认资料不得生产"
+      },
+      "time": {
+        "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+        "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+        "decision_at": "不得早于available_at",
+        "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+      },
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "公式一致不证明市场有效；旧消费者未迁移"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "isolated_formula_or_selection_compared_with_legacy; consumers_not_migrated",
+        "effectiveness": "not_tested_by_normalization",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "mixed_code",
+        "mixed_protocol",
+        "mixed_prices",
+        "mixed_actions",
+        "mixed_pool"
+      ],
+      "id": "mixed.momentum.raw",
+      "version": "1.0.0",
+      "name": "252至21有效报价涨幅",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "ranking",
+        "description",
+        "research_signal"
+      ],
+      "dependencies": [
+        "mixed.price.economic@1.0.0"
+      ],
+      "definition": {
+        "formula": "I(t-21)/I(t-252)-1",
+        "parameters": {
+          "long_lag": 252,
+          "skip_lag": 21
+        },
+        "endpoints": "自身有效报价行位移；第253条首次可算；不含最近21条",
+        "unit": "fraction",
+        "direction": "降序排序，负分允许",
+        "transforms": "无标准化、无截尾、无年化"
+      }
+    },
+    "card_kind": "registered",
+    "type": "feature",
+    "unit": "fraction",
+    "purpose": "predictive_diagnostic",
+    "entity_axis": "instrument",
+    "value_type": "continuous",
+    "protocol": {
+      "protocol_id": "factor-lab-demo-1-numerical",
+      "version": "1.2.0",
+      "kind": "predictive_diagnostic",
+      "data_mode": "synthetic",
+      "sha256": "7f3555bac4456665e0c6b646434dcef42244aed902be3d45015e725224de39a4"
+    },
+    "data_identity": {
+      "inputs": {
+        "prices": {
+          "kind": "DataFrame",
+          "rows": 300,
+          "columns": [
+            "alpha",
+            "beta",
+            "gamma",
+            "delta",
+            "epsilon"
+          ]
+        }
+      },
+      "declared_inputs": {
+        "prices_3": {
+          "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/numerical_prices_3.csv",
+          "sha256": "6c23da1210949916b49ac9de0f9f518e6a14771152d61eb1184b60769ee01af3",
+          "format": "wide_prices"
+        },
+        "prices_5": {
+          "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/numerical_prices_5.csv",
+          "sha256": "8a32ad90031cd6466133f8b9a60c88cf9d0ddbff451cd9a8ec56b272a1b8eb89",
+          "format": "wide_prices"
+        }
+      },
+      "synthetic": true
+    },
+    "code_identity": {
+      "modules": [
+        {
+          "path": "src/lei_signal/research/definitions.py",
+          "sha256": "b6d5a35532644c371ffbfc541a21bd52c05114db9fcb1cc3071c1965ed41ad59"
+        }
+      ]
+    },
+    "calendar": {
+      "timezone": "Asia/Shanghai",
+      "note": "合成输入按协议时区解释"
+    },
+    "time_evidence": {
+      "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+      "evaluation_cutoff": "2030-01-01T15:00:00+08:00"
+    },
+    "synthetic": true,
+    "definition_status": "explicit",
+    "data_status": "synthetic_input",
+    "implementation_status": "isolated_formula_or_selection_compared_with_legacy; consumers_not_migrated",
+    "effectiveness_status": "not_tested_by_normalization",
+    "production_authorization": "not_authorized"
+  },
+  "findings": [
+    {
+      "code": "parameter_binding_ok",
+      "detail": "mixed.momentum.raw@1.0.0 参数与登记卡逐一核对一致；经 quote_features/breadth 既有实现计算，未复制公式"
+    },
+    {
+      "code": "missing_reason_counts",
+      "counts": {
+        "warmup_history_insufficient": 1260,
+        "price_missing": 5
+      }
+    }
+  ],
+  "declared_inputs": {
+    "prices_3": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/numerical_prices_3.csv",
+      "sha256": "6c23da1210949916b49ac9de0f9f518e6a14771152d61eb1184b60769ee01af3"
+    },
+    "prices_5": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/numerical_prices_5.csv",
+      "sha256": "8a32ad90031cd6466133f8b9a60c88cf9d0ddbff451cd9a8ec56b272a1b8eb89"
+    }
+  },
+  "rows": 1500,
+  "missing_reason_counts": {
+    "warmup_history_insufficient": 1260,
+    "None": 235,
+    "price_missing": 5
+  },
+  "quality": "synthetic_only；生产授权无"
+}

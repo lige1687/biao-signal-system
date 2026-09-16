@@ -1,4 +1,4 @@
-import { buildStructureMarkPoints } from "file:///tmp/lei-kline-structure-marks.mjs";
+import { buildStructureMarkPoints } from "file:///tmp/biao-kline-structure-marks.mjs";
 
 function mark(kind) {
   return {

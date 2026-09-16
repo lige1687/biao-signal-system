@@ -780,7 +780,7 @@ export interface MacdEvent {
   dea: number;
   hist: number;
   detailCn: string;
-  /** 盲区补齐：当日 LEI 颜色（破线）与 EMA20 斜率（均线拐头）。 */
+  /** 盲区补齐：当日 BIAO 颜色（破线）与 EMA20 斜率（均线拐头）。 */
   colorCn: string;
   slopeCn: string;
 }
@@ -902,6 +902,11 @@ export interface CreatePlanPayload {
   drawdown_playbook_cn?: string;
   take_profit_plan_cn?: string;
   stop_plan_cn?: string;
+  /** 03B-R2 契约1：来源绑定（相同编号重复保存返回原 draft） */
+  client_request_id?: string | null;
+  source_session_id?: string | null;
+  source_question_id?: number | null;
+  source_refs?: Record<string, unknown>;
 }
 
 export interface PlanChatReply {
@@ -1439,7 +1444,7 @@ export interface PositionBandResponse {
 }
 
 // ---- 行业板块趋势工作台 (/api/sectors, research_proxy) ----
-// 判定均为研究代理，不冒充 LEI 原始规则，不出买卖点。
+// 判定均为研究代理，不冒充 BIAO 原始规则，不出买卖点。
 export interface SectorTrendRow {
   code: string;
   name: string;
@@ -1699,6 +1704,7 @@ export interface AgentChatRequest {
   context_kind: "symbol" | "global";
   symbol: string | null;
   message: string;
+  client_request_id?: string | null;
 }
 
 export interface AgentChatReply {
@@ -1707,11 +1713,138 @@ export interface AgentChatReply {
   grounded: boolean;
   trace: TraceItem[];
   resolved_symbol?: string | null;
+  question_id?: number | null;
+  /** 03B-R2 契约3：服务端四分区证据卡（重试复用同样返回） */
+  evidence_card?: EvidenceCard | null;
+  /** 03B-R3 S5：服务端计划产物（真实 suggested_plan + 字段来源） */
+  plan_artifact?: PlanArtifact | null;
+  /** 03B-R3 S4：回答状态 answered/pending/generating */
+  answer_state?: string | null;
+  /** UX 第一期（2026-09-13）：下一步动作建议（服务端既有事实推导，≤3 个） */
+  next_steps?: NextStep[];
+}
+
+/** UX 第一期：下一步动作（kind 决定前端行为；draft_cn 带标的代码防串扰）。 */
+export interface NextStep {
+  kind: "expand_evidence" | "ask_conditions" | "prepare_backtest" | "discuss_plan" | string;
+  label_cn: string;
+  draft_cn?: string | null;
+  note_cn?: string | null;
+}
+
+/** 03B-R3 S5：服务端计划产物（模型只解释，不是产物来源） */
+export interface PlanArtifact {
+  kind?: string;
+  artifact_id?: string;
+  question_id?: number | null;
+  session_id?: string | null;
+  symbol?: string | null;
+  fields: Record<string, { value?: unknown; source?: string; note_cn?: string }>;
+  ruleset_ref?: Record<string, unknown>;
+  evidence_refs?: Record<string, unknown>[];
+  rule_refs?: Record<string, unknown>[];
+  created_at?: string;
+  note_cn?: string;
+}
+
+/** 03B-R2 契约3：服务端结构化证据卡（同一产物：模型输入/即时卡/历史恢复）。 */
+export interface EvidenceCard {
+  facts?: {
+    symbol?: string;
+    display_name?: string;
+    subject_kind?: "sector" | "symbol";
+    sector_summary_cn?: string;
+    as_of?: string | null;
+    verdict_cn?: string | null;
+    buy_point_candidate_n?: number;
+  };
+  history_and_scope?: {
+    winrate_evidence?: Record<string, unknown>;
+    matched_runs?: MatchedBacktestRun[];
+    /** 03B-R3 S2：本问题的完整方法比较配置（来源逐项记录） */
+    comparison_config?: Record<string, unknown>;
+    supporting_runs?: string[];
+    note_cn?: string;
+  };
+  explanations?: { kinds?: string[]; note_cn?: string };
+  pending_conditions?: (string | null)[];
+}
+
+export interface MatchedBacktestRun {
+  request_id: string;
+  run_id: string;
+  symbol: string;
+  module: string;
+  exit_variant: string;
+  entry_variant?: string | null;
+  data_cutoff?: string;
+  ruleset_version?: string;
+  completed_at?: string;
+  module_matches_question: boolean;
+  /** 03B-R3 S2：公共引用契约 exact/incompatible/unknown */
+  compatibility?: "exact" | "incompatible" | "unknown" | "reference";
+  supports_question?: boolean;
+  input_verified?: boolean;
+  window_note_cn?: string;
+  run_window?: { data_cutoff?: string; data_range?: Record<string, unknown> };
+  differences_cn: string[];
+  summary?: {
+    trade_count?: number | null;
+    win_rate?: number | null;
+    expectancy_r?: number | null;
+    profit_factor?: number | null;
+    zero_trades?: boolean;
+  };
+  data_range?: { start?: string; end?: string };
+}
+
+// ---------------- 03B：统一解析 + 按需补测（/api/copilot） ----------------
+
+export interface CopilotClarification {
+  kind: string;
+  question_cn: string;
+}
+
+export interface CopilotResolveReply {
+  intent: "discussion" | "trade_report" | "discovery" | "backtest_request" | "existing_action";
+  topic: string;
+  resolved_symbol: string | null;
+  subject_source: string;
+  purpose: string;
+  clarification: CopilotClarification[];
+  discussion_context: {
+    states: { id: string; label_cn: string; missing_behavior: string; forbidden_claims: string[] }[];
+    evidence: Record<string, unknown> | null;
+    active_plan_count: number | null;
+    client_request_id: string | null;
+  };
+}
+
+export interface BacktestRequestStatus {
+  request_id: string;
+  client_request_id: string;
+  session_id: string;
+  question_id: number;
+  symbol: string;
+  method: string;
+  entry_variant: string | null;
+  exit_variant: string;
+  status: "queued" | "running" | "completed" | "failed" | "interrupted";
+  run_id: string;
+  error: string | null;
+  backfilled: boolean;
+  config: Record<string, unknown>;
+  config_hash: string;
+  data_cutoff: string;
+  input_refs: Record<string, unknown>[];
+  created_at: string;
+  updated_at: string;
 }
 
 export interface AgentSessionDTO {
   session_id: string;
   symbol: string | null;
+  display_name?: string | null;
   title_cn: string;
   last_active_at: string;
   last_message_cn: string;
@@ -1722,6 +1855,25 @@ export interface AgentMessageDTO {
   content: string;
   grounded: boolean;
   created_at: string;
+  /** 03B-R2 契约1/3：历史可恢复问题归属、证据卡与草稿绑定 */
+  message_id?: number | null;
+  question_id?: number | null;
+  resolved_symbol?: string | null;
+  evidence_card?: EvidenceCard | null;
+  system_generated?: boolean;
+  message_kind?: string;
+  /** 03B-R3 S5：服务端计划产物（历史恢复同一产物） */
+  plan_artifact?: PlanArtifact | null;
+  plan_draft?: { plan_id: string; symbol: string; client_request_id: string } | null;
+  /** UX 第一期：当时的下一步动作（历史同款恢复；旧记录缺字段则不造） */
+  next_steps?: NextStep[];
+  /** 补修二 2026-09-15：回答未完成原因（流中断/未正常收尾/截断）；null=完成 */
+  answer_incomplete?: { reason?: string; reason_cn?: string } | null;
+  /** 二轮复验：原问题重试身份（可核实的 cid+原始三输入）；null=不可考/已完成 */
+  retry?: {
+    client_request_id: string; message: string;
+    context_kind: string; symbol: string | null;
+  } | null;
 }
 
 // ---------------- 回测工作台（/api/backtest） ----------------
@@ -2293,6 +2445,61 @@ export interface OpsCard {
   push_summary_cn: string;
 }
 
+// ---- 前向存证账本 (/api/copilot/observations，只读) ----
+export interface ObservationBucket {
+  source_type: string;
+  strategy: string;
+  evaluation_kind: string;
+  evaluation_kind_stored: string;
+  evaluation_version: string;
+  is_reference_version: boolean;
+  direction: string | null;
+  horizon_days: number;
+  legacy_quality: string;
+  rule_refs?: string[];          // 分组维度：规则引用（不同规则不同组）
+  eval_config_hash?: string | null;  // 分组维度：评价配置摘要
+  n_observations: number;   // 展示记录数
+  n_samples: number;        // 研究样本数（同事件改措辞不重复计）
+  n_ready_observations: number;
+  n_ready_samples: number;
+  n_pending: number;
+  n_missing: number;
+  n_not_applicable: number;
+  n_conflict_samples: number;
+  avg_change_pct: number | null;
+  min_change_pct: number | null; max_change_pct: number | null;
+  first_eval_date: string | null; last_eval_date: string | null;
+  has_baseline: boolean;
+  n_hit_samples?: number; hit_rate_pct?: number;
+}
+export interface ObservationOutcome {
+  evaluation_version: string;       // 评价口径版本（严格/参考分版本）
+  is_reference_version: boolean;    // 参考口径（按行情行数）单列
+  horizon: number;
+  status: string;
+  status_cn: string;                // 已评价/待到期/缺数据/不可评价
+  change_pct: number | null;
+  eval_date: string | null;
+}
+export interface ObservationRecent {
+  observation_id: string;
+  source_type: string;
+  source_record_id: string;
+  instrument_id: string | null;
+  claim: string;
+  direction: string | null;
+  observed_at: string;
+  emitted_at: string;
+  legacy: boolean;
+  record_type: string;
+  batch_members: string[];
+  superseded: boolean;
+  legacy_quality: string;
+  display_status: string;
+  first_shown_at: string | null;    // 首次实际展示时间（未展示=null）
+  payload: Record<string, unknown>;
+  outcomes: ObservationOutcome[];   // 结构化分版本结果（不再拼无版本单串）
+}
 export interface ScoutItem {
   symbol?: string | null; display_name: string; kind: string; kind_cn: string;
   verdict_cn?: string; detail_cn?: string; winrate_cn?: string | null;
@@ -2502,4 +2709,95 @@ export interface SentimentAction {
 export interface SentimentLight {
   light: "blue" | "red" | "gray";
   n_picks: number; n_alarms: number; holding_danger: number; available: boolean;
+}
+
+// ---- 文献学习库（learning，2026-09-08）----
+// 数据唯一来源：后端只读接口 GET /api/learning，背后是
+// docs/literature-learning/learning-seed.json 固定内容文件（字段约定见
+// 该目录 README）。纯学习展示层：不参与道路/路牌/技术入场/过滤判定。
+export interface LearningPaper {
+  id: string;
+  title: string;
+  authors: string[];
+  year: number;
+  publication_kind: string; // journalArticle / report / workingPaper…
+  venue: string | null;
+  doi: string | null;
+  source_url: string | null;
+  zotero_item_key: string | null;
+  zotero_uri: string | null;
+  selection_label: string;
+  reading_level: string;
+  read_version: string | null;
+  source_locator: string;
+  checked_at: string;
+  replication_status: string;
+}
+
+export interface LearningExample {
+  kind: string; // 「教学假设，不是真实回测」——必须原样展示，不冒充实测
+  text: string;
+}
+
+export interface LearningMethodAcceptance {
+  origin: string; // 作者原方法 or 本库整理，二选一的明确说明
+  checks: string[];
+  /** null = 未提取已核实的作者数值门槛；不得显示为 0 或「已通过」。 */
+  paper_numeric_threshold: number | null;
+  threshold_note: string;
+}
+
+export interface LearningEntry {
+  id: string;
+  paper_id: string;
+  title: string;
+  category: string; // 实验方法 / 判断标准 / 经典理论 / 投资启示
+  question: string;
+  author_finding_summary: string;
+  our_learning: string;
+  example: LearningExample;
+  practice_steps: string[];
+  method_acceptance: LearningMethodAcceptance;
+  applicability: string;
+  related_paper_ids: string[];
+  local_research_path: string | null;
+  /** 后端核对 docs/ 内报告真实存在后才为 true；false 时不渲染死链。 */
+  local_research_available?: boolean;
+  system_relation: string;
+  adoption_status: string;
+  content_status: string;
+  priority: 1 | 2 | 3;
+  review_question: string;
+  answer_hint: string;
+  updated_at: string;
+}
+
+export interface LearningPath {
+  id: string;
+  title: string;
+  entry_ids: string[];
+}
+
+export interface LearningStats {
+  papers: number;
+  entries: number;
+  paths: number;
+  byCategory: Record<string, number>;
+  byPriority: Record<string, number>;
+  integrity: {
+    orphanEntryIds: string[];
+    missingRelatedIds: string[];
+    brokenPathIds: string[];
+  };
+}
+
+export interface LearningResponse {
+  schema_version: string;
+  purpose: string;
+  updated_at: string;
+  categories: string[];
+  reading_paths: LearningPath[];
+  papers: LearningPaper[];
+  entries: LearningEntry[];
+  stats: LearningStats;
 }

@@ -1,0 +1,117 @@
+{
+  "cost_drag_pct_sum": {
+    "A_等权持有": 0.1,
+    "B_全宽度闸": 5.3
+  },
+  "delta_B_vs_old_bform_stress_10bp": {
+    "ann_pct": 0.0,
+    "calmar": 0.0,
+    "maxdd_pct": 0.0,
+    "sharpe": 0.0
+  },
+  "delta_vs_old_portfolio_split": {
+    "A_等权持有": {
+      "ann_pct": 0.0,
+      "calmar": 0.0,
+      "maxdd_pct": 0.0,
+      "sharpe": 0.0
+    },
+    "B_全宽度闸": {
+      "ann_pct": 0.0,
+      "calmar": 0.0,
+      "maxdd_pct": 0.0,
+      "sharpe": 0.0
+    }
+  },
+  "environment": {
+    "numpy": "2.1.1",
+    "pandas": "2.3.3",
+    "parquet_engine_pyarrow": "23.0.1",
+    "platform": "macOS-15.6.1-arm64-arm-64bit",
+    "python": "3.11.7"
+  },
+  "input_hashes_after": {
+    "inputs/breadth_overlay/a_share_breadth_33y_snapshot.json": "8fabf1882d1d04fa2912bfa7545d4c1216a23e964d0981b1addc7042f43b33ca",
+    "inputs/portfolio_split/sh000016_close.parquet": "d90b7878318a2d8af82521ba7cb20d22bac5684a53b96b3645d885518e1def57",
+    "inputs/portfolio_split/sh000300_close.parquet": "e8f51bfc53f3fac3a9c53d9b942949c368041ea7649a7c0b404766949e9d7863",
+    "inputs/portfolio_split/sz399393_close.parquet": "fc3075ee5fbfc6401f35aed2c1c05ebadd8efcfec05d9297e8907d24c484bfbe",
+    "inputs/portfolio_split/sz399395_close.parquet": "4e8cbac36a4383f44b5fb9b58a8b5e25c60861477194505f17377f602f35bd61",
+    "inputs/portfolio_split/sz399976_close.parquet": "12fead5a010f8626cc4fd567160232d080f177cb02f86d4eb7cc2e8263bb87b5",
+    "inputs/portfolio_split/sz399989_close.parquet": "ca12b1f36dfb7b4a9efc074ca430f8d23ac4a3452493aa8c659ea5afd3d4fdaf",
+    "inputs/portfolio_split/sz399997_close.parquet": "c539365843f9c464ccac66af796258fdf6263a4b9ae49477cddeea59caae77e7",
+    "inputs/siphon_detector/cyb_399006_close.parquet": "04e199c1e0b3e779af280ccf04f58a08a462998e1a47220e4b08551e72351adc",
+    "inputs/siphon_detector/sec_399975_close.parquet": "6b229cc01368be9f1bb99b8ce3b2eaaf80d3406b1b73e6cfb396ae330cff83ca",
+    "source/pyproject.toml": "f677a2ce2ebb6233b14c84cbfecd2a2e1bfd0f36dfc2b1b096cb269d3e874d97",
+    "source/run_portfolio_split.py": "af5cae26d1f1f5fa8c48e6448035bd59ed4ce02bd2d60c496539c1bd62ab1d17",
+    "source/run_siphon_detector.py": "f2d71db88b6a85eeb40d93bb111a1ecf8df1708a6fe7b9f6c442c2b1f5ef07d0"
+  },
+  "input_hashes_before": {
+    "inputs/breadth_overlay/a_share_breadth_33y_snapshot.json": "8fabf1882d1d04fa2912bfa7545d4c1216a23e964d0981b1addc7042f43b33ca",
+    "inputs/portfolio_split/sh000016_close.parquet": "d90b7878318a2d8af82521ba7cb20d22bac5684a53b96b3645d885518e1def57",
+    "inputs/portfolio_split/sh000300_close.parquet": "e8f51bfc53f3fac3a9c53d9b942949c368041ea7649a7c0b404766949e9d7863",
+    "inputs/portfolio_split/sz399393_close.parquet": "fc3075ee5fbfc6401f35aed2c1c05ebadd8efcfec05d9297e8907d24c484bfbe",
+    "inputs/portfolio_split/sz399395_close.parquet": "4e8cbac36a4383f44b5fb9b58a8b5e25c60861477194505f17377f602f35bd61",
+    "inputs/portfolio_split/sz399976_close.parquet": "12fead5a010f8626cc4fd567160232d080f177cb02f86d4eb7cc2e8263bb87b5",
+    "inputs/portfolio_split/sz399989_close.parquet": "ca12b1f36dfb7b4a9efc074ca430f8d23ac4a3452493aa8c659ea5afd3d4fdaf",
+    "inputs/portfolio_split/sz399997_close.parquet": "c539365843f9c464ccac66af796258fdf6263a4b9ae49477cddeea59caae77e7",
+    "inputs/siphon_detector/cyb_399006_close.parquet": "04e199c1e0b3e779af280ccf04f58a08a462998e1a47220e4b08551e72351adc",
+    "inputs/siphon_detector/sec_399975_close.parquet": "6b229cc01368be9f1bb99b8ce3b2eaaf80d3406b1b73e6cfb396ae330cff83ca",
+    "source/pyproject.toml": "f677a2ce2ebb6233b14c84cbfecd2a2e1bfd0f36dfc2b1b096cb269d3e874d97",
+    "source/run_portfolio_split.py": "af5cae26d1f1f5fa8c48e6448035bd59ed4ce02bd2d60c496539c1bd62ab1d17",
+    "source/run_siphon_detector.py": "f2d71db88b6a85eeb40d93bb111a1ecf8df1708a6fe7b9f6c442c2b1f5ef07d0"
+  },
+  "inputs_unchanged": true,
+  "instruments": [
+    "沪深300",
+    "上证50",
+    "中证白酒",
+    "国证地产",
+    "创业板指",
+    "证券公司",
+    "新能车",
+    "中证医疗",
+    "国证有色"
+  ],
+  "metrics": {
+    "A_等权持有": {
+      "ann_pct": -0.48,
+      "calmar": -0.01,
+      "maxdd_pct": -49.6,
+      "sharpe": 0.1
+    },
+    "B_全宽度闸": {
+      "ann_pct": 11.99,
+      "calmar": 0.345,
+      "maxdd_pct": -34.73,
+      "sharpe": 0.72
+    }
+  },
+  "old_bform_stress_10bp_B_reference": {
+    "ann_pct": 11.99,
+    "calmar": 0.345,
+    "maxdd_pct": -34.73,
+    "sharpe": 0.72
+  },
+  "old_portfolio_split_reference": {
+    "A_等权持有": {
+      "ann_pct": -0.48,
+      "calmar": -0.01,
+      "maxdd_pct": -49.6,
+      "sharpe": 0.1
+    },
+    "B_全宽度闸": {
+      "ann_pct": 11.99,
+      "calmar": 0.345,
+      "maxdd_pct": -34.73,
+      "sharpe": 0.72
+    }
+  },
+  "rows": 2716,
+  "scope": "locked legacy A/B only; no C, no search, no corrected ledger",
+  "source_loading": "importlib loaded locked copies; old main functions were not called",
+  "weight_drift_diagnostic": "../weight-drift-check.json",
+  "window": [
+    "2015-06-16",
+    "2026-08-18"
+  ]
+}

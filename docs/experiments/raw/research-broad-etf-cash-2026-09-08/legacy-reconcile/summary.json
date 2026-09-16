@@ -1,0 +1,107 @@
+{
+  "scope": "locked nine-index A/B comparison only; continuous shares diagnose old math and are not tradeable ETF evidence",
+  "window": [
+    "2015-06-16",
+    "2026-08-18"
+  ],
+  "rows": 2716,
+  "instruments": [
+    "沪深300",
+    "上证50",
+    "中证白酒",
+    "国证地产",
+    "创业板指",
+    "证券公司",
+    "新能车",
+    "中证医疗",
+    "国证有色"
+  ],
+  "rules": {
+    "cost_one_way": 0.001,
+    "rebalance_band_absolute_weight": 0.05,
+    "execution": "next common quote day close",
+    "initial_cash": 1.0,
+    "target_amount_basis": "pre-fee equity valued at execution close",
+    "cash_shortfall": "sell first; scale all planned buys pro rata so buys plus fees fit cash"
+  },
+  "summaries": {
+    "A_true_buy_once_hold": {
+      "end_equity": 0.9471601028400451,
+      "total_return_pct": -5.283989715995485,
+      "ann_pct": -0.5024286681007739,
+      "maxdd_pct": -53.90245671642505,
+      "return_drawdown_ratio": -0.009321071778675995,
+      "daily_stability": 0.10549584923877325,
+      "fees_paid": 0.0009990009990009992,
+      "trade_rows": 9,
+      "trade_dates": 1,
+      "ending_cash": 0.0
+    },
+    "A_5pp_equal_weight_rebalance": {
+      "end_equity": 0.9691525262232901,
+      "total_return_pct": -3.0847473776709933,
+      "ann_pct": -0.2902989114026866,
+      "maxdd_pct": -46.917790099076925,
+      "return_drawdown_ratio": -0.006187395245804598,
+      "daily_stability": 0.10014181258069554,
+      "fees_paid": 0.0016110303383835621,
+      "trade_rows": 22,
+      "trade_dates": 14,
+      "ending_cash": 0.08736159500188256
+    },
+    "B_breadth_3tier_5pp_rebalance": {
+      "end_equity": 3.3786970199967548,
+      "total_return_pct": 237.86970199967547,
+      "ann_pct": 11.95905101400989,
+      "maxdd_pct": -32.95300310853744,
+      "return_drawdown_ratio": 0.362912326218655,
+      "daily_stability": 0.7306676133217833,
+      "fees_paid": 0.11562668018037196,
+      "trade_rows": 851,
+      "trade_dates": 119,
+      "ending_cash": 0.0
+    },
+    "A_legacy_weight_sim": {
+      "end_equity": 0.949602075676679,
+      "total_return_pct": -5.039792432332102,
+      "ann_pct": -0.4786551575392983,
+      "maxdd_pct": -49.59509940748953,
+      "return_drawdown_ratio": -0.009651259161848055,
+      "daily_stability": 0.10100330920242273
+    },
+    "B_legacy_weight_sim": {
+      "end_equity": 3.39010685515151,
+      "total_return_pct": 239.01068551515098,
+      "ann_pct": 11.994077434399175,
+      "maxdd_pct": -34.73120398604974,
+      "return_drawdown_ratio": 0.3453400993301804,
+      "daily_stability": 0.724297044153311
+    }
+  },
+  "attribution": {
+    "A_accounting_effect_vs_same_5pp_semantics": {
+      "end_equity_delta_legacy_minus_cash": -0.019550450546611087,
+      "annualized_return_delta_pp": -0.18835624613661173,
+      "max_abs_daily_equity_delta": 0.050126496808204246
+    },
+    "A_semantic_effect_true_hold_vs_corrected_5pp": {
+      "end_equity_delta_true_hold_minus_5pp": -0.02199242338324492,
+      "annualized_return_delta_pp": -0.2121297566980873
+    },
+    "B_accounting_effect_vs_same_rule": {
+      "end_equity_delta_legacy_minus_cash": 0.011409835154755132,
+      "annualized_return_delta_pp": 0.035026420389284496,
+      "max_abs_daily_equity_delta": 0.05320748481749549
+    },
+    "mechanism": "legacy weights are not allowed to drift with relative prices; corrected accounts preserve shares between qualifying trades and self-finance fees"
+  },
+  "input_hashes_unchanged": true,
+  "boundary_cases_passed": true,
+  "environment": {
+    "python": "3.11.7",
+    "platform": "macOS-15.6.1-arm64-arm-64bit",
+    "numpy": "2.1.1",
+    "pandas": "2.3.3",
+    "pyarrow": "23.0.1"
+  }
+}

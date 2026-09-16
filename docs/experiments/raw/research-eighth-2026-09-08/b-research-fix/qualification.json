@@ -1,0 +1,34 @@
+{
+  "research_implementation_id": "b-research-fix-2026-09-08-v1",
+  "name": "修正后的B研究代理",
+  "three_specific_fixes_verified": true,
+  "complete_B_qualified": false,
+  "nine_conditions_fully_enforced": false,
+  "test_counts": {
+    "before-replay16": {
+      "finding": 2,
+      "pass": 14
+    },
+    "before-boundaries": {
+      "fail": 13,
+      "pass": 3
+    },
+    "after-replay16": {
+      "pass": 16
+    },
+    "after-boundaries": {
+      "pass": 16
+    }
+  },
+  "historical_strategy_runs": 0,
+  "performance_verdict": null,
+  "production_changed": false,
+  "config_changed": false,
+  "b3_semantics": "close<breakout_reference AND close<SMA20 AND close<close_lag20; ambush extra SMA20<=SMA60; no EMA slope condition",
+  "remaining": [
+    "九条完整规则与历史输入未核验",
+    "价格同单位转换和真实交易可用性由主研究负责",
+    "未修埋伏false→true等其他未授权差异",
+    "本次无四基金历史收益结果"
+  ]
+}

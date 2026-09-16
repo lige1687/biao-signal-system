@@ -1,0 +1,93 @@
+{
+  "different_input_identity": {
+    "declared_action": "exit_on_d3_at_close",
+    "variant": "variant_exit_on_d3",
+    "base": "base",
+    "checks": {
+      "pool_version_equal": true,
+      "pool_entities_equal": true,
+      "period_declared_equal": true,
+      "initial_cash_equal": true,
+      "external_flows_equal": true,
+      "fee_schedule_equal": true,
+      "benchmark_equal": true,
+      "frozen_rules_equal": true,
+      "input_identity_equal": true
+    },
+    "conditions_unknown": [],
+    "differences": {
+      "net_pnl": -0.5499999999999972,
+      "net_return": -0.00550000000000006,
+      "cagr": -565.3863096583925,
+      "max_drawdown": 0.0,
+      "fees": 0.55,
+      "trades": 1
+    },
+    "note": "各维度差额是同一受控比较的描述，不可相加成资金贡献；资金归属见层1。相等指纹只证明材料一致，不证明现实执行正确。本接口消费合成账户结果，合同始终标合成",
+    "status": "attributable_to_declared_action_only",
+    "limitation": "“only”仅指声明动作差异可解释本轮算术差额；不证明现实执行正确，不构成收益能力证据"
+  },
+  "already_excluded": {
+    "n_pairs": 1,
+    "n_usable_clean": 1,
+    "n_label_crossing_into_next_segment": 0,
+    "n_label_available_unknown": 0,
+    "n_label_not_mature_by_segment_cutoff": 0,
+    "n_label_known_after_segment_cutoff": 0,
+    "segment_cutoff": "2024-01-10 15:00:00+08:00",
+    "distinct_observation_dates": 1,
+    "distinct_entities": 1,
+    "seen_marker": true,
+    "first_date": "2024-01-02",
+    "last_date": "2024-01-02",
+    "max_single_date_share": 1.0,
+    "segment_ic": null
+  },
+  "inverted_direct_audit": {
+    "n_pairs": 1,
+    "n_usable_clean": 1,
+    "n_label_crossing_into_next_segment": 0,
+    "n_label_available_unknown": 0,
+    "n_label_not_mature_by_segment_cutoff": 0,
+    "n_label_known_after_segment_cutoff": 0,
+    "segment_cutoff": "2024-01-10 15:00:00+08:00",
+    "distinct_observation_dates": 1,
+    "distinct_entities": 1,
+    "seen_marker": true,
+    "first_date": "2024-01-02",
+    "last_date": "2024-01-02",
+    "max_single_date_share": 1.0,
+    "segment_ic": {
+      "n": 1,
+      "ic_pooled_over_segment": null,
+      "reason": "fewer_than_three_pairs",
+      "note": "段内合并相关仅作方向描述；合并跨日样本不是独立证据"
+    }
+  },
+  "reduced_checks": {
+    "original": 23,
+    "accepted": 1,
+    "kept": "momentum_first_valid_row"
+  },
+  "json_nonfinite": "Extra data: line 4 column 1 (char 20)",
+  "baseline_keys": {
+    "protected_files_from_prev_baseline": 29,
+    "protected_raw_from_prev_baseline": 4
+  },
+  "protected_file_changes": [],
+  "protected_raw": {
+    "count": 411,
+    "changes": []
+  },
+  "runs": {
+    "repair-1-numerical-run-01": {
+      "outputs": 0
+    },
+    "repair-2-state-run-01": {
+      "outputs": 0
+    },
+    "repair-3-attribution-run-01": {
+      "outputs": 0
+    }
+  }
+}

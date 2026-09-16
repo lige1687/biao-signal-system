@@ -1,0 +1,38 @@
+{
+ "status": "ok",
+ "reasons": [
+  "合同未引用有效 source_decision（来源裁定表）"
+ ],
+ "notes": [
+  "510300: available_at 未知（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格",
+  "159915: available_at 未知（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格",
+  "SPY: available_at 未知（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格",
+  "QQQ: available_at 未知（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格",
+  "存在 pending_controller_freeze 目标（510300, 159915, SPY, QQQ）：资料齐备待主控冻结协议；不自动启动执行"
+ ],
+ "allowed_uses": [],
+ "markets": {
+  "510300": {
+   "price_basis": "price_basis_verified",
+   "calendar": "declared_local",
+   "target": "pending_controller_freeze"
+  },
+  "159915": {
+   "price_basis": "price_basis_verified",
+   "calendar": "declared_local",
+   "target": "pending_controller_freeze"
+  },
+  "SPY": {
+   "price_basis": "price_basis_verified",
+   "calendar": "declared_local",
+   "target": "pending_controller_freeze"
+  },
+  "QQQ": {
+   "price_basis": "price_basis_verified",
+   "calendar": "declared_local",
+   "target": "pending_controller_freeze"
+  }
+ },
+ "data_mode": "synthetic",
+ "generated_at": "2026-09-15T13:43:08.997097+08:00"
+}

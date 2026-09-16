@@ -1,0 +1,79 @@
+{
+  "scope": "synthetic counterexamples plus independent frozen-output arithmetic",
+  "synthetic_control": {
+    "exit": 0,
+    "manifest_exists": true
+  },
+  "unknown-object": {
+    "exit": 3,
+    "manifest_exists": false
+  },
+  "wrong-target": {
+    "exit": 3,
+    "manifest_exists": false
+  },
+  "legal-action": {
+    "exit": 0,
+    "manifest_exists": true,
+    "values_sha": "30a87db9e671786fb53cd7b89cc67ae710440ee086a75b99916484b3ca34725a"
+  },
+  "account-action": {
+    "exit": 2,
+    "manifest_exists": true
+  },
+  "negative-dividend": {
+    "exit": 2,
+    "manifest_exists": true
+  },
+  "qualified-routing-mocked-checks": {
+    "synthetic_mock_only": true,
+    "exit": 0,
+    "targets": 28,
+    "skipped": {},
+    "unknown_available_at": [
+      {
+        "symbol": "510300.SS",
+        "event_id": "SYNTH-DIV"
+      }
+    ],
+    "reject_reasons": []
+  },
+  "overlap_mismatches": [
+    {
+      "date": "2024-01-31",
+      "actual": 4,
+      "expected_interval_intersections": 5
+    },
+    {
+      "date": "2024-02-29",
+      "actual": 4,
+      "expected_interval_intersections": 5
+    },
+    {
+      "date": "2024-05-31",
+      "actual": 4,
+      "expected_interval_intersections": 5
+    }
+  ],
+  "run04_independent_values": {
+    "rows": 772,
+    "unique_keys": 772,
+    "attached_action_ids": 20,
+    "max_abs_difference": 8.43769498715119e-15,
+    "all_within_tolerance": true
+  },
+  "manifest_checks": {
+    "run-04": {
+      "outputs_match": true,
+      "protocol_matches": false
+    },
+    "run-05": {
+      "outputs_match": true,
+      "protocol_matches": false
+    }
+  },
+  "protected": {
+    "count": 896,
+    "changed": []
+  }
+}

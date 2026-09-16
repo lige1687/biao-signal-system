@@ -1,0 +1,83 @@
+{
+ "schema_version": "momentum-research-prototype-manifest/1.0",
+ "generated_at": "2026-09-13T08:55:23.080558+00:00",
+ "generated_at_note": "本次运行时刻，不得当作数据的对外可用时刻",
+ "mode": "historical-diagnostic",
+ "synthetic": false,
+ "historical_reconstruction_only": true,
+ "protocol": {
+  "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/run-01/fixture-negative-dividend/protocol-test.json",
+  "sha256": "6b353abc92cb59debc195c6caf26bb5e749a0a568ea2034fe7b3646afe092b72",
+  "protocol_id": "momentum-research-prototype-2026-09-13"
+ },
+ "target_id": "protocol:momentum-next-close-21-session@1.0.0",
+ "objects": {
+  "primary": "mixed.momentum.raw@1.0.0",
+  "dependency": "mixed.price.economic@1.0.0",
+  "type": "feature（身份引用，完整卡见协议文件）"
+ },
+ "code_hashes": {
+  "momentum_prototype": "02366b5c8b683035e431a97c7ade3afbd8520a63f993860b6f953d1c3f0277c8",
+  "run_momentum_research_prototype": "65b932d662273282cda33268037338ad98772aac95b63a68f6f8d74fba48b0b3"
+ },
+ "inputs": {
+  "snapshot_dir": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/run-01/fixture-negative-dividend/snapshot",
+   "sha256": "9c390a0a9251ae8bb0c8a53da5a0f4f628a60b9a4c2b8f37abe82c4b46bfba6b",
+   "verified_file": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/run-01/fixture-negative-dividend/snapshot/snapshot.json"
+  },
+  "calendar": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/run-01/fixture-negative-dividend/calendar.json",
+   "sha256": "4a7bbfb76e3856acd5863f3218bcc3274a83bc8541f36c55da396d53365cc0a7",
+   "verified_file": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/run-01/fixture-negative-dividend/calendar.json"
+  },
+  "publication": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/run-01/fixture-negative-dividend/publication.json",
+   "sha256": "39cb3a8bebaf38e671a493505cc44f87130860c9cf18095218e36c6cf728f1d3",
+   "verified_file": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/run-01/fixture-negative-dividend/publication.json"
+  },
+  "actions": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/run-01/fixture-negative-dividend/actions.json",
+   "sha256": "71dfd0e3b9978a8cae74a38f3d797f7fbc9eb885a7bc6df27e2aafa5060084c1",
+   "verified_file": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/run-01/fixture-negative-dividend/actions.json"
+  },
+  "registry": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definitions.v1.json",
+   "sha256": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05"
+  }
+ },
+ "observations": {
+  "count": 14,
+  "first": "2025-01-31",
+  "last": "2026-02-27"
+ },
+ "unknown_available_at": [
+  {
+   "symbol": "510300.SS",
+   "event_id": "SYNTH-DIV"
+  }
+ ],
+ "failures": [],
+ "skipped_stages": {
+  "targets": "协议规定历史诊断模式不写真实 targets/rank 结果",
+  "rank-diagnostic": "协议规定历史诊断模式不写真实 targets/rank 结果"
+ },
+ "offline_guard": {
+  "self_check_blocked": true,
+  "blocked_with": "RuntimeError"
+ },
+ "statuses": {
+  "computation_run": true,
+  "research_qualification": "qualified_for_this_mode",
+  "validity": "not_tested_by_this_run",
+  "production": "not_authorized",
+  "policy": "not_applicable_no_account_policy"
+ },
+ "outputs": {
+  "quality.json": "365743f1ca177cce5bea0b20686c5203d8139556e5abedfa13b6409764e924aa",
+  "values.csv": "c0d28766dce6473f943d157a7988aec2055026f7fef131470b24e0c8658e2c82",
+  "missing.csv": "5b133e1622bffba645fc699f97b26ee6998baf0faedddb743ac76a5a49fe3738",
+  "skipped-stages.json": "50c7d0ce6c949ff07854c32e5a689997d4717ea2b9dc6ffca122d2110ffe1575",
+  "report.md": "74f2cd06be1e471759f6c3b24c820af414086b88e3eaa266df3e0900491fdf71"
+ }
+}

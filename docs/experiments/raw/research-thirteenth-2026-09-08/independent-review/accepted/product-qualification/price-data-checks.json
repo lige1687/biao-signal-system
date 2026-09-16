@@ -1,0 +1,154 @@
+{
+  "window": [
+    "2015-01-01",
+    "2026-06-30"
+  ],
+  "products": [
+    {
+      "symbol": "sh510300",
+      "warmup_rows": 483,
+      "window_rows": 2790,
+      "first": "2013-01-04",
+      "window_first": "2015-01-05",
+      "last": "2026-06-30",
+      "currency": "CNY",
+      "price_unit": "CNY per contemporaneous fund unit",
+      "source_sha256": "5136735349a87a55c58ed916f4f657f0eb7435222ae0e6112c765e760c617dcd",
+      "volume_unit": null,
+      "volume_allowed_usage": "same-symbol ratios only; no absolute liquidity sizing or amount conversion"
+    },
+    {
+      "symbol": "sz159915",
+      "warmup_rows": 483,
+      "window_rows": 2789,
+      "first": "2013-01-04",
+      "window_first": "2015-01-05",
+      "last": "2026-06-30",
+      "currency": "CNY",
+      "price_unit": "CNY per contemporaneous fund unit",
+      "source_sha256": "e7deeb79a650af9648c3b45b8211829346a530b14e02365dd58c68ac7a9a72bd",
+      "volume_unit": null,
+      "volume_allowed_usage": "same-symbol ratios only; no absolute liquidity sizing or amount conversion"
+    },
+    {
+      "symbol": "sh518880",
+      "warmup_rows": 350,
+      "window_rows": 2790,
+      "first": "2013-07-29",
+      "window_first": "2015-01-05",
+      "last": "2026-06-30",
+      "currency": "CNY",
+      "price_unit": "CNY per contemporaneous fund unit",
+      "source_sha256": "c55197ed968fa0131d95606d743859359126619434c7bca58d8b573f091784f1",
+      "volume_unit": null,
+      "volume_allowed_usage": "same-symbol ratios only; no absolute liquidity sizing or amount conversion"
+    },
+    {
+      "symbol": "sh513100",
+      "warmup_rows": 400,
+      "window_rows": 2789,
+      "first": "2013-05-15",
+      "window_first": "2015-01-05",
+      "last": "2026-06-30",
+      "currency": "CNY",
+      "price_unit": "CNY per contemporaneous fund unit",
+      "source_sha256": "a50032fdec4c95b8236c36ac744a611382d4d8421395c82469c4198ac96e9137",
+      "volume_unit": null,
+      "volume_allowed_usage": "same-symbol ratios only; no absolute liquidity sizing or amount conversion"
+    }
+  ],
+  "vendor_adjustment_crosscheck": [
+    {
+      "symbol": "sh510300",
+      "OHLC_cells": 13092,
+      "max_error": "0",
+      "tolerance": ".0005",
+      "status": "known events explain vendor adjustment within published quote precision",
+      "independent_action_completeness_proof": false
+    },
+    {
+      "symbol": "sz159915",
+      "OHLC_cells": 13088,
+      "max_error": "0",
+      "tolerance": ".0005",
+      "status": "known events explain vendor adjustment within published quote precision",
+      "independent_action_completeness_proof": false
+    },
+    {
+      "symbol": "sh518880",
+      "OHLC_cells": 12560,
+      "max_error": "0",
+      "tolerance": ".0005",
+      "status": "known events explain vendor adjustment within published quote precision",
+      "independent_action_completeness_proof": false
+    },
+    {
+      "symbol": "sh513100",
+      "OHLC_cells": 12756,
+      "max_error": "0.0004",
+      "tolerance": ".0005",
+      "status": "known events explain vendor adjustment within published quote precision",
+      "independent_action_completeness_proof": false
+    }
+  ],
+  "missing_vs_observed_union": {
+    "sh510300": [],
+    "sz159915": [
+      "2021-02-08"
+    ],
+    "sh518880": [],
+    "sh513100": [
+      "2022-01-13"
+    ]
+  },
+  "one_price_diagnostics": [
+    {
+      "symbol": "sh513100",
+      "date": "2025-04-07",
+      "type": "one_price_day",
+      "available_after": "session close",
+      "use_for_open_decision": false,
+      "OHLC": {
+        "open": "1.272",
+        "high": "1.272",
+        "low": "1.272",
+        "close": "1.272"
+      }
+    }
+  ],
+  "OHLC_outside_ordinary_reference": [],
+  "volume_crosscheck": {
+    "symbol": "sz159915",
+    "period": "2025-03",
+    "exchange_volume": "24499884934",
+    "vendor_sum": "244906046.0",
+    "exchange_over_vendor": "100.0378934458808746599910399925365664513",
+    "vendor_x100": "24490604600.0",
+    "difference": "9280334.0",
+    "relative_difference": "0.0003787909218757639410879038865611677978504",
+    "exchange_row": [
+      "159915",
+      "创业板ETF",
+      "40192454936",
+      "2.0877",
+      "399006",
+      "2.242",
+      "1.916",
+      "83454682589",
+      "17527164.40",
+      "-0.04",
+      "",
+      "2.201",
+      "2.047",
+      "2.064",
+      "-3.01",
+      "24499884934",
+      "5254497.96",
+      "0.07"
+    ],
+    "source": "sources/szse-2025-march-stats.html",
+    "conclusion": "roughly 100-fold units supported; exact mismatch and trade-scope difference unresolved; keep raw volume unit null for all products; same-series ratios only"
+  },
+  "formal_exchange_calendar_complete": false,
+  "formal_intraday_suspension_coverage_complete": false
+}

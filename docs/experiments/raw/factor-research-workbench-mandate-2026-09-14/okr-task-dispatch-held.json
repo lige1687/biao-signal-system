@@ -1,0 +1,88 @@
+{
+  "title": "首轮：通用因子计算、检验与策略归因工具",
+  "purpose": "按2026-09-14-factor-research-workbench-v1.md v1.0.0实现研究专用通用接口，不改既有引擎/卡/生产。复用已有计算，3类合成例验证数值、状态检验、过拟合风险和资金/决策归因，风险模型缺条件明确不运行。",
+  "parent_id": "okr-cd1a0bd5532c",
+  "priority": "high",
+  "owner": "ZCode执行；Codex独立复核",
+  "target_date": null,
+  "next_action": "长执行规格和prompt已写好；ZCode图形界面不能同时核验新空任务与准确仓库，已在Send前停止，未派发。待用户打开正确新任务后重新派发，或手工转交prompt。完成度仍0/5。",
+  "evidence": "仅计划与当前代码复用面核对完成；源代码实现、测试与正式合成运行尚未开始。",
+  "milestones": [
+    {
+      "id": "interfaces",
+      "title": "统一引用/输入/元数据和不同合成实体集合可调用；既有对象/双均线候选/宽度边界明确",
+      "done": false
+    },
+    {
+      "id": "diagnostics",
+      "title": "预测IC与状态诊断分流，未来标签/缺值/并列/共同状态处理经独立小例核验",
+      "done": false
+    },
+    {
+      "id": "validation",
+      "title": "尝试史、时间切分、标签重叠及已看过验证资料可追溯，不伪称排除过拟合",
+      "done": false
+    },
+    {
+      "id": "attribution",
+      "title": "资金贡献对账、受控决策比较及风险模型资格入口真实调用，未实现项明确",
+      "done": false
+    },
+    {
+      "id": "delivery",
+      "title": "三类合成端到端产物、测试/保护证据、使用文档齐备并交主控复核",
+      "done": false
+    }
+  ],
+  "links": [
+    {
+      "label": "自有因子体系目标与首轮执行计划",
+      "url": "/library?report=docs%2Fexperiments%2Ffactor-research-workbench-mandate-2026-09-14.md"
+    }
+  ],
+  "kind": "concrete",
+  "id": "okr-3fa8363be729",
+  "version": 4,
+  "status": "approved",
+  "created_at": "2026-09-14T11:02:59+00:00",
+  "updated_at": "2026-09-14T11:07:13+00:00",
+  "authorization": {
+    "granted": true,
+    "scope": "用户2026-09-14授权：更新相关OKR并通过ZCode发送长执行任务。仅执行docs/superpowers/plans/2026-09-14-factor-research-workbench-v1.md v1.0.0：新factor_lab研究包/CLI/测试/手册/报告，零新行情/依赖/真实收益或账户运行；真实只读资格最多1批，合成正式3类各初跑1+纠错1，完整相关回归最多2次。不改生产/旧卡/旧引擎/旧封存，不交易不提交git；执行者不写OKR，主控按证据同步且不提前完成。",
+    "at": "2026-09-14T11:02:59+00:00"
+  },
+  "history": [
+    {
+      "at": "2026-09-14T11:02:59+00:00",
+      "action": "created",
+      "note": "目标已登记，登记不会启动执行。"
+    },
+    {
+      "at": "2026-09-14T11:02:59+00:00",
+      "action": "authorize",
+      "note": "登记本次用户明确授权，非默认授予整个方向。",
+      "from_status": "planned",
+      "to_status": "approved",
+      "scope": "用户2026-09-14授权：更新相关OKR并通过ZCode发送长执行任务。仅执行docs/superpowers/plans/2026-09-14-factor-research-workbench-v1.md v1.0.0：新factor_lab研究包/CLI/测试/手册/报告，零新行情/依赖/真实收益或账户运行；真实只读资格最多1批，合成正式3类各初跑1+纠错1，完整相关回归最多2次。不改生产/旧卡/旧引擎/旧封存，不交易不提交git；执行者不写OKR，主控按证据同步且不提前完成。"
+    },
+    {
+      "at": "2026-09-14T11:07:13+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "next_action": "准备新ZCode空任务并核workspace/job身份后发送；回调后主控独立复核，更新证据和进度，不由执行者自行验收。"
+      },
+      "after": {
+        "next_action": "长执行规格和prompt已写好；ZCode图形界面不能同时核验新空任务与准确仓库，已在Send前停止，未派发。待用户打开正确新任务后重新派发，或手工转交prompt。完成度仍0/5。"
+      }
+    },
+    {
+      "at": "2026-09-14T11:07:13+00:00",
+      "action": "note",
+      "note": "2026-09-14：文档链接/示例语法检查通过、实验报告测试4 passed。派发job edeffe2f-ab54-4b2b-a59c-15cbc4a4a2ba 在发送前取消；没有输入prompt或开始执行。遵循zcode-delegate身份核验红线，不把准备完成写成开发开始。",
+      "from_status": "approved",
+      "to_status": "approved",
+      "scope": "仅计划、OKR与派发准备，无完成项勾选"
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+ "schema_version": "research-input-preflight-manifest/1.0",
+ "generated_at": "2026-09-13T04:56:36.289242+00:00",
+ "generated_at_note": "这是本次运行时刻，不得当作数据的对外可用时刻",
+ "specs": {
+  "principles": {
+   "path": "docs/research/experiment-backtest-principles.md",
+   "version": "v1.1",
+   "sha256": "ac5a676c0635441b66f656c8e1249b69bade36365cc9065ed6341a610b6a53c6"
+  },
+  "definition_standard": {
+   "path": "docs/research/definition-standard.md",
+   "version": "1.1.0",
+   "sha256": "3406feaea2bbb8d23a91ddc8fa0c85e62ff86437bdf443d459f2c97b0e99cd5c"
+  },
+  "execution_contract": {
+   "path": "docs/research/ai-execution-contract.md",
+   "version": "1.0.1",
+   "sha256": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962"
+  },
+  "report_template": {
+   "path": "docs/research/experiment-report-template.md",
+   "version": "1.1.0",
+   "sha256": "cae2853f81841de6f424c6bda10e6708dd35574ebb8a325088fe507c5755d54e"
+  }
+ },
+ "protocol": null,
+ "code_hashes": {
+  "input_preflight": "c4ed39dbde5d54624f727b6aaffe716650773c773de501b8d1ad3cfccf5a2dde",
+  "check_research_input": "e20917ea673242820787b16b1b8f00e9951cba8944d301c7ae63767b42bf802e",
+  "data_quality": "ddad2ecfd676e0c1c9dbc3787afcc29024c53581f3eb664a97167f2e9fc8f783",
+  "data_snapshot": "748f75249190d89619b84498c7efe336f27f0a23e3cc0b3b5c3fff947393dc49",
+  "trading_calendar": "4651fa7d0e1e20aeaf3b40d9446f3ea76ec0eac037bbe965c018c3e5ccb6389e",
+  "definitions": "b6d5a35532644c371ffbfc541a21bd52c05114db9fcb1cc3071c1965ed41ad59",
+  "factor_runtime": "1f596f29aff27973ea55b55c49efd3c4c6fb1fdd200946a8618c272dad822579"
+ },
+ "input_hashes": {
+  "snapshot_json": "d4e6518b957d06a50189a574cbd547a98e479bae872a284c0718febff781ce27",
+  "calendar": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+  "publication": "657ef122c62aefcf8d580e5e20e85beac8b1a0979c399f3529ae30d6b245ef02",
+  "actions": "097043b2c622a308b602a961b666129f575a35083a8ede6d7bfa1cf16ea1ce81",
+  "registry": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05"
+ },
+ "input_times": {
+  "snapshot_timing": {
+   "started_at": "2026-09-10T00:00:00+00:00",
+   "finished_at": "2026-09-10T00:00:15+00:00",
+   "note": "started_at/finished_at 是本次运行时刻；不得当作数据的对外可用时刻。"
+  },
+  "time_semantics": {
+   "observed_at": "数据自身观察日（日线收盘）",
+   "available_at": "来源对外可用时刻；未核实一律 null 并给 reason",
+   "generated_at": "本地标准化产物生成时刻",
+   "fetched_at": "本次取得时刻；导入模式为 null",
+   "rule": "后来取得的历史资料只证明本次取得了该版本，不证明历史当天就拿得到"
+  },
+  "per_instrument": {
+   "159652.SZ": {
+    "fetched_at": null,
+    "first_date": "2023-02-08",
+    "last_date": "2026-06-30"
+   },
+   "510300.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-02",
+    "last_date": "2026-06-30"
+   },
+   "512400.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-02",
+    "last_date": "2026-06-30"
+   },
+   "512890.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-02",
+    "last_date": "2026-06-30"
+   },
+   "513870.SS": {
+    "fetched_at": null,
+    "first_date": "2023-11-02",
+    "last_date": "2026-06-30"
+   },
+   "515050.SS": {
+    "fetched_at": null,
+    "first_date": "2019-10-16",
+    "last_date": "2026-06-30"
+   },
+   "515130.SS": {
+    "fetched_at": null,
+    "first_date": "2020-05-11",
+    "last_date": "2026-06-30"
+   },
+   "515170.SS": {
+    "fetched_at": null,
+    "first_date": "2021-01-13",
+    "last_date": "2026-06-30"
+   },
+   "515300.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-19",
+    "last_date": "2026-06-30"
+   },
+   "515880.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-06",
+    "last_date": "2026-06-30"
+   },
+   "516220.SS": {
+    "fetched_at": null,
+    "first_date": "2021-03-10",
+    "last_date": "2026-06-30"
+   },
+   "518850.SS": {
+    "fetched_at": null,
+    "first_date": "2020-06-05",
+    "last_date": "2026-06-30"
+   },
+   "562590.SS": {
+    "fetched_at": null,
+    "first_date": "2023-10-18",
+    "last_date": "2026-06-30"
+   },
+   "588000.SS": {
+    "fetched_at": null,
+    "first_date": "2020-11-16",
+    "last_date": "2026-06-30"
+   }
+  },
+  "available_at": null,
+  "available_at_note": "历史到达时间未知；保持 null，不用本次生成时刻顶替"
+ },
+ "registry": {
+  "loaded": true,
+  "container_version": "1.2.0",
+  "objects": 81,
+  "sources": 34,
+  "sources_verified": true
+ },
+ "objects": {},
+ "evaluation": {
+  "start": "2019-09-02",
+  "end": "2026-06-30"
+ },
+ "outputs": {
+  "preflight_json": "e6382fb572c74a12b6400607f39f33f310a31dc21389265e0dba0b355a46d578",
+  "preflight_md": "e7bc0b3c09bf96cd0d0d35ce421b0de77ceb2078d64bc89ec42359a1b9422d24"
+ },
+ "request_satisfied": true,
+ "calculation_run": false,
+ "production_authorized": false
+}

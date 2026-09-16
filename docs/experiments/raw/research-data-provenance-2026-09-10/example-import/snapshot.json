@@ -1,0 +1,182 @@
+{
+ "schema_version": "research-data-snapshot/1.0",
+ "transform_version": "research-data-snapshot/1.0",
+ "mode": "import",
+ "protocol_id": "research-data-provenance-2026-09-10",
+ "source": {
+  "source_id": "frozen_mixed_prices",
+  "import_source": {
+   "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/prices.csv",
+   "sha256": "de467734be6c2ccbabed6fd39dc04b36fc6b78ee0ab731defd31ded4b83eb850",
+   "read_only": true
+  }
+ },
+ "request": {
+  "instruments": [
+   "510300.SH",
+   "515300.SH"
+  ],
+  "trading_days_requested": {
+   "510300.SH": 1652,
+   "515300.SH": 1640
+  },
+  "fields_requested": [
+   "date",
+   "open",
+   "high",
+   "low",
+   "close",
+   "volume"
+  ],
+  "calls": [],
+  "requests_used": 0,
+  "budget": null
+ },
+ "timing": {
+  "started_at": "2026-09-10T16:04:35.579699+00:00",
+  "finished_at": "2026-09-10T16:04:35.600949+00:00",
+  "note": "started_at/finished_at 是本次运行时刻；不得当作数据的对外可用时刻。"
+ },
+ "instruments": [
+  {
+   "instrument_id": "510300.SH",
+   "market": "CN",
+   "requested_trading_days": null,
+   "rows": 1652,
+   "first_date": "2019-09-02",
+   "last_date": "2026-06-30",
+   "raw_responses": [],
+   "normalized": {
+    "path": "normalized/510300.SH.csv",
+    "sha256": "5f1fd1fca3a80e2e049b1d288883386fbf2d026e43bb43fc23d5f01e65504f72"
+   },
+   "provider_report": {
+    "provider": "frozen_mixed_prices",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": [
+     "行情未复权：分红拆股可能造成虚假的颜色切换"
+    ]
+   },
+   "fetched_at": null
+  },
+  {
+   "instrument_id": "515300.SH",
+   "market": "CN",
+   "requested_trading_days": null,
+   "rows": 1640,
+   "first_date": "2019-09-19",
+   "last_date": "2026-06-30",
+   "raw_responses": [],
+   "normalized": {
+    "path": "normalized/515300.SH.csv",
+    "sha256": "c117ce60a985209688e0d825e5ac45ab59a6bd2edbf9bffe056bb18f67f804a3"
+   },
+   "provider_report": {
+    "provider": "frozen_mixed_prices",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": [
+     "行情未复权：分红拆股可能造成虚假的颜色切换"
+    ]
+   },
+   "fetched_at": null
+  }
+ ],
+ "market_data_refs": {
+  "510300.SH": {
+   "schema_version": "provenance/1.2",
+   "source_id": "frozen_mixed_prices",
+   "instrument_id": "510300.SH",
+   "market": "CN",
+   "observed_at": "2026-06-30",
+   "available_at": null,
+   "generated_at": "2026-09-10T16:04:35.593750+00:00",
+   "last_valid_at": "2026-06-30",
+   "health": "unknown",
+   "reason": "冻结历史输入缺到达时间；保持未知，不补造",
+   "calendar_ref": null,
+   "as_of_cutoff": null,
+   "source_policy_ref": null,
+   "reference_lag_trading_days": null,
+   "source": "frozen_mixed_prices",
+   "completeness": "unknown",
+   "lag_trading_days": null,
+   "fetched_at": null,
+   "transform_version": "research-data-snapshot/1.0"
+  },
+  "515300.SH": {
+   "schema_version": "provenance/1.2",
+   "source_id": "frozen_mixed_prices",
+   "instrument_id": "515300.SH",
+   "market": "CN",
+   "observed_at": "2026-06-30",
+   "available_at": null,
+   "generated_at": "2026-09-10T16:04:35.600900+00:00",
+   "last_valid_at": "2026-06-30",
+   "health": "unknown",
+   "reason": "冻结历史输入缺到达时间；保持未知，不补造",
+   "calendar_ref": null,
+   "as_of_cutoff": null,
+   "source_policy_ref": null,
+   "reference_lag_trading_days": null,
+   "source": "frozen_mixed_prices",
+   "completeness": "unknown",
+   "lag_trading_days": null,
+   "fetched_at": null,
+   "transform_version": "research-data-snapshot/1.0"
+  }
+ },
+ "semantics": {
+  "fields": {
+   "date": "交易日（Asia/Shanghai，无时区标注的日期）",
+   "open": "开盘价，人民币元",
+   "high": "最高价，人民币元",
+   "low": "最低价，人民币元",
+   "close": "收盘价，人民币元",
+   "volume": "成交量，原始单位未统一认证（只宜同一标的自身相对比较）"
+  },
+  "currency": "CNY",
+  "price_basis": "nominal_close",
+  "price_basis_note": "nominal_close = 名义未复权收盘价；公司行动不在价格里，需另接已登记的 actions 输入",
+  "corporate_action_basis": "not_included_in_price",
+  "trading_calendar": {
+   "authority": "none",
+   "note": "本仓库无真实交易所日历。data/calendar.py 的 WeekdayCalendar 是周一至周五近似且节假日表为空，不得当交易日历使用；data_provenance.reference_calendar 的 authority 为 price_dates_reference，只是参考。"
+  },
+  "time_semantics": {
+   "observed_at": "数据自身观察日（日线收盘）",
+   "available_at": "来源对外可用时刻；未核实一律 null 并给 reason",
+   "generated_at": "本地标准化产物生成时刻",
+   "fetched_at": "本次取得时刻；导入模式为 null",
+   "rule": "后来取得的历史资料只证明本次取得了该版本，不证明历史当天就拿得到"
+  }
+ },
+ "code_identity": {
+  "data_snapshot": "1bd91ede1d97be8ddaf1b718447e9c3322d4fbdf6cca5821fce2633e500596cf",
+  "data_quality": "905ac3474dc2288f4b602e964a049abfcce573b4a15e96511ffe64e829f07081",
+  "providers": "69c7a09954bbf2c6c8b8a8d90474bbdce43be26b03cae8dc6993711718a3805c",
+  "validation": "18d221abbfea6879c980e324a1b346765bcf499ede5141ce3306e9c01106d62b",
+  "data_provenance": "3c5ac99a39feddf619e140c08df13251b6a785c17679bacb7638756a776c749a"
+ },
+ "known_gaps": [
+  "来源发布节奏未核实，available_at 全部未知（health=unknown）",
+  "无真实交易所日历，无法区分整池缺席日与非交易日",
+  "volume 绝对单位未统一认证，只宜同一标的自身相对比较",
+  "价格不含公司行动；分红拆分须由已登记的 actions 输入单独提供"
+ ],
+ "uses": [
+  "description",
+  "diagnostic",
+  "comparison"
+ ],
+ "not_for": [
+  "production_trade",
+  "宣称历史时点可交易",
+  "作为复权价格使用"
+ ],
+ "authorization": {
+  "production_trade": false,
+  "note": "本快照只是数据资料，不构成策略有效或获准交易的证据"
+ }
+}

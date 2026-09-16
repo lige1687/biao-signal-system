@@ -1,0 +1,177 @@
+{
+ "data_mode": "real",
+ "object_ref": "candidate:lei.dual_ma.bull_state@draft-1",
+ "candidate_card": {
+  "path": "docs/experiments/raw/factor-research-workbench-v1-2026-09-14/candidate-card-dual-ma-bull-state-draft-1.md",
+  "sha256": "907d17631e27011423bebbf068bcb2bbc6e1b44a184618597cf54f868e066dc1"
+ },
+ "theme": "trend",
+ "type": "state_signal",
+ "use": "historical_description",
+ "lookback": 20,
+ "e_offset": 1,
+ "x_offset": 22,
+ "regime": "none",
+ "evaluation_window": {
+  "start": "2019-10-08",
+  "end": "2025-12-31"
+ },
+ "universe": {
+  "universe_id": "b0fix-real-qualification",
+  "members": [
+   "510300",
+   "159915",
+   "SPY",
+   "QQQ"
+  ],
+  "attribute_labels": {
+   "510300": [
+    "broad"
+   ],
+   "159915": [
+    "growth",
+    "broad"
+   ],
+   "SPY": [
+    "broad",
+    "US_large"
+   ],
+   "QQQ": [
+    "growth",
+    "US_tech"
+   ]
+  }
+ },
+ "target_basis": "total_return_wealth",
+ "data_identity": {
+  "510300": {
+   "path": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/510300.parquet",
+   "sha256": "a6d518e02313f03cb98ebd69a3e459c9382bd85864f5b1d86771c3c04665fcb4",
+   "fetched_at": null,
+   "available_at": null,
+   "available_at_source": null,
+   "point_in_time_verified": false,
+   "date_range": [
+    "2012-05-28",
+    "2026-08-27"
+   ],
+   "price_basis_status": "producer_candidate_only",
+   "price_basis_evidence": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-b0-concentrated-fix-2026-09-15/real-evidence.json",
+    "sha256": "934c84d6f5cebf68fd9b2c122ee9579005049b85dc579aaf6243d9b41eb5fc87"
+   }
+  },
+  "159915": {
+   "path": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/159915.parquet",
+   "sha256": "f6d5010501fd14cf10941407ca9e6954c6d0fbcc48d631027839f45ac0d8af37",
+   "fetched_at": null,
+   "available_at": null,
+   "available_at_source": null,
+   "point_in_time_verified": false,
+   "date_range": [
+    "2012-05-28",
+    "2026-08-27"
+   ],
+   "price_basis_status": "producer_candidate_only",
+   "price_basis_evidence": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-b0-concentrated-fix-2026-09-15/real-evidence.json",
+    "sha256": "934c84d6f5cebf68fd9b2c122ee9579005049b85dc579aaf6243d9b41eb5fc87"
+   }
+  },
+  "SPY": {
+   "path": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/SPY.parquet",
+   "sha256": "584ea5441e19065ac557df14235aa621a5c74f39659e4a8b8926435a33ca4713",
+   "fetched_at": null,
+   "available_at": null,
+   "available_at_source": null,
+   "point_in_time_verified": false,
+   "date_range": [
+    "2012-05-28",
+    "2026-08-27"
+   ],
+   "price_basis_status": "producer_candidate_only",
+   "price_basis_evidence": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-b0-concentrated-fix-2026-09-15/real-evidence.json",
+    "sha256": "934c84d6f5cebf68fd9b2c122ee9579005049b85dc579aaf6243d9b41eb5fc87"
+   }
+  },
+  "QQQ": {
+   "path": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/QQQ.parquet",
+   "sha256": "3706b3d182fb986aec13ffabe4020638ae7a0fa101043b226bd26e04c9f48548",
+   "fetched_at": null,
+   "available_at": null,
+   "available_at_source": null,
+   "point_in_time_verified": false,
+   "date_range": [
+    "2012-05-28",
+    "2026-08-27"
+   ],
+   "price_basis_status": "producer_candidate_only",
+   "price_basis_evidence": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-b0-concentrated-fix-2026-09-15/real-evidence.json",
+    "sha256": "934c84d6f5cebf68fd9b2c122ee9579005049b85dc579aaf6243d9b41eb5fc87"
+   }
+  }
+ },
+ "calendar_identity": {
+  "CN": {
+   "source": {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+    "sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1"
+   },
+   "synthetic_schedule": null,
+   "exchange": "SZSE",
+   "timezone": "Asia/Shanghai",
+   "session_close": "15:00",
+   "half_day_close": null
+  },
+  "US": {
+   "source": null,
+   "synthetic_schedule": null,
+   "exchange": "NYSE/Nasdaq",
+   "timezone": "America/New_York",
+   "session_close": "16:00",
+   "half_day_close": null
+  }
+ },
+ "source_decision": {
+  "path": "docs/experiments/raw/factor-unit-b0-concentrated-fix-2026-09-15/source-decision-v2.csv",
+  "sha256": "ecaa78e5befc248b738978bdb580aa52d13630e70b079a24a6b0e4116679db2b"
+ },
+ "code_identity": {
+  "src/lei_signal/research/factor_unit/__init__.py": "72c20484fbeb7b11a1a556ef20a09c58883dd97b4088dc5bc0a83409bdc1eeec",
+  "src/lei_signal/research/factor_unit/close_state.py": "b0efb324a2ef65d1f415c19be4f50b96ebf25f140da0c31b2b759d68ef04db10",
+  "src/lei_signal/research/factor_unit/study_contract.py": "687d6f49fd7e9e81cd5e6356492f47a6a5a4269061ddc2bb48b32eb27f2ed587",
+  "src/lei_signal/research/factor_unit/state_description.py": "1d5e52da5e62e173b4a9217ea2b86416809534f3cb16923bf1ea0b5eb897c3e9",
+  "scripts/check_factor_unit_readiness.py": "1de2ced7273072369932602ad820bc8a3de76b27990e4126f10713b197c94179",
+  "src/lei_signal/features/indicators.py": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+  "src/lei_signal/rules/lei_color.py": "ae6f3a2547cc37dd1ebdfea1bea206f932defdd8cd90d4061630914c0fc9d4d7",
+  "src/lei_signal/rules/dual_ma.py": "5c41da87036e0e318bacab663aa5509d73f99f301f805a76559b016b99aa3f7c",
+  "src/lei_signal/domain/rules_config.py": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031",
+  "configs/rules.v2.yaml": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+  "src/lei_signal/research/trading_calendar.py": "4651fa7d0e1e20aeaf3b40d9446f3ea76ec0eac037bbe965c018c3e5ccb6389e"
+ },
+ "standards": [
+  {
+   "path": "docs/research/experiment-backtest-principles.md",
+   "version": "1.1",
+   "sha256": "ac5a676c0635441b66f656c8e1249b69bade36365cc9065ed6341a610b6a53c6"
+  },
+  {
+   "path": "docs/research/definition-standard.md",
+   "version": "1.1.0",
+   "sha256": "3406feaea2bbb8d23a91ddc8fa0c85e62ff86437bdf443d459f2c97b0e99cd5c"
+  },
+  {
+   "path": "docs/research/ai-execution-contract.md",
+   "version": "1.0.1",
+   "sha256": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962"
+  },
+  {
+   "path": "docs/research/experiment-report-template.md",
+   "version": "1.1.0",
+   "sha256": "cae2853f81841de6f424c6bda10e6708dd35574ebb8a325088fe507c5755d54e"
+  }
+ ],
+ "research_cutoff": "2026-09-15T23:59:00+08:00"
+}

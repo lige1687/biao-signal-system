@@ -1,0 +1,209 @@
+{
+  "protocol_id": "factor-lab-demo-3-attribution",
+  "version": "1.1.0",
+  "kind": "strategy_explanation",
+  "data_mode": "synthetic",
+  "synthetic": true,
+  "timezone": "Asia/Shanghai",
+  "evaluation_cutoff": "2030-01-01T15:00:00+08:00",
+  "case": "attribution",
+  "title": "③策略三层归因入口（返修版：固定比较合同，未知条件降级）",
+  "expectation_tolerance_abs": 1e-06,
+  "registry": {
+    "version": "1.2.0",
+    "canonical_sha256": "6773ef5a75c5a2209612cf27452a05fdfc0067d1e9bd579c133737dc580de007"
+  },
+  "code_identity": {
+    "scripts/run_factor_lab.py": "17a7bc63bc97893f24ee72861836d64e65298b18b4d53c67041ef999cc4613d5",
+    "src/lei_signal/domain/rules_config.py": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031",
+    "src/lei_signal/features/indicators.py": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+    "src/lei_signal/research/definitions.py": "b6d5a35532644c371ffbfc541a21bd52c05114db9fcb1cc3071c1965ed41ad59",
+    "src/lei_signal/research/factor_diagnostics.py": "70de5549e2831a4353d5000e011e5c93ef4c9798ce4909da943d079997d73a08",
+    "src/lei_signal/research/factor_lab/__init__.py": "ea269601b6b4fa5f1bb70f2dff555aca5a7afa236babc8005a8b4e7fd2d036c4",
+    "src/lei_signal/research/factor_lab/adapters.py": "27596fd66d918cacf9db7a6ae2cdd11b408d7d46f3c9889ac2d35a42e7748020",
+    "src/lei_signal/research/factor_lab/attribution.py": "033960c686d54f41ef2b33f42825668039456ed00aded0d31969e0f9e064f997",
+    "src/lei_signal/research/factor_lab/contracts.py": "d9ff0e864a8f4600c134972e9815acc2143f1b7227e17de570fed4901e0988bc",
+    "src/lei_signal/research/factor_lab/diagnostics.py": "21bdd86594e31412dc1244e0c1ab113b00cab1cc86e73370c70c051c15357728",
+    "src/lei_signal/research/factor_lab/runner.py": "e2e497712e30b9f8bb0722c7f7aa8cc620fc5edae27c6452f961c9c210c31cf5",
+    "src/lei_signal/research/factor_lab/validation.py": "6ea914ef032a2fdf71924a9f8ac7658e2f8fcedaa3ba45d647f01fe8e4ffb5a1",
+    "src/lei_signal/research/momentum_prototype.py": "5425e4f5494710041ae42816bf259ac7cdc1ed6aaef01986ac1d3d34d90e568f",
+    "src/lei_signal/rules/dual_ma.py": "5c41da87036e0e318bacab663aa5509d73f99f301f805a76559b016b99aa3f7c",
+    "src/lei_signal/rules/lei_color.py": "ae6f3a2547cc37dd1ebdfea1bea206f932defdd8cd90d4061630914c0fc9d4d7"
+  },
+  "definition_cards_sha256": {},
+  "data_declarations": {
+    "price_scale": "arbitrary_positive_units_synthetic",
+    "calendar": "pandas_bdate_range_synthetic_not_exchange_calendar",
+    "timezone": "Asia/Shanghai",
+    "currency": "synthetic_units_not_cny"
+  },
+  "required_checks": [
+    "base_net_contribution",
+    "base_reconcile_error",
+    "base_status",
+    "l2_net_pnl_diff",
+    "l2_status",
+    "l3_reason",
+    "l3_status",
+    "receivable_net_contribution",
+    "receivable_status",
+    "variant_exit_on_d3_net_contribution",
+    "variant_exit_on_d3_status"
+  ],
+  "expectation_source": {
+    "path": "../factor-research-workbench-v1-2026-09-14/independent-expectations.json",
+    "sha256": "5e8cb43d974ca7ef5e44d6218a14928a3d3bd0a01bf58e528d923c385cdc390a"
+  },
+  "attempt_history": [
+    {
+      "attempt": "repair-fixture-reuse",
+      "outcome": "success",
+      "reason": "复用首轮 synthetic_inputs（哈希冻结）；本轮未改夹具"
+    },
+    {
+      "attempt": "protocol-v1.1.0-freeze",
+      "outcome": "success",
+      "reason": "按集中返修任务书增强合同后冻结；期望仍取自独立算术文件"
+    }
+  ],
+  "inputs": {
+    "equity_base": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/attribution_equity_base.csv",
+      "sha256": "0b66f1bd061f5f5004c32e826811baadbc276509edd6cb7bfb3c7a5654496b59",
+      "format": "table"
+    },
+    "trades_base": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/attribution_trades_base.csv",
+      "sha256": "09ce8fe55e40e3531b0aa880c6606455afccd53ede5fb995bebad8af67c38722",
+      "format": "table"
+    },
+    "events_base": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/attribution_events_base.csv",
+      "sha256": "abf0308e80b5c7f9a0e36ce27a00a47502a8c3bcdbc387f128ddb6c3b1e809b5",
+      "format": "table"
+    },
+    "actions_base": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/attribution_actions_base.json",
+      "sha256": "c40e901a40034152d0962317d9c631ad5eb5696c74f566afe882788755b193e7",
+      "format": "actions"
+    },
+    "prices_base": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/attribution_prices_base.csv",
+      "sha256": "5875e7e7cf018882f174f64db506cf87d6e9c52463e62c080f1200d772729d3f",
+      "format": "table"
+    },
+    "equity_variant": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/attribution_equity_variant.csv",
+      "sha256": "e5b94aeaac168f19f018ff098c70a1788069d0c01ab8512e900a0626169d1c62",
+      "format": "table"
+    },
+    "trades_variant": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/attribution_trades_variant.csv",
+      "sha256": "0fa3e56b6ef5156c488ca86b4f23fd03617c3734586901a45fb022800ca83af4",
+      "format": "table"
+    },
+    "equity_receivable": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/attribution_equity_receivable.csv",
+      "sha256": "9ea9d26d2eb1767a94833d73300c11864fd40eca7f2ec4a89701bc897db3c5aa",
+      "format": "table"
+    },
+    "events_receivable": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/attribution_events_receivable.csv",
+      "sha256": "8dae2120ac043d56e4825efff6a63b734c994f69f5943d8ec116ee3273a9735c",
+      "format": "table"
+    },
+    "actions_receivable": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/attribution_actions_receivable.json",
+      "sha256": "aba6deb10b761934af6f987178059c118049af5557c14dd4d1c269c6fa22cd2f",
+      "format": "actions"
+    }
+  },
+  "accounts": {
+    "base": {
+      "initial": 100.0,
+      "equity": "equity_base",
+      "trades": "trades_base",
+      "events": "events_base",
+      "actions": "actions_base",
+      "prices": "prices_base"
+    },
+    "variant_exit_on_d3": {
+      "initial": 100.0,
+      "equity": "equity_variant",
+      "trades": "trades_variant",
+      "events": "events_base",
+      "actions": "actions_base",
+      "prices": "prices_base"
+    },
+    "receivable": {
+      "initial": 100.0,
+      "equity": "equity_receivable",
+      "trades": "trades_base",
+      "events": "events_receivable",
+      "actions": "actions_receivable",
+      "prices": "prices_base"
+    }
+  },
+  "comparison": {
+    "variant": "variant_exit_on_d3",
+    "base": "base",
+    "declared_action": "exit_on_d3_at_close",
+    "pool_versions": {
+      "base": "synthetic-pool-100001",
+      "variant": "synthetic-pool-100001"
+    },
+    "entity_sets": {
+      "base": [
+        "100001"
+      ],
+      "variant": [
+        "100001"
+      ]
+    },
+    "period": {
+      "start": "2026-01-05",
+      "end": "2026-01-08"
+    },
+    "initial_cash": 100.0,
+    "external_flows": {
+      "base": [],
+      "variant": []
+    },
+    "fee_schedule": {
+      "base": {
+        "buy": 0.02,
+        "sell": 0.01
+      },
+      "variant": {
+        "buy": 0.02,
+        "sell": 0.01
+      }
+    },
+    "benchmark": {
+      "base": "hold_cash_synthetic",
+      "variant": "hold_cash_synthetic"
+    },
+    "frozen_rules": {
+      "base": "entry_fixed_synthetic",
+      "variant": "entry_fixed_synthetic"
+    },
+    "input_identity": {
+      "prices": "attribution_prices_base.csv@v1"
+    }
+  },
+  "model_card": null,
+  "expectations": {
+    "base_status": "reconciled",
+    "base_net_contribution": 6.0,
+    "base_reconcile_error": 0.0,
+    "receivable_status": "reconciled",
+    "receivable_net_contribution": 6.0,
+    "variant_exit_on_d3_status": "reconciled",
+    "variant_exit_on_d3_net_contribution": 5.450000000000003,
+    "l2_status": "attributable_to_declared_action_only",
+    "l2_net_pnl_diff": -0.5499999999999998,
+    "l3_status": "not_run",
+    "l3_reason": "no_model_card_provided"
+  },
+  "expectation_basis": "独立手算：100元本金，买1份@50费1→现金49，分红2到账→51，期末价55→总资产106、净损益6、产品净贡献6；应收未付变体权益同为106（含应收2）；变体d3以55卖出（费率1%→0.55）→净损益5.45，差额-0.55只归给该卖出动作（全部合同条件核对相等后才允许only，且仅限合成材料一致）。层3无模型卡是合法not_run。"
+}

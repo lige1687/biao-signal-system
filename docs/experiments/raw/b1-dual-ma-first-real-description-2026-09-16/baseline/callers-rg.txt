@@ -1,0 +1,33 @@
+# 旧public/辅助函数实际调用者（rg, 2026-09-16 00:42:43）
+## describe_states
+src/lei_signal/research/factor_unit/study_contract.py:364:    del cutoff  # 合同侧只校验解析；统计侧由 describe_states 消费
+tests/unit/test_factor_unit_four_fixes.py:21:from lei_signal.research.factor_unit.state_description import describe_states
+tests/unit/test_factor_unit_four_fixes.py:198:    row = describe_states(values, schedule, contract)['symbols']['SYN']
+tests/unit/test_factor_unit_four_fixes.py:209:    row = describe_states(values, schedule, contract)['symbols']['SYN']
+tests/unit/test_factor_unit_four_fixes.py:230:    row = describe_states(values, schedule, contract)['symbols']['SYN']
+tests/unit/test_factor_unit_four_fixes.py:242:    row = describe_states(values, schedule, contract)['symbols']['SYN']
+tests/unit/test_factor_unit_four_fixes.py:281:    row = describe_states(values, schedule, contract)['symbols']['SYN']
+tests/unit/test_factor_unit_four_fixes.py:293:    row = describe_states(values, schedule, contract)['symbols']['SYN']
+## _stat
+src/lei_signal/research/reward_risk_backtest.py:16:    fixed_horizon_stats,
+src/lei_signal/research/reward_risk_backtest.py:84:                stats=tuple(fixed_horizon_stats(frame, entries)),
+src/lei_signal/dailybrief.py:180:def extract_symbol_state(assessment) -> dict:
+src/lei_signal/dailybrief.py:185:    risk_state = getattr(getattr(assessment, "risk_state", None), "value", None)
+src/lei_signal/dailybrief.py:190:        "risk_state_cn": RISK_STATE_CN.get(risk_state, risk_state),
+src/lei_signal/dailybrief.py:198:def diff_symbol_state(prev: dict | None, curr: dict) -> dict:
+src/lei_signal/research/factor_account_adapter.py:90:                trend_states=json.dumps(trend, ensure_ascii=False),
+src/lei_signal/research/stability.py:149:    from lei_signal.research.outcomes import _market_state
+## _state_value
+## _close_segment
+## _finite
+src/lei_signal/research/factor_lab/runner.py:129:            {"file": path.name, "non_finite_replaced_with_null": warnings}
+src/lei_signal/research/factor_lab/diagnostics.py:88:        return "value_not_finite"
+src/lei_signal/research/factor_lab/diagnostics.py:93:        return "target_not_finite"
+src/lei_signal/research/factor_lab/validation.py:242:                           "value_not_finite", "target_not_finite",
+src/lei_signal/research/qualification_bundle.py:105:def _finite_number(value) -> float | None:
+src/lei_signal/research/qualification_bundle.py:445:                f10, f1 = _finite_number(per10), _finite_number(per1)
+src/lei_signal/research/data_quality.py:1127:                    "non_finite_value",
+src/lei_signal/plans/store.py:178:def check_finite_positive_price(field: str, value: float | None) -> float | None:
+## SPARSE_STEP
+## FIXED_OFFSETS
+## EMPTY_GROUP

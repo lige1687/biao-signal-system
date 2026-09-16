@@ -1,0 +1,36 @@
+{
+  "error": "blank HTML table cell shifted positional column; first extraction mistakenly read daily-change column",
+  "observed": {
+    "symbol": "sz159915",
+    "period": "2025-03",
+    "exchange_volume": "-3.01",
+    "vendor_sum": "244906046.0",
+    "exchange_over_vendor": "-1.229042748907881188037309621992753906941E-8",
+    "vendor_x100": "24490604600.0",
+    "difference": "-24490604603.01",
+    "relative_difference": "8136413489.372093023255813953488372093023",
+    "exchange_row": [
+      "159915",
+      "创业板ETF",
+      "40192454936",
+      "2.0877",
+      "399006",
+      "2.242",
+      "1.916",
+      "83454682589",
+      "17527164.40",
+      "-0.04",
+      "",
+      "2.201",
+      "2.047",
+      "2.064",
+      "-3.01",
+      "24499884934",
+      "5254497.96",
+      "0.07"
+    ],
+    "source": "sources/szse-2025-march-stats.html",
+    "conclusion": "roughly 100-fold units supported; exact mismatch and trade-scope difference unresolved; keep raw volume unit null for all products; same-series ratios only"
+  },
+  "resolution": "drop blank cells, validate positive monthly volume and code"
+}

@@ -1,0 +1,45 @@
+{
+  "retrieved_at_utc": "2026-09-08T07:03:18.646365+00:00",
+  "entries": [
+    {
+      "repo": "/Users/yongbiaoli/lei-signal-sync",
+      "commit": "1a321ce60e29ef5c11b735c73b5e593b749aed34",
+      "git_path": "docs/handbook-30-videos.md",
+      "saved": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/b-zone-semantics/sources/handbook-30-videos-1a321ce.md",
+      "sha256": "99068d8bcb095493747495abc616cff0b06ac43e1ba69e2a07cffcc81d50ddcb",
+      "commit_metadata": "1a321ce60e29ef5c11b735c73b5e593b749aed34\n2026-09-01T10:52:10+08:00\nuntracked files on feat/timing-backtest: ef89d12 feat(web): 报告存档卡改读 reportsIndex 索引——多路回测AI归档统一入口,只追加不抢改页面\n\n"
+    },
+    {
+      "repo": "/Users/yongbiaoli/lei-signal-sync",
+      "commit": "1a321ce60e29ef5c11b735c73b5e593b749aed34",
+      "git_path": "docs/trading-spec-v2.md",
+      "saved": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/b-zone-semantics/sources/trading-spec-v2-1a321ce.md",
+      "sha256": "462ff009f66323d9825b5e6e21a8c6cfc50e39f25a3d3f1facce4790cf51e062",
+      "commit_metadata": "1a321ce60e29ef5c11b735c73b5e593b749aed34\n2026-09-01T10:52:10+08:00\nuntracked files on feat/timing-backtest: ef89d12 feat(web): 报告存档卡改读 reportsIndex 索引——多路回测AI归档统一入口,只追加不抢改页面\n\n"
+    },
+    {
+      "repo": "/Users/yongbiaoli/lei-signal-sync",
+      "commit": "8c189349ff40e703620c35d5a8f0a74b3ae7a418",
+      "git_path": "src/lei_signal/rules/dense_breakout.py",
+      "saved": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/b-zone-semantics/sources/dense_breakout-first-8c18934.py",
+      "sha256": "5e412e1dccac12ddcdd0bf287333d4785cae18580416087862f947da1703fc99",
+      "commit_metadata": "8c189349ff40e703620c35d5a8f0a74b3ae7a418\n2026-08-05T23:36:09+08:00\nfeat(rules): 实现模块 B 密集区突破与模块 C 2B/破底翻\n\n规格 §9 模块 B/C 的研究代理量化实现，补齐 A/B/C/D 四模块。\n\n模块 B（dense_breakout）：\n- B1 横盘密集区识别，纠缠度阈值复用 tradability_gate（单一来源避免漂移）\n- B2 收盘突破密集区上沿 + 完整多头排列 -> 确认\n- B3 跌回上沿下方且 SMA20 下弯 -> 失效\n- 每个密集区生命周期只允许一次确认（consumed 语义）\n\n模块 C（two_b_reversal）：\n- C1 用 confirmed_pivots 识别 L2/L1 更高低点结构 + 颈线（规格原文未给结构\n  定义，L1/L2 量化口径为研究代理）\n- C2 三版本入场分别产事件：v1 站上 L1 / v2 +EMA20 拐头 / v3 +双均线共同向上\n- C3 收盘跌破 L2 -> 结构彻底失效；快速收复窗口耗尽 -> 本轮消耗\n- 大幅负乖离仅作 evidence 增强，不单独触发（规格 §4.7）\n\n接线：\n- MODULE_MAP 登记 B/C，monitor 的 IMPLEMENTED_MODULES 改由 MODULE_MAP 派生，\n  MODULE_NOT_IMPLEMENTED 对 B/C 自动消失\n- pipeline 接入、回测（固定周期 + 规则退出）、场景 DTO、中文解释与标签\n\nruleset 保持 1.3.0：新增规则（各自 version=1.0.0）未改动既有阈值，\nbump 会误触既有计划的 PLAN_STALE_RULESET。\n\n本次 yaml 另含 holding_watch_guard 规则（持仓盯盘承载规则），其判定代码在\n后续提交，规则本身未被引用时不产生行为。\n\nFixture 验证（000001.SS / 000300.SS）：B/C 均产出事件，module_backtest\n分桶有样本，C 三版本 v1≥v2≥v3 符合「越保守触发越少」。\n\nCo-Authored-By: Claude <noreply@anthropic.com>\n\n"
+    },
+    {
+      "repo": "/Users/yongbiaoli/lei-signal-sync",
+      "commit": "ce7a2da1c89fe504dbdaa4b9dfe334318ba3d683",
+      "git_path": "src/lei_signal/rules/dense_breakout.py",
+      "saved": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/b-zone-semantics/sources/dense_breakout-ce7a2da.py",
+      "sha256": "e375e8ea8571e0ff563b6ea4143263d69365475957af11ad29b68ccd13c48817",
+      "commit_metadata": "ce7a2da1c89fe504dbdaa4b9dfe334318ba3d683\n2026-08-10T10:17:41+08:00\nfeat: 提醒订阅 + 计划落库完整闭环 (Step 2/3 + 监督员 agent)\n\n核心增量:\n- watch_subscriptions 表 (migration 013) + 14:45 命中 checker (launchd)\n- TradePlan.source 字段 (migration 014) 区分 user / watch_promoted / agent\n- POST /api/watch/{id}/promote: pending watch 一站式 create+confirm+enter\n- PromotePlanDialog 模态: 五项预案必填, 默认 entry+auto_enter=true\n- 监督员 agent: 飞书签名回执, 分级通知, 持仓盯盘退出预案\n- 基本面模块: fundamentals service + sources + UI 页\n- BuyPointDrawer: 候选/共振/历史结构, 落计划预填\n- 多个测试 fixture 与单测 (含 watch_promote 7 + e2e 9)\n\nbackend: 752/752 unit tests pass\nfrontend: tsc clean\n\n"
+    },
+    {
+      "repo": "/Users/yongbiaoli/lei-signal-sync",
+      "commit": "3cdbd9ee7a8d46e5a8cbfdb01f8e402b3cb20dd0",
+      "git_path": "src/lei_signal/rules/dense_breakout.py",
+      "saved": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/b-zone-semantics/sources/dense_breakout-restored-3cdbd9e.py",
+      "sha256": "ffb37ff38e99c31c4f4723a2046290a326c6c9086121c14dabd3a714c5764c3b",
+      "commit_metadata": "3cdbd9ee7a8d46e5a8cbfdb01f8e402b3cb20dd0\n2026-09-03T23:32:07+08:00\nmerge: data-sync(因子面板/资讯流/美国宏观) 并入 recovery/lei-round2 + 恢复 stash 中丢失的 V2 规则源码\n\n- 冲突全取并集：TopNav/App/路由同挂 因子观测+资讯流+回测+本轮研究 四页\n- fundamentals TTL 保留用户确认的 12-24h 策略，补 _US_MACRO_TTL\n- DailyBriefPage/FundamentalsPage/BreadthTimingPanel 取 recovery 演进版（美国宏观/相关性图谱已在区外并入）\n- 运维手册章节重排消除重复编号（10~15 唯一化）\n- 恢复 stash@{0} 中的 V2 规则源码（dense_breakout/first_ma_pullback/reward_risk_filter 等 13 文件 + rules.v2.yaml）——修复 recovery 自 8-27 起测试与源码错配\n- 补注册 backtest.router（此前 /api/backtest/* 被 SPA 兜底吞掉返回 index.html）\n- 测试 1330 全过；前端 tsc + build 通过\n\n"
+    }
+  ]
+}

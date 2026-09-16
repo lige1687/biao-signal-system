@@ -1,0 +1,306 @@
+{
+  "task": "factor-research-workbench-v1",
+  "synthetic": true,
+  "title": "合成算法验证，非真实收益/有效性证据",
+  "production_authorization": "not_authorized",
+  "effectiveness_claim": "none；本运行不证明任何因子有效",
+  "spec_bindings": {
+    "experiment_backtest_principles": "docs/research/experiment-backtest-principles.md@v1.1",
+    "definition_standard": "docs/research/definition-standard.md@1.1.0",
+    "ai_execution_contract": "docs/research/ai-execution-contract.md@1.0.1",
+    "experiment_report_template": "docs/research/experiment-report-template.md@1.1.0",
+    "plan": "docs/superpowers/plans/2026-09-14-factor-research-workbench-v1.md@1.0.0"
+  },
+  "registry_version": "1.2.0",
+  "registry_canonical_sha256": "50dfe905a4664af668d6c4656033079d289879836fd50a8fb045aa00c8e756ee",
+  "definition_cards": {
+    "candidate:lei.dual_ma.bull_state@draft-1": {
+      "id": "candidate:lei.dual_ma.bull_state",
+      "version": "draft-1",
+      "name": "双均线共同确认状态（候选）",
+      "type": "state_signal",
+      "definition": {
+        "formula": "Close>EMA20 且 Close>SMA20，两均线相比前一观察上升，signal_color=green（读取当前状态，不要求同日上穿）",
+        "parameters": {
+          "ema": 20,
+          "sma": 20,
+          "color": "green"
+        },
+        "unit": "boolean"
+      },
+      "card_draft_path": "docs/experiments/raw/factor-research-workbench-v1-2026-09-14/candidate-card-dual-ma-bull-state-draft-1.md",
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "synthetic_only",
+        "implementation": "bound_to_existing_functions",
+        "effectiveness": "no_evidence",
+        "production": "not_authorized"
+      },
+      "readiness_semantics": "warmup/缺失行原函数输出False；适配层单列 readiness，未就绪行 value=NaN、missing_reason=warmup_not_ready"
+    },
+    "breadth.csi300.b50.common@1.0.0": {
+      "scope": "沪深300指数300成分（20交易日探测成员链）",
+      "not_for": [
+        "production_trade",
+        "unique_alpha_claim",
+        "prediction_from_contemporaneous_fit"
+      ],
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "P_signal",
+          "membership_by_date"
+        ],
+        "price_basis": "指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+        "currency": "各股票同尺度比值；无量纲，非投资收益",
+        "frequency": "daily",
+        "calendar": "SMA按各股有效报价；宽度输出按显式交易日历，不前填"
+      },
+      "universe": {
+        "version": "csi_members指纹：查询历史300名单，20交易日探测，可能漏段内往返",
+        "eligibility": "当日成员且当日真实报价且至少200有效收盘；B50/B200共用E200",
+        "warmup": "200有效收盘（包含当日）",
+        "missing": "停牌/缺报价不纳入当日E；新股不足200不合格；全无合格返回缺失原因",
+        "quality_gate": "eligible/当日成员总数>=0.90；等于0.90有效",
+        "degrade": "无名单/无合格/覆盖不足时两个宽度均缺失，不返回0"
+      },
+      "time": {
+        "observation_time": "t股票收盘",
+        "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+        "decision_at": "不得早于available_at",
+        "execution_at": "下一个允许成交的ETF开盘；周目标与确认各自有时钟",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+      },
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "共同分母不消除成员变更影响；输入成员必须当时生效且可知"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "isolated_formula_compared_on_member_change_sample; consumers_not_migrated",
+        "effectiveness": "level_definition_not_return_factor",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "breadth_code",
+        "breadth_protocol",
+        "breadth_prepare",
+        "breadth_inputs",
+        "breadth_quality"
+      ],
+      "id": "breadth.csi300.b50.common",
+      "version": "1.0.0",
+      "name": "csi300 B50共同分母（比例）",
+      "type": "state_signal",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "count(P>SMA50 in E200)/count(E200)",
+        "parameters": {
+          "window": 50,
+          "eligible_window": 200,
+          "minimum_coverage": 0.9,
+          "strict_above": true
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      }
+    },
+    "breadth.csi300.b200.common@1.0.0": {
+      "scope": "沪深300指数300成分（20交易日探测成员链）",
+      "not_for": [
+        "production_trade",
+        "unique_alpha_claim",
+        "prediction_from_contemporaneous_fit"
+      ],
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "P_signal",
+          "membership_by_date"
+        ],
+        "price_basis": "指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+        "currency": "各股票同尺度比值；无量纲，非投资收益",
+        "frequency": "daily",
+        "calendar": "SMA按各股有效报价；宽度输出按显式交易日历，不前填"
+      },
+      "universe": {
+        "version": "csi_members指纹：查询历史300名单，20交易日探测，可能漏段内往返",
+        "eligibility": "当日成员且当日真实报价且至少200有效收盘；B50/B200共用E200",
+        "warmup": "200有效收盘（包含当日）",
+        "missing": "停牌/缺报价不纳入当日E；新股不足200不合格；全无合格返回缺失原因",
+        "quality_gate": "eligible/当日成员总数>=0.90；等于0.90有效",
+        "degrade": "无名单/无合格/覆盖不足时两个宽度均缺失，不返回0"
+      },
+      "time": {
+        "observation_time": "t股票收盘",
+        "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+        "decision_at": "不得早于available_at",
+        "execution_at": "下一个允许成交的ETF开盘；周目标与确认各自有时钟",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+      },
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "共同分母不消除成员变更影响；输入成员必须当时生效且可知"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "B_limited_historical_membership",
+        "implementation": "isolated_formula_compared_on_member_change_sample; consumers_not_migrated",
+        "effectiveness": "level_definition_not_return_factor",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "breadth_code",
+        "breadth_protocol",
+        "breadth_prepare",
+        "breadth_inputs",
+        "breadth_quality"
+      ],
+      "id": "breadth.csi300.b200.common",
+      "version": "1.0.0",
+      "name": "csi300 B200共同分母（比例）",
+      "type": "state_signal",
+      "profile": "breadth",
+      "uses": [
+        "research_signal",
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "count(P>SMA200 in E200)/count(E200)",
+        "parameters": {
+          "window": 200,
+          "eligible_window": 200,
+          "minimum_coverage": 0.9,
+          "strict_above": true
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      }
+    }
+  },
+  "code_files": [
+    {
+      "path": "src/lei_signal/research/factor_lab/__init__.py",
+      "sha256": "ea269601b6b4fa5f1bb70f2dff555aca5a7afa236babc8005a8b4e7fd2d036c4"
+    },
+    {
+      "path": "src/lei_signal/research/factor_lab/contracts.py",
+      "sha256": "d9ff0e864a8f4600c134972e9815acc2143f1b7227e17de570fed4901e0988bc"
+    },
+    {
+      "path": "src/lei_signal/research/factor_lab/adapters.py",
+      "sha256": "5291aba7c429c67b8c5a890364b4dee377f2bc2fb4fd3423b6f0cd7918825de9"
+    },
+    {
+      "path": "src/lei_signal/research/factor_lab/diagnostics.py",
+      "sha256": "8250c7f96818eac77ba9cd917a29507716cb4e2966e244ff193074b8b0968a2b"
+    },
+    {
+      "path": "src/lei_signal/research/factor_lab/validation.py",
+      "sha256": "a0e5cd341f66ecb8628619dac8f92dafffa2a19bd393622fb44764abd7b4a581"
+    },
+    {
+      "path": "src/lei_signal/research/factor_lab/attribution.py",
+      "sha256": "1d27a8de64411c0a7ce8e242ef4be9d30028189938ae632f28b15b6c0890fe99"
+    },
+    {
+      "path": "src/lei_signal/research/factor_lab/runner.py",
+      "sha256": "c47fb8bce8e2e64b76901dfd735c4a39a7084a094155d575d50673644fd0e447"
+    },
+    {
+      "path": "src/lei_signal/research/definitions.py",
+      "sha256": "b6d5a35532644c371ffbfc541a21bd52c05114db9fcb1cc3071c1965ed41ad59"
+    },
+    {
+      "path": "src/lei_signal/research/momentum_prototype.py",
+      "sha256": "5425e4f5494710041ae42816bf259ac7cdc1ed6aaef01986ac1d3d34d90e568f"
+    },
+    {
+      "path": "src/lei_signal/research/factor_diagnostics.py",
+      "sha256": "70de5549e2831a4353d5000e011e5c93ef4c9798ce4909da943d079997d73a08"
+    },
+    {
+      "path": "src/lei_signal/rules/dual_ma.py",
+      "sha256": "5c41da87036e0e318bacab663aa5509d73f99f301f805a76559b016b99aa3f7c"
+    },
+    {
+      "path": "src/lei_signal/rules/lei_color.py",
+      "sha256": "ae6f3a2547cc37dd1ebdfea1bea206f932defdd8cd90d4061630914c0fc9d4d7"
+    },
+    {
+      "path": "src/lei_signal/features/indicators.py",
+      "sha256": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26"
+    }
+  ],
+  "protocol": {
+    "path": "protocol-2-state.json",
+    "version": "1.0.0",
+    "sha256": "7899ebba34fa71104516c196a5a699d4f8fbec15575a46f60836e69dfaa5f677"
+  },
+  "inputs": {
+    "bars_dm_a": {
+      "path": "synthetic_inputs/state_bars_dm_a.csv",
+      "sha256": "824142ed06ee0e9f6b55d0bb599b0f7acdaea6a5076f3133c31147715eb85487"
+    },
+    "bars_dm_b": {
+      "path": "synthetic_inputs/state_bars_dm_b.csv",
+      "sha256": "cee05419e8e096f27853f6d22ad2234fd7fb1ff6ae4fd522e8f40db8ea072d1d"
+    },
+    "state_breadth_close": {
+      "path": "synthetic_inputs/state_breadth_close.csv",
+      "sha256": "374da151042a538f4915fd8578c3f205450f3380277aa9d4cca57f42e8f530ca"
+    },
+    "state_membership": {
+      "path": "synthetic_inputs/state_membership.json",
+      "sha256": "cc18619c78aca9f043adfd81dc44f8ed81fdf86578a3c5c60d5b79e4506523d7"
+    }
+  },
+  "targets_protocol": null,
+  "split_protocol": null,
+  "attempt_history": [
+    {
+      "attempt": "fixture-v1",
+      "outcome": "abandoned",
+      "reason": "合成产品代码 'X' 与复用 build_marks 的6位代码 zfill 假设冲突；协议冻结前改用 '100001' 重建夹具（未运行任何正式案例）"
+    },
+    {
+      "attempt": "fixture-v2",
+      "outcome": "success",
+      "reason": "当前 synthetic_inputs 内容；期望全部来自独立手算脚本"
+    }
+  ],
+  "executor_model": "GLM (builtin:bigmodel-coding-plan/GLM-5.3-Flash) via ZCode"
+}

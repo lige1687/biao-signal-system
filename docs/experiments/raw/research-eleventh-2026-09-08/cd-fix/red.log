@@ -1,0 +1,71 @@
+F.FFF..                                                                  [100%]
+=================================== FAILURES ===================================
+_____________ test_c_new_breakdown_uses_only_latest_confirmed_low ______________
+
+    def test_c_new_breakdown_uses_only_latest_confirmed_low() -> None:
+        frame = _load("c-recent-valley.csv")
+        confirmed = [
+            event
+            for event in c.detect_two_b_reversal_events(frame, "SYNTH")
+            if event.evidence["sub_rule"] == c.SUB_RULE_V1
+        ]
+>       assert {event.evidence["l1_price"] for event in confirmed} == {101.0}
+E       assert {100.0, 101.0} == {101.0}
+E         
+E         Extra items in the left set:
+E         100.0
+E         Use -v to get more diff
+
+docs/experiments/raw/research-eleventh-2026-09-08/cd-fix/test_cd_fix.py:42: AssertionError
+____________ test_d_new_breakdown_uses_only_latest_confirmed_valley ____________
+
+    def test_d_new_breakdown_uses_only_latest_confirmed_valley() -> None:
+        frame = _load("d-recent-valley.csv")
+        confirmed = [
+            event
+            for event in d.detect_module_d_events(frame, "SYNTH")
+            if event.evidence["sub_rule"] == d.SUB_RULE_CONFIRMED
+        ]
+>       assert {event.evidence["valley_price"] for event in confirmed} == {99.2}
+E       assert {99.0, 99.2} == {99.2}
+E         
+E         Extra items in the left set:
+E         99.0
+E         Use -v to get more diff
+
+docs/experiments/raw/research-eleventh-2026-09-08/cd-fix/test_cd_fix.py:61: AssertionError
+_______ test_d_all_219_prefixes_equal_published_full_history_all_fields ________
+
+    def test_d_all_219_prefixes_equal_published_full_history_all_fields() -> None:
+        frame = _load("d-future-zone-end.csv")
+        full = _serial(d.detect_module_d_events(frame, "SYNTH"))
+        for cut in range(1, 220):
+            prefix = _serial(d.detect_module_d_events(frame.iloc[:cut], "SYNTH"))
+            known = [event for event in full if event["available_date"] <= str(frame.index[cut - 1].date())]
+>           assert prefix == known, f"D prefix {cut} changed published fields"
+E           AssertionError: D prefix 197 changed published fields
+E           assert [{'available_...:2024-09-30'}] == []
+E             
+E             Left contains one more item: {'available_date': '2024-10-02', 'event_id': 'module_d_false_breakout:a77957d93055e6a4767498d9', 'evidence': {'bars_to...te': '2024-10-01', 'close': 100.5, 'false_low': 97.5, ...}, 'lifecycle_id': 'module_d_false_breakout:SYNTH:2024-09-30'}
+E             Use -v to get more diff
+
+docs/experiments/raw/research-eleventh-2026-09-08/cd-fix/test_cd_fix.py:70: AssertionError
+_______ test_d_zone_stays_open_for_first_20_absent_bars_and_ends_on_21st _______
+
+    def test_d_zone_stays_open_for_first_20_absent_bars_and_ends_on_21st() -> None:
+        frame = _load("d-future-zone-end.csv")
+        reclaim_window, threshold, minimum, exit_bars = d._params(get_rule(d.RULE_ID))
+        del reclaim_window
+        through_20 = d._zone_intervals(frame.iloc[:211], threshold, minimum, exit_bars)
+        through_21 = d._zone_intervals(frame.iloc[:212], threshold, minimum, exit_bars)
+        assert through_20[-1][1] == 211
+>       assert through_21[-1][1] == 211
+E       assert 191 == 211
+
+docs/experiments/raw/research-eleventh-2026-09-08/cd-fix/test_cd_fix.py:80: AssertionError
+=========================== short test summary info ============================
+FAILED docs/experiments/raw/research-eleventh-2026-09-08/cd-fix/test_cd_fix.py::test_c_new_breakdown_uses_only_latest_confirmed_low
+FAILED docs/experiments/raw/research-eleventh-2026-09-08/cd-fix/test_cd_fix.py::test_d_new_breakdown_uses_only_latest_confirmed_valley
+FAILED docs/experiments/raw/research-eleventh-2026-09-08/cd-fix/test_cd_fix.py::test_d_all_219_prefixes_equal_published_full_history_all_fields
+FAILED docs/experiments/raw/research-eleventh-2026-09-08/cd-fix/test_cd_fix.py::test_d_zone_stays_open_for_first_20_absent_bars_and_ends_on_21st
+4 failed, 3 passed in 0.61s

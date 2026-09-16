@@ -1,0 +1,2346 @@
+{
+  "created_at_utc": "2026-09-08T05:14:24.579840+00:00",
+  "scope": "read-only local evidence inspection; no strategy execution",
+  "search_scope": [
+    "old INDEX and registry",
+    "listed module/exit/portfolio reports and scripts",
+    "previous frozen cash research",
+    "latest user task sections 4, 6, 7"
+  ],
+  "negative_search_claim": "No direct matched-budget full B versus plain breakout comparison located within the inspected scope; not a claim about every historical disk file.",
+  "files": [
+    {
+      "id": "S01",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/AGENTS.md",
+      "origin": "old_source",
+      "relative_reference": "AGENTS.md",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "6923182fa18764550d10c051454301638ff0492b1019454c0e67704f270f9db2",
+      "bytes": 5820,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# 项目级约束（对所有 agent 生效）"
+        },
+        {
+          "line": 3,
+          "text": "## 第零步：任何技术改造之前，先读策略文档"
+        },
+        {
+          "line": 24,
+          "text": "## UI 层：只改 web/，不改 Streamlit"
+        },
+        {
+          "line": 34,
+          "text": "## 实验归档规约（2026-09-04 起强制，供「实验报告库」页面展示）"
+        },
+        {
+          "line": 53,
+          "text": "## 其他既有约束（提醒）"
+        },
+        {
+          "line": 62,
+          "text": "## 说人话（对用户的所有输出，以及新产出的报告文档，强制执行）"
+        }
+      ],
+      "frozen_copy": "source-copies/S01-AGENTS.md"
+    },
+    {
+      "id": "S02",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/trading-spec-v1.md",
+      "origin": "old_source",
+      "relative_reference": "docs/trading-spec-v1.md",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "dd75d70cd22b103e815d3b314b47c36731230aa268d05e42fa447ba55e639798",
+      "bytes": 15726,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# LEI 单一标的技术交易系统——回测规格"
+        },
+        {
+          "line": 9,
+          "text": "## 1. 重要说明"
+        },
+        {
+          "line": 20,
+          "text": "## 2. 系统的核心逻辑"
+        },
+        {
+          "line": 22,
+          "text": "### 2.1 价量时空"
+        },
+        {
+          "line": 29,
+          "text": "### 2.2 先判断道路，再观察路牌"
+        },
+        {
+          "line": 36,
+          "text": "### 2.3 什么逻辑进场，就用什么逻辑退出"
+        },
+        {
+          "line": 44,
+          "text": "## 3. 数据和回测约定"
+        },
+        {
+          "line": 46,
+          "text": "### 3.1 最低数据要求"
+        },
+        {
+          "line": 53,
+          "text": "### 3.2 防止未来数据泄漏"
+        },
+        {
+          "line": 60,
+          "text": "### 3.3 成交和跳空"
+        },
+        {
+          "line": 63,
+          "text": "## 4. 指标定义"
+        },
+        {
+          "line": 65,
+          "text": "### 4.1 双均线组"
+        },
+        {
+          "line": 68,
+          "text": "### 4.2 抵扣价与 SMA 方向"
+        },
+        {
+          "line": 71,
+          "text": "### 4.3 EMA 方向"
+        },
+        {
+          "line": 74,
+          "text": "### 4.4 基础趋势状态"
+        },
+        {
+          "line": 77,
+          "text": "### 4.5 均线排列"
+        },
+        {
+          "line": 80,
+          "text": "### 4.6 均线密集"
+        },
+        {
+          "line": 84,
+          "text": "### 4.7 乖离率"
+        },
+        {
+          "line": 87,
+          "text": "### 4.8 成交量异常"
+        },
+        {
+          "line": 91,
+          "text": "## 5. 趋势五步状态机"
+        },
+        {
+          "line": 95,
+          "text": "## 6. 多周期处理"
+        },
+        {
+          "line": 107,
+          "text": "## 7. 顶底构造"
+        },
+        {
+          "line": 109,
+          "text": "### 7.1 顶部构造"
+        },
+        {
+          "line": 112,
+          "text": "### 7.2 底部构造"
+        },
+        {
+          "line": 115,
+          "text": "### 7.3 包含关系"
+        },
+        {
+          "line": 122,
+          "text": "### 7.4 信号性质"
+        },
+        {
+          "line": 125,
+          "text": "## 8. 关键性波动"
+        },
+        {
+          "line": 127,
+          "text": "### 8.1 多头趋势中的反向关键波动"
+        },
+        {
+          "line": 131,
+          "text": "### 8.2 空头趋势中的向上关键波动"
+        },
+        {
+          "line": 134,
+          "text": "### 8.3 回测用途"
+        },
+        {
+          "line": 141,
+          "text": "## 9. 四个可独立回测的交易模块"
+        },
+        {
+          "line": 143,
+          "text": "### 模块 A：稳定上升趋势回调"
+        },
+        {
+          "line": 165,
+          "text": "### 模块 B：均线密集区突破"
+        },
+        {
+          "line": 174,
+          "text": "### 模块 C：2B / 破底翻反转"
+        },
+        {
+          "line": 185,
+          "text": "### 模块 D：假突破反向交易"
+        },
+        {
+          "line": 192,
+          "text": "## 10. 盈亏比过滤"
+        },
+        {
+          "line": 198,
+          "text": "## 11. 筹码分布的可选过滤器"
+        },
+        {
+          "line": 203,
+          "text": "## 12. 信号冲突处理"
+        },
+        {
+          "line": 207,
+          "text": "## 13. 无交易条件"
+        },
+        {
+          "line": 219,
+          "text": "## 14. 单笔交易状态机"
+        },
+        {
+          "line": 222,
+          "text": "## 15. 建议的基础回测顺序"
+        },
+        {
+          "line": 228,
+          "text": "## 16. 回测输出要求"
+        },
+        {
+          "line": 231,
+          "text": "## 17. 必须由回测者确认的参数"
+        },
+        {
+          "line": 254,
+          "text": "## 18. 可直接交给回测 AI 的任务指令"
+        },
+        {
+          "line": 257,
+          "text": "## 19. 主要原始材料"
+        },
+        {
+          "line": 270,
+          "text": "## 20. 最简策略摘要"
+        }
+      ],
+      "frozen_copy": "source-copies/S02-trading-spec-v1.md"
+    },
+    {
+      "id": "S03",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/configs/rules.v1.yaml",
+      "origin": "old_source",
+      "relative_reference": "configs/rules.v1.yaml",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "9be26a1626fdf6351478b40b388907e9d8128f74b6bd4aa2b8ff4a850cfdcfd2",
+      "bytes": 36540,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# LEI 信号系统规则账本 v1"
+        },
+        {
+          "line": 2,
+          "text": "#"
+        },
+        {
+          "line": 3,
+          "text": "# provenance 取值："
+        },
+        {
+          "line": 4,
+          "text": "#   lei_explicit    - LEI 视频明确讲出的规则"
+        },
+        {
+          "line": 5,
+          "text": "#   lei_inferred    - 根据视频画面与数学关系复原"
+        },
+        {
+          "line": 6,
+          "text": "#   existing_backtest - 旧回测采用的工程定义"
+        },
+        {
+          "line": 7,
+          "text": "#   research_proxy  - 为量化建立的代理指标，不冒充作者原始规则"
+        },
+        {
+          "line": 8,
+          "text": "#   user_config     - 用户自行选择的参数或阈值"
+        },
+        {
+          "line": 9,
+          "text": "#"
+        },
+        {
+          "line": 10,
+          "text": "# 任何 research_proxy 必须在界面标注「研究代理」。"
+        },
+        {
+          "line": 11,
+          "text": "# 阈值只能在此文件调整，且必须同时提升 version。禁止为迎合回测结果修改公式。"
+        },
+        {
+          "line": 629,
+          "text": "# ---------------- 状态机 ----------------"
+        },
+        {
+          "line": 651,
+          "text": "# ---------------- 风险提示优先级（仅决定排序，不自动卖出）----------------"
+        }
+      ],
+      "frozen_copy": "source-copies/S03-rules.v1.yaml"
+    },
+    {
+      "id": "S04",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/configs/rules.v2.yaml",
+      "origin": "old_source",
+      "relative_reference": "configs/rules.v2.yaml",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+      "bytes": 83873,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# LEI 信号系统规则账本 v2"
+        },
+        {
+          "line": 2,
+          "text": "#"
+        },
+        {
+          "line": 3,
+          "text": "# 溯源层级（V2 起）："
+        },
+        {
+          "line": 4,
+          "text": "#   最高溯源 = docs/handbook-30-videos.md（手册，引用格式「手册 x.y」）"
+        },
+        {
+          "line": 5,
+          "text": "#   实施规格 = docs/trading-spec-v2.md（V2.2 回测规格，2026-08-24；V2.1 已存档 trading-spec-v2.1.md）"
+        },
+        {
+          "line": 6,
+          "text": "#   audit 对照 = docs/trading-spec-v1.md + configs/rules.v1.yaml（1.5.0，冻结）"
+        },
+        {
+          "line": 7,
+          "text": "#"
+        },
+        {
+          "line": 8,
+          "text": "# provenance 取值："
+        },
+        {
+          "line": 9,
+          "text": "#   lei_explicit    - 手册/视频明确讲出的规则"
+        },
+        {
+          "line": 10,
+          "text": "#   lei_inferred    - 根据视频画面与数学关系复原"
+        },
+        {
+          "line": 11,
+          "text": "#   existing_backtest - 旧回测采用的工程定义"
+        },
+        {
+          "line": 12,
+          "text": "#   research_proxy  - 为量化建立的代理指标，不冒充作者原始规则"
+        },
+        {
+          "line": 13,
+          "text": "#   user_config     - 用户自行选择的参数或阈值"
+        },
+        {
+          "line": 14,
+          "text": "#"
+        },
+        {
+          "line": 15,
+          "text": "# 任何 research_proxy 必须在界面标注「研究代理」。"
+        },
+        {
+          "line": 16,
+          "text": "# 阈值只能在此文件调整，且必须同时提升 version。禁止为迎合回测结果修改公式。"
+        },
+        {
+          "line": 17,
+          "text": "#"
+        },
+        {
+          "line": 18,
+          "text": "# implementation_status（ruleset 2.0.0 新增，描述 formula 与代码的关系）："
+        },
+        {
+          "line": 19,
+          "text": "#   缺省        - formula 即当前 Python 判定层已实现语义，账本即实况"
+        },
+        {
+          "line": 20,
+          "text": "#   pending_v2  - 规格 V2.1 已定、代码未实现的排期项（按规格 §15 轮次落地）："
+        },
+        {
+          "line": 21,
+          "text": "#                 新增规则：formula 为 V2 目标契约，落地前无任何代码读取本条；"
+        },
+        {
+          "line": 22,
+          "text": "#                 既有规则：formula 仍是 v1 现行语义（代码口径），V2 重写目标见"
+        },
+        {
+          "line": 23,
+          "text": "#                 note_cn「V2 目标」段，重写落地时同步更新 formula 与 version。"
+        },
+        {
+          "line": 24,
+          "text": "#"
+        },
+        {
+          "line": 25,
+          "text": "# 〔标定 V2.1，待彪哥确认〕= 规格作者未给数值、V2.1 讨论稿标定的默认值（规格 §17）："
+        },
+        {
+          "line": 26,
+          "text": "# 确认前按默认值执行、不得视为作者标准；全部保留规格 §17 敏感性测试。"
+        },
+        {
+          "line": 1278,
+          "text": "# ---------------- 状态机 ----------------"
+        },
+        {
+          "line": 1300,
+          "text": "# ---------------- 风险提示优先级（仅决定排序，不自动卖出）----------------"
+        }
+      ],
+      "frozen_copy": "source-copies/S04-rules.v2.yaml"
+    },
+    {
+      "id": "S05",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/.claude/skills/macd-reading/SKILL.md",
+      "origin": "old_source",
+      "relative_reference": ".claude/skills/macd-reading/SKILL.md",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "4a75dea4cb8f0ad2d1cb450c1d4237d87cc5c5b7f50f3eacda10880164c731ab",
+      "bytes": 5902,
+      "anchors": [
+        {
+          "line": 6,
+          "text": "# MACD 解读 skill"
+        },
+        {
+          "line": 14,
+          "text": "## 定义（不可改写）"
+        },
+        {
+          "line": 24,
+          "text": "## 趋势转折 5 步骤：MACD 能交代与不能交代的部分"
+        },
+        {
+          "line": 37,
+          "text": "## 数据从哪里来（只读，不自算）"
+        },
+        {
+          "line": 51,
+          "text": "## 八种状态与讲法"
+        },
+        {
+          "line": 66,
+          "text": "## 表达红线（与 lei-supervisor 一致，任何时刻不得突破）"
+        },
+        {
+          "line": 81,
+          "text": "## 讲解骨架"
+        },
+        {
+          "line": 91,
+          "text": "## 不要做的事"
+        }
+      ],
+      "frozen_copy": "source-copies/S05-SKILL.md"
+    },
+    {
+      "id": "S06",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/plan-sector-trend-page.md",
+      "origin": "old_source",
+      "relative_reference": "docs/plan-sector-trend-page.md",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "921a483e16081fa975216a6f498a6af8654508df65be4feed64d8d593c24b23d",
+      "bytes": 26061,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# 行业板块趋势工作台 · 执行方案 v1"
+        },
+        {
+          "line": 5,
+          "text": "## 0. 目标与定位"
+        },
+        {
+          "line": 15,
+          "text": "## 1. 关键前提（全部已勘察确认）"
+        },
+        {
+          "line": 31,
+          "text": "## 2. 红线（全程遵守，逐条可验收）"
+        },
+        {
+          "line": 42,
+          "text": "## 3. 分阶段交付"
+        },
+        {
+          "line": 54,
+          "text": "## P0 · 修 universe：补科创板（阻塞项）"
+        },
+        {
+          "line": 56,
+          "text": "### P0.1 `src/lei_signal/market_context/a_share_breadth.py`"
+        },
+        {
+          "line": 63,
+          "text": "### P0.2 回补日K缓存"
+        },
+        {
+          "line": 71,
+          "text": "## P1 · 预计算层"
+        },
+        {
+          "line": 73,
+          "text": "### P1.1 新模块 `src/lei_signal/market_context/sector_trend.py`（全部逻辑在此，脚本只是 CLI 壳）"
+        },
+        {
+          "line": 77,
+          "text": "#### a) 成分股映射 `fetch_sector_members()`"
+        },
+        {
+          "line": 90,
+          "text": "#### b) 层级判定与去重（纯函数）"
+        },
+        {
+          "line": 100,
+          "text": "#### c) 等权指数合成（纯函数，单测重点）"
+        },
+        {
+          "line": 116,
+          "text": "#### d) RS 相对强度（纯函数）"
+        },
+        {
+          "line": 123,
+          "text": "#### e) 板块宽度（纯函数）"
+        },
+        {
+          "line": 130,
+          "text": "#### f) 趋势读出（复用规则引擎 4 个轻入口）"
+        },
+        {
+          "line": 143,
+          "text": "#### g) 阶段判定 Stage（纯函数，标 research_proxy）"
+        },
+        {
+          "line": 154,
+          "text": "#### h) 落盘产物（全部原子写，根目录 = `Path(os.environ.get(\"LEI_CACHE_ROOT\", str(DEFAULT_CACHE_DIR)))`）"
+        },
+        {
+          "line": 164,
+          "text": "#### i) 与现有 16:30 任务的关系"
+        },
+        {
+          "line": 168,
+          "text": "### P1.2 CLI `scripts/precompute_sector_trend.py`"
+        },
+        {
+          "line": 172,
+          "text": "### P1.3 单测 `tests/unit/test_sector_trend.py`（`a_share_breadth` 至今零覆盖，这里立标准）"
+        },
+        {
+          "line": 185,
+          "text": "## P2 · 后端 API"
+        },
+        {
+          "line": 187,
+          "text": "### P2.1 新路由 `src/lei_signal/api/routes/sectors.py`"
+        },
+        {
+          "line": 202,
+          "text": "### P2.2 单测 `tests/unit/test_sectors_api.py`"
+        },
+        {
+          "line": 209,
+          "text": "## P3 · 前端 `/sectors` 页"
+        },
+        {
+          "line": 211,
+          "text": "### P3.1 先抽共享件（纯重构，零行为变化，独立提交）"
+        },
+        {
+          "line": 224,
+          "text": "### P3.2 类型 `web/src/types.ts` 末尾追加"
+        },
+        {
+          "line": 257,
+          "text": "### P3.3 API client `web/src/api/client.ts` L314 后追加"
+        },
+        {
+          "line": 271,
+          "text": "### P3.4 页面 `web/src/pages/SectorsPage.tsx`"
+        },
+        {
+          "line": 292,
+          "text": "### P3.5 验收"
+        },
+        {
+          "line": 301,
+          "text": "## P4 · launchd 接线 + 运维"
+        },
+        {
+          "line": 309,
+          "text": "## 交付顺序与提交节奏"
+        },
+        {
+          "line": 322,
+          "text": "## 验收门禁（全部满足才算交付）"
+        },
+        {
+          "line": 331,
+          "text": "## 不做（本期）"
+        }
+      ],
+      "frozen_copy": "source-copies/S06-plan-sector-trend-page.md"
+    },
+    {
+      "id": "S07",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/domain/rules_config.py",
+      "origin": "old_source",
+      "relative_reference": "src/lei_signal/domain/rules_config.py",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031",
+      "bytes": 2987,
+      "anchors": [
+        {
+          "line": 15,
+          "text": "def _default_config_path() -> Path:"
+        }
+      ],
+      "frozen_copy": "source-copies/S07-rules_config.py"
+    },
+    {
+      "id": "S08",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/rules/dense_breakout.py",
+      "origin": "old_source",
+      "relative_reference": "src/lei_signal/rules/dense_breakout.py",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "ffb37ff38e99c31c4f4723a2046290a326c6c9086121c14dabd3a714c5764c3b",
+      "bytes": 16376,
+      "anchors": [
+        {
+          "line": 51,
+          "text": "#: 借用 tradability_gate 的密集参数（单一来源，避免双写阈值）。"
+        }
+      ],
+      "frozen_copy": "source-copies/S08-dense_breakout.py"
+    },
+    {
+      "id": "S09",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/backtest/engine.py",
+      "origin": "old_source",
+      "relative_reference": "src/lei_signal/backtest/engine.py",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "ca9fe8344aa5580edfa95d14104dc889645cf9d5d389f632bdd9c5417e331d62",
+      "bytes": 18231,
+      "anchors": [
+        {
+          "line": 88,
+          "text": "#: 四个交易模块的入场事件契约：rule_id / 确认子规则 / 变体字段 / 变体取值。"
+        },
+        {
+          "line": 89,
+          "text": "#: D 单版本（无变体字段）。变体事件按 evidence 对应字段匹配。"
+        },
+        {
+          "line": 283,
+          "text": "def simulate_trade("
+        }
+      ],
+      "frozen_copy": "source-copies/S09-engine.py"
+    },
+    {
+      "id": "S10",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/INDEX.md",
+      "origin": "old_source",
+      "relative_reference": "docs/experiments/INDEX.md",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "c251f1bf4975ee429090790719f932917c7eb6e2381f99306721474985af5667",
+      "bytes": 32874,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# docs/experiments 总索引"
+        },
+        {
+          "line": 13,
+          "text": "## 0. 新会话入口（按顺序读）"
+        },
+        {
+          "line": 29,
+          "text": "## 1. 任务编号总账（任务书 → 执行归档）"
+        },
+        {
+          "line": 31,
+          "text": "### 9-07 超级入口增量评估"
+        },
+        {
+          "line": 66,
+          "text": "### 9-01 轮（A–M，任务书合订本：`prompts-2026-09-01.md`）"
+        },
+        {
+          "line": 84,
+          "text": "### 9-02 单发（N–X，任务书各自单独成文件）"
+        },
+        {
+          "line": 100,
+          "text": "### 9-03 本轮拆分（任务书已入库；已全部执行，见下方 9-03~04 会话四批节）"
+        },
+        {
+          "line": 112,
+          "text": "### 9-04 轮（AU–AW，会话内自研自跑，预注册+双跑哈希同前例）"
+        },
+        {
+          "line": 125,
+          "text": "### 9-05 单发（用户直发任务）"
+        },
+        {
+          "line": 134,
+          "text": "### 9-06 单发（用户直发任务）"
+        },
+        {
+          "line": 160,
+          "text": "### 9-03~04 会话四批（Y–BC，交接总表：`session-handoff-manifest-2026-09-04.md`）"
+        },
+        {
+          "line": 194,
+          "text": "## 2. 归档按主题（每份文件只归一组，标题即内容摘要）"
+        },
+        {
+          "line": 196,
+          "text": "### 元与跨组"
+        },
+        {
+          "line": 205,
+          "text": "### 宽度择时主线（大盘冷热信号）"
+        },
+        {
+          "line": 212,
+          "text": "### 入场模块与标的池（8-25～8-28 早期探索 + 后续板块/判别器）"
+        },
+        {
+          "line": 228,
+          "text": "### 出场与止损"
+        },
+        {
+          "line": 237,
+          "text": "### 仓位与波动机制"
+        },
+        {
+          "line": 246,
+          "text": "### 组合与资金层"
+        },
+        {
+          "line": 257,
+          "text": "### 宏观/情绪/估值确认层（触发路线，基本全线判负）"
+        },
+        {
+          "line": 270,
+          "text": "### 宽基/全池/持仓/数据质量专项（9-02）"
+        },
+        {
+          "line": 280,
+          "text": "## 3. raw/ 数据目录对照"
+        },
+        {
+          "line": 308,
+          "text": "## 4. 悬案与未执行清单"
+        },
+        {
+          "line": 326,
+          "text": "## 5. 相邻目录"
+        }
+      ],
+      "frozen_copy": "source-copies/S10-INDEX.md",
+      "original_registry_entry": {
+        "category": "研究总纲",
+        "oneLiner": "docs/experiments 总索引：按任务编号和主题两条路查所有归档；新归档要顺手补行，机器可读版见同目录 registry.json。"
+      }
+    },
+    {
+      "id": "S11",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/registry.json",
+      "origin": "old_source",
+      "relative_reference": "docs/experiments/registry.json",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "2b28335398321ce7a76a868db90e5c12665e2495f51dc4cd453ef1f278b47da4",
+      "bytes": 50064,
+      "top_level_keys": [
+        "version",
+        "note",
+        "categories",
+        "entries"
+      ],
+      "frozen_copy": "source-copies/S11-registry.json"
+    },
+    {
+      "id": "S12",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/bcd-retrial-report-2026-08-26.md",
+      "origin": "old_source",
+      "relative_reference": "docs/experiments/bcd-retrial-report-2026-08-26.md",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "2b3ea1e09ecc4f8a7bf3b529f5677c7c4625275460cb75466c8d04a01129c9f5",
+      "bytes": 17339,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# B/C/D 公平重测报告（2026-08-26）"
+        },
+        {
+          "line": 8,
+          "text": "## 0. TL;DR（给彪哥的四条建议）"
+        },
+        {
+          "line": 29,
+          "text": "## 1. 复活判据（事前定死）"
+        },
+        {
+          "line": 40,
+          "text": "## 2. 第一步：C × 缩量 × 真空矩阵（零新数据，ETF 池）"
+        },
+        {
+          "line": 47,
+          "text": "### 2.1 主表（a6_1_costbasis 抵扣价退出，公平台，全池）"
+        },
+        {
+          "line": 71,
+          "text": "### 2.2 判据的分辨力问题（诚实披露）"
+        },
+        {
+          "line": 89,
+          "text": "### 2.3 a6_3（C 原生失效 = 破 L2）侧：全灭 + 口径警示"
+        },
+        {
+          "line": 97,
+          "text": "### 2.4 ETF 池分年份与分标的（候选档 v2/v3 shrink，全池）"
+        },
+        {
+          "line": 106,
+          "text": "## 3. 个股池（第二步 2.0）"
+        },
+        {
+          "line": 122,
+          "text": "## 4. 个股池重测（第二步 2.2 / 2.3）"
+        },
+        {
+          "line": 130,
+          "text": "### 4.1 C：个股池建议复活（观察档）"
+        },
+        {
+          "line": 174,
+          "text": "### 4.2 B：个股池维持原判"
+        },
+        {
+          "line": 198,
+          "text": "### 4.3 D：个股池维持原判（无统计力）"
+        },
+        {
+          "line": 203,
+          "text": "### 4.4 A 基准对照 + 缩量的「池类型」交互"
+        },
+        {
+          "line": 222,
+          "text": "## 5. 「标的×模块」适配矩阵初稿"
+        },
+        {
+          "line": 249,
+          "text": "## 6. 纪律与边界"
+        },
+        {
+          "line": 261,
+          "text": "## 附表 A：个股池 82 只"
+        }
+      ],
+      "frozen_copy": "source-copies/S12-bcd-retrial-report-2026-08-26.md",
+      "original_registry_entry": {
+        "category": "模块与信号",
+        "verdict": "falsified",
+        "oneLiner": "B/C/D 三个模块的公平重测：C 模块加缩量过滤也没能从零轴劈开，ETF 池维持原判；个股池的复活判据也未达到。"
+      }
+    },
+    {
+      "id": "S13",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/b-adaptation-report-2026-08-26.md",
+      "origin": "old_source",
+      "relative_reference": "docs/experiments/b-adaptation-report-2026-08-26.md",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "8219eea498f1b84b126468e4c132411bea4f1e02e218da98e2b07daddb386557",
+      "bytes": 22907,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# B 模块全谱参数 × 标的类型适配实验报告"
+        },
+        {
+          "line": 11,
+          "text": "## 0. 一句话结论"
+        },
+        {
+          "line": 24,
+          "text": "## 1. 实验设计"
+        },
+        {
+          "line": 26,
+          "text": "### 1.1 参数空间（全谱 49 档）"
+        },
+        {
+          "line": 35,
+          "text": "### 1.2 标的分组（5 组，各自独立选档）"
+        },
+        {
+          "line": 47,
+          "text": "### 1.3 组内合格档判据（事前定死，与 bcd-retrial 同口径）"
+        },
+        {
+          "line": 62,
+          "text": "## 2. 主结果：组×最优档适配表"
+        },
+        {
+          "line": 85,
+          "text": "### 2.1 适配增量"
+        },
+        {
+          "line": 113,
+          "text": "## 3. 适配是否成立：判定与可信度"
+        },
+        {
+          "line": 115,
+          "text": "### 3.1 分散度判定（机械判据）"
+        },
+        {
+          "line": 132,
+          "text": "### 3.2 但可信度要打折（必须一起看的三点）"
+        },
+        {
+          "line": 140,
+          "text": "### 3.3 可信的跨时段发现：个股组（主轴 cb30/cl3% + 埋伏 cb20/cl8%）"
+        },
+        {
+          "line": 154,
+          "text": "### 3.4 默认档 cb=126/cl=2% 的事实"
+        },
+        {
+          "line": 163,
+          "text": "## 4. 其他组合对照（放量确认 / 结构止损 / 埋伏）"
+        },
+        {
+          "line": 180,
+          "text": "## 5. 全谱热力表"
+        },
+        {
+          "line": 184,
+          "text": "### 5.1 expR 热力表（整体期望）"
+        },
+        {
+          "line": 208,
+          "text": "### 5.2 OOS 热力表（样本外两年）"
+        },
+        {
+          "line": 238,
+          "text": "## 6. 诊断工具：`scripts/diagnose_dense_zone.py`"
+        },
+        {
+          "line": 242,
+          "text": "### 6.1 用法"
+        },
+        {
+          "line": 245,
+          "text": "# 默认账本档 cb=126 / cl=2%，全段"
+        },
+        {
+          "line": 248,
+          "text": "# 指定区间 + 临时覆盖参数"
+        },
+        {
+          "line": 251,
+          "text": "# 对每个漏检横盘段扫全谱，给出哪些 (cb,cl) 档能捕捉"
+        },
+        {
+          "line": 255,
+          "text": "### 6.2 输出内容"
+        },
+        {
+          "line": 263,
+          "text": "### 6.3 验证"
+        },
+        {
+          "line": 273,
+          "text": "## 7. 彪哥指认区间归因 —— ⏳ 待补"
+        },
+        {
+          "line": 284,
+          "text": "## 8. 建议（建议级，不改账本默认）"
+        },
+        {
+          "line": 294,
+          "text": "## 附：复现方式"
+        },
+        {
+          "line": 297,
+          "text": "# 全谱扫描（已完成，可断点续跑，skip-if-exists）"
+        },
+        {
+          "line": 300,
+          "text": "# 汇总（严格判据：N≥30、expR>0、OOS>0、ex-top1>0）"
+        },
+        {
+          "line": 303,
+          "text": "# 单标的诊断"
+        },
+        {
+          "line": 311,
+          "text": "## 追加实验：牛熊市分组 + 统一风险单位（2026-08-27，彪哥要求）"
+        }
+      ],
+      "frozen_copy": "source-copies/S13-b-adaptation-report-2026-08-26.md",
+      "original_registry_entry": {
+        "category": "模块与信号"
+      }
+    },
+    {
+      "id": "S14",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/module-b-robustness-2026-09-03.md",
+      "origin": "old_source",
+      "relative_reference": "docs/experiments/module-b-robustness-2026-09-03.md",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "fe2df6a391eda915415be9ed459031b180fd0ca45ea5738bb9f9d63063cd845c",
+      "bytes": 8248,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# 模块B（密集突破）干净数据正期望的稳健性归档：是广泛分布还是少数几笔撑起来的"
+        },
+        {
+          "line": 8,
+          "text": "## 大白话（先说结论）"
+        },
+        {
+          "line": 24,
+          "text": "## 1. 被复核结论与复现"
+        },
+        {
+          "line": 32,
+          "text": "## 2. 预注册稳健性框架（跑前写死，全文照录脚本 docstring）"
+        },
+        {
+          "line": 46,
+          "text": "## 3. 结果分解"
+        },
+        {
+          "line": 48,
+          "text": "### 3.1 D1 逐笔集中度（压线）"
+        },
+        {
+          "line": 59,
+          "text": "### 3.2 D2 时间分散（过线，但年份集中度偏高）"
+        },
+        {
+          "line": 75,
+          "text": "### 3.3 D3 标的 leave-one-out（全正，最宽裕的一维）"
+        },
+        {
+          "line": 84,
+          "text": "### 3.4 D4 胜率结构（描述性）"
+        },
+        {
+          "line": 88,
+          "text": "## 4. 判定"
+        },
+        {
+          "line": 92,
+          "text": "## 5. 复现与红线"
+        }
+      ],
+      "frozen_copy": "source-copies/S14-module-b-robustness-2026-09-03.md",
+      "original_registry_entry": {
+        "category": "模块与信号",
+        "verdict": "passed"
+      }
+    },
+    {
+      "id": "S15",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/regime-gate-report-2026-08-27.md",
+      "origin": "old_source",
+      "relative_reference": "docs/experiments/regime-gate-report-2026-08-27.md",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "f8d56591b572773bc6ad17b8a9930b69df04d64823b914a4771ce90ae38f34d0",
+      "bytes": 15034,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# 市场状态门禁 + A/B 轮动实验报告"
+        },
+        {
+          "line": 12,
+          "text": "## 0. 一句话结论"
+        },
+        {
+          "line": 24,
+          "text": "## 1. 实验设计"
+        },
+        {
+          "line": 26,
+          "text": "### 1.1 池与参数（全部照抄 handoff）"
+        },
+        {
+          "line": 37,
+          "text": "### 1.2 基准时钟的工程要点（复现必读）"
+        },
+        {
+          "line": 41,
+          "text": "### 1.3 判定标准（事前写死，见脚本 docstring）"
+        },
+        {
+          "line": 49,
+          "text": "## 2. 任务一：B 的市场状态门禁"
+        },
+        {
+          "line": 51,
+          "text": "### 2.1 门禁矩阵（18 组）"
+        },
+        {
+          "line": 76,
+          "text": "### 2.2 回答：横市门禁挡掉的是不是牛市亏损单？——分池而论"
+        },
+        {
+          "line": 93,
+          "text": "### 2.3 回答：个股池 +1.17 门禁后到多少"
+        },
+        {
+          "line": 99,
+          "text": "### 2.4 计划外发现：a6_1_costbasis 退出在 B 上全面强于 b3_dual"
+        },
+        {
+          "line": 105,
+          "text": "## 3. 任务二：A/B 按基准状态轮动"
+        },
+        {
+          "line": 109,
+          "text": "### 3.1 四组总览"
+        },
+        {
+          "line": 120,
+          "text": "### 3.2 轮动增益的完全分解（增益从哪来）"
+        },
+        {
+          "line": 129,
+          "text": "### 3.3 分年（cumR）"
+        },
+        {
+          "line": 148,
+          "text": "### 3.4 归因与判定"
+        },
+        {
+          "line": 155,
+          "text": "## 4. 任务三：黑天鹅损耗量化（只量化，不对冲）"
+        },
+        {
+          "line": 176,
+          "text": "## 5. 交叉验证（与前轮报告对账）"
+        },
+        {
+          "line": 181,
+          "text": "## 6. 建议（均为建议级，不改账本）"
+        },
+        {
+          "line": 190,
+          "text": "## 附：复现"
+        },
+        {
+          "line": 194,
+          "text": "# 产出 raw/regime_gate/*.json（约 70 秒；帧/事件进程内缓存，全局串行）"
+        },
+        {
+          "line": 195,
+          "text": "# 判定标准与全部口径写死在脚本 docstring，防止事后改口径"
+        }
+      ],
+      "frozen_copy": "source-copies/S15-regime-gate-report-2026-08-27.md",
+      "original_registry_entry": {
+        "category": "方法论与验证"
+      }
+    },
+    {
+      "id": "S16",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/module-b-filter-h1h2-validation-2026-09-04.md",
+      "origin": "old_source",
+      "relative_reference": "docs/experiments/module-b-filter-h1h2-validation-2026-09-04.md",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "364e23e8f6e43fd4343df5d82c43ee58db50ccccc92231b5ecd24dcde9d54d35",
+      "bytes": 26412,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# 模块B 栖息地过滤假设 H1/H2 正式验证：以个股池为独立样本——H1 判不成立、H2 判证据不足"
+        },
+        {
+          "line": 9,
+          "text": "## 大白话（先说结论）"
+        },
+        {
+          "line": 35,
+          "text": "## 1. 被验证假设与数据来源"
+        },
+        {
+          "line": 48,
+          "text": "## 2. 预注册（跑前写死，全文照录脚本 docstring）"
+        },
+        {
+          "line": 130,
+          "text": "## 3. 主检验结果（个股池 98 笔，独立样本）"
+        },
+        {
+          "line": 132,
+          "text": "### 3.1 H1：rv60_pctl < 20 过滤——反证命中"
+        },
+        {
+          "line": 145,
+          "text": "### 3.2 H2：b20_pctl5y ≥ 80 过滤——三向同向但幅度不足线"
+        },
+        {
+          "line": 158,
+          "text": "### 3.3 两池对照表（ETF=发现样本，个股=独立样本）"
+        },
+        {
+          "line": 169,
+          "text": "### 3.4 被过滤交易明细"
+        },
+        {
+          "line": 217,
+          "text": "## 4. ETF 池分段稳定性（辅助，样本极小只看方向）"
+        },
+        {
+          "line": 230,
+          "text": "## 5. H1 反向问题的正面回答（机制讨论——**解释性、不可判定**）"
+        },
+        {
+          "line": 256,
+          "text": "## 6. 判定（预注册三选一，跑前冻结线，按序求值）"
+        },
+        {
+          "line": 264,
+          "text": "## 7. 双跑哈希与红线"
+        },
+        {
+          "line": 271,
+          "text": "## 8. 局限（如实声明）"
+        }
+      ],
+      "frozen_copy": "source-copies/S16-module-b-filter-h1h2-validation-2026-09-04.md",
+      "original_registry_entry": {
+        "category": "模块与信号",
+        "verdict": "falsified"
+      }
+    },
+    {
+      "id": "S17",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/exit-matrix-report-2026-08-31.md",
+      "origin": "old_source",
+      "relative_reference": "docs/experiments/exit-matrix-report-2026-08-31.md",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "1e37400fa40c4b4696f64577ac8aed3bc7dad4b05e45d814f0e4ecf17e3f5dc6",
+      "bytes": 4165,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# 出场变体矩阵报告：A/B'/C × 四种出场（2026-08-31）"
+        },
+        {
+          "line": 11,
+          "text": "## 一句话结论"
+        },
+        {
+          "line": 20,
+          "text": "## 实验口径"
+        },
+        {
+          "line": 32,
+          "text": "## 结果矩阵（全池，expR / PF / 笔数）"
+        },
+        {
+          "line": 40,
+          "text": "## 解读"
+        },
+        {
+          "line": 58,
+          "text": "## 与证伪清单的合并建议"
+        },
+        {
+          "line": 63,
+          "text": "## 风险与限制"
+        },
+        {
+          "line": 70,
+          "text": "## 纪律合规"
+        },
+        {
+          "line": 75,
+          "text": "## 复现"
+        }
+      ],
+      "frozen_copy": "source-copies/S17-exit-matrix-report-2026-08-31.md",
+      "original_registry_entry": {
+        "category": "出场与止损",
+        "verdict": "falsified"
+      }
+    },
+    {
+      "id": "S18",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/portfolio-report-2026-08-27.md",
+      "origin": "old_source",
+      "relative_reference": "docs/experiments/portfolio-report-2026-08-27.md",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "469c50d67d051b1658fd9f371724d24098875d6fd247a2ba1524ff940b286075",
+      "bytes": 13328,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# 资金层组合模拟器实验报告：从 R 统计到账户曲线"
+        },
+        {
+          "line": 12,
+          "text": "## 0. 一句话结论"
+        },
+        {
+          "line": 21,
+          "text": "## 1. 模拟器口径（复现必读）"
+        },
+        {
+          "line": 39,
+          "text": "## 2. 无约束基线（现状的资金化镜像）"
+        },
+        {
+          "line": 49,
+          "text": "## 3. 对照矩阵（主口径 a61；判定 = 减半 ∧ 保终值 70%）"
+        },
+        {
+          "line": 72,
+          "text": "## 4. 消融：止血的钱从哪来、终值的钱丢哪去"
+        },
+        {
+          "line": 87,
+          "text": "## 5. 2026 段专项（彪哥盯）"
+        },
+        {
+          "line": 107,
+          "text": "## 6. 意外发现：真正的资金层考点是 2021-2024 段"
+        },
+        {
+          "line": 111,
+          "text": "## 7. 建议（均为建议级）"
+        },
+        {
+          "line": 119,
+          "text": "## 附：产出与复现"
+        },
+        {
+          "line": 125,
+          "text": "# raw：docs/experiments/raw/portfolio/"
+        },
+        {
+          "line": 126,
+          "text": "#   A_ETF_cm05_shrink.json / Bp_stocks_30_3_a61.json / Bp_stocks_30_3_b3.json（run 留痕）"
+        },
+        {
+          "line": 127,
+          "text": "#   portfolio_matrix.json（27×2 矩阵 + 消融 + 2026 月度曲线）"
+        },
+        {
+          "line": 128,
+          "text": "# 模块：src/lei_signal/backtest/portfolio.py（独立新模块，未动 engine/service）"
+        }
+      ],
+      "frozen_copy": "source-copies/S18-portfolio-report-2026-08-27.md",
+      "original_registry_entry": {
+        "category": "组合与仓位",
+        "verdict": "falsified"
+      }
+    },
+    {
+      "id": "S19",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/full-stack-sim-report-2026-08-27.md",
+      "origin": "old_source",
+      "relative_reference": "docs/experiments/full-stack-sim-report-2026-08-27.md",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "2b565ea172bf410ab8a5d08da66aa2b1aa1bfcc2e5d7349b060515959c590502",
+      "bytes": 10266,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# 三层串联完整账户模拟器报告：宽度定闸 × 资金层定重 × 信号层定点"
+        },
+        {
+          "line": 13,
+          "text": "## 0. 一句话结论"
+        },
+        {
+          "line": 22,
+          "text": "## 1. 三层接线（复现必读）"
+        },
+        {
+          "line": 32,
+          "text": "## 2. 任务一：三口径去重对账"
+        },
+        {
+          "line": 44,
+          "text": "## 3. 任务二：三层串联 vs 对照（初始 100 万，1% 风险）"
+        },
+        {
+          "line": 89,
+          "text": "## 4. 建议（均为建议级）"
+        },
+        {
+          "line": 96,
+          "text": "## 5. 局限与打折声明"
+        },
+        {
+          "line": 103,
+          "text": "## 产出与复现"
+        },
+        {
+          "line": 110,
+          "text": "# raw：docs/experiments/raw/full_stack/"
+        },
+        {
+          "line": 111,
+          "text": "#   full_stack_results.json（对账 + 四口径全指标 + 判定）"
+        },
+        {
+          "line": 112,
+          "text": "#   monthly_position_curve.csv（月度：权益/R/在场仓/cap/B200）"
+        },
+        {
+          "line": 113,
+          "text": "#   breadth_position_drawdown_daily.csv（事件日三线：B200/cap/回撤）"
+        },
+        {
+          "line": 114,
+          "text": "#   trades_fullsim_518850.csv（10 笔）/ trades_fullsim_510300.csv（4 笔）"
+        },
+        {
+          "line": 115,
+          "text": "# 模块：src/lei_signal/backtest/full_sim.py（去重+cap，纯函数）"
+        },
+        {
+          "line": 116,
+          "text": "#      src/lei_signal/backtest/portfolio.py（cap_fn 接线，默认行为不变）"
+        }
+      ],
+      "frozen_copy": "source-copies/S19-full-stack-sim-report-2026-08-27.md",
+      "original_registry_entry": {
+        "category": "宽度择时"
+      }
+    },
+    {
+      "id": "S20",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/portfolio-split-report-2026-08-28.md",
+      "origin": "old_source",
+      "relative_reference": "docs/experiments/portfolio-split-report-2026-08-28.md",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "3fb1db47b9423f0b39a32b332aa74a7b7472f0624c1edb4977cf228adbe47568",
+      "bytes": 4642,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# 组合层适配性分账·预注册实验报告（2026-08-28）"
+        },
+        {
+          "line": 9,
+          "text": "## 一句话结论"
+        },
+        {
+          "line": 15,
+          "text": "## 主结果（2015-06-16 → 2026-08-18，9 标的，等权，10bp，5% 调仓带）"
+        },
+        {
+          "line": 27,
+          "text": "## 预注册判定（分账假设）：FAIL"
+        },
+        {
+          "line": 39,
+          "text": "## B 臂起点偏移稳健性（诊断附录，31 个月度起点 2015-06→2017-12）"
+        },
+        {
+          "line": 52,
+          "text": "## 边界与警示（引用此结果必读）"
+        },
+        {
+          "line": 62,
+          "text": "## 下一步（按价值排序）"
+        },
+        {
+          "line": 70,
+          "text": "## 纪律合规"
+        }
+      ],
+      "frozen_copy": "source-copies/S20-portfolio-split-report-2026-08-28.md",
+      "original_registry_entry": {
+        "category": "宽度择时",
+        "verdict": "passed"
+      }
+    },
+    {
+      "id": "S21",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/vt-signal-driven-sizing-ARCHIVE-2026-09-02.md",
+      "origin": "old_source",
+      "relative_reference": "docs/experiments/vt-signal-driven-sizing-ARCHIVE-2026-09-02.md",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "325c705f6e9ed5e5413375c98b695a52bfb2afd0ccf81d322dbaae4701de47dc",
+      "bytes": 18557,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# vt 信号驱动单标的仓位层归档摘要（2026-09-02）"
+        },
+        {
+          "line": 28,
+          "text": "## 〇、一句话结论"
+        },
+        {
+          "line": 43,
+          "text": "## 信号本体与口径（环境披露，必读）"
+        },
+        {
+          "line": 85,
+          "text": "## 一、通过清单"
+        },
+        {
+          "line": 92,
+          "text": "## 二、证伪清单"
+        },
+        {
+          "line": 101,
+          "text": "## 三、观察中"
+        },
+        {
+          "line": 128,
+          "text": "## 四、下一步方向（≤3）"
+        },
+        {
+          "line": 141,
+          "text": "## 冲突发现"
+        },
+        {
+          "line": 185,
+          "text": "## 局限（解读必读）"
+        },
+        {
+          "line": 201,
+          "text": "## 诚实条款自查"
+        },
+        {
+          "line": 216,
+          "text": "## 复现"
+        },
+        {
+          "line": 222,
+          "text": "# 两次 md5 应均为 0f9c17cc9e2db2e12cd48a143e82f286"
+        },
+        {
+          "line": 223,
+          "text": "# 首次需联网抓取（腾讯 qfq + Yahoo v8），约 8 分钟后缓存于本目录"
+        }
+      ],
+      "frozen_copy": "source-copies/S21-vt-signal-driven-sizing-ARCHIVE-2026-09-02.md",
+      "original_registry_entry": {
+        "category": "组合与仓位",
+        "verdict": "falsified",
+        "oneLiner": "按波动率高低给单标的仓位打折：在 84 格网格里没能复现组合层的正效果，观察中的「高波期 C 模块不缩」也只对了一半——组合层参数搬不到单标的层。"
+      }
+    },
+    {
+      "id": "S22",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/etf-eight-twoyear-2026-09-06.md",
+      "origin": "old_source",
+      "relative_reference": "docs/experiments/etf-eight-twoyear-2026-09-06.md",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "6beea255c3d93b32549d945c98eb89e67e1dee6e2304bf8b84b330f56febbadf",
+      "bytes": 10418,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# 核心八 ETF 两年闭环回测（自主决策链路首测）"
+        },
+        {
+          "line": 10,
+          "text": "## 一句话结论（大白话）"
+        },
+        {
+          "line": 18,
+          "text": "## 成绩单（去重后 49 笔）"
+        },
+        {
+          "line": 34,
+          "text": "## 模块分解（核心发现）"
+        },
+        {
+          "line": 44,
+          "text": "## 与买入持有对照（同窗）"
+        },
+        {
+          "line": 60,
+          "text": "## 局限（如实）"
+        },
+        {
+          "line": 70,
+          "text": "## 结论建议（建议级，拍板项）"
+        },
+        {
+          "line": 77,
+          "text": "## 附录：科创三标的补测（2026-09-06，用户点名）"
+        },
+        {
+          "line": 94,
+          "text": "## 附录2：红利低波补测（2026-09-06，用户点名）"
+        },
+        {
+          "line": 106,
+          "text": "## 附录3：极端加速阻断的验证与证伪（2026-09-06，规格§13-6）"
+        },
+        {
+          "line": 123,
+          "text": "## 附录4：窄止损脆弱性调研（2026-09-06，用户质疑触发）"
+        },
+        {
+          "line": 148,
+          "text": "## 附录5：止损口径六方案全池对比（2026-09-06，用户拍板「两种方法都试」）"
+        }
+      ],
+      "frozen_copy": "source-copies/S22-etf-eight-twoyear-2026-09-06.md",
+      "original_registry_entry": {
+        "category": "模块与信号",
+        "verdict": "mixed",
+        "oneLiner": "核心八ETF两年闭环：合计+71R但钱全靠趋势回调(A)赚的(+93R)，破底翻反转(C)在震荡上行ETF上两年净亏(-22R，恒科10笔全亏)——抄底信号在这类品种上反复送钱"
+      }
+    },
+    {
+      "id": "S23",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/scripts/run_b_spectrum.py",
+      "origin": "old_source",
+      "relative_reference": "scripts/run_b_spectrum.py",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "396ac2e9d152602e5dfff8491cdf387fb3f816d67036d78524f1aae3c81baf09",
+      "bytes": 6181,
+      "anchors": [
+        {
+          "line": 33,
+          "text": "# ---- 标的分组（与既往轮次同口径） ----"
+        },
+        {
+          "line": 72,
+          "text": "# ---- 全谱参数空间 ----"
+        }
+      ],
+      "frozen_copy": "source-copies/S23-run_b_spectrum.py"
+    },
+    {
+      "id": "S24",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/scripts/agent_AI/run_moduleB_robustness.py",
+      "origin": "old_source",
+      "relative_reference": "scripts/agent_AI/run_moduleB_robustness.py",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "3091fef19c3544096f9828e1ffbe86ec186bf5f7bfdf6c7bbc5f6ac7b2276b9b",
+      "bytes": 12648,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "#!/usr/bin/env python3"
+        }
+      ],
+      "frozen_copy": "source-copies/S24-run_moduleB_robustness.py"
+    },
+    {
+      "id": "S25",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/scripts/run_regime_gate.py",
+      "origin": "old_source",
+      "relative_reference": "scripts/run_regime_gate.py",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "5557b90f426761fca86af312ea916c5fc299834b9b666c74ebd35a6f3e6f89e1",
+      "bytes": 16574,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "#!/usr/bin/env python3"
+        },
+        {
+          "line": 190,
+          "text": "# ---------------------------------------------------------------- 任务一"
+        },
+        {
+          "line": 234,
+          "text": "# ---------------------------------------------------------------- 任务二"
+        },
+        {
+          "line": 333,
+          "text": "# ---------------------------------------------------------------- 任务三"
+        }
+      ],
+      "frozen_copy": "source-copies/S25-run_regime_gate.py"
+    },
+    {
+      "id": "S26",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/scripts/agent_AV/validate_h1h2.py",
+      "origin": "old_source",
+      "relative_reference": "scripts/agent_AV/validate_h1h2.py",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "eec676af8e6593abf7f2cf452f3d4dc45a84a11df22e19327bf458a9146b51aa",
+      "bytes": 20482,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "#!/usr/bin/env python3"
+        },
+        {
+          "line": 2,
+          "text": "# -*- coding: utf-8 -*-"
+        }
+      ],
+      "frozen_copy": "source-copies/S26-validate_h1h2.py"
+    },
+    {
+      "id": "S27",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/scripts/run_exit_matrix.py",
+      "origin": "old_source",
+      "relative_reference": "scripts/run_exit_matrix.py",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "4a06c486032f946093350c792e962d03ec8723acd7efa5689aef8d0aebeb3ee9",
+      "bytes": 4185,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "#!/usr/bin/env python3"
+        }
+      ],
+      "frozen_copy": "source-copies/S27-run_exit_matrix.py"
+    },
+    {
+      "id": "S28",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/scripts/run_portfolio_sim.py",
+      "origin": "old_source",
+      "relative_reference": "scripts/run_portfolio_sim.py",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "06b146a7b23691c0d9a98a6a362fb0d3c872e77d4e42826aa3f87bc43eb69445",
+      "bytes": 10954,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "#!/usr/bin/env python3"
+        }
+      ],
+      "frozen_copy": "source-copies/S28-run_portfolio_sim.py"
+    },
+    {
+      "id": "S29",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/backtest/portfolio.py",
+      "origin": "old_source",
+      "relative_reference": "src/lei_signal/backtest/portfolio.py",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "aa22880508b8fd17c040aae0dc5308d6e02a265e61ba4e181ba5e90b7b712e6b",
+      "bytes": 17130,
+      "anchors": [
+        {
+          "line": 37,
+          "text": "#: 交易 dict 必备字段（execute_run 的 _trade_dict 输出子集）。"
+        },
+        {
+          "line": 119,
+          "text": "def _normalize(trades: list[dict], default_pool: str) -> tuple[list[_Signal], dict]:"
+        },
+        {
+          "line": 188,
+          "text": "def simulate_portfolio("
+        }
+      ],
+      "frozen_copy": "source-copies/S29-portfolio.py"
+    },
+    {
+      "id": "S30",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/scripts/run_full_stack_sim.py",
+      "origin": "old_source",
+      "relative_reference": "scripts/run_full_stack_sim.py",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "310779ec3d2e9c9b1be643a595f0e69a71293496ee3a3de9490509403a462a98",
+      "bytes": 14926,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "#!/usr/bin/env python3"
+        },
+        {
+          "line": 54,
+          "text": "# 阴跌段窗口（宽度样本起点 2021-06-18，晚于 2021-02 峰——半覆盖，标注）"
+        }
+      ],
+      "frozen_copy": "source-copies/S30-run_full_stack_sim.py"
+    },
+    {
+      "id": "S31",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/backtest/full_sim.py",
+      "origin": "old_source",
+      "relative_reference": "src/lei_signal/backtest/full_sim.py",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "277f2dcbe66827d88075ac22c21fc6767084d3c81f3ce5899b86784f07ccecf9",
+      "bytes": 9913,
+      "anchors": [
+        {
+          "line": 35,
+          "text": "#: 档位表：[(阈值上界(含), 仓位)]，宽度 ≤ 阈值取该档（宽度报告 2026-08-27）。"
+        },
+        {
+          "line": 39,
+          "text": "#: 同日多模块优先级（任务一规则 2）。"
+        },
+        {
+          "line": 111,
+          "text": "# ---------------------------------------------------------------- 去重"
+        },
+        {
+          "line": 207,
+          "text": "# ---------------------------------------------------------------- 板块过滤"
+        }
+      ],
+      "frozen_copy": "source-copies/S31-full_sim.py"
+    },
+    {
+      "id": "S32",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/scripts/run_portfolio_split.py",
+      "origin": "old_source",
+      "relative_reference": "scripts/run_portfolio_split.py",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "af5cae26d1f1f5fa8c48e6448035bd59ed4ce02bd2d60c496539c1bd62ab1d17",
+      "bytes": 11190,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "#!/usr/bin/env python3"
+        },
+        {
+          "line": 57,
+          "text": "# ── 冻结配置 ──"
+        },
+        {
+          "line": 97,
+          "text": "def donchian_daily(price_full: pd.Series, dates: pd.DatetimeIndex) -> pd.Series:"
+        },
+        {
+          "line": 117,
+          "text": "def simulate(prices: pd.DataFrame, exposures: pd.DataFrame) -> dict:"
+        }
+      ],
+      "frozen_copy": "source-copies/S32-run_portfolio_split.py"
+    },
+    {
+      "id": "S33",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/raw/vt_signal_sizing/run_vt_signal_sizing.py",
+      "origin": "old_source",
+      "relative_reference": "docs/experiments/raw/vt_signal_sizing/run_vt_signal_sizing.py",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "5ae02146359ac9bcbc70f179db569e842705b96e68995e686cc9824d1f4e9414",
+      "bytes": 38165,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "#!/usr/bin/env python3"
+        },
+        {
+          "line": 2,
+          "text": "# -*- coding: utf-8 -*-"
+        },
+        {
+          "line": 146,
+          "text": "#: ── 预注册参数（docstring 判定标准的机器可读副本，两边必须一致）──────"
+        },
+        {
+          "line": 167,
+          "text": "#: G1 门槛：归档 run groups 汇总 net=True 口径（r_net 统计；groups 键"
+        },
+        {
+          "line": 168,
+          "text": "#: \"True\"=net 含费用——首跑烟雾测试已验证 groups['True'] 与 r_net 自算一致）。"
+        },
+        {
+          "line": 174,
+          "text": "#: 非 G1 样本的归档 net 汇总（含基准自身交易，仅披露用，不作门槛）。"
+        },
+        {
+          "line": 189,
+          "text": "#: 腾讯 fqkline 主机：主用 ifzq.gtimg.cn（实测 web.ifzq 子域在连续请求"
+        },
+        {
+          "line": 190,
+          "text": "#: ~30 次后返回 501，裸域不受影响；抓取层带双主机重试）。"
+        }
+      ],
+      "frozen_copy": "source-copies/S33-run_vt_signal_sizing.py"
+    },
+    {
+      "id": "S34",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/raw/module_b_robustness/moduleB_robustness.json",
+      "origin": "old_source",
+      "relative_reference": "docs/experiments/raw/module_b_robustness/moduleB_robustness.json",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "ddf646ac032b73d7db3f9ae410eb0882bd510a66d1d8432b80760708e3debb50",
+      "bytes": 9956,
+      "top_level_keys": [
+        "task",
+        "params",
+        "env_snapshot_sha256_16",
+        "anchor_ok",
+        "overall",
+        "D1_concentration",
+        "D2_time",
+        "D3_symbols",
+        "D4_win_structure",
+        "conditions",
+        "failed_conditions",
+        "verdict_pre_registered",
+        "trades_detail"
+      ],
+      "frozen_copy": "source-copies/S34-moduleB_robustness.json"
+    },
+    {
+      "id": "S35",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/raw/portfolio_split/portfolio_split_results.json",
+      "origin": "old_source",
+      "relative_reference": "docs/experiments/raw/portfolio_split/portfolio_split_results.json",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "eec06b8268aa68281bd3c75a26161404e64f8cffdacfa459cad56daa1f0dd884",
+      "bytes": 2490,
+      "top_level_keys": [
+        "arms",
+        "cost_drag",
+        "meta",
+        "verdict",
+        "yearly_pct"
+      ],
+      "frozen_copy": "source-copies/S35-portfolio_split_results.json"
+    },
+    {
+      "id": "S36",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/raw/full_stack/full_stack_results.json",
+      "origin": "old_source",
+      "relative_reference": "docs/experiments/raw/full_stack/full_stack_results.json",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "368a9b8175b76ee2e32228d5b19f6d71a93c36216b13e220ffdb5055eac0ccb4",
+      "bytes": 270814,
+      "top_level_keys": [
+        "date",
+        "data_end",
+        "task1_dedup",
+        "task2"
+      ]
+    },
+    {
+      "id": "S37",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/raw/regime_gate/regime_gate_summary.json",
+      "origin": "old_source",
+      "relative_reference": "docs/experiments/raw/regime_gate/regime_gate_summary.json",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "13a47cb10a8e35744b1ef1b409080d267e8d2e0c09ff56bba023fc674c7431ba",
+      "bytes": 28511,
+      "top_level_keys": [
+        "date",
+        "handoff",
+        "benchmark",
+        "pool_sizes",
+        "task1",
+        "task2",
+        "task3"
+      ],
+      "frozen_copy": "source-copies/S37-regime_gate_summary.json"
+    },
+    {
+      "id": "S38",
+      "source_path": "/Users/yongbiaoli/lei-signal-sync/docs/experiments/raw/b_adaptation/b_spectrum_summary.json",
+      "origin": "old_source",
+      "relative_reference": "docs/experiments/raw/b_adaptation/b_spectrum_summary.json",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "aef78dac424b67873e0e2456b952f578083b6d297c356edc93f4596cbbcfc675",
+      "bytes": 1953,
+      "top_level_keys": [
+        "axis",
+        "best",
+        "all_pool_best_cb",
+        "all_pool_best_cl",
+        "pass_groups",
+        "runs_count"
+      ],
+      "frozen_copy": "source-copies/S38-b_spectrum_summary.json"
+    },
+    {
+      "id": "S39",
+      "source_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/full-baseline-review/review-2026-09-08.md",
+      "origin": "current_research",
+      "relative_reference": "docs/experiments/raw/research-sixth-2026-09-08/full-baseline-review/review-2026-09-08.md",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "3b16ac9dc154b58efd6d562e9e144545bd8fc33a1ad95202d118555efbc7d3c8",
+      "bytes": 7898,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# A/B/C 共 2309 条历史记录的独立核验"
+        },
+        {
+          "line": 5,
+          "text": "## 一句话结论（大白话）"
+        },
+        {
+          "line": 9,
+          "text": "## 检查了哪些记录"
+        },
+        {
+          "line": 22,
+          "text": "## 逐笔核对结果"
+        },
+        {
+          "line": 40,
+          "text": "## 退出过程如何独立核验"
+        },
+        {
+          "line": 48,
+          "text": "## 不能统一写成“行情截止 2026-08-28”"
+        },
+        {
+          "line": 63,
+          "text": "## 方法边界与后续可用范围"
+        },
+        {
+          "line": 69,
+          "text": "## 证据与复现"
+        }
+      ],
+      "frozen_copy": "source-copies/S39-review-2026-09-08.md"
+    },
+    {
+      "id": "S40",
+      "source_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/full-baseline-review/summary.json",
+      "origin": "current_research",
+      "relative_reference": "docs/experiments/raw/research-sixth-2026-09-08/full-baseline-review/summary.json",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "2fc86b5d636931756a0381fd11aa2eba24db200abfec59432ca6c7647c898586",
+      "bytes": 24416,
+      "top_level_keys": [
+        "scope",
+        "total",
+        "by_module",
+        "true_entered_only",
+        "true_closed_only",
+        "symbols",
+        "data_end_distribution",
+        "problem_quality",
+        "replay_difference_rows",
+        "self_checks",
+        "frozen_inputs_unchanged",
+        "original_inputs_unchanged",
+        "finished_at_utc"
+      ],
+      "frozen_copy": "source-copies/S40-summary.json"
+    },
+    {
+      "id": "S41",
+      "source_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/full-baseline-review/input-manifest.json",
+      "origin": "current_research",
+      "relative_reference": "docs/experiments/raw/research-sixth-2026-09-08/full-baseline-review/input-manifest.json",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "c0af3fa913027804dff7c45bf79cfc1446fe4d312b083edbc1d884a3a972672b",
+      "bytes": 132682,
+      "top_level_keys": [
+        "frozen_at_utc",
+        "phase",
+        "records",
+        "symbols",
+        "protocol_sha256",
+        "files"
+      ],
+      "frozen_copy": "source-copies/S41-input-manifest.json"
+    },
+    {
+      "id": "S42",
+      "source_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fifth-2026-09-08/study/protocol.md",
+      "origin": "current_research",
+      "relative_reference": "docs/experiments/raw/research-fifth-2026-09-08/study/protocol.md",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "df2f260e1a8c89d7616f719db3e64cacf4c037186c427a8e1affa8639174ad3b",
+      "bytes": 5205,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# 06第五批：完整可核查历史的固定三方案（查看新增结果前）"
+        },
+        {
+          "line": 5,
+          "text": "## 问题与策略位置"
+        },
+        {
+          "line": 8,
+          "text": "## 数据范围如何决定"
+        },
+        {
+          "line": 13,
+          "text": "## 固定的完整账户与比较数"
+        },
+        {
+          "line": 20,
+          "text": "## 扩长历史所需的明确修正"
+        },
+        {
+          "line": 27,
+          "text": "## 事前检查与最终交付"
+        },
+        {
+          "line": 34,
+          "text": "## 论文方法落实"
+        }
+      ],
+      "frozen_copy": "source-copies/S42-protocol.md"
+    },
+    {
+      "id": "S43",
+      "source_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fifth-2026-09-08/study/qualification.json",
+      "origin": "current_research",
+      "relative_reference": "docs/experiments/raw/research-fifth-2026-09-08/study/qualification.json",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "dad1780305b07651a71edfdacf677a3245bde67f44bf19296391cfe930175284",
+      "bytes": 10667,
+      "top_level_keys": [
+        "at",
+        "window",
+        "cash_coverage",
+        "pdf_checks",
+        "price_checks",
+        "missing_vs_510300_reference",
+        "price_reference_is_complete_exchange_calendar",
+        "full_share_event_coverage",
+        "qualified_for_bounded_research",
+        "qualification_basis",
+        "sources"
+      ],
+      "frozen_copy": "source-copies/S43-qualification.json"
+    },
+    {
+      "id": "S44",
+      "source_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fifth-2026-09-08/study/cash_engine.py",
+      "origin": "current_research",
+      "relative_reference": "docs/experiments/raw/research-fifth-2026-09-08/study/cash_engine.py",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "2809f119bae9e3f7a3d53ccd88ca9b7925711181bcd058662f3987fe026ba317",
+      "bytes": 8078,
+      "anchors": [
+        {
+          "line": 6,
+          "text": "def simulate(prices, events, *, start, end, weekly, fee, cash_rate, rebalance, limits, limit_changes=None, blocked_dates=None):"
+        }
+      ],
+      "frozen_copy": "source-copies/S44-cash_engine.py"
+    },
+    {
+      "id": "S45",
+      "source_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fifth-2026-09-08/study/independent-long-ledgers.json",
+      "origin": "current_research",
+      "relative_reference": "docs/experiments/raw/research-fifth-2026-09-08/study/independent-long-ledgers.json",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "a9421f327b75553d90c1134cbf45152b3777a9d22ef23fb8d9eca93ef31cc521",
+      "bytes": 19267,
+      "top_level_keys": [
+        "checked_at",
+        "window",
+        "method",
+        "boundaries",
+        "results",
+        "source_dividends_reparsed",
+        "input_hashes"
+      ],
+      "frozen_copy": "source-copies/S45-independent-long-ledgers.json"
+    },
+    {
+      "id": "S46",
+      "source_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/events/510300/events.json",
+      "origin": "current_research",
+      "relative_reference": "docs/experiments/raw/research-fourth-2026-09-08/events/510300/events.json",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "c026034d7f86214ed26c9a185b9144fa46962629f242d810d104c32b63853959",
+      "bytes": 13779,
+      "top_level_keys": [
+        "symbol",
+        "window_start",
+        "window_end",
+        "event_count",
+        "events",
+        "completeness",
+        "limitations"
+      ],
+      "frozen_copy": "source-copies/S46-events.json"
+    },
+    {
+      "id": "S47",
+      "source_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/prices/sh510300-nominal.csv",
+      "origin": "current_research",
+      "relative_reference": "docs/experiments/raw/research-fourth-2026-09-08/prices/sh510300-nominal.csv",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "5136735349a87a55c58ed916f4f657f0eb7435222ae0e6112c765e760c617dcd",
+      "bytes": 147736
+    },
+    {
+      "id": "S48",
+      "source_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/prices/sz159915-nominal.csv",
+      "origin": "current_research",
+      "relative_reference": "docs/experiments/raw/research-fourth-2026-09-08/prices/sz159915-nominal.csv",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "e7deeb79a650af9648c3b45b8211829346a530b14e02365dd58c68ac7a9a72bd",
+      "bytes": 147752
+    },
+    {
+      "id": "S49",
+      "source_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/prices/sh518880-nominal.csv",
+      "origin": "current_research",
+      "relative_reference": "docs/experiments/raw/research-fourth-2026-09-08/prices/sh518880-nominal.csv",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "c55197ed968fa0131d95606d743859359126619434c7bca58d8b573f091784f1",
+      "bytes": 140808
+    },
+    {
+      "id": "S50",
+      "source_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fourth-2026-09-08/prices/sh513100-nominal.csv",
+      "origin": "current_research",
+      "relative_reference": "docs/experiments/raw/research-fourth-2026-09-08/prices/sh513100-nominal.csv",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "a50032fdec4c95b8236c36ac744a611382d4d8421395c82469c4198ac96e9137",
+      "bytes": 140228
+    },
+    {
+      "id": "S51",
+      "source_path": "/Users/yongbiaoli/.codex/attachments/ca25f1f7-eae4-47ef-93bf-2cad8280e914/pasted-text.txt",
+      "origin": "user_task",
+      "relative_reference": "task-book-latest.txt",
+      "inspected_at_utc": "2026-09-08T05:14:24.579840+00:00",
+      "exists": true,
+      "sha256": "8c0c894ab0b83e9c114d380254cb6eb50614c1fbcc04ecdfa29becaa732f48f5",
+      "bytes": 21949,
+      "anchors": [
+        {
+          "line": 1,
+          "text": "# 研究负责人交接 Prompt：逐环节效果、完整交易与论文方法验证"
+        },
+        {
+          "line": 5,
+          "text": "## 1. 你的任务与用户真正的目标"
+        },
+        {
+          "line": 19,
+          "text": "## 2. 分工与边界"
+        },
+        {
+          "line": 43,
+          "text": "## 3. 先读什么，如何处理材料冲突"
+        },
+        {
+          "line": 86,
+          "text": "## 4. 建立逐环节证据地图，再排研究优先级"
+        },
+        {
+          "line": 118,
+          "text": "## 5. 如何使用论文库"
+        },
+        {
+          "line": 133,
+          "text": "## 6. 每项新实验先固定这些内容"
+        },
+        {
+          "line": 149,
+          "text": "## 7. 必须防住的失真"
+        },
+        {
+          "line": 167,
+          "text": "## 8. 什么叫完整交易方案"
+        },
+        {
+          "line": 181,
+          "text": "## 9. 交付格式与证据如何供系统使用"
+        },
+        {
+          "line": 210,
+          "text": "## 10. 现在开始"
+        }
+      ],
+      "frozen_copy": "source-copies/S51-pasted-text.txt"
+    }
+  ]
+}

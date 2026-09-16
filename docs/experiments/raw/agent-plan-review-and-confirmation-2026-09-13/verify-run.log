@@ -1,0 +1,16 @@
+PASS | G0 baseline: preview db ready | plans=23 fund_trades=0
+PASS | G1.1 ruleset-version endpoint is authoritative | v=2.1.0
+PASS | G1.2 load-failure blocks submit (no empty version) | disabled=True hint=True
+PASS | G2.1 P3 legal prefill (C/two_b_reversal) | 计划草稿 · TH881272.SECTOR（保存后仍需确认） · 原问题 #51 · 服务端产物 | 模块/方向：C · long | 入场理由：two_b_reversal | 失效价：未
+PASS | G2.2 save returns real plan_id | plan_TH881272_SECTOR_20260913150513_fbbb4f36
+PASS | G3.1 incomplete draft confirm rejected, still editable | state=draft
+PASS | G2.3 complete→confirm 200, state=armed | state=armed 
+PASS | G4.1 history restore shows armed status without re-save | 计划草稿 · TH881272.SECTOR（保存后仍需确认） · 原问题 #51 · 服务端产物 | 模块/方向：C · long | 入场理由：two_b_reversal | 失效价：未给出（待补草稿） | 有效期至：- | 入场条件
+PASS | G4.2 restore adds no plans/trades | plans=24 trades=0
+PASS | G4.3 two questions → two distinct plans, own bindings | A=plan_TH881272_SECTOR_202(q51) B=plan_TH881272_SECTOR_202(q53)
+PASS | G5.1 console entry: save + review entry reachable
+PASS | G5.2 late save response does not leak into new conversation | welcome=True stray=False
+PASS | G3.2 early signal gives no legal prefill → stays pending | 计划草稿 · 516220.SS（保存后仍需确认） · 原问题 #59 · 服务端产物 | 模块/方向：null · null | 入场理由：- | 失效价：未给出（待补草稿） | 有效期至：- | 入场条件：- | 认错退
+
+TOTAL: 13/13 PASS
+VERIFY_EXIT=0

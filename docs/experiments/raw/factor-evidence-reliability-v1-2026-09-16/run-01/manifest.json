@@ -1,0 +1,77 @@
+{
+ "identity": "factor-evidence-reliability@1.0.0",
+ "completed": true,
+ "exit_code": 0,
+ "object_ref": "candidate:lei.dual_ma.bull_state@draft-1",
+ "use": "post_hoc_historical_sensitivity_diagnostic",
+ "files": {
+  "evidence-card.json": {
+   "sha256": "cdef55b75c7c0aabaabb3b4a5a22f129ffca9b866527877c220d3df1da7b9155",
+   "bytes": 2074
+  },
+  "leave-one-year-out.csv": {
+   "sha256": "81bb663cd33a99896d471c2e79342b8156b73e378ea7f3da919c7f41a0481cca",
+   "bytes": 329
+  },
+  "overlap.json": {
+   "sha256": "aea636196a21409a38fd1307f389dd1cadabddfa3d5c077006c9e67a5fca018f",
+   "bytes": 902
+  },
+  "protocol.source.json": {
+   "sha256": "769a350160ef9f3da896df9c048b4b4ff664d64a4b1ab88cdf7dfb54adb88db1",
+   "bytes": 8879
+  },
+  "report.md": {
+   "sha256": "835512d4008122e81189d914be5f8d60799ecec216b9951880611c8d820cee1c",
+   "bytes": 2628
+  },
+  "resampling-L126-replicates.csv": {
+   "sha256": "6d7ce97983532ed0e8edbfe6311c740a01ad400ad582f497b32e43b556ca7dc4",
+   "bytes": 71980
+  },
+  "resampling-L126-starts.npy": {
+   "sha256": "ed5149507985f25c81a6029e08da0482c71df0acaa5742e6736df64e881cd3ce",
+   "bytes": 208128
+  },
+  "resampling-L63-replicates.csv": {
+   "sha256": "2a1ccff0481aca9df71baf67cba659102538ca5a485719aa37bfd7016b7e5d9a",
+   "bytes": 71946
+  },
+  "resampling-L63-starts.npy": {
+   "sha256": "4b3c7ee17a1bfb27f5ca7feeae231c2b53c3a591173bf2327303a7b52a855895",
+   "bytes": 400128
+  },
+  "stability.json": {
+   "sha256": "597d6d6bb8d242543a18e6316161a83c6c0b0330d7bf1c7644493b1acf62c806",
+   "bytes": 2691
+  },
+  "uncertainty.json": {
+   "sha256": "a580a53d430fd2c3c30644179e8f5dded02a20e66e4ba6e182c6e141e3956b1c",
+   "bytes": 1888
+  },
+  "yearly.csv": {
+   "sha256": "8de41d905430a10d99ccb58740442e140c14a7b33091e0d7cfc9e793617377c3",
+   "bytes": 2128
+  }
+ },
+ "file_count": 12,
+ "metadata": {
+  "unit": "main/aux/delta 为小数变化率，×100 读作百分点",
+  "object": "candidate:lei.dual_ma.bull_state@draft-1",
+  "target": "P_vendor(t+22)/P_vendor(t+1) - 1（观察日t后第1个至第22个交易日收盘，21个价格变动区间；直接取观察表 main 列，不重算）",
+  "legal_set": "flag_state_known ∧ flag_main_legal ∧ flag_mature（B1 共同合法集合）；aux 缺失不删主目标",
+  "data_use_limits": [
+   "事后描述；快照2026-09-08取得，历史可得性未知",
+   "标签重叠非独立；重用比不是有效样本数",
+   "条件性范围不是有效概率/显著性/独立样本数",
+   "未接入：IC/排序、factor_return、风险模型归因、真实时点验证"
+  ],
+  "inputs_verified": 6,
+  "numpy_version": "2.1.1",
+  "starts_saved": [
+   "resampling-L63-starts.npy",
+   "resampling-L126-starts.npy"
+  ]
+ },
+ "manifest_note": "manifest 最后写入；completed=true 只代表工程完成，不代表结论有效"
+}

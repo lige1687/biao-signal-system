@@ -1,0 +1,56 @@
+[
+  {
+    "id": "U1-direct-workspace",
+    "expected": "Open Chinese setup, no module-code instruction",
+    "old_module_prompt": true,
+    "turns": [
+      "合成回答",
+      "请说明要补测的模块：A 回调 / B 突破 / C 2B / D 假突破（例：补测一下 模块A）。不默认选 A。"
+    ],
+    "verdict": "FAIL"
+  },
+  {
+    "id": "U1-direct-console",
+    "expected": "Open Chinese setup, no module-code instruction",
+    "old_module_prompt": true,
+    "turns": [
+      "合成回答",
+      "请说明要补测的模块：A 回调 / B 突破 / C 2B / D 假突破（例：「补测一下 模块A」）。不默认选 A。"
+    ],
+    "verdict": "FAIL"
+  },
+  {
+    "id": "U3-late-workspace",
+    "expected": "Old task response must not append into new conversation",
+    "new_conversation_turns": [
+      "新会话：518880",
+      "已创建补测任务（510300.SS · A · a6_1_costbasis · queued）。完成后结果自动回到这个问题的依据卡里，不用盯在这里。"
+    ],
+    "verdict": "FAIL"
+  },
+  {
+    "id": "U3-late-console",
+    "expected": "Old task response must not append into new conversation",
+    "new_conversation_turns": [
+      "新会话：518880",
+      "已创建补测任务（510300.SS · A · a6_1_costbasis · queued）。完成后结果自动回到原问题的依据卡里，不用盯在这里。"
+    ],
+    "verdict": "FAIL"
+  },
+  {
+    "id": "U2-invalid-preselection",
+    "expected": "Only valid visible capabilities may be submitted",
+    "button": "<button type=\"button\" class=\"btn primary\">创建这次补测</button>",
+    "verdict": "FAIL"
+  },
+  {
+    "id": "source-integrity",
+    "verdict": "PASS",
+    "hashes": {
+      "web/src/pages/AgentWorkspacePage.tsx": "04b4b3e6a2c1698dc548aee82c2a71139bd1b7555f9a699f5e67bac61a86ba22",
+      "web/src/components/AgentConsole.tsx": "a3d5ad56d52522be01397795d4b536bae0d935c61a34926a002c4a7be061adcc",
+      "web/src/components/agent/BacktestSetupPanel.tsx": "1a68f553fd5f7fcbf84313549ec05115b5615f013b68d9e5ac328df3edef8468",
+      "web/src/utils/agentUx.ts": "3824966d1e41d6a9fb4c28ad44e4e49285d31a5235ba5d377ac0f5e08b5f2257"
+    }
+  }
+]

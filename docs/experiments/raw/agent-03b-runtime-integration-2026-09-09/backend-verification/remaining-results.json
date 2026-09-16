@@ -1,0 +1,525 @@
+{
+  "t1_unknown_window": {
+    "acceptance_pass": true,
+    "observed": {
+      "comparison_config": {
+        "symbol": "000001.SS",
+        "module": {
+          "value": "A",
+          "source": "message"
+        },
+        "exit_variant": {
+          "value": "a6_1_costbasis",
+          "source": "message"
+        },
+        "entry_variant": {
+          "value": null,
+          "source": "engine_default"
+        },
+        "rr_min": {
+          "value": 3.0,
+          "source": "engine_default"
+        },
+        "fee_label": {
+          "value": "standard",
+          "source": "engine_default"
+        },
+        "ruleset_sha256": {
+          "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+          "source": "current_active_ledger"
+        },
+        "window": null,
+        "window_state": "unverified",
+        "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+      },
+      "matched": {
+        "request_id": "btr_e3166a33fdbe",
+        "run_id": "20260909-202340-983257",
+        "symbol": "000001.SS",
+        "module": "A",
+        "exit_variant": "a6_1_costbasis",
+        "entry_variant": null,
+        "data_cutoff": "2026-09-09",
+        "ruleset_version": "2.1.0",
+        "completed_at": "2026-09-09T12:23:41.006659+00:00",
+        "differences_cn": [
+          "比较区间尚未核实（没有可证明的窗口来源；旧运行自己的数字只作描述参考，不进入支持本问题的材料）"
+        ],
+        "unverified_fields": [
+          "比较区间"
+        ],
+        "input_verified": true,
+        "window_note_cn": "本问题没有可证明的比较窗口；旧运行窗口见 data_cutoff=2026-09-09、实际区间 2024-01-01~2025-04-04，窗口维度尚未核实",
+        "run_window": {
+          "data_cutoff": "2026-09-09",
+          "data_range": {
+            "start": "2024-01-01",
+            "end": "2025-04-04",
+            "symbols_count": 1,
+            "out_of_sample_start": "2023-04-05"
+          }
+        },
+        "compatibility": "unknown",
+        "module_matches_question": true,
+        "supports_question": false,
+        "summary": {
+          "trade_count": 0,
+          "win_rate": null,
+          "expectancy_r": null,
+          "profit_factor": null,
+          "zero_trades": true
+        }
+      }
+    }
+  },
+  "t1_explicit_window": {
+    "acceptance_pass": true,
+    "observed": {
+      "asked_window": "2024-01-01..2024-06-28",
+      "config": {
+        "symbol": "000001.SS",
+        "module": {
+          "value": "A",
+          "source": "message"
+        },
+        "exit_variant": {
+          "value": "a6_1_costbasis",
+          "source": "message"
+        },
+        "entry_variant": {
+          "value": null,
+          "source": "engine_default"
+        },
+        "rr_min": {
+          "value": 3.0,
+          "source": "engine_default"
+        },
+        "fee_label": {
+          "value": "standard",
+          "source": "engine_default"
+        },
+        "ruleset_sha256": {
+          "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+          "source": "current_active_ledger"
+        },
+        "window": {
+          "start": "2024-01-01",
+          "end": "2024-06-28",
+          "source": "message（用户本条消息明确给出的区间）",
+          "run_id": null
+        },
+        "window_state": "verified",
+        "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+      },
+      "run": {
+        "request_id": "btr_e3166a33fdbe",
+        "run_id": "20260909-202340-983257",
+        "symbol": "000001.SS",
+        "module": "A",
+        "exit_variant": "a6_1_costbasis",
+        "entry_variant": null,
+        "data_cutoff": "2026-09-09",
+        "ruleset_version": "2.1.0",
+        "completed_at": "2026-09-09T12:23:41.006659+00:00",
+        "differences_cn": [
+          "比较区间：本问题为 2024-01-01~2024-06-28（message（用户本条消息明确给出的区间）），旧运行实际为 2024-01-01~2025-04-04——不能用另一区间替代"
+        ],
+        "unverified_fields": [],
+        "input_verified": true,
+        "run_window": {
+          "data_cutoff": "2026-09-09",
+          "data_range": {
+            "start": "2024-01-01",
+            "end": "2025-04-04",
+            "symbols_count": 1,
+            "out_of_sample_start": "2023-04-05"
+          }
+        },
+        "compatibility": "incompatible",
+        "module_matches_question": true,
+        "supports_question": false,
+        "summary": {
+          "trade_count": 0,
+          "win_rate": null,
+          "expectancy_r": null,
+          "profit_factor": null,
+          "zero_trades": true
+        }
+      }
+    }
+  },
+  "t2_recovery_params": {
+    "acceptance_pass": true,
+    "observed": [
+      {
+        "field": "fee_label",
+        "altered": "different-fee",
+        "validator_error": "输出的实际生效参数与本次请求的完整配置不符（字段：fee_label(类型不符)；不采纳为本次结果）",
+        "status": "interrupted"
+      },
+      {
+        "field": "data_fingerprint",
+        "altered": "different-input",
+        "validator_error": "输出的数据内容指纹与冻结依据不符（实际输入不是本次请求的数据）",
+        "status": "interrupted"
+      },
+      {
+        "field": "symbols",
+        "altered": [
+          "000001.SS",
+          "600000.SS"
+        ],
+        "validator_error": "输出对象集合 ['000001.SS', '600000.SS'] 与本次请求的对象 ['000001.SS'] 不一致（不是同一次运行）",
+        "status": "interrupted"
+      }
+    ]
+  },
+  "t2_valid_recovery": {
+    "acceptance_pass": true,
+    "observed": {
+      "status": "completed"
+    }
+  },
+  "t3_plan_retry": {
+    "acceptance_pass": true,
+    "observed": {
+      "first_question": 8,
+      "retry_question": 8,
+      "first_artifact": {
+        "kind": "server_plan_draft_v1",
+        "artifact_id": "spa_8",
+        "question_id": 8,
+        "session_id": "sess_c198a39f25fd",
+        "symbol": "000001.SS",
+        "fields": {
+          "module": {
+            "value": "A",
+            "source": "message（用户本条消息明确给出）",
+            "note_cn": ""
+          },
+          "direction": {
+            "value": "long",
+            "source": "module_default（A/B/C 均为多头打法；默认多头方向）",
+            "note_cn": ""
+          },
+          "entry_rule_id": {
+            "value": null,
+            "source": "pending（待用户补）",
+            "note_cn": ""
+          },
+          "entry_trigger_cn": {
+            "value": null,
+            "source": "pending（待用户补）",
+            "note_cn": ""
+          },
+          "invalidation_price": {
+            "value": null,
+            "source": "pending（待用户补）",
+            "note_cn": "结构失效价只来自系统建议或用户明确给出；不从预算/聊天数字猜"
+          },
+          "target_b_price": {
+            "value": null,
+            "source": "pending（待用户补）",
+            "note_cn": ""
+          },
+          "thesis_cn": {
+            "value": null,
+            "source": "pending（五项预案必须由人写）",
+            "note_cn": ""
+          },
+          "invalidation_criteria_cn": {
+            "value": null,
+            "source": "pending（五项预案必须由人写）",
+            "note_cn": ""
+          },
+          "drawdown_playbook_cn": {
+            "value": null,
+            "source": "pending（五项预案必须由人写）",
+            "note_cn": ""
+          },
+          "take_profit_plan_cn": {
+            "value": null,
+            "source": "pending（五项预案必须由人写）",
+            "note_cn": ""
+          },
+          "stop_plan_cn": {
+            "value": null,
+            "source": "pending（五项预案必须由人写）",
+            "note_cn": ""
+          }
+        },
+        "ruleset_ref": {
+          "schema_version": "provenance/1.2",
+          "rule_id": "__ruleset__",
+          "version": "2.1.0",
+          "config_path": "/Users/yongbiaoli/lei-signal-integration-20260909/configs/rules.v2.yaml",
+          "config_hash": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+          "definition_ref": "/Users/yongbiaoli/lei-signal-integration-20260909/configs/rules.v2.yaml",
+          "fallback_note": ""
+        },
+        "evidence_refs": [
+          {
+            "schema_version": "provenance/1.2",
+            "source_id": "analysis_service(compose.pipeline)",
+            "instrument_id": "000001.SS",
+            "market": "cn",
+            "observed_at": "2025-04-04",
+            "available_at": null,
+            "generated_at": "2026-09-09T12:23:54.906110+00:00",
+            "last_valid_at": "2025-04-04",
+            "health": "unknown",
+            "reason": "判定层分析结果；底层行情发布节奏未核实（unknown 不当当前）",
+            "calendar_ref": null,
+            "as_of_cutoff": null,
+            "source_policy_ref": null,
+            "reference_lag_trading_days": null,
+            "source": "analysis_service(compose.pipeline)",
+            "completeness": "unknown",
+            "lag_trading_days": null
+          },
+          {
+            "schema_version": "provenance/1.2",
+            "id": "module_winrate:000001.SS",
+            "source_path": "docs/experiments/module_winrate.json",
+            "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+            "source_version": "1",
+            "status": "unverified",
+            "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+            "statistic_kind": "trade_r_stats",
+            "strategy_scope": [
+              "technical_execution"
+            ],
+            "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+            "compatibility": "unknown",
+            "evidence_id": "module_winrate:000001.SS",
+            "source": "docs/experiments/module_winrate.json",
+            "strategies": [
+              "technical_execution"
+            ],
+            "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+          }
+        ],
+        "rule_refs": [
+          {
+            "schema_version": "provenance/1.2",
+            "rule_id": "__ruleset__",
+            "version": "2.1.0",
+            "config_path": "/Users/yongbiaoli/lei-signal-integration-20260909/configs/rules.v2.yaml",
+            "config_hash": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+            "definition_ref": "/Users/yongbiaoli/lei-signal-integration-20260909/configs/rules.v2.yaml",
+            "fallback_note": ""
+          },
+          {
+            "schema_version": "provenance/1.2",
+            "rule_id": "two_b_reversal",
+            "version": "3.0.0",
+            "config_path": "/Users/yongbiaoli/lei-signal-integration-20260909/configs/rules.v2.yaml",
+            "config_hash": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+            "definition_ref": "/Users/yongbiaoli/lei-signal-integration-20260909/configs/rules.v2.yaml",
+            "fallback_note": ""
+          }
+        ],
+        "created_at": "2026-09-09T12:23:54+00:00",
+        "note_cn": "服务端产物：模型不参与字段构造；待补字段确认时由 04B 拒绝"
+      },
+      "retry_artifact": {
+        "kind": "server_plan_draft_v1",
+        "artifact_id": "spa_8",
+        "question_id": 8,
+        "session_id": "sess_c198a39f25fd",
+        "symbol": "000001.SS",
+        "fields": {
+          "module": {
+            "value": "A",
+            "source": "message（用户本条消息明确给出）",
+            "note_cn": ""
+          },
+          "direction": {
+            "value": "long",
+            "source": "module_default（A/B/C 均为多头打法；默认多头方向）",
+            "note_cn": ""
+          },
+          "entry_rule_id": {
+            "value": null,
+            "source": "pending（待用户补）",
+            "note_cn": ""
+          },
+          "entry_trigger_cn": {
+            "value": null,
+            "source": "pending（待用户补）",
+            "note_cn": ""
+          },
+          "invalidation_price": {
+            "value": null,
+            "source": "pending（待用户补）",
+            "note_cn": "结构失效价只来自系统建议或用户明确给出；不从预算/聊天数字猜"
+          },
+          "target_b_price": {
+            "value": null,
+            "source": "pending（待用户补）",
+            "note_cn": ""
+          },
+          "thesis_cn": {
+            "value": null,
+            "source": "pending（五项预案必须由人写）",
+            "note_cn": ""
+          },
+          "invalidation_criteria_cn": {
+            "value": null,
+            "source": "pending（五项预案必须由人写）",
+            "note_cn": ""
+          },
+          "drawdown_playbook_cn": {
+            "value": null,
+            "source": "pending（五项预案必须由人写）",
+            "note_cn": ""
+          },
+          "take_profit_plan_cn": {
+            "value": null,
+            "source": "pending（五项预案必须由人写）",
+            "note_cn": ""
+          },
+          "stop_plan_cn": {
+            "value": null,
+            "source": "pending（五项预案必须由人写）",
+            "note_cn": ""
+          }
+        },
+        "ruleset_ref": {
+          "schema_version": "provenance/1.2",
+          "rule_id": "__ruleset__",
+          "version": "2.1.0",
+          "config_path": "/Users/yongbiaoli/lei-signal-integration-20260909/configs/rules.v2.yaml",
+          "config_hash": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+          "definition_ref": "/Users/yongbiaoli/lei-signal-integration-20260909/configs/rules.v2.yaml",
+          "fallback_note": ""
+        },
+        "evidence_refs": [
+          {
+            "schema_version": "provenance/1.2",
+            "source_id": "analysis_service(compose.pipeline)",
+            "instrument_id": "000001.SS",
+            "market": "cn",
+            "observed_at": "2025-04-04",
+            "available_at": null,
+            "generated_at": "2026-09-09T12:23:54.906110+00:00",
+            "last_valid_at": "2025-04-04",
+            "health": "unknown",
+            "reason": "判定层分析结果；底层行情发布节奏未核实（unknown 不当当前）",
+            "calendar_ref": null,
+            "as_of_cutoff": null,
+            "source_policy_ref": null,
+            "reference_lag_trading_days": null,
+            "source": "analysis_service(compose.pipeline)",
+            "completeness": "unknown",
+            "lag_trading_days": null
+          },
+          {
+            "schema_version": "provenance/1.2",
+            "id": "module_winrate:000001.SS",
+            "source_path": "docs/experiments/module_winrate.json",
+            "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+            "source_version": "1",
+            "status": "unverified",
+            "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+            "statistic_kind": "trade_r_stats",
+            "strategy_scope": [
+              "technical_execution"
+            ],
+            "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+            "compatibility": "unknown",
+            "evidence_id": "module_winrate:000001.SS",
+            "source": "docs/experiments/module_winrate.json",
+            "strategies": [
+              "technical_execution"
+            ],
+            "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+          }
+        ],
+        "rule_refs": [
+          {
+            "schema_version": "provenance/1.2",
+            "rule_id": "__ruleset__",
+            "version": "2.1.0",
+            "config_path": "/Users/yongbiaoli/lei-signal-integration-20260909/configs/rules.v2.yaml",
+            "config_hash": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+            "definition_ref": "/Users/yongbiaoli/lei-signal-integration-20260909/configs/rules.v2.yaml",
+            "fallback_note": ""
+          },
+          {
+            "schema_version": "provenance/1.2",
+            "rule_id": "two_b_reversal",
+            "version": "3.0.0",
+            "config_path": "/Users/yongbiaoli/lei-signal-integration-20260909/configs/rules.v2.yaml",
+            "config_hash": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+            "definition_ref": "/Users/yongbiaoli/lei-signal-integration-20260909/configs/rules.v2.yaml",
+            "fallback_note": ""
+          }
+        ],
+        "created_at": "2026-09-09T12:23:54+00:00",
+        "note_cn": "服务端产物：模型不参与字段构造；待补字段确认时由 04B 拒绝"
+      },
+      "same_text": true
+    }
+  },
+  "t3_field_contract": {
+    "acceptance_pass": true,
+    "observed": {
+      "module": {
+        "value": "A",
+        "source": "suggested_plan",
+        "note_cn": ""
+      },
+      "direction": {
+        "value": "long",
+        "source": "suggested_plan",
+        "note_cn": ""
+      },
+      "entry_rule_id": {
+        "value": "first_ma_pullback_confirmed",
+        "source": "suggested_plan",
+        "note_cn": ""
+      },
+      "entry_trigger_cn": {
+        "value": "回调后站回均线",
+        "source": "suggested_plan",
+        "note_cn": ""
+      },
+      "invalidation_price": {
+        "value": null,
+        "source": "pending（待用户补）",
+        "note_cn": "结构失效价只来自系统建议或用户明确给出；不从预算/聊天数字猜"
+      },
+      "target_b_price": {
+        "value": 120.0,
+        "source": "suggested_plan",
+        "note_cn": ""
+      },
+      "thesis_cn": {
+        "value": null,
+        "source": "pending（五项预案必须由人写）",
+        "note_cn": ""
+      },
+      "invalidation_criteria_cn": {
+        "value": null,
+        "source": "pending（五项预案必须由人写）",
+        "note_cn": ""
+      },
+      "drawdown_playbook_cn": {
+        "value": null,
+        "source": "pending（五项预案必须由人写）",
+        "note_cn": ""
+      },
+      "take_profit_plan_cn": {
+        "value": null,
+        "source": "pending（五项预案必须由人写）",
+        "note_cn": ""
+      },
+      "stop_plan_cn": {
+        "value": null,
+        "source": "pending（五项预案必须由人写）",
+        "note_cn": ""
+      }
+    }
+  }
+}

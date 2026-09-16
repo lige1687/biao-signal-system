@@ -1,0 +1,56 @@
+{
+  "date": "2026-09-08",
+  "scope": "pre-return static review only; no real account run or result reconciliation",
+  "verdict": "pass",
+  "blocking_findings": [],
+  "checks": {
+    "independent_risk_sized_config_set": true,
+    "default_behavior_unchanged": true,
+    "real_default_five_tables_exact": true,
+    "r1_target_rejections_bypassed": true,
+    "r1_exit_unchanged": true,
+    "prior_day_equity_used": true,
+    "distinctive_open_10_close_11_test": true,
+    "account_count": 4,
+    "single_product_inputs_per_account": true,
+    "internal_config_id": "R1",
+    "output_method": "R1-risk1",
+    "candidate_count": 313,
+    "candidate_counts_by_symbol": {
+      "sh510300": 158,
+      "sz159915": 155
+    },
+    "source_lock_files": 14,
+    "source_lock_all_match": true
+  },
+  "test_evidence": {
+    "final_unit_tests_passed": 7,
+    "first_failed_test_preserved": true,
+    "first_failure_kind": "test fixture initially did not create an under-one-lot risk quantity",
+    "final_prior_day_case": {
+      "entry_open": 10,
+      "entry_close": 11,
+      "previous_product_equity": 100000,
+      "risk_budget": 1000,
+      "entry_day_ending_equity": 100990
+    },
+    "real_default_regression_tables": [
+      "daily",
+      "trades",
+      "orders",
+      "events",
+      "roundtrips"
+    ]
+  },
+  "nonblocking_followup": "No execution-report.md or equivalent preparation report existed at review time. This is consistent with the pre-run stage; the post-run report should record the command, lock hash, completion state, and failed attempts.",
+  "reviewed_sha256": {
+    "protocol.md": "aaced19dd2e6c71228af6c194454410ab52e6874eb13b284c76eef22fbcb1b78",
+    "execution/engine.diff": "8cc5013b12d72b600d951d4f37a8af4810078567cbff339436725ff464a13766",
+    "execution/engine.py": "a828d373d86b8547698b61386401829cb05d3616c9272ec0297ad1b801b1e8be",
+    "execution/run_accounts.py": "5742c699c607ff656a407360a166bcf47a7f8cbb790a7ea81997dbc4260899dc",
+    "execution/test_engine.py": "fdebe21b7b2e9da3c4031204adedda361537174e962f46b7a9ad6a5b3aeac675",
+    "execution/preparation-tests.log": "4d3ba3f31c087a55f241b2670cd049d9cc2ef01b0e8d730de73b3da1ee60665b",
+    "execution/real-default-regression.log": "f6b3f36b4ecf4511430d1f3511fece924adb933f11509f68df26f3a55c4e1983",
+    "execution/source-lock.json": "be43adaba201acaf205249b748d520930987278965b644931ead45fe214e6dcd"
+  }
+}

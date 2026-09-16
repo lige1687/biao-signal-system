@@ -1,0 +1,1814 @@
+{
+ "schema_version": "fixed-etf-source-inventory/1.0",
+ "git_head": "8ba16576b75e605aa1b0d0902568c760c4b99095",
+ "code_hashes": {
+  "src/lei_signal/research/momentum_prototype.py": "5425e4f5494710041ae42816bf259ac7cdc1ed6aaef01986ac1d3d34d90e568f",
+  "scripts/run_momentum_research_prototype.py": "f7d2db02c855bc9d210c4d89ec175dd27feaa0946b887f2dd5edd93febdb29e7",
+  "tests/unit/test_momentum_prototype.py": "a17d48e0ee88c6b0c01ed5bf76ca02173c98c6a77cee5ccf8f2302c58cc97eae",
+  "tests/integration/test_momentum_prototype_cli.py": "f93e99b7b996a3ad0aaa07bb9f0e145ae39f3b528db5c3fe12a0dd3d01267e9e"
+ },
+ "frozen_inputs": {
+  "snapshot_dir": {
+   "path": "docs/experiments/raw/research-identity-wiring-2026-09-10/canonical-snapshot-v2",
+   "sha256": "d4e6518b957d06a50189a574cbd547a98e479bae872a284c0718febff781ce27"
+  },
+  "calendar": {
+   "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+   "sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1"
+  },
+  "publication": {
+   "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-evidence.json",
+   "sha256": "657ef122c62aefcf8d580e5e20e85beac8b1a0979c399f3529ae30d6b245ef02"
+  },
+  "actions": {
+   "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/normalized-actions.json",
+   "sha256": "097043b2c622a308b602a961b666129f575a35083a8ede6d7bfa1cf16ea1ce81"
+  }
+ },
+ "groups": {
+  "listing-leads": [
+   {
+    "path": "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/index-universe.json",
+    "sha256": "b0e92fbfbebdbb1d7cb665ebc470098f8430eee84657b84b8c2b7e6209e1bdcc",
+    "bytes": 3802,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/product-events.json",
+    "sha256": "39f7f898c221eaa7f87175df5af0af13e9266236b2a827829325f96cce43f907",
+    "bytes": 9294,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/qualification.md",
+    "sha256": "c4ce0f235c3924197d8ec5827cdf008e8eb1d292da37f31b6d5327eeaa5e0073",
+    "bytes": 5431,
+    "kind": "md"
+   },
+   {
+    "path": "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/source-manifest.json",
+    "sha256": "c062f2c037800e7503881ac8f8285b58ca074f5a2b9128b1a02dfec2c7490219",
+    "bytes": 5078,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/sources/159516-listing.pdf",
+    "sha256": "41e8f902e586a82eff13d060ca57d0a61fba5dc0ac5749d4e85d34b6aa778f8d",
+    "bytes": 97492,
+    "kind": "pdf"
+   },
+   {
+    "path": "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/sources/515050-listing.pdf",
+    "sha256": "014bb99ca6f9a5d8a1d4bfe0967e1f3c4d85f0b5632dbd9104ae81d5da9bec9c",
+    "bytes": 199948,
+    "kind": "pdf"
+   },
+   {
+    "path": "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/sources/516650-index-000811.pdf",
+    "sha256": "7203adaad91310b7a9cfbd25b797f7d2762b49fed8d9b5490f90f1afcb303edf",
+    "bytes": 1974096,
+    "kind": "pdf"
+   },
+   {
+    "path": "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/sources/516690-index-000813.pdf",
+    "sha256": "339343a46c8f5b2896f192bc72b78d20e53e159f643443b47d7cd9754d906c35",
+    "bytes": 1343655,
+    "kind": "pdf"
+   },
+   {
+    "path": "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/sources/516690-termination-2024-08-22.pdf",
+    "sha256": "3c409ba8c772f4c4c52bd3932e65f874364a909e796ebca69759f57b5a1890be",
+    "bytes": 659939,
+    "kind": "pdf"
+   },
+   {
+    "path": "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/sources/562590-listing.pdf",
+    "sha256": "95fe32ff583ff000ecc9d53ab2c09ce5d6934681d542e8ec0fde24723aa98a7f",
+    "bytes": 748690,
+    "kind": "pdf"
+   }
+  ],
+  "action-sources": [
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/159652-table0.csv",
+    "sha256": "f03f2a32741572186d13fb81d417b7c9208db311bcd27fa6627a3163df9babd1",
+    "bytes": 430,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/159652-table1.csv",
+    "sha256": "98410216c6ec2e5eb85162d009b2508fee075fd449a014c543a4662491e3df86",
+    "bytes": 164,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/159652-table2.csv",
+    "sha256": "57c97b50473c4b776981889dd36745cfce1f2dbe765e65eed0f174aa8cf1a1be",
+    "bytes": 166,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/159652.html",
+    "sha256": "7ab05c9056a1cc2cc305070ef6d1379a45ecb4600262396224ae46fbf5090936",
+    "bytes": 43945,
+    "kind": "html"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/510300-table0.csv",
+    "sha256": "f03f2a32741572186d13fb81d417b7c9208db311bcd27fa6627a3163df9babd1",
+    "bytes": 430,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/510300-table1.csv",
+    "sha256": "79ace003bac124c94851fdf371d68bb5066543d1fd9135edd68679548958897c",
+    "bytes": 1016,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/510300-table2.csv",
+    "sha256": "baf2e8f95f8553677a0cc7fb5029256289d5cdc171bf570747d2dbfa51f9fab9",
+    "bytes": 96,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/510300.html",
+    "sha256": "d92ef5eb755cb4b1622686521a3773a1381cf82f3ee317a263caf95a680544a6",
+    "bytes": 45616,
+    "kind": "html"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/512400-table0.csv",
+    "sha256": "f03f2a32741572186d13fb81d417b7c9208db311bcd27fa6627a3163df9babd1",
+    "bytes": 430,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/512400-table1.csv",
+    "sha256": "82878da2c12ab88b10cb12c21bf8b4cbc03849fbef89827a3f3fb031f5ad7bad",
+    "bytes": 268,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/512400-table2.csv",
+    "sha256": "57c97b50473c4b776981889dd36745cfce1f2dbe765e65eed0f174aa8cf1a1be",
+    "bytes": 166,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/512400.html",
+    "sha256": "a809da2247e015711b0159681def5fa26b931054649b3e30e8ec0f7291b68075",
+    "bytes": 44279,
+    "kind": "html"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/512890-official-split.pdf",
+    "sha256": "4e224e9585dcb6bb0151fd5b043f9df201724a819a2bc722181c54db4e1821b9",
+    "bytes": 101021,
+    "kind": "pdf"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/512890-table0.csv",
+    "sha256": "f03f2a32741572186d13fb81d417b7c9208db311bcd27fa6627a3163df9babd1",
+    "bytes": 430,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/512890-table1.csv",
+    "sha256": "98410216c6ec2e5eb85162d009b2508fee075fd449a014c543a4662491e3df86",
+    "bytes": 164,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/512890-table2.csv",
+    "sha256": "6b7ce074c192f7939c2f621192988a74447e8fceee8ab097e10b54dac830d20c",
+    "bytes": 96,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/512890.html",
+    "sha256": "8097216468aa5e14e58ff822393e9faae89e5d2f3e2600a3dcb3312eb9e9be56",
+    "bytes": 44039,
+    "kind": "html"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/513870-table0.csv",
+    "sha256": "98410216c6ec2e5eb85162d009b2508fee075fd449a014c543a4662491e3df86",
+    "bytes": 164,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/513870-table1.csv",
+    "sha256": "57c97b50473c4b776981889dd36745cfce1f2dbe765e65eed0f174aa8cf1a1be",
+    "bytes": 166,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/513870.html",
+    "sha256": "6a3e3e5a0f2cae1c1a6952efb129c38c53ce036860ca7dd957aad2a29dd6fd8b",
+    "bytes": 37242,
+    "kind": "html"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515050-official-split.pdf",
+    "sha256": "b8cbe27f95651df691224c4c19ff087a52908c28bdc4ef88973e57bbb0d62424",
+    "bytes": 199517,
+    "kind": "pdf"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515050-table0.csv",
+    "sha256": "98410216c6ec2e5eb85162d009b2508fee075fd449a014c543a4662491e3df86",
+    "bytes": 164,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515050-table1.csv",
+    "sha256": "76a0d6b1ca56cc243cfb4287aa988448f0728729ebc04ce66200f8cfe4e0e815",
+    "bytes": 96,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515050.html",
+    "sha256": "822604296c15e2ecabf22893a87c15dd581c763beb36090ef9f3c96a83395292",
+    "bytes": 37120,
+    "kind": "html"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515130-table0.csv",
+    "sha256": "98410216c6ec2e5eb85162d009b2508fee075fd449a014c543a4662491e3df86",
+    "bytes": 164,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515130-table1.csv",
+    "sha256": "57c97b50473c4b776981889dd36745cfce1f2dbe765e65eed0f174aa8cf1a1be",
+    "bytes": 166,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515130.html",
+    "sha256": "c1314cf8d2ac43603084b9ce9d2a99392576173f25613067137c949e0b601c90",
+    "bytes": 37269,
+    "kind": "html"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515170-table0.csv",
+    "sha256": "f03f2a32741572186d13fb81d417b7c9208db311bcd27fa6627a3163df9babd1",
+    "bytes": 430,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515170-table1.csv",
+    "sha256": "98410216c6ec2e5eb85162d009b2508fee075fd449a014c543a4662491e3df86",
+    "bytes": 164,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515170-table2.csv",
+    "sha256": "57c97b50473c4b776981889dd36745cfce1f2dbe765e65eed0f174aa8cf1a1be",
+    "bytes": 166,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515170.html",
+    "sha256": "f5572e32db5c44ce578a1371d29bab2a9cc327b637d06dd85d27666169152b85",
+    "bytes": 43830,
+    "kind": "html"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515300-table0.csv",
+    "sha256": "f03f2a32741572186d13fb81d417b7c9208db311bcd27fa6627a3163df9babd1",
+    "bytes": 430,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515300-table1.csv",
+    "sha256": "7d2bd13b7e64d20b2cc919a1f7cb5db03d5199fc2954caf746c6d43b81322367",
+    "bytes": 540,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515300-table2.csv",
+    "sha256": "57c97b50473c4b776981889dd36745cfce1f2dbe765e65eed0f174aa8cf1a1be",
+    "bytes": 166,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515300.html",
+    "sha256": "382d47076dbdb14ea4c5bff1afb8850e681b5ed1176856933dd324b5be685378",
+    "bytes": 44635,
+    "kind": "html"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515880-official-split.pdf",
+    "sha256": "6dbf89de8a08ed48d5894807255b8ff2d7bb64c2c4dac6cfa7854ca6cc09a10f",
+    "bytes": 264638,
+    "kind": "pdf"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515880-table0.csv",
+    "sha256": "f03f2a32741572186d13fb81d417b7c9208db311bcd27fa6627a3163df9babd1",
+    "bytes": 430,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515880-table1.csv",
+    "sha256": "98410216c6ec2e5eb85162d009b2508fee075fd449a014c543a4662491e3df86",
+    "bytes": 164,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515880-table2.csv",
+    "sha256": "03f473fdacb07d3ff34f17993acaf9195ec95db0690463cfa97e48e923341787",
+    "bytes": 137,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515880.html",
+    "sha256": "0213d143c27a539358e4a8b5e7f23d62d7f4ae5348a596ab511426af59949256",
+    "bytes": 43962,
+    "kind": "html"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/516220-table0.csv",
+    "sha256": "f03f2a32741572186d13fb81d417b7c9208db311bcd27fa6627a3163df9babd1",
+    "bytes": 430,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/516220-table1.csv",
+    "sha256": "98410216c6ec2e5eb85162d009b2508fee075fd449a014c543a4662491e3df86",
+    "bytes": 164,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/516220-table2.csv",
+    "sha256": "57c97b50473c4b776981889dd36745cfce1f2dbe765e65eed0f174aa8cf1a1be",
+    "bytes": 166,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/516220.html",
+    "sha256": "2f0547673c62c13caa418badf7808219eb862c7d6840804d35cbdbcda0736bc5",
+    "bytes": 43854,
+    "kind": "html"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/518850-table0.csv",
+    "sha256": "f03f2a32741572186d13fb81d417b7c9208db311bcd27fa6627a3163df9babd1",
+    "bytes": 430,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/518850-table1.csv",
+    "sha256": "98410216c6ec2e5eb85162d009b2508fee075fd449a014c543a4662491e3df86",
+    "bytes": 164,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/518850-table2.csv",
+    "sha256": "896fdfdef74cb968dff15205655eb4b0d6620ad98ef3714825f53bd1d0b0b679",
+    "bytes": 96,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/518850.html",
+    "sha256": "31c006fc413fa827c39ad937bcaf1037ff2ccfe8d696f6ce8157188607429827",
+    "bytes": 43795,
+    "kind": "html"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/562590-table0.csv",
+    "sha256": "f03f2a32741572186d13fb81d417b7c9208db311bcd27fa6627a3163df9babd1",
+    "bytes": 430,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/562590-table1.csv",
+    "sha256": "98410216c6ec2e5eb85162d009b2508fee075fd449a014c543a4662491e3df86",
+    "bytes": 164,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/562590-table2.csv",
+    "sha256": "d5f8393d921f6f758dffc65598069c30302940381667338b21ef898148c55c0c",
+    "bytes": 96,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/562590.html",
+    "sha256": "8b97f17eaf33de99414322485af47e5c2369ad397f8dedf817f80d14431db5d9",
+    "bytes": 43879,
+    "kind": "html"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/588000-table0.csv",
+    "sha256": "98410216c6ec2e5eb85162d009b2508fee075fd449a014c543a4662491e3df86",
+    "bytes": 164,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/588000-table1.csv",
+    "sha256": "ec9e5841c87039529648a85db33b7e4204f7b854b7a22b4c8c1a57fa5d7a3b5f",
+    "bytes": 96,
+    "kind": "csv"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/588000.html",
+    "sha256": "dd742d99a32a428bb12412879e4c8786fd13657b3432d636556558adb6ad0359",
+    "bytes": 37138,
+    "kind": "html"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/fetch.py",
+    "sha256": "569f3d2500e315d580c9e2217dfba82d9bca4da85cb794207c588fc99e7075ec",
+    "bytes": 1210,
+    "kind": "py"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/index.json",
+    "sha256": "a3d06817f22b8155e331d9bf76e0605145b5a13f40dc52c714080adf3c7d1bfd",
+    "bytes": 23268,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/normalize.py",
+    "sha256": "c286f66be776a9fa011576f71d90965caee1f04d20dd52a803e8e5bfe3c2f597",
+    "bytes": 3181,
+    "kind": "py"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/normalized-actions.json",
+    "sha256": "097043b2c622a308b602a961b666129f575a35083a8ede6d7bfa1cf16ea1ce81",
+    "bytes": 24603,
+    "kind": "json"
+   }
+  ],
+  "515300-official": [
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/events.json",
+    "sha256": "7c5f38d7e31d33fd04047258822facbb1477ab1b8707b45918ed7c0ff425dcb8",
+    "bytes": 3712,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/qualification.md",
+    "sha256": "26326b49c63c9084826806bb4cda053d4c08ab40845f150d3ec4e96c034fb40b",
+    "bytes": 1765,
+    "kind": "md"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/source-manifest.json",
+    "sha256": "671f8a7ce127a3a0c7c5a77ad1a9a61a1dbcb5a65cf7c1460747938e5d93a089",
+    "bytes": 2406,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20231214_MO7U.pdf",
+    "sha256": "bd46358cca56e22f7a0e49e9cfd461b2e25060c8772fc68403305d9aae37c38b",
+    "bytes": 176588,
+    "kind": "pdf"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20231214_MO7U.txt",
+    "sha256": "5877f9764d3a785a54a2c96c40edb8f67c820ab38ad137f22adeada30c909728",
+    "bytes": 4144,
+    "kind": "txt"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20240618_QXY9.pdf",
+    "sha256": "b993b33e769f5d5e98a593a0d57c373159ecab9050e34f0c5cdefa07f8c35351",
+    "bytes": 176564,
+    "kind": "pdf"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20240618_QXY9.txt",
+    "sha256": "3668566a2a317f6d17c348c42f23e1176c439a2bfea5c14bd99127aaaa46f5c2",
+    "bytes": 4133,
+    "kind": "txt"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20240913_SAOV.pdf",
+    "sha256": "d0fcca84c84c5e5f2985f6b566a17edc8943089cbba604fa68a96ae4799e578c",
+    "bytes": 177191,
+    "kind": "pdf"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20240913_SAOV.txt",
+    "sha256": "746782188a3a68fa1c8910d5169b0207ef5025f9eaa402e59853a440b538e4a6",
+    "bytes": 4146,
+    "kind": "txt"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20241128_QVEK.pdf",
+    "sha256": "42e76e778fce0ad3ec7617d3ff8a5a35bcb459a96d7ab8acd45acb50762ec157",
+    "bytes": 177222,
+    "kind": "pdf"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20241128_QVEK.txt",
+    "sha256": "579e1fda632a201933331d1b7f52dc7151b41ba48beb78b27301db5718a4cc77",
+    "bytes": 4149,
+    "kind": "txt"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20250612_HGW2.pdf",
+    "sha256": "e654cfe4108dc9f19572d020c4af95d7b7bff3c4160a0d981d83792622e23db8",
+    "bytes": 109986,
+    "kind": "pdf"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20250612_HGW2.txt",
+    "sha256": "968692c7602d257c1700df0a570913ad3ceb49d3593d3eec57c9043d5b1fcf64",
+    "bytes": 4036,
+    "kind": "txt"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20250915_NN2J.pdf",
+    "sha256": "779e0693869e088e9f4cdfb3abe1747122b78177b5210741f4f5e8a4a5f2b651",
+    "bytes": 109997,
+    "kind": "pdf"
+   },
+   {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20250915_NN2J.txt",
+    "sha256": "535dc62ca451fdfa83b6bb67bcd08a41893856a63adaa84e531ea94e03acefc8",
+    "bytes": 4035,
+    "kind": "txt"
+   }
+  ],
+  "calendar": [
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+    "sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+    "bytes": 296252,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining/calendar.json",
+    "sha256": "7e7abaf64d1bf6fabdb619b1a100dc15eaffe1b39fb191335ba3ed9ca0cf1a49",
+    "bytes": 3849,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+    "sha256": "0004e6376e84add586f65d9b102b43fa8a58fb5b4b79029959f0969836ec1948",
+    "bytes": 217108,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2019-11.json",
+    "sha256": "73cd876df59caae8847a027f0cd6be88253e282a67a0e8f9db4bfd8853e945d9",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2019-12.json",
+    "sha256": "af32db29063806ceaa5bdde7e9a9207680e7a927f41bcde9eed3a38ec7a11fd1",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-03.json",
+    "sha256": "343010425fcb5d5d1957e7cd216f4e780d656121f7e79ce28810fc2db851662e",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-04.json",
+    "sha256": "26c15f3e240d643e961b00e7cce21d13619ae819cf91d71fb74dac5bdfc5c2c4",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-05.json",
+    "sha256": "72f4c320d9bb3e84268e7e5c0e265bf022ef3c4b3fce544d6536085e4719fb5e",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-06.json",
+    "sha256": "760ba1a5c4d62b69b2d92f05f784e427b86fbc6da47064dab65e0feef5eb0824",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-07.json",
+    "sha256": "208529e063163b22a916acc19c66889c4540ef002f2f54a64e4bb4e7dfdf5a3d",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-08.json",
+    "sha256": "38b3c08b34708dd880530b663c24618278325e08f0864e77784559007df8932a",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-09.json",
+    "sha256": "e6e649d49b90b50791b054bd282c58064df632150f7fad84311d431521df7ff0",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-11.json",
+    "sha256": "2a5fb428670c46a6d894dc9345dd11b20ca260d0080a95e26d147cabb01a23a4",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-12.json",
+    "sha256": "5a6c17f9761f80c6d837200202d65cab8a08100613e45a12f65190ee3e600bd4",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-01.json",
+    "sha256": "26209c80a5077d55b39e2c515abb7f5b8ea34f3dc5e041600b99264ebec2b917",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-03.json",
+    "sha256": "acc7877be7acd4e0a600a1269993b0eef3ebd4bbb6ebd8c8df94f67142012ada",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-04.json",
+    "sha256": "1e21c3d73d34324060e4e43d142f462115159c950faac040a72b321066caf98c",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-05.json",
+    "sha256": "d53a8cfc58f0ced36ed7361e2e0a094b8c57778d5bd91115e4148c8399633998",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-06.json",
+    "sha256": "5bf42c465e3c443bba9607974337b16de7f0984b91e455e9e50d1ca75af9c6eb",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-07.json",
+    "sha256": "cb84f24c98e30758bccdee0cbb8c2871feccb29b00878aba299f1a9d23f60482",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-08.json",
+    "sha256": "acc063d2a1a26ccc8936e9eb64cb30c3bc8a20ae35aeb2ab5baca6940600eeef",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-11.json",
+    "sha256": "b8073c69cdf04d38ceb800a7105060b335e24578f5ecc6ed1a8a5bdc5274c2e7",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-12.json",
+    "sha256": "abb25fec5757e382ff5c0a5790527fa5fca4956b9c4d2af6cf17bc687d6dd491",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-02.json",
+    "sha256": "49ae2bb7c3291a8181371a04db9fd80be597626be4e0e6191089957c2832a106",
+    "bytes": 1209,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-03.json",
+    "sha256": "2fcf13ec55e8c065e55991c0d3c8ea92c648bc53c930ebe2f2b09f0a52dbb4bc",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-05.json",
+    "sha256": "f6201b39e5b8d45389996a5db3ef441aa245890f1c92290cd0e990a6a5f98e7f",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-06.json",
+    "sha256": "824df41143d8d14b7334e258ed142e35122203bb8144c241b78a9cedaf979e86",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-07.json",
+    "sha256": "5638e15fb61c48a8c5fac390c609abd63c6e62175f2faed79d89236a667d9cb5",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-08.json",
+    "sha256": "1526d313e4bff43449f96d620e9ad8dfc10e390bd4b83a10957fadc42d1a0bab",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-09.json",
+    "sha256": "80a76645ca97129a26eaaf7c59c42a0ff6689c2d7499fb50268bab5a9eeb2050",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-11.json",
+    "sha256": "d4514cb5d678ee4c192c083d1755f4aacd8a966e70313a31949d0d6ac1ed19bf",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-12.json",
+    "sha256": "48cb0c901f0fc61e1edd5f095aa8147315716a700138f5c912875f55a4aab8ee",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-02.json",
+    "sha256": "3510871f9d15b1a683d3a94ea28b1e51dcb3b7223b27f3250495d32047d57cdb",
+    "bytes": 1209,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-03.json",
+    "sha256": "10cbdf81f4c3a043da35a2814c069ddc003fe1b8905563ea06fcc53012728349",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-04.json",
+    "sha256": "6b7b70d4476f593092b480f0496168a0a5545ef10668a26a2279a0cedf6d39f2",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-05.json",
+    "sha256": "27574d6970dc9aa00b983ce4695fe622d031fa599ac4f09c170c2fd9e6172203",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-06.json",
+    "sha256": "2d2c3035016931dea40f7ee67cadb41709797e291005bcd2e2e29cefc623fa10",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-07.json",
+    "sha256": "f54bfaa5763f35890165e9cac19d89a796877c161dc08c6679c47410e6a88f8f",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-08.json",
+    "sha256": "f7a6733b6d8b896659889ad5647836fc17950a92222050477090f6ff57a6a63c",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-11.json",
+    "sha256": "ee8f6079bf16cfbc3aae39554672ddb3557cd0f55d8b2f1d5466c8fb8e079f82",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-12.json",
+    "sha256": "b99940defe43b371bbb06265a0aebf7266469c5f19a20cd2670b112bf056d4aa",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-01.json",
+    "sha256": "319509f1c09755b480f0c4555965046083d431b88062cb47728bbe1c7426015f",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-03.json",
+    "sha256": "3f00d5fa03f49f9439d8421a25a4b65b210168e1194420f147ef586e5410e532",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-04.json",
+    "sha256": "bdf0de40a244b1bc0661d1b73e7ac55c2189a06dd23e412179e4e520f01224ca",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-05.json",
+    "sha256": "15058854f291ac80d04dc919fe40b9d3436143631fc4d88848b079edc44acdc4",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-06.json",
+    "sha256": "c13db5d324afc6a9bc96587bc2d4d8031f281c7b7511c2f5df93e29d23de8257",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-07.json",
+    "sha256": "23229eb8eec8443706a16d832a0026511ddec555c37a11fcbb2d270fd5e98b4a",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-08.json",
+    "sha256": "b02702172d6ebbb7140b04ec0fa7b9f44963795f6aaf34c878015fae865f5781",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-09.json",
+    "sha256": "dcc5cef5ddb75f9b51e2ebbdf466b97120dcf13e8e301b8d81dab7034f42e464",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-11.json",
+    "sha256": "d14a6c75686e286de6cf62653cddd041feefbd2b3c689e67c7763d71cf190c79",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-12.json",
+    "sha256": "6a5d4059960841949df228ebcb79c9ae6f7a60d8b4eb901e76417b60facb15e9",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-03.json",
+    "sha256": "18e7c0195124cd4c64dbabc3fa3bae07bce11daffcb5a060edf1aa96587daaca",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-04.json",
+    "sha256": "31ae208673ba9b43ceb8f554db4aec02ee19f92f9c4577fbfed0d686227bebde",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-05.json",
+    "sha256": "f59da05f4b43b078d1ea91d0b2591686457470aea773c1d63f34b343aafc59b8",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-06.json",
+    "sha256": "f9c63ea8d8c5c3f2263bd5bb6692b06c9e8f05de85ffc6e145464e447ebdd9bf",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-07.json",
+    "sha256": "3fbba25a412ff6ab7676779f1ff1f4d522cd99aa3adc4c1cb416e9c05c5a00a8",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-08.json",
+    "sha256": "42fa7ece56b62e9162b68dc3e350b94849b9f99207588c3f63dc2f5ac01d8b71",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-09.json",
+    "sha256": "1e52596fb8c2a7795dc35ca390e14c0b79a7b3c8316f0d7811ee9232ccb320bd",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-11.json",
+    "sha256": "a9cfaccc7b53979061f1a9b3baf5ca8e23be6801a0fb5d46f1b9254d82133ff4",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-12.json",
+    "sha256": "ae6c79c83b1a09fe34f12f7189f5fcc2bf842d9ab5f1cae795345b655942ab1a",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2026-03.json",
+    "sha256": "8bf24b4a15975f3cd8346e279fa84cf7c72767878d9194df9ae0b904cfd2dd6d",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2026-04.json",
+    "sha256": "10e3bfaae22e98fa41eeb2fb224822b115b5f79e5bb2ba3ad4d420835dcea0f8",
+    "bytes": 1293,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2026-05.json",
+    "sha256": "e5be116c816df091cb18d1ef3a4c80a72b463c8c4b90918b2e3c979904924f2d",
+    "bytes": 1335,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/missing-months.txt",
+    "sha256": "0615f2c501f4834f1f186cd195b741c5e9101c8947f92fd4c07aeb2f11ccf592",
+    "bytes": 479,
+    "kind": "txt"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/protocol.json",
+    "sha256": "8be3aeec19fc35e4d69fab983e064d48e5e24f976de011a43b937bd0a86a64e9",
+    "bytes": 4541,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-evidence.json",
+    "sha256": "657ef122c62aefcf8d580e5e20e85beac8b1a0979c399f3529ae30d6b245ef02",
+    "bytes": 3815,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/sse_2026_annual_notice.html",
+    "sha256": "4e260b815ce1309175ed994e6490a4ccd51b998a5f92bcdc41cec00fc6823dc7",
+    "bytes": 29251,
+    "kind": "html"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/sse_2026_spring_notice.html",
+    "sha256": "0e05934820bcd89e88165e7725d14c9b5463ca7ad24b049a9b1aef5fcd44085e",
+    "bytes": 27935,
+    "kind": "html"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/sse_closed_page.html",
+    "sha256": "51ac590f84bd825f6fe70793b90a63470bf59053f4dfd5ad94cb7cdb67da5b43",
+    "bytes": 30824,
+    "kind": "html"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/szse_cal_page.html",
+    "sha256": "c172b73cf8301d68b194464a6efca3a719f04274d9b22d6df680c69460eddad9",
+    "bytes": 8406,
+    "kind": "html"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/szse_notice.json",
+    "sha256": "909a526f37ede9aad5fb563a8735ddde67db27e48ec4e0ff5871074118e4b710",
+    "bytes": 2226,
+    "kind": "json"
+   },
+   {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/szse_search.json",
+    "sha256": "909a526f37ede9aad5fb563a8735ddde67db27e48ec4e0ff5871074118e4b710",
+    "bytes": 2226,
+    "kind": "json"
+   }
+  ]
+ },
+ "duplicates": {
+  "f03f2a32741572186d13fb81d417b7c9208db311bcd27fa6627a3163df9babd1": [
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/159652-table0.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/510300-table0.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/512400-table0.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/512890-table0.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515170-table0.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515300-table0.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515880-table0.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/516220-table0.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/518850-table0.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/562590-table0.csv"
+  ],
+  "98410216c6ec2e5eb85162d009b2508fee075fd449a014c543a4662491e3df86": [
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/159652-table1.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/512890-table1.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/513870-table0.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515050-table0.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515130-table0.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515170-table1.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515880-table1.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/516220-table1.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/518850-table1.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/562590-table1.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/588000-table0.csv"
+  ],
+  "57c97b50473c4b776981889dd36745cfce1f2dbe765e65eed0f174aa8cf1a1be": [
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/159652-table2.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/512400-table2.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/513870-table1.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515130-table1.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515170-table2.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515300-table2.csv",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/516220-table2.csv"
+  ],
+  "909a526f37ede9aad5fb563a8735ddde67db27e48ec4e0ff5871074118e4b710": [
+   "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/szse_notice.json",
+   "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/szse_search.json"
+  ]
+ },
+ "index_notes": {
+  "listing-source-manifest": {
+   "path": "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/source-manifest.json",
+   "parsed": {
+    "generated_at": "2026-09-09T19:39:34.914385+08:00",
+    "principles_version": "v1.0",
+    "protocol_sha256": "4e19e4f33cd8a202ad4ecb2eac8fff1e24e815d211d846b3deb9603843eb5465",
+    "scope": "stage A existing economic directions; bounded source qualification; no returns",
+    "references": [
+     {
+      "publisher": "SSE",
+      "evidence": "科创50首批四只同日上市",
+      "url": "https://etf.sse.com.cn/fundtrends/c/10055594/files/c41feab91f544352ac2782c4f24b0bb3.pdf",
+      "level": "official"
+     },
+     {
+      "publisher": "SSE",
+      "evidence": "黄金ETF历史表（成立日与跟踪对象）",
+      "url": "https://star.sse.com.cn/aboutus/research/report/c/10056573/files/ac9c082e4dbb44ca8bf2e1045c6ff704.pdf",
+      "level": "official_exchange_research"
+     },
+     {
+      "publisher": "SZSE",
+      "evidence": "159919至迟2012-06-04存在",
+      "url": "https://www.szse.cn/disclosure/margin/business/t20120601_500953.html",
+      "level": "official"
+     },
+     {
+      "publisher": "SSE",
+      "evidence": "516120上市及跟踪细分化工",
+      "url": "https://etf.sse.com.cn/fundtrends/c/5334122.shtml",
+      "level": "official"
+     },
+     {
+      "publisher": "SSE",
+      "evidence": "516680上市及跟踪细分有色",
+      "url": "https://etf.sse.com.cn/fundtrends/c/5332656.shtml",
+      "level": "official"
+     },
+     {
+      "publisher": "SZSE",
+      "evidence": "159516上市日",
+      "url": "https://www.szse.cn/disclosure/notice/fund/t20230724_602100.html",
+      "level": "official"
+     },
+     {
+      "publisher": "SSE",
+      "evidence": "513870上市日",
+      "url": "https://www.sse.com.cn/disclosure/announcement/listing/c/c_20231101_5728304.shtml",
+      "level": "official"
+     },
+     {
+      "publisher": "SSE",
+      "evidence": "516690终止上市",
+      "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2024-08-22/516690_20240822_1VIX.pdf",
+      "level": "official"
+     },
+     {
+      "publisher": "SSE",
+      "evidence": "515930暂停赎回与拟终止",
+      "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2023-06-12/515930_20230612_3WRP.pdf",
+      "level": "official"
+     },
+     {
+      "publisher": "SSE",
+      "evidence": "512210终止上市",
+      "url": "https://www.sse.com.cn/disclosure/announcement/listing/c/c_20180830_4627586.shtml",
+      "level": "official"
+     },
+     {
+      "publisher": "SSE",
+      "evidence": "516900终止提案",
+      "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2024-08-02/516900_20240802_VAQ9.pdf",
+      "level": "official"
+     },
+     {
+      "publisher": "CSI",
+      "evidence": "931743指数代码",
+      "url": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/931743factsheet.pdf",
+      "level": "official_index_provider"
+     },
+     {
+      "publisher": "SSE",
+      "evidence": "516650文件列出000811/000813/000815指数系列",
+      "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2022-06-20/516650_20220620_1_Kmn6l3e8.pdf",
+      "level": "official"
+     },
+     {
+      "publisher": "SSE",
+      "evidence": "code 513100 explicitly identified as Nasdaq-100 ETF",
+      "url": "https://edu.sse.com.cn/best/article/mcontent/c/4731121.shtml",
+      "level": "official_exchange_education"
+     },
+     {
+      "publisher": "SSE",
+      "evidence": "Nasdaq-100 ETF listing month is May 2013; exact code not stated on this page",
+      "url": "https://edu.sse.com.cn/best/article/mcontent/c/4731119.shtml",
+      "level": "official_exchange_education"
+     }
+    ],
+    "files": [
+     {
+      "path": "index-universe.json",
+      "bytes": 3802,
+      "sha256": "b0e92fbfbebdbb1d7cb665ebc470098f8430eee84657b84b8c2b7e6209e1bdcc"
+     },
+     {
+      "path": "product-events.json",
+      "bytes": 9294,
+      "sha256": "39f7f898c221eaa7f87175df5af0af13e9266236b2a827829325f96cce43f907"
+     },
+     {
+      "path": "qualification.md",
+      "bytes": 5431,
+      "sha256": "c4ce0f235c3924197d8ec5827cdf008e8eb1d292da37f31b6d5327eeaa5e0073"
+     },
+     {
+      "path": "sources/159516-listing.pdf",
+      "bytes": 97492,
+      "sha256": "41e8f902e586a82eff13d060ca57d0a61fba5dc0ac5749d4e85d34b6aa778f8d"
+     },
+     {
+      "path": "sources/515050-listing.pdf",
+      "bytes": 199948,
+      "sha256": "014bb99ca6f9a5d8a1d4bfe0967e1f3c4d85f0b5632dbd9104ae81d5da9bec9c"
+     },
+     {
+      "path": "sources/516650-index-000811.pdf",
+      "bytes": 1974096,
+      "sha256": "7203adaad91310b7a9cfbd25b797f7d2762b49fed8d9b5490f90f1afcb303edf"
+     },
+     {
+      "path": "sources/516690-index-000813.pdf",
+      "bytes": 1343655,
+      "sha256": "339343a46c8f5b2896f192bc72b78d20e53e159f643443b47d7cd9754d906c35"
+     },
+     {
+      "path": "sources/516690-termination-2024-08-22.pdf",
+      "bytes": 659939,
+      "sha256": "3c409ba8c772f4c4c52bd3932e65f874364a909e796ebca69759f57b5a1890be"
+     },
+     {
+      "path": "sources/562590-listing.pdf",
+      "bytes": 748690,
+      "sha256": "95fe32ff583ff000ecc9d53ab2c09ce5d6934681d542e8ec0fde24723aa98a7f"
+     }
+    ]
+   }
+  },
+  "listing-qualification-md": {
+   "path": "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/qualification.md",
+   "text_head": "# 阶段 A：旧经济方向的历史产品资格核查\n\n## 一句话结论（大白话）\n\n旧 14 只产品实际对应 13 个不同跟踪对象；按下一轮限定的 11 个代表跟踪对象，至少漏掉了黄金、纳指100、细分化工和半导体材料设备的更早可交易产品。细分有色的更早产品只保留在旧池旁账，不能自动加入下一轮。因此，直接用今天这 14 个代码回看历史会漏掉当时真实存在的选择，也会留下已经消失产品带来的偏差。\n\n## 边界\n\n本批遵守 `docs/research/experiment-backtest-principles.md` **v1.0**、边界文件 `docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-stage-a-boundary.md` 和冻结协议 `docs/experiments/raw/research-mixed-evaluation-2026-09-09/protocol.json`。只恢复旧池已有经济方向中的产品存在、上市和终止线索，不新增方向、不运行收益，也不声称穷尽全市场最早产品。\n\n“同一指数历史恢复”是指跟踪对象代码一致，可在补齐真实未复权行情、分红拆分、停牌和费用后，作为历史可投资产品候选。“同方向不同指数”只是经济方向相近，成分和权重规则可能不同，加入它会改变产品池，必须另冻结为产品池变化，不能用于无缝补历史。\n\n## 已核清的结构\n\n旧 14 只只有 510300 与 515130 同为沪深300指数 `000300`；因此是 **13 个不同跟踪对象**，不是“14 个指数”。完整清单见 `index-universe.json`。下一轮最小修复仅限现有 11 只代表产品的 11 个跟踪对象；旧 14 池额外的 `931079`（5G）和 `000811`（细分有色）只留来源旁账。\n\n本轮明确找到的较早同对象产品包括：\n\n- 黄金：518880 于 2013-07-18 成立并跟踪 Au99.99，早于旧池 518850；本批尚缺精确上市日。\n- 纳指100：两份上交所资料合并确认：一份把代码 513100 与纳指100ETF绑定，另一份确认该纳指100ETF在 2013 年 5 月上市，远早于 513870 的 2023-11-02；本批尚缺精确上市日。\n- 细分化工 `000813`：516120 于 2021-03-09 上市，早于 516220 的 2021-03-10。\n- 细分有色 `000811`：516680 于 2021-03-08 上市、516650 于 2021-06-21 上市，均早于 159652 的 2023-02-08；该对象不在现 11 代表范围，只作旧 14 池旁账。\n- 半导体材料设备 `931743`：159516 "
+  },
+  "listing-product-events": {
+   "path": "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/product-events.json",
+   "parsed": {
+    "schema": {
+     "symbol": "exchange code",
+     "relationship": "same_tracking_object or same_direction_different_index",
+     "event_type": "listing/termination/alternative",
+     "announcement_date": "official publication date when known",
+     "effective_date": "listing or termination effective date",
+     "evidence_level": "official/secondary/unresolved"
+    },
+    "events": [
+     {
+      "symbol": "518880",
+      "name": "华安黄金ETF",
+      "old_pool_reference": "518850",
+      "tracking_object": "AU99.99",
+      "relationship": "same_tracking_object",
+      "event_type": "earlier_product",
+      "announcement_date": null,
+      "effective_date": "2013-07-18",
+      "effective_date_kind": "fund_establishment_not_listing",
+      "evidence_level": "official_sse_research",
+      "source_url": "https://star.sse.com.cn/aboutus/research/report/c/10056573/files/ac9c082e4dbb44ca8bf2e1045c6ff704.pdf",
+      "note": "SSE research table confirms establishment date and Au99.99; exact listing date remains to recover",
+      "stage_a_use": "eligible_for_11_object_source_qualification",
+      "listed_date": null
+     },
+     {
+      "symbol": "513100",
+      "name": "国泰纳斯达克100ETF",
+      "old_pool_reference": "513870",
+      "tracking_object": "NASDAQ-100",
+      "relationship": "same_tracking_object",
+      "event_type": "earlier_product",
+      "announcement_date": null,
+      "effective_date": "2013-05",
+      "effective_date_kind": "listing_month",
+      "evidence_level": "official_sse",
+      "source_url": "https://edu.sse.com.cn/best/article/mcontent/c/4731121.shtml",
+      "note": "official SSE September 2013 Q&A explicitly binds code 513100 to Nasdaq-100; a separate July 2013 SSE Q&A confirms the Nasdaq-100 ETF listed in May 2013; exact day remains unrecovered",
+      "stage_a_use": "eligible_for_11_object_source_qualification",
+      "listed_date": null,
+      "supporting_source_url": "https://edu.sse.com.cn/best/article/mcontent/c/4731119.shtml"
+     },
+     {
+      "symbol": "516120",
+      "name": "富国中证细分化工产业主题ETF",
+      "old_pool_reference": "516220",
+      "tracking_object": "000813",
+      "relationship": "same_tracking_object",
+      "event_type": "earlier_product",
+      "announcement_date": null,
+      "effective_date": "2021-03-09",
+      "effective_date_kind": "listing",
+      "evidence_level": "official_sse",
+      "source_url": "https://etf.sse.com.cn/fundtrends/c/5334122.shtml",
+      "stage_a_use": "eligible_for_11_object_source_qualification"
+     },
+     {
+      "symbol": "516680",
+      "name": "建信中证细分有色金属产业主题ETF",
+      "old_pool_reference": "159652",
+      "tracking_object": "000811",
+      "relationship": "same_tracking_object",
+      "event_type": "earlier_product",
+      "announcement_date": null,
+      "effective_date": "2021-03-08",
+      "effective_date_kind": "listing",
+      "evidence_level": "official_sse",
+      "source_url": "https://etf.sse.com.cn/fundtrends/c/5332656.shtml",
+      "stage_a_use": "side_ledger_only"
+     },
+     {
+      "symbol": "516650",
+      "name": "华夏中证细分有色金属产业主题ETF",
+      "old_pool_reference": "159652",
+      "tracking_object": "000811",
+      "relationship": "same_tracking_object",
+      "event_type": "earlier_product",
+      "announcement_date": null,
+      "effective_date": "2021-06-21",
+      "effective_date_kind": "listing",
+      "evidence_level": "official_sse_annual_report",
+      "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-03-31/516650_20260331_9RIA.pdf",
+      "stage_a_use": "side_ledger_only"
+     },
+     {
+      "symbol": "159516",
+      "name": "国泰中证半导体材料设备主题ETF",
+      "old_pool_reference": "562590",
+      "tracking_object": "931743",
+      "relationship": "same_tracking_object",
+      "event_type": "earlier_product",
+      "announcement_date": "2023-07-24",
+      "effective_date": "2023-07-27",
+      "effective_date_kind": "listing",
+      "evidence_level": "official_szse",
+      "source_url": "https://www.szse.cn/disclosure/notice/fund/t20230724_602100.html",
+      "stage_a_use": "eligible_for_11_object_source_qualification"
+     },
+     {
+      "symbol": "588050/588080/588090",
+      "name": "首批其他三只科创50ETF",
+      "old_pool_reference": "588000",
+      "tracking_object": "000688",
+      "relationship": "same_tracking_object",
+      "event_type": "same_day_alternatives",
+      "announcement_date": null,
+      "effective_date": "2020-11-16",
+      "effective_date_kind": "listing",
+      "evidence_level": "official_sse",
+      "source_url": "https://etf.sse.com.cn/fundtrends/c/10055594/files/c41feab91f544352ac2782c4f24b0bb3.pdf",
+      "stage_a_use": "eligible_for_11_object_source_qualification"
+     },
+     {
+      "symbol": "159919",
+      "name": "嘉实沪深300ETF",
+      "old_pool_reference": "510300/515130",
+      "tracking_object": "000300",
+      "relationship": "same_tracking_object",
+      "event_type": "early_alternative",
+      "announcement_date": "2012-06-01",
+      "effective_date": "2012-06-04",
+      "effective_date_kind": "margin_eligibility_not_listing",
+      "evidence_level": "official_szse",
+      "source_url": "https://www.szse.cn/disclosure/margin/business/t20120601_500953.html",
+      "note": "proves product existed by date; exact listing date not recovered here",
+      "stage_a_use": "eligible_for_11_object_source_qualification",
+      "listed_date": null
+     },
+     {
+      "symbol": "516690",
+      "name": "银华中证细分化工产业主题ETF",
+      "old_pool_reference": "516220",
+      "tracking_object": "000813",
+      "relationship": "same_tracking_object",
+      "event_type": "termination",
+      "announcement_date": "2024-08-22",
+      "effective_date": "2024-08-27",
+      "effective_date_kind": "termination_listing",
+      "listing_date": "2021-12-21",
+      "last_operation_date": "2024-06-06",
+      "liquidation_start": "2024-06-07",
+      "evidence_level": "official_sse",
+      "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2024-08-22/516690_20240822_1VIX.pdf",
+      "stage_a_use": "eligible_for_11_object_source_qualification",
+      "contract_termination_date": null,
+      "cash_distribution_amount": null,
+      "cash_distribution_date": null,
+      "note": "Last operation, liquidation start, and exchange delisting are separate official events; contract termination and final cash distribution evidence were not recovered.",
+      "liquidation_end": "2024-06-21",
+      "liquidation_report_announcement_date": "2024-07-30",
+      "remaining_property_distribution_announcement_date": "2024-08-14",
+      "liquidation_funds_distribution_date": "2024-08-22",
+      "actual_credit_time_note": "subject to sales institution",
+      "per_share_distribution_amount": null,
+      "last_tradable_date": null
+     },
+     {
+      "symbol": "515930",
+      "name": "永赢沪深300ETF（旧代码）",
+      "old_pool_reference": "510300/515130",
+      "tracking_object": "000300",
+      "relationship": "same_tracking_object",
+      "event_type": "proposed_termination_then_liquidation_path",
+      "announcement_date": "2023-06-12",
+      "effective_date": "2023-06-12",
+      "effective_date_kind": "redemption_suspension",
+      "evidence_level": "official_sse_but_final_termination_date_not_recovered",
+      "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2023-06-12/515930_20230612_3WRP.pdf",
+      "note": "do not confuse with newer 563520 carrying a similar name",
+      "stage_a_use": "eligible_for_11_object_source_qualification"
+     },
+     {
+      "symbol": "512210",
+      "name": "景顺长城中证800食品饮料ETF",
+      "old_pool_reference": "515170",
+      "tracking_object": "different_food_beverage_index",
+      "relationship": "same_direction_different_index",
+      "event_type": "termination",
+      "announcement_date": "2018-08-30",
+      "effective_date": "2018-08-31",
+      "effective_date_kind": "termination_listing",
+      "evidence_level": "official_sse",
+      "source_url": "https://www.sse.com.cn/disclosure/announcement/listing/c/c_20180830_4627586.shtml",
+      "stage_a_use": "separate_pool_change"
+     },
+     {
+      "symbol": "516900",
+      "name": "华安中证申万食品饮料ETF",
+      "old_pool_reference": "515170",
+      "tracking_object": "申万食品饮料指数_not_000815",
+      "relationship": "same_direction_different_index",
+      "event_type": "termination_proposal",
+      "announcement_date": "2024-08-02",
+      "effective_date": null,
+      "effective_date_kind": "final_date_not_recovered",
+      "evidence_level": "official_sse",
+      "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2024-08-02/516900_20240802_VAQ9.pdf",
+      "stage_a_use": "separate_pool_change"
+     }
+    ],
+    "merger_search_result": "No completed ETF merger within this bounded source pass was verified. Absence here does not mean no merger existed.",
+    "interpretation": "same_tracking_object candidates may repair historical product availability after independent action/price qualification; same_direction_different_index candidates change the pool definition and require a separately frozen comparison"
+   }
+  },
+  "listing-index-universe": {
+   "path": "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/index-universe.json",
+   "parsed": {
+    "principles": {
+     "path": "docs/research/experiment-backtest-principles.md",
+     "version": "v1.0"
+    },
+    "protocol": "docs/experiments/raw/research-mixed-evaluation-2026-09-09/protocol.json",
+    "scope": "stage_A_existing_economic_directions_only",
+    "old_pool_product_count": 14,
+    "distinct_tracking_object_count": 13,
+    "duplicate_reason": "510300 and 515130 both track CSI 300 (000300); the other 12 products have distinct index codes or tracking objects",
+    "tracking_objects": [
+     {
+      "code": "000300",
+      "name": "沪深300指数",
+      "old_products": [
+       "510300",
+       "515130"
+      ],
+      "kind": "domestic_equity_index",
+      "status": "confirmed_official"
+     },
+     {
+      "code": "000819",
+      "name": "中证申万有色金属指数",
+      "old_products": [
+       "512400"
+      ],
+      "kind": "domestic_equity_index",
+      "status": "confirmed_official"
+     },
+     {
+      "code": "931079",
+      "name": "中证5G通信主题指数",
+      "old_products": [
+       "515050"
+      ],
+      "kind": "domestic_equity_index",
+      "status": "confirmed_official"
+     },
+     {
+      "code": "930740",
+      "name": "沪深300红利低波动指数",
+      "old_products": [
+       "515300"
+      ],
+      "kind": "domestic_equity_index",
+      "status": "confirmed_official"
+     },
+     {
+      "code": "AU99.99",
+      "name": "上海黄金交易所黄金现货实盘合约Au99.99价格",
+      "old_products": [
+       "518850"
+      ],
+      "kind": "commodity_tracking_object",
+      "status": "confirmed_official_sse_research"
+     },
+     {
+      "code": "000688",
+      "name": "上证科创板50成份指数",
+      "old_products": [
+       "588000"
+      ],
+      "kind": "domestic_equity_index",
+      "status": "confirmed_official"
+     },
+     {
+      "code": "000815",
+      "name": "中证细分食品饮料产业主题指数",
+      "old_products": [
+       "515170"
+      ],
+      "kind": "domestic_equity_index",
+      "status": "confirmed_in_official_index_series_document"
+     },
+     {
+      "code": "000813",
+      "name": "中证细分化工产业主题指数",
+      "old_products": [
+       "516220"
+      ],
+      "kind": "domestic_equity_index",
+      "status": "confirmed_official"
+     },
+     {
+      "code": "000811",
+      "name": "中证细分有色金属产业主题指数",
+      "old_products": [
+       "159652"
+      ],
+      "kind": "domestic_equity_index",
+      "status": "confirmed_official"
+     },
+     {
+      "code": "930955",
+      "name": "中证红利低波动指数",
+      "old_products": [
+       "512890"
+      ],
+      "kind": "domestic_equity_index",
+      "status": "confirmed_official"
+     },
+     {
+      "code": "931160",
+      "name": "中证全指通信设备指数",
+      "old_products": [
+       "515880"
+      ],
+      "kind": "domestic_equity_index",
+      "status": "confirmed_official"
+     },
+     {
+      "code": "NDX",
+      "name": "NASDAQ-100 Index",
+      "old_products": [
+       "513870"
+      ],
+      "kind": "overseas_equity_index",
+      "status": "confirmed_product_name_and_official_exchange_listing; vendor ticker noted for identity"
+     },
+     {
+      "code": "931743",
+      "name": "中证半导体材料设备主题指数",
+      "old_products": [
+       "562590"
+      ],
+      "kind": "domestic_equity_index",
+      "status": "confirmed_official_index_factsheet"
+     }
+    ],
+    "stage_a_boundary": "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-stage-a-boundary.md",
+    "next_experiment_tracking_objects": [
+     "000300",
+     "000819",
+     "930740",
+     "AU99.99",
+     "000688",
+     "000815",
+     "000813",
+     "930955",
+     "931160",
+     "NDX",
+     "931743"
+    ],
+    "side_ledger_not_automatically_reactivated": [
+     "931079",
+     "000811"
+    ]
+   }
+  },
+  "515300-source-manifest": {
+   "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/source-manifest.json",
+   "parsed": {
+    "created_at": "2026-09-09",
+    "scope": "515300 official dividend qualification only",
+    "search_boundary": "One targeted search pass across the seven known event dates; SSE/fund-manager primary sources preferred.",
+    "sources": [
+     {
+      "path": "sources/515300_20231214_MO7U.pdf",
+      "sha256": "bd46358cca56e22f7a0e49e9cfd461b2e25060c8772fc68403305d9aae37c38b",
+      "bytes": 176588
+     },
+     {
+      "path": "sources/515300_20231214_MO7U.txt",
+      "sha256": "5877f9764d3a785a54a2c96c40edb8f67c820ab38ad137f22adeada30c909728",
+      "bytes": 4144
+     },
+     {
+      "path": "sources/515300_20240618_QXY9.pdf",
+      "sha256": "b993b33e769f5d5e98a593a0d57c373159ecab9050e34f0c5cdefa07f8c35351",
+      "bytes": 176564
+     },
+     {
+      "path": "sources/515300_20240618_QXY9.txt",
+      "sha256": "3668566a2a317f6d17c348c42f23e1176c439a2bfea5c14bd99127aaaa46f5c2",
+      "bytes": 4133
+     },
+     {
+      "path": "sources/515300_20240913_SAOV.pdf",
+      "sha256": "d0fcca84c84c5e5f2985f6b566a17edc8943089cbba604fa68a96ae4799e578c",
+      "bytes": 177191
+     },
+     {
+      "path": "sources/515300_20240913_SAOV.txt",
+      "sha256": "746782188a3a68fa1c8910d5169b0207ef5025f9eaa402e59853a440b538e4a6",
+      "bytes": 4146
+     },
+     {
+      "path": "sources/515300_20241128_QVEK.pdf",
+      "sha256": "42e76e778fce0ad3ec7617d3ff8a5a35bcb459a96d7ab8acd45acb50762ec157",
+      "bytes": 177222
+     },
+     {
+      "path": "sources/515300_20241128_QVEK.txt",
+      "sha256": "579e1fda632a201933331d1b7f52dc7151b41ba48beb78b27301db5718a4cc77",
+      "bytes": 4149
+     },
+     {
+      "path": "sources/515300_20250612_HGW2.pdf",
+      "sha256": "e654cfe4108dc9f19572d020c4af95d7b7bff3c4160a0d981d83792622e23db8",
+      "bytes": 109986
+     },
+     {
+      "path": "sources/515300_20250612_HGW2.txt",
+      "sha256": "968692c7602d257c1700df0a570913ad3ceb49d3593d3eec57c9043d5b1fcf64",
+      "bytes": 4036
+     },
+     {
+      "path": "sources/515300_20250915_NN2J.pdf",
+      "sha256": "779e0693869e088e9f4cdfb3abe1747122b78177b5210741f4f5e8a4a5f2b651",
+      "bytes": 109997
+     },
+     {
+      "path": "sources/515300_20250915_NN2J.txt",
+      "sha256": "535dc62ca451fdfa83b6bb67bcd08a41893856a63adaa84e531ea94e03acefc8",
+      "bytes": 4035
+     }
+    ],
+    "unresolved": [
+     "Official primary announcement for the 2025-12-12 record / 2025-12-15 ex-date event was not recovered in the bounded pass."
+    ]
+   }
+  },
+  "515300-events": {
+   "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/events.json",
+   "parsed": {
+    "scope": "515300 only",
+    "official_confirmed_count": 6,
+    "secondary_only_count": 1,
+    "events": [
+     {
+      "symbol": "515300.SH",
+      "event_type": "cash_dividend",
+      "record_date": "2023-12-18",
+      "ex_date": "2023-12-19",
+      "pay_date": "2023-12-22",
+      "cash_per_share": "0.0661",
+      "cash_per_10_shares": "0.6610",
+      "official_status": "official_confirmed",
+      "official_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2023-12-14/515300_20231214_MO7U.pdf",
+      "local_pdf": "sources/515300_20231214_MO7U.pdf",
+      "local_text": "sources/515300_20231214_MO7U.txt"
+     },
+     {
+      "symbol": "515300.SH",
+      "event_type": "cash_dividend",
+      "record_date": "2024-06-20",
+      "ex_date": "2024-06-21",
+      "pay_date": "2024-06-26",
+      "cash_per_share": "0.0714",
+      "cash_per_10_shares": "0.7140",
+      "official_status": "official_confirmed",
+      "official_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2024-06-18/515300_20240618_QXY9.pdf",
+      "local_pdf": "sources/515300_20240618_QXY9.pdf",
+      "local_text": "sources/515300_20240618_QXY9.txt"
+     },
+     {
+      "symbol": "515300.SH",
+      "event_type": "cash_dividend",
+      "record_date": "2024-09-19",
+      "ex_date": "2024-09-20",
+      "pay_date": "2024-09-25",
+      "cash_per_share": "0.0654",
+      "cash_per_10_shares": "0.6540",
+      "official_status": "official_confirmed",
+      "official_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2024-09-13/515300_20240913_SAOV.pdf",
+      "local_pdf": "sources/515300_20240913_SAOV.pdf",
+      "local_text": "sources/515300_20240913_SAOV.txt"
+     },
+     {
+      "symbol": "515300.SH",
+      "event_type": "cash_dividend",
+      "record_date": "2024-12-02",
+      "ex_date": "2024-12-03",
+      "pay_date": "2024-12-06",
+      "cash_per_share": "0.0634",
+      "cash_per_10_shares": "0.6340",
+      "official_status": "official_confirmed",
+      "official_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2024-11-28/515300_20241128_QVEK.pdf",
+      "local_pdf": "sources/515300_20241128_QVEK.pdf",
+      "local_text": "sources/515300_20241128_QVEK.txt"
+     },
+     {
+      "symbol": "515300.SH",
+      "event_type": "cash_dividend",
+      "record_date": "2025-06-16",
+      "ex_date": "2025-06-17",
+      "pay_date": "2025-06-20",
+      "cash_per_share": "0.0237",
+      "cash_per_10_shares": "0.2370",
+      "official_status": "official_confirmed",
+      "official_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2025-06-12/515300_20250612_HGW2.pdf",
+      "local_pdf": "sources/515300_20250612_HGW2.pdf",
+      "local_text": "sources/515300_20250612_HGW2.txt"
+     },
+     {
+      "symbol": "515300.SH",
+      "event_type": "cash_dividend",
+      "record_date": "2025-09-17",
+      "ex_date": "2025-09-18",
+      "pay_date": "2025-09-23",
+      "cash_per_share": "0.0233",
+      "cash_per_10_shares": "0.2330",
+      "official_status": "official_confirmed",
+      "official_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2025-09-15/515300_20250915_NN2J.pdf",
+      "local_pdf": "sources/515300_20250915_NN2J.pdf",
+      "local_text": "sources/515300_20250915_NN2J.txt"
+     },
+     {
+      "symbol": "515300.SH",
+      "event_type": "cash_dividend",
+      "record_date": "2025-12-12",
+      "ex_date": "2025-12-15",
+      "pay_date": "2025-12-18",
+      "cash_per_share": "0.0228",
+      "cash_per_10_shares": "0.2280",
+      "official_status": "secondary_only",
+      "secondary_reference": "../action-sources/index.json",
+      "official_gap": "Bounded official-source search did not recover the 2025-12-10 announcement."
+     }
+    ]
+   }
+  },
+  "515300-qualification-md": {
+   "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/qualification.md",
+   "text_head": "# 515300 分红官方来源有限核查\n\n## 一句话结论（大白话）\n\n七次已知分红中，六次已由上交所保存的基金公告逐项确认金额、登记日、除息日和发放日；2025 年 12 月这一次仍只有已保存的二手全表支持，因此不能把七次都写成“官方已核”。\n\n## 核查范围\n\n本次只核 515300，按 `../action-sources/index.json` 已列七次分红做一轮定向检索，不查其他 ETF，不计算收益。官方证据优先采用上交所基金公告；PDF 原文和抽取文本保存在 `sources/`。\n\n## 结果\n\n| 登记日 | 除息日 | 发放日 | 每份现金 | 结果 |\n|---|---|---|---:|---|\n| 2023-12-18 | 2023-12-19 | 2023-12-22 | 0.0661 | 上交所公告确认 |\n| 2024-06-20 | 2024-06-21 | 2024-06-26 | 0.0714 | 上交所公告确认 |\n| 2024-09-19 | 2024-09-20 | 2024-09-25 | 0.0654 | 上交所公告确认 |\n| 2024-12-02 | 2024-12-03 | 2024-12-06 | 0.0634 | 上交所公告确认 |\n| 2025-06-16 | 2025-06-17 | 2025-06-20 | 0.0237 | 上交所公告确认 |\n| 2025-09-17 | 2025-09-18 | 2025-09-23 | 0.0233 | 上交所公告确认 |\n| 2025-12-12 | 2025-12-15 | 2025-12-18 | 0.0228 | 本轮未找到官方原文；仅二手全表支持 |\n\n六份官方公告中的金额均以“每 10 份基金份额”披露，`events.json` 将其除以 10 后记录为每份现金。四个日期和金额均与二手全表一致，没有发现反例。\n\n## 使用边界\n\n前六次可作为正式公司行动输入的官方依据。2025 年 12 月事件若进入正式核账，应保留 `secondary_only` 标记；最小补齐项是找到 2025-12-10 左右由嘉实基金或上交所发布的第三次收益分配公告，并核对同样四个字段。本目录不修改上游 `normalized-actions.json`。\n"
+  },
+  "calendar-protocol": {
+   "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/protocol.json",
+   "parsed": {
+    "protocol_id": "research-calendar-completion-2026-09-10",
+    "version": "1.0.0",
+    "round": 3,
+    "scope": "把交易日历补到覆盖冻结输入的全部 82 个月，并尝试取得该日历的发布时间证据",
+    "authorization_basis": {
+     "user_words": "继续",
+     "context": "紧接第二轮交付的「下一步最值得单独授权的一件事」——补齐日历并取得发布时间证据",
+     "interpretation": "视为授权执行该项，且为其扩大外部请求预算",
+     "caveat": "第二轮预算为 30 次且明令「不自动扩大预算」。本轮预算是显式重设而非自动扩大；若用户本意不同，须停止并改回。"
+    },
+    "prior_state": {
+     "round2_report": "docs/experiments/research-data-provenance-round2-2026-09-10.md",
+     "calendar_artifact": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+     "months_covered": 22,
+     "months_needed_total": 82,
+     "months_missing": 60,
+     "frozen_range": "2019-09-02..2026-06-30",
+     "requests_used_round2": 27
+    },
+    "network_budget": {
+     "max_requests_total": 75,
+     "breakdown": {
+      "remaining_months": 60,
+      "publication_time_probing": 10,
+      "retry_and_slack": 5
+     },
+     "includes_retries_and_redirects": true,
+     "sources_allowed": [
+      "深圳证券交易所公开接口（第二轮已核可用）",
+      "上海证券交易所公开接口（第二轮失败，本轮可再试，计入同一预算）"
+     ],
+     "forbidden": [
+      "批量下载行情/财务/公司行动",
+      "安装 akshare / baostock / Qlib / Alphalens 等框架",
+      "新增账号、凭据、付费访问",
+      "写生产缓存"
+     ],
+     "stop_rule": "预算用尽即停，交已覆盖范围与明确缺口，不伪称全覆盖"
+    },
+    "two_questions_kept_separate": {
+     "q1_ex_post_confirmation": "某日事后确认是否开市 —— 第二轮已可回答（覆盖内）；本轮目标是把覆盖补满",
+     "q2_known_in_advance": "当时是否已经知道后续开休市安排 —— 第二轮完全无法回答；本轮尝试取得公告发布时间，取不到就如实保持未知"
+    },
+    "writable_paths": [
+     "docs/experiments/raw/research-calendar-completion-2026-09-10/**",
+     "src/lei_signal/research/trading_calendar.py",
+     "tests/unit/test_research_calendar_and_identity.py",
+     "docs/experiments/research-calendar-completion-2026-09-10.md",
+     "docs/experiments/registry.json",
+     "docs/experiments/INDEX.md"
+    ],
+    "protected_paths": [
+     "docs/experiments/raw/research-data-provenance-2026-09-10/**",
+     "docs/experiments/raw/research-data-provenance-round2-2026-09-10/**",
+     "docs/experiments/research-data-provenance-2026-09-10.md",
+     "docs/experiments/research-data-provenance-round2-2026-09-10.md",
+     "docs/experiments/raw/research-rotation-clean-2026-09-09/**",
+     "docs/experiments/raw/research-mixed-defense-2026-09-09/**",
+     "docs/experiments/raw/research-factor-library-v0-2026-09-09/**",
+     "docs/research/definitions.v1.json",
+     "src/lei_signal/research/definitions.py",
+     "src/lei_signal/research/factor_runtime.py",
+     "src/lei_signal/research/factor_account_adapter.py",
+     "src/lei_signal/research/factor_diagnostics.py",
+     "src/lei_signal/research/data_snapshot.py",
+     "src/lei_signal/research/symbol_identity.py",
+     "src/lei_signal/data_provenance.py",
+     "src/lei_signal/data/**",
+     "configs/rules.v1.yaml"
+    ],
+    "protected_note": "第二轮日历产物只读：本轮写新目录，不改旧 calendar.json。data_quality.py 本轮不改（第二轮已接入日历参数）。",
+    "acceptance": [
+     "82 个月全部取到，或明确列出仍缺哪些月及原因",
+     "用补齐后的日历重新核对冻结价格全区间 1652 个日期（第二轮只核了 389 个交易日）",
+     "任何新出现的来源冲突必须报告，不得掩盖",
+     "发布时间证据取到则登记，取不到则 schedule_known_at 继续返回未知",
+     "未覆盖日期仍返回未知，绝不回退为工作日"
+    ],
+    "explicitly_not_in_scope": [
+     "不测因子、不跑账户、不做收益回测",
+     "不改公司行动可得时间（仍为 0/21）",
+     "不解除 attribution 用途限制（它由行动可得时间决定，不由日历决定）",
+     "不改 OKR 完成勾选、授权或范围"
+    ],
+    "completion_is_not": [
+     "日历补齐不等于数据合格",
+     "覆盖完整不等于历史时点合法",
+     "零冲突不等于两个来源都正确，只说明互不矛盾"
+    ]
+   }
+  }
+ },
+ "text_reads_used": 8,
+ "text_reads": [
+  "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/source-manifest.json",
+  "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/qualification.md",
+  "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/product-events.json",
+  "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/index-universe.json",
+  "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/source-manifest.json",
+  "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/events.json",
+  "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/qualification.md",
+  "docs/experiments/raw/research-calendar-completion-2026-09-10/protocol.json"
+ ],
+ "notes": [
+  "哈希全量覆盖四组材料；文本内容仅读取索引/清单/已抽取文本",
+  "『仓库保存了』不等于『官方内容已核实』；PDF 原文核对在 Task 2",
+  "159516/516690 等名单外产品仅登记存在，不接入本轮"
+ ]
+}

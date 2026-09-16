@@ -1,0 +1,38 @@
+{
+  "review_date": "2026-09-08",
+  "scope": "static_protocol_and_timing_review_only",
+  "full_cash_recalculation_performed": false,
+  "verdict": "pass",
+  "blocking_findings_open": [],
+  "resolved_during_review": [
+    "Protocol v1 ambiguity about the 2014-12-31 observation was clarified in v1.1: eligibility date controls the start filter.",
+    "The H1 boundary test stopped using binary floating-point division and now checks finite decimal values immediately around both repeating-decimal thresholds."
+  ],
+  "nonblocking_findings": [],
+  "closed_nonblocking_findings": [
+    "The stale pre-run README was preserved as preparation-readme-before-run.md and the current README now reflects the completed locked run."
+  ],
+  "checks": {
+    "h1_exact_predicates_and_state": "pass",
+    "eligible_date_start_filter": "pass",
+    "h2_point_in_time_daily_60_state": "pass",
+    "signal_before_execution": "pass; H1 stores the last breadth observation as signal_date and derives week end as eligible_date minus one day, while H2 stores that week-end date explicitly",
+    "missing_and_terminal_weeks": "pass",
+    "legacy_dividend_and_action_logic_reused": "pass",
+    "legacy_weekly_5pp_execution_reused": "pass",
+    "main_run_lock_16_inputs_unchanged": "pass",
+    "price_basis_runtime_dependency": "not_imported_by_candidate_account_run; prepared-signals.json is the direct frozen input and first12/source-lock.json records the earlier helper",
+    "preparation_tests": {"status": "pass", "count": 7},
+    "candidate_counts": {
+      "H1_weekly_binary_hysteresis": 1176,
+      "H2_weekly_breadth_trend_participation": 1176,
+      "terminal_candidate_only": 4
+    }
+  },
+  "explicit_exclusions": [
+    "No complete eight-account cash recomputation",
+    "No return comparison or investment conclusion",
+    "No external verification of price or corporate-action completeness",
+    "No edits to execution code"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "cases": [
+    "blocked open then lower observed close cancels queued reentry; later recovery waits for next open",
+    "reentry gross cost stays within actual stop sale net proceeds",
+    "new monthly list clears old recovery queue and budget before open"
+  ],
+  "case1_trade_dates": [
+    [
+      "2021-01-04",
+      "buy",
+      "monthly"
+    ],
+    [
+      "2021-01-05",
+      "sell",
+      "stop"
+    ],
+    [
+      "2021-01-11",
+      "buy",
+      "fast_reentry"
+    ]
+  ],
+  "case2_trade_dates": [
+    [
+      "2021-01-04",
+      "buy",
+      "monthly"
+    ],
+    [
+      "2021-01-05",
+      "sell",
+      "stop"
+    ]
+  ],
+  "scope": "synthetic execution boundary checks, not additional strategy or return search"
+}

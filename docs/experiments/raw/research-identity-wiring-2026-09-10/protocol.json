@@ -1,0 +1,88 @@
+{
+  "protocol_id": "research-identity-wiring-2026-09-10",
+  "version": "1.0.0",
+  "round": 4,
+  "scope": "把已建成的身份映射真正接入（生成规范标签快照），并挖掘公司行动的 announcement_date 作为可得时间下界；重新测量用途裁决实际变化",
+
+  "authorization_basis": {
+    "user_words": "先别审核了, 你做吧直接先",
+    "interpretation": "授权不经逐轮审核继续推进第三轮报告列出的下一步；按其排序执行第 1、2 项",
+    "still_forbidden": "该授权不覆盖：改生产代码、改冻结实验、扩池、跑收益账户、装框架、真实交易"
+  },
+
+  "targets": [
+    {
+      "id": "T1",
+      "goal": "消掉 symbol_convention_mismatch（13 条）",
+      "method": "用 symbol_identity 的映射生成一份规范标签（.SS/.SZ）快照，写入全新目录",
+      "must_not": "不改上一轮冻结交付产物 example-fullpool；不改生产 resolve_symbol；不改冻结 prices.csv"
+    },
+    {
+      "id": "T2",
+      "goal": "把 action_available_at_unknown 从 21/21 未知细化为有下界的部分",
+      "method": "只用本地已有字段：3 条拆分记录带 announcement_date。公告日期是「不晚于该日已公布」的下界证据，不等于 available_at 精确时刻",
+      "must_not": "不补造 available_at；不改 normalized-actions.json；不联网采购来源"
+    },
+    {
+      "id": "T3",
+      "goal": "区分「可修缺陷」与「已声明的固有属性」",
+      "reason": "starts_after_window 是产品池非矩形这一结构事实，正确声明后仍永久压低裁决，使裁决失去信息量。需把两类分开，但不得借此放宽闸门",
+      "method": "Finding 增加 structural 标记；require_use 增加 accept_structural，默认仍不放行"
+    }
+  ],
+
+  "network_budget": {"max_requests": 0, "reason": "本轮全部为本地工作"},
+
+  "writable_paths": [
+    "src/lei_signal/research/data_snapshot.py",
+    "src/lei_signal/research/data_quality.py",
+    "tests/unit/test_research_data_quality.py",
+    "tests/unit/test_research_data_snapshot.py",
+    "tests/integration/test_research_offline_loop_round2.py",
+    "docs/experiments/raw/research-identity-wiring-2026-09-10/**",
+    "docs/experiments/research-identity-wiring-2026-09-10.md",
+    "docs/experiments/registry.json",
+    "docs/experiments/INDEX.md"
+  ],
+
+  "protected_paths": [
+    "docs/experiments/raw/research-data-provenance-2026-09-10/**",
+    "docs/experiments/raw/research-data-provenance-round2-2026-09-10/**",
+    "docs/experiments/raw/research-calendar-completion-2026-09-10/**",
+    "docs/experiments/research-data-provenance-2026-09-10.md",
+    "docs/experiments/research-data-provenance-round2-2026-09-10.md",
+    "docs/experiments/research-calendar-completion-2026-09-10.md",
+    "docs/experiments/raw/research-rotation-clean-2026-09-09/**",
+    "docs/experiments/raw/research-mixed-defense-2026-09-09/**",
+    "docs/experiments/raw/research-factor-library-v0-2026-09-09/**",
+    "docs/research/definitions.v1.json",
+    "src/lei_signal/research/definitions.py",
+    "src/lei_signal/research/factor_runtime.py",
+    "src/lei_signal/research/factor_account_adapter.py",
+    "src/lei_signal/research/factor_diagnostics.py",
+    "src/lei_signal/research/symbol_identity.py",
+    "src/lei_signal/research/trading_calendar.py",
+    "src/lei_signal/data_provenance.py",
+    "src/lei_signal/data/**",
+    "configs/rules.v1.yaml"
+  ],
+
+  "acceptance": [
+    "规范标签快照生成后，symbol_convention_mismatch 必须为 0 条，且产品数/行数/日期覆盖与原快照逐项相等",
+    "映射后的快照必须与原快照在数值上完全一致（只换标签，不换数据）",
+    "announcement_date 的处理必须是「下界」语义，不得写入 available_at 字段",
+    "structural 标记不得导致默认放行；require_use 默认行为不变",
+    "重新测量并如实报告：哪些用途裁决变了、哪些没变、为什么"
+  ],
+
+  "must_report_honestly": [
+    "若裁决仍无变化，如实说明并给出剩余阻断项",
+    "不得为让裁决变绿而放宽检查或删除告警"
+  ],
+
+  "completion_is_not": [
+    "接入不等于数据合格",
+    "裁决变绿不等于策略有效",
+    "本轮不产生任何收益结论，不获准生产或交易"
+  ]
+}

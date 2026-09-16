@@ -1,0 +1,137 @@
+{
+  "task": "factor-research-workbench-v1 / concentrated-repair",
+  "synthetic": true,
+  "title": "合成算法验证，非真实收益/有效性证据",
+  "production_authorization": "not_authorized",
+  "effectiveness_claim": "none；本运行不证明任何因子有效",
+  "spec_bindings": {
+    "experiment_backtest_principles": "docs/research/experiment-backtest-principles.md@v1.1",
+    "definition_standard": "docs/research/definition-standard.md@1.1.0",
+    "ai_execution_contract": "docs/research/ai-execution-contract.md@1.0.1",
+    "experiment_report_template": "docs/research/experiment-report-template.md@1.1.0",
+    "plan": "docs/superpowers/plans/2026-09-14-factor-research-workbench-v1.md@1.0.0",
+    "repair_plan": "docs/superpowers/plans/2026-09-14-factor-lab-concentrated-repair.md@1.0.0"
+  },
+  "registry": {
+    "version": "1.2.0",
+    "canonical_sha256": "6773ef5a75c5a2209612cf27452a05fdfc0067d1e9bd579c133737dc580de007"
+  },
+  "definition_cards_sha256": {
+    "mixed.momentum.raw@1.0.0": "bfd8b4703709b92339bb92eb4c9ec77ab3e80f732da304153ce63fa1d6ecb2b2",
+    "mixed.rv20@1.0.0": "bb55244e315f3f4f403ae564ad8b61a194dc9f054013478f0e2f7378bc2a3fb8",
+    "trend.distance50@1.0.0": "6075b7d645f12c4a245dca26129fc3c0a767cc596c39f9eb3ebf5d42c6900542",
+    "trend.distance200@1.0.0": "b6159bda902bf75a35975e8934ddde7d2eb1819558b89997e489a86ba5110eb5"
+  },
+  "code_identity": {
+    "scripts/run_factor_lab.py": "17a7bc63bc97893f24ee72861836d64e65298b18b4d53c67041ef999cc4613d5",
+    "src/lei_signal/domain/rules_config.py": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031",
+    "src/lei_signal/features/indicators.py": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+    "src/lei_signal/research/definitions.py": "b6d5a35532644c371ffbfc541a21bd52c05114db9fcb1cc3071c1965ed41ad59",
+    "src/lei_signal/research/factor_diagnostics.py": "70de5549e2831a4353d5000e011e5c93ef4c9798ce4909da943d079997d73a08",
+    "src/lei_signal/research/factor_lab/__init__.py": "ea269601b6b4fa5f1bb70f2dff555aca5a7afa236babc8005a8b4e7fd2d036c4",
+    "src/lei_signal/research/factor_lab/adapters.py": "27596fd66d918cacf9db7a6ae2cdd11b408d7d46f3c9889ac2d35a42e7748020",
+    "src/lei_signal/research/factor_lab/attribution.py": "033960c686d54f41ef2b33f42825668039456ed00aded0d31969e0f9e064f997",
+    "src/lei_signal/research/factor_lab/contracts.py": "d9ff0e864a8f4600c134972e9815acc2143f1b7227e17de570fed4901e0988bc",
+    "src/lei_signal/research/factor_lab/diagnostics.py": "21bdd86594e31412dc1244e0c1ab113b00cab1cc86e73370c70c051c15357728",
+    "src/lei_signal/research/factor_lab/runner.py": "e2e497712e30b9f8bb0722c7f7aa8cc620fc5edae27c6452f961c9c210c31cf5",
+    "src/lei_signal/research/factor_lab/validation.py": "6ea914ef032a2fdf71924a9f8ac7658e2f8fcedaa3ba45d647f01fe8e4ffb5a1",
+    "src/lei_signal/research/momentum_prototype.py": "5425e4f5494710041ae42816bf259ac7cdc1ed6aaef01986ac1d3d34d90e568f",
+    "src/lei_signal/rules/dual_ma.py": "5c41da87036e0e318bacab663aa5509d73f99f301f805a76559b016b99aa3f7c",
+    "src/lei_signal/rules/lei_color.py": "ae6f3a2547cc37dd1ebdfea1bea206f932defdd8cd90d4061630914c0fc9d4d7"
+  },
+  "protocol": {
+    "path": "protocol-1-numerical.json",
+    "version": "1.1.0",
+    "file_sha256": "5446557355c7133ae905ecd6ff178b15166ad517522a8d21b8bdd1c27062d2d6",
+    "canonical_sha256": "3bdb439bb8f9611673d3a43e43f23b0fad1032749816f81a9db832ebdf09fd13"
+  },
+  "data_declarations": {
+    "price_scale": "arbitrary_positive_units_synthetic",
+    "calendar": "pandas_bdate_range_synthetic_not_exchange_calendar",
+    "timezone": "Asia/Shanghai",
+    "currency": "synthetic_units_not_cny"
+  },
+  "inputs": {
+    "prices_3": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/numerical_prices_3.csv",
+      "sha256": "6c23da1210949916b49ac9de0f9f518e6a14771152d61eb1184b60769ee01af3"
+    },
+    "prices_5": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/numerical_prices_5.csv",
+      "sha256": "8a32ad90031cd6466133f8b9a60c88cf9d0ddbff451cd9a8ec56b272a1b8eb89"
+    }
+  },
+  "targets_effective": {
+    "entry_offset": 1,
+    "exit_offset": 22,
+    "observations": {
+      "start": "2017-12-20",
+      "end": "2018-01-24"
+    }
+  },
+  "split_protocol": {
+    "dev": [
+      "2017-12-20",
+      "2017-12-29"
+    ],
+    "validation": [
+      "2018-01-01",
+      "2018-01-10"
+    ],
+    "holdout": [
+      "2018-01-11",
+      "2018-01-24"
+    ]
+  },
+  "segment_cutoffs": {
+    "dev": "2017-12-29T15:00:00+08:00",
+    "validation": "2018-01-10T15:00:00+08:00",
+    "holdout": "2018-02-23T15:00:00+08:00"
+  },
+  "attempt_history": [
+    {
+      "attempt": "repair-fixture-reuse",
+      "outcome": "success",
+      "reason": "复用首轮 synthetic_inputs（哈希冻结）；本轮未改夹具"
+    },
+    {
+      "attempt": "protocol-v1.1.0-freeze",
+      "outcome": "success",
+      "reason": "按集中返修任务书增强合同后冻结；期望仍取自独立算术文件"
+    }
+  ],
+  "executor_model": "not_declared_in_protocol（实际模型见执行报告）",
+  "outputs": {},
+  "artifact_metadata": {
+    "mom3": {
+      "reference": "mixed.momentum.raw@1.0.0",
+      "unit": "fraction",
+      "entity_axis": "instrument",
+      "synthetic": true
+    },
+    "mom5": {
+      "reference": "mixed.momentum.raw@1.0.0",
+      "unit": "fraction",
+      "entity_axis": "instrument",
+      "synthetic": true
+    },
+    "rv3": {
+      "reference": "mixed.rv20@1.0.0",
+      "unit": "fraction",
+      "entity_axis": "instrument",
+      "synthetic": true
+    },
+    "d50_3": {
+      "reference": "trend.distance50@1.0.0",
+      "unit": "fraction",
+      "entity_axis": "instrument",
+      "synthetic": true
+    },
+    "d200_3": {
+      "reference": "trend.distance200@1.0.0",
+      "unit": "fraction",
+      "entity_axis": "instrument",
+      "synthetic": true
+    }
+  }
+}

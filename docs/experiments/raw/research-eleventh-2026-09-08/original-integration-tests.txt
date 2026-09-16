@@ -1,0 +1,31 @@
+........F.......................                                         [100%]
+=================================== FAILURES ===================================
+___________________ test_insufficient_columns_returns_empty ____________________
+
+    def test_insufficient_columns_returns_empty() -> None:
+        frame = pd.DataFrame({"close": [1.0, 2.0]})
+>       assert detect_first_ma_pullback_events(frame, "TEST") == []
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs/experiments/raw/research-eleventh-2026-09-08/integration-tests/test_first_ma_pullback.py:165: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+frame =    close
+0    1.0
+1    2.0, symbol = 'TEST'
+
+    def detect_first_ma_pullback_events(frame: pd.DataFrame, symbol: str) -> list[SignalEvent]:
+        """识别模块 A（V2）：时钟二类 + 多头排列 + 周线环境中的均线回撤事件。"""
+        spec = get_rule(RULE_ID)
+        periods, distance_atr, atr_period = _params(spec)
+        if frame.empty:
+            return []
+        missing = _required_columns().difference(frame.columns)
+        if missing:
+>           raise ValueError(f"模块A输入缺少必需字段: {', '.join(sorted(missing))}")
+E           ValueError: 模块A输入缺少必需字段: close_lag120, close_lag20, close_lag60, ema120, ema20, ema60, high, low, open, signal_color, sma120, sma20, sma60, volume
+
+docs/experiments/raw/research-eleventh-2026-09-08/research-package/src/lei_signal/rules/first_ma_pullback.py:192: ValueError
+=========================== short test summary info ============================
+FAILED docs/experiments/raw/research-eleventh-2026-09-08/integration-tests/test_first_ma_pullback.py::test_insufficient_columns_returns_empty
+1 failed, 31 passed in 1.49s

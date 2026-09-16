@@ -1,0 +1,206 @@
+/* 看盘首页视觉样板。策略判定与 K 线三色仍使用原有数据、原有颜色。
+   页面内的基础文字色与操作蓝独立于 BIAO 三色，状态始终带文字。 */
+.top-nav,
+.workspace {
+  --font-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --text: #202b3b;
+  --text-dim: #536175;
+  --text-faint: #637084;
+  --border: #e0e6ed;
+  --accent: #2458c6;
+  font-family: var(--font-sans);
+}
+
+/* 导航保留日常工作入口，辅助资料按用途展开。 */
+.top-nav {
+  height: 60px;
+  flex: 0 0 60px;
+  padding: 0 24px;
+  gap: 8px;
+  background: #fff;
+  border-bottom: 1px solid #dce3eb;
+}
+.top-nav a { font-size: 13px; padding: 9px 11px; border-radius: 6px; }
+.top-nav a.active { color: var(--accent); background: #edf3ff; font-weight: 650; }
+.top-nav a.brand,
+.top-nav a.brand.active {
+  padding: 0;
+  margin-right: 20px;
+  background: transparent;
+  color: #202b3b;
+  font-family: "Avenir Next", "PingFang SC", sans-serif;
+  font-weight: 800;
+  font-size: 25px;
+  letter-spacing: -1px;
+  gap: 10px;
+}
+.top-nav .brand span { font-size: 11px; letter-spacing: 1px; font-weight: 500; color: #536175; }
+.top-nav .nav-sep { margin: 0 8px; height: 20px; }
+.top-nav .nav-badge { background: #e5ecfa; color: #2458c6; height: 18px; min-width: 18px; }
+.top-nav .nav-agent { margin: 0; padding: 8px 12px; font-size: 12px; border-color: #c8d5ec; color: #2458c6; }
+.nav-more { position: relative; flex-shrink: 0; }
+.nav-more summary {
+  display: flex; align-items: center; gap: 8px;
+  padding: 9px 10px; list-style: none;
+  color: var(--text-dim); font-size: 13px; cursor: pointer; border-radius: 6px;
+}
+.nav-more summary::-webkit-details-marker { display: none; }
+.nav-more summary:hover, .nav-more[open] summary { background: #f1f5fa; }
+.nav-more.is-current summary { color: var(--accent); background: #edf3ff; }
+.nav-more-links {
+  position: absolute; top: calc(100% + 10px); left: 0; min-width: 176px;
+  display: flex; flex-direction: column; gap: 3px;
+  padding: 7px; background: #fff; border: 1px solid #dce3eb; border-radius: 9px;
+  box-shadow: 0 10px 30px #20334e18;
+}
+.top-nav .nav-more-links a { padding: 10px 12px; }
+.top-nav :focus-visible, .workspace :focus-visible { outline: 2px solid #2458c6; outline-offset: 3px; }
+
+/* 根容器分配真实剩余高度，避免顶栏把工作区推到视口外。 */
+#root:has(> .workspace) { height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+.workspace { height: auto; flex: 1; min-height: 0; background: #f3f6fa; font-size: 14px; }
+.workspace button { font-family: inherit; }
+.workspace .btn { min-height: 32px; border-radius: 6px; font-size: 12px; }
+.workspace .ws-top { display: block; padding: 0 24px; }
+.ws-context-row { min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.ws-context-title, .ws-context-tools { display: flex; align-items: center; gap: 12px; }
+.ws-context-title h1 { margin: 0; font-size: 15px; font-weight: 650; }
+.ws-context-caption { font-size: 12px; color: var(--text-dim); }
+.workspace .ws-sidebar-toggle { min-width: 28px; min-height: 28px; padding: 2px; border-color: transparent; color: #637084; }
+.ws-data-time { font-size: 11px; color: var(--text-dim); white-space: nowrap; }
+.ws-quote-row {
+  display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
+  min-height: 84px; padding: 12px 0 16px; border-top: 1px solid #edf0f5;
+}
+.ws-instrument { display: flex; flex-direction: column; gap: 4px; }
+.workspace .ws-symbol { margin: 0; font-size: 23px; font-weight: 650; line-height: 1.25; letter-spacing: -.5px; }
+.ws-instrument-meta { font-size: 11px; color: var(--text-dim); }
+.ws-quote { display: flex; align-items: baseline; gap: 9px; }
+.workspace .ws-quote .price { font-family: "Avenir Next", "PingFang SC", sans-serif; font-size: 30px; font-weight: 600; letter-spacing: -.8px; }
+.workspace .ws-quote .change { font-size: 13px; font-weight: 600; }
+.ws-state { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; padding: 0; background: transparent; border: 0; cursor: pointer; }
+.ws-state-label { color: var(--text-dim); font-size: 11px; }
+.ws-stage-chip { align-self: center; white-space: nowrap; }
+.ws-quote-context { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.ws-quote-actions { display: flex; gap: 7px; margin-left: auto; }
+.workspace .badge-chip { font-size: 11px; }
+
+/* 三色使用不同的实体表面；灰色有明确边界，绝不等同于禁用态。 */
+.workspace .color-badge { font-size: 12px; font-weight: 600; padding: 4px 9px; border-radius: 5px; line-height: 1.35; }
+.workspace .color-badge .dot { flex-shrink: 0; width: 9px; height: 9px; }
+.workspace .color-badge.black { background: #252b34; border-color: #252b34; color: #fff; }
+.workspace .color-badge.black .dot { background: #fff; box-shadow: inset 0 0 0 2px #252b34; border: 1px solid #fff; }
+.workspace .color-badge.gray { background: #e4e8ed; border-color: #a3acb8; color: #364152; }
+.workspace .color-badge.gray .dot { background: #717d8e; }
+.workspace .color-badge.green { background: #e4f5eb; border-color: #75b48f; color: #08623f; }
+.workspace .color-badge.green .dot { background: var(--biao-green); }
+.workspace .color-badge.unknown { color: var(--text-dim); border-style: dashed; }
+
+/* 自选是一份连续列表，减少层层嵌套的卡片。 */
+.workspace .ws-body { gap: 8px; padding: 16px 18px; }
+.workspace .sidebar { border-radius: 9px; box-shadow: none; flex-direction: column; }
+.workspace .sb-main { padding: 0; }
+.workspace .sb-rail { width: 100%; flex-direction: row; gap: 3px; padding: 8px; border-right: 0; border-bottom: 1px solid var(--border); background: #f8fafd; overflow-x: auto; flex-shrink: 0; }
+.workspace .sb-rail-btn { padding: 7px 9px; min-height: 30px; flex-shrink: 0; border-radius: 5px; font-size: 12px; }
+.workspace .sb-rail-btn.active { background: #e7efff; border-color: transparent; color: #2458c6; }
+.workspace .sb-head { padding: 12px; font-size: 14px; font-weight: 600; color: var(--text); border: 0; }
+.sb-state-key { display: flex; flex-wrap: wrap; gap: 6px 10px; padding: 0 12px 12px; font-size: 11px; color: #465266; }
+.sb-state-key-label { width: 100%; color: #536175; font-size: 11px; }
+.sb-state-key > span { display: inline-flex; align-items: center; gap: 4px; }
+.state-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.state-dot.black { background: #252b34; }
+.state-dot.gray { background: #717d8e; }
+.state-dot.green { background: var(--biao-green); }
+.workspace .sb-scroll { padding: 0 6px 10px; background: #fff; }
+.workspace .sb-group { border: 0; border-radius: 0; margin: 0; box-shadow: none; }
+.workspace .sb-group-head { background: #fff; padding: 0 8px; border-top: 1px solid var(--border); border-bottom: 0; }
+.workspace .sb-items { padding: 0; }
+.workspace .side-item { margin: 0; padding: 11px 10px; border: 1px solid transparent; border-bottom-color: #edf0f4; border-radius: 0; }
+.workspace .side-item:hover { background: #f7f9fc; }
+.workspace .side-item.active { background: #edf3ff; border: 1px solid #a7bfeb; border-radius: 6px; }
+.workspace .si-name { font-size: 14px; font-weight: 600; }
+.workspace .si-row2 { margin: 7px 0 5px; justify-content: space-between; flex-wrap: wrap; row-gap: 4px; }
+.workspace .si-price { font-size: 13px; color: #465266; }
+.workspace .si-row2 .color-badge { font-size: 11px; padding: 2px 6px; }
+.workspace .si-change { font-size: 12px; white-space: nowrap; }
+.workspace .sb-add-symbol { color: #2458c6; border: 1px solid #d4dfef; background: #f8faff; }
+.workspace .resize-handle::before { background: transparent; }
+.workspace .resize-handle:hover::before { background: var(--accent); }
+
+/* 中栏以价格图为主，摘要和控件保持紧凑、清晰。 */
+.workspace .ws-center { min-width: 0; padding-right: 0; scrollbar-gutter: stable; }
+.workspace .ws-chart-row { grid-template-columns: minmax(0, 1fr); min-width: 0; }
+.workspace .ws-chart-row.bp-open > .kline-wrap { height: auto; }
+.workspace .sig-banner { border: 0; border-bottom: 1px solid #dce3eb; border-radius: 0; background: transparent; box-shadow: none; padding: 0 2px 12px; }
+.workspace .sig-banner-head { gap: 8px; }
+.workspace .today-digest { background: #fff; border: 1px solid var(--border); box-shadow: none; border-radius: 7px; padding: 8px 10px; margin-bottom: 12px; gap: 8px; }
+.workspace .today-digest .td-seg { font-size: 12px; }
+.workspace .today-digest .td-seg b { font-size: 14px; }
+.workspace .kline-wrap { min-width: 0; border-radius: 9px; box-shadow: none; padding: 8px 10px; }
+.workspace .chart-controls { gap: 9px 16px; padding: 5px 2px 12px; }
+.workspace .ctl-group { gap: 4px; }
+.workspace .ctl-label { font-size: 11px; color: #536175; }
+.workspace .chip { border-radius: 4px; padding: 4px 7px; font-size: 11px; color: #536175; }
+.workspace .chip.on { background: #f2f6fc; border-color: #a4bce5; color: #234c8e; }
+.workspace .seg-btn { padding: 5px 9px; color: #536175; }
+.workspace .seg-btn.on { background: #2458c6; color: #fff; }
+.workspace .ws-center .kline { height: clamp(420px, 58vh, 690px); }
+.workspace .chart-legend { font-size: 11px; line-height: 1.6; color: #536175; }
+.workspace .panel { box-shadow: none; border-radius: 7px; }
+.workspace .panel h3 { font-size: 15px; }
+
+@media (min-width: 861px) and (max-width: 1100px) {
+  .workspace .ws-body { grid-template-columns: var(--sidebar-w, 268px) 6px minmax(0, 1fr); overflow: hidden; }
+  .workspace .ws-body.no-sidebar { grid-template-columns: minmax(0, 1fr); }
+  .workspace .ws-body .resize-handle { display: block; }
+}
+@media (min-width: 861px) and (max-width: 1200px) {
+  .workspace .ws-body:not(.exp-collapsed) { grid-template-columns: var(--sidebar-w, 268px) 6px minmax(0, 1fr); }
+  .workspace .ws-body.no-sidebar { grid-template-columns: minmax(0, 1fr); }
+  .workspace .ws-body .exp-panel { position: fixed; top: 200px; right: 16px; bottom: 16px; height: auto; width: 340px; z-index: 35; box-shadow: 0 12px 32px #20334e25; }
+}
+@media (max-width: 1200px) {
+  .top-nav { padding: 0 16px; gap: 3px; }
+  .top-nav .brand span { display: none; }
+  .top-nav a.brand { margin-right: 8px; }
+  .top-nav a { padding: 8px; font-size: 12px; }
+  .nav-more summary { padding: 8px; font-size: 12px; }
+  .ws-quote-row { gap: 14px; }
+  .ws-quote-context { display: flex; order: 2; flex-basis: 100%; }
+  .ws-context-caption { display: none; }
+}
+@media (max-width: 860px) {
+  .top-nav { height: auto; min-height: 60px; flex-basis: auto; flex-wrap: wrap; padding: 10px 14px; row-gap: 6px; }
+  .top-nav .nav-spacer { display: none; }
+  .top-nav .nav-ai { margin-left: auto; }
+  .workspace .ws-top { padding: 0 14px; }
+  .workspace .ws-body, .workspace .ws-body.no-sidebar,
+  .workspace .ws-body.exp-collapsed, .workspace .ws-body.no-sidebar.exp-collapsed {
+    grid-template-columns: minmax(0, 1fr); grid-auto-rows: max-content;
+    overflow-y: auto; padding: 12px; gap: 12px;
+  }
+  .workspace .sidebar { max-height: 290px; min-height: 220px; }
+  .workspace .ws-body .resize-handle { display: none; }
+  .workspace .ws-center { overflow: visible; scrollbar-gutter: auto; }
+  .workspace .ws-body .exp-panel { height: auto; max-height: none; }
+  .ws-context-tools { gap: 6px; }
+  .ws-data-time { display: none; }
+  .ws-quote-row { gap: 12px 20px; padding-bottom: 12px; }
+  .workspace .ws-symbol { font-size: 21px; }
+  .workspace .ws-quote .price { font-size: 27px; }
+  .ws-quote-actions { flex-wrap: wrap; }
+  .workspace .ws-center .kline { height: 440px; }
+}
+@media (max-width: 480px) {
+  .top-nav .nav-group { flex-wrap: wrap; }
+  .top-nav a { padding: 6px; }
+  .top-nav .nav-sep { margin: 0 4px; }
+  .top-nav a.brand { font-size: 22px; }
+  .ws-state { flex-direction: row; align-items: center; gap: 8px; }
+  .ws-quote-actions { width: 100%; margin: 0; }
+  .workspace .ws-quote-actions .btn { flex: 1; }
+  .nav-more-links { min-width: 150px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .workspace *, .top-nav * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

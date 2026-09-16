@@ -1,0 +1,77 @@
+{
+  "observed_at": "2026-09-16T09:32:19.085281+00:00",
+  "reviewed_at": "2026-09-16T09:32:50.055863+00:00",
+  "record": "docs/research/observations/breadth-v1/records/2026-09-16T093219.085281_0000-937cf917.json",
+  "readiness_reference": "docs/experiments/raw/research-breadth-freeze-2026-09-09/readiness/readiness.json",
+  "readiness_sha256": "a1cd7cfbbd0bda574e95352f89362dc7a64a04bfa27bf23d99807b8d0a1c94fb",
+  "facts": [
+    {
+      "id": "source-01",
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_klines.parquet",
+      "sha256": "53919a3c369c600f5e0c0dd63855a4445238f564863639d4011ed7ebec46f14e",
+      "rows": 4065188,
+      "columns": [
+        "symbol",
+        "date",
+        "close"
+      ],
+      "latest_date": "2026-09-16",
+      "member_latest_date_counts": {
+        "2026-08-28": 1,
+        "2026-08-31": 1,
+        "2026-09-03": 1,
+        "2026-09-04": 1,
+        "2026-09-09": 2,
+        "2026-09-10": 1,
+        "2026-09-11": 3,
+        "2026-09-14": 5204,
+        "2026-09-15": 3,
+        "2026-09-16": 1
+      }
+    },
+    {
+      "id": "source-02",
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_codes.json",
+      "sha256": "abc30e2a6363af36063cef8c07baa31cc23dd68c09b9c00ea64d28f1e301f26d",
+      "data": {
+        "date": "2026-09-16",
+        "codes": 5564
+      }
+    },
+    {
+      "id": "source-03",
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_ma_breadth.json",
+      "sha256": "c359968d6de595481d4c4bfaea6fb6de6c3df5f7afec3d9df2991f69d02ed877",
+      "data": {
+        "as_of": "2026-09-16 16:41",
+        "date": "2026-09-16",
+        "ma20_pct": 29.33384526780572,
+        "ma50_pct": 51.663781496441615,
+        "ma200_pct": 22.65397318826501,
+        "eligible": 5209,
+        "up": 4170,
+        "down": 1189,
+        "flat": 205,
+        "total": 5564,
+        "up_pct": 74.94608195542774,
+        "adv_dec_ratio": 3.5071488645920943,
+        "limit_up": 124,
+        "limit_down": 5,
+        "source": "腾讯日K线(本机收盘后预计算)"
+      }
+    }
+  ],
+  "unstable_after_review": [],
+  "qualification": {
+    "stage": "input_observation_only",
+    "common_200_denominator": "日常快照未提供冻结研究共同200日分母与覆盖证明；保留原缺口。",
+    "historical_membership": "更新当前代码列表不建立历史成员、生效时间及取得时间链。",
+    "etf_nominal_prices_and_actions": "监测ETF和公司行动文件均未变，原名义价、行动及执行资格缺口未解除。",
+    "availability": "实际读取时间保留；快照日期和文件修改时刻不代表全部成员均有当天收盘，也不用于倒填历史观察。",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "decision": "没有匹配输入齐备的新证据，继续仅输入观察；不通知常规刷新。",
+  "scope": "原冻结协议续跑，只读来源并追加核查记录；没有回测、改参数、更新OKR或交易。"
+}

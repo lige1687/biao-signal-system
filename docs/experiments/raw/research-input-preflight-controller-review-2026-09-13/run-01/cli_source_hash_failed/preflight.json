@@ -1,0 +1,167 @@
+{
+ "schema_version": "research-input-preflight/1.0",
+ "request": {
+  "snapshot_dir": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-input-preflight-controller-review-2026-09-13/run-01/synthetic-snapshot",
+  "calendar_path": null,
+  "publication_path": null,
+  "actions_path": null,
+  "registry_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-input-preflight-controller-review-2026-09-13/run-01/synthetic-registry-wrong-source-hash.json",
+  "refs": [
+   "mixed.price.economic@1.0.0"
+  ],
+  "use": "description",
+  "evaluation_start": "2026-06-01",
+  "evaluation_end": "2026-06-02"
+ },
+ "integrity": {
+  "verified": true,
+  "hash_mismatches": [],
+  "instruments": [
+   "510300.SS"
+  ],
+  "rows": 2,
+  "first_date": "2026-06-01",
+  "last_date": "2026-06-02",
+  "per_instrument_fields": {
+   "510300.SS": {
+    "missing_declared_fields": [],
+    "rows": 2
+   }
+  },
+  "date_index_note": "日期以 datetime64 索引承载，与快照声明的 date 字段一一对应；索引类型 datetime64[ns]"
+ },
+ "calendar": {
+  "loaded": false
+ },
+ "data_uses": {
+  "description": {
+   "verdict": "usable",
+   "declared": true,
+   "default_accepted": true,
+   "reason": "",
+   "blockers": {
+    "fixable": [],
+    "structural": []
+   }
+  },
+  "ranking": {
+   "verdict": "conditional",
+   "declared": false,
+   "default_accepted": false,
+   "reason": "not_declared: 产物自身声明的用途不含 ranking",
+   "blockers": {
+    "fixable": [
+     "no_qualified_calendar"
+    ],
+    "structural": []
+   }
+  },
+  "research_signal": {
+   "verdict": "conditional",
+   "declared": false,
+   "default_accepted": false,
+   "reason": "not_declared: 产物自身声明的用途不含 research_signal",
+   "blockers": {
+    "fixable": [
+     "no_qualified_calendar"
+    ],
+    "structural": []
+   }
+  },
+  "attribution": {
+   "verdict": "usable",
+   "declared": false,
+   "default_accepted": false,
+   "reason": "not_declared: 产物自身声明的用途不含 attribution",
+   "blockers": {
+    "fixable": [],
+    "structural": []
+   }
+  },
+  "comparison": {
+   "verdict": "conditional",
+   "declared": false,
+   "default_accepted": false,
+   "reason": "not_declared: 产物自身声明的用途不含 comparison",
+   "blockers": {
+    "fixable": [
+     "no_qualified_calendar"
+    ],
+    "structural": []
+   }
+  },
+  "diagnostic": {
+   "verdict": "usable",
+   "declared": true,
+   "default_accepted": true,
+   "reason": "",
+   "blockers": {
+    "fixable": [],
+    "structural": []
+   }
+  }
+ },
+ "registry": {
+  "loaded": true,
+  "container_version": "1.2.0",
+  "objects": 81,
+  "sources": 34,
+  "sources_verified": false,
+  "sources_error": "ValueError: changed or missing source: docs/experiments/raw/research-rotation-clean-2026-09-09/full-execution/run.py"
+ },
+ "objects": {
+  "mixed.price.economic@1.0.0": {
+   "ref": "mixed.price.economic@1.0.0",
+   "resolved": true,
+   "purpose_allowed": true,
+   "card_uses": [
+    "description",
+    "research_signal",
+    "attribution"
+   ],
+   "contract_digest": "d310853944aec5449128c20462294828592c7f7cdeff7532098b82049f771e21",
+   "missing_fields": [],
+   "directly_satisfiable": true
+  }
+ },
+ "findings": [
+  {
+   "level": "warn",
+   "code": "no_qualified_calendar",
+   "message": "无合格交易日历：不推断缺失交易日，不把工作日当交易日。跨标的同日对齐与覆盖率分母均无权威依据",
+   "instrument": null,
+   "field": null,
+   "affects_uses": [
+    "ranking",
+    "research_signal",
+    "comparison"
+   ],
+   "evidence": {
+    "calendar_authority": "none"
+   },
+   "structural": false
+  },
+  {
+   "level": "info",
+   "code": "coverage_denominator_unknown",
+   "message": "无权威日历，评价期覆盖率没有可信分母，只报绝对条数",
+   "instrument": "510300.SS",
+   "field": null,
+   "affects_uses": [],
+   "evidence": {
+    "rows_in_window": 2
+   },
+   "structural": false
+  }
+ ],
+ "request_satisfied": true,
+ "errors": [],
+ "limitations": [
+  "未提供日历：所有依赖日历的检查按无合格日历降级",
+  "登记表来源哈希核验未通过，详见 registry.sources_error",
+  "既有机器绑定限制：validate_registry 仍要求 standard_version==1.0.0，而正文标准已为 1.1.0；如实保留，不改版本字符串冒充迁移",
+  "request_satisfied=true 仅表示本次已实现的输入检查满足，不等于公式实现、历史可得时点、因子有效或交易授权"
+ ],
+ "calculation_run": false,
+ "production_authorized": false
+}

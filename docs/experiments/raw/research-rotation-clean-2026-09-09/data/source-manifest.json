@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-09",
+  "symbols": [
+    "510300.SH",
+    "159915.SZ",
+    "512400.SH",
+    "512170.SH"
+  ],
+  "windows": {
+    "warmup_start": "2020-07-07",
+    "evaluation_start": "2021-08-02",
+    "end": "2026-06-30"
+  },
+  "price_schema": [
+    "date",
+    "symbol",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume"
+  ],
+  "price_semantics": "unadjusted nominal contemporaneous fund-unit OHLCV",
+  "sources": [
+    {
+      "symbol": "510300.SH",
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/bars-helper-native/sh510300-nominal.csv",
+      "sha256": "d11357f678570ff9698e39799fd4db81ed825c3c05f7bb4c876e895a5c66d0bf",
+      "source_format": "csv"
+    },
+    {
+      "symbol": "159915.SZ",
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/bars-helper-native/sz159915-nominal.csv",
+      "sha256": "dc15f1c722114cf0f67d3c63d123b91fce27d60a9c41c4796a058b7b05fdece0",
+      "source_format": "csv"
+    },
+    {
+      "symbol": "512400.SH",
+      "path": "docs/experiments/raw/research-sector-etf-technical-2026-09-09/data-audit/inputs/512400.SS-sina-unadjusted.parquet",
+      "sha256": "6a4d0d561594ebc3a13337edda61f6241a63e5d6d307f91a099cd7514735d93b",
+      "source_format": "parquet"
+    },
+    {
+      "symbol": "512170.SH",
+      "path": "docs/experiments/raw/research-sector-etf-technical-2026-09-09/data-audit/inputs/512170.SS-sina-unadjusted.parquet",
+      "sha256": "10451e971d93d52542804d9f3ead2570ed3a9dab2ca6f1c5ea6f3c668849e618",
+      "source_format": "parquet"
+    },
+    {
+      "role": "actions_or_restrictions",
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/actions.json",
+      "sha256": "42803eceab514880d34918dbf4e04b64eac2a90749ccedb791b214e904ff2789"
+    },
+    {
+      "role": "actions_or_restrictions",
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/dated-restrictions.json",
+      "sha256": "06d01e93347bbf7341111d29118e20aeb22d37c5d872c5cb2257dd78404225c7"
+    },
+    {
+      "role": "actions_or_restrictions",
+      "path": "docs/experiments/raw/research-sector-etf-technical-2026-09-09/action-qualification/actions.json",
+      "sha256": "6c5d349d1fb25022455dd5457189f8e40b59553d0e768e9666e473da2ac1bada"
+    }
+  ],
+  "outputs": {
+    "prices.csv": {
+      "sha256": "80e34fd2a2d569c69393bc94008aae5e0ece033d18c50453feff45d13aa2bdb7",
+      "bytes": 310776
+    },
+    "actions.json": {
+      "sha256": "caaa0fdc9dc7549ff918f3f65f21f590cf999e9cb9c34e4236b798e4e137ef89",
+      "bytes": 9511
+    },
+    "qualification.md": {
+      "sha256": "3c7ec20f746ac6a927b252129f15ca9319063c900deaab1722f1c2884b4bc436",
+      "bytes": 2373
+    }
+  },
+  "checks": {
+    "510300.SH": {
+      "rows": 1450,
+      "first_date": "2020-07-07",
+      "last_date": "2026-06-30",
+      "evaluation_start_present": true,
+      "evaluation_end_present": true,
+      "zero_volume_rows": 0,
+      "missing_values": 0,
+      "duplicate_dates": 0,
+      "ohlc_order_violations": 0
+    },
+    "159915.SZ": {
+      "rows": 1449,
+      "first_date": "2020-07-07",
+      "last_date": "2026-06-30",
+      "evaluation_start_present": true,
+      "evaluation_end_present": true,
+      "zero_volume_rows": 0,
+      "missing_values": 0,
+      "duplicate_dates": 0,
+      "ohlc_order_violations": 0
+    },
+    "512400.SH": {
+      "rows": 1450,
+      "first_date": "2020-07-07",
+      "last_date": "2026-06-30",
+      "evaluation_start_present": true,
+      "evaluation_end_present": true,
+      "zero_volume_rows": 0,
+      "missing_values": 0,
+      "duplicate_dates": 0,
+      "ohlc_order_violations": 0
+    },
+    "512170.SH": {
+      "rows": 1449,
+      "first_date": "2020-07-07",
+      "last_date": "2026-06-30",
+      "evaluation_start_present": true,
+      "evaluation_end_present": true,
+      "zero_volume_rows": 0,
+      "missing_values": 0,
+      "duplicate_dates": 0,
+      "ohlc_order_violations": 0
+    }
+  }
+}

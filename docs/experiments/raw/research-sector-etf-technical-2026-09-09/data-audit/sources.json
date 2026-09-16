@@ -1,0 +1,64 @@
+{
+  "status": "conditionally_ready_after_actions_and_restrictions",
+  "selection_basis": "history length and sector difference; not prior returns",
+  "first_batch": ["512400.SS", "512170.SS"],
+  "deferred": {
+    "512800.SS": ["known 2025-07-07 price break", "official action mapping missing"],
+    "512480.SS": ["known 2021-03-29 and 2026-07-03 price breaks", "official action mapping missing"]
+  },
+  "usable_trade_price_inputs": [
+    {
+      "symbol": "512400.SS",
+      "path": "inputs/512400.SS-sina-unadjusted.parquet",
+      "provider": "sina",
+      "adjusted": false,
+      "rows": 1500,
+      "first": "2020-07-07",
+      "last": "2026-09-08",
+      "fields": ["open", "high", "low", "close", "volume"]
+    },
+    {
+      "symbol": "512170.SS",
+      "path": "inputs/512170.SS-sina-unadjusted.parquet",
+      "provider": "sina",
+      "adjusted": false,
+      "rows": 1500,
+      "first": "2020-07-06",
+      "last": "2026-09-08",
+      "fields": ["open", "high", "low", "close", "volume"]
+    }
+  ],
+  "technical_history_only": [
+    {
+      "symbol": "512400.SS",
+      "path": "docs/experiments/raw/exit_three_piece/pool/512400.SS.bars.parquet",
+      "rows": 2184,
+      "first": "2017-09-01",
+      "last": "2026-09-01",
+      "actual_identity": "Tencent qfq OHLCV; metadata omits adjusted flag",
+      "not_valid_as": "historical nominal execution prices"
+    },
+    {
+      "symbol": "512170.SS",
+      "path": "docs/experiments/raw/exit_three_piece/pool/512170.SS.bars.parquet",
+      "rows": 1751,
+      "first": "2019-06-17",
+      "last": "2026-09-01",
+      "actual_identity": "Tencent qfq OHLCV; metadata omits adjusted flag",
+      "not_valid_as": "historical nominal execution prices"
+    }
+  ],
+  "minimum_common_trade_window": ["2020-07-07", "2026-09-08"],
+  "remaining_requirements": [
+    "official or cross-checked cash dividend and split table",
+    "512170 2021-02-25 approximately 3-for-1 unit change",
+    "512400 2025-09 adjustment explanation",
+    "dated trading restrictions and known suspensions",
+    "protocol-defined end date and warmup treatment"
+  ],
+  "forbidden_substitutes": [
+    "current-component sector index backfill",
+    "qfq close-only cache as execution OHLCV",
+    "Tencent qfq historical opens as nominal fills"
+  ]
+}

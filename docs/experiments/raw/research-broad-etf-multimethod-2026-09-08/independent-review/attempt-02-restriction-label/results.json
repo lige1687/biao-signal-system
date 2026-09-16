@@ -1,0 +1,106 @@
+{
+  "status": "failed",
+  "accounts": 8,
+  "weekly_signals_per_account": 588,
+  "daily_rows_checked": 33592,
+  "trade_rows_checked": 402,
+  "monthly_rows_checked": 1104,
+  "yearly_rows_checked": 96,
+  "failed_sections": 4,
+  "input_hashes_unchanged": true,
+  "first_failures": [
+    {
+      "account_id": "sz159915-H1_weekly_binary_hysteresis-fee0.001",
+      "independent_count": 703,
+      "executor_count": 703,
+      "passed": false,
+      "first_differences": [
+        {
+          "index": 364,
+          "independent": [
+            "2021-02-08",
+            "known_open_unavailable",
+            null,
+            null
+          ],
+          "executor": [
+            "2021-02-08",
+            "missing_quote",
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "account_id": "sz159915-H1_weekly_binary_hysteresis-fee0.002",
+      "independent_count": 703,
+      "executor_count": 703,
+      "passed": false,
+      "first_differences": [
+        {
+          "index": 364,
+          "independent": [
+            "2021-02-08",
+            "known_open_unavailable",
+            null,
+            null
+          ],
+          "executor": [
+            "2021-02-08",
+            "missing_quote",
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "account_id": "sz159915-H2_weekly_breadth_trend_participation-fee0.001",
+      "independent_count": 703,
+      "executor_count": 703,
+      "passed": false,
+      "first_differences": [
+        {
+          "index": 365,
+          "independent": [
+            "2021-02-08",
+            "known_open_unavailable",
+            null,
+            null
+          ],
+          "executor": [
+            "2021-02-08",
+            "missing_quote",
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "account_id": "sz159915-H2_weekly_breadth_trend_participation-fee0.002",
+      "independent_count": 703,
+      "executor_count": 703,
+      "passed": false,
+      "first_differences": [
+        {
+          "index": 365,
+          "independent": [
+            "2021-02-08",
+            "known_open_unavailable",
+            null,
+            null
+          ],
+          "executor": [
+            "2021-02-08",
+            "missing_quote",
+            null,
+            null
+          ]
+        }
+      ]
+    }
+  ],
+  "signal_date_note": "H1 executor labels signal_date with breadth source date; independent engine labels completed-week Sunday. Semantic comparison proves both breadth_source_date and derived Sunday decision_date match; execution week and all financial rows match."
+}

@@ -1,0 +1,82 @@
+{
+  "new_backtests": 0,
+  "scope": "Descriptive diagnostics of existing main-fee trades; no counterfactual cash-attribution percentages",
+  "findings": [
+    {
+      "symbol": "sh510300",
+      "method": "R1",
+      "buys": 83,
+      "sells": 82,
+      "median_initial_stop_distance_fraction": 0.05895522388059694,
+      "exit_reasons": {
+        "ema_cost_exit": 81,
+        "structure_stop": 1
+      },
+      "first_trade": {
+        "date": "2015-01-22",
+        "shares": 28100.0,
+        "entry_notional": 99558.3,
+        "net_pnl": -5336.274300000003
+      }
+    },
+    {
+      "symbol": "sh510300",
+      "method": "R1-risk1",
+      "buys": 83,
+      "sells": 82,
+      "median_initial_stop_distance_fraction": 0.05895522388059694,
+      "exit_reasons": {
+        "ema_cost_exit": 81,
+        "structure_stop": 1
+      },
+      "first_trade": {
+        "date": "2015-01-22",
+        "shares": 800.0,
+        "entry_notional": 2834.4,
+        "net_pnl": -151.92240000000007
+      }
+    },
+    {
+      "symbol": "sz159915",
+      "method": "R1",
+      "buys": 82,
+      "sells": 81,
+      "median_initial_stop_distance_fraction": 0.09099357054023943,
+      "exit_reasons": {
+        "ema_cost_exit": 81
+      },
+      "first_trade": {
+        "date": "2015-01-09",
+        "shares": 67200.0,
+        "entry_notional": 99792.0,
+        "net_pnl": 116275.824
+      }
+    },
+    {
+      "symbol": "sz159915",
+      "method": "R1-risk1",
+      "buys": 82,
+      "sells": 81,
+      "median_initial_stop_distance_fraction": 0.09099357054023943,
+      "exit_reasons": {
+        "ema_cost_exit": 81
+      },
+      "first_trade": {
+        "date": "2015-01-09",
+        "shares": 12600.0,
+        "entry_notional": 18711.0,
+        "net_pnl": 21801.717
+      }
+    }
+  ],
+  "sources": {
+    "docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sh510300-R1-fee10bp/trades.csv": "be2af37a862d87a224643c95c7829471ccbfeabf02cb19eefe18fed2fcaa7056",
+    "docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sh510300-R1-fee10bp/roundtrips.json": "41d1da4e72723a4e74460b02eb65919dbebd5c471b26578b3abfc5c8f25b82c6",
+    "docs/experiments/raw/research-broad-etf-risk-sizing-2026-09-08/execution/account-results/sh510300-R1-risk1-fee10bp/trades.csv": "f487184dd652d863fd7ce22fc87c161ae502b44fe0c89d8c23de02c0d5753cb7",
+    "docs/experiments/raw/research-broad-etf-risk-sizing-2026-09-08/execution/account-results/sh510300-R1-risk1-fee10bp/roundtrips.json": "3042baf805116eb5f4741691169f541b841af16a729259c8a4f96a82e03f595f",
+    "docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sz159915-R1-fee10bp/trades.csv": "e6432853789a0d7f5d77f95a509ecef8c9c6fc31cba75ba91b008670ef59cc66",
+    "docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sz159915-R1-fee10bp/roundtrips.json": "bf665784a4495baa902a3ddf1dc854dbd176d233b4312eea1e3507460fa68302",
+    "docs/experiments/raw/research-broad-etf-risk-sizing-2026-09-08/execution/account-results/sz159915-R1-risk1-fee10bp/trades.csv": "d3365a3b1ee4ffa98dcd21de430493dc19b951cd6f9d493c5ef5f94ed5c09e5d",
+    "docs/experiments/raw/research-broad-etf-risk-sizing-2026-09-08/execution/account-results/sz159915-R1-risk1-fee10bp/roundtrips.json": "d62b1c9dbf8607c1be2c87318b7fb17335ff6b2de0b295f43d6e5ffde7e38f00"
+  }
+}

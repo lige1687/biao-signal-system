@@ -1,0 +1,56 @@
+test_bad_event_sequence_rejected (__main__.HistoryChecks.test_bad_event_sequence_rejected) ... FAIL
+test_duplicate_event_rejected (__main__.HistoryChecks.test_duplicate_event_rejected) ... FAIL
+test_late_resume_blocks_open_not_close_mark (__main__.HistoryChecks.test_late_resume_blocks_open_not_close_mark) ... FAIL
+test_limit_change_only_from_effective_date (__main__.HistoryChecks.test_limit_change_only_from_effective_date) ... FAIL
+test_nonfinite_close_rejected (__main__.HistoryChecks.test_nonfinite_close_rejected) ... FAIL
+test_split_during_missing_day_then_resume (__main__.HistoryChecks.test_split_during_missing_day_then_resume) ... ok
+
+======================================================================
+FAIL: test_bad_event_sequence_rejected (__main__.HistoryChecks.test_bad_event_sequence_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fifth-2026-09-08/study/test_history_rules.py", line 11, in test_bad_event_sequence_rejected
+    with self.assertRaises(ValueError):run(prices(),events=[e])
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_duplicate_event_rejected (__main__.HistoryChecks.test_duplicate_event_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fifth-2026-09-08/study/test_history_rules.py", line 14, in test_duplicate_event_rejected
+    with self.assertRaises(ValueError):run(prices(),events=[e,e])
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_late_resume_blocks_open_not_close_mark (__main__.HistoryChecks.test_late_resume_blocks_open_not_close_mark)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fifth-2026-09-08/study/test_history_rules.py", line 25, in test_late_resume_blocks_open_not_close_mark
+    self.assertEqual(r['trades'][0]['date'],'2021-02-10')
+AssertionError: '2021-02-09' != '2021-02-10'
+- 2021-02-09
+?          -
++ 2021-02-10
+?         +
+
+
+======================================================================
+FAIL: test_limit_change_only_from_effective_date (__main__.HistoryChecks.test_limit_change_only_from_effective_date)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fifth-2026-09-08/study/test_history_rules.py", line 20, in test_limit_change_only_from_effective_date
+    self.assertIn('2020-08-24',[t['date'] for t in r['trades']])
+AssertionError: '2020-08-24' not found in ['2020-08-18', '2020-08-25']
+
+======================================================================
+FAIL: test_nonfinite_close_rejected (__main__.HistoryChecks.test_nonfinite_close_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fifth-2026-09-08/study/test_history_rules.py", line 8, in test_nonfinite_close_rejected
+    with self.assertRaises(ValueError):run(p)
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+FAILED (failures=5)

@@ -1,0 +1,150 @@
+{
+  "protocol_id": "research-data-provenance-2026-09-10",
+  "version": "1.0.0",
+  "frozen_at": "2026-09-10T00:00:00+08:00",
+  "scope": "研究专用数据获取/导入、只读快照、质量校验及薄适配；不新增因子、不运行账户、不做收益回测",
+
+  "adopted_specs": {
+    "principles": {"path": "docs/research/experiment-backtest-principles.md", "version": "v1.1"},
+    "definition_standard": {"path": "docs/research/definition-standard.md", "version": "1.1.0"},
+    "execution_contract": {"path": "docs/research/ai-execution-contract.md", "version": "1.0.0"},
+    "report_template": {"path": "docs/research/experiment-report-template.md", "version": "1.1.0"},
+    "registry": {"path": "docs/research/definitions.v1.json", "container_version": "1.2.0", "objects": 81, "sources": 34}
+  },
+  "known_machine_binding_limitation": "validate_registry 硬要求 standard_version=='1.0.0'（现行标准为 1.1.0）；make_manifest 硬编码 principles_version=1.0.0（现行为 v1.1）。本轮如实单列，不改版本字符串冒充迁移。已由 governance-pack-merge-2026-09-10.md:59 记录。",
+
+  "workspace": {
+    "git_head": "91c720ed46ad95237dcbc56575ac122ab606edd8",
+    "note": "存在大量未提交修改，HEAD 不代表实际内容；实际代码身份以逐文件 SHA-256 为准"
+  },
+
+  "writable_paths": [
+    "src/lei_signal/research/data_snapshot.py",
+    "src/lei_signal/research/data_quality.py",
+    "scripts/run_research_data_snapshot.py",
+    "tests/unit/test_research_data_snapshot.py",
+    "tests/unit/test_research_data_quality.py",
+    "tests/integration/test_research_data_snapshot_cli.py",
+    "docs/experiments/raw/research-data-provenance-2026-09-10/**",
+    "docs/experiments/research-data-provenance-2026-09-10.md",
+    "docs/experiments/registry.json",
+    "docs/experiments/INDEX.md"
+  ],
+
+  "protected_paths": [
+    "docs/experiments/raw/research-rotation-clean-2026-09-09/**",
+    "docs/experiments/raw/research-mixed-defense-2026-09-09/**",
+    "docs/experiments/raw/research-factor-library-v0-2026-09-09/**",
+    "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/**",
+    "docs/experiments/raw/research-breadth-freeze-2026-09-09/**",
+    "docs/research/definitions.v1.json",
+    "src/lei_signal/research/definitions.py",
+    "src/lei_signal/research/factor_runtime.py",
+    "src/lei_signal/research/factor_account_adapter.py",
+    "src/lei_signal/research/factor_diagnostics.py",
+    "src/lei_signal/data_provenance.py",
+    "src/lei_signal/data/providers.py",
+    "src/lei_signal/data/cache.py",
+    "src/lei_signal/data/validation.py",
+    "src/lei_signal/data/calendar.py",
+    "src/lei_signal/data/point_in_time.py",
+    "src/lei_signal/ui/**",
+    "configs/rules.v1.yaml",
+    "scripts/run_factor_library_v0.py"
+  ],
+  "protected_rule": "以上只读。本轮结束须以聚合 SHA-256 证明未改动。",
+
+  "reuse_not_rebuild": {
+    "provenance_fields": "src/lei_signal/data_provenance.py::MarketDataRef / file_source_hash / SourcePolicy / reference_calendar / assess_freshness",
+    "fetch": "src/lei_signal/data/providers.py（超时/有限重试/失败 raise）",
+    "bar_validation": "src/lei_signal/data/validation.py::validate_bars",
+    "hash_and_manifest": "src/lei_signal/research/definitions.py::fingerprint / verify_sources",
+    "forbidden": "不建第二份对象登记表、不建第二套行情体系、不建新通用回测引擎"
+  },
+
+  "interfaces": {
+    "src/lei_signal/research/data_snapshot.py": [
+      "RequestSpec(source_id, instrument_id, market, start, end, fields, params, url)",
+      "FetchBudget(max_instruments, max_trading_days, max_requests, timeout_seconds, max_retries)",
+      "BudgetExceeded(RuntimeError) / AcquisitionFailed(RuntimeError)",
+      "acquire_prices(specs, *, budget, out_dir, now, transport) -> SnapshotResult",
+      "import_prices(csv_path, *, source_id, instrument_ids, out_dir, now, declared) -> SnapshotResult",
+      "load_snapshot(snapshot_dir) -> LoadedSnapshot   # 完全离线",
+      "diff_snapshots(old_dir, new_dir) -> dict"
+    ],
+    "src/lei_signal/research/data_quality.py": [
+      "Finding(level, code, scope, message, evidence)",
+      "UseVerdict(use, verdict, reasons)   # verdict ∈ usable|conditional|unusable",
+      "QualityReport(findings, verdicts, counts).to_dict()",
+      "check_prices(frame, *, spec, price_basis, calendar_authority, warmup_rows, now) -> QualityReport",
+      "check_actions(actions, *, declared_symbols) -> QualityReport"
+    ],
+    "uses_enum": "复用 definition-standard §2 机器用途枚举：description / ranking / research_signal / attribution / comparison / diagnostic。不自造新枚举。"
+  },
+
+  "snapshot_layout": {
+    "root": "docs/experiments/raw/research-data-provenance-2026-09-10/<name>-NN/",
+    "files": {
+      "snapshot.json": "来源、请求参数、请求与返回时刻、产品/区间/行数/日期范围、各文件 SHA-256、代码身份、转换版本、字段/单位/币种/交易日历/价格与公司行动口径、四类时间、已知缺口、允许与禁止用途",
+      "raw/<instrument>.raw.json": "原始响应体，未经改动",
+      "normalized/<instrument>.csv": "标准化产物，与原始分开",
+      "market_data_refs.json": "每标的一条 MarketDataRef（复用 data_provenance）",
+      "quality-report.json": "校验结果与按用途裁决"
+    },
+    "no_overwrite": "目录已存在则 bump -NN（复用 fresh_dir 同款语义）；相同请求返回不同内容时保存新快照并写 diff，不静默刷新旧证据"
+  },
+
+  "time_semantics_rule": {
+    "recorded_separately": ["observed_at", "available_at", "generated_at", "fetched_at"],
+    "unknown_stays_unknown": "历史资料缺到达时间一律 null + reason，禁止补成收盘时间或本次抓取时间",
+    "later_acquisition": "后来取得的历史资料只证明本次取得了该版本，不证明历史当天可得"
+  },
+
+  "network_budget": {
+    "enabled": true,
+    "source": "sina getKLineData（仓库已使用的同一公开来源，providers.py:497）",
+    "instruments": ["510300.SH", "515300.SH"],
+    "reason_for_choice": "均在现有混合池 14 只内；510300 有 8 条已登记公司行动、515300 有官方资格核查目录，便于演示价格与公司行动的独立身份关联",
+    "max_trading_days": 60,
+    "max_requests_total": 10,
+    "includes_retries_and_paging": true,
+    "writes_to_production_cache": false,
+    "new_credentials_or_vendors": false,
+    "stop_condition": "接口不支持有界请求、许可不明或需扩大范围时停止联网分支，完成离线适配与测试并列明剩余缺口"
+  },
+
+  "test_plan": {
+    "unit_snapshot": ["正常小例", "乱序", "重复与冲突", "空响应", "字段缺失", "超时", "限流", "有限重试", "请求上限", "错误响应", "相同快照离线复用一致", "旧输出防覆盖", "相同请求内容变化产生新快照与 diff"],
+    "unit_quality": ["非正价", "无穷值", "缺报价", "预热不足", "代码错配", "分红拆分边界", "重复行动ID", "未声明字段", "无合格日历时不把工作日当交易日", "按用途裁决 usable/conditional/unusable", "异常只阻断受影响产品与用途"],
+    "unit_binding": ["价格缩放时每份现金分红同步缩放、拆分比例不变、仅对无量纲信号断言不变", "追加未来输入不改变截至 t 日信号", "历史修订另留新指纹与差异", "错对象版本拒绝", "错价格口径拒绝", "输入身份不符拒绝"],
+    "integration": ["CLI 端到端：导入→快照→校验→离线复用", "输出目录防覆盖"],
+    "oracle_rule": "手算期望值独立于被测函数；不把「随机打分应接近零」当确定性通过条件",
+    "network_rule": "失败分支用模拟响应覆盖；真实接口小样本另列证据"
+  },
+
+  "resource_limits": {
+    "max_new_source_files": 6,
+    "no_new_database": true,
+    "no_new_scheduler": true,
+    "no_paid_service": true,
+    "no_dependency_upgrade": true,
+    "no_bulk_backfill": true
+  },
+
+  "explicitly_out_of_scope": [
+    "新收益回测、参数搜索",
+    "扩 ETF 池、转个股实验",
+    "为填满 factor_return 类型新造多空组合",
+    "接入国债 / 无风险利率 / 海外因子库",
+    "修改生产缓存或会覆盖旧输出的入口",
+    "把历史到达时间补成收盘时间或本次抓取时间",
+    "改 OKR 里程碑范围、授权或完成度（只读核对并给建议）"
+  ],
+
+  "completion_is_not": [
+    "不因接口跑通宣称策略有效",
+    "不因算术一致宣称历史时点已证实",
+    "不因测试通过宣称获准真实交易",
+    "不自行宣布全部数据已合格"
+  ]
+}

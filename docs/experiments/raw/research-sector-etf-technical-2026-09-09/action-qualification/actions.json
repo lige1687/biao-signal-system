@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "research_end": "2026-06-30",
+  "events": [
+    {
+      "event_id": "512400-cash-2024",
+      "symbol": "512400",
+      "type": "cash_dividend",
+      "announcement_date": "2024-09-11",
+      "record_date": "2024-09-13",
+      "ex_date": "2024-09-18",
+      "pay_date": "2024-09-23",
+      "cash_per_unit": "0.010000",
+      "source_file": "sources/512400-dividend-2024-sse.pdf",
+      "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2024-09-11/512400_20240911_IDKV.pdf"
+    },
+    {
+      "event_id": "512400-cash-2025",
+      "symbol": "512400",
+      "type": "cash_dividend",
+      "announcement_date": "2025-09-10",
+      "record_date": "2025-09-12",
+      "ex_date": "2025-09-15",
+      "pay_date": "2025-09-18",
+      "cash_per_unit": "0.015000",
+      "source_file": "sources/512400-dividend-2025-sse.pdf",
+      "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2025-09-10/512400_20250910_RUGH.pdf"
+    },
+    {
+      "event_id": "512170-split-2021",
+      "symbol": "512170",
+      "type": "share_split",
+      "announcement_date": "2021-02-08",
+      "record_date": "2021-02-23",
+      "effective_date": "2021-02-24",
+      "split_ratio": "3.000000",
+      "source_file": "sources/512170-split-second-notice-2021-02-23-sse.pdf",
+      "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2021-02-22/512170_20210223_1.pdf"
+    },
+    {
+      "event_id": "512170-trading-suspension-2021",
+      "symbol": "512170",
+      "type": "trading_suspension",
+      "announcement_date": "2021-02-08",
+      "suspension_date": "2021-02-24",
+      "resume_date": "2021-02-25",
+      "scope": "secondary_market_trading",
+      "reason": "share_split",
+      "source_file": "sources/512170-split-second-notice-2021-02-23-sse.pdf",
+      "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2021-02-22/512170_20210223_1.pdf"
+    }
+  ],
+  "excluded_after_end": [
+    {
+      "symbol": "512400",
+      "type": "cash_dividend",
+      "record_date": "2026-09-08",
+      "ex_date": "2026-09-09",
+      "pay_date": "2026-09-14",
+      "cash_per_unit": "0.080000",
+      "reason": "after 2026-06-30 research end",
+      "source_file": "sources/512400-eastmoney-dividend-split-snapshot.html"
+    }
+  ],
+  "coverage_notes": [
+    "512170 cash-dividend absence and 512400 split absence are cross-check findings from Eastmoney snapshots, not official continuous no-event certificates.",
+    "Only the 2021-02-24 512170 trading suspension tied to the split was positively identified. Other suspension absence is not asserted; quote-calendar qualification must still reject dates without usable quotes."
+  ]
+}

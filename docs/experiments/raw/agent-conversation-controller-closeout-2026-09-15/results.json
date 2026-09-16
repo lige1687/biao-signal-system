@@ -1,0 +1,148 @@
+{
+  "clean_eof": {
+    "text": "半句话",
+    "interrupted": true
+  },
+  "provider_error": {
+    "text": "半句话",
+    "interrupted": true
+  },
+  "normal": {
+    "text": "半句话",
+    "interrupted": false
+  },
+  "openai_error_eof": {
+    "text": "半句话",
+    "reasons": [
+      "server_error_event"
+    ]
+  },
+  "openai_error_done": {
+    "text": "半句话",
+    "reasons": [
+      "server_error_event"
+    ]
+  },
+  "history_retry": {
+    "first_done": {
+      "session_id": "sess_49c3d3c242cc",
+      "resolved_symbol": null,
+      "grounded": false,
+      "question_id": 1,
+      "evidence_card": null,
+      "plan_artifact": null,
+      "answer_state": "incomplete",
+      "next_steps": [],
+      "verify_note": "AI 讲解未完成（连接中断）；以上是已收到的部分，上方系统资料仍然可用。可重试同一问题重新生成（不会重复记录）。"
+    },
+    "stored_answers": [
+      {
+        "content": "按系统资料，先观察。",
+        "grounded": 0,
+        "meta_json": "{\"trace\": [], \"answer_incomplete\": {\"reason\": \"connection_interrupted\", \"reason_cn\": \"连接中断\"}}"
+      },
+      {
+        "content": "按系统资料，先观察。",
+        "grounded": 1,
+        "meta_json": "{\"trace\": []}"
+      }
+    ],
+    "claims": [
+      {
+        "client_request_id": "controller-interrupted-1",
+        "session_id": "sess_49c3d3c242cc",
+        "question_id": 1,
+        "request_hash": "7751fa943c93d6b39802961d26f64cf45d9094148a80e61daf425ac38f3b6884",
+        "created_at": "2026-09-15T02:11:41.517890+00:00",
+        "answer_message_id": 3,
+        "answer_state": "answered",
+        "state_at": "2026-09-15T02:12:16.728959+00:00",
+        "request_message": "先观察什么",
+        "request_context_kind": "global",
+        "request_symbol": ""
+      }
+    ],
+    "retry_events": [
+      [
+        "stage",
+        {
+          "key": "resolve",
+          "text": "识别标的与意图"
+        }
+      ],
+      [
+        "prepared",
+        {
+          "session_id": "sess_49c3d3c242cc",
+          "resolved_symbol": null,
+          "quick_card": null,
+          "evidence_card": null,
+          "next_steps": []
+        }
+      ],
+      [
+        "stage",
+        {
+          "key": "llm",
+          "text": "AI 组织语言（逐字输出）"
+        }
+      ],
+      [
+        "token",
+        {
+          "t": "按系统资料，先观察。"
+        }
+      ],
+      [
+        "done",
+        {
+          "session_id": "sess_49c3d3c242cc",
+          "resolved_symbol": null,
+          "grounded": true,
+          "question_id": 1,
+          "evidence_card": null,
+          "plan_artifact": null,
+          "answer_state": "answered",
+          "next_steps": []
+        }
+      ]
+    ],
+    "model_calls": 2,
+    "after_success_replay": [
+      [
+        "token",
+        {
+          "t": "按系统资料，先观察。"
+        }
+      ],
+      [
+        "done",
+        {
+          "session_id": "sess_49c3d3c242cc",
+          "resolved_symbol": null,
+          "grounded": true,
+          "question_id": 1,
+          "evidence_card": null,
+          "plan_artifact": null,
+          "answer_state": "answered",
+          "next_steps": [],
+          "replayed": true
+        }
+      ]
+    ],
+    "retry_projection": {
+      "client_request_id": "controller-interrupted-1",
+      "message": "先观察什么",
+      "context_kind": "global",
+      "symbol": null
+    },
+    "retry_count_after_complete": 0
+  },
+  "source_before": {
+    "src/lei_signal/plans/llm.py": "f6bd40c3edecbf78e4737326970172df8da21c0de49083c7510d8436a2535874",
+    "src/lei_signal/api/routes/agent.py": "a4331bb42ffb12b1ca12a1caa59f845fad81ecb3530b56b3bb49e310a81ca954",
+    "web/src/pages/AgentWorkspacePage.tsx": "a927c9fb3bb3e6f1f229944fc7b96d49f7219ef9ebd9c249ba40c44cb488eaea",
+    "web/src/components/AgentConsole.tsx": "7d181d6738919f978eb0adc2b6dda943b86665dde7dd110baa71dab90658f66d"
+  },
+  "source_unchanged": true
+}

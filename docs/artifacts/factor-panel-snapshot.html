@@ -1,0 +1,541 @@
+<title>因子观测台</title>
+<style>
+:root {
+  --bg: #F7F8F9;
+  --bg-raise: #FFFFFF;
+  --bg-sunk: #EEF1F3;
+  --ink: #1A2229;
+  --ink-2: #4A5560;
+  --ink-3: #828B94;
+  --line: #DFE3E7;
+  --line-soft: #EBEDEF;
+  --accent: #1F6F8B;
+  --accent-ink: #1F6F8B;
+  --accent-tint: #E4EFF3;
+  --pass: #2E7D6B;
+  --pass-tint: #E2EFEA;
+  --weak: #B5762B;
+  --weak-tint: #F7EDDC;
+  --inverse: #7A4FA3;
+  --inverse-tint: #EFE7F6;
+  --fail: #6E747B;
+  --fail-tint: #E9EAEC;
+  --hot: #C4562E;
+  --hot-tint: #F9E7DF;
+  --pos: #B03A2E;
+  --neg: #1E7A46;
+  --bar-track: #E3E6E9;
+  --bar-fill: #9FB4BE;
+}
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) {
+  --bg: #0F1319;
+  --bg-raise: #171E26;
+  --bg-sunk: #0B0F14;
+  --ink: #E4E8EC;
+  --ink-2: #A8B2BB;
+  --ink-3: #6E7880;
+  --line: #2A323B;
+  --line-soft: #212932;
+  --accent: #5FA8C4;
+  --accent-ink: #7CBDD6;
+  --accent-tint: #17303C;
+  --pass: #5FB39E;
+  --pass-tint: #16332B;
+  --weak: #D9A15B;
+  --weak-tint: #3A2C16;
+  --inverse: #B795D9;
+  --inverse-tint: #2B2140;
+  --fail: #959DA6;
+  --fail-tint: #232A31;
+  --hot: #E0835C;
+  --hot-tint: #3A2117;
+  --pos: #E08A80;
+  --neg: #5FBA8B;
+  --bar-track: #262E37;
+  --bar-fill: #56717E;
+}
+}
+:root[data-theme="dark"] {
+  --bg: #0F1319;
+  --bg-raise: #171E26;
+  --bg-sunk: #0B0F14;
+  --ink: #E4E8EC;
+  --ink-2: #A8B2BB;
+  --ink-3: #6E7880;
+  --line: #2A323B;
+  --line-soft: #212932;
+  --accent: #5FA8C4;
+  --accent-ink: #7CBDD6;
+  --accent-tint: #17303C;
+  --pass: #5FB39E;
+  --pass-tint: #16332B;
+  --weak: #D9A15B;
+  --weak-tint: #3A2C16;
+  --inverse: #B795D9;
+  --inverse-tint: #2B2140;
+  --fail: #959DA6;
+  --fail-tint: #232A31;
+  --hot: #E0835C;
+  --hot-tint: #3A2117;
+  --pos: #E08A80;
+  --neg: #5FBA8B;
+  --bar-track: #262E37;
+  --bar-fill: #56717E;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 28px 20px 64px; }
+
+h1, h2, h3 { font-family: "Noto Serif SC", "Songti SC", serif; text-wrap: balance; }
+.mono, td.num, .cell-num { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace; font-variant-numeric: tabular-nums; }
+
+/* ── 页头 ─────────────────────────── */
+.eyebrow {
+  font-size: 12px; letter-spacing: .18em; color: var(--accent-ink);
+  font-weight: 600; text-transform: uppercase; margin-bottom: 6px;
+}
+h1 { font-size: 30px; margin: 0 0 6px; font-weight: 700; }
+.sub { color: var(--ink-2); font-size: 13.5px; max-width: 62ch; }
+.sub .mono { color: var(--ink-3); }
+
+.proxy-band {
+  margin-top: 18px; padding: 10px 14px; border-left: 3px solid var(--accent);
+  background: var(--accent-tint); border-radius: 4px;
+  font-size: 12.5px; color: var(--ink-2);
+}
+
+/* ── 市场横幅 ─────────────────────── */
+.market-band {
+  margin-top: 14px; display: flex; flex-wrap: wrap; gap: 18px 32px; align-items: baseline;
+  background: var(--bg-raise); border: 1px solid var(--line); border-radius: 8px;
+  padding: 14px 18px;
+}
+.market-band .m-label { font-size: 12px; color: var(--ink-3); letter-spacing: .06em; }
+.market-band .m-value { font-size: 22px; font-weight: 600; }
+.market-band .m-note { font-size: 12px; color: var(--ink-3); }
+.market-band .big-pctbar { width: 130px; }
+
+/* ── 章节 ─────────────────────────── */
+section { margin-top: 40px; }
+.sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+.sec-head h2 { font-size: 20px; margin: 0; }
+.sec-head .sec-tag { font-size: 12px; color: var(--ink-3); }
+.sec-sub { color: var(--ink-2); font-size: 13px; margin: 0 0 16px; max-width: 70ch; }
+
+/* ── 评级卡 ───────────────────────── */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; }
+.fcard {
+  background: var(--bg-raise); border: 1px solid var(--line); border-radius: 8px;
+  padding: 16px 16px 12px 18px; position: relative; overflow: hidden;
+}
+.fcard::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--vc, var(--line)); }
+.fcard .f-top { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.fcard .f-name { font-family: "Noto Serif SC", "Songti SC", serif; font-weight: 700; font-size: 15.5px; }
+.verdict-chip {
+  font-size: 11.5px; font-weight: 600; padding: 1px 9px; border-radius: 999px;
+  color: var(--vc); background: var(--vt); border: 1px solid var(--vc); border-color: color-mix(in srgb, var(--vc) 45%, transparent);
+}
+.fcard .f-formula { font-size: 12.5px; color: var(--ink-3); margin: 8px 0 0; }
+.fcard .f-body { font-size: 13px; color: var(--ink-2); margin-top: 10px; }
+.fcard details { margin-top: 10px; }
+.fcard summary {
+  cursor: pointer; font-size: 12.5px; color: var(--accent-ink); font-weight: 600;
+  list-style: none; outline-offset: 3px;
+}
+.fcard summary::before { content: "▸ "; }
+.fcard details[open] summary::before { content: "▾ "; }
+.fcard summary::-webkit-details-marker { display: none; }
+.fcard .f-evidence { border-top: 1px dashed var(--line); margin-top: 10px; padding-top: 10px; font-size: 12.8px; color: var(--ink-2); }
+.fcard .f-evidence .ev-label { font-size: 11px; letter-spacing: .1em; color: var(--ink-3); display: block; margin-bottom: 4px; }
+.lv-pass { --vc: var(--pass); --vt: var(--pass-tint); }
+.lv-weak { --vc: var(--weak); --vt: var(--weak-tint); }
+.lv-inverse { --vc: var(--inverse); --vt: var(--inverse-tint); }
+.lv-fail { --vc: var(--fail); --vt: var(--fail-tint); }
+.lv-fail .f-name, .lv-fail .f-formula { opacity: .75; }
+
+/* ── 表格 ─────────────────────────── */
+.table-box { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--bg-raise); }
+table { border-collapse: collapse; width: 100%; font-size: 12.8px; white-space: nowrap; }
+th, td { text-align: left; padding: 7px 12px; border-bottom: 1px solid var(--line-soft); }
+thead th {
+  font-size: 11.5px; color: var(--ink-3); font-weight: 600; letter-spacing: .04em;
+  position: sticky; top: 0; background: var(--bg-raise); border-bottom: 1px solid var(--line);
+}
+tbody tr:last-child td { border-bottom: 0; }
+tbody tr:hover { background: var(--bg-sunk); }
+th.sortable { cursor: pointer; user-select: none; }
+th.sortable:hover { color: var(--accent-ink); }
+th.sorted::after { content: " ↓"; color: var(--accent-ink); }
+td.num { text-align: right; }
+th.num { text-align: right; }
+.group-row td {
+  background: var(--bg-sunk); font-size: 11.5px; font-weight: 700; color: var(--ink-2);
+  letter-spacing: .08em; padding: 5px 12px;
+}
+.pos { color: var(--pos); }
+.neg { color: var(--neg); }
+.dim { color: var(--ink-3); }
+
+.pctcell { display: inline-flex; align-items: center; gap: 7px; }
+.pctbar {
+  width: 56px; height: 5px; border-radius: 3px; background: var(--bar-track);
+  display: inline-block; overflow: hidden; flex: none;
+}
+.pctbar > span { display: block; height: 100%; background: var(--bar-fill); border-radius: 3px; }
+.pctbar.hot { box-shadow: 0 0 0 1.5px var(--hot); }
+.pctbar.hot > span { background: var(--hot); }
+.hotnum { color: var(--hot); font-weight: 700; }
+.big-pctbar .pctbar { width: 130px; height: 7px; }
+
+.chips { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.chip {
+  font-size: 11px; padding: 0 7px; border-radius: 4px; white-space: nowrap; line-height: 1.7;
+}
+.chip-warn { color: var(--hot); background: var(--hot-tint); border: 1px solid color-mix(in srgb, var(--hot) 40%, transparent); }
+.chip-caution { color: var(--weak); background: var(--weak-tint); border: 1px solid color-mix(in srgb, var(--weak) 40%, transparent); }
+.chip-dim { color: var(--ink-3); background: var(--fail-tint); }
+.trend { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; }
+.trend .up { color: var(--pos); }
+.trend .dn { color: var(--neg); }
+
+/* ── 第22轮矩阵 ────────────────────── */
+.matrix td.win { font-weight: 700; white-space: normal; min-width: 120px; }
+.mcell { display: inline-block; line-height: 1.35; }
+.mcell .r { font-weight: 700; font-size: 13px; }
+.mcell .s { display: block; font-size: 11px; color: var(--ink-3); }
+tr.is-best td { background: var(--pass-tint); }
+tr.is-best td:first-child { box-shadow: inset 3px 0 0 var(--pass); }
+.legend { font-size: 12px; color: var(--ink-3); margin-top: 10px; max-width: 80ch; }
+
+/* ── 时间轴 ───────────────────────── */
+.timeline { border-left: 2px solid var(--line); margin-left: 6px; padding-left: 22px; display: grid; gap: 18px; }
+.t-item { position: relative; }
+.t-item::before {
+  content: ""; position: absolute; left: -28px; top: 7px; width: 10px; height: 10px;
+  border-radius: 50%; background: var(--bg); border: 2.5px solid var(--accent);
+}
+.t-item.excluded::before { border-color: var(--fail); }
+.t-date { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--accent-ink); font-weight: 600; }
+.t-item.excluded .t-date { color: var(--ink-3); }
+.t-title { font-weight: 600; margin: 2px 0; }
+.t-desc { font-size: 13px; color: var(--ink-2); max-width: 72ch; }
+.t-badge { font-size: 11px; color: var(--ink-3); border: 1px solid var(--line); border-radius: 4px; padding: 0 6px; margin-left: 8px; }
+
+footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; color: var(--ink-3); }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">LeiSignal · research_proxy · 冻结快照还原</div>
+    <h1>因子观测台</h1>
+    <p class="sub">
+      此前因子线两次落地成果的还原页：评级卡与读数来自
+      <span class="mono">~/.lei_signal_lab/cache/factor_panel_snapshot.json</span>
+      （2026-09-04 16:29 生成，评级为 2026-08-27 本地数据实证的静态留痕）；
+      回测矩阵来自 2026-08-28 第22轮多因子入池实验。
+    </p>
+    <div class="proxy-band">
+      本页全部为 research_proxy 研究观测：因子读数不构成买卖点、不挡任何 LEI 技术信号；
+      评级随研究更新而修订，前端不另造评级或阈值。高分位提示（高波 / 短线超买 / 彩票股）是「风险标注」，不是看多或看空信号。
+    </div>
+    <div class="market-band">
+      <div>
+        <div class="m-label">市场波动率分位（RV 分位）</div>
+        <div class="m-value mono">41.8%</div>
+      </div>
+      <div class="big-pctbar">
+        <div class="m-label">&nbsp;</div>
+        <div class="pctcell"><span class="pctbar"><span style="width:41.8%"></span></span></div>
+      </div>
+      <div>
+        <div class="m-label">市场 20 日年化波动率</div>
+        <div class="m-value mono">18.65%</div>
+      </div>
+      <div>
+        <div class="m-label">口径 / 数据截至</div>
+        <div class="m-note">板块等权日收益（缓存内板块合成指数）<br>截至 <span class="mono">2026-09-04</span></div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head"><h2>六因子评级卡</h2><span class="sec-tag">实证留痕 · 2026-08-27 · 静态，不实时计算</span></div>
+    <p class="sec-sub">每张卡的评级不是界面配色游戏，是一次本地数据检验的结论记录；证据要点默认收起，点开可核对出处。</p>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>板块读数</h2><span class="sec-tag">20 个板块 · 按 12-1 动量排名</span></div>
+    <p class="sec-sub">12-1 动量在板块层是唯一拿到正 IC 的用法（+0.133），所以板块表直接按它排序；个股/ETF 层不这样用。</p>
+    <div class="table-box"><table id="sector-table"></table></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>标的读数</h2><span class="sec-tag">33 只 · 3 只因数据不足跳过（159165 / 159915 / 560390）</span></div>
+    <p class="sec-sub">个股多出「特质波动分位」一列 —— 彩票股排雷维度，仅个股层有效。点列头可排序。</p>
+    <div class="table-box"><table id="symbol-table"></table></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>第22轮 · 多因子入池×宽度预算</h2><span class="sec-tag">2026-08-28 · 35 只股票池 · K=5 · B200 三档预算</span></div>
+    <p class="sec-sub">
+      检验的问题：按因子分组挑股票，能不能比「全池等权拿着」多赚？每格三个数字：年化收益 / 最大回撤 / 性价比
+      （年化 ÷ 回撤绝对值，越高说明每承受一分回撤换到的收益越多）。底色行为该时段最强。
+    </p>
+    <div class="table-box"><table class="matrix" id="matrix"></table></div>
+    <p class="legend">
+      读法：起点 2013 窗口里 M0·全池+预算（+9.2%）与 M3·全因子（+9.2%）打平，而回撤更浅（-31% vs -35%）——
+      因子分组挑股没有挣到钱；本轮科技牛里 M0（+18.4%）甩开 M3（+3.9%）9 倍以上差距。
+      原结论原文：「因子选股无增量，预算挣全部超额，等权全池是最强基准」。
+      M1/M2/M3 = 按动量族 / 质量族 / 全部因子分组入池；M0 = 全池 + 预算（对照组）；
+      「静态8·冠军」为上一轮选出的 8 只静态持有参照。
+    </p>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>因子线时间轴</h2><span class="sec-tag">这个项目里叫「因子」的东西一共四个</span></div>
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-date">2026-08-28</div>
+        <div class="t-title">第22轮 多因子入池×宽度预算 <span class="t-badge">已提交 · 024c331</span></div>
+        <div class="t-desc">一次性检验脚本 + 结果记录（本页下方矩阵）。结论否定了「因子分组选股」这条路 —— 超额全部来自宽度预算，不来自挑股。</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2026-09-03 → 09-08</div>
+        <div class="t-title">因子观测台（本页上半部分） <span class="t-badge">已提交 · 2e27e0f 起</span></div>
+        <div class="t-desc">六因子评级卡 + 33 标的 / 20 板块读数面板，读冻结快照、不重算、不出买卖点。9/4 重做评级卡可读性，9/8 定稿前端页。</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2026-09-06</div>
+        <div class="t-title">因子实验台 factor_lab <span class="t-badge">未提交 · 仅 lei-signal-sync</span></div>
+        <div class="t-desc">三个只读实验模块：低波 / 12-1 动量 / 价值质量（标「数据受限·缓做」），带 L1–L6 周度市场难度分级。自带退休条款：连续 8 周无有效结论即下架。未进主仓，只剩一份备份。</div>
+      </div>
+      <div class="t-item excluded">
+        <div class="t-date">2026-09-09</div>
+        <div class="t-title">研究因子库 v0 <span class="t-badge">未提交 · 前天新增，按你要求排除</span></div>
+        <div class="t-desc">81 张定义卡注册表 + 硬绑定计算运行时（factor_runtime）+ 跑批入口。与上面三个不是一回事：这是研究定义登记与复算层，整套尚未进 git。</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    还原依据：<span class="mono">src/lei_signal/market_context/factor_panel.py</span>（FACTOR_META 原文）·
+    <span class="mono">docs/timing-sweep/multifactor_pool_20260828.txt</span> ·
+    快照生成于 2026-09-04 16:29:58，此后读数未更新。
+  </footer>
+</div>
+
+<script>
+const FACTORS = [
+  {id:"rv_pct", name:"已实现波动率分位", level:"pass", verdict:"实证稳健",
+   formula:"近20日收益标准差年化；分位=近756日滚动百分位",
+   evidence:"①条件收益：ETF池趋势日内高波(≥0.8)前向21日收益 8年中6年跑输（均值约-2%/月）。②LEI信号对账（3755条入场信号，41标的，2016-2026）：标的高波期信号60日均值 4.53%→1.83%；**市场RV分位更有预测力：低波4.98% vs 高波0.73%（胜率53%→46%）**。③策略化：高波空仓有害（2024年V型暴涨砍仓），目标波动中性微正。",
+   usage:"市场RV分位（页头）与标的RV分位列共同构成「信号可信度打折」提示，仅分组不挡信号。**分模块语义（LEI对账新发现）**：趋势类模块A（趋势回调）与D（假突破反向）在高波期显著变差（A: 2.23%→0.85%；D: 2.77%→-0.36%），而**模块C（2B/破底翻）在高波期反而更好（1.76%→2.67%）——高波提示主要针对A/B/D类信号，C类以高波为燃料**。另：选强/轮动场景剔除高波候选（ETF池三信号族一致改善）。"},
+  {id:"idio_vol", name:"特质波动率（个股截面 · 已落地）", level:"pass", verdict:"实证最稳 · 个股排雷维度",
+   formula:"60日超额收益（个股−等权市场）标准差（年化），个股截面排名",
+   evidence:"A股全市场月频截面 IC -0.090（t=-9.3），2009-2026 全部 18 年为负——高特质波动个股系统性跑输（彩票偏好反面）；偏度因子同向佐证（-0.025，17/18 年负）。为两轮检验中最稳健的截面发现。",
+   usage:"2026-09-04 已落地（ivol60_ann/ivol_pct 列）：仅个股层，不适用 ETF/板块。截面分位≥0.8 标红「彩票股警示」——入口层排雷，不作用于已确认信号（F2 边界）；个股样本<3 只时留空不排名。"},
+  {id:"mom_121", name:"12-1 动量", level:"weak", verdict:"板块层有效 · 标的层仅参考",
+   formula:"P(t-21)/P(t-252)-1（剔除最近约1个月）",
+   evidence:"20个板块指数 IC +0.133（t=3.5，63日持有，6/8 年为正）；A股个股 12 组检验 IC 全负（-0.026~-0.072）；本系统 ETF 池 top3 轮动超额 +0.34%/月 不显著（t=0.5，n=52 月）。策略化回测（8年含成本）：板块 top3 轮动 11.5% 跑输等权 14.6%，分年呈周期性失效（2019/2022-2024 输），最差月 -27.6%。",
+   usage:"板块排序的信息维度（研究分组用）；个股/ETF 层只作参考，不单独驱动决策——策略化回测证实独立轮动跑不赢等权（docs/research-factor-backtest.md A 段）。"},
+  {id:"mom_20", name:"20日短动量（反向警示）", level:"inverse", verdict:"反向因子 · 追高警示",
+   formula:"P(t)/P(t-20)-1",
+   evidence:"A股个股 mom_20 截面 IC -0.066（t=-6.1，2010-2026 全市场）：短期涨幅排名对前向收益为负贡献（买前期最强组每月跑输约 1.4%）。**注意边界**：LEI 信号对账（3755条）显示信号日 mom20≥80分位的信号前向20日 2.15% 反而略好于低组 1.42%——反向效应存在于**裸标的截面**，不适用于已通过结构确认的 LEI 信号。",
+   usage:"读数处于同组高分位（≥0.8）时提示**裸标的层面**的短线超买/追高风险（无入场结构时），与顶底结构的追高风险判断互为印证；对已触发的 LEI 信号无减分作用。不是看多理由。"},
+  {id:"adx14", name:"ADX14 趋势强度", level:"fail", verdict:"未通过稳健性检验 · 仅留痕",
+   formula:"Wilder ADX(14)",
+   evidence:"pooled 看：趋势日 ADX≥25 前向 21 日收益 2.03%/月 vs ADX<20 的 1.17%（差 +0.86%）；但按年拆 2019-2021 方向相反（-5.2%~-1.4%），逐 ETF 仅 5/11 方向为正——显著性来自 2025-2026 牛市与日频重叠样本，属伪显著。",
+   usage:"仅观测留痕；禁止用于信号过滤、排序或仓位调整。此条同时是「必须做分年拆检」的登记案例。"},
+  {id:"vol_up", name:"放量确认", level:"weak", verdict:"组合级风控参考 · 信号层不一致",
+   formula:"5日均量 > 20日均量（量能趋势向上）",
+   evidence:"组合级（25资产×2趋势规则×8年）：放量确认使组合 Sharpe 0.71→0.88、MaxDD -17.0%→-11.9%（改善集中在回撤控制）；但逐资产仅 26/50 改善，且 LEI 信号对账（3755条）显示信号日放量的前向60日 2.99% 反而低于缩量的 3.82%——**信号层面无增强**。",
+   usage:"标的表「量能」列读数仅作标的状态标注与 LEI 量能异常规则的量化旁证；其验证过的价值在组合回撤控制，不在单信号收益预测。"}
+];
+
+const SECTORS = [
+ {close:6038.848,rv20_ann:0.5228,rv_pct:0.7566,mom_121:0.6977,mom_20:0.0668,adx14:30.83,vol_ok:false,above_ema20:true,above_ema120:true,as_of:"2026-09-04",notes:[],code:"TH881169.SECTOR",name:"贵金属",mom_20_group_pct:0.75,mom_121_rank:1},
+ {close:15884.055,rv20_ann:0.4463,rv_pct:0.7302,mom_121:0.5143,mom_20:-0.0417,adx14:15.3,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-09-04",notes:[],code:"TH881121.SECTOR",name:"半导体",mom_20_group_pct:0.2,mom_121_rank:2},
+ {close:8620.008,rv20_ann:0.3616,rv_pct:0.6323,mom_121:0.499,mom_20:-0.0719,adx14:14.55,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-09-04",notes:[],code:"TH881170.SECTOR",name:"小金属",mom_20_group_pct:0.1,mom_121_rank:3},
+ {close:30101.058,rv20_ann:0.3865,rv_pct:0.5,mom_121:0.374,mom_20:-0.0707,adx14:16.01,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-09-04",notes:[],code:"TH881267.SECTOR",name:"能源金属",mom_20_group_pct:0.15,mom_121_rank:4},
+ {close:9298.389,rv20_ann:0.3851,rv_pct:0.6825,mom_121:0.2575,mom_20:0.0337,adx14:13.85,vol_ok:false,above_ema20:true,above_ema120:true,as_of:"2026-09-04",notes:[],code:"TH881129.SECTOR",name:"通信设备",mom_20_group_pct:0.6,mom_121_rank:5},
+ {close:4423.326,rv20_ann:0.3177,rv_pct:0.6455,mom_121:0.1938,mom_20:0.1125,adx14:22.13,vol_ok:false,above_ema20:true,above_ema120:true,as_of:"2026-08-24",notes:[],code:"TH881168.SECTOR",name:"工业金属",mom_20_group_pct:1.0,mom_121_rank:6},
+ {close:6452.186,rv20_ann:0.2213,rv_pct:0.3876,mom_121:0.1273,mom_20:0.0017,adx14:13.02,vol_ok:false,above_ema20:true,above_ema120:false,as_of:"2026-09-04",notes:[],code:"TH881278.SECTOR",name:"电网设备",mom_20_group_pct:0.4,mom_121_rank:7},
+ {close:1921.919,rv20_ann:0.1686,rv_pct:0.4365,mom_121:0.1211,mom_20:-0.0194,adx14:11.4,vol_ok:false,above_ema20:true,above_ema120:false,as_of:"2026-09-04",notes:[],code:"TH881145.SECTOR",name:"电力",mom_20_group_pct:0.35,mom_121_rank:8},
+ {close:17449.485,rv20_ann:0.226,rv_pct:0.123,mom_121:0.1154,mom_20:-0.0358,adx14:17.22,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-09-04",notes:[],code:"TH881281.SECTOR",name:"电池",mom_20_group_pct:0.3,mom_121_rank:9},
+ {close:7007.975,rv20_ann:0.2663,rv_pct:0.3069,mom_121:0.0122,mom_20:-0.0416,adx14:16.94,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-09-04",notes:[],code:"TH881279.SECTOR",name:"光伏设备",mom_20_group_pct:0.25,mom_121_rank:10},
+ {close:7190.259,rv20_ann:0.2197,rv_pct:0.5013,mom_121:-0.0172,mom_20:0.0131,adx14:13.74,vol_ok:true,above_ema20:true,above_ema120:false,as_of:"2026-09-04",notes:[],code:"TH881109.SECTOR",name:"化学制品",mom_20_group_pct:0.5,mom_121_rank:11},
+ {close:4046.536,rv20_ann:0.2245,rv_pct:0.2751,mom_121:-0.0254,mom_20:-0.0755,adx14:24.52,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-09-04",notes:[],code:"TH881280.SECTOR",name:"风电设备",mom_20_group_pct:0.05,mom_121_rank:12},
+ {close:1396.056,rv20_ann:0.139,rv_pct:0.3426,mom_121:-0.0317,mom_20:0.0607,adx14:31.25,vol_ok:true,above_ema20:true,above_ema120:true,as_of:"2026-09-04",notes:[],code:"TH881155.SECTOR",name:"银行",mom_20_group_pct:0.65,mom_121_rank:13},
+ {close:13597.547,rv20_ann:0.3771,rv_pct:0.7579,mom_121:-0.0355,mom_20:0.0633,adx14:21.3,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-08-24",notes:[],code:"TH881114.SECTOR",name:"金属新材料",mom_20_group_pct:0.7,mom_121_rank:14},
+ {close:2159.79,rv20_ann:0.2127,rv_pct:0.3505,mom_121:-0.1005,mom_20:0.0691,adx14:28.5,vol_ok:true,above_ema20:true,above_ema120:true,as_of:"2026-09-04",notes:[],code:"TH881156.SECTOR",name:"保险",mom_20_group_pct:0.85,mom_121_rank:15},
+ {close:1509.262,rv20_ann:0.184,rv_pct:0.2566,mom_121:-0.16,mom_20:0.0326,adx14:19.54,vol_ok:true,above_ema20:true,above_ema120:true,as_of:"2026-09-04",notes:[],code:"TH881157.SECTOR",name:"证券",mom_20_group_pct:0.55,mom_121_rank:16},
+ {close:2824.799,rv20_ann:0.2435,rv_pct:0.6429,mom_121:-0.171,mom_20:0.0891,adx14:24.28,vol_ok:true,above_ema20:true,above_ema120:false,as_of:"2026-08-24",notes:[],code:"TH881102.SECTOR",name:"养殖业",mom_20_group_pct:0.95,mom_121_rank:17},
+ {close:4628.134,rv20_ann:0.249,rv_pct:0.6772,mom_121:-0.2031,mom_20:0.0882,adx14:15.93,vol_ok:true,above_ema20:false,above_ema120:false,as_of:"2026-08-24",notes:[],code:"TH881134.SECTOR",name:"食品加工制造",mom_20_group_pct:0.9,mom_121_rank:18},
+ {close:1795.687,rv20_ann:0.3513,rv_pct:0.5873,mom_121:-0.295,mom_20:0.0675,adx14:20.66,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-08-24",notes:[],code:"TH881272.SECTOR",name:"软件开发",mom_20_group_pct:0.8,mom_121_rank:19},
+ {close:2070.753,rv20_ann:0.2551,rv_pct:0.5251,mom_121:-0.3499,mom_20:0.0073,adx14:15.27,vol_ok:true,above_ema20:true,above_ema120:false,as_of:"2026-09-04",notes:[],code:"TH881273.SECTOR",name:"白酒",mom_20_group_pct:0.45,mom_121_rank:20}
+];
+
+const SYMBOLS = [
+ {close:1.689,rv20_ann:0.3991,rv_pct:0.787,mom_121:0.3474,mom_20:0.1032,adx14:19.05,vol_ok:false,above_ema20:true,above_ema120:true,as_of:"2026-08-24",notes:[],code:"159652.SZ",name:null,subgroup:"cn_etf",mom_20_group_pct:0.9565},
+ {close:4.627,rv20_ann:0.1909,rv_pct:0.7831,mom_121:0.1579,mom_20:-0.0265,adx14:16.1,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-08-24",notes:[],code:"510300.SS",name:null,subgroup:"cn_etf",mom_20_group_pct:0.4348},
+ {close:1.949,rv20_ann:0.4114,rv_pct:0.7989,mom_121:0.3534,mom_20:0.0974,adx14:16.48,vol_ok:false,above_ema20:true,above_ema120:true,as_of:"2026-08-24",notes:[],code:"512400.SS",name:null,subgroup:"cn_etf",mom_20_group_pct:0.913},
+ {close:1.21,rv20_ann:0.0999,rv_pct:0.2415,mom_121:-0.0395,mom_20:0.0449,adx14:24.26,vol_ok:true,above_ema20:true,above_ema120:true,as_of:"2026-09-04",notes:[],code:"512890.SS",name:null,subgroup:"cn_etf",mom_20_group_pct:0.8696},
+ {close:2.03,rv20_ann:0.278,rv_pct:0.8202,mom_121:0.2297,mom_20:0.0227,adx14:14.48,vol_ok:false,above_ema20:false,above_ema120:true,as_of:"2026-08-24",notes:[],code:"513870.SS",name:null,subgroup:"cn_etf",mom_20_group_pct:0.7391},
+ {close:1.003,rv20_ann:0.7223,rv_pct:0.9709,mom_121:1.2375,mom_20:-0.052,adx14:21.59,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-08-24",notes:[],code:"515050.SS",name:null,subgroup:"cn_etf",mom_20_group_pct:0.2609},
+ {close:1.533,rv20_ann:0.1908,rv_pct:0.8307,mom_121:0.1701,mom_20:-0.0217,adx14:16.4,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-08-24",notes:[],code:"515130.SS",name:null,subgroup:"cn_etf",mom_20_group_pct:0.4783},
+ {close:0.464,rv20_ann:0.1699,rv_pct:0.4418,mom_121:-0.199,mom_20:-0.019,adx14:14.35,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-09-03",notes:[],code:"515170.SS",name:null,subgroup:"cn_etf",mom_20_group_pct:0.5217},
+ {close:1.306,rv20_ann:0.1478,rv_pct:0.7553,mom_121:-0.045,mom_20:0.0077,adx14:18.63,vol_ok:false,above_ema20:true,above_ema120:true,as_of:"2026-08-24",notes:[],code:"515300.SS",name:null,subgroup:"cn_etf",mom_20_group_pct:0.6522},
+ {close:0.64,rv20_ann:0.4635,rv_pct:0.7134,mom_121:0.8629,mom_20:-0.0303,adx14:15.88,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-09-04",notes:[],code:"515880.SS",name:null,subgroup:"cn_etf",mom_20_group_pct:0.3913},
+ {close:0.89,rv20_ann:0.2283,rv_pct:0.537,mom_121:0.2511,mom_20:0.023,adx14:13.12,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-08-24",notes:[],code:"516220.SS",name:null,subgroup:"cn_etf",mom_20_group_pct:0.7826},
+ {close:9.658,rv20_ann:0.1935,rv_pct:0.7659,mom_121:0.1216,mom_20:0.125,adx14:30.28,vol_ok:true,above_ema20:true,above_ema120:true,as_of:"2026-08-24",notes:[],code:"518850.SS",name:null,subgroup:"cn_etf",mom_20_group_pct:1.0},
+ {close:1.022,rv20_ann:0.7716,rv_pct:0.9406,mom_121:1.7678,mom_20:-0.0555,adx14:12.47,vol_ok:false,above_ema20:false,above_ema120:true,as_of:"2026-08-24",notes:[],code:"562590.SS",name:null,subgroup:"cn_etf",mom_20_group_pct:0.1739},
+ {close:1.691,rv20_ann:0.5545,rv_pct:0.9246,mom_121:0.7199,mom_20:-0.1151,adx14:15.29,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-08-24",notes:[],code:"588000.SS",name:null,subgroup:"cn_etf",mom_20_group_pct:0.0435},
+ {close:3930.12,rv20_ann:0.1336,rv_pct:0.5503,mom_121:0.0343,mom_20:-0.0025,adx14:15.27,vol_ok:true,above_ema20:false,above_ema120:false,as_of:"2026-09-04",notes:[],code:"000001.SS",name:null,subgroup:"cn_index",mom_20_group_pct:0.6087},
+ {close:11.56,rv20_ann:0.175,rv_pct:0.4114,mom_121:-0.0596,mom_20:0.0405,adx14:24.99,vol_ok:false,above_ema20:true,above_ema120:true,as_of:"2026-08-24",notes:[],code:"000001.SZ",name:null,subgroup:"cn_index",mom_20_group_pct:0.8261},
+ {close:4548.05,rv20_ann:0.1538,rv_pct:0.5767,mom_121:0.0847,mom_20:-0.0312,adx14:16.83,vol_ok:true,above_ema20:false,above_ema120:false,as_of:"2026-09-04",notes:[],code:"000300.SS",name:null,subgroup:"cn_index",mom_20_group_pct:0.3478},
+ {close:1577.36,rv20_ann:0.3898,rv_pct:0.7354,mom_121:0.4805,mom_20:-0.0956,adx14:16.79,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-09-04",notes:[],code:"000688.SS",name:null,subgroup:"cn_index",mom_20_group_pct:0.087},
+ {close:1790.68,rv20_ann:0.4338,rv_pct:0.8022,mom_121:0.4097,mom_20:-0.0535,adx14:16.66,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-09-04",notes:[],code:"000698.SS",name:null,subgroup:"cn_index",mom_20_group_pct:0.2174},
+ {close:18.4,rv20_ann:0.3081,rv_pct:0.1058,mom_121:0.1388,mom_20:-0.0033,adx14:20.51,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-08-24",notes:[],code:"002555.SZ",name:null,subgroup:"cn_stock",ivol60_ann:0.3603,ivol_pct:0.25,mom_20_group_pct:0.5652},
+ {close:1304.66,rv20_ann:0.2734,rv_pct:0.8452,mom_121:-0.0523,mom_20:0.0118,adx14:22.61,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-08-24",notes:[],code:"600519.SS",name:null,subgroup:"cn_stock",ivol60_ann:0.3976,ivol_pct:0.5,mom_20_group_pct:0.6957},
+ {close:45.82,rv20_ann:0.4138,rv_pct:0.3156,mom_121:-0.1026,mom_20:-0.0905,adx14:14.74,vol_ok:true,above_ema20:false,above_ema120:false,as_of:"2026-09-04",notes:[],code:"601689.SS",name:null,subgroup:"cn_stock",ivol60_ann:0.4595,ivol_pct:0.75,mom_20_group_pct:0.1304},
+ {close:19246.92,rv20_ann:0.4671,rv_pct:0.7659,mom_121:0.8761,mom_20:-0.0318,adx14:16.79,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-09-04",notes:[],code:"931160.SS",name:null,subgroup:"cn_stock",ivol60_ann:0.5477,ivol_pct:1.0,mom_20_group_pct:0.3043},
+ {close:106.95,rv20_ann:0.4099,rv_pct:0.8942,mom_121:-0.056,mom_20:0.0757,adx14:25.42,vol_ok:true,above_ema20:true,above_ema120:true,as_of:"2026-09-03",notes:[],code:"IGV",name:null,subgroup:"us_etf",mom_20_group_pct:1.0},
+ {close:227.785,rv20_ann:0.4482,rv_pct:0.795,mom_121:0.2848,mom_20:0.0402,adx14:16.39,vol_ok:true,above_ema20:true,above_ema120:true,as_of:"2026-09-03",notes:[],code:"NVDA",name:null,subgroup:"us_etf",mom_20_group_pct:0.8},
+ {close:502.2,rv20_ann:0.3115,rv_pct:0.3631,mom_121:1.1959,mom_20:-0.0569,adx14:16.0,vol_ok:true,above_ema20:false,above_ema120:true,as_of:"2026-09-03",notes:[],code:"SOXX",name:null,subgroup:"us_etf",mom_20_group_pct:0.2},
+ {close:62.43,rv20_ann:0.2369,rv_pct:0.7588,mom_121:0.3029,mom_20:0.0645,adx14:27.34,vol_ok:false,above_ema20:true,above_ema120:true,as_of:"2026-08-26",notes:[],code:"XLE",name:null,subgroup:"us_etf",mom_20_group_pct:0.9},
+ {close:185.97,rv20_ann:0.2089,rv_pct:0.4295,mom_121:0.4227,mom_20:0.0035,adx14:11.28,vol_ok:true,above_ema20:true,above_ema120:true,as_of:"2026-09-03",notes:[],code:"XLK",name:null,subgroup:"us_etf",mom_20_group_pct:0.3},
+ {close:7747.71,rv20_ann:0.0831,rv_pct:0.0809,mom_121:0.1978,mom_20:0.0049,adx14:13.34,vol_ok:false,above_ema20:true,above_ema120:true,as_of:"2026-09-03",notes:[],code:"^GSPC",name:null,subgroup:"us_index",mom_20_group_pct:0.4},
+ {close:25665.35,rv20_ann:0.1483,rv_pct:0.0277,mom_121:0.0033,mom_20:0.0053,adx14:13.48,vol_ok:false,above_ema20:true,above_ema120:true,as_of:"2026-09-04",notes:[],code:"^HSI",name:null,subgroup:"us_index",mom_20_group_pct:0.5},
+ {close:4565.95,rv20_ann:0.2199,rv_pct:0.1694,mom_121:-0.1663,mom_20:-0.0602,adx14:14.17,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-09-04",notes:[],code:"^HSTECH",name:null,subgroup:"us_index",mom_20_group_pct:0.1},
+ {close:26584.06,rv20_ann:0.1291,rv_pct:0.1909,mom_121:0.2263,mom_20:0.0089,adx14:13.0,vol_ok:false,above_ema20:true,above_ema120:true,as_of:"2026-09-03",notes:[],code:"^IXIC",name:null,subgroup:"us_index",mom_20_group_pct:0.6},
+ {close:6687.21,rv20_ann:0.4695,rv_pct:0.7629,mom_121:1.024,mom_20:0.0135,adx14:14.89,vol_ok:false,above_ema20:false,above_ema120:false,as_of:"2026-09-04",notes:[],code:"^KS11",name:null,subgroup:"us_index",mom_20_group_pct:0.7}
+];
+
+const GROUPS = [["cn_etf","A股 ETF"],["cn_index","A股 指数"],["cn_stock","A股 个股"],["us_etf","美股 ETF/ADR"],["us_index","美股/港股 指数"]];
+
+/* [年化%, 回撤%, 性价比] */
+const MATRIX_ROWS = [
+ {name:"M1 · 动量族", wins:[[6.0,-57,0.11],[3.7,-57,0.07],[-9.7,-26,-0.38],[-19.3,-31,-0.62],[10.3,-37,0.27]]},
+ {name:"M2 · 质量族", wins:[[7.9,-25,0.31],[6.2,-25,0.25],[5.7,-22,0.26],[-14.9,-25,-0.59],[9.2,-15,0.61]]},
+ {name:"M3 · 全因子", wins:[[9.2,-35,0.26],[7.5,-35,0.21],[-2.7,-24,-0.12],[-16.5,-27,-0.61],[3.9,-33,0.12]]},
+ {name:"M0 · 全池+预算（对照）", wins:[[9.2,-31,0.29],[8.2,-31,0.26],[5.5,-24,0.23],[-24.0,-31,-0.77],[18.4,-13,1.40]]},
+ {name:"全池持有（无预算）", wins:[[7.9,-50,0.16],[-0.1,-48,-0.00],[-55.3,-48,-1.16],[-24.0,-31,-0.77],[23.0,-16,1.40]]},
+ {name:"静态8 · 冠军", wins:[[12.6,-36,0.35],[12.2,-36,0.34],[18.5,-23,0.79],[-27.5,-36,-0.77],[26.6,-13,2.07]]}
+];
+const MATRIX_COLS = ["起点 2013-01","共同窗口 2015-06","2015 股灾","2018 阴跌","本轮科技牛"];
+const BEST = [4,4,4,0,4]; // 每列 年化 最高的行下标
+
+/* ── helpers ── */
+const $ = s => document.querySelector(s);
+function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+function mdBold(s){ return esc(s).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>"); }
+function signedPct(v, digits=1){ if(v==null) return '<span class="dim">-</span>';
+  const t=(v>0?"+":"")+(v*100).toFixed(digits)+"%";
+  return `<span class="${v>0?"pos":v<0?"neg":"dim"}">${t}</span>`; }
+function num(v,d=1){ return v==null?'<span class="dim">-</span>':v.toFixed(d); }
+function pctBar(v,warnAt=0.8){ if(v==null) return '<span class="dim">留痕中</span>';
+  const p=Math.round(v*100), hot=v>=warnAt;
+  return `<span class="pctcell"><span class="pctbar${hot?" hot":""}"><span style="width:${p}%"></span></span><span class="${hot?"hotnum":""}">${p}%</span></span>`; }
+function trend(r){ return `<span class="trend"><span class="${r.above_ema20?"up":"dn"}">E20${r.above_ema20?"↑":"↓"}</span> <span class="${r.above_ema120?"up":"dn"}">E120${r.above_ema120?"↑":"↓"}</span></span>`; }
+function chips(r){ const c=[];
+  if(r.rv_pct!=null&&r.rv_pct>=0.8) c.push('<span class="chip chip-warn" title="实证：高波分位期趋势信号可信度打折，仅分组提示不挡信号">高波·信号打折提示</span>');
+  if(r.mom_20_group_pct!=null&&r.mom_20_group_pct>=0.8) c.push('<span class="chip chip-caution" title="实证：A股短动量为反向因子，组内高分位提示追高风险">短线超买警示</span>');
+  if(r.ivol_pct!=null&&r.ivol_pct>=0.8) c.push('<span class="chip chip-caution" title="高特质波动个股 18 年系统性跑输，入口层排雷">彩票股警示</span>');
+  if(r.notes&&r.notes.some(n=>n.startsWith("数据较旧"))) c.push('<span class="chip chip-dim">数据较旧</span>');
+  return c.length?`<span class="chips">${c.join("")}</span>`:""; }
+
+/* ── 评级卡 ── */
+$("#cards").innerHTML = FACTORS.map(f=>`
+  <div class="fcard lv-${f.level}">
+    <div class="f-top"><span class="f-name">${f.name}</span><span class="verdict-chip">${f.verdict}</span></div>
+    <div class="f-formula mono">${f.formula}</div>
+    <div class="f-body">${mdBold(f.usage)}</div>
+    <details><summary>证据要点（实证留痕）</summary>
+      <div class="f-evidence"><span class="ev-label">EVIDENCE · 2026-08-27</span>${mdBold(f.evidence)}</div>
+    </details>
+  </div>`).join("");
+
+/* ── 表格（可排序）── */
+function buildTable(sel, cols, rows, groupKey){
+  const tbl=$(sel);
+  let sortKey=null, asc=false;
+  function head(){
+    return "<thead><tr>"+cols.map(c=>
+      `<th class="${c.num?"num":""} ${c.sort?"sortable":""} ${sortKey===c.key?"sorted":""}" data-k="${c.key||""}">${c.label}</th>`).join("")+"</tr></thead>";
+  }
+  function body(){
+    let data=rows.slice();
+    if(sortKey) data.sort((a,b)=>{ const x=a[sortKey],y=b[sortKey];
+      if(x==null&&y==null)return 0; if(x==null)return 1; if(y==null)return -1;
+      return (typeof x==="string"? x.localeCompare(y): x-y)*(asc?1:-1); });
+    let html="", lastGroup=null;
+    for(const r of data){
+      if(groupKey && !sortKey){
+        if(r[groupKey]!==lastGroup){ lastGroup=r[groupKey];
+          const g=GROUPS.find(g=>g[0]===lastGroup);
+          html+=`<tr class="group-row"><td colspan="${cols.length}">${g?g[1]:lastGroup}</td></tr>`; }
+      }
+      html+="<tr>"+cols.map(c=>`<td class="${c.num?"num":""}">${c.render(r)}</td>`).join("")+"</tr>";
+    }
+    return "<tbody>"+html+"</tbody>";
+  }
+  function draw(){ tbl.innerHTML=head()+body(); }
+  tbl.addEventListener("click",e=>{
+    const th=e.target.closest("th.sortable"); if(!th)return;
+    const k=th.dataset.k;
+    if(sortKey===k) asc=!asc; else { sortKey=k; asc=false; }
+    draw();
+  });
+  draw();
+}
+
+const COMMON_COLS = [
+  {key:"rv_pct", label:"RV分位", sort:true, render:r=>pctBar(r.rv_pct)},
+  {key:"rv20_ann", label:"年化波动", num:true, sort:true, render:r=>r.rv20_ann==null?"-":`<span class="cell-num">${(r.rv20_ann*100).toFixed(1)}%</span>`},
+  {key:"mom_121", label:"12-1动量", num:true, sort:true, render:r=>signedPct(r.mom_121)},
+  {key:"mom_20", label:"20日动量", num:true, sort:true, render:r=>signedPct(r.mom_20)},
+  {key:"mom_20_group_pct", label:"组内分位", sort:true, render:r=>pctBar(r.mom_20_group_pct)},
+  {key:"adx14", label:"ADX14", num:true, sort:true, render:r=>`<span class="dim cell-num">${num(r.adx14)}</span>`},
+  {key:"vol_ok", label:"量能", render:r=>r.vol_ok?'<span class="pos">放量</span>':'<span class="dim">缩量</span>'},
+  {label:"趋势", render:trend},
+  {key:"as_of", label:"截至", render:r=>`<span class="dim cell-num">${r.as_of}</span>`},
+  {label:"风险标注", render:chips},
+];
+
+buildTable("#sector-table",
+  [{key:"mom_121_rank", label:"#", num:true, render:r=>`<span class="dim cell-num">${r.mom_121_rank}</span>`},
+   {key:"name", label:"板块", sort:true, render:r=>`<strong>${r.name}</strong>`},
+   {key:"close", label:"收盘", num:true, sort:true, render:r=>`<span class="cell-num">${r.close.toLocaleString("zh-CN",{maximumFractionDigits:2})}</span>`},
+   ...COMMON_COLS],
+  SECTORS, null);
+
+buildTable("#symbol-table",
+  [{key:"code", label:"代码", sort:true, render:r=>`<span class="cell-num">${r.code}</span>`},
+   {key:"close", label:"收盘", num:true, sort:true, render:r=>`<span class="cell-num">${r.close.toLocaleString("zh-CN",{maximumFractionDigits:3})}</span>`},
+   COMMON_COLS[0], COMMON_COLS[1], COMMON_COLS[2], COMMON_COLS[3], COMMON_COLS[4],
+   {key:"ivol_pct", label:"特质波动分位", sort:true, render:r=>r.ivol_pct==null?'<span class="dim">-</span>':pctBar(r.ivol_pct)},
+   COMMON_COLS[5], COMMON_COLS[6], COMMON_COLS[7], COMMON_COLS[8], COMMON_COLS[9]],
+  SYMBOLS, "subgroup");
+
+/* ── 第22轮矩阵 ── */
+$("#matrix").innerHTML =
+  "<thead><tr><th>方案</th>"+MATRIX_COLS.map(c=>`<th>${c}</th>`).join("")+"</tr></thead><tbody>"+
+  MATRIX_ROWS.map((row,i)=>{
+    const bestCol = BEST.indexOf(i)>=0 ? null : null;
+    return `<tr class="${BEST.includes(i)?"is-best":""}"><td class="win">${row.name}</td>`+
+      row.wins.map((w,j)=>{
+        const cls=w[0]>0?"pos":w[0]<0?"neg":"dim";
+        return `<td><span class="mcell"><span class="r ${cls} mono">${w[0]>0?"+":""}${w[0].toFixed(1)}%</span>`+
+               `<span class="s mono">回撤 ${w[1].toFixed(0)}% · 性价比 ${w[2].toFixed(2)}</span></span></td>`;
+      }).join("")+"</tr>";
+  }).join("")+"</tbody>";
+</script>

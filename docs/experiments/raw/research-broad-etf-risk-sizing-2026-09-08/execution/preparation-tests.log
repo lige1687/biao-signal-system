@@ -1,0 +1,57 @@
+test_below_three_bypassed (test_engine.Tests.test_below_three_bypassed) ... ok
+test_default_old_behavior_exact (test_engine.Tests.test_default_old_behavior_exact) ... ok
+test_fee_cash_cap (test_engine.Tests.test_fee_cash_cap) ... ok
+test_missing_target_bypassed_but_risk_sized (test_engine.Tests.test_missing_target_bypassed_but_risk_sized) ... ok
+test_positive_risk_required (test_engine.Tests.test_positive_risk_required) ... ok
+test_under_one_lot_rejected (test_engine.Tests.test_under_one_lot_rejected) ... FAIL
+
+======================================================================
+FAIL: test_under_one_lot_rejected (test_engine.Tests.test_under_one_lot_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-risk-sizing-2026-09-08/execution/test_engine.py", line 22, in test_under_one_lot_rejected
+    r=run(new,[c(stop=.01)],risk_sized_config_set={'R1'});self.assertEqual(r['orders'][0]['reason'],'insufficient_cash_or_risk_lot')
+                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'candidate_entry' != 'insufficient_cash_or_risk_lot'
+- candidate_entry
++ insufficient_cash_or_risk_lot
+
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+FAILED (failures=1)
+test_below_three_bypassed (test_engine.Tests.test_below_three_bypassed) ... ok
+test_default_old_behavior_exact (test_engine.Tests.test_default_old_behavior_exact) ... ok
+test_fee_cash_cap (test_engine.Tests.test_fee_cash_cap) ... ok
+test_missing_target_bypassed_but_risk_sized (test_engine.Tests.test_missing_target_bypassed_but_risk_sized) ... ok
+test_positive_risk_required (test_engine.Tests.test_positive_risk_required) ... ok
+test_under_one_lot_rejected (test_engine.Tests.test_under_one_lot_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK
+test_below_three_bypassed (test_engine.Tests.test_below_three_bypassed) ... ok
+test_default_old_behavior_exact (test_engine.Tests.test_default_old_behavior_exact) ... ok
+test_fee_cash_cap (test_engine.Tests.test_fee_cash_cap) ... ok
+test_missing_target_bypassed_but_risk_sized (test_engine.Tests.test_missing_target_bypassed_but_risk_sized) ... ok
+test_positive_risk_required (test_engine.Tests.test_positive_risk_required) ... ok
+test_under_one_lot_rejected (test_engine.Tests.test_under_one_lot_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK
+test_below_three_bypassed (test_engine.Tests.test_below_three_bypassed) ... ok
+test_budget_uses_prior_day_not_buy_day_close (test_engine.Tests.test_budget_uses_prior_day_not_buy_day_close) ... ok
+test_default_old_behavior_exact (test_engine.Tests.test_default_old_behavior_exact) ... ok
+test_fee_cash_cap (test_engine.Tests.test_fee_cash_cap) ... ok
+test_missing_target_bypassed_but_risk_sized (test_engine.Tests.test_missing_target_bypassed_but_risk_sized) ... ok
+test_positive_risk_required (test_engine.Tests.test_positive_risk_required) ... ok
+test_under_one_lot_rejected (test_engine.Tests.test_under_one_lot_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.001s
+
+OK

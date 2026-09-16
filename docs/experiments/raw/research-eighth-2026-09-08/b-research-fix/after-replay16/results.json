@@ -1,0 +1,471 @@
+[
+  {
+    "id": "S01",
+    "label": "有效配置为冻结v2；126根、2%和20根解除参数",
+    "input_kind": "配置原文与实际加载",
+    "status": "pass",
+    "detail": {
+      "effective_config": "research-package/configs/rules.v2.yaml",
+      "effective_ruleset_version": "2.1.0",
+      "v1_ruleset_version": "1.5.0",
+      "dense_runtime_params": [
+        0.02,
+        126,
+        20
+      ],
+      "rules_v1": {
+        "dense_breakout": {
+          "rule_id": "dense_breakout",
+          "version": "1.0.0",
+          "provenance": "research_proxy",
+          "params": {
+            "breakout_lookback": 60,
+            "require_full_alignment": true,
+            "dense_recompute_lookback": 90
+          },
+          "formula": "横盘密集区阈值（cluster_threshold / minimum_consolidation_bars / entanglement_lookback）\n复用 tradability_gate，不在此重复声明，单一来源避免漂移；\nB1 环境：entanglement = (max(六线)-min(六线))/close；\n  consolidating = entanglement <= cluster_threshold 且近 entanglement_lookback 日均纠缠\n                  <= cluster_threshold*1.5 且 position >= minimum_consolidation_bars；\n  consolidating 由 false -> true 时开启一个密集区生命周期，产 watch 事件；\nB2 多头触发：生命周期内，reference(t) = max(high) over [t-breakout_lookback, t-1]（仅已完成日 K），\n  close(t) > reference(t) 且完整多头排列成立（SMA20>SMA60>SMA120 且三线斜率均>0）时\n  产 confirmed 事件，下一根 K 线开盘入场；记录突破日 reference 为 breakout_reference；\nB3 失效：确认后 close(t) < breakout_reference（跌回密集区）且 sma20_slope(t) < 0\n  （20 均线组向下弯曲）时产 failed 事件，本轮生命周期结束；\n每个密集区生命周期内只允许一次突破确认（consumed 语义）；密集区若连续\nentanglement_lookback 日不再 consolidating 则静默结束、允许新密集区开启。\n",
+          "note_cn": "“均线密集区突破”是规格 §9 模块 B 的研究代理量化：横盘阶段只等待标志性动作——价格收盘\n突破密集区上沿且完整多头排列成立。横盘阈值复用 tradability_gate（cluster_threshold/\nminimum_consolidation_bars 待确认，规格第 17 节），breakout_lookback 为待确认默认值。\n不是旧 Streamlit 泛化文案，也不冒充 LEI 原始规则。所有判断只使用当日及此前已完成日 K；\n界面必须标注“研究代理”，并显示密集区识别、突破参考位、确认条件与客观失效。\n",
+          "events": [
+            "dense_breakout_watch",
+            "dense_breakout_confirmed",
+            "dense_breakout_failed"
+          ]
+        },
+        "tradability_gate": {
+          "rule_id": "tradability_gate",
+          "version": "1.0.0",
+          "provenance": "research_proxy",
+          "params": {
+            "cluster_threshold": 0.02,
+            "minimum_consolidation_bars": 120,
+            "entanglement_lookback": 20,
+            "acceleration_slope_pct": 0.03,
+            "bias_extreme": 0.5,
+            "atr_percentile_window": 120,
+            "messy_color_flip_lookback": 20,
+            "messy_color_flip_threshold": 4,
+            "signature_action_lookback": 10,
+            "signature_volume_ratio": 1.5
+          },
+          "formula": "趋势类型分类（只依赖当日及此前已完成日 K）：\n  entanglement = (max(六线) - min(六线)) / close，六线= SMA/EMA 20/60/120；\n  ema20_slope_pct = ema20_slope / ema20；bias_ema120 = close/ema120 - 1；\n  insufficient_data = position < minimum_consolidation_bars 或均线缺失；\n  exhaustion（加速衰竭）= ema20_slope_pct >= acceleration_slope_pct 且 bias_ema120 >= bias_extreme；\n  consolidating = entanglement <= cluster_threshold 且近 entanglement_lookback 日均纠缠 <= cluster_threshold*1.5；\n  late_consolidation（横盘末期）= consolidating 且 ATR 分位 <= 0.25（波动压缩将破）；\n  ranging（横盘反复）= consolidating 且非末期；\n  trending（趋势）= 完整多头/空头排列 且 |ema20_slope_pct| 方向一致；\n  unclear（趋势类型不明）= 既非上述任一明确类型。\n9 条无交易条件（规格第 13 节逐条）：\n  1 趋势类型不明(unclear/insufficient) 2 模块不明(入场时判) 3 入场/目标/失效不能定义(入场时判)\n  4 盈亏比<3(只算不强制，入场时标注) 5 横盘反复且无标志性动作 6 极端加速无持仓\n  7 多周期杂乱(窗口内颜色翻转>=阈值) 8 数据不足(<120 或均线缺失) 9 依赖未来K线(系统前向，不触发)。\n可交易性 = 环境条件(1/5/6/7/8)均不阻断；入场时条件(2/3/4)结合信号判断、只算不强制。\n",
+          "note_cn": "“可交易性门禁 + 趋势类型分类”是规格第 13 节（无交易条件）与第 2.2 节（道路/路牌）的研究代理\n量化：用均线纠缠度 + ATR 分位 + 斜率把行情分成横盘反复/横盘末期/趋势/加速衰竭，并逐条落地\n9 条无交易条件作为横切层。cluster_threshold/minimum_consolidation_bars/acceleration_slope_pct/\nbias_extreme 等均为待确认默认值（规格第 17 节），不得回测调参后冒充作者标准。界面必须标注\n“研究代理”。多周期(条件7)当前用日线颜色翻转代理，60min 未接入。\n",
+          "events": [
+            "tradability_evaluated"
+          ]
+        },
+        "reward_risk_filter": {
+          "rule_id": "reward_risk_filter",
+          "version": "1.0.0",
+          "provenance": "research_proxy",
+          "params": {
+            "range_lookback": 60,
+            "rr_min_ideal": 3,
+            "rr_min_strong": 5
+          },
+          "formula": "A = 入场价（信号确认日收盘）；S = 失效价（入场依据的支撑/结构位被破坏处）；\nB = 目标价，优先级（只用信号时已存在、已确认的数据）：\n  1) 已确认摆动高点（B1 第一阻力，available_date <= 信号日）；\n  2) 筹码分布代理价值区上沿 VAH / 成交量峰 POC（高于入场价者）；\n  3) 区间另一侧：近 range_lookback 根已完成的最高 high；\nR/R = (B - A) / (A - S)，要求 A > S 且 B > A；\n无法客观确定 B 时标记“目标不可计算”，不事后选最优目标；\n只计算展示，不做硬过滤（已确认）；回测分别看 R/R≥3 与 R/R≥5 两组。\n",
+          "note_cn": "“盈亏比计算”是规格第 10 节的研究代理量化：入场前用信号时已存在的目标算 R/R。\n目标 B 优先级遵循规格（摆动高点 > 缺口 > 均线密集区 > 筹码峰 > 区间另一侧）；\n当前系统缺口(gap_definition)与均线密集区(cluster_threshold)尚未实现，故跳过这两档，\n待第二轮补齐后接入。无法客观确定 B 时标“目标不可计算”，绝不事后选最优目标。\n只算不强制（已确认）。界面必须标注“研究代理”。range_lookback/rr_min_* 待确认（规格第 17 节）。\n",
+          "events": [
+            "reward_risk_computed"
+          ]
+        }
+      },
+      "rules_v2": {
+        "dense_breakout": {
+          "rule_id": "dense_breakout",
+          "version": "2.0.0",
+          "provenance": "research_proxy",
+          "params": {
+            "zone_exit_bars": 20,
+            "dissolve_bars": 20
+          },
+          "formula": "(V2 已实现语义，2.0.0 起 live 与回测同源；v1 纠缠度口径已替换)\nB1 环境 = 时钟三类（|s60| < 10%，clock_classifier）+ 密集两条件：\n          整理时间 = 时钟三类状态寿命 >= minimum_consolidation_bars（126 根，\n          允许 zone_exit_bars=20 根间歇）+ 当下六线带宽 max/min - 1 < 2%\n          （即时条件；「整理时间」由横盘状态承担，非带宽天天达标）；\nB2 埋伏版（variant=ambush）= 密集区内双组多头排列（SMA20>SMA60>SMA120 且\n          EMA20>EMA60>EMA120）false->true 切换日入场，等突破；\n          止损 = 密集区最低 low（zone_low_water）；\nB2 突破版（variant=breakout）= 收盘突破密集区上沿（截至昨日的区间最高 high，\n          防当根自我抬升），不要求排列（规格 §9 B2：排列是加仓条件非首进条件）；\n          止损 = 密集区下沿（跌穿整个密集区 = 突破彻底失败；突破后回踩上沿\n          是常见确认动作，不能作价格止损——B3 是双条件语义非价格线）；\nB3 失效（两动作不分先后、必须全部满足）= 收盘跌回密集区上沿下方 且\n          close < SMA20 且 close < close_lag20（20 组下弯，抵扣价判据）；\n埋伏单附加底线 = 双组多头排列破坏（SMA20 <= SMA60）即失效；\n每个密集区生命周期内埋伏/突破各只允许一次确认；带宽持续 dissolve_bars\n          根不成立则生命周期静默结束。\n",
+          "note_cn": "“均线密集区突破”是规格 §9 模块 B 的研究代理量化，界面必须标注“研究代理”。\n2.0.0 = V2 重写（§15 第三轮落地）：B1 时钟三类门禁替换 v1 纠缠度口径；\nB2 埋伏/突破两版分别出事件（evidence.variant）；B3 两动作同日齐备才失效。\n实测（回测深池 10 年）：全池 19 个密集区生命周期、8 次埋伏、15 次突破——\n真密集区数年一遇（“横有多长竖有多高”的代价），样本稀少是特征不是缺陷。\n与 tradability_gate 的横盘参数共用单一来源（cluster_threshold/\nminimum_consolidation_bars）。\n",
+          "events": [
+            "dense_breakout_watch",
+            "dense_breakout_confirmed",
+            "dense_breakout_failed"
+          ]
+        },
+        "tradability_gate": {
+          "rule_id": "tradability_gate",
+          "version": "2.0.0",
+          "provenance": "research_proxy",
+          "implementation_status": "pending_v2",
+          "params": {
+            "cluster_threshold": 0.02,
+            "minimum_consolidation_bars": 126,
+            "entanglement_lookback": 20,
+            "acceleration_slope_pct": 0.03,
+            "bias_extreme": 0.5,
+            "atr_percentile_window": 120,
+            "messy_color_flip_lookback": 20,
+            "messy_color_flip_threshold": 4,
+            "signature_action_lookback": 10,
+            "signature_volume_ratio": 1.5
+          },
+          "formula": "趋势类型分类（只依赖当日及此前已完成日 K）：\n  entanglement = (max(六线) - min(六线)) / close，六线= SMA/EMA 20/60/120；\n  ema20_slope_pct = ema20_slope / ema20；bias_ema120 = close/ema120 - 1；\n  insufficient_data = position < minimum_consolidation_bars 或均线缺失；\n  exhaustion（加速衰竭）= ema20_slope_pct >= acceleration_slope_pct 且 bias_ema120 >= bias_extreme；\n  consolidating = entanglement <= cluster_threshold 且近 entanglement_lookback 日均纠缠 <= cluster_threshold*1.5；\n  late_consolidation（横盘末期）= consolidating 且 ATR 分位 <= 0.25（波动压缩将破）；\n  ranging（横盘反复）= consolidating 且非末期；\n  trending（趋势）= 完整多头/空头排列 且 |ema20_slope_pct| 方向一致；\n  unclear（趋势类型不明）= 既非上述任一明确类型。\n9 条无交易条件（规格第 13 节逐条）：\n  1 趋势类型不明(unclear/insufficient) 2 模块不明(入场时判) 3 入场/目标/失效不能定义(入场时判)\n  4 盈亏比<3(只算不强制，入场时标注) 5 横盘反复且无标志性动作 6 极端加速无持仓\n  7 多周期杂乱(窗口内颜色翻转>=阈值) 8 数据不足(<120 或均线缺失) 9 依赖未来K线(系统前向，不触发)。\n可交易性 = 环境条件(1/5/6/7/8)均不阻断；入场时条件(2/3/4)结合信号判断、只算不强制。\n",
+          "note_cn": "“可交易性门禁 + 趋势类型分类”是规格第 13 节（无交易条件）与第 2.2 节（道路/路牌）的研究代理\n量化：用均线纠缠度 + ATR 分位 + 斜率把行情分成横盘反复/横盘末期/趋势/加速衰竭，并逐条落地\n9 条无交易条件作为横切层。cluster_threshold/minimum_consolidation_bars/acceleration_slope_pct/\nbias_extreme 等均为待确认默认值（规格第 17 节），不得回测调参后冒充作者标准。界面必须标注\n“研究代理”。多周期(条件7)当前用日线颜色翻转代理，60min 未接入。\nV2 目标（规格 §4.4 / §13，pending_v2）：趋势类型分类切换为时钟五类 s60 口径\n（clock_classifier 供数），加速衰竭判据由 s60 > 100% 年化（或 s20 >= 2 x s60 且\ns60 > 40%）取代 EMA20 斜率 + 乖离组合；横盘判据 = 时钟三类叠加密集两条件\n（规格 §4.6）。cluster_threshold=2% 与 minimum_consolidation_bars=126 为 V2 §17\n已定（原则）值，126 已生效（代码直接读本参数，v1 为 120，横盘判定约延后\n6 根）；acceleration_slope_pct / bias_extreme 在时钟口径落地前继续作为 v1\n判据运行。\n",
+          "events": [
+            "tradability_evaluated"
+          ]
+        },
+        "reward_risk_filter": {
+          "rule_id": "reward_risk_filter",
+          "version": "1.0.0",
+          "provenance": "research_proxy",
+          "params": {
+            "range_lookback": 60,
+            "rr_min_ideal": 3,
+            "rr_min_strong": 5
+          },
+          "formula": "A = 入场价（信号确认日收盘）；S = 失效价（入场依据的支撑/结构位被破坏处）；\nB = 目标价，优先级（只用信号时已存在、已确认的数据）：\n  1) 已确认摆动高点（B1 第一阻力，available_date <= 信号日）；\n  2) 筹码分布代理价值区上沿 VAH / 成交量峰 POC（高于入场价者）；\n  3) 区间另一侧：近 range_lookback 根已完成的最高 high；\nR/R = (B - A) / (A - S)，要求 A > S 且 B > A；\n无法客观确定 B 时标记“目标不可计算”，不事后选最优目标；\n只计算展示，不做硬过滤（已确认）；回测分别看 R/R≥3 与 R/R≥5 两组。\n",
+          "note_cn": "“盈亏比计算”是规格第 10 节的研究代理量化：入场前用信号时已存在的目标算 R/R。\n目标 B 优先级遵循 V2 规格 §10（摆动高点 > 未回补缺口 > 均线密集区 > 筹码密集区/\n成交量峰 > 区间另一侧；手册定义「第一个目标位 = 上方均线密集区」）；缺口档待\ngap_events（pending_v2，§15 第四轮）落地后接入，均线密集区档待 strict_structure/\nclock_classifier 落地后接入。\n无法客观确定 B 时标“目标不可计算”，绝不事后选最优目标。\n只算不强制（已确认；V2 §13 第 4 条与 §17 已定（原则）reward_risk_min=3，案例参考 5）。界面必须标注“研究代理”。range_lookback 待确认。\n",
+          "events": [
+            "reward_risk_computed"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "S02",
+    "label": "完整OHLC计算特征后产生突破，参考只到昨日",
+    "input_kind": "完整OHLC→特征→B事件",
+    "status": "pass",
+    "detail": [
+      {
+        "date": "2020-12-08",
+        "sub": "dense_breakout_watch",
+        "variant": null,
+        "reference": null,
+        "stop": null
+      },
+      {
+        "date": "2021-02-24",
+        "sub": "dense_breakout_confirmed",
+        "variant": "ambush",
+        "reference": null,
+        "stop": 99.0
+      },
+      {
+        "date": "2021-02-24",
+        "sub": "dense_breakout_confirmed",
+        "variant": "breakout",
+        "reference": 101.0,
+        "stop": 99.0
+      }
+    ]
+  },
+  {
+    "id": "S03",
+    "label": "追加未来行情不改变既有B事件",
+    "input_kind": "完整OHLC→特征→B事件",
+    "status": "pass",
+    "detail": {
+      "prefix": [
+        {
+          "date": "2020-12-08",
+          "sub": "dense_breakout_watch",
+          "variant": null,
+          "reference": null,
+          "stop": null
+        },
+        {
+          "date": "2021-02-24",
+          "sub": "dense_breakout_confirmed",
+          "variant": "ambush",
+          "reference": null,
+          "stop": 99.0
+        },
+        {
+          "date": "2021-02-24",
+          "sub": "dense_breakout_confirmed",
+          "variant": "breakout",
+          "reference": 101.0,
+          "stop": 99.0
+        }
+      ]
+    }
+  },
+  {
+    "id": "S04",
+    "label": "同一密集区持续站上上沿不重复突破",
+    "input_kind": "完整OHLC→特征→B事件",
+    "status": "pass",
+    "detail": {
+      "breakout_count": 1,
+      "tail_bars_above_reference": 6
+    }
+  },
+  {
+    "id": "S05",
+    "label": "缺关键字段时不发B事件",
+    "input_kind": "完整特征删除字段",
+    "status": "pass",
+    "detail": {
+      "removed": "sma120",
+      "events": []
+    }
+  },
+  {
+    "id": "S06",
+    "label": "突破版不强制多头排列",
+    "input_kind": "直接控制六线的组件隔离",
+    "status": "pass",
+    "detail": {
+      "alignment": false,
+      "events": [
+        {
+          "date": "2021-02-24",
+          "sub": "dense_breakout_confirmed",
+          "variant": "breakout",
+          "reference": 101.0,
+          "stop": 99.0
+        }
+      ],
+      "manual_indicators": {
+        "sma20": 100.0,
+        "sma60": 100.1,
+        "sma120": 100.2,
+        "ema20": 100.0,
+        "ema60": 100.1,
+        "ema120": 100.2
+      }
+    }
+  },
+  {
+    "id": "S07",
+    "label": "B3只有跌回不退出，双动作满足后下一根开盘",
+    "input_kind": "直接控制指标与持仓规则",
+    "status": "pass",
+    "detail": {
+      "only_fallback_at": "2021-02-25",
+      "both_actions_at": "2021-02-26",
+      "actual": {
+        "entry_date": "2021-02-25",
+        "entry_price": 10.0,
+        "exit_date": "2021-03-01",
+        "exit_reason": "exit_b3_dual",
+        "reward_risk": 4.0,
+        "stop_price": 9.0,
+        "target_price": 14.0
+      }
+    }
+  },
+  {
+    "id": "S08",
+    "label": "结构失效与B3同时出现时结构失效优先",
+    "input_kind": "直接控制指标与持仓规则",
+    "status": "pass",
+    "detail": {
+      "entry_date": "2021-02-25",
+      "entry_price": 10.0,
+      "exit_date": "2021-02-26",
+      "exit_reason": "structure_stop_C",
+      "reward_risk": 4.0,
+      "stop_price": 9.0,
+      "target_price": 14.0
+    }
+  },
+  {
+    "id": "S09",
+    "label": "突破版不能套用埋伏的单独排列退出",
+    "input_kind": "实际B事件后直接控制两条均线",
+    "status": "pass",
+    "detail": {
+      "required": "突破版仅排列破坏且未跌回上沿时不触发B3退出",
+      "close": 102.0,
+      "reference": 101.0,
+      "sma20": 100.0,
+      "sma60": 100.1,
+      "detector_failed_events": [],
+      "actual_engine": {
+        "entry_date": "2021-02-25",
+        "entry_price": 102.0,
+        "exit_date": "None",
+        "exit_reason": "open_at_end",
+        "reward_risk": 4.0,
+        "stop_price": 99.0,
+        "target_price": 120.0
+      },
+      "consequence": "事件层与逐笔退出层不一致"
+    }
+  },
+  {
+    "id": "S10",
+    "label": "埋伏版排列破坏下一根退出",
+    "input_kind": "直接控制指标与持仓规则",
+    "status": "pass",
+    "detail": {
+      "entry_date": "2021-02-25",
+      "entry_price": 10.0,
+      "exit_date": "2021-02-26",
+      "exit_reason": "exit_b3_dual",
+      "reward_risk": 4.0,
+      "stop_price": 9.0,
+      "target_price": 14.0
+    }
+  },
+  {
+    "id": "S11",
+    "label": "开盘跳空后的实际目标风险比仍须不少于3",
+    "input_kind": "实际目标筛选→直接控制下一根开盘",
+    "status": "pass",
+    "detail": {
+      "required": "若称实际入场风险比不少于3，跳空后应取消该次入场",
+      "signal_rr": 4.0,
+      "actual_open_rr": 1.6315789473684206,
+      "actual": {
+        "entry_date": "2021-02-25",
+        "entry_price": 10.9,
+        "exit_date": "None",
+        "exit_reason": "skipped_actual_reward_risk_below_3",
+        "reward_risk": 4.0,
+        "stop_price": 9.0,
+        "target_price": 14.0
+      }
+    }
+  },
+  {
+    "id": "S12",
+    "label": "信号收盘风险比恰为3通过，低于3过滤",
+    "input_kind": "直接事件→实际目标与入场筛选",
+    "status": "pass",
+    "detail": [
+      {
+        "target": 13.0,
+        "accepted": 1,
+        "below_rr": 0,
+        "no_target": 0
+      },
+      {
+        "target": 12.99,
+        "accepted": 0,
+        "below_rr": 1,
+        "no_target": 0
+      }
+    ]
+  },
+  {
+    "id": "S13",
+    "label": "无目标在默认3被拒绝，None对照允许入场",
+    "input_kind": "直接事件→实际目标与入场筛选",
+    "status": "pass",
+    "detail": {
+      "behavior_confirmed": [
+        {
+          "rr_min": 3.0,
+          "accepted": 0,
+          "no_target": 1,
+          "target": null
+        },
+        {
+          "rr_min": null,
+          "accepted": 1,
+          "no_target": 1,
+          "target": null
+        }
+      ],
+      "scope_limit": "rr_min=None是有意取消目标限制的对照，不能称完整纪律"
+    }
+  },
+  {
+    "id": "S14",
+    "label": "未来才确认的高点与未来极端行情不改变旧目标",
+    "input_kind": "实际目标计算；提供带确认日期的摆动点",
+    "status": "pass",
+    "detail": {
+      "prefix_target": 14.0,
+      "full_with_unconfirmed_pivot": 14.0,
+      "future_extreme_prices": 14.0,
+      "future_confirmation": "2021-03-02"
+    }
+  },
+  {
+    "id": "S15",
+    "label": "九条展示中的四项占位、多周期实为日线颜色变化",
+    "input_kind": "直接控制日线颜色→实际展示评估",
+    "status": "pass",
+    "detail": {
+      "checks": [
+        {
+          "code": "trend_type_unclear",
+          "label_cn": "1.无法明确当前趋势类型",
+          "blocked": false,
+          "detail_cn": "当前趋势类型=横盘反复"
+        },
+        {
+          "code": "module_unclear",
+          "label_cn": "2.交易模块不明确",
+          "blocked": false,
+          "detail_cn": "环境层不判，需结合入场信号确定交易模块（A/B/C/D）"
+        },
+        {
+          "code": "entry_target_stop_undefined",
+          "label_cn": "3.入场/目标/失效不能定义",
+          "blocked": false,
+          "detail_cn": "环境层不判，入场前需明确入场依据/目标B/失效位"
+        },
+        {
+          "code": "rr_below_3",
+          "label_cn": "4.盈亏比<3（只算不强制）",
+          "blocked": false,
+          "detail_cn": "只算不强制：入场时按 R/R 标注，<3 仅提示不拦截"
+        },
+        {
+          "code": "ranging_no_action",
+          "label_cn": "5.横盘反复且无标志性动作",
+          "blocked": true,
+          "detail_cn": "横盘反复且近期无放量标志性动作"
+        },
+        {
+          "code": "exhaustion_no_position",
+          "label_cn": "6.极端加速无持仓",
+          "blocked": false,
+          "detail_cn": "极端加速阶段，无既有持仓则不开新仓"
+        },
+        {
+          "code": "multi_period_messy",
+          "label_cn": "7.多周期杂乱",
+          "blocked": true,
+          "detail_cn": "近20日颜色翻转19次（杂乱）"
+        },
+        {
+          "code": "insufficient_data",
+          "label_cn": "8.数据不足",
+          "blocked": false,
+          "detail_cn": "position=300，需≥126根且均线齐全"
+        },
+        {
+          "code": "depends_on_future",
+          "label_cn": "9.依赖未来K线",
+          "blocked": false,
+          "detail_cn": "系统严格前向，信号不依赖未完成K线"
+        }
+      ],
+      "placeholder_codes": [
+        "module_unclear",
+        "entry_target_stop_undefined",
+        "rr_below_3",
+        "depends_on_future"
+      ],
+      "weekly_input_supplied": false,
+      "scope_limit": "只确认占位与单日线代理存在，不代表九条完整实现"
+    }
+  },
+  {
+    "id": "S16",
+    "label": "逐笔研究主路径没有执行九条展示评估",
+    "input_kind": "冻结源码AST静态调用核对",
+    "status": "pass",
+    "detail": {
+      "main_path_evaluate_tradability_calls": {
+        "backtest/service.py": false,
+        "backtest/engine.py": false,
+        "backtest/runner.py": false
+      },
+      "display_path": "api/routes/symbols.py::_tradability_dto",
+      "scope_limit": "函数缺席由静态调用核对；不等于所有单项都未做，2/3/4部分由事件与目标筛选覆盖"
+    }
+  }
+]

@@ -1,0 +1,97 @@
+{
+  "task": "factor-unit-readiness-2026-09-15 Task5",
+  "generated_at": "2026-09-15T11:40:00+08:00",
+  "status": "proposal_not_executable",
+  "status_reason": "四载体价格长历史已在本地确认，但复权/分红口径未核、载体缺volume列、美股市历缺失、逐行可得时间未证——资格条件未满足前不可执行；本提案仅交主控判定，不运行任何真实因子/目标统计",
+  "object_reference": "candidate:lei.dual_ma.bull_state@draft-1",
+  "study_kind": "state_outcomes（历史描述性状态诊断）",
+  "carriers": [
+    {
+      "symbol": "510300",
+      "identity": "沪300ETF(上交所510300)，币种CNY， Asia/Shanghai",
+      "proposed_file": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/510300.parquet",
+      "sha256": "a6d518e02313f03cb98ebd69a3e459c9382bd85864f5b1d86771c3c04665fcb4",
+      "coverage": "2012-05-28至2026-08-27，3465行日频，无重复日期",
+      "qualification_evidence": "docs/experiments/raw/factor-unit-readiness-2026-09-15/input-inventory.json#carrier_510300_timing",
+      "unresolved": ["复权/分红口径未声明未核", "缺volume列(factor_lab bars合同要求)", "无2012-05-28之前历史(2010-01-01起算不可行)", "无逐行available_at证据"]
+    },
+    {
+      "symbol": "159915",
+      "identity": "创业板ETF(深交所159915)，币种CNY，Asia/Shanghai",
+      "proposed_file": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/159915.parquet",
+      "sha256": "f6d5010501fd14cf10941407ca9e6954c6d0fbcc48d631027839f45ac0d8af37",
+      "coverage": "2011-12-09至2026-08-27，3573行日频，无重复日期",
+      "qualification_evidence": "docs/experiments/raw/factor-unit-readiness-2026-09-15/input-inventory.json#carrier_159915_timing",
+      "unresolved": ["复权/分红口径未声明未核", "缺volume列", "无2011-12-09之前历史", "存在.quarantined旧副本，须以正式文件为准并记录", "无逐行available_at证据"]
+    },
+    {
+      "symbol": "SPY",
+      "identity": "SPDR S&P 500 ETF(NYSE Arca: SPY)，币种USD，America/New_York",
+      "proposed_file": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/SPY.parquet",
+      "sha256": "584ea5441e19065ac557df14235aa621a5c74f39659e4a8b8926435a33ca4713",
+      "coverage": "1993-01-29至2026-08-26，8451行日频，无重复日期",
+      "qualification_evidence": "docs/experiments/raw/factor-unit-readiness-2026-09-15/input-inventory.json#carrier_SPY_timing",
+      "unresolved": ["复权/分红口径未声明未核(Yahoo系惯例疑似前复权，不得默认)", "缺volume列", "美股市历与半日市表缺失", "无逐行available_at证据"]
+    },
+    {
+      "symbol": "QQQ",
+      "identity": "Invesco QQQ Trust(Nasdaq: QQQ)，币种USD，America/New_York",
+      "proposed_file": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/QQQ.parquet",
+      "sha256": "3706b3d182fb986aec13ffabe4020638ae7a0fa101043b226bd26e04c9f48548",
+      "coverage": "1999-03-10至2026-08-26，6909行日频，无重复日期",
+      "qualification_evidence": "docs/experiments/raw/factor-unit-readiness-2026-09-15/input-inventory.json#carrier_QQQ_timing",
+      "unresolved": ["复权/分红口径未声明未核", "缺volume列", "美股市历与半日市表缺失", "无逐行available_at证据"]
+    }
+  ],
+  "carrier_policy": "四载体固定，不因缺数据替换、不挑赢家；任一载体资格不满足则该载体报告为'未就绪'，其余载体独立交付",
+  "main_target": {
+    "definition": "财富变化 I(x)/I(e) - 1；e = 观察日t之后第1个当地交易日收盘，x = 第22个当地交易日收盘",
+    "intervals": "e到x之间21个收盘间隔（不是20，不是21天）",
+    "endpoints": "收盘对收盘，不改成开盘；缺端点不顺延、不缩短窗口，该观察记缺失及原因",
+    "nature": "诊断目标；不假设能按该价格成交；不冒充账户净收益",
+    "price_basis": "信号OHLC与目标财富尺度分开声明；四载体分红/拆分处理必须一致；无含分红总回报数据时不得静默用价格涨跌替代主目标（协议须明示降级为价格口径）"
+  },
+  "auxiliary_target": {
+    "definition": "同一窗口内相对I(e)的最不利收盘变化（min over 收盘∈(e,x] 的 I(t)/I(e)-1）",
+    "not": "不是完整账户最大回撤，不冒充路径回撤"
+  },
+  "window_and_warmup": {
+    "recommended_start": "510300/159915/SPY/QQQ各自数据起点后预留预热；建议主区间起点按各载体可得日期在协议冻结（510300约2012-07、159915约2012-02、SPY 1993-02、QQQ 1999-04，均含21根预热+22根标签窗缓冲；确切日期须在复权口径核实后按实际日历冻结）",
+    "recommended_end": "2025-12-31（或各载体最后日期-22个当地交易日，取早者）",
+    "warmup_rule": "状态最早第21根可true；标签窗需再+22根；预热行记warmup_not_ready",
+    "calendar": "A股：现有深交所月度日历+A股载体自带日期交叉核验；美股：缺真实NYSE日历——具体阻断见blockers",
+    "timezone": "A股 Asia/Shanghai 15:00；美股 America/New_York 16:00（夏令时切换生效；半日市须由日历显式给出）",
+    "label_maturity": "标签窗结束日当地收盘时刻成熟；未成熟不进统计",
+    "missing_handling": "输入缺价行保留不删；端点缺失记缺失；不把工作日并集冒充日历；不知道停牌还是缺报价则标未知"
+  },
+  "blocking_conditions": [
+    "B1 复权/分红口径：四载体均未声明；必须核实（重抓带声明数据或供应商文档）后才能冻结价格口径——未核实则主目标降级为'历史价格口径描述'并明示",
+    "B2 volume缺失：factor_lab bars输入合同要求open/high/low/volume/close；须(a)补齐volume或(b)主控批准close-only降级合同；不得静默放宽",
+    "B3 美股交易日历：无真实NYSE日历与半日市表；影响t+1/t+22当地交易日定位与标签成熟时刻；需另行申请数据",
+    "B4 逐行可得时间：特征即时可得假设未解除；真实模式须按当地收盘逐行供给available_at",
+    "B5 ETF上市日资格：各载体上市初期成交资格（starts_after_window）未证；状态起点应留缓冲并在协议声明"
+  ],
+  "statistics_plan": {
+    "per_carrier": "真/假/未就绪数量与占比；真/假状态后21收盘间隔主要目标的均值/中位数/上涨占比；辅助风险分布；逐年分列",
+    "persistence": "持续状态段（连续同状态）计数与结果集中度；重叠观察不得视为独立成功",
+    "non_overlapping_view": "预先固定一个不重叠视角：锚点=每载体主区间内首个合法可评价观察日，其后每(1+22)个当地交易日推进一格（遇缺失跳过该格不顺延补齐）；仅作方向一致性描述，不挑有利偏移",
+    "forbidden": ["不强制IC", "不拟合回归", "不声称统计显著", "不混四载体/全年份制造大样本", "不搜参数", "不加5/10/60日网格"]
+  },
+  "interpretation_limit": "真实资料只能事后重建：结论仅为历史关联描述，不能证明当时可交易或样本外预测能力；方向一致只支持继续研究，不是有效性认证",
+  "b_stage_minimal_scope": {
+    "code_changes": "factor_lab新增real_frozen协议模式（输入资格门槛：复权声明+OHLCV或批准降级+日历对象+逐行available_at）；decision_moment参数化(市场,当地规则)；不改v1.2.0消费者",
+    "tests": "real模式输入资格拒绝用例(无复权声明/缺volume/日历缺月)；decision_moment夏令时/半日市边界用例；state_outcomes对真实小样本的计数对账用例（期望来自独立参考实现，模板=examples-results.json）",
+    "run_path": "python3 scripts/run_factor_lab.py --protocol <frozen real protocol> --out <新目录>（沿用退出码0/1/2/3语义）",
+    "quota_suggestion": "四载体各1次初始正式运行+最多1次已定位错误纠正批次；完整相关回归≤2次；单元测试按需；全部CLI调试逐次登记",
+    "separate_requests": ["美股NYSE交易日历与半日市表", "四载体复权口径核实或重抓带声明数据", "volume补齐或close-only降级裁定", "供应商发布时刻证据（B4解除前提）"]
+  },
+  "authority_boundary": "本提案不拥有B阶段真实运行授权；主控确认资格条件（B1-B5）处置方案并冻结协议后另行发令",
+  "evidence_paths": {
+    "inventory": "docs/experiments/raw/factor-unit-readiness-2026-09-15/input-inventory.json",
+    "readiness_matrix": "docs/experiments/raw/factor-unit-readiness-2026-09-15/readiness-matrix.csv",
+    "dossier": "docs/experiments/raw/factor-unit-readiness-2026-09-15/dual-ma-dossier.md",
+    "adapter_gaps": "docs/experiments/raw/factor-unit-readiness-2026-09-15/adapter-gap-map.md",
+    "examples": "docs/experiments/raw/factor-unit-readiness-2026-09-15/examples-results.json",
+    "execution_spec": "docs/experiments/raw/factor-unit-readiness-2026-09-15/next-execution-spec.md"
+  }
+}

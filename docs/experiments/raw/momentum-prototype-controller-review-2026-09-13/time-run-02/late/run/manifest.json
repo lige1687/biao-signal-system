@@ -1,0 +1,79 @@
+{
+ "schema_version": "momentum-research-prototype-manifest/1.0",
+ "generated_at": "2026-09-13T10:57:12.667587+00:00",
+ "generated_at_note": "本次运行时刻，不得当作数据的对外可用时刻",
+ "mode": "qualified-research",
+ "synthetic": false,
+ "historical_reconstruction_only": false,
+ "protocol": {
+  "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/time-run-02/late/protocol-test.json",
+  "sha256": "3c609360bccdcf3cb235d4a2ef5fecdf57eeae0e46e9d55c27bef9e1098191f2",
+  "protocol_id": "momentum-research-prototype-2026-09-13"
+ },
+ "target_id": "protocol:momentum-next-close-21-session@1.0.0",
+ "objects": {
+  "primary": "mixed.momentum.raw@1.0.0",
+  "dependency": "mixed.price.economic@1.0.0",
+  "type": "feature（身份引用，完整卡见协议文件）"
+ },
+ "code_hashes": {
+  "momentum_prototype": "dd0f12c614bb2b4f8a177763535965003e51556e62a113297e4da236306ccb40",
+  "run_momentum_research_prototype": "e70b440fe39c26819861810bb3c69fae922db651988b3a0a8a18392dd729dfec"
+ },
+ "inputs": {
+  "snapshot_dir": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/time-run-02/late/snapshot",
+   "sha256": "34fc9acbc510d00a2984a0d6ee37877f6798dbf3721b3be9ffab431404a752d5",
+   "verified_file": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/time-run-02/late/snapshot/snapshot.json"
+  },
+  "calendar": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/time-run-02/late/calendar.json",
+   "sha256": "e2b863af5a4c654ecd6f5ee85a7af13e50e5d2f85cc0d2f6f9ac3623e1f9483e",
+   "verified_file": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/time-run-02/late/calendar.json"
+  },
+  "publication": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/time-run-02/late/publication.json",
+   "sha256": "39cb3a8bebaf38e671a493505cc44f87130860c9cf18095218e36c6cf728f1d3",
+   "verified_file": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/time-run-02/late/publication.json"
+  },
+  "actions": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/time-run-02/late/actions.json",
+   "sha256": "a09cfa39109c120da723a7f55ee21d0e13a379742876120ece767b0a345281b3",
+   "verified_file": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/time-run-02/late/actions.json"
+  },
+  "registry": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definitions.v1.json",
+   "sha256": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05"
+  }
+ },
+ "observations": {
+  "count": 0,
+  "first": null,
+  "last": null
+ },
+ "unknown_available_at": [],
+ "late_available_at": [],
+ "failures": [],
+ "identity_errors": [],
+ "skipped_stages": {
+  "economic-reconstruction": "研究资格未满足，拒绝运行：时间资格未满足：进入信号计算的资料无法证明在观察时点可知（510300.SS SYNTH-TIME-DIV@2025-06-30 available_at（2030-01-01 10:00:00+08:00）晚于观察日 2025-06-30 的决策时点）",
+  "targets": "研究资格未满足，拒绝运行：时间资格未满足：进入信号计算的资料无法证明在观察时点可知（510300.SS SYNTH-TIME-DIV@2025-06-30 available_at（2030-01-01 10:00:00+08:00）晚于观察日 2025-06-30 的决策时点）",
+  "rank-diagnostic": "研究资格未满足，拒绝运行：时间资格未满足：进入信号计算的资料无法证明在观察时点可知（510300.SS SYNTH-TIME-DIV@2025-06-30 available_at（2030-01-01 10:00:00+08:00）晚于观察日 2025-06-30 的决策时点）"
+ },
+ "offline_guard": {
+  "self_check_blocked": true,
+  "blocked_with": "RuntimeError"
+ },
+ "statuses": {
+  "computation_run": false,
+  "research_qualification": "rejected",
+  "validity": "not_tested_by_this_run",
+  "production": "not_authorized",
+  "policy": "not_applicable_no_account_policy"
+ },
+ "outputs": {
+  "quality.json": "7bd645b47993750a01aedb7b2adccea3494b9646028ffeb20ab5d5a65bd65aa6",
+  "skipped-stages.json": "e1022affbeb71f19445332f15a83391193e2a1d1822dd5c8387926d68f54af45",
+  "report.md": "7591939584e26a7b22de80b54766c0d0f66319e3749430607d6cc73f89f6b1cf"
+ }
+}

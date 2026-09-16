@@ -1,0 +1,365 @@
+{
+ "task": "factor-unit-readiness-2026-09-15 Task4",
+ "generated_at": "2026-09-15T11:37:04.815880",
+ "synthetic": true,
+ "expectation_policy": "期望全部来自独立参考实现/手算常数；被测函数仅作观察对象",
+ "results": [
+  {
+   "case": "dual_ma_state_synthetic",
+   "expectation_source": "independent_ref_impl",
+   "pass": true,
+   "detail": {
+    "up_105": {
+     "closes": [
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      105.0
+     ],
+     "observed": [
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "true"
+     ],
+     "expected": [
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "true"
+     ]
+    },
+    "flat_100": {
+     "closes": [
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+     ],
+     "observed": [
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "false"
+     ],
+     "expected": [
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "false"
+     ]
+    },
+    "down_99": {
+     "closes": [
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      99.0
+     ],
+     "observed": [
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "false"
+     ],
+     "expected": [
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "false"
+     ]
+    },
+    "scaled_x100": {
+     "observed": [
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "true"
+     ],
+     "expected": [
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "missing",
+      "true"
+     ],
+     "note": "价格同比缩放(含每份分红同尺度调整的极端情形)状态不变"
+    }
+   }
+  },
+  {
+   "case": "breadth_common_denominator_synthetic",
+   "expectation_source": "hand_derived_constants",
+   "pass": true,
+   "detail": {
+    "b50_half": {
+     "observed": 0.5,
+     "expected": 0.5
+    },
+    "b200_half": {
+     "observed": 0.5,
+     "expected": 0.5
+    },
+    "all_unqualified_is_missing_not_zero": {
+     "observed": {
+      "missing_reason": "no_eligible_quotes",
+      "b50_is_nan": true
+     },
+     "expected": {
+      "missing_reason": "no_eligible_quotes",
+      "b50_is_nan": true
+     }
+    },
+    "no_membership": {
+     "observed": {
+      "missing_reason": "membership_missing"
+     },
+     "expected": {
+      "missing_reason": "membership_missing"
+     }
+    },
+    "coverage_below_minimum": {
+     "observed": {
+      "missing_reason": "coverage_below_minimum",
+      "coverage": 0.1
+     },
+     "expected": {
+      "missing_reason": "coverage_below_minimum",
+      "coverage": 0.1
+     }
+    }
+   }
+  },
+  {
+   "case": "sentiment_percentile_formula_synthetic",
+   "expectation_source": "hand_derived_constants",
+   "pass": true,
+   "detail": {
+    "tie_counts_as_le": {
+     "observed_label": "low",
+     "expected_label": "low",
+     "hand_percentile": 23.076923076923077
+    },
+    "warmup_below_52_is_unknown": {
+     "observed": "unknown",
+     "expected": "unknown"
+    },
+    "boundary_90pct": {
+     "observed_label": "extreme_high",
+     "expected_label": "extreme_high",
+     "hand_percentile": 90.38461538461539
+    },
+    "raw_value_untouched": {
+     "observed": 10.0,
+     "expected": 10.0,
+     "note": "原始读数与分位/状态分层，原始值不被改写"
+    }
+   }
+  },
+  {
+   "case": "cross_market_same_date_not_same_knowledge_time",
+   "expectation_source": "hand_derived_constants(zoneinfo)",
+   "pass": true,
+   "detail": {
+    "summer": {
+     "us_close_in_shanghai": "2026-07-16T04:00:00+08:00",
+     "after_a_share_close_same_date": true,
+     "expected": true
+    },
+    "winter_est": {
+     "us_close_in_shanghai": "2026-01-16T05:00:00+08:00",
+     "after_a_share_close_same_date": true,
+     "expected": true
+    }
+   },
+   "note": "合成时刻演示：同一日历日期的美股收盘在上海时间已是次日凌晨，故不能借美股同日收盘解释A股同日信号；未声称真实交易所时刻表已证实"
+  }
+ ],
+ "all_pass": true
+}

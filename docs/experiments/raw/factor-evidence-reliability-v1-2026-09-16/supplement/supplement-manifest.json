@@ -1,0 +1,68 @@
+{
+ "purpose": "R3 补件：规范/任务书/候选卡原字节 + 外部输入依赖指纹 + 核验覆盖度声明",
+ "date": "2026-09-16",
+ "copies": {
+  "docs/research/experiment-backtest-principles.md": "ac5a676c0635441b66f656c8e1249b69bade36365cc9065ed6341a610b6a53c6",
+  "docs/research/definition-standard.md": "3406feaea2bbb8d23a91ddc8fa0c85e62ff86437bdf443d459f2c97b0e99cd5c",
+  "docs/research/ai-execution-contract.md": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962",
+  "docs/research/experiment-report-template.md": "cae2853f81841de6f424c6bda10e6708dd35574ebb8a325088fe507c5755d54e",
+  "docs/research/definitions.v1.json": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05",
+  "docs/superpowers/plans/2026-09-16-factor-evidence-reliability-v1.md": "77fb4152b6e415903bab427a25f823ac1d4b906cedf487ce7f47c01c71a61fc5",
+  "docs/experiments/raw/factor-research-workbench-v1-2026-09-14/candidate-card-dual-ma-bull-state-draft-1.md": "907d17631e27011423bebbf068bcb2bbc6e1b44a184618597cf54f868e066dc1"
+ },
+ "external_inputs": {
+  "note": "输入大件不复制入包，按协议指纹列外部依赖；装载时逐项核验",
+  "inputs": {
+   "run-02/observations.csv": "1dfe4c206212c31809f53f4b66bb40b3dd4ec193b03daf37c1540f8307eb9d5d",
+   "run-02/summary.json": "ce4c51ba5e0d7bb7f7e10630b07fc106a59c98f0d4f57ac290f861164c9bfcf7",
+   "run-02/manifest.json": "ca7154fc9bdde40c54490a37c8de47acfaaf138911735b1d6dac0c67bf614fde",
+   "run-02/input-package/calendar.json": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+   "supplement/full-file-listing.json": "320f4c3139c8edbb92b812217310d646df68685cbaf10b4a83ff161b9ca8a453",
+   "supplement/supplement-manifest.json": "982baa52667b35c732f39c3007a808a57db96acf977248bb3b834e1ede95c592"
+  }
+ },
+ "coverage": {
+  "verify_run01_limitations": [
+   "leave-one-year-out.csv 只逐值核了年份行序；数值经 stability.json 间接核对，CSV 单元格未逐一重读",
+   "aux 字段只核 true 组 aux_mean/aux_n 与 false 组 aux_worst，未逐字段全核",
+   "manifest 枚举以文件名排除全部 manifest.json（本包无嵌套 manifest，实际等价），非仅顶层路径比较",
+   "文末'输入SHA六项'是转引装载时核验结果，未在该脚本内独立复算六项（主控复核已另行独立核过）",
+   "12,132 项是该脚本覆盖范围内的全过，不是全部字段完整覆盖的证明"
+  ],
+  "run_log_limitations": [
+   "开发期 32 次定向 pytest 的逐次命令/stdout/stderr/退出码原件未保存为文件，不可精确恢复；台账只存次数汇总与主要失败叙述",
+   "不补造原件；主控复核报告 §3/§8 已记录该缺口"
+  ],
+  "supplement_note": "本补件为 2026-09-16 主控复核 R3 要求的后补，不是旧 freeze/1.0.0 运行时已包含的内容；原件均与旧协议声明指纹匹配后复制"
+ },
+ "files": {
+  "standards/docs__experiments__raw__factor-research-workbench-v1-2026-09-14__candidate-card-dual-ma-bull-state-draft-1.md": {
+   "sha256": "907d17631e27011423bebbf068bcb2bbc6e1b44a184618597cf54f868e066dc1",
+   "bytes": 3097
+  },
+  "standards/docs__research__ai-execution-contract.md": {
+   "sha256": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962",
+   "bytes": 5188
+  },
+  "standards/docs__research__definition-standard.md": {
+   "sha256": "3406feaea2bbb8d23a91ddc8fa0c85e62ff86437bdf443d459f2c97b0e99cd5c",
+   "bytes": 14002
+  },
+  "standards/docs__research__definitions.v1.json": {
+   "sha256": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05",
+   "bytes": 207737
+  },
+  "standards/docs__research__experiment-backtest-principles.md": {
+   "sha256": "ac5a676c0635441b66f656c8e1249b69bade36365cc9065ed6341a610b6a53c6",
+   "bytes": 21561
+  },
+  "standards/docs__research__experiment-report-template.md": {
+   "sha256": "cae2853f81841de6f424c6bda10e6708dd35574ebb8a325088fe507c5755d54e",
+   "bytes": 12378
+  },
+  "standards/docs__superpowers__plans__2026-09-16-factor-evidence-reliability-v1.md": {
+   "sha256": "77fb4152b6e415903bab427a25f823ac1d4b906cedf487ce7f47c01c71a61fc5",
+   "bytes": 18207
+  }
+ }
+}

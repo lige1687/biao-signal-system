@@ -1,0 +1,149 @@
+{
+  "principles_version": "1.0.0",
+  "definition_standard_version": "1.0.0",
+  "registry_version": "1.1.0",
+  "registry_file": {
+    "path": "docs/experiments/raw/research-factor-library-v0-2026-09-09/prepare-02/frozen-definitions.v1.0.0.json",
+    "sha256": "d0f9e0038123b61a83699c52d67a80561f2bfe36b24a7c1f25575f5da78c209e"
+  },
+  "standard_file": {
+    "path": "docs/research/definition-standard.md",
+    "sha256": "b12fe66d7b13e41a4e11b17b77c9e2251e98d2655ee00a7b8d53881a3f0c5ade"
+  },
+  "registry_canonical_sha256": "d628e49903a3ad6306f39750c06f798df9534eef5286e6a264c9ec4b65a96c3e",
+  "definition_refs": [
+    "mixed.price.economic@1.0.0",
+    "mixed.asset.total_return@1.0.0",
+    "cash.zero@1.0.0",
+    "mixed.momentum.raw@1.0.0",
+    "mixed.rv20@1.0.0",
+    "mixed.rv_percentile@1.0.0",
+    "mixed.volatility_allowed@1.0.0",
+    "mixed.eligible@1.0.0",
+    "mixed.momentum.rank@1.0.0",
+    "mixed.top3@1.0.0",
+    "mixed.target.equal@1.0.0",
+    "trend.sma200@1.0.0",
+    "trend.distance200@1.0.0",
+    "trend.above200@1.0.0",
+    "risk.product_account_weight@1.0.0",
+    "risk.direction_account_weight@1.0.0",
+    "risk.product_invested_weight@1.0.0",
+    "risk.profit_direction_share@1.0.0",
+    "mixed.no_exit_100@1.0.0"
+  ],
+  "dependency_closure": [
+    "cash.zero@1.0.0",
+    "mixed.asset.total_return@1.0.0",
+    "mixed.eligible@1.0.0",
+    "mixed.momentum.rank@1.0.0",
+    "mixed.momentum.raw@1.0.0",
+    "mixed.no_exit_100@1.0.0",
+    "mixed.price.economic@1.0.0",
+    "mixed.rv20@1.0.0",
+    "mixed.rv_percentile@1.0.0",
+    "mixed.target.equal@1.0.0",
+    "mixed.top3@1.0.0",
+    "mixed.volatility_allowed@1.0.0",
+    "risk.direction_account_weight@1.0.0",
+    "risk.product_account_weight@1.0.0",
+    "risk.product_invested_weight@1.0.0",
+    "risk.profit_direction_share@1.0.0",
+    "trend.above200@1.0.0",
+    "trend.distance200@1.0.0",
+    "trend.sma200@1.0.0"
+  ],
+  "codes": [
+    {
+      "path": "src/lei_signal/research/definitions.py",
+      "sha256": "b6d5a35532644c371ffbfc541a21bd52c05114db9fcb1cc3071c1965ed41ad59"
+    },
+    {
+      "path": "src/lei_signal/research/factor_runtime.py",
+      "sha256": "1f596f29aff27973ea55b55c49efd3c4c6fb1fdd200946a8618c272dad822579"
+    },
+    {
+      "path": "src/lei_signal/research/factor_account_adapter.py",
+      "sha256": "2161f3517d30dc9714243ddedfe3cd91bebf93031d11641eb17a6e4ded4dd156"
+    },
+    {
+      "path": "src/lei_signal/research/factor_diagnostics.py",
+      "sha256": "70de5549e2831a4353d5000e011e5c93ef4c9798ce4909da943d079997d73a08"
+    },
+    {
+      "path": "scripts/run_factor_library_v0.py",
+      "sha256": "3405c45e1b0a6444fe37178af7b0cb5ae37a86eacbc1f2baf45677489310d1eb"
+    },
+    {
+      "path": "docs/experiments/raw/research-mixed-defense-2026-09-09/execution/run.py",
+      "sha256": "bcffccf19eec6ccb7dbd0a1f3c6092a321f1baa9c6b946dd8cddbc03c6ec8928"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/prices.csv",
+      "sha256": "de467734be6c2ccbabed6fd39dc04b36fc6b78ee0ab731defd31ded4b83eb850"
+    },
+    {
+      "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/normalized-actions.json",
+      "sha256": "097043b2c622a308b602a961b666129f575a35083a8ede6d7bfa1cf16ea1ce81"
+    },
+    {
+      "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/candidate-pool.json",
+      "sha256": "c9da91c99e3449b25bcdb7f339aa1626261e0724092b0c05fd5f6a5fd5b9f430"
+    },
+    {
+      "path": "docs/experiments/raw/research-factor-library-v0-2026-09-09/prepare-02/protocol.json",
+      "sha256": "b9dd663558caea1eedf2ded7a19f2ed7b5d838ceabccb25feb444ca129590010"
+    }
+  ],
+  "data_cutoff": "2026-06-30T15:00:00+08:00",
+  "available_at": "2026-09-09T21:10:46.999807+08:00",
+  "decision_at": "2026-09-09T21:10:47.999807+08:00",
+  "protocol": {
+    "path": "docs/experiments/raw/research-factor-library-v0-2026-09-09/prepare-02/protocol.json",
+    "sha256": "b9dd663558caea1eedf2ded7a19f2ed7b5d838ceabccb25feb444ca129590010"
+  },
+  "pool_version": "full14 reconstructed; pool sha256 c9da91c99e34",
+  "quality": {
+    "historical_point_in_time_availability": "not_certified",
+    "execution_capacity": "not_accepted",
+    "reconciliation": {
+      "passed": true,
+      "max_abs_error": 0.0,
+      "ending_equity": 3096475.199,
+      "initial_cash": 1000000,
+      "sum_contribution": 2096475.199,
+      "tolerance_cny": 0.01
+    },
+    "phase_reconciliation": [
+      {
+        "phase_start": "2020-12-01",
+        "phase_end": "2024-12-31",
+        "start_equity": 1000000.0,
+        "end_equity": 1248929.9815,
+        "sum_contribution": 248929.9814999993,
+        "abs_error": 6.984919309616089e-10,
+        "passed": true,
+        "label": "2020Dec-2024"
+      },
+      {
+        "phase_start": "2025-01-01",
+        "phase_end": "2026-06-30",
+        "start_equity": 1248929.9815,
+        "end_equity": 3096475.199,
+        "sum_contribution": 1847545.2175000005,
+        "abs_error": 4.656612873077393e-10,
+        "passed": true,
+        "label": "2025-2026Jun"
+      }
+    ]
+  },
+  "production_authorization": "not_authorized",
+  "variant": "E11",
+  "fee": 0.001,
+  "account_id": "E11-fee0.001",
+  "legacy_account_id": "no_exit_100-fee0.001",
+  "policy_ref": "mixed.no_exit_100@1.0.0",
+  "policy_status": "executed_compatibility_reference"
+}

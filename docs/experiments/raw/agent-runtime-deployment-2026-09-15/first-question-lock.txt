@@ -1,0 +1,22 @@
+agent_chat_stream 准备段失败（session=None message='510300 最近怎么看？先说判断，再讲机会和风险，现有依据够不够？本次只讨论。'）
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/api/routes/agent.py", line 2366, in _work
+    outcome = _enter_chat(request, body)
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/api/routes/agent.py", line 1986, in _enter_chat
+    return enter_chat_request(
+        conn, client_request_id=body.client_request_id,
+    ...<4 lines>...
+        request_context_kind=body.context_kind or "global",
+        request_symbol=body.symbol)
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/copilot/chat_identity.py", line 311, in enter_chat_request
+    conn.execute("BEGIN IMMEDIATE")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: database is locked
+2026-09-15 10:36:34,899 INFO lei_signal.api.preheat 预热 full 完成（29 个标的，耗时 267.0s）
+
+3 Failed downloads:
+['CL=F', 'GC=F', 'HG=F']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+
+12 Failed downloads:
+['XLY', 'XLP', 'SPY', 'XLU', 'XLK', 'XLV', 'XLC', 'XLF', 'XLRE', 'XLB', 'XLE', 'XLI']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+2026-09-15 10:37:24,529 INFO lei_signal.api.preheat 预热 fundamentals 完成（0 个标的，耗时 49.6s）

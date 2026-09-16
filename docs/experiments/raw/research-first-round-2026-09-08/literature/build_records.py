@@ -1,0 +1,22 @@
+from pathlib import Path
+import json,html
+p=Path(__file__).resolve().parent
+papers=[
+ dict(id='L01',title='Conditional Effectiveness of Volatility-Adaptive Exit Rules in Algorithmic Trading Systems: Evidence from the USD/JPY Market',authors=['Kang, Byung-Kook'],date='2026/07/24',kind='JOUR',venue='Journal of Risk and Financial Management',volume='19',issue='8',pages='554',doi='10.3390/jrfm19080554',url='https://www.mdpi.com/1911-8074/19/8/554',level='期刊论文；只读出版方摘要及索引中的方法片段，全文请求受限',note='对应初始止损与持有退出。USD/JPY，2022–2025；470种MACD设置与36种ATR退出组合，前后两段历史比较。片段显示未计交易成本。可借用：退出效果须按入场机制和当时状态分开验证。不能照搬：MACD买卖触发与本系统“MACD只表达强度”冲突；大量试参、外汇市场和省略成本不能支持A股规则。方法片段§2.3、§2.4、§4.3；原文未完整获得，结果幅度与全部限制待核。不把它当本系统ATR有效证据。'),
+ dict(id='L02',title='Stop the Losses!',authors=['Jeon, Jay','Masturzo, Jim'],date='2025/10',kind='RPRT',venue='Research Affiliates',url='https://media.researchaffiliates.com/1099_stop_the_losses_e389db6127.pdf',level='机构研究，非期刊同行评审；已读全文重点方法和结果，15页',note='对应止损、再次进入和完整资金路径。研究风险溢价组合及71个工具的趋势组合。PDF第6页说明期货/外汇费用和次日成交；第7页同时定义止损与重新进入，第8–11页讨论风险和收益的取舍。可借用：先把卖出后何时再买、少赚多少、额外交易成本写全。不能照搬：跨资产期货和外汇、目标波动权重不等于本系统ETF/个股；风险下降不表示收益或每种风险指标都改善。阈值选择仍要本地独立验证。'),
+ dict(id='L03',title='The Three Types of Backtests',authors=['Joubert, Jacques','Sestovic, Dragan','Barziy, Illya','Distaso, Walter','Lopez de Prado, Marcos'],date='2024/07/29',kind='RPRT',venue='ADIA Lab Research Series / SSRN working paper',doi='10.2139/ssrn.4897573',url='https://www.adialab.ae/research-series/the-three-types-of-backtests',level='工作论文，所读PDF封面版本2024-07-29，19页；作者机构页面确认来源',note='对应实验设计和全部尝试记录。区分按时间向后验证、重新组合已有历史片段、人工模拟情景三类检查，并讨论反复试验后只报赢家的偏差。可借用：先问要验证历史延续性还是压力承受能力，分别保存方案、假设和失败记录。不能照搬：模拟不是没有假设的真相；重新取历史片段不能修复用到未来信息或错记现金流。该文不是LEI收益实证。PDF正文第2–5节；本地全文来自Hillsdale原论文镜像。'),
+ dict(id='L04',title='The predictive ability of technical trading rules: an empirical analysis of developed and emerging equity markets',authors=['Rink, Kevin'],date='2023/08/12',kind='JOUR',venue='Financial Markets and Portfolio Management',volume='37',pages='403–456',doi='10.1007/s11408-023-00433-2',url='https://link.springer.com/article/10.1007/s11408-023-00433-2',level='正式期刊；已读出版方全文和PDF，重点§6–7；略超近三年，因高度相关纳入反向证据',note='对应入场规则筛选及扣费后的持续性。6406条技术规则、41个股票市场，最长66年；先考虑费用，再检验历史挑出的规则在随后36个月能否延续。可借用：先计费用、完整记录试过的规则、让之后的历史回答过去赢家能否继续。反向证据：历史最佳规则的优势常不能持续。不能把指数规则结果直接推广为LEI无效，也不能将后来的网页抓取日期误写为2025新论文。'),
+ dict(id='L05',title='The Science and Practice of Trend-Following Systems',authors=['Sepp, Artur','Lucic, Vladimir'],date='2026/07/21',kind='RPRT',venue='arXiv preprint 2607.19497v1',doi='10.48550/arXiv.2607.19497',url='https://arxiv.org/abs/2607.19497v1',level='预印本v1；已读HTML方法/实证/附录A，未复跑作者代码',note='对应道路、风险权重与持有退出的贡献拆分。理论把趋势延续、长期漂移、波动尺度和成本拆开，实证对象为流动合约；附录A另给ATR和停止规则的离散实现，t日信息用于t+1日。可借用：方向信号、仓位和退出分别对照，不把某一部分的效果归给整体。不能照搬：线性模型推导不能自动覆盖结构止损、跳空和A股交易限制。作者代码：https://github.com/ArturSepp/TrendFollowingSystems ，本轮未验证可复现性。'),
+ dict(id='L06',title='Beyond the Status Quo: A Critical Assessment of Lifecycle Investment Advice',authors=['Anarkulova, Aizhan','Cederburg, Scott','O’Doherty, Michael S.'],date='2025/03/03',kind='RPRT',venue='SSRN working paper (read version: 2025-03-03)',doi='10.2139/ssrn.4590406',url='https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4590406',level='工作论文；读到2025-03-03版86页PDF，线上另有2025-07-10修订元数据/摘要，未取得其全文',note='对应持续收入、停止投入和退休取款。以美国家庭生命周期模拟，把工资、失业、退休取款及跨资产共同变化纳入；所读版§4.1–4.4定义现金来源和假设。可借用：先定义钱何时到账、何时必须使用，再比较完整资金安排。不能照搬：美国退休制度、数十年目标与模型风险偏好不是用户的真实情况；不采纳文中股票比例作为本系统建议。3月版和7月版数字不同，本轮不混用收益幅度；也不是技术信号分批入场的直接证据。')
+]
+for q in papers:
+ q['status']='方法可参考；本系统效果未验证';q['read_at']='2026-09-08';q['note']='【'+q['id']+'｜'+q['level']+'】'+q['note']+'【结论】'+q['status']+'。研究记录：research-first-round-ARCHIVE-2026-09-08。'
+(p/'papers.json').write_text(json.dumps(papers,ensure_ascii=False,indent=2)+'\n')
+lines=[]
+for q in papers:
+ lines += ['TY  - '+q['kind'],'TI  - '+q['title']]+['AU  - '+a for a in q['authors']]+['PY  - '+q['date'],'T2  - '+q['venue'],'UR  - '+q['url']]
+ for key,tag in [('volume','VL'),('issue','IS'),('pages','SP'),('doi','DO')]:
+  if key in q:lines.append(tag+'  - '+q[key])
+ lines += ['KW  - LEI首轮研究2026-09-08','KW  - '+q['id'],'N1  - '+html.escape(q['note']),'ER  - ','']
+(p/'new-six.ris').write_text('\n'.join(lines))
+print('6 records written; existing 12 untouched')

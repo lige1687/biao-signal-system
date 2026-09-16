@@ -1,0 +1,35 @@
+{
+  "definition_reference": "breadth.csi300.b200.common@1.0.0",
+  "entity_axis": "universe",
+  "value_type": "fraction_bounded",
+  "evaluation_cutoff": "2030-01-01 15:00:00+08:00",
+  "protocol": {
+    "protocol_id": "factor-lab-demo-2-state",
+    "version": "1.0.0",
+    "kind": "state_diagnostic",
+    "data_mode": "synthetic",
+    "sha256": "7899ebba34fa71104516c196a5a699d4f8fbec15575a46f60836e69dfaa5f677"
+  },
+  "diagnostic": "time_series_state",
+  "entities": [
+    {
+      "target_entity": "m1",
+      "n": 39,
+      "excluded_counts": {
+        "value_missing:no_eligible_quotes": 199,
+        "target_missing": 21,
+        "value_missing:coverage_below_minimum": 1
+      },
+      "status": "descriptive_only",
+      "mean_state": 0.7051282051282052,
+      "mean_target": 0.23239194035844138,
+      "pearson_over_time": 0.22408846471672322,
+      "spearman_over_time": 0.20108311560592998
+    }
+  ],
+  "summary_caveats": {
+    "meaning": "同一共同状态序列与单一目标实体后续结果的跨日期相关；描述性",
+    "time_correlation_not_significance": "重叠标签窗与共同状态使各期样本互相不独立；相关系数只是描述，不构成'结果不是巧合'的显著性证据",
+    "correlation_robust_confidence_interval": "not_implemented"
+  }
+}

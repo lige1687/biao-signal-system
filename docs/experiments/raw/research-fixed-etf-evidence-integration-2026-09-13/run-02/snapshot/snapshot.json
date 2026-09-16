@@ -1,0 +1,709 @@
+{
+ "schema_version": "research-data-snapshot/1.0",
+ "transform_version": "research-data-snapshot/1.0",
+ "mode": "import",
+ "protocol_id": "research-data-provenance-2026-09-10",
+ "derived_from": {
+  "original_snapshot": "docs/experiments/raw/research-identity-wiring-2026-09-10/canonical-snapshot-v2",
+  "original_snapshot_json_sha256": "d4e6518b957d06a50189a574cbd547a98e479bae872a284c0718febff781ce27",
+  "actions_sha256": "097043b2c622a308b602a961b666129f575a35083a8ede6d7bfa1cf16ea1ce81",
+  "evidence_bundle": {
+   "path": "docs/experiments/raw/research-fixed-etf-evidence-integration-2026-09-13/evidence-bundle.json",
+   "sha256": "c7b4259f0ea24883b5b7d46880216d57ee123772a126910f12007885a2dce144"
+  },
+  "momentum_protocol": {
+   "path": "docs/experiments/raw/research-momentum-prototype-2026-09-13/protocol.json",
+   "sha256": "7ad3c33055acbd613525fafa8e5ec1316821624c209a442a276c7a51f336e150"
+  },
+  "transform": "economic_index = reconstructed_economic_index(名义close, adapt_company_events(冻结行动))；基准为原首次有效报价 I=1；名义 OHLCV 与日期行逐字节保留，缺失保持缺失",
+  "derived_at": "2026-09-13T12:09:59.727970+00:00",
+  "derived_at_note": "本次派生时刻，不是数据的对外可用时刻"
+ },
+ "timing": {
+  "started_at": "2026-09-10T00:00:00+00:00",
+  "finished_at": "2026-09-10T00:00:15+00:00",
+  "note": "started_at/finished_at 是本次运行时刻；不得当作数据的对外可用时刻。",
+  "derived_at": "2026-09-13T12:09:59.727978+00:00"
+ },
+ "instruments": [
+  {
+   "instrument_id": "159652.SZ",
+   "market": "CN",
+   "requested_trading_days": null,
+   "rows": 822,
+   "first_date": "2023-02-08",
+   "last_date": "2026-06-30",
+   "raw_responses": [],
+   "normalized": {
+    "path": "normalized/159652.SZ.csv",
+    "sha256": "cadb5e99978820b3e35a626d14b945c496bd7d4c97a34d4110153e77e8fc2aff"
+   },
+   "provider_report": {
+    "provider": "frozen_mixed_prices_canonical",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": [
+     "行情未复权：分红拆股可能造成虚假的颜色切换"
+    ]
+   },
+   "fetched_at": null
+  },
+  {
+   "instrument_id": "510300.SS",
+   "market": "CN",
+   "requested_trading_days": null,
+   "rows": 1652,
+   "first_date": "2019-09-02",
+   "last_date": "2026-06-30",
+   "raw_responses": [],
+   "normalized": {
+    "path": "normalized/510300.SS.csv",
+    "sha256": "f766949558af864f245fb086f74220df9b6a9d5220c80f62231506d099212497"
+   },
+   "provider_report": {
+    "provider": "frozen_mixed_prices_canonical",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": [
+     "行情未复权：分红拆股可能造成虚假的颜色切换"
+    ]
+   },
+   "fetched_at": null
+  },
+  {
+   "instrument_id": "512400.SS",
+   "market": "CN",
+   "requested_trading_days": null,
+   "rows": 1652,
+   "first_date": "2019-09-02",
+   "last_date": "2026-06-30",
+   "raw_responses": [],
+   "normalized": {
+    "path": "normalized/512400.SS.csv",
+    "sha256": "643cfbdefc459d5f23563216b716945a0f3fe9b842fa61adb5b7067a2bb4f5b1"
+   },
+   "provider_report": {
+    "provider": "frozen_mixed_prices_canonical",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": [
+     "行情未复权：分红拆股可能造成虚假的颜色切换"
+    ]
+   },
+   "fetched_at": null
+  },
+  {
+   "instrument_id": "512890.SS",
+   "market": "CN",
+   "requested_trading_days": null,
+   "rows": 1651,
+   "first_date": "2019-09-02",
+   "last_date": "2026-06-30",
+   "raw_responses": [],
+   "normalized": {
+    "path": "normalized/512890.SS.csv",
+    "sha256": "30d9914afb6370d6cd2d33a5e116e0ad8a06994427bbcbed3c271854b3ca8835"
+   },
+   "provider_report": {
+    "provider": "frozen_mixed_prices_canonical",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": [
+     "行情未复权：分红拆股可能造成虚假的颜色切换"
+    ]
+   },
+   "fetched_at": null
+  },
+  {
+   "instrument_id": "513870.SS",
+   "market": "CN",
+   "requested_trading_days": null,
+   "rows": 643,
+   "first_date": "2023-11-02",
+   "last_date": "2026-06-30",
+   "raw_responses": [],
+   "normalized": {
+    "path": "normalized/513870.SS.csv",
+    "sha256": "9c66b80ca2586d09fb2de2523d6fdab6bdc54f38b58b6241d269dddcfd1ce181"
+   },
+   "provider_report": {
+    "provider": "frozen_mixed_prices_canonical",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": [
+     "行情未复权：分红拆股可能造成虚假的颜色切换"
+    ]
+   },
+   "fetched_at": null
+  },
+  {
+   "instrument_id": "515050.SS",
+   "market": "CN",
+   "requested_trading_days": null,
+   "rows": 1626,
+   "first_date": "2019-10-16",
+   "last_date": "2026-06-30",
+   "raw_responses": [],
+   "normalized": {
+    "path": "normalized/515050.SS.csv",
+    "sha256": "520990c664d0e645a5dd2b793ffb08975acf300b1b4dad35f316566d3b55cc24"
+   },
+   "provider_report": {
+    "provider": "frozen_mixed_prices_canonical",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": [
+     "行情未复权：分红拆股可能造成虚假的颜色切换"
+    ]
+   },
+   "fetched_at": null
+  },
+  {
+   "instrument_id": "515130.SS",
+   "market": "CN",
+   "requested_trading_days": null,
+   "rows": 1489,
+   "first_date": "2020-05-11",
+   "last_date": "2026-06-30",
+   "raw_responses": [],
+   "normalized": {
+    "path": "normalized/515130.SS.csv",
+    "sha256": "d7e503fb49df53b4541ce102a797682fd8428bf355a4cf0f0e75bb45ad5087d6"
+   },
+   "provider_report": {
+    "provider": "frozen_mixed_prices_canonical",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": [
+     "行情未复权：分红拆股可能造成虚假的颜色切换"
+    ]
+   },
+   "fetched_at": null
+  },
+  {
+   "instrument_id": "515170.SS",
+   "market": "CN",
+   "requested_trading_days": null,
+   "rows": 1321,
+   "first_date": "2021-01-13",
+   "last_date": "2026-06-30",
+   "raw_responses": [],
+   "normalized": {
+    "path": "normalized/515170.SS.csv",
+    "sha256": "efb639db0020c9717ca561d6ef90b6ec341b0421e9e60ac7d47fa616d4fefdb1"
+   },
+   "provider_report": {
+    "provider": "frozen_mixed_prices_canonical",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": [
+     "行情未复权：分红拆股可能造成虚假的颜色切换"
+    ]
+   },
+   "fetched_at": null
+  },
+  {
+   "instrument_id": "515300.SS",
+   "market": "CN",
+   "requested_trading_days": null,
+   "rows": 1640,
+   "first_date": "2019-09-19",
+   "last_date": "2026-06-30",
+   "raw_responses": [],
+   "normalized": {
+    "path": "normalized/515300.SS.csv",
+    "sha256": "78cebf4a8de47e0461fb0d5d26321d9b90095b7e5eeee329a3ae7eda4977d317"
+   },
+   "provider_report": {
+    "provider": "frozen_mixed_prices_canonical",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": [
+     "行情未复权：分红拆股可能造成虚假的颜色切换"
+    ]
+   },
+   "fetched_at": null
+  },
+  {
+   "instrument_id": "515880.SS",
+   "market": "CN",
+   "requested_trading_days": null,
+   "rows": 1648,
+   "first_date": "2019-09-06",
+   "last_date": "2026-06-30",
+   "raw_responses": [],
+   "normalized": {
+    "path": "normalized/515880.SS.csv",
+    "sha256": "ac0928047b6d5cf0a5b26e2396286214bdc05ab598ad7233ffc1dfb8fba21cf9"
+   },
+   "provider_report": {
+    "provider": "frozen_mixed_prices_canonical",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": [
+     "行情未复权：分红拆股可能造成虚假的颜色切换"
+    ]
+   },
+   "fetched_at": null
+  },
+  {
+   "instrument_id": "516220.SS",
+   "market": "CN",
+   "requested_trading_days": null,
+   "rows": 1286,
+   "first_date": "2021-03-10",
+   "last_date": "2026-06-30",
+   "raw_responses": [],
+   "normalized": {
+    "path": "normalized/516220.SS.csv",
+    "sha256": "798d0d087df2c1349b148a8f9d4da6d61dc73a9d3ac5390698bd654337dace1e"
+   },
+   "provider_report": {
+    "provider": "frozen_mixed_prices_canonical",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": [
+     "行情未复权：分红拆股可能造成虚假的颜色切换"
+    ]
+   },
+   "fetched_at": null
+  },
+  {
+   "instrument_id": "518850.SS",
+   "market": "CN",
+   "requested_trading_days": null,
+   "rows": 1470,
+   "first_date": "2020-06-05",
+   "last_date": "2026-06-30",
+   "raw_responses": [],
+   "normalized": {
+    "path": "normalized/518850.SS.csv",
+    "sha256": "817655cad8e17dd79e746a04f94b4b8059cf9bbd45d513076a05c5121868a0ae"
+   },
+   "provider_report": {
+    "provider": "frozen_mixed_prices_canonical",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": [
+     "行情未复权：分红拆股可能造成虚假的颜色切换"
+    ]
+   },
+   "fetched_at": null
+  },
+  {
+   "instrument_id": "562590.SS",
+   "market": "CN",
+   "requested_trading_days": null,
+   "rows": 654,
+   "first_date": "2023-10-18",
+   "last_date": "2026-06-30",
+   "raw_responses": [],
+   "normalized": {
+    "path": "normalized/562590.SS.csv",
+    "sha256": "d8ed8f6f78fa57e5bc9d327308c86400d4cbbad4a2401a358d215e4ce3db3f3c"
+   },
+   "provider_report": {
+    "provider": "frozen_mixed_prices_canonical",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": [
+     "行情未复权：分红拆股可能造成虚假的颜色切换"
+    ]
+   },
+   "fetched_at": null
+  },
+  {
+   "instrument_id": "588000.SS",
+   "market": "CN",
+   "requested_trading_days": null,
+   "rows": 1362,
+   "first_date": "2020-11-16",
+   "last_date": "2026-06-30",
+   "raw_responses": [],
+   "normalized": {
+    "path": "normalized/588000.SS.csv",
+    "sha256": "307429eac9f6eb595856f8fa1412a7af65465d4445acb3cb028b22b8cee41629"
+   },
+   "provider_report": {
+    "provider": "frozen_mixed_prices_canonical",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": [
+     "行情未复权：分红拆股可能造成虚假的颜色切换"
+    ]
+   },
+   "fetched_at": null
+  }
+ ],
+ "market_data_refs": {
+  "159652.SZ": {
+   "schema_version": "provenance/1.2",
+   "source_id": "frozen_mixed_prices_canonical",
+   "instrument_id": "159652.SZ",
+   "market": "CN",
+   "observed_at": "2026-06-30",
+   "available_at": null,
+   "generated_at": "2026-09-10T00:00:01+00:00",
+   "last_valid_at": "2026-06-30",
+   "health": "unknown",
+   "reason": "冻结历史输入缺到达时间；保持未知，不补造",
+   "calendar_ref": null,
+   "as_of_cutoff": null,
+   "source_policy_ref": null,
+   "reference_lag_trading_days": null,
+   "source": "frozen_mixed_prices_canonical",
+   "completeness": "unknown",
+   "lag_trading_days": null,
+   "fetched_at": null,
+   "transform_version": "research-data-snapshot/1.0"
+  },
+  "510300.SS": {
+   "schema_version": "provenance/1.2",
+   "source_id": "frozen_mixed_prices_canonical",
+   "instrument_id": "510300.SS",
+   "market": "CN",
+   "observed_at": "2026-06-30",
+   "available_at": null,
+   "generated_at": "2026-09-10T00:00:02+00:00",
+   "last_valid_at": "2026-06-30",
+   "health": "unknown",
+   "reason": "冻结历史输入缺到达时间；保持未知，不补造",
+   "calendar_ref": null,
+   "as_of_cutoff": null,
+   "source_policy_ref": null,
+   "reference_lag_trading_days": null,
+   "source": "frozen_mixed_prices_canonical",
+   "completeness": "unknown",
+   "lag_trading_days": null,
+   "fetched_at": null,
+   "transform_version": "research-data-snapshot/1.0"
+  },
+  "512400.SS": {
+   "schema_version": "provenance/1.2",
+   "source_id": "frozen_mixed_prices_canonical",
+   "instrument_id": "512400.SS",
+   "market": "CN",
+   "observed_at": "2026-06-30",
+   "available_at": null,
+   "generated_at": "2026-09-10T00:00:03+00:00",
+   "last_valid_at": "2026-06-30",
+   "health": "unknown",
+   "reason": "冻结历史输入缺到达时间；保持未知，不补造",
+   "calendar_ref": null,
+   "as_of_cutoff": null,
+   "source_policy_ref": null,
+   "reference_lag_trading_days": null,
+   "source": "frozen_mixed_prices_canonical",
+   "completeness": "unknown",
+   "lag_trading_days": null,
+   "fetched_at": null,
+   "transform_version": "research-data-snapshot/1.0"
+  },
+  "512890.SS": {
+   "schema_version": "provenance/1.2",
+   "source_id": "frozen_mixed_prices_canonical",
+   "instrument_id": "512890.SS",
+   "market": "CN",
+   "observed_at": "2026-06-30",
+   "available_at": null,
+   "generated_at": "2026-09-10T00:00:04+00:00",
+   "last_valid_at": "2026-06-30",
+   "health": "unknown",
+   "reason": "冻结历史输入缺到达时间；保持未知，不补造",
+   "calendar_ref": null,
+   "as_of_cutoff": null,
+   "source_policy_ref": null,
+   "reference_lag_trading_days": null,
+   "source": "frozen_mixed_prices_canonical",
+   "completeness": "unknown",
+   "lag_trading_days": null,
+   "fetched_at": null,
+   "transform_version": "research-data-snapshot/1.0"
+  },
+  "513870.SS": {
+   "schema_version": "provenance/1.2",
+   "source_id": "frozen_mixed_prices_canonical",
+   "instrument_id": "513870.SS",
+   "market": "CN",
+   "observed_at": "2026-06-30",
+   "available_at": null,
+   "generated_at": "2026-09-10T00:00:05+00:00",
+   "last_valid_at": "2026-06-30",
+   "health": "unknown",
+   "reason": "冻结历史输入缺到达时间；保持未知，不补造",
+   "calendar_ref": null,
+   "as_of_cutoff": null,
+   "source_policy_ref": null,
+   "reference_lag_trading_days": null,
+   "source": "frozen_mixed_prices_canonical",
+   "completeness": "unknown",
+   "lag_trading_days": null,
+   "fetched_at": null,
+   "transform_version": "research-data-snapshot/1.0"
+  },
+  "515050.SS": {
+   "schema_version": "provenance/1.2",
+   "source_id": "frozen_mixed_prices_canonical",
+   "instrument_id": "515050.SS",
+   "market": "CN",
+   "observed_at": "2026-06-30",
+   "available_at": null,
+   "generated_at": "2026-09-10T00:00:06+00:00",
+   "last_valid_at": "2026-06-30",
+   "health": "unknown",
+   "reason": "冻结历史输入缺到达时间；保持未知，不补造",
+   "calendar_ref": null,
+   "as_of_cutoff": null,
+   "source_policy_ref": null,
+   "reference_lag_trading_days": null,
+   "source": "frozen_mixed_prices_canonical",
+   "completeness": "unknown",
+   "lag_trading_days": null,
+   "fetched_at": null,
+   "transform_version": "research-data-snapshot/1.0"
+  },
+  "515130.SS": {
+   "schema_version": "provenance/1.2",
+   "source_id": "frozen_mixed_prices_canonical",
+   "instrument_id": "515130.SS",
+   "market": "CN",
+   "observed_at": "2026-06-30",
+   "available_at": null,
+   "generated_at": "2026-09-10T00:00:07+00:00",
+   "last_valid_at": "2026-06-30",
+   "health": "unknown",
+   "reason": "冻结历史输入缺到达时间；保持未知，不补造",
+   "calendar_ref": null,
+   "as_of_cutoff": null,
+   "source_policy_ref": null,
+   "reference_lag_trading_days": null,
+   "source": "frozen_mixed_prices_canonical",
+   "completeness": "unknown",
+   "lag_trading_days": null,
+   "fetched_at": null,
+   "transform_version": "research-data-snapshot/1.0"
+  },
+  "515170.SS": {
+   "schema_version": "provenance/1.2",
+   "source_id": "frozen_mixed_prices_canonical",
+   "instrument_id": "515170.SS",
+   "market": "CN",
+   "observed_at": "2026-06-30",
+   "available_at": null,
+   "generated_at": "2026-09-10T00:00:08+00:00",
+   "last_valid_at": "2026-06-30",
+   "health": "unknown",
+   "reason": "冻结历史输入缺到达时间；保持未知，不补造",
+   "calendar_ref": null,
+   "as_of_cutoff": null,
+   "source_policy_ref": null,
+   "reference_lag_trading_days": null,
+   "source": "frozen_mixed_prices_canonical",
+   "completeness": "unknown",
+   "lag_trading_days": null,
+   "fetched_at": null,
+   "transform_version": "research-data-snapshot/1.0"
+  },
+  "515300.SS": {
+   "schema_version": "provenance/1.2",
+   "source_id": "frozen_mixed_prices_canonical",
+   "instrument_id": "515300.SS",
+   "market": "CN",
+   "observed_at": "2026-06-30",
+   "available_at": null,
+   "generated_at": "2026-09-10T00:00:09+00:00",
+   "last_valid_at": "2026-06-30",
+   "health": "unknown",
+   "reason": "冻结历史输入缺到达时间；保持未知，不补造",
+   "calendar_ref": null,
+   "as_of_cutoff": null,
+   "source_policy_ref": null,
+   "reference_lag_trading_days": null,
+   "source": "frozen_mixed_prices_canonical",
+   "completeness": "unknown",
+   "lag_trading_days": null,
+   "fetched_at": null,
+   "transform_version": "research-data-snapshot/1.0"
+  },
+  "515880.SS": {
+   "schema_version": "provenance/1.2",
+   "source_id": "frozen_mixed_prices_canonical",
+   "instrument_id": "515880.SS",
+   "market": "CN",
+   "observed_at": "2026-06-30",
+   "available_at": null,
+   "generated_at": "2026-09-10T00:00:10+00:00",
+   "last_valid_at": "2026-06-30",
+   "health": "unknown",
+   "reason": "冻结历史输入缺到达时间；保持未知，不补造",
+   "calendar_ref": null,
+   "as_of_cutoff": null,
+   "source_policy_ref": null,
+   "reference_lag_trading_days": null,
+   "source": "frozen_mixed_prices_canonical",
+   "completeness": "unknown",
+   "lag_trading_days": null,
+   "fetched_at": null,
+   "transform_version": "research-data-snapshot/1.0"
+  },
+  "516220.SS": {
+   "schema_version": "provenance/1.2",
+   "source_id": "frozen_mixed_prices_canonical",
+   "instrument_id": "516220.SS",
+   "market": "CN",
+   "observed_at": "2026-06-30",
+   "available_at": null,
+   "generated_at": "2026-09-10T00:00:11+00:00",
+   "last_valid_at": "2026-06-30",
+   "health": "unknown",
+   "reason": "冻结历史输入缺到达时间；保持未知，不补造",
+   "calendar_ref": null,
+   "as_of_cutoff": null,
+   "source_policy_ref": null,
+   "reference_lag_trading_days": null,
+   "source": "frozen_mixed_prices_canonical",
+   "completeness": "unknown",
+   "lag_trading_days": null,
+   "fetched_at": null,
+   "transform_version": "research-data-snapshot/1.0"
+  },
+  "518850.SS": {
+   "schema_version": "provenance/1.2",
+   "source_id": "frozen_mixed_prices_canonical",
+   "instrument_id": "518850.SS",
+   "market": "CN",
+   "observed_at": "2026-06-30",
+   "available_at": null,
+   "generated_at": "2026-09-10T00:00:12+00:00",
+   "last_valid_at": "2026-06-30",
+   "health": "unknown",
+   "reason": "冻结历史输入缺到达时间；保持未知，不补造",
+   "calendar_ref": null,
+   "as_of_cutoff": null,
+   "source_policy_ref": null,
+   "reference_lag_trading_days": null,
+   "source": "frozen_mixed_prices_canonical",
+   "completeness": "unknown",
+   "lag_trading_days": null,
+   "fetched_at": null,
+   "transform_version": "research-data-snapshot/1.0"
+  },
+  "562590.SS": {
+   "schema_version": "provenance/1.2",
+   "source_id": "frozen_mixed_prices_canonical",
+   "instrument_id": "562590.SS",
+   "market": "CN",
+   "observed_at": "2026-06-30",
+   "available_at": null,
+   "generated_at": "2026-09-10T00:00:13+00:00",
+   "last_valid_at": "2026-06-30",
+   "health": "unknown",
+   "reason": "冻结历史输入缺到达时间；保持未知，不补造",
+   "calendar_ref": null,
+   "as_of_cutoff": null,
+   "source_policy_ref": null,
+   "reference_lag_trading_days": null,
+   "source": "frozen_mixed_prices_canonical",
+   "completeness": "unknown",
+   "lag_trading_days": null,
+   "fetched_at": null,
+   "transform_version": "research-data-snapshot/1.0"
+  },
+  "588000.SS": {
+   "schema_version": "provenance/1.2",
+   "source_id": "frozen_mixed_prices_canonical",
+   "instrument_id": "588000.SS",
+   "market": "CN",
+   "observed_at": "2026-06-30",
+   "available_at": null,
+   "generated_at": "2026-09-10T00:00:14+00:00",
+   "last_valid_at": "2026-06-30",
+   "health": "unknown",
+   "reason": "冻结历史输入缺到达时间；保持未知，不补造",
+   "calendar_ref": null,
+   "as_of_cutoff": null,
+   "source_policy_ref": null,
+   "reference_lag_trading_days": null,
+   "source": "frozen_mixed_prices_canonical",
+   "completeness": "unknown",
+   "lag_trading_days": null,
+   "fetched_at": null,
+   "transform_version": "research-data-snapshot/1.0"
+  }
+ },
+ "semantics": {
+  "fields": {
+   "date": "交易日（Asia/Shanghai，无时区标注的日期）",
+   "open": "开盘价，人民币元",
+   "high": "最高价，人民币元",
+   "low": "最低价，人民币元",
+   "close": "收盘价，人民币元",
+   "volume": "成交量，原始单位未统一认证（只宜同一标的自身相对比较）",
+   "economic_index": "事后重建经济指数（名义价+已生效分红/拆分连接，首值 I=1）；historical_reconstruction_only=true，不得当作历史可知输入"
+  },
+  "currency": "CNY",
+  "price_basis": "nominal_close",
+  "price_basis_by_instrument": {
+   "159652.SZ": "nominal_close",
+   "510300.SS": "nominal_close",
+   "512400.SS": "nominal_close",
+   "512890.SS": "nominal_close",
+   "513870.SS": "nominal_close",
+   "515050.SS": "nominal_close",
+   "515130.SS": "nominal_close",
+   "515170.SS": "nominal_close",
+   "515300.SS": "nominal_close",
+   "515880.SS": "nominal_close",
+   "516220.SS": "nominal_close",
+   "518850.SS": "nominal_close",
+   "562590.SS": "nominal_close",
+   "588000.SS": "nominal_close"
+  },
+  "price_basis_note": "nominal_close = 名义未复权收盘价；公司行动不在价格里，需另接已登记的 actions 输入",
+  "corporate_action_basis": "not_included_in_price",
+  "trading_calendar": {
+   "authority": "none",
+   "note": "本仓库无真实交易所日历。data/calendar.py 的 WeekdayCalendar 是周一至周五近似且节假日表为空，不得当交易日历使用；data_provenance.reference_calendar 的 authority 为 price_dates_reference，只是参考。"
+  },
+  "time_semantics": {
+   "observed_at": "数据自身观察日（日线收盘）",
+   "available_at": "来源对外可用时刻；未核实一律 null 并给 reason",
+   "generated_at": "本地标准化产物生成时刻",
+   "fetched_at": "本次取得时刻；导入模式为 null",
+   "rule": "后来取得的历史资料只证明本次取得了该版本，不证明历史当天就拿得到"
+  },
+  "historical_reconstruction_only": true,
+  "available_at_note": "未知 available_at 保持 null，不因补列被清除"
+ },
+ "code_identity": {
+  "data_snapshot": "9ef4445f0d7426b37ee8ca13eba70702ab6bff816fea21db92784afeb326a798",
+  "data_quality": "9e6e1955738bf0e69c7d4a2b6fd14e88fa6d3061809a266bf32a21eae49ec485",
+  "providers": "69c7a09954bbf2c6c8b8a8d90474bbdce43be26b03cae8dc6993711718a3805c",
+  "validation": "18d221abbfea6879c980e324a1b346765bcf499ede5141ce3306e9c01106d62b",
+  "data_provenance": "3c5ac99a39feddf619e140c08df13251b6a785c17679bacb7638756a776c749a"
+ },
+ "known_gaps": [
+  "来源发布节奏未核实，available_at 全部未知（health=unknown）",
+  "无真实交易所日历，无法区分整池缺席日与非交易日",
+  "volume 绝对单位未统一认证，只宜同一标的自身相对比较",
+  "价格不含公司行动；分红拆分须由已登记的 actions 输入单独提供"
+ ],
+ "uses": [
+  "description",
+  "ranking",
+  "research_signal",
+  "attribution",
+  "comparison",
+  "diagnostic"
+ ],
+ "uses_basis": "本实现默认：价格行可服务全部六类机器用途，实际能否使用由质量裁决决定",
+ "not_for": [
+  "production_trade",
+  "宣称历史时点可交易",
+  "作为复权价格使用"
+ ],
+ "authorization": {
+  "production_trade": false,
+  "note": "本快照只是数据资料，不构成策略有效或获准交易的证据"
+ }
+}

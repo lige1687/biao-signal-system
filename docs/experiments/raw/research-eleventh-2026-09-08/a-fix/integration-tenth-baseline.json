@@ -1,0 +1,205 @@
+{
+  "package": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/b-research-fix/research-package",
+  "controlled_upstream": [
+    "SMA/EMA/close_lag 派生列",
+    "clock_series",
+    "weekly_env_series"
+  ],
+  "not_replaced": [
+    "detect_strict_structures",
+    "A 主状态机"
+  ],
+  "stale_bottom_case": {
+    "actual_bottoms": [
+      {
+        "side": "bottom",
+        "confirmed_date": "2024-01-31",
+        "reference_price": 8.0,
+        "trigger_price": 10.3,
+        "final_price": 10.8,
+        "reference_date": "2024-01-29",
+        "contained_bars_merged": 22,
+        "structure_id": "strict_bottom:2024-01-31",
+        "invalidated_date": "2024-02-01",
+        "invalidated_reason": "new_low_breaks_bottom"
+      }
+    ],
+    "target_was_observed_by_A_on_confirmation_day": true,
+    "observed_active_bottoms": [
+      {
+        "as_of": "2024-01-31",
+        "structure_id": "strict_bottom:2024-01-31",
+        "confirmed_date": "2024-01-31",
+        "invalidated_date": "2024-02-01"
+      }
+    ],
+    "ema20_reclaim_count": 0,
+    "stale_confirmation_count": 2,
+    "stale_confirmations": [
+      {
+        "event_id": "first_ma_pullback:b0aa63383038b3cc1cbaee1a",
+        "symbol": "SYNTHETIC",
+        "timeframe": "1d",
+        "event_date": "2024-02-01",
+        "available_date": "2024-02-01",
+        "rule_id": "first_ma_pullback",
+        "rule_version": "3.0.0",
+        "direction": "bullish",
+        "severity": "important",
+        "strength": 75,
+        "reason_cn": "SMA20 回撤入场（A4 早期版）：close > EMA20 且 EMA20 上行，A3=底部构造",
+        "provenance": "research_proxy",
+        "evidence": {
+          "sub_rule": "first_ma_pullback_confirmed",
+          "research_proxy": true,
+          "ma_period": 20,
+          "is_first_touch": true,
+          "touch_date": "2024-01-29",
+          "entry_variant": "early",
+          "close": 10.4,
+          "a3_source": "bottom_structure",
+          "a3_structure_id": "strict_bottom:2024-01-31",
+          "stop_price": 7.5,
+          "entry_ref_close": 10.4,
+          "ma_value": 9.2,
+          "atr20": 1.905,
+          "clock_type": 2,
+          "weekly_bull_env": true
+        },
+        "invalidation": {
+          "condition": "入场依据为 SMA20 均线组支撑：收盘跌破本轮回撤结构低点（stop_price）即介入逻辑失效（规格 §9 A5）；趋势生命周期重置（SMA 排列破坏 / 收盘跌破 SMA120 / LEI 转黑）同样终止本轮回撤"
+        },
+        "structure_id": null,
+        "run_id": null,
+        "valid_until": null,
+        "lifecycle_id": "first_ma_pullback:SYNTHETIC:2024-01-01",
+        "ended_event_id": null
+      },
+      {
+        "event_id": "first_ma_pullback:4e815d829a360d12ed0f500b",
+        "symbol": "SYNTHETIC",
+        "timeframe": "1d",
+        "event_date": "2024-02-01",
+        "available_date": "2024-02-01",
+        "rule_id": "first_ma_pullback",
+        "rule_version": "3.0.0",
+        "direction": "bullish",
+        "severity": "important",
+        "strength": 80,
+        "reason_cn": "SMA20 回撤入场（A4 确认版）：EMA20 与 SMA20 共同向上（SMA 用抵扣价判据）",
+        "provenance": "research_proxy",
+        "evidence": {
+          "sub_rule": "first_ma_pullback_confirmed",
+          "research_proxy": true,
+          "ma_period": 20,
+          "is_first_touch": true,
+          "touch_date": "2024-01-29",
+          "entry_variant": "confirmed",
+          "close": 10.4,
+          "a3_source": "bottom_structure",
+          "a3_structure_id": "strict_bottom:2024-01-31",
+          "stop_price": 7.5,
+          "entry_ref_close": 10.4,
+          "ma_value": 9.2,
+          "atr20": 1.905,
+          "clock_type": 2,
+          "weekly_bull_env": true
+        },
+        "invalidation": {
+          "condition": "入场依据为 SMA20 均线组支撑：收盘跌破本轮回撤结构低点（stop_price）即介入逻辑失效（规格 §9 A5）；趋势生命周期重置（SMA 排列破坏 / 收盘跌破 SMA120 / LEI 转黑）同样终止本轮回撤"
+        },
+        "structure_id": null,
+        "run_id": null,
+        "valid_until": null,
+        "lifecycle_id": "first_ma_pullback:SYNTHETIC:2024-01-01",
+        "ended_event_id": null
+      }
+    ]
+  },
+  "contained_bar_case": {
+    "prefix_confirmation_count": 2,
+    "full_past_confirmation_count": 0,
+    "full_field_prefix_stable": false,
+    "prefix_confirmations": [
+      {
+        "event_id": "first_ma_pullback:16baaf55e93438e42ac8fc1e",
+        "symbol": "SYNTHETIC",
+        "timeframe": "1d",
+        "event_date": "2024-01-31",
+        "available_date": "2024-01-31",
+        "rule_id": "first_ma_pullback",
+        "rule_version": "3.0.0",
+        "direction": "bullish",
+        "severity": "important",
+        "strength": 75,
+        "reason_cn": "SMA20 回撤入场（A4 早期版）：close > EMA20 且 EMA20 上行，A3=底部构造",
+        "provenance": "research_proxy",
+        "evidence": {
+          "sub_rule": "first_ma_pullback_confirmed",
+          "research_proxy": true,
+          "ma_period": 20,
+          "is_first_touch": true,
+          "touch_date": "2024-01-29",
+          "entry_variant": "early",
+          "close": 10.6,
+          "a3_source": "bottom_structure",
+          "a3_structure_id": "strict_bottom:2024-01-31",
+          "stop_price": 9.0,
+          "entry_ref_close": 10.6,
+          "ma_value": 9.2,
+          "atr20": 1.8450000000000002,
+          "clock_type": 2,
+          "weekly_bull_env": true
+        },
+        "invalidation": {
+          "condition": "入场依据为 SMA20 均线组支撑：收盘跌破本轮回撤结构低点（stop_price）即介入逻辑失效（规格 §9 A5）；趋势生命周期重置（SMA 排列破坏 / 收盘跌破 SMA120 / LEI 转黑）同样终止本轮回撤"
+        },
+        "structure_id": null,
+        "run_id": null,
+        "valid_until": null,
+        "lifecycle_id": "first_ma_pullback:SYNTHETIC:2024-01-01",
+        "ended_event_id": null
+      },
+      {
+        "event_id": "first_ma_pullback:5b58ad9291353da2ce36c3e8",
+        "symbol": "SYNTHETIC",
+        "timeframe": "1d",
+        "event_date": "2024-01-31",
+        "available_date": "2024-01-31",
+        "rule_id": "first_ma_pullback",
+        "rule_version": "3.0.0",
+        "direction": "bullish",
+        "severity": "important",
+        "strength": 80,
+        "reason_cn": "SMA20 回撤入场（A4 确认版）：EMA20 与 SMA20 共同向上（SMA 用抵扣价判据）",
+        "provenance": "research_proxy",
+        "evidence": {
+          "sub_rule": "first_ma_pullback_confirmed",
+          "research_proxy": true,
+          "ma_period": 20,
+          "is_first_touch": true,
+          "touch_date": "2024-01-29",
+          "entry_variant": "confirmed",
+          "close": 10.6,
+          "a3_source": "bottom_structure",
+          "a3_structure_id": "strict_bottom:2024-01-31",
+          "stop_price": 9.0,
+          "entry_ref_close": 10.6,
+          "ma_value": 9.2,
+          "atr20": 1.8450000000000002,
+          "clock_type": 2,
+          "weekly_bull_env": true
+        },
+        "invalidation": {
+          "condition": "入场依据为 SMA20 均线组支撑：收盘跌破本轮回撤结构低点（stop_price）即介入逻辑失效（规格 §9 A5）；趋势生命周期重置（SMA 排列破坏 / 收盘跌破 SMA120 / LEI 转黑）同样终止本轮回撤"
+        },
+        "structure_id": null,
+        "run_id": null,
+        "valid_until": null,
+        "lifecycle_id": "first_ma_pullback:SYNTHETIC:2024-01-01",
+        "ended_event_id": null
+      }
+    ],
+    "full_past_confirmations": []
+  }
+}

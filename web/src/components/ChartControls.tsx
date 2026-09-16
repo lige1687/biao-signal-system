@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   MA_META,
   effectiveDisplay,
@@ -36,8 +36,17 @@ function markBadge(shown: number, total: number | undefined): string {
   return String(shown);
 }
 
+/** 「图表设置」展开状态持久化：收起是给 K 线让空间的长期偏好，不是临时状态。 */
+const SETTINGS_OPEN_KEY = "lei.chartControls.settingsOpen";
+function loadSettingsOpen(): boolean {
+  try { return window.localStorage.getItem(SETTINGS_OPEN_KEY) === "1"; } catch { return false; }
+}
+
 /**
- * K 线显示控制条：标记开关（默认全关）、着色模式、均线开关。
+ * K 线显示控制条：首行只保留常用操作（周期 / 着色 / 全部隐藏 / 导出），
+ * 均线、结构标记、参考项等显示开关收进「图表设置」可展开区，
+ * 避免图表上方多行按钮堆叠。开关状态本身仍由父组件持有（原有持久化不变），
+ * 收起只是收起面板，不改变任何开关值。
  *
  * 为什么标记默认关闭：一只标的历史上可能有数百个结构确认/失效标记，
  * 全部铺在图上会严重干扰看盘。需要研究某段行情时再按需打开。
@@ -71,11 +80,11 @@ export default function ChartControls({
     onChange({ ...display, timeframe: tf });
   };
 
-  // 日线专属开关在周/月线下禁用：聚合视图不提供 LEI 判定与结构标记，
+  // 日线专属开关在周/月线下禁用：聚合视图不提供 BIAO 判定与结构标记，
   // 留着能点但没效果比直接禁掉更让人困惑。
   const isDaily = display.timeframe === "D";
   const eff = effectiveDisplay(display);
-  const dailyOnlyTitle = "仅日线可用：周/月线是日线聚合的展示视图，不提供 LEI 信号与结构标记";
+  const dailyOnlyTitle = "仅日线可用：周/月线是日线聚合的展示视图，不提供 BIAO 信号与结构标记";
 
   const anyMark =
     display.bottomMarks ||
@@ -83,6 +92,22 @@ export default function ChartControls({
     display.invalidatedMarks ||
     display.keyVolatility ||
     display.levels;
+
+  // 「图表设置」展开态（持久化）；收起时按钮上提示当前有几项显示开关是开着的，
+  // 避免用户忘记自己开过 MACD/标记导致图上看不懂。
+  const [settingsOpen, setSettingsOpen] = useState(loadSettingsOpen);
+  useEffect(() => {
+    try { window.localStorage.setItem(SETTINGS_OPEN_KEY, settingsOpen ? "1" : "0"); } catch { /* 私密窗口等场景忽略 */ }
+  }, [settingsOpen]);
+  const activeCount =
+    MA_META.filter((m) => display.ma[m.key]).length +
+    (display.bottomMarks ? 1 : 0) +
+    (display.topMarks ? 1 : 0) +
+    (display.invalidatedMarks ? 1 : 0) +
+    (display.keyVolatility ? 1 : 0) +
+    (display.levels ? 1 : 0) +
+    (display.chipDist ? 1 : 0) +
+    (display.macd ? 1 : 0);
 
   // 筹码峰口径下拉（全历史 / 衰减）的展开态
   const [modeOpen, setModeOpen] = useState(false);
@@ -130,16 +155,53 @@ export default function ChartControls({
             红涨绿跌
           </button>
           <button
-            className={`seg-btn ${eff.colorMode === "lei_state" ? "on" : ""}`}
-            onClick={() => setMode("lei_state")}
+            className={`seg-btn ${eff.colorMode === "biao_state" ? "on" : ""}`}
+            onClick={() => setMode("biao_state")}
             disabled={!isDaily}
-            title={isDaily ? "按当日 LEI 三色着色（颜色只表达状态，涨跌看今日概述）" : dailyOnlyTitle}
+            title={isDaily ? "按当日 BIAO 三色着色（颜色只表达状态，涨跌看今日概述）" : dailyOnlyTitle}
           >
-            LEI 绿灰黑
+            BIAO 绿灰黑
           </button>
         </div>
+        <button
+          type="button"
+          className={`chip ctl-settings-toggle ${settingsOpen ? "on" : ""}`}
+          aria-expanded={settingsOpen}
+          onClick={() => setSettingsOpen((v) => !v)}
+          title="均线、结构标记、参考线等显示开关"
+        >
+          图表设置{activeCount > 0 ? `（已开 ${activeCount} 项）` : ""} {settingsOpen ? "▴" : "▾"}
+        </button>
+        {isDaily && anyMark && (
+          <button
+            className="chip clear"
+            onClick={() =>
+              onChange({
+                ...display,
+                bottomMarks: false,
+                topMarks: false,
+                invalidatedMarks: false,
+                keyVolatility: false,
+                levels: false,
+              })
+            }
+            title="清空所有信号标记，回到干净的看盘视图"
+          >
+            全部隐藏
+          </button>
+        )}
+        {onDownloadPng && (
+          <button
+            className="chip export"
+            onClick={onDownloadPng}
+            title="把当前 K 线图导出为 PNG（包含你打开的标记、参考线、均线）"
+          >
+            ⤓ 导出 PNG
+          </button>
+        )}
       </div>
 
+      {settingsOpen && <>
       <div className="ctl-group">
         <span className="ctl-label">均线</span>
         {MA_META.map((m) => (
@@ -325,40 +387,14 @@ export default function ChartControls({
           disabled={!isDaily}
           title={
             isDaily
-              ? "MACD 副图（研究代理）：DIF/DEA + 红绿柱。表达均线扩散/密集=乖离率=强度，不是转折节点；破线看 LEI 颜色，均线拐头看均线斜率"
+              ? "MACD 副图（研究代理）：DIF/DEA + 红绿柱。表达均线扩散/密集=乖离率=强度，不是转折节点；破线看 BIAO 颜色，均线拐头看均线斜率"
               : "仅日线可用：MACD 判定口径在后端规则层，聚合视图不前端重算，避免两套口径分叉"
           }
         >
           ⑃ MACD
         </button>
-        {isDaily && anyMark && (
-          <button
-            className="chip clear"
-            onClick={() =>
-              onChange({
-                ...display,
-                bottomMarks: false,
-                topMarks: false,
-                invalidatedMarks: false,
-                keyVolatility: false,
-                levels: false,
-              })
-            }
-            title="清空所有信号标记，回到干净的看盘视图"
-          >
-            全部隐藏
-          </button>
-        )}
-        {onDownloadPng && (
-          <button
-            className="chip export"
-            onClick={onDownloadPng}
-            title="把当前 K 线图导出为 PNG（包含你打开的标记、参考线、均线）"
-          >
-            ⤓ 导出 PNG
-          </button>
-        )}
       </div>
+      </>}
     </div>
   );
 }

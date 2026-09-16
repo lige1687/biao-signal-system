@@ -1,0 +1,33 @@
+from pathlib import Path
+import json, hashlib, datetime
+ROOT=Path('/Users/yongbiaoli/Desktop/lei-signal-lab')
+OUT=ROOT/'docs/experiments/raw/research-ninth-2026-09-08/remaining-work'
+def doc(name): return 'docs/experiments/'+name+'-2026-09-08.md'
+items=[]
+def add(id,title,status,evidence,done,left,dependency,finish,okr):
+ items.append(dict(id=id,title=title,status=status,evidence=evidence,delivered=done,not_completed=left,dependency=dependency,present_stage_acceptance=finish,okr_ids=okr))
+add('05','完整资金安排与分批投入','有限研究已交，待验收',[doc('ambush-complete-menu-review'),doc('ambush-pending-boundaries')],
+ 'E01旧146机会与64资金路径；E02固定3菜单、876机会和192连续资金路径；未成交/取消记录另补，64账户金额未改变。',
+ '未覆盖所有19轮定投、更广产品、真实取款和个人资金用途；E02未由第二套实现重算全部192路径。',
+ '本地成果可验收；个人金额、用途、期限由用户决定；更多资金方案属后续范围。',
+ '提交固定菜单和失败记录、资金账、适用限制即可结束本轮；不因未发现稳定改善继续试阈值。',['okr-a2eff5db5b52','okr-7bbcebbdf718','okr-45f7c118ab37'])
+add('06','真实基金与长期资金比较','有限研究已交，待验收',[doc('dca-long-cash-study-closeout'),doc('dca-actual-fund-cash-comparison')],'固定四基金、2013-07-30至2026-06-30，21资金情景；分红/拆分来源与逐日资金记录；另一实现独立核最长3账户。','不是全产品比较；不是完整逐笔交易制度还原；第二实现未独立重建全部21账户目标数量；用户真实费用和取款未定。','现有资料可结案；真实交易成本需用户产品/渠道资料；新产品需另查。','保留时期差异、亏损时期和近似执行边界；不无限补十多年所有公告。',['okr-2e6ed8f5d1fe','okr-e9ae686dca95'])
+add('07','完整情绪冰点的可计算性','资料核查已交，效果未证实',[doc('sentiment-four-input-audit'),doc('icepoint-legacy-replay')],'旧四区间只是两个条件的结果；完整四条件审计：半导体0/257日齐备，有色96/257日齐备且0个完整信号；缺失日期明确保留。','不能检验完整冰点是否增加有效机会；历史成分、发布时间与连续输入仍不足。','必须新增合格历史资料或等未来记录；不是继续运行旧两条件就可解决。','把“现有资料不足以验证”作为明确结论验收；不给缺失日填无信号，不宣布完整情绪方法无效。',['okr-8ffcedeaa609','okr-02a9b781fd88'])
+add('08','AI解释与退出效果分开验证','历史审计和协议已交，未来部分待启动',[doc('ai-defense-evidence-audit'),doc('ai-future-validation-protocol'),doc('ai-explanation-exercise-pack')],'130缓存决策、20重放和15日账；两类验证协议；8个固定解释练习及评分资料。','没有真实解释答案/用户理解评分；旧模型版本和输入不全；退出的最低值得改善、机械参照及观察量尚未全部固定；未产生未来有效性证据。','研究者完成方法和观察量依据；用户只需确定价值取舍、可接受成本与实际学习反馈；未来效果要等新事件。','历史证据限制、练习包和未来启动清单交清即可结束资料阶段；未来观察保留未启动/进行中。',['okr-a8f0d5bc834a','okr-12a112a12d19'])
+add('ATR','用通常波动幅度调整止损等规则','一个用途完成有限检验',[doc('exit-baseline-full-audit'),doc('atr-buffer-opportunity-study'),doc('paper-methods-applied-checks')],'先核旧退出基准；固定半个ATR结构缓冲，2309机会×24视图共55416行；随后按实际日期组合并检查历史重组方法敏感性，未见跨模块一致改善。','初始ATR距离、盈利后跟随退出、独立仓位调整没有因这次缓冲实验完成；同一缓冲的完整共享现金比较也未做。','现有实验可验收；其余用途要先有明确机制与有限方案，不能仅为补齐四格而试参。','认可这一个用途的有限结果及不能推广到其他用途的边界；不把更多ATR用途列成本轮强制尾款。',['okr-6b4e807d5ffc','okr-2e99d9d04832'])
+add('literature','经典与近期论文、来源可追踪学习材料','代表性首轮已交；台账/内容版本需对齐',[doc('lei-academic-literature-ARCHIVE'),doc('research-first-round-ARCHIVE'),doc('literature-learning-library-handoff')],'12经典加6近期，含2026两篇、2025两篇；18篇与中文笔记、20学习条目、3阅读路线；后续有四份本地应用补充；第七批核两篇方法原文。','不是穷尽检索或逐篇复现；部分只读摘要，2025生命周期论文只取得3月全文而非7月修订全文；后续应用补充未全部并入原页面数据/Zotero。','本地可做来源/状态对账和补充交接；缺全文可保留限制，不需要重新无限检索。','用已检索范围、入选理由、阅读版本、可取/不能照搬之处及来源索引验收首轮；将K-recent实际证据与0/4差异交负责人处理。',['K-classics','K-recent','okr-27bab16d426d'])
+add('learning-ui','独立学习页面','当前台账记已开发待验收',['docs/literature-learning/README.md','docs/literature-learning/learning-seed.json'],'当前GET台账：其他AI已完成页面/API/搜索与深链接等4项，review 4/4。','本次未独立复测页面；目录README“页面尚未开发”是旧描述；后续补充内容尚未全同步。','页面验收属工程/用户；研究内容可直接交接，不必重建页面。','明确已有页面状态和补充文件入口；不把本次盘点当新页面测试证明。',['okr-d294b817468b'])
+add('technical-B','B与简单方法的完整资金对照','第八有限比较已交，第九固定诊断进行中',[doc('technical-account-limited-comparison'),'docs/experiments/raw/research-ninth-2026-09-08/protocol.md'],'第八固定8配置、33592日账独立重建；B只有6个原始机会、2笔真实技术买卖；第九已固定两组取消目标空间检查的诊断和6事件区间溯源。','完整B仍非全部实现；第八普通方法加上纪律后零成交不能代表原始普通方法；第九当前仅协议，结果不可预先算完成；区间正式定义可能需补明。','第九两组及独立核算可用本地资料短期完成；语义未定就交选择依据，不先扩跑替代B收益。','完成第九预声明两账户、六行语义表与独立核对即停；保存不能因历史成绩放松正式纪律的限制。',['K-baseline'])
+add('technical-ACD','完整A/C/D及四模块共同账户','有规则与单元测试，当前研究未完整覆盖',['docs/trading-spec-v1.md','configs/rules.v1.yaml','src/lei_signal/rules/first_ma_pullback.py','src/lei_signal/rules/two_b_reversal.py','src/lei_signal/rules/module_d_false_breakout.py','tests/unit/test_first_ma_pullback.py','tests/unit/test_two_b_reversal.py','tests/unit/test_module_d.py'],'现有代码已定义A首次回调、C破底翻和D假突破；测试含结构失效、生命周期及部分追加未来资料不改过去的检查。此处只读，没有运行新候选或测试。','缺当前研究统一输入与完整账户接入证明；A具体触碰/结构/确认版本，C原文2B精确结构，D假突破边界/空头适用性、模块冲突优先级、九条纪律需逐项冻结；不能用存在代码代替全系统验证。','现有名义OHLCV能衍生日线均线/已确认结构，非全部缺行情；多周期结构/当时成分/完整制度仍可能缺。先有限定义核对，再估工程与选定研究，不可承诺本轮完成所有模块。','本轮交已实现/缺定义/缺数据/缺账户映射即可；完整系统目标保持未完成。',['K-baseline'])
+add('cost-data','真实产品行动、执行成本与不使用未来信息','日线近似已交，真实制度仍有边界',['docs/experiments/raw/research-eighth-2026-09-08/product-qualification/README.md','docs/experiments/raw/research-eighth-2026-09-08/account-review/README.md','docs/experiments/raw/research-seventh-2026-09-08/price-basis-qualification/qualification-report.md'],'四基金已知14行动含预热期，价格单位及转换冻结；已知拆分/停牌保守限制；第八74次日期截断和资金独立核算。','历史临时停牌/迟开盘并非穷尽；量的绝对单位未全部核实；用户渠道真实收费、价差和冲击未标定；现金发放开盘即到账为研究假设；历史事后核实原文不等于当时可提前得知。','可报告近似费用与保守限制；实盘精度需渠道/执行资料和工程，不可通过当前账户复算补齐。','所有账户显式继承已知范围与禁用日期；不得从当日高低收倒推开盘限制；不标为完整实盘收益。',['okr-2e99d9d04832','K-baseline'])
+add('forward','未来验证与正式采纳','尚不能由历史研究完成',[doc('ai-future-validation-protocol'),'docs/okr/README.md'],'启动前版本、输入来源、所有动作及失败应记录；历史研究和未来验证的界线明确。','未来数据、足够独立事件和用户采纳决定不存在；工程09R2/03B/04B也不能由研究目录交付替代验收。','必须等用户价值取舍、工程就绪以及未来事件；涉及20/60交易日观察的结果自然需数周至数月，事件不足可能更久。','本轮给启动条件、责任与停止条件；不以等待未来完成拖住现有资料阶段，也不把它标已完成。',['okr-12a112a12d19','D-forward'])
+(OUT/'acceptance-checklist.json').write_text(json.dumps({'as_of_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'scope':'只读验收盘点；不代表对所有引用成果重新独立重算','items':items},ensure_ascii=False,indent=2)+'\n')
+files={p for i in items for p in i['evidence']}
+files.update(['docs/experiments/raw/research-first-round-2026-09-08/literature/papers.json','docs/literature-learning/research-applications-2026-09-08.md','docs/literature-learning/exit-method-lessons-2026-09-08.md','docs/literature-learning/paper-method-followup-2026-09-08.md','docs/literature-learning/technical-comparison-lessons-2026-09-08.md','docs/experiments/raw/research-eighth-2026-09-08/README.md','docs/experiments/raw/research-fifth-2026-09-08/README.md','docs/experiments/raw/research-seventh-2026-09-08/README.md','docs/experiments/research-sixth-handoff-2026-09-08.md','docs/experiments/raw/research-ninth-2026-09-08/b-zone-semantics/protocol.md'])
+manifest=[]
+for p in sorted(files):
+ f=ROOT/p
+ if not f.exists():raise SystemExit('Missing evidence '+p)
+ manifest.append({'path':p,'sha256':hashlib.sha256(f.read_bytes()).hexdigest(),'bytes':f.stat().st_size})
+(OUT/'source-manifest.json').write_text(json.dumps({'captured_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'note':'当前只读版本；第九协议结果仍进行中。旧成果不复制修改。输入未逐一重新执行。','files':manifest},ensure_ascii=False,indent=2)+'\n')
+print('wrote',len(items),'acceptance rows,',len(manifest),'source fingerprints')

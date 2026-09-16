@@ -1,0 +1,46 @@
+Traceback (most recent call last):
+  File "<stdin>", line 21, in <module>
+  File "/opt/homebrew/Cellar/python@3.11/3.11.7_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/pathlib.py", line 445, in __getitem__
+    raise IndexError(idx)
+IndexError: 1
+{
+  "checks": {
+    "accounts_48": true,
+    "unique_account_ids": true,
+    "all_locked_files_unchanged": true,
+    "source_lock_same_before_after": true,
+    "daily_complete": true,
+    "trade_fee_sums_match": true,
+    "ending_components_match": true,
+    "funding_100000": true,
+    "precision_candidate_snapshot_exact": true,
+    "diagnostic_candidate_snapshot_exact": true,
+    "sz159915_2021_02_08_no_quote": true
+  },
+  "summary_rows": 48,
+  "daily_rows_per_account": 4199,
+  "empty_trade_files_without_header": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sh510300-A60J-fee10bp/trades.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sh510300-A60J-fee20bp/trades.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sh510300-A120J-fee10bp/trades.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sh510300-A120J-fee20bp/trades.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sh510300-C3-fee10bp/trades.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sh510300-C3-fee20bp/trades.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sh510300-D-fee10bp/trades.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sh510300-D-fee20bp/trades.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sz159915-A20J-fee10bp/trades.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sz159915-A20J-fee20bp/trades.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sz159915-A120E-fee10bp/trades.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sz159915-A120E-fee20bp/trades.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sz159915-A120J-fee10bp/trades.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sz159915-A120J-fee20bp/trades.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sz159915-C2-fee10bp/trades.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sz159915-C2-fee20bp/trades.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sz159915-C3-fee10bp/trades.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sz159915-C3-fee20bp/trades.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sz159915-D-fee10bp/trades.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sz159915-D-fee20bp/trades.csv"
+  ],
+  "known_output_limitation": "zero-trade CSV files have zero rows and no header; orders.json remains authoritative",
+  "scope": "account invariants and frozen-input identity; independent trade-decision reconstruction is separate phase-13 review"
+}

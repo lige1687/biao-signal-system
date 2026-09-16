@@ -1,0 +1,80 @@
+{
+ "schema_version": "fixed-etf-derived-snapshot-manifest/1.1",
+ "generated_at": "2026-09-13T15:16:28.219875+00:00",
+ "protocol": {
+  "input_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/r123-recheck-01/reference_missing_one/protocol-test.json",
+  "sha256": "4430efa106bf7a996e45abecf31d8a3c14c5f5ef70c2ccb8eae43218cd238d37",
+  "protocol_id": "momentum-research-prototype-2026-09-13",
+  "frozen_copy": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/r123-recheck-01/reference_missing_one/out/protocol-frozen.json",
+   "sha256": "4430efa106bf7a996e45abecf31d8a3c14c5f5ef70c2ccb8eae43218cd238d37"
+  }
+ },
+ "declared_inputs": {
+  "evidence_bundle": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/r123-recheck-01/reference_missing_one/evidence-bundle.json",
+   "sha256": "43d403911eaa2411dcfaa58a3bbe22d596bfe453b0ddf513ee28dc2ca4034d0d"
+  },
+  "reference_values": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/r123-recheck-01/reference_missing_one/run04-values.csv",
+   "sha256": "e14f24ba756470837e025336f46642727db35a5b5832a1f40f35ec0c79fc8c9a"
+  }
+ },
+ "offline_guard": {
+  "self_check_blocked": true,
+  "blocked_with": "RuntimeError"
+ },
+ "result": {
+  "evidence_bundle": {
+   "schema_version": "fixed-etf-evidence-bundle/1.1",
+   "validated": 1,
+   "unresolved": 0,
+   "conflicts": 0
+  },
+  "econ_stats": {
+   "510300.SS": {
+    "rows": 260,
+    "economic_index_filled": 260,
+    "economic_index_blank": 0,
+    "close_dropped_nonpositive_or_nan": 0,
+    "unknown_available_at_events": []
+   },
+   "159915.SZ": {
+    "rows": 260,
+    "economic_index_filled": 260,
+    "economic_index_blank": 0,
+    "close_dropped_nonpositive_or_nan": 0,
+    "unknown_available_at_events": []
+   }
+  },
+  "binding": {
+   "mixed.momentum.raw@1.0.0": {
+    "directly_satisfiable": true,
+    "missing_fields": []
+   },
+   "mixed.price.economic@1.0.0": {
+    "directly_satisfiable": true,
+    "missing_fields": []
+   }
+  },
+  "momentum_key_check": {
+   "unique_reference_keys": 15,
+   "checked": 15,
+   "mismatch": 0,
+   "duplicate_reference_rows": [],
+   "invalid_reference_values": [],
+   "missing_in_derived": [],
+   "unknown_product_keys": [],
+   "tolerance": "atol=rtol=1e-12（双方均为有限值后才比较）",
+   "complete_consistent": true
+  },
+  "observation_cutoff_assumption": "观察/决策截点 15:00 为按收盘设置的保守测试假设，不是已证实的数据到达时间或实盘决策时刻"
+ },
+ "outputs": {
+  "result.json": "eb19c734b47481522d7282456a0a2ff9f614f6aa93e05b3d0b78a20081bf7985",
+  "protocol-frozen.json": "4430efa106bf7a996e45abecf31d8a3c14c5f5ef70c2ccb8eae43218cd238d37",
+  "snapshot/normalized/159915.SZ.csv": "e4ed2c0b6677e8ccd5d22c98d489885979b9a51c3cbc1d31309fc34706f4905c",
+  "snapshot/normalized/510300.SS.csv": "c9e1b6029a5e967ac89b54007481eabf05b4c79bff47623adc4d61f99ce18ded",
+  "snapshot/snapshot.json": "a016a8d40a3d9de6cfcaa0fdbdadfb8593558dcd42c501b5b8a0b39c4d395a93"
+ }
+}

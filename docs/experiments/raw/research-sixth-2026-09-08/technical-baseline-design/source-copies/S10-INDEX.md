@@ -1,0 +1,332 @@
+# docs/experiments 总索引
+
+> 2026-09-03 整理建索引。**没有移动、改名、删除任何现有文件**——所有归档、
+> 任务书、raw 数据都在原位，本文件是新增的导航层。大白话说：这里的每份
+> 文件都是一次独立实验或任务的"结案报告"，之前散着放找不到，现在按
+> "任务编号 → 归档"和"主题 → 归档"两条路都能查。
+>
+> 维护约定：新增归档或新发任务书时，顺手在 §1 字母账和 §2 对应主题组各
+> 补一行，保持索引不过期。
+
+---
+
+## 0. 新会话入口（按顺序读）
+
+1. 仓库根 `AGENTS.md` — 项目级约束（先读策略文档、说人话、红线词汇）
+2. `../next-steps-master-plan-2026-09-02.md` — **下一步方向总纲**（九个新组合
+   语义 + 五项遗留债务 + 优先级建议，当前选题的唯一入口）
+3. `coverage-sync-2026-09-02.md` — 跨机器任务覆盖对账（A–W 哪些做过、
+   何处存疑；注意其 §3/§4 写于 23ca826 补齐归档之前，部分"零归档"结论
+   已过时，以本索引 §1 为准）
+4. `CROSS-GROUP-SYNTHESIS-2026-09-01.md` — 跨组统一视图与开放冲突清单
+5. `../system-architecture-and-decisions-2026-09-04.md` — **系统四轨架构
+   原型 + 决策台账（D1~D4 待拍板事项）+ 研究队列**（2026-09-04 起维护，
+   拍板与立项状态以它为准）
+6. 本索引（机器可读版：`registry.json`，分类/判定状态供「实验报告库」
+   页面使用，新归档须同步登记，见 AGENTS.md 归档规约）
+7. `session-handoff-manifest-2026-09-04.md` — 9-03~04 四批 25 项交接总表
+
+## 1. 任务编号总账（任务书 → 执行归档）
+
+### 9-07 超级入口增量评估
+
+成员契约新记录链已通过：[独立验收与旧库两项缺口](agent-member-contract-review-2026-09-08.md)（整体mixed；26固定探针及178测试通过，03B开放隔离接线）。
+
+09R2 成员层复验：[报告](agent-09r2-member-review-2026-09-08.md)（mixed；22个固定探针及170项测试通过，成员授权/逐批展示/历史明细仍需按总控新契约闭合）。
+
+09R2 最新独立复验：[报告](agent-09r2-controller-review-2026-09-08.md)（mixed；e1—e5、q1—q9及159项测试通过，实际入口八个原范围边界需补修）。
+
+最新核查：[09R与03A/04A总控验收](agent-09r-controller-review-2026-09-08.md)（mixed；原九探针通过，四类记录问题及计划确认缺陷仍待修；已定稿09R2/04B/03B）。
+
+| 编号 | 任务书 | 执行归档 | 状态 |
+|---|---|---|---|
+| AGENT-INTEGRATION | [八份GLM分工任务书](../glm-prompts/agent-integration-2026-09-07/README.md) | [组装与增量评估](agent-integration-increment-review-2026-09-07.md) | 评估结案；实施与收益验证未开始 |
+| AGENT-01 证据/数据 | 同上任务书 01 | [证据读取与数据日期修复](agent-evidence-data-2026-09-07.md) | 首轮 mixed 待返修；返修已交付：[01R返修报告](agent-evidence-repair-2026-09-07.md)（R01/R02日期可信度与按依赖分列、契约v1.2引用、R07文案、参数一致性、三票与胜率事实清单；待总控复验） |
+| AGENT-01D 日历/停更审计 | 同上任务书 01D | [交易日历与timing停更只读审计](agent-calendar-timing-audit-2026-09-07.md) | 结案：根因=launchd bash 读桌面脚本被 macOS 拦（8-28 起 7/7 败）；本地无交易所日历；最小回补方案 P1-P5 已验证可行性，真实回补归总控 |
+| AGENT-02 观察存证 | 同上任务书 02 | [Agent观察存证账本](agent-observation-journal-2026-09-07.md) | 首轮 mixed 待返修；返修已交付：[02R返修报告](agent-observation-repair-2026-09-08.md)（探针C—M修复12/12、双口径评价、样本去重、缺数据可恢复；待总控复验后真实库迁入与03/04接线） |
+
+独立验收补充：
+
+| 编号 | 结论 | 报告 |
+|---|---|---|
+| AGENT-01-02-REVIEW | 01/02总控验收：部分有效，整体返修；八项裁决已定 | [独立验收](agent-01-02-controller-review-2026-09-07.md) |
+
+| 编号 | 结论 | 报告 |
+|---|---|---|
+| AGENT-REPAIR-REVIEW | 9-08复验：局部修复通过，实际调用链待联合收尾 | [总控复验](agent-repair-controller-review-2026-09-08.md) |
+| AGENT-CLOSEOUT | 总控验收 mixed：局部修复保留，9个新场景未通过；按09R定向返修，真实迁入暂不批准 | [联合收尾报告](agent-integration-closeout-2026-09-08.md) |
+| AGENT-CLOSEOUT-REVIEW | 独立复验：123项相关回归、旧12项断言通过；9个独立反例归并7项返修 | [总控独立验收](agent-closeout-controller-review-2026-09-08.md) |
+| AGENT-09R | 七项记录生命周期修复全部落地：总控原版九探针重跑全 PASS；规则身份真实分组、重试复用首次依据、草稿不夺当前、展示时间门控、迁入不抢当前、情绪脚本统一口径、归属不可考隔离；旧12项 8/12 逐条解释（F=总控纠偏，H/J/M=旧时间构造）；217项回归全绿；watch 待总控复验 | [09R返修报告](agent-record-lifecycle-repair-2026-09-08.md) |
+| AGENT-03A-04A | 标的讨论+完整计划工程准备：入口/能力/接口全图与12场景核查；骨架可复用，四个断点（补测零接线、胜率表缺字段、降级态缺失效价可确认、定投无意图路由）交总控定稿；不代表03/04已实现 | [工程准备报告](agent-discussion-plan-preparation-2026-09-08.md) |
+| AGENT-04B | 计划确认边界修复：总控p1关闭——缺失效价422、分析缺席503保草稿可重试、过期/版本不符409；store共享校验+模型层拦NaN/Inf/零/负；holding_watch/定投不误伤；15项验收全绿；watch待总控复验 | [确认修复报告](agent-plan-confirmation-repair-2026-09-08.md) |
+| AGENT-09R2 | 总控e1—e5关闭：评价方法/参数/规则/时点变化不被同原文重试吞掉（业务身份规范化，材料更新仍复用首份冻结依据）；草稿展示带键无键同一转正事务（成员同步、防自指、幂等）；情绪脚本删自建算法改调账本共享投影（冲突不再洗成命中）；截止日贯通observations API（未来成绩不出现原值保留+排除计数+当前按截止重建+非法日期422）；e1—e5+九探针全PASS，25新测+219回归全绿；watch待总控复验 | [记录边界修复报告](agent-record-boundaries-repair-2026-09-08.md) |
+| AGENT-09R2补修 | 总控a1—a8关闭：来源筛选500修复；转正必须当轮shown且只升当轮授权成员（稳定成员键）；历史视图整体同一截止（展示时点过滤+recent先滤后限+superseded按当时链+非标准日期422）；claim_class入三层身份；情绪脚本先补数后输出本次成绩；a1—a8+e1—e5+q1—q9全PASS，36新测+212回归全绿；watch待总控复验 | [补修报告](agent-record-boundaries-addendum-2026-09-08.md) |
+| AGENT-09R2成员契约 | 总控b1—b4关闭：迁移026新增批次成员关系表（member_key含claim_class、first_shown只空→实、known/unknown）；展示授权走关系表，可见性判断统一current/summary/recent三出口（同批延后展示、旧批不串新批）；legacy截止视图成绩移outcomes_untimed原值不进分母；旧数据回填诚实unknown；矛盾标志显式冲突、同事务回滚；b+a+e+q四套探针全PASS，44契约测试+216回归全绿；watch待总控复验 | [成员契约报告](agent-record-member-visibility-2026-09-08.md) |
+
+### 9-01 轮（A–M，任务书合订本：`prompts-2026-09-01.md`）
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| A | 美债10Y/收益率曲线做美股触发 | us-treasury-ARCHIVE + us-treasury-CROSSCHECK | ✅ |
+| B | VIX期限结构/PUT-CALL情绪触发 | vix-sentiment-ARCHIVE | ✅ |
+| C | A股宏观变量触发层 | ashare-macro-ARCHIVE | ✅ |
+| D | 新信号×现有两腿正交检查 | orthogonality-check | ✅ |
+| E | MACD强度信号分层验证 | macd-strength-layering-ARCHIVE | ✅ |
+| F | 宽度/利率分位仓位映射复活 | position-mapping-revival-ARCHIVE | ✅ |
+| G | 纯结构止损复活（补止盈） | exit-structural-stop-revival-ARCHIVE | ✅ |
+| H | vt目标波动缩放网格 | vt-grid-ARCHIVE | ✅ |
+| I | 止损方式跨模块统一矩阵 | stop-loss-matrix-ARCHIVE | ✅ |
+| J | a6_1三部件拆解（三件套） | exit-three-piece-ARCHIVE | ✅ 证伪（0/27 全灭） |
+| K | vt接入信号驱动单标的仓位层 | vt-signal-driven-sizing-ARCHIVE | ✅ |
+| L | 板块级RS加权 | sector-rs-ARCHIVE | ✅ |
+| M | 时间止损接受右尾（反向设计） | time-stop-tail-aware-ARCHIVE | ✅ |
+
+### 9-02 单发（N–X，任务书各自单独成文件）
+
+| 编号 | 任务书 | 执行归档 | 状态 |
+|---|---|---|---|
+| N | prompt-N-module-conflict-resonance | module-conflict-resonance-ARCHIVE | ✅ |
+| O | prompt-O-pool-recovery | pool-recovery-audit | ✅ |
+| P | prompt-PQ（P：标普替代纳指） | spx-vs-ndx-ARCHIVE-2026-09-03 | ✅ 已执行 09-03（标普版年化-1.9pp、回撤略浅） |
+| Q | prompt-PQ（Q：纯宽基vs行业篮子） | 无独立归档 | 〰️ 被 X 阶段三间接回答 |
+| R | prompt-R-full-pool-revalidation | full-pool-revalidation-ARCHIVE | ✅ |
+| S | prompt-S-b-module-reverse-vt | b-module-reverse-vt-ARCHIVE | ✅ |
+| T | prompt-T-valuation-overlay | valuation-overlay-ARCHIVE | ✅ A股主判定证伪→催生U |
+| U | prompt-U-us-erp-overlay | us-erp-overlay-ARCHIVE | ✅ |
+| V | prompt-V-current-holdings-check | 无独立归档 | 〰️ 内容被 W 吸收（W 第三步） |
+| W | prompt-W-holdings-correlation | holdings-correlation-study | ✅ |
+| X | prompt-X-broad-index-comprehensive | coverage-sync + broad-index 三份 | ✅ 四份产出齐全 |
+
+### 9-03 本轮拆分（任务书已入库；已全部执行，见下方 9-03~04 会话四批节）
+
+| 编号 | 任务书 | 内容 | 梯队 |
+|---|---|---|---|
+| Y | prompt-Y-pollution-recheck-2026-09-03 | 债务一+三复核：模块B仍成立；510500证据不足 | 一 · ✅已执行 |
+| AE | prompt-AE-staged-entry-precheck-2026-09-03 | 语义九前置：分批执行叠加现有信号 | 一 |
+| Z | prompt-Z-antifragile-precheck-2026-09-03 | 语义三前置：反脆弱补偿效应事件研究 | 一 |
+| AA | prompt-AA-master-slave-precheck-2026-09-03 | 语义一前置：主从关系依赖性验证 | 二 |
+| AB | prompt-AB-multi-confirm-frequency-2026-09-03 | 语义四前置：多重确认共触发频率 | 二 |
+| AC | prompt-AC-timescale-layering-precheck-2026-09-03 | 语义五前置：长短期信号分层 | 二 |
+| AD | prompt-AD-overnight-us-cn-precheck-2026-09-03 | 语义七前置：美股隔夜×次日A股关联 | 二 |
+
+### 9-04 轮（AU–AW，会话内自研自跑，预注册+双跑哈希同前例）
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| AU | 二元+滞回 vs 现役三档（决策级，AJ/AP 搁置的决策） | binary-hysteresis-vs-t3-decision-2026-09-04 | ✅ 判「换」（宽基域，待用户拍板） |
+| AV | 极端底部价格阶梯执行（R1 主臂+R2 追涨兜底） | price-ladder-execution-2026-09-04 | ✅ 交换结构（+6.1pp中位 vs V型左尾） |
+| AW | 宽度择时个股边界（12美股大盘股+SPY/QQQ） | us-stocks-timing-boundary-2026-09-04 | ✅ 判「无优势」（有效域=跟随宽度的宽基） |
+| AX | 换档决策走样本前向验证 + 相对痛苦度量 | switch-walkforward-and-pain-2026-09-04 | ✅ 判「保持」（6/11 压线；重选协议是 edge 一半） |
+| AY | A股个股面板×四引擎 + 跟随度分层（81只） | astock-panel-timing-2026-09-04 | ✅ 混合；机制线支持边界判据（跟随度连续谱） |
+
+不发（等条件）：语义二/六（总纲判高风险暂缓）、语义八（等 Z 结果）、
+债务二（等用户拍板立项）、债务五 P 部分（等用户表态是否有兴趣）。
+
+### 9-05 单发（用户直发任务）
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| BD | 因子观测台价值验证（第三次独立重建信号×因子对账，8561 条） | factor-panel-value-2026-09-05 | 〰️ 路由提示复现增强(t=4.4)；「高波打折/彩票股」警示对已确认信号反向 |
+| BE | A股跌破200日线分步清单自测（文主任增量 #4） | ma200-breakdown-checklist-astock-2026-09-05 | 〰️ 多数虚惊成立(60%/5天收回)；急速vs缓慢形态分组在A股反向、不落地 |
+| BF | 横截面动量标的池研究（文主任增量 #5，研究先行） | cross-sectional-momentum-pool-2026-09-05 | 〰️ 池内胜率略高但分年不稳定（牛市年占优/弱势年反向）、盈亏比无差——不落地留观察 |
+| BG | 因子实验台扩展：组合回测+L1-L6+估值分位（文主任增量 #6） | factor-lab-extension-2026-09-05 | 👁 低波前30%年化20%超基准5.6pp/动量反向；L1-L6高档后波动单调更大；全部只观察 |
+
+### 9-06 单发（用户直发任务）
+
+| 编号 | 任务 | 执行归档 | 状态 |
+|---|---|---|---|
+| BH | 定投方式对比：频率×要不要浮动×按什么浮动（13 标的九臂） | dca-methods-comparison-2026-09-06 | 〰️ 频率无关选省事的；行业基金宽度浮动 10/10 胜、宽基 0/10 败；美股平投碾压浮动（热暂停版腰斩） |
+| BI | 定投×情绪信号择时（冰点/散户热宽度成分，八臂） | dca-sentiment-timing-2026-09-06 | 〰️ 纯冰点加倍=空心的（26格与平投一分不差，加码没弹药）；配热减半后行业微弱正(+0.3~0.9%)仍远弱于宽度版；宽基/美股平投三次复证 |
+| BK | 定投×时间跨度稳健性（31年/22年/四个十年，12指数） | dca-longwindow-robustness-2026-09-06 | ✅ 三条结论全维持：宽基平投(16窗宽度版仅赢2)、美股平投16/16、频率无关20/20；1995-2005十年定投A股是亏的；科创50五年是物理上限 |
+| BL | 行业指数×定投择时长窗口（10指数+5ETF对照） | dca-industry-longwindow-2026-09-07 | ❌ 推翻第一轮「行业宽度浮动有效」：只剩军工/证券/白酒赢(6/20)，ETF短样本甜头来自2021-2024熊市段；四轮终局=定投择时整体证伪，平投最优 |
+| BM | 系统买点后的执行方式：一次性 vs 分批 vs 定投窗口（A 4368笔+B 552笔） | dca-entry-execution-2026-09-07 | ❌ 8/8臂负增量、8/8更贵：买点后行情平均上行晚买更贵+批次被出场作废三至六成；亏钱单少亏1~2pp不敌赢钱单少赚2~9pp；语义九第三次判负，一次性买入最优 |
+| BN | 估值分段定投×情绪定投（乐咕PE/PB 21年+NAAIM/AAII/VIX/融资/换手） | dca-sentiment-valuation-2026-09-07 | 〰️ 估值分段方向8/8正但幅度+0~0.9%趋零（不亏不值当）；情绪五族20/20全输（融资-7~-10%/NAAIM-7~-8%/VIX-5~-6%/AAII-2%）且分半窗全负——定投系列收官：平投+一次性执行即最优 |
+| BO | 定投标的横评×篮子再平衡（28标的两窗+两篮三臂） | dca-basket-targets-2026-09-07 | ✅ 标的：中证1000/科创50/黄金/纳指两窗靠前、沪深300中游、2021顶起投的白酒消费医药全亏；篮子定投月度/年度再平衡各4/4有增量（九篮子+5.9%回撤浅3.1pp、费仅1~26bp）——低买高卖的正确形态是成分间再平衡 |
+| BP | 组合矩阵×定投总开关（六组合三档再平衡+七标的两开关） | dca-combos-exit-2026-09-07 | 〰️ 跨资产四件套(300+创业板+黄金+纳指)月度再平衡年化15.8%回撤-9.8%性价比全场最佳，再平衡增量随腿间差异递增；定投总开关双双判负(年线0/14宽度2/14连A股也负)——现金流本身就是风控，定投侧三类择时形态全部封箱 |
+| BQ | 科创腿×再平衡方式×纳指核心长持（四组合两窗+五方式+三方案） | dca-kc-rebal-core-2026-09-07 | 〰️ 换科创50年化+1.3pp回撤+3pp(换比加好)；季度再平衡4/4胜月度省2/3交易、阈值版判负年度不稳；纳指长持多赚0.5~2.1pp但回撤-12.6%→-22%(配置旋钮非免费午餐) |
+| BR | 埋伏进场滚动检验（316段12个月campaign×四臂） | dca-ambush-entry-2026-09-07 | 👁 一次性赢中位左尾深、平投左尾保护大成本低1.1pp、平投+阶梯(-8/16/24%加档)成本再低1pp几乎免费、纯阶梯踏空别用；贴年线深回调仅5样本结局分裂——底部感觉无统计背书 |
+| BS | 买点时机状态表（8指数31年6400周观测×5状态维度×4期限） | dca-entry-timing-table-2026-09-07 | 👁 距年线≤-20%深超跌6个月胜率95%中位+12.8%左尾消失=最强时机行；底部区域12个月+4.6%/61%当前创业板在区；热档中位+9.6%但P10-27.9%(等惨=尾部管理非收益最大化)；浅超跌-10~0%是最差磨底坑 |
+| BT | 定投触发门控（四触发×三形态×8指数16格） | dca-trigger-gating-2026-09-07 | ❌ 等触发才投全灭：深超跌门控2/16(连95%胜率的行也输)、底部区域10/16混合、惨档偏零——常开平投本来就在好周自动买入，门控只新增现金闲置；触发状态管预期不停钱，埋伏=额外闲钱阶梯加码 |
+| BU | 条件定投完整交易闭环（四入场×五出场×600余笔平仓） | dca-complete-trades-2026-09-07 | ✅ 出场比入场重要：+30%目标止盈让任意入场中位+25~27%；深乖离+30%出场次优(底部入场+22.6%/69%)；宽度热出场砍牛腿最差；时间离场=随机入场中位-5.2%；埋伏模板=底部/惨档触发→12月定投→止盈或深乖离出场→24月兜底 |
+| BV | 标的适配止盈止损（六出场臂含波动/分位适配与止损侧） | dca-adaptive-exits-2026-09-08 | 〰️ 波动适配止盈8/32不敌统一30%(A股波动挤在20~30%带)；止损首测=买尾部卖中位(bottom入场-20%止损中位27%→3%，deep20入场无损)；菜单：要中位不带止损/要稳带30%-20%/折中波动止损 |
+| BW | 分标的出场规则（跨资产11标的×止盈类vs不止盈类） | dca-per-target-exits-2026-09-08 | 〰️ 分裂轴=蓝筹vs成长：沪深300/深证/红利该止盈(30%档差+12~21pp)，创业板/1000/科创深底入场别设低止盈(不止盈+63%vs止盈+55%，用50%档或等过热)；标普框架内止盈占优纳指平(24月兜底截断，美股不止盈以九轮40年口径为准)；分腿出场菜单落地 |
+| BX | 分腿止盈组合级联合模拟（两篮×四政策，收官） | dca-joint-policy-2026-09-08 | ❌ 三种止盈政策0/12全判负：季度再平衡本来就是更聪明的止盈器(只卖偏离永不停摆)；止盈清仓停摆期错过后续(科创腿32%现金滞留)、部分止盈26次砍领涨腿回撤反深；唯一例外=年线回场0.4%代价买5pp回撤改善——定投终局形态：平投+跨资产篮子+季度再平衡 |
+| BY | 状态表事件级复验（外部评审R2：事件归并+抽签重抽） | dca-deep20-episodes-2026-09-08 | 〰️ 深超跌行扛住最严口径(11次独立深跌10次6月为正、重抽胜率下限89%、剔90年代不变)账本改报区间；底部区域行降级(16事件仅62.5%的12月为正，+4.6%/61%被重叠样本抬高)——底部区域触发仍可用但预期按弱参照讲 |
+| BZ | 终局形态整装验证（外部评审R1：13年长窗+96起点网格+参数邻域） | dca-final-form-assembly-2026-09-08 | ✅ 篮子对纯沪深300优势96/96起点为正(中位+10.8pp)、再平衡增量96/96为正但仅+0.62pp；13年整装12.14%/-23.8%——15.88%/-9.7%被5.8年窗抬高(终点±3月晃4pp)，账本主数字改报中位13.86%[12.23%,15.70%]；季度≈月度("完胜"改判等价+省费)；往300倾斜差3pp=权重敏感 |
+| CA | 行业情绪×定投（情绪页b50机会位/压力位+散户净流入×四入场四出场，半导体/有色ETF） | dca-sector-sentiment-2026-09-08 | 〰️ b50机会位加码终值+21~22%但同钱口径仅+0.2~0.8pp(本金效应+短窗底部触发，不采用)；b50压力位清仓判负扎实(终值-30~-49%)；散户流两方向无证据(加码触发仅9天/清仓终值大负)；XIRR对清仓+现金闲置臂虚高的口径教训——情绪页信号维持叙事定位，不做买卖指令 |
+| — | 核心八 ETF 两年闭环 | etf-eight-twoyear-2026-09-06 | 〰️ 钱全靠趋势回调赚，破底翻在 ETF 上净亏（补登，见 registry） |
+| — | AI 参与决策三档实验 | ai-three-tier-decision-2026-09-06 | ❌ 否决权完败，AI 留信息层（补登，见 registry） |
+
+### 9-03~04 会话四批（Y–BC，交接总表：`session-handoff-manifest-2026-09-04.md`）
+
+> 调度会话四批 25 项，全部预注册+双跑哈希。**注意：本批代号与上方 9-04
+> AU–AY 节存在字母复用（两组会话各编各的），引用一律以文件名为准。**
+> 机器可读判定/分类见 `registry.json`，判定状态已登记。
+
+| 代号 | 报告 | 判定（大白话） |
+|---|---|---|
+| Y | pollution-recheck-moduleB-csi500-2026-09-03 | ✅ 模块B仍成立；中证500 证据不足不入池 |
+| Z | antifragile-event-study-2026-09-03 | ❌ 反脆弱补偿不成立 |
+| AA | master-slave-precheck-2026-09-03 | ❌ 主从依赖不成立（两信号 100% 同步） |
+| AB | multi-confirm-frequency-2026-09-03 | 〰️ 仅 P1 对过线但独立性存疑 |
+| AC | timescale-layering-precheck-2026-09-03 | ❌ 长短期分层不值得设计 |
+| AD | overnight-us-cn-precheck-2026-09-03 | 〰️ 关联存在但主通道是开盘跳空 |
+| AE | staged-entry-precheck-2026-09-03 | ❌ 分批买入证据不足 |
+| AF | p1-increment-test-2026-09-03 | ❌ 语义四实质关闭 |
+| AG | overnight-gate2-increment-2026-09-03 | ❌ 语义七关闭 |
+| AH | csi500-fee-sensitivity-2026-09-03 | 〰️ 费率敏感带内打平，不入池不变 |
+| AI | module-b-robustness-2026-09-03 | ✅ 稳健但压线（前三笔占 69%） |
+| AJ | binary-vs-tiered-vs-dca-2026-09-03 | 〰️ A股二元赢；美股 40 年定投碾压 |
+| AK | extreme-bottom-event-study-2026-09-03 | ✅ A股底部是过程非事件 |
+| AL | tsy10y-high-orthogonality-2026-09-03 | ❌ 不独立（重叠 94%），2027-03 复查 |
+| AM | extreme-bottom-staged-entry-validation-2026-09-03 | ❌ 语义九买入侧关闭 |
+| AN | top-structure-event-study-2026-09-03 | 〰️ 卖出警报偏磨顶、几乎非顶 |
+| AO | module-b-regime-diagnosis-2026-09-03 | 👁 栖息地仅登记（弱证据） |
+| AP | binary-hysteresis-sensitivity-2026-09-03 | ✅ 滞回带修复阈值脆弱性 |
+| AQ | module-b-stock-pool-boundary-2026-09-03 | ✅ 个股复现同型（15 只 +0.726） |
+| AR | system-fragility-xray-2026-09-03 | ✅ 系统体检：阴跌是唯一死穴 |
+| AV | module-b-filter-h1h2-validation-2026-09-04 | ❌ H1/H2 都不启用 |
+| AW | hysteresis-binary-promotion-2026-09-04 | ✅ 滞回二元候选成立，等拍板 |
+| AX | staged-exit-validation-2026-09-04 | ❌ 语义九卖出侧关闭 |
+| AY | breadth-input-comparison-2026-09-04 | ❌ 查重关闭（playbook 已测） |
+| BC | module-b-us-etf-boundary-2026-09-04 | ❌ 模块B不出海（剔 1995 后≈零） |
+
+## 2. 归档按主题（每份文件只归一组，标题即内容摘要）
+
+### 元与跨组
+
+- `../system-architecture-and-decisions-2026-09-04.md` — 系统四轨架构原型 +
+  决策台账 + 研究队列（docs 根，2026-09-04 起的决策状态权威文件）
+- `CROSS-GROUP-SYNTHESIS-2026-09-01.md` — 跨组统一视图（五路归档汇总）
+- `coverage-sync-2026-09-02.md` — 跨机器任务覆盖对账 + stash 26份报告恢复
+- `FINAL-VERDICT-walkforward-2026-08-27.md` — walk-forward 时序终审（第十三轮）
+- `todo-new-composition-semantics-2026-09-02.md` — 新组合语义待办（已并入总纲）
+
+### 宽度择时主线（大盘冷热信号）
+
+- `kuandu-quanzhan-ARCHIVE-2026-09-01.md` — 31轮总决算（冠军三档、两只版、8指数篮子）
+- `breadth-overlay-report-2026-08-27.md` — 宽度极值叠加（用户口径两档制）
+- `stage-b200-report-2026-08-27.md` — stage路由 + B200 牛熊口径纠正
+- `midzone-breadth-timing-2026-09-07.md` — 中间地带宽度择时证伪（16组缓冲带21年全跑输持有；极端位仅配价格确认有效）
+
+### 入场模块与标的池（8-25～8-28 早期探索 + 后续板块/判别器）
+
+- `etf-expansion-log/report-2026-08-25.md` ×2 — 扩池实验（A稳健档被推翻）
+- `experiment-log / final-report-2026-08-25.md` — 8-25 四轮总日志与终报
+- `filters-round4-log/report-2026-08-25.md` ×2 — 第四轮过滤器（量能/筹码/状态机）
+- `shrink-filter-report-2026-08-25.md` — 缩量回调过滤器
+- `bcd-retrial-report-2026-08-26.md` — B/C/D 公平重测
+- `b-adaptation-report-2026-08-26.md` — B 模块全谱参数×标的类型
+- `bform-*-report-2026-08-28.md` ×3 — B 形态探索/动态/终审
+- `portfolio-params-pool-report-2026-08-28.md` — B 形态参数真高原、9只最优池
+- `regime-gate-report-2026-08-27.md` — 宽基"仅横"门禁（干净发现）
+- `rs26-detector / siphon-detector-report-2026-08-27.md` — RS虹吸灯方法论源头
+- `sector-layer-report-2026-08-27.md` — 板块第四层筛选器
+- `sector-rs-ARCHIVE-2026-09-02.md` — 板块级RS加权（任务L）
+- `module-conflict-resonance-ARCHIVE-2026-09-02.md` — 四模块同标的同日互斥（任务N）
+
+### 出场与止损
+
+- `exit-matrix-report-2026-08-31.md` — A/B'/C × 四种出场矩阵
+- `exit-structural-stop-revival-ARCHIVE-2026-09-01.md` — a6_3 结构止损复活（任务G）
+- `exit-three-piece-ARCHIVE-2026-09-02.md` — a6_5 三件套证伪（任务J）
+- `stop-loss-matrix-ARCHIVE-2026-09-01.md` — 止损跨模块统一矩阵（任务I）
+- `time-stop-tail-aware-ARCHIVE-2026-09-02.md` — 时间止损接受右尾（任务M）
+- `knife-timestop-report-2026-08-27.md` — 接刀格时间止损判负
+
+### 仓位与波动机制
+
+- `breadth-position-report-2026-08-27.md` — 宽度→仓位曲线（定投基准对比出处）
+- `position-mapping-revival-ARCHIVE-2026-09-01.md` — 仓位映射复活判负（任务F）
+- `vt-grid-ARCHIVE-2026-09-01.md` — vt 网格（任务H）
+- `vt-signal-driven-sizing-ARCHIVE-2026-09-02.md` — vt 信号驱动单标的仓位（任务K）
+- `b-module-reverse-vt-ARCHIVE-2026-09-02.md` — B 高波反向 vt（任务S）
+- `huanjing-ARCHIVE-2026-09-01.md` — 环境组宽度×RV 总仓位系数
+
+### 组合与资金层
+
+- `portfolio-report / portfolio-split-report-2026-08-27~28.md` — 资金层与分账制
+- `bform-global-report + m5-final-review-report-2026-08-28.md` — M5 跨市场宽指组合全周期
+- `heiti-ARCHIVE-2026-08-31.md` — 合体组（B9+LEI 分账制 224.6万/-9.7%）
+- `combined-certification-report-2026-08-31.md` — 合体认证 6/6
+- `cash-leg / gold-expand-report-2026-08-31.md` — 现金腿与黄金腿增强
+- `lifecycle-report / full-stack-sim-report-2026-08-27.md` — 生命周期与三层串联
+- `lei-ARCHIVE + meta-scan + signal-density` — LEI 个股腿三份
+- `module-e-report-2026-08-27.md` — 模块E 情绪极值择时（手册口径）
+
+### 宏观/情绪/估值确认层（触发路线，基本全线判负）
+
+- `us-treasury-ARCHIVE + us-treasury-CROSSCHECK-2026-09-01.md` — 美债（任务A）
+- `vix-sentiment-ARCHIVE-2026-09-01.md` — VIX/PUT-CALL（任务B）
+- `ashare-macro-ARCHIVE-2026-09-01.md` — A股宏观（任务C）
+- `sentiment-gate-report-2026-08-28.md` — 两融分位闸 + 北向
+- `trd-gate-report-2026-08-31.md` — 股债性价比门首测即证伪
+- `valuation-overlay-ARCHIVE-2026-09-02.md` — 估值确认层（任务T，A股证伪）
+- `us-erp-overlay-ARCHIVE-2026-09-02.md` — 美股ERP（任务U）
+- `orthogonality-check-2026-09-01.md` — 新信号×两腿正交（任务D）
+- `macd-strength-layering-ARCHIVE-2026-09-01.md` — MACD强度分层（任务E）
+- `retail-mania-threshold-2026-09-04.md` — 板块散户热度阈值（进行中：口径/页面已上线，等数据回填出回测）
+
+### 宽基/全池/持仓/数据质量专项（9-02）
+
+- `broad-index-coverage-summary / gap-fill / portfolio-and-signals-2026-09-02.md` — 任务X 阶段一/二/三+四
+- `full-pool-revalidation-ARCHIVE-2026-09-02.md` — 175标的全池复验（任务R复验M+K）
+- `data-quality-jump-audit-2026-09-02.md` — 13处复权断裂审计（修平方法出处）
+- `holdings-correlation-study-2026-09-02.md` — 用户持仓×已验证标的相关性（任务W）
+- `pool-recovery-audit-2026-09-02.md` — 深池环境盘点（任务O）
+- `pollution-recheck-moduleB-csi500-2026-09-03.md` — 债务一+三复核（任务Y）
+- `spx-vs-ndx-ARCHIVE-2026-09-03.md` — 标普替代纳指全量对比（任务P）
+
+## 3. raw/ 数据目录对照
+
+按目录名与归档名对应（个别按任务编号/提交信息推断并标注）；空白 = 未对账，
+使用前以归档报告内的 raw 引用为准。快照类目录（backtest-runs / pool-snapshot）
+是环境保全，不隶属单一实验。
+
+| raw 目录 | 对应归档 |
+|---|---|
+| agent-discussion-plan-prep-2026-09-08 | [03A/04A工程准备](agent-discussion-plan-preparation-2026-09-08.md) |
+| ashare-macro / vix-sentiment / us-treasury-signal(+crosscheck) / A_round2 | 任务A/B/C 归档（A_round2 为任务A二轮，推断） |
+| breadth_overlay / stage_b200 | breadth-overlay / stage-b200 |
+| breadth_position | breadth-position |
+| etf_expansion | etf-expansion 系列 |
+| b_adaptation / B_breakout_matrix（推断） / bcd_retrial | b-adaptation / bcd-retrial |
+| bform 系列（无独立 raw，参数在归档内） | — |
+| exit_matrix / exit_revival_a64 / exit_three_piece | exit-matrix / exit-structural-stop-revival / exit-three-piece |
+| stop_loss_matrix / knife_timestop / time_stop_tail_aware(+full_pool) | stop-loss-matrix / knife-timestop / time-stop-tail-aware（full_pool=任务R复验） |
+| position-mapping-revival / vt-grid / vt_signal_sizing(+full_pool) / b_reverse_vt / huanjing | 仓位机制组各归档（vt full_pool=任务R复验） |
+| portfolio / portfolio_split / cash_leg / gold_expand / combined_cert / heiti / lei / meta_scan / signal_density / lifecycle_combo / full_stack / module_e / ultimate（heiti终极组合，推断） | 组合与资金层组各归档 |
+| regime_gate / rs26_detector / siphon_detector / sector_layer / sector_rs / module-conflict-resonance | 入场模块组各归档 |
+| sentiment / trd_gate / valuation_overlay / us_erp_overlay / orthogonality-check / macd-strength-layering | 触发/确认层组各归档 |
+| gap_fill / holdings_correlation | broad-index-gap-fill / holdings-correlation |
+| ashare_axes / cross_check / etf_breadth / stock_breadth | —（未对账） |
+| backtest-runs-snapshot-2026-08-31 / pool-snapshot-2026-08-25 | 环境保全快照（非单一实验） |
+| pollution_recheck / spx_vs_ndx | pollution-recheck / spx-vs-ndx（任务Y/P，09-03） |
+| agent_AU-binary-hyst-vs-t3 / agent_AV-price-ladder / agent_AW-us-stocks-timing | binary-hysteresis-vs-t3-decision / price-ladder-execution / us-stocks-timing-boundary（09-04） |
+| agent_AX-walkforward-switch / agent_AY-astock-panel | switch-walkforward-and-pain / astock-panel-timing（09-04 晚） |
+
+## 4. 悬案与未执行清单
+
+- ~~P（标普替代纳指）~~ **已执行（09-03，spx-vs-ndx-ARCHIVE）** — 两只版换腿：
+  年化 15.9%→14.0%（-1.9pp）、回撤 -25.6%→-24.0%；防守版纳指档保险性价比更高
+  （13.8 vs 8.7）。附勘误：原防守版归档"纳指5档"标签与代码不符（实为3档）。
+- **数据断裂正式修复未立项** — `data-quality-jump-audit` 第7节，属生产数据
+  操作，等用户拍板（总纲债务二）。新增两条待立项线索：①HEAD 引擎代码断链
+  （engine.py 引用已丢失模块，复现靠 git 悬空对象重建，gc 后会失效）；
+  ②512690 深池 2020-02-03 单日 +25.1% 超物理限制，不在审计 13 清单内。
+- **债务一/三已复核（09-03，pollution-recheck 归档）** — 模块B宽基正收益仍
+  成立（三跑分解），且审计 §5"b-adaptation 7宽基受污染"系跨数据源误推
+  （该实验用深池数据、深池无跳变；勘误登记于此，不改原归档）；中证500 重审
+  落"证据不足"中间态（翻案三条件仅过一条，判负触发条件也未命中）。
+- **总纲债务四（J–N/P–S/U–V 去向不明）已基本自解** — 23ca826 补齐了任务书
+  原文和 J/K/L/M/T/U 归档，实际残留只有上面两条。
+- timing-sweep 时代引用的 `vt-signal / time-stop-tail` 两份后续归档，即
+  vt-signal-driven-sizing 与 time-stop-tail-aware（coverage-sync 疑点2 的答案）。
+
+## 5. 相邻目录
+
+- `docs/timing-sweep/` — 8-27 时代 31 轮择时实验档案（`execution_playbook_20260827.md`
+  被大量引用，其余为各轮 txt/csv）
+- `docs/reports/` — 说明：回测 HTML 报告已迁至 `web/public/reports/`
+- `docs/` 根的 `handoff-* / plan-*` 为应用线（data-sync）历史任务书与方案，
+  与本目录研究线互不隶属

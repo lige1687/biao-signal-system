@@ -1,0 +1,197 @@
+{
+  "status": "passed",
+  "exact_files": [
+    "A20E/daily.csv",
+    "A20E/trades.csv",
+    "A20E/events.json",
+    "A20E/roundtrips.json",
+    "A20J/daily.csv",
+    "A20J/trades.csv",
+    "A20J/events.json",
+    "A20J/roundtrips.json",
+    "A60E/daily.csv",
+    "A60E/trades.csv",
+    "A60E/events.json",
+    "A60E/roundtrips.json",
+    "A60J/daily.csv",
+    "A60J/trades.csv",
+    "A60J/events.json",
+    "A60J/roundtrips.json",
+    "A120E/daily.csv",
+    "A120E/trades.csv",
+    "A120E/events.json",
+    "A120E/roundtrips.json",
+    "A120J/daily.csv",
+    "A120J/trades.csv",
+    "A120J/events.json",
+    "A120J/roundtrips.json",
+    "C1/daily.csv",
+    "C1/trades.csv",
+    "C1/events.json",
+    "C1/roundtrips.json",
+    "C2/daily.csv",
+    "C2/trades.csv",
+    "C2/events.json",
+    "C2/roundtrips.json",
+    "C3/daily.csv",
+    "C3/trades.csv",
+    "C3/events.json",
+    "C3/roundtrips.json",
+    "D/daily.csv",
+    "D/trades.csv",
+    "D/events.json",
+    "D/roundtrips.json",
+    "REF_BREAKOUT/daily.csv",
+    "REF_BREAKOUT/trades.csv",
+    "REF_BREAKOUT/events.json",
+    "REF_BREAKOUT/roundtrips.json",
+    "REF_ROAD/daily.csv",
+    "REF_ROAD/trades.csv",
+    "REF_ROAD/events.json",
+    "REF_ROAD/roundtrips.json",
+    "annual-contributions.csv",
+    "product-contributions.csv",
+    "a-first-touch-contributions.csv"
+  ],
+  "exact_file_count": 51,
+  "financial_results_unchanged": true,
+  "changed_order_records": 799,
+  "changed_rejection_paths": [
+    {
+      "config_id": "A20E",
+      "order_id": "A20E-O124",
+      "candidate_id": "A20E:first_ma_pullback:64e8c7322fdea81bccfdf858",
+      "changes": [
+        {
+          "path": "/attempts",
+          "before": [],
+          "after": [
+            {
+              "date": "2023-12-11",
+              "reason": "nonpositive_open_risk",
+              "open_price": 4.547,
+              "open_rr": null,
+              "risk_budget": 1184.817,
+              "previous_product_equity": 118481.7
+            }
+          ]
+        },
+        {
+          "path": "/candidate_metadata/signal_accepted",
+          "before": false,
+          "after": true
+        },
+        {
+          "path": "/candidate_metadata/signal_reject_reason",
+          "before": "signal_reward_risk_below_3",
+          "after": null
+        },
+        {
+          "path": "/reason",
+          "before": "signal_reward_risk_below_3",
+          "after": "nonpositive_open_risk"
+        },
+        {
+          "path": "/resolved_date",
+          "before": "2023-12-08",
+          "after": "2023-12-11"
+        },
+        {
+          "path": "/signal_accepted",
+          "before": false,
+          "after": true
+        },
+        {
+          "path": "/signal_reject_reason",
+          "before": "signal_reward_risk_below_3",
+          "after": null
+        }
+      ]
+    },
+    {
+      "config_id": "A20J",
+      "order_id": "A20J-O119",
+      "candidate_id": "A20J:first_ma_pullback:5dfc14dc6e284f6f8b6b9c36",
+      "changes": [
+        {
+          "path": "/attempts",
+          "before": [],
+          "after": [
+            {
+              "date": "2023-12-11",
+              "reason": "nonpositive_open_risk",
+              "open_price": 4.547,
+              "open_rr": null,
+              "risk_budget": 1184.817,
+              "previous_product_equity": 118481.7
+            }
+          ]
+        },
+        {
+          "path": "/candidate_metadata/signal_accepted",
+          "before": false,
+          "after": true
+        },
+        {
+          "path": "/candidate_metadata/signal_reject_reason",
+          "before": "signal_reward_risk_below_3",
+          "after": null
+        },
+        {
+          "path": "/reason",
+          "before": "signal_reward_risk_below_3",
+          "after": "nonpositive_open_risk"
+        },
+        {
+          "path": "/resolved_date",
+          "before": "2023-12-08",
+          "after": "2023-12-11"
+        },
+        {
+          "path": "/signal_accepted",
+          "before": false,
+          "after": true
+        },
+        {
+          "path": "/signal_reject_reason",
+          "before": "signal_reward_risk_below_3",
+          "after": null
+        }
+      ]
+    }
+  ],
+  "summary_changes": [
+    {
+      "path": "/0/rejection_reason_counts/nonpositive_open_risk",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "path": "/0/rejection_reason_counts/signal_reward_risk_below_3",
+      "before": 136,
+      "after": 135
+    },
+    {
+      "path": "/0/signal_accepted",
+      "before": 35,
+      "after": 36
+    },
+    {
+      "path": "/1/rejection_reason_counts/nonpositive_open_risk",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "path": "/1/rejection_reason_counts/signal_reward_risk_below_3",
+      "before": 133,
+      "after": 132
+    },
+    {
+      "path": "/1/signal_accepted",
+      "before": 32,
+      "after": 33
+    }
+  ],
+  "original_completion_sha256": "d7050662a811d1ef89d274f6a7c2f0653ae9cb37de7af1f55709b95f7c573829",
+  "corrected_completion_sha256": "8bf7d23d6f0120b159eea35d628e8c62f81b907dcd95b92e0b496d94ae0ff38b"
+}

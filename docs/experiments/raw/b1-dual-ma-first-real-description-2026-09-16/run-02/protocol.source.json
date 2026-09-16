@@ -1,0 +1,144 @@
+{
+ "spec_status": "frozen",
+ "spec_version": "1.0.1",
+ "frozen_at": "2026-09-16T10:44:13.036554+08:00",
+ "family": "B1-dual-ma-unit",
+ "use": "post_hoc_historical_description",
+ "object_ref": "candidate:lei.dual_ma.bull_state@draft-1",
+ "symbol": "510300",
+ "source_symbol_mapping": {
+  "sh510300": "510300"
+ },
+ "evaluation_window": {
+  "start": "2019-10-08",
+  "end": "2025-12-31"
+ },
+ "lookback": 20,
+ "e_offset": 1,
+ "x_offset": 22,
+ "ema_seed_sessions": 20,
+ "ema_alpha": "2/21",
+ "warmup_sessions": 20,
+ "label_maturity_cutoff": "2026-02-03T15:00:00+08:00",
+ "session_close": "15:00",
+ "timezone": "Asia/Shanghai",
+ "sparse_anchor_session": "2019-10-08",
+ "sparse_step": 23,
+ "target_basis": "vendor_adjusted_price_change",
+ "target_main": "P_vendor(t+22)/P_vendor(t+1) - 1",
+ "target_aux": "min(0, min(P_vendor(s)/P_vendor(t+1) - 1)), s in t+1..t+22",
+ "coverage": {
+  "start": "2019-09-02",
+  "end": "2026-02-03"
+ },
+ "data_mode": "real",
+ "historical_reconstruction_only": true,
+ "historical_available_at": null,
+ "adjustment_anchor": "unknown（精确复权锚点未证）",
+ "price_basis": "vendor_qfq",
+ "extracted_field": "qfqday",
+ "currency": "CNY",
+ "candidate_card": {
+  "path": "docs/experiments/raw/factor-research-workbench-v1-2026-09-14/candidate-card-dual-ma-bull-state-draft-1.md",
+  "sha256": "907d17631e27011423bebbf068bcb2bbc6e1b44a184618597cf54f868e066dc1"
+ },
+ "task_book": {
+  "path": "docs/superpowers/plans/2026-09-16-b1-dual-ma-first-real-description.md",
+  "sha256": "0afb4ae14920b4c04207458763df9df02ae05bfe43e693a9289c604214770e89"
+ },
+ "standards": [
+  {
+   "path": "docs/research/experiment-backtest-principles.md",
+   "version": "1.1",
+   "sha256": "ac5a676c0635441b66f656c8e1249b69bade36365cc9065ed6341a610b6a53c6"
+  },
+  {
+   "path": "docs/research/definition-standard.md",
+   "version": "1.1.0",
+   "sha256": "3406feaea2bbb8d23a91ddc8fa0c85e62ff86437bdf443d459f2c97b0e99cd5c"
+  },
+  {
+   "path": "docs/research/ai-execution-contract.md",
+   "version": "1.0.1",
+   "sha256": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962"
+  },
+  {
+   "path": "docs/research/experiment-report-template.md",
+   "version": "1.1.0",
+   "sha256": "cae2853f81841de6f424c6bda10e6708dd35574ebb8a325088fe507c5755d54e"
+  },
+  {
+   "path": "docs/research/definitions.v1.json",
+   "version": "容器1.2.0（只读）",
+   "sha256": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05"
+  }
+ ],
+ "input_identity": {
+  "package": "docs/experiments/raw/510300-offline-reuse-2026-09-15/run-02",
+  "prices_csv_sha256": "bc8582af3ac7b4c2f00a5b51d81754606179347cc3811c911d7579242cb56703",
+  "manifest_sha256": "8d39a83eec833c13f14ee78ad36899b6ae49f32f64b024c33ee75474bc3a6ae7",
+  "calendar_sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+  "fetch_manifest_sha256": "5ba8a51d93dcca331204b4df71aa47f5b15a76dedee8ee3ab951689e0979f0c4"
+ },
+ "code_identity": {
+  "src/lei_signal/research/factor_unit/__init__.py": "72c20484fbeb7b11a1a556ef20a09c58883dd97b4088dc5bc0a83409bdc1eeec",
+  "src/lei_signal/research/factor_unit/description_core.py": "a7875dd3fbede43aea4db5f30c94786e8a3ff027a6594f9d5284c4b2eedb7e3d",
+  "src/lei_signal/research/factor_unit/state_description.py": "2f0359b5435d08b1f1c3773ee4b185a334ce45ba1c537a3091ba6e93765ecc76",
+  "src/lei_signal/research/factor_unit/b1_contract.py": "c0481125a82d27171d41cbc4e9aa7bff77562407dace883a288ee86e0d147651",
+  "src/lei_signal/research/factor_unit/b1_description.py": "0030e00f57b173ee15862490d008d61e6c8984a3ed87c2f2afef4da6a7060358",
+  "scripts/run_b1_dual_ma_description.py": "a4c0b92acf108ac824851b542e97868feaa2ca57a554bd793af7f5bac800249c",
+  "src/lei_signal/research/factor_unit/close_state.py": "b0efb324a2ef65d1f415c19be4f50b96ebf25f140da0c31b2b759d68ef04db10",
+  "src/lei_signal/research/trading_calendar.py": "4651fa7d0e1e20aeaf3b40d9446f3ea76ec0eac037bbe965c018c3e5ccb6389e",
+  "src/lei_signal/features/indicators.py": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+  "src/lei_signal/rules/dual_ma.py": "5c41da87036e0e318bacab663aa5509d73f99f301f805a76559b016b99aa3f7c",
+  "src/lei_signal/rules/lei_color.py": "ae6f3a2547cc37dd1ebdfea1bea206f932defdd8cd90d4061630914c0fc9d4d7",
+  "src/lei_signal/domain/rules_config.py": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031",
+  "src/lei_signal/domain/types.py": "88ea22c7100068d8be9e50a342e024fb18aadc7139409aeae71f3bc1719dffd9",
+  "src/lei_signal/domain/canonical.py": "3e406f77dfa3f03c7ff4d2fe1989dd117a47e448d137d5ccce76d61864ee06a9",
+  "src/lei_signal/events/log.py": "b71c4c09405ee67f4d16a1c0d22dbd098ffb5078433184a9e7eb39a006e961fa",
+  "configs/rules.v2.yaml": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5"
+ },
+ "authorization": {
+  "user_words": "可以的，开写计划（2026-09-16，授权编制任务书）；用户将任务书交给执行者并要求执行后启动实现与预算内运行",
+  "task_book_sha256": "0afb4ae14920b4c04207458763df9df02ae05bfe43e693a9289c604214770e89",
+  "boundary": "离线、单产品、固定目标的历史描述消费者开发和首次正式运行；不含联网、参数寻优、扩池、生产、OKR"
+ },
+ "research_family": "B1-dual-ma-unit",
+ "attempt_history": [
+  "2026-09-15 四轮：B0集中修复→四项限定修复→510300离线输入包→主控S1-S4收尾；真实资格0次运行；本次为首次真实历史描述"
+ ],
+ "run_budget": {
+  "real_formal_runs": "1次；可定位工程错误后新编号修正再1次；结果不好不得重跑",
+  "old_regression": "≤2次",
+  "synthetic_cli_debug": "≤3批",
+  "restore_verify": "1次（只核字节与从observations重汇总，不重算状态/目标）",
+  "network": 0
+ },
+ "tolerance": {
+  "float": 1e-12,
+  "counts_keys_nulls": "严格一致"
+ },
+ "output_fields": [
+  "protocol.source.json",
+  "input-package/",
+  "source-snapshot/",
+  "environment.json",
+  "states.csv",
+  "observations.csv",
+  "summary.json",
+  "quality.json",
+  "report.md",
+  "manifest.json"
+ ],
+ "no_claims": [
+  "strategy_return",
+  "annualization",
+  "significance",
+  "IC",
+  "alpha",
+  "production_advice",
+  "factor_effective",
+  "total_return_wealth",
+  "point_in_time_verified"
+ ]
+}

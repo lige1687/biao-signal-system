@@ -1,0 +1,82 @@
+{
+  "title": "围绕标的讨论并形成有依据的完整交易计划",
+  "purpose": "本会话目标：围绕标的查询可靠依据、必要时补测、讨论资金与进出并形成完整计划。此条只覆盖标题所列工程工作，不覆盖05—08研究或生产交易。",
+  "parent_id": null,
+  "priority": "high",
+  "owner": "Codex总控／GLM工程",
+  "target_date": null,
+  "next_action": "结束C1—C3整轮功能返修。合入准备时应用单行保存冲突提示补丁、增量登记补修报告，并核对运行目录差异；无自动部署/真实交易授权。",
+  "evidence": "2026-09-13 计划流程任务执行完成（开发副本 lei-agent-ux-20260913 提交 4640a5db，分支 plan-review-flow-20260913，待主控复核）：P1 规则集版本改由服务端权威 /plans/ruleset-version 提供（移除前端写死1.3.0）；P2 会话保存的草稿可经「补齐并核对」打开核对抽屉（同一 plan_id 编辑/确认），历史恢复读取 plan_draft 绑定显示计划当前状态，不再要求重新保存；P3 计划预填只取入场规则可映射 A/B/C/D 且模块一致的候选（早期转强信号转待补）。六组验收 13/13 通过（含真实页面正例：保存→补齐→确认200→armed；恢复不重存、库内计划/成交数不增、迟到响应不串扰），证据 docs/experiments/raw/agent-plan-review-and-confirmation-2026-09-13/。合成数据+本地假模型；未合入运行目录。\n2026-09-13 主控复核1e568e12：docs/experiments/agent-plan-flow-controller-review-2026-09-13.md；40回归、3前端脚本及构建通过，独立确认C1—C3，主流程保留。未合入。\n2026-09-14 主控复核b30ee97e：docs/experiments/agent-plan-flow-controller-recheck-2026-09-14.md；C1—C3固定功能项通过，前端3脚本及构建通过，确认保护临时库复核通过；单行提示补丁已给未应用，未合入。",
+  "milestones": [],
+  "links": [],
+  "kind": "directional",
+  "id": "okr-b1ce64d26449",
+  "version": 5,
+  "status": "planned",
+  "created_at": "2026-09-08T02:32:55+00:00",
+  "updated_at": "2026-09-13T16:23:23+00:00",
+  "authorization": {
+    "granted": false,
+    "scope": "",
+    "at": null
+  },
+  "history": [
+    {
+      "at": "2026-09-08T02:32:55+00:00",
+      "action": "created",
+      "note": "目标已登记，登记不会启动执行。"
+    },
+    {
+      "at": "2026-09-13T12:17:17+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "next_action": "按本会话具体授权推进并记录证据；完成后交用户验收。",
+        "evidence": ""
+      },
+      "after": {
+        "next_action": "用户转交计划流程任务书后，仅推进版本读取、同计划补齐核对与历史恢复、合法入场候选适配；未启动开发或合入，不扩研究与交易。",
+        "evidence": "2026-09-13 计划流程缺口与接续方案：docs/experiments/agent-user-experience-controller-closeout-2026-09-13.md；任务书 docs/prompts/agent-plan-review-and-confirmation-2026-09-13.md。仅完成复核与方案；旧版本表单409、早期信号草稿422、合法合成对照200。页面完整流程尚未通过。"
+      }
+    },
+    {
+      "at": "2026-09-13T15:09:15+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "next_action": "用户转交计划流程任务书后，仅推进版本读取、同计划补齐核对与历史恢复、合法入场候选适配；未启动开发或合入，不扩研究与交易。",
+        "evidence": "2026-09-13 计划流程缺口与接续方案：docs/experiments/agent-user-experience-controller-closeout-2026-09-13.md；任务书 docs/prompts/agent-plan-review-and-confirmation-2026-09-13.md。仅完成复核与方案；旧版本表单409、早期信号草稿422、合法合成对照200。页面完整流程尚未通过。"
+      },
+      "after": {
+        "next_action": "主控按任务书六组验收复核；通过后定向合入运行目录。真实模型质量、数值容差旧问题、因子研究保持后续事项。",
+        "evidence": "2026-09-13 计划流程任务执行完成（开发副本 lei-agent-ux-20260913 提交 4640a5db，分支 plan-review-flow-20260913，待主控复核）：P1 规则集版本改由服务端权威 /plans/ruleset-version 提供（移除前端写死1.3.0）；P2 会话保存的草稿可经「补齐并核对」打开核对抽屉（同一 plan_id 编辑/确认），历史恢复读取 plan_draft 绑定显示计划当前状态，不再要求重新保存；P3 计划预填只取入场规则可映射 A/B/C/D 且模块一致的候选（早期转强信号转待补）。六组验收 13/13 通过（含真实页面正例：保存→补齐→确认200→armed；恢复不重存、库内计划/成交数不增、迟到响应不串扰），证据 docs/experiments/raw/agent-plan-review-and-confirmation-2026-09-13/。合成数据+本地假模型；未合入运行目录。"
+      }
+    },
+    {
+      "at": "2026-09-13T15:20:22+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "next_action": "主控按任务书六组验收复核；通过后定向合入运行目录。真实模型质量、数值容差旧问题、因子研究保持后续事项。",
+        "evidence": "2026-09-13 计划流程任务执行完成（开发副本 lei-agent-ux-20260913 提交 4640a5db，分支 plan-review-flow-20260913，待主控复核）：P1 规则集版本改由服务端权威 /plans/ruleset-version 提供（移除前端写死1.3.0）；P2 会话保存的草稿可经「补齐并核对」打开核对抽屉（同一 plan_id 编辑/确认），历史恢复读取 plan_draft 绑定显示计划当前状态，不再要求重新保存；P3 计划预填只取入场规则可映射 A/B/C/D 且模块一致的候选（早期转强信号转待补）。六组验收 13/13 通过（含真实页面正例：保存→补齐→确认200→armed；恢复不重存、库内计划/成交数不增、迟到响应不串扰），证据 docs/experiments/raw/agent-plan-review-and-confirmation-2026-09-13/。合成数据+本地假模型；未合入运行目录。"
+      },
+      "after": {
+        "next_action": "执行者按主控报告固定C1—C3补持仓版本拦截、首次保存请求重试、版本冲突指引，并补原定draft历史/控制台打开动作；不扩大策略或部署。",
+        "evidence": "2026-09-13 计划流程任务执行完成（开发副本 lei-agent-ux-20260913 提交 4640a5db，分支 plan-review-flow-20260913，待主控复核）：P1 规则集版本改由服务端权威 /plans/ruleset-version 提供（移除前端写死1.3.0）；P2 会话保存的草稿可经「补齐并核对」打开核对抽屉（同一 plan_id 编辑/确认），历史恢复读取 plan_draft 绑定显示计划当前状态，不再要求重新保存；P3 计划预填只取入场规则可映射 A/B/C/D 且模块一致的候选（早期转强信号转待补）。六组验收 13/13 通过（含真实页面正例：保存→补齐→确认200→armed；恢复不重存、库内计划/成交数不增、迟到响应不串扰），证据 docs/experiments/raw/agent-plan-review-and-confirmation-2026-09-13/。合成数据+本地假模型；未合入运行目录。\n2026-09-13 主控复核1e568e12：docs/experiments/agent-plan-flow-controller-review-2026-09-13.md；40回归、3前端脚本及构建通过，独立确认C1—C3，主流程保留。未合入。"
+      }
+    },
+    {
+      "at": "2026-09-13T16:23:23+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "next_action": "执行者按主控报告固定C1—C3补持仓版本拦截、首次保存请求重试、版本冲突指引，并补原定draft历史/控制台打开动作；不扩大策略或部署。",
+        "evidence": "2026-09-13 计划流程任务执行完成（开发副本 lei-agent-ux-20260913 提交 4640a5db，分支 plan-review-flow-20260913，待主控复核）：P1 规则集版本改由服务端权威 /plans/ruleset-version 提供（移除前端写死1.3.0）；P2 会话保存的草稿可经「补齐并核对」打开核对抽屉（同一 plan_id 编辑/确认），历史恢复读取 plan_draft 绑定显示计划当前状态，不再要求重新保存；P3 计划预填只取入场规则可映射 A/B/C/D 且模块一致的候选（早期转强信号转待补）。六组验收 13/13 通过（含真实页面正例：保存→补齐→确认200→armed；恢复不重存、库内计划/成交数不增、迟到响应不串扰），证据 docs/experiments/raw/agent-plan-review-and-confirmation-2026-09-13/。合成数据+本地假模型；未合入运行目录。\n2026-09-13 主控复核1e568e12：docs/experiments/agent-plan-flow-controller-review-2026-09-13.md；40回归、3前端脚本及构建通过，独立确认C1—C3，主流程保留。未合入。"
+      },
+      "after": {
+        "next_action": "结束C1—C3整轮功能返修。合入准备时应用单行保存冲突提示补丁、增量登记补修报告，并核对运行目录差异；无自动部署/真实交易授权。",
+        "evidence": "2026-09-13 计划流程任务执行完成（开发副本 lei-agent-ux-20260913 提交 4640a5db，分支 plan-review-flow-20260913，待主控复核）：P1 规则集版本改由服务端权威 /plans/ruleset-version 提供（移除前端写死1.3.0）；P2 会话保存的草稿可经「补齐并核对」打开核对抽屉（同一 plan_id 编辑/确认），历史恢复读取 plan_draft 绑定显示计划当前状态，不再要求重新保存；P3 计划预填只取入场规则可映射 A/B/C/D 且模块一致的候选（早期转强信号转待补）。六组验收 13/13 通过（含真实页面正例：保存→补齐→确认200→armed；恢复不重存、库内计划/成交数不增、迟到响应不串扰），证据 docs/experiments/raw/agent-plan-review-and-confirmation-2026-09-13/。合成数据+本地假模型；未合入运行目录。\n2026-09-13 主控复核1e568e12：docs/experiments/agent-plan-flow-controller-review-2026-09-13.md；40回归、3前端脚本及构建通过，独立确认C1—C3，主流程保留。未合入。\n2026-09-14 主控复核b30ee97e：docs/experiments/agent-plan-flow-controller-recheck-2026-09-14.md；C1—C3固定功能项通过，前端3脚本及构建通过，确认保护临时库复核通过；单行提示补丁已给未应用，未合入。"
+      }
+    }
+  ]
+}
