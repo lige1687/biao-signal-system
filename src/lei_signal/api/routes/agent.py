@@ -294,6 +294,13 @@ def _symbol_candidates_from_message(message: str) -> list[str]:
             info = resolve_symbol(tok)
         except ValueError:
             continue
+        # 收口一（二轮复验 2026-09-17）：纯字母 token 同时是技术指标词时，
+        # 指标/方法语境不算指名该证券——「ATR止损/ATR距离/ATR缓冲」是波动
+        # 指标用法，不能因此把对象从当前讨论截走；「ATR 这只股票」这类明确
+        # 证券问法仍正常解析（不全局禁用代码）。
+        if tok in _INDICATOR_WORD_SYMBOLS and \
+                _INDICATOR_WORD_SYMBOLS[tok].search(message or ""):
+            continue
         if info.symbol not in valid:
             valid.append(info.symbol)
     return valid
@@ -391,6 +398,14 @@ _WATCH_NAME_CN: dict[str, str] = {
 }
 
 
+#: 同名证券代码也是技术指标词的守卫（收口一）：词 → 指标/方法语境模式。
+_INDICATOR_WORD_SYMBOLS: dict[str, re.Pattern[str]] = {
+    "ATR": re.compile(r"ATR.{0,8}(止损|止盈|缓冲|距离|指标|通道|倍数|退出|真实波幅)|"
+                      r"(止损|止盈|缓冲|距离|指标|通道|倍数|退出|真实波幅).{0,8}ATR",
+                      re.IGNORECASE),
+}
+
+
 def _resolve_symbol_by_catalog(message: str) -> str | None:
     """目录搜索层：自选没命中时，按「目录名完整出现在话里」+ 口语别名解析。
 
@@ -436,6 +451,13 @@ def _resolve_symbol_by_catalog(message: str) -> str | None:
     best: tuple[int, str] | None = None  # (名称更长=更具体, symbol)
     for symbol, name in entries:
         if name and name in message and (best is None or len(name) > best[0]):
+            # 收口一（二轮复验 2026-09-17）：同名代码同时是技术指标词时，
+            # 指标/方法语境不算指名该证券——「ATR止损/ATR距离/ATR缓冲」是
+            # 波动指标用法，不该把对象截走；「ATR 这只股票/看看 ATR」这类
+            # 明确证券问法仍按证券身份解析（不全局禁用代码）。
+            if name in _INDICATOR_WORD_SYMBOLS and \
+                    _INDICATOR_WORD_SYMBOLS[name].search(message):
+                continue
             best = (len(name), symbol)
     return best[1] if best else None
 
@@ -1079,40 +1101,48 @@ def _sector_product_relation_reply(ctx_payload: dict, message: str) -> str | Non
 
 
 def _user_background(history_rows: list, symbol: str | None) -> dict:
-    """同会话、同对象内用户**自己声明过**的事实背景（C3，主控复验 2026-09-16）。
+    """同会话、同对象内用户**自己声明过**的事实背景（C3 + 收口二精确归属）。
 
-    只收集绑定到当前对象的轮次（用户消息 → 其后 assistant 的 resolved_symbol
-    一致才算）；明确撤销（没持有/已卖出/没预算）即时清除；沉默不影响。
-    这是**讨论背景**：不是成交记录、不是写库授权、不是新的交易许可；
-    切对象不串用（绑定对象不同的声明不进背景）。
+    归属用现成的精确绑定：用户消息的 ``message_id`` = assistant 回答的
+    ``question_id``。只收集「绑定对象 == 当前 symbol」的声明；
+    **无精确归属（无 message_id / 尚无绑定回答）的旧消息标未知、不可继承，
+    不得跨过下一条 user 去猜归属**；中断后重试/同一问题的多个回答共享同一
+    question_id，天然按同一问题处理；symbol 未知（全局）不收集任何背景。
+    明确撤销（没持有/已卖出/没预算）即时清除；沉默不影响。
+    这是**讨论背景**：不是成交记录、不是写库授权、不是新的交易许可。
     返回 {holding, budget, purpose, stated}；没有任何已知事实时返回 {}。
     """
     from lei_signal.copilot import resolve as resolve_mod  # noqa: PLC0415
 
-    if not history_rows:
+    if not history_rows or not symbol:
         return {}
-    bg: dict = {"holding": False, "budget": None, "purpose": None}
-    stated: list[str] = []
-
-    def _assistant_symbol(row) -> str | None:  # noqa: ANN001
+    # 问题号 → 该问题回答的绑定对象（多回答/重试同号，后者覆盖一致即可）
+    bound_by_qid: dict[int, str] = {}
+    for row in history_rows:
+        if row.role != "assistant":
+            continue
+        qid = getattr(row, "question_id", None)
+        if not qid:
+            continue
         try:
             meta = json.loads(row.meta_json or "{}")
         except (TypeError, ValueError):
-            return None
-        s = meta.get("resolved_symbol")
-        return s if isinstance(s, str) and s else None
-
-    n = len(history_rows)
-    for i, row in enumerate(history_rows):
+            continue
+        sym = meta.get("resolved_symbol")
+        if isinstance(sym, str) and sym:
+            bound_by_qid[int(qid)] = sym
+    bg: dict = {"holding": False, "budget": None, "purpose": None}
+    stated: list[str] = []
+    for row in history_rows:
         if row.role != "user":
             continue
-        # 该用户声明归属的对象 = 其后最近一条 assistant 的绑定对象
-        bound = None
-        for j in range(i + 1, n):
-            if history_rows[j].role == "assistant":
-                bound = _assistant_symbol(history_rows[j])
-                break
-        if bound is None or (symbol and bound != symbol):
+        mid = getattr(row, "message_id", None)
+        if not mid:
+            continue  # 无身份：不可继承
+        bound = bound_by_qid.get(int(mid))
+        if bound is None:
+            continue  # 无精确归属（旧消息/尚无绑定回答）：标未知，不猜
+        if bound != symbol:
             continue  # 别的对象的声明不串用
         text = row.content or ""
         correction = resolve_mod.detect_fact_correction(text)
@@ -1121,17 +1151,18 @@ def _user_background(history_rows: list, symbol: str | None) -> dict:
         elif resolve_mod.detect_stance(text) == "holding":
             bg["holding"] = True
             stated.append("持有")
+        # 先清后立：同一条消息「不是一万，是五千」= 清除旧值 + 新值生效，
+        # 顺序一致、不与背景矛盾（收口二）。
         if correction["budget_cleared"]:
             bg["budget"] = None
             bg["purpose"] = None
-        else:
-            parsed = resolve_mod.parse_request(text)
-            if parsed.get("budget"):
-                bg["budget"] = parsed["budget"]
-                stated.append("预算")
-            if parsed.get("purpose") not in (None, "unknown"):
-                bg["purpose"] = parsed["purpose"]
-                stated.append("用途")
+        parsed = resolve_mod.parse_request(text)
+        if parsed.get("budget"):
+            bg["budget"] = parsed["budget"]
+            stated.append("预算")
+        if parsed.get("purpose") not in (None, "unknown"):
+            bg["purpose"] = parsed["purpose"]
+            stated.append("用途")
     out = {k: v for k, v in bg.items() if v}
     if not out:
         return {}
@@ -1346,13 +1377,14 @@ def _degraded_reply(symbol: str, ctx_payload: dict) -> str:
         if isinstance(known_amt, (int, float)):
             lines.append(
                 f"你之前说过可投入的资金是 {known_amt:g} 元（这是讨论背景，"
-                "不是成交记录）；成本价你没给，我不编。具体的退出位以你自己"
-                "确认过的计划为准。这里没有记录任何成交。")
+                "不是成交记录）；成本信息这段系统直出未核实（系统目前没有"
+                "成本提取能力），不编造。具体的退出位以你自己确认过的计划为准。"
+                "这里没有记录任何成交。")
         else:
             lines.append(
-                "你没有给成本价和资金信息，这段讨论里也没有你的成交信息——"
-                "我不编这些；具体的退出位以你自己确认过的计划为准。"
-                "这里没有记录任何成交。")
+                "成本与资金信息这段系统直出未核实（系统目前没有成本提取能力），"
+                "不编造；这段讨论里也没有你的成交信息。具体的退出位以你自己"
+                "确认过的计划为准。这里没有记录任何成交。")
     elif q_topic == "money":
         budget = ctx_payload.get("user_budget") or {}
         amt = budget.get("amount")
@@ -2355,6 +2387,9 @@ def _prepare_discussion(
         stance = resolve_mod.detect_stance(body.message)
         if stance is None and bg.get("holding") and not correction["holding_cleared"]:
             stance = "holding"
+        # 收口二一致性：本条明确给出的新值最优先（「不是一万，是五千」新值
+        # 覆盖同条里的撤销），本条只撤销没给新值时背景才失效——新值与清除
+        # 顺序一致，user_budget/user_background 不矛盾。
         budget = parsed.get("budget") or (
             None if correction["budget_cleared"] else bg.get("budget"))
         purpose = parsed.get("purpose")
@@ -2364,11 +2399,17 @@ def _prepare_discussion(
             ctx_payload["user_budget"] = budget
         if purpose not in (None, "unknown"):
             ctx_payload["user_purpose"] = purpose
-        if bg and ctx_payload.get("context_kind") != "sector":
+        bg_holding = bool(bg.get("holding")) and not correction["holding_cleared"]
+        bg_budget = parsed.get("budget") or (
+            None if correction["budget_cleared"] else bg.get("budget"))
+        bg_purpose = None if correction["budget_cleared"] else (
+            purpose if purpose not in (None, "unknown") else None)
+        if (bg_holding or bg_budget or bg_purpose) and \
+                ctx_payload.get("context_kind") != "sector":
             ctx_payload["user_background"] = {
-                "holding": bool(bg.get("holding")) and not correction["holding_cleared"],
-                "budget": bg.get("budget") if not correction["budget_cleared"] else None,
-                "purpose": bg.get("purpose") if not correction["budget_cleared"] else None,
+                "holding": bg_holding,
+                "budget": bg_budget,
+                "purpose": bg_purpose,
                 "note_cn": ("用户在本会话、该对象上此前声明过的背景（持有/预算/用途）。"
                             "这是讨论背景：不是成交记录、不是写库授权、不是新的交易许可；"
                             "不要再说用户没提供过这些信息，也不要重复追问。"),

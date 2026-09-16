@@ -30,6 +30,8 @@
 
 - [连续讨论补修二轮复验](controller-agent-continuity-cfix-review-2026-09-16.md)：保留比较修复，收口ATR继续讨论与记忆归属。
 
+- [连续讨论二轮补修](agent-experience-continuity-cfix2-2026-09-17.md)：ATR概念讨论可达+指标词不截对象（两入口浏览器链）；语义守卫+question_id精确归属；41+134项测试全绿。待复验。
+
 - [连续讨论体验主控复验](controller-agent-continuity-review-2026-09-16.md)：三组固定补修及因子/数值校验裁决，暂不合入。
 
 - [连续讨论三组固定补修](agent-experience-continuity-cfixes-2026-09-16.md)：C1比较冻结字段/C2窄匹配+ATR全意图诚实说明/C3事实守卫与会话背景；34项测试全绿，表达部分改善，待复验。

@@ -90,7 +90,7 @@
 ## 6. 提速采用准备与因子交接（交付物 2/3）
 
 - **提速采用候选**：`raw/agent-experience-continuity-2026-09-16/speedup-adoption-candidate.md`。结论：运行目录提速内容 0%（14 文件中 9 个逐字节等于提速前基线、5 个不存在）；第一批 5 个纯新增零风险、第二批 7 个干净覆盖、第三批 2 个前端文件需人工定向（AgentWorkspacePage.tsx 与因子工作真冲突且正被活跃编辑，禁止整体覆盖，采用前重新取指纹）。无数据库迁移（零 DDL）；备份/回退/验证命令与前后 blob 指纹齐全。**本任务执行者未重启运行服务、未改真实业务库。**
-- **因子交接草案**：`docs/factor-evidence-handoff-draft-2026-09-16.md`。是待双方核实的约定，不是已上线接口：现有 `/api/factors/panel` 只读冻结快照、FACTOR_META 6 因子静态评级、因子未进讨论链路；字段建议逐字复用 data_provenance 的 EvidenceRef/MarketDataRef/RuleRef；因子负责人当前在 factor_unit 首个候选（双均线）单标的历史描述收口阶段，尚无生产授权。顺手发现：`web/src/api/client.ts:633` 的 `factorsApi.lab` 后端无路由，属悬空引用（待主控定补路由还是删死代码）。本轮未建空 API、未造假返回、未建面板。
+- **因子交接草案**：`docs/archive/handoffs-plans/factor-evidence-handoff-draft-2026-09-16.md`。是待双方核实的约定，不是已上线接口：现有 `/api/factors/panel` 只读冻结快照、FACTOR_META 6 因子静态评级、因子未进讨论链路；字段建议逐字复用 data_provenance 的 EvidenceRef/MarketDataRef/RuleRef；因子负责人当前在 factor_unit 首个候选（双均线）单标的历史描述收口阶段，尚无生产授权。顺手发现：`web/src/api/client.ts:633` 的 `factorsApi.lab` 后端无路由，属悬空引用（待主控定补路由还是删死代码）。本轮未建空 API、未造假返回、未建面板。
 
 ## 7. 单列发现（越界但不在本轮修复范围）
 

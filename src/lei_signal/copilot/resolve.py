@@ -141,6 +141,11 @@ _BUDGET_NOT_MONEY_AFTER = ("股", "手", "份", "张", "桶", "克", "盎司", "
 _BUDGET_NEG_BEFORE = ("没", "无", "不", "别", "未")
 _BUDGET_FOREIGN_AFTER = ("美元", "美金", "港币", "港元", "欧元", "日元", "英镑", "刀")
 _CN_CONT_DIGITS = set("一二两三四五六七八九十百千万亿")
+#: 收口二（二轮复验 2026-09-17）：假设与第三人的钱不是用户事实
+#: （「如果我有一万元」「朋友有一万元闲钱」）。
+_HYPOTHETICAL_RE2 = re.compile(r"如果|假如|假设|要是|会不会|要不要")
+_THIRD_PERSON_RE = re.compile(
+    r"朋友|同事|家人|亲戚|同学|别人|人家|我妈|我爸|他有|她有|他们|客户|领导")
 
 
 def _budget_guard_ok(text: str, m: re.Match[str]) -> bool:
@@ -155,8 +160,14 @@ def _budget_guard_ok(text: str, m: re.Match[str]) -> bool:
     if after and after[0] in "万千wWkK":
         return False  # 「预算1万美元」：单位在数字后，交给口语分支（外币守卫）
     before = text[max(0, m.start() - 3):m.start()]
-    # 「我没有一万元预算」「不用一万」：否定不是事实
-    return not any(w in before for w in _BUDGET_NEG_BEFORE)
+    if any(w in before for w in _BUDGET_NEG_BEFORE):
+        return False  # 「我没有一万元预算」「不用一万」：否定不是事实
+    prefix = text[:m.start()]
+    if _HYPOTHETICAL_RE2.search(prefix):
+        return False  # 「如果我有一万元」：假设不是事实（可作本轮讨论假设）
+    if _THIRD_PERSON_RE.search(prefix):
+        return False  # 「朋友有一万元闲钱」：第三人的钱不是用户事实
+    return True
 
 
 def _parse_loose_budget(text: str) -> dict[str, Any] | None:
@@ -203,11 +214,16 @@ _HOLDING_HYPOTHETICAL_RE = re.compile(
 _HOLDING_NEG_NEAR_RE = re.compile(
     r"(?:没|未|不|无|别)[^，。；,.;?!？！]{0,6}(?:持有|重仓|轻仓|被套|套牢|持仓|手里有|手上有)")
 _HOLDING_FEATURE_RE = re.compile(r"持仓速览|我的仓位|持仓情况|持仓查询")
+#: 现金不是持仓（收口二）：「我手里有一万元闲钱」是钱不是证券。
+_HOLDING_CASH_RE = re.compile(
+    r"(?:手里有|手上有)[^，。；,.;?!？！]{0,8}(?:元|块|万|千|钱|现金|预算|闲钱|资金)")
 #: 用户明确纠正（会话背景清除用）：此后不再当作持有/有该笔资金。
 _HOLDING_CLEAR_RE = re.compile(
-    r"没(有)?持有|没买|未持有|已经卖了|已卖出|清仓|割肉|止盈离场|暂时没持仓")
+    r"没(有)?持有|没买|未持有|不再持有|不持有了|不持有|已经卖了|已卖出|"
+    r"清仓|割肉|止盈离场|暂时没持仓")
 _BUDGET_CLEAR_RE = re.compile(
-    r"没(有)?[^，。；,.;?!？！]{0,8}(预算|闲钱|资金|那么多钱|这个钱)")
+    r"没(有)?[^，。；,.;?!？！]{0,8}(预算|闲钱|资金|那么多钱|这个钱)|"
+    r"不(是|要)[^，。；,.;?!？！]{0,6}(万|千|元|块)")
 
 
 def detect_stance(message: str) -> str | None:
@@ -223,6 +239,10 @@ def detect_stance(message: str) -> str | None:
         return None  # 功能词：持仓速览/我的仓位，不是语境声明
     if _HOLDING_HYPOTHETICAL_RE.search(text):
         return None  # 假设/意愿句里的持有词不是事实
+    if _THIRD_PERSON_RE.search(text):
+        return None  # 第三人的持仓不是用户事实（收口二）
+    if _HOLDING_CASH_RE.search(text):
+        return None  # 「手里有一万元闲钱」是现金不是证券持仓（收口二）
     if _HOLDING_NEG_NEAR_RE.search(text):
         return None  # 否定就近压过持有词
     if _HOLDING_RE.search(text):

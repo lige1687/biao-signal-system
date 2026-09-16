@@ -179,3 +179,60 @@ def test_c3_negation_not_a_fact(client):
     body = _chat(client, sid, "我没有一万元预算", "c3-n-1")
     assert "10000 元" not in body["reply"]
     assert "1 万元" not in body["reply"]
+
+
+# ---------------- 收口二：语义守卫与精确归属（真实路由 + 临时库真实身份） ----------------
+
+def test_r2_hypothetical_and_third_person_money(client):
+    """收口二矩阵：假设的钱/朋友的钱不是用户事实。"""
+    client, db = client
+    sid = _mk_session(db)
+    body = _chat(client, sid, "如果我有一万元，能不能买？", "r2-hyp-1")
+    assert "10000 元" not in body["reply"]
+    body2 = _chat(client, sid, "朋友有一万元闲钱", "r2-3rd-1")
+    assert "10000 元" not in body2["reply"]
+
+
+def test_r2_cash_is_not_holding(client):
+    """收口二矩阵：「我手里有一万元闲钱」是现金不是持仓。"""
+    client, db = client
+    sid = _mk_session(db)
+    body = _chat(client, sid, "我手里有一万元闲钱", "r2-cash-1")
+    assert "从持仓管理角度讲" not in body["reply"]
+
+
+def test_r2_correction_clears_holding(client):
+    """收口二矩阵：我已经持有 → 我已经不持有了 → 重点看哪里（清除后不继承）。"""
+    client, db = client
+    sid = _mk_session(db)
+    _chat(client, sid, "我已经持有了。", "r2-clr-1")
+    _chat(client, sid, "我已经不持有了", "r2-clr-2")
+    third = _chat(client, sid, "那现在重点看哪里？", "r2-clr-3")
+    assert "从持仓管理角度讲" not in third["reply"]
+
+
+def test_r2_unanswered_declaration_not_inherited(client):
+    """收口二矩阵：问题1声明持有但没有回答；问题2切 510300（绑定 question_id=2）
+    → 510300 的背景不认领问题1的持仓。"""
+    client, db = client
+    sid = _mk_session(db)
+    # 问题1：只有 user 消息、没有绑定回答（模拟中断后未恢复）
+    with connect(db) as conn:
+        append_message(conn, sid, "user", "我已经持有了", False, {})
+    body = _chat(client, sid, "510300 现在怎么看", "r2-unans-1")
+    assert "从持仓管理角度讲" not in body["reply"]
+    # 再问一句跟随问题，仍不得把无主声明认领成 510300 持仓
+    follow = _chat(client, sid, "那现在重点看哪里？", "r2-unans-2")
+    assert "从持仓管理角度讲" not in follow["reply"]
+
+
+def test_r2_amount_correction_consistent(client):
+    """收口二矩阵：本条更正金额——「不是一万，是五千」后背景新值 5000、
+    旧值 10000 不再出现（经后续资金问题观察背景一致性）。"""
+    client, db = client
+    sid = _mk_session(db)
+    _chat(client, sid, "我有一万闲钱，能不能买一点？", "r2-amt-1")
+    _chat(client, sid, "不是一万，是五千", "r2-amt-2")
+    third = _chat(client, sid, "那这笔钱怎么安排？", "r2-amt-3")
+    assert "5000" in third["reply"]
+    assert "10000" not in third["reply"]

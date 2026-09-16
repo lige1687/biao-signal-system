@@ -55,6 +55,15 @@ assert.equal(detectUnsupportedExitRequest('用atr止损试试'), 'ATR 止损');
 assert.equal(detectUnsupportedExitRequest('补测 模块A 退出2'), null);
 assert.equal(detectUnsupportedExitRequest('帮我用结构止损跑一次'), null);
 
+// 收口一（二轮复验 2026-09-17）：概念解释/思路讨论放行，比较/换用仍拦。
+// 反例一：「ATR止损是什么意思？我不要求回测」此前被拦——概念问题应正常讨论。
+assert.equal(detectUnsupportedExitRequest('ATR止损是什么意思？我不要求回测'), null);
+assert.equal(detectUnsupportedExitRequest('解释一下 ATR 止损的思路'), null);
+// 反例二：「继续讨论」草稿回送不能再被拦（否则点击后收到同一提示=死循环）。
+// 显式比较/换用请求保持拦截（诚实拒绝，不捏造已比较）。
+assert.equal(detectUnsupportedExitRequest('如果换成ATR止损，胜率会有什么变化？'), 'ATR 止损');
+assert.equal(detectUnsupportedExitRequest('用ATR止损补测一下效果如何'), 'ATR 止损');
+
 // 支持清单（拦截文案与面板共用）：不含 ATR，不用"成本区"含糊词（U4）
 for (const term of ['同时跌破20日指数均线与抵扣价', '关键性波动', '初始结构止损']) {
   assert.ok(SUPPORTED_EXITS_CN.includes(term), `supported list mentions ${term}`);
@@ -71,6 +80,9 @@ for (const sym of ['510300.SS', null]) {
   assert.ok(!BACKTEST_TRIGGER.test(draft), `draft must avoid trigger words: ${draft}`);
   assert.match(draft, /ATR/);
   assert.match(draft, /只讨论思路/);
+  // 收口一：草稿回送必须能通过「未支持退出请求」检测（不再二次拦截）
+  assert.equal(detectUnsupportedExitRequest(draft), null,
+    `discussion draft must not be re-intercepted: ${draft}`);
 }
 
 // U2：某打法下合法退出清单（b3_dual 仅 B）

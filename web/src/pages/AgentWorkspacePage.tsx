@@ -498,7 +498,7 @@ export default function AgentWorkspacePage() {
         </div>
         {hasNew && <button className="ar-new-output" onClick={toBottom}>回到最新回复 ↓</button>}
         <footer className="ar-composer">
-          <div className="ar-composer-context"><span>当前讨论</span><strong>{subjectLabel(symbol, [...turns].reverse().find(t=>t.resolved===symbol)?.evidenceCard?.facts?.display_name)}</strong>{symbol && <button disabled={busy} onClick={()=>setSymbol(null)}>切回全局</button>}<span className="ar-context-hint">{resource?.kind === "chart" && resource.symbol!==symbol?`正在查看 ${resource.symbol}，提问仍沿用当前讨论`:""}</span></div>
+          <div className="ar-composer-context"><span>当前讨论</span><strong>{subjectLabel(symbol, [...turns].reverse().find(t=>t.resolved===symbol && t.evidenceCard?.facts?.display_name)?.evidenceCard?.facts?.display_name)}</strong>{symbol && <button disabled={busy} onClick={()=>setSymbol(null)}>切回全局</button>}<span className="ar-context-hint">{resource?.kind === "chart" && resource.symbol!==symbol?`正在查看 ${resource.symbol}，提问仍沿用当前讨论`:""}</span></div>
           <div className="ar-input-box"><label className="ar-sr-only" htmlFor="agent-question">输入问题</label><textarea id="agent-question" ref={taRef} rows={2} value={input} onChange={e=>setInput(e.target.value)}
             onKeyDown={e=>{if(e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing && e.keyCode!==229){e.preventDefault();if(!busy)void send(input);}}}
             placeholder={busy?"可以先写下一条问题，当前回复完成后再发送":"输入问题，或说出标的名称 / 代码…"} />

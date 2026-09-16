@@ -5,7 +5,7 @@
 | 提交 | 内容 | 文件 |
 |---|---|---|
 | 6292b527 | 冻结案例+修前基线 | docs/experiments/raw/agent-experience-continuity-2026-09-16/（inputs-and-acceptance、baseline-degraded.json、baseline-notes.md、screens/before-*、serve_iso.py、run_cases.py、ui_harness.py） |
-| d465b558 | 连续讨论修复+因子交接草案+提速采用候选 | src/lei_signal/copilot/resolve.py、src/lei_signal/api/routes/agent.py、src/lei_signal/api/routes/copilot.py、src/lei_signal/plans/llm.py、tests/unit/test_agent_continuity_20260916.py（新）、docs/factor-evidence-handoff-draft-2026-09-16.md（新）、raw/speedup-adoption-candidate.md |
+| d465b558 | 连续讨论修复+因子交接草案+提速采用候选 | src/lei_signal/copilot/resolve.py、src/lei_signal/api/routes/agent.py、src/lei_signal/api/routes/copilot.py、src/lei_signal/plans/llm.py、tests/unit/test_agent_continuity_20260916.py（新）、docs/archive/handoffs-plans/factor-evidence-handoff-draft-2026-09-16.md（新）、raw/speedup-adoption-candidate.md |
 | b1dc3270 | 两个既有 e2e 断言修复 | tests/integration/test_agent_chat_e2e.py（xfail(strict) + 断言锚点更新） |
 | （待提交） | 报告+登记+改后证据 | docs/experiments/agent-experience-continuity-2026-09-16.md、registry.json、INDEX.md、raw/（after-degraded.json、real-chain、case9c、screens/after-*、stub_llm.py、ui_case9.py、merge-checklist.md） |
 

@@ -330,20 +330,30 @@ def test_deterministic_dispatch():
                                 "如果换成ATR止损，胜率会有什么变化？") is None
 
 
-# ---------------- C3：会话背景记忆（同会话同对象） ----------------
+# ---------------- C3：会话背景记忆（同会话同对象，question_id 精确归属） ----------------
 
-def _user_row(text: str):
-    return SimpleNamespace(role="user", content=text, meta_json=None)
+def _user_row(text: str, message_id: int = 0):
+    return SimpleNamespace(role="user", content=text, meta_json=None,
+                           message_id=message_id, question_id=None)
+
+
+def _bound_assistant_row(symbol: str, question_id: int):
+    """绑定到某问题的 assistant 行（多回答/重试同号按同一问题处理）。"""
+    import json as _json
+
+    return SimpleNamespace(
+        role="assistant", content="…", question_id=question_id, message_id=9000 + question_id,
+        meta_json=_json.dumps({"resolved_symbol": symbol, "evidence_card": {"facts": {}}}))
 
 
 def test_user_background_collects_same_object_facts():
     from lei_signal.api.routes.agent import _user_background
 
     hist = [
-        _user_row("我已经持有了"),
-        _assistant_row("515880.SS", "2026-09-16", "观察中", 0),
-        _user_row("我有一万闲钱"),
-        _assistant_row("515880.SS", "2026-09-16", "观察中", 0),
+        _user_row("我已经持有了", 1),
+        _bound_assistant_row("515880.SS", 1),
+        _user_row("我有一万闲钱", 2),
+        _bound_assistant_row("515880.SS", 2),
     ]
     bg = _user_background(hist, "515880.SS")
     assert bg["holding"] is True
@@ -355,20 +365,60 @@ def test_user_background_not_cross_object_and_correction():
     from lei_signal.api.routes.agent import _user_background
 
     # 别的对象的声明不串用
-    hist = [
-        _user_row("我已经持有了"),
-        _assistant_row("510300.SS", "2026-09-16", "观察中", 0),
-    ]
+    hist = [_user_row("我已经持有了", 1), _bound_assistant_row("510300.SS", 1)]
     assert _user_background(hist, "515880.SS") == {}
-    # 用户明确纠正后不再当作持有
-    hist2 = [
-        _user_row("我已经持有了"),
-        _assistant_row("515880.SS", "2026-09-16", "观察中", 0),
-        _user_row("我已经卖了"),
-        _assistant_row("515880.SS", "2026-09-16", "观察中", 0),
+    # 用户明确纠正后不再当作持有（含「我已经不持有了」正常否定表达）
+    for correction_text in ("我已经卖了", "我已经不持有了"):
+        hist2 = [
+            _user_row("我已经持有了", 1),
+            _bound_assistant_row("515880.SS", 1),
+            _user_row(correction_text, 2),
+            _bound_assistant_row("515880.SS", 2),
+        ]
+        bg2 = _user_background(hist2, "515880.SS")
+        assert bg2.get("holding") in (None, False), correction_text
+
+
+def test_user_background_requires_precise_binding():
+    """收口二：无 message_id / 无绑定回答的旧消息标未知、不可继承；
+    不跨过下一条 user 猜归属；symbol 未知不收集。"""
+    from lei_signal.api.routes.agent import _user_background
+
+    # 问题1声明持有但没有回答；问题2切 510300 且回答绑定 question_id=2
+    hist = [
+        _user_row("我已经持有了", 1),       # 无回答 → 无归属
+        _user_row("510300 现在怎么看", 2),
+        _bound_assistant_row("510300.SS", 2),
     ]
-    bg2 = _user_background(hist2, "515880.SS")
-    assert bg2.get("holding") in (None, False)
+    assert _user_background(hist, "510300.SS") == {}
+    # 无 message_id 的旧消息不可继承
+    hist2 = [_user_row("我已经持有了", 0), _bound_assistant_row("515880.SS", 1)]
+    assert _user_background(hist2, "515880.SS") == {}
+    # symbol 未知（全局）不收集
+    hist3 = [_user_row("我已经持有了", 1), _bound_assistant_row("515880.SS", 1)]
+    assert _user_background(hist3, None) == {}
+    # 同一问题两次回答（重试/多回答）：绑定一致，事实不丢
+    hist4 = [
+        _user_row("我已经持有了", 1),
+        _bound_assistant_row("515880.SS", 1),
+        _bound_assistant_row("515880.SS", 1),
+    ]
+    assert _user_background(hist4, "515880.SS").get("holding") is True
+
+
+def test_c3_new_semantic_guards():
+    """收口二五例：假设/第三人的钱与持仓不是用户事实；现金不是持仓。"""
+    assert resolve_mod.parse_request("如果我有一万元，能不能买？")["budget"] is None
+    assert resolve_mod.parse_request("朋友有一万元闲钱")["budget"] is None
+    assert resolve_mod.detect_stance("我手里有一万元闲钱") is None
+    assert resolve_mod.detect_stance("朋友持有这个") is None
+    c = resolve_mod.detect_fact_correction("我已经不持有了")
+    assert c["holding_cleared"] is True
+    # 「不是一万，是五千」：旧值清除 + 新值 5000，不矛盾
+    p = resolve_mod.parse_request("不是一万，是五千")
+    assert p["budget"]["amount"] == 5_000.0
+    c2 = resolve_mod.detect_fact_correction("不是一万，是五千")
+    assert c2["budget_cleared"] is True
 
 
 # ---------------- 案例5/10a：resolve 澄清 ----------------

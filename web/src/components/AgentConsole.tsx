@@ -625,7 +625,7 @@ export default function AgentConsole() {
       <div className="drawer-overlay" onClick={closeConsole} />
       <aside className="drawer-panel agent-console">
         <div className="drawer-head">
-          <h2>Agent · {subjectLabel(symbol, [...turns].reverse().find(t=>t.resolved===symbol)?.evidenceCard?.facts?.display_name)}</h2>
+          <h2>Agent · {subjectLabel(symbol, [...turns].reverse().find(t=>t.resolved===symbol && t.evidenceCard?.facts?.display_name)?.evidenceCard?.facts?.display_name)}</h2>
           <button className="btn small" onClick={resetConversation}>
             开新会话
           </button>

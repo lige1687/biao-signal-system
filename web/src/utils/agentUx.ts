@@ -105,11 +105,24 @@ export function expectancyCn(r: number | null | undefined): string {
  * 注意：引擎有 ATR 缓冲过滤参数，但补测入口不暴露它，也不构成
  * "ATR 止损退出方式"——所以这里判为不支持是准确的。
  */
+/** 概念/思路讨论标记（二轮复验收口一 2026-09-17）：用户明确只要解释或
+ * 讨论思路时，不按「未支持比较请求」拦截——概念问题可以正常讨论，
+ * 只是不得捏造已回测结果。 */
+const ATR_CONCEPT_RE =
+  /是什么意思|什么意思|是什么|聊聊|讨论|思路|解释|只讨论|不要求回测|不做数值比较|了解/;
+
 export function detectUnsupportedExitRequest(message: string): string | null {
   const t = (message || "").replace(/\s+/g, "");
-  if (/atr止损|atr缓冲止损|atr止损方式/i.test(t)) return "ATR 止损";
-  if (/atr.*(退出|止损)/i.test(t) || /(退出|止损).*atr/i.test(t)) return "ATR 止损";
-  return null;
+  const atrMention =
+    /atr止损|atr缓冲止损|atr止损方式/i.test(t) ||
+    /atr.*(退出|止损)/i.test(t) ||
+    /(退出|止损).*atr/i.test(t);
+  if (!atrMention) return null;
+  // 收口一：区分「要求执行/比较未支持的退出方法」与「概念解释/只讨论思路」。
+  // 概念讨论放行（继续讨论草稿「我想先聊聊思路…只讨论思路，不做数值比较」
+  // 与「ATR止损是什么意思？我不要求回测」都属此类）；显式比较/换用请求仍拦截。
+  if (ATR_CONCEPT_RE.test(t)) return null;
+  return "ATR 止损";
 }
 
 /**
