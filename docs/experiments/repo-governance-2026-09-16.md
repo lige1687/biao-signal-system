@@ -49,8 +49,12 @@
 
 ## 已知遗留与风险
 
-1. `export_flagship_data.py` 因 2026-09-01 源码丢失事故缺 4 个依赖模块
-  （仅剩 .pyc），本来就不可运行，本次保留在根层（UI 引用其产物）待重建。
+1. ~~`export_flagship_data.py` 因 2026-09-01 源码丢失事故缺 4 个依赖模块~~
+  **已解决（2026-09-17）**：5 个依赖全部找回——3 个从 `legacy_recovery/`
+  恢复工作副本，`run_bform_mini.py` / `run_bform_global.py` 由 pyc 字节码
+  重建并经归档结果验证（mini 逐字节一致；global 除两条读已更新美宽度
+  缓存的臂外全部一致，判定不变）。import 链已验证通过，见
+  `legacy_recovery/README.md` 补录。
 2. 归档移动使旧实验报告中记录的复现命令路径失效
   （`scripts/x.py` → `scripts/archive/x.py`），映射关系见
   `scripts/archive/README.md`；git 历史可完整追溯。
