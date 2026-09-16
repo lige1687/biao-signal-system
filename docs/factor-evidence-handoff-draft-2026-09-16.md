@@ -80,13 +80,15 @@
 | 计算时间与窗口 | `generated_at`、`window` | 快照 generated_at；FACTOR_META formula 参数 |
 | 数值/单位/方向含义 | 数值走 `extra`（先例 dca/state.py:212）；单位方向沿用 FACTOR_META label/formula/usage；统计类型 `statistic_kind` | 快照行 |
 | 缺失/过期状态 | `health`、`reason`、`as_of_cutoff`、`reference_lag_trading_days`（经 `assess_freshness()`） | 现 notes[] 迁移为结构化 |
-| 验证材料与研究状态 | `status`（照抄账本不推断）、`limitations`、`compatibility`（默认 unknown） | FACTOR_META verdict 映射 status；evidence 文本入 limitations 或挂报告哈希 |
-| 适用对象/市场环境 | `strategy_scope`（现有 STRATEGY_* 枚举） | FACTOR_META usage 解析 |
-| 已知限制 | `limitations`、`note` | FACTOR_META usage 禁区（如「ADX 禁用于过滤排序」） |
-| 历史统计（如有） | 不单独立类：`window + statistic_kind + limitations`；事件定义/入场退出/评价期限/样本量/研究来源作为 limitations 结构化子段，或 source_path 指报告 + source_hash | 例：B1（510300，e=t+1 收盘，x=t+22 收盘，真组 n=590/假组 n=926） |
+| 验证材料与研究状态 | `status`（照抄账本不推断）、`limitations`、`compatibility`（默认 unknown） | 研究状态登记来源；**FACTOR_META 的静态评级（2026-08-27 留痕）不得自动映射为当前因子有效性**——有效性以首批真实研究输出为准 |
+| 适用对象/市场环境 | **注意**：`strategy_scope` 表示**策略适用范围**（哪些策略可用该证据），不等于标的/市场环境适用范围；后者目前没有现成字段，建议入 `limitations` 文本或待双方商定新字段 | 双方商定 |
+| 已知限制 | `limitations`（**当前是字符串**，不是结构化子段——事件定义/期限/样本量等正式结构待首批真实研究输出共同定稿，本文不预先发明）、`note` | FACTOR_META usage 禁区（如「ADX 禁用于过滤排序」） |
+| 历史统计（如有） | `window + statistic_kind` 可用现成字段；事件定义/入场退出/评价期限/样本量/研究来源**目前没有结构化契约**，暂以 `source_path` 指研究报告 + `source_hash` 锚定原文，正式结构双方定稿后补齐 | 例：B1（510300，e=t+1 收盘，x=t+22 收盘，真组 n=590/假组 n=926） |
 
 纪律沿用现有契约：compatibility 默认 unknown；available_at 无依据 = null；快照序列化即冻结、
 历史不重读。**没有事件定义+入场退出+评价期限+样本量+研究来源五件套的统计，不称胜率。**
+（2026-09-16 主控复验纠正：limitations 是字符串而非结构化契约；strategy_scope≠标的/环境
+适用范围；静态评级不自动映射有效性。）
 
 ## 6. 未来读取方式（建议，待核实）
 

@@ -30,6 +30,8 @@
 
 - [连续讨论体验主控复验](controller-agent-continuity-review-2026-09-16.md)：三组固定补修及因子/数值校验裁决，暂不合入。
 
+- [连续讨论三组固定补修](agent-experience-continuity-cfixes-2026-09-16.md)：C1比较冻结字段/C2窄匹配+ATR全意图诚实说明/C3事实守卫与会话背景；34项测试全绿，表达部分改善，待复验。
+
 - [Agent 连续讨论与简洁回答](agent-experience-continuity-2026-09-16.md)：四处答非所问修复（板块对应ETF/持仓语境/资金提问/变化比较）+日期口径+科创板澄清；真实模型5次计数验证；提速采用候选与因子交接草案；校验器缺口单列。待主控复验。
 
 - [提问稳定性主控收口](controller-ask-stability-closeout-2026-09-16.md)：固定补修通过，统一合入本地main；运行版未更新。

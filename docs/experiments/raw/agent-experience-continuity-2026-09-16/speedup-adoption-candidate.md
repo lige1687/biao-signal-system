@@ -27,7 +27,8 @@ web/src/pages/AgentWorkspacePage.tsx(±26)
 
 ## 采用候选（分三批）
 
-**第一批·纯新增（5，零风险）**：ask_timing.py、write_tx.py、三个新测试文件。
+**第一批·纯新增（5，文件不存在、不存在覆盖冲突）**：ask_timing.py、write_tx.py、
+三个新测试文件。（主控复验措辞修正：无覆盖冲突 ≠ 零风险，运行效果仍需集成验证。）
 
 **第二批·干净覆盖（7，运行现状逐字节 == 90df76b6）**：routes/agent.py、routes/copilot.py、
 copilot/chat_identity.py、fundamentals/sources.py、market_context/market_mood.py、

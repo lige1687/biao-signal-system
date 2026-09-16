@@ -46,7 +46,8 @@ _TOPIC_RULES: tuple[tuple[str, re.Pattern[str]], ...] = (
     # 连续讨论一轮（2026-09-16）：口语资金问法「能不能买一点/能买吗」归入资金主题，
     # 让用途澄清与资金纪律块能接上；「买点」二字单独出现不算资金问题（买点是技术概念）。
     ("money", re.compile(r"资金|投多少|仓位多少|多少预算|金额|投一点|买多少|"
-                         r"买一点|能不能买|能买吗|可以买吗|能买不")),
+                         r"买一点|能不能买|能买吗|可以买吗|能买不|"
+                         r"怎么安排|如何安排")),
     ("dca", re.compile(r"定投|闲钱|每月|新收入|工资|分批投")),
     ("sentiment", re.compile(r"情绪|冰点|强热|恐慌|热警报|散户")),
     ("mindset", re.compile(r"心态|拿不住|怕跌|慌|睡不着")),
@@ -134,12 +135,39 @@ def _cn_head_to_number(head: str) -> float | None:
     return None
 
 
+#: 金额守卫（C3，2026-09-16 主控复验）：股数/份额不是钱；否定句里的金额
+#: 不是用户已给事实；外币不默认折算人民币；复杂中文金额截取部分数字宁可未知。
+_BUDGET_NOT_MONEY_AFTER = ("股", "手", "份", "张", "桶", "克", "盎司", "手")
+_BUDGET_NEG_BEFORE = ("没", "无", "不", "别", "未")
+_BUDGET_FOREIGN_AFTER = ("美元", "美金", "港币", "港元", "欧元", "日元", "英镑", "刀")
+_CN_CONT_DIGITS = set("一二两三四五六七八九十百千万亿")
+
+
+def _budget_guard_ok(text: str, m: re.Match[str]) -> bool:
+    """一条金额候选是否可采信为人民币预算（C3 四道守卫）。"""
+    after = text[m.end():m.end() + 3]
+    if after.startswith(_BUDGET_NOT_MONEY_AFTER):
+        return False  # 股数/份额/手数：不是金额（成交量有一万股）
+    if after.startswith(_BUDGET_FOREIGN_AFTER):
+        return False  # 外币：不默认折成人民币，宁可未知（反例另存）
+    if after and after[0] in _CN_CONT_DIGITS:
+        return False  # 后面还连着中文数字：是更复杂的金额说法，不截取部分
+    if after and after[0] in "万千wWkK":
+        return False  # 「预算1万美元」：单位在数字后，交给口语分支（外币守卫）
+    before = text[max(0, m.start() - 3):m.start()]
+    # 「我没有一万元预算」「不用一万」：否定不是事实
+    return not any(w in before for w in _BUDGET_NEG_BEFORE)
+
+
 def _parse_loose_budget(text: str) -> dict[str, Any] | None:
     """不带「预算」前缀的口语金额识别（2026-09-16 连续讨论一轮）。
 
     只在带明确单位时采信：阿拉伯数字必须跟 万/千/w/k；中文数字必须跟 万/千。
-    不匹配裸数字（515880 这类代码、2024 这类年份自然出局）。"""
+    不匹配裸数字（515880 这类代码、2024 这类年份自然出局）；股数/外币/
+    否定句/截断的复杂金额一律不采信（C3）。"""
     for m in _LOOSE_BUDGET_RE.finditer(text or ""):
+        if not _budget_guard_ok(text, m):
+            continue
         if m.group(1) is not None:
             value = float(m.group(1))
             unit = m.group(2)
@@ -168,24 +196,53 @@ def _parse_loose_budget(text: str) -> dict[str, Any] | None:
 #: 不算语境声明；否定/假设先行（没买/如果持有）不算。
 _HOLDING_RE = re.compile(r"我已经持有|我已持有|我持有|已经持有|持有着|"
                          r"我手里有|我手上有|被套|套牢|重仓|轻仓")
-_HOLDING_NEG_RE = re.compile(r"没(有)?持有|没买|未持有|如果.*持有|假如.*持有|"
-                             r"要不要持有|想持有|打算持有|持仓速览|我的仓位|持仓情况")
+#: C3（主控复验 2026-09-16）：假设/条件句里的持有词不是事实（「如果重仓
+#: 会怎样」）；否定词就近压过持有词（「我没有重仓」「担心被套暂时没持仓」）。
+_HOLDING_HYPOTHETICAL_RE = re.compile(
+    r"如果|假如|假设|要是|会不会|要不要|考虑|打算|想(要|持)")
+_HOLDING_NEG_NEAR_RE = re.compile(
+    r"(?:没|未|不|无|别)[^，。；,.;?!？！]{0,6}(?:持有|重仓|轻仓|被套|套牢|持仓|手里有|手上有)")
+_HOLDING_FEATURE_RE = re.compile(r"持仓速览|我的仓位|持仓情况|持仓查询")
+#: 用户明确纠正（会话背景清除用）：此后不再当作持有/有该笔资金。
+_HOLDING_CLEAR_RE = re.compile(
+    r"没(有)?持有|没买|未持有|已经卖了|已卖出|清仓|割肉|止盈离场|暂时没持仓")
+_BUDGET_CLEAR_RE = re.compile(
+    r"没(有)?[^，。；,.;?!？！]{0,8}(预算|闲钱|资金|那么多钱|这个钱)")
 
 
 def detect_stance(message: str) -> str | None:
     """用户本条消息声明的讨论立场。当前只有 ``holding``（已持有）。
 
     立场只影响**解释口径**（持仓管理视角而非首次买入视角），不改变技术规则、
-    不写真实计划或成交；按消息逐条识别，不做跨轮继承——恢复历史时不把旧
-    意图当成今天的新授权（执行书 §4）。"""
+    不写真实计划或成交；按消息逐条识别——恢复历史时不把旧意图当成今天的
+    新授权；同会话同对象的背景记忆由路由层按对象范围另行维护（C3）。"""
     text = (message or "").strip()
     if not text:
         return None
-    if _HOLDING_NEG_RE.search(text):
-        return None
+    if _HOLDING_FEATURE_RE.search(text):
+        return None  # 功能词：持仓速览/我的仓位，不是语境声明
+    if _HOLDING_HYPOTHETICAL_RE.search(text):
+        return None  # 假设/意愿句里的持有词不是事实
+    if _HOLDING_NEG_NEAR_RE.search(text):
+        return None  # 否定就近压过持有词
     if _HOLDING_RE.search(text):
         return "holding"
     return None
+
+
+def detect_fact_correction(message: str) -> dict[str, bool]:
+    """用户本条消息是否明确**撤销**此前声明的事实（C3 背景记忆清除用）。
+
+    ``holding_cleared``：说了没持有/已卖出/清仓等；
+    ``budget_cleared``：说了没有预算/没有那笔钱等。只认明确撤销，沉默不算。"""
+    text = (message or "").strip()
+    if not text:
+        return {"holding_cleared": False, "budget_cleared": False}
+    hypothetical = bool(_HOLDING_HYPOTHETICAL_RE.search(text))
+    return {
+        "holding_cleared": bool(_HOLDING_CLEAR_RE.search(text)) and not hypothetical,
+        "budget_cleared": bool(_BUDGET_CLEAR_RE.search(text)) and not hypothetical,
+    }
 
 
 def parse_exit_choice(text: str) -> str | None:
@@ -286,7 +343,7 @@ def parse_request(message: str) -> dict[str, Any]:
             method_choice["module_source"] = "unspecified"
     budget = None
     bm = re.search(r"预算\s*([0-9][0-9,，.]*)\s*(?:元|块)?", text)
-    if bm:
+    if bm and _budget_guard_ok(text, bm):
         amount = float(bm.group(1).replace(",", "").replace("，", ""))
         budget = {"amount": amount, "currency": "CNY",
                   "note_cn": "用户本条消息明确提供"}
@@ -332,4 +389,5 @@ def parse_request(message: str) -> dict[str, Any]:
     }
 
 
-__all__ = ["parse_request", "detect_stance", "INTENTS", "TOPICS", "PURPOSES"]
+__all__ = ["parse_request", "detect_stance", "detect_fact_correction",
+           "INTENTS", "TOPICS", "PURPOSES"]

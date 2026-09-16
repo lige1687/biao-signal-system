@@ -586,24 +586,27 @@ export default function AgentConsole() {
       dispatch.mutate(text);
       return;
     }
-    if (route.action === "backtest") {
+    // C2（主控复验 2026-09-16）：ATR 类不支持退出方式的诚实说明对**所有**
+    // 意图生效——discussion 意图下「如果换成ATR止损，胜率会有什么变化？」
+    // 此前会漏进通用讨论并把 ATR 误解析成同名标的。
+    const unsupported = detectUnsupportedExitRequest(text);
+    if (unsupported) {
       // UX 第一期（场景5）：点名当前引擎没有的退出方式（如 ATR 止损）→
       // 如实说明暂未支持，不静默替换、不声称已比较。
       // U1 返修：原草稿含"补测"会被再次判成补测请求形成死循环——换用
       // 不含触发词的讨论草稿，并提供"继续讨论"动作（点击放回输入框，
       // 可改后发送），保证讨论入口真实可用。
-      const unsupported = detectUnsupportedExitRequest(text);
-      if (unsupported) {
-        const sym = route.resolve.resolved_symbol ?? symbol;
-        setTurns((cur) => [...cur, {
-          who: "agent",
-          grounded: true,
-          resolved: sym,
-          nextSteps: [{ kind: "draft_discussion", label_cn: "继续讨论（不做数值比较）", draft_cn: atrDiscussionDraft(sym) }],
-          text: `这项比较暂未支持：当前补测引擎的退出方式只有${SUPPORTED_EXITS_CN}；${unsupported}不在其中。我不会把它偷偷换成别的退出规则，也没有做过这项比较。\n\n想继续的话：① 就支持的退出方式补测——点下方「准备补测」之前，先就这个标的提一个问题；② 点「继续讨论」把思路问题放回输入框，可修改后发送。`,
-        }]);
-        return;
-      }
+      const sym = route.resolve.resolved_symbol ?? symbol;
+      setTurns((cur) => [...cur, {
+        who: "agent",
+        grounded: true,
+        resolved: sym,
+        nextSteps: [{ kind: "draft_discussion", label_cn: "继续讨论（不做数值比较）", draft_cn: atrDiscussionDraft(sym) }],
+        text: `这项比较暂未支持：当前补测引擎的退出方式只有${SUPPORTED_EXITS_CN}；${unsupported}不在其中。我不会把它偷偷换成别的退出规则，也没有做过这项比较。\n\n想继续的话：① 就支持的退出方式补测——点下方「准备补测」之前，先就这个标的提一个问题；② 点「继续讨论」把思路问题放回输入框，可修改后发送。`,
+      }]);
+      return;
+    }
+    if (route.action === "backtest") {
       await handleBacktest(text);
       return;
     }

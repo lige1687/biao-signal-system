@@ -1042,10 +1042,19 @@ _SECTOR_PRODUCT_RE = re.compile(r"ETF|基金|产品|可以买的|能买的")
 _SECTOR_RELATION_RE = re.compile(
     r"对应|跟踪|相关|哪些|哪个|有没有|关联|挂钩|可以买|能买")
 
-#: 「和刚才相比有什么变化」类比较追问（案例8）。
-_COMPARISON_RE = re.compile(
-    r"和(刚才|之前|此前|上次)|有(什么|啥)变化|有什么不一样|比.*变化|"
-    r"更新了吗|有新(数据|资料|消息|情况)|数据(有)?更新")
+#: 「和刚才相比有什么变化」类资料新旧比较追问（案例8）——C2 窄匹配：
+#: 必须锚定「与此前资料相比」或裸问资料/数据/状态更新；方法（止损/止盈/
+#: 胜率/回测/模块/退出）、资金（金额/预算/仓位/数字+单位）、基本面消息类
+#: 的「变化」问题一律放行给原有链路，不靠堆关键词代替边界判定。
+_COMPARISON_ANCHOR_RE = re.compile(
+    r"(和|与)(刚才|之前|此前|上次)(相比)?|"
+    r"^有(什么|啥)(新)?变化[吗呢？?]{0,2}$|"
+    r"(资料|数据|状态).{0,6}(更新|变化)|"
+    r"^(资料|数据)?(有)?更新了吗[？?]{0,1}$")
+_COMPARISON_EXCLUDE_RE = re.compile(
+    r"止损|止盈|胜率|回测|补测|复跑|方法|模块|退出|打法|"
+    r"金额|预算|仓位|股|元|块|万|千|美元|港币|欧元|成本|"
+    r"基本面|消息|新闻|公告|财报|ATR|atr")
 
 
 def _sector_product_relation_reply(ctx_payload: dict, message: str) -> str | None:
@@ -1067,6 +1076,67 @@ def _sector_product_relation_reply(ctx_payload: dict, message: str) -> str | Non
         "想继续的话：直接说具体产品的名称或代码，我按那个产品自己的系统资料来讲"
         f"（不会把板块的整体统计当成某个产品的成绩）。{name}板块本身的观察仍按"
         f"截至 {as_of} 的板块资料。")
+
+
+def _user_background(history_rows: list, symbol: str | None) -> dict:
+    """同会话、同对象内用户**自己声明过**的事实背景（C3，主控复验 2026-09-16）。
+
+    只收集绑定到当前对象的轮次（用户消息 → 其后 assistant 的 resolved_symbol
+    一致才算）；明确撤销（没持有/已卖出/没预算）即时清除；沉默不影响。
+    这是**讨论背景**：不是成交记录、不是写库授权、不是新的交易许可；
+    切对象不串用（绑定对象不同的声明不进背景）。
+    返回 {holding, budget, purpose, stated}；没有任何已知事实时返回 {}。
+    """
+    from lei_signal.copilot import resolve as resolve_mod  # noqa: PLC0415
+
+    if not history_rows:
+        return {}
+    bg: dict = {"holding": False, "budget": None, "purpose": None}
+    stated: list[str] = []
+
+    def _assistant_symbol(row) -> str | None:  # noqa: ANN001
+        try:
+            meta = json.loads(row.meta_json or "{}")
+        except (TypeError, ValueError):
+            return None
+        s = meta.get("resolved_symbol")
+        return s if isinstance(s, str) and s else None
+
+    n = len(history_rows)
+    for i, row in enumerate(history_rows):
+        if row.role != "user":
+            continue
+        # 该用户声明归属的对象 = 其后最近一条 assistant 的绑定对象
+        bound = None
+        for j in range(i + 1, n):
+            if history_rows[j].role == "assistant":
+                bound = _assistant_symbol(history_rows[j])
+                break
+        if bound is None or (symbol and bound != symbol):
+            continue  # 别的对象的声明不串用
+        text = row.content or ""
+        correction = resolve_mod.detect_fact_correction(text)
+        if correction["holding_cleared"]:
+            bg["holding"] = False
+        elif resolve_mod.detect_stance(text) == "holding":
+            bg["holding"] = True
+            stated.append("持有")
+        if correction["budget_cleared"]:
+            bg["budget"] = None
+            bg["purpose"] = None
+        else:
+            parsed = resolve_mod.parse_request(text)
+            if parsed.get("budget"):
+                bg["budget"] = parsed["budget"]
+                stated.append("预算")
+            if parsed.get("purpose") not in (None, "unknown"):
+                bg["purpose"] = parsed["purpose"]
+                stated.append("用途")
+    out = {k: v for k, v in bg.items() if v}
+    if not out:
+        return {}
+    out["stated"] = sorted(set(stated))
+    return out
 
 
 def _previous_turn_facts(history_rows: list) -> list[dict]:
@@ -1094,14 +1164,21 @@ def _previous_turn_facts(history_rows: list) -> list[dict]:
 
 def _comparison_reply(history_rows: list, symbol: str | None,
                       ctx_payload: dict, message: str) -> str | None:
-    """「和刚才相比有什么变化」→ 确定性比较回答（案例8）。
+    """「和刚才相比有什么变化」→ 确定性比较回答（案例8，C1 口径）。
 
-    同份资料（as_of 相同）就明确说没有新数据，不制造「刚刚出现」的机会；
-    资料日期变了就说明更新的日期与可核实的变化字段（系统结论/候选数）；
-    对象已切换就说清楚比的是哪两份资料。全部直读历史证据卡与当前材料，
-    不经过模型——比较结论完全由数据日期决定，不需要也不允许发挥。
+    比较的是同对象、同口径的**已冻结事实**（历史证据卡与当前材料的
+    资料日期/系统结论/买点候选数），不是只比日期：
+    - 已比较字段全部相同 → 只说「这些已比较字段相同」；系统没有每份资料
+      的完整版本快照，不断言所有内容都没更新（C1）；
+    - 同一数据日但内容字段不同 → 如实说同一数据日内的资料内容有变化
+      （盘中/当日修订允许存在），不得说成没有变化；
+    - 日期倒退（当前比刚才更旧）→ 明确是退回较旧资料，不是「更新」；
+    - 日期或字段缺失 → 该字段诚实不可比，不猜。
+    全部直读已落库事实，不引入第二套行情计算。
     """
-    if not _COMPARISON_RE.search(message):
+    if not _COMPARISON_ANCHOR_RE.search(message):
+        return None
+    if _COMPARISON_EXCLUDE_RE.search(message):
         return None
     prev = _previous_turn_facts(history_rows)
     cur_name = ctx_payload.get("display_name") or symbol or "当前对象"
@@ -1109,6 +1186,7 @@ def _comparison_reply(history_rows: list, symbol: str | None,
     cur_card = ctx_payload.get("evidence_card") or {}
     cur_facts = cur_card.get("facts") or {}
     cur_verdict = cur_facts.get("verdict_cn")
+    cur_n = cur_facts.get("buy_point_candidate_n")
     if not prev:
         return ("这是本会话里我能看到的第一份资料，没有可比较的之前状态。"
                 f"当前 {cur_name} 的资料截至 {cur_as_of or '未知'}。")
@@ -1120,32 +1198,71 @@ def _comparison_reply(history_rows: list, symbol: str | None,
             f"现在这份是 {cur_name}（资料截至 {cur_as_of or '未知'}）——两个对象的"
             "资料不是同一份，不能互相比新旧。"
             + (f"{cur_name} 当前的系统结论：{cur_verdict}。" if cur_verdict else ""))
-    same_object = [p for p in prev if not symbol or p.get("symbol") in (None, symbol)]
-    last_same = same_object[0] if same_object else last
-    prev_as_of = last_same.get("as_of")
-    if prev_as_of and cur_as_of and prev_as_of == cur_as_of:
-        verdict_bit = f"系统结论仍是：{cur_verdict}。" if cur_verdict else ""
+    # 只与同对象的已冻结事实比（C1）：全局轮/其他对象轮不冒充同一份资料。
+    same_object = [p for p in prev if p.get("symbol") and p["symbol"] == symbol] \
+        if symbol else [p for p in prev if not p.get("symbol")]
+    if not same_object:
         return (
-            f"没有新数据：和刚才一样，{cur_name} 还是截至 {cur_as_of} 的同一份资料，"
-            f"系统状态没有变化。{verdict_bit}"
-            "这不是刚出现的新情况——要有新资料（下一个数据日之后）再谈变化。")
-    if prev_as_of and cur_as_of and prev_as_of != cur_as_of:
-        changes: list[str] = []
-        if last_same.get("verdict_cn") and cur_verdict \
-                and last_same["verdict_cn"] != cur_verdict:
-            changes.append(f"系统结论从「{last_same['verdict_cn']}」变成「{cur_verdict}」")
-        elif cur_verdict:
-            changes.append(f"系统结论维持「{cur_verdict}」")
-        prev_n, cur_n = last_same.get("candidate_n"), cur_facts.get("buy_point_candidate_n")
-        if isinstance(prev_n, int) and isinstance(cur_n, int) and prev_n != cur_n:
-            changes.append(f"买点候选数从 {prev_n} 个变成 {cur_n} 个")
-        change_txt = "；".join(changes) if changes else "明细字段无可见变化"
-        return (f"资料有更新：刚才是截至 {prev_as_of}，现在是截至 {cur_as_of}。"
-                f"变化：{change_txt}。")
-    # 日期缺失无法证明新旧：如实说不可比，不猜。
-    return (f"刚才的资料日期（{prev_as_of or '未知'}）与当前（{cur_as_of or '未知'}）"
-            "无法完整核实是否为同一份，不能断言有没有变化；"
-            "按当前资料，" + (f"系统结论：{cur_verdict}。" if cur_verdict else "没有新结论。"))
+            f"刚才聊的不是 {cur_name}，这个对象在本会话里还没有可比较的之前"
+            f"资料。当前 {cur_name} 的资料截至 {cur_as_of or '未知'}。"
+            + (f"系统结论：{cur_verdict}。" if cur_verdict else ""))
+    last_same = same_object[0]
+    prev_as_of = last_same.get("as_of")
+    prev_verdict = last_same.get("verdict_cn")
+    prev_n = last_same.get("candidate_n")
+
+    # 日期倒退：退回较旧资料，绝不能写成「更新」（C1 反例）。
+    if prev_as_of and cur_as_of and cur_as_of < prev_as_of:
+        return (
+            f"注意：现在这份资料的日期（{cur_as_of}）比刚才那份（{prev_as_of}）"
+            "更旧——你看到的是退回较旧的资料，不是新数据；要谈变化请以较新"
+            "日期的资料为准。")
+
+    # 逐字段比较（双方都有值才可比；缺失的字段诚实列入不可比）。
+    field_rows = [
+        ("系统结论", prev_verdict, cur_verdict),
+        ("买点候选数", prev_n, cur_n),
+    ]
+    changed: list[str] = []
+    unverifiable: list[str] = []
+    for label, old, new in field_rows:
+        if old is None or new is None:
+            unverifiable.append(label)
+        elif old != new:
+            changed.append(f"{label}从「{old}」变成「{new}」")
+    dates_known = bool(prev_as_of and cur_as_of)
+    if changed:
+        date_bit = (
+            f"资料日期都是 {cur_as_of}（同一数据日内的资料内容变化）"
+            if dates_known and prev_as_of == cur_as_of else
+            f"资料日期从 {prev_as_of} 到 {cur_as_of}"
+            if dates_known else "资料日期无法完整核实")
+        tail = (f"；另：{'、'.join(unverifiable)}无法核实对比" if unverifiable else "")
+        return f"有变化：{date_bit}。" + "；".join(changed) + f"。{tail}"
+    if unverifiable and len(unverifiable) == len(field_rows):
+        # 一个可比字段都没有：如实说无法对比，不列空清单（C1）。
+        return (
+            f"刚才的旧记录里缺少可对比的字段（{'、'.join(unverifiable)}都没有"
+            "留档），无法核实对比——不能断言有没有变化。"
+            + (f"当前系统结论：{cur_verdict}。" if cur_verdict else ""))
+    if unverifiable:
+        same_bit = "已比较的字段（" + "、".join(
+            label for label, old, new in field_rows
+            if old is not None and new is not None) + "）相同"
+        date_bit = (f"，资料日期同为 {cur_as_of}" if dates_known and prev_as_of == cur_as_of
+                    else f"，资料日期从 {prev_as_of} 到 {cur_as_of}" if dates_known else "")
+        return (
+            f"{same_bit}{date_bit}；但{'、'.join(unverifiable)}在旧记录里缺字段，"
+            "无法核实对比——只能保证已比较字段相同，不能断言有没有变化。")
+    # 已比较字段全部相同：只说已比较字段相同，不断言系统没变化（C1）。
+    date_bit = (f"，资料日期同为 {cur_as_of}" if dates_known and prev_as_of == cur_as_of
+                else f"，资料日期从 {prev_as_of} 到 {cur_as_of}" if dates_known
+                else "，资料日期无法完整核实")
+    return (
+        f"和刚才相比，已比较的字段（系统结论、买点候选数）相同{date_bit}。"
+        "系统没有保存每份资料的完整版本快照，只能保证这些已比较字段相同，"
+        "不能断言所有细节都没更新。"
+        + (f"当前系统结论：{cur_verdict}。" if cur_verdict else ""))
 
 
 def _deterministic_reply(history_rows: list, symbol: str | None,
@@ -1205,7 +1322,9 @@ def _degraded_reply(symbol: str, ctx_payload: dict) -> str:
     # 最关键缺失信息（案例7）；都不改变判定层结论，只换解释口径。
     stance = (ctx_payload.get("discussion_stance") or {}).get("kind")
     q_topic = ctx_payload.get("question_topic")
-    if stance == "holding":
+    # 本条明确是资金问题时资金分支优先（C3：持仓者问钱，答钱不按持仓模板）；
+    # 否则持仓语境优先于通用首买模板。
+    if stance == "holding" and q_topic != "money":
         lines = [
             f"{display}（{symbol}）：你说已经持有了——这次就从持仓管理角度讲，"
             "不按首次买入说。",
@@ -1222,9 +1341,18 @@ def _degraded_reply(symbol: str, ctx_payload: dict) -> str:
                 "——持仓语境下它们只是参照，不是新的入场引导。")
         else:
             lines.append("系统当前没有新的买点候选；持仓期间重点看失效位与观察条件。")
-        lines.append(
-            "你没有给成本价和资金信息，这段讨论里也没有你的成交信息——我不编这些；"
-            "具体的退出位以你自己确认过的计划为准。这里没有记录任何成交。")
+        known_budget = ctx_payload.get("user_budget") or {}
+        known_amt = known_budget.get("amount")
+        if isinstance(known_amt, (int, float)):
+            lines.append(
+                f"你之前说过可投入的资金是 {known_amt:g} 元（这是讨论背景，"
+                "不是成交记录）；成本价你没给，我不编。具体的退出位以你自己"
+                "确认过的计划为准。这里没有记录任何成交。")
+        else:
+            lines.append(
+                "你没有给成本价和资金信息，这段讨论里也没有你的成交信息——"
+                "我不编这些；具体的退出位以你自己确认过的计划为准。"
+                "这里没有记录任何成交。")
     elif q_topic == "money":
         budget = ctx_payload.get("user_budget") or {}
         amt = budget.get("amount")
@@ -1243,12 +1371,23 @@ def _degraded_reply(symbol: str, ctx_payload: dict) -> str:
             verdict_line = (
                 f"先回答能不能买：按系统数据，{display}（{symbol}）现在没有"
                 "系统定义的买点候选。")
+        # C3：用途已知（本条或同会话同对象背景）就不再重复追问，
+        # 直接按已知用途给纪律边界；未知才问这最关键的一项。
+        known_purpose = ctx_payload.get("user_purpose")
+        if known_purpose == "spare_cash":
+            purpose_line = ("你说过这是一笔已有的闲钱：按闲钱的用法，分几批、"
+                            "每批多少由你决定——不再追问用途。")
+        elif known_purpose == "income_dca":
+            purpose_line = ("你说过这是持续投入的新收入：按定投式的用法，"
+                            "节奏和金额由你决定——不再追问用途。")
+        else:
+            purpose_line = ("还差一项关键信息：这笔钱是持续投入的新收入，"
+                            "还是已有的闲钱？这影响怎么分批，先确认这一项再细聊。")
         lines = [
             verdict_line,
             f"{amt_txt}怎么安排由你决定；系统纪律是盈亏比不足 3 的机会放弃"
             "（研究代理口径），仓位档位只是参考。",
-            "还差一项关键信息：这笔钱是持续投入的新收入，还是已有的闲钱？"
-            "这影响怎么分批，先确认这一项再细聊。",
+            purpose_line,
             "现在只是讨论——没有确认任何计划，也不会替你下单。",
         ]
     # ① 先回答这次问题：第一句就是大白话结论（只重组既有判定字段，
@@ -1282,11 +1421,11 @@ def _degraded_reply(symbol: str, ctx_payload: dict) -> str:
             "先用最新数据核实再谈下一步。"
         )
     else:
-        # 连续讨论一轮（日期口径）：当天数据不说「今日收盘」——系统未核实
-        # 交易日历与发布规则，是否收盘如实标未知，不凭文件时间猜。
+        # 连续讨论一轮（日期口径，主控复验 §3）：当天数据不说「今日收盘」——
+        # 没有完成交易时段的来源证明，只说截至该日的最新记录，不凭更新时间猜。
         lines.append(
-            f"截至 {as_of} 的数据（是否已收盘系统未单独核实，不凭更新时间猜）。"
-            "AI 讲解暂时不可用，以下是系统直接给出的数据事实。"
+            f"截至 {as_of} 的最新记录（系统没有该日是否已收盘的来源证明，"
+            "不凭更新时间猜）。AI 讲解暂时不可用，以下是系统直接给出的数据事实。"
         )
 
     # 系统标签（颜色/阶段/风险）是细节，不再当第一句。
@@ -2205,19 +2344,41 @@ def _prepare_discussion(
         parsed = resolve_mod.parse_request(body.message)
         parsed_topic = parsed["topic"]
         ctx_payload.update(_topic_blocks(parsed_topic, symbol))
-        # 连续讨论一轮（2026-09-16）：主题与用户声明立场进材料——模型按
-        # 持仓/资金语境调整解释口径，降级直出同样按语境分支。立场逐条
-        # 识别不继承（恢复历史≠今天的新授权）；判定层规则不因立场改变。
+        # 连续讨论一轮（2026-09-16）+ C3 补修：主题、用户声明立场与
+        # 会话背景进材料。本条消息明确说的优先；同会话同对象此前声明过
+        # 且未撤销的作为背景补齐（不重复追问、不再声称用户没提供）；
+        # 本条明确撤销的立即失效。背景=讨论语境，不是成交记录或新授权；
+        # 判定层规则不因立场改变。
         ctx_payload["question_topic"] = parsed_topic
-        if parsed.get("budget"):
-            ctx_payload["user_budget"] = parsed["budget"]
+        correction = resolve_mod.detect_fact_correction(body.message)
+        bg = _user_background(history_rows, symbol)
         stance = resolve_mod.detect_stance(body.message)
+        if stance is None and bg.get("holding") and not correction["holding_cleared"]:
+            stance = "holding"
+        budget = parsed.get("budget") or (
+            None if correction["budget_cleared"] else bg.get("budget"))
+        purpose = parsed.get("purpose")
+        if purpose in (None, "unknown") and not correction["budget_cleared"]:
+            purpose = bg.get("purpose")
+        if budget:
+            ctx_payload["user_budget"] = budget
+        if purpose not in (None, "unknown"):
+            ctx_payload["user_purpose"] = purpose
+        if bg and ctx_payload.get("context_kind") != "sector":
+            ctx_payload["user_background"] = {
+                "holding": bool(bg.get("holding")) and not correction["holding_cleared"],
+                "budget": bg.get("budget") if not correction["budget_cleared"] else None,
+                "purpose": bg.get("purpose") if not correction["budget_cleared"] else None,
+                "note_cn": ("用户在本会话、该对象上此前声明过的背景（持有/预算/用途）。"
+                            "这是讨论背景：不是成交记录、不是写库授权、不是新的交易许可；"
+                            "不要再说用户没提供过这些信息，也不要重复追问。"),
+            }
         if stance == "holding" and ctx_payload.get("context_kind") != "sector":
             ctx_payload["discussion_stance"] = {
                 "kind": "holding",
                 "note_cn": ("用户声明已持有该标的：从持仓管理角度解释（当前系统"
                             "状态、失效位与观察条件），不按首次买入引导；用户未"
-                            "提供成本与资金信息，不得编造；不记录成交；有既有"
+                            "提供的成本与资金信息不得编造；不记录成交；有既有"
                             "计划时结合计划状态讲。"),
             }
         tm.mark("prep_done")  # 主题块（DCA/情绪/证据/心态/资金）之后准备完成
