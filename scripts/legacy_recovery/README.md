@@ -191,3 +191,19 @@ PYTHONHASHSEED=0 python3 scripts/legacy_recovery/run_ashare_axes.py
   - `docs/experiments/raw/portfolio_split/m5_walkforward_results.json`（M5 walk-forward 终审）
   - `docs/experiments/raw/ashare_axes/ashare_axes_results.json`（A/B 预注册 + C 行业扫描）
 - 关联 .pyc 证据：`scripts/__pycache__/run_{bform_dynamic,ashare_axes,m5_walkforward}.cpython-311.pyc`（mtime 8-28）
+
+---
+
+## 补录（2026-09-17，目录治理任务）：run_bform_mini / run_bform_global 字节码重建
+
+这两个脚本在 2026-09-01 事故中丢失且对象库中已无幸存 blob（fsck 全量悬空
+对象检索确认），改由 `scripts/__pycache__/*.cpython-311.pyc` 逐函数反汇编
+重建，源码回到 `scripts/` 根层（供 `export_flagship_data.py` 等 import）：
+
+| 脚本 | 验证方式 | 结果 |
+|---|---|---|
+| `run_bform_mini.py` | 重跑输出与归档 `raw/portfolio_split/bform_mini_results.json` 逐字节比对 | **逐字节一致**（sha256 `871038d6…`） |
+| `run_bform_global.py` | 重跑输出与归档 `raw/portfolio_split/bform_global_results.json` 比对 | 不依赖外部缓存的臂（H5/M5/B9/判定）全部一致；仅读取 `~/.lei_signal_lab/cache/sp500_ma_breadth_history.json`（2026-09-07 更新过，晚于原实验）的 G5/M5D 两臂数值小幅漂移，判定结论不变（FAIL_归档）。重建逻辑经其余臂精确印证 |
+
+另三个恢复脚本（run_ashare_axes / run_bform_dynamic / run_m5_walkforward）
+自本目录复制回 `scripts/` 根层作为工作副本，本目录保持恢复档案原状。

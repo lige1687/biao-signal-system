@@ -56,6 +56,11 @@ SCRIPTS_KEEP = {
     "run_full_stack_sim.py", "run_momentum_research_prototype.py",
     "run_portfolio_split.py", "run_research_data_snapshot.py",
     "run_siphon_detector.py", "run_symbol_tilt.py", "seed_portfolio.py",
+    # 2026-09-01 事故后恢复的组合实验脚本（run_bform_mini/global 为
+    # 字节码重建并经归档结果验证，其余三个恢复自悬空 blob；根层副本供
+    # export_flagship_data 等依赖 import，legacy_recovery/ 留档）
+    "run_ashare_axes.py", "run_bform_dynamic.py", "run_bform_mini.py",
+    "run_bform_global.py", "run_m5_walkforward.py",
     "sentiment_journal.py", "signal_scan.py", "start_backend.sh",
     "start_feishu_tunnel.sh", "start_frontend.sh", "timing_daily.sh",
     "timing_scorecard.py", "update_portfolio_funds.py",
