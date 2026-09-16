@@ -136,7 +136,9 @@ def test_state_machine_declares_all_stages_and_invariants() -> None:
 
 
 def test_ruleset_version_is_present() -> None:
-    assert ruleset_version() == "2.0.0"  # 2.0.0：切 V2 账本（V2.1 标定参数生效）
+    # 2.0.0 切 V2 账本；2.1.0 起宽度环境调节生效（cfc41cc8）。
+    # 阈值标定按账本规约持续升 version，这里只钉 V2 世代，不逐版追改。
+    assert ruleset_version().startswith("2.")
     assert load_ruleset()["source_video"].startswith("https://www.youtube.com/watch?v=7NkwlH6NOk8")
 
 
