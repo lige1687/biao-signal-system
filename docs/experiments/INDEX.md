@@ -28,6 +28,9 @@
 
 ## 1. 任务编号总账（任务书 → 执行归档）
 
+- [连续讨论ZCode最终独立裁决](controller-zcode-continuity-final-2026-09-17.md)：三轮结束，事实归属未通过，暂不合入。
+
+
 - [连续讨论ZCode第二轮独立复核](controller-zcode-continuity-r2-2026-09-17.md)：混合句归属与否定固定收口。
 
 
