@@ -1,0 +1,72 @@
+# runtime dirty state, captured 2026-09-17 11:40:19 +0800 by S1 audit
+# NOTE: runtime worktree is LIVE — session-start capture (~11:05) had 15 tracked-modified files;
+# by 11:35 fund-trade idempotency work (copilot.py/trades.py/sqlite_store.py/client.ts/CopilotCards.tsx
+# + untracked test_copilot_trades_dedup.py) and breadth work had appeared. Re-verify at S2 build time.
+
+=== git status --porcelain ===
+ M docs/experiments/INDEX.md
+ M docs/experiments/factor-evidence-controller-review-2026-09-16.md
+ M docs/experiments/factor-evidence-reliability-v1-2026-09-16.md
+ M docs/experiments/factor-library-progress-2026-09-16.md
+ M docs/experiments/factor-library-progress-controller-review-2026-09-16.md
+ M docs/experiments/raw/factor-evidence-reliability-v1-2026-09-16/repair-r1-r4/repair-log.md
+ M docs/experiments/raw/factor-library-progress-2026-09-16/run-log.md
+ M docs/experiments/registry.json
+ M docs/research/factor-evidence-reliability-usage.md
+ M src/lei_signal/api/routes/copilot.py
+ M src/lei_signal/copilot/trades.py
+ M src/lei_signal/research/factor_evidence/runner.py
+ M src/lei_signal/research/factor_evidence/stability.py
+ M src/lei_signal/storage/sqlite_store.py
+ M tests/integration/test_factor_evidence_cli.py
+ M web/src/api/client.ts
+ M web/src/components/agent/AnswerText.tsx
+ M web/src/components/copilot/CopilotCards.tsx
+ M web/src/pages/AgentWorkspacePage.tsx
+ M web/src/pages/agent-workspace.css
+ M web/src/styles.css
+?? docs/archive/handoffs-plans/2026-09-17-breadth-first-description-design.md
+?? docs/archive/handoffs-plans/2026-09-17-breadth-first-description-execution.md
+?? docs/archive/handoffs-plans/2026-09-17-breadth-first-description-goals.json
+?? docs/archive/handoffs-plans/2026-09-17-factor-breadth-readiness-ark-brief.md
+?? docs/archive/handoffs-plans/2026-09-17-factor-breadth-readiness-contract.json
+?? docs/archive/handoffs-plans/2026-09-17-factor-breadth-readiness-round2.md
+?? docs/experiments/agent-news-priorities-2026-09-17.md
+?? docs/experiments/factor-breadth-readiness-controller-review-2026-09-17.md
+?? docs/experiments/factor-evidence-zcode-dispatch-review-2026-09-17.md
+?? docs/experiments/raw/agent-news-priorities-2026-09-17/
+?? docs/experiments/raw/breadth-b200-first-description-2026-09-17/
+?? docs/experiments/raw/factor-breadth-readiness-2026-09-17/
+?? docs/experiments/raw/factor-evidence-s-closeout-2026-09-17/
+?? docs/experiments/raw/factor-evidence-s-closeout-retry-2026-09-17/
+?? docs/experiments/raw/factor-library-progress-2026-09-16/okr2-after/
+?? docs/experiments/raw/factor-library-progress-2026-09-16/okr2-before/
+?? docs/experiments/raw/factor-library-progress-2026-09-16/okr2-diff-report.md
+?? docs/experiments/raw/factor-library-progress-2026-09-16/revision-v1.1/
+?? src/lei_signal/research/breadth_description.py
+?? src/lei_signal/research/breadth_description_contract.py
+?? tests/unit/test_breadth_description.py
+?? tests/unit/test_copilot_trades_dedup.py
+
+=== tracked-modified: sha256 HEAD-blob vs actual ===
+docs/experiments/INDEX.md	head=2c81aa627ad40ca9fa29d5e633c199f1858cc4ba360185a7b27e81aed8832622	actual=600b8bcbaea2a654d8eba945333d97abd253465b6b93dc292c1d076b4cae357e
+docs/experiments/factor-evidence-controller-review-2026-09-16.md	head=13674809b350021032303a11c5dba6866d7d3a9c3e5e3b4ae254656fb0e80021	actual=78888ca52e2174e3ac111955863961713565c260c464a42a096369c3c5506add
+docs/experiments/factor-evidence-reliability-v1-2026-09-16.md	head=d411f5a655ab6a849eef47179a63147c4afc5b3a3e2aef7fb4536f0aa516e657	actual=b20c1dbd78022ead248062cd7bfadf497b27b87d9a108d0f5f71d189c53f1e28
+docs/experiments/factor-library-progress-2026-09-16.md	head=76492f97dc0c0b4eae6efa74ea3f0d193d38f6229db5af398fbfea64e496750a	actual=8067bd1712551d1df172662a3d79bea65e790eebf7758ba07d96c6e4ab392f3f
+docs/experiments/factor-library-progress-controller-review-2026-09-16.md	head=233b135e95c642010a174c1933c34043d926fc948c5e815a6ca9e5c5fbce574e	actual=89f111414acd1b9dc9b56c93640c9865618404676821c48582d4f95484851849
+docs/experiments/raw/factor-evidence-reliability-v1-2026-09-16/repair-r1-r4/repair-log.md	head=b2389fe59fd2927dcf5a7e22ed78431846aa49ec0d0649951f9ea1dc5ef141ba	actual=5d1a482bebcf21ebf4c4cb06c984734f4165c5aa55782d35ae3f3e276ad2ed36
+docs/experiments/raw/factor-library-progress-2026-09-16/run-log.md	head=0e42478de89b9e2154675cb43e98edd1d8e2aeb932578aed883f10ef4f81dffc	actual=0daf464470b836c49526ed6491bc0b9161640a86ec1e3a44fc78f2702835bc31
+docs/experiments/registry.json	head=e14288384f45abd9304b9cda10ee158bdd97411a1d70e15a88445ca0032cc8ce	actual=72479f2ca113e65afd04e3759b5d4fcc11f3b957af08e9ebe8b810a861187b01
+docs/research/factor-evidence-reliability-usage.md	head=bdb9f48abf5a95bdf5dcb0d739a8d6ff49b43555578ac781209cf9d64cd9db7e	actual=41eb47655e6ecb948764c1810c96f3f181ba30ae10687ee1dfad62a301a07ff8
+src/lei_signal/api/routes/copilot.py	head=8672282b8243fc7b638e3d6e064c6e76709e3a5bee7a7052c58340d7d131c98a	actual=33e532f7dd72b03e387af7faf465d275eaba3af681d289e9b6c2891e64312f5d
+src/lei_signal/copilot/trades.py	head=4d49843acff56b8023f90ae96408c62ad02a870b59a3f717c7b5145fbeede475	actual=28defcc92e767f90a607db7f4ae420a16405f6ac414dc7a8aa9726392a4304d7
+src/lei_signal/research/factor_evidence/runner.py	head=06611433debb1fe423b41f180b3d5c65aed969430a56bab9e832a241898954af	actual=2f85a2b66861d3089ab52626880fc63f8e49e4199da22266d07855f6afcbb82b
+src/lei_signal/research/factor_evidence/stability.py	head=e794e7a3194adea1fbbcbb213a889f21bc05c0e3cc931cdb7b5d0787e401ead4	actual=59fe10b5086e75c9123df6bc66ea6ffa2265ffdc947df17f127143ed0e7fe9c1
+src/lei_signal/storage/sqlite_store.py	head=4e3dfdb127cfc46ae2d086604a4bea5acddc03b61dd30d36b8bedd7b4e987a6e	actual=25911e2270bd587841303ab869c327240cc34141cb40e360ef3d19a9a47cb885
+tests/integration/test_factor_evidence_cli.py	head=06b42c809eab9e42f7051719f3c3c8aa17f5188fc8ab0d6e9d404260852358b0	actual=09e5b4b4972f6a5ac502be0b1a4cab88efda564a1be484a5cb6d6c807b2541df
+web/src/api/client.ts	head=9a31604abc18d5dd9f0de36466a9c44f4673a278d2de562b11ca6cc40aa2fe1e	actual=6e4f0711edc3a83f7bb81abacefd44b1966406e56a9ca5634513b46e7c86af93
+web/src/components/agent/AnswerText.tsx	head=dbed69829ed3c2dba3de23cb2ff46e9b5d0df26c84a7b320ffe4e0bbbed94c1c	actual=247e550bbf3dc795b07db73ef8f1cb6dc56623559bbfb156b3fc940adbb84090
+web/src/components/copilot/CopilotCards.tsx	head=c19579d08cc4ff9b93844c42fd63b9e0ff029ae8932bb0dd90539ce009f6c48d	actual=0b7e772011738c288b416ac9e1d22901001cd86da8c1f7ad0528c16841c04db2
+web/src/pages/AgentWorkspacePage.tsx	head=821b953d9c036f3dccb59b845d9888f0bab7f53763b22c31dc03852eb40dae20	actual=6528ae224602fad0e131a31f4a7d49d43a48a072d99bd6ac5c4dfe100283620b
+web/src/pages/agent-workspace.css	head=759a46df93ffa5c921d5f3c1140dffbeba016481ac2d0d56cb1a00203f95adee	actual=b9591b302a92eb1842d8baba5e6f12c20f5ef80987343a78ad234589d94e66b6
+web/src/styles.css	head=3368e9331f263ab33cfb53592fd04b738d1003c4335ab46dc42a74680987ba1d	actual=352d54c63ad14e95a4dbb583252af36b9b8ff0f05c66c79fb47149ebe457a68a

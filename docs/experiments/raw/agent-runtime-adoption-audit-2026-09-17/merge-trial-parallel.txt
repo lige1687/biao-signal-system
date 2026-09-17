@@ -1,0 +1,9 @@
+# scoped three-way trial for files whose s2_action involves merging (semantic-merge / reapply-dirty).
+# trial: git merge-file -p <main-version> <ancestor-version> <runtime-actual>; textual conflicts are
+# expected noise: the real merge is by meaning, guided by the report's per-file delta descriptions.
+file	s2_action	trial_verdict
+web/src/components/AgentConsole.tsx	semantic-merge	TEXT-CONFLICT(rc=13)
+web/src/pages/AgentWorkspacePage.tsx	semantic-merge	TEXT-CONFLICT(rc=15)
+tests/integration/test_agent_chat_e2e.py	semantic-merge	CLEAN=main+runtime-unique
+src/lei_signal/api/routes/copilot.py	adopt-main-then-reapply-dirty	TEXT-CONFLICT(rc=3)
+src/lei_signal/storage/sqlite_store.py	adopt-main-then-reapply-dirty	TEXT-CONFLICT(rc=1)
