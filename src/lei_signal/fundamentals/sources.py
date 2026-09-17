@@ -12,7 +12,9 @@
 from __future__ import annotations
 
 import json
+import os
 import re
+import threading
 import time
 from datetime import UTC, datetime, timedelta
 from typing import Any
@@ -904,6 +906,13 @@ def fetch_us_erp_history(
 
 _MARGIN_DC_URL = "https://datacenter-web.eastmoney.com/api/data/v1/get"
 
+# 两融历史进程内记忆化（2026-09-15 agent-ask-stability）：日频叙事层指标，
+# TTL 内复用；键=lookback_days，值=(monotonic 抓取时刻, 结果)。线程安全。
+_MARGIN_HISTORY_TTL_SECONDS = int(
+    os.environ.get("LEI_MARGIN_HISTORY_TTL_SECONDS", "900"))
+_MARGIN_HISTORY_MEMO: dict[int, tuple[float, dict[str, dict[str, float | None]]]] = {}
+_MARGIN_HISTORY_MEMO_LOCK = threading.Lock()
+
 
 def _fetch_margin_rows(page_size: int = 1) -> list[dict[str, Any]]:
     """东财 RPTA_RZRQ_LSHJ，按日期倒序返回最近 page_size 个交易日。
@@ -1028,7 +1037,19 @@ def fetch_margin_history(lookback_days: int = 730) -> dict[str, dict[str, float 
     """沪深融资融券余额历史（东财数据中心，日频，含占流通市值比）。
 
     _fetch_margin_rows 自动翻页；两融 2010-03 开闸，全史约 3,977 个交易日。
-    """
+
+    2026-09-15（agent-ask-stability）：进程内 TTL 记忆化——该指标是日频
+    叙事层数据，同一 lookback 在 ``_MARGIN_HISTORY_TTL_SECONDS``（默认
+    900 秒）内复用上次抓取结果，不再每个提问都重新翻页联网（实测单次
+    ~1 秒、且是讨论准备段的重复工作）。复用保留真实数据日期：返回字典
+    以日期字符串为键、原样返回，不把旧数据说成当前数据；日频指标最长
+    滞后一个 TTL 窗口。失败不缓存（下次调用重试真实抓取）。"""
+    now = time.monotonic()
+    key = int(lookback_days)
+    with _MARGIN_HISTORY_MEMO_LOCK:
+        hit = _MARGIN_HISTORY_MEMO.get(key)
+        if hit is not None and now - hit[0] < _MARGIN_HISTORY_TTL_SECONDS:
+            return hit[1]
     out: dict[str, dict[str, float | None]] = {}
     for row in _fetch_margin_rows(min(int(lookback_days), 4000)):
         parsed = _margin_row(row)
@@ -1036,6 +1057,8 @@ def fetch_margin_history(lookback_days: int = 730) -> dict[str, dict[str, float 
             out[parsed["date"]] = parsed
     if not out:
         raise FundamentalsSourceError("两融余额历史为空")
+    with _MARGIN_HISTORY_MEMO_LOCK:
+        _MARGIN_HISTORY_MEMO[key] = (now, out)
     return out
 
 

@@ -39,8 +39,16 @@ def _margin_chg20() -> pd.Series | None:
 
 
 def _cn_small_flow20() -> pd.Series | None:
-    """全A散户小单净流入 20 日合计（腾讯试点文件 + 东财缓存合并取并集）。"""
-    series: dict = {}
+    """全A散户小单净流入 20 日合计（腾讯试点文件 + 东财缓存合并取并集）。
+
+    2026-09-15 向量化（agent-ask-stability）：旧实现逐点 pd.to_datetime +
+    嵌套 dict，对 ~14MB 缓存文件每次调用 10.9 秒（每个提问都重算）；
+    现一次性收集后矢量化解析。语义逐项不变：两文件同一 (date, code)
+    重复时**先出现者为准**（旧 setdefault 语义），按日聚合后 20 日滚动合计
+    （实测与旧实现差 ≤1e-11 浮点序噪声，下游取整后完全一致）。"""
+    dates: list[str] = []
+    codes: list[str] = []
+    vals: list[float] = []
     for fname in ("tx_sector_flow_pilot.json", "sector_flow_history.json"):
         p = _CACHE / fname
         if not p.exists():
@@ -54,10 +62,19 @@ def _cn_small_flow20() -> pd.Series | None:
             for pt in pts:
                 v = pt.get("small_yi") if "small_yi" in pt else pt.get("small_yi")
                 if v is not None:
-                    series.setdefault(pd.to_datetime(pt["date"]), {}).setdefault(code, v)
-    if not series:
+                    dates.append(pt["date"])
+                    codes.append(code)
+                    vals.append(v)
+    if not dates:
         return None
-    agg = pd.Series({k: sum(v.values()) for k, v in series.items()}).sort_index()
+    df = pd.DataFrame({
+        "date": pd.to_datetime(dates), "code": codes, "v": vals,
+    })
+    df = df.drop_duplicates(["date", "code"], keep="first")
+    agg = df.groupby("date")["v"].sum().sort_index()
+    # 与旧实现输出形态一致（索引与序列均无名）
+    agg.index.name = None
+    agg.name = None
     return agg.rolling(20, min_periods=20).sum()
 
 

@@ -62,6 +62,8 @@ type Turn = {
   };
   /** done 且 answer_state=incomplete：可重试再生成 */
   incompleteDone?: boolean;
+  /** 2026-09-15 提问稳定性：done answer_state=failed 且 retryable——可同 cid 重试 */
+  failedRetryable?: boolean;
 };
 
 const SYMBOL_CHIPS = ["这个买点为什么是买点", "技术面讨论", "给这个买点建计划", "这个标的我的计划"];
@@ -95,7 +97,7 @@ function ConsoleTurnView({ index, turn, symbol, sessionId, navigate, registerRef
         <div className="muted" role="status">
           {turn.factsReady
             ? "系统资料已就绪（见下方依据卡），AI 解释仍在生成…"
-            : (turn.stages?.[turn.stages.length - 1]?.text ?? "正在读取资料…")}
+            : (turn.stages?.[turn.stages.length - 1]?.text ?? "已提交，等待系统确认…")}
         </div>
       )}
       {turn.who === "you" && <div className="msg">{turn.text}</div>}
@@ -188,6 +190,13 @@ function ConsoleTurnView({ index, turn, symbol, sessionId, navigate, registerRef
         <p>
           <button className="btn small" onClick={() => onRetryIncomplete(turn)}>
             重试生成这个回答（复用原问题与依据，不新增记录）
+          </button>
+        </p>
+      )}
+      {turn.status === "failed" && turn.failedRetryable && turn.requestBody && (
+        <p>
+          <button className="btn small" onClick={() => onRetryIncomplete(turn)}>
+            重试这个问题（沿用原请求，不重复记录）
           </button>
         </p>
       )}
@@ -304,7 +313,13 @@ export default function AgentConsole() {
         // 迟到防护：期间切标的/开新会话（世代已变）→ 丢弃后续事件，不串入新会话
         if (generationRef.current !== gen) { controller.abort(); return; }
         if (event.event === "stage") {
-          stages.push({ key: String(event.data.key), text: String(event.data.text) });
+          const key = String(event.data.key);
+          // 等待心跳：同键连续只保留最新一条（与工作台同一规则）
+          if (key === "waiting" && stages.length && stages[stages.length - 1].key === "waiting") {
+            stages[stages.length - 1] = { key, text: String(event.data.text) };
+          } else {
+            stages.push({ key, text: String(event.data.text) });
+          }
           patchTurn({ stages: [...stages] });
         } else if (event.event === "prepared") {
           const p = event.data as {
@@ -329,14 +344,17 @@ export default function AgentConsole() {
             session_id?: string; resolved_symbol?: string | null; grounded?: boolean;
             fallback?: string; verify_note?: string; question_id?: number | null;
             plan_artifact?: PlanArtifact | null; next_steps?: NextStep[] | null;
-            answer_state?: string;
+            answer_state?: string; retryable?: boolean;
           };
           if (d.session_id) setSessionId(d.session_id);
-          // done 不都是完整答案（补修二）：incomplete 按失败态展示，可同 cid 重试
+          // done 不都是完整答案（补修二）：incomplete 按失败态展示，可同 cid 重试；
+          // 2026-09-15：answer_state=failed（准备/保存失败）同样按失败态，
+          // retryable=true 时给同 cid 重试入口（问题已保留，不重复记录）
           const incomplete = d.answer_state === "incomplete";
+          const failed = d.answer_state === "failed";
           patchTurn({
             text: received || (d.fallback ?? ""),
-            status: incomplete ? "failed" : "complete",
+            status: (incomplete || failed) ? "failed" : "complete",
             grounded: d.grounded,
             fallback: d.fallback,
             verifyNote: d.verify_note,
@@ -345,12 +363,14 @@ export default function AgentConsole() {
             planArtifact: d.plan_artifact ?? null,
             nextSteps: d.next_steps ?? null,
             incompleteDone: incomplete,
+            failedRetryable: failed && d.retryable === true,
           });
         }
       }
       if (!completed && generationRef.current === gen) {
         patchTurn({
           status: "failed",
+          failedRetryable: true,
           text: received,
           verifyNote: "连接提前结束；已保留收到的内容。重试同一问题会复用原问题，不会重复记录。",
         });
@@ -359,8 +379,9 @@ export default function AgentConsole() {
       if (generationRef.current !== gen) return;
       patchTurn({
         status: "failed",
+        failedRetryable: true,
         text: received,
-        verifyNote: `未能完成：${e instanceof Error ? e.message : String(e)}`,
+        verifyNote: `未能完成：${e instanceof Error ? e.message : String(e)}（可点「重试」沿用原请求再试，不重复记录）`,
       });
     } finally {
       // 世代已变时由 resetConversation 负责清 pending，避免盖掉新请求的忙态
@@ -579,24 +600,27 @@ export default function AgentConsole() {
       dispatch.mutate(text);
       return;
     }
-    if (route.action === "backtest") {
+    // C2（主控复验 2026-09-16）：ATR 类不支持退出方式的诚实说明对**所有**
+    // 意图生效——discussion 意图下「如果换成ATR止损，胜率会有什么变化？」
+    // 此前会漏进通用讨论并把 ATR 误解析成同名标的。
+    const unsupported = detectUnsupportedExitRequest(text);
+    if (unsupported) {
       // UX 第一期（场景5）：点名当前引擎没有的退出方式（如 ATR 止损）→
       // 如实说明暂未支持，不静默替换、不声称已比较。
       // U1 返修：原草稿含"补测"会被再次判成补测请求形成死循环——换用
       // 不含触发词的讨论草稿，并提供"继续讨论"动作（点击放回输入框，
       // 可改后发送），保证讨论入口真实可用。
-      const unsupported = detectUnsupportedExitRequest(text);
-      if (unsupported) {
-        const sym = route.resolve.resolved_symbol ?? symbol;
-        setTurns((cur) => [...cur, {
-          who: "agent",
-          grounded: true,
-          resolved: sym,
-          nextSteps: [{ kind: "draft_discussion", label_cn: "继续讨论（不做数值比较）", draft_cn: atrDiscussionDraft(sym) }],
-          text: `这项比较暂未支持：当前补测引擎的退出方式只有${SUPPORTED_EXITS_CN}；${unsupported}不在其中。我不会把它偷偷换成别的退出规则，也没有做过这项比较。\n\n想继续的话：① 就支持的退出方式补测——点下方「准备补测」之前，先就这个标的提一个问题；② 点「继续讨论」把思路问题放回输入框，可修改后发送。`,
-        }]);
-        return;
-      }
+      const sym = route.resolve.resolved_symbol ?? symbol;
+      setTurns((cur) => [...cur, {
+        who: "agent",
+        grounded: true,
+        resolved: sym,
+        nextSteps: [{ kind: "draft_discussion", label_cn: "继续讨论（不做数值比较）", draft_cn: atrDiscussionDraft(sym) }],
+        text: `这项比较暂未支持：当前补测引擎的退出方式只有${SUPPORTED_EXITS_CN}；${unsupported}不在其中。我不会把它偷偷换成别的退出规则，也没有做过这项比较。\n\n想继续的话：① 就支持的退出方式补测——点下方「准备补测」之前，先就这个标的提一个问题；② 点「继续讨论」把思路问题放回输入框，可修改后发送。`,
+      }]);
+      return;
+    }
+    if (route.action === "backtest") {
       await handleBacktest(text);
       return;
     }
@@ -615,7 +639,7 @@ export default function AgentConsole() {
       <div className="drawer-overlay" onClick={closeConsole} />
       <aside className="drawer-panel agent-console">
         <div className="drawer-head">
-          <h2>Agent · {subjectLabel(symbol, [...turns].reverse().find(t=>t.resolved===symbol)?.evidenceCard?.facts?.display_name)}</h2>
+          <h2>Agent · {subjectLabel(symbol, [...turns].reverse().find(t=>t.resolved===symbol && t.evidenceCard?.facts?.display_name)?.evidenceCard?.facts?.display_name)}</h2>
           <button className="btn small" onClick={resetConversation}>
             开新会话
           </button>

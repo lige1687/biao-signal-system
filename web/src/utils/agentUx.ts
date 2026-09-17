@@ -105,11 +105,43 @@ export function expectancyCn(r: number | null | undefined): string {
  * 注意：引擎有 ATR 缓冲过滤参数，但补测入口不暴露它，也不构成
  * "ATR 止损退出方式"——所以这里判为不支持是准确的。
  */
+/**
+ * ATR 请求按分句、按动作判意图。概念说明里的“回测”只是讨论对象；真正要求
+ * 采用、运行测试或比较才算执行。否定只覆盖它紧邻的动作，因此“不用比较，
+ * 直接回测”仍有一个肯定动作。
+ */
+const ATR_ACTION_RE =
+  /补测|回测|测一下|复跑|重新测|再测|跑一次(?:回测)?|比较|对比|换成|改成|改用|换用|采用|使用|执行|试试|(?<!作)用(?=atr)/gi;
+const ATR_NEGATED_ACTION_PREFIX_RE =
+  /(?:不|没|无|别|勿|非|无需|不用|不要|不必|不想|不要求)(?:再|要|需要|要求|做|进行|你)?(?:数值)?$/;
+const ATR_ACTION_AS_TOPIC_RE = /^(?:是)?(?:什么意思|什么|怎么回事|的?含义|的?概念|的?原理)/;
+
+function clauseHasAffirmativeAtrAction(clause: string): boolean {
+  ATR_ACTION_RE.lastIndex = 0;
+  let match: RegExpExecArray | null;
+  while ((match = ATR_ACTION_RE.exec(clause)) !== null) {
+    const prefix = clause.slice(0, match.index);
+    const suffix = clause.slice(match.index + match[0].length);
+    const negationTail = prefix.slice(-8);
+    if (ATR_NEGATED_ACTION_PREFIX_RE.test(negationTail)) continue;
+    if (ATR_ACTION_AS_TOPIC_RE.test(suffix)) continue;
+    return true;
+  }
+  return false;
+}
+
+function hasAffirmativeAtrAction(t: string): boolean {
+  return t.split(/[，,。；;？！?!：:]/).some(clauseHasAffirmativeAtrAction);
+}
+
 export function detectUnsupportedExitRequest(message: string): string | null {
   const t = (message || "").replace(/\s+/g, "");
-  if (/atr止损|atr缓冲止损|atr止损方式/i.test(t)) return "ATR 止损";
-  if (/atr.*(退出|止损)/i.test(t) || /(退出|止损).*atr/i.test(t)) return "ATR 止损";
-  return null;
+  const atrMention =
+    /atr止损|atr缓冲止损|atr止损方式/i.test(t) ||
+    /atr.*(退出|止损)/i.test(t) ||
+    /(退出|止损).*atr/i.test(t);
+  if (!atrMention) return null;
+  return hasAffirmativeAtrAction(t) ? "ATR 止损" : null;
 }
 
 /**

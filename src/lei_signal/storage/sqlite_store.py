@@ -1186,7 +1186,12 @@ def connect(path: str | Path) -> sqlite3.Connection:
     - 迁移必须 **只** 第一次开连接时跑一次（pragma journal_mode 是持久化的，
       后续连接会复用），避免并发连接重复 apply 互相抢锁。
     """
-    connection = sqlite3.connect(str(path), timeout=30.0)
+    # TrackedConnection（2026-09-15 agent-ask-stability）：写事务进程内登记——
+    # BEGIN IMMEDIATE 锁等待失败时日志能指认当时进程内的持锁方（位置/线程/
+    # 已持有多久），慢等待/慢持有也有日志；行为与 sqlite3.Connection 一致。
+    from lei_signal.storage.write_tx import TrackedConnection
+
+    connection = sqlite3.connect(str(path), timeout=30.0, factory=TrackedConnection)
     connection.row_factory = sqlite3.Row
     connection.execute("PRAGMA foreign_keys = ON")
     connection.execute("PRAGMA journal_mode = WAL")
