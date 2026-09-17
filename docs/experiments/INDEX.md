@@ -584,3 +584,5 @@
 - `docs/reports/` — 说明：回测 HTML 报告已迁至 `web/public/reports/`
 - `docs/` 根的 `handoff-* / plan-*` 为应用线（data-sync）历史任务书与方案，
   与本目录研究线互不隶属
+
+- [Agent采用包主控独立复验（2026-09-17）](agent-runtime-adoption-controller-2026-09-17.md)：54项通过，采用工具三项固定返修。
