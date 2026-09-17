@@ -71,13 +71,19 @@ function QuickCardView({ card, onChart }: { card: QuickCard; onChart: (symbol: s
   const color = ({ "绿色": "green", "灰色": "gray", "黑色": "black" } as Record<string, string>)[card.color_cn ?? ""] ?? "unknown";
   return <section className="ar-quick-card" aria-label={`${card.display_name}关键数据`}>
     <header><div><strong>{card.display_name}</strong><span>{card.symbol} · {card.as_of ?? "数据日期未提供"}</span></div>
-      {card.color_cn && <ColorBadge color={color} colorCn={card.color_cn} descriptive />}</header>
+      <div className="ar-quick-head-actions">
+        {card.color_cn && <ColorBadge color={color} colorCn={card.color_cn} descriptive />}
+        {/* UX 第二轮：看图操作放在价位区同一屏，不用翻到动作条才找到 */}
+        <button className="ar-quick-chart-btn" onClick={() => onChart(card.symbol)} title="在资料区打开该标的的最新图表">看图 ↗</button>
+      </div></header>
     <dl className="ar-metrics"><div><dt>收盘价</dt><dd>{card.close}</dd></div>
       {card.stage_cn && <div><dt>当前阶段</dt><dd>{card.stage_cn}</dd></div>}
       {card.risk_cn && <div><dt>风险关注</dt><dd>{card.risk_cn}</dd></div>}</dl>
-    {validPriceLevels(card.levels).length > 0 && <div className="ar-levels">{validPriceLevels(card.levels).map((level, i) => <button key={i} onClick={() => onChart(card.symbol, {level, levels:validPriceLevels(card.levels), asOf:card.as_of})} title={`在图上定位该价位 · ${level.from_cn}`}>
-      <span>{level.role}</span><strong>{level.price}</strong><span>距现价 {level.dist_pct}%</span><span>查看图表 ↗</span>
-    </button>)}</div>}
+    {validPriceLevels(card.levels).length > 0 && <div className="ar-levels">
+      <div className="ar-section-label">系统价位与条件（点价位在图上定位）</div>
+      {validPriceLevels(card.levels).map((level, i) => <button key={i} onClick={() => onChart(card.symbol, {level, levels:validPriceLevels(card.levels), asOf:card.as_of})} title={`在图上定位该价位 · ${level.from_cn}`}>
+        <span>{level.role}</span><strong>{level.price}</strong><span>距现价 {level.dist_pct}%</span><span>查看图表 ↗</span>
+      </button>)}</div>}
     {card.note_cn && <p className="ar-footnote">{card.note_cn}</p>}
   </section>;
 }
@@ -117,10 +123,13 @@ function TurnRow({ turn, onOpen, onChart, onAsk, expanded = false, sessionId, on
       <ol>{turn.stages.map((s, i) => <li key={`${s.key}-${i}`}>{s.text}</li>)}</ol></details> : working && <p className="ar-working" role="status">正在读取资料，首次分析可能需要一些时间…</p>}
     {working && turn.factsReady && <p className="ar-working" role="status">系统资料已就绪（见下方卡片），AI 解释仍在生成…</p>}
     {turn.fallback && <p className="ar-notice">本次采用系统提供的结果，请结合下方说明查看。</p>}
-    <AnswerText text={fullText} markdown={markdown} expanded={expanded || working || selfExpanded} />
+    {/* UX 第二轮 2026-09-17：层级改为「结论 → 系统价位与条件 → 完整分析（可展开）
+        → 依据卡」。系统价位卡通过 middle 插槽插在结论与正文之间；没有价位卡的
+        回答（如历史恢复、清单类结果）顺序与原来一致，不造新结论。 */}
+    <AnswerText text={fullText} markdown={markdown} expanded={expanded || working || selfExpanded}
+      middle={turn.quickCard ? <QuickCardView card={turn.quickCard} onChart={onChart} /> : undefined} />
     {/* 可靠性一期：资料卡在 prepared 事件后即显示（working 期间也可看），
         失败/超时后同样保留——先于 AI 解释到达，不随模型失败消失。 */}
-    {turn.quickCard && <QuickCardView card={turn.quickCard} onChart={onChart} />}
     {turn.evidenceCard && <EvidenceCardView card={turn.evidenceCard} forceDetailsOpen={expanded || selfExpanded} />}
     <CopilotCardDispatcher card={turn.card ?? null} preview={expanded ? null : turn.preview ?? null} />
     {!working && (() => {
