@@ -1,0 +1,1423 @@
+diff --git a/configs/newsfeed.json b/configs/newsfeed.json
+index d80a099c..d38eb040 100644
+--- a/configs/newsfeed.json
++++ b/configs/newsfeed.json
+@@ -104,5 +104,14 @@
+       "重组"
+     ]
+   },
+-  "lookback_days": 3
++  "lookback_days": 3,
++  "health": {
++    "_comment": "资料健康状态（2026-09-17 S1）：对既有每日运行的运维过期提醒（24h+2h宽限），只作展示提醒，不参与技术策略。",
++    "max_age_hours": 26
++  },
++  "fed_press": {
++    "_comment": "美联储官方货币政策公告源（2026-09-17 S1 验证实际可达后接入；采集归 macro，不进 blogger）。",
++    "enabled": true,
++    "url": "https://www.federalreserve.gov/feeds/press_monetary.xml"
++  }
+ }
+\ No newline at end of file
+diff --git a/docs/experiments/INDEX.md b/docs/experiments/INDEX.md
+index 07da6697..cdbac834 100644
+--- a/docs/experiments/INDEX.md
++++ b/docs/experiments/INDEX.md
+@@ -28,6 +28,8 @@
+ 
+ ## 1. 任务编号总账（任务书 → 执行归档）
+ 
++- 2026-09-17：[Agent消息可靠性S1](agent-news-s1-2026-09-17.md)：采集/评分/简报分阶段留痕+资料健康状态（过期/无消息/失败/未评分分清）；美联储官方源真实接通（预期与正式公告不混同）；隔离验证88测试通过，生产未采用（阶段交付未结案，Ark执行/Codex复核）。
++
+ - 2026-09-16：[仓库目录治理](repo-governance-2026-09-16.md)：四层目录白名单化+169项旧产物归档+plist回填，全量测试零新增失败；AGENTS.md 立文件归置规约 + scripts/check_repo_hygiene.py 结案自检防再乱。
+ 
+ - 2026-09-16：[因子库建设进度总览](factor-library-progress-2026-09-16.md)：能力分层现状快照+四条OKR同步（只读整理，零计算零联网零安装）；首个真实结果与全部缺口、下一步授权状态一页可查，不是验收。
+diff --git a/docs/experiments/registry.json b/docs/experiments/registry.json
+index d2d92e07..b3d738a5 100644
+--- a/docs/experiments/registry.json
++++ b/docs/experiments/registry.json
+@@ -1357,6 +1357,11 @@
+       "category": "数据与质量",
+       "verdict": "passed",
+       "oneLiner": "仓库大扫除：四层目录白名单化+归档169项旧产物，生产零破坏；AGENTS.md立归置规约+自检脚本防再乱。"
++    },
++    "docs/experiments/agent-news-s1-2026-09-17.md": {
++      "category": "数据与质量",
++      "verdict": "mixed",
++      "oneLiner": "消息断更不再装正常：采集/评分/简报分阶段留痕，资料过期/无消息/失败/未评分分得清；美联储官方源真实接通，9月4日预期与9月17日正式公告不混同；隔离验证88测试通过，生产未采用未恢复。"
+     }
+   }
+ }
+diff --git a/src/lei_signal/api/schemas.py b/src/lei_signal/api/schemas.py
+index 70b4a7cd..d7b68faa 100644
+--- a/src/lei_signal/api/schemas.py
++++ b/src/lei_signal/api/schemas.py
+@@ -1268,6 +1268,9 @@ class MajorEventDTO(BaseModel):
+ 
+     2026-09-05 用户口径：影响资本开支级别的产业大事（英伟达/谷歌类）+
+     宏观/风险/政策，≥7 分；博主观点与 AI 主观小结（llm_note）不进 Agent。
++    2026-09-17 S1 增量（可选，缺省兼容旧卡）：事件阶段/来源/带时区事件
++    时间与「尚未评分」标记——正式声明无 AI 评分也可展示，方向/重要度
++    留空不冒充中性事实。
+     """
+ 
+     title: str
+@@ -1276,14 +1279,24 @@ class MajorEventDTO(BaseModel):
+     importance: int = 0
+     when_cn: str = ""
+     published_at: str = ""
++    event_stage: str | None = None
++    source_url: str | None = None
++    event_at: str | None = None
++    score_state_cn: str | None = None
+ 
+ 
+ class MajorEventsBlockDTO(BaseModel):
+-    """重大事件叙事区块（参考层，不参与技术判定）。"""
++    """重大事件叙事区块（参考层，不参与技术判定）。
++
++    health（2026-09-17 S1 可选）：消息资料健康状态 dict
++    （build_news_health 输出）——空条目与「资料过期/采集失败」不再
++    混为一句「没有重大消息」。
++    """
+ 
+     available: bool = False
+     items: list[MajorEventDTO] = []
+     note_cn: str = ""
++    health: dict | None = None
+ 
+ 
+ class OpsCardDTO(BaseModel):
+diff --git a/src/lei_signal/copilot/ops.py b/src/lei_signal/copilot/ops.py
+index cb8408fd..e06e62aa 100644
+--- a/src/lei_signal/copilot/ops.py
++++ b/src/lei_signal/copilot/ops.py
+@@ -134,14 +134,24 @@ def _build_major_events_block(major_events: dict | None) -> MajorEventsBlockDTO
+             importance=int(it.get("importance") or 0),
+             when_cn=str(it.get("when_cn") or ""),
+             published_at=str(it.get("published_at") or ""),
++            # 2026-09-17 S1 透传（可选）：事件阶段/来源/事件时间与未评分标记
++            event_stage=(it.get("event") or {}).get("event_stage")
++            if isinstance(it.get("event"), dict) else None,
++            source_url=(it.get("event") or {}).get("source_url")
++            if isinstance(it.get("event"), dict) else None,
++            event_at=(it.get("event") or {}).get("event_at")
++            if isinstance(it.get("event"), dict) else None,
++            score_state_cn=it.get("score_state_cn"),
+         )
+         for it in (major_events.get("items") or [])
+         if isinstance(it, dict)
+     ]
++    health = major_events.get("health")
+     return MajorEventsBlockDTO(
+         available=bool(major_events.get("available")),
+         items=items,
+         note_cn=str(major_events.get("note_cn") or ""),
++        health=health if isinstance(health, dict) else None,
+     )
+ 
+ 
+diff --git a/src/lei_signal/newsfeed/config_loader.py b/src/lei_signal/newsfeed/config_loader.py
+index b318be34..a7179603 100644
+--- a/src/lei_signal/newsfeed/config_loader.py
++++ b/src/lei_signal/newsfeed/config_loader.py
+@@ -26,6 +26,11 @@ DEFAULT_CONFIG: dict[str, Any] = {
+         "industry": ["财报", "业绩", "营收", "净利润", "产能", "涨价", "订单"],
+     },
+     "lookback_days": 3,
++    # 资料健康状态（2026-09-17 S1）：对既有每日运行的运维过期提醒
++    # （24 小时 + 2 小时宽限），只作展示提醒，不参与技术策略。
++    "health": {"max_age_hours": 26},
++    # 美联储官方货币政策公告源：默认关闭，configs/newsfeed.json 显式启用。
++    "fed_press": {"enabled": False},
+ }
+ 
+ 
+diff --git a/src/lei_signal/newsfeed/pipeline.py b/src/lei_signal/newsfeed/pipeline.py
+index 142b336f..f7240fff 100644
+--- a/src/lei_signal/newsfeed/pipeline.py
++++ b/src/lei_signal/newsfeed/pipeline.py
+@@ -2,6 +2,12 @@
+ 
+ 单项降级：任一源失败记入 ``news_runs.errors_json`` 并继续；全部源失败
+ status=failed，部分失败 partial，全成 ok。LLM 失败保持未评分态。
++
++阶段留痕（2026-09-17 S1）：run.status 保持「采集结果」口径不变（兼容旧
++消费方）；stats_json 新增 ``stages``（collect/score/digest/push 各自的
++status/finished_at/errors）与 ``sources``（每源尝试时间/成败），让
++「旧 ok 但评分失败」「no_llm 跳过」「部分源失败」可以事后核对，不再
++只靠日志 warning。
+ """
+ from __future__ import annotations
+ 
+@@ -22,6 +28,7 @@ from lei_signal.newsfeed.models import NewsItem
+ from lei_signal.newsfeed.normalize import preclassify
+ from lei_signal.newsfeed.sources.bilibili import BilibiliClient, fetch_new_up_items
+ from lei_signal.newsfeed.sources.eastmoney import collect_eastmoney
++from lei_signal.newsfeed.sources.fed import FED_PRESS_URL, collect_fed_press
+ from lei_signal.newsfeed.sources.rss import collect_rss
+ from lei_signal.newsfeed.sources.sina import collect_sina
+ from lei_signal.newsfeed.store import NewsStore
+@@ -39,6 +46,10 @@ def _lookback_iso(days: int) -> str:
+     return (datetime.now().astimezone() - timedelta(days=days)).isoformat(timespec="seconds")
+ 
+ 
++def _now_iso() -> str:
++    return datetime.now().astimezone().isoformat(timespec="seconds")
++
++
+ def _flash_filter(
+     items: list[NewsItem], cfg: dict[str, Any]
+ ) -> tuple[list[NewsItem], int]:
+@@ -60,23 +71,41 @@ def _flash_filter(
+ 
+ def _collect_all(
+     store: NewsStore, cfg: dict[str, Any], *, full: bool, bili_client: BilibiliClient | None
+-) -> tuple[dict[str, int], list[dict]]:
+-    """跑全部源。返回（每源入库数, 错误列表）。"""
++) -> tuple[dict[str, int], list[dict], dict[str, dict]]:
++    """跑全部源。返回（每源入库数, 错误列表, 每源尝试记录）。"""
+     stats: dict[str, int] = {}
+     errors: list[dict] = []
++    attempts: dict[str, dict] = {}
+     lookback = _lookback_iso(int(cfg.get("lookback_days") or 3))
+ 
+     def _ingest(source_key: str, items: list[NewsItem], watermark: str | None) -> None:
+-        if watermark is not None:
+-            store.set_watermark(source_key, watermark)
++        # 先写库、后推进水位（2026-09-17 S1 修复，原顺序相反）：写库失败时
++        # 水位不动，下次重抓，dedupe 保证不重复插入；不提前推进水位漏新闻。
+         if not items:
+             stats[source_key] = 0
++            if watermark is not None:
++                store.set_watermark(source_key, watermark)
+             return
+         inserted = store.insert_items([it.to_row() for it in items])
+         stats[source_key] = inserted
++        if watermark is not None:
++            store.set_watermark(source_key, watermark)
++
++    def _attempt(source_key: str, fn, *, warn_prefix: str | None = None) -> None:
++        """单源执行 + 尝试留痕（attempted_at/ok/error），失败不阻断其他源。"""
++        attempted_at = _now_iso()
++        try:
++            fn()
++        except Exception as exc:  # noqa: BLE001 - 单项降级
++            msg = str(exc)[:200]
++            errors.append({"source": source_key, "error": msg})
++            attempts[source_key] = {"attempted_at": attempted_at, "ok": False, "error": msg}
++            logger.warning("newsfeed %s 失败: %s", warn_prefix or source_key, exc)
++        else:
++            attempts[source_key] = {"attempted_at": attempted_at, "ok": True, "error": None}
+ 
+     # ---- 东财快讯 ----
+-    try:
++    def _eastmoney() -> None:
+         wm_raw = store.get_watermark("eastmoney")
+         since = None if (full or wm_raw is None) else int(wm_raw)
+         items, wm = collect_eastmoney(since)
+@@ -84,12 +113,11 @@ def _collect_all(
+             items = [i for i in items if i.published_at >= lookback]
+         kept, _dropped = _flash_filter(items, cfg)
+         _ingest("eastmoney", kept, wm)
+-    except Exception as exc:  # noqa: BLE001 - 单项降级
+-        errors.append({"source": "eastmoney", "error": str(exc)[:200]})
+-        logger.warning("newsfeed eastmoney 失败: %s", exc)
++
++    _attempt("eastmoney", _eastmoney)
+ 
+     # ---- 新浪 7x24 ----
+-    try:
++    def _sina() -> None:
+         wm_raw = store.get_watermark("sina")
+         since = None if (full or wm_raw is None) else int(wm_raw)
+         items, wm = collect_sina(since)
+@@ -97,39 +125,54 @@ def _collect_all(
+             items = [i for i in items if i.published_at >= lookback]
+         kept, _dropped = _flash_filter(items, cfg)
+         _ingest("sina", kept, wm)
+-    except Exception as exc:  # noqa: BLE001
+-        errors.append({"source": "sina", "error": str(exc)[:200]})
+-        logger.warning("newsfeed sina 失败: %s", exc)
++
++    _attempt("sina", _sina)
++
++    # ---- 美联储官方货币政策公告（2026-09-17 S1，config 显式启用才接入）----
++    fed_cfg = cfg.get("fed_press") or {}
++    if fed_cfg.get("enabled"):
++
++        def _fed() -> None:
++            wm_raw = store.get_watermark("fed")
++            since = None if (full or wm_raw is None) else wm_raw
++            items, wm = collect_fed_press(
++                url=str(fed_cfg.get("url") or FED_PRESS_URL), since_iso=since
++            )
++            if wm is not None and (full or wm_raw is None):
++                items = [i for i in items if i.published_at >= lookback]
++            _ingest("fed", items, wm)
++
++        _attempt("fed", _fed)
+ 
+     # ---- Google News 查询 ----
+     for query in cfg.get("gnews_queries") or []:
+         key = f"gnews:{query}"
+-        try:
+-            wm_raw = store.get_watermark(key)
++
++        def _gnews(q: str = query, k: str = key) -> None:
++            wm_raw = store.get_watermark(k)
+             since = None if (full or wm_raw is None) else wm_raw
+-            items, wm = collect_rss(query, is_gnews=True, since_iso=since)
++            items, wm = collect_rss(q, is_gnews=True, since_iso=since)
+             for it in items:
+                 it.category = "industry"
+             if wm is not None and (full or wm_raw is None):
+                 items = [i for i in items if i.published_at >= lookback]
+-            _ingest(key, items, wm)
+-        except Exception as exc:  # noqa: BLE001
+-            errors.append({"source": key, "error": str(exc)[:200]})
+-            logger.warning("newsfeed %s 失败: %s", key, exc)
++            _ingest(k, items, wm)
++
++        _attempt(key, _gnews)
+ 
+     # ---- 通用 RSS（P2 公众号 wewe-rss）----
+     for feed_url in cfg.get("rss_feeds") or []:
+         key = f"rss:{feed_url}"
+-        try:
+-            wm_raw = store.get_watermark(key)
++
++        def _rss(u: str = feed_url, k: str = key) -> None:
++            wm_raw = store.get_watermark(k)
+             since = None if (full or wm_raw is None) else wm_raw
+-            items, wm = collect_rss(feed_url, is_gnews=False, since_iso=since)
++            items, wm = collect_rss(u, is_gnews=False, since_iso=since)
+             for it in items:
+                 it.category = "blogger"
+-            _ingest(key, items, wm)
+-        except Exception as exc:  # noqa: BLE001
+-            errors.append({"source": key, "error": str(exc)[:200]})
+-            logger.warning("newsfeed %s 失败: %s", key, exc)
++            _ingest(k, items, wm)
++
++        _attempt(key, _rss)
+ 
+     # ---- B站 UP主 ----
+     cookie_path = Path(DEFAULT_CACHE_DIR) / "newsfeed" / "bili_cookies.json"
+@@ -139,34 +182,35 @@ def _collect_all(
+         if not mid:
+             continue
+         key = f"bilibili:{mid}"
+-        try:
++
++        def _bili(m: int = mid, n: str = name, k: str = key) -> None:
+             client = bili_client or BilibiliClient(
+                 cookie_path, sessdata=os.environ.get("BILI_SESSDATA", "")
+             )
+-            wm_raw = store.get_watermark(key)
++            wm_raw = store.get_watermark(k)
+             items, wm = fetch_new_up_items(
+                 client,
+-                mid,
+-                name,
++                m,
++                n,
+                 None if (full or wm_raw is None) else wm_raw,
+                 lookback_iso=lookback if (full or wm_raw is None) else None,
+                 title_blocklist=list(cfg.get("bili_title_blocklist") or ["直播回放"]),
+                 max_duration_sec=cfg.get("bili_max_duration_sec", 1800),
+             )
+-            _ingest(key, items, wm)
+-        except Exception as exc:  # noqa: BLE001
+-            errors.append({"source": key, "error": str(exc)[:200]})
+-            logger.warning("newsfeed %s(%s) 失败: %s", key, name, exc)
++            _ingest(k, items, wm)
++
++        _attempt(key, _bili, warn_prefix=f"{key}({name})")
+ 
+-    return stats, errors
++    return stats, errors, attempts
+ 
+ 
+-def _score_all(store: NewsStore) -> int:
+-    """未评分条目分批打分。
++def _score_all(store: NewsStore) -> tuple[int, list[dict]]:
++    """未评分条目分批打分。返回（成功打分数, 失败记录列表）。
+ 
+     批次按"条数 ≤20 且累计字符 ≤30000"双限制切分：长字幕（直播回放）
+     单条可达 2 万字，固定 20 条/批会撑爆模型上下文（2026-08-27 实测批
+     80-94 两次失败）。批失败原样重试 1 次，仍失败放弃该批（保持未评分）。
++    失败记录进 stats.stages.score.errors（2026-09-17 S1），不只日志 warning。
+     """
+     total = 0
+     rows = [dict(r) for r in store.fetch_unscored(limit=500)]
+@@ -180,25 +224,30 @@ def _score_all(store: NewsStore) -> int:
+ 
+     batch: list[dict] = []
+     weight = 0
+-    failures = 0
++    failures: list[dict] = []
++
++    def _flush(b: list[dict]) -> None:
++        nonlocal total
++        if _run_score_batch(store, b):
++            total += len(b)
++        else:
++            failures.append({
++                "stage": "score",
++                "error": f"打分批 {b[0].get('id')}-{b[-1].get('id')} 两次失败（保持未评分态）",
++            })
++
+     for row in rows:
+         w = _row_weight(row)
+         if batch and (len(batch) >= _SCORE_BATCH or weight + w > _SCORE_CHAR_BUDGET):
+-            if _run_score_batch(store, batch):
+-                total += len(batch)
+-            else:
+-                failures += 1
++            _flush(batch)
+             batch, weight = [], 0
+         batch.append(row)
+         weight += w
+     if batch:
+-        if _run_score_batch(store, batch):
+-            total += len(batch)
+-        else:
+-            failures += 1
++        _flush(batch)
+     if failures:
+-        logger.warning("newsfeed 打分 %d 个批失败（保持未评分态）", failures)
+-    return total
++        logger.warning("newsfeed 打分 %d 个批失败（保持未评分态）", len(failures))
++    return total, failures
+ 
+ 
+ def _run_score_batch(store: NewsStore, batch: list[dict]) -> bool:
+@@ -237,15 +286,45 @@ def run_pipeline(
+     store = NewsStore(db_path)
+     try:
+         run_id = store.start_run()
+-        per_source, errors = _collect_all(store, cfg, full=full, bili_client=bili_client)
++        per_source, errors, attempts = _collect_all(
++            store, cfg, full=full, bili_client=bili_client
++        )
++        collect_status = "ok"
++        if errors and not per_source:
++            collect_status = "failed"
++        elif errors:
++            collect_status = "partial"
++        stages: dict[str, dict] = {
++            "collect": {
++                "status": collect_status,
++                "finished_at": _now_iso(),
++                "errors": list(errors),
++            }
++        }
+         # 内容保留队列：字幕/正文大字段保留 7 天（2026-09-05 用户口径），
+         # 过期清理；评分元数据保留。放在抓取后、打分前（打分只读近期条目）。
+         store.clear_old_content(days=7)
+         scored = 0
+         digest_ok = False
+         pushed = 0
+-        if not no_llm:
+-            scored = _score_all(store)
++        if no_llm:
++            # 明确记 skipped：不误写 failed，也不冒充全 ok（2026-09-17 S1）。
++            stages["score"] = {
++                "status": "skipped", "finished_at": None, "errors": [], "reason": "no_llm",
++            }
++            stages["digest"] = {
++                "status": "skipped", "finished_at": None, "errors": [], "reason": "no_llm",
++            }
++            stages["push"] = {
++                "status": "skipped", "finished_at": None, "errors": [], "reason": "no_llm",
++            }
++        else:
++            scored, score_errors = _score_all(store)
++            stages["score"] = {
++                "status": "failed" if score_errors else "ok",
++                "finished_at": _now_iso(),
++                "errors": score_errors,
++            }
+             today = datetime.now().astimezone().strftime("%Y-%m-%d")
+             digest_rows = [dict(r) for r in store.scored_rows_for_digest(today)]
+             if digest_rows:
+@@ -262,24 +341,44 @@ def run_pipeline(
+                             digest["bloggers"] = bloggers
+                     store.save_digest(today, digest)
+                     digest_ok = True
++                    stages["digest"] = {
++                        "status": "ok", "finished_at": _now_iso(), "errors": [],
++                    }
++                else:
++                    stages["digest"] = {
++                        "status": "failed",
++                        "finished_at": _now_iso(),
++                        "errors": [{"stage": "digest", "error": "简报生成两次失败，未保存"}],
++                    }
++            else:
++                stages["digest"] = {
++                    "status": "skipped", "finished_at": None, "errors": [],
++                    "reason": "no_items",
++                }
+             # 重大事件推送（宏观线；参考层，best-effort 不阻断管线）
+             try:
+                 from lei_signal.newsfeed.push import push_daily_brief
+ 
+                 pushed = push_daily_brief(db_path)
++                stages["push"] = {"status": "ok", "finished_at": _now_iso(), "errors": []}
+             except Exception as exc:  # noqa: BLE001 — 推送失败不影响抓取/打分
+                 logger.warning("消息面推送失败: %s", exc)
+-        status = "ok"
+-        if errors and not per_source:
+-            status = "failed"
+-        elif errors:
+-            status = "partial"
++                stages["push"] = {
++                    "status": "failed",
++                    "finished_at": _now_iso(),
++                    "errors": [{"stage": "push", "error": str(exc)[:200]}],
++                }
++        # run.status 保持「采集结果」口径（兼容旧消费方）；评分/简报/推送
++        # 成败只在 stages 里表达，不再被综合 ok 掩盖。
++        status = collect_status
+         stats = {
+             "inserted": sum(per_source.values()),
+             "per_source": per_source,
+             "scored": scored,
+             "digest": digest_ok,
+             "pushed": pushed,
++            "stages": stages,
++            "sources": attempts,
+         }
+         store.finish_run(run_id, status, stats, errors)
+         return {"run_id": run_id, "status": status, **stats, "errors": errors}
+diff --git a/src/lei_signal/newsfeed/push.py b/src/lei_signal/newsfeed/push.py
+index b08c5070..cf287f88 100644
+--- a/src/lei_signal/newsfeed/push.py
++++ b/src/lei_signal/newsfeed/push.py
+@@ -4,8 +4,9 @@
+ 1. 危机状态机事件（V4 刚崩警示 / V3 出清企稳，最高优先）——触发即推；
+ 2. 当日宏观/风险类重大消息（category ∈ {macro, risk} 且 importance ≥ 7）
+    ——美联储议息、非农、战争等系统性事件；
+-3. 「影响窗口」：importance ≥ 9 的事件发布后 3 日内持续随推送出现
+-   （标"X日前 · 影响窗口"）——关键信息的影响不止当天。
++3. 「继续关注」：importance ≥ 9 的事件发布后 3 日内持续随推送出现
++   （标"X日前 · 继续关注"）——3 天只是**关注期限**（提醒用户别忘），
++   不宣称市场影响持续时间（2026-09-17 文案口径，原"影响窗口"说法退役）。
+ 
+ 铁律（对齐 notify/handoff-feishu-notifier）：
+ - 参考层信息推送：文案只有事实与读数，无买卖指令（llm_note 本身不给建议）；
+@@ -26,7 +27,8 @@ logger = logging.getLogger(__name__)
+ #: 当日重大事件门槛（宏观/风险类）。8→7（2026-09-05）：GLM 打分较 ark 保守，
+ #: 非农/美联储/战争类系统性事件落在 7 分档（用户口径点名必推）。
+ PUSH_IMPORTANCE = 7
+-#: 影响窗口：≥9 分事件的持续天数（含发布日）。
++#: 继续关注期限：≥9 分事件发布后持续提醒的天数（含发布日）。仅关注期限，
++#: 不声称市场影响持续这么久（2026-09-17 口径）。
+ IMPACT_WINDOW_DAYS = 3
+ 
+ _DIR_ARROW = {"bullish": "利多↑", "bearish": "利空↓", "neutral": ""}
+@@ -77,7 +79,7 @@ def _fmt_item(d: dict) -> str:
+     )
+     suffix = ""
+     if "_days_ago" in d:
+-        suffix = f"（{d['_days_ago']}日前 · 影响窗口内）"
++        suffix = f"（{d['_days_ago']}日前 · 继续关注）"
+     line = f"- {head}{suffix}"
+     if note:
+         line += f"\n  {note[:60]}"
+@@ -120,7 +122,7 @@ def build_push_payloads(db_path: str | Path) -> list[NotificationPayload]:
+             lines.append("**今日重大宏观/风险事件**")
+             lines += [_fmt_item(d) for d in fresh[:5]]
+         if window:
+-            lines.append("\n**仍在影响窗口（≥9分）**")
++            lines.append("\n**近期事件继续关注（≥9分）**")
+             lines += [_fmt_item(d) for d in window[:3]]
+         lines.append("\n*消息面参考层 · 非交易信号 · 详情打开资讯流页*")
+         payloads.append(
+diff --git a/src/lei_signal/newsfeed/service.py b/src/lei_signal/newsfeed/service.py
+index 87901cc0..1e6b5806 100644
+--- a/src/lei_signal/newsfeed/service.py
++++ b/src/lei_signal/newsfeed/service.py
+@@ -7,6 +7,9 @@ from datetime import datetime, timedelta
+ from typing import Any
+ 
+ from lei_signal.api import config as api_config
++from lei_signal.newsfeed.config_loader import load_config
++from lei_signal.newsfeed.event_context import build_event_reference, dedupe_events
++from lei_signal.newsfeed.health import build_news_health
+ from lei_signal.newsfeed.pipeline import run_pipeline
+ from lei_signal.newsfeed.store import NewsStore
+ 
+@@ -177,6 +180,46 @@ class NewsfeedService:
+         )
+         return {"days": days, "items": hits, "mood": mood}
+ 
++    # ---------------- 健康状态（2026-09-17 S1） ----------------
++
++    def _health(self, store: NewsStore) -> dict[str, Any]:
++        """由运行留痕 + 轻量聚合构建健康状态。
++
++        服务异常时返回**明确失败材料**（availability=unknown + 说明），
++        不静默省略 health 键。
++        """
++        try:
++            cfg = load_config()
++            max_age = int((cfg.get("health") or {}).get("max_age_hours") or 26)
++            run = store.latest_run()
++            run_dict = None
++            if run is not None:
++                run_dict = dict(run)
++                run_dict["stats"] = json.loads(run_dict.pop("stats_json") or "{}")
++                run_dict["errors"] = json.loads(run_dict.pop("errors_json") or "[]")
++            agg = store.health_aggregates()
++            now = datetime.now().astimezone().isoformat(timespec="seconds")
++            return build_news_health(
++                latest_run=run_dict,
++                latest_success_at=agg.get("latest_success_at"),
++                latest_item_at=agg.get("latest_item_at"),
++                unscored_count=int(agg.get("unscored_count") or 0),
++                now=now,
++                max_age_hours=max_age,
++            )
++        except Exception as exc:  # noqa: BLE001 — 明确失败材料替代静默省略
++            return {
++                "availability": "unknown",
++                "last_checked_at": None,
++                "last_success_at": None,
++                "latest_item_at": None,
++                "age_hours": None,
++                "note_cn": f"健康状态计算失败（{type(exc).__name__}），资料状态未知",
++                "stages": {},
++                "unscored_count": 0,
++                "max_age_hours": 26,
++            }
++
+     def major_events_brief(
+         self,
+         *,
+@@ -190,6 +233,12 @@ class NewsfeedService:
+         故类别扩到 macro/risk/industry/policy 四类（推送的宏观线仍只 macro/risk，
+         两套口径各自维护）。**只给标题/类别/方向/分数/时间**，不带 llm_note
+         主观小结——博主立场与 AI 观点不进 Agent（同日红线：叙事标注层）。
++
++        2026-09-17 S1 增量：每条带 ``event`` 事件参考（阶段/来源/带时区时间，
++        build_event_reference 口径）；未评分的官方来源正式声明也进参考列表
++        （importance/direction 保持空，标「尚未评分」，不凭空赋分）；同一
++        官方公告按确定事件身份去重；顶层带 ``health`` 资料状态——空 items
++        与「资料过期/采集失败」不再混为一句「没有重大消息」。
+         """
+         days = max(1, min(int(days), 7))
+         date_from = (
+@@ -203,6 +252,10 @@ class NewsfeedService:
+                 date_from=date_from,
+                 limit=60,
+             )
++            official_unscored = store.official_unscored_recent(
++                source="fed", date_from=date_from, limit=10
++            )
++            health = self._health(store)
+         finally:
+             store.close()
+         today = datetime.now().astimezone().strftime("%Y-%m-%d")
+@@ -210,6 +263,17 @@ class NewsfeedService:
+             "macro": "宏观", "risk": "风险", "industry": "产业", "policy": "政策",
+         }
+         dir_cn = {"bullish": "利多", "bearish": "利空", "neutral": "中性"}
++
++        def _when_cn(published_at: Any) -> str:
++            day = str(published_at or "")[:10]
++            if day == today:
++                return "今日"
++            gap = (
++                datetime.fromisoformat(today).date()
++                - datetime.fromisoformat(day).date()
++            ).days if day else 99
++            return f"{gap}天前" if 0 < gap < 30 else day
++
+         # 同类限额：非农/议息一类系统性事件常被多条报道刷屏（2026-09-05
+         # 实测 8 条全被宏观占满，用户点名的产业大事被挤出），每类最多
+         # 4 条保住类别多样性；合并后仍按重要度降序。
+@@ -222,18 +286,9 @@ class NewsfeedService:
+                 continue
+             seen_cat[c] = seen_cat.get(c, 0) + 1
+             capped.append(r)
+-        items = []
++        items: list[dict[str, Any]] = []
+         for r in capped[:max(1, int(limit))]:
+             d = dict(r)
+-            day = str(d.get("published_at") or "")[:10]
+-            if day == today:
+-                when_cn = "今日"
+-            else:
+-                gap = (
+-                    datetime.fromisoformat(today).date()
+-                    - datetime.fromisoformat(day).date()
+-                ).days if day else 99
+-                when_cn = f"{gap}天前" if 0 < gap < 30 else day
+             items.append(
+                 {
+                     "title": d.get("title") or "",
+@@ -243,14 +298,40 @@ class NewsfeedService:
+                     "direction_cn": dir_cn.get(d.get("direction") or "", "中性"),
+                     "importance": d.get("importance"),
+                     "published_at": d.get("published_at"),
+-                    "when_cn": when_cn,
++                    "when_cn": _when_cn(d.get("published_at")),
++                    "event": build_event_reference(d),
++                }
++            )
++        # 未评分官方条目：正式声明无 AI 评分仍可展示；方向/重要度留空并
++        # 标「尚未评分」（未知不填为「中性事实」），不参与排序只作参考事实。
++        for r in official_unscored[:5]:
++            d = dict(r)
++            items.append(
++                {
++                    "title": d.get("title") or "",
++                    "category": d.get("category"),
++                    "category_cn": cat_cn.get(d.get("category") or "", d.get("category") or ""),
++                    "direction": None,
++                    "direction_cn": None,
++                    "importance": None,
++                    "score_state_cn": "尚未评分",
++                    "published_at": d.get("published_at"),
++                    "when_cn": _when_cn(d.get("published_at")),
++                    "event": build_event_reference(d),
+                 }
+             )
++        # 同一官方公告（确定事件身份）去重：优先已确认正式结果与已评分条目；
++        # 无确定身份的条目（如预期报道）永不合并。dedupe_events 返回原 ref
++        # 对象，按身份映射回展示条目。
++        refs = [it["event"] for it in items]
++        kept = {id(r) for r in dedupe_events(refs)}
++        items = [it for it, r in zip(items, refs, strict=True) if id(r) in kept]
+         return {
+             "days": days,
+             "min_importance": max(1, int(min_importance)),
+             "available": bool(items),
+             "items": items,
++            "health": health,
+             "note_cn": "客观事件参考层（标题/类别/方向为资讯流AI评分），不参与技术判定",
+         }
+ 
+@@ -279,6 +360,9 @@ class NewsfeedService:
+                 "last_run": last_run,
+                 "counts": store.counts(),
+                 "trigger": dict(self._last_trigger),
++                # 2026-09-17 S1：资料健康状态（采集/评分/简报分阶段），
++                # 旧 ok 而过期、部分源失败、未评分等与「没有消息」分开。
++                "health": self._health(store),
+             }
+         finally:
+             store.close()
+diff --git a/src/lei_signal/newsfeed/store.py b/src/lei_signal/newsfeed/store.py
+index 5d3f5ff7..e1ab3f8d 100644
+--- a/src/lei_signal/newsfeed/store.py
++++ b/src/lei_signal/newsfeed/store.py
+@@ -182,11 +182,14 @@ class NewsStore:
+         级别的产业事件（英伟达/谷歌资本开支类）也纳入，故类别集合由调用方
+         传入（Agent 侧 = macro/risk/industry/policy 四类）。只取客观字段
+         （标题/类别/方向/分数/时间），不含 llm_note——主观小结不进 Agent。
++        2026-09-17 S1 增列 source/source_name/url/ingested_at（同为客观
++        字段），供事件参考归一化（build_event_reference）追溯来源与时间。
+         """
+         ph = ",".join("?" for _ in categories)
+         return list(
+             self._conn.execute(
+-                "SELECT id, category, title, direction, importance, published_at "
++                "SELECT id, source, source_name, url, category, title, direction, "
++                "importance, published_at, ingested_at "
+                 f"FROM news_items WHERE importance IS NOT NULL "
+                 f"AND category IN ({ph}) AND importance >= ? AND published_at >= ? "
+                 "ORDER BY importance DESC, published_at DESC LIMIT ?",
+@@ -326,5 +329,59 @@ class NewsStore:
+         ).fetchone()
+         return {"total": row["total"] or 0, "scored": row["scored"] or 0}
+ 
++    # ---------------- 健康状态只读聚合（2026-09-17 S1） ----------------
++
++    def health_aggregates(self) -> dict:
++        """健康状态所需的三项轻量聚合（不全表载入正文）。
++
++        - latest_success_at：最近一次**明确采集成功**（stages.collect.status
++          == 'ok'）的完成时间；部分失败不算，旧记录没有阶段字段不回填
++          （不追溯伪造成功，保持 None）；
++        - latest_item_at：库里最新消息的发布时间（MAX(published_at)）；
++        - unscored_count：未评分数（仅计数，不据此推断成败）。
++        """
++        latest_success: str | None = None
++        for r in self._conn.execute(
++            "SELECT finished_at, stats_json FROM news_runs ORDER BY id DESC LIMIT 100"
++        ):
++            try:
++                stats = json.loads(r["stats_json"] or "{}")
++            except ValueError:
++                continue
++            stages = stats.get("stages") if isinstance(stats, dict) else None
++            if not isinstance(stages, dict):
++                continue  # 旧格式：无明确阶段记录，不冒充成功
++            collect = stages.get("collect") or {}
++            if collect.get("status") == "ok":
++                latest_success = collect.get("finished_at") or r["finished_at"]
++                break
++        row = self._conn.execute("SELECT MAX(published_at) AS m FROM news_items").fetchone()
++        unscored = self._conn.execute(
++            "SELECT COUNT(*) AS n FROM news_items WHERE importance IS NULL"
++        ).fetchone()["n"]
++        return {
++            "latest_success_at": latest_success,
++            "latest_item_at": row["m"],
++            "unscored_count": int(unscored or 0),
++        }
++
++    def official_unscored_recent(
++        self, *, source: str = "fed", date_from: str, limit: int = 10
++    ) -> list[sqlite3.Row]:
++        """未评分的官方来源近期条目（正式声明无 AI 评分仍可展示，2026-09-17 S1）。
++
++        只取客观字段；不凭空赋重要度/方向（importance/direction 保持 NULL）。
++        """
++        return list(
++            self._conn.execute(
++                "SELECT id, source, source_name, url, category, title, summary, "
++                "published_at, ingested_at "
++                "FROM news_items WHERE source = ? AND importance IS NULL "
++                "AND published_at >= ? "
++                "ORDER BY published_at DESC LIMIT ?",
++                (source, date_from, limit),
++            )
++        )
++
+ 
+ __all__ = ["NewsStore"]
+diff --git a/tests/unit/test_newsfeed_api.py b/tests/unit/test_newsfeed_api.py
+index d9d1c561..8c3d00ec 100644
+--- a/tests/unit/test_newsfeed_api.py
++++ b/tests/unit/test_newsfeed_api.py
+@@ -139,3 +139,44 @@ def test_digests_and_status_and_run(tmp_path, monkeypatch):
+     resp = client.post("/api/news/run")
+     assert resp.status_code == 200
+     assert resp.json()["run"] in ("started", "already_running")
++
++
++def test_status_includes_health(tmp_path, monkeypatch):
++    """状态接口带资料健康状态（2026-09-17 S1）：时间、阶段、未知保留。"""
++    client = _client(tmp_path, monkeypatch)
++    db = str(tmp_path / "api.db")
++    from datetime import datetime
++
++    from lei_signal.newsfeed.store import NewsStore
++
++    now = datetime.now().astimezone().isoformat(timespec="seconds")
++    store = NewsStore(db)
++    run_id = store.start_run()
++    store.finish_run(run_id, "ok", {
++        "inserted": 0,
++        "stages": {
++            "collect": {"status": "ok", "finished_at": now, "errors": []},
++            "score": {"status": "skipped", "finished_at": None,
++                      "errors": [], "reason": "no_llm"},
++        },
++    }, [])
++    store.close()
++
++    resp = client.get("/api/news/status")
++    assert resp.status_code == 200
++    health = resp.json()["health"]
++    assert health["availability"] == "fresh"
++    assert health["last_checked_at"] is not None
++    assert health["last_success_at"] is not None
++    assert health["stages"]["collect"]["status"] == "ok"
++    assert health["stages"]["score"]["status"] == "skipped"
++    assert health["max_age_hours"] == 26
++
++
++def test_status_health_unknown_when_never_ran(tmp_path, monkeypatch):
++    """有条目但无任务记录：状态未知（不冒充正常）。"""
++    client = _client(tmp_path, monkeypatch)
++    resp = client.get("/api/news/status")
++    health = resp.json()["health"]
++    assert health["availability"] == "unknown"
++    assert health["latest_item_at"] is not None  # 条目时间仍保留
+diff --git a/tests/unit/test_newsfeed_major_events.py b/tests/unit/test_newsfeed_major_events.py
+index 23446dbf..2040d646 100644
+--- a/tests/unit/test_newsfeed_major_events.py
++++ b/tests/unit/test_newsfeed_major_events.py
+@@ -147,3 +147,125 @@ def test_discussion_context_major_events_block():
+     assert out is not None
+     assert out["items"][0]["title"] == "英伟达资本开支上修"
+     assert "不参与技术判定" in out["note_cn"]
++
++
++# ---------------- 资料状态与官方事件材料（2026-09-17 S1） ----------------
++
++
++def _seed_fed_statement(db, *, scored: bool) -> None:
++    """模拟 sources/fed.py 采集的官方声明行（9-16 14:00 EDT = 9-17 02:00+08）。"""
++    store = NewsStore(db)
++    store.insert_items([{
++        "source": "fed", "source_name": "美联储官网",
++        "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm",
++        "category": "macro", "title": "Federal Reserve issues FOMC statement",
++        "summary": "The Committee decided to raise the target range.",
++        "content": None,
++        "published_at": datetime.now().astimezone().isoformat(timespec="seconds"),
++        "ingested_at": datetime.now().astimezone().isoformat(timespec="seconds"),
++        "dedupe_key": f"fed-stmt-{scored}",
++    }])
++    if scored:
++        ids = [r["id"] for r in store.fetch_unscored()]
++        store.apply_scores([
++            {"id": i, "category": "macro", "importance": 9,
++             "direction": "bearish", "symbols": [], "note": "模型点评"} for i in ids
++        ])
++    store.close()
++
++
++def test_major_events_brief_carries_health(tmp_path):
++    """空条目与「资料过期/失败」不再混为一句没有消息：health 始终随简报返回。"""
++    db = tmp_path / "nf.db"
++    _seed(db)
++    brief = NewsfeedService(db_path=str(db)).major_events_brief(days=3)
++    assert "health" in brief
++    # 种子只有条目、无任务记录 → 状态未知而非假装正常
++    assert brief["health"]["availability"] == "unknown"
++    assert brief["health"]["latest_item_at"] is not None
++
++
++def test_major_events_empty_db_health_unknown(tmp_path):
++    brief = NewsfeedService(db_path=str(tmp_path / "empty.db")).major_events_brief()
++    assert brief["available"] is False
++    assert brief["health"]["availability"] == "never"
++
++
++def test_unscored_official_statement_displayable(tmp_path):
++    """正式声明无 AI 评分仍可展示：原文链接/阶段/带时区时间保留，不凭空赋分。"""
++    db = tmp_path / "fed.db"
++    _seed_fed_statement(db, scored=False)
++    brief = NewsfeedService(db_path=str(db)).major_events_brief(days=3)
++    assert brief["available"] is True
++    fed = [i for i in brief["items"] if i["title"] == "Federal Reserve issues FOMC statement"]
++    assert len(fed) == 1
++    item = fed[0]
++    assert item["importance"] is None
++    assert item["direction_cn"] is None  # 未知不填为「中性事实」
++    assert item["score_state_cn"] == "尚未评分"
++    assert item["event"]["event_stage"] == "official_result"
++    assert item["event"]["source_url"].endswith("monetary20260916a.htm")
++    assert item["event"]["event_at"] == item["published_at"]
++    assert "note" not in item and "llm_note" not in item and "summary" not in item
++
++
++def test_scored_items_carry_event_reference(tmp_path):
++    """已评分条目带事件参考：模型标签与事实分开（model_annotation）。"""
++    db = tmp_path / "nf.db"
++    _seed(db)
++    brief = NewsfeedService(db_path=str(db)).major_events_brief(days=3)
++    by_title = {i["title"]: i for i in brief["items"]}
++    ev = by_title["美联储议息落地"]["event"]
++    assert ev["event_stage"] in ("expectation", "commentary", "unknown")
++    assert ev["model_annotation"]["scored"] is True
++    assert ev["model_annotation"]["importance"] == 7
++
++
++def test_same_official_url_deduped_scored_preferred(tmp_path):
++    """同一官方公告 URL 的已评分+未评分两行：只显示一条，优先已评分。"""
++    db = tmp_path / "dup.db"
++    store = NewsStore(db)
++    row = {
++        "source": "fed", "source_name": "美联储官网",
++        "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm",
++        "category": "macro", "title": "Federal Reserve issues FOMC statement",
++        "summary": "stmt", "content": None,
++        "published_at": datetime.now().astimezone().isoformat(timespec="seconds"),
++        "dedupe_key": "dup-scored",
++    }
++    store.insert_items([row, {**row, "dedupe_key": "dup-unscored"}])
++    ids = sorted(r["id"] for r in store.fetch_unscored())
++    store.apply_scores([
++        {"id": ids[0], "category": "macro", "importance": 9,
++         "direction": "bearish", "symbols": [], "note": "n"},
++    ])
++    store.close()
++    brief = NewsfeedService(db_path=str(db)).major_events_brief(days=3)
++    fed = [i for i in brief["items"] if "FOMC statement" in i["title"]]
++    assert len(fed) == 1
++    assert fed[0]["importance"] == 9  # 已评分优先
++
++
++def test_ops_block_passthrough_health_and_event():
++    """ops DTO 透传 health 与事件阶段（旧输入无这些键仍兼容）。"""
++    block = _build_major_events_block({
++        "available": True,
++        "items": [{
++            "title": "Federal Reserve issues FOMC statement", "category_cn": "宏观",
++            "direction_cn": "", "importance": 0, "when_cn": "今日",
++            "published_at": _now_iso(), "score_state_cn": "尚未评分",
++            "event": {"event_stage": "official_result",
++                      "source_url": "https://www.federalreserve.gov/x.htm",
++                      "event_at": _now_iso()},
++        }],
++        "health": {"availability": "fresh"},
++    })
++    assert block is not None
++    assert block.health["availability"] == "fresh"
++    assert block.items[0].event_stage == "official_result"
++    assert block.items[0].score_state_cn == "尚未评分"
++    old = _build_major_events_block({"available": True, "items": [{
++        "title": "t", "category_cn": "宏观", "direction_cn": "利空",
++        "importance": 8, "when_cn": "今日", "published_at": _now_iso(),
++    }]})
++    assert old is not None and old.health is None and old.items[0].event_stage is None
+diff --git a/tests/unit/test_newsfeed_pipeline.py b/tests/unit/test_newsfeed_pipeline.py
+index 2f094ae7..e544429a 100644
+--- a/tests/unit/test_newsfeed_pipeline.py
++++ b/tests/unit/test_newsfeed_pipeline.py
+@@ -161,6 +161,158 @@ def test_pipeline_blogger_summary_failure_does_not_block_digest(monkeypatch, tmp
+     store.close()
+ 
+ 
++# ---------------- 阶段留痕与水位顺序（2026-09-17 S1） ----------------
++
++
++def test_pipeline_records_stage_results_and_source_attempts(monkeypatch, tmp_path):
++    """正常带评分运行：stages/sources 留痕齐全，旧计数字段兼容。"""
++    _patch_sources(monkeypatch)
++    monkeypatch.setattr(pipeline, "score_items",
++                        lambda rows, config=None: [
++                            {"id": r["id"], "category": "macro", "importance": 7,
++                             "direction": "bullish", "symbols": [], "note": "n"}
++                            for r in rows])
++    monkeypatch.setattr(pipeline, "generate_digest", lambda rows, config=None: None)
++    result = run_pipeline(tmp_path / "p.db", config=_CFG, no_llm=False)
++    assert result["status"] == "ok"
++    stages = result["stages"]
++    assert stages["collect"]["status"] == "ok"
++    assert stages["collect"]["finished_at"]
++    assert stages["score"]["status"] == "ok"
++    # 简报生成失败（mock 返回 None）→ 明确 failed，不再静默
++    assert stages["digest"]["status"] == "failed"
++    # 每源尝试时间/成败留痕
++    assert result["sources"]["eastmoney"]["ok"] is True
++    assert result["sources"]["eastmoney"]["attempted_at"].startswith("20")
++    # 旧计数字段保持
++    assert result["inserted"] == 1 and result["scored"] == 1
++
++
++def test_pipeline_no_llm_marks_score_digest_push_skipped(monkeypatch, tmp_path):
++    """no_llm 正常运行：评分/简报/推送明确 skipped，不误写 failed 或全 ok。"""
++    _patch_sources(monkeypatch)
++    result = run_pipeline(tmp_path / "p.db", config=_CFG, no_llm=True)
++    assert result["status"] == "ok"
++    assert result["stages"]["score"]["status"] == "skipped"
++    assert result["stages"]["score"]["reason"] == "no_llm"
++    assert result["stages"]["digest"]["status"] == "skipped"
++    assert result["stages"]["push"]["status"] == "skipped"
++    # 未评分条目保留（采集成功与未评分是两回事）
++    assert result["scored"] == 0 and result["inserted"] == 1
++
++
++def test_pipeline_score_failure_visible_items_kept(monkeypatch, tmp_path):
++    """原文采集成功、评分失败（模拟 429）、简报未生成：条目保留且失败可追溯。"""
++    _patch_sources(monkeypatch)
++    monkeypatch.setattr(pipeline, "score_items", lambda rows, config=None: None)
++    monkeypatch.setattr(pipeline, "generate_digest", lambda rows, config=None: None)
++    result = run_pipeline(tmp_path / "p.db", config=_CFG, no_llm=False)
++    # 采集正常 → run.status 保持 ok（采集口径）；评分失败在 stages 可见
++    assert result["status"] == "ok"
++    assert result["scored"] == 0
++    assert result["stages"]["score"]["status"] == "failed"
++    assert result["stages"]["score"]["errors"]
++    # 无已评分条目 → 简报 skipped（无数据），与失败分开
++    assert result["stages"]["digest"]["status"] == "skipped"
++    assert result["stages"]["digest"]["reason"] == "no_items"
++    # 条目保留为未评分，原文仍可查
++    from lei_signal.newsfeed.store import NewsStore
++
++    store = NewsStore(tmp_path / "p.db")
++    unscored = store.fetch_unscored()
++    assert len(unscored) == 1 and unscored[0]["title"] == "央行降准"
++    store.close()
++
++
++def test_pipeline_partial_preserves_failed_source_attempt(monkeypatch, tmp_path):
++    """部分源正常、官方源失败：总体 partial 且该来源失败留痕，不被其他源掩盖。"""
++    _patch_sources(monkeypatch)
++
++    def boom(*a, **k):
++        raise NewsSourceError("fed timeout")
++
++    monkeypatch.setattr(pipeline, "collect_fed_press", boom)
++    cfg = dict(_CFG, fed_press={"enabled": True, "url": "https://example.test/fed.xml"})
++    result = run_pipeline(tmp_path / "p.db", config=cfg, no_llm=True)
++    assert result["status"] == "partial"
++    assert result["stages"]["collect"]["status"] == "partial"
++    assert result["sources"]["fed"]["ok"] is False
++    assert "timeout" in result["sources"]["fed"]["error"]
++    assert {"source": "fed", "error": "fed timeout"} in result["errors"]
++    # 其他源成功不受牵连
++    assert result["sources"]["eastmoney"]["ok"] is True
++
++
++def test_pipeline_fed_items_are_macro_not_blogger(monkeypatch, tmp_path):
++    """官方公告归 macro：不将官方声明分进博主。"""
++    _patch_sources(monkeypatch)
++    monkeypatch.setattr(
++        pipeline, "collect_fed_press",
++        lambda *, url, since_iso: ([NewsItem(
++            source="fed", source_name="美联储官网",
++            url="https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm",
++            category="macro", title="Federal Reserve issues FOMC statement",
++            summary="stmt", content=None,
++            published_at=datetime.now().astimezone().isoformat(timespec="seconds"),
++            dedupe_key="fed1")], None),
++    )
++    cfg = dict(_CFG, fed_press={"enabled": True, "url": "https://example.test/fed.xml"})
++    result = run_pipeline(tmp_path / "p.db", config=cfg, no_llm=True)
++    assert result["per_source"]["fed"] == 1
++    from lei_signal.newsfeed.store import NewsStore
++
++    store = NewsStore(tmp_path / "p.db")
++    rows = store.query_items(source="fed")[0]
++    assert rows[0]["category"] == "macro"
++    store.close()
++
++
++def test_watermark_not_advanced_when_insert_fails(monkeypatch, tmp_path):
++    """写库失败不提前推进水位；修复后重跑不重复插入（2026-09-17 S1 顺序修复）。"""
++    monkeypatch.setattr(pipeline, "collect_sina",
++                        lambda since: ([NewsItem(
++                            source="sina", title="央行降准", summary="s",
++                            published_at=datetime.now().astimezone().isoformat(timespec="seconds"),
++                            dedupe_key="s1")], "5062609"))
++    # 东财同步失败：全部源失败 → failed（部分成功场景见 partial 用例）
++    monkeypatch.setattr(pipeline, "collect_eastmoney",
++                        lambda since: (_ for _ in ()).throw(NewsSourceError("em down")))
++    monkeypatch.setattr(pipeline, "collect_rss",
++                        lambda q, *, is_gnews, since_iso: ([], None))
++    monkeypatch.setattr(pipeline, "fetch_new_up_items",
++                        lambda c, mid, name, since, lookback_iso=None, **kw: ([], None))
++    monkeypatch.setattr(pipeline, "BilibiliClient", lambda *a, **k: object())
++
++    from lei_signal.newsfeed.store import NewsStore
++
++    original_insert = NewsStore.insert_items
++
++    def boom_insert(self, items):
++        raise RuntimeError("disk full")
++
++    monkeypatch.setattr(NewsStore, "insert_items", boom_insert)
++    db = tmp_path / "p.db"
++    # 最小配置：只留快讯两源（gnews/bili/rss 不启用），全部失败才是 failed
++    cfg = {**_CFG, "gnews_queries": [], "bili_ups": [], "rss_feeds": []}
++    result1 = run_pipeline(db, config=cfg, no_llm=True)
++    assert result1["status"] == "failed"  # 写库失败 + 东财失败 → 全部源失败
++    store = NewsStore(db)
++    assert store.get_watermark("sina") is None  # 水位未推进
++    store.close()
++
++    monkeypatch.setattr(NewsStore, "insert_items", original_insert)
++    monkeypatch.setattr(pipeline, "collect_eastmoney", lambda since: ([], None))
++    result2 = run_pipeline(db, config=cfg, no_llm=True)
++    assert result2["status"] == "ok"
++    assert result2["per_source"]["sina"] == 1
++    store = NewsStore(db)
++    assert store.get_watermark("sina") == "5062609"
++    # 第三次重跑：水位 + dedupe，不重复插入
++    store.close()
++    result3 = run_pipeline(db, config=cfg, no_llm=True)
++    assert result3["inserted"] == 0
++
++
+ def test_blogger_category_restricted_to_blogger_sources(monkeypatch, tmp_path):
+     """gnews 的英文股评被 LLM 判成 blogger 时，回落预分类 industry。"""
+     monkeypatch.setattr(
+diff --git a/tests/unit/test_newsfeed_push.py b/tests/unit/test_newsfeed_push.py
+index a85b9db2..b14707eb 100644
+--- a/tests/unit/test_newsfeed_push.py
++++ b/tests/unit/test_newsfeed_push.py
+@@ -39,24 +39,37 @@ def _no_crisis(monkeypatch):
+ 
+ 
+ def test_push_only_macro_risk_and_importance(tmp_path, monkeypatch):
++    """边界对齐生产口径（2026-09-17 修正旧测试偏差）：
++
++    生产 PUSH_IMPORTANCE=7（2026-09-05 用户口径：GLM 打分偏保守，非农/
++    美联储类系统性事件落在 7 分档点名必推）。旧测试期待 7 分不推，是
++    8 分时代的遗留；修正为 7 分包含、6 分排除，行业类不推的断言保留。
++    生产阈值本身不动。
++    """
+     _no_crisis(monkeypatch)
+     db = tmp_path / "n.db"
+     _seed(db, [
+-        ("m9", "macro", 9, "bearish"),     # 当日 ≥8 宏观 → 推
+-        ("r8", "risk", 8, "bullish"),      # 当日 ≥8 风险 → 推
+-        ("m7", "macro", 7, "neutral"),     # <8 → 不推
++        ("m9", "macro", 9, "bearish"),     # 当日 ≥7 宏观 → 推
++        ("r8", "risk", 8, "bullish"),      # 当日 ≥7 风险 → 推
++        ("m7", "macro", 7, "neutral"),     # =7 → 推（PUSH_IMPORTANCE=7）
++        ("m6", "macro", 6, "neutral"),     # <7 → 不推
+         ("i9", "industry", 9, "bullish"),  # 非宏观/风险 → 不推
+     ])
+     payloads = push_mod.build_push_payloads(db)
+     assert len(payloads) == 1
+     body = payloads[0].body_md
+-    assert "事件m9" in body and "事件r8" in body
+-    assert "事件m7" not in body and "事件i9" not in body
++    assert "事件m9" in body and "事件r8" in body and "事件m7" in body
++    assert "事件m6" not in body and "事件i9" not in body
+     assert payloads[0].title.startswith("📰 消息面")
+ 
+ 
+ def test_push_impact_window_three_days(tmp_path, monkeypatch):
+-    """≥9 分事件 3 日内持续出现（窗口），>3 日消失；<9 分不进窗口。"""
++    """≥9 分事件 3 日内持续出现（关注期限），>3 日消失；<9 分不进。
++
++    文案口径（2026-09-17）：3 天只是「继续关注」的提醒期限，不宣称市场
++    影响持续时间——旧「影响窗口」说法不再出现在推送文案里。天数、阈值、
++    发送渠道均不变。
++    """
+     _no_crisis(monkeypatch)
+     db = tmp_path / "n.db"
+     store = NewsStore(db)
+@@ -79,11 +92,12 @@ def test_push_impact_window_three_days(tmp_path, monkeypatch):
+     payloads = push_mod.build_push_payloads(db)
+     assert len(payloads) == 1
+     body = payloads[0].body_md
+-    assert "窗口w1" in body and "窗口w2" in body   # 1-2 日前在窗口
++    assert "窗口w1" in body and "窗口w2" in body   # 1-2 日内在关注期限
+     assert "窗口w3" not in body                    # 3 日前 = 超出（< n 严格）
+     assert "窗口w4" not in body                    # 4 日前超出
+-    assert "窗口w5" not in body                    # 8 分不进窗口
+-    assert "影响窗口" in body
++    assert "窗口w5" not in body                    # 8 分不进继续关注
++    assert "继续关注" in body                      # 新口径：关注期限
++    assert "影响窗口" not in body                  # 不宣称市场影响持续时间
+ 
+ 
+ def test_push_crisis_alert_first(tmp_path, monkeypatch):
+diff --git a/tests/unit/test_newsfeed_sources.py b/tests/unit/test_newsfeed_sources.py
+index 33f35576..3520c111 100644
+--- a/tests/unit/test_newsfeed_sources.py
++++ b/tests/unit/test_newsfeed_sources.py
+@@ -183,3 +183,125 @@ def test_atom_feed_for_wechat(monkeypatch: pytest.MonkeyPatch) -> None:
+     assert items[0].source == "rss"
+     assert items[0].url == "https://mp.weixin.qq.com/s/abc"
+     assert items[0].published_at.startswith("2026-08-27T10:00:00")
++
++
++# ---------------- 美联储官方公告源（2026-09-17 S1） ----------------
++
++from datetime import UTC, datetime  # noqa: E402
++from pathlib import Path  # noqa: E402
++
++from lei_signal.newsfeed.sources import fed  # noqa: E402
++
++_FED_XML = (
++    Path(__file__).resolve().parents[1]
++    / "fixtures" / "newsfeed" / "agent-news" / "fed-press-monetary-sample.xml"
++).read_text("utf-8")
++
++
++def test_fed_parse_fixture_preserves_facts(monkeypatch: pytest.MonkeyPatch) -> None:
++    monkeypatch.setattr(
++        fed.requests, "get",
++        lambda *a, **k: _FakeBytesResp(_FED_XML.encode("utf-8")))
++    items, wm = fed.collect_fed_press(since_iso=None)
++    assert len(items) == 3
++    stmt = items[0]
++    assert stmt.source == "fed" and stmt.source_name == "美联储官网"
++    assert stmt.category == "macro"  # 官方公告归宏观，不进 blogger
++    assert stmt.title == "Federal Reserve issues FOMC statement"
++    assert stmt.url.endswith("monetary20260916a.htm")
++    # 原文摘要保留（含加息事实）
++    assert "raise the target range" in (stmt.summary or "")
++    # 已核事实：2026-09-16 14:00 EDT = 18:00 UTC = 北京时间 9-17 02:00
++    assert datetime.fromisoformat(stmt.published_at) == datetime(2026, 9, 16, 18, 0, tzinfo=UTC)
++    assert wm is not None
++    assert datetime.fromisoformat(wm) == datetime(2026, 9, 16, 18, 0, tzinfo=UTC)
++
++
++def test_fed_since_filters_and_no_date_skipped(monkeypatch: pytest.MonkeyPatch) -> None:
++    xml = _FED_XML.replace(
++        "<pubDate>Thu, 10 Sep 2026 13:30:00 EDT</pubDate>", "")
++    monkeypatch.setattr(fed.requests, "get", lambda *a, **k: _FakeBytesResp(xml.encode("utf-8")))
++    items, _ = fed.collect_fed_press(since_iso=None)
++    assert [i.title for i in items] == [
++        "Federal Reserve issues FOMC statement",
++        "Federal Reserve issues implementation note",
++    ]  # 无日期条目跳过：不能用抓取时间冒充发布时间
++    # since 覆盖全部 → 空 + 水位 None
++    items2, wm2 = fed.collect_fed_press(since_iso="2999-01-01T00:00:00+08:00")
++    assert items2 == [] and wm2 is None
++
++
++def test_fed_fetcher_injection_replay_idempotent() -> None:
++    """重放同一材料：fetcher 注入已保存响应，两次解析结果一致（不打网络）。"""
++    saved: dict = {"calls": 0}
++
++    def fetcher(url: str, timeout: int) -> str:
++        saved["calls"] += 1
++        return _FED_XML
++
++    items1, wm1 = fed.collect_fed_press(
++        url="https://www.federalreserve.gov/feeds/press_monetary.xml",
++        since_iso=None, fetcher=fetcher)
++    items2, wm2 = fed.collect_fed_press(
++        url="https://www.federalreserve.gov/feeds/press_monetary.xml",
++        since_iso=None, fetcher=fetcher)
++    assert [i.dedupe_key for i in items1] == [i.dedupe_key for i in items2]
++    assert wm1 == wm2
++
++
++def test_fed_network_error(monkeypatch: pytest.MonkeyPatch) -> None:
++    def boom(*a, **k):
++        raise fed.requests.RequestException("timeout")
++
++    monkeypatch.setattr(fed.requests, "get", boom)
++    with pytest.raises(NewsSourceError):
++        fed.collect_fed_press(since_iso=None)
++
++
++def test_fed_pubdate_dst_via_zoneinfo() -> None:
++    """夏令/冬令用 zoneinfo 按日期换算，不用固定美国时差。"""
++    winter = fed.parse_fed_pubdate("Sun, 11 Jan 2026 14:00:00 EST")
++    summer = fed.parse_fed_pubdate("Sat, 11 Jul 2026 14:00:00 EDT")
++    assert winter is not None and winter.utcoffset().total_seconds() == -5 * 3600
++    assert summer is not None and summer.utcoffset().total_seconds() == -4 * 3600
++    # 源站冬夏误写（7 月写 EST）也按当天规则正确换算
++    mislabeled = fed.parse_fed_pubdate("Sat, 11 Jul 2026 14:00:00 EST")
++    assert mislabeled is not None and mislabeled.utcoffset().total_seconds() == -4 * 3600
++    # GMT 与数字偏移
++    assert fed.parse_fed_pubdate("Wed, 16 Sep 2026 18:00:00 GMT") == datetime(
++        2026, 9, 16, 18, 0, tzinfo=UTC)
++    numeric = fed.parse_fed_pubdate("Wed, 16 Sep 2026 14:00:00 -0400")
++    assert numeric == datetime(2026, 9, 16, 18, 0, tzinfo=UTC)
++    # 无时区记号不猜
++    assert fed.parse_fed_pubdate("Wed, 16 Sep 2026 14:00:00") is None
++    assert fed.parse_fed_pubdate(None) is None
++    assert fed.parse_fed_pubdate("garbage") is None
++
++
++class _FakeBytesResp:
++    """带原始字节的响应：_default_fetch 按 utf-8-sig 解码 content。"""
++
++    def __init__(self, body: bytes, status: int = 200):
++        self.content = body
++        self.status_code = status
++
++    def raise_for_status(self) -> None:
++        if self.status_code >= 400:
++            raise RuntimeError(f"HTTP {self.status_code}")
++
++
++def test_fed_parse_tolerates_utf8_bom(monkeypatch: pytest.MonkeyPatch) -> None:
++    """官方 feed 实测带 UTF-8 BOM 且响应头无 charset（2026-09-17 受控采集）：
++    按字节 utf-8-sig 解码，不能退化成 ISO-8859-1 乱码。"""
++    body = b"\xef\xbb\xbf" + _FED_XML.encode("utf-8")
++    monkeypatch.setattr(fed.requests, "get", lambda *a, **k: _FakeBytesResp(body))
++    items, wm = fed.collect_fed_press(since_iso=None)
++    assert len(items) == 3 and wm is not None
++
++
++def test_fed_parse_tolerates_str_bom_on_replay() -> None:
++    """重放路径传入含 U+FEFF 的文本也能解析（双保险）。"""
++    items, wm = fed.collect_fed_press(
++        since_iso=None, fetcher=lambda url, timeout: "﻿" + _FED_XML
++    )
++    assert len(items) == 3 and wm is not None
+diff --git a/tests/unit/test_newsfeed_store.py b/tests/unit/test_newsfeed_store.py
+index 5694b576..b8e66cdf 100644
+--- a/tests/unit/test_newsfeed_store.py
++++ b/tests/unit/test_newsfeed_store.py
+@@ -232,3 +232,89 @@ def test_clear_old_content_keeps_recent(tmp_path) -> None:
+     assert rows["新字幕"]["content"] == "y" * 100
+     assert store.clear_old_content(days=7) == 0  # 幂等
+     store.close()
++
++
++# ---------------- 健康状态只读聚合（2026-09-17 S1） ----------------
++
++
++def _finish_run_with_stages(store: NewsStore, collect_status: str,
++                            collect_finished: str, run_finished: str) -> None:
++    run_id = store.start_run()
++    store.finish_run(run_id, "ok" if collect_status == "ok" else collect_status, {
++        "inserted": 0,
++        "stages": {"collect": {"status": collect_status,
++                               "finished_at": collect_finished, "errors": []}},
++    }, [])
++    # finish_run 用当前时间写 finished_at；测试需要确定时间，直接改回
++    store._conn.execute("UPDATE news_runs SET finished_at=? WHERE id=?",
++                        (run_finished, run_id))
++    store._conn.commit()
++
++
++def test_health_aggregates_empty_db(tmp_path) -> None:
++    store = NewsStore(tmp_path / "n.db")
++    agg = store.health_aggregates()
++    assert agg == {"latest_success_at": None, "latest_item_at": None, "unscored_count": 0}
++    store.close()
++
++
++def test_health_aggregates_new_format_success(tmp_path) -> None:
++    store = NewsStore(tmp_path / "n.db")
++    store.insert_items([
++        _item("k1", "旧", "2026-09-10T10:00:00+08:00"),
++        _item("k2", "新", "2026-09-16T21:00:00+08:00", source="fed"),
++    ])
++    _finish_run_with_stages(store, "ok", "2026-09-17T08:29:50+08:00",
++                            "2026-09-17T08:30:00+08:00")
++    agg = store.health_aggregates()
++    assert agg["latest_success_at"] == "2026-09-17T08:29:50+08:00"
++    assert agg["latest_item_at"] == "2026-09-16T21:00:00+08:00"
++    assert agg["unscored_count"] == 2
++    store.close()
++
++
++def test_health_aggregates_legacy_run_not_fabricated(tmp_path) -> None:
++    """旧 news_runs 没有阶段字段：latest_success_at 保持 None，不追溯伪造成功。"""
++    store = NewsStore(tmp_path / "n.db")
++    run_id = store.start_run()
++    store.finish_run(run_id, "ok", {
++        "inserted": 7, "per_source": {"sina": 2}, "scored": 9,
++        "digest": True, "pushed": 0,
++    }, [])
++    assert store.health_aggregates()["latest_success_at"] is None
++    store.close()
++
++
++def test_health_aggregates_partial_is_not_success(tmp_path) -> None:
++    """部分源失败不算「明确采集成功」：继续往前找，找不到则 None。"""
++    store = NewsStore(tmp_path / "n.db")
++    _finish_run_with_stages(store, "ok", "2026-09-15T20:30:00+08:00",
++                            "2026-09-15T20:31:00+08:00")
++    _finish_run_with_stages(store, "partial", "2026-09-16T20:30:00+08:00",
++                            "2026-09-16T20:31:00+08:00")
++    agg = store.health_aggregates()
++    assert agg["latest_success_at"] == "2026-09-15T20:30:00+08:00"
++    store.close()
++
++
++def test_official_unscored_recent(tmp_path) -> None:
++    """未评分官方条目单独可查：已评分/非官方源不进；客观字段齐全。"""
++    store = NewsStore(tmp_path / "n.db")
++    store.insert_items([
++        _item("f1", "Federal Reserve issues FOMC statement",
++              "2026-09-17T02:00:00+08:00", source="fed"),
++        _item("f2", "Speech by Chair Powell",
++              "2026-09-10T13:30:00-04:00", source="fed"),
++        _item("s1", "新浪快讯", "2026-09-17T09:00:00+08:00", source="sina"),
++    ])
++    ids = {r["title"]: r["id"] for r in store.fetch_unscored()}
++    store.apply_scores([
++        {"id": ids["Speech by Chair Powell"], "category": "macro", "importance": 6,
++         "direction": "neutral", "symbols": [], "note": "n"},
++    ])
++    rows = store.official_unscored_recent(source="fed", date_from="2026-09-01T00:00:00+08:00")
++    titles = [r["title"] for r in rows]
++    assert titles == ["Federal Reserve issues FOMC statement"]  # 已评分讲话不进
++    assert rows[0]["url"] is None or isinstance(rows[0]["url"], str)
++    assert rows[0]["published_at"] == "2026-09-17T02:00:00+08:00"
++    store.close()

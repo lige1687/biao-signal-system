@@ -1,0 +1,114 @@
+{
+  "probes": [
+    {
+      "case": "healthy_empty",
+      "actual": "fresh",
+      "expected": "fresh",
+      "passed": true
+    },
+    {
+      "case": "legacy_no_stage",
+      "actual": "unknown",
+      "expected": "unknown",
+      "passed": true
+    },
+    {
+      "case": "failed_stage_not_overridden_by_ok",
+      "actual": "failed",
+      "expected": "failed",
+      "passed": true
+    },
+    {
+      "case": "future_latest_item",
+      "actual": "unknown",
+      "expected": "unknown",
+      "passed": true
+    },
+    {
+      "case": "invalid_success_timezone",
+      "actual": "unknown",
+      "expected": "unknown",
+      "passed": true
+    },
+    {
+      "case": "26h_1m_is_stale",
+      "actual": "stale",
+      "expected": "stale",
+      "passed": true
+    },
+    {
+      "case": "4m_future_run",
+      "actual": "unknown",
+      "expected": "unknown",
+      "passed": true
+    },
+    {
+      "case": "statement",
+      "actual": "official_result",
+      "expected": "official_result",
+      "passed": true
+    },
+    {
+      "case": "Speech by Powell on the FOMC statement",
+      "actual": "commentary",
+      "expected": "commentary",
+      "passed": true
+    },
+    {
+      "case": "Minutes of the FOMC statement discussion",
+      "actual": "commentary",
+      "expected": "commentary",
+      "passed": true
+    },
+    {
+      "case": "EST_explicit_offset",
+      "actual": "2026-09-16T19:00:00+00:00",
+      "expected": "2026-09-16T19:00:00+00:00",
+      "passed": true
+    },
+    {
+      "case": "EDT_explicit_offset",
+      "actual": "2026-09-16T18:00:00+00:00",
+      "expected": "2026-09-16T18:00:00+00:00",
+      "passed": true
+    },
+    {
+      "case": "watermark_compares_instants",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "case": "official_unscored_visible",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "case": "official_scored6_still_visible",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "case": "no_external_push",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "case": "exception_run_finalized",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "case": "exception_score_failure_persisted",
+      "actual": "failed",
+      "expected": "failed",
+      "passed": true
+    }
+  ],
+  "passed": 18,
+  "total": 18
+}

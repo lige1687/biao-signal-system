@@ -1,0 +1,106 @@
+{
+  "checks": [
+    {
+      "name": "real_feed_item_count",
+      "actual": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "name": "real_statement_utc",
+      "actual": "2026-09-16T18:00:00+00:00",
+      "expected": "2026-09-16T18:00:00+00:00",
+      "passed": true
+    },
+    {
+      "name": "real_feed_replay_no_new",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "html_200",
+      "actual": "source_error",
+      "expected": "source_error",
+      "passed": true
+    },
+    {
+      "name": "missing_fields",
+      "actual": "source_error",
+      "expected": "source_error",
+      "passed": true
+    },
+    {
+      "name": "invalid_times",
+      "actual": "source_error",
+      "expected": "source_error",
+      "passed": true
+    },
+    {
+      "name": "partial_feed_health_not_fresh",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "partial_feed_run_detail",
+      "observed": {
+        "health": {
+          "availability": "partial",
+          "last_checked_at": "2026-09-17T13:47:20+08:00",
+          "last_success_at": null,
+          "latest_item_at": "2026-09-17T02:00:00+08:00",
+          "age_hours": 0.0,
+          "note_cn": "最近一次采集部分来源失败（约 0.0 小时前）：fed；其余来源正常",
+          "stages": {
+            "collect": {
+              "status": "partial",
+              "finished_at": "2026-09-17T13:47:20+08:00",
+              "errors": [
+                {
+                  "source": "fed",
+                  "error": "fed 1 条公告不可用（Federal Reserve issues F:发布时间不可解析）；合法条目已保留，本次未推进书签"
+                }
+              ]
+            },
+            "score": {
+              "status": "skipped",
+              "finished_at": null,
+              "errors": [],
+              "reason": "no_llm"
+            },
+            "digest": {
+              "status": "skipped",
+              "finished_at": null,
+              "errors": [],
+              "reason": "no_llm"
+            },
+            "push": {
+              "status": "skipped",
+              "finished_at": null,
+              "errors": [],
+              "reason": "no_llm"
+            }
+          },
+          "unscored_count": 1,
+          "max_age_hours": 26,
+          "anomalies": []
+        },
+        "run": {
+          "id": 1,
+          "started_at": "2026-09-17T13:47:20+08:00",
+          "finished_at": "2026-09-17T13:47:20+08:00",
+          "status": "partial",
+          "stats_json": "{\"inserted\": 1, \"per_source\": {\"eastmoney\": 0, \"sina\": 0, \"fed\": 1}, \"scored\": 0, \"digest\": false, \"pushed\": 0, \"stages\": {\"collect\": {\"status\": \"partial\", \"finished_at\": \"2026-09-17T13:47:20+08:00\", \"errors\": [{\"source\": \"fed\", \"error\": \"fed 1 条公告不可用（Federal Reserve issues F:发布时间不可解析）；合法条目已保留，本次未推进书签\"}]}, \"score\": {\"status\": \"skipped\", \"finished_at\": null, \"errors\": [], \"reason\": \"no_llm\"}, \"digest\": {\"status\": \"skipped\", \"finished_at\": null, \"errors\": [], \"reason\": \"no_llm\"}, \"push\": {\"status\": \"skipped\", \"finished_at\": null, \"errors\": [], \"reason\": \"no_llm\"}}, \"sources\": {\"eastmoney\": {\"attempted_at\": \"2026-09-17T13:47:20+08:00\", \"ok\": true, \"error\": null}, \"sina\": {\"attempted_at\": \"2026-09-17T13:47:20+08:00\", \"ok\": true, \"error\": null}, \"fed\": {\"attempted_at\": \"2026-09-17T13:47:20+08:00\", \"ok\": false, \"error\": \"fed 1 条公告不可用（Federal Reserve issues F:发布时间不可解析）；合法条目已保留，本次未推进书签\"}}}",
+          "errors_json": "[{\"source\": \"fed\", \"error\": \"fed 1 条公告不可用（Federal Reserve issues F:发布时间不可解析）；合法条目已保留，本次未推进书签\"}]"
+        },
+        "counts": {
+          "total": 1,
+          "scored": 0
+        }
+      }
+    }
+  ],
+  "passed": 7,
+  "total": 7
+}

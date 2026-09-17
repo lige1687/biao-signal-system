@@ -1,0 +1,50 @@
+{
+  "db_path": "/tmp/agent-news-s1/newsfeed-s1.db",
+  "items": [
+    {
+      "source": "fed",
+      "source_name": "美联储官网",
+      "category": "macro",
+      "title": "Federal Reserve issues FOMC statement",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm",
+      "published_at": "2026-09-17T02:00:00+08:00",
+      "ingested_at": "2026-09-17T12:44:38+08:00",
+      "importance": null,
+      "dedupe_key": "fe283a4d738a52f3965cc6e253035b54d9521d20"
+    },
+    {
+      "source": "fed",
+      "source_name": "美联储官网",
+      "category": "macro",
+      "title": "Federal Reserve Board and Federal Open Market Committee release economic projections from the September 15-16 FOMC meeting",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916b.htm",
+      "published_at": "2026-09-17T02:00:00+08:00",
+      "ingested_at": "2026-09-17T12:44:38+08:00",
+      "importance": null,
+      "dedupe_key": "96bceaa064dff21599f108a02bdccc6afd10ce06"
+    }
+  ],
+  "watermarks": [
+    {
+      "source_key": "fed",
+      "cursor_value": "2026-09-17T02:00:00+08:00",
+      "updated_at": "2026-09-17T12:44:38+08:00"
+    }
+  ],
+  "runs": [
+    {
+      "id": 1,
+      "status": "ok",
+      "started_at": "2026-09-17T12:44:38+08:00",
+      "finished_at": "2026-09-17T12:44:38+08:00",
+      "stats_json": "{\"inserted\": 2, \"per_source\": {\"eastmoney\": 0, \"sina\": 0, \"fed\": 2}, \"scored\": 0, \"digest\": false, \"pushed\": 0, \"stages\": {\"collect\": {\"status\": \"ok\", \"finished_at\": \"2026-09-17T12:44:38+08:00\", \"errors\": []}, \"score\": {\"status\": \"skipped\", \"finished_at\": null, \"errors\": [], \"reason\": \"no_llm\"}, \"digest\": {\"status\": \"skipped\", \"finished_at\": null, \"errors\": [], \"reason\": \"no_llm\"}, \"push\": {\"status\": \"skipped\", \"finished_at\": null, \"errors\": [], \"reason\": \"no_llm\"}}, \"sources\": {\"eastmoney\": {\"attempted_at\": \"2026-09-17T12:44:38+08:00\", \"ok\": true, \"error\": null}, \"sina\": {\"attempted_at\": \"2026-09-17T12:44:38+08:00\", \"ok\": true, \"error\": null}, \"fed\": {\"attempted_at\": \"2026-09-17T12:44:38+08:00\", \"ok\": true, \"error\": null}}}"
+    },
+    {
+      "id": 2,
+      "status": "ok",
+      "started_at": "2026-09-17T12:44:38+08:00",
+      "finished_at": "2026-09-17T12:44:38+08:00",
+      "stats_json": "{\"inserted\": 0, \"per_source\": {\"eastmoney\": 0, \"sina\": 0, \"fed\": 0}, \"scored\": 0, \"digest\": false, \"pushed\": 0, \"stages\": {\"collect\": {\"status\": \"ok\", \"finished_at\": \"2026-09-17T12:44:38+08:00\", \"errors\": []}, \"score\": {\"status\": \"skipped\", \"finished_at\": null, \"errors\": [], \"reason\": \"no_llm\"}, \"digest\": {\"status\": \"skipped\", \"finished_at\": null, \"errors\": [], \"reason\": \"no_llm\"}, \"push\": {\"status\": \"skipped\", \"finished_at\": null, \"errors\": [], \"reason\": \"no_llm\"}}, \"sources\": {\"eastmoney\": {\"attempted_at\": \"2026-09-17T12:44:38+08:00\", \"ok\": true, \"error\": null}, \"sina\": {\"attempted_at\": \"2026-09-17T12:44:38+08:00\", \"ok\": true, \"error\": null}, \"fed\": {\"attempted_at\": \"2026-09-17T12:44:38+08:00\", \"ok\": true, \"error\": null}}}"
+    }
+  ]
+}

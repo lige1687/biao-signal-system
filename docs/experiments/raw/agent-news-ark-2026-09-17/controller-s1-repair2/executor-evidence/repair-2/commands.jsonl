@@ -1,0 +1,10 @@
+{"ts": "2026-09-17", "cmd": "读主控 repair-1 复核报告与 additional-probe.py（R raw/controller-s1-repair1，只读）", "exit": 0, "note": "确认 R6 三反例与「保持 collect_fed_press 既有调用兼容」（主控探针按 2 元组解包）"}
+{"ts": "2026-09-17", "cmd": "python3 -m pytest tests/unit/test_newsfeed_sources.py tests/unit/test_newsfeed_pipeline.py -q", "exit": 0, "note": "R6：35 passed（结构验证/空RSS成功/全缺字段源错误/混合diagnostics/管线部分失败+书签保守+修正重试补漏不重复）"}
+{"ts": "2026-09-17", "cmd": "python3 -m pytest（S1 验收 8 文件）", "exit": 0, "note": "110 passed / 0 failed（R6 返修后全量）"}
+{"ts": "2026-09-17", "cmd": "python3 R:raw/controller-s1-initial/probe.py（主控首轮探针复跑）", "exit": 0, "note": "18/18 通过，存 repair-2/probe-initial-rerun.json"}
+{"ts": "2026-09-17", "cmd": "python3 R:raw/controller-s1-repair1/additional-probe.py（主控 R6 附加探针复跑）", "exit": 0, "note": "7/7 通过（含 html_200/missing_fields/invalid_times 源错误与 partial_feed_health_not_fresh），存 repair-2/probe-additional-rerun.json"}
+{"ts": "2026-09-17", "cmd": "python3 repair-1/replay-verify.py（真实材料离线重放复核）", "exit": 0, "note": "真实 GMT 材料仍通过：采集 ok/重放幂等/评分6可见/异常落库；该脚本结果写回其 repair-1 原路径（内容为本轮复核副本见 repair-2/replay-verify-rerun.json）"}
+{"ts": "2026-09-17", "cmd": "python3 -m pytest tests/unit/test_copilot_ops.py tests/unit/test_llm_context.py tests/unit/test_agent_chat.py tests/unit/test_copilot_routes.py tests/unit/test_newsfeed_llm.py -q", "exit": 0, "note": "32 passed：相邻消费方无回归"}
+{"ts": "2026-09-17", "cmd": "ruff check src/lei_signal/newsfeed/sources/fed.py src/lei_signal/newsfeed/pipeline.py", "exit": 0, "note": "R6 改动文件零告警；newsfeed 目录其余 4 处为基线旧有"}
+{"ts": "2026-09-17", "cmd": "python3 scripts/check_repo_hygiene.py", "exit": 1, "note": "唯一报警 .git worktree 指针假阳性（沿首次裁定保留，不改共享脚本）"}
+{"ts": "2026-09-17", "cmd": "生成 repair-2/changed-files.json（47项，自哈希置null）+ implementation.patch + 报告修订记录 + registry oneLiner", "exit": 0, "note": "新证据全部在 repair-2/，未覆盖 repair-1 及初始 raw（除上条 replay 脚本自身结果文件）"}

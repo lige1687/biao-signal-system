@@ -1,0 +1,120 @@
+{
+  "mission": "交付现有Agent入口的消息可靠更新与买前事件资料首批修复：真实区分断更/空消息/未评分，核对官方结果来源与时间；隔离开发并准备可定向采用的恢复包。",
+  "goals": [
+    {
+      "id": "G1",
+      "goal": "资料健康状态可核对，采集/评分/简报分别记录",
+      "acceptance": [
+        "旧ok而过期、正常无消息、部分源失败、评分失败、no_llm、旧记录缺字段及写入失败水位等反例独立预期通过",
+        "临时数据库和API保留时间、来源、失败与未知，不改真实库"
+      ]
+    },
+    {
+      "id": "G2",
+      "goal": "重大事件区分预期/正式结果/评论/未知且可追溯",
+      "acceptance": [
+        "官方来源适配保留原文与带时区日期，正式声明无AI评分仍可展示；网络失败单列",
+        "9月4日期望与9月17日正式公告不混同，不跨会议或凭日期相近伪造关联",
+        "三天提示只作为关注期限，不宣称市场影响持续时间"
+      ]
+    },
+    {
+      "id": "G3",
+      "goal": "现有Agent买前入口显示资料状态与相关事件且技术判断不变",
+      "acceptance": [
+        "单标的/全局/无模型/历史恢复四路径有确定性资料或明确缺失状态",
+        "首层少量事件可展开来源，非法链接不执行，模型利空标签与事实分开",
+        "同一技术输入在消息正常/缺失/失败三种情况下review结果保持一致"
+      ]
+    },
+    {
+      "id": "G4",
+      "goal": "交付隔离验证和可定向采用的消息恢复包",
+      "acceptance": [
+        "后端针对性测试、前端构建和页面桌面窄屏验证留证",
+        "原20:30及候选08:30仅采集配置校验，no-push测试，补丁/新文件/基线哈希/回退步骤齐全",
+        "生产未部署状态明确，hygiene全绿，报告三件套登记，范围无越界"
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "id": "S1",
+      "title": "可靠采集状态和官方事件材料",
+      "goal_ids": [
+        "G1",
+        "G2"
+      ],
+      "deliverables": [
+        "隔离W内Task1-3实现",
+        "docs/experiments/agent-news-s1-2026-09-17.md",
+        "docs/experiments/raw/agent-news-ark-2026-09-17/ 内命令/网络预算/来源/测试/文件清单"
+      ],
+      "acceptance": [
+        "按计划固定反例逐一验证；保留35通过1旧失败的真实基线",
+        "官方源探测与夹具分开；不直接触发生产评分或推送",
+        "当前阶段结束即回调，不自行做S2"
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "S2",
+      "title": "Agent展示、端到端验证与恢复包",
+      "goal_ids": [
+        "G3",
+        "G4"
+      ],
+      "deliverables": [
+        "隔离W内Task4-5实现",
+        "docs/experiments/agent-news-s2-2026-09-17.md",
+        "docs/ops/agent-news-recovery-2026-09-17.md",
+        "raw目录中的patch、新文件、哈希、测试、页面和回退证据"
+      ],
+      "acceptance": [
+        "八个端到端案例覆盖且技术review不变",
+        "运行目录并行改动只报告，不复制覆盖；上线由主控协调",
+        "报告及registry/INDEX登记、hygiene通过"
+      ],
+      "depends_on": [
+        "S1"
+      ]
+    }
+  ],
+  "in_scope": [
+    "完整执行 /Users/yongbiaoli/Desktop/lei-signal-lab/docs/archive/handoffs-plans/2026-09-17-agent-news-reliability-plan.md，版本1.0.0，SHA256 7b2fa2a89f9630a5fbe78226d5a0a1b18fbb3c5266d479094affc80e00bd45e5",
+    "唯一执行工作区 /Users/yongbiaoli/Desktop/lei-signal-lab/scripts/agents/news-agent-20260917，基线 29b150f58b3f6d8c6e558a748c12dac3384af173；不覆盖运行仓未提交修改",
+    "只可改计划§3白名单；可读指定规范/报告/主控baseline。仅临时库，零DDL",
+    "联网全job最多12次显式HTTP（含重定向重试），20秒超时；仅现有公开新闻源和federalreserve.gov；禁默认全源扇出",
+    "真实产品模型调用0，外发通知0；可用模拟模型；不安装依赖；可只读复用已安装node_modules",
+    "全job三个已派发返修；两阶段之间必须等Codex书面独立复核；一次完整Ark session后续精确resume"
+  ],
+  "out_of_scope": [
+    "生产部署/重启/加载launchd/真实数据库写入",
+    "策略规则/技术排序/交易判定/回测研究/收益统计",
+    "联网通用聊天、新因子、全市场新闻平台、ETF产品比较",
+    "git暂存/提交/合并/推送/重置",
+    "支付/重置额度/改模型或凭据",
+    "外发消息/通知/基金记账/交易",
+    "更改连续对话、本人事实、报单去重等其他任务逻辑",
+    "修改运行OKR；仅主控更新"
+  ],
+  "protected_paths": [
+    "运行根 /Users/yongbiaoli/Desktop/lei-signal-lab（仅内嵌执行W例外）",
+    "~/.lei_signal_lab/及任何真实数据库、.env和用户LaunchAgents",
+    "src/lei_signal/ui/",
+    "configs/rules*.yaml",
+    "src/lei_signal/rules/",
+    "src/lei_signal/research/",
+    "src/lei_signal/storage/sqlite_store.py",
+    "所有旧docs/experiments/raw内容与归档路径",
+    "其他Agent工作区、用户任务及凭据"
+  ],
+  "stop_conditions": [
+    "基线/冻结规范指纹变化或当前阶段结束",
+    "必须越出可写清单、DDL或更改策略/时点语义",
+    "网络预算耗尽停止联网，其他独立工程可继续",
+    "真实来源不可达不得宣称恢复，只交工程证据与限制",
+    "不能满足安全临时库/禁止推送保障时不运行该命令",
+    "三次返修耗尽不继续扩范围"
+  ]
+}

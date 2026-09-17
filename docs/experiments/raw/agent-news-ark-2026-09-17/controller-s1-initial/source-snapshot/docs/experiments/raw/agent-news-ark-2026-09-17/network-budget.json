@@ -1,0 +1,52 @@
+{
+  "job_id": "ba055bd8-99d8-4275-b4a0-a3e3a1ae51ce",
+  "budget_total": 12,
+  "budget_scope": "全job（S1+S2）显式HTTP尝试上限，含重试/重定向；每次超时20秒",
+  "used": 4,
+  "remaining": 8,
+  "attempts": [
+    {
+      "n": 1,
+      "at": "2026-09-17T12:39:00+08:00",
+      "url": "https://www.federalreserve.gov/feeds/press_monetary.xml",
+      "timeout_sec": 20,
+      "purpose": "S1 受控采集（临时库，no_llm，不推送）",
+      "result": "失败留痕：HTTP 200 取得真实 RSS，但 XML 解析失败（响应带 BOM，resp.text 按 ISO-8859-1 解码成乱码）。响应已保存。",
+      "followup": "fed.py 修复：_default_fetch 改按字节 utf-8-sig 解码 + BOM 双保险 + 回归测试"
+    },
+    {
+      "n": 2,
+      "at": "2026-09-17T12:41:00+08:00",
+      "url": "https://www.federalreserve.gov/feeds/press_monetary.xml",
+      "timeout_sec": 20,
+      "purpose": "第一次修复（仅 lstrip BOM）后重跑受控采集",
+      "result": "失败留痕：同一解析错误——根因是 resp.text 的错误编码而非文本 BOM，lstrip 不解决。",
+      "followup": "定位根因（文件实为双重编码），改 utf-8-sig 字节解码"
+    },
+    {
+      "n": 3,
+      "at": "2026-09-17T12:43:09+08:00",
+      "url": "https://www.federalreserve.gov/feeds/press_monetary.xml",
+      "timeout_sec": 20,
+      "purpose": "编码修复后受控采集",
+      "result": "成功：status=ok，fed 入库 2 条（FOMC 声明 + 经济预测，发布时间 2026-09-17T02:00:00+08:00 = 9-16 14:00 EDT）。当次重放脚本写法有误（绕过管线直接 insert 未过滤全集 15 条），污染临时库。",
+      "followup": "重放改为沿同一管线路径（fetcher 注入），删临时库重跑"
+    },
+    {
+      "n": 4,
+      "at": "2026-09-17T12:44:38+08:00",
+      "url": "https://www.federalreserve.gov/feeds/press_monetary.xml",
+      "timeout_sec": 20,
+      "purpose": "干净受控采集 + 同材料沿管线路径重放",
+      "result": "成功：status=ok，fed 入库 2 条；重放 inserted=0，幂等=true。阶段留痕 collect=ok、score/digest/push=skipped(no_llm)。证据：controlled-collect-result.json、fed-press-monetary-live-2026-09-17.xml、temp-db-inspect.json。",
+      "followup": "无"
+    }
+  ],
+  "real_feed_format": {
+    "pubDate": "GMT 命名时区（如 Wed, 16 Sep 2026 18:00:00 GMT），CDATA 包裹",
+    "encoding": "UTF-8 带 BOM，响应头无 charset（requests 默认会误判 ISO-8859-1）",
+    "items": 15,
+    "note": "9-16 FOMC 声明 18:00 GMT = 14:00 EDT = 北京时间 9-17 02:00，与上一轮已核事实一致"
+  },
+  "notes": "S1 共用 4 次（2 次解析失败留痕、1 次成功但重放脚本缺陷、1 次干净成功）；重放核幂等使用已保存响应不再耗预算。真实模型调用 0 次、通知 0 次。"
+}

@@ -1,0 +1,302 @@
+{
+  "job_id": "ba055bd8-99d8-4275-b4a0-a3e3a1ae51ce",
+  "stage": "S1",
+  "base_commit": "29b150f58b3f6d8c6e558a748c12dac3384af173",
+  "note": "W 内全部改动（未提交，execution 2 repair-1 后状态）；采用须三方合并，不得整体覆盖 R。按主控复核 R5：本清单不对自身声称最终哈希（自身条目 after_sha256 置 null），最终一致性由主控外置校验；初版自哈希无效记录见 repair-1/hash-note.json。",
+  "files": [
+    {
+      "path": "configs/newsfeed.json",
+      "kind": "modified",
+      "base_sha256": "8a6bf0f3123656ade91f1014ade629351ed798f6fc28852f15f09128ee7b5b4e",
+      "after_sha256": "56e6614f5001d312ff72fe70897211b2c9cad73e23a9fedc2a922aa8857675f3",
+      "purpose": "health.max_age_hours=26 + fed_press 官方源启用配置（验证可达后接入）"
+    },
+    {
+      "path": "src/lei_signal/api/schemas.py",
+      "kind": "modified",
+      "base_sha256": "2d5473271098c1f16d5f49fd30f00302292fddbdcc6adfbd07e18b1e51a03b3b",
+      "after_sha256": "20c660422c1eafe14d850b96fb5086fe04f8943106686839d4a4037bb15f846e",
+      "purpose": "MajorEventDTO/MajorEventsBlockDTO 增量可选字段（事件阶段/来源/health，缺省兼容）"
+    },
+    {
+      "path": "src/lei_signal/copilot/ops.py",
+      "kind": "modified",
+      "base_sha256": "092af1b15087759a840091fe2db2fe4c407d7d9a1979d6ce4d58b1de0b5aa9cd",
+      "after_sha256": "17b31a5a8b64d78d9cc81f6582909bd47c51cbfc80b19381016e7d3732534527",
+      "purpose": "重大事件区块透传 health 与事件参考字段"
+    },
+    {
+      "path": "src/lei_signal/newsfeed/config_loader.py",
+      "kind": "modified",
+      "base_sha256": "a14737d15129c82c608d96a220b167449aade6db1a2c907192f04d11cf7e3112",
+      "after_sha256": "df936a27c18ab7b85af493a90cb48fda7911678e2cdfd919ff0ce597df4b6fb2",
+      "purpose": "DEFAULT_CONFIG 增加 health 与 fed_press 默认（fed 默认关闭）"
+    },
+    {
+      "path": "src/lei_signal/newsfeed/pipeline.py",
+      "kind": "modified",
+      "base_sha256": "5fcd058680f0d8985f425dbcece659190ed09654a7e05571479fce7893ad4977",
+      "after_sha256": "5253b46801feeaf5a2e258289576cfdb49d8a5553dbfe8b6f0022ad6a4deda2e",
+      "purpose": "阶段留痕（stages/sources）、fed 源接入、水位顺序修复（先写库后推进）"
+    },
+    {
+      "path": "src/lei_signal/newsfeed/push.py",
+      "kind": "modified",
+      "base_sha256": "17ccfa13102bec04e1035e5ab0fb7eec31fd142252ea1ac76239ac4dca1e275b",
+      "after_sha256": "14e1bdacffef1246ad57ea038df3abaa316ff93a482a8e3ae0bce0c0fec04c96",
+      "purpose": "文案口径：影响窗口→近期事件继续关注（天数/阈值/渠道不变）"
+    },
+    {
+      "path": "src/lei_signal/newsfeed/service.py",
+      "kind": "modified",
+      "base_sha256": "f6768e391a1492bd91cb16d23465f664b5a99ad70f7c51e51f6442cae6b1308c",
+      "after_sha256": "1bd9d675653df8b22a56ee43397923158721db71a68a39916262871d362be027",
+      "purpose": "status/major_events_brief 带 health；未评分官方条目入参考；事件参考与去重"
+    },
+    {
+      "path": "src/lei_signal/newsfeed/store.py",
+      "kind": "modified",
+      "base_sha256": "69e1787c77663e70f1d3115bbea4c3bcafb03c14ebda44ebbc2ed4a52f75e151",
+      "after_sha256": "85fdcb2e2801ede7556a970505dd01311f4286e6f77137eab9e6d8a95e79c0e9",
+      "purpose": "health_aggregates/official_unscored_recent 只读聚合；major_rows 增列来源字段"
+    },
+    {
+      "path": "tests/unit/test_newsfeed_api.py",
+      "kind": "modified",
+      "base_sha256": "7d8e8099d0454a3c0c09c5aee2b181a062bd8d6a30e08ae635441ae6fd3c69f3",
+      "after_sha256": "75565ea737bef140b557f7e3b3f48a788fff509a962aeac90ae7e3ad2dbc05f5",
+      "purpose": "状态接口 health 用例"
+    },
+    {
+      "path": "tests/unit/test_newsfeed_major_events.py",
+      "kind": "modified",
+      "base_sha256": "0488ecc4b06600db6dc3b3ff1bc8217a9b33cddab13f25e3d30b48c29bae065e",
+      "after_sha256": "2807ad59119df38ce74f8df2cfc3c70c1726322b890fc59bb268db5352165a52",
+      "purpose": "health/未评分官方/事件参考/去重/DTO透传用例"
+    },
+    {
+      "path": "tests/unit/test_newsfeed_pipeline.py",
+      "kind": "modified",
+      "base_sha256": "0e8d79b04f80121c5adb2999a3360be15c36c9baf784ed768b2309a59ed6b436",
+      "after_sha256": "1bd35ec6361527859b0c3e7c49e6f77a3aab06aa2a0b4a468804561e470b6f7d",
+      "purpose": "阶段留痕/评分失败可见/部分源失败/fed归类/水位顺序用例"
+    },
+    {
+      "path": "tests/unit/test_newsfeed_push.py",
+      "kind": "modified",
+      "base_sha256": "fdd505d8c15c6ee9d295bee1cf63d9de62480c17b44b34802b53df6cfd832e7d",
+      "after_sha256": "826eca0bc9fa9f6135ebcaa957841c3210c207c781a9da670e2a876a6bec6f69",
+      "purpose": "旧边界修正（7推6不推，生产阈值不动）+ 继续关注文案断言"
+    },
+    {
+      "path": "tests/unit/test_newsfeed_sources.py",
+      "kind": "modified",
+      "base_sha256": "a3e043a0cf76c47fb1afada27b0ce7a1cdad5e9b133f2b33e712e774352f7675",
+      "after_sha256": "abd1de67d9230ffa29f6b0e09d82e59e62abfbe0d0f1fb0725390a75d59af270",
+      "purpose": "fed 源解析/BOM/GMT/夏令冬令/重放用例"
+    },
+    {
+      "path": "tests/unit/test_newsfeed_store.py",
+      "kind": "modified",
+      "base_sha256": "3fe6d1731ae37757830f1eb66cf2bd44cb25c5ae76a412eb7e8a7f65581d7132",
+      "after_sha256": "9eee293d9225e3841faba8cb8e1a4981dded1d60d68ebc19ff719776908a36f3",
+      "purpose": "health_aggregates 与 official_unscored_recent 用例"
+    },
+    {
+      "path": "src/lei_signal/newsfeed/health.py",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "16c38db20943655f6765d41e8d461bbffb70965c812540f50f5d74a3c55c0776",
+      "purpose": "build_news_health 纯函数：fresh/stale/never/failed/partial/unknown + 分阶段状态"
+    },
+    {
+      "path": "src/lei_signal/newsfeed/event_context.py",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "4ca6c650de4817df4ba9602ae594a2b8e88a244cf4822c197ce7e9db8403dea7",
+      "purpose": "build_event_reference/dedupe_events：预期/正式结果/评论/未知 + 来源时间保留"
+    },
+    {
+      "path": "src/lei_signal/newsfeed/sources/fed.py",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "677a2b877fb559212191d04c7d3fbb098c3a58013d26e5dbcbb8b244c1916775",
+      "purpose": "美联储官方 feed 适配（zoneinfo 时区、BOM/编码兼容、宏观归类）"
+    },
+    {
+      "path": "src/lei_signal/newsfeed/timeparse.py",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "57f12cb6a45438c67befdfc08f502d34ac0357f9317738516a28ce40c4c676de",
+      "purpose": "严格 ISO 解析私有辅助（无时区不合法）"
+    },
+    {
+      "path": "tests/unit/test_newsfeed_health.py",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "d990209a0ae443f9cd2f274612a43ebfd08ef61c82e283a8560cdcccafd46bd8",
+      "purpose": "13 个健康状态反例（计划固定反例全覆盖）"
+    },
+    {
+      "path": "tests/unit/test_newsfeed_event_context.py",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "f62e3e93501672b690173b2fe19840dad8a3faaca8a664cc30326123f082e8ac",
+      "purpose": "13 个事件阶段/时间/去重反例"
+    },
+    {
+      "path": "tests/fixtures/newsfeed/agent-news/README.md",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "fe985cd32de307e250c7d4940cb209bfadcb4b8c656d4a6c164946b3f6aa9cd6",
+      "purpose": "夹具出处说明"
+    },
+    {
+      "path": "tests/fixtures/newsfeed/agent-news/fed-press-monetary-sample.xml",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "9f9a47120da5231c1623e386e83343de6c2773a635061c29be35ffef0d985618",
+      "purpose": "手工构造官方 feed 夹具（EDT 路径）"
+    },
+    {
+      "path": "tests/fixtures/newsfeed/agent-news/item-expectation-20260904.json",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "a5238ebbf769281d5788bd5efb95b5844775bfba0e2f62be13b927363945169a",
+      "purpose": "真实条目124快照（预期报道）"
+    },
+    {
+      "path": "tests/fixtures/newsfeed/agent-news/item-fed-statement-20260916.json",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "a8f86a825a74f4c1319f9196b2fa6f8d8df26ab2186fd3700aa6bb99b11b8c61",
+      "purpose": "官方声明入库形态夹具（未评分）"
+    },
+    {
+      "path": "docs/experiments/agent-news-s1-2026-09-17.md",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "1b41c371579189a5c4ad373e8ef2abdc4cc0c5439a5a51c4d9e836d58bdc5646",
+      "purpose": "S1 阶段交付报告（含一句话结论大白话）"
+    },
+    {
+      "path": "docs/experiments/registry.json",
+      "kind": "modified",
+      "base_sha256": "e14288384f45abd9304b9cda10ee158bdd97411a1d70e15a88445ca0032cc8ce",
+      "after_sha256": "b5e65be7dbb792d03bd331f177fb4f4267060c39344814c8189512659ec42999",
+      "purpose": "登记 S1 报告（category=数据与质量, verdict=mixed）"
+    },
+    {
+      "path": "docs/experiments/INDEX.md",
+      "kind": "modified",
+      "base_sha256": "2c81aa627ad40ca9fa29d5e633c199f1858cc4ba360185a7b27e81aed8832622",
+      "after_sha256": "100d791e8255509ed80b944fa52a966b2e402e299163affba062c41d617d2a90",
+      "purpose": "§1 字母账补 S1 一行"
+    },
+    {
+      "path": "docs/experiments/raw/agent-news-ark-2026-09-17/baseline.json",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "e93031c24502743ae96e94ef5bd8f556d228f331a88d5a6631087f049c418615",
+      "purpose": "主控基线指纹（与 R 原文件字节一致，e93031c2…）"
+    },
+    {
+      "path": "docs/experiments/raw/agent-news-ark-2026-09-17/controlled_collect.py",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "e3f398b39bd97b5cfa3f35d55c181ad1143b28e74aec65f2cfc08b07b9812ac1",
+      "purpose": "受控采集+重放脚本（仅官方源、临时库、留痕）"
+    },
+    {
+      "path": "docs/experiments/raw/agent-news-ark-2026-09-17/commands.jsonl",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "b28da15683b93bcebc02c71a414016760172186aad1202b4229a79f3407ea7a0",
+      "purpose": "逐命令日志"
+    },
+    {
+      "path": "docs/experiments/raw/agent-news-ark-2026-09-17/network-budget.json",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "43a36bf5d3d087068bae4c6cc1e807c26106ab2416b2233822f0b646ab8114ae",
+      "purpose": "网络预算留痕（4/12）"
+    },
+    {
+      "path": "docs/experiments/raw/agent-news-ark-2026-09-17/source-manifest.json",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "bcc1061190027bfb6b7acfc92c80b701cbfe7dd277772290c7df6f2c369c78ae",
+      "purpose": "来源与依据清单"
+    },
+    {
+      "path": "docs/experiments/raw/agent-news-ark-2026-09-17/controlled-collect-result.json",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "a469927e6c6e57dc8e8929d474e862cd16c24f68ed435fa8ceac912647a992f9",
+      "purpose": "受控采集结果证据"
+    },
+    {
+      "path": "docs/experiments/raw/agent-news-ark-2026-09-17/fed-press-monetary-live-2026-09-17.xml",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "8e7d6133fc7b31ca6c9b13c73e85172e2eea537ec04ace24f538d955f5a61c45",
+      "purpose": "官方 feed 真实原始响应"
+    },
+    {
+      "path": "docs/experiments/raw/agent-news-ark-2026-09-17/temp-db-inspect.json",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "6f015ddb693c73b3f51addcc803344a22b4273714108c4335cdb1fd39e5a5025",
+      "purpose": "临时库内容快照"
+    },
+    {
+      "path": "docs/experiments/raw/agent-news-ark-2026-09-17/changed-files.json",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": null,
+      "purpose": "本清单（按 R5 不对自身声称最终哈希，外置校验为准）"
+    },
+    {
+      "path": "docs/experiments/raw/agent-news-ark-2026-09-17/implementation.patch",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "b329701444070fb69276252935622f800b4e91c29b825f4c8d9eace2646decc2",
+      "purpose": "已跟踪文件修改补丁"
+    },
+    {
+      "path": "docs/experiments/raw/agent-news-ark-2026-09-17/repair-1/hash-note.json",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "f7517d5099d3aaf2a5dfd192405999ef09c16c591d6ce818f9298aeb25b41629",
+      "purpose": "R5 自哈希不一致记录与修复口径"
+    },
+    {
+      "path": "docs/experiments/raw/agent-news-ark-2026-09-17/repair-1/probe-rerun.json",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "c992cfb56c2fa990bfd2d9c015292c8ec1351edc318889f84e97b1a4b43514b6",
+      "purpose": "主控独立探针复跑结果（18/18 通过）"
+    },
+    {
+      "path": "docs/experiments/raw/agent-news-ark-2026-09-17/repair-1/replay-verify.py",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "fcbbd5b983376dfd3a8c9ad58d01a940938601e13b520a207b9e4c1b960a6b5f",
+      "purpose": "repair-1 重放验证脚本（真实材料，0 HTTP）"
+    },
+    {
+      "path": "docs/experiments/raw/agent-news-ark-2026-09-17/repair-1/replay-verify-result.json",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "76dd462e16a1bb4c6e9b42402ae224ed73002b3115df9bfe4c1bbdfe482db365",
+      "purpose": "repair-1 重放验证结果"
+    },
+    {
+      "path": "docs/experiments/raw/agent-news-ark-2026-09-17/repair-1/commands.jsonl",
+      "kind": "new",
+      "base_sha256": null,
+      "after_sha256": "8aedeeea919b80d84f5efc5f882101351c55e9bb9c84707cae66e501c8e0c312",
+      "purpose": "repair-1 逐命令日志"
+    }
+  ]
+}

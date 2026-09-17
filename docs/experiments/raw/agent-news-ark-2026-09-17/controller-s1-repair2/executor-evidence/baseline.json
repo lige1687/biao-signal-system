@@ -1,0 +1,48 @@
+{
+  "base_commit": "29b150f58b3f6d8c6e558a748c12dac3384af173",
+  "runtime_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "execution_workspace": "/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/agents/news-agent-20260917",
+  "baseline_policy": "HEAD snapshot, no dirty-file overlay; adoption requires fresh three-way comparison",
+  "required_docs": {
+    "AGENTS.md": "79d233a044ccb4c209e2cdccb7b2a5a09af81acc24faafe622b477e4be78cde5",
+    "CLAUDE.md": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+    "docs/trading-spec-v1.md": "dd75d70cd22b103e815d3b314b47c36731230aa268d05e42fa447ba55e639798",
+    "configs/rules.v1.yaml": "9be26a1626fdf6351478b40b388907e9d8128f74b6bd4aa2b8ff4a850cfdcfd2",
+    ".claude/skills/macd-reading/SKILL.md": "4a75dea4cb8f0ad2d1cb450c1d4237d87cc5c5b7f50f3eacda10880164c731ab",
+    "docs/plan-sector-trend-page.md": "921a483e16081fa975216a6f498a6af8654508df65be4feed64d8d593c24b23d",
+    "docs/plan-agent-superentry-v1.md": "90f768066c3d84db30602478145c4c4e356cc1c4229f9ea78d1e354157e7f765",
+    "docs/research/ai-execution-contract.md": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962"
+  },
+  "runtime_dirty_files": [
+    "docs/experiments/INDEX.md",
+    "docs/experiments/factor-evidence-controller-review-2026-09-16.md",
+    "docs/experiments/factor-evidence-reliability-v1-2026-09-16.md",
+    "docs/experiments/factor-library-progress-2026-09-16.md",
+    "docs/experiments/factor-library-progress-controller-review-2026-09-16.md",
+    "docs/experiments/raw/factor-evidence-reliability-v1-2026-09-16/repair-r1-r4/repair-log.md",
+    "docs/experiments/raw/factor-library-progress-2026-09-16/run-log.md",
+    "docs/experiments/registry.json",
+    "docs/research/factor-evidence-reliability-usage.md",
+    "src/lei_signal/api/routes/copilot.py",
+    "src/lei_signal/copilot/trades.py",
+    "src/lei_signal/research/factor_evidence/runner.py",
+    "src/lei_signal/research/factor_evidence/stability.py",
+    "src/lei_signal/storage/sqlite_store.py",
+    "tests/integration/test_factor_evidence_cli.py",
+    "web/src/api/client.ts",
+    "web/src/components/agent/AnswerText.tsx",
+    "web/src/components/copilot/CopilotCards.tsx",
+    "web/src/pages/AgentWorkspacePage.tsx",
+    "web/src/pages/agent-workspace.css",
+    "web/src/styles.css"
+  ],
+  "baseline_test": {
+    "command": "/Users/yongbiaoli/.workbuddy/binaries/python/envs/default/bin/python3 -m pytest tests/unit/test_newsfeed_pipeline.py tests/unit/test_newsfeed_store.py tests/unit/test_newsfeed_major_events.py tests/unit/test_newsfeed_api.py tests/unit/test_newsfeed_sources.py tests/unit/test_newsfeed_push.py -q",
+    "exit_code": 1,
+    "passed": 35,
+    "failed": 1,
+    "failure": "test_newsfeed_push.py::test_push_only_macro_risk_and_importance",
+    "reason": "旧测试期待7分不推；生产现有PUSH_IMPORTANCE=7。允许保留生产7并修正独立边界测试。"
+  },
+  "plan_sha256": "7b2fa2a89f9630a5fbe78226d5a0a1b18fbb3c5266d479094affc80e00bd45e5"
+}

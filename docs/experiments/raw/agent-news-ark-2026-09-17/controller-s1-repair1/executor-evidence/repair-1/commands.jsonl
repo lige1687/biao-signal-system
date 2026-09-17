@@ -1,0 +1,14 @@
+{"ts": "2026-09-17", "cmd": "读主控复核报告与 probe.py/probe-result.json（R raw/controller-s1-initial，只读）", "exit": 0, "note": "确认 R1-R5 返修点与探针独立预期；初版证据已由主控快照保全，不覆盖"}
+{"ts": "2026-09-17", "cmd": "python3 -m pytest tests/unit/test_newsfeed_health.py -q", "exit": 0, "note": "R1：22 passed（含 7 个新返修反例：冲突不被洗白/未来辅助时间/26h1m/4分钟未来/阶段时间降级；legacy 改 unknown）"}
+{"ts": "2026-09-17", "cmd": "python3 -m pytest tests/unit/test_newsfeed_event_context.py -q", "exit": 0, "note": "R2 分类：14 passed（含 FOMC statement 字样讲话/纪要反例、完整路径 event_key）"}
+{"ts": "2026-09-17", "cmd": "python3 -m pytest tests/unit/test_newsfeed_store.py tests/unit/test_newsfeed_major_events.py -q", "exit": 0, "note": "R2 可见性：29 passed（official_recent 不限评分状态；评分6/0/类别误判正式公告仍可见；讲话不占位）"}
+{"ts": "2026-09-17", "cmd": "python3 -m pytest tests/unit/test_newsfeed_sources.py -q", "exit": 0, "note": "R3：16 passed（命名时区定义偏移 EST=19:00UTC/EDT=18:00UTC；书签真实时刻比较；未来/无时区不推进书签；全部不可解析→NewsSourceError）"}
+{"ts": "2026-09-17", "cmd": "python3 -m pytest tests/unit/test_newsfeed_pipeline.py -q", "exit": 0, "note": "R4：14 passed（评分抛异常→运行收尾+阶段落库+下游 skipped(upstream_failed)+不外发；简报异常→落库且推送独立）"}
+{"ts": "2026-09-17", "cmd": "python3 -m pytest（S1 验收 8 文件）", "exit": 0, "note": "105 passed / 0 failed（R1-R4 返修后全量）"}
+{"ts": "2026-09-17", "cmd": "python3 R:raw/controller-s1-initial/probe.py（主控独立探针离线复跑）", "exit": 0, "note": "18/18 全部通过；结果存 repair-1/probe-rerun.json；探针只读 R 文件，临时库，0 HTTP/0 模型/0 推送"}
+{"ts": "2026-09-17", "cmd": "python3 docs/experiments/raw/agent-news-ark-2026-09-17/repair-1/replay-verify.py", "exit": 0, "note": "repair-1 重放验证（execution 1 保存的真实 GMT 材料，0 HTTP）：采集 ok、重放幂等、真实声明 official_result/经济预测 unknown、评分6仍可见、评分异常落库收尾"}
+{"ts": "2026-09-17", "cmd": "ruff check（src/newsfeed 及全部改动测试文件）", "exit": 1, "note": "6 处告警全部为基线旧有（llm_score/push I001/service×2/store测试×2），repair 零新增"}
+{"ts": "2026-09-17", "cmd": "python3 -m pytest（S1 验收 8 文件）", "exit": 0, "note": "105 passed / 0 failed（最终复跑）"}
+{"ts": "2026-09-17", "cmd": "python3 -m pytest tests/unit/test_copilot_ops.py tests/unit/test_llm_context.py tests/unit/test_agent_chat.py tests/unit/test_copilot_routes.py tests/unit/test_newsfeed_llm.py -q", "exit": 0, "note": "32 passed：相邻消费方无回归"}
+{"ts": "2026-09-17", "cmd": "python3 scripts/check_repo_hygiene.py", "exit": 1, "note": "唯一报警 .git 为 worktree 指针文件（W 结构固有）；R 原始命令主控已验证全绿（hygiene-root.json）"}
+{"ts": "2026-09-17", "cmd": "更新 changed-files.json（R5 自哈希置 null）+ implementation.patch + registry oneLiner", "exit": 0, "note": "42 项文件条目；报告追加修订记录（初版内容原样保留）；registry verdict 维持 mixed"}

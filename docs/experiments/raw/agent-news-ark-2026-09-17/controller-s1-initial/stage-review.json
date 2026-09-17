@@ -1,0 +1,20 @@
+{
+  "stage_id": "S1",
+  "verified": false,
+  "summary": "88 existing tests pass, but independent offline probes demonstrate health, official-event retention/classification, timezone/watermark and exception-persistence defects. Bounded S1 repair R1-R5 required.",
+  "goal_ids_checked": [
+    "G1",
+    "G2"
+  ],
+  "evidence": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/agent-news-s1-controller-review-2026-09-17.md",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/agent-news-ark-2026-09-17/controller-s1-initial/probe-result.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/agent-news-ark-2026-09-17/controller-s1-initial/fresh-pytest.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/agent-news-ark-2026-09-17/controller-s1-initial/hash-check.json"
+  ],
+  "limitations": [
+    "No production adoption; S2 not started.",
+    "Original W hygiene command only fails on standard worktree .git pointer; root passes.",
+    "No new external HTTP, product LLM or notification calls by controller."
+  ]
+}
