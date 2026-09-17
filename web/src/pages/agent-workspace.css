@@ -127,6 +127,11 @@
 .ar-quick-card header > div { display:flex; flex-direction:column; gap:5px; }
 .ar-quick-card header strong { font-size:15px; }
 .ar-quick-card header span { font-size:11px; color:var(--text-dim); }
+/* UX 第二轮：价位区头部的看图入口，蓝色交互语义，不占用黑灰绿状态色 */
+.ar-quick-head-actions { display:flex; align-items:center; gap:8px; }
+.ar-quick-chart-btn { border:1px solid #c6d8f5; background:#fff; color:#2458c6; border-radius:5px; padding:4px 9px; font-size:11px; white-space:nowrap; }
+.ar-quick-chart-btn:hover { background:#f0f4fa; }
+.ar-section-label { font-size:11px; color:var(--text-dim); margin:4px 0 2px; }
 .ar-metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); gap:12px; margin:16px 0; }
 .ar-metrics dt { font-size:11px; color:var(--text-dim); margin-bottom:6px; }
 .ar-metrics dd { margin:0; font-size:15px; font-weight:600; }
@@ -175,6 +180,13 @@
   .ar-resource { position:fixed; top:60px; right:0; bottom:0; width:min(600px,90vw); z-index:40; box-shadow:-8px 0 30px #20334e18; }
   .ar-workspace.has-resource .ar-toolbar-caption { display:none; }
   .ar-workspace.wide-resource .ar-resource { width:96vw; }
+}
+@media(max-width:860px) {
+  /* G3 修复 2026-09-17：顶栏 ≤860px 会换行变高（768px 实测 98px，z-index:50），
+     而 651–860px 区间抽屉仍是 top:60px / z-index 40·45——抽屉头部（固定/放大/
+     关闭）被顶栏第二行压住。抽屉改为全屏覆盖顶栏，与 ≤650px 行为一致，
+     关闭走抽屉自己的 ×。 */
+  .ar-history, .ar-resource { top:0; z-index:80; }
 }
 @media(max-width:650px) {
   .ar-toolbar { padding:14px 16px; min-height:60px; }

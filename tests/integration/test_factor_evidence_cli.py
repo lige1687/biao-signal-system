@@ -222,6 +222,70 @@ def test_run_analysis_requires_explicit_mode(tmp_path):
     assert not out.exists()
 
 
+def test_run_analysis_fake_real_identity_direct_call_rejected(tmp_path):
+    # 主控S1反例：数据标的与协议同为510300、自填伪 base_dir/sha 的 real
+    # 直接调用也必须在写盘前拒绝——自填身份不是已验证合同
+    frame, schedule, _ = _synthetic()
+    frame = frame.copy()
+    frame["symbol"] = "510300"
+    out = tmp_path / "run-fakereal"
+    with pytest.raises(ValueError, match="real|真实|main"):
+        runner.run_analysis(frame, schedule, FIXED_PARAMS, out_dir=out,
+                            source_meta={
+                                "mode": "real",
+                                "input_identity": {
+                                    "base_dir": "does-not-exist",
+                                    "observations_csv_sha256": "fake"}})
+    assert not out.exists()
+
+
+def test_report_two_year_sign_flip_keeps_actual_values(tmp_path):
+    # 主控S2反例：2020真/假0.1/0、2021真/假−0.2/0，全期−0.05；
+    # 删2020后−0.2、删2021后+0.1（反号）。机器解释不得输出"不反号"断言，
+    # 只给中性说明并展示实际数值；统计值本身不变。
+    days = [d.strftime("%Y-%m-%d")
+            for d in pd.bdate_range("2020-01-02", "2021-03-31")]
+    schedule = pd.DataFrame({"session": days,
+                             "in_window": [True] * len(days)})
+    rows = []
+    for session, state, main in [("2020-01-02", True, 0.1),
+                                 ("2020-01-03", False, 0.0),
+                                 ("2021-01-04", True, -0.2),
+                                 ("2021-01-05", False, 0.0)]:
+        i = days.index(session)
+        rows.append({"symbol": "SYN", "session": session, "state": state,
+                     "main": main, "aux": -0.01, "legal": True,
+                     "legal_reason": None,
+                     "e_date": days[i + 1], "x_date": days[i + 21]})
+    frame = pd.DataFrame(rows, columns=COLS)
+    params = json.loads(json.dumps(FIXED_PARAMS))
+    params["resampling"] = {**params["resampling"], "reps": 4,
+                            "block_lengths": [2]}
+    out = tmp_path / "run-flip"
+    runner.run_analysis(frame, schedule, params, out_dir=out,
+                        source_meta=dict(_SYN_META))
+    stab = json.loads((out / "stability.json").read_text(encoding="utf-8"))
+    assert stab["full_period"]["delta"] == pytest.approx(-0.05)
+    ys = stab["year_stability"]
+    assert ys["leave_one_year_out"]["2020"]["delta"] == pytest.approx(-0.2)
+    assert ys["leave_one_year_out"]["2021"]["delta"] == pytest.approx(0.1)
+    assert ys["sign_counts"] == {"positive": 1, "zero": 0, "negative": 1}
+    report = (out / "report.md").read_text(encoding="utf-8")
+    assert "不使差值反号" not in report  # 旧固定断言（本例为假）已移除
+    assert "逐项查看" in report
+    assert "-5.0000" in report       # 全期差实际数值仍展示
+    assert "-20.0000" in report and "+10.0000" in report  # 留一年范围
+    card_text = (out / "evidence-card.json").read_text(encoding="utf-8")
+    assert "逐年方向不一致" not in card_text
+    card = json.loads(card_text)
+    assert card["qualifications"]["effectiveness"] \
+        == "无预测有效性证明；年度结果见实际输出"
+    overlap = json.loads((out / "overlap.json").read_text(encoding="utf-8"))
+    note = overlap["sparse"]["note"]
+    assert "观察窗口不重叠" not in note  # 不再无条件断言不重叠
+    assert "计数" in note and "独立" in note
+
+
 def test_run_analysis_single_group_completes_not_estimable(tmp_path):
     # 主控R2反例：单组资料必须完成诚实的"不可估计"报告，不得在渲染崩溃
     schedule = pd.DataFrame({"session": DAYS,

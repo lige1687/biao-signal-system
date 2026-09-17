@@ -476,6 +476,9 @@ export const api = {
     amount: number;
     trade_date: string;
     note?: string;
+    // 确认身份：每次独立确认生成一个稳定UUID，失败重试沿用同一ID；
+    // 服务端据此保证同一次确认只记一笔（新UI必须携带）。
+    request_id: string;
   }) =>
     request<FundTrade>(`/copilot/trades`, {
       method: "POST",

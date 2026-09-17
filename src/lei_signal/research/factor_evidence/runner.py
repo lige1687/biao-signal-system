@@ -10,8 +10,10 @@
    定稿），文件集合与哈希双向一致；任何失败不产生 completed=true 的
    manifest。标准 JSON（allow_nan=False），合法缺失=null+原因。
 
-``run_analysis`` 是显式传入观察表的合成入口（测试/复算用，不经过真实
-输入身份检查）；真实入口只有 ``main``（协议→身份→装载→计算）。
+``run_analysis`` 是显式传入观察表的合成入口（测试/复算用）；直接调用
+**只支持合成**——real 模式写盘前拒绝，自填 base_dir/sha 不能自证真实
+身份（主控 S1 收窄）。真实入口只有 ``main``（协议→身份→装载→计算），
+其内部经完整校验后调用私有落盘函数 ``_run_analysis_write``。
 """
 from __future__ import annotations
 
@@ -170,8 +172,9 @@ def _report_md(full: dict, years: dict, loo: dict, eq: dict, sign: dict,
 （把每年当一票的平均，与全期把两组各自观察直接平均问的问题不同；
 两个都是描述视角，都不是因果校正，反转不意味着计算错误）。
 留一年全期差范围：{loo_lo} 至 {loo_hi}
-（删除任一单个年份后的全期差；只说明单个年份不使差值反号，
-不据此称不依赖连续行情或无集中影响）。
+（删除任一单个年份后的全期差；逐项查看各年份删除后的差值及缺失原因，
+差值是否随之反号以实际数值为准，不能由此排除单个年份的集中影响，
+也不据此称不依赖连续行情）。
 
 ## 标签区间重叠（主结果=共同合法集合；单位是相邻交易日价格区间）
 
@@ -188,7 +191,7 @@ def _report_md(full: dict, years: dict, loo: dict, eq: dict, sign: dict,
 - 稀疏锚点（{sp['anchor']}，步长{sp['step']}）应有格点
   {_sv(sp['expected_points'])}、可审计 {_sv(sp['auditable_points'])}、
   缺失原因 {sp['reasons']}；可审计格点间共享区间最大
-  {_sv(sp['adjacent_shared_max'])}（不重叠不等于独立）。
+  {_sv(sp['adjacent_shared_max'])}（该计数即使为 0 也不证明独立）。
 
 ## 连续行情敏感性（成对循环区块重抽，条件性范围）
 
@@ -210,6 +213,10 @@ def _report_md(full: dict, years: dict, loo: dict, eq: dict, sign: dict,
 def _resolve_identity(frame: pd.DataFrame, fixed_params: dict,
                       source_meta: dict) -> dict:
     """解析运行身份（主控R1）：真实/合成分开，合成不得冒用真实身份。
+
+    内部辅助函数，不是入口：真实分支的 input_identity 必须来自 ``main``
+    已完成的协议校验与固定装载（``validate_protocol`` +
+    ``load_b1_observations``），本函数不独立验证来源。
 
     - real：必须提供已验证合同的 input_identity；数据标的必须与协议一致，
       冲突在写盘前拒绝；对象/用途取合同常量。
@@ -257,11 +264,34 @@ def _resolve_identity(frame: pd.DataFrame, fixed_params: dict,
 
 def run_analysis(frame: pd.DataFrame, schedule: pd.DataFrame,
                  fixed_params: dict, *, out_dir, source_meta: dict) -> dict:
-    """对观察表执行固定方法分析并落盘。
+    """对观察表执行固定方法分析并落盘（直接调用**仅限显式合成输入**）。
 
-    身份（真实/合成）由 ``source_meta`` 显式声明并逐项核对（见
-    ``_resolve_identity``）；缺组/空集/不足资料不崩溃，写成结构化
-    not_estimable 输出（真实 CLI 入口的资料不足出口为退出 2，见 ``main``）。
+    主控 S1 收窄：公开直接调用不再接受 real 模式——自填
+    ``input_identity``（base_dir/sha）不是已验证合同，不能自证真实身份，
+    写盘前拒绝；真实运行只能经 ``main`` 的已校验入口（协议校验→固定输入
+    装载→私有落盘函数），不引入可自填的 verified/token/approval 旁路。
+    """
+    mode = source_meta.get("mode")
+    if mode == "real":
+        raise ValueError("real 模式不允许直接调用 run_analysis：真实身份"
+                         "不能自填（base_dir/sha 不是已验证合同，写盘前"
+                         "拒绝）；真实运行只能经 main 的已校验入口")
+    if mode != "synthetic":
+        raise ValueError("source_meta.mode 必须为 'synthetic'（直接调用仅"
+                         "支持显式合成输入；真实入口只有 main）")
+    return _run_analysis_write(frame, schedule, fixed_params,
+                               out_dir=out_dir, source_meta=source_meta)
+
+
+def _run_analysis_write(frame: pd.DataFrame, schedule: pd.DataFrame,
+                        fixed_params: dict, *, out_dir,
+                        source_meta: dict) -> dict:
+    """分析并落盘（私有：真实路径仅由 ``main`` 完成校验后调用）。
+
+    身份（真实/合成）由 ``source_meta`` 显式声明并经 ``_resolve_identity``
+    逐项核对；本函数不承诺独立验证来源，对外不是已校验真实入口。
+    缺组/空集/不足资料不崩溃，写成结构化 not_estimable 输出（真实 CLI
+    入口的资料不足出口为退出 2，见 ``main``）。
     """
     out = Path(out_dir)
     if out.exists():
@@ -350,7 +380,7 @@ def run_analysis(frame: pd.DataFrame, schedule: pd.DataFrame,
                                    if not ident["synthetic"] else
                                    "合成输入，无数据资格声明"),
             "implementation": "本包独立实现+测试；与 arch 未做逐值兼容核验",
-            "effectiveness": "无预测有效性证据；逐年方向不一致",
+            "effectiveness": "无预测有效性证明；年度结果见实际输出",
             "production": "无生产授权",
         },
         "next_step": "最多一个最能改变判断的实验：由主控/用户决定（见正式报告）",
@@ -434,7 +464,9 @@ def main(protocol_path, out_dir, repo_root) -> int:
             print(f"[exit 2] 资料不足（not_estimable）："
                   f"{pre['null_reason']}；n={len(frame)}，max_L={max_L}")
             return 2
-        summary = run_analysis(
+        # 真实路径只经私有落盘函数：上方 validate_protocol + 装载已完成
+        # 完整校验，公开 run_analysis 已收窄为仅合成直接调用（主控S1）
+        summary = _run_analysis_write(
             frame, schedule, params, out_dir=out,
             source_meta={
                 "mode": "real",

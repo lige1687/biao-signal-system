@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { ResultContext, ResultSymbol } from "../agent/ResultContext";
@@ -65,7 +65,30 @@ export function RecommendCardView({ card }: { card: RecommendCard }) {
   );
 }
 
-/** 报单确认卡：字段可改，确认后才落库（设计定稿 D1 红线）。 */
+/** 每次独立确认的稳定请求标识：同一张确认卡（含失败重试）共用一个ID，
+ *  服务端凭它保证同一次确认只记一笔。ID 挂在 preview 对象上（WeakMap）：
+ *  组件因展开/收起对话轮重挂后身份不变；用户主动发起新一笔报单会得到
+ *  新的 preview 对象 → 新ID，即使金额日期代码完全相同也互不影响。 */
+const confirmationIds = new WeakMap<TradePreview, string>();
+
+function confirmationIdFor(preview: TradePreview): string {
+  let id = confirmationIds.get(preview);
+  if (!id) {
+    id = typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+      ? crypto.randomUUID()
+      : `req-${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+    confirmationIds.set(preview, id);
+  }
+  return id;
+}
+
+/** 报单确认卡：字段可改，确认后才落库（设计定稿 D1 红线）。
+ *  防重复记账三件套（工作台与侧栏助手共用本组件，两入口同样生效）：
+ *  ① 同步提交锁（ref）——按钮 disabled 依赖渲染时机，同一帧的极速连点
+ *    都发生在状态更新前，由 ref 在事件层直接拦截，正在执行时只放行第一次；
+ *  ② 稳定请求ID——失败重试沿用同一ID，服务端幂等返原笔，不会记两笔；
+ *  ③ 编辑阻断——上次提交结果未知（网络失败）又改了字段时拒绝发送，
+ *    提示先核对原笔，防止静默多记一笔。 */
 export function TradeConfirmCard({ preview }: { preview: TradePreview }) {
   const { readOnly } = useContext(ResultContext);
   const qc = useQueryClient();
@@ -75,23 +98,61 @@ export function TradeConfirmCard({ preview }: { preview: TradePreview }) {
     preview.amount != null ? String(preview.amount) : "",
   );
   const [date, setDate] = useState(preview.trade_date);
+  const submittingRef = useRef(false);
+  const attemptedKeyRef = useRef<string | null>(null);
+  const [editBlocked, setEditBlocked] = useState(false);
+  const requestId = confirmationIdFor(preview);
+
+  const buildPayload = () => ({
+    fund_code: code.trim(),
+    fund_name: name.trim() || code.trim(),
+    side: preview.side,
+    amount: Number(amount),
+    trade_date: date,
+    request_id: requestId,
+  });
+  // 影响落库结果的字段都进指纹；request_id 由卡片身份单独保证。
+  const payloadKey = (p: ReturnType<typeof buildPayload>) =>
+    JSON.stringify([p.fund_code, p.fund_name, p.side, p.amount, p.trade_date]);
+
   const create = useMutation({
-    mutationFn: () =>
-      api.copilotTradesCreate({
-        fund_code: code.trim(),
-        fund_name: name.trim() || code.trim(),
-        side: preview.side,
-        amount: Number(amount),
-        trade_date: date,
-      }),
+    mutationFn: (payload: ReturnType<typeof buildPayload>) =>
+      api.copilotTradesCreate(payload),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["copilotTrades"] });
       qc.invalidateQueries({ queryKey: ["opsToday"] });
+    },
+    onSettled: () => {
+      submittingRef.current = false;
     },
   });
   const missingHint = preview.missing.length
     ? `待补：${preview.missing.join("、")}`
     : "信息已抽全，请核对";
+  const confirmLocked =
+    readOnly ||
+    create.isPending ||
+    create.isSuccess ||
+    !/^\d{6}$/.test(code.trim()) ||
+    !(Number(amount) > 0) ||
+    !Number.isFinite(Number(amount)) ||
+    !/^\d{4}-\d{2}-\d{2}$/.test(date);
+  const handleSubmit = () => {
+    if (confirmLocked || submittingRef.current) return;
+    const payload = buildPayload();
+    if (
+      attemptedKeyRef.current !== null &&
+      attemptedKeyRef.current !== payloadKey(payload)
+    ) {
+      // 上次提交结果未知（失败/超时），字段又被改过：拒绝静默换一笔。
+      setEditBlocked(true);
+      return;
+    }
+    setEditBlocked(false);
+    attemptedKeyRef.current = payloadKey(payload);
+    submittingRef.current = true;
+    create.mutate(payload);
+  };
   return (
     <div className="cp-card">
       <div className="cp-label">报单确认（{preview.side_cn}）· 确认后记入基金台账</div>
@@ -106,23 +167,25 @@ export function TradeConfirmCard({ preview }: { preview: TradePreview }) {
       </div>
       <button
         className="btn small primary"
-        disabled={
-          readOnly ||
-          create.isPending ||
-          create.isSuccess ||
-          !/^\d{6}$/.test(code.trim()) ||
-          !(Number(amount) > 0) ||
-          !Number.isFinite(Number(amount)) ||
-          !/^\d{4}-\d{2}-\d{2}$/.test(date)
-        }
-        onClick={() => create.mutate()}
+        disabled={confirmLocked}
+        onClick={handleSubmit}
       >
         {create.isPending ? "记账中…" : create.isSuccess ? "已记账" : "确认记账"}
       </button>
       {create.isSuccess && <p role="status">已记入基金台账。<Link to="/portfolio">查看成交记录</Link></p>}
+      {editBlocked && !create.isSuccess && (
+        <div className="cp-error" role="alert">
+          上一次提交没有成功，你又修改了报单内容。系统无法确定上一笔有没有记上账，所以先不放行：
+          请到「我的持仓」页核对成交记录；如果那里没有这一笔，请重新发起一次报单（对助手再说一遍），
+          新确认卡会按新内容生成。
+        </div>
+      )}
       {create.error && (
         <div className="cp-error">
           {create.error instanceof Error ? create.error.message : String(create.error)}
+          <div style={{ marginTop: 4 }}>
+            内容没改时可直接再点一次「确认记账」，不会重复记两笔；拿不准是否已记账，请先到「我的持仓」页核对。
+          </div>
         </div>
       )}
     </div>
@@ -233,7 +296,9 @@ export function CopilotCardDispatcher({
   card: { card_type: string; data: unknown } | null;
   preview: TradePreview | null;
 }) {
-  if (preview) return <TradeConfirmCard preview={preview} />;
+  // key = 确认身份：新一笔预览（新对象）强制重挂，字段与提交状态按新卡
+  // 初始化；同一笔预览（含重挂恢复）复用同一实例身份，重试不换ID。
+  if (preview) return <TradeConfirmCard key={confirmationIdFor(preview)} preview={preview} />;
   if (!card) return null;
   if (card.card_type === "recommend")
     return <RecommendCardView card={card.data as RecommendCard} />;

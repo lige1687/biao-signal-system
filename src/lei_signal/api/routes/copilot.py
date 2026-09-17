@@ -12,7 +12,7 @@ from contextlib import closing
 from datetime import UTC, datetime
 
 from fastapi import APIRouter, HTTPException, Request
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from lei_signal.api.config import sqlite_path as default_db
 from lei_signal.api.schemas import (
@@ -367,6 +367,10 @@ class TradeCreateRequest(BaseModel):
     amount: float
     trade_date: str
     note: str = ""
+    # 确认身份（前端每次独立确认生成稳定UUID，失败重试沿用）。缺省 None =
+    # 旧客户端：不落唯一索引、无重试保护，行为与历史完全一致（明确兼容，
+    # 不假装旧调用也受保护）。
+    request_id: str | None = Field(default=None, max_length=128)
 
 
 class TradePreviewRequest(BaseModel):
@@ -384,7 +388,12 @@ def trades_preview(body: TradePreviewRequest) -> TradePreviewDTO:
 
 @router.post("/copilot/trades", response_model=FundTradeDTO)
 def trades_create(request: Request, body: TradeCreateRequest) -> FundTradeDTO:
-    """确认卡落库（结构化字段直传）+ 立即尝试定价。"""
+    """确认卡落库（结构化字段直传）+ 立即尝试定价。
+
+    带 request_id 时幂等：同ID同规范化载荷重试返回原成交（响应丢失、
+    定价失败后再试都不新建），同ID异载荷 409 冲突。定价只补 pending
+    行，天然可重试且不改变记账身份。
+    """
     from lei_signal.copilot import trades as trades_mod  # noqa: PLC0415
 
     with closing(connect(_db_path(request))) as conn:
@@ -398,7 +407,11 @@ def trades_create(request: Request, body: TradeCreateRequest) -> FundTradeDTO:
                 trade_date=body.trade_date,
                 source="web",
                 note=body.note,
+                request_id=(body.request_id.strip() or None)
+                if body.request_id else None,
             )
+        except trades_mod.TradeRequestConflict as exc:
+            raise HTTPException(status_code=409, detail=str(exc)) from exc
         except ValueError as exc:
             raise HTTPException(status_code=422, detail=str(exc)) from exc
         trades_mod.price_pending_trades(

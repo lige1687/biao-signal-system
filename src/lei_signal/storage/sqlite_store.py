@@ -1146,6 +1146,23 @@ MIGRATIONS: tuple[tuple[int, str, str], ...] = (
         ALTER TABLE agent_chat_requests ADD COLUMN request_symbol TEXT NOT NULL DEFAULT '';
         """,
     ),
+    (
+        31,
+        "031_fund_trade_request_identity",
+        """
+        -- 基金手动成交确认的重复记账修复（2026-09-17 委派合同 G2）：
+        -- 确认卡重试/连点曾会重复落库。给 fund_trades 增加请求身份两列，
+        -- 同一确认身份（request_id）由部分唯一索引在数据库层保证最多一笔：
+        -- 同ID同规范化载荷重试返回原成交，同ID异载荷显式冲突（409），
+        -- 不同ID的合法两笔（哪怕金额日期代码相同）互不影响。
+        -- 旧行两列保持 NULL：历史成交不补造身份、不删不合并；无ID的旧
+        -- 客户端调用不落索引，行为与之前完全一致（无重试保护，属预期）。
+        ALTER TABLE fund_trades ADD COLUMN request_id TEXT;
+        ALTER TABLE fund_trades ADD COLUMN request_payload TEXT;
+        CREATE UNIQUE INDEX IF NOT EXISTS idx_fund_trades_request_id
+            ON fund_trades(request_id) WHERE request_id IS NOT NULL;
+        """,
+    ),
 )
 
 
@@ -1232,6 +1249,15 @@ def apply_migrations(connection: sqlite3.Connection) -> tuple[str, ...]:
             # 不加外键约束：删组时把成员置 NULL 而非级联删除标的。
             connection.executescript(sql)
             _safe_add_column(connection, "watchlist_items", "group_id", "INTEGER")
+        elif name == "031_fund_trade_request_identity":
+            # 与 003/004 同理：executescript 隐式提交，若中途断在 ALTER 后、
+            # 记账前，重跑不能撞 duplicate column。旧行两列保持 NULL 不回填。
+            _safe_add_column(connection, "fund_trades", "request_id", "TEXT")
+            _safe_add_column(connection, "fund_trades", "request_payload", "TEXT")
+            connection.execute(
+                "CREATE UNIQUE INDEX IF NOT EXISTS idx_fund_trades_request_id "
+                "ON fund_trades(request_id) WHERE request_id IS NOT NULL"
+            )
         else:
             # executescript 会隐式提交，因此记账单独提交
             connection.executescript(sql)

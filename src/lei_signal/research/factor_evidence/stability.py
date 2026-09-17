@@ -322,7 +322,8 @@ def overlap_audit(frame: pd.DataFrame, schedule: pd.DataFrame,
             "grid_policy": "锚点沿完整交易日轴推进；只审计原规则锚点，不扫描其他起点选最好",
             "adjacent_pairs": len(sparse_shared),
             "adjacent_shared_max": max(sparse_shared) if sparse_shared else None,
-            "note": ("可审计格点间标签观察窗口不重叠（区间级）；"
-                     "不重叠不等于统计独立"),
+            "note": ("可审计格点间共享区间以 adjacent_shared_max/"
+                     "adjacent_pairs 等实际计数为准；即使为 0 也不证明"
+                     "统计独立"),
         },
     }
