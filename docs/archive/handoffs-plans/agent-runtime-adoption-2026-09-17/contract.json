@@ -1,0 +1,88 @@
+{
+  "mission": "将已验收本地main的Agent连续讨论、事实记忆与稳定性成果准备成保留运行目录并行工作的可审阅定向采用包；本任务不部署。",
+  "goals": [
+    {
+      "id": "G1",
+      "goal": "准确区分已存在、待采用与并行冲突，并查清最小依赖。",
+      "acceptance": [
+        "记录来源main=f8638b9f、运行HEAD与实际工作区文件哈希；逐文件/关键改动列采用理由、共同祖先与并行修改，不以不同等于落后。",
+        "覆盖此前未部署的Agent稳定性及连续讨论依赖；给出最小采用清单与明确排除项，报告真实库/服务均未改动。"
+      ]
+    },
+    {
+      "id": "G2",
+      "goal": "隔离副本保留当前运行行为并整合已验收Agent改动。",
+      "acceptance": [
+        "仅在隔离工作区构建候选；把纳入清单的运行工作区脏改作为基线保留，冲突按改动含义合并，特别保留AgentWorkspacePage及AnswerText和因子入口。",
+        "真实路由临时库验证本人事实声明/第三人及假设/更正/快照与历史一致；双入口概念讨论/明确ATR执行拦截/中断重试与名称板块识别保持，证据区分模型桩与真实模型。",
+        "运行受影响回归、前端build及相关脚本；可隔离浏览器检查两入口；不得修范围外已有失败以冒充全绿。"
+      ]
+    },
+    {
+      "id": "G3",
+      "goal": "交付可验证、可回退且遇到运行文件变化即拒绝应用的采用包。",
+      "acceptance": [
+        "patch基于捕获的实际运行文件而非仅运行HEAD，逐项记录before/after sha256、新增文件预期不存在；在另一份临时副本实测正确基线能应用、任一目标变化拒绝且零部分写入。",
+        "交付中文报告/raw/registry/INDEX和精确文件清单、依赖及采用/回退步骤；仅单一候选分支提交，不合main不push不改运行代码，不重启服务不写真实业务库。"
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "id": "S1",
+      "title": "只读差异与依赖审查",
+      "goal_ids": [
+        "G1"
+      ],
+      "deliverables": [
+        "docs/experiments/agent-runtime-adoption-audit-2026-09-17.md",
+        "同名raw下文件指纹、差异分类、最小候选清单及依赖表"
+      ],
+      "acceptance": [
+        "逐文件核实来源/运行实态，明确脏改冲突与保留要求；本阶段不编辑产品代码、不制作已应用候选。"
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "S2",
+      "title": "隔离整合与采用包验证",
+      "goal_ids": [
+        "G2",
+        "G3"
+      ],
+      "deliverables": [
+        "候选实现与相关测试日志",
+        "docs/experiments/agent-runtime-adoption-candidate-2026-09-17.md及raw采用包"
+      ],
+      "acceptance": [
+        "按S1主控认可清单构建隔离候选，保留运行并行改动，验证关键用户链路。",
+        "采用/回退包只在临时目录演练，并具备全目标预校验；生产采用留主控。"
+      ],
+      "depends_on": [
+        "S1"
+      ]
+    }
+  ],
+  "in_scope": [
+    "工作区/Users/yongbiaoli/lei-agent-runtime-adoption-20260917，分支codex/agent-runtime-adoption-20260917，基于运行已提交HEAD29b150f5；当前阶段只做S1",
+    "只读来源/Users/yongbiaoli/lei-agent-main-consolidation-20260915，冻结main提交f8638b9f；只读运行/Users/yongbiaoli/Desktop/lei-signal-lab",
+    "允许在S2复制纳入清单所必需的运行源文件到候选并合并，经主控审查前不得跨阶段；临时库、合成数据、本机隔离服务、无模型测试允许",
+    "相关技能/CLAUDE/AGENTS策略文档必读；服务于讨论与体验解释层，不改变交易策略"
+  ],
+  "out_of_scope": [
+    "实际部署、真实库迁移/回补、push或主分支合并、运行服务操作",
+    "新因子接口、因子研究与算法、规则/阈值/模型配置、付费模型请求、数值校验器重写",
+    "整仓同步、目录治理、覆盖受保护归档路径或搬迁历史原始证据"
+  ],
+  "protected_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab 全工作区及服务（只读）",
+    "/Users/yongbiaoli/lei-agent-main-consolidation-20260915（只读）",
+    "所有.env/凭据/真实数据库，禁止复制到候选或日志",
+    "src/lei_signal/ui/、configs/、并行因子算法内容、历史docs/experiments/raw路径"
+  ],
+  "stop_conditions": [
+    "运行目标文件持续变化时不强行覆盖：列出漂移，冻结候选供主控核对；对不依赖漂移的部分继续分析",
+    "发现策略/资金/产品语义冲突不能机械决定时停对应合入，给具体差异与选项",
+    "无法隔离真实数据库或外部请求时不启动预览；未获主控阶段通过不得进入S2"
+  ]
+}
