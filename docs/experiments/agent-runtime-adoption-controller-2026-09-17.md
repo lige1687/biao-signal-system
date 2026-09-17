@@ -18,3 +18,7 @@
 
 ## ARCHIVE
 分类数据与质量，verdict=mixed。S2未通过G3，待限定返修；未部署、未修改真实业务库。G2关键抽查通过不代表浏览器及真实模型全面验证。
+
+## 第二轮独立复验（d19e7eff）
+
+正常应用与精确回退通过，上一轮目录/载荷/依赖三项反例均正确拒绝。独立八场景记录见raw同目录package-probe-r1-results.json。仍未通过的是中断后的备用恢复脚本：22项已应用后失败，再编辑agent.py，恢复脚本返回0并覆盖新编辑。限定修异常恢复出口，产品代码不返工。第二次返修书位于docs/archive/handoffs-plans/agent-runtime-adoption-2026-09-17/controller-S2-repair2.md。

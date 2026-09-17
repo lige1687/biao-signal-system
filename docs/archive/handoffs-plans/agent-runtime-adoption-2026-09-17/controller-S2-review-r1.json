@@ -1,0 +1,18 @@
+{
+  "stage_id": "S2",
+  "verified": false,
+  "summary": "上一轮三项补修独立通过；备用恢复脚本实测覆盖中断后新修改，G3仍待限定补修",
+  "goal_ids_checked": [
+    "G2",
+    "G3"
+  ],
+  "evidence": [
+    "/Users/yongbiaoli/lei-agent-runtime-adoption-20260917/docs/experiments/raw/agent-runtime-adoption-controller-2026-09-17/package-probe-r1-results.json",
+    "/Users/yongbiaoli/lei-agent-runtime-adoption-20260917/docs/archive/handoffs-plans/agent-runtime-adoption-2026-09-17/controller-S2-repair2.md",
+    "git diff 52713e23 d19e7eff仅工具与文档，已通过产品代码未修改"
+  ],
+  "limitations": [
+    "未部署、未操作真实库",
+    "异常恢复出口仍未守住后续改动保护"
+  ]
+}
