@@ -1,0 +1,19 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__________________ test_backtest_intent_shared_with_frontend ___________________
+
+    def test_backtest_intent_shared_with_frontend():
+        from pathlib import Path
+        from lei_signal.copilot.resolve import parse_request
+        cases=json.loads(Path('tests/fixtures/agent_semantics/atr_intents.json').read_text())
+        for case in cases:
+>           assert (parse_request(case['text'])['intent']=='backtest_request')==case['backtest'],case['text']
+E           AssertionError: 解释一下ATR止损回测是什么意思，不要求你执行
+E           assert ('backtest_request' == 'backtest_request'
+E             
+E               backtest_request) == False
+
+tests/unit/test_agent_context_contract.py:51: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_agent_context_contract.py::test_backtest_intent_shared_with_frontend
+1 failed in 0.80s

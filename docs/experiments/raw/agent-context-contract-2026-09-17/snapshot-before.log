@@ -1,0 +1,49 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______________ test_context_contract_full_conversation_and_replay ______________
+
+client = (<starlette.testclient.TestClient object at 0x110e38750>, '/private/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/pytest-of-yongbiaoli/pytest-26/test_context_contract_full_con0/t.db')
+
+    def test_context_contract_full_conversation_and_replay(client):
+        """Actual API+temporary DB: current materials, persisted reply and replay agree."""
+        from lei_signal.api.routes.agent import _user_background
+        from lei_signal.plans.sessions import list_messages
+        from lei_signal.storage.sqlite_store import connect
+        http, db = client
+        sid = _mk_session(db)
+        messages = [
+            '我已经持有了', '我有一万闲钱',
+            '朋友昨天操作了，已经清仓',
+            '如果以后有钱，每月定投',
+            '不是一万，是五千',
+            '那现在重点看哪里？',
+            '朋友还持有，但我已清仓',
+            '我没有闲钱，这是每月工资定投',
+            '那现在重点看哪里？',
+        ]
+        for i, message in enumerate(messages):
+            reply = _chat(http, sid, message, f'contract-{i}')
+            assert reply['reply'] == _last_stored_reply(http, sid)
+            with connect(db) as conn:
+                bg = _user_background(list_messages(conn, sid, limit=100), SYMBOL)
+            import json
+            with connect(db) as conn:
+                raw = conn.execute("SELECT meta_json FROM agent_messages WHERE session_id=? AND role='user' ORDER BY message_id DESC LIMIT 1", (sid,)).fetchone()
+            snapshot = json.loads(raw['meta_json'])['discussion_v1']
+>           assert snapshot.get('budget') == bg.get('budget') or (
+                snapshot.get('budget') and bg.get('budget') and
+                snapshot['budget']['amount'] == bg['budget']['amount'])
+E           AssertionError: assert ({'amount': 5000.0, 'currency': 'CNY', 'inherited_from_question': 13, 'note_cn': '用户本条消息明确提供（中文数字换算）'} == None or ({'amount': 5000.0, 'currency': 'CNY', 'inherited_from_question': 13, 'note_cn': '用户本条消息明确提供（中文数字换算）'} and None))
+E            +  where {'amount': 5000.0, 'currency': 'CNY', 'inherited_from_question': 13, 'note_cn': '用户本条消息明确提供（中文数字换算）'} = <built-in method get of dict object at 0x11397db80>('budget')
+E            +    where <built-in method get of dict object at 0x11397db80> = {'backtest_request_ids': [], 'budget': {'amount': 5000.0, 'currency': 'CNY', 'inherited_from_question': 13, 'note_cn':...'data_refs': [{'as_of_cutoff': None, 'available_at': None, 'calendar_ref': None, 'completeness': 'unknown', ...}], ...}.get
+E            +  and   None = <built-in method get of dict object at 0x11397e280>('budget')
+E            +    where <built-in method get of dict object at 0x11397e280> = {'purpose': 'income_dca', 'stated': ['用途']}.get
+E            +  and   {'amount': 5000.0, 'currency': 'CNY', 'inherited_from_question': 13, 'note_cn': '用户本条消息明确提供（中文数字换算）'} = <built-in method get of dict object at 0x11397db80>('budget')
+E            +    where <built-in method get of dict object at 0x11397db80> = {'backtest_request_ids': [], 'budget': {'amount': 5000.0, 'currency': 'CNY', 'inherited_from_question': 13, 'note_cn':...'data_refs': [{'as_of_cutoff': None, 'available_at': None, 'calendar_ref': None, 'completeness': 'unknown', ...}], ...}.get
+E            +  and   None = <built-in method get of dict object at 0x11397e280>('budget')
+E            +    where <built-in method get of dict object at 0x11397e280> = {'purpose': 'income_dca', 'stated': ['用途']}.get
+
+tests/unit/test_agent_continuity_routes_20260916.py:337: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_agent_continuity_routes_20260916.py::test_context_contract_full_conversation_and_replay
+1 failed in 21.85s

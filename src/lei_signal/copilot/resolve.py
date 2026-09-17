@@ -169,23 +169,13 @@ _CLAUSE_SPLIT_RE = re.compile(r"[，。；,;.!！?？\n：:]+")
 
 
 def _clause_spans(text: str) -> list[tuple[int, int, str]]:
-    """[(start, end, 分句)]，保留原文位置（空白分句丢弃）。"""
-    spans: list[tuple[int, int, str]] = []
-    start = 0
-    for m in _CLAUSE_SPLIT_RE.finditer(text or ""):
-        if m.start() > start:
-            spans.append((start, m.start(), text[start:m.start()]))
-        start = m.end()
-    if text and start < len(text):
-        spans.append((start, len(text), text[start:]))
-    return spans
+    from lei_signal.copilot.context_scope import clauses
+    return [(c.start, c.end, c.text) for c in clauses(text)]
 
 
 def _own_clause(clause: str) -> bool:
-    """分句是否可归属本人：含第三人/假设标记的分句不是本人陈述
-    （「朋友…」「如果…」）；无标记分句按既有约定视为本人陈述，
-    不向更远处猜归属。"""
-    return not (_THIRD_PERSON_RE.search(clause) or _HYPOTHETICAL_RE2.search(clause))
+    from lei_signal.copilot.context_scope import clauses
+    return all(c.subject != "other" and c.factual for c in clauses(clause))
 
 
 def _budget_guard_ok(text: str, m: re.Match[str]) -> bool:
@@ -204,11 +194,9 @@ def _budget_guard_ok(text: str, m: re.Match[str]) -> bool:
         return False  # 「我没有一万元预算」「不用一万」：否定不是事实
     # 三轮收口：归属按金额所在**分句**核实（「朋友有一万，我五千」里
     # 五千是本人事实，朋友的一万不是）。
-    clause = next((t for s, e, t in _clause_spans(text)
-                   if s <= m.start() < e), text)
-    if not _own_clause(clause):
-        return False  # 「朋友有一万元」「如果我有一万元」：非本人事实
-    return True
+    from lei_signal.copilot.context_scope import clauses
+    scope = next((c for c in clauses(text) if c.start <= m.start() < c.end), None)
+    return scope is not None and scope.subject != "other" and scope.factual
 
 
 def _parse_loose_budget(text: str) -> dict[str, Any] | None:
@@ -321,6 +309,70 @@ def detect_fact_correction(message: str) -> dict[str, bool]:
     return {"holding_cleared": holding_cleared, "budget_cleared": budget_cleared}
 
 
+def user_fact_events(message: str) -> list[dict[str, Any]]:
+    """Only explicit own factual statements become updates; keep original evidence.
+
+    Lexical extraction for a question is deliberately broader than memory. Missing
+    subject is not authority to mutate memory. Corrections require an existing value.
+    """
+    from lei_signal.copilot.context_scope import clauses
+    text = (message or "").strip()
+    events: list[dict[str, Any]] = []
+    correction = bool(re.fullmatch(r"不是[^，,。]+[，,]\s*是[^，,。]+[。]?", text))
+    for scope in clauses(text):
+        if not scope.factual or (scope.subject != "self" and not correction):
+            continue
+        part = scope.text
+        def emit(field: str, value: Any, source: str = part) -> None:
+            events.append({"field": field, "value": value, "source_text": source,
+                           "requires_existing": correction})
+        if correction:
+            value = _parse_loose_budget(part)
+            if value:
+                emit("budget", value)
+            continue
+        if (_HOLDING_CLEAR_RE.search(part) and not _CLEAR_ACTION_NEG_RE.search(part)):
+            emit("holding", False)
+        elif detect_stance(part) == "holding":
+            emit("holding", True)
+        if _BUDGET_CLEAR_RE.search(part):
+            emit("budget", None)
+            emit("purpose", None)
+        # Negating a purpose must revoke it even without giving a replacement.
+        if any(_PURPOSE_NEG_TAIL_RE.search(part[:m.start()])
+               for _, pat in _PURPOSE_RULES for m in pat.finditer(part)):
+            emit("purpose", None)
+        budget = None
+        bm = re.search(r"预算\s*([0-9][0-9,.]*)\s*(?:元|块)?", part)
+        if bm and _budget_guard_ok(part, bm):
+            budget = {"amount": float(bm.group(1).replace(",", "")), "currency": "CNY",
+                      "note_cn": "用户本条消息明确提供"}
+        budget = budget or _parse_loose_budget(part)
+        if budget:
+            emit("budget", budget)
+        purpose = _establish_purpose(part)
+        if purpose:
+            emit("purpose", purpose)
+    return events
+
+
+def apply_user_facts(background: dict, message: str) -> dict:
+    """One reducer for live preparation and replay. No event means no change."""
+    result = {k: v for k, v in background.items() if k in ("holding", "budget", "purpose") and v}
+    for event in user_fact_events(message):
+        key, value = event["field"], event["value"]
+        if event["requires_existing"] and not background.get(key):
+            continue
+        if value:
+            result[key] = value
+        else:
+            result.pop(key, None)
+    if result:
+        names = {"holding": "持有", "budget": "预算", "purpose": "用途"}
+        result["stated"] = sorted(names[k] for k in result)
+    return result
+
+
 def parse_exit_choice(text: str) -> str | None:
     """从一句话里识别用户明确的退出方式（返回引擎 exit_variant id 或 None）。"""
     t = (text or "").strip()
@@ -375,6 +427,24 @@ def parse_window_choice(text: str) -> dict[str, Any] | None:
     return None
 
 
+def _requests_backtest(text: str) -> bool:
+    """Execution action, not a mentioned concept. Shared cases with web agentUx."""
+    negative = re.compile(
+        r"(?:不|没|无|别|勿|非|无需|不用|不要|不必|不想|不要求)"
+        r"(?:再|要|需要|要求|做|进行|你)?(?:数值)?$")
+    topic = re.compile(r"^(?:是)?(?:什么意思|什么|怎么回事|的?含义|的?概念|的?原理)")
+    for clause in re.split(r"[，,。；;？！?!：:]", re.sub(r"\s+", "", text)):
+        if _BACKTEST_NEGATIVE_RE.search(clause):
+            continue
+        for match in _BACKTEST_RE.finditer(clause):
+            if negative.search(clause[:match.start()][-8:]):
+                continue
+            if topic.search(clause[match.end():]):
+                continue
+            return True
+    return False
+
+
 def parse_request(message: str) -> dict[str, Any]:
     """一句话 → 固定意图/主题/用途/澄清。纯函数。"""
     text = (message or "").strip()
@@ -388,7 +458,7 @@ def parse_request(message: str) -> dict[str, Any]:
 
     # ---- 意图（顺序即优先级：补测 > 已有功能 > 发现 > 成交 > 讨论）----
     # R2：否定/查询语气先于启动判断——「先不要补测」「有没有已有回测」是讨论
-    if _BACKTEST_RE.search(text) and not _BACKTEST_NEGATIVE_RE.search(text):
+    if _requests_backtest(text):
         intent = "backtest_request"
     elif _EXISTING_RE.search(text):
         intent = "existing_action"
@@ -435,10 +505,11 @@ def parse_request(message: str) -> dict[str, Any]:
     # （「朋友有闲钱」），本人肯定分句可更新（「…这是每月工资定投」）；
     # 含糊无归属不猜。与撤销共用同一套分句/归属判断，不各建一套整句守卫。
     purpose = "unknown"
-    for _s, _e, clause in _clause_spans(text):
-        if not _own_clause(clause):
+    from lei_signal.copilot.context_scope import clauses
+    for scope in clauses(text):
+        if scope.subject == "other" or not scope.factual:
             continue
-        established = _establish_purpose(clause)
+        established = _establish_purpose(scope.text)
         if established:
             purpose = established
             break

@@ -1,0 +1,211 @@
+FFFFF.FF.FFFFF                                                           [100%]
+=================================== FAILURES ===================================
+_ test_foreign_hypothesis_never_updates[\u670b\u53cb\u6628\u5929\u64cd\u4f5c\u4e86\uff0c\u5df2\u7ecf\u6e05\u4ed3] _
+
+text = '朋友昨天操作了，已经清仓'
+
+    @pytest.mark.parametrize('text',[
+        '朋友昨天操作了，已经清仓','朋友昨天操作了。已经清仓',
+        '如果以后有钱，每月定投','假设我已经持有，现在清仓',
+        '朋友有一万元闲钱，每月定投','朋友手里有，重仓持有着',
+    ])
+    def test_foreign_hypothesis_never_updates(text):
+        before=background('我已经持有了','我有一万闲钱')
+>       assert background('我已经持有了','我有一万闲钱',text)==before
+E       AssertionError: assert {'budget': {'..., '用途', '预算']} == {'budget': {'..., '用途', '预算']}
+E         
+E         Omitting 3 identical items, use -vv to show
+E         Right contains 1 more item:
+E         {'holding': True}
+E         Use -v to get more diff
+
+tests/unit/test_agent_context_contract.py:23: AssertionError
+_ test_foreign_hypothesis_never_updates[\u670b\u53cb\u6628\u5929\u64cd\u4f5c\u4e86\u3002\u5df2\u7ecf\u6e05\u4ed3] _
+
+text = '朋友昨天操作了。已经清仓'
+
+    @pytest.mark.parametrize('text',[
+        '朋友昨天操作了，已经清仓','朋友昨天操作了。已经清仓',
+        '如果以后有钱，每月定投','假设我已经持有，现在清仓',
+        '朋友有一万元闲钱，每月定投','朋友手里有，重仓持有着',
+    ])
+    def test_foreign_hypothesis_never_updates(text):
+        before=background('我已经持有了','我有一万闲钱')
+>       assert background('我已经持有了','我有一万闲钱',text)==before
+E       AssertionError: assert {'budget': {'..., '用途', '预算']} == {'budget': {'..., '用途', '预算']}
+E         
+E         Omitting 3 identical items, use -vv to show
+E         Right contains 1 more item:
+E         {'holding': True}
+E         Use -v to get more diff
+
+tests/unit/test_agent_context_contract.py:23: AssertionError
+_ test_foreign_hypothesis_never_updates[\u5982\u679c\u4ee5\u540e\u6709\u94b1\uff0c\u6bcf\u6708\u5b9a\u6295] _
+
+text = '如果以后有钱，每月定投'
+
+    @pytest.mark.parametrize('text',[
+        '朋友昨天操作了，已经清仓','朋友昨天操作了。已经清仓',
+        '如果以后有钱，每月定投','假设我已经持有，现在清仓',
+        '朋友有一万元闲钱，每月定投','朋友手里有，重仓持有着',
+    ])
+    def test_foreign_hypothesis_never_updates(text):
+        before=background('我已经持有了','我有一万闲钱')
+>       assert background('我已经持有了','我有一万闲钱',text)==before
+E       AssertionError: assert {'budget': {'..., '用途', '预算']} == {'budget': {'..., '用途', '预算']}
+E         
+E         Omitting 3 identical items, use -vv to show
+E         Differing items:
+E         {'purpose': 'income_dca'} != {'purpose': 'spare_cash'}
+E         Use -v to get more diff
+
+tests/unit/test_agent_context_contract.py:23: AssertionError
+_ test_foreign_hypothesis_never_updates[\u5047\u8bbe\u6211\u5df2\u7ecf\u6301\u6709\uff0c\u73b0\u5728\u6e05\u4ed3] _
+
+text = '假设我已经持有，现在清仓'
+
+    @pytest.mark.parametrize('text',[
+        '朋友昨天操作了，已经清仓','朋友昨天操作了。已经清仓',
+        '如果以后有钱，每月定投','假设我已经持有，现在清仓',
+        '朋友有一万元闲钱，每月定投','朋友手里有，重仓持有着',
+    ])
+    def test_foreign_hypothesis_never_updates(text):
+        before=background('我已经持有了','我有一万闲钱')
+>       assert background('我已经持有了','我有一万闲钱',text)==before
+E       AssertionError: assert {'budget': {'..., '用途', '预算']} == {'budget': {'..., '用途', '预算']}
+E         
+E         Omitting 3 identical items, use -vv to show
+E         Right contains 1 more item:
+E         {'holding': True}
+E         Use -v to get more diff
+
+tests/unit/test_agent_context_contract.py:23: AssertionError
+_ test_foreign_hypothesis_never_updates[\u670b\u53cb\u6709\u4e00\u4e07\u5143\u95f2\u94b1\uff0c\u6bcf\u6708\u5b9a\u6295] _
+
+text = '朋友有一万元闲钱，每月定投'
+
+    @pytest.mark.parametrize('text',[
+        '朋友昨天操作了，已经清仓','朋友昨天操作了。已经清仓',
+        '如果以后有钱，每月定投','假设我已经持有，现在清仓',
+        '朋友有一万元闲钱，每月定投','朋友手里有，重仓持有着',
+    ])
+    def test_foreign_hypothesis_never_updates(text):
+        before=background('我已经持有了','我有一万闲钱')
+>       assert background('我已经持有了','我有一万闲钱',text)==before
+E       AssertionError: assert {'budget': {'..., '用途', '预算']} == {'budget': {'..., '用途', '预算']}
+E         
+E         Omitting 3 identical items, use -vv to show
+E         Differing items:
+E         {'purpose': 'income_dca'} != {'purpose': 'spare_cash'}
+E         Use -v to get more diff
+
+tests/unit/test_agent_context_contract.py:23: AssertionError
+_______ test_unowned_standalone_not_memorized[\u5341\u4e07\u95f2\u94b1] ________
+
+text = '十万闲钱'
+
+    @pytest.mark.parametrize('text',['十万闲钱','三千元','已经清仓','每月定投'])
+    def test_unowned_standalone_not_memorized(text):
+>       assert background(text)=={}
+E       AssertionError: assert {'budget': {'... ['用途', '预算']} == {}
+E         
+E         Left contains 3 more items:
+E         {'budget': {'amount': 100000.0,
+E                     'currency': 'CNY',
+E                     'note_cn': '用户本条消息明确提供（中文数字换算）'},
+E          'purpose': 'spare_cash',
+E          'stated': ['用途', '预算']}
+E         Use -v to get more diff
+
+tests/unit/test_agent_context_contract.py:27: AssertionError
+__________ test_unowned_standalone_not_memorized[\u4e09\u5343\u5143] ___________
+
+text = '三千元'
+
+    @pytest.mark.parametrize('text',['十万闲钱','三千元','已经清仓','每月定投'])
+    def test_unowned_standalone_not_memorized(text):
+>       assert background(text)=={}
+E       AssertionError: assert {'budget': {'...ated': ['预算']} == {}
+E         
+E         Left contains 2 more items:
+E         {'budget': {'amount': 3000.0,
+E                     'currency': 'CNY',
+E                     'note_cn': '用户本条消息明确提供（中文数字换算）'},
+E          'stated': ['预算']}
+E         Use -v to get more diff
+
+tests/unit/test_agent_context_contract.py:27: AssertionError
+_______ test_unowned_standalone_not_memorized[\u6bcf\u6708\u5b9a\u6295] ________
+
+text = '每月定投'
+
+    @pytest.mark.parametrize('text',['十万闲钱','三千元','已经清仓','每月定投'])
+    def test_unowned_standalone_not_memorized(text):
+>       assert background(text)=={}
+E       AssertionError: assert {'purpose': '...ated': ['用途']} == {}
+E         
+E         Left contains 2 more items:
+E         {'purpose': 'income_dca', 'stated': ['用途']}
+E         Use -v to get more diff
+
+tests/unit/test_agent_context_contract.py:27: AssertionError
+__________________ test_explicit_self_switch_and_update_order __________________
+
+    def test_explicit_self_switch_and_update_order():
+        assert not background('我已经持有了','朋友还持有，但我已清仓').get('holding')
+>       assert background('我清仓了，但我又已经持有了')['holding'] is True
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'holding'
+
+tests/unit/test_agent_context_contract.py:31: KeyError
+____________________ test_purpose_clear_without_new_purpose ____________________
+
+    def test_purpose_clear_without_new_purpose():
+>       assert background('我每月工资定投','我不定投了').get('purpose') is None
+E       AssertionError: assert 'income_dca' is None
+E        +  where 'income_dca' = <built-in method get of dict object at 0x10e7bd3c0>('purpose')
+E        +    where <built-in method get of dict object at 0x10e7bd3c0> = {'purpose': 'income_dca', 'stated': ['用途']}.get
+E        +      where {'purpose': 'income_dca', 'stated': ['用途']} = background('我每月工资定投', '我不定投了')
+
+tests/unit/test_agent_context_contract.py:35: AssertionError
+_____________________ test_correction_needs_previous_value _____________________
+
+    def test_correction_needs_previous_value():
+>       assert background('不是一万，是五千')=={}
+E       AssertionError: assert {'budget': {'...ated': ['预算']} == {}
+E         
+E         Left contains 2 more items:
+E         {'budget': {'amount': 5000.0,
+E                     'currency': 'CNY',
+E                     'note_cn': '用户本条消息明确提供（中文数字换算）'},
+E          'stated': ['预算']}
+E         Use -v to get more diff
+
+tests/unit/test_agent_context_contract.py:38: AssertionError
+_________________ test_ambiguous_bindings_not_last_answer_wins _________________
+
+    def test_ambiguous_bindings_not_last_answer_wins():
+        h=rows(['我已经持有了'])
+        h += [SimpleNamespace(role='assistant',content='',question_id=1,meta_json=json.dumps({'resolved_symbol':'510300.SS'}))]
+>       assert _user_background(h,'510300.SS')=={}
+E       AssertionError: assert {'holding': T...ated': ['持有']} == {}
+E         
+E         Left contains 2 more items:
+E         {'holding': True, 'stated': ['持有']}
+E         Use -v to get more diff
+
+tests/unit/test_agent_context_contract.py:44: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_agent_context_contract.py::test_foreign_hypothesis_never_updates[\u670b\u53cb\u6628\u5929\u64cd\u4f5c\u4e86\uff0c\u5df2\u7ecf\u6e05\u4ed3]
+FAILED tests/unit/test_agent_context_contract.py::test_foreign_hypothesis_never_updates[\u670b\u53cb\u6628\u5929\u64cd\u4f5c\u4e86\u3002\u5df2\u7ecf\u6e05\u4ed3]
+FAILED tests/unit/test_agent_context_contract.py::test_foreign_hypothesis_never_updates[\u5982\u679c\u4ee5\u540e\u6709\u94b1\uff0c\u6bcf\u6708\u5b9a\u6295]
+FAILED tests/unit/test_agent_context_contract.py::test_foreign_hypothesis_never_updates[\u5047\u8bbe\u6211\u5df2\u7ecf\u6301\u6709\uff0c\u73b0\u5728\u6e05\u4ed3]
+FAILED tests/unit/test_agent_context_contract.py::test_foreign_hypothesis_never_updates[\u670b\u53cb\u6709\u4e00\u4e07\u5143\u95f2\u94b1\uff0c\u6bcf\u6708\u5b9a\u6295]
+FAILED tests/unit/test_agent_context_contract.py::test_unowned_standalone_not_memorized[\u5341\u4e07\u95f2\u94b1]
+FAILED tests/unit/test_agent_context_contract.py::test_unowned_standalone_not_memorized[\u4e09\u5343\u5143]
+FAILED tests/unit/test_agent_context_contract.py::test_unowned_standalone_not_memorized[\u6bcf\u6708\u5b9a\u6295]
+FAILED tests/unit/test_agent_context_contract.py::test_explicit_self_switch_and_update_order
+FAILED tests/unit/test_agent_context_contract.py::test_purpose_clear_without_new_purpose
+FAILED tests/unit/test_agent_context_contract.py::test_correction_needs_previous_value
+FAILED tests/unit/test_agent_context_contract.py::test_ambiguous_bindings_not_last_answer_wins
+12 failed, 2 passed in 1.08s

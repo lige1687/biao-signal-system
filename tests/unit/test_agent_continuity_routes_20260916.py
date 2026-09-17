@@ -306,3 +306,62 @@ def test_r4_income_purpose_after_negated_spare(client):
     assert "持续投入的新收入" in third["reply"]  # 本人定投用途生效
     assert "你说过这是一笔已有的闲钱" not in third["reply"]
     assert third["reply"] == _last_stored_reply(client, sid)
+
+
+def test_context_contract_full_conversation_and_replay(client):
+    """Actual API+temporary DB: current materials, persisted reply and replay agree."""
+    from lei_signal.api.routes.agent import _user_background
+    from lei_signal.plans.sessions import list_messages
+    from lei_signal.storage.sqlite_store import connect
+
+    http, db = client
+    sid = _mk_session(db)
+    messages = [
+        "我已经持有了",
+        "我有一万闲钱",
+        "朋友昨天操作了，已经清仓",
+        "如果以后有钱，每月定投",
+        "不是一万，是五千",
+        "那现在重点看哪里？",
+        "朋友还持有，但我已清仓",
+        "我没有闲钱，这是每月工资定投",
+        "那现在重点看哪里？",
+    ]
+    for i, message in enumerate(messages):
+        reply = _chat(http, sid, message, f"contract-{i}")
+        assert reply["reply"] == _last_stored_reply(http, sid)
+        with connect(db) as conn:
+            bg = _user_background(list_messages(conn, sid, limit=100), SYMBOL)
+        import json
+
+        with connect(db) as conn:
+            raw = conn.execute(
+                "SELECT meta_json FROM agent_messages WHERE session_id=? "
+                "AND role='user' ORDER BY message_id DESC LIMIT 1",
+                (sid,),
+            ).fetchone()
+        snapshot = json.loads(raw["meta_json"])["discussion_v1"]
+        assert snapshot.get("budget") == bg.get("budget") or (
+            snapshot.get("budget")
+            and bg.get("budget")
+            and snapshot["budget"]["amount"] == bg["budget"]["amount"]
+        )
+        assert snapshot.get("purpose") in (
+            bg.get("purpose"),
+            "unknown" if not bg.get("purpose") else bg["purpose"],
+        )
+        if 1 <= i <= 5:
+            assert bg["holding"] is True
+            assert bg["purpose"] == "spare_cash"
+            assert bg["budget"]["amount"] == (5000 if i >= 4 else 10000)
+        if i == 5:
+            assert "从持仓管理角度讲" in reply["reply"]
+        if i >= 6:
+            assert not bg.get("holding")
+        if i >= 7:
+            assert bg["purpose"] == "income_dca"
+            assert not bg.get("budget")
+    # Re-open history from HTTP; no creation or trade API invoked.
+    restored = http.get(f"/api/agent/sessions/{sid}/messages").json()
+    assert len([m for m in restored if m["role"] == "user"]) == len(messages)
+    assert "从持仓管理角度讲" not in reply["reply"]

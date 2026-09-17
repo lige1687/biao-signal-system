@@ -105,30 +105,33 @@ export function expectancyCn(r: number | null | undefined): string {
  * 注意：引擎有 ATR 缓冲过滤参数，但补测入口不暴露它，也不构成
  * "ATR 止损退出方式"——所以这里判为不支持是准确的。
  */
-/** 概念/思路讨论标记（二轮复验收口一 2026-09-17）：用户明确只要解释或
- * 讨论思路时，不按「未支持比较请求」拦截——概念问题可以正常讨论，
- * 只是不得捏造已回测结果。 */
-const ATR_CONCEPT_RE =
-  /是什么意思|什么意思|是什么|聊聊|讨论|思路|解释|只讨论|不要求回测|不做数值比较|了解/;
-/** 肯定的补测/比较/换用要求（三轮收口 2026-09-17；r3 复核改**分句核实**）：
- * 对每个执行动作分别核实是否被否定——一个动作被否定不得取消另一动作
- * （「不用比较，直接帮我回测」仍拦截）；只收动作词：胜率/收益是话题词
- * 不是执行要求（「对收益的意义」纯概念须放行）。 */
-const ATR_EXEC_RE = /补测|回测|测一下|复跑|重新测|再测|比较/g;
-const ATR_EXEC_NEG_TAIL_RE =
-  /(?:不|没|无|别|勿|非)[^，。；,.;:;?!？！]{0,4}$/;
+/**
+ * ATR 请求按分句、按动作判意图。概念说明里的“回测”只是讨论对象；真正要求
+ * 采用、运行测试或比较才算执行。否定只覆盖它紧邻的动作，因此“不用比较，
+ * 直接回测”仍有一个肯定动作。
+ */
+const ATR_ACTION_RE =
+  /补测|回测|测一下|复跑|重新测|再测|跑一次(?:回测)?|比较|对比|换成|改成|改用|换用|采用|使用|执行|试试|(?<!作)用(?=atr)/gi;
+const ATR_NEGATED_ACTION_PREFIX_RE =
+  /(?:不|没|无|别|勿|非|无需|不用|不要|不必|不想|不要求)(?:再|要|需要|要求|做|进行|你)?(?:数值)?$/;
+const ATR_ACTION_AS_TOPIC_RE = /^(?:是)?(?:什么意思|什么|怎么回事|的?含义|的?概念|的?原理)/;
 
-function hasAffirmativeExec(t: string): boolean {
-  ATR_EXEC_RE.lastIndex = 0;
-  let m: RegExpExecArray | null;
-  while ((m = ATR_EXEC_RE.exec(t)) !== null) {
-    const before = t.slice(0, m.index);
-    const cut = Math.max(...["，", ",", "。", "；", ";", "？", "?", "！", "!", "：", ":"]
-      .map((p) => before.lastIndexOf(p)));
-    const clausePrefix = cut >= 0 ? before.slice(cut + 1) : before;
-    if (!ATR_EXEC_NEG_TAIL_RE.test(clausePrefix)) return true;
+function clauseHasAffirmativeAtrAction(clause: string): boolean {
+  ATR_ACTION_RE.lastIndex = 0;
+  let match: RegExpExecArray | null;
+  while ((match = ATR_ACTION_RE.exec(clause)) !== null) {
+    const prefix = clause.slice(0, match.index);
+    const suffix = clause.slice(match.index + match[0].length);
+    const negationTail = prefix.slice(-8);
+    if (ATR_NEGATED_ACTION_PREFIX_RE.test(negationTail)) continue;
+    if (ATR_ACTION_AS_TOPIC_RE.test(suffix)) continue;
+    return true;
   }
   return false;
+}
+
+function hasAffirmativeAtrAction(t: string): boolean {
+  return t.split(/[，,。；;？！?!：:]/).some(clauseHasAffirmativeAtrAction);
 }
 
 export function detectUnsupportedExitRequest(message: string): string | null {
@@ -138,14 +141,7 @@ export function detectUnsupportedExitRequest(message: string): string | null {
     /atr.*(退出|止损)/i.test(t) ||
     /(退出|止损).*atr/i.test(t);
   if (!atrMention) return null;
-  // 收口一：区分「要求执行/比较未支持的退出方法」与「概念解释/只讨论思路」。
-  // 概念讨论放行（继续讨论草稿「我想先聊聊思路…只讨论思路，不做数值比较」
-  // 与「ATR止损是什么意思？我不要求回测」都属此类）；显式比较/换用请求仍拦截。
-  // r3 复核：肯定执行按**分句**核实——任一动作未否定即拦截，
-  // 概念词（解释/聊聊）只保护纯概念与明确否定执行的问法。
-  const execAffirmative = hasAffirmativeExec(t);
-  if (!execAffirmative && ATR_CONCEPT_RE.test(t)) return null;
-  return "ATR 止损";
+  return hasAffirmativeAtrAction(t) ? "ATR 止损" : null;
 }
 
 /**

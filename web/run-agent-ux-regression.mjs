@@ -1,10 +1,26 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import {
   subjectLabel, moduleCn, exitCn, compatCn, expectancyCn, noteCn, EXIT_HINT_CN_SIMPLE,
   detectUnsupportedExitRequest, SUPPORTED_EXITS_CN,
   atrDiscussionDraft, validExitsFor, resolveExitAfterModuleChange,
   windowLabelFromComparisonConfig,
 } from '/tmp/lei-agent-ux.mjs';
+
+// 前后端共用的 ATR 意图语义：execute 表示用户肯定要求采用、比较或测试 ATR
+// 退出；backtest 只表示肯定要求实际测试/复跑，单独要求比较不自动等同于回测。
+const ATR_INTENT_CASES = JSON.parse(readFileSync(
+  new URL('../tests/fixtures/agent_semantics/atr_intents.json', import.meta.url),
+  'utf8',
+));
+for (const testCase of ATR_INTENT_CASES) {
+  assert.equal(
+    detectUnsupportedExitRequest(testCase.text) != null,
+    testCase.execute,
+    `ATR execute intent mismatch: ${testCase.text}`,
+  );
+  assert.equal(typeof testCase.backtest, 'boolean', `backtest intent must be boolean: ${testCase.text}`);
+}
 
 // R1 独立对照（主控四行表）：退出1 引擎条件是"同时"——
 // (close<ema20)&(close<close_lag20)（engine.py::prepare_frame），

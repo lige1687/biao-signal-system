@@ -1,0 +1,81 @@
+FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+_ test_questions_and_future_preserve_current[\u6211\u6709\u4e94\u5343\u5143\u9884\u7b97\uff1f] _
+
+text = '我有五千元预算？'
+
+    @pytest.mark.parametrize('text',['我有五千元预算？','我是不是有五千元预算','我下个月会有五千元预算','我打算以后投入，每月五千'])
+    def test_questions_and_future_preserve_current(text):
+>       assert background('我有一万闲钱',text)==background('我有一万闲钱')
+E       AssertionError: assert {'budget': {'... ['用途', '预算']} == {'budget': {'... ['用途', '预算']}
+E         
+E         Omitting 2 identical items, use -vv to show
+E         Differing items:
+E         {'budget': {'amount': 5000.0, 'currency': 'CNY', 'note_cn': '用户本条消息明确提供（中文数字换算）'}} != {'budget': {'amount': 10000.0, 'currency': 'CNY', 'note_cn': '用户本条消息明确提供（中文数字换算）'}}
+E         Use -v to get more diff
+
+tests/unit/test_agent_context_contract.py:55: AssertionError
+_ test_questions_and_future_preserve_current[\u6211\u662f\u4e0d\u662f\u6709\u4e94\u5343\u5143\u9884\u7b97] _
+
+text = '我是不是有五千元预算'
+
+    @pytest.mark.parametrize('text',['我有五千元预算？','我是不是有五千元预算','我下个月会有五千元预算','我打算以后投入，每月五千'])
+    def test_questions_and_future_preserve_current(text):
+>       assert background('我有一万闲钱',text)==background('我有一万闲钱')
+E       AssertionError: assert {} == {'budget': {'... ['用途', '预算']}
+E         
+E         Right contains 3 more items:
+E         {'budget': {'amount': 10000.0,
+E                     'currency': 'CNY',
+E                     'note_cn': '用户本条消息明确提供（中文数字换算）'},
+E          'purpose': 'spare_cash',
+E          'stated': ['用途', '预算']}
+E         Use -v to get more diff
+
+tests/unit/test_agent_context_contract.py:55: AssertionError
+_ test_questions_and_future_preserve_current[\u6211\u4e0b\u4e2a\u6708\u4f1a\u6709\u4e94\u5343\u5143\u9884\u7b97] _
+
+text = '我下个月会有五千元预算'
+
+    @pytest.mark.parametrize('text',['我有五千元预算？','我是不是有五千元预算','我下个月会有五千元预算','我打算以后投入，每月五千'])
+    def test_questions_and_future_preserve_current(text):
+>       assert background('我有一万闲钱',text)==background('我有一万闲钱')
+E       AssertionError: assert {'budget': {'... ['用途', '预算']} == {'budget': {'... ['用途', '预算']}
+E         
+E         Omitting 2 identical items, use -vv to show
+E         Differing items:
+E         {'budget': {'amount': 5000.0, 'currency': 'CNY', 'note_cn': '用户本条消息明确提供（中文数字换算）'}} != {'budget': {'amount': 10000.0, 'currency': 'CNY', 'note_cn': '用户本条消息明确提供（中文数字换算）'}}
+E         Use -v to get more diff
+
+tests/unit/test_agent_context_contract.py:55: AssertionError
+_ test_questions_and_future_preserve_current[\u6211\u6253\u7b97\u4ee5\u540e\u6295\u5165\uff0c\u6bcf\u6708\u4e94\u5343] _
+
+text = '我打算以后投入，每月五千'
+
+    @pytest.mark.parametrize('text',['我有五千元预算？','我是不是有五千元预算','我下个月会有五千元预算','我打算以后投入，每月五千'])
+    def test_questions_and_future_preserve_current(text):
+>       assert background('我有一万闲钱',text)==background('我有一万闲钱')
+E       AssertionError: assert {'budget': {'... ['用途', '预算']} == {'budget': {'... ['用途', '预算']}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'purpose': 'income_dca'} != {'purpose': 'spare_cash'}
+E         {'budget': {'amount': 5000.0, 'currency': 'CNY', 'note_cn': '用户本条消息明确提供（中文数字换算）'}} != {'budget': {'amount': 10000.0, 'currency': 'CNY', 'note_cn': '用户本条消息明确提供（中文数字换算）'}}
+E         Use -v to get more diff
+
+tests/unit/test_agent_context_contract.py:55: AssertionError
+_____________________ test_conjunction_keeps_update_order ______________________
+
+    def test_conjunction_keeps_update_order():
+>       assert background('我清仓了但我又已经持有了')['holding'] is True
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'holding'
+
+tests/unit/test_agent_context_contract.py:58: KeyError
+=========================== short test summary info ============================
+FAILED tests/unit/test_agent_context_contract.py::test_questions_and_future_preserve_current[\u6211\u6709\u4e94\u5343\u5143\u9884\u7b97\uff1f]
+FAILED tests/unit/test_agent_context_contract.py::test_questions_and_future_preserve_current[\u6211\u662f\u4e0d\u662f\u6709\u4e94\u5343\u5143\u9884\u7b97]
+FAILED tests/unit/test_agent_context_contract.py::test_questions_and_future_preserve_current[\u6211\u4e0b\u4e2a\u6708\u4f1a\u6709\u4e94\u5343\u5143\u9884\u7b97]
+FAILED tests/unit/test_agent_context_contract.py::test_questions_and_future_preserve_current[\u6211\u6253\u7b97\u4ee5\u540e\u6295\u5165\uff0c\u6bcf\u6708\u4e94\u5343]
+FAILED tests/unit/test_agent_context_contract.py::test_conjunction_keeps_update_order
+5 failed, 15 deselected in 0.72s

@@ -587,33 +587,6 @@ def _market_of(symbol: str) -> str:
     return "us"
 
 
-def _inherit_session_facts(conn, session_id: str | None, parsed: dict) -> dict:
-    """契约3：预算/用途沿会话真实继承——本轮没说的，取本会话最近一次明确
-    说法（记录来源问题号），不每轮丢弃、也不每轮重复问。"""
-    inherited: dict = {}
-    if session_id is None:
-        return inherited
-    rows = conn.execute(
-        "SELECT message_id, meta_json FROM agent_messages "
-        "WHERE session_id = ? AND role = 'user' AND meta_json LIKE '%discussion_v1%' "
-        "ORDER BY message_id DESC LIMIT 20",
-        (session_id,)).fetchall()
-    for r in rows:
-        try:
-            snap = (json.loads(r["meta_json"] or "{}") or {}).get("discussion_v1") or {}
-        except json.JSONDecodeError:
-            continue
-        if not inherited.get("budget") and parsed.get("budget") is None \
-                and snap.get("budget"):
-            inherited["budget"] = {**snap["budget"],
-                                   "inherited_from_question": r["message_id"]}
-        if not inherited.get("purpose") and (parsed.get("purpose") in (None, "unknown")) \
-                and snap.get("purpose") not in (None, "unknown"):
-            inherited["purpose"] = snap["purpose"]
-            inherited["purpose_source_question"] = r["message_id"]
-    return inherited
-
-
 def _resolve_window_for_question(conn, body, symbol, session_id, message) -> dict:
     """03B-R3 T1 单入口窗口选择（一次选定，冻结与比较共用）。
 
@@ -808,7 +781,11 @@ def _discussion_snapshot(conn, body, symbol: str | None,
         evidence_refs.append(wr.to_dict())
     rule_refs = [ruleset_ref().to_dict()]
     rule_refs.extend(rule_ref(rid).to_dict() for rid in candidates if rid)
-    inherited = _inherit_session_facts(conn, session_id, parsed)
+    history = list_messages(conn, session_id, limit=21) if session_id else []
+    if question_id is not None:
+        history = [row for row in history if row.message_id < question_id]
+    current_background = resolve_mod.apply_user_facts(
+        _user_background(history[-20:], symbol), body.message)
     # 03B-R3 T1：窗口选择一次生成（_resolve_window_for_question），此处直接
     # 冻结其结构化结果——不再自行查库选运行，保证「显示」与「存档」是同一份依据
     # （u2：并发下显示与冻结一致）。window_sel 为 None 时退化为即时解析（兜底）。
@@ -825,10 +802,8 @@ def _discussion_snapshot(conn, body, symbol: str | None,
                          "symbol": symbol}
     else:
         window_frozen = None
-    budget = parsed.get("budget") or inherited.get("budget")
-    purpose = parsed.get("purpose")
-    if purpose in (None, "unknown"):
-        purpose = inherited.get("purpose") or parsed.get("purpose")
+    budget = current_background.get("budget")
+    purpose = current_background.get("purpose") or "unknown"
     return {
         "question_id": question_id,
         "client_request_id": body.client_request_id,
@@ -856,6 +831,9 @@ def _discussion_snapshot(conn, body, symbol: str | None,
         "plan_id": None, "plan_version": None,
         "budget": budget,
         "holdings": None, "risk_preference": None,
+        "user_background": current_background,
+        "user_fact_updates": resolve_mod.user_fact_events(body.message),
+        "user_fact_contract": "own-factual-v1",
     }
 
 
@@ -1116,8 +1094,8 @@ def _user_background(history_rows: list, symbol: str | None) -> dict:
 
     if not history_rows or not symbol:
         return {}
-    # 问题号 → 该问题回答的绑定对象（多回答/重试同号，后者覆盖一致即可）
-    bound_by_qid: dict[int, str] = {}
+    # 问题号 → 回答绑定对象集合；多回答冲突时不猜采用哪一个
+    bound_by_qid: dict[int, set[str]] = {}
     for row in history_rows:
         if row.role != "assistant":
             continue
@@ -1130,9 +1108,8 @@ def _user_background(history_rows: list, symbol: str | None) -> dict:
             continue
         sym = meta.get("resolved_symbol")
         if isinstance(sym, str) and sym:
-            bound_by_qid[int(qid)] = sym
+            bound_by_qid.setdefault(int(qid), set()).add(sym)
     bg: dict = {"holding": False, "budget": None, "purpose": None}
-    stated: list[str] = []
     for row in history_rows:
         if row.role != "user":
             continue
@@ -1142,32 +1119,13 @@ def _user_background(history_rows: list, symbol: str | None) -> dict:
         bound = bound_by_qid.get(int(mid))
         if bound is None:
             continue  # 无精确归属（旧消息/尚无绑定回答）：标未知，不猜
-        if bound != symbol:
+        if bound != {symbol}:
             continue  # 别的对象的声明不串用
-        text = row.content or ""
-        correction = resolve_mod.detect_fact_correction(text)
-        if correction["holding_cleared"]:
-            bg["holding"] = False
-        elif resolve_mod.detect_stance(text) == "holding":
-            bg["holding"] = True
-            stated.append("持有")
-        # 先清后立：同一条消息「不是一万，是五千」= 清除旧值 + 新值生效，
-        # 顺序一致、不与背景矛盾（收口二）。
-        if correction["budget_cleared"]:
-            bg["budget"] = None
-            bg["purpose"] = None
-        parsed = resolve_mod.parse_request(text)
-        if parsed.get("budget"):
-            bg["budget"] = parsed["budget"]
-            stated.append("预算")
-        if parsed.get("purpose") not in (None, "unknown"):
-            bg["purpose"] = parsed["purpose"]
-            stated.append("用途")
-    out = {k: v for k, v in bg.items() if v}
-    if not out:
-        return {}
-    out["stated"] = sorted(set(stated))
-    return out
+        previous_budget = bg.get("budget")
+        bg = resolve_mod.apply_user_facts(bg, row.content or "")
+        if bg.get("budget") and bg["budget"] != previous_budget:
+            bg["budget"] = {**bg["budget"], "inherited_from_question": int(mid)}
+    return {k: v for k, v in bg.items() if v}
 
 
 def _previous_turn_facts(history_rows: list) -> list[dict]:
@@ -2382,37 +2340,21 @@ def _prepare_discussion(
         # 本条明确撤销的立即失效。背景=讨论语境，不是成交记录或新授权；
         # 判定层规则不因立场改变。
         ctx_payload["question_topic"] = parsed_topic
-        correction = resolve_mod.detect_fact_correction(body.message)
-        bg = _user_background(history_rows, symbol)
-        stance = resolve_mod.detect_stance(body.message)
-        if stance is None and bg.get("holding") and not correction["holding_cleared"]:
-            stance = "holding"
-        # 收口二一致性：本条明确给出的新值最优先（「不是一万，是五千」新值
-        # 覆盖同条里的撤销），本条只撤销没给新值时背景才失效——新值与清除
-        # 顺序一致，user_budget/user_background 不矛盾。
-        budget = parsed.get("budget") or (
-            None if correction["budget_cleared"] else bg.get("budget"))
-        purpose = parsed.get("purpose")
-        if purpose in (None, "unknown") and not correction["budget_cleared"]:
-            purpose = bg.get("purpose")
-        if budget:
-            ctx_payload["user_budget"] = budget
-        if purpose not in (None, "unknown"):
-            ctx_payload["user_purpose"] = purpose
-        bg_holding = bool(bg.get("holding")) and not correction["holding_cleared"]
-        bg_budget = parsed.get("budget") or (
-            None if correction["budget_cleared"] else bg.get("budget"))
-        bg_purpose = None if correction["budget_cleared"] else (
-            purpose if purpose not in (None, "unknown") else None)
-        if (bg_holding or bg_budget or bg_purpose) and \
-                ctx_payload.get("context_kind") != "sector":
+        bg = resolve_mod.apply_user_facts(_user_background(history_rows, symbol), body.message)
+        # Current input and historical replay use exactly the same field updates.
+        # Uncertain/foreign/hypothetical text remains available for discussion only.
+        ctx_payload["user_fact_updates"] = resolve_mod.user_fact_events(body.message)
+        stance = "holding" if bg.get("holding") else None
+        if bg.get("budget"):
+            ctx_payload["user_budget"] = bg["budget"]
+        if bg.get("purpose"):
+            ctx_payload["user_purpose"] = bg["purpose"]
+        if bg and ctx_payload.get("context_kind") != "sector":
             ctx_payload["user_background"] = {
-                "holding": bg_holding,
-                "budget": bg_budget,
-                "purpose": bg_purpose,
-                "note_cn": ("用户在本会话、该对象上此前声明过的背景（持有/预算/用途）。"
-                            "这是讨论背景：不是成交记录、不是写库授权、不是新的交易许可；"
-                            "不要再说用户没提供过这些信息，也不要重复追问。"),
+                "holding": bool(bg.get("holding")), "budget": bg.get("budget"),
+                "purpose": bg.get("purpose"),
+                "note_cn": ("用户在本会话、该对象上明确声明的背景。只作讨论参考，"
+                            "不是成交记录、不是写库授权；假设或别人情况不能覆盖这些事实。"),
             }
         if stance == "holding" and ctx_payload.get("context_kind") != "sector":
             ctx_payload["discussion_stance"] = {

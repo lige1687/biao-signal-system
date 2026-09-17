@@ -1,0 +1,40 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_ test_question_without_punctuation_is_not_a_fact[\u6211\u6709\u4e94\u5343\u5143\u9884\u7b97\u5417] _
+
+text = '我有五千元预算吗'
+
+    @pytest.mark.parametrize('text', ['我有五千元预算吗', '我已经持有了吗'])
+    def test_question_without_punctuation_is_not_a_fact(text):
+        before = background('我有一万闲钱')
+>       assert background('我有一万闲钱', text) == before
+E       AssertionError: assert {'budget': {'... ['用途', '预算']} == {'budget': {'... ['用途', '预算']}
+E         
+E         Omitting 2 identical items, use -vv to show
+E         Differing items:
+E         {'budget': {'amount': 5000.0, 'currency': 'CNY', 'inherited_from_question': 2, 'note_cn': '用户本条消息明确提供（中文数字换算）'}} != {'budget': {'amount': 10000.0, 'currency': 'CNY', 'inherited_from_question': 1, 'note_cn': '用户本条消息明确提供（中文数字换算）'}}
+E         Use -v to get more diff
+
+tests/unit/test_agent_context_contract.py:108: AssertionError
+_ test_question_without_punctuation_is_not_a_fact[\u6211\u5df2\u7ecf\u6301\u6709\u4e86\u5417] _
+
+text = '我已经持有了吗'
+
+    @pytest.mark.parametrize('text', ['我有五千元预算吗', '我已经持有了吗'])
+    def test_question_without_punctuation_is_not_a_fact(text):
+        before = background('我有一万闲钱')
+>       assert background('我有一万闲钱', text) == before
+E       AssertionError: assert {'budget': {'..., '用途', '预算']} == {'budget': {'... ['用途', '预算']}
+E         
+E         Omitting 2 identical items, use -vv to show
+E         Differing items:
+E         {'stated': ['持有', '用途', '预算']} != {'stated': ['用途', '预算']}
+E         Left contains 1 more item:
+E         {'holding': True}
+E         Use -v to get more diff
+
+tests/unit/test_agent_context_contract.py:108: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_agent_context_contract.py::test_question_without_punctuation_is_not_a_fact[\u6211\u6709\u4e94\u5343\u5143\u9884\u7b97\u5417]
+FAILED tests/unit/test_agent_context_contract.py::test_question_without_punctuation_is_not_a_fact[\u6211\u5df2\u7ecf\u6301\u6709\u4e86\u5417]
+2 failed, 20 deselected in 0.66s
