@@ -1,0 +1,1 @@
+用户明确指定GLM Flash，使用flash-high；已冻结精确DASHBOARD_INDICES修复范围与真实路由反例，不扩大语义规则。主控承担验收与阶段推进。Ark启动失败留痕，不推定额度耗尽。
