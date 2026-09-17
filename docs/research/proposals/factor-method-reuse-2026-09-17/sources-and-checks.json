@@ -1,0 +1,89 @@
+{
+  "job": {
+    "job_id": "e624f7e6-f3c1-43c4-bd58-8fb9abb83964",
+    "stage": "S1",
+    "execution": 3,
+    "attempt": "repair",
+    "date": "2026-09-17",
+    "controller_review": "docs/experiments/factor-method-reuse-controller-review-2026-09-17.md §8（S1–S3 最小收尾）",
+    "model_self_report": "bigmodel-coding-plan/GLM-5.3 via ZCode CLI (reasoning max; internal reasoning not observable)",
+    "base": "branch codex/factor-unit-research-20260915, HEAD 29b150f58b3f6d8c6e558a748c12dac3384af173",
+    "writable_scope": "docs/research/proposals/factor-method-reuse-2026-09-17/（v2 七文件先封存至 history-v2/，不覆盖 history-v1）"
+  },
+  "local_references": {
+    "note": "sha256 于 2026-09-17 计算；与 execution 1/2 相比无变化（未重算即沿用）",
+    "docs/research/experiment-backtest-principles.md": {"version": "v1.1", "sha256": "ac5a676c0635441b66f656c8e1249b69bade36365cc9065ed6341a610b6a53c6"},
+    "docs/research/ai-execution-contract.md": {"version": "1.0.1", "sha256": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962"},
+    "docs/research/definition-standard.md": {"version": "1.1.0", "sha256": "3406feaea2bbb8d23a91ddc8fa0c85e62ff86437bdf443d459f2c97b0e99cd5c"},
+    "docs/research/experiment-report-template.md": {"version": "v1.1", "sha256": "cae2853f81841de6f424c6bda10e6708dd35574ebb8a325088fe507c5755d54e"},
+    "docs/literature-learning/README.md": {"version": "v1.1.0", "sha256": "c8d3bb1ed17f03a3822bcfa0ba752b7dc794095cb8bc9b92ae6704be0c6bd7fe"},
+    "docs/experiments/research-tool-reuse-shortlist-2026-09-14.md": {"version": "v1.1.0", "sha256": "9344ca56c9b82b12e407d8f92a88a616e8d92be34459c5149a92483526f20d2d"},
+    "docs/experiments/factor-library-external-backlog-2026-09-09.md": {"version": "v1.1.0", "sha256": "fe174a156e10a0b8c1fed36eed9330b660ae714b5da459e0dc21eb7f9e46ec4e"},
+    "docs/research/proposals/factor-workflow-audit-2026-09-17/workflow-map.md": {"version": "v1.1", "sha256": "b40761f11b100e8ef891bbe9e32ba26483cc21677034230cfe220040bf2e5411"},
+    "docs/research/definitions.v1.json": {"version": "registry 1.2.0", "sha256": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05"},
+    "src/lei_signal/research/factor_evidence/resampling.py": {"note": "本地循环分块重抽证据，只读；sha 未单独计算"}
+  },
+  "external_access_ledgers": {
+    "v1_execution1": {"budget": 18, "used": 18, "failed": 6, "detail": "history-v1/sources-and-checks.json（含台账）；不回填"},
+    "v2_execution2": {"budget": 12, "used": 7, "failed": 0, "times": "未知（会话时钟未记录；v2 台账所记~13:35–13:43 为猜测，与派发时间不符，已撤回；无法从工具记录恢复）", "detail": "history-v2/sources-and-checks.json"},
+    "v3_execution3": {
+      "budget": "最多4（含失败）",
+      "used": 3,
+      "times": "未知（会话时钟未记录，无法从工具记录恢复）",
+      "accesses": [
+        {"n": 1, "url": "https://raw.githubusercontent.com/bashtage/arch/v8.0.0/arch/bootstrap/base.py", "purpose": "S1.1 optimal_block_length 实际返回列名（主控已核，本轮独立复核）", "ok": true, "scope": "optimal_block_length 返回语句：columns=['stationary','circular']，docstring 仍写 b_sb/b_cb"},
+        {"n": 2, "url": "https://github.com/statsmodels/statsmodels/releases", "purpose": "S1.2 固定 statsmodels 发布版", "ok": true, "scope": "最新 tag v0.15.0（前有 v0.14.6/v0.14.5）"},
+        {"n": 3, "url": "https://raw.githubusercontent.com/statsmodels/statsmodels/v0.15.0/statsmodels/stats/sandwich_covariance.py", "purpose": "S1.2 tag 源码核 cov_hac_simple/weights_bartlett", "ok": true, "scope": "cov_hac_simple(results, nlags=None, weights_func=weights_bartlett, use_correction=True)；weights=1-arange(nlags+1)/(nlags+1.0)；cov_hac=cov_hac_simple 别名；nlags=None→floor(4(T/100)^(2/9))；use_correction=True→×nobs/(nobs-k_params)"}
+      ]
+    }
+  },
+  "licenses": {
+    "statsmodels": "BSD-3（常识标注, LICENSE 原文未核——unknown）",
+    "arch": "未核（unknown）",
+    "alphalens-reloaded": "Apache-2.0（performance.py 页标注; LICENSE 文件未核——unknown）",
+    "ken.french data": "数据使用条款未核（unknown）；未下载任何数据",
+    "code_vs_data": "代码/数据许可分开登记；未核即 unknown"
+  },
+  "errors_and_unknowns": [
+    "execution 3 结构/算术检查脚本两次均暴露自身笔误（卡2例 u₅=0.30 被误当继续；0.30<0.50 实为重启）——CSV 结构两次均通过，算术笔误已改文档（u₅=0.60）并停止命令（限额 2/2 用满）",
+    "arch 编译采样器本体未逐行读；arch LICENSE 未核",
+    "alphalens get_robustcov 之外的 statsmodels A2 入口仅文档级核对（已在 CSV 标注）",
+    "French 动量单位/发布时点、市场因子单位、数据使用条款：unknown",
+    "pandas 版本未钉，缺价例以版本条件形式给出（明示非可直接执行）",
+    "方法卡两篇原始论文未读，作者结论为文档/源码转述"
+  ],
+  "commands_actual_v3": {
+    "read_only_local": [
+      "Read 主控复核 §8；mkdir history-v2 + cp 七文件（封存 v2 原字节）",
+      "shasum 六文件（记录指纹，非结构检查）"
+    ],
+    "structure_and_arithmetic_checks": "2/2 用满：两次合并命令（csv.reader 结构 + 教学算术复算）。CSV 11行×9列 两次均通过；算术部分两次均因检查脚本自身笔误中断（StopIteration/IndexError），笔误同时修正了卡2初稿（u₅ 0.30→0.60），试点例数值为手算未耗命令",
+    "hygiene": "1/1：repo 根目录执行 → ✓ 归置自检通过",
+    "real_statistics_run": 0, "installs": 0, "production_changes": 0,
+    "downloads_of_market_or_factor_data": 0, "git_writes": 0,
+    "shared_writes": "无（仅本目录修订 + history-v2/ 封存）"
+  },
+  "commands_actual_history": {
+    "execution1_hygiene": "1 次调用 1 次成功",
+    "execution2_hygiene": "实际调用 2 次、成功 1 次（首次 cwd 在提案目录路径不存在；换根目录重跑成功）——v2 台账误记 1/1，本轮更正为 2 次尝试 1 次成功",
+    "execution1_structure_checks": "2 次命令（definitions.v1.json 解析×2；未验交付 CSV——缺陷已由主控指出，v2 起补 CSV 校验）",
+    "execution2_structure_checks": "1 次命令（CSV 9列校验通过）"
+  },
+  "deliverable_identity_v3": {
+    "note": "sha256 在 sources-and-checks.json 写入前计算；本文件自身不列 hash（避免自引用循环）",
+    "README.md": {"sha256": "ec3dfa8a795e5a7494464b783cd3bd6939e7037d98fceeeb83b3206d77b13f41", "bytes": 4397},
+    "capability-reuse.csv": {"sha256": "7c9bfeb5abbffc59c6e061346760bc1915306ffc6f6444221f1f40e50e2324bc", "bytes": 9589, "shape": "11行×9列，本轮两次 csv.reader 校验通过"},
+    "method-cards.md": {"sha256": "6ae731bdfa645ea4263a15efc669e7f2db1bad7f01dea880ed7f22577a6be2fc", "bytes": 8287},
+    "factor-definition-crosswalk.md": {"sha256": "e52d9302360166872bedce5aa665f346e24d7e1212bd6e345be92119628be4a5", "bytes": 6292, "note": "本轮未改动（v3 无需变更；hash 与 v2 相同）"},
+    "next-pilot-proposal.md": {"sha256": "295490905af82e8bbff9837e46f9a4cc39ee34c7ffddc56a953a594e33332f73", "bytes": 8648},
+    "revision-response.md": {"sha256": "31e0fe6092d318e5e7fa54842f7818559df1e6ed6487e92e11834159037ad7b1", "bytes": 11325},
+    "sources-and-checks.json": {"sha256": null, "note": "自身"},
+    "history-v1/": "v1 六文件原字节（execution 1 交付指纹见其内 deliverable_identity）",
+    "history-v2/": "v2 七文件原字节（指纹见 v2 版 sources-and-checks 的 deliverable_identity_v2）"
+  },
+  "scope_disclaimers": [
+    "本目录为待主控审核的提案（v3 为 S1–S3 最小收尾），不是权威规范变更；不进 registry/INDEX/OKR",
+    "外部来源持续变化，结论以各台账访问记录为准（时刻字段：未知）",
+    "未宣称任何兼容性已验证、任何因子有效、任何过拟合已排除；试点结论为暂缓，缺价例明示为条件规格"
+  ]
+}

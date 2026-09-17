@@ -1,0 +1,13 @@
+{
+  "mission": "核清沪深300宽度定义、代码和历史数据资格，为下一次因子研究提供可复查依据，不计算因子收益。",
+  "goals": [
+    {"id":"G1","goal":"定义与实际实现逐对象对应","acceptance":["definition-implementation-map.csv 覆盖 B50/B200 common 与 legacy 四对象，附准确版本、代码位置、单位、分母与差异"]},
+    {"id":"G2","goal":"历史输入来源与各用途资格分开说明","acceptance":["input-qualification.md 和 sources-manifest.json 绑定实际输入哈希，逐项说明成员生效、价格、日历、缺失和时间证据；未知保持未知"]},
+    {"id":"G3","goal":"下一步请求可决策且不自行执行","acceptance":["next-study-request.md 给出最小候选研究及资料缺口，未擅定新阈值、未计算真实信号或收益"]},
+    {"id":"G4","goal":"交付范围和实际调用可追溯","acceptance":["delivery.md 与 run-log.md 列出命令、预算、失败和未核项；所有新增产物仅位于指定目录；现存文件只读；hygiene 结果有记录"]}
+  ],
+  "in_scope":["执行同目录 2026-09-17-factor-breadth-readiness-ark-brief.md v1.0.1 的 Task 0–4；仅本地读取和结构检查","唯一可写目录 docs/experiments/raw/factor-breadth-readiness-2026-09-17/，首次必须不存在","最多深入读取12份数据；可选结构脚本最多2次；文档格式检查最多2批；hygiene一次"],
+  "out_of_scope":["联网或安装","真实宽度/状态/目标/收益/IC计算","生产修改或新阈值","OKR及registry/INDEX写入","git写操作","自动开展下一阶段"],
+  "protected_paths":["全部既有文件","src/","configs/","web/","tests/","docs/research/definitions.v1.json","docs/experiments/registry.json","docs/experiments/INDEX.md","所有旧 raw 产物"],
+  "stop_conditions":["身份或冻结输入指纹变化","输出目录已存在","到达任务预算","需要写入范围外文件或扩大研究含义","完成后等待主控独立复核；无自行验收授权"]
+}

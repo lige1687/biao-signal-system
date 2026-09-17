@@ -1,5 +1,13 @@
 # docs/experiments 总索引
 
+- 2026-09-17：[外部因子方法复用主控复核](factor-method-reuse-controller-review-2026-09-17.md)：R1–R4限定返修，未验收或批准安装。
+
+- 2026-09-17：[因子流程导航主控复核](factor-workflow-audit-controller-review-2026-09-17.md)：§6限定收口，入口与状态已纠正，导航可参考，不新增运行授权。
+
+- 2026-09-17：[情绪对象提案主控复核](sentiment-factor-readiness-controller-review-2026-09-17.md)：§6限定收口，候选资料和待批方案接受；时点/许可/日历仍未核，不启动真实研究。
+
+- 2026-09-17：[宽度首次描述执行](breadth-b200-first-description-2026-09-17.md) / [主控阻断复核](breadth-b200-first-description-controller-review-2026-09-17.md)：路径错误未出数，补救待授权；保留合成调用超支记录。
+
 > 2026-09-03 整理建索引。**没有移动、改名、删除任何现有文件**——所有归档、
 > 任务书、raw 数据都在原位，本文件是新增的导航层。大白话说：这里的每份
 > 文件都是一次独立实验或任务的"结案报告"，之前散着放找不到，现在按
@@ -28,11 +36,25 @@
 
 ## 1. 任务编号总账（任务书 → 执行归档）
 
+- 2026-09-17：[Agent消息 S1 通过复核](agent-news-s1-repair2-controller-review-2026-09-17.md)：110项测试、58项独立检查通过；允许继续S2，线上未恢复。
+
+- 2026-09-17：[Agent消息 S1 首次返修主控复核](agent-news-s1-repair1-controller-review-2026-09-17.md)：18个旧反例通过，来源异常识别尚有遗漏，限定第二次返修。
+
+- 2026-09-17：[Agent消息 S1 主控复核](agent-news-s1-controller-review-2026-09-17.md)：88项测试通过，独立反例需返修；未进入S2、未上线。
+
+- 2026-09-17：[Agent超级入口与消息面优先级](agent-news-priorities-2026-09-17.md)：核实断更和已有接线，纠正概率报道、影响期限及停更归因；先资料可靠，再买前准备，尚未开发。
+
+- 2026-09-17：[宽度研究准备主控复核](factor-breadth-readiness-controller-review-2026-09-17.md)：§9限定收口，保留流程偏差与来源未知，未启动真实统计。
+
+- 2026-09-17：[因子证据S1–S3派发受阻复核](factor-evidence-zcode-dispatch-review-2026-09-17.md)：权限客户端受阻且环境身份变化，未落地修复，待确认执行方式。
+
+- 2026-09-17：[因子库进度与OKR接入主控复核](factor-library-progress-controller-review-2026-09-16.md)：v1.1记录整理限定收口，四条OKR读回一致，未改变授权或完成勾选。
+
 - 2026-09-16：[仓库目录治理](repo-governance-2026-09-16.md)：四层目录白名单化+169项旧产物归档+plist回填，全量测试零新增失败；AGENTS.md 立文件归置规约 + scripts/check_repo_hygiene.py 结案自检防再乱。
 
 - 2026-09-16：[因子库建设进度总览](factor-library-progress-2026-09-16.md)：能力分层现状快照+四条OKR同步（只读整理，零计算零联网零安装）；首个真实结果与全部缺口、下一步授权状态一页可查，不是验收。
 
-- 2026-09-16：[因子证据可靠性v1](factor-evidence-reliability-v1-2026-09-16.md) → [主控复核](factor-evidence-controller-review-2026-09-16.md)：主要返修与补件接受；直接真实入口收窄、机器解释及过程声明限定收尾，历史数字保留，零真实重跑。
+- 2026-09-16：[因子证据可靠性v1](factor-evidence-reliability-v1-2026-09-16.md) → [主控复核§10](factor-evidence-controller-review-2026-09-16.md)：09-17 S1–S3限定收口，118项回归通过；历史数字保留、零真实重跑，保留快照核验超预算违规。
 
 - 2026-09-16：[外部候选接入设计（第三轮）](external-schools-integration-design-2026-09-16.md)：五候选（筹码剖面/波动收缩箱体/52周高/剩余动量/宽度推力）各交付规格挂点+数据代码现实+定义草案+差异表+对照设计五件套；数据全就绪、C3最便宜（2024-09-30硬检验）、D1/D2复用封存账户引擎；推荐首批C3事件清点+C1描述；零回测待授权。
 
