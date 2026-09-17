@@ -1,64 +1,184 @@
 #!/bin/sh
-# Agent runtime adoption package: REVERT script (S2/G3, 2026-09-17)
-# Usage: run `sh <path-to>/revert.sh` from anywhere.
-# Steps:
-#   1) Full pre-check (zero writes): every replace target must still equal
-#      after_sha256 and every added file must still equal after_sha256.
-#      Any file modified after adoption (current != after) -> refuse to
-#      revert, so post-adoption work is never overwritten.
-#   2) Only after the pre-check passes: replace targets are restored to the
-#      captured before content (the runtime worktree actual state, including
-#      the then-uncommitted layers); add targets are deleted.
+# Agent runtime adoption package: REVERT script (S2 repair, 2026-09-17)
+#
+# Usage:
+#   sh revert.sh --target /absolute/path/to/runtime-workspace-root
+#
+# The target is MANDATORY and must be an absolute path (same semantics as
+# apply.sh). Package location and caller cwd never influence the target.
+#
+# Pre-checks (ALL must pass before the first write; any failure = zero writes):
+#   1) manifest structure   : same checks as apply
+#   2) package payloads     : before/ payloads must match before_sha256 (the
+#                             revert input) AND after/ payloads must match
+#                             after_sha256 (whole-package integrity)
+#   3) required dependencies: same read-only fingerprints as apply — the
+#                             baseline being restored to is designed against
+#                             those exact dependency states
+#   4) target state         : every replace target still equals after_sha256
+#                             and every add file still equals after_sha256.
+#                             Any file modified after adoption -> refuse, so
+#                             post-adoption work is never overwritten.
+#
+# Restore materials: before reverting, every replace target's current content
+# is backed up to KEEPDIR; on a mid-revert failure a restore-partial.sh that
+# puts those files back (post-apply state) is generated and its path printed.
 
 set -eu
-# Locate the package dir from the script path, then walk up exactly 5 levels:
-# adoption-package -> agent-runtime-adoption-candidate-2026-09-17 -> raw
-#   -> experiments -> docs -> workspace root
-CDPATH= cd -- "$(dirname -- "$0")"
-PKG=$(pwd)
-i=0
-while [ "$i" -lt 5 ]; do
-    cd ..
-    i=$((i + 1))
+
+usage() {
+    echo "usage: sh revert.sh --target /absolute/path/to/runtime-workspace-root" >&2
+    echo "  --target is required; the package will only touch that directory." >&2
+    exit 1
+}
+
+TARGET=""
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --target)
+            [ $# -ge 2 ] || usage
+            TARGET="$2"; shift 2 ;;
+        *) usage ;;
+    esac
 done
-echo "workspace root: $(pwd)"
+[ -n "$TARGET" ] || usage
+case "$TARGET" in
+    /*) ;;
+    *) echo "REFUSED: --target must be an absolute path, got: $TARGET" >&2; exit 1 ;;
+esac
+if [ ! -d "$TARGET" ]; then
+    echo "REFUSED: target is not an existing directory: $TARGET" >&2
+    exit 1
+fi
+if [ ! -d "$TARGET/src/lei_signal" ] || [ ! -d "$TARGET/docs/experiments" ]; then
+    echo "REFUSED: target does not look like a runtime workspace (missing src/lei_signal or docs/experiments): $TARGET" >&2
+    exit 1
+fi
+echo "target (resolved): $TARGET"
+
+PKG=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+MANIFEST="$PKG/manifest.tsv"
+DEPS="$PKG/dependencies.tsv"
+[ -f "$MANIFEST" ] || { echo "REFUSED: manifest.tsv missing in package" >&2; exit 1; }
+[ -f "$DEPS" ] || { echo "REFUSED: dependencies.tsv missing in package" >&2; exit 1; }
 
 PRECHK="${TMPDIR:-/tmp}/adoption-revert-precheck.$$"
 mkdir -p "$PRECHK"
+KEEPDIR="${TMPDIR:-/tmp}/adoption-revert-keep-$(date +%Y%m%d%H%M%S)-$$"
+mkdir -p "$KEEPDIR"
 trap 'rm -rf "$PRECHK"' EXIT
 
-tail -n +2 "$PKG/manifest.tsv" | while IFS="$(printf '\t')" read -r f op before after; do
+# ---------- pre-check 1: manifest structure ----------
+tail -n +2 "$MANIFEST" | while IFS="$(printf '\t')" read -r f op before after; do
+    if [ -z "$f" ] || [ -z "$op" ] || [ -z "$before" ] || [ -z "$after" ]; then
+        echo "STRUCT-FAIL: incomplete row: $f"
+    fi
+    case "$op" in
+        replace|add) ;;
+        *) echo "STRUCT-FAIL: unknown op: $op ($f)" ;;
+    esac
+done > "$PRECHK/struct.log" 2>&1 || true
+rows=$(tail -n +2 "$MANIFEST" | wc -l | tr -d ' ')
+[ "$rows" -eq 24 ] || echo "STRUCT-FAIL: expected 24 data rows, found $rows" >> "$PRECHK/struct.log"
+
+# ---------- pre-check 2: package payloads (before/ is the revert input) ----------
+tail -n +2 "$MANIFEST" | while IFS="$(printf '\t')" read -r f op before after; do
+    bp="$PKG/before/$f"
     if [ "$op" = "replace" ]; then
-        if [ ! -f "$f" ]; then
-            echo "PRECHECK-FAIL: replace target missing: $f"
-            continue
-        fi
-        cur=$(shasum -a 256 "$f" | cut -d' ' -f1)
-        [ "$cur" = "$after" ] || echo "PRECHECK-FAIL: modified after adoption (refusing revert): $f"
-    elif [ "$op" = "add" ]; then
-        if [ ! -f "$f" ]; then
-            echo "PRECHECK-FAIL: add target already gone: $f"
+        if [ ! -f "$bp" ]; then
+            echo "PAYLOAD-FAIL: before payload missing: $f"
         else
-            cur=$(shasum -a 256 "$f" | cut -d' ' -f1)
-            [ "$cur" = "$after" ] || echo "PRECHECK-FAIL: modified after adoption (refusing delete): $f"
+            got=$(shasum -a 256 "$bp" | cut -d' ' -f1)
+            [ "$got" = "$before" ] || echo "PAYLOAD-FAIL: before payload corrupt: $f (manifest=$before actual=$got)"
         fi
     fi
-done > "$PRECHK/result.log" 2>&1 || true
+    ap="$PKG/after/$f"
+    if [ ! -f "$ap" ]; then
+        echo "PAYLOAD-FAIL: after payload missing: $f"
+    else
+        got=$(shasum -a 256 "$ap" | cut -d' ' -f1)
+        [ "$got" = "$after" ] || echo "PAYLOAD-FAIL: after payload corrupt: $f (manifest=$after actual=$got)"
+    fi
+done > "$PRECHK/payload.log" 2>&1 || true
 
+# ---------- pre-check 3: required dependencies ----------
+tail -n +2 "$DEPS" | while IFS="$(printf '\t')" read -r df dh dsrc dwhy; do
+    if [ ! -f "$TARGET/$df" ]; then
+        echo "DEP-FAIL: required dependency missing at target: $df ($dwhy)"
+    else
+        got=$(shasum -a 256 "$TARGET/$df" | cut -d' ' -f1)
+        [ "$got" = "$dh" ] || echo "DEP-FAIL: dependency drifted at target: $df (expected=$dh actual=$got)"
+    fi
+done > "$PRECHK/deps.log" 2>&1 || true
+
+# ---------- pre-check 4: target still at post-apply state ----------
+tail -n +2 "$MANIFEST" | while IFS="$(printf '\t')" read -r f op before after; do
+    if [ ! -f "$TARGET/$f" ]; then
+        echo "STATE-FAIL: target missing: $f"
+        continue
+    fi
+    cur=$(shasum -a 256 "$TARGET/$f" | cut -d' ' -f1)
+    [ "$cur" = "$after" ] || echo "STATE-FAIL: modified after adoption (refusing revert): $f (expected=$after actual=$cur)"
+done > "$PRECHK/state.log" 2>&1 || true
+
+cat "$PRECHK/struct.log" "$PRECHK/payload.log" "$PRECHK/deps.log" "$PRECHK/state.log" > "$PRECHK/result.log"
 if [ -s "$PRECHK/result.log" ]; then
     echo "---- PRE-CHECK FAILED (zero writes, nothing modified) ----"
     cat "$PRECHK/result.log"
+    rm -rf "$KEEPDIR"
     exit 1
 fi
-echo "PRE-CHECK OK: all targets still at after state; reverting now."
+echo "PRE-CHECK OK: all targets still at post-apply state, package payloads and dependencies verified; reverting now."
 
-tail -n +2 "$PKG/manifest.tsv" | while IFS="$(printf '\t')" read -r f op before skip_after; do
+# ---------- revert phase ----------
+reverted_log="$KEEPDIR/reverted.list"
+rows_file="$KEEPDIR/manifest-rows.txt"
+tail -n +2 "$MANIFEST" > "$rows_file"
+: > "$reverted_log"
+
+revert_fail() {
+    # $1 = failed file, $2 = reason ; restores post-apply state for done files
+    {
+        echo '#!/bin/sh'
+        echo "# Restore files already reverted by the interrupted adoption revert"
+        echo "# back to their post-apply state."
+        echo "# Target: $TARGET   Keep dir: $KEEPDIR"
+        if [ -s "$reverted_log" ]; then
+            while IFS="$(printf '\t')" read -r dop df; do
+                if [ "$dop" = "replace" ]; then
+                    echo "cp \"$KEEPDIR/postapply/$df\" \"$TARGET/$df\""
+                else
+                    echo "cp \"$PKG/after/$df\" \"$TARGET/$df\""
+                fi
+            done < "$reverted_log"
+            echo "echo restored \$(wc -l < \"$reverted_log\" | tr -d ' ') files to post-apply state"
+        else
+            echo "echo nothing was reverted"
+        fi
+    } > "$KEEPDIR/restore-partial.sh"
+    chmod +x "$KEEPDIR/restore-partial.sh"
+    echo "REVERT-FAIL: $2 ($1)"
+    n=$(wc -l < "$reverted_log" | tr -d ' ')
+    echo "files already reverted: $n (list: $reverted_log)"
+    echo "recovery materials KEPT at: $KEEPDIR"
+    echo "to restore already-reverted files to their post-apply state, run:"
+    echo "  sh \"$KEEPDIR/restore-partial.sh\""
+    exit 1
+}
+
+while IFS="$(printf '\t')" read -r f op before skip_after; do
     if [ "$op" = "replace" ]; then
-        cp "$PKG/before/$f" "$f"
+        mkdir -p "$KEEPDIR/postapply/$(dirname "$f")"
+        cp "$TARGET/$f" "$KEEPDIR/postapply/$f" || revert_fail "$f" "cannot back up post-apply content"
+        cp "$PKG/before/$f" "$TARGET/$f" || revert_fail "$f" "cannot restore baseline content"
+        printf '%s\t%s\n' "$op" "$f" >> "$reverted_log"
         echo "reverted [replace] $f"
     else
-        rm "$f"
+        rm "$TARGET/$f" || revert_fail "$f" "cannot remove added file"
+        printf '%s\t%s\n' "$op" "$f" >> "$reverted_log"
         echo "reverted [add removed] $f"
     fi
-done
+done < "$rows_file"
 echo "REVERT DONE: 24/24 restored to the captured pre-adoption runtime state."
+rm -rf "$KEEPDIR"
+exit 0

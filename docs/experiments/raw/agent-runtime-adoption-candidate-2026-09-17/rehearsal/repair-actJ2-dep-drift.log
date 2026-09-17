@@ -1,0 +1,55 @@
+target (resolved): /private/tmp/s2J.3_gqrv6m
+---- PRE-CHECK FAILED (zero writes, nothing modified) ----
+DEP-FAIL: dependency drifted at target: src/lei_signal/copilot/trades.py (expected=28defcc92e767f90a607db7f4ae420a16405f6ac414dc7a8aa9726392a4304d7 actual=66a8105a6a8fc8f250a53d802fc94e3d295fb71e10b2cc7c3fe305e2a4b4e078)
+STATE-FAIL: add target already exists (refusing): src/lei_signal/api/ask_timing.py
+STATE-FAIL: target drifted (refusing): src/lei_signal/api/routes/agent.py
+  expected before=9567fc9db104723e663a0512a800e04b4c8725c5f738fed28ca6663bead3cb1a
+  actual         =f03ee953230383d0f949c3f83c31ed2ab6b4e4e9818ab300d36ca43e4b81cce5
+STATE-FAIL: target drifted (refusing): src/lei_signal/api/routes/copilot.py
+  expected before=33e532f7dd72b03e387af7faf465d275eaba3af681d289e9b6c2891e64312f5d
+  actual         =ba4ee69f01b6ac3725afd1f13c50e5f91f014c3e245b971ae29b994e5bc1c48a
+STATE-FAIL: target drifted (refusing): src/lei_signal/copilot/chat_identity.py
+  expected before=390161408ac35290203ad05fe8a6ef8d955e8c44ef17e74982733d7a3cd456a3
+  actual         =38a7eee8482fa2408aee0ac935457f5c3dcdafe9c910ddb2ea3a3d68735fd2a9
+STATE-FAIL: add target already exists (refusing): src/lei_signal/copilot/context_scope.py
+STATE-FAIL: target drifted (refusing): src/lei_signal/copilot/resolve.py
+  expected before=cecc2c4eca7e74f1333709456860cd0997ceb8ff575e19d85b88fde5a6e9e15c
+  actual         =4c9be6bc98c0e8b7a757a2d2861109e1e6913348ea861af9d392bb14713e133c
+STATE-FAIL: target drifted (refusing): src/lei_signal/fundamentals/sources.py
+  expected before=2b4814d213309f9ca30ed7cb283939e952db2b60d4f30a996227015a4be5948c
+  actual         =771e182adbe583413d75c826ffa6b54bd985923f02ab45ee079bd3425375e99c
+STATE-FAIL: target drifted (refusing): src/lei_signal/market_context/market_mood.py
+  expected before=d5906e7bdaa265ced90417c84c8e23e8411ccc43c0eb00cc30b56999df4bdc78
+  actual         =8acd5b146b23fb512be4ea26059c9cfffc710d37803b61cd3137d230707c76ec
+STATE-FAIL: target drifted (refusing): src/lei_signal/plans/llm.py
+  expected before=d180c9295c8088d0df535b915744ca6dbe49c4ec4f00fcf2348b51204a49bbd5
+  actual         =72c66c98a43edf93bba94185263ddb8012b2a7af13f62581d9ffbfe68bd6e8d0
+STATE-FAIL: target drifted (refusing): src/lei_signal/storage/sqlite_store.py
+  expected before=25911e2270bd587841303ab869c327240cc34141cb40e360ef3d19a9a47cb885
+  actual         =1805f00c0e28e5c328ebeab42252477edaed1a4a5b11e94146a735702b6c419e
+STATE-FAIL: add target already exists (refusing): src/lei_signal/storage/write_tx.py
+STATE-FAIL: add target already exists (refusing): tests/fixtures/agent_semantics/atr_intents.json
+STATE-FAIL: target drifted (refusing): tests/integration/test_agent_chat_e2e.py
+  expected before=1419bef634b5857ef3b980f5be463f30d7dd24e80fae9570fc525a2e2213d810
+  actual         =062f1f78292cd21f0107e4c586ebb6634db54c4a9d8f9fc5018dfa0720dbf113
+STATE-FAIL: add target already exists (refusing): tests/unit/test_agent_ask_stability.py
+STATE-FAIL: add target already exists (refusing): tests/unit/test_agent_context_contract.py
+STATE-FAIL: add target already exists (refusing): tests/unit/test_agent_continuity_20260916.py
+STATE-FAIL: add target already exists (refusing): tests/unit/test_agent_continuity_routes_20260916.py
+STATE-FAIL: target drifted (refusing): tests/unit/test_agent_name_resolve.py
+  expected before=b19ece839253c8e463a716af594b1a33725c0120bb48601d4fcfe02c25c7112b
+  actual         =fda6b0fffe4d84a6f3a0278f1aed6687776c436fee0b49b4402eeb1efb67f697
+STATE-FAIL: add target already exists (refusing): tests/unit/test_market_mood_perf.py
+STATE-FAIL: add target already exists (refusing): tests/unit/test_write_tx_tracking.py
+STATE-FAIL: target drifted (refusing): web/run-agent-ux-regression.mjs
+  expected before=71fbecbc4aeca06f69293868176df17c66adb910aadf0a63e2797d12b5e76a0c
+  actual         =83390d0e72f91620eddac05c6064ba98424a0759eab26e4b8d09328e9d798bc4
+STATE-FAIL: target drifted (refusing): web/src/components/AgentConsole.tsx
+  expected before=3be789d4ed551dac3d36a36e2324e8db8034047c655de0a02b978fe73ee04359
+  actual         =314c903a3d8a211947e648c2a02cdb87218553c03ca8128d9b564bac72593783
+STATE-FAIL: target drifted (refusing): web/src/pages/AgentWorkspacePage.tsx
+  expected before=6528ae224602fad0e131a31f4a7d49d43a48a072d99bd6ac5c4dfe100283620b
+  actual         =34e78ad09c1833ce504be7f208fb38c361c2a97e29b3a8641d7f7588537acd79
+STATE-FAIL: target drifted (refusing): web/src/utils/agentUx.ts
+  expected before=0f449179035654346890103255a2f0681110057530a45d94cf86e59364a388c8
+  actual         =81fb3378457ba1f1dcb857d9b4e3d6a9930db07bdf34882b3b7685122ce8fce6

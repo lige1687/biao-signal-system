@@ -82,3 +82,30 @@
 未调用付费/真实模型（唯一一次真实外呼来自既有失败测试对 LLM 端点的 404 探测，
 随后被跳过）。浏览器检查未执行（后端不可用），已用 build+确定性回归脚本与真实
 HTTP 合成流替代并如实区分。
+
+## 返修补记（S2 repair，主控复验 mixed 后）
+
+主控独立复验 G3 未过（verdict=mixed），三项固定返修全部落实，**未改任何已通过
+产品代码与运行目录**：
+
+1. `apply.sh`/`revert.sh` 改为 `--target <绝对路径>` 必填（显式目标，打印解析路径、
+   验证布局）；包位置与调用 cwd 不再影响目标。
+2. 预校验扩为四重：manifest 结构（24 行/列数/op 枚举/哈希格式）、**全载荷双向哈希**
+   （apply 验 after+before，revert 验 before+after）、必要依赖指纹、目标状态；
+   写入失败不再 trap 删备份——KEEPDIR（备份+已写清单+生成的 restore-partial.sh）
+   保留并打印可执行恢复指引；不宣称跨 24 文件原子事务。
+3. 新增 `dependencies.tsv`：7 个只读前置指纹（trades.py/client.ts/CopilotCards.tsx/
+   AnswerText.tsx/App.tsx 草稿 store/AgentMarkdown.tsx/agent-workspace.css，逐项
+   理由），apply/revert 均校验，缺失/漂移拒绝；包不复制不覆盖。
+
+十幕演练（/private/tmp 独立副本、进程级隔离、无网络、未对运行目录安装）：
+保持四项（显式目标应用/漂移拒绝零写入/精确回退/回退后修改保护）+ 新增四类
+（晚序 payload 损坏拒绝/before 损坏拒绝/写入失败恢复实测/依赖缺失与漂移拒绝），
+日志在 raw/rehearsal/repair-act*.log，汇总见 raw/rehearsal/README-repair.md。
+
+报告数字更正：后端通过项 300（130+140+14+16），初版误写 301；"每问省约 12 秒"
+为来源侧旧测量、本次候选未重新计时。
+
+返修过程新增教训：多轮修补脚本后演练副本必须重新组装（copytree 快照不会跟随
+源变化）；shell 变量不跨工具调用保留，演练驱动改用 python 全程管理状态；
+`rm -rf` 的变量兜底值绝不能指向系统目录。

@@ -1,0 +1,30 @@
+target (resolved): /private/tmp/s2I.p5qz5hgo
+PRE-CHECK OK: manifest structure, package payloads (after+before), 7 dependencies and 24 target states all verified; writing now.
+applied [add] src/lei_signal/api/ask_timing.py
+applied [replace] src/lei_signal/api/routes/agent.py
+applied [replace] src/lei_signal/api/routes/copilot.py
+applied [replace] src/lei_signal/copilot/chat_identity.py
+applied [add] src/lei_signal/copilot/context_scope.py
+applied [replace] src/lei_signal/copilot/resolve.py
+applied [replace] src/lei_signal/fundamentals/sources.py
+applied [replace] src/lei_signal/market_context/market_mood.py
+applied [replace] src/lei_signal/plans/llm.py
+applied [replace] src/lei_signal/storage/sqlite_store.py
+applied [add] src/lei_signal/storage/write_tx.py
+applied [add] tests/fixtures/agent_semantics/atr_intents.json
+applied [replace] tests/integration/test_agent_chat_e2e.py
+applied [add] tests/unit/test_agent_ask_stability.py
+applied [add] tests/unit/test_agent_context_contract.py
+applied [add] tests/unit/test_agent_continuity_20260916.py
+applied [add] tests/unit/test_agent_continuity_routes_20260916.py
+applied [replace] tests/unit/test_agent_name_resolve.py
+applied [add] tests/unit/test_market_mood_perf.py
+applied [add] tests/unit/test_write_tx_tracking.py
+applied [replace] web/run-agent-ux-regression.mjs
+applied [replace] web/src/components/AgentConsole.tsx
+WRITE-FAIL: cannot stage tmp file (web/src/pages/AgentWorkspacePage.tsx)
+files already written: 22 (list: /var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T//adoption-keep-20260917125647-39698/applied.list)
+recovery materials KEPT at: /var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T//adoption-keep-20260917125647-39698
+to restore already-written files to their pre-apply state, run:
+  sh "/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T//adoption-keep-20260917125647-39698/restore-partial.sh"
+cp: /private/tmp/s2I.p5qz5hgo/web/src/pages/AgentWorkspacePage.tsx.tmp.adoption: Permission denied
