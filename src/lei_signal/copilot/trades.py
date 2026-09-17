@@ -11,6 +11,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import sqlite3
 from collections.abc import Callable
 from datetime import UTC, datetime
@@ -21,6 +22,44 @@ from lei_signal.portfolio.funddata import NavPoint, fetch_nav_history
 NavFetcher = Callable[[str], list[NavPoint]]
 
 _STATUS_CN = {"pending": "待定价", "priced": "已定价", "failed": "定价失败"}
+
+
+class TradeRequestConflict(RuntimeError):
+    """同一请求ID（确认身份）携带了不同的载荷。
+
+    路由层映射为 409：不能静默复用已有成交，也不能悄悄再记一笔，
+    需要用户核对原笔后重新发起预览。
+    """
+
+
+def canonical_request_payload(
+    *,
+    fund_code: str,
+    fund_name: str,
+    side: str,
+    amount: float,
+    trade_date: str,
+    note: str = "",
+    plan_id: str | None = None,
+    source: str = "web",
+) -> str:
+    """落库载荷的规范化形式：同一确认身份重试时逐字段比对用。
+
+    与 create_trade 实际写入的字段一一对应（strip / 名称回退 / float 化
+    都按服务端口径），客户端「看起来一样」但服务端会写成不同结果的载荷
+    必须判冲突，而不是复用原成交。
+    """
+    normalized = {
+        "fund_code": fund_code.strip(),
+        "fund_name": fund_name.strip() or fund_code.strip(),
+        "side": side,
+        "amount": float(amount),
+        "trade_date": trade_date,
+        "note": note or "",
+        "plan_id": plan_id,
+        "source": source,
+    }
+    return json.dumps(normalized, sort_keys=True, ensure_ascii=False)
 
 
 def _now() -> str:
@@ -53,6 +92,17 @@ def _nav_on_or_before(navs: list[NavPoint], day: str) -> float | None:
     return None
 
 
+def _ensure_same_request(row: sqlite3.Row, canonical: str) -> None:
+    """已有 request_id 行的载荷必须与本次完全一致，否则显式冲突。"""
+    if (row["request_payload"] or "") != canonical:
+        raise TradeRequestConflict(
+            f"请求ID {row['request_id']} 已对应另一笔成交"
+            f"（{row['trade_id']}，{row['trade_date']} {row['fund_name']}），"
+            "不能复用同一确认身份提交不同内容；请先到「我的持仓」核对原笔，"
+            "再重新发起报单预览。"
+        )
+
+
 def create_trade(
     conn: sqlite3.Connection,
     *,
@@ -64,7 +114,15 @@ def create_trade(
     plan_id: str | None = None,
     source: str = "web",
     note: str = "",
+    request_id: str | None = None,
 ) -> FundTradeDTO:
+    """落一笔手动确认的基金成交。
+
+    request_id（确认身份）非空时具备重试保护：同ID同规范化载荷返回
+    原成交（不重复记账），同ID异载荷抛 TradeRequestConflict。并发竞争
+    由 031 迁移的部分唯一索引兜底——INSERT 撞索引后回读已落库那笔再比对。
+    request_id 为 None（旧客户端）保持原行为：无重试保护，每次新建。
+    """
     if side not in ("buy", "sell"):
         raise ValueError(f"side 只能是 buy/sell，收到 {side}")
     if amount <= 0:
@@ -74,14 +132,39 @@ def create_trade(
         f"{fund_code}{side}{amount}{trade_date}{created}".encode()
     ).hexdigest()[:8]
     trade_id = f"ft_{fund_code}_{trade_date}_{h}"
-    conn.execute(
-        """INSERT INTO fund_trades
-           (trade_id, fund_code, fund_name, side, amount, trade_date,
-            priced_nav, price_status, plan_id, source, note, created_at, updated_at)
-           VALUES (?,?,?,?,?,?,NULL,'pending',?,?,?,?,?)""",
-        (trade_id, fund_code, fund_name, side, amount, trade_date,
-         plan_id, source, note, created, created),
+    canonical = canonical_request_payload(
+        fund_code=fund_code, fund_name=fund_name, side=side, amount=amount,
+        trade_date=trade_date, note=note, plan_id=plan_id, source=source,
     )
+    if request_id:
+        existing = conn.execute(
+            "SELECT * FROM fund_trades WHERE request_id = ?", (request_id,)
+        ).fetchone()
+        if existing is not None:
+            _ensure_same_request(existing, canonical)
+            return _row_to_dto(existing)
+    try:
+        conn.execute(
+            """INSERT INTO fund_trades
+               (trade_id, fund_code, fund_name, side, amount, trade_date,
+                priced_nav, price_status, plan_id, source, note,
+                created_at, updated_at, request_id, request_payload)
+               VALUES (?,?,?,?,?,?,NULL,'pending',?,?,?,?,?,?,?)""",
+            (trade_id, fund_code, fund_name, side, amount, trade_date,
+             plan_id, source, note, created, created, request_id, canonical),
+        )
+    except sqlite3.IntegrityError:
+        # 并发下另一连接先落了同一 request_id（WAL 写锁放行后撞唯一索引）；
+        # 若不是该索引引起（trade_id 主键等），原样上抛。
+        if not request_id:
+            raise
+        existing = conn.execute(
+            "SELECT * FROM fund_trades WHERE request_id = ?", (request_id,)
+        ).fetchone()
+        if existing is None:
+            raise
+        _ensure_same_request(existing, canonical)
+        return _row_to_dto(existing)
     row = conn.execute(
         "SELECT * FROM fund_trades WHERE trade_id = ?", (trade_id,)
     ).fetchone()
