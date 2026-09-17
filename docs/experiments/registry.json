@@ -1361,6 +1361,10 @@
     "docs/experiments/agent-runtime-adoption-audit-2026-09-17.md": {
       "category": "数据与质量",
       "oneLiner": "S1只读审查：来源main与运行实态逐文件三方比对，24文件最小采用清单+依赖闭合表+排除项；运行工作区为活跃移动靶，S2须指纹门禁；真实库/服务零改动，未测真实模型。"
+    },
+    "docs/experiments/agent-runtime-adoption-candidate-2026-09-17.md": {
+      "category": "数据与质量",
+      "oneLiner": "S2隔离整合：基线(运行在制13文件)+Agent增量(24项)装成候选分支；后端301项通过/1项基线既有失败不修、前端build+6回归、真实路由冒烟；采用包四幕演练(应用/拒漂移零写入/回退/保护后改动)；未测真实模型未部署，采用留主控。"
     }
   }
 }
