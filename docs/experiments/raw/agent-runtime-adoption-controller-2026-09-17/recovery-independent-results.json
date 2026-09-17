@@ -1,0 +1,44 @@
+{
+  "apply_clean": {
+    "pass": true,
+    "operation_exit": 1,
+    "recovery_exit": 0,
+    "modified_by_recovery": 22,
+    "recovery_output": "RECOVERY DONE: restored 22/22 items.\n"
+  },
+  "apply_later_edit": {
+    "pass": true,
+    "operation_exit": 1,
+    "recovery_exit": 1,
+    "modified_by_recovery": 0,
+    "recovery_output": "RECOVERY-REFUSED: target changed after interruption: src/lei_signal/api/routes/agent.py\nNo recovery writes were made; recovery materials were kept.\n"
+  },
+  "apply_backup_corrupt": {
+    "pass": true,
+    "operation_exit": 1,
+    "recovery_exit": 1,
+    "modified_by_recovery": 0,
+    "recovery_output": "RECOVERY-REFUSED: recovery payload missing or damaged: src/lei_signal/api/routes/agent.py\nNo recovery writes were made; recovery materials were kept.\n"
+  },
+  "apply_restore_write_fail": {
+    "pass": true,
+    "operation_exit": 1,
+    "recovery_exit": 1,
+    "modified_by_recovery": 1,
+    "recovery_output": "RECOVERY-WRITE-FAIL: src/lei_signal/api/routes/agent.py: [Errno 13] Permission denied: '/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/tmpcu86wkfk/apply_restore_write_fail/target/src/lei_signal/api/routes/.agent.py.recovery-kxpu6bjh'; restored 1/22 items.\nRecovery materials were kept for diagnosis and retry.\n"
+  },
+  "revert_clean": {
+    "pass": true,
+    "operation_exit": 1,
+    "recovery_exit": 0,
+    "modified_by_recovery": 22,
+    "recovery_output": "RECOVERY DONE: restored 22/22 items.\n"
+  },
+  "revert_later_edit": {
+    "pass": true,
+    "operation_exit": 1,
+    "recovery_exit": 1,
+    "modified_by_recovery": 0,
+    "recovery_output": "RECOVERY-REFUSED: target changed after interruption: src/lei_signal/api/routes/agent.py\nNo recovery writes were made; recovery materials were kept.\n"
+  }
+}

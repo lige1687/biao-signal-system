@@ -1,0 +1,17 @@
+{
+  "backend": {
+    "command": "PYTHONPATH=src python3.11 pytest: continuity_routes + name_resolve (socket.connect blocks non-loopback)",
+    "passed": 27,
+    "seconds": 100.13,
+    "exit": 0
+  },
+  "frontend": {
+    "scripts": [
+      "test:agent-ux",
+      "test:agent-workspace",
+      "test:evidence-card"
+    ],
+    "exit": 0,
+    "notes": "SSR useLayoutEffect warning retained; no browser interaction or paid model"
+  }
+}

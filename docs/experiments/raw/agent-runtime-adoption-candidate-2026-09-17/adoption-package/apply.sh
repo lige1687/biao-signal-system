@@ -71,8 +71,10 @@ echo "target (resolved): $TARGET"
 PKG=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 MANIFEST="$PKG/manifest.tsv"
 DEPS="$PKG/dependencies.tsv"
+RECOVERY_TOOL="$PKG/recovery.py"
 [ -f "$MANIFEST" ] || { echo "REFUSED: manifest.tsv missing in package" >&2; exit 1; }
 [ -f "$DEPS" ] || { echo "REFUSED: dependencies.tsv missing in package" >&2; exit 1; }
+[ -f "$RECOVERY_TOOL" ] || { echo "REFUSED: recovery.py missing in package" >&2; exit 1; }
 
 PRECHK="${TMPDIR:-/tmp}/adoption-apply-precheck.$$"
 mkdir -p "$PRECHK"
@@ -159,28 +161,19 @@ echo "PRE-CHECK OK: manifest structure, package payloads (after+before), 7 depen
 
 # ---------- write phase ----------
 applied_log="$KEEPDIR/applied.list"
+recovery_plan="$KEEPDIR/recovery-plan.tsv"
 rows_file="$KEEPDIR/manifest-rows.txt"
 tail -n +2 "$MANIFEST" > "$rows_file"
 : > "$applied_log"
+printf 'path\taction\texpected_current\trestore_sha256\tpayload\n' > "$recovery_plan"
+cp "$RECOVERY_TOOL" "$KEEPDIR/recovery.py" || { echo "WRITE-FAIL: cannot preserve recovery tool before target writes" >&2; exit 1; }
 
 write_fail() {
     # $1 = failed file, $2 = reason ; keeps KEEPDIR and emits a restore script
     {
         echo '#!/bin/sh'
-        echo "# Restore files already written by the interrupted adoption apply."
-        echo "# Target: $TARGET   Keep dir: $KEEPDIR"
-        if [ -s "$applied_log" ]; then
-            while IFS="$(printf '\t')" read -r dop df; do
-                if [ "$dop" = "replace" ]; then
-                    echo "cp \"$KEEPDIR/backup/$df\" \"$TARGET/$df\""
-                else
-                    echo "rm -f \"$TARGET/$df\""
-                fi
-            done < "$applied_log"
-            echo "echo restored \$(wc -l < \"$applied_log\" | tr -d ' ') files to pre-apply state"
-        else
-            echo "echo nothing was written"
-        fi
+        echo 'set -eu'
+        echo "exec python3 \"$KEEPDIR/recovery.py\" \"$TARGET\" \"$recovery_plan\""
     } > "$KEEPDIR/restore-partial.sh"
     chmod +x "$KEEPDIR/restore-partial.sh"
     echo "WRITE-FAIL: $2 ($1)"
@@ -192,7 +185,7 @@ write_fail() {
     exit 1
 }
 
-while IFS="$(printf '\t')" read -r f op skip_before after; do
+while IFS="$(printf '\t')" read -r f op before after; do
     mkdir -p "$(dirname "$TARGET/$f")"
     if [ "$op" = "replace" ]; then
         mkdir -p "$KEEPDIR/backup/$(dirname "$f")"
@@ -206,6 +199,11 @@ while IFS="$(printf '\t')" read -r f op skip_before after; do
     fi
     mv "$TARGET/$f.tmp.adoption" "$TARGET/$f" || write_fail "$f" "atomic rename failed"
     printf '%s\t%s\n' "$op" "$f" >> "$applied_log"
+    if [ "$op" = "replace" ]; then
+        printf '%s\tcopy\t%s\t%s\t%s\n' "$f" "$after" "$before" "backup/$f" >> "$recovery_plan"
+    else
+        printf '%s\tremove\t%s\tABSENT\t-\n' "$f" "$after" >> "$recovery_plan"
+    fi
     echo "applied [$op] $f"
 done < "$rows_file"
 echo "APPLY DONE: 24/24 into $TARGET. Run the affected regressions from the report"

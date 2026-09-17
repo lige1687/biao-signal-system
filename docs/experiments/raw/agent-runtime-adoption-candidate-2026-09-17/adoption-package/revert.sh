@@ -59,8 +59,10 @@ echo "target (resolved): $TARGET"
 PKG=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 MANIFEST="$PKG/manifest.tsv"
 DEPS="$PKG/dependencies.tsv"
+RECOVERY_TOOL="$PKG/recovery.py"
 [ -f "$MANIFEST" ] || { echo "REFUSED: manifest.tsv missing in package" >&2; exit 1; }
 [ -f "$DEPS" ] || { echo "REFUSED: dependencies.tsv missing in package" >&2; exit 1; }
+[ -f "$RECOVERY_TOOL" ] || { echo "REFUSED: recovery.py missing in package" >&2; exit 1; }
 
 PRECHK="${TMPDIR:-/tmp}/adoption-revert-precheck.$$"
 mkdir -p "$PRECHK"
@@ -132,29 +134,19 @@ echo "PRE-CHECK OK: all targets still at post-apply state, package payloads and 
 
 # ---------- revert phase ----------
 reverted_log="$KEEPDIR/reverted.list"
+recovery_plan="$KEEPDIR/recovery-plan.tsv"
 rows_file="$KEEPDIR/manifest-rows.txt"
 tail -n +2 "$MANIFEST" > "$rows_file"
 : > "$reverted_log"
+printf 'path\taction\texpected_current\trestore_sha256\tpayload\n' > "$recovery_plan"
+cp "$RECOVERY_TOOL" "$KEEPDIR/recovery.py" || { echo "REVERT-FAIL: cannot preserve recovery tool before target writes" >&2; exit 1; }
 
 revert_fail() {
     # $1 = failed file, $2 = reason ; restores post-apply state for done files
     {
         echo '#!/bin/sh'
-        echo "# Restore files already reverted by the interrupted adoption revert"
-        echo "# back to their post-apply state."
-        echo "# Target: $TARGET   Keep dir: $KEEPDIR"
-        if [ -s "$reverted_log" ]; then
-            while IFS="$(printf '\t')" read -r dop df; do
-                if [ "$dop" = "replace" ]; then
-                    echo "cp \"$KEEPDIR/postapply/$df\" \"$TARGET/$df\""
-                else
-                    echo "cp \"$PKG/after/$df\" \"$TARGET/$df\""
-                fi
-            done < "$reverted_log"
-            echo "echo restored \$(wc -l < \"$reverted_log\" | tr -d ' ') files to post-apply state"
-        else
-            echo "echo nothing was reverted"
-        fi
+        echo 'set -eu'
+        echo "exec python3 \"$KEEPDIR/recovery.py\" \"$TARGET\" \"$recovery_plan\""
     } > "$KEEPDIR/restore-partial.sh"
     chmod +x "$KEEPDIR/restore-partial.sh"
     echo "REVERT-FAIL: $2 ($1)"
@@ -170,12 +162,22 @@ while IFS="$(printf '\t')" read -r f op before skip_after; do
     if [ "$op" = "replace" ]; then
         mkdir -p "$KEEPDIR/postapply/$(dirname "$f")"
         cp "$TARGET/$f" "$KEEPDIR/postapply/$f" || revert_fail "$f" "cannot back up post-apply content"
-        cp "$PKG/before/$f" "$TARGET/$f" || revert_fail "$f" "cannot restore baseline content"
+        cp "$PKG/before/$f" "$TARGET/$f.tmp.adoption-revert" || revert_fail "$f" "cannot stage baseline content"
+        got=$(shasum -a 256 "$TARGET/$f.tmp.adoption-revert" | cut -d' ' -f1)
+        if [ "$got" != "$before" ]; then
+            rm -f "$TARGET/$f.tmp.adoption-revert"
+            revert_fail "$f" "staged baseline content mismatch"
+        fi
+        mv "$TARGET/$f.tmp.adoption-revert" "$TARGET/$f" || revert_fail "$f" "atomic baseline rename failed"
         printf '%s\t%s\n' "$op" "$f" >> "$reverted_log"
+        printf '%s\tcopy\t%s\t%s\t%s\n' "$f" "$before" "$skip_after" "postapply/$f" >> "$recovery_plan"
         echo "reverted [replace] $f"
     else
+        mkdir -p "$KEEPDIR/postapply/$(dirname "$f")"
+        cp "$TARGET/$f" "$KEEPDIR/postapply/$f" || revert_fail "$f" "cannot preserve added content"
         rm "$TARGET/$f" || revert_fail "$f" "cannot remove added file"
         printf '%s\t%s\n' "$op" "$f" >> "$reverted_log"
+        printf '%s\tcopy\tABSENT\t%s\t%s\n' "$f" "$skip_after" "postapply/$f" >> "$recovery_plan"
         echo "reverted [add removed] $f"
     fi
 done < "$rows_file"

@@ -586,3 +586,6 @@
   与本目录研究线互不隶属
 
 - [Agent采用包主控独立复验（2026-09-17）](agent-runtime-adoption-controller-2026-09-17.md)：54项通过，采用工具三项固定返修。
+
+- [Agent采用候选最终独立复验（2026-09-17）](agent-runtime-adoption-final-review-2026-09-17.md)：候选与采用工具准备通过，未部署。
+- [异常恢复保护（2026-09-17）](agent-adoption-recovery-protection-2026-09-17.md)：后续编辑与损坏备份保护，独立六场景通过。

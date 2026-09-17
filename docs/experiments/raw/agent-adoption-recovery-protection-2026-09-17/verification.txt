@@ -1,0 +1,25 @@
+2026-09-17 local verification in isolated candidate workspace
+
+1. python3 recovery_probe.py
+   exit 0
+   - apply failure, unchanged targets: complete recovery
+   - apply failure, later edit: refused; zero writes; edit preserved
+   - apply failure, damaged backup: refused; zero writes
+   - recovery write failure: non-zero exit
+   - revert failure, later edit: refused; zero writes; edit preserved
+   - revert failure, unchanged targets: complete recovery
+
+2. sh -n apply.sh revert.sh
+   exit 0
+
+3. python3 -m py_compile recovery.py recovery_probe.py
+   exit 0
+
+4. python3 package_probe_r1.py
+   exit 0
+   - original normal apply/revert and seven refusal scenarios retained
+   - recovery_modified now returns restore_rc=1 and later_edit_preserved=true
+
+5. python3 scripts/check_repo_hygiene.py
+   exit 1 only because the isolated git worktree root contains a .git control file.
+   No reported placement violation concerns a file added by this repair.
