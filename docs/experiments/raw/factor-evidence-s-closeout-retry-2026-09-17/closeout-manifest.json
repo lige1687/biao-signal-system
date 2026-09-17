@@ -1,0 +1,32 @@
+{
+ "task": "factor-evidence S1-S3 closeout retry 2026-09-17",
+ "base_head": "2b05787f746991a90ec33a06736b61cfdeca6119",
+ "branch": "codex/factor-unit-research-20260915",
+ "snapshot_policy": "修后原字节另存本目录，不覆盖 repair-r1-r4/code-snapshot；旧 run-01/freeze/1.0.0 与 protocol-v1.0.0.json 仍绑定返修时旧字节；未来正式真实运行须新版本协议+主控授权",
+ "files": [
+  {
+   "path": "src/lei_signal/research/factor_evidence/runner.py",
+   "snapshot_file": "code-snapshot/runner.py",
+   "old_sha256_head_2b05787f": "06611433debb1fe423b41f180b3d5c65aed969430a56bab9e832a241898954af",
+   "new_sha256_repaired": "2f85a2b66861d3089ab52626880fc63f8e49e4199da22266d07855f6afcbb82b",
+   "bytes": 23501,
+   "changed": true
+  },
+  {
+   "path": "src/lei_signal/research/factor_evidence/stability.py",
+   "snapshot_file": "code-snapshot/stability.py",
+   "old_sha256_head_2b05787f": "e794e7a3194adea1fbbcbb213a889f21bc05c0e3cc931cdb7b5d0787e401ead4",
+   "new_sha256_repaired": "59fe10b5086e75c9123df6bc66ea6ffa2265ffdc947df17f127143ed0e7fe9c1",
+   "bytes": 15032,
+   "changed": true
+  },
+  {
+   "path": "tests/integration/test_factor_evidence_cli.py",
+   "snapshot_file": "code-snapshot/test_factor_evidence_cli.py",
+   "old_sha256_head_2b05787f": "06b42c809eab9e42f7051719f3c3c8aa17f5188fc8ab0d6e9d404260852358b0",
+   "new_sha256_repaired": "09e5b4b4972f6a5ac502be0b1a4cab88efda564a1be484a5cb6d6c807b2541df",
+   "bytes": 16443,
+   "changed": true
+  }
+ ]
+}

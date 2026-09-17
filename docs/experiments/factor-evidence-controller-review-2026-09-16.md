@@ -159,3 +159,47 @@ repair-log §1将“2个收集错误”与“其余新测试失败、旧逻辑�
 仅做S1入口收窄、S2中性模板、S3过程声明纠正；不改统计算法、参数、输入或研究问题。不运行真实分析、状态或目标，不联网、不装依赖、不写OKR/registry/INDEX。定向测试最多3次（包括失败），原相关回归1次、ruff1次；合成输出仅由测试内1批覆盖，记录重复执行次数，不另跑演示批次；快照核验1次。额度到即停，未完成如实交回。新正式真实协议仍未授权。
 
 以上不是第四轮完整工具建设：固定历史数字可继续引用，未可信的直接真实调用与自动解释在收尾前暂停采用。下一轮因子方向讨论无需重新计算这些数字，但不得把尚未关闭的工具边界当作已完成能力。
+
+## 10. S1–S3替代任务独立复核与限定收口（2026-09-17）
+
+**裁决：G1–G3限定交付接受，必需返修项：无；保留快照核验超预算的流程违规，不称全程合规。** 此裁决只关闭入口、机器解释和记录修正，不增加因子有效性证据或真实运行权限。
+
+替代job `67336cf4-4ca9-4713-9d8c-ab6e8770c812` 第1/3轮；绑定会话 `sess_ed0f9d9b-2919-40c9-92d9-64f89c1f76ae`。控制权已通过job记录转回原主控任务，冻结目标不变。现场分支`codex/factor-unit-research-20260915`，HEAD `2b05787f746991a90ec33a06736b61cfdeca6119`，与替代任务合同一致。旧权限受阻job保留，不追认为成功。
+
+### 10.1 已独立确认
+
+| 目标 | 主控确认与边界 |
+|---|---|
+| G1/S1 | 阅读实际diff：公开run_analysis在mode=real时创建目录前拒绝；main仍先validate_protocol、load_b1_observations，再调用私有落盘函数。主控伪base_dir/sha合成反例直接调用被拒，目录不存在。私有函数仍不独立核来源，不作为对外真实入口。 |
+| G2/S2 | 两处runner结论和stability稀疏note已改中性；stability除note外无统计改动，原run_analysis主体仅重命名/路由调整。主控四行手算复核全期−0.05、删2020为−0.2、删2021为+0.1；新测试确认生成报告保留数值、不再写不反号断言。 |
+| G3/S3 | repair-log §7与执行报告§12追加纠正，未补造旧日志。三份新源码/测试快照与磁盘一致；旧协议、八个旧冻结代码键、run-01全部文件及集合、七份补件与121项保护基线独立核验通过。 |
+
+实际主控命令：
+
+```text
+python3 -m pytest tests/unit/test_factor_evidence_contract.py tests/unit/test_factor_evidence_stability.py tests/unit/test_factor_evidence_resampling.py tests/integration/test_factor_evidence_cli.py tests/unit/test_factor_unit_description_core.py tests/unit/test_b1_contract.py tests/unit/test_b1_description.py tests/integration/test_b1_description_cli.py tests/unit/test_experiment_reports.py -q
+118 passed in 7.06s；退出0。
+
+python3 -m ruff check src/lei_signal/research/factor_evidence/runner.py src/lei_signal/research/factor_evidence/stability.py tests/integration/test_factor_evidence_cli.py
+All checks passed；退出0。
+
+python3 docs/experiments/raw/factor-evidence-s-closeout-retry-2026-09-17/controller-check.py
+checks=158，failures=[]；退出0。
+
+python3 scripts/check_repo_hygiene.py
+归置自检通过；退出0。
+```
+
+[执行交付](raw/factor-evidence-s-closeout-retry-2026-09-17/delivery.md)、[新字节清单](raw/factor-evidence-s-closeout-retry-2026-09-17/closeout-manifest.json)、[主控独立检查脚本](raw/factor-evidence-s-closeout-retry-2026-09-17/controller-check.py)。runner当前SHA为`2f85a2b66861d3089ab52626880fc63f8e49e4199da22266d07855f6afcbb82b`；stability为`59fe10b5086e75c9123df6bc66ea6ffa2265ffdc947df17f127143ed0e7fe9c1`。
+
+### 10.2 流程偏差与证据范围
+
+执行者快照核验实际3次，限额1次。已读首次路径错误日志及后续输出；失败重试不能自动增加预算，本轮流程违规明确保留。主控接受的是已验证的功能和证据产物，不追认超支许可，也不要求为违规重做正确产物。今后达到预算即回调，不把“修自己脚本”当例外。
+
+定向测试与回归均包含相同合成输出用例，不能把“一个测试批次定义”读作每个用例只执行一次；两份运行日志分别保留。新反号小例是报告/算术单元测试，只有四行且未按完整日期轴规范化，不是合格真实输入或独立验证资料；不能拿它证明输入校验链。真实路径只做源码及失败路由检查，没有新的真实正向运行。
+
+本轮未重算真实状态/目标或正式敏感性分析；历史run-01绑定旧协议/旧字节，新修改仅由限定测试核验。未来真实运行需要另批新协议，不重签v1.0.0、不覆盖旧产物。未改OKR，不提交git。进度总览及OKR可在后续统一同步中引用本节，不能仍把S1–S3列未完成。
+
+### 10.3 下一步
+
+停止本次执行，不派第二轮。下一项应选择新的研究问题或资料资格盘点，而非继续无边界打磨本工具。第二载体、宽度或情绪任务仍需明确范围并单独授权；本收口不自动启动它们，不宣布稳定优势、预测能力或获准交易。

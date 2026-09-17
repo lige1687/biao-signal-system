@@ -1,0 +1,17 @@
+{
+  "summary": "G1–G3限定功能与证据交付经主控独立核验接受，保留快照核验3/1超预算违规，不宣称流程完全合规。",
+  "goals": [
+    {"id":"G1","verified":true,"evidence":["实际diff：公开run_analysis拒绝real，main保留完整协议与固定装载链后调用私有函数","controller-check.py伪510300/base_dir/sha直接调用写盘前拒绝；118项新回归包含合成正例与单组例"]},
+    {"id":"G2","verified":true,"evidence":["runner/stability固定结论改为中性说明，无统计变更","独立手算全期-0.05、删2020=-0.2、删2021=0.1；新增报告测试通过"]},
+    {"id":"G3","verified":true,"evidence":["repair-log §7与报告§12如实区分收集失败和行为复现","独立158项检查无失败，三份快照一致、旧冻结代码/协议/run-01/补件及121保护项核验通过","执行者三次快照日志保留；3/1预算违规已在主控报告§10.2裁断，不追认许可"]}
+  ],
+  "changed_files": ["src/lei_signal/research/factor_evidence/runner.py","src/lei_signal/research/factor_evidence/stability.py","tests/integration/test_factor_evidence_cli.py","docs/research/factor-evidence-reliability-usage.md","docs/experiments/factor-evidence-reliability-v1-2026-09-16.md","docs/experiments/raw/factor-evidence-reliability-v1-2026-09-16/repair-r1-r4/repair-log.md","docs/experiments/raw/factor-evidence-s-closeout-retry-2026-09-17/"],
+  "verification": [
+    {"command":"主控报告§10.1九文件python3 -m pytest命令","result":"118 passed in 7.06s，exit 0"},
+    {"command":"python3 -m ruff check src/lei_signal/research/factor_evidence/runner.py src/lei_signal/research/factor_evidence/stability.py tests/integration/test_factor_evidence_cli.py","result":"All checks passed，exit 0"},
+    {"command":"python3 docs/experiments/raw/factor-evidence-s-closeout-retry-2026-09-17/controller-check.py","result":"158 checks, failures=[], exit 0"},
+    {"command":"python3 scripts/check_repo_hygiene.py","result":"passed，exit 0"}
+  ],
+  "limitations": ["快照核验3/1超预算违规保留，功能接受不等于流程合规","反号四行例仅验证模板与算术，非完整合法日期轴输入","未真实正向重跑，新代码未与旧协议重签绑定","无预测有效性、交易授权或OKR完成结论"],
+  "pending_actions": ["后续真实运行、新载体及宽度等新任务另行授权","后续统一同步进度总览与OKR，本轮未写OKR"]
+}
