@@ -591,3 +591,5 @@
 
 - [Agent采用候选最终独立复验（2026-09-17）](agent-runtime-adoption-final-review-2026-09-17.md)：候选与采用工具准备通过，未部署。
 - [异常恢复保护（2026-09-17）](agent-adoption-recovery-protection-2026-09-17.md)：后续编辑与损坏备份保护，独立六场景通过。
+
+- [跨标的名称主控复验](agent-glm-symbol-controller-2026-09-18.md)：S1独立61项通过，未部署。

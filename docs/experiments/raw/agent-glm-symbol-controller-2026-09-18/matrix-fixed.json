@@ -1,0 +1,2906 @@
+{
+  "meta": {
+    "mode": "fixed",
+    "workspace": "/Users/yongbiaoli/lei-agent-runtime-adoption-20260917",
+    "lei_signal_from": "/Users/yongbiaoli/lei-agent-runtime-adoption-20260917/src/lei_signal/__init__.py",
+    "workspace_head": "见同名报告/raw",
+    "isolated": "audit 护栏硬隔离（网络/DNS、沙箱外写入、真实 .env、真实业务库、非临时SQLite）；合成行情桩 + 双路模型桩 + 一次性临时库 + cwd 独立；无真实模型/行情/真实库",
+    "run_cwd": "/Users/yongbiaoli/lei-agent-runtime-adoption-20260917/docs/experiments/raw/agent-glm-symbol-controller-2026-09-18/isolated-cwd",
+    "tmp_root": "/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/symbol-binding-fix-20260918-xtq0dp0z",
+    "generated_at": "2026-09-18T01:05:20",
+    "elapsed_s": 0.8
+  },
+  "llm_prompt_materials": [
+    {
+      "via": "stream:_request_completion_stream",
+      "context_kind": null,
+      "display_name": "通信ETF",
+      "ctx_symbol": "515880.SS",
+      "facts_symbol": "515880.SS"
+    },
+    {
+      "via": "stream:_request_completion_stream",
+      "context_kind": null,
+      "display_name": "通信ETF",
+      "ctx_symbol": "515880.SS",
+      "facts_symbol": "515880.SS"
+    },
+    {
+      "via": "stream:_request_completion_stream",
+      "context_kind": null,
+      "display_name": "沪深300",
+      "ctx_symbol": "000300.SS",
+      "facts_symbol": "000300.SS"
+    },
+    {
+      "via": "stream:_request_completion_stream",
+      "context_kind": null,
+      "display_name": "沪深300",
+      "ctx_symbol": "000300.SS",
+      "facts_symbol": "000300.SS"
+    },
+    {
+      "via": "stream:_request_completion_stream",
+      "context_kind": null,
+      "display_name": "通信ETF",
+      "ctx_symbol": "515880.SS",
+      "facts_symbol": "515880.SS"
+    },
+    {
+      "via": "stream:_request_completion_stream",
+      "context_kind": "global",
+      "display_name": null,
+      "ctx_symbol": null,
+      "facts_symbol": null
+    },
+    {
+      "via": "stream:_request_completion_stream",
+      "context_kind": "global",
+      "display_name": null,
+      "ctx_symbol": null,
+      "facts_symbol": null
+    },
+    {
+      "via": "nonstream:_llm_call",
+      "context_kind": null,
+      "display_name": "通信ETF",
+      "ctx_symbol": "515880.SS",
+      "facts_symbol": "515880.SS"
+    },
+    {
+      "via": "nonstream:_llm_call",
+      "context_kind": null,
+      "display_name": "上证指数",
+      "ctx_symbol": "000001.SS",
+      "facts_symbol": "000001.SS"
+    },
+    {
+      "via": "nonstream:_llm_call",
+      "context_kind": null,
+      "display_name": "科创50",
+      "ctx_symbol": "000688.SS",
+      "facts_symbol": "000688.SS"
+    },
+    {
+      "via": "nonstream:_llm_call",
+      "context_kind": "global",
+      "display_name": null,
+      "ctx_symbol": null,
+      "facts_symbol": null
+    },
+    {
+      "via": "nonstream:_llm_call",
+      "context_kind": null,
+      "display_name": "通信ETF",
+      "ctx_symbol": "515880.SS",
+      "facts_symbol": "515880.SS"
+    }
+  ],
+  "cases": {
+    "case1_515880_to_hs300_stream": {
+      "q1": {
+        "route": "POST /api/agent/chat/stream",
+        "http_status": 200,
+        "request": {
+          "message": "515880 现在有哪些系统定义的买点？",
+          "selected": "515880.SS"
+        },
+        "prepared": {
+          "session_id": "sess_9fffd86b0597",
+          "resolved_symbol": "515880.SS",
+          "quick_card": {
+            "symbol": "515880.SS",
+            "display_name": "通信ETF",
+            "as_of": "2024-04-22",
+            "close": 139.5,
+            "color_cn": "绿色",
+            "stage_cn": "无线索",
+            "risk_cn": "正常",
+            "levels": [],
+            "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+          },
+          "evidence_card": {
+            "facts": {
+              "symbol": "515880.SS",
+              "display_name": "通信ETF",
+              "as_of": "2024-04-22",
+              "verdict_cn": "当前无机会",
+              "buy_point_candidate_n": 0
+            },
+            "history_and_scope": {
+              "winrate_evidence": {
+                "schema_version": "provenance/1.2",
+                "id": "module_winrate:515880.SS",
+                "source_path": "docs/experiments/module_winrate.json",
+                "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+                "source_version": "1",
+                "status": "unverified",
+                "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+                "statistic_kind": "trade_r_stats",
+                "strategy_scope": [
+                  "technical_execution"
+                ],
+                "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+                "compatibility": "unknown",
+                "evidence_id": "module_winrate:515880.SS",
+                "source": "docs/experiments/module_winrate.json",
+                "strategies": [
+                  "technical_execution"
+                ],
+                "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+              },
+              "comparison_config": {
+                "symbol": "515880.SS",
+                "module": {
+                  "value": "A",
+                  "source": "engine_default"
+                },
+                "exit_variant": {
+                  "value": "a6_1_costbasis",
+                  "source": "engine_default"
+                },
+                "entry_variant": {
+                  "value": null,
+                  "source": "engine_default"
+                },
+                "rr_min": {
+                  "value": 3.0,
+                  "source": "engine_default"
+                },
+                "fee_label": {
+                  "value": "standard",
+                  "source": "engine_default"
+                },
+                "ruleset_sha256": {
+                  "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+                  "source": "current_active_ledger"
+                },
+                "window": null,
+                "window_state": "unverified",
+                "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+              },
+              "matched_runs": [],
+              "supporting_runs": [],
+              "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+            },
+            "explanations": {
+              "kinds": [
+                "news",
+                "major_events",
+                "sentiment",
+                "experience"
+              ],
+              "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+            },
+            "pending_conditions": []
+          },
+          "next_steps": [
+            {
+              "kind": "expand_evidence",
+              "label_cn": "查看依据详情"
+            },
+            {
+              "kind": "prepare_backtest",
+              "label_cn": "准备补测",
+              "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+            }
+          ]
+        },
+        "done": {
+          "session_id": "sess_9fffd86b0597",
+          "resolved_symbol": "515880.SS",
+          "grounded": true,
+          "question_id": 1,
+          "evidence_card": {
+            "facts": {
+              "symbol": "515880.SS",
+              "display_name": "通信ETF",
+              "as_of": "2024-04-22",
+              "verdict_cn": "当前无机会",
+              "buy_point_candidate_n": 0
+            },
+            "history_and_scope": {
+              "winrate_evidence": {
+                "schema_version": "provenance/1.2",
+                "id": "module_winrate:515880.SS",
+                "source_path": "docs/experiments/module_winrate.json",
+                "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+                "source_version": "1",
+                "status": "unverified",
+                "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+                "statistic_kind": "trade_r_stats",
+                "strategy_scope": [
+                  "technical_execution"
+                ],
+                "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+                "compatibility": "unknown",
+                "evidence_id": "module_winrate:515880.SS",
+                "source": "docs/experiments/module_winrate.json",
+                "strategies": [
+                  "technical_execution"
+                ],
+                "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+              },
+              "comparison_config": {
+                "symbol": "515880.SS",
+                "module": {
+                  "value": "A",
+                  "source": "engine_default"
+                },
+                "exit_variant": {
+                  "value": "a6_1_costbasis",
+                  "source": "engine_default"
+                },
+                "entry_variant": {
+                  "value": null,
+                  "source": "engine_default"
+                },
+                "rr_min": {
+                  "value": 3.0,
+                  "source": "engine_default"
+                },
+                "fee_label": {
+                  "value": "standard",
+                  "source": "engine_default"
+                },
+                "ruleset_sha256": {
+                  "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+                  "source": "current_active_ledger"
+                },
+                "window": null,
+                "window_state": "unverified",
+                "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+              },
+              "matched_runs": [],
+              "supporting_runs": [],
+              "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+            },
+            "explanations": {
+              "kinds": [
+                "news",
+                "major_events",
+                "sentiment",
+                "experience"
+              ],
+              "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+            },
+            "pending_conditions": []
+          },
+          "plan_artifact": null,
+          "answer_state": "answered",
+          "next_steps": [
+            {
+              "kind": "expand_evidence",
+              "label_cn": "查看依据详情"
+            },
+            {
+              "kind": "prepare_backtest",
+              "label_cn": "准备补测",
+              "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+            }
+          ],
+          "timing_ms": {
+            "total_ms": 221,
+            "marks_ms": {
+              "received": 0,
+              "identity": 55,
+              "prep_resolve": 63,
+              "prep_analysis": 142,
+              "prep_review": 149,
+              "prep_plans": 149,
+              "prep_news": 194,
+              "prep_extras": 195,
+              "prep_context": 200,
+              "prep_sentiment_winrate": 201,
+              "prep_evidence": 206,
+              "prep_done": 212,
+              "prepared": 213,
+              "material_sent": 213,
+              "question_saved": 215,
+              "first_token": 215,
+              "llm_end": 218,
+              "answer_saved": 221
+            },
+            "spans_ms": {}
+          },
+          "quick_card": {
+            "symbol": "515880.SS",
+            "display_name": "通信ETF",
+            "as_of": "2024-04-22",
+            "close": 139.5,
+            "color_cn": "绿色",
+            "stage_cn": "无线索",
+            "risk_cn": "正常",
+            "levels": [],
+            "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+          }
+        },
+        "events": [
+          {
+            "event": "stage",
+            "resolved_symbol": null,
+            "evidence_facts_symbol": null,
+            "quick_card_symbol": null,
+            "answer_state": null,
+            "verify_note": null,
+            "reply_head": null,
+            "session_id": null,
+            "payload_keys": [
+              "key",
+              "text"
+            ]
+          },
+          {
+            "event": "stage",
+            "resolved_symbol": null,
+            "evidence_facts_symbol": null,
+            "quick_card_symbol": null,
+            "answer_state": null,
+            "verify_note": null,
+            "reply_head": null,
+            "session_id": null,
+            "payload_keys": [
+              "key",
+              "text"
+            ]
+          },
+          {
+            "event": "stage",
+            "resolved_symbol": null,
+            "evidence_facts_symbol": null,
+            "quick_card_symbol": null,
+            "answer_state": null,
+            "verify_note": null,
+            "reply_head": null,
+            "session_id": null,
+            "payload_keys": [
+              "key",
+              "text"
+            ]
+          },
+          {
+            "event": "stage",
+            "resolved_symbol": null,
+            "evidence_facts_symbol": null,
+            "quick_card_symbol": null,
+            "answer_state": null,
+            "verify_note": null,
+            "reply_head": null,
+            "session_id": null,
+            "payload_keys": [
+              "key",
+              "text"
+            ]
+          },
+          {
+            "event": "prepared",
+            "resolved_symbol": "515880.SS",
+            "evidence_facts_symbol": "515880.SS",
+            "quick_card_symbol": "515880.SS",
+            "answer_state": null,
+            "verify_note": null,
+            "reply_head": null,
+            "session_id": "sess_9fffd86b0597",
+            "payload_keys": [
+              "evidence_card",
+              "next_steps",
+              "quick_card",
+              "resolved_symbol",
+              "session_id"
+            ]
+          },
+          {
+            "event": "stage",
+            "resolved_symbol": null,
+            "evidence_facts_symbol": null,
+            "quick_card_symbol": null,
+            "answer_state": null,
+            "verify_note": null,
+            "reply_head": null,
+            "session_id": null,
+            "payload_keys": [
+              "key",
+              "text"
+            ]
+          },
+          {
+            "event": "token",
+            "resolved_symbol": null,
+            "evidence_facts_symbol": null,
+            "quick_card_symbol": null,
+            "answer_state": null,
+            "verify_note": null,
+            "reply_head": null,
+            "session_id": null,
+            "payload_keys": [
+              "t"
+            ]
+          },
+          {
+            "event": "token",
+            "resolved_symbol": null,
+            "evidence_facts_symbol": null,
+            "quick_card_symbol": null,
+            "answer_state": null,
+            "verify_note": null,
+            "reply_head": null,
+            "session_id": null,
+            "payload_keys": [
+              "t"
+            ]
+          },
+          {
+            "event": "done",
+            "resolved_symbol": "515880.SS",
+            "evidence_facts_symbol": "515880.SS",
+            "quick_card_symbol": "515880.SS",
+            "answer_state": "answered",
+            "verify_note": null,
+            "reply_head": null,
+            "session_id": "sess_9fffd86b0597",
+            "payload_keys": [
+              "answer_state",
+              "evidence_card",
+              "grounded",
+              "next_steps",
+              "plan_artifact",
+              "question_id",
+              "quick_card",
+              "resolved_symbol",
+              "session_id"
+            ]
+          }
+        ]
+      },
+      "q2": {
+        "route": "POST /api/agent/chat/stream",
+        "http_status": 200,
+        "request": {
+          "message": "沪深300 现在有哪些系统定义的买点？",
+          "selected": "515880.SS"
+        },
+        "prepared": {
+          "session_id": "sess_9fffd86b0597",
+          "resolved_symbol": "000300.SS",
+          "quick_card": {
+            "symbol": "000300.SS",
+            "display_name": "沪深300",
+            "as_of": "2024-04-22",
+            "close": 139.5,
+            "color_cn": "绿色",
+            "stage_cn": "无线索",
+            "risk_cn": "正常",
+            "levels": [],
+            "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+          },
+          "evidence_card": {
+            "facts": {
+              "symbol": "000300.SS",
+              "display_name": "沪深300",
+              "as_of": "2024-04-22",
+              "verdict_cn": "当前无机会",
+              "buy_point_candidate_n": 0
+            },
+            "history_and_scope": {
+              "winrate_evidence": {
+                "schema_version": "provenance/1.2",
+                "id": "module_winrate:000300.SS",
+                "source_path": "docs/experiments/module_winrate.json",
+                "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+                "source_version": "1",
+                "status": "unverified",
+                "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+                "statistic_kind": "trade_r_stats",
+                "strategy_scope": [
+                  "technical_execution"
+                ],
+                "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+                "compatibility": "unknown",
+                "evidence_id": "module_winrate:000300.SS",
+                "source": "docs/experiments/module_winrate.json",
+                "strategies": [
+                  "technical_execution"
+                ],
+                "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+              },
+              "comparison_config": {
+                "symbol": "000300.SS",
+                "module": {
+                  "value": "A",
+                  "source": "engine_default"
+                },
+                "exit_variant": {
+                  "value": "a6_1_costbasis",
+                  "source": "engine_default"
+                },
+                "entry_variant": {
+                  "value": null,
+                  "source": "engine_default"
+                },
+                "rr_min": {
+                  "value": 3.0,
+                  "source": "engine_default"
+                },
+                "fee_label": {
+                  "value": "standard",
+                  "source": "engine_default"
+                },
+                "ruleset_sha256": {
+                  "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+                  "source": "current_active_ledger"
+                },
+                "window": null,
+                "window_state": "unverified",
+                "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+              },
+              "matched_runs": [],
+              "supporting_runs": [],
+              "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+            },
+            "explanations": {
+              "kinds": [
+                "news",
+                "major_events",
+                "sentiment",
+                "experience"
+              ],
+              "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+            },
+            "pending_conditions": []
+          },
+          "next_steps": [
+            {
+              "kind": "expand_evidence",
+              "label_cn": "查看依据详情"
+            },
+            {
+              "kind": "prepare_backtest",
+              "label_cn": "准备补测",
+              "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+            }
+          ]
+        },
+        "done": {
+          "session_id": "sess_9fffd86b0597",
+          "resolved_symbol": "000300.SS",
+          "grounded": true,
+          "question_id": 5,
+          "evidence_card": {
+            "facts": {
+              "symbol": "000300.SS",
+              "display_name": "沪深300",
+              "as_of": "2024-04-22",
+              "verdict_cn": "当前无机会",
+              "buy_point_candidate_n": 0
+            },
+            "history_and_scope": {
+              "winrate_evidence": {
+                "schema_version": "provenance/1.2",
+                "id": "module_winrate:000300.SS",
+                "source_path": "docs/experiments/module_winrate.json",
+                "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+                "source_version": "1",
+                "status": "unverified",
+                "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+                "statistic_kind": "trade_r_stats",
+                "strategy_scope": [
+                  "technical_execution"
+                ],
+                "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+                "compatibility": "unknown",
+                "evidence_id": "module_winrate:000300.SS",
+                "source": "docs/experiments/module_winrate.json",
+                "strategies": [
+                  "technical_execution"
+                ],
+                "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+              },
+              "comparison_config": {
+                "symbol": "000300.SS",
+                "module": {
+                  "value": "A",
+                  "source": "engine_default"
+                },
+                "exit_variant": {
+                  "value": "a6_1_costbasis",
+                  "source": "engine_default"
+                },
+                "entry_variant": {
+                  "value": null,
+                  "source": "engine_default"
+                },
+                "rr_min": {
+                  "value": 3.0,
+                  "source": "engine_default"
+                },
+                "fee_label": {
+                  "value": "standard",
+                  "source": "engine_default"
+                },
+                "ruleset_sha256": {
+                  "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+                  "source": "current_active_ledger"
+                },
+                "window": null,
+                "window_state": "unverified",
+                "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+              },
+              "matched_runs": [],
+              "supporting_runs": [],
+              "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+            },
+            "explanations": {
+              "kinds": [
+                "news",
+                "major_events",
+                "sentiment",
+                "experience"
+              ],
+              "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+            },
+            "pending_conditions": []
+          },
+          "plan_artifact": null,
+          "answer_state": "answered",
+          "next_steps": [
+            {
+              "kind": "expand_evidence",
+              "label_cn": "查看依据详情"
+            },
+            {
+              "kind": "prepare_backtest",
+              "label_cn": "准备补测",
+              "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+            }
+          ],
+          "timing_ms": {
+            "total_ms": 80,
+            "marks_ms": {
+              "received": 0,
+              "identity": 1,
+              "prep_resolve": 2,
+              "prep_analysis": 57,
+              "prep_review": 62,
+              "prep_plans": 62,
+              "prep_news": 65,
+              "prep_extras": 65,
+              "prep_context": 67,
+              "prep_sentiment_winrate": 67,
+              "prep_evidence": 67,
+              "prep_done": 72,
+              "prepared": 72,
+              "material_sent": 73,
+              "question_saved": 74,
+              "first_token": 75,
+              "llm_end": 78,
+              "answer_saved": 80
+            },
+            "spans_ms": {}
+          },
+          "quick_card": {
+            "symbol": "000300.SS",
+            "display_name": "沪深300",
+            "as_of": "2024-04-22",
+            "close": 139.5,
+            "color_cn": "绿色",
+            "stage_cn": "无线索",
+            "risk_cn": "正常",
+            "levels": [],
+            "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+          }
+        },
+        "events": [
+          {
+            "event": "stage",
+            "resolved_symbol": null,
+            "evidence_facts_symbol": null,
+            "quick_card_symbol": null,
+            "answer_state": null,
+            "verify_note": null,
+            "reply_head": null,
+            "session_id": null,
+            "payload_keys": [
+              "key",
+              "text"
+            ]
+          },
+          {
+            "event": "stage",
+            "resolved_symbol": null,
+            "evidence_facts_symbol": null,
+            "quick_card_symbol": null,
+            "answer_state": null,
+            "verify_note": null,
+            "reply_head": null,
+            "session_id": null,
+            "payload_keys": [
+              "key",
+              "text"
+            ]
+          },
+          {
+            "event": "stage",
+            "resolved_symbol": null,
+            "evidence_facts_symbol": null,
+            "quick_card_symbol": null,
+            "answer_state": null,
+            "verify_note": null,
+            "reply_head": null,
+            "session_id": null,
+            "payload_keys": [
+              "key",
+              "text"
+            ]
+          },
+          {
+            "event": "stage",
+            "resolved_symbol": null,
+            "evidence_facts_symbol": null,
+            "quick_card_symbol": null,
+            "answer_state": null,
+            "verify_note": null,
+            "reply_head": null,
+            "session_id": null,
+            "payload_keys": [
+              "key",
+              "text"
+            ]
+          },
+          {
+            "event": "prepared",
+            "resolved_symbol": "000300.SS",
+            "evidence_facts_symbol": "000300.SS",
+            "quick_card_symbol": "000300.SS",
+            "answer_state": null,
+            "verify_note": null,
+            "reply_head": null,
+            "session_id": "sess_9fffd86b0597",
+            "payload_keys": [
+              "evidence_card",
+              "next_steps",
+              "quick_card",
+              "resolved_symbol",
+              "session_id"
+            ]
+          },
+          {
+            "event": "stage",
+            "resolved_symbol": null,
+            "evidence_facts_symbol": null,
+            "quick_card_symbol": null,
+            "answer_state": null,
+            "verify_note": null,
+            "reply_head": null,
+            "session_id": null,
+            "payload_keys": [
+              "key",
+              "text"
+            ]
+          },
+          {
+            "event": "token",
+            "resolved_symbol": null,
+            "evidence_facts_symbol": null,
+            "quick_card_symbol": null,
+            "answer_state": null,
+            "verify_note": null,
+            "reply_head": null,
+            "session_id": null,
+            "payload_keys": [
+              "t"
+            ]
+          },
+          {
+            "event": "token",
+            "resolved_symbol": null,
+            "evidence_facts_symbol": null,
+            "quick_card_symbol": null,
+            "answer_state": null,
+            "verify_note": null,
+            "reply_head": null,
+            "session_id": null,
+            "payload_keys": [
+              "t"
+            ]
+          },
+          {
+            "event": "done",
+            "resolved_symbol": "000300.SS",
+            "evidence_facts_symbol": "000300.SS",
+            "quick_card_symbol": "000300.SS",
+            "answer_state": "answered",
+            "verify_note": null,
+            "reply_head": null,
+            "session_id": "sess_9fffd86b0597",
+            "payload_keys": [
+              "answer_state",
+              "evidence_card",
+              "grounded",
+              "next_steps",
+              "plan_artifact",
+              "question_id",
+              "quick_card",
+              "resolved_symbol",
+              "session_id"
+            ]
+          }
+        ]
+      }
+    },
+    "case3_explicit_000300_stream_selected_stale": {
+      "route": "POST /api/agent/chat/stream",
+      "http_status": 200,
+      "request": {
+        "message": "000300.SS 现在的买点结构到哪一步了",
+        "selected": "515880.SS"
+      },
+      "prepared": {
+        "session_id": "sess_9fffd86b0597",
+        "resolved_symbol": "000300.SS",
+        "quick_card": {
+          "symbol": "000300.SS",
+          "display_name": "沪深300",
+          "as_of": "2024-04-22",
+          "close": 139.5,
+          "color_cn": "绿色",
+          "stage_cn": "无线索",
+          "risk_cn": "正常",
+          "levels": [],
+          "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+        },
+        "evidence_card": {
+          "facts": {
+            "symbol": "000300.SS",
+            "display_name": "沪深300",
+            "as_of": "2024-04-22",
+            "verdict_cn": "当前无机会",
+            "buy_point_candidate_n": 0
+          },
+          "history_and_scope": {
+            "winrate_evidence": {
+              "schema_version": "provenance/1.2",
+              "id": "module_winrate:000300.SS",
+              "source_path": "docs/experiments/module_winrate.json",
+              "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+              "source_version": "1",
+              "status": "unverified",
+              "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+              "statistic_kind": "trade_r_stats",
+              "strategy_scope": [
+                "technical_execution"
+              ],
+              "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+              "compatibility": "unknown",
+              "evidence_id": "module_winrate:000300.SS",
+              "source": "docs/experiments/module_winrate.json",
+              "strategies": [
+                "technical_execution"
+              ],
+              "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+            },
+            "comparison_config": {
+              "symbol": "000300.SS",
+              "module": {
+                "value": "A",
+                "source": "engine_default"
+              },
+              "exit_variant": {
+                "value": "a6_1_costbasis",
+                "source": "engine_default"
+              },
+              "entry_variant": {
+                "value": null,
+                "source": "engine_default"
+              },
+              "rr_min": {
+                "value": 3.0,
+                "source": "engine_default"
+              },
+              "fee_label": {
+                "value": "standard",
+                "source": "engine_default"
+              },
+              "ruleset_sha256": {
+                "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+                "source": "current_active_ledger"
+              },
+              "window": null,
+              "window_state": "unverified",
+              "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+            },
+            "matched_runs": [],
+            "supporting_runs": [],
+            "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+          },
+          "explanations": {
+            "kinds": [
+              "news",
+              "major_events",
+              "sentiment",
+              "experience"
+            ],
+            "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+          },
+          "pending_conditions": []
+        },
+        "next_steps": [
+          {
+            "kind": "expand_evidence",
+            "label_cn": "查看依据详情"
+          },
+          {
+            "kind": "prepare_backtest",
+            "label_cn": "准备补测",
+            "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+          }
+        ]
+      },
+      "done": {
+        "session_id": "sess_9fffd86b0597",
+        "resolved_symbol": "000300.SS",
+        "grounded": true,
+        "question_id": 7,
+        "evidence_card": {
+          "facts": {
+            "symbol": "000300.SS",
+            "display_name": "沪深300",
+            "as_of": "2024-04-22",
+            "verdict_cn": "当前无机会",
+            "buy_point_candidate_n": 0
+          },
+          "history_and_scope": {
+            "winrate_evidence": {
+              "schema_version": "provenance/1.2",
+              "id": "module_winrate:000300.SS",
+              "source_path": "docs/experiments/module_winrate.json",
+              "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+              "source_version": "1",
+              "status": "unverified",
+              "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+              "statistic_kind": "trade_r_stats",
+              "strategy_scope": [
+                "technical_execution"
+              ],
+              "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+              "compatibility": "unknown",
+              "evidence_id": "module_winrate:000300.SS",
+              "source": "docs/experiments/module_winrate.json",
+              "strategies": [
+                "technical_execution"
+              ],
+              "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+            },
+            "comparison_config": {
+              "symbol": "000300.SS",
+              "module": {
+                "value": "A",
+                "source": "engine_default"
+              },
+              "exit_variant": {
+                "value": "a6_1_costbasis",
+                "source": "engine_default"
+              },
+              "entry_variant": {
+                "value": null,
+                "source": "engine_default"
+              },
+              "rr_min": {
+                "value": 3.0,
+                "source": "engine_default"
+              },
+              "fee_label": {
+                "value": "standard",
+                "source": "engine_default"
+              },
+              "ruleset_sha256": {
+                "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+                "source": "current_active_ledger"
+              },
+              "window": null,
+              "window_state": "unverified",
+              "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+            },
+            "matched_runs": [],
+            "supporting_runs": [],
+            "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+          },
+          "explanations": {
+            "kinds": [
+              "news",
+              "major_events",
+              "sentiment",
+              "experience"
+            ],
+            "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+          },
+          "pending_conditions": []
+        },
+        "plan_artifact": null,
+        "answer_state": "answered",
+        "next_steps": [
+          {
+            "kind": "expand_evidence",
+            "label_cn": "查看依据详情"
+          },
+          {
+            "kind": "prepare_backtest",
+            "label_cn": "准备补测",
+            "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+          }
+        ],
+        "timing_ms": {
+          "total_ms": 25,
+          "marks_ms": {
+            "received": 0,
+            "identity": 1,
+            "prep_resolve": 2,
+            "prep_analysis": 2,
+            "prep_review": 8,
+            "prep_plans": 8,
+            "prep_news": 10,
+            "prep_extras": 10,
+            "prep_context": 12,
+            "prep_sentiment_winrate": 12,
+            "prep_evidence": 13,
+            "prep_done": 18,
+            "prepared": 18,
+            "material_sent": 18,
+            "question_saved": 20,
+            "first_token": 20,
+            "llm_end": 23,
+            "answer_saved": 25
+          },
+          "spans_ms": {}
+        },
+        "quick_card": {
+          "symbol": "000300.SS",
+          "display_name": "沪深300",
+          "as_of": "2024-04-22",
+          "close": 139.5,
+          "color_cn": "绿色",
+          "stage_cn": "无线索",
+          "risk_cn": "正常",
+          "levels": [],
+          "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+        }
+      },
+      "events": [
+        {
+          "event": "stage",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "key",
+            "text"
+          ]
+        },
+        {
+          "event": "stage",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "key",
+            "text"
+          ]
+        },
+        {
+          "event": "stage",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "key",
+            "text"
+          ]
+        },
+        {
+          "event": "stage",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "key",
+            "text"
+          ]
+        },
+        {
+          "event": "prepared",
+          "resolved_symbol": "000300.SS",
+          "evidence_facts_symbol": "000300.SS",
+          "quick_card_symbol": "000300.SS",
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": "sess_9fffd86b0597",
+          "payload_keys": [
+            "evidence_card",
+            "next_steps",
+            "quick_card",
+            "resolved_symbol",
+            "session_id"
+          ]
+        },
+        {
+          "event": "stage",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "key",
+            "text"
+          ]
+        },
+        {
+          "event": "token",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "t"
+          ]
+        },
+        {
+          "event": "token",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "t"
+          ]
+        },
+        {
+          "event": "done",
+          "resolved_symbol": "000300.SS",
+          "evidence_facts_symbol": "000300.SS",
+          "quick_card_symbol": "000300.SS",
+          "answer_state": "answered",
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": "sess_9fffd86b0597",
+          "payload_keys": [
+            "answer_state",
+            "evidence_card",
+            "grounded",
+            "next_steps",
+            "plan_artifact",
+            "question_id",
+            "quick_card",
+            "resolved_symbol",
+            "session_id"
+          ]
+        }
+      ]
+    },
+    "case4_followup_invalidation_stream": {
+      "route": "POST /api/agent/chat/stream",
+      "http_status": 200,
+      "request": {
+        "message": "那失效位呢",
+        "selected": "515880.SS"
+      },
+      "prepared": {
+        "session_id": "sess_9fffd86b0597",
+        "resolved_symbol": "515880.SS",
+        "quick_card": {
+          "symbol": "515880.SS",
+          "display_name": "通信ETF",
+          "as_of": "2024-04-22",
+          "close": 139.5,
+          "color_cn": "绿色",
+          "stage_cn": "无线索",
+          "risk_cn": "正常",
+          "levels": [],
+          "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+        },
+        "evidence_card": {
+          "facts": {
+            "symbol": "515880.SS",
+            "display_name": "通信ETF",
+            "as_of": "2024-04-22",
+            "verdict_cn": "当前无机会",
+            "buy_point_candidate_n": 0
+          },
+          "history_and_scope": {
+            "winrate_evidence": {
+              "schema_version": "provenance/1.2",
+              "id": "module_winrate:515880.SS",
+              "source_path": "docs/experiments/module_winrate.json",
+              "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+              "source_version": "1",
+              "status": "unverified",
+              "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+              "statistic_kind": "trade_r_stats",
+              "strategy_scope": [
+                "technical_execution"
+              ],
+              "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+              "compatibility": "unknown",
+              "evidence_id": "module_winrate:515880.SS",
+              "source": "docs/experiments/module_winrate.json",
+              "strategies": [
+                "technical_execution"
+              ],
+              "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+            },
+            "comparison_config": {
+              "symbol": "515880.SS",
+              "module": {
+                "value": "A",
+                "source": "engine_default"
+              },
+              "exit_variant": {
+                "value": "a6_1_costbasis",
+                "source": "engine_default"
+              },
+              "entry_variant": {
+                "value": null,
+                "source": "engine_default"
+              },
+              "rr_min": {
+                "value": 3.0,
+                "source": "engine_default"
+              },
+              "fee_label": {
+                "value": "standard",
+                "source": "engine_default"
+              },
+              "ruleset_sha256": {
+                "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+                "source": "current_active_ledger"
+              },
+              "window": null,
+              "window_state": "unverified",
+              "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+            },
+            "matched_runs": [],
+            "supporting_runs": [],
+            "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+          },
+          "explanations": {
+            "kinds": [
+              "news",
+              "major_events",
+              "sentiment",
+              "experience"
+            ],
+            "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+          },
+          "pending_conditions": []
+        },
+        "next_steps": [
+          {
+            "kind": "expand_evidence",
+            "label_cn": "查看依据详情"
+          },
+          {
+            "kind": "prepare_backtest",
+            "label_cn": "准备补测",
+            "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+          }
+        ]
+      },
+      "done": {
+        "session_id": "sess_9fffd86b0597",
+        "resolved_symbol": "515880.SS",
+        "grounded": true,
+        "question_id": 3,
+        "evidence_card": {
+          "facts": {
+            "symbol": "515880.SS",
+            "display_name": "通信ETF",
+            "as_of": "2024-04-22",
+            "verdict_cn": "当前无机会",
+            "buy_point_candidate_n": 0
+          },
+          "history_and_scope": {
+            "winrate_evidence": {
+              "schema_version": "provenance/1.2",
+              "id": "module_winrate:515880.SS",
+              "source_path": "docs/experiments/module_winrate.json",
+              "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+              "source_version": "1",
+              "status": "unverified",
+              "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+              "statistic_kind": "trade_r_stats",
+              "strategy_scope": [
+                "technical_execution"
+              ],
+              "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+              "compatibility": "unknown",
+              "evidence_id": "module_winrate:515880.SS",
+              "source": "docs/experiments/module_winrate.json",
+              "strategies": [
+                "technical_execution"
+              ],
+              "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+            },
+            "comparison_config": {
+              "symbol": "515880.SS",
+              "module": {
+                "value": "A",
+                "source": "engine_default"
+              },
+              "exit_variant": {
+                "value": "a6_1_costbasis",
+                "source": "engine_default"
+              },
+              "entry_variant": {
+                "value": null,
+                "source": "engine_default"
+              },
+              "rr_min": {
+                "value": 3.0,
+                "source": "engine_default"
+              },
+              "fee_label": {
+                "value": "standard",
+                "source": "engine_default"
+              },
+              "ruleset_sha256": {
+                "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+                "source": "current_active_ledger"
+              },
+              "window": null,
+              "window_state": "unverified",
+              "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+            },
+            "matched_runs": [],
+            "supporting_runs": [],
+            "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+          },
+          "explanations": {
+            "kinds": [
+              "news",
+              "major_events",
+              "sentiment",
+              "experience"
+            ],
+            "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+          },
+          "pending_conditions": []
+        },
+        "plan_artifact": null,
+        "answer_state": "answered",
+        "next_steps": [
+          {
+            "kind": "expand_evidence",
+            "label_cn": "查看依据详情"
+          },
+          {
+            "kind": "prepare_backtest",
+            "label_cn": "准备补测",
+            "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+          }
+        ],
+        "timing_ms": {
+          "total_ms": 27,
+          "marks_ms": {
+            "received": 0,
+            "identity": 1,
+            "prep_resolve": 2,
+            "prep_analysis": 2,
+            "prep_review": 9,
+            "prep_plans": 9,
+            "prep_news": 11,
+            "prep_extras": 11,
+            "prep_context": 13,
+            "prep_sentiment_winrate": 13,
+            "prep_evidence": 13,
+            "prep_done": 19,
+            "prepared": 19,
+            "material_sent": 19,
+            "question_saved": 21,
+            "first_token": 21,
+            "llm_end": 24,
+            "answer_saved": 27
+          },
+          "spans_ms": {}
+        },
+        "quick_card": {
+          "symbol": "515880.SS",
+          "display_name": "通信ETF",
+          "as_of": "2024-04-22",
+          "close": 139.5,
+          "color_cn": "绿色",
+          "stage_cn": "无线索",
+          "risk_cn": "正常",
+          "levels": [],
+          "note_cn": "价位直读系统结构（研究代理）；距离为展示层换算"
+        }
+      },
+      "events": [
+        {
+          "event": "stage",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "key",
+            "text"
+          ]
+        },
+        {
+          "event": "stage",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "key",
+            "text"
+          ]
+        },
+        {
+          "event": "stage",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "key",
+            "text"
+          ]
+        },
+        {
+          "event": "stage",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "key",
+            "text"
+          ]
+        },
+        {
+          "event": "prepared",
+          "resolved_symbol": "515880.SS",
+          "evidence_facts_symbol": "515880.SS",
+          "quick_card_symbol": "515880.SS",
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": "sess_9fffd86b0597",
+          "payload_keys": [
+            "evidence_card",
+            "next_steps",
+            "quick_card",
+            "resolved_symbol",
+            "session_id"
+          ]
+        },
+        {
+          "event": "stage",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "key",
+            "text"
+          ]
+        },
+        {
+          "event": "token",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "t"
+          ]
+        },
+        {
+          "event": "token",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "t"
+          ]
+        },
+        {
+          "event": "done",
+          "resolved_symbol": "515880.SS",
+          "evidence_facts_symbol": "515880.SS",
+          "quick_card_symbol": "515880.SS",
+          "answer_state": "answered",
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": "sess_9fffd86b0597",
+          "payload_keys": [
+            "answer_state",
+            "evidence_card",
+            "grounded",
+            "next_steps",
+            "plan_artifact",
+            "question_id",
+            "quick_card",
+            "resolved_symbol",
+            "session_id"
+          ]
+        }
+      ]
+    },
+    "case5_explicit_new_symbol_no_data": {
+      "route": "POST /api/agent/chat/stream",
+      "http_status": 200,
+      "request": {
+        "message": "000300.SS 现在的买点",
+        "selected": "515880.SS"
+      },
+      "prepared": {
+        "session_id": "sess_6c8123157ba6",
+        "resolved_symbol": null,
+        "quick_card": null,
+        "evidence_card": null,
+        "next_steps": []
+      },
+      "done": {
+        "session_id": "sess_6c8123157ba6",
+        "resolved_symbol": null,
+        "grounded": true,
+        "question_id": 3,
+        "evidence_card": null,
+        "plan_artifact": null,
+        "answer_state": "answered",
+        "next_steps": [],
+        "timing_ms": {
+          "total_ms": 12,
+          "marks_ms": {
+            "received": 0,
+            "identity": 2,
+            "prep_resolve": 3,
+            "prep_analysis": 3,
+            "prep_global_material": 5,
+            "prep_done": 5,
+            "prepared": 5,
+            "material_sent": 5,
+            "question_saved": 7,
+            "first_token": 7,
+            "llm_end": 10,
+            "answer_saved": 12
+          },
+          "spans_ms": {}
+        }
+      },
+      "events": [
+        {
+          "event": "stage",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "key",
+            "text"
+          ]
+        },
+        {
+          "event": "stage",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "key",
+            "text"
+          ]
+        },
+        {
+          "event": "stage",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "key",
+            "text"
+          ]
+        },
+        {
+          "event": "prepared",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": "sess_6c8123157ba6",
+          "payload_keys": [
+            "evidence_card",
+            "next_steps",
+            "quick_card",
+            "resolved_symbol",
+            "session_id"
+          ]
+        },
+        {
+          "event": "stage",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "key",
+            "text"
+          ]
+        },
+        {
+          "event": "token",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "t"
+          ]
+        },
+        {
+          "event": "token",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "t"
+          ]
+        },
+        {
+          "event": "done",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": "answered",
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": "sess_6c8123157ba6",
+          "payload_keys": [
+            "answer_state",
+            "evidence_card",
+            "grounded",
+            "next_steps",
+            "plan_artifact",
+            "question_id",
+            "resolved_symbol",
+            "session_id"
+          ]
+        }
+      ]
+    },
+    "case2b_sse_named_nodata_stream": {
+      "route": "POST /api/agent/chat/stream",
+      "http_status": 200,
+      "request": {
+        "message": "上证指数 现在有哪些系统定义的买点？",
+        "selected": "515880.SS"
+      },
+      "prepared": {
+        "session_id": "sess_6c8123157ba6",
+        "resolved_symbol": null,
+        "quick_card": null,
+        "evidence_card": null,
+        "next_steps": []
+      },
+      "done": {
+        "session_id": "sess_6c8123157ba6",
+        "resolved_symbol": null,
+        "grounded": true,
+        "question_id": 5,
+        "evidence_card": null,
+        "plan_artifact": null,
+        "answer_state": "answered",
+        "next_steps": [],
+        "timing_ms": {
+          "total_ms": 10,
+          "marks_ms": {
+            "received": 0,
+            "identity": 1,
+            "prep_resolve": 2,
+            "prep_analysis": 2,
+            "prep_global_material": 3,
+            "prep_done": 3,
+            "prepared": 4,
+            "material_sent": 4,
+            "question_saved": 5,
+            "first_token": 5,
+            "llm_end": 8,
+            "answer_saved": 10
+          },
+          "spans_ms": {}
+        }
+      },
+      "events": [
+        {
+          "event": "stage",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "key",
+            "text"
+          ]
+        },
+        {
+          "event": "stage",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "key",
+            "text"
+          ]
+        },
+        {
+          "event": "stage",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "key",
+            "text"
+          ]
+        },
+        {
+          "event": "prepared",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": "sess_6c8123157ba6",
+          "payload_keys": [
+            "evidence_card",
+            "next_steps",
+            "quick_card",
+            "resolved_symbol",
+            "session_id"
+          ]
+        },
+        {
+          "event": "stage",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "key",
+            "text"
+          ]
+        },
+        {
+          "event": "token",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "t"
+          ]
+        },
+        {
+          "event": "token",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": null,
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": null,
+          "payload_keys": [
+            "t"
+          ]
+        },
+        {
+          "event": "done",
+          "resolved_symbol": null,
+          "evidence_facts_symbol": null,
+          "quick_card_symbol": null,
+          "answer_state": "answered",
+          "verify_note": null,
+          "reply_head": null,
+          "session_id": "sess_6c8123157ba6",
+          "payload_keys": [
+            "answer_state",
+            "evidence_card",
+            "grounded",
+            "next_steps",
+            "plan_artifact",
+            "question_id",
+            "resolved_symbol",
+            "session_id"
+          ]
+        }
+      ]
+    },
+    "case2a_515880_to_sse_index_plain": {
+      "q1": {
+        "route": "POST /api/agent/chat",
+        "http_status": 200,
+        "request": {
+          "message": "515880 现在有哪些系统定义的买点？",
+          "selected": "515880.SS"
+        },
+        "resolved_symbol": "515880.SS",
+        "evidence_facts_symbol": "515880.SS",
+        "grounded": true,
+        "answer_state": "answered",
+        "reply_head": "首段结论。\n\n其余说明。",
+        "payload_keys": [
+          "answer_state",
+          "evidence_card",
+          "grounded",
+          "next_steps",
+          "plan_artifact",
+          "question_id",
+          "reply",
+          "resolved_symbol",
+          "session_id",
+          "trace"
+        ],
+        "session_id": "sess_72d1798ff80a",
+        "raw": {
+          "session_id": "sess_72d1798ff80a",
+          "reply": "首段结论。\n\n其余说明。",
+          "grounded": true,
+          "trace": [],
+          "resolved_symbol": "515880.SS",
+          "question_id": 9,
+          "evidence_card": {
+            "facts": {
+              "symbol": "515880.SS",
+              "display_name": "通信ETF",
+              "as_of": "2024-04-22",
+              "verdict_cn": "当前无机会",
+              "buy_point_candidate_n": 0
+            },
+            "history_and_scope": {
+              "winrate_evidence": {
+                "schema_version": "provenance/1.2",
+                "id": "module_winrate:515880.SS",
+                "source_path": "docs/experiments/module_winrate.json",
+                "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+                "source_version": "1",
+                "status": "unverified",
+                "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+                "statistic_kind": "trade_r_stats",
+                "strategy_scope": [
+                  "technical_execution"
+                ],
+                "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+                "compatibility": "unknown",
+                "evidence_id": "module_winrate:515880.SS",
+                "source": "docs/experiments/module_winrate.json",
+                "strategies": [
+                  "technical_execution"
+                ],
+                "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+              },
+              "comparison_config": {
+                "symbol": "515880.SS",
+                "module": {
+                  "value": "A",
+                  "source": "engine_default"
+                },
+                "exit_variant": {
+                  "value": "a6_1_costbasis",
+                  "source": "engine_default"
+                },
+                "entry_variant": {
+                  "value": null,
+                  "source": "engine_default"
+                },
+                "rr_min": {
+                  "value": 3.0,
+                  "source": "engine_default"
+                },
+                "fee_label": {
+                  "value": "standard",
+                  "source": "engine_default"
+                },
+                "ruleset_sha256": {
+                  "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+                  "source": "current_active_ledger"
+                },
+                "window": null,
+                "window_state": "unverified",
+                "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+              },
+              "matched_runs": [],
+              "supporting_runs": [],
+              "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+            },
+            "explanations": {
+              "kinds": [
+                "news",
+                "major_events",
+                "sentiment",
+                "experience"
+              ],
+              "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+            },
+            "pending_conditions": []
+          },
+          "plan_artifact": null,
+          "answer_state": "answered",
+          "next_steps": [
+            {
+              "kind": "expand_evidence",
+              "label_cn": "查看依据详情"
+            },
+            {
+              "kind": "prepare_backtest",
+              "label_cn": "准备补测",
+              "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+            }
+          ]
+        }
+      },
+      "q2": {
+        "route": "POST /api/agent/chat",
+        "http_status": 200,
+        "request": {
+          "message": "上证指数 现在有哪些系统定义的买点？",
+          "selected": "515880.SS"
+        },
+        "resolved_symbol": "000001.SS",
+        "evidence_facts_symbol": "000001.SS",
+        "grounded": true,
+        "answer_state": "answered",
+        "reply_head": "首段结论。\n\n其余说明。",
+        "payload_keys": [
+          "answer_state",
+          "evidence_card",
+          "grounded",
+          "next_steps",
+          "plan_artifact",
+          "question_id",
+          "reply",
+          "resolved_symbol",
+          "session_id",
+          "trace"
+        ],
+        "session_id": "sess_72d1798ff80a",
+        "raw": {
+          "session_id": "sess_72d1798ff80a",
+          "reply": "首段结论。\n\n其余说明。",
+          "grounded": true,
+          "trace": [],
+          "resolved_symbol": "000001.SS",
+          "question_id": 11,
+          "evidence_card": {
+            "facts": {
+              "symbol": "000001.SS",
+              "display_name": "上证指数",
+              "as_of": "2024-04-22",
+              "verdict_cn": "当前无机会",
+              "buy_point_candidate_n": 0
+            },
+            "history_and_scope": {
+              "winrate_evidence": {
+                "schema_version": "provenance/1.2",
+                "id": "module_winrate:000001.SS",
+                "source_path": "docs/experiments/module_winrate.json",
+                "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+                "source_version": "1",
+                "status": "unverified",
+                "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+                "statistic_kind": "trade_r_stats",
+                "strategy_scope": [
+                  "technical_execution"
+                ],
+                "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+                "compatibility": "unknown",
+                "evidence_id": "module_winrate:000001.SS",
+                "source": "docs/experiments/module_winrate.json",
+                "strategies": [
+                  "technical_execution"
+                ],
+                "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+              },
+              "comparison_config": {
+                "symbol": "000001.SS",
+                "module": {
+                  "value": "A",
+                  "source": "engine_default"
+                },
+                "exit_variant": {
+                  "value": "a6_1_costbasis",
+                  "source": "engine_default"
+                },
+                "entry_variant": {
+                  "value": null,
+                  "source": "engine_default"
+                },
+                "rr_min": {
+                  "value": 3.0,
+                  "source": "engine_default"
+                },
+                "fee_label": {
+                  "value": "standard",
+                  "source": "engine_default"
+                },
+                "ruleset_sha256": {
+                  "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+                  "source": "current_active_ledger"
+                },
+                "window": null,
+                "window_state": "unverified",
+                "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+              },
+              "matched_runs": [],
+              "supporting_runs": [],
+              "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+            },
+            "explanations": {
+              "kinds": [
+                "news",
+                "major_events",
+                "sentiment",
+                "experience"
+              ],
+              "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+            },
+            "pending_conditions": []
+          },
+          "plan_artifact": null,
+          "answer_state": "answered",
+          "next_steps": [
+            {
+              "kind": "expand_evidence",
+              "label_cn": "查看依据详情"
+            },
+            {
+              "kind": "prepare_backtest",
+              "label_cn": "准备补测",
+              "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+            }
+          ]
+        }
+      }
+    },
+    "case6_kc50_board": {
+      "route": "POST /api/agent/chat",
+      "http_status": 200,
+      "request": {
+        "message": "科创50板块现在怎么看",
+        "selected": null
+      },
+      "resolved_symbol": "000688.SS",
+      "evidence_facts_symbol": "000688.SS",
+      "grounded": true,
+      "answer_state": "answered",
+      "reply_head": "首段结论。\n\n其余说明。",
+      "payload_keys": [
+        "answer_state",
+        "evidence_card",
+        "grounded",
+        "next_steps",
+        "plan_artifact",
+        "question_id",
+        "reply",
+        "resolved_symbol",
+        "session_id",
+        "trace"
+      ],
+      "session_id": "sess_e2f32773382b",
+      "raw": {
+        "session_id": "sess_e2f32773382b",
+        "reply": "首段结论。\n\n其余说明。",
+        "grounded": true,
+        "trace": [],
+        "resolved_symbol": "000688.SS",
+        "question_id": 13,
+        "evidence_card": {
+          "facts": {
+            "symbol": "000688.SS",
+            "display_name": "科创50",
+            "as_of": "2024-04-22",
+            "verdict_cn": "当前无机会",
+            "buy_point_candidate_n": 0
+          },
+          "history_and_scope": {
+            "winrate_evidence": {
+              "schema_version": "provenance/1.2",
+              "id": "module_winrate:000688.SS",
+              "source_path": "docs/experiments/module_winrate.json",
+              "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+              "source_version": "1",
+              "status": "unverified",
+              "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+              "statistic_kind": "trade_r_stats",
+              "strategy_scope": [
+                "technical_execution"
+              ],
+              "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+              "compatibility": "unknown",
+              "evidence_id": "module_winrate:000688.SS",
+              "source": "docs/experiments/module_winrate.json",
+              "strategies": [
+                "technical_execution"
+              ],
+              "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+            },
+            "comparison_config": {
+              "symbol": "000688.SS",
+              "module": {
+                "value": "A",
+                "source": "engine_default"
+              },
+              "exit_variant": {
+                "value": "a6_1_costbasis",
+                "source": "engine_default"
+              },
+              "entry_variant": {
+                "value": null,
+                "source": "engine_default"
+              },
+              "rr_min": {
+                "value": 3.0,
+                "source": "engine_default"
+              },
+              "fee_label": {
+                "value": "standard",
+                "source": "engine_default"
+              },
+              "ruleset_sha256": {
+                "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+                "source": "current_active_ledger"
+              },
+              "window": null,
+              "window_state": "unverified",
+              "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+            },
+            "matched_runs": [],
+            "supporting_runs": [],
+            "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+          },
+          "explanations": {
+            "kinds": [
+              "news",
+              "major_events",
+              "sentiment",
+              "experience"
+            ],
+            "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+          },
+          "pending_conditions": []
+        },
+        "plan_artifact": null,
+        "answer_state": "answered",
+        "next_steps": [
+          {
+            "kind": "expand_evidence",
+            "label_cn": "查看依据详情"
+          },
+          {
+            "kind": "prepare_backtest",
+            "label_cn": "准备补测",
+            "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+          }
+        ]
+      }
+    },
+    "case7_star_market_whole": {
+      "route": "POST /api/agent/chat",
+      "http_status": 200,
+      "request": {
+        "message": "科创板整体现在怎么样",
+        "selected": null
+      },
+      "resolved_symbol": null,
+      "evidence_facts_symbol": null,
+      "grounded": true,
+      "answer_state": "answered",
+      "reply_head": "首段结论。\n\n其余说明。",
+      "payload_keys": [
+        "answer_state",
+        "evidence_card",
+        "grounded",
+        "next_steps",
+        "plan_artifact",
+        "question_id",
+        "reply",
+        "resolved_symbol",
+        "session_id",
+        "trace"
+      ],
+      "session_id": "sess_01ef32fffa89",
+      "raw": {
+        "session_id": "sess_01ef32fffa89",
+        "reply": "首段结论。\n\n其余说明。",
+        "grounded": true,
+        "trace": [],
+        "resolved_symbol": null,
+        "question_id": 15,
+        "evidence_card": null,
+        "plan_artifact": null,
+        "answer_state": "answered",
+        "next_steps": []
+      }
+    },
+    "case8_two_symbols_compare": {
+      "route": "POST /api/agent/chat",
+      "http_status": 200,
+      "request": {
+        "message": "515880 和 510300 哪个更强",
+        "selected": "515880.SS"
+      },
+      "resolved_symbol": "515880.SS",
+      "evidence_facts_symbol": "515880.SS",
+      "grounded": true,
+      "answer_state": "answered",
+      "reply_head": "首段结论。\n\n其余说明。",
+      "payload_keys": [
+        "answer_state",
+        "evidence_card",
+        "grounded",
+        "next_steps",
+        "plan_artifact",
+        "question_id",
+        "reply",
+        "resolved_symbol",
+        "session_id",
+        "trace"
+      ],
+      "session_id": "sess_362c63b46860",
+      "raw": {
+        "session_id": "sess_362c63b46860",
+        "reply": "首段结论。\n\n其余说明。",
+        "grounded": true,
+        "trace": [],
+        "resolved_symbol": "515880.SS",
+        "question_id": 17,
+        "evidence_card": {
+          "facts": {
+            "symbol": "515880.SS",
+            "display_name": "通信ETF",
+            "as_of": "2024-04-22",
+            "verdict_cn": "当前无机会",
+            "buy_point_candidate_n": 0
+          },
+          "history_and_scope": {
+            "winrate_evidence": {
+              "schema_version": "provenance/1.2",
+              "id": "module_winrate:515880.SS",
+              "source_path": "docs/experiments/module_winrate.json",
+              "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+              "source_version": "1",
+              "status": "unverified",
+              "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+              "statistic_kind": "trade_r_stats",
+              "strategy_scope": [
+                "technical_execution"
+              ],
+              "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+              "compatibility": "unknown",
+              "evidence_id": "module_winrate:515880.SS",
+              "source": "docs/experiments/module_winrate.json",
+              "strategies": [
+                "technical_execution"
+              ],
+              "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+            },
+            "comparison_config": {
+              "symbol": "515880.SS",
+              "module": {
+                "value": "A",
+                "source": "engine_default"
+              },
+              "exit_variant": {
+                "value": "a6_1_costbasis",
+                "source": "engine_default"
+              },
+              "entry_variant": {
+                "value": null,
+                "source": "engine_default"
+              },
+              "rr_min": {
+                "value": 3.0,
+                "source": "engine_default"
+              },
+              "fee_label": {
+                "value": "standard",
+                "source": "engine_default"
+              },
+              "ruleset_sha256": {
+                "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+                "source": "current_active_ledger"
+              },
+              "window": null,
+              "window_state": "unverified",
+              "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+            },
+            "matched_runs": [],
+            "supporting_runs": [],
+            "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+          },
+          "explanations": {
+            "kinds": [
+              "news",
+              "major_events",
+              "sentiment",
+              "experience"
+            ],
+            "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+          },
+          "pending_conditions": []
+        },
+        "plan_artifact": null,
+        "answer_state": "answered",
+        "next_steps": [
+          {
+            "kind": "expand_evidence",
+            "label_cn": "查看依据详情"
+          },
+          {
+            "kind": "prepare_backtest",
+            "label_cn": "准备补测",
+            "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+          }
+        ]
+      }
+    }
+  },
+  "history_session_A": [
+    {
+      "role": "user",
+      "message_id": 1,
+      "question_id": 1,
+      "resolved_symbol": null,
+      "evidence_facts_symbol": null,
+      "content_head": "515880 现在有哪些系统定义的买点？"
+    },
+    {
+      "role": "assistant",
+      "message_id": 2,
+      "question_id": 1,
+      "resolved_symbol": "515880.SS",
+      "evidence_facts_symbol": "515880.SS",
+      "content_head": "首段结论。\n\n其余说明。"
+    },
+    {
+      "role": "user",
+      "message_id": 3,
+      "question_id": 3,
+      "resolved_symbol": null,
+      "evidence_facts_symbol": null,
+      "content_head": "那失效位呢"
+    },
+    {
+      "role": "assistant",
+      "message_id": 4,
+      "question_id": 3,
+      "resolved_symbol": "515880.SS",
+      "evidence_facts_symbol": "515880.SS",
+      "content_head": "首段结论。\n\n其余说明。"
+    },
+    {
+      "role": "user",
+      "message_id": 5,
+      "question_id": 5,
+      "resolved_symbol": null,
+      "evidence_facts_symbol": null,
+      "content_head": "沪深300 现在有哪些系统定义的买点？"
+    },
+    {
+      "role": "assistant",
+      "message_id": 6,
+      "question_id": 5,
+      "resolved_symbol": "000300.SS",
+      "evidence_facts_symbol": "000300.SS",
+      "content_head": "首段结论。\n\n其余说明。"
+    },
+    {
+      "role": "user",
+      "message_id": 7,
+      "question_id": 7,
+      "resolved_symbol": null,
+      "evidence_facts_symbol": null,
+      "content_head": "000300.SS 现在的买点结构到哪一步了"
+    },
+    {
+      "role": "assistant",
+      "message_id": 8,
+      "question_id": 7,
+      "resolved_symbol": "000300.SS",
+      "evidence_facts_symbol": "000300.SS",
+      "content_head": "首段结论。\n\n其余说明。"
+    }
+  ],
+  "history_session_B": [
+    {
+      "role": "user",
+      "message_id": 1,
+      "question_id": 1,
+      "resolved_symbol": null,
+      "evidence_facts_symbol": null,
+      "content_head": "515880 现在有哪些系统定义的买点？"
+    },
+    {
+      "role": "assistant",
+      "message_id": 2,
+      "question_id": 1,
+      "resolved_symbol": "515880.SS",
+      "evidence_facts_symbol": "515880.SS",
+      "content_head": "首段结论。\n\n其余说明。"
+    },
+    {
+      "role": "user",
+      "message_id": 3,
+      "question_id": 3,
+      "resolved_symbol": null,
+      "evidence_facts_symbol": null,
+      "content_head": "000300.SS 现在的买点"
+    },
+    {
+      "role": "assistant",
+      "message_id": 4,
+      "question_id": 3,
+      "resolved_symbol": null,
+      "evidence_facts_symbol": null,
+      "content_head": "首段结论。\n\n其余说明。"
+    },
+    {
+      "role": "user",
+      "message_id": 5,
+      "question_id": 5,
+      "resolved_symbol": null,
+      "evidence_facts_symbol": null,
+      "content_head": "上证指数 现在有哪些系统定义的买点？"
+    },
+    {
+      "role": "assistant",
+      "message_id": 6,
+      "question_id": 5,
+      "resolved_symbol": null,
+      "evidence_facts_symbol": null,
+      "content_head": "首段结论。\n\n其余说明。"
+    }
+  ],
+  "history_session_C": [
+    {
+      "role": "user",
+      "message_id": 9,
+      "question_id": 9,
+      "resolved_symbol": null,
+      "evidence_facts_symbol": null,
+      "content_head": "515880 现在有哪些系统定义的买点？"
+    },
+    {
+      "role": "assistant",
+      "message_id": 10,
+      "question_id": 9,
+      "resolved_symbol": "515880.SS",
+      "evidence_facts_symbol": "515880.SS",
+      "content_head": "首段结论。\n\n其余说明。"
+    },
+    {
+      "role": "user",
+      "message_id": 11,
+      "question_id": 11,
+      "resolved_symbol": null,
+      "evidence_facts_symbol": null,
+      "content_head": "上证指数 现在有哪些系统定义的买点？"
+    },
+    {
+      "role": "assistant",
+      "message_id": 12,
+      "question_id": 11,
+      "resolved_symbol": "000001.SS",
+      "evidence_facts_symbol": "000001.SS",
+      "content_head": "首段结论。\n\n其余说明。"
+    }
+  ],
+  "resolve_probes": [
+    {
+      "tag": "hs300_named",
+      "message": "沪深300 现在有哪些系统定义的买点？",
+      "selected_symbol": "515880.SS",
+      "http_status": 200,
+      "resolved_symbol": "000300.SS",
+      "subject_source": "message",
+      "display_name": "沪深300",
+      "clarification_kinds": []
+    },
+    {
+      "tag": "sse_named",
+      "message": "上证指数 现在有哪些系统定义的买点？",
+      "selected_symbol": "515880.SS",
+      "http_status": 200,
+      "resolved_symbol": "000001.SS",
+      "subject_source": "message",
+      "display_name": "上证指数",
+      "clarification_kinds": []
+    },
+    {
+      "tag": "hs300_code",
+      "message": "000300.SS 现在有哪些系统定义的买点？",
+      "selected_symbol": "515880.SS",
+      "http_status": 200,
+      "resolved_symbol": "000300.SS",
+      "subject_source": "message",
+      "display_name": "沪深300",
+      "clarification_kinds": []
+    },
+    {
+      "tag": "followup",
+      "message": "那失效位呢",
+      "selected_symbol": "515880.SS",
+      "http_status": 200,
+      "resolved_symbol": "515880.SS",
+      "subject_source": "selected",
+      "display_name": "通信ETF",
+      "clarification_kinds": []
+    },
+    {
+      "tag": "kc50_board",
+      "message": "科创50板块现在怎么看",
+      "selected_symbol": null,
+      "http_status": 200,
+      "resolved_symbol": "000688.SS",
+      "subject_source": "message",
+      "display_name": "科创50",
+      "clarification_kinds": []
+    },
+    {
+      "tag": "star_whole",
+      "message": "科创板整体现在怎么样",
+      "selected_symbol": null,
+      "http_status": 200,
+      "resolved_symbol": null,
+      "subject_source": "none",
+      "display_name": null,
+      "clarification_kinds": [
+        "sector_ambiguous_index_reference"
+      ]
+    },
+    {
+      "tag": "two_symbols",
+      "message": "515880 和 510300 哪个更强",
+      "selected_symbol": "515880.SS",
+      "http_status": 200,
+      "resolved_symbol": null,
+      "subject_source": "ambiguous",
+      "display_name": null,
+      "clarification_kinds": [
+        "symbol_ambiguous"
+      ]
+    }
+  ],
+  "display_name_checks": {
+    "catalog_names_hs300": "沪深300",
+    "catalog_names_sse": "上证指数",
+    "static_name_hs300": "沪深300",
+    "static_name_sse": "上证指数",
+    "resolve_probe_hs300_code": "沪深300",
+    "resolve_probe_hs300_named": "沪深300"
+  },
+  "verdicts": [
+    {
+      "case": 1,
+      "name": "515880→沪深300（流式，有数据）",
+      "status": "pass",
+      "expectation": "绑定 000300.SS",
+      "actual": "chat/stream: resolved=000300.SS facts=000300.SS quick=000300.SS AI材料=沪深300(000300.SS)",
+      "bindings": {
+        "resolved": [
+          "000300.SS"
+        ],
+        "facts": [
+          "000300.SS"
+        ],
+        "quick": [
+          "000300.SS"
+        ]
+      },
+      "evidence": [
+        "chat/stream"
+      ]
+    },
+    {
+      "case": "2a",
+      "name": "515880→上证指数（非流式，有数据）",
+      "status": "pass",
+      "expectation": "绑定 000001.SS",
+      "actual": "chat/plain: resolved=000001.SS facts=000001.SS quick=None AI材料=上证指数(000001.SS)",
+      "bindings": {
+        "resolved": [
+          "000001.SS"
+        ],
+        "facts": [
+          "000001.SS"
+        ],
+        "quick": [
+          null
+        ]
+      },
+      "evidence": [
+        "chat/plain"
+      ]
+    },
+    {
+      "case": "2b",
+      "name": "上证指数名称+无行情（流式）",
+      "status": "pass",
+      "expectation": "绑定 None",
+      "actual": "chat/stream-nodata: resolved=None facts=None quick=None AI材料=global(None)",
+      "bindings": {
+        "resolved": [
+          null
+        ],
+        "facts": [
+          null
+        ],
+        "quick": [
+          null
+        ]
+      },
+      "evidence": [
+        "chat/stream-nodata"
+      ]
+    },
+    {
+      "case": 3,
+      "name": "515880→明确000300.SS（selected 刻意保留旧标的）",
+      "status": "pass",
+      "expectation": "绑定 000300.SS",
+      "actual": "chat/stream: resolved=000300.SS facts=000300.SS quick=000300.SS AI材料=沪深300(000300.SS)",
+      "bindings": {
+        "resolved": [
+          "000300.SS"
+        ],
+        "facts": [
+          "000300.SS"
+        ],
+        "quick": [
+          "000300.SS"
+        ]
+      },
+      "evidence": [
+        "chat/stream"
+      ]
+    },
+    {
+      "case": 4,
+      "name": "515880→那失效位呢（流式追问，继承）",
+      "status": "pass",
+      "expectation": "绑定 515880.SS",
+      "actual": "chat/stream: resolved=515880.SS facts=515880.SS quick=515880.SS AI材料=通信ETF(515880.SS)",
+      "bindings": {
+        "resolved": [
+          "515880.SS"
+        ],
+        "facts": [
+          "515880.SS"
+        ],
+        "quick": [
+          "515880.SS"
+        ]
+      },
+      "evidence": [
+        "chat/stream"
+      ]
+    },
+    {
+      "case": 5,
+      "name": "明确新标的但分析无数据（流式：000300.SS 无行情）",
+      "status": "pass",
+      "expectation": "绑定 None",
+      "actual": "chat/stream-nodata: resolved=None facts=None quick=None AI材料=global(None)",
+      "bindings": {
+        "resolved": [
+          null
+        ],
+        "facts": [
+          null
+        ],
+        "quick": [
+          null
+        ]
+      },
+      "evidence": [
+        "chat/stream-nodata"
+      ]
+    },
+    {
+      "case": 6,
+      "name": "科创50板块（非流式）",
+      "status": "pass",
+      "expectation": "绑定 000688.SS",
+      "actual": "chat/plain: resolved=000688.SS facts=000688.SS quick=None AI材料=科创50(000688.SS)",
+      "bindings": {
+        "resolved": [
+          "000688.SS"
+        ],
+        "facts": [
+          "000688.SS"
+        ],
+        "quick": [
+          null
+        ]
+      },
+      "evidence": [
+        "chat/plain"
+      ]
+    },
+    {
+      "case": 7,
+      "name": "科创板整体（非流式）",
+      "status": "pass",
+      "expectation": "绑定 None",
+      "actual": "chat/plain: resolved=None facts=None quick=None AI材料=global(None)",
+      "bindings": {
+        "resolved": [
+          null
+        ],
+        "facts": [
+          null
+        ],
+        "quick": [
+          null
+        ]
+      },
+      "evidence": [
+        "chat/plain"
+      ]
+    },
+    {
+      "case": 8,
+      "name": "两个标的并列比较（非流式，只记录现状）",
+      "status": "as_is_observed",
+      "expectation": "仅记录现状",
+      "actual": "chat/plain: resolved=515880.SS facts=515880.SS quick=None AI材料=通信ETF(515880.SS)",
+      "bindings": {
+        "resolved": [
+          "515880.SS"
+        ],
+        "facts": [
+          "515880.SS"
+        ],
+        "quick": [
+          null
+        ]
+      },
+      "evidence": [
+        "chat/plain"
+      ]
+    },
+    {
+      "case": 9,
+      "name": "显示名目录可读",
+      "status": "pass",
+      "expectation": "绑定 None",
+      "actual": "",
+      "bindings": {
+        "resolved": [],
+        "facts": [],
+        "quick": []
+      },
+      "evidence": []
+    }
+  ],
+  "guard": {
+    "installed_at": "2026-09-18T01:05:19",
+    "network_attempts": 0,
+    "blocked_writes": 0,
+    "blocked_reads": 0,
+    "blocked_sqlite": 0,
+    "note": "全部为 0 才算隔离干净；明细见 logs/guard-attempts.json"
+  },
+  "checks_summary": {
+    "total": 61,
+    "failed": 0,
+    "failed_detail": []
+  }
+}

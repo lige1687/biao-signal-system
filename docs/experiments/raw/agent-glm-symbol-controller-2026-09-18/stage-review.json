@@ -1,0 +1,18 @@
+{
+  "stage_id": "S1",
+  "verified": true,
+  "summary": "独立真实路由复跑61检查通过，精确目录修复符合G1；S2执行约束见主控报告",
+  "goal_ids_checked": [
+    "G1"
+  ],
+  "evidence": [
+    "/Users/yongbiaoli/lei-agent-runtime-adoption-20260917/docs/experiments/agent-glm-symbol-controller-2026-09-18.md",
+    "/Users/yongbiaoli/lei-agent-runtime-adoption-20260917/docs/experiments/raw/agent-glm-symbol-controller-2026-09-18/recheck.log",
+    "/Users/yongbiaoli/lei-agent-runtime-adoption-20260917/docs/experiments/raw/agent-glm-symbol-controller-2026-09-18/logs/case-checks-fixed.json",
+    "/Users/yongbiaoli/lei-agent-runtime-adoption-20260917/docs/experiments/raw/agent-glm-symbol-controller-2026-09-18/logs/guard-attempts-fixed.json"
+  ],
+  "limitations": [
+    "真实模型和浏览器未测",
+    "回归test_s13旧外呼应禁止再次执行；合入采用包须增加subjects.py并同步清单数量"
+  ]
+}
