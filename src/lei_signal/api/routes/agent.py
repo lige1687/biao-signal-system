@@ -421,7 +421,11 @@ def _resolve_symbol_by_catalog(message: str) -> str | None:
     唯一可核实对象 → None（由 resolve 层澄清，不用指数/ETF 顶替板块）。
     """
     from lei_signal.api import catalog as catalog_mod  # noqa: PLC0415
-    from lei_signal.api.config import STRATEGY_INDICES, US_ETFS  # noqa: PLC0415
+    from lei_signal.api.config import (  # noqa: PLC0415
+        DASHBOARD_INDICES,
+        STRATEGY_INDICES,
+        US_ETFS,
+    )
     from lei_signal.api.labels import THS_INDUSTRY_NAMES  # noqa: PLC0415
 
     from lei_signal.copilot.subjects import named_subject
@@ -436,8 +440,12 @@ def _resolve_symbol_by_catalog(message: str) -> str | None:
         if alias in message:
             return _CATALOG_ALIAS[alias]
 
-    # 3) 目录名完整出现在话里（行业/指数/美股ETF/概念）
+    # 3) 目录名完整出现在话里（默认大盘/行业/指数/美股ETF/概念）。
+    #    DASHBOARD_INDICES 一并装入（2026-09-18 名称绑定修复）：否则说
+    #    「沪深300/上证指数」这类默认大盘名解析不到，旧选中/会话对象接管，
+    #    回答和资料卡跟错对象。
     entries: list[tuple[str, str]] = []  # (symbol, name)
+    entries += [(idx.symbol, idx.display_name) for idx in DASHBOARD_INDICES]
     entries += [(f"TH{code}", name) for code, name in THS_INDUSTRY_NAMES.items()]
     entries += [(idx.symbol, idx.display_name) for idx in STRATEGY_INDICES]
     entries += [(etf.symbol, etf.display_name) for etf in US_ETFS]
