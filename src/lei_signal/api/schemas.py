@@ -1171,6 +1171,8 @@ class CopilotDispatchReply(BaseModel):
     card: dict | None = None        # {card_type, data}
     preview: TradePreviewDTO | None = None
     chat_fallback: bool = False
+    #: 识别成功但下游未就绪时的显式回落原因（如 mindset_seed_missing）；无标注为 None。
+    fallback_reason: str | None = None
     note_cn: str = ""
 
 

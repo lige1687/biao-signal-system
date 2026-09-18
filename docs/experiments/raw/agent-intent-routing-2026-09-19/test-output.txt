@@ -1,0 +1,107 @@
+意图路由扩展 S2 测试原始输出
+日期：2026-09-19  HEAD（实现前基线）：5b2fd8a5  分支：codex/agent-runtime-adoption-20260917
+全部离线（tmp 库隔离；sentiment 两融外呼在测试中注入 None，生产路径不变）
+
+██████ 1. 用例矩阵 + 既有 intent/dispatch 回归 ██████
+============================= test session starts ==============================
+platform darwin -- Python 3.11.7, pytest-8.4.2, pluggy-1.6.0 -- /opt/homebrew/opt/python@3.11/bin/python3.11
+cachedir: .pytest_cache
+hypothesis profile 'default'
+rootdir: /Users/yongbiaoli/lei-agent-runtime-adoption-20260917
+configfile: pyproject.toml
+plugins: anyio-4.9.0, hypothesis-6.147.0, asyncio-1.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 26 items
+
+tests/unit/test_copilot_intent.py::test_intent_recommend PASSED          [  3%]
+tests/unit/test_copilot_intent.py::test_intent_holdings PASSED           [  7%]
+tests/unit/test_copilot_intent.py::test_intent_trade_report PASSED       [ 11%]
+tests/unit/test_copilot_intent.py::test_intent_review PASSED             [ 15%]
+tests/unit/test_copilot_intent.py::test_intent_chat_fallback PASSED      [ 19%]
+tests/unit/test_copilot_intent.py::test_trade_report_buy_with_code_and_amount PASSED [ 23%]
+tests/unit/test_copilot_intent.py::test_trade_report_sell_with_wan_and_k PASSED [ 26%]
+tests/unit/test_copilot_intent.py::test_trade_report_name_extraction_and_missing PASSED [ 30%]
+tests/unit/test_copilot_intent.py::test_trade_report_today_default PASSED [ 34%]
+tests/unit/test_copilot_intent.py::test_trade_report_amount_missing PASSED [ 38%]
+tests/unit/test_copilot_intent.py::test_intent_dca PASSED                [ 42%]
+tests/unit/test_copilot_intent.py::test_intent_sentiment PASSED          [ 46%]
+tests/unit/test_copilot_intent.py::test_intent_mindset_recognized_with_fallback_reason PASSED [ 50%]
+tests/unit/test_copilot_intent.py::test_intent_new_kinds_negative PASSED [ 53%]
+tests/unit/test_copilot_intent.py::test_intent_cross_priority PASSED     [ 57%]
+tests/unit/test_copilot_intent.py::test_intent_old_chat_has_no_fallback_reason PASSED [ 61%]
+tests/unit/test_copilot_intent.py::test_intent_no_hidden_session_state PASSED [ 65%]
+tests/unit/test_copilot_dispatch.py::test_dispatch_recommend_returns_card PASSED [ 69%]
+tests/unit/test_copilot_dispatch.py::test_dispatch_trade_report_returns_preview PASSED [ 73%]
+tests/unit/test_copilot_dispatch.py::test_dispatch_holdings_card PASSED  [ 76%]
+tests/unit/test_copilot_dispatch.py::test_dispatch_unknown_falls_back_to_chat PASSED [ 80%]
+tests/unit/test_copilot_dispatch.py::test_dispatch_dca_returns_state_card PASSED [ 84%]
+tests/unit/test_copilot_dispatch.py::test_dispatch_dca_with_symbol PASSED [ 88%]
+tests/unit/test_copilot_dispatch.py::test_dispatch_sentiment_narrative_card PASSED [ 92%]
+tests/unit/test_copilot_dispatch.py::test_dispatch_mindset_falls_back_with_reason PASSED [ 96%]
+tests/unit/test_copilot_dispatch.py::test_dispatch_sequence_no_hidden_state PASSED [100%]
+
+============================== 26 passed in 4.51s ==============================
+
+██████ 2. 名称绑定回归（红线：不破坏）██████
+rootdir: /Users/yongbiaoli/lei-agent-runtime-adoption-20260917
+configfile: pyproject.toml
+plugins: anyio-4.9.0, hypothesis-6.147.0, asyncio-1.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 10 items
+
+tests/unit/test_agent_name_resolve.py::test_exact_and_substring_name_hit PASSED [ 10%]
+tests/unit/test_agent_name_resolve.py::test_partial_name_matches_via_lcs PASSED [ 20%]
+tests/unit/test_agent_name_resolve.py::test_static_table_fills_missing_display_name PASSED [ 30%]
+tests/unit/test_agent_name_resolve.py::test_stopwords_do_not_match PASSED [ 40%]
+tests/unit/test_agent_name_resolve.py::test_longest_match_wins PASSED    [ 50%]
+tests/unit/test_agent_name_resolve.py::test_no_false_positive_on_unrelated_text PASSED [ 60%]
+tests/unit/test_agent_name_resolve.py::test_payload_symbol_numbers_whitelists_codes PASSED [ 70%]
+tests/unit/test_agent_name_resolve.py::test_catalog_layer_resolves_index_not_in_watchlist PASSED [ 80%]
+tests/unit/test_agent_name_resolve.py::test_catalog_alias_longest_key_wins PASSED [ 90%]
+tests/unit/test_agent_name_resolve.py::test_resolve_api_clarifies_sector_area_with_index_reference PASSED [100%]
+
+============================= 10 passed in 12.68s ==============================
+
+██████ 3. resolve.py 讨论入口回归（本合同未改动该层，验证边界未破坏）██████
+
+tests/unit/test_discussion_backtest_03b.py:532: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_discussion_backtest_03b.py::test_s13_no_llm_degraded_has_evidence_sections
+1 failed, 73 passed in 36.08s
+
+██████ 3-更正. resolve.py 讨论入口回归——排除 test_s13（简报红线：不运行已知外呼用例）██████
+说明：首次全量跑出 1 failed = test_s13_no_llm_degraded_has_evidence_sections；
+经 git stash 后在 S1 基线 5b2fd8a5（无本改动）复跑同样失败 → 基线既有失败，
+且该用例属简报明示『不运行已知会外呼真实 API 的用例（先例 test_s13）』，按红线排除。
+........................................................................ [ 98%]
+.                                                                        [100%]
+73 passed, 1 deselected in 34.25s
+
+██████ 4. 改动面与静态检查 ██████
+--- git diff --stat（相对 S1 提交 5b2fd8a5）---
+ src/lei_signal/api/routes/copilot.py | 84 ++++++++++++++++++++++++++++++++++++
+ src/lei_signal/api/schemas.py        |  2 +
+ src/lei_signal/copilot/intent.py     | 32 +++++++++++++-
+ tests/unit/test_copilot_dispatch.py  | 66 ++++++++++++++++++++++++++++
+ tests/unit/test_copilot_intent.py    | 54 +++++++++++++++++++++++
+ 5 files changed, 236 insertions(+), 2 deletions(-)
+--- ruff（改动文件）---
+All checks passed!
+--- ruff copilot.py：7 处均为既有（S1 提交同数，未动他人区域）---
+[*] 5 fixable with the `--fix` option.
+
+██████ 5. 磁盘恢复后干净复跑（2026-09-19，主控清理磁盘后；前次 §1 复跑受 ENOSPC 干扰作废，以本段为准）██████
+tests/unit/test_agent_name_resolve.py::test_exact_and_substring_name_hit PASSED [ 75%]
+tests/unit/test_agent_name_resolve.py::test_partial_name_matches_via_lcs PASSED [ 77%]
+tests/unit/test_agent_name_resolve.py::test_static_table_fills_missing_display_name PASSED [ 80%]
+tests/unit/test_agent_name_resolve.py::test_stopwords_do_not_match PASSED [ 83%]
+tests/unit/test_agent_name_resolve.py::test_longest_match_wins PASSED    [ 86%]
+tests/unit/test_agent_name_resolve.py::test_no_false_positive_on_unrelated_text PASSED [ 88%]
+tests/unit/test_agent_name_resolve.py::test_payload_symbol_numbers_whitelists_codes PASSED [ 91%]
+tests/unit/test_agent_name_resolve.py::test_catalog_layer_resolves_index_not_in_watchlist PASSED [ 94%]
+tests/unit/test_agent_name_resolve.py::test_catalog_alias_longest_key_wins PASSED [ 97%]
+tests/unit/test_agent_name_resolve.py::test_resolve_api_clarifies_sector_area_with_index_reference PASSED [100%]
+
+============================= 36 passed in 13.45s ==============================
+--- ruff 复查（4 个改动文件）---
+All checks passed!

@@ -291,6 +291,90 @@ def dispatch(request: Request, body: CopilotDispatchRequest) -> CopilotDispatchR
             intent="review",
             card={"card_type": "review", "data": weekly.model_dump()},
         )
+    if intent.kind == "dca":
+        from lei_signal.dca import service as dca_service  # noqa: PLC0415
+        from lei_signal.dca.state import default_data_loader, read_breadth  # noqa: PLC0415
+
+        # 只读状态板（先例 agent.py 话题块 dca 分支）：证据账本+宽度读数，
+        # 带 symbol 则附该标的逐状态；零下单零记账（成交仍走报单确认台账）。
+        ev = dca_service.load_evidence()
+        readings: dict = {}
+        for key, market in (("cn", "cn_all"), ("us", "sp500")):
+            try:
+                readings[key] = read_breadth(market)
+            except Exception:  # noqa: BLE001 - 宽度缺席如实，不硬凑
+                readings[key] = None
+        b_cn = readings.get("cn").value if readings.get("cn") is not None else None
+        b_us = readings.get("us").value if readings.get("us") is not None else None
+        breadth_meta = {k: v.meta() for k, v in readings.items() if v is not None}
+        states: list[dict] = []
+        states_error = None
+        try:
+            states = dca_service.targets_state(
+                default_data_loader(), ev,
+                [(body.symbol, body.symbol)] if body.symbol else None,
+                b_cn, b_us, breadth_meta=breadth_meta)
+        except Exception as exc:  # noqa: BLE001 - 缺席如实标注，不硬凑
+            states_error = str(exc)
+        data = {
+            "evidence_available": bool(ev.get("available")),
+            "evidence_version": ev.get("version"),
+            "error_cn": ev.get("error_detail") or states_error,
+            "states": states,
+            "breadth": {k: (v.meta().to_dict() if v is not None else None)
+                        for k, v in readings.items()},
+            "hint_cn": "状态=路牌统计（只提示不判定）；期望为历史分布非预测；"
+                       "实际买卖仍走报单确认台账。",
+        }
+        return CopilotDispatchReply(
+            intent="dca",
+            symbol=body.symbol,
+            card={"card_type": "dca", "data": data},
+            note_cn="定投状态板：按证据账本算的路牌统计，只提示不判定。",
+        )
+    if intent.kind == "sentiment":
+        from lei_signal.copilot import sentiment as sentiment_mod  # noqa: PLC0415
+
+        # 只叙事标注层：只标注、只作排序参考，永不硬过滤、不参与技术判定
+        # （copilot/sentiment.py 模块头红线；AGENTS.md 体系红线）。
+        pack = sentiment_mod.load_sector_sentiment()
+        try:
+            margin = sentiment_mod.margin_regime_cn()
+        except Exception:  # noqa: BLE001 - 情绪面缺数据不阻塞
+            margin = None
+        symbol_note = None
+        if body.symbol:
+            try:
+                symbol_note = sentiment_mod.symbol_sentiment_cn(body.symbol)
+            except Exception:  # noqa: BLE001 - 未覆盖标的返回 None，不冒充
+                symbol_note = None
+        data = {
+            "available": bool(pack.get("available")),
+            "reason_cn": pack.get("reason"),
+            "as_of": pack.get("as_of"),
+            "hot_boards": pack.get("hot_boards", []),
+            "cold_boards": pack.get("cold_boards", []),
+            "margin": margin,
+            "symbol_note": symbol_note,
+            "note_cn": pack.get("note_cn", ""),
+        }
+        return CopilotDispatchReply(
+            intent="sentiment",
+            symbol=body.symbol,
+            card={"card_type": "sentiment", "data": data},
+            note_cn="情绪面是叙事标注（解释「为什么」），不参与技术判定、不拦"
+                    "任何信号；过热/冰点只作中性提示，不构成买卖点。",
+        )
+    if intent.fallback_reason:
+        # 识别成功但下游未就绪（现仅 mindset 种子库缺位）：显式回落通用讨论，
+        # 回落原因随 fallback_reason 字段可观察，不让用户猜为什么没出卡。
+        return CopilotDispatchReply(
+            intent="chat",
+            symbol=body.symbol,
+            chat_fallback=True,
+            fallback_reason=intent.fallback_reason,
+            note_cn="心态/认知话题已识别，但心态内容库尚未建立——已转通用讨论，可继续聊。",
+        )
     return CopilotDispatchReply(
         intent="chat",
         symbol=body.symbol,
