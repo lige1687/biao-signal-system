@@ -1,0 +1,6 @@
+PASS W-skip.apply.recorded_not_renamed :: rc=0 out=RECOVERY DONE: restored 3/4 items (1 already at their restore state and skipped).
+PASS W-refuse.later_edit_refused :: rc=1 err=RECOVERY-REFUSED: target changed after interruption: src/lei_signal/api/routes/agent.py
+No recovery writes wer
+PASS W-refuse.zero_target_writes :: 恢复尝试前后目标逐文件哈希一致（零写入）
+PASS R-skip.revert.recorded_not_renamed :: rc=0 out=RECOVERY DONE: restored 2/3 items (1 already at their restore state and skipped).
+window probes: 4 checks, 0 failed

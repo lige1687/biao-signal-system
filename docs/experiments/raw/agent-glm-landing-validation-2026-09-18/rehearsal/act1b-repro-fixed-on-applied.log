@@ -1,0 +1,17 @@
+== [fixed] 会话A（流式，数据可用）：515880 → 那失效位呢 → 沪深300 → 明确000300.SS ==
+== [fixed] 会话B（流式，沪深300/上证指数无数据）：515880 → 明确000300.SS(无数据) → 上证指数 ==
+== [fixed] 会话C（非流式，数据可用）：515880 → 上证指数 ==
+== [fixed] 会话D/E/F（非流式）：科创50板块 / 科创板整体 / 两个标的并列 ==
+== [fixed] resolve 层探针 + 显示名 ==
+完成[fixed]：用时 0.9s；护栏=网络0次/越界写0/禁读0/非法SQLite0；机检 61 条，未过 0 条
+  case1: pass  chat/stream: resolved=000300.SS facts=000300.SS quick=000300.SS AI材料=沪深300(000300.SS)
+  case2a: pass  chat/plain: resolved=000001.SS facts=000001.SS quick=None AI材料=上证指数(000001.SS)
+  case2b: pass  chat/stream-nodata: resolved=None facts=None quick=None AI材料=global(None)
+  case3: pass  chat/stream: resolved=000300.SS facts=000300.SS quick=000300.SS AI材料=沪深300(000300.SS)
+  case4: pass  chat/stream: resolved=515880.SS facts=515880.SS quick=515880.SS AI材料=通信ETF(515880.SS)
+  case5: pass  chat/stream-nodata: resolved=None facts=None quick=None AI材料=global(None)
+  case6: pass  chat/plain: resolved=000688.SS facts=000688.SS quick=None AI材料=科创50(000688.SS)
+  case7: pass  chat/plain: resolved=None facts=None quick=None AI材料=global(None)
+  case8: as_is_observed  chat/plain: resolved=515880.SS facts=515880.SS quick=None AI材料=通信ETF(515880.SS)
+  case9: pass  
+[fixed] 全部案例通过

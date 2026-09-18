@@ -1,0 +1,22 @@
+[
+ {
+  "case": "W-skip.apply.recorded_not_renamed",
+  "ok": true,
+  "detail": "rc=0 out=RECOVERY DONE: restored 3/4 items (1 already at their restore state and skipped)."
+ },
+ {
+  "case": "W-refuse.later_edit_refused",
+  "ok": true,
+  "detail": "rc=1 err=RECOVERY-REFUSED: target changed after interruption: src/lei_signal/api/routes/agent.py\nNo recovery writes wer"
+ },
+ {
+  "case": "W-refuse.zero_target_writes",
+  "ok": true,
+  "detail": "恢复尝试前后目标逐文件哈希一致（零写入）"
+ },
+ {
+  "case": "R-skip.revert.recorded_not_renamed",
+  "ok": true,
+  "detail": "rc=0 out=RECOVERY DONE: restored 2/3 items (1 already at their restore state and skipped)."
+ }
+]

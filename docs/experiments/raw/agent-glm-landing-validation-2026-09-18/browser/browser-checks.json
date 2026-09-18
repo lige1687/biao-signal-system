@@ -1,0 +1,37 @@
+[
+ {
+  "check": "ws.step1_515880_card",
+  "ok": true,
+  "detail": "cards=['通信ETF关键数据']"
+ },
+ {
+  "check": "ws.step2_hs300_switch",
+  "ok": true,
+  "detail": "cards=['通信ETF关键数据', '沪深300关键数据']"
+ },
+ {
+  "check": "ws.step2_chip_hs300",
+  "ok": true,
+  "detail": "composer chip='沪深300（000300.SS）'"
+ },
+ {
+  "check": "ws.step3_followup_inherit",
+  "ok": true,
+  "detail": "chip='沪深300（000300.SS）' cards=['通信ETF关键数据', '沪深300关键数据', '沪深300关键数据']"
+ },
+ {
+  "check": "console.step1_515880_card",
+  "ok": true,
+  "detail": "drawer 含 通信ETF/515880.SS"
+ },
+ {
+  "check": "console.step2_sse_nodata_no_stale_card",
+  "ok": true,
+  "detail": "drawer上证指数出现1次(应为1=仅问题回显) 上证指数卡=0(应0) body含000001.SS=False"
+ },
+ {
+  "check": "console.step3_hs300_code_switch",
+  "ok": true,
+  "detail": "drawer 含 沪深300/000300.SS"
+ }
+]
