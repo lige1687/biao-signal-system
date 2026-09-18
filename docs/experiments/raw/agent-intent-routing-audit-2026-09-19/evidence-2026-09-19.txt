@@ -1,0 +1,158 @@
+意图路由扩展 S1 只读核实——取证原始输出
+日期：2026-09-19　执行：ZCode Flash（job 09e2707a stage=S1）
+工作区：/Users/yongbiaoli/lei-agent-runtime-adoption-20260917（候选仓，可写）
+运行仓：/Users/yongbiaoli/Desktop/lei-signal-lab（只读，禁止写入；本审计只读访问）
+
+本文件是 docs/experiments/agent-intent-routing-audit-2026-09-19.md 的 raw 对照，
+记录每条关键结论的原始命令与输出。S1 零产品代码改动（本目录与审计文档为纯新增文档）。
+
+====================================================================
+1. 工作区 HEAD 与「候选分支=已采用运行实态」核对
+====================================================================
+$ git -C /Users/yongbiaoli/lei-agent-runtime-adoption-20260917 rev-parse HEAD
+267a7afb62045fb6d1dd279e3f32e0e0bceab4e1
+$ git -C /Users/yongbiaoli/lei-agent-runtime-adoption-20260917 status --short --branch
+## codex/agent-runtime-adoption-20260917
+?? docs/archive/handoffs-plans/agent-intent-routing-20260919/   ← 主控交接材料，非本任务产物，保持未跟踪
+
+$ git -C /Users/yongbiaoli/Desktop/lei-signal-lab rev-parse HEAD
+91a93ad2b881fbeed1ee15ae03d4fc3bbff08342
+（运行仓为另一克隆，HEAD 号不同属正常；运行仓工作区有 docs 侧未提交改动：
+INDEX.md / registry.json / factor 相关文档——均为文档，非产品代码。）
+
+关键文件逐字节比对（diff -q，workspace vs 运行仓）：
+SAME  src/lei_signal/copilot/intent.py
+SAME  src/lei_signal/api/routes/copilot.py
+SAME  src/lei_signal/copilot/resolve.py
+SAME  src/lei_signal/api/routes/dca.py
+SAME  src/lei_signal/copilot/sentiment.py
+SAME  src/lei_signal/api/routes/sentiment.py
+SAME  src/lei_signal/api/app.py
+SAME  tests/unit/test_copilot_intent.py
+SAME  tests/unit/test_copilot_dispatch.py
+SAME  tests/unit/test_agent_name_resolve.py
+
+运行服务进程身份（只读观察）：
+$ ps aux | grep uvicorn | grep -v grep
+/Users/yongbiaoli/.workbuddy/binaries/python/envs/default/bin/python3 -m uvicorn \
+    lei_signal.api.app:app --host 0.0.0.0 --port 8000
+$ lsof -p 99297 | grep cwd
+cwd  DIR ... /Users/yongbiaoli/Desktop/lei-signal-lab
+结论：生产服务即运行仓的 lei_signal.api.app:app；产品代码文件与候选仓逐字节一致
+→「候选分支=已采用运行实态」在代码层成立。
+
+====================================================================
+2. 意图规则与分派点（源码行号）
+====================================================================
+src/lei_signal/copilot/intent.py：
+  :1-7   模块 docstring（规则意图识别+报单解析，纯函数零 LLM）
+  :16    顺序即优先级注释（报单优先于推荐，避免「买了什么好」误判）
+  :17-23 _INTENT_RULES 五类：trade_report(18)/scout(19)/recommend(20)/holdings(21)/review(22)
+  :31-35 Intent dataclass（kind/symbol/params）
+  :38-43 parse_intent（顺序子串匹配，未命中 Intent(kind="chat")）
+  :103-129 parse_trade_report
+
+src/lei_signal/api/routes/copilot.py（/api/copilot/dispatch，:199-299）：
+  :203-205 import + parse_intent 调用
+  :206-230 scout 分支
+  :231-241 recommend 分支（_recommend_card 定义于 :92）
+  :242-248 trade_report 分支
+  :249-279 holdings 分支
+  :280-293 review 分支
+  :294-299 chat 回落（chat_fallback=True，note_cn=「未命中快捷指令，已转通用讨论。」）
+
+src/lei_signal/api/schemas.py：
+  :1161-1163 CopilotDispatchRequest（message, symbol 可空）
+  :1166-1174 CopilotDispatchReply（intent/symbol/card/preview/chat_fallback/note_cn）
+
+parse_intent 全仓消费面：仅 routes/copilot.py:203-205 与
+tests/unit/test_copilot_intent.py、tests/unit/test_copilot_dispatch.py（无其他生产调用方）。
+
+====================================================================
+3. 第二套解析器（勿混淆，本次不改动）
+====================================================================
+src/lei_signal/copilot/resolve.py：/api/copilot/resolve（routes/copilot.py:649）与
+agent 讨论入口用的富解析器（意图+主题+用途+澄清）。
+  :20-21 TOPICS 含 dca/sentiment/mindset
+  :44-57 _TOPIC_RULES：:51 dca(定投|闲钱|每月|新收入|工资|分批投)、
+         :52 sentiment(情绪|冰点|强热|恐慌|热警报|散户)、:53 mindset(心态|拿不住|怕跌|慌|睡不着)
+既有回归（不得破坏）：tests/unit/test_discussion_backtest_03b.py、
+tests/unit/test_agent_context_contract.py、tests/unit/test_agent_continuity_20260916.py。
+
+src/lei_signal/api/routes/agent.py：
+  :1896 def _topic_blocks（讨论主题→真实状态/依据材料）
+  :1908-1962 topic=="dca"：直连 lei_signal.dca.service 证据+状态板（不依赖 REST 挂载）
+  :1971 topic=="sentiment"
+  :1998-2001 topic=="mindset"：available=False + 引用边界说明（「心态内容只在用户
+          求助时按其认可且兼容的一条引用，不当规则」）
+
+agent.py 的 outcome.kind（:2476/:2478/:2483/:2920/:3043/:3064/:3088）取值
+replay/incomplete/resume/proceed —— 流式会话状态，与意图路由无关（简报提醒核实无误）。
+
+====================================================================
+4. 下游就绪度——运行实况（关键发现：DCA REST 未挂载）
+====================================================================
+4.1 OpenAPI 实况（GET localhost:8000/openapi.json，运行中生产服务）：
+总路径数: 121
+dca 路径: []
+copilot/dispatch 在线: True
+copilot/resolve 在线: True
+sentiment 路径: ['/api/sentiment/alerts', '/api/sentiment/board/{code}',
+  '/api/sentiment/board/{code}/chart', '/api/sentiment/confidence',
+  '/api/sentiment/dashboard', '/api/sentiment/light', '/api/sentiment/us-board/{key}/chart']
+agent/chat 在线: ['/api/agent/chat', '/api/agent/chat/stream']
+
+4.2 反向验证（易假阳性点）：
+$ curl -s -o /dev/null -w "%{http_code}" localhost:8000/api/dca/state
+200   ← 假阳性！
+$ curl -s localhost:8000/api/dca/state | head -c 300
+<!doctype html> ... <title>BIAO 看盘系统</title>   ← 是前端 SPA index.html
+原因：app.py:178-187 静态兜底（未命中 API 的 GET 回退 index.html）。
+→ 未挂载路径静默返回 200+HTML，判定端点就绪必须看 OpenAPI/响应体，不能看状态码。
+
+4.3 挂载点核查：
+$ grep -rn "include_router" src/lei_signal/ --include="*.py"（排除 __pycache__）
+仅 src/lei_signal/api/app.py 一处；create_app 于 app.py:114，挂载清单约 :145-162，
+共 22 个 include_router，其中无 dca.router；app.py 全文零 "dca" 字样。
+tests/ 目录亦无任何 tests 挂载 routes.dca。
+git log（dca.py）：仅 1d431137 chore: 治理前现场快照（保存全部在制工作）——
+文件随治理快照入库，此后无挂载动作。
+
+4.4 DCA 服务层（与 REST 挂载无关，独立就绪）：
+src/lei_signal/dca/{service,state,presets}.py 存在；
+configs/dca_evidence.json 存在且被 git 跟踪（hygiene 检查项 5 覆盖）；
+agent.py:1908-1962 已在生产讨论路径直连该服务层（先例）。
+
+4.5 前端：web/src 全目录 grep "api/dca" 零命中（前端从未调用 DCA REST）。
+
+4.6 情绪模块（只叙事红线原文）：
+copilot/sentiment.py :3-5「定位：叙事标注层——只标注、只作排序参考，
+永不硬过滤信号、不参与技术判定」；数据源板块热度快照+映射+两融，磁盘 only 无网络。
+REST /api/sentiment/* 7 路径在线（见 4.1）；scout 卡已嵌情绪段（scout.py:96-149）。
+
+4.7 认知（mindset）种子库缺位：
+$ ls configs/mindset_seed.json（两仓）→ No such file or directory
+$ grep -rn "mindset" src/（两仓一致）→ 仅 resolve.py:21,53 / semantic_states.py:82 /
+routes/dca.py:3 注释 / routes/agent.py:1904,1998-1999 话题骨架，零种子库文件引用。
+
+====================================================================
+5. 既有回归基线（S2 改动前后对照用）
+====================================================================
+$ python3 -m pytest tests/unit/test_copilot_intent.py \
+    tests/unit/test_copilot_dispatch.py tests/unit/test_agent_name_resolve.py -v
+（节选结尾）
+tests/unit/test_copilot_intent.py        10 passed
+tests/unit/test_copilot_dispatch.py       4 passed
+tests/unit/test_agent_name_resolve.py    10 passed
+============================= 24 passed in 12.81s ==============================
+基线全绿。S2 完成后须复跑同命令并保持 24 passed（新增用例另计）。
+
+====================================================================
+6. S1 改动清单（零产品代码）
+====================================================================
+新增（纯文档）：
+  docs/experiments/agent-intent-routing-audit-2026-09-19.md
+  docs/experiments/raw/agent-intent-routing-audit-2026-09-19/evidence-2026-09-19.txt
+  docs/experiments/raw/agent-intent-routing-audit-2026-09-19/case-matrix.json
+增量登记：docs/experiments/registry.json（+1 条目）、docs/experiments/INDEX.md §1（+1 行）
+未动：src/、web/、configs/、tests/ 全部零改动。

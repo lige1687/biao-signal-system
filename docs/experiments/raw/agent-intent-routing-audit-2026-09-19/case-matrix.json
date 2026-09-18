@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "date": "2026-09-19",
+    "stage": "S1 冻结（只读核实产物，零产品代码改动）",
+    "workspace_head": "267a7afb62045fb6d1dd279e3f32e0e0bceab4e1",
+    "branch": "codex/agent-runtime-adoption-20260917",
+    "purpose": "S2 用例矩阵契约：每例含改前实况（HEAD 267a7afb）与 S2 后冻结期望；入口级断言一律走 /api/copilot/dispatch 路由回包结构（intent/chat_fallback/card.card_type/fallback_reason），不凭回答正文判定。",
+    "layers": {
+      "unit": "parse_intent 纯函数（tests/unit/test_copilot_intent.py 扩展）",
+      "route": "TestClient POST /api/copilot/dispatch（tests/unit/test_copilot_dispatch.py 扩展）",
+      "regression": "既有 24 例基线不破坏（intent 10 + dispatch 4 + test_agent_name_resolve 10）"
+    }
+  },
+  "frozen_design": {
+    "priority_order_after_s2": ["trade_report", "scout", "recommend", "holdings", "review", "dca", "sentiment", "mindset"],
+    "priority_rationale": "旧五类规则原序原词保持元组前位（追加式扩展，旧五类行为零回归由构造保证）；新三类按 定投→情绪→认知 追加，情绪先于认知与 resolve.py:52-53 自身顺序一致。",
+    "tokens_after_s2": {
+      "dca": ["定投", "分批投"],
+      "sentiment": ["情绪", "冰点", "强热", "恐慌", "热警报", "散户"],
+      "mindset": ["心态", "拿不住", "怕跌", "慌", "睡不着"]
+    },
+    "token_rationale": "sentiment/mindset 词表与 resolve.py:52-53 话题词表逐字一致（两入口同词同向）；dca 刻意窄于 resolve.py:51——闲钱/每月/工资/新收入是资金用途词汇，归 agent 讨论入口 resolve.py 处理，进 dispatch 粗粒度层会误劫持（如「每月复盘」会撞「每月」；「工资到账怎么安排」不是查定投状态板）。偏差已文档化。",
+    "downstream_mapping": {
+      "dca": "直达 lei_signal.dca 服务层只读适配器出卡（证据可用性+宽度状态板，body.symbol 有则带标的逐状态；先例 agent.py:1908-1962）。REST /api/dca/* 未挂载（OpenAPI 实证），本合同不挂载路由，挂载与否留主控另行裁决。",
+      "sentiment": "直达 copilot/sentiment.py 只叙事模块（load_sector_sentiment + margin_regime_cn，body.symbol 有则加 symbol_sentiment_cn）；note_cn 带只叙事红线措辞，永不硬过滤。",
+      "mindset": "种子库缺位（configs/mindset_seed.json 两仓不存在）→ 识别为 mindset 后显式回落通用讨论：Intent 增 fallback_reason 字段='mindset_seed_missing'，dispatch 回落分支回 intent='chat'、chat_fallback=True、回显 fallback_reason，note_cn 说明原因。不改语义状态校验。"
+    },
+    "schema_additions_minimal": {
+      "Intent": "fallback_reason: str | None = None（intent.py dataclass 追加带默认字段）",
+      "CopilotDispatchReply": "fallback_reason: str | None = None（schemas.py:1166-1174 追加带默认字段，非破坏）"
+    },
+    "known_limitations": [
+      "intent.py 为无否定处理的子串粗匹配层（既有定位，intent.py:1-7）；「别定投/不想定投」在本层会命中 dca——与「别买了」今日命中 trade_report 同一既有局限；否定/假设的精细处理归 agent 入口 resolve.py:_HYPOTHETICAL_RE，本合同不复制该逻辑（红线：最小改动）。",
+      "「情绪」一词兼有市场情绪与用户心情两义，且 sentiment 先于 mindset 匹配：「情绪不好，睡不着」会入情绪卡而非认知回落——与 resolve.py 同序的既定取舍，双方落点均为只叙事，误向代价低，已列观察项。",
+      "dca 状态板依赖磁盘证据账本与宽度数据，缺席时须如实标注不可用（沿 dca.py/agent.py 缺席如实先例），不得硬凑。"
+    ]
+  },
+  "cases": [
+    {"id": "A1", "group": "旧五类回归", "input": "今天看什么", "kind_now": "recommend", "kind_after_s2": "recommend", "level": "unit+route", "route_assert": "intent==recommend && card.card_type==recommend && chat_fallback==false"},
+    {"id": "A2", "group": "旧五类回归", "input": "有什么推荐", "kind_now": "recommend", "kind_after_s2": "recommend", "level": "unit"},
+    {"id": "A3", "group": "旧五类回归", "input": "看下我的持仓", "kind_now": "holdings", "kind_after_s2": "holdings", "level": "unit"},
+    {"id": "A4", "group": "旧五类回归", "input": "持仓速览", "kind_now": "holdings", "kind_after_s2": "holdings", "level": "unit+route", "route_assert": "intent==holdings && card.card_type==holdings"},
+    {"id": "A5", "group": "旧五类回归", "input": "我昨天买了1万515880", "kind_now": "trade_report", "kind_after_s2": "trade_report", "level": "unit+route", "route_assert": "intent==trade_report && preview.fund_code==515880 && preview.amount==10000.0"},
+    {"id": "A6", "group": "旧五类回归", "input": "卖了5000块纳斯达克基金", "kind_now": "trade_report", "kind_after_s2": "trade_report", "level": "unit"},
+    {"id": "A7", "group": "旧五类回归", "input": "本周复盘", "kind_now": "review", "kind_after_s2": "review", "level": "unit"},
+    {"id": "A8", "group": "旧五类回归", "input": "最近机会", "kind_now": "scout", "kind_after_s2": "scout", "level": "unit"},
+    {"id": "A9", "group": "旧五类回归-否定回落", "input": "515880 这个买点为什么是买点", "kind_now": "chat", "kind_after_s2": "chat", "level": "unit"},
+    {"id": "A10", "group": "旧五类回归-否定回落", "input": "市场环境怎么样", "kind_now": "chat", "kind_after_s2": "chat", "level": "unit+route", "route_assert": "intent==chat && chat_fallback==true && fallback_reason==null（不含任何新词表词，回落不带新回落原因）"},
+
+    {"id": "B1", "group": "新增-定投", "input": "现在能定投吗", "kind_now": "chat", "kind_after_s2": "dca", "level": "unit+route", "route_assert": "intent==dca && card.card_type==dca && chat_fallback==false（简报指定交叉用例）"},
+    {"id": "B2", "group": "新增-定投", "input": "这个ETF适合定投吗", "kind_now": "chat", "kind_after_s2": "dca", "level": "unit", "note": "body.symbol 有值时卡片带该标的逐状态"},
+    {"id": "B3", "group": "新增-定投", "input": "开始分批投沪深300", "kind_now": "chat", "kind_after_s2": "dca", "level": "unit"},
+    {"id": "B4", "group": "新增-情绪", "input": "市场情绪怎么样", "kind_now": "chat", "kind_after_s2": "sentiment", "level": "unit+route", "route_assert": "intent==sentiment && card.card_type==sentiment && chat_fallback==false"},
+    {"id": "B5", "group": "新增-情绪", "input": "市场恐慌了吗", "kind_now": "chat", "kind_after_s2": "sentiment", "level": "unit"},
+    {"id": "B6", "group": "新增-情绪", "input": "现在散户热不热", "kind_now": "chat", "kind_after_s2": "sentiment", "level": "unit"},
+    {"id": "B7", "group": "新增-认知(回落)", "input": "最近拿不住怎么办", "kind_now": "chat", "kind_after_s2": "chat(显式回落)", "level": "unit+route", "route_assert": "intent==chat && chat_fallback==true && fallback_reason==mindset_seed_missing && note_cn 含心态/认知说明"},
+    {"id": "B8", "group": "新增-认知(回落)", "input": "心态崩了", "kind_now": "chat", "kind_after_s2": "chat(显式回落)", "level": "unit+route", "route_assert": "同 B7"},
+    {"id": "B9", "group": "新增-认知(回落)", "input": "跌得睡不着", "kind_now": "chat", "kind_after_s2": "chat(显式回落)", "level": "unit", "note": "unit 层断言 parse_intent(msg).kind==mindset 且 fallback_reason!=null（识别成功、下游缺位，回落发生在 dispatch 层）"},
+
+    {"id": "C1", "group": "否定用例-不得命中新三类", "input": "设置提醒", "kind_now": "chat", "kind_after_s2": "chat", "level": "unit"},
+    {"id": "C2", "group": "否定用例-不得命中新三类", "input": "今天大盘为什么跌", "kind_now": "chat", "kind_after_s2": "chat", "level": "unit"},
+    {"id": "C3", "group": "否定用例-不得命中新三类", "input": "换一种止损方式", "kind_now": "chat", "kind_after_s2": "chat", "level": "unit"},
+    {"id": "C4", "group": "否定用例-不得命中新三类", "input": "每月复盘一次", "kind_now": "review", "kind_after_s2": "review", "level": "unit", "note": "「每月」不在 dca 窄词表（冻结设计），且 review 前位优先"},
+    {"id": "C5", "group": "否定用例-不得命中新三类", "input": "这只基金规模多大", "kind_now": "chat", "kind_after_s2": "chat", "level": "unit"},
+    {"id": "C6", "group": "否定用例-不得命中新三类", "input": "工资到账了怎么安排", "kind_now": "chat", "kind_after_s2": "chat", "level": "unit", "note": "「工资」不在 dca 窄词表（资金用途词汇归 resolve.py 的 agent 入口）"},
+
+    {"id": "D1", "group": "交叉意图-优先级", "input": "推荐个适合定投的ETF", "kind_now": "recommend", "kind_after_s2": "recommend", "level": "unit", "note": "旧五类前位优先（追加式扩展的构造性质）"},
+    {"id": "D2", "group": "交叉意图-优先级", "input": "我昨天申购了定投500元515880", "kind_now": "trade_report", "kind_after_s2": "trade_report", "level": "unit+route", "route_assert": "intent==trade_report && preview.fund_code==515880（成交词优先，intent.py:16 既有口径）"},
+    {"id": "D3", "group": "交叉意图-优先级", "input": "市场情绪恐慌，看下我的持仓", "kind_now": "holdings", "kind_after_s2": "holdings", "level": "unit"},
+    {"id": "D4", "group": "交叉意图-优先级", "input": "情绪不好，睡不着", "kind_now": "chat", "kind_after_s2": "sentiment", "level": "unit", "note": "已知取舍：sentiment 先于 mindset（与 resolve.py:52-53 同序），双方落点均只叙事，列观察项"},
+    {"id": "D5", "group": "交叉意图-优先级", "input": "别定投了，风险太大", "kind_now": "chat", "kind_after_s2": "dca", "level": "unit", "note": "已知局限：本层无否定处理（与「别买了」今日命中 trade_report 同一既有局限）；否定精细处理归 resolve.py，本合同不扩"},
+
+    {"id": "E1", "group": "连续讨论-无跨话状态", "input": "[\"现在能定投吗\", \"515880 呢\", \"买了1万515880\"]", "kind_now": "chat/chat/chat", "kind_after_s2": "dca/chat/trade_report", "level": "unit+route", "note": "parse_intent 纯函数逐条独立判定，dispatch 无跨消息上下文；上下文承接归 agent 入口（resolve.py context_scope）。三条连发逐条断言，证明无隐藏会话态。"},
+
+    {"id": "F1", "group": "名称绑定回归", "input": "tests/unit/test_agent_name_resolve.py 全文件", "kind_now": "10 passed（2026-09-19 基线）", "kind_after_s2": "10 passed", "level": "regression", "note": "agent 入口名称绑定与 intent.py 无共享代码，S2 不得破坏"},
+    {"id": "F2", "group": "名称绑定回归-入口不改", "input": "通信ETF 怎么看（走 /api/agent/chat，非 dispatch）", "kind_now": "名称绑定由 agent.py:_resolve_symbol_by_name 处理", "kind_after_s2": "不变", "level": "regression", "note": "dispatch 新三类不改变 agent 入口任何行为；如需轨迹证据用既有 before/after 禁网隔离法（先例 agent-glm-symbol-binding-fix-2026-09-18）"}
+  ],
+  "baseline_evidence": {
+    "command": "python3 -m pytest tests/unit/test_copilot_intent.py tests/unit/test_copilot_dispatch.py tests/unit/test_agent_name_resolve.py -v",
+    "result": "24 passed in 12.81s（2026-09-19，HEAD 267a7afb，全部离线临时库）",
+    "raw": "docs/experiments/raw/agent-intent-routing-audit-2026-09-19/evidence-2026-09-19.txt §5"
+  }
+}
