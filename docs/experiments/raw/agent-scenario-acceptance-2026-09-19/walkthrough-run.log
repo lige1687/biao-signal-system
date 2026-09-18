@@ -1,0 +1,37 @@
+PASS home-loaded :: url=http://127.0.0.1:5173/
+SHOT 00-home :: http://127.0.0.1:5173/ @ 2026-09-19T02:48:58
+PASS console-opened :: AI 助手抽屉已打开
+SHOT 01-console-open :: http://127.0.0.1:5173/ @ 2026-09-19T02:48:58
+PASS s1-page-clarification-shown :: 页面先显示 resolve 澄清问句（这笔钱是新收入还是闲钱分批）——真实预路由行为
+PASS s1-page-no-dca-card :: 页面上未出现 dca 快捷卡——自由输入被预路由进讨论管线（缺口如实记录）
+PASS s1-page-model-blocked :: 讨论管线请求被测试防护掐断（累计 1 次），无真模型调用
+SHOT 02-s1-dingtou-page-realpath :: http://127.0.0.1:5173/ @ 2026-09-19T02:49:02
+PASS s2-dispatch-not-called-or-fallback :: dispatch 层无直达卡（真实预路由下该句不进 dispatch；接口通道单测见 dispatch-s2-buywhy.json）
+PASS s2-model-blocked :: 讨论管线第二次被掐断（累计 2 次）
+PASS s2-failed-note :: 页面如实显示讨论未完成（被测试掐断）
+SHOT 03-s2-buywhy-blocked :: http://127.0.0.1:5173/ @ 2026-09-19T02:49:06
+PASS s3-card-type :: holdings 卡标题出现（真实生产 dispatch 响应渲染）
+PASS s3-empty-degraded :: 生产台账当前为空 → 卡内空态话术即数据缺失降级表现（真实数据，非 mock）
+SHOT 04-s3-holdings-empty :: http://127.0.0.1:5173/ @ 2026-09-19T02:49:07
+PASS s4-dispatch-not-called-or-fallback :: dispatch 层无直达卡（真实预路由下该句不进 dispatch；接口通道见 dispatch-s4-ustech.json）
+PASS s4-model-blocked :: 讨论管线第三次被掐断（累计 3 次）
+SHOT 05-s4-ustech-blocked :: http://127.0.0.1:5173/ @ 2026-09-19T02:49:11
+PASS real-card::帮我打开定投状态板 :: 探针经 mock resolve 分类进入真实 dispatch，定投状态板 卡=真实生产数据渲染
+SHOT 06a-dca-card-real :: http://127.0.0.1:5173/ @ 2026-09-19T02:49:12
+PASS real-card::市场情绪速览 :: 探针经 mock resolve 分类进入真实 dispatch，市场情绪速览 卡=真实生产数据渲染
+SHOT 06b-sentiment-card-real :: http://127.0.0.1:5173/ @ 2026-09-19T02:49:12
+PASS real-card::心态速览 :: 探针经 mock resolve 分类进入真实 dispatch，认知/心态卡片 卡=真实生产数据渲染
+SHOT 06c-mindset-card-real :: http://127.0.0.1:5173/ @ 2026-09-19T02:49:12
+PASS b-no-degraded-copy :: B 段全程无降级文案（生产数据在场）
+SHOT 06-three-real-cards :: http://127.0.0.1:5173/ @ 2026-09-19T02:49:12
+PASS dca-degraded-copy :: dca 降级话术完整出现
+SHOT 07-dca-card-degraded :: http://127.0.0.1:5173/ @ 2026-09-19T02:49:13
+PASS sentiment-degraded-copy :: sentiment 降级话术出现
+SHOT 08-sentiment-card-degraded :: http://127.0.0.1:5173/ @ 2026-09-19T02:49:13
+PASS mindset-degraded-card-copy :: mindset 缺场卡内降级话术出现（mock available=false 触发前端防御渲染）
+SHOT 09-mindset-card-degraded :: http://127.0.0.1:5173/ @ 2026-09-19T02:49:13
+PASS mindset-fallback-shape :: 回落回包带 fallback_reason=mindset_seed_missing（与 copilot.py 391-397 逐字段一致）
+PASS mindset-fallback-blocked :: 回落后讨论管线同样被掐断（累计 4 次）
+SHOT 10-mindset-fallback-blocked :: http://127.0.0.1:5173/ @ 2026-09-19T02:49:18
+
+== 21/21 checks passed; model calls blocked: 4 ==
