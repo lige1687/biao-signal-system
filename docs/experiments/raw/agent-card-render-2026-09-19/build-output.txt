@@ -1,0 +1,26 @@
+=== df before build (2026-09-19 02:07:05) ===
+/dev/disk3s1s1   228Gi    17Gi   637Mi    97%    426k  6.5M    6%   /
+=== npm run build ===
+
+> biao-signal-web@0.1.0 build
+> tsc --noEmit && vite build
+
+vite v5.4.21 building for production...
+transforming...
+✓ 741 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                      0.55 kB │ gzip:   0.34 kB
+dist/assets/index-Ducz5aDV.css     215.64 kB │ gzip:  38.86 kB
+dist/assets/react-7VFnTMk3.js      164.49 kB │ gzip:  53.66 kB
+dist/assets/index-C64hr3cq.js      731.94 kB │ gzip: 250.26 kB
+dist/assets/echarts-BOcpYRet.js  1,035.04 kB │ gzip: 342.62 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 2.83s
+build exit=0
+=== df after build (2026-09-19 02:07:13) ===
+/dev/disk3s1s1   228Gi    17Gi   638Mi    97%    426k  6.5M    6%   /

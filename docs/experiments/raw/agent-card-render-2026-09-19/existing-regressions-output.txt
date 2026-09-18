@@ -1,0 +1,108 @@
+=== npm run test:structure-controls ===
+
+  ../../../../tmp/biao-kline-structure-marks.mjs  3.5kb
+
+⚡ Done in 2ms
+file:///Users/yongbiaoli/lei-agent-runtime-adoption-20260917/web/run-structure-regression.mjs:36
+    throw new Error(`${key} 单独开启失败：${kinds.join(",") || "无标记"}`);
+          ^
+
+Error: invalidatedMarks 单独开启失败：无标记
+    at file:///Users/yongbiaoli/lei-agent-runtime-adoption-20260917/web/run-structure-regression.mjs:36:11
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v22.22.1
+=== npm run test:factor-panel ===
+
+  ../../../../tmp/biao-factor-panel-logic.mjs  2.7kb
+
+⚡ Done in 1ms
+因子观测台展示层回归通过：chips边界/评级分组/体制短语/弱列清单 均符合 2026-09-05 复核口径
+=== npm run test:agent-workspace ===
+
+  ../../../../tmp/biao-agent-workspace-logic.mjs  1.6kb
+
+⚡ Done in 1ms
+Agent workspace: stream, reader cleanup, scrolling and exact-text preview checks passed.
+=== npm run test:agent-prices ===
+
+  ../../../../tmp/lei-agent-price-links.mjs  1.9kb
+
+⚡ Done in 1ms
+Agent price links: provenance matching, ambiguity, exact precision, roles and visible bounds passed.
+=== npm run test:agent-ux ===
+
+  ../../../../tmp/lei-agent-ux.mjs  7.8kb
+
+⚡ Done in 2ms
+Agent UX phase1+rework: mappings, engine-accurate exit texts, R phrasing, ATR draft safety, exit/module consistency, window label passed.
+=== npm run test:agent-tasks ===
+
+  ../../../../tmp/lei-agent-tasks.mjs  17.7kb
+
+⚡ Done in 3ms
+Agent tasks: five-state texts, terminal semantics, chinese naming passed.
+=== npm run test:evidence-card ===
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at div
+    at EvidenceCardView (/Users/yongbiaoli/lei-agent-runtime-adoption-20260917/web/__evidence_card_component.cjs:86:29)
+    at Router (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at div
+    at div
+    at div
+    at EvidenceCardView (/Users/yongbiaoli/lei-agent-runtime-adoption-20260917/web/__evidence_card_component.cjs:86:29)
+    at Router (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at div
+    at details
+    at div
+    at div
+    at EvidenceCardView (/Users/yongbiaoli/lei-agent-runtime-adoption-20260917/web/__evidence_card_component.cjs:86:29)
+    at Router (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at div
+    at div
+    at div
+    at EvidenceCardView (/Users/yongbiaoli/lei-agent-runtime-adoption-20260917/web/__evidence_card_component.cjs:86:29)
+    at Router (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at div
+    at details
+    at div
+    at div
+    at EvidenceCardView (/Users/yongbiaoli/lei-agent-runtime-adoption-20260917/web/__evidence_card_component.cjs:86:29)
+    at Router (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/Users/yongbiaoli/Desktop/lei-signal-lab/web/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Evidence card SSR: supporting notes retained, chinese mapping, forceDetailsOpen passed.
+=== npm run test:agent-markdown ===
+Agent markdown: bp chip locatable/plain degradation, numeral variants, inline regressions passed.
+=== npm run test:portfolio-map ===
+
+  ../../../../tmp/lei-portfolio-symbols.mjs  2.3kb
+
+⚡ Done in 1ms
+Portfolio symbol mapping: source-identity model, cross-market suffix guard, insufficient-identity and all earlier counterexamples passed.

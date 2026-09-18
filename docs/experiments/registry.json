@@ -1409,6 +1409,11 @@
       "category": "数据与质量",
       "verdict": "passed",
       "oneLiner": "认知/心态种子库后端接入（口径=叙事内容接入非认知能力上线）：26条种子入仓(sha256留档)+加载校验去重+dispatch出mindset叙事卡带出处+缺文件降级与现状一致；quote实测仅3/26按可选处理；种子零进入判定路径（代码+测试双证）；核心37例+回归277例通过。"
+    },
+    "docs/experiments/agent-card-render-2026-09-19.md": {
+      "category": "数据与质量",
+      "verdict": "passed",
+      "oneLiner": "B阶段前端三卡渲染：CopilotCards分发层新增dca/sentiment/mindset三只读卡片（复用既有布局、缺字段如实「数据不可用」、null状态读「不可判」不写成「未触发」、无任何动作话术）；真实组件静态渲染回归9组断言过，构建过（df留痕），既有卡片回归零退化；后端与agent-chat管线零改动（diff证明）；structure-controls为改动前既有失败已留证。"
     }
   }
 }

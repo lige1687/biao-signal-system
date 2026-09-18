@@ -14,6 +14,7 @@
     "test:agent-ux": "esbuild src/utils/agentUx.ts --bundle --platform=node --format=esm --outfile=/tmp/lei-agent-ux.mjs && node run-agent-ux-regression.mjs",
     "test:agent-tasks": "esbuild src/utils/backtestTasks.ts --bundle --platform=node --format=esm --outfile=/tmp/lei-agent-tasks.mjs && node run-agent-tasks-regression.mjs",
     "test:evidence-card": "node run-evidence-card-regression.mjs",
+    "test:copilot-cards": "node run-copilot-cards-regression.mjs",
     "test:agent-markdown": "node run-agent-markdown-regression.mjs",
     "test:portfolio-map": "esbuild src/utils/portfolioSymbols.ts --bundle --platform=node --format=esm --outfile=/tmp/lei-portfolio-symbols.mjs && node run-portfolio-map-regression.mjs"
   },
