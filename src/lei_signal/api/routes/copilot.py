@@ -365,6 +365,37 @@ def dispatch(request: Request, body: CopilotDispatchRequest) -> CopilotDispatchR
             note_cn="情绪面是叙事标注（解释「为什么」），不参与技术判定、不拦"
                     "任何信号；过热/冰点只作中性提示，不构成买卖点。",
         )
+    if intent.kind == "mindset":
+        from lei_signal.copilot import mindset as mindset_mod  # noqa: PLC0415
+
+        # 只叙事红线（与 sentiment 同纪律）：种子内容只作认知/心态叙事展示，
+        # 不参与技术判定、评分、过滤、推荐排序（AGENTS.md 叙事标注层边界）。
+        pack = mindset_mod.load_mindset_seeds()
+        if pack["available"]:
+            data = {
+                "available": True,
+                "count": pack["count"],
+                "sha256": pack["sha256"],
+                "items": pack["items"],
+                "note_cn": "认知/心态种子只作叙事与教育用途；每条带引用出处，"
+                           "内容不代表系统判定。",
+            }
+            return CopilotDispatchReply(
+                intent="mindset",
+                symbol=body.symbol,
+                card={"card_type": "mindset", "data": data},
+                note_cn="认知/心态卡只讲「怎么想」，不讲「该不该买卖」；"
+                        "种子内容不参与任何技术判定与信号过滤。",
+            )
+        # 种子缺失/损坏：走既有显式回落（与接入前行为一致，原因可观察）
+        return CopilotDispatchReply(
+            intent="chat",
+            symbol=body.symbol,
+            chat_fallback=True,
+            fallback_reason="mindset_seed_missing",
+            note_cn="心态/认知话题已识别，但心态内容库不可用（缺失或损坏）"
+                    "——已转通用讨论，可继续聊。",
+        )
     if intent.fallback_reason:
         # 识别成功但下游未就绪（现仅 mindset 种子库缺位）：显式回落通用讨论，
         # 回落原因随 fallback_reason 字段可观察，不让用户猜为什么没出卡。

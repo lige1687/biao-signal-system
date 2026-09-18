@@ -1,0 +1,49 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.11.7, pytest-8.4.2, pluggy-1.6.0 -- /opt/homebrew/opt/python@3.11/bin/python3.11
+cachedir: .pytest_cache
+hypothesis profile 'default'
+rootdir: /Users/yongbiaoli/lei-agent-runtime-adoption-20260917
+configfile: pyproject.toml
+plugins: anyio-4.9.0, hypothesis-6.147.0, asyncio-1.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 37 items
+
+tests/unit/test_copilot_mindset.py::test_load_real_seed_file PASSED      [  2%]
+tests/unit/test_copilot_mindset.py::test_seed_key_documented_dedup PASSED [  5%]
+tests/unit/test_copilot_mindset.py::test_invalid_entries_dropped PASSED  [  8%]
+tests/unit/test_copilot_mindset.py::test_quote_optional_normalised PASSED [ 10%]
+tests/unit/test_copilot_mindset.py::test_missing_file_degrades PASSED    [ 13%]
+tests/unit/test_copilot_mindset.py::test_corrupt_file_degrades PASSED    [ 16%]
+tests/unit/test_copilot_mindset.py::test_bad_structure_degrades PASSED   [ 18%]
+tests/unit/test_copilot_mindset.py::test_no_valid_items_degrades PASSED  [ 21%]
+tests/unit/test_copilot_mindset.py::test_seed_content_isolated_from_decision_paths PASSED [ 24%]
+tests/unit/test_copilot_intent.py::test_intent_recommend PASSED          [ 27%]
+tests/unit/test_copilot_intent.py::test_intent_holdings PASSED           [ 29%]
+tests/unit/test_copilot_intent.py::test_intent_trade_report PASSED       [ 32%]
+tests/unit/test_copilot_intent.py::test_intent_review PASSED             [ 35%]
+tests/unit/test_copilot_intent.py::test_intent_chat_fallback PASSED      [ 37%]
+tests/unit/test_copilot_intent.py::test_trade_report_buy_with_code_and_amount PASSED [ 40%]
+tests/unit/test_copilot_intent.py::test_trade_report_sell_with_wan_and_k PASSED [ 43%]
+tests/unit/test_copilot_intent.py::test_trade_report_name_extraction_and_missing PASSED [ 45%]
+tests/unit/test_copilot_intent.py::test_trade_report_today_default PASSED [ 48%]
+tests/unit/test_copilot_intent.py::test_trade_report_amount_missing PASSED [ 51%]
+tests/unit/test_copilot_intent.py::test_intent_dca PASSED                [ 54%]
+tests/unit/test_copilot_intent.py::test_intent_sentiment PASSED          [ 56%]
+tests/unit/test_copilot_intent.py::test_intent_mindset_recognized_no_fallback_when_seeds_present PASSED [ 59%]
+tests/unit/test_copilot_intent.py::test_intent_mindset_fallback_when_seeds_missing PASSED [ 62%]
+tests/unit/test_copilot_intent.py::test_intent_new_kinds_negative PASSED [ 64%]
+tests/unit/test_copilot_intent.py::test_intent_cross_priority PASSED     [ 67%]
+tests/unit/test_copilot_intent.py::test_intent_old_chat_has_no_fallback_reason PASSED [ 70%]
+tests/unit/test_copilot_intent.py::test_intent_no_hidden_session_state PASSED [ 72%]
+tests/unit/test_copilot_dispatch.py::test_dispatch_recommend_returns_card PASSED [ 75%]
+tests/unit/test_copilot_dispatch.py::test_dispatch_trade_report_returns_preview PASSED [ 78%]
+tests/unit/test_copilot_dispatch.py::test_dispatch_holdings_card PASSED  [ 81%]
+tests/unit/test_copilot_dispatch.py::test_dispatch_unknown_falls_back_to_chat PASSED [ 83%]
+tests/unit/test_copilot_dispatch.py::test_dispatch_dca_returns_state_card PASSED [ 86%]
+tests/unit/test_copilot_dispatch.py::test_dispatch_dca_with_symbol PASSED [ 89%]
+tests/unit/test_copilot_dispatch.py::test_dispatch_sentiment_narrative_card PASSED [ 91%]
+tests/unit/test_copilot_dispatch.py::test_dispatch_mindset_returns_narrative_card PASSED [ 94%]
+tests/unit/test_copilot_dispatch.py::test_dispatch_mindset_falls_back_with_reason PASSED [ 97%]
+tests/unit/test_copilot_dispatch.py::test_dispatch_sequence_no_hidden_state PASSED [100%]
+
+============================== 37 passed in 4.57s ==============================

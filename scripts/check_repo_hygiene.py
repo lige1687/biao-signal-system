@@ -23,7 +23,8 @@ REPO = Path(__file__).resolve().parents[1]
 
 #: 仓库根层白名单（文件）。工具配置目录（.streamlit 等）单独列。
 ROOT_KEEP_FILES = {
-    ".DS_Store", ".env", ".env.example", ".gitignore", ".plan.md",
+    # ".git"（文件）= git worktree 指针（本工作区形态），与目录形态一并放行
+    ".DS_Store", ".env", ".env.example", ".git", ".gitignore", ".plan.md",
     "AGENTS.md", "CLAUDE.md", "README.md", "pyproject.toml",
     "project.config.json", "project.private.config.json",
 }

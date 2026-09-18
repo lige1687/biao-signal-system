@@ -78,12 +78,21 @@ def test_intent_sentiment():
         assert parse_intent(msg).kind == "sentiment"
 
 
-def test_intent_mindset_recognized_with_fallback_reason():
-    # 识别成功、种子库缺位：kind=mindset 且带显式回落原因（回落发生在 dispatch 层）
+def test_intent_mindset_recognized_no_fallback_when_seeds_present():
+    # 识别成功、种子库在场（configs/mindset_seed.json 已入仓）：不带回落标注
     for msg in ("最近拿不住怎么办", "心态崩了", "跌得睡不着"):
         i = parse_intent(msg)
         assert i.kind == "mindset"
-        assert i.fallback_reason == "mindset_seed_missing"
+        assert i.fallback_reason is None
+
+
+def test_intent_mindset_fallback_when_seeds_missing(monkeypatch):
+    # 种子库缺位：识别成功但带显式回落原因（回落发生在 dispatch 层），
+    # 行为与接入前缺位场景一致
+    monkeypatch.setattr("lei_signal.copilot.intent._mindset_seeds_ok", lambda: False)
+    i = parse_intent("心态崩了")
+    assert i.kind == "mindset"
+    assert i.fallback_reason == "mindset_seed_missing"
 
 
 def test_intent_new_kinds_negative():

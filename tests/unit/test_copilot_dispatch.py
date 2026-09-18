@@ -114,7 +114,32 @@ def test_dispatch_sentiment_narrative_card(app, monkeypatch):
     assert "不参与技术判定" in body["note_cn"]  # 只叙事红线随卡下带
 
 
-def test_dispatch_mindset_falls_back_with_reason(app):
+def test_dispatch_mindset_returns_narrative_card(app):
+    # 种子库在场（已入仓）：出 card_type=mindset 叙事卡，带出处与只叙事红线
+    r = TestClient(app).post("/api/copilot/dispatch", json={"message": "心态崩了"})
+    assert r.status_code == 200
+    body = r.json()
+    assert body["intent"] == "mindset"
+    assert body["chat_fallback"] is False
+    assert body["fallback_reason"] is None
+    assert body["card"]["card_type"] == "mindset"
+    data = body["card"]["data"]
+    assert data["available"] is True and data["count"] > 0
+    for item in data["items"][:3]:
+        assert set(item) >= {"category", "text", "quote", "source", "seed_key"}
+    assert "不参与" in body["note_cn"]  # 只叙事红线随卡下带
+
+
+def test_dispatch_mindset_falls_back_with_reason(app, monkeypatch):
+    # 种子库缺位（模拟文件缺失）：回落行为与接入前一致，原因可观察
+    from lei_signal.copilot import intent as intent_mod
+    from lei_signal.copilot import mindset as mindset_mod
+
+    monkeypatch.setattr(intent_mod, "_mindset_seeds_ok", lambda: False)
+    monkeypatch.setattr(
+        mindset_mod, "load_mindset_seeds",
+        lambda path=None: {"available": False, "items": [], "count": 0},
+    )
     r = TestClient(app).post("/api/copilot/dispatch", json={"message": "心态崩了"})
     assert r.status_code == 200
     body = r.json()

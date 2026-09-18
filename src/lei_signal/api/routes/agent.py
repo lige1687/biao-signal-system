@@ -1996,9 +1996,14 @@ def _topic_blocks(topic: str | None, symbol: str | None) -> dict:
         except Exception as exc:  # noqa: BLE001
             blocks["evidence"] = {"available": False, "error": str(exc)}
     elif topic == "mindset":
+        from lei_signal.copilot import mindset as mindset_mod
+
+        pack = mindset_mod.load_mindset_seeds()
         blocks["mindset"] = {
-            "available": False,
-            "note_cn": "心态内容只在用户求助时按其认可且兼容的一条引用，不当规则",
+            "available": bool(pack.get("available")),
+            "count": pack.get("count"),
+            "note_cn": "心态内容只在用户求助时按其认可且兼容的一条引用，不当规则"
+                       "；只叙事，不参与判定",
         }
     elif topic == "money":
         blocks["money"] = {
