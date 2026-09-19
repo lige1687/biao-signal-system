@@ -1,0 +1,291 @@
+# diff 快照（本阶段全部改动，213 行纯新增）
+
+diff --git a/src/lei_signal/api/schemas.py b/src/lei_signal/api/schemas.py
+index 9a892fd9..28619ebe 100644
+--- a/src/lei_signal/api/schemas.py
++++ b/src/lei_signal/api/schemas.py
+@@ -1288,6 +1288,25 @@ class MajorEventsBlockDTO(BaseModel):
+     note_cn: str = ""
+ 
+ 
++class DcaBlockDTO(BaseModel):
++    """定投状态区块（2026-09-20 接入，V1 状态位：只报状态事实）。
++
++    数据来自既有 DCA 只读服务（证据账本可用性 + 中美宽度读数 +
++    跟踪池逐状态），形态对齐 agent.py 话题块 / routes/copilot.py
++    dca 分支先例；缺数据=null 与未触发=false 的区分在服务层。
++    本块不携带解释文案、不新增任何判断；数据缺失时 available=False
++    并给 reason_cn（如实原因），不编数。零下单零记账——实际买卖
++    仍走报单确认台账。
++    """
++
++    available: bool = False
++    reason_cn: str = ""                # 降级原因（可用时为空）
++    evidence_available: bool = False   # 证据账本可读
++    evidence_version: str = ""         # 账本版本（可读时）
++    breadth: dict = {}                 # {cn: 引用卡|None, us: 引用卡|None}
++    states: list[dict] = []            # 跟踪池逐标的状态（服务原样输出）
++
++
+ class OpsCardDTO(BaseModel):
+     """每日操作清单（确定性组装，零 LLM；页面与推送共用）。"""
+ 
+@@ -1299,6 +1318,7 @@ class OpsCardDTO(BaseModel):
+     watch_triggers: list[OpsLineDTO] = []
+     sentiment: SentimentBlockDTO | None = None
+     major_events: MajorEventsBlockDTO | None = None
++    dca: DcaBlockDTO | None = None
+     push_summary_cn: str = ""
+ 
+ 
+diff --git a/src/lei_signal/copilot/ops.py b/src/lei_signal/copilot/ops.py
+index cb8408fd..778d3855 100644
+--- a/src/lei_signal/copilot/ops.py
++++ b/src/lei_signal/copilot/ops.py
+@@ -5,14 +5,17 @@
+      ③ 计划待办催办（open 待办，EXIT 优先）
+      ④ 观察触发（当日扫描 waiting 项还缺什么）
+      ⑤ 重大事件（客观字段 only，newsfeed 侧组装后传入）
++另附区块：情绪面（2026-09-06）、定投状态位（2026-09-20，V1 只报状态事实）。
+ """
+ from __future__ import annotations
+ 
+ import json
+ import sqlite3
++from collections.abc import Callable
+ from datetime import UTC, datetime
+ 
+ from lei_signal.api.schemas import (
++    DcaBlockDTO,
+     MajorEventsBlockDTO,
+     OpsCardDTO,
+     OpsLineDTO,
+@@ -33,6 +36,7 @@ def build_ops_today(
+     run_date: str,
+     recommend_card: RecommendCardDTO | None,
+     major_events: dict | None = None,
++    dca_reader: Callable[[], DcaBlockDTO] | None = None,
+ ) -> OpsCardDTO:
+     rows = conn.execute(
+         """SELECT a.action_id, a.plan_id, a.kind, a.due_from, a.nag_count,
+@@ -102,6 +106,10 @@ def build_ops_today(
+     major_block = _build_major_events_block(major_events)
+     if major_block and major_block.available:
+         parts.append(f"重大事件 {len(major_block.items)} 条")
++    try:
++        dca_block = (dca_reader or _build_dca_block)()
++    except Exception:  # noqa: BLE001 — 区块缺席不阻塞清单（与情绪面同一红线）
++        dca_block = None
+     summary = "；".join(parts) + "。" if parts else "今日无必须处理的待办。"
+     return OpsCardDTO(
+         run_date=run_date,
+@@ -112,6 +120,7 @@ def build_ops_today(
+         watch_triggers=watch,
+         sentiment=_build_sentiment_block(conn),
+         major_events=major_block,
++        dca=dca_block,
+         push_summary_cn=summary,
+     )
+ 
+@@ -145,6 +154,73 @@ def _build_major_events_block(major_events: dict | None) -> MajorEventsBlockDTO
+     )
+ 
+ 
++def _build_dca_block(
++    *,
++    evidence_path=None,
++    loader=None,
++    breadth_reader=None,
++    symbols=None,
++) -> DcaBlockDTO:
++    """定投状态区块（2026-09-20 接入，V1 状态位口径：只报状态事实）。
++
++    纯只读调既有 DCA 服务（先例：agent.py 话题块 dca 分支、
++    routes/copilot.py dispatch dca 分支、routes/dca.py 状态板）：
++    证据账本可用性 + 中美宽度读数 + 跟踪池逐状态（symbols=None 即
++    服务默认跟踪池，与三处先例一致）。缺数据=null 与未触发=false
++    的区分在服务层，本层不碰；零写入、不新增判断、不携带解释文案。
++    数据缺失时 available=False 并如实给原因，不编数。注入参数仅供
++    单测使用（临时/构造数据），生产调用方一律走默认读取。
++    """
++    try:
++        from lei_signal.dca import service as dca_service  # noqa: PLC0415
++        from lei_signal.dca.state import (  # noqa: PLC0415
++            default_data_loader,
++            read_breadth,
++        )
++    except Exception as exc:  # noqa: BLE001 — 服务缺席如实降级
++        return DcaBlockDTO(available=False, reason_cn=f"DCA 服务不可用：{exc}")
++
++    ev = dca_service.load_evidence(evidence_path)
++    reason = ""
++    if not ev.get("available"):
++        reason = str(ev.get("error_detail") or ev.get("note")
++                     or "证据账本不可读")
++
++    def _read(market: str):
++        return (breadth_reader(market) if breadth_reader is not None
++                else read_breadth(market))
++
++    readings: dict = {}
++    for key, market in (("cn", "cn_all"), ("us", "sp500")):
++        try:
++            readings[key] = _read(market)
++        except Exception:  # noqa: BLE001 — 宽度缺席如实，不硬凑
++            readings[key] = None
++    b_cn = readings.get("cn").value if readings.get("cn") is not None else None
++    b_us = readings.get("us").value if readings.get("us") is not None else None
++    breadth_meta = {k: v.meta() for k, v in readings.items() if v is not None}
++
++    states: list[dict] = []
++    states_error = ""
++    try:
++        states = dca_service.targets_state(
++            loader if loader is not None else default_data_loader(),
++            ev, symbols, b_cn, b_us, breadth_meta=breadth_meta)
++    except Exception as exc:  # noqa: BLE001 — 逐状态缺席如实降级
++        states_error = str(exc)
++    if states_error and not reason:
++        reason = f"逐状态计算失败：{states_error}"
++    return DcaBlockDTO(
++        available=bool(ev.get("available")) and not states_error,
++        reason_cn=reason,
++        evidence_available=bool(ev.get("available")),
++        evidence_version=str(ev.get("version") or ""),
++        breadth={k: (v.meta().to_dict() if v is not None else None)
++                 for k, v in readings.items()},
++        states=states,
++    )
++
++
+ def _sentiment_signal_lines() -> list[dict]:
+     """情绪信号触发状态（2026-09-06 接入，交易链路主动可见位）。
+ 
+diff --git a/tests/unit/test_copilot_ops.py b/tests/unit/test_copilot_ops.py
+index 9472ba50..d66f7e11 100644
+--- a/tests/unit/test_copilot_ops.py
++++ b/tests/unit/test_copilot_ops.py
+@@ -69,3 +69,120 @@ def test_exit_todo_ranked_first(conn):
+     assert card.plan_todos[0].nag_count == 3
+     assert "退出" in card.push_summary_cn or "EXIT" in card.push_summary_cn
+     assert any("退出待办" in h.text_cn for h in card.holdings_actions)
++
++
++# ---- dca 状态块（2026-09-20 接入，V1 状态位）三态组装测试 ----
++# 真实数据禁碰：证据账本用 tmp_path 临时文件，行情/宽度全部构造注入。
++
++
++def _fake_bars(n: int = 260):
++    import pandas as pd
++
++    idx = pd.bdate_range("2025-01-01", periods=n)
++    close = [100.0 + i * 0.1 for i in range(n)]
++    return pd.DataFrame({"close": close}, index=idx)
++
++
++def _fake_breadth(market: str):
++    from lei_signal.dca.state import BreadthReading
++
++    return BreadthReading(market, 50.0, "test-source", "2026-09-18",
++                          "2026-09-18", None, "unknown",
++                          "测试注入（发布节奏未核实）")
++
++
++def _missing_breadth(_market: str):
++    raise RuntimeError("测试注入：宽度文件缺失")
++
++
++def _write_evidence(tmp_path):
++    import json
++
++    p = tmp_path / "dca_evidence.json"
++    p.write_text(json.dumps({
++        "version": "test-v1",
++        "state_expectations": {},
++    }, ensure_ascii=False), encoding="utf-8")
++    return p
++
++
++def test_dca_block_with_data(tmp_path):
++    block = ops._build_dca_block(
++        evidence_path=_write_evidence(tmp_path),
++        loader=lambda s: _fake_bars(),
++        breadth_reader=_fake_breadth,
++        symbols=[("TEST1", "测试指数")],
++    )
++    assert block.available is True
++    assert block.evidence_available is True
++    assert block.evidence_version == "test-v1"
++    assert block.reason_cn == ""
++    assert block.states and block.states[0]["symbol"] == "TEST1"
++    st = block.states[0]
++    assert st["state_status"] == "ok"
++    assert st["deep20"] is False and st["bottom_zone"] is False  # 上升序列未触发
++    assert block.breadth["cn"]["health"] == "unknown"
++    assert block.breadth["us"]["market"] == "sp500"
++
++
++def test_dca_block_degrades_when_evidence_missing(tmp_path):
++    block = ops._build_dca_block(
++        evidence_path=tmp_path / "missing.json",
++        loader=lambda s: None,
++        breadth_reader=_missing_breadth,
++    )
++    assert block.available is False
++    assert block.evidence_available is False
++    assert "不存在" in block.reason_cn
++    # 逐状态仍如实给出：跟踪池全 insufficient_data（缺数据=null），不编数
++    assert block.states
++    assert all(s["state_status"] == "insufficient_data" for s in block.states)
++    assert block.breadth == {"cn": None, "us": None}
++
++
++def test_dca_block_partial_breadth_missing(tmp_path):
++    block = ops._build_dca_block(
++        evidence_path=_write_evidence(tmp_path),
++        loader=lambda s: _fake_bars(),
++        breadth_reader=_missing_breadth,
++        symbols=[("TEST1", "测试指数")],
++    )
++    # 证据账本可读、价格可判 → 块整体可用；宽度缺席只降级依赖它的状态
++    assert block.available is True
++    assert block.breadth == {"cn": None, "us": None}
++    st = block.states[0]
++    assert st["deep20"] is False        # 深超跌只依赖价格：仍可判
++    assert st["bottom_zone"] is None    # 底部区域依赖宽度：无法判定（null≠false）
++
++
++def test_ops_card_wires_dca_block_without_touching_sentiment(conn, tmp_path):
++    block = ops._build_dca_block(
++        evidence_path=_write_evidence(tmp_path),
++        loader=lambda s: _fake_bars(),
++        breadth_reader=_fake_breadth,
++        symbols=[("TEST1", "测试指数")],
++    )
++    card_with = ops.build_ops_today(
++        conn, run_date="2026-09-20", recommend_card=None,
++        dca_reader=lambda: block,
++    )
++    card_none = ops.build_ops_today(
++        conn, run_date="2026-09-20", recommend_card=None,
++        dca_reader=lambda: None,
++    )
++    assert card_with.dca is block and card_with.dca.available is True
++    assert card_none.dca is None
++    # dca 接入对情绪面块零影响：同库同参数两次组装，情绪面逐字段一致
++    assert card_with.sentiment is not None
++    assert card_with.sentiment == card_none.sentiment
++
++
++def test_ops_card_survives_dca_reader_failure(conn):
++    def _boom():
++        raise RuntimeError("测试注入：读取器失败")
++
++    card = ops.build_ops_today(
++        conn, run_date="2026-09-20", recommend_card=None, dca_reader=_boom,
++    )
++    assert card.dca is None
++    assert card.push_summary_cn
+
+# 与干净树的全量单测失败对照：同一批测试在 HEAD 干净树上同样 14 failed / 13 passed / 8 errors（全部为存量，与本次无关）
+# 存量失败域：factor 契约指纹、write_tx_tracking、newsfeed push、symbol_extraction、fundamentals、b1_contract、discussion_backtest_03b

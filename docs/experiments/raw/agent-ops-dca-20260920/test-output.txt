@@ -1,0 +1,20 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.11.7, pytest-8.4.2, pluggy-1.6.0 -- /opt/homebrew/opt/python@3.11/bin/python3.11
+cachedir: .pytest_cache
+hypothesis profile 'default'
+rootdir: /Users/yongbiaoli/lei-agent-runtime-adoption-20260917
+configfile: pyproject.toml
+plugins: anyio-4.9.0, hypothesis-6.147.0, asyncio-1.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 8 items
+
+tests/unit/test_copilot_ops.py::test_empty_db_honest_empty_sections PASSED [ 12%]
+tests/unit/test_copilot_ops.py::test_waiting_scan_rows_become_watch_triggers PASSED [ 25%]
+tests/unit/test_copilot_ops.py::test_exit_todo_ranked_first PASSED       [ 37%]
+tests/unit/test_copilot_ops.py::test_dca_block_with_data PASSED          [ 50%]
+tests/unit/test_copilot_ops.py::test_dca_block_degrades_when_evidence_missing PASSED [ 62%]
+tests/unit/test_copilot_ops.py::test_dca_block_partial_breadth_missing PASSED [ 75%]
+tests/unit/test_copilot_ops.py::test_ops_card_wires_dca_block_without_touching_sentiment PASSED [ 87%]
+tests/unit/test_copilot_ops.py::test_ops_card_survives_dca_reader_failure PASSED [100%]
+
+============================== 8 passed in 4.95s ===============================
