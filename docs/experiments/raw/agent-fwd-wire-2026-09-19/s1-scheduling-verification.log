@@ -1,0 +1,29 @@
+== S1 验证序列（隔离临时目录，LEI_CACHE_ROOT 重定向） ==
+workspace: /Users/yongbiaoli/lei-agent-runtime-adoption-20260917 HEAD: 84e377be
+
+[T1 功能] 夹具日期 2025-09-18 代码 ['BK1621', 'BK1617']
+exit = 0
+== 前向存证战绩（绝对收益；基准对账见实验报告续篇） ==
+  冰点机会·10日: n=1 胜率100% 均+15.16%
+  冰点机会·20日: n=1 胜率100% 均+18.32%
+  强热警报·10日（期望为负）: n=1 胜率100% 均+15.62%
+  强热警报·20日: n=1 胜率100% 均+6.04%
+  t10: got=[0.1516] expected=[0.1516] match=True
+  t20: got=[0.1832] expected=[0.1832] match=True
+  a10: got=[0.1562] expected=[0.1562] match=True
+  a20: got=[0.0604] expected=[0.0604] match=True
+  done 标记: True → 功能正确: True
+
+[T2 幂等] 复跑 exit=0 sha前=ca927a9ce23bbebd sha后=ca927a9ce23bbebd 字节级不变=True 记录数=1（无重复）
+
+[T3 注入] 损坏 history 直接跑 review：exit=1（失败是真实的）
+  stderr 尾行: json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+  ⚠ 情绪存证对账异常（不影响主快照，退出码 1）：json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+  挂载块（ast 抽取自真实源码）执行：吞掉异常打警告={} True
+
+[T4 降级] 损坏 journal：exit=0（_load_journal 吞 JSONDecodeError，按空账本处理不崩）
+
+[真实 cache] history 未变=True journal 未变=True
+[脚本] py_compile: True
+
+== 总结论： ALL PASS ==
