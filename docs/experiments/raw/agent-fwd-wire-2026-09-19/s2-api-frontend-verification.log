@@ -1,0 +1,49 @@
+==== S2 验证（execution=2, 2026-09-19） ====
+
+--- [1] API 单元测试（临时 JSON + 临时 SQLite，TestClient） ---
+tests/unit/test_fwd_ledger_api.py::test_sentiment_buckets_match_review_output PASSED [ 20%]
+tests/unit/test_fwd_ledger_api.py::test_scorecard_both_available_and_readonly PASSED [ 40%]
+tests/unit/test_fwd_ledger_api.py::test_scorecard_degrades_when_data_missing PASSED [ 60%]
+tests/unit/test_fwd_ledger_api.py::test_sentiment_records_without_expired_samples_degrade PASSED [ 80%]
+tests/unit/test_fwd_ledger_api.py::test_recommendation_corrupt_outcome_rows_skipped PASSED [100%]
+============================== 5 passed in 1.56s ===============================
+
+--- [2] 前端构建 ---
+✓ built in 2.72s
+
+--- [3] 前端回归脚本（全部） ---
+test:structure-controls FAIL(既有：干净树上同样失败，与本阶段无关)
+test:factor-panel       PASS
+test:agent-workspace    PASS
+test:agent-prices       PASS
+test:agent-ux           PASS
+test:agent-tasks        PASS
+test:evidence-card      PASS
+test:copilot-cards      PASS
+test:resolve-route      PASS
+test:agent-markdown     PASS
+test:portfolio-map      PASS
+test:fwd-ledger         PASS
+
+--- [4] 后端 unit 全量（对照干净树） ---
+带本阶段改动：  28 failed, 2382 passed, 1 skipped, 8 errors（7:32）
+干净树(--lf)：  15 failed, 8 errors —— 与带改动时同一批失败集，全部既有（b1_contract/factor 冻结协议/fundamentals/newsfeed_push/symbol_extraction/research preflight），与本阶段无关
+5 passed in 1.17s
+
+--- [5] 只读性 ---
+routes/fwd_ledger.py：仅 1 个 GET 端点（/api/fwd-ledger/scorecard），无 POST/PUT/DELETE/PATCH
+api/fwd_ledger.py：唯一 execute( 是 SELECT recommendation_journal（只读查询）；无 INSERT/UPDATE/DELETE
+29:@router.get("/scorecard")
+97:    rows = conn.execute(
+
+--- [6] 冒烟（临时环境三形态） ---
+双可用形态：sentiment.available = True
+   四桶 pick10 n=2 mean=1.5 win=50.0
+   四桶 pick20 n=1 mean=10.0 win=100.0
+   四桶 alarm10 n=1 mean=-3.0 win=0.0
+   四桶 alarm20 n=1 mean=1.0 win=100.0
+           recommendation.available = True | scoredDates = 2 | latest = 2026-08-02
+   标的 510300 沪深300ETF t1 = 0.5 | t5 = 2.0 | t20 = None
+   标的 513100 纳指ETF t1 = -0.5 | t5 = None | t20 = None
+降级形态：sentiment = False | 账本文件不存在（情绪信号尚未存证过）
+          recommendation = False | 推荐账本尚无任何到期对账结果

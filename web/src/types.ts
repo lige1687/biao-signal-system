@@ -2801,3 +2801,48 @@ export interface LearningResponse {
   entries: LearningEntry[];
   stats: LearningStats;
 }
+
+// ---- 前向验证成绩单（/api/fwd-ledger/scorecard，只读）----
+export interface FwdBucketStat {
+  n: number;
+  winRatePct?: number;
+  meanPct?: number;
+}
+
+export interface FwdSentimentBucket extends FwdBucketStat {
+  key: "pick10" | "pick20" | "alarm10" | "alarm20";
+  labelCn: string;
+  horizonDays: number;
+}
+
+export interface FwdSentimentSection {
+  available: boolean;
+  reason: string;
+  records?: number;
+  reviewedRecords?: number;
+  buckets?: FwdSentimentBucket[];
+}
+
+export interface FwdSymbolRow {
+  symbol: string;
+  nameCn: string | null;
+  samples: number;
+  t1: FwdBucketStat | null;
+  t5: FwdBucketStat | null;
+  t20: FwdBucketStat | null;
+}
+
+export interface FwdRecommendationSection {
+  available: boolean;
+  reason: string;
+  scoredDates?: number;
+  latestDate?: string;
+  horizonsCn?: Record<string, string>;
+  bySymbol?: FwdSymbolRow[];
+}
+
+export interface FwdLedgerResponse {
+  sentiment: FwdSentimentSection;
+  recommendation: FwdRecommendationSection;
+  disclaimerCn: string;
+}

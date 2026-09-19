@@ -66,6 +66,7 @@ export default function TopNav() {
     ],
     [
       { to: "/backtest", label: "回测" },
+      { to: "/fwd", label: "前向成绩" },
       { to: "/research", label: "本轮研究" },
       { to: "/library", label: "实验报告库" },
       { to: "/learning", label: "文献学习库" },

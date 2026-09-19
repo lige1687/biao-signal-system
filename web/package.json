@@ -17,7 +17,8 @@
     "test:copilot-cards": "node run-copilot-cards-regression.mjs",
     "test:resolve-route": "node run-resolve-route-regression.mjs",
     "test:agent-markdown": "node run-agent-markdown-regression.mjs",
-    "test:portfolio-map": "esbuild src/utils/portfolioSymbols.ts --bundle --platform=node --format=esm --outfile=/tmp/lei-portfolio-symbols.mjs && node run-portfolio-map-regression.mjs"
+    "test:portfolio-map": "esbuild src/utils/portfolioSymbols.ts --bundle --platform=node --format=esm --outfile=/tmp/lei-portfolio-symbols.mjs && node run-portfolio-map-regression.mjs",
+    "test:fwd-ledger": "esbuild src/pages/fwdLedgerLogic.ts --bundle --platform=node --format=esm --outfile=/tmp/lei-fwd-ledger-logic.mjs && node run-fwd-ledger-regression.mjs"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.59.0",

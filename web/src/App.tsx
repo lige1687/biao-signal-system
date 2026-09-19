@@ -6,6 +6,7 @@ import AgentConsole from "./components/AgentConsole";
 import DetailPage from "./pages/DetailPage";
 import FactorPanelPage from "./pages/FactorPanelPage";
 import FundamentalsPage from "./pages/FundamentalsPage";
+import FwdLedgerPage from "./pages/FwdLedgerPage";
 import NewsPage from "./pages/NewsPage";
 import SectorsPage from "./pages/SectorsPage";
 import DailyBriefPage from "./pages/DailyBriefPage";
@@ -84,6 +85,7 @@ export default function App() {
         {/* 本轮研究展示：宽度/模块E/终审 轮次结果（静态数据页） */}
         <Route path="/research" element={<ResearchPage />} />
         {/* 实验报告库：全量实验/调研文档统一浏览（登记簿分类 + 一句话结论） */}
+        <Route path="/fwd" element={<FwdLedgerPage />} />
         <Route path="/library" element={<ReportsLibraryPage />} />
         {/* 文献学习库：以论文为线索的学习目录（只读学习层，不参与交易判定） */}
         <Route path="/learning" element={<LearningLibraryPage />} />
