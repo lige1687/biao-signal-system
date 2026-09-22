@@ -28,7 +28,7 @@ ROOT_KEEP_FILES = {
     "project.config.json", "project.private.config.json",
 }
 ROOT_KEEP_DIRS = {
-    ".git", ".streamlit", ".claude", ".superpowers", ".workbuddy", ".zcode",
+    ".git", ".agents", ".streamlit", ".claude", ".superpowers", ".workbuddy", ".zcode",
     ".mypy_cache", ".pytest_cache", ".ruff_cache", ".biao",
     "configs", "data", "docs", "logs", "miniapp", "scripts", "src", "tests", "web",
 }

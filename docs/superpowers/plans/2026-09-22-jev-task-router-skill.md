@@ -11,7 +11,7 @@
 ## Global Constraints
 
 - Worktree is dirty: never reset, clean, stash, or commit unrelated files.
-- The Skill is installed under `/Users/yongbiaoli/.codex/skills/lei-task-router/`; no key value enters the repository or Skill files.
+- The Skill is installed under `/Users/yongbiaoli/Desktop/lei-signal-lab/.agents/skills/lei-task-router/`; no key value enters the repository or Skill files.
 - `AGENTS.md` and explicit user model choices outrank Jev.
 - Fixed rules must produce zero Jev calls; one frozen task version may call Jev at most once.
 - Jev receives at most 800 Chinese characters of task summary and only two or three adjacent candidate routes.
@@ -26,10 +26,10 @@
 ### Task 1: Scaffold the Skill and freeze its public route contract
 
 **Files:**
-- Create: `/Users/yongbiaoli/.codex/skills/lei-task-router/SKILL.md`
-- Create: `/Users/yongbiaoli/.codex/skills/lei-task-router/agents/openai.yaml`
-- Create: `/Users/yongbiaoli/.codex/skills/lei-task-router/references/route-contract.md`
-- Create: `/Users/yongbiaoli/.codex/skills/lei-task-router/tests/scenarios.json`
+- Create: `/Users/yongbiaoli/Desktop/lei-signal-lab/.agents/skills/lei-task-router/SKILL.md`
+- Create: `/Users/yongbiaoli/Desktop/lei-signal-lab/.agents/skills/lei-task-router/agents/openai.yaml`
+- Create: `/Users/yongbiaoli/Desktop/lei-signal-lab/.agents/skills/lei-task-router/references/route-contract.md`
+- Create: `/Users/yongbiaoli/Desktop/lei-signal-lab/.agents/skills/lei-task-router/tests/scenarios.json`
 
 **Interfaces:**
 - Consumes: project model split from `/Users/yongbiaoli/Desktop/lei-signal-lab/AGENTS.md`.
@@ -42,9 +42,9 @@ Run:
 ```bash
 python3 /Users/yongbiaoli/.codex/skills/.system/skill-creator/scripts/init_skill.py \
   lei-task-router \
-  --path /Users/yongbiaoli/.codex/skills \
+  --path /Users/yongbiaoli/Desktop/lei-signal-lab/.agents/skills \
   --resources scripts,references
-mkdir -p /Users/yongbiaoli/.codex/skills/lei-task-router/tests
+mkdir -p /Users/yongbiaoli/Desktop/lei-signal-lab/.agents/skills/lei-task-router/tests
 ```
 
 Expected: a new Skill folder with `SKILL.md` and `agents/openai.yaml`; no project files change.
@@ -104,8 +104,8 @@ Expected: automatic discovery is possible, but the description only attracts mod
 ### Task 2: Build the deterministic router with tests first
 
 **Files:**
-- Create: `/Users/yongbiaoli/.codex/skills/lei-task-router/scripts/route_task.py`
-- Create: `/Users/yongbiaoli/.codex/skills/lei-task-router/tests/test_route_task.py`
+- Create: `/Users/yongbiaoli/Desktop/lei-signal-lab/.agents/skills/lei-task-router/scripts/route_task.py`
+- Create: `/Users/yongbiaoli/Desktop/lei-signal-lab/.agents/skills/lei-task-router/tests/test_route_task.py`
 
 **Interfaces:**
 - Consumes: a JSON packet on stdin or from `--input`, optional `--state-dir`, and an injectable transport in Python tests.
@@ -128,7 +128,7 @@ test_rejects_summary_over_800_characters
 Run:
 
 ```bash
-python3 -m unittest discover -s /Users/yongbiaoli/.codex/skills/lei-task-router/tests -v
+python3 -m unittest discover -s /Users/yongbiaoli/Desktop/lei-signal-lab/.agents/skills/lei-task-router/tests -v
 ```
 
 Expected: FAIL because `scripts.route_task` does not exist.
@@ -203,7 +203,7 @@ Catch network, HTTP, timeout and JSON errors once and return a structured fallba
 Run:
 
 ```bash
-python3 -m unittest discover -s /Users/yongbiaoli/.codex/skills/lei-task-router/tests -v
+python3 -m unittest discover -s /Users/yongbiaoli/Desktop/lei-signal-lab/.agents/skills/lei-task-router/tests -v
 ```
 
 Expected: all tests PASS and no network access occurs.
@@ -213,7 +213,7 @@ Expected: all tests PASS and no network access occurs.
 ### Task 3: Write the concise Skill workflow and local configuration
 
 **Files:**
-- Modify: `/Users/yongbiaoli/.codex/skills/lei-task-router/SKILL.md`
+- Modify: `/Users/yongbiaoli/Desktop/lei-signal-lab/.agents/skills/lei-task-router/SKILL.md`
 - Create: `/Users/yongbiaoli/.codex/lei-task-router/config.json`
 
 **Interfaces:**
@@ -255,7 +255,7 @@ Run:
 
 ```bash
 python3 /Users/yongbiaoli/.codex/skills/.system/skill-creator/scripts/quick_validate.py \
-  /Users/yongbiaoli/.codex/skills/lei-task-router
+  /Users/yongbiaoli/Desktop/lei-signal-lab/.agents/skills/lei-task-router
 ```
 
 Expected: validation succeeds.

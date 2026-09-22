@@ -102,6 +102,7 @@
 
 | 内容 | 去处 | 备注 |
 |---|---|---|
+| 项目级 Codex Skill | `.agents/skills/<skill>/` | Skill 随仓库版本管理；密钥与缓存仍放用户目录，不入库 |
 | 实验结案报告 | `docs/experiments/主题-YYYY-MM-DD.md` | 按上文归档规约三件套登记 |
 | 实验原始数据/复现产物 | `docs/experiments/raw/<实验名>-<日期>/` | 报告的 raw 对照 |
 | 一次性研究脚本 | 随实验放 `docs/experiments/raw/<实验名>/`，或 `scripts/archive/` | **不放 scripts/ 根层** |

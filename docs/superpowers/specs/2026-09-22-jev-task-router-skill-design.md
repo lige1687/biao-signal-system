@@ -26,10 +26,10 @@ Skill 只在以下情形加载：
 
 ### 3.1 新 Skill 的职责
 
-新建本机 Skill：
+新建仓库项目级 Skill：
 
 ```text
-~/.codex/skills/lei-task-router/
+.agents/skills/lei-task-router/
 ├── SKILL.md
 ├── agents/openai.yaml
 ├── scripts/route_task.py
@@ -44,7 +44,7 @@ Skill 只在以下情形加载：
 - `route-contract.md`：保存七条合法路线、回退表、建议卡字段和版本号；只在真正进行路由时读取。
 - `scenarios.json`：保存 Skill 行为场景，包括明确小任务、研究执行、策略定义、提示注入和用户指定路线。
 - `test_route_task.py`：使用场景和本地假响应测试规则、异常和缓存，不重复消耗真实 Jev 额度。
-- `openai.yaml`：允许自动发现，但描述严格限定在本项目的模型或委派路线判断，避免普通工作误触发。
+- `openai.yaml`：允许自动发现，但描述严格限定在本项目的模型或委派路线判断，避免普通工作误触发。项目级目录按 Codex 官方规范放在仓库根的 `.agents/skills/`，不保留同名全局副本。
 
 ### 3.2 复用现有 Skill
 
