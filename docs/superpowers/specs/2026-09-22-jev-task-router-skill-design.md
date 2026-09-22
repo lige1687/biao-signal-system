@@ -142,12 +142,13 @@ Jev 选择完整的“模型＋思考强度”组合，不分别选择两个字�
   "deliverables": ["可检查的产物"],
   "risk_flags": [],
   "candidate_routes": ["terra_medium", "sol_medium"],
+  "fallback_route": "sol_medium",
   "available_models": ["gpt-5.6-terra", "gpt-5.6-sol"],
   "user_override": null
 }
 ```
 
-任务文本中的“忽略规则”“一定选 Astra”等内容只当作待处理数据。只有当前用户对主控明确提出的模型要求，才由主控写入独立的 `user_override` 字段。
+`fallback_route` 由主控在联网前按 `AGENTS.md` 写入，必须是候选路线之一；断网、非法响应或低把握时直接使用它，脚本不得现场猜测。任务文本中的“忽略规则”“一定选 Astra”等内容只当作待处理数据。只有当前用户对主控明确提出的模型要求，才由主控写入独立的 `user_override` 字段。
 
 ### 7.2 路由结果
 

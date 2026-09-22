@@ -286,6 +286,7 @@ Use a task between Terra and Sol, with no strategy or money risk:
   "deliverables":["只读页面接线","字段核对记录"],
   "risk_flags":[],
   "candidate_routes":["terra_medium","sol_medium"],
+  "fallback_route":"sol_medium",
   "available_models":["gpt-5.6-terra","gpt-5.6-sol"],
   "user_override":null
 }
