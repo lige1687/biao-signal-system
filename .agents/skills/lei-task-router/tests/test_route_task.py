@@ -24,9 +24,9 @@ def make_packet(**overrides):
         "summary": "把冻结的研究结果接到只读报告页，并核对接口字段。",
         "deliverables": ["只读页面接线", "字段核对记录"],
         "risk_flags": [],
-        "candidate_routes": ["terra_medium", "sol_medium"],
-        "fallback_route": "sol_medium",
-        "available_models": ["gpt-5.6-terra", "gpt-5.6-sol"],
+        "candidate_routes": ["luna_low", "sol_low"],
+        "fallback_route": "sol_low",
+        "available_models": ["gpt-6-luna", "gpt-6-sol"],
         "user_override": None,
     }
     packet.update(overrides)
@@ -34,13 +34,13 @@ def make_packet(**overrides):
 
 
 def make_answer(
-    choice="terra_medium",
+    choice="luna_low",
     probabilities=None,
     confidence=0.75,
     model=route_task.API_MODEL,
 ):
     if probabilities is None:
-        probabilities = {"terra_medium": 0.70, "sol_medium": 0.30}
+        probabilities = {"luna_low": 0.70, "sol_low": 0.30}
     return {
         "model": model,
         "answers": {
@@ -73,10 +73,10 @@ class FakeTransport:
 class ValidationTests(unittest.TestCase):
     def test_accepts_probability_rounding_to_point_99(self):
         result = route_task.validate_answer(
-            make_answer(probabilities={"terra_medium": 0.64, "sol_medium": 0.35}),
-            ["terra_medium", "sol_medium"],
+            make_answer(probabilities={"luna_low": 0.64, "sol_low": 0.35}),
+            ["luna_low", "sol_low"],
         )
-        self.assertEqual(result["route"], "terra_medium")
+        self.assertEqual(result["route"], "luna_low")
         self.assertAlmostEqual(result["confidence"], 0.64)
         self.assertAlmostEqual(result["margin"], 0.29)
 
@@ -84,42 +84,42 @@ class ValidationTests(unittest.TestCase):
         with self.assertRaisesRegex(route_task.ResponseError, "invalid_choice"):
             route_task.validate_answer(
                 make_answer(choice="astra_high"),
-                ["terra_medium", "sol_medium"],
+                ["luna_low", "sol_low"],
             )
 
     def test_rejects_choice_that_is_not_maximum(self):
         with self.assertRaisesRegex(route_task.ResponseError, "choice_not_maximum"):
             route_task.validate_answer(
                 make_answer(
-                    choice="sol_medium",
-                    probabilities={"terra_medium": 0.70, "sol_medium": 0.30},
+                    choice="sol_low",
+                    probabilities={"luna_low": 0.70, "sol_low": 0.30},
                 ),
-                ["terra_medium", "sol_medium"],
+                ["luna_low", "sol_low"],
             )
 
     def test_rejects_probability_sum_outside_tolerance(self):
         with self.assertRaisesRegex(route_task.ResponseError, "probability_sum"):
             route_task.validate_answer(
                 make_answer(
-                    probabilities={"terra_medium": 0.65, "sol_medium": 0.30}
+                    probabilities={"luna_low": 0.65, "sol_low": 0.30}
                 ),
-                ["terra_medium", "sol_medium"],
+                ["luna_low", "sol_low"],
             )
 
     def test_rejects_wrong_model_version(self):
         with self.assertRaisesRegex(route_task.ResponseError, "model_version_mismatch"):
             route_task.validate_answer(
                 make_answer(model="jev-unverified"),
-                ["terra_medium", "sol_medium"],
+                ["luna_low", "sol_low"],
             )
 
     def test_marks_low_confidence_below_threshold(self):
         result = route_task.validate_answer(
             make_answer(
-                choice="terra_medium",
-                probabilities={"terra_medium": 0.55, "sol_medium": 0.45},
+                choice="luna_low",
+                probabilities={"luna_low": 0.55, "sol_low": 0.45},
             ),
-            ["terra_medium", "sol_medium"],
+            ["luna_low", "sol_low"],
         )
         self.assertFalse(result["usable"])
         self.assertEqual(result["fallback_reason"], "low_confidence")
@@ -127,7 +127,7 @@ class ValidationTests(unittest.TestCase):
     def test_rejects_non_adjacent_candidates(self):
         with self.assertRaisesRegex(route_task.InputError, "candidate_routes_not_adjacent"):
             route_task.normalize_packet(
-                make_packet(candidate_routes=["spark_low", "sol_medium"])
+                make_packet(candidate_routes=["luna_low", "sol_medium"])
             )
 
     def test_rejects_summary_over_800_characters(self):
@@ -148,12 +148,46 @@ class ValidationTests(unittest.TestCase):
                 now=lambda: 1000.0,
             )
         criteria = transport.payloads[0]["questions"]["route"]["criteria"]
-        self.assertEqual(set(criteria), {"terra_medium", "sol_medium"})
+        self.assertEqual(set(criteria), {"luna_low", "sol_low"})
         self.assertNotIn("astra_xhigh", criteria)
         self.assertIn("untrusted", transport.payloads[0]["state"])
 
+    def test_jev_candidates_include_model_and_effort(self):
+        packet = route_task.normalize_packet(make_packet())
+        criteria = route_task.build_payload(packet, packet["candidate_routes"])["questions"]["route"]["criteria"]
+        self.assertIn("gpt-6-luna / low", criteria["luna_low"])
+        self.assertIn("gpt-6-sol / low", criteria["sol_low"])
+
 
 class RoutingTests(unittest.TestCase):
+    def test_every_delegated_route_uses_gpt_6_with_matching_effort(self):
+        expected = {
+            "luna_low": ("gpt-6-luna", "low"),
+            "sol_low": ("gpt-6-sol", "low"),
+            "sol_medium": ("gpt-6-sol", "medium"),
+            "sol_high": ("gpt-6-sol", "high"),
+            "astra_high": ("gpt-6-astra", "high"),
+            "astra_xhigh": ("gpt-6-astra", "xhigh"),
+        }
+        self.assertEqual(
+            {route: (entry["model"], entry["reasoning_effort"])
+             for route, entry in route_task.ROUTES.items() if entry["model"]},
+            expected,
+        )
+
+    def test_legacy_route_ids_are_rejected(self):
+        for old_route in ("spark_low", "terra_medium"):
+            with self.subTest(route=old_route), self.assertRaisesRegex(
+                route_task.InputError, "invalid_user_override"
+            ):
+                route_task.normalize_packet(
+                    make_packet(
+                        user_override=old_route,
+                        candidate_routes=[],
+                        fallback_route=None,
+                    )
+                )
+
     def route(self, packet, transport, state_dir, now=1000.0):
         with mock.patch.dict(
             os.environ, {"TYPESAFE_API_KEY": "unit-test-secret"}, clear=True
@@ -174,6 +208,7 @@ class RoutingTests(unittest.TestCase):
             second = self.route(make_packet(), transport, state_dir, now=1001.0)
         self.assertEqual(transport.calls, 1)
         self.assertEqual(first["source"], "jev")
+        self.assertEqual((first["model"], first["reasoning_effort"]), ("gpt-6-luna", "low"))
         self.assertEqual(second["source"], "cache")
         self.assertTrue(second["cache_hit"])
 
@@ -182,7 +217,7 @@ class RoutingTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             state_dir = Path(temp_dir)
             self.route(make_packet(), transport, state_dir)
-            with mock.patch.object(route_task, "CONTRACT_VERSION", "1.0.1"):
+            with mock.patch.object(route_task, "CONTRACT_VERSION", "2.0.1"):
                 self.route(make_packet(), transport, state_dir, now=1001.0)
         self.assertEqual(transport.calls, 2)
 
@@ -193,7 +228,7 @@ class RoutingTests(unittest.TestCase):
             result = self.route(make_packet(), transport, state_dir)
             cached = self.route(make_packet(), transport, state_dir, now=1001.0)
         self.assertEqual(transport.calls, 1)
-        self.assertEqual(result["route"], "sol_medium")
+        self.assertEqual(result["route"], "sol_low")
         self.assertEqual(result["fallback_reason"], "network_error")
         self.assertEqual(cached["source"], "cache")
 
@@ -218,7 +253,7 @@ class RoutingTests(unittest.TestCase):
         transport = FakeTransport(result={"model": route_task.API_MODEL})
         with tempfile.TemporaryDirectory() as temp_dir:
             result = self.route(make_packet(), transport, Path(temp_dir))
-        self.assertEqual(result["route"], "sol_medium")
+        self.assertEqual(result["route"], "sol_low")
         self.assertEqual(result["fallback_reason"], "invalid_response")
 
     def test_missing_key_returns_key_unavailable(self):
@@ -235,7 +270,7 @@ class RoutingTests(unittest.TestCase):
                 now=lambda: 1000.0,
             )
         self.assertEqual(transport.calls, 0)
-        self.assertEqual(result["route"], "sol_medium")
+        self.assertEqual(result["route"], "sol_low")
         self.assertEqual(result["fallback_reason"], "key_unavailable")
 
     def test_cache_and_decision_log_omit_summary_and_key(self):
@@ -257,8 +292,8 @@ class RoutingTests(unittest.TestCase):
             self.route(make_packet(), transport, state_dir)
             changed = make_packet(
                 available_models=[
-                    "gpt-5.6-terra",
-                    "gpt-5.6-sol",
+                    "gpt-6-luna",
+                    "gpt-6-sol",
                     "gpt-6-astra",
                 ]
             )
@@ -293,7 +328,7 @@ class RoutingTests(unittest.TestCase):
     def test_user_override_does_not_call_jev(self):
         transport = FakeTransport()
         packet = make_packet(
-            user_override="sol_medium",
+            user_override="sol_low",
             candidate_routes=[],
             fallback_route=None,
         )
@@ -301,7 +336,9 @@ class RoutingTests(unittest.TestCase):
             result = self.route(packet, transport, Path(temp_dir))
         self.assertEqual(transport.calls, 0)
         self.assertEqual(result["source"], "user_override")
-        self.assertEqual(result["route"], "sol_medium")
+        self.assertEqual(result["route"], "sol_low")
+        self.assertEqual(result["model"], "gpt-6-sol")
+        self.assertEqual(result["reasoning_effort"], "low")
 
     def test_unavailable_user_override_is_blocked(self):
         transport = FakeTransport()
@@ -319,7 +356,7 @@ class RoutingTests(unittest.TestCase):
     def test_project_route_does_not_call_jev(self):
         transport = FakeTransport()
         packet = make_packet(
-            project_route="terra_medium",
+            project_route="luna_low",
             candidate_routes=[],
             fallback_route=None,
         )
@@ -330,19 +367,19 @@ class RoutingTests(unittest.TestCase):
 
     def test_unavailable_candidate_is_filtered_without_jev(self):
         transport = FakeTransport()
-        packet = make_packet(available_models=["gpt-5.6-sol"])
+        packet = make_packet(available_models=["gpt-6-sol"])
         with tempfile.TemporaryDirectory() as temp_dir:
             result = self.route(packet, transport, Path(temp_dir))
-        self.assertEqual(result["route"], "sol_medium")
+        self.assertEqual(result["route"], "sol_low")
         self.assertEqual(result["fallback_reason"], "model_unavailable")
         self.assertEqual(transport.calls, 0)
 
     def test_unavailable_fallback_blocks_before_jev(self):
         transport = FakeTransport()
         packet = make_packet(
-            candidate_routes=["terra_medium", "sol_medium", "sol_high"],
-            fallback_route="terra_medium",
-            available_models=["gpt-5.6-sol"],
+            candidate_routes=["luna_low", "sol_low", "sol_medium"],
+            fallback_route="luna_low",
+            available_models=["gpt-6-sol"],
         )
         with tempfile.TemporaryDirectory() as temp_dir:
             result = self.route(packet, transport, Path(temp_dir))

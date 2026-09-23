@@ -9,7 +9,7 @@ Recommend the lowest sufficient execution route while keeping scope, permissions
 
 ## Route without Jev first
 
-1. Read the current repository `AGENTS.md`. An explicit user model or effort choice wins when that route is currently callable.
+1. Read the current repository `AGENTS.md`. For new delegated work, use only the current GPT-6 routes. An explicit user model or effort choice wins when that route is currently callable; handle a non-GPT-6 user choice directly rather than encoding it as a router route.
 2. Keep a read-only check, one command, wording edit, or similarly tiny change in the current task. Do not spend another model call on it.
 3. Apply the project model split directly when the category is clear. Strategy meaning, paper methods, experiment design, system boundaries, real-money risk, and critical-time judgment never go to Jev for possible downgrading.
 4. Use Jev only when a concrete, independently testable work package remains genuinely ambiguous between two or three adjacent routes.
@@ -46,11 +46,11 @@ Check current model availability again before dispatch. Show a compact card:
 ```text
 路线建议
 - 执行方式：当前完成 / 委派
-- 模型与思考：route 对应组合
+- 模型与思考：输出中的 model 与 reasoning_effort
 - 判断来源：用户指定 / 项目规则 / Jev / 缓存 / 回退
 - 把握：仅在 Jev 有有效结果时显示
 - 回退原因：如有
-- 后续流程：当前任务 / codex-delegate / lei-gpt-zcode-orchestrator / zcode-delegate
+- 后续流程：当前任务 / codex-delegate / lei-gpt-zcode-orchestrator
 - 原因：一句大白话
 ```
 
@@ -59,6 +59,6 @@ Then use the established execution workflow:
 - direct work stays in the current task;
 - bounded local delegation uses `$codex-delegate`;
 - `$lei-gpt-zcode-orchestrator` applies only when the user requested Pro participation and the substantial task warrants that full workflow;
-- `$zcode-delegate` applies only when the user explicitly selects legacy ZCode.
+- Legacy ZCode jobs are historical records; this router does not recommend that executor for new work.
 
 Jev never dispatches, retries, expands write or network permission, changes research authority, accepts an executor result, commits, deploys, or makes a trading decision. If a dispatch later fails, follow the selected execution Skill's replacement rules instead of asking this router to silently choose another executor.
