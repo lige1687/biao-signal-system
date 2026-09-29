@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { RESEARCH_EXTENSIONS, normalizeSelectedDocumentId } from "/tmp/lei-strategy-system-logic.mjs";
+import { RESEARCH_EXTENSIONS, normalizeSelectedDocumentId, normalizeStrategyMarkdown } from "/tmp/lei-strategy-system-logic.mjs";
 
 const logic = readFileSync(new URL("./src/pages/strategySystemLogic.ts", import.meta.url), "utf8");
 assert.ok(logic.includes("normalizeSelectedDocumentId"));
@@ -11,6 +11,10 @@ assert.deepEqual(RESEARCH_EXTENSIONS.map((item) => item.id), ["breadth", "instit
 assert.equal(RESEARCH_EXTENSIONS[3].sourceClass, "体系外研究扩展");
 assert.ok(RESEARCH_EXTENSIONS.slice(0, 3).every((item) => item.sourceClass === "原文与实现已有"));
 assert.ok(RESEARCH_EXTENSIONS.every((item) => item.plainDefinition && item.status && item.to.startsWith("/")));
+assert.equal(normalizeStrategyMarkdown("| 名称 | 值 |\n\n| --- | --- |\n\n| 测试 | 1 |"), "| 名称 | 值 |\n| --- | --- |\n| 测试 | 1 |");
+const fencedTable = "```md\n| A | B |\n\n| C | D |\n```";
+assert.equal(normalizeStrategyMarkdown(fencedTable), fencedTable);
+assert.equal(normalizeStrategyMarkdown("段落一\n\n段落二"), "段落一\n\n段落二");
 const page = readFileSync(new URL("./src/pages/StrategySystemPage.tsx", import.meta.url), "utf8");
 const app = readFileSync(new URL("./src/App.tsx", import.meta.url), "utf8");
 const nav = readFileSync(new URL("./src/components/TopNav.tsx", import.meta.url), "utf8");

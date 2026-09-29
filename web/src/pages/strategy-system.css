@@ -34,7 +34,7 @@
 .strategy-provenance dt { color: var(--text-faint); }
 .strategy-provenance dd { margin: 0; font-family: ui-monospace, monospace; font-size: 12px; overflow-wrap: anywhere; }
 .strategy-reader-layout { display: grid; grid-template-columns: 250px minmax(0, 780px); justify-content: center; gap: clamp(24px, 4vw, 64px); margin-top: 32px; align-items: start; }
-.strategy-toc { position: sticky; top: 86px; max-height: calc(100vh - 110px); overflow-y: auto; scrollbar-width: thin; padding-right: 14px; }
+.strategy-toc { position: sticky; top: var(--strategy-scroll-offset); max-height: calc(100vh - var(--strategy-scroll-offset) - 24px); overflow-y: auto; scrollbar-width: thin; padding-right: 14px; }
 .strategy-toc h2 { font-size: 13px; color: var(--text-faint); margin: 0 0 12px; }
 .strategy-toc ul, .strategy-mobile-toc ul { list-style: none; margin: 0; padding: 0; }
 .strategy-toc li a, .strategy-mobile-toc li a { display: block; text-decoration: none; font-size: 12px; line-height: 1.6; padding: 7px 8px; color: var(--text-dim); border-left: 2px solid transparent; }
@@ -44,7 +44,7 @@
 .strategy-mobile-toc { display: none; }
 .strategy-markdown { min-width: 0; max-width: 780px; font-size: 16px; line-height: 1.75; }
 .strategy-markdown > :first-child { margin-top: 0; }
-.strategy-markdown h1, .strategy-markdown h2, .strategy-markdown h3 { scroll-margin-top: 110px; color: var(--text); }
+.strategy-markdown h1, .strategy-markdown h2, .strategy-markdown h3 { scroll-margin-top: var(--strategy-scroll-offset); color: var(--text); }
 .strategy-markdown h1 { font-size: 28px; line-height: 1.5; margin: 0 0 28px; }
 .strategy-markdown h2 { font-size: 23px; line-height: 1.5; margin: 48px 0 20px; padding-top: 24px; border-top: 1px solid var(--border); }
 .strategy-markdown h3 { font-size: 19px; line-height: 1.6; margin: 32px 0 14px; }

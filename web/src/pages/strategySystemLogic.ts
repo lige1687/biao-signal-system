@@ -34,3 +34,24 @@ export function normalizeSelectedDocumentId(requested: string | null, ids: strin
   if (requested && ids.includes(requested)) return requested;
   return ids[0] ?? null;
 }
+
+/** 连起原文表格行之间的空行；代码块的内容保持原样。仅用于阅读展示。 */
+export function normalizeStrategyMarkdown(markdown: string): string {
+  const lines = markdown.split("\n");
+  let fence = "";
+  return lines.filter((line, index) => {
+    const marker = line.match(/^ {0,3}(`{3,}|~{3,})/);
+    if (marker) {
+      const token = marker[1];
+      if (!fence) fence = token;
+      else if (token[0] === fence[0] && token.length >= fence.length) fence = "";
+      return true;
+    }
+    if (fence || line.trim()) return true;
+    let before = index - 1, after = index + 1;
+    while (before >= 0 && !lines[before].trim()) before--;
+    while (after < lines.length && !lines[after].trim()) after++;
+    return !(lines[before]?.startsWith("|") && lines[before]?.trimEnd().endsWith("|")
+      && lines[after]?.startsWith("|"));
+  }).join("\n");
+}

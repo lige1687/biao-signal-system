@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import type { CSSProperties } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useSearchParams } from "react-router-dom";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 import { strategyDocumentsApi } from "../api/client";
-import { normalizeSelectedDocumentId, RESEARCH_EXTENSIONS } from "./strategySystemLogic";
+import { normalizeSelectedDocumentId, normalizeStrategyMarkdown, RESEARCH_EXTENSIONS } from "./strategySystemLogic";
 import type { StrategyDocumentHeading } from "../types";
 import "./strategy-system.css";
 
@@ -19,10 +20,12 @@ export default function StrategySystemPage() {
   const section = searchParams.get("section");
   const [activeHeading, setActiveHeading] = useState("");
   const [copyStatus, setCopyStatus] = useState("");
+  const [readingOffset, setReadingOffset] = useState(110);
+  const clickedSectionRef = useRef<string | null>(null);
   const articleRef = useRef<HTMLElement>(null);
   const mobileTocRef = useRef<HTMLDetailsElement>(null);
   const listQuery = useQuery({
-    queryKey: ["strategy-documents"], queryFn: strategyDocumentsApi.list, staleTime: 60_000,
+    queryKey: ["strategy-documents"], queryFn: strategyDocumentsApi.list, staleTime: 60_000, retry: false,
   });
   const ids = listQuery.data?.documents.map((item) => item.id) ?? [];
   const selectedId = normalizeSelectedDocumentId(searchParams.get("doc"), ids);
@@ -30,18 +33,29 @@ export default function StrategySystemPage() {
   const detailQuery = useQuery({
     queryKey: ["strategy-document", selectedId],
     queryFn: () => strategyDocumentsApi.detail(selectedId!),
-    enabled: selectedId != null, staleTime: 60_000,
+    enabled: selectedId != null, staleTime: 60_000, retry: false,
   });
   const detail = detailQuery.data;
   const source = detail ?? summary;
   const html = useMemo(() => {
     if (!detail) return "";
-    return DOMPurify.sanitize(marked.parse(detail.markdown, { async: false }) as string, {
+    // 桌面原文的部分表格在每行间有空行；仅在展示时连起表格行，不改源正文。
+    const markdown = normalizeStrategyMarkdown(detail.markdown);
+    return DOMPurify.sanitize(marked.parse(markdown, { async: false }) as string, {
       // 不执行原文 HTML；保留 Markdown 的标题、表格、列表、代码与链接。
       USE_PROFILES: { html: true }, FORBID_TAGS: ["style", "form", "input", "button", "iframe"],
       FORBID_ATTR: ["style", "id", "name"],
     });
   }, [detail]);
+
+  useEffect(() => {
+    const nav = document.querySelector(".top-nav");
+    if (!nav) return;
+    const measure = () => setReadingOffset(Math.ceil(nav.getBoundingClientRect().height) + 24);
+    const observer = new ResizeObserver(measure);
+    measure(); observer.observe(nav);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (selectedId && searchParams.get("doc") !== selectedId) {
@@ -78,7 +92,7 @@ export default function StrategySystemPage() {
       const first = [...visible].sort((a, b) =>
         a.getBoundingClientRect().top - b.getBoundingClientRect().top)[0];
       if (first?.id) setActiveHeading(first.id);
-    }, { rootMargin: "-96px 0px -70% 0px", threshold: [0, 1] });
+    }, { rootMargin: `-${readingOffset}px 0px -70% 0px`, threshold: [0, 1] });
     headings.forEach((node) => observer.observe(node));
     // 长章节滚动时保留当前章；向上滚回章节之间时也能正确切换。
     let frame = 0;
@@ -86,7 +100,7 @@ export default function StrategySystemPage() {
       if (frame) return;
       frame = requestAnimationFrame(() => {
         frame = 0;
-        const current = headings.filter((node) => node.id && node.getBoundingClientRect().top <= 120).slice(-1)[0];
+        const current = headings.filter((node) => node.id && node.getBoundingClientRect().top <= readingOffset + 10).slice(-1)[0];
         if (current) setActiveHeading(current.id);
       });
     };
@@ -98,10 +112,14 @@ export default function StrategySystemPage() {
       // 查询刷新但 HTML 相同时，防止重复添加复制链接。
       article.querySelectorAll(".strategy-heading-link").forEach((node) => node.remove());
     };
-  }, [detail, html]);
+  }, [detail, html, readingOffset]);
 
   useEffect(() => {
     if (!detail || !articleRef.current) return;
+    if (clickedSectionRef.current === section) {
+      clickedSectionRef.current = null;
+      return;
+    }
     const target = Array.from(articleRef.current.querySelectorAll<HTMLElement>("h1,h2,h3"))
       .find((node) => node.id === section);
     if (!target) return;
@@ -110,13 +128,14 @@ export default function StrategySystemPage() {
       setActiveHeading(target.id);
     });
     return () => cancelAnimationFrame(frame);
-  }, [detail, html, section]);
+  }, [detail, html, section, readingOffset]);
 
   function goToSection(heading: StrategyDocumentHeading) {
     if (!selectedId) return;
     const target = Array.from(articleRef.current?.querySelectorAll<HTMLElement>("h1,h2,h3") ?? [])
       .find((node) => node.id === heading.id);
     mobileTocRef.current?.removeAttribute("open");
+    clickedSectionRef.current = heading.id;
     setSearchParams({ doc: selectedId, section: heading.id });
     target?.scrollIntoView({
       behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
@@ -131,7 +150,8 @@ export default function StrategySystemPage() {
       onClick={(event) => { event.preventDefault(); goToSection(heading); }}>{heading.text}</a>
   </li>)}</ul>;
 
-  return <main className="strategy-page">
+  return <main className="strategy-page"
+    style={{ "--strategy-scroll-offset": `${readingOffset}px` } as CSSProperties}>
     <header className="strategy-header">
       <div><p className="strategy-eyebrow">LEI · 只读交易手册</p><h1>技术体系</h1></div>
       <nav className="strategy-document-tabs" aria-label="选择权威文档">
@@ -146,7 +166,7 @@ export default function StrategySystemPage() {
         </button>)}
       </nav>
       {source && <p className="strategy-source-status">
-        {sourceLabels[source.approvalStatus]}<br />
+        {detailQuery.isError && detail ? "读取失败，显示上次成功读取的内容" : sourceLabels[source.approvalStatus]}<br />
         <span>更新时间：{source.modifiedAt ? new Date(source.modifiedAt).toLocaleString("zh-CN") : "不可用"}</span>
       </p>}
     </header>
@@ -167,6 +187,7 @@ export default function StrategySystemPage() {
     {detailQuery.isFetching && !detail && selectedId && <p role="status">正在读取文档…</p>}
     {detailQuery.isError && <div className="strategy-source-alert" role="alert">
       <p>{detailQuery.error.message}</p>
+      {detail && <p>当前正文、指纹和时间为上次成功读取的记录，尚未核对当前源文件。</p>}
       <p>请检查读取权限，并将 UTF-8 原文恢复到登记路径：{summary?.path}。恢复后重新读取。</p>
       <button type="button" onClick={() => { void listQuery.refetch(); void detailQuery.refetch(); }}>重新读取</button>
     </div>}
