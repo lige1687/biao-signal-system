@@ -55,3 +55,9 @@ export function normalizeStrategyMarkdown(markdown: string): string {
       && lines[after]?.startsWith("|"));
   }).join("\n");
 }
+export function strategyReadingParams(documentId: string, guide = false, section?: string): URLSearchParams {
+  const params = new URLSearchParams({ doc: documentId });
+  if (guide) params.set("collection", "factor-guide");
+  if (section) params.set("section", section);
+  return params;
+}

@@ -804,7 +804,8 @@ export const mindsetApi = {
 };
 
 export const strategyDocumentsApi = {
-  list: () => request<StrategyDocumentsResponse>("/strategy-documents"),
-  detail: (documentId: string) =>
-    request<StrategyDocumentDetail>(`/strategy-documents/${encodeURIComponent(documentId)}`),
+  list: (guide = false) => request<StrategyDocumentsResponse>(
+    guide ? "/strategy-documents/factor-guide" : "/strategy-documents"),
+  detail: (documentId: string, guide = false) =>
+    request<StrategyDocumentDetail>(`/strategy-documents/${guide ? "factor-guide/" : ""}${encodeURIComponent(documentId)}`),
 };

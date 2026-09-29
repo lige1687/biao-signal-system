@@ -1,11 +1,14 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { RESEARCH_EXTENSIONS, normalizeSelectedDocumentId, normalizeStrategyMarkdown } from "/tmp/lei-strategy-system-logic.mjs";
+import { RESEARCH_EXTENSIONS, normalizeSelectedDocumentId, normalizeStrategyMarkdown, strategyReadingParams } from "/tmp/lei-strategy-system-logic.mjs";
 
 const logic = readFileSync(new URL("./src/pages/strategySystemLogic.ts", import.meta.url), "utf8");
 assert.ok(logic.includes("normalizeSelectedDocumentId"));
 assert.equal(normalizeSelectedDocumentId("invalid", ["technical-system", "technical-implementation"]), "technical-system");
 assert.equal(normalizeSelectedDocumentId(null, []), null);
+assert.equal(strategyReadingParams("candidate-registry", true, "a01").get("collection"), "factor-guide");
+assert.equal(strategyReadingParams("candidate-registry", true, "a01").get("section"), "a01");
+assert.equal(strategyReadingParams("technical-system").has("collection"), false);
 assert.equal(normalizeSelectedDocumentId("technical-implementation", ["technical-system", "technical-implementation"]), "technical-implementation");
 assert.deepEqual(RESEARCH_EXTENSIONS.map((item) => item.id), ["breadth", "institutional", "retail", "a-share-sentiment"]);
 assert.equal(RESEARCH_EXTENSIONS[3].sourceClass, "体系外研究扩展");

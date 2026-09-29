@@ -5,12 +5,13 @@ import { Link, useSearchParams } from "react-router-dom";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 import { strategyDocumentsApi } from "../api/client";
-import { normalizeSelectedDocumentId, normalizeStrategyMarkdown, RESEARCH_EXTENSIONS } from "./strategySystemLogic";
+import { normalizeSelectedDocumentId, normalizeStrategyMarkdown, strategyReadingParams, RESEARCH_EXTENSIONS } from "./strategySystemLogic";
 import type { StrategyDocumentHeading } from "../types";
 import "./strategy-system.css";
 
 const sourceLabels = {
   confirmed: "已确认来源",
+  unchanged: "与接入时文件一致（研究参考）",
   changed: "源文件已变化，尚未确认",
   missing: "源文件缺失",
 };
@@ -18,6 +19,7 @@ const sourceLabels = {
 export default function StrategySystemPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const section = searchParams.get("section");
+  const guide = searchParams.get("collection") === "factor-guide";
   const [activeHeading, setActiveHeading] = useState("");
   const [copyStatus, setCopyStatus] = useState("");
   const [readingOffset, setReadingOffset] = useState(110);
@@ -25,14 +27,14 @@ export default function StrategySystemPage() {
   const articleRef = useRef<HTMLElement>(null);
   const mobileTocRef = useRef<HTMLDetailsElement>(null);
   const listQuery = useQuery({
-    queryKey: ["strategy-documents"], queryFn: strategyDocumentsApi.list, staleTime: 60_000, retry: false,
+    queryKey: ["strategy-documents", guide], queryFn: () => strategyDocumentsApi.list(guide), staleTime: 60_000, retry: false,
   });
   const ids = listQuery.data?.documents.map((item) => item.id) ?? [];
   const selectedId = normalizeSelectedDocumentId(searchParams.get("doc"), ids);
   const summary = listQuery.data?.documents.find((item) => item.id === selectedId);
   const detailQuery = useQuery({
-    queryKey: ["strategy-document", selectedId],
-    queryFn: () => strategyDocumentsApi.detail(selectedId!),
+    queryKey: ["strategy-document", guide, selectedId],
+    queryFn: () => strategyDocumentsApi.detail(selectedId!, guide),
     enabled: selectedId != null, staleTime: 60_000, retry: false,
   });
   const detail = detailQuery.data;
@@ -78,7 +80,7 @@ export default function StrategySystemPage() {
       link.className = "strategy-heading-link";
       link.textContent = "#";
       link.setAttribute("aria-label", `复制章节链接：${heading.text}`);
-      link.href = `/strategy?${new URLSearchParams({ doc: detail.id, section: heading.id })}`;
+      link.href = `/strategy?${strategyReadingParams(detail.id, guide, heading.id)}`;
       node.appendChild(link);
     });
     setActiveHeading(detail.headings[0]?.id ?? "");
@@ -112,7 +114,7 @@ export default function StrategySystemPage() {
       // 查询刷新但 HTML 相同时，防止重复添加复制链接。
       article.querySelectorAll(".strategy-heading-link").forEach((node) => node.remove());
     };
-  }, [detail, html, readingOffset]);
+  }, [detail, html, readingOffset, guide]);
 
   useEffect(() => {
     if (!detail || !articleRef.current) return;
@@ -136,7 +138,7 @@ export default function StrategySystemPage() {
       .find((node) => node.id === heading.id);
     mobileTocRef.current?.removeAttribute("open");
     clickedSectionRef.current = heading.id;
-    setSearchParams({ doc: selectedId, section: heading.id });
+    setSearchParams(strategyReadingParams(selectedId, guide, heading.id));
     target?.scrollIntoView({
       behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
       block: "start",
@@ -145,7 +147,7 @@ export default function StrategySystemPage() {
   }
 
   const toc = <ul>{detail?.headings.map((heading) => <li key={heading.id} data-level={heading.level}>
-    <a href={`?${new URLSearchParams({ doc: selectedId!, section: heading.id })}`}
+    <a href={`?${strategyReadingParams(selectedId!, guide, heading.id)}`}
       aria-current={activeHeading === heading.id ? "location" : undefined}
       onClick={(event) => { event.preventDefault(); goToSection(heading); }}>{heading.text}</a>
   </li>)}</ul>;
@@ -153,35 +155,52 @@ export default function StrategySystemPage() {
   return <main className="strategy-page"
     style={{ "--strategy-scroll-offset": `${readingOffset}px` } as CSSProperties}>
     <header className="strategy-header">
-      <div><p className="strategy-eyebrow">LEI · 只读交易手册</p><h1>技术体系</h1></div>
-      <nav className="strategy-document-tabs" aria-label="选择权威文档">
-        {listQuery.data?.documents.map((item) => <button key={item.id} type="button"
-          aria-pressed={selectedId === item.id} onClick={() => {
+      <div><p className="strategy-eyebrow">LEI · {guide ? "只读研究资料" : "只读交易手册"}</p><h1>技术体系</h1></div>
+      <nav className="strategy-document-tabs" aria-label="选择阅读资料">
+        {[
+          { label: "交易体系", id: "technical-system", guide: false },
+          { label: "实现规范", id: "technical-implementation", guide: false },
+          { label: "因子指南包", id: "research-guide", guide: true },
+        ].map((item) => <button key={item.id} type="button"
+          aria-pressed={item.guide === guide && (guide || selectedId === item.id)} onClick={() => {
             setCopyStatus(""); setActiveHeading("");
-            setSearchParams({ doc: item.id });
+            setSearchParams(strategyReadingParams(item.id, item.guide));
             window.scrollTo({ top: 0, behavior: "auto" });
-          }}>
-          {item.id === "technical-system" ? "交易体系" : "实现规范"}
-          {item.approvalStatus === "missing" && <span>源文件缺失</span>}
-        </button>)}
+          }}>{item.label}</button>)}
       </nav>
       {source && <p className="strategy-source-status">
-        {detailQuery.isError && detail ? "读取失败，显示上次成功读取的内容" : sourceLabels[source.approvalStatus]}<br />
+        {detailQuery.isError && detail ? "读取失败，显示上次成功读取的内容" : (guide && source.approvalStatus === "changed" ? "指南文件已变化" : sourceLabels[source.approvalStatus])}<br />
         <span>更新时间：{source.modifiedAt ? new Date(source.modifiedAt).toLocaleString("zh-CN") : "不可用"}</span>
       </p>}
     </header>
-    {listQuery.isPending && <p role="status">正在读取权威来源索引…</p>}
+    {guide && <section className="strategy-guide-intro" aria-label="因子指南包说明">
+      <p>研究指南、候选注册表与模板。候选登记和研究优先级不代表已验证、已实现或获准交易。
+        指导包不替代两份权威技术文档；接入时指纹只用于识别文件变化。</p>
+      <label htmlFor="strategy-guide-document">包内资料</label>
+      <select id="strategy-guide-document" value={selectedId ?? ""} disabled={!ids.length}
+        onChange={(event) => {
+          setCopyStatus(""); setActiveHeading("");
+          setSearchParams(strategyReadingParams(event.target.value, true));
+          window.scrollTo({ top: 0, behavior: "auto" });
+        }}>
+        {listQuery.data?.documents.map((item) => <option key={item.id} value={item.id}>
+          {item.title}{item.available ? "" : "（文件缺失）"}
+        </option>)}
+      </select>
+    </section>}
+    {listQuery.isPending && <p role="status">正在读取资料索引…</p>}
     {listQuery.isError && <p className="strategy-source-alert" role="alert">{listQuery.error.message}</p>}
     {source?.approvalStatus === "changed" && <div className="strategy-source-alert" role="alert">
-      源文件已变化，尚未确认。当前内容可以阅读，但不能据此扩大或缩小因子研究范围。
+      {guide ? "指南文件与接入时记录不同。当前内容可只读查阅，变化不代表新增研究或交易授权。"
+        : "源文件已变化，尚未确认。当前内容可以阅读，但不能据此扩大或缩小因子研究范围。"}
     </div>}
     {source && <section className="strategy-provenance" aria-label="来源与职责">
       <p><strong>{source.title}</strong> · {source.role}</p>
       <dl>
         <dt>真实路径</dt><dd>{source.path}</dd>
         <dt>当前 SHA-256</dt><dd>{source.currentSha256 ?? "源文件缺失，无法计算"}</dd>
-        <dt>已确认 SHA-256</dt><dd>{source.approved_sha256}</dd>
-        <dt>确认日期</dt><dd>{source.confirmed_at}</dd>
+        <dt>{guide ? "接入时 SHA-256" : "已确认 SHA-256"}</dt><dd>{guide ? source.baseline_sha256 : source.approved_sha256}</dd>
+        <dt>{guide ? "接入日期" : "确认日期"}</dt><dd>{guide ? source.recorded_at : source.confirmed_at}</dd>
       </dl>
     </section>}
     {detailQuery.isFetching && !detail && selectedId && <p role="status">正在读取文档…</p>}

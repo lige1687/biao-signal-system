@@ -2803,7 +2803,7 @@ export interface LearningResponse {
 }
 
 // ---- 只读权威策略文档 ----
-export type StrategyDocumentApprovalStatus = "confirmed" | "changed" | "missing";
+export type StrategyDocumentApprovalStatus = "confirmed" | "unchanged" | "changed" | "missing";
 
 export interface StrategyDocumentHeading {
   id: string;
@@ -2816,8 +2816,10 @@ export interface StrategyDocumentSummary {
   title: string;
   file_name: string;
   role: string;
-  approved_sha256: string;
-  confirmed_at: string;
+  approved_sha256?: string;
+  confirmed_at?: string;
+  baseline_sha256?: string;
+  recorded_at?: string;
   order: number;
   path: string;
   available: boolean;

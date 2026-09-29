@@ -141,3 +141,75 @@ def test_route_reports_index_error(monkeypatch) -> None:
     response = TestClient(create_app()).get("/api/strategy-documents")
     assert response.status_code == 503
     assert response.json()["detail"] == "策略文档索引不可用"
+
+
+def _guide_fixture(root: Path, home: Path) -> Path:
+    source = home / "Desktop/lei signal doc/guide/templates/registry.yaml"
+    source.parent.mkdir(parents=True)
+    source.write_text('candidates:\n- id: A01\n  status: NOT_RUN\n'
+                      '  definition_status: DRAFT\n  result: null\n'
+                      '  extension_note: "<script>bad()</script>```"\n', encoding="utf-8")
+    (root / "configs").mkdir(exist_ok=True)
+    (root / "configs/factor-guide-documents.v1.json").write_text(json.dumps({
+        "schema_version": "factor-guide-documents/1",
+        "canonical_directory": "~/Desktop/lei signal doc/guide",
+        "documents": [{"id": "candidate-registry", "title": "候选注册表",
+                       "file_name": "templates/registry.yaml", "role": "研究参考",
+                       "baseline_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+                       "recorded_at": "2026-09-29", "order": 1}],
+    }), encoding="utf-8")
+    return source
+
+
+def test_guide_nested_registry_preserves_state_and_raw_source(tmp_path: Path) -> None:
+    home = tmp_path / "home"
+    source = _guide_fixture(tmp_path, home)
+    doc = sd.read_document("candidate-registry", tmp_path, home, guide=True)
+    assert doc["approvalStatus"] == "unchanged"
+    assert "approved_sha256" not in doc
+    assert doc["currentSha256"] == hashlib.sha256(source.read_bytes()).hexdigest()
+    assert doc["headings"][1]["id"] == "a01"
+    assert "NOT_RUN" in doc["markdown"] and "DRAFT" in doc["markdown"]
+    assert "未填写（null）" in doc["markdown"]
+    assert "&lt;script&gt;" in doc["markdown"]
+    assert "````yaml" in doc["markdown"]
+    assert source.read_text() in doc["markdown"]
+    assert sd.read_document("sources", tmp_path, home, guide=True) is None
+    source.write_text("candidates: []\n", encoding="utf-8")
+    assert sd.read_document("candidate-registry", tmp_path, home, guide=True)[
+        "approvalStatus"
+    ] == "changed"
+    source.unlink()
+    assert sd.list_documents(tmp_path, home, guide=True)["documents"][0][
+        "approvalStatus"
+    ] == "missing"
+
+
+def test_guide_path_escape_and_invalid_registry(tmp_path: Path) -> None:
+    home = tmp_path / "home"
+    source = _guide_fixture(tmp_path, home)
+    source.write_text("candidates: not-a-list\n", encoding="utf-8")
+    with pytest.raises(sd.StrategyDocumentError, match="注册表格式"):
+        sd.read_document("candidate-registry", tmp_path, home, guide=True)
+    source.unlink()
+    source.symlink_to(tmp_path / "secret.yaml")
+    with pytest.raises(sd.StrategyDocumentError, match="权威目录之外"):
+        sd.list_documents(tmp_path, home, guide=True)
+
+
+def test_guide_routes_are_separate_from_authoritative_sources(monkeypatch, tmp_path: Path) -> None:
+    home = tmp_path / "home"
+    _write_fixture(tmp_path, home)
+    _guide_fixture(tmp_path, home)
+    monkeypatch.setattr(sd, "_repo_root", lambda base=None: tmp_path)
+    monkeypatch.setattr(sd.Path, "home", lambda: home)
+    client = TestClient(create_app())
+    base = "/api/strategy-documents/factor-guide"
+    assert client.get(base).json()["documents"][0]["id"] == "candidate-registry"
+    assert client.get(base + "/candidate-registry").status_code == 200
+    assert client.get(base + "/technical-system").status_code == 404
+    assert client.get(base + "/%2E%2E%2FAGENTS.md").status_code == 404
+    assert client.get("/api/strategy-documents").json()["documents"][0][
+        "id"
+    ] == "technical-system"
+    assert client.get("/api/strategy-documents/candidate-registry").status_code == 404
