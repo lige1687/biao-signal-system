@@ -2801,3 +2801,36 @@ export interface LearningResponse {
   entries: LearningEntry[];
   stats: LearningStats;
 }
+
+// ---- 只读权威策略文档 ----
+export type StrategyDocumentApprovalStatus = "confirmed" | "changed" | "missing";
+
+export interface StrategyDocumentHeading {
+  id: string;
+  text: string;
+  level: 1 | 2 | 3;
+}
+
+export interface StrategyDocumentSummary {
+  id: string;
+  title: string;
+  file_name: string;
+  role: string;
+  approved_sha256: string;
+  confirmed_at: string;
+  order: number;
+  path: string;
+  available: boolean;
+  currentSha256: string | null;
+  approvalStatus: StrategyDocumentApprovalStatus;
+  modifiedAt: string | null;
+}
+
+export interface StrategyDocumentsResponse {
+  documents: StrategyDocumentSummary[];
+}
+
+export interface StrategyDocumentDetail extends StrategyDocumentSummary {
+  markdown: string;
+  headings: StrategyDocumentHeading[];
+}
