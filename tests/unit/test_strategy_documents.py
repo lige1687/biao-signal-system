@@ -5,8 +5,10 @@ import json
 from pathlib import Path
 
 import pytest
+from fastapi.testclient import TestClient
 
 from lei_signal.api import strategy_documents as sd
+from lei_signal.api.app import create_app
 
 
 def _write_fixture(root: Path, home: Path, body: str = "# 总纲\n\n## 道路\n\n## 道路\n") -> str:
@@ -96,3 +98,46 @@ def test_encoding_and_unreadable_errors(monkeypatch, tmp_path: Path) -> None:
 def test_headings_ignore_code_and_have_unique_ids() -> None:
     headings = sd._headings("# 道路\n```md\n## 假标题\n```\n## 道路-2\n## 道路\n")
     assert [h["id"] for h in headings] == ["道路", "道路-2", "道路-3"]
+
+
+def test_strategy_document_routes(monkeypatch, tmp_path: Path) -> None:
+    home = tmp_path / "home"
+    _write_fixture(tmp_path, home)
+    monkeypatch.setattr(sd, "_repo_root", lambda base=None: tmp_path)
+    monkeypatch.setattr(sd.Path, "home", lambda: home)
+    client = TestClient(create_app())
+    listed = client.get("/api/strategy-documents")
+    assert listed.status_code == 200
+    assert listed.json()["documents"][0]["id"] == "technical-system"
+    detail = client.get("/api/strategy-documents/technical-system")
+    assert detail.status_code == 200
+    assert detail.json()["headings"][1]["text"] == "道路"
+    assert client.get("/api/strategy-documents/unknown").status_code == 404
+    assert client.get("/api/strategy-documents/../AGENTS.md").status_code in (404, 422)
+    assert client.get("/api/strategy-documents/%2E%2E%2FAGENTS.md").status_code == 404
+    changed = home / "Desktop/lei signal doc/LEI 技术交易体系.md"
+    changed.write_text("# 已变化", encoding="utf-8")
+    assert client.get("/api/strategy-documents/technical-system").json()[
+        "approvalStatus"
+    ] == "changed"
+    changed.write_bytes(b"\xff")
+    encoding_error = client.get("/api/strategy-documents/technical-system")
+    assert encoding_error.status_code == 503
+    assert "UTF-8" in encoding_error.json()["detail"]
+    changed.unlink()
+    assert client.get("/api/strategy-documents").json()["documents"][0][
+        "approvalStatus"
+    ] == "missing"
+    missing = client.get("/api/strategy-documents/technical-system")
+    assert missing.status_code == 503
+    assert "源文件不存在" in missing.json()["detail"]
+
+
+def test_route_reports_index_error(monkeypatch) -> None:
+    def broken():
+        raise sd.StrategyDocumentError("策略文档索引不可用")
+
+    monkeypatch.setattr(sd, "list_documents", broken)
+    response = TestClient(create_app()).get("/api/strategy-documents")
+    assert response.status_code == 503
+    assert response.json()["detail"] == "策略文档索引不可用"
