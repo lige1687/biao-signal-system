@@ -11,4 +11,12 @@ assert.deepEqual(RESEARCH_EXTENSIONS.map((item) => item.id), ["breadth", "instit
 assert.equal(RESEARCH_EXTENSIONS[3].sourceClass, "体系外研究扩展");
 assert.ok(RESEARCH_EXTENSIONS.slice(0, 3).every((item) => item.sourceClass === "原文与实现已有"));
 assert.ok(RESEARCH_EXTENSIONS.every((item) => item.plainDefinition && item.status && item.to.startsWith("/")));
+const page = readFileSync(new URL("./src/pages/StrategySystemPage.tsx", import.meta.url), "utf8");
+const app = readFileSync(new URL("./src/App.tsx", import.meta.url), "utf8");
+const nav = readFileSync(new URL("./src/components/TopNav.tsx", import.meta.url), "utf8");
+assert.ok(page.includes("DOMPurify.sanitize"), "正文必须清理危险 HTML");
+assert.ok(page.includes("IntersectionObserver"), "章节目录必须跟随阅读位置");
+assert.ok(page.includes('approvalStatus === "changed"'), "必须提示未经确认的源文件变化");
+assert.ok(app.includes('path="/strategy"'), "App 必须注册 /strategy");
+assert.ok(nav.includes('{ to: "/strategy", label: "技术体系" }'), "顶栏必须提供技术体系入口");
 console.log("strategy-system regression passed");
