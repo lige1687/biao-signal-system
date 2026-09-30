@@ -24,6 +24,8 @@ cd biao-signal-system
 
 按文件的同步清单见同目录 `github-core-sync-2026-09-30-manifest.json`。清单只列本次提交的新增或修改文件，不代表仓库全量目录。
 
+该初次清单对应提交 `9561df05d2d0b818a95c8cc050ee6b2db2d057b0`。同日后续追加的 [Astra六项工作队列](../archive/handoffs-plans/remote-astra-queue-2026-09-30/README.md) 是另一份规划产物，其输入指纹绑定初次提交；后续README和交接说明的改动不倒写初次清单。
+
 ## 哪些仍在本机
 
 本批不新增数据库、账户与基金成交记录、密钥、运行缓存、临时代理目录、完整聊天交接、带私人对话地址的文档及大体积原始下载。约 1.4GB 尚未入库的原始研究产物留在主机，既有 Git 历史不改写。少量文档的最新本地版本也因此没有进入本批；具体路径见 manifest 的 `withheld_current_documents`。
