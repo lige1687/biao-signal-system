@@ -1,10 +1,26 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import {
   subjectLabel, moduleCn, exitCn, compatCn, expectancyCn, noteCn, EXIT_HINT_CN_SIMPLE,
   detectUnsupportedExitRequest, SUPPORTED_EXITS_CN,
   atrDiscussionDraft, validExitsFor, resolveExitAfterModuleChange,
   windowLabelFromComparisonConfig,
 } from '/tmp/lei-agent-ux.mjs';
+
+// 前后端共用的 ATR 意图语义：execute 表示用户肯定要求采用、比较或测试 ATR
+// 退出；backtest 只表示肯定要求实际测试/复跑，单独要求比较不自动等同于回测。
+const ATR_INTENT_CASES = JSON.parse(readFileSync(
+  new URL('../tests/fixtures/agent_semantics/atr_intents.json', import.meta.url),
+  'utf8',
+));
+for (const testCase of ATR_INTENT_CASES) {
+  assert.equal(
+    detectUnsupportedExitRequest(testCase.text) != null,
+    testCase.execute,
+    `ATR execute intent mismatch: ${testCase.text}`,
+  );
+  assert.equal(typeof testCase.backtest, 'boolean', `backtest intent must be boolean: ${testCase.text}`);
+}
 
 // R1 独立对照（主控四行表）：退出1 引擎条件是"同时"——
 // (close<ema20)&(close<close_lag20)（engine.py::prepare_frame），
@@ -55,6 +71,28 @@ assert.equal(detectUnsupportedExitRequest('用atr止损试试'), 'ATR 止损');
 assert.equal(detectUnsupportedExitRequest('补测 模块A 退出2'), null);
 assert.equal(detectUnsupportedExitRequest('帮我用结构止损跑一次'), null);
 
+// 收口一（二轮复验 2026-09-17）：概念解释/思路讨论放行，比较/换用仍拦。
+// 反例一：「ATR止损是什么意思？我不要求回测」此前被拦——概念问题应正常讨论。
+assert.equal(detectUnsupportedExitRequest('ATR止损是什么意思？我不要求回测'), null);
+assert.equal(detectUnsupportedExitRequest('解释一下 ATR 止损的思路'), null);
+// 反例二：「继续讨论」草稿回送不能再被拦（否则点击后收到同一提示=死循环）。
+// 显式比较/换用请求保持拦截（诚实拒绝，不捏造已比较）。
+assert.equal(detectUnsupportedExitRequest('如果换成ATR止损，胜率会有什么变化？'), 'ATR 止损');
+assert.equal(detectUnsupportedExitRequest('用ATR止损补测一下效果如何'), 'ATR 止损');
+
+// 三轮收口（主控复核 2026-09-17）：概念词不能放行**肯定的**补测/比较要求。
+assert.equal(detectUnsupportedExitRequest('请解释一下用ATR止损回测，比较收益'), 'ATR 止损');
+assert.equal(detectUnsupportedExitRequest('先聊聊，再帮我用ATR止损补测'), 'ATR 止损');
+// r4 复核（主控三轮 2026-09-17）：否定按分句核实，一个动作被否定不得取消
+// 另一个动作——先否定比较再肯定回测仍拦截；两者都否定是纯概念。
+assert.equal(detectUnsupportedExitRequest('先解释ATR止损，不用比较，直接帮我回测'), 'ATR 止损');
+assert.equal(detectUnsupportedExitRequest('不用比较，也不回测，ATR止损是什么意思'), null);
+// 纯概念与明确否定执行的说法继续放行（正例保留）。
+assert.equal(detectUnsupportedExitRequest('请解释一下ATR止损对收益的意义'), null,
+  'pure concept without execution verbs still passes');
+assert.equal(detectUnsupportedExitRequest('先聊聊思路就好，我不想做比较'), null,
+  'negated execution request still passes');
+
 // 支持清单（拦截文案与面板共用）：不含 ATR，不用"成本区"含糊词（U4）
 for (const term of ['同时跌破20日指数均线与抵扣价', '关键性波动', '初始结构止损']) {
   assert.ok(SUPPORTED_EXITS_CN.includes(term), `supported list mentions ${term}`);
@@ -71,6 +109,9 @@ for (const sym of ['510300.SS', null]) {
   assert.ok(!BACKTEST_TRIGGER.test(draft), `draft must avoid trigger words: ${draft}`);
   assert.match(draft, /ATR/);
   assert.match(draft, /只讨论思路/);
+  // 收口一：草稿回送必须能通过「未支持退出请求」检测（不再二次拦截）
+  assert.equal(detectUnsupportedExitRequest(draft), null,
+    `discussion draft must not be re-intercepted: ${draft}`);
 }
 
 // U2：某打法下合法退出清单（b3_dual 仅 B）

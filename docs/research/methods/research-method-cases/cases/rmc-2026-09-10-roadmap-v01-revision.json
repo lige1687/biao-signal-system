@@ -1,0 +1,31 @@
+{
+  "id": "rmc-2026-09-10-roadmap-v01-revision",
+  "title": "因子研究路线图 v0.1 多处事实错误与过满判断，逐条纠正并下调结论强度",
+  "date": "2026-09-10",
+  "kind": "observation_case",
+  "status": "observed",
+  "failure_mode": {
+    "category": "interpretation",
+    "reason": "错误集中在转写丢限定、把判断写成事实、结论强度超出证据，属表述与解释层问题。"
+  },
+  "problem": "路线图 v0.1 经上级模型复核发现多处事实错误与判断过满：如'登记表里没有真正的 factor_return 对象'（实际有 2 个）、csi300 成分被当成'唯一真时点名单'（实为 B 级有条件重建）、'Rank IC 0.03 业内算能用'与'随机打分 IC 应接近 0'被当验收线（均不成立）等 8 条。",
+  "why_changed": "错误判断会直接派生错误的研究优先级与验收标准；留档纠正清单避免后续重犯同类'转写丢限定、把判断写成事实'的错误。",
+  "old_method": "v0.1 写法：盘点转写不保留原文限定，把单池单窗口的结果写成一般结论，把无依据的经验数值写成验收线。",
+  "new_method": "v0.2 修订：逐条对照纠正（§8 留档'v0.1 错在哪'），下调多处结论强度，删除不成立的验收线，第一批范围大幅收窄。",
+  "scope": "因子研究路线图文档的结论表述方法；不改任何策略规格或登记表对象。",
+  "rule_changed": false,
+  "evaluator_changed": false,
+  "references": [
+    "docs/research/factor-research-roadmap-2026-09-10.md"
+  ],
+  "before_after": {
+    "old_result": "v0.1 含 8 条已识别错误/过满判断（含 2 条不能作为验收线的方法错误），若直接执行会派生错误的对象盘点结论与个股研究建议。",
+    "new_result": "v0.2 逐条纠正并留档错误清单；判负的结论保留（不许换名字重跑），也不扩大成永久禁令；后续研究按收窄后的第一批范围推进。",
+    "difference_explanation": "差异是表述纪律而非新证据：同一批材料，保留限定、区分'该池该窗口未测出'与'一般不成立'后，结论强度与事实一致。方法教训：转写他人盘点必须保留原文限定；经验数值不能直接当验收线。"
+  },
+  "object_states": [
+    "mixed.asset.total_return@1.0.0: exists",
+    "cash.zero@1.0.0: exists"
+  ],
+  "notes": ""
+}

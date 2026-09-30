@@ -1,0 +1,83 @@
+{
+  "mission": "按 GPT-6 Pro 冻结计划前段，在 WorkspacePage 首屏实现只读聚合的买前关注区块，让用户5秒看懂为什么关注、30秒看懂还缺什么与何时失效，动作闭环到既有计划预填；零新增判定。",
+  "goals": [
+    {
+      "id": "G1",
+      "goal": "WorkspacePage首屏关注区块：actionable/waiting/blocked分组清单，逐条含为什么关注/候选状态/缺失条件/失效位/盈亏比/数据时点",
+      "acceptance": [
+        "字段与 stage1-source-mapping.md 逐项一致，无自创字段",
+        "price型无价位不编数字；失效位缺失明示；盈亏比不可算明说",
+        "无候选时直说，不凑数；跨日变化显示待后段占位",
+        "state与verdict分别展示，blocked不冒充invalidated"
+      ]
+    },
+    {
+      "id": "G2",
+      "goal": "动作闭环：已有计划直达；无计划时点击进入既有buy-point-review/SuggestedPlanDTO预填，保存走既有确认流程",
+      "acceptance": [
+        "不新建计划系统或第二入口",
+        "点击行为只读打开，无自动保存"
+      ]
+    },
+    {
+      "id": "G3",
+      "goal": "后端只读聚合（如需）：opportunities.py聚合扩展+测试",
+      "acceptance": [
+        "新DTO字段标注source/derived，无decision字段",
+        "不碰rules/storage/configs/Streamlit/消息面",
+        "相关pytest全过"
+      ]
+    },
+    {
+      "id": "G4",
+      "goal": "交付证据：构建/测试/截图/场景自评/归置检查",
+      "acceptance": [
+        "npm run build通过",
+        "raw目录含桌面窄屏截图与场景自评表（五秒/三十秒/失效/占位/闭环逐条）",
+        "check_repo_hygiene.py在worktree全绿",
+        "报告含一句话结论（大白话），registry/INDEX留给主控"
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "id": "S1",
+      "title": "关注区块端到端实现与自测",
+      "goal_ids": ["G1", "G2", "G3", "G4"],
+      "deliverables": [
+        "worktree内web前端与（如需）opportunities聚合扩展",
+        "docs/experiments/watchlist-stage1-2026-09-19.md",
+        "docs/experiments/raw/watchlist-stage1-2026-09-19/证据"
+      ],
+      "acceptance": [
+        "场景自评逐条通过且截图留证",
+        "构建与相关测试通过，归置全绿"
+      ],
+      "depends_on": []
+    }
+  ],
+  "in_scope": [
+    "唯一可写：worktree scripts/agents/watchlist-stage1-20260919",
+    "web前端与opportunities.py只读聚合扩展及其测试",
+    "复用R的node_modules（符号链接，只读）"
+  ],
+  "out_of_scope": [
+    "主仓R任何写入（含并行任务未提交改动）",
+    "storage/rules/configs/Streamlit/消息面模块",
+    "部署/定时任务/真实库/网络下载",
+    "新增判定/评分/推荐/AI判断/消息维度",
+    "跨日快照（Stage2另批）"
+  ],
+  "protected_paths": [
+    "主仓 /Users/yongbiaoli/Desktop/lei-signal-lab（worktree例外）",
+    "src/lei_signal/ui/（Streamlit冻结）",
+    "web/node_modules符号链接",
+    "~/.lei_signal_lab/ 及真实数据库",
+    "并行任务（质感精修）的全部文件"
+  ],
+  "stop_conditions": [
+    "发现需要新判定或改规则才能展示的字段：停下报告，不得代拟",
+    "需要动受保护路径或主仓：停下报告",
+    "测试或构建连续失败无法定位：交剩余问题，不绕过"
+  ]
+}

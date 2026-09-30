@@ -1,6 +1,8 @@
 """基本面参考层端点：宏观指标 + 行业板块全景 + 行业资金流历史。"""
 from __future__ import annotations
 
+from typing import Literal
+
 from fastapi import APIRouter, HTTPException, Request
 
 from lei_signal.fundamentals import sources
@@ -11,6 +13,12 @@ router = APIRouter(prefix="/api/fundamentals", tags=["fundamentals"])
 
 def _service(request: Request) -> FundamentalsService:
     return request.app.state.fundamentals_service
+
+
+@router.get("/observations")
+def observations(request: Request, market: Literal["cn", "us"]) -> dict:
+    """叙事观察事实、来源、时点和缺项原因。"""
+    return _service(request).observations(market)
 
 
 @router.get("/overview")

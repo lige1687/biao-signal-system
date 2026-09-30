@@ -1,5 +1,9 @@
 # LEI 技术信号研究系统（lei-signal-lab）
 
+> **2026-09-30 跨电脑入口**：当前核心内容同步在 `codex/core-sync-20260930` 分支。
+> 只拥有 GitHub 文件的电脑先读 [同步范围与验证说明](docs/ops/github-core-sync-2026-09-30.md) 和 [Astra 建议任务书](docs/archive/handoffs-plans/2026-09-30-github-astra-task.md)。
+> 当前 UI 在 `web/`；下文 2026-08-02 的状态、测试数量和 Streamlit 启动说明是历史记录，不能当成当前状态。
+
 > LEI 双均线与顶底结构的**技术信号识别、解释与历史有效性研究系统**。
 > **不是自动交易系统**——不下单、不计算仓位、不管理资金、不输出确定性买卖建议。
 

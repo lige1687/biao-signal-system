@@ -1,7 +1,8 @@
 """通用计算适配层：一份定义、多种用途。
 
 薄封装既有实现，不复制第二套公式：
-- 数值特征 → ``definitions.quote_features``（momentum/rv20/distance 列暴露）；
+- 数值特征与趋势基础状态 → ``definitions.quote_features``
+  （momentum/rv20/distance/SMA/above/cross_up 列暴露）；
 - 宽度 → ``definitions.breadth``（E200 共同合格分母）；
 - 双均线候选 → 只读调用 ``dual_ma.dual_ma_bull_state``，颜色来自
   ``lei_color.classify_colors``、EMA20 来自 ``indicators.compute_features``；
@@ -272,11 +273,45 @@ def calculate_batch(
         _require_params(card, {"window": 20, "ddof": 1, "annualization": 252}, reference)
         prices = _prices_from_inputs(reference, inputs)
         values = _quote_column_values(prices, "rv20")
+    elif identity == "mixed.rv_percentile":
+        _require_params(
+            card,
+            {"window": 756, "minimum": 252, "include_current": True, "ties": "average"},
+            reference,
+        )
+        prices = _prices_from_inputs(reference, inputs)
+        values = _quote_column_values(prices, "rv_rank")
     elif identity in {"trend.distance50", "trend.distance200"}:
         n = 50 if identity.endswith("50") else 200
         _require_params(card, {"window": n}, reference)
         prices = _prices_from_inputs(reference, inputs)
         values = _quote_column_values(prices, f"distance{n}")
+    elif identity in {"trend.sma50", "trend.sma200"}:
+        n = 50 if identity.endswith("50") else 200
+        _require_params(card, {"window": n, "min_periods": n}, reference)
+        prices = _prices_from_inputs(reference, inputs)
+        values = _quote_column_values(prices, f"sma{n}")
+    elif identity in {"trend.above50", "trend.above200"}:
+        n = 50 if identity.endswith("50") else 200
+        _require_params(card, {"equal": False}, reference)
+        prices = _prices_from_inputs(reference, inputs)
+        values = _quote_column_values(prices, f"above{n}")
+        value_type = "boolean"
+    elif identity == "trend.recovered200":
+        _require_params(card, {"equal": True}, reference)
+        prices = _prices_from_inputs(reference, inputs)
+        values = _quote_column_values(prices, "recovered200")
+        value_type = "boolean"
+    elif identity in {"trend.cross_up50", "trend.cross_up200"}:
+        n = 50 if identity.endswith("50") else 200
+        _require_params(
+            card,
+            {"equal_current": False, "previous": "上一有效报价", "missing_previous": "缺失"},
+            reference,
+        )
+        prices = _prices_from_inputs(reference, inputs)
+        values = _quote_column_values(prices, f"cross_up{n}")
+        value_type = "boolean"
     elif identity.startswith("breadth.") and identity.endswith(".common"):
         n = 50 if ".b50." in identity else 200
         _require_params(

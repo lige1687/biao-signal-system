@@ -291,6 +291,121 @@ def dispatch(request: Request, body: CopilotDispatchRequest) -> CopilotDispatchR
             intent="review",
             card={"card_type": "review", "data": weekly.model_dump()},
         )
+    if intent.kind == "dca":
+        from lei_signal.dca import service as dca_service  # noqa: PLC0415
+        from lei_signal.dca.state import default_data_loader, read_breadth  # noqa: PLC0415
+
+        # 只读状态板（先例 agent.py 话题块 dca 分支）：证据账本+宽度读数，
+        # 带 symbol 则附该标的逐状态；零下单零记账（成交仍走报单确认台账）。
+        ev = dca_service.load_evidence()
+        readings: dict = {}
+        for key, market in (("cn", "cn_all"), ("us", "sp500")):
+            try:
+                readings[key] = read_breadth(market)
+            except Exception:  # noqa: BLE001 - 宽度缺席如实，不硬凑
+                readings[key] = None
+        b_cn = readings.get("cn").value if readings.get("cn") is not None else None
+        b_us = readings.get("us").value if readings.get("us") is not None else None
+        breadth_meta = {k: v.meta() for k, v in readings.items() if v is not None}
+        states: list[dict] = []
+        states_error = None
+        try:
+            states = dca_service.targets_state(
+                default_data_loader(), ev,
+                [(body.symbol, body.symbol)] if body.symbol else None,
+                b_cn, b_us, breadth_meta=breadth_meta)
+        except Exception as exc:  # noqa: BLE001 - 缺席如实标注，不硬凑
+            states_error = str(exc)
+        data = {
+            "evidence_available": bool(ev.get("available")),
+            "evidence_version": ev.get("version"),
+            "error_cn": ev.get("error_detail") or states_error,
+            "states": states,
+            "breadth": {k: (v.meta().to_dict() if v is not None else None)
+                        for k, v in readings.items()},
+            "hint_cn": "状态=路牌统计（只提示不判定）；期望为历史分布非预测；"
+                       "实际买卖仍走报单确认台账。",
+        }
+        return CopilotDispatchReply(
+            intent="dca",
+            symbol=body.symbol,
+            card={"card_type": "dca", "data": data},
+            note_cn="定投状态板：按证据账本算的路牌统计，只提示不判定。",
+        )
+    if intent.kind == "sentiment":
+        from lei_signal.copilot import sentiment as sentiment_mod  # noqa: PLC0415
+
+        # 只叙事标注层：只标注、只作排序参考，永不硬过滤、不参与技术判定
+        # （copilot/sentiment.py 模块头红线；AGENTS.md 体系红线）。
+        pack = sentiment_mod.load_sector_sentiment()
+        try:
+            margin = sentiment_mod.margin_regime_cn()
+        except Exception:  # noqa: BLE001 - 情绪面缺数据不阻塞
+            margin = None
+        symbol_note = None
+        if body.symbol:
+            try:
+                symbol_note = sentiment_mod.symbol_sentiment_cn(body.symbol)
+            except Exception:  # noqa: BLE001 - 未覆盖标的返回 None，不冒充
+                symbol_note = None
+        data = {
+            "available": bool(pack.get("available")),
+            "reason_cn": pack.get("reason"),
+            "as_of": pack.get("as_of"),
+            "hot_boards": pack.get("hot_boards", []),
+            "cold_boards": pack.get("cold_boards", []),
+            "margin": margin,
+            "symbol_note": symbol_note,
+            "note_cn": pack.get("note_cn", ""),
+        }
+        return CopilotDispatchReply(
+            intent="sentiment",
+            symbol=body.symbol,
+            card={"card_type": "sentiment", "data": data},
+            note_cn="情绪面是叙事标注（解释「为什么」），不参与技术判定、不拦"
+                    "任何信号；过热/冰点只作中性提示，不构成买卖点。",
+        )
+    if intent.kind == "mindset":
+        from lei_signal.copilot import mindset as mindset_mod  # noqa: PLC0415
+
+        # 只叙事红线（与 sentiment 同纪律）：种子内容只作认知/心态叙事展示，
+        # 不参与技术判定、评分、过滤、推荐排序（AGENTS.md 叙事标注层边界）。
+        pack = mindset_mod.load_mindset_seeds()
+        if pack["available"]:
+            data = {
+                "available": True,
+                "count": pack["count"],
+                "sha256": pack["sha256"],
+                "items": pack["items"],
+                "note_cn": "认知/心态种子只作叙事与教育用途；每条带引用出处，"
+                           "内容不代表系统判定。",
+            }
+            return CopilotDispatchReply(
+                intent="mindset",
+                symbol=body.symbol,
+                card={"card_type": "mindset", "data": data},
+                note_cn="认知/心态卡只讲「怎么想」，不讲「该不该买卖」；"
+                        "种子内容不参与任何技术判定与信号过滤。",
+            )
+        # 种子缺失/损坏：走既有显式回落（与接入前行为一致，原因可观察）
+        return CopilotDispatchReply(
+            intent="chat",
+            symbol=body.symbol,
+            chat_fallback=True,
+            fallback_reason="mindset_seed_missing",
+            note_cn="心态/认知话题已识别，但心态内容库不可用（缺失或损坏）"
+                    "——已转通用讨论，可继续聊。",
+        )
+    if intent.fallback_reason:
+        # 识别成功但下游未就绪（现仅 mindset 种子库缺位）：显式回落通用讨论，
+        # 回落原因随 fallback_reason 字段可观察，不让用户猜为什么没出卡。
+        return CopilotDispatchReply(
+            intent="chat",
+            symbol=body.symbol,
+            chat_fallback=True,
+            fallback_reason=intent.fallback_reason,
+            note_cn="心态/认知话题已识别，但心态内容库尚未建立——已转通用讨论，可继续聊。",
+        )
     return CopilotDispatchReply(
         intent="chat",
         symbol=body.symbol,
@@ -547,7 +662,9 @@ class ResolveRequest(BaseModel):
     selected_symbol: str | None = None
 
 
-def _resolve_symbol_with_ambiguity(request: Request, body: ResolveRequest):
+def _resolve_symbol_with_ambiguity(
+    request: Request, body: ResolveRequest, *, read_only: bool = False,
+):
     """标的解析（03B §2 优先级）：本轮明确 → 当前选中 → 会话最近。
     明确名称命中多个不同标的 → 澄清，不猜。返回 (symbol, source, ambiguities)。
 
@@ -560,9 +677,44 @@ def _resolve_symbol_with_ambiguity(request: Request, body: ResolveRequest):
         _symbol_candidates_from_message,
     )
 
+    if read_only:
+        # A definition reference is not a US ticker (MIXED/TREND/RAW). Strip
+        # only its span; a separate ETF code in the same question remains.
+        cleaned = re.sub(r"(?:candidate:)?[A-Za-z][\w.-]+@[A-Za-z0-9][\w.-]*", " ", body.message)
+        cleaned = re.sub(r"\bentity_id=[A-Za-z0-9_^.:-]+", " ", cleaned)
+        cleaned = re.sub(r"\b[a-z][a-z0-9_-]*(?:\.[a-z][a-z0-9_-]*)+", " ", cleaned)
+        body = body.model_copy(update={"message": cleaned})
+
     service = getattr(request.app.state, "analysis_service", None)
     db = getattr(request.app.state, "plans_db_path", None) or _db_path(request)
     explicit = _symbol_candidates_from_message(body.message)
+    if read_only:
+        from lei_signal.api.routes.agent import _CATALOG_ALIAS
+        from lei_signal.copilot.subjects import catalog_names
+
+        flat = re.sub(r"\s+", "", body.message).upper()
+        named_pairs = [(name.replace(" ", "").upper(), symbol)
+                       for symbol, name in catalog_names().items() if name]
+        named_pairs += [(name.upper(), symbol) for name, symbol in _CATALOG_ALIAS.items()]
+        matched = [(name, symbol) for name, symbol in named_pairs if name in flat]
+        if re.search(r"ETF|基金", flat):
+            # “沪深300ETF”不是“沪深300指数”；没有准确产品名或代码时澄清。
+            product_matches = [(name, symbol) for name, symbol in matched
+                               if re.search(r"ETF|基金", name)
+                               or (symbol.startswith(("5", "1"))
+                                   and symbol.endswith((".SS", ".SZ")))]
+            if matched and not product_matches and not explicit:
+                return None, "ambiguous", ["请给出ETF的完整代码，不能用同名指数代替"]
+            matched = product_matches
+        # “通信ETF”包含“通信”；只保留完整的产品名称。不同完整名称不能
+        # 用最长词或当前选中标的悄悄二选一。
+        full_hits = {symbol for name, symbol in matched
+                     if not any(name != other and name in other for other, _ in matched)}
+        candidates = set(explicit) | full_hits
+        if len(candidates) > 1:
+            return None, "ambiguous", sorted(candidates)
+        if candidates:
+            return next(iter(candidates)), "message", []
     if len(explicit) == 1:
         return explicit[0], "message", []
     if len(explicit) > 1:
@@ -573,6 +725,12 @@ def _resolve_symbol_with_ambiguity(request: Request, body: ResolveRequest):
     named = named_subject(body.message or "")
     if named:
         return named, "message", []
+    # 主控裁决（2026-09-15）：用户明确指定的对象（别名/目录全名，如
+    # 「科创50板块」里的科创50）优先于笼统的「板块」关键词——先按目录
+    # 层解析，确实没有唯一对象才落「板块问法无对象」的澄清路径。
+    catalog_hit = (None if read_only else _resolve_symbol_by_catalog(body.message or ""))
+    if catalog_hit:
+        return catalog_hit, "message", []
     if asks_for_sector(body.message or ""):
         return None, "none", []
     if service is not None and not re.search(r"\d{6}", body.message or ""):
@@ -592,7 +750,7 @@ def _resolve_symbol_with_ambiguity(request: Request, body: ResolveRequest):
         hits = {sym for nm, sym in names.items() if nm and nm in flat}
         if len(hits) > 1:
             return None, "ambiguous", sorted(hits)
-    if service is not None:
+    if service is not None and not read_only:
         by_catalog = _resolve_symbol_by_catalog(body.message or "")
         if by_catalog:
             try:
@@ -623,6 +781,23 @@ def _resolve_symbol_with_ambiguity(request: Request, body: ResolveRequest):
     return None, "none", []
 
 
+#: 板块泛指 → 可选的指数观察参考（主控裁决 2026-09-15）。
+#: 仅登记有明确产品定义的项；（泛指词, 指数代码, 指数名）。这不是
+#: 「板块→指数」的静默顶替：只在澄清文案里作为可选项给出，并明确
+#: 指数不代表整个板块。
+_SECTOR_AREA_INDEX_REF: tuple[tuple[str, str, str], ...] = (
+    ("科创", "000688.SS", "科创50"),
+)
+
+
+def _sector_area_index_reference(message: str) -> tuple[str, str, str] | None:
+    """消息含板块泛指词时给出可选的指数观察参考；无登记返回 None。"""
+    for area_word, ref_symbol, ref_name in _SECTOR_AREA_INDEX_REF:
+        if area_word in (message or ""):
+            return ref_symbol, ref_name, area_word
+    return None
+
+
 @router.post("/copilot/resolve")
 def copilot_resolve(request: Request, body: ResolveRequest) -> dict:
     """统一入口解析（03B §2）：意图/主题/标的/用途/澄清。
@@ -636,12 +811,57 @@ def copilot_resolve(request: Request, body: ResolveRequest) -> dict:
 
     from lei_signal.copilot.subjects import display_name, asks_for_sector
 
+    from lei_signal.api.routes.agent import _factor_request_message
+
+    history = []
+    if body.session_id:
+        db = getattr(request.app.state, "plans_db_path", None) or _db_path(request)
+        with closing(connect(db)) as conn:
+            from lei_signal.plans.sessions import list_messages
+            history = list_messages(conn, body.session_id, limit=20)
+    if _factor_request_message(body.message, history) is not None:
+        symbol, source, ambiguities = _resolve_symbol_with_ambiguity(request, body, read_only=True)
+        clarification = ([{"kind": "symbol_ambiguous", "question_cn":
+                           "请明确要查哪个标的：" + "、".join(ambiguities)}]
+                         if ambiguities else [])
+        return {
+            "intent": "discussion", "topic": "evidence", "resolved_symbol": symbol,
+            "display_name": symbol, "subject_source": source, "purpose": "unknown",
+            "clarification": clarification,
+            "discussion_context": {"factor_readonly": True, "states": [],
+                                   "evidence": None, "active_plan_count": None,
+                                   "client_request_id": body.client_request_id},
+        }
     parsed = resolve_mod.parse_request(body.message)
     symbol, source, ambiguities = _resolve_symbol_with_ambiguity(request, body)
     clarification = list(parsed["need_clarification"])
-    if not symbol and asks_for_sector(body.message):
-        clarification.append({"kind": "sector_unknown", "question_cn":
-            "没有找到这个板块，请提供完整板块名称；不会用相近名称的ETF代替。"})
+    # 连续讨论一轮（2026-09-16，案例5）：对象已从消息/页面/会话继承核实，
+    # 就不再追问「想补测哪个标的」——缺必要信息只问最关键的一项，已知项不重复问。
+    if symbol:
+        clarification = [c for c in clarification
+                         if c.get("kind") != "backtest_symbol"]
+    if not symbol and (asks_for_sector(body.message)
+                       or _sector_area_index_reference(body.message) is not None):
+        # 主控裁决（2026-09-15）：「科创板块/科创板整体」这类泛指没有唯一
+        # 可核实对象——简短澄清，可让用户选择科创50作为观察参考，并明确
+        # 它不代表整个科创板；不得恢复「任意板块→ETF/指数」的静默顶替。
+        area_ref = _sector_area_index_reference(body.message)
+        if area_ref is not None:
+            ref_symbol, ref_name, area_word = area_ref
+            clarification.append({
+                "kind": "sector_ambiguous_index_reference",
+                "question_cn": (
+                    f"「{area_word}」是板块泛指，系统里没有唯一可核实的"
+                    f"对应对象，不能直接给出它的判定。如果你想看的是"
+                    f"{ref_name}（{ref_symbol}），可以把它作为观察参考——"
+                    f"注意它是 50 只成分股组成的指数，不代表整个板块。"
+                    f"要按{ref_name}继续，请直接说「{ref_name}」。"),
+                "reference_symbol": ref_symbol,
+                "reference_name": ref_name,
+            })
+        else:
+            clarification.append({"kind": "sector_unknown", "question_cn":
+                "没有找到这个板块，请提供完整板块名称；不会用相近名称的ETF代替。"})
     if ambiguities:
         clarification.append({
             "kind": "symbol_ambiguous",
@@ -726,7 +946,7 @@ def create_backtest_request(request: Request, body: BacktestRequestIn) -> dict:
     with closing(connect(_db_path(request))) as conn:
         # 服务端校验归属：question_id 必须是该会话的 user 消息
         q = conn.execute(
-            "SELECT role, session_id, meta_json FROM agent_messages "
+            "SELECT role, session_id, meta_json, content FROM agent_messages "
             "WHERE message_id = ?", (body.question_id,)).fetchone()
         if q is None or q["role"] != "user" or q["session_id"] != body.session_id:
             raise HTTPException(status_code=422, detail={
@@ -738,6 +958,13 @@ def create_backtest_request(request: Request, body: BacktestRequestIn) -> dict:
             snap = (json.loads(q["meta_json"] or "{}").get("discussion_v1") or {})
         except ValueError:
             snap = {}
+        from lei_signal.copilot.factor_readonly import is_factor_question
+
+        if snap.get("context_kind") == "factor_readonly" or is_factor_question(q["content"] or ""):
+            raise HTTPException(status_code=422, detail={
+                "code": "FACTOR_RESEARCH_NOT_EXECUTABLE",
+                "message": "因子问题仅支持读取已有材料或提出实验提案；"
+                           "不能转换为技术模块补测。新实验需另行确认具体协议与范围。"})
         snap_symbol = snap.get("symbol")
         if snap_symbol and snap_symbol != symbol:
             raise HTTPException(status_code=422, detail={

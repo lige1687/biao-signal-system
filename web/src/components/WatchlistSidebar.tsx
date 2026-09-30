@@ -460,7 +460,7 @@ export default function WatchlistSidebar({ cards, selected, onSelect, onAddClick
             ＋ 添加自选
           </button>
           <div
-            style={{ padding: "6px 12px", fontSize: 11, opacity: 0.65 }}
+            style={{ padding: "6px 12px", fontSize: 12, opacity: 0.65 }}
             title="不用鼠标，直接用方向键在自选列表里快速换标的"
           >
             ↑↓ 方向键切换标的

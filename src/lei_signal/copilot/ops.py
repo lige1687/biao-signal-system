@@ -5,14 +5,17 @@
      ③ 计划待办催办（open 待办，EXIT 优先）
      ④ 观察触发（当日扫描 waiting 项还缺什么）
      ⑤ 重大事件（客观字段 only，newsfeed 侧组装后传入）
+另附区块：情绪面（2026-09-06）、定投状态位（2026-09-20，V1 只报状态事实）。
 """
 from __future__ import annotations
 
 import json
 import sqlite3
+from collections.abc import Callable
 from datetime import UTC, datetime
 
 from lei_signal.api.schemas import (
+    DcaBlockDTO,
     MajorEventsBlockDTO,
     OpsCardDTO,
     OpsLineDTO,
@@ -33,6 +36,7 @@ def build_ops_today(
     run_date: str,
     recommend_card: RecommendCardDTO | None,
     major_events: dict | None = None,
+    dca_reader: Callable[[], DcaBlockDTO] | None = None,
 ) -> OpsCardDTO:
     rows = conn.execute(
         """SELECT a.action_id, a.plan_id, a.kind, a.due_from, a.nag_count,
@@ -102,6 +106,10 @@ def build_ops_today(
     major_block = _build_major_events_block(major_events)
     if major_block and major_block.available:
         parts.append(f"重大事件 {len(major_block.items)} 条")
+    try:
+        dca_block = (dca_reader or _build_dca_block)()
+    except Exception:  # noqa: BLE001 — 区块缺席不阻塞清单（与情绪面同一红线）
+        dca_block = None
     summary = "；".join(parts) + "。" if parts else "今日无必须处理的待办。"
     return OpsCardDTO(
         run_date=run_date,
@@ -112,6 +120,7 @@ def build_ops_today(
         watch_triggers=watch,
         sentiment=_build_sentiment_block(conn),
         major_events=major_block,
+        dca=dca_block,
         push_summary_cn=summary,
     )
 
@@ -142,6 +151,73 @@ def _build_major_events_block(major_events: dict | None) -> MajorEventsBlockDTO 
         available=bool(major_events.get("available")),
         items=items,
         note_cn=str(major_events.get("note_cn") or ""),
+    )
+
+
+def _build_dca_block(
+    *,
+    evidence_path=None,
+    loader=None,
+    breadth_reader=None,
+    symbols=None,
+) -> DcaBlockDTO:
+    """定投状态区块（2026-09-20 接入，V1 状态位口径：只报状态事实）。
+
+    纯只读调既有 DCA 服务（先例：agent.py 话题块 dca 分支、
+    routes/copilot.py dispatch dca 分支、routes/dca.py 状态板）：
+    证据账本可用性 + 中美宽度读数 + 跟踪池逐状态（symbols=None 即
+    服务默认跟踪池，与三处先例一致）。缺数据=null 与未触发=false
+    的区分在服务层，本层不碰；零写入、不新增判断、不携带解释文案。
+    数据缺失时 available=False 并如实给原因，不编数。注入参数仅供
+    单测使用（临时/构造数据），生产调用方一律走默认读取。
+    """
+    try:
+        from lei_signal.dca import service as dca_service  # noqa: PLC0415
+        from lei_signal.dca.state import (  # noqa: PLC0415
+            default_data_loader,
+            read_breadth,
+        )
+    except Exception as exc:  # noqa: BLE001 — 服务缺席如实降级
+        return DcaBlockDTO(available=False, reason_cn=f"DCA 服务不可用：{exc}")
+
+    ev = dca_service.load_evidence(evidence_path)
+    reason = ""
+    if not ev.get("available"):
+        reason = str(ev.get("error_detail") or ev.get("note")
+                     or "证据账本不可读")
+
+    def _read(market: str):
+        return (breadth_reader(market) if breadth_reader is not None
+                else read_breadth(market))
+
+    readings: dict = {}
+    for key, market in (("cn", "cn_all"), ("us", "sp500")):
+        try:
+            readings[key] = _read(market)
+        except Exception:  # noqa: BLE001 — 宽度缺席如实，不硬凑
+            readings[key] = None
+    b_cn = readings.get("cn").value if readings.get("cn") is not None else None
+    b_us = readings.get("us").value if readings.get("us") is not None else None
+    breadth_meta = {k: v.meta() for k, v in readings.items() if v is not None}
+
+    states: list[dict] = []
+    states_error = ""
+    try:
+        states = dca_service.targets_state(
+            loader if loader is not None else default_data_loader(),
+            ev, symbols, b_cn, b_us, breadth_meta=breadth_meta)
+    except Exception as exc:  # noqa: BLE001 — 逐状态缺席如实降级
+        states_error = str(exc)
+    if states_error and not reason:
+        reason = f"逐状态计算失败：{states_error}"
+    return DcaBlockDTO(
+        available=bool(ev.get("available")) and not states_error,
+        reason_cn=reason,
+        evidence_available=bool(ev.get("available")),
+        evidence_version=str(ev.get("version") or ""),
+        breadth={k: (v.meta().to_dict() if v is not None else None)
+                 for k, v in readings.items()},
+        states=states,
     )
 
 

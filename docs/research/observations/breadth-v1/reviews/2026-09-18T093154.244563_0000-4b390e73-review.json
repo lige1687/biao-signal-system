@@ -1,0 +1,39 @@
+{
+  "observed_at": "2026-09-18T09:31:54.244563+00:00",
+  "reviewed_at": "2026-09-18T09:32:06Z",
+  "record": "docs/research/observations/breadth-v1/records/2026-09-18T093154.244563_0000-4b390e73.json",
+  "changed_sources": ["source-01", "source-02", "source-03"],
+  "facts": {
+    "a_share_rows": 4066306,
+    "a_share_latest_date": "2026-09-18",
+    "member_latest_date_counts": {
+      "2026-08-28": 1,
+      "2026-08-31": 1,
+      "2026-09-03": 1,
+      "2026-09-04": 1,
+      "2026-09-10": 1,
+      "2026-09-11": 3,
+      "2026-09-14": 4,
+      "2026-09-16": 1,
+      "2026-09-17": 5203,
+      "2026-09-18": 3
+    },
+    "current_code_date": "2026-09-18",
+    "current_code_count": 5565,
+    "daily_snapshot_date": "2026-09-18",
+    "daily_snapshot_eligible": 5211,
+    "daily_snapshot_ma200_pct": 22.999222999222997
+  },
+  "qualification": {
+    "stage": "input_observation_only",
+    "common_200_denominator": "快照标为9月18日，但逐股原料仅3只以9月18日为最后日期、5203只仍止于9月17日；不能证明共同200日分母来自同一市场日。",
+    "historical_membership": "当前代码列表更新仍不能建立历史成员、生效时间及真实取得时间链。",
+    "etf_nominal_prices_and_actions": "监测ETF价格与公司行动来源未变，原名义价、行动和交易限制资格缺口未解除。",
+    "availability": "本次实际读取时间已保存；快照日期不倒填成全部成员在当日已可用。",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "decision": "输入有常规刷新，但冻结口径仍不齐备；继续仅输入观察，不生成信号。",
+  "scope": "未回测、未改参数、未更新OKR、未交易、未自动切换状态。"
+}

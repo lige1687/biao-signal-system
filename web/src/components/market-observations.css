@@ -1,0 +1,28 @@
+.observation-section { margin: 18px 0 24px; }
+.observation-section-head { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:12px; }
+.observation-section-head h2 { margin:0; font-size:19px; }
+.observation-section-head span,.observation-date { color:var(--text-secondary,#687483); font-size:12px; }
+.observation-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; }
+.observation-card { border:1px solid var(--border-subtle,#dce2e8); border-radius:10px; padding:16px; background:var(--surface,#fff); min-width:0; }
+.observation-card-top { display:flex; justify-content:space-between; align-items:start; gap:8px; }
+.observation-card h3 { margin:0; font-size:15px; line-height:1.4; }
+.observation-status { font-size:11px; flex-shrink:0; color:#27634c; }
+.observation-status.stale,.observation-status.missing,.observation-status.time_unverified,.observation-status.insufficient_history { color:#965f21; }
+.observation-value { font-size:29px; font-weight:650; line-height:1.35; margin-top:10px; font-variant-numeric:tabular-nums; }
+.observation-change { font-size:13px; margin:2px 0 12px; }
+.observation-reading { font-size:13px; line-height:1.55; margin:0 0 12px; }
+.observation-date { line-height:1.5; margin:0 0 10px; }
+.observation-source { border-top:1px solid var(--border-subtle,#dce2e8); padding-top:9px; font-size:12px; }
+.observation-source summary { cursor:pointer; color:#286b9a; }
+.observation-source dl { margin:8px 0; }
+.observation-source dl div { display:grid; grid-template-columns:72px 1fr; gap:8px; margin:5px 0; }
+.observation-source dt { color:var(--text-secondary,#687483); }
+.observation-source dd { margin:0; overflow-wrap:anywhere; }
+.observation-source p,.observation-error,.observation-empty { font-size:12px; line-height:1.6; }
+@media(max-width:600px){.observation-section-head{display:block}.observation-grid{grid-template-columns:1fr}}
+.observation-market-switch { display:inline-flex; gap:4px; padding:3px; border:1px solid var(--border-subtle,#dce2e8); border-radius:9px; margin:16px 0 0; }
+.observation-market-switch button { border:0; background:transparent; padding:7px 16px; border-radius:6px; cursor:pointer; color:inherit; }
+.observation-market-switch button.on { background:#e7f1f7; color:#195d86; font-weight:650; }
+.observation-market-switch button:focus-visible,.observation-source summary:focus-visible { outline:2px solid #2677a4; outline-offset:2px; }
+.observation-legacy { margin:18px 0; }
+.observation-legacy > summary { cursor:pointer; font-weight:600; padding:10px 0; }

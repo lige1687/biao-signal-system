@@ -1,0 +1,152 @@
+{
+  "schema_version": "factor-display-bindings/1",
+  "excluded_references": [
+    "mixed.price.economic@1.0.0",
+    "etf.price.continuous@1.0.0",
+    "mixed.target.equal@1.0.0",
+    "mixed.eligible@1.0.0",
+    "mixed.top3@1.0.0",
+    "cash.zero@1.0.0",
+    "mixed.asset.total_return@1.0.0"
+  ],
+  "experiments": [
+    {
+      "id": "etf-raw-momentum-21d-b1-20260923",
+      "reference": "mixed.momentum.raw@1.0.0",
+      "title": "六只ETF普通动量与后续21日表现",
+      "kind": "predictive_study",
+      "summary": "六只固定ETF的历史排序关系已计算；预先规定的正向线索筛选未通过。",
+      "review_status": "partial",
+      "review_summary": "主要数值经主控独立核对，资料完整性检查已事后修正；整批最终书面结案仍待完成。",
+      "reviewed_at": "2026-09-23",
+      "sources": {
+        "protocol": {
+          "path": "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/protocol.json",
+          "sha256": "29e47deed9b1964517ef3d2f592e4d9115dd4a2559698ecccb0003a8627e56db"
+        },
+        "summary": {
+          "path": "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/formal/summary.json",
+          "sha256": "43699eb706cd872bf8256db933010e25ca6ee2562cf13775b23502951b995e39"
+        },
+        "independent": {
+          "path": "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/independent/summary.json",
+          "sha256": "43699eb706cd872bf8256db933010e25ca6ee2562cf13775b23502951b995e39"
+        },
+        "run": {
+          "path": "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/formal/run-record.json",
+          "sha256": "1d6e505161515641259d26415b625896cc5384f4a148fa84fe963ecf51d6a5f6"
+        },
+        "controller": {
+          "path": "docs/archive/handoffs-plans/factor-b-route-2026-09-22/b1-controller-repair-review-2026-09-23.md",
+          "sha256": "efb54a72aa67f0320cc36dac94198feedbb79ebeba2e3aa7c60658786a26ed8a"
+        },
+        "repair": {
+          "path": "docs/experiments/raw/factor-b1-evidence-repair-2026-09-23/impact-review.md",
+          "sha256": "fb3f9e78d57a7f39458b8d69ed6f37b596182a3ff4d986f921613988a6f90871"
+        },
+        "latest_review": {
+          "path": "docs/archive/handoffs-plans/factor-b-route-2026-09-22/lei-road-s0-controller-review-2026-09-23.md",
+          "sha256": "6bcd4eb0adc17d0450eb2167a0800888ec609d3387a8f0b0edff3e1b8f6e555e"
+        }
+      },
+      "limitations": [
+        "六只产品事后固定且未来区间重叠，不能外推为完整市场。",
+        "没有费用、成交、持仓或完整资金账户结果。",
+        "历史资料到达时刻不完整，不代表当时可实时使用。"
+      ],
+      "next_steps": [
+        "等待主控完成最终书面结案；是否扩大产品验证另行冻结研究。"
+      ],
+      "adapter": "rank_summary_v1"
+    },
+    {
+      "id": "lei-dual-ma-b1-20260916",
+      "reference": "candidate:lei.dual_ma.bull_state@draft-1",
+      "title": "510300双均线20日状态与后续价格变化",
+      "kind": "price_description",
+      "summary": "成立组之后的平均价格变化较高，但七个年份只有两年更好，不能认为稳定有效。",
+      "review_status": "partial",
+      "review_summary": "主控限定接受固定快照的历史描述与补件；流程偏差和历史资料限制保留。",
+      "reviewed_at": "2026-09-16",
+      "sources": {
+        "protocol": {
+          "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/protocol-v1.0.1.json",
+          "sha256": "00a16465e5232d3760cedbe9bccb5332b05e4f777f1732e8911ee586974c3af2"
+        },
+        "summary": {
+          "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/summary.json",
+          "sha256": "ce4c51ba5e0d7bb7f7e10630b07fc106a59c98f0d4f57ac290f861164c9bfcf7"
+        },
+        "report": {
+          "path": "docs/experiments/b1-dual-ma-first-real-description-2026-09-16.md",
+          "sha256": "b54ef5d112e28b191a89eaa6a8fa190b43067e26820b02ca7760ef4cb52a7c90"
+        },
+        "controller": {
+          "path": "docs/experiments/b1-closeout-controller-2026-09-16.md",
+          "sha256": "7ba4484223b027f3156e0355a1d64a55b19656a7e1fb8b3b987fa86e7e102f64"
+        }
+      },
+      "limitations": [
+        "单一510300、前复权快照事后取得，不能证明当时可得。",
+        "相邻21日观察区间重叠，不是独立交易或账户收益。",
+        "七个年份只有两年成立组平均表现更好。"
+      ],
+      "next_steps": [
+        "其他市场与含成本策略效果需另行研究。"
+      ],
+      "adapter": "dual_ma_description_v1"
+    }
+  ],
+  "projects": [
+    {
+      "id": "lei-road-s0-20260923",
+      "title": "LEI道路背景：六线与20日共同确认",
+      "stage": "in_progress",
+      "summary": "来源与只收盘接口已做首阶段检查；真实历史表现尚未运行。",
+      "review_status": "partial",
+      "evidence_date": "2026-09-23",
+      "references": [],
+      "sources": [
+        {
+          "path": "docs/archive/handoffs-plans/factor-b-route-2026-09-22/lei-road-s0-controller-review-2026-09-23.md",
+          "sha256": "6bcd4eb0adc17d0450eb2167a0800888ec609d3387a8f0b0edff3e1b8f6e555e"
+        },
+        {
+          "path": "docs/experiments/raw/lei-road-s0-2026-09-23/s0-review.md",
+          "sha256": "80005feae4ea9d6bd8f4f81f846c405c45f179d073d3aa79170ee32ee1ea7551"
+        }
+      ],
+      "limitations": [
+        "512100有一日整行无报价且原因未明；接口核验不等于历史效果。"
+      ],
+      "next_steps": [
+        "先完成来源用途与接口边界复核，真实效果另行冻结。"
+      ]
+    },
+    {
+      "id": "dual-ma-resonance-20260923",
+      "title": "20/60/120日双均线及组间共同确认",
+      "stage": "in_progress",
+      "summary": "三组及共同确认的研究设计已交付，尚未计算新历史效果。",
+      "review_status": "pending",
+      "evidence_date": "2026-09-23",
+      "references": [],
+      "sources": [
+        {
+          "path": "docs/archive/handoffs-plans/factor-b-route-2026-09-22/dual-ma-resonance-dispatch-2026-09-23.md",
+          "sha256": "1e37827319b2713f8c2b9c636d9769c65c5c58928d77ff423e2f5ef2262f41f1"
+        },
+        {
+          "path": "docs/experiments/raw/dual-ma-resonance-design-2026-09-23/delivery.md",
+          "sha256": "276624ac4dc04453c995c468875e6da0feec6640245560b4a0bbd1741921159f"
+        }
+      ],
+      "limitations": [
+        "这是设计包，不是60/120日及共同确认的真实效果。"
+      ],
+      "next_steps": [
+        "等待主控审阅设计与输入；真实历史描述另行冻结。"
+      ]
+    }
+  ]
+}

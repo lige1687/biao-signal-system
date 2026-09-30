@@ -1,0 +1,29 @@
+{
+  "id": "rmc-2026-09-17-factor-method-reuse-pause",
+  "title": "外部因子方法复用提案经两轮返修仍未验收，试点降级为暂缓",
+  "date": "2026-09-17",
+  "kind": "rejection_case",
+  "status": "rejected",
+  "failure_mode": {
+    "category": "interpretation",
+    "reason": "被拒主因是未核实事实写成已查证、表格错列、判断超出证据——提案的解释与表述层不可信。"
+  },
+  "problem": "提案想把成熟外部工具（Alphalens、statsmodels/arch 等）的方法复用到本仓库因子研究，但主控复核发现表格错列、方法示例算错、工具版本与默认值混用、书目与算法事实错误，两轮限定返修后仍有 S1–S3 未完成项（接口列名、未固定版本、试点规格不完整）。",
+  "why_changed": "值得记录为反例：方向（复用具体函数优于泛泛工具名单）被部分接受，但'未核实事实就写成已查实'的提案不能进入开发；这是台账防止'成功经验收集器'偏倚的代表性被拒案例。",
+  "old_method": "维持现状：本地 factor_evidence 既有实现（固定长度、可绕回历史开头的成对分块重抽等），不安装外部工具、不新增真实实验。",
+  "new_method": "被拒候选：安装 Alphalens 并按提案开展复用试点（含 SPA、HAC 等外部统计方法接入）。",
+  "scope": "外部因子方法复用提案（factor-method-reuse-2026-09-17）；不影响宽度真实补救等其它线。",
+  "rule_changed": false,
+  "evaluator_changed": false,
+  "references": [
+    "docs/experiments/factor-method-reuse-controller-review-2026-09-17.md",
+    "docs/research/proposals/factor-method-reuse-2026-09-17/next-pilot-proposal.md"
+  ],
+  "before_after": {
+    "old_result": "无外部复用试点；本地可靠性研究（含循环重抽）已存在。",
+    "new_result": "提案未获验收：第一轮裁决 R1–R4 限定返修'未验收'，execution 2 复核仍'尚未整体验收'，最终 next-pilot-proposal 裁决'暂缓执行'——Alphalens/statsmodels/arch、外部因子数据维持暂缓，仅保留为'问题出现时可直接启用'的暂缓项。",
+    "difference_explanation": "拒绝理由是事实质量问题而非方向否定：可保留三个方向性原则，但精确接口、版本固定、完整试点规格三关未过即不许进入开发。维持现状避免了基于错误事实的复用决策；判负要保留、不许换名字重跑，但也未扩大成永久禁令（触发条件出现时可先冻结提案再执行）。"
+  },
+  "object_states": [],
+  "notes": "合同 §1 点名的反例配额候选之一。"
+}

@@ -69,7 +69,7 @@ export default function BreadthTrendChart({
       {!isLoading && !isError && degenerate.isDegenerate && points.length >= 2 && (
         <div className="muted" style={{ padding: "40px 16px", textAlign: "center", color: "#9ca3af" }}>
           <div style={{ fontSize: 13, marginBottom: 4 }}>⏳ {degenerate.reason}</div>
-          <div style={{ fontSize: 11, color: "#b0b7bf" }}>
+          <div style={{ fontSize: 12, color: "#b0b7bf" }}>
             {marketId === "SP500"
               ? "提示：需在终端重新运行 SP500 入库脚本（增大 --max-bars）以拉取全量 K 线"
               : "系统会在每个交易日自动积累宽度历史"}

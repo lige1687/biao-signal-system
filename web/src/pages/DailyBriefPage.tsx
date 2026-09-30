@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { api, dailyBriefApi, sectorsApi } from "../api/client";
@@ -149,35 +149,36 @@ export default function DailyBriefPage() {
 
   const activeSlot = slot && data.slots_available.includes(slot) ? slot : data.slot;
 
+  const slotButtons = data.slots_available.map((s) => (
+    <button
+      key={s}
+      className={`btn ${s === activeSlot ? "primary" : ""}`}
+      onClick={() => setSlot(s)}
+    >
+      {s === "1445" ? "14:45 预判" : "16:45 收盘"}
+    </button>
+  ));
+
   return (
     <div className="page">
-      <div className="header">
-        <h1>收盘简报</h1>
-        <span className="generated">
-          {data.date} · {SLOT_CN[activeSlot] ?? activeSlot} · 生成于 {data.brief.generated_at}
-        </span>
-        <span className="spacer" />
-        {data.slots_available.map((s) => (
-          <button
-            key={s}
-            className={`btn ${s === activeSlot ? "primary" : ""}`}
-            onClick={() => setSlot(s)}
-          >
-            {s === "1445" ? "14:45 预判" : "16:45 收盘"}
-          </button>
-        ))}
-      </div>
-
       {activeSlot !== data.slot ? (
-        <SlotView date={data.date} slot={activeSlot} />
+        <SlotView date={data.date} slot={activeSlot} buttons={slotButtons} />
       ) : (
-        <BriefBody brief={data.brief} />
+        <BriefBody
+          brief={data.brief}
+          headMeta={
+            <>
+              {data.date} · {SLOT_CN[activeSlot] ?? activeSlot} · 生成于 {data.brief.generated_at}
+            </>
+          }
+          actions={slotButtons}
+        />
       )}
     </div>
   );
 }
 
-function SlotView({ date, slot }: { date: string; slot: string }) {
+function SlotView({ date, slot, buttons }: { date: string; slot: string; buttons: ReactNode }) {
   const { data, error } = useQuery({
     queryKey: ["dailyBrief", date, slot],
     queryFn: () => dailyBriefApi.byDate(date, slot),
@@ -187,7 +188,17 @@ function SlotView({ date, slot }: { date: string; slot: string }) {
     return <div className="fund-errors">该槽位加载失败：{(error as Error).message}</div>;
   }
   if (!data) return <div className="muted">加载中…</div>;
-  return <BriefBody brief={data.brief} />;
+  return (
+    <BriefBody
+      brief={data.brief}
+      headMeta={
+        <>
+          {date} · {SLOT_CN[slot] ?? slot} · 生成于 {data.brief.generated_at}
+        </>
+      }
+      actions={buttons}
+    />
+  );
 }
 
 /* ------------------------------------------------------------------ */
@@ -682,19 +693,47 @@ function OpportunityStrip({
 
 /* ------------------------------------------------------------------ */
 
-function BriefBody({ brief }: { brief: DailyBriefResponseBrief }) {
+function BriefBody({
+  brief,
+  headMeta,
+  actions,
+}: {
+  brief: DailyBriefResponseBrief;
+  headMeta: ReactNode;
+  actions?: ReactNode;
+}) {
+  const [showRaw, setShowRaw] = useState(false);
   return (
     <>
-      <OpportunityStrip wl={brief.watchlist} pool={brief.pool} env={brief.env} />
-      <SummaryBlock brief={brief} />
+      {/* S13 信号组层级：组头=市场总结+日期状态；组体=机会速览+核心摘要；
+          动作组=槽位切换/原始文字版，独立于摘要区 */}
+      <div className="pg-firstlook-group daily-firstlook-group">
+        <div className="pg-grp-head">
+          <h1>收盘简报</h1>
+          <span className="pg-grp-meta">{headMeta}</span>
+        </div>
+        <div className="pg-grp-body">
+          <OpportunityStrip wl={brief.watchlist} pool={brief.pool} env={brief.env} />
+          <SummaryBlock brief={brief} />
+        </div>
+        <div className="pg-grp-actions">
+          <button className="btn" onClick={() => setShowRaw((v) => !v)}>
+            {showRaw ? "收起原始文字版" : "查看原始文字版"}
+          </button>
+          {actions}
+        </div>
+      </div>
+
       <EnvSection env={brief.env} />
       <WatchSection wl={brief.watchlist} />
       <PoolSection pool={brief.pool} />
 
-      <details className="brief-raw">
-        <summary>原始文字版（用于复制 / 与飞书推送对照）</summary>
-        <pre className="brief-text">{brief.summary.text}</pre>
-      </details>
+      {showRaw && (
+        <details className="brief-raw" open>
+          <summary>原始文字版（用于复制 / 与飞书推送对照）</summary>
+          <pre className="brief-text">{brief.summary.text}</pre>
+        </details>
+      )}
 
       <div className="legend" style={{ marginTop: 10 }}>
         本页为个人研究参考（research_proxy），不构成买卖建议。所有「主力资金」按单笔成交金额规模推算，是研究代理口径而非真实机构数据；

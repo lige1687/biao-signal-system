@@ -58,7 +58,7 @@ Then use the established execution workflow:
 
 - direct work stays in the current task;
 - bounded local delegation uses `$codex-delegate`;
-- `$lei-gpt-zcode-orchestrator` applies only when the user requested Pro participation and the substantial task warrants that full workflow;
+- `$lei-gpt-zcode-orchestrator` handles delegated factor-research callbacks and continuation, including the user's outcome-first reporting agreement; its Pro-assisted mode applies only when the user explicitly requires Pro participation;
 - Legacy ZCode jobs are historical records; this router does not recommend that executor for new work.
 
 Jev never dispatches, retries, expands write or network permission, changes research authority, accepts an executor result, commits, deploys, or makes a trading decision. If a dispatch later fails, follow the selected execution Skill's replacement rules instead of asking this router to silently choose another executor.

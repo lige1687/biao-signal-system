@@ -1,0 +1,28 @@
+{
+  "id": "rmc-2026-09-13-rdf-listing-evidence",
+  "title": "上市日期自洽不能代替来源核验：structural 开关可被假证据绕过",
+  "date": "2026-09-13",
+  "kind": "observation_case",
+  "status": "observed",
+  "failure_mode": {
+    "category": "input",
+    "reason": "日期自洽被当成来源已核验，假证据可通过 structural 开关——输入证据核验缺位。"
+  },
+  "problem": "_validate_listing_evidence 只验证 source 是非空字符串并检查日期自洽；主控反例：给晚出现的产品传 {\"listing_date\":\"2026-06-01\",\"source\":\"dummy\"}，structural 即变 true，调用方用 accept_structural=True 就能放行研究用途——日期对得上不等于来源真的支持这只产品这个日期。",
+  "why_changed": "若'自洽'冒充'已核验'，资格墙的一个入口形同虚设，未核验数据可升级为研究资格。",
+  "old_method": "字段合法＋日期自洽即产生 structural=True 证据资格，来源字符串本身不核验。",
+  "new_method": "（复核返修 R1 要求）把'字段合法且日期自洽'与'来源已核验、确实支持该产品与日期'分开：前者不能单独放行正常研究用途；无合格来源继续拒绝，不新增由调用方自由填写的 verified 开关；保留'日期自洽但来源未核验'的诊断输出。",
+  "scope": "src/lei_signal/research/data_quality.py 的上市证据验证入口；不涉及策略规则。",
+  "rule_changed": false,
+  "evaluator_changed": false,
+  "references": [
+    "docs/experiments/research-data-foundation-controller-review-2026-09-13.md"
+  ],
+  "before_after": {
+    "old_result": "dummy 来源＋自洽日期即可凭 accept_structural=True 放行；数据仍标 conditional 但开关已足够绕过。",
+    "new_result": "以返修单 R1（必须处理）记录最小修改要求与验收要求（无来源/空来源/dummy/无法回查的引用均不得放行；来源对应另一产品或日期时拒绝；合成小例不得升级真实资格）。后续 §13 类收口见同线复核。",
+    "difference_explanation": "差异是把证据资格的判定从'形式自洽'升级为'来源可回查'。与 rmc-2026-09-10-rdf-root-entry 同一类根因：声明式信任必须换成结构核验。"
+  },
+  "object_states": [],
+  "notes": ""
+}

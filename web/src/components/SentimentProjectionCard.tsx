@@ -8,10 +8,10 @@ import { fmt, pctClass } from "../utils/format";
  * 情绪 × 标普500 投影散点（关系图）。
  *
  * X = 情绪读数（AAII 看涨-看跌净值 / NAAIM 暴露指数），Y = 此后 N 周标普500 涨跌幅。
- * 发布时间对齐（无前视）：入场价 = available_at（调查周四发布）当天或之后第一个收盘价，
+ * 事后资料对齐：价格起点 = 历史记录 available_at 当天或之后第一个收盘价；
  * 出场价 = 入场日 + N 周后第一个收盘价。红点 = 后续上涨，绿点 = 后续下跌；
  * 灰虚线 = 阈值（AAII ±25 / NAAIM 40、80）与 0 轴；蓝虚线 = 最小二乘拟合。
- * 与同页「同窗对照」互补：对照看拐点叙事，投影看关系强度与极端区的后续分布。
+ * 历史回填首发真实性尚未逐条核实，不能据此称当时可交易。
  */
 
 type SeriesKey = "aaii" | "naaim";
@@ -108,8 +108,9 @@ export default function SentimentProjectionCard() {
     for (const o of hist?.observations ?? []) {
       const x = series === "aaii" ? o.bull_bear : o.exposure_index;
       if (x == null) continue;
-      // 发布时间对齐：available_at 缺失时退回调查周周一 + 3 天（AAII/NAAIM 均周四发布）
-      const avail = (o.available_at?.slice(0, 10) ?? addDays(o.survey_week, 3));
+      // 缺记录日期不对齐；有日期仍只作事后对照，不推定首发真实性。
+      if (!o.available_at) continue;
+      const avail = o.available_at.slice(0, 10);
       const ei = lowerBound(dates, avail);
       if (ei == null) continue;
       latest = { week: o.survey_week, x };
@@ -305,7 +306,7 @@ export default function SentimentProjectionCard() {
   return (
     <div className="macro-card">
       <div className="macro-head">
-        <span className="macro-name">情绪 × 标普500 投影（逆向验证）</span>
+        <span className="macro-name">调查历史 × 标普500（事后对照）</span>
         {pending && (
           <span className="macro-chip neutral">
             最新 {meta.title} {fmt(pending.x, 1)}（{pending.week}）
@@ -358,12 +359,10 @@ export default function SentimentProjectionCard() {
         ))}
       </div>
       <div className="macro-note">
-        X = {meta.title}（灰虚线 {meta.thresholds.join(" / ")} 为经验阈值，
-        <span style={{ color: "#f59e0b" }}>橙色实线 = 当前读数位置</span>），Y = 发布后 {horizon} 周标普涨跌；
-        红点涨 / 绿点跌，点越淡 = 越早的样本，蓝虚线为最小二乘拟合。负相关 = 情绪越乐观后续越弱（逆向指标特征）。
-        入场价取 available_at（周四发布）当天或之后首个收盘，无前视；周频采样与 {horizon} 周窗口存在重叠，
-        相关系数与分桶按「有效样本」解读而非独立样本；样本自 {points[0]?.week ?? "-"} 起、
-        相关≠因果，仅作研究参考，不构成投资建议。
+        X = {meta.title}（灰虚线 {meta.thresholds.join(" / ")} 是旧研究的参考分组，不是顶底线；
+        <span style={{ color: "#f59e0b" }}>橙色实线 = 最新保存读数</span>），Y = 记录可用日期后 {horizon} 周标普500涨跌。
+        红点随后涨、绿点随后跌。旧历史 available_at 的真实首发时间未逐条核实，不能称为当时可交易成绩；
+        周频观察的后续窗口相互重叠，样本自 {points[0]?.week ?? "-"} 起。此图仅描述保存资料的关系，不证明因果或纳斯达克短期顶底。
       </div>
     </div>
   );

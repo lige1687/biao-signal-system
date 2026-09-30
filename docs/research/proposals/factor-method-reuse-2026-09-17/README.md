@@ -1,18 +1,23 @@
-# 因子方法复用提案：statsmodels / arch / Alphalens 与外部标准因子定义（v3 / S1–S3 最小收尾版）
+# 因子方法复用提案：statsmodels / arch / Alphalens 与外部标准因子定义（v4 / T1–T2 最后限定返修版）
 
-日期：2026-09-17（v1 初版 → v2 R1–R4 返修 → v3 S1–S3 最小收尾）。性质：
-**待主控审核的调研提案**，不是规范变更、不是安装验收、不含任何新研究计算。
-执行身份：ZCode 委派 job e624f7e6（stage S1，execution 1/2/3），模型
-bigmodel-coding-plan/GLM-5.3（CLI reasoning high/max；后台过程不可观察）。
-基线：分支 codex/factor-unit-research-20260915，HEAD 29b150f5（历轮开工均
-核对一致）。工作区既有脏改动与本目录不重叠，仅记录未触碰。
-v1 存 `history-v1/`、v2 存 `history-v2/`（原字节）；逐项回应见
-`revision-response.md`。v3 要点：arch v8.0.0 `optimal_block_length` 实际
-返回列名 `stationary`/`circular`（源码核对）；statsmodels 钉 **v0.15.0**
-（tag 源码核对）；A5 收窄为 SPA；试点教学例改为最小确定例（factor 仅 d1、
-prices 全 d1–d4、逐例唯一预期）并更正"动量特征是过去窗口"的表述；
-Mom 起点混入市场因子 1926-07 的问题已清（C2 只保留动量详情页口径 1927-01）；
-台账按实际调用次数记账、猜测时刻已撤回。
+日期：2026-09-17（v1 初版 → v2 R1–R4 返修 → v3 S1–S3 收尾 → v4 T1–T2
+最后限定返修）。性质：**待主控审核的调研提案**，不是规范变更、不是安装
+验收、不含任何新研究计算。执行身份：ZCode 委派 job e624f7e6（stage S1，
+execution 1–4），模型 bigmodel-coding-plan/GLM-5.3（CLI reasoning
+high/max；后台过程不可观察）。基线：分支 codex/factor-unit-research-20260915，
+HEAD 29b150f5（历轮开工均核对一致）。工作区既有脏改动与本目录不重叠。
+v1/v2/v3 分别存 `history-v1/`、`history-v2/`、`history-v3/`（原字节）；
+逐项回应见 `revision-response.md`。
+v4 要点：T1 并列分组按 qcut **右闭区间**更正为唯一预期
+[A,B,C,D]=[2,1,1,1]；T2 缺价例按入口拆分——完整清洗入口（max_loss=0）
+唯一预期抛 MaxLossExceededError，两键 IC=+1.0 降级为直接 IC 入口的独立
+教学算术（显式提供已清洗 factor_data，不冒充完整入口成功）；试点规格
+统一改称**待冻结提案**（算术期望已定、pandas 版本分支未定），触发条件
+删除"≥3 标的/分数全不同"通用门槛；台账笔误更正（statsmodels
+get_robustcov_results）。
+外部访问实账（四轮累计）：execution 1 = **18/18**（6 失败）、
+execution 2 = **7/12**、execution 3 = **3/4**、execution 4 = **0（零联网）**；
+失败史与未验证边界全部保留在各轮台账。
 
 ## 一分钟说明（大白话）
 
@@ -47,14 +52,14 @@ Mom 起点混入市场因子 1926-07 的问题已清（C2 只保留动量详情�
 | capability-reuse.csv | 问题→本地现状→外部函数/默认差异→决定→证据（9列×10行，含逐入口默认） |
 | method-cards.md | 两篇方法卡（HAC 误差、历史分块重抽；v2 纠正书目/权重/段长措辞） |
 | factor-definition-crosswalk.md | 市场超额收益、动量两例与本地 raw/rank/benchmark/宽度分层对照 |
-| next-pilot-proposal.md | 唯一候选试点（**暂缓**），含精确输入输出合同与手算正负例 |
-| sources-and-checks.json | 本地引用 hash、两轮外部访问台账、许可、命令实账、交付身份 |
-| revision-response.md | 对主控 R1–R4 的逐项回应 |
-| history-v1/ | v1 六文件原字节 |
+| next-pilot-proposal.md | 唯一候选试点（**暂缓，待冻结提案**），含精确输入输出合同与逐例唯一手算预期 |
+| sources-and-checks.json | 本地引用 hash、历轮外部访问台账（18/18、7/12、3/4、0）、许可、命令实账、交付身份 |
+| revision-response.md | 对主控 R1–R4、S1–S3、T1–T2 的逐项回应 |
+| history-v1/ · history-v2/ · history-v3/ | v1/v2/v3 原字节封存 |
 
 ## 边界重申
 
-- 真实统计 0 次、安装 0 次、下载行情/因子数据 0 次、生产改动 0 次、共享写入 0 次。
-- 外部访问：初版 18/18、返修 7/12（均含失败，台账如实记录，不回填）。
-- 外部来源持续变化，所有结论标注访问时点（2026-09-17）。
+- 真实统计 0 次、安装 0 次、下载行情/因子数据 0 次、生产改动 0 次、共享写入 0 次、git 写入 0 次。
+- 外部访问：execution 1 = 18/18（6 失败）、execution 2 = 7/12、execution 3 = 3/4、execution 4 = 0（零联网）；失败史如实保留，不回填。
+- 外部来源持续变化，所有结论标注访问时点（2026-09-17）；台账时刻字段为"未知"（会话时钟未记录）。
 - 本目录为探索提案，按先例不进 registry/INDEX/OKR（workflow-map §1.7）。

@@ -1171,6 +1171,8 @@ class CopilotDispatchReply(BaseModel):
     card: dict | None = None        # {card_type, data}
     preview: TradePreviewDTO | None = None
     chat_fallback: bool = False
+    #: 识别成功但下游未就绪时的显式回落原因（如 mindset_seed_missing）；无标注为 None。
+    fallback_reason: str | None = None
     note_cn: str = ""
 
 
@@ -1286,6 +1288,25 @@ class MajorEventsBlockDTO(BaseModel):
     note_cn: str = ""
 
 
+class DcaBlockDTO(BaseModel):
+    """定投状态区块（2026-09-20 接入，V1 状态位：只报状态事实）。
+
+    数据来自既有 DCA 只读服务（证据账本可用性 + 中美宽度读数 +
+    跟踪池逐状态），形态对齐 agent.py 话题块 / routes/copilot.py
+    dca 分支先例；缺数据=null 与未触发=false 的区分在服务层。
+    本块不携带解释文案、不新增任何判断；数据缺失时 available=False
+    并给 reason_cn（如实原因），不编数。零下单零记账——实际买卖
+    仍走报单确认台账。
+    """
+
+    available: bool = False
+    reason_cn: str = ""                # 降级原因（可用时为空）
+    evidence_available: bool = False   # 证据账本可读
+    evidence_version: str = ""         # 账本版本（可读时）
+    breadth: dict = {}                 # {cn: 引用卡|None, us: 引用卡|None}
+    states: list[dict] = []            # 跟踪池逐标的状态（服务原样输出）
+
+
 class OpsCardDTO(BaseModel):
     """每日操作清单（确定性组装，零 LLM；页面与推送共用）。"""
 
@@ -1297,6 +1318,7 @@ class OpsCardDTO(BaseModel):
     watch_triggers: list[OpsLineDTO] = []
     sentiment: SentimentBlockDTO | None = None
     major_events: MajorEventsBlockDTO | None = None
+    dca: DcaBlockDTO | None = None
     push_summary_cn: str = ""
 
 

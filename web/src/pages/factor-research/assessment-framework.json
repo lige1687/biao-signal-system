@@ -1,0 +1,482 @@
+{
+  "schema_version": "factor-assessment/1",
+  "note": "这是完整研究该核什么的阅读框架，不是因子评分、通过条件或新的冻结实验要求。各项已有证据与缺口须由页面现存结构化来源逐项显示；‘未接入’只指本页尚无可核的结构化材料，不代表全仓未研究。核验、描述、状态、政策对照、风险执行和收益解释应选各自合适的方法，不统一强制排名相关或收益率。",
+  "source_refs": [
+    "docs/research/experiment-backtest-principles.md",
+    "docs/research/definition-standard.md",
+    "docs/research/ai-execution-contract.md",
+    "docs/research/experiment-report-template.md",
+    "docs/research/definitions.v1.json"
+  ],
+  "topics": [
+    {
+      "id": "purpose",
+      "title": "作用与用途",
+      "question": "它具体解决什么问题，应该在哪个决策环节看？",
+      "section": "overview",
+      "checks": [
+        {
+          "label": "衡量对象与类型",
+          "why": "先分清数值特征、状态、风险描述和完整策略，避免把一个读数当买卖规则。",
+          "id": "purpose.object_type",
+          "sources": {
+            "definition_fields": [
+              "object_type",
+              "category"
+            ]
+          }
+        },
+        {
+          "label": "允许用途与禁用范围",
+          "why": "核定义卡的用途、适用资产和限制；可用于观察不等于已有预测价值。",
+          "id": "purpose.allowed_use",
+          "sources": {
+            "definition_fields": [
+              "purpose",
+              "scope",
+              "limitations"
+            ]
+          }
+        },
+        {
+          "label": "与既有交易体系的位置",
+          "why": "说明它是道路背景、相对比较、回调位置还是账户风险解释，不冒充独立入场触发。",
+          "id": "purpose.system_position",
+          "sources": {
+            "definition_fields": [
+              "purpose",
+              "object_type"
+            ]
+          }
+        },
+        {
+          "label": "适合该用途的检验",
+          "why": "排序可看后续排名关系，状态可看固定对照，风险描述先看账户解释；不同用途不强套同一种指标。",
+          "id": "purpose.fit_for_purpose",
+          "sources": {
+            "definition_fields": [
+              "purpose",
+              "object_type"
+            ],
+            "experiment_fields": [
+              "baseline",
+              "metrics"
+            ]
+          }
+        },
+        {
+          "label": "机制假设与失效情形",
+          "why": "说明为何预期有用、何时可能失效；这只是可检验的解释假设，不是市场实证结论。",
+          "id": "purpose.mechanism_limits"
+        }
+      ],
+      "missing": [
+        "若没有把精确定义用途连到对应实验，应标“该用途的研究证据待接入”；定义解释不能代替效果。"
+      ]
+    },
+    {
+      "id": "data",
+      "title": "资料与当时可用性",
+      "question": "输入可靠、覆盖足够，而且在当时真的看得到吗？",
+      "section": "definition",
+      "checks": [
+        {
+          "label": "价格、单位和资料来源",
+          "why": "核复权、分红、币种、频率、成员名单及文件身份；相似名称可能使用不同口径。",
+          "id": "data.source_unit",
+          "sources": {
+            "definition_fields": [
+              "input",
+              "unit",
+              "sources"
+            ]
+          }
+        },
+        {
+          "label": "样本覆盖与缺失分布",
+          "why": "列产品、时期、有效日期和缺失原因，检查是否集中在重要年份或产品。",
+          "id": "data.coverage_missing",
+          "sources": {
+            "definition_fields": [
+              "scope"
+            ],
+            "experiment_fields": [
+              "products",
+              "period",
+              "sample"
+            ],
+            "sample_labels": [
+              "有效排名日期",
+              "固定不重叠日期",
+              "成立组观察",
+              "未成立组观察"
+            ]
+          }
+        },
+        {
+          "label": "异常与降级处理",
+          "why": "停牌、坏价、重复日期和预热不足要有明确处理，不把缺失填成零或合格。",
+          "id": "data.anomaly_handling"
+        },
+        {
+          "label": "历史可得时刻",
+          "why": "把观察、资料到达、最早决策和可成交时间分开，避免事后资料混进过去。",
+          "id": "data.point_in_time",
+          "sources": {
+            "definition_fields": [
+              "time"
+            ],
+            "experiment_fields": [
+              "data_cutoff"
+            ]
+          }
+        },
+        {
+          "label": "产品选择与存续偏差",
+          "why": "说明历史名单如何形成、退市或后来才出现的产品如何处理，避免只看留到今天的赢家。",
+          "id": "data.universe_survivorship"
+        }
+      ],
+      "missing": [
+        "若缺逐字段缺失率、异常分布、成员历史或资料到达时刻，逐项标“专项资料待接入”，不推断输入合格。",
+        "每次实验的来源与用途资格需独立核对，不能只凭定义卡的资料要求判定。"
+      ]
+    },
+    {
+      "id": "effect",
+      "title": "效果与实际大小",
+      "question": "在规定用途上有无帮助，差别有多大、可靠吗？",
+      "section": "evidence",
+      "checks": [
+        {
+          "label": "先定主要问题和对照",
+          "why": "比较对象、观察期限和通过条件须在看结果前固定，不拿事后最好的数字当主要结论。",
+          "id": "effect.primary_comparator",
+          "sources": {
+            "experiment_fields": [
+              "baseline",
+              "period",
+              "result_tables"
+            ]
+          }
+        },
+        {
+          "label": "按用途选择结果",
+          "why": "排序看排名关系和分组差，状态看后续差别，风险管理看账户代价；不强制每个对象都有相关系数。",
+          "id": "effect.purpose_fit_result",
+          "sources": {
+            "experiment_fields": [
+              "metrics",
+              "baseline"
+            ]
+          }
+        },
+        {
+          "label": "大小、方向与不确定性",
+          "why": "同时报告实际差值、单位、可能的波动范围和反向结果；小的正值不自动有用。",
+          "id": "effect.magnitude_direction",
+          "sources": {
+            "metric_labels": [
+              "全期平均排名关系",
+              "高二减低二后续表现差",
+              "不重叠日期排名关系",
+              "不重叠日期高低差",
+              "成立组后续均值",
+              "未成立组后续均值"
+            ]
+          }
+        },
+        {
+          "label": "样本数量与有效覆盖",
+          "why": "有效日期、产品和事件数决定结果能说明多大范围，重叠观察不可当独立成功。",
+          "id": "effect.sample_coverage",
+          "sources": {
+            "experiment_fields": [
+              "products",
+              "period",
+              "sample"
+            ],
+            "sample_labels": [
+              "有效排名日期",
+              "固定不重叠日期",
+              "成立组观察",
+              "未成立组观察"
+            ]
+          }
+        },
+        {
+          "label": "历史描述与资金结果分开",
+          "why": "后续价格或排名关系不是完整账户净收益，不能由短期目标推年化。",
+          "id": "effect.price_vs_account",
+          "sources": {
+            "experiment_fields": [
+              "baseline",
+              "costs"
+            ]
+          }
+        }
+      ],
+      "missing": [
+        "若原实验未报告适合其用途的对照、效果大小、样本或不确定范围，对应项保持待接入，不补算。"
+      ]
+    },
+    {
+      "id": "stability",
+      "title": "稳定性与衰减",
+      "question": "换年份、产品或市场阶段，结果还站得住吗？",
+      "section": "evidence",
+      "checks": [
+        {
+          "label": "逐年和关键阶段",
+          "why": "列出顺利与困难时期，不能只报全期平均或删掉反向年份。",
+          "id": "stability.year_period",
+          "sources": {
+            "table_titles": [
+              "按观察时期",
+              "按观察年"
+            ]
+          }
+        },
+        {
+          "label": "逐产品与集中程度",
+          "why": "看结果是否只由少数产品或几次行情撑起，不能把总体数字外推到每只。",
+          "id": "stability.by_product"
+        },
+        {
+          "label": "不同市场背景",
+          "why": "强趋势、震荡、下跌等阶段的行为可不同，阶段划分须事先说明。",
+          "id": "stability.market_regime"
+        },
+        {
+          "label": "时间与观察期限的衰减",
+          "why": "比较早近时期及预先设定的不同观察期限，检查差别是否减弱；保持同一身份和口径。",
+          "id": "stability.horizon_decay"
+        },
+        {
+          "label": "观察次数的独立性",
+          "why": "重叠的未来窗口会重复使用同一行情，固定间隔结果仍不自动等于独立样本。",
+          "id": "stability.independence",
+          "sources": {
+            "metric_labels": [
+              "不重叠日期排名关系",
+              "不重叠日期高低差"
+            ],
+            "sample_labels": [
+              "固定不重叠日期"
+            ]
+          }
+        }
+      ],
+      "missing": [
+        "若没有逐产品、市场阶段、时间衰减或集中度专项结果，分别标待接入；单有逐年表也不自动判稳定。"
+      ]
+    },
+    {
+      "id": "robustness",
+      "title": "反复验证与误差边界",
+      "question": "这项发现会不会是选样、调参或计算方式碰巧造成的？",
+      "section": "evidence",
+      "checks": [
+        {
+          "label": "未参与选择的资料",
+          "why": "核是否有未参与选池、定窗口或改规则的资料作后续验证；不能把已看过的数据叫全新检验。",
+          "id": "robustness.held_out"
+        },
+        {
+          "label": "尝试次数与失败记录",
+          "why": "保留换产品、期限、阈值和失败结果，避免多次试验后只展示最好的一次。",
+          "id": "robustness.all_attempts"
+        },
+        {
+          "label": "合理口径变化",
+          "why": "在事先允许的价格、样本和参数变体下核方向；修改定义或规则要有新版本。",
+          "id": "robustness.spec_variants"
+        },
+        {
+          "label": "重叠与误差范围",
+          "why": "说明观察值并非完全独立时结果有多不确定，不从一个均值宣称可靠。",
+          "id": "robustness.overlap_uncertainty",
+          "sources": {
+            "metric_labels": [
+              "不重叠日期排名关系",
+              "不重叠日期高低差"
+            ],
+            "sample_labels": [
+              "固定不重叠日期"
+            ],
+            "experiment_fields": [
+              "limitations"
+            ]
+          }
+        },
+        {
+          "label": "独立复算与来源封存",
+          "why": "另一计算路径、输入指纹和异常反例能检查数值是否算对，但数值正确仍不证明有用。",
+          "id": "robustness.independent_recheck",
+          "sources": {
+            "definition_fields": [
+              "calculation",
+              "sources"
+            ],
+            "experiment_fields": [
+              "review_summary",
+              "review_status",
+              "sources"
+            ]
+          }
+        }
+      ],
+      "missing": [
+        "若没有未参与选择的数据、完整尝试记录、预定口径变体或误差范围，分别标待接入。",
+        "独立复算只验证其覆盖范围的数字一致，不自动代替实际效果检验。"
+      ]
+    },
+    {
+      "id": "implementation",
+      "title": "资金账户与执行代价",
+      "question": "放进完整策略后，扣成本还值得做、做得到吗？",
+      "section": "strategy",
+      "checks": [
+        {
+          "label": "完整账户净收益和年化",
+          "why": "现金、分红、持仓、等待期和费用都须入账，不能把价格描述年化成账户利润。",
+          "id": "implementation.net_return"
+        },
+        {
+          "label": "最大回撤与恢复时间",
+          "why": "看最深跌幅、恢复前高要等多久，以及期末仍未恢复的情况。",
+          "id": "implementation.drawdown_recovery"
+        },
+        {
+          "label": "交易结构、仓位与费用",
+          "why": "真实完整成交记录才可核交易次数、持有期、胜率和每笔净盈亏，并连同仓位、换手、费用看；胜率单独不说明赚钱。",
+          "id": "implementation.trades_exposure_costs"
+        },
+        {
+          "label": "成交可行与压力成本",
+          "why": "核收盘后信号的成交时点、流动性、买卖价差、滑点、停牌和规模容量。",
+          "id": "implementation.fills_capacity"
+        },
+        {
+          "label": "固定可投资对照",
+          "why": "在相同资金、时期和费用规则下比较简单方案，明确改善与付出的代价。",
+          "id": "implementation.investable_benchmark"
+        }
+      ],
+      "missing": [
+        "若无同一版本完整含成本账户结果，账户年化、回撤、净夏普、换手、费用和成交可行性应标待接入。",
+        "真实零值显示零；没有报告的数值保持缺失，不能由短期价格差推算。"
+      ]
+    },
+    {
+      "id": "incremental",
+      "title": "组合中的新增价值",
+      "question": "它与已有因子是否重复，加入后整个组合净结果改变多少？",
+      "section": "strategy",
+      "checks": [
+        {
+          "label": "信息是否重复",
+          "why": "比较与已用信号的同日读数、事件或持仓重合，不把名称不同当独立贡献。",
+          "id": "incremental.overlap"
+        },
+        {
+          "label": "加入前后的固定对照",
+          "why": "固定其余规则、资金和费用，再比较加入该对象前后完整账户净结果。",
+          "id": "incremental.fixed_addition"
+        },
+        {
+          "label": "收益、下跌和恢复的交换",
+          "why": "增量可能是少跌、恢复更快或更分散，不必假称独有超额收益。",
+          "id": "incremental.risk_tradeoff"
+        },
+        {
+          "label": "集中与执行负担",
+          "why": "新规则可能加重同方向押注、换手或成本，须与改善一并核算。",
+          "id": "incremental.concentration_cost"
+        }
+      ],
+      "missing": [
+        "若无与现有因子的重合、加入前后固定账户对照及组合代价，应逐项标待接入。",
+        "即使接入组合比较实验，也须核原报告具体覆盖哪些问题，不能只按实验类型判完成。"
+      ]
+    },
+    {
+      "id": "governance",
+      "title": "版本、复核与可追溯性",
+      "question": "这张结论能对应到哪个定义、哪批输入和哪次独立复核？",
+      "section": "definition",
+      "checks": [
+        {
+          "label": "精确定义身份",
+          "why": "写清对象ID和版本，旧版计算核验不自动转给新版，候选草案也不冒充正式卡。",
+          "id": "governance.exact_identity",
+          "sources": {
+            "definition_fields": [
+              "reference",
+              "version"
+            ]
+          }
+        },
+        {
+          "label": "资料与代码身份",
+          "why": "记录来源文件指纹、输入窗口、价格口径和实际执行代码，发现漂移应停下解释受影响结果。",
+          "id": "governance.source_code_identity",
+          "sources": {
+            "definition_fields": [
+              "sources",
+              "input",
+              "calculation"
+            ],
+            "experiment_fields": [
+              "sources"
+            ]
+          }
+        },
+        {
+          "label": "四种日期分别列",
+          "why": "观察期、资料截止、运行时刻与复核日期各有含义，未知时留空不拿生成日期替代。",
+          "id": "governance.four_dates",
+          "sources": {
+            "experiment_fields": [
+              "period",
+              "data_cutoff",
+              "run_at",
+              "reviewed_at"
+            ]
+          }
+        },
+        {
+          "label": "运行、复核和结论分列",
+          "why": "已计算、数字核对、限定接受、策略有用和生产授权不是同一个状态。",
+          "id": "governance.run_review_result",
+          "sources": {
+            "experiment_fields": [
+              "run_status",
+              "review_status",
+              "review_summary"
+            ]
+          }
+        },
+        {
+          "label": "失败与下一步可追",
+          "why": "保留不支持、资料不足、修正和待办，不用新版报告抹去旧结果。",
+          "id": "governance.failed_followup",
+          "sources": {
+            "definition_fields": [
+              "limitations",
+              "next_steps"
+            ],
+            "experiment_fields": [
+              "limitations",
+              "next_steps",
+              "review_summary"
+            ]
+          }
+        }
+      ],
+      "missing": [
+        "若缺精确输入或代码身份、历史到达时间、运行与复核日期、失败尝试记录，应逐项标待接入或未记录；不可用生成日期补空。"
+      ]
+    }
+  ]
+}

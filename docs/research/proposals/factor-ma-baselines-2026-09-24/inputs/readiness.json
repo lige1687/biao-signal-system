@@ -1,0 +1,74 @@
+{
+  "task": "factor-ma-baselines-2026-09-24-task2",
+  "scope": "2022-01-01..2026-06-30; six fixed domestic broad ETF; 11 predeclared policies per symbol",
+  "status": "input_review_only_no_return_run",
+  "real_return_runs": 0,
+  "network_requests": 0,
+  "qualification_changed": false,
+  "interpretation": "计算可行性不等于原来源资格升级、当时可知性证明或生产采用。旧input-bundle的action_complete=false是旧快照，不能覆盖随后84/84行动覆盖事实；旧qualified=false也不能自动变true。",
+  "price_window": {
+    "start_quote": "2022-01-04",
+    "end_quote": "2026-06-30",
+    "nominal_open_close_nonmissing": true,
+    "signal_price": "既有六ETF经济指数收盘序列，只供收盘均线状态；现金分红不是可用账户现金",
+    "execution_price": "未复权ETF名义开盘价；逐笔费用另扣",
+    "warmup": "最迟2020-12-21起的现有有效报价足够20/60/120日均线；不以上市前指数替代",
+    "important_correction": "510050/510500/512100的旧exit_three_piece parquet与名义CSV逐日价格不同，不能拿旧parquet开盘作成交价。分别有1210/1337/1230个共同日期的close不等；应用economic-momentum/run.py绑定的normalized nominal-candidate CSV。"
+  },
+  "symbols": [
+    {
+      "symbol": "510300.SS",
+      "nominal_price_rows_in_window": 1085,
+      "nominal_price_hash": "d11357f678570ff9698e39799fd4db81ed825c3c05f7bb4c876e895a5c66d0bf",
+      "action_coverage": "2020-tail..2026H1现金及拆分证据已有完整候选；2022..2026H1五笔现金分红，付款日均已知，无实施拆分",
+      "compute_scope": "固定全期六方案价格与11政策的账户计算有条件可行",
+      "minimum_gate": "主控明确接纳新84/84覆盖中该产品年度表及已有付款公告，并把原qualified=false与新证据并列留痕；随后按新协议核名义价和账户样例。2018/2019补充核查不直接决定本次2022起账户，但不得反填旧资格。"
+    },
+    {
+      "symbol": "510050.SS",
+      "nominal_price_rows_in_window": 1085,
+      "nominal_price_hash": "bac2a6b082f77468dc0a01a8460d40766f8a77700150cf040699a6a0465d8c86",
+      "action_coverage": "2020-tail..2026H1现金及拆分覆盖完整；2022..2025四笔现金分红，无实施拆分",
+      "compute_scope": "可算经济收盘信号；完整现金账户尚不可宣称可跑",
+      "minimum_gate": "给510050-2023-cash-1及510050-2025-cash-1核场内现金发放日并固定来源页/哈希；2021-11-29事件在本账户开跑前，但经济指数预热仍沿用已存金额及除息日。"
+    },
+    {
+      "symbol": "510500.SS",
+      "nominal_price_rows_in_window": 1085,
+      "nominal_price_hash": "bc8619d96c93975d7cf00885aebcf2b00a69b47b5e97617385dcb92373352b69",
+      "action_coverage": "2020-tail..2026H1现金及拆分覆盖完整；2022-08-26日终实施1.14539份额变动；2024/2025/2026H1三笔现金分红",
+      "compute_scope": "可算经济收盘信号及份额变动；完整现金账户尚不可宣称可跑",
+      "minimum_gate": "核510500-2024-cash-1、510500-2025-cash-1、510500-2026H1-cash-1的到账日；账户中日终份额变动须在2022-08-26收盘后处理，不得在当日开盘先增份额。"
+    },
+    {
+      "symbol": "512100.SS",
+      "nominal_price_rows_in_window": 1084,
+      "nominal_price_hash": "a63a56971234b698178ba8312be818c1895099e5543f72fee3c2b8b65e6dc195",
+      "action_coverage": "2020-tail..2026H1现金及拆分覆盖完整；2022-08-03计划已取消；2022-09-02日终实施0.36555份额合并，09-02无报价、09-05恢复；2025/2026H1两笔现金分红",
+      "compute_scope": "可算经济收盘信号；完整现金账户尚不可宣称可跑",
+      "minimum_gate": "核512100-2025-cash-1及512100-2026H1-cash-1的到账日；账户合并在2022-09-02日终处理，09-02不得凭空生成开盘成交。"
+    },
+    {
+      "symbol": "159915.SZ",
+      "nominal_price_rows_in_window": 1085,
+      "nominal_price_hash": "dc15f1c722114cf0f67d3c63d123b91fce27d60a9c41c4796a058b7b05fdece0",
+      "action_coverage": "预热尾段至2026H1现金与拆分逐期有零事件证据",
+      "compute_scope": "固定全期经济信号和账户计算有条件可行",
+      "minimum_gate": "主控确认沿用已核SZSE名义价、日历与零事件覆盖；按新协议跑账户样例，不将当前资料可见性写成历史到达日志。"
+    },
+    {
+      "symbol": "588000.SS",
+      "nominal_price_rows_in_window": 1085,
+      "nominal_price_hash": "7c7bce89fee5b6483f822d14814dbc14a4ed67a0edcc034196485828e9def543",
+      "action_coverage": "2020-11-09份额变动早于预热起点；2020-tail..2026H1现金与拆分零事件覆盖",
+      "compute_scope": "固定全期经济信号和账户计算有条件可行",
+      "minimum_gate": "主控沿用既有588000名义价核查和零事件覆盖；按新协议检查标的自身成交限制与账户样例。"
+    }
+  ],
+  "common_gates_before_real_run": [
+    "Task1冻结收盘经济信号到下一允许开盘的时间线、B0/B50初始化、100份单位、两种费用、停牌/涨跌停/缺失、期末估值及人工金额期望",
+    "新raw仅加输入/账户薄适配，逐条校验行动登记日、除息日、到账日和日终份额变动，缺付款日不得猜、不得在除息日当现金到账",
+    "六只保留在结果表；受付款日阻断的三只标未运行和精确事件，不把其余三只当全体，也不改固定区间",
+    "所有历史资料在本次复算时可读取，不声称2022年每份资料已于当日到达；政策的未来信号输入只允许已生效的价格/行动，严格历史采用证据另列"
+  ]
+}

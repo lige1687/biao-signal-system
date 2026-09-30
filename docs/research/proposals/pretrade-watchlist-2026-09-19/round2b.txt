@@ -1,0 +1,16 @@
+方向与架构讨论 第2轮（接续；你第1轮的回复我已收到并核验完毕，因通道故障需开新对话续轮）
+
+你第1轮的立场摘要（我记录的）：A=S2采用不作前置、关注清单V1不含消息维度、消息只做解释层；B=不建pretrade领域模块、只做轻聚合展示层、DTO字段三分法（source引用/derived格式化/禁decision）；C=最小daily_watch_snapshots表（候选级每日、业务库、180天、首日=建立基线不装变化）；D=验收用用户任务场景（5秒为什么看/30秒等什么/次日变化/失效可见）+30秒理解指标，不用测试数量。你留了两个问题：关注清单是一级入口还是挂靠？需要显式watch生命周期吗？
+
+我的核验结果（仓库事实）：
+1. watch生命周期已存在：BuyPointCandidateDTO.state 取值 watch/confirmed/weakened/invalidated；WatchConditionDTO 区分price/state型并带 as_signal_rule_ids；SuggestedPlanDTO 已是可直接落计划的预填（动作闭环后端半联通）。→ 不需要新生命周期，缺的只是每日diff视图。
+2. /opportunities/scan 已分 actionable/waiting/blocked；ScanItemDTO 含 verdict/missing_summary_cn/blocking_reasons/has_active_plan。
+3. 路由现状：/ 是 WorkspacePage。我的立场：V1做WorkspacePage首屏区块、不新增一级路由；升级为独立入口的触发条件请你定。
+4. 快照落库要动 storage 层（受保护路径），计划需把「存储层授权」列为用户决策项。
+
+第2轮请收敛输出（这是冻结前的最后一轮讨论，之后我冻结计划交用户批）：
+1. 冻结计划骨架：2-3个阶段，每阶段给：目标一句话、涉及层（API聚合/前端/存储）、验收清单（用你的场景格式可打勾）、用户授权点。
+2. 派发建议：每阶段执行档案（flash-high机械/glm-high有界/glm-max难推理），你推荐我执行。
+3. ETF失效语义清单：结构破坏/估值偏离/宏观条件 vs 止损目标价——哪些映射既有规则来源、哪些标注为ETF差异，保证可溯源。
+4. 冻结前剩余分歧或风险（没有就说没有）。
+（通道约束，请严格遵守：回复请用连续的自然段纯文本，不要使用任何列表符号、编号、markdown标题或表格；每段不超过300字，总长度控制在1200-1800字。内容优先，格式极简。）

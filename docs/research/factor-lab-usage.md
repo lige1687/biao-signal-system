@@ -11,6 +11,14 @@
 `momentum_prototype.py`、`factor_diagnostics.py`、`dual_ma.py` 等），
 不复制第二套公式。
 
+### 现有 API 与 Agent 调用边界（2026-09-22）
+
+- `GET /api/factors/panel` 已存在：`api/routes/factors.py` → `FactorPanelService` → 磁盘快照；只读观测结果，不是任意因子运行接口。无需再做第二个同类面板 API。
+- 面板中的评级是带历史研究日期的留痕，不是 `definitions.v1.json` 某个精确版本的新验证结论；不能直接把它当作 Agent 的因子资格证明。
+- `calculate_batch` 等是本地 Python 研究入口；`scripts/run_factor_lab.py` 需要冻结协议，CLI 也不是自由运行授权。读取结果与启动研究要分开。
+- 本次检查的 Copilot/Agent 路由未发现 `factor_lab` 或上述面板的专用调用绑定，不能说网页 Agent 已接通整套研究。后续优先复用现有函数/快照入口并补少量格式与权限对接，不重建计算服务。
+- 外部 REST API 是数据接口；MCP 是把接口包装成 Agent 工具。包装成功不等于其数据适合 ETF 研究，也不自动允许它执行回测。FactorHub 本轮状态与证据见[复核报告](../experiments/factor-reuse-refresh-2026-09-22.md)。
+
 ## 一、当前支持的对象（分列，不含未支持项）
 
 ### 已登记卡（可直接引用，参数与登记表逐一核对）
@@ -32,8 +40,41 @@
 
 ### 未支持（登记了但没有 factor_lab 实现；调用会拒绝）
 
-`mixed.price.economic` 等其余约75张卡。**登记不等于已接入**；需要新对象时按
-§四的准入清单走，不要自行加分支。
+上表是2026-09-14首批接口快照，不再以“其余约75张”描述当前支持范围。
+**登记不等于已接入**；还要分清统一入口、独立研究函数和CLI是否支持。
+
+### 2026-09-22 当前入口补充（历史首批表保留）
+
+`adapters.calculate_batch` 在首批之外已有以下精确引用，均只按当前合成协议调用：
+
+| 引用（均为1.0.0） | 含义与限制 |
+|---|---|
+| `trend.sma50`、`trend.sma200` | 50/200期简单均线；已有人工作例证据，不代表投资有效 |
+| `trend.above50`、`trend.above200` | 严格站上均线的状态；不是当天上穿 |
+| `trend.cross_up50`、`trend.cross_up200` | 从上一有效报价的未站上变为当前严格站上；不是持仓规则 |
+| `trend.recovered200` | 当前价格大于或等于200期均线；是状态，不是必须发生穿越 |
+| `mixed.rv_percentile` | 波动在自身历史中的位置；v1仍为exists，存在价格整体缩放后排名大变的已知限制，不能因为可调用而称已验证 |
+
+另有独立入口，**不自动包含在calculate_batch或CLI支持范围中**：
+
+- `b3a_registered_v2.calculate_registered_b3a_v2`：仅 `trend.cost_basis_distance20@2.0.0`、`mixed.pullback_ma_distance@2.0.0`，合成输入；旧1.0.0不继承新版本验证。
+- `b3b_ma_cluster_width.ma_cluster_width`：六均线密集宽度；数值描述，不自行套阈值或构造突破信号。
+- `b3b_swing_rr_distance.swing_rr_from_bars` / `swing_rr_distance`：已确认结构间的距离比例；不能把它称为可直接交易的盈亏比。
+
+`mixed.momentum.rank@1.0.0` 是有序名单定义，当前没有calculate_batch分支；`select_mixed` 还会筛波动并截前三，不能冒充仅按动量排序的相同对象。其他对象应逐一核实际入口，不用旧总数推断支持或不支持。
+
+### 完整动量排序：复用已有阶段，不另建引擎（2026-09-22）
+
+已有 `factor_runtime.monthly_decisions(..., variant="E10")` 的 **`ranked`** 字段保留所有合格对象，按动量降序、精确相等再按代码升序；不是该函数的 `selected`（前三），也不是E11的波动筛选后名单。返回值是`|`分隔文本，空文本应解码为`[]`，不能得到`[""]`。这不是`calculate_batch`/CLI新增支持，也没有新增网页Agent绑定。
+
+调用前由研究协议保证：
+
+- 分数与`valid_count`来自获准的同一输入；当天行只代表真实有效报价，不用旧报价前填。排序阶段本身不会从原始价格重算这些字段。
+- `(date, symbol)`唯一，`symbols`唯一且为统一约定的字符串、不能含`|`；重复行会被旧入口取第一条，不会自动拒绝。
+- `completed_months`由完整月份和声明的交易日历确定，不能拿截到月中的最后一行冒充月末；旧函数只使用调用者传入的日期。
+- 精确解析`mixed.momentum.rank@1.0.0`及`mixed.eligible@1.0.0`、`mixed.momentum.raw@1.0.0`，留输入/代码/定义身份；仅调用`monthly_decisions`不会自动做这一项或研究用途检查。
+
+上述是使用者义务，**不是声称已加自动校验**。人工分数检查只证明这个排序阶段能复用，不证明原始ETF输入合格、因子有效或可用于交易。调用与独立反例见[本轮报告](../experiments/factor-momentum-rank-reuse-2026-09-22.md)。
 
 ## 二、一次完整用法（五步）
 
@@ -170,6 +211,12 @@ python3 scripts/run_factor_lab.py --protocol <不可变协议.json> --out <新�
 - 前端研究台、生产接入、真实交易授权。
 
 ## 六、完整参考
+
+2026-09-29新增受控技术研究分支：
+[一页说明与真实命令](research-workflow-usage.md)。新任务由
+`--workflow-draft`演练冻结、`--workflow-contract`检查后计算、同分支的
+`--register-report`重新核验后登记。下面的原workbench-v1规格和上面的历史
+未实现清单是旧批次边界，不据此推断新分支能力；新分支也不迁移旧协议。
 
 - 执行规格：`docs/superpowers/plans/2026-09-14-factor-research-workbench-v1.md` v1.0.0
 - 执行报告：`docs/experiments/factor-research-workbench-v1-2026-09-14.md`

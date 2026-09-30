@@ -30,6 +30,7 @@ from lei_signal.api.routes import (
     factors,
     feishu_webhook,
     fundamentals,
+    fwd_ledger,
     learning,
     news,
     opportunities,
@@ -149,6 +150,7 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
     app.include_router(signals.router)
     app.include_router(agent.router)
     app.include_router(copilot.router)
+    app.include_router(fwd_ledger.router)
     app.include_router(feishu_webhook.router)
     app.include_router(fundamentals.router)
     app.include_router(sectors.router)

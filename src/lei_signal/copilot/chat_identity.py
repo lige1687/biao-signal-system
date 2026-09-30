@@ -39,6 +39,7 @@ __all__ = [
     "build_incomplete",
     "mark_answered",
     "mark_incomplete",
+    "release_generation",
     "retry_identity_for",
     "ChatRequestConflict",
 ]
@@ -116,6 +117,9 @@ class EnterOutcome:
     question_id: int | None = None
     replay_reply: dict[str, Any] | None = None
     incomplete_reply: dict[str, Any] | None = None
+    #: 本次领号后 claim 行的 state_at（仅 proceed/resume=本次持有生成权时非空）。
+    #: 失败释放（release_generation）凭它做 CAS，避免误伤租约回收后的新主。
+    claim_state_at: str | None = None
 
 
 def _assistant_by_id(conn: sqlite3.Connection,
@@ -180,9 +184,10 @@ def _lease_expired(claim: ChatClaim) -> bool:
     return _now() - started > timedelta(seconds=ANSWER_LEASE_SECONDS)
 
 
-def _claim_generation(conn: sqlite3.Connection, claim: ChatClaim) -> bool:
+def _claim_generation(conn: sqlite3.Connection, claim: ChatClaim) -> str | None:
     """原子领取生成权：pending/incomplete→generating，或过期 generating 凭
-    state_at 比对回收（CAS）。返回 False=他人正在生成（未完成出口）。
+    state_at 比对回收（CAS）。返回 None=他人正在生成（未完成出口）；
+    成功时返回本次写入的 state_at（供失败释放做 CAS，不误伤新主）。
     ``incomplete`` 是上次生成以未完成收场的状态：重试凭本 CAS 重新领取，
     并发重复重试只有一个胜出、不重复生成。"""
     now = _now_iso()
@@ -201,6 +206,33 @@ def _claim_generation(conn: sqlite3.Connection, claim: ChatClaim) -> bool:
             "UPDATE agent_chat_requests SET answer_state='generating', state_at=? "
             "WHERE client_request_id=? AND answer_state='generating' AND state_at=?",
             (now, claim.client_request_id, claim.state_at))
+    conn.commit()
+    return now if cur.rowcount == 1 else None
+
+
+def release_generation(conn: sqlite3.Connection, client_request_id: str, *,
+                       expected_state_at: str | None = None) -> bool:
+    """生成方以**失败/断连收场且未留下任何回答**时，把生成权放回
+    ``pending``（2026-09-15 agent-ask-stability）。
+
+    修前：准备失败/问题落库失败/回答保存失败/客户端断连后，claim 停在
+    ``generating``——同身份重试在租约（600 秒）内只得到「回答正在生成或
+    重试中」，用户无法立即继续处理原问题。释放后重试按既有 CAS
+    （pending→generating）立即恢复。
+
+    ``expected_state_at`` 给出领号时的 state_at：CAS 防误伤——若租约已被
+    他人回收重领（state_at 已变），本次释放不生效。只从 generating 放回
+    pending；已有终态（answered/incomplete）不动。"""
+    if expected_state_at is not None:
+        cur = conn.execute(
+            "UPDATE agent_chat_requests SET answer_state='pending' "
+            "WHERE client_request_id=? AND answer_state='generating' AND state_at=?",
+            (client_request_id, expected_state_at))
+    else:
+        cur = conn.execute(
+            "UPDATE agent_chat_requests SET answer_state='pending' "
+            "WHERE client_request_id=? AND answer_state='generating'",
+            (client_request_id,))
     conn.commit()
     return cur.rowcount == 1
 
@@ -248,7 +280,8 @@ def _check_claim(conn: sqlite3.Connection, claim: ChatClaim, *,
             kind="incomplete", session_id=claim.session_id,
             question_id=claim.question_id or None,
             incomplete_reply=build_incomplete(claim, reason="回答正在生成或重试中"))
-    if not _claim_generation(conn, claim):
+    claimed_at = _claim_generation(conn, claim)
+    if claimed_at is None:
         return EnterOutcome(
             kind="incomplete", session_id=claim.session_id,
             question_id=claim.question_id or None,
@@ -257,10 +290,12 @@ def _check_claim(conn: sqlite3.Connection, claim: ChatClaim, *,
         # 原问题已落库、回答缺失：按固定逻辑恢复**该问题**（不复用下一问题）
         return EnterOutcome(kind="resume", session_id=claim.session_id,
                             claim_cid=claim.client_request_id,
-                            question_id=claim.question_id)
+                            question_id=claim.question_id,
+                            claim_state_at=claimed_at)
     # 领号后、问题落库前崩溃：续用原会话正常走流程，稍后补挂问题号
     return EnterOutcome(kind="proceed", session_id=claim.session_id,
-                        claim_cid=claim.client_request_id)
+                        claim_cid=claim.client_request_id,
+                        claim_state_at=claimed_at)
 
 
 def enter_chat_request(
@@ -304,7 +339,8 @@ def enter_chat_request(
                 return _check_claim(conn, winner, request_hash=request_hash,
                                     session_id=session_id)
         return EnterOutcome(kind="proceed", session_id=session_id,
-                            claim_cid=client_request_id)
+                            claim_cid=client_request_id,
+                            claim_state_at=now if client_request_id else None)
     # 需要新建会话：领号、建会话、领生成权同事务（并发重复编号只有一个成功）
     now = _now_iso()
     new_sid = f"sess_{uuid.uuid4().hex[:12]}"
@@ -334,7 +370,8 @@ def enter_chat_request(
         return _check_claim(conn, winner, request_hash=request_hash,
                             session_id=session_id)
     return EnterOutcome(kind="proceed", session_id=new_sid,
-                        claim_cid=client_request_id)
+                        claim_cid=client_request_id,
+                        claim_state_at=now if client_request_id else None)
 
 
 def attach_question_to_claim(conn: sqlite3.Connection,

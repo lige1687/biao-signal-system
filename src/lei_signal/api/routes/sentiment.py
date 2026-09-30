@@ -88,35 +88,11 @@ def alerts() -> dict:
     """全局情绪信号横幅（2026-09-06 用户口径：打开系统第一眼可见）。
 
     只在信号激活时返回条目（平时空列表，前端不渲染横幅）：
-    - 冰点环境（全A三票冷）→ warn 级横幅（黄金坑前提，附宽度佐证）；
     - 热警报（需板块热度数据）→ alert 级横幅；
     纯叙事标注层（research_proxy），不构成买卖点；点击跳 /ops 看详情。
     """
-    from lei_signal.copilot import breadth as breadth_mod
-
     out: list[dict] = []
     try:
-        cn = market_mood.cn_mood() or {}
-        if str(cn.get("state")) == "cold":
-            breadth_note = ""
-            try:
-                b = breadth_mod.a_share_breadth() or {}
-                if b.get("available"):
-                    breadth_note = (
-                        f"；宽度佐证：200日线上方 {b.get('ma200_pct', 0):.0f}%"
-                    )
-            except Exception:  # noqa: BLE001
-                pass
-            out.append({
-                "level": "warn",
-                "key": "icepoint",
-                "title_cn": "❄ 全A情绪冰点出现",
-                "body_cn": (
-                    f"{cn.get('state_cn') or '三票冷'}{breadth_note}"
-                    "——冰点机会信号的环境前提成立（历史 10 日超额 +6~8%、"
-                    "154 例 92% 板块同向），点开今日操作查看板块明细"
-                ),
-            })
         heat = market_mood.sector_heat_boards() or {}
         for b in (heat.get("boards") or []):
             sig = str(b.get("signal") or "")

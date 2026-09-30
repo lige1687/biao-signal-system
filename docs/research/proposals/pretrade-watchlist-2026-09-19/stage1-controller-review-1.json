@@ -1,0 +1,33 @@
+{
+  "job_id": "51927622-4ede-442d-ada6-346639797d3e",
+  "stage": "S1",
+  "execution": 1,
+  "reviewed_by": "zcode-controller-sess_ceb17eff",
+  "reviewed_at": "2026-09-19T04:05:00Z",
+  "verdict": "failed",
+  "failed_goals": ["G4(部分)：页面级证据无效；直达链路未实测"],
+  "passed_goals": ["G1(代码+API证据)", "G2(代码路径，见保留项)", "G3(6+52测试全过，DTO纪律满分)"],
+  "controller_evidence": {
+    "build": "npm run build 通过（2.48s，主控复跑）",
+    "tests": "test_watchlist_block 6项 + 相关52项 = 58 passed（主控复跑）",
+    "hygiene": "仅worktree已知.git误报",
+    "dto_discipline": "每字段source=/derived=标注，decision零出现（主控逐行核对）",
+    "api_response": "9条blocked字段完整正确（主控解析核验）"
+  },
+  "failures": [
+    {
+      "id": "F1",
+      "severity": "blocking",
+      "desc": "desktop.png/narrow.png 为加载中状态截图（转圈「正在加载自选与大盘」，区块未渲染），不能作为场景自评表的证据；自评表引用该截图的各行证据无效",
+      "fix": "缓存预热后（或等待区块元素出现）重截两图，图中必须可见：数据时点、三组分组、候选行字段、跨日占位、无候选文案逻辑由单测保证"
+    },
+    {
+      "id": "F2",
+      "severity": "major",
+      "desc": "has_active_plan=true 的「直达执行计划」路径未实际点到（本次自选无此类标的）",
+      "fix": "用夹具或临时注入一条 has_active_plan=true 数据实测点击导航到 /plans，留证；无法构造则如实标注并给出代码级验证说明"
+    }
+  ],
+  "repair_scope": "仅证据补齐与必要的测试夹具；不改业务逻辑、不改DTO、不扩范围",
+  "notes": "执行者诚实披露了F2（未解决问题第2条），予以记录；F1系截图时机错误（冷缓存扫描243秒未等待完成）"
+}

@@ -294,6 +294,13 @@ def _symbol_candidates_from_message(message: str) -> list[str]:
             info = resolve_symbol(tok)
         except ValueError:
             continue
+        # 收口一（二轮复验 2026-09-17）：纯字母 token 同时是技术指标词时，
+        # 指标/方法语境不算指名该证券——「ATR止损/ATR距离/ATR缓冲」是波动
+        # 指标用法，不能因此把对象从当前讨论截走；「ATR 这只股票」这类明确
+        # 证券问法仍正常解析（不全局禁用代码）。
+        if tok in _INDICATOR_WORD_SYMBOLS and \
+                _INDICATOR_WORD_SYMBOLS[tok].search(message or ""):
+            continue
         if info.symbol not in valid:
             valid.append(info.symbol)
     return valid
@@ -367,9 +374,11 @@ def _static_symbol_name(symbol: str, db_name: str | None) -> str:
 
 
 #: 口语别名 → 标的（目录名不含的常用说法）。命中优先级：自选 > 别名 > 目录精确子串。
+#: 主控裁决（2026-09-15）：别名只收**用户明确指定的产品/指数**；
+#: 「科创」「科创板」这类整个板块的泛指不再静默映射到科创50指数——
+#: 板块整体没有唯一可核实对象时，由 resolve 层澄清（科创50 只作可选
+#: 观察参考并明确它不代表整个板块），不用指数顶替板块。
 _CATALOG_ALIAS: dict[str, str] = {
-    "科创": "000688.SS",
-    "科创板": "000688.SS",
     "科创50": "000688.SS",
     "恒生科技": "^HSTECH",
     "中概": "513050.SS",
@@ -389,32 +398,54 @@ _WATCH_NAME_CN: dict[str, str] = {
 }
 
 
+#: 同名证券代码也是技术指标词的守卫（收口一）：词 → 指标/方法语境模式。
+_INDICATOR_WORD_SYMBOLS: dict[str, re.Pattern[str]] = {
+    "ATR": re.compile(r"ATR.{0,8}(止损|止盈|缓冲|距离|指标|通道|倍数|退出|真实波幅)|"
+                      r"(止损|止盈|缓冲|距离|指标|通道|倍数|退出|真实波幅).{0,8}ATR",
+                      re.IGNORECASE),
+}
+
+
 def _resolve_symbol_by_catalog(message: str) -> str | None:
     """目录搜索层：自选没命中时，按「目录名完整出现在话里」+ 口语别名解析。
 
-    「白酒板块现在怎么看」→ 目录名「白酒」完整在句中 → TH881273；
-    「科创板块现在怎么看」→ 别名表「科创」→ 000688.SS（科创50）。
+    「白酒板块现在怎么看」→ 板块名「白酒」完整在句中 → TH881273；
+    「科创50指数现在怎么看」→ 别名表「科创50」→ 000688.SS。
     不做模糊公共子串：目录词汇面大（90行业+500概念），2 字模糊串会
     把「市场环境」误配到「环保工程」这类。命中的 symbol 由调用方交给
     分析服务，失败自然回退全局。
+
+    主控裁决（2026-09-15）：用户**明确指定**的对象（板块专名/别名/目录
+    全名）优先于笼统的「板块/版块/行业」关键词——「科创50板块」里的
+    科创50是指数身份，不被板块二字截断；而「科创板块/科创板整体」没有
+    唯一可核实对象 → None（由 resolve 层澄清，不用指数/ETF 顶替板块）。
     """
     from lei_signal.api import catalog as catalog_mod  # noqa: PLC0415
-    from lei_signal.api.config import STRATEGY_INDICES, US_ETFS  # noqa: PLC0415
+    from lei_signal.api.config import (  # noqa: PLC0415
+        DASHBOARD_INDICES,
+        STRATEGY_INDICES,
+        US_ETFS,
+    )
     from lei_signal.api.labels import THS_INDUSTRY_NAMES  # noqa: PLC0415
 
-    from lei_signal.copilot.subjects import named_subject, asks_for_sector
+    from lei_signal.copilot.subjects import named_subject
 
+    # 1) 板块专名（通信板块→BK1215 等，含「板块」二字的真实板块）
     named = named_subject(message)
-    if named or asks_for_sector(message):
+    if named:
         return named
 
-    # 1) 口语别名（最长键优先，防「科创板」被「科创」截胡）
+    # 2) 口语别名（最长键优先；明确对象优先于「板块」关键词）
     for alias in sorted(_CATALOG_ALIAS, key=len, reverse=True):
         if alias in message:
             return _CATALOG_ALIAS[alias]
 
-    # 2) 目录名完整出现在话里（行业/指数/美股ETF/概念）
+    # 3) 目录名完整出现在话里（默认大盘/行业/指数/美股ETF/概念）。
+    #    DASHBOARD_INDICES 一并装入（2026-09-18 名称绑定修复）：否则说
+    #    「沪深300/上证指数」这类默认大盘名解析不到，旧选中/会话对象接管，
+    #    回答和资料卡跟错对象。
     entries: list[tuple[str, str]] = []  # (symbol, name)
+    entries += [(idx.symbol, idx.display_name) for idx in DASHBOARD_INDICES]
     entries += [(f"TH{code}", name) for code, name in THS_INDUSTRY_NAMES.items()]
     entries += [(idx.symbol, idx.display_name) for idx in STRATEGY_INDICES]
     entries += [(etf.symbol, etf.display_name) for etf in US_ETFS]
@@ -428,6 +459,13 @@ def _resolve_symbol_by_catalog(message: str) -> str | None:
     best: tuple[int, str] | None = None  # (名称更长=更具体, symbol)
     for symbol, name in entries:
         if name and name in message and (best is None or len(name) > best[0]):
+            # 收口一（二轮复验 2026-09-17）：同名代码同时是技术指标词时，
+            # 指标/方法语境不算指名该证券——「ATR止损/ATR距离/ATR缓冲」是
+            # 波动指标用法，不该把对象截走；「ATR 这只股票/看看 ATR」这类
+            # 明确证券问法仍按证券身份解析（不全局禁用代码）。
+            if name in _INDICATOR_WORD_SYMBOLS and \
+                    _INDICATOR_WORD_SYMBOLS[name].search(message):
+                continue
             best = (len(name), symbol)
     return best[1] if best else None
 
@@ -531,6 +569,75 @@ def _payload_symbol_numbers(ctx_payload: dict) -> set[float]:
     return nums
 
 
+_A_SHARE_CODE_PREFIXES = frozenset(
+    {"60", "68", "51", "56", "58", "00", "30", "15", "16", "18"}
+)
+
+
+#: R3 身份标记模式集（agent-whitelist-fix-r3-2026-09-20）：6 位数字必须
+#: 紧邻这些「明确标的指向」语境才算代码。只列写法变体（X代码 / 标的X），
+#: 不枚举具体数值或前缀白名单之外的证券存在性判断。
+_HISTORY_CODE_IDENTITY_MARKERS = re.compile(
+    r"(?:"
+    # 「代码 510300」「标的代码是 510300」「基金代码：510300」「ETF 代码=510300」
+    r"(?:标的|证券|股票|基金|指数|[Ee][Tt][Ff])?代码(?:是|为|[:：=])?"
+    # 「标的是 510300」「讨论的标的 510300」——「标的」后只允许是/为/冒号
+    r"|标的(?:是|为|[:：=])?"
+    r")\s*$"
+)
+
+#: R3 候选数字形态：恰好 6 位、前后无相邻数字、非小数的一部分
+#: （510300.25 的整数段不算代码）、后面不紧跟计量单位字（元/股/份/手/张/%，
+#: 「510300 元」「510300 股」是金额/数量，不是标的）。
+_HISTORY_CODE_TOKEN = re.compile(
+    r"(?<!\d)(?<!\d\.)\d{6}(?!\d)(?!\.\d)(?!\s*[元股份手张%])"
+)
+
+
+def _history_symbol_numbers(history_rows: list) -> set[float]:  # noqa: ANN001
+    """会话历史**用户消息**里的标的代码数字段（S4-2 误拦修复，R3 2026-09-20）。
+
+    会话上下文整体喂给模型（chat_discussion 的 history）；追问轮因消息带
+    「板块」命中 asks_for_sector 不继承标的时走全局路径，材料里没有任何
+    标的代码，模型回显上一轮讨论过的代码（如 510300）是忠于所给材料，却
+    被数值校验当编数字误拦→好答案被换成降级模板（真模型评测
+    agent-realmodel-eval-2026-09-20 B 类）。
+
+    R3 身份标记准入（GPT ITERATION:20 BLOCK 纠正，形状过滤不充分）：
+    「账户金额是 510300 元」「成交价是 510300.25 元」同为 6 位、无相邻
+    数字、前缀合法、来自用户——仅凭形状无法与代码区分。收紧为：6 位
+    前缀合法数字必须伴随**文本内明确的标的指向语境**（
+    ``_HISTORY_CODE_IDENTITY_MARKERS`` 模式集，见其注释）才入补集；
+    无标记→不加入，该句数值由既有 chat_fallback 降级承接。不以枚举
+    前缀或排除特定数值代替身份判别。前缀集合
+    ``_A_SHARE_CODE_PREFIXES`` 是**本补集支持范围**（沪：60/68/51/56/58；
+    深：00/30/15/16/18），不是证券存在性证明。
+    来源分层（R2 保持）：只扫 role == "user" 的消息——助手自由文本里的
+    代码不得仅因进入历史而自合法化。价位类校验保持严格。
+    """
+    nums: set[float] = set()
+    for m in history_rows:
+        if getattr(m, "role", None) != "user":
+            continue
+        content = getattr(m, "content", None)
+        if not isinstance(content, str):
+            continue
+        for match in _HISTORY_CODE_TOKEN.finditer(content):
+            token = match.group()
+            if token[:2] not in _A_SHARE_CODE_PREFIXES:
+                continue
+            # 身份判别：代码前必须紧邻标的指向语境（窗口收 16 字，
+            # 覆盖「我要讨论的标的代码是」这类自然前缀）。
+            window = content[max(0, match.start() - 16):match.start()]
+            if not _HISTORY_CODE_IDENTITY_MARKERS.search(window):
+                continue
+            try:
+                nums.add(float(token))
+            except ValueError:  # pragma: no cover - 纯数字正则不会走到
+                continue
+    return nums
+
+
 def _last_resolved_symbol(history_rows: list) -> str | None:  # noqa: ANN001
     """从会话最近的 assistant 消息 meta 继承标的。
 
@@ -555,33 +662,6 @@ def _market_of(symbol: str) -> str:
     if symbol.startswith("^HS"):
         return "hk"
     return "us"
-
-
-def _inherit_session_facts(conn, session_id: str | None, parsed: dict) -> dict:
-    """契约3：预算/用途沿会话真实继承——本轮没说的，取本会话最近一次明确
-    说法（记录来源问题号），不每轮丢弃、也不每轮重复问。"""
-    inherited: dict = {}
-    if session_id is None:
-        return inherited
-    rows = conn.execute(
-        "SELECT message_id, meta_json FROM agent_messages "
-        "WHERE session_id = ? AND role = 'user' AND meta_json LIKE '%discussion_v1%' "
-        "ORDER BY message_id DESC LIMIT 20",
-        (session_id,)).fetchall()
-    for r in rows:
-        try:
-            snap = (json.loads(r["meta_json"] or "{}") or {}).get("discussion_v1") or {}
-        except json.JSONDecodeError:
-            continue
-        if not inherited.get("budget") and parsed.get("budget") is None \
-                and snap.get("budget"):
-            inherited["budget"] = {**snap["budget"],
-                                   "inherited_from_question": r["message_id"]}
-        if not inherited.get("purpose") and (parsed.get("purpose") in (None, "unknown")) \
-                and snap.get("purpose") not in (None, "unknown"):
-            inherited["purpose"] = snap["purpose"]
-            inherited["purpose_source_question"] = r["message_id"]
-    return inherited
 
 
 def _resolve_window_for_question(conn, body, symbol, session_id, message) -> dict:
@@ -746,6 +826,19 @@ def _discussion_snapshot(conn, body, symbol: str | None,
     行情日只写 observed_at，generated_at 是本次材料生成时间，不互相冒充。"""
     from datetime import UTC as _UTC, datetime as _dt
 
+    # Factor queries freeze their own read-only materials; do not fabricate an
+    # analysis_service/rule reference or inherit a technical backtest window.
+    if window_sel and window_sel.get("factor_readonly") is not None:
+        pack = window_sel["factor_readonly"]
+        return {
+            "question_id": question_id, "client_request_id": body.client_request_id,
+            "symbol": symbol, "context_kind": "factor_readonly",
+            "intent": "discussion", "topic": "evidence", "purpose": "unknown",
+            "factor_readonly": pack, "method": {}, "rule_refs": [],
+            "data_refs": [], "evidence_refs": pack.get("sources", []),
+            "backtest_request_ids": [], "plan_id": None, "budget": None,
+        }
+
     from lei_signal.copilot import resolve as resolve_mod
     from lei_signal.data_provenance import (
         MarketDataRef,
@@ -778,7 +871,11 @@ def _discussion_snapshot(conn, body, symbol: str | None,
         evidence_refs.append(wr.to_dict())
     rule_refs = [ruleset_ref().to_dict()]
     rule_refs.extend(rule_ref(rid).to_dict() for rid in candidates if rid)
-    inherited = _inherit_session_facts(conn, session_id, parsed)
+    history = list_messages(conn, session_id, limit=21) if session_id else []
+    if question_id is not None:
+        history = [row for row in history if row.message_id < question_id]
+    current_background = resolve_mod.apply_user_facts(
+        _user_background(history[-20:], symbol), body.message)
     # 03B-R3 T1：窗口选择一次生成（_resolve_window_for_question），此处直接
     # 冻结其结构化结果——不再自行查库选运行，保证「显示」与「存档」是同一份依据
     # （u2：并发下显示与冻结一致）。window_sel 为 None 时退化为即时解析（兜底）。
@@ -795,10 +892,8 @@ def _discussion_snapshot(conn, body, symbol: str | None,
                          "symbol": symbol}
     else:
         window_frozen = None
-    budget = parsed.get("budget") or inherited.get("budget")
-    purpose = parsed.get("purpose")
-    if purpose in (None, "unknown"):
-        purpose = inherited.get("purpose") or parsed.get("purpose")
+    budget = current_background.get("budget")
+    purpose = current_background.get("purpose") or "unknown"
     return {
         "question_id": question_id,
         "client_request_id": body.client_request_id,
@@ -826,6 +921,9 @@ def _discussion_snapshot(conn, body, symbol: str | None,
         "plan_id": None, "plan_version": None,
         "budget": budget,
         "holdings": None, "risk_preference": None,
+        "user_background": current_background,
+        "user_fact_updates": resolve_mod.user_fact_events(body.message),
+        "user_fact_contract": "own-factual-v1",
     }
 
 
@@ -1027,6 +1125,243 @@ def _server_plan_artifact(conn, session_id: str, question_id: int,
     }
 
 
+#: 连续讨论一轮（2026-09-16）：「板块 → 对应ETF/产品」追问的确定性识别。
+#: 系统目录没有可核实的板块→产品跟踪关系资料，这类问题的诚实答案是完全
+#: 确定的，不走模型（防止凭名称猜跟踪关系或擅自选定产品）。
+_SECTOR_PRODUCT_RE = re.compile(r"ETF|基金|产品|可以买的|能买的")
+_SECTOR_RELATION_RE = re.compile(
+    r"对应|跟踪|相关|哪些|哪个|有没有|关联|挂钩|可以买|能买")
+
+#: 「和刚才相比有什么变化」类资料新旧比较追问（案例8）——C2 窄匹配：
+#: 必须锚定「与此前资料相比」或裸问资料/数据/状态更新；方法（止损/止盈/
+#: 胜率/回测/模块/退出）、资金（金额/预算/仓位/数字+单位）、基本面消息类
+#: 的「变化」问题一律放行给原有链路，不靠堆关键词代替边界判定。
+_COMPARISON_ANCHOR_RE = re.compile(
+    r"(和|与)(刚才|之前|此前|上次)(相比)?|"
+    r"^有(什么|啥)(新)?变化[吗呢？?]{0,2}$|"
+    r"(资料|数据|状态).{0,6}(更新|变化)|"
+    r"^(资料|数据)?(有)?更新了吗[？?]{0,1}$")
+_COMPARISON_EXCLUDE_RE = re.compile(
+    r"止损|止盈|胜率|回测|补测|复跑|方法|模块|退出|打法|"
+    r"金额|预算|仓位|股|元|块|万|千|美元|港币|欧元|成本|"
+    r"基本面|消息|新闻|公告|财报|ATR|atr")
+
+
+def _sector_product_relation_reply(ctx_payload: dict, message: str) -> str | None:
+    """板块语境下问「对应的ETF/有哪些产品」→ 确定性诚实回答（案例2）。
+
+    系统目录不存在板块→ETF 的可核实跟踪关系（已核实：目录只有板块与产品
+    各自的名称，没有跟踪/对应关系数据）。如实说明，不仅凭名称猜、不自动选一个。
+    """
+    if ctx_payload.get("context_kind") != "sector":
+        return None
+    if not (_SECTOR_PRODUCT_RE.search(message) and _SECTOR_RELATION_RE.search(message)):
+        return None
+    name = ctx_payload.get("display_name") or "该"
+    as_of = ctx_payload.get("as_of") or "未知"
+    return (
+        f"你问的「对应的ETF」：系统目录里没有可核实的「{name}板块 → ETF/产品」"
+        "跟踪关系资料——我不会仅凭名称相近猜哪个产品跟踪这个板块，也不替你选定"
+        "某一个产品。\n"
+        "想继续的话：直接说具体产品的名称或代码，我按那个产品自己的系统资料来讲"
+        f"（不会把板块的整体统计当成某个产品的成绩）。{name}板块本身的观察仍按"
+        f"截至 {as_of} 的板块资料。")
+
+
+def _user_background(history_rows: list, symbol: str | None) -> dict:
+    """同会话、同对象内用户**自己声明过**的事实背景（C3 + 收口二精确归属）。
+
+    归属用现成的精确绑定：用户消息的 ``message_id`` = assistant 回答的
+    ``question_id``。只收集「绑定对象 == 当前 symbol」的声明；
+    **无精确归属（无 message_id / 尚无绑定回答）的旧消息标未知、不可继承，
+    不得跨过下一条 user 去猜归属**；中断后重试/同一问题的多个回答共享同一
+    question_id，天然按同一问题处理；symbol 未知（全局）不收集任何背景。
+    明确撤销（没持有/已卖出/没预算）即时清除；沉默不影响。
+    这是**讨论背景**：不是成交记录、不是写库授权、不是新的交易许可。
+    返回 {holding, budget, purpose, stated}；没有任何已知事实时返回 {}。
+    """
+    from lei_signal.copilot import resolve as resolve_mod  # noqa: PLC0415
+
+    if not history_rows or not symbol:
+        return {}
+    # 问题号 → 回答绑定对象集合；多回答冲突时不猜采用哪一个
+    bound_by_qid: dict[int, set[str]] = {}
+    for row in history_rows:
+        if row.role != "assistant":
+            continue
+        qid = getattr(row, "question_id", None)
+        if not qid:
+            continue
+        try:
+            meta = json.loads(row.meta_json or "{}")
+        except (TypeError, ValueError):
+            continue
+        sym = meta.get("resolved_symbol")
+        if isinstance(sym, str) and sym:
+            bound_by_qid.setdefault(int(qid), set()).add(sym)
+    bg: dict = {"holding": False, "budget": None, "purpose": None}
+    for row in history_rows:
+        if row.role != "user":
+            continue
+        mid = getattr(row, "message_id", None)
+        if not mid:
+            continue  # 无身份：不可继承
+        bound = bound_by_qid.get(int(mid))
+        if bound is None:
+            continue  # 无精确归属（旧消息/尚无绑定回答）：标未知，不猜
+        if bound != {symbol}:
+            continue  # 别的对象的声明不串用
+        previous_budget = bg.get("budget")
+        bg = resolve_mod.apply_user_facts(bg, row.content or "")
+        if bg.get("budget") and bg["budget"] != previous_budget:
+            bg["budget"] = {**bg["budget"], "inherited_from_question": int(mid)}
+    return {k: v for k, v in bg.items() if v}
+
+
+def _previous_turn_facts(history_rows: list) -> list[dict]:
+    """会话历史中 assistant 轮的可比事实（对象/资料日期/结论），新→旧排序。"""
+    facts: list[dict] = []
+    for m in reversed(history_rows):
+        if m.role != "assistant":
+            continue
+        try:
+            meta = json.loads(m.meta_json or "{}")
+        except (TypeError, ValueError):
+            continue
+        resolved = meta.get("resolved_symbol")
+        card = meta.get("evidence_card") or {}
+        f = card.get("facts") or {}
+        facts.append({
+            "symbol": resolved if isinstance(resolved, str) else None,
+            "display_name": f.get("display_name"),
+            "as_of": f.get("as_of"),
+            "verdict_cn": f.get("verdict_cn"),
+            "candidate_n": f.get("buy_point_candidate_n"),
+        })
+    return facts
+
+
+def _comparison_reply(history_rows: list, symbol: str | None,
+                      ctx_payload: dict, message: str) -> str | None:
+    """「和刚才相比有什么变化」→ 确定性比较回答（案例8，C1 口径）。
+
+    比较的是同对象、同口径的**已冻结事实**（历史证据卡与当前材料的
+    资料日期/系统结论/买点候选数），不是只比日期：
+    - 已比较字段全部相同 → 只说「这些已比较字段相同」；系统没有每份资料
+      的完整版本快照，不断言所有内容都没更新（C1）；
+    - 同一数据日但内容字段不同 → 如实说同一数据日内的资料内容有变化
+      （盘中/当日修订允许存在），不得说成没有变化；
+    - 日期倒退（当前比刚才更旧）→ 明确是退回较旧资料，不是「更新」；
+    - 日期或字段缺失 → 该字段诚实不可比，不猜。
+    全部直读已落库事实，不引入第二套行情计算。
+    """
+    if not _COMPARISON_ANCHOR_RE.search(message):
+        return None
+    if _COMPARISON_EXCLUDE_RE.search(message):
+        return None
+    prev = _previous_turn_facts(history_rows)
+    cur_name = ctx_payload.get("display_name") or symbol or "当前对象"
+    cur_as_of = ctx_payload.get("as_of")
+    cur_card = ctx_payload.get("evidence_card") or {}
+    cur_facts = cur_card.get("facts") or {}
+    cur_verdict = cur_facts.get("verdict_cn")
+    cur_n = cur_facts.get("buy_point_candidate_n")
+    if not prev:
+        return ("这是本会话里我能看到的第一份资料，没有可比较的之前状态。"
+                f"当前 {cur_name} 的资料截至 {cur_as_of or '未知'}。")
+    last = prev[0]
+    last_name = last.get("display_name") or last.get("symbol") or "上一个对象"
+    if symbol and last.get("symbol") and last["symbol"] != symbol:
+        return (
+            f"刚才聊的是 {last_name}（资料截至 {last.get('as_of') or '未知'}），"
+            f"现在这份是 {cur_name}（资料截至 {cur_as_of or '未知'}）——两个对象的"
+            "资料不是同一份，不能互相比新旧。"
+            + (f"{cur_name} 当前的系统结论：{cur_verdict}。" if cur_verdict else ""))
+    # 只与同对象的已冻结事实比（C1）：全局轮/其他对象轮不冒充同一份资料。
+    same_object = [p for p in prev if p.get("symbol") and p["symbol"] == symbol] \
+        if symbol else [p for p in prev if not p.get("symbol")]
+    if not same_object:
+        return (
+            f"刚才聊的不是 {cur_name}，这个对象在本会话里还没有可比较的之前"
+            f"资料。当前 {cur_name} 的资料截至 {cur_as_of or '未知'}。"
+            + (f"系统结论：{cur_verdict}。" if cur_verdict else ""))
+    last_same = same_object[0]
+    prev_as_of = last_same.get("as_of")
+    prev_verdict = last_same.get("verdict_cn")
+    prev_n = last_same.get("candidate_n")
+
+    # 日期倒退：退回较旧资料，绝不能写成「更新」（C1 反例）。
+    if prev_as_of and cur_as_of and cur_as_of < prev_as_of:
+        return (
+            f"注意：现在这份资料的日期（{cur_as_of}）比刚才那份（{prev_as_of}）"
+            "更旧——你看到的是退回较旧的资料，不是新数据；要谈变化请以较新"
+            "日期的资料为准。")
+
+    # 逐字段比较（双方都有值才可比；缺失的字段诚实列入不可比）。
+    field_rows = [
+        ("系统结论", prev_verdict, cur_verdict),
+        ("买点候选数", prev_n, cur_n),
+    ]
+    changed: list[str] = []
+    unverifiable: list[str] = []
+    for label, old, new in field_rows:
+        if old is None or new is None:
+            unverifiable.append(label)
+        elif old != new:
+            changed.append(f"{label}从「{old}」变成「{new}」")
+    dates_known = bool(prev_as_of and cur_as_of)
+    if changed:
+        date_bit = (
+            f"资料日期都是 {cur_as_of}（同一数据日内的资料内容变化）"
+            if dates_known and prev_as_of == cur_as_of else
+            f"资料日期从 {prev_as_of} 到 {cur_as_of}"
+            if dates_known else "资料日期无法完整核实")
+        tail = (f"；另：{'、'.join(unverifiable)}无法核实对比" if unverifiable else "")
+        return f"有变化：{date_bit}。" + "；".join(changed) + f"。{tail}"
+    if unverifiable and len(unverifiable) == len(field_rows):
+        # 一个可比字段都没有：如实说无法对比，不列空清单（C1）。
+        return (
+            f"刚才的旧记录里缺少可对比的字段（{'、'.join(unverifiable)}都没有"
+            "留档），无法核实对比——不能断言有没有变化。"
+            + (f"当前系统结论：{cur_verdict}。" if cur_verdict else ""))
+    if unverifiable:
+        same_bit = "已比较的字段（" + "、".join(
+            label for label, old, new in field_rows
+            if old is not None and new is not None) + "）相同"
+        date_bit = (f"，资料日期同为 {cur_as_of}" if dates_known and prev_as_of == cur_as_of
+                    else f"，资料日期从 {prev_as_of} 到 {cur_as_of}" if dates_known else "")
+        return (
+            f"{same_bit}{date_bit}；但{'、'.join(unverifiable)}在旧记录里缺字段，"
+            "无法核实对比——只能保证已比较字段相同，不能断言有没有变化。")
+    # 已比较字段全部相同：只说已比较字段相同，不断言系统没变化（C1）。
+    date_bit = (f"，资料日期同为 {cur_as_of}" if dates_known and prev_as_of == cur_as_of
+                else f"，资料日期从 {prev_as_of} 到 {cur_as_of}" if dates_known
+                else "，资料日期无法完整核实")
+    return (
+        f"和刚才相比，已比较的字段（系统结论、买点候选数）相同{date_bit}。"
+        "系统没有保存每份资料的完整版本快照，只能保证这些已比较字段相同，"
+        "不能断言所有细节都没更新。"
+        + (f"当前系统结论：{cur_verdict}。" if cur_verdict else ""))
+
+
+def _deterministic_reply(history_rows: list, symbol: str | None,
+                         ctx_payload: dict, message: str) -> str | None:
+    """答案完全由确定性事实决定的问题类型，直接系统作答（不走模型）。
+
+    连续讨论一轮（2026-09-16）：板块→产品关系追问（案例2）、与刚才比较的
+    变化追问（案例8）。这些回答的「诚实版本」不依赖表达发挥，交给模型反而
+    有编造风险；产出按普通回答落库（grounded=True，依据系统数据）。
+    """
+    if ctx_payload.get("context_kind") == "factor_readonly":
+        return ctx_payload["factor_readonly"]["reply"]
+    if not message:
+        return None
+    rel = _sector_product_relation_reply(ctx_payload, message)
+    if rel is not None:
+        return rel
+    return _comparison_reply(history_rows, symbol, ctx_payload, message)
+
+
 def _degraded_reply(symbol: str, ctx_payload: dict) -> str:
     """AI 讲解不可用/校验失败时的系统直出（可靠性一期 2026-09-14 改写）。
 
@@ -1063,9 +1398,83 @@ def _degraded_reply(symbol: str, ctx_payload: dict) -> str:
     blocked = bool(trad) and not trad.get("tradable") and bool(
         trad.get("blocking_reasons"))
 
+    # 连续讨论一轮（2026-09-16）：用户声明的立场与问题主题决定第一句的
+    # 讲法——已持有按持仓管理讲（案例6），资金问题先正面回答再给纪律与
+    # 最关键缺失信息（案例7）；都不改变判定层结论，只换解释口径。
+    stance = (ctx_payload.get("discussion_stance") or {}).get("kind")
+    q_topic = ctx_payload.get("question_topic")
+    # 本条明确是资金问题时资金分支优先（C3：持仓者问钱，答钱不按持仓模板）；
+    # 否则持仓语境优先于通用首买模板。
+    if stance == "holding" and q_topic != "money":
+        lines = [
+            f"{display}（{symbol}）：你说已经持有了——这次就从持仓管理角度讲，"
+            "不按首次买入说。",
+        ]
+        if blocked:
+            lines.append(
+                f"系统当前状态：{'、'.join(trad['blocking_reasons'])}——"
+                "这是环境层面的提醒，不是让你立刻动作。")
+        elif candidates:
+            c0 = candidates[0]
+            lines.append(
+                f"系统当前有 {len(candidates)} 个买点候选在观察中，最近的"
+                f"「{c0.get('scenario_cn', '')}」（{c0.get('state_cn', '')}）"
+                "——持仓语境下它们只是参照，不是新的入场引导。")
+        else:
+            lines.append("系统当前没有新的买点候选；持仓期间重点看失效位与观察条件。")
+        known_budget = ctx_payload.get("user_budget") or {}
+        known_amt = known_budget.get("amount")
+        if isinstance(known_amt, (int, float)):
+            lines.append(
+                f"你之前说过可投入的资金是 {known_amt:g} 元（这是讨论背景，"
+                "不是成交记录）；成本信息这段系统直出未核实（系统目前没有"
+                "成本提取能力），不编造。具体的退出位以你自己确认过的计划为准。"
+                "这里没有记录任何成交。")
+        else:
+            lines.append(
+                "成本与资金信息这段系统直出未核实（系统目前没有成本提取能力），"
+                "不编造；这段讨论里也没有你的成交信息。具体的退出位以你自己"
+                "确认过的计划为准。这里没有记录任何成交。")
+    elif q_topic == "money":
+        budget = ctx_payload.get("user_budget") or {}
+        amt = budget.get("amount")
+        amt_txt = f"{amt:g} 元" if isinstance(amt, (int, float)) else "这笔钱"
+        if blocked:
+            verdict_line = (
+                f"先回答能不能买：按系统数据，{display}（{symbol}）现在按规则"
+                f"不适合开新仓——{'、'.join(trad['blocking_reasons'])}。")
+        elif candidates:
+            c0 = candidates[0]
+            verdict_line = (
+                f"先回答能不能买：{display}（{symbol}）现在有 {len(candidates)} 个"
+                f"系统定义的买点候选，最近的「{c0.get('scenario_cn', '')}」状态"
+                f"「{c0.get('state_cn', '')}」——还不等于可以直接行动。")
+        else:
+            verdict_line = (
+                f"先回答能不能买：按系统数据，{display}（{symbol}）现在没有"
+                "系统定义的买点候选。")
+        # C3：用途已知（本条或同会话同对象背景）就不再重复追问，
+        # 直接按已知用途给纪律边界；未知才问这最关键的一项。
+        known_purpose = ctx_payload.get("user_purpose")
+        if known_purpose == "spare_cash":
+            purpose_line = ("你说过这是一笔已有的闲钱：按闲钱的用法，分几批、"
+                            "每批多少由你决定——不再追问用途。")
+        elif known_purpose == "income_dca":
+            purpose_line = ("你说过这是持续投入的新收入：按定投式的用法，"
+                            "节奏和金额由你决定——不再追问用途。")
+        else:
+            purpose_line = ("还差一项关键信息：这笔钱是持续投入的新收入，"
+                            "还是已有的闲钱？这影响怎么分批，先确认这一项再细聊。")
+        lines = [
+            verdict_line,
+            f"{amt_txt}怎么安排由你决定；系统纪律是盈亏比不足 3 的机会放弃"
+            "（研究代理口径），仓位档位只是参考。",
+            purpose_line,
+            "现在只是讨论——没有确认任何计划，也不会替你下单。",
+        ]
     # ① 先回答这次问题：第一句就是大白话结论（只重组既有判定字段，
     # 不做新判定；候选状态/价位照抄，不加解释性定语）。
-    if candidates:
+    elif candidates:
         c0 = candidates[0]
         lines = [
             f"{display}（{symbol}）：按系统数据，目前有 {len(candidates)} 个"
@@ -1094,8 +1503,11 @@ def _degraded_reply(symbol: str, ctx_payload: dict) -> str:
             "先用最新数据核实再谈下一步。"
         )
     else:
+        # 连续讨论一轮（日期口径，主控复验 §3）：当天数据不说「今日收盘」——
+        # 没有完成交易时段的来源证明，只说截至该日的最新记录，不凭更新时间猜。
         lines.append(
-            f"数据日 {as_of}。AI 讲解暂时不可用，以下是系统直接给出的数据事实。"
+            f"截至 {as_of} 的最新记录（系统没有该日是否已收盘的来源证明，"
+            "不凭更新时间猜）。AI 讲解暂时不可用，以下是系统直接给出的数据事实。"
         )
 
     # 系统标签（颜色/阶段/风险）是细节，不再当第一句。
@@ -1105,7 +1517,8 @@ def _degraded_reply(symbol: str, ctx_payload: dict) -> str:
     )
 
     # ③ 机会与风险：有候选列候选（阻断原因已进第一句，不重复）。
-    if candidates:
+    # 持仓语境不列入场向的「机会」行，避免把持仓管理答成首次买入。
+    if candidates and stance != "holding":
         for c in candidates[:2]:
             lines.append(
                 f"机会：{c.get('scenario_cn', '')}目前[{c.get('state_cn', '')}]，"
@@ -1171,6 +1584,8 @@ def _build_next_steps(ctx_payload: dict, symbol: str | None) -> list[dict]:
     完整中文问题，**带标的代码**——用户切到别的标的后点旧按钮也不会串对象。
     历史恢复与即时回答共用同一份（存 meta.next_steps）。
     """
+    if ctx_payload.get("context_kind") == "factor_readonly":
+        return []  # No plan/backtest actions for a research lookup or proposal.
     if not symbol:
         return []
     if ctx_payload.get("context_kind") == "sector":
@@ -1667,9 +2082,14 @@ def _topic_blocks(topic: str | None, symbol: str | None) -> dict:
         except Exception as exc:  # noqa: BLE001
             blocks["evidence"] = {"available": False, "error": str(exc)}
     elif topic == "mindset":
+        from lei_signal.copilot import mindset as mindset_mod
+
+        pack = mindset_mod.load_mindset_seeds()
         blocks["mindset"] = {
-            "available": False,
-            "note_cn": "心态内容只在用户求助时按其认可且兼容的一条引用，不当规则",
+            "available": bool(pack.get("available")),
+            "count": pack.get("count"),
+            "note_cn": "心态内容只在用户求助时按其认可且兼容的一条引用，不当规则"
+                       "；只叙事，不参与判定",
         }
     elif topic == "money":
         blocks["money"] = {
@@ -1680,10 +2100,42 @@ def _topic_blocks(topic: str | None, symbol: str | None) -> dict:
     return blocks
 
 
+def _factor_request_message(message: str, history_rows: list) -> str | None:
+    """Carry an explicit factor discussion through short follow-ups only.
+
+    Never treat a past factor answer as permission to run an experiment. An
+    explicit new technical question leaves this scope normally.
+    """
+    from lei_signal.copilot.factor_readonly import is_factor_question
+
+    if is_factor_question(message):
+        return message
+    if not re.match(r"^(那|它|这个|刚才|继续|开始|执行|跑|补测|回测|帮我|请|试试|验证|好|可以|"
+                    r"现在|当前|为什么|有没有|有用|有效)",
+                    (message or "").strip()):
+        return None
+    if re.search(r"买点|卖点|止损|筹码|MACD|macd|均线|技术分析|报单|成交", message):
+        return None
+    for row in reversed(history_rows):
+        if row.role != "assistant":
+            continue
+        try:
+            meta = json.loads(row.meta_json or "{}")
+            pack = (meta.get("evidence_card") or {}).get("factor_readonly")
+        except (ValueError, TypeError, AttributeError):
+            return None
+        if not isinstance(pack, dict):
+            return None
+        refs = pack.get("definition_refs") or []
+        return message + "；沿用刚才的因子问题" + ("：" + "、".join(refs) if refs else "")
+    return None
+
+
 def _prepare_discussion(
     request: Request, body: AgentChatRequest, on_stage=None,
     session_id: str | None = None,
     resume_question_id: int | None = None,
+    timing=None,
 ) -> tuple[str, list, dict, list, str | None]:
     """agent_chat 与流式版共用的准备段（一个连接内完成）。
 
@@ -1692,12 +2144,65 @@ def _prepare_discussion(
 
     返回 (session_id, history_rows, ctx_payload, alerts, symbol)。
     阶段回调 ``on_stage``（可选）用于流式路径向 UI 报告调用链进度。
+    ``timing``（可选，AskTiming）：分段计时——行情准备、材料组装、叙事块
+    各自耗时进 spans（2026-09-15 agent-ask-stability，回答「准备慢在哪」）。
     """
+    from lei_signal.api.ask_timing import NULL_TIMING  # noqa: PLC0415
+
+    tm = timing if timing is not None else NULL_TIMING
     with closing(connect(_db_path(request))) as conn:
         session = get_session(conn, session_id)
         if session is None:
             raise HTTPException(status_code=404, detail=f"会话不存在: {session_id}")
         history_rows = list_messages(conn, session.session_id, limit=20)
+
+        if resume_question_id is not None:
+            frozen_row = conn.execute(
+                "SELECT meta_json FROM agent_messages "
+                "WHERE message_id=? AND session_id=? AND role='user'",
+                (resume_question_id, session.session_id),
+            ).fetchone()
+            try:
+                frozen_meta = json.loads(frozen_row[0] or "{}") if frozen_row else {}
+                frozen = frozen_meta.get("discussion_v1", {})
+            except (ValueError, TypeError):
+                frozen = {}
+            if frozen.get("context_kind") == "factor_readonly":
+                pack = frozen["factor_readonly"]
+                if on_stage:
+                    on_stage("context", "恢复本问题已保存的因子材料")
+                ctx = {"context_kind": "factor_readonly", "factor_readonly": pack,
+                       "evidence_card": {"factor_readonly": pack}}
+                return (session.session_id, history_rows, ctx, [], pack.get("symbol"),
+                        {"factor_readonly": pack})
+
+        factor_message = _factor_request_message(body.message, history_rows)
+        if factor_message is not None:
+            from lei_signal.api.routes.copilot import ResolveRequest, _resolve_symbol_with_ambiguity
+            from lei_signal.copilot.factor_readonly import build_factor_reply
+
+            factor_symbol, source, ambiguities = _resolve_symbol_with_ambiguity(
+                request, ResolveRequest(message=body.message, session_id=session_id,
+                                        selected_symbol=body.symbol), read_only=True)
+            if on_stage:
+                on_stage("context", "读取因子定义与已有材料（不计算、不回测）")
+            svc = getattr(request.app.state, "factor_service", None)
+            # The loader is only invoked by an observation query. No refresh,
+            # auto-precompute, quote provider, or generic analysis fallback.
+            pack = build_factor_reply(
+                factor_message, factor_symbol,
+                panel_loader=svc.panel if svc is not None else lambda: None)
+            if ambiguities:
+                pack.update(symbol=None, status="needs_clarification",
+                            reply="标的还不能唯一确定：" + "、".join(ambiguities)
+                                  + "。请明确产品代码；未运行计算。")
+            pack.setdefault("metadata", {})["subject_source"] = source
+            factor_symbol = pack.get("symbol")
+            ctx = {"context_kind": "factor_readonly", "factor_readonly": pack,
+                   "evidence_card": {"factor_readonly": pack}}
+            tm.mark("prep_factor_readonly")
+            return (session.session_id, history_rows, ctx, [], factor_symbol,
+                    {"factor_readonly": pack})
 
         ctx_payload: dict = {}
         alerts: list = []
@@ -1741,6 +2246,7 @@ def _prepare_discussion(
                 subject_source = "session"
         from lei_signal.copilot.subjects import sector_context, asks_for_sector
 
+        tm.mark("prep_resolve")
         sector_payload = sector_context(symbol) if symbol else None
         if sector_payload is not None:
             window_sel = (_read_frozen_window_for_question(conn, resume_question_id)
@@ -1748,11 +2254,13 @@ def _prepare_discussion(
                           _resolve_window_for_question(conn, body, symbol, session_id, body.message))
             if on_stage:
                 on_stage("context", f"读取{sector_payload['display_name']}板块资料")
+            tm.mark("prep_sector")
             return session.session_id, history_rows, sector_payload, [], symbol, window_sel
         if symbol is not None and service is not None and on_stage:
             on_stage("fetch", f"拉取 {symbol} 行情（首次约 1 分钟）")
         if symbol is not None and service is not None:
             entry = service.get(symbol)
+            tm.mark("prep_analysis")
             if entry.result is None:
                 if explicit and subject_source == "selected":
                     raise HTTPException(
@@ -1764,6 +2272,7 @@ def _prepare_discussion(
                     buy_point_review,
                 )
                 review = buy_point_review(request, symbol)
+                tm.mark("prep_review")
                 plans = [
                     p for p in list_plans(conn, symbol=symbol)
                     if p.state in ("armed", "entered")
@@ -1775,6 +2284,7 @@ def _prepare_discussion(
                 ]
                 if on_stage:
                     on_stage("context", "组装技术材料与监督状态")
+                tm.mark("prep_plans")
                 news_brief = None
                 major_events = None
                 try:
@@ -1795,6 +2305,7 @@ def _prepare_discussion(
                 except Exception:  # noqa: BLE001  消息面缺席不阻断技术材料
                     news_brief = None
                     major_events = None
+                tm.mark("prep_news")
                 # 回测经验（叙事层，不参与判定）：该标的池类型的历史结论，
                 # 供 AI 引用「同类信号在这个池上历史成绩如何」。
                 experience_items: list = []
@@ -1814,6 +2325,7 @@ def _prepare_discussion(
                     fit_block = fit_mod.fit_advice(entry.result.frame)
                 except Exception:  # noqa: BLE001
                     fit_block = None
+                tm.mark("prep_extras")  # 经验叙事 + 形态适配
                 # 横向机会：当前标的无系统买点候选时，带出当日扫描表里
                 # 其他 actionable/waiting 标的（用户口径 2026-09-05：聊 A
                 # 没买点时应主动提示 B/C 有观察价值，引导开下一个讨论）。
@@ -1849,6 +2361,7 @@ def _prepare_discussion(
                 )
                 ctx_payload["display_name"] = _static_symbol_name(
                     symbol, ctx_payload.get("display_name")) or "名称待核实"
+                tm.mark("prep_context")
                 if experience_items:
                     ctx_payload["experience"] = {
                         "note_cn": "历史经验叙事层（回测定案报告），不参与技术判定",
@@ -1891,6 +2404,7 @@ def _prepare_discussion(
                         ctx_payload["winrate"] = _w
                 except Exception:  # noqa: BLE001
                     pass
+                tm.mark("prep_sentiment_winrate")  # 情绪信号 + 胜率材料
                 # 03B-R3 T1：本问题窗口选择一次生成（冻结与比较共用同一份）。
                 # 恢复已有问题：用原问题快照冻结的选择，不按当前会话最新历史
                 # 重选（z4）；新问题：对象确定后统一解析一次（u2 显示/冻结一致）。
@@ -1938,6 +2452,7 @@ def _prepare_discussion(
                     ctx_payload["evidence_card"] = card
                 except Exception:  # noqa: BLE001 证据卡缺席不阻断讨论
                     pass
+                tm.mark("prep_evidence")
                 if alternatives:
                     ctx_payload["alternatives"] = alternatives
                 ctx = context_from_result(entry.result)
@@ -1989,12 +2504,45 @@ def _prepare_discussion(
                 ctx_payload["major_events"] = NewsfeedService().major_events_brief()
             except Exception:  # noqa: BLE001
                 ctx_payload["major_events"] = None
+            tm.mark("prep_global_material")  # 全局兜底材料（宽度/两融/情绪/大事）
         # R3（03B-R1）：按主题装载既有适配器数据（DCA/情绪/证据/心态/资金），
         # 两个路径（有标的/全局）都消费；目录说明不代替实际数据。
         from lei_signal.copilot import resolve as resolve_mod
 
-        parsed_topic = resolve_mod.parse_request(body.message)["topic"]
+        parsed = resolve_mod.parse_request(body.message)
+        parsed_topic = parsed["topic"]
         ctx_payload.update(_topic_blocks(parsed_topic, symbol))
+        # 连续讨论一轮（2026-09-16）+ C3 补修：主题、用户声明立场与
+        # 会话背景进材料。本条消息明确说的优先；同会话同对象此前声明过
+        # 且未撤销的作为背景补齐（不重复追问、不再声称用户没提供）；
+        # 本条明确撤销的立即失效。背景=讨论语境，不是成交记录或新授权；
+        # 判定层规则不因立场改变。
+        ctx_payload["question_topic"] = parsed_topic
+        bg = resolve_mod.apply_user_facts(_user_background(history_rows, symbol), body.message)
+        # Current input and historical replay use exactly the same field updates.
+        # Uncertain/foreign/hypothetical text remains available for discussion only.
+        ctx_payload["user_fact_updates"] = resolve_mod.user_fact_events(body.message)
+        stance = "holding" if bg.get("holding") else None
+        if bg.get("budget"):
+            ctx_payload["user_budget"] = bg["budget"]
+        if bg.get("purpose"):
+            ctx_payload["user_purpose"] = bg["purpose"]
+        if bg and ctx_payload.get("context_kind") != "sector":
+            ctx_payload["user_background"] = {
+                "holding": bool(bg.get("holding")), "budget": bg.get("budget"),
+                "purpose": bg.get("purpose"),
+                "note_cn": ("用户在本会话、该对象上明确声明的背景。只作讨论参考，"
+                            "不是成交记录、不是写库授权；假设或别人情况不能覆盖这些事实。"),
+            }
+        if stance == "holding" and ctx_payload.get("context_kind") != "sector":
+            ctx_payload["discussion_stance"] = {
+                "kind": "holding",
+                "note_cn": ("用户声明已持有该标的：从持仓管理角度解释（当前系统"
+                            "状态、失效位与观察条件），不按首次买入引导；用户未"
+                            "提供的成本与资金信息不得编造；不记录成交；有既有"
+                            "计划时结合计划状态讲。"),
+            }
+        tm.mark("prep_done")  # 主题块（DCA/情绪/证据/心态/资金）之后准备完成
         # window_sel 已在构建证据卡前统一算好（冻结与比较共用同一份依据）
         return session.session_id, history_rows, ctx_payload, alerts, symbol, window_sel
 
@@ -2036,6 +2584,8 @@ def _maybe_plan_artifact(request: Request, session_id: str, question_id: int | N
                          ctx_payload: dict) -> None:
     """整理计划类问题 → 生成服务端计划产物并挂到 ctx（即时/流式/历史同一产物）。"""
     if question_id is None:
+        return
+    if ctx_payload.get("context_kind") == "factor_readonly":
         return
     try:
         from lei_signal.copilot import resolve as resolve_mod
@@ -2089,7 +2639,12 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
             next_steps=p.get("next_steps") or [],
         )
 
+    from lei_signal.api.ask_timing import AskTiming  # noqa: PLC0415
+
+    timing = AskTiming()
+    timing.mark("received")
     outcome = _enter_chat(request, body)
+    timing.mark("identity")
     if outcome.kind == "replay":
         return _reply_from_payload(outcome.replay_reply or {})
     if outcome.kind == "incomplete":
@@ -2098,21 +2653,48 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
         return _reply_from_payload(outcome.incomplete_reply or {})
 
     resume = outcome.kind == "resume"
-    (session_id, history_rows, ctx_payload, alerts, symbol,
-     window_sel) = _prepare_discussion(
-        request, body, session_id=outcome.session_id,
-        resume_question_id=outcome.question_id if resume else None,
-    )
+
+    def _release_claim() -> None:
+        """失败收场时把生成权放回 pending：同身份重试立即恢复（与流式同源）。
+        无 claim_state_at（非本次领取）不动，防误伤重试者的新领取。"""
+        if not outcome.claim_cid or not outcome.claim_state_at:
+            return
+        try:
+            from lei_signal.copilot.chat_identity import (  # noqa: PLC0415
+                release_generation,
+            )
+
+            with closing(connect(_db_path(request))) as conn:
+                release_generation(conn, outcome.claim_cid,
+                                   expected_state_at=outcome.claim_state_at)
+        except Exception:  # noqa: BLE001
+            logger.exception("agent_chat 释放生成权失败")
+
+    try:
+        (session_id, history_rows, ctx_payload, alerts, symbol,
+         window_sel) = _prepare_discussion(
+            request, body, session_id=outcome.session_id,
+            resume_question_id=outcome.question_id if resume else None,
+            timing=timing,
+        )
+    except Exception:
+        _release_claim()  # 准备失败不把 claim 卡在 generating 600 秒
+        raise
+    timing.mark("prepared")
     question_id: int | None = outcome.question_id if resume else None
     if not resume:
         # 03B：先落 user 消息 + discussion_v1 快照（回测绑定需要 question_id）；
         # 并发双发在写事务内收口：输家直接复用赢家的原问题，不产生第二个问题
-        with closing(connect(_db_path(request))) as conn:
-            appended, user_msg, dup = _append_user_for_claim(
-                conn, outcome, body, symbol,
-                review_dump=ctx_payload.get("buy_point_review"),
-                as_of=ctx_payload.get("as_of"), window_sel=window_sel)
-            question_id = user_msg.message_id if user_msg is not None else None
+        try:
+            with closing(connect(_db_path(request))) as conn:
+                appended, user_msg, dup = _append_user_for_claim(
+                    conn, outcome, body, symbol,
+                    review_dump=ctx_payload.get("buy_point_review"),
+                    as_of=ctx_payload.get("as_of"), window_sel=window_sel)
+                question_id = user_msg.message_id if user_msg is not None else None
+        except Exception:
+            _release_claim()
+            raise
         if appended == "duplicate":
             dup = dup or {}
             return AgentChatReply(
@@ -2129,18 +2711,23 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
     # 03B-R3 S5：整理计划类问题生成服务端产物（原问题绑定，模型不参与构造）
     _maybe_plan_artifact(request, session_id, question_id, body, symbol, ctx_payload)
 
-    config = plans_llm.load_ark_config()
-    reply: str | None = None
-    grounded = False
+    # 连续讨论一轮（2026-09-16）：答案完全由确定性事实决定的问题（板块→产品
+    # 关系、与刚才比较）直接系统作答，不走模型也不走降级模板。
+    det_reply = _deterministic_reply(history_rows, symbol, ctx_payload, body.message)
+    config = plans_llm.load_ark_config() if det_reply is None else None
+    reply: str | None = det_reply
+    grounded = det_reply is not None
     # 数值白名单 = 技术材料数值 ∪ 本轮 user message 中出现的数字
     # （用户问「8700 是不是更好」、LLM 回显「你说的 8700」时不误降级）
     # ∪ 上下文字符串里的代码数字段（TH881129/515880 这类标的代码会被校验器
     #   当数字抽取，它们本就来自系统材料，不进白名单就是误伤——glm-5.3 讲
     #   板块时必带代码，曾因此整链降级）
+    # ∪ 会话历史里的代码数字段（S4-2 误拦修复：全局追问回显上一轮标的代码）
     allowed_nums = (
         collect_payload_numbers(ctx_payload)
         | frozenset(extract_market_numbers(body.message))
         | frozenset(_payload_symbol_numbers(ctx_payload))
+        | frozenset(_history_symbol_numbers(history_rows))
     )
     history = [{"role": m.role, "content": m.content} for m in history_rows]
     if config is not None:
@@ -2186,11 +2773,20 @@ def agent_chat(request: Request, body: AgentChatRequest) -> AgentChatReply:
     next_steps = _build_next_steps(ctx_payload, symbol)
     if next_steps:
         meta["next_steps"] = next_steps
-    with closing(connect(_db_path(request))) as conn:
-        _append_answer(conn, session_id=session_id, question_id=question_id,
-                       content=reply, grounded=grounded, meta=meta,
-                       claim_cid=outcome.claim_cid,
-                       source_request_id=outcome.claim_cid or "")
+    try:
+        with closing(connect(_db_path(request))) as conn:
+            _append_answer(conn, session_id=session_id, question_id=question_id,
+                           content=reply, grounded=grounded, meta=meta,
+                           claim_cid=outcome.claim_cid,
+                           source_request_id=outcome.claim_cid or "")
+    except Exception:
+        _release_claim()  # 保存失败不把 claim 卡在 generating（重试可立即恢复）
+        raise
+    timing.mark("answer_saved")
+    logger.info(
+        "agent_ask_timing mode=plain session=%s symbol=%s %s",
+        session_id, symbol or "-",
+        json.dumps(timing.summary(), ensure_ascii=False, sort_keys=True))
     return AgentChatReply(
         session_id=session_id, reply=reply, grounded=grounded,
         trace=trace, resolved_symbol=symbol,
@@ -2368,6 +2964,53 @@ def _quick_card(ctx_payload: dict, symbol: str | None) -> dict | None:
     return card
 
 
+class _StreamState:
+    """流式请求中后台工作者与消费者共用的结束/归属状态（S1，2026-09-15）。
+
+    cancelled：消费者已断开/退出（finally 里无条件置位）——工作者晚取得
+    生成权时据此立即收尾，不开始准备/生成；
+    outcome：工作者的领号结果（生成权归属的唯一载体，claim_state_at CAS）；
+    terminal：消费者已到终态（含失败 done）——finally 不再重复释放。"""
+
+    __slots__ = ("lock", "cancelled", "outcome", "terminal")
+
+    def __init__(self) -> None:
+        import threading
+
+        self.lock = threading.Lock()
+        self.cancelled = False
+        self.outcome = None
+        self.terminal = False
+
+
+def _http_disconnect_poll(request: Request) -> bool:
+    """同步轮询真实 HTTP 客户端是否已断开（S1 矩阵 5）。
+
+    真实断开时 uvicorn 不会及时把 GeneratorExit 送进响应生成器（实测：
+    客户端断开后同步生成器长期悬挂、claim 无人收尾）。ASGI 服务器会把
+    ``http.disconnect`` 放进 receive 通道——这里以近零超时取一条消息
+    （没有消息=仍连接），经 ``anyio.from_thread.run`` 回到事件循环执行。
+
+    只在 anyio 工作线程内有效（生产=StreamingResponse 的线程池迭代器）；
+    主线程手动驱动生成器的测试/探针环境没有 anyio token，异常一律按
+    「未断开」处理——那些环境由 close()/finally 路径负责收尾。"""
+    try:
+        import asyncio as _asyncio  # noqa: PLC0415
+
+        import anyio  # noqa: PLC0415
+
+        async def _poll() -> bool:
+            try:
+                message = await _asyncio.wait_for(request.receive(), 0.001)
+            except _asyncio.TimeoutError:
+                return False
+            return message.get("type") == "http.disconnect"
+
+        return bool(anyio.from_thread.run(_poll))
+    except Exception:  # noqa: BLE001  非 anyio 工作线程/通道不可用=按未断开
+        return False
+
+
 @router.post("/agent/chat/stream")
 def agent_chat_stream(request: Request, body: AgentChatRequest):
     """流式讨论入口：SSE 推送调用链阶段 + GLM 真·逐字正文 + 校验结果。
@@ -2385,12 +3028,19 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
 
     from fastapi.responses import StreamingResponse  # noqa: PLC0415
 
+    from lei_signal.api.ask_timing import AskTiming  # noqa: PLC0415
+
     def _sse(event: str, data: dict) -> str:
         return f"event: {event}\ndata: {_json.dumps(data, ensure_ascii=False)}\n\n"
 
     def _generate() -> Iterator[str]:
         import queue as _queue
         import threading as _threading
+
+        # 分段计时（任务书 §一）：收到→身份登记→资料准备→资料展示→
+        # 模型首字→回答保存；汇总进 done 与服务端日志，回答「慢在哪一段」。
+        timing = AskTiming()
+        timing.mark("received")
 
         # 准备段（解析/行情/材料）在后台线程跑，阶段事件经队列实时推给客户端：
         # 用户在等待的第一秒就能看到「识别标的→拉取行情」逐条点亮，而不是
@@ -2400,11 +3050,46 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
         def on_stage(key: str, text: str) -> None:
             q.put(("stage", (key, text)))
 
+        # S1（主控复验 2026-09-15）：后台工作者与流消费者**共用**结束/取消
+        # 状态与生成权归属。消费者提前退出（断连/停止）时，工作者之后晚取得
+        # 的生成权也必须收尾——否则 claim 卡在 generating，同身份重试被
+        # 「回答正在生成」错误地挡满租约。清理只放自己的领取（claim_state_at
+        # CAS），绝不触碰重试者的新领取；无消费者后不开始准备/生成。
+        shared = _StreamState()
+
+        def _release_claim(out) -> None:
+            """失败/断连收场：把生成权放回 pending，同身份重试可立即恢复
+            （不等 600 秒租约）。只放自己的领取——无 claim_state_at（非本次
+            领取/replay/incomplete 出口）一律不动，防误伤重试者的新领取。"""
+            if (out is None or not getattr(out, "claim_cid", None)
+                    or not getattr(out, "claim_state_at", None)):
+                return
+            try:
+                from lei_signal.copilot.chat_identity import (  # noqa: PLC0415
+                    release_generation,
+                )
+
+                with closing(connect(_db_path(request))) as conn:
+                    release_generation(
+                        conn, out.claim_cid,
+                        expected_state_at=out.claim_state_at)
+            except Exception:  # noqa: BLE001
+                logger.exception(
+                    "agent_chat_stream 释放生成权失败（cid=%s…）",
+                    str(getattr(out, "claim_cid", ""))[:8])
+
         def _work() -> None:
             try:
                 # 契约1：统一事务入口在准备/建模之前裁决（重试复用/409/
                 # 未完成/恢复）
                 outcome = _enter_chat(request, body)
+                with shared.lock:
+                    shared.outcome = outcome
+                    gone = shared.cancelled
+                if gone:
+                    # 消费者已断开：晚领号也收尾；不开始准备/生成（S1 矩阵1/2）
+                    _release_claim(outcome)
+                    return
                 q.put(("entered", outcome))
                 if outcome.kind in ("proceed", "resume"):
                     q.put((
@@ -2413,7 +3098,8 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
                             request, body, on_stage=on_stage,
                             session_id=outcome.session_id,
                             resume_question_id=outcome.question_id
-                            if outcome.kind == "resume" else None),
+                            if outcome.kind == "resume" else None,
+                            timing=timing),
                     ))
             except Exception as exc:  # noqa: BLE001
                 # 可靠性一期（2026-09-14）：准备段失败必须留服务端日志。
@@ -2427,241 +3113,381 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
 
         _threading.Thread(target=_work, daemon=True).start()
 
-        prepared = None
-        outcome = None
-        while True:
-            try:
-                kind, payload = q.get(timeout=180)
-            except _queue.Empty:
-                logger.warning(
-                    "agent_chat_stream 准备段超时180s（session=%s message=%r）",
-                    body.session_id, body.message[:50],
-                )
-                yield _sse("done", {
-                    "session_id": "", "resolved_symbol": None, "grounded": False,
-                    "verify_note": "准备阶段超时（180s），请稍后重试。",
-                })
-                return
-            if kind == "stage":
-                yield _sse("stage", {"key": payload[0], "text": payload[1]})
-            elif kind == "error":
-                yield _sse("done", {
-                    "session_id": "", "resolved_symbol": None, "grounded": False,
-                    "verify_note": f"准备阶段失败：{payload}",
-                })
-                return
-            elif kind == "entered":
-                outcome = payload
-                if outcome.kind == "replay":
-                    p = outcome.replay_reply or {}
-                    yield _sse("token", {"t": p.get("reply") or ""})
-                    yield _sse("done", {
-                        "session_id": p.get("session_id") or outcome.session_id or "",
-                        "resolved_symbol": p.get("resolved_symbol"),
-                        "grounded": bool(p.get("grounded")),
-                        "question_id": p.get("question_id"),
-                        "evidence_card": p.get("evidence_card"),
-                        "plan_artifact": p.get("plan_artifact"),
-                        "answer_state": p.get("answer_state") or "answered",
-                        "next_steps": p.get("next_steps") or [],
-                        "replayed": True,
-                    })
-                    return
-                if outcome.kind == "incomplete":
-                    # S4：未完成明确出口（不复用下一问题/补测卡）
-                    p = outcome.incomplete_reply or {}
-                    yield _sse("token", {"t": p.get("reply") or ""})
-                    yield _sse("done", {
-                        "session_id": p.get("session_id") or outcome.session_id or "",
-                        "resolved_symbol": None,
-                        "grounded": False,
-                        "question_id": p.get("question_id"),
-                        "answer_state": p.get("answer_state") or "pending",
-                        "incomplete": True,
-                    })
-                    return
-            else:
-                prepared = payload
-                break
-
-        (session_id, history_rows, ctx_payload, alerts, symbol,
-         window_sel) = prepared
-        resume = outcome.kind == "resume"
-        question_id: int | None = outcome.question_id if resume else None
-
-        # 可靠性一期（2026-09-14）：系统资料就绪即推送，不等模型。字段与
-        # done 同名同源（不是第二套证据），前端据此先渲染事实卡并提示
-        # 「资料已就绪，AI 解释仍在生成」；done 仍是唯一的最终完成信号。
-        yield _sse("prepared", {
-            "session_id": session_id,
-            "resolved_symbol": symbol,
-            "quick_card": _quick_card(ctx_payload, symbol),
-            "evidence_card": ctx_payload.get("evidence_card"),
-            "next_steps": _build_next_steps(ctx_payload, symbol),
-        })
-
-        if not resume:
-            # 03B：先落 user 消息 + discussion_v1 快照（回测绑定需要 question_id）；
-            # 编号已在进入时领取——并发双发在此收口，输家复用赢家原问题
-            try:
-                with closing(connect(_db_path(request))) as conn:
-                    appended, user_msg, dup = _append_user_for_claim(
-                        conn, outcome, body, symbol,
-                        review_dump=ctx_payload.get("buy_point_review"),
-                        as_of=ctx_payload.get("as_of"), window_sel=window_sel)
-                    question_id = (
-                        user_msg.message_id if user_msg is not None else None)
-            except Exception as exc:  # noqa: BLE001
-                # 落库失败不假装开始回答：资料已展示，如实说明历史没存上，
-                # 重试同一问题走既有 replay/resume 身份（不重复建问题）。
-                logger.exception(
-                    "agent_chat_stream 问题落库失败（session=%s）", session_id)
-                yield _sse("done", {
-                    "session_id": session_id,
-                    "resolved_symbol": symbol,
-                    "grounded": False,
-                    "verify_note": (
-                        "系统资料已在上方展示；但本次问题未能写入历史记录"
-                        f"（{type(exc).__name__}），AI 解释没有开始。"
-                        "请稍后重试同一问题。"
-                    ),
-                })
-                return
-            if appended == "duplicate":
-                dup = dup or {}
-                yield _sse("done", {
-                    "session_id": dup.get("session_id") or session_id,
-                    "resolved_symbol": dup.get("resolved_symbol"),
-                    "grounded": bool(dup.get("grounded")),
-                    "question_id": dup.get("question_id"),
-                    "evidence_card": dup.get("evidence_card"),
-                    "replayed": True,
-                })
-                return
-
-        # 03B-R3 S5：整理计划类问题生成服务端产物（原问题绑定）
-        _maybe_plan_artifact(request, session_id, question_id, body, symbol,
-                             ctx_payload)
-
-        config = plans_llm.load_ark_config()
-        pieces: list[str] = []
-        interrupt_reason = ""
-        if config is not None:
-            yield _sse("stage", {"key": "llm", "text": "AI 组织语言（逐字输出）"})
-            for piece in plans_llm.chat_discussion_stream(
-                ctx_payload,
-                [{"role": m.role, "content": m.content} for m in history_rows],
-                body.message,
-                config,
-            ):
-                # 完成契约（主控复核 2026-09-15 固定补修一）：流未正常收尾/
-                # 被截断都以 StreamInterrupt 收尾，原因入落库与提示
-                if isinstance(piece, plans_llm.StreamInterrupt):
-                    interrupt_reason = piece.reason
-                    break
-                pieces.append(piece)
-                yield _sse("token", {"t": piece})
-
-        _INCOMPLETE_CN = {
-            "connection_interrupted": "连接中断",
-            "no_completion_marker": "连接提前关闭（未收到正常结束标记）",
-            "server_error_event": "模型服务返回错误事件",
-            "max_tokens_truncated": "输出额度截断",
-        }
-        interrupted = bool(interrupt_reason)
-        full = "".join(pieces).strip()
-        grounded = False
-        verify_note = ""
-        fallback = ""
-        if interrupted:
-            reason_cn = _INCOMPLETE_CN.get(interrupt_reason, interrupt_reason)
-            if full:
-                # 有部分正文：保留已收到内容，如实标记解释未完成；不再叠加完整模板
-                grounded = False
-                verify_note = (
-                    f"AI 讲解未完成（{reason_cn}）；以上是已收到的部分，"
-                    "上方系统资料仍然可用。可重试同一问题重新生成"
-                    "（不会重复记录）。"
-                )
-            else:
-                verify_note = f"AI 讲解未完成（{reason_cn}），系统改用模板直出。"
-        if full and not interrupted:
-            from lei_signal.plans.grounding import (  # noqa: PLC0415
-                collect_payload_numbers,
-                verify_numeric_grounding,
+        def _log_timing(mode: str, session_id: str | None,
+                        symbol: str | None) -> None:
+            """单请求分段耗时汇总进服务端日志（不含问题原文/密钥/SQL 参数）。"""
+            summary = timing.summary()
+            logger.info(
+                "agent_ask_timing mode=%s session=%s symbol=%s %s",
+                mode, session_id or "-", symbol or "-",
+                _json.dumps(summary, ensure_ascii=False, sort_keys=True),
             )
 
-            allowed_nums = (
-                collect_payload_numbers(ctx_payload)
-                | frozenset(extract_market_numbers(body.message))
-                | frozenset(_payload_symbol_numbers(ctx_payload))
-            )
-            rule_ids = {a.rule_id for a in alerts if a.rule_id}
-            ok_num, num_reason = verify_numeric_grounding(full, allowed_nums)
-            ok_txt, txt_reason = _discussion_txt_ok(full, rule_ids)
-            if ok_num and ok_txt:
-                grounded = True
-            else:
-                verify_note = (
-                    f"以上 AI 流式原文未过溯源校验（{txt_reason or num_reason}），"
-                    "请以下方模板直出为准。"
-                )
-        if (not full or not grounded) and not (interrupted and full):
-            fallback = _degraded_reply(symbol or "", ctx_payload)
-
-        trace = _build_trace(alerts)
-        meta: dict = {"trace": [t.model_dump() for t in trace]}
-        if symbol is not None:
-            meta["resolved_symbol"] = symbol
-        # 契约3：同一证据产物进历史（r6：流式路径同样持久化，恢复不依赖模型复述）
-        if ctx_payload.get("evidence_card") is not None:
-            meta["evidence_card"] = ctx_payload["evidence_card"]
-        # 03B-R3 S5：服务端计划产物随流式回答持久化/下发
-        if ctx_payload.get("plan_artifact") is not None:
-            meta["plan_artifact"] = ctx_payload["plan_artifact"]
-        # UX 第一期：下一步动作随流式回答持久化/下发（与普通路径同一函数）
-        next_steps = _build_next_steps(ctx_payload, symbol)
-        if next_steps:
-            meta["next_steps"] = next_steps
-        if interrupted:
-            # 补修二：未完成原因进持久化 meta（历史/恢复可区分未完成与其他）
-            meta["answer_incomplete"] = {
-                "reason": interrupt_reason,
-                "reason_cn": _INCOMPLETE_CN.get(interrupt_reason, interrupt_reason),
-            }
-        try:
-            with closing(connect(_db_path(request))) as conn:
-                # S4：流式完成回答同样按 question_id 精确绑定（列+claim 状态）；
-                # interrupted 时 claim 记 incomplete（重试重新生成，不回放半截话）
-                _append_answer(
-                    conn, session_id=session_id, question_id=question_id,
-                    content=full or fallback, grounded=grounded, meta=meta,
-                    claim_cid=outcome.claim_cid, incomplete=interrupted,
-                    source_request_id=outcome.claim_cid or "")
-        except Exception:  # noqa: BLE001  落库失败不断流（锁窗口下次再试不可行，丢历史可接受）
-            yield _sse(
-                "done", {"session_id": session_id, "resolved_symbol": symbol,
-                         "grounded": grounded,
-                         "answer_state": "incomplete" if interrupted else "answered",
-                         "verify_note": "会话记录保存失败（不影响本次回复）",
-                         "fallback": fallback})
-            return
-        yield _sse(
-            "done",
-            {
+        def _fail_payload(note: str, *, out=None, session_id: str = "",
+                          symbol: str | None = None,
+                          retryable: bool = True) -> dict:
+            """可重试的失败出口（任务书 §三）：失败如实说明、保留问题、
+            给明确重试入口；不假装开始回答，也不把数据库等待说成 AI 思考。"""
+            _release_claim(out)
+            timing.mark("failed")
+            payload = {
                 "session_id": session_id,
                 "resolved_symbol": symbol,
-                "grounded": grounded,
-                "question_id": question_id,
+                "grounded": False,
+                "answer_state": "failed",
+                "retryable": retryable,
+                "verify_note": note,
+                "timing_ms": timing.summary(),
+            }
+            _log_timing("stream_failed", session_id or (out.session_id if out else ""),
+                        symbol)
+            return payload
+
+        import time as _time
+
+        def _mark_terminal() -> None:
+            with shared.lock:
+                shared.terminal = True
+
+        prepared = None
+        outcome = None
+        phase = "identity"  # identity=登记中；prepare=准备资料中（心跳文案据此区分）
+        wait_started = _time.monotonic()
+        try:
+            # 提交即回执（任务书 §三）：不等内容，先告诉用户「已收到问题」。
+            # 在 try 内：首条 yield 即断开时 finally 仍会标记取消并收尾（S1）。
+            yield _sse("stage", {"key": "received", "text": "已收到问题，正在登记请求"})
+            while True:
+                try:
+                    kind, payload = q.get(timeout=5)
+                except _queue.Empty:
+                    if _http_disconnect_poll(request):
+                        # 真实 HTTP 断开（S1 矩阵 5）：立刻退出，finally
+                        # 标记取消并收尾生成权；不等服务器写失败才发现。
+                        return
+                    waited = int(_time.monotonic() - wait_started)
+                    if waited > 180:
+                        logger.warning(
+                            "agent_chat_stream 准备段超时180s"
+                            "（session=%s message=%r）",
+                            body.session_id, body.message[:50],
+                        )
+                        yield _sse("done", _fail_payload(
+                            "准备阶段超时（等待 180 秒仍未就绪）。问题已保留，"
+                            "可点「重试」继续，不会重复记录。",
+                            out=outcome))
+                        _mark_terminal()
+                        return
+                    # 真实阶段心跳（不虚构进度/倒计时）：数据库等待如实说
+                    # 「等待系统处理」，绝不描述成「AI 正在思考」。
+                    if phase == "identity":
+                        text = ("等待系统处理：正在登记请求"
+                                f"（数据库繁忙时需排队，已等待 {waited} 秒）")
+                    else:
+                        text = f"仍在读取系统资料（已等待 {waited} 秒）"
+                    yield _sse("stage", {"key": "waiting", "text": text})
+                    continue
+                if kind == "stage":
+                    yield _sse("stage", {"key": payload[0], "text": payload[1]})
+                elif kind == "error":
+                    exc = payload
+                    import sqlite3 as _sqlite3  # noqa: PLC0415
+
+                    if isinstance(exc, _sqlite3.OperationalError) and \
+                            "locked" in str(exc).lower():
+                        note = (
+                            "准备阶段失败：系统数据库正被后台任务占用，"
+                            "等待后仍不可用（database is locked）。"
+                            "你的问题已保留——可点「重试」继续，不会重复记录。"
+                        )
+                    elif isinstance(exc, HTTPException):
+                        note = f"准备阶段失败：{exc.detail}"
+                    else:
+                        note = f"准备阶段失败：{exc}"
+                    retryable = not (
+                        isinstance(exc, HTTPException) and exc.status_code < 500)
+                    yield _sse("done", _fail_payload(
+                        note, out=outcome, retryable=retryable))
+                    _mark_terminal()
+                    return
+                elif kind == "entered":
+                    outcome = payload
+                    timing.mark("identity")
+                    phase = "prepare"
+                    if outcome.kind == "replay":
+                        p = outcome.replay_reply or {}
+                        yield _sse("token", {"t": p.get("reply") or ""})
+                        timing.mark("answer_saved")
+                        yield _sse("done", {
+                            "session_id": p.get("session_id") or outcome.session_id or "",
+                            "resolved_symbol": p.get("resolved_symbol"),
+                            "grounded": bool(p.get("grounded")),
+                            "question_id": p.get("question_id"),
+                            "evidence_card": p.get("evidence_card"),
+                            "plan_artifact": p.get("plan_artifact"),
+                            "answer_state": p.get("answer_state") or "answered",
+                            "next_steps": p.get("next_steps") or [],
+                            "replayed": True,
+                            "timing_ms": timing.summary(),
+                        })
+                        _log_timing("stream_replay",
+                                    p.get("session_id") or outcome.session_id,
+                                    p.get("resolved_symbol"))
+                        _mark_terminal()
+                        return
+                    if outcome.kind == "incomplete":
+                        # S4：未完成明确出口（不复用下一问题/补测卡）
+                        p = outcome.incomplete_reply or {}
+                        yield _sse("token", {"t": p.get("reply") or ""})
+                        yield _sse("done", {
+                            "session_id": p.get("session_id") or outcome.session_id or "",
+                            "resolved_symbol": None,
+                            "grounded": False,
+                            "question_id": p.get("question_id"),
+                            "answer_state": p.get("answer_state") or "pending",
+                            "incomplete": True,
+                            "timing_ms": timing.summary(),
+                        })
+                        _log_timing("stream_incomplete",
+                                    p.get("session_id") or outcome.session_id, None)
+                        _mark_terminal()
+                        return
+                else:
+                    prepared = payload
+                    timing.mark("prepared")
+                    break
+
+            (session_id, history_rows, ctx_payload, alerts, symbol,
+             window_sel) = prepared
+            resume = outcome.kind == "resume"
+            question_id: int | None = outcome.question_id if resume else None
+
+            # 可靠性一期（2026-09-14）：系统资料就绪即推送，不等模型。字段与
+            # done 同名同源（不是第二套证据），前端据此先渲染事实卡并提示
+            # 「资料已就绪，AI 解释仍在生成」；done 仍是唯一的最终完成信号。
+            # 下一步动作在此处算一次，done 复用同一份（不重复推导）。
+            next_steps = _build_next_steps(ctx_payload, symbol)
+            yield _sse("prepared", {
+                "session_id": session_id,
+                "resolved_symbol": symbol,
+                "quick_card": _quick_card(ctx_payload, symbol),
                 "evidence_card": ctx_payload.get("evidence_card"),
-                "plan_artifact": ctx_payload.get("plan_artifact"),
-                "answer_state": "incomplete" if interrupted else "answered",
                 "next_steps": next_steps,
-                **({"verify_note": verify_note} if verify_note else {}),
-                **({"fallback": fallback} if fallback else {}),
-                **({"quick_card": _quick_card(ctx_payload, symbol)} if symbol else {}),
-            },
-        )
+            })
+            timing.mark("material_sent")
+
+            if not resume:
+                # 03B：先落 user 消息 + discussion_v1 快照（回测绑定需要 question_id）；
+                # 编号已在进入时领取——并发双发在此收口，输家复用赢家原问题
+                try:
+                    with closing(connect(_db_path(request))) as conn:
+                        appended, user_msg, dup = _append_user_for_claim(
+                            conn, outcome, body, symbol,
+                            review_dump=ctx_payload.get("buy_point_review"),
+                            as_of=ctx_payload.get("as_of"), window_sel=window_sel)
+                        question_id = (
+                            user_msg.message_id if user_msg is not None else None)
+                except Exception as exc:  # noqa: BLE001
+                    # 落库失败不假装开始回答：资料已展示，如实说明历史没存上；
+                    # 释放生成权，重试同一问题立即恢复（不重复建问题）。
+                    logger.exception(
+                        "agent_chat_stream 问题落库失败（session=%s）", session_id)
+                    yield _sse("done", _fail_payload(
+                        "系统资料已在上方展示；但本次问题未能写入历史记录"
+                        f"（{type(exc).__name__}），AI 解释没有开始。"
+                        "问题已保留——可点「重试」继续，不会重复记录。",
+                        out=outcome, session_id=session_id, symbol=symbol))
+                    _mark_terminal()
+                    return
+                timing.mark("question_saved")
+                if appended == "duplicate":
+                    dup = dup or {}
+                    yield _sse("done", {
+                        "session_id": dup.get("session_id") or session_id,
+                        "resolved_symbol": dup.get("resolved_symbol"),
+                        "grounded": bool(dup.get("grounded")),
+                        "question_id": dup.get("question_id"),
+                        "evidence_card": dup.get("evidence_card"),
+                        "replayed": True,
+                        "timing_ms": timing.summary(),
+                    })
+                    _log_timing("stream_duplicate", session_id, symbol)
+                    _mark_terminal()
+                    return
+
+            # 03B-R3 S5：整理计划类问题生成服务端产物（原问题绑定）
+            _maybe_plan_artifact(request, session_id, question_id, body, symbol,
+                                 ctx_payload)
+
+            # 连续讨论一轮（2026-09-16）：确定性作答（板块→产品关系、与刚才
+            # 比较）不走模型——正文一条 token 下发，grounded=True（依据系统
+            # 数据），跳过后续模型校验（自己的系统文案不过模型接地校验器）。
+            det_reply = _deterministic_reply(history_rows, symbol, ctx_payload,
+                                             body.message)
+            config = plans_llm.load_ark_config() if det_reply is None else None
+            pieces: list[str] = []
+            interrupt_reason = ""
+            if det_reply is not None:
+                timing.mark("first_token")
+                pieces.append(det_reply)
+                yield _sse("token", {"t": det_reply})
+            if config is not None:
+                yield _sse("stage", {"key": "llm", "text": "生成解释（AI 逐字输出）"})
+                try:
+                    for piece in plans_llm.chat_discussion_stream(
+                        ctx_payload,
+                        [{"role": m.role, "content": m.content} for m in history_rows],
+                        body.message,
+                        config,
+                    ):
+                        # 完成契约（主控复核 2026-09-15 固定补修一）：流未正常收尾/
+                        # 被截断都以 StreamInterrupt 收尾，原因入落库与提示
+                        if isinstance(piece, plans_llm.StreamInterrupt):
+                            interrupt_reason = piece.reason
+                            break
+                        if not pieces:
+                            timing.mark("first_token")
+                        if _http_disconnect_poll(request):
+                            # 真实客户端断开（S1 矩阵 5）：停止继续生成，
+                            # finally 收尾（历史只留问题，不落假回答）
+                            return
+                        pieces.append(piece)
+                        yield _sse("token", {"t": piece})
+                except GeneratorExit:
+                    # 客户端断连/停止接收：不再产出事件；finally 释放生成权，
+                    # 历史只留问题不落假回答（既有「停止接收」语义）。
+                    raise
+                except Exception:  # noqa: BLE001
+                    # 模型迭代器意外抛错（网络层已在 llm.py 收敛，这里是真 bug
+                    # 兜底）：按未完成收场——部分正文保留、claim 记 incomplete，
+                    # 不让异常逃出流、把 claim 卡在 generating。
+                    logger.exception(
+                        "agent_chat_stream 模型流意外异常（session=%s）", session_id)
+                    interrupt_reason = interrupt_reason or "generation_error"
+            timing.mark("llm_end")
+
+            _INCOMPLETE_CN = {
+                "connection_interrupted": "连接中断",
+                "no_completion_marker": "连接提前关闭（未收到正常结束标记）",
+                "server_error_event": "模型服务返回错误事件",
+                "max_tokens_truncated": "输出额度截断",
+                "generation_error": "生成过程出现异常",
+            }
+            interrupted = bool(interrupt_reason)
+            full = "".join(pieces).strip()
+            # 确定性作答自带 grounded（系统数据直出）；模型路径仍须过校验。
+            grounded = det_reply is not None and bool(full) and not interrupted
+            verify_note = ""
+            fallback = ""
+            if interrupted:
+                reason_cn = _INCOMPLETE_CN.get(interrupt_reason, interrupt_reason)
+                if full:
+                    # 有部分正文：保留已收到内容，如实标记解释未完成；不再叠加完整模板
+                    grounded = False
+                    verify_note = (
+                        f"AI 讲解未完成（{reason_cn}）；以上是已收到的部分，"
+                        "上方系统资料仍然可用。可重试同一问题重新生成"
+                        "（不会重复记录）。"
+                    )
+                else:
+                    verify_note = f"AI 讲解未完成（{reason_cn}），系统改用模板直出。"
+            if full and not interrupted and det_reply is None:
+                from lei_signal.plans.grounding import (  # noqa: PLC0415
+                    collect_payload_numbers,
+                    verify_numeric_grounding,
+                )
+
+                allowed_nums = (
+                    collect_payload_numbers(ctx_payload)
+                    | frozenset(extract_market_numbers(body.message))
+                    | frozenset(_payload_symbol_numbers(ctx_payload))
+                    | frozenset(_history_symbol_numbers(history_rows))
+                )
+                rule_ids = {a.rule_id for a in alerts if a.rule_id}
+                ok_num, num_reason = verify_numeric_grounding(full, allowed_nums)
+                ok_txt, txt_reason = _discussion_txt_ok(full, rule_ids)
+                if ok_num and ok_txt:
+                    grounded = True
+                else:
+                    verify_note = (
+                        f"以上 AI 流式原文未过溯源校验（{txt_reason or num_reason}），"
+                        "请以下方模板直出为准。"
+                    )
+            if (not full or not grounded) and not (interrupted and full):
+                fallback = _degraded_reply(symbol or "", ctx_payload)
+
+            trace = _build_trace(alerts)
+            meta: dict = {"trace": [t.model_dump() for t in trace]}
+            if symbol is not None:
+                meta["resolved_symbol"] = symbol
+            # 契约3：同一证据产物进历史（r6：流式路径同样持久化，恢复不依赖模型复述）
+            if ctx_payload.get("evidence_card") is not None:
+                meta["evidence_card"] = ctx_payload["evidence_card"]
+            # 03B-R3 S5：服务端计划产物随流式回答持久化/下发
+            if ctx_payload.get("plan_artifact") is not None:
+                meta["plan_artifact"] = ctx_payload["plan_artifact"]
+            # UX 第一期：下一步动作随流式回答持久化/下发（与 prepared 同一份）
+            if next_steps:
+                meta["next_steps"] = next_steps
+            if interrupted:
+                # 补修二：未完成原因进持久化 meta（历史/恢复可区分未完成与其他）
+                meta["answer_incomplete"] = {
+                    "reason": interrupt_reason,
+                    "reason_cn": _INCOMPLETE_CN.get(interrupt_reason, interrupt_reason),
+                }
+            try:
+                with closing(connect(_db_path(request))) as conn:
+                    # S4：流式完成回答同样按 question_id 精确绑定（列+claim 状态）；
+                    # interrupted 时 claim 记 incomplete（重试重新生成，不回放半截话）
+                    _append_answer(
+                        conn, session_id=session_id, question_id=question_id,
+                        content=full or fallback, grounded=grounded, meta=meta,
+                        claim_cid=outcome.claim_cid, incomplete=interrupted,
+                        source_request_id=outcome.claim_cid or "")
+            except Exception:  # noqa: BLE001
+                # 保存失败不谎报已回答：如实说「回答已生成但未能写入历史」，
+                # 释放生成权——同身份重试立即对原问题重新生成（不重复记录）。
+                logger.exception(
+                    "agent_chat_stream 回答落库失败（session=%s）", session_id)
+                yield _sse("done", _fail_payload(
+                    "本次回答已生成但未能写入历史记录"
+                    "（系统数据库暂时不可用）。以上内容本次有效；"
+                    "需要留档可点「重试」对同一问题重新生成，不会重复记录。",
+                    out=outcome, session_id=session_id, symbol=symbol))
+                _mark_terminal()
+                return
+            timing.mark("answer_saved")
+            yield _sse(
+                "done",
+                {
+                    "session_id": session_id,
+                    "resolved_symbol": symbol,
+                    "grounded": grounded,
+                    "question_id": question_id,
+                    "evidence_card": ctx_payload.get("evidence_card"),
+                    "plan_artifact": ctx_payload.get("plan_artifact"),
+                    "answer_state": "incomplete" if interrupted else "answered",
+                    "next_steps": next_steps,
+                    "timing_ms": timing.summary(),
+                    **({"verify_note": verify_note} if verify_note else {}),
+                    **({"fallback": fallback} if fallback else {}),
+                    **({"quick_card": _quick_card(ctx_payload, symbol)} if symbol else {}),
+                },
+            )
+            _log_timing("stream", session_id, symbol)
+            _mark_terminal()
+        finally:
+            # S1：消费者退出（断连/停止/异常）一律标记取消——工作者晚领号
+            # 时据此收尾；未达终态且生成权已领则放回 pending（CAS 只放自己
+            # 的领取，重试者的新领取不受影响）。
+            with shared.lock:
+                shared.cancelled = True
+                _out = shared.outcome
+                _term = shared.terminal
+            if not _term:
+                _release_claim(_out)
+                _log_timing("stream_aborted",
+                            _out.session_id if _out else None, None)
 
     return StreamingResponse(
         _generate(),

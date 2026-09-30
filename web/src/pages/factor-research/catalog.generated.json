@@ -1,0 +1,2659 @@
+{
+  "schema_version": "factor-research/1",
+  "generated_at": "2026-09-23T15:07:11.156007+08:00",
+  "registry_version": "1.4.4",
+  "sources": [
+    {
+      "path": "configs/factor-access.v1.json",
+      "sha256": "0ac46ed9043b41bc2aa17fbb6b6e388cfe41f0b0bd2284ca68b712dad58c7cc8"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/factor-b-route-2026-09-22/b1-controller-repair-review-2026-09-23.md",
+      "sha256": "efb54a72aa67f0320cc36dac94198feedbb79ebeba2e3aa7c60658786a26ed8a"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/factor-b-route-2026-09-22/dual-ma-resonance-dispatch-2026-09-23.md",
+      "sha256": "1e37827319b2713f8c2b9c636d9769c65c5c58928d77ff423e2f5ef2262f41f1"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/factor-b-route-2026-09-22/lei-road-s0-controller-review-2026-09-23.md",
+      "sha256": "6bcd4eb0adc17d0450eb2167a0800888ec609d3387a8f0b0edff3e1b8f6e555e"
+    },
+    {
+      "path": "docs/experiments/b1-closeout-controller-2026-09-16.md",
+      "sha256": "7ba4484223b027f3156e0355a1d64a55b19656a7e1fb8b3b987fa86e7e102f64"
+    },
+    {
+      "path": "docs/experiments/b1-dual-ma-first-real-description-2026-09-16.md",
+      "sha256": "b54ef5d112e28b191a89eaa6a8fa190b43067e26820b02ca7760ef4cb52a7c90"
+    },
+    {
+      "path": "docs/experiments/factor-candidate-exploration-2026-09-22.md",
+      "sha256": "5f0a0da2b93bf0e6d3583ced6f79f1cce46d675e33795e0c4ff18c12274a2d23"
+    },
+    {
+      "path": "docs/experiments/factor-momentum-rank-reuse-2026-09-22.md",
+      "sha256": "83646818842e51ab13dab6e99746c23a2ef7da146df1931b057763886c455ee5"
+    },
+    {
+      "path": "docs/experiments/factor-reuse-refresh-2026-09-22.md",
+      "sha256": "2df4b7be38bcb315fbd575b119b7d3d2ac727f70139de261ee0ca85eef7cebc7"
+    },
+    {
+      "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/protocol-v1.0.1.json",
+      "sha256": "00a16465e5232d3760cedbe9bccb5332b05e4f777f1732e8911ee586974c3af2"
+    },
+    {
+      "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/summary.json",
+      "sha256": "ce4c51ba5e0d7bb7f7e10630b07fc106a59c98f0d4f57ac290f861164c9bfcf7"
+    },
+    {
+      "path": "docs/experiments/raw/dual-ma-resonance-design-2026-09-23/delivery.md",
+      "sha256": "276624ac4dc04453c995c468875e6da0feec6640245560b4a0bbd1741921159f"
+    },
+    {
+      "path": "docs/experiments/raw/factor-b1-evidence-repair-2026-09-23/impact-review.md",
+      "sha256": "fb3f9e78d57a7f39458b8d69ed6f37b596182a3ff4d986f921613988a6f90871"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/formal/run-record.json",
+      "sha256": "1d6e505161515641259d26415b625896cc5384f4a148fa84fe963ecf51d6a5f6"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/formal/summary.json",
+      "sha256": "43699eb706cd872bf8256db933010e25ca6ee2562cf13775b23502951b995e39"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/independent/summary.json",
+      "sha256": "43699eb706cd872bf8256db933010e25ca6ee2562cf13775b23502951b995e39"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/protocol.json",
+      "sha256": "29e47deed9b1964517ef3d2f592e4d9115dd4a2559698ecccb0003a8627e56db"
+    },
+    {
+      "path": "docs/experiments/raw/lei-road-s0-2026-09-23/s0-review.md",
+      "sha256": "80005feae4ea9d6bd8f4f81f846c405c45f179d073d3aa79170ee32ee1ea7551"
+    },
+    {
+      "path": "docs/experiments/registry.json",
+      "sha256": "3e39775730998299c9f537a1adcd681c5c4fa02339aa9a722ae97829486df1f9"
+    },
+    {
+      "path": "docs/research/definitions.v1.json",
+      "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+    },
+    {
+      "path": "web/src/pages/factor-research/display-bindings.json",
+      "sha256": "bbe981d696cdbe530ceae9ba4867445fe9f40addf5d357ac30aae4ee123be4a2"
+    }
+  ],
+  "counts": {
+    "factor_objects": 49,
+    "definition_versions": 51,
+    "executed_experiments": 2
+  },
+  "limitations": [
+    "目录只统计展示范围内的正式研究读数与状态；基础价格、选择动作、基准和策略另有身份，不计作因子。",
+    "未绑定展示证据不等于全仓未研究；计算核验不等于真实市场有效。",
+    "量能方向目前没有本展示目录中可直接确认的正式对象，保留为空缺。"
+  ],
+  "source_errors": [],
+  "items": [
+    {
+      "reference": "mixed.momentum.raw@1.0.0",
+      "id": "mixed.momentum.raw",
+      "version": "1.0.0",
+      "name": "普通12-1动量",
+      "formal_name": "252至21有效报价涨幅",
+      "object_type": "feature",
+      "category": "相对强弱",
+      "purpose": "比较过去约一年、扣除最近一个月的涨幅，观察强弱是否延续。",
+      "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+      "formula": "I(t-21)/I(t-252)-1",
+      "unit": "fraction",
+      "input": "[\"date\", \"symbol\", \"economic_index\"]；名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF"
+      ],
+      "calculation": {
+        "status": "verified",
+        "scope": "函数级合成精确值验证与resolve/calculate身份参数绑定（仅该测试文件覆盖范围）；未做账户级回放，不构成有效性或生产授权"
+      },
+      "research": {
+        "stage": "historical",
+        "result": "no_help",
+        "summary": "六只ETF普通动量与后续21日表现（2022-01-01至2026-06-30）：六只固定ETF的历史排序关系已计算；预先规定的正向线索筛选未通过。 主要数值经主控独立核对，资料完整性检查已事后修正；整批最终书面结案仍待完成。",
+        "evidence_date": "2026-09-23"
+      },
+      "limitations": [
+        "公式一致不证明市场有效；旧消费者未迁移",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [
+        "etf-raw-momentum-21d-b1-20260923"
+      ],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        },
+        {
+          "path": "docs/experiments/factor-reuse-refresh-2026-09-22.md",
+          "sha256": "2df4b7be38bcb315fbd575b119b7d3d2ac727f70139de261ee0ca85eef7cebc7"
+        },
+        {
+          "path": "docs/experiments/factor-momentum-rank-reuse-2026-09-22.md",
+          "sha256": "83646818842e51ab13dab6e99746c23a2ef7da146df1931b057763886c455ee5"
+        },
+        {
+          "path": "docs/experiments/factor-candidate-exploration-2026-09-22.md",
+          "sha256": "5f0a0da2b93bf0e6d3583ced6f79f1cce46d675e33795e0c4ff18c12274a2d23"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "mixed.rv20@1.0.0",
+      "id": "mixed.rv20",
+      "version": "1.0.0",
+      "name": "20期简单收益的样本波动",
+      "formal_name": "20期简单收益的样本波动",
+      "object_type": "feature",
+      "category": "风险",
+      "purpose": "量出最近20次有效报价的日涨跌波动幅度，描述价格是否颠簸。",
+      "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+      "formula": "std(I_t/I_prev-1 over last20,ddof=1)*sqrt(252)",
+      "unit": "fraction",
+      "input": "[\"date\", \"symbol\", \"economic_index\"]；名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF"
+      ],
+      "calculation": {
+        "status": "verified",
+        "scope": "仅本地合成数值验证：精确登记实现测试及独立零被测实现导入复算逐行通过；未验证真实价格输入、市场效果或预测能力，未获 research_ready、生产或交易授权。"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "公式一致不证明市场有效；旧消费者未迁移",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "mixed.rv_percentile@1.0.0",
+      "id": "mixed.rv_percentile",
+      "version": "1.0.0",
+      "name": "自身波动历史分位",
+      "formal_name": "自身波动历史分位",
+      "object_type": "feature",
+      "category": "风险",
+      "purpose": "把当前波动放回自身历史中比较，观察它处于偏高还是偏低位置。",
+      "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+      "formula": "average_rank(current RV20 within last756 slots)/nonmissing_count",
+      "unit": "fraction",
+      "input": "[\"date\", \"symbol\", \"economic_index\"]；名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "公式一致不证明市场有效；旧消费者未迁移",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "mixed.volatility_allowed@1.0.0",
+      "id": "mixed.volatility_allowed",
+      "version": "1.0.0",
+      "name": "历史波动过滤状态",
+      "formal_name": "历史波动过滤状态",
+      "object_type": "state_signal",
+      "category": "风险",
+      "purpose": "记录历史波动位置是否低于既定筛选水平；这是研究条件，不是买卖许可。",
+      "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+      "formula": "isNaN(rv_percentile) OR rv_percentile<0.8",
+      "unit": "boolean",
+      "input": "[\"date\", \"symbol\", \"economic_index\"]；名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "公式一致不证明市场有效；旧消费者未迁移",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "mixed.momentum.rank@1.0.0",
+      "id": "mixed.momentum.rank",
+      "version": "1.0.0",
+      "name": "完整动量排序",
+      "formal_name": "横截面动量有序名单",
+      "object_type": "feature",
+      "category": "相对强弱",
+      "purpose": "把合格产品按普通动量从强到弱完整排序，便于检查相对位置。",
+      "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+      "formula": "sort(eligible finite momentum,key=(-score,symbol))",
+      "unit": "ordered_symbol_list",
+      "input": "[\"date\", \"symbol\", \"economic_index\"]；名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "calculation_only",
+        "result": "not_evaluated",
+        "summary": "既有排序阶段在人工数据上能输出完整有序名单并处理精确并列；调用者仍需核实记录唯一、输入可追溯和完整月末。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "公式一致不证明市场有效；旧消费者未迁移",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        },
+        {
+          "path": "docs/experiments/factor-momentum-rank-reuse-2026-09-22.md",
+          "sha256": "83646818842e51ab13dab6e99746c23a2ef7da146df1931b057763886c455ee5"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "trend.sma50@1.0.0",
+      "id": "trend.sma50",
+      "version": "1.0.0",
+      "name": "50有效报价简单均线",
+      "formal_name": "50有效报价简单均线",
+      "object_type": "feature",
+      "category": "趋势",
+      "purpose": "计算最近50次有效报价的简单平均价，作为趋势位置参照。",
+      "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+      "formula": "SMA50=sum(last 50 valid P_signal including t)/50",
+      "unit": "same_as_P_signal",
+      "input": "[\"date\", \"symbol\", \"economic_index\"]；名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "verified",
+        "scope": "仅本地人工价格计算验证：精确登记入口、执行方1911行标准库独立复算及主控另一套人工价格核对均通过，覆盖50条有效价格、包含当期、缺价、整体缩放和未来数据不改过去；未验证真实行情、市场效果或预测能力，未获 research_ready、生产或交易授权。"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "公式一致不证明市场有效；旧消费者未迁移",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "trend.distance50@1.0.0",
+      "id": "trend.distance50",
+      "version": "1.0.0",
+      "name": "相对50日均线距离",
+      "formal_name": "相对50日均线距离",
+      "object_type": "feature",
+      "category": "回调位置",
+      "purpose": "量出当前价格离50日均线有多远，描述偏离程度。",
+      "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+      "formula": "P_signal/SMA50-1",
+      "unit": "fraction",
+      "input": "[\"date\", \"symbol\", \"economic_index\"]；名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "verified",
+        "scope": "仅本地合成数值验证：精确登记实现测试及独立零被测实现导入复算逐行通过，SMA50 包含当日；未验证真实价格输入、市场效果或预测能力，未获 research_ready、生产或交易授权。"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "公式一致不证明市场有效；旧消费者未迁移",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "trend.above50@1.0.0",
+      "id": "trend.above50",
+      "version": "1.0.0",
+      "name": "严格站上50日均线",
+      "formal_name": "严格站上50日均线",
+      "object_type": "state_signal",
+      "category": "趋势",
+      "purpose": "记录当前价格是否严格站上50日均线。",
+      "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+      "formula": "P_signal>SMA50",
+      "unit": "boolean",
+      "input": "[\"date\", \"symbol\", \"economic_index\"]；名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "verified",
+        "scope": "仅本地人工价格计算验证：严格大于、相等为否、50条有效价格预热、缺价、整体缩放及未来数据不改过去均经执行方和主控独立核对；未验证真实行情、市场效果或预测能力，未获 research_ready、生产或交易授权。"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "公式一致不证明市场有效；旧消费者未迁移",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "trend.cross_up50@1.0.0",
+      "id": "trend.cross_up50",
+      "version": "1.0.0",
+      "name": "本次上穿50日均线事件",
+      "formal_name": "本次上穿50日均线事件",
+      "object_type": "state_signal",
+      "category": "趋势",
+      "purpose": "记录本次价格是否由均线下方或线上穿到50日均线上方。",
+      "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+      "formula": "P_t>SMA50_t AND P_prev<=SMA50_prev",
+      "unit": "boolean",
+      "input": "[\"date\", \"symbol\", \"economic_index\"]；名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "verified",
+        "scope": "仅本地人工价格事件计算验证：首次无上一条可比均线时留空，缺价后与上一有效价格比较，相等和整体缩放边界均经执行方和主控独立核对；上穿不等于买点，未验证真实行情、预测能力、生产或交易资格。"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "公式一致不证明市场有效；旧消费者未迁移",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "trend.sma200@1.0.0",
+      "id": "trend.sma200",
+      "version": "1.0.0",
+      "name": "200有效报价简单均线",
+      "formal_name": "200有效报价简单均线",
+      "object_type": "feature",
+      "category": "趋势",
+      "purpose": "计算最近200次有效报价的简单平均价，作为趋势位置参照。",
+      "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+      "formula": "SMA200=sum(last 200 valid P_signal including t)/200",
+      "unit": "same_as_P_signal",
+      "input": "[\"date\", \"symbol\", \"economic_index\"]；名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "verified",
+        "scope": "仅本地人工价格计算验证：精确登记入口、执行方1911行标准库独立复算及主控另一套人工价格核对均通过，覆盖200条有效价格、包含当期、缺价、整体缩放和未来数据不改过去；未验证真实行情、市场效果或预测能力，未获 research_ready、生产或交易授权。"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "公式一致不证明市场有效；旧消费者未迁移",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "trend.distance200@1.0.0",
+      "id": "trend.distance200",
+      "version": "1.0.0",
+      "name": "相对200日均线距离",
+      "formal_name": "相对200日均线距离",
+      "object_type": "feature",
+      "category": "回调位置",
+      "purpose": "量出当前价格离200日均线有多远，描述偏离程度。",
+      "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+      "formula": "P_signal/SMA200-1",
+      "unit": "fraction",
+      "input": "[\"date\", \"symbol\", \"economic_index\"]；名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "verified",
+        "scope": "仅本地合成数值验证：精确登记入口、执行方1300行独立逐行重算及主控另一套人工数据核对均通过，覆盖SMA200含当日、缺价、预热、整体缩放与未来数据不改过去；未验证真实行情、市场效果或预测能力，未获 research_ready、生产或交易授权。"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "公式一致不证明市场有效；旧消费者未迁移",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "trend.above200@1.0.0",
+      "id": "trend.above200",
+      "version": "1.0.0",
+      "name": "严格站上200日均线",
+      "formal_name": "严格站上200日均线",
+      "object_type": "state_signal",
+      "category": "趋势",
+      "purpose": "记录当前价格是否严格站上200日均线。",
+      "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+      "formula": "P_signal>SMA200",
+      "unit": "boolean",
+      "input": "[\"date\", \"symbol\", \"economic_index\"]；名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "verified",
+        "scope": "仅本地人工价格计算验证：严格大于、相等为否、200条有效价格预热、缺价、整体缩放及未来数据不改过去均经执行方和主控独立核对；未验证真实行情、市场效果或预测能力，未获 research_ready、生产或交易授权。"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "公式一致不证明市场有效；旧消费者未迁移",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "trend.cross_up200@1.0.0",
+      "id": "trend.cross_up200",
+      "version": "1.0.0",
+      "name": "本次上穿200日均线事件",
+      "formal_name": "本次上穿200日均线事件",
+      "object_type": "state_signal",
+      "category": "趋势",
+      "purpose": "记录本次价格是否由均线下方或线上穿到200日均线上方。",
+      "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+      "formula": "P_t>SMA200_t AND P_prev<=SMA200_prev",
+      "unit": "boolean",
+      "input": "[\"date\", \"symbol\", \"economic_index\"]；名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "verified",
+        "scope": "仅本地人工价格事件计算验证：首次无上一条可比均线时留空，缺价后与上一有效价格比较，相等和整体缩放边界均经执行方和主控独立核对；上穿不等于买点，未验证真实行情、预测能力、生产或交易资格。"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "公式一致不证明市场有效；旧消费者未迁移",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "trend.recovered200@1.0.0",
+      "id": "trend.recovered200",
+      "version": "1.0.0",
+      "name": "站回或等于200日均线",
+      "formal_name": "站回或等于200日均线",
+      "object_type": "state_signal",
+      "category": "趋势",
+      "purpose": "记录价格是否重新站回或等于200日均线。",
+      "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+      "formula": "P_signal>=SMA200",
+      "unit": "boolean",
+      "input": "[\"date\", \"symbol\", \"economic_index\"]；名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "verified",
+        "scope": "仅本地人工价格计算验证：第200条有效价格首次可用、等于均线为真、低于为假、缺价压缩、整体缩放与未来数据不改过去均经执行方4840行及主控另一套人工价格独立核对；不是独立买点，未验证真实行情、预测能力、生产或交易资格。"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "公式一致不证明市场有效；旧消费者未迁移",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.all_a.b50.common@1.0.0",
+      "id": "breadth.all_a.b50.common",
+      "version": "1.0.0",
+      "name": "all_a B50共同分母（比例）",
+      "formal_name": "all_a B50共同分母（比例）",
+      "object_type": "state_signal",
+      "category": "宽度",
+      "purpose": "在共同合格股票分母内，计算全A股票有多少站上各自50日均线。",
+      "scope": "当前缓存列回溯全A（非完整历史存续表）",
+      "formula": "count(P>SMA50 in E200)/count(E200)",
+      "unit": "fraction",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "个股"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "共同分母不消除成员变更影响；输入成员必须当时生效且可知",
+        "B_limited_historical_membership"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.all_a.b50.legacy_percent@1.0.0",
+      "id": "breadth.all_a.b50.legacy_percent",
+      "version": "1.0.0",
+      "name": "all_a B50冻结百分数口径",
+      "formal_name": "all_a B50冻结百分数口径",
+      "object_type": "state_signal",
+      "category": "宽度",
+      "purpose": "按冻结旧百分数口径，描述全A股票中站上50日均线的占比。",
+      "scope": "给定日期成员集合的宽度研究，身份须附全A/沪深300/创业板指数及名单版本",
+      "formula": "100 * fraction B50",
+      "unit": "percent",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "共同分母不消除成员变更影响；输入成员必须当时生效且可知",
+        "B_limited_historical_membership"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.all_a.delta50_20@1.0.0",
+      "id": "breadth.all_a.delta50_20",
+      "version": "1.0.0",
+      "name": "all_a B50二十行变化",
+      "formal_name": "all_a B50二十行变化",
+      "object_type": "feature",
+      "category": "宽度",
+      "purpose": "比较全A股票站上50日均线的比例与20个观察值前的变化。",
+      "scope": "给定日期成员集合的宽度研究，身份须附全A/沪深300/创业板指数及名单版本",
+      "formula": "fraction B50_t - fraction B50_{t-20}",
+      "unit": "fraction_difference",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "共同分母不消除成员变更影响；输入成员必须当时生效且可知",
+        "B_limited_historical_membership"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.all_a.b200.common@1.0.0",
+      "id": "breadth.all_a.b200.common",
+      "version": "1.0.0",
+      "name": "all_a B200共同分母（比例）",
+      "formal_name": "all_a B200共同分母（比例）",
+      "object_type": "state_signal",
+      "category": "宽度",
+      "purpose": "在共同合格股票分母内，计算全A股票有多少站上各自200日均线。",
+      "scope": "当前缓存列回溯全A（非完整历史存续表）",
+      "formula": "count(P>SMA200 in E200)/count(E200)",
+      "unit": "fraction",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "个股"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "共同分母不消除成员变更影响；输入成员必须当时生效且可知",
+        "B_limited_historical_membership"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.all_a.b200.legacy_percent@1.0.0",
+      "id": "breadth.all_a.b200.legacy_percent",
+      "version": "1.0.0",
+      "name": "all_a B200冻结百分数口径",
+      "formal_name": "all_a B200冻结百分数口径",
+      "object_type": "state_signal",
+      "category": "宽度",
+      "purpose": "按冻结旧百分数口径，描述全A股票中站上200日均线的占比。",
+      "scope": "给定日期成员集合的宽度研究，身份须附全A/沪深300/创业板指数及名单版本",
+      "formula": "100 * fraction B200",
+      "unit": "percent",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "共同分母不消除成员变更影响；输入成员必须当时生效且可知",
+        "B_limited_historical_membership"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.all_a.delta200_20@1.0.0",
+      "id": "breadth.all_a.delta200_20",
+      "version": "1.0.0",
+      "name": "all_a B200二十行变化",
+      "formal_name": "all_a B200二十行变化",
+      "object_type": "feature",
+      "category": "宽度",
+      "purpose": "比较全A股票站上200日均线的比例与20个观察值前的变化。",
+      "scope": "给定日期成员集合的宽度研究，身份须附全A/沪深300/创业板指数及名单版本",
+      "formula": "fraction B200_t - fraction B200_{t-20}",
+      "unit": "fraction_difference",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "共同分母不消除成员变更影响；输入成员必须当时生效且可知",
+        "B_limited_historical_membership"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.csi300.b50.common@1.0.0",
+      "id": "breadth.csi300.b50.common",
+      "version": "1.0.0",
+      "name": "csi300 B50共同分母（比例）",
+      "formal_name": "csi300 B50共同分母（比例）",
+      "object_type": "state_signal",
+      "category": "宽度",
+      "purpose": "在共同合格股票分母内，计算沪深300历史成分股有多少站上各自50日均线。",
+      "scope": "沪深300指数300成分（20交易日探测成员链）",
+      "formula": "count(P>SMA50 in E200)/count(E200)",
+      "unit": "fraction",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "其他"
+      ],
+      "calculation": {
+        "status": "verified",
+        "scope": "仅本地合成数值验证：精确登记实现测试及独立零被测实现导入复算逐行通过，合成成员链覆盖 E200、0.90 覆盖率与缺失边界；未验证真实沪深300历史成员、真实价格输入、市场效果或预测能力，未获 research_ready、生产或交易授权。"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "共同分母不消除成员变更影响；输入成员必须当时生效且可知",
+        "B_limited_historical_membership"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.csi300.b50.legacy_percent@1.0.0",
+      "id": "breadth.csi300.b50.legacy_percent",
+      "version": "1.0.0",
+      "name": "csi300 B50冻结百分数口径",
+      "formal_name": "csi300 B50冻结百分数口径",
+      "object_type": "state_signal",
+      "category": "宽度",
+      "purpose": "按冻结旧百分数口径，描述沪深300历史成分股中站上50日均线的占比。",
+      "scope": "给定日期成员集合的宽度研究，身份须附全A/沪深300/创业板指数及名单版本",
+      "formula": "100 * fraction B50",
+      "unit": "percent",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "共同分母不消除成员变更影响；输入成员必须当时生效且可知",
+        "B_limited_historical_membership"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.csi300.delta50_20@1.0.0",
+      "id": "breadth.csi300.delta50_20",
+      "version": "1.0.0",
+      "name": "csi300 B50二十行变化",
+      "formal_name": "csi300 B50二十行变化",
+      "object_type": "feature",
+      "category": "宽度",
+      "purpose": "比较沪深300历史成分股站上50日均线的比例与20个观察值前的变化。",
+      "scope": "给定日期成员集合的宽度研究，身份须附全A/沪深300/创业板指数及名单版本",
+      "formula": "fraction B50_t - fraction B50_{t-20}",
+      "unit": "fraction_difference",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "共同分母不消除成员变更影响；输入成员必须当时生效且可知",
+        "B_limited_historical_membership"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.csi300.b200.common@1.0.0",
+      "id": "breadth.csi300.b200.common",
+      "version": "1.0.0",
+      "name": "csi300 B200共同分母（比例）",
+      "formal_name": "csi300 B200共同分母（比例）",
+      "object_type": "state_signal",
+      "category": "宽度",
+      "purpose": "在共同合格股票分母内，计算沪深300历史成分股有多少站上各自200日均线。",
+      "scope": "沪深300指数300成分（20交易日探测成员链）",
+      "formula": "count(P>SMA200 in E200)/count(E200)",
+      "unit": "fraction",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "其他"
+      ],
+      "calculation": {
+        "status": "verified",
+        "scope": "仅本地合成数值验证：精确登记入口、执行方210行独立逐行重算及主控另一套人工成员链核对均通过，覆盖E200、严格大于、0.90覆盖率、缺失原因、成员变化及B50/B200区分；未验证真实沪深300历史成员、真实价格输入、市场效果或预测能力，未获 research_ready、生产或交易授权。"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "共同分母不消除成员变更影响；输入成员必须当时生效且可知",
+        "B_limited_historical_membership"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.csi300.b200.legacy_percent@1.0.0",
+      "id": "breadth.csi300.b200.legacy_percent",
+      "version": "1.0.0",
+      "name": "csi300 B200冻结百分数口径",
+      "formal_name": "csi300 B200冻结百分数口径",
+      "object_type": "state_signal",
+      "category": "宽度",
+      "purpose": "按冻结旧百分数口径，描述沪深300历史成分股中站上200日均线的占比。",
+      "scope": "给定日期成员集合的宽度研究，身份须附全A/沪深300/创业板指数及名单版本",
+      "formula": "100 * fraction B200",
+      "unit": "percent",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "共同分母不消除成员变更影响；输入成员必须当时生效且可知",
+        "B_limited_historical_membership"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.csi300.delta200_20@1.0.0",
+      "id": "breadth.csi300.delta200_20",
+      "version": "1.0.0",
+      "name": "csi300 B200二十行变化",
+      "formal_name": "csi300 B200二十行变化",
+      "object_type": "feature",
+      "category": "宽度",
+      "purpose": "比较沪深300历史成分股站上200日均线的比例与20个观察值前的变化。",
+      "scope": "给定日期成员集合的宽度研究，身份须附全A/沪深300/创业板指数及名单版本",
+      "formula": "fraction B200_t - fraction B200_{t-20}",
+      "unit": "fraction_difference",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "共同分母不消除成员变更影响；输入成员必须当时生效且可知",
+        "B_limited_historical_membership"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.chinext.b50.common@1.0.0",
+      "id": "breadth.chinext.b50.common",
+      "version": "1.0.0",
+      "name": "chinext B50共同分母（比例）",
+      "formal_name": "chinext B50共同分母（比例）",
+      "object_type": "state_signal",
+      "category": "宽度",
+      "purpose": "在共同合格股票分母内，计算创业板历史成分股有多少站上各自50日均线。",
+      "scope": "创业板指数100成分；不是全创业板市场",
+      "formula": "count(P>SMA50 in E200)/count(E200)",
+      "unit": "fraction",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "其他"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "合成算法检查不算真实创业板证据；旧自身4路径未跑",
+        "blocked_membership_chain"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.chinext.b50.legacy_percent@1.0.0",
+      "id": "breadth.chinext.b50.legacy_percent",
+      "version": "1.0.0",
+      "name": "chinext B50冻结百分数口径",
+      "formal_name": "chinext B50冻结百分数口径",
+      "object_type": "state_signal",
+      "category": "宽度",
+      "purpose": "按冻结旧百分数口径，描述创业板历史成分股中站上50日均线的占比。",
+      "scope": "给定日期成员集合的宽度研究，身份须附全A/沪深300/创业板指数及名单版本",
+      "formula": "100 * fraction B50",
+      "unit": "percent",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "共同分母不消除成员变更影响；输入成员必须当时生效且可知",
+        "blocked_membership_chain"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.chinext.delta50_20@1.0.0",
+      "id": "breadth.chinext.delta50_20",
+      "version": "1.0.0",
+      "name": "chinext B50二十行变化",
+      "formal_name": "chinext B50二十行变化",
+      "object_type": "feature",
+      "category": "宽度",
+      "purpose": "比较创业板历史成分股站上50日均线的比例与20个观察值前的变化。",
+      "scope": "给定日期成员集合的宽度研究，身份须附全A/沪深300/创业板指数及名单版本",
+      "formula": "fraction B50_t - fraction B50_{t-20}",
+      "unit": "fraction_difference",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "共同分母不消除成员变更影响；输入成员必须当时生效且可知",
+        "blocked_membership_chain"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.chinext.b200.common@1.0.0",
+      "id": "breadth.chinext.b200.common",
+      "version": "1.0.0",
+      "name": "chinext B200共同分母（比例）",
+      "formal_name": "chinext B200共同分母（比例）",
+      "object_type": "state_signal",
+      "category": "宽度",
+      "purpose": "在共同合格股票分母内，计算创业板历史成分股有多少站上各自200日均线。",
+      "scope": "创业板指数100成分；不是全创业板市场",
+      "formula": "count(P>SMA200 in E200)/count(E200)",
+      "unit": "fraction",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "其他"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "合成算法检查不算真实创业板证据；旧自身4路径未跑",
+        "blocked_membership_chain"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.chinext.b200.legacy_percent@1.0.0",
+      "id": "breadth.chinext.b200.legacy_percent",
+      "version": "1.0.0",
+      "name": "chinext B200冻结百分数口径",
+      "formal_name": "chinext B200冻结百分数口径",
+      "object_type": "state_signal",
+      "category": "宽度",
+      "purpose": "按冻结旧百分数口径，描述创业板历史成分股中站上200日均线的占比。",
+      "scope": "给定日期成员集合的宽度研究，身份须附全A/沪深300/创业板指数及名单版本",
+      "formula": "100 * fraction B200",
+      "unit": "percent",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "共同分母不消除成员变更影响；输入成员必须当时生效且可知",
+        "blocked_membership_chain"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.chinext.delta200_20@1.0.0",
+      "id": "breadth.chinext.delta200_20",
+      "version": "1.0.0",
+      "name": "chinext B200二十行变化",
+      "formal_name": "chinext B200二十行变化",
+      "object_type": "feature",
+      "category": "宽度",
+      "purpose": "比较创业板历史成分股站上200日均线的比例与20个观察值前的变化。",
+      "scope": "给定日期成员集合的宽度研究，身份须附全A/沪深300/创业板指数及名单版本",
+      "formula": "fraction B200_t - fraction B200_{t-20}",
+      "unit": "fraction_difference",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "共同分母不消除成员变更影响；输入成员必须当时生效且可知",
+        "blocked_membership_chain"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.production.independent@1.0.0",
+      "id": "breadth.production.independent",
+      "version": "1.0.0",
+      "name": "生产通用宽度独立分母（映射）",
+      "formal_name": "生产通用宽度独立分母（映射）",
+      "object_type": "state_signal",
+      "category": "宽度",
+      "purpose": "记录既有生产宽度口径下，各周期有资料的股票中多少站上各自均线。",
+      "scope": "给定日期成员集合的宽度研究，身份须附全A/沪深300/创业板指数及名单版本",
+      "formula": "100 * above_N / eligible_N",
+      "unit": "percent",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF",
+        "个股"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "共同分母不消除成员变更影响；输入成员必须当时生效且可知",
+        "consumer_specific"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.daily_all_a.independent@1.0.0",
+      "id": "breadth.daily_all_a.independent",
+      "version": "1.0.0",
+      "name": "日常全A独立分母（映射）",
+      "formal_name": "日常全A独立分母（映射）",
+      "object_type": "state_signal",
+      "category": "宽度",
+      "purpose": "记录日常全A宽度口径下，各周期有资料的股票中多少站上各自均线。",
+      "scope": "给定日期成员集合的宽度研究，身份须附全A/沪深300/创业板指数及名单版本",
+      "formula": "100*above_N/eligible_N",
+      "unit": "percent",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "个股"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "共同分母不消除成员变更影响；输入成员必须当时生效且可知",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "breadth.three_tier@1.0.0",
+      "id": "breadth.three_tier",
+      "version": "1.0.0",
+      "name": "低宽度多投入三档目标",
+      "formal_name": "低宽度多投入三档目标",
+      "object_type": "state_signal",
+      "category": "宽度",
+      "purpose": "把宽度水平对应到三档研究目标，记录规则会如何改变投入比例。",
+      "scope": "接入时必须引用具体U、B200版本；映射本身不是完整交易策略",
+      "formula": "B<0.433=>1; 0.433<=B<0.567=>0.5; B>=0.567=>0",
+      "unit": "fraction",
+      "input": "[\"date\", \"symbol\", \"P_signal\", \"membership_by_date\"]；指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+      "time": "t股票收盘；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "共同分母不消除成员变更影响；输入成员必须当时生效且可知",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "risk.product_account_weight@1.0.0",
+      "id": "risk.product_account_weight",
+      "version": "1.0.0",
+      "name": "产品占完整账户比例",
+      "formal_name": "产品占完整账户比例",
+      "object_type": "risk_metric",
+      "category": "风险",
+      "purpose": "量出某产品市值占完整账户的比例，观察是否过度集中。",
+      "scope": "绑定账户及互斥经济方向的实际持仓或贡献，不继承选强入选资格",
+      "formula": "market_value_i/equity",
+      "unit": "fraction",
+      "input": "[\"units\", \"nominal_close\", \"cash\", \"receivable\"]；实际份额*名义最后有效收盘，拆分调整旧价",
+      "time": "账户日终估值或明确的统计区间；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "其他"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "不是目标权重；不是市场beta估计",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "risk.direction_account_weight@1.0.0",
+      "id": "risk.direction_account_weight",
+      "version": "1.0.0",
+      "name": "经济方向占完整账户比例",
+      "formal_name": "经济方向占完整账户比例",
+      "object_type": "risk_metric",
+      "category": "风险",
+      "purpose": "合并同一经济方向的持仓，量出它占完整账户的比例。",
+      "scope": "绑定账户及互斥经济方向的实际持仓或贡献，不继承选强入选资格",
+      "formula": "sum(product market_value for exclusive group)/equity",
+      "unit": "fraction",
+      "input": "[\"units\", \"nominal_close\", \"cash\", \"receivable\"]；实际份额*名义最后有效收盘，拆分调整旧价",
+      "time": "账户日终估值或明确的统计区间；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "其他"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "公式一致不证明市场有效；旧消费者未迁移",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "risk.product_invested_weight@1.0.0",
+      "id": "risk.product_invested_weight",
+      "version": "1.0.0",
+      "name": "产品占在场资产比例",
+      "formal_name": "产品占在场资产比例",
+      "object_type": "risk_metric",
+      "category": "风险",
+      "purpose": "量出某产品占已投入资产的比例，不含账户中的现金。",
+      "scope": "绑定账户及互斥经济方向的实际持仓或贡献，不继承选强入选资格",
+      "formula": "market_value_i/sum(market_values)",
+      "unit": "fraction",
+      "input": "[\"units\", \"nominal_close\", \"cash\", \"receivable\"]；实际份额*名义最后有效收盘，拆分调整旧价",
+      "time": "账户日终估值或明确的统计区间；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "其他"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "辅助风险视角，不得取代完整账户资金分母",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "risk.profit_direction_share@1.0.0",
+      "id": "risk.profit_direction_share",
+      "version": "1.0.0",
+      "name": "经济方向利润占比（非持仓比例）",
+      "formal_name": "经济方向利润占比（非持仓比例）",
+      "object_type": "risk_metric",
+      "category": "风险",
+      "purpose": "量出某经济方向对账户净盈亏的占比，说明盈亏集中在哪里。",
+      "scope": "绑定账户及互斥经济方向的实际持仓或贡献，不继承选强入选资格",
+      "formula": "group_net_pnl/(equity_end-initial_cash)",
+      "unit": "fraction",
+      "input": "[\"net_sale\", \"purchase_including_fees\", \"dividend_entitlement\", \"ending_market_value\", \"initial_cash\", \"ending_equity\"]；绑定账户净损益账；不是P_signal",
+      "time": "账户日终估值或明确的统计区间；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "其他"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "重叠视角不得再相加；可能负数或>100%；不是集中收益因子",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "etf.trend.sma50@1.0.0",
+      "id": "etf.trend.sma50",
+      "version": "1.0.0",
+      "name": "ETF连续价SMA50（宽度旧账户）",
+      "formal_name": "ETF连续价SMA50（宽度旧账户）",
+      "object_type": "feature",
+      "category": "趋势",
+      "purpose": "计算ETF连续价格最近50次有效报价的平均线，作为趋势位置参照。",
+      "scope": "仅etf.price.continuous，不得替换为混合池经济指数",
+      "formula": "continuous_close.rolling(50,min_periods=50).mean()",
+      "unit": "same_as_P_signal",
+      "input": "[\"date\", \"symbol\", \"continuous_close\"]；etf.price.continuous@1.0.0",
+      "time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "公式一致不证明市场有效；旧消费者未迁移",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "etf.trend.above50@1.0.0",
+      "id": "etf.trend.above50",
+      "version": "1.0.0",
+      "name": "ETF连续价在SMA50上方（旧布尔比较）",
+      "formal_name": "ETF连续价在SMA50上方（旧布尔比较）",
+      "object_type": "state_signal",
+      "category": "趋势",
+      "purpose": "记录ETF连续价格是否站上50日均线；这是状态描述。",
+      "scope": "仅etf.price.continuous，不得替换为混合池经济指数",
+      "formula": "continuous_close>SMA50; 均值缺失时旧比较返回false",
+      "unit": "boolean",
+      "input": "[\"date\", \"symbol\", \"continuous_close\"]；etf.price.continuous@1.0.0",
+      "time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "公式一致不证明市场有效；旧消费者未迁移",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "etf.trend.sma200@1.0.0",
+      "id": "etf.trend.sma200",
+      "version": "1.0.0",
+      "name": "ETF连续价SMA200（宽度旧账户）",
+      "formal_name": "ETF连续价SMA200（宽度旧账户）",
+      "object_type": "feature",
+      "category": "趋势",
+      "purpose": "计算ETF连续价格最近200次有效报价的平均线，作为趋势位置参照。",
+      "scope": "仅etf.price.continuous，不得替换为混合池经济指数",
+      "formula": "continuous_close.rolling(200,min_periods=200).mean()",
+      "unit": "same_as_P_signal",
+      "input": "[\"date\", \"symbol\", \"continuous_close\"]；etf.price.continuous@1.0.0",
+      "time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "公式一致不证明市场有效；旧消费者未迁移",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "etf.trend.above200@1.0.0",
+      "id": "etf.trend.above200",
+      "version": "1.0.0",
+      "name": "ETF连续价在SMA200上方（旧布尔比较）",
+      "formal_name": "ETF连续价在SMA200上方（旧布尔比较）",
+      "object_type": "state_signal",
+      "category": "趋势",
+      "purpose": "记录ETF连续价格是否站上200日均线；这是状态描述。",
+      "scope": "仅etf.price.continuous，不得替换为混合池经济指数",
+      "formula": "continuous_close>SMA200; 均值缺失时旧比较返回false",
+      "unit": "boolean",
+      "input": "[\"date\", \"symbol\", \"continuous_close\"]；etf.price.continuous@1.0.0",
+      "time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）；收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "asset_classes": [
+        "ETF"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "公式一致不证明市场有效；旧消费者未迁移",
+        "limited_frozen_sources"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "etf.trend.price50.state@1.0.0",
+      "id": "etf.trend.price50.state",
+      "version": "1.0.0",
+      "name": "ETF连续价格50日均线二元状态",
+      "formal_name": "ETF连续价格50日均线二元状态",
+      "object_type": "state_signal",
+      "category": "趋势",
+      "purpose": "记录ETF连续价格是否站上50日均线；这是状态描述。",
+      "scope": "510300与159915的冻结历史研究；不等同旧B1/SMA200，也不是宽度确认条件",
+      "formula": "当日连续价格close严格大于截至当日最近50条有效报价的简单平均值时为1，否则为0；不足50条为缺失",
+      "unit": "boolean",
+      "input": "[\"date\", \"symbol\", \"nominal_open\", \"nominal_close\", \"actions\", \"restrictions\", \"price_limit_regimes\"]；etf.price.continuous@1.0.0的冻结ETF连续价算法；账户用名义开收盘与独立公司行动。只在有报价日连接恰好该日生效的动作；非报价日行动尚未泛化支持。",
+      "time": "ETF有效报价日收盘后；冻结输入实际到达时间未知；本次重算时已取得，不伪造历史available_at",
+      "asset_classes": [
+        "其他"
+      ],
+      "calculation": {
+        "status": "verified",
+        "scope": "冻结run逐值合成复算：状态变化、成交与资金账与冻结输出一致（该执行测试覆盖范围）；账户级样例验证，不构成有效性或生产授权"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "仅绑定本轮两ETF冻结输入；纯50日跌回均线会退出，W3价格确认转负本身不退出。完整方案差不能全部归于宽度；旧消费者未迁移。",
+        "limited_frozen_etf_inputs_historical_availability_unknown"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "mixed.bias_ema120_pct@1.0.0",
+      "id": "mixed.bias_ema120_pct",
+      "version": "1.0.0",
+      "name": "EMA120 乖离率",
+      "formal_name": "EMA120 乖离率",
+      "object_type": "feature",
+      "category": "回调位置",
+      "purpose": "量出价格偏离120日指数均线的程度，描述位置是否远离长期道路。",
+      "scope": "单一标的（宽基/ETF）日线时序描述；不适用横截面排序",
+      "formula": "bias[t] = close[t] / EMA120[t] - 1",
+      "unit": "ratio（无量纲；正=价格在 EMA120 上方）",
+      "input": "[\"close（日线收盘价，前复权）\"]；前复权（随登记表 sources 口径）",
+      "time": "交易日收盘；同收盘（只用当日及此前数据，因果）",
+      "asset_classes": [
+        "ETF"
+      ],
+      "calculation": {
+        "status": "verified",
+        "scope": "仅人工合成收盘价→实际 compute_features/seeded_ema→实际 _bias_ema120 的完整数值路径：8组1215行、独立闭式重算及历史前缀/正比例缩放检查；沿用当前缺价不重启行为。不是实际行情复权、资料资格、预测有效性、research_ready 或生产授权。"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "仅合成输入；无真实数据资格声明；无任何有效性证据",
+        "合成夹具合格；真实资料未申请"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "trend.cost_basis_distance20@1.0.0",
+      "id": "trend.cost_basis_distance20",
+      "version": "1.0.0",
+      "name": "20 日抵扣价距离",
+      "formal_name": "20 日抵扣价距离",
+      "object_type": "feature",
+      "category": "回调位置",
+      "purpose": "比较今天收盘价与20次有效报价前的价格，描述抵扣价距离。",
+      "scope": "单一标的（宽基/ETF）日线时序描述；不适用横截面排序",
+      "formula": "cbd20[t] = close[t] / close[t-20] - 1",
+      "unit": "ratio（正=价格高于 20 期前抵扣价）",
+      "input": "[\"close（前复权）\"]；前复权（随登记表 sources 口径）",
+      "time": "交易日收盘；同收盘（只用当日及此前数据，因果）",
+      "asset_classes": [
+        "ETF"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅合成输入验证（synthetic-only）；未经真实数据验证；不构成预测有效性或生产授权"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "仅合成输入；无真实数据资格声明（lifecycle=exists）。旧 B3-a 证据仅属 draft；B8 正式编号接线和逐行数值对照只作诊断，定义含义待澄清，不构成完整定义验证。",
+        "合成夹具合格，真实资料未申请"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "mixed.pullback_ma_distance@1.0.0",
+      "id": "mixed.pullback_ma_distance",
+      "version": "1.0.0",
+      "name": "入场均线组最近距离",
+      "formal_name": "入场均线组最近距离",
+      "object_type": "feature",
+      "category": "回调位置",
+      "purpose": "在20、60、120日指数及简单均线中，找出价格离哪条线最近、相距多少。",
+      "scope": "单一标的（宽基/ETF）日线时序描述",
+      "formula": "pmd[t] = min(|close[t] - M[t]| / M[t])，M ∈ {EMA,SMA} × {20,60,120}",
+      "unit": "ratio（非负；分子为绝对距离，分母为该均线自身值）",
+      "input": "[\"close（前复权；OHLCV 为复用 compute_features 的伴随列）\"]；前复权（随登记表 sources 口径）",
+      "time": "交易日收盘；同收盘（只用当日及此前数据，因果）",
+      "asset_classes": [
+        "ETF"
+      ],
+      "calculation": {
+        "status": "exists",
+        "scope": "仅合成输入验证（synthetic-only）；未经真实数据验证；不构成预测有效性或生产授权"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "仅合成输入；无真实数据资格声明（lifecycle=exists）。旧 B3-a 证据仅属 draft；B8 正式编号接线和逐行数值对照只作诊断，定义含义待澄清，不构成完整定义验证。",
+        "合成夹具合格，真实资料未申请"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "trend.ma_cluster_width@1.0.0",
+      "id": "trend.ma_cluster_width",
+      "version": "1.0.0",
+      "name": "六均线密集宽度",
+      "formal_name": "六均线密集宽度",
+      "object_type": "feature",
+      "category": "趋势",
+      "purpose": "量出六条均线最高与最低之间的相对距离，描述均线是否密集。",
+      "scope": "单一标的（宽基/ETF）日线时序描述；不适用横截面排序",
+      "formula": "width[t] = (max(M) - min(M)) / min(M)",
+      "unit": "ratio（非负，越小越密集）",
+      "input": "[\"close（前复权）\"]；前复权（随登记表 sources 口径）",
+      "time": "交易日收盘；同收盘（只用当日及此前数据，因果）",
+      "asset_classes": [
+        "ETF"
+      ],
+      "calculation": {
+        "status": "verified",
+        "scope": "仅本地合成数值验证：逐卡实现测试和不导入被测实现的独立复算通过，覆盖预热与缺失处理；未验证真实输入兼容性、市场有效性或预测能力，未获 research_ready、生产或交易授权。"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "仅合成输入；无真实数据资格声明",
+        "合成夹具合格，真实资料未申请"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "mixed.swing_rr_distance@1.0.0",
+      "id": "mixed.swing_rr_distance",
+      "version": "1.0.0",
+      "name": "已确认摆动点距离比",
+      "formal_name": "已确认摆动点距离比",
+      "object_type": "feature",
+      "category": "回调位置",
+      "purpose": "比较价格离已确认高点和低点的距离，仅描述当前位置与结构空间。",
+      "scope": "单一标的（宽基/ETF）日线时序描述；不适用横截面排序",
+      "formula": "value[t] = (H_conf - close[t]) / (close[t] - L_conf)",
+      "unit": "无量纲比值（正数）",
+      "input": "[\"OHLC（前复权）\", \"已确认摆动点序列（confirmed_index 随行）\"]；前复权（随登记表 sources 口径）",
+      "time": "交易日收盘；同收盘（只用当日及此前已确认结构）",
+      "asset_classes": [
+        "ETF"
+      ],
+      "calculation": {
+        "status": "verified",
+        "scope": "仅本地合成数值验证：逐卡实现测试和不导入被测实现的独立复算通过，覆盖已确认摆动点的可用时点；未验证真实输入兼容性、市场有效性或预测能力，未获 research_ready、生产或交易授权。"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "仅合成输入；结构输入依赖 pivots.py 既有口径；无真实数据资格声明",
+        "合成夹具合格，真实资料未申请"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "trend.cost_basis_distance20@2.0.0",
+      "id": "trend.cost_basis_distance20",
+      "version": "2.0.0",
+      "name": "20 日抵扣价距离",
+      "formal_name": "20 日抵扣价距离",
+      "object_type": "feature",
+      "category": "回调位置",
+      "purpose": "比较今天收盘价与20次有效报价前的价格，描述抵扣价距离。",
+      "scope": "单一标的（宽基/ETF）日线时序描述；不适用横截面排序",
+      "formula": "cbd20[t] = close[t] / close[t-20] - 1",
+      "unit": "ratio（正=价格高于 20 期前抵扣价）",
+      "input": "[\"close（前复权）\"]；前复权（随登记表 sources 口径）",
+      "time": "交易日收盘；同收盘（只用当日及此前数据，因果）",
+      "asset_classes": [
+        "ETF"
+      ],
+      "calculation": {
+        "status": "verified",
+        "scope": "仅2.0.0精确入口的本地人工合成数值验证：8组每卡1303行、两卡共2606行；独立原始价格重建、主控闭式EMA重算、62边界及前缀/缩放核对通过。不证明真实价格与行动资料合格、预测/投资价值、research_ready、生产或交易授权；旧1.0.0状态不继承。"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "只验证有限非负人工价格与缺失行。负价、无穷、非法字符串及真实行情输入不在验证域内；未核预测、收益、交易。首次回放脚本与资格阶段标注缺陷保留原件并有增量勘误，使用replay.py只读复核。",
+        "仅人工合成输入；真实资料未合格"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    },
+    {
+      "reference": "mixed.pullback_ma_distance@2.0.0",
+      "id": "mixed.pullback_ma_distance",
+      "version": "2.0.0",
+      "name": "入场均线组最近距离",
+      "formal_name": "入场均线组最近距离",
+      "object_type": "feature",
+      "category": "回调位置",
+      "purpose": "在20、60、120日指数及简单均线中，找出价格离哪条线最近、相距多少。",
+      "scope": "单一标的（宽基/ETF）日线时序描述",
+      "formula": "pmd[t] = min(|close[t] - M[t]| / M[t])，M ∈ {EMA,SMA} × {20,60,120}",
+      "unit": "ratio（非负；分子为绝对距离，分母为该均线自身值）",
+      "input": "[\"close（前复权；OHLCV 为复用 compute_features 的伴随列）\"]；前复权（随登记表 sources 口径）",
+      "time": "交易日收盘；同收盘（只用当日及此前数据，因果）",
+      "asset_classes": [
+        "ETF"
+      ],
+      "calculation": {
+        "status": "verified",
+        "scope": "仅2.0.0精确入口的本地人工合成数值验证：8组每卡1303行、两卡共2606行；独立原始价格重建、主控闭式EMA重算、62边界及前缀/缩放核对通过。不证明真实价格与行动资料合格、预测/投资价值、research_ready、生产或交易授权；旧1.0.0状态不继承。"
+      },
+      "research": {
+        "stage": "unbound",
+        "result": "unknown",
+        "summary": "本页尚未绑定这张定义卡的真实市场效果材料；这不代表全仓没有研究。",
+        "evidence_date": null
+      },
+      "limitations": [
+        "只验证有限非负人工价格与缺失行。负价、无穷、非法字符串及真实行情输入不在验证域内；未核预测、收益、交易。首次回放脚本与资格阶段标注缺陷保留原件并有增量勘误，使用replay.py只读复核。",
+        "仅人工合成输入；真实资料未合格"
+      ],
+      "next_steps": [],
+      "experiment_ids": [],
+      "sources": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
+        }
+      ],
+      "source_error": null
+    }
+  ],
+  "experiments": [
+    {
+      "id": "etf-raw-momentum-21d-b1-20260923",
+      "title": "六只ETF普通动量与后续21日表现",
+      "kind": "predictive_study",
+      "run_status": "completed",
+      "review_status": "partial",
+      "review_summary": "主要数值经主控独立核对，资料完整性检查已事后修正；整批最终书面结案仍待完成。",
+      "conclusion": "六只固定ETF的历史排序关系已计算；预先规定的正向线索筛选未通过。",
+      "result": "no_help",
+      "baseline": "六只平均及固定低二；只比较后续表现，没有交易账户。",
+      "costs": "未计算费用、成交或持仓。",
+      "references": [
+        "mixed.momentum.raw@1.0.0"
+      ],
+      "products": [
+        {
+          "code": "510300.SS",
+          "name": "510300.SS"
+        },
+        {
+          "code": "510050.SS",
+          "name": "510050.SS"
+        },
+        {
+          "code": "510500.SS",
+          "name": "510500.SS"
+        },
+        {
+          "code": "512100.SS",
+          "name": "512100.SS"
+        },
+        {
+          "code": "159915.SZ",
+          "name": "159915.SZ"
+        },
+        {
+          "code": "588000.SS",
+          "name": "588000.SS"
+        }
+      ],
+      "period": {
+        "start": "2022-01-01",
+        "end": "2026-06-30"
+      },
+      "data_cutoff": "2026-06-30",
+      "run_at": "2026-09-23T03:25:00.244704+00:00",
+      "reviewed_at": "2026-09-23",
+      "sample": [
+        {
+          "label": "有效排名日期",
+          "value": 1062,
+          "unit": "日",
+          "meaning": "六只齐全且后续目标可用的共同交易日"
+        },
+        {
+          "label": "固定不重叠日期",
+          "value": 51,
+          "unit": "日",
+          "meaning": "预定每21个共同交易日取一次"
+        }
+      ],
+      "metrics": [
+        {
+          "label": "全期平均排名关系",
+          "value": 0.02082324455205811,
+          "unit": "ratio",
+          "meaning": "六只当期与后续表现名次关系，非胜率"
+        },
+        {
+          "label": "高二减低二后续表现差",
+          "value": 0.00012344825200395667,
+          "unit": "fraction",
+          "meaning": "21日后续平均涨幅差，非账户利润"
+        },
+        {
+          "label": "不重叠日期排名关系",
+          "value": -0.04985994397759102,
+          "unit": "ratio",
+          "meaning": "固定日期子集的平均关系"
+        },
+        {
+          "label": "不重叠日期高低差",
+          "value": -0.001973533517991655,
+          "unit": "fraction",
+          "meaning": "固定日期子集的后续平均涨幅差"
+        }
+      ],
+      "result_tables": [
+        {
+          "title": "按观察时期",
+          "columns": [
+            {
+              "key": "period",
+              "label": "时期",
+              "unit": ""
+            },
+            {
+              "key": "dates",
+              "label": "有效日期",
+              "unit": "日"
+            },
+            {
+              "key": "relation",
+              "label": "平均排名关系",
+              "unit": "ratio"
+            },
+            {
+              "key": "difference",
+              "label": "高二减低二",
+              "unit": "fraction"
+            }
+          ],
+          "rows": [
+            {
+              "period": "2022",
+              "dates": 240,
+              "relation": 0.03809523809523805,
+              "difference": -0.0004558276681522741
+            },
+            {
+              "period": "2023",
+              "dates": 242,
+              "relation": 0.037544273907910264,
+              "difference": 0.001368552659951617
+            },
+            {
+              "period": "2024",
+              "dates": 242,
+              "relation": -0.03872491145218416,
+              "difference": -0.01689186610098958
+            },
+            {
+              "period": "2025",
+              "dates": 243,
+              "relation": -0.0673721340388008,
+              "difference": 0.007072997538070499
+            },
+            {
+              "period": "2026H1",
+              "dates": 95,
+              "relation": 0.3118796992481203,
+              "difference": 0.02398320142068216
+            }
+          ],
+          "note": "按观察期分组；这些不是年度投资收益。"
+        }
+      ],
+      "limitations": [
+        "六只产品事后固定且未来区间重叠，不能外推为完整市场。",
+        "没有费用、成交、持仓或完整资金账户结果。",
+        "历史资料到达时刻不完整，不代表当时可实时使用。"
+      ],
+      "next_steps": [
+        "等待主控完成最终书面结案；是否扩大产品验证另行冻结研究。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/protocol.json",
+          "sha256": "29e47deed9b1964517ef3d2f592e4d9115dd4a2559698ecccb0003a8627e56db",
+          "role": "protocol"
+        },
+        {
+          "path": "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/formal/summary.json",
+          "sha256": "43699eb706cd872bf8256db933010e25ca6ee2562cf13775b23502951b995e39",
+          "role": "summary"
+        },
+        {
+          "path": "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/independent/summary.json",
+          "sha256": "43699eb706cd872bf8256db933010e25ca6ee2562cf13775b23502951b995e39",
+          "role": "independent"
+        },
+        {
+          "path": "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/formal/run-record.json",
+          "sha256": "1d6e505161515641259d26415b625896cc5384f4a148fa84fe963ecf51d6a5f6",
+          "role": "run"
+        },
+        {
+          "path": "docs/archive/handoffs-plans/factor-b-route-2026-09-22/b1-controller-repair-review-2026-09-23.md",
+          "sha256": "efb54a72aa67f0320cc36dac94198feedbb79ebeba2e3aa7c60658786a26ed8a",
+          "role": "controller"
+        },
+        {
+          "path": "docs/experiments/raw/factor-b1-evidence-repair-2026-09-23/impact-review.md",
+          "sha256": "fb3f9e78d57a7f39458b8d69ed6f37b596182a3ff4d986f921613988a6f90871",
+          "role": "repair"
+        },
+        {
+          "path": "docs/archive/handoffs-plans/factor-b-route-2026-09-22/lei-road-s0-controller-review-2026-09-23.md",
+          "sha256": "6bcd4eb0adc17d0450eb2167a0800888ec609d3387a8f0b0edff3e1b8f6e555e",
+          "role": "latest_review"
+        }
+      ],
+      "report_registration": null
+    },
+    {
+      "id": "lei-dual-ma-b1-20260916",
+      "title": "510300双均线20日状态与后续价格变化",
+      "kind": "price_description",
+      "run_status": "completed",
+      "review_status": "partial",
+      "review_summary": "主控限定接受固定快照的历史描述与补件；流程偏差和历史资料限制保留。",
+      "conclusion": "成立组之后的平均价格变化较高，但七个年份只有两年更好，不能认为稳定有效。",
+      "result": "conditional",
+      "baseline": "同一510300历史中双均线状态未成立的观察。",
+      "costs": "未计算交易费用或账户收益。",
+      "references": [
+        "candidate:lei.dual_ma.bull_state@draft-1"
+      ],
+      "products": [
+        {
+          "code": "510300",
+          "name": "510300"
+        }
+      ],
+      "period": {
+        "start": "2019-10-08",
+        "end": "2025-12-31"
+      },
+      "data_cutoff": null,
+      "run_at": null,
+      "reviewed_at": "2026-09-16",
+      "sample": [
+        {
+          "label": "成立组观察",
+          "value": 590,
+          "unit": "次",
+          "meaning": "状态成立且后续目标可用"
+        },
+        {
+          "label": "未成立组观察",
+          "value": 926,
+          "unit": "次",
+          "meaning": "状态未成立且后续目标可用"
+        }
+      ],
+      "metrics": [
+        {
+          "label": "成立组后续均值",
+          "value": 0.010424288924092265,
+          "unit": "return_fraction",
+          "meaning": "之后21个价格变化区间，非账户利润"
+        },
+        {
+          "label": "未成立组后续均值",
+          "value": 0.0034083643415440874,
+          "unit": "return_fraction",
+          "meaning": "之后21个价格变化区间，非账户利润"
+        }
+      ],
+      "result_tables": [
+        {
+          "title": "按观察年",
+          "columns": [
+            {
+              "key": "period",
+              "label": "观察年",
+              "unit": ""
+            },
+            {
+              "key": "true_n",
+              "label": "成立次数",
+              "unit": "次"
+            },
+            {
+              "key": "true_mean",
+              "label": "成立组均值",
+              "unit": "return_fraction"
+            },
+            {
+              "key": "false_n",
+              "label": "未成立次数",
+              "unit": "次"
+            },
+            {
+              "key": "false_mean",
+              "label": "未成立组均值",
+              "unit": "return_fraction"
+            }
+          ],
+          "rows": [
+            {
+              "period": "2019",
+              "true_n": 23,
+              "true_mean": -0.009511365875061295,
+              "false_n": 38,
+              "false_mean": 0.02818619480280985
+            },
+            {
+              "period": "2020",
+              "true_n": 146,
+              "true_mean": 0.037099852472615456,
+              "false_n": 97,
+              "false_mean": 0.02846953440481755
+            },
+            {
+              "period": "2021",
+              "true_n": 85,
+              "true_mean": -0.017262652296758163,
+              "false_n": 158,
+              "false_mean": -0.008105551008209474
+            },
+            {
+              "period": "2022",
+              "true_n": 54,
+              "true_mean": 0.013773208232940324,
+              "false_n": 188,
+              "false_mean": -0.01769831865399306
+            },
+            {
+              "period": "2023",
+              "true_n": 54,
+              "true_mean": -0.02187103867956198,
+              "false_n": 188,
+              "false_mean": -0.016791598781578484
+            },
+            {
+              "period": "2024",
+              "true_n": 86,
+              "true_mean": -0.0023984553241459153,
+              "false_n": 156,
+              "false_mean": 0.029981869578059185
+            },
+            {
+              "period": "2025",
+              "true_n": 142,
+              "true_mean": 0.021573161032095438,
+              "false_n": 101,
+              "false_mean": 0.023872623995079823
+            }
+          ],
+          "note": "逐年方向不一致，价格变化比例不是年度账户收益。"
+        }
+      ],
+      "limitations": [
+        "单一510300、前复权快照事后取得，不能证明当时可得。",
+        "相邻21日观察区间重叠，不是独立交易或账户收益。",
+        "七个年份只有两年成立组平均表现更好。",
+        "协议中的目标成熟截止不是输入资料截止日；本展示没有可核实的输入资料末日。"
+      ],
+      "next_steps": [
+        "其他市场与含成本策略效果需另行研究。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/protocol-v1.0.1.json",
+          "sha256": "00a16465e5232d3760cedbe9bccb5332b05e4f777f1732e8911ee586974c3af2",
+          "role": "protocol"
+        },
+        {
+          "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/summary.json",
+          "sha256": "ce4c51ba5e0d7bb7f7e10630b07fc106a59c98f0d4f57ac290f861164c9bfcf7",
+          "role": "summary"
+        },
+        {
+          "path": "docs/experiments/b1-dual-ma-first-real-description-2026-09-16.md",
+          "sha256": "b54ef5d112e28b191a89eaa6a8fa190b43067e26820b02ca7760ef4cb52a7c90",
+          "role": "report"
+        },
+        {
+          "path": "docs/experiments/b1-closeout-controller-2026-09-16.md",
+          "sha256": "7ba4484223b027f3156e0355a1d64a55b19656a7e1fb8b3b987fa86e7e102f64",
+          "role": "controller"
+        }
+      ],
+      "report_registration": {
+        "category": "模块与信号",
+        "verdict": "mixed",
+        "oneLiner": "510300双均线首轮历史描述：成立组均值1.042%、未成立组0.341%，但逐年均值差2正5负。主控已完成限定收口，流程偏差保留；不是预测能力或交易利润。"
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": "lei-road-s0-20260923",
+      "title": "LEI道路背景：六线与20日共同确认",
+      "stage": "in_progress",
+      "summary": "来源与只收盘接口已做首阶段检查；真实历史表现尚未运行。",
+      "review_status": "partial",
+      "references": [],
+      "evidence_date": "2026-09-23",
+      "sources": [
+        {
+          "path": "docs/archive/handoffs-plans/factor-b-route-2026-09-22/lei-road-s0-controller-review-2026-09-23.md",
+          "sha256": "6bcd4eb0adc17d0450eb2167a0800888ec609d3387a8f0b0edff3e1b8f6e555e"
+        },
+        {
+          "path": "docs/experiments/raw/lei-road-s0-2026-09-23/s0-review.md",
+          "sha256": "80005feae4ea9d6bd8f4f81f846c405c45f179d073d3aa79170ee32ee1ea7551"
+        }
+      ],
+      "limitations": [
+        "512100有一日整行无报价且原因未明；接口核验不等于历史效果。"
+      ],
+      "next_steps": [
+        "先完成来源用途与接口边界复核，真实效果另行冻结。"
+      ]
+    },
+    {
+      "id": "dual-ma-resonance-20260923",
+      "title": "20/60/120日双均线及组间共同确认",
+      "stage": "in_progress",
+      "summary": "三组及共同确认的研究设计已交付，尚未计算新历史效果。",
+      "review_status": "pending",
+      "references": [],
+      "evidence_date": "2026-09-23",
+      "sources": [
+        {
+          "path": "docs/archive/handoffs-plans/factor-b-route-2026-09-22/dual-ma-resonance-dispatch-2026-09-23.md",
+          "sha256": "1e37827319b2713f8c2b9c636d9769c65c5c58928d77ff423e2f5ef2262f41f1"
+        },
+        {
+          "path": "docs/experiments/raw/dual-ma-resonance-design-2026-09-23/delivery.md",
+          "sha256": "276624ac4dc04453c995c468875e6da0feec6640245560b4a0bbd1741921159f"
+        }
+      ],
+      "limitations": [
+        "这是设计包，不是60/120日及共同确认的真实效果。"
+      ],
+      "next_steps": [
+        "等待主控审阅设计与输入；真实历史描述另行冻结。"
+      ]
+    }
+  ]
+}

@@ -54,13 +54,17 @@
 
 ## 交易研究与回测必读
 
-研究入口：`docs/research/experiment-backtest-principles.md` v1.1（原则、对照与验收）；
-派发与交接读 `docs/research/ai-execution-contract.md` v1.0.1；主控每轮复核须交付可交回执行 agent 的书面报告。
-涉及定义另读 `docs/research/definition-standard.md` v1.1.0，从唯一登记表
-`docs/research/definitions.v1.json` 解析准确 `对象ID@版本`；模板为
-`docs/research/experiment-report-template.md` v1.1.0；文献与外部方法读
+新研究的当前路径、版本统一读取 `docs/research/current-standards.json`，不用本文的
+历史版本号推断；原则、执行合同、定义规范和报告模板均由该索引定位。主控每轮
+复核须交付可交回执行 agent 的书面报告。从唯一登记表
+`docs/research/definitions.v1.json` 解析准确 `对象ID@版本`；文献与外部方法读
 `docs/literature-learning/README.md` v1.1.0。各任务绑定实际路径、版本/指纹、输入及冻结协议，
 不假设子任务自动继承。新任务显式采用；既有 v0/冻结实验保留原规范快照，不中途扩项或倒填版本。
+
+学习经典因子的分类、研究思路与实验过程时，使用现有文献学习库的
+`docs/literature-learning/classic-research-process-2026-09-29.md`（学习路线 `classic-process`，
+前端 `/learning?path=classic-process`）。其中区分原文方法、本库延伸和既有双均线真实案例；
+学习资料不替代本轮研究合同，不代表因子已实现、有效或获准交易，也不要求重跑已完成实验。
 
 先分清核验、预测、状态、政策对照、风险执行与收益解释，不统一强制相关性或回归。
 复现、纠错、优化分开；不调参、换基准、覆盖封存或伪造证据。资金贡献、决策差额和
@@ -181,3 +185,17 @@ bootstrap、Calmar、expR、PF、样本内/样本外、走查（walk-forward）*
   什么、对用户实际有什么意义——不能让用户翻完整份报告才搞懂讲的是什么。
 - 如果一个术语确实没有更简单的说法（比如"宽度"这个系统专用概念本身），
   第一次出现时要用一句话定义它，不能假设读者已经知道。
+
+<!-- research-closure:project:start -->
+## 研究闭环入口（新任务显式采用，旧冻结合同不变）
+
+新技术信息研究走 `scripts/run_factor_lab.py --workflow-draft`（实际资料检查、
+合成演练、冻结）→ `--workflow-contract`（检查在统计前执行）→ `--register-report`
+（重新核数与来源后登记）。用法及已覆盖/未覆盖入口见
+`docs/research/research-workflow-usage.md`。新特征适配器先在研究工具层绑定准确
+定义和代码，不从归档 raw/run.py 导入正式实现。检查通过不代表科学设计合格；
+范围、代理、方法及结论由主控留下理由。阴性可 completed；预算中断是 paused。
+本负责人不执行情绪、宽度、宏观、账户政策或生产交易；旧冻结合同和入口不迁移。
+
+跨项目的继续、停止、交付与恢复流程使用用户级 `$research-closure`；项目委派和回调仍由 `.agents/skills/lei-gpt-zcode-orchestrator/SKILL.md` 管理。先复用本项目权威规范、定义、报告模板、实验账本和 manifest；通用默认值不扩大原预算和授权，不重启已有绿色/黑色研究。默认由 AI 自主设计和完成必要实验，中间结果留在产物中，最后一次性交付因子性能、相对已有信息的增量和适用范围；不逐项请求继续。只在关键定义、数据或权限确实阻塞时合并提问，用户主动要求进度或阶段交付时服从。
+<!-- research-closure:project:end -->

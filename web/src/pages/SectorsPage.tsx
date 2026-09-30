@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import * as echarts from "echarts";
 import { sectorsApi, sentimentApi } from "../api/client";
 import { etfsForSector } from "../data/sectorEtfMap";
+import { compareObservationValues, compareSectorRankRows, stageMissingLabel, stageMissingReason } from "./sectorObservationLogic";
+import "./sector-observation.css";
 import { fmt, fmtYi, pctClass } from "../utils/format";
 import ColorBadge from "../components/ColorBadge";
 import OverlayChart, { type OverlaySeries } from "../components/trend/OverlayChart";
@@ -35,24 +37,15 @@ const STAGE_HEX: Record<string, string> = {
   accumulation: "#4d7fc4",
   distribution: "#c08a1f",
   decline: "#d24a43",
-  "": "#9aa4b2",
+  "": "#8c96a8",
 };
 
 const STARS_KEY = "biao.sector.stars";
-const MACD_BLIND_SPOT =
-  "MACD 盲区：柱/线背离需结合量价与均线斜率；本列为研究代理补充，非买卖建议。";
-
 type SortKey =
   | "stage"
   | "rs_pctile"
   | "rs_pctile_delta_20"
-  | "rs_chg_60"
-  | "pct_change"
-  | "b50"
-  | "nh60"
-  | "flow_20d_main_yi"
-  | "heat_pctile"
-  | "pe_ttm";
+  | "b50";
 
 /** 级别筛选：仅 L1（31 个一级行业）/ 含二级 / 全部层级 / 重点+自选。 */
 type LevelMode = "l1" | "l2" | "all" | "focus";
@@ -123,6 +116,7 @@ function median(xs: number[]): number | null {
 }
 
 export default function SectorsPage() {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [sortKey, setSortKey] = useState<SortKey>("rs_pctile");
   const [sortAsc, setSortAsc] = useState(false);
@@ -136,7 +130,7 @@ export default function SectorsPage() {
   const [showTails, setShowTails] = useState(true);
   const [helpOpen, setHelpOpen] = useState(false);
 
-  const { data, error } = useQuery({
+  const { data, error, isLoading } = useQuery({
     queryKey: ["sectorsTrend"],
     queryFn: () => sectorsApi.trend(false, "all"),
     staleTime: 5 * 60_000,
@@ -177,18 +171,14 @@ export default function SectorsPage() {
         (b) => b.name.toLowerCase().includes(k) || b.code.toLowerCase().includes(k),
       );
     }
-    const dir = sortAsc ? 1 : -1;
     return [...list].sort((a, b) => {
-      let av: number;
-      let bv: number;
       if (sortKey === "stage") {
-        av = STAGE_ORDER[a.stage ?? ""] ?? 0;
-        bv = STAGE_ORDER[b.stage ?? ""] ?? 0;
-      } else {
-        av = (a[sortKey] as number | null) ?? -1e18;
-        bv = (b[sortKey] as number | null) ?? -1e18;
+        return compareObservationValues(a.stage == null ? null : STAGE_ORDER[a.stage], b.stage == null ? null : STAGE_ORDER[b.stage], sortAsc);
       }
-      return (bv - av) * dir;
+      if (sortKey === "rs_pctile" || sortKey === "rs_pctile_delta_20") {
+        return compareSectorRankRows(a, b, sortKey, sortAsc);
+      }
+      return compareObservationValues(a[sortKey] as number | null, b[sortKey] as number | null, sortAsc);
     });
   }, [levelRows, onlyStars, keyword, stageFilter, sortKey, sortAsc, stars]);
 
@@ -221,12 +211,7 @@ export default function SectorsPage() {
           <h1>行业板块</h1>
           {data && (
             <span className="sx-meta">
-              交易日 {data.trading_day} · 更新{" "}
-              {new Date(data.as_of).toLocaleTimeString("zh-CN", {
-                hour12: false,
-                hour: "2-digit",
-                minute: "2-digit",
-              })}{" "}
+              快照截至 {data.trading_day || data.date || "未知"} · 生成时点 {data.as_of ? new Date(data.as_of).toLocaleString("zh-CN", { hour12: false }) : "未知"}{" "}
               · 等权合成 research_proxy
             </span>
           )}
@@ -248,11 +233,16 @@ export default function SectorsPage() {
           </button>
         </div>
       </div>
+      {data && (
+        <div className="sx-snapshot-notice" role="status">
+          截至 {data.trading_day || data.date || "未知"} 的历史快照；最新交易日尚未核实，生成时间不代表行情更新。
+        </div>
+      )}
       {helpOpen && <HelpCard note={data?.research_proxy_note} onClose={() => setHelpOpen(false)} />}
       {error && (
         <div className="fund-errors">
-          加载失败：{(error as Error).message}
-          <div className="fund-hint">请先在本机跑 scripts/precompute_sector_trend.py 生成快照。</div>
+          板块资料读取失败，请稍后重试。
+          <div className="fund-hint">目前无法确认可用的板块快照。</div>
         </div>
       )}
 
@@ -312,11 +302,11 @@ export default function SectorsPage() {
           </div>
 
           <div className="sx-tablewrap">
-            <table className="sx-table">
+            <table className="sx-table sx-observation-table">
               <thead>
                 <tr>
                   <th className="col-star"></th>
-                  <th title="板块名称与级别（L1=一级行业 / L2=二级细分 / L3=三级）；色点=BIAO 长趋势">板块</th>
+                  <th title="板块名称与级别（L1=一级行业 / L2=二级细分 / L3=三级）；色点=BIAO 长趋势">行业 / ETF</th>
                   <SortableTh
                     label="阶段"
                     sortKey="stage"
@@ -326,83 +316,24 @@ export default function SectorsPage() {
                     tip="BIAO 市场阶段：上升=机会 / 筑底=中性 / 派发=谨慎 / 下降=危险（绿=上升与 A 股红涨无关）"
                   />
                   <SortableTh
-                    label="RS位"
+                    label="RS强弱排名"
                     sortKey="rs_pctile"
                     cur={sortKey}
                     asc={sortAsc}
                     onToggle={toggleSort}
-                    tip="相对全 A 等权基准的强弱百分位：0 最弱、100 最强，50 为强弱分界"
+                    tip="相对全 A 等权基准的强弱排名：0 最弱、100 最强，不代表收益百分点；按现有行业层级分组比较"
                   />
+                  <th className="num" title="RS强弱排名近20日变化">强弱变化</th>
                   <SortableTh
-                    label="RS20Δ"
-                    sortKey="rs_pctile_delta_20"
-                    cur={sortKey}
-                    asc={sortAsc}
-                    onToggle={toggleSort}
-                    tip="RS 百分位近 20 日变化：正=相对强度在改善，负=走弱"
-                  />
-                  <SortableTh
-                    label="60日%"
-                    sortKey="rs_chg_60"
-                    cur={sortKey}
-                    asc={sortAsc}
-                    onToggle={toggleSort}
-                    tip="板块近 60 个交易日涨跌幅"
-                  />
-                  <SortableTh
-                    label="当日%"
-                    sortKey="pct_change"
-                    cur={sortKey}
-                    asc={sortAsc}
-                    onToggle={toggleSort}
-                    tip="板块当日涨跌幅（红涨绿跌）"
-                  />
-                  <SortableTh
-                    label="b50"
+                    label="50个交易日均线占比"
                     sortKey="b50"
                     cur={sortKey}
                     asc={sortAsc}
                     onToggle={toggleSort}
-                    tip="成分股站上 MA50 的比例：板块内部宽度，高=共识强"
+                    tip="成分股中，收盘价高于50个交易日均线的比例；反映板块内部走势是否普遍"
                   />
-                  <SortableTh
-                    label="nh60"
-                    sortKey="nh60"
-                    cur={sortKey}
-                    asc={sortAsc}
-                    onToggle={toggleSort}
-                    tip="60 日新高家数占比：板块内创新高的广度"
-                  />
-                  <SortableTh
-                    label="20日主力"
-                    sortKey="flow_20d_main_yi"
-                    cur={sortKey}
-                    asc={sortAsc}
-                    onToggle={toggleSort}
-                    tip="近 20 日主力（超大+大单）累计净流入（亿元，单据规模代理，覆盖约 14% 板块）"
-                  />
-                  <SortableTh
-                    label="散户热度"
-                    sortKey="heat_pctile"
-                    cur={sortKey}
-                    asc={sortAsc}
-                    onToggle={toggleSort}
-                    tip="散户热度分位（0-100）：小单−超大单净流入分化（相对市值，20 日均），当日全部板块横截面排名。资金流零和（散户净流入≡主力净流出），热度高=筹码向小单集中；过热×上升/派发阶段亮警示。研究代理·只预警非买卖点"
-                  />
-                  <th className="num" title="均线排列 · MACD 形态（辅助验证）">
-                    均线/MACD
-                  </th>
-                  <SortableTh
-                    label="PE"
-                    sortKey="pe_ttm"
-                    cur={sortKey}
-                    asc={sortAsc}
-                    onToggle={toggleSort}
-                    tip="市盈率 TTM，负值=亏损"
-                  />
-                  <th className="num" title="命中板块规则的成分股数 / 总成分股数">
-                    成分
-                  </th>
+                  <th>下一观察条件</th>
+                  <th className="num">日期</th>
                 </tr>
               </thead>
               <tbody>
@@ -427,6 +358,15 @@ export default function SectorsPage() {
                       <span className="symbol">
                         L{b.level}·{b.code}
                       </span>
+                      {etfsForSector(b.name).length > 0 && (
+                        <span className="sx-row-etfs">
+                          {etfsForSector(b.name).slice(0, 2).map((etf) => (
+                            <button key={etf.symbol} className="sector-etf-btn" type="button" onClick={(e) => { e.stopPropagation(); navigate(`/?symbol=${encodeURIComponent(etf.symbol)}`); }}>
+                              {etf.name}
+                            </button>
+                          ))}
+                        </span>
+                      )}
                     </td>
                     <td className="num">
                       {b.stage ? (
@@ -442,7 +382,10 @@ export default function SectorsPage() {
                           {STAGE_CN[b.stage]}
                         </span>
                       ) : (
-                        <span className="muted">样本不足</span>
+                        <>
+                          <span className="muted" title={stageMissingReason(b)}>{stageMissingLabel(b)}</span>
+                          <span className="sx-stage-why">{stageMissingReason(b)}</span>
+                        </>
                       )}
                     </td>
                     <td className="num">
@@ -451,66 +394,17 @@ export default function SectorsPage() {
                     <td className={`num ${pctClass(b.rs_pctile_delta_20)}`}>
                       {fmt(b.rs_pctile_delta_20, 1)}
                     </td>
-                    <td className={`num ${pctClass(b.rs_chg_60)}`}>{fmt(b.rs_chg_60, 1, "%")}</td>
-                    <td className={`num ${pctClass(b.pct_change)} strong`}>
-                      {fmt(b.pct_change, 2, "%")}
-                    </td>
                     <td className="num">
                       <BarCell v={b.b50} digits={0} color="#c08a1f" />
                     </td>
-                    <td className="num">{fmt(b.nh60, 0)}</td>
-                    <td className={`num ${b.flow_20d_main_yi != null && b.flow_20d_main_yi > 0 ? "up" : b.flow_20d_main_yi != null && b.flow_20d_main_yi < 0 ? "down" : ""}`}>
-                      {b.flow_20d_main_yi == null ? (
-                        <span className="muted">-</span>
-                      ) : (
-                        <span
-                          title={b.flow_vs_stage_cn ? `阶段交叉验证：${b.flow_vs_stage_cn}` : undefined}
-                        >
-                          {b.flow_20d_main_yi.toFixed(0)}
-                        </span>
-                      )}
-                    </td>
-                    <td className="num">
-                      {b.heat_pctile == null ? (
-                        <span className="muted">-</span>
-                      ) : (
-                        <span
-                          className={`sx-heat${b.heat_warning ? " warn" : b.heat_hot ? " hot" : ""}`}
-                          title={
-                            b.heat_note_cn ??
-                            `散户热度分位 ${b.heat_pctile}（小单−超大单分化·20日·横截面，research_proxy）`
-                          }
-                        >
-                          {b.heat_pctile.toFixed(0)}
-                          {b.heat_warning && <b className="sx-heat-flag">过热</b>}
-                          {b.sig_heat_alarm && <b className="sx-heat-flag alarm" title={b.sig_note_cn ?? undefined}>强热</b>}
-                          {b.sig_icepoint_pick && <b className="sx-heat-flag ice" title={b.sig_note_cn ?? undefined}>冰点关注</b>}
-                        </span>
-                      )}
-                    </td>
-                    <td
-                      className="num sx-tech"
-                      title={
-                        b.macd_label_cn
-                          ? `${b.alignment_cn ?? "-"}｜${b.macd_label_cn}｜${b.macd_detail_cn ?? ""}｜${MACD_BLIND_SPOT}`
-                          : MACD_BLIND_SPOT
-                      }
-                    >
-                      {(b.alignment_cn ?? "-").replace("排列", "")}
-                      {b.macd_status ? ` · ${b.macd_status}` : ""}
-                    </td>
-                    <td className="num">
-                      {b.pe_ttm == null ? "-" : b.pe_ttm < 0 ? "亏" : b.pe_ttm.toFixed(0)}
-                    </td>
-                    <td className="num sx-dim-num">
-                      {b.hit_count}/{b.member_count}
-                    </td>
+                    <td className="sx-next-watch-cell">{b.next_watch ?? "—"}</td>
+                    <td className="num sx-observation-date">{data?.trading_day || data?.date || "未知"}</td>
                   </tr>
                 ))}
                 {visibleRows.length === 0 && (
                   <tr>
-                    <td colSpan={14} className="muted">
-                      无匹配板块（请先运行预计算脚本）
+                    <td colSpan={8} className="muted">
+                      {isLoading ? "板块资料加载中…" : rows.length ? "没有符合当前筛选条件的板块" : "暂无可用的板块快照"}
                     </td>
                   </tr>
                 )}
@@ -519,14 +413,14 @@ export default function SectorsPage() {
           </div>
         </div>
 
-        {/* ── 右栏：散户热度榜 + 轮动 RRG + 动能榜 + 今日观察（sticky）── */}
+        {/* ── 右栏：小单与超大单差额排名 + 轮动 RRG + 动能榜 + 快照观察（sticky）── */}
         <aside className="sx-rail">
           <HeatBoardCard rows={rows} heat={data?.heat} onPick={pickByCode} />
 
           <section className="sx-rail-card">
             <div className="sx-rail-head">
               <span className="sx-rail-title">轮动 RRG</span>
-              <span className="sx-rail-sub">X=RS位 · Y=RS20Δ</span>
+              <span className="sx-rail-sub">X=RS强弱排名 · Y=近20日变化</span>
               <span className="spacer" />
               <button
                 className={`sx-mini-btn${showTails ? " on" : ""}`}
@@ -562,9 +456,7 @@ export default function SectorsPage() {
   );
 }
 
-// ── 散户热度榜：全板块视角，风险区/机会区双段 ────────────────────────────────
-// 阈值来自规则账本（快照 heat meta），当前为回测校准前的占位刻度：
-// 风险线=散户狂买·超大单派发；机会线=散户割肉·超大单吸筹（反向关注）。
+// ── 小单与超大单差额排名：按既有快照分组展示，不推断参与者身份 ─────────────
 function HeatBoardCard({
   rows,
   heat,
@@ -578,19 +470,19 @@ function HeatBoardCard({
   return (
     <section className="sx-rail-card">
       <div className="sx-rail-head">
-        <span className="sx-rail-title">散户热度榜</span>
+        <span className="sx-rail-title">小单与超大单差额排名</span>
         <span className="sx-rail-sub">
-          {heat ? `${heat.window_days}日 · 小单−超大单分化` : "小单−超大单分化"}
+          {heat ? `${heat.window_days}日 · 小单与超大单金额差额` : "小单与超大单金额差额"}
         </span>
       </div>
       {!heat || valid.length < 20 ? (
         <div className="watch-empty">
-          数据累积中（热度需连续 20 个交易日资金流，覆盖 {valid.length}/{rows.length} 板块）
+          当前可用资料不足（排名需连续 20 个交易日资金流，覆盖 {valid.length}/{rows.length} 个板块）
         </div>
       ) : (
         <>
           <div className="sx-heat-zone risk">
-            情绪高位 ≥{heat.hot_pctile.toFixed(0)}：散户买入最集中（中性参考）
+            差额排名较高（≥{heat.hot_pctile.toFixed(0)}）：相对排名靠前（中性参考）
           </div>
           {valid
             .filter((b) => b.heat_hot && b.level <= 2)
@@ -601,12 +493,12 @@ function HeatBoardCard({
                 key={b.code}
                 className={`sx-heat-row${b.heat_warning ? " warn" : ""}`}
                 onClick={() => onPick(b.code)}
-                title={b.heat_note_cn ?? `散户热度分位 ${b.heat_pctile}（research_proxy）`}
+                title={`小单与超大单差额排名 ${b.heat_pctile}（中性参考，不识别投资者身份）`}
               >
                 <span className="sx-heat-name">
                   <i
                     className="sx-biao-dot"
-                    style={{ background: b.stage ? STAGE_HEX[b.stage] : "#9aa4b2" }}
+                    style={{ background: b.stage ? STAGE_HEX[b.stage] : "#8c96a8" }}
                   />
                   {b.name}
                   <em>L{b.level}</em>
@@ -615,7 +507,7 @@ function HeatBoardCard({
               </button>
             ))}
           <div className="sx-heat-zone opp">
-            情绪冰点 ≤{(heat.cold_pctile ?? 0).toFixed(0)}：散户流出最集中（中性参考）
+            {heat.cold_pctile == null ? "差额排名较低：当前没有可用门槛" : `差额排名较低（≤${heat.cold_pctile.toFixed(0)}）：相对排名靠后（中性参考）`}
           </div>
           {valid
             .filter((b) => b.heat_cold && b.level <= 2)
@@ -626,12 +518,12 @@ function HeatBoardCard({
                 key={b.code}
                 className="sx-heat-row cold"
                 onClick={() => onPick(b.code)}
-                title={b.heat_note_cn ?? `散户热度分位 ${b.heat_pctile}（research_proxy）`}
+                title={`小单与超大单差额排名 ${b.heat_pctile}（中性参考，不识别投资者身份）`}
               >
                 <span className="sx-heat-name">
                   <i
                     className="sx-biao-dot"
-                    style={{ background: b.stage ? STAGE_HEX[b.stage] : "#9aa4b2" }}
+                    style={{ background: b.stage ? STAGE_HEX[b.stage] : "#8c96a8" }}
                   />
                   {b.name}
                   <em>L{b.level}</em>
@@ -639,8 +531,8 @@ function HeatBoardCard({
                 <span className="sx-heat-val">{b.heat_pctile?.toFixed(0)}</span>
               </button>
             ))}
-          <div className="muted" style={{ fontSize: 11, marginTop: 6 }}>
-            仅一、二级行业上榜（排名池 {heat.n_pool} 个；细分板块热度见主表）· research_proxy（回测结案：过热/冰点均无短期预警价值，仅作情绪参考，非买卖点）· 港股资金流不覆盖
+          <div className="muted" style={{ fontSize: 12, marginTop: 6 }}>
+            仅一、二级行业上榜（排名池 {heat.n_pool} 个；细分板块数据不在此榜中）。该指标按供应商订单规模分类，不识别投资者身份；港股资金流不覆盖。
           </div>
         </>
       )}
@@ -683,7 +575,7 @@ function StatsStrip({ rows, total }: { rows: SectorTrendRow[]; total: number }) 
   const n = rows.length;
   const stageEntries = (
     ["markup", "accumulation", "distribution", "decline", ""] as const
-  ).map((k) => ({ key: k, cn: k ? STAGE_CN[k] : "样本不足", count: stats.stages[k] ?? 0 }));
+  ).map((k) => ({ key: k, cn: k ? STAGE_CN[k] : "未归入阶段/资料不足", count: stats.stages[k] ?? 0 }));
 
   return (
     <div className="sx-stats">
@@ -721,32 +613,36 @@ function StatsStrip({ rows, total }: { rows: SectorTrendRow[]; total: number }) 
       <div className="sx-stat">
         <div className="sx-stat-label">当日上涨</div>
         <div className="sx-stat-val">
-          <span className="up">{stats.up}</span>
-          <span className="sx-stat-dim">/{stats.hasPct}</span>
-          <span className="sx-stat-sub">
-            {stats.hasPct ? `${((stats.up / stats.hasPct) * 100).toFixed(0)}%` : "-"}
-          </span>
+          {stats.hasPct ? (
+            <>
+              <span className="up">{stats.up}</span>
+              <span className="sx-stat-dim">/{stats.hasPct}</span>
+              <span className="sx-stat-sub">{((stats.up / stats.hasPct) * 100).toFixed(0)}%</span>
+            </>
+          ) : <span className="sx-stat-sub">涨跌家数缺失</span>}
         </div>
       </div>
       <div className="sx-stat">
-        <div className="sx-stat-label">RS&gt;50 占比</div>
+        <div className="sx-stat-label">RS排名高于中位位置</div>
         <div className="sx-stat-val">
-          <span>{stats.rsStrong}</span>
-          <span className="sx-stat-dim">/{stats.hasRs}</span>
-          <span className="sx-stat-sub">
-            {stats.hasRs ? `${((stats.rsStrong / stats.hasRs) * 100).toFixed(0)}%` : "-"}
-          </span>
+          {stats.hasRs ? (
+            <>
+              <span>{stats.rsStrong}</span>
+              <span className="sx-stat-dim">/{stats.hasRs}</span>
+              <span className="sx-stat-sub">{((stats.rsStrong / stats.hasRs) * 100).toFixed(0)}%</span>
+            </>
+          ) : <span className="sx-stat-sub">RS排名资料不足</span>}
         </div>
       </div>
       <div className="sx-stat">
-        <div className="sx-stat-label">中位 b50</div>
+        <div className="sx-stat-label">中位50日线占比</div>
         <div className="sx-stat-val">
           {stats.medB50 == null ? "-" : stats.medB50.toFixed(0)}
-          <span className="sx-stat-sub">%在 MA50 上</span>
+          <span className="sx-stat-sub">%在50个交易日均线上</span>
         </div>
       </div>
       <div className="sx-stat">
-        <div className="sx-stat-label">中位 RS20Δ</div>
+        <div className="sx-stat-label">中位强弱排名变化（20日）</div>
         <div className="sx-stat-val">
           <span className={pctClass(stats.medRsD20)}>{fmt(stats.medRsD20, 1)}</span>
           <span className="sx-stat-sub">轮动动能</span>
@@ -774,16 +670,16 @@ function HelpCard({ note, onClose }: { note?: string; onClose: () => void }) {
               <td>上升=机会 / 筑底=中性 / 派发=谨慎 / 下降=危险。绿色系= BIAO 阶段色，与 A 股红涨绿跌无关。</td>
             </tr>
             <tr>
-              <td>RS位 / RS20Δ</td>
-              <td>相对全 A 等权的强弱百分位（50 为分界）；RS20Δ 为其 20 日变化，正=动能改善。</td>
+              <td>RS强弱排名（不是收益百分点） / RS20Δ</td>
+              <td>相对全 A 等权基准的强弱排名；50 仅表示排名中间位置，不代表跑赢基准。RS20Δ 是排名近 20 日变化，正数表示相对位置改善。</td>
             </tr>
             <tr>
-              <td>b50 / nh60</td>
-              <td>成分股站上 MA50 比例 / 60 日新高占比：板块内部宽度，验证趋势共识。</td>
+              <td>50日线占比 / 60日新高占比</td>
+              <td>成分股收盘高于50个交易日均线的比例 / 60 个交易日新高占比：板块内部宽度，验证趋势共识。</td>
             </tr>
             <tr>
-              <td>20日主力</td>
-              <td>超大+大单净流入（单据规模代理），只做阶段交叉验证，覆盖约 14% 板块。</td>
+              <td>订单规模资金流</td>
+              <td>供应商按订单规模分为超大+大单、中+小单，不识别投资者身份；只作阶段交叉查看，覆盖约 14% 板块。</td>
             </tr>
             <tr>
               <td>RRG</td>
@@ -909,7 +805,7 @@ function MoversCard({ rows, onPick }: { rows: SectorTrendRow[]; onPick: (code: s
   );
 }
 
-// ── 今日观察（道路层）：紧凑清单替代大卡片 ─────────────────────────────────
+// ── 快照观察（道路层）：紧凑清单替代大卡片 ─────────────────────────────────
 function WatchCard({ onPick }: { onPick: (code: string) => void }) {
   const { data } = useQuery({
     queryKey: ["sectorsWatchlist"],
@@ -920,8 +816,8 @@ function WatchCard({ onPick }: { onPick: (code: string) => void }) {
   return (
     <section className="sx-rail-card">
       <div className="sx-rail-head">
-        <span className="sx-rail-title">今日观察</span>
-        <span className="sx-rail-sub">道路层 · {data.trading_day}</span>
+        <span className="sx-rail-title">快照观察</span>
+        <span className="sx-rail-sub">道路层 · 截至 {data.trading_day || "未知"}</span>
       </div>
       <div className="sx-watch">
         {data.groups.map((g) => (
@@ -1068,7 +964,7 @@ function RrgPanel({
         formatter: (p: any) => {
           if (p.seriesType !== "scatter") return "";
           const d = p.data;
-          return `<b>${d[3]}</b>（${d[2]}）<br/>RS位 ${fmt(d[0], 0)} · RS20Δ ${fmt(d[1], 1)}<br/>阶段 ${STAGE_CN[d[4]] ?? "-"}`;
+          return `<b>${d[3]}</b>（${d[2]}）<br/>RS强弱排名 ${fmt(d[0], 0)} · RS20Δ ${fmt(d[1], 1)}<br/>阶段 ${STAGE_CN[d[4]] ?? "-"}`;
         },
       },
       series: [
@@ -1094,7 +990,7 @@ function RrgPanel({
   return <div ref={ref} style={{ width: "100%", height: 264 }} />;
 }
 
-// ── 趋势抽屉（保留：等权指数 + b50 宽度 + 三条件 + 资金流交叉验证）────────
+// ── 趋势抽屉（保留：等权指数 + 50个交易日均线宽度 + 三条件 + 资金流交叉验证）────────
 function SectorTrendDrawer({
   row,
   onClose,
@@ -1121,7 +1017,7 @@ function SectorTrendDrawer({
       axis: "left",
     },
     {
-      name: "b50 宽度",
+      name: "高于50个交易日均线的成分股比例",
       values: (hist?.points ?? []).map((p) => p.b50),
       color: "#e0913a",
       axis: "breadth",
@@ -1202,20 +1098,20 @@ function SectorTrendDrawer({
               label="MACD"
               value={`${row.macd_label_cn ?? "-"}${row.macd_detail_cn ? "｜" + row.macd_detail_cn : ""}`}
             />
-            <Fact label="RS 百分位" value={fmt(row.rs_pctile, 1)} />
+            <Fact label="RS 强弱排名（非收益百分点）" value={fmt(row.rs_pctile, 1)} />
             <Fact label="RS 20日变化" value={fmt(row.rs_pctile_delta_20, 1)} />
-            <Fact label="b50 / nh60" value={`${fmt(row.b50, 1)} / ${fmt(row.nh60, 1)}`} />
+            <Fact label="高于50个交易日均线比例 / 60日新高占比" value={`${fmt(row.b50, 1)} / ${fmt(row.nh60, 1)}`} />
             <Fact label="宽度背离" value={row.breadth_divergence ? "是" : "否"} />
             <Fact label="成分命中" value={`${row.hit_count}/${row.member_count}`} />
             <Fact label="判定口径" value="research_proxy（研究代理，非 BIAO 原始规则）" />
           </div>
 
           <h5>
-            情绪画像（自身热度 / 相对热度 / 趋势档位 · research_proxy）
+            差额排名画像（自身变化 / 相对排名 / 趋势档位 · 研究参考）
           </h5>
           <BoardProfileLine code={row.code} />
           <h5>
-            资金流（5/20/60 日累计，亿元 · 主力=超大+大单 / 散户=中+小单）
+            资金流（5/20/60 日累计，亿元 · 供应商按订单规模分为超大+大单、中+小单，不识别投资者身份）
             {row.flow_vs_stage_cn && (
               <span className={`flow-badge ${row.flow_vs_stage === "confirm" ? "fb-ok" : "fb-warn"}`}>
                 {row.flow_vs_stage_cn}
@@ -1224,37 +1120,34 @@ function SectorTrendDrawer({
           </h5>
           {row.flow_20d_main_yi != null || row.flow_20d_retail_yi != null ? (
             <>
-              {row.flow_note_cn && <div className="flow-struct">{row.flow_note_cn}</div>}
               <div className="flow-grid">
-                <FlowBar label="5日·主力" v={row.flow_5d_main_yi} highlight />
-                <FlowBar label="5日·散户" v={row.flow_5d_retail_yi} />
-                <FlowBar label="20日·主力" v={row.flow_20d_main_yi} highlight />
-                <FlowBar label="20日·散户" v={row.flow_20d_retail_yi} />
-                <FlowBar label="60日·主力" v={row.flow_60d_main_yi} highlight />
-                <FlowBar label="60日·散户" v={row.flow_60d_retail_yi} />
+                <FlowBar label="5日·超大+大单" v={row.flow_5d_main_yi} highlight />
+                <FlowBar label="5日·中+小单" v={row.flow_5d_retail_yi} />
+                <FlowBar label="20日·超大+大单" v={row.flow_20d_main_yi} highlight />
+                <FlowBar label="20日·中+小单" v={row.flow_20d_retail_yi} />
+                <FlowBar label="60日·超大+大单" v={row.flow_60d_main_yi} highlight />
+                <FlowBar label="60日·中+小单" v={row.flow_60d_retail_yi} />
               </div>
               <div className="flow-heat">
-                <span className="fact-label">散户热度</span>
+                <span className="fact-label">小单与超大单差额排名</span>
                 <span className="fact-value">
                   {row.heat_pctile == null ? (
-                    "数据不足（窗口未满 20 日或板块指数缺失）"
+                    "资料不足（窗口未满 20 个交易日或板块指数缺失）"
                   ) : (
                     <>
                       分位 <b className={row.heat_warning ? "down" : row.heat_hot ? "caution" : ""}>{row.heat_pctile.toFixed(0)}</b>
                       /100
-                      {row.heat_warning ? "（过热×阶段警示）" : row.heat_hot ? "（过热区，阶段不匹配暂不警示）" : ""}
+                      {row.heat_warning ? "（排名较高×阶段提示）" : row.heat_hot ? "（排名较高，阶段不同暂不提示）" : ""}
                     </>
                   )}
                 </span>
               </div>
-              {row.heat_note_cn && <div className="flow-struct warn">{row.heat_note_cn}</div>}
-              <div className="muted" style={{ fontSize: 11, marginTop: 4 }}>
-                单据规模代理（非真实机构/散户身份），仅作阶段交叉验证，不参与判定、不构成买卖建议。
-                五档资金流零和：散户净流入≡主力净流出，散户热度取小单−超大单分化口径。
+              <div className="muted" style={{ fontSize: 12, marginTop: 4 }}>
+                供应商按订单规模分类，不识别投资者身份；小单与超大单金额差额仅作阶段交叉查看，不参与技术判定。
               </div>
             </>
           ) : (
-            <div className="muted">资金流数据不可用（DATA_UNAVAILABLE，不冒充）</div>
+            <div className="muted">资金流资料不足（当前快照没有可用数据）</div>
           )}
 
           <div className="drawer-actions">
@@ -1279,12 +1172,9 @@ function BoardProfileLine({ code }: { code: string }) {
   const pct = data.cross_pctile == null ? "-" : data.cross_pctile.toFixed(0);
   return (
     <div className="flow-heat" style={{ flexWrap: "wrap", gap: 12 }}>
-      <span>自身热度 z <b>{z}</b></span>
-      <span>相对全市场分位 <b>{pct}</b></span>
-      <span>档位 <b>{data.tier_cn ?? "-"}</b>（b50={data.b50?.toFixed(0) ?? "-"} / b200={data.b200?.toFixed(0) ?? "-"}）</span>
-      {data.reading_cn?.map((r, i) => (
-        <span key={i} className="muted">{r}</span>
-      ))}
+          <span>自身指标变化标准分 <b>{z}</b></span>
+          <span>相对全市场分位 <b>{pct}</b></span>
+      <span>档位 <b>{data.tier_cn ?? "-"}</b>（高于50个交易日均线占比={data.b50?.toFixed(0) ?? "-"} / 高于200个交易日均线占比={data.b200?.toFixed(0) ?? "-"}）</span>
     </div>
   );
 }

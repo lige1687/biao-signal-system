@@ -64,9 +64,19 @@ export default function UpgradesPage() {
   const review = concrete.filter(g => g.status === "review").length;
 
   return <main className="upgrades-page">
-    <header className="upgrades-header">
-      <div><h1>系统待升级项目</h1><p>把想做的改进留下来，等合适的时候逐项推进。</p></div>
-      <div className="upgrades-header-actions">
+    <header className="upgrades-header pg-head">
+      <div className="pg-head-title">
+        <h1>系统待升级项目</h1>
+        <p className="pg-head-sub">把想做的改进留下来，等合适的时候逐项推进。授权只针对选中的具体目标，不会自动启动研究或改规则。</p>
+      </div>
+      <div className="pg-head-kv">
+        <span className="pg-kv"><span className="k">方向性目标</span><b>{query.isLoading ? "未知" : directions.length}</b></span>
+        <span className="pg-kv"><span className="k">具体目标</span><b>{query.isLoading ? "未知" : concrete.length}</b></span>
+        <span className="pg-kv"><span className="k">待授权</span><b>{query.isLoading ? "未知" : waiting}</b></span>
+        <span className="pg-kv"><span className="k">进行中</span><b>{query.isLoading ? "未知" : active}</b></span>
+        <span className="pg-kv"><span className="k">待验收</span><b>{query.isLoading ? "未知" : review}</b></span>
+      </div>
+      <div className="pg-head-actions upgrades-header-actions">
         <a className="upgrade-button" href="/api/upgrades/export" download="system-upgrades.json">导出完整台账</a>
         <button className="upgrade-button primary" onClick={() => open({ mode: "create", kind: "concrete" })}>＋ 登记目标</button>
       </div>

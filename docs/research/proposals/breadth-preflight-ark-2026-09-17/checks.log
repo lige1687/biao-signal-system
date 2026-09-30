@@ -1,0 +1,74 @@
+# 独立合成检查预算台账（2026-09-18，ZCode GLM-5.3-Flash/high，job a45965db-162c-4ab6-bbba-e836318d9ee8 S1）
+
+预算（2026-09-17-breadth-preflight-ark.md）：新独立合成检查命令 ≤4 次（失败计数），
+完整 CLI 0 次；ruff 仅新检查文件 ≤1 次；hygiene ≤1 次；只读/哈希不限。
+环境：PYTHONDONTWRITEBYTECODE=1，pytest -p no:cacheprovider。
+
+## 合成检查命令
+
+| # | 命令 | 结果 | 原始日志 |
+|---|---|---|---|
+| 1 | PYTHONDONTWRITEBYTECODE=1 python3 -m pytest docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_independent_checks.py -p no:cacheprovider -q | 28 passed（0.55s，一次通过，无修复重跑） | checks/run-01-pytest.log |
+
+计数口径：按命令次数计 1/4（不按 pytest 用例数 28 假称 28 次）。
+检查文件自身在本轮未修改后重跑（唯一一次预运行前的手算修正：s[3] 单行双原因
+夹具的 included 计数 6→7，属写脚本时的手算笔误，发生在任何命令运行之前，
+见 git 未跟踪文件首次内容即已修正——实际无命令消耗）。
+
+## 完整 CLI 调用：0 次（预算 0，符合）
+## ruff：见下方追加
+## hygiene：见下方追加
+
+## ruff（新检查文件，预算 1 次）
+
+| # | 命令 | 结果 |
+|---|---|---|
+| 1 | python3 -m ruff check docs/research/proposals/breadth-preflight-ark-2026-09-17/checks/test_independent_checks.py | All checks passed!（exit 0，一次通过） |
+
+## hygiene（预算 1 次）
+
+| # | 命令 | 结果 |
+|---|---|---|
+| 1 | python3 scripts/check_repo_hygiene.py | 通过：根层四层均在白名单内（exit 0） |
+
+## 收工核对（2026-09-18）
+
+- 开工/收工 HEAD 均为 7f8c38c36981b2d176381181bc6a8bb901df618c，分支
+  codex/factor-unit-research-20260915，无漂移。
+- 本轮新增文件全部位于交付目录内；src/、tests/、旧 raw、协议/规范/
+  registry/INDEX/OKR 零改动（git status 复核）。
+- 预算总结：合成检查 1/4、CLI 0、ruff 1/1、hygiene 1/1，无超支。
+
+# ================ 返修轮（execution=2, attempt=repair, 2026-09-18） ================
+
+依据：docs/experiments/breadth-preflight-controller-review-2026-09-18.md（R1/R2/R3）。
+追加预算：新增合成检查 ≤3 次、ruff ≤1 次、hygiene ≤1 次，全部失败计数；
+零完整 CLI、零真实统计、零联网安装。返修前已封存 execution=1 的 review.md 与
+test_independent_checks.py 原字节（SHA 见 checks/archive-pre-repair-2026-09-18/README.md）。
+
+## 新增合成检查命令（本轮 2/3 次使用，累计 3/4）
+
+| # | 命令 | 结果 | 原始日志 |
+|---|---|---|---|
+| 2（新增1） | PYTHONDONTWRITEBYTECODE=1 python3 -m pytest checks/test_protocol_identity_checks.py checks/test_verifier_independent_checks.py -p no:cacheprovider -q | 15 passed / 5 failed（失败全为同一夹具笔误：inputs.mkdir 缺 parents=True，检查文件缺陷、非被审实现缺陷；两文件按额度允许自修） | checks/run-02-repair-pytest.log |
+| 3（新增2） | 同上（仅修夹具 mkdir 后重跑） | 20 passed（14 项协议身份 + 6 项核验器，0.61s） | checks/run-03-repair-pytest.log |
+
+计数口径：按命令次数计；新增文件合并为一条 pytest 命令运行，不按用例数（20）
+假称 20 次。剩余新增额度 1 次未使用。
+
+## ruff（追加预算 1/1 已消耗，含 1 次失败）
+
+| # | 命令 | 结果 |
+|---|---|---|
+| 1（追加） | python3 -m ruff check checks/test_protocol_identity_checks.py checks/test_verifier_independent_checks.py | **失败（exit 1）**：仅 1 处 F401——test_verifier_independent_checks.py 导入了未使用的 `sys`；协议身份文件零问题。随后删除该导入行（文件修改不计命令数）；按「ruff 追加最多 1 次」预算**不再重跑**。如实记录：删除的是唯一被标记行，最终字节预期全绿但**未经 ruff 复验**。 |
+
+## hygiene（追加预算 1/1，通过）
+
+| # | 命令 | 结果 |
+|---|---|---|
+| 1（追加） | python3 scripts/check_repo_hygiene.py | 通过（exit 0） |
+
+## 返修轮新增文件指纹（SHA-256，2026-09-18 计算于 ruff 修正后）
+
+见 checks/archive-pre-repair-2026-09-18/README.md（封存件）与本次 handoff 附录；
+被审实现、冻结协议、旧 raw 在返修轮零改动。

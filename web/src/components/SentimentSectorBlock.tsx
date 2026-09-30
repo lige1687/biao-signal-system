@@ -11,7 +11,7 @@ import type { SectorBoardRow, SectorBoardsView, SectorRecommendation } from "../
  *
  * 阈值框架与基本面页宽度卡一致：b50 ≤20% 机会位（深度弱势）、
  * ≥80% 压力位（过热拥挤）、中间常态区。b50 = 板块内站上 50 日线
- * （约半年均线）的股票占比。 */
+ * （50个交易日均线）的股票占比。 */
 
 const WATCH_KEY = "biao.sentiment.watchBoards";
 
@@ -106,8 +106,8 @@ function BoardChartDrawer({ code, name, onClose, us }: { code: string; name: str
           markLine: {
             silent: true, symbol: "none", label: { fontSize: 10, position: "insideEndTop" },
             data: [
-              { yAxis: 80, lineStyle: { color: "#d24a43", type: "dashed" }, label: { formatter: "压力位80", color: "#d24a43" } },
-              { yAxis: 20, lineStyle: { color: "#15803d", type: "dashed" }, label: { formatter: "机会位20", color: "#15803d" } },
+              { yAxis: 80, lineStyle: { color: "#d24a43", type: "dashed" }, label: { formatter: "原参考80", color: "#d24a43" } },
+              { yAxis: 20, lineStyle: { color: "#15803d", type: "dashed" }, label: { formatter: "原参考20", color: "#15803d" } },
             ],
           },
           markArea: {
@@ -200,8 +200,8 @@ function MarketBreadthChart({ marketId, height = 250 }: { marketId: "CN_ALL_A" |
           markLine: {
             silent: true, symbol: "none", label: { fontSize: 10, position: "insideEndTop" },
             data: [
-              { yAxis: 80, lineStyle: { color: "#d24a43", type: "dashed" }, label: { formatter: "压力位 80%", color: "#d24a43" } },
-              { yAxis: 20, lineStyle: { color: "#15803d", type: "dashed" }, label: { formatter: "机会位 20%", color: "#15803d" } },
+              { yAxis: 80, lineStyle: { color: "#d24a43", type: "dashed" }, label: { formatter: "原参考 80%", color: "#d24a43" } },
+              { yAxis: 20, lineStyle: { color: "#15803d", type: "dashed" }, label: { formatter: "原参考 20%", color: "#15803d" } },
             ],
           },
           markArea: {
@@ -236,7 +236,7 @@ function MarketBreadthChart({ marketId, height = 250 }: { marketId: "CN_ALL_A" |
 /* ── 0–100 位置条：色带标机会/常态/压力区，游标 = 当前 b50 ── */
 function PositionBar({ b50 }: { b50: number }) {
   return (
-    <div className="sb-posbar" title={`板块内 ${b50.toFixed(0)}% 的股票站上半年线（50日均线）`}>
+    <div className="sb-posbar" title={`板块内 ${b50.toFixed(0)}% 的股票站上50个交易日均线`}>
       <div className="sb-posbar-mark" style={{ left: `${Math.min(100, Math.max(0, b50))}%` }} />
       <span className="sb-posbar-tick" style={{ left: "20%" }} />
       <span className="sb-posbar-tick" style={{ left: "80%" }} />
@@ -258,8 +258,8 @@ function StageBadge({ stageCn }: { stageCn: string }) {
 }
 
 function ZoneChip({ zone }: { zone: SectorBoardRow["zone"] }) {
-  if (zone === "opportunity") return <span className="macro-chip info">机会位</span>;
-  if (zone === "risk") return <span className="macro-chip danger">压力位</span>;
+  if (zone === "opportunity") return <span className="macro-chip info">参与较少</span>;
+  if (zone === "risk") return <span className="macro-chip danger">参与较多</span>;
   return <span className="macro-chip neutral">常态区</span>;
 }
 
@@ -301,8 +301,8 @@ const HoldingBoardCard = BoardCard;
 
 /* ── 推荐观察卡 ── */
 const REC_META: Record<SectorRecommendation["kind"], { icon: string; label: string; cls: string }> = {
-  opportunity: { icon: "💰", label: "机会位", cls: "info" },
-  risk: { icon: "⚠", label: "压力位", cls: "danger" },
+  opportunity: { icon: "○", label: "低参与观察", cls: "info" },
+  risk: { icon: "○", label: "高参与观察", cls: "danger" },
   upgrade_watch: { icon: "📈", label: "接近转强", cls: "neutral" },
 };
 
@@ -362,7 +362,7 @@ function AllBoardsChart({ boards, watch, onOpen, height = 560 }: {
           if (!b) return "";
           return [
             `<b>${b.name}</b>${b.holding ? " · 持仓相关" : ""}${watch.has(b.code) ? " · ★已观察" : ""}`,
-            `强度：${b.b50.toFixed(0)}%（站上半年线的股票占比）`,
+            `强度：${b.b50.toFixed(0)}%（站上50个交易日均线的股票占比）`,
             `阶段：${b.stage_cn} · 今日 ${b.pct_change != null ? `${b.pct_change > 0 ? "+" : ""}${b.pct_change.toFixed(1)}%` : "—"}`,
             b.sig_note_cn ?? b.next_watch ?? "",
           ].filter(Boolean).join("<br/>");
@@ -400,8 +400,8 @@ function AllBoardsChart({ boards, watch, onOpen, height = 560 }: {
           label: { fontSize: 10, position: "end", rotate: 0 },
           lineStyle: { type: "dashed" },
           data: [
-            { xAxis: 20, lineStyle: { color: "#15803d" }, label: { formatter: "机会位20", color: "#15803d" } },
-            { xAxis: 80, lineStyle: { color: "#d24a43" }, label: { formatter: "压力位80", color: "#d24a43" } },
+            { xAxis: 20, lineStyle: { color: "#15803d" }, label: { formatter: "原参考20", color: "#15803d" } },
+            { xAxis: 80, lineStyle: { color: "#d24a43" }, label: { formatter: "原参考80", color: "#d24a43" } },
           ],
         },
         z: 3,
@@ -445,7 +445,7 @@ export default function SentimentSectorBlock({ view, heatAvailable, heatHint }: 
       <div className="sx-rail-head">
         <span className="sx-rail-title">板块情绪</span>
         <span className="sx-rail-sub">
-          大板块（成分股≥30只）· 更新 {view.as_of ?? "—"} · 强度 = 板块内站上半年线的股票占比
+          大板块（成分股≥30只）· 资料所属日 {view.as_of ?? "—"} · 强度 = 板块内站上50个交易日均线的股票占比
         </span>
       </div>
 
@@ -458,8 +458,8 @@ export default function SentimentSectorBlock({ view, heatAvailable, heatHint }: 
         </div>
         <MarketBreadthChart marketId={breadthTab} />
         <div className="muted mood-note">
-          怎么看：蓝线 = 站上半年线的股票占比。掉进绿区（≤20%，超卖）历史常对应阶段底部、
-          冲进红区（≥80%，过热）常对应阶段顶部。虚线是 20/80 阈值；灰/橙细线是 20日/200日口径。
+          怎么看：蓝线 = 站上50个交易日均线的股票占比。20/80 是原有页面的观察参考区，
+          不能单凭进入该区认定阶段顶底。灰/橙细线分别是20日/200日口径。
         </div>
       </div>
 
@@ -487,19 +487,21 @@ export default function SentimentSectorBlock({ view, heatAvailable, heatHint }: 
           </div>
         </>
       )}
+      {watchedBoards.length === 0 && <p className="muted">暂无自选观察板块。</p>}
 
       {/* 持仓相关板块 */}
       <div className="sb-sub-title" style={{ marginTop: 14 }}>持仓相关板块（{holdings.length} 个 · 点卡片看对照图）</div>
+      {holdings.length === 0 && <p className="muted">暂无持仓相关板块。</p>}
       <div className="sb-hold-grid">
         {holdings.map((b) => <HoldingBoardCard key={b.code} b={b} onOpen={() => open(b)} />)}
       </div>
 
       {/* 推荐观察（阈值触发，用户决定加不加） */}
       <div className="sb-sub-title" style={{ marginTop: 14 }}>
-        推荐观察（{view.recommendations.length} 条 · 按阈值筛选，是否关注由你定）
+        快照观察（{view.recommendations.length} 条 · 截至 {view.as_of ?? "日期未记录"}，按原阈值筛选）
       </div>
       {view.recommendations.length === 0 ? (
-        <div className="muted" style={{ padding: "4px 2px" }}>当前没有触发阈值的板块（既没有跌进机会位的，也没有冲进压力位派发的）。</div>
+        <div className="muted" style={{ padding: "4px 2px" }}>该资料日期内，没有进入原有20/80参考范围的板块。</div>
       ) : (
         <div className="sb-rec-list">
           {view.recommendations.map((r) => (
@@ -518,6 +520,7 @@ export default function SentimentSectorBlock({ view, heatAvailable, heatHint }: 
       <div className="sb-sub-title" style={{ marginTop: 16 }}>
         全部大板块排行（{view.n_boards} 个 · 强度从高到低 · 蓝边=持仓相关 · ★=我的观察 · 点柱子看对照图）
       </div>
+      {view.boards.length === 0 && <p className="muted">该快照没有可展示的板块排行数据。</p>}
       <AllBoardsChart boards={view.boards} watch={watch} onOpen={open} />
 
       <div className="muted mood-note">
@@ -563,7 +566,7 @@ export function UsSectorBlock({ view }: { view: SectorBoardsView }) {
       <div className="sx-rail-head">
         <span className="sx-rail-title">美股板块情绪</span>
         <span className="sx-rail-sub">
-          11 个行业（标普500成分股）· 更新 {view.as_of ?? "—"} · 强度 = 行业内站上半年线的股票占比
+          11 个行业（标普500成分股）· 资料所属日 {view.as_of ?? "—"} · 强度 = 行业内站上50个交易日均线的股票占比
         </span>
       </div>
 
@@ -591,9 +594,11 @@ export function UsSectorBlock({ view }: { view: SectorBoardsView }) {
           </div>
         </>
       )}
+      {watched.length === 0 && <p className="muted">暂无自选观察行业。</p>}
 
       {/* 全部行业卡（点开看对照图） */}
       <div className="sb-sub-title" style={{ marginTop: 14 }}>全部行业（点卡片看「价格 × 情绪」对照图）</div>
+      {boards.length === 0 && <p className="muted">该快照没有可展示的行业数据。</p>}
       <div className="sb-hold-grid">
         {boards.map((b) => (
           <BoardCard key={b.code} b={b} onOpen={() => open(b)} pctLabel="近20日" />
@@ -602,10 +607,10 @@ export function UsSectorBlock({ view }: { view: SectorBoardsView }) {
 
       {/* 推荐观察 */}
       <div className="sb-sub-title" style={{ marginTop: 14 }}>
-        推荐观察（{view.recommendations.length} 条 · 阈值触发，是否关注由你定）
+        快照观察（{view.recommendations.length} 条 · 截至 {view.as_of ?? "日期未记录"}，按原阈值筛选）
       </div>
       {view.recommendations.length === 0 ? (
-        <div className="muted" style={{ padding: "4px 2px" }}>当前没有行业触发阈值。</div>
+        <div className="muted" style={{ padding: "4px 2px" }}>该快照没有行业进入原参考范围。</div>
       ) : (
         <div className="sb-rec-list">
           {view.recommendations.map((r) => (

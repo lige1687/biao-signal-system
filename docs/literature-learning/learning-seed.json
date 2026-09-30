@@ -431,6 +431,72 @@
       "source_note_path": "docs/experiments/raw/research-first-round-2026-09-08/literature/papers.json",
       "checked_at": "2026-09-08",
       "replication_status": "未复现作者计算"
+    },
+    {
+      "id": "huatai-volatility-2017",
+      "title": "华泰单因子测试之波动率类因子（华泰多因子系列之六）",
+      "authors": [
+        "林晓明（研究员）",
+        "陈烨（联系人）"
+      ],
+      "year": 2017,
+      "publication_kind": "report",
+      "venue": "华泰证券研究所",
+      "doi": null,
+      "source_url": "https://crm.htsc.com.cn/doc/2017/10750101/a6f8387f-6be1-46ff-b1b2-d6449147a1ad.pdf",
+      "zotero_item_key": null,
+      "zotero_uri": null,
+      "selection_label": "研究过程入门：先分清信息，再逐项检验",
+      "reading_level": "仅核对PDF第1、5—6、10—11页：分类、测试框架、数据处理与评价；未逐项复现实证",
+      "read_version": "2017-03-27 原始报告；2026-09-28本地下载件",
+      "source_locator": "PDF第5页：12类风格及波动率定义；第5—6页：四步研究框架；第10—11页：回归、排序关系及处理条件。原件：docs/experiments/raw/classic-benchmarks-2026-09-28/ht-single-original.pdf。2026-09-29复核页记录见docs/experiments/raw/classic-research-learning-2026-09-29/source-checks.json。",
+      "source_note_path": "docs/literature-learning/classic-research-process-2026-09-29.md",
+      "checked_at": "2026-09-29",
+      "replication_status": "仅学习原文方法；未复现股票组合，也未证明适用于本地ETF"
+    },
+    {
+      "id": "huatai-synthesis-2019",
+      "title": "因子合成方法实证分析（华泰多因子系列之十）",
+      "authors": [
+        "林晓明（研究员）",
+        "陈烨（研究员）",
+        "何康（联系人）"
+      ],
+      "year": 2019,
+      "publication_kind": "report",
+      "venue": "华泰证券研究所",
+      "doi": null,
+      "source_url": "https://crm.htsc.com.cn/doc/2019/10750101/ae933a8c-5a94-4d92-8f33-d92b70c36119.pdf",
+      "zotero_item_key": null,
+      "zotero_uri": null,
+      "selection_label": "研究过程入门：组合方法也要有简单对手",
+      "reading_level": "仅核对PDF第1、5—11页：合成方法、检验流程、对照和月频条件；未复现各类结果",
+      "read_version": "2019-01-04 原始报告；2026-09-28本地下载件",
+      "source_locator": "PDF第5—7页：合成目的与方法；第8—10页：检验和数据处理；第11页：与平均分配权重和原始单项比较、12个月历史窗口、月频。原件：docs/experiments/raw/classic-benchmarks-2026-09-28/ht-synthesis-original.pdf。",
+      "source_note_path": "docs/literature-learning/classic-research-process-2026-09-29.md",
+      "checked_at": "2026-09-29",
+      "replication_status": "仅学习原文方法；未实现六类合成方法，未复制作者参数或成绩"
+    },
+    {
+      "id": "lei-research-process-2026",
+      "title": "从问题到实验结论：经典因子研究方法与双均线案例（本库整理）",
+      "authors": [
+        "LeiSignal 本库整理"
+      ],
+      "year": 2026,
+      "publication_kind": "report",
+      "venue": "本地学习笔记；非外部论文",
+      "doi": null,
+      "source_url": null,
+      "zotero_item_key": null,
+      "zotero_uri": null,
+      "selection_label": "本库方法整理：把流程放回我们的ETF问题",
+      "reading_level": "综合已核对的方法页、用户提供的任务文档、现行项目规范与2026-09-28真实试点；不是任一作者的原始完整流程",
+      "read_version": "2026-09-29 学习版1",
+      "source_locator": "中文阅读稿：docs/literature-learning/classic-research-process-2026-09-29.md；项目方法：docs/research/research-question-method-standard.md；真实案例：docs/experiments/classic-benchmarks-2026-09-28.md；用户任务原文的分类和三种对照是本轮整理依据，不能冒充华泰原分类或原结论。",
+      "source_note_path": "docs/literature-learning/classic-research-process-2026-09-29.md",
+      "checked_at": "2026-09-29",
+      "replication_status": "已有双20历史探索案例；工程接通、外部证券级复现和本地有效性分别记录"
     }
   ],
   "entries": [
@@ -1241,9 +1307,322 @@
       "review_question": "已有闲钱分批买和每月新工资投入，为什么不能混成一项定投？",
       "answer_hint": "先把钱到账和要取出的日期写清，再比较如何投资。",
       "updated_at": "2026-09-08"
+    },
+    {
+      "id": "classic-process-classify",
+      "paper_id": "huatai-volatility-2017",
+      "title": "先分清信息类别，再确定研究对象",
+      "category": "实验方法",
+      "question": "作者为什么先按信息来源分组，而不是把全部指标一起筛选？",
+      "author_finding_summary": "报告第5页回顾12类风格：估值、成长、财务质量、杠杆、规模、动量、波动率、换手率、改进的动量、分析师情绪、股东、技术；再列出波动率类的具体定义。它们是股票研究的分类，详细机制并未在本轮逐类核对。",
+      "our_learning": "分类先帮助说明一项信息描述什么、需要什么数据，再决定检验什么。它不同于资料库的四类对象：特征定义、因子组合收益与模型、方法文献、验证案例。分类本身不证明有效，也不代表已经接入。",
+      "example": {
+        "kind": "教学假设，不是真实回测",
+        "text": "过去涨幅描述方向，波动率描述涨跌的幅度。两者都来自价格，却回答不同问题；不能只因都算出了一个数字，就用同一个门槛判断好坏。"
+      },
+      "practice_steps": [
+        "写清信息属于价格、成交、财务或外部预期，并保留作者原分类名称",
+        "说明研究的是同日股票间比较，还是某只ETF随时间的变化",
+        "写出这一项想帮助判断涨幅、上涨机会还是下跌风险",
+        "再检查我们是否具备当时可用的数据"
+      ],
+      "method_acceptance": {
+        "origin": "本库结合已核对方法页与本地案例整理；不是作者统一验收门槛",
+        "checks": [
+          "作者原类别与我们自己的归类是否分开",
+          "股票财务或外部预期是否仍只作叙事和研究参考",
+          "是否把资料已登记误说为公式已实现"
+        ],
+        "paper_numeric_threshold": null,
+        "threshold_note": "本条未建立可迁移到ETF的作者数值标准；原文股票检验阈值、费用和窗口不得照搬为本地通过线。"
+      },
+      "applicability": "12类名称来自原文；不是LeiSignal新增12个技术判定维度。财务和消息资料不能因此进入生产技术判断或硬过滤。",
+      "related_paper_ids": [
+        "huatai-synthesis-2019",
+        "jegadeesh1993"
+      ],
+      "local_research_path": "docs/experiments/classic-benchmarks-2026-09-28.md",
+      "system_relation": "学习与研究方法层。策略仍按道路、路牌、触发条件、过滤纪律组织；不改变技术判断、MACD口径或交易规则。",
+      "adoption_status": "仅学习参考；真实案例只支持报告所述范围",
+      "content_status": "方法页已核对；作者方法、本库延伸与本地实测分开",
+      "priority": 1,
+      "review_question": "把一个指标归入经典类别，能否说明它已接入或有效？",
+      "answer_hint": "不能。类别描述信息来源；还要分别检查定义、数据、计算和本地证据。",
+      "updated_at": "2026-09-29"
+    },
+    {
+      "id": "classic-process-distribution",
+      "paper_id": "huatai-volatility-2017",
+      "title": "先看分布，找出可能混淆结论的背景",
+      "category": "实验方法",
+      "question": "低波动组看起来更好，是波动率的作用，还是它恰好集中在不同公司和行业？",
+      "author_finding_summary": "第5—6页先观察波动率在行业和公司规模之间的差异，再决定检验时怎样考虑这些背景，之后才做分组和控制比较。",
+      "our_learning": "先了解信息值在哪里高、在哪里低、缺失在哪里，以及哪些输入表达相似内容。发现相关只是提示该怎么比较，不能单凭高相关否定价值，或凭低相关宣称有额外帮助。",
+      "example": {
+        "kind": "教学假设，不是真实回测",
+        "text": "一组主要是银行，另一组主要是科技公司。两组表现不同，可能来自行业背景，不能立即归功于波动率。"
+      },
+      "practice_steps": [
+        "画出或汇总不同对象、时期的数值和缺失分布",
+        "查清极端值、相似输入和组别大小",
+        "预先选出可能影响结果的背景信息",
+        "保存原始比较，再做适配的背景控制；不只展示控制后结果"
+      ],
+      "method_acceptance": {
+        "origin": "本库结合已核对方法页与本地案例整理；不是作者统一验收门槛",
+        "checks": [
+          "比较组是否其实换了行业、对象或市场时期",
+          "新增条件是不是已有信息的另一种表达",
+          "处理缺失或极端值是否改变了参与比较的对象"
+        ],
+        "paper_numeric_threshold": null,
+        "threshold_note": "本条未建立可迁移到ETF的作者数值标准；原文股票检验阈值、费用和窗口不得照搬为本地通过线。"
+      },
+      "applicability": "华泰研究同日股票间差异；我们的少量ETF研究先在每只ETF内部比较，再检查共享行情，不强制套股票行业处理。",
+      "related_paper_ids": [
+        "industry1999",
+        "lei-research-process-2026"
+      ],
+      "local_research_path": "docs/experiments/classic-benchmarks-2026-09-28.md",
+      "system_relation": "学习与研究方法层。策略仍按道路、路牌、触发条件、过滤纪律组织；不改变技术判断、MACD口径或交易规则。",
+      "adoption_status": "仅学习参考；真实案例只支持报告所述范围",
+      "content_status": "方法页已核对；作者方法、本库延伸与本地实测分开",
+      "priority": 1,
+      "review_question": "看到两个指标高度相关，能否立即删掉其中一个？",
+      "answer_hint": "不能。先辨认它们描述什么，再检验在已有信息下新增一项是否改善指定问题。",
+      "updated_at": "2026-09-29"
+    },
+    {
+      "id": "classic-process-single-test",
+      "paper_id": "huatai-volatility-2017",
+      "title": "从多个角度检验单项，检查方向和稳定性",
+      "category": "实验方法",
+      "question": "一个总体数字好看，怎样判断它是否只在少数行情里有效？",
+      "author_finding_summary": "第5—6页的四步顺序是观察分布、分组比较、用控制比较和排序关系检查、综合优缺点；第10—11页写明股票池、日期、月末观察、后续收益和评价条件。",
+      "our_learning": "分组查看高低值对应什么结果；排序检查当时靠前的对象后来是否更强；控制比较检查背景信息能否解释现象。这些是不同角度，同一批数据上的多个角度不等于几次独立验证。",
+      "example": {
+        "kind": "教学假设，不是真实回测",
+        "text": "一个方法总平均不错，但主要优势来自某一年；其余年份方向反复。只展示总平均会隐藏这种不稳定。"
+      },
+      "practice_steps": [
+        "先保存单项原值和明确的未来结果",
+        "按问题选择分组、排序或控制比较；不要求每次把所有方法都跑一遍",
+        "同时报告组别数量、连续事件数量、时期差异和不确定范围",
+        "记录支持结果、反例和样本太少的地方"
+      ],
+      "method_acceptance": {
+        "origin": "本库结合已核对方法页与本地案例整理；不是作者统一验收门槛",
+        "checks": [
+          "是否只展示最好组或最好年份",
+          "持续几十天的同一状态是否被当成几十次独立机会",
+          "历史分组上涨比例是否被误写成未来个体的预测概率"
+        ],
+        "paper_numeric_threshold": null,
+        "threshold_note": "本条未建立可迁移到ETF的作者数值标准；原文股票检验阈值、费用和窗口不得照搬为本地通过线。"
+      },
+      "applicability": "同日股票排序和ETF跨日期预测是不同问题。原文统计门槛不自动适配本系统；重复窗口和共享行情必须保留在不确定性解释中。",
+      "related_paper_ids": [
+        "lo2000",
+        "lei-research-process-2026"
+      ],
+      "local_research_path": "docs/experiments/classic-benchmarks-2026-09-28.md",
+      "system_relation": "学习与研究方法层。策略仍按道路、路牌、触发条件、过滤纪律组织；不改变技术判断、MACD口径或交易规则。",
+      "adoption_status": "仅学习参考；真实案例只支持报告所述范围",
+      "content_status": "方法页已核对；作者方法、本库延伸与本地实测分开",
+      "priority": 1,
+      "review_question": "分组、排序和控制比较都用了同一批历史，算三次独立验证吗？",
+      "answer_hint": "不算。它们是同一批证据的不同角度；独立新资料必须没有参与规则和参数的选择。",
+      "updated_at": "2026-09-29"
+    },
+    {
+      "id": "classic-process-combine",
+      "paper_id": "huatai-synthesis-2019",
+      "title": "先验证单项，再让组合方法与简单办法比较",
+      "category": "实验方法",
+      "question": "复杂地合成几个指标，是否比原始单项和平均分配权重更有用？",
+      "author_finding_summary": "报告第5页说明合成可整理相似信息或代表一类信息；第11页明确比较合成结果、平均分配权重的结果和原始单项。研究采用月频股票数据，使用12个月历史窗口估计部分方法所需的信息。",
+      "our_learning": "组合应有明确目的和简单对手。把多个输入变成一个组合值可能帮助受限模型，但不会凭空产生新的原始资料。看过成绩后才改权重，会增加挑中偶然好结果的风险。",
+      "example": {
+        "kind": "教学假设，不是真实回测",
+        "text": "三个指标平均分配权重已经表现不错；复杂权重必须在相同日期和目标下超过它，才有理由承担额外复杂度。"
+      },
+      "practice_steps": [
+        "先理解并核对每个输入；不先堆成一个总分",
+        "保留原始单项和平均分配权重的简单对手",
+        "只用当时已经知道的历史信息确定权重",
+        "固定目标、日期和计算预算，比较改善及不确定范围",
+        "把表现退步、方向不稳和复杂度一起报告"
+      ],
+      "method_acceptance": {
+        "origin": "本库结合已核对方法页与本地案例整理；不是作者统一验收门槛",
+        "checks": [
+          "是否用后来结果决定过去的权重",
+          "是否把同一信息的组合写成新增原始信息",
+          "是否为了复杂办法换了更容易的对手或样本"
+        ],
+        "paper_numeric_threshold": null,
+        "threshold_note": "本条未建立可迁移到ETF的作者数值标准；原文股票检验阈值、费用和窗口不得照搬为本地通过线。"
+      },
+      "applicability": "原报告的合成公式、12个月窗口和股票结果本轮未移植；双均线组合只检验指定预测方法是否受益，不证明交易更好。",
+      "related_paper_ids": [
+        "huatai-volatility-2017",
+        "lei-research-process-2026"
+      ],
+      "local_research_path": "docs/experiments/classic-benchmarks-2026-09-28.md",
+      "system_relation": "学习与研究方法层。策略仍按道路、路牌、触发条件、过滤纪律组织；不改变技术判断、MACD口径或交易规则。",
+      "adoption_status": "仅学习参考；真实案例只支持报告所述范围",
+      "content_status": "方法页已核对；作者方法、本库延伸与本地实测分开",
+      "priority": 1,
+      "review_question": "组合用了两个指标，就等于获得两份独立信息吗？",
+      "answer_hint": "不等于。两项可能都来自同一段价格；组合价值要相对原始输入和简单对手检验。",
+      "updated_at": "2026-09-29"
+    },
+    {
+      "id": "classic-process-time",
+      "paper_id": "lei-research-process-2026",
+      "title": "把实验放回当时：防止偷看后来行情",
+      "category": "判断标准",
+      "question": "研究使用的信息，在作出判断的那一刻真的已经知道吗？",
+      "author_finding_summary": "这是本库的时点检查整理。华泰原文描述月末信息对应后来收益，但也采用标准化后将缺失特征设为零、剔除下一交易日停牌股票等条件。我们记录这些条件，不能直接照搬为ETF事前预测规则。",
+      "our_learning": "学习研究步骤，还要审查原处理的适用条件。未来收益缺失不能填零；今天修订的数据不能假装当时已知；跨日期学习的权重和标准化参数只能用较早资料，训练段的未来结果不能跨入验证段。",
+      "example": {
+        "kind": "教学假设，不是真实回测",
+        "text": "一份财报在4月公布，不能把它当成3月底已经知道的资料。只因现在能下载到完整历史，也不能证明过去当时可见。"
+      },
+      "practice_steps": [
+        "列出观察日、信息发布时间、可使用时刻和结果区间",
+        "按时间安排学习与检查资料；同一天的ETF保持一起处理",
+        "排除跨越时间边界的未来结果，保留原因",
+        "分别记录未知、缺失和真实的零；不拿零掩盖缺行情",
+        "声明哪些历史以前已经看过，哪些新资料确实未参与选择"
+      ],
+      "method_acceptance": {
+        "origin": "本库结合已核对方法页与本地案例整理；不是作者统一验收门槛",
+        "checks": [
+          "训练资料是否含验证期的后来涨幅",
+          "当月因子组合收益是否被当成月初已知输入",
+          "是否因明天停牌而事后改变今天参与研究的对象"
+        ],
+        "paper_numeric_threshold": null,
+        "threshold_note": "本条未建立可迁移到ETF的作者数值标准；原文股票检验阈值、费用和窗口不得照搬为本地通过线。"
+      },
+      "applicability": "这是本库依据项目规范作的审查，不是声称外部作者已完成全部防未来检验。原文缺失处理是特定特征处理，不是缺失收益可以填零的许可。",
+      "related_paper_ids": [
+        "huatai-volatility-2017",
+        "huatai-synthesis-2019",
+        "sullivan1999"
+      ],
+      "local_research_path": "docs/experiments/classic-benchmarks-2026-09-28.md",
+      "system_relation": "学习与研究方法层。策略仍按道路、路牌、触发条件、过滤纪律组织；不改变技术判断、MACD口径或交易规则。",
+      "adoption_status": "仅学习参考；真实案例只支持报告所述范围",
+      "content_status": "方法页已核对；作者方法、本库延伸与本地实测分开",
+      "priority": 1,
+      "review_question": "下载了一份完整历史文件，就能称它是过去当时可用的数据吗？",
+      "answer_hint": "不能。下载时间、历史发布时间和后来修订是不同概念；无法确认的地方必须明确保留限制。",
+      "updated_at": "2026-09-29"
+    },
+    {
+      "id": "classic-process-pilot",
+      "paper_id": "lei-research-process-2026",
+      "title": "用双均线案例走完一次：问题、对照、结果",
+      "category": "实验方法",
+      "question": "已有一条均线和简单价格信息后，另一条均线究竟多提供了什么？",
+      "author_finding_summary": "这是本库整理的真实试点，不是华泰原作者的实验。2026-09-28报告用六只国内宽基ETF、20日均线和21个交易间隔的后续涨幅，分别检验已有SMA再加EMA及反向问题。",
+      "our_learning": "先冻结问题与定义，再比较只用已有信息、只用新增信息、两者一起用。用同样对象、日期和结果，分别展示原始分组与额外改善。计算通过和有用证据必须分开。",
+      "example": {
+        "kind": "本地真实实验：已看过历史，属于探索",
+        "text": "SMA再加EMA时，预测误差由87.7552变为87.9670；误差越小越好，单位是预测涨幅偏差的平方平均（百分点的平方）。改善为−0.2118，95%探索范围为−0.5474至+0.1160。范围包含零，当前没有稳定改善证据；这不是账户收益或未来收益保证。"
+      },
+      "practice_steps": [
+        "写问题：在已有SMA下增加EMA，是否改善后续固定涨幅预测",
+        "固定六只ETF、20日定义、21个交易间隔的目标及原数据快照；不按结果挑周期",
+        "先用手算和独立实现核对定义、单位、缺失和边界",
+        "让三种输入在相同日期、目标和简单预测方法下比较",
+        "读表一的组别差异，再读表二的额外改善及不确定范围",
+        "保留证据不足结论，并注明没有独立新资料验证"
+      ],
+      "method_acceptance": {
+        "origin": "本库结合已核对方法页与本地案例整理；不是作者统一验收门槛",
+        "checks": [
+          "是否把原始分组差异冒充新增信息的贡献",
+          "反向问题是否同样记录",
+          "误差单位、改善正负和研究结果与交易收益是否说明"
+        ],
+        "paper_numeric_threshold": null,
+        "threshold_note": "本条未建立可迁移到ETF的作者数值标准；原文股票检验阈值、费用和窗口不得照搬为本地通过线。"
+      },
+      "applicability": "仅限报告列出的数据、对手和简单线性预测方法；不能推出双均线在所有期限、风险目标或完整交易中都无用，也不能直接上线。",
+      "related_paper_ids": [
+        "brock1992",
+        "huatai-synthesis-2019"
+      ],
+      "local_research_path": "docs/experiments/classic-benchmarks-2026-09-28.md",
+      "system_relation": "学习与研究方法层。策略仍按道路、路牌、触发条件、过滤纪律组织；不改变技术判断、MACD口径或交易规则。",
+      "adoption_status": "仅学习参考；真实案例只支持报告所述范围",
+      "content_status": "方法页已核对；作者方法、本库延伸与本地实测分开",
+      "priority": 1,
+      "review_question": "双均线组的平均上涨更多，为什么还要看第二张表？",
+      "answer_hint": "第一张表只描述组别不同；第二张才检查在已有简单信息下是否额外改善，仍受模型、历史与不确定性限制。",
+      "updated_at": "2026-09-29"
+    },
+    {
+      "id": "classic-process-record",
+      "paper_id": "lei-research-process-2026",
+      "title": "把失败和未完成项留下，让下一位能接着核对",
+      "category": "判断标准",
+      "question": "下一位AI怎样知道哪些已经验证，哪些仍只是参考，哪些结果可能是挑出来的？",
+      "author_finding_summary": "这是本库的交付整理。既有试点保存了来源原件、配置和代码身份、失败及修订记录、逐行预测和复核报告；外部官方收益接入、证券级重建和本地预测有效性分别说明。",
+      "our_learning": "一份可接续的研究应让读者知道问题、对手、尝试、证据和边界。分清原作者结果、本地重算及工程检查；无改善或证据不足也能回答问题，不用不断换参数直到出现正数。",
+      "example": {
+        "kind": "本地真实实验：过程记录",
+        "text": "本次三套官方收益已能读取，四种本地对照已能计算；证券级外部复现和独立新资料验证仍未完成。试点保留首次缺日和边界处理失败，修复后重跑并未成为新的行情证据。"
+      },
+      "practice_steps": [
+        "登记主要问题、期限和判断指标；保存所有尝试，不只留最好一次",
+        "给出原始来源、数据版本、输入与代码指纹、执行入口和结果路径",
+        "写清工程是否正确、作者计算复现到哪层、本地问题支持什么",
+        "提供两张主要表、反例、限制和下一步会改变判断的必要检查",
+        "问题已回答或现有证据到达边界时收尾；未授权的新实验另行界定"
+      ],
+      "method_acceptance": {
+        "origin": "本库结合已核对方法页与本地案例整理；不是作者统一验收门槛",
+        "checks": [
+          "失败与修订是否可以追溯",
+          "是否把重跑相同历史称为独立新证据",
+          "没有改善时是否仍准确交付，而非隐藏或扫参"
+        ],
+        "paper_numeric_threshold": null,
+        "threshold_note": "本条未建立可迁移到ETF的作者数值标准；原文股票检验阈值、费用和窗口不得照搬为本地通过线。"
+      },
+      "applicability": "保存记录不自动证明统计可靠；本学习路线不启动新研究、自动任务或生产部署。后续研究仍按授权和现行research-closure及项目规范推进。",
+      "related_paper_ids": [
+        "sullivan1999",
+        "L04"
+      ],
+      "local_research_path": "docs/experiments/classic-benchmarks-2026-09-28.md",
+      "system_relation": "学习与研究方法层。策略仍按道路、路牌、触发条件、过滤纪律组织；不改变技术判断、MACD口径或交易规则。",
+      "adoption_status": "仅学习参考；真实案例只支持报告所述范围",
+      "content_status": "方法页已核对；作者方法、本库延伸与本地实测分开",
+      "priority": 1,
+      "review_question": "工程测试全部通过，但研究没有稳定改善，这次工作算失败吗？",
+      "answer_hint": "不能混为一谈。工程证明计算按约定运行；研究可以得到没有稳定改善或证据不足的结论，仍然有价值。",
+      "updated_at": "2026-09-29"
     }
   ],
   "reading_paths": [
+    {
+      "id": "classic-process",
+      "title": "从问题到实验结论：经典因子研究方法",
+      "entry_ids": [
+        "classic-process-classify",
+        "classic-process-distribution",
+        "classic-process-single-test",
+        "classic-process-combine",
+        "classic-process-time",
+        "classic-process-pilot",
+        "classic-process-record"
+      ]
+    },
     {
       "id": "start",
       "title": "先学会看懂一个好结果",
@@ -1275,5 +1654,5 @@
       ]
     }
   ],
-  "updated_at": "2026-09-08"
+  "updated_at": "2026-09-29"
 }

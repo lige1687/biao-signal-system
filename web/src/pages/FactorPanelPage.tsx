@@ -2,6 +2,8 @@ import { useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { factorsApi, type FactorRow } from "../api/client";
 import { fmt, pctClass } from "../utils/format";
+import FactorResearchPage from "./factor-research/FactorResearchPage";
+import { isOldSnapshot } from "./factor-research/model";
 
 /**
  * 因子观测台：常见因子读数 + 历史分位 + 板块 12-1 排名。
@@ -113,7 +115,7 @@ function RiskChips({ row }: { row: FactorRow }) {
   );
 }
 
-export default function FactorPanelPage() {
+function LegacyFactorPanel() {
   const queryClient = useQueryClient();
   const { data, error, isLoading } = useQuery({
     queryKey: ["factorPanel"],
@@ -137,36 +139,21 @@ export default function FactorPanelPage() {
     return rows;
   }, [data, sortKey, sortDesc]);
 
-  if (isLoading) return <div className="page"><div className="legend">加载中…</div></div>;
-
-  const miss = error != null || data == null;
-
-  const head = (key: SymSortKey, label: string, title?: string) => (
-    <th
-      title={title}
-      style={{ cursor: "pointer", userSelect: "none" }}
-      onClick={() => {
-        if (sortKey === key) setSortDesc((d) => !d);
-        else { setSortKey(key); setSortDesc(true); }
-      }}
-    >
-      {label}{sortKey === key ? (sortDesc ? " ▾" : " ▴") : ""}
-    </th>
-  );
-
-  return (
-    <div className="page">
-      <div className="header">
-        <h1>
-          因子观测台{" "}
-          <span className="fund-count">
-            {data ? `${data.counts.symbols} 标的 · ${data.counts.sectors} 板块 · 数据截止 ${data.data_as_of}` : ""}
-          </span>
-        </h1>
-        <span className="generated">
-          快照 {data?.generated_at} · 评级留痕 {data?.study_date}
-        </span>
-        <span className="spacer" />
+  /* 页头在加载/缺失态也渲染：键值缺失显示"未知"（范式红线：不伪造状态） */
+  const pgHead = (
+    <div className="pg-head">
+      <div className="pg-head-title">
+        <h1>因子观测台</h1>
+        <span className="pg-head-sub">研究代理层：本地数据实证留痕，只做观测对照，不直接构成买卖点</span>
+      </div>
+      <div className="pg-head-kv">
+        <span className="pg-kv"><span className="k">标的</span><b>{data ? data.counts.symbols : "未知"}</b></span>
+        <span className="pg-kv"><span className="k">板块</span><b>{data ? data.counts.sectors : "未知"}</b></span>
+        <span className="pg-kv"><span className="k">数据截止</span><b>{data?.data_as_of ?? "未知"}</b></span>
+        <span className="pg-kv"><span className="k">快照</span><b>{data?.generated_at ?? "未知"}</b></span>
+        <span className="pg-kv"><span className="k">评级留痕</span><b>{data?.study_date ?? "未知"}</b></span>
+      </div>
+      <div className="pg-head-actions">
         <button
           className="btn primary"
           disabled={refreshing}
@@ -187,6 +174,38 @@ export default function FactorPanelPage() {
           {refreshing ? "刷新中…" : "刷新"}
         </button>
       </div>
+    </div>
+  );
+
+  const oldSnapshot = isOldSnapshot(data?.data_as_of);
+  const legacyDateNotice = data && (
+    <div className="fr-legacy-banner" role="note">
+      <strong>{oldSnapshot === true ? "旧快照：行情数据较旧" : oldSnapshot === false ? "旧快照日期" : "旧快照：时效未知"}</strong>
+      <span>行情数据截止 {data.data_as_of ?? "未知"}；快照生成 {data.generated_at ?? "未知"}；评级留痕 {data.study_date ?? "未知"}。{oldSnapshot === true ? "行情截止距今超过 7 个自然日，仅作历史查看。" : oldSnapshot === null ? "无法判断距今时长。" : "请按实际交易日与市场情况判断时效。"}旧评级不代表当前研究结论。</span>
+    </div>
+  );
+
+  if (isLoading) return <div className="page">{pgHead}<div className="legend">加载中…</div></div>;
+
+  const miss = error != null || data == null;
+
+  const head = (key: SymSortKey, label: string, title?: string) => (
+    <th
+      title={title}
+      style={{ cursor: "pointer", userSelect: "none" }}
+      onClick={() => {
+        if (sortKey === key) setSortDesc((d) => !d);
+        else { setSortKey(key); setSortDesc(true); }
+      }}
+    >
+      {label}{sortKey === key ? (sortDesc ? " ▾" : " ▴") : ""}
+    </th>
+  );
+
+  return (
+    <div className="page">
+      {pgHead}
+      {legacyDateNotice}
 
       {refreshError && (
         <div className="fund-errors">刷新失败：{refreshError}</div>
@@ -349,4 +368,8 @@ export default function FactorPanelPage() {
       )}
     </div>
   );
+}
+
+export default function FactorPanelPage() {
+  return <FactorResearchPage legacy={<LegacyFactorPanel />} />;
 }

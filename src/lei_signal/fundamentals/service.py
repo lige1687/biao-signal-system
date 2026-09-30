@@ -65,6 +65,14 @@ class FundamentalsService:
     def __init__(self) -> None:
         self._cache = _TtlCache()
 
+    def observations(self, market: str) -> dict[str, Any]:
+        """独立来源隔离的市场观察接口。"""
+        from lei_signal.fundamentals.observations import build_observations
+
+        return build_observations(market, lambda key, loader: self._cache.get_or_load(
+            key, _US_MACRO_TTL if market == "us" else _MARGIN_TTL, loader,
+        )[0])
+
     def overview(self, *, refresh: bool = False) -> dict[str, Any]:
         if refresh:
             self._cache.invalidate()

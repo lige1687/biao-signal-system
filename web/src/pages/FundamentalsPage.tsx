@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Fragment, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./reference-reading.css";
 import { api, fundamentalsApi } from "../api/client";
 import OverlayChart, { type OverlayMode, type OverlaySeries } from "../components/trend/OverlayChart";
 import Sparkline from "../components/trend/Sparkline";
@@ -8,6 +9,7 @@ import MetricCard from "../components/trend/MetricCard";
 import TrendChart from "../components/trend/TrendChart";
 import TrendDrawer, { type DrawerState } from "../components/trend/TrendDrawer";
 import SentimentProjectionCard from "../components/SentimentProjectionCard";
+import MarketObservationCards from "../components/MarketObservationCards";
 import { buildDrawer } from "../components/trend/drawer";
 import { alignTo, unionDates } from "../components/trend/align";
 import { fmt, pctClass } from "../utils/format";
@@ -601,12 +603,12 @@ function OverlaySection() {
           mode={mode}
           rightMarkLines={[
             { y: 20, label: "20 正常/升温界", color: "#6b7280" },
-            { y: 30, label: "30 恐慌区（尖峰事后看多为阶段底）", color: "#e33d47" },
+            { y: 30, label: "30 原经验观察线", color: "#e33d47" },
           ]}
         />
         <div className="fund-hint-row">
           左轴标普500（近 10 年）；右轴 VIX。月度相关性：同期 <strong>-0.78</strong>（构造性镜像——VIX 本身由标普期权定价反推，见「相关性速查」卡），
-          指数领先 VIX 变化 +0.28。用法：VIX&gt;30 尖峰用于<strong>确认</strong>底部区域，不是领先抄底信号。
+          指数领先 VIX 变化 +0.28（旧研究窗口）。VIX只描述期权市场对未来波动幅度的预期；30为原页面经验参考线，不确认底部。
         </div>
       </div>
       )}
@@ -694,10 +696,10 @@ function RatesSection({ data, hist }: {
           data.vix == null
             ? "yfinance 限流，稍后刷新重试"
             : data.vix.value > 30
-              ? "恐慌区：持股风险高，但常伴逆向机会"
+              ? "预期波动较高；不表示价格方向"
               : data.vix.value < 15
-                ? "低波动区：风险资产环境友好，需防自满"
-                : "15–30 正常/升温区间"
+                ? "预期波动较低；不表示价格方向"
+                : "处于原页面15–30参考范围"
         }
         zoneLabel={data.vix == null ? undefined : findZone(data.vix.value, ZONES.vix).label}
         zoneTone={data.vix == null ? undefined : findZone(data.vix.value, ZONES.vix).tone}
@@ -924,7 +926,7 @@ function BreadthSparkCard({
       // 用户可滚轮/双指捏合缩小看完整 32 年。
       defaultWindowDays: 756,
       footnote:
-        "宽度 = 站上 N 日均线的个股占比。50 日 >80% 大概率阶段顶部，<20% 短期底部；配合 200 日同低/同高可能见反转。" +
+        "宽度 = 站上 N 个交易日均线的个股占比。50日读数描述上涨参与范围；20/80 是观察参考范围，不能单凭它判断短期顶底。" +
         SOURCE_NOTES.breadth,
     });
   };
@@ -1162,7 +1164,7 @@ function SentimentUpdateForm({ onDone }: { onDone: () => void }) {
 
   const naaimOk = exposure.trim() !== "";
   const aaiiOk = bullish.trim() !== "" && neutral.trim() !== "" && bearish.trim() !== "";
-  const canSubmit = series === "naaim" ? naaimOk : aaiiOk;
+  const canSubmit = (series === "naaim" ? naaimOk : aaiiOk) && availableAt.trim() !== "";
 
   return (
     <div className="sentiment-update-form">
@@ -1177,7 +1179,7 @@ function SentimentUpdateForm({ onDone }: { onDone: () => void }) {
       <div className="sentiment-form-row">
         <label className="sentiment-form-label" htmlFor="sw">调查周</label>
         <input id="sw" type="date" value={surveyWeek} onChange={(e) => setSurveyWeek(e.target.value)} />
-        <span className="sentiment-form-hint">默认本周一；发布时间取 {releaseHint(surveyWeek, series)}</span>
+        <span className="sentiment-form-hint">默认本周一；常见周四安排仅供查证：{releaseHint(surveyWeek, series)}</span>
       </div>
 
       {series === "naaim" ? (
@@ -1198,8 +1200,8 @@ function SentimentUpdateForm({ onDone }: { onDone: () => void }) {
       )}
 
       <div className="sentiment-form-row">
-        <label className="sentiment-form-label" htmlFor="av">发布时间(可选)</label>
-        <input id="av" type="text" value={availableAt} placeholder="留空=默认周四发布时间" onChange={(e) => setAvailableAt(e.target.value)} />
+        <label className="sentiment-form-label" htmlFor="av">已核实发布时间</label>
+        <input id="av" type="text" required value={availableAt} placeholder="按来源填写，不以调查周推算" onChange={(e) => setAvailableAt(e.target.value)} />
       </div>
 
       {error && <div className="sentiment-form-error">写入失败：{error}</div>}
@@ -1242,7 +1244,7 @@ function SentimentCard({
           <span className="macro-name">投资者情绪</span>
         </div>
         <div className="macro-note">
-          未设置 <code>LEI_SENTIMENT_ROOT</code>。设置后放入 naaim.csv / aaii.csv，或点「更新情绪」手动录入，本卡即展示最新读数与分档。
+          未设置 <code>LEI_SENTIMENT_ROOT</code>。设置后放入 naaim.csv / aaii.csv，或点「更新情绪」手动录入，本卡展示带日期的历史调查读数。
         </div>
         <details className="sentiment-setup">
           <summary>如何启用（一次性）</summary>
@@ -1263,25 +1265,21 @@ function SentimentCard({
     const cur = series === "naaim" ? sentiment.naaim : sentiment.aaii;
     if (series === "naaim") {
       onOpen({
-        title: "NAAIM 机构情绪（暴露指数）",
-        subtitle: `当前 ${fmt(cur?.exposure_index, 1)} · ${cur?.label_cn ?? "-"}${
+        title: "NAAIM 主动投资管理人自报股票敞口（原值历史）",
+        subtitle: `已记录 ${fmt(cur?.exposure_index, 1)} · ${cur?.label_cn ?? "-"}${
           cur?.percentile != null ? ` · 百分位 P${cur.percentile.toFixed(0)}` : ""
         }（共 ${obs.length} 期，周频）`,
         dates,
         series: [{ name: "暴露指数", values: obs.map((o) => o.exposure_index ?? null), color: "#2563eb" }],
         unit: "",
-        yRange: [0, 100],
-        markLines: [
-          { y: 20, label: "20 极端悲观（逆向机会区）", color: "#0b9b64" },
-          { y: 80, label: "80 极端乐观（自满风险区）", color: "#e33d47" },
-        ],
+        yRange: [-200, 200],
         footnote:
-          "NAAIM = 机构经理人平均多头暴露（0–100）。逆向解读：极端乐观常伴阶段顶，极端悲观常伴阶段底；百分位基于全部历史周排序。",
+          "NAAIM 是基金经理自报股票敞口，个别答复可为负值或超过100。横轴是调查周，不代表当周已公布；历史位置来自现有记录，不是顶底线。",
       });
     } else {
       onOpen({
-        title: "AAII 散户情绪（多空调查）",
-        subtitle: `当前 多 ${fmt(cur?.bullish, 0)}% / 空 ${fmt(cur?.bearish, 0)}%（共 ${obs.length} 期，周频）`,
+        title: "AAII 会员未来六个月方向调查",
+        subtitle: `已记录 多 ${fmt(cur?.bullish, 0)}% / 空 ${fmt(cur?.bearish, 0)}%（共 ${obs.length} 期，周频）`,
         dates,
         series: [
           { name: "看多 %", values: obs.map((o) => o.bullish ?? null), color: "#e33d47" },
@@ -1290,7 +1288,7 @@ function SentimentCard({
         unit: "%",
         yRange: [0, 70],
         footnote:
-          "AAII = 散户多空调查（看多/看空占受访者 %）。散户情绪逆向用：看多极端常近顶，看空极端常近底；与 NAAIM 机构口径对照看分歧。",
+          "AAII 是美国个人投资者协会会员对未来六个月股市方向的问卷；横轴是调查周，不代表当周已公布。看多和看空比例不能直接当作短期顶底线。",
       });
     }
   };
@@ -1308,7 +1306,7 @@ function SentimentCard({
           <SentimentRow
             kind="naaim"
             s={sentiment.naaim}
-            title="NAAIM 机构"
+            title="NAAIM 自报股票敞口"
             sparkValues={(naaimHist?.observations ?? []).map((o) => o.exposure_index).filter((v): v is number => v != null)}
             onOpen={() => openHistory("naaim")}
           />
@@ -1319,7 +1317,7 @@ function SentimentCard({
           <SentimentRow
             kind="aaii"
             s={sentiment.aaii}
-            title="AAII 散户"
+            title="AAII 会员方向调查"
             sparkValues={(aaiiHist?.observations ?? []).map((o) => o.bull_bear).filter((v): v is number => v != null)}
             onOpen={() => openHistory("aaii")}
           />
@@ -1724,7 +1722,7 @@ function EtfStrengthSection() {
   );
 }
 
-// ── 情绪 × 标普500 同窗对照：逆向指标，情绪极端处常对应指数拐点 ─────────────
+// ── 情绪 × 标普500 同窗对照：只在有明确发布时间时落点 ─────────────
 function SentimentSp500Card() {
   // 与 OverlaySection / SentimentCard 共享同一 queryKey，不产生重复请求
   const { data: ov } = useQuery({
@@ -1744,32 +1742,22 @@ function SentimentSp500Card() {
     staleTime: 5 * 60_000,
   });
 
-  const sp = ov?.series?.sp500;
-  const dates = sp?.dates ?? [];
   const naaimObs = naaimHist?.observations ?? [];
   const aaiiObs = aaiiHist?.observations ?? [];
-
-  // 周频情绪 → 日轴：每个调查周（周一）对齐到当天或之后第一个交易日；
-  // 其余日期为 null，靠 OverlayChart 的 connectNulls 连成周频折线（与宽度叠加同法）。
-  const weeklyToDaily = <T,>(obs: T[], weekOf: (o: T) => string, pick: (o: T) => number | null | undefined) => {
-    const byWeek = new Map<string, number>();
-    for (const o of obs) {
-      const v = pick(o);
-      if (v != null) byWeek.set(weekOf(o), v);
+  const dates = ov?.series?.sp500?.dates ?? [];
+  // 只在记录的可用日之后落点；旧档 available_at 的首发真实性未逐条核实。
+  const pointsAtAvailableDay = <T extends { available_at?: string | null }>(obs: T[], pick: (o: T) => number | null | undefined) => {
+    const result: (number | null)[] = dates.map(() => null);
+    for (const row of obs) {
+      const value = pick(row);
+      if (value == null || !row.available_at) continue;
+      const date = row.available_at.slice(0, 10);
+      const index = dates.findIndex((day) => day >= date);
+      if (index >= 0) result[index] = value;
     }
-    const hit = new Map<string, number>();
-    let di = 0;
-    for (const w of [...byWeek.keys()].sort()) {
-      while (di < dates.length && dates[di] < w) di++;
-      if (di < dates.length) {
-        const d = dates[di] >= w ? dates[di] : null;
-        if (d != null && !hit.has(d)) hit.set(d, byWeek.get(w)!);
-      }
-    }
-    return dates.map((d) => hit.get(d) ?? null);
+    return result;
   };
-
-  if (!sp || dates.length < 2) {
+  if (!ov?.series?.sp500 || ov.series.sp500.dates.length < 2) {
     return (
       <div className="macro-card todo-card">
         <div className="macro-head"><span className="macro-name">情绪 × 标普500</span></div>
@@ -1781,65 +1769,33 @@ function SentimentSp500Card() {
     return (
       <div className="macro-card todo-card">
         <div className="macro-head"><span className="macro-name">情绪 × 标普500</span></div>
-        <div className="macro-note">暂无情绪读数：每周四 launchd 自动抓取 NAAIM/AAII，攒满后此处叠加显示。</div>
+        <div className="macro-note">暂无调查历史读数。</div>
       </div>
     );
   }
-
   const series: OverlaySeries[] = [
-    { name: "标普500", values: alignTo(dates, sp), color: "#2563eb", axis: "left" },
-    ...(naaimObs.length
-      ? [{
-          name: "NAAIM 暴露",
-          values: weeklyToDaily(naaimObs, (o) => o.survey_week, (o) => o.exposure_index ?? null),
-          color: "#7c3aed", axis: "right" as const, lineWidth: 1.6,
-        }]
-      : []),
-    ...(aaiiObs.length
-      ? [
-          {
-            name: "AAII 看多",
-            values: weeklyToDaily(aaiiObs, (o) => o.survey_week, (o) => o.bullish ?? null),
-            color: "#e33d47", axis: "right" as const, lineWidth: 1.2, opacity: 0.85,
-          },
-          {
-            name: "AAII 看空",
-            values: weeklyToDaily(aaiiObs, (o) => o.survey_week, (o) => o.bearish ?? null),
-            color: "#0b9b64", axis: "right" as const, lineWidth: 1.2, opacity: 0.85,
-          },
-        ]
-      : []),
+    { name: "标普500", values: alignTo(dates, ov.series.sp500), color: "#2563eb", axis: "left" },
+    { name: "NAAIM 股票敞口", values: pointsAtAvailableDay(naaimObs, (o) => o.exposure_index), color: "#7c3aed", axis: "right", connectNulls: false },
+    { name: "AAII 看多", values: pointsAtAvailableDay(aaiiObs, (o) => o.bullish), color: "#e33d47", axis: "right", connectNulls: false },
+    { name: "AAII 看空", values: pointsAtAvailableDay(aaiiObs, (o) => o.bearish), color: "#0b9b64", axis: "right", connectNulls: false },
   ];
 
   return (
     <div className="macro-card overlay-card">
       <h4>
-        <span>情绪 × 标普500</span>
-        <span className="macro-period">周频 · 逆向对照</span>
+        <span>调查历史 × 标普500</span>
+        <span className="macro-period">事后资料对照</span>
       </h4>
-      <OverlayChart
-        dates={dates}
-        series={series}
-        leftName="标普500"
-        rightName="情绪（0–100）"
-        height={380}
-        startPercent={15}
-        rightMarkLines={[
-          { y: 20, label: "20 极端悲观·逆向机会", color: "#16a34a" },
-          { y: 80, label: "80 极端乐观·自满风险", color: "#e33d47" },
-        ]}
-      />
+      <OverlayChart dates={dates} series={series} leftName="标普500" rightName="调查原值（不同单位）" height={380} startPercent={15} />
       <div className="fund-hint-row">
-        左轴标普500（日线）；右轴情绪（0–100，周频，周四发布）：紫=NAAIM 机构暴露，
-        <span className="up">红=AAII 看多</span> / <span className="down">绿=AAII 看空</span>。
-        逆向读法：情绪触及 20/80 分界线的极端区，常对应指数阶段拐点（历史由 NAAIM 官方 chart /
-        AAII Wayback 快照回填，每周四自动追加最新一期）。
+        已保存 NAAIM {naaimObs.length} 期、AAII {aaiiObs.length} 期。调查用离散点表示，缺口不连线；没有可用日的记录不画。
+        旧历史的首次发布时间未逐条核实，这只是事后资料对照，不能称当时已知或据此判定短期顶底。价格对象是标普500，不是纳斯达克。
       </div>
     </div>
   );
 }
 
-// ── 情绪 × 标普500：同一区块两种视图（对照看拐点叙事 / 投影看关系强度）──────
+// ── 调查历史 × 标普500：两种事后资料对照视图 ──────
 function SentimentViews() {
   const [view, setView] = useState<"overlay" | "projection">("overlay");
   return (
@@ -1850,7 +1806,7 @@ function SentimentViews() {
           type="button"
           className={`ma-toggle${view === "overlay" ? " on" : ""}`}
           onClick={() => setView("overlay")}
-          title="标普与情绪同窗叠加，看极端区与指数拐点的叙事对照"
+          title="调查记录可用日与标普500的事后对照；历史首次公开时间未逐条核实"
         >
           同窗对照
         </button>
@@ -1858,7 +1814,7 @@ function SentimentViews() {
           type="button"
           className={`ma-toggle${view === "projection" ? " on" : ""}`}
           onClick={() => setView("projection")}
-          title="X=情绪、Y=发布后 N 周标普涨跌的散点，看关系强度与极端区后续分布"
+          title="调查记录可用日后数周的标普500涨跌，仅供事后对照；历史首次公开时间未逐条核实"
         >
           投影散点
         </button>
@@ -1961,15 +1917,21 @@ function MacroSection({
 /** 分区页签：原来 5 段纵向堆叠近万素深，「翻个东西要滚到最底」；改为点选直达。
  *  id 沿用锚点名并同步到 URL hash，刷新/深链保持当前分区。 */
 const FUND_SECTIONS: { id: string; label: string; tip: string }[] = [
-  { id: "fund-sec-market", label: "市场", tip: "宽度 + 情绪（最有用）" },
+  { id: "fund-sec-market", label: "市场环境", tip: "当前宽度与情绪、产品强弱和历史变化" },
   { id: "fund-sec-rates", label: "利率", tip: "价格的标尺 / 资本的成本" },
   { id: "fund-sec-overlay", label: "长周期叠加", tip: "利率 / 两融 × 股指（20 年级，可滑动缩放）" },
-  { id: "fund-sec-macro", label: "消费", tip: "就业 / 物价 / 景气" },
+  { id: "fund-sec-macro", label: "经济与物价", tip: "就业 / 物价 / 景气" },
   { id: "fund-sec-usmacro", label: "美国宏观", tip: "就业 / 房产 / 汽车 / WEI / 物价 / 订单（FRED）" },
 ];
 
 export default function FundamentalsPage() {
   const queryClient = useQueryClient();
+  const [market, setMarket] = useState<"cn" | "us">("cn");
+  const { data: observations, error: observationsError, isLoading: observationsLoading } = useQuery({
+    queryKey: ["fundamentalsObservations", market],
+    queryFn: () => fundamentalsApi.observations(market),
+    staleTime: 5 * 60_000,
+  });
   const [drawer, setDrawer] = useState<DrawerState>(null);
   // 利率趋势数据一次拉满 20 年：抽屉里的 3/5/10/20 年 chips 是纯本地缩放窗口，不再重拉。
   const ratesLookback = RATE_LOOKBACK_OPTIONS[RATE_LOOKBACK_OPTIONS.length - 1].days;
@@ -1995,12 +1957,12 @@ export default function FundamentalsPage() {
     queryFn: () => fundamentalsApi.rates(),
     staleTime: 5 * 60_000,
   });
-  const { data: ratesHist } = useQuery({
+  const { data: ratesHist, error: ratesHistError } = useQuery({
     queryKey: ["fundamentalsRatesHistory", ratesLookback],
     queryFn: () => fundamentalsApi.ratesHistory(ratesLookback),
     staleTime: 30 * 60_000,
   });
-  const { data: macroHist } = useQuery({
+  const { data: macroHist, error: macroHistError } = useQuery({
     queryKey: ["fundamentalsMacroHistory", 60],
     queryFn: () => fundamentalsApi.macroHistory(60),
     staleTime: 30 * 60_000,
@@ -2032,13 +1994,18 @@ export default function FundamentalsPage() {
       queryClient.invalidateQueries({ queryKey: ["marketContextGlobalStrip"] });
       queryClient.invalidateQueries({ queryKey: ["fundamentalsRatesHistory"] });
       queryClient.invalidateQueries({ queryKey: ["fundamentalsMacroHistory"] });
+      queryClient.invalidateQueries({ queryKey: ["fundamentalsObservations"] });
     },
   });
 
   const allErrors = [
     ...(ov?.errors ?? []),
+    ...(ovError ? [`概览：${ovError instanceof Error ? ovError.message : String(ovError)}`] : []),
+    ...(ratesError ? [`利率：${ratesError instanceof Error ? ratesError.message : String(ratesError)}`] : []),
     ...(rates?.errors ?? []),
+    ...(ratesHistError ? [`利率历史：${ratesHistError instanceof Error ? ratesHistError.message : String(ratesHistError)}`] : []),
     ...(ratesHist?.errors ?? []),
+    ...(macroHistError ? [`经济历史：${macroHistError instanceof Error ? macroHistError.message : String(macroHistError)}`] : []),
     ...(macroHist?.errors ?? []),
     ...(commoditiesError
       ? [`大宗商品：${commoditiesError instanceof Error ? commoditiesError.message : String(commoditiesError)}`]
@@ -2046,29 +2013,38 @@ export default function FundamentalsPage() {
   ];
 
   return (
-    <div className="page">
-      <div className="header">
-        <h1>基本面参考</h1>
-        {ov && (
-          <span className="generated">
-            更新于 {new Date(ov.generated_at).toLocaleString("zh-CN", { hour12: false })}
+    <div className="page fund-reading-page">
+      <div className="pg-head">
+        <div className="pg-head-title">
+          <h1>基本面参考</h1>
+          <span className="pg-head-sub">叙事标注层：解释"为什么"，不参与技术判定、不做硬过滤</span>
+        </div>
+        <div className="pg-head-kv">
+          <span className="pg-kv">
+            <span className="k">概览生成于</span>
+            <b>{ov ? new Date(ov.generated_at).toLocaleString("zh-CN", { hour12: false }) : "未知"}</b>
           </span>
-        )}
-        <span className="spacer" />
-        <button
-          className="btn primary"
-          disabled={refreshMutation.isPending}
-          onClick={() => refreshMutation.mutate()}
-        >
-          {refreshMutation.isPending ? "刷新中…" : "刷新"}
-        </button>
+          <span className="pg-kv">
+            <span className="k">数据源</span>
+            <b>{ov ? (allErrors.length > 0 ? "概览数据源：部分不可用" : "概览数据源：本次未报告错误") : "未知"}</b>
+          </span>
+        </div>
+        <div className="pg-head-actions">
+          <button
+            className="btn primary"
+            disabled={refreshMutation.isPending}
+            onClick={() => refreshMutation.mutate()}
+          >
+            {refreshMutation.isPending ? "刷新中…" : "刷新"}
+          </button>
+        </div>
       </div>
 
       {ov && <div className="legend">{ov.disclaimer_cn}</div>}
       {allErrors.length > 0 && (
         <div className="fund-errors">
           部分数据源暂不可用（其余内容不受影响）：
-          {allErrors.map((e, i) => <div key={i}>· {e}</div>)}
+          {Array.from(new Set(allErrors.map((e) => e.split(/[:：]/)[0]))).map((source, i) => <div key={i}>· {/[\u4e00-\u9fff]/.test(source) ? source : "部分来源"}资料读取失败</div>)}
         </div>
       )}
       {(ovError || ratesError) && (
@@ -2093,9 +2069,21 @@ export default function FundamentalsPage() {
       {/* ── ① 市场 ── */}
       {activeSection === "fund-sec-market" && (
         <>
+          <div className="observation-market-switch" role="group" aria-label="观察市场">
+            <button type="button" className={market === "cn" ? "on" : ""} onClick={() => setMarket("cn")} aria-pressed={market === "cn"}>A股</button>
+            <button type="button" className={market === "us" ? "on" : ""} onClick={() => setMarket("us")} aria-pressed={market === "us"}>美股</button>
+          </div>
+          {observationsLoading && <p className="muted">观察资料加载中…</p>}
+          {observationsError && <p className="fund-errors">观察资料不可用：{(observationsError as Error).message}</p>}
+          {(observations || (!observationsLoading && !observationsError)) &&
+            <MarketObservationCards response={observations} title={`${market === "cn" ? "A股" : "美股"}背景观察`} />}
+          <details className="observation-legacy"><summary>已有宽度、产品强弱与调查历史</summary>
+          <div className="reference-reading-group"><h2>当前市场：宽度与情绪</h2><p>宽度是一批股票中有多少站在各自均线上方；这里展示现有市场读数。</p></div>
           <MarketSection onOpen={setDrawer} />
+          <div className="reference-reading-group"><h2>进一步查看：产品强弱与历史变化</h2><p>历史叠图只用于观察同期变化，不能据此认定原因或交易效果。</p></div>
           <EtfStrengthSection />
           <SentimentViews />
+          </details>
         </>
       )}
 

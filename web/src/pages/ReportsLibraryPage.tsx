@@ -4,6 +4,7 @@ import { marked } from "marked";
 import { useSearchParams } from "react-router-dom";
 import { experimentsApi } from "../api/client";
 import type { ExperimentReportItem, ExperimentVerdict } from "../types";
+import "./page-reading.css";
 
 /**
  * 实验报告库：历史上所有实验/调研文档的统一浏览入口。
@@ -52,7 +53,7 @@ function ReportRow({
         <VerdictBadge v={item.verdict} />
       </div>
       <div className="lib-row-oneliner">
-        {item.oneLiner || "（未写「一句话结论」小节——点开看正文；新报告请按规约补写）"}
+        {item.oneLiner || "该报告尚未整理一句话结论，可打开正文查看。"}
       </div>
     </div>
   );
@@ -99,8 +100,16 @@ export default function ReportsLibraryPage() {
 
   if (error) {
     return (
-      <div className="page">
-        <div className="header"><h1>实验报告库</h1></div>
+      <div className="page lib-page">
+        <div className="pg-head">
+          <div className="pg-head-title">
+            <h1>实验报告库</h1>
+            <span className="pg-head-sub">全部实验/调研报告的统一浏览入口 · 只读展示，不产生结论</span>
+          </div>
+          <div className="pg-head-kv">
+            <span className="pg-kv"><span className="k">报告数</span><b>未知</b></span>
+          </div>
+        </div>
         <div className="fund-errors">加载失败：{(error as Error).message}</div>
       </div>
     );
@@ -111,16 +120,24 @@ export default function ReportsLibraryPage() {
 
   return (
     <div className="page lib-page">
-      <div className="header">
-        <h1>实验报告库</h1>
-        <span className="generated">
-          {stats ? `${stats.total} 份报告 · 成立 ${stats.byVerdict.passed ?? 0} / 证伪 ${stats.byVerdict.falsified ?? 0} / 有条件 ${stats.byVerdict.mixed ?? 0} / 观察 ${stats.byVerdict.watch ?? 0}` : "加载中…"}
-        </span>
-        <span className="spacer" />
-        <label className="lib-toggle">
-          <input type="checkbox" checked={hidePrompts} onChange={(e) => setHidePrompts(e.target.checked)} />
-          隐藏任务书
-        </label>
+      <div className="pg-head">
+        <div className="pg-head-title">
+          <h1>实验报告库</h1>
+          <span className="pg-head-sub">全部实验/调研报告的统一浏览入口 · 只读展示，不产生结论</span>
+        </div>
+        <div className="pg-head-kv">
+          <span className="pg-kv"><span className="k">报告数</span><b>{stats ? stats.total : "未知"}</b></span>
+          <span className="pg-kv"><span className="k">成立</span><b>{stats ? (stats.byVerdict.passed ?? 0) : "-"}</b></span>
+          <span className="pg-kv"><span className="k">证伪</span><b>{stats ? (stats.byVerdict.falsified ?? 0) : "-"}</b></span>
+          <span className="pg-kv"><span className="k">有条件</span><b>{stats ? (stats.byVerdict.mixed ?? 0) : "-"}</b></span>
+          <span className="pg-kv"><span className="k">观察</span><b>{stats ? (stats.byVerdict.watch ?? 0) : "-"}</b></span>
+        </div>
+        <div className="pg-head-actions">
+          <label className="lib-toggle">
+            <input type="checkbox" checked={hidePrompts} onChange={(e) => setHidePrompts(e.target.checked)} />
+            隐藏任务书
+          </label>
+        </div>
       </div>
 
       {stats && stats.pending > 0 && (
@@ -155,6 +172,8 @@ export default function ReportsLibraryPage() {
         />
         <span className="count">{items.length} 份</span>
       </div>
+      <p className="lib-verdict-note">“成立”或“证伪”只针对报告提出的研究问题，不等于获准交易。</p>
+      <details className="lib-maintenance-note"><summary>查看登记与维护说明</summary><p>分类和结论状态来自 docs/experiments/registry.json；新报告按 AGENTS.md 的归档规约登记。</p></details>
 
       <div className="lib-layout">
         <div className="lib-list">

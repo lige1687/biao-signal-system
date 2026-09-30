@@ -255,68 +255,86 @@ export default function DetailPage() {
         <Link to="/">← 返回看盘</Link>
         {data && (
           <>
-            <h1>{data.display_name}</h1>
-            <span style={{ color: "var(--text-faint)", fontSize: 11 }}>{data.symbol}</span>
-            {data.market_cn && <span className="tag">{data.market_cn}</span>}
-            <span className={`price ${changeCls}`}>
-              {lastClose != null ? lastClose.toFixed(2) : "--"}
-            </span>
-            <span className={`change ${changeCls}`}>
-              {changePct != null ? `${changePct > 0 ? "+" : ""}${changePct.toFixed(2)}%` : "--"}
-            </span>
-            <span
-              onClick={() => pickConcept("signal_color", "徽章 · BIAO 颜色")}
-              style={{ cursor: "pointer" }}
-              title="点击查看解释"
-            >
-              <ColorBadge color={data.assessment.color} colorCn={data.assessment.color_cn} />
-            </span>
-            {data.market_badge && (
+            {/* 主组：标的 + 报价 + 道路状态（与看盘首页同语言，见 web/VISUAL.md §4） */}
+            <div className="ws-entry-group ws-entry-primary">
+              <div className="ws-instrument">
+                <h1>{data.display_name}</h1>
+                <span className="ws-instrument-meta">
+                  {data.symbol}{data.market_cn ? ` · ${data.market_cn}` : ""}
+                </span>
+              </div>
+              <div className="ws-quote">
+                <span className={`price ${changeCls}`}>
+                  {lastClose != null ? lastClose.toFixed(2) : "--"}
+                </span>
+                <span className={`change ${changeCls}`}>
+                  {changePct != null ? `${changePct > 0 ? "+" : ""}${changePct.toFixed(2)}%` : "--"}
+                </span>
+              </div>
               <span
-                className={`badge-chip ${data.market_badge.summary}`}
-                title={data.market_badge.reasons_cn.join("\n") || undefined}
+                className="ws-state"
+                onClick={() => pickConcept("signal_color", "徽章 · BIAO 颜色")}
+                title="点击查看解释"
               >
-                市场环境：{data.market_badge.summary_cn}
+                <span className="ws-state-label">道路状态</span>
+                <ColorBadge color={data.assessment.color} colorCn={data.assessment.color_cn} />
               </span>
-            )}
-            <span style={{ flex: 1 }} />
-            <button
-              className="btn small"
-              onClick={() => setShowCreatePlan(true)}
-              title="基于当前信号建立执行计划"
-            >
-              建立执行计划
-            </button>
-            <button
-              className="btn small"
-              onClick={() => {
-                setActiveCand(null);
-                setShowBuyPoint(true);
-              }}
-              title="买点分析"
-            >
-              买点分析
-            </button>
-            {!showBuyPoint && (
+            </div>
+            {/* 次组：键值元信息（市场环境 / 数据时间），去胶囊 */}
+            <div className="ws-entry-group ws-entry-context">
+              {data.market_badge && (
+                <span
+                  className="ws-entry-item"
+                  title={data.market_badge.reasons_cn.join("\n") || undefined}
+                >
+                  <span className="ws-entry-k">市场环境</span>
+                  <b>{data.market_badge.summary_cn}</b>
+                </span>
+              )}
+              <span className="ws-entry-item">
+                <span className="ws-entry-k">数据</span>
+                <b>
+                  {data.meta.data_time
+                    ? new Date(data.meta.data_time).toLocaleString("zh-CN", { hour12: false })
+                    : "--"}
+                  <span className="ws-entry-k">
+                    {" "}· {data.meta.is_intraday_forming ? "盘中" : "已收盘"}
+                    {data.meta.cache_fallback_used ? " · 缓存兜底" : ""}
+                  </span>
+                </b>
+              </span>
+            </div>
+            <div className="ws-quote-actions">
               <button
                 className="btn small"
-                onClick={() => setExpCollapsed((c) => !c)}
-                title={expCollapsed ? "展开右侧解释面板" : "收起右侧解释面板"}
+                onClick={() => setShowCreatePlan(true)}
+                title="基于当前信号建立执行计划"
               >
-                {expCollapsed ? "解释" : "收起解释"}
+                建立执行计划
               </button>
-            )}
-            <span style={{ color: "var(--text-faint)", fontSize: 12 }}>
-              数据时间{" "}
-              {data.meta.data_time
-                ? new Date(data.meta.data_time).toLocaleString("zh-CN", { hour12: false })
-                : "--"}{" "}
-              · {data.meta.is_intraday_forming ? "盘中" : "已收盘"}
-              {data.meta.cache_fallback_used && " · 缓存兜底"}
-            </span>
-            <button className="btn" disabled={refreshBusy} onClick={doRefresh}>
-              {refreshBusy ? "刷新中…" : "刷新"}
-            </button>
+              <button
+                className="btn small"
+                onClick={() => {
+                  setActiveCand(null);
+                  setShowBuyPoint(true);
+                }}
+                title="买点分析"
+              >
+                买点分析
+              </button>
+              {!showBuyPoint && (
+                <button
+                  className="btn small"
+                  onClick={() => setExpCollapsed((c) => !c)}
+                  title={expCollapsed ? "展开右侧解释面板" : "收起右侧解释面板"}
+                >
+                  {expCollapsed ? "解释" : "收起解释"}
+                </button>
+              )}
+              <button className="btn small" disabled={refreshBusy} onClick={doRefresh}>
+                {refreshBusy ? "刷新中…" : "刷新"}
+              </button>
+            </div>
           </>
         )}
       </div>
@@ -373,45 +391,50 @@ export default function DetailPage() {
               />
               <TrendChecklist payload={data.chart} assessment={data.assessment} />
               <div className="chart-legend">
-                {legend.bottomMarks && (
-                  <span>
-                    <span className="mk mk-bottom">◆</span> 底部确认
-                  </span>
-                )}
-                {legend.topMarks && (
-                  <span>
-                    <span className="mk mk-top">◆</span> 顶部确认
-                  </span>
-                )}
-                {legend.invalidatedMarks && (
-                  <span>
-                    <span className="mk mk-dead">✕</span> 结构失效
-                  </span>
-                )}
-                {legend.keyVolatility && (
-                  <span>
-                    <span className="mk mk-kv">▲</span> 关键性波动
-                  </span>
-                )}
-                {legend.levels && (
-                  <>
+                <div className="cl-group">
+                  <span className="cl-group-k">标记</span>
+                  {legend.bottomMarks && (
                     <span>
-                      <span className="mk mk-b1">●</span> B1 阻力线
+                      <span className="mk mk-bottom">◆</span> 底部确认
                     </span>
+                  )}
+                  {legend.topMarks && (
                     <span>
-                      <span className="mk mk-cline">●</span> C 点失效线
+                      <span className="mk mk-top">◆</span> 顶部确认
                     </span>
+                  )}
+                  {legend.invalidatedMarks && (
                     <span>
-                      <span className="mk mk-neck">●</span> 顶部颈线
+                      <span className="mk mk-dead">✕</span> 结构失效
                     </span>
-                  </>
-                )}
+                  )}
+                  {legend.keyVolatility && (
+                    <span>
+                      <span className="mk mk-kv">▲</span> 关键性波动
+                    </span>
+                  )}
+                  {legend.levels && (
+                    <>
+                      <span>
+                        <span className="mk mk-b1">●</span> B1 阻力线
+                      </span>
+                      <span>
+                        <span className="mk mk-cline">●</span> C 点失效线
+                      </span>
+                      <span>
+                        <span className="mk mk-neck">●</span> 顶部颈线
+                      </span>
+                    </>
+                  )}
+                </div>
                 {legend.colorMode === "biao_state" && (
-                  <span className="muted">
-                    BIAO 着色模式：K 线颜色 = 当日绿/灰/黑状态（实体不再分空心/实心）
-                  </span>
+                  <div className="cl-group">
+                    <span className="muted">
+                      BIAO 着色模式：K 线颜色 = 当日绿/灰/黑状态（实体不再分空心/实心）
+                    </span>
+                  </div>
                 )}
-                <span className="muted">
+                <span className="muted cl-hint">
                   {legend.bottomMarks ||
                   legend.topMarks ||
                   legend.invalidatedMarks ||

@@ -1,0 +1,18 @@
+{
+  "verified": true,
+  "summary": "ETF数据源盘点全目标验证通过：样本身份如实（不硬凑）、字段证据表口径纪律无违反、四级分类可复核、门槛判定诚实（未达到）。关键附带发现：两只ETF行情缓存停滞约4周且无过期告警（513870跨境、515130境内），属既有数据质量问题需上报。",
+  "goals": [
+    {"id": "G1", "verified": true, "evidence": ["样本表含身份证据等级与本地数据范围", "159919/510310不存在如实记录"]},
+    {"id": "G2", "verified": true, "evidence": ["field_table.json六字段全证据链", "主控抽查realtime.py与缓存文件坐实"]},
+    {"id": "G3", "verified": true, "evidence": ["四级分类逐字段有依据", "无来源字段未硬凑"]},
+    {"id": "G4", "verified": true, "evidence": ["报告含一句话结论", "raw证据01-06齐备", "hygiene仅已知误报"]}
+  ],
+  "changed_files": ["docs/experiments/etf-data-source-audit-2026-09-19.md", "docs/experiments/raw/etf-data-audit-2026-09-19/"],
+  "limitations": ["外部可取得性未实测（零外呼约束）", "ETF身份待权威源核验", "缓存停滞问题转上报"],
+  "pending_actions": ["主控向用户上报缓存停滞数据质量问题", "下一轮方向讨论携带盘点结论"],
+  "verification": [
+    {"command": "python3 -c json.load(field_table.json)", "result": "通过"},
+    {"command": "python3 scripts/check_repo_hygiene.py", "result": "仅worktree已知.git误报"},
+    {"command": "主控抽查缓存mtime与代码grep", "result": "关键主张全部坐实"}
+  ]
+}

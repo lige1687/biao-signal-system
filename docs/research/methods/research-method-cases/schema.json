@@ -1,0 +1,145 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "research-method-cases/schema.json",
+  "title": "研究方法案例台账（research-method-cases）",
+  "description": "每条案例记录一次研究方法/流程问题与其处理。字段语义见同目录 README.md。方法状态只用本 schema 的 status 四值；涉及研究对象状态时引用因子库合同 F1 四态（exists/verified/research_ready/production_approved），本 schema 不定义对象状态。",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "date",
+    "kind",
+    "problem",
+    "why_changed",
+    "old_method",
+    "new_method",
+    "scope",
+    "rule_changed",
+    "evaluator_changed",
+    "references",
+    "before_after",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^rmc-[0-9]{4}-[0-9]{2}-[0-9]{2}-[a-z0-9-]+$",
+      "description": "rmc-日期-短名，与文件名一致。"
+    },
+    "title": { "type": "string", "minLength": 4 },
+    "date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "description": "案例发生/结案日期（取来源报告日期）。"
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["method_change_case", "rejection_case", "observation_case"],
+      "description": "method_change_case=已实施的方法改进；rejection_case=被拒绝或暂缓的方法/对象候选（反例）；observation_case=仅记录事实，未构成方法变更决策。"
+    },
+    "problem": {
+      "type": "string",
+      "description": "出现了什么问题/疑问，用大白话 + 必要技术细节。"
+    },
+    "why_changed": {
+      "type": "string",
+      "description": "为什么考虑修改方法；observation/rejection 案例写为什么值得记录或为什么拒绝。"
+    },
+    "old_method": {
+      "type": "string",
+      "description": "修改前的方法/做法；无先前做法时如实写「无既有方法」。"
+    },
+    "new_method": {
+      "type": "string",
+      "description": "修改后的方法/被提议或被拒绝的候选做法。"
+    },
+    "scope": {
+      "type": "string",
+      "description": "适用范围，须写明边界（如 testing workflow only）。"
+    },
+    "rule_changed": {
+      "type": "boolean",
+      "description": "是否改变 trading-spec/规则账本/评估尺子。方法台账案例恒须为 false；true 即越界，不得入账。"
+    },
+    "evaluator_changed": {
+      "type": "boolean",
+      "description": "是否改变评价标准/验收协议本身。true 即越界，不得入账。"
+    },
+    "references": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 3 },
+      "description": "仓库内真实报告/产物路径（相对仓库根），每条必须可解析。没有出处不得入账。"
+    },
+    "before_after": {
+      "type": "object",
+      "required": ["old_result", "new_result", "difference_explanation"],
+      "additionalProperties": false,
+      "properties": {
+        "old_result": {
+          "type": "string",
+          "description": "旧方法下的事实结果（数字/测试结果/错误现象）。无旧方法时写「无」。"
+        },
+        "new_result": {
+          "type": "string",
+          "description": "新方法（或拒绝后维持现状）下的事实结果。"
+        },
+        "difference_explanation": {
+          "type": "string",
+          "description": "差异怎么解释；rejection 案例写拒绝理由与保持现状的依据。"
+        }
+      }
+    },
+    "failure_mode": {
+      "type": "object",
+      "required": ["category", "reason"],
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "type": "string",
+          "enum": ["input", "time", "sample", "engineering", "interpretation"],
+          "description": "失败模式人工五分类，互斥单选：input=输入问题（来源/字段未核验、坏记录被消费）；time=时间问题（可知性/时点对齐/未来信息缺失或泄漏）；sample=样本问题（研究对象范围/覆盖/代表性缺陷）；engineering=工程问题（代码/测试/流程实现缺陷）；interpretation=解释问题（转写失真、判断过满、结论超出证据）。"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 8,
+          "description": "一句话打标理由（为什么归这一类而不是相邻类）。"
+        }
+      },
+      "description": "M2 起必填（2026-09-19 前的案例已回溯补齐）。rejection_case 打候选失败的原因；observation_case 打暴露出的缺陷类型；method_change_case 打被改进做法所根治的缺陷类型。"
+    },
+    "review_log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["date", "actor", "decision"],
+        "additionalProperties": false,
+        "properties": {
+          "date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+          "actor": { "type": "string", "description": "人工审查者身份（主控/GPT/用户名），不得填 auto/脚本名——审查必须有人。" },
+          "decision": { "type": "string", "enum": ["reviewed", "approved", "rejected", "observed"] },
+          "note": { "type": "string", "description": "可选：审查意见或裁决理由。" }
+        }
+      },
+      "description": "审查轨迹（M2 状态机的 reviewed 事件落在这里，不新增 status 值）。proposed 案例在得到人工 approved/rejected 裁决前，必须至少有一条 decision=reviewed 的人工记录；actor 禁止自动/脚本。"
+    },
+    "object_states": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "可选。案例涉及对象按 F1 四态（exists/verified/research_ready/production_approved）标注，如 'mixed.momentum.rank@1.0.0: exists'。仅描述对象状态，不得引申为方法状态。"
+    },
+    "notes": { "type": "string", "description": "可选补充（边界、未解决事项）。" }
+  },
+  "x-status-semantics": {
+    "proposed": "方法变化候选，等待人工批准；不得先行使用。",
+    "approved": "经人工（主控/GPT/用户）批准采纳的方法改进。",
+    "rejected": "被拒绝或暂缓的候选（反例，与正例同等重要）。",
+    "observed": "已发生并留档的事实记录，未构成方法变更决策。"
+  },
+  "x-m2-state-machine": {
+    "states": ["proposed", "approved", "rejected", "observed"],
+    "transitions": "proposed --(人工 reviewed 记入 review_log)--> approved | rejected；已发生事实直接 observed。reviewed 是 review_log 里的中间事件，不是第五个 status 值（不造新状态词）。",
+    "zero_auto_adoption": "proposed→approved 只能由人工 actor 在 review_log 写入；任何脚本/代码路径都不得改写 status。台账与校验器均无执行权限。"
+  }
+}

@@ -623,18 +623,23 @@ export default function NewsPage() {
 
   return (
     <div className="page">
-      <div className="header">
-        <h1>
-          资讯流{" "}
-          <span className="fund-count">
-            {focus ? "今天重点" : data ? `${data.total} 条` : ""}
-          </span>
-        </h1>
-        <span className="generated">每日 20:30 自动整合 · 参考层，非交易信号</span>
-        <span className="spacer" />
-        <button className="btn primary" onClick={onRefresh} disabled={running}>
-          {running ? "抓取中…" : "立即刷新"}
-        </button>
+      <div className="pg-head">
+        <div className="pg-head-title">
+          <h1>资讯流</h1>
+          <span className="pg-head-sub">消息检索与排序 · 参考层，非交易信号 · 每日 20:30 自动整合</span>
+        </div>
+        <div className="pg-head-kv">
+          <span className="pg-kv"><span className="k">当前范围</span><b>{focus ? "今天重点（重要性≥6）" : "全量"}</b></span>
+          <span className="pg-kv"><span className="k">条数</span><b>{data ? data.total : "未知"}</b></span>
+          {symbolFilter && (
+            <span className="pg-kv"><span className="k">标的筛选</span><b>{symbolFilter}</b></span>
+          )}
+        </div>
+        <div className="pg-head-actions">
+          <button className="btn primary" onClick={onRefresh} disabled={running}>
+            {running ? "抓取中…" : "立即刷新"}
+          </button>
+        </div>
       </div>
 
       {runError && (

@@ -1,0 +1,30 @@
+{
+  "id": "rmc-2026-09-13-momentum-protocol-binding",
+  "title": "动量协议身份未与实际算法绑定：改对象名/目标后输出照旧",
+  "date": "2026-09-13",
+  "kind": "observation_case",
+  "status": "observed",
+  "failure_mode": {
+    "category": "engineering",
+    "reason": "协议身份与实际算法未绑定是接口实现缺陷：改对象名/目标后输出照旧，属工程问题。"
+  },
+  "problem": "主控用两个合成反例证明：把协议里的主对象改成不存在的 nosuch.object@9.9.9，manifest 照抄该名字但 values 仍输出固定的 mixed.momentum.raw@1.0.0；把 target_id 改成不支持的协议，targets 仍按固定 21 日算法输出——协议'身份证'和实际算的东西没有绑定。",
+  "why_changed": "协议身份若不与算法绑定，冻结记录就可能在被篡改/错配时仍宣称'已完成'，动摇全部产物可审计性。",
+  "old_method": "_load_protocol 只验字段存在、_verify_protocol_codes 只验协议列出的代码文件；合成路径不解析对象，公式/目标/卡快照不校验实际受支持语义。",
+  "new_method": "（复核后要求的修复方向，属后续工程收口）明确支持身份、固定参数/方向/窗口、用途与依赖；用唯一登记表解析并核对卡快照/指纹，任何不支持或矛盾的协议拒绝为输入错误，不输出'已完成'；算法输出与 manifest 身份从同一已验证绑定产生。",
+  "scope": "动量研究原型的协议加载与编排入口；不涉及策略规则。",
+  "rule_changed": false,
+  "evaluator_changed": false,
+  "references": [
+    "docs/experiments/momentum-prototype-controller-review-2026-09-13.md"
+  ],
+  "before_after": {
+    "old_result": "两个合成反例均退出 0 且照常输出：身份错配不被发现，manifest 冒充绑定。另有协议 specs.registry.version 写 v1.0.0 而实际容器为 1.2.0 的文案不一致。",
+    "new_result": "该复核单为集中返修单（B 项，P1）；后续 S1–S3 工程收口复核（同文 §13，2026-09-14）判定收尾通过、停止返修，420 项回归通过、独立复算 772 键零差异。",
+    "difference_explanation": "反例的价值在于暴露'字段存在≠语义一致'：修复方向是把身份验证从'看键在不在'升级为'解析登记表并绑定算法输出'。本条记录的是暴露与修复要求这一过程，不宣称全仓库同类入口都已迁移。"
+  },
+  "object_states": [
+    "mixed.momentum.raw@1.0.0: exists"
+  ],
+  "notes": "同类教训与 rmc-2026-09-10-rdf-root-entry（口头声明字段）同源：身份/口径须由结构核验，不由声明产生。"
+}

@@ -59,17 +59,18 @@ export default function TopNav() {
     ],
     [
       { to: "/fundamentals", label: "基本面" },
-      { to: "/factors", label: "因子观测台" },
       { to: "/news", label: "资讯流" },
       { to: "/daily", label: "收盘简报" },
       { to: "/mindset", label: "认知心态" },
     ],
     [
       { to: "/strategy", label: "技术体系" },
-      { to: "/backtest", label: "回测" },
-      { to: "/research", label: "本轮研究" },
+      { to: "/factors", label: "因子研究" },
       { to: "/library", label: "实验报告库" },
       { to: "/learning", label: "文献学习库" },
+      { to: "/backtest", label: "回测" },
+      { to: "/fwd", label: "前向成绩" },
+      { to: "/research", label: "历史研究回顾" },
       { to: "/upgrades", label: "系统待升级" },
     ],
   ];

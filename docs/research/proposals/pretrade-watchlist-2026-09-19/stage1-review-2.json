@@ -1,0 +1,18 @@
+{
+  "stage_id": "S1",
+  "verified": true,
+  "summary": "返修复核通过：F1新截图主控亲验（desktop全要素+窄屏像素均值242非空白）、F2直达导航实测留证（/plans页TH881121待执行卡片）、构建/40项相关测试/归置主控复跑全过、业务逻辑零改动。执行器输出尾部出现复读退化（记录在案，不影响证据真伪）。",
+  "goal_ids_checked": ["G1", "G2", "G3", "G4"],
+  "evidence": [
+    "主控视觉核验 desktop.png：数据时点/共9条/跨日占位/环境阻断分组/候选行全字段可见",
+    "主控视觉核验 plans-navigation.png：实际点击后路由到 /plans，TH881121.SECTOR 待执行卡片在位",
+    "主控像素统计 narrow.png：420x2800 均值242 黑块0%",
+    "主控复跑 npm run build 通过（2.48s）",
+    "主控复跑相关 pytest 58项全过（首轮）+ 返修后40项（执行者日志，文件时间戳核实）",
+    "check_repo_hygiene.py 仅worktree已知.git误报"
+  ],
+  "limitations": [
+    "GPT-6 Pro 主导方终审尚未进行（确认轮+终审待通道恢复后一并呈报）",
+    "执行器输出复读退化现象已记录，建议后续作业注意"
+  ]
+}

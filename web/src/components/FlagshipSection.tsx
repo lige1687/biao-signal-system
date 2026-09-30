@@ -83,7 +83,7 @@ function ComboChart({ idx }: { idx: number }) {
     <div style={{ background: "var(--bg-card)", borderRadius: 10, padding: "12px 14px",
       margin: "12px 0", border: "1px solid var(--border)" }}>
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 8 }}>
-        <div style={kpi}><b>{c.name}</b><div style={{ opacity: 0.6, fontSize: 11 }}>{c.desc}</div></div>
+        <div style={kpi}><b>{c.name}</b><div style={{ opacity: 0.6, fontSize: "var(--fs-xs)" }}>{c.desc}</div></div>
         <div style={kpi}>组合年化 <b style={{ color: "#34d399" }}>{c.ann}%</b>（持有 {c.annHold}%）</div>
         <div style={kpi}>最大回撤 <b style={{ color: "#f87171" }}>{c.dd}%</b>（持有 {c.ddHold}%）</div>
         <div style={kpi}>调仓 {c.nEvents} 次 · 绿点=买入 红点=卖出</div>

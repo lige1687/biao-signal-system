@@ -52,13 +52,22 @@ def test_build_rows() -> None:
     naaim = build_naaim_row(date(2026, 8, 10), 72.5)
     assert naaim["exposure_index"] == 72.5
     assert naaim["available_at"].startswith("2026-08-13T07:00")
+    assert naaim["publication_time_basis"] == "estimated_from_survey_week"
+    assert naaim["first_fetched_at"] == ""
 
     naaim2 = build_naaim_row(date(2026, 8, 10), 70.0, available_at="2026-08-13T12:00:00")
     assert naaim2["available_at"].startswith("2026-08-13T12:00")
+    assert naaim2["publication_time_basis"] == "operator_supplied_unverified"
 
     aaii = build_aaii_row(date(2026, 8, 10), 35.0, 28.0, 37.0)
     assert aaii["bullish"] == 35.0
     assert aaii["available_at"].startswith("2026-08-13T08:00")
+    assert aaii["publication_time_basis"] == "estimated_from_survey_week"
+
+    auto = build_aaii_row(date(2026, 8, 10), 35, 28, 37,
+                          source="auto:aaii.com", first_fetched_at="2026-08-13T09:12:00+00:00")
+    assert auto["first_fetched_at"] == "2026-08-13T09:12:00+00:00"
+    assert auto["available_at"] != auto["first_fetched_at"]
 
 
 def test_dedupe_and_sort() -> None:
@@ -93,6 +102,26 @@ def test_append_observation_writes_and_dedupes() -> None:
         df = pd.read_csv(root / "naaim.csv")
         assert len(df) == 2
         assert df.iloc[0]["exposure_index"] == 61.0  # deduped keep-last, sorted
+
+
+def test_append_preserves_first_auto_fetch_and_legacy_rows(tmp_path) -> None:
+    path = tmp_path / "aaii.csv"
+    path.write_text(
+        "survey_week,available_at,bullish,neutral,bearish,source,license_status\n"
+        "2026-08-03,2026-08-06T08:00:00,35,30,35,official,unknown\n",
+        encoding="utf-8",
+    )
+    first = build_aaii_row(date(2026, 8, 10), 35, 28, 37,
+                           source="auto:aaii.com", first_fetched_at="2026-08-13T09:00:00+00:00")
+    later = build_aaii_row(date(2026, 8, 10), 36, 28, 36,
+                           source="auto:aaii.com", first_fetched_at="2026-08-13T12:00:00+00:00")
+    append_observation(tmp_path, "aaii", first, AAII_COLUMNS, "aaii.csv")
+    append_observation(tmp_path, "aaii", later, AAII_COLUMNS, "aaii.csv")
+    rows = pd.read_csv(path)
+    assert len(rows) == 2
+    assert rows.iloc[0]["bullish"] == 35
+    assert rows.iloc[1]["bullish"] == 36
+    assert rows.iloc[1]["first_fetched_at"] == first["first_fetched_at"]
 
 
 def test_from_aaii_csv() -> None:

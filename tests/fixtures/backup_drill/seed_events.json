@@ -1,0 +1,64 @@
+{
+  "events": [
+    {
+      "event_id": "drill:ev:1",
+      "symbol": "510300",
+      "timeframe": "1d",
+      "event_date": "2026-09-10",
+      "available_date": "2026-09-11",
+      "rule_id": "dense_breakout",
+      "rule_version": "1.0.0",
+      "direction": "bullish",
+      "severity": "important",
+      "strength": 72,
+      "reason_cn": "演练用密集突破事件1",
+      "provenance": "research_proxy",
+      "evidence": {"close": 4.05, "breakout_reference": 4.0, "note": "fixture"}
+    },
+    {
+      "event_id": "drill:ev:2",
+      "symbol": "510300",
+      "timeframe": "1d",
+      "event_date": "2026-09-12",
+      "available_date": "2026-09-15",
+      "rule_id": "first_ma_pullback",
+      "rule_version": "1.0.0",
+      "direction": "bullish",
+      "severity": "watch",
+      "strength": 41,
+      "reason_cn": "演练用A回调事件2",
+      "provenance": "research_proxy",
+      "evidence": {"pullback_pct": 0.03, "note": "fixture"}
+    },
+    {
+      "event_id": "drill:ev:3",
+      "symbol": "159915",
+      "timeframe": "1d",
+      "event_date": "2026-09-14",
+      "available_date": "2026-09-15",
+      "rule_id": "key_volatility",
+      "rule_version": "1.0.0",
+      "direction": "bearish",
+      "severity": "critical",
+      "strength": 88,
+      "reason_cn": "演练用关键性波动事件3",
+      "provenance": "research_proxy",
+      "evidence": {"range_ratio": 2.7, "note": "fixture"}
+    }
+  ],
+  "late_event": {
+    "event_id": "drill:ev:late",
+    "symbol": "510300",
+    "timeframe": "1d",
+    "event_date": "2026-09-18",
+    "available_date": "2026-09-18",
+    "rule_id": "dense_breakout",
+    "rule_version": "1.0.0",
+    "direction": "bullish",
+    "severity": "info",
+    "strength": 10,
+    "reason_cn": "备份完成后才写入的迟到事件（演示缺失窗口）",
+    "provenance": "research_proxy",
+    "evidence": {"note": "written_after_backup"}
+  }
+}

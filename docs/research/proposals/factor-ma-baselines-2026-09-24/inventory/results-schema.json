@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.1.0",
+  "purpose": "未来均线参与完整账户对照的结果表约定；不是已计算的结果。",
+  "row_grain": "每只ETF × 一个方案 × 一个共同观察区间 × 一个费用情景一行。每只ETF单独以100000元起始资金列示，六行不得相加称作10万元组合。",
+  "policies": {
+    "B0": {"description": "同一ETF初始买入后持有，分红按冻结账户规则单列。", "priority": "common_benchmark"},
+    "S20": {"description": "仅20日简单均线确认参与。", "period_days": 20, "priority": "primary"},
+    "E20": {"description": "仅20日指数均线确认参与。", "period_days": 20, "priority": "primary"},
+    "D20": {"description": "20日简单与指数均线同时确认才参与。", "period_days": 20, "priority": "primary"},
+    "S60": {"description": "仅60日简单均线确认参与。", "period_days": 60, "priority": "secondary_exploratory"},
+    "E60": {"description": "仅60日指数均线确认参与。", "period_days": 60, "priority": "secondary_exploratory"},
+    "D60": {"description": "60日简单与指数均线同时确认才参与。", "period_days": 60, "priority": "secondary_exploratory"},
+    "S120": {"description": "仅120日简单均线确认参与。", "period_days": 120, "priority": "secondary_exploratory"},
+    "E120": {"description": "仅120日指数均线确认参与。", "period_days": 120, "priority": "secondary_exploratory"},
+    "D120": {"description": "120日简单与指数均线同时确认才参与。", "period_days": 120, "priority": "secondary_exploratory"},
+    "B50": {"description": "按预先固定的规则持有一半ETF、一半现金并定期恢复比例。", "priority": "common_benchmark"}
+  },
+  "known_history_rule": "所有方案使用的2022—2026H1历史已被看过，必须exploratory=true。priority=primary仅表示20日是本研究主要问题，不代表未见验证；60/120日为secondary_exploratory。",
+  "required_dimensions": {
+    "symbol": {"type": "string", "unit": "交易所代码"},
+    "policy_id": {"type": "enum", "values": ["B0", "S20", "E20", "D20", "S60", "E60", "D60", "S120", "E120", "D120", "B50"]},
+    "period_start": {"type": "date", "unit": "YYYY-MM-DD"},
+    "period_end": {"type": "date", "unit": "YYYY-MM-DD"},
+    "universe_id": {"type": "string", "description": "冻结六只ETF名单/资格口径的引用。"},
+    "signal_definition_id": {"type": "string", "description": "准确的对象ID@版本或冻结协议字段引用；不虚构登记定义。"},
+    "decision_time": {"type": "string", "description": "信号可见及决定时点。"},
+    "execution_time": {"type": "string", "description": "决定之后实际采用的成交时点及价格字段。"},
+    "fee_scenario_id": {"type": "string", "description": "冻结费用情景及各费用组成。"},
+    "cash_rule_id": {"type": "string", "description": "现金利息、分红应收/到账、资金流与期末处理规则。"},
+    "exploratory": {"type": "boolean", "fixed_value": true, "description": "本批所有结果均来自已看历史，故均为true。"},
+    "priority": {"type": "enum", "values": ["primary", "secondary_exploratory", "common_benchmark"], "description": "区分研究问题主次，不代表数据新旧或证据强弱。"}
+  },
+  "comparison_rule": {
+    "field_shape": "每项比较一条记录：{policy_id, benchmark_id, same_period, return_delta_pp, drawdown_reduction_pp}。",
+    "common_benchmarks": ["B0", "B50"],
+    "same_period_benchmarks": {
+      "D20": ["S20", "E20"],
+      "D60": ["S60", "E60"],
+      "D120": ["S120", "E120"]
+    },
+    "same_period": "true表示被比方案与基准均使用相同ETF、日期范围、起始资金及费用情景。D_N必须与同周期S_N及E_N分别比较；不得以S20/E20替代D60/D120的同周期基准。",
+    "return_delta_pp": "本方案扣费年化收益率 − 基准扣费年化收益率，单位百分点；正数表示本方案收益率较高。",
+    "drawdown_reduction_pp": "基准账户最大跌幅 − 本方案账户最大跌幅，单位百分点；正数表示本方案历史最大跌幅较小，负数表示更大。两个最大跌幅均以正百分数表示下跌幅度。",
+    "null_rule": "基准或方案指标缺失时差值为null并写明原因，不能填0。"
+  },
+  "metrics": {
+    "net_annualized_return_pct": {"type": "number|null", "unit": "%/年", "meaning": "从完整账户期初、期末资产按冻结日数折算的扣费年化收益率。", "null_reasons": ["not_run", "missing_prices", "missing_corporate_actions", "execution_rule_unresolved", "account_not_reconciled", "period_not_comparable", "source_unqualified"]},
+    "max_account_drawdown_pct": {"type": "number|null", "unit": "%（正数表示跌幅）", "meaning": "含现金、持仓市值及应收分红的账户净值相对此前高点的最大下跌幅度。", "null_reasons": ["not_run", "incomplete_account_path", "account_not_reconciled", "source_unqualified"]},
+    "average_invested_pct": {"type": "number|null", "unit": "%账户资产", "meaning": "逐日ETF持仓市值占账户资产比例的全期平均。", "null_reasons": ["not_run", "incomplete_account_path", "account_not_reconciled"]},
+    "trades_per_year": {"type": "number|null", "unit": "次/年", "meaning": "按冻结拆单口径统计的实际模拟买卖成交次数除以观察年数。", "null_reasons": ["not_run", "no_trade_ledger", "execution_rule_unresolved"]},
+    "total_fees_cny": {"type": "number|null", "unit": "人民币元", "meaning": "模拟成交累计费用；费用在成交记账时已从账户现金扣除。", "null_reasons": ["not_run", "fee_schedule_missing", "no_trade_ledger", "execution_rule_unresolved"]},
+    "ending_assets_100k_cny": {"type": "number|null", "unit": "人民币元（期初100000元）", "meaning": "期末已扣费现金 + ETF市值 + 应收分红。因为现金已按成交扣费，此字段不得再次减去total_fees_cny。", "null_reasons": ["not_run", "incomplete_account_path", "missing_corporate_actions", "account_not_reconciled", "source_unqualified"]},
+    "longest_recovery_days": {"type": "integer|null", "unit": "日历日", "meaning": "全期各个账户下跌区间中持续时间的最长值。已恢复区间用从跌破前高到恢复前高的时长；期末仍未恢复的区间用跌破前高至期末的已持续时长。若全期未跌破此前高点，记0。", "null_reasons": ["not_run", "incomplete_account_path", "recovery_data_missing"]},
+    "longest_interval_is_unrecovered": {"type": "boolean|null", "unit": "是/否", "meaning": "longest_recovery_days所指的最长下跌区间到期末是否仍未恢复。它与是否存在较短的期末未恢复区间分开。", "null_reasons": ["not_run", "incomplete_account_path", "recovery_data_missing"]},
+    "is_unrecovered_at_period_end": {"type": "boolean|null", "unit": "是/否", "meaning": "账户在观察期最后一天是否仍低于此前高点；表示当前期末状态，不表示历史最长区间是否已恢复。", "null_reasons": ["not_run", "incomplete_account_path", "recovery_data_missing"]},
+    "current_underwater_days": {"type": "integer|null", "unit": "日历日", "meaning": "若期末账户仍低于此前高点，从当前未恢复区间起点到期末的已持续天数；若期末已恢复或从未跌破此前高点，记0。", "null_reasons": ["not_run", "incomplete_account_path", "recovery_data_missing"]}
+  },
+  "recovery_examples_not_market_results": [
+    {"case": "历史有一次300日后恢复，期末另有一段持续10日仍未恢复", "longest_recovery_days": 300, "longest_interval_is_unrecovered": false, "is_unrecovered_at_period_end": true, "current_underwater_days": 10},
+    {"case": "账户全期没有跌破此前高点", "longest_recovery_days": 0, "longest_interval_is_unrecovered": false, "is_unrecovered_at_period_end": false, "current_underwater_days": 0}
+  ],
+  "null_encoding": {
+    "rule": "指标为空时必须提供同字段名加_null_reason的原因；未运行写not_run。有效0、无此下跌、资料缺失和未运行必须区分。", 
+    "allowed_reasons": ["not_run", "missing_prices", "missing_corporate_actions", "execution_rule_unresolved", "account_not_reconciled", "period_not_comparable", "source_unqualified", "incomplete_account_path", "no_trade_ledger", "fee_schedule_missing", "recovery_data_missing", "benchmark_missing"]
+  },
+  "current_state": "本清单未运行账户模拟，所有账户指标与比较差额均为null，null_reason=not_run。不得将既有价格路径统计搬入账户指标。"
+}

@@ -1,0 +1,30 @@
+{
+  "observed_at": "2026-09-29T09:32:03.519380+00:00",
+  "reviewed_at": "2026-09-29T09:32:17Z",
+  "record": "docs/research/observations/breadth-v1/records/2026-09-29T093203.519380_0000-b80e16a6.json",
+  "changed_sources": ["source-01", "source-02", "source-03"],
+  "facts": {
+    "a_share_rows": 4068445,
+    "a_share_latest_date": "2026-09-29",
+    "same_day_member_count": 4,
+    "previous_day_member_count": 5209,
+    "current_code_date": "2026-09-29",
+    "current_code_count": 5571,
+    "current_code_prefix_counts": {"sh": 2320, "sz": 2903, "bj": 348},
+    "daily_snapshot_date": "2026-09-29",
+    "daily_snapshot_total": 5571,
+    "daily_snapshot_eligible": 5212
+  },
+  "qualification": {
+    "stage": "input_observation_only",
+    "common_200_denominator": "快照标为9月29日，但逐股原料只有4只以9月29日为最后日期、5209只止于9月28日，不能证明同一市场日的共同200日分母。",
+    "historical_membership": "当前名单完整更新仍不补足历史成员、生效时间和真实取得时间链。",
+    "etf_nominal_prices_and_actions": "ETF名义价格、公司行动和交易限制链的原资格缺口仍在。",
+    "availability": "本次实际读取时间已保存；快照日期不倒填为所有成员已在当日可用。",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "decision": "名单正常，但行情日期不统一；继续仅输入观察，不生成信号。",
+  "scope": "未回测、未改参数、未更新OKR、未交易、未自动切换状态。"
+}

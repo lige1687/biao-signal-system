@@ -1,12 +1,11 @@
 """大盘情绪环境（市场情绪仪表盘数据层，research_proxy）。
 
 定位：叙事标注层——只标注环境、不硬过滤、不出买卖点（AGENTS.md 红线）。
-两个市场四个成分 + 美国调查情绪（外部实证阈值，rules.v2.yaml
+两个市场观察成分 + 美国调查情绪（外部实证阈值，rules.v2.yaml
 us_survey_sentiment 段登记，未硬编码）。
 
 成分（全部本地数据或既有管道，单项失败独立降级不阻塞）：
-- CN 情绪（热/中/冷，三票多数）：两融余额 20 日变化 + 全A散户小单净流入
-  20 日合计 + 全A等权指数 20 日动能；
+- CN 环境：融资余额变化与板块价格代理逐项展示；不合成冰点。
 - US 情绪（宽/窄 + 恐慌档）：SP500 宽度（lab.db 1986 起）60 日分位、
   VIX（fetch_vix_history，惯例分档）、XLY/XLP 风险偏好（etf_strength）。
 """
@@ -39,8 +38,16 @@ def _margin_chg20() -> pd.Series | None:
 
 
 def _cn_small_flow20() -> pd.Series | None:
-    """全A散户小单净流入 20 日合计（腾讯试点文件 + 东财缓存合并取并集）。"""
-    series: dict = {}
+    """全A散户小单净流入 20 日合计（腾讯试点文件 + 东财缓存合并取并集）。
+
+    2026-09-15 向量化（agent-ask-stability）：旧实现逐点 pd.to_datetime +
+    嵌套 dict，对 ~14MB 缓存文件每次调用 10.9 秒（每个提问都重算）；
+    现一次性收集后矢量化解析。语义逐项不变：两文件同一 (date, code)
+    重复时**先出现者为准**（旧 setdefault 语义），按日聚合后 20 日滚动合计
+    （实测与旧实现差 ≤1e-11 浮点序噪声，下游取整后完全一致）。"""
+    dates: list[str] = []
+    codes: list[str] = []
+    vals: list[float] = []
     for fname in ("tx_sector_flow_pilot.json", "sector_flow_history.json"):
         p = _CACHE / fname
         if not p.exists():
@@ -54,10 +61,19 @@ def _cn_small_flow20() -> pd.Series | None:
             for pt in pts:
                 v = pt.get("small_yi") if "small_yi" in pt else pt.get("small_yi")
                 if v is not None:
-                    series.setdefault(pd.to_datetime(pt["date"]), {}).setdefault(code, v)
-    if not series:
+                    dates.append(pt["date"])
+                    codes.append(code)
+                    vals.append(v)
+    if not dates:
         return None
-    agg = pd.Series({k: sum(v.values()) for k, v in series.items()}).sort_index()
+    df = pd.DataFrame({
+        "date": pd.to_datetime(dates), "code": codes, "v": vals,
+    })
+    df = df.drop_duplicates(["date", "code"], keep="first")
+    agg = df.groupby("date")["v"].sum().sort_index()
+    # 与旧实现输出形态一致（索引与序列均无名）
+    agg.index.name = None
+    agg.name = None
     return agg.rolling(20, min_periods=20).sum()
 
 
@@ -76,7 +92,7 @@ def _all_a_equal_index() -> pd.Series | None:
 
 
 def cn_mood() -> dict:
-    """全A情绪：三成分 + 多数票合成。任一成分缺失标注 degraded。
+    """A股环境：两项事实逐项展示，不合成为冰点。
 
     成分两类口径：pct=变化率（×100 配 %）；amount=金额（亿元原值配 亿，
     2026-09-07 修复：此前小单净流入 20 日合计被当百分比格式化成 +1017654%）。
@@ -84,8 +100,7 @@ def cn_mood() -> dict:
     comp: dict[str, dict] = {}
     for key, fn, label, kind in (
         ("margin20", _margin_chg20, "融资余额20日变化", "pct"),
-        ("retail_small20", _cn_small_flow20, "全A散户小单净流入20日合计", "amount"),
-        ("equal_mom20", _all_a_equal_index, "全A等权指数20日动能", "pct"),
+        ("equal_mom20", _all_a_equal_index, "板块等权价格代理20日变化", "pct"),
     ):
         s = fn()
         if s is None or s.dropna().empty:
@@ -101,16 +116,16 @@ def cn_mood() -> dict:
             "unit": unit, "vote": int(np.sign(last)),
             "as_of": str(s.dropna().index[-1].date()),
         }
+    dates = {c["as_of"] for c in comp.values() if c.get("ok")}
     votes = [c["vote"] for c in comp.values() if c.get("ok")]
-    score = int(np.sign(sum(votes))) if len(votes) >= 2 else None
-    state = {1: "热", -1: "冷", 0: "中"}.get(score) if score is not None else None
+    comparable = len(votes) == 2 and len(dates) == 1
+    state = None  # 两条代理的正负不足以定义冰点或极端情绪。
     return {
         "components": comp,
         "state": state,
-        "state_cn": {"热": "情绪偏热（散户加杠杆/净流入/动能多数向上）",
-                     "冷": "情绪偏冷（多数向下，冰点或恐慌期）",
-                     "中": "情绪中性（成分分歧）"}.get(state, "成分不足，暂不判定"),
-        "note_cn": "三票多数合成（两融变化+散户小单净流入+等权动能）；research_proxy，只标注不判定。",
+        "state_cn": "同日资料仅供逐项观察；不合成为冰点信号" if comparable else "无足够同日资料，暂不汇总",
+        "as_of": next(iter(dates)) if comparable else None,
+        "note_cn": "仅比较同一日期的融资余额变化与板块价格代理；重复板块小单汇总不代表全A散户。只作观察，不参与技术判定。",
     }
 
 
@@ -199,40 +214,26 @@ def us_risk_appetite() -> dict:
 
 # ─────────────────────── 美国调查情绪（AAII/NAAIM） ───────────────────────
 def us_survey_latest() -> dict:
-    """AAII/NAAIM 最新一期读数 + 外部实证阈值分档（数据需手动导入）。"""
-    root = os.environ.get("LEI_SENTIMENT_ROOT", "")
-    out: dict = {"available": False, "root": root or None,
-                 "hint_cn": "未设置 LEI_SENTIMENT_ROOT；放入 naaim.csv/aaii.csv 或在基本面页手动录入"}
-    try:
-        rule = get_rule("us_survey_sentiment")
-        th = {
-            "spread_greed": rule.param("bull_bear_spread_greed", 20),
-            "spread_fear": rule.param("bull_bear_spread_fear", -20),
-            "bullish_greed": rule.param("bullish_greed", 50),
-            "bearish_fear": rule.param("bearish_fear", 50),
-        }
-    except Exception:  # noqa: BLE001
-        th = {"spread_greed": 20, "spread_fear": -20, "bullish_greed": 50, "bearish_fear": 50}
-    out["thresholds"] = th
-    out["threshold_source_cn"] = "AAII 官方定义与历史极值（aaii.com，价差均值约+6.5pp；2009-03 看空70.3%见底案例）——外部实证阈值，非本系统回测"
-    if not root:
-        return out
+    """AAII/NAAIM 本地历史读数；不声称许可、首次公开时点或当前态度。"""
+    root = os.environ.get("LEI_SENTIMENT_ROOT") or str(Path(__file__).resolve().parents[3] / "data" / "sentiment")
+    out: dict = {"available": False, "root": root,
+                 "hint_cn": "未找到本地 naaim.csv/aaii.csv；调查数据只作背景观察"}
+    out["thresholds"] = None  # 旧字段兼容；调查原值不使用交易档位。
+    out["threshold_source_cn"] = "调查原值展示，不据此划分贪婪或恐惧"
     from lei_signal.market_context import sentiment as senti
 
-    aaii_rows = []
     p = Path(root) / "aaii.csv"
     if p.exists():
         try:
             obs = senti.load_aaii_observations(p)
             o = obs[-1]
             spread = float(o.bullish - o.bearish)  # type: ignore[attr-defined]
-            aaii_rows = [{"bullish": o.bullish, "neutral": o.neutral, "bearish": o.bearish}]  # type: ignore[attr-defined]
-            state = ("贪婪/过度乐观" if spread > th["spread_greed"] or o.bullish > th["bullish_greed"]  # type: ignore[attr-defined]
-                     else "恐惧/极度悲观" if spread < th["spread_fear"] or o.bearish > th["bearish_fear"]  # type: ignore[attr-defined]
-                     else "中性")
             out["aaii"] = {"available": True, "as_of": str(o.survey_week),  # type: ignore[attr-defined]
-                           "bullish": o.bullish, "bearish": o.bearish,  # type: ignore[attr-defined]
-                           "spread": round(spread, 1), "state_cn": state}
+                           "bullish": o.bullish, "neutral": o.neutral, "bearish": o.bearish,  # type: ignore[attr-defined]
+                           "spread": round(spread, 1), "state_cn": "历史调查原值；当前态度未核实",
+                           "source_access": "local_source_claim_unverified",
+                           "publication_precision": "unknown",
+                           "time_note_cn": "逐期首次公开时间未核实，不可用于历史交易回放"}
             out["available"] = True
         except Exception:  # noqa: BLE001
             pass
@@ -240,16 +241,17 @@ def us_survey_latest() -> dict:
     if p.exists():
         try:
             obs = senti.load_naaim_observations(p)
-            o = obs[-1]
+            verified_week_rows = [row for row in obs if not row.source.startswith("auto:naaim.org")]
+            if not verified_week_rows:
+                raise ValueError("NAAIM 旧自动数据没有可核实的观测周")
+            o = verified_week_rows[-1]
             expo = float(o.exposure_index)  # type: ignore[attr-defined]
-            # 85–100 区间历史罕见（均值约 60–70），98+ 却标「中性」会误导，
-            # 按 NAAIM 惯例外推一档「偏乐观（接近自满）」。
-            state = ("机构极端乐观" if expo > 100
-                     else "机构偏乐观（接近自满）" if expo >= 85
-                     else "机构极端悲观" if expo < 40 else "中性")
             out["naaim"] = {"available": True, "as_of": str(o.survey_week),  # type: ignore[attr-defined]
-                            "exposure_index": expo, "state_cn": state,
-                            "threshold_source_cn": "NAAIM 惯例（>100 极端乐观 / <40 极端悲观）"}
+                            "exposure_index": expo, "state_cn": "历史自报股票敞口；当前态度未核实",
+                            "threshold_source_cn": "调查原值展示，不按档位分类",
+                            "source_access": "local_source_claim_unverified",
+                            "publication_precision": "unknown",
+                            "time_note_cn": "逐期首次公开时间未核实，不可用于历史交易回放"}
             out["available"] = True
         except Exception:  # noqa: BLE001
             pass
@@ -274,13 +276,7 @@ def sector_heat_boards() -> dict:
 
 # ─────────────────────── 市场结构分化（结构市识别） ───────────────────────
 def market_structure() -> dict:
-    """板块热度结构：极化指数 + 热/冷板块群（结构市识别）。
-
-    极化 = 同时存在 b50>70（强）与 b50<30（弱）的板块占比之和；高极化 +
-    整体中性 = 结构市（部分板块狂欢、部分冰点），此时板块必须按自身画像
-    单独对待，不能用整体环境一概而论（用户 2026-09-06 提出）。
-    历史序列：sector_trend_history 的 b50（246 交易日）。
-    """
+    """板块宽度结构：分别给出强与弱板块占比及历史。"""
     try:
         rows = json.loads((_CACHE / "sector_trend_history.json").read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
@@ -306,7 +302,7 @@ def market_structure() -> dict:
         weak = sum(1 for x in vals if x < 30) / len(vals) * 100
         series.append({"date": r["date"], "strong_pct": round(strong, 1),
                        "weak_pct": round(weak, 1),
-                       "polar": round(strong + weak, 1),
+                       "polar": None,
                        "median_b50": round(sorted(vals)[len(vals) // 2], 1)})
     if not series:
         return {"available": False}
@@ -328,18 +324,14 @@ def market_structure() -> dict:
         groups["weak"].sort(key=lambda x: x["b50"])
     except Exception:  # noqa: BLE001
         pass
-    pol = last["polar"]
-    state = ("结构市（强弱的板块同时大量存在，板块须单独画像，勿用整体环境一概而论）"
-             if pol >= 50 else ("单边市（板块同涨同跌，整体环境权重更高）" if pol <= 25
-                                else "中度分化"))
+    state = "分别观察强、弱板块占比；板块按自身阶段和证据解读"
     return {
         "available": True, "as_of": last["date"], "state_cn": state,
-        "polar": pol, "strong_pct": last["strong_pct"], "weak_pct": last["weak_pct"],
+        "polar": None, "strong_pct": last["strong_pct"], "weak_pct": last["weak_pct"],
         "median_b50": last["median_b50"],
         "series": series[-120:],
         "strong_boards": groups["strong"][:10], "weak_boards": groups["weak"][:10],
-        "note_cn": "极化指数 = b50>70 板块占比 + b50<30 占比（一、二级行业且成分股≥30只的大板块池）。"
-                   "高极化 + 中位中性 = 结构市：热板块按警报读、冷板块按机会读，分别对待。",
+        "note_cn": "强板块与弱板块占比分别展示（一、二级行业且成分股≥30只）；两组不可相加解释为分化。",
     }
 
 

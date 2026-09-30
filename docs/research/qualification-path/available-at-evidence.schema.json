@@ -1,0 +1,135 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "lei-signal/qualification-path/available-at-evidence@1.0.0",
+  "title": "available_at 三层来源证据模型（A1，2026-09-19）",
+  "description": "一条公司行动的 available_at（系统可获得时间）证据必须落到且只落到一个 tier。tier 决定证据义务：Tier1 官方披露、Tier2 规则推导、Tier3 用户供料、tier=0 缺证（如实为 unknown，不伪造）。本 schema 是 G2 负向校验的机器可执行部分。",
+  "definitions": {
+    "timezone": { "type": "string", "default": "Asia/Shanghai" },
+    "datetime_or_date": { "type": "string", "pattern": "^(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}(\\+\\d{2}:\\d{2})?)?$" },
+    "source_ref": {
+      "type": "object",
+      "required": ["locator", "sha256"],
+      "properties": {
+        "locator": {
+          "anyOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "string", "pattern": "^docs/" }
+          ],
+          "description": "官方原文 URL 或仓库内归档路径"
+        },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "fetch_date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "locator_page": { "type": ["integer", "null"] }
+      }
+    }
+  },
+  "type": "object",
+  "required": ["event_id", "tier", "timezone"],
+  "properties": {
+    "event_id": { "type": "string" },
+    "timezone": { "$ref": "#/definitions/timezone" },
+    "tier0_unknown": {
+      "type": "object",
+      "required": ["basis"],
+      "properties": {
+        "basis": { "const": "missing" },
+        "note": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "tier1_official": {
+      "type": "object",
+      "required": ["event_time", "publication_time", "publication_bound", "source", "availability_scope"],
+      "description": "官方披露。publication_bound 说明 publication_time 的语义：not_before（落款/送出日，只是下界）或 exact（有发布时刻证据）。",
+      "properties": {
+        "event_time": { "$ref": "#/definitions/datetime_or_date" },
+        "publication_time": { "$ref": "#/definitions/datetime_or_date" },
+        "publication_bound": { "enum": ["not_before", "document_dated", "exact"], "description": "not_before=落款/送出日下界；document_dated=成文日（成文≠披露，更弱下界）；exact=有发布时刻证据" },
+        "source": { "$ref": "#/definitions/source_ref" },
+        "availability_scope": {
+          "type": "string",
+          "minLength": 1,
+          "description": "该披露在什么渠道/范围可被获得（如『基金公司官网公告栏，公开发布』）"
+        },
+        "available_at": {
+          "type": ["string", "null"],
+          "description": "只有当 publication_bound=exact 且 availability_scope 覆盖系统取数渠道时可填；否则为 null（R5，由下方 allOf 强制）"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": { "properties": { "publication_bound": { "not": { "const": "exact" } } }, "required": ["publication_bound"] },
+          "then": { "not": { "anyOf": [ { "properties": { "available_at": { "type": "string" } }, "required": ["available_at"] } ] } },
+          "description": "R5：bound 非 exact（not_before/document_dated）时禁止携带非 null 的 available_at"
+        }
+      ]
+    },
+    "tier2_rule_derived": {
+      "type": "object",
+      "required": ["derived_from_rule", "rule", "effective_time"],
+      "description": "规则化时间（公告后第 N 交易日生效类）。禁止携带 publication_time/available_at——规则只能推导生效时点，不能推导公告何时发出。",
+      "properties": {
+        "derived_from_rule": { "const": true },
+        "rule": {
+          "type": "object",
+          "required": ["statement", "reference"],
+          "properties": {
+            "statement": { "type": "string", "minLength": 1 },
+            "reference": {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "type": "string", "pattern": "^(docs/|configs/)" }
+              ]
+            },
+            "rule_id": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "effective_time": { "$ref": "#/definitions/datetime_or_date" },
+        "derivation_inputs": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false,
+      "not": { "anyOf": [ { "required": ["publication_time"] }, { "required": ["available_at"] } ] }
+    },
+    "tier3_user_supplied": {
+      "type": "object",
+      "required": ["user_supplied", "provided_by", "provided_at", "scope"],
+      "description": "用户主动供料，仅限历史缺口。本阶段（A1）只定义不使用：生产校验要求 acknowledged=true，A1 阶段任何 tier3 记录都必须拒绝。",
+      "properties": {
+        "user_supplied": { "const": true },
+        "provided_by": { "type": "string" },
+        "provided_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}" },
+        "scope": { "const": "historical_gap_only" },
+        "acknowledged_by_user": { "type": "boolean" },
+        "available_at": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "effective_time": {
+      "type": ["string", "null"],
+      "description": "市场生效时点（除息/拆分/停牌日）。独立于 available_at，禁止混用。"
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "tier": { "const": 0 } }, "required": ["tier"] },
+      "then": { "required": ["tier0_unknown"], "not": { "anyOf": [ { "required": ["tier1_official"] }, { "required": ["tier2_rule_derived"] }, { "required": ["tier3_user_supplied"] } ] } }
+    },
+    {
+      "if": { "properties": { "tier": { "const": 1 } }, "required": ["tier"] },
+      "then": { "required": ["tier1_official"], "not": { "anyOf": [ { "required": ["tier2_rule_derived"] }, { "required": ["tier3_user_supplied"] }, { "required": ["tier0_unknown"] } ] } }
+    },
+    {
+      "if": { "properties": { "tier": { "const": 2 } }, "required": ["tier"] },
+      "then": { "required": ["tier2_rule_derived"], "not": { "anyOf": [ { "required": ["tier1_official"] }, { "required": ["tier3_user_supplied"] }, { "required": ["tier0_unknown"] } ] } }
+    },
+    {
+      "if": { "properties": { "tier": { "const": 3 } }, "required": ["tier"] },
+      "then": { "required": ["tier3_user_supplied"], "not": { "anyOf": [ { "required": ["tier1_official"] }, { "required": ["tier2_rule_derived"] }, { "required": ["tier0_unknown"] } ] } }
+    }
+  ]
+}

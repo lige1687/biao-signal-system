@@ -1,0 +1,41 @@
+{
+  "observed_at": "2026-09-21T09:30:46.224220+00:00",
+  "reviewed_at": "2026-09-21T09:31:00Z",
+  "record": "docs/research/observations/breadth-v1/records/2026-09-21T093046.224220_0000-dd59d079.json",
+  "changed_sources": ["source-01", "source-02", "source-03", "source-08", "source-09"],
+  "facts": {
+    "a_share_rows": 4067021,
+    "a_share_latest_date": "2026-09-21",
+    "member_latest_date_counts": {
+      "2026-08-28": 1,
+      "2026-08-31": 1,
+      "2026-09-03": 1,
+      "2026-09-10": 1,
+      "2026-09-11": 2,
+      "2026-09-14": 4,
+      "2026-09-18": 2,
+      "2026-09-21": 5207
+    },
+    "current_code_date": "2026-09-21",
+    "current_code_count": 5565,
+    "daily_snapshot_date": "2026-09-21",
+    "daily_snapshot_eligible": 5212,
+    "daily_snapshot_ma200_pct": 28.613053613053612,
+    "510300_rows": 640,
+    "510300_latest_date": "2026-09-18",
+    "510300_fetched_at": "2026-09-19T02:13:03.033450+00:00",
+    "159915_content_hash_unchanged": true
+  },
+  "qualification": {
+    "stage": "input_observation_only",
+    "common_200_denominator": "日常快照仍未保存冻结研究要求的共同200日分母、覆盖率和逐成员同日证明。",
+    "historical_membership": "当前代码列表更新仍不能建立历史成员、生效时间及真实取得时间链。",
+    "etf_nominal_prices_and_actions": "510300行情更新至9月18日，但仍缺配套公司行动、停牌限价和连续信号价身份；159915内容仍未更新。",
+    "availability": "本次实际读取时间已保存；来源日期、修改时间和元数据取得时间不倒填为过去已观察。",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "decision": "输入有常规刷新，但没有完整匹配输入或需要用户处理的新证据；继续仅输入观察。",
+  "scope": "未回测、未改参数、未更新OKR、未交易、未自动切换状态。"
+}

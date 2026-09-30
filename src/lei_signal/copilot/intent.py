@@ -4,6 +4,22 @@
 /agent/chat）。路由表可持续补充——这里只是「常见说法」的快捷方式，不是
 意图的权威定义。报单解析是 best-effort：抽不全的字段进 missing，由前端
 确认卡补齐，解析错误不阻断报单。
+
+意图路由扩展（2026-09-19，agent-intent-routing）：旧五类之后追加
+dca/sentiment/mindset 三类显式规则。优先级=元组顺序：旧五类在前、原序原词
+（追加式扩展，旧行为零回归由构造保证）；新三类依次 dca→sentiment→mindset，
+sentiment 先于 mindset 与 copilot/resolve.py 的 _TOPIC_RULES 自身顺序一致。
+
+- sentiment/mindset 词表与 resolve.py 话题词表逐字一致（同一句话在 dispatch
+  快捷层与 agent 讨论入口同向）；dca 刻意窄于 resolve.py 的 dca 话题词
+  （不含 闲钱/每月/工资/新收入）——这些是资金用途词汇，归讨论入口处理，
+  进本粗粒度层会误劫持（如「每月复盘」撞「每月」）。
+- 本层是无否定处理的子串匹配（「别定投了」命中 dca，与「别买了」命中
+  trade_report 同一既有局限）；否定/假设的精细处理归 resolve.py，不在本层复制。
+- mindset 下游种子库 configs/mindset_seed.json 已于 2026-09-19 S1 接入
+  （copilot/mindset.py 加载器）：种子在场时命中即出叙事卡、不带回落标注；
+  种子缺失/损坏时仍带 fallback_reason 标注，由 dispatch 显式回落通用讨论
+  且回落原因可观察（行为与接入前缺位场景一致）。
 """
 from __future__ import annotations
 
@@ -14,13 +30,30 @@ from datetime import date, timedelta
 from lei_signal.api.schemas import TradePreviewDTO
 
 #: 意图关键词表（顺序即优先级：报单优先于推荐，避免「买了什么好」误判）。
+#: 2026-09-19 尾部追加 dca/sentiment/mindset：旧五类在前零回归由构造保证；
+#: sentiment 先于 mindset 与 resolve.py 话题词表同序；词表口径见模块 docstring。
 _INTENT_RULES: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("trade_report", ("买了", "卖了", "申购", "赎回", "报单", "下单了", "成交了")),
     ("scout", ("最近机会", "看看机会", "发掘机会", "机会扫描", "扫扫机会")),
     ("recommend", ("今天看什么", "推荐", "有什么机会", "扫一下自选", "标的雷达")),
     ("holdings", ("持仓", "我的仓位", "持仓速览")),
     ("review", ("复盘", "周报", "这周做得怎么样")),
+    ("dca", ("定投", "分批投")),
+    ("sentiment", ("情绪", "冰点", "强热", "恐慌", "热警报", "散户")),
+    ("mindset", ("心态", "拿不住", "怕跌", "慌", "睡不着")),
 )
+
+#: 认知/心态下游种子库缺位时的显式回落原因（dispatch 回落分支消费，
+#: 随回包 fallback_reason 字段可观察）。种子在场（copilot/mindset.py 校验
+#: 通过）时不标注，直接出叙事卡。
+_MINDSET_FALLBACK_REASON = "mindset_seed_missing"
+
+
+def _mindset_seeds_ok() -> bool:
+    # 独立小函数便于测试替换（intent 层只问在场与否，不搬种子内容）。
+    from lei_signal.copilot.mindset import seeds_available  # noqa: PLC0415
+
+    return seeds_available()
 
 _AMOUNT_RE = re.compile(r"(\d+(?:\.\d+)?)\s*(万|w|W|k|K|千|块|元)?")
 _CODE_RE = re.compile(r"(?<!\d)(\d{6})(?!\d)")
@@ -30,16 +63,26 @@ _SIDE_SELL = ("卖", "赎回")
 
 @dataclass(slots=True)
 class Intent:
-    kind: str                    # recommend|holdings|trade_report|review|chat
+    # kind: trade_report|scout|recommend|holdings|review|dca|sentiment|mindset|chat
+    kind: str
     symbol: str | None = None
     params: dict = field(default_factory=dict)
+    #: 识别成功但下游未就绪时的显式回落原因（如 mindset 种子库缺位）；None=无标注。
+    fallback_reason: str | None = None
 
 
 def parse_intent(message: str) -> Intent:
     text = (message or "").strip()
+    from lei_signal.copilot.factor_readonly import is_factor_question
+
+    if is_factor_question(text):
+        return Intent(kind="chat")
     for kind, needles in _INTENT_RULES:
         if any(n in text for n in needles):
-            return Intent(kind=kind)
+            fallback = (
+                None if _mindset_seeds_ok() else _MINDSET_FALLBACK_REASON
+            ) if kind == "mindset" else None
+            return Intent(kind=kind, fallback_reason=fallback)
     return Intent(kind="chat")
 
 

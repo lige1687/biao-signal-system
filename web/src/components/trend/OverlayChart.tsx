@@ -17,6 +17,8 @@ export interface OverlaySeries {
   opacity?: number;
   /** 在原始刻度指数格里，是否作为配角（不单独占一把 Y 轴，与主角共轴）。 */
   secondary?: boolean;
+  /** 调查等离散资料可选择保留缺口；默认沿用既有连线行为。 */
+  connectNulls?: boolean;
 }
 
 /**
@@ -251,8 +253,9 @@ function buildSeries(
       xAxisIndex: x,
       yAxisIndex: y,
       data: rebase ? rebaseFrom(s.values, iBase) : s.values,
-      showSymbol: false,
-      connectNulls: true, // 债券/股票交易日历不完全重合，跳过空点连线
+      showSymbol: s.connectNulls === false,
+      symbolSize: s.connectNulls === false ? 5 : undefined,
+      connectNulls: s.connectNulls ?? true, // 其他既有叠图仍跳过交易日历空点
       lineStyle: {
         width: s.lineWidth ?? (s.dashed ? 1.2 : 1.4),
         color: s.color,

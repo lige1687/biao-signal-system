@@ -249,11 +249,16 @@ export default function SupervisorPage() {
 
   return (
     <div className="page">
-      <div className="page-head">
-        <h1>监督待办</h1>
-        <span className="ph-meta">
-          活跃计划（entered / armed）与当日判定。待办的「已执行 / 推迟」与飞书回执写同一套状态机。
-        </span>
+      <div className="pg-head">
+        <div className="pg-head-title">
+          <h1>监督待办</h1>
+          <span className="pg-head-sub">
+            活跃计划（entered / armed）与当日判定。待办的「已执行 / 推迟」与飞书回执写同一套状态机。
+          </span>
+        </div>
+        <div className="pg-head-kv">
+          <span className="pg-kv"><span className="k">活跃计划</span><b>{l1 || l2 ? "未知" : plans.length}</b></span>
+        </div>
       </div>
 
       <div className="sv-scan">

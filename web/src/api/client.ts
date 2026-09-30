@@ -26,7 +26,9 @@ import type { BoardProfile, BoardChartSeries, SentimentDashboard, SentimentLight
   DraftUpdatePayload,
   EventItem,
   ForwardStatsResponse,
+  FwdLedgerResponse,
   FundamentalsOverview,
+  MarketObservationsResponse,
   GlobalStripResponse,
   CommodityRatios,
   EtfItem,
@@ -498,6 +500,8 @@ export const api = {
 
 // ---- 基本面参考层 ----
 export const fundamentalsApi = {
+  observations: (market: "cn" | "us") =>
+    request<MarketObservationsResponse>(`/fundamentals/observations?market=${market}`),
   overview: (refresh = false) =>
     request<FundamentalsOverview>(`/fundamentals/overview${refresh ? "?refresh=true" : ""}`),
   industryFlow: (code: string, days = 20) =>
@@ -801,6 +805,11 @@ export const mindsetApi = {
     }),
   remove: (id: string) => request<void>(`/mindset/items/${id}`, { method: "DELETE" }),
   reviewNext: () => request<MindsetItem | null>("/mindset/review/next"),
+};
+
+// ---- 前向验证成绩单（只读）----
+export const fwdLedgerApi = {
+  scorecard: () => request<FwdLedgerResponse>("/fwd-ledger/scorecard"),
 };
 
 export const strategyDocumentsApi = {

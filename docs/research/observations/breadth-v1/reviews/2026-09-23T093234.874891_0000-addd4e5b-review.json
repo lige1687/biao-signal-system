@@ -1,0 +1,28 @@
+{
+  "observed_at": "2026-09-23T09:32:34.874891+00:00",
+  "reviewed_at": "2026-09-23T09:32:52Z",
+  "record": "docs/research/observations/breadth-v1/records/2026-09-23T093234.874891_0000-addd4e5b.json",
+  "changed_sources": ["source-01", "source-02"],
+  "facts": {
+    "a_share_content_hash_unchanged": true,
+    "a_share_rows": 4067021,
+    "a_share_latest_date": "2026-09-21",
+    "current_code_date": "2026-09-23",
+    "current_code_count": 3248,
+    "previous_code_count": 4949,
+    "code_count_change": -1701,
+    "current_code_prefix_counts": {"sh": 0, "sz": 2902, "bj": 346}
+  },
+  "qualification": {
+    "stage": "input_observation_only",
+    "common_200_denominator": "逐股行情内容未更新，名单又减少1701只；上海市场代码为0，不能形成任何合格的全A共同分母。",
+    "historical_membership": "名单缺失整个上海市场，属于明确输入故障，不能解释为真实成员变化。",
+    "etf_nominal_prices_and_actions": "ETF及公司行动监测来源未变化，原资格缺口仍在。",
+    "availability": "本次实际读取时间已保存；故障名单不用于信号、历史回填或策略结论。",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "decision": "观察到明确输入故障并通知用户；继续阻止信号生成，不自动修复、不重跑历史，等待名单来源恢复或单独授权排查。",
+  "scope": "未回测、未改参数、未更新OKR、未交易、未自动切换状态。"
+}

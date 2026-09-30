@@ -1,0 +1,20 @@
+方向与架构讨论 第2轮（主控事实核验反馈）
+
+你第1轮的关键主张我逐条在仓库核验了，先纠正/加强你的事实基础：
+
+核验1（回答你留下的问2）：watch生命周期已存在，不需要新建。BuyPointCandidateDTO 已有 state 字段，取值 watch/confirmed/weakened/invalidated，附 state_cn；WatchConditionDTO 明确区分 price 型与 state 型缺失条件（注释原文：缺「完整多头排列未成立」时没有单一价位可言，硬贴数字就是编造），并带 as_signal_rule_ids 可跟踪化字段；SuggestedPlanDTO 已是「可直接落计划的预填」（symbol/module/direction/entry_rule_id），你要的动作闭环（关注→计划草稿）后端已半联通，缺的是前端把这条链显式摆出来。
+核验2：/opportunities/scan 已把结果分为 actionable/waiting/blocked 三组；ScanItemDTO 含 verdict、missing_summary_cn、blocking_reasons、has_active_plan。你要的首层「为什么看/等什么」字段全在。
+核验3（回答你留下的问1）：前端路由现状：/ 是 WorkspacePage（今日工作台），另有 /daily /plans /portfolio 等。我的立场：V1 不新增一级路由，关注清单做成 WorkspacePage 首屏区块；理由是用户每天第一站是首页、9/16方向文档口径也是「沿用既有工作台」、避免导航膨胀。升级为独立入口的触发条件（如条目持续超过多少、或用户主动要求）请你定。
+核验4：daily_watch_snapshots 落库需要动 storage 层（sqlite_store.py 属受保护路径的改动，需要用户对这一批授权）——计划里要把「动存储层的授权点」显式列为用户决策项。
+
+基于此我对你第1轮立场的回应：
+- A（S2并行、V1不含消息维度）：同意。补一点：S2反哺的「消息不可用≠没消息」原则我写进V1验收反例（即使无消息维度，预留状态位，不显示「无消息」误导文案）。
+- B（只做聚合展示层）：同意。你提的 DTO 字段三分法（source/derived/禁decision）我采纳为验收条款。补充：现有BuyPointCandidateDTO的docstring已自我约束「无新判定、无新数值」，方向一致。
+- C（快照）：同意最小表+180天+首日基线。确认一点：diff只由两次快照对比产生，禁止回填。
+- D（验收）：同意用户任务式验收。请把你的四个场景（5秒为什么看/30秒等什么/次日变化/失效可见）+30秒理解指标写成可打勾的验收清单格式，作为冻结计划的验收附件。
+
+第2轮请你收敛输出：
+1. 冻结计划骨架：分几个阶段（建议2-3个），每阶段给：目标一句话、涉及层（API聚合/前端/存储/无）、验收清单（用你的场景格式）、用户授权点（哪些要用户点头）。
+2. 派发建议：每阶段建议的执行档案（flash-high机械/glm-high有界/glm-max难推理），按orchestrator规则你只推荐、我执行选择与记录。
+3. 你上轮提的ETF失效语义（结构破坏/估值偏离/宏观条件vs止损目标价）：请给出「哪些映射到既有规则来源、哪些必须显式标注为ETF差异」的具体清单，保证可溯源到trading-spec。
+4. 你认为还有哪些必须在冻结前解决的分歧或风险（如果没有就说没有）。

@@ -1,0 +1,30 @@
+/* ── S14 情绪页·趋势图视觉中心（2026-09-20，页面级样式，禁写共享 styles.css）──
+ * 设计意图：以空间建立主次——主图（整体市场冷热宽度趋势图）放大占主导，
+ * 四张情绪指标卡降权为扁平辅助层；不新增图表、不改字号、不隐藏指标。
+ * 黑灰绿、数据、时间窗、排序、交互全部不变。 */
+
+/* 主图区块：加大留白，与后续内容拉开层级 */
+.sent-page .sb-main .sb-breadth-block {
+  padding: 14px 16px 12px;
+  margin-bottom: 18px;
+}
+
+/* 桌面（≥1280）：主图增高为页面最高的单一视觉元素（覆盖组件内联 250px；
+ * echarts 的 ResizeObserver 会随容器尺寸自适应重绘，图例/轴标不裁切） */
+@media (min-width: 1280px) {
+  .sent-page .sb-main .sb-breadth-block > div[style*="height"] {
+    height: 360px !important;
+  }
+}
+
+/* 辅助指标卡降权：白卡改为页面底色的扁平卡，不再与主图同权重竞争；
+ * 内容、字号、徽章色全部不变 */
+.sent-page .mood-grid .mood-card {
+  background: var(--bg);
+  border-color: var(--border-subtle);
+}
+.sent-sector-link { margin: 12px 0 20px; font-size: 13px; line-height: 1.6; }
+.sent-sector-link a { color: #256b95; font-weight: 600; }
+.sent-legacy,.sent-sector-details { border-top: 1px solid var(--border-subtle); padding-top: 12px; margin-top: 16px; }
+.sent-legacy > summary,.sent-sector-details > summary { cursor: pointer; font-weight: 650; padding: 6px 0; }
+.sent-legacy > summary:focus-visible,.sent-sector-details > summary:focus-visible { outline: 2px solid #2677a4; outline-offset: 3px; }

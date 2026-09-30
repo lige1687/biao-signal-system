@@ -1,0 +1,375 @@
+{
+  "schema": "sentiment-question-index/1",
+  "created_at": "2026-09-29T07:55:21.802271+00:00",
+  "formula_registry": "docs/research/definitions.v1.json",
+  "formula_registry_version": "1.5.4",
+  "formula_registry_sha256": "46d35016f278d8260b0024463d7518712e781c5126a41af9618bbf0c7d5df960",
+  "not_a_second_formula_registry": true,
+  "user_mission": "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/user-mission.txt",
+  "technical_owner": "another technical_agent",
+  "allowed_verdicts": [
+    "Stable predictive information",
+    "Conditional information",
+    "Tail-risk information",
+    "Volatility information",
+    "Mostly redundant",
+    "No meaningful incremental information",
+    "Insufficient evidence"
+  ],
+  "entries": [
+    {
+      "family": "S01",
+      "name": "市场宽度绝对水平",
+      "owner": "sentiment_agent",
+      "source": "original_LEI",
+      "semantic_note": null,
+      "priority": 1,
+      "status": "data_qualification_blocked",
+      "verdict": "Insufficient evidence",
+      "verdict_scope": "目前已有资料/证据，不代表家族所有用途已经完成",
+      "research_card": "research-cards.md",
+      "global_object_refs": [
+        "breadth.all_a.b50.common@1.0.0",
+        "breadth.all_a.b50.legacy_percent@1.0.0",
+        "breadth.all_a.b200.common@1.0.0",
+        "breadth.all_a.b200.legacy_percent@1.0.0",
+        "breadth.csi300.b50.common@1.0.0",
+        "breadth.csi300.b50.legacy_percent@1.0.0",
+        "breadth.csi300.b200.common@1.0.0",
+        "breadth.csi300.b200.legacy_percent@1.0.0",
+        "breadth.chinext.b50.common@1.0.0",
+        "breadth.chinext.b50.legacy_percent@1.0.0",
+        "breadth.chinext.b200.common@1.0.0",
+        "breadth.chinext.b200.legacy_percent@1.0.0",
+        "breadth.production.independent@1.0.0",
+        "breadth.daily_all_a.independent@1.0.0"
+      ],
+      "local_candidate_refs": [],
+      "prediction_targets": "方向、涨跌幅、反转、大跌风险、波动分别定义；新实验未冻前不混成单一成绩",
+      "production": "not_authorized",
+      "original_LEI_threshold": {
+        "market": "SP500",
+        "low_percent": 15,
+        "high_percent": 85,
+        "condition": "20+50同时，200增强",
+        "optimized": false
+      },
+      "actual_source_audit": "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/us-source-audit.json",
+      "blocking_reason": "公开价格档案已下载，2008-09-12同名完整50日窗口384/496，排除AGN已知身份冲突后最多383；其余身份、名单及调整版本未核齐。Investing20/50长期记录存在，登录已恢复，正常导出未确认文件，口径待核；来源续查24次额度用完已暂停。原E效果未评价。",
+      "latest_source_qualification": "docs/experiments/raw/sentiment-s01-historical-input-2026-09-30/source/qualification.json",
+      "latest_source_report": "docs/experiments/sentiment-open-source-input-2026-09-30.md",
+      "prior_official_source_report": "docs/experiments/sentiment-s01-historical-input-2026-09-30.md",
+      "latest_source_note": "Actual50quote windows checked using local/Boris/selected FNSPID files; identity-unverified name union384/496 on2008-09-12, knownAGN ambiguity removed upperbound383. Prior355/496 only filename proxy preserved. Public InvestingB20/B50 page shows4364 dated rows each for2008-2025; no full download or methodology qualification yet. No new market effects. Login subsequently restored via skipped onboarding; authenticatedB20 long query worked, normal download timed out without confirmed file;24/24 continuation operations consumed, paused.",
+      "latest_local_cache_report": "docs/experiments/sentiment-s01-local-cache-2026-09-30.md",
+      "latest_local_cache_profile": "docs/experiments/raw/sentiment-s01-local-cache-2026-09-30/cache-profile.json",
+      "local_cache_note": "User-identified local self-calculated series exists; full B20/B50/B200 arithmetic reproduces from494 current-member price columns with zero beyond-rounding discrepancies. Historical SP500 entry/exit identities and actual available-at remain unqualified; no originalE outcome fit.",
+      "purpose_specific_qualification": "docs/experiments/raw/sentiment-standard-pro-review-2026-09-29/qualification-tiers.json",
+      "next_direction_plan": "docs/experiments/raw/sentiment-standard-pro-review-2026-09-29/next-stage-plan.json",
+      "latest_direction_note": "Separate retrospective input identity from actual historical availability. Independent and common denominators are both explicit research choices; assess missingness/coverage, do not impose common denominator universally.",
+      "decision_mapping": {
+        "original_claim": "原E的标普500 20/50同时低于等于15%或高于等于85%，200辅助",
+        "actual_version": "本地算术及免费来源实物核查已做；实际50日报价窗口/身份反例和成品序列存在性已核。连续20/50效果条件设计仍未冻结运行。",
+        "target_decision": "内部参与是否在已有指数涨跌之外提供信息；原E主输入的研究依据",
+        "input_qualification": "有免费旧名单、持仓身份快照和旧价格，但历史公司身份/完整覆盖/调整版本未核齐；成品序列待正常免费登录下载、口径与用途资格。当年决策另核输入可得时点。",
+        "unstudied_uses": [
+          "原历史标普500所有效果",
+          "高状态、其他期限、周/月行动适配",
+          "完整资金和对冲"
+        ]
+      },
+      "latest_open_source_evidence": {
+        "manifest": "docs/experiments/raw/sentiment-open-source-input-2026-09-30/source-manifest.json",
+        "price_windows": "docs/experiments/raw/sentiment-open-source-input-2026-09-30/actual-50day-window-coverage.json",
+        "identity_counterexamples": "docs/experiments/raw/sentiment-open-source-input-2026-09-30/security-identity-counterexamples.json",
+        "compiled_series_presence": "docs/experiments/raw/sentiment-open-source-input-2026-09-30/compiled-breadth-five-date-audit.json",
+        "full_original_E_qualified": false
+      }
+    },
+    {
+      "family": "S02",
+      "name": "宽度变化与扩散",
+      "owner": "sentiment_agent",
+      "source": "original_LEI",
+      "semantic_note": "S02为原宽度家族的新增派生研究，具体变换不冒充原E规则",
+      "priority": 2,
+      "status": "pending",
+      "verdict": "Insufficient evidence",
+      "verdict_scope": "目前已有资料/证据，不代表家族所有用途已经完成",
+      "research_card": "research-cards.md",
+      "global_object_refs": [
+        "breadth.all_a.delta50_20@1.0.0",
+        "breadth.all_a.delta200_20@1.0.0",
+        "breadth.csi300.delta50_20@1.0.0",
+        "breadth.csi300.delta200_20@1.0.0",
+        "breadth.chinext.delta50_20@1.0.0",
+        "breadth.chinext.delta200_20@1.0.0"
+      ],
+      "local_candidate_refs": [],
+      "prediction_targets": "方向、涨跌幅、反转、大跌风险、波动分别定义；新实验未冻前不混成单一成绩",
+      "production": "not_authorized",
+      "blocking_reason": "继承S01资料资格；新Δ1/Δ5/加速/背离尚未定义，不静默发布",
+      "decision_mapping": {
+        "original_claim": "宽度参与恢复假说；新派生研究不冒充原E触发",
+        "actual_version": "既有中国delta50_20/delta200_20登记；美国新问题未执行；delta1/5/加速/背离待定义",
+        "target_decision": "参与变化相对宽度水平是否多提供信息",
+        "input_qualification": "美国对象继承S01历史身份；中国旧对象不能替代美国原E",
+        "unstudied_uses": [
+          "美国变化/恢复效果",
+          "新变换的准确定义",
+          "名单更替与价格变化的分离"
+        ]
+      }
+    },
+    {
+      "family": "S03",
+      "name": "AAII个人投资者看法",
+      "owner": "sentiment_agent",
+      "source": "original_LEI",
+      "semantic_note": null,
+      "priority": 3,
+      "status": "historical_return_and_risk_increment_completed_pending_source_and_new_evidence",
+      "verdict": "Insufficient evidence",
+      "verdict_scope": "已完成收益五期限和本次连续值120风险问题；有限历史证据不足，不代表全AAII用途判负",
+      "research_card": "research-cards.md",
+      "global_object_refs": [],
+      "local_candidate_refs": [
+        "candidate:sentiment.aaii-spread@draft-1",
+        "local:sentiment.aaii-low-excess@1.0.0",
+        "local:sentiment.aaii-high-excess@1.0.0"
+      ],
+      "prediction_targets": "方向、涨跌幅、反转、大跌风险、波动分别定义；新实验未冻前不混成单一成绩",
+      "production": "not_authorized",
+      "actual_report": "docs/experiments/sentiment-factor-feasibility-2026-09-29.md",
+      "original_LEI_threshold": {
+        "spread_percentage_points": [
+          -25,
+          25
+        ],
+        "optimized": false
+      },
+      "remaining": "真实首次发布/价格调整版本、真正新资料、原极端风险/概率/波动/持续恢复/20周背景与其他市场及完整E未评价",
+      "latest_report": "docs/experiments/sentiment-aaii-risk-increment-2026-09-29.md",
+      "latest_question": "sentiment.aaii-risk120-increment@1.0.0",
+      "definition_source": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/protocol.json",
+      "latest_increment_note": "120报价间隔内最大阶段下跌：新增连续AAII误差减少0.2092%，一年日期范围[-1.3350%,2.3449%]，整套方法比成熟历史平均多3.7941%平方误差，去2016后-0.1088%；835日期，2026仅1条。",
+      "available_at": "实际历史首发未知；本轮明确假设源日期+7日，不修复源",
+      "previous_question_reports": [
+        "docs/experiments/sentiment-aaii-extremes-increment-2026-09-29.md"
+      ],
+      "latest_question_protocol": "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/protocol.json",
+      "conditional_next_question": "AAII original<=-25 confirmation within qualified20/50 double-low state; not executed; no prior state positive-result requirement",
+      "decision_mapping": {
+        "original_claim": "AAII多空差±25及20周图线，作E确认",
+        "actual_version": "sentiment.aaii-risk120-increment@1.0.0及五期限涨跌冻结协议，报告引用保持",
+        "target_decision": "调查看法相对价格背景的新增信息；未来合格宽度内悲观确认",
+        "input_qualification": "旧调查比例已核；七日等待是假设；回顾性新问题需真实观测日期/来源版本，历史决策可用另需首发，真正新确认需新记录",
+        "unstudied_uses": [
+          "合格宽度内确认",
+          "20周线、持续、恢复、波动",
+          "周/月行动适配与完整E"
+        ]
+      }
+    },
+    {
+      "family": "S04",
+      "name": "NAAIM主动管理人敞口",
+      "owner": "sentiment_agent",
+      "source": "original_LEI",
+      "semantic_note": null,
+      "priority": 4,
+      "status": "data_qualification_blocked",
+      "verdict": "Insufficient evidence",
+      "verdict_scope": "目前已有资料/证据，不代表家族所有用途已经完成",
+      "research_card": "research-cards.md",
+      "global_object_refs": [],
+      "local_candidate_refs": [
+        "candidate:sentiment.naaim-exposure@draft-1"
+      ],
+      "prediction_targets": "方向、涨跌幅、反转、大跌风险、波动分别定义；新实验未冻前不混成单一成绩",
+      "production": "not_authorized",
+      "original_LEI_threshold": {
+        "exposure_percent": [
+          40,
+          100
+        ],
+        "optimized": false
+      },
+      "blocking_reason": "完整1047周文件版本及其观察日期未核完，历史首发/修订仍缺；当前官方公开131周观察身份已核，有限回顾性效果另报告，不受S01连带阻断",
+      "decision_mapping": {
+        "original_claim": "部分管理人自报敞口40/100作E确认，不是全体机构实仓",
+        "actual_version": "candidate:sentiment.naaim-exposure@draft-1；官方短史131周已核，78周有限涨跌比较有线索；完整家族未验证",
+        "target_decision": "区分低敞口反向信息与恢复敞口的确认信息",
+        "input_qualification": "完整1047周文件版本及其观察日期未核完，历史首发/修订仍缺；当前官方公开131周观察身份已核，有限回顾性效果另报告，不受S01连带阻断",
+        "unstudied_uses": [
+          "原宽度内确认及完整组合",
+          "完整长历史与真实时点研究",
+          "未来风险估计增量",
+          "低频行动适配",
+          "超越完整价格背景与AAII"
+        ]
+      },
+      "latest_public_window_evidence": {
+        "report": "docs/experiments/sentiment-naaim-public-window-2026-09-30.md",
+        "protocol": "docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/protocol.json",
+        "execution": "completed",
+        "scope": "official public131surveyweeks;78evalweeks;retrospectivecurrentversiononly",
+        "result": "limitederrorreductionclue15.3641%overpast20dayreturn;0qualifiedas-oftrade",
+        "remaining": "longhistorysource/firstrelease;original40/100only1/6weeks;fullprice/AAIIincrementnotrun"
+      }
+    },
+    {
+      "family": "S05",
+      "name": "Equity与Total Put/Call",
+      "owner": "sentiment_agent",
+      "source": "original_LEI",
+      "semantic_note": null,
+      "priority": 5,
+      "status": "historical_single_factor_completed_pending_recent_qualified_data",
+      "verdict": "Insufficient evidence",
+      "verdict_scope": "仅SPY观察2015-01-02—2019-09-05、两报价等待假设、20段涨跌及窗口最大下跌；非全家族无效",
+      "research_card": "research-cards.md",
+      "global_object_refs": [],
+      "local_candidate_refs": [
+        "local:sentiment.equity-putcall-reported@1.0.0",
+        "local:sentiment.total-putcall-reported@1.0.0",
+        "local:sentiment.equity-putcall-original-extreme@1.0.0"
+      ],
+      "prediction_targets": "本轮20段窗口内最大跌幅为主，期末涨跌辅助；方向仅原始上涨比例，不宣称概率模型",
+      "production": "not_authorized",
+      "original_LEI_threshold": {
+        "type": "Equity",
+        "low_side_condition": "Put/Call>1",
+        "top_threshold": null,
+        "optimized": false
+      },
+      "actual_source_audit": "docs/experiments/raw/sentiment-putcall-increment-2026-09-29/controller-qualification-review.json",
+      "blocking_reason": "历史单位已完成；近年连续可比源及真实首发时间未确认，不代入0；其他期限和用途未评价",
+      "actual_report": "docs/experiments/sentiment-putcall-increment-2026-09-29.md",
+      "latest_report": "docs/experiments/sentiment-putcall-increment-2026-09-29.md",
+      "latest_question": "sentiment.putcall-increment@1.0.0",
+      "definition_source": "docs/experiments/raw/sentiment-putcall-increment-2026-09-29/protocol.json",
+      "prior_source_audit": "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/putcall-source-audit.json",
+      "latest_increment_note": "股票／总体比例主风险改善−0.675%／−0.155%，涨跌+0.100%／−1.234%；单独及组合都不如过去均值，原>1评价仅5次。",
+      "available_at": "actual first-release/revision unknown; hypothetical two real quote rows wait after exact source-day quote; not a source repair",
+      "decision_mapping": {
+        "original_claim": "原E只有Equity Put/Call>1低位确认；Total是分开研究的对照",
+        "actual_version": "sentiment.putcall-increment@1.0.0；20间隔窗口最大下跌为主，期末涨跌辅助",
+        "target_decision": "期权成交构成是否增加价格背景之外的信息",
+        "input_qualification": "2012变化后，SPY2015—2019共同1177日；两报价日等待是假设；新时期需同口径资料，历史可执行另核首发",
+        "unstudied_uses": [
+          "2020以后",
+          "持续、恢复、其他期限和波动",
+          "宽度确认、周/月行动适配及完整E"
+        ]
+      }
+    },
+    {
+      "family": "S06",
+      "name": "VIX恐慌与缓解",
+      "owner": "sentiment_agent",
+      "source": "extension",
+      "semantic_note": null,
+      "priority": 6,
+      "status": "deferred_extension",
+      "verdict": null,
+      "verdict_scope": null,
+      "research_card": "research-cards.md",
+      "global_object_refs": [],
+      "local_candidate_refs": [],
+      "prediction_targets": "方向、涨跌幅、反转、大跌风险、波动分别定义；新实验未冻前不混成单一成绩",
+      "production": "not_authorized"
+    },
+    {
+      "family": "S07",
+      "name": "市场内部结构",
+      "owner": "sentiment_agent",
+      "source": "extension",
+      "semantic_note": null,
+      "priority": 7,
+      "status": "deferred_extension",
+      "verdict": null,
+      "verdict_scope": null,
+      "research_card": "research-cards.md",
+      "global_object_refs": [],
+      "local_candidate_refs": [],
+      "prediction_targets": "方向、涨跌幅、反转、大跌风险、波动分别定义；新实验未冻前不混成单一成绩",
+      "production": "not_authorized"
+    },
+    {
+      "family": "S08",
+      "name": "防御与进攻资产相对表现",
+      "owner": "sentiment_agent",
+      "source": "extension",
+      "semantic_note": null,
+      "priority": 8,
+      "status": "deferred_extension",
+      "verdict": null,
+      "verdict_scope": null,
+      "research_card": "research-cards.md",
+      "global_object_refs": [],
+      "local_candidate_refs": [],
+      "prediction_targets": "方向、涨跌幅、反转、大跌风险、波动分别定义；新实验未冻前不混成单一成绩",
+      "production": "not_authorized"
+    },
+    {
+      "family": "S09",
+      "name": "信用与系统风险状态",
+      "owner": "sentiment_agent",
+      "source": "extension",
+      "semantic_note": null,
+      "priority": 9,
+      "status": "deferred_extension",
+      "verdict": null,
+      "verdict_scope": null,
+      "research_card": "research-cards.md",
+      "global_object_refs": [],
+      "local_candidate_refs": [],
+      "prediction_targets": "方向、涨跌幅、反转、大跌风险、波动分别定义；新实验未冻前不混成单一成绩",
+      "production": "not_authorized"
+    },
+    {
+      "family": "S10",
+      "name": "COT、基金流量与期权持仓",
+      "owner": "sentiment_agent",
+      "source": "extension",
+      "semantic_note": null,
+      "priority": 10,
+      "status": "deferred_extension",
+      "verdict": null,
+      "verdict_scope": null,
+      "research_card": "research-cards.md",
+      "global_object_refs": [],
+      "local_candidate_refs": [],
+      "prediction_targets": "方向、涨跌幅、反转、大跌风险、波动分别定义；新实验未冻前不混成单一成绩",
+      "production": "not_authorized"
+    }
+  ],
+  "last_research_update": "2026-09-30T06:31:57.152445+00:00",
+  "latest_research_registry_binding": {
+    "version": "1.6.0",
+    "sha256": "8fedb09a4074729674b3a81da970efae8b04ad1b102560ff2dc12ebbc8426f1e",
+    "scope": "newriskquestion, no globalruntime objects called",
+    "frozen_manifest": "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/source-manifest.json"
+  },
+  "last_direction_review": "2026-09-29T12:24:09.282749+00:00",
+  "latest_direction_review": {
+    "report": "docs/experiments/sentiment-standard-pro-review-2026-09-29.md",
+    "plan": "docs/experiments/raw/sentiment-standard-pro-review-2026-09-29/next-stage-plan.json",
+    "actual_pro_calls": 1,
+    "new_market_fits": 0,
+    "new_source_requests": 0,
+    "direction": "real original20/50 breadth inputs first; user continuous-before-threshold retained"
+  },
+  "direction_application": {
+    "date": "2026-09-30",
+    "report": "docs/experiments/sentiment-direction-application-2026-09-30.md",
+    "readiness": "docs/experiments/raw/sentiment-direction-application-2026-09-30/independent/readiness.json",
+    "next_data_decision": "docs/experiments/raw/sentiment-direction-application-2026-09-30/data-acquisition-decision.md",
+    "new_market_fits": 0,
+    "new_source_requests": 0,
+    "new_pro_calls": 0,
+    "provider_contact": "draft_only_not_sent",
+    "sequence": "core readiness and dependencies, not strict family numbering; no positivity prerequisite for original E AAII confirmation",
+    "technical_interaction": "separate question after line-specific qualification"
+  }
+}

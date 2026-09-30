@@ -252,6 +252,8 @@ class SentimentObservation:
     available_at: datetime
     source: str
     license_status: str  # "licensed", "public_delayed", etc.
+    publication_time_basis: str | None = None  # absent in legacy files
+    first_fetched_at: datetime | None = None
     publication_delay_days: int | None = None
     current_eligible: bool = False
 

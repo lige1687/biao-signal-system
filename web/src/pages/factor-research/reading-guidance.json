@@ -1,0 +1,873 @@
+{
+  "schema_version": "factor-reading/1",
+  "note": "解释仅帮助阅读公式，不证明投资有效，也不是买卖信号。",
+  "guides": [
+    {
+      "references": [
+        "mixed.momentum.raw@1.0.0"
+      ],
+      "plain_name": "普通12-1动量",
+      "watch": "看约一年前到约一个月前的累计涨幅。",
+      "read": "值越大，这段历史涨幅越高；不代表之后一定延续。",
+      "context": [
+        "按每只产品自身的第252次与第21次前有效报价计算",
+        "比较日期与产品是否齐全，并看真实研究范围"
+      ],
+      "pitfall": "不是最近一个月涨幅，也不能凭读数推断下月继续上涨。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#mixed.momentum.raw@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "mixed.rv20@1.0.0"
+      ],
+      "plain_name": "20次收益波动",
+      "watch": "看最近20次涨跌有多不平稳。",
+      "read": "数值较大表示这段日收益起伏更大，不指明涨跌方向。",
+      "context": [
+        "有效报价是否足够",
+        "与同产品自身历史波动位置一起看"
+      ],
+      "pitfall": "按日收益样本标准差换算成年尺度，不是最大亏损或20日价格涨幅。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#mixed.rv20@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "mixed.rv_percentile@1.0.0"
+      ],
+      "plain_name": "波动在自身历史的位置",
+      "watch": "看现在的波动在自身历史中偏高还是偏低。",
+      "read": "接近1表示在历史比较窗中偏高；接近0表示偏低。",
+      "context": [
+        "先看原始20次收益波动",
+        "确认历史窗口及缺失数量"
+      ],
+      "pitfall": "分位高不代表绝对波动更大；跨产品还需比较波动率本身。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#mixed.rv_percentile@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "mixed.volatility_allowed@1.0.0"
+      ],
+      "plain_name": "既定波动筛选状态",
+      "watch": "看既定波动条件当前是否放行。",
+      "read": "真表示分位低于阈值，或旧规则把缺失分位也放行。",
+      "context": [
+        "同时看分位是否缺失",
+        "查看对应策略的资格与执行约束"
+      ],
+      "pitfall": "真可能来自缺失值放行，不能读成低风险或准许交易。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#mixed.volatility_allowed@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "mixed.momentum.rank@1.0.0"
+      ],
+      "plain_name": "普通动量完整排名",
+      "watch": "看同月合格产品谁排在前、谁在后。",
+      "read": "名单顺序按动量由高到低；并列按代码固定顺序。",
+      "context": [
+        "先核月末与资格是否完整",
+        "对照每只产品原始动量"
+      ],
+      "pitfall": "完整排名不是前三名，也不是经过波动筛选的买入名单。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#mixed.momentum.rank@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "trend.sma50@1.0.0"
+      ],
+      "plain_name": "50次有效报价均价",
+      "watch": "看当前价格相对50次报价均价的位置。",
+      "read": "均线是最近50次有效报价的平均，不是收益率。",
+      "context": [
+        "与当前价格及价格口径同看",
+        "核报价窗口是否足够"
+      ],
+      "pitfall": "均线高低本身不说明即将上涨；缺足够报价时不能补零。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#trend.sma50@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "trend.distance50@1.0.0"
+      ],
+      "plain_name": "距50次报价均线",
+      "watch": "看价格离50次报价均线有多远。",
+      "read": "正值在线上、负值在线下；绝对值越大表示距离越远。",
+      "context": [
+        "与均线方向和当前价格一起看",
+        "确认价格尺度一致"
+      ],
+      "pitfall": "距离不是买卖阈值；正负不证明趋势会持续。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#trend.distance50@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "trend.above50@1.0.0"
+      ],
+      "plain_name": "是否站上50次报价均线",
+      "watch": "看收盘价是否严格高于50次报价均线。",
+      "read": "真表示当期严格在线上；假与缺失应分别看。",
+      "context": [
+        "同时看均线是否已形成",
+        "与上穿事件区分"
+      ],
+      "pitfall": "持续在线上不等于今天刚上穿，更不是独立买点。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#trend.above50@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "trend.cross_up50@1.0.0"
+      ],
+      "plain_name": "本次上穿50次报价均线",
+      "watch": "看价格是否刚从均线下方（或相等）跨到上方。",
+      "read": "真只记录这一回上穿事件；之后保持在线上不再算新上穿。",
+      "context": [
+        "需看前后两次合法报价",
+        "结合道路方向与其他条件"
+      ],
+      "pitfall": "上穿事件不说明后续必涨，缺前次值不能冒充未上穿。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#trend.cross_up50@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "trend.sma200@1.0.0"
+      ],
+      "plain_name": "200次有效报价均价",
+      "watch": "看当前价格相对200次报价均价的位置。",
+      "read": "均线是最近200次有效报价的平均，不是收益率。",
+      "context": [
+        "与当前价格及价格口径同看",
+        "核报价窗口是否足够"
+      ],
+      "pitfall": "均线高低本身不说明即将上涨；缺足够报价时不能补零。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#trend.sma200@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "trend.distance200@1.0.0"
+      ],
+      "plain_name": "距200次报价均线",
+      "watch": "看价格离200次报价均线有多远。",
+      "read": "正值在线上、负值在线下；绝对值越大表示距离越远。",
+      "context": [
+        "与均线方向和当前价格一起看",
+        "确认价格尺度一致"
+      ],
+      "pitfall": "距离不是买卖阈值；正负不证明趋势会持续。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#trend.distance200@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "trend.above200@1.0.0"
+      ],
+      "plain_name": "是否站上200次报价均线",
+      "watch": "看收盘价是否严格高于200次报价均线。",
+      "read": "真表示当期严格在线上；假与缺失应分别看。",
+      "context": [
+        "同时看均线是否已形成",
+        "与上穿事件区分"
+      ],
+      "pitfall": "持续在线上不等于今天刚上穿，更不是独立买点。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#trend.above200@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "trend.cross_up200@1.0.0"
+      ],
+      "plain_name": "本次上穿200次报价均线",
+      "watch": "看价格是否刚从均线下方（或相等）跨到上方。",
+      "read": "真只记录这一回上穿事件；之后保持在线上不再算新上穿。",
+      "context": [
+        "需看前后两次合法报价",
+        "结合道路方向与其他条件"
+      ],
+      "pitfall": "上穿事件不说明后续必涨，缺前次值不能冒充未上穿。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#trend.cross_up200@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "trend.recovered200@1.0.0"
+      ],
+      "plain_name": "站回或贴住200次均线",
+      "watch": "看价格是否已回到200次报价均线。",
+      "read": "真包含刚好等于均线；与“严格站上”边界不同。",
+      "context": [
+        "同时看严格站上200的状态",
+        "检查均线预热是否足够"
+      ],
+      "pitfall": "站回是位置状态，不等于突破确认或交易许可。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#trend.recovered200@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.all_a.b50.common@1.0.0"
+      ],
+      "plain_name": "全A股票50日均线宽度",
+      "watch": "看合格股票中有多少站上各自50日均线。",
+      "read": "0到1的比例；越高，站上均线的股票占比越大。",
+      "context": [
+        "全A历史名单与资料覆盖",
+        "50日与200日采用共同合格分母"
+      ],
+      "pitfall": "宽度是覆盖面，不是指数涨幅；成员变化也会改变读数。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.all_a.b50.common@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.all_a.b50.legacy_percent@1.0.0"
+      ],
+      "plain_name": "全A股票50日宽度旧百分数",
+      "watch": "看旧口径下站上50日均线的股票占比。",
+      "read": "0到100的百分数；50表示约一半合格股票在线上。",
+      "context": [
+        "全A历史名单与资料覆盖",
+        "与同一池的新版0到1比例核单位"
+      ],
+      "pitfall": "旧百分数与新版小数相差100倍，不能直接相减。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.all_a.b50.legacy_percent@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.all_a.delta50_20@1.0.0"
+      ],
+      "plain_name": "全A股票50日宽度变化",
+      "watch": "看站上50日均线的比例较20次观察前如何变。",
+      "read": "正值表示覆盖面扩大，负值表示收缩；单位是比例差。",
+      "context": [
+        "全A历史名单与资料覆盖",
+        "同时看起点与终点宽度及共同分母"
+      ],
+      "pitfall": "0.05是5个百分点，不是增长5%；变化不保证后续收益。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.all_a.delta50_20@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.all_a.b200.common@1.0.0"
+      ],
+      "plain_name": "全A股票200日均线宽度",
+      "watch": "看合格股票中有多少站上各自200日均线。",
+      "read": "0到1的比例；越高，站上均线的股票占比越大。",
+      "context": [
+        "全A历史名单与资料覆盖",
+        "50日与200日采用共同合格分母"
+      ],
+      "pitfall": "宽度是覆盖面，不是指数涨幅；成员变化也会改变读数。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.all_a.b200.common@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.all_a.b200.legacy_percent@1.0.0"
+      ],
+      "plain_name": "全A股票200日宽度旧百分数",
+      "watch": "看旧口径下站上200日均线的股票占比。",
+      "read": "0到100的百分数；50表示约一半合格股票在线上。",
+      "context": [
+        "全A历史名单与资料覆盖",
+        "与同一池的新版0到1比例核单位"
+      ],
+      "pitfall": "旧百分数与新版小数相差100倍，不能直接相减。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.all_a.b200.legacy_percent@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.all_a.delta200_20@1.0.0"
+      ],
+      "plain_name": "全A股票200日宽度变化",
+      "watch": "看站上200日均线的比例较20次观察前如何变。",
+      "read": "正值表示覆盖面扩大，负值表示收缩；单位是比例差。",
+      "context": [
+        "全A历史名单与资料覆盖",
+        "同时看起点与终点宽度及共同分母"
+      ],
+      "pitfall": "0.05是5个百分点，不是增长5%；变化不保证后续收益。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.all_a.delta200_20@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.csi300.b50.common@1.0.0"
+      ],
+      "plain_name": "沪深300成分股50日均线宽度",
+      "watch": "看合格股票中有多少站上各自50日均线。",
+      "read": "0到1的比例；越高，站上均线的股票占比越大。",
+      "context": [
+        "当时成分名单是否完整",
+        "50日与200日采用共同合格分母"
+      ],
+      "pitfall": "宽度是覆盖面，不是指数涨幅；成员变化也会改变读数。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.csi300.b50.common@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.csi300.b50.legacy_percent@1.0.0"
+      ],
+      "plain_name": "沪深300成分股50日宽度旧百分数",
+      "watch": "看旧口径下站上50日均线的股票占比。",
+      "read": "0到100的百分数；50表示约一半合格股票在线上。",
+      "context": [
+        "当时成分名单是否完整",
+        "与同一池的新版0到1比例核单位"
+      ],
+      "pitfall": "旧百分数与新版小数相差100倍，不能直接相减。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.csi300.b50.legacy_percent@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.csi300.delta50_20@1.0.0"
+      ],
+      "plain_name": "沪深300成分股50日宽度变化",
+      "watch": "看站上50日均线的比例较20次观察前如何变。",
+      "read": "正值表示覆盖面扩大，负值表示收缩；单位是比例差。",
+      "context": [
+        "当时成分名单是否完整",
+        "同时看起点与终点宽度及共同分母"
+      ],
+      "pitfall": "0.05是5个百分点，不是增长5%；变化不保证后续收益。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.csi300.delta50_20@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.csi300.b200.common@1.0.0"
+      ],
+      "plain_name": "沪深300成分股200日均线宽度",
+      "watch": "看合格股票中有多少站上各自200日均线。",
+      "read": "0到1的比例；越高，站上均线的股票占比越大。",
+      "context": [
+        "当时成分名单是否完整",
+        "50日与200日采用共同合格分母"
+      ],
+      "pitfall": "宽度是覆盖面，不是指数涨幅；成员变化也会改变读数。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.csi300.b200.common@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.csi300.b200.legacy_percent@1.0.0"
+      ],
+      "plain_name": "沪深300成分股200日宽度旧百分数",
+      "watch": "看旧口径下站上200日均线的股票占比。",
+      "read": "0到100的百分数；50表示约一半合格股票在线上。",
+      "context": [
+        "当时成分名单是否完整",
+        "与同一池的新版0到1比例核单位"
+      ],
+      "pitfall": "旧百分数与新版小数相差100倍，不能直接相减。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.csi300.b200.legacy_percent@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.csi300.delta200_20@1.0.0"
+      ],
+      "plain_name": "沪深300成分股200日宽度变化",
+      "watch": "看站上200日均线的比例较20次观察前如何变。",
+      "read": "正值表示覆盖面扩大，负值表示收缩；单位是比例差。",
+      "context": [
+        "当时成分名单是否完整",
+        "同时看起点与终点宽度及共同分母"
+      ],
+      "pitfall": "0.05是5个百分点，不是增长5%；变化不保证后续收益。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.csi300.delta200_20@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.chinext.b50.common@1.0.0"
+      ],
+      "plain_name": "创业板成分股50日均线宽度",
+      "watch": "看合格股票中有多少站上各自50日均线。",
+      "read": "0到1的比例；越高，站上均线的股票占比越大。",
+      "context": [
+        "当时成分链的已知缺口",
+        "50日与200日采用共同合格分母"
+      ],
+      "pitfall": "宽度是覆盖面，不是指数涨幅；成员变化也会改变读数。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.chinext.b50.common@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.chinext.b50.legacy_percent@1.0.0"
+      ],
+      "plain_name": "创业板成分股50日宽度旧百分数",
+      "watch": "看旧口径下站上50日均线的股票占比。",
+      "read": "0到100的百分数；50表示约一半合格股票在线上。",
+      "context": [
+        "当时成分链的已知缺口",
+        "与同一池的新版0到1比例核单位"
+      ],
+      "pitfall": "旧百分数与新版小数相差100倍，不能直接相减。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.chinext.b50.legacy_percent@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.chinext.delta50_20@1.0.0"
+      ],
+      "plain_name": "创业板成分股50日宽度变化",
+      "watch": "看站上50日均线的比例较20次观察前如何变。",
+      "read": "正值表示覆盖面扩大，负值表示收缩；单位是比例差。",
+      "context": [
+        "当时成分链的已知缺口",
+        "同时看起点与终点宽度及共同分母"
+      ],
+      "pitfall": "0.05是5个百分点，不是增长5%；变化不保证后续收益。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.chinext.delta50_20@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.chinext.b200.common@1.0.0"
+      ],
+      "plain_name": "创业板成分股200日均线宽度",
+      "watch": "看合格股票中有多少站上各自200日均线。",
+      "read": "0到1的比例；越高，站上均线的股票占比越大。",
+      "context": [
+        "当时成分链的已知缺口",
+        "50日与200日采用共同合格分母"
+      ],
+      "pitfall": "宽度是覆盖面，不是指数涨幅；成员变化也会改变读数。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.chinext.b200.common@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.chinext.b200.legacy_percent@1.0.0"
+      ],
+      "plain_name": "创业板成分股200日宽度旧百分数",
+      "watch": "看旧口径下站上200日均线的股票占比。",
+      "read": "0到100的百分数；50表示约一半合格股票在线上。",
+      "context": [
+        "当时成分链的已知缺口",
+        "与同一池的新版0到1比例核单位"
+      ],
+      "pitfall": "旧百分数与新版小数相差100倍，不能直接相减。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.chinext.b200.legacy_percent@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.chinext.delta200_20@1.0.0"
+      ],
+      "plain_name": "创业板成分股200日宽度变化",
+      "watch": "看站上200日均线的比例较20次观察前如何变。",
+      "read": "正值表示覆盖面扩大，负值表示收缩；单位是比例差。",
+      "context": [
+        "当时成分链的已知缺口",
+        "同时看起点与终点宽度及共同分母"
+      ],
+      "pitfall": "0.05是5个百分点，不是增长5%；变化不保证后续收益。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.chinext.delta200_20@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.production.independent@1.0.0"
+      ],
+      "plain_name": "既有生产宽度映射",
+      "watch": "看各周期合格股票中站上均线的占比。",
+      "read": "输出旧生产百分数口径，各周期按自身合格分母。",
+      "context": [
+        "各周期实际合格股票数量",
+        "与共同分母研究口径分开"
+      ],
+      "pitfall": "不同周期分母可不同，不可当作共同分母B50/B200。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.production.independent@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.daily_all_a.independent@1.0.0"
+      ],
+      "plain_name": "日常全A宽度映射",
+      "watch": "看日常全A可用股票站上各周期均线的占比。",
+      "read": "输出旧日常百分数口径，各周期分别计算分母。",
+      "context": [
+        "日常数据覆盖及缺失",
+        "与历史共同分母研究口径分开"
+      ],
+      "pitfall": "不是完整历史成分回放；口径不同不能直接评判策略改善。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.daily_all_a.independent@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "breadth.three_tier@1.0.0"
+      ],
+      "plain_name": "宽度对应的三档目标",
+      "watch": "看既有映射把当前宽度放在哪一档。",
+      "read": "输出目标比例1、0.5或0，仅描述冻结规则的对应关系。",
+      "context": [
+        "先看宽度来源与口径",
+        "另看完整资金策略和执行限制"
+      ],
+      "pitfall": "三档是既有研究映射，不是本页给出的投入建议或盈利证明。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#breadth.three_tier@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "risk.product_account_weight@1.0.0"
+      ],
+      "plain_name": "单产品占账户比例",
+      "watch": "看一个产品在完整账户中占了多少。",
+      "read": "较高表示资金更集中于该产品；现金也在账户分母中。",
+      "context": [
+        "同时看其他产品与现金",
+        "查看账户估值时点"
+      ],
+      "pitfall": "占比高只说明集中，不说明这项持仓一定更危险或赚钱。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#risk.product_account_weight@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "risk.direction_account_weight@1.0.0"
+      ],
+      "plain_name": "同方向占账户比例",
+      "watch": "看同一经济方向的产品合计占多少。",
+      "read": "合并同方向后占完整账户的比例，可发现表面分散的集中。",
+      "context": [
+        "确认方向分组互斥",
+        "同时看产品层占比"
+      ],
+      "pitfall": "相似方向归组依赖既定分组，不是收益独立性的证明。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#risk.direction_account_weight@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "risk.product_invested_weight@1.0.0"
+      ],
+      "plain_name": "单产品占已投入资金比例",
+      "watch": "看一个产品在已投入资产中占多少。",
+      "read": "分母不含现金；同样持仓可比账户占比更高。",
+      "context": [
+        "与完整账户占比对照",
+        "查看现金比例"
+      ],
+      "pitfall": "不要把它当完整账户比例；全现金时分母不可算。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#risk.product_invested_weight@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "risk.profit_direction_share@1.0.0"
+      ],
+      "plain_name": "同方向盈亏占比",
+      "watch": "看账户净盈亏集中来自哪个经济方向。",
+      "read": "分母是期末权益减初始现金，描述盈亏来源，不是仓位。",
+      "context": [
+        "同时看账户净盈亏的正负和大小",
+        "结合资金贡献金额"
+      ],
+      "pitfall": "净亏时符号可能反转，净盈亏接近零会放大比值；不能当资金占比。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#risk.profit_direction_share@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "etf.trend.sma50@1.0.0"
+      ],
+      "plain_name": "ETF连续价50次均价",
+      "watch": "看ETF连续价格相对50次报价均价的位置。",
+      "read": "均线是旧账户口径的连续价格平均，需50次报价。",
+      "context": [
+        "核ETF连续价口径",
+        "与当前连续价格同看"
+      ],
+      "pitfall": "不能与混合池经济价格均线直接互换，也不是账户收益。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#etf.trend.sma50@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "etf.trend.above50@1.0.0"
+      ],
+      "plain_name": "ETF连续价站上50次均线",
+      "watch": "看ETF连续价格是否高于50次均价。",
+      "read": "真表示严格在线上；旧布尔比较在均线缺失时可返回假。",
+      "context": [
+        "先看均线是否已形成",
+        "与旧账户价格口径保持一致"
+      ],
+      "pitfall": "旧假值可能是预热不足，不能都读成价格跌到线下。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#etf.trend.above50@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "etf.trend.sma200@1.0.0"
+      ],
+      "plain_name": "ETF连续价200次均价",
+      "watch": "看ETF连续价格相对200次报价均价的位置。",
+      "read": "均线是旧账户口径的连续价格平均，需200次报价。",
+      "context": [
+        "核ETF连续价口径",
+        "与当前连续价格同看"
+      ],
+      "pitfall": "不能与混合池经济价格均线直接互换，也不是账户收益。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#etf.trend.sma200@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "etf.trend.above200@1.0.0"
+      ],
+      "plain_name": "ETF连续价站上200次均线",
+      "watch": "看ETF连续价格是否高于200次均价。",
+      "read": "真表示严格在线上；旧布尔比较在均线缺失时可返回假。",
+      "context": [
+        "先看均线是否已形成",
+        "与旧账户价格口径保持一致"
+      ],
+      "pitfall": "旧假值可能是预热不足，不能都读成价格跌到线下。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#etf.trend.above200@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "etf.trend.price50.state@1.0.0"
+      ],
+      "plain_name": "ETF连续价50日位置状态",
+      "watch": "看ETF连续价格是否严格站上50日均线。",
+      "read": "1在线上、0不在线上；不足50条有效报价为缺失。",
+      "context": [
+        "核连续价与有效报价数量",
+        "与旧above50布尔比较区别"
+      ],
+      "pitfall": "这里缺数据是缺失，不能当0；状态也不是买卖动作。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#etf.trend.price50.state@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "mixed.bias_ema120_pct@1.0.0"
+      ],
+      "plain_name": "价格距EMA120的乖离",
+      "watch": "看价格离120日指数均线多远。",
+      "read": "正值在线上、负值在线下；绝对值描述距离。",
+      "context": [
+        "结合EMA120方向和价格结构",
+        "确认均线已形成"
+      ],
+      "pitfall": "距离大不自动表示应反转，也不单独构成买卖点。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#mixed.bias_ema120_pct@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "trend.cost_basis_distance20@1.0.0"
+      ],
+      "plain_name": "与20期前价格的距离",
+      "watch": "比较今天价格与向前20条记录的价格。",
+      "read": "正值表示今天更高；旧版缺价时的可算范围需另核。",
+      "context": [
+        "确认观察日期和20条记录前的价格",
+        "旧版缺价处理边界与新版不同，须按旧定义读"
+      ],
+      "pitfall": "不是本人持仓成本；旧版缺价口径和定义范围待澄清，不能套用新版核验结论。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#trend.cost_basis_distance20@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "trend.cost_basis_distance20@2.0.0"
+      ],
+      "plain_name": "与20期前价格的距离",
+      "watch": "比较今天价格与向前20条记录的价格。",
+      "read": "正值表示今天更高；缺价记录也计入这20条间隔。",
+      "context": [
+        "确认观察日期和20条记录前的价格",
+        "新版按原输入记录逐条计数，缺价记录仍占位置"
+      ],
+      "pitfall": "不是本人持仓成本；新版人工序列核验不证明真实行情或投资效果。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#trend.cost_basis_distance20@2.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "mixed.pullback_ma_distance@1.0.0"
+      ],
+      "plain_name": "价格离最近均线多远",
+      "watch": "看价格离20、60、120期两种均线中的哪条最近。",
+      "read": "距离越小表示越靠近某条线；还需另看价格在线上或线下。",
+      "context": [
+        "确认六条均线是否都已形成",
+        "旧版缺价处理边界与新版不同，须按旧定义读"
+      ],
+      "pitfall": "只量绝对距离；旧版缺价口径和定义范围待澄清，不能套用新版核验结论。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#mixed.pullback_ma_distance@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "mixed.pullback_ma_distance@2.0.0"
+      ],
+      "plain_name": "价格离最近均线多远",
+      "watch": "看价格离20、60、120期两种均线中的哪条最近。",
+      "read": "距离越小表示越靠近某条线；还需另看价格在线上或线下。",
+      "context": [
+        "确认六条均线是否都已形成",
+        "新版缺价可能让指数均线后续读数缺失，简单均线须等窗口完整"
+      ],
+      "pitfall": "这是六条线中的绝对最近距离，不判回调成立；新版人工序列核验不证明真实效果。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#mixed.pullback_ma_distance@2.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "trend.ma_cluster_width@1.0.0"
+      ],
+      "plain_name": "六条均线张开程度",
+      "watch": "看六条均线最高与最低之间相距多远。",
+      "read": "较小表示六线更密集，较大表示分散。",
+      "context": [
+        "同时看均线整体方向",
+        "查看各线是否完整形成"
+      ],
+      "pitfall": "密集不等于即将突破；单看宽度无法判断上下方向。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#trend.ma_cluster_width@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    },
+    {
+      "references": [
+        "mixed.swing_rr_distance@1.0.0"
+      ],
+      "plain_name": "已确认高低点距离比",
+      "watch": "看价格到已确认高点与低点的相对空间。",
+      "read": "比值比较上方距离与下方距离，取决于已确认结构。",
+      "context": [
+        "核高低点确认时间与有效性",
+        "同时看当前价格与失效位"
+      ],
+      "pitfall": "这是历史结构距离比，不是未来赔率或真实交易盈亏比。",
+      "source_refs": [
+        "docs/research/definitions.v1.json#mixed.swing_rr_distance@1.0.0"
+      ],
+      "verification_scope": "由定义公式解释的阅读提示，不是效果结论"
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "bindings": [
+    {
+      "reference": "mixed.momentum.raw@1.0.0",
+      "kind": "registered",
+      "label": "普通12-1动量",
+      "aliases": [
+        "普通动量",
+        "12-1动量",
+        "动量"
+      ],
+      "definition_notes": [
+        "按每只产品自己的有效报价行，比较第t-21条与第t-252条的价格；第253条有效报价首次可算，最近21条不进入这段涨幅。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/factor-reuse-refresh-2026-09-22.md",
+          "sha256": "2df4b7be38bcb315fbd575b119b7d3d2ac727f70139de261ee0ca85eef7cebc7"
+        },
+        {
+          "path": "docs/experiments/factor-momentum-rank-reuse-2026-09-22.md",
+          "sha256": "83646818842e51ab13dab6e99746c23a2ef7da146df1931b057763886c455ee5"
+        },
+        {
+          "path": "docs/experiments/factor-candidate-exploration-2026-09-22.md",
+          "sha256": "5f0a0da2b93bf0e6d3583ced6f79f1cce46d675e33795e0c4ff18c12274a2d23"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "calculation_check",
+          "summary": "首批绑定的三份报告核对了已有接口与人工计算；这些材料不能证明普通动量对真实ETF投资有效。",
+          "scope": "人工数据与现有研究入口复用；没有新增真实ETF收益检验。",
+          "limitations": [
+            "这只是这三份材料的范围，不代表其他未接入材料没有证据。",
+            "计算核验通过不等于投资有效，也没有生产或交易授权。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/factor-reuse-refresh-2026-09-22.md",
+              "sha256": "2df4b7be38bcb315fbd575b119b7d3d2ac727f70139de261ee0ca85eef7cebc7"
+            },
+            {
+              "path": "docs/experiments/factor-momentum-rank-reuse-2026-09-22.md",
+              "sha256": "83646818842e51ab13dab6e99746c23a2ef7da146df1931b057763886c455ee5"
+            },
+            {
+              "path": "docs/experiments/factor-candidate-exploration-2026-09-22.md",
+              "sha256": "5f0a0da2b93bf0e6d3583ced6f79f1cce46d675e33795e0c4ff18c12274a2d23"
+            }
+          ]
+        }
+      ],
+      "batches": [],
+      "legacy_panel": {
+        "field": "mom_121"
+      }
+    },
+    {
+      "reference": "mixed.momentum.rank@1.0.0",
+      "kind": "registered",
+      "label": "完整动量排序",
+      "aliases": [
+        "完整动量排序",
+        "动量排序",
+        "动量排名"
+      ],
+      "definition_notes": [
+        "在同一个月末截面内，把合格且动量有限的对象按分数降序排列；精确同分时按代码升序。完整有序名单不是前三名，也不是经过波动筛选后的名单。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/factor-momentum-rank-reuse-2026-09-22.md",
+          "sha256": "83646818842e51ab13dab6e99746c23a2ef7da146df1931b057763886c455ee5"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "calculation_check",
+          "summary": "既有排序阶段在人工数据上能输出完整有序名单并处理精确并列；调用者仍需核实记录唯一、输入可追溯和完整月末。",
+          "scope": "人工数据，完整排序阶段，不是收益回测。",
+          "limitations": [
+            "不能证明排序能赚钱，不能证明真实ETF输入合格。"
+          ],
+          "sources": [
+            {
+              "path": "docs/experiments/factor-momentum-rank-reuse-2026-09-22.md",
+              "sha256": "83646818842e51ab13dab6e99746c23a2ef7da146df1931b057763886c455ee5"
+            }
+          ]
+        }
+      ],
+      "batches": []
+    },
+    {
+      "reference": "candidate:mixed.high52.proximity@draft-2",
+      "kind": "candidate",
+      "label": "高点位置候选",
+      "aliases": [
+        "高点位置",
+        "此前高点",
+        "high52"
+      ],
+      "definition_notes": [],
+      "draft_definition": "拟计算当前经济指数（反映分红拆股影响的价格序列）÷此前252个有效收盘的最高值；当日加此前252个值共需253个有效值。",
+      "sources": [
+        {
+          "path": "docs/experiments/factor-candidate-exploration-2026-09-22.md",
+          "sha256": "5f0a0da2b93bf0e6d3583ced6f79f1cce46d675e33795e0c4ff18c12274a2d23"
+        },
+        {
+          "path": "docs/research/proposals/factor-candidate-exploration-2026-09-22/candidate-definitions.md",
+          "sha256": "c6ddc7b99032ac168c3199c765f45f856c152b2a680de3deb34f92d8a893a54d"
+        }
+      ],
+      "evidence": [],
+      "batches": []
+    }
+  ],
+  "comparisons": [
+    {
+      "references": [
+        "candidate:mixed.high52.proximity@draft-2",
+        "mixed.momentum.raw@1.0.0"
+      ],
+      "summary": "高点位置候选用当前经济指数÷此前252个有效收盘的最高值；普通12-1动量用I(t-21)/I(t-252)-1，只看两个端点，并跳过最近21个有效报价。公式不同不能证明高点位置多提供了有用信息。",
+      "limitations": [
+        "已有报告只提出同范围同日期的公平比较，尚未运行这项真实效果研究。",
+        "这里只解释旧材料，不执行新实验，也不能把任一读数当买卖信号。"
+      ],
+      "sources": [
+        {
+          "path": "docs/experiments/factor-candidate-exploration-2026-09-22.md",
+          "sha256": "5f0a0da2b93bf0e6d3583ced6f79f1cce46d675e33795e0c4ff18c12274a2d23"
+        },
+        {
+          "path": "docs/research/proposals/factor-candidate-exploration-2026-09-22/candidate-definitions.md",
+          "sha256": "c6ddc7b99032ac168c3199c765f45f856c152b2a680de3deb34f92d8a893a54d"
+        }
+      ]
+    }
+  ]
+}

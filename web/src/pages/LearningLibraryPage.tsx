@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import { learningApi } from "../api/client";
 import type { LearningEntry, LearningPaper, LearningResponse } from "../types";
+import "./page-reading.css";
 
 /**
  * 文献学习库：以论文为线索的学习目录（独立学习层，不参与交易判定）。
@@ -160,8 +161,16 @@ export default function LearningLibraryPage() {
 
   if (error) {
     return (
-      <div className="page">
-        <div className="header"><h1>文献学习库</h1></div>
+      <div className="page lib-page learning-page">
+        <div className="pg-head">
+          <div className="pg-head-title">
+            <h1>文献学习库</h1>
+            <span className="pg-head-sub">从文献中学习研究方法与投资思考。</span>
+          </div>
+          <div className="pg-head-kv">
+            <span className="pg-kv"><span className="k">文献数</span><b>未知</b></span>
+          </div>
+        </div>
         <div className="fund-errors">学习资料暂不可用：{(error as Error).message}（稍后重试；这不是资料缺失的结论）</div>
       </div>
     );
@@ -177,15 +186,17 @@ export default function LearningLibraryPage() {
 
   return (
     <div className="page lib-page learning-page">
-      <div className="header">
-        <h1>文献学习库</h1>
-        <span className="generated">
-          {stats
-            ? `${stats.papers} 篇文献 · ${stats.entries} 条学习内容 · ${stats.paths} 条学习路线 · 内容版本 ${data?.updated_at}`
-            : "加载中…"}
-        </span>
-        <span className="spacer" />
-        <span className="lr-purpose">从文献中学习研究方法与投资思考。</span>
+      <div className="pg-head">
+        <div className="pg-head-title">
+          <h1>文献学习库</h1>
+          <span className="pg-head-sub">从文献中学习研究方法与投资思考。</span>
+        </div>
+        <div className="pg-head-kv">
+          <span className="pg-kv"><span className="k">文献</span><b>{stats ? stats.papers : "未知"}</b></span>
+          <span className="pg-kv"><span className="k">学习内容</span><b>{stats ? stats.entries : "未知"}</b></span>
+          <span className="pg-kv"><span className="k">学习路线</span><b>{stats ? stats.paths : "未知"}</b></span>
+          <span className="pg-kv"><span className="k">内容版本</span><b>{data?.updated_at ?? "未知"}</b></span>
+        </div>
       </div>
 
       {integrityCount > 0 && (
@@ -368,6 +379,8 @@ function EntryArticle({
         </span>
       </h3>
 
+      <p className="lr-footnote">与本系统的关系：{e.system_relation}；采用状态：{e.adoption_status}；内容状态：{e.content_status}。</p>
+
       <div className="lr-sec"><span className="lr-label">要学会回答的问题</span><p>{e.question}</p></div>
       <div className="lr-sec"><span className="lr-label">作者研究了什么（转述摘要，非原文引用）</span><p>{e.author_finding_summary}</p></div>
       <div className="lr-sec">
@@ -381,7 +394,7 @@ function EntryArticle({
 
       {e.practice_steps.length > 0 && (
         <div className="lr-sec">
-          <span className="lr-label">应用步骤</span>
+          <span className="lr-label">应用步骤 <em className="lr-tag">学习用</em></span>
           <ol className="lr-list">{e.practice_steps.map((s, i) => <li key={i}>{s}</li>)}</ol>
         </div>
       )}
@@ -416,7 +429,6 @@ function EntryArticle({
             <span className="lr-missing">链接的本地报告暂缺（{e.local_research_path}）</span>
           )}
         </div>
-        <p className="lr-footnote">{e.system_relation}（{e.adoption_status}；{e.content_status}）</p>
       </div>
 
       <details className="lr-quiz">

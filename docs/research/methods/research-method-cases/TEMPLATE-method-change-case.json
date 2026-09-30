@@ -1,0 +1,35 @@
+{
+  "id": "rmc-YYYY-MM-DD-short-slug",
+  "title": "一句话标题",
+  "date": "YYYY-MM-DD",
+  "kind": "method_change_case",
+  "problem": "出现了什么问题（先大白话，再技术细节）。",
+  "why_changed": "为什么考虑修改方法 / 为什么拒绝 / 为什么值得记录。",
+  "old_method": "修改前的做法；无先前做法时如实写「无既有方法」。",
+  "new_method": "修改后的做法（或被提议/被拒绝的候选做法）。",
+  "scope": "适用范围与边界，如：testing workflow only。",
+  "rule_changed": false,
+  "evaluator_changed": false,
+  "references": [
+    "docs/experiments/某报告-YYYY-MM-DD.md"
+  ],
+  "before_after": {
+    "old_result": "【v2 硬性要求】旧方法下的事实结果（数字/测试结果/错误现象），必填且必须可核查（引用报告/日志路径或具体数字）。只有当 old_method 写「无既有方法」时才允许写「无」，且校验器会核对这一对应关系；缺旧结果的案例一律不合格，不允许只展示新做法。",
+    "new_result": "新方法（或拒绝后维持现状）下的事实结果。",
+    "difference_explanation": "差异怎么解释（拒绝案例写拒绝理由）。结论表述为方法改进对研究流程的影响，不得说成系统自我修复成功。"
+  },
+  "failure_mode": {
+    "category": "engineering",
+    "reason": "一句话打标理由：为什么归这一类而不是相邻类（五类定义见 schema.json failure_mode 描述）。"
+  },
+  "review_log": [
+    {
+      "date": "YYYY-MM-DD",
+      "actor": "主控/GPT 复核/用户（必须是人，禁止 auto 或脚本名）",
+      "decision": "reviewed",
+      "note": "审查意见；随后人工裁决时再追加 approved/rejected 记录。"
+    }
+  ],
+  "object_states": [],
+  "notes": "可选：边界、未解决事项。"
+}

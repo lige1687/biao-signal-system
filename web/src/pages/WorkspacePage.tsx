@@ -410,50 +410,59 @@ export default function WorkspacePage() {
           </div>
         </div>
         {data && <div className="ws-quote-row">
-          <div className="ws-instrument">
-            <span className="ws-symbol">{data.display_name}</span>
-            <span className="ws-instrument-meta">{data.symbol}{data.market_cn ? ` · ${data.market_cn}` : ""}</span>
+          {/* 主组：标的 + 报价 + 道路状态（黑灰绿、圆点+文字，固定在报价右侧） */}
+          <div className="ws-entry-group ws-entry-primary">
+            <div className="ws-instrument">
+              <span className="ws-symbol">{data.display_name}</span>
+              <span className="ws-instrument-meta">{data.symbol}{data.market_cn ? ` · ${data.market_cn}` : ""}</span>
+            </div>
+            <div className="ws-quote" aria-label="最新价格与涨跌幅">
+              <span className={`price ${changeCls}`}>{lastClose != null ? lastClose.toFixed(2) : "--"}</span>
+              <span className={`change ${changeCls}`}>
+                {changePct != null ? `${changePct > 0 ? "+" : ""}${changePct.toFixed(2)}%` : "--"}
+              </span>
+            </div>
+            <button className="ws-state" onClick={() => pickConcept("signal_color", "顶栏 · BIAO 颜色")}
+              title="查看道路状态的解释">
+              <span className="ws-state-label">道路状态</span>
+              <ColorBadge color={data.assessment.color} colorCn={data.assessment.color_cn} descriptive />
+            </button>
           </div>
-          <div className="ws-quote" aria-label="最新价格与涨跌幅">
-            <span className={`price ${changeCls}`}>{lastClose != null ? lastClose.toFixed(2) : "--"}</span>
-            <span className={`change ${changeCls}`}>
-              {changePct != null ? `${changePct > 0 ? "+" : ""}${changePct.toFixed(2)}%` : "--"}
+          {/* 次组：阶段 / 市场环境 / 板块阶段，弱化为「键-值」元信息，去碎框 */}
+          <div className="ws-entry-group ws-entry-context">
+            <span className="ws-entry-item"
+              title={data.assessment.stage_change_reason_cn
+                ? `当前阶段 · 系统判定：${data.assessment.stage_change_reason_cn}`
+                : "当前阶段 · 系统判定，详细依据见下方「当前观察」"}>
+              <span className="ws-entry-k">阶段</span>
+              <b>{data.assessment.stage_cn}</b>
             </span>
-          </div>
-          <button className="ws-state" onClick={() => pickConcept("signal_color", "顶栏 · BIAO 颜色")}
-            title="查看道路状态的解释">
-            <span className="ws-state-label">道路状态</span>
-            <ColorBadge color={data.assessment.color} colorCn={data.assessment.color_cn} descriptive />
-          </button>
-          <span className="badge-chip ws-stage-chip"
-            title={data.assessment.stage_change_reason_cn
-              ? `当前阶段 · 系统判定：${data.assessment.stage_change_reason_cn}`
-              : "当前阶段 · 系统判定，详细依据见下方「当前观察」"}>
-            阶段 {data.assessment.stage_cn}
-          </span>
-          <div className="ws-quote-context">
-            {data.market_badge && <span className={`badge-chip ${data.market_badge.summary}`}
+            {data.market_badge && <span className="ws-entry-item"
               title={data.market_badge.reasons_cn.join("\n") || undefined}>
-              市场环境：{data.market_badge.summary_cn}
+              <span className="ws-entry-k">市场环境</span>
+              <b>{data.market_badge.summary_cn}</b>
             </span>}
             {sectorChip && <button type="button"
-              className={`badge-chip sector-link-chip ${SECTOR_CHIP_TONE[sectorChip.stage ?? ""] ?? ""}`}
+              className={`ws-entry-item ws-entry-link ${SECTOR_CHIP_TONE[sectorChip.stage ?? ""] ?? ""}`}
               onClick={() => navigate("/sectors")}
               title={`「${sectorChip.name}」板块阶段 · 点击打开板块趋势工作台（研究代理）`}>
-              {sectorChip.name} · {SECTOR_CHIP_CN[sectorChip.stage ?? ""] ?? "样本不足"}
+              <span className="ws-entry-k">{sectorChip.name}</span>
+              <b>{SECTOR_CHIP_CN[sectorChip.stage ?? ""] ?? "样本不足"}</b>
             </button>}
           </div>
+          {/* S12 首屏层级：动作（建计划/买点分析）与工具（解释）分组，中间细分隔线 */}
           <div className="ws-quote-actions">
+            <button className="btn small" onClick={() => setShowCreatePlan(true)}
+              title="基于当前信号建立执行计划">建立执行计划</button>
+            <button className="btn small primary" onClick={() => setShowBuyPoint(true)}
+              title="买点分析">买点分析</button>
+            <span className="ws-action-sep" aria-hidden="true" />
             {!showBuyPoint && <button className="btn small"
               onClick={() => setExpCollapsed((c) => !c)}
               aria-expanded={!expCollapsed}
               title={expCollapsed ? "展开右侧解释面板" : "收起右侧解释面板"}>
               {expCollapsed ? "解释" : "收起解释"}
             </button>}
-            <button className="btn small" onClick={() => setShowCreatePlan(true)}
-              title="基于当前信号建立执行计划">建立执行计划</button>
-            <button className="btn small primary" onClick={() => setShowBuyPoint(true)}
-              title="买点分析">买点分析</button>
           </div>
         </div>}
       </header>
@@ -504,7 +513,7 @@ export default function WorkspacePage() {
           {cardsLoading && <div className="loading">正在加载自选与大盘…</div>}
           {!cardsLoading && cards.length === 0 && (
             <div className="panel" style={{ padding: 32, textAlign: "center" }}>
-              <div style={{ fontSize: 15, marginBottom: 8 }}>自选列表还是空的</div>
+              <div style={{ fontSize: 16, marginBottom: 8 }}>自选列表还是空的</div>
               <div className="muted" style={{ marginBottom: 16 }}>
                 添加第一个标的后，这里会显示 K 线图、今日信号与解释面板。
               </div>
@@ -528,10 +537,11 @@ export default function WorkspacePage() {
           )}
           {isLoading && <div className="loading">正在分析 {selected} …</div>}
 
-          <TodaySignalBanner onPick={handleSignalPick} />
-
-          {data && (
-            <>
+          {/* S12 首屏层级：今日信号横幅（组头）+ 四段摘要条（组体）合并为一个
+              「今日信号组」，让「为什么看它、在等什么」在同一视觉容器里可读。 */}
+          <div className="ws-firstlook-group">
+            <TodaySignalBanner onPick={handleSignalPick} />
+            {data && (
               <TodayDigestBar
                 events={digest.events}
                 activeBuys={digest.activeBuys}
@@ -539,7 +549,11 @@ export default function WorkspacePage() {
                 tradability={digest.tradability}
                 onJump={jumpToPanel}
               />
+            )}
+          </div>
 
+          {data && (
+            <>
               {data.meta.persist_warning && (
                 <div className="panel warn-panel">
                   <span className="stale-chip">未写入研究库</span>{" "}
@@ -573,47 +587,52 @@ export default function WorkspacePage() {
                   <TrendChecklist payload={data.chart} assessment={data.assessment} />
                 </CollapsiblePanel>
                 <div className="chart-legend">
-                  {legend.bottomMarks && (
-                    <span>
-                      <span className="mk mk-bottom">◆</span> 底部确认
-                    </span>
-                  )}
-                  {legend.topMarks && (
-                    <span>
-                      <span className="mk mk-top">◆</span> 顶部确认
-                    </span>
-                  )}
-                  {legend.invalidatedMarks && (
-                    <span>
-                      <span className="mk mk-dead">✕</span> 结构失效
-                    </span>
-                  )}
-                  {legend.keyVolatility && (
-                    <span>
-                      <span className="mk mk-kv">▲</span> 关键性波动
-                    </span>
-                  )}
-                  {legend.levels && (
-                    <>
+                  <div className="cl-group">
+                    <span className="cl-group-k">标记</span>
+                    {legend.bottomMarks && (
                       <span>
-                        <span className="mk mk-b1">●</span> B1 第一阻力
+                        <span className="mk mk-bottom">◆</span> 底部确认
                       </span>
+                    )}
+                    {legend.topMarks && (
                       <span>
-                        <span className="mk mk-cline">●</span> C 点失效线
+                        <span className="mk mk-top">◆</span> 顶部确认
                       </span>
+                    )}
+                    {legend.invalidatedMarks && (
                       <span>
-                        <span className="mk mk-neck">●</span> 顶部颈线
+                        <span className="mk mk-dead">✕</span> 结构失效
                       </span>
-                    </>
-                  )}
+                    )}
+                    {legend.keyVolatility && (
+                      <span>
+                        <span className="mk mk-kv">▲</span> 关键性波动
+                      </span>
+                    )}
+                    {legend.levels && (
+                      <>
+                        <span>
+                          <span className="mk mk-b1">●</span> B1 第一阻力
+                        </span>
+                        <span>
+                          <span className="mk mk-cline">●</span> C 点失效线
+                        </span>
+                        <span>
+                          <span className="mk mk-neck">●</span> 顶部颈线
+                        </span>
+                      </>
+                    )}
+                  </div>
                   {legend.colorMode === "biao_state" && (
-                    <span className="muted">
-                      BIAO 着色：颜色=当日状态（绿/灰/黑）；涨跌方向看「今日概述」开高低收
-                    </span>
+                    <div className="cl-group">
+                      <span className="muted">
+                        BIAO 着色：颜色=当日状态（绿/灰/黑）；涨跌方向看「今日概述」开高低收
+                      </span>
+                    </div>
                   )}
                   {/* 量能颜色图例：与下方柱状图一一对应 */}
-                  <span className="vol-legend">
-                    <span className="muted">量能</span>
+                  <div className="cl-group vol-legend">
+                    <span className="cl-group-k">量能</span>
                     <span className="vol-sw vol-surged" />
                     <span>≥2× 放量</span>
                     <span className="vol-sw vol-warm" />
@@ -622,18 +641,18 @@ export default function WorkspacePage() {
                     <span>正常</span>
                     <span className="vol-sw vol-shrunk" />
                     <span>&lt;0.8× 缩量</span>
-                  </span>
-                  <span className="muted">
+                  </div>
+                  <span className="muted cl-hint">
                     {counts.bottomMarks ||
                     counts.topMarks ||
                     counts.invalidatedMarks ||
                     counts.keyVolatility ||
                     counts.levels
                       ? legend.bottomMarks ||
-                        legend.topMarks ||
-                        legend.invalidatedMarks ||
-                        legend.keyVolatility ||
-                        legend.levels
+                          legend.topMarks ||
+                          legend.invalidatedMarks ||
+                          legend.keyVolatility ||
+                          legend.levels
                         ? "点标记/线右端圆点 → 右栏看解释"
                         : "信号标记默认隐藏，按上方开关显示"
                       : ""}

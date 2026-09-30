@@ -1,0 +1,77 @@
+{
+  "schema_version": "factor-admission-form/1.0",
+  "_doc": "因子准入表单模板：逐字段填写，缺项写 null 并在 notes 说明，不许删字段。本表单只是纸面流程产物；实际写入 definitions.v1.json 是另行维护动作，写入后 lifecycle 只能是 exists。",
+  "_enums": {
+    "spec_layer": ["road（道路/双均线方向）", "signpost（路牌：顶底构造/关键性波动/量能异常）", "entry_trigger（A/B/C/D 入场触发）", "filter_discipline（盈亏比/九条无交易条件）", "narrative（叙事标注层：基本面/消息面解释，不参与判定）", "mandated_research（已冻结专项研究问题）"],
+    "verdict": ["admit_as_candidate", "reject"],
+    "rejection_reason": ["no_research_question", "duplicate_information", "no_verifiable_path"],
+    "lifecycle_target": "exists（唯一允许值；verified 须走 F1 证据规则 + F2 Evidence Record 七阶段，准入无权授予）"
+  },
+  "form_id": "fa-<YYYYMMDD>-<slug>",
+  "date": "<YYYY-MM-DD>",
+  "proposer": "<提出者/agent>",
+  "stage_1_research_question": {
+    "question": "<具体研究问题，一句话能说清要回答什么>",
+    "spec_anchor": "<trading-spec-v1.md 的节号或专项研究文档路径；挂不上即拒绝>",
+    "spec_layer": "signpost",
+    "decision_or_description": "<这个问题服务于哪个具体决策或哪类描述需求>",
+    "plain_language": "<大白话：这个问题为什么值得回答，对实际交易研究有什么意义>"
+  },
+  "stage_2_information_gap": {
+    "required_information": "<回答该问题需要什么信息（可度量口径）>",
+    "existing_factors_checked": [
+      { "factor": "<id@version>", "what_it_provides": "<提供的信息>", "why_insufficient": "<为什么不够>" }
+    ],
+    "gap_statement": "<一句话：已有因子覆盖了什么、缺的是什么>",
+    "registry_version_checked": "1.3.0"
+  },
+  "stage_3_candidate": {
+    "candidate_id": "<拟登记 id，如 mixed.volume_anomaly_decay>",
+    "name": "<中文名>",
+    "type": "<factor / state_signal / ...>",
+    "profile": "<mixed / etf / ...>",
+    "uses": ["research_signal", "description"],
+    "preliminary_definition": {
+      "formula": "<初步公式，可执行口径>",
+      "parameters": {},
+      "input_requirements": "<需要什么输入：标的、频率、窗口、复权等>",
+      "unit": "<单位>",
+      "direction_note": "无默认好坏评价；方向声明随验证结论另行登记",
+      "nan_policy": "<缺值如何处理>"
+    },
+    "alternatives_considered": "<考虑过的其他候选及为何不选，或 null>"
+  },
+  "stage_4_definition_registration": {
+    "form_only": true,
+    "note": "只写本表单，不实际写入 definitions.v1.json；实际写入走 F1 字段标准，lifecycle=exists",
+    "definition_card_draft": "<拟登记卡片的字段草稿路径或内联，null 表示正例尚未到成卡细节>"
+  },
+  "stage_5_evidence_plan": {
+    "f2_stages": [
+      { "stage": "definition", "plan": "<卡快照与登记表版本如何固定>" },
+      { "stage": "input_manifest", "plan": "<输入清单与冻结方式；真实/合成>" },
+      { "stage": "qualification", "plan": "<闸门裁决预期：ranking 允许与否、target 必须阻断>" },
+      { "stage": "ranking_reconstruction", "plan": "<排序重建安排或 not_applicable 理由>" },
+      { "stage": "sample_ledger", "plan": "<样本台账如何留痕>" },
+      { "stage": "blocked_report", "plan": "<target 阻断时如何出报告>" },
+      { "stage": "independent_check", "plan": "<独立复算如何做，不得 import 被测实现>" }
+    ],
+    "forbidden_statistics_not_computed": ["rank_ic", "quantile_groups_q2", "reference_difference"],
+    "verification_route_to_verified": "升级 verified 须按 F1 证据规则积累验证留痕，并按 F2 模板形成完整 Evidence Record；准入流程不预支任何验证结论"
+  },
+  "stage_6_verdict": {
+    "verdict": "admit_as_candidate",
+    "rejection_reason": null,
+    "rationale": "<裁决理由，具体不套话>",
+    "lifecycle_target": "exists",
+    "reviewer": "<裁决者>"
+  },
+  "forbidden_zone_ack": {
+    "no_performance_screening": true,
+    "no_ic_ranking": true,
+    "no_auto_retirement": true,
+    "no_trading_rule_generation": true,
+    "no_trading_spec_change": true
+  },
+  "notes": "<其他说明，大白话>"
+}

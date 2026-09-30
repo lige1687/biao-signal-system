@@ -38,6 +38,15 @@ REQUIRED = {
     "status",
     "sources",
 }
+# Four-state evidence semantics: registered existence, formula/selection
+# verification, research readiness, production approval. Presence in the
+# registry is never verification; higher states require explicit evidence.
+LIFECYCLE_STATES = ("exists", "verified", "research_ready", "production_approved")
+LIFECYCLE_FIELDS = {"state", "basis", "verification_scope"}
+LIFECYCLE_REGISTRY_PATH = "docs/research/definitions.v1.json"
+# lifecycle became mandatory for every card at registry version 1.3.0;
+# older registries keep their original validation behaviour unchanged.
+LIFECYCLE_MIN_VERSION = (1, 3, 0)
 SECTIONS = {
     "definition": {"formula", "parameters", "endpoints", "unit", "direction", "transforms"},
     "input": {"fields", "price_basis", "currency", "frequency", "calendar"},
@@ -112,6 +121,12 @@ def validate_registry(registry):
         ):
             raise ValueError("invalid source path/hash")
     cards = {}
+    try:
+        lifecycle_required = (
+            tuple(int(p) for p in registry.get("version", "").split(".")) >= LIFECYCLE_MIN_VERSION
+        )
+    except ValueError:
+        lifecycle_required = False  # malformed versions are rejected above
     for obj in registry.get("objects", []):
         c = _expand(registry, obj)
         if REQUIRED - c.keys():
@@ -180,6 +195,43 @@ def validate_registry(registry):
         for source in c["sources"]:
             if source not in registry["sources"]:
                 raise ValueError(f"unknown source: {source}")
+        if lifecycle_required:
+            lc = c.get("lifecycle")
+            if (
+                not isinstance(lc, dict)
+                or {"state", "basis"} - lc.keys()
+                or set(lc) - LIFECYCLE_FIELDS
+            ):
+                raise ValueError(f"lifecycle requires state and basis: {ref}")
+            if lc["state"] not in LIFECYCLE_STATES:
+                raise ValueError(f"invalid lifecycle state: {ref}")
+            if lc["state"] == "production_approved":
+                raise ValueError(f"registry grants no production approval: {ref}")
+            basis = lc["basis"]
+            if (
+                not isinstance(basis, list)
+                or not basis
+                or any(not isinstance(b, str) or not b for b in basis)
+                or len(basis) != len(set(basis))
+            ):
+                raise ValueError(f"lifecycle basis must be unique nonempty strings: {ref}")
+            for b in basis:
+                p = Path(b)
+                if p.is_absolute() or ".." in p.parts or not (ROOT / b).is_file():
+                    raise ValueError(f"lifecycle basis path missing: {b} ({ref})")
+            scope = lc.get("verification_scope")
+            external = [b for b in basis if b != LIFECYCLE_REGISTRY_PATH]
+            if lc["state"] != "exists":
+                if not isinstance(scope, str) or not scope.strip():
+                    raise ValueError(f"non-exists lifecycle requires verification_scope: {ref}")
+                if not external:
+                    raise ValueError(f"non-exists lifecycle requires evidence beyond the registry: {ref}")
+                test_evidence = [b for b in external if b.startswith(("tests/", "docs/experiments/"))]
+                if not test_evidence:
+                    raise ValueError(f"{lc['state']} requires synthetic/frozen verification evidence: {ref}")
+                if lc["state"] == "research_ready":
+                    if not any(b.startswith("docs/experiments/") for b in external):
+                        raise ValueError(f"research_ready requires a research report evidence: {ref}")
         if c["type"] in {"benchmark", "policy/strategy"}:
             required = {
                 "selection",
@@ -239,6 +291,10 @@ def validate_registry(registry):
         for ref in [model["dependent_return"], *model["factor_returns"]]:
             if ref not in cards or cards[ref]["type"] not in {"factor_return", "benchmark"}:
                 raise ValueError("model requires a registered return series, not a breadth level")
+    if "research_references" in registry:
+        from lei_signal.research.factor_lab.benchmarks import validate_references
+
+        validate_references(registry)
     return cards
 
 

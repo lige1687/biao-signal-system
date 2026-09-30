@@ -35,14 +35,6 @@ const btnBase: React.CSSProperties = {
   cursor: "pointer",
   fontSize: 13,
 };
-const chip: React.CSSProperties = {
-  display: "inline-block",
-  padding: "3px 12px",
-  borderRadius: 999,
-  fontSize: 12.5,
-  background: "#f1eef3",
-  color: "#5f5a68",
-};
 
 export default function MindsetPage() {
   const qc = useQueryClient();
@@ -92,11 +84,47 @@ export default function MindsetPage() {
   const summary = q.data?.summary;
   const items = useMemo(() => q.data?.items ?? [], [q.data]);
 
+  /* 页头在加载/失败态也渲染：键值缺失显示"未知"，失败给重试动作（范式红线：不伪造状态） */
+  const head = (
+    <div className="pg-head">
+      <div className="pg-head-title">
+        <h1>认知与心态</h1>
+        <span className="pg-head-sub">
+          判断题卡片：逐条点认可/中立/不认可；认可的进"篮子"随机温习。
+          只是认知沉淀，不影响任何买卖判定。
+        </span>
+      </div>
+      {summary && (
+        <div className="pg-head-kv">
+          <span className="pg-kv"><span className="k">共</span><b>{summary.total} 条</b></span>
+          <span className="pg-kv"><span className="k">待评价</span><b>{summary.unevaluated}</b></span>
+          <span className="pg-kv"><span className="k">认可</span><b>{summary.agree}</b></span>
+          <span className="pg-kv"><span className="k">中立</span><b>{summary.neutral}</b></span>
+          <span className="pg-kv"><span className="k">不认可</span><b>{summary.disagree}</b></span>
+        </div>
+      )}
+      <div className="pg-head-actions">
+        <button className="btn small" onClick={pullReview} disabled={!q.data}>
+          温习一条
+        </button>
+        <button className="btn small" onClick={() => setShowForm((v) => !v)}>
+          {showForm ? "收起新增" : "+ 新增认知/复盘"}
+        </button>
+      </div>
+    </div>
+  );
+
   if (q.isLoading)
-    return <div className="page" style={{ padding: "40px 18px" }}>加载中…</div>;
+    return (
+      <div className="page" style={{ maxWidth: 1080 }}>
+        {head}
+        <div className="muted">加载中…</div>
+      </div>
+    );
   if (q.isError || !q.data)
     return (
-      <div className="page" style={{ padding: "40px 18px" }}>
+      <div className="page" style={{ maxWidth: 1080 }}>
+        {head}
         <div className="cp-error">加载失败。</div>
         <button className="btn small" style={{ marginTop: 10 }} onClick={() => q.refetch()}>
           重试
@@ -123,35 +151,7 @@ export default function MindsetPage() {
   /* ---------- 主列表 ---------- */
   return (
     <div className="page" style={{ maxWidth: 1080 }}>
-      <div className="page-head">
-        <h1>认知与心态</h1>
-        <span className="ph-meta">
-          判断题卡片：逐条点认可/中立/不认可；认可的进"篮子"随机温习。
-          来源于博主调研与自己的记录，只是认知沉淀，不影响任何买卖判定。
-        </span>
-      </div>
-
-      {/* 摘要 + 操作 */}
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center", margin: "10px 0 14px" }}>
-        {summary && (
-          <>
-            <span style={chip}>共 {summary.total} 条</span>
-            <span style={chip}>待评价 {summary.unevaluated}</span>
-            <span style={{ ...chip, background: "#e7f2ec", color: "#2f6b4f" }}>
-              认可 {summary.agree}
-            </span>
-            <span style={chip}>中立 {summary.neutral}</span>
-            <span style={chip}>不认可 {summary.disagree}</span>
-          </>
-        )}
-        <span style={{ flex: 1 }} />
-        <button className="btn small" onClick={pullReview}>
-          温习一条（从认可与自建里随机）
-        </button>
-        <button className="btn small" onClick={() => setShowForm((v) => !v)}>
-          {showForm ? "收起新增" : "+ 新增认知/复盘"}
-        </button>
-      </div>
+      {head}
       {reviewEmpty && (
         <div className="muted" style={{ marginBottom: 10, fontSize: 13 }}>
           篮子里还没有可温习的条目——点几条"认可"，或自己新增一条。

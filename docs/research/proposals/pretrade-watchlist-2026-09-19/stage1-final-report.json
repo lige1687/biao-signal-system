@@ -1,0 +1,19 @@
+{
+  "verified": true,
+  "summary": "Stage1买前关注区块全目标主控独立验证通过（G1字段映射一致/DTO纪律满分；G2动作闭环双路径实测；G3只读聚合+测试；G4证据链完整）。返修1/3用于证据补齐，业务逻辑零改动。待GPT-6 Pro主导方终审后交用户采用决策。",
+  "goals": [
+    {"id": "G1", "verified": true, "evidence": ["主控亲验desktop.png全要素在位", "api-response.json逐字段解析与stage1-source-mapping.md一致", "DTO逐行核对source=/derived=标注、decision零出现"]},
+    {"id": "G2", "verified": true, "evidence": ["plans-navigation.png实测点击后路由/plans且TH881121待执行卡片在位", "预填链路复用既有onPick抽屉与SuggestedPlanDTO，无自动保存"]},
+    {"id": "G3", "verified": true, "evidence": ["test_watchlist_block.py 6项+相关52项主控复跑58 passed", "opportunities.py仅新增只读聚合路由，不碰rules/storage"]},
+    {"id": "G4", "verified": true, "evidence": ["npm run build主控复跑通过", "三图验证：desktop视觉/narrow像素均值242/plans视觉", "hygiene仅worktree已知.git误报", "报告含大白话结论小节"]}
+  ],
+  "changed_files": ["src/lei_signal/api/routes/opportunities.py", "web/src/types.ts", "web/src/api/client.ts", "web/src/components/PretradeWatchBlock.tsx", "web/src/pages/WorkspacePage.tsx", "web/src/styles.css", "tests/unit/test_watchlist_block.py", "docs/experiments/watchlist-stage1-2026-09-19.md", "docs/experiments/raw/watchlist-stage1-2026-09-19/"],
+  "limitations": ["GPT-6 Pro主导方终审待通道恢复", "执行器输出复读退化已记录在案", "采用到主仓需与并行质感精修任务的web改动做逐文件合并"],
+  "pending_actions": ["GPT主导方终审（含确认轮补呈）", "用户采用决策"],
+  "verification": [
+    {"command": "cd web && npm run build", "result": "通过（2.48s，主控复跑）"},
+    {"command": "PYTHONPATH=src python -m pytest 相关6文件 -q", "result": "58 passed（首轮主控复跑）；返修后40 passed（执行者留证核实）"},
+    {"command": "python3 scripts/check_repo_hygiene.py", "result": "仅worktree已知.git误报"},
+    {"command": "视觉核验三张截图", "result": "desktop全要素/plans导航实测/narrow像素均值242"}
+  ]
+}

@@ -55,11 +55,37 @@ export default function OpsPage() {
     null;
   const active = picked ?? firstSym ?? null;
   const pick = (sym: string | null) => setPicked(sym);
+  // 组体摘要：只做既有数据的计数汇总（不新增信息，明细仍在下方分区）
+  const maxNag = ops.plan_todos.reduce((m, t) => Math.max(m, t.nag_count), 0);
+  const hotBoards = ops.sentiment?.hot_boards ?? [];
   return (
     <div className="page ops-page">
-      <div className="page-head">
-        <h1>今日操作 · {ops.run_date}</h1>
-        <span className="ph-meta">{ops.push_summary_cn}</span>
+      {/* S13 信号组层级：单一一级信号组（组头=标题+日期+主任务提示，
+          组体=今日事项摘要+风险提醒，动作组=进入入口/查看详情） */}
+      <div className="pg-firstlook-group ops-firstlook-group">
+        <div className="pg-grp-head">
+          <h1>今日操作</h1>
+          <span className="pg-grp-meta">{ops.run_date}</span>
+        </div>
+        {ops.push_summary_cn && <p className="pg-grp-hint">{ops.push_summary_cn}</p>}
+        <div className="pg-grp-body">
+          <div className="ops-grp-sumline">
+            <span>持仓待处理 <b>{ops.holdings_actions.filter((l) => l.symbol !== "-").length}</b> 项</span>
+            <span>计划待办 <b>{ops.plan_todos.length}</b> 项{maxNag > 0 && `（已催最多 ${maxNag} 次）`}</span>
+            <span>观察触发 <b>{ops.watch_triggers.length}</b> 项</span>
+            {hotBoards.length > 0 && (
+              <span className="ops-grp-risk">
+                ⚠ 过热警示：{hotBoards.map((b) => `${b.name}（${b.heat_pctile}分位）`).join("、")}
+              </span>
+            )}
+          </div>
+        </div>
+        <div className="pg-grp-actions">
+          <a className="cp-link" href="#ops-sentiment">展开情绪面与事件详情</a>
+          {ops.plan_todos.length > 0 && (
+            <Link className="btn primary" to="/plans">去监督待办处理</Link>
+          )}
+        </div>
       </div>
 
       <div className="ops-with-kline">
@@ -84,7 +110,7 @@ export default function OpsPage() {
         </section>
 
         <section className="ops-section">
-          <h3>③ 计划待办</h3>
+          <h3>② 计划待办</h3>
           {ops.plan_todos.length === 0 && <div className="ops-empty">暂无待办。</div>}
           {ops.plan_todos.map((t) => (
             <div key={t.action_id} className="cp-row">
@@ -104,7 +130,7 @@ export default function OpsPage() {
         </section>
 
         <section className="ops-section">
-          <h3>④ 观察触发</h3>
+          <h3>③ 观察触发</h3>
           {ops.watch_triggers.length === 0 && <div className="ops-empty">暂无观察项。</div>}
           {ops.watch_triggers.map((l, i) => (
             <div key={i} className="cp-row">
@@ -120,8 +146,8 @@ export default function OpsPage() {
           ))}
         </section>
 
-        <section className="ops-section span-all">
-          <h3>⑤ 情绪面（叙事标注，不构成判定）</h3>
+        <section className="ops-section span-all" id="ops-sentiment">
+          <h3>④ 情绪面（叙事标注，不构成判定）</h3>
           {ops.sentiment?.margin_cn && (
             <div className="cp-row">
               <span className="cp-sym">融资环境</span>
@@ -160,7 +186,7 @@ export default function OpsPage() {
 
         {ops.major_events?.available && ops.major_events.items.length > 0 && (
           <section className="ops-section span-all">
-            <h3>⑥ 近3日重大事件（客观参考，不构成判定）</h3>
+            <h3>⑤ 近3日重大事件（客观参考，不构成判定）</h3>
             {ops.major_events.items.map((e, i) => (
               <div key={i} className="cp-row ops-major">
                 <span className="ops-major-meta">
@@ -181,8 +207,8 @@ export default function OpsPage() {
           </section>
         )}
 
-        <section className="ops-section span-all">
-          <h3>② 今日推荐</h3>
+        <section className="ops-section span-all" id="ops-recommend">
+          <h3>{ops.major_events?.available && ops.major_events.items.length > 0 ? "⑥" : "⑤"} 今日推荐</h3>
           {ops.recommendations ? (
             <RecommendCardView card={ops.recommendations} />
           ) : (

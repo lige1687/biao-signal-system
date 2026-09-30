@@ -1,0 +1,86 @@
+{
+  "version": "1.1.0",
+  "nature": "post-review qualification checkpoint, no market effects",
+  "execution": "blocked",
+  "evidence": "not_evaluated",
+  "primary_stock_candidate_codes": 439,
+  "stock_close_missing_formal_codes": [
+    "600705",
+    "600837",
+    "601989"
+  ],
+  "stocks_OHLC_actions_membership_ready": false,
+  "index_provider_proxy_numerical_inputs": [
+    {
+      "symbol": "sh000300",
+      "provider_name": "沪深300",
+      "rows": 1338,
+      "first": "2020-12-18",
+      "last": "2026-06-30",
+      "warmup_rows": 253,
+      "formal_rows": 1085,
+      "illegal_rows": 0,
+      "checks": {
+        "no_duplicate_dates": true,
+        "ascending_dates": true,
+        "exact_calendar_match": true,
+        "complete_positive_OHLC": true,
+        "requested_symbol_name_and_code": true,
+        "no_adjustment_branch_day": true
+      },
+      "qualification": "numerical_provider_proxy_qualified",
+      "identity_scope": "provider response code/name/day branch proven; official publisher price vs total-return methodology not certified",
+      "calendar_scope": "SZSE retained calendar; independent SSE validation absent",
+      "history_arrival": "unknown; retrieved now, not certified as originally available",
+      "effect_branch": "not_evaluated",
+      "strict_A01_frozen_contract_ready": false,
+      "remaining": [
+        "official index methodology and legal use/redistribution boundary",
+        "independent Shanghai calendar if required by final adopted use",
+        "retain cross-source check as numerical consistency, not independence"
+      ],
+      "response_sha256": "08baa13913f01ef21036a3f8a5169b9b5798929792499d011e7799e033f6435b"
+    },
+    {
+      "symbol": "sz399006",
+      "provider_name": "创业板指",
+      "rows": 1338,
+      "first": "2020-12-18",
+      "last": "2026-06-30",
+      "warmup_rows": 253,
+      "formal_rows": 1085,
+      "illegal_rows": 0,
+      "checks": {
+        "no_duplicate_dates": true,
+        "ascending_dates": true,
+        "exact_calendar_match": true,
+        "complete_positive_OHLC": true,
+        "requested_symbol_name_and_code": true,
+        "no_adjustment_branch_day": true
+      },
+      "qualification": "numerical_provider_proxy_qualified",
+      "identity_scope": "provider response code/name/day branch proven; official publisher price vs total-return methodology not certified",
+      "calendar_scope": "SZSE retained calendar; independent SSE validation absent",
+      "history_arrival": "unknown; retrieved now, not certified as originally available",
+      "effect_branch": "not_evaluated",
+      "strict_A01_frozen_contract_ready": false,
+      "remaining": [
+        "official index methodology and legal use/redistribution boundary",
+        "independent Shanghai calendar if required by final adopted use",
+        "retain cross-source check as numerical consistency, not independence"
+      ],
+      "response_sha256": "bade0110a05ace810141ab7bd48052d67f1730058f1066e17161a1e46985733c"
+    }
+  ],
+  "strict_prior_effect_contract_ready": false,
+  "actual_data_requests_used_this_correction": 2,
+  "total_external_source_requests_used_this_correction": 6,
+  "market_fits_this_correction": 0,
+  "market_attempts_family_expansion": 0,
+  "final_clock_and_target_semantics": "not adopted; freeze after numerical/use review, do not substitute existing@2.0.0 silently",
+  "canonical_cards_unchanged": true,
+  "adopt_before_execution": [
+    "review-amendment-v1.1.md",
+    "data-acquisition-plan.md"
+  ]
+}

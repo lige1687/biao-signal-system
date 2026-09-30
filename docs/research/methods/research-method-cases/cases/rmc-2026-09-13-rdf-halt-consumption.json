@@ -1,0 +1,28 @@
+{
+  "id": "rmc-2026-09-13-rdf-halt-consumption",
+  "title": "直接价格入口消费未核验停牌记录：混账字段记录可把缺口解释成停牌",
+  "date": "2026-09-13",
+  "kind": "observation_case",
+  "status": "observed",
+  "failure_mode": {
+    "category": "engineering",
+    "reason": "两个入口对同一非法记录判定不一致，是验证责任未统一的实现/流程旁路，属工程问题（坏记录本身另计入输入）。"
+  },
+  "problem": "check_prices 直接入口把原始 halts 交给日历检查；主控反例：给缺报价的产品补一条日期正确但带 account_id/amount 字段的记录，直接入口从 conditional 变 usable（缺口被解释成停牌、放行排序用途），而 check_snapshot 同记录会拒绝并报 events_passed_as_actions——两个入口对同一非法记录判定不一致。",
+  "why_changed": "同一坏记录在不同入口得到不同结论，说明'验证后才能消费'的责任未统一，直接入口是资格墙的旁路。",
+  "old_method": "check_snapshot 先校验行动再解释缺口；check_prices 直接消费调用方传入的原始停牌记录，仅靠注释要求调用方已核验。",
+  "new_method": "（复核返修 R2 要求）统一'验证后才能消费'：两入口复用同一行动验证结果，或直接入口明确拒绝未验证原始记录；按最小改动选择，不新建通用框架，不强制重构未消费 halts 的 CLI 路径。",
+  "scope": "src/lei_signal/research/data_quality.py 的 check_prices/check_snapshot 入口；不涉及策略规则。",
+  "rule_changed": false,
+  "evaluator_changed": false,
+  "references": [
+    "docs/experiments/research-data-foundation-controller-review-2026-09-13.md"
+  ],
+  "before_after": {
+    "old_result": "同一非法停牌记录：直接 check_prices 放行（usable，缺口解释为 halt）；check_snapshot 拒绝（conditional）。三路径判定矩阵见返修单 R2。",
+    "new_result": "以返修单 R2（必须处理）记录最小修改与验收要求（两入口一致拒绝；覆盖账户字段混入/错误身份/缺 ID/冲突 ID/非法区间；合法停牌仍能解释并保留 event_id；须列出实际接入与未接入的消费者）。",
+    "difference_explanation": "差异来自消除入口旁路：资格规则只在一个入口生效时，绕过它只需换一个函数名。本条记录暴露与修复要求，不写成全仓库迁移完成。"
+  },
+  "object_states": [],
+  "notes": "合法停牌引用例：512890 的 2021-10-22 缺口以 512890-halt-2021-10-22 解释——解释来源不等于证明当时可交易。"
+}
