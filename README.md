@@ -1,5 +1,9 @@
 # LEI 技术信号研究系统（lei-signal-lab）
 
+> **2026-09-30 主干交接入口**：本次远端模型为 **Opus 5.5**。先读 [任务队列](docs/archive/handoffs-plans/remote-astra-queue-2026-09-30/README.md)、[归属与去重](docs/archive/handoffs-plans/remote-astra-queue-2026-09-30/OWNERSHIP-AND-DEDUP.md) 和 [本批合入范围](docs/ops/main-reviewed-docs-integration-2026-09-30.md)。
+> [已确认策略原文的只读副本](docs/research/strategy-source-snapshots/2026-09-30/README.md) 已收录。本批仅合入资料与交接；实际研究代码仍在 `codex/core-sync-20260930`，执行前切到该分支。下文原有状态是历史记录。
+
+
 > LEI 双均线与顶底结构的**技术信号识别、解释与历史有效性研究系统**。
 > **不是自动交易系统**——不下单、不计算仓位、不管理资金、不输出确定性买卖建议。
 
