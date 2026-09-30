@@ -108,12 +108,14 @@ def category(ref: str, card: dict) -> str:
         return "回调位置"
     if "volume" in id_:
         return "量能"
-    if id_.startswith(("trend.", "etf.trend.")):
+    if id_.startswith(("trend.", "etf.trend.", "research.trend.")):
         return "趋势"
     return "其他研究读数"
 
 
 def asset_classes(card: dict) -> list[str]:
+    if card["id"] == "research.trend.ma_cluster_width":
+        return ["指数"]
     words = " ".join(
         (text_part(card.get("scope")), text_part(card.get("universe", {}).get("version")))
     )
@@ -128,6 +130,8 @@ def asset_classes(card: dict) -> list[str]:
 def purpose_for(card: dict) -> str:
     """Explain the registered formula in plain Chinese; never assess effectiveness."""
     name = card["id"]
+    if name == "research.trend.ma_cluster_width":
+        return "量出20、60、120日的六条均线彼此靠近或分开的程度，检查它在已有趋势信息之外能否帮助判断后续涨跌和下行风险。"
     if name == "mixed.momentum.raw":
         return "比较过去约一年、扣除最近一个月的涨幅，观察强弱是否延续。"
     if name == "mixed.momentum.rank":
@@ -313,6 +317,7 @@ def make_momentum(root: Path, binding: dict) -> dict:
         "products": [{"code": code, "name": code} for code in protocol["symbols"]],
         "period": {"start": protocol["window"][0], "end": protocol["window"][1]},
         "data_cutoff": protocol["window"][1],
+        "target_horizon": "21个共同交易日；当期收盘至第21个共同交易日收盘" if protocol.get("target", {}).get("id") == "economic_index_return_plus_21_common_trading_days" else None,
         "run_at": run["completed_at"],
         "reviewed_at": binding["reviewed_at"],
         "sample": [
@@ -409,6 +414,7 @@ def make_dual_ma(root: Path, binding: dict) -> dict:
             "end": protocol["evaluation_window"]["end"],
         },
         "data_cutoff": None,
+        "target_horizon": "21个价格变化区间；下一报价收盘至第22个报价收盘" if protocol.get("target_main") == "P_vendor(t+22)/P_vendor(t+1) - 1" else None,
         "run_at": None,
         "reviewed_at": binding["reviewed_at"],
         "sample": [
@@ -452,6 +458,94 @@ def make_dual_ma(root: Path, binding: dict) -> dict:
             "verdict": registration.get("verdict"),
             "oneLiner": registration.get("oneLiner"),
         },
+    }
+
+
+def make_workflow_prediction(root: Path, binding: dict) -> dict:
+    """Read frozen prediction errors; never run research or infer trading validity."""
+    specs = binding["sources"]
+    verified = [pinned(root, spec, role) for role, spec in specs.items()]
+    contract, run_contract, receipt, stats, block60 = (
+        read_json(root, specs[key]) for key in ("contract", "run_contract", "receipt", "summary", "block60")
+    )
+    question = contract["question"]
+    ref = binding["reference"]
+    if (question["question_id"] != binding["id"] or question["factor_refs"] != [ref]
+            or contract["feature"]["definition_ref"] != ref):
+        raise ValueError("workflow question or exact definition identity mismatch")
+    if (contract != run_contract or receipt["run_id"] != binding["run_id"]
+            or receipt["callback_executed"] is not True
+            or receipt["contract_sha256"] != specs["contract"]["sha256"]
+            or receipt["outputs"]["result.json"] != specs["summary"]["sha256"]):
+        raise ValueError("workflow receipt does not bind this contract and result")
+    target = question["target"]
+    if (target["kind"] != binding["target_kind"] or contract["target"]["kind"] != target["kind"]
+            or target["kind"] not in {"mae", "forward_return"}
+            or target["horizon"] != 20 or target["start_offset"] != 1 or target["end_offset"] != 21):
+        raise ValueError("unsupported or inconsistent workflow target")
+    if any(contract["target"][key] != target[key] for key in ("start_offset", "end_offset")):
+        raise ValueError("workflow target offsets disagree")
+    report_path = specs["report"]["path"]
+    registration = json.loads((root / "docs/experiments/registry.json").read_text()).get("entries", {}).get(report_path)
+    if (contract["publication"]["report_path"] != report_path
+            or contract["publication"]["conclusion"] != "insufficient"
+            or binding["result"] != "insufficient"
+            or not isinstance(registration, dict) or registration.get("verdict") != "mixed"):
+        raise ValueError("workflow report identity or registered conclusion mismatch")
+    names = {"B0": "简单历史均值", "B1": "已有趋势、位置、涨幅和波动", "B2": "已有信息加六线间距"}
+    performance = stats["performance"]
+    if any(block60.get(key) != stats.get(key) for key in ("performance", "predictions", "period_comparisons")):
+        raise ValueError("60-day uncertainty source does not reuse the same predictions")
+    if {(row["model"], row["metric"]) for row in performance} != {(m, k) for m in names for k in ("MSE", "RMSE")} or len(performance) != 6:
+        raise ValueError("workflow performance must retain all three baselines")
+    sample = performance[0]
+    for row in performance:
+        unit = "percentage_point_squared" if row["metric"] == "MSE" else "percentage_point"
+        if row["unit"] != unit or any(row[key] != sample[key] for key in ("rows", "dates", "assets")):
+            raise ValueError("workflow units or comparison samples disagree")
+        finite(row["value"], "prediction error")
+    increments = stats["increments"]
+    if len(increments) != 2 or {row["old_model"] for row in increments} != {"B0", "B1"}:
+        raise ValueError("workflow increments must retain both fixed comparisons")
+    for row in [*increments, *block60["increments"]]:
+        if row["new_model"] != "B2" or row["metric"] != "MSE" or row["unit"] != "percentage_point_squared":
+            raise ValueError("workflow increment units or model mismatch")
+    primary = next(row for row in increments if row["old_model"] == "B1")
+    columns = lambda fields: [{"key": key, "label": label, "unit": unit} for key, label, unit in fields]
+    return {
+        "id": question["question_id"], "title": binding["title"], "kind": binding["kind"], "measure": "prediction_error",
+        "run_status": "completed", "review_status": binding["review_status"],
+        "review_summary": binding["review_summary"], "conclusion": binding["summary"],
+        "result": binding["result"], "references": [ref], "run_id": receipt["run_id"],
+        "baseline": "简单历史均值（B0）、已有趋势/三组均线位置/近期涨幅和波动（B1）、再加入六线间距（B2），三者用同一批后期观察比较。",
+        "costs": "没有账户交易；未计算费用、成交、持仓或投资收益。",
+        "products": [{"code": code, "name": {"sh000300": "沪深300", "sz399006": "创业板指"}.get(code, code)} for code in contract["universe"]["assets"]],
+        "period": {"start": question["period"][0], "end": question["period"][1]},
+        "data_cutoff": question["period"][1], "run_at": None, "reviewed_at": binding["reviewed_at"],
+        "target_horizon": "20个交易日；下一交易日收盘起，至第21个交易日收盘",
+        "evaluation_period": "2025年至2026年上半年；全部历史资料此前已见",
+        "sample": [metric(label, sample[key], unit, meaning) for key, label, unit, meaning in [
+            ("rows", "后期共同评价观察", "次", "2025和2026年上半年共同成熟观察；不是独立交易"),
+            ("dates", "后期共同评价日期", "日", "同日两指数相关且周观察重叠"),
+            ("assets", "研究指数", "个", "历史指数点位，不是ETF账户")]],
+        "metrics": [metric("加入六线后预测误差减少比例", primary["relative_percent"], "percent", "正值表示误差减少，负值表示误差增加；不是投资收益")],
+        "result_tables": [
+            {"title": "三种固定方法的预测误差", "columns": columns([("model", "方法", ""), ("mse", "平均平方误差（越小越好）", "百分点²"), ("rmse", "预测误差规模（越小越好）", "百分点")]),
+             "rows": [{"model": names[m], "mse": next(row["value"] for row in performance if row["model"] == m and row["metric"] == "MSE"), "rmse": next(row["value"] for row in performance if row["model"] == m and row["metric"] == "RMSE")} for m in names],
+             "note": "原结果表；误差反映预测偏离实际的程度，不是账户收益或风险金额。"},
+            {"title": "加入六线间距后，比各固定对照改善多少", "columns": columns([("baseline", "对照", ""), ("relative", "平方误差减少比例", "percent"), ("absolute", "平方误差减少量", "百分点²")]),
+             "rows": [{"baseline": names[row["old_model"]], "relative": finite(row["relative_percent"], "relative error"), "absolute": finite(row["absolute_error_improvement"], "absolute error")} for row in increments],
+             "note": "正值改善，负值恶化；不是投资收益增量。不能只选较弱的背景方法作对照。"},
+            {"title": "按评价时期比较已有信息与加入六线", "columns": columns([("period", "评价时期", ""), ("before", "加入前误差", "百分点²"), ("after", "加入后误差", "百分点²"), ("improvement", "误差减少量", "百分点²"), ("rows", "观察", "次")]),
+             "rows": [{"period": row["year"], "before": finite(row["old_value"], "period before"), "after": finite(row["new_value"], "period after"), "improvement": finite(row["absolute_error_improvement"], "period improvement"), "rows": finite(row["rows"], "period rows")} for row in stats["period_comparisons"]],
+             "note": "原逐期结果；2026仅截至6月30日。正值表示误差减少，不能把一段时期的改善外推为稳定可交易。"},
+            {"title": "考虑相邻日期相关后的误差改善范围", "columns": columns([("range", "一起考虑的日期长度", ""), ("baseline", "对照", ""), ("low", "改善范围下限", "百分点²"), ("high", "改善范围上限", "百分点²")]),
+             "rows": [{"range": f"{days}日", "baseline": names[row["old_model"]], "low": finite(row["lo"], "uncertainty low"), "high": finite(row["hi"], "uncertainty high")} for days, result in [(20, stats), (60, block60)] for row in result["increments"]],
+             "note": "原研究的成段估计：相邻观察一起处理。范围含负值与正值表示恶化和改善都可能；不是确定收益区间。"},
+        ],
+        "limitations": binding["limitations"], "source_note": binding.get("source_note"),
+        "next_steps": binding["next_steps"], "sources": verified,
+        "report_registration": registration,
     }
 
 
@@ -518,16 +612,16 @@ def attach_experiments(items: list[dict], experiments: list[dict]) -> None:
     """Derive scoped research text only from successfully verified records."""
     by_reference: dict[str, list[dict]] = {}
     for exp in experiments:
-        if exp["run_status"] == "completed" and exp["sources"]:
-            for ref in exp["references"]:
-                by_reference.setdefault(ref, []).append(exp)
+        for ref in exp["references"]:
+            by_reference.setdefault(ref, []).append(exp)
     for item in items:
+        matches = by_reference.get(item["reference"], [])
+        item["experiment_ids"] = [exp["id"] for exp in matches]
         if item["research"]["stage"] == "insufficient":
             continue
-        matches = by_reference.get(item["reference"], [])
+        matches = [exp for exp in matches if exp["run_status"] == "completed" and exp["sources"]]
         if not matches:
             continue
-        item["experiment_ids"] = [exp["id"] for exp in matches]
         descriptions = []
         for exp in matches:
             period = exp["period"]
@@ -536,7 +630,7 @@ def attach_experiments(items: list[dict], experiments: list[dict]) -> None:
             descriptions.append(description + " " + exp["review_summary"])
         item["research"] = {
             "stage": "historical",
-            "result": matches[0]["result"] if len(matches) == 1 else "unknown",
+            "result": matches[0]["result"] if len({exp["result"] for exp in matches}) == 1 else "unknown",
             "summary": "；".join(descriptions),
             "evidence_date": max(
                 (exp["reviewed_at"] for exp in matches if exp["reviewed_at"]), default=None
@@ -548,7 +642,8 @@ def load_experiments(root: Path, bindings: list[dict]) -> tuple[list[dict], list
     experiments: list[dict] = []
     errors: list[str] = []
     seen_ids: set[str] = set()
-    adapters = {"rank_summary_v1": make_momentum, "dual_ma_description_v1": make_dual_ma}
+    adapters = {"rank_summary_v1": make_momentum, "dual_ma_description_v1": make_dual_ma,
+                "workflow_prediction_v1": make_workflow_prediction}
     for binding in bindings:
         if binding["id"] in seen_ids:
             raise ValueError(f"duplicate experiment id: {binding['id']}")
@@ -566,7 +661,15 @@ def load_experiments(root: Path, bindings: list[dict]) -> tuple[list[dict], list
     return experiments, errors
 
 
-def build(root: Path, bindings_path: Path = BINDINGS) -> dict:
+def select_references(cards: dict, bindings: dict, *, unrestricted: bool = False) -> list[str]:
+    eligible = [ref for ref, card in cards.items() if card["type"] in INCLUDED_TYPES and ref not in bindings["excluded_references"]]
+    selected = bindings.get("included_references", eligible)
+    if not isinstance(selected, list) or len(selected) != len(set(selected)) or any(ref not in eligible for ref in selected):
+        raise ValueError("display scope has duplicate, unknown or excluded references")
+    return eligible if unrestricted else selected
+
+
+def build(root: Path, bindings_path: Path = BINDINGS, *, unrestricted: bool = False) -> dict:
     root = root.resolve()
     bindings = json.loads((root / bindings_path).read_text())
     if bindings.get("schema_version") != "factor-display-bindings/1":
@@ -574,12 +677,13 @@ def build(root: Path, bindings_path: Path = BINDINGS) -> dict:
     access = factor_access.load_access_catalog(root=root)
     registry = access["registry"]
     all_cards = definitions.validate_registry(registry)
-    excluded = set(bindings["excluded_references"])
+    selected = select_references(all_cards, bindings, unrestricted=unrestricted)
+    unintegrated = sorted(set(select_references(all_cards, bindings, unrestricted=True)) - set(selected))
     registry_src = source(root, "docs/research/definitions.v1.json")
     items = [
         item_from_card(root, ref, card, access, registry_src)
-        for ref, card in all_cards.items()
-        if card["type"] in INCLUDED_TYPES and ref not in excluded
+        for ref in selected
+        for card in [all_cards[ref]]
     ]
     experiments, source_errors = load_experiments(root, bindings["experiments"])
     projects = []
@@ -626,8 +730,9 @@ def build(root: Path, bindings_path: Path = BINDINGS) -> dict:
         "limitations": [
             "目录只统计展示范围内的正式研究读数与状态；基础价格、选择动作、基准和策略另有身份，不计作因子。",
             "未绑定展示证据不等于全仓未研究；计算核验不等于真实市场有效。",
-            "量能方向目前没有本展示目录中可直接确认的正式对象，保留为空缺。",
+            f"本批只接入已核定的展示范围；另有{len(unintegrated)}个已登记版本尚未接入本页，不表示它们尚未研究。",
         ],
+        "unintegrated_references": unintegrated,
         "source_errors": source_errors,
         "items": items,
         "experiments": experiments,
@@ -641,10 +746,23 @@ def main():
         "--check", action="store_true", help="check pinned sources and generated contents"
     )
     parser.add_argument("--root", type=Path, default=ROOT, help=argparse.SUPPRESS)
+    parser.add_argument("--preview", action="store_true", help="show unrestricted and scoped changes without writing the snapshot")
     args = parser.parse_args()
     root = args.root.resolve()
     generated = build(root)
     out = root / OUTPUT
+    if args.preview:
+        old = json.loads(out.read_text())
+        full = build(root, unrestricted=True)
+        previous = {item["reference"]: item for item in old["items"]}
+        selected = {item["reference"]: item for item in generated["items"]}
+        print(json.dumps({"old_counts": old["counts"], "unrestricted_counts": full["counts"],
+            "scoped_counts": generated["counts"], "added": sorted(selected.keys() - previous.keys()),
+            "removed": sorted(previous.keys() - selected.keys()),
+            "changed_existing": {ref: [key for key in previous[ref] if previous[ref][key] != selected[ref].get(key)] for ref in previous.keys() & selected.keys() if previous[ref] != selected[ref]},
+            "added_experiments": [e["id"] for e in generated["experiments"] if e["id"] not in {e["id"] for e in old["experiments"]}],
+            "unintegrated_references": generated["unintegrated_references"], "source_errors": generated["source_errors"]}, ensure_ascii=False, indent=2))
+        return
     if args.check:
         if generated["source_errors"]:
             raise SystemExit("source verification failed: " + "; ".join(generated["source_errors"]))

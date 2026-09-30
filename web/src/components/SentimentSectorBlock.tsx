@@ -445,7 +445,7 @@ export default function SentimentSectorBlock({ view, heatAvailable, heatHint }: 
       <div className="sx-rail-head">
         <span className="sx-rail-title">板块情绪</span>
         <span className="sx-rail-sub">
-          大板块（成分股≥30只）· 资料所属日 {view.as_of ?? "—"} · 强度 = 板块内站上50个交易日均线的股票占比
+          大板块（成分股≥30只）· 快照生成于 {view.as_of ?? "未记录"}（行情所属日未提供） · 强度 = 板块内站上50个交易日均线的股票占比
         </span>
       </div>
 
@@ -498,10 +498,10 @@ export default function SentimentSectorBlock({ view, heatAvailable, heatHint }: 
 
       {/* 推荐观察（阈值触发，用户决定加不加） */}
       <div className="sb-sub-title" style={{ marginTop: 14 }}>
-        快照观察（{view.recommendations.length} 条 · 截至 {view.as_of ?? "日期未记录"}，按原阈值筛选）
+        快照观察（{view.recommendations.length} 条 · 生成于 {view.as_of ?? "未记录"}，按原阈值筛选）
       </div>
       {view.recommendations.length === 0 ? (
-        <div className="muted" style={{ padding: "4px 2px" }}>该资料日期内，没有进入原有20/80参考范围的板块。</div>
+        <div className="muted" style={{ padding: "4px 2px" }}>这份快照中，没有进入原有20/80参考范围的板块。</div>
       ) : (
         <div className="sb-rec-list">
           {view.recommendations.map((r) => (

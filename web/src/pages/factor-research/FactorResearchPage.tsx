@@ -6,6 +6,7 @@ import readingGuidance from "./reading-guidance.json";
 import metricsGuidance from "./metrics-guidance.json";
 import assessmentFramework from "./assessment-framework.json";
 import FactorResearchOverview from "./FactorResearchOverview";
+import StudyConclusion from "./StudyConclusion";
 import { catalogAction, factorView } from "./overviewModel";
 import "./factor-research.css";
 
@@ -19,7 +20,7 @@ const reading = (() => {
 const metricGuide = metricsGuidance as MetricsGuidance;
 const assessment = assessmentFramework as AssessmentFramework;
 const observationPeriod = (experiment: Experiment) => `${date(experiment.period.start)} 至 ${date(experiment.period.end)}`;
-const priceStudyCaution = (experiment: Experiment) => experiment.kind === "predictive_study" ? "排名关系不是胜率；后续价格差不是账户收益。" : experiment.kind === "price_description" ? "后续价格均值不是完整账户收益。" : null;
+const priceStudyCaution = (experiment: Experiment) => experiment.measure === "prediction_error" ? "预测误差减少表示预测更接近实际；负值表示误差增加。这些比例不是胜率或投资收益。" : experiment.kind === "predictive_study" ? "排名关系不是胜率；后续价格差不是账户收益。" : experiment.kind === "price_description" ? "后续价格均值不是完整账户收益。" : null;
 
 function StatusBadge({ children, tone }: { children: ReactNode; tone: DisplayTone }) {
   return <span className="fr-status-badge" data-tone={tone}><span aria-hidden="true" className="fr-badge-mark" />{children}</span>;
@@ -81,10 +82,7 @@ function ExperimentEvidence({ experiment, onOpen }: { experiment: Experiment; on
 
 function ExperimentDetail({ experiment }: { experiment: Experiment }) {
   return <article className="fr-detail" aria-label="实验详情">
-    <div className="fr-meta-line"><span>{kindLabels[experiment.kind] ?? experiment.kind}</span><span>{runLabels[experiment.run_status] ?? experiment.run_status}</span><StatusBadge tone={reviewTone(experiment.review_status)}>{reviewLabels[experiment.review_status] ?? experiment.review_status}</StatusBadge>{experiment.result && <StatusBadge tone={resultTone(experiment.result)}>{resultLabels[experiment.result as keyof typeof resultLabels] ?? experiment.result}</StatusBadge>}</div>
-    <h2>{experiment.title}</h2>
-    <p className="fr-lead">{display(experiment.conclusion)}</p>
-    <p className="fr-experiment-scope">观察期 {observationPeriod(experiment)} · 产品 {experiment.products.length ? `${experiment.products.length} 项` : "未记录"}</p>
+    <StudyConclusion experiment={experiment} />
     <section className="fr-section fr-experiment-key-results"><h3>本实验已报告的指标</h3>{experiment.metrics.length ? <div className="fr-metric-list">{experiment.metrics.map((m, i) => <div key={i}><span>{m.label}</span><strong>{formatValue(m.value, m.unit)}</strong>{m.meaning && <details className="fr-metric-meaning"><summary>口径</summary><small>{m.meaning}</small></details>}</div>)}</div> : <p className="fr-dim">本实验暂无已接入数值。</p>}</section>
     {priceStudyCaution(experiment) && <p className="fr-price-caution">{priceStudyCaution(experiment)}</p>}
     {experiment.result_tables.map((table, i) => <ResultTable table={table} key={i} />)}
@@ -122,23 +120,21 @@ function FactorDetail({ item, versions, experiments, guides, section, onSectionC
   const originalLimits = linked.flatMap(experiment => experiment.limitations.map(text => ({ title: experiment.title, text })));
   const leadMetrics = cardMetricEvidence(item, experiments);
   const outcome = factorOutcome(item);
-  const completedStudies = linked.filter(experiment => experiment.run_status === "completed");
   const completedAccounts = accountExperiments.filter(experiment => experiment.run_status === "completed");
   const hasAccountValue = completedAccounts.some(experiment => accountMetricRows(metricGuide.account_metrics, experiment, item.reference).some(row => row.status === "available"));
   return <article className="fr-detail fr-factor-detail fr-dossier" aria-label="因子研究档案" data-category={categoryTone(item.category)}>
     <div className="fr-dossier-heading"><h2>{displayFactorName(item, guides)}</h2><div className="fr-meta-line"><span className="fr-category-tag" data-category={categoryTone(item.category)}>{item.category}</span><span>{typeLabels[item.object_type] ?? item.object_type}</span><span>v{item.version}</span></div></div>
     <p className="fr-detail-question"><strong>观察什么：</strong>{guide?.watch || purposeText(item.purpose)}</p>
-    <p className="fr-detail-answer"><strong>当前结论：</strong>{outcome.headline}。{outcome.explanation}</p>
-    <p className="fr-detail-range"><strong>本次检查范围：</strong>{completedStudies.length ? completedStudies.map(study => `${study.products.map(product => product.name || product.code).join("、") || "产品未记录"}，${observationPeriod(study)}`).join("；") : "本页未接入该版本实验"}</p>
-    {(originalLimits[0] || item.limitations[0]) && <p className="fr-detail-limit"><strong>主要局限：</strong>{originalLimits[0]?.text ?? limitationText(item.limitations[0])}</p>}
+    <p className="fr-detail-answer"><strong>已接入资料：</strong>{linked.length ? `本精确版本有${linked.length}项实验。每项结论只适用于下列对应范围，不合并成一个买卖判断。` : `${outcome.headline}。${outcome.explanation}`}</p>
+    {linked.map(experiment => <StudyConclusion key={experiment.id} experiment={experiment} onOpen={() => onOpenExperiment(experiment.id)} />)}
+    {!linked.length && item.limitations[0] && <p className="fr-detail-limit"><strong>定义限制：</strong>{limitationText(item.limitations[0])}</p>}
     {versions.length > 1 && <div className="fr-version-choice"><label htmlFor="fr-version">定义版本</label><select id="fr-version" value={item.reference} onChange={e => onVersionChange(e.target.value)}>{versions.map(version => <option key={version.reference} value={version.reference}>v{version.version}{version.reference === item.reference ? "（当前）" : ""}</option>)}</select><span>各版研究证据独立展示。</span></div>}
     <nav className="fr-dossier-tabs" aria-label="档案内部页面">{dossierTabs.map(tab => <button key={tab.id} type="button" aria-current={section === tab.id ? "page" : undefined} className={section === tab.id ? "active" : ""} onClick={() => onSectionChange(tab.id)}>{tab.label}</button>)}</nav>
     {section === "overview" && <div className="fr-dossier-panel" aria-label="总览">
       <section className="fr-user-outcome" data-tone={outcome.tone}><span>有没有帮助</span><h3>{outcome.headline}</h3><p>{outcome.explanation}</p><details><summary>查看登记原结论与状态</summary><p>{display(item.research.summary)}</p><small>{stageLabels[item.research.stage] ?? "阶段未核明"} · {resultLabels[item.research.result] ?? "结论未核明"} · 证据日期 {date(item.research.evidence_date)}</small></details></section>
-      <div className="fr-user-answers"><section><h3>在哪验证过？</h3>{completedStudies.length ? <><p>{completedStudies[0].products.length ? `${completedStudies[0].products.length} 个产品` : "产品未记录"} · {observationPeriod(completedStudies[0])}</p><small>{reviewLabels[completedStudies[0].review_status] ?? completedStudies[0].review_status}{completedStudies.length > 1 ? ` · 另 ${completedStudies.length - 1} 项研究见证据页` : ""}</small>{completedStudies[0].products.length > 0 && <details><summary>查看产品清单</summary><p>{completedStudies[0].products.map(product => product.name && product.name !== product.code ? `${product.name}（${product.code}）` : product.code).join("、")}</p></details>}</> : <p>尚无可展示的历史验证范围。</p>}</section><section><h3>策略能否增加收益？</h3><p>{hasAccountValue ? "已有完整账户指标；是否改善收益仍须看原实验固定对照。" : completedAccounts.length ? "已有完整回测记录，但本页未报告可核的账户指标，暂不能判断。" : "尚不能判断：暂无可展示的同版本扣费后账户结果。"}</p><small>短期价格变化与排名关系不是账户利润。</small></section></div>
+      <div className="fr-user-answers"><section><h3>策略能否增加收益？</h3><p>{hasAccountValue ? "已有完整账户指标；是否改善收益仍须看原实验固定对照。" : completedAccounts.length ? "已有完整回测记录，但本页未报告可核的账户指标，暂不能判断。" : "尚不能判断：暂无可展示的同版本扣费后账户结果。"}</p><small>短期价格变化、预测误差与排名关系不是账户利润。</small></section></div>
       {leadMetrics.length > 0 && <details className="fr-user-numbers"><summary>查看本次研究的原数值与单位</summary><div>{leadMetrics.map(({ experiment, metric }, index) => <p key={`${experiment.id}-${index}`}><strong>{metric.label}：{formatValue(metric.value, metric.unit)}</strong><span> · {observationPeriod(experiment)} · {reviewLabels[experiment.review_status] ?? experiment.review_status}</span></p>)}</div></details>}
       <div className="fr-overview-purpose"><strong>它关注什么</strong><span>{guide?.watch || purposeText(display(item.purpose))}</span>{guide && <details><summary>完整读法与误读</summary><div><p><strong>重点看：</strong>{guide.watch}</p><p><strong>怎么看：</strong>{guide.read}</p><p><strong>还需一起看：</strong>{guide.context.join("；")}</p><p><strong>容易误读：</strong>{guide.pitfall}</p><small>{guide.verification_scope}</small></div></details>}</div>
-      {(originalLimits[0] || item.limitations[0]) && <p className="fr-leading-limit"><strong>已记录限制：</strong>{originalLimits[0]?.text ?? limitationText(item.limitations[0])}</p>}
       <details className="fr-overview-limits"><summary>查看全部局限与下一步（{item.limitations.length + originalLimits.length} 项局限）</summary><div className="fr-dossier-limit-columns"><div><strong>本版本限制</strong>{item.limitations.length ? <ul>{item.limitations.map((text, index) => <li key={index}>{limitationText(text)}</li>)}</ul> : <p>未记录</p>}</div><div><strong>关联实验原限制</strong>{originalLimits.length ? <ul>{originalLimits.map((limit, index) => <li key={index}>{limit.text}<small>— {limit.title}</small></li>)}</ul> : <p>暂无关联实验原限制；不表示不存在其他限制。</p>}</div></div><Notes title="本版本后续工作" values={item.next_steps} /></details>
       <details className="fr-deep-material"><summary>深入了解：定义范围与八方面核对资料</summary><div className="fr-dossier-scope"><div><strong>定义适用</strong><p>{display(item.scope)} · {item.asset_classes.join("、") || "资产未记录"}</p></div><div><strong>本版已接入研究</strong><p>{linked.length ? linked.map(experiment => `${experiment.title}：${observationPeriod(experiment)}；${experiment.products.map(product => product.name || product.code).join("、") || "产品未记录"}`).join("；") : "暂无关联实验；定义范围不等于验证范围。"}</p></div></div><p className="fr-dossier-note">资料可见不等于核查通过或投资有效。</p><div className="fr-dense-topic-grid">{assessment.topics.map(topicItem => { const fact = facts.find(value => value.id === topicItem.id); const missing = topicItem.checks.filter(check => checkEvidence(item, experiments, check).length === 0); return <button className="fr-dense-topic" type="button" key={topicItem.id} onClick={() => onSectionChange(topicItem.section === "overview" ? "definition" : topicItem.section)}><strong>{topicItem.title}</strong><span>{fact?.label ?? "资料未核明"}</span><small>{missing.length ? `待查：${missing[0].label}${missing.length > 1 ? `等${missing.length}项` : ""}` : "相关资料已列，仍需核对"}</small></button>; })}</div></details>
     </div>}
@@ -180,15 +176,15 @@ function CatalogCard({ group, guides, experiments, onOpen, onOpenExperiment, com
   if (compact) return <article className="fr-object-row" data-category={categoryTone(item.category)}>
     <div className="fr-row-identity"><span className="fr-mobile-label">观察什么</span><span className="fr-category-tag" data-category={categoryTone(item.category)}>{item.category}</span><h3>{displayFactorName(item, guides)}</h3><p>{purpose}</p><small>v{item.version}{versions.length > 1 ? ` · 共${versions.length}版` : ""}</small></div>
     <div className="fr-row-outcome" data-tone={outcome.tone}><span className="fr-mobile-label">已记录结论</span><strong>{outcome.headline}</strong></div>
-    <div className="fr-row-scope"><span className="fr-mobile-label">证据范围</span>{study ? <><span>{study.products.length ? `${study.products.length} 个产品` : "产品未记录"}</span><small>{observationPeriod(study)} · {reviewLabels[study.review_status] ?? study.review_status}</small></> : <span>本页未接入该版本实验</span>}</div>
+    <div className="fr-row-scope"><span className="fr-mobile-label">证据范围</span>{linked.length > 1 ? <><span>{linked.length}项实验，分别记录范围</span><small>打开后逐项看结论、日期和限制</small></> : study ? <><span>{study.products.length ? `${study.products.length} 个产品` : "产品未记录"}</span><small>{observationPeriod(study)} · {reviewLabels[study.review_status] ?? study.review_status}</small></> : <span>本页未接入该版本实验</span>}</div>
     <button type="button" className="fr-main-action fr-row-open" onClick={onOpen}>{catalogAction(item, experiments)}</button>
   </article>;
   return <article className="fr-object-card" data-category={categoryTone(item.category)}>
     <div className="fr-card-top"><span className="fr-category-tag" data-category={categoryTone(item.category)}><span className="fr-category-mark" aria-hidden="true" />{item.category}</span><span className="fr-card-assets">v{item.version}{versions.length > 1 ? ` · 共${versions.length}版` : ""}</span></div>
     <h3>{displayFactorName(item, guides)}</h3>
     <p className="fr-grid-purpose">{purpose}</p><div className="fr-grid-outcome" data-tone={outcome.tone}><strong>{outcome.headline}</strong></div>
-    <div className="fr-grid-scope">{study ? <><span>{study.products.length ? `${study.products.length} 个产品` : "产品未记录"}</span><small>{observationPeriod(study)} · {reviewLabels[study.review_status] ?? study.review_status}</small></> : <span>本页未接入该版本实验</span>}</div>
-    <div className="fr-card-actions"><button type="button" className="fr-main-action" onClick={onOpen}>{catalogAction(item, experiments)}</button>{linked.length > 0 && <button type="button" className="fr-text-action" onClick={() => onOpenExperiment(linked[0].id)}>看原实验</button>}</div>
+    <div className="fr-grid-scope">{linked.length > 1 ? <><span>{linked.length}项实验，分别记录范围</span><small>打开后逐项看结论、日期和限制</small></> : study ? <><span>{study.products.length ? `${study.products.length} 个产品` : "产品未记录"}</span><small>{observationPeriod(study)} · {reviewLabels[study.review_status] ?? study.review_status}</small></> : <span>本页未接入该版本实验</span>}</div>
+    <div className="fr-card-actions"><button type="button" className="fr-main-action" onClick={onOpen}>{catalogAction(item, experiments)}</button>{linked.length === 1 && <button type="button" className="fr-text-action" onClick={() => onOpenExperiment(linked[0].id)}>看原实验</button>}</div>
   </article>;
 }
 

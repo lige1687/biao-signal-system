@@ -121,8 +121,13 @@ test("reading guides bind only exact versions, including both versions of one ob
   const snapshot = JSON.parse(await readFile(new URL("./catalog.generated.json", import.meta.url), "utf8"));
   const lookup = model.indexGuides(document);
   assert.equal(document.schema_version, "factor-reading/1");
-  assert.equal(lookup.size, snapshot.items.length);
-  for (const card of snapshot.items) assert.ok(lookup.has(card.reference), `missing ${card.reference}`);
+  const newResearch = snapshot.items.find(card => card.reference === "research.trend.ma_cluster_width@1.0.0");
+  assert.ok(newResearch);
+  assert.equal(lookup.size, snapshot.items.length - 1);
+  for (const card of snapshot.items.filter(card => card !== newResearch)) assert.ok(lookup.has(card.reference), `missing ${card.reference}`);
+  assert.equal(lookup.get(newResearch.reference), undefined);
+  assert.equal(model.displayFactorName(newResearch, lookup), newResearch.name);
+  assert.notEqual(model.displayFactorName(newResearch, lookup), lookup.get("trend.ma_cluster_width@1.0.0")?.plain_name);
   const old = lookup.get("trend.cost_basis_distance20@1.0.0");
   const newer = lookup.get("trend.cost_basis_distance20@2.0.0");
   assert.ok(old && newer);

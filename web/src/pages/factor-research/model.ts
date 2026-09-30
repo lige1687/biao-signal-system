@@ -15,6 +15,9 @@ export type Experiment = {
   references: string[]; products: { code: string; name: string }[];
   period: { start: string | null; end: string | null };
   data_cutoff: string | null; run_at: string | null; reviewed_at: string | null;
+  target_horizon?: string; evaluation_period?: string; source_note?: string;
+  measure?: "prediction_error";
+  correction?: { status: "corrected" | "superseded"; note: string; sources: Source[] };
   sample: { label: string; value: number | null; unit: string }[];
   metrics: { label: string; value: number | null; unit: string; meaning: string }[];
   result_tables: { title: string; columns: { key: string; label: string; unit: string }[]; rows: Record<string, string | number | null>[]; note: string }[];
@@ -25,6 +28,7 @@ export type Snapshot = {
   schema_version: "factor-research/1"; generated_at: string; registry_version: string;
   sources: Source[]; counts: { factor_objects: number; definition_versions: number; executed_experiments: number };
   limitations: string[]; items: FactorItem[]; experiments: Experiment[]; projects: Project[];
+  unintegrated_references?: string[];
 };
 export type ReadingGuide = {
   references: string[]; plain_name: string; watch: string; read: string;

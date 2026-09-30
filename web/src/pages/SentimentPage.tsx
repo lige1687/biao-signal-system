@@ -71,7 +71,7 @@ export default function SentimentPage() {
         <span className="pg-head-sub">观察交易参与和调查读数；交易仍看阶段、路牌与触发条件</span>
       </div>
       <div className="pg-head-kv">
-        <span className="pg-kv"><span className="k">A股板块日期</span><b>{d?.sector_boards?.as_of ?? "未记录"}</b></span>
+        <span className="pg-kv"><span className="k">A股快照生成于</span><b>{d?.sector_boards?.as_of ?? "未记录"}</b></span>
         <span className="pg-kv"><span className="k">美股板块日期</span><b>{d?.us_sector_boards?.as_of ?? "未记录"}</b></span>
       </div>
       <div className="pg-head-actions">

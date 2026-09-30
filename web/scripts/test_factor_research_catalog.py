@@ -197,6 +197,100 @@ class FactorResearchCatalogTests(unittest.TestCase):
         self.assertEqual(item["calculation"]["status"], "verified")
         self.assertIn("source drift", item["limitations"])
 
+    def _workflow_binding(self, id_="question-a"):
+        reference = "research.trend.ma_cluster_width@1.0.0"
+        prefix = f"docs/experiments/raw/{id_}"
+        report_path = f"docs/experiments/{id_}.md"
+        contract = {"question": {"question_id": id_, "factor_refs": [reference],
+            "period": ["2023-01-01", "2026-06-30"],
+            "target": {"kind": "mae", "horizon": 20, "start_offset": 1, "end_offset": 21}},
+            "feature": {"definition_ref": reference}, "target": {"kind": "mae", "start_offset": 1, "end_offset": 21},
+            "universe": {"assets": ["sh000300", "sz399006"]},
+            "publication": {"report_path": report_path, "conclusion": "insufficient"}}
+        performance = [{"model": m, "metric": metric, "value": value,
+            "unit": "percentage_point_squared" if metric == "MSE" else "percentage_point",
+            "rows": 81, "dates": 43, "assets": 2}
+            for m in ["B0", "B1", "B2"] for metric, value in [("MSE", 9), ("RMSE", 3)]]
+        increments = [{"new_model": "B2", "old_model": m, "relative_percent": -3.77,
+            "absolute_error_improvement": -0.3, "lo": -0.8, "hi": 0.1,
+            "metric": "MSE", "unit": "percentage_point_squared"} for m in ["B1", "B0"]]
+        result = {"performance": performance, "increments": increments,
+            "period_comparisons": [{"fold": "0", "old_model": "B1", "new_model": "B2",
+                "year": "2025", "old_value": 8, "new_value": 9,
+                "absolute_error_improvement": -1, "rows": 47, "dates": 24,
+                "unit": "percentage_point_squared"}]}
+        sources = {"contract": self._write(f"{prefix}/contract.json", contract),
+            "run_contract": self._write(f"{prefix}/run-contract.json", contract),
+            "summary": self._write(f"{prefix}/result.json", result),
+            "block60": self._write(f"{prefix}/block60.json", result)}
+        sources["receipt"] = self._write(f"{prefix}/receipt.json", {
+            "run_id": "run-a", "callback_executed": True,
+            "contract_sha256": sources["contract"]["sha256"],
+            "outputs": {"result.json": sources["summary"]["sha256"]}})
+        for role in ["report", "family_report", "controller", "numeric_check", "protocol", "feature_audit"]:
+            sources[role] = self._write(report_path if role == "report" else f"{prefix}/{role}.json", {"fixture": role})
+        self._write("docs/experiments/registry.json", {"entries": {report_path: {"verdict": "mixed"}}})
+        return {"id": id_, "adapter": "workflow_prediction_v1", "reference": reference,
+            "run_id": "run-a", "target_kind": "mae", "title": "风险信息", "kind": "predictive_study",
+            "summary": "证据不足", "result": "insufficient", "review_status": "reviewed",
+            "review_summary": "有限复核", "reviewed_at": "2026-09-30", "sources": sources,
+            "limitations": ["不是ETF账户结果"], "next_steps": [], "source_note": "审计更正保留"}
+
+    def test_workflow_reads_exact_question_and_error_units_without_account_claim(self):
+        experiment = builder.make_workflow_prediction(self.root, self._workflow_binding())
+        self.assertEqual(experiment["id"], "question-a")
+        self.assertEqual(experiment["references"], ["research.trend.ma_cluster_width@1.0.0"])
+        self.assertEqual(experiment["target_horizon"], "20个交易日；下一交易日收盘起，至第21个交易日收盘")
+        self.assertEqual(experiment["run_at"], None)
+        self.assertEqual(experiment["result"], "insufficient")
+        self.assertEqual(experiment["metrics"][0]["unit"], "percent")
+        self.assertIn("不是投资收益", experiment["metrics"][0]["meaning"])
+        self.assertEqual(experiment["source_note"], "审计更正保留")
+
+    def test_workflow_rejects_wrong_question_old_version_and_receipt_relationship(self):
+        for field, value in [("id", "wrong"), ("reference", "trend.ma_cluster_width@1.0.0"), ("run_id", "other-run")]:
+            with self.subTest(field=field):
+                binding = self._workflow_binding()
+                binding[field] = value
+                with self.assertRaises(ValueError):
+                    builder.make_workflow_prediction(self.root, binding)
+        binding = self._workflow_binding()
+        receipt = json.loads((self.root / binding["sources"]["receipt"]["path"]).read_text())
+        receipt["outputs"]["result.json"] = "0" * 64
+        binding["sources"]["receipt"] = self._write(binding["sources"]["receipt"]["path"], receipt)
+        with self.assertRaisesRegex(ValueError, "receipt"):
+            builder.make_workflow_prediction(self.root, binding)
+
+    def test_blocked_workflow_stays_attached_without_borrowing_completed_claim(self):
+        bad = self._workflow_binding()
+        bad["sources"]["controller"]["sha256"] = "0" * 64
+        experiments, errors = builder.load_experiments(self.root, [bad, self._binding("other", "other@1.0.0")])
+        self.assertEqual(len(errors), 1)
+        item = {"reference": bad["reference"], "experiment_ids": [], "research": {"stage": "unbound", "result": "unknown"}}
+        builder.attach_experiments([item], experiments)
+        self.assertEqual(item["experiment_ids"], [bad["id"]])
+        self.assertEqual(item["research"]["stage"], "unbound")
+        self.assertEqual(experiments[1]["run_status"], "completed")
+
+    def test_scope_rejects_unknown_duplicate_and_excluded_references(self):
+        cards = {"a@1.0.0": {"type": "feature"}, "b@1.0.0": {"type": "baseline"}}
+        for references in [["missing@1.0.0"], ["a@1.0.0", "a@1.0.0"], ["b@1.0.0"]]:
+            with self.subTest(references=references), self.assertRaises(ValueError):
+                builder.select_references(cards, {"excluded_references": [], "included_references": references})
+
+    def test_workflow_duplicate_ids_are_rejected(self):
+        binding = self._workflow_binding()
+        with self.assertRaisesRegex(ValueError, "duplicate experiment id"):
+            builder.load_experiments(self.root, [binding, binding])
+
+    def test_workflow_cannot_replace_uncertainty_with_other_predictions(self):
+        binding = self._workflow_binding()
+        changed = json.loads((self.root / binding["sources"]["block60"]["path"]).read_text())
+        changed["performance"][0]["value"] = 1
+        binding["sources"]["block60"] = self._write(binding["sources"]["block60"]["path"], changed)
+        with self.assertRaisesRegex(ValueError, "same predictions"):
+            builder.make_workflow_prediction(self.root, binding)
+
 
 if __name__ == "__main__":
     unittest.main()
