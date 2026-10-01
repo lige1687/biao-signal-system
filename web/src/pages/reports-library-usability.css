@@ -1,0 +1,23 @@
+/* Report navigation only; scoped to avoid affecting the learning library. */
+.lib-page .lib-row {
+  width: 100%; flex-shrink: 0; color: inherit; font: inherit; text-align: left;
+}
+.lib-page :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.lib-page .lib-list, .lib-page .lib-reader { min-width: 0; }
+.lib-page .lib-back { margin-bottom: 12px; }
+.lib-page .lib-reader-bar { flex-wrap: wrap; }
+.lib-page .lib-reader-bar .count, .lib-page .lib-row-title,
+.lib-page .lib-reader-error { overflow-wrap: anywhere; }
+.lib-page .lib-reader-error { color: var(--error); }
+
+@media (max-width: 900px) {
+  .lib-page .lib-layout { grid-template-columns: minmax(0, 1fr); }
+  .lib-page .lib-list, .lib-page .lib-reader { max-height: none; }
+  .lib-page .lib-reader { display: none; }
+  .lib-page--reading .lib-list, .lib-page--reading .lib-filters,
+  .lib-page--reading .lib-toggle { display: none; }
+  .lib-page--reading .lib-reader { display: block; }
+  .lib-page .lib-search { min-width: 0; width: 100%; flex-basis: 100%; }
+  .lib-page .lib-row-head { flex-wrap: wrap; }
+  .lib-page .lib-row-title { min-width: 0; }
+}

@@ -1,9 +1,10 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { marked } from "marked";
 import { useSearchParams } from "react-router-dom";
 import { experimentsApi } from "../api/client";
 import type { ExperimentReportItem, ExperimentVerdict } from "../types";
+import "./reports-library-usability.css";
 
 /**
  * 实验报告库：历史上所有实验/调研文档的统一浏览入口。
@@ -38,36 +39,66 @@ function ReportRow({
   onClick: () => void;
 }) {
   return (
-    <div className={`lib-row${active ? " active" : ""}`} onClick={onClick}>
-      <div className="lib-row-head">
+    <button type="button" className={`lib-row${active ? " active" : ""}`} aria-current={active ? "true" : undefined} onClick={onClick}>
+      <span className="lib-row-head">
         <span className="lib-row-date">{item.date}</span>
         <span className="lib-row-title">
           {item.isPrompt ? "〔任务书〕" : ""}
           {item.title}
         </span>
         {item.archived && <span className="lib-row-archived">归档</span>}
-      </div>
-      <div className="lib-row-meta">
+      </span>
+      <span className="lib-row-meta">
         <span className={`lib-cat${item.pending ? " pending" : ""}`}>{item.category}</span>
         <VerdictBadge v={item.verdict} />
-      </div>
-      <div className="lib-row-oneliner">
+      </span>
+      <span className="lib-row-oneliner">
         {item.oneLiner || "（未写「一句话结论」小节——点开看正文；新报告请按规约补写）"}
-      </div>
-    </div>
+      </span>
+    </button>
   );
 }
 
 export default function ReportsLibraryPage() {
-  const [category, setCategory] = useState<string>("");
-  const [verdict, setVerdict] = useState<string>("");
-  const [q, setQ] = useState("");
-  const [hidePrompts, setHidePrompts] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
-  const selected = searchParams.get("report");
-  const setSelected = (name: string) => setSearchParams({ report: name }, { replace: true });
+  const category = searchParams.get("category") ?? "";
+  const verdict = searchParams.get("verdict") ?? "";
+  const q = searchParams.get("q") ?? "";
+  const hidePrompts = searchParams.get("prompts") !== "show";
+  const selected = searchParams.get("report") || null;
+  const readerRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+  const restoreListFocus = useRef(false);
+  const updateParam = (key: string, value: string, replace = true) => {
+    const next = new URLSearchParams(searchParams);
+    if (value) next.set(key, value);
+    else next.delete(key);
+    setSearchParams(next, { replace });
+  };
+  const clearFilters = () => {
+    const next = new URLSearchParams(searchParams);
+    ["category", "verdict", "q", "prompts"].forEach((key) => next.delete(key));
+    setSearchParams(next, { replace: true });
+  };
+  const returnToList = () => {
+    restoreListFocus.current = true;
+    updateParam("report", "");
+  };
 
-  const { data, error } = useQuery({
+  useEffect(() => {
+    if (selected) {
+      restoreListFocus.current = true;
+      readerRef.current?.focus({ preventScroll: true });
+      readerRef.current?.scrollIntoView({ block: "start" });
+      if (readerRef.current) readerRef.current.scrollTop = 0;
+    } else if (restoreListFocus.current) {
+      listRef.current?.focus({ preventScroll: true });
+      listRef.current?.scrollIntoView({ block: "start" });
+      restoreListFocus.current = false;
+    }
+  }, [selected]);
+
+  const { data, error, isPending } = useQuery({
     queryKey: ["experiments"],
     queryFn: experimentsApi.list,
     staleTime: 5 * 60_000,
@@ -110,7 +141,7 @@ export default function ReportsLibraryPage() {
   const html = detail.data ? (marked.parse(detail.data.markdown, { async: false }) as string) : "";
 
   return (
-    <div className="page lib-page">
+    <div className={`page lib-page${selected ? " lib-page--reading" : ""}`}>
       <div className="header">
         <h1>实验报告库</h1>
         <span className="generated">
@@ -118,7 +149,7 @@ export default function ReportsLibraryPage() {
         </span>
         <span className="spacer" />
         <label className="lib-toggle">
-          <input type="checkbox" checked={hidePrompts} onChange={(e) => setHidePrompts(e.target.checked)} />
+          <input type="checkbox" checked={hidePrompts} onChange={(e) => updateParam("prompts", e.target.checked ? "" : "show")} />
           隐藏任务书
         </label>
       </div>
@@ -131,7 +162,7 @@ export default function ReportsLibraryPage() {
       )}
 
       <div className="lib-filters">
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+        <select aria-label="报告分类" value={category} onChange={(e) => updateParam("category", e.target.value)}>
           <option value="">全部分类</option>
           {(data?.categories ?? []).map((c) => (
             <option key={c} value={c}>
@@ -139,7 +170,7 @@ export default function ReportsLibraryPage() {
             </option>
           ))}
         </select>
-        <select value={verdict} onChange={(e) => setVerdict(e.target.value)}>
+        <select aria-label="报告结论" value={verdict} onChange={(e) => updateParam("verdict", e.target.value)}>
           <option value="">全部结论</option>
           <option value="passed">成立</option>
           <option value="falsified">证伪</option>
@@ -149,27 +180,37 @@ export default function ReportsLibraryPage() {
         </select>
         <input
           className="lib-search"
+          aria-label="搜索报告"
           placeholder="搜索标题 / 结论 / 文件名…"
           value={q}
-          onChange={(e) => setQ(e.target.value)}
+          onChange={(e) => updateParam("q", e.target.value)}
         />
-        <span className="count">{items.length} 份</span>
+        <button type="button" className="btn" onClick={clearFilters} disabled={!category && !verdict && !q && hidePrompts}>清除筛选</button>
+        <span className="count" role="status">{isPending ? "加载中…" : `${items.length} 份`}</span>
       </div>
 
       <div className="lib-layout">
-        <div className="lib-list">
+        <div className="lib-list" ref={listRef} tabIndex={-1} role="region" aria-label="报告列表">
           {items.map((x) => (
             <ReportRow
               key={x.name}
               item={x}
               active={selected === x.name}
-              onClick={() => setSelected(x.name)}
+              onClick={() => updateParam("report", x.name, false)}
             />
           ))}
-          {items.length === 0 && <div className="lib-empty">没有匹配的报告。</div>}
+          {isPending ? <div className="lib-empty" role="status">正在加载报告列表…</div> : items.length === 0 && <div className="lib-empty">没有匹配的报告。可清除筛选后重试。</div>}
         </div>
-        <div className="lib-reader">
-          {detail.data ? (
+        <div className="lib-reader" ref={readerRef} tabIndex={-1} role="region" aria-label="报告正文" aria-busy={selected != null && detail.isPending}>
+          {selected && <button type="button" className="btn lib-back" onClick={returnToList}>← 返回报告列表</button>}
+          {!selected ? <div className="lib-empty">选择一份报告，查看结论和正文。</div> : detail.isPending ? (
+            <div className="lib-empty" role="status">正在读取报告…</div>
+          ) : detail.error ? (
+            <div className="lib-reader-error" role="alert">
+              <p>报告读取失败：{(detail.error as Error).message}</p>
+              <button type="button" className="btn" disabled={detail.isFetching} onClick={() => void detail.refetch()}>{detail.isFetching ? "重试中…" : "重试"}</button>
+            </div>
+          ) : detail.data ? (
             <>
               <div className="lib-reader-bar">
                 <span className={`lib-cat${detail.data.category === "待分类" ? " pending" : ""}`}>
@@ -184,7 +225,7 @@ export default function ReportsLibraryPage() {
               <div className="lib-markdown" dangerouslySetInnerHTML={{ __html: html }} />
             </>
           ) : (
-            <div className="lib-empty">← 点左侧任意报告阅读全文。</div>
+            <div className="lib-empty">暂无报告正文，可返回列表选择其他报告。</div>
           )}
         </div>
       </div>
