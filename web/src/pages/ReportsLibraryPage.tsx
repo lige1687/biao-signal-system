@@ -59,6 +59,13 @@ function ReportRow({
   );
 }
 
+function scrollBelowNavigation(element: HTMLElement | null) {
+  if (!element) return;
+  const navHeight = document.querySelector(".top-nav")?.getBoundingClientRect().height ?? 0;
+  element.style.scrollMarginTop = `${navHeight + 8}px`;
+  element.scrollIntoView({ block: "start" });
+}
+
 export default function ReportsLibraryPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const category = searchParams.get("category") ?? "";
@@ -89,11 +96,11 @@ export default function ReportsLibraryPage() {
     if (selected) {
       restoreListFocus.current = true;
       readerRef.current?.focus({ preventScroll: true });
-      readerRef.current?.scrollIntoView({ block: "start" });
+      scrollBelowNavigation(readerRef.current);
       if (readerRef.current) readerRef.current.scrollTop = 0;
     } else if (restoreListFocus.current) {
       listRef.current?.focus({ preventScroll: true });
-      listRef.current?.scrollIntoView({ block: "start" });
+      scrollBelowNavigation(listRef.current);
       restoreListFocus.current = false;
     }
   }, [selected]);
@@ -110,6 +117,13 @@ export default function ReportsLibraryPage() {
     enabled: selected != null,
     staleTime: 5 * 60_000,
   });
+
+  // A pending mobile reader may be shorter than the viewport. Scroll again
+  // once its real content (or error) gives the document its final height.
+  const readerReady = selected != null && !detail.isPending;
+  useEffect(() => {
+    if (readerReady) scrollBelowNavigation(readerRef.current);
+  }, [selected, readerReady]);
 
   const items = useMemo(() => {
     let list = data?.items ?? [];
