@@ -40,3 +40,17 @@ scripts/*.err
 
 # 微信开发者工具本机私有配置
 project.private.config.json
+
+# 阶段交接：本机大数据恢复包、数据库、备份和密钥不入 Git
+/docs/ops/recovery/
+/.lei_signal_lab/
+/backups/
+/exports/
+/secrets/
+/credentials/
+*.db-journal
+*.sqlite
+*.sqlite-*
+*.sqlite3-*
+*.pem
+*.key
