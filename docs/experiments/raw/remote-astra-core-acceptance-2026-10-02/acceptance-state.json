@@ -1,0 +1,79 @@
+{
+  "execution": "completed_required_and_full_asof_acceptance",
+  "evidence": "conditionally_accepted",
+  "mode": "report_only_with_requested_replays",
+  "delivery_commit": "4155b4db7ccd14674eff2e29dfaf102d2ac3e5f9",
+  "base_commit": "639ad8dbd3d2aa72f824b626b86149c466c132a4",
+  "checkout": "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/checkout",
+  "prior_checkpoint": "preflight-state.json",
+  "allowed_writes": [
+    "new acceptance report",
+    "new acceptance raw directory",
+    "append own report to registry.json and INDEX.md"
+  ],
+  "replays": "one each T2 synthetic/real coverage, population full/asof, T6 four scripts, T5 counterexamples, T3/T4/T7/T9/T10; no parameter search; no new market experiment",
+  "user_decisions": "four specified strategy/data questions retained for user",
+  "reproduction_runs": [
+    "runs/t9-ledger/result.json",
+    "runs/t4-timing/result.json",
+    "runs/t7-qualification/result.json",
+    "runs/t2-real/result.json",
+    "runs/t3-cases/result.json",
+    "runs/t2-cases/result.json",
+    "runs/t10-existing/result.json",
+    "runs/t3-real-fixed/result.json",
+    "runs/population-asof/result.json",
+    "runs/population-full/result.json",
+    "runs/t6-real/result.json",
+    "runs/t5-counterexamples/result.json",
+    "runs/t6-ledger/result.json",
+    "runs/t10-handoff/result.json",
+    "runs/t7-method/result.json",
+    "runs/t6-compare/result.json",
+    "runs/t6-probe/result.json",
+    "runs/population-asof-partitioned/result.json"
+  ],
+  "pending": [],
+  "last_checkpoint": "2026-10-02T13:52:47.130298+08:00",
+  "independent_review_notes": [
+    "scope-review.md",
+    "methods-review.md"
+  ],
+  "controlled_attempt_errors": [
+    {
+      "task": "t3-real",
+      "error": "controller used wrong script name real_coverage.py; assertion stopped before execution",
+      "resolution": "real_coverage_b.py ran successfully under t3-real-fixed"
+    }
+  ],
+  "optional_check": {
+    "execution": "completed_partitioned_original_algorithm",
+    "label": "population-asof-partitioned",
+    "elapsed_seconds": 728.693,
+    "independently_confirmed": true,
+    "resume": "completed; preserve interrupted attempt; no required acceptance calculation remains",
+    "resume_label": "population-asof-partitioned",
+    "resume_method": "one original SYMBOLS item per subprocess; only output HERE rebound; no algorithm changes",
+    "completed_result": "runs/population-asof-partitioned/result.json",
+    "resume_elapsed_seconds": 728.693,
+    "resume_partition_elapsed_seconds_sum": 2771.911,
+    "byte_identical": true,
+    "prior_attempt": {
+      "label": "population-asof",
+      "elapsed_seconds": 2326.799,
+      "execution": "interrupted",
+      "independently_confirmed": false,
+      "reason": "controller interrupted optional replay after 38.8 minutes; no new output was produced"
+    }
+  },
+  "budget": {
+    "completed_replay_wall_seconds_sum": 529.246,
+    "optional_interrupted_wall_seconds": 2326.799,
+    "is_actual_whole_task_wall_time": false,
+    "optional_completed_wall_seconds": 728.693,
+    "optional_partition_elapsed_seconds_sum": 2771.911
+  },
+  "report": "docs/experiments/remote-astra-core-acceptance-2026-10-02.md",
+  "repair_prompt": "REPAIR-PROMPT.md",
+  "publication_branch": "codex/remote-core-acceptance-20261002"
+}

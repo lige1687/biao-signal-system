@@ -1,0 +1,1448 @@
+{
+  "meta": {
+    "label": "人工合成（T5 反例，非真实行情）",
+    "git_head": "4155b4db7ccd14674eff2e29dfaf102d2ac3e5f9",
+    "git_status_src_configs_tests": "clean",
+    "python": "3.11.7",
+    "pandas": "2.3.3",
+    "numpy": "2.1.1",
+    "source_sha256": {
+      "src/lei_signal/compose/pipeline.py": "b072cad4d33ff05d1506b92e25de30e90b2f4a0ab57b90cdf16ea763b5b76e5d",
+      "src/lei_signal/state/machine.py": "cbbeb86a1bcde079174a7a5e96bf75e23e7a76645784bc6c0ea7faa44b7c65d4",
+      "src/lei_signal/events/log.py": "b71c4c09405ee67f4d16a1c0d22dbd098ffb5078433184a9e7eb39a006e961fa",
+      "src/lei_signal/events/lifecycle.py": "2126849f33edcfec8841ab8a19cdcc04214ec3d2904f0b5954d4a3961af81bcd",
+      "src/lei_signal/features/pivots.py": "ce8421c864c76cccaa5259de704001b69e44febf5f8f1eedbdc72ae6848baa90",
+      "src/lei_signal/data/point_in_time.py": "30170271191c407c1d2c1af03c303b9919b5b4cd1c5dfd4f4b4637c2b42052d8",
+      "src/lei_signal/data/bar_completeness.py": "04810a2c69b282ea294e6fafa7d53e8898fbe5b19bdd12e0c8092f574ededefc",
+      "src/lei_signal/data/validation.py": "18d221abbfea6879c980e324a1b346765bcf499ede5141ce3306e9c01106d62b",
+      "src/lei_signal/rules/strict_structure.py": "0c6be71b91060059bc93b4a99049b2038a8849463b7849b17f91300308825c1b",
+      "src/lei_signal/rules/bottom_structure.py": "2e128b5327561f498f8dd63fc0a0b063f85d9f9cd792784e0242cc6a14ce1cdd",
+      "src/lei_signal/rules/volume.py": "46207b4d7a462b34ef0ebe2ef57f6b82ce41721710f44a874063cb51778c2055",
+      "src/lei_signal/rules/tradability_gate.py": "64bd55ba3b7384f1c1d6f03a311a75a6ac5143c689cbd799dc1f20e99e255518",
+      "src/lei_signal/features/weekly_context.py": "298fcc56af0b1d938d934f881e6684b91cffe4cee7509ef027ac0c0ed8d1b136",
+      "src/lei_signal/storage/sqlite_store.py": "1805f00c0e28e5c328ebeab42252477edaed1a4a5b11e94146a735702b6c419e",
+      "src/lei_signal/api/routes/symbols.py": "158bf1e753adc1978dffc7b3bec14b354aedef07d29e38bf358104c3694f7f5e",
+      "src/lei_signal/api/sell_signals.py": "00b7797a8e7906e26a3886d43fee218f2ce8f38baea04c0c97b84d4a8fa0269e",
+      "configs/rules.v2.yaml": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5"
+    },
+    "elapsed_seconds": 483.1
+  },
+  "results": {
+    "H01": {
+      "inputs": [
+        "docs/experiments/raw/remote-astra-T5-2026-09-30/inputs/H01_base.json",
+        "docs/experiments/raw/remote-astra-T5-2026-09-30/inputs/H01c_reversal.json"
+      ],
+      "D_breakout_day": "2024-03-28",
+      "invalidation_day": "2024-04-23",
+      "breakout_volume_on_D_by_cut": {
+        "2024-04-22": [
+          {
+            "event_id": "volume_proxies:7",
+            "rule_id": "volume_proxies",
+            "sub_rule": "breakout_volume",
+            "event_date": "2024-03-28",
+            "available_date": "2024-03-28",
+            "structure_id": "structure_double"
+          }
+        ],
+        "2024-04-23": []
+      },
+      "breakout_volume_on_D_full": [],
+      "events_on_D_removed_by_full_history": [
+        {
+          "event_id": "volume_proxies:7",
+          "rule_id": "volume_proxies",
+          "sub_rule": "breakout_volume",
+          "event_date": "2024-03-28",
+          "available_date": "2024-03-28",
+          "structure_id": "structure_double"
+        }
+      ],
+      "full_structure_states": [
+        {
+          "structure_id": "structure_higher",
+          "type": "higher_low_bottom",
+          "side": "bottom",
+          "detected": "2024-03-27",
+          "confirmed": "2024-03-28",
+          "invalidated": "2024-04-23",
+          "status": "invalidated",
+          "c_price": 68.8,
+          "neckline": 73.5
+        },
+        {
+          "structure_id": "structure_double",
+          "type": "double_bottom",
+          "side": "bottom",
+          "detected": "2024-03-27",
+          "confirmed": "2024-03-28",
+          "invalidated": "2024-04-23",
+          "status": "invalidated",
+          "c_price": 68.8,
+          "neckline": 73.5
+        },
+        {
+          "structure_id": "structure_double",
+          "type": "double_bottom",
+          "side": "bottom",
+          "detected": "2024-04-26",
+          "confirmed": "None",
+          "invalidated": "None",
+          "status": "candidate",
+          "c_price": 68.6,
+          "neckline": 76.60000000000001
+        }
+      ],
+      "H01b_structures_confirmed_on_D": [
+        {
+          "structure_id": "structure_higher",
+          "type": "higher_low_bottom",
+          "side": "bottom",
+          "detected": "2024-03-27",
+          "confirmed": "2024-03-28",
+          "invalidated": "None",
+          "status": "confirmed",
+          "c_price": 68.8,
+          "neckline": 73.5
+        },
+        {
+          "structure_id": "structure_double",
+          "type": "double_bottom",
+          "side": "bottom",
+          "detected": "2024-03-27",
+          "confirmed": "2024-03-28",
+          "invalidated": "None",
+          "status": "confirmed",
+          "c_price": 68.8,
+          "neckline": 73.5
+        }
+      ],
+      "H01b_neckline_map_entries_for_D": {
+        "2024-03-28": {
+          "neckline": 73.5,
+          "structure_id": "structure_double_bottom:e134402128308019677a25f2"
+        }
+      },
+      "H01c_breakout_events_on_reversal_bottom": [
+        {
+          "event_id": "volume_proxies:8",
+          "rule_id": "volume_proxies",
+          "sub_rule": "breakout_volume",
+          "event_date": "2024-03-27",
+          "available_date": "2024-03-27",
+          "structure_id": "structure_bullis",
+          "structure_type": "bullish_reversal_bottom",
+          "neckline": 53.8,
+          "close": 53.599999999999994,
+          "close_above_neckline": false,
+          "reason_cn": "放量突破：收盘价突破结构颈线 53.8000，且成交量比 2.73 达到阈值"
+        }
+      ],
+      "expected_by_source": "门禁1/§3.2：截至 D 已发布的事件在追加未来行情后不变；pipeline._build_structure_necklines 文档：确认后、失效之前可用。",
+      "verdict": "复现",
+      "summary": "D=2024-03-28 的 breakout_volume 在截到 2024-04-22 时存在，一旦看到 2024-04-23 的C失效就从过去消失"
+    },
+    "H02": {
+      "inputs": [
+        "docs/experiments/raw/remote-astra-T5-2026-09-30/inputs/H02_two_structures.json",
+        "docs/experiments/raw/remote-astra-T5-2026-09-30/inputs/H02b_candidate_only.json"
+      ],
+      "structures": [
+        {
+          "structure_id": "structure_higher",
+          "type": "higher_low_bottom",
+          "side": "bottom",
+          "detected": "2024-05-08",
+          "confirmed": "2024-05-09",
+          "invalidated": "None",
+          "status": "confirmed",
+          "c_price": 50.9,
+          "neckline": 63.35000000000003
+        },
+        {
+          "structure_id": "structure_double",
+          "type": "double_bottom",
+          "side": "bottom",
+          "detected": "2024-05-15",
+          "confirmed": "2024-05-16",
+          "invalidated": "None",
+          "status": "confirmed",
+          "c_price": 60.55000000000003,
+          "neckline": 64.35000000000004
+        },
+        {
+          "structure_id": "structure_bullis",
+          "type": "bullish_reversal_bottom",
+          "side": "bottom",
+          "detected": "2024-03-27",
+          "confirmed": "2024-03-27",
+          "invalidated": "None",
+          "status": "confirmed",
+          "c_price": 50.9,
+          "neckline": 53.8
+        },
+        {
+          "structure_id": "structure_bullis",
+          "type": "bullish_reversal_bottom",
+          "side": "bottom",
+          "detected": "2024-05-03",
+          "confirmed": "2024-05-03",
+          "invalidated": "2024-05-10",
+          "status": "invalidated",
+          "c_price": 60.85000000000003,
+          "neckline": 63.35000000000003
+        }
+      ],
+      "X_invalidated_day": "2024-05-10",
+      "state_window_around_D": [
+        {
+          "day": "2024-05-06",
+          "opportunity_stage": "joint_confirmed",
+          "risk_state": "normal",
+          "display_stage": "joint_confirmed",
+          "color": "green",
+          "observations": {
+            "bullish_reversal_bottom:d60ffbc7": "joint_confirmed"
+          },
+          "live_bottoms": [
+            "bullish_reversal_bottom:d60ffbc7",
+            "bullish_reversal_bottom:a2347ee3"
+          ]
+        },
+        {
+          "day": "2024-05-07",
+          "opportunity_stage": "joint_confirmed",
+          "risk_state": "normal",
+          "display_stage": "joint_confirmed",
+          "color": "green",
+          "observations": {
+            "bullish_reversal_bottom:d60ffbc7": "joint_confirmed"
+          },
+          "live_bottoms": [
+            "bullish_reversal_bottom:d60ffbc7",
+            "bullish_reversal_bottom:a2347ee3"
+          ]
+        },
+        {
+          "day": "2024-05-08",
+          "opportunity_stage": "joint_confirmed",
+          "risk_state": "normal",
+          "display_stage": "joint_confirmed",
+          "color": "green",
+          "observations": {
+            "bullish_reversal_bottom:d60ffbc7": "joint_confirmed"
+          },
+          "live_bottoms": [
+            "higher_low_bottom:870ca469",
+            "bullish_reversal_bottom:d60ffbc7",
+            "bullish_reversal_bottom:a2347ee3"
+          ]
+        },
+        {
+          "day": "2024-05-09",
+          "opportunity_stage": "joint_confirmed",
+          "risk_state": "normal",
+          "display_stage": "joint_confirmed",
+          "color": "green",
+          "observations": {
+            "bullish_reversal_bottom:d60ffbc7": "joint_confirmed"
+          },
+          "live_bottoms": [
+            "higher_low_bottom:870ca469",
+            "bullish_reversal_bottom:d60ffbc7",
+            "bullish_reversal_bottom:a2347ee3"
+          ]
+        },
+        {
+          "day": "2024-05-10",
+          "opportunity_stage": "joint_confirmed",
+          "risk_state": "c_invalidated",
+          "display_stage": "invalidated",
+          "color": "green",
+          "observations": {
+            "bullish_reversal_bottom:d60ffbc7": "joint_confirmed"
+          },
+          "live_bottoms": [
+            "higher_low_bottom:870ca469",
+            "bullish_reversal_bottom:d60ffbc7"
+          ]
+        },
+        {
+          "day": "2024-05-13",
+          "opportunity_stage": "joint_confirmed",
+          "risk_state": "normal",
+          "display_stage": "joint_confirmed",
+          "color": "green",
+          "observations": {
+            "bullish_reversal_bottom:d60ffbc7": "joint_confirmed"
+          },
+          "live_bottoms": [
+            "higher_low_bottom:870ca469",
+            "bullish_reversal_bottom:d60ffbc7"
+          ]
+        },
+        {
+          "day": "2024-05-14",
+          "opportunity_stage": "joint_confirmed",
+          "risk_state": "normal",
+          "display_stage": "joint_confirmed",
+          "color": "green",
+          "observations": {
+            "bullish_reversal_bottom:d60ffbc7": "joint_confirmed"
+          },
+          "live_bottoms": [
+            "higher_low_bottom:870ca469",
+            "bullish_reversal_bottom:d60ffbc7"
+          ]
+        }
+      ],
+      "c_touch_events_on_D": [
+        {
+          "event_id": "bottom_c_lifecyc",
+          "rule_id": "bottom_c_lifecycle",
+          "sub_rule": "bottom_C_touched",
+          "event_date": "2024-05-10",
+          "available_date": "2024-05-10",
+          "structure_id": "structure_bullis"
+        }
+      ],
+      "H02b_candidate_structures": [
+        {
+          "structure_id": "structure_higher",
+          "type": "higher_low_bottom",
+          "side": "bottom",
+          "detected": "2024-03-27",
+          "confirmed": "None",
+          "invalidated": "2024-04-19",
+          "status": "invalidated",
+          "c_price": 68.8,
+          "neckline": 73.5
+        },
+        {
+          "structure_id": "structure_double",
+          "type": "double_bottom",
+          "side": "bottom",
+          "detected": "2024-03-27",
+          "confirmed": "None",
+          "invalidated": "2024-04-19",
+          "status": "invalidated",
+          "c_price": 68.8,
+          "neckline": 73.5
+        }
+      ],
+      "H02b_state_on_Dc": {
+        "day": "2024-04-19",
+        "risk_state": "c_invalidated",
+        "display_stage": "invalidated",
+        "opportunity_stage": "no_clue"
+      },
+      "H02b_risk_alerts_on_Dc": [
+        "c_touched_or_broken",
+        "black"
+      ],
+      "H02b_c_lifecycle_events_on_Dc": [],
+      "H02c_sell_signals_on_Dc": [
+        {
+          "kind": "structure_invalidated",
+          "tier": "hard",
+          "kind_cn": "结构失效",
+          "title": "2 个底部结构失效",
+          "reason_cn": "bottom_C_touched_in_candidate；bottom_C_touched_in_candidate",
+          "is_new": true,
+          "key_prices": {
+            "invalidation_c": 68.8
+          },
+          "provenance": "system",
+          "available_date": "2024-04-19"
+        }
+      ],
+      "verdict": "核心无问题；显示合并与候选失效处理见 summary",
+      "summary": "另一结构的观察档与机会阶段不受影响；失效当天组合显示阶段=失效；候选失效有风险提示与硬卖点但无事件"
+    },
+    "H03": {
+      "inputs": [
+        "docs/experiments/raw/remote-astra-T5-2026-09-30/inputs/H03a_same_bar_touch_and_break.json"
+      ],
+      "a_structures_detected_on_L2_confirm_day": [
+        {
+          "structure_id": "structure_higher",
+          "type": "higher_low_bottom",
+          "side": "bottom",
+          "detected": "2024-03-27",
+          "confirmed": "None",
+          "invalidated": "2024-03-28",
+          "status": "invalidated",
+          "c_price": 68.8,
+          "neckline": 73.5
+        },
+        {
+          "structure_id": "structure_double",
+          "type": "double_bottom",
+          "side": "bottom",
+          "detected": "2024-03-27",
+          "confirmed": "None",
+          "invalidated": "2024-03-28",
+          "status": "invalidated",
+          "c_price": 68.8,
+          "neckline": 73.5
+        }
+      ],
+      "a_ok_touch_wins": true,
+      "b_strict_outside_bar": {
+        "top_merged": [
+          {
+            "high": 10.0,
+            "low": 9.0,
+            "first_date": "2024-01-01",
+            "completed_date": "2024-01-01",
+            "source_bars": 1
+          },
+          {
+            "high": 10.4,
+            "low": 8.2,
+            "first_date": "2024-01-02",
+            "completed_date": "2024-01-03",
+            "source_bars": 2
+          }
+        ],
+        "top_structures": [],
+        "bottom_merged": [
+          {
+            "high": 9.8,
+            "low": 9.0,
+            "first_date": "2024-01-01",
+            "completed_date": "2024-01-01",
+            "source_bars": 1
+          },
+          {
+            "high": 10.9,
+            "low": 8.8,
+            "first_date": "2024-01-02",
+            "completed_date": "2024-01-03",
+            "source_bars": 2
+          }
+        ],
+        "bottom_structures": []
+      },
+      "c_property_checks": [
+        {
+          "series": "S1_sideways_mix_seed5",
+          "black_days": 246,
+          "ema_events": 433,
+          "ema_events_on_black_days": [],
+          "observations_on_black_days": [],
+          "ema_events_on_or_after_c": [],
+          "observations_of_dead_structures": []
+        },
+        {
+          "series": "S2_trend_mix_seed3",
+          "black_days": 150,
+          "ema_events": 378,
+          "ema_events_on_black_days": [],
+          "observations_on_black_days": [],
+          "ema_events_on_or_after_c": [],
+          "observations_of_dead_structures": []
+        },
+        {
+          "series": "S3_uptrend_seed101",
+          "black_days": 184,
+          "ema_events": 771,
+          "ema_events_on_black_days": [],
+          "observations_on_black_days": [],
+          "ema_events_on_or_after_c": [],
+          "observations_of_dead_structures": []
+        }
+      ],
+      "c_ok": true,
+      "verdict": "未发现问题（(b)原文先后待确认）",
+      "summary": "(a)先触C即失效；(b)外包K线被包含合并吸收后按新高作废；(c)转黑/失效当天无升级"
+    },
+    "H04": {
+      "inputs": [
+        "docs/experiments/raw/remote-astra-T5-2026-09-30/inputs/H04_pivot_confirm_day.json"
+      ],
+      "by_cut": {
+        "2024-03-26": {
+          "bottoms": [],
+          "swing_low_events": [
+            {
+              "event_id": "swing_pivots:39b",
+              "rule_id": "swing_pivots",
+              "sub_rule": "swing_low_confirmed",
+              "event_date": "2024-03-12",
+              "available_date": "2024-03-15",
+              "structure_id": null
+            }
+          ],
+          "b1_price": null
+        },
+        "2024-03-27": {
+          "bottoms": [
+            {
+              "structure_id": "structure_higher",
+              "type": "higher_low_bottom",
+              "side": "bottom",
+              "detected": "2024-03-27",
+              "confirmed": "None",
+              "invalidated": "None",
+              "status": "candidate",
+              "c_price": 68.8,
+              "neckline": 73.5
+            },
+            {
+              "structure_id": "structure_double",
+              "type": "double_bottom",
+              "side": "bottom",
+              "detected": "2024-03-27",
+              "confirmed": "None",
+              "invalidated": "None",
+              "status": "candidate",
+              "c_price": 68.8,
+              "neckline": 73.5
+            }
+          ],
+          "swing_low_events": [
+            {
+              "event_id": "swing_pivots:39b",
+              "rule_id": "swing_pivots",
+              "sub_rule": "swing_low_confirmed",
+              "event_date": "2024-03-12",
+              "available_date": "2024-03-15",
+              "structure_id": null
+            },
+            {
+              "event_id": "swing_pivots:cff",
+              "rule_id": "swing_pivots",
+              "sub_rule": "swing_low_confirmed",
+              "event_date": "2024-03-22",
+              "available_date": "2024-03-27",
+              "structure_id": null
+            }
+          ],
+          "b1_price": null
+        },
+        "2024-03-28": {
+          "bottoms": [
+            {
+              "structure_id": "structure_higher",
+              "type": "higher_low_bottom",
+              "side": "bottom",
+              "detected": "2024-03-27",
+              "confirmed": "2024-03-28",
+              "invalidated": "None",
+              "status": "confirmed",
+              "c_price": 68.8,
+              "neckline": 73.5
+            },
+            {
+              "structure_id": "structure_double",
+              "type": "double_bottom",
+              "side": "bottom",
+              "detected": "2024-03-27",
+              "confirmed": "2024-03-28",
+              "invalidated": "None",
+              "status": "confirmed",
+              "c_price": 68.8,
+              "neckline": 73.5
+            }
+          ],
+          "swing_low_events": [
+            {
+              "event_id": "swing_pivots:39b",
+              "rule_id": "swing_pivots",
+              "sub_rule": "swing_low_confirmed",
+              "event_date": "2024-03-12",
+              "available_date": "2024-03-15",
+              "structure_id": null
+            },
+            {
+              "event_id": "swing_pivots:cff",
+              "rule_id": "swing_pivots",
+              "sub_rule": "swing_low_confirmed",
+              "event_date": "2024-03-22",
+              "available_date": "2024-03-27",
+              "structure_id": null
+            }
+          ],
+          "b1_price": null
+        }
+      },
+      "full_b1_on_pivot_high_confirm": {
+        "2024-03-21": null,
+        "2024-03-22": 73.5
+      },
+      "full_bottoms": [
+        {
+          "structure_id": "structure_higher",
+          "type": "higher_low_bottom",
+          "side": "bottom",
+          "detected": "2024-03-27",
+          "confirmed": "2024-03-28",
+          "invalidated": "2024-04-23",
+          "status": "invalidated",
+          "c_price": 68.8,
+          "neckline": 73.5
+        },
+        {
+          "structure_id": "structure_double",
+          "type": "double_bottom",
+          "side": "bottom",
+          "detected": "2024-03-27",
+          "confirmed": "2024-03-28",
+          "invalidated": "2024-04-23",
+          "status": "invalidated",
+          "c_price": 68.8,
+          "neckline": 73.5
+        }
+      ],
+      "verdict": "未发现问题",
+      "summary": "拐点后第3根才出现低点与结构；确认最早在其次日；截断与全历史一致"
+    },
+    "H05": {
+      "inputs": [
+        "docs/experiments/raw/remote-astra-T5-2026-09-30/inputs/H05_intraday_1430.json",
+        "docs/experiments/raw/remote-astra-T5-2026-09-30/inputs/H05_final_close.json",
+        "random_series(seed=101, 200根漂移0.05%+500根漂移0.12%, 波动1.1%) 人工合成"
+      ],
+      "D": "2024-03-28",
+      "intraday_events_on_D": [
+        {
+          "event_id": "double_bottom:ba",
+          "rule_id": "double_bottom",
+          "sub_rule": "confirmed",
+          "event_date": "2024-03-28",
+          "available_date": "2024-03-28",
+          "structure_id": "structure_double"
+        },
+        {
+          "event_id": "ema20_reclaim_ri",
+          "rule_id": "ema20_reclaim_rising",
+          "sub_rule": "ema20_reclaim_rising_structure_confirmed",
+          "event_date": "2024-03-28",
+          "available_date": "2024-03-28",
+          "structure_id": "structure_double"
+        },
+        {
+          "event_id": "ema20_reclaim_ri",
+          "rule_id": "ema20_reclaim_rising",
+          "sub_rule": "ema20_reclaim_rising_structure_confirmed",
+          "event_date": "2024-03-28",
+          "available_date": "2024-03-28",
+          "structure_id": "structure_higher"
+        },
+        {
+          "event_id": "higher_low_botto",
+          "rule_id": "higher_low_bottom",
+          "sub_rule": "confirmed",
+          "event_date": "2024-03-28",
+          "available_date": "2024-03-28",
+          "structure_id": "structure_higher"
+        },
+        {
+          "event_id": "key_wave_black:6",
+          "rule_id": "key_wave_black",
+          "sub_rule": "key_wave_black_ended",
+          "event_date": "2024-03-28",
+          "available_date": "2024-03-28",
+          "structure_id": null
+        },
+        {
+          "event_id": "lei_color:e349e7",
+          "rule_id": "lei_color",
+          "sub_rule": "lei_color_gray_started",
+          "event_date": "2024-03-28",
+          "available_date": "2024-03-28",
+          "structure_id": null
+        },
+        {
+          "event_id": "volume_proxies:2",
+          "rule_id": "volume_proxies",
+          "sub_rule": "volume_up_surge",
+          "event_date": "2024-03-28",
+          "available_date": "2024-03-28",
+          "structure_id": null
+        },
+        {
+          "event_id": "volume_proxies:8",
+          "rule_id": "volume_proxies",
+          "sub_rule": "breakout_volume",
+          "event_date": "2024-03-28",
+          "available_date": "2024-03-28",
+          "structure_id": "structure_double"
+        }
+      ],
+      "intraday_opportunity_stage": "early_strength",
+      "final_events_on_D": [
+        "ema20_reclaim_rising:ema20_reclaim_rising_early_watch",
+        "ema20_reclaim_rising:ema20_reclaim_rising_early_watch",
+        "key_wave_black:key_wave_black_ended",
+        "lei_color:lei_color_gray_started",
+        "volume_proxies:volume_up_surge"
+      ],
+      "final_opportunity_stage": "bottom_watch",
+      "intraday_tradability_check9": {
+        "code": "depends_on_future",
+        "label": "9.依赖未来K线",
+        "blocked": false,
+        "detail": "系统严格前向，信号不依赖未完成K线"
+      },
+      "analysis_result_fields_about_completeness": [],
+      "buy_point_review_fields_about_completeness": [],
+      "db_after_final_run": {
+        "structure_instances": [
+          {
+            "structure_type": "higher_low_bottom",
+            "status": "candidate",
+            "confirmed_date": null
+          },
+          {
+            "structure_type": "double_bottom",
+            "status": "candidate",
+            "confirmed_date": null
+          }
+        ],
+        "structure_lifecycle": [
+          {
+            "structure_id": "structure_higher_low_bottom:7d0f1a83b05790d8445a938f",
+            "changed_on": "2024-03-27",
+            "from_status": null,
+            "to_status": "candidate"
+          },
+          {
+            "structure_id": "structure_higher_low_bottom:7d0f1a83b05790d8445a938f",
+            "changed_on": "2024-03-28",
+            "from_status": "candidate",
+            "to_status": "confirmed"
+          },
+          {
+            "structure_id": "structure_double_bottom:d2b85d62829a0e32588975dc",
+            "changed_on": "2024-03-27",
+            "from_status": null,
+            "to_status": "candidate"
+          },
+          {
+            "structure_id": "structure_double_bottom:d2b85d62829a0e32588975dc",
+            "changed_on": "2024-03-28",
+            "from_status": "candidate",
+            "to_status": "confirmed"
+          }
+        ],
+        "events_on_D_in_db_not_in_final_memory": [
+          "double_bottom:confirmed",
+          "ema20_reclaim_rising:ema20_reclaim_rising_structure_confirmed",
+          "higher_low_bottom:confirmed",
+          "volume_proxies:breakout_volume"
+        ]
+      },
+      "verdict_flip_search": {
+        "tried_days": 35,
+        "flips": [
+          {
+            "day": "2022-05-16",
+            "intraday_bar": {
+              "open": 147.91276784809244,
+              "high": 148.94027807205902,
+              "low": 147.87469005373916,
+              "close": 148.94027807205902
+            },
+            "final_bar": {
+              "open": 147.91276784809244,
+              "high": 148.94027807205902,
+              "low": 147.41980306775883,
+              "close": 147.87469005373916
+            },
+            "intraday_verdict": "等待条件成立",
+            "final_verdict": "当前无机会",
+            "intraday_candidates": [
+              "次级别确认（日线代理）"
+            ],
+            "intraday_summary": "近 3 个交易日有 1 个场景在观察中，尚有条件未成立；下列条件成立即构成系统定义的买点。 29 个结构已超出 recency 窗口，在卡片底部单列。",
+            "intraday_check9": {
+              "blocked": false,
+              "detail": "系统严格前向，信号不依赖未完成K线"
+            }
+          },
+          {
+            "day": "2022-02-16",
+            "intraday_bar": {
+              "open": 134.05418575338308,
+              "high": 134.6319870306411,
+              "low": 133.75398998454955,
+              "close": 134.6319870306411
+            },
+            "final_bar": {
+              "open": 134.05418575338308,
+              "high": 134.6319870306411,
+              "low": 132.6407585121853,
+              "close": 133.75398998454955
+            },
+            "intraday_verdict": "等待条件成立",
+            "final_verdict": "当前无机会",
+            "intraday_candidates": [
+              "次级别确认（日线代理）"
+            ],
+            "intraday_summary": "近 3 个交易日有 1 个场景在观察中，尚有条件未成立；下列条件成立即构成系统定义的买点。 22 个结构已超出 recency 窗口，在卡片底部单列。",
+            "intraday_check9": {
+              "blocked": false,
+              "detail": "系统严格前向，信号不依赖未完成K线"
+            }
+          },
+          {
+            "day": "2022-02-08",
+            "intraday_bar": {
+              "open": 134.4454718121915,
+              "high": 135.40661689041391,
+              "low": 134.29195465555327,
+              "close": 135.40661689041391
+            },
+            "final_bar": {
+              "open": 134.4454718121915,
+              "high": 135.40661689041391,
+              "low": 133.24922670095177,
+              "close": 134.29195465555327
+            },
+            "intraday_verdict": "等待条件成立",
+            "final_verdict": "当前无机会",
+            "intraday_candidates": [
+              "次级别确认（日线代理）"
+            ],
+            "intraday_summary": "近 3 个交易日有 1 个场景在观察中，尚有条件未成立；下列条件成立即构成系统定义的买点。 22 个结构已超出 recency 窗口，在卡片底部单列。",
+            "intraday_check9": {
+              "blocked": false,
+              "detail": "系统严格前向，信号不依赖未完成K线"
+            }
+          }
+        ]
+      },
+      "verdict": "复现",
+      "summary": "盘中版确认结构并永久写入研究库；收盘版已不成立但库中仍在；第9条恒写“不依赖未完成K线”"
+    },
+    "H06": {
+      "inputs": [
+        "docs/experiments/raw/remote-astra-T5-2026-09-30/inputs/H06_friday_intraday.json"
+      ],
+      "intraday_last_week": {
+        "available_date": "2024-02-09",
+        "open": 12.586206896551724,
+        "high": 13.6,
+        "low": 12.286206896551723,
+        "close": 13.5,
+        "volume": 4400000.0,
+        "bar_count": 5.0,
+        "is_complete": true,
+        "week_start": "2024-02-05 00:00:00",
+        "week_end": "2024-02-11 23:59:59.999999999"
+      },
+      "final_last_week": {
+        "available_date": "2024-02-09",
+        "close": 12.5,
+        "low": 12.286206896551723
+      },
+      "pipeline_weekly_trend_last_index": "2024-02-09",
+      "pipeline_weekly_trend_last_close": 13.5,
+      "verdict": "复现",
+      "summary": "周五盘中数据让当周周线被标“已完成”，收盘价取盘中价，无任何标注"
+    },
+    "H07": {
+      "inputs": [
+        "docs/experiments/raw/remote-astra-T5-2026-09-30/inputs/H07_short_week.json"
+      ],
+      "calls": [
+        {
+          "caller": "compose.pipeline.analyze_bars",
+          "calendar_injected": true,
+          "last_week_available_date": "2024-02-07"
+        },
+        {
+          "caller": "features.weekly_context.weekly_env_series",
+          "calendar_injected": false,
+          "last_week_available_date": "2024-02-02"
+        },
+        {
+          "caller": "features.weekly_context.weekly_env_series",
+          "calendar_injected": false,
+          "last_week_available_date": "2024-02-02"
+        }
+      ],
+      "pipeline_weekly_trend_last_index": "2024-02-07",
+      "verdict": "复现（已知）",
+      "summary": "同一次分析里主流程周线含短周（周三），模块A/回撤卡周线环境不含（只到上周五）"
+    },
+    "H08": {
+      "inputs": [
+        "docs/experiments/raw/remote-astra-T5-2026-09-30/inputs/H08a_missing_low.json",
+        "docs/experiments/raw/remote-astra-T5-2026-09-30/inputs/H08b_missing_volume.json"
+      ],
+      "a_validate_warnings": [],
+      "a_missing_low_row_after_validate": {
+        "open": 70.8,
+        "high": 71.0,
+        "low": null,
+        "close": 70.2,
+        "volume": 1000000.0
+      },
+      "a_with_missing_low": {
+        "risk_state": "black",
+        "display_stage": "risk_watch",
+        "live_bottoms": [
+          "higher_low_bottom",
+          "double_bottom"
+        ],
+        "structures_detected_0327": [
+          {
+            "structure_id": "structure_higher",
+            "type": "higher_low_bottom",
+            "side": "bottom",
+            "detected": "2024-03-27",
+            "confirmed": "2024-03-28",
+            "invalidated": "None",
+            "status": "confirmed",
+            "c_price": 68.8,
+            "neckline": 73.5
+          },
+          {
+            "structure_id": "structure_double",
+            "type": "double_bottom",
+            "side": "bottom",
+            "detected": "2024-03-27",
+            "confirmed": "2024-03-28",
+            "invalidated": "None",
+            "status": "confirmed",
+            "c_price": 68.8,
+            "neckline": 73.5
+          }
+        ],
+        "last_day_live_bottoms": [
+          "higher_low_bottom",
+          "double_bottom"
+        ]
+      },
+      "a_with_true_low": {
+        "risk_state": "c_invalidated",
+        "display_stage": "invalidated",
+        "live_bottoms": [],
+        "structures_detected_0327": [
+          {
+            "structure_id": "structure_higher",
+            "type": "higher_low_bottom",
+            "side": "bottom",
+            "detected": "2024-03-27",
+            "confirmed": "2024-03-28",
+            "invalidated": "2024-04-23",
+            "status": "invalidated",
+            "c_price": 68.8,
+            "neckline": 73.5
+          },
+          {
+            "structure_id": "structure_double",
+            "type": "double_bottom",
+            "side": "bottom",
+            "detected": "2024-03-27",
+            "confirmed": "2024-03-28",
+            "invalidated": "2024-04-23",
+            "status": "invalidated",
+            "c_price": 68.8,
+            "neckline": 73.5
+          }
+        ],
+        "last_day_live_bottoms": [
+          "double_bottom"
+        ]
+      },
+      "b_validate_warnings": [],
+      "b_volume_after_validate": 0.0,
+      "b_volume_ratio20_on_day": 0.0,
+      "b_pullback_shrink_on_day": false,
+      "b_next19_ratio_inflation_min_max": [
+        1.0465116279069768,
+        1.0526315789473684
+      ],
+      "verdict": "复现",
+      "summary": "最低价缺失被当成“没触及C”，结构继续有效；成交量缺失被静默当0；均无警告"
+    },
+    "H09": {
+      "a_errors": [],
+      "a_structure_instances": [
+        {
+          "structure_id": "structure_higher_low_bottom:7d0f1a83b05790d8445a938f",
+          "status": "confirmed",
+          "confirmed_date": "2024-03-28",
+          "invalidated_date": null
+        }
+      ],
+      "a_structure_lifecycle": [
+        {
+          "structure_id": "structure_higher_low_bottom:7d0f1a83b05790d8445a938f",
+          "changed_on": "2024-03-27",
+          "from_status": null,
+          "to_status": "candidate",
+          "reason": "bottom_C_touched"
+        },
+        {
+          "structure_id": "structure_higher_low_bottom:7d0f1a83b05790d8445a938f",
+          "changed_on": "2024-03-28",
+          "from_status": "candidate",
+          "to_status": "confirmed",
+          "reason": "bottom_C_touched"
+        },
+        {
+          "structure_id": "structure_higher_low_bottom:7d0f1a83b05790d8445a938f",
+          "changed_on": "2024-04-23",
+          "from_status": "confirmed",
+          "to_status": "invalidated",
+          "reason": "bottom_C_touched"
+        }
+      ],
+      "a_c_touch_events_in_db": [
+        {
+          "available_date": "2024-04-23",
+          "structure_id": "structure_double_bottom:d2b85d62829a0e32588975dc"
+        },
+        {
+          "available_date": "2024-04-23",
+          "structure_id": "structure_higher_low_bottom:7d0f1a83b05790d8445a938f"
+        }
+      ],
+      "b_errors": [],
+      "b_structure_instances": [
+        {
+          "structure_id": "structure_higher_low_bottom:3fc32db4977182d09021d847",
+          "structure_type": "higher_low_bottom",
+          "detected_date": "2024-03-28",
+          "status": "confirmed",
+          "confirmed_date": "2024-03-29",
+          "invalidated_date": null,
+          "in_current_analysis": false
+        },
+        {
+          "structure_id": "structure_double_bottom:853b103f83797896724bf159",
+          "structure_type": "double_bottom",
+          "detected_date": "2024-03-28",
+          "status": "confirmed",
+          "confirmed_date": "2024-03-29",
+          "invalidated_date": null,
+          "in_current_analysis": false
+        },
+        {
+          "structure_id": "structure_higher_low_bottom:7d0f1a83b05790d8445a938f",
+          "structure_type": "higher_low_bottom",
+          "detected_date": "2024-03-27",
+          "status": "invalidated",
+          "confirmed_date": "2024-03-28",
+          "invalidated_date": "2024-04-23",
+          "in_current_analysis": true
+        },
+        {
+          "structure_id": "structure_double_bottom:d2b85d62829a0e32588975dc",
+          "structure_type": "double_bottom",
+          "detected_date": "2024-03-27",
+          "status": "invalidated",
+          "confirmed_date": "2024-03-28",
+          "invalidated_date": "2024-04-23",
+          "in_current_analysis": true
+        },
+        {
+          "structure_id": "structure_double_bottom:d46225ca9a31dbb2fae1b1e2",
+          "structure_type": "double_bottom",
+          "detected_date": "2024-04-26",
+          "status": "candidate",
+          "confirmed_date": null,
+          "invalidated_date": null,
+          "in_current_analysis": true
+        }
+      ],
+      "b_swing_low_events_for_L2": [
+        {
+          "event_date": "2024-03-22",
+          "available_date": "2024-03-28"
+        },
+        {
+          "event_date": "2024-03-22",
+          "available_date": "2024-03-27"
+        }
+      ],
+      "c_before_replay": [
+        {
+          "status": "invalidated",
+          "invalidated_date": "2024-04-23"
+        }
+      ],
+      "c_after_replay_as_of": {
+        "as_of": "2024-04-16",
+        "rows": [
+          {
+            "status": "confirmed",
+            "invalidated_date": null
+          }
+        ]
+      },
+      "c_structure_lifecycle": [
+        {
+          "changed_on": "2024-03-27",
+          "from_status": null,
+          "to_status": "candidate"
+        },
+        {
+          "changed_on": "2024-03-28",
+          "from_status": "candidate",
+          "to_status": "confirmed"
+        },
+        {
+          "changed_on": "2024-04-23",
+          "from_status": "confirmed",
+          "to_status": "invalidated"
+        }
+      ],
+      "verdict": "复现（修订语义待确认）",
+      "summary": "修订/回补/回放都直接改写结构表“当前状态”，无修订记录，三张表互相矛盾"
+    },
+    "H10": {
+      "prefix_top_confirmations": [
+        [
+          "2024-01-03",
+          8.3
+        ]
+      ],
+      "after_inner_bar": [
+        [
+          "2024-01-04",
+          8.3
+        ]
+      ],
+      "after_outer_bar": [],
+      "existing_test_note": "tests/unit/test_strict_structure.py::test_prefix_invariance 的第4根(9.5,10.5,9.4)不与第3根构成包含，未覆盖本情形",
+      "verdict": "复现（已知/已记录）",
+      "summary": "内包K线把确认日后移一天；外包新高K线让已确认顶部从历史中消失"
+    },
+    "H11": {
+      "series": [
+        {
+          "series": "S1_sideways_mix_seed5",
+          "label": "人工合成（T5 反例，非真实行情）",
+          "bars": 640,
+          "data_hash16": "a9066c2b5836d232",
+          "events_full": 1867,
+          "structures_full": 85,
+          "cuts": 25,
+          "diff_counts": {
+            "design_note:量价维度(历史评估不带筹码代理)": 11
+          },
+          "diff_examples": {
+            "design_note:量价维度(历史评估不带筹码代理)": [
+              {
+                "cut": "2021-02-17",
+                "prefix": "冲突",
+                "full": "中性"
+              },
+              {
+                "cut": "2021-03-17",
+                "prefix": "冲突",
+                "full": "中性"
+              },
+              {
+                "cut": "2021-04-15",
+                "prefix": "冲突",
+                "full": "中性"
+              },
+              {
+                "cut": "2021-05-13",
+                "prefix": "冲突",
+                "full": "中性"
+              }
+            ]
+          }
+        },
+        {
+          "series": "S2_trend_mix_seed3",
+          "label": "人工合成（T5 反例，非真实行情）",
+          "bars": 700,
+          "data_hash16": "9fbbb0d8fbd6e8ef",
+          "events_full": 1900,
+          "structures_full": 101,
+          "cuts": 25,
+          "diff_counts": {
+            "only_in_prefix:volume_proxies:breakout_volume[H01]": 8,
+            "design_note:量价维度(历史评估不带筹码代理)": 7
+          },
+          "diff_examples": {
+            "only_in_prefix:volume_proxies:breakout_volume[H01]": [
+              {
+                "cut": "2020-10-05",
+                "event_id": "volume_proxies:f",
+                "rule_id": "volume_proxies",
+                "sub_rule": "breakout_volume",
+                "event_date": "2020-09-25",
+                "available_date": "2020-09-25",
+                "structure_id": "structure_higher"
+              },
+              {
+                "cut": "2020-11-05",
+                "event_id": "volume_proxies:f",
+                "rule_id": "volume_proxies",
+                "sub_rule": "breakout_volume",
+                "event_date": "2020-09-25",
+                "available_date": "2020-09-25",
+                "structure_id": "structure_higher"
+              },
+              {
+                "cut": "2020-12-08",
+                "event_id": "volume_proxies:f",
+                "rule_id": "volume_proxies",
+                "sub_rule": "breakout_volume",
+                "event_date": "2020-09-25",
+                "available_date": "2020-09-25",
+                "structure_id": "structure_higher"
+              },
+              {
+                "cut": "2021-01-08",
+                "event_id": "volume_proxies:f",
+                "rule_id": "volume_proxies",
+                "sub_rule": "breakout_volume",
+                "event_date": "2020-09-25",
+                "available_date": "2020-09-25",
+                "structure_id": "structure_higher"
+              }
+            ],
+            "design_note:量价维度(历史评估不带筹码代理)": [
+              {
+                "cut": "2020-12-08",
+                "prefix": "冲突",
+                "full": "中性"
+              },
+              {
+                "cut": "2021-03-12",
+                "prefix": "冲突",
+                "full": "中性"
+              },
+              {
+                "cut": "2021-04-14",
+                "prefix": "冲突",
+                "full": "中性"
+              },
+              {
+                "cut": "2021-05-17",
+                "prefix": "冲突",
+                "full": "中性"
+              }
+            ]
+          }
+        },
+        {
+          "series": "S3_uptrend_seed101",
+          "label": "人工合成（T5 反例，非真实行情）",
+          "bars": 700,
+          "data_hash16": "7decc91a13b36091",
+          "events_full": 2625,
+          "structures_full": 132,
+          "cuts": 25,
+          "diff_counts": {
+            "design_note:量价维度(历史评估不带筹码代理)": 8,
+            "field:structure_id:volume_proxies:breakout_volume[H01]": 1,
+            "field:evidence:volume_proxies:breakout_volume[H01]": 1
+          },
+          "diff_examples": {
+            "design_note:量价维度(历史评估不带筹码代理)": [
+              {
+                "cut": "2020-08-03",
+                "prefix": "冲突",
+                "full": "中性"
+              },
+              {
+                "cut": "2020-09-02",
+                "prefix": "冲突",
+                "full": "中性"
+              },
+              {
+                "cut": "2020-10-05",
+                "prefix": "冲突",
+                "full": "中性"
+              },
+              {
+                "cut": "2020-11-05",
+                "prefix": "冲突",
+                "full": "中性"
+              }
+            ],
+            "field:structure_id:volume_proxies:breakout_volume[H01]": [
+              {
+                "cut": "2022-07-06",
+                "event_id": "volume_proxies:8",
+                "rule_id": "volume_proxies",
+                "sub_rule": "breakout_volume",
+                "event_date": "2022-07-06",
+                "available_date": "2022-07-06",
+                "structure_id": "structure_double",
+                "prefix": "structure_double_bottom:2147ede52af76430dca9376d",
+                "full": "structure_higher_low_bottom:7fa01f296f21f7d6084cca2f"
+              }
+            ],
+            "field:evidence:volume_proxies:breakout_volume[H01]": [
+              {
+                "cut": "2022-07-06",
+                "event_id": "volume_proxies:8",
+                "rule_id": "volume_proxies",
+                "sub_rule": "breakout_volume",
+                "event_date": "2022-07-06",
+                "available_date": "2022-07-06",
+                "structure_id": "structure_double",
+                "prefix": "{\"neckline\": 154.3203905368478, \"structure_id\": \"structure_double_bottom:2147ede52af76430dca9376d\", \"sub_rule\": \"breakou",
+                "full": "{\"neckline\": 156.29172928067604, \"structure_id\": \"structure_higher_low_bottom:7fa01f296f21f7d6084cca2f\", \"sub_rule\": \"br"
+              }
+            ]
+          }
+        }
+      ],
+      "non_attributed_or_state_diffs": {},
+      "verdict": "见 non_attributed_or_state_diffs",
+      "summary": "全链路截断/全历史一致性扫描"
+    },
+    "H12": {
+      "inputs": [
+        "docs/experiments/raw/remote-astra-T5-2026-09-30/inputs/H12_short_history.json"
+      ],
+      "daily_long": "unknown",
+      "weekly_long": "unknown",
+      "dimension_long_cycle": "冲突",
+      "long_cycle_factors": [
+        {
+          "kind": "conflict",
+          "label": "长周期背景仍冲突",
+          "detail": "日线=unknown，周线=unknown；这只是冲突标签，不会阻止底部与短期信号被记录"
+        }
+      ],
+      "tradability_blocked_checks": [
+        {
+          "code": "trend_type_unclear",
+          "label": "1.无法明确当前趋势类型",
+          "blocked": true,
+          "detail": "当前趋势类型=数据不足"
+        },
+        {
+          "code": "insufficient_data",
+          "label": "8.数据不足",
+          "blocked": true,
+          "detail": "position=99，需≥126根且均线齐全"
+        }
+      ],
+      "verdict": "复现（显示层，待确认）",
+      "summary": "两条长周期都 unknown 时，长周期维度写“冲突”；可交易性另行按“数据不足”阻断"
+    },
+    "H01d": {
+      "input": "random_series(seed=101) 人工合成 S3，前缀截到 2022-07-06 vs 全历史 2022-11-30",
+      "same_day_confirmed_structures_prefix": [
+        {
+          "structure_id": "structure_higher",
+          "type": "higher_low_bottom",
+          "side": "bottom",
+          "detected": "2022-06-28",
+          "confirmed": "2022-07-06",
+          "invalidated": "None",
+          "status": "confirmed",
+          "c_price": 136.81650864665022,
+          "neckline": 156.29172928067604
+        },
+        {
+          "structure_id": "structure_double",
+          "type": "double_bottom",
+          "side": "bottom",
+          "detected": "2022-07-05",
+          "confirmed": "2022-07-06",
+          "invalidated": "None",
+          "status": "confirmed",
+          "c_price": 150.49061161938545,
+          "neckline": 154.3203905368478
+        }
+      ],
+      "same_day_confirmed_structures_full": [
+        {
+          "structure_id": "structure_higher",
+          "type": "higher_low_bottom",
+          "side": "bottom",
+          "detected": "2022-06-28",
+          "confirmed": "2022-07-06",
+          "invalidated": "None",
+          "status": "confirmed",
+          "c_price": 136.81650864665022,
+          "neckline": 156.29172928067604
+        },
+        {
+          "structure_id": "structure_double",
+          "type": "double_bottom",
+          "side": "bottom",
+          "detected": "2022-07-05",
+          "confirmed": "2022-07-06",
+          "invalidated": "2022-07-18",
+          "status": "invalidated",
+          "c_price": 150.49061161938545,
+          "neckline": 154.3203905368478
+        }
+      ],
+      "breakout_volume_rebinding": [
+        {
+          "event_id": "volume_proxies:2",
+          "prefix_structure": "structure_double_bottom:c3ead3",
+          "full_structure": "structure_higher_low_bottom:7a",
+          "prefix_neckline": 154.3203905368478,
+          "full_neckline": 156.29172928067604
+        }
+      ],
+      "direct_analyze": {
+        "second_run": "EventIdentityConflictError: 事件 volume_proxies:23d1735cc28ed8601ffd59cc 的身份字段 structure_id 不一致：已存='structure_double_bottom:c3ead3ef49180464df5d03f1'，新值='structure_higher_low_bottom:7acb75b13ca7b394537675fb'。身份字段是不可变历史事实，必须显式处理，不得静默覆盖。",
+        "analysis_runs": [
+          {
+            "run_id": "api-2022-07-06",
+            "last_data_date": "2022-07-06"
+          }
+        ],
+        "lifecycle_snapshot_runs": [
+          {
+            "run_id": "api-2022-07-06",
+            "n": 2288
+          }
+        ],
+        "signal_events_by_run": [
+          {
+            "run_id": "api-2022-07-06",
+            "n": 2288
+          },
+          {
+            "run_id": "api-2022-11-30",
+            "n": 337
+          }
+        ]
+      },
+      "analysis_service": {
+        "first": {
+          "error": null,
+          "persist_conflict": null,
+          "sqlite_persisted": true
+        },
+        "second": {
+          "error": null,
+          "persist_conflict": "",
+          "sqlite_persisted": true
+        },
+        "third_same_data": {
+          "persist_conflict_again": false,
+          "sqlite_persisted": true
+        },
+        "analysis_runs": [
+          {
+            "run_id": "api-2026-10-02",
+            "last_data_date": "2022-07-06"
+          }
+        ],
+        "lifecycle_snapshot_as_of": [
+          {
+            "as_of": "2022-07-06",
+            "n": 2288
+          }
+        ],
+        "signal_events_total": 2288
+      },
+      "verdict": "复现",
+      "summary": "同一事件编号后来换绑到另一结构 → 写研究库时身份冲突 → 之后每次运行都冲突、该标的研究库生命周期与运行记录停写"
+    }
+  }
+}

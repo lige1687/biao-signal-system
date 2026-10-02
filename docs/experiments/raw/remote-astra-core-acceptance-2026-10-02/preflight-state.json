@@ -1,0 +1,43 @@
+{
+  "research_id": "remote-astra-core-acceptance-2026-10-02",
+  "as_of": "2026-10-02",
+  "mode": "report_only_with_user_specified_replays",
+  "execution": "blocked",
+  "evidence": "not_evaluated",
+  "blocker": "delivery_branch_not_available",
+  "repository": "git@github.com:lige1687/biao-signal-system.git",
+  "requested_branch": "codex/astra-core-review-20260930",
+  "requested_base": "639ad8dbd3d2aa72f824b626b86149c466c132a4",
+  "requested_reports": [
+    "docs/experiments/remote-astra-core-review-2026-09-30.md",
+    "docs/experiments/module-a-population-audit-2026-10-02.md"
+  ],
+  "checks": [
+    {
+      "command": "git ls-remote origin refs/heads/codex/astra-core-review-20260930",
+      "result": "exit 0; no matching ref"
+    },
+    {
+      "command": "git ls-remote --heads origin",
+      "result": "requested branch absent; origin points to lige1687/biao-signal-system"
+    },
+    {
+      "command": "git fetch origin refs/heads/codex/astra-core-review-20260930",
+      "exit_code": 128,
+      "result": "fatal: couldn't find remote ref refs/heads/codex/astra-core-review-20260930"
+    },
+    {
+      "check": "required reports/state/ACCEPTANCE-PROMPT",
+      "result": "absent from working directory and inspected main/core-sync/air-factor-parallel refs"
+    }
+  ],
+  "attempts": {
+    "remote_ref_queries": 2,
+    "target_fetch": 1,
+    "reproduction_runs": 0,
+    "external_literature_reads": 0
+  },
+  "scope": "Independent acceptance only. No production, rules, official definitions or frozen evidence edits. Report registry addition allowed only for requested acceptance deliverable.",
+  "decision": "No acceptance or rejection of research quality is possible without delivery bytes. Do not infer correctness from user-provided expected counts.",
+  "resume": "After branch is pushed or actual repository and commit are provided, pin the actual SHA, read required delivery artifacts, inspect scripts before execution, replay checks in an isolated in-repository copy preserving frozen output bytes, then write and register the acceptance report."
+}

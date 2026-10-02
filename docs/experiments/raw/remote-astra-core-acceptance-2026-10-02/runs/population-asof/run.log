@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/checkout/docs/experiments/raw/remote-astra-T2-audit-2026-10-02/population_audit.py", line 213, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/checkout/docs/experiments/raw/remote-astra-T2-audit-2026-10-02/population_audit.py", line 136, in main
+    asof_list = asof_structures(frame)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/checkout/docs/experiments/raw/remote-astra-T2-audit-2026-10-02/population_audit.py", line 74, in asof_structures
+    for st in detect_strict_structures(frame.iloc[: i + 1]):
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/checkout/src/lei_signal/rules/strict_structure.py", line 222, in detect_strict_structures
+    for day in sorted(d for d in highs if d > structure.confirmed_date):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/checkout/src/lei_signal/rules/strict_structure.py", line 222, in <genexpr>
+    for day in sorted(d for d in highs if d > structure.confirmed_date):
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

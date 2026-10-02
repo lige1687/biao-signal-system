@@ -1,0 +1,33 @@
+{
+  "mission": "Review T7/T8/T9/T10 proposed contracts and synthetic validators for logical omissions; distinguish illustrative demos from operational guarantees. No network or new experiments.",
+  "task_scope": [
+    "Review T7/T8/T9/T10 proposed contracts and synthetic validators for logical omissions; distinguish illustrative demos from operational guarantees. No network or new experiments."
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/checkout"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/remote-astra-core-acceptance-2026-10-02/methods-review.md"
+  ],
+  "network_allowed": false,
+  "max_agents": 2,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "concise evidence-based findings with exact file lines",
+    "limitations",
+    "no edits outside own note"
+  ],
+  "stop_conditions": [
+    "missing evidence",
+    "scope expansion",
+    "unsafe action"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

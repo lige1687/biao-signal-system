@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-02",
+  "purpose": "second-paper specified prepublication PDF recovery",
+  "result": "not recovered; exact version/pages remain unverified",
+  "primary_attempts": [
+    {
+      "url": "https://www.dartmouth.edu/~nyhan/post-treatment-bias.pdf",
+      "result": "web fetch 404"
+    },
+    {
+      "url": "https://sites.wustl.edu/montgomery/research/",
+      "result": "search index gives bibliographic DOI; live web fetch 502"
+    },
+    {
+      "url": "https://brendan-nyhan.com/",
+      "result": "live author homepage reachable; university-profile link fetch failed"
+    },
+    {
+      "url": "https://sites.dartmouth.edu/nyhan/publications/",
+      "result": "live web fetch failed"
+    }
+  ],
+  "decision": "bounded source search ended; do not replace claimed version with different PDF or invent hash"
+}

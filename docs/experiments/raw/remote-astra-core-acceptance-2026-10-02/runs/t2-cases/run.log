@@ -1,0 +1,29 @@
+C1_valid_first hand_ok= True prod_mirror= True
+   recommended: [['2024-03-13', True, 100.3, None]] []
+   production : [['2024-03-08', True], ['2024-03-12', False]] [['2024-03-13', False, 100.9, None]] [['2024-03-11', '收盘跌破回撤结构低点（A5 结构失效）']]
+C2_later_after_black hand_ok= True prod_mirror= True
+   recommended: [['2024-03-13', True, 100.3, None], ['2024-03-25', False, 100.1, None]] []
+   production : [['2024-03-08', True], ['2024-03-12', False], ['2024-03-25', True]] [['2024-03-13', False, 100.9, None], ['2024-03-26', True, 101.8, None]] [['2024-03-11', '收盘跌破回撤结构低点（A5 结构失效）']]
+C3_direction_changed hand_ok= True prod_mirror= True
+   recommended: [] [['2024-03-12', 'direction_changed']]
+   production : [['2024-03-08', True], ['2024-03-13', False]] [['2024-03-14', False, 100.9, None]] [['2024-03-11', '收盘跌破回撤结构低点（A5 结构失效）']]
+C4_structure_not_confirmed hand_ok= True prod_mirror= True
+   recommended: [['2024-03-13', True, 100.3, None]] []
+   production : [['2024-03-08', True], ['2024-03-12', False]] [['2024-03-13', False, 100.9, None]] [['2024-03-11', '收盘跌破回撤结构低点（A5 结构失效）']]
+C5_confirm_after_touch hand_ok= True prod_mirror= True
+   recommended: [['2024-03-15', True, 100.2, 'S_c5']] []
+   production : [['2024-03-08', True], ['2024-03-13', False]] [['2024-03-15', False, 100.5, 'S_c5']] [['2024-03-11', '收盘跌破回撤结构低点（A5 结构失效）']]
+C6_target_missing hand_ok= True prod_mirror= True
+   recommended: [['2024-03-13', True, 100.3, None]] []
+   production : [['2024-03-08', True], ['2024-03-12', False]] [['2024-03-13', False, 100.9, None]] [['2024-03-11', '收盘跌破回撤结构低点（A5 结构失效）']]
+   production R/R: {'target_b': 106.0, 'source': 'volume_profile', 'rr': 0.2749999999999986, 'computable': True}
+C7_old_structure_invalid_new_structure hand_ok= True prod_mirror= True
+   recommended: [['2024-03-15', True, 104.4, 'S2']] []
+   production : [['2024-03-07', True]] [['2024-03-14', True, 104.4, 'S1']] []
+C8_data_gap hand_ok= True prod_mirror= True
+   recommended: [] [['2024-03-11', 'data_gap']]
+   production : [['2024-03-08', True], ['2024-03-12', True]] [] [['2024-03-11', '趋势生命周期重置（排列破坏/跌破SMA120/转黑）'], ['2024-03-13', '价格离开回撤区且未触发入场']]
+C9_supplement_touch_without_departure hand_ok= True prod_mirror= True
+   recommended: [] []
+   production : [['2024-03-04', True]] [] []
+FAILURES: none

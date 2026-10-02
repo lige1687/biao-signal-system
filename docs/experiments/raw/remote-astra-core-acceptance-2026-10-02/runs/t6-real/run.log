@@ -1,0 +1,12 @@
+sh510300-A20E-fee10bp 2015-05-18:ok(1E-11) 2026-01-16:ok(4E-11) 2026-01-19:ok(4E-11) 2026-01-27:ok(3.15E-11) 2026-06-30:ok(3.15E-11) end_bridge True 3.5E-11
+sh510300-R1-fee10bp 2024-11-25:ok(2E-11) 2025-06-17:ok(5E-11) 2025-06-18:ok(7E-11) 2025-06-20:ok(4E-11) 2025-06-25:ok(7E-11) 2025-06-27:ok(7E-11) 2026-06-30:ok(8E-11) end_bridge True 7.5E-11
+sz159915-R1-fee10bp 2023-01-09:ok(4.6892E-10) 行动相关日=未覆盖 2026-06-30:ok(7E-10) 2021-02-05:ok(3.4552E-10) 2021-02-08:ok(3.4552E-10) 2021-02-09:ok(3.4552E-10) end_bridge True 7E-10
+sh510300-breadth_three_tier-fee0.001 2022-02-14:ok(0) 2023-01-13:ok(0) 2023-01-16:ok(0) 2023-01-19:ok(0) 2026-06-30:ok(0) end_bridge True 5.4E-12
+double-count demo overstatement 2427.73
+B01 buys 496 edge/mismatch 0 binding {'现金先卡住': 26, '1%风险先卡住': 20, '两者相同': 0}
+B04 {'buy:filled': 496, 'sell:missing_quote': 276, 'sell:filled': 486, 'buy:nonpositive_open_risk': 2, 'buy:open_rr_below3': 4} pending_end [] f12 limits [('2024-10-08', True), ('2024-10-08', True), ('2024-10-08', True), ('2024-10-08', True), ('2015-07-08', True), ('2015-07-08', True)]
+B06 {'sh510300': [], 'sz159915': []} events 288 bad [] sold ex..pay 4
+B09 34 bad 0
+B10 1.99182E-10 ['sh510300-A20E-fee10bp', 'sh510300-A20E-fee20bp', 'sh510300-A20J-fee10bp', 'sh510300-A20J-fee20bp', 'sh510300-R1-fee10bp', 'sh510300-R1-fee20bp', 'sz159915-R0-fee10bp', 'sz159915-R0-fee20bp', 'sz159915-R1-fee10bp', 'sz159915-R1-fee20bp']
+B11 {'accounts': 48, 'rows_with_funding_not_100000_or_deposit': []}
+input_integrity 23 / 27 [('sh510300-nominal.csv', True), ('sz159915-nominal.csv', True), ('sh510300-nominal.csv', True), ('sz159915-nominal.csv', True)]

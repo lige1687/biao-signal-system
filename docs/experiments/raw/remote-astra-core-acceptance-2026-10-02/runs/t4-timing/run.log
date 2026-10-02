@@ -1,0 +1,14 @@
+1_normal_week_after_close True decidable
+1b_normal_week_before_close True not_yet
+2_holiday_short_week True ['2026-09-30', 'decidable']
+2b_all_closed_week True None
+3_incomplete_week_midweek True not_yet
+4_post_close_revision True ['v0', 'v1']
+5_lunch_break True ['decidable', '2026-10-12T13:00:00+08:00']
+6_last_hour_unfinished True not_yet
+7_hourly_confirmation_late True ['decidable', '2026-10-13T10:31:00+08:00', '2026-10-13T10:31:00+08:00']
+8_missing_hourly True unknown
+8b_calendar_uncovered True None
+9_weekly_cadence True ['2026-10-14T09:30:00+08:00', '2026-10-16T15:00:00+08:00', None]
+production: {'P1_short_week_default_calendar_weeks': 0, 'P1_short_week_injected_calendar_weeks': 1, 'P1_injected_available_date': ['2026-09-30'], 'P2_friday_bar_present_weeks': ['2026-09-30', '2026-10-16'], 'P2_bar_completeness_at_14_00': 'partial', 'P3_bar_completeness_naive_observed_at': 'partial'}
+FAILURES: none
