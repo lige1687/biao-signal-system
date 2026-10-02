@@ -225,6 +225,25 @@
       "budget_used": "子任务约2.5小时（自报）＋主控复核约0.3小时",
       "next_step": "首12程序除息/拆分日缺价估值修复交主负责人；涨跌停影响如需精确数字须另立协议重跑",
       "verification": "subagent: 27 hand cases, 4 accounts x 22 dates within 1e-9; controller rerun of 4 scripts reproduced all JSON byte-identical; engine.py:207 float lot and first12 run_accounts.py:253-262 checked; 2024-10-08 limit-up opens checked in raw bars"
+    },
+    "T2_followup_population_audit": {
+      "problem": "已封存模块A候选的机会母体是否符合原文回调",
+      "owner": "remote Opus 5.5 session",
+      "status": "completed",
+      "inputs": [
+        "precision-candidates.json.gz (504 A candidates)",
+        "research-twelfth bars-helper-native",
+        "actions.json",
+        "account-results/*-A*-fee10bp/roundtrips.json (candidate ids only)"
+      ],
+      "outputs": [
+        "docs/experiments/module-a-population-audit-2026-10-02.md",
+        "docs/experiments/raw/remote-astra-T2-audit-2026-10-02/"
+      ],
+      "verification": "504/504 reproduced with as-of structures; 457/504 with full-history structures",
+      "skip_reason": null,
+      "budget_used": "约0.6小时（含15分钟运行）",
+      "next_step": "主负责人批准 lifecycle_ref 开关后重建机会母体"
     }
   },
   "limitations": [
