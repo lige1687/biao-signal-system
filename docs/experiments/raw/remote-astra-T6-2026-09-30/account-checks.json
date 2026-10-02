@@ -1,0 +1,1420 @@
+{
+ "_note": "4个代表账户×三类日期的独立数字核验；允许误差1e-6元；成交价、费用、现金、份数、分红权利与估值均由原始行情和行动独立重算。",
+ "tolerance_cny": "0.000001",
+ "accounts": [
+  {
+   "account": "sh510300-A20E-fee10bp",
+   "source": "docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sh510300-A20E-fee10bp",
+   "engine": "48账户冻结引擎（浮点）",
+   "why": "A/C/D 1%计划风险；期末仍持有那一笔决定了全部净收益（21,750.69元）；持有期间有分红与失效位换算",
+   "checks": {
+    "普通成交日": {
+     "2015-05-18": {
+      "fields": {
+       "cash": {
+        "saved": "97769.24260000001",
+        "independent": "97769.2426000",
+        "diff": "1E-11",
+        "ok": true
+       },
+       "units_sh510300": {
+        "saved": "0.0",
+        "independent": "0.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark_sh510300": {
+        "saved": "4.554",
+        "independent": "4.554",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "0.0",
+        "independent": "0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "assets": {
+        "saved": "0.0",
+        "independent": "0.0000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "equity": {
+        "saved": "97769.24260000001",
+        "independent": "97769.2426000",
+        "diff": "1E-11",
+        "ok": true
+       }
+      },
+      "max_diff": "1E-11",
+      "ok": true,
+      "mark_date_saved": "2015-05-18",
+      "mark_date_independent": "2015-05-18",
+      "equity_identity_residual": "0E-11",
+      "external_input": "100000.0",
+      "investment_pnl_saved": "-2230.75739999999",
+      "investment_pnl_independent": "-2230.7574000",
+      "capital_identity_diff": "1E-11",
+      "pnl_parts": {
+       "price": "-2033.0000",
+       "dividends": "0.000",
+       "fees": "-197.7574000"
+      },
+      "trades_that_day": [
+       [
+        "sell",
+        "21400.0",
+        "4.573"
+       ]
+      ]
+     }
+    },
+    "行动相关日": {
+     "2026-01-16": {
+      "fields": {
+       "cash": {
+        "saved": "177.38210000003164",
+        "independent": "177.3821000",
+        "diff": "3.164E-11",
+        "ok": true
+       },
+       "units_sh510300": {
+        "saved": "22900.0",
+        "independent": "22900.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark_sh510300": {
+        "saved": "4.859",
+        "independent": "4.859",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "0.0",
+        "independent": "0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "assets": {
+        "saved": "111271.1",
+        "independent": "111271.1000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "equity": {
+        "saved": "111448.48210000004",
+        "independent": "111448.4821000",
+        "diff": "4E-11",
+        "ok": true
+       }
+      },
+      "max_diff": "4E-11",
+      "ok": true,
+      "mark_date_saved": "2026-01-16",
+      "mark_date_independent": "2026-01-16",
+      "equity_identity_residual": "8.36E-12",
+      "external_input": "100000.0",
+      "investment_pnl_saved": "11448.48210000004",
+      "investment_pnl_independent": "11448.4821000",
+      "capital_identity_diff": "4E-11",
+      "pnl_parts": {
+       "price": "10515.8000",
+       "dividends": "1418.40000",
+       "fees": "-485.7179000"
+      },
+      "trades_that_day": []
+     },
+     "2026-01-19": {
+      "fields": {
+       "cash": {
+        "saved": "177.38210000003164",
+        "independent": "177.3821000",
+        "diff": "3.164E-11",
+        "ok": true
+       },
+       "units_sh510300": {
+        "saved": "22900.0",
+        "independent": "22900.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark_sh510300": {
+        "saved": "4.738",
+        "independent": "4.738",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "2816.7",
+        "independent": "2816.70000",
+        "diff": "0.00000",
+        "ok": true
+       },
+       "assets": {
+        "saved": "108500.20000000001",
+        "independent": "108500.2000",
+        "diff": "1E-11",
+        "ok": true
+       },
+       "equity": {
+        "saved": "111494.28210000004",
+        "independent": "111494.2821000",
+        "diff": "4E-11",
+        "ok": true
+       }
+      },
+      "max_diff": "4E-11",
+      "ok": true,
+      "mark_date_saved": "2026-01-19",
+      "mark_date_independent": "2026-01-19",
+      "equity_identity_residual": "-1.64E-12",
+      "external_input": "100000.0",
+      "investment_pnl_saved": "11494.28210000004",
+      "investment_pnl_independent": "11494.2821000",
+      "capital_identity_diff": "4E-11",
+      "pnl_parts": {
+       "price": "7744.9000",
+       "dividends": "4235.10000",
+       "fees": "-485.7179000"
+      },
+      "trades_that_day": []
+     },
+     "2026-01-27": {
+      "fields": {
+       "cash": {
+        "saved": "2994.0821000000315",
+        "independent": "2994.0821000",
+        "diff": "3.15E-11",
+        "ok": true
+       },
+       "units_sh510300": {
+        "saved": "22900.0",
+        "independent": "22900.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark_sh510300": {
+        "saved": "4.71",
+        "independent": "4.71",
+        "diff": "0.00",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "0.0",
+        "independent": "0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "assets": {
+        "saved": "107859.0",
+        "independent": "107859.000",
+        "diff": "0.000",
+        "ok": true
+       },
+       "equity": {
+        "saved": "110853.08210000003",
+        "independent": "110853.0821000",
+        "diff": "3E-11",
+        "ok": true
+       }
+      },
+      "max_diff": "3.15E-11",
+      "ok": true,
+      "mark_date_saved": "2026-01-27",
+      "mark_date_independent": "2026-01-27",
+      "equity_identity_residual": "-1.5E-12",
+      "external_input": "100000.0",
+      "investment_pnl_saved": "10853.08210000003",
+      "investment_pnl_independent": "10853.0821000",
+      "capital_identity_diff": "3E-11",
+      "pnl_parts": {
+       "price": "7103.7000",
+       "dividends": "4235.10000",
+       "fees": "-485.7179000"
+      },
+      "trades_that_day": []
+     }
+    },
+    "期末": {
+     "2026-06-30": {
+      "fields": {
+       "cash": {
+        "saved": "2994.0821000000315",
+        "independent": "2994.0821000",
+        "diff": "3.15E-11",
+        "ok": true
+       },
+       "units_sh510300": {
+        "saved": "22900.0",
+        "independent": "22900.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark_sh510300": {
+        "saved": "5.019",
+        "independent": "5.019",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "0.0",
+        "independent": "0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "assets": {
+        "saved": "114935.1",
+        "independent": "114935.1000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "equity": {
+        "saved": "117929.18210000003",
+        "independent": "117929.1821000",
+        "diff": "3E-11",
+        "ok": true
+       }
+      },
+      "max_diff": "3.15E-11",
+      "ok": true,
+      "mark_date_saved": "2026-06-30",
+      "mark_date_independent": "2026-06-30",
+      "equity_identity_residual": "-1.5E-12",
+      "external_input": "100000.0",
+      "investment_pnl_saved": "17929.18210000003",
+      "investment_pnl_independent": "17929.1821000",
+      "capital_identity_diff": "3E-11",
+      "pnl_parts": {
+       "price": "14179.8000",
+       "dividends": "4235.10000",
+       "fees": "-485.7179000"
+      },
+      "trades_that_day": []
+     }
+    }
+   },
+   "end_bridge": {
+    "closed_positions_net": "-3821.5126999999824",
+    "open_positions_net": "21750.694800000005",
+    "sum": "17929.1821000000226",
+    "summary_net_gain": 17929.182100000035,
+    "annual_sum": "17929.1821000000353",
+    "independent_net_gain": "17929.1821000",
+    "max_diff": "3.5E-11",
+    "end_receivable": 0.0,
+    "hypothetical_terminal_sell_fee": "114.9351",
+    "equity_after_hypothetical_terminal_sale": "117814.24700000003",
+    "ok": true
+   }
+  },
+  {
+   "account": "sh510300-R1-fee10bp",
+   "source": "docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sh510300-R1-fee10bp",
+   "engine": "48账户冻结引擎（浮点）",
+   "why": "尽量用满现金的诊断参照；除息后、到账前卖出又用现金买回；研究末日当天买入",
+   "checks": {
+    "普通成交日": {
+     "2024-11-25": {
+      "fields": {
+       "cash": {
+        "saved": "137683.58740000002",
+        "independent": "137683.5874000",
+        "diff": "2E-11",
+        "ok": true
+       },
+       "units_sh510300": {
+        "saved": "0.0",
+        "independent": "0.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark_sh510300": {
+        "saved": "3.931",
+        "independent": "3.931",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "0.0",
+        "independent": "0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "assets": {
+        "saved": "0.0",
+        "independent": "0.0000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "equity": {
+        "saved": "137683.58740000002",
+        "independent": "137683.5874000",
+        "diff": "2E-11",
+        "ok": true
+       }
+      },
+      "max_diff": "2E-11",
+      "ok": true,
+      "mark_date_saved": "2024-11-25",
+      "mark_date_independent": "2024-11-25",
+      "equity_identity_residual": "0E-11",
+      "external_input": "100000.0",
+      "investment_pnl_saved": "37683.58740000002",
+      "investment_pnl_independent": "37683.5874000",
+      "capital_identity_diff": "2E-11",
+      "pnl_parts": {
+       "price": "50244.8000",
+       "dividends": "5500.60000",
+       "fees": "-18061.8126000"
+      },
+      "trades_that_day": [
+       [
+        "sell",
+        "34800.0",
+        "3.955"
+       ]
+      ]
+     }
+    },
+    "行动相关日": {
+     "2025-06-17": {
+      "fields": {
+       "cash": {
+        "saved": "187.21240000004764",
+        "independent": "187.2124000",
+        "diff": "4.764E-11",
+        "ok": true
+       },
+       "units_sh510300": {
+        "saved": "34400.0",
+        "independent": "34400.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark_sh510300": {
+        "saved": "3.989",
+        "independent": "3.989",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "0.0",
+        "independent": "0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "assets": {
+        "saved": "137221.6",
+        "independent": "137221.6000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "equity": {
+        "saved": "137408.81240000005",
+        "independent": "137408.8124000",
+        "diff": "5E-11",
+        "ok": true
+       }
+      },
+      "max_diff": "5E-11",
+      "ok": true,
+      "mark_date_saved": "2025-06-17",
+      "mark_date_independent": "2025-06-17",
+      "equity_identity_residual": "2.36E-12",
+      "external_input": "100000.0",
+      "investment_pnl_saved": "37408.81240000005",
+      "investment_pnl_independent": "37408.8124000",
+      "capital_identity_diff": "5E-11",
+      "pnl_parts": {
+       "price": "50649.6000",
+       "dividends": "5500.60000",
+       "fees": "-18741.3876000"
+      },
+      "trades_that_day": []
+     },
+     "2025-06-18": {
+      "fields": {
+       "cash": {
+        "saved": "187.21240000004764",
+        "independent": "187.2124000",
+        "diff": "4.764E-11",
+        "ok": true
+       },
+       "units_sh510300": {
+        "saved": "34400.0",
+        "independent": "34400.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark_sh510300": {
+        "saved": "3.904",
+        "independent": "3.904",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "3027.2",
+        "independent": "3027.2000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "assets": {
+        "saved": "134297.6",
+        "independent": "134297.6000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "equity": {
+        "saved": "137512.01240000007",
+        "independent": "137512.0124000",
+        "diff": "7E-11",
+        "ok": true
+       }
+      },
+      "max_diff": "7E-11",
+      "ok": true,
+      "mark_date_saved": "2025-06-18",
+      "mark_date_independent": "2025-06-18",
+      "equity_identity_residual": "2.236E-11",
+      "external_input": "100000.0",
+      "investment_pnl_saved": "37512.01240000007",
+      "investment_pnl_independent": "37512.0124000",
+      "capital_identity_diff": "7E-11",
+      "pnl_parts": {
+       "price": "47725.6000",
+       "dividends": "8527.80000",
+       "fees": "-18741.3876000"
+      },
+      "trades_that_day": []
+     },
+     "2025-06-20": {
+      "fields": {
+       "cash": {
+        "saved": "133250.81560000003",
+        "independent": "133250.8156000",
+        "diff": "3E-11",
+        "ok": true
+       },
+       "units_sh510300": {
+        "saved": "0.0",
+        "independent": "0.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark_sh510300": {
+        "saved": "3.878",
+        "independent": "3.878",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "3027.2",
+        "independent": "3027.2000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "assets": {
+        "saved": "0.0",
+        "independent": "0.0000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "equity": {
+        "saved": "136278.01560000004",
+        "independent": "136278.0156000",
+        "diff": "4E-11",
+        "ok": true
+       }
+      },
+      "max_diff": "4E-11",
+      "ok": true,
+      "mark_date_saved": "2025-06-20",
+      "mark_date_independent": "2025-06-20",
+      "equity_identity_residual": "1E-11",
+      "external_input": "100000.0",
+      "investment_pnl_saved": "36278.01560000004",
+      "investment_pnl_independent": "36278.0156000",
+      "capital_identity_diff": "4E-11",
+      "pnl_parts": {
+       "price": "46624.8000",
+       "dividends": "8527.80000",
+       "fees": "-18874.5844000"
+      },
+      "trades_that_day": [
+       [
+        "sell",
+        "34400.0",
+        "3.872"
+       ]
+      ]
+     },
+     "2025-06-25": {
+      "fields": {
+       "cash": {
+        "saved": "373.77130000005127",
+        "independent": "373.7713000",
+        "diff": "5.127E-11",
+        "ok": true
+       },
+       "units_sh510300": {
+        "saved": "33700.0",
+        "independent": "33700.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark_sh510300": {
+        "saved": "4.001",
+        "independent": "4.001",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "3027.2",
+        "independent": "3027.2000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "assets": {
+        "saved": "134833.7",
+        "independent": "134833.7000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "equity": {
+        "saved": "138234.67130000007",
+        "independent": "138234.6713000",
+        "diff": "7E-11",
+        "ok": true
+       }
+      },
+      "max_diff": "7E-11",
+      "ok": true,
+      "mark_date_saved": "2025-06-25",
+      "mark_date_independent": "2025-06-25",
+      "equity_identity_residual": "1.873E-11",
+      "external_input": "100000.0",
+      "investment_pnl_saved": "38234.67130000007",
+      "investment_pnl_independent": "38234.6713000",
+      "capital_identity_diff": "7E-11",
+      "pnl_parts": {
+       "price": "48714.2000",
+       "dividends": "8527.80000",
+       "fees": "-19007.3287000"
+      },
+      "trades_that_day": [
+       [
+        "buy",
+        "33700.0",
+        "3.939"
+       ]
+      ],
+      "buy_cash_constraint": {
+       "saved_shares": "33700.0",
+       "open": "3.939",
+       "spendable_cash_before_open": "133250.81560000003",
+       "receivable_outstanding": "3027.2000",
+       "cash_lot_cap_excluding_receivable": "33700",
+       "cash_lot_cap_if_receivable_spendable": "34500"
+      }
+     },
+     "2025-06-27": {
+      "fields": {
+       "cash": {
+        "saved": "3400.971300000051",
+        "independent": "3400.9713000",
+        "diff": "5.1E-11",
+        "ok": true
+       },
+       "units_sh510300": {
+        "saved": "33700.0",
+        "independent": "33700.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark_sh510300": {
+        "saved": "3.963",
+        "independent": "3.963",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "0.0",
+        "independent": "0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "assets": {
+        "saved": "133553.1",
+        "independent": "133553.1000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "equity": {
+        "saved": "136954.07130000007",
+        "independent": "136954.0713000",
+        "diff": "7E-11",
+        "ok": true
+       }
+      },
+      "max_diff": "7E-11",
+      "ok": true,
+      "mark_date_saved": "2025-06-27",
+      "mark_date_independent": "2025-06-27",
+      "equity_identity_residual": "1.9E-11",
+      "external_input": "100000.0",
+      "investment_pnl_saved": "36954.07130000007",
+      "investment_pnl_independent": "36954.0713000",
+      "capital_identity_diff": "7E-11",
+      "pnl_parts": {
+       "price": "47433.6000",
+       "dividends": "8527.80000",
+       "fees": "-19007.3287000"
+      },
+      "trades_that_day": []
+     }
+    },
+    "期末": {
+     "2026-06-30": {
+      "fields": {
+       "cash": {
+        "saved": "72.53210000006948",
+        "independent": "72.5321000",
+        "diff": "6.948E-11",
+        "ok": true
+       },
+       "units_sh510300": {
+        "saved": "31400.0",
+        "independent": "31400.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark_sh510300": {
+        "saved": "5.019",
+        "independent": "5.019",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "0.0",
+        "independent": "0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "assets": {
+        "saved": "157596.6",
+        "independent": "157596.6000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "equity": {
+        "saved": "157669.13210000008",
+        "independent": "157669.1321000",
+        "diff": "8E-11",
+        "ok": true
+       }
+      },
+      "max_diff": "8E-11",
+      "ok": true,
+      "mark_date_saved": "2026-06-30",
+      "mark_date_independent": "2026-06-30",
+      "equity_identity_residual": "1.052E-11",
+      "external_input": "100000.0",
+      "investment_pnl_saved": "57669.13210000008",
+      "investment_pnl_independent": "57669.1321000",
+      "capital_identity_diff": "8E-11",
+      "pnl_parts": {
+       "price": "66516.1000",
+       "dividends": "12672.90000",
+       "fees": "-21519.8679000"
+      },
+      "trades_that_day": [
+       [
+        "buy",
+        "31400.0",
+        "4.947"
+       ]
+      ],
+      "buy_cash_constraint": {
+       "saved_shares": "31400.0",
+       "open": "4.947",
+       "spendable_cash_before_open": "155563.66790000006",
+       "receivable_outstanding": "0",
+       "cash_lot_cap_excluding_receivable": "31400",
+       "cash_lot_cap_if_receivable_spendable": "31400"
+      }
+     }
+    }
+   },
+   "end_bridge": {
+    "closed_positions_net": "55563.66790000004663",
+    "open_positions_net": "2105.4642000000176",
+    "sum": "57669.13210000006423",
+    "summary_net_gain": 57669.132100000075,
+    "annual_sum": "57669.1321000000759",
+    "independent_net_gain": "57669.1321000",
+    "max_diff": "7.5E-11",
+    "end_receivable": 0.0,
+    "hypothetical_terminal_sell_fee": "157.5966",
+    "equity_after_hypothetical_terminal_sale": "157511.53550000008",
+    "ok": true
+   }
+  },
+  {
+   "account": "sz159915-R1-fee10bp",
+   "source": "docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/account-results/sz159915-R1-fee10bp",
+   "engine": "48账户冻结引擎（浮点）",
+   "why": "48账户里期末金额最大（588,184.83元）；期末持仓贡献39,323.24元；持仓跨过2021-02-08停牌",
+   "checks": {
+    "普通成交日": {
+     "2023-01-09": {
+      "fields": {
+       "cash": {
+        "saved": "187.79649999953108",
+        "independent": "187.7965000",
+        "diff": "4.6892E-10",
+        "ok": true
+       },
+       "units_sz159915": {
+        "saved": "153800.0",
+        "independent": "153800.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark_sz159915": {
+        "saved": "2.365",
+        "independent": "2.365",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "0",
+        "independent": "0",
+        "diff": "0",
+        "ok": true
+       },
+       "assets": {
+        "saved": "363737.00000000006",
+        "independent": "363737.0000",
+        "diff": "6E-11",
+        "ok": true
+       },
+       "equity": {
+        "saved": "363924.7964999996",
+        "independent": "363924.7965000",
+        "diff": "4E-10",
+        "ok": true
+       }
+      },
+      "max_diff": "4.6892E-10",
+      "ok": true,
+      "mark_date_saved": "2023-01-09",
+      "mark_date_independent": "2023-01-09",
+      "equity_identity_residual": "8.92E-12",
+      "external_input": "100000.0",
+      "investment_pnl_saved": "263924.7964999996",
+      "investment_pnl_independent": "263924.7965000",
+      "capital_identity_diff": "4E-10",
+      "pnl_parts": {
+       "price": "290112.7000",
+       "dividends": "0",
+       "fees": "-26187.9035000"
+      },
+      "trades_that_day": [
+       [
+        "buy",
+        "153800.0",
+        "2.361"
+       ]
+      ],
+      "buy_cash_constraint": {
+       "saved_shares": "153800.0",
+       "open": "2.361",
+       "spendable_cash_before_open": "363672.7182999996",
+       "receivable_outstanding": "0",
+       "cash_lot_cap_excluding_receivable": "153800",
+       "cash_lot_cap_if_receivable_spendable": "153800"
+      }
+     }
+    },
+    "行动相关日": {
+     "status": "未覆盖",
+     "reason": "该产品研究期内 actions.json 没有现金分红或拆分记录（action-coverage.json：159915 现金分红为正式报告连续明确为零；拆分覆盖不完整）。不制造分红案例。"
+    },
+    "期末": {
+     "2026-06-30": {
+      "fields": {
+       "cash": {
+        "saved": "354.0294999993639",
+        "independent": "354.0295000",
+        "diff": "6.361E-10",
+        "ok": true
+       },
+       "units_sz159915": {
+        "saved": "134700.0",
+        "independent": "134700.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark_sz159915": {
+        "saved": "4.364",
+        "independent": "4.364",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "0",
+        "independent": "0",
+        "diff": "0",
+        "ok": true
+       },
+       "assets": {
+        "saved": "587830.7999999999",
+        "independent": "587830.8000",
+        "diff": "1E-10",
+        "ok": true
+       },
+       "equity": {
+        "saved": "588184.8294999993",
+        "independent": "588184.8295000",
+        "diff": "7E-10",
+        "ok": true
+       }
+      },
+      "max_diff": "7E-10",
+      "ok": true,
+      "mark_date_saved": "2026-06-30",
+      "mark_date_independent": "2026-06-30",
+      "equity_identity_residual": "3.61E-11",
+      "external_input": "100000.0",
+      "investment_pnl_saved": "488184.8294999993",
+      "investment_pnl_independent": "488184.8295000",
+      "capital_identity_diff": "7E-10",
+      "pnl_parts": {
+       "price": "536287.3000",
+       "dividends": "0",
+       "fees": "-48102.4705000"
+      },
+      "trades_that_day": []
+     }
+    },
+    "停牌补充（不是公司行动）": {
+     "2021-02-05": {
+      "fields": {
+       "cash": {
+        "saved": "177.67899999965448",
+        "independent": "177.6790000",
+        "diff": "3.4552E-10",
+        "ok": true
+       },
+       "units_sz159915": {
+        "saved": "100100.0",
+        "independent": "100100.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark_sz159915": {
+        "saved": "3.084",
+        "independent": "3.084",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "0",
+        "independent": "0",
+        "diff": "0",
+        "ok": true
+       },
+       "assets": {
+        "saved": "308708.4",
+        "independent": "308708.4000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "equity": {
+        "saved": "308886.0789999997",
+        "independent": "308886.0790000",
+        "diff": "3E-10",
+        "ok": true
+       }
+      },
+      "max_diff": "3.4552E-10",
+      "ok": true,
+      "mark_date_saved": "2021-02-05",
+      "mark_date_independent": "2021-02-05",
+      "equity_identity_residual": "4.552E-11",
+      "external_input": "100000.0",
+      "investment_pnl_saved": "208886.0789999997",
+      "investment_pnl_independent": "208886.0790000",
+      "capital_identity_diff": "3E-10",
+      "pnl_parts": {
+       "price": "225327.8000",
+       "dividends": "0",
+       "fees": "-16441.7210000"
+      },
+      "trades_that_day": []
+     },
+     "2021-02-08": {
+      "fields": {
+       "cash": {
+        "saved": "177.67899999965448",
+        "independent": "177.6790000",
+        "diff": "3.4552E-10",
+        "ok": true
+       },
+       "units_sz159915": {
+        "saved": "100100.0",
+        "independent": "100100.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark_sz159915": {
+        "saved": "3.084",
+        "independent": "3.084",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "0",
+        "independent": "0",
+        "diff": "0",
+        "ok": true
+       },
+       "assets": {
+        "saved": "308708.4",
+        "independent": "308708.4000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "equity": {
+        "saved": "308886.0789999997",
+        "independent": "308886.0790000",
+        "diff": "3E-10",
+        "ok": true
+       }
+      },
+      "max_diff": "3.4552E-10",
+      "ok": true,
+      "mark_date_saved": "2021-02-05",
+      "mark_date_independent": "2021-02-05",
+      "equity_identity_residual": "4.552E-11",
+      "external_input": "100000.0",
+      "investment_pnl_saved": "208886.0789999997",
+      "investment_pnl_independent": "208886.0790000",
+      "capital_identity_diff": "3E-10",
+      "pnl_parts": {
+       "price": "225327.8000",
+       "dividends": "0",
+       "fees": "-16441.7210000"
+      },
+      "trades_that_day": []
+     },
+     "2021-02-09": {
+      "fields": {
+       "cash": {
+        "saved": "177.67899999965448",
+        "independent": "177.6790000",
+        "diff": "3.4552E-10",
+        "ok": true
+       },
+       "units_sz159915": {
+        "saved": "100100.0",
+        "independent": "100100.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark_sz159915": {
+        "saved": "3.222",
+        "independent": "3.222",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "0",
+        "independent": "0",
+        "diff": "0",
+        "ok": true
+       },
+       "assets": {
+        "saved": "322522.2",
+        "independent": "322522.2000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "equity": {
+        "saved": "322699.87899999967",
+        "independent": "322699.8790000",
+        "diff": "3.3E-10",
+        "ok": true
+       }
+      },
+      "max_diff": "3.4552E-10",
+      "ok": true,
+      "mark_date_saved": "2021-02-09",
+      "mark_date_independent": "2021-02-09",
+      "equity_identity_residual": "1.552E-11",
+      "external_input": "100000.0",
+      "investment_pnl_saved": "222699.87899999967",
+      "investment_pnl_independent": "222699.8790000",
+      "capital_identity_diff": "3.3E-10",
+      "pnl_parts": {
+       "price": "239141.6000",
+       "dividends": "0",
+       "fees": "-16441.7210000"
+      },
+      "trades_that_day": []
+     }
+    }
+   },
+   "end_bridge": {
+    "closed_positions_net": "448861.58909999935903",
+    "open_positions_net": "39323.24039999995",
+    "sum": "488184.82949999930903",
+    "summary_net_gain": 488184.8294999993,
+    "annual_sum": "488184.829499999320",
+    "independent_net_gain": "488184.8295000",
+    "max_diff": "7E-10",
+    "end_receivable": 0.0,
+    "hypothetical_terminal_sell_fee": "587.8307999999999",
+    "equity_after_hypothetical_terminal_sale": "587596.9986999993001",
+    "ok": true
+   }
+  },
+  {
+   "account": "sh510300-breadth_three_tier-fee0.001",
+   "source": "docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12/account-results/sh510300-breadth_three_tier-fee0.001",
+   "engine": "首12冻结程序（十进制）",
+   "why": "首12账户的另一套冻结程序；除息当天开盘卖出一半，应收仍归账户、到账前不可花",
+   "checks": {
+    "普通成交日": {
+     "2022-02-14": {
+      "fields": {
+       "cash": {
+        "saved": "103342.9049",
+        "independent": "103342.9049000",
+        "diff": "0E-7",
+        "ok": true
+       },
+       "units": {
+        "saved": "22400.0",
+        "independent": "22400.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark": {
+        "saved": "4.547",
+        "independent": "4.547",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "0.0",
+        "independent": "0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "market_value": {
+        "saved": "101852.8",
+        "independent": "101852.8000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "equity": {
+        "saved": "205195.7049",
+        "independent": "205195.7049000",
+        "diff": "0E-7",
+        "ok": true
+       }
+      },
+      "max_diff": "0",
+      "ok": true,
+      "equity_identity_residual": "0.0000",
+      "external_input": "100000",
+      "investment_pnl_saved": "105195.7049",
+      "investment_pnl_independent": "105195.7049000",
+      "dividends_received_saved": "11851.7",
+      "dividends_received_independent": "11851.70000",
+      "pnl_parts": {
+       "price": "98602.9000",
+       "dividends": "11851.70000",
+       "fees": "-5258.8951000"
+      },
+      "trades_that_day": [
+       [
+        "buy",
+        "22400.0",
+        "4.58"
+       ]
+      ],
+      "buy_cash_constraint": {
+       "saved_shares": "22400.0",
+       "open": "4.58",
+       "spendable_cash_before_open": "206037.4969",
+       "receivable_outstanding": "0",
+       "cash_lot_cap_excluding_receivable": "44900",
+       "cash_lot_cap_if_receivable_spendable": "44900"
+      }
+     }
+    },
+    "行动相关日": {
+     "2023-01-13": {
+      "fields": {
+       "cash": {
+        "saved": "77.2752",
+        "independent": "77.2752000",
+        "diff": "0E-7",
+        "ok": true
+       },
+       "units": {
+        "saved": "48000.0",
+        "independent": "48000.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark": {
+        "saved": "4.144",
+        "independent": "4.144",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "0.0",
+        "independent": "0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "market_value": {
+        "saved": "198912.0",
+        "independent": "198912.0000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "equity": {
+        "saved": "198989.2752",
+        "independent": "198989.2752000",
+        "diff": "0E-7",
+        "ok": true
+       }
+      },
+      "max_diff": "0",
+      "ok": true,
+      "equity_identity_residual": "0.0000",
+      "external_input": "100000",
+      "investment_pnl_saved": "98989.2752",
+      "investment_pnl_independent": "98989.2752000",
+      "dividends_received_saved": "11851.7",
+      "dividends_received_independent": "11851.70000",
+      "pnl_parts": {
+       "price": "93258.8000",
+       "dividends": "11851.70000",
+       "fees": "-6121.2248000"
+      },
+      "trades_that_day": []
+     },
+     "2023-01-16": {
+      "fields": {
+       "cash": {
+        "saved": "96386.8692",
+        "independent": "96386.8692000",
+        "diff": "0E-7",
+        "ok": true
+       },
+       "units": {
+        "saved": "24400.0",
+        "independent": "24400.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark": {
+        "saved": "4.143",
+        "independent": "4.143",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "3072.0",
+        "independent": "3072.00000",
+        "diff": "0.00000",
+        "ok": true
+       },
+       "market_value": {
+        "saved": "101089.2",
+        "independent": "101089.2000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "equity": {
+        "saved": "200548.0692",
+        "independent": "200548.0692000",
+        "diff": "0E-7",
+        "ok": true
+       }
+      },
+      "max_diff": "0",
+      "ok": true,
+      "equity_identity_residual": "0.0000",
+      "external_input": "100000",
+      "investment_pnl_saved": "100548.0692",
+      "investment_pnl_independent": "100548.0692000",
+      "dividends_received_saved": "11851.7",
+      "dividends_received_independent": "11851.70000",
+      "pnl_parts": {
+       "price": "91842.0000",
+       "dividends": "14923.70000",
+       "fees": "-6217.6308000"
+      },
+      "trades_that_day": [
+       [
+        "sell",
+        "23600.0",
+        "4.085"
+       ]
+      ]
+     },
+     "2023-01-19": {
+      "fields": {
+       "cash": {
+        "saved": "99458.8692",
+        "independent": "99458.8692000",
+        "diff": "0E-7",
+        "ok": true
+       },
+       "units": {
+        "saved": "24400.0",
+        "independent": "24400.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark": {
+        "saved": "4.158",
+        "independent": "4.158",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "0.0",
+        "independent": "0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "market_value": {
+        "saved": "101455.2",
+        "independent": "101455.2000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "equity": {
+        "saved": "200914.0692",
+        "independent": "200914.0692000",
+        "diff": "0E-7",
+        "ok": true
+       }
+      },
+      "max_diff": "0",
+      "ok": true,
+      "equity_identity_residual": "0.0000",
+      "external_input": "100000",
+      "investment_pnl_saved": "100914.0692",
+      "investment_pnl_independent": "100914.0692000",
+      "dividends_received_saved": "14923.7",
+      "dividends_received_independent": "14923.70000",
+      "pnl_parts": {
+       "price": "92208.0000",
+       "dividends": "14923.70000",
+       "fees": "-6217.6308000"
+      },
+      "trades_that_day": []
+     }
+    },
+    "期末": {
+     "2026-06-30": {
+      "fields": {
+       "cash": {
+        "saved": "97.4469",
+        "independent": "97.4469000",
+        "diff": "0E-7",
+        "ok": true
+       },
+       "units": {
+        "saved": "48800.0",
+        "independent": "48800.0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "mark": {
+        "saved": "5.019",
+        "independent": "5.019",
+        "diff": "0.000",
+        "ok": true
+       },
+       "receivable": {
+        "saved": "0.0",
+        "independent": "0",
+        "diff": "0.0",
+        "ok": true
+       },
+       "market_value": {
+        "saved": "244927.2",
+        "independent": "244927.2000",
+        "diff": "0.0000",
+        "ok": true
+       },
+       "equity": {
+        "saved": "245024.6469",
+        "independent": "245024.6469000",
+        "diff": "0E-7",
+        "ok": true
+       }
+      },
+      "max_diff": "0",
+      "ok": true,
+      "equity_identity_residual": "0.0000",
+      "external_input": "100000",
+      "investment_pnl_saved": "145024.6469",
+      "investment_pnl_independent": "145024.6469000",
+      "dividends_received_saved": "18449.6",
+      "dividends_received_independent": "18449.60000",
+      "pnl_parts": {
+       "price": "135023.1000",
+       "dividends": "18449.60000",
+       "fees": "-8448.0531000"
+      },
+      "trades_that_day": []
+     }
+    }
+   },
+   "end_bridge": {
+    "summary_net_gain": 145024.6469,
+    "yearly_change_sum": "145024.6468999999946",
+    "independent_net_gain": "145024.6469000",
+    "pnl_parts": {
+     "price": "135023.1000",
+     "dividends": "18449.60000",
+     "fees": "-8448.0531000"
+    },
+    "end_receivable": 0.0,
+    "hypothetical_terminal_sell_fee": "244.9272",
+    "equity_after_hypothetical_terminal_sale": "244779.7197",
+    "max_diff": "5.4E-12",
+    "ok": true
+   }
+  }
+ ],
+ "no_double_count_demo": {
+  "position": "sh510300-A20E-fee10bp / A20E-sh510300-T3",
+  "shares": "22900",
+  "entry_open": "4.188",
+  "last_close": "5.019",
+  "nominal_price_gain": "19029.90",
+  "dividend": "2816.70",
+  "buy_fee": "95.91",
+  "correct_net": "21750.69",
+  "saved_net_pnl": "21750.69",
+  "proportional_adjust_factor": "0.974686",
+  "adjusted_price_gain_cash_proportional": "21457.63",
+  "wrong_if_adjusted_plus_dividend": "24178.42",
+  "overstatement": "2427.73"
+ }
+}

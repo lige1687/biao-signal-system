@@ -1,0 +1,4493 @@
+{
+ "_note": "冻结引擎在 /tmp 副本中对 cases.json 人工输入的实际输出；未改动任何旧文件。",
+ "fingerprints": {
+  "engine.py": {
+   "locked": "b13f9491bfe69a6f71e4ae1f393bb81c953a8a91a18131974adce782db0856a7",
+   "copy": "b13f9491bfe69a6f71e4ae1f393bb81c953a8a91a18131974adce782db0856a7",
+   "original": "b13f9491bfe69a6f71e4ae1f393bb81c953a8a91a18131974adce782db0856a7",
+   "match": true
+  },
+  "first12/run_accounts.py": {
+   "locked": "4c51b79d064171446404b391434d685932a078bb8fd4d601b487ee8f09910547",
+   "copy": "4c51b79d064171446404b391434d685932a078bb8fd4d601b487ee8f09910547",
+   "original": "4c51b79d064171446404b391434d685932a078bb8fd4d601b487ee8f09910547",
+   "match": true
+  },
+  "first12/inputs/dated-restrictions.json": {
+   "locked": "06d01e93347bbf7341111d29118e20aeb22d37c5d872c5cb2257dd78404225c7",
+   "copy": "06d01e93347bbf7341111d29118e20aeb22d37c5d872c5cb2257dd78404225c7",
+   "original": "06d01e93347bbf7341111d29118e20aeb22d37c5d872c5cb2257dd78404225c7",
+   "match": true
+  }
+ },
+ "cases": [
+  {
+   "id": "C01a",
+   "boundary": "B01",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-02",
+      "side": "buy",
+      "shares": 9900,
+      "price": 2.071,
+      "notional": 20502.9,
+      "fee": 20.5029,
+      "risk_budget": null
+     }
+    ],
+    "orders": {
+     "c1": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-02",
+      "attempts": [
+       [
+        "2024-01-02",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-02",
+      "stop": 1.5,
+      "target": null
+     }
+    },
+    "sells": [],
+    "positions": [
+     {
+      "stop": 1.5,
+      "target": null,
+      "shares": 9900.0,
+      "div_accrued": 0.0,
+      "div_paid": 0.0,
+      "net_pnl": -20.5029,
+      "closed": false,
+      "exit_date": null,
+      "market_value": 20502.9,
+      "level_actions": []
+     }
+    ],
+    "daily": {
+     "2024-01-01": {
+      "cash": 20730.71,
+      "units": 0.0,
+      "mark": 2.071,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 20730.71,
+      "funding": 20730.71,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 207.30709999999817,
+      "units": 9900.0,
+      "mark": 2.071,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 20710.2071,
+      "funding": 20730.71,
+      "nav": 0.9990109890109891,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 207.30709999999817,
+      "units": 9900.0,
+      "mark": 2.071,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 20710.2071,
+      "funding": 20730.71,
+      "nav": 0.9990109890109891,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 207.30709999999817,
+      "units": 9900.0,
+      "mark": 2.071,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 20710.2071,
+      "funding": 20730.71,
+      "nav": 0.9990109890109891,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 20730.71
+     }
+    ]
+   }
+  },
+  {
+   "id": "C01b",
+   "boundary": "B01",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-03",
+      "side": "buy",
+      "shares": 3300,
+      "price": 10.0,
+      "notional": 33000.0,
+      "fee": 33.0,
+      "risk_budget": 1000.0
+     },
+     {
+      "date": "2024-01-04",
+      "side": "sell",
+      "shares": 3300.0,
+      "price": 9.6,
+      "notional": 31680.0,
+      "fee": 31.68,
+      "risk_budget": null
+     }
+    ],
+    "orders": {
+     "c1": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-03",
+      "attempts": [
+       [
+        "2024-01-03",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-03",
+      "stop": 9.7,
+      "target": 11.0
+     }
+    },
+    "sells": [
+     {
+      "status": "filled",
+      "reason": "structure_stop",
+      "planned_date": null,
+      "attempts": [
+       [
+        "2024-01-04",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-04",
+      "stop": null,
+      "target": null
+     }
+    ],
+    "positions": [
+     {
+      "stop": 9.7,
+      "target": 11.0,
+      "shares": 0.0,
+      "div_accrued": 0.0,
+      "div_paid": 0.0,
+      "net_pnl": -1384.68,
+      "closed": true,
+      "exit_date": "2024-01-04",
+      "market_value": 0.0,
+      "level_actions": []
+     }
+    ],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.65,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 98812.0,
+      "funding": 100000.0,
+      "nav": 0.98812,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 98615.32,
+      "units": 0.0,
+      "mark": 9.6,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 98615.32,
+      "funding": 100000.0,
+      "nav": 0.9861532000000001,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-05": {
+      "cash": 98615.32,
+      "units": 0.0,
+      "mark": 9.6,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 98615.32,
+      "funding": 100000.0,
+      "nav": 0.9861532000000001,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C02a",
+   "boundary": "B02",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [],
+    "orders": {
+     "c1": {
+      "status": "rejected",
+      "reason": "insufficient_cash_or_risk_lot",
+      "planned_date": "2024-01-03",
+      "attempts": [
+       [
+        "2024-01-03",
+        "insufficient_cash_or_risk_lot"
+       ]
+      ],
+      "fill_date": null,
+      "stop": 9.7,
+      "target": 11.0
+     }
+    },
+    "sells": [],
+    "positions": [],
+    "daily": {
+     "2024-01-01": {
+      "cash": 500.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 500.0,
+      "funding": 500.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 500.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 500.0,
+      "funding": 500.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 500.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 500.0,
+      "funding": 500.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 500.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 500.0,
+      "funding": 500.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-05": {
+      "cash": 500.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 500.0,
+      "funding": 500.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 500.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C02b",
+   "boundary": "B02",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-03",
+      "side": "buy",
+      "shares": 9900,
+      "price": 10.0,
+      "notional": 99000.0,
+      "fee": 99.0,
+      "risk_budget": 1000.0
+     }
+    ],
+    "orders": {
+     "c1": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-03",
+      "attempts": [
+       [
+        "2024-01-03",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-03",
+      "stop": 9.98,
+      "target": 10.1
+     }
+    },
+    "sells": [],
+    "positions": [
+     {
+      "stop": 9.98,
+      "target": 10.1,
+      "shares": 9900.0,
+      "div_accrued": 0.0,
+      "div_paid": 0.0,
+      "net_pnl": -99.0,
+      "closed": false,
+      "exit_date": null,
+      "market_value": 99000.0,
+      "level_actions": []
+     }
+    ],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 901.0,
+      "units": 9900.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 99901.0,
+      "funding": 100000.0,
+      "nav": 0.99901,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 901.0,
+      "units": 9900.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 99901.0,
+      "funding": 100000.0,
+      "nav": 0.99901,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-05": {
+      "cash": 901.0,
+      "units": 9900.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 99901.0,
+      "funding": 100000.0,
+      "nav": 0.99901,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C03a",
+   "boundary": "B03",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-03",
+      "side": "buy",
+      "shares": 3300,
+      "price": 10.0,
+      "notional": 33000.0,
+      "fee": 33.0,
+      "risk_budget": 1000.0
+     },
+     {
+      "date": "2024-01-05",
+      "side": "sell",
+      "shares": 3300.0,
+      "price": 9.6,
+      "notional": 31680.0,
+      "fee": 31.68,
+      "risk_budget": null
+     },
+     {
+      "date": "2024-01-08",
+      "side": "buy",
+      "shares": 3200,
+      "price": 9.6,
+      "notional": 30720.0,
+      "fee": 30.72,
+      "risk_budget": 986.1532000000001
+     }
+    ],
+    "orders": {
+     "c1": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-03",
+      "attempts": [
+       [
+        "2024-01-03",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-03",
+      "stop": 9.7,
+      "target": 11.0
+     },
+     "c2": {
+      "status": "rejected",
+      "reason": "pending_exit",
+      "planned_date": "2024-01-05",
+      "attempts": [],
+      "fill_date": null,
+      "stop": 9.3,
+      "target": 10.6
+     },
+     "c3": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-08",
+      "attempts": [
+       [
+        "2024-01-08",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-08",
+      "stop": 9.3,
+      "target": 10.6
+     }
+    },
+    "sells": [
+     {
+      "status": "filled",
+      "reason": "structure_stop",
+      "planned_date": null,
+      "attempts": [
+       [
+        "2024-01-05",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-05",
+      "stop": null,
+      "target": null
+     }
+    ],
+    "positions": [
+     {
+      "stop": 9.7,
+      "target": 11.0,
+      "shares": 0.0,
+      "div_accrued": 0.0,
+      "div_paid": 0.0,
+      "net_pnl": -1384.68,
+      "closed": true,
+      "exit_date": "2024-01-05",
+      "market_value": 0.0,
+      "level_actions": []
+     },
+     {
+      "stop": 9.3,
+      "target": 10.6,
+      "shares": 3200.0,
+      "div_accrued": 0.0,
+      "div_paid": 0.0,
+      "net_pnl": -30.72,
+      "closed": false,
+      "exit_date": null,
+      "market_value": 30720.0,
+      "level_actions": []
+     }
+    ],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.6,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 98647.0,
+      "funding": 100000.0,
+      "nav": 0.98647,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-05": {
+      "cash": 98615.32,
+      "units": 0.0,
+      "mark": 9.6,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 98615.32,
+      "funding": 100000.0,
+      "nav": 0.9861532000000001,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-06": {
+      "cash": 98615.32,
+      "units": 0.0,
+      "mark": 9.6,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 98615.32,
+      "funding": 100000.0,
+      "nav": 0.9861532000000001,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-07": {
+      "cash": 98615.32,
+      "units": 0.0,
+      "mark": 9.6,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 98615.32,
+      "funding": 100000.0,
+      "nav": 0.9861532000000001,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-08": {
+      "cash": 67864.6,
+      "units": 3200.0,
+      "mark": 9.6,
+      "mark_date": "2024-01-08",
+      "receivable": 0,
+      "equity": 98584.6,
+      "funding": 100000.0,
+      "nav": 0.9858460000000001,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-09": {
+      "cash": 67864.6,
+      "units": 3200.0,
+      "mark": 9.6,
+      "mark_date": "2024-01-09",
+      "receivable": 0,
+      "equity": 98584.6,
+      "funding": 100000.0,
+      "nav": 0.9858460000000001,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C04a",
+   "boundary": "B04",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [],
+    "orders": {
+     "c1": {
+      "status": "rejected",
+      "reason": "known_open_unavailable",
+      "planned_date": "2024-01-03",
+      "attempts": [
+       [
+        "2024-01-03",
+        "known_open_unavailable"
+       ]
+      ],
+      "fill_date": null,
+      "stop": 9.7,
+      "target": 11.0
+     }
+    },
+    "sells": [],
+    "positions": [],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-05": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C04b",
+   "boundary": "B04",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [],
+    "orders": {
+     "c1": {
+      "status": "rejected",
+      "reason": "at_open_limit_conservative",
+      "planned_date": "2024-01-03",
+      "attempts": [
+       [
+        "2024-01-03",
+        "at_open_limit_conservative"
+       ]
+      ],
+      "fill_date": null,
+      "stop": 3.0,
+      "target": null
+     }
+    },
+    "sells": [],
+    "positions": [],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 3.575,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 3.575,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 3.932,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 3.932,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C04c",
+   "boundary": "B04",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [],
+    "orders": {
+     "c1": {
+      "status": "rejected",
+      "reason": "at_open_limit_conservative",
+      "planned_date": "2024-01-03",
+      "attempts": [
+       [
+        "2024-01-03",
+        "at_open_limit_conservative"
+       ]
+      ],
+      "fill_date": null,
+      "stop": 3.0,
+      "target": null
+     }
+    },
+    "sells": [],
+    "positions": [],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 3.575,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 3.575,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 3.218,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 3.218,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C04d",
+   "boundary": "B04",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [],
+    "orders": {
+     "c1": {
+      "status": "pending_at_end",
+      "reason": "candidate_entry",
+      "planned_date": null,
+      "attempts": [],
+      "fill_date": null,
+      "stop": 9.7,
+      "target": 11.0
+     }
+    },
+    "sells": [],
+    "positions": [],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-05": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-06": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-07": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": "X"
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C05a",
+   "boundary": "B05",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-03",
+      "side": "buy",
+      "shares": 3300,
+      "price": 10.0,
+      "notional": 33000.0,
+      "fee": 33.0,
+      "risk_budget": 1000.0
+     },
+     {
+      "date": "2024-01-09",
+      "side": "sell",
+      "shares": 3300.0,
+      "price": 9.8,
+      "notional": 32340.000000000004,
+      "fee": 32.34,
+      "risk_budget": null
+     }
+    ],
+    "orders": {
+     "c1": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-03",
+      "attempts": [
+       [
+        "2024-01-03",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-03",
+      "stop": 9.7,
+      "target": 11.0
+     }
+    },
+    "sells": [
+     {
+      "status": "filled",
+      "reason": "structure_stop",
+      "planned_date": null,
+      "attempts": [
+       [
+        "2024-01-05",
+        "missing_quote"
+       ],
+       [
+        "2024-01-06",
+        "missing_quote"
+       ],
+       [
+        "2024-01-07",
+        "missing_quote"
+       ],
+       [
+        "2024-01-08",
+        "known_open_unavailable"
+       ],
+       [
+        "2024-01-09",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-09",
+      "stop": null,
+      "target": null
+     }
+    ],
+    "positions": [
+     {
+      "stop": 9.7,
+      "target": 11.0,
+      "shares": 0.0,
+      "div_accrued": 0.0,
+      "div_paid": 0.0,
+      "net_pnl": -725.3399999999964,
+      "closed": true,
+      "exit_date": "2024-01-09",
+      "market_value": 0.0,
+      "level_actions": []
+     }
+    ],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.6,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 98647.0,
+      "funding": 100000.0,
+      "nav": 0.98647,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-05": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.6,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 98647.0,
+      "funding": 100000.0,
+      "nav": 0.98647,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-06": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.6,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 98647.0,
+      "funding": 100000.0,
+      "nav": 0.98647,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-07": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.6,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 98647.0,
+      "funding": 100000.0,
+      "nav": 0.98647,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-08": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.9,
+      "mark_date": "2024-01-08",
+      "receivable": 0,
+      "equity": 99637.0,
+      "funding": 100000.0,
+      "nav": 0.99637,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-09": {
+      "cash": 99274.66,
+      "units": 0.0,
+      "mark": 9.8,
+      "mark_date": "2024-01-09",
+      "receivable": 0,
+      "equity": 99274.66,
+      "funding": 100000.0,
+      "nav": 0.9927466,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-10": {
+      "cash": 99274.66,
+      "units": 0.0,
+      "mark": 9.8,
+      "mark_date": "2024-01-10",
+      "receivable": 0,
+      "equity": 99274.66,
+      "funding": 100000.0,
+      "nav": 0.9927466,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C05b",
+   "boundary": "B05",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-03",
+      "side": "buy",
+      "shares": 3300,
+      "price": 10.0,
+      "notional": 33000.0,
+      "fee": 33.0,
+      "risk_budget": 1000.0
+     },
+     {
+      "date": "2024-01-09",
+      "side": "sell",
+      "shares": 3300.0,
+      "price": 10.0,
+      "notional": 33000.0,
+      "fee": 33.0,
+      "risk_budget": null
+     }
+    ],
+    "orders": {
+     "c1": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-03",
+      "attempts": [
+       [
+        "2024-01-03",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-03",
+      "stop": 9.7,
+      "target": 11.0
+     }
+    },
+    "sells": [
+     {
+      "status": "filled",
+      "reason": "structure_stop",
+      "planned_date": null,
+      "attempts": [
+       [
+        "2024-01-06",
+        "missing_quote"
+       ],
+       [
+        "2024-01-07",
+        "missing_quote"
+       ],
+       [
+        "2024-01-08",
+        "at_open_limit_conservative"
+       ],
+       [
+        "2024-01-09",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-09",
+      "stop": null,
+      "target": null
+     }
+    ],
+    "positions": [
+     {
+      "stop": 9.7,
+      "target": 11.0,
+      "shares": 0.0,
+      "div_accrued": 0.0,
+      "div_paid": 0.0,
+      "net_pnl": -66.0,
+      "closed": true,
+      "exit_date": "2024-01-09",
+      "market_value": 0.0,
+      "level_actions": []
+     }
+    ],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-05": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 8.5,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 95017.0,
+      "funding": 100000.0,
+      "nav": 0.95017,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-06": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 8.5,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 95017.0,
+      "funding": 100000.0,
+      "nav": 0.95017,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-07": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 8.5,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 95017.0,
+      "funding": 100000.0,
+      "nav": 0.95017,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-08": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-08",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-09": {
+      "cash": 99934.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-09",
+      "receivable": 0,
+      "equity": 99934.0,
+      "funding": 100000.0,
+      "nav": 0.99934,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C06a",
+   "boundary": "B06",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-03",
+      "side": "buy",
+      "shares": 3300,
+      "price": 10.0,
+      "notional": 33000.0,
+      "fee": 33.0,
+      "risk_budget": 1000.0
+     }
+    ],
+    "orders": {
+     "c1": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-03",
+      "attempts": [
+       [
+        "2024-01-03",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-03",
+      "stop": 9.7,
+      "target": 11.0
+     }
+    },
+    "sells": [],
+    "positions": [
+     {
+      "stop": 9.214999999999998,
+      "target": 10.45,
+      "shares": 3300.0,
+      "div_accrued": 1650.0,
+      "div_paid": 1650.0,
+      "net_pnl": -33.0,
+      "closed": false,
+      "exit_date": null,
+      "market_value": 31350.0,
+      "level_actions": [
+       "D1"
+      ]
+     }
+    ],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.5,
+      "mark_date": "2024-01-04",
+      "receivable": 1650.0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-05": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.5,
+      "mark_date": "2024-01-05",
+      "receivable": 1650.0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-06": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.5,
+      "mark_date": "2024-01-05",
+      "receivable": 1650.0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-07": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.5,
+      "mark_date": "2024-01-05",
+      "receivable": 1650.0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-08": {
+      "cash": 68617.0,
+      "units": 3300.0,
+      "mark": 9.5,
+      "mark_date": "2024-01-08",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-09": {
+      "cash": 68617.0,
+      "units": 3300.0,
+      "mark": 9.5,
+      "mark_date": "2024-01-09",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     },
+     {
+      "date": "2024-01-03",
+      "kind": "dividend_recorded",
+      "symbol": "X",
+      "event_id": "D1",
+      "shares": 3300.0,
+      "position_id": "A20E-X-T1"
+     },
+     {
+      "date": "2024-01-04",
+      "kind": "dividend_receivable",
+      "symbol": "X",
+      "event_id": "D1",
+      "amount": 1650.0,
+      "entitled_shares": 3300.0,
+      "position_id": "A20E-X-T1"
+     },
+     {
+      "date": "2024-01-08",
+      "kind": "dividend_paid",
+      "symbol": "X",
+      "event_id": "D1",
+      "amount": 1650.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C06b",
+   "boundary": "B06",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-02",
+      "side": "buy",
+      "shares": 3300,
+      "price": 10.0,
+      "notional": 33000.0,
+      "fee": 33.0,
+      "risk_budget": 1000.0
+     },
+     {
+      "date": "2024-01-03",
+      "side": "sell",
+      "shares": 3300.0,
+      "price": 9.6,
+      "notional": 31680.0,
+      "fee": 31.68,
+      "risk_budget": null
+     }
+    ],
+    "orders": {
+     "c1": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-02",
+      "attempts": [
+       [
+        "2024-01-02",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-02",
+      "stop": 9.7,
+      "target": 11.0
+     }
+    },
+    "sells": [
+     {
+      "status": "filled",
+      "reason": "structure_stop",
+      "planned_date": null,
+      "attempts": [
+       [
+        "2024-01-03",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-03",
+      "stop": null,
+      "target": null
+     }
+    ],
+    "positions": [
+     {
+      "stop": 9.7,
+      "target": 11.0,
+      "shares": 0.0,
+      "div_accrued": 0.0,
+      "div_paid": 0.0,
+      "net_pnl": -1384.68,
+      "closed": true,
+      "exit_date": "2024-01-03",
+      "market_value": 0.0,
+      "level_actions": []
+     }
+    ],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.6,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 98647.0,
+      "funding": 100000.0,
+      "nav": 0.98647,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 98615.32,
+      "units": 0.0,
+      "mark": 9.6,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 98615.32,
+      "funding": 100000.0,
+      "nav": 0.9861532000000001,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 98615.32,
+      "units": 0.0,
+      "mark": 9.1,
+      "mark_date": "2024-01-04",
+      "receivable": 0.0,
+      "equity": 98615.32,
+      "funding": 100000.0,
+      "nav": 0.9861532000000001,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-05": {
+      "cash": 98615.32,
+      "units": 0.0,
+      "mark": 9.1,
+      "mark_date": "2024-01-05",
+      "receivable": 0.0,
+      "equity": 98615.32,
+      "funding": 100000.0,
+      "nav": 0.9861532000000001,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-06": {
+      "cash": 98615.32,
+      "units": 0.0,
+      "mark": 9.1,
+      "mark_date": "2024-01-05",
+      "receivable": 0.0,
+      "equity": 98615.32,
+      "funding": 100000.0,
+      "nav": 0.9861532000000001,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-07": {
+      "cash": 98615.32,
+      "units": 0.0,
+      "mark": 9.1,
+      "mark_date": "2024-01-05",
+      "receivable": 0.0,
+      "equity": 98615.32,
+      "funding": 100000.0,
+      "nav": 0.9861532000000001,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-08": {
+      "cash": 98615.32,
+      "units": 0.0,
+      "mark": 9.1,
+      "mark_date": "2024-01-08",
+      "receivable": 0,
+      "equity": 98615.32,
+      "funding": 100000.0,
+      "nav": 0.9861532000000001,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     },
+     {
+      "date": "2024-01-03",
+      "kind": "dividend_recorded",
+      "symbol": "X",
+      "event_id": "D1",
+      "shares": 0.0,
+      "position_id": null
+     },
+     {
+      "date": "2024-01-04",
+      "kind": "dividend_receivable",
+      "symbol": "X",
+      "event_id": "D1",
+      "amount": 0.0,
+      "entitled_shares": 0.0,
+      "position_id": null
+     },
+     {
+      "date": "2024-01-08",
+      "kind": "dividend_paid",
+      "symbol": "X",
+      "event_id": "D1",
+      "amount": 0.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C06c",
+   "boundary": "B06",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-04",
+      "side": "buy",
+      "shares": 3500,
+      "price": 9.5,
+      "notional": 33250.0,
+      "fee": 33.25,
+      "risk_budget": 1000.0
+     }
+    ],
+    "orders": {
+     "c1": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-04",
+      "attempts": [
+       [
+        "2024-01-04",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-04",
+      "stop": 9.214999999999998,
+      "target": 10.45
+     }
+    },
+    "sells": [],
+    "positions": [
+     {
+      "stop": 9.214999999999998,
+      "target": 10.45,
+      "shares": 3500.0,
+      "div_accrued": 0.0,
+      "div_paid": 0.0,
+      "net_pnl": -33.25,
+      "closed": false,
+      "exit_date": null,
+      "market_value": 33250.0,
+      "level_actions": [
+       "D1"
+      ]
+     }
+    ],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 66716.75,
+      "units": 3500.0,
+      "mark": 9.5,
+      "mark_date": "2024-01-04",
+      "receivable": 0.0,
+      "equity": 99966.75,
+      "funding": 100000.0,
+      "nav": 0.9996675,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-05": {
+      "cash": 66716.75,
+      "units": 3500.0,
+      "mark": 9.5,
+      "mark_date": "2024-01-05",
+      "receivable": 0.0,
+      "equity": 99966.75,
+      "funding": 100000.0,
+      "nav": 0.9996675,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-06": {
+      "cash": 66716.75,
+      "units": 3500.0,
+      "mark": 9.5,
+      "mark_date": "2024-01-05",
+      "receivable": 0.0,
+      "equity": 99966.75,
+      "funding": 100000.0,
+      "nav": 0.9996675,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-07": {
+      "cash": 66716.75,
+      "units": 3500.0,
+      "mark": 9.5,
+      "mark_date": "2024-01-05",
+      "receivable": 0.0,
+      "equity": 99966.75,
+      "funding": 100000.0,
+      "nav": 0.9996675,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-08": {
+      "cash": 66716.75,
+      "units": 3500.0,
+      "mark": 9.5,
+      "mark_date": "2024-01-08",
+      "receivable": 0,
+      "equity": 99966.75,
+      "funding": 100000.0,
+      "nav": 0.9996675,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     },
+     {
+      "date": "2024-01-03",
+      "kind": "dividend_recorded",
+      "symbol": "X",
+      "event_id": "D1",
+      "shares": 0.0,
+      "position_id": null
+     },
+     {
+      "date": "2024-01-04",
+      "kind": "dividend_receivable",
+      "symbol": "X",
+      "event_id": "D1",
+      "amount": 0.0,
+      "entitled_shares": 0.0,
+      "position_id": null
+     },
+     {
+      "date": "2024-01-08",
+      "kind": "dividend_paid",
+      "symbol": "X",
+      "event_id": "D1",
+      "amount": 0.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C06d_T",
+   "boundary": "B06",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-02",
+      "side": "buy",
+      "shares": 3300,
+      "price": 10.0,
+      "notional": 33000.0,
+      "fee": 33.0,
+      "risk_budget": 1000.0
+     }
+    ],
+    "orders": {
+     "c1": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-02",
+      "attempts": [
+       [
+        "2024-01-02",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-02",
+      "stop": 9.7,
+      "target": 11.0
+     }
+    },
+    "sells": [],
+    "positions": [
+     {
+      "stop": 9.214999999999998,
+      "target": 10.45,
+      "shares": 3300.0,
+      "div_accrued": 1650.0,
+      "div_paid": 1650.0,
+      "net_pnl": -33.0,
+      "closed": false,
+      "exit_date": null,
+      "market_value": 31350.0,
+      "level_actions": [
+       "D3"
+      ]
+     }
+    ],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-05": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-06": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-07": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-08": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.5,
+      "mark_date": "2024-01-05",
+      "receivable": 1650.0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-09": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.5,
+      "mark_date": "2024-01-09",
+      "receivable": 1650.0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-10": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.5,
+      "mark_date": "2024-01-10",
+      "receivable": 1650.0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-11": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.5,
+      "mark_date": "2024-01-11",
+      "receivable": 1650.0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-12": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.5,
+      "mark_date": "2024-01-12",
+      "receivable": 1650.0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-13": {
+      "cash": 68617.0,
+      "units": 3300.0,
+      "mark": 9.5,
+      "mark_date": "2024-01-12",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-14": {
+      "cash": 68617.0,
+      "units": 3300.0,
+      "mark": 9.5,
+      "mark_date": "2024-01-12",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-15": {
+      "cash": 68617.0,
+      "units": 3300.0,
+      "mark": 9.5,
+      "mark_date": "2024-01-15",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     },
+     {
+      "date": "2024-01-05",
+      "kind": "dividend_recorded",
+      "symbol": "X",
+      "event_id": "D3",
+      "shares": 3300.0,
+      "position_id": "A20E-X-T1"
+     },
+     {
+      "date": "2024-01-08",
+      "kind": "dividend_receivable",
+      "symbol": "X",
+      "event_id": "D3",
+      "amount": 1650.0,
+      "entitled_shares": 3300.0,
+      "position_id": "A20E-X-T1"
+     },
+     {
+      "date": "2024-01-13",
+      "kind": "dividend_paid",
+      "symbol": "X",
+      "event_id": "D3",
+      "amount": 1650.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C06d_F",
+   "boundary": "B06",
+   "engine": "f12_hold",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-01",
+      "side": "buy",
+      "shares": 9900.0,
+      "price": 10.0,
+      "notional": 99000.0,
+      "fee": 99.0
+     }
+    ],
+    "orders": {},
+    "sells": [],
+    "positions": [],
+    "daily": {
+     "2024-01-01": {
+      "cash": 901.0,
+      "units": 9900.0,
+      "mark": 10.0,
+      "receivable": 0.0,
+      "equity": 99901.0,
+      "mark_age_days": 0
+     },
+     "2024-01-02": {
+      "cash": 901.0,
+      "units": 9900.0,
+      "mark": 10.0,
+      "receivable": 0.0,
+      "equity": 99901.0,
+      "mark_age_days": 0
+     },
+     "2024-01-03": {
+      "cash": 901.0,
+      "units": 9900.0,
+      "mark": 10.0,
+      "receivable": 0.0,
+      "equity": 99901.0,
+      "mark_age_days": 0
+     },
+     "2024-01-04": {
+      "cash": 901.0,
+      "units": 9900.0,
+      "mark": 10.0,
+      "receivable": 0.0,
+      "equity": 99901.0,
+      "mark_age_days": 0
+     },
+     "2024-01-05": {
+      "cash": 901.0,
+      "units": 9900.0,
+      "mark": 10.0,
+      "receivable": 0.0,
+      "equity": 99901.0,
+      "mark_age_days": 0
+     },
+     "2024-01-06": {
+      "cash": 901.0,
+      "units": 9900.0,
+      "mark": 10.0,
+      "receivable": 0.0,
+      "equity": 99901.0,
+      "mark_age_days": 1
+     },
+     "2024-01-07": {
+      "cash": 901.0,
+      "units": 9900.0,
+      "mark": 10.0,
+      "receivable": 0.0,
+      "equity": 99901.0,
+      "mark_age_days": 2
+     },
+     "2024-01-08": {
+      "cash": 901.0,
+      "units": 9900.0,
+      "mark": 10.0,
+      "receivable": 4950.0,
+      "equity": 104851.0,
+      "mark_age_days": 3
+     },
+     "2024-01-09": {
+      "cash": 901.0,
+      "units": 9900.0,
+      "mark": 9.5,
+      "receivable": 4950.0,
+      "equity": 99901.0,
+      "mark_age_days": 0
+     },
+     "2024-01-10": {
+      "cash": 901.0,
+      "units": 9900.0,
+      "mark": 9.5,
+      "receivable": 4950.0,
+      "equity": 99901.0,
+      "mark_age_days": 0
+     },
+     "2024-01-11": {
+      "cash": 901.0,
+      "units": 9900.0,
+      "mark": 9.5,
+      "receivable": 4950.0,
+      "equity": 99901.0,
+      "mark_age_days": 0
+     },
+     "2024-01-12": {
+      "cash": 901.0,
+      "units": 9900.0,
+      "mark": 9.5,
+      "receivable": 4950.0,
+      "equity": 99901.0,
+      "mark_age_days": 0
+     },
+     "2024-01-13": {
+      "cash": 5851.0,
+      "units": 9900.0,
+      "mark": 9.5,
+      "receivable": 0.0,
+      "equity": 99901.0,
+      "mark_age_days": 1
+     },
+     "2024-01-14": {
+      "cash": 5851.0,
+      "units": 9900.0,
+      "mark": 9.5,
+      "receivable": 0.0,
+      "equity": 99901.0,
+      "mark_age_days": 2
+     },
+     "2024-01-15": {
+      "cash": 5851.0,
+      "units": 9900.0,
+      "mark": 9.5,
+      "receivable": 0.0,
+      "equity": 99901.0,
+      "mark_age_days": 0
+     }
+    },
+    "rejected": [],
+    "summary": {
+     "account_id": "t6-C06d_F",
+     "symbol": "X",
+     "method": "hold",
+     "fee_per_side": 0.001,
+     "initial_cash": 100000.0,
+     "final_equity": 99901.0,
+     "net_gain": -99.0,
+     "total_return": -0.0009900000000000464,
+     "final_cash": 5851.0,
+     "final_receivable": 0.0,
+     "final_units": 9900.0,
+     "terminal_market_value": 94050.0,
+     "fees": 99.0,
+     "dividends_received": 4950.0,
+     "buys": 1,
+     "sells": 0,
+     "cash_only_days": 0,
+     "max_drawdown": -0.04720985016833412,
+     "unrecovered_drawdowns": 1,
+     "conditional_product_qualification": true
+    }
+   }
+  },
+  {
+   "id": "C07a",
+   "boundary": "B07",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-02",
+      "side": "buy",
+      "shares": 3300,
+      "price": 10.0,
+      "notional": 33000.0,
+      "fee": 33.0,
+      "risk_budget": 1000.0
+     },
+     {
+      "date": "2024-01-05",
+      "side": "sell",
+      "shares": 3300.0,
+      "price": 9.1,
+      "notional": 30030.0,
+      "fee": 30.03,
+      "risk_budget": null
+     },
+     {
+      "date": "2024-01-08",
+      "side": "buy",
+      "shares": 10500,
+      "price": 9.2,
+      "notional": 96599.99999999999,
+      "fee": 96.6,
+      "risk_budget": 986.1697
+     }
+    ],
+    "orders": {
+     "c1": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-02",
+      "attempts": [
+       [
+        "2024-01-02",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-02",
+      "stop": 9.7,
+      "target": 11.0
+     },
+     "c2": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-08",
+      "attempts": [
+       [
+        "2024-01-08",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-08",
+      "stop": 9.19,
+      "target": 9.25
+     }
+    },
+    "sells": [
+     {
+      "status": "filled",
+      "reason": "structure_stop",
+      "planned_date": null,
+      "attempts": [
+       [
+        "2024-01-05",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-05",
+      "stop": null,
+      "target": null
+     }
+    ],
+    "positions": [
+     {
+      "stop": 9.214999999999998,
+      "target": 10.45,
+      "shares": 0.0,
+      "div_accrued": 1650.0,
+      "div_paid": 1650.0,
+      "net_pnl": -1383.03,
+      "closed": true,
+      "exit_date": "2024-01-05",
+      "market_value": 0.0,
+      "level_actions": [
+       "D2"
+      ]
+     },
+     {
+      "stop": 9.19,
+      "target": 9.25,
+      "shares": 10500.0,
+      "div_accrued": 0.0,
+      "div_paid": 0.0,
+      "net_pnl": -96.6,
+      "closed": false,
+      "exit_date": null,
+      "market_value": 96599.99999999999,
+      "level_actions": []
+     }
+    ],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.1,
+      "mark_date": "2024-01-04",
+      "receivable": 1650.0,
+      "equity": 98647.0,
+      "funding": 100000.0,
+      "nav": 0.98647,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-05": {
+      "cash": 96966.97,
+      "units": 0.0,
+      "mark": 9.2,
+      "mark_date": "2024-01-05",
+      "receivable": 1650.0,
+      "equity": 98616.97,
+      "funding": 100000.0,
+      "nav": 0.9861697,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-06": {
+      "cash": 96966.97,
+      "units": 0.0,
+      "mark": 9.2,
+      "mark_date": "2024-01-05",
+      "receivable": 1650.0,
+      "equity": 98616.97,
+      "funding": 100000.0,
+      "nav": 0.9861697,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-07": {
+      "cash": 96966.97,
+      "units": 0.0,
+      "mark": 9.2,
+      "mark_date": "2024-01-05",
+      "receivable": 1650.0,
+      "equity": 98616.97,
+      "funding": 100000.0,
+      "nav": 0.9861697,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-08": {
+      "cash": 270.3700000000099,
+      "units": 10500.0,
+      "mark": 9.2,
+      "mark_date": "2024-01-08",
+      "receivable": 1650.0,
+      "equity": 98520.37,
+      "funding": 100000.0,
+      "nav": 0.9852036999999999,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-09": {
+      "cash": 270.3700000000099,
+      "units": 10500.0,
+      "mark": 9.2,
+      "mark_date": "2024-01-09",
+      "receivable": 1650.0,
+      "equity": 98520.37,
+      "funding": 100000.0,
+      "nav": 0.9852036999999999,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-10": {
+      "cash": 1920.37000000001,
+      "units": 10500.0,
+      "mark": 9.2,
+      "mark_date": "2024-01-10",
+      "receivable": 0,
+      "equity": 98520.37,
+      "funding": 100000.0,
+      "nav": 0.9852036999999999,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     },
+     {
+      "date": "2024-01-03",
+      "kind": "dividend_recorded",
+      "symbol": "X",
+      "event_id": "D2",
+      "shares": 3300.0,
+      "position_id": "A20E-X-T1"
+     },
+     {
+      "date": "2024-01-04",
+      "kind": "dividend_receivable",
+      "symbol": "X",
+      "event_id": "D2",
+      "amount": 1650.0,
+      "entitled_shares": 3300.0,
+      "position_id": "A20E-X-T1"
+     },
+     {
+      "date": "2024-01-10",
+      "kind": "dividend_paid",
+      "symbol": "X",
+      "event_id": "D2",
+      "amount": 1650.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C08a",
+   "boundary": "B08",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-02",
+      "side": "buy",
+      "shares": 3300,
+      "price": 10.0,
+      "notional": 33000.0,
+      "fee": 33.0,
+      "risk_budget": 1000.0
+     }
+    ],
+    "orders": {
+     "c1": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-02",
+      "attempts": [
+       [
+        "2024-01-02",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-02",
+      "stop": 9.7,
+      "target": 11.0
+     }
+    },
+    "sells": [],
+    "positions": [
+     {
+      "stop": 1.94,
+      "target": 2.2,
+      "shares": 16500.0,
+      "div_accrued": 0.0,
+      "div_paid": 0.0,
+      "net_pnl": -33.0,
+      "closed": false,
+      "exit_date": null,
+      "market_value": 33000.0,
+      "level_actions": [
+       "S1"
+      ]
+     }
+    ],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 66967.0,
+      "units": 16500.0,
+      "mark": 2.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-05": {
+      "cash": 66967.0,
+      "units": 16500.0,
+      "mark": 2.0,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-06": {
+      "cash": 66967.0,
+      "units": 16500.0,
+      "mark": 2.0,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-07": {
+      "cash": 66967.0,
+      "units": 16500.0,
+      "mark": 2.0,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-08": {
+      "cash": 66967.0,
+      "units": 16500.0,
+      "mark": 2.0,
+      "mark_date": "2024-01-08",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     },
+     {
+      "date": "2024-01-04",
+      "kind": "split",
+      "symbol": "X",
+      "event_id": "S1",
+      "old_shares": 3300.0,
+      "new_shares": 16500.0,
+      "factor": 0.2,
+      "amount": 0.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C08b_misdated",
+   "boundary": "B08",
+   "engine": "technical",
+   "used_engine_actions_override": true,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-02",
+      "side": "buy",
+      "shares": 3300,
+      "price": 10.0,
+      "notional": 33000.0,
+      "fee": 33.0,
+      "risk_budget": 1000.0
+     }
+    ],
+    "orders": {
+     "c1": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-02",
+      "attempts": [
+       [
+        "2024-01-02",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-02",
+      "stop": 9.7,
+      "target": 11.0
+     }
+    },
+    "sells": [],
+    "positions": [
+     {
+      "stop": 1.94,
+      "target": 2.2,
+      "shares": 16500.0,
+      "div_accrued": 0.0,
+      "div_paid": 0.0,
+      "net_pnl": 297.0,
+      "closed": false,
+      "exit_date": null,
+      "market_value": 33330.0,
+      "level_actions": [
+       "S1"
+      ]
+     }
+    ],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 66967.0,
+      "units": 16500.0,
+      "mark": 10.1,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 233617.0,
+      "funding": 100000.0,
+      "nav": 2.33617,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-05": {
+      "cash": 66967.0,
+      "units": 16500.0,
+      "mark": 2.02,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 100297.0,
+      "funding": 100000.0,
+      "nav": 1.00297,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-06": {
+      "cash": 66967.0,
+      "units": 16500.0,
+      "mark": 2.02,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 100297.0,
+      "funding": 100000.0,
+      "nav": 1.00297,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-07": {
+      "cash": 66967.0,
+      "units": 16500.0,
+      "mark": 2.02,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 100297.0,
+      "funding": 100000.0,
+      "nav": 1.00297,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-08": {
+      "cash": 66967.0,
+      "units": 16500.0,
+      "mark": 2.02,
+      "mark_date": "2024-01-08",
+      "receivable": 0,
+      "equity": 100297.0,
+      "funding": 100000.0,
+      "nav": 1.00297,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     },
+     {
+      "date": "2024-01-04",
+      "kind": "split",
+      "symbol": "X",
+      "event_id": "S1",
+      "old_shares": 3300.0,
+      "new_shares": 16500.0,
+      "factor": 0.2,
+      "amount": 0.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C08b_nextday",
+   "boundary": "B08",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-02",
+      "side": "buy",
+      "shares": 3300,
+      "price": 10.0,
+      "notional": 33000.0,
+      "fee": 33.0,
+      "risk_budget": 1000.0
+     }
+    ],
+    "orders": {
+     "c1": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-02",
+      "attempts": [
+       [
+        "2024-01-02",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-02",
+      "stop": 9.7,
+      "target": 11.0
+     }
+    },
+    "sells": [],
+    "positions": [
+     {
+      "stop": 1.94,
+      "target": 2.2,
+      "shares": 16500.0,
+      "div_accrued": 0.0,
+      "div_paid": 0.0,
+      "net_pnl": 297.0,
+      "closed": false,
+      "exit_date": null,
+      "market_value": 33330.0,
+      "level_actions": [
+       "S1"
+      ]
+     }
+    ],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.1,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 100297.0,
+      "funding": 100000.0,
+      "nav": 1.00297,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-05": {
+      "cash": 66967.0,
+      "units": 16500.0,
+      "mark": 2.02,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 100297.0,
+      "funding": 100000.0,
+      "nav": 1.00297,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-06": {
+      "cash": 66967.0,
+      "units": 16500.0,
+      "mark": 2.02,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 100297.0,
+      "funding": 100000.0,
+      "nav": 1.00297,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-07": {
+      "cash": 66967.0,
+      "units": 16500.0,
+      "mark": 2.02,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 100297.0,
+      "funding": 100000.0,
+      "nav": 1.00297,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-08": {
+      "cash": 66967.0,
+      "units": 16500.0,
+      "mark": 2.02,
+      "mark_date": "2024-01-08",
+      "receivable": 0,
+      "equity": 100297.0,
+      "funding": 100000.0,
+      "nav": 1.00297,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     },
+     {
+      "date": "2024-01-05",
+      "kind": "split",
+      "symbol": "X",
+      "event_id": "S1",
+      "old_shares": 3300.0,
+      "new_shares": 16500.0,
+      "factor": 0.2,
+      "amount": 0.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C08c",
+   "boundary": "B08",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-02",
+      "side": "buy",
+      "shares": 3300,
+      "price": 10.0,
+      "notional": 33000.0,
+      "fee": 33.0,
+      "risk_budget": 1000.0
+     }
+    ],
+    "orders": {
+     "c1": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-02",
+      "attempts": [
+       [
+        "2024-01-02",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-02",
+      "stop": 9.7,
+      "target": 11.0
+     }
+    },
+    "sells": [],
+    "positions": [
+     {
+      "stop": 8.468731174534438,
+      "target": 9.603715764935961,
+      "shares": 3779.787,
+      "div_accrued": 0.0,
+      "div_paid": 0.0,
+      "net_pnl": -31.67970300000161,
+      "closed": false,
+      "exit_date": null,
+      "market_value": 33001.320297,
+      "level_actions": [
+       "S3"
+      ]
+     }
+    ],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 66967.0,
+      "units": 3779.787,
+      "mark": 8.730650695396328,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-05": {
+      "cash": 66967.0,
+      "units": 3779.787,
+      "mark": 8.731,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 99968.320297,
+      "funding": 100000.0,
+      "nav": 0.99968320297,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-06": {
+      "cash": 66967.0,
+      "units": 3779.787,
+      "mark": 8.731,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 99968.320297,
+      "funding": 100000.0,
+      "nav": 0.99968320297,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-07": {
+      "cash": 66967.0,
+      "units": 3779.787,
+      "mark": 8.731,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 99968.320297,
+      "funding": 100000.0,
+      "nav": 0.99968320297,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-08": {
+      "cash": 66967.0,
+      "units": 3779.787,
+      "mark": 8.731,
+      "mark_date": "2024-01-08",
+      "receivable": 0,
+      "equity": 99968.320297,
+      "funding": 100000.0,
+      "nav": 0.99968320297,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     },
+     {
+      "date": "2024-01-04",
+      "kind": "split",
+      "symbol": "X",
+      "event_id": "S3",
+      "old_shares": 3300.0,
+      "new_shares": 3779.787,
+      "factor": 0.8730650695396328,
+      "amount": 0.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C08d",
+   "boundary": "B08",
+   "engine": "f12_hold",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-01",
+      "side": "buy",
+      "shares": 9900.0,
+      "price": 10.0,
+      "notional": 99000.0,
+      "fee": 99.0
+     }
+    ],
+    "orders": {},
+    "sells": [],
+    "positions": [],
+    "daily": {
+     "2024-01-01": {
+      "cash": 901.0,
+      "units": 9900.0,
+      "mark": 10.0,
+      "receivable": 0.0,
+      "equity": 99901.0,
+      "mark_age_days": 0
+     },
+     "2024-01-02": {
+      "cash": 901.0,
+      "units": 9900.0,
+      "mark": 10.0,
+      "receivable": 0.0,
+      "equity": 99901.0,
+      "mark_age_days": 0
+     },
+     "2024-01-03": {
+      "cash": 901.0,
+      "units": 9900.0,
+      "mark": 10.0,
+      "receivable": 0.0,
+      "equity": 99901.0,
+      "mark_age_days": 0
+     },
+     "2024-01-04": {
+      "cash": 901.0,
+      "units": 49500.0,
+      "mark": 10.0,
+      "receivable": 0.0,
+      "equity": 495901.0,
+      "mark_age_days": 1
+     },
+     "2024-01-05": {
+      "cash": 901.0,
+      "units": 49500.0,
+      "mark": 2.0,
+      "receivable": 0.0,
+      "equity": 99901.0,
+      "mark_age_days": 0
+     },
+     "2024-01-06": {
+      "cash": 901.0,
+      "units": 49500.0,
+      "mark": 2.0,
+      "receivable": 0.0,
+      "equity": 99901.0,
+      "mark_age_days": 1
+     },
+     "2024-01-07": {
+      "cash": 901.0,
+      "units": 49500.0,
+      "mark": 2.0,
+      "receivable": 0.0,
+      "equity": 99901.0,
+      "mark_age_days": 2
+     },
+     "2024-01-08": {
+      "cash": 901.0,
+      "units": 49500.0,
+      "mark": 2.0,
+      "receivable": 0.0,
+      "equity": 99901.0,
+      "mark_age_days": 0
+     }
+    },
+    "rejected": [],
+    "summary": {
+     "account_id": "t6-C08d",
+     "symbol": "X",
+     "method": "hold",
+     "fee_per_side": 0.001,
+     "initial_cash": 100000.0,
+     "final_equity": 99901.0,
+     "net_gain": -99.0,
+     "total_return": -0.0009900000000000464,
+     "final_cash": 901.0,
+     "final_receivable": 0.0,
+     "final_units": 49500.0,
+     "terminal_market_value": 99000.0,
+     "fees": 99.0,
+     "dividends_received": 0.0,
+     "buys": 1,
+     "sells": 0,
+     "cash_only_days": 0,
+     "max_drawdown": -0.7985464840764588,
+     "unrecovered_drawdowns": 1,
+     "conditional_product_qualification": true
+    }
+   }
+  },
+  {
+   "id": "C09a",
+   "boundary": "B09",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-02",
+      "side": "buy",
+      "shares": 3300,
+      "price": 10.0,
+      "notional": 33000.0,
+      "fee": 33.0,
+      "risk_budget": 1000.0
+     }
+    ],
+    "orders": {
+     "c1": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-02",
+      "attempts": [
+       [
+        "2024-01-02",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-02",
+      "stop": 9.7,
+      "target": 11.0
+     }
+    },
+    "sells": [],
+    "positions": [
+     {
+      "stop": 9.224509803921567,
+      "target": 10.46078431372549,
+      "shares": 3300.0,
+      "div_accrued": 1650.0,
+      "div_paid": 0.0,
+      "net_pnl": -692.9999999999964,
+      "closed": false,
+      "exit_date": null,
+      "market_value": 30690.000000000004,
+      "level_actions": [
+       "D4"
+      ]
+     }
+    ],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.2,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 100627.0,
+      "funding": 100000.0,
+      "nav": 1.00627,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.3,
+      "mark_date": "2024-01-04",
+      "receivable": 1650.0,
+      "equity": 99307.0,
+      "funding": 100000.0,
+      "nav": 0.99307,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-05": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.3,
+      "mark_date": "2024-01-05",
+      "receivable": 1650.0,
+      "equity": 99307.0,
+      "funding": 100000.0,
+      "nav": 0.99307,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     },
+     {
+      "date": "2024-01-03",
+      "kind": "dividend_recorded",
+      "symbol": "X",
+      "event_id": "D4",
+      "shares": 3300.0,
+      "position_id": "A20E-X-T1"
+     },
+     {
+      "date": "2024-01-04",
+      "kind": "dividend_receivable",
+      "symbol": "X",
+      "event_id": "D4",
+      "amount": 1650.0,
+      "entitled_shares": 3300.0,
+      "position_id": "A20E-X-T1"
+     }
+    ]
+   }
+  },
+  {
+   "id": "C09b",
+   "boundary": "B09",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-08",
+      "side": "buy",
+      "shares": 5200,
+      "price": 1.9,
+      "notional": 9880.0,
+      "fee": 9.88,
+      "risk_budget": 1000.0
+     }
+    ],
+    "orders": {
+     "c1": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-08",
+      "attempts": [
+       [
+        "2024-01-08",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-08",
+      "stop": 1.71,
+      "target": 2.565
+     }
+    },
+    "sells": [],
+    "positions": [
+     {
+      "stop": 1.71,
+      "target": 2.565,
+      "shares": 5200.0,
+      "div_accrued": 0.0,
+      "div_paid": 0.0,
+      "net_pnl": -9.88,
+      "closed": false,
+      "exit_date": null,
+      "market_value": 9880.0,
+      "level_actions": [
+       "S2",
+       "D5"
+      ]
+     }
+    ],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 2.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-05": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 1.9,
+      "mark_date": "2024-01-03",
+      "receivable": 0.0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-06": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 1.9,
+      "mark_date": "2024-01-03",
+      "receivable": 0.0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-07": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 1.9,
+      "mark_date": "2024-01-03",
+      "receivable": 0.0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-08": {
+      "cash": 90110.12,
+      "units": 5200.0,
+      "mark": 1.9,
+      "mark_date": "2024-01-08",
+      "receivable": 0.0,
+      "equity": 99990.12,
+      "funding": 100000.0,
+      "nav": 0.9999011999999999,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-09": {
+      "cash": 90110.12,
+      "units": 5200.0,
+      "mark": 1.9,
+      "mark_date": "2024-01-09",
+      "receivable": 0.0,
+      "equity": 99990.12,
+      "funding": 100000.0,
+      "nav": 0.9999011999999999,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     },
+     {
+      "date": "2024-01-03",
+      "kind": "dividend_recorded",
+      "symbol": "X",
+      "event_id": "D5",
+      "shares": 0.0,
+      "position_id": null
+     },
+     {
+      "date": "2024-01-04",
+      "kind": "split",
+      "symbol": "X",
+      "event_id": "S2",
+      "old_shares": 0.0,
+      "new_shares": 0.0,
+      "factor": 0.2,
+      "amount": 0.0
+     },
+     {
+      "date": "2024-01-05",
+      "kind": "dividend_receivable",
+      "symbol": "X",
+      "event_id": "D5",
+      "amount": 0.0,
+      "entitled_shares": 0.0,
+      "position_id": null
+     }
+    ]
+   }
+  },
+  {
+   "id": "C10a",
+   "boundary": "B10,B12",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-03",
+      "side": "buy",
+      "shares": 3300,
+      "price": 10.0,
+      "notional": 33000.0,
+      "fee": 33.0,
+      "risk_budget": 1000.0
+     }
+    ],
+    "orders": {
+     "c1": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-03",
+      "attempts": [
+       [
+        "2024-01-03",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-03",
+      "stop": 9.7,
+      "target": 11.0
+     }
+    },
+    "sells": [
+     {
+      "status": "pending_at_end",
+      "reason": "structure_stop",
+      "planned_date": null,
+      "attempts": [
+       [
+        "2024-01-06",
+        "missing_quote"
+       ],
+       [
+        "2024-01-07",
+        "missing_quote"
+       ]
+      ],
+      "fill_date": null,
+      "stop": null,
+      "target": null
+     }
+    ],
+    "positions": [
+     {
+      "stop": 9.7,
+      "target": 11.0,
+      "shares": 3300.0,
+      "div_accrued": 0.0,
+      "div_paid": 0.0,
+      "net_pnl": -1188.0,
+      "closed": false,
+      "exit_date": null,
+      "market_value": 31845.0,
+      "level_actions": []
+     }
+    ],
+    "daily": {
+     "2024-01-01": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 100000.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 100000.0,
+      "funding": 100000.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 99967.0,
+      "funding": 100000.0,
+      "nav": 0.99967,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-05": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.65,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 98812.0,
+      "funding": 100000.0,
+      "nav": 0.98812,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-06": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.65,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 98812.0,
+      "funding": 100000.0,
+      "nav": 0.98812,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-07": {
+      "cash": 66967.0,
+      "units": 3300.0,
+      "mark": 9.65,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 98812.0,
+      "funding": 100000.0,
+      "nav": 0.98812,
+      "deposit": 0.0,
+      "stale": "X"
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 100000.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C11a",
+   "boundary": "B11",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [],
+    "orders": {},
+    "sells": [],
+    "positions": [],
+    "daily": {
+     "2024-01-01": {
+      "cash": 1250.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 1250.0,
+      "funding": 1250.0,
+      "nav": 1.0,
+      "deposit": 250.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 1250.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 1250.0,
+      "funding": 1250.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 1250.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 1250.0,
+      "funding": 1250.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 1250.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 1250.0,
+      "funding": 1250.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-05": {
+      "cash": 1250.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 1250.0,
+      "funding": 1250.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-06": {
+      "cash": 1250.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 1250.0,
+      "funding": 1250.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-07": {
+      "cash": 1250.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 1250.0,
+      "funding": 1250.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-08": {
+      "cash": 1500.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-08",
+      "receivable": 0,
+      "equity": 1500.0,
+      "funding": 1500.0,
+      "nav": 1.0,
+      "deposit": 250.0,
+      "stale": ""
+     },
+     "2024-01-09": {
+      "cash": 1500.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-09",
+      "receivable": 0,
+      "equity": 1500.0,
+      "funding": 1500.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-10": {
+      "cash": 1500.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-10",
+      "receivable": 0,
+      "equity": 1500.0,
+      "funding": 1500.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-11": {
+      "cash": 1500.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-11",
+      "receivable": 0,
+      "equity": 1500.0,
+      "funding": 1500.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-12": {
+      "cash": 1500.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-12",
+      "receivable": 0,
+      "equity": 1500.0,
+      "funding": 1500.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-13": {
+      "cash": 1500.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-12",
+      "receivable": 0,
+      "equity": 1500.0,
+      "funding": 1500.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-14": {
+      "cash": 1500.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-12",
+      "receivable": 0,
+      "equity": 1500.0,
+      "funding": 1500.0,
+      "nav": 1.0,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-15": {
+      "cash": 1750.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-15",
+      "receivable": 0,
+      "equity": 1750.0,
+      "funding": 1750.0,
+      "nav": 1.0,
+      "deposit": 250.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 1000.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "C11b",
+   "boundary": "B11",
+   "engine": "technical",
+   "used_engine_actions_override": false,
+   "result": {
+    "status": "ok",
+    "trades": [
+     {
+      "date": "2024-01-02",
+      "side": "buy",
+      "shares": 100,
+      "price": 10.0,
+      "notional": 1000.0,
+      "fee": 1.0,
+      "risk_budget": null
+     }
+    ],
+    "orders": {
+     "c1": {
+      "status": "filled",
+      "reason": "candidate_entry",
+      "planned_date": "2024-01-02",
+      "attempts": [
+       [
+        "2024-01-02",
+        "filled"
+       ]
+      ],
+      "fill_date": "2024-01-02",
+      "stop": 5.0,
+      "target": null
+     }
+    },
+    "sells": [],
+    "positions": [
+     {
+      "stop": 5.0,
+      "target": null,
+      "shares": 100.0,
+      "div_accrued": 0.0,
+      "div_paid": 0.0,
+      "net_pnl": 99.0,
+      "closed": false,
+      "exit_date": null,
+      "market_value": 1100.0,
+      "level_actions": []
+     }
+    ],
+    "daily": {
+     "2024-01-01": {
+      "cash": 1250.0,
+      "units": 0.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-01",
+      "receivable": 0,
+      "equity": 1250.0,
+      "funding": 1250.0,
+      "nav": 1.0,
+      "deposit": 250.0,
+      "stale": ""
+     },
+     "2024-01-02": {
+      "cash": 249.0,
+      "units": 100.0,
+      "mark": 10.0,
+      "mark_date": "2024-01-02",
+      "receivable": 0,
+      "equity": 1249.0,
+      "funding": 1250.0,
+      "nav": 0.9992,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-03": {
+      "cash": 249.0,
+      "units": 100.0,
+      "mark": 10.5,
+      "mark_date": "2024-01-03",
+      "receivable": 0,
+      "equity": 1299.0,
+      "funding": 1250.0,
+      "nav": 1.0392,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-04": {
+      "cash": 249.0,
+      "units": 100.0,
+      "mark": 11.0,
+      "mark_date": "2024-01-04",
+      "receivable": 0,
+      "equity": 1349.0,
+      "funding": 1250.0,
+      "nav": 1.0792,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-05": {
+      "cash": 249.0,
+      "units": 100.0,
+      "mark": 11.0,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 1349.0,
+      "funding": 1250.0,
+      "nav": 1.0792,
+      "deposit": 0.0,
+      "stale": ""
+     },
+     "2024-01-06": {
+      "cash": 249.0,
+      "units": 100.0,
+      "mark": 11.0,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 1349.0,
+      "funding": 1250.0,
+      "nav": 1.0792,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-07": {
+      "cash": 249.0,
+      "units": 100.0,
+      "mark": 11.0,
+      "mark_date": "2024-01-05",
+      "receivable": 0,
+      "equity": 1349.0,
+      "funding": 1250.0,
+      "nav": 1.0792,
+      "deposit": 0.0,
+      "stale": "X"
+     },
+     "2024-01-08": {
+      "cash": 499.0,
+      "units": 100.0,
+      "mark": 11.0,
+      "mark_date": "2024-01-08",
+      "receivable": 0,
+      "equity": 1599.0,
+      "funding": 1500.0,
+      "nav": 1.0792,
+      "deposit": 250.0,
+      "stale": ""
+     },
+     "2024-01-09": {
+      "cash": 499.0,
+      "units": 100.0,
+      "mark": 11.0,
+      "mark_date": "2024-01-09",
+      "receivable": 0,
+      "equity": 1599.0,
+      "funding": 1500.0,
+      "nav": 1.0792,
+      "deposit": 0.0,
+      "stale": ""
+     }
+    },
+    "events": [
+     {
+      "date": "2024-01-01",
+      "kind": "initial_deposit",
+      "symbol": "all",
+      "amount": 1000.0
+     }
+    ]
+   }
+  }
+ ]
+}

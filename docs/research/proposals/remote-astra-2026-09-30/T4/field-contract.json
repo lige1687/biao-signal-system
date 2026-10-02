@@ -1,0 +1,44 @@
+{
+  "schema_version": "multi-timeframe-timing-contract/0",
+  "status": "draft / not approved",
+  "inputs_injected": {
+    "exchange_session_ref": {"tz": "Asia/Shanghai", "sessions": [["09:30", "11:30"], ["13:00", "15:00"]],
+                             "hourly_bar_ends": ["10:30", "11:30", "14:00", "15:00"],
+                             "note": "half-days, special closures and changes over history must come from an official, versioned source"},
+    "calendar_ref": {"required": true, "fields": ["date", "status trading|closed|unknown", "exchange", "source", "publication_evidence_date"],
+                     "rule": "outside coverage = unknown; never fall back to weekday assumption for completion",
+                     "repository_status": "SZSE 2019-09..2026-06 official months; SSE not independently accepted"}
+  },
+  "price_item": {
+    "item": "string id, e.g. 1d:510300:2026-10-12",
+    "timeframe": "60m | 1d | 1w | 1M",
+    "bar_start": "ISO8601 with offset, exchange tz",
+    "bar_end": "ISO8601 with offset, exchange tz",
+    "complete_at": "1d = trading-day close; 1w = close of the calendar's last trading day of that week; 1M likewise; all-closed week has no bar; uncovered = null",
+    "is_complete_at_observation": "derived, never stored as a constant",
+    "source_available_at": "ISO8601 or null (null => timing_quality=lower_bound_only)",
+    "known_at": "max(complete_at, source_available_at)",
+    "revision_id": "v0 first release; later versions appended with revised_at",
+    "missing": "true when the feed is not connected or the bar is absent"
+  },
+  "decision": {
+    "depends_on": ["list of item ids (all timeframes used)"],
+    "decidable_at": "max(known_at of all items); any unknown => decision status unknown",
+    "status": "decidable | not_yet | unknown",
+    "timing_quality": "exact | lower_bound_only",
+    "versions_used": "item -> revision_id visible at observation time"
+  },
+  "execution_cadence": {
+    "daily_reference": {"source": "implementation §3.2", "evaluate_at": "decidable_at", "execute_at": "next trading day open"},
+    "intraday_after_hourly_confirmation": {"evaluate_at": "decidable_at of the hourly item", "execute_at": "first tradable moment after decidable_at within sessions",
+                                           "status": "research design only; no hourly data connected"},
+    "weekly_action": {"evaluate_at": "close of the last trading day of the week containing the signal",
+                      "rule": "re-check every condition with data known at evaluate_at; a signal that no longer holds is not executed",
+                      "execute_at": "next trading day open; unknown if outside calendar coverage"},
+    "month_end_action": {"evaluate_at": "close of the last trading day of the month", "rule": "same as weekly_action",
+                         "execute_at": "next trading day open"},
+    "not_in_scope": "estimating returns of delayed cadences"
+  },
+  "hourly_status": "not_connected: lower-timeframe confirmation must be reported as unknown, never as 'not confirmed' and never replaced by daily OHLC proxies",
+  "observed_at_rule": "must carry a timezone; naive datetimes rejected (production classify_a_share_bar currently assumes Shanghai)"
+}

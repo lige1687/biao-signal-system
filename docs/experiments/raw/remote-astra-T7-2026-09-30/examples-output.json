@@ -1,0 +1,103 @@
+{
+ "E1_same_opportunity_delayed": {
+  "paired": {
+   "id": "510300|ep1|g60|touch=t1",
+   "kind": "delayed_by_B",
+   "delta": -0.006824682,
+   "entry_gap": 0.006673022,
+   "stop_A": 100.3,
+   "stop_B": 100.2,
+   "R_A": 0.673913,
+   "R_B": 0.444444
+  },
+  "matches_hand_answer": true
+ },
+ "E2_opportunity_set_changes": {
+  "paired_delta": {
+   "P1|touch=t1": 0.04,
+   "P2|touch=t8": 0.0
+  },
+  "account_A": {
+   "final": 0.96,
+   "return": -0.04,
+   "taken": [
+    "P1|touch=t1"
+   ],
+   "blocked": [
+    "P2|touch=t8"
+   ]
+  },
+  "account_B": {
+   "final": 1.06,
+   "return": 0.06,
+   "taken": [
+    "P2|touch=t8"
+   ],
+   "blocked": []
+  },
+  "account_gap": 0.1,
+  "capital_reuse_part_not_condition_effect": 0.06,
+  "matches_hand_answer": true
+ },
+ "E3_adjacent_overlap": {
+  "clusters": {
+   "510300|g20|2025-03-03": 0,
+   "159915|g20|2025-03-04": 0,
+   "510300|g60|2025-03-05": 0,
+   "510300|g20|2025-09-01": 1
+  },
+  "cluster_values": [
+   0.012333333,
+   0.008
+  ],
+  "naive_sign_flip": {
+   "G": 4,
+   "observed_mean": 0.01125,
+   "share_as_extreme": 0.0625,
+   "smallest_attainable_share": 0.0625
+  },
+  "cluster_sign_flip": {
+   "G": 2,
+   "observed_mean": 0.010166667,
+   "share_as_extreme": 0.25,
+   "smallest_attainable_share": 0.25
+  },
+  "describe_clusters": {
+   "G": 2,
+   "positive": 2,
+   "negative": 0,
+   "mean": 0.010166667,
+   "median": 0.010166667,
+   "leave_one_cluster_out_mean_range": [
+    0.008,
+    0.012333333
+   ],
+   "largest_cluster_share_of_abs": 0.606557377,
+   "direction_flips_when_one_cluster_removed": false
+  },
+  "matches_hand_answer": true
+ },
+ "E4_single_extreme": {
+  "describe": {
+   "G": 6,
+   "positive": 5,
+   "negative": 1,
+   "mean": -0.026666667,
+   "median": 0.0175,
+   "leave_one_cluster_out_mean_range": [
+    -0.037,
+    0.018
+   ],
+   "largest_cluster_share_of_abs": 0.735294118,
+   "direction_flips_when_one_cluster_removed": true
+  },
+  "sign_flip": {
+   "G": 6,
+   "observed_mean": -0.026666667,
+   "share_as_extreme": 0.5,
+   "smallest_attainable_share": 0.015625
+  },
+  "matches_hand_answer": true
+ },
+ "_note": "人工合成例；不计费用；只证明比较方法按约定工作，不代表任何市场效果。"
+}

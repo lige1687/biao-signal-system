@@ -1,0 +1,1317 @@
+{
+ "_note": "人工答案与冻结引擎行为逐项对比；real_records 来自 real-scans.json（real_accounts.py）。",
+ "summary": {
+  "不一致": [
+   "C01a",
+   "C06d_F",
+   "C08d"
+  ],
+  "一致": [
+   "C01b",
+   "C02a",
+   "C02b",
+   "C03a",
+   "C04a",
+   "C04d",
+   "C05a",
+   "C06a",
+   "C06b",
+   "C06c",
+   "C06d_T",
+   "C07a",
+   "C08a",
+   "C08b_nextday",
+   "C09a",
+   "C10a",
+   "C11a",
+   "C11b"
+  ],
+  "研究假设局限": [
+   "C04b",
+   "C04c",
+   "C08b_misdated",
+   "C08c",
+   "C09b"
+  ],
+  "一致（保护在运行入口，引擎本身不拦）": [
+   "C05b"
+  ]
+ },
+ "per_boundary": {
+  "B01": {
+   "cases": {
+    "C01a": "不一致",
+    "C01b": "一致"
+   },
+   "real_records": "48账户496笔买入十进制重算份数，不同或落在取整临界的0笔；C01a的浮点少一手问题未在真实记录出现。"
+  },
+  "B02": {
+   "cases": {
+    "C02a": "一致",
+    "C02b": "一致"
+   },
+   "real_records": "A/C/D共46笔买入：现金先卡住26笔、1%风险先卡住20笔。"
+  },
+  "B03": {
+   "cases": {
+    "C03a": "一致"
+   },
+   "real_records": "同日既卖又买0次、买入当天或更早卖出0次、持仓重叠0次；因已有持仓拒绝1086次。"
+  },
+  "B04": {
+   "cases": {
+    "C04a": "一致",
+    "C04b": "研究假设局限",
+    "C04c": "研究假设局限",
+    "C04d": "一致"
+   },
+   "real_records": "48账户开盘受限未成交0次、期末未执行订单0个；首12账户开盘受限6次，全部正好在交易所涨跌停价，其中4次是开盘涨停时被挡住的卖出。全部1498笔真实成交没有一笔在涨跌停价或差一个价位。"
+  },
+  "B05": {
+   "cases": {
+    "C05a": "一致",
+    "C05b": "一致（保护在运行入口，引擎本身不拦）"
+   },
+   "real_records": "2021-02-08在两份行情中都没有报价（技术False、首12False）；3个跨停牌持仓按02-05收盘估值，02-09按当日收盘估值，没有开盘成交尝试。"
+  },
+  "B06": {
+   "cases": {
+    "C06a": "一致",
+    "C06b": "一致",
+    "C06c": "一致",
+    "C06d_T": "一致",
+    "C06d_F": "不一致"
+   },
+   "real_records": "研究期除息日全部有报价（无报价除息日：{'sh510300': [], 'sz159915': []}）；288条账户×分红事件的权利份数与金额不同0条。首12程序的无报价除息问题未在真实记录出现。"
+  },
+  "B07": {
+   "cases": {
+    "C07a": "一致"
+   },
+   "real_records": "除息后、到账前卖出的持仓4段，分红均记回原持仓。"
+  },
+  "B08": {
+   "cases": {
+    "C08a": "一致",
+    "C08b_misdated": "研究假设局限",
+    "C08b_nextday": "一致",
+    "C08c": "研究假设局限",
+    "C08d": "不一致"
+   },
+   "real_records": "510300、159915研究期内没有已记录拆分，真实记录不能覆盖；两产品拆分正式覆盖不完整。"
+  },
+  "B09": {
+   "cases": {
+    "C09a": "一致",
+    "C09b": "研究假设局限"
+   },
+   "real_records": "34段带行动换算的持仓独立重算失效位/目标，不同0段。"
+  },
+  "B10": {
+   "cases": {
+    "C10a": "一致"
+   },
+   "real_records": "期末仍持有10个账户各1段；已卖出+未卖出=总盈亏，最大差1.99182E-10元；期末应收全部为0。"
+  },
+  "B11": {
+   "cases": {
+    "C11a": "一致",
+    "C11b": "一致"
+   },
+   "real_records": "48账户每日累计投入均为100000元、无追加（不符0户）。"
+  },
+  "B12": {
+   "cases": {
+    "C10a": "一致"
+   },
+   "real_records": "期末假想卖出费用另列，见 real-scans.json B10_B12_terminal；保存的期末财富都未扣这笔费用。"
+  }
+ },
+ "cases": [
+  {
+   "id": "C01a",
+   "boundary": "B01",
+   "engine": "technical",
+   "title": "现金恰好等于10手含费成本",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "trades.0.date": {
+     "hand": "2024-01-02",
+     "frozen": "2024-01-02",
+     "ok": true
+    },
+    "trades.0.shares": {
+     "hand": "10000",
+     "frozen": 9900,
+     "ok": false
+    },
+    "trades.0.fee": {
+     "hand": "20.71",
+     "frozen": 20.5029,
+     "ok": false
+    },
+    "daily.2024-01-02.cash": {
+     "hand": "0",
+     "frozen": 207.30709999999817,
+     "ok": false
+    },
+    "daily.2024-01-04.equity": {
+     "hand": "20710",
+     "frozen": 20710.2071,
+     "ok": false
+    }
+   },
+   "verdict": "不一致",
+   "explanation": "48账户引擎用二进制小数计算“现金÷(开盘价×(1+费率))÷100”再向下取整，现金恰好够整数手时会少算一手（应买10000份，实际9900份）。风险份数那一路加了1e-12的保护，现金那一路没有。",
+   "mismatched_fields": [
+    "trades.0.shares",
+    "trades.0.fee",
+    "daily.2024-01-02.cash",
+    "daily.2024-01-04.equity"
+   ]
+  },
+  {
+   "id": "C01b",
+   "boundary": "B01",
+   "engine": "technical",
+   "title": "1%计划风险定量与实际亏损（含买入当天收盘跌破）",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "trades.0.date": {
+     "hand": "2024-01-03",
+     "frozen": "2024-01-03",
+     "ok": true
+    },
+    "trades.0.shares": {
+     "hand": "3300",
+     "frozen": 3300,
+     "ok": true
+    },
+    "trades.0.fee": {
+     "hand": "33",
+     "frozen": 33.0,
+     "ok": true
+    },
+    "positions.0.budget": {
+     "hand": "1000",
+     "frozen": 1000.0,
+     "ok": true
+    },
+    "positions.0.planned_risk": {
+     "hand": "990",
+     "frozen": null,
+     "ok": null,
+     "note": "人工推导量，引擎不输出"
+    },
+    "trades.1.date": {
+     "hand": "2024-01-04",
+     "frozen": "2024-01-04",
+     "ok": true
+    },
+    "trades.1.fee": {
+     "hand": "31.68",
+     "frozen": 31.68,
+     "ok": true
+    },
+    "daily.2024-01-03.equity": {
+     "hand": "98812",
+     "frozen": 98812.0,
+     "ok": true
+    },
+    "daily.2024-01-05.equity": {
+     "hand": "98615.32",
+     "frozen": 98615.32,
+     "ok": true
+    },
+    "positions.0.net_pnl": {
+     "hand": "-1384.68",
+     "frozen": -1384.68,
+     "ok": true
+    }
+   },
+   "verdict": "一致",
+   "explanation": "冻结程序与手算答案逐项相同。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C02a",
+   "boundary": "B02",
+   "engine": "technical",
+   "title": "现金不够一手",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "orders.c1.status": {
+     "hand": "rejected",
+     "frozen": "rejected",
+     "ok": true
+    },
+    "orders.c1.reason": {
+     "hand": "insufficient_cash_or_lot",
+     "frozen": "insufficient_cash_or_lot",
+     "ok": true
+    },
+    "orders.c1.attempt_count": {
+     "hand": "1",
+     "frozen": 1,
+     "ok": true
+    },
+    "trade_count": {
+     "hand": "0",
+     "frozen": 0,
+     "ok": true
+    },
+    "daily.2024-01-05.cash": {
+     "hand": "500",
+     "frozen": 500.0,
+     "ok": true
+    }
+   },
+   "verdict": "一致",
+   "explanation": "冻结程序与手算答案逐项相同。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C02b",
+   "boundary": "B02",
+   "engine": "technical",
+   "title": "失效位很近：现金先于1%风险卡住数量",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "trades.0.shares": {
+     "hand": "9900",
+     "frozen": 9900,
+     "ok": true
+    },
+    "positions.0.risk_lots": {
+     "hand": "50000",
+     "frozen": null,
+     "ok": null,
+     "note": "人工推导量，引擎不输出"
+    },
+    "positions.0.cash_lots": {
+     "hand": "9900",
+     "frozen": null,
+     "ok": null,
+     "note": "人工推导量，引擎不输出"
+    },
+    "positions.0.planned_risk": {
+     "hand": "198",
+     "frozen": null,
+     "ok": null,
+     "note": "人工推导量，引擎不输出"
+    },
+    "daily.2024-01-05.equity": {
+     "hand": "99901",
+     "frozen": 99901.0,
+     "ok": true
+    }
+   },
+   "verdict": "一致",
+   "explanation": "冻结程序与手算答案逐项相同。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C03a",
+   "boundary": "B03",
+   "engine": "technical",
+   "title": "跌破当天的新机会被拒；卖出当天的新机会次日买入",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "orders.c2.status": {
+     "hand": "rejected",
+     "frozen": "rejected",
+     "ok": true
+    },
+    "orders.c2.reason": {
+     "hand": "position_held",
+     "frozen": "position_held",
+     "ok": true
+    },
+    "trades.1.date": {
+     "hand": "2024-01-05",
+     "frozen": "2024-01-05",
+     "ok": true
+    },
+    "trades.1.side": {
+     "hand": "sell",
+     "frozen": "sell",
+     "ok": true
+    },
+    "orders.c3.status": {
+     "hand": "filled",
+     "frozen": "filled",
+     "ok": true
+    },
+    "trades.2.date": {
+     "hand": "2024-01-08",
+     "frozen": "2024-01-08",
+     "ok": true
+    },
+    "trades.2.shares": {
+     "hand": "3200",
+     "frozen": 3200,
+     "ok": true
+    },
+    "daily.2024-01-09.cash": {
+     "hand": "67864.60",
+     "frozen": 67864.6,
+     "ok": true
+    },
+    "daily.2024-01-09.equity": {
+     "hand": "98584.60",
+     "frozen": 98584.6,
+     "ok": true
+    }
+   },
+   "verdict": "一致",
+   "explanation": "冻结程序与手算答案逐项相同。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C04a",
+   "boundary": "B04",
+   "engine": "technical",
+   "title": "计划买入日禁止开盘，作废不顺延",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "orders.c1.status": {
+     "hand": "rejected",
+     "frozen": "rejected",
+     "ok": true
+    },
+    "orders.c1.reason": {
+     "hand": "blocked",
+     "frozen": "blocked",
+     "ok": true
+    },
+    "orders.c1.attempt_count": {
+     "hand": "1",
+     "frozen": 1,
+     "ok": true
+    },
+    "trade_count": {
+     "hand": "0",
+     "frozen": 0,
+     "ok": true
+    },
+    "daily.2024-01-05.cash": {
+     "hand": "100000",
+     "frozen": 100000.0,
+     "ok": true
+    }
+   },
+   "verdict": "一致",
+   "explanation": "冻结程序与手算答案逐项相同。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C04b",
+   "boundary": "B04",
+   "engine": "technical",
+   "title": "开盘3.932比真实涨停价3.933低一个价位",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "orders.c1.status": {
+     "hand": "rejected",
+     "frozen": "rejected",
+     "ok": true
+    },
+    "orders.c1.reason": {
+     "hand": "open_limit",
+     "frozen": "open_limit",
+     "ok": true
+    },
+    "trade_count": {
+     "hand": "0",
+     "frozen": 0,
+     "ok": true
+    },
+    "calc.exchange_limit_up": {
+     "hand": "3.933",
+     "frozen": null,
+     "ok": null,
+     "note": "人工推导量，引擎不输出"
+    },
+    "calc.exchange_limit_down": {
+     "hand": "3.218",
+     "frozen": null,
+     "ok": null,
+     "note": "人工推导量，引擎不输出"
+    },
+    "calc.open_strictly_inside_exchange_limits": {
+     "hand": "true",
+     "frozen": null,
+     "ok": null,
+     "note": "人工推导量，引擎不输出"
+    },
+    "calc.shares_if_exchange_rule": {
+     "hand": "25400",
+     "frozen": null,
+     "ok": null,
+     "note": "人工推导量，引擎不输出"
+    }
+   },
+   "engine_matches_old_contract": true,
+   "verdict": "研究假设局限",
+   "explanation": "旧合同（IF第11行）的保守容差0.00051在“前收×10%”恰为半分位时，把比真实涨停价低一个价位的开盘也判为受限；真实规则下该价位可以报价成交。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C04c",
+   "boundary": "B04",
+   "engine": "technical",
+   "title": "开盘正好在跌停价时买入",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "orders.c1.status": {
+     "hand": "rejected",
+     "frozen": "rejected",
+     "ok": true
+    },
+    "orders.c1.reason": {
+     "hand": "open_limit",
+     "frozen": "open_limit",
+     "ok": true
+    },
+    "trade_count": {
+     "hand": "0",
+     "frozen": 0,
+     "ok": true
+    },
+    "calc.exchange_limit_down": {
+     "hand": "3.218",
+     "frozen": null,
+     "ok": null,
+     "note": "人工推导量，引擎不输出"
+    },
+    "calc.open_strictly_inside_exchange_limits": {
+     "hand": "false",
+     "frozen": null,
+     "ok": null,
+     "note": "人工推导量，引擎不输出"
+    }
+   },
+   "engine_matches_old_contract": true,
+   "verdict": "研究假设局限",
+   "explanation": "旧合同对涨跌停双向一律不成交；真实规则只禁止越过涨跌停价，跌停价买入（或涨停价卖出）在价格上允许，能否成交取决于盘口，日线无法判断。真实记录：首12的4个宽度账户在2024-10-08开盘涨停时卖出被挡、次日低价卖出，见 real-scans.json B04。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C04d",
+   "boundary": "B04",
+   "engine": "technical",
+   "title": "最后一个报价日收盘出现的新机会",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "orders.c1.status": {
+     "hand": "pending_at_end",
+     "frozen": "pending_at_end",
+     "ok": true
+    },
+    "orders.c1.attempt_count": {
+     "hand": "0",
+     "frozen": 0,
+     "ok": true
+    },
+    "trade_count": {
+     "hand": "0",
+     "frozen": 0,
+     "ok": true
+    },
+    "daily.2024-01-07.cash": {
+     "hand": "100000",
+     "frozen": 100000.0,
+     "ok": true
+    }
+   },
+   "verdict": "一致",
+   "explanation": "冻结程序与手算答案逐项相同。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C05a",
+   "boundary": "B05",
+   "engine": "technical",
+   "title": "待卖期间停牌一天、再禁止开盘一天",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "sell.0.fill_date": {
+     "hand": "2024-01-09",
+     "frozen": "2024-01-09",
+     "ok": true
+    },
+    "daily.2024-01-05.equity": {
+     "hand": "98647",
+     "frozen": 98647.0,
+     "ok": true
+    },
+    "daily.2024-01-05.mark_date": {
+     "hand": "2024-01-04",
+     "frozen": "2024-01-04",
+     "ok": true
+    },
+    "daily.2024-01-08.equity": {
+     "hand": "99637",
+     "frozen": 99637.0,
+     "ok": true
+    },
+    "daily.2024-01-10.equity": {
+     "hand": "99274.66",
+     "frozen": 99274.66,
+     "ok": true
+    }
+   },
+   "verdict": "一致",
+   "explanation": "冻结程序与手算答案逐项相同。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C05b",
+   "boundary": "B05",
+   "engine": "technical",
+   "title": "禁止收盘估值的日子却出现报价",
+   "hand_status": "stop",
+   "frozen_status": "ok",
+   "hand_stop_reason": "2024-01-05 有报价但禁止收盘估值：TP「资金、时点、未成交」要求先停下核口径，不静默使用",
+   "primary_checks": {
+    "status": {
+     "hand": "stop",
+     "frozen": "ok",
+     "ok": false
+    }
+   },
+   "secondary_label": "若不停止、只是不用这根收盘（首12程序的做法）",
+   "secondary_checks": {
+    "daily.2024-01-05.equity": {
+     "hand": "99967",
+     "frozen": 95017.0,
+     "ok": false
+    },
+    "daily.2024-01-09.equity": {
+     "hand": "99967",
+     "frozen": 99934.0,
+     "ok": false
+    },
+    "trade_count": {
+     "hand": "1",
+     "frozen": 2,
+     "ok": false
+    }
+   },
+   "verdict": "一致（保护在运行入口，引擎本身不拦）",
+   "explanation": "引擎本身没有“禁止收盘估值”输入，会用这根报价估值并触发卖出；旧协议要求停下核口径，冻结运行入口 run_accounts.py 第36行 `assert \"2021-02-08\" not in prices[\"sz159915\"]` 承担了这项保护。复用引擎时必须保留同类断言。",
+   "mismatched_fields": [
+    "status"
+   ]
+  },
+  {
+   "id": "C06a",
+   "boundary": "B06",
+   "engine": "technical",
+   "title": "登记日开盘买入：享有分红",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "trades.0.date": {
+     "hand": "2024-01-03",
+     "frozen": "2024-01-03",
+     "ok": true
+    },
+    "daily.2024-01-03.equity": {
+     "hand": "99967",
+     "frozen": 99967.0,
+     "ok": true
+    },
+    "daily.2024-01-04.equity": {
+     "hand": "99967",
+     "frozen": 99967.0,
+     "ok": true
+    },
+    "daily.2024-01-04.receivable": {
+     "hand": "1650",
+     "frozen": 1650.0,
+     "ok": true
+    },
+    "daily.2024-01-08.cash": {
+     "hand": "68617",
+     "frozen": 68617.0,
+     "ok": true
+    },
+    "daily.2024-01-08.receivable": {
+     "hand": "0",
+     "frozen": 0,
+     "ok": true
+    },
+    "positions.0.stop": {
+     "hand": "9.215",
+     "frozen": 9.214999999999998,
+     "ok": true
+    },
+    "positions.0.target": {
+     "hand": "10.45",
+     "frozen": 10.45,
+     "ok": true
+    },
+    "positions.0.div_accrued": {
+     "hand": "1650",
+     "frozen": 1650.0,
+     "ok": true
+    }
+   },
+   "verdict": "一致",
+   "explanation": "冻结程序与手算答案逐项相同。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C06b",
+   "boundary": "B06",
+   "engine": "technical",
+   "title": "登记日开盘卖出：不享有分红",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "trades.1.date": {
+     "hand": "2024-01-03",
+     "frozen": "2024-01-03",
+     "ok": true
+    },
+    "daily.2024-01-04.receivable": {
+     "hand": "0",
+     "frozen": 0.0,
+     "ok": true
+    },
+    "daily.2024-01-08.equity": {
+     "hand": "98615.32",
+     "frozen": 98615.32,
+     "ok": true
+    },
+    "positions.0.div_accrued": {
+     "hand": "0",
+     "frozen": 0.0,
+     "ok": true
+    }
+   },
+   "verdict": "一致",
+   "explanation": "冻结程序与手算答案逐项相同。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C06c",
+   "boundary": "B06",
+   "engine": "technical",
+   "title": "除息日开盘买入：不享有分红；跨除息的待买单换算",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "trades.0.date": {
+     "hand": "2024-01-04",
+     "frozen": "2024-01-04",
+     "ok": true
+    },
+    "trades.0.shares": {
+     "hand": "3500",
+     "frozen": 3500,
+     "ok": true
+    },
+    "positions.0.stop": {
+     "hand": "9.215",
+     "frozen": 9.214999999999998,
+     "ok": true
+    },
+    "positions.0.target": {
+     "hand": "10.45",
+     "frozen": 10.45,
+     "ok": true
+    },
+    "daily.2024-01-04.receivable": {
+     "hand": "0",
+     "frozen": 0.0,
+     "ok": true
+    },
+    "daily.2024-01-08.equity": {
+     "hand": "99966.75",
+     "frozen": 99966.75,
+     "ok": true
+    }
+   },
+   "verdict": "一致",
+   "explanation": "冻结程序与手算答案逐项相同。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C06d_T",
+   "boundary": "B06",
+   "engine": "technical",
+   "title": "除息日恰好无报价、到账日是周六（技术引擎）",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "daily.2024-01-05.equity": {
+     "hand": "99967",
+     "frozen": 99967.0,
+     "ok": true
+    },
+    "daily.2024-01-08.equity": {
+     "hand": "99967",
+     "frozen": 99967.0,
+     "ok": true
+    },
+    "daily.2024-01-08.receivable": {
+     "hand": "1650",
+     "frozen": 1650.0,
+     "ok": true
+    },
+    "daily.2024-01-08.mark": {
+     "hand": "9.5",
+     "frozen": 9.5,
+     "ok": true
+    },
+    "daily.2024-01-13.cash": {
+     "hand": "68617",
+     "frozen": 68617.0,
+     "ok": true
+    },
+    "daily.2024-01-15.equity": {
+     "hand": "99967",
+     "frozen": 99967.0,
+     "ok": true
+    }
+   },
+   "verdict": "一致",
+   "explanation": "冻结程序与手算答案逐项相同。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C06d_F",
+   "boundary": "B06",
+   "engine": "f12_hold",
+   "title": "除息日恰好无报价、到账日是周六（首12程序一直持有）",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "trades.0.shares": {
+     "hand": "9900",
+     "frozen": 9900.0,
+     "ok": true
+    },
+    "daily.2024-01-05.equity": {
+     "hand": "99901",
+     "frozen": 99901.0,
+     "ok": true
+    },
+    "daily.2024-01-08.equity": {
+     "hand": "99901",
+     "frozen": 104851.0,
+     "ok": false
+    },
+    "daily.2024-01-08.receivable": {
+     "hand": "4950",
+     "frozen": 4950.0,
+     "ok": true
+    },
+    "daily.2024-01-13.cash": {
+     "hand": "5851",
+     "frozen": 5851.0,
+     "ok": true
+    },
+    "daily.2024-01-15.equity": {
+     "hand": "99901",
+     "frozen": 99901.0,
+     "ok": true
+    }
+   },
+   "verdict": "不一致",
+   "explanation": "首12程序在除息日只记应收、不把估值价扣掉每份现金；除息日若没有报价，当天财富会把分红多算一次（104,851元，应为99,901元），下一个报价日才恢复。这会制造一天的假高点和随后的假回撤。",
+   "mismatched_fields": [
+    "daily.2024-01-08.equity"
+   ]
+  },
+  {
+   "id": "C07a",
+   "boundary": "B07",
+   "engine": "technical",
+   "title": "除息后卖出、到账前用现金买新仓",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "trades.1.date": {
+     "hand": "2024-01-05",
+     "frozen": "2024-01-05",
+     "ok": true
+    },
+    "daily.2024-01-05.receivable": {
+     "hand": "1650",
+     "frozen": 1650.0,
+     "ok": true
+    },
+    "daily.2024-01-05.equity": {
+     "hand": "98616.97",
+     "frozen": 98616.97,
+     "ok": true
+    },
+    "trades.2.date": {
+     "hand": "2024-01-08",
+     "frozen": "2024-01-08",
+     "ok": true
+    },
+    "trades.2.shares": {
+     "hand": "10500",
+     "frozen": 10500,
+     "ok": true
+    },
+    "calc.shares_if_receivable_spendable": {
+     "hand": "10700",
+     "frozen": null,
+     "ok": null,
+     "note": "人工推导量，引擎不输出"
+    },
+    "daily.2024-01-08.cash": {
+     "hand": "270.37",
+     "frozen": 270.3700000000099,
+     "ok": true
+    },
+    "daily.2024-01-08.equity": {
+     "hand": "98520.37",
+     "frozen": 98520.37,
+     "ok": true
+    },
+    "daily.2024-01-10.cash": {
+     "hand": "1920.37",
+     "frozen": 1920.37000000001,
+     "ok": true
+    },
+    "daily.2024-01-10.receivable": {
+     "hand": "0",
+     "frozen": 0,
+     "ok": true
+    },
+    "positions.0.div_paid": {
+     "hand": "1650",
+     "frozen": 1650.0,
+     "ok": true
+    },
+    "positions.1.div_accrued": {
+     "hand": "0",
+     "frozen": 0.0,
+     "ok": true
+    },
+    "positions.0.net_pnl": {
+     "hand": "-1383.03",
+     "frozen": -1383.03,
+     "ok": true
+    }
+   },
+   "verdict": "一致",
+   "explanation": "冻结程序与手算答案逐项相同。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C08a",
+   "boundary": "B08",
+   "engine": "technical",
+   "title": "一拆五、拆分日停牌（技术引擎）",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "daily.2024-01-04.units": {
+     "hand": "16500",
+     "frozen": 16500.0,
+     "ok": true
+    },
+    "daily.2024-01-04.equity": {
+     "hand": "99967",
+     "frozen": 99967.0,
+     "ok": true
+    },
+    "positions.0.stop": {
+     "hand": "1.94",
+     "frozen": 1.94,
+     "ok": true
+    },
+    "positions.0.target": {
+     "hand": "2.2",
+     "frozen": 2.2,
+     "ok": true
+    },
+    "daily.2024-01-08.equity": {
+     "hand": "99967",
+     "frozen": 99967.0,
+     "ok": true
+    }
+   },
+   "verdict": "一致",
+   "explanation": "冻结程序与手算答案逐项相同。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C08b_misdated",
+   "boundary": "B08",
+   "engine": "technical",
+   "title": "真实在1月4日日终折算，却把生效日录成1月4日",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "daily.2024-01-04.units": {
+     "hand": "3300",
+     "frozen": 16500.0,
+     "ok": false
+    },
+    "daily.2024-01-04.equity": {
+     "hand": "100297",
+     "frozen": 233617.0,
+     "ok": false
+    },
+    "daily.2024-01-05.units": {
+     "hand": "16500",
+     "frozen": 16500.0,
+     "ok": true
+    },
+    "daily.2024-01-05.equity": {
+     "hand": "100297",
+     "frozen": 100297.0,
+     "ok": true
+    }
+   },
+   "engine_matches_old_contract": null,
+   "verdict": "研究假设局限",
+   "explanation": "引擎只支持“生效日开盘前”一种拆分时点；日终折算的产品若按折算当天录入，当天持仓市值按5倍计算（小例子账户从100,297元变成233,617元）。旧510300/159915没有已知拆分；新产品（如510500的2022年日终拆分）录入时必须把生效日写成首个新单位报价日。",
+   "mismatched_fields": [
+    "daily.2024-01-04.units",
+    "daily.2024-01-04.equity"
+   ]
+  },
+  {
+   "id": "C08b_nextday",
+   "boundary": "B08",
+   "engine": "technical",
+   "title": "同一日终折算，把生效日录成首个新单位报价日",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "daily.2024-01-04.units": {
+     "hand": "3300",
+     "frozen": 3300.0,
+     "ok": true
+    },
+    "daily.2024-01-04.equity": {
+     "hand": "100297",
+     "frozen": 100297.0,
+     "ok": true
+    },
+    "daily.2024-01-05.units": {
+     "hand": "16500",
+     "frozen": 16500.0,
+     "ok": true
+    },
+    "daily.2024-01-05.equity": {
+     "hand": "100297",
+     "frozen": 100297.0,
+     "ok": true
+    }
+   },
+   "verdict": "一致",
+   "explanation": "冻结程序与手算答案逐项相同。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C08c",
+   "boundary": "B08",
+   "engine": "technical",
+   "title": "非整数拆分倍数1.14539产生零碎份额",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "daily.2024-01-04.units": {
+     "hand": "3779.787",
+     "frozen": 3779.787,
+     "ok": true
+    },
+    "daily.2024-01-04.equity": {
+     "hand": "99967",
+     "frozen": 99967.0,
+     "ok": true
+    },
+    "daily.2024-01-05.equity": {
+     "hand": "99968.320297",
+     "frozen": 99968.320297,
+     "ok": true
+    }
+   },
+   "engine_matches_old_contract": true,
+   "verdict": "研究假设局限",
+   "explanation": "旧合同（IF第21行）允许拆分后的零碎份额保留并全部卖出；真实产品的份额精度和零碎份额处理由基金公告决定，本快照没有这类规则。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C08d",
+   "boundary": "B08",
+   "engine": "f12_hold",
+   "title": "一拆五、拆分日停牌（首12程序一直持有）",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "daily.2024-01-04.units": {
+     "hand": "49500",
+     "frozen": 49500.0,
+     "ok": true
+    },
+    "daily.2024-01-04.equity": {
+     "hand": "99901",
+     "frozen": 495901.0,
+     "ok": false
+    },
+    "daily.2024-01-05.equity": {
+     "hand": "99901",
+     "frozen": 99901.0,
+     "ok": true
+    }
+   },
+   "verdict": "不一致",
+   "explanation": "首12程序拆分时只把份数乘倍数、不把旧估值价除倍数；拆分日若没有报价（真实的513100拆分日就停牌），当天财富虚增5倍（495,901元，应为99,901元）。",
+   "mismatched_fields": [
+    "daily.2024-01-04.equity"
+   ]
+  },
+  {
+   "id": "C09a",
+   "boundary": "B09",
+   "engine": "technical",
+   "title": "除息后换算的失效位决定是否卖出；期末仍有未到账分红",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "positions.0.stop": {
+     "hand": "9.224509803921568627",
+     "frozen": 9.224509803921567,
+     "ok": true
+    },
+    "positions.0.target": {
+     "hand": "10.460784313725490196",
+     "frozen": 10.46078431372549,
+     "ok": true
+    },
+    "sell_count": {
+     "hand": "0",
+     "frozen": 0,
+     "ok": true
+    },
+    "daily.2024-01-05.receivable": {
+     "hand": "1650",
+     "frozen": 1650.0,
+     "ok": true
+    },
+    "daily.2024-01-05.equity": {
+     "hand": "99307",
+     "frozen": 99307.0,
+     "ok": true
+    }
+   },
+   "verdict": "一致",
+   "explanation": "冻结程序与手算答案逐项相同。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C09b",
+   "boundary": "B09",
+   "engine": "technical",
+   "title": "拆分后没有新报价就除息：参照收盘还是旧单位",
+   "hand_status": "stop",
+   "frozen_status": "ok",
+   "hand_stop_reason": "2024-01-05 除息的参照收盘(2024-01-03)与除息之间还有行动['S2']且无新报价：价格换算器合同 protocol-amendment-1 第2条要求停止，不擅自二次推导",
+   "primary_checks": {
+    "status": {
+     "hand": "stop",
+     "frozen": "ok",
+     "ok": false
+    }
+   },
+   "secondary_label": "若按“新单位连续参照价=旧收盘÷拆分倍数”推导（价格换算器合同明确不做的二次推导）",
+   "secondary_checks": {
+    "positions.0.stop": {
+     "hand": "1.71",
+     "frozen": 1.71,
+     "ok": true
+    },
+    "positions.0.target": {
+     "hand": "2.565",
+     "frozen": 2.565,
+     "ok": true
+    },
+    "trades.0.shares": {
+     "hand": "5200",
+     "frozen": 5200,
+     "ok": true
+    },
+    "daily.2024-01-09.equity": {
+     "hand": "99990.12",
+     "frozen": 99990.12,
+     "ok": true
+    }
+   },
+   "engine_matches_old_contract": null,
+   "verdict": "研究假设局限",
+   "explanation": "拆分后没有新报价就除息时，48账户引擎按“旧收盘÷拆分倍数”推导参照价继续换算（与IF第21行一致），而价格换算器合同 protocol-amendment-1 第2条要求停止、不做二次推导。两份旧合同口径不同。",
+   "mismatched_fields": [
+    "status"
+   ]
+  },
+  {
+   "id": "C10a",
+   "boundary": "B10,B12",
+   "engine": "technical",
+   "title": "研究末日是周日，最后报价日收盘才触发卖出",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "sell.0.status": {
+     "hand": "pending_at_end",
+     "frozen": "pending_at_end",
+     "ok": true
+    },
+    "daily.2024-01-07.equity": {
+     "hand": "98812",
+     "frozen": 98812.0,
+     "ok": true
+    },
+    "daily.2024-01-07.mark_date": {
+     "hand": "2024-01-05",
+     "frozen": "2024-01-05",
+     "ok": true
+    },
+    "positions.0.net_pnl": {
+     "hand": "-1188",
+     "frozen": -1188.0,
+     "ok": true
+    },
+    "calc.hypothetical_sell_fee": {
+     "hand": "31.845",
+     "frozen": null,
+     "ok": null,
+     "note": "人工推导量，引擎不输出"
+    },
+    "calc.equity_after_hypothetical_sale": {
+     "hand": "98780.155",
+     "frozen": null,
+     "ok": null,
+     "note": "人工推导量，引擎不输出"
+    }
+   },
+   "verdict": "一致",
+   "explanation": "冻结程序与手算答案逐项相同。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C11a",
+   "boundary": "B11",
+   "engine": "technical",
+   "title": "每周一入金250元、不交易",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "daily.2024-01-15.equity": {
+     "hand": "1750",
+     "frozen": 1750.0,
+     "ok": true
+    },
+    "daily.2024-01-15.funding": {
+     "hand": "1750",
+     "frozen": 1750.0,
+     "ok": true
+    },
+    "daily.2024-01-15.nav": {
+     "hand": "1",
+     "frozen": 1.0,
+     "ok": true
+    },
+    "calc.investment_pnl": {
+     "hand": "0",
+     "frozen": null,
+     "ok": null,
+     "note": "人工推导量，引擎不输出"
+    }
+   },
+   "verdict": "一致",
+   "explanation": "冻结程序与手算答案逐项相同。",
+   "mismatched_fields": []
+  },
+  {
+   "id": "C11b",
+   "boundary": "B11",
+   "engine": "technical",
+   "title": "持仓上涨期间周一入金",
+   "hand_status": "ok",
+   "frozen_status": "ok",
+   "hand_stop_reason": null,
+   "primary_checks": {
+    "trades.0.shares": {
+     "hand": "100",
+     "frozen": 100,
+     "ok": true
+    },
+    "daily.2024-01-04.nav": {
+     "hand": "1.0792",
+     "frozen": 1.0792,
+     "ok": true
+    },
+    "daily.2024-01-08.equity": {
+     "hand": "1599",
+     "frozen": 1599.0,
+     "ok": true
+    },
+    "daily.2024-01-08.funding": {
+     "hand": "1500",
+     "frozen": 1500.0,
+     "ok": true
+    },
+    "daily.2024-01-08.nav": {
+     "hand": "1.0792",
+     "frozen": 1.0792,
+     "ok": true
+    },
+    "calc.investment_pnl": {
+     "hand": "99",
+     "frozen": null,
+     "ok": null,
+     "note": "人工推导量，引擎不输出"
+    }
+   },
+   "verdict": "一致",
+   "explanation": "冻结程序与手算答案逐项相同。",
+   "mismatched_fields": []
+  }
+ ]
+}

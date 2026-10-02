@@ -1,0 +1,201 @@
+{
+ "schema_version": "handoff-manifest/0",
+ "experiment_id": "research-broad-etf-technical-2026-09-08",
+ "review_mode": "frozen_code_replay",
+ "also_supports": [
+  "report_numbers"
+ ],
+ "base_commit_of_this_copy": "639ad8dbd3d2aa72f824b626b86149c466c132a4",
+ "originals": [
+  {
+   "path": "protocol-lock.json",
+   "note": "kept byte-identical"
+  },
+  {
+   "path": "execution/source-lock.json",
+   "note": "absolute paths of the original machine kept; map below is handoff-only"
+  }
+ ],
+ "path_map": [
+  {
+   "from_prefix": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/",
+   "to_prefix": ""
+  }
+ ],
+ "files": [
+  {
+   "path": "protocol.md",
+   "role": "frozen_protocol",
+   "sha256": "501e98287584c969de514dcc11b36568a70d817e0729039ad141ab85639a5bd2",
+   "git_blob": "9b546df6b8d07c636fd982ed185fcf73173e200e",
+   "eol": "lf",
+   "public": true,
+   "license": "repository"
+  },
+  {
+   "path": "protocol-lock.json",
+   "role": "original_lock",
+   "sha256": "bd07bad5c550614f34c01c36ac7e08581a773882605d8a20962703494e86edfa",
+   "git_blob": "b89995ab0e50dcd049df5e8efefeb769d47c388d",
+   "eol": "lf",
+   "public": true,
+   "license": "repository"
+  },
+  {
+   "path": "execution/source-lock.json",
+   "role": "original_lock",
+   "sha256": "6fafabb98f9fc3092ee21bfd2763e6f826f4a27526c80fc817b38b1be71dbfc0",
+   "git_blob": "eccb01e1b20ed7fdfbe2b0c74b60498b53cb530b",
+   "eol": "lf",
+   "public": true,
+   "license": "repository"
+  },
+  {
+   "path": "execution/engine.py",
+   "role": "frozen_code",
+   "sha256": "b13f9491bfe69a6f71e4ae1f393bb81c953a8a91a18131974adce782db0856a7",
+   "git_blob": "34de6d6528413d58f1b7fda8bb8626d420a53a8a",
+   "eol": "lf",
+   "public": true,
+   "license": "repository"
+  },
+  {
+   "path": "execution/metrics.py",
+   "role": "frozen_code",
+   "sha256": "7fcb1a81887a0731f6de32c2adb60ff1f74402831bd7d491c10c4bee24b304e7",
+   "git_blob": "17c835a3c875374af4e1fa574c16ffa8f5535aa9",
+   "eol": "lf",
+   "public": true,
+   "license": "repository"
+  },
+  {
+   "path": "execution/run_accounts.py",
+   "role": "frozen_code",
+   "sha256": "1b7ae1ea91c79dbb3c8960cfefc55bdf52051231f7744b6b99d0eda3f5b1abfb",
+   "git_blob": "71c7eda135564041da9acb8f25b249b76cee9af9",
+   "eol": "lf",
+   "public": true,
+   "license": "repository"
+  },
+  {
+   "path": "execution/inputs/execution-config.json",
+   "role": "input",
+   "sha256": "b76e7c8df1455c604e1f1d7362a33d13b5c747ce3b23c60caa4f16ab55ed930f",
+   "git_blob": "1ff0850c485b2913fd7e8142a8429541285461cb",
+   "eol": "lf",
+   "public": true,
+   "license": "repository"
+  },
+  {
+   "path": "execution/inputs/actions.json",
+   "role": "input",
+   "sha256": "42803eceab514880d34918dbf4e04b64eac2a90749ccedb791b214e904ff2789",
+   "git_blob": "9c315a28cbc0b3b5cb0bc76c78eae841cce48381",
+   "eol": "lf",
+   "public": true,
+   "license": "repository"
+  },
+  {
+   "path": "execution/inputs/action-coverage.json",
+   "role": "input_coverage",
+   "sha256": "86582d0fc21a5d166a96feed180fface54f6584155d5c9900027f55a49931e9e",
+   "git_blob": "f6268f21266a68293d51faac42b8e59bbd3b675f",
+   "eol": "lf",
+   "public": true,
+   "license": "repository"
+  },
+  {
+   "path": "execution/inputs/dated-restrictions.json",
+   "role": "input",
+   "sha256": "06d01e93347bbf7341111d29118e20aeb22d37c5d872c5cb2257dd78404225c7",
+   "git_blob": "3f25d9d42fb28c33560c2301a28c6654aa9f16a2",
+   "eol": "lf",
+   "public": true,
+   "license": "repository"
+  },
+  {
+   "path": "execution/inputs/bars/sh510300-nominal.csv",
+   "role": "input_market_data",
+   "sha256": "9e282d1d6ba01d54ee3940ee2b14e62ebd8cfd3dccfdaf1feec7f7dc77fdbc44",
+   "git_blob": "346b3e1366265c9e7354e8c23b5916c3eb66e826",
+   "eol": "lf",
+   "public": false,
+   "license": "exchange/vendor terms not recorded in lock; keep extracted facts public, originals by authorization"
+  },
+  {
+   "path": "execution/inputs/bars/sz159915-nominal.csv",
+   "role": "input_market_data",
+   "sha256": "bc4586140bb1c199c93dfc3137d137507067410699f972a1f9b405296b0dcb3f",
+   "git_blob": "b24765cebab095c90ccaabe340057dfab50bab05",
+   "eol": "lf",
+   "public": false,
+   "license": "exchange/vendor terms not recorded in lock; keep extracted facts public, originals by authorization"
+  },
+  {
+   "path": "execution/account-results/summary.json",
+   "role": "expected_output",
+   "sha256": "133982fc558e9d209496aeaf356c21cafebab3a725abc8e2ae26c8447cfaace8",
+   "git_blob": "764df5660e50829cde32b2eed1fec08d28f1c849",
+   "eol": "lf",
+   "public": true,
+   "license": "repository"
+  }
+ ],
+ "code": {
+  "commit": "639ad8dbd3d2aa72f824b626b86149c466c132a4",
+  "files": [
+   {
+    "path": "execution/engine.py",
+    "git_blob": "34de6d6528413d58f1b7fda8bb8626d420a53a8a"
+   },
+   {
+    "path": "execution/metrics.py",
+    "git_blob": "17c835a3c875374af4e1fa574c16ffa8f5535aa9"
+   },
+   {
+    "path": "execution/run_accounts.py",
+    "git_blob": "71c7eda135564041da9acb8f25b249b76cee9af9"
+   }
+  ]
+ },
+ "environment": {
+  "python": "unknown in original lock (record when replaying)",
+  "packages": "unknown in original lock"
+ },
+ "objects": [
+  "sh510300",
+  "sz159915"
+ ],
+ "dates": [
+  "2015-01-01",
+  "2026-06-30"
+ ],
+ "units": {
+  "price": "CNY nominal traded price",
+  "account": "CNY, 100000 initial per account"
+ },
+ "expected_outputs": [
+  {
+   "path": "execution/account-results/summary.json",
+   "tolerance_abs": 0.01,
+   "note": "48 accounts; compare per account final equity and max drawdown"
+  }
+ ],
+ "known_differences": [
+  {
+   "path": "execution/inputs/bars/*.csv",
+   "fact": "GitHub copy is LF; execution/source-lock.json recorded the CRLF bytes of the original machine",
+   "effect": "byte check reports eol_only; content identical after newline normalization"
+  }
+ ],
+ "missing": [
+  {
+   "item": "historical arrival time of quotes",
+   "reason": "not recorded upstream"
+  },
+  {
+   "item": "exact Python/pandas versions used on 2026-09-08",
+   "reason": "not in lock"
+  }
+ ]
+}

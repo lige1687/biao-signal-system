@@ -1,0 +1,23 @@
+{
+  "_note": "人工标准答案：按推荐读法（lifecycle_ref.RECOMMENDED）逐日判断 cases.py 生成的特征表；日期为信号当日收盘，执行为下一允许开盘。只检验语义/实现，不是市场效果。",
+  "C1_valid_first": {"touches": [["2024-03-08", true]], "signals": [["2024-03-13", true, 100.3]], "cancels": [],
+    "why": "03-07 仍在触碰带上方（已武装）；03-08 最低 101.2 入带且收盘 101.6>抵扣价 97；此后继续下探到 100.3 但 SMA60 方向未变；03-13 收盘站回 EMA20 且 EMA20 上行。整段是一次回撤，C=回撤最低 100.3。"},
+  "C2_later_after_black": {"touches": [["2024-03-08", true], ["2024-03-20", false]], "signals": [["2024-03-13", true, 100.3], ["2024-03-25", false, 100.1]], "cancels": [],
+    "why": "第二次回撤中 03-19..03-21 为 20 组黑色，但 SMA/EMA 多头排列与 SMA120 未破；多头排列未中断，所以仍是同一趋势段的第二次（后续）回撤，C=100.1。"},
+  "C3_direction_changed": {"touches": [["2024-03-08", true]], "signals": [], "cancels": [["2024-03-12", "direction_changed"]],
+    "why": "03-12 收盘 100.6<60 日抵扣价 101.2，SMA60 当日转为向下，违反 §4.4 第 2 步“不改变 MA 运行方向”；本次 60 组回撤作废，之后没有重新离开触碰带前不能再触碰。"},
+  "C4_structure_not_confirmed": {"touches": [["2024-03-08", true]], "signals": [["2024-03-13", true, 100.3]], "cancels": [],
+    "structure_required": {"touches": [["2024-03-08", true]], "signals": [], "cancels": [], "open_at_end": true},
+    "why": "按实现 A3“至少一种”，EMA20 收复即满足，03-13 入场；按体系 §4.4“底部构造 + 低一级别多头”，构造未确认且小时资料未接入，只能判“尚不能进入”。这是需要用户确认的读法差异。"},
+  "C5_confirm_after_touch": {"touches": [["2024-03-08", true]], "signals": [["2024-03-15", true, 100.2]], "cancels": [],
+    "structure_required": {"touches": [["2024-03-08", true]], "signals": [["2024-03-15", true, 100.2]], "cancels": []},
+    "why": "触碰 03-08，底部构造 03-15 才确认、同日收回 EMA20；信号日≠触碰日，C 取触碰以来最低 100.2（即该构造低点），执行在 03-18 开盘。"},
+  "C6_target_missing": {"touches": [["2024-03-08", true]], "signals": [["2024-03-13", true, 100.3]], "cancels": [], "B_status": "unknown_pending_T1",
+    "why": "首选目标（上方均线密集区）待 T1 定义；本段没有已确认摆动高点和未回补缺口；筹码参数属【必须配置】。按实现 §10/§13 应标“目标不可计算、不开仓”；研究保留机会并单列，不删。"},
+  "C7_old_structure_invalid_new_structure": {"touches": [["2024-03-07", true]], "signals": [["2024-03-15", true, 104.4]], "cancels": [],
+    "why": "S1 在 03-11 确认时时钟为三类不能入场，03-12 被新低破坏；按 §7.4“破坏了就找下一个”，03-14 时钟恢复也不能引用 S1；03-15 S2 确认才入场，C=104.4。"},
+  "C8_data_gap": {"touches": [["2024-03-08", true]], "signals": [], "cancels": [["2024-03-11", "data_gap"]],
+    "why": "03-11 缺价，当天无法核对方向与低点，候选取消；缺价打断了趋势段，下一段的“首次”无法判断（unknown），且价格未重新离开触碰带，不产生新触碰。"},
+  "C9_supplement_touch_without_departure": {"touches": [], "signals": [], "cancels": [],
+    "why": "价格一直贴着 SMA20+1ATR 触碰带上行，从未离开，就不存在“回撤”；不应消耗首次。"}
+}

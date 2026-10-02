@@ -1,0 +1,76 @@
+{
+ "D1_complete": {
+  "status": "complete",
+  "action": "proceed",
+  "findings": [
+   {
+    "declared_missing": "historical arrival time of quotes",
+    "reason": "never recorded upstream"
+   }
+  ],
+  "matches_expected": true
+ },
+ "D2_file_missing": {
+  "status": "incomplete",
+  "action": "stop",
+  "findings": [
+   {
+    "path": "inputs/bars-SYN.csv",
+    "result": "missing"
+   },
+   {
+    "declared_missing": "historical arrival time of quotes",
+    "reason": "never recorded upstream"
+   }
+  ],
+  "matches_expected": true
+ },
+ "D3_content_modified": {
+  "status": "modified",
+  "action": "stop",
+  "findings": [
+   {
+    "path": "expected/summary.json",
+    "result": "content_changed"
+   },
+   {
+    "declared_missing": "historical arrival time of quotes",
+    "reason": "never recorded upstream"
+   }
+  ],
+  "matches_expected": true
+ },
+ "D4_wrong_code_version": {
+  "status": "wrong_code_version",
+  "action": "stop",
+  "findings": [
+   {
+    "code": "execution/engine.py",
+    "result": "blob_mismatch_or_missing"
+   },
+   {
+    "declared_missing": "historical arrival time of quotes",
+    "reason": "never recorded upstream"
+   }
+  ],
+  "matches_expected": true
+ },
+ "D5_eol_only_real_world": {
+  "status": "eol_only",
+  "action": "proceed_only_after_recording_normalization",
+  "findings": [
+   {
+    "path": "inputs/bars-SYN.csv",
+    "result": "eol_only",
+    "recorded_eol": "lf",
+    "actual_eol": "crlf"
+   },
+   {
+    "declared_missing": "historical arrival time of quotes",
+    "reason": "never recorded upstream"
+   }
+  ],
+  "matches_expected": true
+ },
+ "_note": "合成包在临时目录生成并删除；D5 复现了真实旧锁里看到的“只差换行符”情形。合成演练只证明校验器按约定工作。"
+}

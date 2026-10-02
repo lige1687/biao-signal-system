@@ -1,0 +1,237 @@
+{
+  "schema_version": "remote-astra-task-state/1",
+  "as_of": "2026-09-30",
+  "branch": "codex/astra-core-review-20260930",
+  "base_branch": "codex/core-sync-20260930",
+  "base_commit": "639ad8dbd3d2aa72f824b626b86149c466c132a4",
+  "code_review_baseline": "9561df05d2d0b818a95c8cc050ee6b2db2d057b0",
+  "model_note": "User instruction for this run: use Opus 5.5; 'Astra' in the task files is legacy naming.",
+  "strategy_sources": {
+    "technical-system": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "technical-implementation": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+    "matches_confirmed_fingerprints": true
+  },
+  "input_inventory_check": "72/72 files in repository-input-inventory.json match recorded sha256 at base commit",
+  "queue": [
+    "T2",
+    "T7",
+    "T8",
+    "T9",
+    "T10",
+    "T4",
+    "T3",
+    "T5",
+    "T6"
+  ],
+  "tasks": {
+    "T1": {
+      "problem": "",
+      "owner": "remote Opus 5.5 session (task text calls it Astra; user set model for this run)",
+      "status": "skipped",
+      "inputs": [],
+      "outputs": [],
+      "skip_reason": "held for technical-mainline owner per README/OWNERSHIP; not handed over",
+      "budget_used": null,
+      "next_step": null
+    },
+    "T2": {
+      "problem": "完整A回调：局部研究距原文缺哪些步骤；怎样比较条件作用而不把另一批机会冒充同一批",
+      "owner": "remote Opus 5.5 session (task text calls it Astra; user set model for this run)",
+      "status": "completed",
+      "inputs": [
+        "strategy snapshots 2026-09-30 (fingerprints match)",
+        "src/lei_signal/rules/first_ma_pullback.py@639ad8d",
+        "low_level_confirmation.py",
+        "bottom_structure.py",
+        "strict_structure.py",
+        "exit_ema20_costbasis.py",
+        "reward_risk_filter.py",
+        "compose/pipeline.py",
+        "factor-direction-audit / factor-a-exit / a01 / a03 / module-a-money / range-expansion reports",
+        "inputs/bars sh510300/sz159915 nominal + actions.json (event counts only)"
+      ],
+      "outputs": [
+        "docs/research/proposals/remote-astra-2026-09-30/T2/README.md",
+        "docs/research/proposals/remote-astra-2026-09-30/T2/condition-map.md",
+        "docs/research/proposals/remote-astra-2026-09-30/T2/lifecycle.md",
+        "docs/research/proposals/remote-astra-2026-09-30/T2/worked-examples.md",
+        "docs/research/proposals/remote-astra-2026-09-30/T2/next-question.md",
+        "docs/research/proposals/remote-astra-2026-09-30/T2/production-fix-notes.md",
+        "docs/experiments/raw/remote-astra-T2-2026-09-30/"
+      ],
+      "skip_reason": null,
+      "budget_used": "约2.5小时（墙钟估计，含克隆约15分钟）",
+      "next_step": "主负责人批准 lifecycle_ref 开关后，按 T2/next-question.md 先做第0步覆盖表；生产修复见 production-fix-notes.md",
+      "verification": "run_cases.py 9/9 hand answers; production-mode reference == production code 9/9 cases and 239/239, 188/188 real events"
+    },
+    "T7": {
+      "problem": "机会稀少且互相依赖时如何比较一个条件的作用（服务 T2 下一问题）",
+      "owner": "remote Opus 5.5 session (task text calls it Astra; user set model for this run)",
+      "status": "completed",
+      "inputs": [
+        "T2 lifecycle/next-question",
+        "research-question-method-standard v1.2.0 §12-13",
+        "factor-increment-evidence-standard v1.1.0",
+        "research-information-gain-review-2026-09-28",
+        "research-design-correction-2026-09-30",
+        "factor-evidence-reliability-usage",
+        "literature README + READING.md (sullivan1999, kaminski2014)",
+        "MacKinnon-Nielsen-Webb 2023 arXiv:2205.03285 (sections 3.3,4.3,6.2,7,9)",
+        "Montgomery-Nyhan-Torres 2018 pre-publication PDF (abstract,§1,§3.2 excerpt,§5)"
+      ],
+      "outputs": [
+        "docs/research/proposals/remote-astra-2026-09-30/T7/README.md",
+        "docs/research/proposals/remote-astra-2026-09-30/T7/method-cards.md",
+        "docs/research/proposals/remote-astra-2026-09-30/T7/contract.md",
+        "docs/experiments/raw/remote-astra-T7-2026-09-30/"
+      ],
+      "skip_reason": null,
+      "budget_used": "约1.2小时",
+      "next_step": "T2 生命周期开关获批后按 T7/contract.md 执行；推荐 describe_only",
+      "verification": "method_examples.py 4/4 hand answers; qualification_count.py: 30 differing pullbacks -> 13 time clusters (no outcomes read)"
+    },
+    "T8": {
+      "problem": "下一笔资料工作先解决哪个阻塞",
+      "owner": "remote Opus 5.5 session (task text calls it Astra; user set model for this run)",
+      "status": "completed",
+      "inputs": [
+        "repository-input-inventory.json",
+        "etf-data-audit-2026-09-19",
+        "etf-source-verify-2026-09-20/b-final.json",
+        "data-staleness-fix-2026-09-20/a-final.json",
+        "action-coverage.json",
+        "research-calendar-completion-2026-09-10",
+        "input_preflight/qualification_bundle/symbol_identity/trading_calendar docstrings",
+        "SSE legal statement (fetched 2026-10-02)",
+        "SZSE terms: not found"
+      ],
+      "outputs": [
+        "docs/research/proposals/remote-astra-2026-09-30/T8/README.md",
+        "docs/research/proposals/remote-astra-2026-09-30/T8/data-contract.json"
+      ],
+      "skip_reason": null,
+      "budget_used": "约0.8小时",
+      "next_step": "主负责人按 T10 清单移交六 ETF 日线/行动/日历包；用户决定小时资料是否采购"
+    },
+    "T9": {
+      "problem": "未来观察如何改变判断而不事后改规则",
+      "owner": "remote Opus 5.5 session (task text calls it Astra; user set model for this run)",
+      "status": "completed",
+      "inputs": [
+        "experiment-backtest-principles §8",
+        "breadth-freeze-observation-2026-09-09 §4-5",
+        "factor-evidence-reliability-usage §1",
+        "definitions.py lifecycle",
+        "definitions.v1.json research.a03.pullback_order@1.0.0",
+        "a03 report"
+      ],
+      "outputs": [
+        "docs/research/proposals/remote-astra-2026-09-30/T9/README.md",
+        "docs/research/proposals/remote-astra-2026-09-30/T9/observation-contract.md",
+        "docs/experiments/raw/remote-astra-T9-2026-09-30/"
+      ],
+      "skip_reason": null,
+      "budget_used": "约0.7小时",
+      "next_step": "在资料完整的电脑上取得 A03 原协议并核指纹后，由主负责人决定是否启动观察",
+      "verification": "observation_ledger.py 5/5 states + 3/3 negative checks (synthetic)"
+    },
+    "T10": {
+      "problem": "移交最小资料后别人怎样复查同一实验",
+      "owner": "remote Opus 5.5 session (task text calls it Astra; user set model for this run)",
+      "status": "completed",
+      "inputs": [
+        "strategy-source-snapshots manifest",
+        "research-broad-etf-technical-2026-09-08 locks",
+        "8 tracked source-lock.json",
+        "definitions.v1.json",
+        "workflow/data_snapshot/qualification_bundle (docstrings)"
+      ],
+      "outputs": [
+        "docs/research/proposals/remote-astra-2026-09-30/T10/README.md",
+        "docs/experiments/raw/remote-astra-T10-2026-09-30/"
+      ],
+      "skip_reason": null,
+      "budget_used": "约0.8小时",
+      "next_step": "主负责人决定登记表引用闭包（56 个缺失证据文件）随移交包同步还是列为缺项",
+      "verification": "handoff_check.py 5/5 synthetic; example manifest self-check complete; existing_audit.py read-only"
+    },
+    "T4": {
+      "problem": "日/周/小时确认最早何时真正已知",
+      "owner": "remote Opus 5.5 session (task text calls it Astra; user set model for this run)",
+      "status": "completed",
+      "inputs": [
+        "point_in_time.py",
+        "calendar.py",
+        "bar_completeness.py",
+        "weekly_context.py",
+        "low_level_confirmation.py",
+        "tests/no_lookahead/*"
+      ],
+      "outputs": [
+        "docs/research/proposals/remote-astra-2026-09-30/T4/README.md",
+        "docs/research/proposals/remote-astra-2026-09-30/T4/field-contract.json",
+        "docs/experiments/raw/remote-astra-T4-2026-09-30/"
+      ],
+      "skip_reason": null,
+      "budget_used": "约0.8小时",
+      "next_step": "小时资料是否采购由用户决定（T8 Q3）；观测时刻强制带时区的修复交主负责人",
+      "verification": "timing_cases.py 12/12 synthetic + 3 production timing checks"
+    },
+    "T3": {
+      "problem": "B 横盘埋伏与突破定义核对",
+      "owner": "remote Opus 5.5 session (task text calls it Astra; user set model for this run)",
+      "status": "completed",
+      "inputs": [
+        "体系 §3.2/§3.5/§4.3",
+        "实现 §4.4/§4.6/模块B",
+        "dense_breakout.py 2.0.0",
+        "test_dense_breakout.py",
+        "symbols.py _dense_breakout_scenario"
+      ],
+      "outputs": [
+        "docs/research/proposals/remote-astra-2026-09-30/T3/README.md",
+        "docs/experiments/raw/remote-astra-T3-2026-09-30/"
+      ],
+      "skip_reason": null,
+      "budget_used": "约0.8小时",
+      "next_step": "用户确认 Q1（两失效动作是否须同日）；B 效果研究须先有足够密集区样本",
+      "verification": "b_cases.py 9/9 code predictions; 7/9 differ from original reading; real coverage: 510300 0 zones, 159915 1 zone 0 triggers"
+    },
+    "T5": {
+      "problem": "当前程序入口未覆盖的跨模块时点反例",
+      "owner": "background subagent (same model Opus 5.5; GPT-6 series not available in this harness)",
+      "status": "completed",
+      "inputs": [],
+      "outputs": [
+        "docs/research/proposals/remote-astra-2026-09-30/T5/README.md",
+        "docs/research/proposals/remote-astra-2026-09-30/T5/fix-suggestions.md",
+        "docs/experiments/raw/remote-astra-T5-2026-09-30/"
+      ],
+      "skip_reason": null,
+      "budget_used": "子任务约3小时（自报）＋主控复核约0.3小时",
+      "next_step": "F1/F2 修复需主负责人决定是否升 volume_proxies 版本；F4-F6 语义待用户选择；H01d 缓存子检查未重跑",
+      "verification": "subagent: existing tests 67/67; controller rerun of check_counterexamples.py reproduced results (only elapsed_seconds differs); cited code lines checked"
+    },
+    "T6": {
+      "problem": "资金/时点边界上冻结引擎与独立算账是否一致",
+      "owner": "background subagent (same model Opus 5.5; GPT-6 series not available in this harness)",
+      "status": "completed",
+      "inputs": [],
+      "outputs": [
+        "docs/research/proposals/remote-astra-2026-09-30/T6/README.md",
+        "docs/experiments/raw/remote-astra-T6-2026-09-30/"
+      ],
+      "skip_reason": null,
+      "budget_used": "子任务约2.5小时（自报）＋主控复核约0.3小时",
+      "next_step": "首12程序除息/拆分日缺价估值修复交主负责人；涨跌停影响如需精确数字须另立协议重跑",
+      "verification": "subagent: 27 hand cases, 4 accounts x 22 dates within 1e-9; controller rerun of 4 scripts reproduced all JSON byte-identical; engine.py:207 float lot and first12 run_accounts.py:253-262 checked; 2024-10-08 limit-up opens checked in raw bars"
+    }
+  },
+  "limitations": [
+    "No local database, no host API, no hourly quotes, no newest raw directories listed as missing in inventory",
+    "Public web access only for T7-T10 bounded reading"
+  ],
+  "closing_report": "docs/experiments/remote-astra-core-review-2026-09-30.md",
+  "as_of_close": "2026-10-02",
+  "dispatch_record": "T5/T6 由同模型（Opus 5.5）后台子任务执行；本环境无 GPT-6 系列可调用，未假称使用 Luna/Sol"
+}

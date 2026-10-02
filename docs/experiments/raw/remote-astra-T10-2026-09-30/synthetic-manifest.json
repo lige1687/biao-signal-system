@@ -1,0 +1,95 @@
+{
+ "schema_version": "handoff-manifest/0",
+ "experiment_id": "SYNTHETIC-handoff-drill",
+ "review_mode": "frozen_code_replay",
+ "originals": [
+  {
+   "path": "protocol-lock.json",
+   "sha256": "e5f491777c6953fa1a023ec878c093054bd81f3e739f47fb4f1e9c6b7b0f061a",
+   "note": "original lock kept byte-identical; absolute paths inside are not rewritten"
+  }
+ ],
+ "path_map": [
+  {
+   "from_prefix": "/Users/someone/Desktop/lei-signal-lab/",
+   "to_prefix": ""
+  }
+ ],
+ "files": [
+  {
+   "path": "protocol.md",
+   "role": "protocol.md",
+   "sha256": "256c9b6cff6799df76c523afe59b293bca65be0c89cd2855d6d027496375dc78",
+   "git_blob": "b6565ab2354e49a6c511e317188a92ef49afca9a",
+   "eol": "lf",
+   "public": true,
+   "license": "synthetic"
+  },
+  {
+   "path": "protocol-lock.json",
+   "role": "protocol-lock.json",
+   "sha256": "e5f491777c6953fa1a023ec878c093054bd81f3e739f47fb4f1e9c6b7b0f061a",
+   "git_blob": "eac89524f4248a65b0671bcf150f5ca3b52814c9",
+   "eol": "lf",
+   "public": true,
+   "license": "synthetic"
+  },
+  {
+   "path": "inputs/bars-SYN.csv",
+   "role": "inputs",
+   "sha256": "92a8c92166174659164e24493519da0e970d9da9739410d253337fabc1b9a16f",
+   "git_blob": "2ccbcfb2993ff80b377a97cc579adead4c380a83",
+   "eol": "lf",
+   "public": true,
+   "license": "synthetic"
+  },
+  {
+   "path": "expected/summary.json",
+   "role": "expected",
+   "sha256": "27a6af23a58c18c5588699a19bf228443f7b1aa6a29ef1b198d2f6a2a50d5454",
+   "git_blob": "2e780653580056e177bc499a6b56a465469b22a0",
+   "eol": "lf",
+   "public": true,
+   "license": "synthetic"
+  }
+ ],
+ "code": {
+  "commit": "SYNTHETIC",
+  "files": [
+   {
+    "path": "execution/engine.py",
+    "git_blob": "caf30e4da5b36c75cf8259d13a3870d85eadd5ce"
+   }
+  ]
+ },
+ "environment": {
+  "python": "3.12",
+  "packages": {
+   "pandas": "2.x (record exact)",
+   "numpy": "2.x (record exact)"
+  }
+ },
+ "objects": [
+  "SYN"
+ ],
+ "dates": [
+  "2026-01-05",
+  "2026-01-05"
+ ],
+ "units": {
+  "price": "CNY nominal"
+ },
+ "expected_outputs": [
+  {
+   "path": "expected/summary.json",
+   "field": "final_equity",
+   "tolerance_abs": 0.01
+  }
+ ],
+ "missing": [
+  {
+   "item": "historical arrival time of quotes",
+   "reason": "never recorded upstream"
+  }
+ ]
+}

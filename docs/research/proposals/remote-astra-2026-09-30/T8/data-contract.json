@@ -1,0 +1,53 @@
+{
+  "schema_version": "remote-astra-data-contract/0",
+  "status": "draft / not approved",
+  "as_of": "2026-10-02",
+  "scope": "broad-index ETF technical research blockers from T2/T4/T7; stocks not sampled here but the same field contract applies",
+  "blockers": [
+    {
+      "id": "D1_daily_bars",
+      "serves": ["T2 next-question", "T7 contract", "T8 Q1 audit"],
+      "objects": ["sh510300", "sh510050", "sh510500", "sh512100", "sz159915", "sh588000"],
+      "period": "2013-01-01..2026-09-25 (at least 252 trading days warm-up before the first evaluated date)",
+      "fields": ["date (exchange local date, Asia/Shanghai)", "open", "high", "low", "close", "volume", "price_basis=nominal_traded", "source_id", "retrieved_at (UTC ISO8601)", "file_sha256"],
+      "source": "R1 transfer of the main-computer qualified package; repository already has sh510300/sz159915",
+      "license": "vendor/exchange terms per source; record 'unknown' when not verified",
+      "qualification": "limited_historical (arrival time unknown)",
+      "verification": ["row count and date range per symbol equal manifest", "sha256 equal manifest", "no synthetic or fault-injection rows", "missing quote days listed, not filled"]
+    },
+    {
+      "id": "D2_corporate_actions",
+      "serves": ["technical price conversion", "T6 capital accounting", "T2/T7 accounts layer"],
+      "objects": "same as D1",
+      "period": "same as D1",
+      "fields": ["event_id", "symbol", "type (cash_dividend|split|merge)", "announcement_date", "record_date", "ex_date", "pay_date", "cash_per_unit or ratio", "amount_basis", "source_file", "source_sha256", "coverage_status per year (proven_event|proven_none|unknown)"],
+      "source": "R1 (main-computer 84/84 evidence) ; R2 only for listed unknown years",
+      "license": "SSE legal statement allows non-commercial browsing/download; public redistribution of originals unclear -> commit extracted facts + URL + sha256 only; SZSE terms not found -> unknown",
+      "qualification": "per-year coverage; unknown years must stay unknown",
+      "verification": ["every event has source sha256", "years without proof flagged unknown (not assumed none)", "technical price conversion reproduces stored economic close within stated tolerance"]
+    },
+    {
+      "id": "D3_trading_calendar",
+      "serves": ["weekly completion (T4)", "next allowed open", "T5/T6 timing"],
+      "objects": ["SSE", "SZSE"],
+      "period": "2013-01-01..2026-12-31",
+      "fields": ["date", "status (trading|closed|unknown)", "exchange", "source_month", "publication_evidence_date (when the schedule was known)"],
+      "source": "SZSE official monthly list already in repo (2019-09..2026-06); SSE independent list via R2 or R1",
+      "license": "SZSE unknown; SSE non-commercial",
+      "qualification": "outside covered months = unknown, never weekday fallback",
+      "verification": ["no unknown day treated as trading", "SSE and SZSE compared day by day where both exist"]
+    },
+    {
+      "id": "D4_hourly_bars",
+      "serves": ["T4 full version", "body §4.4 lower-timeframe bullish confirmation", "implementation §6 complete version"],
+      "objects": "minimum: the 6 ETFs above; only periods that contain module A candidates (+ warm-up)",
+      "period": "to be sized from T4; not before the user sets a budget",
+      "fields": ["bar_start and bar_end (exchange local time with UTC offset)", "open", "high", "low", "close", "volume", "is_complete", "session (am|pm)", "revision_id / retrieved_at", "source_id", "file_sha256"],
+      "source": "R3 only (user purchase or provision); none in repository",
+      "license": "unknown until a source is chosen",
+      "qualification": "not_connected",
+      "verification": ["60-minute bars aggregate to the same daily OHLC as D1 within tolerance", "lunch break and half-day sessions present", "last bar of the day marked complete only after close"]
+    }
+  ],
+  "not_allowed": ["replace historical gaps with today's surviving products or index points", "use daily OHLC proxies as hourly confirmation", "buy or download data under this contract"]
+}

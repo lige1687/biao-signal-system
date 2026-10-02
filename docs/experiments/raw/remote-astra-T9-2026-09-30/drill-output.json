@@ -1,0 +1,158 @@
+{
+ "S1_waiting_outcome": {
+  "ledger_records": 3,
+  "validation_errors": [],
+  "derived": {
+   "stream": "research.a03.pullback_order@1.0.0",
+   "matured_first": 0,
+   "matured_later": 0,
+   "waiting": 1,
+   "verdict": "insufficient_no_comparison",
+   "first_mean": null,
+   "later_mean": null,
+   "revised_count": 0
+  },
+  "expected": {
+   "verdict": "insufficient_no_comparison",
+   "waiting": 1,
+   "matured_first": 0
+  },
+  "matches_hand_answer": true
+ },
+ "S2_outcome_matured": {
+  "ledger_records": 6,
+  "validation_errors": [],
+  "derived": {
+   "stream": "research.a03.pullback_order@1.0.0",
+   "matured_first": 1,
+   "matured_later": 1,
+   "waiting": 0,
+   "verdict": "describe_only",
+   "first_mean": 0.012,
+   "later_mean": -0.004,
+   "revised_count": 0
+  },
+  "expected": {
+   "verdict": "describe_only",
+   "matured_first": 1,
+   "matured_later": 1,
+   "first_mean": 0.012,
+   "later_mean": -0.004
+  },
+  "matches_hand_answer": true
+ },
+ "S3_input_revised": {
+  "ledger_records": 7,
+  "validation_errors": [],
+  "derived": {
+   "stream": "research.a03.pullback_order@1.0.0",
+   "matured_first": 1,
+   "matured_later": 1,
+   "waiting": 0,
+   "verdict": "describe_only",
+   "first_mean": 0.012,
+   "later_mean": -0.004,
+   "revised_count": 1
+  },
+  "expected": {
+   "verdict": "describe_only",
+   "revised_count": 1,
+   "first_mean": 0.012
+  },
+  "matches_hand_answer": true
+ },
+ "S4_definition_new_version": {
+  "ledger_records": 8,
+  "validation_errors": [],
+  "derived": {
+   "old": {
+    "stream": "research.a03.pullback_order@1.0.0",
+    "matured_first": 1,
+    "matured_later": 1,
+    "waiting": 0,
+    "verdict": "describe_only",
+    "first_mean": 0.012,
+    "later_mean": -0.004,
+    "revised_count": 0
+   },
+   "new": {
+    "stream": "research.a03.pullback_order@1.1.0",
+    "matured_first": 0,
+    "matured_later": 0,
+    "waiting": 0,
+    "verdict": "insufficient_no_comparison",
+    "first_mean": null,
+    "later_mean": null,
+    "revised_count": 0
+   },
+   "old_stream": {
+    "status": "closed_superseded",
+    "frozen_at": "2026-10-09T16:00:00+08:00",
+    "protocol_sha256": "SYNTHETIC-not-a-real-protocol",
+    "superseded_by": "research.a03.pullback_order@1.1.0"
+   },
+   "new_stream": {
+    "status": "observing",
+    "frozen_at": "2027-01-10T09:05:00+08:00",
+    "protocol_sha256": "SYNTHETIC-v1.1",
+    "superseded_by": null
+   }
+  },
+  "expected": {
+   "old_status": "closed_superseded",
+   "old_matured": 2,
+   "new_status": "observing",
+   "new_matured": 0
+  },
+  "matches_hand_answer": true
+ },
+ "S5_budget_interrupted": {
+  "ledger_records": 4,
+  "validation_errors": [],
+  "derived": {
+   "review": {
+    "stream": "research.a03.pullback_order@1.0.0",
+    "matured_first": 0,
+    "matured_later": 0,
+    "waiting": 1,
+    "verdict": "insufficient_no_comparison",
+    "first_mean": null,
+    "later_mean": null,
+    "revised_count": 0
+   },
+   "stream": {
+    "status": "paused",
+    "frozen_at": "2026-10-09T16:00:00+08:00",
+    "protocol_sha256": "SYNTHETIC-not-a-real-protocol",
+    "superseded_by": null,
+    "resume_point": {
+     "last_snapshot": "SYN-S1",
+     "data_through": "2026-11-03",
+     "open_opportunities": [
+      "SYN|seg1|n60|2026-11-03"
+     ]
+    }
+   },
+   "paused": true
+  },
+  "expected": {
+   "stream_status": "paused",
+   "paused": true,
+   "waiting": 1
+  },
+  "matches_hand_answer": true
+ },
+ "negative_checks": {
+  "tampered_outcome": [
+   "seq 4: chain broken or record edited"
+  ],
+  "backdated_opportunity": [
+   "seq 3: opportunity dated 2026-10-01 not after observe_after 2026-10-09"
+  ],
+  "outcome_before_maturity": [
+   "seq 3: outcome recorded before it matured",
+   "seq 3: outcome recorded before maturity date"
+  ]
+ },
+ "_note": "全部为合成记录；协议指纹为占位符；未读取任何真实或未来行情。"
+}

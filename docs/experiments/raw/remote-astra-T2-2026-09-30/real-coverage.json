@@ -1,0 +1,566 @@
+{
+ "_note": "只计数事件/标签/止损价差异，不含任何未来收益；名义价，510300 前复权为研究代理。",
+ "sh510300": {
+  "rows": 3273,
+  "first_date": "2013-01-04",
+  "last_date": "2026-06-30",
+  "dividend_adjustments": 13,
+  "bottom_structures": 729,
+  "days_gate_open": 391,
+  "mirror_check_production_mode_vs_production_code": {
+   "production_events": 239,
+   "reference_events": 239,
+   "only_production": [],
+   "only_reference": [],
+   "identical": true
+  },
+  "production_code": {
+   "20": {
+    "touches": 74,
+    "touch_first": {
+     "True": 19,
+     "False": 55
+    },
+    "signals": 42,
+    "signal_first": {
+     "True": 10,
+     "False": 32
+    },
+    "signal_years": {
+     "2015": 4,
+     "2017": 4,
+     "2018": 1,
+     "2020": 15,
+     "2021": 2,
+     "2025": 13,
+     "2026": 3
+    },
+    "a3_structure": 32
+   },
+   "60": {
+    "touches": 32,
+    "touch_first": {
+     "True": 28,
+     "False": 4
+    },
+    "signals": 9,
+    "signal_first": {
+     "True": 7,
+     "False": 2
+    },
+    "signal_years": {
+     "2017": 1,
+     "2018": 1,
+     "2020": 4,
+     "2026": 3
+    },
+    "a3_structure": 6
+   },
+   "120": {
+    "touches": 11,
+    "touch_first": {
+     "True": 10,
+     "False": 1
+    },
+    "signals": 4,
+    "signal_first": {
+     "True": 4
+    },
+    "signal_years": {
+     "2020": 1,
+     "2026": 3
+    },
+    "a3_structure": 2
+   }
+  },
+  "recommended_any": {
+   "20": {
+    "touches": 21,
+    "touch_first": {
+     "True": 7,
+     "False": 14
+    },
+    "signals": 17,
+    "signal_first": {
+     "True": 7,
+     "False": 10
+    },
+    "signal_years": {
+     "2017": 3,
+     "2018": 1,
+     "2020": 6,
+     "2021": 1,
+     "2025": 5,
+     "2026": 1
+    },
+    "a3_structure": 10
+   },
+   "60": {
+    "touches": 10,
+    "touch_first": {
+     "True": 9,
+     "False": 1
+    },
+    "signals": 7,
+    "signal_first": {
+     "True": 7
+    },
+    "signal_years": {
+     "2017": 1,
+     "2018": 1,
+     "2020": 3,
+     "2025": 1,
+     "2026": 1
+    },
+    "a3_structure": 2
+   },
+   "120": {
+    "touches": 6,
+    "touch_first": {
+     "True": 5,
+     "False": 1
+    },
+    "signals": 3,
+    "signal_first": {
+     "True": 2,
+     "False": 1
+    },
+    "signal_years": {
+     "2020": 1,
+     "2026": 2
+    },
+    "a3_structure": 1
+   }
+  },
+  "recommended_structure_required": {
+   "20": {
+    "touches": 21,
+    "touch_first": {
+     "True": 7,
+     "False": 14
+    },
+    "signals": 15,
+    "signal_first": {
+     "True": 5,
+     "False": 10
+    },
+    "signal_years": {
+     "2017": 3,
+     "2020": 6,
+     "2021": 1,
+     "2025": 5
+    },
+    "a3_structure": 15
+   },
+   "60": {
+    "touches": 10,
+    "touch_first": {
+     "True": 9,
+     "False": 1
+    },
+    "signals": 4,
+    "signal_first": {
+     "True": 4
+    },
+    "signal_years": {
+     "2017": 1,
+     "2020": 2,
+     "2025": 1
+    },
+    "a3_structure": 4
+   },
+   "120": {
+    "touches": 5,
+    "touch_first": {
+     "True": 5
+    },
+    "signals": 1,
+    "signal_first": {
+     "True": 1
+    },
+    "signal_years": {
+     "2026": 1
+    },
+    "a3_structure": 1
+   }
+  },
+  "production_vs_recommended": {
+   "production_signals": 55,
+   "matched_same_pullback": 13,
+   "first_flag_differs": 5,
+   "stop_raised_vs_pullback_low": 3,
+   "stop_lowered": 0,
+   "unmatched_production": 42,
+   "stale_structure_citations": 0,
+   "recommended_signals": 27,
+   "examples": [
+    {
+     "type": "first_flag",
+     "production": {
+      "date": "2020-03-10",
+      "group": 60,
+      "kind": "confirmed",
+      "first": false,
+      "touch": "2020-03-09",
+      "C": 3.520656002,
+      "structure": null,
+      "reason": null
+     },
+     "recommended": {
+      "date": "2020-03-10",
+      "group": 60,
+      "kind": "confirmed",
+      "first": true,
+      "touch": "2020-03-09",
+      "C": 3.520656002,
+      "structure": null,
+      "reason": "A4_early"
+     }
+    },
+    {
+     "type": "first_flag",
+     "production": {
+      "date": "2020-07-21",
+      "group": 20,
+      "kind": "confirmed",
+      "first": false,
+      "touch": "2020-07-20",
+      "C": 4.093889873,
+      "structure": "strict_bottom:2020-07-21",
+      "reason": null
+     },
+     "recommended": {
+      "date": "2020-07-21",
+      "group": 20,
+      "kind": "confirmed",
+      "first": true,
+      "touch": "2020-07-16",
+      "C": 4.054602816,
+      "structure": "strict_bottom:2020-07-21",
+      "reason": "A4_early"
+     }
+    },
+    {
+     "type": "first_flag",
+     "production": {
+      "date": "2020-11-18",
+      "group": 20,
+      "kind": "confirmed",
+      "first": false,
+      "touch": "2020-11-17",
+      "C": 4.405507663,
+      "structure": "strict_bottom:2020-11-18",
+      "reason": null
+     },
+     "recommended": {
+      "date": "2020-11-18",
+      "group": 20,
+      "kind": "confirmed",
+      "first": true,
+      "touch": "2020-11-13",
+      "C": 4.363541943,
+      "structure": "strict_bottom:2020-11-18",
+      "reason": "A4_early"
+     }
+    },
+    {
+     "type": "first_flag",
+     "production": {
+      "date": "2026-01-26",
+      "group": 20,
+      "kind": "confirmed",
+      "first": false,
+      "touch": "2026-01-16",
+      "C": 4.687,
+      "structure": null,
+      "reason": null
+     },
+     "recommended": {
+      "date": "2026-01-26",
+      "group": 20,
+      "kind": "confirmed",
+      "first": true,
+      "touch": "2026-01-14",
+      "C": 4.687,
+      "structure": null,
+      "reason": "A4_early"
+     }
+    },
+    {
+     "type": "first_flag",
+     "production": {
+      "date": "2026-02-09",
+      "group": 120,
+      "kind": "confirmed",
+      "first": true,
+      "touch": "2026-02-06",
+      "C": 4.61,
+      "structure": "strict_bottom:2026-02-09",
+      "reason": null
+     },
+     "recommended": {
+      "date": "2026-02-09",
+      "group": 120,
+      "kind": "confirmed",
+      "first": false,
+      "touch": "2026-02-06",
+      "C": 4.61,
+      "structure": "strict_bottom:2026-02-09",
+      "reason": "A4_early"
+     }
+    }
+   ]
+  },
+  "unmatched_production_reasons": {
+   "unmatched_production_entries": {
+    "no_departure_after_episode_open": 17,
+    "no_departure_after_previous_entry": 15,
+    "no_departure_after_left_zone_end": 2,
+    "no_departure_after_A5_low_cancel": 8
+   },
+   "recommended_entries_without_production_entry_in_window": 15
+  },
+  "a3_mode_coverage_recommended": {
+   "any_signals": 27,
+   "structure_required_signals": 20,
+   "same_day": 12,
+   "delayed": 8,
+   "dropped_by_structure_requirement": 7
+  }
+ },
+ "sz159915": {
+  "rows": 3272,
+  "first_date": "2013-01-04",
+  "last_date": "2026-06-30",
+  "dividend_adjustments": 0,
+  "bottom_structures": 800,
+  "days_gate_open": 278,
+  "mirror_check_production_mode_vs_production_code": {
+   "production_events": 188,
+   "reference_events": 188,
+   "only_production": [],
+   "only_reference": [],
+   "identical": true
+  },
+  "production_code": {
+   "20": {
+    "touches": 53,
+    "touch_first": {
+     "True": 14,
+     "False": 39
+    },
+    "signals": 26,
+    "signal_first": {
+     "True": 8,
+     "False": 18
+    },
+    "signal_years": {
+     "2015": 3,
+     "2020": 5,
+     "2021": 7,
+     "2025": 2,
+     "2026": 9
+    },
+    "a3_structure": 22
+   },
+   "60": {
+    "touches": 21,
+    "touch_first": {
+     "True": 15,
+     "False": 6
+    },
+    "signals": 10,
+    "signal_first": {
+     "True": 8,
+     "False": 2
+    },
+    "signal_years": {
+     "2015": 1,
+     "2020": 2,
+     "2021": 2,
+     "2025": 1,
+     "2026": 4
+    },
+    "a3_structure": 4
+   },
+   "120": {
+    "touches": 19,
+    "touch_first": {
+     "True": 18,
+     "False": 1
+    },
+    "signals": 2,
+    "signal_first": {
+     "True": 2
+    },
+    "signal_years": {
+     "2020": 1,
+     "2026": 1
+    },
+    "a3_structure": 1
+   }
+  },
+  "recommended_any": {
+   "20": {
+    "touches": 16,
+    "touch_first": {
+     "True": 5,
+     "False": 11
+    },
+    "signals": 12,
+    "signal_first": {
+     "True": 4,
+     "False": 8
+    },
+    "signal_years": {
+     "2020": 3,
+     "2021": 4,
+     "2026": 5
+    },
+    "a3_structure": 8
+   },
+   "60": {
+    "touches": 12,
+    "touch_first": {
+     "True": 6,
+     "False": 6
+    },
+    "signals": 8,
+    "signal_first": {
+     "True": 5,
+     "False": 3
+    },
+    "signal_years": {
+     "2015": 1,
+     "2020": 1,
+     "2021": 2,
+     "2026": 4
+    },
+    "a3_structure": 2
+   },
+   "120": {
+    "touches": 8,
+    "touch_first": {
+     "True": 5,
+     "False": 3
+    },
+    "signals": 4,
+    "signal_first": {
+     "True": 4
+    },
+    "signal_years": {
+     "2020": 2,
+     "2021": 1,
+     "2026": 1
+    },
+    "a3_structure": 1
+   }
+  },
+  "recommended_structure_required": {
+   "20": {
+    "touches": 15,
+    "touch_first": {
+     "True": 5,
+     "False": 10
+    },
+    "signals": 10,
+    "signal_first": {
+     "False": 7,
+     "True": 3
+    },
+    "signal_years": {
+     "2020": 2,
+     "2021": 3,
+     "2026": 5
+    },
+    "a3_structure": 10
+   },
+   "60": {
+    "touches": 10,
+    "touch_first": {
+     "True": 6,
+     "False": 4
+    },
+    "signals": 5,
+    "signal_first": {
+     "True": 4,
+     "False": 1
+    },
+    "signal_years": {
+     "2020": 1,
+     "2021": 1,
+     "2026": 3
+    },
+    "a3_structure": 5
+   },
+   "120": {
+    "touches": 8,
+    "touch_first": {
+     "True": 5,
+     "False": 3
+    },
+    "signals": 4,
+    "signal_first": {
+     "True": 4
+    },
+    "signal_years": {
+     "2020": 2,
+     "2021": 1,
+     "2026": 1
+    },
+    "a3_structure": 4
+   }
+  },
+  "production_vs_recommended": {
+   "production_signals": 38,
+   "matched_same_pullback": 8,
+   "first_flag_differs": 1,
+   "stop_raised_vs_pullback_low": 2,
+   "stop_lowered": 0,
+   "unmatched_production": 30,
+   "stale_structure_citations": 0,
+   "recommended_signals": 24,
+   "examples": [
+    {
+     "type": "first_flag",
+     "production": {
+      "date": "2021-01-20",
+      "group": 20,
+      "kind": "confirmed",
+      "first": false,
+      "touch": "2021-01-19",
+      "C": 2.966,
+      "structure": "strict_bottom:2021-01-20",
+      "reason": null
+     },
+     "recommended": {
+      "date": "2021-01-20",
+      "group": 20,
+      "kind": "confirmed",
+      "first": true,
+      "touch": "2021-01-15",
+      "C": 2.919,
+      "structure": "strict_bottom:2021-01-20",
+      "reason": "A4_early"
+     }
+    }
+   ]
+  },
+  "unmatched_production_reasons": {
+   "unmatched_production_entries": {
+    "no_departure_after_episode_open": 15,
+    "no_departure_after_previous_entry": 8,
+    "no_departure_after_A5_low_cancel": 4,
+    "no_departure_after_left_zone_end": 3
+   },
+   "recommended_entries_without_production_entry_in_window": 16
+  },
+  "a3_mode_coverage_recommended": {
+   "any_signals": 24,
+   "structure_required_signals": 19,
+   "same_day": 9,
+   "delayed": 10,
+   "dropped_by_structure_requirement": 5
+  }
+ }
+}

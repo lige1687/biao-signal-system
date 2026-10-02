@@ -1,0 +1,285 @@
+{
+  "schema_version": "remote-astra-T5-hypotheses/1",
+  "task": "T5 跨模块的交易时点反例检查",
+  "registered_at": "2026-10-02T01:04+08:00",
+  "registered_before_any_counterexample_run": true,
+  "note_on_editing": "本文件在运行任何反例之前保存。之后不改 predicted；如需更正，只在 addenda 追加。",
+  "code_base_commit": "639ad8dbd3d2aa72f824b626b86149c466c132a4",
+  "strategy_snapshots_sha256": {
+    "LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "rules_ledger_in_use": "configs/rules.v2.yaml（rules_config.py 第12行 _CONFIG_NAME）",
+  "input_policy": "全部输入为人工合成报价，不读真实行情、本机数据库或接口；SQLite 只写 /tmp 临时库，用完删除。",
+  "hypotheses": [
+    {
+      "id": "H01",
+      "coverage": [
+        "不同结构同时存在",
+        "前缀截断与全历史一致性"
+      ],
+      "title": "放量突破颈线事件被后来的C失效追溯删除",
+      "scenario": "底部结构在 D 日收盘突破颈线确认，D 日量比>=2 且收涨 -> 产生 volume_proxies/breakout_volume 事件；之后某日最低价触及 C 使结构失效。比较截断到失效前的运行与全历史运行在 D 日的事件。子检查 b：两个底部结构同一天确认时颈线映射是否只保留一个。",
+      "entry": [
+        "compose.pipeline.analyze_bars",
+        "pipeline._build_structure_necklines",
+        "rules.volume.detect_volume_events"
+      ],
+      "expected_by_source": "pipeline._build_structure_necklines 文档字符串：已确认结构 confirmed_date 之后、失效之前都作为可用颈线；规格§3.2 不得用后来信息改写过去；tests/integration/test_acceptance_gates.py 门禁1：追加未来行情后旧日期事件不变；events/log.py 不变量2 事件不可回写。=> D 日事件在两种运行中都应存在。",
+      "predicted": "前缀运行有 D 日 breakout_volume，全历史运行没有（代码按结构最终 status==invalidated 整体排除）。子检查 b：同日两个确认只留一条颈线（字典按确认日覆盖）。",
+      "prior_status": "候选新发现（未在已读文档中检索到）",
+      "decision_affected": "事件时间轴/研究库中的“放量突破”记录；按事件分组的前向统计。"
+    },
+    {
+      "id": "H02",
+      "coverage": [
+        "一结构失效后另一个有效",
+        "不同结构同时存在"
+      ],
+      "title": "一个底部触及C失效时另一个已确认底部的观察是否被波及",
+      "scenario": "两个底部 X、Y 同时存活，Y 已确认且有 EMA20 转强观察档；D 日 X 的 C 被触及（Y 的 C 未触及）。检查 D 日及其后 Y 的观察实例、机会阶段、风险状态与组合显示阶段。另检查 X 若只是候选（从未确认）时风险状态与事件是否一致。",
+      "entry": [
+        "compose.pipeline.analyze_bars",
+        "state.machine.run_state_machine",
+        "events.lifecycle.assign_lifecycles"
+      ],
+      "expected_by_source": "state/machine.py 不变量1/5（机会与风险分离、各结构独立推进）；events/lifecycle.py STRUCTURE_BOUND：C 失效只终止对应结构的转强。=> Y 的观察与档位不变，opportunity_stage 不因 X 下降。",
+      "predicted": "Y 的观察与 opportunity_stage 不受影响（无问题）；但 D 日 risk_state=C_INVALIDATED，兼容字段 stage=INVALIDATED（看盘卡显示“失效”）；X 若只是候选，风险提示照样出现但事件日志没有对应的 bottom_C_touched 事件（只能追溯到结构字段）。",
+      "prior_status": "核心语义预计无问题；显示合并属待确认",
+      "decision_affected": "看盘卡阶段标签（一天）；风险提示可追溯性。"
+    },
+    {
+      "id": "H03",
+      "coverage": [
+        "同日触发与失效顺序"
+      ],
+      "title": "同一根K线同时满足确认与失效时的先后",
+      "scenario": "(a) 摆动点底部候选次日的一根K线：最低价<=C 且收盘>颈线；(b) 严格顶部构造等待确认时，一根合并K线同时最高价>构造前高点且最低价<触发低点；(c) 同一天转黑且绑定结构本应升级档位。",
+      "entry": [
+        "rules.bottom_structure.detect_higher_low_bottoms",
+        "rules.strict_structure.detect_strict_structures",
+        "compose.pipeline.analyze_bars"
+      ],
+      "expected_by_source": "(a) bottom_structure.py 模块文档：先触及C即永久失效；(b) 体系§2.6 与实现§7.1/§7.3 未规定单根K线内先后——原文歧义；(c) ema_reclaim_tiers.py 与 state/machine.py：转黑当天关闭生命周期、不推进新档。",
+      "predicted": "(a) 失效且永不确认，与文档一致；(b) 代码先判新高作废，构造不确认，判“待确认”；(c) 事件层与状态机一致，均不升级。",
+      "prior_status": "预计无新缺陷，(b) 待确认",
+      "decision_affected": "结构是否确认；严格构造（模块A的A3依据、回测退出）是否出现。"
+    },
+    {
+      "id": "H04",
+      "coverage": [
+        "摆动点确认日"
+      ],
+      "title": "摆动点只在右侧三根走完后才被结构、B1、摆动事件使用",
+      "scenario": "构造一个摆动低点，其右侧三根内收盘已高于颈线；在拐点+2根与拐点+3根两处截断，比较结构候选日、确认日、摆动事件可用日、B1。",
+      "entry": [
+        "features.pivots.confirmed_pivots",
+        "compose.pipeline.analyze_bars",
+        "rules.resistance_b1.find_b1"
+      ],
+      "expected_by_source": "实现§3.2 第2条；pivots.py 文档：确认根数未走完前不可用。",
+      "predicted": "拐点+2截断看不到该低点及其结构；候选日=确认日（拐点+3）；结构确认最早在候选日次日；全历史与截断结果一致。无问题。",
+      "prior_status": "预计无问题（阴性对照）",
+      "decision_affected": "底部结构确认时点、B1。"
+    },
+    {
+      "id": "H05",
+      "coverage": [
+        "未完成日"
+      ],
+      "title": "盘中形成中的K线被当成收盘事实使用并永久写入研究库",
+      "scenario": "同一交易日两份报价：14:30 盘中版（收盘价暂时高于颈线）与 15:00 后收盘版（收回颈线下方）。分别经 analyze()（注入内存行情源、临时 SQLite）运行。检查盘中版的结构确认事件、可交易性第9条“依赖未来K线”、结果对象有无完成度标注；再检查收盘版运行后研究库是否仍保留盘中版的确认事件与生命周期记录。",
+      "entry": [
+        "compose.pipeline.analyze",
+        "rules.tradability_gate.evaluate_tradability",
+        "storage.sqlite_store.write_events/write_structures"
+      ],
+      "expected_by_source": "实现§13 第9条：信号依赖尚未完成的K线不开新仓；docs/ops/bar-completeness-contract.md §3：静默当 final 用被禁止；events/log.py：事件不可回写（反过来，不应把未成立的事实写成永久事件）。",
+      "predicted": "盘中版产生结构确认事件；可交易性第9条恒为“不阻断”，说明文字写“系统严格前向，信号不依赖未完成K线”；结果对象无完成度字段；收盘版运行后研究库仍保留盘中版确认事件与 candidate->confirmed 生命周期行，而结构表状态被改回 candidate。",
+      "prior_status": "完成度守卫未接线属已知（bar-completeness 设计稿 W2-S3 未授权）；第9条硬编码与研究库永久写入为候选新发现",
+      "decision_affected": "买点复核 verdict（可交易性决定“可执行/阻断”）；研究库事件真实性。"
+    },
+    {
+      "id": "H06",
+      "coverage": [
+        "未完成周"
+      ],
+      "title": "周五盘中未完成日线让当周周线被标为已完成",
+      "scenario": "周五盘中版与收盘版两份报价，比较 aggregate_weekly 的当周 is_complete、available_date、close，以及 analyze_bars 的 weekly_trend 与模块A周线环境输入。",
+      "entry": [
+        "data.point_in_time.aggregate_weekly",
+        "compose.pipeline.analyze_bars",
+        "features.weekly_context.weekly_env_series"
+      ],
+      "expected_by_source": "实现§3.2 第3条：周线只能在该周最后一个交易日收盘后使用；point_in_time.aggregate_weekly 文档“收盘后运行语义”。",
+      "predicted": "盘中版当周 is_complete=True、available_date=周五、close=盘中价；无任何标注。bar-completeness 设计稿§5第6条明确不改 aggregate_weekly，周线没有对应守卫。",
+      "prior_status": "日线守卫未接线已知；周线层归属空档，判待确认（与 T4 字段合同相关，本任务不设计合同）",
+      "decision_affected": "周线长周期标签、模块A周线环境。"
+    },
+    {
+      "id": "H07",
+      "coverage": [
+        "未完成周",
+        "跨模块一致性"
+      ],
+      "title": "注入的交易所日历没有传到所有使用周线的地方",
+      "scenario": "周四、周五休市的短周。analyze_bars(calendar=含休市日的日历) 在周三收盘时：pipeline 的 weekly_trend 与模块A内部 weekly_env_series、symbols._build_pullback_opportunities 的 weekly_now 是否看到同一套已完成周线。",
+      "entry": [
+        "compose.pipeline.analyze_bars",
+        "features.weekly_context.weekly_env_series",
+        "rules.first_ma_pullback.detect_first_ma_pullback_events"
+      ],
+      "expected_by_source": "pipeline.analyze_bars 文档：与底层同一注入口径，不允许“底层能注入、生产注不进”。",
+      "predicted": "weekly_trend 在周三含短周；weekly_env_series 只用默认日历，短周到下周一才出现——同一次分析两套周线视图。生产 AnalysisService 默认就不注入日历，因此生产当前一致但保守。",
+      "prior_status": "已知（T2 condition-map 第7行；第十批 a-contract weekly 说明），本次只补当前基准实测",
+      "decision_affected": "模块A周线环境门禁（偏晚一天）与状态机周线标签不一致。"
+    },
+    {
+      "id": "H08",
+      "coverage": [
+        "缺价"
+      ],
+      "title": "最高/最低价或成交量缺失被静默放行，未知当成“没触及/缩量”",
+      "scenario": "(a) 一根K线只有收盘价、最低价为空（真实最低价可能已触及某已确认底部的C）。经 validate_bars -> analyze_bars；(b) 一根K线成交量为空。",
+      "entry": [
+        "data.validation.validate_bars",
+        "compose.pipeline.analyze_bars",
+        "rules.volume.compute_volume_labels"
+      ],
+      "expected_by_source": "data/validation.py 模块文档：数据错误必须显式报错或标记 DATA_UNAVAILABLE，禁止静默处理为“无信号”；不填补缺失价格。",
+      "predicted": "(a) 校验通过且没有警告；该日不判触及C，结构继续有效，风险正常；(b) 成交量被静默填0，没有警告，量比=0，可能出现“回调缩量”事件。",
+      "prior_status": "候选新发现（T2 P6 缺价当趋势重置只限模块A，不重复计）",
+      "decision_affected": "底部结构是否失效（C止损）；量能事件。"
+    },
+    {
+      "id": "H09",
+      "coverage": [
+        "旧输入回补/修订"
+      ],
+      "title": "修订旧K线后研究库静默“复活”已失效结构",
+      "scenario": "第一次运行：某日最低价触及已确认底部C，研究库记结构失效。随后行情源更正这天最低价（不再触及C），第二次运行同一临时库。子检查 b：中间缺的一天被回补后，摆动点确认日前移，旧摆动事件是否与新事件并存且无标记。",
+      "entry": [
+        "compose.pipeline.analyze",
+        "storage.sqlite_store.write_structures/write_events"
+      ],
+      "expected_by_source": "bottom_structure.py：失效结构永不复活；sqlite_store.write_structures 文档：状态变化同步写生命周期事件；任务约束：不得静默改变已失效结构的历史。原文未规定数据修订如何记录。",
+      "predicted": "structure_instances 被改回 confirmed、invalidated_date 清空；structure_lifecycle 仍有失效行，没有“修订撤销”行；signal_events 仍保留 C 触及事件。两表矛盾，无修订标记。子检查 b：旧摆动事件与新事件并存。",
+      "prior_status": "候选新发现，因原文未规定修订语义，预计判待确认",
+      "decision_affected": "研究库审计与复现；当前 src 中无读取方，交易决定不直接受影响。"
+    },
+    {
+      "id": "H10",
+      "coverage": [
+        "前缀截断与全历史一致性"
+      ],
+      "title": "严格构造的包含合并让后来K线改写过去确认（已知问题复核）",
+      "scenario": "严格顶部在 D 日确认；分别追加 (i) 被包含的内包K线、(ii) 创更高高点的外包K线。比较截断与全历史的确认日。",
+      "entry": [
+        "rules.strict_structure.detect_strict_structures"
+      ],
+      "expected_by_source": "strict_structure.py 文档：合并结果在当日收盘即完全可知、无泄漏；tests/unit/test_strict_structure.py::test_prefix_invariance。",
+      "predicted": "(i) 确认日从 D 移到 D+1；(ii) 确认整体消失。问题在当前基准仍存在。",
+      "prior_status": "已知/已记录（factor-system-increment-review-2026-09-27 §4；acd-information-qualification-2026-09-08），不重复计数",
+      "decision_affected": "模块A的A3构造依据（first_ma_pullback）、回测引擎严格顶部退出（backtest/engine.py:181）。"
+    },
+    {
+      "id": "H11",
+      "coverage": [
+        "前缀截断与全历史一致性",
+        "不同结构同时存在"
+      ],
+      "title": "整条分析链在多截断日的过去输出一致性扫描",
+      "scenario": "多组人工合成随机行情（含趋势/横盘段），每组约30个截断日；比较截断运行与全历史运行在截断日及以前的全部事件（编号、日期、子规则、结构、生命周期编号、证据字段）、逐日状态（机会阶段、风险、颜色、主结构、有效结构集合、观察档、周线/日线长周期）、已知结构的日期字段、截断日 active 事件集合。",
+      "entry": [
+        "compose.pipeline.analyze_bars"
+      ],
+      "expected_by_source": "门禁1（test_acceptance_gates.py）与实现§3.2：追加未来行情不改变旧日期结论。",
+      "predicted": "除已知来源（模块A严格构造包含合并、模块D密集区结束日追溯，第十批已记录）与 H01 外，不应出现其他差异。",
+      "prior_status": "广谱扫描；差异来源逐条归类",
+      "decision_affected": "依差异来源而定。"
+    },
+    {
+      "id": "H12",
+      "coverage": [
+        "未知显示成没有信号"
+      ],
+      "title": "长周期资料不足时解释层写成“冲突”而不是“数据不足”",
+      "scenario": "只有约150根日线（周线远不足60周、日线EMA120刚可算或不可算）。检查 build_assessment 的“长周期”维度、支持/冲突因素文字、可交易性第1/8条。",
+      "entry": [
+        "compose.pipeline.analyze_bars",
+        "compose.interpreter.build_assessment",
+        "rules.tradability_gate.evaluate_tradability"
+      ],
+      "expected_by_source": "rules/long_trend.py：不足时保持 unknown、禁止伪指标兜底；实现§13 第1/8条把“数据不足”单列为无交易条件；门禁8：前20根是 unknown 不是 gray（未知不得显示成具体状态）。",
+      "predicted": "周线 unknown 时“长周期”维度=“冲突”，因素标题“长周期背景仍冲突”（细节里才写 unknown）；可交易性第8条按位置判断，日线够长时不报数据不足。",
+      "prior_status": "候选新发现（显示层，低）",
+      "decision_affected": "用户对长周期背景的理解；交易决定（不开新仓）本身不变。"
+    }
+  ],
+  "addenda": [
+    {
+      "registered_at": "2026-10-02T01:40+08:00",
+      "registered_before_formal_run": true,
+      "kind": "补充子检查（不新增假设、不改原 predicted）",
+      "parent": "H01",
+      "id": "H01c",
+      "origin": "构造 H01 输入的原型调试中看到阳线反转底部也生成了 breakout_volume；未核对收盘与颈线关系。来源于调试观察，不计入预先登记的预测命中。",
+      "check": "反转K线底部（候选日即确认日，颈线=该K线最高价）上生成的 breakout_volume 事件，当日收盘是否真的高于颈线。",
+      "expected_by_source": "configs/rules.v2.yaml volume_proxies.formula：breakout_volume = Close 突破某个明确结构颈线 且 量比>=阈值；事件文案“收盘价突破结构颈线”。",
+      "predicted": "事件照发，但收盘低于颈线（代码没有比较收盘与颈线）。这是附带的定义一致性问题，不是时点问题，单列。"
+    },
+    {
+      "registered_at": "2026-10-02T01:40+08:00",
+      "registered_before_formal_run": true,
+      "kind": "补充子检查（不新增假设、不改原 predicted）",
+      "parent": "H02",
+      "id": "H02c",
+      "origin": "读 api/sell_signals.py 时注意到 S1 结构失效按 status==invalidated 收集，不区分是否曾确认。未运行。",
+      "check": "从未确认的底部候选触及 C 失效时，卖点提取是否给出“硬”档结构失效卖点。",
+      "expected_by_source": "sell_signals.py S1 注释：进出同一逻辑——什么逻辑进场就什么逻辑退出；未确认候选不是任何买入依据（ema_reclaim_tiers.py：候选期只进观察档、不构成买入）。原文没有对“候选失效是否发卖点”作规定，结果判待确认。",
+      "predicted": "给出 tier=hard 的“结构失效”卖点。"
+    },
+    {
+      "registered_at": "2026-10-02T01:40+08:00",
+      "registered_before_formal_run": true,
+      "kind": "补充子检查（不新增假设、不改原 predicted）",
+      "parent": "H09",
+      "id": "H09c",
+      "origin": "读 api/signal_replay.py 与 storage/sqlite_store.write_structures：回放调用 analyze(as_of=旧日) 且传 sqlite_path；结构表按“最后一次写入”覆盖状态。未运行。",
+      "check": "先用全历史分析写库（结构已失效），再回放失效前的某一天（analyze(as_of=该日)，同一临时库），看结构表状态。",
+      "expected_by_source": "bottom_structure.py：失效结构永不复活；回放设计（signal_replay.py 模块文档）只声明写 signal_alerts / daily_opportunity_scan 两表。",
+      "predicted": "回放把结构表改回 confirmed、清空失效日；生命周期表仍有失效行。"
+    },
+    {
+      "registered_at": "2026-10-02T02:10+08:00",
+      "registered_before_formal_run": false,
+      "kind": "事后追加的确认检查（在第一次正式运行之后登记，来源是运行结果，不计入预先预测命中）",
+      "parent": "H01",
+      "id": "H01d",
+      "origin": "正式运行 H11 的 S3 序列在 2022-07-06 截断时，同一个 breakout_volume 事件编号在截断与全历史中绑定的结构不同（double_bottom→higher_low_bottom），颈线也不同。",
+      "check": "手工构造“同一天两个底部同时确认、其中一个后来失效”，经 AnalysisService（真实缓存服务，行情源替身）先后两次运行同一临时研究库，看第二次是否抛事件身份冲突、研究库后续写入是否停止。",
+      "expected_by_source": "storage/sqlite_store.EventIdentityConflictError 文档：身份字段（含 structure_id）是不可变历史事实；api/services.py：冲突时关闭持久化重算并在界面标注。",
+      "predicted": "第二次运行抛 EventIdentityConflictError，服务返回 persist_conflict；之后每次运行都会冲突，该标的的生命周期快照与运行记录不再写入。"
+    },
+    {
+      "registered_at": "2026-10-02T02:10+08:00",
+      "registered_before_formal_run": false,
+      "kind": "核验脚本机械修复记录（不改预测）",
+      "parent": "H09",
+      "id": "H09b-fix",
+      "origin": "正式运行 H09b 的 in_current_analysis 字段全为 false：脚本对照用的 analyze_bars 符号写成 'T5'，而入库用 '510300.SS'，结构编号含符号，导致对照失效。",
+      "check": "把对照改为同一符号后重跑整个脚本（第2次机械修复）。"
+    },
+    {
+      "registered_at": "2026-10-02T02:15+08:00",
+      "kind": "文件格式说明",
+      "note": "02:10 追加 addenda 时用 json.dump 整体重写，列表改为逐行排版，hypotheses 内容未改。登记时的原始字节已按原格式重建为 hypotheses-as-registered.json，其 sha256=f9417e6a8ce2545340a94dca4a843e396a741604e1aab620c47802f66f2b0dbd，与登记后立即记录的值一致。"
+    },
+    {
+      "registered_at": "2026-10-02T10:10+08:00",
+      "kind": "结果有效性说明（不改预测、不改脚本）",
+      "parent": "H01d",
+      "note": "H01d 的 analysis_service 子检查无效：脚本用 lambda 在 AnalysisService 构造时就生成了 MemoryProvider(前缀数据)，第二、三次 get() 实际仍是前缀数据（analysis_runs 的 last_data_date 仍为 2022-07-06 可证），因此没有出现冲突。已用满两次机械修复额度，未再改脚本。服务层冲突后的降级行为改引既有测试 tests/unit/test_api_endpoints.py（注入假冲突）与 services.py 代码阅读；direct_analyze 子检查有效。"
+    }
+  ]
+}

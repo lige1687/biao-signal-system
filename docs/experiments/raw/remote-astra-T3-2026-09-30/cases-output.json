@@ -1,0 +1,478 @@
+{
+ "B1_half_year_never_consolidated": {
+  "production_events": [
+   [
+    140,
+    "watch",
+    null,
+    100.2
+   ]
+  ],
+  "predicted_code": [
+   [
+    140,
+    "watch",
+    null,
+    100.2
+   ]
+  ],
+  "original_reading": {
+   "events": [],
+   "why": "141 天里只有 8 天是横盘（时钟三类），其余是稳定上涨；原文“整理时间不少于 6 个月”指横盘本身的时长，不应成立"
+  },
+  "code_matches_prediction": true,
+  "code_matches_original_reading": false,
+  "needs_user_choice": false,
+  "note": "代码把不超过 20 天的间歇也算进寿命（_state_age_series 在离开期间继续 +1），间歇不断就永不清零"
+ },
+ "B2_brief_density": {
+  "production_events": [
+   [
+    150,
+    "watch",
+    null,
+    100.2
+   ],
+   [
+    151,
+    "confirmed",
+    "breakout",
+    100.2
+   ]
+  ],
+  "predicted_code": [
+   [
+    150,
+    "watch",
+    null,
+    100.2
+   ],
+   [
+    151,
+    "confirmed",
+    "breakout",
+    100.2
+   ]
+  ],
+  "original_reading": {
+   "events": null,
+   "why": "原文只说“均线高度密集 <2%”，没说要持续多久；一天达标能否算“密集接近尾声”不能唯一判断"
+  },
+  "code_matches_prediction": true,
+  "code_matches_original_reading": false,
+  "needs_user_choice": false,
+  "note": "研究代理：建议同时记录开区当日与触发当日的带宽，不另造持续天数阈值"
+ },
+ "B3_mature_zone_leaves_next_day": {
+  "production_events": [
+   [
+    190,
+    "watch",
+    null,
+    100.4
+   ],
+   [
+    191,
+    "confirmed",
+    "breakout",
+    100.4
+   ]
+  ],
+  "predicted_code": [
+   [
+    190,
+    "watch",
+    null,
+    100.4
+   ],
+   [
+    191,
+    "confirmed",
+    "breakout",
+    100.4
+   ]
+  ],
+  "original_reading": {
+   "events": [
+    [
+     190,
+     "watch",
+     null,
+     105.0
+    ]
+   ],
+   "why": "实现模块 B2：“收盘突破密集区上沿（区间最高价）”；整理期内最高价 105，收盘 100.6 仍在箱体内，不是突破"
+  },
+  "code_matches_prediction": true,
+  "code_matches_original_reading": false,
+  "needs_user_choice": false,
+  "note": "代码的上沿只从开区当天起算（zone_high_water 初值=开区日 high），不含此前 6 个月整理期"
+ },
+ "B4_breakout_day_raises_bound": {
+  "production_events": [
+   [
+    125,
+    "watch",
+    null,
+    100.2
+   ],
+   [
+    130,
+    "confirmed",
+    "breakout",
+    100.2
+   ]
+  ],
+  "predicted_code": [
+   [
+    125,
+    "watch",
+    null,
+    100.2
+   ],
+   [
+    130,
+    "confirmed",
+    "breakout",
+    100.2
+   ]
+  ],
+  "original_reading": {
+   "events": [
+    [
+     125,
+     "watch",
+     null,
+     100.2
+    ],
+    [
+     130,
+     "confirmed",
+     "breakout",
+     100.2
+    ]
+   ],
+   "why": "突破判定只能用突破当天之前已形成的上沿；当天最高价不参与"
+  },
+  "code_matches_prediction": true,
+  "code_matches_original_reading": true,
+  "needs_user_choice": false,
+  "note": "与原文一致；突破后上沿锁定"
+ },
+ "B5_two_failure_actions_days_apart": {
+  "production_events": [
+   [
+    125,
+    "watch",
+    null,
+    100.2
+   ],
+   [
+    130,
+    "confirmed",
+    "breakout",
+    100.2
+   ]
+  ],
+  "predicted_code": [
+   [
+    125,
+    "watch",
+    null,
+    100.2
+   ],
+   [
+    130,
+    "confirmed",
+    "breakout",
+    100.2
+   ]
+  ],
+  "original_reading": {
+   "events": [
+    [
+     125,
+     "watch",
+     null,
+     100.2
+    ],
+    [
+     130,
+     "confirmed",
+     "breakout",
+     100.2
+    ],
+    [
+     136,
+     "failed",
+     "breakout",
+     100.2
+    ]
+   ],
+   "why": "体系 §3.5“两个确认动作（不分先后，必须全部满足）”：132 跌回、136 跌破 20 组且下弯，两动作都已出现"
+  },
+  "code_matches_prediction": true,
+  "code_matches_original_reading": false,
+  "needs_user_choice": true,
+  "note": "代码要求两动作同一天同时成立，相隔数天永不失效；但“跌回”是否需在第二个动作出现时仍然成立，原文没说清"
+ },
+ "B6_ambush_fails_then_breakout": {
+  "production_events": [
+   [
+    125,
+    "watch",
+    null,
+    100.2
+   ],
+   [
+    128,
+    "confirmed",
+    "ambush",
+    100.2
+   ],
+   [
+    133,
+    "failed",
+    "ambush",
+    100.2
+   ],
+   [
+    140,
+    "confirmed",
+    "breakout",
+    100.2
+   ]
+  ],
+  "predicted_code": [
+   [
+    125,
+    "watch",
+    null,
+    100.2
+   ],
+   [
+    128,
+    "confirmed",
+    "ambush",
+    100.2
+   ],
+   [
+    133,
+    "failed",
+    "ambush",
+    100.2
+   ],
+   [
+    140,
+    "confirmed",
+    "breakout",
+    100.2
+   ]
+  ],
+  "original_reading": {
+   "events": [
+    [
+     125,
+     "watch",
+     null,
+     100.2
+    ],
+    [
+     128,
+     "confirmed",
+     "ambush",
+     100.2
+    ],
+    [
+     133,
+     "failed",
+     "ambush",
+     100.2
+    ],
+    [
+     140,
+     "confirmed",
+     "breakout",
+     100.2
+    ]
+   ],
+   "why": "体系 §4.3：埋伏底线是 20 组与 60 组交叉；“出局后重新走好可以再进”，之后的突破仍可进入"
+  },
+  "code_matches_prediction": true,
+  "code_matches_original_reading": true,
+  "needs_user_choice": false,
+  "note": "与原文一致；“不可避免要交叉”未实装（代码只认 SMA20<=SMA60 已发生）"
+ },
+ "B7_missing_quotes": {
+  "production_events": [
+   [
+    125,
+    "watch",
+    null,
+    100.2
+   ]
+  ],
+  "predicted_code": [
+   [
+    125,
+    "watch",
+    null,
+    100.2
+   ]
+  ],
+  "original_reading": {
+   "events": [
+    [
+     145,
+     "watch",
+     null,
+     100.2
+    ]
+   ],
+   "why": "缺价日不能证明在整理；只有真实横盘日计入，126 个真实横盘日要到第 145 天"
+  },
+  "code_matches_prediction": true,
+  "code_matches_original_reading": false,
+  "needs_user_choice": false,
+  "note": "代码把 20 天无报价当作“短暂离开”继续累加寿命：未知被当成已整理"
+ },
+ "B8_same_zone_repeat": {
+  "production_events": [
+   [
+    125,
+    "watch",
+    null,
+    100.2
+   ],
+   [
+    130,
+    "confirmed",
+    "breakout",
+    100.2
+   ],
+   [
+    133,
+    "failed",
+    "breakout",
+    100.2
+   ],
+   [
+    134,
+    "watch",
+    null,
+    100.0
+   ],
+   [
+    135,
+    "confirmed",
+    "breakout",
+    100.0
+   ]
+  ],
+  "predicted_code": [
+   [
+    125,
+    "watch",
+    null,
+    100.2
+   ],
+   [
+    130,
+    "confirmed",
+    "breakout",
+    100.2
+   ],
+   [
+    133,
+    "failed",
+    "breakout",
+    100.2
+   ],
+   [
+    134,
+    "watch",
+    null,
+    100.0
+   ],
+   [
+    135,
+    "confirmed",
+    "breakout",
+    100.0
+   ]
+  ],
+  "original_reading": {
+   "events": [
+    [
+     125,
+     "watch",
+     null,
+     100.2
+    ],
+    [
+     130,
+     "confirmed",
+     "breakout",
+     100.2
+    ],
+    [
+     133,
+     "failed",
+     "breakout",
+     100.2
+    ]
+   ],
+   "why": "失效后价格回到同一箱体；“重新走好”至少要再次收盘站上原箱体上沿 100.2，100.1 不是"
+  },
+  "code_matches_prediction": true,
+  "code_matches_original_reading": false,
+  "needs_user_choice": false,
+  "note": "代码失效后立即在同一箱体开新生命周期，上沿重置为当天最高 100.0，次日 100.1 即算第二次突破"
+ },
+ "B9_supplement_alignment_not_new": {
+  "production_events": [
+   [
+    125,
+    "watch",
+    null,
+    100.2
+   ],
+   [
+    126,
+    "confirmed",
+    "ambush",
+    100.2
+   ]
+  ],
+  "predicted_code": [
+   [
+    125,
+    "watch",
+    null,
+    100.2
+   ],
+   [
+    126,
+    "confirmed",
+    "ambush",
+    100.2
+   ]
+  ],
+  "original_reading": {
+   "events": [
+    [
+     125,
+     "watch",
+     null,
+     100.2
+    ]
+   ],
+   "why": "体系 §4.3/实现 B2：“均线刚形成多头排列时”埋伏；本例多头排列开区前早已存在"
+  },
+  "code_matches_prediction": true,
+  "code_matches_original_reading": false,
+  "needs_user_choice": false,
+  "note": "代码文件头写“false -> true 切换”，实现却只检查当天为真，没有检查前一天为假"
+ },
+ "_note": "人工合成；时钟类型为注入值；其余为生产 dense_breakout 2.0.0 实际行为。事件格式 [第几天, 类型, 版本, 参照价]。"
+}
