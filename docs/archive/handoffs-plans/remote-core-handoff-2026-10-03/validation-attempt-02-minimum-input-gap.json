@@ -1,0 +1,134 @@
+{
+  "tested_at": "2026-10-03T13:08:42.681133+08:00",
+  "platform": "macOS arm64 only",
+  "restore_method": "New independent minimal directory; separate APFS copy-on-write files with distinct inodes and an independent Git object copy, no hardlinks or Git alternates; task paths restored only",
+  "dependency_install": {
+    "interpreter": "Python3.11.7",
+    "command": "python -m pip install --disable-pip-version-check --no-cache-dir -r docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/requirements-minimal.txt",
+    "exit_code": 0,
+    "environment": "fresh venv without system-site-packages",
+    "network": "public package index, no paid or data vendor calls"
+  },
+  "checks": [
+    {
+      "name": "integrity",
+      "command": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-venv/bin/python",
+        "-B",
+        "docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/tools/verify_handoff.py",
+        "--root",
+        "."
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-minimal",
+      "portable_cwd": "repository root",
+      "portable_python": "task venv python",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "passed_expected_condition": true,
+      "elapsed_seconds": 0.786,
+      "stdout": "{\n  \"integrity\": \"passed\",\n  \"checked_files\": 1064,\n  \"checksum_entries\": 1065,\n  \"errors\": [],\n  \"current_missing_definition_references\": 101,\n  \"qualification\": \"blocked\",\n  \"qualification_gaps\": [\n    \"definition-evidence-closure\",\n    \"qualified-six-etf-inputs\",\n    \"hourly-historical-input\",\n    \"asof-structure-intermediate-lists\",\n    \"uncommitted-new-workflow-runtime\"\n  ],\n  \"allowed_next_action\": \"resolve gaps; read-only minimum checks only\",\n  \"full_research_or_production_approved\": false,\n  \"exit_code\": 0\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "real-input-and-rule-smoke",
+      "command": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-venv/bin/python",
+        "-B",
+        "docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/tools/smoke.py",
+        "--root",
+        "."
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-minimal",
+      "portable_cwd": "repository root",
+      "portable_python": "task venv python",
+      "exit_code": 1,
+      "expected_exit_code": 0,
+      "passed_expected_condition": false,
+      "elapsed_seconds": 22.338,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-minimal/docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/tools/smoke.py\", line 62, in <module>\n    print(json.dumps(main(args.root), ensure_ascii=False, indent=2))\n                     ^^^^^^^^^^^^^^^\n  File \"/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-minimal/docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/tools/smoke.py\", line 29, in main\n    frame = classify_colors(compute_features(bars.iloc[:180].copy()))\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-minimal/src/lei_signal/features/indicators.py\", line 115, in compute_features\n    settings = config or indicator_config()\n                         ^^^^^^^^^^^^^^^^^^\n  File \"/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-minimal/src/lei_signal/domain/rules_config.py\", line 82, in indicator_config\n    return dict(load_ruleset(path).get(\"indicators\") or {})\n                ^^^^^^^^^^^^^^^^^^\n  File \"/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-minimal/src/lei_signal/domain/rules_config.py\", line 26, in load_ruleset\n    raise FileNotFoundError(f\"规则账本缺失: {config_path}\")\nFileNotFoundError: 规则账本缺失: /Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-minimal/configs/rules.v2.yaml\n"
+    },
+    {
+      "name": "minimum-related-tests",
+      "command": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/unit/test_first_ma_pullback.py::test_appending_future_bars_does_not_change_past_events",
+        "tests/unit/test_first_ma_pullback.py::test_event_ids_deterministic"
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-minimal",
+      "portable_cwd": "repository root",
+      "portable_python": "task venv python",
+      "exit_code": 1,
+      "expected_exit_code": 0,
+      "passed_expected_condition": false,
+      "elapsed_seconds": 0.644,
+      "stdout": "FF                                                                       [100%]\n=================================== FAILURES ===================================\n____________ test_appending_future_bars_does_not_change_past_events ____________\n\n    def test_appending_future_bars_does_not_change_past_events() -> None:\n>       full_frame = _frame()\n                     ^^^^^^^^\n\ntests/unit/test_first_ma_pullback.py:145: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/unit/test_first_ma_pullback.py:62: in _frame\n    return classify_colors(compute_features(_uptrend_bars(**kwargs)))\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc/lei_signal/features/indicators.py:115: in compute_features\n    settings = config or indicator_config()\n                         ^^^^^^^^^^^^^^^^^^\nsrc/lei_signal/domain/rules_config.py:82: in indicator_config\n    return dict(load_ruleset(path).get(\"indicators\") or {})\n                ^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\npath = None\n\n    @functools.lru_cache(maxsize=4)\n    def load_ruleset(path: str | None = None) -> dict[str, Any]:\n        \"\"\"加载并缓存规则账本。\"\"\"\n        config_path = Path(path) if path else _default_config_path()\n        if not config_path.exists():\n>           raise FileNotFoundError(f\"规则账本缺失: {config_path}\")\nE           FileNotFoundError: 规则账本缺失: /Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-minimal/configs/rules.v2.yaml\n\nsrc/lei_signal/domain/rules_config.py:26: FileNotFoundError\n_________________________ test_event_ids_deterministic _________________________\n\n    def test_event_ids_deterministic() -> None:\n>       frame = _frame()\n                ^^^^^^^^\n\ntests/unit/test_first_ma_pullback.py:157: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/unit/test_first_ma_pullback.py:62: in _frame\n    return classify_colors(compute_features(_uptrend_bars(**kwargs)))\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc/lei_signal/features/indicators.py:115: in compute_features\n    settings = config or indicator_config()\n                         ^^^^^^^^^^^^^^^^^^\nsrc/lei_signal/domain/rules_config.py:82: in indicator_config\n    return dict(load_ruleset(path).get(\"indicators\") or {})\n                ^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\npath = None\n\n    @functools.lru_cache(maxsize=4)\n    def load_ruleset(path: str | None = None) -> dict[str, Any]:\n        \"\"\"加载并缓存规则账本。\"\"\"\n        config_path = Path(path) if path else _default_config_path()\n        if not config_path.exists():\n>           raise FileNotFoundError(f\"规则账本缺失: {config_path}\")\nE           FileNotFoundError: 规则账本缺失: /Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-minimal/configs/rules.v2.yaml\n\nsrc/lei_signal/domain/rules_config.py:26: FileNotFoundError\n=========================== short test summary info ============================\nFAILED tests/unit/test_first_ma_pullback.py::test_appending_future_bars_does_not_change_past_events\nFAILED tests/unit/test_first_ma_pullback.py::test_event_ids_deterministic - F...\n2 failed in 0.36s\n",
+      "stderr": ""
+    },
+    {
+      "name": "full-research-gap-block",
+      "command": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-venv/bin/python",
+        "-B",
+        "docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/tools/verify_handoff.py",
+        "--root",
+        ".",
+        "--require-full-research"
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-minimal",
+      "portable_cwd": "repository root",
+      "portable_python": "task venv python",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "passed_expected_condition": true,
+      "elapsed_seconds": 0.768,
+      "stdout": "{\n  \"integrity\": \"passed\",\n  \"checked_files\": 1064,\n  \"checksum_entries\": 1065,\n  \"errors\": [],\n  \"current_missing_definition_references\": 101,\n  \"qualification\": \"blocked\",\n  \"qualification_gaps\": [\n    \"definition-evidence-closure\",\n    \"qualified-six-etf-inputs\",\n    \"hourly-historical-input\",\n    \"asof-structure-intermediate-lists\",\n    \"uncommitted-new-workflow-runtime\"\n  ],\n  \"allowed_next_action\": \"resolve gaps; read-only minimum checks only\",\n  \"full_research_or_production_approved\": false,\n  \"exit_code\": 2\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "repo-hygiene",
+      "command": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-venv/bin/python",
+        "-B",
+        "scripts/check_repo_hygiene.py"
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-minimal",
+      "portable_cwd": "repository root",
+      "portable_python": "task venv python",
+      "exit_code": 1,
+      "expected_exit_code": 0,
+      "passed_expected_condition": false,
+      "elapsed_seconds": 0.042,
+      "stdout": "✗ 归置自检发现 9 处违规（规约见 AGENTS.md「文件归置规约」）：\n  - [跟踪] configs/rules.v2.yaml 未被 git 跟踪但被代码按默认路径依赖\n  - [跟踪] configs/newsfeed.json 未被 git 跟踪但被代码按默认路径依赖\n  - [跟踪] configs/dca_evidence.json 未被 git 跟踪但被代码按默认路径依赖\n  - [跟踪] configs/semantic_states.v1.json 未被 git 跟踪但被代码按默认路径依赖\n  - [跟踪] configs/sentiment_evidence.json 未被 git 跟踪但被代码按默认路径依赖\n  - [跟踪] docs/experiments/registry.json 未被 git 跟踪但被代码按默认路径依赖\n  - [跟踪] docs/experiments/experience.json 未被 git 跟踪但被代码按默认路径依赖\n  - [跟踪] docs/experiments/module_winrate.json 未被 git 跟踪但被代码按默认路径依赖\n  - [跟踪] docs/research/definitions.v1.json 未被 git 跟踪但被代码按默认路径依赖\n",
+      "stderr": ""
+    },
+    {
+      "name": "dependency-consistency",
+      "command": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-venv/bin/python",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-minimal",
+      "portable_cwd": "repository root",
+      "portable_python": "task venv python",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "passed_expected_condition": true,
+      "elapsed_seconds": 0.825,
+      "stdout": "No broken requirements found.\n",
+      "stderr": ""
+    }
+  ],
+  "full_research_approved": false,
+  "sealed_research_reruns": 0,
+  "no_cross_os_claim": true,
+  "previous_failed_restore": "validation-attempt-01-incomplete-checkout.json"
+}

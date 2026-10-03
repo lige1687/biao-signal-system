@@ -1,0 +1,133 @@
+{
+  "tested_at": "2026-10-03T13:03:12.852660+08:00",
+  "platform": "macOS arm64 only",
+  "restore_method": "git clone --no-local --no-hardlinks exact ef063a7a baseline into independent directory; copied only task package and its own progress; no source Git alternates",
+  "dependency_install": {
+    "interpreter": "Python3.11.7",
+    "command": "python -m pip install --disable-pip-version-check --no-cache-dir -r docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/requirements-minimal.txt",
+    "exit_code": 0,
+    "environment": "fresh venv without system-site-packages",
+    "network": "public package index, no paid or data vendor calls"
+  },
+  "checks": [
+    {
+      "name": "integrity",
+      "command": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-venv/bin/python",
+        "-B",
+        "docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/tools/verify_handoff.py",
+        "--root",
+        "."
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-checkout",
+      "portable_cwd": "repository root",
+      "portable_python": "task venv python",
+      "exit_code": 1,
+      "expected_exit_code": 0,
+      "passed_expected_condition": false,
+      "elapsed_seconds": 0.722,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-checkout/docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/tools/verify_handoff.py\", line 67, in <module>\n    result = verify(args.root, args.require_full_research)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-checkout/docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/tools/verify_handoff.py\", line 44, in verify\n    registry = json.loads(definition_path.read_text(encoding=\"utf-8\"))\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.11/3.11.7_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/pathlib.py\", line 1058, in read_text\n    with self.open(mode='r', encoding=encoding, errors=errors) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.11/3.11.7_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/pathlib.py\", line 1044, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-checkout/docs/research/definitions.v1.json'\n"
+    },
+    {
+      "name": "real-input-and-rule-smoke",
+      "command": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-venv/bin/python",
+        "-B",
+        "docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/tools/smoke.py",
+        "--root",
+        "."
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-checkout",
+      "portable_cwd": "repository root",
+      "portable_python": "task venv python",
+      "exit_code": 1,
+      "expected_exit_code": 0,
+      "passed_expected_condition": false,
+      "elapsed_seconds": 0.306,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-checkout/docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/tools/smoke.py\", line 62, in <module>\n    print(json.dumps(main(args.root), ensure_ascii=False, indent=2))\n                     ^^^^^^^^^^^^^^^\n  File \"/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-checkout/docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/tools/smoke.py\", line 16, in main\n    preflight = verify(root)\n                ^^^^^^^^^^^^\n  File \"/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-checkout/docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/tools/verify_handoff.py\", line 44, in verify\n    registry = json.loads(definition_path.read_text(encoding=\"utf-8\"))\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.11/3.11.7_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/pathlib.py\", line 1058, in read_text\n    with self.open(mode='r', encoding=encoding, errors=errors) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.11/3.11.7_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/pathlib.py\", line 1044, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-checkout/docs/research/definitions.v1.json'\n"
+    },
+    {
+      "name": "minimum-related-tests",
+      "command": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/unit/test_first_ma_pullback.py::test_appending_future_bars_does_not_change_past_events",
+        "tests/unit/test_first_ma_pullback.py::test_event_ids_deterministic"
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-checkout",
+      "portable_cwd": "repository root",
+      "portable_python": "task venv python",
+      "exit_code": 4,
+      "expected_exit_code": 0,
+      "passed_expected_condition": false,
+      "elapsed_seconds": 0.17,
+      "stdout": "\nno tests ran in 0.00s\n",
+      "stderr": "ERROR: file or directory not found: tests/unit/test_first_ma_pullback.py::test_appending_future_bars_does_not_change_past_events\n\n"
+    },
+    {
+      "name": "full-research-gap-block",
+      "command": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-venv/bin/python",
+        "-B",
+        "docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/tools/verify_handoff.py",
+        "--root",
+        ".",
+        "--require-full-research"
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-checkout",
+      "portable_cwd": "repository root",
+      "portable_python": "task venv python",
+      "exit_code": 1,
+      "expected_exit_code": 2,
+      "passed_expected_condition": false,
+      "elapsed_seconds": 0.293,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-checkout/docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/tools/verify_handoff.py\", line 67, in <module>\n    result = verify(args.root, args.require_full_research)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-checkout/docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/tools/verify_handoff.py\", line 44, in verify\n    registry = json.loads(definition_path.read_text(encoding=\"utf-8\"))\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.11/3.11.7_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/pathlib.py\", line 1058, in read_text\n    with self.open(mode='r', encoding=encoding, errors=errors) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.11/3.11.7_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/pathlib.py\", line 1044, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-checkout/docs/research/definitions.v1.json'\n"
+    },
+    {
+      "name": "repo-hygiene",
+      "command": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-venv/bin/python",
+        "-B",
+        "scripts/check_repo_hygiene.py"
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-checkout",
+      "portable_cwd": "repository root",
+      "portable_python": "task venv python",
+      "exit_code": 2,
+      "expected_exit_code": 0,
+      "passed_expected_condition": false,
+      "elapsed_seconds": 0.019,
+      "stdout": "",
+      "stderr": "/opt/homebrew/Cellar/python@3.11/3.11.7_1/Frameworks/Python.framework/Versions/3.11/Resources/Python.app/Contents/MacOS/Python: can't open file '/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-checkout/scripts/check_repo_hygiene.py': [Errno 2] No such file or directory\n"
+    },
+    {
+      "name": "dependency-consistency",
+      "command": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-venv/bin/python",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/remote-astra-acceptance-20261002/restore-checkout",
+      "portable_cwd": "repository root",
+      "portable_python": "task venv python",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "passed_expected_condition": true,
+      "elapsed_seconds": 0.5,
+      "stdout": "No broken requirements found.\n",
+      "stderr": ""
+    }
+  ],
+  "full_research_approved": false,
+  "sealed_research_reruns": 0,
+  "no_cross_os_claim": true
+}
