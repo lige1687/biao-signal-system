@@ -1,4 +1,5 @@
 import { MARKLINES, type MarkLine } from '../../components/trend/zones';
+import { referenceColors, referenceReading, type ReferenceReading } from './reference-reading';
 
 export type Market = 'cn' | 'us';
 export type Endpoint = 'rates' | 'macro' | 'usMacro';
@@ -37,7 +38,7 @@ export const metrics: Metric[] = [
   metric('altsa','美国汽车销量 · 折年率',['us'],'growth','usMacro','百万辆','百万辆','月','上升可能来自消费改善或供应恢复；结合库存、信贷与促销。折年率不是当月销量。','FRED · TOTALSA'),
   metric('dgorder_yoy','美国耐用品新订单同比',['us'],'growth','usMacro','%','%','月','观察订单需求；结合出货与细项，大额飞机订单或基数会造成波动。','FRED · DGORDER'),
 ];
-export interface Reference extends MarkLine { kind: '定义线' | '原页面参考' | '历史分位参考'; basis: string }
+export interface Reference extends MarkLine, ReferenceReading { kind: '定义线' | '原页面参考' | '历史分位参考'; basis: string }
 const historical: Record<string, {window: string; labels: string[]}> = {
   erp_cn:{window:'2005年起固定标定',labels:['P20','P50','P80']},
   erp_us:{window:'2006年起固定标定',labels:['零线','P50','P80']},
@@ -51,9 +52,9 @@ export function referencesFor(key: string): Reference[] {
     const definition = key==='pmi' || (line.y===0 && zeroKeys.has(key));
     const h = historical[key];
     const kind: Reference['kind'] = definition ? '定义线' : h ? '历史分位参考' : '原页面参考';
-    const label = key==='pmi' ? '扩张 / 收缩 50' : definition ? '零线 0' : h ? `${h.labels[i]} ${line.y}` : `参考 ${line.y}`;
+    const reading = referenceReading(key,i,line.y);
     const basis = definition ? (key==='pmi'?'PMI定义分界；不是交易阈值':'数值零点；不等于市场多空分界') : h ? `${h.window}；P20/P50/P80为当时历史的20/50/80百分位，未随当前窗口重算` : '沿用原基本面经验线；不是官方或LEI买卖阈值';
-    return {y:line.y,label,color:definition?'#64748b':'#94a3b8',kind,basis};
+    return {y:line.y,...reading,color:referenceColors[reading.tone],kind,basis:h && !definition?`${h.labels[i]}；${basis}`:basis};
   });
 }
 export interface Series { dates: string[]; values: (number|null)[]; notice: string }

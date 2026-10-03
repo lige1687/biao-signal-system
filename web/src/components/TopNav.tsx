@@ -59,7 +59,6 @@ export default function TopNav() {
       { to: "/plans", label: "监督待办", badge: open || undefined },
     ],
     [
-      { to: "/fundamentals", label: "基本面" },
       { to: "/factors", label: "因子观测台" },
       { to: "/news", label: "资讯流" },
       { to: "/daily", label: "收盘简报" },

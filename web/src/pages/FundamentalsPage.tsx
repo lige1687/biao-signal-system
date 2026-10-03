@@ -8,6 +8,7 @@ import MetricCard from "../components/trend/MetricCard";
 import TrendChart from "../components/trend/TrendChart";
 import TrendDrawer, { type DrawerState } from "../components/trend/TrendDrawer";
 import SentimentProjectionCard from "../components/SentimentProjectionCard";
+import { metrics as dashboardMetrics, referencesFor } from '../features/market-understanding/dashboard-model';
 import { buildDrawer } from "../components/trend/drawer";
 import { alignTo, unionDates } from "../components/trend/align";
 import { fmt, pctClass } from "../utils/format";
@@ -1384,20 +1385,22 @@ function UsMacroSection({ onOpen }: { onOpen: (d: DrawerState) => void }) {
           const zones = ZONES[it.key] ?? [];
           const zone = findZone(it.value ?? null, zones);
           const fmtVal = US_VALUE_FMT[it.key];
+          const isUsCpi = it.key === 'cpiaucsl_yoy';
+          const cpiReading = dashboardMetrics.find(m=>m.key==='cpiaucsl_yoy')!;
           return (
             <MetricCard
               key={it.key}
               label={it.name_cn}
               value={it.value == null || !fmtVal ? "-" : fmtVal(it.value)}
-              sub={`${it.freq}更 · ${it.date ?? "-"} · ${it.note_cn}`}
-              zoneLabel={it.value == null ? undefined : zone.label}
-              zoneTone={it.value == null ? undefined : zone.tone}
+              sub={isUsCpi ? `${it.date?.slice(0,7) ?? '-'} 所属月 · ${cpiReading.reading}` : `${it.freq}更 · ${it.date ?? "-"} · ${it.note_cn}`}
+              zoneLabel={it.value == null ? undefined : isUsCpi ? '涨幅需结合增长与利率' : zone.label}
+              zoneTone={it.value == null ? undefined : isUsCpi ? 'neutral' : zone.tone}
               sparkValues={ser?.values}
               markY={SPARK_MARK[it.key] ?? null}
               onOpen={() => {
                 if (!ser || ser.dates.length < 2) return;
                 onOpen(
-                  buildDrawer({
+                  {...buildDrawer({
                     title: it.name_cn,
                     cur: it.value ?? null,
                     unit: ser.unit,
@@ -1407,7 +1410,11 @@ function UsMacroSection({ onOpen }: { onOpen: (d: DrawerState) => void }) {
                     key: it.key,
                     periodLabel: it.freq,
                     curDisplay: it.value == null || !fmtVal ? "-" : fmtVal(it.value),
-                  }),
+                  }), ...(isUsCpi ? {
+                    subtitle: `${it.value == null || !fmtVal ? '-' : fmtVal(it.value)} · ${it.date?.slice(0,7) ?? '-'} 所属月 · 2%为经验参考，非政策目标；结合增长与利率看`,
+                    zones: [], markLines: referencesFor(it.key),
+                    footnote: `${cpiReading.reading} ${referencesFor(it.key).map(r=>`${r.label}：${r.explanation}`).join(' ')}`,
+                  } : {})},
                 );
               }}
             />
@@ -1946,9 +1953,9 @@ function MacroSection({
       })}
       <CommodityCard data={commodities} />
       <div className="macro-card todo-card">
-        <div className="macro-head"><span className="macro-name">更多消费指标</span></div>
+        <div className="macro-head"><span className="macro-name">美国经济资料</span></div>
         <div className="macro-note">
-          就业（初请/续请失业金、非农）、WEI 周经济指数 - 第二批接入（需 FRED key）。
+          就业、房产、消费与WEI已在 <a href="/market-understanding#fund-sec-usmacro">美国宏观分区</a> 展示；具体可用性以各项日期和数据状态为准。
         </div>
       </div>
     </div>
@@ -1968,16 +1975,17 @@ const FUND_SECTIONS: { id: string; label: string; tip: string }[] = [
   { id: "fund-sec-usmacro", label: "美国宏观", tip: "就业 / 房产 / 汽车 / WEI / 物价 / 订单（FRED）" },
 ];
 
-export default function FundamentalsPage() {
+export default function FundamentalsPage({ section }: { section?: string } = {}) {
   const queryClient = useQueryClient();
   const [drawer, setDrawer] = useState<DrawerState>(null);
   // 利率趋势数据一次拉满 20 年：抽屉里的 3/5/10/20 年 chips 是纯本地缩放窗口，不再重拉。
   const ratesLookback = RATE_LOOKBACK_OPTIONS[RATE_LOOKBACK_OPTIONS.length - 1].days;
   // 当前页签：初始读 URL hash（深链/刷新保持），切换时写回 hash 并回到页首。
-  const [activeSection, setActiveSection] = useState(() => {
+  const [localSection, setActiveSection] = useState(() => {
     const h = window.location.hash.replace("#", "");
     return FUND_SECTIONS.some((s) => s.id === h) ? h : FUND_SECTIONS[0].id;
   });
+  const activeSection = section ?? localSection;
 
   const jumpTo = (id: string) => {
     setActiveSection(id);
@@ -1988,26 +1996,31 @@ export default function FundamentalsPage() {
   const { data: ov, isLoading: ovLoading, error: ovError } = useQuery({
     queryKey: ["fundamentalsOverview"],
     queryFn: () => fundamentalsApi.overview(),
+    enabled: activeSection === "fund-sec-macro",
     staleTime: 5 * 60_000,
   });
   const { data: rates, error: ratesError } = useQuery({
     queryKey: ["fundamentalsRates"],
     queryFn: () => fundamentalsApi.rates(),
+    enabled: activeSection === "fund-sec-rates",
     staleTime: 5 * 60_000,
   });
   const { data: ratesHist } = useQuery({
     queryKey: ["fundamentalsRatesHistory", ratesLookback],
     queryFn: () => fundamentalsApi.ratesHistory(ratesLookback),
+    enabled: activeSection === "fund-sec-rates",
     staleTime: 30 * 60_000,
   });
   const { data: macroHist } = useQuery({
     queryKey: ["fundamentalsMacroHistory", 60],
     queryFn: () => fundamentalsApi.macroHistory(60),
+    enabled: activeSection === "fund-sec-macro",
     staleTime: 30 * 60_000,
   });
   const { data: commoditiesData, error: commoditiesError } = useQuery({
     queryKey: ["fundamentalsCommodities"],
     queryFn: () => fundamentalsApi.commodities(),
+    enabled: activeSection === "fund-sec-macro",
     staleTime: 30 * 60_000,
   });
 
@@ -2036,20 +2049,20 @@ export default function FundamentalsPage() {
   });
 
   const allErrors = [
-    ...(ov?.errors ?? []),
-    ...(rates?.errors ?? []),
-    ...(ratesHist?.errors ?? []),
-    ...(macroHist?.errors ?? []),
-    ...(commoditiesError
+    ...(activeSection === "fund-sec-macro" ? ov?.errors ?? [] : []),
+    ...(activeSection === "fund-sec-rates" ? rates?.errors ?? [] : []),
+    ...(activeSection === "fund-sec-rates" ? ratesHist?.errors ?? [] : []),
+    ...(activeSection === "fund-sec-macro" ? macroHist?.errors ?? [] : []),
+    ...(activeSection === "fund-sec-macro" && commoditiesError
       ? [`大宗商品：${commoditiesError instanceof Error ? commoditiesError.message : String(commoditiesError)}`]
       : []),
   ];
 
   return (
-    <div className="page">
+    <div className={section ? "page mu-fund-embedded" : "page"}>
       <div className="header">
-        <h1>基本面参考</h1>
-        {ov && (
+        {!section && <h1>基本面参考</h1>}
+        {activeSection === "fund-sec-macro" && ov && (
           <span className="generated">
             更新于 {new Date(ov.generated_at).toLocaleString("zh-CN", { hour12: false })}
           </span>
@@ -2064,19 +2077,18 @@ export default function FundamentalsPage() {
         </button>
       </div>
 
-      {ov && <div className="legend">{ov.disclaimer_cn}</div>}
+      {activeSection === "fund-sec-macro" && ov && <div className="legend">{ov.disclaimer_cn}</div>}
       {allErrors.length > 0 && (
         <div className="fund-errors">
-          部分数据源暂不可用（其余内容不受影响）：
-          {allErrors.map((e, i) => <div key={i}>· {e}</div>)}
+          资料接口返回 {allErrors.length} 项缺失提示（可能包含该旧接口的其他资料项）。已取得的图表仍可查看，空项不代表零值。
         </div>
       )}
-      {(ovError || ratesError) && (
-        <div className="fund-errors">加载失败：{((ovError || ratesError) as Error).message}</div>
+      {((activeSection === "fund-sec-macro" && ovError) || (activeSection === "fund-sec-rates" && ratesError)) && (
+        <div className="fund-errors">加载失败：{(activeSection === "fund-sec-macro" ? ovError : ratesError)?.message}</div>
       )}
 
       {/* 分区页签：sticky 吸顶，点选直达（各卡点开仍有大图抽屉） */}
-      <nav className="fund-nav" aria-label="分区导航">
+      {!section && <nav className="fund-nav" aria-label="分区导航">
         {FUND_SECTIONS.map((s) => (
           <button
             key={s.id}
@@ -2088,7 +2100,7 @@ export default function FundamentalsPage() {
             {s.label}
           </button>
         ))}
-      </nav>
+      </nav>}
 
       {/* ── ① 市场 ── */}
       {activeSection === "fund-sec-market" && (
