@@ -199,3 +199,15 @@ bootstrap、Calmar、expR、PF、样本内/样本外、走查（walk-forward）*
 
 跨项目的继续、停止、交付与恢复流程使用用户级 `$research-closure`；项目委派和回调仍由 `.agents/skills/lei-gpt-zcode-orchestrator/SKILL.md` 管理。先复用本项目权威规范、定义、报告模板、实验账本和 manifest；通用默认值不扩大原预算和授权，不重启已有绿色/黑色研究。默认由 AI 自主设计和完成必要实验，中间结果留在产物中，最后一次性交付因子性能、相对已有信息的增量和适用范围；不逐项请求继续。只在关键定义、数据或权限确实阻塞时合并提问，用户主动要求进度或阶段交付时服从。
 <!-- research-closure:project:end -->
+
+
+<!-- coordination:classic-factor:start -->
+## 统一协作入口（2026-10-03）
+
+跨任务当前状态以远端 `coordination/lei` 的根 `COORDINATION.md` 和
+`docs/coordination/tasks/<task-id>.md` 为准；本任务唯一ID `classic-factor-research`。
+每轮实质工作先获取最新协调分支并读相关记录；阶段、范围、阻塞、暂停或结束变化时
+更新并推送自己的任务记录，读回核验准确提交。代码和研究证据继续留独立工作分支。
+旧 `docs/ops/work-progress/` 保留阶段历史；记录不是排他锁，重叠先协调再改冲突部分。
+不覆盖原指令、不切换脏开发区、不重复封存实验；原研究、数据及发布权限边界保持。
+<!-- coordination:classic-factor:end -->
