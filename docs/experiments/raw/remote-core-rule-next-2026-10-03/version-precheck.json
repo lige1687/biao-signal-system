@@ -1,0 +1,307 @@
+{
+  "checked_at": "2026-10-03T13:34:55.320415+08:00",
+  "question": "Before new rule comparisons, did the published newer core snapshot change accepted source behavior or close required evidence?",
+  "mode": "read_only_version_and_qualification_precheck",
+  "why_recheck": "newer published core-sync commit appeared after acceptance, so old completed checks are not rerun; only source versions and referenced file presence compared",
+  "source": "git objects pinned by matching remote core-sync ref; no Air worktree code imported",
+  "newer_core_commit": "d7da6cb0f9c127606b6faa572fabc9ee93f104f7",
+  "fixed_delivery_commit": "4155b4db7ccd14674eff2e29dfaf102d2ac3e5f9",
+  "comparison": [
+    {
+      "path": "src/lei_signal/rules/first_ma_pullback.py",
+      "newer_commit": "d7da6cb0f9c127606b6faa572fabc9ee93f104f7",
+      "newer_bytes": 24508,
+      "newer_sha256": "cbad98a136135a936470a1114e95bea656953c42c37637ee4e3f5bedc9153367",
+      "accepted_baseline_commit": "4155b4db7ccd14674eff2e29dfaf102d2ac3e5f9",
+      "baseline_sha256": "cbad98a136135a936470a1114e95bea656953c42c37637ee4e3f5bedc9153367",
+      "byte_identical": true
+    },
+    {
+      "path": "src/lei_signal/compose/pipeline.py",
+      "newer_commit": "d7da6cb0f9c127606b6faa572fabc9ee93f104f7",
+      "newer_bytes": 21533,
+      "newer_sha256": "b072cad4d33ff05d1506b92e25de30e90b2f4a0ab57b90cdf16ea763b5b76e5d",
+      "accepted_baseline_commit": "4155b4db7ccd14674eff2e29dfaf102d2ac3e5f9",
+      "baseline_sha256": "b072cad4d33ff05d1506b92e25de30e90b2f4a0ab57b90cdf16ea763b5b76e5d",
+      "byte_identical": true
+    },
+    {
+      "path": "src/lei_signal/rules/tradability_gate.py",
+      "newer_commit": "d7da6cb0f9c127606b6faa572fabc9ee93f104f7",
+      "newer_bytes": 10679,
+      "newer_sha256": "64bd55ba3b7384f1c1d6f03a311a75a6ac5143c689cbd799dc1f20e99e255518",
+      "accepted_baseline_commit": "4155b4db7ccd14674eff2e29dfaf102d2ac3e5f9",
+      "baseline_sha256": "64bd55ba3b7384f1c1d6f03a311a75a6ac5143c689cbd799dc1f20e99e255518",
+      "byte_identical": true
+    },
+    {
+      "path": "src/lei_signal/research/definitions.py",
+      "newer_commit": "d7da6cb0f9c127606b6faa572fabc9ee93f104f7",
+      "newer_bytes": 26232,
+      "newer_sha256": "84f7b9ba76f4704e81f4f4d0c1784e2ab1ad7e3aa225abeb4796fa10dcbfec94",
+      "accepted_baseline_commit": "4155b4db7ccd14674eff2e29dfaf102d2ac3e5f9",
+      "baseline_sha256": "84f7b9ba76f4704e81f4f4d0c1784e2ab1ad7e3aa225abeb4796fa10dcbfec94",
+      "byte_identical": true
+    },
+    {
+      "path": "docs/research/definitions.v1.json",
+      "newer_commit": "d7da6cb0f9c127606b6faa572fabc9ee93f104f7",
+      "newer_bytes": 457435,
+      "newer_sha256": "5a826d07035c377db3b793b9bd9aee0287430dab206e551001af1aedd5c0f357",
+      "accepted_baseline_commit": "4155b4db7ccd14674eff2e29dfaf102d2ac3e5f9",
+      "baseline_sha256": "5a826d07035c377db3b793b9bd9aee0287430dab206e551001af1aedd5c0f357",
+      "byte_identical": true
+    },
+    {
+      "path": "scripts/run_factor_lab.py",
+      "newer_commit": "d7da6cb0f9c127606b6faa572fabc9ee93f104f7",
+      "newer_bytes": 2507,
+      "newer_sha256": "075d02d39fd38d8f21dc7cc2aa8a15b3260ca69169df6302a3ee6c8ffb042247",
+      "accepted_baseline_commit": "4155b4db7ccd14674eff2e29dfaf102d2ac3e5f9",
+      "baseline_sha256": "075d02d39fd38d8f21dc7cc2aa8a15b3260ca69169df6302a3ee6c8ffb042247",
+      "byte_identical": true
+    },
+    {
+      "path": "docs/research/current-standards.json",
+      "newer_commit": "d7da6cb0f9c127606b6faa572fabc9ee93f104f7",
+      "newer_bytes": 1209,
+      "newer_sha256": "616c0ae1a636accd35c8500be7c5c21a35c13aaf2039e9e6144cb5531d96cb57",
+      "accepted_baseline_commit": "4155b4db7ccd14674eff2e29dfaf102d2ac3e5f9",
+      "baseline_sha256": "616c0ae1a636accd35c8500be7c5c21a35c13aaf2039e9e6144cb5531d96cb57",
+      "byte_identical": true
+    }
+  ],
+  "newer_registry_missing_refs": 56,
+  "missing": [
+    {
+      "object": "mixed.rv20@1.0.0",
+      "path": "docs/experiments/raw/factor-verification-completion-b6-2026-09-20/evidence-records/mixed.rv20@1.0.0.evidence.json"
+    },
+    {
+      "object": "mixed.rv20@1.0.0",
+      "path": "docs/experiments/raw/factor-verification-completion-b6-2026-09-20/independent-check/mixed.rv20@1.0.0.result.json"
+    },
+    {
+      "object": "trend.sma50@1.0.0",
+      "path": "docs/experiments/raw/factor-b13-trend-backbone-2026-09-21/evidence-records/trend.sma50@1.0.0.evidence.json"
+    },
+    {
+      "object": "trend.sma50@1.0.0",
+      "path": "docs/experiments/raw/factor-b13-trend-backbone-2026-09-21/independent-check/trend.sma50@1.0.0.result.json"
+    },
+    {
+      "object": "trend.sma50@1.0.0",
+      "path": "docs/experiments/raw/factor-b13-controller-2026-09-21/oracle-result.json"
+    },
+    {
+      "object": "trend.distance50@1.0.0",
+      "path": "docs/experiments/raw/factor-verification-completion-b6-2026-09-20/evidence-records/trend.distance50@1.0.0.evidence.json"
+    },
+    {
+      "object": "trend.distance50@1.0.0",
+      "path": "docs/experiments/raw/factor-verification-completion-b6-2026-09-20/independent-check/trend.distance50@1.0.0.result.json"
+    },
+    {
+      "object": "trend.above50@1.0.0",
+      "path": "docs/experiments/raw/factor-b13-trend-backbone-2026-09-21/evidence-records/trend.above50@1.0.0.evidence.json"
+    },
+    {
+      "object": "trend.above50@1.0.0",
+      "path": "docs/experiments/raw/factor-b13-trend-backbone-2026-09-21/independent-check/trend.above50@1.0.0.result.json"
+    },
+    {
+      "object": "trend.above50@1.0.0",
+      "path": "docs/experiments/raw/factor-b13-controller-2026-09-21/oracle-result.json"
+    },
+    {
+      "object": "trend.cross_up50@1.0.0",
+      "path": "docs/experiments/raw/factor-b13-trend-backbone-2026-09-21/evidence-records/trend.cross_up50@1.0.0.evidence.json"
+    },
+    {
+      "object": "trend.cross_up50@1.0.0",
+      "path": "docs/experiments/raw/factor-b13-trend-backbone-2026-09-21/independent-check/trend.cross_up50@1.0.0.result.json"
+    },
+    {
+      "object": "trend.cross_up50@1.0.0",
+      "path": "docs/experiments/raw/factor-b13-controller-2026-09-21/oracle-result.json"
+    },
+    {
+      "object": "trend.sma200@1.0.0",
+      "path": "docs/experiments/raw/factor-b13-trend-backbone-2026-09-21/evidence-records/trend.sma200@1.0.0.evidence.json"
+    },
+    {
+      "object": "trend.sma200@1.0.0",
+      "path": "docs/experiments/raw/factor-b13-trend-backbone-2026-09-21/independent-check/trend.sma200@1.0.0.result.json"
+    },
+    {
+      "object": "trend.sma200@1.0.0",
+      "path": "docs/experiments/raw/factor-b13-controller-2026-09-21/oracle-result.json"
+    },
+    {
+      "object": "trend.distance200@1.0.0",
+      "path": "docs/experiments/raw/factor-b12-b200-distance200-2026-09-21/evidence-records/trend.distance200@1.0.0.evidence.json"
+    },
+    {
+      "object": "trend.distance200@1.0.0",
+      "path": "docs/experiments/raw/factor-b12-b200-distance200-2026-09-21/independent-check/trend.distance200@1.0.0.result.json"
+    },
+    {
+      "object": "trend.distance200@1.0.0",
+      "path": "docs/experiments/raw/factor-b12-controller-2026-09-21/oracle-result.json"
+    },
+    {
+      "object": "trend.above200@1.0.0",
+      "path": "docs/experiments/raw/factor-b13-trend-backbone-2026-09-21/evidence-records/trend.above200@1.0.0.evidence.json"
+    },
+    {
+      "object": "trend.above200@1.0.0",
+      "path": "docs/experiments/raw/factor-b13-trend-backbone-2026-09-21/independent-check/trend.above200@1.0.0.result.json"
+    },
+    {
+      "object": "trend.above200@1.0.0",
+      "path": "docs/experiments/raw/factor-b13-controller-2026-09-21/oracle-result.json"
+    },
+    {
+      "object": "trend.cross_up200@1.0.0",
+      "path": "docs/experiments/raw/factor-b13-trend-backbone-2026-09-21/evidence-records/trend.cross_up200@1.0.0.evidence.json"
+    },
+    {
+      "object": "trend.cross_up200@1.0.0",
+      "path": "docs/experiments/raw/factor-b13-trend-backbone-2026-09-21/independent-check/trend.cross_up200@1.0.0.result.json"
+    },
+    {
+      "object": "trend.cross_up200@1.0.0",
+      "path": "docs/experiments/raw/factor-b13-controller-2026-09-21/oracle-result.json"
+    },
+    {
+      "object": "trend.recovered200@1.0.0",
+      "path": "docs/experiments/raw/factor-b14-rv-rank-recovered200-2026-09-21/evidence-records/trend.recovered200@1.0.0.evidence.json"
+    },
+    {
+      "object": "trend.recovered200@1.0.0",
+      "path": "docs/experiments/raw/factor-b14-rv-rank-recovered200-2026-09-21/independent-check/trend.recovered200@1.0.0.result.json"
+    },
+    {
+      "object": "trend.recovered200@1.0.0",
+      "path": "docs/experiments/raw/factor-b14-controller-2026-09-21/oracle-result.json"
+    },
+    {
+      "object": "breadth.csi300.b50.common@1.0.0",
+      "path": "docs/experiments/raw/factor-verification-completion-b6-2026-09-20/evidence-records/breadth.csi300.b50.common@1.0.0.evidence.json"
+    },
+    {
+      "object": "breadth.csi300.b50.common@1.0.0",
+      "path": "docs/experiments/raw/factor-verification-completion-b6-2026-09-20/independent-check/breadth.csi300.b50.common@1.0.0.result.json"
+    },
+    {
+      "object": "breadth.csi300.b200.common@1.0.0",
+      "path": "docs/experiments/raw/factor-b12-b200-distance200-2026-09-21/evidence-records/breadth.csi300.b200.common@1.0.0.evidence.json"
+    },
+    {
+      "object": "breadth.csi300.b200.common@1.0.0",
+      "path": "docs/experiments/raw/factor-b12-b200-distance200-2026-09-21/independent-check/breadth.csi300.b200.common@1.0.0.result.json"
+    },
+    {
+      "object": "breadth.csi300.b200.common@1.0.0",
+      "path": "docs/experiments/raw/factor-b12-controller-2026-09-21/oracle-result.json"
+    },
+    {
+      "object": "mixed.bias_ema120_pct@1.0.0",
+      "path": "docs/experiments/raw/factor-b8-bias-pipeline-2026-09-21/evidence-record.json"
+    },
+    {
+      "object": "mixed.bias_ema120_pct@1.0.0",
+      "path": "docs/experiments/raw/factor-b8-bias-pipeline-2026-09-21/capture_pipeline.py"
+    },
+    {
+      "object": "mixed.bias_ema120_pct@1.0.0",
+      "path": "docs/experiments/raw/factor-b8-bias-pipeline-2026-09-21/independent_check.py"
+    },
+    {
+      "object": "mixed.bias_ema120_pct@1.0.0",
+      "path": "docs/experiments/raw/factor-b8-bias-pipeline-2026-09-21/independent-report.json"
+    },
+    {
+      "object": "trend.ma_cluster_width@1.0.0",
+      "path": "docs/experiments/raw/factor-b3b-2026-09-20/ma-cluster-width/evidence-record.json"
+    },
+    {
+      "object": "trend.ma_cluster_width@1.0.0",
+      "path": "docs/experiments/raw/factor-b3b-2026-09-20/ma-cluster-width/independent-check-report.json"
+    },
+    {
+      "object": "mixed.swing_rr_distance@1.0.0",
+      "path": "docs/experiments/raw/factor-b3b-2026-09-20/swing-rr-distance/evidence-record.json"
+    },
+    {
+      "object": "mixed.swing_rr_distance@1.0.0",
+      "path": "docs/experiments/raw/factor-b3b-2026-09-20/swing-rr-distance/independent-check-report.json"
+    },
+    {
+      "object": "trend.cost_basis_distance20@2.0.0",
+      "path": "docs/experiments/raw/factor-b10-v2-registration-2026-09-21/cost-evidence-record-corrected.json"
+    },
+    {
+      "object": "trend.cost_basis_distance20@2.0.0",
+      "path": "docs/experiments/raw/factor-b10-v2-registration-2026-09-21/independent-stdlib-report.json"
+    },
+    {
+      "object": "trend.cost_basis_distance20@2.0.0",
+      "path": "docs/experiments/raw/factor-b10-controller-2026-09-21/closed-form-result.json"
+    },
+    {
+      "object": "mixed.pullback_ma_distance@2.0.0",
+      "path": "docs/experiments/raw/factor-b10-v2-registration-2026-09-21/pullback-evidence-record-corrected.json"
+    },
+    {
+      "object": "mixed.pullback_ma_distance@2.0.0",
+      "path": "docs/experiments/raw/factor-b10-v2-registration-2026-09-21/independent-stdlib-report.json"
+    },
+    {
+      "object": "mixed.pullback_ma_distance@2.0.0",
+      "path": "docs/experiments/raw/factor-b10-controller-2026-09-21/closed-form-result.json"
+    },
+    {
+      "object": "research.a01.signed_band@1.0.0",
+      "path": "docs/experiments/raw/a01-guide-study-2026-09-29/protocol.json"
+    },
+    {
+      "object": "research.a01.signed_band@1.0.1",
+      "path": "docs/experiments/raw/a01-guide-study-2026-09-29/controller-check.json"
+    },
+    {
+      "object": "research.a01.signed_band@1.0.1",
+      "path": "docs/experiments/raw/a01-guide-study-2026-09-29/audit/source-audit.json"
+    },
+    {
+      "object": "research.a02.sma_maintenance@1.0.0",
+      "path": "docs/experiments/raw/a02-sma-maintenance-2026-09-29/controller-check.json"
+    },
+    {
+      "object": "research.a02.sma_maintenance@1.0.0",
+      "path": "docs/experiments/raw/a02-sma-maintenance-2026-09-29/controller-uncertainty.json"
+    },
+    {
+      "object": "research.a02.sma_maintenance@1.0.0",
+      "path": "docs/experiments/raw/a02-sma-maintenance-2026-09-29/execution/verification.json"
+    },
+    {
+      "object": "research.a03.pullback_order@1.0.0",
+      "path": "docs/experiments/raw/a03-pullback-order-2026-09-30/protocol.md"
+    },
+    {
+      "object": "research.space.prior_upper_pivot@1.0.0",
+      "path": "docs/experiments/raw/space-prior-target-2026-09-30/protocol.md"
+    },
+    {
+      "object": "research.trend.ma_cluster_width@1.0.0",
+      "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/protocol-v2.md"
+    }
+  ],
+  "market_experiments": 0,
+  "model_fits": 0,
+  "sealed_research_reruns": 0,
+  "paid_calls": 0,
+  "network_data_requests": 0,
+  "assessment": "Three previously cited source locations, the registry loader/registry and workflow entry are byte-identical to the accepted baseline. This proves no source change at those locations, not that every upstream service was inspected or that all possible system repairs are absent. Definition evidence closure still missing 56 references; no formal research is admitted."
+}

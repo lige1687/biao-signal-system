@@ -1,0 +1,45 @@
+{
+  "status": "draft_not_registered_or_executed",
+  "checked_at": "2026-10-03T13:41:50.094807+08:00",
+  "question": "single black trend reset option; qualification and action changes before usefulness",
+  "baseline": {
+    "episode_reset_on_black": true,
+    "pre_entry_low_cancel": true,
+    "zone_exit": "band",
+    "arm_rule": "close_above_ma",
+    "direction_check": "touch_only",
+    "structure_recheck": false,
+    "gap_first": "restart",
+    "a3_mode": "any",
+    "hold_until_both_variants": true
+  },
+  "candidate": {
+    "episode_reset_on_black": false,
+    "pre_entry_low_cancel": true,
+    "zone_exit": "band",
+    "arm_rule": "close_above_ma",
+    "direction_check": "touch_only",
+    "structure_recheck": false,
+    "gap_first": "restart",
+    "a3_mode": "any",
+    "hold_until_both_variants": true
+  },
+  "only_changed_key": "episode_reset_on_black",
+  "source": "docs/experiments/raw/remote-astra-T2-2026-09-30/lifecycle_ref.py",
+  "source_sha256": "cf5ca1535e1d12c4a5d9c98b5c81a439d402e1bffa8b7e070fe726dc1ccc6885",
+  "newer_source_check": "version-precheck.json",
+  "original_strategy_sources": {
+    "technical-system": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "technical-implementation": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "approved_canonical_rule": false,
+  "formal_adapter_implemented": false,
+  "registered_object_id": null,
+  "data_scope": [
+    "sh510300",
+    "sz159915"
+  ],
+  "hourly_data_required_for_this_daily_subset": false,
+  "effects_measured": false,
+  "paid_or_production_permission": false
+}
