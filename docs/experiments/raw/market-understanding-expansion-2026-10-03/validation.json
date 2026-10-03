@@ -1,0 +1,57 @@
+{
+  "checked_at": "2026-10-03T15:58:26.115086+08:00",
+  "baseline_commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+  "market_code_commit": "55d8aa96b45d97b09901ded4ebf78f490bbb7f6b",
+  "checks": {
+    "all_50_original_rows_and_line_numbers_exact": true,
+    "12_unique_complete_cards": true,
+    "12_bounded_code_findings": true,
+    "18_source_records_with_access_status": true,
+    "source_id_and_atlas_group_references_resolve": true,
+    "no_fabricated_live_values": true,
+    "only_one_registry_entry_added": true,
+    "old_registry_entries_retained": true,
+    "new_markdown_relative_links_resolve": true,
+    "required_archive_heading_present": true,
+    "directional_count_error_withdrawn": true,
+    "key_code_evidence_independently_read": true
+  },
+  "real_source_runtime": "not_run",
+  "web_ui": "not_implemented_not_run",
+  "user_comprehension": "not_measured",
+  "market_effect": "not_measured",
+  "new_market_experiments": 0,
+  "new_fits": 0,
+  "new_paid_actions": 0,
+  "commands": [
+    {
+      "description": "Python assertions for content and exact original rows",
+      "exit_code": 0
+    },
+    {
+      "description": "git diff --cached --check against task parent with isolated index after whitespace repair",
+      "exit_code": 0
+    },
+    {
+      "description": "python3 scripts/check_repo_hygiene.py in shared workspace",
+      "exit_code": 0
+    }
+  ],
+  "git_diff_check": "exit_0_after_whitespace_repair",
+  "repository_hygiene": "exit_0_shared_workspace_checker_only",
+  "remote_push": "see_coordination_record_after_commit",
+  "failures_and_repairs": [
+    {
+      "check": "isolated git diff --cached --check",
+      "exit_code": 2,
+      "reason": "indicator-cards.md extra final blank line",
+      "repair": "removed extra blank line only; content unchanged"
+    },
+    {
+      "check": "credential pattern scan",
+      "reason": "broad sk- pattern matched substring in pre-existing jev-task-router filename",
+      "repair": "token boundary added; exact matching text was unchanged from parent; no credential found"
+    }
+  ],
+  "credential_scan": "no_matches_with_token_boundaries"
+}

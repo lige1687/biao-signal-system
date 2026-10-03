@@ -1,0 +1,282 @@
+{
+  "phase_calls_used": 6,
+  "prior_calls_used": 6,
+  "cumulative_calls_used": 12,
+  "original_page_bytes_not_saved": "只保存自己的摘要、链接与定位；note_sha256不是网页原件指纹",
+  "calls": [
+    {
+      "n": 1,
+      "operation": "4 queries: FINRA/CFTC/SEC/SSE ETF",
+      "failed": false
+    },
+    {
+      "n": 2,
+      "operation": "4 queries: JPM/BlackRock/Vanguard/CFA",
+      "failed": false
+    },
+    {
+      "n": 3,
+      "operation": "open 7 primary pages",
+      "partial_failures": [
+        "BlackRock503",
+        "JPM extraction limited"
+      ]
+    },
+    {
+      "n": 4,
+      "operation": "FINRA find x3; open CFTC/SSE/BLS/NBS/ETF PDF",
+      "partial_failures": [
+        "NBS empty",
+        "SSE ETF PDF error"
+      ]
+    },
+    {
+      "n": 5,
+      "operation": "3 bounded queries plus3 prior-source reads",
+      "failed": false
+    },
+    {
+      "n": 6,
+      "operation": "6 opens and BLS timezone find",
+      "partial_failures": [
+        "CFTC portal empty"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "FINRA",
+      "title": "FINRA Margin Statistics",
+      "url": "https://www.finra.org/rules-guidance/key-topics/margin-accounts/margin-statistics",
+      "retrieved_at": "2026-10-03T15:44:38.939502+08:00",
+      "access_status": "body",
+      "locator": "页面Margin Statistics与Historical Data",
+      "bounded_fact": "月末结算口径的三列账户余额，单位百万美元；一般次月第三周更新；页面明确无数据feed；月变动可含计算方法变动，2010年前后口径有差异。",
+      "limitations": "不是全市场全部杠杆；本轮未下载完整历史或审定再分发许可。",
+      "original_bytes_delivered": false,
+      "original_sha256": null,
+      "note_sha256": "ec96e4ee018cf5943f11292c4956fadd9866dd44578aa780c8876be8a24df315"
+    },
+    {
+      "id": "CFTC",
+      "title": "CFTC TFF explanatory notes",
+      "url": "https://www.cftc.gov/idc/groups/public/@commitmentsoftraders/documents/file/tfmexplanatorynotes.pdf",
+      "retrieved_at": "2026-10-03T15:44:38.939502+08:00",
+      "access_status": "body",
+      "locator": "2010说明PDF第1-4页",
+      "bounded_fact": "按交易者主要业务分类，不按每笔交易动机分类；头寸分多、空与跨期组合，历史分类可能回填。",
+      "limitations": "旧方法说明，不能由此确认所有历史时点分类或现行接口；套保不能当悲观。",
+      "original_bytes_delivered": false,
+      "original_sha256": null,
+      "note_sha256": "9eed8f6a457e80bbc363b22cd4e8078b497d0748fd3a62ba931ddae271dba591"
+    },
+    {
+      "id": "CFTC_TIME",
+      "title": "CFTC COT说明",
+      "url": "https://www.cftc.gov/es/node/128971",
+      "retrieved_at": "2026-10-03T15:44:38.939502+08:00",
+      "access_status": "body",
+      "locator": "FAQ及发布说明",
+      "bounded_fact": "通常周二头寸、周五发布，所属日和可见日不同。",
+      "limitations": "节假日及实际发布日期须逐次核。",
+      "original_bytes_delivered": false,
+      "original_sha256": null,
+      "note_sha256": "afb8ee1bce22e548f5699e2042a6344d95db899ced1c11a12c93281ba84bbd1d"
+    },
+    {
+      "id": "SEC_ETF",
+      "title": "SEC investor education ETF bulletin",
+      "url": "https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins-24",
+      "retrieved_at": "2026-10-03T15:44:38.939502+08:00",
+      "access_status": "body",
+      "locator": "Potential risks / Before you invest",
+      "bounded_fact": "场内价格可能偏离净值；买卖报价之差是交易成本；发行人资料含持仓、价差、折溢价等信息。",
+      "limitations": "是投资教育说明，不是逐产品可用API或许可证明。",
+      "original_bytes_delivered": false,
+      "original_sha256": null,
+      "note_sha256": "7d264f62d1c122a00ea47047e54b09461342ed2c6a738d2365b4d7bb39c75fe8"
+    },
+    {
+      "id": "SEC_FEES",
+      "title": "SEC fund and ETF fees bulletin",
+      "url": "https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/mutual-fund-and-etf-fees-and-expenses-investor-bulletin",
+      "retrieved_at": "2026-10-03T15:44:38.939502+08:00",
+      "access_status": "body",
+      "locator": "No-Expense Funds / ETF Transaction Costs",
+      "bounded_fact": "费用率之外还可能有交易成本，减免有条件，份额类别须一致。",
+      "limitations": "不向用户计算个人税务。",
+      "original_bytes_delivered": false,
+      "original_sha256": null,
+      "note_sha256": "8cd32ba8eb039eb5e2ff7740aedd63e8a3dd3ca6a59fbc90830d4402558c0c6b"
+    },
+    {
+      "id": "CFA_INST",
+      "title": "CFA Institute institutional portfolio reading",
+      "url": "https://www.cfainstitute.org/insights/professional-learning/refresher-readings/2026/portfolio-management-institutional-investors",
+      "retrieved_at": "2026-10-03T15:44:38.939502+08:00",
+      "access_status": "body",
+      "locator": "Introduction / Summary",
+      "bounded_fact": "机构目标受支付义务、期限、现金需要及治理约束影响；银行和保险须同时考虑资产与负债。",
+      "limitations": "公开摘要仅支持分类，不提供所有机构每日清单；不采用文中数字为通用阈值。",
+      "original_bytes_delivered": false,
+      "original_sha256": null,
+      "note_sha256": "a100e1e52fdbc32e6fa2f904b04d12c842b6822a264452d31961ad2b35608ef0"
+    },
+    {
+      "id": "VANGUARD",
+      "title": "Vanguard four principles",
+      "url": "https://ownyourfuture.vanguard.com/content/en/learn/financial-planning/vanguards-4-principles-for-investing-success.html",
+      "retrieved_at": "2026-10-03T15:44:38.939502+08:00",
+      "access_status": "body",
+      "locator": "Goals / Balance / Cost / Discipline",
+      "bounded_fact": "长期投入观察应围绕目标、配置、成本与执行持续性。",
+      "limitations": "机构公开框架，不能证明短期择时有效。",
+      "original_bytes_delivered": false,
+      "original_sha256": null,
+      "note_sha256": "6ccc155af9ecf1c77eea7b9a0cde47f46938d503964b20a16bf0264db6ce91a7"
+    },
+    {
+      "id": "JPM",
+      "title": "J.P. Morgan Guide to the Markets",
+      "url": "https://am.jpmorgan.com/content/jpm-am-aem/global-institutional/us/en/institutional/insights/market-insights/guide-to-the-markets.html",
+      "retrieved_at": "2026-10-03T15:44:38.939502+08:00",
+      "access_status": "search_excerpt_body_limited",
+      "locator": "搜索目录；正文提取仅31行",
+      "bounded_fact": "公开目录涉及估值、盈利、集中度、经济与配置。",
+      "limitations": "只用于主题范围例证，未逐图核查或引用图中数值。",
+      "original_bytes_delivered": false,
+      "original_sha256": null,
+      "note_sha256": "2ad4d1f81f1aaaeca4e45d15f805c5180166a88c3c6f08d30b3d49b1d14376ae"
+    },
+    {
+      "id": "BLACKROCK",
+      "title": "BlackRock total portfolio approach",
+      "url": "https://www.blackrock.com/corporate/insights/blackrock-investment-institute/our-take-on-total-portfolio-approach",
+      "retrieved_at": "2026-10-03T15:44:38.939502+08:00",
+      "access_status": "search_excerpt_open_503",
+      "locator": "搜索说明",
+      "bounded_fact": "公开简介强调按客户目标考察整个组合的风险与回报。",
+      "limitations": "正文503；非结论必需，未作完整方案依据。",
+      "original_bytes_delivered": false,
+      "original_sha256": null,
+      "note_sha256": "da128cce864c20e778496f86ca2233b1cca9a5e471f3e4874193839554d7ccb9"
+    },
+    {
+      "id": "SSE_MARGIN",
+      "title": "上交所两融明细",
+      "url": "https://www.sse.com.cn/market/othersdata/margin/detail/index.shtml",
+      "retrieved_at": "2026-10-03T15:44:38.939502+08:00",
+      "access_status": "page_shell_only",
+      "locator": "静态页面导航",
+      "bounded_fact": "核到公开两融入口。",
+      "limitations": "动态行未取得；不作为最新两融数值或深市/北交所覆盖证明。",
+      "original_bytes_delivered": false,
+      "original_sha256": null,
+      "note_sha256": "3f5532a631d330fd3d1221d40674887d57dd090b33a3739f0ec61ee78eff664a"
+    },
+    {
+      "id": "BLS_CAL",
+      "title": "BLS release schedule",
+      "url": "https://www.bls.gov/schedule/2026/10_sched.htm",
+      "retrieved_at": "2026-10-03T15:44:38.939502+08:00",
+      "access_status": "body",
+      "locator": "月历及底部NOTE",
+      "bounded_fact": "列事件、所属期、时间，使用美国东部时间，并提供ICS订阅入口。",
+      "limitations": "未下载订阅文件；不作当前未来日程保证，未核预期值。",
+      "original_bytes_delivered": false,
+      "original_sha256": null,
+      "note_sha256": "3190aaf60e6351ad57fec9faa54407547b185d875715d9791adfef76d40c5728"
+    },
+    {
+      "id": "NBS_CAL",
+      "title": "国家统计局发布日程",
+      "url": "https://www.stats.gov.cn/sj/fbrc/",
+      "retrieved_at": "2026-10-03T15:44:38.939502+08:00",
+      "access_status": "empty_body",
+      "locator": "本次0行",
+      "bounded_fact": "核到入口，正文未取得。",
+      "limitations": "国内日程结构与当前时间仍未核，不能标资料已接入。",
+      "original_bytes_delivered": false,
+      "original_sha256": null,
+      "note_sha256": "2c6112ac6f3f1a0a5e873813314bd0c8212f86d974fc2ae55e3c2428165530e2"
+    },
+    {
+      "id": "SSE_ETF_GUIDE",
+      "title": "上交所ETF教学资料",
+      "url": "https://etf.sse.com.cn/fund/learning/download/c/10055613/files/32901abf70d54e999f46975b52ba46de.pdf",
+      "retrieved_at": "2026-10-03T15:44:38.939502+08:00",
+      "access_status": "search_excerpt_open_error",
+      "locator": "搜索摘录",
+      "bounded_fact": "出现跟踪偏离、跟踪误差和折溢价主题。",
+      "limitations": "PDF打开失败，不引用图表数值；正文用途降级。",
+      "original_bytes_delivered": false,
+      "original_sha256": null,
+      "note_sha256": "104259dc921e19c0c924ade2b433b07a0ca2880b43e79e98858b4236a9269fb7"
+    },
+    {
+      "id": "EFUND_DIV",
+      "title": "易方达红利基金公开说明",
+      "url": "https://www.efunds.com.cn/fund/021050.shtml",
+      "retrieved_at": "2026-10-03T15:44:38.939502+08:00",
+      "access_status": "body",
+      "locator": "报告期内策略及运作分析",
+      "bounded_fact": "示例基金同时考察经营质量、现金流、股息与估值。",
+      "limitations": "只说明这一公开产品的做法，不代表所有主动基金或推荐该产品；动态持仓部分日期空缺。",
+      "original_bytes_delivered": false,
+      "original_sha256": null,
+      "note_sha256": "282be3d2665e6a89e760cb626663ddbef7f637deb9d503db47280df84d06f8dd"
+    },
+    {
+      "id": "EFUND_TARGET",
+      "title": "易方达养老目标日期2038基金",
+      "url": "https://www.efunds.com.cn/Mobile/fund/006860.shtml",
+      "retrieved_at": "2026-10-03T15:44:38.939502+08:00",
+      "access_status": "body",
+      "locator": "基本信息/投资目标",
+      "bounded_fact": "目标日期产品的配置随阶段改变，投资期限和下行风险是约束。",
+      "limitations": "不向个人移植其比例。",
+      "original_bytes_delivered": false,
+      "original_sha256": null,
+      "note_sha256": "c651afa780c36417d08b9c364bd80d5d18ec442b65ef688be5090cebfdbb8e5a"
+    },
+    {
+      "id": "BERKSHIRE",
+      "title": "Berkshire 2001 Owner manual",
+      "url": "https://www.berkshirehathaway.com/2001ar/ownersmanual.html",
+      "retrieved_at": "2026-10-03T15:44:38.939502+08:00",
+      "access_status": "body",
+      "locator": "Intrinsic Value",
+      "bounded_fact": "价值估算关注未来可取得现金，会随现金预期和利率假设变化。",
+      "limitations": "历史方法例证，不当现行政策或精确价值。",
+      "original_bytes_delivered": false,
+      "original_sha256": null,
+      "note_sha256": "5247a416a3adf8202ab7eb9217a63298a774815ad35dad585ae77e212ac2ec5a"
+    },
+    {
+      "id": "SSE_INDEX",
+      "title": "上交所披露的易方达中证A股ETF说明",
+      "url": "https://etf.sse.com.cn/fundtrends/c/c_20260806_10828104.shtml",
+      "retrieved_at": "2026-10-03T15:44:38.939502+08:00",
+      "access_status": "body",
+      "locator": "2026-08-07产品介绍/投资目标",
+      "bounded_fact": "该被动产品目标为跟踪指定指数、减少偏离和跟踪误差。",
+      "limitations": "个别产品示例，不推广其具体规则到所有ETF。",
+      "original_bytes_delivered": false,
+      "original_sha256": null,
+      "note_sha256": "287b31955eb8fe00ec7bb8b4d11bfd06241a6e5c2979309cbb3e2d9b58e2db8b"
+    },
+    {
+      "id": "CFTC_PORTAL",
+      "title": "CFTC public reporting portal",
+      "url": "https://publicreporting.cftc.gov/stories/s/r4w3-av2u",
+      "retrieved_at": "2026-10-03T15:44:38.939502+08:00",
+      "access_status": "search_excerpt_empty_body",
+      "locator": "搜索分类说明，正文0行",
+      "bounded_fact": "搜索显示当前TFF分类入口。",
+      "limitations": "结构化接口未验；不宣称下载或解析成功。",
+      "original_bytes_delivered": false,
+      "original_sha256": null,
+      "note_sha256": "241fd5f86185fe5f7000febb3542c3cd2beb8ba5d0e0bc742996963f282e8cbc"
+    }
+  ]
+}

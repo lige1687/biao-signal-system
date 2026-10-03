@@ -1,0 +1,468 @@
+{
+  "schema_version": "market-understanding-content-draft/1",
+  "status": "reviewable_design_not_implemented",
+  "cards": [
+    {
+      "id": "M01",
+      "title": "A股融资余额",
+      "atlas_groups": [
+        13,
+        14,
+        15
+      ],
+      "question": "借钱参与交易的规模是否变化？",
+      "audiences": [
+        "趋势",
+        "风险观察"
+      ],
+      "market": "cn",
+      "definition_and_unit": "人民币金额；变化额/变化比例单列，不默认跨沪深北或含基金口径可合并",
+      "frequency_and_available_time": "按来源交易日；真正发布时点仍待原负责人核",
+      "rising": "同范围融资未偿还规模变大；可能与行情和融资参与同步增加",
+      "falling": "同范围未偿还规模变小；可能是主动偿还，也可能是价格压力下的收缩",
+      "level_distinction": "绝对额高要结合市场规模；历史新高不等于杠杆比例新高",
+      "combine_with": [
+        "同范围价格变化",
+        "同范围成交和流通市值",
+        "上涨参与股票比例"
+      ],
+      "counterexample": "融资上升但上涨集中于少数股票，与广泛参与是两种不同情况。",
+      "threshold_identity": "变化0只表示未增减；暂无通用交易阈值",
+      "system_status": "已有字段，统一卡部分展示",
+      "owner_boundary": "market-observation",
+      "next_qualified_step": "补说明与关联，不重复采集",
+      "source_ids": [
+        "SSE_MARGIN"
+      ],
+      "qualification_limit": "既有代码sources.py:925-958、observations.py:60-83；只有代码可见，实际历史/发布日期未重新验证",
+      "latest_value": null,
+      "value_status": "not_loaded_design_content",
+      "interpretation_type": "条件解释与检查顺序；未经预测或交易效果检验",
+      "placement_proposal": "市场理解主题详情；与相关ETF关联时注明适用范围",
+      "implementation_status": "content_draft_only"
+    },
+    {
+      "id": "M02",
+      "title": "美国FINRA客户保证金借款",
+      "atlas_groups": [
+        16
+      ],
+      "question": "客户证券账户融资规模是否扩张？",
+      "audiences": [
+        "宏观配置",
+        "风险观察"
+      ],
+      "market": "us",
+      "definition_and_unit": "原始单位百万美元；币种换算仅展示，不与A股余额直接排名",
+      "frequency_and_available_time": "月末所属期；通常下月第三周发布，具体可见时间另存",
+      "rising": "报告余额增加；需要分辨交易活动、覆盖与计算变化",
+      "falling": "报告余额减少；可能去杠杆，也可能报告方法或范围变化",
+      "level_distinction": "名义规模大不等于整个市场杠杆率高",
+      "combine_with": [
+        "同期市场规模",
+        "借款余额变化速度",
+        "两类客户账户自由贷方余额"
+      ],
+      "counterexample": "股市规模扩大时，借款绝对额可以上升而相对规模并未上升。",
+      "threshold_identity": "零/正负是变化描述；历史分位必须固定可比窗口",
+      "system_status": "所审统一链未发现",
+      "owner_boundary": "本任务资料候选；实现前再协调",
+      "next_qualified_step": "待核持续取得与许可",
+      "source_ids": [
+        "FINRA"
+      ],
+      "qualification_limit": "官网说明已读；完整历史、逐期首次发布和再分发许可未核",
+      "latest_value": null,
+      "value_status": "not_loaded_design_content",
+      "interpretation_type": "条件解释与检查顺序；未经预测或交易效果检验",
+      "placement_proposal": "市场理解主题详情；与相关ETF关联时注明适用范围",
+      "implementation_status": "content_draft_only"
+    },
+    {
+      "id": "M03",
+      "title": "美国客户账户自由贷方余额",
+      "atlas_groups": [
+        17
+      ],
+      "question": "账户内可提取的贷方余额怎样变化？",
+      "audiences": [
+        "宏观配置",
+        "资金背景"
+      ],
+      "market": "us",
+      "definition_and_unit": "现金账户与保证金账户分两列，单位百万美元",
+      "frequency_and_available_time": "随FINRA月度统计；不包装为日度资金流",
+      "rising": "相应类别报告的自由贷方余额增加",
+      "falling": "相应类别报告的自由贷方余额减少",
+      "level_distinction": "高余额不能推断即将买股票；不同账户类别不合称全部场外资金",
+      "combine_with": [
+        "借款余额",
+        "同期市场价格",
+        "同口径历史与报告方法"
+      ],
+      "counterexample": "投资者可转出资金，也可保留现金；余额不能当未来买入订单。",
+      "threshold_identity": "没有已验证的看多/看空阈值",
+      "system_status": "所审统一链未发现",
+      "owner_boundary": "与M02同一候选",
+      "next_qualified_step": "与M02复用资料核对",
+      "source_ids": [
+        "FINRA"
+      ],
+      "qualification_limit": "页面已核三列；不能构造未经授权的净流入指标",
+      "latest_value": null,
+      "value_status": "not_loaded_design_content",
+      "interpretation_type": "条件解释与检查顺序；未经预测或交易效果检验",
+      "placement_proposal": "市场理解主题详情；与相关ETF关联时注明适用范围",
+      "implementation_status": "content_draft_only"
+    },
+    {
+      "id": "M04",
+      "title": "CFTC金融期货分类头寸",
+      "atlas_groups": [
+        19
+      ],
+      "question": "哪些类别在何种合约上持有多头、空头和跨期组合？",
+      "audiences": [
+        "宏观交易",
+        "风险观察"
+      ],
+      "market": "us",
+      "definition_and_unit": "按合约、类别、报告格式列张数；净值=多头-空头；不同合约张数不直接相加",
+      "frequency_and_available_time": "通常周二头寸、周五发布；以实际报告可见日记录",
+      "rising": "该类别净头寸更偏多，可能来自增多或减空，须拆开",
+      "falling": "该类别净头寸更偏空，可能来自增空或减多，须拆开",
+      "level_distinction": "0仅代表该报告净多空相等；净空不能读为对全部股票悲观",
+      "combine_with": [
+        "多/空/跨期组合",
+        "该合约总未平仓量",
+        "现货持仓或对冲目的的已知资料"
+      ],
+      "counterexample": "基金可以持有现货多头同时用期货空头降低风险，类别不等于交易动机。",
+      "threshold_identity": "不设“机构看多线”；历史分类回填须标断点",
+      "system_status": "所审统一链未发现",
+      "owner_boundary": "本任务资料候选；因子用途不在本轮",
+      "next_qualified_step": "待核准确合约/格式/历史",
+      "source_ids": [
+        "CFTC",
+        "CFTC_TIME"
+      ],
+      "qualification_limit": "官方方法说明和发布说明已读；结构化下载未验",
+      "latest_value": null,
+      "value_status": "not_loaded_design_content",
+      "interpretation_type": "条件解释与检查顺序；未经预测或交易效果检验",
+      "placement_proposal": "市场理解主题详情；与相关ETF关联时注明适用范围",
+      "implementation_status": "content_draft_only"
+    },
+    {
+      "id": "M05",
+      "title": "ETF折溢价",
+      "atlas_groups": [
+        44,
+        47
+      ],
+      "question": "场内价格相对可比净值贵了还是便宜了？",
+      "audiences": [
+        "趋势执行",
+        "定投",
+        "价值配置"
+      ],
+      "market": "cn/us",
+      "definition_and_unit": "(市场价格/对应净值-1)×100%；每个数绑定时刻、币种和净值种类",
+      "frequency_and_available_time": "盘中估值与收盘净值分别标示；跨境时区不能省",
+      "rising": "价格相对净值更高，可能溢价扩大或折价收窄",
+      "falling": "价格相对净值更低，可能溢价收窄或折价扩大",
+      "level_distinction": "价格高于净值不是基金底层资产必然昂贵",
+      "combine_with": [
+        "净值所属时刻",
+        "买卖价差与可成交量",
+        "底层市场是否开市/申赎限制"
+      ],
+      "counterexample": "底层休市或净值滞后时，表面溢价可能混合时差，不能直接当套利利润。",
+      "threshold_identity": "0是定义分界；不造通用1%/2%买卖门槛",
+      "system_status": "产品链未完整核实",
+      "owner_boundary": "本任务产品内容候选，代码尚未认领",
+      "next_qualified_step": "逐产品同刻价格净值后再实现",
+      "source_ids": [
+        "SEC_ETF"
+      ],
+      "qualification_limit": "公开说明可用；尚无逐产品数据资格",
+      "latest_value": null,
+      "value_status": "not_loaded_design_content",
+      "interpretation_type": "条件解释与检查顺序；未经预测或交易效果检验",
+      "placement_proposal": "市场理解主题详情；与相关ETF关联时注明适用范围",
+      "implementation_status": "content_draft_only"
+    },
+    {
+      "id": "M06",
+      "title": "ETF买卖价差与报价深度",
+      "atlas_groups": [
+        44
+      ],
+      "question": "以当前报价买入再卖出，大致会承担多少交易摩擦？",
+      "audiences": [
+        "趋势执行",
+        "定投执行"
+      ],
+      "market": "cn/us",
+      "definition_and_unit": "卖一价-买一价；比例分母明确为中间价；同时列可成交数量",
+      "frequency_and_available_time": "报价级快照；过期报价不可伪称可成交",
+      "rising": "两边报价更分散，在相同数量下交易摩擦可能更大",
+      "falling": "报价更接近，在相同数量下交易摩擦可能更小",
+      "level_distinction": "窄价差不保证大额成交也便宜",
+      "combine_with": [
+        "报价可成交数量",
+        "底层资产交易时段",
+        "拟成交规模的区间而非私人账户数据"
+      ],
+      "counterexample": "最优报价数量很小，实际成交穿过多档，窄价差仍可能有较大成本。",
+      "threshold_identity": "无统一好坏线；按同产品、同时间和规模比较",
+      "system_status": "所审统一产品观察链未发现",
+      "owner_boundary": "本任务产品内容候选",
+      "next_qualified_step": "需盘口来源与时间资格",
+      "source_ids": [
+        "SEC_ETF"
+      ],
+      "qualification_limit": "未接入或验证盘口；不生成实际委托",
+      "latest_value": null,
+      "value_status": "not_loaded_design_content",
+      "interpretation_type": "条件解释与检查顺序；未经预测或交易效果检验",
+      "placement_proposal": "市场理解主题详情；与相关ETF关联时注明适用范围",
+      "implementation_status": "content_draft_only"
+    },
+    {
+      "id": "M07",
+      "title": "ETF实际跟踪差异",
+      "atlas_groups": [
+        45
+      ],
+      "question": "持有基金的结果与它承诺跟踪的指数相差多少？",
+      "audiences": [
+        "定投",
+        "产品筛选"
+      ],
+      "market": "cn/us",
+      "definition_and_unit": "同期间、同币种基金总回报减指定基准总回报，单位百分点",
+      "frequency_and_available_time": "月/季复核；需要分红与复权口径",
+      "rising": "差额更高；可为少落后或更多跑赢，先读正负",
+      "falling": "差额更低；可为更多落后或少跑赢，先读正负",
+      "level_distinction": "目标通常是接近适用基准；差异不等于未来收益承诺",
+      "combine_with": [
+        "基金费率",
+        "分红/税收和现金安排",
+        "指数是否含分红及产品合同"
+      ],
+      "counterexample": "拿含分红基金净值对不含分红价格指数，会制造虚假的超额。",
+      "threshold_identity": "0是所选对照差；目标取具体产品合同",
+      "system_status": "产品维度未完整核实",
+      "owner_boundary": "本任务产品内容候选",
+      "next_qualified_step": "先取得可比净值/指数，不重跑交易回测",
+      "source_ids": [
+        "SSE_INDEX"
+      ],
+      "qualification_limit": "跟踪目标有产品例证；本卡比较定义是设计，不是既成研究",
+      "latest_value": null,
+      "value_status": "not_loaded_design_content",
+      "interpretation_type": "条件解释与检查顺序；未经预测或交易效果检验",
+      "placement_proposal": "市场理解主题详情；与相关ETF关联时注明适用范围",
+      "implementation_status": "content_draft_only"
+    },
+    {
+      "id": "M08",
+      "title": "ETF跟踪误差",
+      "atlas_groups": [
+        45
+      ],
+      "question": "基金每日相对指数的偏离是否稳定？",
+      "audiences": [
+        "指数基金管理",
+        "定投产品筛选"
+      ],
+      "market": "cn/us",
+      "definition_and_unit": "每日基金与基准回报差的标准差；年化方法和交易日数另列",
+      "frequency_and_available_time": "按固定历史窗口；未齐数据不计算",
+      "rising": "相对基准的每日偏离更不稳定",
+      "falling": "每日偏离更稳定",
+      "level_distinction": "低误差也可能长期稳定地少赚费用，须和M07一起看",
+      "combine_with": [
+        "实际跟踪差异",
+        "样本窗口/缺失天数",
+        "调样与申赎事件"
+      ],
+      "counterexample": "每天都比指数少一点的基金，跟踪误差可以很低但累计差异仍明显。",
+      "threshold_identity": "目标按具体基金合同；不能自创统一准入线",
+      "system_status": "产品维度未完整核实",
+      "owner_boundary": "本任务产品内容候选",
+      "next_qualified_step": "算法口径与数据齐备后才开发",
+      "source_ids": [
+        "SSE_INDEX"
+      ],
+      "qualification_limit": "产品公开目标已核；本卡统计解释属于通用定义，未算真实数值",
+      "latest_value": null,
+      "value_status": "not_loaded_design_content",
+      "interpretation_type": "条件解释与检查顺序；未经预测或交易效果检验",
+      "placement_proposal": "市场理解主题详情；与相关ETF关联时注明适用范围",
+      "implementation_status": "content_draft_only"
+    },
+    {
+      "id": "M09",
+      "title": "ETF费用与持有总成本",
+      "atlas_groups": [
+        45,
+        47
+      ],
+      "question": "买入、持有、卖出分别可能付什么成本？",
+      "audiences": [
+        "定投",
+        "长期配置",
+        "趋势执行"
+      ],
+      "market": "cn/us",
+      "definition_and_unit": "年度费用率、一次交易费用、价差分别列；份额类别/生效日/减免分开",
+      "frequency_and_available_time": "费用变更或定期复核；盘口成本按交易时点",
+      "rising": "同条件下费率/成本上升，留给投资者的回报空间减少",
+      "falling": "同条件下成本下降；仍需确认减免期限和其他收费",
+      "level_distinction": "费率低不能代替跟踪与流动性比较",
+      "combine_with": [
+        "持有期限",
+        "价差/折溢价",
+        "实际跟踪差异与减免到期日"
+      ],
+      "counterexample": "若已用扣费后的净值回报，再减年度管理费会重复扣成本。",
+      "threshold_identity": "不设费率即收益的评分；同类且同份额对比",
+      "system_status": "所审统一产品观察链未发现",
+      "owner_boundary": "本任务产品内容候选",
+      "next_qualified_step": "逐产品核费用说明",
+      "source_ids": [
+        "SEC_FEES",
+        "VANGUARD"
+      ],
+      "qualification_limit": "不处理个人税务；没有自动扣费或交易",
+      "latest_value": null,
+      "value_status": "not_loaded_design_content",
+      "interpretation_type": "条件解释与检查顺序；未经预测或交易效果检验",
+      "placement_proposal": "市场理解主题详情；与相关ETF关联时注明适用范围",
+      "implementation_status": "content_draft_only"
+    },
+    {
+      "id": "M10",
+      "title": "ETF持仓集中与产品重叠",
+      "atlas_groups": [
+        46,
+        50
+      ],
+      "question": "买多只产品后，实际是否仍押在同一批资产上？",
+      "audiences": [
+        "长期配置",
+        "定投",
+        "风险观察"
+      ],
+      "market": "cn/us",
+      "definition_and_unit": "前十大/行业/国家权重和两产品共有持仓；权重基准与披露日标明",
+      "frequency_and_available_time": "随持仓披露/指数调样；报告日并非当前真实仓位",
+      "rising": "按相同定义，风险更集中在少数持仓或方向",
+      "falling": "按相同定义，持仓分布更分散；不保证压力时不共跌",
+      "level_distinction": "ETF数量多不是自动分散",
+      "combine_with": [
+        "行业/国家与币种",
+        "两产品持仓重合",
+        "同一披露日覆盖率"
+      ],
+      "counterexample": "两只名称不同的科技ETF可能重合很多；持仓分散也可能共享同一利率风险。",
+      "threshold_identity": "展示事实和分类；不造通用集中度警戒线",
+      "system_status": "指数/持仓资料待整合",
+      "owner_boundary": "本任务公开产品内容，账户分析仍属原范围",
+      "next_qualified_step": "先核公开成分，不读私人账户",
+      "source_ids": [
+        "JPM",
+        "CFA_INST"
+      ],
+      "qualification_limit": "JPM仅目录证据；组合解释是本任务设计推演，不是风险模型结果",
+      "latest_value": null,
+      "value_status": "not_loaded_design_content",
+      "interpretation_type": "条件解释与检查顺序；未经预测或交易效果检验",
+      "placement_proposal": "市场理解主题详情；与相关ETF关联时注明适用范围",
+      "implementation_status": "content_draft_only"
+    },
+    {
+      "id": "M11",
+      "title": "ETF份额与资产规模变化",
+      "atlas_groups": [
+        43
+      ],
+      "question": "规模增长来自价格上涨还是份额增加？",
+      "audiences": [
+        "资金背景",
+        "产品观察"
+      ],
+      "market": "cn/us",
+      "definition_and_unit": "份额数与净资产分别展示；份额变化不能直接标净流入现金",
+      "frequency_and_available_time": "按发行人披露；拆并份额等产品行为先核",
+      "rising": "份额增加可能反映净申购；资产规模增加也可能只是价格涨",
+      "falling": "份额减少可能反映净赎回；规模下降也可能只是价格跌",
+      "level_distinction": "大规模不代表当天有很多新增买盘",
+      "combine_with": [
+        "基金净值变化",
+        "份额拆分/合并",
+        "申赎与成分调整公告"
+      ],
+      "counterexample": "二级市场投资者相互买卖不会必然改变基金总份额。",
+      "threshold_identity": "变化0是数量分界；不当机构态度阈值",
+      "system_status": "份额已有候选；完整连续链未验",
+      "owner_boundary": "原market-observation份额线，本任务只内容映射",
+      "next_qualified_step": "复用原负责人未来合格结果",
+      "source_ids": [
+        "SEC_ETF"
+      ],
+      "qualification_limit": "创设/赎回机制有来源；日度序列未取得",
+      "latest_value": null,
+      "value_status": "not_loaded_design_content",
+      "interpretation_type": "条件解释与检查顺序；未经预测或交易效果检验",
+      "placement_proposal": "市场理解主题详情；与相关ETF关联时注明适用范围",
+      "implementation_status": "content_draft_only"
+    },
+    {
+      "id": "M12",
+      "title": "重要事件与原先预期",
+      "atlas_groups": [
+        31,
+        32,
+        33,
+        37,
+        42,
+        47
+      ],
+      "question": "将发布什么、市场此前预期什么、实际与预期差在哪？",
+      "audiences": [
+        "日常观察",
+        "宏观配置",
+        "趋势/定投/价值关注"
+      ],
+      "market": "cn/us",
+      "definition_and_unit": "事件ID、官方时区、所属期、计划/实际发布时间、前值/修订、预期来源和预期形成时刻",
+      "frequency_and_available_time": "随官方日历修订；事件发生后再加入实际值",
+      "rising": "不适用统一升高含义：就业、物价、盈利等需各自定义，先计算相对可比预期的差",
+      "falling": "不适用统一降低含义：同一变化对不同资产/目标含义不同",
+      "level_distinction": "日期临近是注意事项；没有合格预期就不展示“超预期”",
+      "combine_with": [
+        "事件类型与受影响资产",
+        "预期及前值版本",
+        "事件后的价格反应时段"
+      ],
+      "counterexample": "一项数据改善但低于原先预期，市场反应可能与数据环比方向不同；不作事后因果定论。",
+      "threshold_identity": "无统一利好利空色；仅事实、差额与解释候选",
+      "system_status": "资讯已有；所审观察链未见完整结构化字段",
+      "owner_boundary": "本任务事件关系设计；来源值归原负责人",
+      "next_qualified_step": "BLS可作入口，国内日程正文与预期授权缺口保留",
+      "source_ids": [
+        "BLS_CAL",
+        "NBS_CAL"
+      ],
+      "qualification_limit": "日历不是预期数据库；未抓ICS，未承诺完整当前日程",
+      "latest_value": null,
+      "value_status": "not_loaded_design_content",
+      "interpretation_type": "条件解释与检查顺序；未经预测或交易效果检验",
+      "placement_proposal": "市场理解主题详情；与相关ETF关联时注明适用范围",
+      "implementation_status": "content_draft_only"
+    }
+  ]
+}

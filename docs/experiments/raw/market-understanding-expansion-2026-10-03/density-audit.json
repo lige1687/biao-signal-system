@@ -1,0 +1,1482 @@
+{
+  "source": {
+    "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+    "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28"
+  },
+  "scope": "Structural extraction only. Binary rise/fall classifications and their counts were withdrawn because level and change meanings were coded inconsistently.",
+  "uniform_card_required_fields": [
+    "id",
+    "metric_and_market",
+    "objective",
+    "rise_interpretation",
+    "fall_interpretation",
+    "combine_with",
+    "counterexample_or_caveat",
+    "frequency",
+    "coverage_status",
+    "evidence"
+  ],
+  "field_presence_counts": {
+    "objective": 48,
+    "combine_with": 48,
+    "counterexample_or_caveat": 50,
+    "frequency": 50,
+    "coverage_status": 50
+  },
+  "missing_fields": {
+    "objective": [
+      "11",
+      "19"
+    ],
+    "combine_with": [
+      "12",
+      "47"
+    ],
+    "counterexample_or_caveat": [],
+    "frequency": [],
+    "coverage_status": []
+  },
+  "rows": [
+    {
+      "id": "01",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 57
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：指数日周趋势、均线方向与排列、结构高低点",
+        "frequency_and_use": "日/周；趋势为主",
+        "how_to_combine_and_common_misreading": "先确定道路、触发和失效；指数上涨不等于所有成分上涨",
+        "system_and_ownership": "已有，技术主线复用"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "02",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 58
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：站上20/50/200日均线比例",
+        "frequency_and_use": "日；趋势/长期观察",
+        "how_to_combine_and_common_misreading": "比较参与股票比例是否持续扩大；须用当时成员及相同分母",
+        "system_and_ownership": "已有/研究中，宽度负责人"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "03",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 59
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：上涨/下跌家数、新高/新低比例、等权与市值加权指数差异",
+        "frequency_and_use": "日；参与广度",
+        "how_to_combine_and_common_misreading": "指数新高但多数股票未跟随是结构分化；不等于明日必跌",
+        "system_and_ownership": "部分可由已有资料形成，完整生产覆盖未验"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": true,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "04",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 60
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：行业相对大盘强弱、上涨行业数量、龙头集中度",
+        "frequency_and_use": "日/周；轮动与集中风险",
+        "how_to_combine_and_common_misreading": "看强势是否扩散；几个大权重推动指数可能掩盖行业疲弱",
+        "system_and_ownership": "板块/行业入口已有；不重做轮动实验"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "05",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 61
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：成交额、换手率、相对近期成交活跃度",
+        "frequency_and_use": "日；交易参与",
+        "how_to_combine_and_common_misreading": "价格方向、上涨家数和成交同时看；放量下跌也是活跃，不是乐观",
+        "system_and_ownership": "A股固定快照已有，自动资料沿原任务"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "06",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 62
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：实际波动、缺口、单日跌幅、从高点回落程度",
+        "frequency_and_use": "日；趋势风险",
+        "how_to_combine_and_common_misreading": "与结构失效距离一起看；低波动不保证低风险，大跌也不自动便宜",
+        "system_and_ownership": "技术/风险已有部分；不重复工具研究"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "07",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 68
+      },
+      "original_cells": {
+        "metric_and_market": "美：AAII看涨、看跌、中性及看涨减看跌",
+        "frequency_and_use": "周；受访会员方向看法",
+        "how_to_combine_and_common_misreading": "读水平、变化和持续时间，结合价格与宽度；不是美国全部散户",
+        "system_and_ownership": "已有，沿情绪研究"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "08",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 69
+      },
+      "original_cells": {
+        "metric_and_market": "美：NAAIM自报股票敞口及分布",
+        "frequency_and_use": "周；受访主动管理人风险暴露",
+        "how_to_combine_and_common_misreading": "均值、分散程度、变化分别看；可以为负或超过100，非全体机构持股比例",
+        "system_and_ownership": "已有但数据日期需修，原负责人"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "09",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 70
+      },
+      "original_cells": {
+        "metric_and_market": "A：投保基金投资者信心调查",
+        "frequency_and_use": "按发布期；频率/连续性待核",
+        "how_to_combine_and_common_misreading": "看问卷对象、抽样和公开日期；指数高不等于高仓位",
+        "system_and_ownership": "本轮只核栏目，缺持续资料；情绪负责人"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "10",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 71
+      },
+      "original_cells": {
+        "metric_and_market": "A：长江商学院CKISS股票预期与资产配置调查",
+        "frequency_and_use": "按报告期；历史样本说明可查",
+        "how_to_combine_and_common_misreading": "分清受访人群与股票/住房预期；不能泛称全A情绪",
+        "system_and_ownership": "资料候选，机构/个人细分与连续性待核"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "11",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 72
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：基金定期持仓、股票配置、现金比例和集中度",
+        "frequency_and_use": "月/季/半年，依报告",
+        "how_to_combine_and_common_misreading": "看配置变化与经理文字解释；净值涨跌或仓位估算不等于真实交易记录",
+        "system_and_ownership": "定期资料入口待核；季报不是今日态度"
+      },
+      "explicit_fields": {
+        "objective": false,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "12",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 73
+      },
+      "original_cells": {
+        "metric_and_market": "美：13F披露持股和行业集中度",
+        "frequency_and_use": "季；季末后最长45天",
+        "how_to_combine_and_common_misreading": "看披露组合长期变化；未覆盖完整空头、对冲和当下交易",
+        "system_and_ownership": "未发现接入，慢速背景候选"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": false,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "13",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 83
+      },
+      "original_cells": {
+        "metric_and_market": "A：融资余额、5/20日变化、与可比市值之比",
+        "frequency_and_use": "日；借款持仓水平",
+        "how_to_combine_and_common_misreading": "余额和市值同时看；名义余额创新高可能伴随市场扩张",
+        "system_and_ownership": "已有，分母与范围先核"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "14",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 84
+      },
+      "original_cells": {
+        "metric_and_market": "A：融资买入额、偿还额、净增加、买入占成交比例",
+        "frequency_and_use": "日；借款交易活动",
+        "how_to_combine_and_common_misreading": "买入和偿还分开；比值的分子分母须相同证券范围",
+        "system_and_ownership": "买入已有，偿还和严格比例待补"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "15",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 85
+      },
+      "original_cells": {
+        "metric_and_market": "A：融券余量/余额、卖出和偿还、可借证券供给",
+        "frequency_and_use": "日及规则事件；做空约束",
+        "how_to_combine_and_common_misreading": "股价变动会改变余额；规则与券源变化会影响数据",
+        "system_and_ownership": "余额字段有，完整链缺失"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "16",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 86
+      },
+      "original_cells": {
+        "metric_and_market": "美：FINRA保证金借款余额、同比/环比及可比规模比",
+        "frequency_and_use": "月末快照、后发布；客户账户融资",
+        "how_to_combine_and_common_misreading": "配合股市规模和变化速度；不涵盖所有机构或衍生品杠杆",
+        "system_and_ownership": "未发现接入，新增候选"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "17",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 87
+      },
+      "original_cells": {
+        "metric_and_market": "美：FINRA现金账户/保证金账户自由贷方余额",
+        "frequency_and_use": "月；账户可用现金背景",
+        "how_to_combine_and_common_misreading": "与借款余额分别展示；两者相减也不等于未来必进股市的资金",
+        "system_and_ownership": "未发现接入；同一数据源扩展"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "18",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 88
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：股指期货基差、近远月价差、成交与持仓",
+        "frequency_and_use": "日；期货相对现货定价",
+        "how_to_combine_and_common_misreading": "基差是期货价与现货指数的差；看期限、分红和资金成本，不能只看正负",
+        "system_and_ownership": "A股中金所有公开入口，生产链未发现"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "19",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 89
+      },
+      "original_cells": {
+        "metric_and_market": "美：CFTC金融期货资产管理者/杠杆基金净头寸、总持仓",
+        "frequency_and_use": "通常周二快照、周五15:30美东发布",
+        "how_to_combine_and_common_misreading": "类别、合约和名义金额分开；期货净空可能为现货多头套保",
+        "system_and_ownership": "未发现接入；策略原文已有COT观察思路"
+      },
+      "explicit_fields": {
+        "objective": false,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "20",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 90
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：账户总借款、衍生品名义金额、保证金余量、压力损失",
+        "frequency_and_use": "随账户；个人/机构风险",
+        "how_to_combine_and_common_misreading": "公开市场数据不能替代自己的完整账户；名义金额也不直接等于实际风险",
+        "system_and_ownership": "单独账户风险范围，本轮不读私人账户、不实施"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "21",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 98
+      },
+      "original_cells": {
+        "metric_and_market": "美：VIX/VXN；A：对应ETF/指数期权隐含波动",
+        "frequency_and_use": "日/盘中；市场预期波动大小",
+        "how_to_combine_and_common_misreading": "按对应指数看，并对照已经发生的波动；数值高没有方向含义",
+        "system_and_ownership": "美已有；A本土可比序列待核"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "22",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 99
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：不同到期日期的隐含波动",
+        "frequency_and_use": "日；事件风险",
+        "how_to_combine_and_common_misreading": "近月异常高可能与已知事件有关；不把期限差直接当股价信号",
+        "system_and_ownership": "未发现完整卡；需要合约与方法"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": true,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "23",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 100
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：认沽/认购成交比、持仓比，指数/个股分开",
+        "frequency_and_use": "日；期权活动",
+        "how_to_combine_and_common_misreading": "区分成交和未平仓合约；买保护、卖期权、组合交易会改变含义",
+        "system_and_ownership": "美已有研究，原负责人；A候选"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "24",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 101
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：下跌保护价格相对上涨期权价格、隐含与实际波动差",
+        "frequency_and_use": "日；保险成本",
+        "how_to_combine_and_common_misreading": "比较同期限、相近条件；保险贵不代表事件一定发生",
+        "system_and_ownership": "待核方法和历史，不承诺直接接入"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "25",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 102
+      },
+      "original_cells": {
+        "metric_and_market": "美：VIX期货期限结构；A/美：到期分布、交易商敏感度估计",
+        "frequency_and_use": "日/事件；波动产品与对冲行为",
+        "how_to_combine_and_common_misreading": "VIX期货与SPX期权期限曲线不同；交易商持仓与Gamma估算高度依赖假设",
+        "system_and_ownership": "后者为进阶候选，优先级低，不当已知真实仓位"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "26",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 110
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：政策利率、国债短中长期收益率、期限差",
+        "frequency_and_use": "日/决议；资金价格",
+        "how_to_combine_and_common_misreading": "看变动原因与期限；降息可能对应增长转弱，也可能缓和资金压力",
+        "system_and_ownership": "部分已有，宏观任务复用"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": true
+        }
+      }
+    },
+    {
+      "id": "27",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 111
+      },
+      "original_cells": {
+        "metric_and_market": "美：10年实际利率、市场通胀补偿；A：名义利率与物价分别看",
+        "frequency_and_use": "日/月；估值背景",
+        "how_to_combine_and_common_misreading": "实际国债收益率与“名义利率减当月CPI”不是同物；通胀补偿也含其他风险溢价",
+        "system_and_ownership": "美实际利率已有，其他覆盖待核"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "28",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 112
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：信用债相对国债的利差、违约与融资条件",
+        "frequency_and_use": "日/月；企业融资压力",
+        "how_to_combine_and_common_misreading": "看水平、扩大速度及信用等级；高收益债整体不能代替CCC或科技企业",
+        "system_and_ownership": "美国广义信用利差已有，原口径差异保留"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "29",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 113
+      },
+      "original_cells": {
+        "metric_and_market": "A：银行间短期资金利率/公开市场操作；美：隔夜融资利率、准备金、财政账户、逆回购",
+        "frequency_and_use": "日/周；短期资金供求",
+        "how_to_combine_and_common_misreading": "按制度和工具解释；不能把几个账户简单相减就宣称能预测股市",
+        "system_and_ownership": "现有完整覆盖未验；进阶资料候选"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "30",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 114
+      },
+      "original_cells": {
+        "metric_and_market": "美：芝加哥联储NFCI总指数及风险/信用/杠杆分项",
+        "frequency_and_use": "周；金融条件综合背景",
+        "how_to_combine_and_common_misreading": "看哪些分项在变化；与已看信用/波动数据有重叠，不是额外独立证明",
+        "system_and_ownership": "未发现接入，低成本候选但需去重"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "31",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 115
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：PMI、新订单、生产、库存、工业生产",
+        "frequency_and_use": "月；企业经营方向",
+        "how_to_combine_and_common_misreading": "看需求和库存组合；PMI50是调查扩张/收缩分界，不是股市买卖线",
+        "system_and_ownership": "部分已有，生产扩展沿宏观负责人"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": true,
+          "fall_interpretation": true
+        }
+      }
+    },
+    {
+      "id": "32",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 116
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：CPI/PPI；美PCE/核心物价；服务与商品拆分",
+        "frequency_and_use": "月；物价压力",
+        "how_to_combine_and_common_misreading": "看月度变化、年度变化、基数和构成；政策目标不可挪用到不同物价指标",
+        "system_and_ownership": "已有+既有扩展，不重复"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "33",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 117
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：就业、工资、实际收入、实际消费、零售、储蓄",
+        "frequency_and_use": "周/月；居民需求",
+        "how_to_combine_and_common_misreading": "收入、花费与储蓄一同判断；零售不等于所有消费，名义增长不等于购买量增长",
+        "system_and_ownership": "部分已有，原扩展负责人"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "34",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 118
+      },
+      "original_cells": {
+        "metric_and_market": "A：社融/贷款与信用结构；美：银行贷款标准/信贷增长",
+        "frequency_and_use": "月/季；实体融资",
+        "how_to_combine_and_common_misreading": "分政府、居民、企业及存量/新增；不叫“流入股市的钱”",
+        "system_and_ownership": "中国社融已有提案，其他待核"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "35",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 119
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：住房许可/开工/销售/库存；商品、汇率和跨资产相对表现",
+        "frequency_and_use": "日/月；经济与成本背景",
+        "how_to_combine_and_common_misreading": "供给与需求分开；铜金比、油金比还受供给、美元及报价单位影响",
+        "system_and_ownership": "已有部分与旧待办，不重复接入"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "36",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 127
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：市盈率PE、市净率PB、长期平滑盈利估值CAPE及历史位置",
+        "frequency_and_use": "日/月；长期定价",
+        "how_to_combine_and_common_misreading": "同指数、同会计和行业构成比较；低PE可能是利润周期顶部，高PB未必昂贵",
+        "system_and_ownership": "现有PE/CAPE部分；其他方法覆盖待核"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "37",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 128
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：指数/行业收入、每股盈利增长、利润率",
+        "frequency_and_use": "季；盈利支撑",
+        "how_to_combine_and_common_misreading": "拆价格变贵与盈利增加；回购会改变每股数字",
+        "system_and_ownership": "中美指数盈利已有草案，不重复认领"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "38",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 129
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：分析师盈利预期上调/下调比例、未来盈利变化",
+        "frequency_and_use": "周/月；预期变化",
+        "how_to_combine_and_common_misreading": "同一批公司、同一预测年度、保留当期预测版本；一致预期不是事实",
+        "system_and_ownership": "历史快照与授权待核，常需供应商"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "39",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 130
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：自由现金流及收益率、经营现金/利润、应收与存货",
+        "frequency_and_use": "季；现金与盈利质量",
+        "how_to_combine_and_common_misreading": "自由现金流需明确资本开支等口径；暂时负现金流不必然坏，利润高也可能没收现金",
+        "system_and_ownership": "价值质量方向已有待办，未发现完整主卡"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "40",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 131
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：资本回报、毛利/净利率、资产负债和利息负担",
+        "frequency_and_use": "季；经营质量和偿债能力",
+        "how_to_combine_and_common_misreading": "同行业比较；金融企业与一般企业不能套同一负债阈值",
+        "system_and_ownership": "待建立可靠财报资料，非新增技术过滤"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "41",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 132
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：股息率、派息占利润/现金比例、分红记录",
+        "frequency_and_use": "公告/季/年；收入可持续性",
+        "how_to_combine_and_common_misreading": "高股息可能来自股价大跌；一次性分红不能年年外推",
+        "system_and_ownership": "观察卡未完整覆盖；与除息调整资料分开"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "42",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 133
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：回购执行、增发稀释、管理层指引、资本开支与资本分配",
+        "frequency_and_use": "公告/季；每股价值",
+        "how_to_combine_and_common_misreading": "公告额度与实际执行分开；回购与股权激励合看",
+        "system_and_ownership": "信息存在不等于结构化事件链；待核"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "43",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 141
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：ETF份额、净申赎、资产规模、场内成交",
+        "frequency_and_use": "日或公告；资金参与",
+        "how_to_combine_and_common_misreading": "规模增加可能只是价格上涨；份额变化须扣拆分等调整；场内买卖不等于基金净流入",
+        "system_and_ownership": "份额已有候选，原任务复用；连续链未验"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "44",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 142
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：折溢价、买卖价差、可成交数量与交易时段",
+        "frequency_and_use": "日/盘中；实际购买成本",
+        "how_to_combine_and_common_misreading": "ETF价格相对净值、买价与卖价差一起看；跨境底层市场休市时尤其需核净值时点",
+        "system_and_ownership": "完整产品观察链缺口；优先候选"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "45",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 143
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：费率、实际跟踪差异、跟踪波动、分红与税费影响",
+        "frequency_and_use": "月/季/年及规则；长期持有成本",
+        "how_to_combine_and_common_misreading": "同指数、同币种、同分红再投资口径比较；便宜费率不必然总成本最低",
+        "system_and_ownership": "产品维度未完整核实；不处理私人税务资料"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "46",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 144
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：指数编制、前十大权重、行业/国家集中度、持仓重叠",
+        "frequency_and_use": "调整日/月；资产配置",
+        "how_to_combine_and_common_misreading": "多买几只ETF可能仍集中于同一批股票；名称不同不等于分散",
+        "system_and_ownership": "指数/持仓资料待整合，非因子重复实验"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "47",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 145
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：汇率、QDII额度/申购限制、杠杆重置、期货换月、清盘/合并",
+        "frequency_and_use": "日/公告；产品结构风险",
+        "how_to_combine_and_common_misreading": "产品规则按具体基金文件核；杠杆倍数不能直接外推长期回报",
+        "system_and_ownership": "新候选，全部具体规则未在本轮逐项查验"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": false,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "48",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 146
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：每期可投入现金、备用资金、投资期限、目标资产比例及偏离",
+        "frequency_and_use": "月/生活事件；定投执行",
+        "how_to_combine_and_common_misreading": "先确定钱是否长期可用和配置是否偏离；不因一项短期情绪随意停投",
+        "system_and_ownership": "个人计划领域，不能用公开市场指标代替"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "49",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 147
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：总投入、现金、份额、分红、费用、资金流入后的实际收益",
+        "frequency_and_use": "每笔/月；定投复盘",
+        "how_to_combine_and_common_misreading": "与“相同日期、相同金额”的简单定投比较；不能只比一条价格曲线",
+        "system_and_ownership": "已有宽基资金研究，复用成果，不重跑"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    },
+    {
+      "id": "50",
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 148
+      },
+      "original_cells": {
+        "metric_and_market": "A/美：持仓风险贡献、相关性、共同下跌、集中度和流动性",
+        "frequency_and_use": "周/月；组合风险",
+        "how_to_combine_and_common_misreading": "平时相关性低不保证压力时分散；需要真实持仓而非市场替代指标",
+        "system_and_ownership": "账户/组合既有方向，另行授权与数据"
+      },
+      "explicit_fields": {
+        "objective": true,
+        "combine_with": true,
+        "counterexample_or_caveat": true,
+        "frequency": true,
+        "coverage_status": true
+      },
+      "withdrawn_direction_flags": {
+        "status": "withdrawn_inconsistent_level_vs_change",
+        "original_values": {
+          "rise_interpretation": false,
+          "fall_interpretation": false
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "A present flag does not establish correctness or user comprehension.",
+    "No market data, external sources, or finance claims were consulted.",
+    "Rise/fall binary judgments were withdrawn as inconsistent; see withdrawn_fields.counterexamples. They are excluded from valid counts."
+  ],
+  "field_presence_rules": {
+    "objective": "Present only when the frequency/use cell explicitly names a purpose after its frequency; rows 11 and 19 list timing only.",
+    "combine_with": "Present when the row explicitly relates multiple measures, conditions, or comparison objects for interpretation; absent for rows 12 and 47.",
+    "counterexample_or_caveat": "Present when the row states a limitation, qualification, or potential misreading.",
+    "frequency": "Present when a cadence or observation timing is stated.",
+    "coverage_status": "Present when the system/ownership cell states an availability, ownership, or verification status."
+  },
+  "withdrawn_fields": {
+    "status": "withdrawn_inconsistent_level_vs_change",
+    "fields": [
+      "rise_interpretation",
+      "fall_interpretation"
+    ],
+    "reason": "The binary coding mixed high/low levels with increases/decreases over time, so its per-row judgments and aggregate counts are not valid findings.",
+    "counterexamples": [
+      {
+        "id": "21",
+        "evidence_line": 98,
+        "source_text": "数值高没有方向含义",
+        "issue": "A high level is discussed, but it does not state the meaning of a rise over time."
+      },
+      {
+        "id": "36",
+        "evidence_line": 127,
+        "source_text": "低PE可能是利润周期顶部",
+        "issue": "A low level is discussed, but it does not state the meaning of a decline over time."
+      },
+      {
+        "id": "41",
+        "evidence_line": 132,
+        "source_text": "高股息可能来自股价大跌",
+        "issue": "A high yield and a price decline are related, but the text does not code a change in the yield over time."
+      }
+    ],
+    "excluded_from_valid_summary": true
+  }
+}

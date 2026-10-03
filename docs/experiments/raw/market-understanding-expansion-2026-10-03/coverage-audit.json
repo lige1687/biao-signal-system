@@ -1,0 +1,106 @@
+{
+  "question": "已发布市场观察实现相对50组投资观察地图，实际读数、解释和资料资格各覆盖到哪里？",
+  "mode": "report_only",
+  "execution": "completed",
+  "completion_reason": "mode_boundary",
+  "evidence_strength": "bounded_code_audit",
+  "versions": {
+    "atlas": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+    "published_market_code": "55d8aa96b45d97b09901ded4ebf78f490bbb7f6b",
+    "coordination": "c44573bb61908ad7b6b0638ed8c605c02b2a2634"
+  },
+  "scope_limit": "仅审查列明Git版本的源码与页面，不连真实来源、不读取调查原始文件、不运行实验或页面；‘未展示’仅指所审统一卡，不等于整个仓库没有实现。",
+  "baseline": {
+    "atlas": "50组观察主题和组合读法；其中很多是候选而非已接入。证据：docs/experiments/investor-observation-map-2026-10-02.md@1f59cf73:49-51,169-189。",
+    "published_observation_api": "统一观察接口按市场生成：A股融资余额、融资买入额、固定股票成交额3项；美股VIX、VXN、10年实际利率、高收益债利差、NAAIM、AAII共6项。它们是代码入口，不证明当日来源可取或历史首次可知。证据：src/lei_signal/fundamentals/observations.py@55d8aa96:54-126,136-186。",
+    "page": "基本面市场页A股最多3张、美股主卡4张且调查在折叠区；情绪页A股3张、美股4张。证据：web/src/pages/FundamentalsPage.tsx@55d8aa96:2069-2088；web/src/pages/SentimentPage.tsx@55d8aa96:85-96。"
+  },
+  "old_finding_now_addressed": [
+    {
+      "finding": "旧NAAIM采集器无日期却推测调查周的记录，当前统一卡会剔除；若只剩这种记录则隐藏值。只修了这类污染，未证明调查历史发布日期、来源授权或今日刷新。",
+      "old_evidence": "docs/experiments/investor-observation-map-2026-10-02.md@1f59cf73:5-7,33-34",
+      "new_evidence": "src/lei_signal/fundamentals/observations.py@55d8aa96:149-175"
+    },
+    {
+      "finding": "旧地图所担忧的中美切换范围混淆，在当前页面有明确限定：开关只影响背景观察和周调查；其他分区不跟着切换。",
+      "old_evidence": "docs/experiments/investor-observation-map-2026-10-02.md@1f59cf73:22-24",
+      "new_evidence": "web/src/pages/FundamentalsPage.tsx@55d8aa96:2072-2083"
+    }
+  ],
+  "density_gaps": [
+    {
+      "id": "D01", "atlas_group": "13-15", "kind": "existing_data_not_unified_card",
+      "finding": "两融来源已有融券余额、两融合计、融资余额占流通市值比，但统一观察卡仅单列融资余额和买入额；可在同一来源范围和日期下补充解释，不重复接源。融资偿还额仍非该来源抓取字段。",
+      "evidence": ["src/lei_signal/fundamentals/sources.py@55d8aa96:925-958", "src/lei_signal/fundamentals/observations.py@55d8aa96:60-83", "docs/experiments/investor-observation-map-2026-10-02.md@1f59cf73:81-85"],
+      "owner_boundary": "market-observation保留已有两融来源和页面范围；此审计只给设计差额"
+    },
+    {
+      "id": "D02", "atlas_group": "05,13-14", "kind": "combination_explanation",
+      "finding": "成交额是截至2026-09-29的固定快照；融资标的可能含基金。现卡分项读数和限制已有，但没有把借款活动、同范围成交及上涨参与面放在同一解释情境；不得直接计算融资买入占该股票成交额的比例。",
+      "evidence": ["src/lei_signal/fundamentals/observations.py@55d8aa96:54-93", "web/src/components/MarketObservationCards.tsx@55d8aa96:26-35", "docs/experiments/investor-observation-map-2026-10-02.md@1f59cf73:180-185"],
+      "owner_boundary": "成交额更新和真实范围核对属market-observation"
+    },
+    {
+      "id": "D03", "atlas_group": "07-08", "kind": "explanation_depth",
+      "finding": "AAII卡已给多/中/空比例和净差，NAAIM卡只给敞口最新值及环比；地图要求区分调查均值、分布、变化、持续时间，目前统一卡没有分布或持续期字段。未经合格历史资料不可填造。",
+      "evidence": ["src/lei_signal/fundamentals/observations.py@55d8aa96:140-183", "web/src/components/MarketObservationCards.tsx@55d8aa96:31-35", "docs/experiments/investor-observation-map-2026-10-02.md@1f59cf73:68-69"],
+      "owner_boundary": "调查资料资格和效果归sentiment/market-observation；本任务仅梳理解释卡"
+    },
+    {
+      "id": "D04", "atlas_group": "21,28", "kind": "combination_explanation",
+      "finding": "VIX/VXN和美国高收益债利差分别有数值与单句解释；没有同卡说明‘预期波动升高、信用利差扩大、上涨参与面下降’与单一事件冲击的反例，避免读者把VIX升高直接当下跌预报。",
+      "evidence": ["src/lei_signal/fundamentals/observations.py@55d8aa96:95-124", "web/src/components/MarketObservationCards.tsx@55d8aa96:28-36", "docs/experiments/investor-observation-map-2026-10-02.md@1f59cf73:184-185"],
+      "owner_boundary": "不得重做VXN或宽度因子效果；只设计并排读法"
+    },
+    {
+      "id": "D05", "atlas_group": "26-28,36-38", "kind": "existing_page_separated",
+      "finding": "实际利率、信用利差位于统一美国主卡，国债/估值/宏观在其他基本面分区；页面尚未提供同对象、同发布日期比较盈利变化、估值和资金价格的整句解释。现有ERP与PE/CAPE是部分数据，不能把标普500估值用于纳指100盈利判断。",
+      "evidence": ["src/lei_signal/fundamentals/service.py@55d8aa96:118-195", "web/src/pages/FundamentalsPage.tsx@55d8aa96:1919-1925,2076-2081,2095-2107", "docs/experiments/investor-observation-map-2026-10-02.md@1f59cf73:127-135,184-186"],
+      "owner_boundary": "宏观映射、盈利资料资格仍归market-observation及其既有负责人"
+    },
+    {
+      "id": "D06", "atlas_group": "26-35", "kind": "source_time_qualification",
+      "finding": "统一观察元数据有观测期、发布时点、抓取时间字段；当前九项构造多传fetched_at=None，未传published_at，元数据默认判为可用时间未核实。卡片如实显示未知，因此代码入口不能算已核实时效。",
+      "evidence": ["src/lei_signal/fundamentals/observations.py@55d8aa96:74-80,119-124,167-176", "src/lei_signal/fundamentals/observation_meta.py@55d8aa96:10-20,38-69", "web/src/components/ObservationSourceNote.tsx@55d8aa96:23-31"],
+      "owner_boundary": "日期/范围与来源资格由market-observation既有任务推进；本审计不复测CPI/三源"
+    },
+    {
+      "id": "D07", "atlas_group": "07-08,21", "kind": "visible_order",
+      "finding": "同一美股观察接口在基本面页主卡只展示VIX/VXN/实际利率/信用利差，AAII/NAAIM放在折叠区；情绪页四主卡有调查，却没有信用利差/实际利率。读者跨页才能完成风险与调查分辨。",
+      "evidence": ["web/src/pages/FundamentalsPage.tsx@55d8aa96:2079-2088", "web/src/pages/SentimentPage.tsx@55d8aa96:90-96", "docs/experiments/investor-observation-map-2026-10-02.md@1f59cf73:191-200"],
+      "owner_boundary": "页面改动归market-observation；此处仅提信息架构候选"
+    },
+    {
+      "id": "D08", "atlas_group": "43-47", "kind": "candidate_new_data",
+      "finding": "已发布etf_strength入口是11行业ETF相对强弱，不等于具体产品份额、折溢价、价差、费率、跟踪差异或持仓集中度；要回答实际购买成本，需逐产品的同日净值、盘口/成交、费用、份额和规则文件。",
+      "evidence": ["src/lei_signal/fundamentals/service.py@55d8aa96:453-458", "web/src/pages/FundamentalsPage.tsx@55d8aa96:2084-2088", "docs/experiments/investor-observation-map-2026-10-02.md@1f59cf73:137-150"],
+      "owner_boundary": "不认领已有ETF份额候选/产品研发；新来源须另核许可、时点和产品范围"
+    },
+    {
+      "id": "D09", "atlas_group": "16-17", "kind": "candidate_new_data",
+      "finding": "所审统一观察构造没有FINRA美国客户保证金借款或两类账户自由贷方余额；这些是月末、发布滞后的不同口径候选，不应与A股日度两融排成可直接比较的同一百分比。",
+      "evidence": ["src/lei_signal/fundamentals/observations.py@55d8aa96:94-126", "docs/experiments/investor-observation-map-2026-10-02.md@1f59cf73:86-87,211-214"],
+      "owner_boundary": "仅提出非独占资料需求；字段、滞后、修订和授权未在本轮核实"
+    },
+    {
+      "id": "D10", "atlas_group": "event_groups", "kind": "candidate_new_data",
+      "finding": "当前所审观察卡以指标所属期和来源说明为主，未见结构化事件的预期值、实际值、前值/修订、发布时刻、受影响指数/ETF产品关联；要解释‘数据好却价格不涨’，需有当时预期及事件后价格，且分清消息与确认事实。",
+      "evidence": ["src/lei_signal/fundamentals/observation_meta.py@55d8aa96:56-69", "web/src/components/MarketObservationCards.tsx@55d8aa96:23-36", "docs/experiments/investor-observation-map-2026-10-02.md@1f59cf73:154-165,214"],
+      "owner_boundary": "事件入口是候选方案，不等于新闻页或仓库全局缺失，也不生成交易信号"
+    },
+    {
+      "id": "D11", "atlas_group": "18-19", "kind": "candidate_new_data",
+      "finding": "统一观察卡没有CFTC分类期货持仓和A股期货基差；若后续补，合约、持仓类别、快照日、实际发布日期及套保反例要随值展示，不能把期货净空解释成机构看空股票。",
+      "evidence": ["src/lei_signal/fundamentals/observations.py@55d8aa96:54-126", "docs/experiments/investor-observation-map-2026-10-02.md@1f59cf73:88-92,211-212"],
+      "owner_boundary": "来源适配先查归属；情绪因子效果仍属原负责人"
+    },
+    {
+      "id": "D12", "atlas_group": "43-47,event_groups", "kind": "candidate_new_data",
+      "finding": "ETF限购/停申赎、分红拆分、清盘合并、指数调样及底层市场休市需要逐产品链接和生效时点；观察卡的通用source_url不能替代产品公告与具体受影响持仓的关系。",
+      "evidence": ["web/src/components/ObservationSourceNote.tsx@55d8aa96:22-33", "docs/experiments/investor-observation-map-2026-10-02.md@1f59cf73:141-150,160-165"],
+      "owner_boundary": "仅定义产品/事件资料需求；不读取私人账户、不作自动交易"
+    }
+  ],
+  "overall_judgment": "九项统一观察读数已经提供基本身份、变化、日期、来源及限制；从原50组地图看，当前最直接的增量是复用现有字段做范围一致的组合解释和显眼的来源时间说明。FINRA、ETF产品资料和事件关联属于尚需来源资格核查的新增候选。没有真实来源刷新、用户理解测试或投资收益证据，不能声称这些设计已改善判断或交易。",
+  "attempts": {"git_blob_reads": "仅指定版本及协调记录", "network_calls": 0, "experiments": 0, "source_budget_change": 0}
+}

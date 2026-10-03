@@ -1,0 +1,70 @@
+[
+  {
+    "network_allowed": false,
+    "max_agents": 2,
+    "one_writer_per_file": true,
+    "preserve_dirty_worktree": true,
+    "controller_review": {
+      "required": true
+    },
+    "stop_conditions": [
+      "scope ambiguity",
+      "missing source version",
+      "unsafe action"
+    ],
+    "read_only_paths": [
+      "AGENTS.md",
+      "Git blobs at 1f59cf73dd019df487b7a2d3138445f4a3756e28",
+      "Git blobs at 55d8aa96b45d97b09901ded4ebf78f490bbb7f6b",
+      "Git blobs at c44573bb61908ad7b6b0638ed8c605c02b2a2634"
+    ],
+    "mission": "审计已发布市场观察实现与原50组地图的字段和展示差距，只读准确Git版本，不运行科学实验。",
+    "task_scope": [
+      "审计已发布市场观察实现与原50组地图的字段和展示差距，只读准确Git版本，不运行科学实验。"
+    ],
+    "write_paths": [
+      "isolated-local-stage/coverage-audit.json"
+    ],
+    "expected_outputs": [
+      "bounded JSON findings with exact file references and limitations"
+    ],
+    "executor": {
+      "model": "gpt-6-sol",
+      "reasoning_effort": "medium"
+    }
+  },
+  {
+    "network_allowed": false,
+    "max_agents": 2,
+    "one_writer_per_file": true,
+    "preserve_dirty_worktree": true,
+    "controller_review": {
+      "required": true
+    },
+    "stop_conditions": [
+      "scope ambiguity",
+      "missing source version",
+      "unsafe action"
+    ],
+    "read_only_paths": [
+      "AGENTS.md",
+      "Git blobs at 1f59cf73dd019df487b7a2d3138445f4a3756e28",
+      "Git blobs at 55d8aa96b45d97b09901ded4ebf78f490bbb7f6b",
+      "Git blobs at c44573bb61908ad7b6b0638ed8c605c02b2a2634"
+    ],
+    "mission": "从已有50组地图提取各组ID和主题，并逐组检查是否明确写了观察目标、升降含义、组合、反例、频率、系统状态；设计一致内容字段，不外推新金融结论。",
+    "task_scope": [
+      "从已有50组地图提取各组ID和主题，并逐组检查是否明确写了观察目标、升降含义、组合、反例、频率、系统状态；设计一致内容字段，不外推新金融结论。"
+    ],
+    "write_paths": [
+      "isolated-local-stage/density-audit.json"
+    ],
+    "expected_outputs": [
+      "bounded JSON findings with exact file references and limitations"
+    ],
+    "executor": {
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low"
+    }
+  }
+]
