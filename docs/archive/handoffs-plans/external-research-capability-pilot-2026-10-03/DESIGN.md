@@ -24,6 +24,12 @@
 - 本任务四技能及固定tsfresh/arch有限工具已有证据；收益或效率改善不能从工具测试推出。兼容审查已结案，docs/progress/external-quant-compatibility-2026-10-03.md；不继续以补全共享workflow作为本轮目标。
 - 远端dot三路在做策略定义、资料资格、未来SMA20增量协议；公式/绝对时间独立校验器已有交付。它们与Air技术顺序、经典、情绪、页面任务均保留原负责人。本轮不进入这些定义/实验或复制其校验器。
 
+
+来源交付限制：上述两份历史报告本次从现有共享工作区只读，尚未包含在本任务工作分支根路径；不能要求远端接手者从这些相对路径直接取得原件。本轮不夹带其他任务报告。准确原件指纹如下，执行时若需复用原试验必须先取得对应负责人发布版本：
+
+- docs/experiments/rdagent-pilot-controller-review-2026-09-27.md：SHA256 eefe70ca54c748ddb65e65ce3c4348a6ce68db9a98b7e2fdacc66bc6a1f48a03。
+- docs/experiments/quantaalpha-medium-validation-2026-09-28.md：SHA256 056233663898c7963f86595d964d219b8744c9f030d9fe975051138905feb219。
+
 ## 三种做法与建议
 
 |做法|能回答什么|主要代价|
