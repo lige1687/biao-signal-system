@@ -81,3 +81,8 @@ tsfresh结论只限四只相关ETF的已看过历史和本轮固定预测方法�
 | 2026-10-03T13:32:58.679699+08:00 | 用户要求持续任务成果同步 | 原负责人继续；已有成果不重新跑实验 | 独立task/external-quant-progress同步 | Air；父提交1ac596f65110e06c286f04707165251328df0962 | 核远端SHA后继续来源/覆盖核查 |
 
 | 2026-10-03T13:41:41.637779+08:00 | 持续任务同步后推进来源阶段 | 首次同步已核；catch22资格核查和共享依赖清单完成 | 本阶段报告/进度同步，0新拟合 | Air；task/external-quant-progress；首次同步0692d3ba4aa99ae9eff988fd0b6a0842a9faef81 | 主控继续后续有界问题；不认领其他主线文件 |
+
+
+## 统一协作接入：2026-10-03T14:04:19.965435+08:00
+
+唯一跨任务实时入口：`coordination/lei` 的 `docs/coordination/tasks/external-quant-resources.md`；本文件保留阶段历史和证据，不是排他锁。读取规则版本1.0，提交b172008890b39e912c8f1d0cfb9125d1e414a97f。catch22及依赖清单已在6d8ad5c80c055337e2bb33c536ec3cbf1f50fd5e推送核验。已读初始化任务和technical-factor-sequence：无已登记同题冲突，未登记任务状态未知。继续维护本任务四技能和归档比较工具；暂不改共享workflow/workflow_inputs/question_contract及技术语义模块，下一步只读核对实际依赖发布状态后决定是否具备整合条件。无新拟合、无后台研究、无预算重置；本轮只修改本分支AGENTS协作入口和两份自身进度。

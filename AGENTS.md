@@ -181,3 +181,8 @@ bootstrap、Calmar、expR、PF、样本内/样本外、走查（walk-forward）*
   什么、对用户实际有什么意义——不能让用户翻完整份报告才搞懂讲的是什么。
 - 如果一个术语确实没有更简单的说法（比如"宽度"这个系统专用概念本身），
   第一次出现时要用一句话定义它，不能假设读者已经知道。
+
+
+## 统一协作入口（2026-10-03）
+
+每轮实质工作先 fetch origin coordination/lei，读取该分支根 COORDINATION.md 和相关 docs/coordination/tasks/ 记录。本任务唯一 task-id 为 external-quant-resources；开始新范围、阶段完成、范围变化、阻塞、暂停或结束时更新并推送自己的记录，推后核验完整提交及读回文件。记录不是排他锁；重叠先明确实现者和验证者，未登记状态不视为空闲。代码/测试/研究证据保留 task/external-quant-progress，跨任务摘要只放 coordination/lei；旧阶段记录保留并链接该入口。不覆盖他人修改、不切换脏工作区、不强推、不合并 main/master、不扩大研究或数据权限。
