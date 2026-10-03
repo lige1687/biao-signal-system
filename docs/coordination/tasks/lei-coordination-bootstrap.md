@@ -17,7 +17,7 @@
 
 ## 正在做与范围
 
-初始化 COORDINATION.md 与本任务文件；登记成功后只在独立工作分支增补 AGENTS.md，保存 docs/ops/work-progress/lei-coordination-bootstrap.md 阶段证据。需其他 AI 暂避本任务文件、首次规则初始化与本分支 AGENTS.md 同一区段；其他研究范围不独占。
+初始化 COORDINATION.md 与本任务文件；登记成功后只在独立工作分支增补 AGENTS.md，保存 docs/ops/work-progress/lei-coordination-bootstrap.md 阶段证据；补充 scripts/check_repo_hygiene.py 白名单，识别用户指定的两个新路径及 worktree .git 文件。需其他 AI 暂避本任务文件、首次规则初始化与本分支 AGENTS.md 同一区段；其他研究范围不独占。
 
 ## 下一步、依赖与阻塞
 
@@ -33,3 +33,5 @@
 
 fetch origin coordination/lei，读本文件和 COORDINATION.md；核对成果分支实际提交后只继续未完成步骤。原研究先确认 task-id 与负责人。
 本版新增：首次范围、基线、旧入口映射和未确认原任务的边界。尚未替任何其他任务登记状态。
+
+阶段更新：远端首次登记已 fetch 读回。目录检查失败 3 项：.git 文件、COORDINATION.md、docs/coordination 不在旧白名单；下一步只补白名单并验证，不改变交易代码。较上一版增加这项必要兼容范围。
