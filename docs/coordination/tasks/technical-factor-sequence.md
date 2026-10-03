@@ -1,15 +1,15 @@
 # LEI 技术因子顺序与组合研究
 
 - task-id：technical-factor-sequence；负责人：本技术因子研究会话 /root，设备 MacBook-Air-126.local。持续负责，不是接管或结束。
-- 状态：active（语义与资料资格准备）；C01/Q01 completed；新效果实验未启动。
+- 状态：active（用户选定C：完整技术策略研究；正在核已有资金证据并冻结非重叠下一题）；C01/Q01及抵扣数学审查已completed；新市场效果未启动。
 - 更新时间：2026-10-03T14:02:21.051775+08:00，Asia/Shanghai。
 - 目标：把 LEI 技术原文的经验判断转为明确可计算信号，检验它在已有信息之后是否仍提供可重复的收益或风险信息。国内宽基/ETF优先。交易和线上业务增量未测量，预测误差改善不能当成交易收益。
 - 验收：原文来源、定义、时点、简单基准、增量比较、收益/风险/机会与后期证据可核；负结果也结案。遵循当前研究规范索引，不改旧冻结合同。
-- 规范：远端 COORDINATION.md 1.0，实际读取提交0b758e7e10f720c44cbd898d511ff392f2857535；工作分支AGENTS.md、docs/research/current-standards.json（本地索引research-standards/1.0，workflow/1.1）；新研究采用最新索引，封存研究保留原绑定。情绪、宽度、宏观、Module E、账户政策和生产交易不归本任务；改变原文、研究范围或技术规则须用户确认。
+- 规范：远端 COORDINATION.md 1.0，实际读取提交0b758e7e10f720c44cbd898d511ff392f2857535；工作分支AGENTS.md、docs/research/current-standards.json（本地索引research-standards/1.0，workflow/1.1）；新研究采用最新索引，封存研究保留原绑定。情绪、宽度、宏观、Module E和生产交易不归本任务；最新用户明确选择C，允许本任务向完整技术策略研究推进，但不据此改原文、编造资金偏好、接管已有人负责的账户问题或修改生产。旧阶段账户边界保留其历史适用范围。
 
 ## 版本与唯一入口映射
 
-仓库 https://github.com/lige1687/biao-signal-system 。工作分支 task/technical-factor-sequence-progress；已推送成果完整commit d444316817e9330c2d72a4a90c655467b45dd5bb；发布基础d7da6cb0f9c127606b6faa572fabc9ee93f104f7。
+仓库 https://github.com/lige1687/biao-signal-system 。工作分支 task/technical-factor-sequence-progress；已推送成果完整commit b355cf0c8c028c99ec53e83ed2a23291081e92a1；发布基础d7da6cb0f9c127606b6faa572fabc9ee93f104f7。
 
 成果入口：https://github.com/lige1687/biao-signal-system/blob/d444316817e9330c2d72a4a90c655467b45dd5bb/docs/progress/technical-factor-sequence.md 。精确上传范围和测试见同commit的technical-factor-sequence-files.json、technical-factor-sequence-validation.json。原共享工作区HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，分支codex/factor-unit-research-20260915，有大量其他任务修改；不代表成果分支，不整批提交。
 
@@ -111,3 +111,18 @@ A01/A02/A03、D01抵扣盒、双均线静态排列、60日斜率变化、简单�
 最新协调基线472cc60c9b9032bcca746937ea680b0b70a0a67e已读：新增dot-formula-time-validation是独立公式/绝对时间边界，明确不接管抵扣；dot-pro-increment-review是未来新趋势SMA20协议审阅，避开C01/Q01；dot-pro-source-qualification仅三项宏观来源；dot-pro-strategy-definition是历史异常量日价位独立审阅。四者均不写本候选/封存结果/共享框架；与当前有界数学审查没有模块/实验执行冲突，原Air与dot身份不混用。此前八条分工保留，未登记仍未知；本文件不是锁。
 
 下一步不是重复注册或重跑小例：围绕这个窄候选绑定唯一未来用途、真实输入资格与正式研究对象/适配器。在需要改变共享接口时先明确实现者与独立验证者，且同步记录；当前共享修改未启动。依赖历史到达/行动/许可未知的步骤仍有条件，不能拿结构检查绕过真实资格。原任务仍由本主控负责，整体active，只有本轮定义问题结案，未转派或结束技术因子研究。
+
+
+## 最新目标确认与本轮限定执行（覆盖上文旧阶段下一步）
+
+更新时间：2026-10-03T15:47:42.938290+08:00，Asia/Shanghai。用户原话：“A、B、C都可以……我其实是想拿到C的……不要和远端正在做的事情重复了……继续地落地……让我看到成果”。C指完整可量化的LEI技术交易策略；A信号验证与B决策辅助为其提供依据。交付要回答相同产品、日期、费用和资金条件下买入、持有、退出的完整收益、风险、机会与后期证据；离线结果不等于线上收益，未测量不填正收益。
+
+当前有界工作：将已封存单模块/账户结果连接到C的可交付基准，核清原文一致性、已有执行入口及未完成最小环节。先复用实际逐日/逐笔或摘要，不重跑旧48账户、不拿预测误差替代资金结果。该轮不是继续抵扣首尾市场实验；其定义审查留存、效果未运行，暂不追加参数。
+
+预计写入范围：docs/research/proposals/technical-sequence-c-2026-10-03/的固定问题、来源/版本清单、必要后续合同；docs/experiments/lei-technical-strategy-c-baseline-2026-10-03.md及同名raw的有界证据；自身两份进度，工作分支registry/INDEX仅自身报告项。共享src/configs/总定义/workflow/前端/源原文暂时只读；若需新增执行模块，先确定语义、文件和负责人再补登记，不以空白登记抢占。原任务仍由本主控负责。
+
+已读取协调368add358cad92bab2102cc8c7dbd83fa749490f的规则、13任务及最新相关增量。remote-core-review持有black-reset定义/正式入口缺口与T2—T10返修；dot-pro-increment-review持有未来新趋势SMA20增量协议；reader持有137起点等待/UI；dot-pro-strategy-definition持有历史爆量价位；它们全部避让。本轮只读汇集旧完整策略资金证据并确定C验收，无登记同题计算或同文件写入冲突；未登记者状态未知，协调记录不是排他锁。多ETF资金分配/信号优先级未获唯一规则时不擅定，不触发情绪或账户政策相邻任务。
+
+分工与预算：主控核原文与最新协调，一个Sol/medium只读助手盘点已有技术账户结果/代码，write_paths为空，不重新运行旧结果；合同在本地运维目录c-evidence-delegate-contract.json。初次合同含桌面绝对路径被预检拒绝，收窄到仓库原文快照后ready；没有越权读取/写入。最多1只读助手，当前0新市场标签/拟合/行情来源/付费。必要新效果批次将另按选定问题冻结且接续旧预算；不自动开放全策略参数搜索。
+
+本轮工作基线b355cf0c8c028c99ec53e83ed2a23291081e92a1；原共享HEAD、脏文件、默认index及进程保持。两分支无版本管理的GitHub workflows，未配置额外hooks；仅安全文档/研究小产物普通分支同步，外部平台集成未确认，不调用部署/收费。当前运行中仅只读证据助手，无市场进程。源文档/真实价格/数据库/账号资料不上传公开仓库。
