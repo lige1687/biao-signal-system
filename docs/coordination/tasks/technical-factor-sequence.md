@@ -1,3 +1,17 @@
+# 当前：新有界问题——已完成周黑绿状态的日线增量研究
+
+更新时间2026-10-04T01:29:31.076569+08:00（Asia/Shanghai）；technical-factor-sequence原负责人继续，状态active；工作分支task/technical-factor-sequence-progress；基础及最新已推2ab565017a7a4959af744430339e32a09ce12667。先读协调规则v1.0@290bcb85854c8542970e408c0d0888a6908c295f，SHA6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0。
+
+本轮只问：上一已完成ISO周的20周绿色/黑色，在日线20/60颜色、EMA20方向、日20/60与周20/60涨幅、日20波动及ETF身份之后，是否增加未来t+1..t+21经济收盘收益/下探信息。原文§2.7日周共振；上一周保守可用、120连续完整周与252日预热是明示研究代理，非原文唯一作者公式；当前未完成周、缺失与未知不能填灰。原文和生产规则不改。先无结果资格/列秩，再固定两时间折、零惩罚OLS；最多8新真实拟合，0行情/付费，单候选不追正。全历史已见、不是未来新样本；旧EMA持续/日20日60黑绿与相邻事件继续封存。
+
+预计单Sol执行adapter及工程集成：新增src/lei_signal/research/weekly_color_information.py及tests/unit/test_weekly_color_information.py；workflow.py/workflow_inputs.py/question_contract.py只新weekly_color_information kind的绑定/分派/许可/演练块。本主控写definitions.v1.json只一新对象、专属raw/weekly-color-information-2026-10-04及报告、registry/INDEX自身项和两进度。不接管session_composition、shape_mining、baseline_review、FactorMiner或其他任务模块，旧定义/冻输入不改。已核其他记录：risk-shape做隔夜日内，external做FactorMiner，classic验收D1-D6，dot未来SMA20paused，情绪另线；未发现已登记同题冲突，记录不是锁，未登记者未知。
+
+验收：明确周聚合与可用时间、源SHA/分红和历史到达限制、完整安排/未知/成熟支持；收益风险机会和同样本增量表；简单ETF均值、各年各ETF反例、20/60连续日期不确定性；独立口径和保存结果核数；准确冻结/账本/报告/清单与远端提交。当前brief仅本地；新真实拟合0/8、来源0/6、无本题PID/checkpoint；不终止他人进程。只具备已有经济日线四ETFpanel，1,582,974字节/SHA382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b；行情与行动原材料仅本地不上传，版本和恢复缺口保留。完整交易资金/线上收益未测量。
+
+下一步：此记录推送读回后完成适配和资格；资料充分则正式冻结、执行效果与必要复核、发布。资料不足如实关闭本题资格，不扩大范围凑样本。D1/D2/D5上轮交付仍待classic原负责人验收，不重派。
+
+---
+
 # 当前：EMA持续性研究闭环已交，相邻变色证据不足
 
 - task-id technical-factor-sequence；负责人本技术因子对话/root，设备Air原负责人继续，非接管或总任务结束。状态：本轮有界问题completed；持续责任active，无本题运行中的实验/助手/checkpoint或后台自动承诺。更新时间2026-10-04T00:41:57+08:00（Asia/Shanghai）。
