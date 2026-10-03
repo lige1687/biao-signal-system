@@ -79,3 +79,10 @@
 本轮读取最新协调210cc70b96e0db6ca119158971027a6119cd1b55：追加classic-factor-research（风险旧题封存，共享接口只读）和external-quant-resources（共同比较工具/外部依赖发布检查，共享整合暂停），technical更新明确不接管2B；均无与当前black-reset准备同题执行冲突。本记录累计读七份其他任务，未登记者仍未知。正式效果分支blocked，等待工具/定义责任方准确交付和输入资格；独立返修差异核验仍持有，但尚无新返修提交。不新建第二套执行器、不改共享框架/总登记或生产。
 
 本阶段普通推送因并行classic文档同步被拒，已读取a775d1ebfe656f667455ae00bdc023880193d1dc：仅classic自身成果SHA/协作回执更新，未改变范围或规则，无冲突。保留其增量后整合本任务未发布提交，不强推。
+
+
+## 2026-10-03T15:10:51.180423+08:00：重复接入要求的安全节点刷新
+
+沿用唯一task-id，不创建第二记录/任务。最新完整规则读取15b3e4e0edd878c3e84ef30482d108e492563dbd，正文仍1.0。已读新增sentiment（原E资料blocked，不改共享研究）及market/external近期增量；当前窄问题无已登记同题运行冲突，未登记状态未知。原工作分支干净、HEAD及远端均bcf6fcf96cb9b5c540714e87316c2ed108299d5b，AGENTS入口已存在无需重复追加；原交付与core-sync远端仍4155b4db7ccd14674eff2e29dfaf102d2ac3e5f9/d7da6cb0f9c127606b6faa572fabc9ee93f104f7，未取得新返修。共享源工作区不切换、不整理、不回滚。
+
+本轮仅继续现有black-reset资格准备：拟在同一raw/remote-core-rule-next-2026-10-03/写BLACK-RESET-DEFINITION-DRAFT.md及source-mapping.json，明确共同趋势身份、严格比较、未知/缺价、共同字段和最小执行器验收，不写正式登记或执行代码。涉及src/lei_signal/rules/first_ma_pullback.py、lei_color.py与旧lifecycle_ref.py均只读。定义草案不是第二登记表、不是正式策略采用，不用旧raw进口充当正式实现。独立只读协作复核一名临时助手，不创建新用户任务/市场实验；累计新效果/拟合/采购/封存重跑均0，历史预算承接不变。正式工具/定义/数据依赖仍blocked。本轮文档同步无新增运行中实验或checkpoint，不杀进程；其他远端进程未知。
