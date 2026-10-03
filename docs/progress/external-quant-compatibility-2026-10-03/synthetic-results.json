@@ -1,0 +1,502 @@
+{
+  "mode": "synthetic extracted-function compatibility only",
+  "own_commit": "59826afc936835e7ef38d3f1d832812b03abdc68",
+  "published_commit": "d444316817e9330c2d72a4a90c655467b45dd5bb",
+  "source_sha256": {
+    "frozen_evaluator": "508459ca3964a55e1688fef345d6e667acba68141f8be8f04f1ea1c5f0018c1c",
+    "published_evaluator": "65188447542c8c84b7a749c6e033c558034ecf3133fc45fca1757c0ceab27cab",
+    "owned_bridge": "0129a745b1b52a42d915cdd577824d833db3ce3c03dfcb970045c5d2ea0148dd"
+  },
+  "python": "3.11.7",
+  "numpy": "2.1.1",
+  "cases": [
+    {
+      "case": "complete",
+      "same_result": true,
+      "outcomes": {
+        "frozen": {
+          "status": "ready",
+          "summary": {
+            "status": "ready",
+            "reasons": [],
+            "range": [
+              "2026-01-02",
+              "2026-01-04"
+            ],
+            "explicit_range": false,
+            "planned_dates": 3,
+            "prediction_dates": 3,
+            "prediction_rows": 6,
+            "assets": [
+              "synthetic-A",
+              "synthetic-B"
+            ],
+            "missing_dates": [],
+            "incomplete_asset_dates": {},
+            "folds": [
+              "0"
+            ],
+            "weighting": "equal_date",
+            "baseline": "B1",
+            "candidate": "B2",
+            "metric": "MSE",
+            "unit": "percentage_point_squared",
+            "positive_means": "candidate has lower squared prediction error",
+            "original_primary_metric": "MSE",
+            "scope": "auxiliary calculation on already-seen saved predictions; no new fit or evidence",
+            "paired_scores": {
+              "baseline": 0.5,
+              "candidate": 0.5,
+              "improvement": 0.0
+            }
+          },
+          "packet": {
+            "metric": "B1 minus B2 daily MSE improvement",
+            "unit": "percentage_point_squared",
+            "frequency": "qualified_session",
+            "calendar": [
+              "2026-01-02",
+              "2026-01-03",
+              "2026-01-04"
+            ],
+            "observations": [
+              {
+                "date": "2026-01-02",
+                "difference": 0.0
+              },
+              {
+                "date": "2026-01-03",
+                "difference": 0.0
+              },
+              {
+                "date": "2026-01-04",
+                "difference": 0.0
+              }
+            ]
+          }
+        },
+        "published": {
+          "status": "ready",
+          "summary": {
+            "status": "ready",
+            "reasons": [],
+            "range": [
+              "2026-01-02",
+              "2026-01-04"
+            ],
+            "explicit_range": false,
+            "planned_dates": 3,
+            "prediction_dates": 3,
+            "prediction_rows": 6,
+            "assets": [
+              "synthetic-A",
+              "synthetic-B"
+            ],
+            "missing_dates": [],
+            "incomplete_asset_dates": {},
+            "folds": [
+              "0"
+            ],
+            "weighting": "equal_date",
+            "baseline": "B1",
+            "candidate": "B2",
+            "metric": "MSE",
+            "unit": "percentage_point_squared",
+            "positive_means": "candidate has lower squared prediction error",
+            "original_primary_metric": "MSE",
+            "scope": "auxiliary calculation on already-seen saved predictions; no new fit or evidence",
+            "paired_scores": {
+              "baseline": 0.5,
+              "candidate": 0.5,
+              "improvement": 0.0
+            }
+          },
+          "packet": {
+            "metric": "B1 minus B2 daily MSE improvement",
+            "unit": "percentage_point_squared",
+            "frequency": "qualified_session",
+            "calendar": [
+              "2026-01-02",
+              "2026-01-03",
+              "2026-01-04"
+            ],
+            "observations": [
+              {
+                "date": "2026-01-02",
+                "difference": 0.0
+              },
+              {
+                "date": "2026-01-03",
+                "difference": 0.0
+              },
+              {
+                "date": "2026-01-04",
+                "difference": 0.0
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "case": "missing_date",
+      "same_result": true,
+      "outcomes": {
+        "frozen": {
+          "status": "not_applicable",
+          "summary": {
+            "status": "not_applicable",
+            "reasons": [
+              "planned dates lack predictions; do not compress or fill the axis"
+            ],
+            "range": [
+              "2026-01-02",
+              "2026-01-04"
+            ],
+            "explicit_range": false,
+            "planned_dates": 3,
+            "prediction_dates": 2,
+            "prediction_rows": 4,
+            "assets": [
+              "synthetic-A",
+              "synthetic-B"
+            ],
+            "missing_dates": [
+              "2026-01-03"
+            ],
+            "incomplete_asset_dates": {},
+            "folds": [
+              "0"
+            ],
+            "weighting": "equal_date",
+            "baseline": "B1",
+            "candidate": "B2",
+            "metric": "MSE",
+            "unit": "percentage_point_squared",
+            "positive_means": "candidate has lower squared prediction error",
+            "original_primary_metric": "MSE",
+            "scope": "auxiliary calculation on already-seen saved predictions; no new fit or evidence"
+          },
+          "packet": null
+        },
+        "published": {
+          "status": "not_applicable",
+          "summary": {
+            "status": "not_applicable",
+            "reasons": [
+              "planned dates lack predictions; do not compress or fill the axis"
+            ],
+            "range": [
+              "2026-01-02",
+              "2026-01-04"
+            ],
+            "explicit_range": false,
+            "planned_dates": 3,
+            "prediction_dates": 2,
+            "prediction_rows": 4,
+            "assets": [
+              "synthetic-A",
+              "synthetic-B"
+            ],
+            "missing_dates": [
+              "2026-01-03"
+            ],
+            "incomplete_asset_dates": {},
+            "folds": [
+              "0"
+            ],
+            "weighting": "equal_date",
+            "baseline": "B1",
+            "candidate": "B2",
+            "metric": "MSE",
+            "unit": "percentage_point_squared",
+            "positive_means": "candidate has lower squared prediction error",
+            "original_primary_metric": "MSE",
+            "scope": "auxiliary calculation on already-seen saved predictions; no new fit or evidence"
+          },
+          "packet": null
+        }
+      }
+    },
+    {
+      "case": "incomplete_asset",
+      "same_result": true,
+      "outcomes": {
+        "frozen": {
+          "status": "not_applicable",
+          "summary": {
+            "status": "not_applicable",
+            "reasons": [
+              "asset pool is not identical on every date; weights would change"
+            ],
+            "range": [
+              "2026-01-02",
+              "2026-01-04"
+            ],
+            "explicit_range": false,
+            "planned_dates": 3,
+            "prediction_dates": 3,
+            "prediction_rows": 5,
+            "assets": [
+              "synthetic-A",
+              "synthetic-B"
+            ],
+            "missing_dates": [],
+            "incomplete_asset_dates": {
+              "2026-01-04": [
+                "synthetic-A"
+              ]
+            },
+            "folds": [
+              "0"
+            ],
+            "weighting": "equal_date",
+            "baseline": "B1",
+            "candidate": "B2",
+            "metric": "MSE",
+            "unit": "percentage_point_squared",
+            "positive_means": "candidate has lower squared prediction error",
+            "original_primary_metric": "MSE",
+            "scope": "auxiliary calculation on already-seen saved predictions; no new fit or evidence"
+          },
+          "packet": null
+        },
+        "published": {
+          "status": "not_applicable",
+          "summary": {
+            "status": "not_applicable",
+            "reasons": [
+              "asset pool is not identical on every date; weights would change"
+            ],
+            "range": [
+              "2026-01-02",
+              "2026-01-04"
+            ],
+            "explicit_range": false,
+            "planned_dates": 3,
+            "prediction_dates": 3,
+            "prediction_rows": 5,
+            "assets": [
+              "synthetic-A",
+              "synthetic-B"
+            ],
+            "missing_dates": [],
+            "incomplete_asset_dates": {
+              "2026-01-04": [
+                "synthetic-A"
+              ]
+            },
+            "folds": [
+              "0"
+            ],
+            "weighting": "equal_date",
+            "baseline": "B1",
+            "candidate": "B2",
+            "metric": "MSE",
+            "unit": "percentage_point_squared",
+            "positive_means": "candidate has lower squared prediction error",
+            "original_primary_metric": "MSE",
+            "scope": "auxiliary calculation on already-seen saved predictions; no new fit or evidence"
+          },
+          "packet": null
+        }
+      }
+    },
+    {
+      "case": "identity_mismatch",
+      "same_result": true,
+      "outcomes": {
+        "frozen": {
+          "status": "rejected",
+          "error": "saved prediction differs from eligible observation identity/target"
+        },
+        "published": {
+          "status": "rejected",
+          "error": "saved prediction differs from eligible observation identity/target"
+        }
+      }
+    },
+    {
+      "case": "nonfinite_prediction",
+      "same_result": true,
+      "outcomes": {
+        "frozen": {
+          "status": "rejected",
+          "error": "prediction.B2: expected finite number"
+        },
+        "published": {
+          "status": "rejected",
+          "error": "prediction.B2: expected finite number"
+        }
+      }
+    },
+    {
+      "case": "duplicate_calendar",
+      "same_result": true,
+      "outcomes": {
+        "frozen": {
+          "status": "rejected",
+          "error": "calendar: require ordered unique dates"
+        },
+        "published": {
+          "status": "rejected",
+          "error": "calendar: require ordered unique dates"
+        }
+      }
+    },
+    {
+      "case": "multiple_fitted_periods",
+      "same_result": true,
+      "outcomes": {
+        "frozen": {
+          "status": "not_applicable",
+          "summary": {
+            "status": "not_applicable",
+            "reasons": [
+              "multiple fitted periods; inspect a declared explicit period separately"
+            ],
+            "range": [
+              "2026-01-02",
+              "2026-01-04"
+            ],
+            "explicit_range": false,
+            "planned_dates": 3,
+            "prediction_dates": 3,
+            "prediction_rows": 6,
+            "assets": [
+              "synthetic-A",
+              "synthetic-B"
+            ],
+            "missing_dates": [],
+            "incomplete_asset_dates": {},
+            "folds": [
+              "0",
+              "1"
+            ],
+            "weighting": "equal_date",
+            "baseline": "B1",
+            "candidate": "B2",
+            "metric": "MSE",
+            "unit": "percentage_point_squared",
+            "positive_means": "candidate has lower squared prediction error",
+            "original_primary_metric": "MSE",
+            "scope": "auxiliary calculation on already-seen saved predictions; no new fit or evidence"
+          },
+          "packet": null
+        },
+        "published": {
+          "status": "not_applicable",
+          "summary": {
+            "status": "not_applicable",
+            "reasons": [
+              "multiple fitted periods; inspect a declared explicit period separately"
+            ],
+            "range": [
+              "2026-01-02",
+              "2026-01-04"
+            ],
+            "explicit_range": false,
+            "planned_dates": 3,
+            "prediction_dates": 3,
+            "prediction_rows": 6,
+            "assets": [
+              "synthetic-A",
+              "synthetic-B"
+            ],
+            "missing_dates": [],
+            "incomplete_asset_dates": {},
+            "folds": [
+              "0",
+              "1"
+            ],
+            "weighting": "equal_date",
+            "baseline": "B1",
+            "candidate": "B2",
+            "metric": "MSE",
+            "unit": "percentage_point_squared",
+            "positive_means": "candidate has lower squared prediction error",
+            "original_primary_metric": "MSE",
+            "scope": "auxiliary calculation on already-seen saved predictions; no new fit or evidence"
+          },
+          "packet": null
+        }
+      }
+    },
+    {
+      "case": "forward_volatility_counterexample",
+      "same_result": false,
+      "outcomes": {
+        "frozen": {
+          "status": "ready",
+          "summary": {
+            "status": "ready",
+            "reasons": [],
+            "range": [
+              "2026-01-02",
+              "2026-01-04"
+            ],
+            "explicit_range": false,
+            "planned_dates": 3,
+            "prediction_dates": 3,
+            "prediction_rows": 6,
+            "assets": [
+              "synthetic-A",
+              "synthetic-B"
+            ],
+            "missing_dates": [],
+            "incomplete_asset_dates": {},
+            "folds": [
+              "0"
+            ],
+            "weighting": "equal_date",
+            "baseline": "B1",
+            "candidate": "B2",
+            "metric": "MSE",
+            "unit": "percentage_point_squared",
+            "positive_means": "candidate has lower squared prediction error",
+            "original_primary_metric": "MSE",
+            "scope": "auxiliary calculation on already-seen saved predictions; no new fit or evidence",
+            "paired_scores": {
+              "baseline": 0.5,
+              "candidate": 0.5,
+              "improvement": 0.0
+            }
+          },
+          "packet": {
+            "metric": "B1 minus B2 daily MSE improvement",
+            "unit": "percentage_point_squared",
+            "frequency": "qualified_session",
+            "calendar": [
+              "2026-01-02",
+              "2026-01-03",
+              "2026-01-04"
+            ],
+            "observations": [
+              {
+                "date": "2026-01-02",
+                "difference": 0.0
+              },
+              {
+                "date": "2026-01-03",
+                "difference": 0.0
+              },
+              {
+                "date": "2026-01-04",
+                "difference": 0.0
+              }
+            ]
+          }
+        },
+        "published": {
+          "status": "rejected",
+          "error": "target.kind: unsupported; policy/account evaluation is not implemented"
+        }
+      }
+    }
+  ],
+  "agreed_current_use_cases": 7,
+  "confirmed_capability_difference": "forward_volatility",
+  "actual_fits": 0,
+  "market_data_reads": 0,
+  "full_import_or_root_integration": "not verified"
+}

@@ -1,0 +1,38 @@
+{
+  "model": "gpt-6-sol",
+  "reasoning_effort": "medium",
+  "agent": "published_adapter_closure",
+  "contract": "read-only; 0 write paths; 0 network; no market computations",
+  "execution": "completed",
+  "candidate_commit": "d444316817e9330c2d72a4a90c655467b45dd5bb",
+  "own_commit": "59826afc936835e7ef38d3f1d832812b03abdc68",
+  "direct_imports": "all required symbols present in candidate; missing 3 root modules on own branch",
+  "closure": [
+    "src/lei_signal/research/workflow_inputs.py",
+    "src/lei_signal/research/top_structure_information.py",
+    "src/lei_signal/research/trend_slope_change_information.py",
+    "src/lei_signal/research/volume_information.py",
+    "src/lei_signal/research/definitions.py",
+    "src/lei_signal/features/indicators.py",
+    "src/lei_signal/rules/clock_classifier.py"
+  ],
+  "definition_refs_missing_in_candidate": [
+    "research.external.mean_abs_log_change20@1.0.0",
+    "research.external.return_autocorrelation20_lag1@1.0.0"
+  ],
+  "required_calculators_present_only_in_own_branch": [
+    ".agents/skills/lei-quant-tools/scripts/tsfresh_calculators.py",
+    ".agents/skills/lei-quant-tools/scripts/tsfresh-LICENSE.txt"
+  ],
+  "source_locations": {
+    "adapter_imports": "12-17",
+    "adapter_definitions": "20-23; 40-46; 115-116",
+    "adapter_calculator_root": "31",
+    "published_tsfresh_dispatch": "workflow_inputs.py:174-178",
+    "source_qualification": "top_structure_information.py:23-45; volume_information.py:23-115",
+    "registered_base_definitions": "docs/research/definitions.v1.json: volume 9111-9112, top 9227-9228, slope 9805-9806"
+  },
+  "runtime_qualification": "unverified; manifest, original raw sources, nominal OHLC and economic actions needed; not opened",
+  "changes": "none",
+  "controller_review": "PASS: closure paths, definition omissions and calculator ownership independently checked; no full runtime claim"
+}

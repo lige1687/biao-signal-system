@@ -86,3 +86,8 @@ tsfresh结论只限四只相关ETF的已看过历史和本轮固定预测方法�
 ## 统一协作接入：2026-10-03T14:04:19.965435+08:00
 
 唯一跨任务实时入口：`coordination/lei` 的 `docs/coordination/tasks/external-quant-resources.md`；本文件保留阶段历史和证据，不是排他锁。读取规则版本1.0，提交b172008890b39e912c8f1d0cfb9125d1e414a97f。catch22及依赖清单已在6d8ad5c80c055337e2bb33c536ec3cbf1f50fd5e推送核验。已读初始化任务和technical-factor-sequence：无已登记同题冲突，未登记任务状态未知。继续维护本任务四技能和归档比较工具；暂不改共享workflow/workflow_inputs/question_contract及技术语义模块，下一步只读核对实际依赖发布状态后决定是否具备整合条件。无新拟合、无后台研究、无预算重置；本轮只修改本分支AGENTS协作入口和两份自身进度。
+
+
+## 2026-10-03T15:16:56.792138+08:00：统一协作复核后实际继续
+
+读取coordination/lei@15b3e4e0edd878c3e84ef30482d108e492563dbd，沿用唯一external-quant-resources，AGENTS入口已存在未重写。最新九条任务无本任务同题写入冲突，未登记者未知。完成有界依赖兼容审查，见docs/progress/external-quant-compatibility-2026-10-03.md及同名小证据目录：17导入绑定、7一致人工场景及1能力差异反例。候选d4443168缺两tsfresh定义/计算器且不含经典风险专属分支，不整文件替换共享主线。Sol助手只读已完成，无运行中金融实验/拟合。原负责人继续，共享整合暂停；工程累计18批、来源34、真拟合16，不重跑旧题。代码和小证据待本工作分支本阶段推送，包含自身commit从Git历史定位；跨任务实时入口仍docs/coordination/tasks/external-quant-resources.md。
