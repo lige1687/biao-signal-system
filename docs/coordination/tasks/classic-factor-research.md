@@ -4,7 +4,7 @@
 - 状态：active（本轮协作接入及成果维护；固定科学问题completed/archived，不代表实验运行）。更新时间2026-10-03T14:07:20.645836+08:00，Asia/Shanghai。
 - 唯一映射：阶段历史docs/ops/work-progress/classic-factor-research.md；成果详情docs/progress/classic-factor.md。跨任务当前摘要只有本文件，旧文件不是锁。
 - 规则读取commit：b172008890b39e912c8f1d0cfb9125d1e414a97f，COORDINATION.md1.0；初读0b758e7e10f720c44cbd898d511ff392f2857535，新版规则内容相同。
-- 工作分支task/classic-factor-progress；发布基础d7da6cb0f9c127606b6faa572fabc9ee93f104f7；最近已推送成果560e4eef8a5571fff4543886ede4acafe7805f2d，远端完整SHA与进展文件已读回。
+- 工作分支task/classic-factor-progress；发布基础d7da6cb0f9c127606b6faa572fabc9ee93f104f7；最近已推送成果0961a2cec0a31b0ad3ddbaf8e82863afc5aa0364（代码/报告同560e4eef8a5571fff4543886ede4acafe7805f2d），远端完整SHA与进展文件已读回。
 - 共享研究区HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9、codex/factor-unit-research-20260915有多任务未提交内容，不整批上传，不用它代表成果。
 
 ## 目标、验收与规范
@@ -56,3 +56,6 @@
 阶段核对：追加读取3fab17d5bd7225eb447bb2358aa9ca1ec1f97e13上的market-observation及technical-factor-sequence更新；规则内容未变。market仅CPI说明/观察卡叙事，不改经典模块或workflow，与当前文档范围无执行冲突。共享registry按条目维护，尚未登记者仍未知。
 
 最新核对：读取9c994de31b2c325ee49080df50009e3369a52f55的新增lei-technical-reader-research和investor-observation-map；它们分别保留阅读/等待研究与观察地图范围，明确避开经典问题。无当前执行冲突，共享workflow/registry未来修改仍需协调。规则内容仍1.0。第二次普通push因并行登记被拒，未强推；改用GitHub单文件创建接口，不上传本地失败分支或合并树。
+
+协作接入阶段完成：工作分支0961a2cec0a31b0ad3ddbaf8e82863afc5aa0364已核远端一致，仅AGENTS追加入口和两份旧进度映射共3路径；原AGENTS字节前缀完整保留，diff检查通过，未改研究代码/运行实验。首次协调9780820345511d37acfad09fd367b39305d3532c已逐字读回，提交仅本记录；失败本地分支不发布。当前无后台科学任务，原负责人继续维护成果和协作边界，固定问题封存不扩项。
+最新规则与任务核对210cc70b96e0db6ca119158971027a6119cd1b55，规则SHA2566871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0。追加读取external-quant-resources和remote-core-review：前者共享主线整合写入暂停、仅依赖/工具核查，后者黑色阶段重置资格准备且共享工具只读；不与本轮文档维护或已封存未来波动问题冲突。共享工作流正式整合尚需明确实现者/独立验证者，本任务不擅自继续此部分。未登记任务仍未知。
