@@ -1,0 +1,237 @@
+{
+  "checked_at": "2026-10-03T07:22:47.991Z",
+  "timezone": "UTC",
+  "browser": "154.0.8037.95",
+  "source_commit": "179a4c89447a55eac63e900b05295159e5659359",
+  "source_verification": {
+    "matched_files": 119,
+    "method": "byte comparison against exact git commit before browser launch",
+    "build_reused": true
+  },
+  "scope": "isolated published reader with explicit synthetic API; not real upstream, strategy originals, full-site or market research",
+  "results": [
+    {
+      "name": "desktop: confirmed rendering and sanitization",
+      "status": "passed",
+      "duration_ms": 314,
+      "evidence": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "table": true,
+        "codeBlock": true,
+        "quote": true,
+        "dangerousHtmlRemoved": true
+      }
+    },
+    {
+      "name": "desktop: chapter URL, refresh, reduced motion",
+      "status": "passed",
+      "duration_ms": 212,
+      "evidence": {
+        "urlQuery": "?doc=technical-system&section=fixture-long",
+        "headingTop": 84.203125,
+        "navBottom": 60,
+        "reducedMotion": true
+      }
+    },
+    {
+      "name": "desktop: keyboard focus",
+      "status": "passed",
+      "duration_ms": 128,
+      "evidence": {
+        "tag": "BUTTON",
+        "text": "交易体系",
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      }
+    },
+    {
+      "name": "desktop: unconfirmed change warning",
+      "status": "passed",
+      "duration_ms": 106,
+      "evidence": {
+        "warning": "visible",
+        "content": "readable",
+        "currentFingerprint": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    },
+    {
+      "name": "desktop: missing source and explicit retry recovery",
+      "status": "passed",
+      "duration_ms": 169,
+      "evidence": {
+        "missingNoFallbackArticle": true,
+        "exactSyntheticPath": true,
+        "retryRestoredReader": true
+      }
+    },
+    {
+      "name": "desktop: document and guide identity",
+      "status": "passed",
+      "duration_ms": 161,
+      "evidence": {
+        "documentIdPreserved": true,
+        "guideIdPreservedAfterRefresh": true,
+        "researchBoundaryVisible": true
+      }
+    },
+    {
+      "name": "narrow: confirmed rendering and sanitization",
+      "status": "passed",
+      "duration_ms": 205,
+      "evidence": {
+        "width": 390,
+        "documentWidth": 390,
+        "table": true,
+        "codeBlock": true,
+        "quote": true,
+        "dangerousHtmlRemoved": true
+      }
+    },
+    {
+      "name": "narrow: chapter URL, refresh, reduced motion",
+      "status": "passed",
+      "duration_ms": 182,
+      "evidence": {
+        "urlQuery": "?doc=technical-system&section=fixture-long",
+        "headingTop": 158.09375,
+        "navBottom": 133.28125,
+        "reducedMotion": true
+      }
+    },
+    {
+      "name": "narrow: keyboard focus",
+      "status": "passed",
+      "duration_ms": 117,
+      "evidence": {
+        "tag": "BUTTON",
+        "text": "交易体系",
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      }
+    },
+    {
+      "name": "narrow: unconfirmed change warning",
+      "status": "passed",
+      "duration_ms": 105,
+      "evidence": {
+        "warning": "visible",
+        "content": "readable",
+        "currentFingerprint": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    },
+    {
+      "name": "narrow: missing source and explicit retry recovery",
+      "status": "passed",
+      "duration_ms": 149,
+      "evidence": {
+        "missingNoFallbackArticle": true,
+        "exactSyntheticPath": true,
+        "retryRestoredReader": true
+      }
+    },
+    {
+      "name": "narrow: document and guide identity",
+      "status": "passed",
+      "duration_ms": 177,
+      "evidence": {
+        "documentIdPreserved": true,
+        "guideIdPreservedAfterRefresh": true,
+        "researchBoundaryVisible": true
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "desktop-confirmed.png",
+      "bytes": 93870,
+      "sha256": "26a5cf1f8a912db5556c4d960c58905af908ce63dbef30a7c9d23a7422de8f49"
+    },
+    {
+      "path": "desktop-chapter-restored.png",
+      "bytes": 116966,
+      "sha256": "45f5064c37d1b98da77c2bd0068b56d4e5faffa2724ae0a49eda8a780488ca0c"
+    },
+    {
+      "path": "desktop-keyboard-focus.png",
+      "bytes": 94506,
+      "sha256": "428b9f36163c99ebf2348386c25731cb2b22e822a48e81134657c801a19eca92"
+    },
+    {
+      "path": "desktop-changed.png",
+      "bytes": 104872,
+      "sha256": "753c874e6188ea0d9545e95b9f3db8bfedf080f7001535ab9064476c778bc4ad"
+    },
+    {
+      "path": "desktop-missing.png",
+      "bytes": 153751,
+      "sha256": "ba2d9686bba56dd0f19dd3f9ed40b991972edc6426c968eded9fc7a15773c0ed"
+    },
+    {
+      "path": "narrow-confirmed.png",
+      "bytes": 58759,
+      "sha256": "d7bb0be8becbbfbdea50f90fc2cb3a3b013064dac38d4c1999e694e7ae26afcd"
+    },
+    {
+      "path": "narrow-chapter-restored.png",
+      "bytes": 77304,
+      "sha256": "1f6e557a25b22fe1f7cbecdb199a572d20746d123a899ec15d954e04f633edbc"
+    },
+    {
+      "path": "narrow-keyboard-focus.png",
+      "bytes": 59407,
+      "sha256": "2fc903304c1a0f79ff3f2b1f4beed300b5cdbde7e8af7dacd64940fdd5c3c37e"
+    },
+    {
+      "path": "narrow-changed.png",
+      "bytes": 62438,
+      "sha256": "5bbd383c595c3851a973da0f10c05b82066bc3e853372244bb11ea5a1a91a2c1"
+    },
+    {
+      "path": "narrow-missing.png",
+      "bytes": 70159,
+      "sha256": "2de1b0e58a3c0f6df3725149c4255346a42e44c280af38fd03fc05fa58cdeda3"
+    }
+  ],
+  "input_assets": [
+    {
+      "path": "assets/echarts-BOcpYRet.js",
+      "bytes": 1035709,
+      "sha256": "68b35d7db1bc46aa7fc1373e02e7cca6455eea0b59105e5afead83ce74980d3c"
+    },
+    {
+      "path": "assets/index-C7zpx2eK.css",
+      "bytes": 222395,
+      "sha256": "ca28d7b82db30cab85fb0a6ecc5eb1b330d1fe6058041a27cf7b2617943dc5b6"
+    },
+    {
+      "path": "assets/index-DoYhblB1.js",
+      "bytes": 845095,
+      "sha256": "6bc1d21217e746a40b4ddb9045ac78403315435bcf45f12160555dda421441ca"
+    },
+    {
+      "path": "assets/react-7VFnTMk3.js",
+      "bytes": 164489,
+      "sha256": "d5e82d58461fceceb88970744ad7e51477ff9911061b73fac1d1efa59a91e903"
+    }
+  ],
+  "harness_sha256": "78c2c4ac3a93fc464e1e38474d077975813bc1d7d46ac7525f45f3910db930f9",
+  "requests": {
+    "count": 162,
+    "apiResponsesSynthetic": true,
+    "externalAllowed": false
+  },
+  "not_verified": [
+    "true browser zoom 200%",
+    "real source files/upstream availability",
+    "full-site interactions",
+    "Linux/Windows",
+    "cold dependency install",
+    "live signal logic or online gains"
+  ],
+  "market_effect_runs": 0,
+  "model_fits": 0,
+  "paid_calls": 0
+}
