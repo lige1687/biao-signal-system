@@ -40,6 +40,8 @@
 
 ## 1. 任务编号总账（任务书 → 执行归档）
 
+- [外部公式搜索试点（2026-10-03）](external-symbolic-search-pilot-2026-10-03.md)：DEAP未达到相对强直接基准的预定采用条件；人工工程结案，非金融效果。
+
 - 2026-09-17：[Agent消息 S1 通过复核](agent-news-s1-repair2-controller-review-2026-09-17.md)：110项测试、58项独立检查通过；允许继续S2，线上未恢复。
 
 - 2026-09-17：[Agent消息 S1 首次返修主控复核](agent-news-s1-repair1-controller-review-2026-09-17.md)：18个旧反例通过，来源异常识别尚有遗漏，限定第二次返修。

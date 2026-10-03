@@ -1,0 +1,182 @@
+{
+  "status": "verified",
+  "independent_score_checks": 108,
+  "independent_input_hashes": 24,
+  "max_prediction_difference": 1.7763568394002505e-15,
+  "max_metric_difference": 8.881784197001252e-16,
+  "accuracy_pass_seeds_of_3": {
+    "additive": 0,
+    "rational": 0
+  },
+  "additive_no_material_degradation_seeds": 3,
+  "accuracy_adoption_pass": false,
+  "noise_promoted": false,
+  "table": [
+    {
+      "task": "additive",
+      "arm": "direct_baseline",
+      "test_mse_mean": 0.0025917209908658564,
+      "outside_mse_mean": 0.0024572506652317857,
+      "wall_seconds_total": 0.00351866799974232
+    },
+    {
+      "task": "additive",
+      "arm": "random_control",
+      "test_mse_mean": 1.3386705361271811,
+      "outside_mse_mean": 5.621851530556927,
+      "wall_seconds_total": 0.3682720420001715
+    },
+    {
+      "task": "additive",
+      "arm": "external",
+      "test_mse_mean": 0.0025249052871025484,
+      "outside_mse_mean": 0.002307370906575408,
+      "wall_seconds_total": 0.38381987599996137
+    },
+    {
+      "task": "rational",
+      "arm": "direct_baseline",
+      "test_mse_mean": 0.0026949859182957346,
+      "outside_mse_mean": 0.002517846789774538,
+      "wall_seconds_total": 0.0019529160008460167
+    },
+    {
+      "task": "rational",
+      "arm": "random_control",
+      "test_mse_mean": 0.3422166735032662,
+      "outside_mse_mean": 3.4036534279382615,
+      "wall_seconds_total": 0.3944052489996466
+    },
+    {
+      "task": "rational",
+      "arm": "external",
+      "test_mse_mean": 0.3422166735032662,
+      "outside_mse_mean": 3.4036534279382615,
+      "wall_seconds_total": 0.3419277500001954
+    },
+    {
+      "task": "noise",
+      "arm": "direct_baseline",
+      "test_mse_mean": 0.9993207405009875,
+      "outside_mse_mean": 1.0208814855970094,
+      "wall_seconds_total": 0.0018927489995803626
+    },
+    {
+      "task": "noise",
+      "arm": "random_control",
+      "test_mse_mean": 0.9726599536926601,
+      "outside_mse_mean": 0.9618941999134544,
+      "wall_seconds_total": 0.3813083749996622
+    },
+    {
+      "task": "noise",
+      "arm": "external",
+      "test_mse_mean": 0.9726599536926601,
+      "outside_mse_mean": 0.9618941999134544,
+      "wall_seconds_total": 0.35549466600014057
+    }
+  ],
+  "additional_searches": 0,
+  "additional_fits": 0,
+  "checked_at": "2026-10-03T20:01:49.556387+08:00",
+  "batch": "followup-1: saved arithmetic and independent directory restoration",
+  "restoration": "macOS arm64 with existing Python3.11.7/NumPy2.1.1; optional DEAP absent; Linux/Windows/fresh dependency installation unverified",
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "-c",
+        "import importlib.util; assert importlib.util.find_spec('deap') is None; print('DEAP unavailable: stored-result verification independent of optional package')"
+      ],
+      "exit_code": 0,
+      "stdout": "DEAP unavailable: stored-result verification independent of optional package\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "run.py",
+        "--check-existing",
+        "core"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"verified\", \"runs\": 27, \"search_evaluations\": 57600, \"input_splits\": 12}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "verify_saved.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"verified\",\n  \"independent_score_checks\": 108,\n  \"independent_input_hashes\": 24,\n  \"max_prediction_difference\": 1.7763568394002505e-15,\n  \"max_metric_difference\": 8.881784197001252e-16,\n  \"accuracy_pass_seeds_of_3\": {\n    \"additive\": 0,\n    \"rational\": 0\n  },\n  \"additive_no_material_degradation_seeds\": 3,\n  \"accuracy_adoption_pass\": false,\n  \"noise_promoted\": false,\n  \"table\": [\n    {\n      \"task\": \"additive\",\n      \"arm\": \"direct_baseline\",\n      \"test_mse_mean\": 0.0025917209908658564,\n      \"outside_mse_mean\": 0.0024572506652317857,\n      \"wall_seconds_total\": 0.00351866799974232\n    },\n    {\n      \"task\": \"additive\",\n      \"arm\": \"random_control\",\n      \"test_mse_mean\": 1.3386705361271811,\n      \"outside_mse_mean\": 5.621851530556927,\n      \"wall_seconds_total\": 0.3682720420001715\n    },\n    {\n      \"task\": \"additive\",\n      \"arm\": \"external\",\n      \"test_mse_mean\": 0.0025249052871025484,\n      \"outside_mse_mean\": 0.002307370906575408,\n      \"wall_seconds_total\": 0.38381987599996137\n    },\n    {\n      \"task\": \"rational\",\n      \"arm\": \"direct_baseline\",\n      \"test_mse_mean\": 0.0026949859182957346,\n      \"outside_mse_mean\": 0.002517846789774538,\n      \"wall_seconds_total\": 0.0019529160008460167\n    },\n    {\n      \"task\": \"rational\",\n      \"arm\": \"random_control\",\n      \"test_mse_mean\": 0.3422166735032662,\n      \"outside_mse_mean\": 3.4036534279382615,\n      \"wall_seconds_total\": 0.3944052489996466\n    },\n    {\n      \"task\": \"rational\",\n      \"arm\": \"external\",\n      \"test_mse_mean\": 0.3422166735032662,\n      \"outside_mse_mean\": 3.4036534279382615,\n      \"wall_seconds_total\": 0.3419277500001954\n    },\n    {\n      \"task\": \"noise\",\n      \"arm\": \"direct_baseline\",\n      \"test_mse_mean\": 0.9993207405009875,\n      \"outside_mse_mean\": 1.0208814855970094,\n      \"wall_seconds_total\": 0.0018927489995803626\n    },\n    {\n      \"task\": \"noise\",\n      \"arm\": \"random_control\",\n      \"test_mse_mean\": 0.9726599536926601,\n      \"outside_mse_mean\": 0.9618941999134544,\n      \"wall_seconds_total\": 0.3813083749996622\n    },\n    {\n      \"task\": \"noise\",\n      \"arm\": \"external\",\n      \"test_mse_mean\": 0.9726599536926601,\n      \"outside_mse_mean\": 0.9618941999134544,\n      \"wall_seconds_total\": 0.35549466600014057\n    }\n  ],\n  \"additional_searches\": 0,\n  \"additional_fits\": 0\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "run.py",
+        "--check-existing",
+        "core"
+      ],
+      "fixture": "copied archive, first saved test prediction increased by1 without updating fingerprint",
+      "exit_code": 1,
+      "expected": "nonzero with prediction length/hash mismatch",
+      "actual": "prediction length/hash mismatch",
+      "result": "expected rejection"
+    }
+  ],
+  "core_source_sha256": {
+    "run.py": "f3d822692ba0b9449c268fbbfb270dc53e5a3a29b0e155a820d2ec182ff4945e",
+    "test_run.py": "7abbc767e71d85fdcb84ca8305bef0c0d503dfd762efe42556004de471d5f667",
+    "protocol.json": "8e4088da68500f765d0a95b277630c2109f1033dd8ab0a727f097f337d1f50ff"
+  },
+  "controller_findings": [
+    "Toolbox namespace corrected before core",
+    "Initial direct selector was forward least squares, corrected to frozen standard OMP before core",
+    "Training now uses DEAP compiler and exported formula independently checked with restricted AST",
+    "Direct fits cached once/task; reused entries explicitly marked",
+    "Partial failures retain completed output and candidate count; no checkpoint/resume promise"
+  ],
+  "unit_prechecks": [
+    {
+      "attempt": 1,
+      "exit_code": 0,
+      "tests_passed": 5,
+      "synthetic_lstsq_fits": 196,
+      "search_evaluations": 0,
+      "note": "initial selector later corrected; test green was not contract compliance"
+    },
+    {
+      "attempt": 2,
+      "exit_code": 0,
+      "tests_passed": 6,
+      "synthetic_lstsq_fits": 6,
+      "search_evaluations": 0,
+      "handwritten_tree_compile": 1
+    }
+  ],
+  "budget_actual": {
+    "sources": 4,
+    "core_batches": 1,
+    "followup_batches": 1,
+    "search_evaluations_including_duplicates": 57600,
+    "core_synthetic_lstsq_fits": 18,
+    "precheck_synthetic_lstsq_fits": 202,
+    "total_synthetic_lstsq_fits": 220,
+    "market_fits": 0,
+    "new_paid_services": 0,
+    "llm_api_calls_by_benchmark": 0,
+    "implementation_assistant_usage": "unmetered; same Sol medium design and implementation assistant; no external model credentials used",
+    "human_interventions_after_freeze": 0,
+    "human_labor_savings": "not measured"
+  },
+  "decision": "not adopted as default research tool; predefined accuracy improvement condition not met; no wider claim about all DEAP configurations",
+  "remaining_core_checks": [],
+  "repository_hygiene": {
+    "command": "python3 scripts/check_repo_hygiene.py",
+    "exit_code": 0,
+    "scope": "current shared worktree, not full isolated published tree",
+    "stdout": "归置自检通过：根层四层均在白名单内，关键配置均已入库。"
+  }
+}

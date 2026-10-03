@@ -1,0 +1,1024 @@
+{
+  "protocol_sha256": "8e4088da68500f765d0a95b277630c2109f1033dd8ab0a727f097f337d1f50ff",
+  "pid": 24398,
+  "started_at": "2026-10-03T19:57:48.578104+08:00",
+  "runtime": {
+    "python": "3.11.7",
+    "numpy": "2.1.1",
+    "deap": "1.4.3"
+  },
+  "runs": [
+    {
+      "expression": "add(sub(x1, x2), add(x1, x0))",
+      "train_fitness": 0.0027001870451472325,
+      "nodes": 7,
+      "height": 2,
+      "evaluation_count": 3200,
+      "invalid_count": 1,
+      "rejected_proposal_count": 0,
+      "task": "additive",
+      "seed": 17,
+      "arm": "external",
+      "wall_seconds": 0.13114020900002288,
+      "mse": {
+        "train": 0.0026301870451472323,
+        "validation": 0.0019229707708606427,
+        "test": 0.0025249052871025484,
+        "outside_range": 0.002307370906575408
+      }
+    },
+    {
+      "expression": "add(add(x1, x1), mul(x0, 1.0))",
+      "train_fitness": 1.3518589341635219,
+      "nodes": 7,
+      "height": 2,
+      "evaluation_count": 3200,
+      "invalid_count": 13,
+      "rejected_proposal_count": 0,
+      "task": "additive",
+      "seed": 17,
+      "arm": "random_control",
+      "wall_seconds": 0.12231933300017772,
+      "mse": {
+        "train": 1.3517889341635219,
+        "validation": 1.1852915354342208,
+        "test": 1.3807709543293658,
+        "outside_range": 5.4884743798688405
+      }
+    },
+    {
+      "model": {
+        "label": "omp_3",
+        "specs": [
+          {
+            "kind": "monomial",
+            "powers": [
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "kind": "monomial",
+            "powers": [
+              0,
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "kind": "monomial",
+            "powers": [
+              1,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "coefficients": [
+          0.0051625252980018795,
+          1.9944588540668118,
+          -0.9993057415745551,
+          0.9975242349665572
+        ]
+      },
+      "fit_count": 6,
+      "mean_estimate_count": 1,
+      "variants_validation_mse": {
+        "training_mean": 8.145770876330182,
+        "linear": 0.0020478433678317942,
+        "polynomial_degree3": 0.002446004219317225,
+        "omp_1": 2.66459067247861,
+        "omp_2": 1.3533517334400464,
+        "omp_3": 0.0020415421124607694,
+        "omp_4": 0.002059790262639879
+      },
+      "selected_validation_mse": 0.0020415421124607694,
+      "evaluation_count": 0,
+      "invalid_count": 0,
+      "rejected_proposal_count": 0,
+      "task": "additive",
+      "seed": 17,
+      "arm": "direct_baseline",
+      "wall_seconds": 0.0034933339998133306,
+      "mse": {
+        "train": 0.002549542748209432,
+        "validation": 0.0020415421124607707,
+        "test": 0.0025917209908658564,
+        "outside_range": 0.0024572506652317857
+      }
+    },
+    {
+      "expression": "sub(add(x0, x1), sub(x2, x1))",
+      "train_fitness": 0.0027001870451472325,
+      "nodes": 7,
+      "height": 2,
+      "evaluation_count": 3200,
+      "invalid_count": 0,
+      "rejected_proposal_count": 0,
+      "task": "additive",
+      "seed": 29,
+      "arm": "external",
+      "wall_seconds": 0.126013999999941,
+      "mse": {
+        "train": 0.0026301870451472323,
+        "validation": 0.0019229707708606427,
+        "test": 0.0025249052871025484,
+        "outside_range": 0.002307370906575408
+      }
+    },
+    {
+      "expression": "add(add(sub(x1, x2), protected_divide(x0, 1.0)), sub(add(x1, x0), add(x0, x3)))",
+      "train_fitness": 1.2301915421619694,
+      "nodes": 15,
+      "height": 3,
+      "evaluation_count": 3200,
+      "invalid_count": 3,
+      "rejected_proposal_count": 0,
+      "task": "additive",
+      "seed": 29,
+      "arm": "random_control",
+      "wall_seconds": 0.12232458400012547,
+      "mse": {
+        "train": 1.2300415421619693,
+        "validation": 1.4588322761485952,
+        "test": 1.380704660438641,
+        "outside_range": 5.680754438051755
+      }
+    },
+    {
+      "model": {
+        "label": "omp_3",
+        "specs": [
+          {
+            "kind": "monomial",
+            "powers": [
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "kind": "monomial",
+            "powers": [
+              0,
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "kind": "monomial",
+            "powers": [
+              1,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "coefficients": [
+          0.0051625252980018795,
+          1.9944588540668118,
+          -0.9993057415745551,
+          0.9975242349665572
+        ]
+      },
+      "fit_count": 0,
+      "mean_estimate_count": 0,
+      "variants_validation_mse": {
+        "training_mean": 8.145770876330182,
+        "linear": 0.0020478433678317942,
+        "polynomial_degree3": 0.002446004219317225,
+        "omp_1": 2.66459067247861,
+        "omp_2": 1.3533517334400464,
+        "omp_3": 0.0020415421124607694,
+        "omp_4": 0.002059790262639879
+      },
+      "selected_validation_mse": 0.0020415421124607694,
+      "reused_from": {
+        "task": "additive",
+        "seed": 17
+      },
+      "evaluation_count": 0,
+      "invalid_count": 0,
+      "rejected_proposal_count": 0,
+      "task": "additive",
+      "seed": 29,
+      "arm": "direct_baseline",
+      "wall_seconds": 1.2041999980283435e-05,
+      "mse": {
+        "train": 0.002549542748209432,
+        "validation": 0.0020415421124607707,
+        "test": 0.0025917209908658564,
+        "outside_range": 0.0024572506652317857
+      }
+    },
+    {
+      "expression": "sub(add(x0, x1), sub(x2, x1))",
+      "train_fitness": 0.0027001870451472325,
+      "nodes": 7,
+      "height": 2,
+      "evaluation_count": 3200,
+      "invalid_count": 1,
+      "rejected_proposal_count": 1,
+      "task": "additive",
+      "seed": 43,
+      "arm": "external",
+      "wall_seconds": 0.12666566699999748,
+      "mse": {
+        "train": 0.0026301870451472323,
+        "validation": 0.0019229707708606427,
+        "test": 0.0025249052871025484,
+        "outside_range": 0.002307370906575408
+      }
+    },
+    {
+      "expression": "sub(add(protected_divide(x0, 1.0), x1), x2)",
+      "train_fitness": 1.3148364222467843,
+      "nodes": 7,
+      "height": 3,
+      "evaluation_count": 3200,
+      "invalid_count": 9,
+      "rejected_proposal_count": 0,
+      "task": "additive",
+      "seed": 43,
+      "arm": "random_control",
+      "wall_seconds": 0.1236281249998683,
+      "mse": {
+        "train": 1.3147664222467843,
+        "validation": 1.2538540078091907,
+        "test": 1.254535993613536,
+        "outside_range": 5.696325773750182
+      }
+    },
+    {
+      "model": {
+        "label": "omp_3",
+        "specs": [
+          {
+            "kind": "monomial",
+            "powers": [
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "kind": "monomial",
+            "powers": [
+              0,
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "kind": "monomial",
+            "powers": [
+              1,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "coefficients": [
+          0.0051625252980018795,
+          1.9944588540668118,
+          -0.9993057415745551,
+          0.9975242349665572
+        ]
+      },
+      "fit_count": 0,
+      "mean_estimate_count": 0,
+      "variants_validation_mse": {
+        "training_mean": 8.145770876330182,
+        "linear": 0.0020478433678317942,
+        "polynomial_degree3": 0.002446004219317225,
+        "omp_1": 2.66459067247861,
+        "omp_2": 1.3533517334400464,
+        "omp_3": 0.0020415421124607694,
+        "omp_4": 0.002059790262639879
+      },
+      "selected_validation_mse": 0.0020415421124607694,
+      "reused_from": {
+        "task": "additive",
+        "seed": 17
+      },
+      "evaluation_count": 0,
+      "invalid_count": 0,
+      "rejected_proposal_count": 0,
+      "task": "additive",
+      "seed": 43,
+      "arm": "direct_baseline",
+      "wall_seconds": 1.329199994870578e-05,
+      "mse": {
+        "train": 0.002549542748209432,
+        "validation": 0.0020415421124607707,
+        "test": 0.0025917209908658564,
+        "outside_range": 0.0024572506652317857
+      }
+    },
+    {
+      "expression": "add(x2, x0)",
+      "train_fitness": 0.3186701976126235,
+      "nodes": 3,
+      "height": 1,
+      "evaluation_count": 3200,
+      "invalid_count": 1,
+      "rejected_proposal_count": 0,
+      "task": "rational",
+      "seed": 17,
+      "arm": "external",
+      "wall_seconds": 0.11319700000012745,
+      "mse": {
+        "train": 0.3186401976126235,
+        "validation": 0.3671228710776134,
+        "test": 0.3422166735032662,
+        "outside_range": 3.403653427938262
+      }
+    },
+    {
+      "expression": "add(x0, x2)",
+      "train_fitness": 0.3186701976126235,
+      "nodes": 3,
+      "height": 1,
+      "evaluation_count": 3200,
+      "invalid_count": 13,
+      "rejected_proposal_count": 0,
+      "task": "rational",
+      "seed": 17,
+      "arm": "random_control",
+      "wall_seconds": 0.12653958299961232,
+      "mse": {
+        "train": 0.3186401976126235,
+        "validation": 0.3671228710776134,
+        "test": 0.3422166735032662,
+        "outside_range": 3.403653427938262
+      }
+    },
+    {
+      "model": {
+        "label": "omp_2",
+        "specs": [
+          {
+            "kind": "monomial",
+            "powers": [
+              0,
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "kind": "rational",
+            "i": 0,
+            "j": 1
+          }
+        ],
+        "coefficients": [
+          0.003503765972344225,
+          1.0002011181258301,
+          1.0052611800129585
+        ]
+      },
+      "fit_count": 6,
+      "mean_estimate_count": 1,
+      "variants_validation_mse": {
+        "training_mean": 1.7004632432475018,
+        "linear": 0.11100978942136719,
+        "polynomial_degree3": 0.018726801674347676,
+        "omp_1": 0.5183604283002539,
+        "omp_2": 0.002743729761450381,
+        "omp_3": 0.0028341703977133254,
+        "omp_4": 0.0028067438903307956
+      },
+      "selected_validation_mse": 0.002743729761450381,
+      "evaluation_count": 0,
+      "invalid_count": 0,
+      "rejected_proposal_count": 0,
+      "task": "rational",
+      "seed": 17,
+      "arm": "direct_baseline",
+      "wall_seconds": 0.0019293750001452281,
+      "mse": {
+        "train": 0.002908750556263416,
+        "validation": 0.002743729761450381,
+        "test": 0.0026949859182957346,
+        "outside_range": 0.002517846789774538
+      }
+    },
+    {
+      "expression": "add(x0, x2)",
+      "train_fitness": 0.3186701976126235,
+      "nodes": 3,
+      "height": 1,
+      "evaluation_count": 3200,
+      "invalid_count": 0,
+      "rejected_proposal_count": 0,
+      "task": "rational",
+      "seed": 29,
+      "arm": "external",
+      "wall_seconds": 0.11325629200018739,
+      "mse": {
+        "train": 0.3186401976126235,
+        "validation": 0.3671228710776134,
+        "test": 0.3422166735032662,
+        "outside_range": 3.403653427938262
+      }
+    },
+    {
+      "expression": "add(x0, x2)",
+      "train_fitness": 0.3186701976126235,
+      "nodes": 3,
+      "height": 1,
+      "evaluation_count": 3200,
+      "invalid_count": 3,
+      "rejected_proposal_count": 0,
+      "task": "rational",
+      "seed": 29,
+      "arm": "random_control",
+      "wall_seconds": 0.14039391599999362,
+      "mse": {
+        "train": 0.3186401976126235,
+        "validation": 0.3671228710776134,
+        "test": 0.3422166735032662,
+        "outside_range": 3.403653427938262
+      }
+    },
+    {
+      "model": {
+        "label": "omp_2",
+        "specs": [
+          {
+            "kind": "monomial",
+            "powers": [
+              0,
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "kind": "rational",
+            "i": 0,
+            "j": 1
+          }
+        ],
+        "coefficients": [
+          0.003503765972344225,
+          1.0002011181258301,
+          1.0052611800129585
+        ]
+      },
+      "fit_count": 0,
+      "mean_estimate_count": 0,
+      "variants_validation_mse": {
+        "training_mean": 1.7004632432475018,
+        "linear": 0.11100978942136719,
+        "polynomial_degree3": 0.018726801674347676,
+        "omp_1": 0.5183604283002539,
+        "omp_2": 0.002743729761450381,
+        "omp_3": 0.0028341703977133254,
+        "omp_4": 0.0028067438903307956
+      },
+      "selected_validation_mse": 0.002743729761450381,
+      "reused_from": {
+        "task": "rational",
+        "seed": 17
+      },
+      "evaluation_count": 0,
+      "invalid_count": 0,
+      "rejected_proposal_count": 0,
+      "task": "rational",
+      "seed": 29,
+      "arm": "direct_baseline",
+      "wall_seconds": 1.1750000339816324e-05,
+      "mse": {
+        "train": 0.002908750556263416,
+        "validation": 0.002743729761450381,
+        "test": 0.0026949859182957346,
+        "outside_range": 0.002517846789774538
+      }
+    },
+    {
+      "expression": "add(x0, x2)",
+      "train_fitness": 0.3186701976126235,
+      "nodes": 3,
+      "height": 1,
+      "evaluation_count": 3200,
+      "invalid_count": 1,
+      "rejected_proposal_count": 0,
+      "task": "rational",
+      "seed": 43,
+      "arm": "external",
+      "wall_seconds": 0.11547445799988054,
+      "mse": {
+        "train": 0.3186401976126235,
+        "validation": 0.3671228710776134,
+        "test": 0.3422166735032662,
+        "outside_range": 3.403653427938262
+      }
+    },
+    {
+      "expression": "add(x0, x2)",
+      "train_fitness": 0.3186701976126235,
+      "nodes": 3,
+      "height": 1,
+      "evaluation_count": 3200,
+      "invalid_count": 9,
+      "rejected_proposal_count": 0,
+      "task": "rational",
+      "seed": 43,
+      "arm": "random_control",
+      "wall_seconds": 0.12747175000004063,
+      "mse": {
+        "train": 0.3186401976126235,
+        "validation": 0.3671228710776134,
+        "test": 0.3422166735032662,
+        "outside_range": 3.403653427938262
+      }
+    },
+    {
+      "model": {
+        "label": "omp_2",
+        "specs": [
+          {
+            "kind": "monomial",
+            "powers": [
+              0,
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "kind": "rational",
+            "i": 0,
+            "j": 1
+          }
+        ],
+        "coefficients": [
+          0.003503765972344225,
+          1.0002011181258301,
+          1.0052611800129585
+        ]
+      },
+      "fit_count": 0,
+      "mean_estimate_count": 0,
+      "variants_validation_mse": {
+        "training_mean": 1.7004632432475018,
+        "linear": 0.11100978942136719,
+        "polynomial_degree3": 0.018726801674347676,
+        "omp_1": 0.5183604283002539,
+        "omp_2": 0.002743729761450381,
+        "omp_3": 0.0028341703977133254,
+        "omp_4": 0.0028067438903307956
+      },
+      "selected_validation_mse": 0.002743729761450381,
+      "reused_from": {
+        "task": "rational",
+        "seed": 17
+      },
+      "evaluation_count": 0,
+      "invalid_count": 0,
+      "rejected_proposal_count": 0,
+      "task": "rational",
+      "seed": 43,
+      "arm": "direct_baseline",
+      "wall_seconds": 1.1791000360972248e-05,
+      "mse": {
+        "train": 0.002908750556263416,
+        "validation": 0.002743729761450381,
+        "test": 0.0026949859182957346,
+        "outside_range": 0.002517846789774538
+      }
+    },
+    {
+      "expression": "sub(x0, x0)",
+      "train_fitness": 1.0472899782351628,
+      "nodes": 3,
+      "height": 1,
+      "evaluation_count": 3200,
+      "invalid_count": 1,
+      "rejected_proposal_count": 0,
+      "task": "noise",
+      "seed": 17,
+      "arm": "external",
+      "wall_seconds": 0.1204544160000296,
+      "mse": {
+        "train": 1.0472599782351628,
+        "validation": 1.0596078192846021,
+        "test": 0.9726599536926601,
+        "outside_range": 0.9618941999134545
+      }
+    },
+    {
+      "expression": "sub(x0, x0)",
+      "train_fitness": 1.0472899782351628,
+      "nodes": 3,
+      "height": 1,
+      "evaluation_count": 3200,
+      "invalid_count": 13,
+      "rejected_proposal_count": 0,
+      "task": "noise",
+      "seed": 17,
+      "arm": "random_control",
+      "wall_seconds": 0.1258840830000736,
+      "mse": {
+        "train": 1.0472599782351628,
+        "validation": 1.0596078192846021,
+        "test": 0.9726599536926601,
+        "outside_range": 0.9618941999134545
+      }
+    },
+    {
+      "model": {
+        "label": "linear",
+        "specs": [
+          {
+            "kind": "monomial",
+            "powers": [
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "kind": "monomial",
+            "powers": [
+              0,
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "kind": "monomial",
+            "powers": [
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "kind": "monomial",
+            "powers": [
+              1,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "coefficients": [
+          0.06714973965793804,
+          0.052313841021482115,
+          -0.06211857424266519,
+          -0.09507781586917664,
+          -0.006239523569636126
+        ]
+      },
+      "fit_count": 6,
+      "mean_estimate_count": 1,
+      "variants_validation_mse": {
+        "training_mean": 1.0763515985272658,
+        "linear": 1.0592447143986976,
+        "polynomial_degree3": 1.2826178523097747,
+        "omp_1": 1.0989032198656166,
+        "omp_2": 1.1516355013495798,
+        "omp_3": 1.1487391033641627,
+        "omp_4": 1.1343867788841662
+      },
+      "selected_validation_mse": 1.0592447143986976,
+      "evaluation_count": 0,
+      "invalid_count": 0,
+      "rejected_proposal_count": 0,
+      "task": "noise",
+      "seed": 17,
+      "arm": "direct_baseline",
+      "wall_seconds": 0.0018650829997568508,
+      "mse": {
+        "train": 1.0211527171974752,
+        "validation": 1.0592447143986976,
+        "test": 0.9993207405009875,
+        "outside_range": 1.0208814855970094
+      }
+    },
+    {
+      "expression": "sub(x2, x2)",
+      "train_fitness": 1.0472899782351628,
+      "nodes": 3,
+      "height": 1,
+      "evaluation_count": 3200,
+      "invalid_count": 0,
+      "rejected_proposal_count": 0,
+      "task": "noise",
+      "seed": 29,
+      "arm": "external",
+      "wall_seconds": 0.11745650000011665,
+      "mse": {
+        "train": 1.0472599782351628,
+        "validation": 1.0596078192846021,
+        "test": 0.9726599536926601,
+        "outside_range": 0.9618941999134545
+      }
+    },
+    {
+      "expression": "sub(x2, x2)",
+      "train_fitness": 1.0472899782351628,
+      "nodes": 3,
+      "height": 1,
+      "evaluation_count": 3200,
+      "invalid_count": 3,
+      "rejected_proposal_count": 0,
+      "task": "noise",
+      "seed": 29,
+      "arm": "random_control",
+      "wall_seconds": 0.12644366699987586,
+      "mse": {
+        "train": 1.0472599782351628,
+        "validation": 1.0596078192846021,
+        "test": 0.9726599536926601,
+        "outside_range": 0.9618941999134545
+      }
+    },
+    {
+      "model": {
+        "label": "linear",
+        "specs": [
+          {
+            "kind": "monomial",
+            "powers": [
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "kind": "monomial",
+            "powers": [
+              0,
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "kind": "monomial",
+            "powers": [
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "kind": "monomial",
+            "powers": [
+              1,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "coefficients": [
+          0.06714973965793804,
+          0.052313841021482115,
+          -0.06211857424266519,
+          -0.09507781586917664,
+          -0.006239523569636126
+        ]
+      },
+      "fit_count": 0,
+      "mean_estimate_count": 0,
+      "variants_validation_mse": {
+        "training_mean": 1.0763515985272658,
+        "linear": 1.0592447143986976,
+        "polynomial_degree3": 1.2826178523097747,
+        "omp_1": 1.0989032198656166,
+        "omp_2": 1.1516355013495798,
+        "omp_3": 1.1487391033641627,
+        "omp_4": 1.1343867788841662
+      },
+      "selected_validation_mse": 1.0592447143986976,
+      "reused_from": {
+        "task": "noise",
+        "seed": 17
+      },
+      "evaluation_count": 0,
+      "invalid_count": 0,
+      "rejected_proposal_count": 0,
+      "task": "noise",
+      "seed": 29,
+      "arm": "direct_baseline",
+      "wall_seconds": 1.2790999790013302e-05,
+      "mse": {
+        "train": 1.0211527171974752,
+        "validation": 1.0592447143986976,
+        "test": 0.9993207405009875,
+        "outside_range": 1.0208814855970094
+      }
+    },
+    {
+      "expression": "sub(1.0, 1.0)",
+      "train_fitness": 1.0472899782351628,
+      "nodes": 3,
+      "height": 1,
+      "evaluation_count": 3200,
+      "invalid_count": 0,
+      "rejected_proposal_count": 0,
+      "task": "noise",
+      "seed": 43,
+      "arm": "external",
+      "wall_seconds": 0.11758374999999432,
+      "mse": {
+        "train": 1.0472599782351628,
+        "validation": 1.0596078192846021,
+        "test": 0.9726599536926601,
+        "outside_range": 0.9618941999134545
+      }
+    },
+    {
+      "expression": "sub(1.0, 1.0)",
+      "train_fitness": 1.0472899782351628,
+      "nodes": 3,
+      "height": 1,
+      "evaluation_count": 3200,
+      "invalid_count": 9,
+      "rejected_proposal_count": 0,
+      "task": "noise",
+      "seed": 43,
+      "arm": "random_control",
+      "wall_seconds": 0.12898062499971275,
+      "mse": {
+        "train": 1.0472599782351628,
+        "validation": 1.0596078192846021,
+        "test": 0.9726599536926601,
+        "outside_range": 0.9618941999134545
+      }
+    },
+    {
+      "model": {
+        "label": "linear",
+        "specs": [
+          {
+            "kind": "monomial",
+            "powers": [
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "kind": "monomial",
+            "powers": [
+              0,
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "kind": "monomial",
+            "powers": [
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "kind": "monomial",
+            "powers": [
+              1,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "coefficients": [
+          0.06714973965793804,
+          0.052313841021482115,
+          -0.06211857424266519,
+          -0.09507781586917664,
+          -0.006239523569636126
+        ]
+      },
+      "fit_count": 0,
+      "mean_estimate_count": 0,
+      "variants_validation_mse": {
+        "training_mean": 1.0763515985272658,
+        "linear": 1.0592447143986976,
+        "polynomial_degree3": 1.2826178523097747,
+        "omp_1": 1.0989032198656166,
+        "omp_2": 1.1516355013495798,
+        "omp_3": 1.1487391033641627,
+        "omp_4": 1.1343867788841662
+      },
+      "selected_validation_mse": 1.0592447143986976,
+      "reused_from": {
+        "task": "noise",
+        "seed": 17
+      },
+      "evaluation_count": 0,
+      "invalid_count": 0,
+      "rejected_proposal_count": 0,
+      "task": "noise",
+      "seed": 43,
+      "arm": "direct_baseline",
+      "wall_seconds": 1.4875000033498509e-05,
+      "mse": {
+        "train": 1.0211527171974752,
+        "validation": 1.0592447143986976,
+        "test": 0.9993207405009875,
+        "outside_range": 1.0208814855970094
+      }
+    }
+  ],
+  "total_search_evaluations": 57600,
+  "total_direct_fits": 18,
+  "total_mean_estimates": 3,
+  "noise_counterexamples": [
+    {
+      "seed": 17,
+      "training_mean_test_ood_mse": {
+        "test": 0.9760801185668098,
+        "outside_range": 0.9530305035706697
+      },
+      "arms_test_ood_mse": {
+        "external": {
+          "test": 0.9726599536926601,
+          "outside_range": 0.9618941999134545
+        },
+        "random_control": {
+          "test": 0.9726599536926601,
+          "outside_range": 0.9618941999134545
+        },
+        "direct_baseline": {
+          "test": 0.9993207405009875,
+          "outside_range": 1.0208814855970094
+        }
+      },
+      "interpretation": "no known population relationship; accidental gain is not promotion"
+    },
+    {
+      "seed": 29,
+      "training_mean_test_ood_mse": {
+        "test": 0.9760801185668098,
+        "outside_range": 0.9530305035706697
+      },
+      "arms_test_ood_mse": {
+        "external": {
+          "test": 0.9726599536926601,
+          "outside_range": 0.9618941999134545
+        },
+        "random_control": {
+          "test": 0.9726599536926601,
+          "outside_range": 0.9618941999134545
+        },
+        "direct_baseline": {
+          "test": 0.9993207405009875,
+          "outside_range": 1.0208814855970094
+        }
+      },
+      "interpretation": "no known population relationship; accidental gain is not promotion"
+    },
+    {
+      "seed": 43,
+      "training_mean_test_ood_mse": {
+        "test": 0.9760801185668098,
+        "outside_range": 0.9530305035706697
+      },
+      "arms_test_ood_mse": {
+        "external": {
+          "test": 0.9726599536926601,
+          "outside_range": 0.9618941999134545
+        },
+        "random_control": {
+          "test": 0.9726599536926601,
+          "outside_range": 0.9618941999134545
+        },
+        "direct_baseline": {
+          "test": 0.9993207405009875,
+          "outside_range": 1.0208814855970094
+        }
+      },
+      "interpretation": "no known population relationship; accidental gain is not promotion"
+    }
+  ],
+  "status": "complete",
+  "ended_at": "2026-10-03T19:57:50.846146+08:00"
+}
