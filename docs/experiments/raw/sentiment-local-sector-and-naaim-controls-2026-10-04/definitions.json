@@ -1,0 +1,19 @@
+{
+  "candidate": "candidate:sentiment.naaim-exposure@draft-1",
+  "meaning": "NAAIM sampled managers untrimmed self-reported exposure percent, not all institutions actual holdings; negative and >100 allowed",
+  "background": "local:sentiment.naaim-five-price-controls@1.0.0",
+  "price_fields": {
+    "r20": "100*(C[k]/C[k-20]-1)",
+    "r63": "100*(C[k]/C[k-63]-1)",
+    "dma200": "100*(C[k]/mean(C[k-199:k+1])-1)",
+    "dd252": "100*(C[k]/max(C[k-251:k+1])-1), negative or zero",
+    "rv20": "100*sample_std(C[i]/C[i-1]-1, i=k-19..k)*sqrt(20), 20-segment scale, not annualized"
+  },
+  "target": "local:sentiment.naaim-public-return20@1.0.0 =100*(C[k+21]/C[k+1]-1); 20 quote return intervals and 21 closing prices",
+  "anchor": "k=first original SPY quote date strictly after survey Wednesday; survey date is observation period, NOT historical available_at",
+  "eligibility": "current-version retrospective association; not eligible for historical as-of forecasts/trades; no fabricated release delay",
+  "missing": "require all 252 original past closes and 21 target closes finite positive; no forward filling or calendar compression",
+  "units": "features/target in percentage points, exposure in percent",
+  "weight": "one survey week one row, same 78 dates as old saved predictions",
+  "thresholds": "original 40/100 preserved, no group fitting or parameter changes"
+}

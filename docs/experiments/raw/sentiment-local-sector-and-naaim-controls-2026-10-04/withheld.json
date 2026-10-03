@@ -1,0 +1,140 @@
+{
+  "required_NAAIM_input_bytes": 338881,
+  "local_cache_bytes": 27548413,
+  "new_storage_location": "none authorized",
+  "private_strategy_originals": "not delivered, approved SHA in authority-manifest/configs; cannot assume access",
+  "files": [
+    {
+      "role": "prices",
+      "path": "docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/inputs/px_SPY.csv",
+      "size": 321463,
+      "sha256": "952f397be0ccc5745185b91cce6acc781737c0f30a7a34aa8a230ae892ed5e45",
+      "delivery": "existing input/row data retained locally; no new upload authorization assumed",
+      "source": "sealed NAAIM official public study 2026-09-30",
+      "required_for": "rebuilding NAAIM observations and independent numeric review",
+      "delivered": false,
+      "reason": "raw survey/market observations; redistribution/vintage qualification not supplied, no authorized data storage location",
+      "recovery": "legally provide byte-identical file at project-relative path, check SHA first; do not refetch new vintage to match"
+    },
+    {
+      "role": "survey",
+      "path": "docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/inputs/naaim-official-delayed.csv",
+      "size": 2235,
+      "sha256": "c4bc5d964a5ce2cda21b893cfe54c5f0872975ddce8b2be3d70c2e5d80c6ba93",
+      "delivery": "existing input/row data retained locally; no new upload authorization assumed",
+      "source": "sealed NAAIM official public study 2026-09-30",
+      "required_for": "rebuilding NAAIM observations and independent numeric review",
+      "delivered": false,
+      "reason": "raw survey/market observations; redistribution/vintage qualification not supplied, no authorized data storage location",
+      "recovery": "legally provide byte-identical file at project-relative path, check SHA first; do not refetch new vintage to match"
+    },
+    {
+      "role": "saved_predictions",
+      "path": "docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/run-01/predictions.csv",
+      "size": 15183,
+      "sha256": "8bae2dfd701b04afb422c4abd4bd066090c40eafec863518d6a8fcce303e942d",
+      "delivery": "existing input/row data retained locally; no new upload authorization assumed",
+      "source": "sealed NAAIM official public study 2026-09-30",
+      "required_for": "rebuilding NAAIM observations and independent numeric review",
+      "delivered": false,
+      "reason": "raw survey/market observations; redistribution/vintage qualification not supplied, no authorized data storage location",
+      "recovery": "legally provide byte-identical file at project-relative path, check SHA first; do not refetch new vintage to match"
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-local-sector-and-naaim-controls-2026-10-04/run-01/observations.csv",
+      "size": 21590,
+      "sha256": "7227a07207ff57b30457b1807a3a68a004d8ddd2e6ddc5a8ee064fbbfca4c399",
+      "required_for": "full row/coefficient review",
+      "delivered": false,
+      "reason": "row-level market-derived output/coefficients retained locally",
+      "recovery": "preserved at original task-relative path; legal transfer needs explicit suitable location; do not rerun sealed study"
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-local-sector-and-naaim-controls-2026-10-04/run-01/predictions.csv",
+      "size": 21717,
+      "sha256": "0a6e72917a6c509007983682fceb8aa47ddeb8b504ec258015e984589f90f791",
+      "required_for": "full row/coefficient review",
+      "delivered": false,
+      "reason": "row-level market-derived output/coefficients retained locally",
+      "recovery": "preserved at original task-relative path; legal transfer needs explicit suitable location; do not rerun sealed study"
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-local-sector-and-naaim-controls-2026-10-04/run-01/fits.json",
+      "size": 2791,
+      "sha256": "9feab087cd195ea6899c804bd3b7f2f6d944de7e74c16834f5b33ee0976316cb",
+      "required_for": "full row/coefficient review",
+      "delivered": false,
+      "reason": "row-level market-derived output/coefficients retained locally",
+      "recovery": "preserved at original task-relative path; legal transfer needs explicit suitable location; do not rerun sealed study"
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-local-sector-and-naaim-controls-2026-10-04/local-sector-audit-contract.json",
+      "size": 1816,
+      "sha256": "b793b6ff565d2f93c31676c2335ef74a4089d63835379832207914ae996a1f41",
+      "required_for": "historical failed preflight original only, not needed for running",
+      "delivered": false,
+      "reason": "failed original has Air absolute cache paths; safe failure summary and successful repo-relative contract delivered",
+      "recovery": "preserved at original task-relative path; legal transfer needs explicit suitable location; do not rerun sealed study"
+    },
+    {
+      "path": "CACHE/sector_members.json",
+      "size": 204962,
+      "sha256": "92ec5ee5a49f522d109692f48aaba8fe7ed51db4d8202728265d737c3be257ab",
+      "required_for": "repeat cache-body qualification audit only; no eligible historical model panel yet",
+      "delivered": false,
+      "source": "existing local application cache, unchanged",
+      "reason": "live local cache/data/privacy/licensing not authorized for Git export",
+      "recovery": "CACHE=LEI_CACHE_ROOT or user .lei_signal_lab/cache; user supplies legally allowed exact version after named storage location; fingerprints must match"
+    },
+    {
+      "path": "CACHE/sector_trend_snapshot.json",
+      "size": 657453,
+      "sha256": "4eb9bdc92733b47fc0ec53c11a74b519b899f149b73b51a13885cff09e09cab3",
+      "required_for": "repeat cache-body qualification audit only; no eligible historical model panel yet",
+      "delivered": false,
+      "source": "existing local application cache, unchanged",
+      "reason": "live local cache/data/privacy/licensing not authorized for Git export",
+      "recovery": "CACHE=LEI_CACHE_ROOT or user .lei_signal_lab/cache; user supplies legally allowed exact version after named storage location; fingerprints must match"
+    },
+    {
+      "path": "CACHE/sector_trend_history.json",
+      "size": 10731451,
+      "sha256": "f96e6a2c926461c7c0c10c3a55608b7a1b5921ff8733381ce0b4c4896cac7800",
+      "required_for": "repeat cache-body qualification audit only; no eligible historical model panel yet",
+      "delivered": false,
+      "source": "existing local application cache, unchanged",
+      "reason": "live local cache/data/privacy/licensing not authorized for Git export",
+      "recovery": "CACHE=LEI_CACHE_ROOT or user .lei_signal_lab/cache; user supplies legally allowed exact version after named storage location; fingerprints must match"
+    },
+    {
+      "path": "CACHE/sector_flow_history.json",
+      "size": 7517757,
+      "sha256": "46be77c7c44267efbacd523216b7b69afb5e87a22de73977a2471ba648c662ac",
+      "required_for": "repeat cache-body qualification audit only; no eligible historical model panel yet",
+      "delivered": false,
+      "source": "existing local application cache, unchanged",
+      "reason": "live local cache/data/privacy/licensing not authorized for Git export",
+      "recovery": "CACHE=LEI_CACHE_ROOT or user .lei_signal_lab/cache; user supplies legally allowed exact version after named storage location; fingerprints must match"
+    },
+    {
+      "path": "CACHE/tx_sector_flow_pilot.json",
+      "size": 8435957,
+      "sha256": "7243e428ddbc91b4028012298e35853a7f044d20916be90eb8084560ca464d29",
+      "required_for": "repeat cache-body qualification audit only; no eligible historical model panel yet",
+      "delivered": false,
+      "source": "existing local application cache, unchanged",
+      "reason": "live local cache/data/privacy/licensing not authorized for Git export",
+      "recovery": "CACHE=LEI_CACHE_ROOT or user .lei_signal_lab/cache; user supplies legally allowed exact version after named storage location; fingerprints must match"
+    },
+    {
+      "path": "CACHE/sentiment_signal_journal.json",
+      "size": 833,
+      "sha256": "a6824f0e08b3ec77e5825cc376725b6f444e1b1c2cab36f733b7b58c32dbdf70",
+      "required_for": "repeat cache-body qualification audit only; no eligible historical model panel yet",
+      "delivered": false,
+      "source": "existing local application cache, unchanged",
+      "reason": "live local cache/data/privacy/licensing not authorized for Git export",
+      "recovery": "CACHE=LEI_CACHE_ROOT or user .lei_signal_lab/cache; user supplies legally allowed exact version after named storage location; fingerprints must match"
+    }
+  ]
+}

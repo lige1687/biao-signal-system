@@ -1,0 +1,38 @@
+{
+  "mission": "只读核对本地板块公式及主控提供的六缓存元数据资格；不接触仓外文件、不计算收益或模型",
+  "task_scope": [
+    "审查现有公式和小型JSON元数据；区别回填与当日记录；不重做封存宽度矩阵算术核验"
+  ],
+  "read_only_paths": [
+    "src/lei_signal/market_context/sector_trend.py",
+    "src/lei_signal/market_context/retail_heat.py",
+    "src/lei_signal/market_context/sentiment_signals.py",
+    "scripts/sentiment_journal.py",
+    "docs/plan-sector-trend-page.md",
+    "docs/experiments/retail-sentiment-ts-2026-09-05.md",
+    "docs/experiments/raw/sentiment-local-sector-and-naaim-controls-2026-10-04/local-material-metadata.json"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "每文件相对CACHE路径/大小/SHA/行数/日期/字段与资格，不输出原始逐行记录或持仓",
+    "准确代码行与公式、历史首次发布/成员/调整/回填标记",
+    "对参与恢复增量题的能做/不能做判断及最小解除条件",
+    "缓存正文未独立读取，元数据来自主控，明确该限制"
+  ],
+  "stop_conditions": [
+    "缺文件只列缺口",
+    "不运行任何precompute/journal脚本、不联网、不拟合、不写缓存或研究文件",
+    "任务超范围则报告"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

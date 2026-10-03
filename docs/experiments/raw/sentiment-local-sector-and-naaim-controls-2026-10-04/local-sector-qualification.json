@@ -1,0 +1,96 @@
+{
+  "status": "qualification_completed_effect_not_run",
+  "tested_question": "Local participation recovery beyond already known price decline",
+  "controller_read": "Six exact existing caches read solely for dates/field structure/counts/fingerprints; no market rows exported, no refresh",
+  "helper": {
+    "model": "gpt-6-sol",
+    "effort": "medium",
+    "scope": "production formula and controller metadata only",
+    "writes": 0,
+    "network": 0,
+    "market_fits": 0,
+    "cache_body_independently_read": false
+  },
+  "controller_confirmed": [
+    "sector_trend.py:586-607: width uses strict close>MA; MA uses forward-filled series but denominator excludes original missing close and unavailable MA",
+    "sentiment_signals.py:99-124: z uses final aligned flow observation, lacks same-day/freshness check",
+    "sector_trend.py:1282-1299: last flow z is combined with current board r60/b50 and CN background",
+    "six metadata hashes and coverage from exact local reads",
+    "old retail report 2026-09-07 heat warning has 2026H1 reverse result; no new effect calculation"
+  ],
+  "definitions": {
+    "b20_b50": "100*number of current mapped members with original nonmissing close and defined MA, and close>MA / number with original nonmissing close and defined MA. MA computed after forward fill; not historical original membership.",
+    "nh60": "100*number with close equal rolling60 maximum and original nonmissing close / number with original nonmissing close; denominator differs from b50",
+    "snapshot_b200": "always null; internal signal b200 computed separately and not retained in daily history",
+    "retail_identity": "small/mid trade-size categories are behavior proxy, not verified retail persons or institutional owners",
+    "small_flow_z": "small_yi/current_mv_scaled_by_board_close, rolling20 valid points, prior120 rollingmeans reference mean/sample std shifted1; >=140 valid aligned points, continuity/freshness not checked",
+    "flow_normalization": "past float cap approximated by current cap * past synthetic board close / latest board close; past cap not measured",
+    "board_history": "date/boards only; stage/rs_pctile/rs_pctile_delta_20/b50/close, no b20/b200 or raw sentiment z series, no history generated_at/source/member vintage/backfill flag"
+  },
+  "material_boundary": {
+    "flow_last": "2026-09-04",
+    "snapshot_trading_day": "2026-09-21",
+    "time_alignment_gap": "17 calendar days (not 17 trading days); no claim signal was actually nonnull for each board",
+    "history_rows": 261,
+    "history_member_vintage": "current map date2026-09-21, no daily membership vintage; append and backfill not reliably distinguishable",
+    "journal_rows": 6,
+    "journal_signal_events": 0,
+    "mature_signal_returns": 0
+  },
+  "conclusion": "Local inputs exist, but current eligible historical panel is absent; no valid same-date incremental effect claim. Zero new research effect fits. This does not show factor permanently ineffective.",
+  "stop_related": [
+    "Do not refresh production cache, add predictive/trigger rules, or rerun old retail trials from this qualification",
+    "No width+AAII/NAAIM confirmation until exact historical width/input eligibility is satisfied"
+  ],
+  "reopen_conditions": [
+    "A specific unchanged historical membership/price/source version, genuine observation timestamps/backfill marks and same-date available flow panel are provided",
+    "A newly authorized bounded retrospective question explicitly accepts remaining biases and does not claim native historical/as-of effects",
+    "New prospective observations with reliable complete-input records and sufficient mature targets; requires explicit collection scope, no automatic service creation"
+  ],
+  "code_evidence": [
+    {
+      "path": "src/lei_signal/market_context/sector_trend.py",
+      "size": 68458,
+      "sha256": "999ce1cdc2fe755f562d7929e6146b56e165207976646d73aa7d786d95bb87fb",
+      "delivery": "source location/fingerprint only, existing shared code not included as own change"
+    },
+    {
+      "path": "src/lei_signal/market_context/sentiment_signals.py",
+      "size": 7168,
+      "sha256": "5d8d6e7b452cc3a40d370cdb56ca5d71c2a18b9e2f423a1431f6e92997a926f4",
+      "delivery": "source location/fingerprint only, existing shared code not included as own change"
+    },
+    {
+      "path": "src/lei_signal/market_context/retail_heat.py",
+      "size": 7674,
+      "sha256": "6311d00aca360b4e9272fbb7b40ab2a8e67f21d1175e024b6d6fd6dfd3a2b086",
+      "delivery": "source location/fingerprint only, existing shared code not included as own change"
+    },
+    {
+      "path": "scripts/sentiment_journal.py",
+      "size": 7906,
+      "sha256": "689743ac7b4a146dd0b504508d96358ce8a66c940a3a10c00d469d2d61d50cef",
+      "delivery": "source location/fingerprint only, existing shared code not included as own change"
+    },
+    {
+      "path": "docs/plan-sector-trend-page.md",
+      "size": 26061,
+      "sha256": "921a483e16081fa975216a6f498a6af8654508df65be4feed64d8d593c24b23d",
+      "delivery": "source location/fingerprint only, existing shared code not included as own change"
+    },
+    {
+      "path": "docs/experiments/retail-sentiment-ts-2026-09-05.md",
+      "size": 19751,
+      "sha256": "d1fa5b53b1960adbc7520ae246e4575ea12ad1a4ff34bb5ccd515e376e4b3484",
+      "delivery": "source location/fingerprint only, existing shared code not included as own change"
+    }
+  ],
+  "not_verified": [
+    "Historical first release and vendor arrival",
+    "Membership/adjustment vintages",
+    "All board row numeric calculations",
+    "Old four ice events or downgraded heat model performance",
+    "Production runtime/current web values",
+    "Historical market panel eligibility"
+  ]
+}

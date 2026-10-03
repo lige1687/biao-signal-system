@@ -1,0 +1,110 @@
+{
+  "id": "sentiment.naaim-five-price-controls-return20@1.0.0",
+  "frozen_at": "2026-10-03T16:12:02.485329+00:00",
+  "authorization": "用户2026-10-03批准下一步顺序，最新按照计划持续推进；2026-10-04核基本面指标合作、避免重复",
+  "question": "In the 131-week official revised short series, does continuous NAAIM add information to SPY next20 quote intervals beyond five fixed price backgrounds?",
+  "strategy_layer": "LEI system §3.6 / implementation module E confirmation item; independent retrospective information study, no strategy/account or production change",
+  "requested_scope": "U.S. broad-index ETF context, not stock-selection or Chinese boards",
+  "tested_scope": "one SPY ETF, official current delayed table 2023-12-27..2026-06-24; eval 2025 and 2026H1, already seen historical data",
+  "definition_file": "definitions.json",
+  "qualification_file": "qualification.json",
+  "qualification": {
+    "source_rows": 131,
+    "valid_rows": 131,
+    "excluded": [],
+    "evaluation_rows": 78,
+    "source_range": [
+      "2023-12-27",
+      "2026-06-24"
+    ],
+    "support": {
+      "2025": {
+        "train_rows": 49,
+        "eval_rows": 52,
+        "train_latest_target_end": "2024-12-31",
+        "unregularized_design_rank": 7,
+        "parameters_including_intercept": 7,
+        "train_adjacent_overlapping_pairs": 48,
+        "independent_events": "unknown; overlapping intervals are not independent observations"
+      },
+      "2026": {
+        "train_rows": 101,
+        "eval_rows": 26,
+        "train_latest_target_end": "2025-12-30",
+        "unregularized_design_rank": 7,
+        "parameters_including_intercept": 7,
+        "train_adjacent_overlapping_pairs": 100,
+        "independent_events": "unknown; overlapping intervals are not independent observations"
+      }
+    },
+    "old_prediction_comparison": "same 78 anchors, labels, NAAIM, r20 verified; no old refit",
+    "eligibility": "current revised retrospective survey association only; original publication/revision and actual provider arrival unknown",
+    "effects_inspected": false,
+    "new_fits": 0
+  },
+  "model_new": {
+    "P": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20"
+    ],
+    "PX": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20",
+      "naaim"
+    ]
+  },
+  "models_reused": [
+    "I",
+    "B",
+    "X",
+    "BX"
+  ],
+  "reuse": "Old saved predictions byte-identical; validate dates/labels/exposure/r20 match, NO refitting old four models",
+  "method": "exact old standardized linear ridge kernel with lambda 0.001, intercept unpenalized; training-only means/population std; no clipping, searches, feature selection or changed penalty",
+  "schedule": "fit once at Jan1 2025 and2026; train only rows target_end strictly before cutoff; test all matching anchor dates within year; same 49/101 training and52/26evaluation",
+  "why_this_followup": "Old 15.36% decrease in squared error was relative to a single price background. Stronger fixed comparison is unanswered and can narrow that claim; not a renamed old experiment. Initial49 weekly targets all neighbor-overlap and7coefficients make this a capacity-stressed descriptive challenge, not a validated prediction model. Regularization provides numeric stability, not independent evidence.",
+  "primary": "100*(1-MSE(PX)/MSE(P)); positive means less squared prediction error, not financial return",
+  "secondary": [
+    "PX_vs_I simple historical matured mean",
+    "same saved old weak-baseline results",
+    "year-specific effects and deleteeachyear (same predictions)",
+    "remove largest five reductions; target overlap"
+  ],
+  "uncertainty": "paired fixed-prediction contiguous survey blocks lengths8/16, 2000draws each, seed20261004+length; percentiles2.5/97.5. Does not capture refitting/provider vintage/selection/family uncertainty.",
+  "minimum_attention_size": "not established: no complete action/fees/capital objective. Do not invent pass line after seeing result.",
+  "source_operations_max": 0,
+  "budget": {
+    "core_fits_max": 4,
+    "independent_review_fits_max": 4,
+    "correction_reserve_fits_max": 4,
+    "total_new_market_fits_max": 12,
+    "core_batches_max": 1,
+    "necessary_followups_max": 3,
+    "wall_minutes_max": 20,
+    "pro_calls_max": 0,
+    "paid_actions_max": 0
+  },
+  "old_budget": ">=1004 prior marketfits, >=4Pro; old6/6source budget and prior sealed budgets not reset. AI tokens/cost not itemized.",
+  "stop": [
+    "input/code/protocol fingerprints change",
+    "common row/date/label mismatch",
+    "nonfinite outputs",
+    "constant feature or inadequate fixed design rank",
+    "budget or wall limit",
+    "repeated failure without diagnosis"
+  ],
+  "do_not_repeat": [
+    "old I/B/X/BX fits",
+    "AAII level/mean/dynamics/risk studies",
+    "provider-short breadth study",
+    "old S&P survivor arithmetic/source6requests",
+    "retail historical TS5/TS6/ice/heat model results"
+  ],
+  "excluded": "No new source fetch, new platform, production, UI, original strategy thresholds, private originals or raw market rows upload. Full capital/online returns unmeasured."
+}

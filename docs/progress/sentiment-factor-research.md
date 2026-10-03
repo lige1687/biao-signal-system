@@ -1,3 +1,25 @@
+# 本轮完成：本地板块资料资格与NAAIM价格背景复核
+
+更新时间2026-10-04T00:33:23.809844+08:00（Asia/Shanghai）。任务sentiment-factor-research，原负责人/root在Air本地继续，非移交；研究主线尚未整体完成。
+
+- 原目标/当前范围：把市场参与程度、调查看法、自报敞口、期权行为定义为可检验信息，在同标的/日期/结果下核已有价格之外的真实帮助；宽基ETF优先，普通技术/宏观产品由其他线负责。当前这一题及本地资料审查completed，有限关联；原E和板块历史用途blocked，不能标全部完成。
+- 已完成：本地六缓存元数据、公式/回填/日期资格核对；原始资料保留27,548,413字节不交Git。NAAIM官方131周/78共同评价，两新模型四次核心、四次独立解算；旧四模型复用保存预测。组合误差6.275→5.755，平方误差少15.896%，仍高于简单平均4.670；2026H1只少1.001%。4人工边界通过，131价格/目标独立重建，最大预测差1.07e−14pp；未跑封存实验。
+- 证据：[docs/experiments/sentiment-local-sector-and-naaim-controls-2026-10-04.md](docs/experiments/sentiment-local-sector-and-naaim-controls-2026-10-04.md)；docs/experiments/raw/sentiment-local-sector-and-naaim-controls-2026-10-04/README.md、protocol/definitions/qualification、local-sector-qualification、run-01/results、independent-review、trial-ledger、validation与manifest/SHA。完整资金/线上收益/前端已引用效果均未测量或未验证。
+- 正在做：本有界研究已完成，正在发布本次安全小文件与校验/协调摘要；没有正在拟合、刷新、安装或生产修复。源码只在本raw，不改生产src/API/web或全局研究入口；两库卡/账只本任务追加，registry/INDEX只本报告。
+- 下一步planned：有具体版本/同日面板时，补一个能改变判断的输入资格问题，或明确限定不同回顾代理问题；NAAIM变化等更丰富定义未开始，本轮不堆短史字段。宽度内AAII/NAAIM确认依赖未满足。未把所有情绪方向独占。
+- 阻塞：历史表没有回填/生成/每日成员版本，腾讯流量止9/4但快照9/21、retail_z无尾日核对；6次真实留痕零触发。原历史20/50宽度与NAAIM历史首发/修订仍缺。旧热警报已于9/7降级，早期代码文案不能当新结论。不同回顾性代理用途可另定义，不能据此宣称所有资料永久无用。
+- 分工：已读取“基本面指标”真实当前任务investor-observation-map及协调、发一条授权消息；其写图表/参考/指数对照/宏观解读，本线供含义/日期资格/有效性/反例，不动其页面。同日关系不当未来预测；消息送达不等于页面已完成引用。
+- 避开：本raw新协议/保存结果和本题NAAIM20；旧AAII动态/均值/风险、短宽度、零售事件、NAAIM单价格、源6/6封存不重跑。技术EMA/黑绿/小时、external STUMPY、classic工具/流程、dot任务不接管。记录不是锁，未知任务不当空闲。
+- 分支task/sentiment-factor-progress；准确基础/上一发布fee4dd4d6d8e6196cd763a002eb5157bb6f551f2。本次形成时尚未发布；最终成果完整SHA/远端读回见coordination/lei/docs/coordination/tasks/sentiment-factor-research.md，不自指冒称已推。规则初3b3660a01f5bc126e7b0854d116fc658811aef0f、范围同步66068173f96a8fcc51d5740adce963ecfadcb597、增量核f0999d3b6b5b709e5740c84a16bfbdad10f805ae，v1.0不变。
+- 数据依赖：旧三个必需输入338,881字节及本轮逐行观察/预测/系数仅本地，withheld精确大小SHA；六缓存只交元数据。私有策略原件只指纹，无权重/tokenizer/数据库或新服务需求。首发/调整版本未知。可读小包恢复不代表完整市场可重算；不上传凭据、持仓或缓存。
+- 进程预算：PID23519已00:12:02退出0，核心0.05895秒、独立0.10523秒，无活跃市场任务/checkpoint。真实新8/12拟合，4纠错余量不用；家族至少1012、Pro至少4保留；本轮Pro/来源/付费0。一个Sol medium只读助手已结束。没有承诺进程/登录态随Git迁移，其他机器状态未知。
+
+- 对话准确名称：情绪与市场宽度因子：定义和有效性研究；thread-id01a0ebfb-fd80-7c62-97c9-ac24d20f58e4。名称已实际更新，任务ID不变。
+
+---
+
+## 历史阶段（保留）
+
 # 当前阶段：AAII动态表达研究已完成，正在同步
 
 更新时间：2026-10-03T20:30:04.456192+08:00，Asia/Shanghai。原情绪线负责人/root继续，设备本地Air；这不是移交或结束整条任务。

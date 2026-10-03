@@ -1,0 +1,62 @@
+{
+  "hypothesis_id": "sentiment.naaim-five-price-controls-return20@1.0.0",
+  "selection": "already seen historical SPY/NAAIM; no new validation sample",
+  "stage": "completed",
+  "entries": [
+    {
+      "id": "local-sector-qualification",
+      "kind": "qualification",
+      "marketfits": 0,
+      "result": "blocked_effects_pending_historical_vintage_and_flow_alignment"
+    },
+    {
+      "id": "controls-core-01",
+      "kind": "market_core",
+      "models": {
+        "P": 2,
+        "PX": 2
+      },
+      "fits": 4,
+      "exit_code": 0,
+      "pid": 23519,
+      "wall_seconds": 0.05894983300095191,
+      "result": 15.895860323866351
+    },
+    {
+      "id": "controls-independent-01",
+      "kind": "numeric_review",
+      "fits": 4,
+      "exit_code": 0,
+      "max_prediction_error_pp": 1.0658141036401503e-14,
+      "wall_seconds": 0.1052330830025312
+    },
+    {
+      "id": "synthetic-boundaries",
+      "kind": "artificial",
+      "cases": 4,
+      "marketfits": 0,
+      "exit_code": 0
+    }
+  ],
+  "prior_marketfits_min": 1004,
+  "prior_pro_min": 4,
+  "source_budget_new": 0,
+  "max_new_marketfits": 12,
+  "old_sealed_fingerprints": {
+    "prices": "952f397be0ccc5745185b91cce6acc781737c0f30a7a34aa8a230ae892ed5e45",
+    "survey": "c4bc5d964a5ce2cda21b893cfe54c5f0872975ddce8b2be3d70c2e5d80c6ba93",
+    "saved_predictions": "8bae2dfd701b04afb422c4abd4bd066090c40eafec863518d6a8fcce303e942d",
+    "old_protocol": "2a291e97ea64a1bb7207a45cbbb0b4bbe09b24a01097d4ab905abff221f8e486",
+    "old_kernel": "608e6a7e4731bded03f7c5d1f8fb7ea3e3b57748fa00cd635d5103b3da61cff2"
+  },
+  "actual_new_marketfits": 8,
+  "core_fits": 4,
+  "review_fits": 4,
+  "unused_correction_reserve": 4,
+  "artificial_cases": 4,
+  "artificial_fits": 0,
+  "source_operations": 0,
+  "pro_calls": 0,
+  "paid_actions": 0,
+  "family_marketfits_min": 1012
+}

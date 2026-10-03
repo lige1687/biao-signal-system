@@ -1,0 +1,112 @@
+{
+  "status": "isolated_minimum_recovery_verified_full_market_inputs_missing",
+  "actual_checks_so_far": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest <raw>/test_analysis.py",
+      "exit_code": 0,
+      "cases": 4,
+      "marketfits": 0
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 <raw>/analysis.py prepare",
+      "exit_code": 0,
+      "rows": 131,
+      "common_eval": 78,
+      "marketfits": 0
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 <raw>/analysis.py run",
+      "exit_code": 0,
+      "marketfits": 4
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 <raw>/verify_independently.py",
+      "exit_code": 0,
+      "marketfits": 4
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 <raw>/verify_saved.py",
+      "exit_code": 0,
+      "marketfits": 0
+    }
+  ],
+  "failed_checks": [
+    {
+      "command": "first codex-delegate dry-run with absolute cache read paths",
+      "exit_code": 1,
+      "result": "rejected before delegate spawned; preserved original locally; relative v2passed"
+    },
+    {
+      "command": "read query with nonexistent sentiment-aaii-mean20 glob",
+      "exit_code": 1,
+      "result": "no source mutation; targeted existing directory query used"
+    },
+    {
+      "command": "git diff --cached --check with alternate index but no task base",
+      "exit_code": 2,
+      "result": "compared own frozen tree against unrelated shared HEAD; exhaustive rename/old whitespace issue, no commit/push/default-index mutation",
+      "correction": "explicit --no-renames --check fee4dd4d6d8e6196cd763a002eb5157bb6f551f2 checks only own delta; exit0"
+    },
+    {
+      "command": "initial staged credential-shape check",
+      "exit_code": 1,
+      "result": "loose sk-prefix incorrectly matched inside ordinary risk-prefixed INDEX filenames; no credential value printed, no commit/push",
+      "correction": "require token start boundary, independently confirmed all initial hits came from ordinary risk filenames; rerun exact staged-file scan"
+    }
+  ],
+  "research_process": "core PID23519 completed exit0; no running job/checkpoint; interrupt did not lead to rerun",
+  "not_verified": [
+    "Linux/Windows",
+    "fresh dependency install",
+    "full data recovery/full services",
+    "data transfer/permission eligibility",
+    "production or online returns"
+  ],
+  "shared_workspace": "default index unchanged; shared AGENTS changed by other actor and preserved; no clean/reset/checkout/stash",
+  "isolated_delivery_files": 34,
+  "isolated_legacy_files": 2,
+  "manifest_checks": 32,
+  "raw_SHA_checks": 25,
+  "isolated_checks": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 docs/experiments/raw/sentiment-local-sector-and-naaim-controls-2026-10-04/verify_saved.py",
+      "cwd": "independent temporary project root inside repository .git/coordination-sentiment-workspace/",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "{\"saved_summary_passed\": true, \"market_fits\": 0, \"input_files_checked\": false}",
+      "stderr": "",
+      "marketfits": 0
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest docs/experiments/raw/sentiment-local-sector-and-naaim-controls-2026-10-04/test_analysis.py",
+      "cwd": "independent temporary project root inside repository .git/coordination-sentiment-workspace/",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.000s\n\nOK",
+      "marketfits": 0
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 docs/experiments/raw/sentiment-local-sector-and-naaim-controls-2026-10-04/verify_saved.py --require-inputs",
+      "cwd": "independent temporary project root inside repository .git/coordination-sentiment-workspace/",
+      "exit_code": 2,
+      "expected_exit": 2,
+      "stdout": "{\"summary_passed\": true, \"full_market_recovery\": \"blocked\", \"missing_inputs\": [\"docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/inputs/px_SPY.csv\", \"docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/inputs/naaim-official-delayed.csv\", \"docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/run-01/predictions.csv\"]}",
+      "stderr": "",
+      "marketfits": 0
+    }
+  ],
+  "hygiene": {
+    "command": "python3 scripts/check_repo_hygiene.py",
+    "cwd": "shared working project root",
+    "exit_code": 0,
+    "claim": "current shared hygiene only, not independent full-repository qualification"
+  },
+  "actual_temporary_directory": ".git/coordination-sentiment-workspace/restore-20261004-c4q7im9z",
+  "full_input_state": "3 required files338881bytes absent, expectedexit2; minimum public artifact works, full scientific rerun remains blocked",
+  "git_diff_check": {
+    "task_base": "fee4dd4d6d8e6196cd763a002eb5157bb6f551f2",
+    "exit_code": 0,
+    "stage_paths": "explicit own manifest whitelist only"
+  }
+}
