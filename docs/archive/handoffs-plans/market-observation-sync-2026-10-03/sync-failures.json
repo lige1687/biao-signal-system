@@ -20,5 +20,18 @@
   "raw_browser_whitespace": {
     "finding": "five AXListMarker entries retain capture trailing spaces",
     "resolution": "preserve raw capture bytes; exclude only this evidence text from whitespace style check; all other changed files checked"
+  },
+  "stage_two_scope_error": {
+    "commit": "08401c5f504a4f2d658b18ef6489d196e75dced3",
+    "cause": "stage-two refresh copied shared originals over three already-derived publication files",
+    "affected_paths": [
+      "docs/experiments/INDEX.md",
+      "docs/experiments/registry.json",
+      "web/src/pages/FundamentalsPage.tsx"
+    ],
+    "correction": "append a corrective commit restoring these files byte-for-byte to first reviewed publication; no force push or history rewrite; source and index remain untouched",
+    "historical_boundary": "unrelated code/catalog metadata remains visible in superseded stage-two historical commit; latest tree excludes it",
+    "secret_review": "outgoing known-token/private-key/password-URL pattern audit had zero findings; no database, strategy originals or raw survey files introduced",
+    "prevention": "lock all code/catalog blobs to first validated commit when adding evidence-only stages; verify content as well as path set"
   }
 }
