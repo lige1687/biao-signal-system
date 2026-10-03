@@ -1,3 +1,35 @@
+# 当前成果：上一完成周黑绿背景的增量研究已封存并发布
+
+- task-id technical-factor-sequence；负责人「LEI 技术因子研究与增量验证」/root，会话01a0e703-4c27-74e2-bf77-997e1879f967；更新时间2026-10-04T02:06:47.433805+08:00（Asia/Shanghai）。本轮有界问题completed / 本实验范围内未发现实际增量；原负责人持续责任active，非移交或总任务结束，无本题运行中市场PID/checkpoint/助手或自动后台承诺。
+- 原目标：原汁原味LEI技术判断→明确金融语义/可复现定义→多方法检验是否超出已有信息；主战场国内宽基ETF，金融效果为验收。情绪/宽度/宏观/账户/生产不属于本线；策略原文新增删除需用户确认，原文未改。
+- 最新项目约定只推codex：**发布成果分支codex/technical-factor-sequence-progress-20261004，已推且核实完整commit 40ed00f8fa3469fe68bb5255917368d95758da4b**；本地原task/technical-factor-sequence-progress工作树没有切换或清理，旧远端task分支停留2ab565017a7a4959af744430339e32a09ce12667、保留历史。沿用原唯一task-id，不开新任务。基础2ab565017a7a4959af744430339e32a09ce12667；77准确Git路径，75项manifest大小/SHA逐项远端Git对象一致，manifest逐字读回，ls-remote等于完整HEAD。没有main合并/部署/强推/权限更改。
+
+[完整效果、定义与反例](https://github.com/lige1687/biao-signal-system/blob/40ed00f8fa3469fe68bb5255917368d95758da4b/docs/experiments/weekly-color-state-information-2026-10-04.md)；[证据与无行情核验入口](https://github.com/lige1687/biao-signal-system/blob/40ed00f8fa3469fe68bb5255917368d95758da4b/docs/experiments/raw/weekly-color-information-2026-10-04/README.md)；[本任务阶段进展](https://github.com/lige1687/biao-signal-system/blob/40ed00f8fa3469fe68bb5255917368d95758da4b/docs/progress/technical-factor-sequence.md)。进度提交形成前“正在同步/仅本地”已由本条真实远端事实替代，不为自指SHA重复提交。
+
+## 本轮真实结果与验收
+
+新对象research.trend.completed_week_color20@1.0.0：上一ISO周实际交易周末经济收盘的20周绿黑灰，首20周SMA播种EMA、alpha2/21；252连续日和120连续有效完成周，当前周即便周五不用，到下一有报价周才用（保守延迟代理）。原文§2.7的周背景部分，不是完整日周同时变绿/排列入场/三周期或小时扩散/资金动作。unknown不填gray，整周无交易不造报价。日线20/60、日/周涨幅、波动与ETF身份13背景字段，新周色2列；只看颜色组训练均值、ETF均值等简单对手并列，分类不强排前10%。
+
+完整4340安排/1085日；1280暖启动未知保留；3060特征合格/765日，最早2023-05-04；20日成熟2976行/744日。主控独立周聚合/EMA递推复算所有安排行，3060合格主要特征/状态/时间差0；两个标签直接收盘重算差0，保存系数反算误差<1e-10。先资格/列秩，再冻结；训练1540/2512，较晚共同888+380=1268行、317日期。
+
+真实OLS8/8，两目标两时间折；收益背景13.880688088→加周色13.882444000，改善−0.001755912个百分点；风险4.136563944→4.169039832，改善−0.032475888。简单每ETF成熟平均6.625508487/3.464019660，颜色组预测6.797633618/3.575442860，均明确并列。背景模型本身明显输简单对手，不能授有效标签；2025有621/888条过去60周涨幅超过早期训练范围，结果后只读范围诊断0fit、不筛样本、不归因全部失败。收益各ETF3好1差、年份一好一差；风险3差1好、两年都差；去任一ETF风险都差。连续20/60日范围都容纳好/坏。全历史已看过，不能叫盲验证。
+
+全绿/黑/灰、9日周状态格、5/10/20/60/120收益/上涨/极端下跌/下探/上探/回撤/中位数及逐ETF构成已保存。20日绿平均+1.009%、下探3.475%；黑+1.481%、3.502%；灰+1.430%、2.720%。组日期不同，不冒称增量或交易收益。2026日周都绿176条平均−0.019%、下探4.518%是明确反例；稀少对照组只1或2ETF，不能挑赢家。
+
+工程Sol23项通过，初次4失败为夹具/断言问题，明确保留transcribed记录、没有伪造未保存stdout。合成演练另计，正式接受复用预测0新fit；两原生family ledger在原路径保留全部冻结/执行/接受。旧归置器因已有docs/progress白名单exit1；当前共享器只读核隔离树exit0，有版本SHA。独立9文件临时目录python3 -S无行情/preflight/第三方核保存算术exit0；篡改副本exit1；完整交付清单核数exit0。Linux/Windows/全新安装、真正新资料与完整账户/线上收益未验证或未测量。
+
+## 范围、预算、材料与下一动作
+
+实际写入：new weekly_color_information.py及专属单测；workflow.py/workflow_inputs.py/question_contract.py只新weekly kind；definitions只一新对象/新source，旧对象与旧source记录逐项相同；本题3报告及registry/INDEX自项、专属raw、原位置两唯一family ledger、两自有进度。其他AI只避开这些具体块/同题，不独占未来全部技术方向。新真实fit8/8、市场/外部来源/付费0；辅助均值估计单列，旧20/60/EMA持续/等待/相邻事件预算不清零、不重跑；固定负结果不追加参数追正。
+
+资料panel1,582,974字节/SHA382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b；源manifest a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94；原文df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20/85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903。原行情、行动PDF、完整preflight仍仅本地（8份约44MB，manifest逐项大小SHA）；无合法交付位置不传大数据，准确source路径/指纹在合同。历史实际到达与完整行动资格未知；原件缺失远端不能重算市场研究。共享checkout及恢复名义报价/其他修改不收走。
+
+规则v1.0最新读至bd48ca7f22ca6ce3306ba5c2881751655d563524，SHA不变。阶段前已读risk新多日成交配合、external FactorMiner、classic验收、sentiment结案与dot记账WIP；没有已登记同题或本块冲突，记录不是锁，未登记活动未知。本次coord开始并发拒后读取新增investor范围并普通重建推成功；不强推。D1/D2/D5上轮资料已交等待classic原负责人验收，不重派；dot未来SMA20paused、宽度input_observation_only不接管。
+
+接续第一步：读最新coord与本题README、核40ed00f8fa3469fe68bb5255917368d95758da4b清单，然后无行情保存结果核验；本题已闭环，勿重跑。下一有界技术问题尚未独占/启动，先查原文和旧结果/owner，再登记；周五即时版、完整日周变绿及非线性方法未测，不能因缺证自称已验证。真正新资料缺合法输入/取得时间与成熟支持；不猜新观察起点、不自动采集、不替本记录假定许可继承。
+
+---
+
 # 当前：新有界问题——已完成周黑绿状态的日线增量研究
 
 更新时间2026-10-04T01:29:31.076569+08:00（Asia/Shanghai）；technical-factor-sequence原负责人继续，状态active；工作分支task/technical-factor-sequence-progress；基础及最新已推2ab565017a7a4959af744430339e32a09ce12667。先读协调规则v1.0@290bcb85854c8542970e408c0d0888a6908c295f，SHA6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0。
