@@ -1,3 +1,39 @@
+# 当前成果：四组观察图、日期透明与连续宏观追问已发布
+
+更新时间2026-10-04T02:16:57.725730+08:00（Asia/Shanghai）；task-id investor-observation-map；负责人/root，会话01a0fd40-f651-7360-9411-d90f80affdc4，名称「市场理解｜中美指标与宏观解读」。原负责人继续，非移交。工程阶段completed，原任务责任active；来源续核paused，实际输入资格blocked，不把软件验收当所有指标来源或投资收益验收。
+
+## 目标、版本、真实增量
+
+用户要专业投资者/机构日常看哪些中美宏微观指标、以何为目的、系统覆盖缺口；数据图优先，阈值有机会/风险颜色及读法、基本面统一市场理解、四指数对照、超级Agent宏观解读；最新“开始做吧，推全”“继续哈”沿批准计划。服务宏观背景叙事，不改变技术判断/过滤/交易规则。
+
+最新用户AGENTS只推codex工作分支，发布 **codex/investor-observation-map-progress-20261004**，已普通推送并核实完整commit **7ef31ab443f72e76bc08b0b837eb213fe3509e53**；基础63eaa0be1ce36b844c2d70792fdc917eb35f0234，设计69ec46e314ed9ac312d2eb6c779e3b47d74c9d62。原task/investor-observation-map-progress本地工作树保留，旧远端仍63eaa0be，不切换/清理脏共享树。ls-remote=本地HEAD=fetch；远端30项manifest大小/SHA逐项一致，manifest与SHA256SUMS逐字读回。未main合并/部署/强推/权限变化。
+
+[本轮报告](https://github.com/lige1687/biao-signal-system/blob/7ef31ab443f72e76bc08b0b837eb213fe3509e53/docs/experiments/market-observation-flow-2026-10-04.md)；[证据/恢复](https://github.com/lige1687/biao-signal-system/blob/7ef31ab443f72e76bc08b0b837eb213fe3509e53/docs/experiments/raw/market-observation-flow-2026-10-04/README.md)；[同一进展文档](https://github.com/lige1687/biao-signal-system/blob/7ef31ab443f72e76bc08b0b837eb213fe3509e53/docs/progress/investor-observation-map.md)。工作分支文档“正在同步”是提交前真实快照，由本条远端读回事实取代，不为自指SHA循环补交。
+
+completed：增长物价利率、估值盈利利率、融资资金指数、信用波动指数四组中美同数据图；保留每项单位/所属期/缺项、最近有效观测变化、共同区间压力事实；实际月末一观测的PE保守按月对齐（36点/35变化），客户端读取/首次发布/修订分开。官方2026-08-31月报PE14.65对接口13.04提示口径待核，ERP继承限制，不替换全史，不称今天官方估值。页面和Agent共用摘要，最近8题和独立主题上下文、跨市场/结合利率追问、更新后回答重算、指代不明要求具体指标、准确回图；持仓/标的/机会/成交不抢宏观路由。0新增模型调用，原聊天/报单不变。业务增量为同资料能辨日期/缺项/依据并继续核查；用户理解正确率、读图耗时、决策差额与线上收益未测量。
+
+## 证据、失败、预算与阻塞
+
+实际17本轮+12基础+14图表+4整合+33资料=80检查exit0，tsc/Vite761模块exit0（旧大包warning）；独立临时副本17最低检查exit0，原Agent内存回归exit0。实际浏览器中美四组、月频对照、信用同段变化、页面→Agent→主输入A股→利率及歧义指代、390/1280px无横溢出，视口恢复。不是洁净安装/完整后端恢复/跨OS；服务断网浏览器场景未实测。归置器既存.git worktree文件和用户docs/progress白名单2项exit1，不假称全绿。初次cwd/白屏依赖混用/变量遮蔽/追问递归和过宽路由/回图旧query/registry审计键错误保留并修复；不删除缓存/资料或重跑金融研究。
+
+**来源记账错误：6批网页工具访问实际20个查询/打开项；原登记上限6次未明确批次。按保守请求项20/6超限入账，不隐藏、不重置、不继续追加来源。** 已停止来源续核paused；旧各阶段来源6/6、累计12、宏观18/18和QQQ/VXN封存预算原样保留。本轮0金融拟合/回测/训练/付费/新代理。FINRA月末余额/通常次月第三周、CFTC周二持仓通常周五发布/TFF分类、盈利共识产品定义核查已有，但许可/逐期发布/连续输入仍未交齐；不称已接入。官方指数月报正文已读但未取得PDF原始字节SHA；行业方法不能认证指数PE。source-ledger保留访问等级/反例/未知项，私有资料不传。
+
+blocked：PE实际供方/运行模块与同日期计算口径；首次发布/修订与再分发资格；盈利预期、ETF净流量、美国FINRA/中国信用和波动输入及完整中国事件日历。后台PID1753 cwd只能定位checkout，不能认证已载模块commit；独立解释器找不到本分支lei_signal，不假称已修后台。授权范围内显示诚实性已修，数据真实性不能靠UI证明。恢复条件为实际版本/合格输入/使用权限，以及必要明确来源请求预算；不借其他任务额度。
+
+系统待升级只读未找到对应目标，仓内upgrade-goal-proposal.json已具体准备；因最新用户要求仓外修改先确认，独立服务数据库写入已提问，尚无答复，不写数据库或initial.json伪造进度。
+
+## 当前范围、材料、运行与接续
+
+当前正在做：本轮成果远端发布读回和阶段记录；工程已完成，无隐藏运行中金融实验。planned：针对用户实际反馈或新合格来源的局部修复；paused：新来源请求；blocked：上述输入真实资格和台账写入。下一步先核准确成果/最低恢复，只有许可/输入/预算明确后续对应缺口；不重复启动已封存问题，也不把所有未来宏观方向圈为独占。
+
+其他AI暂避本轮具体data-quality/observation-model/ObservationPanel、MarketDashboard/IndexComparison/MacroReadingPanel/macro-reading和AgentWorkspacePage宏观入口小块、专属run-market测试/样式/package及专属报告/raw/两进度。后端这轮未修改、不认领整个Agent或宏观。规则v1.0最新完整读8509e1bca27478a1ab858e7a3147c2dd5f6847e3，SHA6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0；范围预登记290bcb85854c8542970e408c0d0888a6908c295f。最新technical周色、risk成交配合、sentiment/FactorMiner及dot记账与本题无已登记同块/同实验冲突，记录不是锁，未登记任务未知。三源T10Y3M/DTWEXBGS/Fed EBP与情绪效果由原方负责，不重抓/重测。
+
+原策略指纹df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20 / 85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903，实际核相同不改/上传原件。API原样rates-input.local.json 99959字节/SHA26f6e6692fe99ed836383c8b3028160ff332f40e938106d6efb94c7f938e8875、截图和restore-local-mph9bgqx仅本地，远端不可据其复现真实市场输入；大小/指纹均manifest。无权重/tokenizer/数据库新增交付。旧本地材料保留，Git只有小源码/摘要/证据。
+
+自有Vite PID59545/session31465/127.0.0.1:5185保持，原1753/8000不终止重启；无金融后台任务/checkpoint，远端进程未知；复制文件不迁移进程/登录态/锁。共享原HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9/index83bb48fe19dcb073d4a449bcef331c745c942128ea53ca2a19c1f6791cbe7f92核未变；脏AGENTS已有并行更新为bdd7bb36751b1fcde7c4ec4abaec7c59c7778b0372b047e80d27290188bba240，本任务未修改/收走。项目自身AGENTS协作入口原样有效。本次较上一版新增四图组/日期与质量/连续追问实装和80检查，预算错误与PE反例明确封存；重要旧记录以下保留。
+
+---
+
 # 当前active：观测日期核实、四组图表与连续宏观追问
 
 更新时间：2026-10-04T01:29:28.672087+08:00。原负责人/root继续，非接管；task-id不变。
