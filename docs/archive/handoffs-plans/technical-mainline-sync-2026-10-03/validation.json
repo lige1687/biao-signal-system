@@ -101,5 +101,16 @@
     "clean dependency install",
     "full browser desktop/narrow rereview"
   ],
-  "not_uploaded": "originals, vendor data, DB, credentials, large local transport packages"
+  "not_uploaded": "originals, vendor data, DB, credentials, large local transport packages",
+  "additional_layout_verification": {
+    "all_indexed_directory_names": true,
+    "exit_code": 0,
+    "stdout": "✓ 归置自检通过：根层四层均在白名单内，关键配置均已入库。\n",
+    "method": "git ls-files -z; all four governed layer names in independent empty skeleton; private-index tracking checks, no source data copied",
+    "initial_harness_error": {
+      "exit_code": 1,
+      "reason": "line-delimited Git output quoted Chinese filenames; incorrectly created a directory named quote-docs in isolated checker only",
+      "correction": "new isolated skeleton using NUL-delimited names; original and failed harness preserved"
+    }
+  }
 }
