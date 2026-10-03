@@ -1,0 +1,92 @@
+{
+  "schema_version": "workflow-rehearsal/1.0",
+  "data_mode": "synthetic",
+  "input_sha256": "178a7fed2de36d292102e36ea82f20d6de1e402d2018b1100dfa7771e01d158c",
+  "definition_and_method": "8df0914acb7bebdb15b913f7c16ebe468ab95a5d144aab43a6efbf9067bc621f",
+  "coverage": {
+    "observations": 1200,
+    "ready_252": 698,
+    "eligible": 656,
+    "price_reset_rows": 0,
+    "continuous252_or_indicator_missing": 502,
+    "feature_ready": 698,
+    "per_asset": {
+      "synthetic-A": {
+        "observations": 600,
+        "ready_252": 349,
+        "eligible": 328,
+        "continuous252_or_indicator_missing": 251,
+        "feature_ready": 349,
+        "price_reset_rows": 0
+      },
+      "synthetic-B": {
+        "observations": 600,
+        "ready_252": 349,
+        "eligible": 328,
+        "continuous252_or_indicator_missing": 251,
+        "feature_ready": 349,
+        "price_reset_rows": 0
+      }
+    },
+    "definition_ref": "etf.reference.volatility20@1.0.0"
+  },
+  "performance": [
+    {
+      "model": "B0",
+      "metric": "MSE",
+      "value": 1.987999915166344e-30,
+      "unit": "percentage_point_squared",
+      "rows": 504,
+      "dates": 252,
+      "assets": 2
+    },
+    {
+      "model": "B0",
+      "metric": "RMSE",
+      "value": 1.4099645084775518e-15,
+      "unit": "percentage_point",
+      "rows": 504,
+      "dates": 252,
+      "assets": 2
+    },
+    {
+      "model": "B1",
+      "metric": "MSE",
+      "value": 3.3532457972675895e-30,
+      "unit": "percentage_point_squared",
+      "rows": 504,
+      "dates": 252,
+      "assets": 2
+    },
+    {
+      "model": "B1",
+      "metric": "RMSE",
+      "value": 1.831186991344027e-15,
+      "unit": "percentage_point",
+      "rows": 504,
+      "dates": 252,
+      "assets": 2
+    },
+    {
+      "model": "B2",
+      "metric": "MSE",
+      "value": 3.3532457972675895e-30,
+      "unit": "percentage_point_squared",
+      "rows": 504,
+      "dates": 252,
+      "assets": 2
+    },
+    {
+      "model": "B2",
+      "metric": "RMSE",
+      "value": 1.831186991344027e-15,
+      "unit": "percentage_point",
+      "rows": 504,
+      "dates": 252,
+      "assets": 2
+    }
+  ],
+  "fits": 2,
+  "purpose": "engineering_error_check_only",
+  "selection_used": false
+}

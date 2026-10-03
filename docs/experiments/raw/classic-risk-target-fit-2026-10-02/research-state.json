@@ -1,23 +1,23 @@
 {
   "research_id": "classic-risk-target-fit-2026-10-02",
   "question": "四只国内宽基ETF：过去20日经济收盘简单收益标准差，在已有价格信息后是否改善接下来20个收盘间隔波动的判断？",
-  "execution": "running",
-  "evidence": "not_evaluated",
+  "execution": "completed",
+  "evidence": "insufficient",
   "mode": "research",
   "delivery_mode": "final_only",
   "authorization": "用户：这一块有无进一步的增量，去做哈，目标要清晰，就是为了我们更好的研究流程和因子效果。",
   "strategy_layer": "研究比较和风险信息评价；现有经典价格变量的研究用途，不改变策略规则或执行。",
   "budget": {
-    "market_experiments": 2,
+    "market_experiments": 1,
     "source_requests": 2,
-    "synthetic_check_batches": 2,
+    "synthetic_check_batches": 3,
     "helpers": 2,
     "paid_actions": 0
   },
   "used": {
-    "market_experiments": 0,
+    "market_experiments": 1,
     "source_requests": 2,
-    "synthetic_check_batches": 2,
+    "synthetic_check_batches": 3,
     "helpers": 2
   },
   "stop": "同定义同用途已有完成结果则不重跑；否则最多一个冻结主比较与一个预定反例批次；不换参数追正结果。",
@@ -45,8 +45,15 @@
     "reason": "user_requested_handoff_no_new_experiment",
     "handoff_at": "2026-10-03T12:50:54.962895+08:00"
   },
-  "phase": "progress_sync_then_source_only_qualification",
+  "phase": "fixed_comparison_archived_owner_retained",
   "resumed_at": "2026-10-03T13:44:36.229850+08:00",
   "resume_authorization": "用户2026-10-03：同步完成后按原任务已有授权继续推进，仍由原任务负责人负责，不接管、不结束。",
-  "real_experiment_started": false
+  "real_experiment_started": true,
+  "budget_reallocation": "budget-reallocation.json",
+  "remote_progress_commit": "913e0f48972373d15e7de9d9aa544bcd2d1f62b7",
+  "completed_at": "2026-10-03T13:51:42.197167+08:00",
+  "real_fits": 4,
+  "additional_saved_prediction_fits": 0,
+  "production_authorized": false,
+  "final_report": "docs/experiments/classic-risk-target-fit-2026-10-02.md"
 }

@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-03T13:51:42.197167+08:00",
+  "commands": [
+    {
+      "stage": "prepare-study",
+      "exit_code": 0,
+      "labels_computed": false,
+      "fits": 0
+    },
+    {
+      "stage": "workflow-draft freeze-01",
+      "exit_code": 0,
+      "fits": 2,
+      "mode": "synthetic engineering"
+    },
+    {
+      "stage": "workflow-contract run-01",
+      "exit_code": 0,
+      "fits": 4,
+      "mode": "real fixed comparison"
+    },
+    {
+      "stage": "check-saved-results",
+      "exit_code": 0,
+      "fits": 0,
+      "mode": "independent arithmetic and preset counterexamples"
+    },
+    {
+      "stage": "workflow-contract accepted-01 --reuse-predictions --register-report",
+      "exit_code": 0,
+      "fits": 0,
+      "mode": "same frozen design aggregation/registration"
+    }
+  ],
+  "ledger": "docs/experiments/raw/research-workflow-ledgers-2026-09-29/78514b8bb7db9863528513a2/attempts.jsonl",
+  "no_sealed_experiment_rerun": true
+}
