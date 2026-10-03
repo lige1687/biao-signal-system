@@ -1,7 +1,7 @@
 {
   "schema_version": "research-workflow-fusion/1.0",
   "id": "workflow-fusion-2026-10-04",
-  "updated_at": "2026-10-03 16:10:51 UTC",
+  "updated_at": "2026-10-04T00:21:15+08:00",
   "display_timezone": "Asia/Shanghai",
   "coordinator_thread": "01a0e6d5-4bcf-7bd3-82e4-4961c963d20e",
   "task_id": "classic-factor-research",
@@ -20,7 +20,7 @@
     "paid_operations": 0,
     "new_threads": 0,
     "new_subagents": 0,
-    "existing_thread_messages": 4
+    "existing_thread_messages": 5
   },
   "assignments": [
     {
@@ -45,7 +45,10 @@
       "title": "宽基ETF量价与风险因子发掘验证",
       "status": "sent",
       "acceptance": "pending",
-      "brief": "errors.md"
+      "brief": "errors.md",
+      "acknowledgment": "confirmed_in_remote_coordination",
+      "evidence": "coordination/lei@81637d235093652de22fd4991cf1f995062c4e0d:docs/coordination/tasks/risk-shape-information.md#workflow-fusion-2026-10-04--d3-errors",
+      "implementation": "planned_by_owner; no scoped delivery yet"
     },
     {
       "id": "complement",
@@ -67,7 +70,10 @@
       "title": "整理 LEI 系统过时内容",
       "status": "sent",
       "acceptance": "pending",
-      "brief": "materials.md"
+      "brief": "materials.md",
+      "implementation": "in_progress_readonly_missing_material_check; no scoped delivery yet",
+      "acknowledgment": "confirmed_by_owner_in_thread",
+      "evidence": "thread 01a101d0-6400-7e81-ab5d-2654902fb237 turn 01a10290-e9cf-77e0-9d5f-4ddf7df95d03 commentary; owner explicitly accepted old research dependency check"
     }
   ],
   "delivery_tool_receipts": [
@@ -149,5 +155,10 @@
     "Existing threads retain ownership, settings and original priorities",
     "Prior conclusions with precise evidence can satisfy a direction without new work"
   ],
-  "next": "Read each receiver's actual scoped artifacts and version, independently verify critical numbers/boundaries; classify pass, partial or blocked. Message acceptance is not task acceptance."
+  "next": "Read each receiver's actual scoped artifacts and version, independently verify critical numbers/boundaries; classify pass, partial or blocked. Message acceptance is not task acceptance.",
+  "published_dispatch_commit": "73e8976e578598d2ff1424e0924558864c2b82be",
+  "latest_coordination_read": "81637d235093652de22fd4991cf1f995062c4e0d",
+  "followup_receipts": [
+    "materials-followup.json"
+  ]
 }

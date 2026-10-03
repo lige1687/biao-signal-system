@@ -35,3 +35,11 @@ dot-pro-increment-review的未来SMA20协议明确paused，不能改名交给技
 本方只写本目录、自有两进度及coordination/lei的classic-factor-research记录；不改他人任务记录/主工作区源码/研究合同。工作分支task/classic-factor-progress，基础385bb0c4ce1833b2162f1e5341c97adb8d85079e。范围登记f0999d3b6b5b709e5740c84a16bfbdad10f805ae已远端逐字核实。
 
 0新行情、0市场拟合、0付费、0新建线程或子代理；原对话自己原有工作继续按原授权。恢复先读最新协调与dispatch-state.json，不重复发送同一派发；按准确threadId读取新回复和产物，不凭消息回执假定成果已完成。没有创建自动唤醒或后台监听。
+
+## 接收核对（2026-10-04T00:21:15+08:00，Asia/Shanghai）
+
+原四条派发已在73e8976e578598d2ff1424e0924558864c2b82be发布，未重复发送。量价研究在协调分支81637d235093652de22fd4991cf1f995062c4e0d的risk-shape-information记录中明确接入D3：选择现存vol_instability20-main、0新拟合，仅补保存错误分解；状态planned，不写成完成。其独立的隔夜/日内研究及原预算仍归原负责人，不是本次派发的新计算。
+
+资料整理返回的是原系统健康检查，尚未回答D6指定的classic缺附件案例；已发一条范围澄清，准确原文与工具回执见materials-followup.json，不重跑系统检查。技术和外部工具对话仍在运行，暂未取得本次指定交付。六项均待主控独立验收，不因工具状态completed或原任务通过而升格。
+
+资料整理随后在01a10290-e9cf-77e0-9d5f-4ddf7df95d03轮明确接下旧研究缺件只读核查；目前已接收、正在做，仍待具体交付。
