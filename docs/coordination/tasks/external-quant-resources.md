@@ -1,3 +1,25 @@
+# 当前成果：因子挖掘能力方向稿已同步，尚未实施
+
+更新时间2026-10-03T21:17:07.451616+08:00，Asia/Shanghai；external-quant-resources原负责人继续。用户要求“拓展我们的挖掘因子的能力”“发散一下”，本轮brainstorming/plan_only已完成初筛，后续具体试点未冻结，整体方向不结束。
+
+工作分支task/external-quant-progress，基础af8934d60511ae24f9e182bdf2d4a441a723cc12；**已推并核实commit ab96cf88ea91ff7d019c9b66ebca9d617b9d090d**，远端ref完全相同，三文件逐字读回；原共享HEAD/index未变。无main合并/部署/权限修改。
+
+[三路线讨论稿](https://github.com/lige1687/biao-signal-system/blob/ab96cf88ea91ff7d019c9b66ebca9d617b9d090d/docs/archive/handoffs-plans/external-mining-expansion-2026-10-03.md)；本任务两进度已同步。新增的是方向/适配判断，没有安装或新增挖掘代码，没有发现有效金融因子的结论。
+
+已完成：官方来源初筛PySR显式公式、STUMPY多日模式、InterpretML条件组合；有限已有资料检索未见对应已交入口，不等于远端不存在。建议先评多日过程发现，再条件组合，公式搜索保留但不换引擎重跑DEAP。文献候选/QuantaAlpha局部生成与classic385bb0c4基准入口直接复用。三个方向都是研究提案，不改已有策略，不把组合条件当交易过滤。
+
+下一步planned：与用户收敛首轮候选类型，再核固定源码commit、完整许可、已有实现和合格输入，制定有限试点。具体ETF/目标/日期/候选上限/预算尚未选，尚无新研究合同。超出现有策略的输入/表达应作为明确扩展提案，不能借工具安装扩大授权。
+
+本轮6/6公开来源（三搜索三官方页；STUMPY首查询限定拼写不规范，无关结果未采信）、0新增实验/工程执行批/市场拟合/模型请求/付费/助手，累计49来源/22工程批/16旧真实拟合。只核了资料，不承诺库已兼容；PySR页标Apache2及Julia/官方skill，未安装，其他许可全文待核。活动页面未钉源commit，原网页快照未随Git，链接和事实摘要在稿中；这不是可复现的源码验收。
+
+归置/diff/准确暂存与远端读回通过；只有3个小文档，不写源码/全局定义/CLI/生产。核心无在跑进程/checkpoint，当前无后台自动继续。AlphaGen、DEAP、tsfresh、arch、RD-Agent旧预算/负结果保持封存。本记录不是新任务锁，不独占这些库或所有因子。
+
+规则1.0及9b3a9ed9fd8e75a9043de8739b705a063aa5cb22、e415137fb2fa559480555290d40bdfeee90d8244已读，自身范围20631f04c308e3e80a305db1afca94a684ada29b已推核字节。发布前协调20631f04c308e3e80a305db1afca94a684ada29b，经典基准入口、技术/情绪封存、观察整合及窄显示纠错与本三文档不同，无已登记同文件/同实验冲突，未知任务不当空闲。AGENTS协作入口原样保留。此协调提交自身SHA由Git路径历史定位，推后读回再报同步。
+
+---
+
+## 历史阶段
+
 # 当前范围：因子挖掘能力方向发散，尚未实施
 
 更新时间2026-10-03T21:12:06.549013+08:00，Asia/Shanghai。task-id external-quant-resources，原负责人继续。
