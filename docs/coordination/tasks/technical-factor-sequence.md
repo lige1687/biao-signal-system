@@ -1,3 +1,15 @@
+# 当前active：技术因子缺口与开源验证的有界并行
+
+更新时间2026-10-03T23:41:19.026655+08:00 Asia/Shanghai；原负责人/root继续。用户明确授权持续推进和已认可开源计划、多路验证。
+- 基础/最近已推ae175d3caea2a5bd301cba46c6d2927bf6a50c6f，工作分支task/technical-factor-sequence-progress；规则及最新增量读至72bfa10e1f9a18b596aada9917a8d9f56b53e70d，新增观察地图UI宏观路线与本题不同。
+- 第一阶段只读：Sol审黑绿20旧八轮与原义条件/EMA稳定代理是否重复；Luna盘点已有Alphalens复用源码、版本和运行环境。本轮两助手不同问题、write_paths空、network false、各1回合，0标签/拟合/行情。
+- 主控核现有来源及开源验证组件，限定Alphalens分类/连续排序薄适配，不接管external的PySR/STUMPY/InterpretML挖掘计划、不重跑DEAP/AlphaGen/tsfresh旧试点。是否存在可执行新问题由旧证据决定。
+- 预计产物本新raw/资格、固定计划、report与自身进度，registry/INDEX仅本题；共享代码/总定义暂不修改。正式模型及新adapter范围在资格/去重完成后补登记才实施。外部来源最多6请求，禁止付费/大包/跨项目取数/生产。
+- 核心验收是合法定义的真实效果与增量，非工具安装。黑绿完整原义的排列/变色/周期保留，black-reset/账户、dot未见SMA20、情绪宽度均避让。当前无已登记同实验/同文件冲突；记录非锁，未登记未知。
+- 旧20八轮、60两目标8真实/24合成以及流程样板封存不重做；新资料也不假称未见。当前市场进程0，后续合同另固定有限预算，不重置旧成本。
+
+---
+
 # 当前成果：原策略语义与黑绿验证流程样板已同步
 
 - task-id technical-factor-sequence；原负责人/root/Air继续，非移交。当前有界流程审查completed；整体责任保留；更新时间2026-10-03T23:02:47.564792+08:00 Asia/Shanghai。
