@@ -2,8 +2,8 @@
 
 - task-id：sentiment-factor-research（唯一稳定映射；旧入口docs/progress/sentiment-factor-research.md、docs/ops/work-progress/sentiment-factor-research.md均保留）。
 - 负责人／会话：本聊天/root，01a0ebfb-fd80-7c62-97c9-ac24d20f58e4；设备本地Air/Darwin arm64。仍负责原任务，不接管其他线、不结束研究。
-- 更新时间：2026-10-03 07:36:19 UTC（UTC；北京时间UTC+08:00）。
-- 状态：active（与用户共同明确下一阶段业务目标；来源资格查新6/6已用、归档待完成，0新市场拟合；原E输入仍blocked）。
+- 更新时间：2026-10-03 11:19:09 UTC（UTC；Asia/Shanghai为UTC+08:00）。
+- 状态：active（三用途目标已确认，正在整理共用证据/验收设计和来源归档；原E资料blocked，无新市场实验）。
 - 工作分支：task/sentiment-factor-progress；最近已推送完整成果commit：d53497de0accff778d0db96c010c30078e5b54d9。
 - 基础完整commit：d197600b6394244465e1c31b1766b7fc2652197c（远端main已存在基线）；原共享源HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9不是全部任务成果。协调规则初读commit0b758e7e10f720c44cbd898d511ff392f2857535，提交前再读最新。
 
@@ -114,3 +114,16 @@
 仅本地新材料：docs/experiments/raw/sentiment-source-qualification-refresh-2026-10-03/brief.json、source-ledger.json、source-manifest.json及公开README/API响应；原brief预算used=0是启动快照，实时6/6以source-ledger及continuation-state.json为准，不改启动快照。后续先完成目标对齐，再按现有授权整理本阶段已有证据、报告和本任务进度；没有新增实验/取数预算，不用调整参数找正结果。工作成果remote仍d53497de0accff778d0db96c010c30078e5b54d9。
 
 本次规则/相关变化已从53be5c72a6d4711d916361d5d1026e5fe144e609审阅到c44573bb61908ad7b6b0638ed8c605c02b2a2634：工具兼容、地图引用、观察页面日期、转黑定义和抵扣数学报告均保持各自范围，没有已登记同实验/同文件冲突。未登记者未知；不凭记录当锁。新Sol只读原任务/研究卡帮助梳理业务目标，0网络/0实验/0写入；不调用6Pro做常规整理。本条只更新自己的协调文件，不移交/结束原任务，不修改共享源码/策略/其他记录。
+
+
+## 三用途目标已确认：2026-10-03 11:19:09 UTC（UTC；Asia/Shanghai为UTC+08:00）
+
+用户最新原话：“都解决一下吧。注意不要和其他路做的重复了。”对应本聊天所问低位机会、持有风险、市场状态解释三用途；三项纳入同一情绪线，研究信息与完整交易收益分别验收。不是新增生产交易/完整仓位规则批准，也不因三用途把原预算乘三。
+
+当前工作：收尾已经执行6/6的来源核查并形成可定位归档；把S01—S05的已有结果整理成三用途证据矩阵、共同输入依赖与后续验收设计。仅新增本线报告sentiment-source-qualification-refresh-2026-10-03及既有同名raw、docs/research/sentiment-factor-library/three-use-evidence-2026-10-03.json、docs/superpowers/specs/2026-10-03-sentiment-three-uses-design.md；追加本库README/实验账、本任务两份进度与registry/INDEX自己的报告条目。无源码/API/UI/共享数学核/定义登记修改。本轮为已有证据整理与设计，不执行新市场拟合；来源预算6/6保持、Pro/付费0。一个已在本聊天工作的Sol只读证据映射，0网络/写入/实验，不另起重复研究。
+
+避重判断绑定最新coordination/lei@8778bd3f417834f49885047afddc22c8d72bf2b8，规则1.0不变。investor-observation-map已做12张市场理解卡/页面方案（成果d58a0740502207ca6dfeb9c9f18b1c135aa54632），负责专业投资目的、解释内容及拟议页面；本线“状态解释”只交S01—S05的实际含义、预测证据级别及不能推出的结论，作为该线引用资料，不重复12卡/导航/页面设计。market-observation仍维护日期/范围/既有宏观说明；technical-factor-sequence已转完整技术策略C（3deaad7a1724228780a62af49cf34fc046b0640a），明确排除本线情绪/宽度/E，本方不接其资金/小时数据题。external-quant聚焦外部系统能力，不重复装平台/找通用skill；dot-formula-time已交独立工具，dot三路及remote-core问题继续避让。当前文档路径和研究计算无已登记执行冲突；有主题相邻但按上述资料供应/内容实现分工，不作为锁。
+
+验收：三个用途逐项对应已测目标/量级/已有信息增量/反例/未测项和证据版本；完整资金与线上收益写未测量。已有来源6次各有结果/指纹，作者缺价样例不冒称本线真实供应商实测；旧实验/原始锁不改不重跑。历史20/50真实成员/身份/调整资料仍缺时，机会确认和原E风险比较维持blocked，不能用当前成员回填或缩短到2015自动放行。设计/归档完成不冒称三用途有效性全部解决。下一步按共同输入依赖推进，不按三个用途各重建一套工具。
+
+工作分支仍task/sentiment-factor-progress@d53497de0accff778d0db96c010c30078e5b54d9；本轮新增材料尚仅本地，推送后再记录准确提交。旧共享HEAD/脏修改/默认index不切换不清理；此范围同步读回后才修改新文档。
