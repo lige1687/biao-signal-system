@@ -1,0 +1,49 @@
+{
+  "checked_at": "2026-10-03T12:54:06.475936+08:00",
+  "system": "macOS15.6.1 arm64, Python3.11.7",
+  "archive": "local historical candidate package (not uploaded)",
+  "archive_sha256": "90d58158a4835c0f4d864d037fed4ceaf018b69feccf0db9fb764f12973c1f29",
+  "restore_directory": "independent local temporary restore directory (not uploaded)",
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "verify_package.py",
+        "--root",
+        "."
+      ],
+      "cwd": "restored-package",
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed\", \"files_verified\": 82, \"catalog_groups\": 50, \"python_files_parsed\": 17, \"strategy_originals_verified\": 2, \"direct_report_links\": \"present\", \"scope\": \"offline evidence handoff, not live markets/full app/investment performance\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "-p",
+        "no:cacheprovider",
+        "-q",
+        "tests/unit/test_turnover_snapshot.py",
+        "-k",
+        "fixed_snapshot or damaged_or_new_date or broken_json"
+      ],
+      "cwd": "restored-package/snapshot",
+      "exit_code": 0,
+      "stdout": "..........                                                               [100%]\n10 passed, 1 deselected in 0.29s\n",
+      "stderr": ""
+    }
+  ],
+  "status": "passed",
+  "not_verified": [
+    "Linux/Windows",
+    "clean dependency installation",
+    "full API/Web startup",
+    "live sources",
+    "investment performance"
+  ],
+  "network_calls": 0,
+  "research_reruns": 0,
+  "record_type": "sanitized derived index; original log remains unchanged locally"
+}

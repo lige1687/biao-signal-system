@@ -1,0 +1,55 @@
+{
+  "research_id": "investor-observation-map-2026-10-02",
+  "question": "A股和美股专业投资观察指标及事件如何分层解读，LEI当前覆盖什么，哪些缺口不与其他任务重叠？",
+  "mode": "report_only",
+  "decision_use": "形成观察与资料补齐清单；不据此改变交易策略",
+  "scope": "本项目的A股/美股，宽基ETF优先，兼顾趋势、定投、价值投资；不跨项目取数",
+  "existing_evidence": [
+    "docs/ops/work-progress/market-observation.md",
+    "docs/experiments/market-observation-candidates-2026-09-30.md",
+    "docs/research/current-standards.json"
+  ],
+  "target_and_baseline": "当前代码、已有本地数据、页面和研究证据，相对于一手来源支持的观察维度；无收益比较",
+  "success_and_falsification": "每项说明对象、频率、解读、限制、系统覆盖和负责人；查到已有实现则纠正缺失判断；无法确认的数据明确未验",
+  "allowed_actions": [
+    "只读源码和现有公开研究",
+    "有界公开来源检索",
+    "本任务报告及进度归档"
+  ],
+  "excluded": [
+    "生产接入",
+    "交易与规则变更",
+    "重复因子实验",
+    "修改其他任务文件",
+    "付费",
+    "仓库外写入"
+  ],
+  "budget": {
+    "web_calls": 6,
+    "maximum_search_queries_per_call": 4,
+    "market_experiments": 0,
+    "paid_actions": 0
+  },
+  "execution_status": "completed",
+  "evidence_status": "supported",
+  "strategy_sha256": {
+    "technical-system": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "technical-implementation": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "output_location": "docs/experiments/investor-observation-map-2026-10-02.md",
+  "completion_reason": "mode_boundary",
+  "scope_note": "descriptive coverage only; realtime/license/full history/investment effect not established",
+  "completed_at": "2026-10-03T12:55:57.079112+08:00",
+  "market_effect": "not_evaluated",
+  "web_calls_used": 6,
+  "handoff": "docs/ops/recovery/investor-observation-map/20261003",
+  "handoff_transmission": "historical local package only; not included in public progress branch",
+  "coordination_status": "active_owner_retained",
+  "latest_user_direction": "2026-10-03: synchronize safe成果/progress to specified existing GitHub; current AI retains ownership, no takeover or task-end",
+  "git_sync": {
+    "repository": "https://github.com/lige1687/biao-signal-system",
+    "branch": "task/investor-observation-map-progress",
+    "status": "prepared_not_pushed",
+    "updated_at": "2026-10-03T13:31:23.259732+08:00"
+  }
+}
