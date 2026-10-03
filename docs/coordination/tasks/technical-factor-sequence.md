@@ -9,9 +9,9 @@
 
 ## 版本与唯一入口映射
 
-仓库 https://github.com/lige1687/biao-signal-system 。工作分支 task/technical-factor-sequence-progress；已推送成果完整commit 6efff23eb30f69156ba9d79fba8f872634903452；发布基础d7da6cb0f9c127606b6faa572fabc9ee93f104f7。
+仓库 https://github.com/lige1687/biao-signal-system 。工作分支 task/technical-factor-sequence-progress；已推送成果完整commit d444316817e9330c2d72a4a90c655467b45dd5bb；发布基础d7da6cb0f9c127606b6faa572fabc9ee93f104f7。
 
-成果入口：https://github.com/lige1687/biao-signal-system/blob/6efff23eb30f69156ba9d79fba8f872634903452/docs/progress/technical-factor-sequence.md 。精确上传范围和测试见同commit的technical-factor-sequence-files.json、technical-factor-sequence-validation.json。原共享工作区HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，分支codex/factor-unit-research-20260915，有大量其他任务修改；不代表成果分支，不整批提交。
+成果入口：https://github.com/lige1687/biao-signal-system/blob/d444316817e9330c2d72a4a90c655467b45dd5bb/docs/progress/technical-factor-sequence.md 。精确上传范围和测试见同commit的technical-factor-sequence-files.json、technical-factor-sequence-validation.json。原共享工作区HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，分支codex/factor-unit-research-20260915，有大量其他任务修改；不代表成果分支，不整批提交。
 
 跨任务当前状态只有本文件；阶段历史仍为docs/ops/work-progress/technical-factor-sequence.md，旧阶段不当作实时锁或接管许可。本文件自身commit从Git历史定位，不无限补写自指SHA。
 
@@ -59,3 +59,15 @@
 A01/A02/A03、D01抵扣盒、双均线静态排列、60日斜率变化、简单顶部失效、回调层级及C01/Q01沿用封存用途和预算，详见docs/research/technical-semantic-evidence-map-2026-10-02.md。无新证据/定义纠错/明确新用途，不改名或调参重跑。邻居137起点事后等待长度与Q01当前可知日龄不同，禁止重复其已结案价格描述。
 
 下轮先fetch coordination/lei并读本文件和相关新增任务，核对工作分支准确commit与输入SHA，然后只做剩余资格步骤。权限不从旧交接包自动继承。本版新增：接入统一规则、旧入口映射、真实研究预算、窄范围避让和未知任务边界；推后核验回执在本地运维目录，不替其他任务改状态。
+
+## 本阶段更新：协作接入后继续原任务
+
+更新时间：2026-10-03T14:06:34.521708+08:00，Asia/Shanghai。最新读取协调commit 067b29d17c0488d04edeba8d056dbed424433cd0；COORDINATION.md规则SHA256 6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0。实际追加读取market-observation：只处理CPI说明和观察卡叙事，不涉及本候选、两适配器或workflow；与本任务没有已登记的模块/实验冲突。其他未登记任务实时状态仍未知。其他任务文件均完整保留。
+
+已核对工作分支远端最新完整SHA d444316817e9330c2d72a4a90c655467b45dd5bb；AGENTS只追加协作入口，原有工作分支字节前缀保留，进展文件增加唯一入口映射。没有将共享区脏AGENTS或其他代码带入。AGENTS变更提交f3bd94915c9bed45bf56f2d70b273c686ef8cae8；后续只增加输入核查文档，不改代码。
+
+原任务独立部分已继续：输入指纹未变，4ETF各1337行、2020-12-21至2026-06-30，无重复日期或异常close，历史窗口1318/对象。具体聚合回执在工作成果commit的docs/research/proposals/technical-sequence-next-2026-10-03/input-qualification.md；这不是机会数或效果验证。0新标签/拟合/市场请求；行动/到达时间等资格限制保留。
+
+当前已完成协作登记和基础输入完整性核查；下一步待办是固定候选的独立用途与表达，先读最新协调记录、核相关实时分工后再冻结；没有新效果进程正在运行，不把待办写成后台执行。新效果/共享工具修改在资格与分工明确前不启动。未遇已登记冲突，不借记录当锁。
+
+本轮实测：文档diff检查通过；本机共享工作区现有版本check_repo_hygiene.py退出0（只证明该工作区检查，不代表独立发布树或云端已测试）。本轮无交易代码变更，不重跑封存10项或大实验。独立索引和单文件协调提交不动原工作区、原暂存区和其他进程。输入完整性阶段已更新工作分支，同一任务状态继续active，原效果成果C01/Q01仍completed，旧预算不变。初次任务登记已推并fetch逐字读回；本次阶段状态同步提交须再核远端包含及内容。
