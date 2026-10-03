@@ -1,0 +1,44 @@
+{
+  "schema": "engineering-protocol/1",
+  "question": "Native exact-scoped experience and action planning reusable without full mining or model calls?",
+  "source_commit": "75e056067a90ed6c4cf2e1737df773eed79abce8",
+  "source_archive_sha256": "8df5596d37aa0f507ce5da30e58e63152c2b909dc95b9db99897b96e41512563",
+  "inputs": "synthetic documented action records only; no substitution of project RMSE for native discovery IC",
+  "parameters": {
+    "seed": 7,
+    "sequence": 2,
+    "native_default_config": true,
+    "planner_exploration_for_deterministic_check": 0,
+    "skill_recipes": [
+      "smooth_3",
+      "smooth_8",
+      "difference_1",
+      "rank_smooth_3"
+    ],
+    "skill_native_min_datasets": 3
+  },
+  "comparisons": [
+    "Action planner no history versus 100 synthetic failed generation proposals versus exact foreign bucket",
+    "Generate-default baseline versus one-step decision_value planner and simple stop-if-estimated-cost-exceeds-gain calculation",
+    "Variant selection with no procedure memory versus four independent artificial positive sources versus same-context negative sources",
+    "Known local contradiction, unknown dynamics, foreign target, duplicate single-dataset evidence"
+  ],
+  "counterexamples": [
+    "Four source panels claimed independent only within artificial construction, not four ETFs sharing dates",
+    "Source memory stays frozen despite local contradiction",
+    "Project existing forecasts have no native formula lineage/selection propensity/IC and cannot be imported by inventing them"
+  ],
+  "limits": {
+    "sources": 6,
+    "core": 1,
+    "followups": 3,
+    "model_calls": 0,
+    "market_fits": 0,
+    "paid": 0
+  },
+  "strategy_sha256": [
+    "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  ],
+  "acceptance": "exact native behavior plus independent arithmetic, source unchanged, restore original saved outputs; candidate quality and financial value explicitly unmeasured"
+}

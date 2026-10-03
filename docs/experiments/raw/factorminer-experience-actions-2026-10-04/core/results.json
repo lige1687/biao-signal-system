@@ -1,0 +1,598 @@
+{
+  "no_history": {
+    "schema_version": "research-actions-v1",
+    "sequence": 1,
+    "iteration": 0,
+    "policy": "decision_value",
+    "seed": 7,
+    "context": {
+      "bucket": "fixed-artificial-target"
+    },
+    "chosen": {
+      "kind": "generate",
+      "evaluations": 1,
+      "parent_formula": "",
+      "formula": "",
+      "parent_quality": 0.0
+    },
+    "estimates": [
+      {
+        "action": {
+          "kind": "generate",
+          "evaluations": 1,
+          "parent_formula": "",
+          "formula": "",
+          "parent_quality": 0.0
+        },
+        "expected_benefit": 0.005,
+        "utility_cost": 0.0015,
+        "net_value": 0.0035,
+        "success_probability": 0.25,
+        "posterior_alpha": 1.0,
+        "posterior_beta": 3.0,
+        "positive_gain_mean": 0.02
+      },
+      {
+        "action": {
+          "kind": "stop",
+          "evaluations": 0,
+          "parent_formula": "",
+          "formula": "",
+          "parent_quality": 0.0
+        },
+        "expected_benefit": 0.0,
+        "utility_cost": 0.0,
+        "net_value": 0.0,
+        "success_probability": 0.25,
+        "posterior_alpha": 1.0,
+        "posterior_beta": 3.0,
+        "positive_gain_mean": 0.02
+      }
+    ],
+    "probabilities": {
+      "generate": 1.0,
+      "stop": 0.0
+    },
+    "selection_probability": 1.0,
+    "rationale": "One-step estimated decision value, with declared randomized exploration.",
+    "utility_model": "excess discovery IC plus resolved delay-test decision loss; not future utility",
+    "config": {
+      "enabled": false,
+      "policy": "decision_value",
+      "seed": 7,
+      "exploration_probability": 0,
+      "prior_success": 1.0,
+      "prior_failure": 3.0,
+      "prior_gain": 0.02,
+      "evaluation_cost": 0.0005,
+      "generation_cost": 0.001,
+      "refinement_window": 3,
+      "delay_bars": 1,
+      "delay_retention": 0.5
+    }
+  },
+  "failed_history": {
+    "schema_version": "research-actions-v1",
+    "sequence": 101,
+    "iteration": 0,
+    "policy": "decision_value",
+    "seed": 7,
+    "context": {
+      "bucket": "fixed-artificial-target"
+    },
+    "chosen": {
+      "kind": "stop",
+      "evaluations": 0,
+      "parent_formula": "",
+      "formula": "",
+      "parent_quality": 0.0
+    },
+    "estimates": [
+      {
+        "action": {
+          "kind": "generate",
+          "evaluations": 1,
+          "parent_formula": "",
+          "formula": "",
+          "parent_quality": 0.0
+        },
+        "expected_benefit": 0.00019230769230769233,
+        "utility_cost": 0.0015,
+        "net_value": -0.0013076923076923077,
+        "success_probability": 0.009615384615384616,
+        "posterior_alpha": 1.0,
+        "posterior_beta": 103.0,
+        "positive_gain_mean": 0.02
+      },
+      {
+        "action": {
+          "kind": "stop",
+          "evaluations": 0,
+          "parent_formula": "",
+          "formula": "",
+          "parent_quality": 0.0
+        },
+        "expected_benefit": 0.0,
+        "utility_cost": 0.0,
+        "net_value": 0.0,
+        "success_probability": 0.25,
+        "posterior_alpha": 1.0,
+        "posterior_beta": 3.0,
+        "positive_gain_mean": 0.02
+      }
+    ],
+    "probabilities": {
+      "generate": 0.0,
+      "stop": 1.0
+    },
+    "selection_probability": 1.0,
+    "rationale": "No available action has positive estimated net decision value.",
+    "utility_model": "excess discovery IC plus resolved delay-test decision loss; not future utility",
+    "config": {
+      "enabled": false,
+      "policy": "decision_value",
+      "seed": 7,
+      "exploration_probability": 0,
+      "prior_success": 1.0,
+      "prior_failure": 3.0,
+      "prior_gain": 0.02,
+      "evaluation_cost": 0.0005,
+      "generation_cost": 0.001,
+      "refinement_window": 3,
+      "delay_bars": 1,
+      "delay_retention": 0.5
+    }
+  },
+  "foreign_context": {
+    "schema_version": "research-actions-v1",
+    "sequence": 101,
+    "iteration": 0,
+    "policy": "decision_value",
+    "seed": 7,
+    "context": {
+      "bucket": "other-target"
+    },
+    "chosen": {
+      "kind": "generate",
+      "evaluations": 1,
+      "parent_formula": "",
+      "formula": "",
+      "parent_quality": 0.0
+    },
+    "estimates": [
+      {
+        "action": {
+          "kind": "generate",
+          "evaluations": 1,
+          "parent_formula": "",
+          "formula": "",
+          "parent_quality": 0.0
+        },
+        "expected_benefit": 0.005,
+        "utility_cost": 0.0015,
+        "net_value": 0.0035,
+        "success_probability": 0.25,
+        "posterior_alpha": 1.0,
+        "posterior_beta": 3.0,
+        "positive_gain_mean": 0.02
+      },
+      {
+        "action": {
+          "kind": "stop",
+          "evaluations": 0,
+          "parent_formula": "",
+          "formula": "",
+          "parent_quality": 0.0
+        },
+        "expected_benefit": 0.0,
+        "utility_cost": 0.0,
+        "net_value": 0.0,
+        "success_probability": 0.25,
+        "posterior_alpha": 1.0,
+        "posterior_beta": 3.0,
+        "positive_gain_mean": 0.02
+      }
+    ],
+    "probabilities": {
+      "generate": 1.0,
+      "stop": 0.0
+    },
+    "selection_probability": 1.0,
+    "rationale": "One-step estimated decision value, with declared randomized exploration.",
+    "utility_model": "excess discovery IC plus resolved delay-test decision loss; not future utility",
+    "config": {
+      "enabled": false,
+      "policy": "decision_value",
+      "seed": 7,
+      "exploration_probability": 0,
+      "prior_success": 1.0,
+      "prior_failure": 3.0,
+      "prior_gain": 0.02,
+      "evaluation_cost": 0.0005,
+      "generation_cost": 0.001,
+      "refinement_window": 3,
+      "delay_bars": 1,
+      "delay_retention": 0.5
+    }
+  },
+  "direct_rule": {
+    "input": "same estimated gain and costs",
+    "expected_generate_net_value": -0.0013076923076923077,
+    "chosen": "stop",
+    "reason": "explicit arithmetic baseline; no LLM quality claim"
+  },
+  "without_memory": {
+    "mode": "structured",
+    "pack_id": "9d81eebc85de42fc87dcfc4278536adc60e771479aeaf376d6c5e644acc34127",
+    "variants": [
+      {
+        "recipe_id": "smooth_3",
+        "formula": "Mean($close, 3)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.25,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      },
+      {
+        "recipe_id": "smooth_8",
+        "formula": "Mean($close, 8)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.25,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      },
+      {
+        "recipe_id": "difference_1",
+        "formula": "Delta($close, 1)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.25,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      },
+      {
+        "recipe_id": "rank_smooth_3",
+        "formula": "Mean(CsRank($close), 3)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.25,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      }
+    ],
+    "selected_recipe": "difference_1",
+    "conditional_probability": 0.25
+  },
+  "with_scoped_memory": {
+    "mode": "structured",
+    "pack_id": "9d81eebc85de42fc87dcfc4278536adc60e771479aeaf376d6c5e644acc34127",
+    "variants": [
+      {
+        "recipe_id": "smooth_3",
+        "formula": "Mean($close, 3)",
+        "kind": "refine",
+        "score": 0.14999999999999997,
+        "probability": 0.9240022015977295,
+        "evidence": {
+          "status": "supported",
+          "skill_id": "e02b98859f21b58ac7d6a891e20e8596d007c83a52b96126531f4b90263788ad",
+          "source_datasets": 4,
+          "mean_effect": 0.14999999999999997,
+          "interval": [
+            0.14999999999999997,
+            0.14999999999999997
+          ],
+          "negative_transfer_observations": 0,
+          "contradictory_event_ids": [],
+          "source_influence": 1.0,
+          "local_effect": 0.0
+        }
+      },
+      {
+        "recipe_id": "smooth_8",
+        "formula": "Mean($close, 8)",
+        "kind": "refine",
+        "score": -0.1,
+        "probability": 0.025003350269406293,
+        "evidence": {
+          "status": "discouraged",
+          "skill_id": "31f94b3f219ebd7fc2d6e65ca3a149d86c282c0558c23923ae5a7f883af4ff9b",
+          "source_datasets": 4,
+          "mean_effect": -0.1,
+          "interval": [
+            -0.1,
+            -0.1
+          ],
+          "negative_transfer_observations": 0,
+          "contradictory_event_ids": [],
+          "source_influence": 1.0,
+          "local_effect": 0.0
+        }
+      },
+      {
+        "recipe_id": "difference_1",
+        "formula": "Delta($close, 1)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.0254972240664322,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      },
+      {
+        "recipe_id": "rank_smooth_3",
+        "formula": "Mean(CsRank($close), 3)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.0254972240664322,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      }
+    ],
+    "selected_recipe": "smooth_3",
+    "conditional_probability": 0.9240022015977295
+  },
+  "different_target": {
+    "mode": "structured",
+    "pack_id": "9d81eebc85de42fc87dcfc4278536adc60e771479aeaf376d6c5e644acc34127",
+    "variants": [
+      {
+        "recipe_id": "smooth_3",
+        "formula": "Mean($close, 3)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.25,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      },
+      {
+        "recipe_id": "smooth_8",
+        "formula": "Mean($close, 8)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.25,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      },
+      {
+        "recipe_id": "difference_1",
+        "formula": "Delta($close, 1)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.25,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      },
+      {
+        "recipe_id": "rank_smooth_3",
+        "formula": "Mean(CsRank($close), 3)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.25,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      }
+    ],
+    "selected_recipe": "difference_1",
+    "conditional_probability": 0.25
+  },
+  "unknown_dynamics": {
+    "mode": "structured",
+    "pack_id": "9d81eebc85de42fc87dcfc4278536adc60e771479aeaf376d6c5e644acc34127",
+    "variants": [
+      {
+        "recipe_id": "smooth_3",
+        "formula": "Mean($close, 3)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.25,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      },
+      {
+        "recipe_id": "smooth_8",
+        "formula": "Mean($close, 8)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.25,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      },
+      {
+        "recipe_id": "difference_1",
+        "formula": "Delta($close, 1)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.25,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      },
+      {
+        "recipe_id": "rank_smooth_3",
+        "formula": "Mean(CsRank($close), 3)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.25,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      }
+    ],
+    "selected_recipe": "difference_1",
+    "conditional_probability": 0.25
+  },
+  "100_rows_one_dataset": {
+    "mode": "structured",
+    "pack_id": "9d81eebc85de42fc87dcfc4278536adc60e771479aeaf376d6c5e644acc34127",
+    "variants": [
+      {
+        "recipe_id": "smooth_3",
+        "formula": "Mean($close, 3)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.25,
+        "evidence": {
+          "status": "exploratory",
+          "skill_id": "e02b98859f21b58ac7d6a891e20e8596d007c83a52b96126531f4b90263788ad",
+          "source_datasets": 1,
+          "mean_effect": 0.14999999999999997,
+          "interval": [
+            null,
+            null
+          ],
+          "negative_transfer_observations": 0,
+          "contradictory_event_ids": [],
+          "source_influence": 1.0,
+          "local_effect": 0.0
+        }
+      },
+      {
+        "recipe_id": "smooth_8",
+        "formula": "Mean($close, 8)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.25,
+        "evidence": {
+          "status": "exploratory",
+          "skill_id": "31f94b3f219ebd7fc2d6e65ca3a149d86c282c0558c23923ae5a7f883af4ff9b",
+          "source_datasets": 1,
+          "mean_effect": -0.09999999999999998,
+          "interval": [
+            null,
+            null
+          ],
+          "negative_transfer_observations": 0,
+          "contradictory_event_ids": [],
+          "source_influence": 1.0,
+          "local_effect": 0.0
+        }
+      },
+      {
+        "recipe_id": "difference_1",
+        "formula": "Delta($close, 1)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.25,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      },
+      {
+        "recipe_id": "rank_smooth_3",
+        "formula": "Mean(CsRank($close), 3)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.25,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      }
+    ],
+    "selected_recipe": "difference_1",
+    "conditional_probability": 0.25
+  },
+  "local_contradiction": {
+    "mode": "structured",
+    "pack_id": "9d81eebc85de42fc87dcfc4278536adc60e771479aeaf376d6c5e644acc34127",
+    "variants": [
+      {
+        "recipe_id": "smooth_3",
+        "formula": "Mean($close, 3)",
+        "kind": "refine",
+        "score": -0.12500000000000003,
+        "probability": 0.02586495547080989,
+        "evidence": {
+          "status": "under_review",
+          "skill_id": "e02b98859f21b58ac7d6a891e20e8596d007c83a52b96126531f4b90263788ad",
+          "source_datasets": 4,
+          "mean_effect": 0.14999999999999997,
+          "interval": [
+            0.14999999999999997,
+            0.14999999999999997
+          ],
+          "negative_transfer_observations": 1,
+          "contradictory_event_ids": [
+            "artificial-local-negative"
+          ],
+          "source_influence": 0.5,
+          "local_effect": -0.4
+        }
+      },
+      {
+        "recipe_id": "smooth_8",
+        "formula": "Mean($close, 8)",
+        "kind": "refine",
+        "score": -0.1,
+        "probability": 0.028018991236059384,
+        "evidence": {
+          "status": "discouraged",
+          "skill_id": "31f94b3f219ebd7fc2d6e65ca3a149d86c282c0558c23923ae5a7f883af4ff9b",
+          "source_datasets": 4,
+          "mean_effect": -0.1,
+          "interval": [
+            -0.1,
+            -0.1
+          ],
+          "negative_transfer_observations": 0,
+          "contradictory_event_ids": [],
+          "source_influence": 1.0,
+          "local_effect": 0.0
+        }
+      },
+      {
+        "recipe_id": "difference_1",
+        "formula": "Delta($close, 1)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.4730580266465654,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      },
+      {
+        "recipe_id": "rank_smooth_3",
+        "formula": "Mean(CsRank($close), 3)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.4730580266465654,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      }
+    ],
+    "selected_recipe": "rank_smooth_3",
+    "conditional_probability": 0.4730580266465654
+  }
+}

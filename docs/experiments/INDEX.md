@@ -608,3 +608,5 @@
   与本目录研究线互不隶属
 
 - [STUMPY多日形态候选发现](stumpy-shape-mining-2026-10-03.md)：工具限定通过，金融增量未测量。
+
+- [FactorMiner经验到下一行动](factorminer-experience-actions-2026-10-04.md)：有限入口已核，AI候选质量未测量。

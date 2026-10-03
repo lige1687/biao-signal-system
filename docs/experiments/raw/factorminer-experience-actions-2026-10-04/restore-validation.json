@@ -1,0 +1,34 @@
+{
+  "followup_batch": 2,
+  "saved_only": [
+    {
+      "command": [
+        "python3",
+        "-S",
+        "verify_saved.py"
+      ],
+      "directory": "repository local independent copy",
+      "case": "intact",
+      "exit_code": 0,
+      "seconds": 0.029016458000114653,
+      "stdout": "{\"status\": \"passed\", \"files\": 22, \"independent_values\": 27, \"max_absolute_error\": 5.551115123125783e-17, \"model_calls\": 0, \"new_fits\": 0}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "-S",
+        "verify_saved.py"
+      ],
+      "directory": "repository local independent copy",
+      "case": "corrupted-copy",
+      "exit_code": 1,
+      "seconds": 0.028048666998074623,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"${ROOT}/.biao/external-factorminer-20261004/saved-only-restore/verify_saved.py\", line 26, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"${ROOT}/.biao/external-factorminer-20261004/saved-only-restore/verify_saved.py\", line 12, in main\n    p=ROOT/item['path'];assert len(p.read_bytes())==item['bytes'];assert hashlib.sha256(p.read_bytes()).hexdigest()==item['sha256'],item['path']\n                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  ],
+  "source_unchanged": true,
+  "new_models": 0,
+  "new_fits": 0
+}

@@ -1,0 +1,88 @@
+{
+  "schema": "experience-choice-result/1",
+  "status": "research_unqualified",
+  "upstream_commit": "75e056067a90ed6c4cf2e1737df773eed79abce8",
+  "selected": {
+    "recipe_id": "smooth_3",
+    "formula": "Mean($close, 3)",
+    "kind": "refine"
+  },
+  "guidance": {
+    "mode": "structured",
+    "pack_id": "9d81eebc85de42fc87dcfc4278536adc60e771479aeaf376d6c5e644acc34127",
+    "variants": [
+      {
+        "recipe_id": "smooth_3",
+        "formula": "Mean($close, 3)",
+        "kind": "refine",
+        "score": 0.14999999999999997,
+        "probability": 0.9240022015977295,
+        "evidence": {
+          "status": "supported",
+          "skill_id": "e02b98859f21b58ac7d6a891e20e8596d007c83a52b96126531f4b90263788ad",
+          "source_datasets": 4,
+          "mean_effect": 0.14999999999999997,
+          "interval": [
+            0.14999999999999997,
+            0.14999999999999997
+          ],
+          "negative_transfer_observations": 0,
+          "contradictory_event_ids": [],
+          "source_influence": 1.0,
+          "local_effect": 0.0
+        }
+      },
+      {
+        "recipe_id": "smooth_8",
+        "formula": "Mean($close, 8)",
+        "kind": "refine",
+        "score": -0.1,
+        "probability": 0.025003350269406293,
+        "evidence": {
+          "status": "discouraged",
+          "skill_id": "31f94b3f219ebd7fc2d6e65ca3a149d86c282c0558c23923ae5a7f883af4ff9b",
+          "source_datasets": 4,
+          "mean_effect": -0.1,
+          "interval": [
+            -0.1,
+            -0.1
+          ],
+          "negative_transfer_observations": 0,
+          "contradictory_event_ids": [],
+          "source_influence": 1.0,
+          "local_effect": 0.0
+        }
+      },
+      {
+        "recipe_id": "difference_1",
+        "formula": "Delta($close, 1)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.0254972240664322,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      },
+      {
+        "recipe_id": "rank_smooth_3",
+        "formula": "Mean(CsRank($close), 3)",
+        "kind": "refine",
+        "score": 0.0,
+        "probability": 0.0254972240664322,
+        "evidence": {
+          "status": "out_of_scope",
+          "source_datasets": 0
+        }
+      }
+    ],
+    "selected_recipe": "smooth_3",
+    "conditional_probability": 0.9240022015977295
+  },
+  "limitations": [
+    "These are native discovery-IC procedure suggestions, not project financial validation",
+    "Distinct dataset IDs do not prove independent market samples",
+    "Four fixed edits; no new LLM hypothesis or formula mining",
+    "Sequence and seed must be frozen before selection; no rerolling for a preferred edit"
+  ]
+}

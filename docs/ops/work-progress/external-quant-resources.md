@@ -1,3 +1,21 @@
+# 2026-10-04 Asia/Shanghai：FactorMiner有限记忆建议入口已验收
+
+external-quant-resources原负责人继续。本轮工程问题completed；真实AI候选质量比较blocked，等待可用授权模型/接口及调用次数，已在本聊天提出合并问题，不请求密钥。长期目标未完成，不把工程阶段当金融增量。
+
+按用户最新AGENTS的codex/推送要求，本次成果准备发布codex/external-quant-progress-20261004，基础92d2cf0f41499c150c5f18d091a6e11fc5b49087；原task/external-quant-progress保留不改、不切换共享脏区。本文件提交前快照，准确发布SHA见coordination/lei同名task记录与路径历史，不预写自指已推。设备本地Mac arm64。
+
+已完成：固定官方源码75e056067a90ed6c4cf2e1737df773eed79abce8、MIT全文、23模块原件指纹；研究经验/下一行动原生21检查；第一方experience_actions.py独立入口，6测试非跳过、CLI与原生结果一致、重复输出退出2、临时目录恢复一致；标准库27独立数值最大差5.55e-17、破坏副本退出1。真实案例输入、模型、收益均未测量。报告docs/experiments/factorminer-experience-actions-2026-10-04.md及同名raw完整命令/输入/输出/许可/manifest。
+
+具体能力：100人工失败使原生选择从生成变停止，与强简单算式相同；同目标4人工来源支持的修改选择权重25%→92.4002%，局部相反结果后2.5865%，不同目标/未知动态/同源重复100条保持25%。权重不代表有效概率，四种固定修改不等于新LLM发现。RMSE不能伪造为原生发现相关质量，旧记录缺来源/选择/公式关系不可倒填。
+
+环境：默认3.11静态不支持上游两处3.12语法；用了已有Codex运行时Python3.12.14/NumPy2.3.5，官方SciPy1.17.1 wheel核SHA后仅仓内解压，无仓库外修改。完整平台/默认长期挖掘/模型服务未安装。源码包2293875字节、SHA8df5596d37aa0f507ce5da30e58e63152c2b909dc95b9db99897b96e41512563；wheel28172662字节与四人工SQLite仅本地，公开恢复URL/文件大小/SHA在raw；无真实行情、密钥、权重或私人资料上传。
+
+本轮5/6来源、核心1+后续2/3，0模型/市场拟合/行情/付费。累计66来源、29工程批、16旧真实拟合；STUMPY/DEAP/AlphaGen/tsfresh/arch/RD-Agent/QuantaAlpha封存不重做。无本题运行进程/助手/checkpoint。可用独立部分已执行到验收，不因写阶段计划停步。
+
+正在做：成果检查与安全发布。下一必要步骤：相同材料/模型/调用数的真实AI候选质量对照，目前调用范围未明确，不能假设可用付费服务或借旧额度；依赖解除后先冻结材料/错误标准和预算，再执行比较。共享workflow整合继续暂停；不接管技术周颜色、量价成交分配、情绪或D3/经典基准。最新协调核至5fc0ae706d9a9cc41f4241acfd5abec4be14059c，相关范围均主动避开FactorMiner，无已登记同题/文件冲突，记录不是锁。
+
+---
+
 # 2026-10-04 Asia/Shanghai：形态发现入口验收，AI流程初筛完成
 
 原负责人继续；本有界工程阶段completed，长期外部增量任务保留。工作分支task/external-quant-progress，基础ab96cf88ea91ff7d019c9b66ebca9d617b9d090d；本次发布commit以该文件Git历史及coordination/lei同名记录为准。设备本地Mac arm64。无后台实验/训练/checkpoint。

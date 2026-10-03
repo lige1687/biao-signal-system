@@ -1,0 +1,79 @@
+[
+  {
+    "command": [
+      "${PYTHON312}",
+      "tests/unit/test_experience_actions.py",
+      "-v"
+    ],
+    "cwd": "${ROOT}",
+    "exit_code": 0,
+    "seconds": 1.593495458997495,
+    "stdout": "",
+    "stderr": "test_dataset_id_excludes_same_source (__main__.TestExperienceActions.test_dataset_id_excludes_same_source) ... ok\ntest_foreign_target_is_uniform (__main__.TestExperienceActions.test_foreign_target_is_uniform) ... ok\ntest_inconsistent_context_even_with_recomputed_pack_digest_rejected (__main__.TestExperienceActions.test_inconsistent_context_even_with_recomputed_pack_digest_rejected) ... ok\ntest_native_rmse_substitution_rejected (__main__.TestExperienceActions.test_native_rmse_substitution_rejected) ... ok\ntest_scoped_source_matches_native_result (__main__.TestExperienceActions.test_scoped_source_matches_native_result) ... ok\ntest_source_hash_mismatch_rejected_before_import (__main__.TestExperienceActions.test_source_hash_mismatch_rejected_before_import) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 1.450s\n\nOK\n"
+  },
+  {
+    "command": [
+      "${PYTHON312}",
+      "-m",
+      "lei_signal.research.experience_actions",
+      "--input",
+      "${ROOT}/docs/experiments/raw/factorminer-experience-actions-2026-10-04/example-input.json",
+      "--upstream",
+      "${ROOT}/.biao/external-factorminer-20261004/source/factorminer-75e056067a90ed6c4cf2e1737df773eed79abce8",
+      "--provenance",
+      "${ROOT}/docs/experiments/raw/factorminer-experience-actions-2026-10-04/component-provenance.json",
+      "--skill-pack",
+      "${ROOT}/docs/experiments/raw/factorminer-experience-actions-2026-10-04/core/skill-pack.json",
+      "--output",
+      "${ROOT}/docs/experiments/raw/factorminer-experience-actions-2026-10-04/adapter"
+    ],
+    "cwd": "${ROOT}",
+    "exit_code": 0,
+    "seconds": 1.2237448750020121,
+    "stdout": "{\"status\": \"research_unqualified\", \"selected_recipe\": \"smooth_3\"}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "${PYTHON312}",
+      "-m",
+      "lei_signal.research.experience_actions",
+      "--input",
+      "${ROOT}/docs/experiments/raw/factorminer-experience-actions-2026-10-04/example-input.json",
+      "--upstream",
+      "${ROOT}/.biao/external-factorminer-20261004/source/factorminer-75e056067a90ed6c4cf2e1737df773eed79abce8",
+      "--provenance",
+      "${ROOT}/docs/experiments/raw/factorminer-experience-actions-2026-10-04/component-provenance.json",
+      "--skill-pack",
+      "${ROOT}/docs/experiments/raw/factorminer-experience-actions-2026-10-04/core/skill-pack.json",
+      "--output",
+      "${ROOT}/docs/experiments/raw/factorminer-experience-actions-2026-10-04/adapter"
+    ],
+    "cwd": "${ROOT}",
+    "exit_code": 2,
+    "seconds": 0.036726041998917935,
+    "stdout": "",
+    "stderr": "usage: experience_actions.py [-h] --input INPUT --upstream UPSTREAM\n                             --provenance PROVENANCE [--skill-pack SKILL_PACK]\n                             --output OUTPUT\nexperience_actions.py: error: Output exists; evidence may not be overwritten\n"
+  },
+  {
+    "command": [
+      "${PYTHON312}",
+      "experience_actions.py",
+      "--input",
+      "input.json",
+      "--upstream",
+      "${ROOT}/.biao/external-factorminer-20261004/source/factorminer-75e056067a90ed6c4cf2e1737df773eed79abce8",
+      "--provenance",
+      "provenance.json",
+      "--skill-pack",
+      "pack.json",
+      "--output",
+      "result"
+    ],
+    "cwd": "${ROOT}/.biao/external-factorminer-20261004/fresh-recovery",
+    "exit_code": 0,
+    "seconds": 1.234001625001838,
+    "stdout": "{\"status\": \"research_unqualified\", \"selected_recipe\": \"smooth_3\"}\n",
+    "stderr": ""
+  }
+]
