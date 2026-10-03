@@ -1,0 +1,200 @@
+- generic: 人工资料验收页面 · 不是真实行情 · 场景 normal
+- navigation "主导航":
+  - link "BIAO 看盘首页":
+    - /url: /
+    - text: BIAO
+    - generic: 趋势研究
+  - link "看盘":
+    - /url: /
+  - link "市场理解":
+    - /url: /market-understanding
+  - link "行业板块":
+    - /url: /sectors
+  - link "情绪":
+    - /url: /sentiment
+  - link "今日操作":
+    - /url: /ops
+  - link "我的持仓":
+    - /url: /portfolio
+  - link "监督待办":
+    - /url: /plans
+  - generic "资讯与认知":
+    - text: 资讯与认知
+    - generic: ⌄
+  - generic "策略研究":
+    - text: 策略研究
+    - generic: ⌄
+  - link "工作台":
+    - /url: /agent
+  - button "AI 助手"
+- main:
+  - paragraph: 看市场，也读懂变化
+  - heading "市场理解" [level=1]
+  - paragraph: 先问这项信息在回答什么，再看变化、配套证据和另一种解释。
+  - link "研究依据 ↗":
+    - /url: https://github.com/lige1687/biao-signal-system/blob/d58a0740502207ca6dfeb9c9f18b1c135aa54632/docs/experiments/market-understanding-expansion-2026-10-03.md
+  - navigation "市场理解页内导航":
+    - link "已有读数":
+      - /url: "#mu-now"
+    - link "观察地图":
+      - /url: "#mu-map"
+    - link "指标读法":
+      - /url: "#mu-reading"
+    - link "联系ETF":
+      - /url: "#mu-etf"
+  - region "阅读范围":
+    - group "观察市场":
+      - generic: 观察市场
+      - button "A股"
+      - button "美股" [pressed]
+    - group "我的阅读目的":
+      - generic: 我的阅读目的
+      - button "趋势交易"
+      - button "定投与长期配置"
+      - button "价值投资" [pressed]
+    - paragraph:
+      - text: 先理解经营和估值假设，再看经济背景、持有载体与风险。
+      - generic: 切换方法只调整阅读顺序，不改变读数或交易规则。
+  - region "美股 · 目前能读到什么":
+    - paragraph: 01 / 先看事实
+    - heading "美股 · 目前能读到什么" [level=2]
+    - button "重新读取"
+    - paragraph: 读数按各自资料所属期展示；这不是“今日行情已齐全”的声明。所有内容用于理解市场。
+    - paragraph: 可显示读数 3 项；接口返回 3 项。页面整理时间：2026-10-03T09:00:00+08:00，不是数据公布时间。
+    - paragraph: 部分来源读取失败；缺失不代表市场没有变化。详情请在原观察页核对。
+    - article:
+      - heading "VIX（人工）" [level=3]
+      - generic: 来源标记已核对
+      - strong: 20指数点
+      - paragraph: 前20个有效观测日 0指数点
+      - paragraph: 人工资料：只用于界面检查，不用于投资判断。
+      - paragraph: 资料所属期：2026-09-29
+      - generic "对象、日期与来源"
+      - paragraph: 人工验证对象，无真实行情
+      - paragraph: 来源发布：2026-09-30（仅日期）
+      - paragraph: 系统取得：未记录；不能代替来源发布时点。
+      - paragraph: 人工资料仅检查界面
+      - list:
+        - listitem: 人工测试，不是真实市场数据
+      - paragraph: 人工测试来源 · 定义版本：synthetic-ui/1
+    - article:
+      - heading "NAAIM（人工）" [level=3]
+      - generic: 历史读数 · 已过期
+      - strong: 70%
+      - paragraph: 前20个有效观测日 0百分点
+      - paragraph: 人工资料：只用于界面检查，不用于投资判断。
+      - paragraph: 调查所属周：2026-05-11
+      - generic "对象、日期与来源"
+    - article:
+      - heading "AAII（人工）" [level=3]
+      - generic: 按来源延迟发布
+      - strong: "-2百分点"
+      - paragraph: 前20个有效观测日 0百分点
+      - paragraph: 人工资料：只用于界面检查，不用于投资判断。
+      - paragraph: 调查所属周：2026-09-24
+      - generic "对象、日期与来源"
+    - paragraph: 本次尚未返回：纳斯达克100预期波动率 VXN、美国10年实际利率、美国高收益债信用利差。不推断其数值或方向。
+    - strong: 事件观察：日历尚未接入本页
+    - paragraph: 关注数据发布、利率决定、财报、政策、指数调整与产品事项。先核官方时间、所属期、前值是否修订；没有可比预期，就不判断“超预期”。
+    - link "到资讯流核对事件 →":
+      - /url: /news
+  - region "专业投资者的观察地图":
+    - paragraph: 02 / 带着问题读
+    - heading "专业投资者的观察地图" [level=2]
+    - generic: 50组目录 · 8个主题
+    - paragraph: 机构和个人的目标不同，没有一份人人每天必看的清单。先选问题，再决定需要哪些资料。
+    - generic "谁在看，想解决什么问题？"
+    - button "估值与经营 价格背后的盈利和现金是否支持假设？":
+      - strong: 估值与经营
+      - generic: 价格背后的盈利和现金是否支持假设？
+    - button "经济与融资环境 需求、物价、资金价格和信用如何联动？":
+      - strong: 经济与融资环境
+      - generic: 需求、物价、资金价格和信用如何联动？
+    - button "ETF产品本身 持有这只产品要付什么成本、承担什么额外风险？":
+      - strong: ETF产品本身
+      - generic: 持有这只产品要付什么成本、承担什么额外风险？
+    - button "个人计划与组合 这些信息与我的投入、期限和风险有什么关系？":
+      - strong: 个人计划与组合
+      - generic: 这些信息与我的投入、期限和风险有什么关系？
+    - button "趋势与市场参与 上涨或下跌是否广泛、持续？":
+      - strong: 趋势与市场参与
+      - generic: 上涨或下跌是否广泛、持续？
+    - button "调查、仓位与预期 谁说乐观、谁实际持有什么、资料有多旧？":
+      - strong: 调查、仓位与预期
+      - generic: 谁说乐观、谁实际持有什么、资料有多旧？
+    - button "杠杆与交易集中 借款和合约头寸怎样变化？":
+      - strong: 杠杆与交易集中
+      - generic: 借款和合约头寸怎样变化？
+    - button "波动与保护成本 市场为多大的波动或保护付多少钱？":
+      - strong: 波动与保护成本
+      - generic: 市场为多大的波动或保护付多少钱？
+    - text: 找指标
+    - searchbox "找指标": FINRA
+    - button "全部主题"
+    - paragraph: 全部主题 · 当前市场匹配 2 组
+    - paragraph: 覆盖说明来自2026-10-03的研究盘点，表示系统的已知能力；不代表此刻已经取得行情。中美适用范围已分别筛选。
+    - generic "16FINRA保证金借款余额、同比/环比及可比规模比 月末快照、后发布":
+      - text: "16"
+      - strong: FINRA保证金借款余额、同比/环比及可比规模比
+      - generic: 月末快照、后发布
+    - generic "17FINRA现金账户/保证金账户自由贷方余额 月":
+      - text: "17"
+      - strong: FINRA现金账户/保证金账户自由贷方余额
+      - generic: 月
+  - region "指标升降，分别意味着什么":
+    - paragraph: 03 / 多读一层
+    - heading "指标升降，分别意味着什么" [level=2]
+    - generic: 首批12项详细读法
+    - paragraph: “现在很高”与“最近在上升”是两件事。下面沿用相同市场、主题和搜索条件；卡片解释概念，未接通的指标不展示假读数。
+    - article:
+      - paragraph: 杠杆与交易集中 · 指标说明
+      - heading "美国FINRA客户保证金借款" [level=3]
+      - paragraph: 客户证券账户融资规模是否扩张？
+      - paragraph: 本页未加载此项真实读数。
+      - generic "展开读法与容易误判的地方" [active]
+      - term: 位置高低
+      - definition: 名义规模大不等于整个市场杠杆率高
+      - term: 数值上升
+      - definition: 报告余额增加；需要分辨交易活动、覆盖与计算变化
+      - term: 数值下降
+      - definition: 报告余额减少；可能去杠杆，也可能报告方法或范围变化
+      - term: 一起检查
+      - definition:
+        - list:
+          - listitem: 同期市场规模
+          - listitem: 借款余额变化速度
+          - listitem: 两类客户账户自由贷方余额
+      - term: 另一种解释
+      - definition: 股市规模扩大时，借款绝对额可以上升而相对规模并未上升。
+      - term: 阈值怎么用
+      - definition: 零/正负是变化描述；历史分位必须固定可比窗口
+      - generic "定义、频率和证据"
+  - region "与我关注的ETF有什么关系":
+    - paragraph: 04 / 联系自己的产品
+    - heading "与我关注的ETF有什么关系" [level=2]
+    - paragraph: 先按基金文件确认下面三项。本页只按你明确选择的范围解释，不根据基金名称猜测，也不读取持仓金额；这不是具体基金的自动核验。
+    - text: 标的资产范围
+    - combobox "标的资产范围":
+      - option "尚未确认 / 其他资产"
+      - option "A股股票"
+      - option "美国股票" [selected]
+    - text: 交易计价币种
+    - combobox "交易计价币种":
+      - option "尚未确认 / 其他币种"
+      - option "人民币" [selected]
+      - option "美元"
+    - text: 产品结构
+    - combobox "产品结构":
+      - option "尚未确认"
+      - option "普通ETF" [selected]
+      - option "杠杆或反向ETF"
+    - list:
+      - listitem: 你选择了美国股票资产：先核具体指数。VIX对应标普500，VXN对应纳斯达克100，不能互相替代。
+      - listitem: 资产与计价币种不同：另核汇率、是否有汇率对冲，以及价格和净值的时间是否一致；不能据此断言有套利机会。
+      - listitem: 你选择了普通ETF：一起核费用、买卖价差、跟踪差异和持仓集中程度；低费用不等于总成本低。
+    - paragraph: 这三个选择独立于上方观察市场。具体指数、成分、费用版本、币种对冲和净值时点仍需核实；这里只提供检查顺序。
+    - link "回到我的持仓核对产品 →":
+      - /url: /portfolio
+  - text: 内容版本 market-understanding-content/2026-10-03 · 解释与观察层，不参与LEI触发、失效或退出判定。使用效果和投资收益尚未测量。
+  - link "来源、反例与未解决问题 ↗":
+    - /url: https://github.com/lige1687/biao-signal-system/blob/d58a0740502207ca6dfeb9c9f18b1c135aa54632/docs/experiments/market-understanding-expansion-2026-10-03.md

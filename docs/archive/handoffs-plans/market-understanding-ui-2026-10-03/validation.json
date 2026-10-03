@@ -1,0 +1,145 @@
+{
+  "schema": "market-understanding-ui-validation/1",
+  "updated_at": "2026-10-03T19:44:10.415163+08:00",
+  "timezone": "Asia/Shanghai",
+  "base_commit": "d58a0740502207ca6dfeb9c9f18b1c135aa54632",
+  "coordination_rules_read": "8778bd3f417834f49885047afddc22c8d72bf2b8",
+  "coordination_scope_receipt": "c4ec1ccdc9a861a60c1aa8deecb63201e9a691f8",
+  "coordination_rechecked": "6b9861b20ac9890fc412326094219d225be687f6",
+  "environment": {
+    "os": "macOS-15.6.1-arm64-arm-64bit",
+    "node": "22.22.1",
+    "npm": "10.9.4",
+    "python": "3.11.7",
+    "react": "18.3.1",
+    "vite": "5.4.21"
+  },
+  "checks": [
+    {
+      "command": "npm ci --ignore-scripts --no-audit --no-fund",
+      "cwd": "web",
+      "exit_code": 0,
+      "result": "79 packages installed from task lockfile; original shared lockfile differed and was not reused"
+    },
+    {
+      "command": "npm run build",
+      "cwd": "web",
+      "phase": "before edits",
+      "exit_code": 0,
+      "modules": 745,
+      "warnings": [
+        "Existing chunk >500kB"
+      ]
+    },
+    {
+      "command": "node web/run-market-understanding-regression.mjs",
+      "cwd": ".",
+      "phase": "final boundary regression",
+      "exit_code": 0,
+      "passed": 22,
+      "kind": "synthetic software checks, not financial effects"
+    },
+    {
+      "command": "npm run build",
+      "cwd": "web",
+      "phase": "final application source",
+      "exit_code": 0,
+      "modules": 750,
+      "warnings": [
+        "Existing large chunks remain; new content increases main bundle by approximately61kB before gzip"
+      ]
+    },
+    {
+      "command": "git diff --check",
+      "cwd": ".",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/check_repo_hygiene.py",
+      "cwd": ".",
+      "exit_code": 1,
+      "result": "Two existing structural warnings: native worktree .git file and user-required docs/progress directory. Checker unchanged from base SHA256 b1aca70670bafe840a8b03a76c9c216dc11d6d737a330c240870ae31ec982415. No fix of shared checker within this UI scope."
+    }
+  ],
+  "browser": {
+    "method": "Codex IAB actual built page with browser-fixture.py; no external API/provider or DB",
+    "normal_cn": "zero retained; missing remains dash; fixed turnover labelled historical; frontend bounds verified",
+    "normal_us": "market separated; stale survey week, delayed data and date-only publication visible; missing metrics named",
+    "interaction": [
+      "method reorders themes",
+      "FINRA searches borrowing and cash cards after correction",
+      "keyboard Enter opens source and explanation details",
+      "explicit US+CNY ETF choice shows currency qualification",
+      "existing module links resolve to registered routes"
+    ],
+    "errors": [
+      "503 clear error",
+      "404 explicit unconnected",
+      "wrong response market rejected",
+      "empty response lists absent metrics",
+      "null+current and invalid change unit excluded with notice"
+    ],
+    "loading": "slow fixture exposed loading message while knowledge remained readable",
+    "viewport": {
+      "width": 390,
+      "height": 844,
+      "document_scroll_width": 390,
+      "no_horizontal_overflow": true
+    },
+    "screenshots": [
+      "market-understanding-preview.png",
+      "mobile-map-preview.png",
+      "desktop-synthetic.png",
+      "mobile-unconnected.png"
+    ],
+    "final_bundle_sha256": "94f51faa85ebcd5795f1c9e02fbf21ab90ad98f966a83c1b15fff63750320cf8"
+  },
+  "review": {
+    "file": "review.md",
+    "initial_important": 2,
+    "resolved": 2,
+    "open_critical_or_important": 0,
+    "fix_detail": "Null/current states and declared change unit; event heading corrected"
+  },
+  "failures_retained": [
+    "Initial regression module absent (red); runner was also made cwd-independent",
+    "Browser getByLabel exact selection timed out; DOM showed correctly named combobox and role-based selection succeeded",
+    "Direct node_repl playwright import failed; used supported CUA browser instead",
+    "Missing/current test failed before repair; source label mismatch and missing topic targets corrected",
+    "Repo hygiene not globally green as above",
+    "Credential-pattern review initially flagged literal https://u:p@example.com in URL-rejection unit test; reviewed as synthetic reserved example domain, exact literal only excluded from token scan. No real credential found."
+  ],
+  "not_verified": [
+    "True upstream observations API on this branch (backend implementation remains on owner branch55d8aa96)",
+    "Production deployment",
+    "Real ETF product metadata/holdings mapping",
+    "FINRA/CFTC/ETF/new event feeds or redistribution rights",
+    "Automatic freshness/future-data qualification beyond server contract",
+    "Linux/Windows and real devices",
+    "User comprehension improvement",
+    "Online investment returns"
+  ],
+  "research_budget": {
+    "prior_public_source_calls": 12,
+    "current_public_source_calls": 0,
+    "market_experiments": 0,
+    "fits": 0,
+    "paid_calls": 0
+  },
+  "processes": {
+    "fixture_old_session": 52804,
+    "fixture_final_session": 42822,
+    "both_exited": true,
+    "exit_code": 0,
+    "browser_tab_closed": true,
+    "market_experiments_running": false,
+    "other_tasks_processes": "not inspected or stopped"
+  },
+  "shared_workspace": {
+    "branch": "codex/factor-unit-research-20260915",
+    "head": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
+    "index_sha256": "83bb48fe19dcb073d4a449bcef331c745c942128ea53ca2a19c1f6791cbe7f92",
+    "agents_sha256": "060a0de558b0543f6afee81e8aa5f903daf348e9381b825ec3d141ec8763dc4e",
+    "unchanged": true
+  }
+}

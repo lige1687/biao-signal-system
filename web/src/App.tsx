@@ -6,6 +6,7 @@ import AgentConsole from "./components/AgentConsole";
 import DetailPage from "./pages/DetailPage";
 import FactorPanelPage from "./pages/FactorPanelPage";
 import FundamentalsPage from "./pages/FundamentalsPage";
+import MarketUnderstandingPage from "./pages/MarketUnderstandingPage";
 import NewsPage from "./pages/NewsPage";
 import SectorsPage from "./pages/SectorsPage";
 import DailyBriefPage from "./pages/DailyBriefPage";
@@ -74,6 +75,7 @@ export default function App() {
         <Route path="/symbol/:symbol" element={<DetailPage />} />
         {/* 基本面参考：宏观 + 行业板块全景（参考层，不进技术信号） */}
         <Route path="/fundamentals" element={<FundamentalsPage />} />
+        <Route path="/market-understanding" element={<MarketUnderstandingPage />} />
         {/* 行业板块趋势工作台：等权指数 / RS / 宽度 / 阶段（research_proxy） */}
         <Route path="/sectors" element={<SectorsPage />} />
         {/* 因子观测台：常见因子读数/分位/排名 + 实证评级留痕（research_proxy，不挡信号） */}

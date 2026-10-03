@@ -16,7 +16,8 @@
     "test:evidence-card": "node run-evidence-card-regression.mjs",
     "test:agent-markdown": "node run-agent-markdown-regression.mjs",
     "test:portfolio-map": "esbuild src/utils/portfolioSymbols.ts --bundle --platform=node --format=esm --outfile=/tmp/lei-portfolio-symbols.mjs && node run-portfolio-map-regression.mjs",
-    "test:strategy-system": "esbuild src/pages/strategySystemLogic.ts --bundle --platform=node --format=esm --outfile=/tmp/lei-strategy-system-logic.mjs && node run-strategy-system-regression.mjs"
+    "test:strategy-system": "esbuild src/pages/strategySystemLogic.ts --bundle --platform=node --format=esm --outfile=/tmp/lei-strategy-system-logic.mjs && node run-strategy-system-regression.mjs",
+    "test:market-understanding": "node run-market-understanding-regression.mjs"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.59.0",

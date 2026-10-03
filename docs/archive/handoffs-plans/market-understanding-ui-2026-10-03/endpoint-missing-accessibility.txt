@@ -1,0 +1,365 @@
+- generic: 人工资料验收页面 · 不是真实行情 · 场景 missing
+- navigation "主导航":
+  - link "BIAO 看盘首页":
+    - /url: /
+    - text: BIAO
+  - link "看盘":
+    - /url: /
+  - link "市场理解":
+    - /url: /market-understanding
+  - link "行业板块":
+    - /url: /sectors
+  - link "情绪":
+    - /url: /sentiment
+  - link "今日操作":
+    - /url: /ops
+  - link "我的持仓":
+    - /url: /portfolio
+  - link "监督待办":
+    - /url: /plans
+  - generic "资讯与认知":
+    - text: 资讯与认知
+    - generic: ⌄
+  - generic "策略研究":
+    - text: 策略研究
+    - generic: ⌄
+  - link "工作台":
+    - /url: /agent
+  - button "AI 助手"
+- main:
+  - paragraph: 看市场，也读懂变化
+  - heading "市场理解" [level=1]
+  - paragraph: 先问这项信息在回答什么，再看变化、配套证据和另一种解释。
+  - link "研究依据 ↗":
+    - /url: https://github.com/lige1687/biao-signal-system/blob/d58a0740502207ca6dfeb9c9f18b1c135aa54632/docs/experiments/market-understanding-expansion-2026-10-03.md
+  - navigation "市场理解页内导航":
+    - link "已有读数":
+      - /url: "#mu-now"
+    - link "观察地图":
+      - /url: "#mu-map"
+    - link "指标读法":
+      - /url: "#mu-reading"
+    - link "联系ETF":
+      - /url: "#mu-etf"
+  - region "阅读范围":
+    - group "观察市场":
+      - generic: 观察市场
+      - button "A股" [pressed]
+      - button "美股"
+    - group "我的阅读目的":
+      - generic: 我的阅读目的
+      - button "趋势交易" [pressed]
+      - button "定投与长期配置"
+      - button "价值投资"
+    - paragraph:
+      - text: 先看技术阶段、触发和失效，再用市场参与、波动与成本理解背景。
+      - generic: 切换方法只调整阅读顺序，不改变读数或交易规则。
+  - region "A股 · 目前能读到什么":
+    - paragraph: 01 / 先看事实
+    - heading "A股 · 目前能读到什么" [level=2]
+    - button "重新读取"
+    - paragraph: 读数按各自资料所属期展示；这不是“今日行情已齐全”的声明。所有内容用于理解市场。
+    - status:
+      - strong: 当前环境尚未接通观察接口。
+      - paragraph: 本页保留指标读法；没有数据不代表市场平静，也不会填入示例行情。
+      - link "查看原基本面页 →":
+        - /url: /fundamentals
+    - strong: 事件观察：日历尚未接入本页
+    - paragraph: 关注数据发布、利率决定、财报、政策、指数调整与产品事项。先核官方时间、所属期、前值是否修订；没有可比预期，就不判断“超预期”。
+    - link "到资讯流核对事件 →":
+      - /url: /news
+  - region "专业投资者的观察地图":
+    - paragraph: 02 / 带着问题读
+    - heading "专业投资者的观察地图" [level=2]
+    - generic: 50组目录 · 8个主题
+    - paragraph: 机构和个人的目标不同，没有一份人人每天必看的清单。先选问题，再决定需要哪些资料。
+    - generic "谁在看，想解决什么问题？"
+    - button "趋势与市场参与 上涨或下跌是否广泛、持续？":
+      - strong: 趋势与市场参与
+      - generic: 上涨或下跌是否广泛、持续？
+    - button "波动与保护成本 市场为多大的波动或保护付多少钱？":
+      - strong: 波动与保护成本
+      - generic: 市场为多大的波动或保护付多少钱？
+    - button "杠杆与交易集中 借款和合约头寸怎样变化？":
+      - strong: 杠杆与交易集中
+      - generic: 借款和合约头寸怎样变化？
+    - button "ETF产品本身 持有这只产品要付什么成本、承担什么额外风险？":
+      - strong: ETF产品本身
+      - generic: 持有这只产品要付什么成本、承担什么额外风险？
+    - button "调查、仓位与预期 谁说乐观、谁实际持有什么、资料有多旧？":
+      - strong: 调查、仓位与预期
+      - generic: 谁说乐观、谁实际持有什么、资料有多旧？
+    - button "经济与融资环境 需求、物价、资金价格和信用如何联动？":
+      - strong: 经济与融资环境
+      - generic: 需求、物价、资金价格和信用如何联动？
+    - button "估值与经营 价格背后的盈利和现金是否支持假设？":
+      - strong: 估值与经营
+      - generic: 价格背后的盈利和现金是否支持假设？
+    - button "个人计划与组合 这些信息与我的投入、期限和风险有什么关系？":
+      - strong: 个人计划与组合
+      - generic: 这些信息与我的投入、期限和风险有什么关系？
+    - text: 找指标
+    - searchbox "找指标"
+    - button "全部主题"
+    - paragraph: 全部主题 · 当前市场匹配 43 组
+    - paragraph: 覆盖说明来自2026-10-03的研究盘点，表示系统的已知能力；不代表此刻已经取得行情。中美适用范围已分别筛选。
+    - generic "01指数日周趋势、均线方向与排列、结构高低点 日/周":
+      - text: "01"
+      - strong: 指数日周趋势、均线方向与排列、结构高低点
+      - generic: 日/周
+    - generic "02站上20/50/200日均线比例 日":
+      - text: "02"
+      - strong: 站上20/50/200日均线比例
+      - generic: 日
+    - generic "03上涨/下跌家数、新高/新低比例、等权与市值加权指数差异 日":
+      - text: "03"
+      - strong: 上涨/下跌家数、新高/新低比例、等权与市值加权指数差异
+      - generic: 日
+    - generic "04行业相对大盘强弱、上涨行业数量、龙头集中度 日/周":
+      - text: "04"
+      - strong: 行业相对大盘强弱、上涨行业数量、龙头集中度
+      - generic: 日/周
+    - generic "05成交额、换手率、相对近期成交活跃度 日":
+      - text: "05"
+      - strong: 成交额、换手率、相对近期成交活跃度
+      - generic: 日
+    - generic "06实际波动、缺口、单日跌幅、从高点回落程度 日":
+      - text: "06"
+      - strong: 实际波动、缺口、单日跌幅、从高点回落程度
+      - generic: 日
+    - generic "21美：VIX/VXN；A：对应ETF/指数期权隐含波动 日/盘中":
+      - text: "21"
+      - strong: 美：VIX/VXN；A：对应ETF/指数期权隐含波动
+      - generic: 日/盘中
+    - generic "22不同到期日期的隐含波动 日":
+      - text: "22"
+      - strong: 不同到期日期的隐含波动
+      - generic: 日
+    - generic "23认沽/认购成交比、持仓比，指数/个股分开 日":
+      - text: "23"
+      - strong: 认沽/认购成交比、持仓比，指数/个股分开
+      - generic: 日
+    - generic "24下跌保护价格相对上涨期权价格、隐含与实际波动差 日":
+      - text: "24"
+      - strong: 下跌保护价格相对上涨期权价格、隐含与实际波动差
+      - generic: 日
+    - generic "25美：VIX期货期限结构；A/美：到期分布、交易商敏感度估计 日/事件":
+      - text: "25"
+      - strong: 美：VIX期货期限结构；A/美：到期分布、交易商敏感度估计
+      - generic: 日/事件
+    - generic "13融资余额、5/20日变化、与可比市值之比 日":
+      - text: "13"
+      - strong: 融资余额、5/20日变化、与可比市值之比
+      - generic: 日
+    - generic "14融资买入额、偿还额、净增加、买入占成交比例 日":
+      - text: "14"
+      - strong: 融资买入额、偿还额、净增加、买入占成交比例
+      - generic: 日
+    - generic "15融券余量/余额、卖出和偿还、可借证券供给 日及规则事件":
+      - text: "15"
+      - strong: 融券余量/余额、卖出和偿还、可借证券供给
+      - generic: 日及规则事件
+    - generic "18股指期货基差、近远月价差、成交与持仓 日":
+      - text: "18"
+      - strong: 股指期货基差、近远月价差、成交与持仓
+      - generic: 日
+    - generic "20账户总借款、衍生品名义金额、保证金余量、压力损失 随账户":
+      - text: "20"
+      - strong: 账户总借款、衍生品名义金额、保证金余量、压力损失
+      - generic: 随账户
+    - generic "43ETF份额、净申赎、资产规模、场内成交 日或公告":
+      - text: "43"
+      - strong: ETF份额、净申赎、资产规模、场内成交
+      - generic: 日或公告
+    - generic "44折溢价、买卖价差、可成交数量与交易时段 日/盘中":
+      - text: "44"
+      - strong: 折溢价、买卖价差、可成交数量与交易时段
+      - generic: 日/盘中
+    - generic "45费率、实际跟踪差异、跟踪波动、分红与税费影响 月/季/年及规则":
+      - text: "45"
+      - strong: 费率、实际跟踪差异、跟踪波动、分红与税费影响
+      - generic: 月/季/年及规则
+    - generic "46指数编制、前十大权重、行业/国家集中度、持仓重叠 调整日/月":
+      - text: "46"
+      - strong: 指数编制、前十大权重、行业/国家集中度、持仓重叠
+      - generic: 调整日/月
+    - generic "47汇率、QDII额度/申购限制、杠杆重置、期货换月、清盘/合并 日/公告":
+      - text: "47"
+      - strong: 汇率、QDII额度/申购限制、杠杆重置、期货换月、清盘/合并
+      - generic: 日/公告
+    - generic "09投保基金投资者信心调查 按发布期":
+      - text: "09"
+      - strong: 投保基金投资者信心调查
+      - generic: 按发布期
+    - generic "10长江商学院CKISS股票预期与资产配置调查 按报告期":
+      - text: "10"
+      - strong: 长江商学院CKISS股票预期与资产配置调查
+      - generic: 按报告期
+    - generic "11基金定期持仓、股票配置、现金比例和集中度 月/季/半年，依报告":
+      - text: "11"
+      - strong: 基金定期持仓、股票配置、现金比例和集中度
+      - generic: 月/季/半年，依报告
+    - generic "26政策利率、国债短中长期收益率、期限差 日/决议":
+      - text: "26"
+      - strong: 政策利率、国债短中长期收益率、期限差
+      - generic: 日/决议
+    - generic "27美：10年实际利率、市场通胀补偿；A：名义利率与物价分别看 日/月":
+      - text: "27"
+      - strong: 美：10年实际利率、市场通胀补偿；A：名义利率与物价分别看
+      - generic: 日/月
+    - generic "28信用债相对国债的利差、违约与融资条件 日/月":
+      - text: "28"
+      - strong: 信用债相对国债的利差、违约与融资条件
+      - generic: 日/月
+    - generic "29A：银行间短期资金利率/公开市场操作；美：隔夜融资利率、准备金、财政账户、逆回购 日/周":
+      - text: "29"
+      - strong: A：银行间短期资金利率/公开市场操作；美：隔夜融资利率、准备金、财政账户、逆回购
+      - generic: 日/周
+    - generic "31PMI、新订单、生产、库存、工业生产 月":
+      - text: "31"
+      - strong: PMI、新订单、生产、库存、工业生产
+      - generic: 月
+    - generic "32CPI/PPI；美PCE/核心物价；服务与商品拆分 月":
+      - text: "32"
+      - strong: CPI/PPI；美PCE/核心物价；服务与商品拆分
+      - generic: 月
+    - generic "33就业、工资、实际收入、实际消费、零售、储蓄 周/月":
+      - text: "33"
+      - strong: 就业、工资、实际收入、实际消费、零售、储蓄
+      - generic: 周/月
+    - generic "34A：社融/贷款与信用结构；美：银行贷款标准/信贷增长 月/季":
+      - text: "34"
+      - strong: A：社融/贷款与信用结构；美：银行贷款标准/信贷增长
+      - generic: 月/季
+    - generic "35住房许可/开工/销售/库存；商品、汇率和跨资产相对表现 日/月":
+      - text: "35"
+      - strong: 住房许可/开工/销售/库存；商品、汇率和跨资产相对表现
+      - generic: 日/月
+    - generic "36市盈率PE、市净率PB、长期平滑盈利估值CAPE及历史位置 日/月":
+      - text: "36"
+      - strong: 市盈率PE、市净率PB、长期平滑盈利估值CAPE及历史位置
+      - generic: 日/月
+    - generic "37指数/行业收入、每股盈利增长、利润率 季":
+      - text: "37"
+      - strong: 指数/行业收入、每股盈利增长、利润率
+      - generic: 季
+    - generic "38分析师盈利预期上调/下调比例、未来盈利变化 周/月":
+      - text: "38"
+      - strong: 分析师盈利预期上调/下调比例、未来盈利变化
+      - generic: 周/月
+    - generic "39自由现金流及收益率、经营现金/利润、应收与存货 季":
+      - text: "39"
+      - strong: 自由现金流及收益率、经营现金/利润、应收与存货
+      - generic: 季
+    - generic "40资本回报、毛利/净利率、资产负债和利息负担 季":
+      - text: "40"
+      - strong: 资本回报、毛利/净利率、资产负债和利息负担
+      - generic: 季
+    - generic "41股息率、派息占利润/现金比例、分红记录 公告/季/年":
+      - text: "41"
+      - strong: 股息率、派息占利润/现金比例、分红记录
+      - generic: 公告/季/年
+    - generic "42回购执行、增发稀释、管理层指引、资本开支与资本分配 公告/季":
+      - text: "42"
+      - strong: 回购执行、增发稀释、管理层指引、资本开支与资本分配
+      - generic: 公告/季
+    - generic "48每期可投入现金、备用资金、投资期限、目标资产比例及偏离 月/生活事件":
+      - text: "48"
+      - strong: 每期可投入现金、备用资金、投资期限、目标资产比例及偏离
+      - generic: 月/生活事件
+    - generic "49总投入、现金、份额、分红、费用、资金流入后的实际收益 每笔/月":
+      - text: "49"
+      - strong: 总投入、现金、份额、分红、费用、资金流入后的实际收益
+      - generic: 每笔/月
+    - generic "50持仓风险贡献、相关性、共同下跌、集中度和流动性 周/月":
+      - text: "50"
+      - strong: 持仓风险贡献、相关性、共同下跌、集中度和流动性
+      - generic: 周/月
+  - region "指标升降，分别意味着什么":
+    - paragraph: 03 / 多读一层
+    - heading "指标升降，分别意味着什么" [level=2]
+    - generic: 首批12项详细读法
+    - paragraph: “现在很高”与“最近在上升”是两件事。下面沿用相同市场、主题和搜索条件；卡片解释概念，未接通的指标不展示假读数。
+    - article:
+      - paragraph: 杠杆与交易集中 · 指标说明
+      - heading "A股融资余额" [level=3]
+      - paragraph: 借钱参与交易的规模是否变化？
+      - paragraph: 已有观察接口；实际读数和日期见上方。
+      - generic "展开读法与容易误判的地方"
+    - article:
+      - paragraph: ETF产品本身 · 指标说明
+      - heading "ETF折溢价" [level=3]
+      - paragraph: 场内价格相对可比净值贵了还是便宜了？
+      - paragraph: 本页未加载此项真实读数。
+      - generic "展开读法与容易误判的地方"
+    - article:
+      - paragraph: ETF产品本身 · 指标说明
+      - heading "ETF买卖价差与报价深度" [level=3]
+      - paragraph: 以当前报价买入再卖出，大致会承担多少交易摩擦？
+      - paragraph: 本页未加载此项真实读数。
+      - generic "展开读法与容易误判的地方"
+    - article:
+      - paragraph: ETF产品本身 · 指标说明
+      - heading "ETF实际跟踪差异" [level=3]
+      - paragraph: 持有基金的结果与它承诺跟踪的指数相差多少？
+      - paragraph: 本页未加载此项真实读数。
+      - generic "展开读法与容易误判的地方"
+    - article:
+      - paragraph: ETF产品本身 · 指标说明
+      - heading "ETF跟踪误差" [level=3]
+      - paragraph: 基金每日相对指数的偏离是否稳定？
+      - paragraph: 本页未加载此项真实读数。
+      - generic "展开读法与容易误判的地方"
+    - article:
+      - paragraph: ETF产品本身 · 指标说明
+      - heading "ETF费用与持有总成本" [level=3]
+      - paragraph: 买入、持有、卖出分别可能付什么成本？
+      - paragraph: 本页未加载此项真实读数。
+      - generic "展开读法与容易误判的地方"
+    - article:
+      - paragraph: ETF产品本身 · 指标说明
+      - heading "ETF持仓集中与产品重叠" [level=3]
+      - paragraph: 买多只产品后，实际是否仍押在同一批资产上？
+      - paragraph: 本页未加载此项真实读数。
+      - generic "展开读法与容易误判的地方"
+    - article:
+      - paragraph: ETF产品本身 · 指标说明
+      - heading "ETF份额与资产规模变化" [level=3]
+      - paragraph: 规模增长来自价格上涨还是份额增加？
+      - paragraph: 本页未加载此项真实读数。
+      - generic "展开读法与容易误判的地方"
+    - article:
+      - paragraph: 经济与融资环境 · 指标说明
+      - heading "重要事件与原先预期" [level=3]
+      - paragraph: 将发布什么、市场此前预期什么、实际与预期差在哪？
+      - paragraph: 本页未加载此项真实读数。
+      - generic "展开读法与容易误判的地方"
+  - region "与我关注的ETF有什么关系":
+    - paragraph: 04 / 联系自己的产品
+    - heading "与我关注的ETF有什么关系" [level=2]
+    - paragraph: 先按基金文件确认下面三项。本页只按你明确选择的范围解释，不根据基金名称猜测，也不读取持仓金额；这不是具体基金的自动核验。
+    - text: 标的资产范围
+    - combobox "标的资产范围":
+      - option "尚未确认 / 其他资产" [selected]
+      - option "A股股票"
+      - option "美国股票"
+    - text: 交易计价币种
+    - combobox "交易计价币种":
+      - option "尚未确认 / 其他币种" [selected]
+      - option "人民币"
+      - option "美元"
+    - text: 产品结构
+    - combobox "产品结构":
+      - option "尚未确认" [selected]
+      - option "普通ETF"
+      - option "杠杆或反向ETF"
+    - list:
+      - listitem: 标的资产范围尚未确认：先核基金跟踪指数及成分，不能从名字或上市地点推断。
+      - listitem: 计价币种尚未确认：先核价格、净值和所持资产的币种，不能计算跨币种溢价。
+      - listitem: 产品结构尚未确认：先核是否含杠杆、反向或每日重置条款，再联系相应观察项。
+    - paragraph: 这三个选择独立于上方观察市场。具体指数、成分、费用版本、币种对冲和净值时点仍需核实；这里只提供检查顺序。
+    - link "回到我的持仓核对产品 →":
+      - /url: /portfolio
+  - text: 内容版本 market-understanding-content/2026-10-03 · 解释与观察层，不参与LEI触发、失效或退出判定。使用效果和投资收益尚未测量。
+  - link "来源、反例与未解决问题 ↗":
+    - /url: https://github.com/lige1687/biao-signal-system/blob/d58a0740502207ca6dfeb9c9f18b1c135aa54632/docs/experiments/market-understanding-expansion-2026-10-03.md

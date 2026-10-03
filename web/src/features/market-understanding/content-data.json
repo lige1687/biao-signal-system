@@ -1,0 +1,1704 @@
+{
+  "provenance": {
+    "originalCatalogue": "docs/experiments/raw/market-understanding-expansion-2026-10-03/density-audit.json",
+    "originalCards": "docs/experiments/raw/market-understanding-expansion-2026-10-03/indicator-cards.json",
+    "originalSources": "docs/experiments/raw/market-understanding-expansion-2026-10-03/source-ledger.json",
+    "note": "静态解释性内容；来源访问、实时数据和转载许可须分别核验。"
+  },
+  "roles": [
+    {
+      "title": "长期主动股票/价值投资",
+      "goal": "判断企业能否持续创造价值、价格是否合理",
+      "reads": "盈利、现金、负债、资本回报、竞争位置、估值假设"
+    },
+    {
+      "title": "成长/行业投资",
+      "goal": "跟踪需求、技术与经营兑现",
+      "reads": "收入、利润率、订单、资本开支、行业供需、预期变化"
+    },
+    {
+      "title": "宏观/多资产投资",
+      "goal": "在增长、物价、利率与不同资产风险间分配资金",
+      "reads": "经济、利率、信用、汇率、流动性、事件与情景"
+    },
+    {
+      "title": "养老金、保险与长期资金",
+      "goal": "按时支付未来支出，控制资产与负债失配",
+      "reads": "到期支付、利率敏感性、现金需求、资产期限与风险"
+    },
+    {
+      "title": "被动指数基金管理",
+      "goal": "按合同跟踪指定指数",
+      "reads": "成分与调样、分红、现金、费用、跟踪偏离"
+    },
+    {
+      "title": "趋势交易/部分系统化交易",
+      "goal": "按明确方法参与趋势并管理失效",
+      "reads": "价格结构、强弱、波动、成交、执行成本"
+    },
+    {
+      "title": "对冲/相对价格交易",
+      "goal": "管理某些风险、利用相对价格差异",
+      "reads": "合约价差、融资成本、持仓、对冲比例、保证金"
+    },
+    {
+      "title": "做市与交易执行",
+      "goal": "提供报价、控制库存风险和成交成本",
+      "reads": "买卖价差、深度、库存、底层可交易性"
+    },
+    {
+      "title": "研究/策略分析团队",
+      "goal": "组织证据与情景、解释风险和预期差",
+      "reads": "数据版本、企业指引、估值、调查、事件"
+    },
+    {
+      "title": "定投与长期个人配置",
+      "goal": "持续投入、保持可承受的配置和成本",
+      "reads": "现金安排、期限、配置偏离、产品费用与重大变化"
+    }
+  ],
+  "catalogue": [
+    {
+      "id": "01",
+      "title": "指数日周趋势、均线方向与排列、结构高低点",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "trend",
+      "frequency": "日/周",
+      "reading": "先确定道路、触发和失效；指数上涨不等于所有成分上涨",
+      "coverage": "已有，技术主线复用",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L57",
+      "original_cells": {
+        "metric_and_market": "A/美：指数日周趋势、均线方向与排列、结构高低点",
+        "frequency_and_use": "日/周；趋势为主",
+        "how_to_combine_and_common_misreading": "先确定道路、触发和失效；指数上涨不等于所有成分上涨",
+        "system_and_ownership": "已有，技术主线复用"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 57
+      }
+    },
+    {
+      "id": "02",
+      "title": "站上20/50/200日均线比例",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "trend",
+      "frequency": "日",
+      "reading": "比较参与股票比例是否持续扩大；须用当时成员及相同分母",
+      "coverage": "已有/研究中，宽度负责人",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L58",
+      "original_cells": {
+        "metric_and_market": "A/美：站上20/50/200日均线比例",
+        "frequency_and_use": "日；趋势/长期观察",
+        "how_to_combine_and_common_misreading": "比较参与股票比例是否持续扩大；须用当时成员及相同分母",
+        "system_and_ownership": "已有/研究中，宽度负责人"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 58
+      }
+    },
+    {
+      "id": "03",
+      "title": "上涨/下跌家数、新高/新低比例、等权与市值加权指数差异",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "trend",
+      "frequency": "日",
+      "reading": "指数新高但多数股票未跟随是结构分化；不等于明日必跌",
+      "coverage": "部分可由已有资料形成，完整生产覆盖未验",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L59",
+      "original_cells": {
+        "metric_and_market": "A/美：上涨/下跌家数、新高/新低比例、等权与市值加权指数差异",
+        "frequency_and_use": "日；参与广度",
+        "how_to_combine_and_common_misreading": "指数新高但多数股票未跟随是结构分化；不等于明日必跌",
+        "system_and_ownership": "部分可由已有资料形成，完整生产覆盖未验"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 59
+      }
+    },
+    {
+      "id": "04",
+      "title": "行业相对大盘强弱、上涨行业数量、龙头集中度",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "trend",
+      "frequency": "日/周",
+      "reading": "看强势是否扩散；几个大权重推动指数可能掩盖行业疲弱",
+      "coverage": "板块/行业入口已有；不重做轮动实验",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L60",
+      "original_cells": {
+        "metric_and_market": "A/美：行业相对大盘强弱、上涨行业数量、龙头集中度",
+        "frequency_and_use": "日/周；轮动与集中风险",
+        "how_to_combine_and_common_misreading": "看强势是否扩散；几个大权重推动指数可能掩盖行业疲弱",
+        "system_and_ownership": "板块/行业入口已有；不重做轮动实验"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 60
+      }
+    },
+    {
+      "id": "05",
+      "title": "成交额、换手率、相对近期成交活跃度",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "trend",
+      "frequency": "日",
+      "reading": "价格方向、上涨家数和成交同时看；放量下跌也是活跃，不是乐观",
+      "coverage": "A股固定快照已有，自动资料沿原任务",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L61",
+      "original_cells": {
+        "metric_and_market": "A/美：成交额、换手率、相对近期成交活跃度",
+        "frequency_and_use": "日；交易参与",
+        "how_to_combine_and_common_misreading": "价格方向、上涨家数和成交同时看；放量下跌也是活跃，不是乐观",
+        "system_and_ownership": "A股固定快照已有，自动资料沿原任务"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 61
+      }
+    },
+    {
+      "id": "06",
+      "title": "实际波动、缺口、单日跌幅、从高点回落程度",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "trend",
+      "frequency": "日",
+      "reading": "与结构失效距离一起看；低波动不保证低风险，大跌也不自动便宜",
+      "coverage": "技术/风险已有部分；不重复工具研究",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L62",
+      "original_cells": {
+        "metric_and_market": "A/美：实际波动、缺口、单日跌幅、从高点回落程度",
+        "frequency_and_use": "日；趋势风险",
+        "how_to_combine_and_common_misreading": "与结构失效距离一起看；低波动不保证低风险，大跌也不自动便宜",
+        "system_and_ownership": "技术/风险已有部分；不重复工具研究"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 62
+      }
+    },
+    {
+      "id": "07",
+      "title": "AAII看涨、看跌、中性及看涨减看跌",
+      "markets": [
+        "us"
+      ],
+      "topic": "position",
+      "frequency": "周",
+      "reading": "读水平、变化和持续时间，结合价格与宽度；不是美国全部散户",
+      "coverage": "已有，沿情绪研究",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L68",
+      "original_cells": {
+        "metric_and_market": "美：AAII看涨、看跌、中性及看涨减看跌",
+        "frequency_and_use": "周；受访会员方向看法",
+        "how_to_combine_and_common_misreading": "读水平、变化和持续时间，结合价格与宽度；不是美国全部散户",
+        "system_and_ownership": "已有，沿情绪研究"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 68
+      }
+    },
+    {
+      "id": "08",
+      "title": "NAAIM自报股票敞口及分布",
+      "markets": [
+        "us"
+      ],
+      "topic": "position",
+      "frequency": "周",
+      "reading": "均值、分散程度、变化分别看；可以为负或超过100，非全体机构持股比例",
+      "coverage": "已有但数据日期需修，原负责人",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L69",
+      "original_cells": {
+        "metric_and_market": "美：NAAIM自报股票敞口及分布",
+        "frequency_and_use": "周；受访主动管理人风险暴露",
+        "how_to_combine_and_common_misreading": "均值、分散程度、变化分别看；可以为负或超过100，非全体机构持股比例",
+        "system_and_ownership": "已有但数据日期需修，原负责人"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 69
+      }
+    },
+    {
+      "id": "09",
+      "title": "投保基金投资者信心调查",
+      "markets": [
+        "cn"
+      ],
+      "topic": "position",
+      "frequency": "按发布期",
+      "reading": "看问卷对象、抽样和公开日期；指数高不等于高仓位",
+      "coverage": "本轮只核栏目，缺持续资料；情绪负责人",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L70",
+      "original_cells": {
+        "metric_and_market": "A：投保基金投资者信心调查",
+        "frequency_and_use": "按发布期；频率/连续性待核",
+        "how_to_combine_and_common_misreading": "看问卷对象、抽样和公开日期；指数高不等于高仓位",
+        "system_and_ownership": "本轮只核栏目，缺持续资料；情绪负责人"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 70
+      }
+    },
+    {
+      "id": "10",
+      "title": "长江商学院CKISS股票预期与资产配置调查",
+      "markets": [
+        "cn"
+      ],
+      "topic": "position",
+      "frequency": "按报告期",
+      "reading": "分清受访人群与股票/住房预期；不能泛称全A情绪",
+      "coverage": "资料候选，机构/个人细分与连续性待核",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L71",
+      "original_cells": {
+        "metric_and_market": "A：长江商学院CKISS股票预期与资产配置调查",
+        "frequency_and_use": "按报告期；历史样本说明可查",
+        "how_to_combine_and_common_misreading": "分清受访人群与股票/住房预期；不能泛称全A情绪",
+        "system_and_ownership": "资料候选，机构/个人细分与连续性待核"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 71
+      }
+    },
+    {
+      "id": "11",
+      "title": "基金定期持仓、股票配置、现金比例和集中度",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "position",
+      "frequency": "月/季/半年，依报告",
+      "reading": "看配置变化与经理文字解释；净值涨跌或仓位估算不等于真实交易记录",
+      "coverage": "定期资料入口待核；季报不是今日态度",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L72",
+      "original_cells": {
+        "metric_and_market": "A/美：基金定期持仓、股票配置、现金比例和集中度",
+        "frequency_and_use": "月/季/半年，依报告",
+        "how_to_combine_and_common_misreading": "看配置变化与经理文字解释；净值涨跌或仓位估算不等于真实交易记录",
+        "system_and_ownership": "定期资料入口待核；季报不是今日态度"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 72
+      }
+    },
+    {
+      "id": "12",
+      "title": "13F披露持股和行业集中度",
+      "markets": [
+        "us"
+      ],
+      "topic": "position",
+      "frequency": "季",
+      "reading": "看披露组合长期变化；未覆盖完整空头、对冲和当下交易",
+      "coverage": "未发现接入，慢速背景候选",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L73",
+      "original_cells": {
+        "metric_and_market": "美：13F披露持股和行业集中度",
+        "frequency_and_use": "季；季末后最长45天",
+        "how_to_combine_and_common_misreading": "看披露组合长期变化；未覆盖完整空头、对冲和当下交易",
+        "system_and_ownership": "未发现接入，慢速背景候选"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 73
+      }
+    },
+    {
+      "id": "13",
+      "title": "融资余额、5/20日变化、与可比市值之比",
+      "markets": [
+        "cn"
+      ],
+      "topic": "leverage",
+      "frequency": "日",
+      "reading": "余额和市值同时看；名义余额创新高可能伴随市场扩张",
+      "coverage": "已有，分母与范围先核",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L83",
+      "original_cells": {
+        "metric_and_market": "A：融资余额、5/20日变化、与可比市值之比",
+        "frequency_and_use": "日；借款持仓水平",
+        "how_to_combine_and_common_misreading": "余额和市值同时看；名义余额创新高可能伴随市场扩张",
+        "system_and_ownership": "已有，分母与范围先核"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 83
+      }
+    },
+    {
+      "id": "14",
+      "title": "融资买入额、偿还额、净增加、买入占成交比例",
+      "markets": [
+        "cn"
+      ],
+      "topic": "leverage",
+      "frequency": "日",
+      "reading": "买入和偿还分开；比值的分子分母须相同证券范围",
+      "coverage": "买入已有，偿还和严格比例待补",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L84",
+      "original_cells": {
+        "metric_and_market": "A：融资买入额、偿还额、净增加、买入占成交比例",
+        "frequency_and_use": "日；借款交易活动",
+        "how_to_combine_and_common_misreading": "买入和偿还分开；比值的分子分母须相同证券范围",
+        "system_and_ownership": "买入已有，偿还和严格比例待补"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 84
+      }
+    },
+    {
+      "id": "15",
+      "title": "融券余量/余额、卖出和偿还、可借证券供给",
+      "markets": [
+        "cn"
+      ],
+      "topic": "leverage",
+      "frequency": "日及规则事件",
+      "reading": "股价变动会改变余额；规则与券源变化会影响数据",
+      "coverage": "余额字段有，完整链缺失",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L85",
+      "original_cells": {
+        "metric_and_market": "A：融券余量/余额、卖出和偿还、可借证券供给",
+        "frequency_and_use": "日及规则事件；做空约束",
+        "how_to_combine_and_common_misreading": "股价变动会改变余额；规则与券源变化会影响数据",
+        "system_and_ownership": "余额字段有，完整链缺失"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 85
+      }
+    },
+    {
+      "id": "16",
+      "title": "FINRA保证金借款余额、同比/环比及可比规模比",
+      "markets": [
+        "us"
+      ],
+      "topic": "leverage",
+      "frequency": "月末快照、后发布",
+      "reading": "配合股市规模和变化速度；不涵盖所有机构或衍生品杠杆",
+      "coverage": "未发现接入，新增候选",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L86",
+      "original_cells": {
+        "metric_and_market": "美：FINRA保证金借款余额、同比/环比及可比规模比",
+        "frequency_and_use": "月末快照、后发布；客户账户融资",
+        "how_to_combine_and_common_misreading": "配合股市规模和变化速度；不涵盖所有机构或衍生品杠杆",
+        "system_and_ownership": "未发现接入，新增候选"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 86
+      }
+    },
+    {
+      "id": "17",
+      "title": "FINRA现金账户/保证金账户自由贷方余额",
+      "markets": [
+        "us"
+      ],
+      "topic": "leverage",
+      "frequency": "月",
+      "reading": "与借款余额分别展示；两者相减也不等于未来必进股市的资金",
+      "coverage": "未发现接入；同一数据源扩展",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L87",
+      "original_cells": {
+        "metric_and_market": "美：FINRA现金账户/保证金账户自由贷方余额",
+        "frequency_and_use": "月；账户可用现金背景",
+        "how_to_combine_and_common_misreading": "与借款余额分别展示；两者相减也不等于未来必进股市的资金",
+        "system_and_ownership": "未发现接入；同一数据源扩展"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 87
+      }
+    },
+    {
+      "id": "18",
+      "title": "股指期货基差、近远月价差、成交与持仓",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "leverage",
+      "frequency": "日",
+      "reading": "基差是期货价与现货指数的差；看期限、分红和资金成本，不能只看正负",
+      "coverage": "A股中金所有公开入口，生产链未发现",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L88",
+      "original_cells": {
+        "metric_and_market": "A/美：股指期货基差、近远月价差、成交与持仓",
+        "frequency_and_use": "日；期货相对现货定价",
+        "how_to_combine_and_common_misreading": "基差是期货价与现货指数的差；看期限、分红和资金成本，不能只看正负",
+        "system_and_ownership": "A股中金所有公开入口，生产链未发现"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 88
+      }
+    },
+    {
+      "id": "19",
+      "title": "CFTC金融期货资产管理者/杠杆基金净头寸、总持仓",
+      "markets": [
+        "us"
+      ],
+      "topic": "leverage",
+      "frequency": "通常周二快照、周五15:30美东发布",
+      "reading": "类别、合约和名义金额分开；期货净空可能为现货多头套保",
+      "coverage": "未发现接入；策略原文已有COT观察思路",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L89",
+      "original_cells": {
+        "metric_and_market": "美：CFTC金融期货资产管理者/杠杆基金净头寸、总持仓",
+        "frequency_and_use": "通常周二快照、周五15:30美东发布",
+        "how_to_combine_and_common_misreading": "类别、合约和名义金额分开；期货净空可能为现货多头套保",
+        "system_and_ownership": "未发现接入；策略原文已有COT观察思路"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 89
+      }
+    },
+    {
+      "id": "20",
+      "title": "账户总借款、衍生品名义金额、保证金余量、压力损失",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "leverage",
+      "frequency": "随账户",
+      "reading": "公开市场数据不能替代自己的完整账户；名义金额也不直接等于实际风险",
+      "coverage": "单独账户风险范围，本轮不读私人账户、不实施",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L90",
+      "original_cells": {
+        "metric_and_market": "A/美：账户总借款、衍生品名义金额、保证金余量、压力损失",
+        "frequency_and_use": "随账户；个人/机构风险",
+        "how_to_combine_and_common_misreading": "公开市场数据不能替代自己的完整账户；名义金额也不直接等于实际风险",
+        "system_and_ownership": "单独账户风险范围，本轮不读私人账户、不实施"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 90
+      }
+    },
+    {
+      "id": "21",
+      "title": "美：VIX/VXN；A：对应ETF/指数期权隐含波动",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "volatility",
+      "frequency": "日/盘中",
+      "reading": "按对应指数看，并对照已经发生的波动；数值高没有方向含义",
+      "coverage": "美已有；A本土可比序列待核",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L98",
+      "original_cells": {
+        "metric_and_market": "美：VIX/VXN；A：对应ETF/指数期权隐含波动",
+        "frequency_and_use": "日/盘中；市场预期波动大小",
+        "how_to_combine_and_common_misreading": "按对应指数看，并对照已经发生的波动；数值高没有方向含义",
+        "system_and_ownership": "美已有；A本土可比序列待核"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 98
+      }
+    },
+    {
+      "id": "22",
+      "title": "不同到期日期的隐含波动",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "volatility",
+      "frequency": "日",
+      "reading": "近月异常高可能与已知事件有关；不把期限差直接当股价信号",
+      "coverage": "未发现完整卡；需要合约与方法",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L99",
+      "original_cells": {
+        "metric_and_market": "A/美：不同到期日期的隐含波动",
+        "frequency_and_use": "日；事件风险",
+        "how_to_combine_and_common_misreading": "近月异常高可能与已知事件有关；不把期限差直接当股价信号",
+        "system_and_ownership": "未发现完整卡；需要合约与方法"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 99
+      }
+    },
+    {
+      "id": "23",
+      "title": "认沽/认购成交比、持仓比，指数/个股分开",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "volatility",
+      "frequency": "日",
+      "reading": "区分成交和未平仓合约；买保护、卖期权、组合交易会改变含义",
+      "coverage": "美已有研究，原负责人；A候选",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L100",
+      "original_cells": {
+        "metric_and_market": "A/美：认沽/认购成交比、持仓比，指数/个股分开",
+        "frequency_and_use": "日；期权活动",
+        "how_to_combine_and_common_misreading": "区分成交和未平仓合约；买保护、卖期权、组合交易会改变含义",
+        "system_and_ownership": "美已有研究，原负责人；A候选"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 100
+      }
+    },
+    {
+      "id": "24",
+      "title": "下跌保护价格相对上涨期权价格、隐含与实际波动差",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "volatility",
+      "frequency": "日",
+      "reading": "比较同期限、相近条件；保险贵不代表事件一定发生",
+      "coverage": "待核方法和历史，不承诺直接接入",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L101",
+      "original_cells": {
+        "metric_and_market": "A/美：下跌保护价格相对上涨期权价格、隐含与实际波动差",
+        "frequency_and_use": "日；保险成本",
+        "how_to_combine_and_common_misreading": "比较同期限、相近条件；保险贵不代表事件一定发生",
+        "system_and_ownership": "待核方法和历史，不承诺直接接入"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 101
+      }
+    },
+    {
+      "id": "25",
+      "title": "美：VIX期货期限结构；A/美：到期分布、交易商敏感度估计",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "volatility",
+      "frequency": "日/事件",
+      "reading": "VIX期货与SPX期权期限曲线不同；交易商持仓与Gamma估算高度依赖假设",
+      "coverage": "后者为进阶候选，优先级低，不当已知真实仓位",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L102",
+      "original_cells": {
+        "metric_and_market": "美：VIX期货期限结构；A/美：到期分布、交易商敏感度估计",
+        "frequency_and_use": "日/事件；波动产品与对冲行为",
+        "how_to_combine_and_common_misreading": "VIX期货与SPX期权期限曲线不同；交易商持仓与Gamma估算高度依赖假设",
+        "system_and_ownership": "后者为进阶候选，优先级低，不当已知真实仓位"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 102
+      }
+    },
+    {
+      "id": "26",
+      "title": "政策利率、国债短中长期收益率、期限差",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "economy",
+      "frequency": "日/决议",
+      "reading": "看变动原因与期限；降息可能对应增长转弱，也可能缓和资金压力",
+      "coverage": "部分已有，宏观任务复用",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L110",
+      "original_cells": {
+        "metric_and_market": "A/美：政策利率、国债短中长期收益率、期限差",
+        "frequency_and_use": "日/决议；资金价格",
+        "how_to_combine_and_common_misreading": "看变动原因与期限；降息可能对应增长转弱，也可能缓和资金压力",
+        "system_and_ownership": "部分已有，宏观任务复用"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 110
+      }
+    },
+    {
+      "id": "27",
+      "title": "美：10年实际利率、市场通胀补偿；A：名义利率与物价分别看",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "economy",
+      "frequency": "日/月",
+      "reading": "实际国债收益率与“名义利率减当月CPI”不是同物；通胀补偿也含其他风险溢价",
+      "coverage": "美实际利率已有，其他覆盖待核",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L111",
+      "original_cells": {
+        "metric_and_market": "美：10年实际利率、市场通胀补偿；A：名义利率与物价分别看",
+        "frequency_and_use": "日/月；估值背景",
+        "how_to_combine_and_common_misreading": "实际国债收益率与“名义利率减当月CPI”不是同物；通胀补偿也含其他风险溢价",
+        "system_and_ownership": "美实际利率已有，其他覆盖待核"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 111
+      }
+    },
+    {
+      "id": "28",
+      "title": "信用债相对国债的利差、违约与融资条件",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "economy",
+      "frequency": "日/月",
+      "reading": "看水平、扩大速度及信用等级；高收益债整体不能代替CCC或科技企业",
+      "coverage": "美国广义信用利差已有，原口径差异保留",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L112",
+      "original_cells": {
+        "metric_and_market": "A/美：信用债相对国债的利差、违约与融资条件",
+        "frequency_and_use": "日/月；企业融资压力",
+        "how_to_combine_and_common_misreading": "看水平、扩大速度及信用等级；高收益债整体不能代替CCC或科技企业",
+        "system_and_ownership": "美国广义信用利差已有，原口径差异保留"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 112
+      }
+    },
+    {
+      "id": "29",
+      "title": "A：银行间短期资金利率/公开市场操作；美：隔夜融资利率、准备金、财政账户、逆回购",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "economy",
+      "frequency": "日/周",
+      "reading": "按制度和工具解释；不能把几个账户简单相减就宣称能预测股市",
+      "coverage": "现有完整覆盖未验；进阶资料候选",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L113",
+      "original_cells": {
+        "metric_and_market": "A：银行间短期资金利率/公开市场操作；美：隔夜融资利率、准备金、财政账户、逆回购",
+        "frequency_and_use": "日/周；短期资金供求",
+        "how_to_combine_and_common_misreading": "按制度和工具解释；不能把几个账户简单相减就宣称能预测股市",
+        "system_and_ownership": "现有完整覆盖未验；进阶资料候选"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 113
+      }
+    },
+    {
+      "id": "30",
+      "title": "芝加哥联储NFCI总指数及风险/信用/杠杆分项",
+      "markets": [
+        "us"
+      ],
+      "topic": "economy",
+      "frequency": "周",
+      "reading": "看哪些分项在变化；与已看信用/波动数据有重叠，不是额外独立证明",
+      "coverage": "未发现接入，低成本候选但需去重",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L114",
+      "original_cells": {
+        "metric_and_market": "美：芝加哥联储NFCI总指数及风险/信用/杠杆分项",
+        "frequency_and_use": "周；金融条件综合背景",
+        "how_to_combine_and_common_misreading": "看哪些分项在变化；与已看信用/波动数据有重叠，不是额外独立证明",
+        "system_and_ownership": "未发现接入，低成本候选但需去重"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 114
+      }
+    },
+    {
+      "id": "31",
+      "title": "PMI、新订单、生产、库存、工业生产",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "economy",
+      "frequency": "月",
+      "reading": "看需求和库存组合；PMI50是调查扩张/收缩分界，不是股市买卖线",
+      "coverage": "部分已有，生产扩展沿宏观负责人",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L115",
+      "original_cells": {
+        "metric_and_market": "A/美：PMI、新订单、生产、库存、工业生产",
+        "frequency_and_use": "月；企业经营方向",
+        "how_to_combine_and_common_misreading": "看需求和库存组合；PMI50是调查扩张/收缩分界，不是股市买卖线",
+        "system_and_ownership": "部分已有，生产扩展沿宏观负责人"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 115
+      }
+    },
+    {
+      "id": "32",
+      "title": "CPI/PPI；美PCE/核心物价；服务与商品拆分",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "economy",
+      "frequency": "月",
+      "reading": "看月度变化、年度变化、基数和构成；政策目标不可挪用到不同物价指标",
+      "coverage": "已有+既有扩展，不重复",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L116",
+      "original_cells": {
+        "metric_and_market": "A/美：CPI/PPI；美PCE/核心物价；服务与商品拆分",
+        "frequency_and_use": "月；物价压力",
+        "how_to_combine_and_common_misreading": "看月度变化、年度变化、基数和构成；政策目标不可挪用到不同物价指标",
+        "system_and_ownership": "已有+既有扩展，不重复"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 116
+      }
+    },
+    {
+      "id": "33",
+      "title": "就业、工资、实际收入、实际消费、零售、储蓄",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "economy",
+      "frequency": "周/月",
+      "reading": "收入、花费与储蓄一同判断；零售不等于所有消费，名义增长不等于购买量增长",
+      "coverage": "部分已有，原扩展负责人",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L117",
+      "original_cells": {
+        "metric_and_market": "A/美：就业、工资、实际收入、实际消费、零售、储蓄",
+        "frequency_and_use": "周/月；居民需求",
+        "how_to_combine_and_common_misreading": "收入、花费与储蓄一同判断；零售不等于所有消费，名义增长不等于购买量增长",
+        "system_and_ownership": "部分已有，原扩展负责人"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 117
+      }
+    },
+    {
+      "id": "34",
+      "title": "A：社融/贷款与信用结构；美：银行贷款标准/信贷增长",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "economy",
+      "frequency": "月/季",
+      "reading": "分政府、居民、企业及存量/新增；不叫“流入股市的钱”",
+      "coverage": "中国社融已有提案，其他待核",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L118",
+      "original_cells": {
+        "metric_and_market": "A：社融/贷款与信用结构；美：银行贷款标准/信贷增长",
+        "frequency_and_use": "月/季；实体融资",
+        "how_to_combine_and_common_misreading": "分政府、居民、企业及存量/新增；不叫“流入股市的钱”",
+        "system_and_ownership": "中国社融已有提案，其他待核"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 118
+      }
+    },
+    {
+      "id": "35",
+      "title": "住房许可/开工/销售/库存；商品、汇率和跨资产相对表现",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "economy",
+      "frequency": "日/月",
+      "reading": "供给与需求分开；铜金比、油金比还受供给、美元及报价单位影响",
+      "coverage": "已有部分与旧待办，不重复接入",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L119",
+      "original_cells": {
+        "metric_and_market": "A/美：住房许可/开工/销售/库存；商品、汇率和跨资产相对表现",
+        "frequency_and_use": "日/月；经济与成本背景",
+        "how_to_combine_and_common_misreading": "供给与需求分开；铜金比、油金比还受供给、美元及报价单位影响",
+        "system_and_ownership": "已有部分与旧待办，不重复接入"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 119
+      }
+    },
+    {
+      "id": "36",
+      "title": "市盈率PE、市净率PB、长期平滑盈利估值CAPE及历史位置",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "valuation",
+      "frequency": "日/月",
+      "reading": "同指数、同会计和行业构成比较；低PE可能是利润周期顶部，高PB未必昂贵",
+      "coverage": "现有PE/CAPE部分；其他方法覆盖待核",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L127",
+      "original_cells": {
+        "metric_and_market": "A/美：市盈率PE、市净率PB、长期平滑盈利估值CAPE及历史位置",
+        "frequency_and_use": "日/月；长期定价",
+        "how_to_combine_and_common_misreading": "同指数、同会计和行业构成比较；低PE可能是利润周期顶部，高PB未必昂贵",
+        "system_and_ownership": "现有PE/CAPE部分；其他方法覆盖待核"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 127
+      }
+    },
+    {
+      "id": "37",
+      "title": "指数/行业收入、每股盈利增长、利润率",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "valuation",
+      "frequency": "季",
+      "reading": "拆价格变贵与盈利增加；回购会改变每股数字",
+      "coverage": "中美指数盈利已有草案，不重复认领",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L128",
+      "original_cells": {
+        "metric_and_market": "A/美：指数/行业收入、每股盈利增长、利润率",
+        "frequency_and_use": "季；盈利支撑",
+        "how_to_combine_and_common_misreading": "拆价格变贵与盈利增加；回购会改变每股数字",
+        "system_and_ownership": "中美指数盈利已有草案，不重复认领"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 128
+      }
+    },
+    {
+      "id": "38",
+      "title": "分析师盈利预期上调/下调比例、未来盈利变化",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "valuation",
+      "frequency": "周/月",
+      "reading": "同一批公司、同一预测年度、保留当期预测版本；一致预期不是事实",
+      "coverage": "历史快照与授权待核，常需供应商",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L129",
+      "original_cells": {
+        "metric_and_market": "A/美：分析师盈利预期上调/下调比例、未来盈利变化",
+        "frequency_and_use": "周/月；预期变化",
+        "how_to_combine_and_common_misreading": "同一批公司、同一预测年度、保留当期预测版本；一致预期不是事实",
+        "system_and_ownership": "历史快照与授权待核，常需供应商"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 129
+      }
+    },
+    {
+      "id": "39",
+      "title": "自由现金流及收益率、经营现金/利润、应收与存货",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "valuation",
+      "frequency": "季",
+      "reading": "自由现金流需明确资本开支等口径；暂时负现金流不必然坏，利润高也可能没收现金",
+      "coverage": "价值质量方向已有待办，未发现完整主卡",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L130",
+      "original_cells": {
+        "metric_and_market": "A/美：自由现金流及收益率、经营现金/利润、应收与存货",
+        "frequency_and_use": "季；现金与盈利质量",
+        "how_to_combine_and_common_misreading": "自由现金流需明确资本开支等口径；暂时负现金流不必然坏，利润高也可能没收现金",
+        "system_and_ownership": "价值质量方向已有待办，未发现完整主卡"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 130
+      }
+    },
+    {
+      "id": "40",
+      "title": "资本回报、毛利/净利率、资产负债和利息负担",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "valuation",
+      "frequency": "季",
+      "reading": "同行业比较；金融企业与一般企业不能套同一负债阈值",
+      "coverage": "待建立可靠财报资料，非新增技术过滤",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L131",
+      "original_cells": {
+        "metric_and_market": "A/美：资本回报、毛利/净利率、资产负债和利息负担",
+        "frequency_and_use": "季；经营质量和偿债能力",
+        "how_to_combine_and_common_misreading": "同行业比较；金融企业与一般企业不能套同一负债阈值",
+        "system_and_ownership": "待建立可靠财报资料，非新增技术过滤"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 131
+      }
+    },
+    {
+      "id": "41",
+      "title": "股息率、派息占利润/现金比例、分红记录",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "valuation",
+      "frequency": "公告/季/年",
+      "reading": "高股息可能来自股价大跌；一次性分红不能年年外推",
+      "coverage": "观察卡未完整覆盖；与除息调整资料分开",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L132",
+      "original_cells": {
+        "metric_and_market": "A/美：股息率、派息占利润/现金比例、分红记录",
+        "frequency_and_use": "公告/季/年；收入可持续性",
+        "how_to_combine_and_common_misreading": "高股息可能来自股价大跌；一次性分红不能年年外推",
+        "system_and_ownership": "观察卡未完整覆盖；与除息调整资料分开"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 132
+      }
+    },
+    {
+      "id": "42",
+      "title": "回购执行、增发稀释、管理层指引、资本开支与资本分配",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "valuation",
+      "frequency": "公告/季",
+      "reading": "公告额度与实际执行分开；回购与股权激励合看",
+      "coverage": "信息存在不等于结构化事件链；待核",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L133",
+      "original_cells": {
+        "metric_and_market": "A/美：回购执行、增发稀释、管理层指引、资本开支与资本分配",
+        "frequency_and_use": "公告/季；每股价值",
+        "how_to_combine_and_common_misreading": "公告额度与实际执行分开；回购与股权激励合看",
+        "system_and_ownership": "信息存在不等于结构化事件链；待核"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 133
+      }
+    },
+    {
+      "id": "43",
+      "title": "ETF份额、净申赎、资产规模、场内成交",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "etf",
+      "frequency": "日或公告",
+      "reading": "规模增加可能只是价格上涨；份额变化须扣拆分等调整；场内买卖不等于基金净流入",
+      "coverage": "份额已有候选，原任务复用；连续链未验",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L141",
+      "original_cells": {
+        "metric_and_market": "A/美：ETF份额、净申赎、资产规模、场内成交",
+        "frequency_and_use": "日或公告；资金参与",
+        "how_to_combine_and_common_misreading": "规模增加可能只是价格上涨；份额变化须扣拆分等调整；场内买卖不等于基金净流入",
+        "system_and_ownership": "份额已有候选，原任务复用；连续链未验"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 141
+      }
+    },
+    {
+      "id": "44",
+      "title": "折溢价、买卖价差、可成交数量与交易时段",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "etf",
+      "frequency": "日/盘中",
+      "reading": "ETF价格相对净值、买价与卖价差一起看；跨境底层市场休市时尤其需核净值时点",
+      "coverage": "完整产品观察链缺口；优先候选",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L142",
+      "original_cells": {
+        "metric_and_market": "A/美：折溢价、买卖价差、可成交数量与交易时段",
+        "frequency_and_use": "日/盘中；实际购买成本",
+        "how_to_combine_and_common_misreading": "ETF价格相对净值、买价与卖价差一起看；跨境底层市场休市时尤其需核净值时点",
+        "system_and_ownership": "完整产品观察链缺口；优先候选"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 142
+      }
+    },
+    {
+      "id": "45",
+      "title": "费率、实际跟踪差异、跟踪波动、分红与税费影响",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "etf",
+      "frequency": "月/季/年及规则",
+      "reading": "同指数、同币种、同分红再投资口径比较；便宜费率不必然总成本最低",
+      "coverage": "产品维度未完整核实；不处理私人税务资料",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L143",
+      "original_cells": {
+        "metric_and_market": "A/美：费率、实际跟踪差异、跟踪波动、分红与税费影响",
+        "frequency_and_use": "月/季/年及规则；长期持有成本",
+        "how_to_combine_and_common_misreading": "同指数、同币种、同分红再投资口径比较；便宜费率不必然总成本最低",
+        "system_and_ownership": "产品维度未完整核实；不处理私人税务资料"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 143
+      }
+    },
+    {
+      "id": "46",
+      "title": "指数编制、前十大权重、行业/国家集中度、持仓重叠",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "etf",
+      "frequency": "调整日/月",
+      "reading": "多买几只ETF可能仍集中于同一批股票；名称不同不等于分散",
+      "coverage": "指数/持仓资料待整合，非因子重复实验",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L144",
+      "original_cells": {
+        "metric_and_market": "A/美：指数编制、前十大权重、行业/国家集中度、持仓重叠",
+        "frequency_and_use": "调整日/月；资产配置",
+        "how_to_combine_and_common_misreading": "多买几只ETF可能仍集中于同一批股票；名称不同不等于分散",
+        "system_and_ownership": "指数/持仓资料待整合，非因子重复实验"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 144
+      }
+    },
+    {
+      "id": "47",
+      "title": "汇率、QDII额度/申购限制、杠杆重置、期货换月、清盘/合并",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "etf",
+      "frequency": "日/公告",
+      "reading": "产品规则按具体基金文件核；杠杆倍数不能直接外推长期回报",
+      "coverage": "新候选，全部具体规则未在本轮逐项查验",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L145",
+      "original_cells": {
+        "metric_and_market": "A/美：汇率、QDII额度/申购限制、杠杆重置、期货换月、清盘/合并",
+        "frequency_and_use": "日/公告；产品结构风险",
+        "how_to_combine_and_common_misreading": "产品规则按具体基金文件核；杠杆倍数不能直接外推长期回报",
+        "system_and_ownership": "新候选，全部具体规则未在本轮逐项查验"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 145
+      }
+    },
+    {
+      "id": "48",
+      "title": "每期可投入现金、备用资金、投资期限、目标资产比例及偏离",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "method",
+      "frequency": "月/生活事件",
+      "reading": "先确定钱是否长期可用和配置是否偏离；不因一项短期情绪随意停投",
+      "coverage": "个人计划领域，不能用公开市场指标代替",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L146",
+      "original_cells": {
+        "metric_and_market": "A/美：每期可投入现金、备用资金、投资期限、目标资产比例及偏离",
+        "frequency_and_use": "月/生活事件；定投执行",
+        "how_to_combine_and_common_misreading": "先确定钱是否长期可用和配置是否偏离；不因一项短期情绪随意停投",
+        "system_and_ownership": "个人计划领域，不能用公开市场指标代替"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 146
+      }
+    },
+    {
+      "id": "49",
+      "title": "总投入、现金、份额、分红、费用、资金流入后的实际收益",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "method",
+      "frequency": "每笔/月",
+      "reading": "与“相同日期、相同金额”的简单定投比较；不能只比一条价格曲线",
+      "coverage": "已有宽基资金研究，复用成果，不重跑",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L147",
+      "original_cells": {
+        "metric_and_market": "A/美：总投入、现金、份额、分红、费用、资金流入后的实际收益",
+        "frequency_and_use": "每笔/月；定投复盘",
+        "how_to_combine_and_common_misreading": "与“相同日期、相同金额”的简单定投比较；不能只比一条价格曲线",
+        "system_and_ownership": "已有宽基资金研究，复用成果，不重跑"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 147
+      }
+    },
+    {
+      "id": "50",
+      "title": "持仓风险贡献、相关性、共同下跌、集中度和流动性",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "method",
+      "frequency": "周/月",
+      "reading": "平时相关性低不保证压力时分散；需要真实持仓而非市场替代指标",
+      "coverage": "账户/组合既有方向，另行授权与数据",
+      "sourceUrl": "https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md#L148",
+      "original_cells": {
+        "metric_and_market": "A/美：持仓风险贡献、相关性、共同下跌、集中度和流动性",
+        "frequency_and_use": "周/月；组合风险",
+        "how_to_combine_and_common_misreading": "平时相关性低不保证压力时分散；需要真实持仓而非市场替代指标",
+        "system_and_ownership": "账户/组合既有方向，另行授权与数据"
+      },
+      "evidence": {
+        "file": "docs/experiments/investor-observation-map-2026-10-02.md",
+        "commit": "1f59cf73dd019df487b7a2d3138445f4a3756e28",
+        "line": 148
+      }
+    }
+  ],
+  "cards": [
+    {
+      "id": "M01",
+      "title": "A股融资余额",
+      "markets": [
+        "cn"
+      ],
+      "topic": "leverage",
+      "question": "借钱参与交易的规模是否变化？",
+      "definition": "人民币金额；变化额/变化比例单列，不默认跨沪深北或含基金口径可合并",
+      "frequency": "按来源交易日；真正发布时点仍待原负责人核",
+      "rising": "同范围融资未偿还规模变大；可能与行情和融资参与同步增加",
+      "falling": "同范围未偿还规模变小；可能是主动偿还，也可能是价格压力下的收缩",
+      "level": "绝对额高要结合市场规模；历史新高不等于杠杆比例新高",
+      "combine": [
+        "同范围价格变化",
+        "同范围成交和流通市值",
+        "上涨参与股票比例"
+      ],
+      "counterexample": "融资上升但上涨集中于少数股票，与广泛参与是两种不同情况。",
+      "threshold": "变化0只表示未增减；暂无通用交易阈值",
+      "coverage": "已有字段，统一卡部分展示",
+      "limitation": "既有代码sources.py:925-958、observations.py:60-83；只有代码可见，实际历史/发布日期未重新验证",
+      "sourceIds": [
+        "SSE_MARGIN"
+      ]
+    },
+    {
+      "id": "M02",
+      "title": "美国FINRA客户保证金借款",
+      "markets": [
+        "us"
+      ],
+      "topic": "leverage",
+      "question": "客户证券账户融资规模是否扩张？",
+      "definition": "原始单位百万美元；币种换算仅展示，不与A股余额直接排名",
+      "frequency": "月末所属期；通常下月第三周发布，具体可见时间另存",
+      "rising": "报告余额增加；需要分辨交易活动、覆盖与计算变化",
+      "falling": "报告余额减少；可能去杠杆，也可能报告方法或范围变化",
+      "level": "名义规模大不等于整个市场杠杆率高",
+      "combine": [
+        "同期市场规模",
+        "借款余额变化速度",
+        "两类客户账户自由贷方余额"
+      ],
+      "counterexample": "股市规模扩大时，借款绝对额可以上升而相对规模并未上升。",
+      "threshold": "零/正负是变化描述；历史分位必须固定可比窗口",
+      "coverage": "所审统一链未发现",
+      "limitation": "官网说明已读；完整历史、逐期首次发布和再分发许可未核",
+      "sourceIds": [
+        "FINRA"
+      ]
+    },
+    {
+      "id": "M03",
+      "title": "美国客户账户自由贷方余额",
+      "markets": [
+        "us"
+      ],
+      "topic": "leverage",
+      "question": "账户内可提取的贷方余额怎样变化？",
+      "definition": "现金账户与保证金账户分两列，单位百万美元",
+      "frequency": "随FINRA月度统计；不包装为日度资金流",
+      "rising": "相应类别报告的自由贷方余额增加",
+      "falling": "相应类别报告的自由贷方余额减少",
+      "level": "高余额不能推断即将买股票；不同账户类别不合称全部场外资金",
+      "combine": [
+        "借款余额",
+        "同期市场价格",
+        "同口径历史与报告方法"
+      ],
+      "counterexample": "投资者可转出资金，也可保留现金；余额不能当未来买入订单。",
+      "threshold": "没有已验证的看多/看空阈值",
+      "coverage": "所审统一链未发现",
+      "limitation": "页面已核三列；不能构造未经授权的净流入指标",
+      "sourceIds": [
+        "FINRA"
+      ]
+    },
+    {
+      "id": "M04",
+      "title": "CFTC金融期货分类头寸",
+      "markets": [
+        "us"
+      ],
+      "topic": "leverage",
+      "question": "哪些类别在何种合约上持有多头、空头和跨期组合？",
+      "definition": "按合约、类别、报告格式列张数；净值=多头-空头；不同合约张数不直接相加",
+      "frequency": "通常周二头寸、周五发布；以实际报告可见日记录",
+      "rising": "该类别净头寸更偏多，可能来自增多或减空，须拆开",
+      "falling": "该类别净头寸更偏空，可能来自增空或减多，须拆开",
+      "level": "0仅代表该报告净多空相等；净空不能读为对全部股票悲观",
+      "combine": [
+        "多/空/跨期组合",
+        "该合约总未平仓量",
+        "现货持仓或对冲目的的已知资料"
+      ],
+      "counterexample": "基金可以持有现货多头同时用期货空头降低风险，类别不等于交易动机。",
+      "threshold": "不设“机构看多线”；历史分类回填须标断点",
+      "coverage": "所审统一链未发现",
+      "limitation": "官方方法说明和发布说明已读；结构化下载未验",
+      "sourceIds": [
+        "CFTC",
+        "CFTC_TIME"
+      ]
+    },
+    {
+      "id": "M05",
+      "title": "ETF折溢价",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "etf",
+      "question": "场内价格相对可比净值贵了还是便宜了？",
+      "definition": "(市场价格/对应净值-1)×100%；每个数绑定时刻、币种和净值种类",
+      "frequency": "盘中估值与收盘净值分别标示；跨境时区不能省",
+      "rising": "价格相对净值更高，可能溢价扩大或折价收窄",
+      "falling": "价格相对净值更低，可能溢价收窄或折价扩大",
+      "level": "价格高于净值不是基金底层资产必然昂贵",
+      "combine": [
+        "净值所属时刻",
+        "买卖价差与可成交量",
+        "底层市场是否开市/申赎限制"
+      ],
+      "counterexample": "底层休市或净值滞后时，表面溢价可能混合时差，不能直接当套利利润。",
+      "threshold": "0是定义分界；不造通用1%/2%买卖门槛",
+      "coverage": "产品链未完整核实",
+      "limitation": "公开说明可用；尚无逐产品数据资格",
+      "sourceIds": [
+        "SEC_ETF"
+      ]
+    },
+    {
+      "id": "M06",
+      "title": "ETF买卖价差与报价深度",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "etf",
+      "question": "以当前报价买入再卖出，大致会承担多少交易摩擦？",
+      "definition": "卖一价-买一价；比例分母明确为中间价；同时列可成交数量",
+      "frequency": "报价级快照；过期报价不可伪称可成交",
+      "rising": "两边报价更分散，在相同数量下交易摩擦可能更大",
+      "falling": "报价更接近，在相同数量下交易摩擦可能更小",
+      "level": "窄价差不保证大额成交也便宜",
+      "combine": [
+        "报价可成交数量",
+        "底层资产交易时段",
+        "拟成交规模的区间而非私人账户数据"
+      ],
+      "counterexample": "最优报价数量很小，实际成交穿过多档，窄价差仍可能有较大成本。",
+      "threshold": "无统一好坏线；按同产品、同时间和规模比较",
+      "coverage": "所审统一产品观察链未发现",
+      "limitation": "未接入或验证盘口；不生成实际委托",
+      "sourceIds": [
+        "SEC_ETF"
+      ]
+    },
+    {
+      "id": "M07",
+      "title": "ETF实际跟踪差异",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "etf",
+      "question": "持有基金的结果与它承诺跟踪的指数相差多少？",
+      "definition": "同期间、同币种基金总回报减指定基准总回报，单位百分点",
+      "frequency": "月/季复核；需要分红与复权口径",
+      "rising": "差额更高；可为少落后或更多跑赢，先读正负",
+      "falling": "差额更低；可为更多落后或少跑赢，先读正负",
+      "level": "目标通常是接近适用基准；差异不等于未来收益承诺",
+      "combine": [
+        "基金费率",
+        "分红/税收和现金安排",
+        "指数是否含分红及产品合同"
+      ],
+      "counterexample": "拿含分红基金净值对不含分红价格指数，会制造虚假的超额。",
+      "threshold": "0是所选对照差；目标取具体产品合同",
+      "coverage": "产品维度未完整核实",
+      "limitation": "跟踪目标有产品例证；本卡比较定义是设计，不是既成研究",
+      "sourceIds": [
+        "SSE_INDEX"
+      ]
+    },
+    {
+      "id": "M08",
+      "title": "ETF跟踪误差",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "etf",
+      "question": "基金每日相对指数的偏离是否稳定？",
+      "definition": "每日基金与基准回报差的标准差；年化方法和交易日数另列",
+      "frequency": "按固定历史窗口；未齐数据不计算",
+      "rising": "相对基准的每日偏离更不稳定",
+      "falling": "每日偏离更稳定",
+      "level": "低误差也可能长期稳定地少赚费用，须和M07一起看",
+      "combine": [
+        "实际跟踪差异",
+        "样本窗口/缺失天数",
+        "调样与申赎事件"
+      ],
+      "counterexample": "每天都比指数少一点的基金，跟踪误差可以很低但累计差异仍明显。",
+      "threshold": "目标按具体基金合同；不能自创统一准入线",
+      "coverage": "产品维度未完整核实",
+      "limitation": "产品公开目标已核；本卡统计解释属于通用定义，未算真实数值",
+      "sourceIds": [
+        "SSE_INDEX"
+      ]
+    },
+    {
+      "id": "M09",
+      "title": "ETF费用与持有总成本",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "etf",
+      "question": "买入、持有、卖出分别可能付什么成本？",
+      "definition": "年度费用率、一次交易费用、价差分别列；份额类别/生效日/减免分开",
+      "frequency": "费用变更或定期复核；盘口成本按交易时点",
+      "rising": "同条件下费率/成本上升，留给投资者的回报空间减少",
+      "falling": "同条件下成本下降；仍需确认减免期限和其他收费",
+      "level": "费率低不能代替跟踪与流动性比较",
+      "combine": [
+        "持有期限",
+        "价差/折溢价",
+        "实际跟踪差异与减免到期日"
+      ],
+      "counterexample": "若已用扣费后的净值回报，再减年度管理费会重复扣成本。",
+      "threshold": "不设费率即收益的评分；同类且同份额对比",
+      "coverage": "所审统一产品观察链未发现",
+      "limitation": "不处理个人税务；没有自动扣费或交易",
+      "sourceIds": [
+        "SEC_FEES",
+        "VANGUARD"
+      ]
+    },
+    {
+      "id": "M10",
+      "title": "ETF持仓集中与产品重叠",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "etf",
+      "question": "买多只产品后，实际是否仍押在同一批资产上？",
+      "definition": "前十大/行业/国家权重和两产品共有持仓；权重基准与披露日标明",
+      "frequency": "随持仓披露/指数调样；报告日并非当前真实仓位",
+      "rising": "按相同定义，风险更集中在少数持仓或方向",
+      "falling": "按相同定义，持仓分布更分散；不保证压力时不共跌",
+      "level": "ETF数量多不是自动分散",
+      "combine": [
+        "行业/国家与币种",
+        "两产品持仓重合",
+        "同一披露日覆盖率"
+      ],
+      "counterexample": "两只名称不同的科技ETF可能重合很多；持仓分散也可能共享同一利率风险。",
+      "threshold": "展示事实和分类；不造通用集中度警戒线",
+      "coverage": "指数/持仓资料待整合",
+      "limitation": "JPM仅目录证据；组合解释是本任务设计推演，不是风险模型结果",
+      "sourceIds": [
+        "JPM",
+        "CFA_INST"
+      ]
+    },
+    {
+      "id": "M11",
+      "title": "ETF份额与资产规模变化",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "etf",
+      "question": "规模增长来自价格上涨还是份额增加？",
+      "definition": "份额数与净资产分别展示；份额变化不能直接标净流入现金",
+      "frequency": "按发行人披露；拆并份额等产品行为先核",
+      "rising": "份额增加可能反映净申购；资产规模增加也可能只是价格涨",
+      "falling": "份额减少可能反映净赎回；规模下降也可能只是价格跌",
+      "level": "大规模不代表当天有很多新增买盘",
+      "combine": [
+        "基金净值变化",
+        "份额拆分/合并",
+        "申赎与成分调整公告"
+      ],
+      "counterexample": "二级市场投资者相互买卖不会必然改变基金总份额。",
+      "threshold": "变化0是数量分界；不当机构态度阈值",
+      "coverage": "份额已有候选；完整连续链未验",
+      "limitation": "创设/赎回机制有来源；日度序列未取得",
+      "sourceIds": [
+        "SEC_ETF"
+      ]
+    },
+    {
+      "id": "M12",
+      "title": "重要事件与原先预期",
+      "markets": [
+        "cn",
+        "us"
+      ],
+      "topic": "economy",
+      "question": "将发布什么、市场此前预期什么、实际与预期差在哪？",
+      "definition": "事件ID、官方时区、所属期、计划/实际发布时间、前值/修订、预期来源和预期形成时刻",
+      "frequency": "随官方日历修订；事件发生后再加入实际值",
+      "rising": "不适用统一升高含义：就业、物价、盈利等需各自定义，先计算相对可比预期的差",
+      "falling": "不适用统一降低含义：同一变化对不同资产/目标含义不同",
+      "level": "日期临近是注意事项；没有合格预期就不展示“超预期”",
+      "combine": [
+        "事件类型与受影响资产",
+        "预期及前值版本",
+        "事件后的价格反应时段"
+      ],
+      "counterexample": "一项数据改善但低于原先预期，市场反应可能与数据环比方向不同；不作事后因果定论。",
+      "threshold": "无统一利好利空色；仅事实、差额与解释候选",
+      "coverage": "资讯已有；所审观察链未见完整结构化字段",
+      "limitation": "日历不是预期数据库；未抓ICS，未承诺完整当前日程",
+      "sourceIds": [
+        "BLS_CAL",
+        "NBS_CAL"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "FINRA",
+      "title": "FINRA Margin Statistics",
+      "url": "https://www.finra.org/rules-guidance/key-topics/margin-accounts/margin-statistics",
+      "limitation": "不是全市场全部杠杆；本轮未下载完整历史或审定再分发许可。",
+      "accessStatus": "body"
+    },
+    {
+      "id": "CFTC",
+      "title": "CFTC TFF explanatory notes",
+      "url": "https://www.cftc.gov/idc/groups/public/@commitmentsoftraders/documents/file/tfmexplanatorynotes.pdf",
+      "limitation": "旧方法说明，不能由此确认所有历史时点分类或现行接口；套保不能当悲观。",
+      "accessStatus": "body"
+    },
+    {
+      "id": "CFTC_TIME",
+      "title": "CFTC COT说明",
+      "url": "https://www.cftc.gov/es/node/128971",
+      "limitation": "节假日及实际发布日期须逐次核。",
+      "accessStatus": "body"
+    },
+    {
+      "id": "SEC_ETF",
+      "title": "SEC investor education ETF bulletin",
+      "url": "https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins-24",
+      "limitation": "是投资教育说明，不是逐产品可用API或许可证明。",
+      "accessStatus": "body"
+    },
+    {
+      "id": "SEC_FEES",
+      "title": "SEC fund and ETF fees bulletin",
+      "url": "https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/mutual-fund-and-etf-fees-and-expenses-investor-bulletin",
+      "limitation": "不向用户计算个人税务。",
+      "accessStatus": "body"
+    },
+    {
+      "id": "CFA_INST",
+      "title": "CFA Institute institutional portfolio reading",
+      "url": "https://www.cfainstitute.org/insights/professional-learning/refresher-readings/2026/portfolio-management-institutional-investors",
+      "limitation": "公开摘要仅支持分类，不提供所有机构每日清单；不采用文中数字为通用阈值。",
+      "accessStatus": "body"
+    },
+    {
+      "id": "VANGUARD",
+      "title": "Vanguard four principles",
+      "url": "https://ownyourfuture.vanguard.com/content/en/learn/financial-planning/vanguards-4-principles-for-investing-success.html",
+      "limitation": "机构公开框架，不能证明短期择时有效。",
+      "accessStatus": "body"
+    },
+    {
+      "id": "JPM",
+      "title": "J.P. Morgan Guide to the Markets",
+      "url": "https://am.jpmorgan.com/content/jpm-am-aem/global-institutional/us/en/institutional/insights/market-insights/guide-to-the-markets.html",
+      "limitation": "本轮正文提取受限，只能依赖检索摘要。 只用于主题范围例证，未逐图核查或引用图中数值。",
+      "accessStatus": "search_excerpt_body_limited"
+    },
+    {
+      "id": "BLACKROCK",
+      "title": "BlackRock total portfolio approach",
+      "url": "https://www.blackrock.com/corporate/insights/blackrock-investment-institute/our-take-on-total-portfolio-approach",
+      "limitation": "本轮页面打开返回503，仅见检索摘要。 正文503；非结论必需，未作完整方案依据。",
+      "accessStatus": "search_excerpt_open_503"
+    },
+    {
+      "id": "SSE_MARGIN",
+      "title": "上交所两融明细",
+      "url": "https://www.sse.com.cn/market/othersdata/margin/detail/index.shtml",
+      "limitation": "本轮仅取得页面外壳，未核正文表格。 动态行未取得；不作为最新两融数值或深市/北交所覆盖证明。",
+      "accessStatus": "page_shell_only"
+    },
+    {
+      "id": "BLS_CAL",
+      "title": "BLS release schedule",
+      "url": "https://www.bls.gov/schedule/2026/10_sched.htm",
+      "limitation": "未下载订阅文件；不作当前未来日程保证，未核预期值。",
+      "accessStatus": "body"
+    },
+    {
+      "id": "NBS_CAL",
+      "title": "国家统计局发布日程",
+      "url": "https://www.stats.gov.cn/sj/fbrc/",
+      "limitation": "本轮页面正文为空。 国内日程结构与当前时间仍未核，不能标资料已接入。",
+      "accessStatus": "empty_body"
+    },
+    {
+      "id": "SSE_ETF_GUIDE",
+      "title": "上交所ETF教学资料",
+      "url": "https://etf.sse.com.cn/fund/learning/download/c/10055613/files/32901abf70d54e999f46975b52ba46de.pdf",
+      "limitation": "本轮PDF打开失败，仅见检索摘要。 PDF打开失败，不引用图表数值；正文用途降级。",
+      "accessStatus": "search_excerpt_open_error"
+    },
+    {
+      "id": "EFUND_DIV",
+      "title": "易方达红利基金公开说明",
+      "url": "https://www.efunds.com.cn/fund/021050.shtml",
+      "limitation": "只说明这一公开产品的做法，不代表所有主动基金或推荐该产品；动态持仓部分日期空缺。",
+      "accessStatus": "body"
+    },
+    {
+      "id": "EFUND_TARGET",
+      "title": "易方达养老目标日期2038基金",
+      "url": "https://www.efunds.com.cn/Mobile/fund/006860.shtml",
+      "limitation": "不向个人移植其比例。",
+      "accessStatus": "body"
+    },
+    {
+      "id": "BERKSHIRE",
+      "title": "Berkshire 2001 Owner manual",
+      "url": "https://www.berkshirehathaway.com/2001ar/ownersmanual.html",
+      "limitation": "历史方法例证，不当现行政策或精确价值。",
+      "accessStatus": "body"
+    },
+    {
+      "id": "SSE_INDEX",
+      "title": "上交所披露的易方达中证A股ETF说明",
+      "url": "https://etf.sse.com.cn/fundtrends/c/c_20260806_10828104.shtml",
+      "limitation": "个别产品示例，不推广其具体规则到所有ETF。",
+      "accessStatus": "body"
+    },
+    {
+      "id": "CFTC_PORTAL",
+      "title": "CFTC public reporting portal",
+      "url": "https://publicreporting.cftc.gov/stories/s/r4w3-av2u",
+      "limitation": "本轮动态页面正文为空，仅见检索摘要。 结构化接口未验；不宣称下载或解析成功。",
+      "accessStatus": "search_excerpt_empty_body"
+    }
+  ]
+}

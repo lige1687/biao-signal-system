@@ -1,0 +1,32 @@
+{
+  "mission": "Promote reviewed market understanding content",
+  "task_scope": "50 catalogue rows +12 explanatory cards, no new financial research",
+  "read_only_paths": [
+    "docs/experiments/",
+    "docs/superpowers/plans/2026-10-03-market-understanding-implementation.md"
+  ],
+  "write_paths": [
+    "web/src/features/market-understanding/content.ts",
+    "web/src/features/market-understanding/content-data.json",
+    "docs/archive/handoffs-plans/market-understanding-ui-2026-10-03/task-1-report.md"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "typed content",
+    "review report"
+  ],
+  "stop_conditions": [
+    "unresolvable source documented",
+    "outside scope blocked"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

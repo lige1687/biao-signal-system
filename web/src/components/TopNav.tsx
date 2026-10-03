@@ -47,6 +47,7 @@ export default function TopNav() {
   const groups: NavGroup[] = [
     [
       { to: "/", label: "看盘", end: true, badge: todayOpps || undefined },
+      { to: "/market-understanding", label: "市场理解" },
       { to: "/sectors", label: "行业板块" },
       { to: "/sentiment", label: "情绪", dot: moodLight?.available && moodLight.light !== "gray"
         ? (moodLight.light === "blue" ? "#4d7fc4" : "#d24a43")
