@@ -1,3 +1,23 @@
+# 2026-10-04 Asia/Shanghai：FactorMiner有限经验建议入口已推，真实AI对照等待调用范围
+
+task-id external-quant-resources，原负责人「外部增量」01a0cd21-07e5-7163-8f4e-72a4d5ebc32e继续；工程问题completed，整体候选质量目标未完成，后续真实AI比较blocked / model_call_scope_missing。用户“ok，持续推进哈”授权本轮。先前91...规则读取，发布前相关范围核至5fc0ae706d9a9cc41f4241acfd5abec4be14059c，规则v1.0不改。
+
+遵从最新AGENTS只推codex/要求，工作分支改用**codex/external-quant-progress-20261004**，从原任务成果92d2cf0f41499c150c5f18d091a6e11fc5b49087建立；旧task分支保留、不切换/清理共享区。**本次已推并核完整commit 5e23ae5d77cde35d3de21521d77d62e728ef98c6**；fetch与ls-remote一致，32文件519552字节逐项读回一致。共享HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9与默认index SHA83bb48fe19dcb073d4a449bcef331c745c942128ea53ca2a19c1f6791cbe7f92保留，原AGENTS协作入口未覆盖。无main合并/部署/强推/权限/仓库外写入。
+
+[完整报告](https://github.com/lige1687/biao-signal-system/blob/5e23ae5d77cde35d3de21521d77d62e728ef98c6/docs/experiments/factorminer-experience-actions-2026-10-04.md)；同名raw README/manifest/SHA256SUMS与core输入/输出/技能包/回执；两进度同步。第一方src/lei_signal/research/experience_actions.py读取准确原生经验，调用4固定公式修改建议，拒绝错源码、错上下文、RMSE替代IC、自我来源迁移和输出覆盖，状态research_unqualified。不生成新LLM假设，不评价金融效果，不改共享workflow/总定义/CLI/规则。
+
+实测：21原生检查退出0；6接入测试非跳过退出0；原生与CLI建议一致；已有输出退出2、未覆盖；独立临时目录复制单模块/输入/技能包/来源清单，输出相同。标准库27独立值最大差5.55e-17，保存副本退出0、破坏副本退出1。100人工失败由继续生成转停止，与简单直接算式相同；4人工来源支持的3点平滑权重25%→92.4002%，当前相反证据后2.5865%；不同目标/未知动态/同源100条均25%。这是选择权重，不是有效概率；真AI候选质量、预测/决策/资金/线上增量未测量。
+
+官方源码75e056067a90ed6c4cf2e1737df773eed79abce8/MIT全文核清；源码archive2293875字节、SHA8df5596d37aa0f507ce5da30e58e63152c2b909dc95b9db99897b96e41512563；23实际导入文件与全源原件SHA保留。默认3.11静态发现两处3.12语法，没改上游；使用已有Codex Python3.12.14/NumPy2.3.5，官方SciPy1.17.1 wheel28172662字节核SHA后仅仓库deps解压。完整上游/模型/GPU平台未安装；全项目/跨平台/从零安装未验证。源/wheel/四人工SQLite仅本地，公共恢复URL大小SHA在raw，不上传大包/库/凭证/公司资料/行情。
+
+预算：本轮5/6来源（README、remote、archive、SciPy metadata、wheel），核心1+后续2/3，0模型/市场拟合/行情/付费；累计66来源/29工程批/16旧真实拟合。STUMPY、DEAP、AlphaGen、tsfresh、arch、RD-Agent/QuantaAlpha旧结论/指纹/预算封存。本轮结束依据是工程问题实际回答，不是预算耗尽。无本题运行进程/助手/checkpoint，不处理他人进程。
+
+未完成与接续：旧项目自然语言报告/预测误差不能直接充当原生相关质量、父子公式、选择权重及独立数据来源；缺字段不倒填。下一必要步骤是同材料/同模型/同调用数的真实候选质量比较，本聊天已请求用户明确授权模型/接口和最大调用次数，不索取密钥，不假设可继承旧已耗模型预算或使用付费服务。得到范围后先核可用接口、冻结材料与错误标准，继续原任务；当前无后台自动运行。
+
+其他任务避开本新experience_actions.py/专测/同名raw即可；技术周颜色、量价成交分配、情绪NAAIM、classic六项验收及D3保持原owner，最新记录明确避开FactorMiner，未有已登记同题冲突，记录不是锁。D4既有指针继续5e23父提交92d2中的同名小节，0重跑。归置、精确diff/大小/凭证形态检查通过；SciPy原许可证4尾空白保留为原件，第一方文件检查通过。状态文件自己的commit由路径历史定位，读回后才报同步。
+
+---
+
 # 2026-10-04 Asia/Shanghai：FactorMiner经验到下一行动组件核验active
 
 external-quant-resources原负责人继续，用户在下一方向解释后明确“ok，持续推进哈”。本轮问题：固定FactorMiner源码和许可后，经验/下一行动组件能否独立调用，在相同人工输入上改变错误重复/停止选择。服务候选提出的研究工具层，仍不变LEI策略。工作分支task/external-quant-progress，基础与最近已推92d2cf0f41499c150c5f18d091a6e11fc5b49087；当前只有本地合同，未有新实现成果。
