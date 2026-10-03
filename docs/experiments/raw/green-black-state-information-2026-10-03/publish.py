@@ -57,6 +57,11 @@ def main():
     for h,z in a['descriptive'].items():
         u,v=z['color60']['green']['metrics'],z['color60']['black']['metrics'];lines.append(f"| {h}日 | {u['return']:.3f}% | {v['return']:.3f}% | {u['mae']:.3f}% | {v['mae']:.3f}% |")
     lines+=['','不是期限越长绿色就稳定更好：短期限方向差异小，20／60日黑色平均涨幅更大，120日接近。辅助期限全部事前登记，没有改主目标或挑出最好期限宣布有效。','',
+    '一条应保留的反向历史线索：60日黑色组未来60日平均涨幅在四只ETF分别统计时都高于绿色；2022—2025各年同样如此。它是原始分组关联，不能直接说成已经发现新信息或转黑买入规则。黑色已包含过去60日下跌的方向，可能与已知跌幅重复；原因没有被本研究识别。2026黑色仅27条、3只ETF，缺中证500，不能和该年绿色四ETF表当作完整共同覆盖的比较。','',
+    '| 信号年份 | 绿色观察／ETF数 | 黑色观察／ETF数 | 绿色未来60日涨跌 | 黑色未来60日涨跌 |','|---|---:|---:|---:|---:|']
+    for y,z in g['by_year'].items():
+        u,v=z['green'],z['black'];lines.append(f"| {y} | {u['rows']}／{len(u['assets'])} | {v['rows']}／{len(v['assets'])} | {u['metrics']['return']:.3f}% | {v['metrics']['return']:.3f}% |")
+    lines+=['',
     '## 5. 反例、机会数量与后期证据','',
     '| 后来比较期 | 收益误差减少 | 下探误差减少 |','|---|---:|---:|']
     for y in ('2025','2026'):lines.append(f"| {y} | {a['return']['by_year'][y]['rmse_improvement']:+.4f} | {a['risk']['by_year'][y]['rmse_improvement']:+.4f} |")
