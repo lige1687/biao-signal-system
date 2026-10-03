@@ -2,17 +2,17 @@
 
 - task-id：market-observation；负责人：原市场观察聊天Codex /root；设备：本地Air。继续负责，不是接管或任务结束。
 - 状态：active（统一协作登记与限定页面说明审查）；宏观新来源分支 paused / budget_exhausted；QQQ/VXN原问题已封存。
-- 更新时间：2026-10-03，Asia/Shanghai；本轮安全节点续核。
+- 更新时间：2026-10-03T15:26:00+08:00，Asia/Shanghai（UTC+08:00）。
 - 目标：核对基本面来源、个人/管理人调查与乐观悲观参考值对纳斯达克短期高低点的含义；补A股类似背景资料，使情绪/板块/基本面信息帮助理解宽基ETF市场。
 - 当前用途：叙事和展示可信度；不进入技术交易判定或硬过滤。用户理解改善、真实账户收益、线上业务增量均未测量。
 - 验收：来源/范围/单位/所属期/首次可用/样本及缺项明示，参考线有准确含义；限定历史问题含简单基准与反例；受影响代码最小验证及实际显示证据可定位。全页面阅读验收尚未完成。
-- 适用规范：COORDINATION.md 1.0；初读0b758e7e10f720c44cbd898d511ff392f2857535、最新读取b172008890b39e912c8f1d0cfb9125d1e414a97f；规则SHA256 6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0。工作分支AGENTS、当前研究索引、策略原文及原冻结合同继续有效；此次协作不迁移旧合同、不重置预算、不扩大权限。
+- 适用规范：COORDINATION.md 1.0；初读0b758e7e10f720c44cbd898d511ff392f2857535、本轮完整读取15b3e4e0edd878c3e84ef30482d108e492563dbd及f9e14cd0b03e8f27b63a51a87577d54c0b04b09a，推前增量核至472cc60c9b9032bcca746937ea680b0b70a0a67e（规则字节相同）；规则SHA256 6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0。工作分支AGENTS、当前研究索引、策略原文及原冻结合同继续有效；此次协作不迁移旧合同、不重置预算、不扩大权限。
 
 ## 分支、版本和唯一映射
 
-仓库 https://github.com/lige1687/biao-signal-system ；工作分支 `task/market-observation-progress`；公共基础完整commit `d7da6cb0f9c127606b6faa572fabc9ee93f104f7`；最近已推送完整成果 `eb8dd780212e9dcd4e3a12f59b2ad55c84478e83`，已核对远端同SHA。该阶段包含CPI较高区间两句说明和人工4.5%显示证据；数值边界/颜色和其他功能代码保持原版。AGENTS协作说明于5106f18ad6ffaf11f8fbf88a33427fbe936530fd已推，原文完整保留。
+仓库 https://github.com/lige1687/biao-signal-system ；工作分支 `task/market-observation-progress`；公共基础完整commit `d7da6cb0f9c127606b6faa572fabc9ee93f104f7`；最近已推送完整成果 `55d8aa96b45d97b09901ded4ebf78f490bbb7f6b`，已核对远端同SHA并GitHub读回进展。父提交eb8dd780212e9dcd4e3a12f59b2ad55c84478e83，本阶段仅三个日期/市场说明文件、人工验收证据与本任务阶段进度；规则、后端、CPI数值边界/颜色和商品卡未改。AGENTS协作说明于5106f18ad6ffaf11f8fbf88a33427fbe936530fd已推，原文完整保留。
 
-成果入口：https://github.com/lige1687/biao-signal-system/blob/eb8dd780212e9dcd4e3a12f59b2ad55c84478e83/docs/progress/market-observation.md 。阶段历史为 `docs/ops/work-progress/market-observation.md`；当前跨任务摘要仅本记录。文件自身提交从协调分支 `git log -- docs/coordination/tasks/market-observation.md`定位，不无限写自指SHA。
+成果入口：https://github.com/lige1687/biao-signal-system/blob/55d8aa96b45d97b09901ded4ebf78f490bbb7f6b/docs/progress/market-observation.md 。阶段历史为 `docs/ops/work-progress/market-observation.md`；当前跨任务摘要仅本记录。文件自身提交从协调分支 `git log -- docs/coordination/tasks/market-observation.md`定位，不无限写自指SHA。
 
 共享Air检出仍为 `codex/factor-unit-research-20260915`、HEAD `18e64fa632dba5dbad0e5fcae09b4ccc75f119a9`，有大量其他任务修改。独立隔离目录和索引构建两分支提交，不切换、不清理、不整体提交共享区。
 
@@ -26,15 +26,15 @@
 
 ## 正在做、下一步与有限文件范围
 
-协作接入与CPI较高区间说明审查已完成，最近代码与证据提交为eb8dd780212e9dcd4e3a12f59b2ad55c84478e83。本轮开始剩余的日期/市场作用范围说明审查：根页市场开关是否让读者误以为全页切换；已有卡片是否区分整理、所属期、首次可用与抓取时间。代码写入前先只读新版，只修仍存在的局部说明，范围限定FundamentalsPage市场环境标题/开关提示、MarketObservationCards及ObservationSourceNote说明块；不改上游字段、规则或其他区域。无正在运行的市场实验/新来源，0/2/3/4边界和颜色不变。
+协作接入、CPI较高区间和日期/市场说明阶段已完成，最近代码与证据为55d8aa96b45d97b09901ded4ebf78f490bbb7f6b。原任务持续active，但当前没有正在执行的市场实验、新来源或子agent；一名Luna只读日期审查已完成，主控实施三个说明文件。A股/美股开关作用范围明示，历史标题标出各市场及美国；资料所属期、来源发布时间/精度与整理/抓取日期分别表达。没有全页切换重构、上游字段、规则或其他区域改动。
 
-继续的第二项是观察卡日期、市场所属说明；第一轮只读对照已完成，未知公布时间不补为当天。需要新上游字段/服务改造时另登记准确范围，尚未列为进行中。全页切换重构、全部宏观接入、盈利指标实现并未启动，不圈为独占。
+下一步planned、尚未启动：既有美国宏观单位/日期字段的只读映射检查，仅US_VALUE_FMT与已保存provider定义，不取新来源、不调整数值/资格结论。先核新版与已封存报告，证据不足保留具体缺口；需要新的来源、服务或字段时先登记有界范围和权限。全页用户阅读、全部宏观/盈利接入未启动，不圈为独占。
 
 ## 重叠与避让
 
 已实际读取最新协调记录 `lei-coordination-bootstrap`（completed/初始化）和 `technical-factor-sequence`（active/技术路径资料资格）。后者明确不负责情绪/宽度/宏观，本任务不动其候选或共享workflow，不存在已登记同题冲突。规则入口与初始化检查器由原协调负责人维护，本任务不改。
 
-未登记任务实时状态未知。既有线索显示SPY长期AAII/情绪因子、宽度研究和商品铜金/油金比各有其他负责人，保留其归属；本任务不改 `fetch_commodity_ratios`、`CommodityRatios.meta`或CommodityCard，不重复他们的研究。共享registry/INDEX只按本任务条目派生发布，不能整体复制。
+未登记任务实时状态未知。已登记sentiment-factor-research保留SPY长期AAII/原E宽度，新获准6次资格查新不属于本任务；商品铜金/油金比仍属其他负责人，保留其归属；本任务不改 `fetch_commodity_ratios`、`CommodityRatios.meta`或CommodityCard，不重复他们的研究。共享registry/INDEX只按本任务条目派生发布，不能整体复制。
 
 请其他AI暂避：CPI说明/参考线块、观察卡日期/来源提示、固定历史成交额展示块；相关三页面修改先核确切块和负责人，不要求整页永久独占。QQQ原参考值/VXN原问题不重跑。此记录不是锁；新重叠出现先暂停冲突块，在自己的协调记录明确提问/实现者与独立检查角色，独立部分可继续。
 
@@ -87,3 +87,15 @@
 新增sentiment-factor-research已读：其负责SPY/AAII及原E宽度资料资格，blocked，明确不改本任务CPI/日期/页面，不重跑QQQ/VXN；本任务同样避让其研究和文件。其余八条（含本任务）从cce89d69到本轮commit无内容变更，沿用已核分工；投资地图只引用页面结果。当前无已登记同块并行执行冲突，未登记者仍未知。
 
 本轮限定工作：只读新版的日期说明与市场开关；拟由一名Luna独立核卡片日期状态，尚未派发，不启动新用户任务。主控核市场开关；二者不写同一文件，不取新来源、不运行效果试验。仅若实际缺陷仍在才做说明补丁并实际显示检查；不重做日期转换/既有实验。允许预算仍为0新市场来源/拟合/实验，累计来源18/18不变。当前没有本负责人新实验或可恢复checkpoint，不终止任何旧进程。
+
+## 日期/市场说明阶段完成（2026-10-03T15:26:00+08:00）
+
+本轮先在21126b9648b75181016f1fa139c8009a486ec920登记并逐字读回范围，已fetch核后续协调分支包含该提交；没有重复建task或启动旧题。固定eb8代码仍有局部缺陷，Luna(gpt-6-luna/low)只读核日期：survey_week不能称单日，published_at不能未经核实直接称首次可用，date/timestamp精度需明示。主控独立核市场开关实际仅进入观察查询和调查条件，再只修三个已登记说明文件；未写后端或他任务模块。
+
+实际成果12路径（3代码、7小型证据含人工fixture/JSON/两份原始可访问性文本/两JPEG/说明、2自身进度）已推工作分支55d8aa96b45d97b09901ded4ebf78f490bbb7f6b并远端完整SHA核相等；GitHub准确commit读回docs/progress/market-observation.md，blob96b1e65446b3c07c49c26aa195069b446cf1e181。AGENTS已有协作入口原字节保留，不重复追加；registry/INDEX/zones及商品卡字节不变。共享HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9、分支及index SHA83bb48fe19dcb073d4a449bcef331c745c942128ea53ca2a19c1f6791cbe7f92与本轮开始完全相同。
+
+验收证据：工作分支同步目录observation-date-market-review.md和observation-date-market-validation.json。Vite767模块exit0（既有大块提醒保留），完整tsc --noEmit exit0；实际浏览器点击cn/us开关及来源/调查详情，日期精度、时刻精度、未知发布时间夹值不升级、调查所属周、市场范围和固定2026-09-29提示共8项条件通过。fixture为人工cn3/us4项、其余API刻意503，不当真实原接口/上游或全服务通过；没有真实市场、账户、数据库。自有exec session4094已由/__finish正常退出0，创建的tab已关，Luna已结束，无本任务checkpoint或后台实验，不终止他人进程。本机现有check_repo_hygiene.py exit0仅证明共享检查器。未重跑旧52项或QQQ/VXN，0来源/拟合/市场实验，宏观18/18暂停不变；Linux/手机/真实时点/全页阅读/线上收益仍未验证。
+
+推前追加审阅协调472cc60c9b9032bcca746937ea680b0b70a0a67e：现在13任务，新增四条dot接续范围均独立书面/合成或三源资格。dot-pro-source-qualification负责T10Y3M/DTWEXBGS/Fed EBP，明确保留本任务CPI/日期页面及18/18账，本方不查其三源、改其契约或借预算；dot公式/绝对时间检查只读研究入口，不写观察组件。地图已完成自身引用修复，情绪新获准6次宽度资格查新，其他技术/工具范围独立。与本阶段无已登记同块执行冲突；主题交叠按原页面实现者/独立复核分工继续，不凭记录当锁，未登记者未知。
+
+本阶段completed，整体责任active；下一既有宏观单位/日期映射planned而非后台进行中。仅本地受限输入/原件缺口按withheld.json仍保留，不上传资料/权重/数据库/凭证，不合并部署或扩大权限。此最终协调更新返回后还须fetch和逐字读回，不能预写自己同步通过。
