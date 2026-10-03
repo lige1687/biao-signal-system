@@ -1,3 +1,25 @@
+# 2026-10-04 Asia/Shanghai：形态工具阶段已发布，AI方向及D4证据已交
+
+external-quant-resources原负责人继续；本轮有界工程/资料问题completed，长期任务保留。工作分支task/external-quant-progress；基础ab96cf88ea91ff7d019c9b66ebca9d617b9d090d；**最新已推并核远端92d2cf0f41499c150c5f18d091a6e11fc5b49087**，34文件428600字节逐项读回一致，远端ref等于本地提交。原共享HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9与index SHA83bb48fe19dcb073d4a449bcef331c745c942128ea53ca2a19c1f6791cbe7f92不变；无合main/部署/清理。
+
+成果入口docs/experiments/stumpy-shape-mining-2026-10-03.md；同名raw有协议、15项测试回执、人工输入/模板/结果、失败、完整许可、manifest/SHA。新src/lei_signal/research/shape_mining.py只调用STUMPY原生发现/距离；20报价点、最多3候选，发现后固定模板。人工重复/噪声/既有510300.SS分别保留1/0/2候选；真实726发现行、359后期行、718距离；798保存距离独立核算最大差9.80e-10，独立目录人工库应用一致。实际预测、决策、资金及线上增量均未测量。真实材料未经历史时点资格，结果只作描述。
+
+已完成失败修复：target安装版本字符串不可靠→核wheel原件并读分发元数据；原生空组→返回空候选并回归。核心首次14fixture错误的pytest退出码未单独捕获，不冒称通过；后续1为14通过，后续2噪声失败，后续3修复后15通过/真实首次CLI/独立保存核数和恢复通过。原始失败留存。预算核心1+后续3/3、来源6/6封存，不再变seed/阈值重跑。
+
+AI来源初筛三搜索三官方页6/6，0安装/模型/实验：docs/archive/handoffs-plans/external-ai-mining-directions-2026-10-04.md。优先建议只核FactorMiner从失败选择下一行动的独立组件，其次AlphaAgent公式重复/含义检查，AlphaForge整套暂缓。源码版本/完整许可/运行资格未完成，不称已接入。累计61公开来源、26工程批、旧16真实拟合不变，本轮0新金融拟合/行情/付费。
+
+## workflow-fusion-2026-10-04 / D4
+
+已读派发9aa990f70b79c440543e25f484374bf39505b707的complement.md；最新规则与其他范围核至dc78d5448364a6d563898517f4b4b866ac7e1d36，无已登记冲突。补充证据在本次92d2cf0f...的docs/progress/external-quant-resources.md同名D4小节，待classic独立验收，不能把收件当完成其验收。
+
+直接复用af8934d60511ae24f9e182bdf2d4a441a723cc12的lei-quant-tools/scripts/multiple_comparison.py compare-workflows及references/multiple-comparison.md：同对象/日/目标/基准/单时期/完整固定资产的保存预测共同误差辅助检查，不是自动组合权重工具。复用同提交raw/external-mining-reuse-2026-10-03/core-result.json的inputs/pool_transitions和verification.json：人工互补可合、同向副本拒绝、负号副本仍占位；六组独立核数、Python -S退出0与破坏副本退出1已存在，本次0重跑。该例同日人工对象，不能代替单ETF跨时间预测。STUMPY形状不同不代表预测互补，真实金融互补未测量；三组新的合格保存预测未交，不扩大预算补作。
+
+当前无本题运行进程/助手/checkpoint；其他进程/远端状态不处理。下一步planned是FactorMiner准确源码/许可/组件接口资格的新有界问题，尚未启动；共同workflow整合仍暂停，不改其定义或他人模块。技术持续/黑绿、隔夜日内分解、D3错误分解、经典基准均由原owner负责；本记录不是排他锁。
+
+本次上传代码/测试/小文档/人工证据，真实价格/模板/逐日距离和wheel只记路径大小SHA，仍仅本地，远端只能恢复人工演示。未测Linux/Windows/全项目/从零依赖安装。归置检查通过；代码文档diff通过；原始失败日志与numba许可既有尾空白保留，不修改原件。发布检查曾误以共享HEAD作比较基线，修正为本工作分支基础后检查；无文件丢失或实验重跑。各阶段进度已在两进度文件，原AGENTS协作入口保留。协调自身commit由路径历史定位，推后核读回。
+
+---
+
 # 2026-10-04 Asia/Shanghai：形态入口验证中，新增AI流程有限资料评估
 
 external-quant-resources原负责人继续，active；已读规则与相关增量到81637d235093652de22fd4991cf1f995062c4e0d。STUMPY范围不变；源码及14项测试仅本地，远端工作成果仍ab96cf88ea91ff7d019c9b66ebca9d617b9d090d。初次版本检查失败已定位为上游运行时版本字符串不适用于target安装；改查包元数据，wheel源码指纹一致，后续测试退出0、14通过。正在执行固定人工重复、随机噪声和既有510300.SS无标签走势的CLI发现/应用检查，无金融拟合。
