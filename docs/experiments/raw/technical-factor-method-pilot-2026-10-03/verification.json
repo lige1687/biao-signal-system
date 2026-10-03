@@ -1,0 +1,123 @@
+{
+  "new_fits": 0,
+  "new_market_labels": 0,
+  "market_requests": 0,
+  "source_files": {
+    "docs/experiments/raw/green-black-state-information-2026-10-03/audit-02.json": {
+      "bytes": 231435,
+      "sha256": "170e45694304f17fe49d755219295d2ec1b645f5c13a24361fb8701de4833a20"
+    },
+    "docs/experiments/raw/green-black-state-information-2026-10-03/return/core-01/contract.json": {
+      "bytes": 67299,
+      "sha256": "71bdd173b108a632ce7b7902edf75ae3f88326255b648d61404edf3353a5b9cd"
+    },
+    "docs/experiments/raw/green-black-state-information-2026-10-03/return/core-01/result.json": {
+      "bytes": 350600,
+      "sha256": "fe7de44458b66d82ddfbf8ba7accc5e2088d3c5efd9ede0b24b3b3a70a7a93ab"
+    },
+    "docs/experiments/raw/green-black-state-information-2026-10-03/risk/core-01/contract.json": {
+      "bytes": 67291,
+      "sha256": "224ccf36885904140ada71e5c62d64c0934f65915b38bbd8fdae20019d704be6"
+    },
+    "docs/experiments/raw/green-black-state-information-2026-10-03/risk/core-01/result.json": {
+      "bytes": 340794,
+      "sha256": "33a2bfb26496a5f5eeb6637faabb2c4d989014266c52271f4bbbbac93ac894b0"
+    }
+  },
+  "targets": {
+    "return": {
+      "rows": 948,
+      "dates": 237,
+      "assets": [
+        "510050.SS",
+        "510300.SS",
+        "510500.SS",
+        "588000.SS"
+      ],
+      "rmse_percentage_points": {
+        "B0": 14.101082956793736,
+        "B1": 16.12647891498577,
+        "B2": 16.16916016250703,
+        "ETF_mean": 14.053258506288927
+      },
+      "improvement_percentage_points": -0.04268124752125857,
+      "candidate_beats_existing": false,
+      "candidate_beats_simple_etf_mean": false,
+      "uncertainty_reused_not_reestimated": {
+        "60": {
+          "length": 60,
+          "draws": 1000,
+          "valid": 1000,
+          "axis_dates": 359,
+          "rmse_improvement_range": [
+            -0.33862463019464867,
+            0.23898319404838556
+          ]
+        },
+        "120": {
+          "length": 120,
+          "draws": 1000,
+          "valid": 1000,
+          "axis_dates": 359,
+          "rmse_improvement_range": [
+            -0.3256694749425945,
+            0.22390473398456745
+          ]
+        }
+      },
+      "mean_baseline_source": "fingerprinted previous audit training means; no new source-data validation"
+    },
+    "risk": {
+      "rows": 948,
+      "dates": 237,
+      "assets": [
+        "510050.SS",
+        "510300.SS",
+        "510500.SS",
+        "588000.SS"
+      ],
+      "rmse_percentage_points": {
+        "B0": 5.800388430196821,
+        "B1": 6.12644819081811,
+        "B2": 6.324113092938405,
+        "ETF_mean": 5.605414138795712
+      },
+      "improvement_percentage_points": -0.19766490212029542,
+      "candidate_beats_existing": false,
+      "candidate_beats_simple_etf_mean": false,
+      "uncertainty_reused_not_reestimated": {
+        "60": {
+          "length": 60,
+          "draws": 1000,
+          "valid": 1000,
+          "axis_dates": 359,
+          "rmse_improvement_range": [
+            -0.5130678985016306,
+            0.014514287842367033
+          ]
+        },
+        "120": {
+          "length": 120,
+          "draws": 1000,
+          "valid": 1000,
+          "axis_dates": 359,
+          "rmse_improvement_range": [
+            -0.42682867764375254,
+            -0.0443736779705404
+          ]
+        }
+      },
+      "mean_baseline_source": "fingerprinted previous audit training means; no new source-data validation"
+    }
+  },
+  "scope": "saved arithmetic and contract date checks; original data qualification is inherited, not rerun",
+  "targets_paired": true,
+  "strategy_originals": {
+    "checked": true,
+    "sha256": {
+      "LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    },
+    "originals_copied": false
+  }
+}
