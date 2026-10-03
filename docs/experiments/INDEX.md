@@ -606,3 +606,5 @@
 - `docs/reports/` — 说明：回测 HTML 报告已迁至 `web/public/reports/`
 - `docs/` 根的 `handoff-* / plan-*` 为应用线（data-sync）历史任务书与方案，
   与本目录研究线互不隶属
+
+- [STUMPY多日形态候选发现](stumpy-shape-mining-2026-10-03.md)：工具限定通过，金融增量未测量。

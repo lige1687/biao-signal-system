@@ -1,0 +1,98 @@
+{
+  "used_requests": 6,
+  "limit": 6,
+  "dependencies": [
+    {
+      "name": "stumpy",
+      "version": "1.14.1",
+      "metadata_url": "https://pypi.org/pypi/stumpy/1.14.1/json",
+      "metadata_bytes": 30898,
+      "metadata_sha256": "e9bd28212815cab4826ceb70354b16d8919c812142033514492cbf99464506ed",
+      "wheel_url": "https://files.pythonhosted.org/packages/db/3d/0701e08335954b5d25ae98e5c2e9f20580587c833de85e486ebdda80cb20/stumpy-1.14.1-py3-none-any.whl",
+      "wheel_filename": "stumpy-1.14.1-py3-none-any.whl",
+      "wheel_bytes": 183983,
+      "wheel_sha256": "1150c95905fdee5f6cb8c77d7136035c2ef4f4aed8d41af73a550a4cf55c7fc5",
+      "requires_dist": [
+        "numpy>=1.24",
+        "scipy>=1.10",
+        "numba>=0.61.2",
+        "pandas>=0.20.0; extra == \"ci\"",
+        "dask>=1.2.2; extra == \"ci\"",
+        "distributed>=1.28.1; extra == \"ci\"",
+        "coverage>=4.5.3; extra == \"ci\"",
+        "flake8>=3.7.7; extra == \"ci\"",
+        "flake8-docstrings>=1.5.0; extra == \"ci\"",
+        "black>=22.1.0; extra == \"ci\"",
+        "pytest>=4.4.1; extra == \"ci\"",
+        "isort>=5.11.0; extra == \"ci\"",
+        "tbb>=2019.5; platform_system == \"Linux\" and extra == \"ci\"",
+        "polars>=1.14.0; extra == \"ci\"",
+        "lxml; extra == \"ci\""
+      ],
+      "wheel_delivery": "local only, public exact URL recovery",
+      "license_files": [
+        {
+          "upstream_path": "stumpy-1.14.1.dist-info/licenses/LICENSE.txt",
+          "delivered": "licenses/stumpy/LICENSE.txt",
+          "sha256": "36af10790ccc8faa741b5e483f648d101f4df9795e485e2b01b089039a388a4f"
+        }
+      ]
+    },
+    {
+      "name": "numba",
+      "version": "0.61.2",
+      "metadata_url": "https://pypi.org/pypi/numba/0.61.2/json",
+      "metadata_bytes": 21392,
+      "metadata_sha256": "7f0c78e0fb5b27c39479898d5d42a5e9f27b087934ae808101b0ab3bb1c4eb2a",
+      "wheel_url": "https://files.pythonhosted.org/packages/95/9e/63c549f37136e892f006260c3e2613d09d5120672378191f2dc387ba65a2/numba-0.61.2-cp311-cp311-macosx_11_0_arm64.whl",
+      "wheel_filename": "numba-0.61.2-cp311-cp311-macosx_11_0_arm64.whl",
+      "wheel_bytes": 2778695,
+      "wheel_sha256": "49c980e4171948ffebf6b9a2520ea81feed113c1f4890747ba7f59e74be84b1b",
+      "requires_dist": [
+        "llvmlite<0.45,>=0.44.0dev0",
+        "numpy<2.3,>=1.24"
+      ],
+      "wheel_delivery": "local only, public exact URL recovery",
+      "license_files": [
+        {
+          "upstream_path": "numba-0.61.2.dist-info/LICENSE",
+          "delivered": "licenses/numba/LICENSE",
+          "sha256": "3a70e0a21cad03147246f6363d07bf76fae216c72779707f4ae5db06bcacf067"
+        },
+        {
+          "upstream_path": "numba-0.61.2.dist-info/LICENSES.third-party",
+          "delivered": "licenses/numba/LICENSES.third-party",
+          "sha256": "a9d83f4ad0e4a314cc7c479885a2deb3f6a356a71666a7dba71b66835960284b"
+        }
+      ]
+    },
+    {
+      "name": "llvmlite",
+      "version": "0.44.0",
+      "metadata_url": "https://pypi.org/pypi/llvmlite/0.44.0/json",
+      "metadata_bytes": 23783,
+      "metadata_sha256": "38022977cfb446e7dc26385c0a380ff07e0b4f64c552f6e66b76dd34ca9eaf07",
+      "wheel_url": "https://files.pythonhosted.org/packages/ff/ec/506902dc6870249fbe2466d9cf66d531265d0f3a1157213c8f986250c033/llvmlite-0.44.0-cp311-cp311-macosx_11_0_arm64.whl",
+      "wheel_filename": "llvmlite-0.44.0-cp311-cp311-macosx_11_0_arm64.whl",
+      "wheel_bytes": 26201090,
+      "wheel_sha256": "ace564d9fa44bb91eb6e6d8e7754977783c68e90a471ea7ce913bff30bd62427",
+      "requires_dist": null,
+      "wheel_delivery": "local only, public exact URL recovery",
+      "license_files": [
+        {
+          "upstream_path": "llvmlite-0.44.0.dist-info/LICENSE",
+          "delivered": "licenses/llvmlite/LICENSE",
+          "sha256": "4b9a7264b0113a7b326ee84fc244b73991b535b4833e4a56d58750f2a72250dc"
+        },
+        {
+          "upstream_path": "llvmlite-0.44.0.dist-info/LICENSE.thirdparty",
+          "delivered": "licenses/llvmlite/LICENSE.thirdparty",
+          "sha256": "dc527293cfc2e4b4d59042e0b204667162845d8548651932f5a9d2f4adfc928b"
+        }
+      ]
+    }
+  ],
+  "repository_install_command": "PIP_DISABLE_PIP_VERSION_CHECK=1 PIP_CACHE_DIR=<repo>/.biao/external-shape-mining-20261003/pip-cache TMPDIR=<repo>/.biao/external-shape-mining-20261003 python3 -m pip install --no-index --no-deps --target <repo>/.biao/external-shape-mining-20261003/deps <three pinned wheel paths>",
+  "installation_exit_code": 0,
+  "package_code_vendored": false
+}

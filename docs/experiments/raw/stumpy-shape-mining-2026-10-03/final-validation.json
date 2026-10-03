@@ -1,0 +1,47 @@
+[
+  {
+    "command": [
+      "python3",
+      "-m",
+      "pytest",
+      "tests/unit/test_shape_mining.py",
+      "-q"
+    ],
+    "exit_code": 0,
+    "seconds": 15.896865667000384,
+    "stdout": "...............                                                          [100%]\n=============================== warnings summary ===============================\ntests/unit/test_shape_mining.py::test_noise_without_native_matches_returns_empty_library\n  ${ROOT}/.biao/external-shape-mining-20261003/deps/stumpy/motifs.py:386: UserWarning: No motifs were found. You may consider increasing the `cutoff` (e.g., cutoff=4.47213595499958) and/or increasing the `max_distance `(e.g., max_distance=np.inf).\n    warnings.warn(msg)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n15 passed, 1 warning in 14.93s\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "${ROOT}/docs/experiments/raw/stumpy-shape-mining-2026-10-03/run_probe.py",
+      "--root",
+      "${ROOT}",
+      "--local-output",
+      "${ROOT}/.biao/external-shape-mining-20261003/probe-real",
+      "--resume"
+    ],
+    "exit_code": 0,
+    "seconds": 25.25590670800011,
+    "stdout": "{\"synthetic\": {\"rows\": 240, \"coverage\": {\"rows\": 160, \"valid_windows\": 141, \"native_groups\": 1, \"kept_candidates\": 1}, \"occurrences\": [3], \"non_null_distances\": 80}, \"noise\": {\"rows\": 240, \"coverage\": {\"rows\": 160, \"valid_windows\": 141, \"native_groups\": 0, \"kept_candidates\": 0}, \"occurrences\": [], \"non_null_distances\": 0}, \"real\": {\"rows\": 1085, \"coverage\": {\"rows\": 726, \"valid_windows\": 707, \"native_groups\": 3, \"kept_candidates\": 2}, \"occurrences\": [4, 12], \"non_null_distances\": 718}}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "shape_mining.py",
+      "apply",
+      "--input",
+      "input.json",
+      "--library",
+      "library.json",
+      "--output",
+      "result"
+    ],
+    "exit_code": 0,
+    "seconds": 2.732939665998856,
+    "stdout": "{\"output\": \"result/observations.json\", \"status\": \"research_unqualified\"}\n",
+    "stderr": ""
+  }
+]

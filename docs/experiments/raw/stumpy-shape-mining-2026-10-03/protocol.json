@@ -1,0 +1,77 @@
+{
+  "question": "Does native STUMPY provide an actually callable new candidate-discovery capability: fixed earlier shapes -> causal later-window distances?",
+  "frozen_at": "2026-10-04T00:05:47.861605+08:00",
+  "mode": "engineering candidate generation, no financial evaluation",
+  "work_base": "ab96cf88ea91ff7d019c9b66ebca9d617b9d090d",
+  "coordination_start": "3b3660a01f5bc126e7b0854d116fc658811aef0f",
+  "parameters": {
+    "window_observations": 20,
+    "max_candidates": 3,
+    "max_distance": "0.5*sqrt(20)",
+    "native": "stump, motifs, mass",
+    "nonoverlap": "occurrence start indices >=20 apart within/across kept candidates",
+    "minimum_occurrences": 2,
+    "transform": "z-normalized log-close, distance, no amplitude"
+  },
+  "synthetic": {
+    "seed": 420,
+    "rows": 240,
+    "train_last_index": 159,
+    "inserted_shape_starts": [
+      5,
+      60,
+      110,
+      170,
+      215
+    ],
+    "noise_control": "seed421 same log-close mean/scale/length, no inserted shapes",
+    "baseline": "no automatic multi-day discovery tool found in allowed inventory; native outputs numerically checked, no financial baseline is evaluated"
+  },
+  "real_diagnostic": {
+    "asset": "510300.SS",
+    "source_path": "docs/experiments/raw/volume-information-2026-09-30/execution/panel.json",
+    "source_sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+    "source_bytes": 1582974,
+    "source_mode": "historical_reconstruction",
+    "price_series": "economic_price",
+    "range": "2022-01-04..2026-06-30",
+    "discovery_end": "2024-12-31",
+    "inputs": "only source calendar, asset/date/status/action_known and positive close; no volume, targets or future labels",
+    "eligibility": "calendar rows retained; missing/unquoted/unknown actions -> null, duplicates/missing calendar row cause diagnostic to stop",
+    "meaning": "already-seen historical description only, no qualified historical decision or financial increment",
+    "delivery": "source raw, extracted real prices, real templates/daily distances only local; public aggregate counts and original fingerprints"
+  },
+  "limits": {
+    "source_requests": 6,
+    "core_batches": 1,
+    "followup_batches": 3,
+    "market_fits": 0,
+    "external_model_requests": 0,
+    "paid_services": 0,
+    "new_candidates_per_series": 3
+  },
+  "planned_checks": [
+    "native motif occurrences >=2, nonoverlap",
+    "earlier fixed discovery does not depend on future tail",
+    "per-window distance excludes future computationally",
+    "independent normalization-distance oracle",
+    "missing null retains window and constant windows ineligible",
+    "input revisions/wrong assets/corrupted library rejected",
+    "real CLI discover/apply, no help-only acceptance",
+    "fresh-directory apply recovery, installed dependencies explicit"
+  ],
+  "stop": [
+    "do not tune geometry or add seeds/windows to obtain more candidates",
+    "candidate_status remains research_unqualified",
+    "formal factor-effect workflow blocked on new exact definition/qualification/contract; do not bypass",
+    "no production, other modules, outside-repo edits or data deletion"
+  ],
+  "strategy_sha256": {
+    "technical-system": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "technical-implementation": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "execution_notes": [
+    "Implementation draft preceded test file despite plan ordering; no red-test-first claim; core results not yet seen",
+    "one readonly Sol medium helper completed, no writes/network/market reads"
+  ]
+}

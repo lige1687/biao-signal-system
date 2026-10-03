@@ -1,3 +1,27 @@
+# 2026-10-04 Asia/Shanghai：形态发现入口验收，AI流程初筛完成
+
+原负责人继续；本有界工程阶段completed，长期外部增量任务保留。工作分支task/external-quant-progress，基础ab96cf88ea91ff7d019c9b66ebca9d617b9d090d；本次发布commit以该文件Git历史及coordination/lei同名记录为准。设备本地Mac arm64。无后台实验/训练/checkpoint。
+
+已完成：shape_mining.py原生STUMPY入口、15项测试、固定人工重复/噪声与既有510300.SS无标签端到端。保留候选1/0/2，真实后期718距离；独立核798距离最大差9.80e-10，独立目录恢复保存人工模板通过。两次失败保留：target版本字符串、原生空组；后者已回归。来源6/6、核心1+后续3/3已用，本阶段不再扩参。报告docs/experiments/stumpy-shape-mining-2026-10-03.md；raw同名目录完整回执/人工输入输出/许可/指纹。金融预测、决策、资金及线上增量未测量。
+
+新增AI资料评估：docs/archive/handoffs-plans/external-ai-mining-directions-2026-10-04.md。建议优先核FactorMiner从负结果选择下一行动，其次公式去重/含义核验；AlphaForge整体迁移暂缓。6/6官方来源搜索/打开，0安装/模型调用/实验。未钉源码版本或完成完整许可验收，不能冒称接入。累计61来源、26工程批、16旧真实拟合保持；本轮0新金融拟合/行情/付费。
+
+当前正在做：本阶段成果安全发布与远端核实。下一步planned：固定FactorMiner源码和许可，只核可单独复用的经验到行动组件；需要另冻结有限问题和预算，当前未运行。暂停：共同workflow整合角色未明确，继续不写共享框架。未完成：形态候选正式定义/合格数据/后期金融比较，未把工具成绩当策略有效。
+
+其他任务应避开本次shape_mining.py、test_shape_mining.py及同名raw；不独占所有形态或AI方向。技术持续/黑绿、risk-shape隔夜日内、经典基准/D3错误分解保持其负责人。最新规则已读取到d87e47ef及随后D4协调更新；无已登记写入冲突。真实行情/模板/逐日距离和wheel不进Git，准确大小SHA见probe-summary/sources；人工演示可远端恢复，真实演示材料仍仅本地。全项目、Linux/Windows、从零依赖恢复未验证。
+
+## workflow-fusion-2026-10-04 / D4
+
+已收到并读准确任务书9aa990f70b79c440543e25f484374bf39505b707:docs/archive/handoffs-plans/research-workflow-fusion-2026-10-04/complement.md。本次只补证据导航，0重跑/拟合/安装/来源；原负责人验收。
+
+已覆盖入口：成果af8934d60511ae24f9e182bdf2d4a441a723cc12中的.agents/skills/lei-quant-tools/scripts/multiple_comparison.py compare-workflows；参数和拒绝边界见references/multiple-comparison.md。它比较多个候选的共同逐日平方误差、同步抽取日期段，不能输出自动组合有效性。必须相同asset/date/id/fold/y/label_end、同基准、完整日历固定资产、一个拟合时期；不取交集、填空、自动改权重。来源和全部尝试史仍需合同资格。
+
+人工互补/同向副本/负号副本已有等价的原生池验收：同一af8934d...中的docs/experiments/raw/external-mining-reuse-2026-10-03/core-result.json inputs/pool_transitions，verification.json保存六组独立核数与Python -S退出0及破坏副本退出1，verify_saved.py为只读重算入口，完整105上游指纹在同目录。原生互补可组合、同向拒绝、负号仍占位，见README；本次只读复用，不再次运行。它是同日四个人工对象的代数例，不能替代单ETF跨时间预测。
+
+边界/未覆盖：multiple_comparison不是预测组合权重搜索器；AlphaGen池的上述例也不是三组已合格市场保存预测的互补实证。当前没有新的这类输入，因此实际金融互补未测量。STUMPY只核模板/发生窗口重复，形状不同不等于错误互补，低相关不等于组合有效。本次不新建同功能工具，不冒称D4金融增量完成；现有工具/反例及接收条件已交，由classic独立验收。
+
+---
+
 # 当前方向：拓展候选发现能力，三路线初筛完成
 
 更新时间2026-10-03T21:14:52.517332+08:00，Asia/Shanghai；task-id external-quant-resources，原负责人继续。模式brainstorming/plan_only；没有实现或安装，原AlphaGen结论保持。

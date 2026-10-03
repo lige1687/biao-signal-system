@@ -1,0 +1,219 @@
+{
+  "followup_batch": 3,
+  "financial_fits": 0,
+  "financial_increment": "unmeasured",
+  "cases": {
+    "synthetic": {
+      "rows": 240,
+      "coverage": {
+        "rows": 160,
+        "valid_windows": 141,
+        "native_groups": 1,
+        "kept_candidates": 1
+      },
+      "occurrences": [
+        3
+      ],
+      "non_null_distances": 80,
+      "distance_min": 0.0,
+      "distance_max": 8.21006109155577,
+      "commands": [
+        {
+          "command": [
+            "/opt/homebrew/opt/python@3.11/bin/python3.11",
+            "-m",
+            "lei_signal.research.shape_mining",
+            "discover",
+            "--input",
+            "${ROOT}/docs/experiments/raw/stumpy-shape-mining-2026-10-03/probe/synthetic/input.json",
+            "--output",
+            "${ROOT}/docs/experiments/raw/stumpy-shape-mining-2026-10-03/probe/synthetic/discover",
+            "--discovery-end",
+            "2020-06-08"
+          ],
+          "status": "reused saved output from followup2; not rerun"
+        },
+        {
+          "command": [
+            "/opt/homebrew/opt/python@3.11/bin/python3.11",
+            "-m",
+            "lei_signal.research.shape_mining",
+            "apply",
+            "--input",
+            "${ROOT}/docs/experiments/raw/stumpy-shape-mining-2026-10-03/probe/synthetic/input.json",
+            "--output",
+            "${ROOT}/docs/experiments/raw/stumpy-shape-mining-2026-10-03/probe/synthetic/apply",
+            "--library",
+            "${ROOT}/docs/experiments/raw/stumpy-shape-mining-2026-10-03/probe/synthetic/discover/library.json"
+          ],
+          "status": "reused saved output from followup2; not rerun"
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "docs/experiments/raw/stumpy-shape-mining-2026-10-03/probe/synthetic/input.json",
+          "bytes": 9937,
+          "sha256": "fd71fe5f7880859daf1c9763e2bf472a60bd4a3e81c9b2a143846b72462d512f",
+          "delivered_in_git": true
+        },
+        {
+          "path": "docs/experiments/raw/stumpy-shape-mining-2026-10-03/probe/synthetic/discover/library.json",
+          "bytes": 2237,
+          "sha256": "1dcc9a8b392921b01461e793b196dfde17255dcc6810311bf2a82d0d97bfb250",
+          "delivered_in_git": true
+        },
+        {
+          "path": "docs/experiments/raw/stumpy-shape-mining-2026-10-03/probe/synthetic/apply/observations.json",
+          "bytes": 23964,
+          "sha256": "f371450bc4ff7d78e97855703f5be4192e661456259e9bcf0d53212ace8f0c9e",
+          "delivered_in_git": true
+        }
+      ]
+    },
+    "noise": {
+      "rows": 240,
+      "coverage": {
+        "rows": 160,
+        "valid_windows": 141,
+        "native_groups": 0,
+        "kept_candidates": 0
+      },
+      "occurrences": [],
+      "non_null_distances": 0,
+      "distance_min": null,
+      "distance_max": null,
+      "commands": [
+        {
+          "command": [
+            "/opt/homebrew/opt/python@3.11/bin/python3.11",
+            "-m",
+            "lei_signal.research.shape_mining",
+            "discover",
+            "--input",
+            "${ROOT}/docs/experiments/raw/stumpy-shape-mining-2026-10-03/probe/noise/input.json",
+            "--output",
+            "${ROOT}/docs/experiments/raw/stumpy-shape-mining-2026-10-03/probe/noise/discover",
+            "--discovery-end",
+            "2020-06-08"
+          ],
+          "exit_code": 0,
+          "seconds": 10.619416917001217,
+          "stdout": "{\"output\": \"${ROOT}/docs/experiments/raw/stumpy-shape-mining-2026-10-03/probe/noise/discover/library.json\", \"status\": \"research_unqualified\"}\n",
+          "stderr": "${ROOT}/.biao/external-shape-mining-20261003/deps/stumpy/motifs.py:386: UserWarning: No motifs were found. You may consider increasing the `cutoff` (e.g., cutoff=4.47213595499958) and/or increasing the `max_distance `(e.g., max_distance=np.inf).\n  warnings.warn(msg)\n"
+        },
+        {
+          "command": [
+            "/opt/homebrew/opt/python@3.11/bin/python3.11",
+            "-m",
+            "lei_signal.research.shape_mining",
+            "apply",
+            "--input",
+            "${ROOT}/docs/experiments/raw/stumpy-shape-mining-2026-10-03/probe/noise/input.json",
+            "--output",
+            "${ROOT}/docs/experiments/raw/stumpy-shape-mining-2026-10-03/probe/noise/apply",
+            "--library",
+            "${ROOT}/docs/experiments/raw/stumpy-shape-mining-2026-10-03/probe/noise/discover/library.json"
+          ],
+          "exit_code": 0,
+          "seconds": 0.09649366700250539,
+          "stdout": "{\"output\": \"${ROOT}/docs/experiments/raw/stumpy-shape-mining-2026-10-03/probe/noise/apply/observations.json\", \"status\": \"research_unqualified\"}\n",
+          "stderr": ""
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "docs/experiments/raw/stumpy-shape-mining-2026-10-03/probe/noise/input.json",
+          "bytes": 9934,
+          "sha256": "663feaeb0faeea513b6ec9e0fb79f7ab807ce9bb26b5fa63088b81d490ed1500",
+          "delivered_in_git": true
+        },
+        {
+          "path": "docs/experiments/raw/stumpy-shape-mining-2026-10-03/probe/noise/discover/library.json",
+          "bytes": 864,
+          "sha256": "c0a89253ee122406fcbf7700442a20aa008a4335ec90e5c537712c799dc26782",
+          "delivered_in_git": true
+        },
+        {
+          "path": "docs/experiments/raw/stumpy-shape-mining-2026-10-03/probe/noise/apply/observations.json",
+          "bytes": 15511,
+          "sha256": "98eb3107e8ee6fdd24d9deecb8891bf5605e6ccbb5a606dfe11f75328efcaac7",
+          "delivered_in_git": true
+        }
+      ]
+    },
+    "real": {
+      "rows": 1085,
+      "coverage": {
+        "rows": 726,
+        "valid_windows": 707,
+        "native_groups": 3,
+        "kept_candidates": 2
+      },
+      "occurrences": [
+        4,
+        12
+      ],
+      "non_null_distances": 718,
+      "distance_min": 1.420356423686148,
+      "distance_max": 8.850981566729786,
+      "commands": [
+        {
+          "command": [
+            "/opt/homebrew/opt/python@3.11/bin/python3.11",
+            "-m",
+            "lei_signal.research.shape_mining",
+            "discover",
+            "--input",
+            "${ROOT}/.biao/external-shape-mining-20261003/probe-real/real/input.json",
+            "--output",
+            "${ROOT}/.biao/external-shape-mining-20261003/probe-real/real/discover",
+            "--discovery-end",
+            "2024-12-31"
+          ],
+          "exit_code": 0,
+          "seconds": 11.347541291997914,
+          "stdout": "{\"output\": \"${ROOT}/.biao/external-shape-mining-20261003/probe-real/real/discover/library.json\", \"status\": \"research_unqualified\"}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/opt/homebrew/opt/python@3.11/bin/python3.11",
+            "-m",
+            "lei_signal.research.shape_mining",
+            "apply",
+            "--input",
+            "${ROOT}/.biao/external-shape-mining-20261003/probe-real/real/input.json",
+            "--output",
+            "${ROOT}/.biao/external-shape-mining-20261003/probe-real/real/apply",
+            "--library",
+            "${ROOT}/.biao/external-shape-mining-20261003/probe-real/real/discover/library.json"
+          ],
+          "exit_code": 0,
+          "seconds": 3.090563249999832,
+          "stdout": "{\"output\": \"${ROOT}/.biao/external-shape-mining-20261003/probe-real/real/apply/observations.json\", \"status\": \"research_unqualified\"}\n",
+          "stderr": ""
+        }
+      ],
+      "artifacts": [
+        {
+          "path": ".biao/external-shape-mining-20261003/probe-real/real/input.json",
+          "bytes": 45461,
+          "sha256": "348dcb20a858d5c13ba987bfda31647055f5f1470603c96ec47fc3fa086efabe",
+          "delivered_in_git": false
+        },
+        {
+          "path": ".biao/external-shape-mining-20261003/probe-real/real/discover/library.json",
+          "bytes": 6024,
+          "sha256": "e5cf10262875860830dc252f3f033a0906173af4daa7a5be335e5478d9cf27d7",
+          "delivered_in_git": false
+        },
+        {
+          "path": ".biao/external-shape-mining-20261003/probe-real/real/apply/observations.json",
+          "bytes": 138912,
+          "sha256": "2821aec26e98d3fa0d4634be70fc71ca6565a1f9be20ed81e094af686164b349",
+          "delivered_in_git": false
+        }
+      ]
+    }
+  }
+}
