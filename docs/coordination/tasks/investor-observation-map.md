@@ -1,3 +1,41 @@
+# 当前成果：基础证据、四指数对照与超级Agent宏观解读已发布
+
+更新时间：2026-10-04T00:27:47.551418+08:00（Asia/Shanghai）。task-id investor-observation-map；负责人「基本面指标」会话01a0fd40-f651-7360-9411-d90f80affdc4/root，原负责人继续，非接管/任务结束。软件阶段completed，原市场理解责任active，资料资格缺口blocked；没有正在运行的新金融实验。
+
+## 版本、目标及完成证据
+
+- 最新用户授权“持续推进…推进完全”“继续哈”，认可先基础再发散：图表优先、可信阈值、A/美四指数关联对照、组合/不一致/事件和超级Agent解读。服务策略叙事标注层，不改技术规则/交易执行。
+- 工作分支task/investor-observation-map-progress；基线11662774379c07466935386fa7ef25ceac63bb24，设计087e3bb5b0f221cab941800bea27dc8fc3b5646a；**最新已推完整成果63eaa0be1ce36b844c2d70792fdc917eb35f0234**。ls-remote=本地HEAD；fetch远端后29项manifest内容大小/SHA逐项相同，manifest本体逐字读回；含manifest共30指纹校验。当前新增代码和小证据已远端，截图/独立恢复副本仅本地。
+- [进展](https://github.com/lige1687/biao-signal-system/blob/63eaa0be1ce36b844c2d70792fdc917eb35f0234/docs/progress/investor-observation-map.md)；[本轮报告](https://github.com/lige1687/biao-signal-system/blob/63eaa0be1ce36b844c2d70792fdc917eb35f0234/docs/experiments/market-foundation-agent-2026-10-04.md)；同名raw有original-goals、source-ledger、validation、restore-validation、manifest/SHA256SUMS。工作文档“提交前仅本地/正在同步”是保存时快照，已由本条准确发布事实替代，不为自指SHA循环补交。
+- completed：24指标近窗口历史P20/P50/P80及样本数/日期/公式；PMI50官方定义和算术零基线；撤未经证明的固定经验线；绿机会/红压力观察保留前提。官方定义可定位不等于第三方数值或投资阈值全部通过。
+- completed：沪深300/上证/标普500/纳斯达克综合NASDAQCOM同窗对照与相邻变化散点；独立单位/缺数不填/未结束期间排除；两指标组合及同段不一致事实，不证明领先或必跌；选定BLS2026事件，美东/中国时间与所属期分开，日频同窗才可标，快照覆盖至10月。
+- completed：/agent宏观快捷入口与主问句→同数据面板→状态/变化/依据/参考/缺口→准确市场指标图。确定性资料整理，0新模型调用；非后端通用LLM工具注册，不写旧聊天历史。原基本面VIX/CPI/信用/融资无证据显示窄覆盖纠正，共享zones.ts、旧仓位带/相关性未完全再核。
+
+## 实际检查、失败及依赖
+
+- 本轮12基础+14图表+4整合+33资料=63组检查exit0；最终tsc/Vite758模块exit0，已有大包warning保留。另原Agent流/清理/滚动/原文预览测试以内存打包运行exit0，没写/tmp。真实浏览器核中美四指数/组合/散点、Agent CPI/PPI问句回图、买卖边界、旧VIX/CPI大图、390px总览/对照/Agent无横向溢出；视口已恢复。
+- 独立临时目录复制8必要文件一致，复用本机node_modules，12组最低模型检查exit0；洁净npm安装、完整后端恢复、跨OS、真实用户理解/线上收益未测或未验证。归置器exit1仍既存.git工作树文件及docs/progress白名单，不改检查器/删除资料冒称通过。
+- 失败保留：初次newline构建错误、错误cwd、浮点严格相等、AX/DOM控件角色差异、事件标签拥挤；按原因修复。主动中断后构建结果不可读，最终重核通过；预览原PID已退出，确认5185无人后恢复本任务预览，未杀其他进程。source-ledger明确官方搜索片段/正文访问等级，不假装完整PDF精读。
+- blocked：A股PE/ERP合格观测、完整中国日历、首次发布时间与修订、FINRA/CFTC/盈利预期连续资料。BLS只是选定快照，FOMC没有逐日期核验因此未植入；不给未来预期/实际值。需要原来源负责人合格交付或用户新限定范围/预算才能续对应缺口；不因UI存在假定数据许可继承。
+
+## 现在责任、下一步与避让
+
+- 当前本阶段代码/验证完成；本条正在完成同步读回。active responsibility：现有市场理解自有图卡/参考/对照/解读的维护。planned：用户实际阅图反馈的局部问题，或原负责人新交的单项合格输入；没有排队启动全宏观/情绪/金融研究，也没有后台自动推进承诺。
+- 具体需避并写范围：web/src/features/market-understanding自有reference-evidence/comparison-model/events/use-market-data/IndexComparison/macro-reading/MacroReadingPanel及图卡/样式；MarketUnderstandingPage/navigation；FundamentalsPage参考显示；AgentWorkspacePage宏观入口；自有run-market-*、package和阶段报告/raw、两进度。不独占整个文件永远，不改旧聊天/报单/回测路径、后端、Streamlit、原策略或他人研究。
+- 已读最新协调规则及增量至d2fd985cdbe4a5cac89d4c855b15c048a47ff98e；COORDINATION1.0/SHA6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0不变。technical EMA/黑绿、external STUMPY/AI工具、classic六项分发、risk日内/隔夜及D3错误、sentiment板块/131周NAAIM题均不进入本显示块或同实验，无已登记冲突。情绪对话的共享证据消息已见，其研究由原方负责，本线只引用正式定义/结果/限制，不重复研究；无额外对话发送。
+- 停止/不要重做：本轮来源6/6（3查询+3打开），拟合/回测/付费/新代理0；旧预算和QQQ/VXN、宏观18/18、AAII/NAAIM弱基准、黑绿封存结论不重置。软件结论只在新变更/失败/适用条件改变时重查对应部分，不重跑大实验。
+
+## 材料、运行与边界
+
+- 30新增/修改准确Git路径（另设计前提交），约0.49MB内容清单；无凭据、逐行行情、权重、数据库、索引或个人交易资料上传。必要新数据缺口如上，策略原件仅来源指纹/范围摘录，未擅自外传。截图preview-comparison.local.png、restore-local-adao0nbe及旧本地副本保持仅本地，路径/大小/指纹见manifest；不是接管包或进程迁移。
+- 自有预览现PID26760/session46007，127.0.0.1:5185；旧49578中断退出不可继续沿用。原API1753/8000不动；无本题金融PID/checkpoint；远端任务进程未确认。其他AI不能并发写本题输出或重复开启此阶段实验，独立问题可继续，记录不是排他锁。
+- 共享原checkout/index/脏AGENTS核原指纹未变；未reset/clean/切脏分支/删资料/强推。工作分支项目AGENTS既有简短协调入口保留，无覆盖。推前树内无GitHub workflow/活动hook，无main/部署/付费或权限修改。
+- 接续第一步：读最新协调与准确63eaa0be1ce36b844c2d70792fdc917eb35f0234报告/SHA清单，核版本与输入资格，跑最低模型检查并确认新版已修旧显示问题，随后只推进有合格输入和授权的单项。不能只凭completed声称全部数据/收益已齐。
+
+---
+
+## 历史阶段（当前事实以上为准，原文保留）
+
 # 当前active：基础证据、指数对照与超级Agent宏观解读
 
 更新时间：2026-10-03T23:03:34.095944+08:00（Asia/Shanghai）；原负责人/root继续，非接管。用户已明确认可组合对照、不一致提示、事件标记、超级Agent宏观能力及“先基础再发散”的六阶段计划，最新授权“持续推进…推进完全”。
