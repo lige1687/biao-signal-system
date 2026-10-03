@@ -1,3 +1,15 @@
+# 2026-10-04 Asia/Shanghai：FactorMiner经验到下一行动组件核验active
+
+external-quant-resources原负责人继续，用户在下一方向解释后明确“ok，持续推进哈”。本轮问题：固定FactorMiner源码和许可后，经验/下一行动组件能否独立调用，在相同人工输入上改变错误重复/停止选择。服务候选提出的研究工具层，仍不变LEI策略。工作分支task/external-quant-progress，基础与最近已推92d2cf0f41499c150c5f18d091a6e11fc5b49087；当前只有本地合同，未有新实现成果。
+
+先读规则1.0@91574230d82f894726f3b635c05acf9ee69e7eff及最新技术结案；技术EMA/颜色、risk-shape隔夜日内、classic D1-D6验收范围不同，未有已登记FactorMiner同题冲突；记录不是锁。STUMPY/D4旧阶段保持，0重跑。新写范围仅docs/experiments/factorminer-experience-actions-2026-10-04.md及同名raw、自己的两进度/本记录、registry/INDEX自己项；必要时新增独立experience_actions.py及其测试，原共享workflow/CLI/总定义/生产不写。上游包和依赖只在本仓.biao/external-factorminer-20261004，不写全局环境或仓库外。
+
+采用research-closure默认6来源请求（含失败）、核心1+必要后续3上限，0新模型/真实拟合/行情/付费；不是重开旧6/6预算。此前61来源/26工程批/16旧拟合保留。本轮已1官方README请求，余5；尚未执行新工程。验收原生实现/许可/输入输出可定位，固定人工记忆与无记忆及强明确策略对比，反例/不适用/恢复可复核；没有真实模型输出对照则明确候选质量未测量，不能用mock冒充。
+
+当前正在核准确上游版本、模块导入及权限边界；只读助手0，不新建任务。遇Python3.12要求先核组件所需语法与现有环境，不假造模块或篡改上游源码；可独立调用则验证，确需迁移整个评价平台/未经批准模型则只阻塞该分支。无本题运行中后台实验/checkpoint，其他程序原样保留。读回此记录后继续下载固定官方源、原生窄执行、证据和远端发布；大数据/私有策略/凭据不上传。
+
+---
+
 # 2026-10-04 Asia/Shanghai：形态工具阶段已发布，AI方向及D4证据已交
 
 external-quant-resources原负责人继续；本轮有界工程/资料问题completed，长期任务保留。工作分支task/external-quant-progress；基础ab96cf88ea91ff7d019c9b66ebca9d617b9d090d；**最新已推并核远端92d2cf0f41499c150c5f18d091a6e11fc5b49087**，34文件428600字节逐项读回一致，远端ref等于本地提交。原共享HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9与index SHA83bb48fe19dcb073d4a449bcef331c745c942128ea53ca2a19c1f6791cbe7f92不变；无合main/部署/清理。
