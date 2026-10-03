@@ -86,3 +86,5 @@
 沿用唯一task-id，不创建第二记录/任务。最新完整规则读取15b3e4e0edd878c3e84ef30482d108e492563dbd，正文仍1.0。已读新增sentiment（原E资料blocked，不改共享研究）及market/external近期增量；当前窄问题无已登记同题运行冲突，未登记状态未知。原工作分支干净、HEAD及远端均bcf6fcf96cb9b5c540714e87316c2ed108299d5b，AGENTS入口已存在无需重复追加；原交付与core-sync远端仍4155b4db7ccd14674eff2e29dfaf102d2ac3e5f9/d7da6cb0f9c127606b6faa572fabc9ee93f104f7，未取得新返修。共享源工作区不切换、不整理、不回滚。
 
 本轮仅继续现有black-reset资格准备：拟在同一raw/remote-core-rule-next-2026-10-03/写BLACK-RESET-DEFINITION-DRAFT.md及source-mapping.json，明确共同趋势身份、严格比较、未知/缺价、共同字段和最小执行器验收，不写正式登记或执行代码。涉及src/lei_signal/rules/first_ma_pullback.py、lei_color.py与旧lifecycle_ref.py均只读。定义草案不是第二登记表、不是正式策略采用，不用旧raw进口充当正式实现。独立只读协作复核一名临时助手，不创建新用户任务/市场实验；累计新效果/拟合/采购/封存重跑均0，历史预算承接不变。正式工具/定义/数据依赖仍blocked。本轮文档同步无新增运行中实验或checkpoint，不杀进程；其他远端进程未知。
+
+本轮首次普通push因同期任务更新被拒，未冒称已同步。已fetch/read a5e4ecec9f37a93c434a9d2a70df2fca29cedb8e新增市场观察日期说明、地图链接修复和抵扣路径恒等审查；各自文件/问题与本题无冲突，规则未变。只整合本任务未发布提交，保留他人原字节，不强推。
