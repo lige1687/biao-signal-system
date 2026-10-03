@@ -2,7 +2,7 @@
 
 - task-id：market-observation；负责人：原市场观察聊天Codex /root；设备：本地Air。继续负责，不是接管或任务结束。
 - 状态：active（统一协作登记与限定页面说明审查）；宏观新来源分支 paused / budget_exhausted；QQQ/VXN原问题已封存。
-- 更新时间：2026-10-03T14:04:46.987217+08:00，Asia/Shanghai。
+- 更新时间：2026-10-03T14:13:55.090391+08:00，Asia/Shanghai。
 - 目标：核对基本面来源、个人/管理人调查与乐观悲观参考值对纳斯达克短期高低点的含义；补A股类似背景资料，使情绪/板块/基本面信息帮助理解宽基ETF市场。
 - 当前用途：叙事和展示可信度；不进入技术交易判定或硬过滤。用户理解改善、真实账户收益、线上业务增量均未测量。
 - 验收：来源/范围/单位/所属期/首次可用/样本及缺项明示，参考线有准确含义；限定历史问题含简单基准与反例；受影响代码最小验证及实际显示证据可定位。全页面阅读验收尚未完成。
@@ -10,9 +10,9 @@
 
 ## 分支、版本和唯一映射
 
-仓库 https://github.com/lige1687/biao-signal-system ；工作分支 `task/market-observation-progress`；公共基础完整commit `d7da6cb0f9c127606b6faa572fabc9ee93f104f7`；最近已推送完整成果 `5106f18ad6ffaf11f8fbf88a33427fbe936530fd`，已核对远端同SHA。该阶段仅AGENTS协作入口与旧进度映射；功能代码同已验证的首提交 `f306746daaefd3f1fce5c705df20d7475bd0ea8e`。
+仓库 https://github.com/lige1687/biao-signal-system ；工作分支 `task/market-observation-progress`；公共基础完整commit `d7da6cb0f9c127606b6faa572fabc9ee93f104f7`；最近已推送完整成果 `eb8dd780212e9dcd4e3a12f59b2ad55c84478e83`，已核对远端同SHA。该阶段包含CPI较高区间两句说明和人工4.5%显示证据；数值边界/颜色和其他功能代码保持原版。AGENTS协作说明于5106f18ad6ffaf11f8fbf88a33427fbe936530fd已推，原文完整保留。
 
-成果入口：https://github.com/lige1687/biao-signal-system/blob/5106f18ad6ffaf11f8fbf88a33427fbe936530fd/docs/progress/market-observation.md 。阶段历史为 `docs/ops/work-progress/market-observation.md`；当前跨任务摘要仅本记录。文件自身提交从协调分支 `git log -- docs/coordination/tasks/market-observation.md`定位，不无限写自指SHA。
+成果入口：https://github.com/lige1687/biao-signal-system/blob/eb8dd780212e9dcd4e3a12f59b2ad55c84478e83/docs/progress/market-observation.md 。阶段历史为 `docs/ops/work-progress/market-observation.md`；当前跨任务摘要仅本记录。文件自身提交从协调分支 `git log -- docs/coordination/tasks/market-observation.md`定位，不无限写自指SHA。
 
 共享Air检出仍为 `codex/factor-unit-research-20260915`、HEAD `18e64fa632dba5dbad0e5fcae09b4ccc75f119a9`，有大量其他任务修改。独立隔离目录和索引构建两分支提交，不切换、不清理、不整体提交共享区。
 
@@ -52,7 +52,7 @@
 
 权威策略批准SHA：体系df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20；实现85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903。只读原件，不改写；Git元数据不能替代材料资格。模型权重/tokenizer不适用，本任务无模型训练。
 
-根目录新增的CPI截图错误PNG后缀重复件、root ops追加记录及完整共享区修改仅本地，未整体推送；公开正确JPEG和对应阶段摘要已推。更多共享修改不归本任务，不能用HEAD冒称交付。
+本地归档目录的CPI截图错误PNG后缀重复件、root ops追加记录及完整共享区修改仅本地，未整体推送；公开正确JPEG和对应阶段摘要已推。更多共享修改不归本任务，不能用HEAD冒称交付。
 
 阻塞仅影响宏观新来源/真实时点资格和云端重跑原实验：预算0、受限输入未交。协作登记与已有资料说明审查可继续。授权仅工作分支/协调记录安全推送，不合并main/master、不上线、不强推、不改权限、不采购或触发付费计算，不上传凭证。
 
@@ -67,3 +67,15 @@
 每轮先fetch coordination/lei，读本文件及相关新增任务；核工作分支完整commit、封存预算与必要输入SHA。只处理尚未完成的限定内容，先核新版是否已修旧问题；新重叠等同步和协调完成再动。共享开发区保持原分支和修改，不从本记录推断可抢占其他任务。
 
 本版新增：首次以稳定task-id登记，映射旧进度、记录已推成果与仅本地缺口、保留预算和失败、按最新技术任务核重叠；没有接管或结束原任务。准确同步提交由本文件历史及远端读回核验定位。
+
+## 协作登记后的继续阶段（2026-10-03T14:13:55.090391+08:00）
+
+初次唯一记录提交067b29d17c0488d04edeba8d056dbed424433cd0已push并GitHub逐字读回；工作分支协作入口5106f18ad6ffaf11f8fbf88a33427fbe936530fd已远端核验。随后先读新协调记录，按已登记窄范围继续CPI说明，没有重新启动旧任务。
+
+最新完整规则读取9c34e297b1eaa51d85a894b8c5eda6ac62ac5176，规则SHA与1.0相同。已检查8条任务记录的目标/范围与相关变更；classic/external/remote-core均明确避开CPI，technical-reader不写该块，technical-sequence只做抵扣路径资格。investor-observation-map主题有交叠，但其已在记录暂停政策口径改写，并指定市场观察原负责人为页面实现者、地图只引用已核结果；本任务接受该分工，不改地图和预算、不替他人改状态。当前无已登记同块执行冲突，未登记者未知，记录不是锁。其他技术定义分工争议不由本任务处理。
+
+本阶段已完成：仅US_CPI_ZONES两句3–4%/>4%说明收窄为页面参考区间，不能仅据此推断利率或ETF方向；数值0/2/3/4/Infinity、标线0/2、颜色配置未调整。第一方说明cpi-policy-copy-review.md、cpi-policy-validation.json、cpi-policy-accessibility.txt、cpi-policy-browser.jpg均在工作分支同步目录。人工4.5%卡片/实际展开图检查通过，旧紧缩压力文案消失、政策限定/PCE说明/2%线可见；Vite767模块构建exit0，既有大chunk提醒保留。未重跑旧52项或市场实验。正确公开证据指纹见cpi-policy-validation.json，不倒改旧阶段manifest。
+
+原任务仍active，仅这一内容阶段completed。当前没有正在执行的实验或新来源；下一步待办为观察卡日期和市场作用范围说明，实质开始前重新读协调并登记确切块；全页重构、新指标/盈利接入没有启动。宏观18/18预算仍paused，不借其他任务额度。Linux/手机/真实上游/整个页面用户效果/线上收益仍未验证。自有人工服务与临时页已关闭，不终止他人进程。
+
+本机现有源码check_repo_hygiene.py exit0（只证明该共享版本，不宣称协调旧检查器已升级）。提交前固定代码/登记表而非重新复制共享原件；仅8个精确工作路径、仅自己的一个协调路径，保留他人字节。最新完整工作成果eb8dd780212e9dcd4e3a12f59b2ad55c84478e83已核远端相同，文档链接以上已更新；本轮协调更新仍须推后读回，不能预写通过。
