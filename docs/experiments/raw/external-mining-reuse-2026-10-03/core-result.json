@@ -1,0 +1,257 @@
+{
+  "started_at": "2026-10-03T20:46:33.034433+08:00",
+  "finished_at": "2026-10-03T20:46:36.559065+08:00",
+  "elapsed_seconds": 3.5243315420002546,
+  "pid": 46304,
+  "python": "3.11.7",
+  "platform": "macOS-15.6.1-arm64-arm-64bit",
+  "dependencies": {
+    "torch": "2.5.1",
+    "numpy": "2.1.1",
+    "pandas": "2.3.3"
+  },
+  "protocol_sha256": "75762afc18244a0f67bef00acd1f37986a1a6dcc28ee68d9af58dbb7c1e6f826",
+  "runner_sha256": "7fc4e99610f94a40efb8ae4823d542c63dcccf677a09d1ed2240a672f6e9fe3b",
+  "upstream_commit": "259687e8f316994426416c530a94842a2fe6405e",
+  "upstream_source_unchanged": true,
+  "inputs": {
+    "x": [
+      [
+        -1.0,
+        -1.0,
+        1.0,
+        1.0
+      ],
+      [
+        -1.0,
+        -1.0,
+        1.0,
+        1.0
+      ],
+      [
+        -1.0,
+        -1.0,
+        1.0,
+        1.0
+      ]
+    ],
+    "z": [
+      [
+        -1.0,
+        1.0,
+        -1.0,
+        1.0
+      ],
+      [
+        -1.0,
+        1.0,
+        -1.0,
+        1.0
+      ],
+      [
+        -1.0,
+        1.0,
+        -1.0,
+        1.0
+      ]
+    ],
+    "target": [
+      [
+        -1.414213562373095,
+        0.0,
+        0.0,
+        1.414213562373095
+      ],
+      [
+        -1.414213562373095,
+        0.0,
+        0.0,
+        1.414213562373095
+      ],
+      [
+        -1.414213562373095,
+        0.0,
+        0.0,
+        1.414213562373095
+      ]
+    ]
+  },
+  "pool_transitions": [
+    {
+      "candidate": "$close",
+      "returned_objective": 0.7071067811865476,
+      "size": 1,
+      "eval_cnt": 1,
+      "current_ic": 0.7071067811865476,
+      "best_ic": 0.7071067811865476,
+      "json": {
+        "exprs": [
+          "$close"
+        ],
+        "weights": [
+          0.7071067811865476
+        ]
+      }
+    },
+    {
+      "candidate": "$open",
+      "returned_objective": 1.0000000000000002,
+      "size": 2,
+      "eval_cnt": 2,
+      "current_ic": 1.0000000000000002,
+      "best_ic": 1.0000000000000002,
+      "json": {
+        "exprs": [
+          "$close",
+          "$open"
+        ],
+        "weights": [
+          0.7071067811865476,
+          0.7071067811865476
+        ]
+      }
+    },
+    {
+      "candidate": "$high",
+      "returned_objective": 0.0,
+      "size": 2,
+      "eval_cnt": 2,
+      "current_ic": 1.0000000000000002,
+      "best_ic": 1.0000000000000002,
+      "json": {
+        "exprs": [
+          "$close",
+          "$open"
+        ],
+        "weights": [
+          0.7071067811865476,
+          0.7071067811865476
+        ]
+      }
+    },
+    {
+      "candidate": "$low",
+      "returned_objective": 1.0,
+      "size": 3,
+      "eval_cnt": 3,
+      "current_ic": 1.0,
+      "best_ic": 1.0000000000000002,
+      "json": {
+        "exprs": [
+          "$close",
+          "$open",
+          "$low"
+        ],
+        "weights": [
+          0.3535533905932736,
+          0.7071067811865476,
+          -0.3535533905932735
+        ]
+      }
+    }
+  ],
+  "semantic_cases": [
+    {
+      "case": "one_instrument",
+      "input": [
+        [
+          1.0
+        ],
+        [
+          2.0
+        ],
+        [
+          3.0
+        ],
+        [
+          4.0
+        ]
+      ],
+      "target": [
+        [
+          1.0
+        ],
+        [
+          2.0
+        ],
+        [
+          3.0
+        ],
+        [
+          4.0
+        ]
+      ],
+      "native_ic": 0.0
+    },
+    {
+      "case": "common_signal_four_instruments",
+      "input": [
+        [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        [
+          2.0,
+          2.0,
+          2.0,
+          2.0
+        ],
+        [
+          3.0,
+          3.0,
+          3.0,
+          3.0
+        ],
+        [
+          4.0,
+          4.0,
+          4.0,
+          4.0
+        ]
+      ],
+      "target": [
+        [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        [
+          2.0,
+          2.0,
+          2.0,
+          2.0
+        ],
+        [
+          3.0,
+          3.0,
+          3.0,
+          3.0
+        ],
+        [
+          4.0,
+          4.0,
+          4.0,
+          4.0
+        ]
+      ],
+      "native_ic": 0.0
+    }
+  ],
+  "stock_data_precondition": {
+    "status": "blocked",
+    "exception": "ModuleNotFoundError",
+    "missing_module": "qlib",
+    "message": "No module named 'qlib'"
+  },
+  "budget": {
+    "core_batches": 1,
+    "try_new_expr_calls": 4,
+    "native_lstsq_calls_inferred_from_accepted_transitions": 2,
+    "market_fits": 0,
+    "rl_training_steps": 0,
+    "external_model_calls": 0
+  }
+}

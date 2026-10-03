@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-10-03T20:52:05.642328+08:00",
+  "followup_batches": 1,
+  "saved_only_restore": {
+    "directory_relative_to_repository": ".biao/external-alphagen-reuse-20261003/saved-only-d5hqspbn",
+    "command": [
+      "python3",
+      "-S",
+      "verify_saved.py"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"status\": \"passed\", \"files_verified\": 8, \"independent_numeric_cases\": 6, \"new_fits\": 0, \"requires_upstream_torch_numpy\": false}\n",
+    "stderr": "",
+    "third_party_packages_loaded": false,
+    "source_tree_present": false
+  },
+  "deliberate_corruption": {
+    "command": [
+      "python3",
+      "-S",
+      "verify_saved.py"
+    ],
+    "changed": "copy only: first saved pool score changed to 0.5",
+    "exit_code": 1,
+    "rejected": true,
+    "stderr_last_line": "AssertionError: core-result.json"
+  },
+  "local_check": {
+    "command": "python3 docs/experiments/raw/external-mining-reuse-2026-10-03/verify_saved.py",
+    "exit_code": 0,
+    "numeric_cases": 6
+  },
+  "not_verified": [
+    "Linux",
+    "Windows",
+    "full clean dependency install",
+    "full AlphaGen expression/RL/data workflow",
+    "financial performance"
+  ],
+  "failures": [
+    {
+      "action": "apply_patch create verify_saved.py",
+      "result": "tool reported Failed to write file; no file created",
+      "diagnosis": "107MiB reported available; no errno in tool result; cause unconfirmed. Direct write of the intended small file succeeded. No deletion or permission change."
+    }
+  ],
+  "hygiene": {
+    "command": "python3 scripts/check_repo_hygiene.py",
+    "exit_code": 0,
+    "scope": "current shared workspace; not full test suite",
+    "checker_sha256": "a661696b29d685c25388441975be6316d33342c3bcc24040cff5c58a377634bb"
+  }
+}

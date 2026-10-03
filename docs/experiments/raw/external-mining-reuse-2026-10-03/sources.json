@@ -1,0 +1,110 @@
+{
+  "retrieved_at": "2026-10-03T20:50:11.404868+08:00",
+  "requests": [
+    {
+      "ordinal": 1,
+      "url": "https://github.com/ICT-FinD-Lab/alphagen",
+      "type": "prior_turn_official_page_read",
+      "raw_response_retained": false
+    },
+    {
+      "ordinal": 2,
+      "url": "https://github.com/microsoft/qlib",
+      "type": "prior_turn_official_page_read",
+      "raw_response_retained": false
+    },
+    {
+      "ordinal": 3,
+      "url": "https://api.github.com/repos/ICT-FinD-Lab/alphagen/commits/master",
+      "bytes": 5456,
+      "sha256": "441199b347a1bf6696589c4bb1d02e38162e49262473e45c63b1df29cd596f8f",
+      "delivery": "not_uploaded; source_permission_or_nonessential_metadata",
+      "local_path": ".biao/external-alphagen-reuse-20261003/upstream-commit.json"
+    },
+    {
+      "ordinal": 4,
+      "url": "https://codeload.github.com/ICT-FinD-Lab/alphagen/zip/259687e8f316994426416c530a94842a2fe6405e",
+      "bytes": 277278,
+      "sha256": "83d23e98b670ca730eb114e3768f956e4eca82033e7c4fe23c0ed99ab082c52c",
+      "delivery": "not_uploaded; source_permission_or_nonessential_metadata",
+      "local_path": ".biao/external-alphagen-reuse-20261003/upstream.zip"
+    },
+    {
+      "ordinal": 5,
+      "url": "https://api.github.com/repos/ICT-FinD-Lab/alphagen",
+      "bytes": 7029,
+      "sha256": "959476324091f70ceda5b419838add7f7b3fd9c28a167183536684e165ed2909",
+      "delivery": "not_uploaded; source_permission_or_nonessential_metadata",
+      "local_path": ".biao/external-alphagen-reuse-20261003/upstream-repository.json"
+    }
+  ],
+  "source_budget": {
+    "used": 5,
+    "limit": 6
+  },
+  "upstream": {
+    "commit": "259687e8f316994426416c530a94842a2fe6405e",
+    "committer_date": "2026-06-04T05:54:37Z",
+    "github_license_field": null,
+    "snapshot_license_named_files": [],
+    "caveat": "Null metadata plus missing core license is an adoption gap; vendored gplearn and qlib notices do not license AlphaGen core."
+  },
+  "prior_evidence": [
+    {
+      "path": "docs/experiments/qlib-alpha158-definition-review-2026-09-12.md",
+      "bytes": 26054,
+      "sha256": "9679f91c82e553902e84a962ea92817b31e4abde891fafb5e222ff9cd998414b",
+      "upstream_commit": "79633dd9506ea689e5400dea0197717b5b3d74b7",
+      "available_in_work_base": true,
+      "delivery": "reference_only_this_stage; old research not rerun",
+      "published_base_sha256": "9679f91c82e553902e84a962ea92817b31e4abde891fafb5e222ff9cd998414b",
+      "matches_local": true
+    },
+    {
+      "path": "docs/experiments/rdagent-pilot-controller-review-2026-09-27.md",
+      "bytes": 7780,
+      "sha256": "eefe70ca54c748ddb65e65ce3c4348a6ce68db9a98b7e2fdacc66bc6a1f48a03",
+      "upstream_commit": "484776c211e4fbbeef03e0ec00d6bbee7362a4f4",
+      "available_in_work_base": false,
+      "delivery": "reference_only_this_stage; old research not rerun"
+    },
+    {
+      "path": "docs/experiments/rdagent-model-feedback-review-2026-09-27.md",
+      "bytes": 5727,
+      "sha256": "2fa517971fc3bddfdd8cd1b0cc050a5c04b0b7c96cb11d6074e729a226f3470f",
+      "upstream_commit": "484776c211e4fbbeef03e0ec00d6bbee7362a4f4",
+      "available_in_work_base": false,
+      "delivery": "reference_only_this_stage; old research not rerun"
+    },
+    {
+      "path": "docs/experiments/quantaalpha-assessment-2026-09-28.md",
+      "bytes": 10683,
+      "sha256": "a27cd103c8490a0cea17b515236e0a212c4bbe9548d40a47fa6baf8d4479ccb3",
+      "upstream_commit": "b7ceb27b1001261d7a95b209a963664ae1f8ab23",
+      "available_in_work_base": false,
+      "delivery": "reference_only_this_stage; old research not rerun"
+    },
+    {
+      "path": "docs/experiments/quantaalpha-medium-validation-2026-09-28.md",
+      "bytes": 12854,
+      "sha256": "056233663898c7963f86595d964d219b8744c9f030d9fe975051138905feb219",
+      "upstream_commit": "b7ceb27b1001261d7a95b209a963664ae1f8ab23",
+      "available_in_work_base": false,
+      "delivery": "reference_only_this_stage; old research not rerun"
+    },
+    {
+      "path": "docs/experiments/external-symbolic-search-pilot-2026-10-03.md",
+      "bytes": 11692,
+      "sha256": "77a06ffb1b71ad2f9a6ad80022edd1467351dcb59756022468bd1bca3e2a9d4e",
+      "upstream_commit": null,
+      "available_in_work_base": true,
+      "delivery": "reference_only_this_stage; old research not rerun",
+      "published_base_sha256": "77a06ffb1b71ad2f9a6ad80022edd1467351dcb59756022468bd1bca3e2a9d4e",
+      "matches_local": true
+    }
+  ],
+  "unchanged_strategy_sha256": {
+    "LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  }
+}
