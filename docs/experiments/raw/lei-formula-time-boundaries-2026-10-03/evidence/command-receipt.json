@@ -1,0 +1,104 @@
+{
+  "scope": "Synthetic validation only; no market outcomes, production integration or full registry admission",
+  "review_fix": "UTC conversion overflow is structured unknown/blocked through the library API, tested at both datetime limits",
+  "commands": [
+    {
+      "name": "unit_tests",
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "test_validator"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "matched": true,
+      "stdout": "",
+      "stderr": "test_absolute_time_equivalence_and_no_fixed_market_hour (test_validator.ValidatorControls.test_absolute_time_equivalence_and_no_fixed_market_hour) ... ok\ntest_cli_pass_and_two_blocking_cases (test_validator.ValidatorControls.test_cli_pass_and_two_blocking_cases) ... ok\ntest_full_formula_and_semantic_fields_are_bound (test_validator.ValidatorControls.test_full_formula_and_semantic_fields_are_bound) ... ok\ntest_global_cutoff_and_latest_required_input (test_validator.ValidatorControls.test_global_cutoff_and_latest_required_input) ... ok\ntest_missing_timezone_and_incomplete_availability_never_pass (test_validator.ValidatorControls.test_missing_timezone_and_incomplete_availability_never_pass) ... ok\ntest_reviewed_formula_and_dependency_contracts_pass (test_validator.ValidatorControls.test_reviewed_formula_and_dependency_contracts_pass) ... ok\ntest_rv20_warmup_endpoint_ddof_and_missing_controls (test_validator.ValidatorControls.test_rv20_warmup_endpoint_ddof_and_missing_controls) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.112s\n\nOK\n"
+    },
+    {
+      "name": "cli_pass",
+      "argv": [
+        "python3",
+        "-B",
+        "validator.py",
+        "fixtures/pass.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "matched": true,
+      "stdout": "{\n  \"status\": \"pass\",\n  \"checks\": {\n    \"formula\": {\n      \"status\": \"pass\",\n      \"reason\": \"reviewed_contract_and_typed_semantics_match\",\n      \"reference\": \"mixed.rv20@1.0.0\",\n      \"contract_hash\": \"f640b89cc970f5fcb2c1484892628158055b40cb84781c77f69f76df23f2d060\",\n      \"scope\": \"local_binding_only; full_registry_admission_not_certified\"\n    },\n    \"time\": {\n      \"status\": \"pass\",\n      \"rows\": [\n        {\n          \"id\": \"synthetic-A|2026-10-03\",\n          \"available_at_utc\": \"2026-10-03T07:00:00+00:00\",\n          \"cutoff_utc\": \"2026-10-03T07:30:00+00:00\",\n          \"status\": \"pass\",\n          \"reason\": \"available_by_absolute_cutoff\"\n        }\n      ],\n      \"admitted\": [\n        \"synthetic-A|2026-10-03\"\n      ],\n      \"scope\": \"declared_time_qualification_only; source_truth_not_certified\"\n    }\n  },\n  \"production_integrated\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "cli_formula_block",
+      "argv": [
+        "python3",
+        "-B",
+        "validator.py",
+        "fixtures/block_formula.json"
+      ],
+      "cwd": ".",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "matched": true,
+      "stdout": "{\n  \"status\": \"blocked\",\n  \"checks\": {\n    \"formula\": {\n      \"status\": \"blocked\",\n      \"reason\": \"unreviewed_semantic_contract\",\n      \"changed_fields\": [\n        \"contract.definition.formula\"\n      ]\n    },\n    \"time\": {\n      \"status\": \"pass\",\n      \"rows\": [\n        {\n          \"id\": \"synthetic-A|2026-10-03\",\n          \"available_at_utc\": \"2026-10-03T07:00:00+00:00\",\n          \"cutoff_utc\": \"2026-10-03T07:30:00+00:00\",\n          \"status\": \"pass\",\n          \"reason\": \"available_by_absolute_cutoff\"\n        }\n      ],\n      \"admitted\": [\n        \"synthetic-A|2026-10-03\"\n      ],\n      \"scope\": \"declared_time_qualification_only; source_truth_not_certified\"\n    }\n  },\n  \"production_integrated\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "cli_time_block",
+      "argv": [
+        "python3",
+        "-B",
+        "validator.py",
+        "fixtures/block_time.json"
+      ],
+      "cwd": ".",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "matched": true,
+      "stdout": "{\n  \"status\": \"blocked\",\n  \"checks\": {\n    \"formula\": {\n      \"status\": \"pass\",\n      \"reason\": \"reviewed_contract_and_typed_semantics_match\",\n      \"reference\": \"mixed.rv20@1.0.0\",\n      \"contract_hash\": \"f640b89cc970f5fcb2c1484892628158055b40cb84781c77f69f76df23f2d060\",\n      \"scope\": \"local_binding_only; full_registry_admission_not_certified\"\n    },\n    \"time\": {\n      \"status\": \"blocked\",\n      \"rows\": [\n        {\n          \"id\": \"synthetic-A|2026-10-03\",\n          \"available_at_utc\": \"2026-10-03T07:00:00+00:00\",\n          \"cutoff_utc\": \"2026-10-03T02:00:00+00:00\",\n          \"status\": \"blocked\",\n          \"reason\": \"availability_after_cutoff\"\n        }\n      ],\n      \"admitted\": [],\n      \"scope\": \"declared_time_qualification_only; source_truth_not_certified\"\n    }\n  },\n  \"production_integrated\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "exact_source_probes",
+      "argv": [
+        "python3",
+        "-B",
+        "probe_sources.py",
+        "--external-root",
+        "/path/to/1ac-payload",
+        "--technical-root",
+        "/path/to/d444-readonly-source"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "matched": true,
+      "stdout_file": "evidence/source-probes-final.json",
+      "stderr": ""
+    }
+  ],
+  "files_sha256": {
+    "validator.py": "c30bae934955f3dec16e603257fa6925354088039dac6a7ace2cc2d48ea6cbde",
+    "test_validator.py": "3dfcc6b675d81f1fa9a4bf6f03a5cd88f93fb71551ca100e377b1d460d1f8fda",
+    "probe_sources.py": "74b9f1e536c1505aff1afd31e0bebb56812944406a2efc8c9359ac88d2180b87",
+    "README.md": "970195a9d76c115c31cacf1a5cfce0f6e29460c70cbd18da9171054c38d4847f",
+    "fixtures/reviewed_binding.json": "f910ae25371050ea723d8058682c770f377269fa10827ebdd424bfaf6a14eccf",
+    "fixtures/pass.json": "1d80c206cbd211adf764bd4bcad1cace9a32b179ea6a703013ad756e3a794560",
+    "fixtures/block_formula.json": "283650bd43bc0aa51f1d610be57594a4b28e2f946dc333785f3d2d02904f177a",
+    "fixtures/block_time.json": "91095818b8c9e9c07ee016a51a05b9e63ae1e81cfaa97a89e5c808b511ec1744",
+    "evidence/source-probes-final.json": "5a61017ae9c7e3d491765714a45e6ca561c0fc723a42584743a48f0161026d2f"
+  },
+  "publication_portability": {
+    "note": "Only execution-location strings were made portable for publication; no source bytes, results, test output or source fingerprints were changed.",
+    "original_receipt_sha256": "5b5944fd3d5bc0d7c5c0a1a13c8ebf20c61431d90bddc4517581ad402eb1fd37",
+    "cwd": ".",
+    "interpreter": "python3",
+    "additional_inputs": "Materialize the two pinned external source roots described in README; placeholders are not included in this checkout."
+  }
+}

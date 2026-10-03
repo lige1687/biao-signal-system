@@ -1,0 +1,168 @@
+{
+  "schema_version": "lei-reviewed-binding/1",
+  "reference": "mixed.rv20@1.0.0",
+  "source_commit": "1ac596f65110e06c286f04707165251328df0962",
+  "registry_version": "1.6.12",
+  "registry_sha256": "a2219a2d47f2d26b40dc1f57ff2914cefa4a24dce1b006d3b264a42ece0b9f43",
+  "contract": {
+    "id": "mixed.rv20",
+    "version": "1.0.0",
+    "definition": {
+      "formula": "std(I_t/I_prev-1 over last20,ddof=1)*sqrt(252)",
+      "parameters": {
+        "window": 20,
+        "ddof": 1,
+        "annualization": 252
+      },
+      "endpoints": "含t；有位移时以formula和parameters为准",
+      "unit": "fraction",
+      "direction": "见公式；无默认好坏评价",
+      "transforms": "无"
+    },
+    "input": {
+      "fields": [
+        "date",
+        "symbol",
+        "economic_index"
+      ],
+      "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+      "frequency": "daily_valid_quotes",
+      "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+    },
+    "universe": {
+      "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+      "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格",
+      "warmup": "按每个对象窗口，不以日历天补足",
+      "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+      "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+      "degrade": "缺报价不发新信号；未确认资料不得生产"
+    },
+    "time": {
+      "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+      "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "decision_at": "不得早于available_at",
+      "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+    },
+    "dependencies": [
+      "mixed.asset.total_return@1.0.0"
+    ]
+  },
+  "dependency_contracts": {
+    "mixed.asset.total_return@1.0.0": {
+      "id": "mixed.asset.total_return",
+      "version": "1.0.0",
+      "definition": {
+        "formula": "I_i(t)/I_i(prev)-1",
+        "parameters": {
+          "gross": true,
+          "fees": 0,
+          "base_currency": "CNY"
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "economic_index"
+        ],
+        "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+        "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+        "frequency": "daily_valid_quotes",
+        "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+      },
+      "universe": {
+        "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+        "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格",
+        "warmup": "按每个对象窗口，不以日历天补足",
+        "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+        "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+        "degrade": "缺报价不发新信号；未确认资料不得生产"
+      },
+      "time": {
+        "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+        "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+        "decision_at": "不得早于available_at",
+        "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+      },
+      "dependencies": [
+        "mixed.price.economic@1.0.0"
+      ]
+    },
+    "mixed.price.economic@1.0.0": {
+      "id": "mixed.price.economic",
+      "version": "1.0.0",
+      "definition": {
+        "formula": "相邻有效报价间按已生效事件连接；I0=1；factor=(nominal_close*split_multiplier+cash_equivalent)/previous_nominal_close",
+        "parameters": {
+          "base": 1,
+          "event_order": "effective_date,event_id；reverse合并：split时mult*=ratio,cash*=ratio；dividend时cash+=amount"
+        },
+        "endpoints": "prev有效报价之后、当前报价当日及之前的生效事件",
+        "unit": "index_level",
+        "direction": "高值只表示累计变化",
+        "transforms": "分红/拆分校正；不再复权或加汇率"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "symbol",
+          "economic_index"
+        ],
+        "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+        "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+        "frequency": "daily_valid_quotes",
+        "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+      },
+      "universe": {
+        "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+        "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格",
+        "warmup": "按每个对象窗口，不以日历天补足",
+        "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+        "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+        "degrade": "缺报价不发新信号；未确认资料不得生产"
+      },
+      "time": {
+        "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+        "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+        "decision_at": "不得早于available_at",
+        "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+      },
+      "dependencies": []
+    }
+  },
+  "semantics": {
+    "operator": "rolling_sample_standard_deviation",
+    "input": {
+      "operator": "simple_return",
+      "price_field": "economic_index",
+      "previous": "previous_own_valid_quote"
+    },
+    "window": 20,
+    "minimum_returns": 20,
+    "ddof": 1,
+    "include_current": true,
+    "annualization": {
+      "operator": "multiply_by_square_root",
+      "periods": 252
+    },
+    "unit": "fraction",
+    "missing": {
+      "NaN": "omit_from_quote_clock_preserve_missing_output",
+      "nonpositive": "reject",
+      "infinite": "reject",
+      "fill": "none"
+    }
+  },
+  "scope": "Reviewed RV20 semantics only; immutable contract pin plus independent arithmetic conformance. No full registry admission or production approval."
+}

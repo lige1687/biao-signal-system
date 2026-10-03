@@ -1,0 +1,154 @@
+{
+  "external_commit": "1ac596f65110e06c286f04707165251328df0962",
+  "external_registry_version": "1.6.12",
+  "technical_commit": "d444316817e9330c2d72a4a90c655467b45dd5bb",
+  "technical_registry_not_loaded": "1.6.0 is a distinct baseline, not mixed into external registry",
+  "external_workflow": {
+    "local_1530": {
+      "accepted": true,
+      "final_id": "synthetic-A|2026-10-03",
+      "final_added_feature": 0.49261083743843415
+    },
+    "same_instant_utc_0730": {
+      "accepted": false,
+      "error": "daily close feature is unavailable before the session close"
+    },
+    "local_before_close_negative_control": {
+      "accepted": false,
+      "error": "daily close feature is unavailable before the session close"
+    },
+    "global_1000_cutoff": {
+      "accepted": true,
+      "final_id": "synthetic-A|2026-10-03",
+      "final_added_feature": 0.49261083743843415
+    },
+    "expected_problem_reproduced": true,
+    "note": "Computed final feature is the cutoff check; label eligibility is a separate question."
+  },
+  "technical_workflow": {
+    "local_1530": {
+      "accepted": true,
+      "final_id": "synthetic-A|2026-10-03",
+      "final_added_feature": 0.49261083743843415
+    },
+    "same_instant_utc_0730": {
+      "accepted": false,
+      "error": "daily close feature is unavailable before the session close"
+    },
+    "local_before_close_negative_control": {
+      "accepted": false,
+      "error": "daily close feature is unavailable before the session close"
+    },
+    "global_1000_cutoff": {
+      "accepted": true,
+      "final_id": "synthetic-A|2026-10-03",
+      "final_added_feature": 0.49261083743843415
+    },
+    "expected_problem_reproduced": true,
+    "note": "Computed final feature is the cutoff check; label eligibility is a separate question."
+  },
+  "external_key_adapter": {
+    "local_1530": {
+      "accepted": true,
+      "final_id": "synthetic-A|2026-10-03",
+      "final_added_feature": 0
+    },
+    "same_instant_utc_0730": {
+      "accepted": false,
+      "error": "close used before session end"
+    },
+    "local_before_close_negative_control": {
+      "accepted": false,
+      "error": "close used before session end"
+    },
+    "global_1000_cutoff": {
+      "accepted": true,
+      "final_id": "synthetic-A|2026-10-03",
+      "final_added_feature": 0
+    },
+    "expected_problem_reproduced": true,
+    "note": "Computed final feature is the cutoff check; label eligibility is a separate question."
+  },
+  "formula": {
+    "scope": "real_bound_reference_after_resolution; resolver substituted only at named unit seam",
+    "normal_card_accepted": true,
+    "same_id_version_doubled_formula_accepted": true,
+    "actual_source_rv20": 0.3731797929882284,
+    "independent_normal_expected": 0.3731797929882284,
+    "doubled_formula_expected": 0.7463595859764568,
+    "candidate": {
+      "status": "blocked",
+      "reason": "unreviewed_semantic_contract",
+      "changed_fields": [
+        "contract.definition.formula"
+      ]
+    },
+    "full_original_registry_admission": {
+      "status": "blocked",
+      "reason": "lifecycle basis path missing: tests/unit/test_research_definitions.py (mixed.momentum.raw@1.0.0)"
+    },
+    "expected_problem_reproduced": true
+  },
+  "source_integrity": {
+    "unchanged": true,
+    "before": {
+      "external": {
+        "AGENTS.md": "060a0de558b0543f6afee81e8aa5f903daf348e9381b825ec3d141ec8763dc4e",
+        "HANDOFF-README.md": "ccc44b31a5c341b758555d0efdf84f2d1e36a75f5e2e03122c3ff0c3821aed01",
+        "byte-verification.json": "87bcdb81360aae48476f668194410be4cb7ea163017c655f9d73fa365a2d62b2",
+        "docs/research/current-standards.json": "616c0ae1a636accd35c8500be7c5c21a35c13aaf2039e9e6144cb5531d96cb57",
+        "docs/research/definition-standard.md": "938e04d7beb96a46069bbb6eb6c03d2331e86bfa771623fdfe21794b4e98fcbd",
+        "docs/research/definitions.v1.json": "a2219a2d47f2d26b40dc1f57ff2914cefa4a24dce1b006d3b264a42ece0b9f43",
+        "handoff-SHA256SUMS": "bcaa9874fcf85fed42695a7029f25480605d5146ced7d4a48ea85f478fd37102",
+        "handoff-manifest.json": "52c06ec50777800e4481eccc5dc44fa489098aeab4bd515caf2293bab8a06f88",
+        "source-provenance.json": "cdfd3f808229f0b00521359b0943109829b5f470c1b3bca27b09b8a3d039d165",
+        "src/lei_signal/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/lei_signal/research/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/lei_signal/research/definitions.py": "84f7b9ba76f4704e81f4f4d0c1784e2ab1ad7e3aa225abeb4796fa10dcbfec94",
+        "src/lei_signal/research/factor_runtime.py": "1f596f29aff27973ea55b55c49efd3c4c6fb1fdd200946a8618c272dad822579",
+        "src/lei_signal/research/key_fluctuation_information.py": "f0c9f769ab608182813eb018ce97d5913cc3e6ff69841811b8757e5626ec1d9d",
+        "src/lei_signal/research/top_structure_information.py": "5ce72eb21cc0d56208befd3e2dbb124792abbd3432288a8bf42c4fd42c341ad9",
+        "src/lei_signal/research/workflow_inputs.py": "12a97a54b6af579bb42f44f7c8dc4179cd14d24d92ed7b9f047e6d05f7e75f14",
+        "tests/unit/test_research_property_checks.py": "4403aef9e8a2bdb0e2170494c1e75964233bf154956b9cbce1290e9facd06823"
+      },
+      "technical": {
+        "src/lei_signal/research/factor_runtime.py": "1f596f29aff27973ea55b55c49efd3c4c6fb1fdd200946a8618c272dad822579",
+        "src/lei_signal/research/key_fluctuation_information.py": "f0c9f769ab608182813eb018ce97d5913cc3e6ff69841811b8757e5626ec1d9d",
+        "src/lei_signal/research/workflow_inputs.py": "0ff1fe0a3de19680cc9c8800fb62267993cc9f55dab36fbe28a2dd7153ca4691"
+      }
+    },
+    "after": {
+      "external": {
+        "AGENTS.md": "060a0de558b0543f6afee81e8aa5f903daf348e9381b825ec3d141ec8763dc4e",
+        "HANDOFF-README.md": "ccc44b31a5c341b758555d0efdf84f2d1e36a75f5e2e03122c3ff0c3821aed01",
+        "byte-verification.json": "87bcdb81360aae48476f668194410be4cb7ea163017c655f9d73fa365a2d62b2",
+        "docs/research/current-standards.json": "616c0ae1a636accd35c8500be7c5c21a35c13aaf2039e9e6144cb5531d96cb57",
+        "docs/research/definition-standard.md": "938e04d7beb96a46069bbb6eb6c03d2331e86bfa771623fdfe21794b4e98fcbd",
+        "docs/research/definitions.v1.json": "a2219a2d47f2d26b40dc1f57ff2914cefa4a24dce1b006d3b264a42ece0b9f43",
+        "handoff-SHA256SUMS": "bcaa9874fcf85fed42695a7029f25480605d5146ced7d4a48ea85f478fd37102",
+        "handoff-manifest.json": "52c06ec50777800e4481eccc5dc44fa489098aeab4bd515caf2293bab8a06f88",
+        "source-provenance.json": "cdfd3f808229f0b00521359b0943109829b5f470c1b3bca27b09b8a3d039d165",
+        "src/lei_signal/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/lei_signal/research/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/lei_signal/research/definitions.py": "84f7b9ba76f4704e81f4f4d0c1784e2ab1ad7e3aa225abeb4796fa10dcbfec94",
+        "src/lei_signal/research/factor_runtime.py": "1f596f29aff27973ea55b55c49efd3c4c6fb1fdd200946a8618c272dad822579",
+        "src/lei_signal/research/key_fluctuation_information.py": "f0c9f769ab608182813eb018ce97d5913cc3e6ff69841811b8757e5626ec1d9d",
+        "src/lei_signal/research/top_structure_information.py": "5ce72eb21cc0d56208befd3e2dbb124792abbd3432288a8bf42c4fd42c341ad9",
+        "src/lei_signal/research/workflow_inputs.py": "12a97a54b6af579bb42f44f7c8dc4179cd14d24d92ed7b9f047e6d05f7e75f14",
+        "tests/unit/test_research_property_checks.py": "4403aef9e8a2bdb0e2170494c1e75964233bf154956b9cbce1290e9facd06823"
+      },
+      "technical": {
+        "src/lei_signal/research/factor_runtime.py": "1f596f29aff27973ea55b55c49efd3c4c6fb1fdd200946a8618c272dad822579",
+        "src/lei_signal/research/key_fluctuation_information.py": "f0c9f769ab608182813eb018ce97d5913cc3e6ff69841811b8757e5626ec1d9d",
+        "src/lei_signal/research/workflow_inputs.py": "0ff1fe0a3de19680cc9c8800fb62267993cc9f55dab36fbe28a2dd7153ca4691"
+      }
+    }
+  },
+  "dependencies": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "new_installs": 0
+  },
+  "scope": "Synthetic function probes only; no source writes, market experiments, production integration or result invalidation."
+}
