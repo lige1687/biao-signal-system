@@ -1,3 +1,19 @@
+# 用户纠正：直接展示中美数据图与阈值，开始改为图表仪表盘
+
+- task-id：investor-observation-map；原负责人继续；状态active。更新时间：2026-10-03T12:42:46.095Z（UTC；用户Asia/Shanghai）。
+- 最新明确原文：“不是做成这种引导向的，而是和我们原有的基本面界面一样，直观的看当前的数据图们，以及他们的阈值，美a的，懂我意思吗”。此要求优先于上一六类指南式布局。主控已承认偏差，改为图表为主体、解释折叠在图旁；旧资料/证据保留，不把旧软件验收当用户产品验收。
+- 工作分支task/investor-observation-map-progress；本轮基础/最近已推959971e30893c0894837b4c2b35442e4bedb1aac；规则读取dc710a9cc711e1c389ac79cd1d250daf835141e1，当前无新增协调差异。原market-observation已归档，图表组件/数据API只读复用，不自动合并其分支。
+- 正在做：直接复用既有TrendChart和基本面rates-history/macro-history/us-macro等API，按A股/美股筛选的数据图卡；每卡最新已取得值/变化/所属期、可交互历史曲线、已有且注明身份的参考线，缺数据诚实显示。只应用原指标定义/单位，不能编造新买卖阈值；解释退为图旁展开。
+- 精确写范围：web/src/pages/MarketUnderstandingPage.tsx、web/src/features/market-understanding/内新的dashboard模型/组件/样式；web/run-market-dashboard-regression.mjs、package.json仅测试项；旧run-market-understanding-regression仅移除对已被替换页面的过时结构断言、保留原数据边界；本任务新spec/plan、自己的两进度与docs/archive/handoffs-plans/market-understanding-dashboard-2026-10-03/。不改原FundamentalsPage、共享TrendChart/zones、来源后端/规则或Streamlit。
+- 当前一名Sol只读API字段/单位/日期资格，主控实施。正在运行市场实验0；本轮不联网做新来源研究、不跑旧金融实验、不购买资料；可读取现有本地市场数据接口作实际产品冒烟，不读取账户/密钥/数据库原件。
+- 验收：当前已接来源在图中实际呈现，中美序列不串；阈值身份/单位/时间明确，月/周/日周期区别；空值/0/错单位/错日期不制造读数；窗口切换只影响显示，图卡和放大图可用；真实已有服务的限定只读检查与合成异常场景分别记，不上传供应商原始序列。构建/最小回归/浏览器桌面窄屏后同步。
+- 重叠仍避开情绪有效性、技术S01/Q01、dot状态计数/宏观资格、经典学习和外部工具。只维护本任务页面/小型消费适配；未知任务不当空闲，记录不是锁。
+- 未完成：本轮图表改版、真实 API 可用性与前后端版本校对；更广数据源接入仍缺，不能用说明数充数据图数。旧预算和来源失败保持，新金融实验/拟合/付费0；本轮前的3助手/2夹具均已结束。下一步本范围推读回后实现，冲突写入失败即停相关部分。
+
+---
+
+## 既往阶段（最新用户纠正优先）
+
 # 当前成果：六类市场理解与基本面对齐已同步
 
 - task-id：investor-observation-map；原聊天Codex继续负责；原任务active，本有界页面阶段completed。不是接管，不宣称所有数据/研究已完成。更新时间：2026-10-03T12:36:37.437Z（UTC，用户时区Asia/Shanghai）。
