@@ -9,7 +9,7 @@
       "scope": "public worktree; synthetic/unit only"
     },
     {
-      "command": "git diff --check; Python AST/JSON parse changed selected files; existing registry entries unchanged",
+      "command": "Python AST/JSON parse selected changed files; existing registry entries unchanged",
       "exit_code": 0,
       "result": "passed; exactly 3 own registry additions"
     },
@@ -27,6 +27,12 @@
       "command": "risk workflow end-to-end on publication branch",
       "exit_code": null,
       "result": "NOT RUN; shared qualifier and input artifacts absent"
+    },
+    {
+      "command": "git diff --cached --check (all newly staged files)",
+      "exit_code": 2,
+      "result": "whitespace warnings only in original test output and valid unified patch blank context; raw originals retained",
+      "blocking_code_issue": false
     }
   ],
   "ci": {
@@ -36,5 +42,16 @@
     "workflow_listing": "GitHub connector endpoint unsupported (400); external integrations not exhaustively verified",
     "production_or_paid_action_authorized": false
   },
-  "real_market_experiments_this_sync": 0
+  "real_market_experiments_this_sync": 0,
+  "packaging_attempts": [
+    {
+      "stage": "first staging",
+      "exit_code": 1,
+      "reason": "one progress path outside sparse definition; task files otherwise staged; explicit --sparse repair required"
+    },
+    {
+      "stage": "first local commit",
+      "result": "created before packaging fixes, not pushed; followed by corrective commit, no history rewrite"
+    }
+  ]
 }
