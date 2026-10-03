@@ -6,7 +6,7 @@
 - 状态：active（有界资格准备）；独立验收 completed；正式效果 blocked、尚未启动；返修差异验收等待交付。
 - 仓库：https://github.com/lige1687/biao-signal-system ；工作分支 codex/remote-core-acceptance-20261002。
 - 基础完整 commit：639ad8dbd3d2aa72f824b626b86149c466c132a4；原远端 Opus 5.5 交付4155b4db7ccd14674eff2e29dfaf102d2ac3e5f9。
-- 最近已推送成果完整 commit：b149a02db84522937281a09df72001b046e7a03e（已核 ls-remote 一致）；实质研究前检查0e4f3f4213ecb60a2d27d5147e8b440237946311。
+- 最近已推送成果完整 commit：bcf6fcf96cb9b5c540714e87316c2ed108299d5b（已核 ls-remote 一致；仅新增工具资格证据/接续状态和本任务进度）；协作AGENTS入口b149a02db84522937281a09df72001b046e7a03e；初步研究前检查0e4f3f4213ecb60a2d27d5147e8b440237946311。
 - 实际读取规则：coordination/lei@b172008890b39e912c8f1d0cfb9125d1e414a97f 的 COORDINATION.md 1.0；后续已读取37226ce542433dde4eef08c51696e8c1f12d0f2b的最新协调任务；规则正文不变。适用本工作分支 AGENTS.md、docs/research/current-standards.json 和原冻结版本；不移植旧实验到新合同。
 
 ## 原始目标、最新要求和验收
@@ -70,3 +70,10 @@
 阶段同步异常：第一次普通推送因其他任务先更新远端而non-fast-forward拒绝，未同步成功。已fetch并审阅新增三个任务文件/更新，规则未改；在独立干净协调目录仅将本任务尚未发布提交整合到最新远端，不强推、不覆盖他人文件。最新更新时间：2026-10-03T14:08:24.760588+08:00。再次推送后需核准确SHA和文件字节。
 
 第二次普通推送再次因并行登记被拒，已读取9c994de31b2c325ee49080df50009e3369a52f55新增investor-observation-map（只维护观察地图，暂停与市场观察重叠的口径改写），与本题无登记冲突。规则未变；保留其原文件，再仅整合本任务未发布提交。已知同期任务共五份，未登记仍未知。
+
+
+## 2026-10-03T14:11:52.750966+08:00：同步后继续原任务的工具资格阶段
+
+首次协调提交9406126bdaa4f35eab81b5a29d1b9dfdd9f95a00已推并fetch核完整SHA/任务字节一致；五份先前规则/记录逐字节保留。随后继续只读核当前研究入口，并保存于工作分支bcf6fcf96cb9b5c540714e87316c2ed108299d5b的docs/experiments/raw/remote-core-rule-next-2026-10-03/tool-binding-review.json（来源路径/行号/实际SHA）。正式入口只接受因子信息层、七类适配器和prediction_ridge/event_risk，未支持black-reset政策动作/路径比较；即使补56条引用仍需准确研究专用对象/执行器。定义加载在选定依赖闭包之前检查全登记引用，缺无关引用仍会阻断此入口；不绕过、不假装输入改名后可跑。0新实验/拟合/付费；未执行完整workflow。本阶段工作分支diff和目录检查通过，准确SHA远端匹配。
+
+本轮读取最新协调210cc70b96e0db6ca119158971027a6119cd1b55：追加classic-factor-research（风险旧题封存，共享接口只读）和external-quant-resources（共同比较工具/外部依赖发布检查，共享整合暂停），technical更新明确不接管2B；均无与当前black-reset准备同题执行冲突。本记录累计读七份其他任务，未登记者仍未知。正式效果分支blocked，等待工具/定义责任方准确交付和输入资格；独立返修差异核验仍持有，但尚无新返修提交。不新建第二套执行器、不改共享框架/总登记或生产。
