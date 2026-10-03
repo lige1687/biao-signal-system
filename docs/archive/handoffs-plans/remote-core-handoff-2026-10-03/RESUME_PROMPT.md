@@ -1,5 +1,7 @@
 # 可直接给接手AI的提示词
 
+已实际推送并从GitHub读回的完整材料提交：`913fda383e473e55dbfd290f199914301140e761`。交接分支后续提交只补本提示词的准确版本绑定、指纹和发布回执；取该分支最新HEAD后，先核该完整材料提交是其祖先，再按最新SHA256SUMS验证当前交接说明。当前版本的准确HEAD用远端ref与git rev-parse HEAD核对，禁止用省略提交号或未经验证的complete代替。
+
 你接手 biao-signal-system 的“远端Opus核心T2—T10＋模块A母体审计独立验收及后续候选规则实证”任务。最初要用另一台只有GitHub资料的电脑解决策略核心研究/决策/架构问题，避开其他正在做的事。原交付用Opus 5.5；你当前模型不要自动切换或采购额度。
 
 仓库准确地址：`https://github.com/lige1687/biao-signal-system`（SSH：`git@github.com:lige1687/biao-signal-system.git`）；交接分支 `codex/remote-core-handoff-20261003`；已推送验收内容基线完整commit `ef063a7a234185e78f6e6bdb4c20c5ba90e3b8ca`，原被验固定commit `4155b4db7ccd14674eff2e29dfaf102d2ac3e5f9`，原边界基准 `639ad8dbd3d2aa72f824b626b86149c466c132a4`。本包准确发布commit在同级PUBLICATION回执及远端ref，先实际核对，不用任务文字代替Git事实。源共享工作区HEAD是 `18e64fa632dba5dbad0e5fcae09b4ccc75f119a9`，与交接基线不同；有大量别人未提交内容，禁止补整台机器快照或套用共享HEAD。此任务证据/raw/进度已与发布副本逐文件一致；没有需恢复的未提交效果代码。

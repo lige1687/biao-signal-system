@@ -1,0 +1,56 @@
+{
+  "schema_version": "remote-core-handoff-publication/1",
+  "checked_at": "2026-10-03T13:20:58.415702+08:00",
+  "timezone": "Asia/Shanghai",
+  "repository": "https://github.com/lige1687/biao-signal-system",
+  "branch": "codex/remote-core-handoff-20261003",
+  "payload_commit": "913fda383e473e55dbfd290f199914301140e761",
+  "remote_ref_verified_at_payload_commit": true,
+  "remote_file_readback": [
+    {
+      "path": "docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/README.md",
+      "bytes": 2339,
+      "sha256": "22c1e7b1c6e5704f82d3540c339a631dd2cd6aaa100c719992a39bca7f7a2a30",
+      "read_back_from_github_raw_immutable_commit": true,
+      "matches_local_at_payload_commit": true
+    },
+    {
+      "path": "docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/manifest.json",
+      "bytes": 622148,
+      "sha256": "9612df575de8b53cd4d1a4a5ae5d268333e260b6311748de4a12a88bbd9b731e",
+      "read_back_from_github_raw_immutable_commit": true,
+      "matches_local_at_payload_commit": true
+    },
+    {
+      "path": "docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/RESUME_PROMPT.md",
+      "bytes": 4707,
+      "sha256": "7f34ce786351bdf7834770289b9b32a7a9d298a2040c033fab9d6c0cc9d6401c",
+      "read_back_from_github_raw_immutable_commit": true,
+      "matches_local_at_payload_commit": true
+    }
+  ],
+  "local_push_metadata_warning": "Remote push succeeded and ls-remote matched exact commit; local upstream config/remote-tracking-ref write failed with No space left on device. Not a remote publication failure. Receiver fresh clone does not inherit this local metadata.",
+  "publication_receipt_followup": "This receipt and exact payload pin are committed in a later metadata-only release; resolve final release commit by git log --format=%H -1 -- this receipt, then check remote ref.",
+  "final_integrity_before_payload_commit": {
+    "exit_code": 0,
+    "checked_files": 1078,
+    "checksum_entries": 1079,
+    "current_missing_definition_references_in_minimum_snapshot": 101,
+    "full_research_qualification": "blocked"
+  },
+  "verification_race_failure_preserved": {
+    "command": "python3 docs/archive/handoffs-plans/remote-core-handoff-2026-10-03/tools/verify_handoff.py --root .",
+    "cwd": "independent restore-minimal",
+    "exit_code": 1,
+    "old_manifest_checked_files": 1074,
+    "new_checksum_entries": 1079,
+    "error": "progress file size/SHA differed while final copy/manifest refresh was still completing",
+    "resolution": "Waited for refresh completion, then verified1078/1078 exit0; no research rerun or source change",
+    "prevention": "Finish materialization before starting dependent fingerprint validation"
+  },
+  "research_running": false,
+  "remote_repair_running": "unknown; no confirmed dispatch/task ID",
+  "main_master_merged": false,
+  "deployment_triggered_by_task": false,
+  "new_large_data_or_credentials_uploaded": false
+}
