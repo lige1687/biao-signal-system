@@ -1,3 +1,20 @@
+# 当前成果：原策略语义与黑绿验证流程样板已同步
+
+- task-id technical-factor-sequence；原负责人/root/Air继续，非移交。当前有界流程审查completed；整体责任保留；更新时间2026-10-03T23:02:47.564792+08:00 Asia/Shanghai。
+- 用户认可原文拆解、金融语义、论文/行业方法、多种验证与实际增量；明确不能漏黑绿，并要求验证过的流程供后续agent使用。
+- 工作分支task/technical-factor-sequence-progress；基础0e9607c2d37444ed6d4330dd4f78e14ee9021fba；**已推并核远端完整成果ae175d3caea2a5bd301cba46c6d2927bf6a50c6f**，说明/报告/manifest三文件远端blob与本地一致。
+- [执行说明](https://github.com/lige1687/biao-signal-system/blob/ae175d3caea2a5bd301cba46c6d2927bf6a50c6f/docs/research/research-workflow-usage.md)；[黑绿流程样板](https://github.com/lige1687/biao-signal-system/blob/ae175d3caea2a5bd301cba46c6d2927bf6a50c6f/docs/experiments/technical-factor-method-pilot-2026-10-03.md)；[证据与覆盖表](https://github.com/lige1687/biao-signal-system/tree/ae175d3caea2a5bd301cba46c6d2927bf6a50c6f/docs/experiments/raw/technical-factor-method-pilot-2026-10-03)。
+- 实际完成：13准确文件367451字节，现有说明追加人工执行步骤/方法适配/防假改善；原文条件映射；原结果独立算术；覆盖表、可复核小脚本/计划/归档和自身进度。旧registry条目不变。未修改src、总定义、生产、原文、旧合同/成绩。
+- 黑绿原义保留§2.7排列前提、变色顺序、灰态、日/周与失效环境；原20八轮复用，60局部研究不冒充完整原策略。新更充分条件/非线性表达、仅因子预测器、概率校准未在本60题运行，不能写通过。原文两SHA与批准版本一致，原件不上传。
+- 实际核验：两个目标各948观察/237日期完全配对；收益误差16.126479→16.169160、下探6.126448→6.324113，仍弱于每ETF历史平均14.053259/5.605414；全数差<1e-10。原日期范围与分组只引用不重新估计，未发现新正向因子。流程能留住负结果/简单对手，本轮未测流程发现正因子的能力或整体假发现率。
+- 本机保存核数、无原行情的独立目录恢复、现有共享归置器只读核隔离树均exit0；新发布13文件manifest/diff/大小/敏感形态/精确暂存通过。Linux/Windows/生产/全系统未验证。隔离树缺docs/ops/work-progress/README.md如实记录，沿已存在自身进度路径未伪造规范。
+- 预算0新市场拟合/标签/行情请求/付费；保存算术2次含独立目录，旧黑绿8真实+24合成及更早未知成本不清零。前一轮EMA持续性只读助手在用户切换回合后interrupted，没有完成结论被采用，也没有启动效果。当前无本题运行中市场进程/checkpoint，不承诺后台继续。
+- 规则读取3e1b5f511208b6674e089d3e3870d8f8160fe6fa；启动36907af045c1654c43d856a462392737dde5beb6已推读回，末次fetch无他人增量。无当前已登记同题/同块冲突；记录非锁，未登记未知。remote-core black-reset/账户、dot未见SMA20、reader等待、情绪宽度、外部自动方法保持原负责人。
+- 下一步planned：先去重原排列背景下20黑绿及变色的准确证据，限定一个确有缺口的问题再资格/冻结；EMA稳定比例只是候选，不同时默认开全部方向。更广完整C小时/首次到达/行动许可与真正未见资料缺口保持。当前说明已交付，不无限扩实验或为正结果扫参。
+- 未推：原策略/行情/DB/凭证、独立恢复临时目录和协调临时index；旧资料指纹与恢复缺口沿原报告。其他AI避免并发写新增说明段、本阶段report/raw和自身进度，不独占全部技术研究。自身最终同步commit可查本路径历史。
+
+---
+
 # 当前阶段：原策略语义与黑绿验证流程样板
 
 - task-id technical-factor-sequence；负责人/root持续负责；状态active，更新时间2026-10-03T22:50:37.863342+08:00 Asia/Shanghai。
