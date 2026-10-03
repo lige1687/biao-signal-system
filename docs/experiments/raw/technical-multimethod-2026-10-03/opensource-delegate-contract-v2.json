@@ -1,0 +1,32 @@
+{
+  "mission": "Read only available Alphalens code and environment inventory",
+  "task_scope": [
+    "Read only available Alphalens code and environment inventory"
+  ],
+  "read_only_paths": [
+    "docs",
+    "src",
+    ".agents"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 2,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "exact source paths and versions",
+    "bounded conclusion and missing evidence"
+  ],
+  "stop_conditions": [
+    "scope ambiguity",
+    "missing permission",
+    "no completed evidence available"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

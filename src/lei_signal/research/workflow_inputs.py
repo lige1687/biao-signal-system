@@ -150,6 +150,12 @@ def prepare_observations(payload, contract):
     entry-day lows because they occurred before entry. MDD only supports closes,
     as daily high/low order is unknown. Fixed endpoint returns require a quote.
     """
+    if contract['feature']['kind'] in {'ema_direction_persistence_information',
+                                       'bull_green_transition_information'}:
+        from lei_signal.research.technical_persistence_information import prepare_observations as prepare_technical
+        return prepare_technical(payload, contract, compute_labels=(
+            payload.get('data_mode') == 'synthetic' or
+            contract.get('permissions', {}).get('real_labels') is True))
     if contract['feature']['kind'] in {'slope_change_risk_information', 'ema_only_wait_age_risk_information'}:
         from lei_signal.research.technical_daily_risk_information import prepare_risk_observations
         return prepare_risk_observations(payload, contract)

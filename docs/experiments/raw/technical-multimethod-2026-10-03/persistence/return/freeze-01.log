@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/scripts/run_factor_lab.py", line 70, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/scripts/run_factor_lab.py", line 46, in main
+    freeze_workflow(args.workflow_draft, args.out)
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/src/lei_signal/research/workflow.py", line 1100, in freeze_workflow
+    frozen = freeze_contract(read_json(draft_path), root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/src/lei_signal/research/workflow.py", line 819, in freeze_contract
+    return _freeze_contract(contract, root, started, accounting)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/src/lei_signal/research/workflow.py", line 831, in _freeze_contract
+    checked = preflight(frozen, root, require_frozen=False)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/src/lei_signal/research/workflow.py", line 709, in preflight
+    raise WorkflowBlocked("future_leakage: adding future bars changed past features")
+lei_signal.research.workflow.WorkflowBlocked: future_leakage: adding future bars changed past features

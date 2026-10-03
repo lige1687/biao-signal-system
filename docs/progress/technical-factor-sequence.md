@@ -1,3 +1,26 @@
+# 当前：EMA持续性多方法研究已完成，相邻变色止于资格边界
+
+更新时间2026-10-04T00:29:50+08:00 Asia/Shanghai（结案/同步阶段）；task-id technical-factor-sequence，Air原负责人继续，非接管或总任务结束。范围是技术判断的明确代理与新增信息；不含情绪/宽度/宏观/账户/生产。
+
+- completed：原文§2.2持续向上、§2.7多头相邻黑转绿两对象@1.0.0，来源/暖启动/样本/未来边界审核；EMA收益/风险固定两折8次真实拟合。较晚1268条/317日：收益误差7.2027→7.2920、风险3.5256→3.5395，无稳定增量；收益模型还输每ETF历史均值6.7943。全部5期限、固定4组、两种排序、时期/资产及连续日期敏感性保存。
+- completed：Alphalens固定f0a07c22d554e4b4036983cc80320b432714fe7e的Apache-2.0原函数窄组件；并列/常数/小ETF池明确处理，不装完整包。真实排名/组均值与独立算法差0。工程12通过；失败、旧归置器退出1与当前只读归置器退出0保留。
+- completed boundary：相邻黑转绿较晚4+3事件，资格后停止，无事件专属真实拟合或条件结果比较，不把550背景日冒充550事件；证据不足。仅新增合格资料与相同定义支持才可另冻新问题。原文不修改、旧20/60黑绿等不重跑。
+- 正在做：本轮准确文件审查、工作分支/协调分支安全同步；没有运行中的市场实验、助手或后台任务。尚未推送的本轮新增文件在同步核验前均仅本地。
+- planned：先读最新协调与已有结论，只选择尚未覆盖的原文问题；本轮EMA不重跑，事件与真正未来观察须先解除输入/事件支持缺口。不独占所有新技术因子/工具方向。
+- paused/blocked：真正未来观察缺合法输入、真实取得时间和历史接触记录，最早合法起点未确定；输入原件远端未交付，不承诺完整市场复现。Linux/Windows、干净依赖、账户及上线未验证。
+
+工作分支task/technical-factor-sequence-progress；基础/上一已推ae175d3caea2a5bd301cba46c6d2927bf6a50c6f；本轮准确commit由本文件Git历史定位，推后协调记录引用完整SHA。报告 docs/experiments/technical-persistence-and-color-transition-2026-10-04.md；raw docs/experiments/raw/technical-multimethod-2026-10-03/README.md及manifest/SHA。数据固定panel SHA382d82ff…，原文df92d85…/85e0e327…保持。
+
+workflow-fusion-2026-10-04 / D1-D2-D5：D1真实冻结用途实例已覆盖；D2区分固定方法内负结果、事件不足及未知冗余原因，已覆盖；D5一页式就绪/缺口卡已覆盖但前瞻执行blocked。依据完整报告同名节，不修改classic baseline_review/CLI，不新增行情拟合、收样本或自动化，不重启dot-pro未来SMA20及宽度观察任务。
+
+模块范围：new technical_persistence_information.py、alphalens_component.py、对应两单测及vendor固定公开源；workflow.py/workflow_inputs.py/question_contract.py只新增两个kind块；definitions仅两个新对象；本方用法、报告、registry/INDEX单项和两进度。其他AI避开这些具体块及EMA方向比例/本次相邻事件，不是排他锁。已核协调规则至f0999d3b6b5b709e5740c84a16bfbdad10f805ae，无当前已登记同题/同块冲突；共享Desktop修改、旧名义报价M和其他恢复文件不收走。
+
+预算：新真实拟合8/12；公开源6/6；市场/付费/账户0。Sol技术三失败批后停止、root修边界并验；Luna组件两批后通过；未清零旧研究预算。本轮负结果封存，不调参追正；每阶段同步不扩大范围/合main/部署。保存结果可在没有行情的独立目录用python3 -S verify_saved.py核验，实际回执补在checks.json；输入资格未重新验证。
+
+---
+
+## 前序阶段（保留）
+
 # 当前阶段：原策略语义与黑绿验证流程样板
 
 更新时间2026-10-03T22:58:39.393216+08:00 Asia/Shanghai；原负责人/root/Air继续。

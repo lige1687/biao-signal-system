@@ -1,0 +1,57 @@
+{
+  "portable_directory": "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/docs/experiments/raw/technical-multimethod-2026-10-03/portable-xzkbxwhd",
+  "command": [
+    "python3",
+    "-S",
+    "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/docs/experiments/raw/technical-multimethod-2026-10-03/portable-xzkbxwhd/docs/experiments/raw/technical-multimethod-2026-10-03/verify_saved.py",
+    "--root",
+    "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/docs/experiments/raw/technical-multimethod-2026-10-03/portable-xzkbxwhd",
+    "--results-only"
+  ],
+  "exit_code": 0,
+  "stdout": {
+    "saved_evidence_verified": true,
+    "new_fits": 0,
+    "mode": "results_only",
+    "input_qualification_rechecked": false,
+    "summary": {
+      "return": {
+        "rows": 1268,
+        "rmse": {
+          "B0": 6.804367217320674,
+          "B1": 7.202728961004526,
+          "B2": 7.291959618431015,
+          "ETF_mean": 6.794336113635843
+        },
+        "B1_minus_B2": -0.08923065742648895
+      },
+      "risk": {
+        "rows": 1268,
+        "rmse": {
+          "B0": 3.7092705129115173,
+          "B1": 3.525641117051642,
+          "B2": 3.539513143010607,
+          "ETF_mean": 3.575432897727927
+        },
+        "B1_minus_B2": -0.013872025958964862
+      }
+    }
+  },
+  "copied_files": [
+    "docs/experiments/raw/technical-multimethod-2026-10-03/analysis.json",
+    "docs/experiments/raw/technical-multimethod-2026-10-03/manifest.json",
+    "docs/experiments/raw/technical-multimethod-2026-10-03/verify_saved.py",
+    "docs/experiments/raw/technical-multimethod-2026-10-03/persistence/return/core-01/result.json",
+    "docs/experiments/raw/technical-multimethod-2026-10-03/persistence/return/core-01/contract.json",
+    "docs/experiments/raw/technical-multimethod-2026-10-03/persistence/return/core-01/receipt.json",
+    "docs/experiments/raw/technical-multimethod-2026-10-03/persistence/risk/core-01/result.json",
+    "docs/experiments/raw/technical-multimethod-2026-10-03/persistence/risk/core-01/contract.json",
+    "docs/experiments/raw/technical-multimethod-2026-10-03/persistence/risk/core-01/receipt.json"
+  ],
+  "without_inputs_or_project_dependencies": true,
+  "negative_control_directory": "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/docs/experiments/raw/technical-multimethod-2026-10-03/negative-xlf_eicj",
+  "negative_exit_code": 1,
+  "negative_detected": "manifest fingerprint/size rejects changed saved analysis",
+  "new_fits": 0,
+  "scope": "saved arithmetic and identity only;not market source qualification"
+}

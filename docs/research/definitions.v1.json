@@ -718,6 +718,18 @@
     "tests/unit/test_green_black_state_information.py": {
       "path": "tests/unit/test_green_black_state_information.py",
       "sha256": "9beab24ac21e74049ef7697f8e77993aa6a860a7daeb8c86d045f61b112499eb"
+    },
+    "docs/experiments/raw/technical-multimethod-2026-10-03/brief.json": {
+      "path": "docs/experiments/raw/technical-multimethod-2026-10-03/brief.json",
+      "sha256": "0a213c24e4fe60aae6617e4dbbadc7c580938137042d21f743d6a2dda68a980d"
+    },
+    "src/lei_signal/research/technical_persistence_information.py": {
+      "path": "src/lei_signal/research/technical_persistence_information.py",
+      "sha256": "b60678e745472c4e854c0b4756211f663aa6ba7cdc56668ba48d67abe0ed898a"
+    },
+    "tests/unit/test_technical_persistence_information.py": {
+      "path": "tests/unit/test_technical_persistence_information.py",
+      "sha256": "ff1b04cc0357323d2f4876b053cc307dd89a35c1ff2a47274804f69ac496038f"
     }
   },
   "objects": [
@@ -11118,6 +11130,230 @@
         "docs/experiments/raw/green-black-state-information-2026-10-03/brief.json",
         "src/lei_signal/research/green_black_state_information.py",
         "tests/unit/test_green_black_state_information.py",
+        "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
+      ],
+      "component_definition_refs": []
+    },
+    {
+      "id": "research.trend.ema_direction_persistence20",
+      "version": "1.0.0",
+      "name": "EMA20最近20个交易日向上比例",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description",
+        "comparison"
+      ],
+      "not_for": [
+        "production_trade",
+        "holding_entry_or_exit",
+        "actual_account_return_claim",
+        "complete_LEI_state",
+        "unique_author_calibration"
+      ],
+      "scope": "四只国内宽基ETF已见日线；有限价格信息表达",
+      "spec_anchor": [
+        "技术体系§2.2",
+        "技术实现§4.2"
+      ],
+      "spec_layer": "trend_road_information",
+      "definition": {
+        "formula": "sum(EMA20[j]>EMA20[j-1],j=t-19..t)/20",
+        "parameters": {
+          "lookback": 20,
+          "warmup": 252,
+          "horizon": 20
+        },
+        "unit": "fraction [0,1] in steps of0.05; equality counts0",
+        "direction": "方向及信息用途由冻结研究检验，不预设越大越好",
+        "transforms": "原生产EMA用前20收盘SMA播种，alpha=2/21；经济OHLC不改变",
+        "nan_policy": "缺价及未知行动分段重置；unknown不填gray；背景外保留理由",
+        "endpoints": "t及以前；目标从t+1至t+21，21个经济收盘20间隔"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "calendar",
+          "action_known"
+        ],
+        "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+        "currency": "CNY ETF经济价格指数",
+        "frequency": "daily",
+        "calendar": "四ETF共同完整交易日历",
+        "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+      },
+      "dependencies": [],
+      "lifecycle": {
+        "state": "research_ready",
+        "basis": [
+          "docs/experiments/raw/technical-multimethod-2026-10-03/brief.json",
+          "src/lei_signal/research/technical_persistence_information.py",
+          "tests/unit/test_technical_persistence_information.py"
+        ],
+        "verification_scope": "合成口径检查与无未来结果的来源/样本资格；效果由冻结合同"
+      },
+      "origin": "固定20日方向比例是稳定上行的研究代理；不是原文唯一公式，也不是Q01连续等待年龄",
+      "universe": {
+        "version": "semantic-four-etf-daily-20261002",
+        "eligibility": "四固定ETF全部4340安排日，全部背景",
+        "warmup": "252连续真实经济OHLC；缺失分段，生产SMA播种EMA",
+        "missing": "未知、背景外、未成熟分别保留，不造价格",
+        "quality_gate": "实际来源资格重新核全部名义OHLC与经济重建；到达及行动完整性未知",
+        "degrade": "只作有限四ETF回顾性信息，非完整ETF总体"
+      },
+      "time": {
+        "observation_time": "完整t收盘后",
+        "available_at": "历史到达时间未认证",
+        "decision_at": "t收盘后研究评价",
+        "execution_at": "无交易",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-03 risk-use research registration"
+      },
+      "validation": {
+        "method": "主控直接价格复算与合成前缀、缺失、边界、接口演练；效果另由冻结合同",
+        "tolerance": {
+          "absolute": 1e-09,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_technical_persistence_information.py"
+        ],
+        "limitations": "固定20日方向比例是稳定上行的研究代理；不是原文唯一公式，也不是Q01连续等待年龄；既有价格表达，非新增原始信息；已见历史"
+      },
+      "status": {
+        "definition_clarity": "fixed_explicit_research_proxy",
+        "data_qualification": "limited_retrospective_economic_ohlc",
+        "implementation": "synthetic_checks_verified",
+        "effectiveness": "not_evaluated",
+        "production": "not_authorized"
+      },
+      "research_owner": "technical_agent",
+      "research_status": "IN_SCOPE",
+      "local_alias": "persistence",
+      "sources": [
+        "docs/experiments/raw/technical-multimethod-2026-10-03/brief.json",
+        "src/lei_signal/research/technical_persistence_information.py",
+        "tests/unit/test_technical_persistence_information.py",
+        "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
+      ],
+      "component_definition_refs": []
+    },
+    {
+      "id": "research.signal.bull_green_adjacent_black20",
+      "version": "1.0.0",
+      "name": "20组严格高于60组且当前绿色时的相邻黑转绿",
+      "type": "state_signal",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description",
+        "comparison"
+      ],
+      "not_for": [
+        "production_trade",
+        "holding_entry_or_exit",
+        "actual_account_return_claim",
+        "complete_LEI_state",
+        "unique_author_calibration"
+      ],
+      "scope": "四只国内宽基ETF已见日线；有限价格信息表达",
+      "spec_anchor": [
+        "技术体系§2.7",
+        "技术实现§4.2"
+      ],
+      "spec_layer": "trend_road_information",
+      "definition": {
+        "formula": "eligible=min(SMA20,EMA20)>max(SMA60,EMA60) AND color20(t)=green; X=1 iff color20(t-1)=black",
+        "parameters": {
+          "lookback": 20,
+          "warmup": 252,
+          "horizon": 20
+        },
+        "unit": "0/1 within fixed bull-green condition; other dates retained as ineligible",
+        "direction": "方向及信息用途由冻结研究检验，不预设越大越好",
+        "transforms": "原生产EMA用前20收盘SMA播种，alpha=2/21；经济OHLC不改变",
+        "nan_policy": "缺价及未知行动分段重置；unknown不填gray；背景外保留理由",
+        "endpoints": "t及以前；目标从t+1至t+21，21个经济收盘20间隔"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "calendar",
+          "action_known"
+        ],
+        "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+        "currency": "CNY ETF经济价格指数",
+        "frequency": "daily",
+        "calendar": "四ETF共同完整交易日历",
+        "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+      },
+      "dependencies": [],
+      "lifecycle": {
+        "state": "research_ready",
+        "basis": [
+          "docs/experiments/raw/technical-multimethod-2026-10-03/brief.json",
+          "src/lei_signal/research/technical_persistence_information.py",
+          "tests/unit/test_technical_persistence_information.py"
+        ],
+        "verification_scope": "合成口径检查与无未来结果的来源/样本资格；效果由冻结合同"
+      },
+      "origin": "仅原文变色条件的相邻日子集；不是完整原文黑色等待绿色，也不是新增买入规则",
+      "universe": {
+        "version": "semantic-four-etf-daily-20261002",
+        "eligibility": "四固定ETF全部4340安排日，全部背景",
+        "warmup": "252连续真实经济OHLC；缺失分段，生产SMA播种EMA",
+        "missing": "未知、背景外、未成熟分别保留，不造价格",
+        "quality_gate": "实际来源资格重新核全部名义OHLC与经济重建；到达及行动完整性未知",
+        "degrade": "只作有限四ETF回顾性信息，非完整ETF总体"
+      },
+      "time": {
+        "observation_time": "完整t收盘后",
+        "available_at": "历史到达时间未认证",
+        "decision_at": "t收盘后研究评价",
+        "execution_at": "无交易",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-03 risk-use research registration"
+      },
+      "validation": {
+        "method": "主控直接价格复算与合成前缀、缺失、边界、接口演练；效果另由冻结合同",
+        "tolerance": {
+          "absolute": 1e-09,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_technical_persistence_information.py"
+        ],
+        "limitations": "仅原文变色条件的相邻日子集；不是完整原文黑色等待绿色，也不是新增买入规则；既有价格表达，非新增原始信息；已见历史"
+      },
+      "status": {
+        "definition_clarity": "fixed_explicit_research_proxy",
+        "data_qualification": "limited_retrospective_economic_ohlc",
+        "implementation": "synthetic_checks_verified",
+        "effectiveness": "not_evaluated",
+        "production": "not_authorized"
+      },
+      "research_owner": "technical_agent",
+      "research_status": "IN_SCOPE",
+      "local_alias": "transition",
+      "sources": [
+        "docs/experiments/raw/technical-multimethod-2026-10-03/brief.json",
+        "src/lei_signal/research/technical_persistence_information.py",
+        "tests/unit/test_technical_persistence_information.py",
         "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
         "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
         "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"

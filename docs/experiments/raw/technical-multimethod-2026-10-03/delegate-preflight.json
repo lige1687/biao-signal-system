@@ -1,0 +1,26 @@
+{
+  "first_attempts": [
+    {
+      "contract": "semantic-delegate-contract.json",
+      "exit": 1,
+      "reason": "absolute paths rejected before dispatch; zero agent side effects"
+    },
+    {
+      "contract": "opensource-delegate-contract.json",
+      "exit": 1,
+      "reason": "absolute paths rejected before dispatch; zero agent side effects"
+    }
+  ],
+  "accepted": [
+    {
+      "contract": "docs/experiments/raw/technical-multimethod-2026-10-03/semantic-delegate-contract-v2.json",
+      "exit": 0,
+      "output": "{\"dirty_worktree_action\": \"preserve\", \"independent_review_required\": true, \"legacy_job_checked_read_only\": false, \"spawn_agent_intent\": {\"model\": \"gpt-6-sol\", \"reasoning_effort\": \"medium\"}, \"spawned\": false, \"status\": \"ready\"}\n"
+    },
+    {
+      "contract": "docs/experiments/raw/technical-multimethod-2026-10-03/opensource-delegate-contract-v2.json",
+      "exit": 0,
+      "output": "{\"dirty_worktree_action\": \"preserve\", \"independent_review_required\": true, \"legacy_job_checked_read_only\": false, \"spawn_agent_intent\": {\"model\": \"gpt-6-luna\", \"reasoning_effort\": \"low\"}, \"spawned\": false, \"status\": \"ready\"}\n"
+    }
+  ]
+}

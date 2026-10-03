@@ -131,3 +131,11 @@ PYTHONPATH=src python3 scripts/run_factor_lab.py --workflow-contract NEW_FREEZE_
 资格文件含 `data_sha256`、`outcome_values_used_for_design:false`、`counts`（assets/observations/dates/episodes）及人工审阅的 `scientific_support`。基础计数对应问题期间所有安排观察，包含不合格和反例；它们绝不是独立样本数。有效机会、成熟标签、每期训练/评价、目标组支持另放 `scientific_support` 并在首页披露。无趋势/事件ID支持时episodes为null，不能手填独立事件数。
 
 程序核文件内容与SHA、输入绑定和基本数量，不审判方法科学性。四栏主控理由不得重复。只够资格或描述时保留报告，当前连续预测/二元风险入口不会强跑模型；也不要求为了进入模型而扩大参数/标的。当前真实适配器还包括 A01 N60带距离和A03首次触碰；其实现能力与用途以精确登记版本及实际输入为准。
+
+## 2026-10-04：连续方向与相邻变色的已实施示例
+
+实际实例见 `docs/experiments/technical-persistence-and-color-transition-2026-10-04.md`，D1/D2/D5不另造登记表。新适配器 `technical_persistence_information.py` 支持准确对象 `research.trend.ema_direction_persistence20@1.0.0` 和 `research.signal.bull_green_adjacent_black20@1.0.0`；只走各自固定四ETF、252连续暖启动、20交易间隔合同。连续因子用固定值组与排序补充模型比较；变色类别不强行排序。资格支持不足时止于qualification_only，不能把背景日当事件数。
+
+`alphalens_component.component_analysis(frame)` 是窄研究组件：传入项目已经合资格的 `(date,asset)` 面板及 `factor/factor_quantile/20D`；20D代表20交易间隔、不是20自然日。上游固定源码SHA先核验，分组提前固定；未知、并列、常数日期不随意删。仅复用原排名和原分组均值，独立观察假设的误差范围不用于金融推断。完整Alphalens包未安装，没有收益构造/资金组合/生产入口。
+
+同日ETF排名与同一ETF随时间排名不是同一用途；本例2026上半年两者相反，必须同时说明。训练误差变好、某组收益高、某种排名正数，均不能代替相同对象日期的新增信息检验；已有模型还须并列简单历史参照。报告中样本稀少、固定方法未支持、弱背景及未知失败原因分别保留，不一律解释为信息重复。真正未来观察缺合法取得时间与历史接触记录时标blocked，不填一个猜测的新观察起日、不自动收样本。

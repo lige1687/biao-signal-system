@@ -1,0 +1,32 @@
+{
+  "mission": "Read only original-condition and EMA persistence novelty audit",
+  "task_scope": [
+    "Read only original-condition and EMA persistence novelty audit"
+  ],
+  "read_only_paths": [
+    "docs",
+    "src",
+    ".agents"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 2,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "exact source paths and versions",
+    "bounded conclusion and missing evidence"
+  ],
+  "stop_conditions": [
+    "scope ambiguity",
+    "missing permission",
+    "no completed evidence available"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

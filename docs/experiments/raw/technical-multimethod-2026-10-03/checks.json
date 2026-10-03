@@ -1,0 +1,70 @@
+{
+  "updated_at": "2026-10-04T00:29:50+08:00",
+  "platform": "macOS-15.6.1-arm64-arm-64bit",
+  "python": "3.11.7 (main, Dec  4 2023, 18:10:11) [Clang 15.0.0 (clang-1500.1.0.2.5)]",
+  "dependencies": {
+    "numpy": "2.1.1",
+    "pandas": "2.3.3",
+    "scipy": "1.17.1",
+    "pytest": "8.4.2"
+  },
+  "tests": {
+    "command": "PYTHONPATH=src pytest -q tests/unit/test_technical_persistence_information.py tests/unit/test_alphalens_component.py",
+    "exit_code": 0,
+    "passed": 12,
+    "expected_warning": "constant ranking relationship undefined"
+  },
+  "core_commands": [
+    {
+      "freeze": "PYTHONPATH=src python3 scripts/run_factor_lab.py --workflow-draft docs/experiments/raw/technical-multimethod-2026-10-03/persistence/return/draft.json --out docs/experiments/raw/technical-multimethod-2026-10-03/persistence/return/freeze-02",
+      "execute": "PYTHONPATH=src python3 scripts/run_factor_lab.py --workflow-contract docs/experiments/raw/technical-multimethod-2026-10-03/persistence/return/freeze-02/contract.json --out docs/experiments/raw/technical-multimethod-2026-10-03/persistence/return/core-01",
+      "exit_code": 0,
+      "fits": 4
+    },
+    {
+      "freeze": "PYTHONPATH=src python3 scripts/run_factor_lab.py --workflow-draft docs/experiments/raw/technical-multimethod-2026-10-03/persistence/risk/draft.json --out docs/experiments/raw/technical-multimethod-2026-10-03/persistence/risk/freeze-01",
+      "execute": "PYTHONPATH=src python3 scripts/run_factor_lab.py --workflow-contract docs/experiments/raw/technical-multimethod-2026-10-03/persistence/risk/freeze-01/contract.json --out docs/experiments/raw/technical-multimethod-2026-10-03/persistence/risk/core-01",
+      "exit_code": 0,
+      "fits": 4
+    }
+  ],
+  "real_fits": 8,
+  "maximum_real_fits": 12,
+  "accepted_reaggregation_fits": 0,
+  "synthetic_fits": {
+    "root_known": 20,
+    "delegate_final_batch_known": 6,
+    "earlier_failed_delegate_batches_total": "not precisely recorded; preserve 3 failed batch counts, do not report cumulative synthetic count as measured"
+  },
+  "failed_freeze": {
+    "path": "docs/experiments/raw/technical-multimethod-2026-10-03/persistence/return/freeze-01.log",
+    "exit_code": 1,
+    "real_fits": 0,
+    "reason": "tested_condition incorrectly depended on target maturity; regression demonstrated and fixed before true freeze"
+  },
+  "failed_analysis": {
+    "path": "docs/experiments/raw/technical-multimethod-2026-10-03/analysis-01.log",
+    "exit_code": 1,
+    "reason": "calendar is a list, not dates mapping",
+    "real_fits": 0
+  },
+  "corrected_analysis": {
+    "path": "docs/experiments/raw/technical-multimethod-2026-10-03/analysis-02.log",
+    "exit_code": 0,
+    "real_fits": 0
+  },
+  "unverified": [
+    "fresh install",
+    "Linux",
+    "Windows",
+    "live or portfolio efficacy",
+    "source arrival and license for redistribution"
+  ],
+  "independent_portable": {
+    "command": "python3 -S <isolated-root>/docs/experiments/raw/technical-multimethod-2026-10-03/verify_saved.py --root <isolated-root> --results-only",
+    "exit_code": 0,
+    "negative_exit_code": 1,
+    "new_fits": 0,
+    "source_qualification_retested": false
+  }
+}

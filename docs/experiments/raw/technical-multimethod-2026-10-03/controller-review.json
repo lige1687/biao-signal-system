@@ -1,0 +1,29 @@
+{
+  "outcome_values_used": false,
+  "data_sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+  "pre_registered_max_real_fits": 12,
+  "authorized_actual_real_fits": 8,
+  "persistence": {
+    "decision": "estimate",
+    "reason": "两折训练2820/3792、晚期888/380，设计矩阵12/13列均满秩；比例0至1保留，不选最佳分组"
+  },
+  "transition": {
+    "decision": "qualification_only",
+    "reason": "完整安排4340；多头绿色子集的新增事件训练仅10/14、晚期仅4/3；不允许将全体绿色日550条冒充550个事件。仅来源/计数及明示描述；不计算或宣称模型增量。",
+    "reopen_condition": "同一预登记定义下新增独立更长ETF历史或真正后续日期；先核来源和成熟，另设冻结问题，不放宽原文代理凑事件"
+  },
+  "engineering": {
+    "delegate_technical_failed_batches": 3,
+    "delegate_stopped": true,
+    "root_cause": "权限夹具继承已开启real_labels；未知/背景外仍调用标签器，已用追踪回归证实并修正。非改金融参数，非架构换模型。",
+    "root_regression": {
+      "command": "PYTHONPATH=src pytest -q tests/unit/test_technical_persistence_information.py tests/unit/test_alphalens_component.py",
+      "exit_code": 0,
+      "passed": 12,
+      "note": "新增完整与截断面板标签成熟不影响past tested_condition回归；首次真实冻结被prefix gate拦截，0真实拟合；修正资格和成熟分离后重新冻结，不改金融定义。"
+    },
+    "luna_component_batches": 2,
+    "luna_component_final_passed": 3
+  },
+  "scope": "源原文和旧实验不改；宽度/情绪/账户不在本轮；8次真实拟合预算，0行情/付费请求；6/6外部来源已用"
+}

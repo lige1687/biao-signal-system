@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/docs/experiments/raw/technical-multimethod-2026-10-03/analyze.py", line 224, in <module>
+    main()
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/docs/experiments/raw/technical-multimethod-2026-10-03/analyze.py", line 126, in main
+    cores[target], checked, _ = core(target)
+                                ^^^^^^^^^^^^
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/docs/experiments/raw/technical-multimethod-2026-10-03/analyze.py", line 97, in core
+    axis = [d for d in contract["calendar"]["dates"] if any(f["eval_start"] <= d <= f["eval_end"] for f in contract["split"]["folds"])]
+                       ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
