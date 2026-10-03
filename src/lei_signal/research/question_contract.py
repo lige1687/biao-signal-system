@@ -299,7 +299,7 @@ def validate_workflow_contract(contract: dict) -> None:
     feature = _mapping(c["feature"], "workflow.feature", {
         "kind", "lookback", "bar_frequency", "missing_policy", "warmup",
     })
-    if feature["kind"] not in {"sma_distance", "decline_event", "a01_signed_band", "a03_pullback_order", "space_prior_target", "ma_cluster_information", "volume_anomaly_information", "key_fluctuation_information", "profile_overhead_information", "simple_top3_information", "future_deduction_box_information", "double_ma_order_information", "slope_change_information", "simple_top_invalidation_information", "pullback_layer_change_information", "prior_top_dual_break_information", "ema_sma_waiting_path", "tsfresh_price_information", "ema_only_wait_age_information"}:
+    if feature["kind"] not in {"sma_distance", "decline_event", "a01_signed_band", "a03_pullback_order", "space_prior_target", "ma_cluster_information", "volume_anomaly_information", "key_fluctuation_information", "profile_overhead_information", "simple_top3_information", "future_deduction_box_information", "double_ma_order_information", "slope_change_information", "simple_top_invalidation_information", "pullback_layer_change_information", "prior_top_dual_break_information", "ema_sma_waiting_path", "tsfresh_price_information", "ema_only_wait_age_information", "slope_change_risk_information", "ema_only_wait_age_risk_information"}:
         _fail("workflow.feature.kind", "no implemented adapter for this feature")
     if feature["missing_policy"] not in {"real_quote", "segmented"}:
         _fail("workflow.feature.missing_policy", "must freeze a supported recovery policy")
@@ -319,6 +319,28 @@ def validate_workflow_contract(contract: dict) -> None:
             _fail("workflow.feature", "current wait age freezes exact prefix-only EMA20/SMA20, segmented252, left censor and log1p age")
         if data["mode"] != "synthetic" and data.get("qualification", {}).get("adapter") != "top_etf_economic/1.0":
             _fail("workflow.data.qualification", "current-age study needs economic OHLC source qualification")
+    if feature["kind"] in {"slope_change_risk_information", "ema_only_wait_age_risk_information"}:
+        from lei_signal.research.technical_daily_risk_information import RISK_SOURCES
+        ref = RISK_SOURCES[feature["kind"]][0]
+        common = (schema_version == "research-workflow/1.1" and
+                  feature["warmup"] == 252 and feature["missing_policy"] == "segmented" and
+                  feature.get("definition_ref") == ref and c["question"]["factor_refs"] == [ref] and
+                  c["question"].get("sampling") == "daily")
+        if feature["kind"] == "slope_change_risk_information":
+            valid = common and feature["lookback"] == 60
+        else:
+            valid = (common and feature["lookback"] == 20 and
+                     feature.get("ema_seed") == "first_close" and
+                     feature.get("age_transform") == "log1p" and feature.get("sma_lag") == 20 and
+                     feature.get("censor_policy") == "left_censor_unknown_start")
+        if not valid:
+            _fail("workflow.feature", "daily risk requires its exact fixed research expression and segmented252 card")
+        if data["mode"] != "synthetic" and data.get("qualification", {}).get("adapter") != "top_etf_economic/1.0":
+            _fail("workflow.data.qualification", "daily risk requires economic OHLC source qualification")
+        if data["mode"] != "synthetic" and (
+                c["universe"]["assets"] != ["510300.SS", "510050.SS", "510500.SS", "588000.SS"] or
+                c["question"]["period"] != ["2022-01-04", "2026-06-30"]):
+            _fail("workflow.universe", "daily risk is limited to its original four ETFs and period")
     if feature["kind"] == "ema_sma_waiting_path":
         ref = "research.trend.ema20_sma20_waiting_path@1.0.0"
         if (schema_version != "research-workflow/1.1" or feature["lookback"] != 20 or feature["warmup"] != 252 or
@@ -529,10 +551,31 @@ def validate_workflow_contract(contract: dict) -> None:
         if feature["kind"] == "simple_top3_information" and (e["baseline_features"] != ["r1", "ret3", "ret20", "vol20", "black20", "asset_510050", "asset_510500", "asset_588000"] or e["added_features"] != ["added"]):
             _fail("workflow.evaluator", "T01 freezes price, black20 and three ETF identity fields plus the top indicator")
     if e["kind"] == "prediction_ols":
-        if (feature["kind"] not in {"future_deduction_box_information", "double_ma_order_information", "key_fluctuation_information", "profile_overhead_information", "slope_change_information", "simple_top_invalidation_information", "tsfresh_price_information", "ema_only_wait_age_information"} or
+        if (feature["kind"] not in {"future_deduction_box_information", "double_ma_order_information", "key_fluctuation_information", "profile_overhead_information", "slope_change_information", "simple_top_invalidation_information", "tsfresh_price_information", "ema_only_wait_age_information", "slope_change_risk_information", "ema_only_wait_age_risk_information"} or
             target["kind"] in {"up", "downside_event"} or e.get("lambda", 0) != 0 or
             e.get("rcond", 1e-12) != 1e-12):
             _fail("workflow.evaluator", "OLS requires continuous target, zero penalty and rcond 1e-12")
+    if feature["kind"] in {"slope_change_risk_information", "ema_only_wait_age_risk_information"}:
+        if feature["kind"] == "slope_change_risk_information":
+            from lei_signal.research.trend_slope_change_information import BASELINE_FEATURES
+        else:
+            from lei_signal.research.ema_only_wait_age_information import BASELINE_FEATURES
+        fixed_folds = [
+            {"train_end": "2024-12-31", "eval_start": "2025-01-01", "eval_end": "2025-12-31"},
+            {"train_end": "2025-12-31", "eval_start": "2026-01-01", "eval_end": "2026-06-30"},
+        ]
+        if (e["kind"] != "prediction_ols" or e["baseline_features"] != list(BASELINE_FEATURES) or
+                e["added_features"] != ["added"] or e.get("lambda") != 0 or
+                e.get("rcond") != 1e-12 or e.get("minimum_training_rows") != 22 or
+                target["kind"] != "mae" or target["start_offset"] != 1 or
+                target["end_offset"] != 21 or target["entry_field"] != "close" or
+                target.get("path_field") != "close" or target.get("price_measure") != "economic_price" or
+                c["question"]["target"]["horizon"] != 20 or
+                c.get("training_weights") != "equal_asset" or c["weights"]["policy"] != "equal_asset" or
+                s["label_policy"] != "purge" or s.get("evaluation_label_policy") != "contained" or
+                s["folds"] != fixed_folds or metric["name"] != "RMSE" or
+                c["dependence"].get("axis_scope") != "evaluation"):
+            _fail("workflow.evaluator", "daily risk freezes exact B1 plus one expression and two contained 21-close MAE OLS folds")
     if feature["kind"] == "ema_only_wait_age_information":
         from lei_signal.research.ema_only_wait_age_information import BASELINE_FEATURES
         if (e["kind"] != "prediction_ols" or e["baseline_features"] != list(BASELINE_FEATURES) or
@@ -712,6 +755,9 @@ def validate_workflow_contract(contract: dict) -> None:
         if type(desc["minimum_each_background"]) is not int or desc["minimum_each_background"] < 1:
             _fail("workflow.descriptive.minimum_each_background", "positive common-support minimum needed")
     b = _mapping(c["budget"], "workflow.budget", {"scientific_variants", "execution_seconds", "max_rows"})
+    if feature["kind"] in {"slope_change_risk_information", "ema_only_wait_age_risk_information"} and (
+            b["scientific_variants"] != 1 or b["execution_seconds"] != 7200):
+        _fail("workflow.budget", "daily risk freezes one scientific configuration and a 7200-second ceiling")
     if feature["kind"] == "ema_sma_waiting_path" and (type(b.get("real_runs")) is not int or b["real_runs"] < 0):
         _fail("workflow.budget.real_runs", "waiting path requires an explicit nonnegative real-run ceiling")
     for key in ("scientific_variants", "max_rows"):

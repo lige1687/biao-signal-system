@@ -1,0 +1,99 @@
+{
+  "schema_version": "workflow-rehearsal/1.0",
+  "data_mode": "synthetic",
+  "input_sha256": "c18fe0a6623d131855040265c07640867710a94134e0bea9358bc0183a4c284c",
+  "definition_and_method": "f62385e959cdba192227be0b735efc695ccd553a6e578b6dbc7ffbd980528a64",
+  "coverage": {
+    "observations": 1200,
+    "ready_252": 698,
+    "E_only": 252,
+    "eligible": 144,
+    "price_reset_rows": 0,
+    "waiting_segments": 62,
+    "left_censored_segments": 0,
+    "waiting_segments_formal": 62,
+    "left_censored_segments_formal": 0,
+    "per_asset": {
+      "synthetic-A": {
+        "observations": 600,
+        "ready_252": 349,
+        "E_only": 126,
+        "eligible": 72,
+        "waiting_segments": 31,
+        "left_censored_segments": 0,
+        "waiting_segments_formal": 31,
+        "left_censored_segments_formal": 0
+      },
+      "synthetic-B": {
+        "observations": 600,
+        "ready_252": 349,
+        "E_only": 126,
+        "eligible": 72,
+        "waiting_segments": 31,
+        "left_censored_segments": 0,
+        "waiting_segments_formal": 31,
+        "left_censored_segments_formal": 0
+      }
+    },
+    "definition_ref": "research.risk.ema_only_wait_age20@1.0.0"
+  },
+  "performance": [
+    {
+      "model": "B0",
+      "metric": "MSE",
+      "value": 2.767141220805958,
+      "unit": "percentage_point_squared",
+      "rows": 82,
+      "dates": 41,
+      "assets": 2
+    },
+    {
+      "model": "B0",
+      "metric": "RMSE",
+      "value": 1.6634726390313601,
+      "unit": "percentage_point",
+      "rows": 82,
+      "dates": 41,
+      "assets": 2
+    },
+    {
+      "model": "B1",
+      "metric": "MSE",
+      "value": 0.008004486657917887,
+      "unit": "percentage_point_squared",
+      "rows": 82,
+      "dates": 41,
+      "assets": 2
+    },
+    {
+      "model": "B1",
+      "metric": "RMSE",
+      "value": 0.08946779676463418,
+      "unit": "percentage_point",
+      "rows": 82,
+      "dates": 41,
+      "assets": 2
+    },
+    {
+      "model": "B2",
+      "metric": "MSE",
+      "value": 0.007408830488334487,
+      "unit": "percentage_point_squared",
+      "rows": 82,
+      "dates": 41,
+      "assets": 2
+    },
+    {
+      "model": "B2",
+      "metric": "RMSE",
+      "value": 0.08607456353844896,
+      "unit": "percentage_point",
+      "rows": 82,
+      "dates": 41,
+      "assets": 2
+    }
+  ],
+  "fits": 2,
+  "purpose": "engineering_error_check_only",
+  "selection_used": false
+}

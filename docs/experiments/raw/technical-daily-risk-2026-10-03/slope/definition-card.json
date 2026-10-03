@@ -1,0 +1,125 @@
+{
+  "id": "research.risk.slope_change60_20",
+  "version": "1.0.0",
+  "name": "SMA60斜率变化的未来20日下探研究用途",
+  "type": "feature",
+  "profile": "mixed",
+  "uses": [
+    "research_signal",
+    "description",
+    "comparison"
+  ],
+  "not_for": [
+    "production_trade",
+    "holding_entry_or_exit",
+    "actual_account_return_claim",
+    "complete_LEI_state",
+    "unique_author_calibration"
+  ],
+  "scope": "四ETF已见历史的趋势动态表达",
+  "spec_anchor": [
+    "桌面LEI技术交易体系§2.4",
+    "桌面LEI技术实现§4.4"
+  ],
+  "spec_layer": "trend_road_information",
+  "definition": {
+    "formula": "s[t]=100*252/60*ln(SMA60[t]/SMA60[t-60]); X[t]=s[t]-s[t-20]",
+    "parameters": {
+      "sma_length": 60,
+      "slope_window": 60,
+      "annualization": 252,
+      "change_lag": 20,
+      "warmup": 252,
+      "target": "100*max(0,1-min(close[t+1:t+22])/close[t+1])"
+    },
+    "unit": "annualized log percentage-point change",
+    "direction": "风险方向由检验决定",
+    "transforms": "V01绑定名义OHLC和行动重建的回顾性经济OHLC；EMA20前20收盘SMA播种，ATR14简单平均",
+    "nan_policy": "缺报价或行动未知重置全部连续指标和结构；252不足未知",
+    "endpoints": "t及以前的完整日线；未来收盘路径t+1..t+21，含首尾"
+  },
+  "input": {
+    "fields": [
+      "date",
+      "open",
+      "high",
+      "low",
+      "close",
+      "calendar",
+      "action_known"
+    ],
+    "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+    "currency": "CNY ETF经济价格指数",
+    "frequency": "daily",
+    "calendar": "四ETF共同完整交易日历",
+    "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+  },
+  "dependencies": [
+    "research.trend.slope_change60_20@1.0.0"
+  ],
+  "lifecycle": {
+    "state": "verified",
+    "basis": [
+      "tests/unit/test_technical_daily_risk_information.py",
+      "docs/experiments/raw/technical-daily-risk-2026-10-03/slope/qualification.json"
+    ],
+    "verification_scope": "synthetic target/path/permission and preserved legacy feature tests; source/sample qualification without outcomes; effectiveness separate frozen protocol"
+  },
+  "origin": "同一表达的风险研究用途，引用research.trend.slope_change60_20@1.0.0；不是新原始信息，不改旧收益或原策略",
+  "universe": {
+    "version": "semantic-four-etf-daily-20261002",
+    "eligibility": "四固定ETF全部4340安排日，全部背景",
+    "warmup": "252连续真实经济OHLC；缺失分段，生产SMA播种EMA",
+    "missing": "未知、背景外、未成熟分别保留，不造价格",
+    "quality_gate": "实际来源资格重新核全部名义OHLC与经济重建；到达及行动完整性未知",
+    "degrade": "只作有限四ETF回顾性信息，非完整ETF总体"
+  },
+  "time": {
+    "observation_time": "完整t收盘后",
+    "available_at": "历史到达时间未认证",
+    "decision_at": "t收盘后研究评价",
+    "execution_at": "无交易",
+    "timezone": "Asia/Shanghai",
+    "effective_from": "2026-10-03 risk-use research registration"
+  },
+  "validation": {
+    "method": "主控直接价格复算与合成前缀、缺失、边界、接口演练；效果另由冻结合同",
+    "tolerance": {
+      "absolute": 1e-09,
+      "relative": 1e-10,
+      "integer": 0
+    },
+    "tests": [
+      "tests/unit/test_trend_slope_change_information.py",
+      "tests/unit/test_technical_daily_risk_information.py"
+    ],
+    "limitations": "数学表达来自已有价格；最新替换/固定20日差为研究代理；已见历史、同日与相邻观察相关"
+  },
+  "status": {
+    "definition_clarity": "fixed_research_proxy",
+    "data_qualification": "limited_retrospective_economic_ohlc",
+    "implementation": "synthetic_and_legacy_checks_verified",
+    "effectiveness": "not_evaluated",
+    "production": "not_authorized"
+  },
+  "research_owner": "technical_agent",
+  "research_status": "IN_SCOPE",
+  "local_alias": "slope-risk",
+  "sources": [
+    "docs/experiments/raw/semantic-mining-2026-10-02/trend-adapter/qualification.json",
+    "docs/experiments/raw/semantic-mining-2026-10-02/controller/trend-design-intent.json",
+    "docs/experiments/raw/semantic-mining-2026-10-02/controller/trend-qualification-review.json",
+    "src/lei_signal/research/trend_slope_change_information.py",
+    "tests/unit/test_trend_slope_change_information.py",
+    "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+    "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+    "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md",
+    "docs/experiments/raw/technical-daily-risk-2026-10-03/brief.json",
+    "tests/unit/test_technical_daily_risk_information.py",
+    "src/lei_signal/research/technical_daily_risk_information.py",
+    "docs/experiments/raw/technical-daily-risk-2026-10-03/slope/qualification.json"
+  ],
+  "component_definition_refs": [
+    "research.trend.slope_change60_20@1.0.0"
+  ]
+}

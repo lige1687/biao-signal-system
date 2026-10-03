@@ -1,0 +1,25 @@
+{
+  "schema_version": "adapter-test-attempts/1.0",
+  "scope": "technical-daily-risk five-file implementation; first expanded regression attempt",
+  "command": "PYTHONPATH=src python3 -m pytest tests/unit/test_technical_daily_risk_information.py tests/unit/test_trend_slope_change_information.py tests/unit/test_ema_only_wait_age_information.py tests/unit/test_question_contract.py tests/unit/test_workflow_design_review.py tests/integration/test_research_workflow_entry.py -q",
+  "working_directory": "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab",
+  "exit_code": 1,
+  "pytest_summary": "39 failed, 33 passed in 4.01s",
+  "observed_failure_examples": [
+    {
+      "test": "tests/unit/test_question_contract.py::QuestionContractTests::test_all_frozen_questions_validate_without_flattening_objects",
+      "error": "FileNotFoundError: docs/archive/handoffs-plans/dual-ma-information-2026-09-28/questions.json"
+    },
+    {
+      "test": "tests/unit/test_workflow_design_review.py::WorkflowDesignReviewTests::test_1_1_controller_reasons_must_be_distinct_after_whitespace_normalization",
+      "error": "FileNotFoundError: docs/experiments/raw/research-workflow-engineering-2026-09-29/demos-final/continuous/run/contract.json"
+    },
+    {
+      "test": "tests/integration/test_research_workflow_entry.py::test_future_and_unfinished_week_rejected_by_actual_entry",
+      "error": "unknown source: docs/experiments/raw/volume-information-2026-09-30/protocol-draft.md"
+    }
+  ],
+  "output_retention": "The tool truncated the original pytest output (reported original token count 61114; 4301 lines). The full failure trace was not retained, so the three examples above and the pytest summary are the exact visible evidence, not a reconstruction of all 39 failures.",
+  "interpretation_limit": "The visible failures include absent historical fixtures and a source reference in this independent worktree. The truncated output does not establish that all 39 failures share those causes, nor does it establish a full regression pass.",
+  "rerun": false
+}

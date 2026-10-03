@@ -190,6 +190,18 @@ def actual_bindings(contract, root=ROOT):
         files[item["path"]] = file_hash(root / item["path"])
         versions[key] = item["version"]
     related_code = list(CODE_PATHS)
+    if contract["feature"]["kind"] in {"slope_change_risk_information", "ema_only_wait_age_risk_information"}:
+        related_code.extend(("src/lei_signal/research/technical_daily_risk_information.py",
+                             "src/lei_signal/research/trend_slope_change_information.py" if
+                             contract["feature"]["kind"] == "slope_change_risk_information" else
+                             "src/lei_signal/research/ema_only_wait_age_information.py",
+                             "src/lei_signal/research/top_structure_information.py",
+                             "src/lei_signal/research/volume_information.py",
+                             "src/lei_signal/features/indicators.py",
+                             "src/lei_signal/research/deduction_box_information.py" if
+                             contract["feature"]["kind"] == "ema_only_wait_age_risk_information" else
+                             "src/lei_signal/rules/clock_classifier.py",
+                             "src/lei_signal/domain/rules_config.py", "configs/rules.v2.yaml"))
     if contract["feature"]["kind"] == "ema_only_wait_age_information":
         related_code.extend(("src/lei_signal/research/ema_only_wait_age_information.py",
                              "src/lei_signal/research/deduction_box_information.py",
@@ -364,6 +376,10 @@ def cache_keys(contract, bindings):
                             contract["feature"]["kind"] == "slope_change_information" else
                             "top_invalidation_information")
         labels = digest({"base": labels, "adapter": bindings["files"][f"src/lei_signal/research/{semantic_adapter}.py"]})
+    if contract["feature"]["kind"] in {"slope_change_risk_information", "ema_only_wait_age_risk_information"}:
+        adapter = bindings["files"]["src/lei_signal/research/technical_daily_risk_information.py"]
+        feature = digest({"base": feature, "risk_adapter": adapter})
+        labels = digest({"base": labels, "risk_adapter": adapter})
     if contract["feature"]["kind"] == "tsfresh_price_information":
         labels = digest({"base": labels,
                          "adapter": bindings["files"]["src/lei_signal/research/tsfresh_price_information.py"],
@@ -524,6 +540,12 @@ def preflight(contract, root=ROOT, *, require_frozen=True):
             contract.get("permissions", {}).get("effect_authorized") is True and
             contract.get("permissions", {}).get("real_fits") == 4):
         raise WorkflowBlocked("current-age study requires explicit real label/effect permission and four-fit ceiling")
+    if contract["feature"]["kind"] in {"slope_change_risk_information", "ema_only_wait_age_risk_information"} and not (
+            contract.get("permissions", {}).get("real_labels") is True and
+            contract.get("permissions", {}).get("effect_authorized") is True and
+            type(contract.get("permissions", {}).get("real_fits")) is int and
+            contract["permissions"]["real_fits"] == 4):
+        raise WorkflowBlocked("technical daily risk requires explicit real label/effect permission and four-fit ceiling")
     bindings = actual_bindings(contract, root)
     if require_frozen and contract.get("bindings") != bindings:
         raise WorkflowBlocked("stale_proof: freeze does not match this input/definition/code")
@@ -825,7 +847,7 @@ def run_rehearsal(contract):
         count = 1000  # two completed pullbacks need more history than daily states
     if c["feature"]["kind"] == "double_ma_order_information":
         count = 900  # fixed engineering correction; no real design change
-    if c["feature"]["kind"] in {"slope_change_information", "simple_top_invalidation_information", "tsfresh_price_information"}:
+    if c["feature"]["kind"] in {"slope_change_information", "simple_top_invalidation_information", "tsfresh_price_information", "slope_change_risk_information", "ema_only_wait_age_risk_information"}:
         count = 600  # engineering fixture, never a market parameter selection
     if count > 2000:
         raise WorkflowBlocked("synthetic rehearsal size exceeds finite engineering adapter limit")
@@ -842,8 +864,10 @@ def run_rehearsal(contract):
             if c["feature"]["kind"] == "pullback_layer_change_information":
                 price = 100.0 + j + 0.2 * i + (4.0 + 2.0 * math.sin(i / 60)) * math.sin(i / 5)
                 low = price - 0.6
-            elif c["feature"]["kind"] in ("slope_change_information", "simple_top_invalidation_information", "tsfresh_price_information"):
-                price = 100.0 + j + 0.10 * i + 4.0 * math.sin(i / 7)
+            elif c["feature"]["kind"] in ("slope_change_information", "simple_top_invalidation_information", "tsfresh_price_information", "slope_change_risk_information", "ema_only_wait_age_risk_information"):
+                price = (100.0 + j - 0.03 * i + 5.0 * math.sin(i / 3)
+                         if c["feature"]["kind"] == "ema_only_wait_age_risk_information" else
+                         100.0 + j + 0.10 * i + 4.0 * math.sin(i / 7))
                 low = price - 0.8
             elif c["feature"]["kind"] in ("space_prior_target", "ma_cluster_information"):
                 price = 100.0 + j + 0.10 * i + 5.0 * math.sin(i / 15)
@@ -894,6 +918,8 @@ def run_rehearsal(contract):
         cutoff = 700
     if c["feature"]["kind"] == "double_ma_order_information":
         cutoff = 550  # training includes rising restart EMA120 lag vs SMA60_up5
+    if c["feature"]["kind"] == "ema_only_wait_age_risk_information":
+        cutoff = 400  # sparse current E-only state needs 22 mature synthetic training rows
     c["split"] = {"label_policy": "purge", "folds": [{"train_end": dates[cutoff],
         "eval_start": dates[cutoff + 1], "eval_end": dates[-1 - c["target"]["end_offset"]]}]}
     if c["feature"]["kind"] in {"double_ma_order_information", "profile_overhead_information"}:
@@ -959,6 +985,13 @@ def run_rehearsal(contract):
                             ("mean_abs_log_change20", "return_autocorrelation20_lag1")) for r in ready) or
                 any(r["ready_252"] for r in inputs["observations"] if r["date"] < dates[251])):
             raise WorkflowBlocked("tsfresh rehearsal requires common finite candidates, segmented252 and two synthetic fits")
+    if c["feature"]["kind"] in {"slope_change_risk_information", "ema_only_wait_age_risk_information"}:
+        ready = [r for r in inputs["observations"] if r["eligible"]]
+        if (not result["performance"] or result["execution"]["fits"] != 2 or
+                len({r["asset"] for r in ready}) != 2 or
+                not any(r["y"] > 0 for r in ready) or
+                any(r["ready_252"] for r in inputs["observations"] if r["date"] < dates[251])):
+            raise WorkflowBlocked("daily risk rehearsal requires two assets, segmented252, nonzero 21-close MAE and both OLS fits")
     return {"schema_version": "workflow-rehearsal/1.0", "data_mode": "synthetic",
             "input_sha256": digest(payload), "definition_and_method": digest({"feature": c["feature"], "target": c["target"], "evaluator": c["evaluator"]}),
             "coverage": inputs["coverage"], "performance": result["performance"],

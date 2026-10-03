@@ -1,0 +1,143 @@
+{
+  "id": "research.risk.ema_only_wait_age20",
+  "version": "1.0.0",
+  "name": "当前EMA单独等待日龄的未来20日下探研究用途",
+  "type": "feature",
+  "profile": "mixed",
+  "uses": [
+    "research_signal",
+    "description",
+    "comparison"
+  ],
+  "not_for": [
+    "production_trade",
+    "automatic_buy_or_sell",
+    "complete_LEI_stable_EMA_definition",
+    "account_return_claim",
+    "retrospective_successful_waiting_time"
+  ],
+  "scope": "四ETF每日E上S未上状态中截至当天已知的连续等待日龄，增量参照含D01盒顶；非事后确认等待长度",
+  "spec_anchor": [
+    "桌面LEI技术交易体系§2.2",
+    "桌面LEI技术实现§4.2、§4.3、§5、A4"
+  ],
+  "spec_layer": "technical_sequence_information",
+  "definition": {
+    "formula": "X[t]=log(1+age[t]), age consecutive E20=true and S20=false sessions through t",
+    "parameters": {
+      "E": "close[t]>first-valid-close seeded EMA20[t], exactly current D01 seed alpha2/21; equality false",
+      "S": "close[t]>close[t-20], equality false; E-only is E and NOT S",
+      "wait_age": "count of consecutive calendar sessions through t with E-only true. Compute from segment history once E/S both known at21 quotes, not only formal dates. Unknown-start spell is left-censored until E-only ends; no invented prehistory. Missing resets. If S confirms while E remains true, spell ends confirmed at that close; if E becomes false first or simultaneously, failed; formal end/cutoff ongoing. New E-only later is new spell even if E never dropped. No minimum-day stability threshold or max-wait stop.",
+      "added": "log1p(wait_age); positive only eligible E-only observations with uncensored age. Fixed monotone compression chosen before outcome; untransformed age retained.",
+      "baseline_features": [
+        "prior20high_distance",
+        "ret20",
+        "ema20_distance",
+        "r1",
+        "vol20",
+        "sma60_up",
+        "asset_510050",
+        "asset_510500",
+        "asset_588000",
+        "deduction_box_distance"
+      ],
+      "baseline_box": "exact D01 added:100*(close[t]/max(close[t-19:t-9])-1), includes historical closes t-19..t-10 inclusive",
+      "population": "all4340scheduled days retained, current E/S states and unknown reason retained; estimation only continuous252economic OHLC, E-only and uncensored current wait age. No selection by later confirmation/success.",
+      "target": "100*max(0,1-min(close[t+1:t+22])/close[t+1])",
+      "EMA_compatibility": "first-close seed follows D01, differs from production SMA-seededEMA. No production change."
+    },
+    "unit": "log1p sessions; original age sessions retained",
+    "direction": "风险方向由检验决定",
+    "transforms": "V01来源绑定经济价格；EMA按D01首收盘种子alpha2/21，与生产SMA种子区分",
+    "nan_policy": "缺失重置；初次21日状态已在等待则左截断至该段结束；252只控制资格而不重置年龄",
+    "endpoints": "t及以前的完整日线；未来收盘路径t+1..t+21，含首尾"
+  },
+  "input": {
+    "fields": [
+      "date",
+      "open",
+      "high",
+      "low",
+      "close",
+      "calendar",
+      "action_known"
+    ],
+    "price_basis": "指纹绑定名义OHLC及行动重建的经济价格",
+    "currency": "CNY ETF经济价格指数",
+    "frequency": "daily",
+    "calendar": "四ETF共同完整交易日历",
+    "sources": "docs/experiments/raw/deduction-box-information-2026-09-30/execution/source-manifest.json"
+  },
+  "dependencies": [
+    "research.trend.ema_only_wait_age20@1.0.0"
+  ],
+  "lifecycle": {
+    "state": "verified",
+    "basis": [
+      "tests/unit/test_technical_daily_risk_information.py",
+      "docs/experiments/raw/technical-daily-risk-2026-10-03/age/qualification.json"
+    ],
+    "verification_scope": "synthetic target/path/permission and preserved legacy feature tests; source/sample qualification without outcomes; effectiveness separate frozen protocol"
+  },
+  "origin": "同一表达的风险研究用途，引用research.trend.ema_only_wait_age20@1.0.0；不是新原始信息，不改旧收益或原策略",
+  "universe": {
+    "version": "ema-only-current-age-four-etf-20261002",
+    "eligibility": "all4340scheduled; currentEonly397days, no future success conditioning; exact age readiness and left-censor counts in qualification",
+    "warmup": "252continuous economic OHLC; compute causal age from first21knownstates before formal dates",
+    "missing": "missing OHLC/action resets; left-censored,current noncontext,warmup,and immature separately retained",
+    "quality_gate": "V01来源数学复核名义OHLC、行动与原响应；历史到达和行动完整性未知",
+    "degrade": "四ETF有限回顾性历史；资料到达及行动完整性未知；全部历史已见"
+  },
+  "time": {
+    "observation_time": "完整t收盘后",
+    "available_at": "历史来源到达时点未认证",
+    "decision_at": "t收盘后研究",
+    "execution_at": "无交易",
+    "timezone": "Asia/Shanghai",
+    "effective_from": "2026-10-03 risk-use research registration"
+  },
+  "validation": {
+    "method": "原panel独立逐日重算4340状态、因果日龄和十背景；合成前缀/相等/缺失/左截断/资格边界/双许可",
+    "tolerance": {
+      "absolute": 1e-10,
+      "relative": 1e-10,
+      "integer": 0
+    },
+    "tests": [
+      "tests/unit/test_ema_only_wait_age_information.py",
+      "tests/unit/test_technical_daily_risk_information.py"
+    ],
+    "limitations": "不证明作者稳定上行全部含义，不判断事后确认代价，不等同账户收益"
+  },
+  "status": {
+    "definition_clarity": "fixed_research_proxy",
+    "data_qualification": "limited_retrospective_economic_ohlc",
+    "implementation": "synthetic_and_legacy_checks_verified",
+    "effectiveness": "not_evaluated",
+    "production": "not_authorized"
+  },
+  "research_owner": "technical_agent",
+  "research_status": "IN_SCOPE",
+  "local_alias": "age-risk",
+  "sources": [
+    "docs/experiments/raw/ema-sma-sequence-information-2026-10-02/controller/definition-intent-v2.json",
+    "docs/experiments/raw/ema-sma-sequence-information-2026-10-02/qualification/qualification.json",
+    "docs/experiments/raw/ema-sma-sequence-information-2026-10-02/controller/qualification-review.json",
+    "docs/experiments/raw/ema-sma-sequence-information-2026-10-02/semantic-review/review.md",
+    "docs/experiments/raw/ema-sma-sequence-information-2026-10-02/protocol.md",
+    "docs/experiments/raw/ema-sma-sequence-information-2026-10-02/independent-identity/receipt.json",
+    "src/lei_signal/research/ema_only_wait_age_information.py",
+    "tests/unit/test_ema_only_wait_age_information.py",
+    "src/lei_signal/research/deduction_box_information.py",
+    "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+    "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+    "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md",
+    "docs/experiments/raw/technical-daily-risk-2026-10-03/brief.json",
+    "tests/unit/test_technical_daily_risk_information.py",
+    "src/lei_signal/research/technical_daily_risk_information.py",
+    "docs/experiments/raw/technical-daily-risk-2026-10-03/age/qualification.json"
+  ],
+  "component_definition_refs": [
+    "research.trend.ema_only_wait_age20@1.0.0"
+  ]
+}

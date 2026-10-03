@@ -1,0 +1,20 @@
+{
+  "mode": "research",
+  "question": "两个已有表达在当天技术信息之后，是否增加未来20间隔收盘下探信息",
+  "primary_target": "100*max(0,1-min(close[t+1:t+22])/close[t+1])",
+  "scope": "four fixed ETFs2022-01-04..2026-06-30 already-seen history; no trading actions",
+  "baseline": "B0 mature historical mean; exact old10-field B1; B2 adds one expression",
+  "split": "train2022-2024 evaluate2025; trainthrough2025 evaluate2026H1; mature/contained outcomes",
+  "budget": {
+    "questions": 2,
+    "fits_per_question": 4,
+    "scientific_configs_per_question": 1,
+    "seconds_per_question": 7200,
+    "new_sources": 0,
+    "paid": 0,
+    "followups": "saved prediction diagnostics only"
+  },
+  "prior_cost": "S01 returns4fits and Q01 returns4fits retained; D01risk previous complete, never reuse as new candidate result",
+  "stop": "core data/definition/permission or real conflict; no tuning to positive",
+  "source_authority": "strategy hashes unchanged; technical proxies, no production change"
+}
