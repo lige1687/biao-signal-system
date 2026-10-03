@@ -1,53 +1,48 @@
-# LEI 公式语义与绝对时间：独立合成验证准备
+# LEI 公式语义与绝对时间：独立工具交付
 
 - task-id：dot-formula-time-validation
-- 状态：planned（登记后才恢复独立合成验证；当前只有此前暂停检查点，没有验证器、测试或实验运行）
-- 更新时间：2026-10-03T07:19:00Z，Etc/UTC
-- 负责人角色：本接续方独立验证；正式源码实现者/公共 registry owner 尚未明确，本记录不授予源码写入权
-- 目标与用途：检查完整公式合同是否能阻止同 id@version 的语义改变，以及带时区时间是否按真正绝对时刻比较。验证资料输入/资格边界，不改变 LEI 策略，不把收盘时间硬写成 15 点新规则。
-- 验收：独立预期算术和正/反控制；最早差异可核；同绝对时间不同偏移等价；真正 available_at ≤ cutoff，缺时区/可用时点拒绝或明确未知。局部接口/候选校验与完整 registry 准入分开，交书面报告和最小反例，不称生产修复。
+- 状态：completed（仅本次独立校验器、合成回归与准确源码探针交付；未接生产，完整 registry 准入仍 blocked）
+- 更新时间：2026-10-03T07:40:00Z，Etc/UTC
+- 负责人/角色：当前 LEI 接续方，独立实现与验证；共享源码/registry 正式改造的原实现负责人尚待明确，本记录不取得其写入权。
+- 目标与用途：拒绝未审阅的 RV20 公式合同语义变更；按绝对时间检验资料声明的真实可用时刻是否不晚于截止。服务研究计算前的合同/输入资格，不产生交易判断、市场效果或新收盘规则。
+- 验收：可直接运行及导入、独立算术正反控、完整合同/精确依赖绑定、时区等价/截止/缺证边界、准确源码问题复现、来源字节不变、最终代码和回执远端可读。该有限验收已完成，源真实性/完整性与生产集成不在通过结论内。
 
-## 本任务真实状态与基线
+## 工作分支、准确成果与版本
 
-此前 2026-10-03T05:32:54Z 暂停检查点说明：只创建独立目录，未写候选验证器、测试文件或正式报告，未改任何 src/configs/tests/registry/Air 输出。用户本轮已允许恢复派发，但必须完成本协调登记并读回后才做新范围。不能把待运行例子写成已发现/已通过，也不能把旧 V01/K01/P01 的 16:00+08 历史结果提前判无效。
+工作分支 codex/lei-formula-time-validation-20261003；基础完整 commit d444316817e9330c2d72a4a90c655467b45dd5bb；最近已推送成果完整 commit 7dd36a3c6b59bd409243e04549294ad809e7129d，已核远端 ref 相同，十文件内容与 Git blob 逐项读回一致。
+成果只新增 docs/experiments/raw/lei-formula-time-boundaries-2026-10-03/：
+validator.py、test_validator.py、probe_sources.py、README.md、fixtures/reviewed_binding.json、fixtures/pass.json、fixtures/block_formula.json、fixtures/block_time.json、evidence/source-probes-final.json、evidence/command-receipt.json。没有修改 src/configs/tests/registry/Air 输出或他人原文件。
 
-本线要同时核现行 technical@d444316817e9330c2d72a4a90c655467b45dd5bb 的实际只读源码与对应 current-standards/来源表。1ac596f65110e06c286f04707165251328df0962 只是一份 15 文件候选输入的已核 blob 快照；不混到现行基线，不假称完整 registry 生命周期/依据闭包已恢复。
-旧恢复快照已知 mixed.rv20 使用最近 20 个本产品有效报价之间的简单收益率样本标准差×sqrt(252)，不是对数收益率。正式本轮测试前仍须解析准确实际卡的 id@version、算子/参数/单位/端点/缺值/实现绑定；不能仅凭名字或子串匹配认定语义。
+[运行入口与限制](https://github.com/lige1687/biao-signal-system/blob/7dd36a3c6b59bd409243e04549294ad809e7129d/docs/experiments/raw/lei-formula-time-boundaries-2026-10-03/README.md)
+[实际校验代码](https://github.com/lige1687/biao-signal-system/blob/7dd36a3c6b59bd409243e04549294ad809e7129d/docs/experiments/raw/lei-formula-time-boundaries-2026-10-03/validator.py)
+[命令/结果回执](https://github.com/lige1687/biao-signal-system/blob/7dd36a3c6b59bd409243e04549294ad809e7129d/docs/experiments/raw/lei-formula-time-boundaries-2026-10-03/evidence/command-receipt.json)
 
-## 登记后的限定计划与文件范围
+适用 COORDINATION.md 1.0（规则 SHA-256 6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0）；本阶段 fresh 核 coordination/lei@368add358cad92bab2102cc8c7dbd83fa749490f，规则 blob 126a1a01cd09439536c69fdd7264e3e292e4b852 未变，自己的旧 task blob 未变。沿选定 d444 的 AGENTS/current-standards 实际索引：research-standards/1.0、workflow 1.1，mission1.1.0/question_method1.2.0/increment1.1.0/principles1.2/execution1.1.0/definition1.2.0/template1.2.1。旧冻结研究不迁移、不改策略原文与阈值。
 
-只新建独立工作分支 docs/experiments/raw/lei-formula-time-boundaries-2026-10-03/ 下的合成样例、候选 validator、局部接口检查和书面回执；分支/目录尚未创建，未推送研究产物。
-预定三类例子：
-1. 保持 mixed.rv20 的 id/version，改变完整语义例如乘数变为 2 倍，检验是否拒绝；独立手算原公式作正控，不能复制被测输出当预期。
-2. UTC 与 +08:00 表示同绝对时刻，核观察/发布/可用/截止比较的一致性，不按字符串字典顺序或日期粗比。
-3. available_at 比 cutoff 早/相同/晚，以及缺时区、缺真正可用时间、发布时间与取得时间不同；不以 observation_date 或 fetched_at 代替真实 availability。
-实际接口导入前核顶层副作用/依赖；仅标准库/已有依赖和合成输入，不执行旧 main、网络市场取数、标签/拟合/账户/生产。完整 registry 缺依据时该步骤 blocked，保留失败，不删 basis、生命周期记录或伪造文件绕总入口。
+## 已完成、检查与准确边界
 
-## 重叠、保护范围与预算
+- 作者标准库 7 项集中测试通过；三个 CLI 合成样例退出 0/2/2，分别为正常/公式阻断/时间阻断。独立 5 项范围对照通过；发现的 UTC 转换溢出已最小返修并复核，极端范围 API 返回 unknown/blocked 而非抛出未处理异常。失败和修订没有伪称市场效果。
+- 公式工具只支持已审 mixed.rv20@1.0.0 typed 合同。完整定义/参数/单位/端点/缺失/时间与两层精确依赖绑定；不是通用自然语言公式解析器。正常算式为 20 个本产品有效报价间简单收益率的样本标准差×sqrt(252)，需21价格、含当期、缺价不填充。合同同义改写也需重新审阅，不能以名称或子串证明语义。
+- 时间工具比较带时区的完成/特征可用/全部依赖可用时刻，与全局及可选逐行 cutoff；同一绝对时刻跨时区等价。缺时区或可用时间完整性声明则 unknown/blocked，没有默认某市场15点新规则。只核声明一致性，不认证来源实际首发真值。
+- 准确 source probe 退出0表示预期问题复现，不是原源码已修好：external@1ac596f65110e06c286f04707165251328df0962 与 technical@d444316817e9330c2d72a4a90c655467b45dd5bb 的 workflow 日线接口，对同绝对时刻时区写法/全局同日 cutoff 的准入不一致；external key 有相同截止问题。
+- 公式 probe 调用真实 bound_reference 解析后的局部接口，仅在注明 resolver seam 用真实展开卡替代解析器；旧绑定接受同id/version的2倍公式，候选拒绝未审合同。标准库独立 RV20 逐行核算。完整原 resolver 另调用，仍因 lifecycle basis 缺 tests/unit/test_research_definitions.py（mixed.momentum.raw@1.0.0）而 blocked，不删basis、改生命周期或伪造文件绕入口。
+- external registry 1.6.12 与 technical 1.6.0 分开；technical registry 未加载、不混到 external。17 external＋3 technical 文件前后 SHA 不变。原1ac payload只是明确额外输入，不把两个版本合称已升级共同主线。
+- 发布检查：仅10 UTF-8新文件、总77,766字节；准确path/diff/大小/敏感扫描通过。基础树无.github，workflows404；成果精确SHA Actions0只是可见时点证据，仓外集成未全面确认。未强推、合并、部署、付费或上传策略原件/行情/数据库/凭据。
 
-external-quant 的 Hypothesis 性质检查已覆盖未来价不改过去特征、缩放与故意泄漏，本线不重复接管这些已完工程。共享 workflow/definitions/factor_runtime 正式修改仍需唯一实现者和独立验证者明确；本线只读，并将候选反例交回 owner。technical 的抵扣路径、reader 等待/阅读页、remote-core 的 black-reset 不在本轮范围。
-明确保护：src/、configs/、tests/、定义/实验 registry、策略原文、冻结报告/输入、Air 输出和他人 task。不能把本独立反例当正式功能升级或全框架验收，记录不是锁；遇同接口正在写入，暂停依赖当前字节的比较并确认固定输入身份。
-本线目前没有科学家族运行、无checkpoint进程；此前只是目录与停止记录。新市场实验/拟合/取数/付费均 0；合成验证计划尚未执行，不虚报测试数。旧历史账本、原失败及冻结结论不改，不重训/不重做市场研究。
+## 指纹、可复现与未覆盖
 
-## 输入与仅本地可复现边界
+validator.py SHA-256 c30bae934955f3dec16e603257fa6925354088039dac6a7ace2cc2d48ea6cbde；
+test_validator.py 3dfcc6b675d81f1fa9a4bf6f03a5cd88f93fb71551ca100e377b1d460d1f8fda；
+probe_sources.py 74b9f1e536c1505aff1afd31e0bebb56812944406a2efc8c9359ac88d2180b87；
+source-probes-final.json 5a61017ae9c7e3d491765714a45e6ca561c0fc723a42584743a48f0161026d2f。
+其余冻结文件身份见成果 command-receipt。原本地 command-receipt SHA 5b5944fd3d5bc0d7c5c0a1a13c8ebf20c61431d90bddc4517581ad402eb1fd37 保留；仅发布副本执行位置改相对 cwd/标准 python3/额外源目录占位并注明移植，发布副本 SHA b47637a5a06baef7f192b8e6979d6681c6d56f8be2c55caefa2ffc6fd896570c。源码、测试结果及20源指纹未改。
 
-只使用合成序列/显式带时区时间与只读已核源码；无行情、权重/tokenizer、数据库或用户凭据需要交付。策略源已批准指纹：体系 df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20，实现 85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903。现行 selected technical 来源表与代码身份须在运行前精确对齐。恢复路径当前仅本地，远端不可复现；此前检查点不是实现产物，无可用成果链接。完整登记/实际工作流未运行，不能把局部绑定通过写成总准入通过。
+独立校验器/7测试/3 CLI仅依赖 Python 标准库，按 README 可运行，不需联网安装。源码 probe 另需已有 NumPy/Pandas 及两套按pin materialize的额外来源目录；这十文件不包含完整源快照、原研究数据或 registry 依据闭包。不能说 clone 即可通过完整原registry；缺件保持 blocked。无权重/tokenizer。未运行新市场实验/标签/拟合、完整 workflow、账户/收益或生产集成；因子增量和线上收益未测量。
+已批准策略副本身份保留：体系 df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20，实现 85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903；原文只读、不随本包推送。本交付是独立工具，不是市场实验归档或整套研究结束。
 
-## 规范、身份与同步边界
+## 依赖、下一步、封存与历史
 
-本记录首次接入，负责人为当前 dot LEI 接续主控；原三路来源是 2026-10-02 Pro 主接管会话 01a0fa8a-bb5f-701a-86c8-7083616c8033。它们不是 2026-09-30 Air 三路，现有九条 Air/初始化任务的负责人不变。本任务记录只由当前接续方维护；若发现同 ID 另一写入者，停止覆盖并报告。
-
-已读 coordination/lei@15b3e4e0edd878c3e84ef30482d108e492563dbd 的 COORDINATION.md 1.0 及九份原任务全文；规则 SHA-256 6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0。现行规范参考取自 task/technical-factor-sequence-progress@d444316817e9330c2d72a4a90c655467b45dd5bb：AGENTS.md、docs/research/current-standards.json、execution 1.1.0、question_method 1.2.0、mission 1.1.0 及 research-workflow-usage。索引 research-standards/1.0 指向 increment 1.1.0、principles 1.2、definition 1.2.0、template 1.2.1，新合同 research-workflow/1.1；后四正文及实际执行定义闭包须在恢复时精确绑定，不冒称仅读索引已验完整实现。旧冻结合同、原结果和预算保持原版本。
-
-工作分支：尚未创建。实现基础完整 commit：尚未选定；上述 d444316817e9330c2d72a4a90c655467b45dd5bb 仅是现行规范参考，不冒充本任务实现基线。最近已推送本任务研究成果 commit：无。原项目材料已交到恢复包，但本接续方研究成果尚未推送；仅本地，远端不可复现。协调记录自身提交由本路径 Git 历史定位，不为写入自身 SHA 无限补交。候选源码输入 codex/handoff-external-quant-20261003@1ac596f65110e06c286f04707165251328df0962 的真实位置是 docs/archive/handoffs-plans/external-quant-handoff-2026-10-03/payload/；它不是当前完整研究基线，不把 payload 与分支根或 d444 源码混用。
-
-本轮只登记当前状态，不改 COORDINATION.md、他人 task、AGENTS、规则账本、定义/实验 registry、源码、配置、正式测试或 Air 输出，不推 main/master、不合并、不部署、不调用付费计算。后续代码、研究小证据留独立工作分支，再在此记录索引。
-
-## 本轮检查、恢复与版次
-
-推前追加完整核对 coordination/lei@5ebcf90b4c93c153e045ce1a146ca8ac2bd00678 的四项新增范围：地图仅修证据链接、市场观察仅修日期/市场提示、remote-core 仅 black-reset 草案、technical 仅抵扣路径恒等审阅。规则未变，本方避开其文件和科学问题；另读7b7b70050cb4661ca36966517ea2324da8d5db50新增 external 的17绑定静态审阅范围，与本方独立书面/合成检查无写入冲突；又读f9e14cd0b03e8f27b63a51a87577d54c0b04b09a的 reader 合成UI验收、情绪资格续核和抵扣路径合成证据增量，仍避开对应实现/实验；以发布时最新树保留九条他人记录后仅新增本方四记录。
-
-通过：GitHub 目标和协调完整 HEAD fresh 读取；规则及九份任务全文核对；目录无我方同名/同义任务；现行规范与历史 Pro 材料身份区分。协调 HEAD 的根树无 .github；.github/workflows 读取 404，该 HEAD Actions runs 为 0。这只是本次可见证据，仓库外集成未全面确认。发布前继续核精确四路径、UTF-8、大小、敏感资料与 diff；推后核远端包含本次 commit 并逐字读回，读回前不宣称已同步。
-未运行：本轮市场计算、训练、拟合、全项目测试、生产/真实交易；未用局部合成或文档读取冒称完整 registry 准入、研究有效或线上收益。协调旧检查器的已知三项白名单兼容问题由 bootstrap 原负责人维护，本任务不改检查器，也不冒称本轮全仓卫生通过。
-下一次恢复最小操作：fresh 读取协调规则、本记录和相关新任务 → 核准确规范/源码/输入指纹、原封存与累计账 → 只继续此记录的未完成小范围；发现重叠先明确实现者与独立验证者。未登记或过期任务状态未知，记录不是排他锁。
-本版新增：首次将本接续方的准确身份、真实状态、历史证据、局部可做与阻塞、未推送边界登记到同一 GitHub 协调入口。旧重要决定和失败继续通过原材料引用保留，不迁移或关闭 Air 原任务。
+本次独立交付到此停止，没有无期限 active 后台工作。后续若要正式接入共享源码，须明确原实现者/独立验证者、准确选定分支与完整登记依据、真实源可用时点；该生产/主线改造未实施，不从本工具通过推定获准。本方不改 technical 抵扣路径、reader等待/UI、remote black-reset、外部已封存 Hypothesis 或 Pro 三路研究，不替任何 Air 任务改owner/状态。
+本轮市场请求/实验/拟合/新安装/付费均0，合成测试与工程检查单列，不清零旧家族账本。保留旧 V01/K01/P01 的16:00+08历史成绩，不因新局部反例认定其无效；不重复已封存的缩放/未来价性质实验或市场收益计算。
+历史首登记/暂停/拟定范围见本任务初始记录 53be5c72a6d4711d916361d5d1026e5fe144e609；阶段代码与回执以本版准确成果为准。无另写旧阶段入口可迁移，跨任务摘要仍只有本文件。自身状态提交从 git log -- 本路径定位，不无限补自指SHA。
+本版新增：可运行代码与已通过验收、最小返修/限制、已推精确commit及10文件读回、移植回执说明，把有限独立工具标completed并保留生产/registry缺口。后续若有新授权，仅fresh相关task/rule变化、核成果/源指纹，再做限定未完成项；没有新事实不反复审旧记录。
