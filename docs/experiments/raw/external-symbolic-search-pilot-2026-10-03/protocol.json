@@ -1,0 +1,139 @@
+{
+  "schema_version": "bounded-engineering-comparison/1",
+  "question": "DEAP是否在固定人工问题和计算上限下比直接NumPy公式筛选增加可靠、可读的关系搜索能力",
+  "decision_use": "只决定是否保留可选研究搜索工具；不改变LEI规则或声称金融有效/整套自主研究有效",
+  "mode": "research",
+  "frozen_at": "2026-10-03T19:47:46.748984+08:00",
+  "base_commit": "c618dead611171c90a29f152b398a2767299756e",
+  "coordination_read_commit": "417e44430eca4ddf6995db65c9b1b491ec6515ce",
+  "strategy_sha256": {
+    "technical_system": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "implementation": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "external": {
+    "package": "deap",
+    "version": "1.4.3",
+    "wheel_sha256": "4a9a940104b5b153e6bf010664882ba6994baf2c9c3f14f4ff515383e1fb16ad",
+    "license": "LGPL-3.0 as wheel license; do not vendor third-party source"
+  },
+  "tasks": {
+    "additive": "x0 + 2*x1 - x2 + normal(0,0.05)",
+    "rational": "x0/(1+x1*x1) + x2 + normal(0,0.05)",
+    "noise": "normal(0,1), independent of all x"
+  },
+  "data": {
+    "features": 4,
+    "seeds": {
+      "train": 1101,
+      "validation": 2202,
+      "test": 3303,
+      "outside_range": 4404
+    },
+    "rows": {
+      "train": 256,
+      "validation": 128,
+      "test": 256,
+      "outside_range": 256
+    },
+    "normal_range": [
+      -2,
+      2
+    ],
+    "outside_range": [
+      -4,
+      4
+    ],
+    "outside_filter": "at least one abs(x)>2",
+    "target_seed_offset": 991,
+    "no_market_inputs": true,
+    "generation": "numpy default_rng for each split; same x for all tasks; task-specific independent noise seed split_seed+991+task_index*10000"
+  },
+  "grammar": {
+    "binary": [
+      "add",
+      "sub",
+      "mul",
+      "protected_divide"
+    ],
+    "terminals": [
+      "x0",
+      "x1",
+      "x2",
+      "x3",
+      1.0
+    ],
+    "protected_divide": "where abs(denominator)>1e-6 use numerator/denominator else 1.0",
+    "max_nodes": 31,
+    "max_height": 6,
+    "invalid_predictions": "nonfinite or abs>1e6 => score 1e30; record count; do not silently drop rows"
+  },
+  "search": {
+    "seeds": [
+      17,
+      29,
+      43
+    ],
+    "population": 128,
+    "generations": 24,
+    "evaluation_cap_per_arm_task_seed": 3200,
+    "tournament_size": 3,
+    "crossover_probability": 0.5,
+    "mutation_probability": 0.3,
+    "initial_depth": [
+      1,
+      3
+    ],
+    "mutation_depth": [
+      0,
+      2
+    ],
+    "penalty_per_node": 1e-05,
+    "fitness": "train MSE + penalty_per_node*nodes",
+    "selection": "best training score; validation used only to select among direct baseline model variants, never test/ood"
+  },
+  "arms": {
+    "external": "DEAP tree generator, tournament selection, subtree crossover/uniform mutation, elitism 1; evaluate full population every generation even clones, exactly128*(1+24)=3200 counted candidates; all overlimit/rejected proposals counted",
+    "random_control": "same DEAP initial tree generator/grammar/depths used as shared representation, independent random trees, no evolution;3200 candidates; controls added value of selection/mutation, not a wholly DEAP-free baseline",
+    "direct_baseline": "NumPy only: training mean, degree<=1 linear least squares, degree<=3 polynomial least squares, and greedy orthogonal matching pursuit up to4 terms from all degree1..3 monomials plus xi/(1+xj^2) for all i,j. intercept always present. train chooses OMP terms, validation chooses 0/1/2/3/4 terms versus other baselines. train/validation only; test/ood evaluated after choices fixed. No oracle coefficients/target name branching."
+  },
+  "success": {
+    "accuracy": "external test AND outside-range MSE <=0.9*best-direct-validation-selected MSE in at least2/3 seeds on >=1 signal task; additive external not >1.1*direct in >=2/3 seeds; no noise promotion",
+    "noise_policy": "noise can never be promoted to valid relationship; report its error against training mean and no known population relationship; favorable accidental test error is not reliable evidence",
+    "independent_checks": "data hashes, formula evaluation by separate restricted AST interpreter for exported formula predictions, accurate candidate counts, test/ood excluded from training/selection; re-evaluate archived outputs without search",
+    "efficiency": "record measured wall time per arm; user interventions after frozen contract; model calls/fees unknown if unmetered; no human labor savings claim without measured baseline",
+    "decision": "adopt only if accuracy criteria hold plus reliable evidence/maintainable bounded interface; otherwise reject for default integration; narrower engineering facts may be retained"
+  },
+  "budget": {
+    "new_public_requests_max": 6,
+    "public_requests_used_before_freeze": 4,
+    "core_batches_max": 1,
+    "followup_batches_max": 3,
+    "market_fits": 0,
+    "paid_services": 0,
+    "synthetic_search_evaluations_max": 57600,
+    "direct_baseline_fits_record_actual": true,
+    "wall_seconds_search_hard_cap": 600
+  },
+  "stopping": "question answered or genuine missing input/permission; no tuning after results; failure/retry preserved, followups only for core correctness/restore not hunting positive",
+  "outputs": [
+    "protocol.json",
+    "run.py",
+    "test_run.py",
+    "input-fingerprints.json",
+    "results.json",
+    "predictions.json",
+    "command-receipts.json",
+    "sources.json",
+    "review.json",
+    "SHA256SUMS"
+  ],
+  "scope_excluded": [
+    "financial hypotheses",
+    "market data",
+    "shared workflow",
+    "formula/time validator owned by dot",
+    "production",
+    "full autonomous LLM research"
+  ],
+  "prior_evidence": "Existing RD-Agent,QuantaAlpha,tsfresh,arch,catch22 sealed; no corresponding new symbolic-search report found by scoped repo search."
+}

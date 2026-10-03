@@ -1,0 +1,41 @@
+{
+  "retrieved_at": "2026-10-03T19:47:46.748984+08:00",
+  "requests": [
+    {
+      "id": 1,
+      "url": "https://github.com/trevorstephens/gplearn",
+      "method": "web.open",
+      "result": "success",
+      "candidate": "gplearn",
+      "decision": "not selected: requires unavailable scikit-learn and its dependencies; functionality overlaps expression search, not tested"
+    },
+    {
+      "id": 2,
+      "url": "https://deap.readthedocs.io/en/master/overview.html",
+      "method": "web.open",
+      "result": "success",
+      "candidate": "DEAP",
+      "decision": "selected: customizable tree search and only numpy dependency; mutable master docs not frozen API evidence"
+    },
+    {
+      "id": 3,
+      "url": "https://pypi.org/pypi/deap/1.4.3/json",
+      "method": "urllib GET",
+      "result": "success",
+      "sha256": "3dede7a03b45b0e005be2d7980b04f221b1b5ecb14cc268cbc402bb5a336958b",
+      "metadata_bytes": 32412
+    },
+    {
+      "id": 4,
+      "url": "https://files.pythonhosted.org/packages/6d/89/48a1f7b94a754d91634183c5a88b76a461620dc9c3fceb0abb3b6badbc3b/deap-1.4.3-cp311-cp311-macosx_10_9_universal2.whl",
+      "method": "urllib GET",
+      "result": "success",
+      "sha256": "4a9a940104b5b153e6bf010664882ba6994baf2c9c3f14f4ff515383e1fb16ad",
+      "bytes": 111429
+    }
+  ],
+  "used": 4,
+  "max": 6,
+  "upstream_license_sha256": "9ccf26cfe845e0eb8bb58053e47366e7ab6b697ae010f7650978d4b71b7d1fc1",
+  "source_delivery": "wheel and full PyPI response retained ignored locally; public URLs+sha for recovery, no third-party source vendored"
+}
