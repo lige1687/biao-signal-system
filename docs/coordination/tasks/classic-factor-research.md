@@ -1,19 +1,20 @@
 # 经典因子与研究方法：当前协作记录
 
 - task-id：classic-factor-research；负责人：本聊天经典研究主控，MacBook-Air-126.local。会话内部ID未取得，不猜测。原负责人持续负责，不接管、不转移。
-- 状态：active（C：研究思路与实验过程的学习设计；固定科学问题completed/archived，无新市场实验）。更新时间2026-10-03T19:31:06+08:00，Asia/Shanghai。
+- 状态：active（C：研究思路与实验过程的学习设计；固定科学问题completed/archived，无新市场实验）。更新时间2026-10-03T19:43:00+08:00，Asia/Shanghai。
 - 唯一映射：阶段历史docs/ops/work-progress/classic-factor-research.md；成果详情docs/progress/classic-factor.md。跨任务当前摘要只有本文件，旧文件不是锁。
 - 规则读取commit：b172008890b39e912c8f1d0cfb9125d1e414a97f，COORDINATION.md1.0；初读0b758e7e10f720c44cbd898d511ff392f2857535，新版规则内容相同。
-- 工作分支task/classic-factor-progress；发布基础d7da6cb0f9c127606b6faa572fabc9ee93f104f7；最近已推送成果0961a2cec0a31b0ad3ddbaf8e82863afc5aa0364（代码/报告同560e4eef8a5571fff4543886ede4acafe7805f2d），远端完整SHA与进展文件已读回。
+- 工作分支task/classic-factor-progress；发布基础d7da6cb0f9c127606b6faa572fabc9ee93f104f7；最近已推送成果cf8d630954257fff441d55a974f8a0fe95eca443（新增教学设计及阶段文档；代码/报告同560e4eef8a5571fff4543886ede4acafe7805f2d），远端完整SHA与设计文件blob已核对。
 - 共享研究区HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9、codex/factor-unit-research-20260915有多任务未提交内容，不整批上传，不用它代表成果。
 
 ## 当前范围：用户选择C（2026-10-03）
 
 用户本轮明确C优先，并要求核对B是否已有其他任务负责。本聊天C指“帮助用户及后续AI学习研究思路与实验过程”，B指“日常ETF决策辅助”，与其他任务A/B/C字母命名无关。沿用唯一task-id，原负责人继续。
-正在做：只读核对协调任务所有权，盘点classic-process已有九条课程/自测，形成一个真实案例的分步判断教学设计。设计草稿计划放docs/archive/handoffs-plans/classic-learning-design-2026-10-03/；本轮先不写应用实现。Luna low只读助手1名，范围限协调git对象及本地进度，无写入/网络/研究计算。
+已完成本轮设计交付：B归属核对、现有课程核查、一份完整波动研究教学草稿和验收设计；入口docs/archive/handoffs-plans/classic-learning-design-2026-10-03/README.md，案例case-volatility.md、核对ownership-audit.md、检查validation.json。Luna low只读助手1名已返回，无后台教学/市场任务。
+正在做：与用户确认具体教学方式。方向C已确定；已提出“先判断、再揭示证据、最后练写研究问题卡”，等待答复，不冒称页面实施/用户学习验收完成。
 基线：现有路线已能阅读方法、案例、应用步骤和折叠答案；拟增量是先作研究判断、再揭示证据和停止理由，最后能写一份可交给AI的有界问题。学习效果与因子/交易效果分别验收，目前学习效果未测量。
-已读取规则与任务快照3593b9b5393d8081acb5bbd17fd2a0a4b3ae65de，规则仍1.0。仅本任务设计目录和阶段文档准备写入；learning-seed.json/classic-process相关条目及LearningLibraryPage.tsx属于后续拟议实现范围，尚未开写，不独占共享页面。
-下一步：完成B归属核对及具体设计/完整案例草稿供用户确认，再按确认方案推进C；不新建因子平台、账户决策页或实验引擎。不会因教学重新跑已封存研究。
+已读取规则与任务快照3593b9b5393d8081acb5bbd17fd2a0a4b3ae65de，规则仍1.0。本轮仅写本任务设计目录与两份阶段文档，6文件已发布；learning-seed.json/classic-process相关条目及LearningLibraryPage.tsx属于后续拟议实现范围，尚未开写，不独占共享页面。
+下一步：用户确认具体教学方案后，先补发布路线遗漏的两个既有条目引用，再按确认方案推进单个案例C；不新建因子平台、账户决策页或实验引擎。不会因教学重新跑已封存研究。
 
 ## 目标、验收与规范
 
@@ -69,3 +70,11 @@
 最新规则与任务核对210cc70b96e0db6ca119158971027a6119cd1b55，规则SHA2566871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0。追加读取external-quant-resources和remote-core-review：前者共享主线整合写入暂停、仅依赖/工具核查，后者黑色阶段重置资格准备且共享工具只读；不与本轮文档维护或已封存未来波动问题冲突。共享工作流正式整合尚需明确实现者/独立验证者，本任务不擅自继续此部分。未登记任务仍未知。
 
 本版新增（2026-10-03T19:31:06+08:00）：记录用户C优先选择及B核对范围、当前只读助手与设计草稿，不改变旧实验预算或封存状态。具体学习设计尚未获确认；无新增市场/付费计算，设计文件尚未发布。
+
+## C设计阶段交付（2026-10-03）
+
+成果提交cf8d630954257fff441d55a974f8a0fe95eca443已推送task/classic-factor-progress，远端完整commit等于本地；设计README远端blob c0cd6655fcdca1e089034eae12e0570a8a2c812f已与本地提交比较。入口：https://github.com/lige1687/biao-signal-system/blob/cf8d630954257fff441d55a974f8a0fe95eca443/docs/archive/handoffs-plans/classic-learning-design-2026-10-03/README.md 。
+B核对：技术完整策略/小时确认、市场观察、投资观察地图、情绪用途均已有原负责人；未找到完整日常ETF动作产品的明确负责人，不等于无人在做。C不接管B、不改全局导航/策略阅读/市场页。本轮只文档，未发现已登记任务同范围写入冲突；后续学习页面开写前再核。
+新增真实缺口：本机classic-process有9条路线引用，已发布基线只有7条；classic-use-baseline与classic-use-attribution两条内容存在但未接路线。当前尚未修正，不能继续称九条前端入口远端已完整。
+实际检查：5文档指纹/UTF-8、相对链接、9个数值与原报告、diff及敏感特征核对通过；共享现行归置检查器只读指向发布目录后通过。旧发布树检查器报docs/progress目录未列白名单，保留失败及两检查器差异，不夹带其他任务检查器修改。首次add因稀疏范围退出1，已停止依赖步骤，核暂存后按精确路径--sparse继续，仅6指定文件提交。无研究/训练/付费批次，无页面测试，学习成效未测量。
+设计内容已在远端；共享本机只读委派合同仍仅本地，但不影响查看完整设计和归属证据。历史受限数据、完整风险复现和未应用CSS补丁缺口均保留，未因教学同步解决。当前等待用户对具体教学方式答复，未启动实现，不转移任务。
