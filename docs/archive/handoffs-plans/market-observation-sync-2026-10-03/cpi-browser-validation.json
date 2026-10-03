@@ -1,0 +1,49 @@
+{
+  "checked_at": "2026-10-03T13:46:05.491049+08:00",
+  "timezone": "Asia/Shanghai",
+  "source_commit": "f306746daaefd3f1fce5c705df20d7475bd0ea8e",
+  "fixture_command": "python3 docs/archive/handoffs-plans/market-observation-sync-2026-10-03/cpi_browser_fixture.py --dist web/dist --port 18043 --seconds 600",
+  "environment": "macOS ARM64; Codex in-app browser; 1280x720 screenshot",
+  "actions": [
+    "open /fundamentals#fund-sec-usmacro",
+    "click CPI chart",
+    "read expanded accessibility state",
+    "inspect actual screenshot",
+    "close created tab; stop owned fixture via /__finish"
+  ],
+  "checks": {
+    "actual_page_cpi_card": true,
+    "actual_drawer": true,
+    "chart_2_percent_reference_line_visible": true,
+    "PCE_target_explanation_visible": true,
+    "old_low_target_label_absent": true,
+    "old_policy_space_claim_absent": true,
+    "synthetic_values_clearly_labeled": true
+  },
+  "artifacts": [
+    {
+      "path": "docs/archive/handoffs-plans/market-observation-sync-2026-10-03/cpi-browser.jpg",
+      "bytes": 75817,
+      "sha256": "2f2ef0c870a1801227cf1815eea09fae4197ad050c5967358b6b037755a3ea97"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/market-observation-sync-2026-10-03/cpi-browser-accessibility.txt",
+      "bytes": 4218,
+      "sha256": "54167e1f6b21bdac50ec3a4817d739c98ed14f2dade0b131f5b772b86074ccff"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/market-observation-sync-2026-10-03/cpi_browser_fixture.py",
+      "bytes": 3437,
+      "sha256": "791206ab0bf29043a5a697bb2c1868de998974d6a62b8ea789a392ea7585aa9a"
+    }
+  ],
+  "research_reruns": 0,
+  "new_official_source_operations": 0,
+  "remaining": [
+    "real upstream data timing/qualification not tested",
+    "other viewports/OS not tested",
+    "CPI higher-zone policy wording still needs bounded content review",
+    "whole-page usability and account benefit not measured"
+  ],
+  "server_status": "owned fixture stopped; no experiment process started"
+}

@@ -6,5 +6,19 @@
       "resolution": "reviewed this small first-party metadata file; allow up to2MiB within exact explicit task path list; no bulk input added",
       "commit_or_push_before_resolution": false
     }
-  ]
+  ],
+  "review_comparison_correction": {
+    "cause": "git diff --cached defaults to shared HEAD, rather than the selected public base",
+    "effect": "scope assertion stopped before any commit or push",
+    "resolution": "explicitly compare public base; rechecked exact paths and blobs; shared index unchanged"
+  },
+  "screenshot_format_correction": {
+    "cause": "browser screenshot bytes are JPEG, initially saved with PNG suffix",
+    "effect": "magic-byte audit stopped before stage-two commit",
+    "resolution": "publish exact same bytes with .jpg suffix; no image editing; original duplicate retained locally"
+  },
+  "raw_browser_whitespace": {
+    "finding": "five AXListMarker entries retain capture trailing spaces",
+    "resolution": "preserve raw capture bytes; exclude only this evidence text from whitespace style check; all other changed files checked"
+  }
 }

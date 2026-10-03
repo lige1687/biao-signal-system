@@ -15,3 +15,5 @@
 GitHub触发检查：基础与出站树不含 `.github/workflows`或部署平台配置；基础commit状态检查返回空。独立分支仅push，不创建PR、不合并、不改权限、不启动Actions或付费任务。推送后用 `git ls-remote`核完整commit，收据单独留本机；不能把清单“已生成”叫远端同步成功。
 
 后续范围变化与阶段完成继续更新同一进展文件。当前显示验收会区分人工浏览器场景和真实市场资料，尚未验证的部分明确写出。
+
+继续推进证据：实际CPI人工场景显示检查通过，详见 `cpi-browser-validation.json`、`cpi-browser-accessibility.txt`和 `cpi-browser.jpg`。复现时先构建 `web/dist`，按JSON中的服务命令启动，再在浏览器打开注明的本地地址并点击CPI图卡。服务最多运行600秒，或访问 `/__finish`结束；不调用生产服务/数据库/上游，其他API故意503。该服务只用于最低显示检查，不代表完整系统。

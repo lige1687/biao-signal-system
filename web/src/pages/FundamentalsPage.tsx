@@ -1827,23 +1827,54 @@ function SentimentViews() {
 // ── 铜金比 / 油金比（thememo 消费类，抽象化全球经济）─────────────────────
 
 function CommodityCard({ data }: { data: CommodityRatios | null | undefined }) {
+  const meta = data?.meta;
+  const known = (value: string | undefined) => value && value !== "unknown" ? value : "未提供或未核实";
+  const number = (value: number | undefined, digits: number) =>
+    value != null && Number.isFinite(value) ? value.toFixed(digits) : "暂不可用";
   return (
     <div className="macro-card">
       <div className="macro-head">
         <span className="macro-name">铜金比 / 油金比</span>
-        <span className="macro-period">全球需求 × 避险</span>
+        <span className="macro-period">日度期货报价比值 · 背景参考</span>
       </div>
       {data == null ? (
         <div className="macro-value">暂不可用</div>
       ) : (
         <div className="commodity-grid">
-          <div><span className="b-label">铜金比</span><span className="b-val">{data.copper_gold.toFixed(4)}</span></div>
-          <div><span className="b-label">油金比</span><span className="b-val">{data.crude_gold.toFixed(4)}</span></div>
+          <div><span className="b-label">铜金比（铜价 ÷ 金价）</span><span className="b-val">{number(data.copper_gold, 6)}</span></div>
+          <div><span className="b-label">油金比（油价 ÷ 金价）</span><span className="b-val">{number(data.crude_gold, 6)}</span></div>
         </div>
       )}
       <div className="macro-note">
-        铜金比升=工业需求回暖；油金比升=通胀预期升。配合国债/PMI 可抽象化把握全球经济。
+        共同报价日：{known(meta?.quote_date)}；报价单位：{known(meta?.quote_units)}。
+        铜价、油价或作为分母的金价变动都会影响比值。无通用买卖阈值；仅作经济背景参考，不参与技术判定。
       </div>
+      <details className="macro-note">
+        <summary>资料口径与限制</summary>
+        {data != null && (
+          <>
+            <div>读取时间（UTC）：{known(meta?.retrieved_at_utc)}。读取时间不等于行情日期或首次发布时间。</div>
+            <div>
+              原始报价：铜 {number(data.copper, 6)}（{known(meta?.tickers?.copper)}）；
+              黄金 {number(data.gold, 6)}（{known(meta?.tickers?.gold)}）；
+              原油 {number(data.crude, 6)}（{known(meta?.tickers?.crude)}）。
+              {meta?.quote_date ? "三项报价取同一共同日期。" : "旧缓存未提供日期信息，无法确认三项报价是否同日。"}
+            </div>
+            <div>各源最新报价日：铜 {known(meta?.latest_dates?.["HG=F"])}；黄金 {known(meta?.latest_dates?.["GC=F"])}；原油 {known(meta?.latest_dates?.["CL=F"])}。</div>
+          </>
+        )}
+        <div>
+          来源：{known(meta?.provider)}
+          {meta?.provider && <>{" · "}<a href="https://finance.yahoo.com/" target="_blank" rel="noreferrer">Yahoo Finance 来源入口</a></>}；
+          首次发布时间：{known(meta?.publication_time)}；合约换月身份：{known(meta?.roll_contract_identity)}；
+          数据使用许可：{known(meta?.data_usage_license)}。软件包许可不代表行情数据使用许可。
+        </div>
+        <div>
+          铜价不动、金价下降，铜金比也会上升。单个数值不能判断趋势，也不能直接断言需求回暖或通胀上升；
+          报价单位和合约换月身份未核实时，跨来源、跨时段比较需谨慎。
+          可配合国债、PMI（采购经理调查指数）理解经济背景。
+        </div>
+      </details>
     </div>
   );
 }
