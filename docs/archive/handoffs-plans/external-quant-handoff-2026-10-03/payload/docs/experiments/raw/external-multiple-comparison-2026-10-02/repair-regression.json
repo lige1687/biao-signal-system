@@ -1,0 +1,16 @@
+{
+  "batch": 4,
+  "purpose": "one repair regression and affected archive recheck",
+  "command": [
+    "/opt/homebrew/opt/python@3.11/bin/python3.11",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/unit/test_multiple_comparison.py",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "exit_code": 0,
+  "stdout": "......................                                                   [100%]\n22 passed in 1.51s\n",
+  "stderr": ""
+}

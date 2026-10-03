@@ -1,0 +1,41 @@
+{
+  "mission": "只读对照现有研究工具与测试，识别Hypothesis性质测试、DuckDB读取、Pandera表格验证和tsfresh特征生成各有什么真实缺口或重叠。",
+  "task_scope": [
+    "读本地实现和现有测试，重点选1至2个适合有界人工变体核验的纯函数，给出精确路径和应保持的性质",
+    "不联网、不安装、不跑实验或测试、不拟合",
+    "每候选给已有覆盖、实际缺口和边界，不凭包名推荐"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "pyproject.toml",
+    "src/lei_signal/research",
+    "tests/unit",
+    "docs/research/current-standards.json",
+    "docs/research/research-workflow-usage.md",
+    "docs/experiments/quant-resources-adoption-2026-10-02.md",
+    "docs/experiments/quant-resources-integration-2026-10-02.md"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/external-increment-2026-10-02/local-capability-review.md"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "local-capability-review.md with specific paths, gaps, proposed finite invariants and limitations"
+  ],
+  "stop_conditions": [
+    "缺少关键语义时只报告",
+    "不修改生产/研究代码/已有测试",
+    "不启动子代理"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "strategy_read_evidence": "Same existing reviewer read both strategy sources in prior task; controller current hashes unchanged."
+}

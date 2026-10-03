@@ -1,0 +1,42 @@
+{
+  "exit_code": 0,
+  "elapsed_seconds": 1.503022165998118,
+  "hypothesis_version": "6.147.0",
+  "outcomes": [
+    {
+      "nodeid": "tests/unit/test_research_property_checks.py::test_future_quotes_do_not_rewrite_past_features",
+      "phase": "call",
+      "outcome": "passed",
+      "detail": null
+    },
+    {
+      "nodeid": "tests/unit/test_research_property_checks.py::test_price_scale_preserves_percentage_quantities",
+      "phase": "call",
+      "outcome": "passed",
+      "detail": null
+    },
+    {
+      "nodeid": "tests/unit/test_research_property_checks.py::test_generator_finds_an_intentional_future_leak",
+      "phase": "call",
+      "outcome": "passed",
+      "detail": null
+    }
+  ],
+  "generated_calls": {
+    "future_change": 64,
+    "scale_invariance": 64,
+    "negative_control_predicate_calls": 16
+  },
+  "intentional_control": {
+    "prices": [
+      1,
+      1,
+      2
+    ],
+    "past_only": 1.0,
+    "wrongly_using_future": 0.5
+  },
+  "test_code_sha256": "345d93584e0bcd9ff98b59a873376159ba71e31eddeb99adb48bce5af2134cc9",
+  "scope": "synthetic demonstration adapter only; no factor or financial effectiveness result",
+  "accepted": true
+}

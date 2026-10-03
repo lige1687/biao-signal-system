@@ -1,0 +1,404 @@
+{
+  "checks": [
+    {
+      "name": "upstream_example_total_training_rows",
+      "actual": 482,
+      "expected": 482,
+      "passed": true
+    },
+    {
+      "name": "upstream_future_training_rows",
+      "actual": 387,
+      "expected": 387,
+      "passed": true
+    },
+    {
+      "name": "upstream_training_after_test_includes_last_row",
+      "actual": 499,
+      "expected": 499,
+      "passed": true
+    },
+    {
+      "name": "upstream_past_only_part",
+      "actual": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94
+      ],
+      "expected": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94
+      ],
+      "passed": true
+    },
+    {
+      "name": "before_initial_publication",
+      "actual": null,
+      "expected": null,
+      "passed": true
+    },
+    {
+      "name": "initial_version_available",
+      "actual": 10,
+      "expected": 10,
+      "passed": true
+    },
+    {
+      "name": "revised_version_available_later",
+      "actual": 12,
+      "expected": 12,
+      "passed": true
+    },
+    {
+      "name": "future_revision_does_not_change_past",
+      "actual": {
+        "available_at": "2026-04-20T16:00:00+08:00",
+        "value": 10,
+        "version": "first"
+      },
+      "expected": {
+        "available_at": "2026-04-20T16:00:00+08:00",
+        "value": 10,
+        "version": "first"
+      },
+      "passed": true
+    },
+    {
+      "name": "unknown_timezone_rejected",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "mature_training_observations",
+      "actual": [
+        [
+          "ETF-A",
+          "2026-04-01"
+        ],
+        [
+          "ETF-B",
+          "2026-04-01"
+        ]
+      ],
+      "expected": [
+        [
+          "ETF-A",
+          "2026-04-01"
+        ],
+        [
+          "ETF-B",
+          "2026-04-01"
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "name": "whole_date_evaluation",
+      "actual": [
+        [
+          "ETF-A",
+          "2026-04-06"
+        ],
+        [
+          "ETF-B",
+          "2026-04-06"
+        ],
+        [
+          "ETF-A",
+          "2026-04-07"
+        ],
+        [
+          "ETF-B",
+          "2026-04-07"
+        ]
+      ],
+      "expected": [
+        [
+          "ETF-A",
+          "2026-04-06"
+        ],
+        [
+          "ETF-B",
+          "2026-04-06"
+        ],
+        [
+          "ETF-A",
+          "2026-04-07"
+        ],
+        [
+          "ETF-B",
+          "2026-04-07"
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "name": "training_and_evaluation_dates_disjoint",
+      "actual": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "train_statistics_are_unchanged_when_future_values_append",
+      "actual": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "name": "contamination_counterexample",
+      "actual": 334.6667,
+      "expected": 334.6667,
+      "passed": true
+    },
+    {
+      "name": "lei-data-availability:matching_name",
+      "actual": "lei-data-availability",
+      "expected": "lei-data-availability",
+      "passed": true
+    },
+    {
+      "name": "lei-data-availability:description_exists",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "lei-data-availability:link:references/cases.md",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "lei-data-availability:link:NOTICE",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "lei-data-availability:link:LICENSE",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "lei-causal-validation:matching_name",
+      "actual": "lei-causal-validation",
+      "expected": "lei-causal-validation",
+      "passed": true
+    },
+    {
+      "name": "lei-causal-validation:description_exists",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "lei-causal-validation:link:references/cases.md",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "lei-causal-validation:link:NOTICE",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "lei-causal-validation:link:LICENSE",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    }
+  ],
+  "passed": 24,
+  "total": 24,
+  "upstream_source_sha256": "a6977a7ac0cbe50bf52b7bf60478a96b4b3a6561d0e2bc760bf6367d49b6a916",
+  "scope": "模拟例和安装结构核验；未运行真实因子研究，未测自动选择或端到端Codex行为"
+}

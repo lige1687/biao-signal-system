@@ -1,0 +1,123 @@
+{
+  "data_sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+  "outcome_values_used_for_design": false,
+  "source_quality": {
+    "request_satisfied": true,
+    "assets": [
+      "510300.SS",
+      "510050.SS",
+      "510500.SS",
+      "588000.SS"
+    ],
+    "raw_response_field_differences": 0,
+    "economic_ohlc_max_absolute_difference": 6.661338147750939e-15
+  },
+  "source_warnings": [
+    "逐行名义OHLC和行动重建已重新核对；V01量仅在源资格例程内核对，未进入T01特征。",
+    "行动历史到达时间及完整性仍未知；这些是回顾性经济价格观察。"
+  ],
+  "coverage": {
+    "observations": 4340,
+    "ready_252": 4340,
+    "eligible": 4340,
+    "price_reset_rows": 0,
+    "continuous252_or_indicator_missing": 0,
+    "tsfresh_candidate_unknown": 0,
+    "feature_ready": 4340,
+    "per_asset": {
+      "510300.SS": {
+        "observations": 1085,
+        "ready_252": 1085,
+        "eligible": 1085,
+        "feature_ready": 1085,
+        "price_reset_rows": 0
+      },
+      "510050.SS": {
+        "observations": 1085,
+        "ready_252": 1085,
+        "eligible": 1085,
+        "feature_ready": 1085,
+        "price_reset_rows": 0
+      },
+      "510500.SS": {
+        "observations": 1085,
+        "ready_252": 1085,
+        "eligible": 1085,
+        "feature_ready": 1085,
+        "price_reset_rows": 0
+      },
+      "588000.SS": {
+        "observations": 1085,
+        "ready_252": 1085,
+        "eligible": 1085,
+        "feature_ready": 1085,
+        "price_reset_rows": 0
+      }
+    },
+    "definition_ref": "research.external.mean_abs_log_change20@1.0.0",
+    "definition_refs": [
+      "research.external.mean_abs_log_change20@1.0.0",
+      "research.external.return_autocorrelation20_lag1@1.0.0"
+    ],
+    "common_population": true
+  },
+  "counts": {
+    "assets": 4,
+    "observations": 4340,
+    "dates": 1085,
+    "episodes": null
+  },
+  "scientific_support": {
+    "phases": {
+      "early_2022_2024": {
+        "scheduled": 2904,
+        "ready_252": 2904,
+        "feature_unknown": 0,
+        "calendar_mature_same_phase": 2820
+      },
+      "eval_2025": {
+        "scheduled": 972,
+        "ready_252": 972,
+        "feature_unknown": 0,
+        "calendar_mature_same_phase": 888
+      },
+      "eval_2026H1": {
+        "scheduled": 464,
+        "ready_252": 464,
+        "feature_unknown": 0,
+        "calendar_mature_same_phase": 380
+      }
+    },
+    "folds": [
+      {
+        "fold": {
+          "train_end": "2024-12-31",
+          "eval_start": "2025-01-01",
+          "eval_end": "2025-12-31"
+        },
+        "train": 2820,
+        "evaluation": 888,
+        "train_dates": 705,
+        "evaluation_dates": 222
+      },
+      {
+        "fold": {
+          "train_end": "2025-12-31",
+          "eval_start": "2026-01-01",
+          "eval_end": "2026-06-30"
+        },
+        "train": 3792,
+        "evaluation": 380,
+        "train_dates": 948,
+        "evaluation_dates": 95
+      }
+    ],
+    "model_feature_count": 12,
+    "definition_refs": [
+      "research.external.mean_abs_log_change20@1.0.0",
+      "research.external.return_autocorrelation20_lag1@1.0.0"
+    ],
+    "unknown_reasons": {},
+    "note": "Future support uses calendar dates only, not future prices."
+  }
+}

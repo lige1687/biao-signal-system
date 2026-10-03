@@ -1,0 +1,93 @@
+{
+  "source": "docs/experiments/registry.json",
+  "source_sha256": "2d716cb3369de20005a99b7840afdabc06999526fe8f3f427cf32d268276e2cd",
+  "categories": [
+    "研究总纲",
+    "宽度择时",
+    "组合与仓位",
+    "模块与信号",
+    "出场与止损",
+    "美股与跨市场",
+    "宏观与情绪",
+    "语义组合",
+    "数据与质量",
+    "方法论与验证",
+    "任务书"
+  ],
+  "entries": {
+    "docs/experiments/factorhub-codex-2026-10-02.md": {
+      "category": "数据与质量",
+      "verdict": "mixed",
+      "oneLiner": "Codex项目查询接入已安装并过25项检查；FactorHub仍缺密钥，已有WeStock已实际取到510300三日行情，未改变正式数据或交易规则。"
+    },
+    "docs/experiments/open-finance-skills-2026-10-02.md": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": "从开源ML4T适配两项项目技能，核对数据当时可知与训练时间边界；24项模拟和结构检查通过，未证明收益或代理质量改善，另一套科学技能正文未核。"
+    },
+    "docs/experiments/quant-resources-adoption-2026-10-02.md": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": "实际复用statsmodels平均差额误差核心和exchange_calendars上交所2026快照，新增可运行项目技能；27项检查通过，未证明收益或省工。"
+    },
+    "docs/experiments/quant-resources-integration-2026-10-02.md": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": "量化工具已接通原研究归档：正确拒绝缺42日的全期，完整222日四ETF可辅助计算；最后29项检查通过，未证明收益或省工。"
+    },
+    "docs/experiments/quant-resources-workflow-fit-2026-10-02.md": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": "资料时间核查、预测边界和归档辅助计算已按用途写进现有研究入口；已有证据足够时复用，本轮未测自动调用或收益改善。"
+    },
+    "docs/experiments/external-increment-2026-10-02.md": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": "新核四个外部项目，已接Hypothesis自动生成边界输入：128例通过且人工未来泄漏被识别；tsfresh保留候选，DuckDB/Pandera待明确缺口，未证收益改善。"
+    },
+    "docs/experiments/tsfresh-adoption-2026-10-02.md": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": "两个tsfresh计算接入Codex项目技能，26项检查与四ETF独立重算通过；补充价格轨迹表达，尚未检验预测或收益增量。"
+    },
+    "docs/experiments/parquet-reading-assessment-2026-10-02.md": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": "四ETF约0.10秒、127文件约0.06至0.25秒；当前列读取未见优先迁移需要，DuckDB相对性能未测。"
+    },
+    "docs/experiments/tsfresh-joint-forecast-artifact-2026-10-02.md": {
+      "category": "模块与信号",
+      "verdict": "mixed",
+      "oneLiner": null,
+      "workflow_receipt": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/accepted-joint-02/receipt.json"
+    },
+    "docs/experiments/tsfresh-amplitude-forecast-artifact-2026-10-02.md": {
+      "category": "模块与信号",
+      "verdict": "mixed",
+      "oneLiner": null,
+      "workflow_receipt": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/accepted-amplitude/receipt.json"
+    },
+    "docs/experiments/tsfresh-serial-forecast-artifact-2026-10-02.md": {
+      "category": "模块与信号",
+      "verdict": "mixed",
+      "oneLiner": null,
+      "workflow_receipt": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/accepted-serial/receipt.json"
+    },
+    "docs/experiments/tsfresh-factor_only-forecast-artifact-2026-10-02.md": {
+      "category": "模块与信号",
+      "verdict": "mixed",
+      "oneLiner": null,
+      "workflow_receipt": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/accepted-factor_only/receipt.json"
+    },
+    "docs/experiments/tsfresh-factor-validation-2026-10-02.md": {
+      "category": "模块与信号",
+      "verdict": "mixed",
+      "oneLiner": "两项tsfresh价格表达完成四ETF整段历史、四组固定比较；合用误差增加0.504个百分点，未发现预测增量，保留研究入口。"
+    },
+    "docs/experiments/external-multiple-comparison-2026-10-02.md": {
+      "category": "方法论与验证",
+      "verdict": "passed",
+      "oneLiner": "多候选共同比较限定接入；22项回归、独立算式及四ETF888行旧预测核对通过，0新拟合；只支持工程采用，未发现新有效因子。"
+    }
+  }
+}

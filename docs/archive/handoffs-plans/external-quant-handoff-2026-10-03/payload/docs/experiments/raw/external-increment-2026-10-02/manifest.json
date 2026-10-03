@@ -1,0 +1,219 @@
+{
+  "question": "除已接入资源外，还有哪些外部项目能为本系统带来具体额外能力？",
+  "decision_use": "比较工程验证、研究读取及候选特征工具，最多落实一项有具体消费用途的适配",
+  "mode": "research",
+  "user_authorization": "外部的其他增量看看呢？",
+  "scope": "新候选的官方资料核对、现有能力对照及有限合成工程试用；不新增因子含义、市场资料或交易规则",
+  "relationship_to_previous": "前轮已有技能接入及用法安排已结案；用户明确提出其他外部增量，本轮另立有限候选问题，前轮累计与暂停分支保留，不恢复旧金融实验",
+  "strategy_sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    }
+  ],
+  "budget": {
+    "source_requests": 6,
+    "test_batches": 4,
+    "source_requests_used": 6,
+    "test_batches_used": 1,
+    "remaining_source_requests": 0,
+    "remaining_test_batches": 3
+  },
+  "sources": [
+    {
+      "attempt": 1,
+      "method": "web.open",
+      "url": "https://hypothesis.readthedocs.io/en/latest/",
+      "evidence": "official-source-overview.json"
+    },
+    {
+      "attempt": 2,
+      "method": "web.open",
+      "url": "https://duckdb.org/docs/stable/data/parquet/overview",
+      "evidence": "official-source-overview.json",
+      "result": "redirect landing; content obtained with follow-up request 5"
+    },
+    {
+      "attempt": 3,
+      "method": "web.open",
+      "url": "https://pandera.readthedocs.io/en/stable/",
+      "evidence": "official-source-overview.json"
+    },
+    {
+      "attempt": 4,
+      "method": "web.open",
+      "url": "https://tsfresh.readthedocs.io/en/latest/",
+      "evidence": "official-source-overview.json"
+    },
+    {
+      "attempt": 5,
+      "method": "web.click",
+      "url": "https://duckdb.org/docs/stable/data/parquet/overview redirect link",
+      "evidence": "official-source-followup.json"
+    },
+    {
+      "attempt": 6,
+      "method": "web.open",
+      "url": "https://tsfresh.readthedocs.io/en/latest/",
+      "reason": "complete short-page content omitted from prior combined rendering",
+      "evidence": "official-source-followup.json"
+    }
+  ],
+  "tests": [
+    {
+      "batch": 1,
+      "status": "passed",
+      "id": "hypothesis_fixed_suite",
+      "reason": "检验一个现有纯函数的有界变体和人工错误探测能力；不新增金融假设",
+      "result": "attempt-1.json"
+    }
+  ],
+  "baseline": "项目现有资料检查、手写测试、pandas/pyarrow读取和已有因子定义",
+  "allowed_actions": [
+    "公开官方资料只读查证",
+    "仓库内研究及开发辅助适配",
+    "已有依赖的限定合成输入验证",
+    "项目报告与技能文档"
+  ],
+  "restricted_actions": [
+    "仓库外写入待许可",
+    "不改生产或策略语义",
+    "不采购/取密钥/上传资料",
+    "不重开旧冻结研究"
+  ],
+  "closure": {
+    "execution": "completed",
+    "evidence": "supported",
+    "completion_reason": "question_answered",
+    "scope": "四候选官方能力与本地对照；Hypothesis在限定演示适配器上可复用，非因子有效性判断"
+  },
+  "cumulative_prior": {
+    "sources": 12,
+    "test_batches": 5,
+    "previous_component_adoption_sources": 6,
+    "previous_component_adoption_batches": 4
+  },
+  "runtime_observed": {
+    "hypothesis": "6.147.0",
+    "sortedcontainers": "2.4.0",
+    "pytest": "8.4.2",
+    "duckdb": "not installed in current interpreter",
+    "polars": "not installed in current interpreter",
+    "pandera": "not installed in current interpreter"
+  },
+  "test_plan": {
+    "id": "hypothesis-workflow-demonstration-adapter",
+    "frozen_before_execution": true,
+    "source_function": "src/lei_signal/research/workflow_inputs.py::prepare_observations (sma_distance demonstration only)",
+    "baseline": "已有人工固定反例，尤其test_actual_prefix_and_future_change；不宣称人工检查没有时间保护",
+    "generated_domain": "两个合成资产，16至28个日期，日期间距1至4天；正整数OHLC，2至6观察回看，显式预热、real_quote或segmented缺价语义；至多一个已知停牌/供应商缺报价；不涉及真实金融资料",
+    "properties": [
+      {
+        "id": "future_change",
+        "max_examples": 64,
+        "invariant": "只改变截点后的有效报价，截点及之前的features和tested_condition完全不变；不比较会随未来成熟的标签/eligible"
+      },
+      {
+        "id": "scale_invariance",
+        "max_examples": 64,
+        "invariant": "全部OHLC乘2的整数次幂，百分比特征和目标在浮点容差内不变，资格/原因不变"
+      },
+      {
+        "id": "leaky_negative_control",
+        "max_examples": 128,
+        "invariant": "故意用全序列最高价归一化过去报价的人工错误实现应找到并缩小反例；不算项目真实缺陷"
+      }
+    ],
+    "settings": {
+      "database": null,
+      "derandomize": true,
+      "deadline": null,
+      "numeric_fit_or_new_market_data": 0
+    },
+    "acceptance": "实际执行三项且所有性质成立；若失败保留反例并在既有4批总预算内修复适配，不扩大策略或对象"
+  },
+  "source_code_sha256": "d4d529d1870fb0520d3dda496cf60f9fe2bf24a3a4f247d02186adaef080f6db",
+  "maintenance_attempts": [
+    {
+      "id": "static_style",
+      "attempt": 1,
+      "result": "6 style findings: import order, line length, delayed pytest import; no runtime failure",
+      "action": "format-only repair; original tested source preserved under before/"
+    },
+    {
+      "id": "static_style",
+      "attempt": 2,
+      "result": "passed; AST content other than reorganized imports unchanged"
+    }
+  ],
+  "report": "docs/experiments/external-increment-2026-10-02.md",
+  "current_standards": {
+    "schema_version": "research-standards/1.0",
+    "new_entry": "scripts/run_factor_lab.py --workflow-contract",
+    "legacy_frozen_studies": "keep_original_bindings",
+    "standards": {
+      "mission": {
+        "path": "docs/research/lei-factor-research-mission.md",
+        "version": "1.1.0"
+      },
+      "question_method": {
+        "path": "docs/research/research-question-method-standard.md",
+        "version": "1.2.0"
+      },
+      "increment": {
+        "path": "docs/research/factor-increment-evidence-standard.md",
+        "version": "1.1.0"
+      },
+      "principles": {
+        "path": "docs/research/experiment-backtest-principles.md",
+        "version": "1.2"
+      },
+      "execution": {
+        "path": "docs/research/ai-execution-contract.md",
+        "version": "1.1.0"
+      },
+      "definition": {
+        "path": "docs/research/definition-standard.md",
+        "version": "1.2.0"
+      },
+      "template": {
+        "path": "docs/research/experiment-report-template.md",
+        "version": "1.2.1"
+      }
+    },
+    "definition_registry": "docs/research/definitions.v1.json",
+    "report_registry": "docs/experiments/registry.json",
+    "strategy_sources": "configs/strategy-documents.v1.json",
+    "new_contract_schema": "research-workflow/1.1"
+  },
+  "verification": "maintenance-checks.json",
+  "independent_review": "local-capability-review.md",
+  "controller_review": "controller-review.md",
+  "ledger_update": {
+    "goal_id": "okr-4f4157e2957e",
+    "status": "pending_user_permission_for_external_database_write",
+    "proposal": "upgrades-note-proposed.json",
+    "written_to_database": false
+  },
+  "remaining_core_actions": [],
+  "cumulative_total": {
+    "source_requests": 18,
+    "test_batches": 6,
+    "includes_previous_closed_questions": true
+  },
+  "artifact_hashes": {
+    "pyproject.toml": "656a4fc165a5f1e59d3fdea1f09003aa72ffe038f70c2bdc4f21f47d0404a1f6",
+    "tests/unit/test_research_property_checks.py": "4403aef9e8a2bdb0e2170494c1e75964233bf154956b9cbce1290e9facd06823",
+    "docs/research/research-workflow-usage.md": "a55de1ab9ed4fc31b1c3f1deb0eccdfcf350590418e35084d89591312d5c7d20",
+    "docs/experiments/external-increment-2026-10-02.md": "c1fdd80533efe3a1f8eaa2572a21490e0d48062cd8a1612ed4486dacc5668e69",
+    "docs/experiments/raw/external-increment-2026-10-02/attempt-1.json": "2a6e44b3308e6a2bde228abe83f72d2b9a8206f756c715e23935a0d19d0fd4cd",
+    "docs/experiments/raw/external-increment-2026-10-02/verify_properties.py": "500bdb9ff4a4b671b124d1df72fe21615a2c6b4af036c1ea14ea426fc2986dfd",
+    "docs/experiments/raw/external-increment-2026-10-02/local-capability-review.md": "eba4052bea4f0d27bc6db4a02dba22544e8c6930a114d17b3080207c8f5c43c8",
+    "docs/experiments/raw/external-increment-2026-10-02/controller-review.md": "504688332b44bfffdfc1f34dc5a9cb77f0b6e535a4a64d7714f684834ee6571a",
+    "docs/experiments/raw/external-increment-2026-10-02/installed-hypothesis.json": "d2efb40446af096082ad52817a7861be4974b47583911feaa1c858962245deda"
+  }
+}

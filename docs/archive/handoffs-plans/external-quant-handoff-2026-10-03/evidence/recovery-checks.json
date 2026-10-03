@@ -1,0 +1,193 @@
+{
+  "checks": [
+    {
+      "label": "01-packet-verification",
+      "command": [
+        "/opt/homebrew/opt/python@3.11/bin/python3.11",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/archive/handoffs-plans/external-quant-handoff-2026-10-03/tools/restore.py",
+        "--verify-only"
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+      "started_at": "2026-10-03T12:59:30.364406+08:00",
+      "elapsed_seconds": 0.11222562499460764,
+      "exit_code": 0,
+      "stdout": "evidence/recovery-logs/01-packet-verification.stdout.txt",
+      "stderr": "evidence/recovery-logs/01-packet-verification.stderr.txt"
+    },
+    {
+      "label": "02-relocated-restore",
+      "command": [
+        "/opt/homebrew/opt/python@3.11/bin/python3.11",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/archive/handoffs-plans/external-quant-handoff-2026-10-03/tools/restore.py",
+        "--output",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/external-quant-handoff-20261003/recovered",
+        "--supplement",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/recovery/external-quant-handoff-20261003/research-materials.tar.gz"
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+      "started_at": "2026-10-03T12:59:30.477021+08:00",
+      "elapsed_seconds": 0.4219554169976618,
+      "exit_code": 0,
+      "stdout": "evidence/recovery-logs/02-relocated-restore.stdout.txt",
+      "stderr": "evidence/recovery-logs/02-relocated-restore.stderr.txt"
+    },
+    {
+      "label": "03-new-venv",
+      "command": [
+        "/opt/homebrew/opt/python@3.11/bin/python3.11",
+        "-m",
+        "venv",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/external-quant-handoff-20261003/recovered/.venv"
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+      "started_at": "2026-10-03T12:59:30.899249+08:00",
+      "elapsed_seconds": 2.5157374590053223,
+      "exit_code": 0,
+      "stdout": "evidence/recovery-logs/03-new-venv.stdout.txt",
+      "stderr": "evidence/recovery-logs/03-new-venv.stderr.txt"
+    },
+    {
+      "label": "04-install-minimum",
+      "command": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/external-quant-handoff-20261003/recovered/.venv/bin/python",
+        "-m",
+        "pip",
+        "install",
+        "-r",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/archive/handoffs-plans/external-quant-handoff-2026-10-03/requirements-recovery.txt"
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/external-quant-handoff-20261003/recovered",
+      "started_at": "2026-10-03T12:59:33.415275+08:00",
+      "elapsed_seconds": 22.55650004200288,
+      "exit_code": 0,
+      "stdout": "evidence/recovery-logs/04-install-minimum.stdout.txt",
+      "stderr": "evidence/recovery-logs/04-install-minimum.stderr.txt"
+    },
+    {
+      "label": "05-task-tests",
+      "command": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/external-quant-handoff-20261003/recovered/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/unit/test_multiple_comparison.py",
+        "tests/unit/test_tsfresh_candidates.py",
+        "tests/unit/test_tsfresh_price_information.py",
+        "tests/unit/test_research_property_checks.py"
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/external-quant-handoff-20261003/recovered",
+      "started_at": "2026-10-03T12:59:55.972036+08:00",
+      "elapsed_seconds": 57.89326604199596,
+      "exit_code": 1,
+      "stdout": "evidence/recovery-logs/05-task-tests.stdout.txt",
+      "stderr": "evidence/recovery-logs/05-task-tests.stderr.txt"
+    },
+    {
+      "label": "06-real-readonly-smoke",
+      "command": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/external-quant-handoff-20261003/recovered/.venv/bin/python",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/archive/handoffs-plans/external-quant-handoff-2026-10-03/tools/smoke.py",
+        "--root",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/external-quant-handoff-20261003/recovered",
+        "--with-archives"
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/external-quant-handoff-20261003/recovered",
+      "started_at": "2026-10-03T13:00:53.865214+08:00",
+      "elapsed_seconds": 1.002463542012265,
+      "exit_code": 0,
+      "stdout": "evidence/recovery-logs/06-real-readonly-smoke.stdout.txt",
+      "stderr": "evidence/recovery-logs/06-real-readonly-smoke.stderr.txt"
+    },
+    {
+      "label": "07-hygiene",
+      "command": [
+        "/opt/homebrew/opt/python@3.11/bin/python3.11",
+        "scripts/check_repo_hygiene.py"
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+      "started_at": "2026-10-03T13:00:54.868016+08:00",
+      "elapsed_seconds": 0.1752928750065621,
+      "exit_code": 0,
+      "stdout": "evidence/recovery-logs/07-hygiene.stdout.txt",
+      "stderr": "evidence/recovery-logs/07-hygiene.stderr.txt"
+    },
+    {
+      "label": "08-corrected-packet-restore",
+      "command": [
+        "/opt/homebrew/opt/python@3.11/bin/python3.11",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/archive/handoffs-plans/external-quant-handoff-2026-10-03/tools/restore.py",
+        "--output",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/external-quant-handoff-20261003/recovered-final",
+        "--supplement",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/recovery/external-quant-handoff-20261003/research-materials.tar.gz"
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+      "checked_at": "2026-10-03T13:02:32.506991+08:00",
+      "elapsed_seconds": 2.241103833017405,
+      "exit_code": 0,
+      "stdout": "evidence/recovery-logs/08-corrected-packet-restore.stdout.txt",
+      "stderr": "evidence/recovery-logs/08-corrected-packet-restore.stderr.txt"
+    },
+    {
+      "label": "09-affected-tests-after-config-fix",
+      "command": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/external-quant-handoff-20261003/recovered/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/unit/test_tsfresh_price_information.py"
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/external-quant-handoff-20261003/recovered-final",
+      "checked_at": "2026-10-03T13:02:34.207666+08:00",
+      "elapsed_seconds": 1.699576791987056,
+      "exit_code": 0,
+      "stdout": "evidence/recovery-logs/09-affected-tests-after-config-fix.stdout.txt",
+      "stderr": "evidence/recovery-logs/09-affected-tests-after-config-fix.stderr.txt"
+    },
+    {
+      "label": "10-final-relocated-readonly-smoke",
+      "command": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/external-quant-handoff-20261003/recovered/.venv/bin/python",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/archive/handoffs-plans/external-quant-handoff-2026-10-03/tools/smoke.py",
+        "--root",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/external-quant-handoff-20261003/recovered-final",
+        "--with-archives"
+      ],
+      "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.biao/external-quant-handoff-20261003/recovered-final",
+      "checked_at": "2026-10-03T13:02:35.150239+08:00",
+      "elapsed_seconds": 0.9422163749986794,
+      "exit_code": 0,
+      "stdout": "evidence/recovery-logs/10-final-relocated-readonly-smoke.stdout.txt",
+      "stderr": "evidence/recovery-logs/10-final-relocated-readonly-smoke.stderr.txt"
+    },
+    {
+      "label": "11-full-isolated-worktree-failed",
+      "command": [
+        "git",
+        "worktree",
+        "add",
+        "-b",
+        "codex/handoff-external-quant-20261003",
+        ".biao/external-quant-handoff-20261003/git-handoff",
+        "HEAD"
+      ],
+      "exit_code": 128,
+      "result": "No space left on device during baseline 1,964,811,565-byte checkout; git rollback left no registered worktree",
+      "failure_not_retried": true
+    }
+  ],
+  "real_fits": 0,
+  "sealed_experiments_rerun": false,
+  "OS": "macOS arm64",
+  "Linux": "not verified",
+  "Windows": "not verified",
+  "source_data_licensing": "not established by this technical check",
+  "result": "53 unaffected tests passed in initial isolated tree; all 5 affected tsfresh adapter tests passed after adding exact default V2 config; 56 unique tests now covered without rerunning sealed research",
+  "missing-config-fix": "configs/rules.v2.yaml exact original added; no runtime source/config edited",
+  "local_materials_available": true,
+  "remote_materials_delivered": false
+}

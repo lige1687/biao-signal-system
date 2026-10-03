@@ -1,0 +1,50 @@
+{
+  "mission": "独立核查多方案共同比较工具是否有明确未被他项覆盖的工程缺口，提出范围与错误使用反例",
+  "task_scope": [
+    "只读核查已有多方案比较能力、历史片段抽取、共同日期和重复候选处理；不研究新因子、不拟合、不调用外部服务；最多12个定点文件读取"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "configs/strategy-documents.v1.json",
+    "docs/research/current-standards.json",
+    "docs/research/research-question-method-standard.md",
+    "docs/research/research-workflow-usage.md",
+    "docs/research/factor-research-roadmap-2026-09-10.md",
+    "docs/ops/work-progress",
+    "docs/experiments/research-tool-reuse-shortlist-2026-09-14.md",
+    "docs/experiments/tsfresh-factor-validation-2026-10-02.md",
+    "src/lei_signal/research"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/external-multiple-comparison-2026-10-02/local-gap-review.md"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "local-gap-review.md：现有能力/具体缺口/适合用途/不能声称什么/重复归属风险"
+  ],
+  "stop_conditions": [
+    "定义或资料缺失时只记录范围",
+    "不改其他文件",
+    "不运行金融实验"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "strategy_sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    }
+  ]
+}

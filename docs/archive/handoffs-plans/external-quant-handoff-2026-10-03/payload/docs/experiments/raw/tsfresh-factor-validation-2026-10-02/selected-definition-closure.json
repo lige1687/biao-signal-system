@@ -1,0 +1,224 @@
+{
+  "research.external.mean_abs_log_change20@1.0.0": {
+    "scope": "四国内宽基ETF价格轨迹表达；回顾性有限预测研究",
+    "not_for": [
+      "production_trade",
+      "holding_entry_or_exit",
+      "actual_account_return_claim",
+      "complete_LEI_state",
+      "unique_author_calibration"
+    ],
+    "input": {
+      "fields": [
+        "date",
+        "open",
+        "high",
+        "low",
+        "close",
+        "calendar",
+        "action_known"
+      ],
+      "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+      "currency": "CNY ETF经济价格指数",
+      "frequency": "daily",
+      "calendar": "四ETF共同完整交易日历",
+      "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+    },
+    "universe": {
+      "version": "external-tsfresh-four-etf-20261002",
+      "eligibility": "四固定ETF完整安排日与所有背景；不按候选值过滤",
+      "warmup": "为公平比较既有背景保持252连续有效OHLC，候选本身只用末21个价格",
+      "missing": "未知、背景外、未成熟分别保留，不造价格",
+      "quality_gate": "实际来源资格重新核全部名义OHLC与经济重建；到达及行动完整性未知",
+      "degrade": "只作有限四ETF回顾性信息，非完整ETF总体"
+    },
+    "time": {
+      "observation_time": "完整t收盘后",
+      "available_at": "历史到达时间未认证",
+      "decision_at": "t收盘后研究评价",
+      "execution_at": "无交易",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-10-02研究登记"
+    },
+    "validation": {
+      "method": "既有两核心工程验收、本轮精确手算/未来/缺失检查，效果必须另过workflow冻结",
+      "tolerance": {
+        "absolute": 1e-09,
+        "relative": 1e-10,
+        "integer": 0
+      },
+      "tests": [
+        "tests/unit/test_tsfresh_candidates.py",
+        "tests/unit/test_tsfresh_price_information.py"
+      ],
+      "limitations": "现有完整价格包含这些表达；历史已见、到达和行动完整性未知，不能从数学差别推增量"
+    },
+    "status": {
+      "definition_clarity": "fixed_external_formula",
+      "data_qualification": "limited_retrospective_economic_ohlc",
+      "implementation": "research_adapter_reviewed_pre_freeze",
+      "effectiveness": "not_evaluated_at_registration",
+      "production": "not_authorized"
+    },
+    "sources": [
+      "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json",
+      ".agents/skills/lei-quant-tools/scripts/tsfresh_calculators.py",
+      ".agents/skills/lei-quant-tools/scripts/tsfresh-LICENSE.txt",
+      "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+      "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+      "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
+    ],
+    "id": "research.external.mean_abs_log_change20",
+    "version": "1.0.0",
+    "name": "20日平均绝对对数变化",
+    "type": "feature",
+    "profile": "mixed",
+    "uses": [
+      "research_signal",
+      "description",
+      "comparison"
+    ],
+    "spec_anchor": [
+      "用户2026-10-02授权外部因子挖掘与较大范围验证",
+      "tsfresh0.21.2固定发布包两个函数，非LEI原文交易定义"
+    ],
+    "spec_layer": "external_price_information",
+    "definition": {
+      "formula": "r[j]=100*ln(C[j]/C[j-1]); X[t]=(1/20)*sum(abs(r[j]), j=t-19..t)",
+      "parameters": {
+        "window_returns": 20,
+        "lag": null,
+        "common_baseline_warmup": 252,
+        "upstream_version": "0.21.2"
+      },
+      "unit": "log percentage points per session",
+      "direction": "连续描述量，不事先指定未来收益方向",
+      "transforms": "21个经济收盘价取100倍自然对数；上游两个函数正文不变；比较背景沿现有指标",
+      "nan_policy": "缺报价/行动未知重置；共同252暖启动；任一候选未知则全部四比較同日资格未知，不填零",
+      "endpoints": "t及以前21个连续经济收盘价；目标另从t+1收盘至t+21收盘"
+    },
+    "dependencies": [],
+    "lifecycle": {
+      "state": "exists",
+      "basis": [
+        "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json"
+      ],
+      "verification_scope": "研究适配器公式4340行独立重算、既有背景逐字段一致及5合成检查；效果尚未计算，研究限定"
+    },
+    "origin": "外部通用算法研究表达；无原作者预测有效性主张",
+    "research_owner": "technical_agent",
+    "research_status": "IN_SCOPE",
+    "local_alias": "20日平均绝对对数变化"
+  },
+  "research.external.return_autocorrelation20_lag1@1.0.0": {
+    "scope": "四国内宽基ETF价格轨迹表达；回顾性有限预测研究",
+    "not_for": [
+      "production_trade",
+      "holding_entry_or_exit",
+      "actual_account_return_claim",
+      "complete_LEI_state",
+      "unique_author_calibration"
+    ],
+    "input": {
+      "fields": [
+        "date",
+        "open",
+        "high",
+        "low",
+        "close",
+        "calendar",
+        "action_known"
+      ],
+      "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+      "currency": "CNY ETF经济价格指数",
+      "frequency": "daily",
+      "calendar": "四ETF共同完整交易日历",
+      "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+    },
+    "universe": {
+      "version": "external-tsfresh-four-etf-20261002",
+      "eligibility": "四固定ETF完整安排日与所有背景；不按候选值过滤",
+      "warmup": "为公平比较既有背景保持252连续有效OHLC，候选本身只用末21个价格",
+      "missing": "未知、背景外、未成熟分别保留，不造价格",
+      "quality_gate": "实际来源资格重新核全部名义OHLC与经济重建；到达及行动完整性未知",
+      "degrade": "只作有限四ETF回顾性信息，非完整ETF总体"
+    },
+    "time": {
+      "observation_time": "完整t收盘后",
+      "available_at": "历史到达时间未认证",
+      "decision_at": "t收盘后研究评价",
+      "execution_at": "无交易",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-10-02研究登记"
+    },
+    "validation": {
+      "method": "既有两核心工程验收、本轮精确手算/未来/缺失检查，效果必须另过workflow冻结",
+      "tolerance": {
+        "absolute": 1e-09,
+        "relative": 1e-10,
+        "integer": 0
+      },
+      "tests": [
+        "tests/unit/test_tsfresh_candidates.py",
+        "tests/unit/test_tsfresh_price_information.py"
+      ],
+      "limitations": "现有完整价格包含这些表达；历史已见、到达和行动完整性未知，不能从数学差别推增量"
+    },
+    "status": {
+      "definition_clarity": "fixed_external_formula",
+      "data_qualification": "limited_retrospective_economic_ohlc",
+      "implementation": "research_adapter_reviewed_pre_freeze",
+      "effectiveness": "not_evaluated_at_registration",
+      "production": "not_authorized"
+    },
+    "sources": [
+      "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json",
+      ".agents/skills/lei-quant-tools/scripts/tsfresh_calculators.py",
+      ".agents/skills/lei-quant-tools/scripts/tsfresh-LICENSE.txt",
+      "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+      "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+      "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
+    ],
+    "id": "research.external.return_autocorrelation20_lag1",
+    "version": "1.0.0",
+    "name": "20日收益的相邻联系",
+    "type": "feature",
+    "profile": "mixed",
+    "uses": [
+      "research_signal",
+      "description",
+      "comparison"
+    ],
+    "spec_anchor": [
+      "用户2026-10-02授权外部因子挖掘与较大范围验证",
+      "tsfresh0.21.2固定发布包两个函数，非LEI原文交易定义"
+    ],
+    "spec_layer": "external_price_information",
+    "definition": {
+      "formula": "r[j]=100*ln(C[j]/C[j-1]); mu=mean(r), v=mean((r-mu)^2); X=sum((r[j]-mu)*(r[j+1]-mu))/(19*v); np.isclose(v,0) => unknown",
+      "parameters": {
+        "window_returns": 20,
+        "lag": 1,
+        "common_baseline_warmup": 252,
+        "upstream_version": "0.21.2"
+      },
+      "unit": "dimensionless",
+      "direction": "连续描述量，不事先指定未来收益方向",
+      "transforms": "21个经济收盘价取100倍自然对数；上游两个函数正文不变；比较背景沿现有指标",
+      "nan_policy": "缺报价/行动未知重置；共同252暖启动；任一候选未知则全部四比較同日资格未知，不填零",
+      "endpoints": "t及以前21个连续经济收盘价；目标另从t+1收盘至t+21收盘"
+    },
+    "dependencies": [],
+    "lifecycle": {
+      "state": "exists",
+      "basis": [
+        "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json"
+      ],
+      "verification_scope": "研究适配器公式4340行独立重算、既有背景逐字段一致及5合成检查；效果尚未计算，研究限定"
+    },
+    "origin": "外部通用算法研究表达；无原作者预测有效性主张",
+    "research_owner": "technical_agent",
+    "research_status": "IN_SCOPE",
+    "local_alias": "20日收益的相邻联系"
+  }
+}

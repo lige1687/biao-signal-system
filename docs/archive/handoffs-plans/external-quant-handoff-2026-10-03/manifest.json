@@ -1,0 +1,1578 @@
+{
+  "schema_version": "lei-task-handoff/1.0",
+  "task": "external-quant-resources",
+  "captured_at": "2026-10-03T12:51:08.170699+08:00",
+  "repository": "https://github.com/lige1687/biao-signal-system",
+  "source_branch": "codex/factor-unit-research-20260915",
+  "source_HEAD": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
+  "handoff_branch": "codex/handoff-external-quant-20261003",
+  "delivered_commit": "resolve with git log -1 -- this handoff directory; no self-commit loop",
+  "self_reference_policy": "manifest excludes itself and SHA256SUMS; SHA256SUMS includes manifest and excludes itself",
+  "files": [
+    {
+      "path": "ARTIFACTS.md",
+      "size": 3855,
+      "sha256": "4c9fc5f0a3c19682a2ba8ac9bfa252a3c70e0f41a447e466f506dedddad40439"
+    },
+    {
+      "path": "DECISIONS.md",
+      "size": 2055,
+      "sha256": "1e709467a9e84dd69ea65120a4e2b46a5fef9c98f8f70c9bb295f9b10d33c335"
+    },
+    {
+      "path": "DO_NOT_REPEAT.md",
+      "size": 2972,
+      "sha256": "b2e04a3427d148a4a297911ed6aea32d9fd87ab1f70a04af4b6b55f802e4802b"
+    },
+    {
+      "path": "ENVIRONMENT.md",
+      "size": 5105,
+      "sha256": "0dab3e4e25e87367570f88143abea526afbe21a0edff1cdb5d1a1b1300d76f3a"
+    },
+    {
+      "path": "EVIDENCE.md",
+      "size": 2646,
+      "sha256": "5e3da164670669f9d351d91daf22f194dd0dc6b009607d9afc4836f4364a7cd9"
+    },
+    {
+      "path": "NEXT_STEPS.md",
+      "size": 1942,
+      "sha256": "744b705028a33bbc6e1868a516c58954b463bf8a0c97016c038cc3a58dca41a0"
+    },
+    {
+      "path": "ORIGINAL_GOALS.md",
+      "size": 4807,
+      "sha256": "1ee2e8bdd4cfdeaed5fd8e937fdc1c270693d1fe578f01252bbfa1e8ec7dbcd7"
+    },
+    {
+      "path": "README.md",
+      "size": 2998,
+      "sha256": "cd4ff2959a9a41e367cd85106e8f929a7238667525bcc810b2b7055c25f07cee"
+    },
+    {
+      "path": "RESUME_PROMPT.md",
+      "size": 4827,
+      "sha256": "5a2a09c3ef345a7e50b3e6c71dc762f63f27bfb40ed5157d223b9d263b7d2b2d"
+    },
+    {
+      "path": "STATUS.md",
+      "size": 3935,
+      "sha256": "c83d8c933fda42993b2ea9f7ff51ce13962f89331264b56a07a5ddfe5b10c638"
+    },
+    {
+      "path": "authority/research-closure-SKILL.md",
+      "size": 13874,
+      "sha256": "81edf1f7ca36c976c50d5b46bab4037d8779e2e330ffc733373017d80034fb42"
+    },
+    {
+      "path": "authority/research-closure-source.json",
+      "size": 279,
+      "sha256": "a9f3ecf38d7779b29e15a803b04e8c8d7cc9fbfd99c3dc6190b72f7d4085f95f"
+    },
+    {
+      "path": "configuration.env.template",
+      "size": 90,
+      "sha256": "4365efd0186d318585eac6103eb483bbcb1ec55810d33e3eef474cf7bfc29994"
+    },
+    {
+      "path": "evidence/delivery-safety.json",
+      "size": 1303,
+      "sha256": "a0d4b0121a0ea17bdb6ab97f83c2e9f7f08ba18ea46eeb57115c422fecb553da"
+    },
+    {
+      "path": "evidence/environment.json",
+      "size": 661,
+      "sha256": "32022dfaa0a865cb2f4db8ff12799385cc8cef1d3344a941f2e8dd297363e187"
+    },
+    {
+      "path": "evidence/experiment-registry-snapshot.json",
+      "size": 4932,
+      "sha256": "81191c0895bfb338288d063e21fbe94cd0b442683d7cf2ced0b2c5471919aad0"
+    },
+    {
+      "path": "evidence/materials-inventory.json",
+      "size": 68068,
+      "sha256": "935a434307663884d20fd56b996cc06c00b3f1b158c6840870017405ad9a5bd6"
+    },
+    {
+      "path": "evidence/original-user-requests.json",
+      "size": 13974,
+      "sha256": "56d7bb856a74995f3b9f94476b1d272c4fe61567d9e32b3353d722b595b93a25"
+    },
+    {
+      "path": "evidence/process-checkpoint.json",
+      "size": 586,
+      "sha256": "2d3361f5ff3cc743c8e925dfe657d044556456a8e6198b50b9619af2267e4b28"
+    },
+    {
+      "path": "evidence/recovery-checks.json",
+      "size": 8630,
+      "sha256": "90052685ed061daf2ab0d0db59c982d5e3789047ed225925a546664ddb37ad58"
+    },
+    {
+      "path": "evidence/recovery-logs/01-packet-verification.stderr.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/recovery-logs/01-packet-verification.stdout.txt",
+      "size": 42,
+      "sha256": "1ae077783fc4cc6a55e3a8bbc1791b2cb836db43c597a11f41ccdff804177eee"
+    },
+    {
+      "path": "evidence/recovery-logs/02-relocated-restore.stderr.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/recovery-logs/02-relocated-restore.stdout.txt",
+      "size": 264,
+      "sha256": "5f22e2a5baf73ba44d97bb1937a5d907445695fd518250901735b9ca7f961b65"
+    },
+    {
+      "path": "evidence/recovery-logs/03-new-venv.stderr.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/recovery-logs/03-new-venv.stdout.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/recovery-logs/04-install-minimum.stderr.txt",
+      "size": 222,
+      "sha256": "f1a615cfe13d941b5c0549736bff766aa133492e926a56bbfd8bb3e32c62625d"
+    },
+    {
+      "path": "evidence/recovery-logs/04-install-minimum.stdout.txt",
+      "size": 7387,
+      "sha256": "c4302ab1155ab069ecac6a3e6701248daab28c81dee12cdc70480131ee31623a"
+    },
+    {
+      "path": "evidence/recovery-logs/05-task-tests.stderr.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/recovery-logs/05-task-tests.stdout.txt",
+      "size": 7394,
+      "sha256": "b5335b34f165db2595ffed55441d1ef7acd283998ad4c52a46b57d0a919086f2"
+    },
+    {
+      "path": "evidence/recovery-logs/06-real-readonly-smoke.stderr.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/recovery-logs/06-real-readonly-smoke.stdout.txt",
+      "size": 15559,
+      "sha256": "e35e514b6c7c9d44efea6fd18863a1f4b34ab6f08d18890383975c81cdff58a4"
+    },
+    {
+      "path": "evidence/recovery-logs/07-hygiene.stderr.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/recovery-logs/07-hygiene.stdout.txt",
+      "size": 86,
+      "sha256": "be8c549ee15f0b9987ff354acaf63d35548b45fc39fb0eb889a8b8841dfc975c"
+    },
+    {
+      "path": "evidence/recovery-logs/08-corrected-packet-restore.stderr.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/recovery-logs/08-corrected-packet-restore.stdout.txt",
+      "size": 270,
+      "sha256": "69af565151ac418358a9ddbef38c3886248d4f865a732673c9e978f50570f6f7"
+    },
+    {
+      "path": "evidence/recovery-logs/09-affected-tests-after-config-fix.stderr.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/recovery-logs/09-affected-tests-after-config-fix.stdout.txt",
+      "size": 98,
+      "sha256": "ae2604274a833403d5a93d1b2dcea196bb9d11ba794c12f5c389cb0ec08875ba"
+    },
+    {
+      "path": "evidence/recovery-logs/10-final-relocated-readonly-smoke.stderr.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/recovery-logs/10-final-relocated-readonly-smoke.stdout.txt",
+      "size": 15655,
+      "sha256": "7f32b09491ec98a2f4ace353c6f3a1b97c437e175137fa5a9414c3b302456439"
+    },
+    {
+      "path": "evidence/source-qualification-inputs.json",
+      "size": 28095,
+      "sha256": "36a0462b1b8ebd1e1dbfd6ee5b75c02c8ea4e08fe41445ac12dd38953d130527"
+    },
+    {
+      "path": "evidence/source-snapshot.json",
+      "size": 150670,
+      "sha256": "81cacd8e36b8220e14edb5b161426d9640c66841eeaec09f448f62e74d7ec9e6"
+    },
+    {
+      "path": "evidence/worktree-state.json",
+      "size": 133431,
+      "sha256": "60a407a1a5d70d8d936a080f5d6b8f9b7a9fedf196f0b77dcfa3cbf702468ffc"
+    },
+    {
+      "path": "payload/.agents/skills/factorhub-readonly/SKILL.md",
+      "size": 2339,
+      "sha256": "264e01d8c54403ba0eb8689bf266c69b79bd65b7165b4683fdcadcfb92febc95"
+    },
+    {
+      "path": "payload/.agents/skills/factorhub-readonly/references/requirements.lock.txt",
+      "size": 557,
+      "sha256": "da3baf9109ca396e310340d76f30ffec3ec9d8a8a60126e816967cbec2ece4a1"
+    },
+    {
+      "path": "payload/.agents/skills/factorhub-readonly/scripts/server.py",
+      "size": 3942,
+      "sha256": "7461e0e2c71060c7f5406f5cc899993e218b0729651ea70df51c06bec43b0f47"
+    },
+    {
+      "path": "payload/.agents/skills/lei-causal-validation/LICENSE",
+      "size": 9156,
+      "sha256": "e97825a2b0db1501085feecd0a5f5237483dee279263171e387632a361590c5c"
+    },
+    {
+      "path": "payload/.agents/skills/lei-causal-validation/NOTICE",
+      "size": 910,
+      "sha256": "9d6777c79a6707360b5b97bc35e5c829aa32c02a6d94bc2ad2ea35e77a70859c"
+    },
+    {
+      "path": "payload/.agents/skills/lei-causal-validation/SKILL.md",
+      "size": 3324,
+      "sha256": "4dd95c0f4d91771472d27d7678bd24fa2d92b0331cbb48e33aca2dfdadcb6fe7"
+    },
+    {
+      "path": "payload/.agents/skills/lei-causal-validation/references/cases.md",
+      "size": 1213,
+      "sha256": "0e392d5dab5a81ae5682a015fd42fba906806f702943b4a3310c5d3afefdb4ff"
+    },
+    {
+      "path": "payload/.agents/skills/lei-data-availability/LICENSE",
+      "size": 9156,
+      "sha256": "e97825a2b0db1501085feecd0a5f5237483dee279263171e387632a361590c5c"
+    },
+    {
+      "path": "payload/.agents/skills/lei-data-availability/NOTICE",
+      "size": 880,
+      "sha256": "b37d5bd1a14659dcbf1fb319f14677fc9389d08957f59ee13925cdfcfb6d698a"
+    },
+    {
+      "path": "payload/.agents/skills/lei-data-availability/SKILL.md",
+      "size": 3206,
+      "sha256": "f0218e2f8971770ff4e993f5d925998e9490f66a6e31f8195b7fbd0c11944b45"
+    },
+    {
+      "path": "payload/.agents/skills/lei-data-availability/references/cases.md",
+      "size": 1408,
+      "sha256": "62d938b9adec3329ffe32444f7ddc13afba25f5f49e5082a773a896c6a7b7eed"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/SKILL.md",
+      "size": 8593,
+      "sha256": "abfc1e60232b42f115a99f46cc59727ab4b07c30e80a467b49f9ee6ca1c3ac46"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/references/exchange-calendars-LICENSE.txt",
+      "size": 11347,
+      "sha256": "e35c4578f7db4498e62e278978f6c42e0fce6f21f9993a060b08a33549cd3044"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/references/multiple-comparison.md",
+      "size": 4841,
+      "sha256": "a3577ee16b6be96a2689c50d4b95801a4caacead401658e25c6ab960fb64360e"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/references/provenance.md",
+      "size": 2408,
+      "sha256": "0fbb4daa92b2f08b474298284a6de0695b07ab62c648903f5311acdd4497807a"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/references/xshg-2026.json",
+      "size": 965,
+      "sha256": "2ab878192c7c5e544ab099414e949d6c8c551e8c00f36a45802d3a17f76e5b20"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/lei_arch_bootstrap/LICENSE.md",
+      "size": 1660,
+      "sha256": "c6e622bd89db4e13315f4e91605ff96fcbb9012d78ee74e429855870b203eed6"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/lei_arch_bootstrap/__init__.py",
+      "size": 72,
+      "sha256": "262c5cc6303c471626c10994f3ae20184689c7f9545f54de51b136353ba00412"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/lei_arch_bootstrap/_typing.py",
+      "size": 2427,
+      "sha256": "023bb889d569b71204ef9187fa14a9fddff8564de1b49f17d6c92f2e9a58df65"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/lei_arch_bootstrap/bootstrap/__init__.py",
+      "size": 72,
+      "sha256": "262c5cc6303c471626c10994f3ae20184689c7f9545f54de51b136353ba00412"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/lei_arch_bootstrap/bootstrap/_samplers_python.py",
+      "size": 1097,
+      "sha256": "8b77262e1e454d195d3fc7f72edde7039ca82e87f7949196de668aa07d2138ab"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/lei_arch_bootstrap/bootstrap/base.py",
+      "size": 60345,
+      "sha256": "018023e4669f839787c69782fde01e788cae031898062bb42add47cedd84e126"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/lei_arch_bootstrap/bootstrap/multiple_comparison.py",
+      "size": 30045,
+      "sha256": "4858aecc1f1d08c1975cde09444769de44d568c3827f8672d0ece062ffb9e6dc"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/lei_arch_bootstrap/compat/__init__.py",
+      "size": 72,
+      "sha256": "262c5cc6303c471626c10994f3ae20184689c7f9545f54de51b136353ba00412"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/lei_arch_bootstrap/compat/numba.py",
+      "size": 1690,
+      "sha256": "83336bb036d46eb052892e529b3795c37076f82bf1d02a3ce8cbc8377be50dec"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/lei_arch_bootstrap/compat/pandas.py",
+      "size": 471,
+      "sha256": "155784fd1454e657950cbf61023132eaf9a00d0d8d061d1504ce38ba53f3840d"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/lei_arch_bootstrap/provenance.json",
+      "size": 3678,
+      "sha256": "ba3041e3d609c590254ea391adacae7e4a8383a946841b904dd72e6e12b7e5de"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/lei_arch_bootstrap/utility/__init__.py",
+      "size": 72,
+      "sha256": "262c5cc6303c471626c10994f3ae20184689c7f9545f54de51b136353ba00412"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/lei_arch_bootstrap/utility/array.py",
+      "size": 10291,
+      "sha256": "ffbfd90b6664c0ecda13a65d4565d003e24245cd928fb9502863ef0825c567fb"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/lei_arch_bootstrap/utility/exceptions.py",
+      "size": 2290,
+      "sha256": "3f95a2f68f5268c069dede6ee0f137bac315d8f8dddfe8345a3f8e0fe5826e67"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/multiple_comparison.py",
+      "size": 12542,
+      "sha256": "89f1a0ef739662177e30ceb6e061e8358dc6cf194a61f972572cc681657efb26"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/quant_tools.py",
+      "size": 5240,
+      "sha256": "be2f0456855f09d4403ec08ae41849578f3ef6abf0fa2b425ed2776b93e0576b"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/statsmodels-LICENSE.txt",
+      "size": 1636,
+      "sha256": "1ca78e1dec9dcebc55f3b96a862317f23e76422c5fc943568d955aad1f6b5fad"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/statsmodels_hac.py",
+      "size": 2142,
+      "sha256": "9c7cf8f74d79314cbc16215c0632cf7b675b83b600a5dbf501d29f7875207bf7"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/tsfresh-LICENSE.txt",
+      "size": 1092,
+      "sha256": "1804283622c8e51a4427aaa772d5ca522f89932fd610b294055435922af1c748"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/tsfresh_calculators.py",
+      "size": 2174,
+      "sha256": "a3ac672ac4a2410cd2b27e0c440ab949dce6bc13c68aa3ccd8f8b2510f4dfeba"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/tsfresh_candidates.py",
+      "size": 6201,
+      "sha256": "aefed96e626ec98a8ddd911fe074eb8ef889eb08bbfb4dcc48ec6a5d44f1cf21"
+    },
+    {
+      "path": "payload/.agents/skills/lei-quant-tools/scripts/workflow_bridge.py",
+      "size": 7940,
+      "sha256": "0129a745b1b52a42d915cdd577824d833db3ce3c03dfcb970045c5d2ea0148dd"
+    },
+    {
+      "path": "payload/.claude/skills/macd-reading/SKILL.md",
+      "size": 5902,
+      "sha256": "4a75dea4cb8f0ad2d1cb450c1d4237d87cc5c5b7f50f3eacda10880164c731ab"
+    },
+    {
+      "path": "payload/AGENTS.md",
+      "size": 22013,
+      "sha256": "060a0de558b0543f6afee81e8aa5f903daf348e9381b825ec3d141ec8763dc4e"
+    },
+    {
+      "path": "payload/configs/rules.v1.yaml",
+      "size": 36540,
+      "sha256": "9be26a1626fdf6351478b40b388907e9d8128f74b6bd4aa2b8ff4a850cfdcfd2"
+    },
+    {
+      "path": "payload/configs/rules.v2.yaml",
+      "size": 77474,
+      "sha256": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5"
+    },
+    {
+      "path": "payload/configs/strategy-documents.v1.json",
+      "size": 806,
+      "sha256": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b"
+    },
+    {
+      "path": "payload/docs/experiments/external-increment-2026-10-02.md",
+      "size": 7726,
+      "sha256": "c1fdd80533efe3a1f8eaa2572a21490e0d48062cd8a1612ed4486dacc5668e69"
+    },
+    {
+      "path": "payload/docs/experiments/external-multiple-comparison-2026-10-02.md",
+      "size": 10964,
+      "sha256": "0bf66080cdcfc4e1b7cb4b30509d2bd6291b66f6737304ddef52711316d5a627"
+    },
+    {
+      "path": "payload/docs/experiments/factorhub-codex-2026-10-02.md",
+      "size": 9271,
+      "sha256": "c23a839de7126bcf1859b35b8d6fd6e475ce5a760834798cb62ad765e29d64f9"
+    },
+    {
+      "path": "payload/docs/experiments/open-finance-skills-2026-10-02.md",
+      "size": 9319,
+      "sha256": "1f4ecf7ef82f9d9d22d42951214128d6fdb71e3641a8d31387791d8f62d91127"
+    },
+    {
+      "path": "payload/docs/experiments/parquet-reading-assessment-2026-10-02.md",
+      "size": 3442,
+      "sha256": "07c774be40f99e9d2bb815eec6f7ef79dbc2b8200e39ba4906e33312727ee8b7"
+    },
+    {
+      "path": "payload/docs/experiments/quant-resources-adoption-2026-10-02.md",
+      "size": 11051,
+      "sha256": "5177d1b9316d76fa8b81d5ccec4112e3395a8f452c6c6aa610656a3f002566e3"
+    },
+    {
+      "path": "payload/docs/experiments/quant-resources-integration-2026-10-02.md",
+      "size": 8419,
+      "sha256": "1202f44ec34002f22fc42011fedd8e81df1c4ba2bc4b7e97af2eda8efc491cfc"
+    },
+    {
+      "path": "payload/docs/experiments/quant-resources-workflow-fit-2026-10-02.md",
+      "size": 5210,
+      "sha256": "224b884b65bda5f1c871c0562bda1287c30550df3b4225ea32f023ca3f511504"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-increment-2026-10-02/attempt-1.json",
+      "size": 1170,
+      "sha256": "2a6e44b3308e6a2bde228abe83f72d2b9a8206f756c715e23935a0d19d0fd4cd"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-increment-2026-10-02/controller-review.md",
+      "size": 2712,
+      "sha256": "504688332b44bfffdfc1f34dc5a9cb77f0b6e535a4a64d7714f684834ee6571a"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-increment-2026-10-02/delegate-contract.json",
+      "size": 1584,
+      "sha256": "4dba4f90b60cf4ce71803d3955b2f9c0ed3108de935a3075adf2fc682e192318"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-increment-2026-10-02/installed-hypothesis.json",
+      "size": 588,
+      "sha256": "d2efb40446af096082ad52817a7861be4974b47583911feaa1c858962245deda"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-increment-2026-10-02/local-capability-review.md",
+      "size": 5944,
+      "sha256": "eba4052bea4f0d27bc6db4a02dba22544e8c6930a114d17b3080207c8f5c43c8"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-increment-2026-10-02/maintenance-checks.json",
+      "size": 443,
+      "sha256": "c2ded1feef89627aefb77af6f16f7e60d76325c116090554cd745ed1c5558627"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-increment-2026-10-02/manifest.json",
+      "size": 9147,
+      "sha256": "028344989778a0acabc138f11af92fef6653466657b7ac3825ed36db7abf610e"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-increment-2026-10-02/official-source-followup.json",
+      "size": 32169,
+      "sha256": "4efbc3b0aceec0a1a81f2ea453973a0ca24d8c7c2854b90094817852815941f6"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-increment-2026-10-02/official-source-overview.json",
+      "size": 31791,
+      "sha256": "350d70dd33726812f3b3942c3331b2cb680f823618f6fa283320e6d281d83911"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-increment-2026-10-02/upgrades-note-proposed.json",
+      "size": 957,
+      "sha256": "bf856e515729bd4bbc6242d0322fc841511c2a8f88f42aa9d5d4e8e40da69f9f"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-increment-2026-10-02/verify_properties.py",
+      "size": 2842,
+      "sha256": "500bdb9ff4a4b671b124d1df72fe21615a2c6b4af036c1ea14ea426fc2986dfd"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/arch-LICENSE.md",
+      "size": 1660,
+      "sha256": "c6e622bd89db4e13315f4e91605ff96fcbb9012d78ee74e429855870b203eed6"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/archive-B0-process.json",
+      "size": 13137,
+      "sha256": "c03d0ae45e72ec27a6b625e17cadf1f1e828ac4cc26dd4defd3446ed8ff02741"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/archive-B0.json",
+      "size": 11043,
+      "sha256": "f6db7fbff0b84137a0330419b3f0d3fc5ae5429a4b6de8d030171351cd61ea54"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/archive-B1-process.json",
+      "size": 13139,
+      "sha256": "5f078660d26acccc9bd96cd0304d4d6e234c0f0a8b9da7859cfdf600175f3b14"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/archive-B1.json",
+      "size": 11045,
+      "sha256": "5d8239c5b3f04325256ffb91699366ce9573bbf3dadf1014a7e27e8e497d3f1d"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/archive-demo-check.json",
+      "size": 3703,
+      "sha256": "712e5937486de62e3ed25ffe4e6a59cec99e395b76479cde5f637718e1784c64"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/archive-full-period-process.json",
+      "size": 4183,
+      "sha256": "2253d6e24130cf7c16f33e744bf96cceebcfe5d4f022103e9a4a6a799d97403c"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/archive-full-period.json",
+      "size": 3072,
+      "sha256": "61835ed8124ad3a4f1cafc86ae78f6f92b9b248281a89660382355dbb94fffd1"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/archive_demo.py",
+      "size": 4284,
+      "sha256": "07da402823c3d612b7a7eb73b8c8e583d30aa5f9b6b65c209c9617c77f6f1211"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/base.py",
+      "size": 60275,
+      "sha256": "104d3552a8e79a801e2f8cd0401160f83a7263b4ff13da44a82d763e5664fd21"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/controller-review.md",
+      "size": 2303,
+      "sha256": "e65a72ea9dd607b10be042c175559d8ed54508c69d621026f468f123417e2d20"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/degenerate-probe.json",
+      "size": 22735,
+      "sha256": "301a28c04550538e942522982a3e47af241da113001469856d0f789f35a37abd"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/engineering-test-1.json",
+      "size": 391,
+      "sha256": "133892daf0f91ee914c632aa17fabb7c3c117636039debab387176f6f5ad2848"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/final-archive-recheck.json",
+      "size": 428,
+      "sha256": "705154414ff1a6f7fa78bf1fcf8d120891c9c7851c5f673d16c6a6c42a8456b6"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/final-maintenance-check.json",
+      "size": 204,
+      "sha256": "7464b491ed020ebb980a8e97bc6a21ef057948b5505baf6498c68f6373fd1372"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/final-review-contract.json",
+      "size": 2032,
+      "sha256": "59a6bb01e3d80908b455cad9f118363580e1ec3af6233382f95b70c5562d9879"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/final-review.md",
+      "size": 4328,
+      "sha256": "916ed8f1afd59bc0db1d0f2d54c6cda375c3b2e6144756e843e7a98da5082923"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/gap-review-contract.json",
+      "size": 1846,
+      "sha256": "ab0ecc59b26ada6621ce485c6ab599f78a903141c8715b922cee9eeef08eabc6"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/implementation-contract.json",
+      "size": 1988,
+      "sha256": "2814fc188a407e362904800871178d4d588b275f832ac6ec5042f507b1f6334c"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/implementation-report.md",
+      "size": 4023,
+      "sha256": "1f0f25f62d163fdaecc6ace83ad5f963c47857476aa86fe729a327270507f75d"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/independent-core-check.json",
+      "size": 1803,
+      "sha256": "48d9be318f6a2279720dbdb5bcffa42b125a74a39b53b1c61fd663735d618800"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/independent_core_check.py",
+      "size": 4110,
+      "sha256": "b9093d91e0d8d86bffdbb8be89e3161f739c88895a1a07a379500a62ad843f58"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/local-gap-review.md",
+      "size": 7168,
+      "sha256": "64bf33a38a20d9be37f5d89a2a458f7b163e34c1796aaf2dfd2fc63bd2696378"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/manifest.json",
+      "size": 4382,
+      "sha256": "215f7167ff6f65c8e59e223eb279f65a47dab214a5a70a96527db7ceefae07c9"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/multiple_comparison.py",
+      "size": 30003,
+      "sha256": "d1956d2e02ab488dd7ce81bec434fb2732b2e99ab00e8c3c96b8d6854ace6ece"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/okr-proposed-update.md",
+      "size": 594,
+      "sha256": "e8637b5c4900c2787d1919573f15c02bd525621fcdc6ce0b25686150762f6b2d"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/protocol.json",
+      "size": 2507,
+      "sha256": "b875e35fd8447f838c2396866339a2af2c1e60aa7fd64c6eab9ba86bd1958724"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/repair-protocol.json",
+      "size": 280,
+      "sha256": "de10110f0220a1866ee83b45d068539cec27f7c9596f84df89074041fafb6f20"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/repair-regression.json",
+      "size": 420,
+      "sha256": "1a3666e37d32cd3b4758915d37d1728c013d345b6dfcb02c14d619accf7f8237"
+    },
+    {
+      "path": "payload/docs/experiments/raw/external-multiple-comparison-2026-10-02/sources.json",
+      "size": 435,
+      "sha256": "551609c2d2ea2a0ab3f7faa235a41f9e3773bc0300c113d723bc4a092b1cdd00"
+    },
+    {
+      "path": "payload/docs/experiments/raw/factorhub-codex-2026-10-02/adapter-checks.json",
+      "size": 2077,
+      "sha256": "3f65cf3a1de2ca0cf0e3ca8734db0d8810d8b549669d4989a4f7f7722ecfa92a"
+    },
+    {
+      "path": "payload/docs/experiments/raw/factorhub-codex-2026-10-02/manifest.json",
+      "size": 6093,
+      "sha256": "e4763d56f2f0440605f511500ac35231efc9e6775aad380afd976a87e515a427"
+    },
+    {
+      "path": "payload/docs/experiments/raw/factorhub-codex-2026-10-02/openai-mcp.md",
+      "size": 18256,
+      "sha256": "adb28990c0c7be47b9ff6c177e3cdeae5803978935cd792f781af2c8b5643e92"
+    },
+    {
+      "path": "payload/docs/experiments/raw/factorhub-codex-2026-10-02/verify_adapter.py",
+      "size": 4942,
+      "sha256": "07ad09d134bd71ec14d30748d4fe1eae65e3cf135c75d4b399b974362f31c094"
+    },
+    {
+      "path": "payload/docs/experiments/raw/factorhub-codex-2026-10-02/westock-etf.stderr.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "payload/docs/experiments/raw/factorhub-codex-2026-10-02/westock-etf.txt",
+      "size": 334,
+      "sha256": "496e0fecdd4bf6116a0be9fd669e94f380a5b1438d34786af6f7d007a12b5f85"
+    },
+    {
+      "path": "payload/docs/experiments/raw/open-finance-skills-2026-10-02/case-checks.json",
+      "size": 6761,
+      "sha256": "4cbac13320870f0b437d588021b67df5ff71c1203190901d7260f92ca6fb161d"
+    },
+    {
+      "path": "payload/docs/experiments/raw/open-finance-skills-2026-10-02/manifest.json",
+      "size": 7798,
+      "sha256": "5efdcaf3529fbefcca28d89730f8e6bc75fa1b7fbee05365f733b87362b69e78"
+    },
+    {
+      "path": "payload/docs/experiments/raw/open-finance-skills-2026-10-02/ml4t-README.md",
+      "size": 18567,
+      "sha256": "9225760a506aff82f8f47f1578146dd9d330489e9b4f51181442bfe05ffb5322"
+    },
+    {
+      "path": "payload/docs/experiments/raw/open-finance-skills-2026-10-02/ml4t-repo.json",
+      "size": 6793,
+      "sha256": "111b60be18890cbf4f768e722e6198c102be1517f326d0049142c0b1d17395de"
+    },
+    {
+      "path": "payload/docs/experiments/raw/open-finance-skills-2026-10-02/scientific-repo.json",
+      "size": 8253,
+      "sha256": "b7123f015402f51fd9f467d246cc2d6c64bff078a2ce943eb15701da79ad094e"
+    },
+    {
+      "path": "payload/docs/experiments/raw/open-finance-skills-2026-10-02/upgrades-note-proposed.json",
+      "size": 837,
+      "sha256": "e693433f94d5d32c411e06bf49443287089657658201765e29195e9c8e30885d"
+    },
+    {
+      "path": "payload/docs/experiments/raw/open-finance-skills-2026-10-02/verify_cases.py",
+      "size": 4878,
+      "sha256": "96b45cd4028513e04d0619ba988074c585815e2771e0dac3023ff7400368b3ca"
+    },
+    {
+      "path": "payload/docs/experiments/raw/parquet-reading-assessment-2026-10-02/attempt-1.json",
+      "size": 892,
+      "sha256": "b4128da90d9c12d6188c910c39afc5f260d8a1938a12595ed74ff668afbc174e"
+    },
+    {
+      "path": "payload/docs/experiments/raw/parquet-reading-assessment-2026-10-02/manifest.json",
+      "size": 19429,
+      "sha256": "77fae9c6eb82e781ca76118cde4addc2fd8b7b923398d39c0a1ea2c0d2027f89"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-adoption-2026-10-02/calendar-output.json",
+      "size": 468,
+      "sha256": "cd52dce4ca890e89d6dc6491a25c43d8d8dd2884d27b18992cb07329bb111f6b"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-adoption-2026-10-02/checks.json",
+      "size": 25529,
+      "sha256": "0bebbebf2ee7f0ad43419b63b2afc3fdb896e8f3f3415d8622f3461d9eb5a440"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-adoption-2026-10-02/exchange_calendar_xshg.py",
+      "size": 14758,
+      "sha256": "0450145f89c503f7311ebdabfa75177b21cd01aa5ec2dcc54cfc5a23f118336a"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-adoption-2026-10-02/grouputils.py",
+      "size": 32641,
+      "sha256": "d567b6921f0a4d2ddf7e3c46140881389fc9e334ca16b0a50c9494cd5273fe0b"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-adoption-2026-10-02/manifest.json",
+      "size": 9203,
+      "sha256": "12f63af6c2b045b39439b741cfaaf036d691b8c3801f45b05ff91f8fc2081476"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-adoption-2026-10-02/sandwich_covariance.py",
+      "size": 38541,
+      "sha256": "91ea0b210cc9f0395159345daae43ec8e575b7a40f27061cf52710130058754d"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-adoption-2026-10-02/synthetic-input.json",
+      "size": 652,
+      "sha256": "99a8651ac06b52401ef539fa0137163480ab326f240953f41afa5ce1497ff8eb"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-adoption-2026-10-02/synthetic-output.json",
+      "size": 507,
+      "sha256": "774639a41afd331b4f935789a463c58467f63d7851c7072fcac18804ba3005a0"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-adoption-2026-10-02/upgrades-current.json",
+      "size": 983,
+      "sha256": "b166d53277aa760829d78fc01c22155b58bbe9b1ce04443a1afd34f31e4b2180"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-adoption-2026-10-02/upgrades-note-proposed.json",
+      "size": 1067,
+      "sha256": "f75b7be348826dd0c635a533ca2c1161412c1b0d2fba4cd83fa3b2f86a09c461"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-adoption-2026-10-02/verify_components.py",
+      "size": 7243,
+      "sha256": "5663994ad70204d505ea36e2a2acd7d329232f3de1343ce07678450ba4142603"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-integration-2026-10-02/attempt-1-error.txt",
+      "size": 187,
+      "sha256": "bf72a8444885552c8ad0c41afd89ccc420b0bb8f388819e15ab9dfd7779267ab"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-integration-2026-10-02/attempt-2-checks.json",
+      "size": 7500,
+      "sha256": "8a20ccd19cf0ccc4a5b09a37d3a6101bd7dc35000301097df58be824616e991a"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-integration-2026-10-02/checks.json",
+      "size": 7641,
+      "sha256": "fe7e326d39ed5d8357f21331596be9a222a53e1ed97ca6786681aaa3cda7b794"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-integration-2026-10-02/controller-review.md",
+      "size": 3739,
+      "sha256": "8683e3fee659a2c48b7f58c091ee8bbecf8e30d0addaed99c9f8501ec168b788"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-integration-2026-10-02/delegate-contract.json",
+      "size": 1504,
+      "sha256": "fc451d1f2e8699728f5dfa8baece9f092c86fddd6598a2132b5d5d14c2de726c"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-integration-2026-10-02/independent-review.md",
+      "size": 6644,
+      "sha256": "a08bd6ee43799515de7dab3d06af5abd42566ed1c642321590eec6eb3f7dcdbc"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-integration-2026-10-02/maintenance-checks.json",
+      "size": 529,
+      "sha256": "6949cdbe5f0c57681d766dd2c7997fe3ec2ba3f7e14d35ad4e970e87cf76ebe3"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-integration-2026-10-02/manifest.json",
+      "size": 10277,
+      "sha256": "448c7e00c7ac232905c0e066038e0d356e161944d9eb534a6653eba140732370"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-integration-2026-10-02/real-explicit-period.json",
+      "size": 2219,
+      "sha256": "4f776b9a9aba68eb591eb1395b2fad55e6fa0e18ad65574ecf94b4984dd4bd9f"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-integration-2026-10-02/real-full-readiness.json",
+      "size": 2426,
+      "sha256": "5612567bf93a377dd521de7f35bf2c50f8fcdbb1c382e78d24a8bd8d4bdfc736"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-integration-2026-10-02/upgrades-note-proposed.json",
+      "size": 1253,
+      "sha256": "fbeea95f28215ad90458b3ce7bd4c3fb9eb1e62042d56c07d6426207fcbf73bb"
+    },
+    {
+      "path": "payload/docs/experiments/raw/quant-resources-integration-2026-10-02/verify_bridge.py",
+      "size": 7918,
+      "sha256": "307d43e3709cb7d4567692a554f0ea3831db6ec2ebfd02de69ddb74c7b5f243c"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-adoption-2026-10-02/LICENSE.txt",
+      "size": 1092,
+      "sha256": "1804283622c8e51a4427aaa772d5ca522f89932fd610b294055435922af1c748"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-adoption-2026-10-02/attempt-1.json",
+      "size": 3756,
+      "sha256": "e98e032cec3d027a4eacd43410c15d32c88f7173208fb2b2ca84d6f1517b83a6"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-adoption-2026-10-02/attempt-2.json",
+      "size": 3756,
+      "sha256": "68d7472c641ae325a8a764bd0788158c323752d84b1c0ca23342f8b6cc93ea21"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-adoption-2026-10-02/controller-review.md",
+      "size": 3118,
+      "sha256": "08d20108edb92dc321222908332686b8abee01f645148f228e71311021b30404"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-adoption-2026-10-02/delegate-contract.json",
+      "size": 1773,
+      "sha256": "7f34e7acacc2e0b5ff066e9afe56a6fab84ccc82a726cca120ffe77948a4ed4e"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-adoption-2026-10-02/feature_calculators.py",
+      "size": 82270,
+      "sha256": "54ecfdd91d33386e0adaf8a7c81551efb14a96ec0d3bd06fbcf3c9511e02fdbe"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-adoption-2026-10-02/format-maintenance.json",
+      "size": 258,
+      "sha256": "45bd473610f06df4ec8192b8f8f3dfb33aed174da4d3ac33a3c6e56754d98e91"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-adoption-2026-10-02/independent-review.md",
+      "size": 6917,
+      "sha256": "48cc884d45c1db2e7ba90c6ed9b61e12302cd8f085a4c9845877d2331fa2384f"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-adoption-2026-10-02/maintenance-checks.json",
+      "size": 949,
+      "sha256": "08d2031f04303c91e5e32062b8388c3aaa236cd8b60aca58cb48b27c612a0054"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-adoption-2026-10-02/manifest.json",
+      "size": 16615,
+      "sha256": "0cd9a0a8ba7d953e6d1271213bb81f31465ae42d173f2255cc6ab08575a14d20"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-adoption-2026-10-02/official-api.json",
+      "size": 14890,
+      "sha256": "0393ed739ded64d43a1aa5b574c4c71b72786c98532e8b10a35c3b31229cf667"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-adoption-2026-10-02/preview-output-1.json",
+      "size": 2999,
+      "sha256": "65377825134677d1ff5c2ca4eaadddc08e477622d6c0cb95fa938540d337b12e"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-adoption-2026-10-02/preview-output-2.json",
+      "size": 2999,
+      "sha256": "65377825134677d1ff5c2ca4eaadddc08e477622d6c0cb95fa938540d337b12e"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-adoption-2026-10-02/protocol.md",
+      "size": 2552,
+      "sha256": "87999d267bc17ffa8803dfce8f6d0c616ee1f448e83181c4abdb3dfbb5fb579d"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-adoption-2026-10-02/upgrades-note-proposed.json",
+      "size": 1010,
+      "sha256": "deeb254c9cfed173f1be083de83a54d56c61032573c53cbb3db94ede9f308f5f"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-adoption-2026-10-02/verify_adoption.py",
+      "size": 6996,
+      "sha256": "1f5f494396fd6b4a2d70f32132e42ff602aebdb12309553e5f63dcdf178f6f81"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/analyze_saved.py",
+      "size": 4983,
+      "sha256": "7fbd4aa7cba4ff86edea99774fa9f0510c3d4dc02eb326824c9806dca2bedd81"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/build_contracts.py",
+      "size": 8456,
+      "sha256": "d5534ecbdd9bf22f20baf67b55aae1b8fe7611366fa14555d5ba45530ba992d7"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/build_verification_root.py",
+      "size": 2805,
+      "sha256": "cd74791238d6a5ac58a5bebb7f12143c0315f8892f2ddb55158848fe7fcad869"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/controller-pre-freeze-review.json",
+      "size": 1361,
+      "sha256": "d5a149e357ee4f285975048a5ac5d11acf640c113563b6d3cef36c08e547191a"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/controller-terminal-review.md",
+      "size": 3203,
+      "sha256": "aa4e31efe4c862dfe3d8f440b29e5e1872c822be788753910962587fdd2e2e37"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/delegate-contract-rejected-overlap.json",
+      "size": 2609,
+      "sha256": "6a1d5a9d43f4d09e307587d7d3510e547c5bdbc6e766f91bd1c54a760ad631cd"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/delegate-contract.json",
+      "size": 2885,
+      "sha256": "57c3a1ad2cbe1660d28702f7aa0293670520705ba47c2ff583327fce7a87b6bf"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/draft-amplitude.json",
+      "size": 21196,
+      "sha256": "2d81e2756a66432b8c5e00c29d8d17f9f0934fb8738300a3d7afc98d56aff1e7"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/draft-factor_only.json",
+      "size": 21144,
+      "sha256": "fd8f38e512672fa2c17af646f52a4e6ed8b8d262a78c537f294a36b1a4dcefdd"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/draft-joint.json",
+      "size": 21227,
+      "sha256": "c54f912a9166d7f9b7a12c1425427a93c8f8b03774fc3f0cac3542b657ba9a99"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/draft-serial.json",
+      "size": 21198,
+      "sha256": "ab3d21a28ebf9e64bb13bf83f27bc82c0bc2a78e8a50f0accc01d862cd033700"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/engineering-test-1.json",
+      "size": 357,
+      "sha256": "e22845b5953d29ce038554ae701207b8d5a20300fd38807b1ded3fc55223c35a"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/engineering-test-2-controller-contracts-failed.json",
+      "size": 249,
+      "sha256": "4ba02df2bb036078a9db0fc0eca8b1faae23d34d792f0519d6f1f53b85d732fc"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/engineering-test-3-controller-acceptance.json",
+      "size": 1434,
+      "sha256": "90a7c6902f1d8a18729e395f794d17aedaba7e122f41852779a2b5703dd1e949"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/executor-report.md",
+      "size": 2692,
+      "sha256": "b52f6c225e720b65e3a7d4201cdd45e4e59acdf38ccb0756825463d3feb9c8d7"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/final-artifact-check.json",
+      "size": 669,
+      "sha256": "988c2bd22ceaff927debdd6009556118f27cec18251ffa2b8102c72b89a5d487"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/frozen-validator-recovery.json",
+      "size": 598,
+      "sha256": "52612ddc6890dcc05e0edbc6c31fbfec62975eecb7e1bac73fa7f9aa89b84767"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/independent-numeric-audit.json",
+      "size": 5620,
+      "sha256": "775f375d3a6a4575e93436973cd9d9f5f2f55aab683a66419614b0b91f32278c"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/independent-numeric-audit.md",
+      "size": 1505,
+      "sha256": "82e16685aa939efe224b0381216065f5bf9195ff8a2a3cbb52ce2490e643afae"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/independent-numeric-audit.py",
+      "size": 13511,
+      "sha256": "e3ee3c117f37fae01fb2b26a703110d67f628bf222f003a9e1bf93a09ee4534e"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/manifest.json",
+      "size": 6089,
+      "sha256": "173c519baaca708801ace07e55f079aad00a8f430e7978bf5acca0ac58bcd460"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/numeric-audit-contract.json",
+      "size": 3270,
+      "sha256": "c26de09784524e8104ea44859bc730d70a70c7a2c010e1661d56302b35fb5349"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/okr-proposed-update.md",
+      "size": 804,
+      "sha256": "14ccf1fbbc717b2e06b58649dacd2f7189391b17a640a5e276640417ac35f96a"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/post-run-source-drift.json",
+      "size": 378,
+      "sha256": "8b5150c1f34acf9fac17fc5256c4ac47369c3b55a90e11d1e640a0537933a27d"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json",
+      "size": 3745,
+      "sha256": "c4dbf35966a6d15a1f5b7e5ef7c45f13f8d32a105479be6e3a8269edf6c45fc1"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/qualification.json",
+      "size": 3293,
+      "sha256": "b878c7a33c426bcf34fafae10ce831f98c5b38782bbd66f4df91c8d20fa01b35"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/recover_frozen_validator.py",
+      "size": 684,
+      "sha256": "4b7c323f24d3702e667e39fee8b11a4e01f530e4cb23d19faf0615f1e61d8982"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/recovery-probe-failed.py",
+      "size": 2637,
+      "sha256": "95a98d328f9e78c2fb009dcb37b1c0af15210d49e60864de8e6d65af3afac8c2"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/saved-prediction-analysis.json",
+      "size": 34652,
+      "sha256": "55b90baa4290e979c47f24143c68ef2c5fa701ced98d1c669e6fe8d911b3ff4b"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/selected-definition-closure.json",
+      "size": 9644,
+      "sha256": "ede12b96640b4fe2dd3a4d5bf0259cfd39606deaa6eb3046f838a838b4d3dcb8"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/verification-root-manifest.json",
+      "size": 626,
+      "sha256": "ce2f79ba64e62a4f8c15dd6af32bac17fe5c134fa44bf229601c19d6f34c48e7"
+    },
+    {
+      "path": "payload/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/write_closeout.py",
+      "size": 18359,
+      "sha256": "40ded4784336f296a138746d54ca5d0d6e9c1a37a42c3ac406f5aa3c2757b551"
+    },
+    {
+      "path": "payload/docs/experiments/tsfresh-adoption-2026-10-02.md",
+      "size": 9396,
+      "sha256": "cec135a0c8e20b8b432db40c9748fa8f6441afb1adff96b98059d549efdce0f0"
+    },
+    {
+      "path": "payload/docs/experiments/tsfresh-amplitude-forecast-artifact-2026-10-02.md",
+      "size": 15472,
+      "sha256": "6057ff5b560a8f4625a2e6942ab2dc8469007eaf08b39940b3d7c89fa1e7e445"
+    },
+    {
+      "path": "payload/docs/experiments/tsfresh-factor-validation-2026-10-02.md",
+      "size": 17673,
+      "sha256": "a00c927fd92620a348d9c0ed588f52a57280ede4ed7bd10a1809dbdfe65fe72d"
+    },
+    {
+      "path": "payload/docs/experiments/tsfresh-factor_only-forecast-artifact-2026-10-02.md",
+      "size": 15476,
+      "sha256": "c0ffe70909d37883a788d8da476c062cb442dc9760e72e95d32ed01d0a1d6860"
+    },
+    {
+      "path": "payload/docs/experiments/tsfresh-joint-forecast-artifact-2026-10-02.md",
+      "size": 15466,
+      "sha256": "f1bc5977d871f994aa883b0516fdc689ad52fa0ee6890d1295332be35462c0be"
+    },
+    {
+      "path": "payload/docs/experiments/tsfresh-serial-forecast-artifact-2026-10-02.md",
+      "size": 15466,
+      "sha256": "f3d45924010a483bc4e090a8840ea0fb2bdedf984d8ad690e52e0b2bce529a99"
+    },
+    {
+      "path": "payload/docs/literature-learning/README.md",
+      "size": 7828,
+      "sha256": "c73aa2a8ab18c9e71fc193e50473eb9dae5e4b6f48cbed06ae1222e189589c74"
+    },
+    {
+      "path": "payload/docs/literature-learning/classic-research-process-2026-09-29.md",
+      "size": 20610,
+      "sha256": "8a13f26cbd0c02d28e9cdbb6aa9dc076618d171a9a34af02c1adb632eb89ab37"
+    },
+    {
+      "path": "payload/docs/ops/work-progress/README.md",
+      "size": 3986,
+      "sha256": "ce5b7bb4a291ef32616f83e3c05f36540ea95b6ab05f9ac54e6bd753c3d96033"
+    },
+    {
+      "path": "payload/docs/ops/work-progress/external-quant-resources.md",
+      "size": 10775,
+      "sha256": "5d7162056c0bac7757122d85852c48960ac091bc25d6ffde994d67357e010fd7"
+    },
+    {
+      "path": "payload/docs/plan-sector-trend-page.md",
+      "size": 26061,
+      "sha256": "921a483e16081fa975216a6f498a6af8654508df65be4feed64d8d593c24b23d"
+    },
+    {
+      "path": "payload/docs/research/ai-execution-contract.md",
+      "size": 6129,
+      "sha256": "f70a929f15d9d59f99f78a609a8658ce468f2c4025f05dba5380198f0bf23d22"
+    },
+    {
+      "path": "payload/docs/research/current-standards.json",
+      "size": 1209,
+      "sha256": "616c0ae1a636accd35c8500be7c5c21a35c13aaf2039e9e6144cb5531d96cb57"
+    },
+    {
+      "path": "payload/docs/research/definition-standard.md",
+      "size": 16412,
+      "sha256": "938e04d7beb96a46069bbb6eb6c03d2331e86bfa771623fdfe21794b4e98fcbd"
+    },
+    {
+      "path": "payload/docs/research/definitions.v1.json",
+      "size": 569863,
+      "sha256": "a2219a2d47f2d26b40dc1f57ff2914cefa4a24dce1b006d3b264a42ece0b9f43"
+    },
+    {
+      "path": "payload/docs/research/experiment-backtest-principles.md",
+      "size": 23327,
+      "sha256": "67b49a08396b0c8cb93cb526466200cc798bdb4cd8ce77509658f291cc29493c"
+    },
+    {
+      "path": "payload/docs/research/experiment-report-template.md",
+      "size": 15786,
+      "sha256": "a141107c915dcf738621e6e8746d89e97fb2d835b4c16883805dc7fb19ab7170"
+    },
+    {
+      "path": "payload/docs/research/factor-increment-evidence-standard.md",
+      "size": 7451,
+      "sha256": "05f5b04c8b54ad3bf86296f09a5addd4fd6344dad6e7b639650c39692b2f3871"
+    },
+    {
+      "path": "payload/docs/research/lei-factor-research-mission.md",
+      "size": 8625,
+      "sha256": "1f58a65ea41c9b678cc14c4490020b674e991f63267a8746f692e919eb109591"
+    },
+    {
+      "path": "payload/docs/research/research-question-method-standard.md",
+      "size": 19221,
+      "sha256": "367da1f21f3344ff17abf449aaf887db2adf31ebcfcb1715333a34fb4bf90f16"
+    },
+    {
+      "path": "payload/docs/research/research-workflow-usage.md",
+      "size": 15580,
+      "sha256": "bbc128ae035144f7bced79848c824107746f544696e3bffbfd57e36ff1b1b818"
+    },
+    {
+      "path": "payload/docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+      "size": 65786,
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    {
+      "path": "payload/docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md",
+      "size": 36427,
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    },
+    {
+      "path": "payload/docs/research/strategy-source-snapshots/2026-09-30/README.md",
+      "size": 740,
+      "sha256": "01d11675a4979fd73e5c38ab01090542abd212d90d766328f78dc06ea8faee02"
+    },
+    {
+      "path": "payload/docs/research/strategy-source-snapshots/2026-09-30/manifest.json",
+      "size": 968,
+      "sha256": "d3a4ba5aa1ed1bda0b97fd01ce106b038ca6817f0978c7b78ed27ce7db579497"
+    },
+    {
+      "path": "payload/pyproject.toml",
+      "size": 1457,
+      "sha256": "ef600637e82fda794fa2e53814ddb1081330b523950d8b591959db896647278a"
+    },
+    {
+      "path": "payload/scripts/check_repo_hygiene.py",
+      "size": 8502,
+      "sha256": "58b9392b8e5dbb3507ae6b6a36f2d558ee0bb2c45da32163c8df91d49b948373"
+    },
+    {
+      "path": "payload/scripts/run_factor_lab.py",
+      "size": 3073,
+      "sha256": "a8542f48980a52edb6f59b276ef64dacf801aa48cf751fbd39165f9d30497476"
+    },
+    {
+      "path": "payload/src/lei_signal/__init__.py",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "payload/src/lei_signal/api/__init__.py",
+      "size": 133,
+      "sha256": "b16097092518d1f5877f6df5fe9568d594c8f44b479a46165ed1acd42d3dbe4d"
+    },
+    {
+      "path": "payload/src/lei_signal/api/labels.py",
+      "size": 7403,
+      "sha256": "d0e3f96e4265a4db77eeb759da8ab0baa748d00880b05a89a90d8bea3ac9291c"
+    },
+    {
+      "path": "payload/src/lei_signal/data/__init__.py",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "payload/src/lei_signal/data/cache.py",
+      "size": 5742,
+      "sha256": "908bc618c89e81f0bcc8306c2f7dc89b6cdd141ac13934d281fcab1abce60f11"
+    },
+    {
+      "path": "payload/src/lei_signal/data/providers.py",
+      "size": 62185,
+      "sha256": "69c7a09954bbf2c6c8b8a8d90474bbdce43be26b03cae8dc6993711718a3805c"
+    },
+    {
+      "path": "payload/src/lei_signal/data/symbols.py",
+      "size": 5124,
+      "sha256": "327441b67236b5a11a94baa984620c8e28a71c26d8b5c991a4bbb462104b1d88"
+    },
+    {
+      "path": "payload/src/lei_signal/data/validation.py",
+      "size": 5278,
+      "sha256": "18d221abbfea6879c980e324a1b346765bcf499ede5141ce3306e9c01106d62b"
+    },
+    {
+      "path": "payload/src/lei_signal/data_provenance.py",
+      "size": 27649,
+      "sha256": "3c5ac99a39feddf619e140c08df13251b6a785c17679bacb7638756a776c749a"
+    },
+    {
+      "path": "payload/src/lei_signal/domain/__init__.py",
+      "size": 901,
+      "sha256": "6607ab27da936dd7ce98fdf35bc5d0821936c682a5138ebd7bb48fd9b5d683e5"
+    },
+    {
+      "path": "payload/src/lei_signal/domain/canonical.py",
+      "size": 6941,
+      "sha256": "3e406f77dfa3f03c7ff4d2fe1989dd117a47e448d137d5ccce76d61864ee06a9"
+    },
+    {
+      "path": "payload/src/lei_signal/domain/rules_config.py",
+      "size": 2987,
+      "sha256": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031"
+    },
+    {
+      "path": "payload/src/lei_signal/domain/types.py",
+      "size": 8142,
+      "sha256": "88ea22c7100068d8be9e50a342e024fb18aadc7139409aeae71f3bc1719dffd9"
+    },
+    {
+      "path": "payload/src/lei_signal/features/__init__.py",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "payload/src/lei_signal/features/indicators.py",
+      "size": 6733,
+      "sha256": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26"
+    },
+    {
+      "path": "payload/src/lei_signal/features/pivots.py",
+      "size": 4222,
+      "sha256": "ce8421c864c76cccaa5259de704001b69e44febf5f8f1eedbdc72ae6848baa90"
+    },
+    {
+      "path": "payload/src/lei_signal/features/volume_profile.py",
+      "size": 5162,
+      "sha256": "f74272ebcbbf961601fa7b2bc945013afc37e55a5a50d0049630875c87a7cf9d"
+    },
+    {
+      "path": "payload/src/lei_signal/research/__init__.py",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "payload/src/lei_signal/research/a01_index_features.py",
+      "size": 14506,
+      "sha256": "387dbd556124b13a7acc5676006bb6c58436f159553c52d208d6d69c653f6177"
+    },
+    {
+      "path": "payload/src/lei_signal/research/a03_pullback_order.py",
+      "size": 12047,
+      "sha256": "251805ee0af6079d8f952c2149d7e6cd2b6dc69f2ddf672247e7d2fd25943585"
+    },
+    {
+      "path": "payload/src/lei_signal/research/candidate_preflight.py",
+      "size": 10132,
+      "sha256": "5b328590d115a2295b2406ba73caa0c460fe8646dfd0183eab284d830affa4df"
+    },
+    {
+      "path": "payload/src/lei_signal/research/classic_volatility_risk_information.py",
+      "size": 11716,
+      "sha256": "9e0df58350e0fa77b7bb446b5acef4f142ff52e569535d8df095261699f4e4a2"
+    },
+    {
+      "path": "payload/src/lei_signal/research/data_quality.py",
+      "size": 70867,
+      "sha256": "4496b0a0ea9e358ae22c5b6064801e4a9622bb5514ddce88393b6765d46b8c3d"
+    },
+    {
+      "path": "payload/src/lei_signal/research/data_snapshot.py",
+      "size": 40313,
+      "sha256": "748f75249190d89619b84498c7efe336f27f0a23e3cc0b3b5c3fff947393dc49"
+    },
+    {
+      "path": "payload/src/lei_signal/research/deduction_box_information.py",
+      "size": 13910,
+      "sha256": "3d62f32f3259aabd72bffd3c53c0bd56b6653145d403839cf64790ff55deb677"
+    },
+    {
+      "path": "payload/src/lei_signal/research/definitions.py",
+      "size": 26232,
+      "sha256": "84f7b9ba76f4704e81f4f4d0c1784e2ab1ad7e3aa225abeb4796fa10dcbfec94"
+    },
+    {
+      "path": "payload/src/lei_signal/research/double_ma_order_information.py",
+      "size": 14678,
+      "sha256": "909ed2c5effceb1bfb0f6d853352d49b3d3c3ec0d8fde2d46aab3754c89fc9ef"
+    },
+    {
+      "path": "payload/src/lei_signal/research/ema_only_wait_age_information.py",
+      "size": 13309,
+      "sha256": "a98a6eff6ba15fa210f28e71092dcef79a75d9ff310f055dc712b40f5bd0982e"
+    },
+    {
+      "path": "payload/src/lei_signal/research/ema_sma_waiting_path.py",
+      "size": 20501,
+      "sha256": "7d7c07b3383d975e849557ab8a4a6239c16940f7db4ad05b8a1ca65ee4db0c32"
+    },
+    {
+      "path": "payload/src/lei_signal/research/factor_lab/__init__.py",
+      "size": 747,
+      "sha256": "ea269601b6b4fa5f1bb70f2dff555aca5a7afa236babc8005a8b4e7fd2d036c4"
+    },
+    {
+      "path": "payload/src/lei_signal/research/factor_lab/benchmarks.py",
+      "size": 10177,
+      "sha256": "6a958bc94a605e52540fcda8b28b5781528ec1b61255ee747db17ad7b9313618"
+    },
+    {
+      "path": "payload/src/lei_signal/research/factor_lab/contracts.py",
+      "size": 6895,
+      "sha256": "d9ff0e864a8f4600c134972e9815acc2143f1b7227e17de570fed4901e0988bc"
+    },
+    {
+      "path": "payload/src/lei_signal/research/factor_runtime.py",
+      "size": 17787,
+      "sha256": "1f596f29aff27973ea55b55c49efd3c4c6fb1fdd200946a8618c272dad822579"
+    },
+    {
+      "path": "payload/src/lei_signal/research/input_preflight.py",
+      "size": 18885,
+      "sha256": "514fb1fa1819d145366365865b49159e6b77beaeb27f15a3bdd64fa024484e04"
+    },
+    {
+      "path": "payload/src/lei_signal/research/key_fluctuation_information.py",
+      "size": 18227,
+      "sha256": "f0c9f769ab608182813eb018ce97d5913cc3e6ff69841811b8757e5626ec1d9d"
+    },
+    {
+      "path": "payload/src/lei_signal/research/ma_cluster_information.py",
+      "size": 6086,
+      "sha256": "b3d14ed03b569e13bc199624deea5f3a0b00c89ed2be6f23839f546938921594"
+    },
+    {
+      "path": "payload/src/lei_signal/research/prior_top_dual_break_information.py",
+      "size": 12923,
+      "sha256": "12fd93959f043befef188f4ccdc5dc7e20486cdd91ba6dbec4f9caa7f6687189"
+    },
+    {
+      "path": "payload/src/lei_signal/research/profile_information.py",
+      "size": 14277,
+      "sha256": "4b5104d5bf3a789173e84d67e78d9c8cfce6a930205fe44b114e5a299d1854d9"
+    },
+    {
+      "path": "payload/src/lei_signal/research/provider_index_input.py",
+      "size": 10336,
+      "sha256": "5230882c5c45e48da4db590cb8950db9d37dd7c75d2498cc8ff828bf7cdc9006"
+    },
+    {
+      "path": "payload/src/lei_signal/research/pullback_layer_change_information.py",
+      "size": 19527,
+      "sha256": "d4f2e07ec9b4f19c45a5b26c6b360ca59e16b7988cb89bff2a710bee1de9b459"
+    },
+    {
+      "path": "payload/src/lei_signal/research/question_contract.py",
+      "size": 59798,
+      "sha256": "84bc945177310d619817895284b5d99011252659eb4af7596e887589fc9abc41"
+    },
+    {
+      "path": "payload/src/lei_signal/research/space_prior_target.py",
+      "size": 10607,
+      "sha256": "daebb885b6cc8a6d978c7b4075995c52bc6239c4fbd11fb07e3c1104c6fb20ef"
+    },
+    {
+      "path": "payload/src/lei_signal/research/symbol_identity.py",
+      "size": 10497,
+      "sha256": "8e47e252bc7a6061e93d34ec1195ba83e57fce43ff6be9542236c3a2e28c1269"
+    },
+    {
+      "path": "payload/src/lei_signal/research/top_invalidation_information.py",
+      "size": 14216,
+      "sha256": "3fab70a8892051d3e3aa6c7c8b3d4168ba3062ef193e9fd296cecc186eff36a5"
+    },
+    {
+      "path": "payload/src/lei_signal/research/top_structure_information.py",
+      "size": 15728,
+      "sha256": "5ce72eb21cc0d56208befd3e2dbb124792abbd3432288a8bf42c4fd42c341ad9"
+    },
+    {
+      "path": "payload/src/lei_signal/research/trading_calendar.py",
+      "size": 16645,
+      "sha256": "4651fa7d0e1e20aeaf3b40d9446f3ea76ec0eac037bbe965c018c3e5ccb6389e"
+    },
+    {
+      "path": "payload/src/lei_signal/research/trend_slope_change_information.py",
+      "size": 12236,
+      "sha256": "037b64c871881100dd408f4d24883cf37b8af2feb82d473959b46a525233fd15"
+    },
+    {
+      "path": "payload/src/lei_signal/research/tsfresh_price_information.py",
+      "size": 9238,
+      "sha256": "e90fa135099d60c8f712d9ba383343faeff1ccc0b75231f9df4550641edec146"
+    },
+    {
+      "path": "payload/src/lei_signal/research/volume_information.py",
+      "size": 15244,
+      "sha256": "e794f2fe131ff1e9e0fe49560dfbe463ce0d2244af0663b7769b02779d2d2570"
+    },
+    {
+      "path": "payload/src/lei_signal/research/workflow.py",
+      "size": 107464,
+      "sha256": "fea25ad9b5a5f6542547f3452e7765430b85146e8a9a16e515ce5879f40be4a5"
+    },
+    {
+      "path": "payload/src/lei_signal/research/workflow_descriptions.py",
+      "size": 6086,
+      "sha256": "4d2ae1f63729efb897c7804008b7b47fbe17f78fcb654336574fd32c08d6fe11"
+    },
+    {
+      "path": "payload/src/lei_signal/research/workflow_evaluation.py",
+      "size": 32517,
+      "sha256": "508459ca3964a55e1688fef345d6e667acba68141f8be8f04f1ea1c5f0018c1c"
+    },
+    {
+      "path": "payload/src/lei_signal/research/workflow_inputs.py",
+      "size": 22410,
+      "sha256": "12a97a54b6af579bb42f44f7c8dc4179cd14d24d92ed7b9f047e6d05f7e75f14"
+    },
+    {
+      "path": "payload/src/lei_signal/rules/__init__.py",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "payload/src/lei_signal/rules/clock_classifier.py",
+      "size": 5756,
+      "sha256": "3ce68b924292fdc5977df12a0f70ae3480db2d01d6bd3a9f4ba9845e5c2e84af"
+    },
+    {
+      "path": "payload/src/lei_signal/rules/resistance_b1.py",
+      "size": 3911,
+      "sha256": "dc221c6cc3fe7855184d35ae43246149083a0acf5e23b4067b38452c00431209"
+    },
+    {
+      "path": "payload/tests/unit/test_multiple_comparison.py",
+      "size": 6678,
+      "sha256": "622dd1ae57abcefe105b5d843d131b64b827ade955e6d215d03bd918c0568e61"
+    },
+    {
+      "path": "payload/tests/unit/test_research_property_checks.py",
+      "size": 5301,
+      "sha256": "4403aef9e8a2bdb0e2170494c1e75964233bf154956b9cbce1290e9facd06823"
+    },
+    {
+      "path": "payload/tests/unit/test_tsfresh_candidates.py",
+      "size": 6002,
+      "sha256": "7030e1488785947e49dfc286a7379af5f823275401dd51dfb5657bcba990d2e6"
+    },
+    {
+      "path": "payload/tests/unit/test_tsfresh_price_information.py",
+      "size": 5940,
+      "sha256": "b408e0550854e6b4fb94319d963a4e51a7ee6ac8bc030cbd760594f97e6f8c60"
+    },
+    {
+      "path": "requirements-recovery.txt",
+      "size": 122,
+      "sha256": "478c07cf774c9570de59857c522049e736757b687d084c346598641350fb22dd"
+    },
+    {
+      "path": "tools/restore.py",
+      "size": 3780,
+      "sha256": "e9283346fe52d63fdd7fafed740f9e6c431cfde655548bfe4a8d134cf292036d"
+    },
+    {
+      "path": "tools/seal.py",
+      "size": 1650,
+      "sha256": "b7577f160d6e827d95fe8c830c68eb843b65241f87474469989ca6ec3b8fd896"
+    },
+    {
+      "path": "tools/smoke.py",
+      "size": 3444,
+      "sha256": "ef89ef23c2a6959a1cdad1adfb2055c79391f291e7abb03e9c76b313fad38956"
+    }
+  ]
+}

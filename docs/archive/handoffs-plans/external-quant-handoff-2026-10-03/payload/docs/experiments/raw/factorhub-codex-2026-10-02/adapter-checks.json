@@ -1,0 +1,73 @@
+{
+  "passed": 25,
+  "checks": [
+    "five advertised tools",
+    "Codex config matches adapter tools",
+    "no POST tool advertised",
+    "direct POST tool rejected before credential access",
+    "missing credential produces explicit error",
+    "list_factors dispatch success",
+    "list_factors fixed HTTPS GET route",
+    "list_factors preserves query parameters",
+    "get_factor_scores dispatch success",
+    "get_factor_scores fixed HTTPS GET route",
+    "get_factor_scores preserves query parameters",
+    "get_factor_nav dispatch success",
+    "get_factor_nav fixed HTTPS GET route",
+    "get_factor_nav preserves query parameters",
+    "get_index_daily dispatch success",
+    "get_index_daily fixed HTTPS GET route",
+    "get_index_daily preserves query parameters",
+    "get_trade_dates dispatch success",
+    "get_trade_dates fixed HTTPS GET route",
+    "get_trade_dates preserves query parameters",
+    "429 classified without vendor exception-handler bug",
+    "real stdio initialize",
+    "real stdio list_tools contains only five queries",
+    "real stdio rejects unadvertised backtest",
+    "real stdio missing credential marked isError"
+  ],
+  "mock_requests": [
+    {
+      "method": "GET",
+      "host": "factorhub.cn",
+      "path": "/api/v1/factors",
+      "params": {
+        "page": "1",
+        "page_size": "2"
+      }
+    },
+    {
+      "method": "GET",
+      "host": "factorhub.cn",
+      "path": "/api/v1/factors/MOM001/scores",
+      "params": {}
+    },
+    {
+      "method": "GET",
+      "host": "factorhub.cn",
+      "path": "/api/v1/factors/MOM001/nav",
+      "params": {}
+    },
+    {
+      "method": "GET",
+      "host": "factorhub.cn",
+      "path": "/api/v1/market/index",
+      "params": {
+        "ts_code": "000300.SH",
+        "start_date": "20260921",
+        "end_date": "20260925"
+      }
+    },
+    {
+      "method": "GET",
+      "host": "factorhub.cn",
+      "path": "/api/v1/calendar/trade-dates",
+      "params": {
+        "start_date": "20260921",
+        "end_date": "20260925"
+      }
+    }
+  ],
+  "live_provider_queries": 0
+}

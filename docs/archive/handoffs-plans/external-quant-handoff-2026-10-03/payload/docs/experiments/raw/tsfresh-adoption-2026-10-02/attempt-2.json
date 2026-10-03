@@ -1,0 +1,93 @@
+{
+  "attempt": 2,
+  "status": "passed",
+  "bindings": {
+    "docs/experiments/raw/volume-information-2026-09-30/execution/panel.json": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+    "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94",
+    "docs/experiments/raw/volume-information-2026-09-30/source-recovery/qualification.json": "9d150d608a5e8a88d11021b96f5e2ec5443dddf14c1a98b4ddc2fb4b01bee5f2",
+    "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1"
+  },
+  "new_market_requests": 0,
+  "future_outcome_fits": 0,
+  "unit_tests": {
+    "returncode": 0,
+    "stdout": "..........................                                               [100%]\n26 passed in 0.98s\n",
+    "stderr": ""
+  },
+  "cli": {
+    "returncode": 0,
+    "stderr": ""
+  },
+  "independent_recalculation": [
+    {
+      "asset": "510300.SS",
+      "expected": {
+        "mean_abs_log_change20": 1.3738861877519848,
+        "return_autocorrelation20_lag1": -0.21413982714780988,
+        "ret20_pct": 3.10188989318001,
+        "vol20_annualized_pct": 25.46283530061164
+      },
+      "absolute_errors": {
+        "mean_abs_log_change20": 1.9984014443252818e-15,
+        "return_autocorrelation20_lag1": 4.440892098500626e-16,
+        "ret20_pct": 4.440892098500626e-15,
+        "vol20_annualized_pct": 1.0658141036401503e-14
+      }
+    },
+    {
+      "asset": "510050.SS",
+      "expected": {
+        "mean_abs_log_change20": 1.1219037689611202,
+        "return_autocorrelation20_lag1": -0.40627006579097713,
+        "ret20_pct": 3.8746630727762854,
+        "vol20_annualized_pct": 23.014354088708888
+      },
+      "absolute_errors": {
+        "mean_abs_log_change20": 1.1102230246251565e-15,
+        "return_autocorrelation20_lag1": 3.885780586188048e-16,
+        "ret20_pct": 1.199040866595169e-14,
+        "vol20_annualized_pct": 1.0658141036401503e-14
+      }
+    },
+    {
+      "asset": "510500.SS",
+      "expected": {
+        "mean_abs_log_change20": 1.5701793228560725,
+        "return_autocorrelation20_lag1": -0.10914825995519294,
+        "ret20_pct": 9.844683393070497,
+        "vol20_annualized_pct": 28.75511967137394
+      },
+      "absolute_errors": {
+        "mean_abs_log_change20": 6.661338147750939e-16,
+        "return_autocorrelation20_lag1": 2.040034807748725e-15,
+        "ret20_pct": 1.7763568394002505e-15,
+        "vol20_annualized_pct": 0.0
+      }
+    },
+    {
+      "asset": "588000.SS",
+      "expected": {
+        "mean_abs_log_change20": 2.731562457855637,
+        "return_autocorrelation20_lag1": 0.0037429658113784657,
+        "ret20_pct": 33.6374002280502,
+        "vol20_annualized_pct": 46.51364869398201
+      },
+      "absolute_errors": {
+        "mean_abs_log_change20": 4.440892098500626e-16,
+        "return_autocorrelation20_lag1": 1.5048726154098802e-16,
+        "ret20_pct": 1.4210854715202004e-14,
+        "vol20_annualized_pct": 0.0
+      }
+    }
+  ],
+  "panel_rows": 5348,
+  "calendar_dates": 1337,
+  "preview_assets": 4,
+  "elapsed_seconds": 2.711627666998538,
+  "tested_files": {
+    ".agents/skills/lei-quant-tools/scripts/tsfresh_candidates.py": "e728e5d769d44e7c1f35e2a672e3610701bab695115b1e30a833455fb1393673",
+    ".agents/skills/lei-quant-tools/scripts/tsfresh_calculators.py": "a3ac672ac4a2410cd2b27e0c440ab949dce6bc13c68aa3ccd8f8b2510f4dfeba",
+    ".agents/skills/lei-quant-tools/scripts/quant_tools.py": "be2f0456855f09d4403ec08ae41849578f3ef6abf0fa2b425ed2776b93e0576b",
+    "tests/unit/test_tsfresh_candidates.py": "7030e1488785947e49dfc286a7379af5f823275401dd51dfb5657bcba990d2e6"
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "question": "arch多方案共同比较能否补上本系统批量验证的偶然挑选检查，且不重复已有单候选日期分段比较？",
+  "decision_use": "决定限定采用只读辅助计算入口；不新增因子、不重训或改生产",
+  "mode": "research",
+  "scope": "工程适配与已存预测的只读复核；单一同基准比较族；不用结果选择窗口/模型",
+  "authorization": "下一步方向是啥？继续做，不要和其他任务codex的重复做了哈",
+  "strategy_sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    }
+  ],
+  "budgets": {
+    "source_requests": 6,
+    "engineering_batches": 4,
+    "real_fits": 0,
+    "execution_seconds": 3600
+  },
+  "actual_cost": {
+    "source_requests": 5,
+    "engineering_batches": 4,
+    "real_fits": 0,
+    "core_synthetic_resamplings": 3000,
+    "archive_demo_references": 2,
+    "initial_tests": 21,
+    "final_tests": 22,
+    "elapsed_seconds": 3565.764652
+  },
+  "closure": {
+    "execution": "completed",
+    "evidence": "supported_within_engineering_scope",
+    "completion_reason": "question_answered",
+    "production_authorized": false
+  },
+  "controller_owns": [
+    "manifest.json",
+    "sources.json",
+    "protocol.json",
+    "controller-review.md"
+  ],
+  "dedup": {
+    "read": [
+      "docs/ops/work-progress/README.md",
+      "docs/ops/work-progress/technical-factor-mainline.md",
+      "docs/ops/work-progress/technical-factor-sequence.md",
+      "docs/ops/work-progress/remote-core-review.md",
+      "docs/research/technical-semantic-evidence-map-2026-10-02.md",
+      "docs/experiments/research-tool-reuse-shortlist-2026-09-14.md",
+      "docs/experiments/external-increment-2026-10-02.md"
+    ],
+    "exclude": [
+      "EMA等待及语义组合",
+      "远端T2-T10/完整A/小时行情",
+      "经典Qlib定义",
+      "情绪/宽度/宏观",
+      "已封存tsfresh真实拟合"
+    ],
+    "remaining_risk": "只能核可见线程与仓库记录；其他设备未提交任务可能未呈现"
+  },
+  "started_at": "2026-10-02T22:49:58.142638+08:00",
+  "method_state": "Frozen protocol before new calculation; eight Python support modules copied under isolated namespace; no package installation",
+  "source_version": "arch8.0.0",
+  "dispatch": {
+    "executor": "/root/comparison_gap_review",
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium",
+    "stages": [
+      "gap-review",
+      "implementation",
+      "final-static-review"
+    ],
+    "state": "completed",
+    "controller_acceptance": "controller-review.md"
+  },
+  "source_limitations": [
+    "stable docs returned7.2.0; fixed8.0.0wheel source governs actual API",
+    "fullpackage needs unavailablestatsmodels/patsy; not installed",
+    "studentize switch has no normalization in checked SPA code; only explicitly unstudentized upper RealityCheck computation used",
+    "exact constant loss differences rejected to avoid zero strict-exceedance misleading pvalue"
+  ],
+  "repair": {
+    "reason": "Alternating nonconstant losses with fixed even circular blocks create zero resampled maximum distribution; upstream strict > gives p0 with zero mean improvement",
+    "probe": "degenerate-probe.json",
+    "owner": "controller after executor completion",
+    "real_fits": 0,
+    "budget": "original reserved batch4; no expansion"
+  },
+  "completed_at": "2026-10-02T23:49:23.907290+08:00",
+  "report": "docs/experiments/external-multiple-comparison-2026-10-02.md",
+  "real_factor_definitions_added": 0,
+  "cumulative_external_direction": {
+    "source_requests": 28,
+    "engineering_test_batches": 16,
+    "prior_requests": 23,
+    "prior_batches": 12
+  },
+  "git": {
+    "branch": "codex/factor-unit-research-20260915",
+    "baseline_sha": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
+    "new_task_commits": 0,
+    "pushed": false
+  },
+  "inputs": {
+    "scope": "prior_tsffresh saved predictions, already seen history; no source market updates",
+    "archive_fingerprints": "archive-demo-check.json"
+  },
+  "report_sha256": "0bf66080cdcfc4e1b7cb4b30509d2bd6291b66f6737304ddef52711316d5a627"
+}

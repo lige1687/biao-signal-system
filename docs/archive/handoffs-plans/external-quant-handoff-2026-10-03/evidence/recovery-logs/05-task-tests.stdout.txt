@@ -1,0 +1,125 @@
+................................................FFF.....                 [100%]
+=================================== FAILURES ===================================
+________ test_independent_21_close_hand_calculation_and_no_label_access ________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1162bc910>
+
+    def test_independent_21_close_hand_calculation_and_no_label_access(monkeypatch):
+        payload, contract = fixture()
+        from lei_signal.research import workflow_inputs
+        monkeypatch.setattr(workflow_inputs, "_label", lambda *a, **kw: pytest.fail("future label accessed"))
+>       rows = tsf.prepare_tsfresh_observations(payload, contract)["observations"]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_tsfresh_price_information.py:32: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/lei_signal/research/tsfresh_price_information.py:75: in prepare_tsfresh_observations
+    prepared = prepare_slope_observations(payload, _slope_contract(contract), compute_labels=compute_labels)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/lei_signal/research/trend_slope_change_information.py:139: in prepare_slope_observations
+    values = _segment_features([r for _, r in segment])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/lei_signal/research/trend_slope_change_information.py:79: in _segment_features
+    frame = compute_features(pd.DataFrame(segment))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/lei_signal/features/indicators.py:115: in compute_features
+    settings = config or indicator_config()
+                         ^^^^^^^^^^^^^^^^^^
+src/lei_signal/domain/rules_config.py:82: in indicator_config
+    return dict(load_ruleset(path).get("indicators") or {})
+                ^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = None
+
+    @functools.lru_cache(maxsize=4)
+    def load_ruleset(path: str | None = None) -> dict[str, Any]:
+        """加载并缓存规则账本。"""
+        config_path = Path(path) if path else _default_config_path()
+        if not config_path.exists():
+>           raise FileNotFoundError(f"规则账本缺失: {config_path}")
+E           FileNotFoundError: 规则账本缺失: /Users/yongbiaoli/Desktop/lei-signal-lab/.biao/external-quant-handoff-20261003/recovered/configs/rules.v2.yaml
+
+src/lei_signal/domain/rules_config.py:26: FileNotFoundError
+________ test_future_change_truncation_missing_reset_and_common_finite _________
+
+    def test_future_change_truncation_missing_reset_and_common_finite():
+        payload, contract = fixture(540)
+>       base = tsf.prepare_tsfresh_observations(payload, contract)["observations"]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_tsfresh_price_information.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/lei_signal/research/tsfresh_price_information.py:75: in prepare_tsfresh_observations
+    prepared = prepare_slope_observations(payload, _slope_contract(contract), compute_labels=compute_labels)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/lei_signal/research/trend_slope_change_information.py:139: in prepare_slope_observations
+    values = _segment_features([r for _, r in segment])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/lei_signal/research/trend_slope_change_information.py:79: in _segment_features
+    frame = compute_features(pd.DataFrame(segment))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/lei_signal/features/indicators.py:115: in compute_features
+    settings = config or indicator_config()
+                         ^^^^^^^^^^^^^^^^^^
+src/lei_signal/domain/rules_config.py:82: in indicator_config
+    return dict(load_ruleset(path).get("indicators") or {})
+                ^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = None
+
+    @functools.lru_cache(maxsize=4)
+    def load_ruleset(path: str | None = None) -> dict[str, Any]:
+        """加载并缓存规则账本。"""
+        config_path = Path(path) if path else _default_config_path()
+        if not config_path.exists():
+>           raise FileNotFoundError(f"规则账本缺失: {config_path}")
+E           FileNotFoundError: 规则账本缺失: /Users/yongbiaoli/Desktop/lei-signal-lab/.biao/external-quant-handoff-20261003/recovered/configs/rules.v2.yaml
+
+src/lei_signal/domain/rules_config.py:26: FileNotFoundError
+__________ test_constant_returns_remain_unknown_for_both_comparisons ___________
+
+    def test_constant_returns_remain_unknown_for_both_comparisons():
+        payload, contract = fixture()
+        for i, bar in enumerate(payload["bars"]):
+            c = 100 * math.exp(.001 * i)
+            bar.update(open=c, high=c + 1, low=c - 1, close=c)
+>       rows = tsf.prepare_tsfresh_observations(payload, contract)["observations"]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_tsfresh_price_information.py:76: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/lei_signal/research/tsfresh_price_information.py:75: in prepare_tsfresh_observations
+    prepared = prepare_slope_observations(payload, _slope_contract(contract), compute_labels=compute_labels)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/lei_signal/research/trend_slope_change_information.py:139: in prepare_slope_observations
+    values = _segment_features([r for _, r in segment])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/lei_signal/research/trend_slope_change_information.py:79: in _segment_features
+    frame = compute_features(pd.DataFrame(segment))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/lei_signal/features/indicators.py:115: in compute_features
+    settings = config or indicator_config()
+                         ^^^^^^^^^^^^^^^^^^
+src/lei_signal/domain/rules_config.py:82: in indicator_config
+    return dict(load_ruleset(path).get("indicators") or {})
+                ^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = None
+
+    @functools.lru_cache(maxsize=4)
+    def load_ruleset(path: str | None = None) -> dict[str, Any]:
+        """加载并缓存规则账本。"""
+        config_path = Path(path) if path else _default_config_path()
+        if not config_path.exists():
+>           raise FileNotFoundError(f"规则账本缺失: {config_path}")
+E           FileNotFoundError: 规则账本缺失: /Users/yongbiaoli/Desktop/lei-signal-lab/.biao/external-quant-handoff-20261003/recovered/configs/rules.v2.yaml
+
+src/lei_signal/domain/rules_config.py:26: FileNotFoundError
+=========================== short test summary info ============================
+FAILED tests/unit/test_tsfresh_price_information.py::test_independent_21_close_hand_calculation_and_no_label_access
+FAILED tests/unit/test_tsfresh_price_information.py::test_future_change_truncation_missing_reset_and_common_finite
+FAILED tests/unit/test_tsfresh_price_information.py::test_constant_returns_remain_unknown_for_both_comparisons
+3 failed, 53 passed in 57.54s
