@@ -7,7 +7,7 @@
 - 仓库：https://github.com/lige1687/biao-signal-system ；工作分支 codex/remote-core-acceptance-20261002。
 - 基础完整 commit：639ad8dbd3d2aa72f824b626b86149c466c132a4；原远端 Opus 5.5 交付4155b4db7ccd14674eff2e29dfaf102d2ac3e5f9。
 - 最近已推送成果完整 commit：b149a02db84522937281a09df72001b046e7a03e（已核 ls-remote 一致）；实质研究前检查0e4f3f4213ecb60a2d27d5147e8b440237946311。
-- 实际读取规则：coordination/lei@b172008890b39e912c8f1d0cfb9125d1e414a97f 的 COORDINATION.md 1.0；本轮推前 fetch 未变化。适用本工作分支 AGENTS.md、docs/research/current-standards.json 和原冻结版本；不移植旧实验到新合同。
+- 实际读取规则：coordination/lei@b172008890b39e912c8f1d0cfb9125d1e414a97f 的 COORDINATION.md 1.0；后续已读取37226ce542433dde4eef08c51696e8c1f12d0f2b的最新协调任务；规则正文不变。适用本工作分支 AGENTS.md、docs/research/current-standards.json 和原冻结版本；不移植旧实验到新合同。
 
 ## 原始目标、最新要求和验收
 
@@ -36,7 +36,7 @@
 
 ## 冲突核对与避让
 
-本轮读 b1720088 下全部已登记任务：lei-coordination-bootstrap completed，technical-factor-sequence active（抵扣路径形状、只读输入资格；C01/Q01已封存）。与本任务黑色阶段重置/返修验收没有已登记同题冲突。共享研究工具均只读；将来需修改先明确实现者与核验者。未登记任务状态未知，不能凭缺记录抢占。
+本轮先读b1720088两份记录，推送竞争后追加读取37226ce542433dde4eef08c51696e8c1f12d0f2b下全部四份记录：lei-coordination-bootstrap completed；technical-factor-sequence active（抵扣路径形状）；market-observation active（CPI说明/日期来源）；lei-technical-reader-research blocked（只读阅读页、EMA等待已结案，2B歧义待分工）。阅读页记录中的“push git+oneapi+任务验证验收”四项规则/小时资料对应本验收历史线，当前只推进转黑准备；不认领2B、抵扣路径、CPI/UI或旧账户。与本任务黑色阶段重置/返修验收没有已登记同题冲突。共享研究工具均只读；将来需修改先明确实现者与核验者。未登记任务状态未知，不能凭缺记录抢占。
 
 其他AI暂避同时改写本任务记录、两份旧进度、新black-reset草案/输出；避免重做T2—T10独立验收及504逐日审计。任何重叠先协商，实现与独立核验可分工；此记录不是排他锁。F1完成度、F2事件记录、T1历史目标的旧负责线不被本任务接管；其当前身份仍以最新登记为准。
 
@@ -57,7 +57,7 @@
 
 ## 本轮实际检查与封存限制
 
-通过：remote目标一致；规则及两份任务读回；工作分支准确SHA已核；AGENTS旧文完整保留；仅3份本任务文档准确暂存；敏感形态扫描未命中；diff --check及工作分支目录卫生全绿。两分支均无 .github/workflows，工作目录无活动Git hooks；未发现受版本管理的生产/付费触发器，外部平台集成未知，本轮不调用部署/计算。未运行：任何大实验、训练、完整回测、生产、Linux/Windows复现（文档同步不要求重跑）。
+通过：remote目标一致；规则及四份最新任务读回；工作分支准确SHA已核；AGENTS旧文完整保留；仅3份本任务文档准确暂存；敏感形态扫描未命中；diff --check及工作分支目录卫生全绿。两分支均无 .github/workflows，工作目录无活动Git hooks；未发现受版本管理的生产/付费触发器，外部平台集成未知，本轮不调用部署/计算。未运行：任何大实验、训练、完整回测、生产、Linux/Windows复现（文档同步不要求重跑）。
 
 不要重复16验收/504母体、A01/A02/A03、旧绿色黑色研究、旧48账户、技术顺序线C01/Q01和已结案同用途问题。T7 30/13仅资格计数，不是逐日收益；T6少8.5%—11%仍是假设估算；T9/T10演练不代表真实准入；T2整组研究生命周期开关未批准为正式默认。只有新证据、适用前提变化、明确纠错或人类要求才重开，并记录理由。
 
@@ -66,3 +66,5 @@
 下次先fetch coordination/lei，读此文件和新增相关任务；核准确成果commit、输入SHA与当前绑定，再继续单问题资格步骤。历史handoff按73592f5b核锁，最新所有权以此记录及最新用户指令为准。权限不会随旧包自动继承。
 
 本版首次接入统一协作，保持稳定remote-core-review身份、完整版本/证据、窄范围/未登记风险及失败预算；没有接管、关闭原任务或启动重复计算。本任务记录自身完整commit用git log -1 --format=%H -- docs/coordination/tasks/remote-core-review.md定位，不无限补交自指SHA。推后须读回核验后才称已同步。
+
+阶段同步异常：第一次普通推送因其他任务先更新远端而non-fast-forward拒绝，未同步成功。已fetch并审阅新增三个任务文件/更新，规则未改；在独立干净协调目录仅将本任务尚未发布提交整合到最新远端，不强推、不覆盖他人文件。最新更新时间：2026-10-03T14:08:24.760588+08:00。再次推送后需核准确SHA和文件字节。
