@@ -42,7 +42,9 @@
 | ETF份额、申赎、产品成本 | 只有部分官方定期报告实例 | 未发现统一观察卡 | 逐日份额、价差、折溢价、跟踪差异、费用与集中度是产品维度缺口 |
 | 新闻与事件 | 有资讯流 | 有资讯流 | 未确认统一的未来事件日历、预期/实际/前值/修订、产品关联与盘后时点 |
 
-主要源码：[观察卡](../../src/lei_signal/fundamentals/observations.py)、[基本面来源](../../src/lei_signal/fundamentals/sources.py)、[基本面服务](../../src/lei_signal/fundamentals/service.py)、[情绪背景](../../src/lei_signal/market_context/market_mood.py)、[情绪页面](../../web/src/pages/SentimentPage.tsx)、[基本面页面](../../web/src/pages/FundamentalsPage.tsx)、[新闻页面](../../web/src/pages/NewsPage.tsx)。资料限定与旧问题沿用[基本面扩展审查](fundamentals-expansion-review-2026-10-02.md)和[市场观察接续报告](market-observation-continuation-2026-10-02.md)。
+主要源码：[观察卡](https://github.com/lige1687/biao-signal-system/blob/eb8dd780212e9dcd4e3a12f59b2ad55c84478e83/src/lei_signal/fundamentals/observations.py)、[基本面来源](https://github.com/lige1687/biao-signal-system/blob/eb8dd780212e9dcd4e3a12f59b2ad55c84478e83/src/lei_signal/fundamentals/sources.py)、[基本面服务](https://github.com/lige1687/biao-signal-system/blob/eb8dd780212e9dcd4e3a12f59b2ad55c84478e83/src/lei_signal/fundamentals/service.py)、[情绪背景](https://github.com/lige1687/biao-signal-system/blob/eb8dd780212e9dcd4e3a12f59b2ad55c84478e83/src/lei_signal/market_context/market_mood.py)、[情绪页面](https://github.com/lige1687/biao-signal-system/blob/eb8dd780212e9dcd4e3a12f59b2ad55c84478e83/web/src/pages/SentimentPage.tsx)、[基本面页面](https://github.com/lige1687/biao-signal-system/blob/eb8dd780212e9dcd4e3a12f59b2ad55c84478e83/web/src/pages/FundamentalsPage.tsx)、[新闻页面](https://github.com/lige1687/biao-signal-system/blob/eb8dd780212e9dcd4e3a12f59b2ad55c84478e83/web/src/pages/NewsPage.tsx)。资料限定与旧问题沿用基本面扩展审查（仅本地原件：`docs/experiments/fundamentals-expansion-review-2026-10-02.md`）和市场观察接续报告（仅本地原件：`docs/experiments/market-observation-continuation-2026-10-02.md`）。
+
+证据版本说明（2026-10-03补记）：上列远端链接使用负责人的准确提交。`sources.py`与`FundamentalsPage.tsx`的已发布版本不同于本轮审查快照，链接仅供对照，不能当原件复现；原审查字节仍仅本地。两份标“仅本地”的审查报告在本次核对的成果分支中未找到，不以同主题报告替代。全部13项原引用的版本、SHA256和缺口见[引用索引](raw/investor-observation-map-2026-10-02/source-link-index.json)。
 
 ## 3. 专业投资观察清单：50组，按问题组织
 
@@ -116,7 +118,7 @@
 | 34 | A：社融/贷款与信用结构；美：银行贷款标准/信贷增长 | 月/季；实体融资 | 分政府、居民、企业及存量/新增；不叫“流入股市的钱” | 中国社融已有提案，其他待核 |
 | 35 | A/美：住房许可/开工/销售/库存；商品、汇率和跨资产相对表现 | 日/月；经济与成本背景 | 供给与需求分开；铜金比、油金比还受供给、美元及报价单位影响 | 已有部分与旧待办，不重复接入 |
 
-[芝加哥联储NFCI](https://www.chicagofed.org/research/data/nfci/current-data)提供周度综合金融条件；它的组成与已看资料部分重合。宏观各原始序列的资格沿用[已核来源报告](fundamentals-series-readiness-2026-10-02.md)，本轮不声称29、34等全部新候选已查通官方接口。机构确实会把盈利、利率和风险事件一起讨论，可见[BlackRock周报](https://www.blackrock.com/us/individual/insights/blackrock-investment-institute/weekly-commentary)；这只说明一种专业观察框架，不代表其观点适用于本系统或本轮即时行情。
+[芝加哥联储NFCI](https://www.chicagofed.org/research/data/nfci/current-data)提供周度综合金融条件；它的组成与已看资料部分重合。宏观各原始序列的资格沿用[已核来源报告](https://github.com/lige1687/biao-signal-system/blob/eb8dd780212e9dcd4e3a12f59b2ad55c84478e83/docs/experiments/fundamentals-series-readiness-2026-10-02.md)，本轮不声称29、34等全部新候选已查通官方接口。机构确实会把盈利、利率和风险事件一起讨论，可见[BlackRock周报](https://www.blackrock.com/us/individual/insights/blackrock-investment-institute/weekly-commentary)；这只说明一种专业观察框架，不代表其观点适用于本系统或本轮即时行情。
 
 ### 3.6 贵不贵、赚不赚钱、利润是不是现金
 
@@ -215,7 +217,7 @@ SEC明确建议ETF投资者查看净值、折溢价、持仓、买卖价差和�
 
 本轮独立补充的是**观察地图和资料缺口**。最优先的顺序是：已有来源与日期修复 → ETF产品成本/事件日历/美股融资缺口 → 盈利质量及分类持仓 → 进阶估算。这个顺序按信息可靠性和实际使用价值排列，不按未经检验的收益潜力排名。
 
-聊天归属依据2026-10-02清单及进度文件。`active`、`idle`或未加载都不是研究完整性的证据；本轮没有向其他聊天发消息、改变其状态、代替其继续研究。情绪聊天最新交付为AAII20周平均研究，具体结果沿[原报告](sentiment-aaii-background-2026-10-02.md)保留，不把其有限改善解释为稳定帮助。
+聊天归属依据2026-10-02清单及进度文件。`active`、`idle`或未加载都不是研究完整性的证据；本轮没有向其他聊天发消息、改变其状态、代替其继续研究。情绪聊天最新交付为AAII20周平均研究，具体结果沿[原报告](https://github.com/lige1687/biao-signal-system/blob/d53497de0accff778d0db96c010c30078e5b54d9/docs/experiments/sentiment-aaii-background-2026-10-02.md)保留，不把其有限改善解释为稳定帮助。
 
 ## 8. 本轮新增了什么证据，没有新增什么
 
@@ -241,6 +243,8 @@ SEC明确建议ETF投资者查看净值、折溢价、持仓、买卖价差和�
 正文链接为本轮一手入口或明确引用的旧归档。子代理主要核搜索结果与官方说明摘录；SEC ETF/Vanguard正文已读取；J.P. Morgan正文提取有限；BlackRock正文返回较长，使用只限其公开框架。投保基金持续发布频率、深交所完整对账、ETF日频份额、盈利预测历史版本、所有未来事件日期尚未核实。详细覆盖与来源状态见同目录附件，不能把链接存在当成API验收。
 
 本轮只读检索默认仓库外系统待升级数据库，未找到同名观察地图具体目标；相关情绪、宽度、价值质量目标已存在。新增地图登记稿单独保存，未经仓库外写入确认不执行。当时未提交、推送、合并或改动其他任务研究文件；2026-10-03后续用户已授权本任务安全成果同步，最新状态见[持续进展](../progress/investor-observation-map.md)。
+
+证据入口修订记录：2026-10-03在原任务继续维护阶段，仅修复仓库引用及说明材料限制；主报告修订前版本为`5ad8672f8907c85d0cd2162583450c75ff1f2373`。50组指标表、事件、阈值/组合读法与科学结论保持原内容，不改原冻结交接包或原输入。此阶段没有新增市场资料检索、计算或收益证据。
 
 ## ARCHIVE
 

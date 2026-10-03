@@ -1,0 +1,408 @@
+{
+  "schema_version": 1,
+  "task_id": "investor-observation-map",
+  "checked_at": "2026-10-03T15:15:22.064083+08:00",
+  "report_parent": "5ad8672f8907c85d0cd2162583450c75ff1f2373",
+  "report_original_sha256": "66d2c48367fed5a8d59aa17e0c186373e7157d6e9894d350c5f544fa3b12bf52",
+  "coordination_rule_commit": "15b3e4e0edd878c3e84ef30482d108e492563dbd",
+  "before": {
+    "unique_relative_references": 13,
+    "same_branch_exists": 8,
+    "same_branch_missing": 5
+  },
+  "after_original_references": {
+    "exact_snapshot": 7,
+    "published_related_version": 2,
+    "local_only": 2,
+    "task_metadata": 2
+  },
+  "owner_branch_refs_verified": {
+    "task/market-observation-progress": "eb8dd780212e9dcd4e3a12f59b2ad55c84478e83",
+    "task/sentiment-factor-progress": "d53497de0accff778d0db96c010c30078e5b54d9"
+  },
+  "scope": "Git repository file reachability/content versions only, not current market-source qualification or investment effectiveness",
+  "rows": [
+    {
+      "label": "观察卡",
+      "original_link": "../../src/lei_signal/fundamentals/observations.py",
+      "path": "src/lei_signal/fundamentals/observations.py",
+      "captured_sha256": "5859c5aed9e43a1e522f7c39fb270c0f996bdf486ce826a98c8cc957d8c2bbc7",
+      "published_versions": [
+        {
+          "owner": "market-observation",
+          "commit": "eb8dd780212e9dcd4e3a12f59b2ad55c84478e83",
+          "sha256": "5859c5aed9e43a1e522f7c39fb270c0f996bdf486ce826a98c8cc957d8c2bbc7",
+          "bytes": 13479,
+          "same_as_capture": true
+        }
+      ],
+      "reference_role": "exact_snapshot",
+      "selected_version": {
+        "owner": "market-observation",
+        "commit": "eb8dd780212e9dcd4e3a12f59b2ad55c84478e83",
+        "sha256": "5859c5aed9e43a1e522f7c39fb270c0f996bdf486ce826a98c8cc957d8c2bbc7",
+        "bytes": 13479,
+        "same_as_capture": true
+      },
+      "published_link": "https://github.com/lige1687/biao-signal-system/blob/eb8dd780212e9dcd4e3a12f59b2ad55c84478e83/src/lei_signal/fundamentals/observations.py",
+      "note": "Published bytes equal the original coverage-audit snapshot."
+    },
+    {
+      "label": "基本面来源",
+      "original_link": "../../src/lei_signal/fundamentals/sources.py",
+      "path": "src/lei_signal/fundamentals/sources.py",
+      "captured_sha256": "7d328d3e91b7d7b2354b4705e69e5de8129098e7957017b2d5998410c309ac17",
+      "published_versions": [
+        {
+          "owner": "map",
+          "commit": "5ad8672f8907c85d0cd2162583450c75ff1f2373",
+          "sha256": "2b4814d213309f9ca30ed7cb283939e952db2b60d4f30a996227015a4be5948c",
+          "bytes": 61193,
+          "same_as_capture": false
+        },
+        {
+          "owner": "market-observation",
+          "commit": "eb8dd780212e9dcd4e3a12f59b2ad55c84478e83",
+          "sha256": "771e182adbe583413d75c826ffa6b54bd985923f02ab45ee079bd3425375e99c",
+          "bytes": 62513,
+          "same_as_capture": false
+        },
+        {
+          "owner": "sentiment-factor-research",
+          "commit": "d53497de0accff778d0db96c010c30078e5b54d9",
+          "sha256": "771e182adbe583413d75c826ffa6b54bd985923f02ab45ee079bd3425375e99c",
+          "bytes": 62513,
+          "same_as_capture": false
+        }
+      ],
+      "reference_role": "published_related_version",
+      "selected_version": {
+        "owner": "market-observation",
+        "commit": "eb8dd780212e9dcd4e3a12f59b2ad55c84478e83",
+        "sha256": "771e182adbe583413d75c826ffa6b54bd985923f02ab45ee079bd3425375e99c",
+        "bytes": 62513,
+        "same_as_capture": false
+      },
+      "published_link": "https://github.com/lige1687/biao-signal-system/blob/eb8dd780212e9dcd4e3a12f59b2ad55c84478e83/src/lei_signal/fundamentals/sources.py",
+      "note": "Published related version differs from the original audit snapshot; it cannot reproduce the old audit by itself."
+    },
+    {
+      "label": "基本面服务",
+      "original_link": "../../src/lei_signal/fundamentals/service.py",
+      "path": "src/lei_signal/fundamentals/service.py",
+      "captured_sha256": "f0a596e6c3f4f116da54c424060ac947c9e0a729eeb27608d77789b597e6fe23",
+      "published_versions": [
+        {
+          "owner": "map",
+          "commit": "5ad8672f8907c85d0cd2162583450c75ff1f2373",
+          "sha256": "5312ef8922d8d95f9180808e8aa01ed3b05193606f1bb5925a64561dcf4ddc16",
+          "bytes": 19934,
+          "same_as_capture": false
+        },
+        {
+          "owner": "market-observation",
+          "commit": "eb8dd780212e9dcd4e3a12f59b2ad55c84478e83",
+          "sha256": "f0a596e6c3f4f116da54c424060ac947c9e0a729eeb27608d77789b597e6fe23",
+          "bytes": 20304,
+          "same_as_capture": true
+        },
+        {
+          "owner": "sentiment-factor-research",
+          "commit": "d53497de0accff778d0db96c010c30078e5b54d9",
+          "sha256": "5312ef8922d8d95f9180808e8aa01ed3b05193606f1bb5925a64561dcf4ddc16",
+          "bytes": 19934,
+          "same_as_capture": false
+        }
+      ],
+      "reference_role": "exact_snapshot",
+      "selected_version": {
+        "owner": "market-observation",
+        "commit": "eb8dd780212e9dcd4e3a12f59b2ad55c84478e83",
+        "sha256": "f0a596e6c3f4f116da54c424060ac947c9e0a729eeb27608d77789b597e6fe23",
+        "bytes": 20304,
+        "same_as_capture": true
+      },
+      "published_link": "https://github.com/lige1687/biao-signal-system/blob/eb8dd780212e9dcd4e3a12f59b2ad55c84478e83/src/lei_signal/fundamentals/service.py",
+      "note": "Published bytes equal the original coverage-audit snapshot."
+    },
+    {
+      "label": "情绪背景",
+      "original_link": "../../src/lei_signal/market_context/market_mood.py",
+      "path": "src/lei_signal/market_context/market_mood.py",
+      "captured_sha256": "2bb7a62507bb5862b2d37ad4018a15f40046b293ba067f2c394011526a254728",
+      "published_versions": [
+        {
+          "owner": "map",
+          "commit": "5ad8672f8907c85d0cd2162583450c75ff1f2373",
+          "sha256": "d5906e7bdaa265ced90417c84c8e23e8411ccc43c0eb00cc30b56999df4bdc78",
+          "bytes": 36198,
+          "same_as_capture": false
+        },
+        {
+          "owner": "market-observation",
+          "commit": "eb8dd780212e9dcd4e3a12f59b2ad55c84478e83",
+          "sha256": "2bb7a62507bb5862b2d37ad4018a15f40046b293ba067f2c394011526a254728",
+          "bytes": 35571,
+          "same_as_capture": true
+        },
+        {
+          "owner": "sentiment-factor-research",
+          "commit": "d53497de0accff778d0db96c010c30078e5b54d9",
+          "sha256": "8acd5b146b23fb512be4ea26059c9cfffc710d37803b61cd3137d230707c76ec",
+          "bytes": 36984,
+          "same_as_capture": false
+        }
+      ],
+      "reference_role": "exact_snapshot",
+      "selected_version": {
+        "owner": "market-observation",
+        "commit": "eb8dd780212e9dcd4e3a12f59b2ad55c84478e83",
+        "sha256": "2bb7a62507bb5862b2d37ad4018a15f40046b293ba067f2c394011526a254728",
+        "bytes": 35571,
+        "same_as_capture": true
+      },
+      "published_link": "https://github.com/lige1687/biao-signal-system/blob/eb8dd780212e9dcd4e3a12f59b2ad55c84478e83/src/lei_signal/market_context/market_mood.py",
+      "note": "Published bytes equal the original coverage-audit snapshot."
+    },
+    {
+      "label": "情绪页面",
+      "original_link": "../../web/src/pages/SentimentPage.tsx",
+      "path": "web/src/pages/SentimentPage.tsx",
+      "captured_sha256": "d51e47999bf84f240706808097e091054ccff6c9752f3edafd339ecb028f9ddd",
+      "published_versions": [
+        {
+          "owner": "map",
+          "commit": "5ad8672f8907c85d0cd2162583450c75ff1f2373",
+          "sha256": "08f0d6bc23c4a1d3b89500f14eb633e8009405b63cf35afb1d4862a20cec536e",
+          "bytes": 23415,
+          "same_as_capture": false
+        },
+        {
+          "owner": "market-observation",
+          "commit": "eb8dd780212e9dcd4e3a12f59b2ad55c84478e83",
+          "sha256": "d51e47999bf84f240706808097e091054ccff6c9752f3edafd339ecb028f9ddd",
+          "bytes": 24020,
+          "same_as_capture": true
+        },
+        {
+          "owner": "sentiment-factor-research",
+          "commit": "d53497de0accff778d0db96c010c30078e5b54d9",
+          "sha256": "08f0d6bc23c4a1d3b89500f14eb633e8009405b63cf35afb1d4862a20cec536e",
+          "bytes": 23415,
+          "same_as_capture": false
+        }
+      ],
+      "reference_role": "exact_snapshot",
+      "selected_version": {
+        "owner": "market-observation",
+        "commit": "eb8dd780212e9dcd4e3a12f59b2ad55c84478e83",
+        "sha256": "d51e47999bf84f240706808097e091054ccff6c9752f3edafd339ecb028f9ddd",
+        "bytes": 24020,
+        "same_as_capture": true
+      },
+      "published_link": "https://github.com/lige1687/biao-signal-system/blob/eb8dd780212e9dcd4e3a12f59b2ad55c84478e83/web/src/pages/SentimentPage.tsx",
+      "note": "Published bytes equal the original coverage-audit snapshot."
+    },
+    {
+      "label": "基本面页面",
+      "original_link": "../../web/src/pages/FundamentalsPage.tsx",
+      "path": "web/src/pages/FundamentalsPage.tsx",
+      "captured_sha256": "a56ed25549ccdd79895ba6817e0392533790e2441f7b5fe7a386935eef4aba33",
+      "published_versions": [
+        {
+          "owner": "map",
+          "commit": "5ad8672f8907c85d0cd2162583450c75ff1f2373",
+          "sha256": "e763694e1ca03bc4c2ef99e9876ba452768b99329ad0f88c12f47aaf27d8dd4e",
+          "bytes": 89642,
+          "same_as_capture": false
+        },
+        {
+          "owner": "market-observation",
+          "commit": "eb8dd780212e9dcd4e3a12f59b2ad55c84478e83",
+          "sha256": "ee1ed2d15c95cd722f4de279bbc921a89f3ecd49198985df69780fe641c4ca06",
+          "bytes": 92373,
+          "same_as_capture": false
+        },
+        {
+          "owner": "sentiment-factor-research",
+          "commit": "d53497de0accff778d0db96c010c30078e5b54d9",
+          "sha256": "3b1539a44d23223c003bb809f2702e4ddd093f24ca392afd0a8a7aaba0ba73ca",
+          "bytes": 89639,
+          "same_as_capture": false
+        }
+      ],
+      "reference_role": "published_related_version",
+      "selected_version": {
+        "owner": "market-observation",
+        "commit": "eb8dd780212e9dcd4e3a12f59b2ad55c84478e83",
+        "sha256": "ee1ed2d15c95cd722f4de279bbc921a89f3ecd49198985df69780fe641c4ca06",
+        "bytes": 92373,
+        "same_as_capture": false
+      },
+      "published_link": "https://github.com/lige1687/biao-signal-system/blob/eb8dd780212e9dcd4e3a12f59b2ad55c84478e83/web/src/pages/FundamentalsPage.tsx",
+      "note": "Published related version differs from the original audit snapshot; it cannot reproduce the old audit by itself."
+    },
+    {
+      "label": "新闻页面",
+      "original_link": "../../web/src/pages/NewsPage.tsx",
+      "path": "web/src/pages/NewsPage.tsx",
+      "captured_sha256": "147646eb64e11093adbbeba097128193c5403475bfc1594b7f6195cf5af127ca",
+      "published_versions": [
+        {
+          "owner": "map",
+          "commit": "5ad8672f8907c85d0cd2162583450c75ff1f2373",
+          "sha256": "61ecc67eb3cf31ba0e652f39a6305000e31f75ae27960cdb83e8fe52219e8074",
+          "bytes": 28921,
+          "same_as_capture": false
+        },
+        {
+          "owner": "market-observation",
+          "commit": "eb8dd780212e9dcd4e3a12f59b2ad55c84478e83",
+          "sha256": "147646eb64e11093adbbeba097128193c5403475bfc1594b7f6195cf5af127ca",
+          "bytes": 29333,
+          "same_as_capture": true
+        },
+        {
+          "owner": "sentiment-factor-research",
+          "commit": "d53497de0accff778d0db96c010c30078e5b54d9",
+          "sha256": "61ecc67eb3cf31ba0e652f39a6305000e31f75ae27960cdb83e8fe52219e8074",
+          "bytes": 28921,
+          "same_as_capture": false
+        }
+      ],
+      "reference_role": "exact_snapshot",
+      "selected_version": {
+        "owner": "market-observation",
+        "commit": "eb8dd780212e9dcd4e3a12f59b2ad55c84478e83",
+        "sha256": "147646eb64e11093adbbeba097128193c5403475bfc1594b7f6195cf5af127ca",
+        "bytes": 29333,
+        "same_as_capture": true
+      },
+      "published_link": "https://github.com/lige1687/biao-signal-system/blob/eb8dd780212e9dcd4e3a12f59b2ad55c84478e83/web/src/pages/NewsPage.tsx",
+      "note": "Published bytes equal the original coverage-audit snapshot."
+    },
+    {
+      "label": "基本面扩展审查",
+      "original_link": "fundamentals-expansion-review-2026-10-02.md",
+      "path": "docs/experiments/fundamentals-expansion-review-2026-10-02.md",
+      "captured_sha256": "e263972a5c80ec8847c93951a6e6907dcbcd6831ee2ea887cbee034f62ad455e",
+      "published_versions": [],
+      "reference_role": "local_only",
+      "selected_version": null,
+      "published_link": null,
+      "note": "Original only local within checked owner branches; do not substitute a similarly named/themed report or upload the original without permission."
+    },
+    {
+      "label": "市场观察接续报告",
+      "original_link": "market-observation-continuation-2026-10-02.md",
+      "path": "docs/experiments/market-observation-continuation-2026-10-02.md",
+      "captured_sha256": "2d23bb164ed130d5fe70635b8a19dfe9eea09f8fe75fc54363242acebba9adbb",
+      "published_versions": [],
+      "reference_role": "local_only",
+      "selected_version": null,
+      "published_link": null,
+      "note": "Original only local within checked owner branches; do not substitute a similarly named/themed report or upload the original without permission."
+    },
+    {
+      "label": "已核来源报告",
+      "original_link": "fundamentals-series-readiness-2026-10-02.md",
+      "path": "docs/experiments/fundamentals-series-readiness-2026-10-02.md",
+      "captured_sha256": "10e6ccc30aabe868a513fcd5feca5e5b6a636b90d8eed62558c5846c3f738412",
+      "published_versions": [
+        {
+          "owner": "market-observation",
+          "commit": "eb8dd780212e9dcd4e3a12f59b2ad55c84478e83",
+          "sha256": "10e6ccc30aabe868a513fcd5feca5e5b6a636b90d8eed62558c5846c3f738412",
+          "bytes": 8559,
+          "same_as_capture": true
+        }
+      ],
+      "reference_role": "exact_snapshot",
+      "selected_version": {
+        "owner": "market-observation",
+        "commit": "eb8dd780212e9dcd4e3a12f59b2ad55c84478e83",
+        "sha256": "10e6ccc30aabe868a513fcd5feca5e5b6a636b90d8eed62558c5846c3f738412",
+        "bytes": 8559,
+        "same_as_capture": true
+      },
+      "published_link": "https://github.com/lige1687/biao-signal-system/blob/eb8dd780212e9dcd4e3a12f59b2ad55c84478e83/docs/experiments/fundamentals-series-readiness-2026-10-02.md",
+      "note": "Published bytes equal the original coverage-audit snapshot."
+    },
+    {
+      "label": "原报告",
+      "original_link": "sentiment-aaii-background-2026-10-02.md",
+      "path": "docs/experiments/sentiment-aaii-background-2026-10-02.md",
+      "captured_sha256": "5c38d47e676a3c5e87446a98c0e3dc5a13c787482b8789bf1e9f11e5b126f941",
+      "published_versions": [
+        {
+          "owner": "sentiment-factor-research",
+          "commit": "d53497de0accff778d0db96c010c30078e5b54d9",
+          "sha256": "5c38d47e676a3c5e87446a98c0e3dc5a13c787482b8789bf1e9f11e5b126f941",
+          "bytes": 17322,
+          "same_as_capture": true
+        }
+      ],
+      "reference_role": "exact_snapshot",
+      "selected_version": {
+        "owner": "sentiment-factor-research",
+        "commit": "d53497de0accff778d0db96c010c30078e5b54d9",
+        "sha256": "5c38d47e676a3c5e87446a98c0e3dc5a13c787482b8789bf1e9f11e5b126f941",
+        "bytes": 17322,
+        "same_as_capture": true
+      },
+      "published_link": "https://github.com/lige1687/biao-signal-system/blob/d53497de0accff778d0db96c010c30078e5b54d9/docs/experiments/sentiment-aaii-background-2026-10-02.md",
+      "note": "Published bytes equal the original coverage-audit snapshot."
+    },
+    {
+      "label": "brief.json",
+      "original_link": "raw/investor-observation-map-2026-10-02/brief.json",
+      "path": "docs/experiments/raw/investor-observation-map-2026-10-02/brief.json",
+      "captured_sha256": "927b506e4b9fa8c5f43cf059c57573968d3ff63a4981a0ab261332f575d71828",
+      "published_versions": [
+        {
+          "owner": "map",
+          "commit": "5ad8672f8907c85d0cd2162583450c75ff1f2373",
+          "sha256": "5e0920360b849a28a5e04a9c4edff812cd77f7591da853104a9754c582a6b037",
+          "bytes": 3072,
+          "same_as_capture": false
+        }
+      ],
+      "reference_role": "task_metadata",
+      "selected_version": {
+        "owner": "map",
+        "commit": "5ad8672f8907c85d0cd2162583450c75ff1f2373",
+        "sha256": "5e0920360b849a28a5e04a9c4edff812cd77f7591da853104a9754c582a6b037",
+        "bytes": 3072,
+        "same_as_capture": false
+      },
+      "published_link": "raw/investor-observation-map-2026-10-02/brief.json",
+      "note": "Current task metadata evolves; original snapshot fingerprint is historical, not a scientific result."
+    },
+    {
+      "label": "持续进展",
+      "original_link": "../progress/investor-observation-map.md",
+      "path": "docs/progress/investor-observation-map.md",
+      "captured_sha256": null,
+      "published_versions": [
+        {
+          "owner": "map",
+          "commit": "5ad8672f8907c85d0cd2162583450c75ff1f2373",
+          "sha256": "11598c02ca7edc6403144b24d4152b5b400415835a2940775ba619658d6762d7",
+          "bytes": 12413,
+          "same_as_capture": null
+        }
+      ],
+      "reference_role": "task_metadata",
+      "selected_version": {
+        "owner": "map",
+        "commit": "5ad8672f8907c85d0cd2162583450c75ff1f2373",
+        "sha256": "11598c02ca7edc6403144b24d4152b5b400415835a2940775ba619658d6762d7",
+        "bytes": 12413,
+        "same_as_capture": null
+      },
+      "published_link": "../progress/investor-observation-map.md",
+      "note": "Current task metadata evolves; original snapshot fingerprint is historical, not a scientific result."
+    }
+  ],
+  "no_external_market_requests": true
+}
