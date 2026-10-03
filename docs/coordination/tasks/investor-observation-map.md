@@ -1,3 +1,37 @@
+# 当前成果：基本面统一入口与彩色参考线已发布
+
+更新时间：2026-10-03T21:24:29+08:00（Asia/Shanghai）。task-id investor-observation-map，原负责人继续；本轮软件实施/验证completed，整体研究未结束，不是接管。
+
+- 用户明确要求：“参考线也要表明是机会还是风险……颜色来一点”“和……基本面页面合并……统一搞到市场理解”。本轮按此实施。
+- 工作分支task/investor-observation-map-progress；基础58baf916d14fbf536a024cced48edd3f118111f6；**已推且核完整成果11662774379c07466935386fa7ef25ceac63bb24**，ls-remote=本地HEAD。远端该commit的manifest blob7b352f6bf18db47bf10fde8aac6918275530c10c等于本地。
+- [进展](https://github.com/lige1687/biao-signal-system/blob/11662774379c07466935386fa7ef25ceac63bb24/docs/progress/investor-observation-map.md)；[证据入口](https://github.com/lige1687/biao-signal-system/blob/11662774379c07466935386fa7ef25ceac63bb24/docs/archive/handoffs-plans/market-understanding-unification-2026-10-03/README.md)。18个准确代码/小文档，原内容总199566字节加manifest/SHA清单；没有数据/数据库/权重/截图/凭据入库。
+
+## 完成、正在维护与下一步
+
+- completed：原基本面五内容区+总览合成市场理解六分区；原/fundamentals保留search/hash并redirect，默认旧市场区；新入口默认总览。资讯与认知删除重复基本面菜单。原市场宽度/情绪/ETF强弱、利率/位置/相关性、长周期叠加、中国/美国宏观内部组件保留。URL驱动选择支持刷新及前后退。
+- completed：总览参考线有绿机会观察/环境支持、橙留意、红风险压力、蓝分界/条件；高低方向、配套判断和例外在标签/图例/展开读法中说明。估值与股债收益差机会方向相反，VIX高位仍提示波动风险及观察条件，不是抄底规则。数值仍取MARKLINES，身份/固定标定范围保持。
+- completed：旧美国CPI卡/抽屉窄覆盖错误“CPI2联储目标”及旧分区，标题明确经验参考/非政策目标；中国宏观过时美国就业待接提示改现有入口。仅本页覆盖，不改共享zones/后端/技术规则/Streamlit/情绪研究。
+- active responsibility：维护统一页面及其显示模型、导航、读法、测试；本批开发与验收已完，没有正在进行的新金融研究。下一步planned为具体阅图反馈；新数据缺口须先明确单一范围和资格，未独占全部指标方向。
+- blocked/not started：A股估值两序列、商品和部分ETF/位置/相关性源依旧可能缺数；不同旧接口更新链路/数值没有全量对齐。FINRA/CFTC/盈利预期/日历新源未接。全旧页科学解释、上游真实性/许可/首次发布时间、全后端恢复/跨OS和用户效果/线上收益未验证或未测量。
+
+## 实際证据与运行
+
+- 14组图表边界+33旧资料+5整合=52组合成检查exit0；tsc/Vite751模块exit0，21项SHA读回通过；旧归置器.git/progress两既存问题仍exit1，未改检查器冒称全绿。真实浏览器核五旧内容区、旧深链/query、刷新/前后退、CAPE彩色大图和解释、CPI旧大图、资讯菜单去重、390px总览及旧美宏无横向溢出。未强制刷新全源或改情绪录入。
+- 实际修改：App.tsx/TopNav.tsx仅对应路由与重复入口；FundamentalsPage.tsx仅受控嵌入/分区query与窄CPI/过时提示/错误摘要；本任务MarketUnderstandingPage及features的MarketDashboard/dashboard-model/dashboard.css/navigation/reference-reading，package测试脚本、新run-market-integration-regression、自己的计划/进度/证据。其他AI避免并发修改这些具体文件；未把进度当锁。
+- 本轮0新金融实验/拟合/外部资料研究/付费，0新代理。原金融封存预算不重置。UI用色不属于technical-factor-sequence的20/60日绿黑研究，避开技术/dot/情绪/经典/外部原范围。
+- 自有本地预览PID49578/session59800继续监听127.0.0.1:5185供用户查看，原5173/8000未动，无研究checkpoint；不承诺进程随文件迁移。本地截图只有指纹/大小进入manifest，图片本身未公开；旧本地中间产物也保留。
+- 失败/限制留在validation：原URL取tab因自动跳转不存在；资讯summary按button定位失败后读取状态用文本成功；旧无zones抽屉不显示footnote，CPI把必要说明放subtitle；缩短重复标题避免图表下移。没有把源缺数写成已修。
+
+## 协作与发布边界
+
+规则读0021e5614e163fc83e598184f25391f0af8144ae，范围登记453a4efbde5c4d636339972f76045bf6703f6552及补充e415137fb2fa559480555290d40bdfeee90d8244先推并读回后实施；增量核98a9abba1c3f0af9e371123e7857609e7ce4af4d，只有技术60日新问题与外部方向稿，无已登记同题同文件冲突。规则1.0/SHA6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0未变，AGENTS原入口保留。
+
+工作树无GitHub workflows/活动Git hooks，普通push，不合并main/master、不部署、不改权限、不强推或触发付费；只更新自己协调文件。计划最后发布勾选是提交形成时状态，实际发布已由本记录准确确认，无自指追加循环。同步提交返回后读取准确commit全文并核远端祖先才报已同步。
+
+---
+
+## 先前阶段记录
+
 ## 同轮显示纠错补充
 
 整合前代码检查确认旧UsMacroSection的CPI抽屉从共享zones导入CPI2“联储目标”错误。为避免统一页面自相矛盾，本轮只在FundamentalsPage美国CPI卡/抽屉覆盖该旧标签与说明，复用本任务已核reference模型，不改共享zones/源/阈值/交易。中国宏观的“美国就业尚待接/FRED key”过时提示改为现已保留的美国宏观分区链接。此为同轮整合的窄显示纠错，其他内部研究/情绪保持。
