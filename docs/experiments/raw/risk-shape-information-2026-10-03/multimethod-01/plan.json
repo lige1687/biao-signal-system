@@ -1,0 +1,81 @@
+{
+  "schema": "risk-shape-supplement/1.0",
+  "authorization": "用户：可以用多种验证因子有效性的方式去验证哈",
+  "scope": "原三个因子/原三ETF/原20间隔MAE/原两个后续评价期，不改变原合同；保存预测的辅助分析",
+  "stage": "exploration_after_results_seen",
+  "original_scientific_configs": 6,
+  "original_real_fits_used": 24,
+  "new_fits": 0,
+  "methods": {
+    "rank": {
+      "formula": "within each asset and fold, Pearson correlation of average ranks of X and Y (Spearman); report each cell and equal-ETF fold aggregation, training direction from earlier mature rows only",
+      "reason": "不依赖原线性预测形状，检查大小顺序；关联不是增量"
+    },
+    "groups": {
+      "thresholds": "per asset/fold train feature30th and70th percentiles, linear quantile; eval low<=q30, high>q70, middle otherwise",
+      "outputs": "group mean and median MAE; equal-ETF high-low mean; high/low coverage; unconditioned relationship only",
+      "direction": "raw high minus low, do not flip according to evaluation results"
+    },
+    "conditional_groups": {
+      "background": "per asset/fold training medians of volatility20 and return20 create four cells; candidate q30/q70 computed only on training cell; train minimum20; eval each extreme minimum5",
+      "weights": "within asset eligible cell weights proportional to all evaluation rows (including middle), normalized across supported cells; fixed three assets equal; missing asset -> overall unestimated",
+      "scope": "descriptive comparable-background contrast; different dates; only two background variables controlled, not full baseline increment"
+    },
+    "nonoverlap": {
+      "clock": "full frozen trading calendar index modulo21, all21 phases, same phase dates and full3assets per fold; no choose best phase",
+      "metric": "saved B1/B2 MSE relative change, pooled twofold equalassets; offsets21 intervals, adjacent future windows share boundary close but no return interval overlap",
+      "reason": "reduce repeated overlapping future outcomes; small phase samples and dependent phase alternatives not independent replications"
+    },
+    "multiple_candidates": {
+      "tool": ".agents/skills/lei-quant-tools/scripts/multiple_comparison.py compare-workflows",
+      "candidates": [
+        "vol_instability20",
+        "beta_asymmetry60",
+        "negative_cluster60"
+      ],
+      "baseline": "B1 existing model",
+      "periods": "each original fold evaluated complete contiguous support first..last saved dates",
+      "block_size": 60,
+      "reps": 1000,
+      "seed": 20261004,
+      "scope": "same-unit maximum loss improvement jointly resampled, only current3 candidate family, not all historical attempts; period selection solely complete support;2026 few blocks limitations",
+      "strong_simple": "compare-losses on same saved support with frozen per-ETF training mature target average as benchmark; source/values independently verified"
+    }
+  },
+  "dependence": {
+    "group_interval_block": 60,
+    "draws": 1000,
+    "seed": 20261004,
+    "axis": "each full fold evaluation calendar separately; resample folds separately, ETF same draw; no acrossfold circular connection",
+    "missing_groups": "unestimable draws reported, never set0; group highlow interval requires all3ETF present"
+  },
+  "budget": {
+    "supplement_batch": 1,
+    "ceiling_seconds": 1200,
+    "original_remaining_seconds": 6652.772544751002,
+    "new_real_fits": 0,
+    "new_market_requests": 0,
+    "paid_requests": 0,
+    "parameter_search": 0
+  },
+  "conclusion_rule": "No pass count vote or new threshold. Seek consistency, useful magnitude, simple baseline superiority, robust uncertainty; negative/inconclusive finish. Original B1->B2 remains primary increment; supplementary association cannot override it.",
+  "protected": "all previous frozen outputs and research-source/production rules unchanged",
+  "inputs": {
+    "docs/experiments/raw/risk-shape-information-2026-10-03/trial-plan.json": "562d86bae184b77d249ea4a052792e38c33c979658ebeff08e11d48e718a11a5",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/diagnostics.json": "e713b2e176035939474d6bff8a40c21d6fc17a36923fed5063a4e476221ed6bb",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/research-state.json": "8857a9958085ca5f21d7dfaafeb67fa5f73c49151e9f57fcc849ce457db9be7a",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/qualification-v2.json": "cbb027b53cb353670b8c8b607a876c2e40312b6100d55547732ef2f9068e5427",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-vol_instability20-main/contract.json": "607d8e592689cb84d8e67b69465abb5e479250dc95a6b1db270f090bf82e8b4b",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-vol_instability20-main/preflight.json": "15193d36bc40c80ed4b95343879d328d9ed3ae0a3fcbdda9ee02c6bb969f9119",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-vol_instability20-main/result.json": "85dc7048128091b3d88dde96c3851f06c00bd3a618855ecd516978c9d5df4f79",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-vol_instability20-main/receipt.json": "46f785d36302c7b55983569651936432424dfde0c5c0b664a406be9dbd149a10",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-beta_asymmetry60-main/contract.json": "8d227d6fbe1f820314b087d9d57da545954dcf3280b3bb83a07a6d9a66ca451c",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-beta_asymmetry60-main/preflight.json": "77df56d272153f99a90bde49a9b2c40ac1d30ca407387dc660e54996126657c2",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-beta_asymmetry60-main/result.json": "a92f1804c2b87b1893373ed3c9db66bc0462aefad3212a78f092bf7349dca3c8",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-beta_asymmetry60-main/receipt.json": "30ff5dd54d65d1191dad220900c5035f01b42852115eeb35f4cdc83ca1e61b7b",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-negative_cluster60-main/contract.json": "3a5f1c79a00e5c802984035c1e31d48804977429a07a9b87d435b5ec1c219ec9",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-negative_cluster60-main/preflight.json": "14113819ef0a887d79877380f8e818e09bd9831125bd6e221f9b35359930247f",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-negative_cluster60-main/result.json": "a1c828d3a987910ec7108b0db7073b213b5579bfd1a6f8d5531fe7be16812274",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-negative_cluster60-main/receipt.json": "75850174960404cbfd21afca48a7824485fb3cc31d507416519f3163231d119e"
+  }
+}

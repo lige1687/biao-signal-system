@@ -1,0 +1,577 @@
+{
+  "status": "arithmetic_verified",
+  "original_run": "docs/experiments/raw/risk-shape-information-2026-10-03/run-vol_instability20-main",
+  "original_hashes_sha256": {
+    "contract.json": "607d8e592689cb84d8e67b69465abb5e479250dc95a6b1db270f090bf82e8b4b",
+    "preflight.json": "15193d36bc40c80ed4b95343879d328d9ed3ae0a3fcbdda9ee02c6bb969f9119",
+    "result.json": "85dc7048128091b3d88dde96c3851f06c00bd3a618855ecd516978c9d5df4f79",
+    "receipt.json": "46f785d36302c7b55983569651936432424dfde0c5c0b664a406be9dbd149a10",
+    "report.md": "143dcefb8bb616a29226b032d41b73024a4f0858ed3da4729f7ef35e1d492629"
+  },
+  "receipt_and_freeze_match": true,
+  "source_and_binding_files_checked": 70,
+  "source_and_binding_hash_checks": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "expected_sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "actual_sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "expected_sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "actual_sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+      "expected_sha256": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94",
+      "actual_sha256": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "configs/strategy-documents.v1.json",
+      "expected_sha256": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b",
+      "actual_sha256": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/exit_three_piece/pool/588000.SS.bars.parquet",
+      "expected_sha256": "7c7bce89fee5b6483f822d14814dbc14a4ed67a0edcc034196485828e9def543",
+      "actual_sha256": "7c7bce89fee5b6483f822d14814dbc14a4ed67a0edcc034196485828e9def543",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/23-510500-2024-annual.pdf",
+      "expected_sha256": "0d30dc196f1dca210bce70fd1e4c58a08646a5ee7d0214f4136ba25e75ec36b7",
+      "actual_sha256": "0d30dc196f1dca210bce70fd1e4c58a08646a5ee7d0214f4136ba25e75ec36b7",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/24-510500-2025-annual.pdf",
+      "expected_sha256": "feb6751fdfdadc14600c7f3c5b8b99f669bc40f924bf1c1827c2c28a07398b38",
+      "actual_sha256": "feb6751fdfdadc14600c7f3c5b8b99f669bc40f924bf1c1827c2c28a07398b38",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/25-510500-2026-half.pdf",
+      "expected_sha256": "01136d5f27e09722b45876afe96bc30070635b76495c95d656b0c34b44a07861",
+      "actual_sha256": "01136d5f27e09722b45876afe96bc30070635b76495c95d656b0c34b44a07861",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/26-510500-2022-split-result.pdf",
+      "expected_sha256": "2cb13ff91d3a42dde84c199bc9f1d9b1ac7246a947ff254ccd48516350032bca",
+      "actual_sha256": "2cb13ff91d3a42dde84c199bc9f1d9b1ac7246a947ff254ccd48516350032bca",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/44-510050-2022-annual.pdf",
+      "expected_sha256": "b13600f67e34e673efcbc1d0a15a1166a8c2aa08a695cf9c24f270271b1333b5",
+      "actual_sha256": "b13600f67e34e673efcbc1d0a15a1166a8c2aa08a695cf9c24f270271b1333b5",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/45-510050-2023-annual.pdf",
+      "expected_sha256": "8b1eef27c0824ed4d9535cbce99379bf48959e9faff0aefbcb7a8e5cf621716e",
+      "actual_sha256": "8b1eef27c0824ed4d9535cbce99379bf48959e9faff0aefbcb7a8e5cf621716e",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/46-510050-2024-annual.pdf",
+      "expected_sha256": "e7ab0da569d9a836d753e71bed70cca8de5ee862eed747f09e1c939ad41f2391",
+      "actual_sha256": "e7ab0da569d9a836d753e71bed70cca8de5ee862eed747f09e1c939ad41f2391",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/47-510050-2025-annual.pdf",
+      "expected_sha256": "d0a37d5e7874cd0bc451e59ea7d68aa8fdcd0413e3765487bb14af320e6d758f",
+      "actual_sha256": "d0a37d5e7874cd0bc451e59ea7d68aa8fdcd0413e3765487bb14af320e6d758f",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/normalized/510050.SS.nominal-candidate.csv",
+      "expected_sha256": "bac2a6b082f77468dc0a01a8460d40766f8a77700150cf040699a6a0465d8c86",
+      "actual_sha256": "bac2a6b082f77468dc0a01a8460d40766f8a77700150cf040699a6a0465d8c86",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/normalized/510500.SS.nominal-candidate.csv",
+      "expected_sha256": "bc8619d96c93975d7cf00885aebcf2b00a69b47b5e97617385dcb92373352b69",
+      "actual_sha256": "bc8619d96c93975d7cf00885aebcf2b00a69b47b5e97617385dcb92373352b69",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/01-sh510050-2020-12-01-2022-12-31.json",
+      "expected_sha256": "1d3280b020f3a78b3c950302644cf635b32821a69c6d530193f732e2dd3187a3",
+      "actual_sha256": "1d3280b020f3a78b3c950302644cf635b32821a69c6d530193f732e2dd3187a3",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/02-sh510050-2022-12-01-2024-12-31.json",
+      "expected_sha256": "73b7c0c404c4d0ec691b3befa26dafc74377fe0157bbab778225d5b475e478e0",
+      "actual_sha256": "73b7c0c404c4d0ec691b3befa26dafc74377fe0157bbab778225d5b475e478e0",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/03-sh510050-2024-12-01-2026-06-30.json",
+      "expected_sha256": "d8d934bb9e2253b28251b719f6ed2f606ecb79e1061ce1727ad5a879e0afec21",
+      "actual_sha256": "d8d934bb9e2253b28251b719f6ed2f606ecb79e1061ce1727ad5a879e0afec21",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/04-sh510500-2020-12-01-2022-12-31.json",
+      "expected_sha256": "b3ac7e514093a862366cc43570b3e7ede57372e6d0b18b45de24a1ed6e82e7c3",
+      "actual_sha256": "b3ac7e514093a862366cc43570b3e7ede57372e6d0b18b45de24a1ed6e82e7c3",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/05-sh510500-2022-12-01-2024-12-31.json",
+      "expected_sha256": "a07955b1ff0aefa0b194be0ec0c5afed0f77b66dcbdb5ec4810763c29eda7646",
+      "actual_sha256": "a07955b1ff0aefa0b194be0ec0c5afed0f77b66dcbdb5ec4810763c29eda7646",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/06-sh510500-2024-12-01-2026-06-30.json",
+      "expected_sha256": "339ff4e81205b5f2478dffd006fba9f69a6e12209704e047ccf7bb6495341a26",
+      "actual_sha256": "339ff4e81205b5f2478dffd006fba9f69a6e12209704e047ccf7bb6495341a26",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/02-510050-2021-annual.pdf",
+      "expected_sha256": "ba98d80942e3daacf4a11e2bbe4150145b03792c91d80a53dc4e0999c7a7527b",
+      "actual_sha256": "ba98d80942e3daacf4a11e2bbe4150145b03792c91d80a53dc4e0999c7a7527b",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/10-510300-2021-annual.pdf",
+      "expected_sha256": "35a8647d9dd401c65030eafb67e0b65f1c40b3f75d8270c12d1436c00b204889",
+      "actual_sha256": "35a8647d9dd401c65030eafb67e0b65f1c40b3f75d8270c12d1436c00b204889",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/11-510300-2022-annual.pdf",
+      "expected_sha256": "0bc9c86850dc6f131c6dad12925135a21fe80bead53dbbd046bb0f811678d0e5",
+      "actual_sha256": "0bc9c86850dc6f131c6dad12925135a21fe80bead53dbbd046bb0f811678d0e5",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/12-510300-2023-annual.pdf",
+      "expected_sha256": "a2a2cb594905a00fc6d092b17ddf841a1f7195dfde3698d4aa8bdc7b6a9f86e7",
+      "actual_sha256": "a2a2cb594905a00fc6d092b17ddf841a1f7195dfde3698d4aa8bdc7b6a9f86e7",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/13-510300-2024-annual.pdf",
+      "expected_sha256": "77041d9520683ee3e2eb2111811b068af9b70526715dcffed57f2bf170fbff0b",
+      "actual_sha256": "77041d9520683ee3e2eb2111811b068af9b70526715dcffed57f2bf170fbff0b",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/14-510300-2025-annual.pdf",
+      "expected_sha256": "4e5632ab0b46865f679d15d7ecdf036076517f48285c9a2d03cdecf5697acabe",
+      "actual_sha256": "4e5632ab0b46865f679d15d7ecdf036076517f48285c9a2d03cdecf5697acabe",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/15-510300-2026-half.pdf",
+      "expected_sha256": "b77ce47ece834f968b085c6823c72ffaa635f82d80793cc6c2ebafce301221c5",
+      "actual_sha256": "b77ce47ece834f968b085c6823c72ffaa635f82d80793cc6c2ebafce301221c5",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510050.SS-wealth-features.csv",
+      "expected_sha256": "decd4123589f3ebf7cc19457f6bead82079a96c5344497fa71004350c9fb684d",
+      "actual_sha256": "decd4123589f3ebf7cc19457f6bead82079a96c5344497fa71004350c9fb684d",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510300.SS-wealth-features.csv",
+      "expected_sha256": "43c424bff72257ae4c523ace643dce38f816079b4d2281ce255ae8a2d06e34a4",
+      "actual_sha256": "43c424bff72257ae4c523ace643dce38f816079b4d2281ce255ae8a2d06e34a4",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510500.SS-wealth-features.csv",
+      "expected_sha256": "a7922b40a515d5f4b4d29d795075c6e87f56b13250e79cd635cfc710e776b8d4",
+      "actual_sha256": "a7922b40a515d5f4b4d29d795075c6e87f56b13250e79cd635cfc710e776b8d4",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/588000.SS-wealth-features.csv",
+      "expected_sha256": "79f69c7f833e250a5ac0b524e894ea759f4f3a96505327f4beb3337c389a8e5e",
+      "actual_sha256": "79f69c7f833e250a5ac0b524e894ea759f4f3a96505327f4beb3337c389a8e5e",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/actions.json",
+      "expected_sha256": "37427a7f656e30dfa08711dd19e91b1578371df597ac88fc557fc53b4202e97b",
+      "actual_sha256": "37427a7f656e30dfa08711dd19e91b1578371df597ac88fc557fc53b4202e97b",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/bars-helper-native/sh510300-nominal.csv",
+      "expected_sha256": "d11357f678570ff9698e39799fd4db81ed825c3c05f7bb4c876e895a5c66d0bf",
+      "actual_sha256": "d11357f678570ff9698e39799fd4db81ed825c3c05f7bb4c876e895a5c66d0bf",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/risk-shape-information-2026-10-03/brief.json",
+      "expected_sha256": "c0fdf37e4e7c1a4dc9e66501c158dd2db8802e042a3c1ad17d7be5828ca74a59",
+      "actual_sha256": "c0fdf37e4e7c1a4dc9e66501c158dd2db8802e042a3c1ad17d7be5828ca74a59",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+      "expected_sha256": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94",
+      "actual_sha256": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510050.SS-row-source-index.json",
+      "expected_sha256": "ac67a2a985e5e6c9e6120c5c52acc66ff5cd903f8d2863a9e9e165610c3fd3e5",
+      "actual_sha256": "ac67a2a985e5e6c9e6120c5c52acc66ff5cd903f8d2863a9e9e165610c3fd3e5",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510300.SS-row-source-index.json",
+      "expected_sha256": "5a0305f2c715a33e65d249b4538fd0094eee1c68163928151b478de51c5bba77",
+      "actual_sha256": "5a0305f2c715a33e65d249b4538fd0094eee1c68163928151b478de51c5bba77",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510500.SS-row-source-index.json",
+      "expected_sha256": "93714223de080e92b6f221f2d709c1153e23be6933d64caa30dc8281b519dd96",
+      "actual_sha256": "93714223de080e92b6f221f2d709c1153e23be6933d64caa30dc8281b519dd96",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/588000.SS-row-source-index.json",
+      "expected_sha256": "7b8b6f9560e7673d0344e1c4838656c7b4a37110705b5e176cda1c16113dbef2",
+      "actual_sha256": "7b8b6f9560e7673d0344e1c4838656c7b4a37110705b5e176cda1c16113dbef2",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/qualification.json",
+      "expected_sha256": "9d150d608a5e8a88d11021b96f5e2ec5443dddf14c1a98b4ddc2fb4b01bee5f2",
+      "actual_sha256": "9d150d608a5e8a88d11021b96f5e2ec5443dddf14c1a98b4ddc2fb4b01bee5f2",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/01-sh510300-2020-12-01-2022-12-31.body",
+      "expected_sha256": "103bbd9c266d14429479896ec19e3f4a3923e5fe42ba13c9a6a74aa6855e27c7",
+      "actual_sha256": "103bbd9c266d14429479896ec19e3f4a3923e5fe42ba13c9a6a74aa6855e27c7",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/02-sh510300-2022-12-01-2024-12-31.body",
+      "expected_sha256": "c1177a9939a174b47e5a6329dada01a514c054e3e4070c7071f571478dc76620",
+      "actual_sha256": "c1177a9939a174b47e5a6329dada01a514c054e3e4070c7071f571478dc76620",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/03-sh510300-2024-12-01-2026-06-30.body",
+      "expected_sha256": "aa23db71c3dfffc7e85a5e1990dd388214416c9855cbc920eed48a116cf89e33",
+      "actual_sha256": "aa23db71c3dfffc7e85a5e1990dd388214416c9855cbc920eed48a116cf89e33",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/04-sh588000-2020-12-01-2022-12-31.body",
+      "expected_sha256": "d3b36bf0c9f7bea7ca9cf0f10de53bc56b72a991d8f2d5348b52df3e333d8ce6",
+      "actual_sha256": "d3b36bf0c9f7bea7ca9cf0f10de53bc56b72a991d8f2d5348b52df3e333d8ce6",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/05-sh588000-2022-12-01-2024-12-31.body",
+      "expected_sha256": "e2f7eb219a3ca999dc16efd7411c2b20d40f2f4e66dd6fa00c9fd20b1a98cf42",
+      "actual_sha256": "e2f7eb219a3ca999dc16efd7411c2b20d40f2f4e66dd6fa00c9fd20b1a98cf42",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/06-sh588000-2024-12-01-2026-06-30.body",
+      "expected_sha256": "7cec676f93319ed2a7877f425adedb8548309ad68c774433d957ff229e8b8276",
+      "actual_sha256": "7cec676f93319ed2a7877f425adedb8548309ad68c774433d957ff229e8b8276",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/research/ai-execution-contract.md",
+      "expected_sha256": "f70a929f15d9d59f99f78a609a8658ce468f2c4025f05dba5380198f0bf23d22",
+      "actual_sha256": "f70a929f15d9d59f99f78a609a8658ce468f2c4025f05dba5380198f0bf23d22",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/research/current-standards.json",
+      "expected_sha256": "616c0ae1a636accd35c8500be7c5c21a35c13aaf2039e9e6144cb5531d96cb57",
+      "actual_sha256": "616c0ae1a636accd35c8500be7c5c21a35c13aaf2039e9e6144cb5531d96cb57",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/research/definition-standard.md",
+      "expected_sha256": "938e04d7beb96a46069bbb6eb6c03d2331e86bfa771623fdfe21794b4e98fcbd",
+      "actual_sha256": "938e04d7beb96a46069bbb6eb6c03d2331e86bfa771623fdfe21794b4e98fcbd",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/research/experiment-backtest-principles.md",
+      "expected_sha256": "67b49a08396b0c8cb93cb526466200cc798bdb4cd8ce77509658f291cc29493c",
+      "actual_sha256": "67b49a08396b0c8cb93cb526466200cc798bdb4cd8ce77509658f291cc29493c",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/research/experiment-report-template.md",
+      "expected_sha256": "a141107c915dcf738621e6e8746d89e97fb2d835b4c16883805dc7fb19ab7170",
+      "actual_sha256": "a141107c915dcf738621e6e8746d89e97fb2d835b4c16883805dc7fb19ab7170",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/research/factor-increment-evidence-standard.md",
+      "expected_sha256": "05f5b04c8b54ad3bf86296f09a5addd4fd6344dad6e7b639650c39692b2f3871",
+      "actual_sha256": "05f5b04c8b54ad3bf86296f09a5addd4fd6344dad6e7b639650c39692b2f3871",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/research/lei-factor-research-mission.md",
+      "expected_sha256": "1f58a65ea41c9b678cc14c4490020b674e991f63267a8746f692e919eb109591",
+      "actual_sha256": "1f58a65ea41c9b678cc14c4490020b674e991f63267a8746f692e919eb109591",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/research/research-question-method-standard.md",
+      "expected_sha256": "367da1f21f3344ff17abf449aaf887db2adf31ebcfcb1715333a34fb4bf90f16",
+      "actual_sha256": "367da1f21f3344ff17abf449aaf887db2adf31ebcfcb1715333a34fb4bf90f16",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+      "expected_sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "actual_sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md",
+      "expected_sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "actual_sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "scripts/run_factor_lab.py",
+      "expected_sha256": "a8542f48980a52edb6f59b276ef64dacf801aa48cf751fbd39165f9d30497476",
+      "actual_sha256": "a8542f48980a52edb6f59b276ef64dacf801aa48cf751fbd39165f9d30497476",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "src/lei_signal/features/indicators.py",
+      "expected_sha256": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+      "actual_sha256": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "src/lei_signal/research/candidate_preflight.py",
+      "expected_sha256": "5b328590d115a2295b2406ba73caa0c460fe8646dfd0183eab284d830affa4df",
+      "actual_sha256": "5b328590d115a2295b2406ba73caa0c460fe8646dfd0183eab284d830affa4df",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "src/lei_signal/research/definitions.py",
+      "expected_sha256": "84f7b9ba76f4704e81f4f4d0c1784e2ab1ad7e3aa225abeb4796fa10dcbfec94",
+      "actual_sha256": "84f7b9ba76f4704e81f4f4d0c1784e2ab1ad7e3aa225abeb4796fa10dcbfec94",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "src/lei_signal/research/factor_lab/benchmarks.py",
+      "expected_sha256": "6a958bc94a605e52540fcda8b28b5781528ec1b61255ee747db17ad7b9313618",
+      "actual_sha256": "6a958bc94a605e52540fcda8b28b5781528ec1b61255ee747db17ad7b9313618",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "src/lei_signal/research/input_preflight.py",
+      "expected_sha256": "514fb1fa1819d145366365865b49159e6b77beaeb27f15a3bdd64fa024484e04",
+      "actual_sha256": "514fb1fa1819d145366365865b49159e6b77beaeb27f15a3bdd64fa024484e04",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "src/lei_signal/research/question_contract.py",
+      "expected_sha256": "687049aea09786be850b8e3533c23b7bfb443b1baa9ca7e1f400700ad8ba4816",
+      "actual_sha256": "1e4acc073e7eac02456c931d170c0c469c08202cfdb52f91157df1d8636cb23a",
+      "matches": false,
+      "exists": true
+    },
+    {
+      "path": "src/lei_signal/research/risk_shape_information.py",
+      "expected_sha256": "787882b3eb6217afe1b09cddddfe14c50fef8f89b0d7bf34d6adad49717bd5d5",
+      "actual_sha256": "787882b3eb6217afe1b09cddddfe14c50fef8f89b0d7bf34d6adad49717bd5d5",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "src/lei_signal/research/top_structure_information.py",
+      "expected_sha256": "5ce72eb21cc0d56208befd3e2dbb124792abbd3432288a8bf42c4fd42c341ad9",
+      "actual_sha256": "5ce72eb21cc0d56208befd3e2dbb124792abbd3432288a8bf42c4fd42c341ad9",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "src/lei_signal/research/volume_information.py",
+      "expected_sha256": "e794f2fe131ff1e9e0fe49560dfbe463ce0d2244af0663b7769b02779d2d2570",
+      "actual_sha256": "e794f2fe131ff1e9e0fe49560dfbe463ce0d2244af0663b7769b02779d2d2570",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "src/lei_signal/research/workflow.py",
+      "expected_sha256": "8a7c48d6a5eb85e28756b89be06daa88ac17ed5c22f01d311579fccf87b7e60a",
+      "actual_sha256": "6653babd4d22068c0cebe9b5789c28caa20b54d50ac9b20726c0beee2024865a",
+      "matches": false,
+      "exists": true
+    },
+    {
+      "path": "src/lei_signal/research/workflow_evaluation.py",
+      "expected_sha256": "508459ca3964a55e1688fef345d6e667acba68141f8be8f04f1ea1c5f0018c1c",
+      "actual_sha256": "508459ca3964a55e1688fef345d6e667acba68141f8be8f04f1ea1c5f0018c1c",
+      "matches": true,
+      "exists": true
+    },
+    {
+      "path": "src/lei_signal/research/workflow_inputs.py",
+      "expected_sha256": "288f929b3888d659d7b7ba2f104628147d596a01304b1c04e662fce81a9921d9",
+      "actual_sha256": "a24ddacb13b192c71b4622eeff159fc5bb38c600408e3db598016a09cd5329ec",
+      "matches": false,
+      "exists": true
+    }
+  ],
+  "source_or_binding_mismatches": [
+    {
+      "path": "src/lei_signal/research/question_contract.py",
+      "expected_sha256": "687049aea09786be850b8e3533c23b7bfb443b1baa9ca7e1f400700ad8ba4816",
+      "actual_sha256": "1e4acc073e7eac02456c931d170c0c469c08202cfdb52f91157df1d8636cb23a",
+      "matches": false,
+      "exists": true
+    },
+    {
+      "path": "src/lei_signal/research/workflow.py",
+      "expected_sha256": "8a7c48d6a5eb85e28756b89be06daa88ac17ed5c22f01d311579fccf87b7e60a",
+      "actual_sha256": "6653babd4d22068c0cebe9b5789c28caa20b54d50ac9b20726c0beee2024865a",
+      "matches": false,
+      "exists": true
+    },
+    {
+      "path": "src/lei_signal/research/workflow_inputs.py",
+      "expected_sha256": "288f929b3888d659d7b7ba2f104628147d596a01304b1c04e662fce81a9921d9",
+      "actual_sha256": "a24ddacb13b192c71b4622eeff159fc5bb38c600408e3db598016a09cd5329ec",
+      "matches": false,
+      "exists": true
+    }
+  ],
+  "note_on_mismatches": "Current files may have changed since the sealed run; old receipt and archived predictions remain intact.",
+  "pairing_validator": "workflow_evaluation._paired_predictions",
+  "weight_validator": "workflow_evaluation._weights",
+  "all_saved_rows_retained": true,
+  "every_prediction_date_has_exact_three_assets": true,
+  "mse_and_increment_match_original_at_1e-12": true,
+  "synthetic_counterexamples": {
+    "duplicate_id_and_asset_date": {
+      "passed": true,
+      "reason": "predictions: duplicate id or asset/date breaks fixed pairing"
+    },
+    "missing_prediction_column": {
+      "passed": true,
+      "reason": "predictions[0]: missing paired baseline fields ['B2']"
+    },
+    "missing_B1_partner": {
+      "passed": true,
+      "reason": "predictions[0]: missing paired baseline fields ['B1']"
+    },
+    "nan": {
+      "passed": true,
+      "reason": "prediction.B2: expected finite number"
+    },
+    "infinity": {
+      "passed": true,
+      "reason": "prediction.B2: expected finite number"
+    },
+    "same_prediction_zero_difference": {
+      "passed": true,
+      "difference": 0.0
+    },
+    "zero_error_both": {
+      "passed": true,
+      "loss": 0.0
+    },
+    "missing_asset_row": {
+      "passed": true,
+      "reason": "fixed three-asset date is incomplete"
+    }
+  },
+  "outputs_sha256": {
+    "full-differences.csv": "b683d9c7ae8074c3b86c7c351e3ac3b195d4f0d93da6f2f68afc222f21e59e29",
+    "summary.json": "af23bfcbf539092388c95e6af6a813c2f0aee5918f0e72475fb25df3b9c24f23"
+  },
+  "elapsed_seconds": 0.25726495799972326,
+  "budget_seconds": 600,
+  "new_fits": 0,
+  "new_labels": 0,
+  "external_requests": 0
+}

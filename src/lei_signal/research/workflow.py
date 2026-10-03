@@ -258,6 +258,26 @@ def actual_bindings(contract, root=ROOT):
                              "configs/rules.v2.yaml"))
         if contract["feature"]["kind"] == "slope_change_information":
             related_code.append("src/lei_signal/rules/clock_classifier.py")
+    if contract["feature"]["kind"] == "risk_shape_information":
+        related_code.extend(("src/lei_signal/research/risk_shape_information.py",
+                             "src/lei_signal/research/factor_lab/benchmarks.py",
+                             "src/lei_signal/research/top_structure_information.py",
+                             "src/lei_signal/research/volume_information.py",
+                             "src/lei_signal/features/indicators.py"))
+    if contract["feature"]["kind"] == "session_composition_information":
+        related_code.extend(("src/lei_signal/research/session_composition_information.py",
+                             "src/lei_signal/research/risk_shape_information.py",
+                             "src/lei_signal/research/factor_lab/benchmarks.py",
+                             "src/lei_signal/research/top_structure_information.py",
+                             "src/lei_signal/research/volume_information.py",
+                             "src/lei_signal/features/indicators.py"))
+    if contract["feature"]["kind"] == "volume_direction_information":
+        related_code.extend(("src/lei_signal/research/volume_direction_information.py",
+                             "src/lei_signal/research/risk_shape_information.py",
+                             "src/lei_signal/research/factor_lab/benchmarks.py",
+                             "src/lei_signal/research/top_structure_information.py",
+                             "src/lei_signal/research/volume_information.py",
+                             "src/lei_signal/features/indicators.py"))
     if contract["feature"]["kind"] == "tsfresh_price_information":
         related_code.extend(("src/lei_signal/research/tsfresh_price_information.py",
                              "src/lei_signal/research/trend_slope_change_information.py",
@@ -380,6 +400,24 @@ def cache_keys(contract, bindings):
                       "sampling": {k: contract["question"].get(k) for k in ("sampling", "frequency", "period", "event_definition")}})
     labels = digest({"data": bindings["data_sha256"], "target": contract["target"],
                      "code": bindings["files"][CODE_PATHS[1]]})
+    if contract["feature"]["kind"] == "risk_shape_information":
+        adapter = bindings["files"]["src/lei_signal/research/risk_shape_information.py"]
+        feature = digest({"base": feature, "adapter": adapter,
+                          "classic_definitions": bindings["files"]["src/lei_signal/research/factor_lab/benchmarks.py"]})
+        labels = digest({"base": labels, "adapter": adapter})
+    if contract["feature"]["kind"] == "session_composition_information":
+        adapter = bindings["files"]["src/lei_signal/research/session_composition_information.py"]
+        feature = digest({"base": feature, "adapter": adapter,
+                          "baseline_adapter": bindings["files"]["src/lei_signal/research/risk_shape_information.py"],
+                          "classic_definitions": bindings["files"]["src/lei_signal/research/factor_lab/benchmarks.py"]})
+        labels = digest({"base": labels, "adapter": adapter})
+    if contract["feature"]["kind"] == "volume_direction_information":
+        adapter = bindings["files"]["src/lei_signal/research/volume_direction_information.py"]
+        feature = digest({"base": feature, "adapter": adapter,
+                          "baseline_adapter": bindings["files"]["src/lei_signal/research/risk_shape_information.py"],
+                          "volume_helper": bindings["files"]["src/lei_signal/research/volume_information.py"],
+                          "classic_definitions": bindings["files"]["src/lei_signal/research/factor_lab/benchmarks.py"]})
+        labels = digest({"base": labels, "adapter": adapter})
     if contract["feature"]["kind"] == "ema_sma_waiting_path":
         adapter = bindings["files"]["src/lei_signal/research/ema_sma_waiting_path.py"]
         feature = digest({"base": feature, "waiting_path_adapter": adapter})
@@ -578,6 +616,24 @@ def preflight(contract, root=ROOT, *, require_frozen=True):
             type(contract.get("permissions", {}).get("real_fits")) is int and
             contract["permissions"]["real_fits"] == 4):
         raise WorkflowBlocked("technical persistence requires explicit real labels, effect and four-fit ceiling")
+    if contract["feature"]["kind"] == "risk_shape_information" and not (
+            contract.get("permissions", {}).get("real_labels") is True and
+            contract.get("permissions", {}).get("effect_authorized") is True and
+            type(contract.get("permissions", {}).get("real_fits")) is int and
+            contract["permissions"]["real_fits"] == 4):
+        raise WorkflowBlocked("risk shape real effects require explicit label/effect permission and four-fit ceiling")
+    if contract["feature"]["kind"] == "session_composition_information" and not (
+            contract.get("permissions", {}).get("real_labels") is True and
+            contract.get("permissions", {}).get("effect_authorized") is True and
+            type(contract.get("permissions", {}).get("real_fits")) is int and
+            contract["permissions"]["real_fits"] == 4):
+        raise WorkflowBlocked("session composition real effects require explicit label/effect permission and four-fit ceiling")
+    if contract["feature"]["kind"] == "volume_direction_information" and not (
+            contract.get("permissions", {}).get("real_labels") is True and
+            contract.get("permissions", {}).get("effect_authorized") is True and
+            type(contract.get("permissions", {}).get("real_fits")) is int and
+            contract["permissions"]["real_fits"] == 4):
+        raise WorkflowBlocked("volume direction real effects require explicit label/effect permission and four-fit ceiling")
     bindings = actual_bindings(contract, root)
     if require_frozen and contract.get("bindings") != bindings:
         raise WorkflowBlocked("stale_proof: freeze does not match this input/definition/code")
@@ -741,7 +797,10 @@ def preflight(contract, root=ROOT, *, require_frozen=True):
     if not eval_rows:
         raise WorkflowBlocked("no_evaluable_rows: requested question has no qualified evaluation labels")
     evaluation_assets = sorted({r["asset"] for r in eval_rows})
-    missing = sorted(set(contract["universe"]["assets"]) - set(evaluation_assets))
+    prediction_assets = set(contract["universe"]["assets"])
+    if contract["feature"]["kind"] in {"risk_shape_information", "session_composition_information", "volume_direction_information"}:
+        prediction_assets.discard(contract["feature"]["anchor_asset"])
+    missing = sorted(prediction_assets - set(evaluation_assets))
     partial = bool(missing)
     if partial and not contract["universe"]["allow_partial"]:
         raise WorkflowBlocked(f"universe_missing: no qualified evaluation rows for {missing}")
@@ -886,6 +945,8 @@ def run_rehearsal(contract):
     if c["feature"]["kind"] in {"ema_direction_persistence_information",
                                  "bull_green_transition_information"}:
         count = 600  # two assets, 252 warmup and 21-close labels
+    if c["feature"]["kind"] in {"risk_shape_information", "session_composition_information", "volume_direction_information"}:
+        count = 600  # fixed engineering fixture for root-owned new adapters
     if count > 2000:
         raise WorkflowBlocked("synthetic rehearsal size exceeds finite engineering adapter limit")
     dates, d = [], date(2020, 1, 2)
@@ -906,7 +967,7 @@ def run_rehearsal(contract):
                 # strict adjacent black-to-green case without market tuning.
                 price = 100.0 + j + 0.18 * i - (14.0 if i >= 260 and i % 31 == 0 else 0.0)
                 low = price - 0.8
-            elif c["feature"]["kind"] in ("slope_change_information", "simple_top_invalidation_information", "tsfresh_price_information", "slope_change_risk_information", "ema_only_wait_age_risk_information", "green_black_state60_information", "ema_direction_persistence_information"):
+            elif c["feature"]["kind"] in ("slope_change_information", "simple_top_invalidation_information", "tsfresh_price_information", "slope_change_risk_information", "ema_only_wait_age_risk_information", "green_black_state60_information", "ema_direction_persistence_information", "risk_shape_information", "session_composition_information", "volume_direction_information"):
                 price = (100.0 + j - 0.03 * i + 5.0 * math.sin(i / 3)
                          if c["feature"]["kind"] == "ema_only_wait_age_risk_information" else
                          100.0 + j + 0.10 * i + 4.0 * math.sin(i / 7))
@@ -952,8 +1013,15 @@ def run_rehearsal(contract):
                          "action_known": True, "open_actionable": True,
                          "volume": 400.0 if (i + 3*j) % 11 == 0 else 100.0,
                          "volume_source_known": True, "volume_break": False})
+    if c["feature"]["kind"] == "session_composition_information":
+        for i, row in enumerate(bars):
+            row["open"] = row["close"] * math.exp(0.002 * math.sin(i / 5))
+            row["high"] = max(row["open"], row["close"]) * 1.01
+            row["low"] = min(row["open"], row["close"]) * 0.99
     payload = {"data_mode": "synthetic", "calendar": dates, "bars": bars}
     c["universe"]["assets"] = assets
+    if c["feature"]["kind"] in {"risk_shape_information", "session_composition_information", "volume_direction_information"}:
+        c["feature"]["anchor_asset"] = assets[0]
     c["question"].update(sampling="daily", universe=assets, period=[dates[0], dates[-1]])
     cutoff = n + c["target"]["end_offset"] + 32
     if c["feature"]["kind"] == "pullback_layer_change_information":
@@ -965,6 +1033,8 @@ def run_rehearsal(contract):
     c["split"] = {"label_policy": "purge", "folds": [{"train_end": dates[cutoff],
         "eval_start": dates[cutoff + 1], "eval_end": dates[-1 - c["target"]["end_offset"]]}]}
     if c["feature"]["kind"] in {"double_ma_order_information", "profile_overhead_information"}:
+        c["split"]["evaluation_label_policy"] = "contained"
+    if c["feature"]["kind"] in {"risk_shape_information", "session_composition_information", "volume_direction_information"}:
         c["split"]["evaluation_label_policy"] = "contained"
     c["calendar"] = dates
     c["dependence"] = {"block_length": 5, "draws": 16, "seed": 7}
@@ -1034,6 +1104,30 @@ def run_rehearsal(contract):
                 not any(r["y"] > 0 for r in ready) or
                 any(r["ready_252"] for r in inputs["observations"] if r["date"] < dates[251])):
             raise WorkflowBlocked("daily risk rehearsal requires two assets, segmented252, nonzero 21-close MAE and both OLS fits")
+    if c["feature"]["kind"] == "risk_shape_information":
+        from lei_signal.research.risk_shape_information import REFS
+        ready = [r for r in inputs["observations"] if r["eligible"]]
+        if (not result["performance"] or result["execution"]["fits"] != 2 or
+                {r["asset"] for r in ready} != {assets[1]} or
+                any(r["eligible"] for r in inputs["observations"] if r["asset"] == assets[0]) or
+                any(len({round(r["features"][name], 8) for r in ready}) < 2 for name in REFS)):
+            raise WorkflowBlocked("risk shape rehearsal requires varied three candidates, anchor exclusion and two fitted models")
+    if c["feature"]["kind"] == "session_composition_information":
+        from lei_signal.research.session_composition_information import REFS
+        ready = [r for r in inputs["observations"] if r["eligible"]]
+        if (not result["performance"] or result["execution"]["fits"] != 2 or
+                {r["asset"] for r in ready} != {assets[1]} or
+                any(r["eligible"] for r in inputs["observations"] if r["asset"] == assets[0]) or
+                any(len({round(r["features"][name], 8) for r in ready}) < 2 for name in REFS)):
+            raise WorkflowBlocked("session composition rehearsal requires varied session composition, anchor exclusion and two fitted models")
+    if c["feature"]["kind"] == "volume_direction_information":
+        from lei_signal.research.volume_direction_information import REFS
+        ready = [r for r in inputs["observations"] if r["eligible"]]
+        if (not result["performance"] or result["execution"]["fits"] != 2 or
+                {r["asset"] for r in ready} != {assets[1]} or
+                any(r["eligible"] for r in inputs["observations"] if r["asset"] == assets[0]) or
+                any(len({round(r["features"][name], 8) for r in ready}) < 2 for name in REFS)):
+            raise WorkflowBlocked("volume direction rehearsal requires varied volume direction, anchor exclusion and two fitted models")
     if c["feature"]["kind"] == "green_black_state60_information":
         ready = [r for r in inputs["observations"] if r["eligible"]]
         colors = {r["color60"] for r in ready}

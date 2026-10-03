@@ -1,0 +1,74 @@
+{
+  "status": "accepted",
+  "direct_source_label_and_performance": [
+    {
+      "mode": "main",
+      "rows": 951,
+      "max_direct_target_error": 0.0,
+      "MSE": {
+        "B0": 15.390647226172868,
+        "B1": 14.65662814710253,
+        "B2": 14.58434035735031
+      },
+      "difference": 0.07228778975222011,
+      "old_new_same_ids": true
+    },
+    {
+      "mode": "solo",
+      "rows": 951,
+      "max_direct_target_error": 0.0,
+      "MSE": {
+        "B0": 15.390647226172868,
+        "B1": 14.79532614184533,
+        "B2": 14.76224570442471
+      },
+      "difference": 0.03308043742061963,
+      "old_new_same_ids": true
+    }
+  ],
+  "fit_audit": "diagnostics.json eight saved coefficient residuals and training-only transformations; no refits",
+  "causal_boundaries": {
+    "folds": [
+      {
+        "train_end": "2024-12-31",
+        "eval_start": "2025-01-02",
+        "eval_end": "2025-12-31"
+      },
+      {
+        "train_end": "2025-12-31",
+        "eval_start": "2026-01-05",
+        "eval_end": "2026-06-30"
+      }
+    ],
+    "train_condition": "date<=train_end AND label_end<eval_start",
+    "eval_condition": "eval_start<=date<=eval_end AND label_end<=eval_end",
+    "preprocessing": "weighted training-only mean/std/intercept; fixed lambda1",
+    "price_ready_rows": 3255,
+    "volume_break_ineligible": 19,
+    "future_tail_immature": 63,
+    "mature_common_rows": 3173,
+    "evaluation_rows": 951,
+    "planned_evaluation_dates": 359,
+    "scored_dates": 317,
+    "removed_cross_boundary_dates": 42,
+    "historical_arrival": "unknown; dates not supplier delivery proof",
+    "seen_history": true
+  },
+  "budget": {
+    "real_fits": 8,
+    "max_fits": 8,
+    "family_billed_seconds": 104.68866208399777,
+    "max_seconds": 3600,
+    "auxiliary_seconds": 2.1395052500010934,
+    "new_market_requests": 0,
+    "paid_requests": 0
+  },
+  "remaining": [
+    "safe scoped Git handoff"
+  ],
+  "publication": {
+    "accepted_prediction_identity": true,
+    "new_fits": 0,
+    "main_report_registered": true
+  }
+}

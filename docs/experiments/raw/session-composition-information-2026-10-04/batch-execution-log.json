@@ -1,0 +1,70 @@
+[
+  {
+    "phase": "freeze",
+    "candidate": "overnight_minus_intraday20",
+    "mode": "main",
+    "command": [
+      "python3",
+      "scripts/run_factor_lab.py",
+      "--workflow-draft",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/session-composition-information-2026-10-04/draft-main.json",
+      "--out",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/session-composition-information-2026-10-04/freeze-main"
+    ],
+    "exit_code": 0,
+    "seconds": 13.108793915998831,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "phase": "freeze",
+    "candidate": "overnight_minus_intraday20",
+    "mode": "solo",
+    "command": [
+      "python3",
+      "scripts/run_factor_lab.py",
+      "--workflow-draft",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/session-composition-information-2026-10-04/draft-solo.json",
+      "--out",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/session-composition-information-2026-10-04/freeze-solo"
+    ],
+    "exit_code": 0,
+    "seconds": 12.195390124998085,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "phase": "execute",
+    "candidate": "overnight_minus_intraday20",
+    "mode": "main",
+    "command": [
+      "python3",
+      "scripts/run_factor_lab.py",
+      "--workflow-contract",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/session-composition-information-2026-10-04/freeze-main/contract.json",
+      "--out",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/session-composition-information-2026-10-04/run-main"
+    ],
+    "exit_code": 0,
+    "seconds": 18.204019166998478,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "phase": "execute",
+    "candidate": "overnight_minus_intraday20",
+    "mode": "solo",
+    "command": [
+      "python3",
+      "scripts/run_factor_lab.py",
+      "--workflow-contract",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/session-composition-information-2026-10-04/freeze-solo/contract.json",
+      "--out",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/session-composition-information-2026-10-04/run-solo"
+    ],
+    "exit_code": 0,
+    "seconds": 18.295496708000428,
+    "stdout": "",
+    "stderr": ""
+  }
+]

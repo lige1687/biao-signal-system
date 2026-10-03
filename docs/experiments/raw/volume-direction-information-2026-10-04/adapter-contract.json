@@ -1,0 +1,53 @@
+{
+  "mission": "Implement fixed20 volume-weighted direction excess research adapter and independent boundary tests, no real future labels or statistics",
+  "task_scope": [
+    "only adapter and tests for exact pre-fixed candidate and baseline19/3"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "docs/research/current-standards.json",
+    "configs/strategy-documents.v1.json",
+    "src/lei_signal/research/session_composition_information.py",
+    "src/lei_signal/research/risk_shape_information.py",
+    "src/lei_signal/research/top_structure_information.py",
+    "src/lei_signal/research/volume_information.py",
+    "src/lei_signal/research/workflow_inputs.py",
+    "docs/experiments/raw/volume-direction-information-2026-10-04/brief.json",
+    "docs/experiments/raw/volume-direction-information-2026-10-04/draft-main.json",
+    "tests/unit/test_session_composition_information.py"
+  ],
+  "write_paths": [
+    "src/lei_signal/research/volume_direction_information.py",
+    "tests/unit/test_volume_direction_information.py",
+    "docs/experiments/raw/volume-direction-information-2026-10-04/adapter-delivery.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "pure candidate_values(closes,volumes) returning direction_excess20 and direction20; adapter prepare_volume_direction_observations; build_qualification; BASELINE_FEATURES19 SOLO_FEATURES3 REFS FOLDS ASSETS",
+    "manual,prefix,gaps,volume-break,invalid,scale,warmup tests with explicit synthetic fixtures independent of shared dispatcher to avoid root concurrent hook dependencies",
+    "delivery actual tests/failure counts/limitations"
+  ],
+  "stop_conditions": [
+    "scope ambiguity",
+    "permission needed",
+    "no real statistics/labels/fits/network/commit",
+    "stop after two failed repair cycles and preserve evidence"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "budget": {
+    "real_fits": 0,
+    "real_labels": 0,
+    "max_repair_cycles": 2,
+    "network_requests": 0
+  },
+  "authority": "AGENTS proportional independent implementation and lei-gpt-zcode-orchestrator delegates local bounded writer; user continues approved P2"
+}

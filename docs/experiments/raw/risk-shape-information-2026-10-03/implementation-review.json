@@ -1,0 +1,35 @@
+{
+  "schema_version": "implementation-review/1.0",
+  "task": "risk-shape-information-2026-10-03",
+  "status": "engineering_ready_for_controller_review",
+  "scope": "research-only technical risk observation; no production rule, real-label fit or registry edit",
+  "files": {
+    "src/lei_signal/research/risk_shape_information.py": "b7cd8ae4ee78270b9fb00fba8f1fd7eb2045a94c8d0a08428d407f194b6a8556",
+    "src/lei_signal/research/workflow.py": "8a7c48d6a5eb85e28756b89be06daa88ac17ed5c22f01d311579fccf87b7e60a",
+    "src/lei_signal/research/workflow_inputs.py": "288f929b3888d659d7b7ba2f104628147d596a01304b1c04e662fce81a9921d9",
+    "src/lei_signal/research/question_contract.py": "687049aea09786be850b8e3533c23b7bfb443b1baa9ca7e1f400700ad8ba4816",
+    "tests/unit/test_risk_shape_information.py": "4366e20f8fa6b0f1685b8f44a9437c04090d4abadd6d8dcd1545c37227524504",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/definition-proposals.json": "271ccace92c7ddde3e3a93e61712e24d17d22b2adb47d74e6424e4ca0b068cad"
+  },
+  "definition_proposals": {
+    "cards": 3,
+    "sources": 5,
+    "copied_registry_validation": "passed",
+    "active_registry_modified": false
+  },
+  "checks": {
+    "six_frozen_draft_contracts": "validated",
+    "six_synthetic_rehearsals": "each two fitted models; changing all three candidate values; anchor excluded",
+    "unit_integration_tests": "110 passed in 14.49s before one additional boundary test; changed test module 7 passed in 6.64s afterward",
+    "repo_hygiene": "passed",
+    "outcome_values_used_for_qualification": false,
+    "real_fits": 0,
+    "new_market_requests": 0
+  },
+  "known_limits": [
+    "Source arrival timing and action-history completeness are not independently certified.",
+    "Historical predictive effect, per-year and per-ETF results require controller real execution after freeze.",
+    "Anchor rows remain scheduled and source-qualified but are excluded from both main and solo predictions."
+  ],
+  "errors": []
+}

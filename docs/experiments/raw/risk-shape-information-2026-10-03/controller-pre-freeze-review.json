@@ -1,0 +1,59 @@
+{
+  "decision": "estimate_limited_seen_history",
+  "before_outcome_numbers": true,
+  "eligible_common_rows": 3255,
+  "scheduled_rows": 4340,
+  "excluded_anchor_rows": 1085,
+  "future_support_calendar_only": [
+    {
+      "fold": {
+        "train_end": "2024-12-31",
+        "eval_start": "2025-01-02",
+        "eval_end": "2025-12-31"
+      },
+      "train": 2115,
+      "evaluation": 666,
+      "train_dates": 705,
+      "evaluation_dates": 222
+    },
+    {
+      "fold": {
+        "train_end": "2025-12-31",
+        "eval_start": "2026-01-05",
+        "eval_end": "2026-06-30"
+      },
+      "train": 2844,
+      "evaluation": 285,
+      "train_dates": 948,
+      "evaluation_dates": 95
+    }
+  ],
+  "field_counts": {
+    "main": 19,
+    "solo": 3
+  },
+  "reasons": [
+    "705/948较早成熟日期，固定惩罚且不搜索；行数不能当独立观察",
+    "同日三资产相关、未来20间隔重叠，317评价日期不足以推更大市场规律",
+    "所有主/单候选比较共同3255特征就绪行；后续成熟判断再剔除",
+    "三个表达由主控已知算式/反例检查通过，所有结果保留；没有最低有用阈值"
+  ],
+  "definition_check": "controller-formula-check.json",
+  "data_time_limits": [
+    "历史源到达未知",
+    "公司行动历史完整性未知",
+    "过往见过同历史"
+  ],
+  "pending": [
+    "执行助手完成交付",
+    "登记准确卡片与source哈希",
+    "冻结并运行六份合同"
+  ],
+  "preexecution_mechanical_failures": [
+    {
+      "error": "KeyError research_design when overly broad draft glob selected draft-metadata-correction.json",
+      "fixed": "restrict to draft-*-main/solo.json",
+      "real_fits": 0
+    }
+  ]
+}

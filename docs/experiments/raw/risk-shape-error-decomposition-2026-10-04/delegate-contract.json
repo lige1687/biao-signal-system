@@ -1,0 +1,52 @@
+{
+  "mission": "D3：复用一组原波动不稳定主比较保存预测，逐行分解旧减新平方误差；不重新拟合",
+  "task_scope": [
+    "只核原vol_instability20-main一组B1/B2全部951共同预测和原权重",
+    "复用workflow_evaluation验证及权重，保存完整差额明细、符号贡献和极端描述",
+    "原输入及结果只读，报告中文清晰限定为算术描述"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "docs/research",
+    "src/lei_signal/research/workflow_evaluation.py",
+    "src/lei_signal/research/workflow.py",
+    ".agents/skills/lei-quant-tools",
+    "docs/experiments/raw/risk-shape-information-2026-10-03",
+    "docs/experiments/risk-shape-information-2026-10-03.md",
+    "docs/experiments/risk-shape-multimethod-2026-10-03.md"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/risk-shape-error-decomposition-2026-10-04",
+    "docs/experiments/risk-shape-error-decomposition-2026-10-04.md"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "run.py完整可复核明细和summary.json",
+    "verification.json：原权重总体核对、重复/缺失/非有限/相同/零反例、原SHA保持",
+    "中文报告含一句话结论、性能及增量表、范围和0新增市场拟合"
+  ],
+  "stop_conditions": [
+    "来源凭据或准确预测缺失",
+    "任何超可写范围/新拟合/取数/付费",
+    "实际结果不能配对"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "budget": {
+    "real_fits": 0,
+    "new_labels": 0,
+    "paid": 0,
+    "external_requests": 0,
+    "execution_seconds": 600
+  },
+  "selection_reason": "D3派发明确优先旧三风险；固定vol主比较，不看分解后挑例",
+  "authorization": "用户在研究流程发散明确授权既有负责人融合D3；本会话研究继续。"
+}

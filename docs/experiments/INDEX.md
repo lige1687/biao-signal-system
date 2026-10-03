@@ -1,5 +1,18 @@
 # docs/experiments 总索引
 
+- 2026-10-04：[volume-direction-main-2026-10-04](volume-direction-main-2026-10-04.md)
+- 2026-10-04：[risk-shape-information-2026-10-03](risk-shape-information-2026-10-03.md)
+- 2026-10-04：[risk-shape-beta_asymmetry60-main-2026-10-03](risk-shape-beta_asymmetry60-main-2026-10-03.md)
+- 2026-10-04：[risk-shape-negative_cluster60-main-2026-10-03](risk-shape-negative_cluster60-main-2026-10-03.md)
+- 2026-10-04：[session-composition-main-2026-10-04](session-composition-main-2026-10-04.md)
+- 2026-10-04：[session-composition-information-2026-10-04](session-composition-information-2026-10-04.md)
+- 2026-10-04：[risk-shape-error-decomposition-2026-10-04](risk-shape-error-decomposition-2026-10-04.md)
+- 2026-10-04：[volume-direction-information-2026-10-04](volume-direction-information-2026-10-04.md)
+- 2026-10-04：[risk-shape-multimethod-2026-10-03](risk-shape-multimethod-2026-10-03.md)
+- 2026-10-04：[volume-direction-solo-2026-10-04](volume-direction-solo-2026-10-04.md)
+- 2026-10-04：[risk-shape-vol_instability20-main-2026-10-03](risk-shape-vol_instability20-main-2026-10-03.md)
+- 2026-10-04：[session-composition-solo-2026-10-04](session-composition-solo-2026-10-04.md)
+
 - 2026-10-03：[原策略语义与黑绿验证流程样板](technical-factor-method-pilot-2026-10-03.md)：复核旧数字并落盘多方法说明；保留完整原义条件、负结果和未测边界。
 
 - 2026-10-03：[20／60日绿黑状态的实际信息价值](green-black-state-information-2026-10-03.md)：20日复用八轮旧证据；60日多期限/状态/背景/后期/风险检查完成，当前没有实际增量，复杂方法弱于简单均值。

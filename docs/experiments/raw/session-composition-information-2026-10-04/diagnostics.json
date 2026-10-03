@@ -1,0 +1,844 @@
+{
+  "core": {
+    "mse": {
+      "B0": 15.451387748555566,
+      "B1": 14.72343986442354,
+      "B2": 14.794898591302704
+    },
+    "rmse": {
+      "B0": 3.9308253266401403,
+      "B1": 3.8371134807852036,
+      "B2": 3.846413731166046
+    },
+    "rows": 951,
+    "dates": 317,
+    "assets": 3
+  },
+  "solo": {
+    "mse": {
+      "B0": 15.451387748555566,
+      "B1": 14.885011082258597,
+      "B2": 14.944060883850431
+    },
+    "rmse": {
+      "B0": 3.9308253266401403,
+      "B1": 3.8581097810013905,
+      "B2": 3.865754891848477
+    },
+    "rows": 951,
+    "dates": 317,
+    "assets": 3
+  },
+  "increment": {
+    "new_model": "B2",
+    "old_model": "B1",
+    "old_value": 14.723439864423536,
+    "new_value": 14.794898591302701,
+    "absolute_error_improvement": -0.07145872687916466,
+    "relative_percent": -0.48533989025099655,
+    "lo": -0.29784359207680944,
+    "hi": 0.11591618020332531,
+    "unit": "percentage_point_squared",
+    "metric": "MSE",
+    "rows": 951,
+    "dates": 317,
+    "assets": 3,
+    "calendar_dates": 359,
+    "block_length": 60,
+    "draws": 1000,
+    "valid_draws": 1000,
+    "unestimable_draws": 0,
+    "seed": 20261004,
+    "weighting": "equal_asset",
+    "interpretation": "positive means lower prediction error; not investment return"
+  },
+  "simple_baselines": {
+    "mse": {
+      "B0": 15.451387748555566,
+      "asset_mean": 14.494896819815875,
+      "rolling_mature120": 15.561191971818712,
+      "B1": 14.72343986442354,
+      "B2": 14.794898591302704
+    },
+    "rmse": {
+      "B0": 3.9308253266401403,
+      "asset_mean": 3.8072164135777564,
+      "rolling_mature120": 3.9447676701953833,
+      "B1": 3.8371134807852036,
+      "B2": 3.846413731166046
+    },
+    "rows": 951,
+    "dates": 317,
+    "assets": 3
+  },
+  "vs_simple_increment": {
+    "asset_mean": {
+      "new_model": "B2",
+      "old_model": "B1",
+      "old_value": 14.494896819815871,
+      "new_value": 14.794898591302701,
+      "absolute_error_improvement": -0.30000177148682994,
+      "relative_percent": -2.069706153938948,
+      "lo": -1.6902638227310907,
+      "hi": 1.0599878509289145,
+      "unit": "percentage_point_squared",
+      "metric": "MSE",
+      "rows": 951,
+      "dates": 317,
+      "assets": 3,
+      "calendar_dates": 359,
+      "block_length": 60,
+      "draws": 1000,
+      "valid_draws": 1000,
+      "unestimable_draws": 0,
+      "seed": 20261004,
+      "weighting": "equal_asset",
+      "interpretation": "positive means lower prediction error; not investment return"
+    },
+    "rolling_mature120": {
+      "new_model": "B2",
+      "old_model": "B1",
+      "old_value": 15.561191971818708,
+      "new_value": 14.794898591302701,
+      "absolute_error_improvement": 0.7662933805160073,
+      "relative_percent": 4.924387424200943,
+      "lo": -1.3188767151957743,
+      "hi": 3.306788457545352,
+      "unit": "percentage_point_squared",
+      "metric": "MSE",
+      "rows": 951,
+      "dates": 317,
+      "assets": 3,
+      "calendar_dates": 359,
+      "block_length": 60,
+      "draws": 1000,
+      "valid_draws": 1000,
+      "unestimable_draws": 0,
+      "seed": 20261004,
+      "weighting": "equal_asset",
+      "interpretation": "positive means lower prediction error; not investment return"
+    }
+  },
+  "periods": {
+    "2025": {
+      "mse": {
+        "B0": 15.189421297853386,
+        "B1": 14.250822841940732,
+        "B2": 14.315493681991958
+      },
+      "rmse": {
+        "B0": 3.8973608118640217,
+        "B1": 3.7750262041396128,
+        "B2": 3.7835821230669695
+      },
+      "rows": 666,
+      "dates": 222,
+      "assets": 3
+    },
+    "2026": {
+      "mse": {
+        "B0": 16.06356198072278,
+        "B1": 15.827871222225466,
+        "B2": 15.915192168849924
+      },
+      "rmse": {
+        "B0": 4.007937372355359,
+        "B1": 3.9784257215920804,
+        "B2": 3.989384936158696
+      },
+      "rows": 285,
+      "dates": 95,
+      "assets": 3
+    }
+  },
+  "assets": {
+    "510050.SS": {
+      "mse": {
+        "B0": 10.322556094066655,
+        "B1": 8.688109813533519,
+        "B2": 8.59830727759772
+      },
+      "rmse": {
+        "B0": 3.2128734948744335,
+        "B1": 2.947559976240266,
+        "B2": 2.9322870387459887
+      },
+      "rows": 317,
+      "dates": 317,
+      "assets": 1
+    },
+    "510500.SS": {
+      "mse": {
+        "B0": 15.853300003326025,
+        "B1": 15.338236544786557,
+        "B2": 15.389983227250134
+      },
+      "rmse": {
+        "B0": 3.9816202736230415,
+        "B1": 3.916406075062513,
+        "B2": 3.923006911445624
+      },
+      "rows": 317,
+      "dates": 317,
+      "assets": 1
+    },
+    "588000.SS": {
+      "mse": {
+        "B0": 20.178307148274016,
+        "B1": 20.143973234950543,
+        "B2": 20.39640526906026
+      },
+      "rmse": {
+        "B0": 4.492027064508184,
+        "B1": 4.4882037871458715,
+        "B2": 4.5162379553185925
+      },
+      "rows": 317,
+      "dates": 317,
+      "assets": 1
+    }
+  },
+  "leave_one_asset_out": {
+    "510050.SS": {
+      "mse": {
+        "B0": 18.01580357580002,
+        "B1": 17.741104889868552,
+        "B2": 17.893194248155194
+      },
+      "rmse": {
+        "B0": 4.244502747766813,
+        "B1": 4.212019098943943,
+        "B2": 4.230034780962822
+      },
+      "rows": 634,
+      "dates": 317,
+      "assets": 2
+    },
+    "510500.SS": {
+      "mse": {
+        "B0": 15.250431621170335,
+        "B1": 14.41604152424203,
+        "B2": 14.497356273328988
+      },
+      "rmse": {
+        "B0": 3.9051801009902647,
+        "B1": 3.796846260285242,
+        "B2": 3.8075393987888013
+      },
+      "rows": 634,
+      "dates": 317,
+      "assets": 2
+    },
+    "588000.SS": {
+      "mse": {
+        "B0": 13.087928048696343,
+        "B1": 12.013173179160038,
+        "B2": 11.994145252423927
+      },
+      "rmse": {
+        "B0": 3.617724153206867,
+        "B1": 3.4660024782391656,
+        "B2": 3.4632564520150577
+      },
+      "rows": 634,
+      "dates": 317,
+      "assets": 2
+    }
+  },
+  "block120_increment": {
+    "new_model": "B2",
+    "old_model": "B1",
+    "old_value": 14.723439864423536,
+    "new_value": 14.794898591302701,
+    "absolute_error_improvement": -0.07145872687916466,
+    "relative_percent": -0.48533989025099655,
+    "lo": -0.3015598851125483,
+    "hi": 0.12583260110303202,
+    "unit": "percentage_point_squared",
+    "metric": "MSE",
+    "rows": 951,
+    "dates": 317,
+    "assets": 3,
+    "calendar_dates": 359,
+    "block_length": 120,
+    "draws": 1000,
+    "valid_draws": 1000,
+    "unestimable_draws": 0,
+    "seed": 20261004,
+    "weighting": "equal_asset",
+    "interpretation": "positive means lower prediction error; not investment return"
+  },
+  "fit_boundary_audit": [
+    {
+      "fold": "0",
+      "model": "B1",
+      "training_rows": 2115,
+      "evaluation_rows": 666,
+      "normal_equation_residual": 1.1102230246251565e-16,
+      "prediction_max_error": 0.0,
+      "training_max_label_end": "2024-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "0",
+      "model": "B2",
+      "training_rows": 2115,
+      "evaluation_rows": 666,
+      "normal_equation_residual": 5.551115123125783e-17,
+      "prediction_max_error": 0.0,
+      "training_max_label_end": "2024-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "1",
+      "model": "B1",
+      "training_rows": 2844,
+      "evaluation_rows": 285,
+      "normal_equation_residual": 4.440892098500626e-16,
+      "prediction_max_error": 1.7763568394002505e-15,
+      "training_max_label_end": "2025-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "1",
+      "model": "B2",
+      "training_rows": 2844,
+      "evaluation_rows": 285,
+      "normal_equation_residual": 4.440892098500626e-16,
+      "prediction_max_error": 1.7763568394002505e-15,
+      "training_max_label_end": "2025-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "0",
+      "model": "B1",
+      "training_rows": 2115,
+      "evaluation_rows": 666,
+      "normal_equation_residual": 1.1102230246251565e-16,
+      "prediction_max_error": 0.0,
+      "training_max_label_end": "2024-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "0",
+      "model": "B2",
+      "training_rows": 2115,
+      "evaluation_rows": 666,
+      "normal_equation_residual": 5.551115123125783e-17,
+      "prediction_max_error": 0.0,
+      "training_max_label_end": "2024-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "1",
+      "model": "B1",
+      "training_rows": 2844,
+      "evaluation_rows": 285,
+      "normal_equation_residual": 2.706168622523819e-16,
+      "prediction_max_error": 1.7763568394002505e-15,
+      "training_max_label_end": "2025-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "1",
+      "model": "B2",
+      "training_rows": 2844,
+      "evaluation_rows": 285,
+      "normal_equation_residual": 3.3306690738754696e-16,
+      "prediction_max_error": 2.6645352591003757e-15,
+      "training_max_label_end": "2025-12-31",
+      "negative_prediction_rows": 0
+    }
+  ],
+  "phases21": [
+    {
+      "phase": 0,
+      "mse": {
+        "B0": 14.250405373935305,
+        "B1": 13.898341272489441,
+        "B2": 13.950030685508302
+      },
+      "rmse": {
+        "B0": 3.7749709103429265,
+        "B1": 3.7280479171396714,
+        "B2": 3.734973987259925
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.05168941301886143
+    },
+    {
+      "phase": 1,
+      "mse": {
+        "B0": 12.494784875790419,
+        "B1": 11.914162919193062,
+        "B2": 11.945893544798302
+      },
+      "rmse": {
+        "B0": 3.5347962990518167,
+        "B1": 3.451689864282865,
+        "B2": 3.4562831980030664
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.03173062560524009
+    },
+    {
+      "phase": 2,
+      "mse": {
+        "B0": 12.589987859153696,
+        "B1": 12.000990113903296,
+        "B2": 12.106512998154942
+      },
+      "rmse": {
+        "B0": 3.548237289014603,
+        "B1": 3.4642445228221543,
+        "B2": 3.4794414779034497
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.10552288425164669
+    },
+    {
+      "phase": 3,
+      "mse": {
+        "B0": 11.395149017909006,
+        "B1": 10.476376459764873,
+        "B2": 10.59273610627449
+      },
+      "rmse": {
+        "B0": 3.3756701583402675,
+        "B1": 3.2367231052045327,
+        "B2": 3.2546483844302583
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.11635964650961661
+    },
+    {
+      "phase": 4,
+      "mse": {
+        "B0": 13.622881108539037,
+        "B1": 12.719486568842086,
+        "B2": 12.955757218122574
+      },
+      "rmse": {
+        "B0": 3.690918735022357,
+        "B1": 3.56643891982494,
+        "B2": 3.5994106765028318
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.23627064928048824
+    },
+    {
+      "phase": 5,
+      "mse": {
+        "B0": 13.329104087310252,
+        "B1": 12.293080984725457,
+        "B2": 12.498730408676785
+      },
+      "rmse": {
+        "B0": 3.6509045574090613,
+        "B1": 3.50614902488834,
+        "B2": 3.5353543540466754
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.20564942395132846
+    },
+    {
+      "phase": 6,
+      "mse": {
+        "B0": 10.440546951372637,
+        "B1": 9.029838813975973,
+        "B2": 9.105921691745174
+      },
+      "rmse": {
+        "B0": 3.231183521772268,
+        "B1": 3.0049690204685926,
+        "B2": 3.0176019770249973
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.07608287776920086
+    },
+    {
+      "phase": 7,
+      "mse": {
+        "B0": 10.390183142708901,
+        "B1": 8.747591339825696,
+        "B2": 8.700512981487204
+      },
+      "rmse": {
+        "B0": 3.223380700864994,
+        "B1": 2.957632725648284,
+        "B2": 2.9496631979748473
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": 0.047078358338492166
+    },
+    {
+      "phase": 8,
+      "mse": {
+        "B0": 13.427336719059705,
+        "B1": 11.564194648874414,
+        "B2": 11.517361110715852
+      },
+      "rmse": {
+        "B0": 3.664333052420277,
+        "B1": 3.400616804180444,
+        "B2": 3.393723782324639
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": 0.046833538158562504
+    },
+    {
+      "phase": 9,
+      "mse": {
+        "B0": 18.203999721649932,
+        "B1": 16.9540552310451,
+        "B2": 17.038695609452294
+      },
+      "rmse": {
+        "B0": 4.266614550395891,
+        "B1": 4.117530234381419,
+        "B2": 4.127795490265027
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.08464037840719385
+    },
+    {
+      "phase": 10,
+      "mse": {
+        "B0": 18.369385000394537,
+        "B1": 17.903460417070725,
+        "B2": 17.90893117593305
+      },
+      "rmse": {
+        "B0": 4.285952052974291,
+        "B1": 4.231248092120187,
+        "B2": 4.231894513800296
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.005470758862323066
+    },
+    {
+      "phase": 11,
+      "mse": {
+        "B0": 19.53918140620135,
+        "B1": 18.565971730466096,
+        "B2": 18.44688051513527
+      },
+      "rmse": {
+        "B0": 4.420314627512543,
+        "B1": 4.308824866534505,
+        "B2": 4.294983179843114
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": 0.11909121533082612
+    },
+    {
+      "phase": 12,
+      "mse": {
+        "B0": 17.551505506584284,
+        "B1": 16.96498313660255,
+        "B2": 16.989739670903496
+      },
+      "rmse": {
+        "B0": 4.1894516952203045,
+        "B1": 4.118857018227575,
+        "B2": 4.121861190154697
+      },
+      "rows": 48,
+      "dates": 16,
+      "assets": 3,
+      "improvement": -0.02475653430094482
+    },
+    {
+      "phase": 13,
+      "mse": {
+        "B0": 16.03268022574208,
+        "B1": 15.683638665839577,
+        "B2": 15.646121592501894
+      },
+      "rmse": {
+        "B0": 4.0040829444133745,
+        "B1": 3.960257398937546,
+        "B2": 3.955517866538071
+      },
+      "rows": 48,
+      "dates": 16,
+      "assets": 3,
+      "improvement": 0.037517073337683726
+    },
+    {
+      "phase": 14,
+      "mse": {
+        "B0": 19.29877057593618,
+        "B1": 18.92326474069857,
+        "B2": 18.93557313825577
+      },
+      "rmse": {
+        "B0": 4.393036600796331,
+        "B1": 4.350087900341621,
+        "B2": 4.3515024001206495
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.012308397557198703
+    },
+    {
+      "phase": 15,
+      "mse": {
+        "B0": 19.418187378120066,
+        "B1": 18.957396273892734,
+        "B2": 19.006339967323342
+      },
+      "rmse": {
+        "B0": 4.406607241191353,
+        "B1": 4.354009218397767,
+        "B2": 4.359626127011735
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.04894369343060845
+    },
+    {
+      "phase": 16,
+      "mse": {
+        "B0": 17.248516779352457,
+        "B1": 17.00195333636774,
+        "B2": 17.09616188246764
+      },
+      "rmse": {
+        "B0": 4.153133368837612,
+        "B1": 4.123342495642066,
+        "B2": 4.13475052239765
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.09420854609989959
+    },
+    {
+      "phase": 17,
+      "mse": {
+        "B0": 18.18210004549651,
+        "B1": 17.98119472207582,
+        "B2": 18.157398763734165
+      },
+      "rmse": {
+        "B0": 4.264047378430089,
+        "B1": 4.240423884716694,
+        "B2": 4.2611499344348545
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.17620404165834458
+    },
+    {
+      "phase": 18,
+      "mse": {
+        "B0": 18.85296259381994,
+        "B1": 18.39253891467544,
+        "B2": 18.522823122646862
+      },
+      "rmse": {
+        "B0": 4.341999838072307,
+        "B1": 4.288652342481894,
+        "B2": 4.303814949860979
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.13028420797142104
+    },
+    {
+      "phase": 19,
+      "mse": {
+        "B0": 16.499300378764474,
+        "B1": 16.197945655034072,
+        "B2": 16.402931059602636
+      },
+      "rmse": {
+        "B0": 4.061933083984087,
+        "B1": 4.024667148353274,
+        "B2": 4.050053216885259
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.20498540456856418
+    },
+    {
+      "phase": 20,
+      "mse": {
+        "B0": 13.163413289478433,
+        "B1": 12.808321735958618,
+        "B2": 12.964746235196749
+      },
+      "rmse": {
+        "B0": 3.6281418507933827,
+        "B1": 3.5788715729903773,
+        "B2": 3.6006591389906304
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.15642449923813118
+    }
+  ],
+  "action_window_sensitivity": {
+    "definition": "current ETF action effective within past20 intervals t-19..t only; no future selection; same saved predictions, no fit",
+    "groups": {
+      "False": {
+        "mse": {
+          "B0": 15.790009467605636,
+          "B1": 15.073860565530527,
+          "B2": 15.138314125124936
+        },
+        "rmse": {
+          "B0": 3.9736644885553227,
+          "B1": 3.8825069949107016,
+          "B2": 3.890798648751299
+        },
+        "rows": 902,
+        "dates": 317,
+        "assets": 3
+      },
+      "True": {
+        "mse": {
+          "B0": 5.642506351027088,
+          "B1": 5.273194686781883,
+          "B2": 5.364363019752715
+        },
+        "rmse": {
+          "B0": 2.3753960408797283,
+          "B1": 2.2963437649406684,
+          "B2": 2.316109457636386
+        },
+        "rows": 49,
+        "dates": 49,
+        "assets": 2
+      }
+    },
+    "original_weights": {
+      "False": 0.94847528916929,
+      "True": 0.051524710830704534
+    },
+    "original_weight_contributions": {
+      "False": -0.06392144697190567,
+      "True": -0.007537279907258443
+    },
+    "event_dates": {
+      "510300.SS": [
+        "2021-01-18",
+        "2022-01-19",
+        "2023-01-16",
+        "2024-01-18",
+        "2025-06-18",
+        "2026-01-19"
+      ],
+      "510050.SS": [
+        "2021-11-29",
+        "2022-12-01",
+        "2023-11-27",
+        "2024-12-02",
+        "2025-12-17"
+      ],
+      "510500.SS": [
+        "2022-08-29",
+        "2024-05-17",
+        "2025-01-16",
+        "2026-01-16"
+      ],
+      "588000.SS": []
+    }
+  },
+  "top10_date_contributions": [
+    [
+      "2025-08-29",
+      -0.007304552884020273
+    ],
+    [
+      "2025-03-18",
+      -0.007042509231762582
+    ],
+    [
+      "2025-03-11",
+      -0.006978360169497868
+    ],
+    [
+      "2025-03-17",
+      -0.006844667973074812
+    ],
+    [
+      "2025-03-13",
+      -0.006774045019464392
+    ],
+    [
+      "2025-10-16",
+      0.0058376609944207755
+    ],
+    [
+      "2025-01-03",
+      -0.005746789927433732
+    ],
+    [
+      "2025-03-19",
+      -0.005500828519369757
+    ],
+    [
+      "2025-03-06",
+      -0.005158027520331236
+    ],
+    [
+      "2025-02-05",
+      -0.0051226734313532946
+    ]
+  ],
+  "top10_remaining_original_weight_improvement": -0.020823933197276885,
+  "sign_counts": {
+    "better": 439,
+    "worse": 512,
+    "same": 0
+  },
+  "common_support_asserted": true,
+  "fingerprints": {
+    "docs/experiments/raw/session-composition-information-2026-10-04/run-main/contract.json": "392c69ce294059d480a0e013d5b579ad70ed3377e5c10252d0def4f0840707a9",
+    "docs/experiments/raw/session-composition-information-2026-10-04/run-main/preflight.json": "1e4df2bc3bce108126feaeaf020bf3a848139e8a892a3ad1725539cc8725c5c7",
+    "docs/experiments/raw/session-composition-information-2026-10-04/run-main/result.json": "b4b652469af5fcb99bc0d9cd71676e624991838d1fb36a16c176996801afc4cd",
+    "docs/experiments/raw/session-composition-information-2026-10-04/run-main/receipt.json": "7f85ea44d8b8048040a9cc5c6580b686be750ea9f18eac7ec092ccd3d97e88c7",
+    "docs/experiments/raw/session-composition-information-2026-10-04/run-solo/contract.json": "fa5c34202613bb04c9ba87c7e0f51c38e8aa7f53f67332caeff5d0d123479508",
+    "docs/experiments/raw/session-composition-information-2026-10-04/run-solo/preflight.json": "29a4895de572e3e0341409261ea57ea88454bf067944bea7d08a3d46c90445a0",
+    "docs/experiments/raw/session-composition-information-2026-10-04/run-solo/result.json": "697d58bcee94c032e4d978ba3d8c08053a05375847a787835669fd818de1a28f",
+    "docs/experiments/raw/session-composition-information-2026-10-04/run-solo/receipt.json": "0a3df0ceb80a25a89a7aad17d45f1d65756d053cdec0870c1b7e2415f1705c88"
+  },
+  "execution": {
+    "new_fits": 0,
+    "real_fits_verified": 8,
+    "seconds": 2.3584329590012203
+  },
+  "limits": "All history seen; dates/ETFs related; 60/120 draws conditional and few blocks; phase alternatives correlated. Baseline review adapter absent locally, reused prior experiment arithmetic under this raw only, no platform created."
+}

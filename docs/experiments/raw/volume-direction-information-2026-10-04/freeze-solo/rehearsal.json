@@ -1,0 +1,93 @@
+{
+  "schema_version": "workflow-rehearsal/1.0",
+  "data_mode": "synthetic",
+  "input_sha256": "2f12d7dd5c06bd05e9ab34529d89132260217d15fd53cee2ea5c9540806f413f",
+  "definition_and_method": "937ab0c338314d7dcac00e360a54494efe06cb3f57a367ae0cd6fcc3f070d629",
+  "coverage": {
+    "scheduled": 1200,
+    "anchor_excluded": 600,
+    "price_ready_252": 349,
+    "volume_ready_20": 580,
+    "common_ready": 349,
+    "eligible": 328,
+    "per_asset": {
+      "synthetic-A": {
+        "scheduled": 600,
+        "anchor_excluded": 600,
+        "price_ready_252": 0,
+        "volume_ready_20": 0,
+        "common_ready": 0,
+        "eligible": 0
+      },
+      "synthetic-B": {
+        "scheduled": 600,
+        "anchor_excluded": 0,
+        "price_ready_252": 349,
+        "volume_ready_20": 580,
+        "common_ready": 349,
+        "eligible": 328,
+        "joint_252_or_feature_missing": 251,
+        "feature_ready": 349
+      }
+    }
+  },
+  "performance": [
+    {
+      "model": "B0",
+      "metric": "MSE",
+      "value": 6.796125223226023,
+      "unit": "percentage_point_squared",
+      "rows": 252,
+      "dates": 252,
+      "assets": 1
+    },
+    {
+      "model": "B0",
+      "metric": "RMSE",
+      "value": 2.606937901681976,
+      "unit": "percentage_point",
+      "rows": 252,
+      "dates": 252,
+      "assets": 1
+    },
+    {
+      "model": "B1",
+      "metric": "MSE",
+      "value": 4.072819431267237,
+      "unit": "percentage_point_squared",
+      "rows": 252,
+      "dates": 252,
+      "assets": 1
+    },
+    {
+      "model": "B1",
+      "metric": "RMSE",
+      "value": 2.0181227493062055,
+      "unit": "percentage_point",
+      "rows": 252,
+      "dates": 252,
+      "assets": 1
+    },
+    {
+      "model": "B2",
+      "metric": "MSE",
+      "value": 10.237705739167655,
+      "unit": "percentage_point_squared",
+      "rows": 252,
+      "dates": 252,
+      "assets": 1
+    },
+    {
+      "model": "B2",
+      "metric": "RMSE",
+      "value": 3.199641501663531,
+      "unit": "percentage_point",
+      "rows": 252,
+      "dates": 252,
+      "assets": 1
+    }
+  ],
+  "fits": 2,
+  "purpose": "engineering_error_check_only",
+  "selection_used": false
+}

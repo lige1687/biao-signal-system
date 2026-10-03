@@ -1,0 +1,50 @@
+{
+  "mission": "Implement research-only exact three risk-shape features and shared workflow hooks, without real future-label fits",
+  "task_scope": [
+    "Follow brief.json exactly; no method choices or market-outcome reads",
+    "Implement source qualification and causal observations; fixed main/solo validator supports",
+    "Produce full versioned definition card proposals without editing registry",
+    "Run bounded synthetic/hand tests and save implementation review"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "docs/research/",
+    "configs/",
+    "src/lei_signal/research/",
+    "docs/experiments/raw/volume-information-2026-09-30/",
+    "/Users/yongbiaoli/Desktop/lei signal doc/",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/brief.json"
+  ],
+  "write_paths": [
+    "src/lei_signal/research/risk_shape_information.py",
+    "src/lei_signal/research/workflow.py",
+    "src/lei_signal/research/workflow_inputs.py",
+    "src/lei_signal/research/question_contract.py",
+    "tests/unit/test_risk_shape_information.py",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/definition-proposals.json",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/implementation-review.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "exact adapter and minimal hooks",
+    "test evidence including hand independently constructed numbers/prefix/missing",
+    "definition-proposals.json with existing registry shape",
+    "implementation-review.json with limitations and changed file hashes"
+  ],
+  "stop_conditions": [
+    "ambiguous core formula",
+    "need to expand write scope",
+    "required source unavailable",
+    "real future-label fit or production requested"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

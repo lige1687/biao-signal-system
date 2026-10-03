@@ -1,0 +1,29 @@
+[
+  {
+    "stage": "initial pytest before qualification complete",
+    "status": "failed",
+    "tests_passed": 4,
+    "tests_failed": 1,
+    "reason": "draft qualification SHA was pending; guard correctly rejects placeholder. Source qualification is next, no real fits.",
+    "real_fits": 0,
+    "synthetic_fits": 0,
+    "correction": "Bind actually generated qualification SHA before contract validation/rehearsal."
+  },
+  {
+    "stage": "qualified draft test batch",
+    "status": "failed",
+    "tests_passed": 78,
+    "tests_failed": 1,
+    "reason": "Copied scaffold retained old question.hypothesis_family while history already new; guard rejects mismatch. No real fits.",
+    "correction": "Set actual question_id and hypothesis_family keys; remove non-authoritative id/family aliases before freezing.",
+    "seconds": 8.05,
+    "real_fits": 0
+  },
+  {
+    "stage": "completion metadata fingerprint inventory",
+    "status": "failed_then_corrected",
+    "reason": "relative file Path.relative_to absolute cwd rejected; only inventory generation interrupted, prior progress/plan writes succeeded.",
+    "correction": "Use already repository-relative path.as_posix; no repeat of prior progress writes or scientific computation.",
+    "real_fits": 0
+  }
+]

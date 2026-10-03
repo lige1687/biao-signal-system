@@ -1,0 +1,74 @@
+{
+  "status": "ready_but_not_written",
+  "outside_repository_database": "/Users/yongbiaoli/.lei_signal_lab/system_upgrades.db",
+  "create": {
+    "kind": "concrete",
+    "title": "验证波动变化、涨跌跟随差与亏损连续性的额外风险信息",
+    "purpose": "在三只国内宽基ETF的相同历史日期上，分别验证三个固定风险候选的表现、相对已有信息的帮助和更简单风险参考；不做同指数ETF产品比较、不改买卖规则。",
+    "parent_id": "okr-ff1e0a86fbac",
+    "priority": "medium",
+    "owner": "本聊天主控",
+    "next_action": "历史范围研究完成；待用户验收。波动不稳定程度仅保留线索，其他候选未确认稳定帮助；生产采用与真正未见资料另行授权。",
+    "evidence": "报告docs/experiments/risk-shape-information-2026-10-03.md；原始证据docs/experiments/raw/risk-shape-information-2026-10-03/。951条、317日期、三ETF；已有模型平方误差减少1.26%/0.03%/0.51%，均未胜过各ETF历史平均风险。",
+    "milestones": [
+      {
+        "id": "definitions",
+        "title": "固定三表达和来源时间/缺失边界",
+        "done": true
+      },
+      {
+        "id": "performance",
+        "title": "交付因子性能与已有信息增量表，核简单对照和不确定性",
+        "done": true
+      },
+      {
+        "id": "scope",
+        "title": "交付跨年、逐ETF、反例和结论范围",
+        "done": true
+      }
+    ],
+    "links": [
+      {
+        "label": "三个价格风险候选完整报告",
+        "url": "/library?file=docs%2Fexperiments%2Frisk-shape-information-2026-10-03.md"
+      }
+    ]
+  },
+  "authorization_note": "用户2026-10-03：可以，这几个因子你可以去验证一下有效性哈；继续哈。仅研究验证，不包含规则采用。",
+  "final_action": "submit_review, not accept",
+  "summary": {
+    "vol_instability20": {
+      "solo_rmse": 3.836773278739687,
+      "combined_rmse": 3.8128091350669724,
+      "mse_improvement_percent": 1.2627916144965783,
+      "primary_interval_pp2": [
+        0.0011877966545760362,
+        0.4561688779379861
+      ],
+      "status": "inconclusive",
+      "vs_asset_mean_percent": -0.2940116177716941
+    },
+    "beta_asymmetry60": {
+      "solo_rmse": 3.8548258960516626,
+      "combined_rmse": 3.836620689282713,
+      "mse_improvement_percent": 0.025683882477181303,
+      "primary_interval_pp2": [
+        -0.05354669713914261,
+        0.06427955103670203
+      ],
+      "status": "inconclusive",
+      "vs_asset_mean_percent": -1.550624998647927
+    },
+    "negative_cluster60": {
+      "solo_rmse": 3.838520140220018,
+      "combined_rmse": 3.827288737721991,
+      "mse_improvement_percent": 0.5114347137851999,
+      "primary_interval_pp2": [
+        -0.003602592538806072,
+        0.1468896561233204
+      ],
+      "status": "inconclusive",
+      "vs_asset_mean_percent": -1.0572152667428327
+    }
+  }
+}

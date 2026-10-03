@@ -1,0 +1,253 @@
+{
+  "status": "passed",
+  "real_feature_rows": 3255,
+  "independent_product_checks": 6510,
+  "max_absolute_error": 1.6076029396572267e-13,
+  "outcome_values_read": false,
+  "samples": [
+    {
+      "asset": "510050.SS",
+      "date": "2022-01-04",
+      "overnight20": 1.475020828050178,
+      "intraday20": -0.7951665407528818,
+      "difference": 2.270187368803049,
+      "sum": 0.6798542872972961,
+      "log_total": 0.6798542872973127
+    },
+    {
+      "asset": "510050.SS",
+      "date": "2025-01-02",
+      "overnight20": 1.0998775392963058,
+      "intraday20": -2.2925864228953214,
+      "difference": 3.3924639621916524,
+      "sum": -1.1927088835990156,
+      "log_total": -1.192708883599018
+    },
+    {
+      "asset": "510050.SS",
+      "date": "2026-01-05",
+      "overnight20": 0.22476418012465949,
+      "intraday20": 4.201939909844012,
+      "difference": -3.9771757297193484,
+      "sum": 4.426704089968672,
+      "log_total": 4.426704089968606
+    },
+    {
+      "asset": "510050.SS",
+      "date": "2026-06-30",
+      "overnight20": -3.3662146606647987,
+      "intraday20": 7.167697020552693,
+      "difference": -10.53391168121749,
+      "sum": 3.8014823598878946,
+      "log_total": 3.8014823598879337
+    },
+    {
+      "asset": "510500.SS",
+      "date": "2022-01-04",
+      "overnight20": -1.0130811925223455,
+      "intraday20": 2.451078186970621,
+      "difference": -3.4641593794929517,
+      "sum": 1.4379969944482756,
+      "log_total": 1.4379969944482587
+    },
+    {
+      "asset": "510500.SS",
+      "date": "2025-01-02",
+      "overnight20": 1.1383706524137622,
+      "intraday20": -7.061947548712062,
+      "difference": 8.200318201125814,
+      "sum": -5.9235768962983,
+      "log_total": -5.923576896298215
+    },
+    {
+      "asset": "510500.SS",
+      "date": "2026-01-05",
+      "overnight20": 0.28453573112236025,
+      "intraday20": 8.664248287429627,
+      "difference": -8.379712556307288,
+      "sum": 8.948784018551988,
+      "log_total": 8.948784018551992
+    },
+    {
+      "asset": "510500.SS",
+      "date": "2026-06-30",
+      "overnight20": -4.327226708590956,
+      "intraday20": 13.71694799685614,
+      "difference": -18.04417470544709,
+      "sum": 9.389721288265184,
+      "log_total": 9.389721288265235
+    },
+    {
+      "asset": "588000.SS",
+      "date": "2022-01-04",
+      "overnight20": -0.7282769006987097,
+      "intraday20": -2.186572070742991,
+      "difference": 1.4582951700442839,
+      "sum": -2.9148489714417005,
+      "log_total": -2.914848971441693
+    },
+    {
+      "asset": "588000.SS",
+      "date": "2025-01-02",
+      "overnight20": 2.27302142551216,
+      "intraday20": -6.256063705308208,
+      "difference": 8.529085130820418,
+      "sum": -3.9830422797960483,
+      "log_total": -3.983042279796028
+    },
+    {
+      "asset": "588000.SS",
+      "date": "2026-01-05",
+      "overnight20": -1.367630840833067,
+      "intraday20": 7.286517979866152,
+      "difference": -8.654148820699229,
+      "sum": 5.918887139033084,
+      "log_total": 5.918887139033066
+    },
+    {
+      "asset": "588000.SS",
+      "date": "2026-06-30",
+      "overnight20": -3.897619086677847,
+      "intraday20": 32.89361686315538,
+      "difference": -36.791235949833215,
+      "sum": 28.995997776477534,
+      "log_total": 28.995997776477505
+    }
+  ],
+  "definition": {
+    "scope": "同一国内宽基ETF过去20个间隔的价格变化构成；510300仅市场参照，不比较同指数ETF产品",
+    "not_for": [
+      "production_trade",
+      "automatic_buy_or_sell",
+      "LEI_original_rule",
+      "account_return_claim"
+    ],
+    "input": {
+      "fields": [
+        "date",
+        "open",
+        "high",
+        "low",
+        "close",
+        "calendar",
+        "action_known"
+      ],
+      "price_basis": "economic_price",
+      "currency": "CNY ETF economic price index",
+      "frequency": "daily",
+      "calendar": "four-source-ETF common trading calendar",
+      "sources": "source-qualified historical ETF OHLC"
+    },
+    "universe": {
+      "version": "same-etf-session-composition-20261004",
+      "eligibility": "Four source ETF scheduled, 510300 excluded as source-only anchor; all baseline fields and the sole candidate finite. No old risk-shape all-three-candidates filter.",
+      "warmup": "252 synchronized contiguous known OHLC rows for target and anchor",
+      "missing": "Missing/invalid/nonpositive own or anchor OHLC or unknown action resets synchronized 252 continuous warmup; no filling",
+      "quality_gate": "Reuse qualify_top_panel source-only V01 economic OHLC/action reconstruction",
+      "degrade": "Historical arrival and action-history completeness not independently certified; no sector or overseas extrapolation"
+    },
+    "time": {
+      "observation_time": "After complete t close",
+      "available_at": "Historical provider arrival not certified",
+      "decision_at": "After t close for research",
+      "execution_at": "No trade",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-10-04 research proposal"
+    },
+    "validation": {
+      "method": "Independent logarithmic product identity, boundary, scale, prefix, gap, no-label qualification and source action reconstruction; synthetic rehearsal and later exact real comparison.",
+      "tolerance": {
+        "absolute": 1e-10,
+        "relative": 1e-10,
+        "integer": 0
+      },
+      "tests": [
+        "tests/unit/test_session_composition_information.py"
+      ],
+      "limitations": "Seen retrospective history; announcement arrival/action completeness unknown; no independent evidence or real open execution"
+    },
+    "status": {
+      "definition_clarity": "fixed_research_proxy",
+      "data_qualification": "limited_frozen_sources",
+      "implementation": "verified_research_only",
+      "effectiveness": "not_proven",
+      "production": "not_authorized"
+    },
+    "sources": [
+      "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+      "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md",
+      "docs/experiments/raw/session-composition-information-2026-10-04/brief.json",
+      "src/lei_signal/research/session_composition_information.py",
+      "tests/unit/test_session_composition_information.py"
+    ],
+    "id": "research.price.overnight_minus_intraday20",
+    "version": "1.0.0",
+    "name": "20日隔夜与日内经济价格变化之差",
+    "type": "feature",
+    "profile": "mixed",
+    "uses": [
+      "research_signal",
+      "description",
+      "comparison",
+      "diagnostic"
+    ],
+    "spec_anchor": [
+      "用户2026-10-03方向制定及2026-10-04继续授权；候选为研究扩展，非原文交易公式",
+      "LEI技术体系§2.4风险背景观察；不替换原判断"
+    ],
+    "spec_layer": "technical_risk_observation_research_extension",
+    "definition": {
+      "formula": "100*sum[j=t-19..t](log(O[j]/C[j-1])-log(C[j]/O[j]))",
+      "parameters": {
+        "candidate": "overnight_minus_intraday20",
+        "lookback": 20,
+        "warmup": 252,
+        "anchor": "510300.SS",
+        "baseline_main": [
+          "S",
+          "E",
+          "return1",
+          "return20",
+          "return60",
+          "volatility5",
+          "volatility20",
+          "volatility60",
+          "market_return20",
+          "market_volatility20",
+          "beta60",
+          "relative_return20",
+          "negative_fraction60",
+          "downside_rms60",
+          "return_autocorr1_60",
+          "current_negative_run",
+          "asset_510500",
+          "asset_588000"
+        ],
+        "baseline_solo": [
+          "asset_510500",
+          "asset_588000"
+        ],
+        "comparison_modes": [
+          "main",
+          "solo"
+        ]
+      },
+      "endpoints": "21 contiguous close prices and last20 economic opens through t; future label is max(0,100*(1-min(C[t+1:t+21])/C[t+1]))",
+      "unit": "log_change_percentage_point",
+      "direction": "Positive means greater overnight than intraday change; risk relation estimated, no assumed trading direction",
+      "transforms": "Source economic OHLC: nominal*split multiplier plus effective cash, times previous economic/nominal-close scale. Both open and close include cash. Log partition is exact price-index identity, not actual trading gains. No normalization/tuning."
+    },
+    "dependencies": [],
+    "lifecycle": {
+      "state": "exists",
+      "basis": [
+        "docs/experiments/raw/session-composition-information-2026-10-04/brief.json"
+      ],
+      "verification_scope": "Defined before effects; tests/qualification pending, not effectiveness claim"
+    },
+    "research_owner": "technical_agent",
+    "research_status": "IN_SCOPE",
+    "origin": "User-authorized same-ETF price composition, not a literal LEI rule"
+  },
+  "seconds": 2.177050917001907
+}

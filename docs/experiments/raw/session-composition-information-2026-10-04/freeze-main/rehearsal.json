@@ -1,0 +1,87 @@
+{
+  "schema_version": "workflow-rehearsal/1.0",
+  "data_mode": "synthetic",
+  "input_sha256": "26d98f15d33b5776fdb73ed6645ab762f6157014e81b5a1cd260fe9156e7ab79",
+  "definition_and_method": "5c999de7cadc26948cf0df053d9979b20ee6ef752dac30b843a088160f9a9fca",
+  "coverage": {
+    "scheduled": 1200,
+    "anchor_excluded": 600,
+    "common_ready": 349,
+    "eligible": 328,
+    "per_asset": {
+      "synthetic-A": {
+        "scheduled": 600,
+        "anchor_excluded": 600,
+        "common_ready": 0,
+        "eligible": 0
+      },
+      "synthetic-B": {
+        "scheduled": 600,
+        "anchor_excluded": 0,
+        "common_ready": 349,
+        "eligible": 328,
+        "joint_252_or_feature_missing": 251,
+        "feature_ready": 349
+      }
+    }
+  },
+  "performance": [
+    {
+      "model": "B0",
+      "metric": "MSE",
+      "value": 6.796125223226023,
+      "unit": "percentage_point_squared",
+      "rows": 252,
+      "dates": 252,
+      "assets": 1
+    },
+    {
+      "model": "B0",
+      "metric": "RMSE",
+      "value": 2.606937901681976,
+      "unit": "percentage_point",
+      "rows": 252,
+      "dates": 252,
+      "assets": 1
+    },
+    {
+      "model": "B1",
+      "metric": "MSE",
+      "value": 2.086625565082545,
+      "unit": "percentage_point_squared",
+      "rows": 252,
+      "dates": 252,
+      "assets": 1
+    },
+    {
+      "model": "B1",
+      "metric": "RMSE",
+      "value": 1.4445156853016672,
+      "unit": "percentage_point",
+      "rows": 252,
+      "dates": 252,
+      "assets": 1
+    },
+    {
+      "model": "B2",
+      "metric": "MSE",
+      "value": 2.0938272526317565,
+      "unit": "percentage_point_squared",
+      "rows": 252,
+      "dates": 252,
+      "assets": 1
+    },
+    {
+      "model": "B2",
+      "metric": "RMSE",
+      "value": 1.447006307046295,
+      "unit": "percentage_point",
+      "rows": 252,
+      "dates": 252,
+      "assets": 1
+    }
+  ],
+  "fits": 2,
+  "purpose": "engineering_error_check_only",
+  "selection_used": false
+}

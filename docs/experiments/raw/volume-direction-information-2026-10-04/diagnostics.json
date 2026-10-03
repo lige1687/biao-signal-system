@@ -1,0 +1,824 @@
+{
+  "core": {
+    "mse": {
+      "B0": 15.390647226172868,
+      "B1": 14.65662814710253,
+      "B2": 14.58434035735031
+    },
+    "rmse": {
+      "B0": 3.923091539356795,
+      "B1": 3.8283975952221225,
+      "B2": 3.8189449272476175
+    },
+    "rows": 951,
+    "dates": 317,
+    "assets": 3
+  },
+  "solo": {
+    "mse": {
+      "B0": 15.390647226172868,
+      "B1": 14.79532614184533,
+      "B2": 14.762245704424709
+    },
+    "rmse": {
+      "B0": 3.923091539356795,
+      "B1": 3.8464693085796653,
+      "B2": 3.8421667981003518
+    },
+    "rows": 951,
+    "dates": 317,
+    "assets": 3
+  },
+  "increment": {
+    "new_model": "B2",
+    "old_model": "B1",
+    "old_value": 14.656628147102527,
+    "new_value": 14.584340357350307,
+    "absolute_error_improvement": 0.07228778975222028,
+    "relative_percent": 0.4932088678698645,
+    "lo": -0.07652370703173779,
+    "hi": 0.20589963453205654,
+    "unit": "percentage_point_squared",
+    "metric": "MSE",
+    "rows": 951,
+    "dates": 317,
+    "assets": 3,
+    "calendar_dates": 359,
+    "block_length": 60,
+    "draws": 1000,
+    "valid_draws": 1000,
+    "unestimable_draws": 0,
+    "seed": 20261004,
+    "weighting": "equal_asset",
+    "interpretation": "positive means lower prediction error; not investment return"
+  },
+  "simple_baselines": {
+    "mse": {
+      "B0": 15.390647226172868,
+      "asset_mean": 14.44156512801727,
+      "rolling_mature120": 15.561191971818712,
+      "B1": 14.65662814710253,
+      "B2": 14.58434035735031
+    },
+    "rmse": {
+      "B0": 3.923091539356795,
+      "asset_mean": 3.8002059323169934,
+      "rolling_mature120": 3.9447676701953833,
+      "B1": 3.8283975952221225,
+      "B2": 3.8189449272476175
+    },
+    "rows": 951,
+    "dates": 317,
+    "assets": 3
+  },
+  "vs_simple_increment": {
+    "asset_mean": {
+      "new_model": "B2",
+      "old_model": "B1",
+      "old_value": 14.441565128017267,
+      "new_value": 14.584340357350307,
+      "absolute_error_improvement": -0.14277522933304,
+      "relative_percent": -0.988640968395107,
+      "lo": -1.38015846659927,
+      "hi": 1.1321880664674897,
+      "unit": "percentage_point_squared",
+      "metric": "MSE",
+      "rows": 951,
+      "dates": 317,
+      "assets": 3,
+      "calendar_dates": 359,
+      "block_length": 60,
+      "draws": 1000,
+      "valid_draws": 1000,
+      "unestimable_draws": 0,
+      "seed": 20261004,
+      "weighting": "equal_asset",
+      "interpretation": "positive means lower prediction error; not investment return"
+    },
+    "rolling_mature120": {
+      "new_model": "B2",
+      "old_model": "B1",
+      "old_value": 15.561191971818708,
+      "new_value": 14.584340357350307,
+      "absolute_error_improvement": 0.9768516144684014,
+      "relative_percent": 6.277485787961989,
+      "lo": -1.085200803246669,
+      "hi": 3.4614580602514895,
+      "unit": "percentage_point_squared",
+      "metric": "MSE",
+      "rows": 951,
+      "dates": 317,
+      "assets": 3,
+      "calendar_dates": 359,
+      "block_length": 60,
+      "draws": 1000,
+      "valid_draws": 1000,
+      "unestimable_draws": 0,
+      "seed": 20261004,
+      "weighting": "equal_asset",
+      "interpretation": "positive means lower prediction error; not investment return"
+    }
+  },
+  "periods": {
+    "2025": {
+      "mse": {
+        "B0": 15.089169885599382,
+        "B1": 14.091946328331815,
+        "B2": 14.07282481873561
+      },
+      "rmse": {
+        "B0": 3.8844780711955864,
+        "B1": 3.753924123944411,
+        "B2": 3.7513763899048587
+      },
+      "rows": 666,
+      "dates": 222,
+      "assets": 3
+    },
+    "2026": {
+      "mse": {
+        "B0": 16.095152169407754,
+        "B1": 15.976200397282517,
+        "B2": 15.779671405481505
+      },
+      "rmse": {
+        "B0": 4.011876390095756,
+        "B1": 3.9970239425455683,
+        "B2": 3.9723634533463206
+      },
+      "rows": 285,
+      "dates": 95,
+      "assets": 3
+    }
+  },
+  "assets": {
+    "510050.SS": {
+      "mse": {
+        "B0": 10.197087298677637,
+        "B1": 8.549428412833663,
+        "B2": 8.665658387869827
+      },
+      "rmse": {
+        "B0": 3.193287850895631,
+        "B1": 2.9239405624659445,
+        "B2": 2.9437490361560763
+      },
+      "rows": 317,
+      "dates": 317,
+      "assets": 1
+    },
+    "510500.SS": {
+      "mse": {
+        "B0": 15.792575940555643,
+        "B1": 15.25001099600065,
+        "B2": 14.942440960269272
+      },
+      "rmse": {
+        "B0": 3.9739874107193196,
+        "B1": 3.9051262458466884,
+        "B2": 3.8655453638871284
+      },
+      "rows": 317,
+      "dates": 317,
+      "assets": 1
+    },
+    "588000.SS": {
+      "mse": {
+        "B0": 20.182278439285326,
+        "B1": 20.170445032473275,
+        "B2": 20.144921723911832
+      },
+      "rmse": {
+        "B0": 4.4924690805040965,
+        "B1": 4.491151860321946,
+        "B2": 4.488309450551714
+      },
+      "rows": 317,
+      "dates": 317,
+      "assets": 1
+    }
+  },
+  "leave_one_asset_out": {
+    "510050.SS": {
+      "mse": {
+        "B0": 17.98742718992048,
+        "B1": 17.710228014236964,
+        "B2": 17.54368134209055
+      },
+      "rmse": {
+        "B0": 4.241158708409824,
+        "B1": 4.208352173266511,
+        "B2": 4.188517797752631
+      },
+      "rows": 634,
+      "dates": 317,
+      "assets": 2
+    },
+    "510500.SS": {
+      "mse": {
+        "B0": 15.189682868981482,
+        "B1": 14.359936722653472,
+        "B2": 14.40529005589083
+      },
+      "rmse": {
+        "B0": 3.8973943691884045,
+        "B1": 3.789450715163541,
+        "B2": 3.7954301542632596
+      },
+      "rows": 634,
+      "dates": 317,
+      "assets": 2
+    },
+    "588000.SS": {
+      "mse": {
+        "B0": 12.99483161961664,
+        "B1": 11.899719704417157,
+        "B2": 11.80404967406955
+      },
+      "rmse": {
+        "B0": 3.6048344788098996,
+        "B1": 3.449597035077743,
+        "B2": 3.435702209748329
+      },
+      "rows": 634,
+      "dates": 317,
+      "assets": 2
+    }
+  },
+  "block120_increment": {
+    "new_model": "B2",
+    "old_model": "B1",
+    "old_value": 14.656628147102527,
+    "new_value": 14.584340357350307,
+    "absolute_error_improvement": 0.07228778975222028,
+    "relative_percent": 0.4932088678698645,
+    "lo": -0.02907470658262446,
+    "hi": 0.15948099756787887,
+    "unit": "percentage_point_squared",
+    "metric": "MSE",
+    "rows": 951,
+    "dates": 317,
+    "assets": 3,
+    "calendar_dates": 359,
+    "block_length": 120,
+    "draws": 1000,
+    "valid_draws": 1000,
+    "unestimable_draws": 0,
+    "seed": 20261004,
+    "weighting": "equal_asset",
+    "interpretation": "positive means lower prediction error; not investment return"
+  },
+  "fit_boundary_audit": [
+    {
+      "fold": "0",
+      "model": "B1",
+      "training_rows": 2096,
+      "evaluation_rows": 666,
+      "normal_equation_residual": 8.326672684688674e-17,
+      "prediction_max_error": 0.0,
+      "training_max_label_end": "2024-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "0",
+      "model": "B2",
+      "training_rows": 2096,
+      "evaluation_rows": 666,
+      "normal_equation_residual": 6.938893903907228e-17,
+      "prediction_max_error": 0.0,
+      "training_max_label_end": "2024-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "1",
+      "model": "B1",
+      "training_rows": 2825,
+      "evaluation_rows": 285,
+      "normal_equation_residual": 5.551115123125783e-16,
+      "prediction_max_error": 1.7763568394002505e-15,
+      "training_max_label_end": "2025-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "1",
+      "model": "B2",
+      "training_rows": 2825,
+      "evaluation_rows": 285,
+      "normal_equation_residual": 5.551115123125783e-16,
+      "prediction_max_error": 1.7763568394002505e-15,
+      "training_max_label_end": "2025-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "0",
+      "model": "B1",
+      "training_rows": 2096,
+      "evaluation_rows": 666,
+      "normal_equation_residual": 2.7755575615628914e-17,
+      "prediction_max_error": 0.0,
+      "training_max_label_end": "2024-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "0",
+      "model": "B2",
+      "training_rows": 2096,
+      "evaluation_rows": 666,
+      "normal_equation_residual": 1.1102230246251565e-16,
+      "prediction_max_error": 0.0,
+      "training_max_label_end": "2024-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "1",
+      "model": "B1",
+      "training_rows": 2825,
+      "evaluation_rows": 285,
+      "normal_equation_residual": 3.3306690738754696e-16,
+      "prediction_max_error": 1.7763568394002505e-15,
+      "training_max_label_end": "2025-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "1",
+      "model": "B2",
+      "training_rows": 2825,
+      "evaluation_rows": 285,
+      "normal_equation_residual": 3.3306690738754696e-16,
+      "prediction_max_error": 1.7763568394002505e-15,
+      "training_max_label_end": "2025-12-31",
+      "negative_prediction_rows": 0
+    }
+  ],
+  "phases21": [
+    {
+      "phase": 0,
+      "mse": {
+        "B0": 14.214857416342912,
+        "B1": 13.955118167078286,
+        "B2": 13.742869322860406
+      },
+      "rmse": {
+        "B0": 3.7702595953518787,
+        "B1": 3.7356549850164544,
+        "B2": 3.7071376185488996
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": 0.21224884421788026
+    },
+    {
+      "phase": 1,
+      "mse": {
+        "B0": 12.443001072395958,
+        "B1": 11.908069525134612,
+        "B2": 11.808519630044538
+      },
+      "rmse": {
+        "B0": 3.5274638300620405,
+        "B1": 3.4508070831523763,
+        "B2": 3.436352663805701
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": 0.09954989509007461
+    },
+    {
+      "phase": 2,
+      "mse": {
+        "B0": 12.541046576390293,
+        "B1": 11.956250602817533,
+        "B2": 11.832350230166888
+      },
+      "rmse": {
+        "B0": 3.5413340108482134,
+        "B1": 3.457781167572282,
+        "B2": 3.4398183426115527
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": 0.12390037265064535
+    },
+    {
+      "phase": 3,
+      "mse": {
+        "B0": 11.350267295959927,
+        "B1": 10.420734275704966,
+        "B2": 10.3384927167124
+      },
+      "rmse": {
+        "B0": 3.369015775558186,
+        "B1": 3.2281162116170736,
+        "B2": 3.2153526582184417
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": 0.0822415589925658
+    },
+    {
+      "phase": 4,
+      "mse": {
+        "B0": 13.577865322149842,
+        "B1": 12.683444037471073,
+        "B2": 12.619303425623368
+      },
+      "rmse": {
+        "B0": 3.684815507206547,
+        "B1": 3.561382321160012,
+        "B2": 3.552365891293205
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": 0.06414061184770503
+    },
+    {
+      "phase": 5,
+      "mse": {
+        "B0": 13.288627207906059,
+        "B1": 12.267582649752015,
+        "B2": 12.218635184360107
+      },
+      "rmse": {
+        "B0": 3.64535693834034,
+        "B1": 3.5025109064429785,
+        "B2": 3.495516440293209
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": 0.048947465391908196
+    },
+    {
+      "phase": 6,
+      "mse": {
+        "B0": 10.394998599335024,
+        "B1": 8.974372010921705,
+        "B2": 9.029532887662276
+      },
+      "rmse": {
+        "B0": 3.224127571814587,
+        "B1": 2.9957256234377847,
+        "B2": 3.004918116631845
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.055160876740570686
+    },
+    {
+      "phase": 7,
+      "mse": {
+        "B0": 10.33512931122181,
+        "B1": 8.680548873382932,
+        "B2": 8.706483923111186
+      },
+      "rmse": {
+        "B0": 3.214829592874529,
+        "B1": 2.946277120941432,
+        "B2": 2.9506751639431927
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.025935049728254
+    },
+    {
+      "phase": 8,
+      "mse": {
+        "B0": 13.333564766672355,
+        "B1": 11.449382472733106,
+        "B2": 11.394165258399946
+      },
+      "rmse": {
+        "B0": 3.6515154068786777,
+        "B1": 3.383693613897852,
+        "B2": 3.3755244419793415
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": 0.05521721433315996
+    },
+    {
+      "phase": 9,
+      "mse": {
+        "B0": 18.148432927405516,
+        "B1": 16.925961408439782,
+        "B2": 16.94985943637024
+      },
+      "rmse": {
+        "B0": 4.26009776031085,
+        "B1": 4.114117330417277,
+        "B2": 4.117020699045638
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.023898027930457033
+    },
+    {
+      "phase": 10,
+      "mse": {
+        "B0": 18.30384181740982,
+        "B1": 17.807697012722997,
+        "B2": 17.698066645279056
+      },
+      "rmse": {
+        "B0": 4.27829893969669,
+        "B1": 4.219916706846593,
+        "B2": 4.206907016476482
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": 0.10963036744394117
+    },
+    {
+      "phase": 11,
+      "mse": {
+        "B0": 19.47433096393906,
+        "B1": 18.453983121586596,
+        "B2": 18.36075383323234
+      },
+      "rmse": {
+        "B0": 4.41297303004891,
+        "B1": 4.295809949425905,
+        "B2": 4.284945021027964
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": 0.09322928835425515
+    },
+    {
+      "phase": 12,
+      "mse": {
+        "B0": 17.471841343390636,
+        "B1": 16.79720966513375,
+        "B2": 16.714875764252994
+      },
+      "rmse": {
+        "B0": 4.179933174512558,
+        "B1": 4.098439906248931,
+        "B2": 4.088383025629203
+      },
+      "rows": 48,
+      "dates": 16,
+      "assets": 3,
+      "improvement": 0.0823339008807551
+    },
+    {
+      "phase": 13,
+      "mse": {
+        "B0": 15.945490456290086,
+        "B1": 15.498870295064576,
+        "B2": 15.4494684010033
+      },
+      "rmse": {
+        "B0": 3.9931804938282074,
+        "B1": 3.936860461721316,
+        "B2": 3.9305811785286027
+      },
+      "rows": 48,
+      "dates": 16,
+      "assets": 3,
+      "improvement": 0.04940189406127615
+    },
+    {
+      "phase": 14,
+      "mse": {
+        "B0": 19.219807531825076,
+        "B1": 18.793148617933575,
+        "B2": 18.722515960310467
+      },
+      "rmse": {
+        "B0": 4.384040092406213,
+        "B1": 4.335106529017894,
+        "B2": 4.326952271554479
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": 0.07063265762310778
+    },
+    {
+      "phase": 15,
+      "mse": {
+        "B0": 19.33041927900991,
+        "B1": 18.811939167342164,
+        "B2": 18.720790454375404
+      },
+      "rmse": {
+        "B0": 4.39663726943785,
+        "B1": 4.337273241028534,
+        "B2": 4.326752876508595
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": 0.09114871296675986
+    },
+    {
+      "phase": 16,
+      "mse": {
+        "B0": 17.184721511308933,
+        "B1": 16.94035416483549,
+        "B2": 16.9630463652446
+      },
+      "rmse": {
+        "B0": 4.145445876055907,
+        "B1": 4.115866150014537,
+        "B2": 4.118621901224317
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.022692200409110796
+    },
+    {
+      "phase": 17,
+      "mse": {
+        "B0": 18.106562550581017,
+        "B1": 17.91277888697676,
+        "B2": 17.9284785793687
+      },
+      "rmse": {
+        "B0": 4.255180671908188,
+        "B1": 4.232349097956921,
+        "B2": 4.234203417334682
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": -0.0156996923919408
+    },
+    {
+      "phase": 18,
+      "mse": {
+        "B0": 18.772614316926123,
+        "B1": 18.29164867048361,
+        "B2": 18.257096563659978
+      },
+      "rmse": {
+        "B0": 4.332737508426528,
+        "B1": 4.276873702891355,
+        "B2": 4.272832381882067
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": 0.0345521068236323
+    },
+    {
+      "phase": 19,
+      "mse": {
+        "B0": 16.458996761342817,
+        "B1": 16.223800115290288,
+        "B2": 16.004880291404156
+      },
+      "rmse": {
+        "B0": 4.056968913036285,
+        "B1": 4.0278778674744204,
+        "B2": 4.000609989914557
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": 0.2189198238861323
+    },
+    {
+      "phase": 20,
+      "mse": {
+        "B0": 13.131438898671398,
+        "B1": 12.837442437281121,
+        "B2": 12.611251734210466
+      },
+      "rmse": {
+        "B0": 3.62373273002734,
+        "B1": 3.5829376825841,
+        "B2": 3.5512324246957516
+      },
+      "rows": 45,
+      "dates": 15,
+      "assets": 3,
+      "improvement": 0.22619070307065492
+    }
+  ],
+  "volume_concentration_sensitivity": {
+    "definition": "max past20 volume share >=0.20 vs <0.20; predetermined before effects; same saved predictions no fit",
+    "groups": {
+      "False": {
+        "mse": {
+          "B0": 15.490292032277209,
+          "B1": 14.710780804089552,
+          "B2": 14.67441628276853
+        },
+        "rmse": {
+          "B0": 3.935770830762026,
+          "B1": 3.835463570950655,
+          "B2": 3.830720073663505
+        },
+        "rows": 920,
+        "dates": 317,
+        "assets": 3
+      },
+      "True": {
+        "mse": {
+          "B0": 10.952369586845318,
+          "B1": 12.109384292158982,
+          "B2": 11.930475191805655
+        },
+        "rmse": {
+          "B0": 3.3094364455062917,
+          "B1": 3.479854061905324,
+          "B2": 3.454051996106262
+        },
+        "rows": 31,
+        "dates": 30,
+        "assets": 2
+      }
+    },
+    "original_weights": {
+      "False": 0.9674027339642426,
+      "True": 0.032597266035751846
+    },
+    "original_weight_contributions": {
+      "False": 0.03281820183852332,
+      "True": 0.03946958791369673
+    },
+    "share_range": [
+      0.06418929982364774,
+      0.40165282969282506
+    ]
+  },
+  "top10_date_contributions": [
+    [
+      "2025-04-09",
+      0.006602302715997924
+    ],
+    [
+      "2025-04-10",
+      0.005584115368085313
+    ],
+    [
+      "2026-03-09",
+      0.005308077440272482
+    ],
+    [
+      "2026-03-06",
+      0.005166450080774069
+    ],
+    [
+      "2025-04-08",
+      0.00492132465789504
+    ],
+    [
+      "2026-03-05",
+      0.004857570428071686
+    ],
+    [
+      "2025-04-16",
+      0.004673506883168414
+    ],
+    [
+      "2025-04-15",
+      0.0044589269572259775
+    ],
+    [
+      "2026-02-25",
+      0.004438270810447205
+    ],
+    [
+      "2026-02-26",
+      0.004117015999007778
+    ]
+  ],
+  "top10_remaining_original_weight_improvement": 0.0221602284112742,
+  "sign_counts": {
+    "better": 477,
+    "worse": 474,
+    "same": 0
+  },
+  "common_support_asserted": true,
+  "fingerprints": {
+    "docs/experiments/raw/volume-direction-information-2026-10-04/run-main/contract.json": "ea46b92efd8b831353d3962993cb551f7eaedb353bf81ba80258062aebddcc0b",
+    "docs/experiments/raw/volume-direction-information-2026-10-04/run-main/preflight.json": "1f57dfe62314340b581c332a1f58486e044777c6c67549cff35fc41c1424e32f",
+    "docs/experiments/raw/volume-direction-information-2026-10-04/run-main/result.json": "b1b1102760f1b537aff6fae8fb2a92f9053f86966eba85e1a0941b444d155924",
+    "docs/experiments/raw/volume-direction-information-2026-10-04/run-main/receipt.json": "da228db348ba58f4a2d5fad468625cce0e4a44bb987ee96ddaeb3a9582d6006d",
+    "docs/experiments/raw/volume-direction-information-2026-10-04/run-solo/contract.json": "73961a144da767b86b0f954535a55241bcfcb0be0eeca6ba2aa99c9b91487b4b",
+    "docs/experiments/raw/volume-direction-information-2026-10-04/run-solo/preflight.json": "4c7bb293dd8e775605bc8c9e664ae4c2fd18cd162234e8774b853110629607e0",
+    "docs/experiments/raw/volume-direction-information-2026-10-04/run-solo/result.json": "5ccd8a2a86292b18737628d205915650e95e9a87cf41597e4acb79018a8ba737",
+    "docs/experiments/raw/volume-direction-information-2026-10-04/run-solo/receipt.json": "27b8770ae1e91c4b7852a8f83726916f599530a48ce4902ef07294b7b13c1198"
+  },
+  "execution": {
+    "new_fits": 0,
+    "real_fits_verified": 8,
+    "seconds": 2.1395052500010934
+  },
+  "limits": "All history seen; dates/ETFs related; 60/120 draws conditional and few blocks; phase alternatives correlated. Baseline review adapter absent locally, reused prior experiment arithmetic under this raw only, no platform created."
+}

@@ -1,0 +1,25 @@
+{
+  "status": "adapter_and_boundary_tests_ready",
+  "write_paths": [
+    "src/lei_signal/research/volume_direction_information.py",
+    "tests/unit/test_volume_direction_information.py",
+    "docs/experiments/raw/volume-direction-information-2026-10-04/adapter-delivery.json"
+  ],
+  "checks": [
+    {
+      "command": "python3 -m py_compile src/lei_signal/research/volume_direction_information.py",
+      "result": "passed"
+    },
+    {
+      "command": "python3 -m pytest -q tests/unit/test_volume_direction_information.py",
+      "result": "9 passed in 3.54s"
+    }
+  ],
+  "repair_cycles": 1,
+  "resolved_failure": "Initial reset test incorrectly expected missing or unqualified volume to append a pair on the invalid day. Test now distinguishes a valid break day (current pair counts) from a missing-volume day (next day starts counting); final tests pass.",
+  "limitations": [
+    "No real future labels, real fits, effect statistics, or network requests were used.",
+    "Source qualification against the saved real panel and shared dispatcher integration remain for controller verification.",
+    "Historical economic-action arrival and complete volume-unit continuity remain unknown, as recorded in the source brief."
+  ]
+}

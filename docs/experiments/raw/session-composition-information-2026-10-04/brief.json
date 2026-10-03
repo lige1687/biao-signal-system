@@ -1,0 +1,149 @@
+{
+  "research_id": "session-composition-information-2026-10-04",
+  "mode": "research",
+  "delivery_mode": "final_only",
+  "question": "同一ETF过去20个间隔的隔夜与日内累计经济价格变化之差，能否在已知近期涨跌与波动后补充未来20个收盘间隔风险判断",
+  "authorization": "用户：可以啊，继续推进相关因子研究和测试哈，不完成目标，没遇到卡点不要停哈；承接已交付方向计划",
+  "strategy_layer": "技术价格/风险观察研究扩展；不改LEI规则、原文、交易或硬过滤",
+  "definition_ref": "research.price.overnight_minus_intraday20@1.0.0",
+  "formula": "100*sum[j=t-19..t](log(O_j/C_(j-1))-log(C_j/O_j)); economic OHLC; no normalization/tuning",
+  "identity": "overnight20+intraday20=100*log(C_t/C_(t-20)); their difference is candidate; given total, open contributes composition",
+  "unit": "log_change_percentage_point",
+  "window": 20,
+  "warmup": 252,
+  "source_assets": [
+    "510300.SS",
+    "510050.SS",
+    "510500.SS",
+    "588000.SS"
+  ],
+  "tested_assets": [
+    "510050.SS",
+    "510500.SS",
+    "588000.SS"
+  ],
+  "target": {
+    "kind": "mae",
+    "start_offset": 1,
+    "end_offset": 21,
+    "entry_field": "close",
+    "path_field": "close",
+    "unit": "percentage_point",
+    "price_measure": "economic_price"
+  },
+  "baseline_main": [
+    "S",
+    "E",
+    "return1",
+    "return20",
+    "return60",
+    "volatility5",
+    "volatility20",
+    "volatility60",
+    "market_return20",
+    "market_volatility20",
+    "beta60",
+    "relative_return20",
+    "negative_fraction60",
+    "downside_rms60",
+    "return_autocorr1_60",
+    "current_negative_run",
+    "asset_510500",
+    "asset_588000"
+  ],
+  "baseline_solo": [
+    "asset_510500",
+    "asset_588000"
+  ],
+  "folds": [
+    {
+      "train_end": "2024-12-31",
+      "eval_start": "2025-01-02",
+      "eval_end": "2025-12-31"
+    },
+    {
+      "train_end": "2025-12-31",
+      "eval_start": "2026-01-05",
+      "eval_end": "2026-06-30"
+    }
+  ],
+  "method": "fixed ridge lambda1; training-only weighted scaling; two modes fixed before new effects",
+  "history": "all history previously used, exploration only; own same-ETF partition differs from old US→China overnight study; no independent new validation",
+  "price_actions": "Reuse volume source qualifier: economic field=(nominal_field*split_mult+cash)*previous economic/nominal close factor. Ex-date cash in both O/C; price-index partition only. Disclosure and pre-fixed saved-prediction non-action-window sensitivity required. Actual announcement arrival and action-history completeness unknown.",
+  "necessary_checks": [
+    "independent formula and identity, scale/flat/invalid/manual cash and split boundary",
+    "prefix/no labels/gap/252 warmup/anchor/maturity",
+    "same rows baselines including perETF matured historical mean and rolling120 matured date mean",
+    "year/ETF/remove-one-ETF without refit",
+    "60-day whole-date uncertainty plus 120-day sensitivity",
+    "all 21 offset phases, no independent replication claim",
+    "exclude past20 action-bearing observations without fitting; reference full original comparison",
+    "independent numerical acceptance and publication"
+  ],
+  "budget": {
+    "scientific_variants": 2,
+    "real_fits": 8,
+    "execution_seconds": 3600,
+    "max_rows": 6000,
+    "external_data_requests": 0,
+    "paid_requests": 0,
+    "production": false,
+    "core_batches": 1,
+    "followup_batches": 3
+  },
+  "success_and_stop": "no preset useful-effect threshold; report magnitude and uncertainty, challenge simple baseline and counterexamples. Once these necessary current-history comparisons resolved, close bounded question even negative/inconclusive; do not seek better windows or new markets.",
+  "current_standards": {
+    "schema_version": "research-standards/1.0",
+    "new_entry": "scripts/run_factor_lab.py --workflow-contract",
+    "legacy_frozen_studies": "keep_original_bindings",
+    "standards": {
+      "mission": {
+        "path": "docs/research/lei-factor-research-mission.md",
+        "version": "1.1.0"
+      },
+      "question_method": {
+        "path": "docs/research/research-question-method-standard.md",
+        "version": "1.2.0"
+      },
+      "increment": {
+        "path": "docs/research/factor-increment-evidence-standard.md",
+        "version": "1.1.0"
+      },
+      "principles": {
+        "path": "docs/research/experiment-backtest-principles.md",
+        "version": "1.2"
+      },
+      "execution": {
+        "path": "docs/research/ai-execution-contract.md",
+        "version": "1.1.0"
+      },
+      "definition": {
+        "path": "docs/research/definition-standard.md",
+        "version": "1.2.0"
+      },
+      "template": {
+        "path": "docs/research/experiment-report-template.md",
+        "version": "1.2.1"
+      }
+    },
+    "definition_registry": "docs/research/definitions.v1.json",
+    "report_registry": "docs/experiments/registry.json",
+    "strategy_sources": "configs/strategy-documents.v1.json",
+    "new_contract_schema": "research-workflow/1.1"
+  },
+  "strategy_sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    }
+  ],
+  "coordination": {
+    "commit": "81637d235093652de22fd4991cf1f995062c4e0d",
+    "task_id": "risk-shape-information"
+  },
+  "ownership": "root only adapter/framework/card/core; separate Sol D3 old outputs only"
+}

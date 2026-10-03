@@ -2280,6 +2280,85 @@
       "category": "模块与信号",
       "verdict": "mixed",
       "oneLiner": "EMA20向上天数比例加入已有信息后，收益和下探预测误差增加0.0892和0.0139个百分点；分组与两种排序不支持稳定优势。多头相邻黑转绿较晚仅7事件，证据不足，不改交易规则。"
+    },
+    "docs/experiments/volume-direction-main-2026-10-04.md": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": null,
+      "workflow_receipt": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/volume-direction-information-2026-10-04/accepted-main/receipt.json"
+    },
+    "docs/experiments/risk-shape-information-2026-10-03.md": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": "波动不稳定程度少错1.26%，有小幅线索但未胜简单历史平均；跟随差与亏损连续性未确认稳定增量，三个均不足以改变买卖规则。",
+      "workflow_receipts": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/risk-shape-information-2026-10-03/accepted-vol_instability20-main/receipt.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/risk-shape-information-2026-10-03/accepted-beta_asymmetry60-main/receipt.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/risk-shape-information-2026-10-03/accepted-negative_cluster60-main/receipt.json"
+      ],
+      "controller_evidence": "docs/experiments/raw/risk-shape-information-2026-10-03/diagnostics.json"
+    },
+    "docs/experiments/risk-shape-beta_asymmetry60-main-2026-10-03.md": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": null,
+      "workflow_receipt": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/risk-shape-information-2026-10-03/accepted-beta_asymmetry60-main/receipt.json"
+    },
+    "docs/experiments/risk-shape-negative_cluster60-main-2026-10-03.md": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": null,
+      "workflow_receipt": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/risk-shape-information-2026-10-03/accepted-negative_cluster60-main/receipt.json"
+    },
+    "docs/experiments/session-composition-main-2026-10-04.md": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": null,
+      "workflow_receipt": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/session-composition-information-2026-10-04/accepted-main/receipt.json"
+    },
+    "docs/experiments/session-composition-information-2026-10-04.md": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": "同ETF20日隔夜/日内构成加入18项价格背景后风险平方误差多0.4853%，两期均变差且弱于各ETF历史平均；951预测已闭环，固定表达不采用。"
+    },
+    "docs/experiments/risk-shape-error-decomposition-2026-10-04.md": {
+      "category": "方法论与验证",
+      "verdict": "passed",
+      "oneLiner": "旧波动候选951条中481改善、470恶化；正贡献0.3670减去恶化0.1811还原净差0.1859，0新拟合，原因子未确认稳定有效。"
+    },
+    "docs/experiments/volume-direction-information-2026-10-04.md": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": "多日成交偏向扣除涨跌天数后少错0.49%，但不如每ETF历史平均；删中证500转差、少数成交集中记录贡献大，当前不能采用。"
+    },
+    "docs/experiments/risk-shape-multimethod-2026-10-03.md": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": "多种方法补查完成：波动变化21种错开日期均微改善，但关系弱、分组覆盖不足、共同检查未确认稳定增量；三候选仍未胜简单平均，0新拟合。",
+      "workflow_receipts": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/risk-shape-information-2026-10-03/accepted-vol_instability20-main/receipt.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/risk-shape-information-2026-10-03/accepted-beta_asymmetry60-main/receipt.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/risk-shape-information-2026-10-03/accepted-negative_cluster60-main/receipt.json"
+      ],
+      "controller_evidence": "docs/experiments/raw/risk-shape-information-2026-10-03/multimethod-01/verification.json"
+    },
+    "docs/experiments/volume-direction-solo-2026-10-04.md": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": null,
+      "workflow_receipt": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/volume-direction-information-2026-10-04/accepted-solo/receipt.json"
+    },
+    "docs/experiments/risk-shape-vol_instability20-main-2026-10-03.md": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": null,
+      "workflow_receipt": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/risk-shape-information-2026-10-03/accepted-vol_instability20-main/receipt.json"
+    },
+    "docs/experiments/session-composition-solo-2026-10-04.md": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": null,
+      "workflow_receipt": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/session-composition-information-2026-10-04/accepted-solo/receipt.json"
     }
   }
 }

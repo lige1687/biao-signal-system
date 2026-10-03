@@ -159,6 +159,24 @@ def prepare_observations(payload, contract):
     if contract['feature']['kind'] in {'slope_change_risk_information', 'ema_only_wait_age_risk_information'}:
         from lei_signal.research.technical_daily_risk_information import prepare_risk_observations
         return prepare_risk_observations(payload, contract)
+    if contract['feature']['kind'] == 'risk_shape_information':
+        from lei_signal.research.risk_shape_information import prepare_risk_shape_observations
+        return prepare_risk_shape_observations(payload, contract, compute_labels=(
+            payload.get('data_mode') == 'synthetic' or
+            (contract.get('permissions', {}).get('real_labels') is True and
+             contract.get('permissions', {}).get('effect_authorized') is True)))
+    if contract['feature']['kind'] == 'session_composition_information':
+        from lei_signal.research.session_composition_information import prepare_session_composition_observations
+        return prepare_session_composition_observations(payload, contract, compute_labels=(
+            payload.get('data_mode') == 'synthetic' or
+            (contract.get('permissions', {}).get('real_labels') is True and
+             contract.get('permissions', {}).get('effect_authorized') is True)))
+    if contract['feature']['kind'] == 'volume_direction_information':
+        from lei_signal.research.volume_direction_information import prepare_volume_direction_observations
+        return prepare_volume_direction_observations(payload, contract, compute_labels=(
+            payload.get('data_mode') == 'synthetic' or
+            (contract.get('permissions', {}).get('real_labels') is True and
+             contract.get('permissions', {}).get('effect_authorized') is True)))
     if contract['feature']['kind'] == 'ema_only_wait_age_information':
         from lei_signal.research.ema_only_wait_age_information import prepare_sequence_observations
         return prepare_sequence_observations(payload, contract, compute_labels=(

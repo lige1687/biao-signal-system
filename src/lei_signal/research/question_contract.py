@@ -299,7 +299,7 @@ def validate_workflow_contract(contract: dict) -> None:
     feature = _mapping(c["feature"], "workflow.feature", {
         "kind", "lookback", "bar_frequency", "missing_policy", "warmup",
     })
-    if feature["kind"] not in {"sma_distance", "decline_event", "a01_signed_band", "a03_pullback_order", "space_prior_target", "ma_cluster_information", "volume_anomaly_information", "key_fluctuation_information", "profile_overhead_information", "simple_top3_information", "future_deduction_box_information", "double_ma_order_information", "slope_change_information", "simple_top_invalidation_information", "pullback_layer_change_information", "prior_top_dual_break_information", "ema_sma_waiting_path", "tsfresh_price_information", "ema_only_wait_age_information", "slope_change_risk_information", "ema_only_wait_age_risk_information", "green_black_state60_information", "ema_direction_persistence_information", "bull_green_transition_information"}:
+    if feature["kind"] not in {"sma_distance", "decline_event", "a01_signed_band", "a03_pullback_order", "space_prior_target", "ma_cluster_information", "volume_anomaly_information", "key_fluctuation_information", "profile_overhead_information", "simple_top3_information", "future_deduction_box_information", "double_ma_order_information", "slope_change_information", "simple_top_invalidation_information", "pullback_layer_change_information", "prior_top_dual_break_information", "ema_sma_waiting_path", "tsfresh_price_information", "ema_only_wait_age_information", "slope_change_risk_information", "ema_only_wait_age_risk_information", "green_black_state60_information", "ema_direction_persistence_information", "bull_green_transition_information", "risk_shape_information", "session_composition_information", "volume_direction_information"}:
         _fail("workflow.feature.kind", "no implemented adapter for this feature")
     if feature["missing_policy"] not in {"real_quote", "segmented"}:
         _fail("workflow.feature.missing_policy", "must freeze a supported recovery policy")
@@ -602,6 +602,96 @@ def validate_workflow_contract(contract: dict) -> None:
                     {"train_end": "2025-12-31", "eval_start": "2026-01-01", "eval_end": "2026-06-30"}] or
                 metric["name"] != "RMSE" or c["dependence"].get("axis_scope") != "evaluation"):
             _fail("workflow.evaluator", "age study freezes D01 nine current fields plus known box distance, one log-age and two contained return20 OLS folds")
+    if feature["kind"] == "risk_shape_information":
+        from lei_signal.research.risk_shape_information import REFS, BASELINE_FEATURES, SOLO_FEATURES, FOLDS, ASSETS
+        selected = [name for name, ref in REFS.items() if ref == feature.get("definition_ref")]
+        mode = feature.get("comparison_mode")
+        if (schema_version != "research-workflow/1.1" or len(selected) != 1 or
+                feature["lookback"] != 60 or feature["warmup"] != 252 or
+                feature["missing_policy"] != "segmented" or
+                feature.get("anchor_asset") != "510300.SS" or feature.get("candidate") != selected[0] or
+                c["question"]["factor_refs"] != [feature["definition_ref"]] or
+                c["question"].get("sampling") != "daily" or
+                mode not in {"main", "solo"} or
+                e["kind"] != "prediction_ridge" or e.get("lambda") != 1.0 or
+                e["baseline_features"] != list(BASELINE_FEATURES if mode == "main" else SOLO_FEATURES) or
+                e["added_features"] != selected or
+                target["kind"] != "mae" or target["start_offset"] != 1 or target["end_offset"] != 21 or
+                target["entry_field"] != "close" or target.get("path_field") != "close" or
+                target.get("price_measure") != "economic_price" or
+                c["weights"]["policy"] != "equal_asset" or c.get("training_weights") != "equal_asset" or
+                s["label_policy"] != "purge" or s.get("evaluation_label_policy") != "contained" or
+                metric["name"] != "MSE" or metric["attention_threshold"] is not None or
+                c["dependence"].get("axis_scope") != "evaluation" or
+                c["dependence"].get("block_length") != 60 or
+                c["dependence"].get("draws") != 1000 or c["dependence"].get("seed") != 20261003):
+            _fail("workflow.evaluator", "risk shape freezes exact candidate, common support and fixed ridge comparisons")
+        if data["mode"] != "synthetic" and (
+                data.get("qualification", {}).get("adapter") != "top_etf_economic/1.0" or
+                u["assets"] != list(ASSETS) or
+                c["question"]["period"] != ["2022-01-04", "2026-06-30"] or
+                s["folds"] != FOLDS):
+            _fail("workflow.data.qualification", "risk shape freezes four source ETFs, three tested ETFs, period and folds")
+    if feature["kind"] == "session_composition_information":
+        from lei_signal.research.session_composition_information import REFS, BASELINE_FEATURES, SOLO_FEATURES, FOLDS, ASSETS
+        selected = [name for name, ref in REFS.items() if ref == feature.get("definition_ref")]
+        mode = feature.get("comparison_mode")
+        if (schema_version != "research-workflow/1.1" or len(selected) != 1 or
+                feature["lookback"] != 20 or feature["warmup"] != 252 or
+                feature["missing_policy"] != "segmented" or
+                feature.get("anchor_asset") != "510300.SS" or feature.get("candidate") != selected[0] or
+                c["question"]["factor_refs"] != [feature["definition_ref"]] or
+                c["question"].get("sampling") != "daily" or
+                mode not in {"main", "solo"} or
+                e["kind"] != "prediction_ridge" or e.get("lambda") != 1.0 or
+                e["baseline_features"] != list(BASELINE_FEATURES if mode == "main" else SOLO_FEATURES) or
+                e["added_features"] != selected or
+                target["kind"] != "mae" or target["start_offset"] != 1 or target["end_offset"] != 21 or
+                target["entry_field"] != "close" or target.get("path_field") != "close" or
+                target.get("price_measure") != "economic_price" or
+                c["weights"]["policy"] != "equal_asset" or c.get("training_weights") != "equal_asset" or
+                s["label_policy"] != "purge" or s.get("evaluation_label_policy") != "contained" or
+                metric["name"] != "MSE" or metric["attention_threshold"] is not None or
+                c["dependence"].get("axis_scope") != "evaluation" or
+                c["dependence"].get("block_length") != 60 or
+                c["dependence"].get("draws") != 1000 or c["dependence"].get("seed") != 20261004):
+            _fail("workflow.evaluator", "session composition freezes exact candidate, common support and fixed ridge comparisons")
+        if data["mode"] != "synthetic" and (
+                data.get("qualification", {}).get("adapter") != "top_etf_economic/1.0" or
+                u["assets"] != list(ASSETS) or
+                c["question"]["period"] != ["2022-01-04", "2026-06-30"] or
+                s["folds"] != FOLDS):
+            _fail("workflow.data.qualification", "session composition freezes four source ETFs, three tested ETFs, period and folds")
+    if feature["kind"] == "volume_direction_information":
+        from lei_signal.research.volume_direction_information import REFS, BASELINE_FEATURES, SOLO_FEATURES, FOLDS, ASSETS
+        selected = [name for name, ref in REFS.items() if ref == feature.get("definition_ref")]
+        mode = feature.get("comparison_mode")
+        if (schema_version != "research-workflow/1.1" or len(selected) != 1 or
+                feature["lookback"] != 20 or feature["warmup"] != 252 or
+                feature["missing_policy"] != "segmented" or
+                feature.get("anchor_asset") != "510300.SS" or feature.get("candidate") != selected[0] or
+                c["question"]["factor_refs"] != [feature["definition_ref"]] or
+                c["question"].get("sampling") != "daily" or
+                mode not in {"main", "solo"} or
+                e["kind"] != "prediction_ridge" or e.get("lambda") != 1.0 or
+                e["baseline_features"] != list(BASELINE_FEATURES if mode == "main" else SOLO_FEATURES) or
+                e["added_features"] != selected or
+                target["kind"] != "mae" or target["start_offset"] != 1 or target["end_offset"] != 21 or
+                target["entry_field"] != "close" or target.get("path_field") != "close" or
+                target.get("price_measure") != "economic_price" or
+                c["weights"]["policy"] != "equal_asset" or c.get("training_weights") != "equal_asset" or
+                s["label_policy"] != "purge" or s.get("evaluation_label_policy") != "contained" or
+                metric["name"] != "MSE" or metric["attention_threshold"] is not None or
+                c["dependence"].get("axis_scope") != "evaluation" or
+                c["dependence"].get("block_length") != 60 or
+                c["dependence"].get("draws") != 1000 or c["dependence"].get("seed") != 20261004):
+            _fail("workflow.evaluator", "volume direction freezes exact candidate, common support and fixed ridge comparisons")
+        if data["mode"] != "synthetic" and (
+                data.get("qualification", {}).get("adapter") != "top_etf_economic/1.0" or
+                u["assets"] != list(ASSETS) or
+                c["question"]["period"] != ["2022-01-04", "2026-06-30"] or
+                s["folds"] != FOLDS):
+            _fail("workflow.data.qualification", "volume direction freezes four source ETFs, three tested ETFs, period and folds")
     if feature["kind"] == "tsfresh_price_information":
         from lei_signal.research.trend_slope_change_information import BASELINE_FEATURES
         refs = ["research.external.mean_abs_log_change20@1.0.0",

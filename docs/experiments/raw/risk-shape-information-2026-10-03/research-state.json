@@ -1,0 +1,57 @@
+{
+  "research_id": "risk-shape-information-2026-10-03",
+  "execution": "completed",
+  "evidence": "inconclusive",
+  "completion_reason": "evidence_boundary",
+  "mode": "research",
+  "delivery_mode": "final_only",
+  "scope": "Three predefined price-risk candidates; three domestic broad-index ETFs; future20-interval max closing loss; seen history",
+  "scientific_configs": 6,
+  "real_fits": 24,
+  "postexecution_new_fits": 0,
+  "execution_budget_seconds": 7200,
+  "workflow_charged_seconds": 547.227455248998,
+  "workflow_ledger": "docs/experiments/raw/research-workflow-ledgers-2026-09-29/f82fcff222dc88f7b45e72ba/attempts.jsonl",
+  "report": "docs/experiments/risk-shape-information-2026-10-03.md",
+  "authoritative_outputs": {
+    "definitions": "docs/research/definitions.v1.json",
+    "qualification": "docs/experiments/raw/risk-shape-information-2026-10-03/qualification-v2.json",
+    "diagnostics": "docs/experiments/raw/risk-shape-information-2026-10-03/diagnostics.json",
+    "independent_verification": "docs/experiments/raw/risk-shape-information-2026-10-03/independent-verification.json",
+    "trial_plan": "docs/experiments/raw/risk-shape-information-2026-10-03/trial-plan.json",
+    "publication": "publication-log.json"
+  },
+  "scientific_pending": [],
+  "remaining_boundaries": [
+    "No genuinely new independent evidence",
+    "Source historical arrival and action completeness not certified",
+    "No strategy/account performance tested"
+  ],
+  "administrative_pending": [
+    "Outside-repository system-upgrades database write awaits user permission; ready proposal saved"
+  ],
+  "failures_preserved": [
+    "controller-coverage-correction.json",
+    "execution-metadata-repair.json",
+    "execution-path-correction.json",
+    "run-vol_instability20-solo/failure.json"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium",
+    "task": "risk_shape_adapter",
+    "role": "bounded engineering only"
+  },
+  "controller_review": "Local independent formula, label, coefficient/weight/period and headline reconciliation",
+  "production_authorized": false,
+  "committed": false,
+  "pushed": false,
+  "supplement_authorization": "用户：可以用多种验证因子有效性的方式去验证哈",
+  "supplement": {
+    "report": "docs/experiments/risk-shape-multimethod-2026-10-03.md",
+    "evidence": "methods.json, verification.json and four computed joint outputs",
+    "charged_auxiliary_seconds": 1200,
+    "family_total_charged_seconds": 1747.227455248998,
+    "new_fits": 0
+  }
+}

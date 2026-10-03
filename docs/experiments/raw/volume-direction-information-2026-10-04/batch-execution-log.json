@@ -1,0 +1,70 @@
+[
+  {
+    "phase": "freeze",
+    "candidate": "direction_excess20",
+    "mode": "main",
+    "command": [
+      "python3",
+      "scripts/run_factor_lab.py",
+      "--workflow-draft",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/volume-direction-information-2026-10-04/draft-main.json",
+      "--out",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/volume-direction-information-2026-10-04/freeze-main"
+    ],
+    "exit_code": 0,
+    "seconds": 12.694699957999546,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "phase": "freeze",
+    "candidate": "direction_excess20",
+    "mode": "solo",
+    "command": [
+      "python3",
+      "scripts/run_factor_lab.py",
+      "--workflow-draft",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/volume-direction-information-2026-10-04/draft-solo.json",
+      "--out",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/volume-direction-information-2026-10-04/freeze-solo"
+    ],
+    "exit_code": 0,
+    "seconds": 11.903813834000175,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "phase": "execute",
+    "candidate": "direction_excess20",
+    "mode": "main",
+    "command": [
+      "python3",
+      "scripts/run_factor_lab.py",
+      "--workflow-contract",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/volume-direction-information-2026-10-04/freeze-main/contract.json",
+      "--out",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/volume-direction-information-2026-10-04/run-main"
+    ],
+    "exit_code": 0,
+    "seconds": 17.749713332999818,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "phase": "execute",
+    "candidate": "direction_excess20",
+    "mode": "solo",
+    "command": [
+      "python3",
+      "scripts/run_factor_lab.py",
+      "--workflow-contract",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/volume-direction-information-2026-10-04/freeze-solo/contract.json",
+      "--out",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/volume-direction-information-2026-10-04/run-solo"
+    ],
+    "exit_code": 0,
+    "seconds": 17.87788858300337,
+    "stdout": "",
+    "stderr": ""
+  }
+]

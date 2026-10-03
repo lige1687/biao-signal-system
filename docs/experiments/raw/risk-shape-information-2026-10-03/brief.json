@@ -1,0 +1,132 @@
+{
+  "research_id": "risk-shape-information-2026-10-03",
+  "mode": "research",
+  "delivery_mode": "final_only",
+  "question": "三个固定价格风险候选能否帮助判断未来20个收盘间隔的最大收盘亏损，以及相对现有信息增加多少",
+  "authorization": "用户：可以，这几个因子你可以去验证一下有效性哈；继续哈。",
+  "strategy_layer": "技术信息的研究解释/风险观察；不是规则变更或账户交易",
+  "candidate_definitions": {
+    "vol_instability20": {
+      "ref": "research.risk.vol_instability20@1.0.0",
+      "formula": "simple returns r_t=100*(C_t/C_(t-1)-1); v5_t=sample std(r_(t-4)..r_t, ddof=1); X=sample std(v5_(t-19)..v5_t,ddof=1)/mean(v5_(t-19)..v5_t); mean<=1e-12 -> missing",
+      "lookback": 24
+    },
+    "beta_asymmetry60": {
+      "ref": "research.risk.beta_asymmetry60@1.0.0",
+      "formula": "60 aligned simple return pairs target vs 510300.SS; separately OLS slopes with intercept for anchor r<0 and r>0; minimum10 each, conditional variance>1e-12; X=beta_down-beta_up; anchor never itself predicted",
+      "lookback": 60
+    },
+    "negative_cluster60": {
+      "ref": "research.risk.negative_cluster60@1.0.0",
+      "formula": "last60 returns give59 transitions; neg = r<0, zero nonnegative; X=P(current neg|previous neg)-P(current neg|previous nonneg); minimum5 transitions for each previous state else missing",
+      "lookback": 60
+    }
+  },
+  "source_assets": [
+    "510300.SS",
+    "510050.SS",
+    "510500.SS",
+    "588000.SS"
+  ],
+  "tested_assets": [
+    "510050.SS",
+    "510500.SS",
+    "588000.SS"
+  ],
+  "population": "All four source ETFs retained in scheduled denominator; 510300 anchor observations explicitly excluded in all three tests for common comparison. All candidates and baseline complete on a common date/asset set; 252 contiguous known-OHLC warmup; gap resets both synchronized series.",
+  "period": [
+    "2022-01-04",
+    "2026-06-30"
+  ],
+  "target": {
+    "kind": "mae",
+    "start_offset": 1,
+    "end_offset": 21,
+    "entry_field": "close",
+    "path_field": "close",
+    "unit": "percentage_point",
+    "price_measure": "economic_price"
+  },
+  "baseline_features": [
+    "S",
+    "E",
+    "return1",
+    "return20",
+    "return60",
+    "volatility5",
+    "volatility20",
+    "volatility60",
+    "market_return20",
+    "market_volatility20",
+    "beta60",
+    "relative_return20",
+    "negative_fraction60",
+    "downside_rms60",
+    "return_autocorr1_60",
+    "current_negative_run",
+    "asset_510500",
+    "asset_588000"
+  ],
+  "S_E": "exact local_features(close,20) seeded EMA/SMA states; reuse existing formula, not new trade states",
+  "baseline_details": "returns percentage points; volatility sample std ddof1 nonannualized; downside_rms60=sqrt(mean(min(r,0)^2)); autocorrelation uses Pearson of adjacent 59 returns; current_negative_run counts within60; beta60 intercept OLS on60 paired simple returns; relative_return20=own compounded return20 minus anchor return20.",
+  "models": {
+    "core": "B1 fixed ridge lambda1 on baseline18 vs B2 baseline+one candidate",
+    "solo": "B1 asset510500/588000 identity only vs B2 identity+one candidate; B0 global training mean provided by evaluator",
+    "fits": 24,
+    "scaling": "training-only weighted standardization",
+    "clipping": "none"
+  },
+  "folds": [
+    {
+      "train_end": "2024-12-31",
+      "eval_start": "2025-01-02",
+      "eval_end": "2025-12-31"
+    },
+    {
+      "train_end": "2025-12-31",
+      "eval_start": "2026-01-05",
+      "eval_end": "2026-06-30"
+    }
+  ],
+  "split": {
+    "label_policy": "purge",
+    "evaluation_label_policy": "contained"
+  },
+  "evaluation": "MSE primary, RMSE auxiliary; equal-asset weights, fixed common support. Improvement=B1 MSE-B2 MSE; positive better. No invented meaningful-effect threshold; exploratory historical research.",
+  "uncertainty": {
+    "block_length": 60,
+    "draws": 1000,
+    "seed": 20261003,
+    "axis_scope": "evaluation",
+    "sensitivity_block": 120,
+    "sensitivity_fits": 0
+  },
+  "checks": [
+    "feature prefix future blindness",
+    "hand calculations and price scale invariance",
+    "anchor exclusion",
+    "missing synchronized gaps reset",
+    "date/label maturity; training-only transforms",
+    "per-year and per-ETF comparisons; leave-one-ETF-out aggregation without refits",
+    "per-asset mature training-label mean and rolling120-date mature-label mean; no fitted parameters",
+    "all saved headline arithmetic independently checked"
+  ],
+  "budget": {
+    "core_batch": "three predefined main contracts",
+    "followup_batches": "three predefined solo contracts",
+    "real_fits": 24,
+    "execution_seconds": 7200,
+    "scientific_variants": 6,
+    "paid_requests": 0,
+    "new_market_data_requests": 0,
+    "parameter_search": false
+  },
+  "boundaries": [
+    "No sentiment/breadth/macro/account policy",
+    "No production rules or strategy source edits",
+    "No sector/overseas generalization",
+    "Historical source arrival/action completeness unknown; reused seen data not independent new confirmation",
+    "No ETF-product comparison"
+  ],
+  "existing_overlap": "Read current technical-factor-sequence/classic-factor-research/external-quant-resources from remote0021e5614e163fc83e598184f25391f0af8144ae. Existing classic vol20, slope-change risk and EMA-age studies are reusable negative/reference evidence; three exact new expressions not covered. Active baseline_review ownership excluded."
+}

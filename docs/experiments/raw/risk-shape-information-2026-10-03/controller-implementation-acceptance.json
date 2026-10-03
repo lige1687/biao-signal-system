@@ -1,0 +1,34 @@
+{
+  "decision": "accepted_for_limited_research",
+  "real_fits": 0,
+  "independent_unit_tests": "7 passed",
+  "known_arithmetic": "controller-formula-check.json",
+  "reviewed_corrections": [
+    "snapshot future labels censored",
+    "conditional variance guard consistent with definition",
+    "direct candidate/ref validation"
+  ],
+  "preserved_old_registry_objects": true,
+  "registry_version": "1.6.13",
+  "definition_refs": [
+    "research.risk.vol_instability20@1.0.0",
+    "research.risk.beta_asymmetry60@1.0.0",
+    "research.risk.negative_cluster60@1.0.0"
+  ],
+  "before_registry_sha256": "54e0e9a2437b891f7bb6b47d3481780c03582d2e9b79d2e6dd40973293ac8241",
+  "after_registry_file_sha256": "05b630e01d3000440889138e75541cb2f6c4607472bb67d57a10c5d5785e07f7",
+  "no_production_changes": true,
+  "executor": {
+    "model": "gpt-6-sol",
+    "effort": "medium",
+    "scope": "implementation-contract-v2.json"
+  },
+  "review_file_hashes": {
+    "src/lei_signal/research/risk_shape_information.py": "b7cd8ae4ee78270b9fb00fba8f1fd7eb2045a94c8d0a08428d407f194b6a8556",
+    "src/lei_signal/research/workflow.py": "8a7c48d6a5eb85e28756b89be06daa88ac17ed5c22f01d311579fccf87b7e60a",
+    "src/lei_signal/research/workflow_inputs.py": "288f929b3888d659d7b7ba2f104628147d596a01304b1c04e662fce81a9921d9",
+    "src/lei_signal/research/question_contract.py": "687049aea09786be850b8e3533c23b7bfb443b1baa9ca7e1f400700ad8ba4816",
+    "tests/unit/test_risk_shape_information.py": "4366e20f8fa6b0f1685b8f44a9437c04090d4abadd6d8dcd1545c37227524504",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/definition-proposals.json": "271ccace92c7ddde3e3a93e61712e24d17d22b2adb47d74e6424e4ca0b068cad"
+  }
+}

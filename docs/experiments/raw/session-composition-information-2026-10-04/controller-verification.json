@@ -1,0 +1,200 @@
+{
+  "status": "passed",
+  "performance_checks": [
+    {
+      "mode": "main",
+      "model": "B0",
+      "mse": 15.451387748555566,
+      "rmse": 3.9308253266401403,
+      "abs_error": 5.329070518200751e-15
+    },
+    {
+      "mode": "main",
+      "model": "B1",
+      "mse": 14.72343986442354,
+      "rmse": 3.8371134807852036,
+      "abs_error": 3.552713678800501e-15
+    },
+    {
+      "mode": "main",
+      "model": "B2",
+      "mse": 14.794898591302704,
+      "rmse": 3.846413731166046,
+      "abs_error": 3.552713678800501e-15
+    },
+    {
+      "mode": "solo",
+      "model": "B0",
+      "mse": 15.451387748555566,
+      "rmse": 3.9308253266401403,
+      "abs_error": 5.329070518200751e-15
+    },
+    {
+      "mode": "solo",
+      "model": "B1",
+      "mse": 14.885011082258597,
+      "rmse": 3.8581097810013905,
+      "abs_error": 3.552713678800501e-15
+    },
+    {
+      "mode": "solo",
+      "model": "B2",
+      "mse": 14.944060883850431,
+      "rmse": 3.865754891848477,
+      "abs_error": 5.329070518200751e-15
+    }
+  ],
+  "simple_mean_max_error": 4.440892098500626e-16,
+  "receipts": "both output SHA exact",
+  "observations": 951,
+  "dates": 317,
+  "assets": 3,
+  "source_quality": {
+    "request_satisfied": true,
+    "assets": [
+      "510300.SS",
+      "510050.SS",
+      "510500.SS",
+      "588000.SS"
+    ],
+    "raw_response_field_differences": 0,
+    "economic_ohlc_max_absolute_difference": 6.661338147750939e-15
+  },
+  "fit_boundary_audits": [
+    {
+      "fold": "0",
+      "model": "B1",
+      "training_rows": 2115,
+      "evaluation_rows": 666,
+      "normal_equation_residual": 1.1102230246251565e-16,
+      "prediction_max_error": 0.0,
+      "training_max_label_end": "2024-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "0",
+      "model": "B2",
+      "training_rows": 2115,
+      "evaluation_rows": 666,
+      "normal_equation_residual": 5.551115123125783e-17,
+      "prediction_max_error": 0.0,
+      "training_max_label_end": "2024-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "1",
+      "model": "B1",
+      "training_rows": 2844,
+      "evaluation_rows": 285,
+      "normal_equation_residual": 4.440892098500626e-16,
+      "prediction_max_error": 1.7763568394002505e-15,
+      "training_max_label_end": "2025-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "1",
+      "model": "B2",
+      "training_rows": 2844,
+      "evaluation_rows": 285,
+      "normal_equation_residual": 4.440892098500626e-16,
+      "prediction_max_error": 1.7763568394002505e-15,
+      "training_max_label_end": "2025-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "0",
+      "model": "B1",
+      "training_rows": 2115,
+      "evaluation_rows": 666,
+      "normal_equation_residual": 1.1102230246251565e-16,
+      "prediction_max_error": 0.0,
+      "training_max_label_end": "2024-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "0",
+      "model": "B2",
+      "training_rows": 2115,
+      "evaluation_rows": 666,
+      "normal_equation_residual": 5.551115123125783e-17,
+      "prediction_max_error": 0.0,
+      "training_max_label_end": "2024-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "1",
+      "model": "B1",
+      "training_rows": 2844,
+      "evaluation_rows": 285,
+      "normal_equation_residual": 2.706168622523819e-16,
+      "prediction_max_error": 1.7763568394002505e-15,
+      "training_max_label_end": "2025-12-31",
+      "negative_prediction_rows": 0
+    },
+    {
+      "fold": "1",
+      "model": "B2",
+      "training_rows": 2844,
+      "evaluation_rows": 285,
+      "normal_equation_residual": 3.3306690738754696e-16,
+      "prediction_max_error": 2.6645352591003757e-15,
+      "training_max_label_end": "2025-12-31",
+      "negative_prediction_rows": 0
+    }
+  ],
+  "all_dates_retained": "all original planned dates remain in preflight, full951 saved predictions scored; no bad-date deletion",
+  "phase_partition": "all21 phases sum951 and weighted differences recover main effect",
+  "action_contribution_identity": "full original weights contributions recover -0.07145872687916466; groups have different asset/date composition, descriptive only",
+  "new_fits": 0,
+  "repair": "none",
+  "coverage_review": [
+    {
+      "topic": "definition",
+      "status": "complete",
+      "evidence": "definitions.v1.json and brief.json"
+    },
+    {
+      "topic": "implementation/numerical",
+      "status": "complete",
+      "evidence": "engineering-verification.json and controller-formula-check.json"
+    },
+    {
+      "topic": "data/time",
+      "status": "complete",
+      "evidence": "qualification.json/preflight.json; unknown availability explicitly limited"
+    },
+    {
+      "topic": "performance/baseline increment",
+      "status": "complete",
+      "evidence": "run-main/result.json,run-solo/result.json,diagnostics.json"
+    },
+    {
+      "topic": "uncertainty/dependence",
+      "status": "complete",
+      "evidence": "60 original evaluation calendar and 120 sensitivity; all21 alternative intervals"
+    },
+    {
+      "topic": "stability/counterexamples",
+      "status": "complete",
+      "evidence": "year/ETF/leaveETF/action contributions all computed"
+    },
+    {
+      "topic": "selection history",
+      "status": "complete",
+      "evidence": "both drafts frozen before first new effect; whole history seen exploration"
+    },
+    {
+      "topic": "reproducibility/reconciliation",
+      "status": "complete",
+      "evidence": "both receipts and this independent arithmetic"
+    }
+  ],
+  "independent_new_data": {
+    "status": "evidence_boundary",
+    "reason": "No truly unused qualified history; old data do not become independent when partitioned"
+  },
+  "account_effect": {
+    "status": "not_applicable",
+    "reason": "Question measures closing-path risk information, not capital or trade rules"
+  }
+}

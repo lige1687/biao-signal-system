@@ -1,0 +1,87 @@
+{
+  "schema_version": "workflow-rehearsal/1.0",
+  "data_mode": "synthetic",
+  "input_sha256": "26d98f15d33b5776fdb73ed6645ab762f6157014e81b5a1cd260fe9156e7ab79",
+  "definition_and_method": "f69b89d0b4984c0f1fe91e1343476f7c54570da49ab6986835c9f551ca25700f",
+  "coverage": {
+    "scheduled": 1200,
+    "anchor_excluded": 600,
+    "common_ready": 349,
+    "eligible": 328,
+    "per_asset": {
+      "synthetic-A": {
+        "scheduled": 600,
+        "anchor_excluded": 600,
+        "common_ready": 0,
+        "eligible": 0
+      },
+      "synthetic-B": {
+        "scheduled": 600,
+        "anchor_excluded": 0,
+        "common_ready": 349,
+        "eligible": 328,
+        "joint_252_or_feature_missing": 251,
+        "feature_ready": 349
+      }
+    }
+  },
+  "performance": [
+    {
+      "model": "B0",
+      "metric": "MSE",
+      "value": 6.796125223226023,
+      "unit": "percentage_point_squared",
+      "rows": 252,
+      "dates": 252,
+      "assets": 1
+    },
+    {
+      "model": "B0",
+      "metric": "RMSE",
+      "value": 2.606937901681976,
+      "unit": "percentage_point",
+      "rows": 252,
+      "dates": 252,
+      "assets": 1
+    },
+    {
+      "model": "B1",
+      "metric": "MSE",
+      "value": 6.796125223226023,
+      "unit": "percentage_point_squared",
+      "rows": 252,
+      "dates": 252,
+      "assets": 1
+    },
+    {
+      "model": "B1",
+      "metric": "RMSE",
+      "value": 2.606937901681976,
+      "unit": "percentage_point",
+      "rows": 252,
+      "dates": 252,
+      "assets": 1
+    },
+    {
+      "model": "B2",
+      "metric": "MSE",
+      "value": 5.363302444116062,
+      "unit": "percentage_point_squared",
+      "rows": 252,
+      "dates": 252,
+      "assets": 1
+    },
+    {
+      "model": "B2",
+      "metric": "RMSE",
+      "value": 2.315880490033124,
+      "unit": "percentage_point",
+      "rows": 252,
+      "dates": 252,
+      "assets": 1
+    }
+  ],
+  "fits": 2,
+  "purpose": "engineering_error_check_only",
+  "selection_used": false
+}

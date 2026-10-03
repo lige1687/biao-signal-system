@@ -730,6 +730,50 @@
     "tests/unit/test_technical_persistence_information.py": {
       "path": "tests/unit/test_technical_persistence_information.py",
       "sha256": "ff1b04cc0357323d2f4876b053cc307dd89a35c1ff2a47274804f69ac496038f"
+    },
+    "docs/experiments/raw/risk-shape-information-2026-10-03/source-LEI 技术交易体系.md": {
+      "path": "docs/experiments/raw/risk-shape-information-2026-10-03/source-LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    "docs/experiments/raw/risk-shape-information-2026-10-03/source-LEI 技术实现.md": {
+      "path": "docs/experiments/raw/risk-shape-information-2026-10-03/source-LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    },
+    "docs/experiments/raw/risk-shape-information-2026-10-03/brief.json": {
+      "path": "docs/experiments/raw/risk-shape-information-2026-10-03/brief.json",
+      "sha256": "c0fdf37e4e7c1a4dc9e66501c158dd2db8802e042a3c1ad17d7be5828ca74a59"
+    },
+    "src/lei_signal/research/risk_shape_information.py": {
+      "path": "src/lei_signal/research/risk_shape_information.py",
+      "sha256": "787882b3eb6217afe1b09cddddfe14c50fef8f89b0d7bf34d6adad49717bd5d5"
+    },
+    "tests/unit/test_risk_shape_information.py": {
+      "path": "tests/unit/test_risk_shape_information.py",
+      "sha256": "cacf4a6a6f54d2a29cb03a81c8e3f38f0ca27481a2166963ab57205b734dc098"
+    },
+    "docs/experiments/raw/session-composition-information-2026-10-04/brief.json": {
+      "path": "docs/experiments/raw/session-composition-information-2026-10-04/brief.json",
+      "sha256": "f66830d26f8db1a212c1484fd018fe58e2629cf1824e39386b1c6c550cd220c7"
+    },
+    "src/lei_signal/research/session_composition_information.py": {
+      "path": "src/lei_signal/research/session_composition_information.py",
+      "sha256": "299399c536efbcfd6147f1da317e7f0604823da6e770c0d8bdbb48892c00065a"
+    },
+    "tests/unit/test_session_composition_information.py": {
+      "path": "tests/unit/test_session_composition_information.py",
+      "sha256": "bf0935c419f11a77791893e4a60a54edaa96490a4f806c7ad95e45511f8b4a04"
+    },
+    "docs/experiments/raw/volume-direction-information-2026-10-04/brief.json": {
+      "path": "docs/experiments/raw/volume-direction-information-2026-10-04/brief.json",
+      "sha256": "7c26de2af1e583dff876cf998e63b0a2b3b6c87ee74ae37a9b98299223ea27ec"
+    },
+    "src/lei_signal/research/volume_direction_information.py": {
+      "path": "src/lei_signal/research/volume_direction_information.py",
+      "sha256": "2eb7397346111cac2f3bf865183af41e6dd631e91a7782a89edfbe4c0892dace"
+    },
+    "tests/unit/test_volume_direction_information.py": {
+      "path": "tests/unit/test_volume_direction_information.py",
+      "sha256": "e3883db423bba71b77cdfc59f444edc9071032fc27ba36692720098887ab7cab"
     }
   },
   "objects": [
@@ -11359,6 +11403,694 @@
         "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
       ],
       "component_definition_refs": []
+    },
+    {
+      "id": "research.risk.vol_instability20",
+      "version": "1.0.0",
+      "name": "20日短期波动不稳定程度",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description",
+        "comparison",
+        "diagnostic"
+      ],
+      "not_for": [
+        "production_trade",
+        "automatic_buy_or_sell",
+        "LEI_original_rule",
+        "account_return_claim"
+      ],
+      "scope": "国内三只宽基ETF相对510300.SS锚定ETF的每日收盘风险研究；共同样本；非交易触发",
+      "spec_anchor": [
+        "用户2026-10-03授权三个新风险候选有效性研究；不是LEI原文公式",
+        "LEI技术交易体系§2.4仅作趋势强度背景；不得替换原判定"
+      ],
+      "spec_layer": "technical_risk_observation_research_extension",
+      "definition": {
+        "formula": "For r[t]=100*(C[t]/C[t-1]-1), v5[j]=sample_std(r[j-4:j],ddof=1). X[t]=sample_std(v5[t-19:t],ddof=1)/mean(v5[t-19:t]); mean<=1e-12 is missing.",
+        "parameters": {
+          "candidate": "vol_instability20",
+          "candidate_window_returns": 24,
+          "common_window_returns": 60,
+          "warmup": 252,
+          "anchor": "510300.SS",
+          "baseline_main": [
+            "S",
+            "E",
+            "return1",
+            "return20",
+            "return60",
+            "volatility5",
+            "volatility20",
+            "volatility60",
+            "market_return20",
+            "market_volatility20",
+            "beta60",
+            "relative_return20",
+            "negative_fraction60",
+            "downside_rms60",
+            "return_autocorr1_60",
+            "current_negative_run",
+            "asset_510500",
+            "asset_588000"
+          ],
+          "baseline_solo": [
+            "asset_510500",
+            "asset_588000"
+          ],
+          "comparison_modes": [
+            "main",
+            "solo"
+          ]
+        },
+        "endpoints": "Only t close and earlier for features. Outcome is max closing-price loss from t+1 through t+21, relative to t+1 close.",
+        "unit": "ratio",
+        "direction": "Risk-prediction direction determined by evaluation; no assumed trading direction",
+        "transforms": "Economic OHLC; simple returns in percentage points; no winsorization or candidate tuning"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "calendar",
+          "action_known"
+        ],
+        "price_basis": "economic_price",
+        "currency": "CNY ETF economic price index",
+        "frequency": "daily",
+        "calendar": "four-source-ETF common trading calendar",
+        "sources": "source-qualified historical ETF OHLC"
+      },
+      "dependencies": [],
+      "universe": {
+        "version": "risk-shape-three-etf-20261003",
+        "eligibility": "Four source ETFs scheduled; 510300.SS is source-only anchor and explicitly excluded. Three predicted ETFs share dates where all 18 baseline fields and all three candidates are finite.",
+        "warmup": "252 synchronized contiguous known OHLC rows for target and anchor",
+        "missing": "Any target/anchor missing or unknown action resets both; candidate denominator/variance rules yield missing; no imputation",
+        "quality_gate": "Reuse qualify_top_panel source-only V01 economic OHLC/action reconstruction",
+        "degrade": "Historical arrival and action-history completeness not independently certified; no sector or overseas extrapolation"
+      },
+      "time": {
+        "observation_time": "After complete t close",
+        "available_at": "Historical provider arrival not certified",
+        "decision_at": "After t close for research",
+        "execution_at": "No trade",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-03 research proposal"
+      },
+      "validation": {
+        "method": "Independent hand arithmetic, price-scale invariance, prefix and synchronized-gap checks, common-support and anchor-exclusion tests; six synthetic two-model rehearsals",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_risk_shape_information.py"
+        ],
+        "limitations": "Definition and synthetic engineering evidence only; no real-label effectiveness claim or production approval"
+      },
+      "status": {
+        "definition_clarity": "fixed_research_proxy",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "verified_research_only",
+        "effectiveness": "not_proven",
+        "production": "not_authorized"
+      },
+      "lifecycle": {
+        "state": "verified",
+        "basis": [
+          "tests/unit/test_risk_shape_information.py",
+          "docs/experiments/raw/risk-shape-information-2026-10-03/controller-formula-check.json"
+        ],
+        "verification_scope": "Three exact formulas, known arithmetic counterexamples, scale invariance and future/snapshot/gap boundaries; effect not established."
+      },
+      "research_owner": "technical_agent",
+      "research_status": "IN_SCOPE",
+      "origin": "User-authorized risk-feature extension, not a literal LEI trading rule",
+      "sources": [
+        "docs/experiments/raw/risk-shape-information-2026-10-03/source-LEI 技术交易体系.md",
+        "docs/experiments/raw/risk-shape-information-2026-10-03/source-LEI 技术实现.md",
+        "docs/experiments/raw/risk-shape-information-2026-10-03/brief.json",
+        "src/lei_signal/research/risk_shape_information.py",
+        "tests/unit/test_risk_shape_information.py"
+      ]
+    },
+    {
+      "id": "research.risk.beta_asymmetry60",
+      "version": "1.0.0",
+      "name": "60日下跌与上涨时相对沪深300的敏感度差",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description",
+        "comparison",
+        "diagnostic"
+      ],
+      "not_for": [
+        "production_trade",
+        "automatic_buy_or_sell",
+        "LEI_original_rule",
+        "account_return_claim"
+      ],
+      "scope": "国内三只宽基ETF相对510300.SS锚定ETF的每日收盘风险研究；共同样本；非交易触发",
+      "spec_anchor": [
+        "用户2026-10-03授权三个新风险候选有效性研究；不是LEI原文公式",
+        "LEI技术交易体系§2.4仅作趋势强度背景；不得替换原判定"
+      ],
+      "spec_layer": "technical_risk_observation_research_extension",
+      "definition": {
+        "formula": "Using 60 aligned target/510300.SS simple-return pairs, separately regress target on anchor with intercept for anchor r<0 and r>0. X=beta_down-beta_up; each side needs >=10 pairs and sample anchor variance>1e-12.",
+        "parameters": {
+          "candidate": "beta_asymmetry60",
+          "candidate_window_returns": 60,
+          "common_window_returns": 60,
+          "warmup": 252,
+          "anchor": "510300.SS",
+          "baseline_main": [
+            "S",
+            "E",
+            "return1",
+            "return20",
+            "return60",
+            "volatility5",
+            "volatility20",
+            "volatility60",
+            "market_return20",
+            "market_volatility20",
+            "beta60",
+            "relative_return20",
+            "negative_fraction60",
+            "downside_rms60",
+            "return_autocorr1_60",
+            "current_negative_run",
+            "asset_510500",
+            "asset_588000"
+          ],
+          "baseline_solo": [
+            "asset_510500",
+            "asset_588000"
+          ],
+          "comparison_modes": [
+            "main",
+            "solo"
+          ]
+        },
+        "endpoints": "Only t close and earlier for features. Outcome is max closing-price loss from t+1 through t+21, relative to t+1 close.",
+        "unit": "slope difference",
+        "direction": "Risk-prediction direction determined by evaluation; no assumed trading direction",
+        "transforms": "Economic OHLC; simple returns in percentage points; no winsorization or candidate tuning"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "calendar",
+          "action_known"
+        ],
+        "price_basis": "economic_price",
+        "currency": "CNY ETF economic price index",
+        "frequency": "daily",
+        "calendar": "four-source-ETF common trading calendar",
+        "sources": "source-qualified historical ETF OHLC"
+      },
+      "dependencies": [],
+      "universe": {
+        "version": "risk-shape-three-etf-20261003",
+        "eligibility": "Four source ETFs scheduled; 510300.SS is source-only anchor and explicitly excluded. Three predicted ETFs share dates where all 18 baseline fields and all three candidates are finite.",
+        "warmup": "252 synchronized contiguous known OHLC rows for target and anchor",
+        "missing": "Any target/anchor missing or unknown action resets both; candidate denominator/variance rules yield missing; no imputation",
+        "quality_gate": "Reuse qualify_top_panel source-only V01 economic OHLC/action reconstruction",
+        "degrade": "Historical arrival and action-history completeness not independently certified; no sector or overseas extrapolation"
+      },
+      "time": {
+        "observation_time": "After complete t close",
+        "available_at": "Historical provider arrival not certified",
+        "decision_at": "After t close for research",
+        "execution_at": "No trade",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-03 research proposal"
+      },
+      "validation": {
+        "method": "Independent hand arithmetic, price-scale invariance, prefix and synchronized-gap checks, common-support and anchor-exclusion tests; six synthetic two-model rehearsals",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_risk_shape_information.py"
+        ],
+        "limitations": "Definition and synthetic engineering evidence only; no real-label effectiveness claim or production approval"
+      },
+      "status": {
+        "definition_clarity": "fixed_research_proxy",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "verified_research_only",
+        "effectiveness": "not_proven",
+        "production": "not_authorized"
+      },
+      "lifecycle": {
+        "state": "verified",
+        "basis": [
+          "tests/unit/test_risk_shape_information.py",
+          "docs/experiments/raw/risk-shape-information-2026-10-03/controller-formula-check.json"
+        ],
+        "verification_scope": "Three exact formulas, known arithmetic counterexamples, scale invariance and future/snapshot/gap boundaries; effect not established."
+      },
+      "research_owner": "technical_agent",
+      "research_status": "IN_SCOPE",
+      "origin": "User-authorized risk-feature extension, not a literal LEI trading rule",
+      "sources": [
+        "docs/experiments/raw/risk-shape-information-2026-10-03/source-LEI 技术交易体系.md",
+        "docs/experiments/raw/risk-shape-information-2026-10-03/source-LEI 技术实现.md",
+        "docs/experiments/raw/risk-shape-information-2026-10-03/brief.json",
+        "src/lei_signal/research/risk_shape_information.py",
+        "tests/unit/test_risk_shape_information.py"
+      ]
+    },
+    {
+      "id": "research.risk.negative_cluster60",
+      "version": "1.0.0",
+      "name": "60日下跌连续性",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description",
+        "comparison",
+        "diagnostic"
+      ],
+      "not_for": [
+        "production_trade",
+        "automatic_buy_or_sell",
+        "LEI_original_rule",
+        "account_return_claim"
+      ],
+      "scope": "国内三只宽基ETF相对510300.SS锚定ETF的每日收盘风险研究；共同样本；非交易触发",
+      "spec_anchor": [
+        "用户2026-10-03授权三个新风险候选有效性研究；不是LEI原文公式",
+        "LEI技术交易体系§2.4仅作趋势强度背景；不得替换原判定"
+      ],
+      "spec_layer": "technical_risk_observation_research_extension",
+      "definition": {
+        "formula": "From 60 target simple returns form 59 consecutive transitions. Negative means r<0; zero is nonnegative. X=P(current negative|previous negative)-P(current negative|previous nonnegative); each previous-state denominator needs >=5 transitions.",
+        "parameters": {
+          "candidate": "negative_cluster60",
+          "candidate_window_returns": 60,
+          "common_window_returns": 60,
+          "warmup": 252,
+          "anchor": "510300.SS",
+          "baseline_main": [
+            "S",
+            "E",
+            "return1",
+            "return20",
+            "return60",
+            "volatility5",
+            "volatility20",
+            "volatility60",
+            "market_return20",
+            "market_volatility20",
+            "beta60",
+            "relative_return20",
+            "negative_fraction60",
+            "downside_rms60",
+            "return_autocorr1_60",
+            "current_negative_run",
+            "asset_510500",
+            "asset_588000"
+          ],
+          "baseline_solo": [
+            "asset_510500",
+            "asset_588000"
+          ],
+          "comparison_modes": [
+            "main",
+            "solo"
+          ]
+        },
+        "endpoints": "Only t close and earlier for features. Outcome is max closing-price loss from t+1 through t+21, relative to t+1 close.",
+        "unit": "probability difference",
+        "direction": "Risk-prediction direction determined by evaluation; no assumed trading direction",
+        "transforms": "Economic OHLC; simple returns in percentage points; no winsorization or candidate tuning"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "calendar",
+          "action_known"
+        ],
+        "price_basis": "economic_price",
+        "currency": "CNY ETF economic price index",
+        "frequency": "daily",
+        "calendar": "four-source-ETF common trading calendar",
+        "sources": "source-qualified historical ETF OHLC"
+      },
+      "dependencies": [],
+      "universe": {
+        "version": "risk-shape-three-etf-20261003",
+        "eligibility": "Four source ETFs scheduled; 510300.SS is source-only anchor and explicitly excluded. Three predicted ETFs share dates where all 18 baseline fields and all three candidates are finite.",
+        "warmup": "252 synchronized contiguous known OHLC rows for target and anchor",
+        "missing": "Any target/anchor missing or unknown action resets both; candidate denominator/variance rules yield missing; no imputation",
+        "quality_gate": "Reuse qualify_top_panel source-only V01 economic OHLC/action reconstruction",
+        "degrade": "Historical arrival and action-history completeness not independently certified; no sector or overseas extrapolation"
+      },
+      "time": {
+        "observation_time": "After complete t close",
+        "available_at": "Historical provider arrival not certified",
+        "decision_at": "After t close for research",
+        "execution_at": "No trade",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-03 research proposal"
+      },
+      "validation": {
+        "method": "Independent hand arithmetic, price-scale invariance, prefix and synchronized-gap checks, common-support and anchor-exclusion tests; six synthetic two-model rehearsals",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_risk_shape_information.py"
+        ],
+        "limitations": "Definition and synthetic engineering evidence only; no real-label effectiveness claim or production approval"
+      },
+      "status": {
+        "definition_clarity": "fixed_research_proxy",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "verified_research_only",
+        "effectiveness": "not_proven",
+        "production": "not_authorized"
+      },
+      "lifecycle": {
+        "state": "verified",
+        "basis": [
+          "tests/unit/test_risk_shape_information.py",
+          "docs/experiments/raw/risk-shape-information-2026-10-03/controller-formula-check.json"
+        ],
+        "verification_scope": "Three exact formulas, known arithmetic counterexamples, scale invariance and future/snapshot/gap boundaries; effect not established."
+      },
+      "research_owner": "technical_agent",
+      "research_status": "IN_SCOPE",
+      "origin": "User-authorized risk-feature extension, not a literal LEI trading rule",
+      "sources": [
+        "docs/experiments/raw/risk-shape-information-2026-10-03/source-LEI 技术交易体系.md",
+        "docs/experiments/raw/risk-shape-information-2026-10-03/source-LEI 技术实现.md",
+        "docs/experiments/raw/risk-shape-information-2026-10-03/brief.json",
+        "src/lei_signal/research/risk_shape_information.py",
+        "tests/unit/test_risk_shape_information.py"
+      ]
+    },
+    {
+      "id": "research.price.overnight_minus_intraday20",
+      "version": "1.0.0",
+      "name": "20日隔夜与日内经济价格变化之差",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description",
+        "comparison",
+        "diagnostic"
+      ],
+      "not_for": [
+        "production_trade",
+        "automatic_buy_or_sell",
+        "LEI_original_rule",
+        "account_return_claim"
+      ],
+      "scope": "同一国内宽基ETF过去20个间隔的价格变化构成；510300仅市场参照，不比较同指数ETF产品",
+      "spec_anchor": [
+        "用户2026-10-03方向制定及2026-10-04继续授权；候选为研究扩展，非原文交易公式",
+        "LEI技术体系§2.4风险背景观察；不替换原判断"
+      ],
+      "spec_layer": "technical_risk_observation_research_extension",
+      "definition": {
+        "formula": "100*sum[j=t-19..t](log(O[j]/C[j-1])-log(C[j]/O[j]))",
+        "parameters": {
+          "candidate": "overnight_minus_intraday20",
+          "lookback": 20,
+          "warmup": 252,
+          "anchor": "510300.SS",
+          "baseline_main": [
+            "S",
+            "E",
+            "return1",
+            "return20",
+            "return60",
+            "volatility5",
+            "volatility20",
+            "volatility60",
+            "market_return20",
+            "market_volatility20",
+            "beta60",
+            "relative_return20",
+            "negative_fraction60",
+            "downside_rms60",
+            "return_autocorr1_60",
+            "current_negative_run",
+            "asset_510500",
+            "asset_588000"
+          ],
+          "baseline_solo": [
+            "asset_510500",
+            "asset_588000"
+          ],
+          "comparison_modes": [
+            "main",
+            "solo"
+          ]
+        },
+        "endpoints": "21 contiguous close prices and last20 economic opens through t; future label is max(0,100*(1-min(C[t+1:t+21])/C[t+1]))",
+        "unit": "log_change_percentage_point",
+        "direction": "Positive means greater overnight than intraday change; risk relation estimated, no assumed trading direction",
+        "transforms": "Source economic OHLC: nominal*split multiplier plus effective cash, times previous economic/nominal-close scale. Both open and close include cash. Log partition is exact price-index identity, not actual trading gains. No normalization/tuning."
+      },
+      "input": {
+        "fields": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "calendar",
+          "action_known"
+        ],
+        "price_basis": "economic_price",
+        "currency": "CNY ETF economic price index",
+        "frequency": "daily",
+        "calendar": "four-source-ETF common trading calendar",
+        "sources": "source-qualified historical ETF OHLC"
+      },
+      "dependencies": [],
+      "universe": {
+        "version": "same-etf-session-composition-20261004",
+        "eligibility": "Four source ETF scheduled, 510300 excluded as source-only anchor; all baseline fields and the sole candidate finite. No old risk-shape all-three-candidates filter.",
+        "warmup": "252 synchronized contiguous known OHLC rows for target and anchor",
+        "missing": "Missing/invalid/nonpositive own or anchor OHLC or unknown action resets synchronized 252 continuous warmup; no filling",
+        "quality_gate": "Reuse qualify_top_panel source-only V01 economic OHLC/action reconstruction",
+        "degrade": "Historical arrival and action-history completeness not independently certified; no sector or overseas extrapolation"
+      },
+      "time": {
+        "observation_time": "After complete t close",
+        "available_at": "Historical provider arrival not certified",
+        "decision_at": "After t close for research",
+        "execution_at": "No trade",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-04 research proposal"
+      },
+      "validation": {
+        "method": "Independent logarithmic product identity, boundary, scale, prefix, gap, no-label qualification and source action reconstruction; synthetic rehearsal and later exact real comparison.",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_session_composition_information.py"
+        ],
+        "limitations": "Seen retrospective history; announcement arrival/action completeness unknown; no independent evidence or real open execution"
+      },
+      "status": {
+        "definition_clarity": "fixed_research_proxy",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "verified_research_only",
+        "effectiveness": "not_proven",
+        "production": "not_authorized"
+      },
+      "lifecycle": {
+        "state": "verified",
+        "basis": [
+          "tests/unit/test_session_composition_information.py",
+          "docs/experiments/raw/session-composition-information-2026-10-04/controller-formula-check.json"
+        ],
+        "verification_scope": "Independent product identity, mathematical cash/split/invalid cases, scale, causal prefix, no-label qualification, gap and snapshot boundaries; not proof of effectiveness."
+      },
+      "research_owner": "technical_agent",
+      "research_status": "IN_SCOPE",
+      "origin": "User-authorized same-ETF price composition, not a literal LEI rule",
+      "sources": [
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md",
+        "docs/experiments/raw/session-composition-information-2026-10-04/brief.json",
+        "src/lei_signal/research/session_composition_information.py",
+        "tests/unit/test_session_composition_information.py"
+      ]
+    },
+    {
+      "id": "research.volume.direction_excess20",
+      "version": "1.0.0",
+      "name": "20日成交方向相对涨跌天数的偏向",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description",
+        "comparison",
+        "diagnostic"
+      ],
+      "not_for": [
+        "production_trade",
+        "automatic_buy_or_sell",
+        "LEI_original_rule",
+        "account_return_claim"
+      ],
+      "scope": "同一国内宽基ETF20个完整报价间隔的成交方向；成交量恒定单位缩放不影响结果，不做同指数ETF产品比较",
+      "spec_anchor": [
+        "LEI技术体系§2.5量价关系研究扩展；非原文唯一交易公式",
+        "用户批准P2方向并持续授权研究"
+      ],
+      "spec_layer": "technical_risk_observation_research_extension",
+      "definition": {
+        "formula": "sum(sign(C[j]-C[j-1])*V[j])/sum(V[j])-mean(sign(C[j]-C[j-1])); j=t-19..t",
+        "parameters": {
+          "candidate": "direction_excess20",
+          "lookback": 20,
+          "warmup": 252,
+          "anchor": "510300.SS",
+          "baseline_main": [
+            "S",
+            "E",
+            "return1",
+            "return20",
+            "return60",
+            "volatility5",
+            "volatility20",
+            "volatility60",
+            "market_return20",
+            "market_volatility20",
+            "beta60",
+            "relative_return20",
+            "negative_fraction60",
+            "downside_rms60",
+            "return_autocorr1_60",
+            "current_negative_run",
+            "asset_510500",
+            "asset_588000",
+            "direction20"
+          ],
+          "baseline_solo": [
+            "asset_510500",
+            "asset_588000",
+            "direction20"
+          ],
+          "comparison_modes": [
+            "main",
+            "solo"
+          ]
+        },
+        "endpoints": "21 economic closes and 20 paired known positive volumes through t; target=max(0,100*(1-min(C[t+1:t+21])/C[t+1]))",
+        "unit": "ratio",
+        "direction": "Positive: volume more biased toward upward than simple day-count direction; no preset risk or trading implication",
+        "transforms": "Economic close action-adjusted; nominal same-ETF volume weights within uninterrupted unit window; no normalization or epsilon. Known split begins new volume window."
+      },
+      "input": {
+        "fields": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "calendar",
+          "action_known",
+          "volume",
+          "volume_source_known",
+          "volume_break"
+        ],
+        "price_basis": "economic_price",
+        "currency": "CNY ETF economic price index",
+        "frequency": "daily",
+        "calendar": "four-source-ETF common trading calendar",
+        "sources": "source-qualified economic OHLC and raw-checked volume"
+      },
+      "dependencies": [],
+      "universe": {
+        "version": "same-etf-volume-direction-20261004",
+        "eligibility": "Three tested ETFs, fourth source-only anchor; joint price252 and volume20 support for old19/new20 or old3/new4",
+        "warmup": "252 synchronized contiguous known OHLC rows for target and anchor",
+        "missing": "Price/anchor gap resets joint252 and volume; missing/invalid own volume resets only20 pairs; known break resets before append current pair, no filling",
+        "quality_gate": "Source-only qualify_top_panel -> qualify_volume_panel raw verification",
+        "degrade": "Historical arrival, action completeness and all volume-unit changes unproved"
+      },
+      "time": {
+        "observation_time": "After complete t close",
+        "available_at": "Historical provider arrival not certified",
+        "decision_at": "After t close for research",
+        "execution_at": "No trade",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-04 research proposal"
+      },
+      "validation": {
+        "method": "Independent up-volume minus down-volume arithmetic; equal-volume/one-direction zero, scale, prefix, split/missing-volume continuity,252 and maturity",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_volume_direction_information.py"
+        ],
+        "limitations": "Seen retrospective history, only3 ETFs; not money flow or traded returns"
+      },
+      "status": {
+        "definition_clarity": "fixed_research_proxy",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "verified_research_only",
+        "effectiveness": "not_proven",
+        "production": "not_authorized"
+      },
+      "lifecycle": {
+        "state": "verified",
+        "basis": [
+          "tests/unit/test_volume_direction_information.py",
+          "docs/experiments/raw/volume-direction-information-2026-10-04/controller-formula-check.json"
+        ],
+        "verification_scope": "Independent arithmetic and boundary tests verified; source qualification and predictive effects separate"
+      },
+      "research_owner": "technical_agent",
+      "research_status": "IN_SCOPE",
+      "origin": "User-authorized multi-day signed-volume composition proxy, not literal LEI rule",
+      "sources": [
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md",
+        "docs/experiments/raw/volume-direction-information-2026-10-04/brief.json",
+        "src/lei_signal/research/volume_direction_information.py",
+        "tests/unit/test_volume_direction_information.py"
+      ]
     }
   ],
   "models": [],
@@ -11488,6 +12220,10 @@
         "research.volume.abnormal20@1.0.0",
         "research.volume_profile.overhead120@1.0.0"
       ]
+    },
+    {
+      "date": "2026-10-04",
+      "change": "Append root-owned3 risk cards and session/volume research cards; inherited definitions unchanged"
     }
   ],
   "standard_version": "1.0.0",

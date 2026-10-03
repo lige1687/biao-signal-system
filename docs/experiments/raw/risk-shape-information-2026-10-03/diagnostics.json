@@ -1,0 +1,1230 @@
+{
+  "candidates": {
+    "vol_instability20": {
+      "core": {
+        "mse": {
+          "B0": 15.451387748555566,
+          "B1": 14.72343986442354,
+          "B2": 14.537513500450153
+        },
+        "rmse": {
+          "B0": 3.9308253266401403,
+          "B1": 3.8371134807852036,
+          "B2": 3.8128091350669724
+        },
+        "rows": 951,
+        "dates": 317,
+        "assets": 3
+      },
+      "solo": {
+        "mse": {
+          "B0": 15.451387748555566,
+          "B1": 14.885011082258597,
+          "B2": 14.720829192450886
+        },
+        "rmse": {
+          "B0": 3.9308253266401403,
+          "B1": 3.8581097810013905,
+          "B2": 3.836773278739687
+        },
+        "rows": 951,
+        "dates": 317,
+        "assets": 3
+      },
+      "increment": {
+        "new_model": "B2",
+        "old_model": "B1",
+        "old_value": 14.723439864423536,
+        "new_value": 14.53751350045015,
+        "absolute_error_improvement": 0.1859263639733868,
+        "relative_percent": 1.2627916144965783,
+        "lo": 0.0011877966545760362,
+        "hi": 0.4561688779379861,
+        "unit": "percentage_point_squared",
+        "metric": "MSE",
+        "rows": 951,
+        "dates": 317,
+        "assets": 3,
+        "calendar_dates": 359,
+        "block_length": 60,
+        "draws": 1000,
+        "valid_draws": 1000,
+        "unestimable_draws": 0,
+        "seed": 20261003,
+        "weighting": "equal_asset",
+        "interpretation": "positive means lower prediction error; not investment return"
+      },
+      "simple_baselines": {
+        "mse": {
+          "B0": 15.451387748555566,
+          "asset_mean": 14.494896819815875,
+          "rolling_mature120": 15.561191971818712,
+          "B1": 14.72343986442354,
+          "B2": 14.537513500450153
+        },
+        "rmse": {
+          "B0": 3.9308253266401403,
+          "asset_mean": 3.8072164135777564,
+          "rolling_mature120": 3.9447676701953833,
+          "B1": 3.8371134807852036,
+          "B2": 3.8128091350669724
+        },
+        "rows": 951,
+        "dates": 317,
+        "assets": 3
+      },
+      "vs_simple_increment": {
+        "asset_mean": {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 14.494896819815871,
+          "new_value": 14.53751350045015,
+          "absolute_error_improvement": -0.04261668063427848,
+          "relative_percent": -0.2940116177716941,
+          "lo": -1.1929321524859353,
+          "hi": 1.3512787785250997,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 951,
+          "dates": 317,
+          "assets": 3,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261003,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        },
+        "rolling_mature120": {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 15.561191971818708,
+          "new_value": 14.53751350045015,
+          "absolute_error_improvement": 1.0236784713685587,
+          "relative_percent": 6.57840654637793,
+          "lo": -1.1749828022630213,
+          "hi": 3.591113398622974,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 951,
+          "dates": 317,
+          "assets": 3,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261003,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        }
+      },
+      "periods": {
+        "2025": {
+          "mse": {
+            "B0": 15.189421297853386,
+            "B1": 14.250822841940732,
+            "B2": 14.027263502843098
+          },
+          "rmse": {
+            "B0": 3.8973608118640217,
+            "B1": 3.7750262041396128,
+            "B2": 3.745298853608761
+          },
+          "rows": 666,
+          "dates": 222,
+          "assets": 3
+        },
+        "2026": {
+          "mse": {
+            "B0": 16.06356198072278,
+            "B1": 15.827871222225466,
+            "B2": 15.729887179068744
+          },
+          "rmse": {
+            "B0": 4.007937372355359,
+            "B1": 3.9784257215920804,
+            "B2": 3.966092179850179
+          },
+          "rows": 285,
+          "dates": 95,
+          "assets": 3
+        }
+      },
+      "assets": {
+        "510050.SS": {
+          "mse": {
+            "B0": 10.322556094066655,
+            "B1": 8.688109813533519,
+            "B2": 8.450719895993931
+          },
+          "rmse": {
+            "B0": 3.2128734948744335,
+            "B1": 2.947559976240266,
+            "B2": 2.907012193987829
+          },
+          "rows": 317,
+          "dates": 317,
+          "assets": 1
+        },
+        "510500.SS": {
+          "mse": {
+            "B0": 15.853300003326025,
+            "B1": 15.338236544786557,
+            "B2": 15.27707318944612
+          },
+          "rmse": {
+            "B0": 3.9816202736230415,
+            "B1": 3.916406075062513,
+            "B2": 3.908589667571427
+          },
+          "rows": 317,
+          "dates": 317,
+          "assets": 1
+        },
+        "588000.SS": {
+          "mse": {
+            "B0": 20.178307148274016,
+            "B1": 20.143973234950543,
+            "B2": 19.88474741591041
+          },
+          "rmse": {
+            "B0": 4.492027064508184,
+            "B1": 4.4882037871458715,
+            "B2": 4.459231706909881
+          },
+          "rows": 317,
+          "dates": 317,
+          "assets": 1
+        }
+      },
+      "leave_one_asset_out": {
+        "510050.SS": {
+          "mse": {
+            "B0": 18.01580357580002,
+            "B1": 17.741104889868552,
+            "B2": 17.580910302678266
+          },
+          "rmse": {
+            "B0": 4.244502747766813,
+            "B1": 4.212019098943943,
+            "B2": 4.192959611381711
+          },
+          "rows": 634,
+          "dates": 317,
+          "assets": 2
+        },
+        "510500.SS": {
+          "mse": {
+            "B0": 15.250431621170335,
+            "B1": 14.41604152424203,
+            "B2": 14.167733655952171
+          },
+          "rmse": {
+            "B0": 3.9051801009902647,
+            "B1": 3.796846260285242,
+            "B2": 3.7640050021157214
+          },
+          "rows": 634,
+          "dates": 317,
+          "assets": 2
+        },
+        "588000.SS": {
+          "mse": {
+            "B0": 13.087928048696343,
+            "B1": 12.013173179160038,
+            "B2": 11.863896542720026
+          },
+          "rmse": {
+            "B0": 3.617724153206867,
+            "B1": 3.4660024782391656,
+            "B2": 3.4444007523399516
+          },
+          "rows": 634,
+          "dates": 317,
+          "assets": 2
+        }
+      },
+      "block120_increment": {
+        "new_model": "B2",
+        "old_model": "B1",
+        "old_value": 14.723439864423536,
+        "new_value": 14.53751350045015,
+        "absolute_error_improvement": 0.1859263639733868,
+        "relative_percent": 1.2627916144965783,
+        "lo": -0.007918678711139401,
+        "hi": 0.4453752947433637,
+        "unit": "percentage_point_squared",
+        "metric": "MSE",
+        "rows": 951,
+        "dates": 317,
+        "assets": 3,
+        "calendar_dates": 359,
+        "block_length": 120,
+        "draws": 1000,
+        "valid_draws": 1000,
+        "unestimable_draws": 0,
+        "seed": 20261003,
+        "weighting": "equal_asset",
+        "interpretation": "positive means lower prediction error; not investment return"
+      },
+      "fit_boundary_audit": [
+        {
+          "fold": "0",
+          "model": "B1",
+          "training_rows": 2115,
+          "evaluation_rows": 666,
+          "normal_equation_residual": 1.1102230246251565e-16,
+          "prediction_max_error": 0.0,
+          "training_max_label_end": "2024-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "0",
+          "model": "B2",
+          "training_rows": 2115,
+          "evaluation_rows": 666,
+          "normal_equation_residual": 1.1102230246251565e-16,
+          "prediction_max_error": 0.0,
+          "training_max_label_end": "2024-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "1",
+          "model": "B1",
+          "training_rows": 2844,
+          "evaluation_rows": 285,
+          "normal_equation_residual": 4.440892098500626e-16,
+          "prediction_max_error": 1.7763568394002505e-15,
+          "training_max_label_end": "2025-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "1",
+          "model": "B2",
+          "training_rows": 2844,
+          "evaluation_rows": 285,
+          "normal_equation_residual": 4.440892098500626e-16,
+          "prediction_max_error": 2.220446049250313e-15,
+          "training_max_label_end": "2025-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "0",
+          "model": "B1",
+          "training_rows": 2115,
+          "evaluation_rows": 666,
+          "normal_equation_residual": 1.1102230246251565e-16,
+          "prediction_max_error": 0.0,
+          "training_max_label_end": "2024-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "0",
+          "model": "B2",
+          "training_rows": 2115,
+          "evaluation_rows": 666,
+          "normal_equation_residual": 2.7755575615628914e-17,
+          "prediction_max_error": 0.0,
+          "training_max_label_end": "2024-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "1",
+          "model": "B1",
+          "training_rows": 2844,
+          "evaluation_rows": 285,
+          "normal_equation_residual": 2.706168622523819e-16,
+          "prediction_max_error": 1.7763568394002505e-15,
+          "training_max_label_end": "2025-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "1",
+          "model": "B2",
+          "training_rows": 2844,
+          "evaluation_rows": 285,
+          "normal_equation_residual": 2.983724378680108e-16,
+          "prediction_max_error": 2.6645352591003757e-15,
+          "training_max_label_end": "2025-12-31",
+          "negative_prediction_rows": 0
+        }
+      ],
+      "top10_abs_daily_share": 0.19507922670792507,
+      "top10_date_contributions": [
+        [
+          "2026-05-25",
+          0.009139308228882608
+        ],
+        [
+          "2026-05-22",
+          0.00869743449596276
+        ],
+        [
+          "2026-05-27",
+          0.008267031976212053
+        ],
+        [
+          "2025-04-29",
+          0.007333121088901886
+        ],
+        [
+          "2025-04-28",
+          0.0071016428844697015
+        ],
+        [
+          "2025-04-09",
+          0.007050076829383454
+        ],
+        [
+          "2025-04-25",
+          0.00696088174604919
+        ],
+        [
+          "2026-05-26",
+          0.006787296484687539
+        ],
+        [
+          "2025-04-23",
+          0.0065783223352854905
+        ],
+        [
+          "2025-04-17",
+          0.006509035481348281
+        ]
+      ],
+      "common_support_asserted": true,
+      "new_fits": 0
+    },
+    "beta_asymmetry60": {
+      "core": {
+        "mse": {
+          "B0": 15.451387748555566,
+          "B1": 14.72343986442354,
+          "B2": 14.719658313432161
+        },
+        "rmse": {
+          "B0": 3.9308253266401403,
+          "B1": 3.8371134807852036,
+          "B2": 3.836620689282713
+        },
+        "rows": 951,
+        "dates": 317,
+        "assets": 3
+      },
+      "solo": {
+        "mse": {
+          "B0": 15.451387748555566,
+          "B1": 14.885011082258597,
+          "B2": 14.859682688870503
+        },
+        "rmse": {
+          "B0": 3.9308253266401403,
+          "B1": 3.8581097810013905,
+          "B2": 3.8548258960516626
+        },
+        "rows": 951,
+        "dates": 317,
+        "assets": 3
+      },
+      "increment": {
+        "new_model": "B2",
+        "old_model": "B1",
+        "old_value": 14.723439864423536,
+        "new_value": 14.71965831343216,
+        "absolute_error_improvement": 0.003781550991377003,
+        "relative_percent": 0.025683882477181303,
+        "lo": -0.05354669713914261,
+        "hi": 0.06427955103670203,
+        "unit": "percentage_point_squared",
+        "metric": "MSE",
+        "rows": 951,
+        "dates": 317,
+        "assets": 3,
+        "calendar_dates": 359,
+        "block_length": 60,
+        "draws": 1000,
+        "valid_draws": 1000,
+        "unestimable_draws": 0,
+        "seed": 20261003,
+        "weighting": "equal_asset",
+        "interpretation": "positive means lower prediction error; not investment return"
+      },
+      "simple_baselines": {
+        "mse": {
+          "B0": 15.451387748555566,
+          "asset_mean": 14.494896819815875,
+          "rolling_mature120": 15.561191971818712,
+          "B1": 14.72343986442354,
+          "B2": 14.719658313432161
+        },
+        "rmse": {
+          "B0": 3.9308253266401403,
+          "asset_mean": 3.8072164135777564,
+          "rolling_mature120": 3.9447676701953833,
+          "B1": 3.8371134807852036,
+          "B2": 3.836620689282713
+        },
+        "rows": 951,
+        "dates": 317,
+        "assets": 3
+      },
+      "vs_simple_increment": {
+        "asset_mean": {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 14.494896819815871,
+          "new_value": 14.71965831343216,
+          "absolute_error_improvement": -0.22476149361628828,
+          "relative_percent": -1.550624998647927,
+          "lo": -1.4737523737295368,
+          "hi": 1.1911517134045528,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 951,
+          "dates": 317,
+          "assets": 3,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261003,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        },
+        "rolling_mature120": {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 15.561191971818708,
+          "new_value": 14.71965831343216,
+          "absolute_error_improvement": 0.8415336583865489,
+          "relative_percent": 5.407899728443457,
+          "lo": -1.4240142768666775,
+          "hi": 3.569337202311811,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 951,
+          "dates": 317,
+          "assets": 3,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261003,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        }
+      },
+      "periods": {
+        "2025": {
+          "mse": {
+            "B0": 15.189421297853386,
+            "B1": 14.250822841940732,
+            "B2": 14.28718254651556
+          },
+          "rmse": {
+            "B0": 3.8973608118640217,
+            "B1": 3.7750262041396128,
+            "B2": 3.779838957748803
+          },
+          "rows": 666,
+          "dates": 222,
+          "assets": 3
+        },
+        "2026": {
+          "mse": {
+            "B0": 16.06356198072278,
+            "B1": 15.827871222225466,
+            "B2": 15.730285895068853
+          },
+          "rmse": {
+            "B0": 4.007937372355359,
+            "B1": 3.9784257215920804,
+            "B2": 3.966142445130892
+          },
+          "rows": 285,
+          "dates": 95,
+          "assets": 3
+        }
+      },
+      "assets": {
+        "510050.SS": {
+          "mse": {
+            "B0": 10.322556094066655,
+            "B1": 8.688109813533519,
+            "B2": 8.717814637056552
+          },
+          "rmse": {
+            "B0": 3.2128734948744335,
+            "B1": 2.947559976240266,
+            "B2": 2.9525945602226784
+          },
+          "rows": 317,
+          "dates": 317,
+          "assets": 1
+        },
+        "510500.SS": {
+          "mse": {
+            "B0": 15.853300003326025,
+            "B1": 15.338236544786557,
+            "B2": 15.30306308694189
+          },
+          "rmse": {
+            "B0": 3.9816202736230415,
+            "B1": 3.916406075062513,
+            "B2": 3.911912970266835
+          },
+          "rows": 317,
+          "dates": 317,
+          "assets": 1
+        },
+        "588000.SS": {
+          "mse": {
+            "B0": 20.178307148274016,
+            "B1": 20.143973234950543,
+            "B2": 20.138097216298043
+          },
+          "rmse": {
+            "B0": 4.492027064508184,
+            "B1": 4.4882037871458715,
+            "B2": 4.487549132466189
+          },
+          "rows": 317,
+          "dates": 317,
+          "assets": 1
+        }
+      },
+      "leave_one_asset_out": {
+        "510050.SS": {
+          "mse": {
+            "B0": 18.01580357580002,
+            "B1": 17.741104889868552,
+            "B2": 17.72058015161997
+          },
+          "rmse": {
+            "B0": 4.244502747766813,
+            "B1": 4.212019098943943,
+            "B2": 4.20958194499406
+          },
+          "rows": 634,
+          "dates": 317,
+          "assets": 2
+        },
+        "510500.SS": {
+          "mse": {
+            "B0": 15.250431621170335,
+            "B1": 14.41604152424203,
+            "B2": 14.427955926677297
+          },
+          "rmse": {
+            "B0": 3.9051801009902647,
+            "B1": 3.796846260285242,
+            "B2": 3.7984149229220994
+          },
+          "rows": 634,
+          "dates": 317,
+          "assets": 2
+        },
+        "588000.SS": {
+          "mse": {
+            "B0": 13.087928048696343,
+            "B1": 12.013173179160038,
+            "B2": 12.01043886199922
+          },
+          "rmse": {
+            "B0": 3.617724153206867,
+            "B1": 3.4660024782391656,
+            "B2": 3.465608007550655
+          },
+          "rows": 634,
+          "dates": 317,
+          "assets": 2
+        }
+      },
+      "block120_increment": {
+        "new_model": "B2",
+        "old_model": "B1",
+        "old_value": 14.723439864423536,
+        "new_value": 14.71965831343216,
+        "absolute_error_improvement": 0.003781550991377003,
+        "relative_percent": 0.025683882477181303,
+        "lo": -0.05970060999444348,
+        "hi": 0.07127053821730463,
+        "unit": "percentage_point_squared",
+        "metric": "MSE",
+        "rows": 951,
+        "dates": 317,
+        "assets": 3,
+        "calendar_dates": 359,
+        "block_length": 120,
+        "draws": 1000,
+        "valid_draws": 1000,
+        "unestimable_draws": 0,
+        "seed": 20261003,
+        "weighting": "equal_asset",
+        "interpretation": "positive means lower prediction error; not investment return"
+      },
+      "fit_boundary_audit": [
+        {
+          "fold": "0",
+          "model": "B1",
+          "training_rows": 2115,
+          "evaluation_rows": 666,
+          "normal_equation_residual": 1.1102230246251565e-16,
+          "prediction_max_error": 0.0,
+          "training_max_label_end": "2024-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "0",
+          "model": "B2",
+          "training_rows": 2115,
+          "evaluation_rows": 666,
+          "normal_equation_residual": 1.1102230246251565e-16,
+          "prediction_max_error": 0.0,
+          "training_max_label_end": "2024-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "1",
+          "model": "B1",
+          "training_rows": 2844,
+          "evaluation_rows": 285,
+          "normal_equation_residual": 4.440892098500626e-16,
+          "prediction_max_error": 1.7763568394002505e-15,
+          "training_max_label_end": "2025-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "1",
+          "model": "B2",
+          "training_rows": 2844,
+          "evaluation_rows": 285,
+          "normal_equation_residual": 4.440892098500626e-16,
+          "prediction_max_error": 1.7763568394002505e-15,
+          "training_max_label_end": "2025-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "0",
+          "model": "B1",
+          "training_rows": 2115,
+          "evaluation_rows": 666,
+          "normal_equation_residual": 1.1102230246251565e-16,
+          "prediction_max_error": 0.0,
+          "training_max_label_end": "2024-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "0",
+          "model": "B2",
+          "training_rows": 2115,
+          "evaluation_rows": 666,
+          "normal_equation_residual": 1.1102230246251565e-16,
+          "prediction_max_error": 0.0,
+          "training_max_label_end": "2024-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "1",
+          "model": "B1",
+          "training_rows": 2844,
+          "evaluation_rows": 285,
+          "normal_equation_residual": 2.706168622523819e-16,
+          "prediction_max_error": 1.7763568394002505e-15,
+          "training_max_label_end": "2025-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "1",
+          "model": "B2",
+          "training_rows": 2844,
+          "evaluation_rows": 285,
+          "normal_equation_residual": 2.914335439641036e-16,
+          "prediction_max_error": 1.7763568394002505e-15,
+          "training_max_label_end": "2025-12-31",
+          "negative_prediction_rows": 0
+        }
+      ],
+      "top10_abs_daily_share": 0.1668536637902159,
+      "top10_date_contributions": [
+        [
+          "2026-02-26",
+          0.0022307724869963146
+        ],
+        [
+          "2026-02-27",
+          0.0022164291239188238
+        ],
+        [
+          "2026-02-25",
+          0.0021477884665479993
+        ],
+        [
+          "2026-03-09",
+          0.0017298229958286806
+        ],
+        [
+          "2025-08-29",
+          0.001703627798060977
+        ],
+        [
+          "2026-03-03",
+          0.0016768467796879191
+        ],
+        [
+          "2026-03-10",
+          0.0016764015001888353
+        ],
+        [
+          "2026-02-24",
+          0.0016604604685952458
+        ],
+        [
+          "2026-05-22",
+          0.0015855935501129092
+        ],
+        [
+          "2026-03-05",
+          0.0014475190628229118
+        ]
+      ],
+      "common_support_asserted": true,
+      "new_fits": 0
+    },
+    "negative_cluster60": {
+      "core": {
+        "mse": {
+          "B0": 15.451387748555566,
+          "B1": 14.72343986442354,
+          "B2": 14.64813908189359
+        },
+        "rmse": {
+          "B0": 3.9308253266401403,
+          "B1": 3.8371134807852036,
+          "B2": 3.827288737721991
+        },
+        "rows": 951,
+        "dates": 317,
+        "assets": 3
+      },
+      "solo": {
+        "mse": {
+          "B0": 15.451387748555566,
+          "B1": 14.885011082258597,
+          "B2": 14.734236866874708
+        },
+        "rmse": {
+          "B0": 3.9308253266401403,
+          "B1": 3.8581097810013905,
+          "B2": 3.838520140220018
+        },
+        "rows": 951,
+        "dates": 317,
+        "assets": 3
+      },
+      "increment": {
+        "new_model": "B2",
+        "old_model": "B1",
+        "old_value": 14.723439864423536,
+        "new_value": 14.648139081893586,
+        "absolute_error_improvement": 0.07530078252995054,
+        "relative_percent": 0.5114347137851999,
+        "lo": -0.003602592538806072,
+        "hi": 0.1468896561233204,
+        "unit": "percentage_point_squared",
+        "metric": "MSE",
+        "rows": 951,
+        "dates": 317,
+        "assets": 3,
+        "calendar_dates": 359,
+        "block_length": 60,
+        "draws": 1000,
+        "valid_draws": 1000,
+        "unestimable_draws": 0,
+        "seed": 20261003,
+        "weighting": "equal_asset",
+        "interpretation": "positive means lower prediction error; not investment return"
+      },
+      "simple_baselines": {
+        "mse": {
+          "B0": 15.451387748555566,
+          "asset_mean": 14.494896819815875,
+          "rolling_mature120": 15.561191971818712,
+          "B1": 14.72343986442354,
+          "B2": 14.64813908189359
+        },
+        "rmse": {
+          "B0": 3.9308253266401403,
+          "asset_mean": 3.8072164135777564,
+          "rolling_mature120": 3.9447676701953833,
+          "B1": 3.8371134807852036,
+          "B2": 3.827288737721991
+        },
+        "rows": 951,
+        "dates": 317,
+        "assets": 3
+      },
+      "vs_simple_increment": {
+        "asset_mean": {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 14.494896819815871,
+          "new_value": 14.648139081893586,
+          "absolute_error_improvement": -0.15324226207771474,
+          "relative_percent": -1.0572152667428327,
+          "lo": -1.4751753970929797,
+          "hi": 1.344759419663787,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 951,
+          "dates": 317,
+          "assets": 3,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261003,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        },
+        "rolling_mature120": {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 15.561191971818708,
+          "new_value": 14.648139081893586,
+          "absolute_error_improvement": 0.9130528899251225,
+          "relative_percent": 5.867499684976959,
+          "lo": -1.248928584191955,
+          "hi": 3.521260581197318,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 951,
+          "dates": 317,
+          "assets": 3,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261003,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        }
+      },
+      "periods": {
+        "2025": {
+          "mse": {
+            "B0": 15.189421297853386,
+            "B1": 14.250822841940732,
+            "B2": 14.165531867541684
+          },
+          "rmse": {
+            "B0": 3.8973608118640217,
+            "B1": 3.7750262041396128,
+            "B2": 3.763712511276822
+          },
+          "rows": 666,
+          "dates": 222,
+          "assets": 3
+        },
+        "2026": {
+          "mse": {
+            "B0": 16.06356198072278,
+            "B1": 15.827871222225466,
+            "B2": 15.775915940694889
+          },
+          "rmse": {
+            "B0": 4.007937372355359,
+            "B1": 3.9784257215920804,
+            "B2": 3.9718907261775076
+          },
+          "rows": 285,
+          "dates": 95,
+          "assets": 3
+        }
+      },
+      "assets": {
+        "510050.SS": {
+          "mse": {
+            "B0": 10.322556094066655,
+            "B1": 8.688109813533519,
+            "B2": 8.564813647988707
+          },
+          "rmse": {
+            "B0": 3.2128734948744335,
+            "B1": 2.947559976240266,
+            "B2": 2.9265702875531123
+          },
+          "rows": 317,
+          "dates": 317,
+          "assets": 1
+        },
+        "510500.SS": {
+          "mse": {
+            "B0": 15.853300003326025,
+            "B1": 15.338236544786557,
+            "B2": 15.215157924717102
+          },
+          "rmse": {
+            "B0": 3.9816202736230415,
+            "B1": 3.916406075062513,
+            "B2": 3.9006612163474417
+          },
+          "rows": 317,
+          "dates": 317,
+          "assets": 1
+        },
+        "588000.SS": {
+          "mse": {
+            "B0": 20.178307148274016,
+            "B1": 20.143973234950543,
+            "B2": 20.164445672974956
+          },
+          "rmse": {
+            "B0": 4.492027064508184,
+            "B1": 4.4882037871458715,
+            "B2": 4.490483901872376
+          },
+          "rows": 317,
+          "dates": 317,
+          "assets": 1
+        }
+      },
+      "leave_one_asset_out": {
+        "510050.SS": {
+          "mse": {
+            "B0": 18.01580357580002,
+            "B1": 17.741104889868552,
+            "B2": 17.689801798846027
+          },
+          "rmse": {
+            "B0": 4.244502747766813,
+            "B1": 4.212019098943943,
+            "B2": 4.205924606890384
+          },
+          "rows": 634,
+          "dates": 317,
+          "assets": 2
+        },
+        "510500.SS": {
+          "mse": {
+            "B0": 15.250431621170335,
+            "B1": 14.41604152424203,
+            "B2": 14.36462966048183
+          },
+          "rmse": {
+            "B0": 3.9051801009902647,
+            "B1": 3.796846260285242,
+            "B2": 3.790069875408873
+          },
+          "rows": 634,
+          "dates": 317,
+          "assets": 2
+        },
+        "588000.SS": {
+          "mse": {
+            "B0": 13.087928048696343,
+            "B1": 12.013173179160038,
+            "B2": 11.889985786352906
+          },
+          "rmse": {
+            "B0": 3.617724153206867,
+            "B1": 3.4660024782391656,
+            "B2": 3.448185868881332
+          },
+          "rows": 634,
+          "dates": 317,
+          "assets": 2
+        }
+      },
+      "block120_increment": {
+        "new_model": "B2",
+        "old_model": "B1",
+        "old_value": 14.723439864423536,
+        "new_value": 14.648139081893586,
+        "absolute_error_improvement": 0.07530078252995054,
+        "relative_percent": 0.5114347137851999,
+        "lo": 0.027082504713275276,
+        "hi": 0.12819193600068934,
+        "unit": "percentage_point_squared",
+        "metric": "MSE",
+        "rows": 951,
+        "dates": 317,
+        "assets": 3,
+        "calendar_dates": 359,
+        "block_length": 120,
+        "draws": 1000,
+        "valid_draws": 1000,
+        "unestimable_draws": 0,
+        "seed": 20261003,
+        "weighting": "equal_asset",
+        "interpretation": "positive means lower prediction error; not investment return"
+      },
+      "fit_boundary_audit": [
+        {
+          "fold": "0",
+          "model": "B1",
+          "training_rows": 2115,
+          "evaluation_rows": 666,
+          "normal_equation_residual": 1.1102230246251565e-16,
+          "prediction_max_error": 0.0,
+          "training_max_label_end": "2024-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "0",
+          "model": "B2",
+          "training_rows": 2115,
+          "evaluation_rows": 666,
+          "normal_equation_residual": 6.938893903907228e-17,
+          "prediction_max_error": 0.0,
+          "training_max_label_end": "2024-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "1",
+          "model": "B1",
+          "training_rows": 2844,
+          "evaluation_rows": 285,
+          "normal_equation_residual": 4.440892098500626e-16,
+          "prediction_max_error": 1.7763568394002505e-15,
+          "training_max_label_end": "2025-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "1",
+          "model": "B2",
+          "training_rows": 2844,
+          "evaluation_rows": 285,
+          "normal_equation_residual": 4.440892098500626e-16,
+          "prediction_max_error": 1.7763568394002505e-15,
+          "training_max_label_end": "2025-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "0",
+          "model": "B1",
+          "training_rows": 2115,
+          "evaluation_rows": 666,
+          "normal_equation_residual": 1.1102230246251565e-16,
+          "prediction_max_error": 0.0,
+          "training_max_label_end": "2024-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "0",
+          "model": "B2",
+          "training_rows": 2115,
+          "evaluation_rows": 666,
+          "normal_equation_residual": 1.1102230246251565e-16,
+          "prediction_max_error": 0.0,
+          "training_max_label_end": "2024-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "1",
+          "model": "B1",
+          "training_rows": 2844,
+          "evaluation_rows": 285,
+          "normal_equation_residual": 2.706168622523819e-16,
+          "prediction_max_error": 1.7763568394002505e-15,
+          "training_max_label_end": "2025-12-31",
+          "negative_prediction_rows": 0
+        },
+        {
+          "fold": "1",
+          "model": "B2",
+          "training_rows": 2844,
+          "evaluation_rows": 285,
+          "normal_equation_residual": 3.3306690738754696e-16,
+          "prediction_max_error": 1.7763568394002505e-15,
+          "training_max_label_end": "2025-12-31",
+          "negative_prediction_rows": 0
+        }
+      ],
+      "top10_abs_daily_share": 0.10414958901251425,
+      "top10_date_contributions": [
+        [
+          "2026-03-25",
+          0.0031481997057069694
+        ],
+        [
+          "2026-03-23",
+          0.0029823820276095726
+        ],
+        [
+          "2026-03-20",
+          0.002944875258044825
+        ],
+        [
+          "2026-02-12",
+          -0.0028690817470082737
+        ],
+        [
+          "2025-08-29",
+          -0.0024946314711072597
+        ],
+        [
+          "2026-05-12",
+          0.0024225598107664326
+        ],
+        [
+          "2025-09-08",
+          0.0022191214843273353
+        ],
+        [
+          "2026-02-11",
+          -0.002217164384869256
+        ],
+        [
+          "2025-09-18",
+          0.0022142886221408063
+        ],
+        [
+          "2025-09-03",
+          0.0022006183157659
+        ]
+      ],
+      "common_support_asserted": true,
+      "new_fits": 0
+    }
+  },
+  "fingerprints": {
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-vol_instability20-main/contract.json": "607d8e592689cb84d8e67b69465abb5e479250dc95a6b1db270f090bf82e8b4b",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-vol_instability20-main/preflight.json": "15193d36bc40c80ed4b95343879d328d9ed3ae0a3fcbdda9ee02c6bb969f9119",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-vol_instability20-main/result.json": "85dc7048128091b3d88dde96c3851f06c00bd3a618855ecd516978c9d5df4f79",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-vol_instability20-main/receipt.json": "46f785d36302c7b55983569651936432424dfde0c5c0b664a406be9dbd149a10",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-repaired-vol_instability20-solo/contract.json": "584dd1d2766e7bff254b1b34e807dace89f3cc09be19d4a1812d3c594e0c9925",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-repaired-vol_instability20-solo/preflight.json": "645f4cd1acc6455a2c41218e103a06e75bc67d5f832b2f6c0dcdd60347b8bd0f",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-repaired-vol_instability20-solo/result.json": "2f1673d11ca3552c22c0dbfa8473d4037b1bf974c5f215c092026fef08e29170",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-repaired-vol_instability20-solo/receipt.json": "ee965cd7082c68f91a73ce5f0113b1c3c266cc4e5f8642faf81c07a7bb12d3c9",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-beta_asymmetry60-main/contract.json": "8d227d6fbe1f820314b087d9d57da545954dcf3280b3bb83a07a6d9a66ca451c",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-beta_asymmetry60-main/preflight.json": "77df56d272153f99a90bde49a9b2c40ac1d30ca407387dc660e54996126657c2",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-beta_asymmetry60-main/result.json": "a92f1804c2b87b1893373ed3c9db66bc0462aefad3212a78f092bf7349dca3c8",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-beta_asymmetry60-main/receipt.json": "30ff5dd54d65d1191dad220900c5035f01b42852115eeb35f4cdc83ca1e61b7b",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-beta_asymmetry60-solo/contract.json": "f43bec96c3383de7dc66ad2c1626f3141d2df72b7ab8fe7adefb9346ab9970fd",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-beta_asymmetry60-solo/preflight.json": "c43ea77ce7441dc2c40553d3e7f770f1a28c56c26b06613a3d2c635e07514af8",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-beta_asymmetry60-solo/result.json": "d5b85f52f38f69723f3051c96f7ab5648573432b45c80d6812d2ab8e0c213a7c",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-beta_asymmetry60-solo/receipt.json": "aab70e0044a10817197d67200cce6a9061424283698aca770d323af83b45a1fd",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-negative_cluster60-main/contract.json": "3a5f1c79a00e5c802984035c1e31d48804977429a07a9b87d435b5ec1c219ec9",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-negative_cluster60-main/preflight.json": "14113819ef0a887d79877380f8e818e09bd9831125bd6e221f9b35359930247f",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-negative_cluster60-main/result.json": "a1c828d3a987910ec7108b0db7073b213b5579bfd1a6f8d5531fe7be16812274",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-negative_cluster60-main/receipt.json": "75850174960404cbfd21afca48a7824485fb3cc31d507416519f3163231d119e",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-negative_cluster60-solo/contract.json": "bdda3993d17036725a5c336a76afe5ea8f846053d489eb53126a869ad8ca1b9c",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-negative_cluster60-solo/preflight.json": "289074794a5e974cc021c79fc7f9e06a33a0793cea1507bf14beee137551692e",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-negative_cluster60-solo/result.json": "0003ef3bab9ba3223c79fc11dc3ed279d654c856a29f477bf4bc34301a4d98af",
+    "docs/experiments/raw/risk-shape-information-2026-10-03/run-negative_cluster60-solo/receipt.json": "c28c746c757a2bf2082ef3faa7175ccb99644b886ab75e5c1cbe696e180e1f2c"
+  },
+  "execution": {
+    "new_fits": 0,
+    "real_fits_verified": 24,
+    "analysis": "preplanned auxiliary calculations of sealed predictions"
+  },
+  "uncertainty_limit": "95 percent intervals conditional on seen history/model; three tests exploratory, no multiple-test promotion; 120-day blocks offer few segments"
+}

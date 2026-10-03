@@ -1,0 +1,102 @@
+{
+  "scope": "fixed saved B1/B2 predictions; no new fits",
+  "unit_prediction": "percentage_point",
+  "unit_squared_difference": "percentage_point_squared",
+  "rows": 951,
+  "dates": 317,
+  "assets": [
+    "510050.SS",
+    "510500.SS",
+    "588000.SS"
+  ],
+  "weights": "equal_asset over all paired rows",
+  "B1_mse": 14.723439864423536,
+  "B2_mse": 14.53751350045015,
+  "B1_rmse": 3.8371134807852028,
+  "B2_rmse": 3.812809135066972,
+  "net_weighted_improvement": 0.18592636397338677,
+  "relative_percent": 1.2627916144965783,
+  "signs": {
+    "better": {
+      "rows": 481,
+      "weight": 0.5057833859095688,
+      "signed_contribution": 0.36704192970564964
+    },
+    "same": {
+      "rows": 0,
+      "weight": 0.0,
+      "signed_contribution": 0.0
+    },
+    "worse": {
+      "rows": 470,
+      "weight": 0.49421661409043105,
+      "signed_contribution": -0.18111556573226284
+    }
+  },
+  "extreme_date_sensitivity": [
+    {
+      "top_absolute_dates": 1,
+      "dates": [
+        "2026-05-25"
+      ],
+      "removed_contribution": 0.009139308228882606,
+      "remaining_contribution_original_weights": 0.17678705574450415,
+      "descriptive_only": true
+    },
+    {
+      "top_absolute_dates": 5,
+      "dates": [
+        "2026-05-25",
+        "2026-05-22",
+        "2026-05-27",
+        "2025-04-29",
+        "2025-04-28"
+      ],
+      "removed_contribution": 0.040538538674429,
+      "remaining_contribution_original_weights": 0.14538782529895777,
+      "descriptive_only": true
+    },
+    {
+      "top_absolute_dates": 10,
+      "dates": [
+        "2026-05-25",
+        "2026-05-22",
+        "2026-05-27",
+        "2025-04-29",
+        "2025-04-28",
+        "2025-04-09",
+        "2025-04-25",
+        "2026-05-26",
+        "2025-04-23",
+        "2025-04-17"
+      ],
+      "removed_contribution": 0.07442415155118294,
+      "remaining_contribution_original_weights": 0.11150221242220383,
+      "descriptive_only": true
+    }
+  ],
+  "original_increment": {
+    "new_model": "B2",
+    "old_model": "B1",
+    "old_value": 14.723439864423536,
+    "new_value": 14.53751350045015,
+    "absolute_error_improvement": 0.1859263639733868,
+    "relative_percent": 1.2627916144965783,
+    "lo": 0.0011877966545760362,
+    "hi": 0.4561688779379861,
+    "unit": "percentage_point_squared",
+    "metric": "MSE",
+    "rows": 951,
+    "dates": 317,
+    "assets": 3,
+    "calendar_dates": 359,
+    "block_length": 60,
+    "draws": 1000,
+    "valid_draws": 1000,
+    "unestimable_draws": 0,
+    "seed": 20261003,
+    "weighting": "equal_asset",
+    "interpretation": "positive means lower prediction error; not investment return"
+  },
+  "date_contribution_count": 317
+}
