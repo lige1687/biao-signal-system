@@ -2,8 +2,8 @@
 
 - task-id：dot-trade-state-accounting（新独立修复项；不替换三条 Pro 研究记录）
 - 负责人：当前 dot LEI 接续主控；本线实施与独立验收，协调记录由本方唯一写入者维护。
-- 状态：active（仅六文件工程修复；范围成功推送并读回后才实施）
-- 更新时间：2026-10-03T11:49:00Z，Etc/UTC
+- 状态：blocked（候选v2已通过局部功能复核；完整验收等待测试依赖安装授权，代码尚未发布）
+- 更新时间：2026-10-03T12:09:00Z，Etc/UTC
 - 目标：修正已审 IR-R02 的状态计数缺口：未实际入场/无效记录不能被显示为真实持仓，旧历史载入不能把不确定记录装作已核准。
 - 用途：回测摘要和历史显示准确性；不改变策略、入场退出、收益或资金路径，不开展新策略研究。
 - 验收：总数守恒，真实open与invalid/skipped/unknown分开；收益closed样本及全部R/回撤等其他指标保持；旧JSON无写盘、旧API数值字段兼容；UI准确显示纠正计数或“未核实”。
@@ -12,7 +12,7 @@
 
 计划工作分支：codex/lei-trade-state-accounting-20261003（尚未创建）。
 实现基础完整commit：3e348e6fa49cdd399e9838f252a2c0c1f411c8c1，task/technical-factor-sequence-progress最新ref已核相同；较3deaad7a1724228780a62af49cf34fc046b0640a仅12文档/JSON变化。实现者已逐项核service、metrics、engine、BacktestPage及types五个blob未变，缺陷仍存在。
-最近已推本任务代码成果commit：无；当前没有本任务已实现或已推的修复。只读材料和后续测试回执仅本地时均标远端不可复现，不借其他任务SHA冒称本方成果。协调自身commit按本路径Git历史定位。
+最近已推本任务代码成果commit：无；六文件候选v2仅本地，远端不可复现；没有已推代码或可合并结论。候选manifest SHA256 248fa928679a6612c20ca9beb39781b86dd05af99c61e8a3d6c78ad33c0a3b08，补丁SHA256 3fd893e1585cdb3ff6544024e14aadec6fa31be48eb855d4a8513944f1e56f27。协调自身commit按本路径Git历史定位。
 
 预计只写以下六个文件：
 1. src/lei_signal/backtest/trade_state_counts.py（新增，纯状态计数）
@@ -34,17 +34,21 @@
 
 ## 已有检查、待验证与停止条件
 
-已完成只读：最新协调规则/任务归属、稳定ID不存在、技术准确ref/12文件差异、相关源码未变及缺陷仍在。本轮未实施代码、未跑测试。
-实施后限定验证：合成各种结束原因、无效/未入场/未知、守恒、收益不变、旧JSON前后字节不变与旧字段兼容；单元测试及受影响既有backtest测试；现有环境可用的前端类型检查。分别记录通过、失败、未运行及工具版本，不以部分测试当全站/生产通过。
-阻塞/停止：若分类需改交易语义、旧字段兼容无法保持、发现同文件实际实施者、或六路径不足，暂停相应变动交回主控；不得凭本任务授权扩大市场计算、安装、部署或权限。目标是修复可核缺陷，资料不足留unknown，不另建平台。
+登记a8c54ea0141e00b9f7ee45f4b068301b0524cb2a成功读回后实施，当前仍严格六文件。v1独立检查发现两个阻断：矛盾结束状态误判为确定类别、只核closed漏检非closed记录被截断；v2均已修并复验，失败历史保留，没有改收益样本或引擎语义。
+
+已通过：20项专测及独立7项合成对照（有覆盖重合，不相加成27种保证）；110组新旧其他财务指标对照；10个原测试函数体用等价合成fixture直接断言（不是完整pytest）；实际UI helper的独立6输入/两使用点检查；补丁在准确基线上apply --check；六路径、原后SHA/Gitblob核对。旧JSON前后字节和旧open_count保持，新增纠正字段可解释unknown/未核实。回执文件名为candidate-v2-manifest.json、command-receipt-v2.json及独立review-result.json，均仅本地，未作为代码成果公开。
+
+未运行/受阻：完整pytest收集、TypeScript/Vite构建、React/浏览器实际渲染及完整Git检出的归置检查。原尝试分别因pytest/tsc缺失、非完整Git检出失败，日志保留，不能写通过。已请求在自有云端安装锁定依赖的授权，当前待答复；未安装、未运行市场数据或部署。局部功能复核仅接受为草稿候选，不是completed/ready-to-merge/生产可用。
+
+当前只整理六文件待发布材料；等待依赖授权及主控明确发布安排后再做被允许的完整验证。若失败需返修，仍限六路径和原兼容合同；范围变化先登记。无授权不绕行安装，不因等待转开新任务，不扩大市场计算。
 
 ## 归属、规范、预算与同步
 
-fresh协调基线6b6be6266fd06e06afc3c9d39e61996edc3f5a1a；COORDINATION.md v1.0，blob126a1a01cd09439536c69fdd7264e3e292e4b852未变。本task在原13项中不存在。推前增量f3c5d414d31abf1df88b234ef228de75aee19b98只新增市场理解页面完成状态，相关入口块和本六路径无登记写入交集，保留其全部记录。technical现已交小时准备、src只读且效果blocked；remote-core已paused并保留T5/T6等未解决证据，本修复不宣告其R1—R8关闭。reader暂停研究；地图/市场观察维护各自页面块，本线只改BacktestPage状态显示，不进入App/TopNav或市场页。未登记任务状态未知，记录不是锁，后续发现重叠先协调。
+fresh协调基线b2bcdb6d11d43835a474400f985bbd2acaa38d9b，COORDINATION.md v1.0/blob126a1a01cd09439536c69fdd7264e3e292e4b852未变，本task未有第二写入者。最新technical只新增独立风险research适配/定义卡，明确避让本backtest六路径；external在其人工搜索目录，sentiment在AAII研究目录，market-observation已archived。其增量全部保留，不把暂停/归档视作接管授权；本线不宣告remote-core R1—R8关闭。未登记活动未知，记录不是锁。
 
 原dot-pro-strategy-definition和dot-pro-increment-review继续paused；宏观只补到旧CSV而资格blocked。公式/时间独立工具已交，不因本项重开旧审查。适用技术基线AGENTS、现行current-standards实际索引及COORDINATION.md；这是已审缺陷修复，不改研究合同、定义、报告登记或原冻结结果。
 
 新增市场实验/拟合/行情下载/付费为0；仅合成记录及现有测试，不上传行情、账户资料、原文、凭据或大包，无模型权重。历史预算与负结果保持。
 技术基线.github/workflows读取404；协调既有根树无.github，外部自动化未知。发布前核准确路径、diff/大小/敏感形态及自动化；非force推送，竞态先fetch再审差异，不改其他任务，不推main/master、不合并、不部署。推后核完整commit及原文读回后才开始实施或声称同步。
 
-本版新增：只登记已审状态计数缺口、六文件及保持旧API数值字段的兼容方案。下一步：读回本登记→按上述范围实施→交最小独立验收和准确小文件清单→授权分支发布并更新证据索引；不得以“已登记”冒称修复完成。
+本版新增：登记候选v2、两项实际失败及修复、局部通过证据和完整验收待授权；代码未发布，工作未结案。下一步等明确授权/发布安排，不新增报告或项目。
