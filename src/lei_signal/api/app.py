@@ -11,7 +11,7 @@ import sys
 import threading
 from pathlib import Path
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -38,6 +38,7 @@ from lei_signal.api.routes import (
     sectors,
     sentiment,
     signals,
+    strategy_documents,
     symbols,
     timing_backtest,
     upgrades,
@@ -159,6 +160,7 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
     app.include_router(experiments.router)
     # 文献学习库：只读学习目录（learning-seed.json），不参与交易判定
     app.include_router(learning.router)
+    app.include_router(strategy_documents.router)
     app.include_router(upgrades.router)
 
     _warm_a_share_breadth()
@@ -179,6 +181,8 @@ def create_app(*, analysis_service: AnalysisService | None = None) -> FastAPI:
 
         @app.get("/{full_path:path}", include_in_schema=False)
         def spa(full_path: str) -> FileResponse:
+            if full_path == "api" or full_path.startswith("api/"):
+                raise HTTPException(status_code=404, detail="未登记的 API 路径")
             candidate = _WEB_DIST / full_path
             if full_path and candidate.is_file():
                 return FileResponse(candidate)

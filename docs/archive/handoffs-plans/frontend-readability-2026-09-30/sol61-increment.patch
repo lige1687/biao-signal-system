@@ -1,0 +1,98 @@
+diff --git a/web/src/pages/SentimentPage.tsx b/web/src/pages/SentimentPage.tsx
+--- a/web/src/pages/SentimentPage.tsx
++++ b/web/src/pages/SentimentPage.tsx
+@@ -235,6 +235,9 @@
+   const verdict = "三个来源日期和股票范围可能不同；旧投票结果仅供追溯，不能据此认定当前冰点或交易方向。";
+   const hotVotes = Object.values(cn.components ?? {}).filter((c) => c.ok && (c.vote ?? 0) > 0).length;
+   const coldVotes = Object.values(cn.components ?? {}).filter((c) => c.ok && (c.vote ?? 0) < 0).length;
++  const components = cn.components ?? {};
++  const componentKeys = [...Object.keys(CN_COMP_EXPLAIN), ...Object.keys(components).filter(key => !(key in CN_COMP_EXPLAIN))];
++  const hasValues = Object.values(components).some(c => c.ok && c.value != null);
+   return (
+     <section className="sx-rail-card mood-card">
+       <CardHead
+@@ -245,10 +248,12 @@
+       />
+       <div className="mood-comp" style={{ marginTop: 4 }}>
+         <span>投票结果</span>
+-        <b>{Object.keys(cn.components ?? {}).length ? <><span className="up">{hotVotes} 票热</span> / <span className="down">{coldVotes} 票冷</span></> : "未取得数据"}</b>
++        <b>{hasValues ? <><span className="up">{hotVotes} 票热</span> / <span className="down">{coldVotes} 票冷</span></> : "未取得数据"}</b>
+       </div>
+       <p className="reference-vote-note">三个现有指标各投一票；缺失数据不作零票或正常值显示。</p>
+-      {Object.entries(cn.components ?? {}).sort(([a], [b]) => (Object.keys(CN_COMP_EXPLAIN).indexOf(a) + 4) % 4 - (Object.keys(CN_COMP_EXPLAIN).indexOf(b) + 4) % 4).map(([k, c]) => {
++      {componentKeys.map(k => {
++        const c = components[k];
++        if (!c) return <Row key={k} name={CN_COMP_EXPLAIN[k].name} hint={CN_COMP_EXPLAIN[k].hint} value={<span className="muted">未取得数据（日期未记录）</span>} />;
+         const ex = CN_COMP_EXPLAIN[k] ?? { name: c.label_cn, hint: "" };
+         // 金额类（亿）超过 1 万亿换算成「万亿」展示，避免一长串数字
+         const fmtVal = () => {
+diff --git a/docs/archive/handoffs-plans/frontend-readability-2026-09-30/sol61-review.md b/docs/archive/handoffs-plans/frontend-readability-2026-09-30/sol61-review.md
+--- /dev/null
++++ b/docs/archive/handoffs-plans/frontend-readability-2026-09-30/sol61-review.md
+@@ -0,0 +1,66 @@
++# Sol 6.1 独立复核：前端阅读顺序
++
++日期：2026-09-30。执行模型：gpt-6.1-sol，medium。状态：本轮复核和范围内修正已交付，待主负责人验收；不是研究结案，也不是用户已验收。
++
++## 一句话结论（大白话）
++
++原实施确实让因子资料的日期、结论和适用范围更容易找到，旧精确版本入口仍能用。复核发现一个缺失显示问题：三个情绪指标都没有有效数据时，仍显示“0票热/0票冷”。已改为“未取得数据”，指标整项缺失时也保留三个指标的名称和缺失说明。原计票规则未改。构建、28项模型测试和资料阅读回归均独立通过；真实200%缩放、浏览器接口错误等项目仍有验证限制，未标为通过。
++
++## 边界与基线
++
++- 使用冻结合同 `sol61-contract.json`，相对接手基线 `sol61-baseline.json` 复核，不重做原Task1–6。
++- 阅读AGENTS、两份桌面权威文档、原计划、原验证记录、原实施差异和页面规范。本轮服务于只读解释、研究证据导航与缺失信息展示层。
++- 桌面技术交易体系SHA-256：`df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20`；技术实现：`85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903`。本次独立重算，与原记录一致。
++- `catalog.generated.json`实际SHA-256：`ff24409ab5c533e8204319ca3ec0309af07099504a418edac04eb20fa6a86406`。本次只读，未重建。实际生成时间2026-09-23T15:07:11.156007+08:00；49对象、51定义版本、2实验。
++- 原 `implementation.patch` 的18个产品路径都在原合同白名单内；概览、详情的结论和范围仍引用原快照，不新增研究判断。
++- 未暂存、提交、推送、清理、重置或修改权威源、研究JSON、后端、规则、Streamlit。未登记重复目标，未代用户验收。
++
++## 独立发现与修正
++
++`web/src/pages/SentimentPage.tsx` 的 CnMoodCard 用“components对象非空”决定是否展示票数。三个字段存在但均ok=false时，按原计票表达式得到0/0，界面把缺失呈现为零；components为空时则完全不展示三项指标。这与原计划Task4的缺失显示目标不符。
++
++先用实际组件函数的内存渲染重现：三项均ok=false/value=null/as_of=2026-09-22，输出“0票热/0票冷”；空components没有任何指标行。随后只修展示：至少有一项ok=true且值非空才展示原票数，三项已定义指标按原顺序保留；整项缺失显示“未取得数据（日期未记录）”。额外已有字段仍保留在后三行之外。hotVotes/coldVotes原表达式、state、方向、请求和业务操作均未改。
++
++修正后四组内存渲染检查通过：所有字段无效、components为空、整段components缺失、三项有效且包含真实0值。最后一组仍显示原1票热/1票冷，0值仍显示0，三个已定义名称顺序固定。
++
++## 独立检查结果
++
++| 检查 | 新证据 |
++| --- | --- |
++| 新旧因子模型测试 | `node --test src/pages/factor-research/overview.test.mjs src/pages/factor-research/model.test.mjs`：28通过，0失败。涵盖精确版本关联、URL往返、未知状态和原值/单位。 |
++| 技术体系原回归 | `npm run test:strategy-system`退出0，未删安全断言。此测试包含代码存在性断言，因此不单独当作页面实测。 |
++| 类型与构建 | 修正前后各运行构建，均退出0；最新构建764模块成功。仅原有大包体积提醒。 |
++| 情绪缺失展示补测 | 上述四组真实组件内存渲染断言通过。无网络、无落库。 |
++| 今日操作事件补测 | 直接渲染实际OpsPage：major_events未提供、available=false且有items、available=true但items为空、available=true且有一项，分别得到①–⑤、①–⑤、①–⑤、①–⑥；事件标题和推荐编号使用同一显示条件。 |
++| 技术体系异常补测 | 直接渲染实际StrategySystemPage，注入confirmed、changed、missing资料。changed警告、missing错误及恢复路径在折叠区外；来源真实路径和指纹在details内。只测试展示结构，不把markdown清理的替身当安全验证；原安全断言另保留。 |
++| 目录与差异 | `python3 scripts/check_repo_hygiene.py`通过；`git diff --check`退出0。 |
++
++渲染补测在stdin中通过esbuild编译为内存CommonJS，执行React `renderToStaticMarkup`，未新建测试文件：情绪仅提取当前文件的MOOD_TONE/Badge/Row/CardHead和CN_COMP_EXPLAIN/CnMoodCard原函数；Ops/Strategy使用原组件，替换useQuery返回夹具并忽略SSR不运行的effect，未向API提交操作。故这类证据证明条件与HTML结构，不证明浏览器网络错误、异步恢复或交互。
++
++## 真实浏览器补测
++
++Chrome启动两次因浏览器工具请求头策略加载失败，改用内置浏览器，仍仅访问既有127.0.0.1:5173。没有新启服务，没有接口拦截或修改源文件模拟异常。测试标签保持后台，视口最终恢复。
++
++| 页面/操作 | 实际观察 |
++| --- | --- |
++| `/factors`，1440×900 | 实际快照日期2026/09/23 15:07、49/51/2可见。两条原结论、各自产品/日期/第一条限制可见；页面横向溢出0。 |
++| 策略研究键盘 | Enter展开；Escape收起，焦点回到策略研究summary；实际焦点样式为2px操作蓝实线。 |
++| 概览→相对强弱→普通动量 | 分类URL保留category=相对强弱；目录2对象；普通动量是“查看证据”，完整排名是“查看定义”及“只验证了计算，效果未知”。 |
++| 详情→刷新→后退 | 精确链接mixed.momentum.raw@1.0.0刷新后仍是原对象；六只产品、2022-01-01至2026-06-30、原限定结论未串别的版本。后退回原分类目录URL。 |
++| 搜索无匹配→清除 | 输入zz-no-match-20260930出现具体空结果和清除按钮；清除后URL回`?tab=catalog`，目录恢复。 |
++| 不存在精确版本，390×844 | `/factors?factor=unknown%4099.0.0`显示没有找到这个精确版本、不自动改选其他版本；截图和DOM横向溢出0。 |
++| `/sentiment`，390×844及1024×768 | 实际数据加载过程与旧读数区可读取，页面横向溢出0；正常资料仍显示原1票热/2票冷。本机当前页面已有其他任务的观察卡及旧资料折叠结构，并不是原实施记录里独立五锚点结构，因此没有把旧验收全表照搬。 |
++
++## 尚未验证与保留问题
++
++- 真实200%浏览器缩放没有通过：内置浏览器快捷键尝试后CSS宽度和devicePixelRatio未变，不能确认发生缩放；最后恢复快捷键与视口。390px或195px视口不能冒充200%缩放。
++- 源缺失/变化和事件存在已经补足组件渲染夹具，但未获得可安全使用的浏览器响应拦截能力，未把它们标成完整浏览器实测。没有移动、更改或清除桌面权威源。
++- 因子快照HTTP失败、异步重试恢复、所有基本面分区图表缩放、减少动态效果设置及看盘/持仓/监督待办/工作台全面回归，本次未逐项补完。保留原验收的真实覆盖，不把构建通过代替交互通过。
++- 当前快照仍截至9月23日，后续研究接入缺口不在本轮范围。原情绪与今日操作交易意味文字和历史收益提示仍须单独核对研究证据；本次不改变它们的策略含义。
++- 原计划完整交互验收表与提交项保持未勾选。本合同明确禁止提交，因此不执行原Task6中的提交动作。
++
++## 并发差异与交付
++
++接手基线后发现其他作者在FundamentalsPage和SentimentPage修改AAII/NAAIM调查名称、历史读数文案。这些是主负责人正在处理的独立差异，本执行者未写、未撤回、未归为本次成果。已通知主负责人避免两文件同时写入；目前与本次CnMoodCard修正没有重叠，未发生整文件覆盖。
++
++`sol61-increment.patch` 只包含相对接手基线的本执行者CnMoodCard小块与本报告，故有意不打包上述其他作者的差异，也不递归包含补丁自身。原计划、原验收记录、implementation.patch均保持原样。

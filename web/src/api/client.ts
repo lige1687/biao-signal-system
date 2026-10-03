@@ -81,6 +81,8 @@ import type { BoardProfile, BoardChartSeries, SentimentDashboard, SentimentLight
   ExperimentsResponse,
   ExperimentReportDetail,
   LearningResponse,
+  StrategyDocumentsResponse,
+  StrategyDocumentDetail,
 } from "../types";
 
 const BASE = "/api";
@@ -799,4 +801,11 @@ export const mindsetApi = {
     }),
   remove: (id: string) => request<void>(`/mindset/items/${id}`, { method: "DELETE" }),
   reviewNext: () => request<MindsetItem | null>("/mindset/review/next"),
+};
+
+export const strategyDocumentsApi = {
+  list: (guide = false) => request<StrategyDocumentsResponse>(
+    guide ? "/strategy-documents/factor-guide" : "/strategy-documents"),
+  detail: (documentId: string, guide = false) =>
+    request<StrategyDocumentDetail>(`/strategy-documents/${guide ? "factor-guide/" : ""}${encodeURIComponent(documentId)}`),
 };

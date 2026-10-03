@@ -1,0 +1,2235 @@
+--- a/web/scripts/build_factor_research.py
++++ b/web/scripts/build_factor_research.py
+@@ -108,12 +108,14 @@
+         return "回调位置"
+     if "volume" in id_:
+         return "量能"
+-    if id_.startswith(("trend.", "etf.trend.")):
++    if id_.startswith(("trend.", "etf.trend.", "research.trend.")):
+         return "趋势"
+     return "其他研究读数"
+ 
+ 
+ def asset_classes(card: dict) -> list[str]:
++    if card["id"] == "research.trend.ma_cluster_width":
++        return ["指数"]
+     words = " ".join(
+         (text_part(card.get("scope")), text_part(card.get("universe", {}).get("version")))
+     )
+@@ -128,6 +130,8 @@
+ def purpose_for(card: dict) -> str:
+     """Explain the registered formula in plain Chinese; never assess effectiveness."""
+     name = card["id"]
++    if name == "research.trend.ma_cluster_width":
++        return "量出20、60、120日的六条均线彼此靠近或分开的程度，检查它在已有趋势信息之外能否帮助判断后续涨跌和下行风险。"
+     if name == "mixed.momentum.raw":
+         return "比较过去约一年、扣除最近一个月的涨幅，观察强弱是否延续。"
+     if name == "mixed.momentum.rank":
+@@ -313,6 +317,7 @@
+         "products": [{"code": code, "name": code} for code in protocol["symbols"]],
+         "period": {"start": protocol["window"][0], "end": protocol["window"][1]},
+         "data_cutoff": protocol["window"][1],
++        "target_horizon": "21个共同交易日；当期收盘至第21个共同交易日收盘" if protocol.get("target", {}).get("id") == "economic_index_return_plus_21_common_trading_days" else None,
+         "run_at": run["completed_at"],
+         "reviewed_at": binding["reviewed_at"],
+         "sample": [
+@@ -409,6 +414,7 @@
+             "end": protocol["evaluation_window"]["end"],
+         },
+         "data_cutoff": None,
++        "target_horizon": "21个价格变化区间；下一报价收盘至第22个报价收盘" if protocol.get("target_main") == "P_vendor(t+22)/P_vendor(t+1) - 1" else None,
+         "run_at": None,
+         "reviewed_at": binding["reviewed_at"],
+         "sample": [
+@@ -455,6 +461,95 @@
+     }
+ 
+ 
++def make_workflow_prediction(root: Path, binding: dict) -> dict:
++    """Read this frozen six-line family, never run research or infer trading validity."""
++    specs = binding["sources"]
++    verified = [pinned(root, spec, role) for role, spec in specs.items()]
++    contract, run_contract, receipt, stats, block60 = (
++        read_json(root, specs[key]) for key in ("contract", "run_contract", "receipt", "summary", "block60")
++    )
++    question = contract["question"]
++    ref = binding["reference"]
++    if (ref != "research.trend.ma_cluster_width@1.0.0"
++            or question["question_id"] != binding["id"] or question["factor_refs"] != [ref]
++            or contract["feature"]["definition_ref"] != ref):
++        raise ValueError("workflow question or exact definition identity mismatch")
++    if (contract != run_contract or receipt["run_id"] != binding["run_id"]
++            or receipt["callback_executed"] is not True
++            or receipt["contract_sha256"] != specs["contract"]["sha256"]
++            or receipt["outputs"]["result.json"] != specs["summary"]["sha256"]):
++        raise ValueError("workflow receipt does not bind this contract and result")
++    target = question["target"]
++    if (target["kind"] != binding["target_kind"] or contract["target"]["kind"] != target["kind"]
++            or target["kind"] not in {"mae", "forward_return"}
++            or target["horizon"] != 20 or target["start_offset"] != 1 or target["end_offset"] != 21):
++        raise ValueError("unsupported or inconsistent workflow target")
++    if any(contract["target"][key] != target[key] for key in ("start_offset", "end_offset")):
++        raise ValueError("workflow target offsets disagree")
++    report_path = specs["report"]["path"]
++    registration = json.loads((root / "docs/experiments/registry.json").read_text()).get("entries", {}).get(report_path)
++    if (contract["publication"]["report_path"] != report_path
++            or contract["publication"]["conclusion"] != "insufficient"
++            or binding["result"] != "insufficient"
++            or not isinstance(registration, dict) or registration.get("verdict") != "mixed"):
++        raise ValueError("workflow report identity or registered conclusion mismatch")
++    names = {"B0": "简单历史均值", "B1": "已有趋势、位置、涨幅和波动", "B2": "已有信息加六线间距"}
++    performance = stats["performance"]
++    if any(block60.get(key) != stats.get(key) for key in ("performance", "predictions", "period_comparisons")):
++        raise ValueError("60-day uncertainty source does not reuse the same predictions")
++    if {(row["model"], row["metric"]) for row in performance} != {(m, k) for m in names for k in ("MSE", "RMSE")} or len(performance) != 6:
++        raise ValueError("workflow performance must retain all three baselines")
++    sample = performance[0]
++    for row in performance:
++        unit = "percentage_point_squared" if row["metric"] == "MSE" else "percentage_point"
++        if row["unit"] != unit or any(row[key] != sample[key] for key in ("rows", "dates", "assets")):
++            raise ValueError("workflow units or comparison samples disagree")
++        finite(row["value"], "prediction error")
++    increments = stats["increments"]
++    if len(increments) != 2 or {row["old_model"] for row in increments} != {"B0", "B1"}:
++        raise ValueError("workflow increments must retain both fixed comparisons")
++    for row in [*increments, *block60["increments"]]:
++        if row["new_model"] != "B2" or row["metric"] != "MSE" or row["unit"] != "percentage_point_squared":
++            raise ValueError("workflow increment units or model mismatch")
++    primary = next(row for row in increments if row["old_model"] == "B1")
++    columns = lambda fields: [{"key": key, "label": label, "unit": unit} for key, label, unit in fields]
++    return {
++        "id": question["question_id"], "title": binding["title"], "kind": binding["kind"], "measure": "prediction_error",
++        "run_status": "completed", "review_status": binding["review_status"],
++        "review_summary": binding["review_summary"], "conclusion": binding["summary"],
++        "result": binding["result"], "references": [ref], "run_id": receipt["run_id"],
++        "baseline": "简单历史均值（B0）、已有趋势/三组均线位置/近期涨幅和波动（B1）、再加入六线间距（B2），三者用同一批后期观察比较。",
++        "costs": "没有账户交易；未计算费用、成交、持仓或投资收益。",
++        "products": [{"code": code, "name": {"sh000300": "沪深300", "sz399006": "创业板指"}.get(code, code)} for code in contract["universe"]["assets"]],
++        "period": {"start": question["period"][0], "end": question["period"][1]},
++        "data_cutoff": question["period"][1], "run_at": None, "reviewed_at": binding["reviewed_at"],
++        "target_horizon": "20个交易日；下一交易日收盘起，至第21个交易日收盘",
++        "evaluation_period": "；".join(f"{fold['eval_start']} 至 {fold['eval_end']}" for fold in contract["split"]["folds"]) + "；全部历史资料此前已见",
++        "sample": [metric(label, sample[key], unit, meaning) for key, label, unit, meaning in [
++            ("rows", "后期共同评价观察", "次", "2025和2026年上半年共同成熟观察；不是独立交易"),
++            ("dates", "后期共同评价日期", "日", "同日两指数相关且周观察重叠"),
++            ("assets", "研究指数", "个", "历史指数点位，不是ETF账户")]],
++        "metrics": [metric("加入六线后预测误差减少比例", primary["relative_percent"], "percent", "正值表示误差减少，负值表示误差增加；不是投资收益")],
++        "result_tables": [
++            {"title": "三种固定方法的预测误差", "columns": columns([("model", "方法", ""), ("mse", "平均平方误差（越小越好）", "百分点²"), ("rmse", "预测误差规模（越小越好）", "百分点")]),
++             "rows": [{"model": names[m], "mse": next(row["value"] for row in performance if row["model"] == m and row["metric"] == "MSE"), "rmse": next(row["value"] for row in performance if row["model"] == m and row["metric"] == "RMSE")} for m in names],
++             "note": "原结果表；误差反映预测偏离实际的程度，不是账户收益或风险金额。"},
++            {"title": "加入六线间距后，比各固定对照改善多少", "columns": columns([("baseline", "对照", ""), ("relative", "平方误差减少比例", "percent"), ("absolute", "平方误差减少量", "百分点²")]),
++             "rows": [{"baseline": names[row["old_model"]], "relative": finite(row["relative_percent"], "relative error"), "absolute": finite(row["absolute_error_improvement"], "absolute error")} for row in increments],
++             "note": "正值改善，负值恶化；不是投资收益增量。不能只选较弱的背景方法作对照。"},
++            {"title": "按评价时期比较已有信息与加入六线", "columns": columns([("period", "评价时期", ""), ("before", "加入前误差", "百分点²"), ("after", "加入后误差", "百分点²"), ("improvement", "误差减少量", "百分点²"), ("rows", "观察", "次")]),
++             "rows": [{"period": row["year"], "before": finite(row["old_value"], "period before"), "after": finite(row["new_value"], "period after"), "improvement": finite(row["absolute_error_improvement"], "period improvement"), "rows": finite(row["rows"], "period rows")} for row in stats["period_comparisons"]],
++             "note": "原逐期结果；2026仅截至6月30日。正值表示误差减少，不能把一段时期的改善外推为稳定可交易。"},
++            {"title": "考虑相邻日期相关后的误差改善范围", "columns": columns([("range", "一起考虑的日期长度", ""), ("baseline", "对照", ""), ("low", "改善范围下限", "百分点²"), ("high", "改善范围上限", "百分点²")]),
++             "rows": [{"range": f"{days}日", "baseline": names[row["old_model"]], "low": finite(row["lo"], "uncertainty low"), "high": finite(row["hi"], "uncertainty high")} for days, result in [(20, stats), (60, block60)] for row in result["increments"]],
++             "note": "原研究的成段估计：相邻观察一起处理。范围含负值与正值表示恶化和改善都可能；不是确定收益区间。"},
++        ],
++        "limitations": binding["limitations"], "source_note": binding.get("source_note"),
++        "next_steps": binding["next_steps"], "sources": verified,
++        "report_registration": registration,
++    }
++
++
+ def make_project(root: Path, binding: dict) -> dict:
+     return {
+         "id": binding["id"],
+@@ -518,16 +613,16 @@
+     """Derive scoped research text only from successfully verified records."""
+     by_reference: dict[str, list[dict]] = {}
+     for exp in experiments:
+-        if exp["run_status"] == "completed" and exp["sources"]:
+-            for ref in exp["references"]:
+-                by_reference.setdefault(ref, []).append(exp)
++        for ref in exp["references"]:
++            by_reference.setdefault(ref, []).append(exp)
+     for item in items:
++        matches = by_reference.get(item["reference"], [])
++        item["experiment_ids"] = [exp["id"] for exp in matches]
+         if item["research"]["stage"] == "insufficient":
+             continue
+-        matches = by_reference.get(item["reference"], [])
++        matches = [exp for exp in matches if exp["run_status"] == "completed" and exp["sources"]]
+         if not matches:
+             continue
+-        item["experiment_ids"] = [exp["id"] for exp in matches]
+         descriptions = []
+         for exp in matches:
+             period = exp["period"]
+@@ -536,7 +631,7 @@
+             descriptions.append(description + " " + exp["review_summary"])
+         item["research"] = {
+             "stage": "historical",
+-            "result": matches[0]["result"] if len(matches) == 1 else "unknown",
++            "result": matches[0]["result"] if len({exp["result"] for exp in matches}) == 1 else "unknown",
+             "summary": "；".join(descriptions),
+             "evidence_date": max(
+                 (exp["reviewed_at"] for exp in matches if exp["reviewed_at"]), default=None
+@@ -548,7 +643,8 @@
+     experiments: list[dict] = []
+     errors: list[str] = []
+     seen_ids: set[str] = set()
+-    adapters = {"rank_summary_v1": make_momentum, "dual_ma_description_v1": make_dual_ma}
++    adapters = {"rank_summary_v1": make_momentum, "dual_ma_description_v1": make_dual_ma,
++                "ma_cluster_prediction_v1": make_workflow_prediction}
+     for binding in bindings:
+         if binding["id"] in seen_ids:
+             raise ValueError(f"duplicate experiment id: {binding['id']}")
+@@ -566,7 +662,15 @@
+     return experiments, errors
+ 
+ 
+-def build(root: Path, bindings_path: Path = BINDINGS) -> dict:
++def select_references(cards: dict, bindings: dict, *, unrestricted: bool = False) -> list[str]:
++    eligible = [ref for ref, card in cards.items() if card["type"] in INCLUDED_TYPES and ref not in bindings["excluded_references"]]
++    selected = bindings.get("included_references", eligible)
++    if not isinstance(selected, list) or len(selected) != len(set(selected)) or any(ref not in eligible for ref in selected):
++        raise ValueError("display scope has duplicate, unknown or excluded references")
++    return eligible if unrestricted else selected
++
++
++def build(root: Path, bindings_path: Path = BINDINGS, *, unrestricted: bool = False) -> dict:
+     root = root.resolve()
+     bindings = json.loads((root / bindings_path).read_text())
+     if bindings.get("schema_version") != "factor-display-bindings/1":
+@@ -574,12 +678,13 @@
+     access = factor_access.load_access_catalog(root=root)
+     registry = access["registry"]
+     all_cards = definitions.validate_registry(registry)
+-    excluded = set(bindings["excluded_references"])
++    selected = select_references(all_cards, bindings, unrestricted=unrestricted)
++    unintegrated = sorted(set(select_references(all_cards, bindings, unrestricted=True)) - set(selected))
+     registry_src = source(root, "docs/research/definitions.v1.json")
+     items = [
+         item_from_card(root, ref, card, access, registry_src)
+-        for ref, card in all_cards.items()
+-        if card["type"] in INCLUDED_TYPES and ref not in excluded
++        for ref in selected
++        for card in [all_cards[ref]]
+     ]
+     experiments, source_errors = load_experiments(root, bindings["experiments"])
+     projects = []
+@@ -626,8 +731,9 @@
+         "limitations": [
+             "目录只统计展示范围内的正式研究读数与状态；基础价格、选择动作、基准和策略另有身份，不计作因子。",
+             "未绑定展示证据不等于全仓未研究；计算核验不等于真实市场有效。",
+-            "量能方向目前没有本展示目录中可直接确认的正式对象，保留为空缺。",
++            f"本批只接入已核定的展示范围；另有{len(unintegrated)}个已登记版本尚未接入本页，不表示它们尚未研究。",
+         ],
++        "unintegrated_references": unintegrated,
+         "source_errors": source_errors,
+         "items": items,
+         "experiments": experiments,
+@@ -641,10 +747,23 @@
+         "--check", action="store_true", help="check pinned sources and generated contents"
+     )
+     parser.add_argument("--root", type=Path, default=ROOT, help=argparse.SUPPRESS)
++    parser.add_argument("--preview", action="store_true", help="show unrestricted and scoped changes without writing the snapshot")
+     args = parser.parse_args()
+     root = args.root.resolve()
+     generated = build(root)
+     out = root / OUTPUT
++    if args.preview:
++        old = json.loads(out.read_text())
++        full = build(root, unrestricted=True)
++        previous = {item["reference"]: item for item in old["items"]}
++        selected = {item["reference"]: item for item in generated["items"]}
++        print(json.dumps({"old_counts": old["counts"], "unrestricted_counts": full["counts"],
++            "scoped_counts": generated["counts"], "added": sorted(selected.keys() - previous.keys()),
++            "removed": sorted(previous.keys() - selected.keys()),
++            "changed_existing": {ref: [key for key in previous[ref] if previous[ref][key] != selected[ref].get(key)] for ref in previous.keys() & selected.keys() if previous[ref] != selected[ref]},
++            "added_experiments": [e["id"] for e in generated["experiments"] if e["id"] not in {e["id"] for e in old["experiments"]}],
++            "unintegrated_references": generated["unintegrated_references"], "source_errors": generated["source_errors"]}, ensure_ascii=False, indent=2))
++        return
+     if args.check:
+         if generated["source_errors"]:
+             raise SystemExit("source verification failed: " + "; ".join(generated["source_errors"]))
+--- a/web/scripts/test_factor_research_catalog.py
++++ b/web/scripts/test_factor_research_catalog.py
+@@ -197,6 +197,101 @@
+         self.assertEqual(item["calculation"]["status"], "verified")
+         self.assertIn("source drift", item["limitations"])
+ 
++    def _workflow_binding(self, id_="question-a"):
++        reference = "research.trend.ma_cluster_width@1.0.0"
++        prefix = f"docs/experiments/raw/{id_}"
++        report_path = f"docs/experiments/{id_}.md"
++        contract = {"question": {"question_id": id_, "factor_refs": [reference],
++            "period": ["2023-01-01", "2026-06-30"],
++            "target": {"kind": "mae", "horizon": 20, "start_offset": 1, "end_offset": 21}},
++            "feature": {"definition_ref": reference}, "target": {"kind": "mae", "start_offset": 1, "end_offset": 21},
++            "split": {"folds": [{"eval_start": "2025-01-01", "eval_end": "2025-12-31"}, {"eval_start": "2026-01-01", "eval_end": "2026-06-30"}]},
++            "universe": {"assets": ["sh000300", "sz399006"]},
++            "publication": {"report_path": report_path, "conclusion": "insufficient"}}
++        performance = [{"model": m, "metric": metric, "value": value,
++            "unit": "percentage_point_squared" if metric == "MSE" else "percentage_point",
++            "rows": 81, "dates": 43, "assets": 2}
++            for m in ["B0", "B1", "B2"] for metric, value in [("MSE", 9), ("RMSE", 3)]]
++        increments = [{"new_model": "B2", "old_model": m, "relative_percent": -3.77,
++            "absolute_error_improvement": -0.3, "lo": -0.8, "hi": 0.1,
++            "metric": "MSE", "unit": "percentage_point_squared"} for m in ["B1", "B0"]]
++        result = {"performance": performance, "increments": increments,
++            "period_comparisons": [{"fold": "0", "old_model": "B1", "new_model": "B2",
++                "year": "2025", "old_value": 8, "new_value": 9,
++                "absolute_error_improvement": -1, "rows": 47, "dates": 24,
++                "unit": "percentage_point_squared"}]}
++        sources = {"contract": self._write(f"{prefix}/contract.json", contract),
++            "run_contract": self._write(f"{prefix}/run-contract.json", contract),
++            "summary": self._write(f"{prefix}/result.json", result),
++            "block60": self._write(f"{prefix}/block60.json", result)}
++        sources["receipt"] = self._write(f"{prefix}/receipt.json", {
++            "run_id": "run-a", "callback_executed": True,
++            "contract_sha256": sources["contract"]["sha256"],
++            "outputs": {"result.json": sources["summary"]["sha256"]}})
++        for role in ["report", "family_report", "controller", "numeric_check", "protocol", "feature_audit"]:
++            sources[role] = self._write(report_path if role == "report" else f"{prefix}/{role}.json", {"fixture": role})
++        self._write("docs/experiments/registry.json", {"entries": {report_path: {"verdict": "mixed"}}})
++        return {"id": id_, "adapter": "ma_cluster_prediction_v1", "reference": reference,
++            "run_id": "run-a", "target_kind": "mae", "title": "风险信息", "kind": "predictive_study",
++            "summary": "证据不足", "result": "insufficient", "review_status": "reviewed",
++            "review_summary": "有限复核", "reviewed_at": "2026-09-30", "sources": sources,
++            "limitations": ["不是ETF账户结果"], "next_steps": [], "source_note": "审计更正保留"}
++
++    def test_workflow_reads_exact_question_and_error_units_without_account_claim(self):
++        experiment = builder.make_workflow_prediction(self.root, self._workflow_binding())
++        self.assertEqual(experiment["id"], "question-a")
++        self.assertEqual(experiment["references"], ["research.trend.ma_cluster_width@1.0.0"])
++        self.assertEqual(experiment["target_horizon"], "20个交易日；下一交易日收盘起，至第21个交易日收盘")
++        self.assertEqual(experiment["run_at"], None)
++        self.assertEqual(experiment["result"], "insufficient")
++        self.assertEqual(experiment["metrics"][0]["unit"], "percent")
++        self.assertIn("不是投资收益", experiment["metrics"][0]["meaning"])
++        self.assertEqual(experiment["source_note"], "审计更正保留")
++
++    def test_workflow_rejects_wrong_question_old_version_and_receipt_relationship(self):
++        for field, value in [("id", "wrong"), ("reference", "trend.ma_cluster_width@1.0.0"), ("run_id", "other-run")]:
++            with self.subTest(field=field):
++                binding = self._workflow_binding()
++                binding[field] = value
++                with self.assertRaises(ValueError):
++                    builder.make_workflow_prediction(self.root, binding)
++        binding = self._workflow_binding()
++        receipt = json.loads((self.root / binding["sources"]["receipt"]["path"]).read_text())
++        receipt["outputs"]["result.json"] = "0" * 64
++        binding["sources"]["receipt"] = self._write(binding["sources"]["receipt"]["path"], receipt)
++        with self.assertRaisesRegex(ValueError, "receipt"):
++            builder.make_workflow_prediction(self.root, binding)
++
++    def test_blocked_workflow_stays_attached_without_borrowing_completed_claim(self):
++        bad = self._workflow_binding()
++        bad["sources"]["controller"]["sha256"] = "0" * 64
++        experiments, errors = builder.load_experiments(self.root, [bad, self._binding("other", "other@1.0.0")])
++        self.assertEqual(len(errors), 1)
++        item = {"reference": bad["reference"], "experiment_ids": [], "research": {"stage": "unbound", "result": "unknown"}}
++        builder.attach_experiments([item], experiments)
++        self.assertEqual(item["experiment_ids"], [bad["id"]])
++        self.assertEqual(item["research"]["stage"], "unbound")
++        self.assertEqual(experiments[1]["run_status"], "completed")
++
++    def test_scope_rejects_unknown_duplicate_and_excluded_references(self):
++        cards = {"a@1.0.0": {"type": "feature"}, "b@1.0.0": {"type": "baseline"}}
++        for references in [["missing@1.0.0"], ["a@1.0.0", "a@1.0.0"], ["b@1.0.0"]]:
++            with self.subTest(references=references), self.assertRaises(ValueError):
++                builder.select_references(cards, {"excluded_references": [], "included_references": references})
++
++    def test_workflow_duplicate_ids_are_rejected(self):
++        binding = self._workflow_binding()
++        with self.assertRaisesRegex(ValueError, "duplicate experiment id"):
++            builder.load_experiments(self.root, [binding, binding])
++
++    def test_workflow_cannot_replace_uncertainty_with_other_predictions(self):
++        binding = self._workflow_binding()
++        changed = json.loads((self.root / binding["sources"]["block60"]["path"]).read_text())
++        changed["performance"][0]["value"] = 1
++        binding["sources"]["block60"] = self._write(binding["sources"]["block60"]["path"], changed)
++        with self.assertRaisesRegex(ValueError, "same predictions"):
++            builder.make_workflow_prediction(self.root, binding)
++
+ 
+ if __name__ == "__main__":
+     unittest.main()
+--- a/web/src/pages/ReportReader.tsx
++++ b/web/src/pages/ReportReader.tsx
+@@ -0,0 +1,16 @@
++import type { ReactNode } from "react";
++import type { ExperimentReportDetail } from "../types";
++
++export default function ReportReader({ selected, report, loading, error, children, onBack }: {
++  selected: string | null; report?: ExperimentReportDetail; loading: boolean; error: unknown;
++  children?: ReactNode; onBack: () => void;
++}) {
++  if (!selected) return <div className="lib-empty">← 点左侧任意报告阅读全文。</div>;
++  return <section aria-label="所选报告正文">
++    <button type="button" className="lib-reader-back" onClick={onBack}>← 返回报告列表</button>
++    {loading ? <p role="status">正在加载所选报告正文…</p>
++      : error ? <p role="alert" className="fund-errors">报告正文加载失败：{error instanceof Error ? error.message : String(error)}。可返回列表重新选择。</p>
++      : report?.name === selected ? children
++      : <p role="alert">所选报告尚未返回对应正文，请返回列表核对报告身份。</p>}
++  </section>;
++}
+--- a/web/src/pages/ReportsLibraryPage.tsx
++++ b/web/src/pages/ReportsLibraryPage.tsx
+@@ -1,10 +1,12 @@
+-import { useMemo, useState } from "react";
++import { useEffect, useMemo, useRef, useState } from "react";
+ import { useQuery } from "@tanstack/react-query";
+ import { marked } from "marked";
+ import { useSearchParams } from "react-router-dom";
+ import { experimentsApi } from "../api/client";
+ import type { ExperimentReportItem, ExperimentVerdict } from "../types";
+ import "./page-reading.css";
++import ReportReader from "./ReportReader";
++import "./reports-library.css";
+ 
+ /**
+  * 实验报告库：历史上所有实验/调研文档的统一浏览入口。
+@@ -67,6 +69,8 @@
+   const [searchParams, setSearchParams] = useSearchParams();
+   const selected = searchParams.get("report");
+   const setSelected = (name: string) => setSearchParams({ report: name }, { replace: true });
++  const returnToList = () => { const next = new URLSearchParams(searchParams); next.delete("report"); setSearchParams(next, { replace: true }); };
++  const readerRef = useRef<HTMLDivElement>(null);
+ 
+   const { data, error } = useQuery({
+     queryKey: ["experiments"],
+@@ -80,6 +84,10 @@
+     enabled: selected != null,
+     staleTime: 5 * 60_000,
+   });
++
++  useEffect(() => {
++    if (selected && detail.data?.name === selected) readerRef.current?.scrollIntoView({ block: "start", behavior: "auto" });
++  }, [selected, detail.data]);
+ 
+   const items = useMemo(() => {
+     let list = data?.items ?? [];
+@@ -119,7 +127,7 @@
+   const html = detail.data ? (marked.parse(detail.data.markdown, { async: false }) as string) : "";
+ 
+   return (
+-    <div className="page lib-page">
++    <div className={`page lib-page${selected ? " lib-page--reading" : ""}`}>
+       <div className="pg-head">
+         <div className="pg-head-title">
+           <h1>实验报告库</h1>
+@@ -187,8 +195,9 @@
+           ))}
+           {items.length === 0 && <div className="lib-empty">没有匹配的报告。</div>}
+         </div>
+-        <div className="lib-reader">
+-          {detail.data ? (
++        <div className="lib-reader" ref={readerRef}>
++          <ReportReader selected={selected} report={detail.data} loading={detail.isPending} error={detail.error} onBack={returnToList}>
++          {detail.data && (
+             <>
+               <div className="lib-reader-bar">
+                 <span className={`lib-cat${detail.data.category === "待分类" ? " pending" : ""}`}>
+@@ -202,9 +211,8 @@
+               )}
+               <div className="lib-markdown" dangerouslySetInnerHTML={{ __html: html }} />
+             </>
+-          ) : (
+-            <div className="lib-empty">← 点左侧任意报告阅读全文。</div>
+           )}
++          </ReportReader>
+         </div>
+       </div>
+     </div>
+--- a/web/src/pages/factor-research/FactorResearchOverview.tsx
++++ b/web/src/pages/factor-research/FactorResearchOverview.tsx
+@@ -1,5 +1,6 @@
+ import type { Snapshot } from "./model";
+-import { catalogCounts, categoryObjectCounts, kindLabels, reviewLabels, runLabels } from "./model";
++import { catalogCounts, categoryObjectCounts } from "./model";
++import StudyConclusion from "./StudyConclusion";
+ import "./factor-overview.css";
+ 
+ const questions: Record<string, string> = {
+@@ -19,12 +20,8 @@
+     <p className="fr-overview-lead">因子，就是把一个观察写成可计算的指标。本页先帮助你看清已接入资料回答了什么、在哪些产品和日期检查，以及还有什么缺口。</p>
+     <p className="fr-overview-counts">已接入 {counts.factor_objects} 个研究对象、{counts.definition_versions} 个定义版本、{counts.executed_experiments} 项已运行实验。候选登记与正式对象分开统计。</p>
+     <section aria-labelledby="fr-overview-evidence"><h2 id="fr-overview-evidence">已接入实验怎么说</h2>
+-      {snapshot.experiments.length ? snapshot.experiments.map(experiment => <article className="fr-overview-study" key={experiment.id}>
+-        <div className="fr-overview-study-head"><h3>{experiment.title}</h3><button type="button" onClick={() => onExperiment(experiment.id)}>查看实验详情</button></div>
+-        <p>{experiment.conclusion || "这项实验尚未记录结论。"}</p>
+-        <p className="fr-overview-study-meta">{kindLabels[experiment.kind] ?? experiment.kind} · {experiment.products.length ? experiment.products.map(product => product.name || product.code).join("、") : "产品未记录"} · 观察期 {experiment.period.start?.slice(0, 10) ?? "未记录"} 至 {experiment.period.end?.slice(0, 10) ?? "未记录"} · {runLabels[experiment.run_status] ?? experiment.run_status} · {reviewLabels[experiment.review_status] ?? experiment.review_status}</p>
+-        <p className="fr-overview-study-limit"><strong>主要限制：</strong>{experiment.limitations[0] ?? "未记录，请查看实验详情核对适用范围。"}</p>
+-      </article>) : <p>当前快照没有已接入实验；这里不展示演示结论。</p>}
++      {snapshot.experiments.length ? snapshot.experiments.map(experiment => <StudyConclusion key={experiment.id} experiment={experiment} onOpen={() => onExperiment(experiment.id)} />) : <p>当前快照没有已接入实验；这里不展示演示结论。</p>}
++      {Boolean(snapshot.unintegrated_references?.length) && <details className="fr-study-more"><summary>还有 {snapshot.unintegrated_references!.length} 个已登记版本尚未接入本页</summary><p>本次只接入来源已核定的最小一批。这里未展示不表示全仓尚未研究，也不代表这些版本可以直接交易。</p><ul>{snapshot.unintegrated_references!.map(reference => <li key={reference}><code>{reference}</code></li>)}</ul></details>}
+     </section>
+     <section aria-labelledby="fr-overview-questions"><h2 id="fr-overview-questions">按问题找因子</h2><div className="fr-overview-categories">{Object.entries(categories).map(([category, count]) => <button type="button" key={category} onClick={() => onCategory(category)}><strong>{category}</strong><span>{questions[category] ?? "查看定义范围"}</span><small>{count} 个对象</small></button>)}</div><button type="button" className="fr-overview-all" onClick={onCatalog}>查看完整因子目录</button></section>
+     <section aria-labelledby="fr-overview-materials"><h2 id="fr-overview-materials">继续查原始资料</h2><div className="fr-overview-links"><a href="/strategy?collection=factor-guide&doc=research-guide">研究指南</a><a href="/strategy?collection=factor-guide&doc=candidate-registry">候选注册表</a><a href="/library">全部实验报告</a></div><p>候选登记不等于正式定义，定义与实验也不等于获准交易。</p></section>
+--- a/web/src/pages/factor-research/FactorResearchPage.tsx
++++ b/web/src/pages/factor-research/FactorResearchPage.tsx
+@@ -6,6 +6,7 @@
+ import metricsGuidance from "./metrics-guidance.json";
+ import assessmentFramework from "./assessment-framework.json";
+ import FactorResearchOverview from "./FactorResearchOverview";
++import StudyConclusion from "./StudyConclusion";
+ import { catalogAction, factorView } from "./overviewModel";
+ import "./factor-research.css";
+ 
+@@ -19,7 +20,7 @@
+ const metricGuide = metricsGuidance as MetricsGuidance;
+ const assessment = assessmentFramework as AssessmentFramework;
+ const observationPeriod = (experiment: Experiment) => `${date(experiment.period.start)} 至 ${date(experiment.period.end)}`;
+-const priceStudyCaution = (experiment: Experiment) => experiment.kind === "predictive_study" ? "排名关系不是胜率；后续价格差不是账户收益。" : experiment.kind === "price_description" ? "后续价格均值不是完整账户收益。" : null;
++const priceStudyCaution = (experiment: Experiment) => experiment.measure === "prediction_error" ? "预测误差减少表示预测更接近实际；负值表示误差增加。这些比例不是胜率或投资收益。" : experiment.kind === "predictive_study" ? "排名关系不是胜率；后续价格差不是账户收益。" : experiment.kind === "price_description" ? "后续价格均值不是完整账户收益。" : null;
+ 
+ function StatusBadge({ children, tone }: { children: ReactNode; tone: DisplayTone }) {
+   return <span className="fr-status-badge" data-tone={tone}><span aria-hidden="true" className="fr-badge-mark" />{children}</span>;
+@@ -81,10 +82,7 @@
+ 
+ function ExperimentDetail({ experiment }: { experiment: Experiment }) {
+   return <article className="fr-detail" aria-label="实验详情">
+-    <div className="fr-meta-line"><span>{kindLabels[experiment.kind] ?? experiment.kind}</span><span>{runLabels[experiment.run_status] ?? experiment.run_status}</span><StatusBadge tone={reviewTone(experiment.review_status)}>{reviewLabels[experiment.review_status] ?? experiment.review_status}</StatusBadge>{experiment.result && <StatusBadge tone={resultTone(experiment.result)}>{resultLabels[experiment.result as keyof typeof resultLabels] ?? experiment.result}</StatusBadge>}</div>
+-    <h2>{experiment.title}</h2>
+-    <p className="fr-lead">{display(experiment.conclusion)}</p>
+-    <p className="fr-experiment-scope">观察期 {observationPeriod(experiment)} · 产品 {experiment.products.length ? `${experiment.products.length} 项` : "未记录"}</p>
++    <StudyConclusion experiment={experiment} />
+     <section className="fr-section fr-experiment-key-results"><h3>本实验已报告的指标</h3>{experiment.metrics.length ? <div className="fr-metric-list">{experiment.metrics.map((m, i) => <div key={i}><span>{m.label}</span><strong>{formatValue(m.value, m.unit)}</strong>{m.meaning && <details className="fr-metric-meaning"><summary>口径</summary><small>{m.meaning}</small></details>}</div>)}</div> : <p className="fr-dim">本实验暂无已接入数值。</p>}</section>
+     {priceStudyCaution(experiment) && <p className="fr-price-caution">{priceStudyCaution(experiment)}</p>}
+     {experiment.result_tables.map((table, i) => <ResultTable table={table} key={i} />)}
+@@ -122,23 +120,21 @@
+   const originalLimits = linked.flatMap(experiment => experiment.limitations.map(text => ({ title: experiment.title, text })));
+   const leadMetrics = cardMetricEvidence(item, experiments);
+   const outcome = factorOutcome(item);
+-  const completedStudies = linked.filter(experiment => experiment.run_status === "completed");
+   const completedAccounts = accountExperiments.filter(experiment => experiment.run_status === "completed");
+   const hasAccountValue = completedAccounts.some(experiment => accountMetricRows(metricGuide.account_metrics, experiment, item.reference).some(row => row.status === "available"));
+   return <article className="fr-detail fr-factor-detail fr-dossier" aria-label="因子研究档案" data-category={categoryTone(item.category)}>
+     <div className="fr-dossier-heading"><h2>{displayFactorName(item, guides)}</h2><div className="fr-meta-line"><span className="fr-category-tag" data-category={categoryTone(item.category)}>{item.category}</span><span>{typeLabels[item.object_type] ?? item.object_type}</span><span>v{item.version}</span></div></div>
+     <p className="fr-detail-question"><strong>观察什么：</strong>{guide?.watch || purposeText(item.purpose)}</p>
+-    <p className="fr-detail-answer"><strong>当前结论：</strong>{outcome.headline}。{outcome.explanation}</p>
+-    <p className="fr-detail-range"><strong>本次检查范围：</strong>{completedStudies.length ? completedStudies.map(study => `${study.products.map(product => product.name || product.code).join("、") || "产品未记录"}，${observationPeriod(study)}`).join("；") : "本页未接入该版本实验"}</p>
+-    {(originalLimits[0] || item.limitations[0]) && <p className="fr-detail-limit"><strong>主要局限：</strong>{originalLimits[0]?.text ?? limitationText(item.limitations[0])}</p>}
++    <p className="fr-detail-answer"><strong>已接入资料：</strong>{linked.length ? `本精确版本有${linked.length}项实验。每项结论只适用于下列对应范围，不合并成一个买卖判断。` : `${outcome.headline}。${outcome.explanation}`}</p>
++    {linked.map(experiment => <StudyConclusion key={experiment.id} experiment={experiment} onOpen={() => onOpenExperiment(experiment.id)} />)}
++    {!linked.length && item.limitations[0] && <p className="fr-detail-limit"><strong>定义限制：</strong>{limitationText(item.limitations[0])}</p>}
+     {versions.length > 1 && <div className="fr-version-choice"><label htmlFor="fr-version">定义版本</label><select id="fr-version" value={item.reference} onChange={e => onVersionChange(e.target.value)}>{versions.map(version => <option key={version.reference} value={version.reference}>v{version.version}{version.reference === item.reference ? "（当前）" : ""}</option>)}</select><span>各版研究证据独立展示。</span></div>}
+     <nav className="fr-dossier-tabs" aria-label="档案内部页面">{dossierTabs.map(tab => <button key={tab.id} type="button" aria-current={section === tab.id ? "page" : undefined} className={section === tab.id ? "active" : ""} onClick={() => onSectionChange(tab.id)}>{tab.label}</button>)}</nav>
+     {section === "overview" && <div className="fr-dossier-panel" aria-label="总览">
+       <section className="fr-user-outcome" data-tone={outcome.tone}><span>有没有帮助</span><h3>{outcome.headline}</h3><p>{outcome.explanation}</p><details><summary>查看登记原结论与状态</summary><p>{display(item.research.summary)}</p><small>{stageLabels[item.research.stage] ?? "阶段未核明"} · {resultLabels[item.research.result] ?? "结论未核明"} · 证据日期 {date(item.research.evidence_date)}</small></details></section>
+-      <div className="fr-user-answers"><section><h3>在哪验证过？</h3>{completedStudies.length ? <><p>{completedStudies[0].products.length ? `${completedStudies[0].products.length} 个产品` : "产品未记录"} · {observationPeriod(completedStudies[0])}</p><small>{reviewLabels[completedStudies[0].review_status] ?? completedStudies[0].review_status}{completedStudies.length > 1 ? ` · 另 ${completedStudies.length - 1} 项研究见证据页` : ""}</small>{completedStudies[0].products.length > 0 && <details><summary>查看产品清单</summary><p>{completedStudies[0].products.map(product => product.name && product.name !== product.code ? `${product.name}（${product.code}）` : product.code).join("、")}</p></details>}</> : <p>尚无可展示的历史验证范围。</p>}</section><section><h3>策略能否增加收益？</h3><p>{hasAccountValue ? "已有完整账户指标；是否改善收益仍须看原实验固定对照。" : completedAccounts.length ? "已有完整回测记录，但本页未报告可核的账户指标，暂不能判断。" : "尚不能判断：暂无可展示的同版本扣费后账户结果。"}</p><small>短期价格变化与排名关系不是账户利润。</small></section></div>
++      <div className="fr-user-answers"><section><h3>策略能否增加收益？</h3><p>{hasAccountValue ? "已有完整账户指标；是否改善收益仍须看原实验固定对照。" : completedAccounts.length ? "已有完整回测记录，但本页未报告可核的账户指标，暂不能判断。" : "尚不能判断：暂无可展示的同版本扣费后账户结果。"}</p><small>短期价格变化、预测误差与排名关系不是账户利润。</small></section></div>
+       {leadMetrics.length > 0 && <details className="fr-user-numbers"><summary>查看本次研究的原数值与单位</summary><div>{leadMetrics.map(({ experiment, metric }, index) => <p key={`${experiment.id}-${index}`}><strong>{metric.label}：{formatValue(metric.value, metric.unit)}</strong><span> · {observationPeriod(experiment)} · {reviewLabels[experiment.review_status] ?? experiment.review_status}</span></p>)}</div></details>}
+       <div className="fr-overview-purpose"><strong>它关注什么</strong><span>{guide?.watch || purposeText(display(item.purpose))}</span>{guide && <details><summary>完整读法与误读</summary><div><p><strong>重点看：</strong>{guide.watch}</p><p><strong>怎么看：</strong>{guide.read}</p><p><strong>还需一起看：</strong>{guide.context.join("；")}</p><p><strong>容易误读：</strong>{guide.pitfall}</p><small>{guide.verification_scope}</small></div></details>}</div>
+-      {(originalLimits[0] || item.limitations[0]) && <p className="fr-leading-limit"><strong>已记录限制：</strong>{originalLimits[0]?.text ?? limitationText(item.limitations[0])}</p>}
+       <details className="fr-overview-limits"><summary>查看全部局限与下一步（{item.limitations.length + originalLimits.length} 项局限）</summary><div className="fr-dossier-limit-columns"><div><strong>本版本限制</strong>{item.limitations.length ? <ul>{item.limitations.map((text, index) => <li key={index}>{limitationText(text)}</li>)}</ul> : <p>未记录</p>}</div><div><strong>关联实验原限制</strong>{originalLimits.length ? <ul>{originalLimits.map((limit, index) => <li key={index}>{limit.text}<small>— {limit.title}</small></li>)}</ul> : <p>暂无关联实验原限制；不表示不存在其他限制。</p>}</div></div><Notes title="本版本后续工作" values={item.next_steps} /></details>
+       <details className="fr-deep-material"><summary>深入了解：定义范围与八方面核对资料</summary><div className="fr-dossier-scope"><div><strong>定义适用</strong><p>{display(item.scope)} · {item.asset_classes.join("、") || "资产未记录"}</p></div><div><strong>本版已接入研究</strong><p>{linked.length ? linked.map(experiment => `${experiment.title}：${observationPeriod(experiment)}；${experiment.products.map(product => product.name || product.code).join("、") || "产品未记录"}`).join("；") : "暂无关联实验；定义范围不等于验证范围。"}</p></div></div><p className="fr-dossier-note">资料可见不等于核查通过或投资有效。</p><div className="fr-dense-topic-grid">{assessment.topics.map(topicItem => { const fact = facts.find(value => value.id === topicItem.id); const missing = topicItem.checks.filter(check => checkEvidence(item, experiments, check).length === 0); return <button className="fr-dense-topic" type="button" key={topicItem.id} onClick={() => onSectionChange(topicItem.section === "overview" ? "definition" : topicItem.section)}><strong>{topicItem.title}</strong><span>{fact?.label ?? "资料未核明"}</span><small>{missing.length ? `待查：${missing[0].label}${missing.length > 1 ? `等${missing.length}项` : ""}` : "相关资料已列，仍需核对"}</small></button>; })}</div></details>
+     </div>}
+@@ -180,15 +176,15 @@
+   if (compact) return <article className="fr-object-row" data-category={categoryTone(item.category)}>
+     <div className="fr-row-identity"><span className="fr-mobile-label">观察什么</span><span className="fr-category-tag" data-category={categoryTone(item.category)}>{item.category}</span><h3>{displayFactorName(item, guides)}</h3><p>{purpose}</p><small>v{item.version}{versions.length > 1 ? ` · 共${versions.length}版` : ""}</small></div>
+     <div className="fr-row-outcome" data-tone={outcome.tone}><span className="fr-mobile-label">已记录结论</span><strong>{outcome.headline}</strong></div>
+-    <div className="fr-row-scope"><span className="fr-mobile-label">证据范围</span>{study ? <><span>{study.products.length ? `${study.products.length} 个产品` : "产品未记录"}</span><small>{observationPeriod(study)} · {reviewLabels[study.review_status] ?? study.review_status}</small></> : <span>本页未接入该版本实验</span>}</div>
++    <div className="fr-row-scope"><span className="fr-mobile-label">证据范围</span>{linked.length > 1 ? <><span>{linked.length}项实验，分别记录范围</span><small>打开后逐项看结论、日期和限制</small></> : study ? <><span>{study.products.length ? `${study.products.length} 个产品` : "产品未记录"}</span><small>{observationPeriod(study)} · {reviewLabels[study.review_status] ?? study.review_status}</small></> : <span>本页未接入该版本实验</span>}</div>
+     <button type="button" className="fr-main-action fr-row-open" onClick={onOpen}>{catalogAction(item, experiments)}</button>
+   </article>;
+   return <article className="fr-object-card" data-category={categoryTone(item.category)}>
+     <div className="fr-card-top"><span className="fr-category-tag" data-category={categoryTone(item.category)}><span className="fr-category-mark" aria-hidden="true" />{item.category}</span><span className="fr-card-assets">v{item.version}{versions.length > 1 ? ` · 共${versions.length}版` : ""}</span></div>
+     <h3>{displayFactorName(item, guides)}</h3>
+     <p className="fr-grid-purpose">{purpose}</p><div className="fr-grid-outcome" data-tone={outcome.tone}><strong>{outcome.headline}</strong></div>
+-    <div className="fr-grid-scope">{study ? <><span>{study.products.length ? `${study.products.length} 个产品` : "产品未记录"}</span><small>{observationPeriod(study)} · {reviewLabels[study.review_status] ?? study.review_status}</small></> : <span>本页未接入该版本实验</span>}</div>
+-    <div className="fr-card-actions"><button type="button" className="fr-main-action" onClick={onOpen}>{catalogAction(item, experiments)}</button>{linked.length > 0 && <button type="button" className="fr-text-action" onClick={() => onOpenExperiment(linked[0].id)}>看原实验</button>}</div>
++    <div className="fr-grid-scope">{linked.length > 1 ? <><span>{linked.length}项实验，分别记录范围</span><small>打开后逐项看结论、日期和限制</small></> : study ? <><span>{study.products.length ? `${study.products.length} 个产品` : "产品未记录"}</span><small>{observationPeriod(study)} · {reviewLabels[study.review_status] ?? study.review_status}</small></> : <span>本页未接入该版本实验</span>}</div>
++    <div className="fr-card-actions"><button type="button" className="fr-main-action" onClick={onOpen}>{catalogAction(item, experiments)}</button>{linked.length === 1 && <button type="button" className="fr-text-action" onClick={() => onOpenExperiment(linked[0].id)}>看原实验</button>}</div>
+   </article>;
+ }
+ 
+--- a/web/src/pages/factor-research/StudyConclusion.tsx
++++ b/web/src/pages/factor-research/StudyConclusion.tsx
+@@ -0,0 +1,32 @@
++import type { Experiment } from "./model";
++import { kindLabels, reviewLabels, runLabels, safeReportHref } from "./model";
++
++/** Keep each conclusion, scope and caveat attached to the same experiment. */
++export default function StudyConclusion({ experiment, onOpen }: { experiment: Experiment; onOpen?: () => void }) {
++  const Heading = onOpen ? "h3" : "h2";
++  const reports = experiment.sources.flatMap(source => {
++    const href = safeReportHref(source.path);
++    return href ? [{ ...source, href }] : [];
++  });
++  return <article className="fr-study-reading" aria-label={experiment.title} data-experiment-id={experiment.id}>
++    <div className="fr-study-reading-head"><Heading>{experiment.title}</Heading>{onOpen && <button type="button" onClick={onOpen}>查看实验详情</button>}</div>
++    <p className="fr-study-conclusion"><strong>{experiment.conclusion || "尚未记录结论"}</strong></p>
++    <dl className="fr-study-scope">
++      <div><dt>检查对象</dt><dd>{experiment.products.map(product => product.name || product.code).join("、") || "未记录"} · {kindLabels[experiment.kind] ?? experiment.kind}</dd></div>
++      <div><dt>观察期</dt><dd>{experiment.period.start?.slice(0, 10) ?? "未记录"} 至 {experiment.period.end?.slice(0, 10) ?? "未记录"}</dd></div>
++      <div><dt>后续期限</dt><dd>{experiment.target_horizon || "原接入资料未单列，请核对实验协议"}</dd></div>
++      {experiment.evaluation_period && <div><dt>效果检查期</dt><dd>{experiment.evaluation_period}</dd></div>}
++      <div><dt>资料截至</dt><dd>{experiment.data_cutoff?.slice(0, 10) ?? "未核实"}</dd></div>
++    </dl>
++    <p className="fr-study-limit"><strong>主要限制：</strong>{experiment.limitations[0] || "未记录，请核对原报告"}</p>
++    {experiment.limitations.length > 1 && <details className="fr-study-more"><summary>全部限制（{experiment.limitations.length}项）</summary><ul>{experiment.limitations.map((text, index) => <li key={index}>{text}</li>)}</ul></details>}
++    <p className="fr-study-review">{runLabels[experiment.run_status] ?? experiment.run_status} · {reviewLabels[experiment.review_status] ?? experiment.review_status} · 复核日期 {experiment.reviewed_at?.slice(0, 10) ?? "未记录"}</p>
++    <details className="fr-study-more"><summary>复核说明、来源与更正</summary><p>{experiment.review_summary || "复核说明未记录"}</p>
++      {experiment.source_note && <p><strong>来源记录：</strong>{experiment.source_note}</p>}
++      {experiment.correction && <div className="fr-study-correction"><p><strong>{experiment.correction.status === "superseded" ? "原结果已被更正替代" : "已有更正说明"}：</strong>{experiment.correction.note}</p>{experiment.correction.sources.map(source => <p key={source.path}>{safeReportHref(source.path) ? <a href={safeReportHref(source.path)!}>阅读更正说明</a> : source.path}</p>)}</div>}
++      <small>实验身份：{experiment.id}</small>
++    </details>
++    {experiment.correction && <p className="fr-study-limit"><strong>更正状态：</strong>{experiment.correction.note}；请连同原结果阅读。</p>}
++    {reports.length > 0 && <div className="fr-study-report-links">{reports.map(source => <a key={source.path} href={source.href}>{source.role === "family_report" ? "阅读家族结案报告" : source.role === "controller" ? "阅读主控复核" : "阅读实验原报告"}</a>)}</div>}
++  </article>;
++}
+--- a/web/src/pages/factor-research/catalog.generated.json
++++ b/web/src/pages/factor-research/catalog.generated.json
+@@ -1,7 +1,7 @@
+ {
+   "schema_version": "factor-research/1",
+-  "generated_at": "2026-09-23T15:07:11.156007+08:00",
+-  "registry_version": "1.4.4",
++  "generated_at": "2026-09-30T18:18:53.963070+08:00",
++  "registry_version": "1.6.3",
+   "sources": [
+     {
+       "path": "configs/factor-access.v1.json",
+@@ -40,6 +40,18 @@
+       "sha256": "2df4b7be38bcb315fbd575b119b7d3d2ac727f70139de261ee0ca85eef7cebc7"
+     },
+     {
++      "path": "docs/experiments/ma-cluster-information-2026-09-30.md",
++      "sha256": "0c987d8f3c0e61b612c8897275033a55a410758e917d5bba3fab9aab1572d53e"
++    },
++    {
++      "path": "docs/experiments/ma-cluster-information-mae-artifact-2026-09-30.md",
++      "sha256": "c03f7acae0da9db8840902a51233df02938cb283251663055da12f0ff14803c1"
++    },
++    {
++      "path": "docs/experiments/ma-cluster-information-return-artifact-2026-09-30.md",
++      "sha256": "8e193bca59fa0c652fb6ea7735a16050ef65509c87f3dfeb3f9eae01c5f0b6c1"
++    },
++    {
+       "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/protocol-v1.0.1.json",
+       "sha256": "00a16465e5232d3760cedbe9bccb5332b05e4f777f1732e8911ee586974c3af2"
+     },
+@@ -76,27 +88,116 @@
+       "sha256": "80005feae4ea9d6bd8f4f81f846c405c45f179d073d3aa79170ee32ee1ea7551"
+     },
+     {
++      "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/controller-numeric-check.json",
++      "sha256": "8eb4fd18ab001fc40b9ae96b2b26a36c7e9525368b60b32815520fad4f9d5b61"
++    },
++    {
++      "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/controller-review.md",
++      "sha256": "4420271344d3804bdad59e7ee59a43f94728ff8fc65eb1e648d4091433878ca5"
++    },
++    {
++      "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/independent-feature-audit/audit-v2.md",
++      "sha256": "231dcb89cd76e779c76c7daf39b422490dd2fdef6a91026cc1223a146700ee35"
++    },
++    {
++      "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/mae-block60-run/result.json",
++      "sha256": "426a2283e924b2e25fa666f9b116df9f5c42540dc7f59b85471bf085ca43d18c"
++    },
++    {
++      "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/mae-freeze/contract.json",
++      "sha256": "68527c021877bad46cbce9a783c655a15c1bccab46e1f26152fb475c1a6f4f21"
++    },
++    {
++      "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/mae-run/contract.json",
++      "sha256": "68527c021877bad46cbce9a783c655a15c1bccab46e1f26152fb475c1a6f4f21"
++    },
++    {
++      "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/mae-run/receipt.json",
++      "sha256": "571225285c522577e975488f297efaf4ca9f7cee7c06c53cb782d35d55402ff3"
++    },
++    {
++      "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/mae-run/result.json",
++      "sha256": "1f87e8349ebafa45973c28d5f5ffd2454481927b15ff6071f041042bf28186d4"
++    },
++    {
++      "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/protocol-v2.md",
++      "sha256": "fbc20aae942ece7d4a79dbf0833144afc4539de3d55ea759f2eef8616d112c8d"
++    },
++    {
++      "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/return-block60-run/result.json",
++      "sha256": "1c6ceb44c431129d501a2b32fcccc187858750ddeebfe068c11186099c502468"
++    },
++    {
++      "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/return-freeze/contract.json",
++      "sha256": "5e831a69fb9d30b226b0362b78d46ba7d2e4ccf9c317673e653734db07a0c507"
++    },
++    {
++      "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/return-run/contract.json",
++      "sha256": "5e831a69fb9d30b226b0362b78d46ba7d2e4ccf9c317673e653734db07a0c507"
++    },
++    {
++      "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/return-run/receipt.json",
++      "sha256": "174a5a0662ad973bdd963a4aec243db0f2f28c8556b442a04d89bc0b540800e5"
++    },
++    {
++      "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/return-run/result.json",
++      "sha256": "d3b8fa4d5deda64df9dcd2e05b278aeeb31ab7a68c311b66a7f0aeb02fd0cc16"
++    },
++    {
+       "path": "docs/experiments/registry.json",
+-      "sha256": "3e39775730998299c9f537a1adcd681c5c4fa02339aa9a722ae97829486df1f9"
++      "sha256": "9cbcf5b4cfebce79f68b0f0bab39e4d31b1414393784315c4ba105c2e05cca9a"
+     },
+     {
+       "path": "docs/research/definitions.v1.json",
+-      "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++      "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+     },
+     {
+       "path": "web/src/pages/factor-research/display-bindings.json",
+-      "sha256": "bbe981d696cdbe530ceae9ba4867445fe9f40addf5d357ac30aae4ee123be4a2"
++      "sha256": "eb830508d0d91f59013227771f66736f1475fe840da1579d8aaf14adbb8dde7c"
+     }
+   ],
+   "counts": {
+-    "factor_objects": 49,
+-    "definition_versions": 51,
+-    "executed_experiments": 2
++    "factor_objects": 50,
++    "definition_versions": 52,
++    "executed_experiments": 4
+   },
+   "limitations": [
+     "目录只统计展示范围内的正式研究读数与状态；基础价格、选择动作、基准和策略另有身份，不计作因子。",
+     "未绑定展示证据不等于全仓未研究；计算核验不等于真实市场有效。",
+-    "量能方向目前没有本展示目录中可直接确认的正式对象，保留为空缺。"
++    "本批只接入已核定的展示范围；另有31个已登记版本尚未接入本页，不表示它们尚未研究。"
++  ],
++  "unintegrated_references": [
++    "etf.ma20260924.state.d120@1.0.0",
++    "etf.ma20260924.state.d20@1.0.0",
++    "etf.ma20260924.state.d60@1.0.0",
++    "etf.ma20260924.state.e120@1.0.0",
++    "etf.ma20260924.state.e20@1.0.0",
++    "etf.ma20260924.state.e60@1.0.0",
++    "etf.ma20260924.state.s120@1.0.0",
++    "etf.ma20260924.state.s20@1.0.0",
++    "etf.ma20260924.state.s60@1.0.0",
++    "etf.reference.ema20@1.0.0",
++    "etf.reference.return20@1.0.0",
++    "etf.reference.sma20@1.0.0",
++    "etf.reference.volatility20@1.0.0",
++    "reference.ch3.mktrf@1.0.0",
++    "reference.ch3.smb@1.0.0",
++    "reference.ch3.vmg@1.0.0",
++    "reference.ff5.cma@1.0.0",
++    "reference.ff5.hml@1.0.0",
++    "reference.ff5.mkt_rf@1.0.0",
++    "reference.ff5.rmw@1.0.0",
++    "reference.ff5.smb@1.0.0",
++    "reference.mom.mom@1.0.0",
++    "research.a01.signed_band@1.0.0",
++    "research.a01.signed_band@1.0.1",
++    "research.a01.signed_band@2.0.0",
++    "research.a02.sma_maintenance@1.0.0",
++    "research.a03.pullback_order@1.0.0",
++    "research.space.prior_upper_pivot@1.0.0",
++    "research.structure.simple_top3@1.0.0",
++    "research.trend.future_deduction_box20_10@1.0.0",
++    "research.volume.abnormal20@1.0.0"
+   ],
+   "source_errors": [],
+   "items": [
+@@ -138,7 +239,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         },
+         {
+           "path": "docs/experiments/factor-reuse-refresh-2026-09-22.md",
+@@ -191,7 +292,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -232,7 +333,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -273,7 +374,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -314,7 +415,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         },
+         {
+           "path": "docs/experiments/factor-momentum-rank-reuse-2026-09-22.md",
+@@ -360,7 +461,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -402,7 +503,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -444,7 +545,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -486,7 +587,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -528,7 +629,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -570,7 +671,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -612,7 +713,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -654,7 +755,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -696,7 +797,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -737,7 +838,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -779,7 +880,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -821,7 +922,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -862,7 +963,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -904,7 +1005,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -946,7 +1047,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -987,7 +1088,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1029,7 +1130,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1071,7 +1172,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1112,7 +1213,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1154,7 +1255,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1196,7 +1297,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1237,7 +1338,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1279,7 +1380,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1321,7 +1422,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1362,7 +1463,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1404,7 +1505,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1446,7 +1547,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1488,7 +1589,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1529,7 +1630,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1570,7 +1671,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1611,7 +1712,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1652,7 +1753,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1693,7 +1794,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1734,7 +1835,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1775,7 +1876,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1816,7 +1917,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1857,7 +1958,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1898,7 +1999,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1939,7 +2040,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -1980,7 +2081,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -2021,7 +2122,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -2062,7 +2163,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -2103,7 +2204,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -2144,7 +2245,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -2185,7 +2286,7 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -2226,7 +2327,51 @@
+       "sources": [
+         {
+           "path": "docs/research/definitions.v1.json",
+-          "sha256": "a3782cdcca20ee6dadaef84a7f32ae3910b9175bca5ae463d60eb76bd55e86f6"
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
++        }
++      ],
++      "source_error": null
++    },
++    {
++      "reference": "research.trend.ma_cluster_width@1.0.0",
++      "id": "research.trend.ma_cluster_width",
++      "version": "1.0.0",
++      "name": "六线聚散宽度（指数有限信息研究）",
++      "formal_name": "六线聚散宽度（指数有限信息研究）",
++      "object_type": "feature",
++      "category": "趋势",
++      "purpose": "量出20、60、120日的六条均线彼此靠近或分开的程度，检查它在已有趋势信息之外能否帮助判断后续涨跌和下行风险。",
++      "scope": "两供应商指数点位日线计算、上行周观察，有限时序收益/风险信息研究；不代表历史密集阻力目标",
++      "formula": "width[t] = (max(M) - min(M)) / min(M)",
++      "unit": "ratio（非负，越小越密集）",
++      "input": "[\"date\", \"open\", \"high\", \"low\", \"close\", \"calendar\"]；已绑定供应商指数点位价格代理，非前复权个股、经济财富或成交",
++      "time": "当日完整日线收盘后；理论当日收盘后，历史到达时点未认证",
++      "asset_classes": [
++        "指数"
++      ],
++      "calculation": {
++        "status": "exists",
++        "scope": "纯研究卡登记；未继承旧卡合成/真实/效果资格"
++      },
++      "research": {
++        "stage": "historical",
++        "result": "insufficient",
++        "summary": "六线聚散：未来20日下行风险信息（2023-01-01至2026-06-30）：加入六线间距后，风险预测误差增加3.77%；比简单历史均值也更差，未确认稳定帮助。 主控接受本轮有限信息研究并封存为证据不足；源价格、计算和关键结果已独立核对，不等于允许交易。；六线聚散：未来20日价格涨跌信息（2023-01-01至2026-06-30）：加入六线间距后，价格涨跌预测误差仅减少0.29%；仍比简单历史均值更差，证据不足。 主控接受本轮有限信息研究并封存为证据不足；源价格、计算和关键结果已独立核对，不等于允许交易。",
++        "evidence_date": "2026-09-30"
++      },
++      "limitations": [
++        "不表示历史整理时长、密集区边界、目标价或完整盈亏比；两相关已见指数价格",
++        "limited_provider_index_price_under_review"
++      ],
++      "next_steps": [],
++      "experiment_ids": [
++        "M01-ma-cluster-mae",
++        "M01-ma-cluster-forward_return"
++      ],
++      "sources": [
++        {
++          "path": "docs/research/definitions.v1.json",
++          "sha256": "9e7d26c3afdef684b7774b3190360e20ddfa669703b1ed825c62223ac2f4b705"
+         }
+       ],
+       "source_error": null
+@@ -2278,6 +2423,7 @@
+         "end": "2026-06-30"
+       },
+       "data_cutoff": "2026-06-30",
++      "target_horizon": "21个共同交易日；当期收盘至第21个共同交易日收盘",
+       "run_at": "2026-09-23T03:25:00.244704+00:00",
+       "reviewed_at": "2026-09-23",
+       "sample": [
+@@ -2452,6 +2598,7 @@
+         "end": "2025-12-31"
+       },
+       "data_cutoff": null,
++      "target_horizon": "21个价格变化区间；下一报价收盘至第22个报价收盘",
+       "run_at": null,
+       "reviewed_at": "2026-09-16",
+       "sample": [
+@@ -2602,6 +2749,628 @@
+         "verdict": "mixed",
+         "oneLiner": "510300双均线首轮历史描述：成立组均值1.042%、未成立组0.341%，但逐年均值差2正5负。主控已完成限定收口，流程偏差保留；不是预测能力或交易利润。"
+       }
++    },
++    {
++      "id": "M01-ma-cluster-mae",
++      "title": "六线聚散：未来20日下行风险信息",
++      "kind": "predictive_study",
++      "measure": "prediction_error",
++      "run_status": "completed",
++      "review_status": "reviewed",
++      "review_summary": "主控接受本轮有限信息研究并封存为证据不足；源价格、计算和关键结果已独立核对，不等于允许交易。",
++      "conclusion": "加入六线间距后，风险预测误差增加3.77%；比简单历史均值也更差，未确认稳定帮助。",
++      "result": "insufficient",
++      "references": [
++        "research.trend.ma_cluster_width@1.0.0"
++      ],
++      "run_id": "f00e294e820c4c599744fcd092da8309",
++      "baseline": "简单历史均值（B0）、已有趋势/三组均线位置/近期涨幅和波动（B1）、再加入六线间距（B2），三者用同一批后期观察比较。",
++      "costs": "没有账户交易；未计算费用、成交、持仓或投资收益。",
++      "products": [
++        {
++          "code": "sh000300",
++          "name": "沪深300"
++        },
++        {
++          "code": "sz399006",
++          "name": "创业板指"
++        }
++      ],
++      "period": {
++        "start": "2023-01-01",
++        "end": "2026-06-30"
++      },
++      "data_cutoff": "2026-06-30",
++      "run_at": null,
++      "reviewed_at": "2026-09-30",
++      "target_horizon": "20个交易日；下一交易日收盘起，至第21个交易日收盘",
++      "evaluation_period": "2025-01-01 至 2025-12-31；2026-01-01 至 2026-06-30；全部历史资料此前已见",
++      "sample": [
++        {
++          "label": "后期共同评价观察",
++          "value": 81,
++          "unit": "次",
++          "meaning": "2025和2026年上半年共同成熟观察；不是独立交易"
++        },
++        {
++          "label": "后期共同评价日期",
++          "value": 43,
++          "unit": "日",
++          "meaning": "同日两指数相关且周观察重叠"
++        },
++        {
++          "label": "研究指数",
++          "value": 2,
++          "unit": "个",
++          "meaning": "历史指数点位，不是ETF账户"
++        }
++      ],
++      "metrics": [
++        {
++          "label": "加入六线后预测误差减少比例",
++          "value": -3.7701179726905223,
++          "unit": "percent",
++          "meaning": "正值表示误差减少，负值表示误差增加；不是投资收益"
++        }
++      ],
++      "result_tables": [
++        {
++          "title": "三种固定方法的预测误差",
++          "columns": [
++            {
++              "key": "model",
++              "label": "方法",
++              "unit": ""
++            },
++            {
++              "key": "mse",
++              "label": "平均平方误差（越小越好）",
++              "unit": "百分点²"
++            },
++            {
++              "key": "rmse",
++              "label": "预测误差规模（越小越好）",
++              "unit": "百分点"
++            }
++          ],
++          "rows": [
++            {
++              "model": "简单历史均值",
++              "mse": 8.174907126774684,
++              "rmse": 2.8591794499077325
++            },
++            {
++              "model": "已有趋势、位置、涨幅和波动",
++              "mse": 9.737322326895514,
++              "rmse": 3.1204682864748863
++            },
++            {
++              "model": "已有信息加六线间距",
++              "mse": 10.104430866000609,
++              "rmse": 3.1787467445521056
++            }
++          ],
++          "note": "原结果表；误差反映预测偏离实际的程度，不是账户收益或风险金额。"
++        },
++        {
++          "title": "加入六线间距后，比各固定对照改善多少",
++          "columns": [
++            {
++              "key": "baseline",
++              "label": "对照",
++              "unit": ""
++            },
++            {
++              "key": "relative",
++              "label": "平方误差减少比例",
++              "unit": "percent"
++            },
++            {
++              "key": "absolute",
++              "label": "平方误差减少量",
++              "unit": "百分点²"
++            }
++          ],
++          "rows": [
++            {
++              "baseline": "已有趋势、位置、涨幅和波动",
++              "relative": -3.7701179726905223,
++              "absolute": -0.3671085391050948
++            },
++            {
++              "baseline": "简单历史均值",
++              "relative": -23.603005016488744,
++              "absolute": -1.9295237392259246
++            }
++          ],
++          "note": "正值改善，负值恶化；不是投资收益增量。不能只选较弱的背景方法作对照。"
++        },
++        {
++          "title": "按评价时期比较已有信息与加入六线",
++          "columns": [
++            {
++              "key": "period",
++              "label": "评价时期",
++              "unit": ""
++            },
++            {
++              "key": "before",
++              "label": "加入前误差",
++              "unit": "百分点²"
++            },
++            {
++              "key": "after",
++              "label": "加入后误差",
++              "unit": "百分点²"
++            },
++            {
++              "key": "improvement",
++              "label": "误差减少量",
++              "unit": "百分点²"
++            },
++            {
++              "key": "rows",
++              "label": "观察",
++              "unit": "次"
++            }
++          ],
++          "rows": [
++            {
++              "period": "2025",
++              "before": 13.860666979653566,
++              "after": 14.63521969795695,
++              "improvement": -0.7745527183033847,
++              "rows": 47
++            },
++            {
++              "period": "2026",
++              "before": 4.144484707800421,
++              "after": 3.974263676255709,
++              "improvement": 0.17022103154471235,
++              "rows": 34
++            }
++          ],
++          "note": "原逐期结果；2026仅截至6月30日。正值表示误差减少，不能把一段时期的改善外推为稳定可交易。"
++        },
++        {
++          "title": "考虑相邻日期相关后的误差改善范围",
++          "columns": [
++            {
++              "key": "range",
++              "label": "一起考虑的日期长度",
++              "unit": ""
++            },
++            {
++              "key": "baseline",
++              "label": "对照",
++              "unit": ""
++            },
++            {
++              "key": "low",
++              "label": "改善范围下限",
++              "unit": "百分点²"
++            },
++            {
++              "key": "high",
++              "label": "改善范围上限",
++              "unit": "百分点²"
++            }
++          ],
++          "rows": [
++            {
++              "range": "20日",
++              "baseline": "已有趋势、位置、涨幅和波动",
++              "low": -0.8664334118152441,
++              "high": 0.13864347418589107
++            },
++            {
++              "range": "20日",
++              "baseline": "简单历史均值",
++              "low": -4.6598864971740594,
++              "high": 0.5451600568979854
++            },
++            {
++              "range": "60日",
++              "baseline": "已有趋势、位置、涨幅和波动",
++              "low": -0.8747448334310812,
++              "high": 0.1883400012780083
++            },
++            {
++              "range": "60日",
++              "baseline": "简单历史均值",
++              "low": -5.873511394801032,
++              "high": 0.8903793111193031
++            }
++          ],
++          "note": "原研究的成段估计：相邻观察一起处理。范围含负值与正值表示恶化和改善都可能；不是确定收益区间。"
++        }
++      ],
++      "limitations": [
++        "只研究沪深300和创业板指的历史指数价格，不能代替ETF账户或个股证据。",
++        "全部历史资料此前已见，后期检查不是真正未见资料验证；周观察相互重叠、两个指数相关。",
++        "当日六线间距不等于六个月整理、历史密集区边界、目标价、触发条件或完整盈亏比。",
++        "低于2%的观察只有两例；不支持把2%当作已验证入场条件。",
++        "20日和60日成段估计都包含改善与恶化的可能；不确认稳定帮助。",
++        "未计算费用、成交、持仓、完整资金账户；预测误差变化不是投资收益。"
++      ],
++      "source_note": "独立特征审计首版使用了不同ATR递推，保留首版并按规定公式更正；本页绑定更正后的审计，不改变原研究结果。",
++      "next_steps": [
++        "本问题已封存；历史密集目标和ETF可交易证据是另有定义与资料要求的问题，本页不启动新研究。"
++      ],
++      "sources": [
++        {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/mae-freeze/contract.json",
++          "sha256": "68527c021877bad46cbce9a783c655a15c1bccab46e1f26152fb475c1a6f4f21",
++          "role": "contract"
++        },
++        {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/mae-run/contract.json",
++          "sha256": "68527c021877bad46cbce9a783c655a15c1bccab46e1f26152fb475c1a6f4f21",
++          "role": "run_contract"
++        },
++        {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/mae-run/receipt.json",
++          "sha256": "571225285c522577e975488f297efaf4ca9f7cee7c06c53cb782d35d55402ff3",
++          "role": "receipt"
++        },
++        {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/mae-run/result.json",
++          "sha256": "1f87e8349ebafa45973c28d5f5ffd2454481927b15ff6071f041042bf28186d4",
++          "role": "summary"
++        },
++        {
++          "path": "docs/experiments/ma-cluster-information-mae-artifact-2026-09-30.md",
++          "sha256": "c03f7acae0da9db8840902a51233df02938cb283251663055da12f0ff14803c1",
++          "role": "report"
++        },
++        {
++          "path": "docs/experiments/ma-cluster-information-2026-09-30.md",
++          "sha256": "0c987d8f3c0e61b612c8897275033a55a410758e917d5bba3fab9aab1572d53e",
++          "role": "family_report"
++        },
++        {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/controller-review.md",
++          "sha256": "4420271344d3804bdad59e7ee59a43f94728ff8fc65eb1e648d4091433878ca5",
++          "role": "controller"
++        },
++        {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/controller-numeric-check.json",
++          "sha256": "8eb4fd18ab001fc40b9ae96b2b26a36c7e9525368b60b32815520fad4f9d5b61",
++          "role": "numeric_check"
++        },
++        {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/protocol-v2.md",
++          "sha256": "fbc20aae942ece7d4a79dbf0833144afc4539de3d55ea759f2eef8616d112c8d",
++          "role": "protocol"
++        },
++        {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/independent-feature-audit/audit-v2.md",
++          "sha256": "231dcb89cd76e779c76c7daf39b422490dd2fdef6a91026cc1223a146700ee35",
++          "role": "feature_audit"
++        },
++        {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/mae-block60-run/result.json",
++          "sha256": "426a2283e924b2e25fa666f9b116df9f5c42540dc7f59b85471bf085ca43d18c",
++          "role": "block60"
++        }
++      ],
++      "report_registration": {
++        "category": "模块与信号",
++        "verdict": "mixed",
++        "oneLiner": null,
++        "workflow_receipt": "docs/experiments/raw/ma-cluster-information-2026-09-30/mae-block60-run/receipt.json"
++      }
++    },
++    {
++      "id": "M01-ma-cluster-forward_return",
++      "title": "六线聚散：未来20日价格涨跌信息",
++      "kind": "predictive_study",
++      "measure": "prediction_error",
++      "run_status": "completed",
++      "review_status": "reviewed",
++      "review_summary": "主控接受本轮有限信息研究并封存为证据不足；源价格、计算和关键结果已独立核对，不等于允许交易。",
++      "conclusion": "加入六线间距后，价格涨跌预测误差仅减少0.29%；仍比简单历史均值更差，证据不足。",
++      "result": "insufficient",
++      "references": [
++        "research.trend.ma_cluster_width@1.0.0"
++      ],
++      "run_id": "08e2898c7d58408eb64c73ed7eb1c3f6",
++      "baseline": "简单历史均值（B0）、已有趋势/三组均线位置/近期涨幅和波动（B1）、再加入六线间距（B2），三者用同一批后期观察比较。",
++      "costs": "没有账户交易；未计算费用、成交、持仓或投资收益。",
++      "products": [
++        {
++          "code": "sh000300",
++          "name": "沪深300"
++        },
++        {
++          "code": "sz399006",
++          "name": "创业板指"
++        }
++      ],
++      "period": {
++        "start": "2023-01-01",
++        "end": "2026-06-30"
++      },
++      "data_cutoff": "2026-06-30",
++      "run_at": null,
++      "reviewed_at": "2026-09-30",
++      "target_horizon": "20个交易日；下一交易日收盘起，至第21个交易日收盘",
++      "evaluation_period": "2025-01-01 至 2025-12-31；2026-01-01 至 2026-06-30；全部历史资料此前已见",
++      "sample": [
++        {
++          "label": "后期共同评价观察",
++          "value": 81,
++          "unit": "次",
++          "meaning": "2025和2026年上半年共同成熟观察；不是独立交易"
++        },
++        {
++          "label": "后期共同评价日期",
++          "value": 43,
++          "unit": "日",
++          "meaning": "同日两指数相关且周观察重叠"
++        },
++        {
++          "label": "研究指数",
++          "value": 2,
++          "unit": "个",
++          "meaning": "历史指数点位，不是ETF账户"
++        }
++      ],
++      "metrics": [
++        {
++          "label": "加入六线后预测误差减少比例",
++          "value": 0.29030532545757487,
++          "unit": "percent",
++          "meaning": "正值表示误差减少，负值表示误差增加；不是投资收益"
++        }
++      ],
++      "result_tables": [
++        {
++          "title": "三种固定方法的预测误差",
++          "columns": [
++            {
++              "key": "model",
++              "label": "方法",
++              "unit": ""
++            },
++            {
++              "key": "mse",
++              "label": "平均平方误差（越小越好）",
++              "unit": "百分点²"
++            },
++            {
++              "key": "rmse",
++              "label": "预测误差规模（越小越好）",
++              "unit": "百分点"
++            }
++          ],
++          "rows": [
++            {
++              "model": "简单历史均值",
++              "mse": 60.6077719713744,
++              "rmse": 7.785099355266726
++            },
++            {
++              "model": "已有趋势、位置、涨幅和波动",
++              "mse": 69.5148822076974,
++              "rmse": 8.337558527992316
++            },
++            {
++              "model": "已有信息加六线间距",
++              "mse": 69.31307680266289,
++              "rmse": 8.325447543685739
++            }
++          ],
++          "note": "原结果表；误差反映预测偏离实际的程度，不是账户收益或风险金额。"
++        },
++        {
++          "title": "加入六线间距后，比各固定对照改善多少",
++          "columns": [
++            {
++              "key": "baseline",
++              "label": "对照",
++              "unit": ""
++            },
++            {
++              "key": "relative",
++              "label": "平方误差减少比例",
++              "unit": "percent"
++            },
++            {
++              "key": "absolute",
++              "label": "平方误差减少量",
++              "unit": "百分点²"
++            }
++          ],
++          "rows": [
++            {
++              "baseline": "已有趋势、位置、涨幅和波动",
++              "relative": 0.29030532545757487,
++              "absolute": 0.20180540503450572
++            },
++            {
++              "baseline": "简单历史均值",
++              "relative": -14.363347386206653,
++              "absolute": -8.705304831288494
++            }
++          ],
++          "note": "正值改善，负值恶化；不是投资收益增量。不能只选较弱的背景方法作对照。"
++        },
++        {
++          "title": "按评价时期比较已有信息与加入六线",
++          "columns": [
++            {
++              "key": "period",
++              "label": "评价时期",
++              "unit": ""
++            },
++            {
++              "key": "before",
++              "label": "加入前误差",
++              "unit": "百分点²"
++            },
++            {
++              "key": "after",
++              "label": "加入后误差",
++              "unit": "百分点²"
++            },
++            {
++              "key": "improvement",
++              "label": "误差减少量",
++              "unit": "百分点²"
++            },
++            {
++              "key": "rows",
++              "label": "观察",
++              "unit": "次"
++            }
++          ],
++          "rows": [
++            {
++              "period": "2025",
++              "before": 99.69749501285901,
++              "after": 99.40282990560934,
++              "improvement": 0.29466510724967065,
++              "rows": 47
++            },
++            {
++              "period": "2026",
++              "before": 31.242745750579008,
++              "after": 31.07891653623375,
++              "improvement": 0.16382921434525954,
++              "rows": 34
++            }
++          ],
++          "note": "原逐期结果；2026仅截至6月30日。正值表示误差减少，不能把一段时期的改善外推为稳定可交易。"
++        },
++        {
++          "title": "考虑相邻日期相关后的误差改善范围",
++          "columns": [
++            {
++              "key": "range",
++              "label": "一起考虑的日期长度",
++              "unit": ""
++            },
++            {
++              "key": "baseline",
++              "label": "对照",
++              "unit": ""
++            },
++            {
++              "key": "low",
++              "label": "改善范围下限",
++              "unit": "百分点²"
++            },
++            {
++              "key": "high",
++              "label": "改善范围上限",
++              "unit": "百分点²"
++            }
++          ],
++          "rows": [
++            {
++              "range": "20日",
++              "baseline": "已有趋势、位置、涨幅和波动",
++              "low": -1.040368755693639,
++              "high": 1.3452981424024166
++            },
++            {
++              "range": "20日",
++              "baseline": "简单历史均值",
++              "low": -18.612761570475495,
++              "high": 0.2577363527214545
++            },
++            {
++              "range": "60日",
++              "baseline": "已有趋势、位置、涨幅和波动",
++              "low": -1.314968368158018,
++              "high": 1.1271031865837118
++            },
++            {
++              "range": "60日",
++              "baseline": "简单历史均值",
++              "low": -22.771288467144675,
++              "high": 0.966000320629897
++            }
++          ],
++          "note": "原研究的成段估计：相邻观察一起处理。范围含负值与正值表示恶化和改善都可能；不是确定收益区间。"
++        }
++      ],
++      "limitations": [
++        "只研究沪深300和创业板指的历史指数价格，不能代替ETF账户或个股证据。",
++        "全部历史资料此前已见，后期检查不是真正未见资料验证；周观察相互重叠、两个指数相关。",
++        "当日六线间距不等于六个月整理、历史密集区边界、目标价、触发条件或完整盈亏比。",
++        "低于2%的观察只有两例；不支持把2%当作已验证入场条件。",
++        "20日和60日成段估计都包含改善与恶化的可能；不确认稳定帮助。",
++        "未计算费用、成交、持仓、完整资金账户；预测误差变化不是投资收益。"
++      ],
++      "source_note": "独立特征审计首版使用了不同ATR递推，保留首版并按规定公式更正；本页绑定更正后的审计，不改变原研究结果。",
++      "next_steps": [
++        "本问题已封存；历史密集目标和ETF可交易证据是另有定义与资料要求的问题，本页不启动新研究。"
++      ],
++      "sources": [
++        {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/return-freeze/contract.json",
++          "sha256": "5e831a69fb9d30b226b0362b78d46ba7d2e4ccf9c317673e653734db07a0c507",
++          "role": "contract"
++        },
++        {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/return-run/contract.json",
++          "sha256": "5e831a69fb9d30b226b0362b78d46ba7d2e4ccf9c317673e653734db07a0c507",
++          "role": "run_contract"
++        },
++        {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/return-run/receipt.json",
++          "sha256": "174a5a0662ad973bdd963a4aec243db0f2f28c8556b442a04d89bc0b540800e5",
++          "role": "receipt"
++        },
++        {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/return-run/result.json",
++          "sha256": "d3b8fa4d5deda64df9dcd2e05b278aeeb31ab7a68c311b66a7f0aeb02fd0cc16",
++          "role": "summary"
++        },
++        {
++          "path": "docs/experiments/ma-cluster-information-return-artifact-2026-09-30.md",
++          "sha256": "8e193bca59fa0c652fb6ea7735a16050ef65509c87f3dfeb3f9eae01c5f0b6c1",
++          "role": "report"
++        },
++        {
++          "path": "docs/experiments/ma-cluster-information-2026-09-30.md",
++          "sha256": "0c987d8f3c0e61b612c8897275033a55a410758e917d5bba3fab9aab1572d53e",
++          "role": "family_report"
++        },
++        {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/controller-review.md",
++          "sha256": "4420271344d3804bdad59e7ee59a43f94728ff8fc65eb1e648d4091433878ca5",
++          "role": "controller"
++        },
++        {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/controller-numeric-check.json",
++          "sha256": "8eb4fd18ab001fc40b9ae96b2b26a36c7e9525368b60b32815520fad4f9d5b61",
++          "role": "numeric_check"
++        },
++        {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/protocol-v2.md",
++          "sha256": "fbc20aae942ece7d4a79dbf0833144afc4539de3d55ea759f2eef8616d112c8d",
++          "role": "protocol"
++        },
++        {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/independent-feature-audit/audit-v2.md",
++          "sha256": "231dcb89cd76e779c76c7daf39b422490dd2fdef6a91026cc1223a146700ee35",
++          "role": "feature_audit"
++        },
++        {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/return-block60-run/result.json",
++          "sha256": "1c6ceb44c431129d501a2b32fcccc187858750ddeebfe068c11186099c502468",
++          "role": "block60"
++        }
++      ],
++      "report_registration": {
++        "category": "模块与信号",
++        "verdict": "mixed",
++        "oneLiner": null,
++        "workflow_receipt": "docs/experiments/raw/ma-cluster-information-2026-09-30/return-block60-run/receipt.json"
++      }
+     }
+   ],
+   "projects": [
+--- a/web/src/pages/factor-research/display-bindings.json
++++ b/web/src/pages/factor-research/display-bindings.json
+@@ -95,6 +95,150 @@
+         "其他市场与含成本策略效果需另行研究。"
+       ],
+       "adapter": "dual_ma_description_v1"
++    },
++    {
++      "id": "M01-ma-cluster-mae",
++      "reference": "research.trend.ma_cluster_width@1.0.0",
++      "adapter": "ma_cluster_prediction_v1",
++      "run_id": "f00e294e820c4c599744fcd092da8309",
++      "target_kind": "mae",
++      "title": "六线聚散：未来20日下行风险信息",
++      "kind": "predictive_study",
++      "summary": "加入六线间距后，风险预测误差增加3.77%；比简单历史均值也更差，未确认稳定帮助。",
++      "result": "insufficient",
++      "review_status": "reviewed",
++      "review_summary": "主控接受本轮有限信息研究并封存为证据不足；源价格、计算和关键结果已独立核对，不等于允许交易。",
++      "reviewed_at": "2026-09-30",
++      "limitations": [
++        "只研究沪深300和创业板指的历史指数价格，不能代替ETF账户或个股证据。",
++        "全部历史资料此前已见，后期检查不是真正未见资料验证；周观察相互重叠、两个指数相关。",
++        "当日六线间距不等于六个月整理、历史密集区边界、目标价、触发条件或完整盈亏比。",
++        "低于2%的观察只有两例；不支持把2%当作已验证入场条件。",
++        "20日和60日成段估计都包含改善与恶化的可能；不确认稳定帮助。",
++        "未计算费用、成交、持仓、完整资金账户；预测误差变化不是投资收益。"
++      ],
++      "source_note": "独立特征审计首版使用了不同ATR递推，保留首版并按规定公式更正；本页绑定更正后的审计，不改变原研究结果。",
++      "next_steps": [
++        "本问题已封存；历史密集目标和ETF可交易证据是另有定义与资料要求的问题，本页不启动新研究。"
++      ],
++      "sources": {
++        "contract": {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/mae-freeze/contract.json",
++          "sha256": "68527c021877bad46cbce9a783c655a15c1bccab46e1f26152fb475c1a6f4f21"
++        },
++        "run_contract": {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/mae-run/contract.json",
++          "sha256": "68527c021877bad46cbce9a783c655a15c1bccab46e1f26152fb475c1a6f4f21"
++        },
++        "receipt": {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/mae-run/receipt.json",
++          "sha256": "571225285c522577e975488f297efaf4ca9f7cee7c06c53cb782d35d55402ff3"
++        },
++        "summary": {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/mae-run/result.json",
++          "sha256": "1f87e8349ebafa45973c28d5f5ffd2454481927b15ff6071f041042bf28186d4"
++        },
++        "report": {
++          "path": "docs/experiments/ma-cluster-information-mae-artifact-2026-09-30.md",
++          "sha256": "c03f7acae0da9db8840902a51233df02938cb283251663055da12f0ff14803c1"
++        },
++        "family_report": {
++          "path": "docs/experiments/ma-cluster-information-2026-09-30.md",
++          "sha256": "0c987d8f3c0e61b612c8897275033a55a410758e917d5bba3fab9aab1572d53e"
++        },
++        "controller": {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/controller-review.md",
++          "sha256": "4420271344d3804bdad59e7ee59a43f94728ff8fc65eb1e648d4091433878ca5"
++        },
++        "numeric_check": {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/controller-numeric-check.json",
++          "sha256": "8eb4fd18ab001fc40b9ae96b2b26a36c7e9525368b60b32815520fad4f9d5b61"
++        },
++        "protocol": {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/protocol-v2.md",
++          "sha256": "fbc20aae942ece7d4a79dbf0833144afc4539de3d55ea759f2eef8616d112c8d"
++        },
++        "feature_audit": {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/independent-feature-audit/audit-v2.md",
++          "sha256": "231dcb89cd76e779c76c7daf39b422490dd2fdef6a91026cc1223a146700ee35"
++        },
++        "block60": {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/mae-block60-run/result.json",
++          "sha256": "426a2283e924b2e25fa666f9b116df9f5c42540dc7f59b85471bf085ca43d18c"
++        }
++      }
++    },
++    {
++      "id": "M01-ma-cluster-forward_return",
++      "reference": "research.trend.ma_cluster_width@1.0.0",
++      "adapter": "ma_cluster_prediction_v1",
++      "run_id": "08e2898c7d58408eb64c73ed7eb1c3f6",
++      "target_kind": "forward_return",
++      "title": "六线聚散：未来20日价格涨跌信息",
++      "kind": "predictive_study",
++      "summary": "加入六线间距后，价格涨跌预测误差仅减少0.29%；仍比简单历史均值更差，证据不足。",
++      "result": "insufficient",
++      "review_status": "reviewed",
++      "review_summary": "主控接受本轮有限信息研究并封存为证据不足；源价格、计算和关键结果已独立核对，不等于允许交易。",
++      "reviewed_at": "2026-09-30",
++      "limitations": [
++        "只研究沪深300和创业板指的历史指数价格，不能代替ETF账户或个股证据。",
++        "全部历史资料此前已见，后期检查不是真正未见资料验证；周观察相互重叠、两个指数相关。",
++        "当日六线间距不等于六个月整理、历史密集区边界、目标价、触发条件或完整盈亏比。",
++        "低于2%的观察只有两例；不支持把2%当作已验证入场条件。",
++        "20日和60日成段估计都包含改善与恶化的可能；不确认稳定帮助。",
++        "未计算费用、成交、持仓、完整资金账户；预测误差变化不是投资收益。"
++      ],
++      "source_note": "独立特征审计首版使用了不同ATR递推，保留首版并按规定公式更正；本页绑定更正后的审计，不改变原研究结果。",
++      "next_steps": [
++        "本问题已封存；历史密集目标和ETF可交易证据是另有定义与资料要求的问题，本页不启动新研究。"
++      ],
++      "sources": {
++        "contract": {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/return-freeze/contract.json",
++          "sha256": "5e831a69fb9d30b226b0362b78d46ba7d2e4ccf9c317673e653734db07a0c507"
++        },
++        "run_contract": {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/return-run/contract.json",
++          "sha256": "5e831a69fb9d30b226b0362b78d46ba7d2e4ccf9c317673e653734db07a0c507"
++        },
++        "receipt": {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/return-run/receipt.json",
++          "sha256": "174a5a0662ad973bdd963a4aec243db0f2f28c8556b442a04d89bc0b540800e5"
++        },
++        "summary": {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/return-run/result.json",
++          "sha256": "d3b8fa4d5deda64df9dcd2e05b278aeeb31ab7a68c311b66a7f0aeb02fd0cc16"
++        },
++        "report": {
++          "path": "docs/experiments/ma-cluster-information-return-artifact-2026-09-30.md",
++          "sha256": "8e193bca59fa0c652fb6ea7735a16050ef65509c87f3dfeb3f9eae01c5f0b6c1"
++        },
++        "family_report": {
++          "path": "docs/experiments/ma-cluster-information-2026-09-30.md",
++          "sha256": "0c987d8f3c0e61b612c8897275033a55a410758e917d5bba3fab9aab1572d53e"
++        },
++        "controller": {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/controller-review.md",
++          "sha256": "4420271344d3804bdad59e7ee59a43f94728ff8fc65eb1e648d4091433878ca5"
++        },
++        "numeric_check": {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/controller-numeric-check.json",
++          "sha256": "8eb4fd18ab001fc40b9ae96b2b26a36c7e9525368b60b32815520fad4f9d5b61"
++        },
++        "protocol": {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/protocol-v2.md",
++          "sha256": "fbc20aae942ece7d4a79dbf0833144afc4539de3d55ea759f2eef8616d112c8d"
++        },
++        "feature_audit": {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/independent-feature-audit/audit-v2.md",
++          "sha256": "231dcb89cd76e779c76c7daf39b422490dd2fdef6a91026cc1223a146700ee35"
++        },
++        "block60": {
++          "path": "docs/experiments/raw/ma-cluster-information-2026-09-30/return-block60-run/result.json",
++          "sha256": "1c6ceb44c431129d501a2b32fcccc187858750ddeebfe068c11186099c502468"
++        }
++      }
+     }
+   ],
+   "projects": [
+@@ -148,5 +292,59 @@
+         "等待主控审阅设计与输入；真实历史描述另行冻结。"
+       ]
+     }
++  ],
++  "included_references": [
++    "mixed.momentum.raw@1.0.0",
++    "mixed.rv20@1.0.0",
++    "mixed.rv_percentile@1.0.0",
++    "mixed.volatility_allowed@1.0.0",
++    "mixed.momentum.rank@1.0.0",
++    "trend.sma50@1.0.0",
++    "trend.distance50@1.0.0",
++    "trend.above50@1.0.0",
++    "trend.cross_up50@1.0.0",
++    "trend.sma200@1.0.0",
++    "trend.distance200@1.0.0",
++    "trend.above200@1.0.0",
++    "trend.cross_up200@1.0.0",
++    "trend.recovered200@1.0.0",
++    "breadth.all_a.b50.common@1.0.0",
++    "breadth.all_a.b50.legacy_percent@1.0.0",
++    "breadth.all_a.delta50_20@1.0.0",
++    "breadth.all_a.b200.common@1.0.0",
++    "breadth.all_a.b200.legacy_percent@1.0.0",
++    "breadth.all_a.delta200_20@1.0.0",
++    "breadth.csi300.b50.common@1.0.0",
++    "breadth.csi300.b50.legacy_percent@1.0.0",
++    "breadth.csi300.delta50_20@1.0.0",
++    "breadth.csi300.b200.common@1.0.0",
++    "breadth.csi300.b200.legacy_percent@1.0.0",
++    "breadth.csi300.delta200_20@1.0.0",
++    "breadth.chinext.b50.common@1.0.0",
++    "breadth.chinext.b50.legacy_percent@1.0.0",
++    "breadth.chinext.delta50_20@1.0.0",
++    "breadth.chinext.b200.common@1.0.0",
++    "breadth.chinext.b200.legacy_percent@1.0.0",
++    "breadth.chinext.delta200_20@1.0.0",
++    "breadth.production.independent@1.0.0",
++    "breadth.daily_all_a.independent@1.0.0",
++    "breadth.three_tier@1.0.0",
++    "risk.product_account_weight@1.0.0",
++    "risk.direction_account_weight@1.0.0",
++    "risk.product_invested_weight@1.0.0",
++    "risk.profit_direction_share@1.0.0",
++    "etf.trend.sma50@1.0.0",
++    "etf.trend.above50@1.0.0",
++    "etf.trend.sma200@1.0.0",
++    "etf.trend.above200@1.0.0",
++    "etf.trend.price50.state@1.0.0",
++    "mixed.bias_ema120_pct@1.0.0",
++    "trend.cost_basis_distance20@1.0.0",
++    "mixed.pullback_ma_distance@1.0.0",
++    "trend.ma_cluster_width@1.0.0",
++    "mixed.swing_rr_distance@1.0.0",
++    "trend.cost_basis_distance20@2.0.0",
++    "mixed.pullback_ma_distance@2.0.0",
++    "research.trend.ma_cluster_width@1.0.0"
+   ]
+ }
+--- a/web/src/pages/factor-research/factor-overview.css
++++ b/web/src/pages/factor-research/factor-overview.css
+@@ -6,3 +6,7 @@
+ @media(max-width:680px){.fr-overview-categories{grid-template-columns:1fr}.fr-overview-categories button{grid-template-columns:minmax(0,1fr) auto;gap:4px 8px}.fr-overview-categories button span{grid-column:1/-1;grid-row:2}.fr-overview-study-head{align-items:start}.fr-overview-study-head button{flex:none}.fr-overview-lead{font-size:14px}}
+ @media(prefers-reduced-motion:reduce){.fr-research-overview *{scroll-behavior:auto}}
+ @media(max-width:300px){.fr-overview-study-head{flex-direction:column;align-items:stretch}.fr-overview-study-head button{width:100%}}
++
++.fr-study-reading{padding:18px 0;border-bottom:1px solid var(--fr-line);overflow-wrap:anywhere;max-width:100%}.fr-study-reading-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px}.fr-study-reading-head :is(h2,h3){font-size:16px;margin:0;line-height:1.6}.fr-study-reading-head button{flex:none;min-height:44px;padding:9px 12px;border:1px solid var(--fr-line);border-radius:4px;background:#fff;color:var(--fr-accent)}.fr-study-conclusion{max-width:80ch;line-height:1.7;font-size:15px;margin:10px 0}.fr-study-scope{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 24px;margin:12px 0;font-size:13px;line-height:1.6}.fr-study-scope>div{display:flex;gap:12px}.fr-study-scope dt{flex:0 0 6em;white-space:nowrap;color:var(--fr-muted)}.fr-study-scope dd{margin:0;min-width:0}.fr-study-limit{color:#664d2d;font-size:13px;line-height:1.7;margin:10px 0}.fr-study-review{font-size:12px;color:var(--fr-muted);line-height:1.7;margin:10px 0}.fr-study-more{font-size:13px;line-height:1.7;margin:8px 0;max-width:90ch}.fr-study-more summary{cursor:pointer;min-height:36px;align-content:center;color:var(--fr-accent)}.fr-study-more ul{padding-left:20px}.fr-study-more li+li{margin-top:6px}.fr-study-report-links{display:flex;gap:16px;flex-wrap:wrap}.fr-study-report-links a{display:inline-flex;align-items:center;min-height:36px;color:var(--fr-accent);font-size:13px}.fr-study-reading button:focus-visible,.fr-study-reading a:focus-visible,.fr-study-more summary:focus-visible{outline:2px solid var(--fr-accent);outline-offset:3px}
++@media(max-width:680px){.fr-study-reading-head{align-items:flex-start;gap:8px}.fr-study-reading-head :is(h2,h3){font-size:14px}.fr-study-reading-head button{font-size:12px;padding:8px}.fr-study-scope{grid-template-columns:1fr;gap:6px}.fr-study-conclusion{font-size:14px}}
++@media(max-width:300px){.fr-study-reading-head{flex-direction:column;align-items:stretch}.fr-study-reading-head button{width:100%}}
+--- a/web/src/pages/factor-research/model.test.mjs
++++ b/web/src/pages/factor-research/model.test.mjs
+@@ -121,8 +121,13 @@
+   const snapshot = JSON.parse(await readFile(new URL("./catalog.generated.json", import.meta.url), "utf8"));
+   const lookup = model.indexGuides(document);
+   assert.equal(document.schema_version, "factor-reading/1");
+-  assert.equal(lookup.size, snapshot.items.length);
+-  for (const card of snapshot.items) assert.ok(lookup.has(card.reference), `missing ${card.reference}`);
++  const newResearch = snapshot.items.find(card => card.reference === "research.trend.ma_cluster_width@1.0.0");
++  assert.ok(newResearch);
++  assert.equal(lookup.size, snapshot.items.length - 1);
++  for (const card of snapshot.items.filter(card => card !== newResearch)) assert.ok(lookup.has(card.reference), `missing ${card.reference}`);
++  assert.equal(lookup.get(newResearch.reference), undefined);
++  assert.equal(model.displayFactorName(newResearch, lookup), newResearch.name);
++  assert.notEqual(model.displayFactorName(newResearch, lookup), lookup.get("trend.ma_cluster_width@1.0.0")?.plain_name);
+   const old = lookup.get("trend.cost_basis_distance20@1.0.0");
+   const newer = lookup.get("trend.cost_basis_distance20@2.0.0");
+   assert.ok(old && newer);
+--- a/web/src/pages/factor-research/model.ts
++++ b/web/src/pages/factor-research/model.ts
+@@ -15,6 +15,9 @@
+   references: string[]; products: { code: string; name: string }[];
+   period: { start: string | null; end: string | null };
+   data_cutoff: string | null; run_at: string | null; reviewed_at: string | null;
++  target_horizon?: string; evaluation_period?: string; source_note?: string;
++  measure?: "prediction_error";
++  correction?: { status: "corrected" | "superseded"; note: string; sources: Source[] };
+   sample: { label: string; value: number | null; unit: string }[];
+   metrics: { label: string; value: number | null; unit: string; meaning: string }[];
+   result_tables: { title: string; columns: { key: string; label: string; unit: string }[]; rows: Record<string, string | number | null>[]; note: string }[];
+@@ -25,6 +28,7 @@
+   schema_version: "factor-research/1"; generated_at: string; registry_version: string;
+   sources: Source[]; counts: { factor_objects: number; definition_versions: number; executed_experiments: number };
+   limitations: string[]; items: FactorItem[]; experiments: Experiment[]; projects: Project[];
++  unintegrated_references?: string[];
+ };
+ export type ReadingGuide = {
+   references: string[]; plain_name: string; watch: string; read: string;
+--- a/web/src/pages/factor-research/study.test.mjs
++++ b/web/src/pages/factor-research/study.test.mjs
+@@ -0,0 +1,46 @@
++import assert from "node:assert/strict";
++import { test } from "node:test";
++import { createElement } from "react";
++import { renderToStaticMarkup } from "react-dom/server";
++import { build } from "esbuild";
++
++const built = await build({ entryPoints: [new URL("./StudyConclusion.tsx", import.meta.url).pathname], bundle: true, write: false, platform: "node", format: "esm", jsx: "automatic" });
++const { default: StudyConclusion } = await import(`data:text/javascript;base64,${Buffer.from(built.outputFiles[0].contents).toString("base64")}`);
++const study = (changes = {}) => ({
++  id: "study-a", title: "涨跌信息研究", kind: "predictive_study", conclusion: "限定范围有帮助", result: "supported",
++  run_status: "completed", review_status: "reviewed", review_summary: "有限复核，不能用于交易",
++  products: [{ code: "A", name: "产品甲" }], period: { start: "2024-01-01", end: "2024-12-31" },
++  target_horizon: "20日", data_cutoff: "2024-12-31", reviewed_at: "2025-02-01",
++  limitations: ["甲的主要限制", "甲的第二限制"],
++  sources: [{ path: "docs/experiments/original-a.md", sha256: "a".repeat(64), role: "report" }], ...changes,
++});
++const render = experiment => renderToStaticMarkup(createElement(StudyConclusion, { experiment, onOpen() {} }));
++
++test("opposite conclusions retain their own products, periods, horizon, cutoff and full limits", () => {
++  const first = render(study());
++  const second = render(study({ id: "study-b", title: "风险信息研究", conclusion: "没有帮助且风险更差", result: "no_help",
++    products: [{ code: "B", name: "产品乙" }], period: { start: "2025-01-01", end: "2025-06-30" },
++    target_horizon: "60日", data_cutoff: "2025-06-30", limitations: ["乙的主要限制", "乙的第二限制"] }));
++  for (const text of ["限定范围有帮助", "产品甲", "2024-01-01", "20日", "2024-12-31", "甲的主要限制", "甲的第二限制", "2025-02-01"]) assert.ok(first.includes(text), text);
++  for (const text of ["没有帮助且风险更差", "产品乙", "2025-01-01", "60日", "2025-06-30", "乙的主要限制", "乙的第二限制"]) assert.ok(second.includes(text), text);
++  assert.ok(!first.includes("产品乙") && !first.includes("乙的主要限制"));
++  assert.ok(!second.includes("产品甲") && !second.includes("甲的主要限制"));
++  assert.ok(first.includes("/library?report="));
++});
++
++test("unfinished evidence stays visible with unknown scope rather than a completed claim", () => {
++  const html = render(study({ id: "pending", run_status: "running", review_status: "pending", conclusion: "",
++    products: [], period: { start: null, end: null }, data_cutoff: null, target_horizon: undefined, reviewed_at: null, limitations: [], sources: [] }));
++  for (const text of ["pending", "尚未记录结论", "运行中", "待复核", "资料截至", "未核实", "原接入资料未单列"]) assert.ok(html.includes(text), text);
++  assert.ok(!html.includes("限定范围有帮助") && !html.includes("2024-12-31") && !html.includes("已运行"));
++});
++
++test("correction retains original conclusion and exposes its status and own source", () => {
++  const html = render(study({ correction: { status: "superseded", note: "原结论经资料更正，不再采用", sources: [{ path: "docs/experiments/correction-a.md", sha256: "b".repeat(64) }] }, source_note: "首次核对公式有误，错误记录保留" }));
++  for (const text of ["限定范围有帮助", "原结果已被更正替代", "更正状态", "原结论经资料更正，不再采用", "correction-a.md", "original-a.md", "错误记录保留"]) assert.ok(html.includes(text), text);
++});
++
++test("unsafe report paths cannot become reading links", () => {
++  const html = render(study({ sources: [{ path: "javascript:alert(1)", sha256: "c".repeat(64) }, { path: "docs/experiments/../secret.md", sha256: "d".repeat(64) }] }));
++  assert.ok(!html.includes('href="javascript:') && !html.includes('href="/library'));
++});
+--- a/web/src/pages/reportReader.test.mjs
++++ b/web/src/pages/reportReader.test.mjs
+@@ -0,0 +1,28 @@
++import assert from "node:assert/strict";
++import { test } from "node:test";
++import { createElement } from "react";
++import { renderToStaticMarkup } from "react-dom/server";
++import { build } from "esbuild";
++const built = await build({ entryPoints: [new URL("./ReportReader.tsx", import.meta.url).pathname], bundle:true, write:false, platform:"node", format:"esm", jsx:"automatic" });
++const { default: Reader } = await import(`data:text/javascript;base64,${Buffer.from(built.outputFiles[0].contents).toString("base64")}`);
++const path = "docs/experiments/ma-cluster-information-mae-artifact-2026-09-30.md";
++const render = changes => renderToStaticMarkup(createElement(Reader, {selected:path, loading:false, error:null, onBack(){}, ...changes}, createElement("h1",null,"M01限定范围正文")));
++test("deep link shows its exact report and provides a return to the unchanged list",()=>{
++  const html = render({report:{name:path}});
++  assert.ok(html.includes("M01限定范围正文") && html.includes("返回报告列表"));
++  assert.ok(!html.includes("点左侧任意报告"));
++});
++test("loading and failures cannot masquerade as unselected reports",()=>{
++  const pending = render({loading:true}); const failed=render({error:new Error("报告不存在")});
++  assert.ok(pending.includes('role="status"') && pending.includes("正在加载所选报告正文"));
++  assert.ok(failed.includes('role="alert"') && failed.includes("报告不存在"));
++  for (const html of [pending,failed]) assert.ok(!html.includes("M01限定范围正文") && !html.includes("点左侧任意报告"));
++});
++test("a different returned report cannot supply the selected report's conclusion",()=>{
++  const html = render({report:{name:"docs/experiments/other.md"}});
++  assert.ok(html.includes('role="alert"') && !html.includes("M01限定范围正文"));
++});
++test("returning to no selection retains list guidance without old report content",()=>{
++  const html = render({selected:null,report:{name:path}});
++  assert.ok(html.includes("点左侧任意报告") && !html.includes("M01限定范围正文"));
++});
+--- a/web/src/pages/reports-library.css
++++ b/web/src/pages/reports-library.css
+@@ -0,0 +1,10 @@
++.lib-reader{scroll-margin-top:76px;min-width:0}
++.lib-reader-back{min-height:44px;padding:8px 12px;margin-bottom:12px;color:var(--text-accent,var(--text));background:var(--bg-card);border:1px solid var(--border);border-radius:4px;cursor:pointer}
++.lib-reader-back:focus-visible{outline:2px solid var(--text-accent,#3054a4);outline-offset:3px}
++.lib-reader-bar{flex-wrap:wrap;overflow-wrap:anywhere}
++@media(max-width:900px){
++  .lib-page--reading .lib-list,.lib-page--reading .lib-filters,.lib-page--reading .lib-verdict-note,.lib-page--reading .lib-maintenance-note,.lib-page--reading .pg-head-kv,.lib-page--reading .pg-head-actions{display:none}
++  .lib-page--reading .lib-layout{grid-template-columns:minmax(0,1fr)}
++  .lib-page--reading .lib-reader{scroll-margin-top:152px;max-height:none;overflow:visible}
++  .lib-page:not(.lib-page--reading) .lib-reader{display:none}
++}

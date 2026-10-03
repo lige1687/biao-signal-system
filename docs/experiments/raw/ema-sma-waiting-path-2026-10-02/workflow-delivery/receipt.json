@@ -1,0 +1,28 @@
+{
+  "status": "engineering_completed",
+  "definition_ref": "research.trend.ema20_sma20_waiting_path@1.0.0",
+  "evaluator": "waiting_path_description@1.0.0",
+  "files": {
+    "src/lei_signal/research/workflow.py": "e3794c4cbc3a5bbfc18a32e190537ede8d1816f6cfa5202b220ff780fa0f03ba",
+    "src/lei_signal/research/workflow_inputs.py": "14b1d70bc428a1772d137bb000686fd0f57acc8c0f3557bb989bc3c29d205883",
+    "src/lei_signal/research/question_contract.py": "3193143928d21b1a97649f4b6b013faaaf6ed7b631ccb4644dd8899e785ade86",
+    "tests/unit/test_waiting_path_workflow.py": "373f4098c670e0f6640c5578b95341d86137db97781451ce6108fc7de538a885"
+  },
+  "strategy_sources": {
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "tests": {
+    "command": "PYTHONPATH=src PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest -q tests/unit/test_waiting_path_workflow.py tests/unit/test_ema_sma_waiting_path.py tests/unit/test_workflow_design_review.py tests/unit/test_question_contract.py tests/unit/test_workflow_inputs.py tests/integration/test_research_workflow_entry.py -p no:cacheprovider",
+    "passed": 134,
+    "seconds": 10.49
+  },
+  "hygiene": "passed",
+  "real_effect_runs": 0,
+  "real_fits": 0,
+  "network_requests": 0,
+  "production_changes": 0,
+  "registry_changes": 0,
+  "source_document_changes": 0,
+  "unresolved": []
+}

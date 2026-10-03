@@ -65,6 +65,7 @@ export default function TopNav() {
       { to: "/mindset", label: "认知心态" },
     ],
     [
+      { to: "/strategy", label: "技术体系" },
       { to: "/backtest", label: "回测" },
       { to: "/research", label: "本轮研究" },
       { to: "/library", label: "实验报告库" },

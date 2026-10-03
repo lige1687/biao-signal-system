@@ -1,0 +1,885 @@
+diff --git a/web/src/components/TopNav.tsx b/web/src/components/TopNav.tsx
+--- a/web/src/components/TopNav.tsx
++++ b/web/src/components/TopNav.tsx
+@@ -59,18 +59,18 @@
+     ],
+     [
+       { to: "/fundamentals", label: "基本面" },
+-      { to: "/factors", label: "因子研究" },
+       { to: "/news", label: "资讯流" },
+       { to: "/daily", label: "收盘简报" },
+       { to: "/mindset", label: "认知心态" },
+     ],
+     [
+       { to: "/strategy", label: "技术体系" },
++      { to: "/factors", label: "因子研究" },
++      { to: "/library", label: "实验报告库" },
++      { to: "/learning", label: "文献学习库" },
+       { to: "/backtest", label: "回测" },
+       { to: "/fwd", label: "前向成绩" },
+-      { to: "/research", label: "本轮研究" },
+-      { to: "/library", label: "实验报告库" },
+-      { to: "/learning", label: "文献学习库" },
++      { to: "/research", label: "历史研究回顾" },
+       { to: "/upgrades", label: "系统待升级" },
+     ],
+   ];
+diff --git a/web/src/pages/factor-research/FactorResearchPage.tsx b/web/src/pages/factor-research/FactorResearchPage.tsx
+--- a/web/src/pages/factor-research/FactorResearchPage.tsx
++++ b/web/src/pages/factor-research/FactorResearchPage.tsx
+@@ -5,9 +5,11 @@
+ import readingGuidance from "./reading-guidance.json";
+ import metricsGuidance from "./metrics-guidance.json";
+ import assessmentFramework from "./assessment-framework.json";
++import FactorResearchOverview from "./FactorResearchOverview";
++import { catalogAction, factorView } from "./overviewModel";
+ import "./factor-research.css";
+ 
+-const TAB_LABELS: Record<string, string> = { catalog: "因子库", experiments: "实验与组合", legacy: "旧行情快照" };
++const TAB_LABELS: Record<string, string> = { overview: "研究概览", catalog: "因子目录", experiments: "实验与组合", legacy: "旧行情快照" };
+ const display = (value: string | null | undefined) => value?.trim() || "未记录";
+ const date = (value: string | null | undefined) => value ? value.slice(0, 10) : "未记录";
+ const reading = (() => {
+@@ -125,6 +127,10 @@
+   const hasAccountValue = completedAccounts.some(experiment => accountMetricRows(metricGuide.account_metrics, experiment, item.reference).some(row => row.status === "available"));
+   return <article className="fr-detail fr-factor-detail fr-dossier" aria-label="因子研究档案" data-category={categoryTone(item.category)}>
+     <div className="fr-dossier-heading"><h2>{displayFactorName(item, guides)}</h2><div className="fr-meta-line"><span className="fr-category-tag" data-category={categoryTone(item.category)}>{item.category}</span><span>{typeLabels[item.object_type] ?? item.object_type}</span><span>v{item.version}</span></div></div>
++    <p className="fr-detail-question"><strong>观察什么：</strong>{guide?.watch || purposeText(item.purpose)}</p>
++    <p className="fr-detail-answer"><strong>当前结论：</strong>{outcome.headline}。{outcome.explanation}</p>
++    <p className="fr-detail-range"><strong>本次检查范围：</strong>{completedStudies.length ? completedStudies.map(study => `${study.products.map(product => product.name || product.code).join("、") || "产品未记录"}，${observationPeriod(study)}`).join("；") : "本页未接入该版本实验"}</p>
++    {(originalLimits[0] || item.limitations[0]) && <p className="fr-detail-limit"><strong>主要局限：</strong>{originalLimits[0]?.text ?? limitationText(item.limitations[0])}</p>}
+     {versions.length > 1 && <div className="fr-version-choice"><label htmlFor="fr-version">定义版本</label><select id="fr-version" value={item.reference} onChange={e => onVersionChange(e.target.value)}>{versions.map(version => <option key={version.reference} value={version.reference}>v{version.version}{version.reference === item.reference ? "（当前）" : ""}</option>)}</select><span>各版研究证据独立展示。</span></div>}
+     <nav className="fr-dossier-tabs" aria-label="档案内部页面">{dossierTabs.map(tab => <button key={tab.id} type="button" aria-current={section === tab.id ? "page" : undefined} className={section === tab.id ? "active" : ""} onClick={() => onSectionChange(tab.id)}>{tab.label}</button>)}</nav>
+     {section === "overview" && <div className="fr-dossier-panel" aria-label="总览">
+@@ -172,17 +178,17 @@
+   const outcome = factorOutcome(item);
+   const purpose = guide?.watch || purposeText(item.purpose);
+   if (compact) return <article className="fr-object-row" data-category={categoryTone(item.category)}>
+-    <div className="fr-row-identity"><span className="fr-category-tag" data-category={categoryTone(item.category)}>{item.category}</span><h3>{displayFactorName(item, guides)}</h3><p>{purpose}</p></div>
+-    <div className="fr-row-outcome" data-tone={outcome.tone}><strong>{outcome.headline}</strong></div>
+-    <div className="fr-row-scope">{study ? <><span>{study.products.length ? `${study.products.length} 个产品` : "产品未记录"}</span><small>{observationPeriod(study)} · {reviewLabels[study.review_status] ?? study.review_status}</small></> : <span>范围待补</span>}</div>
+-    <button type="button" className="fr-main-action fr-row-open" onClick={onOpen}>看结果</button>
++    <div className="fr-row-identity"><span className="fr-mobile-label">观察什么</span><span className="fr-category-tag" data-category={categoryTone(item.category)}>{item.category}</span><h3>{displayFactorName(item, guides)}</h3><p>{purpose}</p><small>v{item.version}{versions.length > 1 ? ` · 共${versions.length}版` : ""}</small></div>
++    <div className="fr-row-outcome" data-tone={outcome.tone}><span className="fr-mobile-label">已记录结论</span><strong>{outcome.headline}</strong></div>
++    <div className="fr-row-scope"><span className="fr-mobile-label">证据范围</span>{study ? <><span>{study.products.length ? `${study.products.length} 个产品` : "产品未记录"}</span><small>{observationPeriod(study)} · {reviewLabels[study.review_status] ?? study.review_status}</small></> : <span>本页未接入该版本实验</span>}</div>
++    <button type="button" className="fr-main-action fr-row-open" onClick={onOpen}>{catalogAction(item, experiments)}</button>
+   </article>;
+   return <article className="fr-object-card" data-category={categoryTone(item.category)}>
+     <div className="fr-card-top"><span className="fr-category-tag" data-category={categoryTone(item.category)}><span className="fr-category-mark" aria-hidden="true" />{item.category}</span><span className="fr-card-assets">v{item.version}{versions.length > 1 ? ` · 共${versions.length}版` : ""}</span></div>
+     <h3>{displayFactorName(item, guides)}</h3>
+     <p className="fr-grid-purpose">{purpose}</p><div className="fr-grid-outcome" data-tone={outcome.tone}><strong>{outcome.headline}</strong></div>
+-    <div className="fr-grid-scope">{study ? <><span>{study.products.length ? `${study.products.length} 个产品` : "产品未记录"}</span><small>{observationPeriod(study)} · {reviewLabels[study.review_status] ?? study.review_status}</small></> : <span>范围待补</span>}</div>
+-    <div className="fr-card-actions"><button type="button" className="fr-main-action" onClick={onOpen}>看结果</button>{linked.length > 0 && <button type="button" className="fr-text-action" onClick={() => onOpenExperiment(linked[0].id)}>看原实验</button>}</div>
++    <div className="fr-grid-scope">{study ? <><span>{study.products.length ? `${study.products.length} 个产品` : "产品未记录"}</span><small>{observationPeriod(study)} · {reviewLabels[study.review_status] ?? study.review_status}</small></> : <span>本页未接入该版本实验</span>}</div>
++    <div className="fr-card-actions"><button type="button" className="fr-main-action" onClick={onOpen}>{catalogAction(item, experiments)}</button>{linked.length > 0 && <button type="button" className="fr-text-action" onClick={() => onOpenExperiment(linked[0].id)}>看原实验</button>}</div>
+   </article>;
+ }
+ 
+@@ -190,7 +196,7 @@
+   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
+   const [loadError, setLoadError] = useState<string | null>(null);
+   const [params, setParams] = useSearchParams();
+-  const tab = TAB_LABELS[params.get("tab") ?? ""] ? params.get("tab")! : "catalog";
++  const tab = factorView(params);
+   const factor = params.get("factor");
+   const section = dossierSection(params.get("section"));
+   const experiment = params.get("experiment");
+@@ -206,6 +212,7 @@
+   const changeSection = (next: DossierSection) => { update({ section: next === "overview" ? null : next }); scrollTop(); };
+   const openExperiment = (id: string) => { update({ tab: "experiments", factor: null, section: null, experiment: id, project: null }); scrollTop(); };
+   const openProject = (id: string) => { update({ tab: "experiments", factor: null, section: null, experiment: null, project: id }); scrollTop(); };
++  const openCategory = (category: string) => { update({ tab: "catalog", category, q: null, asset: null, stage: null, result: null, page: null, factor: null, section: null, experiment: null, project: null }); scrollTop(); };
+ 
+   useEffect(() => {
+     let active = true;
+@@ -232,9 +239,9 @@
+   const hasStrategyComparison = snapshot?.experiments.some(e => e.kind === "strategy_backtest" || e.kind === "portfolio_comparison") ?? false;
+ 
+   return <main className="factor-research fr-redesign">
+-    <header className="fr-header"><div><h1>因子研究</h1><p>先了解每个研究对象的用途，再查看它目前有哪些真实证据。</p></div>{snapshot && <div className="fr-counts" aria-label="研究目录数量"><div><strong>{snapshot.counts.factor_objects}</strong><span>研究对象</span></div><div><strong>{snapshot.counts.definition_versions}</strong><span>定义版本</span></div><div><strong>{snapshot.counts.executed_experiments}</strong><span>已运行实验</span></div></div>}</header>
++    <header className="fr-header"><div><h1>因子研究</h1><p>先看已接入资料回答的问题、研究范围和缺口，再查精确版本与原始报告。</p><p className="fr-header-scope">本页材料整理于 {snapshot ? formatGeneratedAt(snapshot.generated_at) : "读取中"}，只覆盖已接入材料；未接入不等于未研究。生成日期、实验观察期和数据截止日各有不同含义。</p></div>{snapshot && <p className="fr-header-counts">已接入 {snapshot.counts.factor_objects} 个对象 · {snapshot.counts.definition_versions} 个定义版本 · {snapshot.counts.executed_experiments} 项已运行实验</p>}</header>
+     <nav className="fr-tabs" aria-label="因子研究视图">{Object.entries(TAB_LABELS).map(([key, label]) => <button type="button" key={key} className={tab === key ? "active" : ""} aria-current={tab === key ? "page" : undefined} onClick={() => { update({ tab: key, factor: null, section: null, experiment: null, project: null }); scrollTop(); }}>{label}</button>)}</nav>
+-    {tab === "legacy" ? <><div className="fr-legacy-banner"><strong>旧行情快照</strong><span>下方沿用原接口的标的读数与历史评级；这些评级不代表新研究目录的结论。</span></div>{legacy}</> : loadError ? <div className="fr-load-state" role="alert"><h2>研究快照暂时不可用</h2><p>{loadError}</p><p>需重新生成并核对来源文件；页面不会显示演示数据。</p></div> : !snapshot ? <div className="fr-load-state" role="status">正在载入研究材料…</div> : tab === "catalog" ? factor ? <div className="fr-full-detail">
++    {tab === "legacy" ? <><div className="fr-legacy-banner"><strong>旧行情快照</strong><span>下方沿用原接口的标的读数与历史评级；这些评级不代表新研究目录的结论。</span></div>{legacy}</> : loadError ? <div className="fr-load-state" role="alert"><h2>研究快照暂时不可用</h2><p>{loadError}</p><p>需重新生成并核对来源文件；页面不会显示演示数据。</p></div> : !snapshot ? <div className="fr-load-state" role="status">正在载入研究材料…</div> : tab === "overview" ? <FactorResearchOverview snapshot={snapshot} onCategory={openCategory} onExperiment={openExperiment} onCatalog={() => { update({ tab: "catalog", factor: null, experiment: null, project: null }); scrollTop(); }} /> : tab === "catalog" ? factor ? <div className="fr-full-detail">
+       <button type="button" className="fr-back" onClick={() => { update({ factor: null, section: null }); scrollTop(); }}>← 返回因子库</button>
+       {selectedFactor ? <FactorDetail item={selectedFactor} versions={selectedVersions} guides={reading.guides} experiments={snapshot.experiments} section={section} onSectionChange={changeSection} onOpenExperiment={openExperiment} onVersionChange={openFactor} /> : <div className="fr-empty" role="alert"><h2>没有找到这个精确版本</h2><code>{factor}</code><p>不会自动改选其他版本。请返回目录重新选择。</p></div>}
+     </div> : <>
+@@ -250,8 +257,8 @@
+         {filters.category === "宽度" && <p className="fr-category-explain">宽度：一批股票中，有多少站在各自均线上方。具体分母和均线周期以所选定义版本为准。</p>}
+         {(filters.query || filters.asset || filters.category || filters.stage || filters.result) && <button type="button" className="fr-clear" onClick={() => changeFilter({ q: null, asset: null, category: null, stage: null, result: null })}>清除全部筛选</button>}
+       </section>
+-      {groups.length ? <><section className={`fr-object-grid${view === "list" ? " is-list" : ""}`} aria-label="因子库对象">{pageData.rows.map(group => <CatalogCard key={group.id} group={group} guides={reading.guides} experiments={snapshot.experiments} compact={view === "list"} onOpen={() => openFactor(group.item.reference)} onOpenExperiment={openExperiment} />)}</section><nav className="fr-pagination" aria-label="目录分页"><button type="button" disabled={pageData.page <= 1} onClick={() => { update({ page: String(pageData.page - 1) }); scrollTop(); }}>上一页</button><span>第 {pageData.page} / {pageData.pages} 页</span><button type="button" disabled={pageData.page >= pageData.pages} onClick={() => { update({ page: String(pageData.page + 1) }); scrollTop(); }}>下一页</button></nav></> : <div className="fr-catalog-empty"><h2>没有符合条件的对象</h2><p>调整搜索或筛选条件后再看。</p><button type="button" onClick={() => changeFilter({ q: null, asset: null, category: null, stage: null, result: null })}>清除筛选</button></div>}
+-      {snapshot.projects.length > 0 && <section className="fr-project-strip"><div><h2>进行中的研究</h2><p>这些项目与正式定义、已运行实验分别记录。</p></div><div className="fr-project-links">{snapshot.projects.map(item => <button type="button" key={item.id} onClick={() => openProject(item.id)}><strong>{item.title}</strong><span>{statusText(item.stage, projectStageLabels)} · {item.summary}</span></button>)}</div></section>}
++      {groups.length ? <>{view === "list" && <div className="fr-list-columns" aria-hidden="true"><span>观察什么</span><span>已记录结论</span><span>证据范围</span><span>详情</span></div>}<section className={`fr-object-grid${view === "list" ? " is-list" : ""}`} aria-label="因子库对象">{pageData.rows.map(group => <CatalogCard key={group.id} group={group} guides={reading.guides} experiments={snapshot.experiments} compact={view === "list"} onOpen={() => openFactor(group.item.reference)} onOpenExperiment={openExperiment} />)}</section><nav className="fr-pagination" aria-label="目录分页"><button type="button" disabled={pageData.page <= 1} onClick={() => { update({ page: String(pageData.page - 1) }); scrollTop(); }}>上一页</button><span>第 {pageData.page} / {pageData.pages} 页</span><button type="button" disabled={pageData.page >= pageData.pages} onClick={() => { update({ page: String(pageData.page + 1) }); scrollTop(); }}>下一页</button></nav></> : <div className="fr-catalog-empty"><h2>没有符合条件的对象</h2><p>调整搜索或筛选条件后再看。</p><button type="button" onClick={() => changeFilter({ q: null, asset: null, category: null, stage: null, result: null })}>清除筛选</button></div>}
++      {snapshot.projects.length > 0 && <section className="fr-project-strip"><div><h2>材料快照中的研究项目</h2><p>这些项目与正式定义、已运行实验分别记录；状态来自本次材料快照。</p></div><div className="fr-project-links">{snapshot.projects.map(item => <button type="button" key={item.id} onClick={() => openProject(item.id)}><strong>{item.title}</strong><span>{statusText(item.stage, projectStageLabels)} · 证据日期 {date(item.evidence_date)} · {item.summary}</span></button>)}</div></section>}
+       <details className="fr-material-scope"><summary>材料范围与生成时间</summary><p>{reading.note}{reading.error && ` ${reading.error}`}</p><p>{metricGuide.note} 指标说明依据：{metricGuide.source_refs?.join("、") || "未记录"}。</p><p>生成于 {formatGeneratedAt(snapshot.generated_at)}；正式登记版本 {snapshot.registry_version}。生成时间不是实验日期或数据截止日。</p><p>目录计数只含已接入的数值描述、状态条件、风险指标与收益序列，不含策略或基准。</p><Notes title="材料限制" values={snapshot.limitations} /><SourceList sources={snapshot.sources} /></details>
+     </> : experiment || project ? <div className="fr-full-detail"><button type="button" className="fr-back" onClick={() => { update({ experiment: null, project: null }); scrollTop(); }}>← 返回实验与项目</button>{selectedExperiment ? <ExperimentDetail experiment={selectedExperiment} /> : selectedProject ? <ProjectDetail project={selectedProject} /> : <div className="fr-empty" role="alert"><h2>未找到这条研究记录</h2><p>请返回列表选择。</p></div>}</div> : <div className="fr-experiment-catalog"><div className="fr-section-heading"><h2>已接入的实验</h2><p>复核进度与研究结果分开显示。{!hasStrategyComparison && "当前尚无相应的含成本策略回测或组合对照。"}</p></div><div className="fr-experiment-grid">{snapshot.experiments.length ? snapshot.experiments.map(item => <article className="fr-experiment-card" key={item.id}><div className="fr-meta-line"><span>{kindLabels[item.kind] ?? item.kind}</span><span>{runLabels[item.run_status] ?? item.run_status}</span><StatusBadge tone={reviewTone(item.review_status)}>{reviewLabels[item.review_status] ?? item.review_status}</StatusBadge></div><h3>{item.title}</h3><p>{item.conclusion}</p><small>观察期 {date(item.period.start)} 至 {date(item.period.end)}</small><button type="button" className="fr-main-action" onClick={() => openExperiment(item.id)}>查看实验详情</button></article>) : <div className="fr-empty">尚无已接入实验。</div>}</div><div className="fr-section-heading fr-project-heading"><h2>研究项目</h2><p>项目计划不计入已运行实验。</p></div><div className="fr-experiment-grid">{snapshot.projects.map(item => <article className="fr-experiment-card" key={item.id}><div className="fr-meta-line"><span>研究项目</span><StatusBadge tone={item.stage === "in_progress" || item.stage === "insufficient" ? "attention" : "quiet"}>{statusText(item.stage, projectStageLabels)}</StatusBadge></div><h3>{item.title}</h3><p>{item.summary}</p><small>证据日期 {date(item.evidence_date)}</small><button type="button" className="fr-main-action" onClick={() => openProject(item.id)}>查看项目详情</button></article>)}</div></div>}
+   </main>;
+diff --git a/web/src/pages/factor-research/FactorResearchOverview.tsx b/web/src/pages/factor-research/FactorResearchOverview.tsx
+--- /dev/null
++++ b/web/src/pages/factor-research/FactorResearchOverview.tsx
+@@ -0,0 +1,32 @@
++import type { Snapshot } from "./model";
++import { catalogCounts, categoryObjectCounts, kindLabels, reviewLabels, runLabels } from "./model";
++import "./factor-overview.css";
++
++const questions: Record<string, string> = {
++  趋势: "价格处在怎样的趋势中",
++  回调位置: "价格离已有参照位置有多远",
++  相对强弱: "哪些产品相对更强",
++  风险: "波动和下跌风险怎样",
++  宽度: "走强是普遍现象还是少数股票",
++};
++
++export default function FactorResearchOverview({ snapshot, onCategory, onExperiment, onCatalog }: {
++  snapshot: Snapshot; onCategory: (category: string) => void; onExperiment: (id: string) => void; onCatalog: () => void;
++}) {
++  const counts = catalogCounts(snapshot.items, snapshot.experiments);
++  const categories = categoryObjectCounts(snapshot.items);
++  return <div className="fr-research-overview">
++    <p className="fr-overview-lead">因子，就是把一个观察写成可计算的指标。本页先帮助你看清已接入资料回答了什么、在哪些产品和日期检查，以及还有什么缺口。</p>
++    <p className="fr-overview-counts">已接入 {counts.factor_objects} 个研究对象、{counts.definition_versions} 个定义版本、{counts.executed_experiments} 项已运行实验。候选登记与正式对象分开统计。</p>
++    <section aria-labelledby="fr-overview-evidence"><h2 id="fr-overview-evidence">已接入实验怎么说</h2>
++      {snapshot.experiments.length ? snapshot.experiments.map(experiment => <article className="fr-overview-study" key={experiment.id}>
++        <div className="fr-overview-study-head"><h3>{experiment.title}</h3><button type="button" onClick={() => onExperiment(experiment.id)}>查看实验详情</button></div>
++        <p>{experiment.conclusion || "这项实验尚未记录结论。"}</p>
++        <p className="fr-overview-study-meta">{kindLabels[experiment.kind] ?? experiment.kind} · {experiment.products.length ? experiment.products.map(product => product.name || product.code).join("、") : "产品未记录"} · 观察期 {experiment.period.start?.slice(0, 10) ?? "未记录"} 至 {experiment.period.end?.slice(0, 10) ?? "未记录"} · {runLabels[experiment.run_status] ?? experiment.run_status} · {reviewLabels[experiment.review_status] ?? experiment.review_status}</p>
++        <p className="fr-overview-study-limit"><strong>主要限制：</strong>{experiment.limitations[0] ?? "未记录，请查看实验详情核对适用范围。"}</p>
++      </article>) : <p>当前快照没有已接入实验；这里不展示演示结论。</p>}
++    </section>
++    <section aria-labelledby="fr-overview-questions"><h2 id="fr-overview-questions">按问题找因子</h2><div className="fr-overview-categories">{Object.entries(categories).map(([category, count]) => <button type="button" key={category} onClick={() => onCategory(category)}><strong>{category}</strong><span>{questions[category] ?? "查看定义范围"}</span><small>{count} 个对象</small></button>)}</div><button type="button" className="fr-overview-all" onClick={onCatalog}>查看完整因子目录</button></section>
++    <section aria-labelledby="fr-overview-materials"><h2 id="fr-overview-materials">继续查原始资料</h2><div className="fr-overview-links"><a href="/strategy?collection=factor-guide&doc=research-guide">研究指南</a><a href="/strategy?collection=factor-guide&doc=candidate-registry">候选注册表</a><a href="/library">全部实验报告</a></div><p>候选登记不等于正式定义，定义与实验也不等于获准交易。</p></section>
++  </div>;
++}
+diff --git a/web/src/pages/factor-research/overviewModel.ts b/web/src/pages/factor-research/overviewModel.ts
+--- /dev/null
++++ b/web/src/pages/factor-research/overviewModel.ts
+@@ -0,0 +1,17 @@
++import { linkedExperiments, type Experiment, type FactorItem } from "./model";
++
++export type FactorView = "overview" | "catalog" | "experiments" | "legacy";
++
++export function factorView(params: URLSearchParams): FactorView {
++  if (params.get("factor")) return "catalog";
++  if (params.get("experiment") || params.get("project")) return "experiments";
++  const tab = params.get("tab");
++  if (tab === "overview" || tab === "catalog" || tab === "experiments" || tab === "legacy") return tab;
++  return ["q", "asset", "category", "stage", "result", "page", "sort", "view"]
++    .some(key => Boolean(params.get(key))) ? "catalog" : "overview";
++}
++
++export function catalogAction(item: FactorItem, experiments: Experiment[]): string {
++  if (linkedExperiments(item, experiments).some(experiment => experiment.run_status === "completed")) return "查看证据";
++  return item.research.stage === "in_progress" ? "查看进展" : "查看定义";
++}
+diff --git a/web/src/pages/factor-research/overview.test.mjs b/web/src/pages/factor-research/overview.test.mjs
+--- /dev/null
++++ b/web/src/pages/factor-research/overview.test.mjs
+@@ -0,0 +1,25 @@
++import assert from "node:assert/strict";
++import { test } from "node:test";
++import { build } from "esbuild";
++
++const built = await build({ entryPoints: [new URL("./overviewModel.ts", import.meta.url).pathname], bundle: true, write: false, platform: "node", format: "esm" });
++const model = await import(`data:text/javascript;base64,${Buffer.from(built.outputFiles[0].contents).toString("base64")}`);
++
++test("overview preserves existing deep links and filters", () => {
++  for (const [query, expected] of [
++    ["", "overview"], ["tab=overview", "overview"], ["tab=legacy", "legacy"],
++    ["factor=a%401.0.0", "catalog"], ["experiment=e1", "experiments"],
++    ["project=p1", "experiments"], ["category=宽度", "catalog"],
++    ["q=均线", "catalog"], ["tab=unknown", "overview"],
++  ]) assert.equal(model.factorView(new URLSearchParams(query)), expected, query);
++});
++
++test("catalog action follows only completed experiments linked to the exact version", () => {
++  const item = (reference, stage = "historical") => ({ reference, experiment_ids: ["e1"], research: { stage } });
++  const completed = [{ id: "e1", references: ["a@1.0.0"], run_status: "completed" }];
++  assert.equal(model.catalogAction(item("a@1.0.0"), completed), "查看证据");
++  assert.equal(model.catalogAction(item("a@2.0.0"), completed), "查看定义");
++  assert.equal(model.catalogAction(item("a@1.0.0", "calculation_only"), []), "查看定义");
++  assert.equal(model.catalogAction(item("a@1.0.0", "in_progress"), []), "查看进展");
++  assert.equal(model.catalogAction(item("a@1.0.0", "unbound"), []), "查看定义");
++});
+diff --git a/web/src/pages/factor-research/factor-overview.css b/web/src/pages/factor-research/factor-overview.css
+--- /dev/null
++++ b/web/src/pages/factor-research/factor-overview.css
+@@ -0,0 +1,8 @@
++.fr-research-overview{max-width:1280px;margin:22px auto 0;color:var(--fr-ink)}
++.fr-research-overview>p{max-width:86ch}.fr-overview-lead{font-size:16px;line-height:1.7}.fr-overview-counts{font-size:13px;color:var(--fr-muted)}
++.fr-research-overview section{margin-top:28px}.fr-research-overview section h2{font-size:17px;border-bottom:1px solid var(--fr-line);padding-bottom:8px}
++.fr-overview-study{padding:15px 0;border-bottom:1px solid var(--fr-line)}.fr-overview-study-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px}.fr-overview-study-head h3{font-size:15px;margin:0}.fr-overview-study-head button,.fr-overview-all,.fr-overview-links a{min-height:44px;color:var(--fr-accent);background:#fff;border:1px solid var(--fr-line);border-radius:4px;padding:10px 14px;text-decoration:none}.fr-overview-study>p{font-size:14px;line-height:1.65;margin:8px 0}.fr-overview-study .fr-overview-study-meta{font-size:12px;color:var(--fr-muted)}.fr-overview-study .fr-overview-study-limit{font-size:13px;color:#664d2d}
++.fr-overview-categories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}.fr-overview-categories button{display:grid;grid-template-columns:140px minmax(0,1fr) auto;gap:12px;text-align:left;align-items:center;border:0;border-bottom:1px solid var(--fr-line);padding:14px 0;background:transparent;min-height:54px;color:var(--fr-ink)}.fr-overview-categories button:hover strong{color:var(--fr-accent)}.fr-overview-categories small{color:var(--fr-muted)}.fr-overview-all{margin-top:16px}.fr-overview-links{display:flex;gap:10px;flex-wrap:wrap}.fr-research-overview section>p{margin-top:9px;color:var(--fr-muted);font-size:13px}
++@media(max-width:680px){.fr-overview-categories{grid-template-columns:1fr}.fr-overview-categories button{grid-template-columns:minmax(0,1fr) auto;gap:4px 8px}.fr-overview-categories button span{grid-column:1/-1;grid-row:2}.fr-overview-study-head{align-items:start}.fr-overview-study-head button{flex:none}.fr-overview-lead{font-size:14px}}
++@media(prefers-reduced-motion:reduce){.fr-research-overview *{scroll-behavior:auto}}
++@media(max-width:300px){.fr-overview-study-head{flex-direction:column;align-items:stretch}.fr-overview-study-head button{width:100%}}
+diff --git a/web/src/pages/factor-research/factor-research.css b/web/src/pages/factor-research/factor-research.css
+--- a/web/src/pages/factor-research/factor-research.css
++++ b/web/src/pages/factor-research/factor-research.css
+@@ -87,5 +87,9 @@
+ .fr-user-outcome{--fr-outcome:#526177;--fr-bg:#f2f5f8;border-left:4px solid var(--fr-outcome);background:var(--fr-bg);padding:15px 19px;margin:11px 0 9px}.fr-user-outcome[data-tone="attention"]{--fr-outcome:#986a2c;--fr-bg:#fbf5ea}.fr-user-outcome[data-tone="history"]{--fr-outcome:#7153a0;--fr-bg:#f4f0fa}.fr-user-outcome[data-tone="neutral"]{--fr-outcome:#526177;--fr-bg:#f0f3f7}.fr-user-outcome>span{font-size:12px;color:var(--fr-outcome);font-weight:650}.fr-redesign .fr-user-outcome h3{font-size:25px;line-height:1.25;margin:3px 0 5px;color:var(--fr-outcome)}.fr-user-outcome>p{font-size:14px;line-height:1.55;margin:0}.fr-user-outcome details{margin-top:7px}.fr-user-outcome summary{font-size:12px;color:var(--fr-accent);cursor:pointer}.fr-user-outcome details p{font-size:12px;line-height:1.55;margin:6px 0 3px}.fr-user-outcome details small{font-size:12px;color:var(--fr-muted)}.fr-user-answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.fr-user-answers>section{border:1px solid var(--fr-line);background:#fff;padding:12px 14px}.fr-redesign .fr-user-answers h3{font-size:14px;margin:0 0 6px}.fr-user-answers p{font-size:13px;line-height:1.55;margin:0 0 4px}.fr-user-answers small{font-size:12px;line-height:1.45;color:var(--fr-muted)}.fr-user-numbers,.fr-deep-material{margin-top:9px;border-top:1px solid var(--fr-line);padding:7px 0}.fr-user-numbers summary,.fr-deep-material>summary{font-size:12px;color:var(--fr-accent);cursor:pointer}.fr-user-numbers>div{display:flex;flex-wrap:wrap;gap:5px 18px;margin-top:7px}.fr-user-numbers p{font-size:13px;line-height:1.5;margin:0}.fr-user-numbers span{font-size:12px;color:var(--fr-muted)}.fr-deep-material>.fr-dossier-scope{margin:10px 0}.fr-deep-material>.fr-dense-topic-grid{margin:8px 0}
+ @media(max-width:1050px){.fr-object-grid.is-list .fr-object-row{grid-template-columns:minmax(170px,1fr) minmax(190px,1.2fr) minmax(150px,1fr) auto}.fr-row-purpose{display:none}}
+ @media(max-width:680px){.fr-object-grid.is-list .fr-object-row{grid-template-columns:minmax(0,1fr) auto}.fr-row-identity{grid-column:1;grid-row:1}.fr-row-open{grid-column:2;grid-row:1;align-self:start}.fr-row-outcome{grid-column:1/-1;grid-row:2}.fr-row-scope{grid-column:1/-1;grid-row:3}.fr-user-answers{grid-template-columns:1fr}.fr-redesign .fr-user-outcome h3{font-size:22px}.fr-user-outcome{padding:12px 14px}.fr-outcome-shortcuts button{padding:5px 7px}}
++.fr-redesign .fr-header{align-items:start}.fr-redesign .fr-header .fr-header-scope{font-size:12px;line-height:1.55;color:var(--fr-muted);max-width:82ch;margin-top:7px}.fr-header-counts{font-size:12px;color:var(--fr-muted);white-space:nowrap;margin:4px 0 0}.fr-detail-question,.fr-detail-answer,.fr-detail-range,.fr-detail-limit{font-size:13px;line-height:1.55;margin:6px 0;overflow-wrap:anywhere}.fr-detail-question{margin-top:13px}.fr-detail-limit{color:#71532d}.fr-redesign .fr-row-open,.fr-redesign .fr-card-actions .fr-main-action{min-height:44px}
++.fr-list-columns{max-width:1280px;margin:12px auto 6px;display:grid;grid-template-columns:minmax(220px,1.15fr) minmax(270px,1.4fr) minmax(200px,1fr) auto;gap:12px;padding:0 13px;color:var(--fr-muted);font-size:12px}.fr-mobile-label{display:none}.fr-row-identity small{font-size:12px;color:var(--fr-muted)}
++@media(max-width:900px){.fr-header-counts{white-space:normal}}
++@media(max-width:680px){.fr-list-columns{display:none}.fr-mobile-label{display:block;font-size:12px;font-weight:500;color:var(--fr-muted);grid-column:1/-1}.fr-row-outcome .fr-mobile-label{color:var(--fr-muted);font-size:12px}.fr-row-identity .fr-mobile-label{grid-column:1/-1}.fr-row-identity small{grid-column:1/-1}}
+ .fr-object-grid.is-list .fr-row-identity{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;justify-items:start;gap:3px 7px}.fr-object-grid.is-list .fr-row-identity h3{grid-column:2;min-width:0}.fr-object-grid.is-list .fr-row-identity p{grid-column:1/-1}.fr-redesign .fr-full-detail .fr-detail .fr-user-outcome h3{font-size:24px;line-height:1.28}.fr-redesign .fr-full-detail .fr-detail .fr-user-outcome>p{font-size:13px}.fr-user-answers details{margin-top:5px}.fr-user-answers summary{color:var(--fr-accent);font-size:12px;cursor:pointer}.fr-user-answers details p{font-size:12px;overflow-wrap:anywhere;margin-top:5px}
+ @media(max-width:680px){.fr-redesign .fr-full-detail .fr-detail .fr-user-outcome h3{font-size:22px}}
+diff --git a/web/src/pages/FundamentalsPage.tsx b/web/src/pages/FundamentalsPage.tsx
+--- a/web/src/pages/FundamentalsPage.tsx
++++ b/web/src/pages/FundamentalsPage.tsx
+@@ -1,6 +1,7 @@
+ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+ import { Fragment, useMemo, useState } from "react";
+ import { useNavigate } from "react-router-dom";
++import "./reference-reading.css";
+ import { api, fundamentalsApi } from "../api/client";
+ import OverlayChart, { type OverlayMode, type OverlaySeries } from "../components/trend/OverlayChart";
+ import Sparkline from "../components/trend/Sparkline";
+@@ -1961,10 +1962,10 @@
+ /** 分区页签：原来 5 段纵向堆叠近万素深，「翻个东西要滚到最底」；改为点选直达。
+  *  id 沿用锚点名并同步到 URL hash，刷新/深链保持当前分区。 */
+ const FUND_SECTIONS: { id: string; label: string; tip: string }[] = [
+-  { id: "fund-sec-market", label: "市场", tip: "宽度 + 情绪（最有用）" },
++  { id: "fund-sec-market", label: "市场环境", tip: "当前宽度与情绪、产品强弱和历史变化" },
+   { id: "fund-sec-rates", label: "利率", tip: "价格的标尺 / 资本的成本" },
+   { id: "fund-sec-overlay", label: "长周期叠加", tip: "利率 / 两融 × 股指（20 年级，可滑动缩放）" },
+-  { id: "fund-sec-macro", label: "消费", tip: "就业 / 物价 / 景气" },
++  { id: "fund-sec-macro", label: "经济与物价", tip: "就业 / 物价 / 景气" },
+   { id: "fund-sec-usmacro", label: "美国宏观", tip: "就业 / 房产 / 汽车 / WEI / 物价 / 订单（FRED）" },
+ ];
+ 
+@@ -1995,12 +1996,12 @@
+     queryFn: () => fundamentalsApi.rates(),
+     staleTime: 5 * 60_000,
+   });
+-  const { data: ratesHist } = useQuery({
++  const { data: ratesHist, error: ratesHistError } = useQuery({
+     queryKey: ["fundamentalsRatesHistory", ratesLookback],
+     queryFn: () => fundamentalsApi.ratesHistory(ratesLookback),
+     staleTime: 30 * 60_000,
+   });
+-  const { data: macroHist } = useQuery({
++  const { data: macroHist, error: macroHistError } = useQuery({
+     queryKey: ["fundamentalsMacroHistory", 60],
+     queryFn: () => fundamentalsApi.macroHistory(60),
+     staleTime: 30 * 60_000,
+@@ -2037,8 +2038,12 @@
+ 
+   const allErrors = [
+     ...(ov?.errors ?? []),
++    ...(ovError ? [`概览：${ovError instanceof Error ? ovError.message : String(ovError)}`] : []),
++    ...(ratesError ? [`利率：${ratesError instanceof Error ? ratesError.message : String(ratesError)}`] : []),
+     ...(rates?.errors ?? []),
++    ...(ratesHistError ? [`利率历史：${ratesHistError instanceof Error ? ratesHistError.message : String(ratesHistError)}`] : []),
+     ...(ratesHist?.errors ?? []),
++    ...(macroHistError ? [`经济历史：${macroHistError instanceof Error ? macroHistError.message : String(macroHistError)}`] : []),
+     ...(macroHist?.errors ?? []),
+     ...(commoditiesError
+       ? [`大宗商品：${commoditiesError instanceof Error ? commoditiesError.message : String(commoditiesError)}`]
+@@ -2046,7 +2051,7 @@
+   ];
+ 
+   return (
+-    <div className="page">
++    <div className="page fund-reading-page">
+       <div className="pg-head">
+         <div className="pg-head-title">
+           <h1>基本面参考</h1>
+@@ -2059,7 +2064,7 @@
+           </span>
+           <span className="pg-kv">
+             <span className="k">数据源</span>
+-            <b>{ov ? (allErrors.length > 0 ? `${allErrors.length} 项不可用` : "全部可用") : "未知"}</b>
++            <b>{ov ? (allErrors.length > 0 ? "概览数据源：部分不可用" : "概览数据源：本次未报告错误") : "未知"}</b>
+           </span>
+         </div>
+         <div className="pg-head-actions">
+@@ -2102,7 +2107,9 @@
+       {/* ── ① 市场 ── */}
+       {activeSection === "fund-sec-market" && (
+         <>
++          <div className="reference-reading-group"><h2>当前市场：宽度与情绪</h2><p>宽度是一批股票中有多少站在各自均线上方；这里展示现有市场读数。</p></div>
+           <MarketSection onOpen={setDrawer} />
++          <div className="reference-reading-group"><h2>进一步查看：产品强弱与历史变化</h2><p>历史叠图只用于观察同期变化，不能据此认定原因或交易效果。</p></div>
+           <EtfStrengthSection />
+           <SentimentViews />
+         </>
+diff --git a/web/src/pages/SentimentPage.tsx b/web/src/pages/SentimentPage.tsx
+--- a/web/src/pages/SentimentPage.tsx
++++ b/web/src/pages/SentimentPage.tsx
+@@ -2,6 +2,7 @@
+ import { sentimentApi } from "../api/client";
+ import { etfsForSector } from "../data/sectorEtfMap";
+ import SentimentSectorBlock, { UsSectorBlock } from "../components/SentimentSectorBlock";
++import "./reference-reading.css";
+ import "./sentiment.css"; // S14 页面级样式：趋势图视觉中心（禁写共享 styles.css）
+ import type { SentimentDashboard } from "../types";
+ 
+@@ -87,22 +88,28 @@
+     <div className="page sent-page">
+       {head(data)}
+ 
++      <nav className="reference-reading-nav" aria-label="情绪页内容"><a href="#sent-overall">整体状态</a><a href="#sent-sectors">板块情况</a><a href="#sent-prompts">系统现有提示</a><a href="#sent-indicators">指标说明</a><a href="#sent-history">历史信号</a></nav>
++
+       {/* ── 第一屏结论条：一句话回答"现在怎样、要不要行动" ── */}
++      <div id="sent-overall" className="reference-reading-anchor"><h2>整体状态</h2></div>
+       <VerdictBar data={data} />
+ 
+       {/* ── 板块情绪主区块（用户重点：图表化、持仓优先、推荐观察） ── */}
++      <div id="sent-sectors" className="reference-reading-anchor"><h2>板块情况</h2><p>下方展示板块当前读数和已有观察列表。</p></div>
+       {data.sector_boards?.available && (
+         <SentimentSectorBlock
+           view={data.sector_boards}
+           heatAvailable={data.sector_heat.available}
+-          heatHint="散户热度分位（散户相对大资金的活跃度）数据重建中，约 9 月底恢复后叠加到各板块"
++          heatHint="散户热度分位数据暂不可用，恢复后显示"
+         />
+       )}
++      {!data.sector_boards?.available && <p className="muted">板块情绪数据暂不可用；当前不展示板块结论。</p>}
+ 
+       {/* ── 美股板块情绪（11 GICS 行业，对标 A股） ── */}
+       {data.us_sector_boards?.available && <UsSectorBlock view={data.us_sector_boards} />}
+ 
+       {/* ── 行动区：有信号时给操作卡 + 持仓风险 ── */}
++      <div id="sent-prompts" className="reference-reading-anchor"><h2>系统现有提示</h2><p>保留系统原有提示条件；情绪只作环境标注。</p></div>
+       {data.action?.available && (nPicks > 0 || nAlarms > 0 || holdDanger.length > 0) && (
+         <section className="mood-action">
+           {(data.action.opportunity_cards ?? []).map((c) => (
+@@ -157,6 +164,7 @@
+         </section>
+       )}
+ 
++      <div id="sent-indicators" className="reference-reading-anchor"><h2>指标说明</h2></div>
+       <div className="mood-grid">
+         <CnMoodCard cn={cn} />
+         <MarketStructureCard data={data} />
+@@ -165,6 +173,7 @@
+       </div>
+ 
+       {/* ── 两个经过历史验证的情绪信号：结构化卡片，激活/未激活一眼可见 ── */}
++      <div id="sent-history" className="reference-reading-anchor"><h2>历史信号</h2></div>
+       <SignalCards cn={cn} />
+ 
+       <div className="muted mood-note" style={{ marginTop: 10 }}>{data.disclaimer_cn}</div>
+@@ -224,7 +233,7 @@
+ };
+ 
+ function CnMoodCard({ cn }: { cn: SentimentDashboard["cn_mood"] }) {
+-  const state = cn.state ?? "中";
++  const state = cn.state ?? "未知";
+   const tone = state === "热" ? "danger" : state === "冷" ? "info" : "neutral";
+   const verdict = state === "热"
+     ? "散户整体情绪偏热——多数指标向上，追高需谨慎"
+@@ -239,19 +248,20 @@
+     <section className="sx-rail-card mood-card">
+       <CardHead
+         title="全A情绪（散户视角）"
+-        badge={<Badge tone={tone}>{state === "热" ? "偏热" : state === "冷" ? "偏冷" : "中性"}</Badge>}
++        badge={<Badge tone={tone}>{state === "热" ? "偏热" : state === "冷" ? "偏冷" : state === "中" ? "中性" : "数据不足"}</Badge>}
+         verdict={verdict}
+         verdictColor={MOOD_TONE[state]}
+       />
+       <div className="mood-comp" style={{ marginTop: 4 }}>
+         <span>投票结果</span>
+-        <b><span className="up">{hotVotes} 票热</span> / <span className="down">{coldVotes} 票冷</span></b>
+-      </div>
+-      {Object.entries(cn.components ?? {}).map(([k, c]) => {
++        <b>{Object.keys(cn.components ?? {}).length ? <><span className="up">{hotVotes} 票热</span> / <span className="down">{coldVotes} 票冷</span></> : "未取得数据"}</b>
++      </div>
++      <p className="reference-vote-note">三个现有指标各投一票；缺失数据不作零票或正常值显示。</p>
++      {Object.entries(cn.components ?? {}).sort(([a], [b]) => (Object.keys(CN_COMP_EXPLAIN).indexOf(a) + 4) % 4 - (Object.keys(CN_COMP_EXPLAIN).indexOf(b) + 4) % 4).map(([k, c]) => {
+         const ex = CN_COMP_EXPLAIN[k] ?? { name: c.label_cn, hint: "" };
+         // 金额类（亿）超过 1 万亿换算成「万亿」展示，避免一长串数字
+         const fmtVal = () => {
+-          if (!c.ok || c.value == null) return <span className="muted">不可用</span>;
++          if (!c.ok || c.value == null) return <span className="muted">未取得数据{c.as_of ? `（${c.as_of}）` : "（日期未记录）"}</span>;
+           const v = c.value;
+           const shown = c.unit === "亿" && Math.abs(v) >= 10000
+             ? `${v > 0 ? "+" : ""}${(v / 10000).toFixed(2)}万亿`
+diff --git a/web/src/components/SentimentSectorBlock.tsx b/web/src/components/SentimentSectorBlock.tsx
+--- a/web/src/components/SentimentSectorBlock.tsx
++++ b/web/src/components/SentimentSectorBlock.tsx
+@@ -487,9 +487,11 @@
+           </div>
+         </>
+       )}
++      {watchedBoards.length === 0 && <p className="muted">暂无自选观察板块。</p>}
+ 
+       {/* 持仓相关板块 */}
+       <div className="sb-sub-title" style={{ marginTop: 14 }}>持仓相关板块（{holdings.length} 个 · 点卡片看对照图）</div>
++      {holdings.length === 0 && <p className="muted">暂无持仓相关板块。</p>}
+       <div className="sb-hold-grid">
+         {holdings.map((b) => <HoldingBoardCard key={b.code} b={b} onOpen={() => open(b)} />)}
+       </div>
+@@ -518,6 +520,7 @@
+       <div className="sb-sub-title" style={{ marginTop: 16 }}>
+         全部大板块排行（{view.n_boards} 个 · 强度从高到低 · 蓝边=持仓相关 · ★=我的观察 · 点柱子看对照图）
+       </div>
++      {view.boards.length === 0 && <p className="muted">当前没有可展示的板块排行数据。</p>}
+       <AllBoardsChart boards={view.boards} watch={watch} onOpen={open} />
+ 
+       <div className="muted mood-note">
+@@ -591,9 +594,11 @@
+           </div>
+         </>
+       )}
++      {watched.length === 0 && <p className="muted">暂无自选观察行业。</p>}
+ 
+       {/* 全部行业卡（点开看对照图） */}
+       <div className="sb-sub-title" style={{ marginTop: 14 }}>全部行业（点卡片看「价格 × 情绪」对照图）</div>
++      {boards.length === 0 && <p className="muted">当前没有可展示的行业数据。</p>}
+       <div className="sb-hold-grid">
+         {boards.map((b) => (
+           <BoardCard key={b.code} b={b} onOpen={() => open(b)} pctLabel="近20日" />
+diff --git a/web/src/pages/reference-reading.css b/web/src/pages/reference-reading.css
+--- /dev/null
++++ b/web/src/pages/reference-reading.css
+@@ -0,0 +1,4 @@
++.fund-reading-page .reference-reading-group,.sent-page .reference-reading-anchor{margin:20px 0 10px;scroll-margin-top:84px}
++.fund-reading-page .reference-reading-group h2,.sent-page .reference-reading-anchor h2{font-size:16px;line-height:1.4;margin:0 0 4px;color:var(--text-primary)}
++.fund-reading-page .reference-reading-group p,.sent-page .reference-reading-anchor p,.sent-page .reference-vote-note{font-size:13px;line-height:1.6;color:var(--text-secondary);margin:0 0 9px}
++.sent-page .reference-reading-nav{display:flex;flex-wrap:wrap;gap:8px 18px;margin:12px 0 18px}.sent-page .reference-reading-nav a{color:var(--accent);font-size:13px;min-height:44px;display:inline-flex;align-items:center}.sent-page .reference-reading-nav a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+diff --git a/web/src/pages/ResearchPage.tsx b/web/src/pages/ResearchPage.tsx
+--- a/web/src/pages/ResearchPage.tsx
++++ b/web/src/pages/ResearchPage.tsx
+@@ -2,6 +2,7 @@
+ import FlagshipSection from "../components/FlagshipSection";
+ import { REPORTS_INDEX } from "../data/reportsIndex";
+ import * as echarts from "echarts";
++import "./page-reading.css";
+ import {
+   FALSIFIED,
+   FUNDAMENTAL_PANEL,
+@@ -76,7 +77,7 @@
+     <div className="page rs-page">
+       <div className="pg-head">
+         <div className="pg-head-title">
+-          <h1>{SESSION_META.title}</h1>
++          <h1>历史研究回顾</h1>
+           <span className="pg-head-sub">
+             所有结论都先写死标准再跑数据（防止事后找理由）· 每个结果都重跑两遍验证一致
+           </span>
+@@ -85,11 +86,13 @@
+           <span className="pg-kv"><span className="k">周期</span><b>{SESSION_META.dateRange}</b></span>
+           <span className="pg-kv"><span className="k">轮次</span><b>{SESSION_META.rounds} 轮</b></span>
+           <span className="pg-kv"><span className="k">判定量</span><b>约 {SESSION_META.hypothesisCount} 组</b></span>
+-          <span className="pg-kv"><span className="k">详细档案</span><b>{SESSION_META.reports.join(" · ")}</b></span>
+-        </div>
+-      </div>
++          <span className="pg-kv"><span className="k">详细档案</span><b>{SESSION_META.reports.length} 份，见下方</b></span>
++        </div>
++      </div>
++      <p className="rs-history-note">{SESSION_META.title} · {SESSION_META.dateRange}。这是当时的研究记录；查看已接入的因子证据请到 <a href="/factors">因子研究</a>。</p>
++      <details className="rs-source-paths"><summary>查看当时的原始档案路径</summary><ul>{SESSION_META.reports.map(path => <li key={path}><code>{path}</code></li>)}</ul></details>
+       <div className="rs-lede">
+-        {OPS_LINE}
++        <strong>当时的运行安排：</strong>{OPS_LINE}
+       </div>
+ 
+       <div className="card-grid">
+@@ -130,7 +133,7 @@
+         </table>
+         <div className="rs-takeaway">{SEMANTIC_CLOSEOUT.takeaway}</div>
+       </Section>
+-      <Section title="报告存档" sub="多路回测统一归档 · 自包含离线 HTML · 仓库 web/public/reports/">
++      <Section title="报告存档" sub="多路回测统一归档 · 自包含离线 HTML">
+         <div className="rs-report-wall">
+           {REPORTS_INDEX.map((r) => (
+             <a key={r.id} href={r.href} target="_blank" rel="noreferrer" className="rs-report-link">
+@@ -139,9 +142,7 @@
+             </a>
+           ))}
+         </div>
+-        <div className="rs-note">
+-          新增报告：HTML 放 web/public/reports/，条目追加到 web/src/data/reportsIndex.ts（只追加，不改别人的）。
+-        </div>
++        <details className="rs-note"><summary>维护说明</summary><p>新增报告：HTML 放 web/public/reports/，条目追加到 web/src/data/reportsIndex.ts（只追加，不改别人的）。</p></details>
+       </Section>
+       <Section title="① 仓位方案比拼" sub="同样 100 万 · 同样十年 · 同样的买卖点，只有仓位管法不同">
+         <GateChart />
+diff --git a/web/src/pages/ReportsLibraryPage.tsx b/web/src/pages/ReportsLibraryPage.tsx
+--- a/web/src/pages/ReportsLibraryPage.tsx
++++ b/web/src/pages/ReportsLibraryPage.tsx
+@@ -4,6 +4,7 @@
+ import { useSearchParams } from "react-router-dom";
+ import { experimentsApi } from "../api/client";
+ import type { ExperimentReportItem, ExperimentVerdict } from "../types";
++import "./page-reading.css";
+ 
+ /**
+  * 实验报告库：历史上所有实验/调研文档的统一浏览入口。
+@@ -52,7 +53,7 @@
+         <VerdictBadge v={item.verdict} />
+       </div>
+       <div className="lib-row-oneliner">
+-        {item.oneLiner || "（未写「一句话结论」小节——点开看正文；新报告请按规约补写）"}
++        {item.oneLiner || "该报告尚未整理一句话结论，可打开正文查看。"}
+       </div>
+     </div>
+   );
+@@ -171,6 +172,8 @@
+         />
+         <span className="count">{items.length} 份</span>
+       </div>
++      <p className="lib-verdict-note">“成立”或“证伪”只针对报告提出的研究问题，不等于获准交易。</p>
++      <details className="lib-maintenance-note"><summary>查看登记与维护说明</summary><p>分类和结论状态来自 docs/experiments/registry.json；新报告按 AGENTS.md 的归档规约登记。</p></details>
+ 
+       <div className="lib-layout">
+         <div className="lib-list">
+diff --git a/web/src/pages/LearningLibraryPage.tsx b/web/src/pages/LearningLibraryPage.tsx
+--- a/web/src/pages/LearningLibraryPage.tsx
++++ b/web/src/pages/LearningLibraryPage.tsx
+@@ -3,6 +3,7 @@
+ import { useSearchParams } from "react-router-dom";
+ import { learningApi } from "../api/client";
+ import type { LearningEntry, LearningPaper, LearningResponse } from "../types";
++import "./page-reading.css";
+ 
+ /**
+  * 文献学习库：以论文为线索的学习目录（独立学习层，不参与交易判定）。
+@@ -378,6 +379,8 @@
+         </span>
+       </h3>
+ 
++      <p className="lr-footnote">与本系统的关系：{e.system_relation}；采用状态：{e.adoption_status}；内容状态：{e.content_status}。</p>
++
+       <div className="lr-sec"><span className="lr-label">要学会回答的问题</span><p>{e.question}</p></div>
+       <div className="lr-sec"><span className="lr-label">作者研究了什么（转述摘要，非原文引用）</span><p>{e.author_finding_summary}</p></div>
+       <div className="lr-sec">
+@@ -391,7 +394,7 @@
+ 
+       {e.practice_steps.length > 0 && (
+         <div className="lr-sec">
+-          <span className="lr-label">应用步骤</span>
++          <span className="lr-label">应用步骤 <em className="lr-tag">学习用</em></span>
+           <ol className="lr-list">{e.practice_steps.map((s, i) => <li key={i}>{s}</li>)}</ol>
+         </div>
+       )}
+@@ -426,7 +429,6 @@
+             <span className="lr-missing">链接的本地报告暂缺（{e.local_research_path}）</span>
+           )}
+         </div>
+-        <p className="lr-footnote">{e.system_relation}（{e.adoption_status}；{e.content_status}）</p>
+       </div>
+ 
+       <details className="lr-quiz">
+diff --git a/web/src/pages/StrategySystemPage.tsx b/web/src/pages/StrategySystemPage.tsx
+--- a/web/src/pages/StrategySystemPage.tsx
++++ b/web/src/pages/StrategySystemPage.tsx
+@@ -176,6 +176,7 @@
+     {guide && <section className="strategy-guide-intro" aria-label="因子指南包说明">
+       <p>研究指南、候选注册表与模板。候选登记和研究优先级不代表已验证、已实现或获准交易。
+         指导包不替代两份权威技术文档；接入时指纹只用于识别文件变化。</p>
++      <Link to="/factors">查看已接入研究结果</Link>
+       <label htmlFor="strategy-guide-document">包内资料</label>
+       <select id="strategy-guide-document" value={selectedId ?? ""} disabled={!ids.length}
+         onChange={(event) => {
+@@ -195,13 +196,13 @@
+         : "源文件已变化，尚未确认。当前内容可以阅读，但不能据此扩大或缩小因子研究范围。"}
+     </div>}
+     {source && <section className="strategy-provenance" aria-label="来源与职责">
+-      <p><strong>{source.title}</strong> · {source.role}</p>
+-      <dl>
++      <p><strong>{source.title}</strong> · {source.role} · {sourceLabels[source.approvalStatus]} · 更新时间：{source.modifiedAt ? new Date(source.modifiedAt).toLocaleString("zh-CN") : "不可用"}</p>
++      <details><summary>查看来源路径与指纹</summary><dl>
+         <dt>真实路径</dt><dd>{source.path}</dd>
+         <dt>当前 SHA-256</dt><dd>{source.currentSha256 ?? "源文件缺失，无法计算"}</dd>
+         <dt>{guide ? "接入时 SHA-256" : "已确认 SHA-256"}</dt><dd>{guide ? source.baseline_sha256 : source.approved_sha256}</dd>
+         <dt>{guide ? "接入日期" : "确认日期"}</dt><dd>{guide ? source.recorded_at : source.confirmed_at}</dd>
+-      </dl>
++      </dl></details>
+     </section>}
+     {detailQuery.isFetching && !detail && selectedId && <p role="status">正在读取文档…</p>}
+     {detailQuery.isError && <div className="strategy-source-alert" role="alert">
+diff --git a/web/src/pages/strategy-system.css b/web/src/pages/strategy-system.css
+--- a/web/src/pages/strategy-system.css
++++ b/web/src/pages/strategy-system.css
+@@ -37,6 +37,7 @@
+ .strategy-provenance dl { display: grid; grid-template-columns: 125px minmax(0, 1fr); gap: 6px 16px; margin: 0; }
+ .strategy-provenance dt { color: var(--text-faint); }
+ .strategy-provenance dd { margin: 0; font-family: ui-monospace, monospace; font-size: 12px; overflow-wrap: anywhere; }
++.strategy-provenance details{margin-top:6px}.strategy-provenance summary{cursor:pointer;color:var(--accent);font-size:12px;min-height:32px}.strategy-provenance details dl{padding-top:10px}.strategy-guide-intro>a{display:inline-flex;min-height:44px;align-items:center;color:var(--accent)}
+ .strategy-reader-layout { display: grid; grid-template-columns: 250px minmax(0, 780px); justify-content: center; gap: clamp(24px, 4vw, 64px); margin-top: 32px; align-items: start; }
+ .strategy-toc { position: sticky; top: var(--strategy-scroll-offset); max-height: calc(100vh - var(--strategy-scroll-offset) - 24px); overflow-y: auto; scrollbar-width: thin; padding-right: 14px; }
+ .strategy-toc h2 { font-size: 13px; color: var(--text-faint); margin: 0 0 12px; }
+diff --git a/web/src/pages/OpsPage.tsx b/web/src/pages/OpsPage.tsx
+--- a/web/src/pages/OpsPage.tsx
++++ b/web/src/pages/OpsPage.tsx
+@@ -110,7 +110,7 @@
+         </section>
+ 
+         <section className="ops-section">
+-          <h3>③ 计划待办</h3>
++          <h3>② 计划待办</h3>
+           {ops.plan_todos.length === 0 && <div className="ops-empty">暂无待办。</div>}
+           {ops.plan_todos.map((t) => (
+             <div key={t.action_id} className="cp-row">
+@@ -130,7 +130,7 @@
+         </section>
+ 
+         <section className="ops-section">
+-          <h3>④ 观察触发</h3>
++          <h3>③ 观察触发</h3>
+           {ops.watch_triggers.length === 0 && <div className="ops-empty">暂无观察项。</div>}
+           {ops.watch_triggers.map((l, i) => (
+             <div key={i} className="cp-row">
+@@ -147,7 +147,7 @@
+         </section>
+ 
+         <section className="ops-section span-all" id="ops-sentiment">
+-          <h3>⑤ 情绪面（叙事标注，不构成判定）</h3>
++          <h3>④ 情绪面（叙事标注，不构成判定）</h3>
+           {ops.sentiment?.margin_cn && (
+             <div className="cp-row">
+               <span className="cp-sym">融资环境</span>
+@@ -186,7 +186,7 @@
+ 
+         {ops.major_events?.available && ops.major_events.items.length > 0 && (
+           <section className="ops-section span-all">
+-            <h3>⑥ 近3日重大事件（客观参考，不构成判定）</h3>
++            <h3>⑤ 近3日重大事件（客观参考，不构成判定）</h3>
+             {ops.major_events.items.map((e, i) => (
+               <div key={i} className="cp-row ops-major">
+                 <span className="ops-major-meta">
+@@ -208,7 +208,7 @@
+         )}
+ 
+         <section className="ops-section span-all" id="ops-recommend">
+-          <h3>② 今日推荐</h3>
++          <h3>{ops.major_events?.available && ops.major_events.items.length > 0 ? "⑥" : "⑤"} 今日推荐</h3>
+           {ops.recommendations ? (
+             <RecommendCardView card={ops.recommendations} />
+           ) : (
+diff --git a/web/src/pages/page-reading.css b/web/src/pages/page-reading.css
+--- /dev/null
++++ b/web/src/pages/page-reading.css
+@@ -0,0 +1,4 @@
++.rs-page .rs-history-note{font-size:13px;line-height:1.6;color:var(--text-secondary);margin:10px 0 16px}.rs-page .rs-history-note a{color:var(--accent)}.rs-page .rs-note summary{cursor:pointer;color:var(--accent)}
++.rs-page .rs-source-paths{font-size:12px;color:var(--text-secondary);margin-bottom:12px}.rs-page .rs-source-paths summary{cursor:pointer;color:var(--accent)}.rs-page .rs-source-paths code{overflow-wrap:anywhere}.rs-page .rs-section{min-width:0;overflow-x:auto}
++.lib-page .lib-verdict-note{font-size:13px;line-height:1.6;color:var(--text-secondary);margin:8px 0}.lib-page .lib-maintenance-note{font-size:12px;color:var(--text-secondary);margin-bottom:12px}.lib-page .lib-maintenance-note summary{cursor:pointer;color:var(--accent)}
++.lr-entry>.lr-footnote{margin:7px 0 13px;color:var(--text-secondary);font-size:13px;line-height:1.6}
+diff --git a/docs/archive/handoffs-plans/2026-09-30-frontend-readability-sol-plan.md b/docs/archive/handoffs-plans/2026-09-30-frontend-readability-sol-plan.md
+--- a/docs/archive/handoffs-plans/2026-09-30-frontend-readability-sol-plan.md
++++ b/docs/archive/handoffs-plans/2026-09-30-frontend-readability-sol-plan.md
+@@ -1,6 +1,6 @@
+ # 前端阅读顺序与因子研究入口改进 Implementation Plan
+ 
+-> **For agentic workers:** REQUIRED SUB-SKILL: Use `executing-plans` to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. 本次只交付计划；用户将自行交给 Sol 实施，不在规划任务中继续写产品代码。
++> **For agentic workers:** REQUIRED SUB-SKILL: Use `executing-plans` to implement this plan task-by-task. Steps use checkbox syntax for tracking. 用户已于 2026-09-30 授权交 Sol 实施；实际完成与未实测项见验收记录。
+ 
+ **Goal:** 让用户进入页面后，先知道这里回答什么问题，再看现有结论、证据范围与缺口，最后按需查阅原始资料。
+ 
+@@ -8,7 +8,7 @@
+ 
+ **Tech Stack:** React 18、TypeScript、React Router、TanStack Query、现有 ECharts、现有 Node 测试工具。
+ 
+-**日期：** 2026-09-30。**状态：** 计划已整理，等待用户交给 Sol 执行。任务框尚未勾选，不表示实现完成。
++**日期：** 2026-09-30。**状态：** Sol 已按冻结合同实施展示层，等待主负责人独立复核。任务框只勾真实完成项；未勾不表示其它研究结论失效。
+ 
+ ## 一、范围与已有事实
+ 
+@@ -73,11 +73,11 @@
+ 
+ **接口与行为：** 不增删路由；只调整导航数组中的归属、顺序与展示名称。
+ 
+-- [ ] 记录任务文件动手前的内容、既有暂存区和未跟踪文件状态。确认本计划是本次授权范围。
+-- [ ] 将 `{ to: "/factors", label: "因子研究" }` 从资讯组移至策略研究组，位于技术体系之后。随后放实验报告库、文献学习库，其余研究入口仍可达。
+-- [ ] 将 `/research` 标签改为“历史研究回顾”，与 Task 5 页头一致。不改路由。
++- [x] 记录任务文件动手前的内容、既有暂存区和未跟踪文件状态。确认本计划是本次授权范围。
++- [x] 将 `{ to: "/factors", label: "因子研究" }` 从资讯组移至策略研究组，位于技术体系之后。随后放实验报告库、文献学习库，其余研究入口仍可达。
++- [x] 将 `/research` 标签改为“历史研究回顾”，与 Task 5 页头一致。不改路由。
+ - [ ] 若需要菜单说明，仅给研究入口增加一行短说明：技术体系“查规则与实现依据”、因子研究“看问题、证据和缺口”、实验报告库“查每次研究的原始报告”、文献学习库“了解方法与采用状态”。仅应用于折叠菜单，不能让常驻导航变成两行长说明。
+-- [ ] 保留当前页面高亮、点击外部收起、跳转后收起、Escape 收起并回到菜单标题的行为。确认因子页高亮“策略研究”。
++- [x] 保留当前页面高亮、点击外部收起、跳转后收起、Escape 收起并回到菜单标题的行为。确认因子页高亮“策略研究”。
+ 
+ **验收：** 桌面与 390px 窄屏能通过主导航找到因子研究和原报告；全部旧入口存在；键盘能展开、选择并退出菜单；不改情绪灯点或持仓提醒数据。
+ 
+@@ -94,7 +94,7 @@
+ 
+ **接口：** `FactorResearchOverview` 接收 `snapshot: Snapshot`、`onCategory(category: string): void`、`onExperiment(id: string): void`、`onCatalog(): void`。只展示已有字段；数量复用 `catalogCounts`、分类数量复用 `categoryObjectCounts`，不把实验结果合成“有效因子数”。
+ 
+-- [ ] 先在 `overviewModel.ts` 定义并测试以下 URL 兼容函数。优先保留已有对象/实验深链接；普通 `/factors` 才进入概览。
++- [x] 先在 `overviewModel.ts` 定义并测试以下 URL 兼容函数。优先保留已有对象/实验深链接；普通 `/factors` 才进入概览。
+ 
+ ```ts
+ export type FactorView = "overview" | "catalog" | "experiments" | "legacy";
+@@ -126,13 +126,13 @@
+ });
+ ```
+ 
+-- [ ] 页签增加“研究概览”，原 `catalog` 仅改中文为“因子目录”；已有参数值不更名。页签切换仍清除对象/实验详情参数，保留已有筛选的返回体验。
+-- [ ] 页头加入“本页材料整理于〔generated_at〕，只覆盖已接入材料；未接入不等于未研究”。把对象、定义版本、实验数量改为一行辅助信息。生成日期、实验观察期、数据截止日分别显示，不能互相替代。
+-- [ ] 将当前“进行中的研究”标题改为“材料快照中的研究项目”，保留原项目状态、摘要和证据日期；避免把旧快照的项目描述当成实时进度。
+-- [ ] 概览首段解释“因子”后，逐项呈现已接入实验的原结论、类型、研究产品、观察期、复核状态、首项限制和“查看实验详情”。不把负面或限定结论藏起来；原文太长可展开，但首项限制不能截掉关键否定词。
+-- [ ] 分类入口使用现有分类名称，只解释用户问题：趋势“价格处在怎样的趋势中”、回调位置“价格离已有参照位置有多远”、相对强弱“哪些产品相对更强”、风险“波动和下跌风险怎样”、宽度“走强是普遍现象还是少数股票”。这些是目录说明，具体定义仍以精确版本为准。未来未知类别显示原名称与“查看定义范围”。
+-- [ ] 分类点击写入 `tab=catalog&category=分类`，清除会冲突的搜索、资产、阶段、结果、页码和详情参数；不能点完得到用户无法理解的空集。
+-- [ ] 增加只读资料入口：研究指南 `/strategy?collection=factor-guide&doc=research-guide`、候选注册表 `/strategy?collection=factor-guide&doc=candidate-registry`、报告库 `/library`。候选登记不纳入正式对象数量。情绪、机构情绪等入口沿用技术体系页既有研究扩展区，不在因子目录编造未登记对象。
++- [x] 页签增加“研究概览”，原 `catalog` 仅改中文为“因子目录”；已有参数值不更名。页签切换仍清除对象/实验详情参数，保留已有筛选的返回体验。
++- [x] 页头加入“本页材料整理于〔generated_at〕，只覆盖已接入材料；未接入不等于未研究”。把对象、定义版本、实验数量改为一行辅助信息。生成日期、实验观察期、数据截止日分别显示，不能互相替代。
++- [x] 将当前“进行中的研究”标题改为“材料快照中的研究项目”，保留原项目状态、摘要和证据日期；避免把旧快照的项目描述当成实时进度。
++- [x] 概览首段解释“因子”后，逐项呈现已接入实验的原结论、类型、研究产品、观察期、复核状态、首项限制和“查看实验详情”。不把负面或限定结论藏起来；原文太长可展开，但首项限制不能截掉关键否定词。
++- [x] 分类入口使用现有分类名称，只解释用户问题：趋势“价格处在怎样的趋势中”、回调位置“价格离已有参照位置有多远”、相对强弱“哪些产品相对更强”、风险“波动和下跌风险怎样”、宽度“走强是普遍现象还是少数股票”。这些是目录说明，具体定义仍以精确版本为准。未来未知类别显示原名称与“查看定义范围”。
++- [x] 分类点击写入 `tab=catalog&category=分类`，清除会冲突的搜索、资产、阶段、结果、页码和详情参数；不能点完得到用户无法理解的空集。
++- [x] 增加只读资料入口：研究指南 `/strategy?collection=factor-guide&doc=research-guide`、候选注册表 `/strategy?collection=factor-guide&doc=candidate-registry`、报告库 `/library`。候选登记不纳入正式对象数量。情绪、机构情绪等入口沿用技术体系页既有研究扩展区，不在因子目录编造未登记对象。
+ - [ ] 快照缺失、格式不兼容、实验为空时显示实际空态；不显示演示结论，不回退成旧行情评级。
+ 
+ **验收：** 打开 `/factors`，无需展开页尾即可说出材料日期和范围；两项现有实验仍保留各自限定结论；旧精确版本 URL、实验 URL、筛选 URL 刷新后有效；数量来自实际材料，不写死 49/51/2。
+@@ -148,7 +148,7 @@
+ 
+ **接口：** 复用 `factorOutcome(item)`、`linkedExperiments(item, experiments)`、`groupCatalog`、`displayFactorName`、`dossierFacts`。关联必须同时满足实验 ID 和精确 `reference`，不把旧版证据挪到新版。
+ 
+-- [ ] 在 `overviewModel.ts` 添加下述按钮文案函数，测试“准确关联”“同对象不同版本”“计算核对”“研究进行中”“未接入”五种情况；它只决定入口文字，不改变研究状态。
++- [x] 在 `overviewModel.ts` 添加下述按钮文案函数，测试“准确关联”“同对象不同版本”“计算核对”“研究进行中”“未接入”五种情况；它只决定入口文字，不改变研究状态。
+ 
+ ```ts
+ import { linkedExperiments, type FactorItem, type Experiment } from "./model";
+@@ -158,12 +158,12 @@
+ }
+ ```
+ 
+-- [ ] 列表增加可见列说明“观察什么 / 已记录结论 / 证据范围 / 详情”；移动端每行保留字段标签。将笼统“范围待补”改为“本页未接入该版本实验”，不能说该对象从未研究。
+-- [ ] 多版本对象显示当前选中版本，仍可进入全部版本；旧版有实验、新版没有时，新版不显示旧版结论。多项实验的范围不能拼成虚构的大样本。
+-- [ ] 详情首段按“观察什么 → 当前结论 → 本次在哪些产品和日期检查 → 主要局限”组织，复用现有说明和实验字段。原公式、时间可用性、详细指标和八方面核对保留在下层页签/展开区。
+-- [ ] 保留各类缺口的原区分：只核对计算、证据未接入、已研究但证据不足、本次没有帮助。不能用同一个灰色“待完善”替代，也不能添加总分。
+-- [ ] 搜索结果为空给“清除筛选”；加载失败给实际原因。单项资料缺失不能让整个因子目录消失。
+-- [ ] 检查原实验中的数值、单位、日期、基准、成本和限制逐项未变化；不把价格变化当账户收益，不把每年正负数量直接叫稳定性。
++- [x] 列表增加可见列说明“观察什么 / 已记录结论 / 证据范围 / 详情”；移动端每行保留字段标签。将笼统“范围待补”改为“本页未接入该版本实验”，不能说该对象从未研究。
++- [x] 多版本对象显示当前选中版本，仍可进入全部版本；旧版有实验、新版没有时，新版不显示旧版结论。多项实验的范围不能拼成虚构的大样本。
++- [x] 详情首段按“观察什么 → 当前结论 → 本次在哪些产品和日期检查 → 主要局限”组织，复用现有说明和实验字段。原公式、时间可用性、详细指标和八方面核对保留在下层页签/展开区。
++- [x] 保留各类缺口的原区分：只核对计算、证据未接入、已研究但证据不足、本次没有帮助。不能用同一个灰色“待完善”替代，也不能添加总分。
++- [x] 搜索结果为空给“清除筛选”；加载失败给实际原因。单项资料缺失不能让整个因子目录消失。
++- [x] 检查原实验中的数值、单位、日期、基准、成本和限制逐项未变化；不把价格变化当账户收益，不把每年正负数量直接叫稳定性。
+ 
+ **验收用例：** 普通动量仍显示本次未发现帮助；完整排名仍是计算核对；未接入版本不出现“看结果”；同对象切换旧/新版不串证据；返回目录、浏览器后退、刷新后筛选与页码符合原 URL；长名称和长限制在窄屏可读。
+ 
+@@ -179,13 +179,13 @@
+ 
+ **接口：** 所有接口参数、请求频率、图表数据、投票、筛选规则与判定沿用现状。分组组件只包现有 JSX，不重新计算状态。
+ 
+-- [ ] 基本面页签保留原 hash ID：`fund-sec-market` 显示“市场环境”，`fund-sec-macro` 显示“经济与物价”；其余“利率 / 长周期叠加 / 美国宏观”保持。将“最有用”等笼统提示换成该分区实际包含的信息。
+-- [ ] 市场区加入两个清楚分组：MarketSection 前为“当前市场：宽度与情绪”；EtfStrengthSection、SentimentViews 前为“进一步查看：产品强弱与历史变化”。说明历史叠图用于观察同期变化，不能据此认定原因或交易效果。保留原组件顺序和抽屉。
+-- [ ] 基本面页头的“数据源”状态须诚实反映所检查接口的范围：不能仅因 `overview/rates` 无错误就宣称所有分区全部可用。不新增数据探测；显示为“概览数据源：本次未报告错误/部分不可用”，各分区保留自己的加载与缺失提示。
+-- [ ] 情绪页给现有区块加层级标题或短锚点目录：整体状态、板块情况、系统现有提示、指标说明、历史信号。保持原有提示及行动卡的位置和条件，本轮不增强其交易号召，也不改 `VerdictBar` 推断、`plan_cn`、`win_rate_cn` 等含义。
+-- [ ] 全 A 情绪卡将已有投票说明紧邻投票结果，三个现有指标按当前映射稳定排列；缺失项显示“未取得数据”及实际日期，不将空值当零。沿用现有方向和投票规则，不增删指标。
+-- [ ] 板块观察、持仓、推荐等已有列表为空时给具体空态，例如“暂无持仓相关板块”，但有加载/不可用状态时优先显示该状态，不冒称“没有”。原全板块排行保留，不在本轮新增推荐筛选算法。
+-- [ ] 对“约 9 月底恢复”等写死的未来日期，改为由现有 `available` 状态决定的“数据暂不可用，恢复后显示”；不承诺后台修复时间，不触发重建。
++- [x] 基本面页签保留原 hash ID：`fund-sec-market` 显示“市场环境”，`fund-sec-macro` 显示“经济与物价”；其余“利率 / 长周期叠加 / 美国宏观”保持。将“最有用”等笼统提示换成该分区实际包含的信息。
++- [x] 市场区加入两个清楚分组：MarketSection 前为“当前市场：宽度与情绪”；EtfStrengthSection、SentimentViews 前为“进一步查看：产品强弱与历史变化”。说明历史叠图用于观察同期变化，不能据此认定原因或交易效果。保留原组件顺序和抽屉。
++- [x] 基本面页头的“数据源”状态须诚实反映所检查接口的范围：不能仅因 `overview/rates` 无错误就宣称所有分区全部可用。不新增数据探测；显示为“概览数据源：本次未报告错误/部分不可用”，各分区保留自己的加载与缺失提示。
++- [x] 情绪页给现有区块加层级标题或短锚点目录：整体状态、板块情况、系统现有提示、指标说明、历史信号。保持原有提示及行动卡的位置和条件，本轮不增强其交易号召，也不改 `VerdictBar` 推断、`plan_cn`、`win_rate_cn` 等含义。
++- [x] 全 A 情绪卡将已有投票说明紧邻投票结果，三个现有指标按当前映射稳定排列；缺失项显示“未取得数据”及实际日期，不将空值当零。沿用现有方向和投票规则，不增删指标。
++- [x] 板块观察、持仓、推荐等已有列表为空时给具体空态，例如“暂无持仓相关板块”，但有加载/不可用状态时优先显示该状态，不冒称“没有”。原全板块排行保留，不在本轮新增推荐筛选算法。
++- [x] 对“约 9 月底恢复”等写死的未来日期，改为由现有 `available` 状态决定的“数据暂不可用，恢复后显示”；不承诺后台修复时间，不触发重建。
+ 
+ **验收：** 所有页签及 hash 深链接有效；有数据、缺失、错误三态可区分；图表点击和缩放保持；无额外网络调用；情绪状态、提示条件、投票与原接口逐项一致。任何发现的“已验证/机会”措辞与研究证据冲突只记入问题清单，交用户裁定其含义，不顺手改策略。
+ 
+@@ -203,12 +203,12 @@
+ 
+ **接口：** 只改显示顺序、标题、链接、折叠区与编号；保留所有读取、筛选、报告渲染和执行操作处理函数。
+ 
+-- [ ] `/research` 页头改为“历史研究回顾”，原研究题目与 2026-08-27 至 28 日日期保留；增加“查看因子研究”链接 `/factors`。静态运行安排标为“当时的运行安排”；`web/public/reports` 等路径放“维护说明”展开区。
+-- [ ] 报告库在结论筛选旁解释“成立/证伪针对报告提出的研究问题，不等于获准交易”，原分类、枚举和计数保持。缺一句话结论时显示“该报告尚未整理一句话结论，可打开正文查看”；登记文件路径和维护要求收进展开区，原警示仍可见。
+-- [ ] 文献学习内容的 `system_relation`、`adoption_status`、`content_status` 原样移到标题下，在应用步骤之前；应用步骤加“学习用”标签。未知状态保持未知，不补造采用结论。
+-- [ ] 技术体系页始终显示文档名称、职责、来源状态和更新时间；完整路径与当前/已确认指纹放在“查看来源路径与指纹”原生 `details` 内。未确认变化警告、读取失败、缺失路径与恢复办法保持常显，不因折叠降低可见性。
+-- [ ] 因子指南包保留中文切换和包内选择器，增加“查看已接入研究结果”链接 `/factors`。候选注册表、正式定义和真实实验保持各自身份；模板不显示为已完成研究。
+-- [ ] 今日操作页按当前 DOM 显示顺序只修编号：①持仓、②计划、③观察、④情绪、⑤事件、⑥推荐；事件不显示时推荐为⑤。禁止重排执行顺序或改变操作按钮行为。
++- [x] `/research` 页头改为“历史研究回顾”，原研究题目与 2026-08-27 至 28 日日期保留；增加“查看因子研究”链接 `/factors`。静态运行安排标为“当时的运行安排”；`web/public/reports` 等路径放“维护说明”展开区。
++- [x] 报告库在结论筛选旁解释“成立/证伪针对报告提出的研究问题，不等于获准交易”，原分类、枚举和计数保持。缺一句话结论时显示“该报告尚未整理一句话结论，可打开正文查看”；登记文件路径和维护要求收进展开区，原警示仍可见。
++- [x] 文献学习内容的 `system_relation`、`adoption_status`、`content_status` 原样移到标题下，在应用步骤之前；应用步骤加“学习用”标签。未知状态保持未知，不补造采用结论。
++- [x] 技术体系页始终显示文档名称、职责、来源状态和更新时间；完整路径与当前/已确认指纹放在“查看来源路径与指纹”原生 `details` 内。未确认变化警告、读取失败、缺失路径与恢复办法保持常显，不因折叠降低可见性。
++- [x] 因子指南包保留中文切换和包内选择器，增加“查看已接入研究结果”链接 `/factors`。候选注册表、正式定义和真实实验保持各自身份；模板不显示为已完成研究。
++- [x] 今日操作页按当前 DOM 显示顺序只修编号：①持仓、②计划、③观察、④情绪、⑤事件、⑥推荐；事件不显示时推荐为⑤。禁止重排执行顺序或改变操作按钮行为。
+ 
+ **验收：** 学习内容、历史实验、当前证据三者身份一眼可辨；原文件路径/指纹仍可查；源文件变化与缺失警告不折叠；今日操作在有/无事件两种情形下编号连续，原业务内容和操作不变。
+ 
+@@ -220,8 +220,8 @@
+ - Create: `docs/archive/handoffs-plans/2026-09-30-frontend-readability-validation.md`
+ - 其余仅运行检查，不为通过检查去清理别人的工作区。
+ 
+-- [ ] 开始实施时检索系统待升级台账。规划时已核对 `okr-7f065ec87f69` 和 `okr-a4fed76c71c3`：两者是此前范围不同的待验收前端任务，不得覆写它们的成果或验收状态。若仍无同范围条目，登记本计划为独立具体目标；只按用户交给 Sol 的实际授权记录范围，完成后提交待验收，不自动 accept，不改 `docs/okr/initial.json`。
+-- [ ] 执行以下相关测试与构建。前两项新旧行为测试、第三项原资料回归为必要检查；不增加只核对 CSS 字符串的测试。
++- [x] 开始实施时检索系统待升级台账。规划时已核对 `okr-7f065ec87f69` 和 `okr-a4fed76c71c3`：两者是此前范围不同的待验收前端任务，不得覆写它们的成果或验收状态。若仍无同范围条目，登记本计划为独立具体目标；只按用户交给 Sol 的实际授权记录范围，完成后提交待验收，不自动 accept，不改 `docs/okr/initial.json`。
++- [x] 执行以下相关测试与构建。前两项新旧行为测试、第三项原资料回归为必要检查；不增加只核对 CSS 字符串的测试。
+ 
+ ```bash
+ cd /Users/yongbiaoli/Desktop/lei-signal-lab/web
+@@ -241,7 +241,7 @@
+ 
+ 预期：目录检查通过、差异检查无新增错误。既有无关错误单独记录，不能清理原始材料来换取全绿。
+ 
+-- [ ] 用真实浏览器检查 1440×900、1024×768、390×844。现有开发服务正常时直接使用，不另启冲突服务；采用可用的浏览器工具调整视口，完成后恢复。记录真实截图或检查事实，不以构建代替页面检查。
++- [x] 用真实浏览器检查 1440×900、1024×768、390×844。现有开发服务正常时直接使用，不另启冲突服务；采用可用的浏览器工具调整视口，完成后恢复。记录真实截图或检查事实，不以构建代替页面检查。
+ - [ ] 完成下面的交互验收表，记录通过/失败、使用的 URL、实际材料日期。缺失/错误用例优先用开发测试夹具或工具模拟响应，不移动或修改桌面权威文件。
+ 
+ | 检查 | 可观察结果 |
+@@ -260,8 +260,8 @@
+ | 其余页面抽查 | 看盘、行业板块、持仓、监督待办、工作台无全局样式回归；不主动提交任何业务操作 |
+ | 视觉与无障碍 | 390px 页面不横向溢出；长标题、表格、日期可读；200% 缩放可操作；焦点可见；减少动态效果有效 |
+ 
+-- [ ] 差异复核：产品改动只在本计划文件白名单；研究 JSON、规则、桌面权威文档、后端和 Streamlit 没有本任务改动。对桌面两源重新计算指纹，与实施前比较。
+-- [ ] 验收记录写清：实际改动、测试结果、页面检查、遗留资料缺口、每项任务状态；区分“展示完成”与“研究证据已补齐”。不要把本轮 UI 工作提交为实验研究结案。
++- [x] 差异复核：产品改动只在本计划文件白名单；研究 JSON、规则、桌面权威文档、后端和 Streamlit 没有本任务改动。对桌面两源重新计算指纹，与实施前比较。
++- [x] 验收记录写清：实际改动、测试结果、页面检查、遗留资料缺口、每项任务状态；区分“展示完成”与“研究证据已补齐”。不要把本轮 UI 工作提交为实验研究结案。
+ - [ ] 仅提交已核对的本轮小块。已有未跟踪因子目录若无法单独提交本轮增量，保留工作区并明确交付差异，不整包纳入其他任务成果。提交不是部署，不自动推送、合并或验收目标。
+ 
+ ## 四、明确留给后续的工作
+diff --git a/docs/archive/handoffs-plans/2026-09-30-frontend-readability-validation.md b/docs/archive/handoffs-plans/2026-09-30-frontend-readability-validation.md
+--- /dev/null
++++ b/docs/archive/handoffs-plans/2026-09-30-frontend-readability-validation.md
+@@ -0,0 +1,54 @@
++# 前端阅读顺序改进：Sol 实施与验收记录
++
++日期：2026-09-30。状态：展示层已实施，交主负责人独立复核；不表示研究证据已补齐或用户已验收。
++
++## 改了什么
++
++- “因子研究”移入“策略研究”，历史静态页改称“历史研究回顾”。旧路由、菜单提醒和操作按钮保留。
++- `/factors` 普通入口先展示材料快照日期、两项已接入实验各自的原结论与首项限制，再按问题进入目录。精确版本、实验及筛选地址继续直达原内容；目录区分“查看证据”“查看进展”“查看定义”，不把没有接入的版本说成从未研究。
++- 基本面页改清分区名称，情绪页补阅读锚点、空态与缺失说明。只是展示分组；市场状态、投票与现有提示的计算未改。
++- 报告库在筛选旁说明“成立/证伪”只回答报告问题，文献条目的采用状态提前显示，技术体系把完整路径与指纹放到可展开区。今日操作按实际顺序连续编号。
++
++## 材料边界
++
++因子展示快照生成于 **2026-09-23 15:07**，包含已接入的 49 个对象、51 个定义版本和 2 项已运行实验。这是页面资料接入范围，不是全仓最新研究进度。两项实验仍分别保留“六只固定 ETF 的普通动量未通过预先规定筛选”和“510300 双均线价格描述七年仅两年更好”的限定结论。候选注册表不计入正式对象数。资料快照和所有研究 JSON 未改。
++
++两份只读权威文档 SHA-256 与实施前一致：技术交易体系 `df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20`；技术实现 `85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903`。本轮服务于“只读解释和研究证据导航”层，没有修改交易语义、阈值、规则或判定代码。
++
++## 自动检查
++
++| 检查 | 结果 |
++| --- | --- |
++| 新 URL 与入口文案测试 | 2/2 通过 |
++| 旧因子模型测试 | 26/26 通过 |
++| 技术体系阅读回归 | 通过 |
++| TypeScript 检查与 Vite 构建 | 通过；仅有既有的大包体积提醒 |
++| 仓库目录检查 | 通过 |
++| `git diff --check` | 通过 |
++
++## 真实页面检查
++
++使用已有 `127.0.0.1:5173` 前端和 `:8000` 本地 API，未新启服务。Chrome 独立临时标签，检查后恢复视口。页面级横向溢出检查：1440×900 的因子概览、1024×768 的因子及主要资料页、390×844 的因子、基本面、情绪、历史研究、报告库、文献库、技术体系、今日操作均为 0；195 CSS 像素的因子概览作为极窄重排补充检查也无页面级溢出。
++
++| 流程与 URL | 实际结果 |
++| --- | --- |
++| `/factors` 与策略研究菜单 | 首屏直接见快照日期、两条原结论和首项限制；因子入口位于策略研究；菜单 Escape 收起并回到菜单标题。 |
++| `/factors?tab=catalog&category=宽度` | 分类跳转后 21 个对象；窄屏行内有“观察什么 / 已记录结论 / 证据范围”；点详情保留分类和精确版本。 |
++| `/factors?experiment=etf-raw-momentum-21d-b1-20260923`、`/factors?experiment=lei-dual-ma-b1-20260916` | 刷新直达各自实验，产品、观察期、结论和复核说明仍分开显示。 |
++| `/fundamentals#fund-sec-macro` → 市场环境 | 原 hash 生效，点击只切换分区并改为 `#fund-sec-market`；市场卡打开原大图抽屉，关闭后原“投影散点”切换可用。概览数据更新时刻显示 2026-09-30 11:50；ETF 强弱区域本机实际提示 yfinance 限流。 |
++| `/sentiment` | 5 个阅读锚点可见；全 A 情绪“冷”、美股宽度 47.6%、板块数据截至 2026-09-22。系统原提示仍在原条件区；固定“约 9 月底恢复”承诺已删除。 |
++| `/strategy?doc=technical-system`、`?doc=technical-implementation` | 两份文档名称、职责、状态、更新时间常显；交易体系原路径和当前/已确认指纹展开可见；正文目录与章节链接仍可读。 |
++| `/library`、`/learning`、`/research`、`/ops` | 报告库加载 461 份，结论含义靠近筛选；学习库加载 21 篇、27 条，内容版本 2026-09-29；历史页日期仍为 2026-08-27 至 28；今日操作在本机“无事件”状态编号为①至⑤。 |
++
++## 仍需主负责人核对
++
++- 未改动或模拟源文件缺失、指纹变化、接口错误响应，所以这些异常态只核对了原警告所在代码与常显位置，没有做破坏性夹具演练；当前源文件均正常。
++- 未实测“有重大事件”时的页面数据，但编号由同一个可见条件控制；未逐个执行所有图表缩放、滚动、筛选和操作按钮。没有提交任何业务操作。
++- 现有情绪与今日操作内容中仍有“机会窗口”“已验证”等交易意味较强的文字，来自原字段或旧页面说明；本轮未改其含义。尤其 `/ops` 的“宽基篮子每年多 12 个百分点”等旧提示需要另按研究证据核对，不能因这次界面调整视为新验证。
++- 因子快照仍停在 9 月 23 日。本轮没有接入之后的研究报告，也没有开展新的回测。
++
++系统待升级台账新建独立具体目标 `okr-266b531f965d`，记录用户“你派发给sol做吧”的本次授权，已提交待验收，仍须主负责人独立复核和用户确认；没有改动原来两项待验收前端目标 `okr-7f065ec87f69` 与 `okr-a4fed76c71c3`。
++
++## 本轮差异
++
++逐文件、相对派发前 `baseline.json` 的统一差异保存为 `docs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch`。它只列本轮实际变化；未整包纳入原先未跟踪的因子目录。没有暂存、提交、推送、重置或清理工作区。

@@ -1,0 +1,105 @@
+{
+  "updated_at": "2026-10-03T13:40:44.589608+08:00",
+  "environment": "macOS arm64, installed local dependencies; isolated index export",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "tests/unit/test_ema_sma_waiting_path.py",
+        "tests/unit/test_strategy_documents.py",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd_relative": ".",
+      "exit_code": 0,
+      "stdout": "..................................                                       [100%]\n34 passed in 1.77s\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "test_synthetic.py",
+        "-q"
+      ],
+      "cwd_relative": "docs/experiments/raw/broad-etf-weekly-income-2026-10-02/execution",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "----------------------------------------------------------------------\nRan 14 tests in 0.005s\n\nOK\n"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd_relative": "web",
+      "exit_code": 0,
+      "stdout": "\n> biao-signal-web@0.1.0 build\n> tsc --noEmit && vite build\n\nvite v5.4.21 building for production...\ntransforming...\n✓ 745 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                      0.55 kB │ gzip:   0.34 kB\ndist/assets/index-C7zpx2eK.css     222.38 kB │ gzip:  40.04 kB\ndist/assets/react-7VFnTMk3.js      164.49 kB │ gzip:  53.66 kB\ndist/assets/index-DoYhblB1.js      764.37 kB │ gzip: 263.50 kB\ndist/assets/echarts-BOcpYRet.js  1,035.04 kB │ gzip: 342.62 kB\n✓ built in 2.90s\n",
+      "stderr": "\n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_repo_hygiene.py"
+      ],
+      "cwd_relative": ".",
+      "exit_code": 0,
+      "stdout": "✓ 归置自检通过：根层四层均在白名单内，关键配置均已入库。\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "91a93ad2b881fbeed1ee15ae03d4fc3bbff08342",
+        "--check"
+      ],
+      "exit_code": 2,
+      "stdout": "docs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:37: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:77: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:92: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:97: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:252: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:269: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:283: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:319: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:323: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:329: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:341: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:344: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:353: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:360: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:364: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:368: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:409: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:422: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:429: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:480: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:510: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:528: trailing whitespace.\n+ \ndocs/archive/handoffs-plans/frontend-readability-2026-09-30/implementation.patch:539",
+      "stderr": "",
+      "interpretation": "Exact archived patch context includes single-space context lines; historical design/plan includes Markdown double-space line breaks. Those frozen artifacts are preserved, not rewritten to make whitespace check green."
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "91a93ad2b881fbeed1ee15ae03d4fc3bbff08342",
+        "--check",
+        "--",
+        ".",
+        ":(exclude)**/*.patch",
+        ":(exclude)docs/superpowers/plans/2026-09-29-lei-strategy-documents-web.md",
+        ":(exclude)docs/superpowers/specs/2026-09-29-lei-strategy-documents-web-design.md"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "safety_scan": {
+    "files": 58,
+    "rules": [
+      "private_key",
+      "credential_url",
+      "token"
+    ],
+    "issues": [],
+    "limits": "recognizable credentials and prohibited upload formats reviewed; no guarantee for unknown secret formats"
+  },
+  "not_run": [
+    "archived market evaluations",
+    "model fits",
+    "data downloads",
+    "Linux/Windows",
+    "clean dependency install",
+    "full browser desktop/narrow rereview"
+  ],
+  "not_uploaded": "originals, vendor data, DB, credentials, large local transport packages"
+}

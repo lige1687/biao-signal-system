@@ -91,6 +91,7 @@ DOCS_KEEP = {
     "plan-agent-superentry-v1.md",     # copilot/sentiment.py 注释锚定
 }
 DOCS_KEEP_DIRS = {
+    "progress",  # Task progress directory explicitly requested by the user.
     "archive", "artifacts", "experiments", "literature-learning", "okr",
     "ops", "prompts", "reports", "research", "superpowers", "timing-sweep",
 }

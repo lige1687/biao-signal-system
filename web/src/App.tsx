@@ -20,6 +20,7 @@ import BacktestPage from "./pages/BacktestPage";
 import ResearchPage from "./pages/ResearchPage";
 import ReportsLibraryPage from "./pages/ReportsLibraryPage";
 import LearningLibraryPage from "./pages/LearningLibraryPage";
+import StrategySystemPage from "./pages/StrategySystemPage";
 import UpgradesPage from "./pages/UpgradesPage";
 
 // ---- AgentConsole 全局开合（模块级单例 store，避免引入状态库）----
@@ -87,6 +88,7 @@ export default function App() {
         <Route path="/library" element={<ReportsLibraryPage />} />
         {/* 文献学习库：以论文为线索的学习目录（只读学习层，不参与交易判定） */}
         <Route path="/learning" element={<LearningLibraryPage />} />
+        <Route path="/strategy" element={<StrategySystemPage />} />
         <Route path="/upgrades" element={<UpgradesPage />} />
         {/* 收盘简报：环境异常 → 自选重点变化 → 板块观察池（research_proxy） */}
         <Route path="/daily" element={<DailyBriefPage />} />
