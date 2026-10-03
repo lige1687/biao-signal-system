@@ -1,3 +1,32 @@
+# 当前成果：市场数据图表优先修订
+
+- 更新时间：2026-10-03 12:57:41 UTC（Asia/Shanghai为UTC+08:00）。task-id investor-observation-map；原负责人继续，非接管或整体结束。
+- 用户最新原文：“不是做成这种引导向的，而是和我们原有的基本面界面一样，直观的看当前的数据图们，以及他们的阈值，美a的，懂我意思吗”。旧引导页的软件验收不能代表用户接受，本轮按此纠正。
+- 规则读取dc710a9cc711e1c389ac79cd1d250daf835141e1；范围登记0b9e4600132ff40edb1eee57a6be0f5d819d064c已逐字读回后实施；增量核22e413c9fb487e549f7531f71c2bde0d8473d49e（technical-factor-sequence完成/磁盘状态更新），无已登记同模块/同实验冲突。规则1.0 SHA6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0未变；进度不是锁。
+- 工作分支task/investor-observation-map-progress；基础959971e30893c0894837b4c2b35442e4bedb1aac；**已推并核远端完整成果58baf916d14fbf536a024cced48edd3f118111f6**。远端ref=本地HEAD；准确commit的manifest已读回。15个本任务代码/小文档，未夹带旧两个本地中间文件、实时市场正文/截图或恢复目录依赖链接。
+- [进展](https://github.com/lige1687/biao-signal-system/blob/58baf916d14fbf536a024cced48edd3f118111f6/docs/progress/investor-observation-map.md)；[恢复与证据入口](https://github.com/lige1687/biao-signal-system/blob/58baf916d14fbf536a024cced48edd3f118111f6/docs/archive/handoffs-plans/market-understanding-dashboard-2026-10-03/README.md)。manifest、SHA256SUMS含代码/依赖、排除项大小/指纹；原始策略文档不上传。
+
+## 状态与具体成果
+
+- completed：把MarketUnderstandingPage改为图表仪表盘，A股/美股切换，24唯一指标（A9/美16，共享利差），最近有效读数、自身所属期、较前一有效观测差额；复用rates-history/macro-history/us-macro和TrendChart。分类、自然年窗口、参考线开关、放大与手机布局已做。
+- completed：仅复用旧MARKLINES数值并重写中性身份；PMI50/零线、经验线、固定历史分位分别说明。两融绝对额不画风险线，CPI2不叫联储目标，股债收益差称粗略比较；不传旧机会/危险ZONES。原基本面/共享图表/后端/规则/Streamlit均未改，旧50目录/20读法数据保留。
+- completed：14组合成检查、33项旧资料回归、tsc/Vite749模块通过；18项SHA校验通过；独立临时源码副本使用既有依赖，14检查exit0（不是干净安装/后台恢复）。真实既有服务A7/9、美16/16曲线，A股PE/股债收益差空卡明确；桌面/390px/放大/分类/窗口/线开关/Escape焦点已核。旧卫生器仍.git/progress两项误报exit1，未掩盖。
+- active responsibility：本图表页、数据展示模型和相关测试维护；本批实现与验收已结束，没有在运行的数据研究。下一步planned为具体阅图反馈，或经协调选定并具资格的单一数据缺口；不把未来所有方向占作独有。
+- blocked/not started：A股两个估值历史源本次为空；真实FINRA/CFTC、盈利预期、事件日历尚未接图；无首次发布/修订时间。完整后端恢复、跨OS、上游真实性/许可、用户理解效果和线上收益均未验证/未测量。新源研究预算不自行重置，旧实验不重跑。
+
+## 工作范围、进程和边界
+
+- 文件：web/src/pages/MarketUnderstandingPage.tsx；web/src/features/market-understanding/{MarketDashboard.tsx,dashboard-model.ts,dashboard.css}；web/run-market-dashboard-regression.mjs；package测试脚本、旧regression仅撤去退役布局断言；自身spec/progress与dashboard-2026-10-03证据目录。其他AI避免并发改这些准确文件，原其他模块没有排他主张。
+- 避让：sentiment三用途、technical风险/小时、dot状态计数/宏观资料资格、外部工具/经典学习；不合并market-observation旧分支，使用既有API。
+- 两名Sol中思考助手完成接口/阈值审计、合成测试及一次实现审查；0新金融拟合/全量回测/外部资料研究/付费，旧预算保持。三市场API只读GET及浏览器读取；不强制源刷新。
+- 自有前端预览PID49578/session59800在127.0.0.1:5185运行，留给用户阅图；不是研究checkpoint或部署。已有用户5173/8000未动。接续者不可与原负责人并行写此分支/输出；本次没有接管授权。复制文件不能迁移进程。
+- 失败留痕：错误工作目录写入失败、磁盘临时输入不足（未删资料）、Array.at编译兼容、轴小数/月度标签/弹窗焦点已修，合成凭证样例误报按准确样例排除，详见validation。初始API摘要误用asof字段的null作废。
+- 本任务工作分支无GitHub workflows/实际Git hooks；普通push，未合并main/master、强推、部署、改权限或触发付费。协作只更新本任务文件。实时数据截图仅本地，未获公开再分发资格；源码恢复不需要它们。
+
+---
+
+## 先前阶段记录（当前状态以上为准）
+
 # 用户纠正：直接展示中美数据图与阈值，开始改为图表仪表盘
 
 - task-id：investor-observation-map；原负责人继续；状态active。更新时间：2026-10-03T12:42:46.095Z（UTC；用户Asia/Shanghai）。
