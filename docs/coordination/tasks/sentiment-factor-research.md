@@ -1,3 +1,43 @@
+# 当前阶段：三个用途的证据与设计已交付
+
+- task-id：sentiment-factor-research，原负责人/root继续；本次不是接管或结束整条研究。
+- 更新时间：2026-10-03T19:45:46.000+08:00（Asia/Shanghai）。
+- 状态：active（原责任保留）；本轮来源资格与三用途证据/设计completed；原E机会确认及组合风险因合格历史输入不足blocked，当前无市场实验运行。
+- 用户最新决定：“都解决一下吧。注意不要和其他路做的重复了。”三个用途是低位机会、持有风险、市场状态解释，按同一资料准备、不同目标各自验收。
+- 规则初读8778bd3f417834f49885047afddc22c8d72bf2b8，推前增量审阅至b51c454f39925101024b194d8e60a6d1eff03842；COORDINATION.md v1.0及SHA6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0不变。
+- 准确工作分支：task/sentiment-factor-progress（不是task/sentiment-factor-research-progress）；基础d53497de0accff778d0db96c010c30078e5b54d9；最新已推送成果完整commit **69688860b30c1f4fdb1d06e40e0d8e75c50e85db**，本地与远端ref已核一致。
+- [本轮报告](https://github.com/lige1687/biao-signal-system/blob/69688860b30c1f4fdb1d06e40e0d8e75c50e85db/docs/experiments/sentiment-source-qualification-refresh-2026-10-03.md)；[三用途具体设计](https://github.com/lige1687/biao-signal-system/blob/69688860b30c1f4fdb1d06e40e0d8e75c50e85db/docs/superpowers/specs/2026-10-03-sentiment-three-uses-design.md)；[可引用证据矩阵](https://github.com/lige1687/biao-signal-system/blob/69688860b30c1f4fdb1d06e40e0d8e75c50e85db/docs/research/sentiment-factor-library/three-use-evidence-2026-10-03.json)；[阶段进度](https://github.com/lige1687/biao-signal-system/blob/69688860b30c1f4fdb1d06e40e0d8e75c50e85db/docs/progress/sentiment-factor-research.md)。
+
+## 本轮实际成果与验证
+
+19条准确路径、200539字节：来源报告、同名raw的请求账/资格/状态/原件索引/规范指纹/校验/manifest及SHA256SUMS，三用途设计与证据JSON，本库README/实验账、两份自身进度，以及registry/INDEX仅本报告一项。原模型/科学成绩未改；未修改共享代码、规则、源原文、页面或别人记录。registry保留原字节格式，只追加本条，不搬共享脏版本；原共享HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9、默认index SHA83bb48fe19dcb073d4a449bcef331c745c942128ea53ca2a19c1f6791cbe7f92、脏AGENTS仍原样。
+
+六请求来源阶段completed+inconclusive/evidence_boundary：pitindex版本未变，coil成员重建和K0D1Z的2015起流程可借鉴，未提供本题完整合格长历史。作者18条缺价样例是公开记录，不是本线18次Tiingo请求；未安装、未运行第三方下载或获取密钥。原E仍blocked，不能称免费源全被穷尽或原E已无效。
+
+三用途矩阵逐条绑定旧结果和反例：宽度短史147日期局部改善对学习期敏感；AAII20周816日期仍不如过去平均；风险835日期微小优势对2016敏感；NAAIM78周有限线索、首发/长史未核。机会/风险稳定帮助未确认；状态解释只供应可引用含义、证据与限制。原E是持有并对冲，不将风险用途改写成止损卖出。完整资金、预警概率、用户理解提升及线上收益均未测量。
+
+最小检查通过：6操作/4直接读取指纹、7仅本地原件大小/SHA、18样例、8份已发布结果/报告字节、5项相对差额、旧账保留、JSON/结论/ARCHIVE/登记、精确路径/小文件/凭据形态及diff。共享现行hygiene退出0，只证明该工作区检查。独立临时目录恢复19本轮文件＋8旧证据＋1准确外部规范索引，共28文件，15交付SHA及8旧证据SHA通过，0市场计算。恢复发现本工作基线缺current-standards.json，已从公开d444316817e9330c2d72a4a90c655467b45dd5bb逐字读回，SHA616c0ae1a636accd35c8500be7c5c21a35c13aaf2039e9e6144cb5531d96cb57，写明准确解析位置；没有把整个技术分支并入本线。原始doc准备Python语法失败exit1、无写入，显式脚本修正后exit0；失败留在validation。Linux/全服务/行情完整恢复/生产未验证。
+
+工作分支远端核验：git ls-remote=69688860b30c1f4fdb1d06e40e0d8e75c50e85db；GitHub按准确commit读回报告和设计，与本地逐字一致，blob分别32b308140f1a7ee9799eaef6c312b71da8049165、0521f5c9c67dbe500ecb72fc14d4ec08a5a4a626。AGENTS协作入口既有，本轮无需重加；基线无GitHub workflow/本地pre-push，未合并、部署、付费或改权限。此协调更新推后另核，不预写自身验证。
+
+## 已确认的避重边界与下一步
+
+给相邻market-observation和investor-observation-map的明确边界：**本线三个用途指研究证据职责，不认领个人判断复核/候选排序产品、全站导航或市场理解页面。** 可直接引用上述准确成果，无须重跑模型。地图已进入/market-understanding实施，App/TopNav及独立页由其维护；本线不进入这些块。market-observation当前澄清关注范围/复核判断，保留原日期/来源说明，其未决产品边界不由本线代定。它们若需要新研究问题，先具体化对象/目标/文件再协调，而不是重复一套解释资料。
+
+技术C继续完整回调/小时资格；dot未来SMA协议与历史爆量候选现在做独立工程前置，明确避开本线；经典转教学设计；外部线聚焦外部能力试点；remote-core按用户要求paused，本线不接管其返修/转黑；reader暂停讨论目标并明确避开三用途。已登记相关记录中没有本轮同实验或同文件写入冲突，主题相邻按证据供应/产品实施分工。未登记任务/远端进程未知，不能宣称全仓无冲突，记录不是锁。
+
+本轮设计与证据已交，下一步只有真正合格历史20/50资料或定位错误出现后，才冻结一个机会问题（原连续/双低及同低状态AAII确认）及不同目标的风险问题；不要求宽度先有正结果。数据版本共用，不将美国结果外推中国/板块。正式动作/资金规则、页面整合和新实验预算不能仅凭设计文件假设具备。六请求阶段不再重试，旧模型不换标题重跑；后续读最新协调/实际输入，再处理能改变判断的缺口。
+
+## 预算、仅本地材料与运行状态
+
+本次来源6/6，三用途整理另增0来源；0新拟合/Pro/付费。至少824历史拟合、至少4历史Pro及全部旧预算仍保留。Luna来源只读一次、Sol目标/证据只读两回合均已结束；没有本任务后台市场计算或可迁checkpoint，不杀其他进程。
+
+7份第三方README/API原件仅本地，准确大小/SHA和重取条件在source-index；原行情/大价格包/私有桌面原文/登录状态依旧未交，原件与行情资格不因Git可见而变合格。公开远端可核文档和保存结果，不能运行完整市场研究。源码权重/tokenizer不适用，旧外部系统升级台账不写。manifest不含自身循环指纹，准确登记增量在提交diff可核。
+
+---
+
+## 历史记录（以下保留当时状态，当前范围与成果以上文为准）
+
 # LEI 情绪与市场状态因子研究
 
 - task-id：sentiment-factor-research（唯一稳定映射；旧入口docs/progress/sentiment-factor-research.md、docs/ops/work-progress/sentiment-factor-research.md均保留）。
