@@ -21,8 +21,8 @@ export default function ObservationSourceNote({ item }: { item: MarketObservatio
       </p>}
       <dl>
         <div><dt>范围</dt><dd>{item.universe}</dd></div>
-        <div><dt>资料所属日</dt><dd>{item.observation_date ?? "未核实"}</dd></div>
-        <div><dt>首次可用</dt><dd>{item.publication_precision === "unknown" ? "未核实" : item.published_at ?? "未记录"}</dd></div>
+        <div><dt>资料所属期</dt><dd>{item.observation_date ?? "未核实"}</dd></div>
+        <div><dt>来源发布时间</dt><dd>{item.publication_precision === "unknown" ? "未核实" : `${item.published_at ?? "未记录"}${item.published_at ? (item.publication_precision === "date" ? "（仅确认日期）" : "（记录到时刻）") : ""}`}</dd></div>
         <div><dt>抓取时间</dt><dd>{item.fetched_at ?? "未记录"}</dd></div>
         <div><dt>来源</dt><dd>{item.source_url ? <a href={item.source_url} target="_blank" rel="noreferrer">{item.source_name}</a> : item.source_name}（{ACCESS[item.source_access] ?? item.source_access}）</dd></div>
         <div><dt>历史范围</dt><dd>{item.history_start && item.history_end ? `${item.history_start} 至 ${item.history_end}` : "未确认"}</dd></div>

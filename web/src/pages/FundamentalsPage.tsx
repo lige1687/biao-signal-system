@@ -2069,10 +2069,11 @@ export default function FundamentalsPage() {
       {/* ── ① 市场 ── */}
       {activeSection === "fund-sec-market" && (
         <>
-          <div className="observation-market-switch" role="group" aria-label="观察市场">
+          <div className="observation-market-switch" role="group" aria-label="背景观察市场">
             <button type="button" className={market === "cn" ? "on" : ""} onClick={() => setMarket("cn")} aria-pressed={market === "cn"}>A股</button>
             <button type="button" className={market === "us" ? "on" : ""} onClick={() => setMarket("us")} aria-pressed={market === "us"}>美股</button>
           </div>
+          <p className="fund-hint-row">A股／美股只切换背景观察卡和对应每周调查。下方宽度与历史内容按各自标题标明市场；其他分区不随此开关切换。</p>
           {observationsLoading && <p className="muted">观察资料加载中…</p>}
           {observationsError && <p className="fund-errors">观察资料不可用：{(observationsError as Error).message}</p>}
           {(observations || (!observationsLoading && !observationsError)) &&
@@ -2080,9 +2081,9 @@ export default function FundamentalsPage() {
               metricIds={market === "us" ? ["vix", "vxn", "real_yield_10y", "hy_oas"] : undefined} />}
           <details className="observation-legacy"><summary>每周调查、已有宽度与产品历史</summary>
           {market === "us" && <MarketObservationCards response={observations} title="个人看法与管理人股票敞口调查" metricIds={["aaii", "naaim"]} /> }
-          <div className="reference-reading-group"><h2>当前市场：宽度与情绪</h2><p>宽度是一批股票中有多少站在各自均线上方；这里展示现有市场读数。</p></div>
+          <div className="reference-reading-group"><h2>各市场宽度与美国调查</h2><p>宽度是一批股票中有多少站在各自均线上方；市场范围见各卡标题，美国调查单列展示。</p></div>
           <MarketSection onOpen={setDrawer} />
-          <div className="reference-reading-group"><h2>进一步查看：产品强弱与历史变化</h2><p>历史叠图只用于观察同期变化，不能据此认定原因或交易效果。</p></div>
+          <div className="reference-reading-group"><h2>美股产品强弱与标普500历史对照</h2><p>历史叠图只用于观察同期变化，不能据此认定原因或交易效果。</p></div>
           <EtfStrengthSection />
           <SentimentViews />
           </details>

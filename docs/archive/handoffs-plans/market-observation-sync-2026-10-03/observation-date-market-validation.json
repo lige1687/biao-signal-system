@@ -1,0 +1,114 @@
+{
+  "stage": "date-and-market-copy",
+  "updated_at": "2026-10-03T15:21:07.606540+08:00",
+  "timezone": "Asia/Shanghai",
+  "base_commit": "eb8dd780212e9dcd4e3a12f59b2ad55c84478e83",
+  "coordination_rule_read": "f9e14cd0b03e8f27b63a51a87577d54c0b04b09a",
+  "checks": {
+    "market_scope_visible": true,
+    "date_precision": true,
+    "timestamp_precision": true,
+    "unknown_not_filled": true,
+    "survey_period_not_daily": true,
+    "source_publication_not_first_available": true,
+    "historical_market_titles": true,
+    "fixed_turnover_cutoff_retained": true
+  },
+  "commands": [
+    {
+      "workdir": "web",
+      "command": "./node_modules/.bin/vite build",
+      "exit_code": 0,
+      "modules": 767,
+      "warning": "existing chunks >500 kB"
+    },
+    {
+      "workdir": "web",
+      "command": "./node_modules/.bin/tsc --noEmit",
+      "exit_code": 0
+    },
+    {
+      "command": "observation_browser_fixture.py --dist web/dist --port 18045 --seconds 600",
+      "exit_code": 0,
+      "process_session_id": 4094,
+      "shutdown": "GET /__finish; own created tab closed"
+    },
+    {
+      "workdir": "original shared checkout",
+      "command": "python3 scripts/check_repo_hygiene.py",
+      "exit_code": 0,
+      "scope": "existing shared checker only; does not prove older independent checker updated"
+    }
+  ],
+  "budget_delta": {
+    "market_source_requests": 0,
+    "fits": 0,
+    "market_experiments": 0
+  },
+  "agents": [
+    {
+      "name": "observation_date_semantics_check",
+      "model": "gpt-6-luna",
+      "reasoning": "low",
+      "scope": "readonly date semantics at frozen commit",
+      "status": "completed",
+      "writes": 0
+    }
+  ],
+  "files": [
+    {
+      "path": "web/src/pages/FundamentalsPage.tsx",
+      "size_bytes": 92598,
+      "sha256": "6d5259e7812d9ae1fa6ef9f1fa7cbe703e9e2de15066b1abc3ae0f56213e4bbc"
+    },
+    {
+      "path": "web/src/components/MarketObservationCards.tsx",
+      "size_bytes": 3705,
+      "sha256": "cbdfbbdac1070f4599cee3f75e8fb072f56a701a3d68efae1d37273f6b72d2d9"
+    },
+    {
+      "path": "web/src/components/ObservationSourceNote.tsx",
+      "size_bytes": 2659,
+      "sha256": "826f8cc18b61a0fe5f53c9e38a01a3b6ead9b4ec0b22324845571bbc3582fa3a"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/market-observation-sync-2026-10-03/observation_browser_fixture.py",
+      "size_bytes": 4957,
+      "sha256": "9c9630e3371b48187b4142f42cabd72882264cce64dd2a353ded0c856d45aa31"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/market-observation-sync-2026-10-03/observation-cn-accessibility.txt",
+      "size_bytes": 6229,
+      "sha256": "c8e7395c526e99479b57bf86da5ea825d56bd11458762cdbbeddd6cb69f1b00a"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/market-observation-sync-2026-10-03/observation-us-accessibility.txt",
+      "size_bytes": 8308,
+      "sha256": "4c9e91e93280277f8869b0b2c3d41921836fdbf146a4d8f2136e67b4ad6a4e64"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/market-observation-sync-2026-10-03/observation-browser.jpg",
+      "size_bytes": 79680,
+      "sha256": "901951a3ec9e1dbe867b54e9c36d356381b1e0ce75f3e7a4978ea957e69c8f1a"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/market-observation-sync-2026-10-03/observation-survey-browser.jpg",
+      "size_bytes": 69075,
+      "sha256": "67a0cd90e77ee66bdebd3b9d93729f99097b1f1874e57b100d979fdce2572191"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/market-observation-sync-2026-10-03/observation-date-market-review.md",
+      "size_bytes": 3721,
+      "sha256": "1688c774c43ad1e2c1553ac1a95804cc6e3f123ac4c4cb3322753c32934decb1"
+    }
+  ],
+  "not_verified": [
+    "Linux",
+    "mobile",
+    "real upstream",
+    "complete service",
+    "historical first availability",
+    "user benefit",
+    "live trading returns"
+  ]
+}

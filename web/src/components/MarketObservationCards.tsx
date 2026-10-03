@@ -32,7 +32,7 @@ export default function MarketObservationCards({ response, title, limit, metricI
         {showValue && <p className="observation-change">{showValue && item.change != null ? `${item.comparison_period ?? "较上期"} ${item.change > 0 ? "+" : ""}${readable(item.change, changeUnit)}` : "暂无可比较的上期读数"}</p>}
         <p className="observation-reading">{showValue ? `${current || fixedTurnover ? "" : "最新情况未核实。"}${item.reading}` : item.quality_reason ?? "当前读数不可用于观察"}</p>
         {showValue && item.components && <p className="observation-change">看涨 {readable(item.components.bullish_pct, "%")} · 中性 {readable(item.components.neutral_pct, "%")} · 看跌 {readable(item.components.bearish_pct, "%")}</p>}
-        <p className="observation-date">资料所属日：{item.observation_date ?? "未核实"}；{item.publication_precision === "unknown" ? "首次可用时间未核实" : `发布：${item.published_at ?? "未记录"}`}</p>
+        <p className="observation-date">资料所属期：{item.observation_date ?? "未核实"}；{item.publication_precision === "unknown" ? "来源发布时间未核实" : `来源发布：${item.published_at ?? "未记录"}${item.published_at ? (item.publication_precision === "date" ? "（仅确认日期）" : "（记录到时刻）") : ""}`}</p>
         <ObservationSourceNote item={item} />
       </article>;
     })}</div>
