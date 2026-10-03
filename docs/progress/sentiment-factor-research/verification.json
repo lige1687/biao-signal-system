@@ -4,9 +4,7 @@
   "this_sync": "exact file/secret/diff checks; AST/JSON/registry validation to be run before commit; no refit",
   "github_cli": "gh unavailable; remote verified via git ls-remote/fetch",
   "ci": "remote main tree has no .github workflows or known root CI/deploy config; no configured pre-push hook, only pre-push.sample; no deployment paths changed",
-  "pending": [
-    "push_remote_commit_readback"
-  ],
+  "pending": [],
   "checked_at_utc": "2026-10-03T05:37:54.155255+00:00",
   "this_sync_results": {
     "included_files_sha_and_size": 419,
@@ -39,5 +37,13 @@
     "no_large_inputs_or_session_material": true,
     "no_shared_index_worktree_mutation": true,
     "no_deployment_or_ci_paths": true
-  }
+  },
+  "first_push_readback": {
+    "checked_at_utc": "2026-10-03T05:47:32.057749+00:00",
+    "method": "git ls-remote origin refs/heads/task/sentiment-factor-progress",
+    "local_commit": "f5e263096ee2c3c50c2ed2bed080b5acda351fab",
+    "remote_commit": "f5e263096ee2c3c50c2ed2bed080b5acda351fab",
+    "match": true
+  },
+  "final_doc_update_note": "This receipt records completed first batch; commit carrying latest progress is resolved and checked separately to avoid circular self-reference."
 }
