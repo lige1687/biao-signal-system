@@ -205,3 +205,18 @@
 正在做：本阶段成果发布和同步；没有背景市场研究或取数。下一步待已有观察后端与本任务分支明确整合、逐项核FINRA/CFTC/ETF/事件许可及资料后续范围；新实时数据不能冒充完成。其他AI暂避本新页/features及入口小块，不占整App/TopNav，也不圈全部候选来源。最新相邻记录6b9861b2明确保留本方页面，无已登记同块冲突。
 
 预算：旧公开来源12/12不重置，本轮0新来源/市场实验/拟合/付费。两Sol助手已结束；人工预览52804/42822均正常退出0，浏览器页已关。共享原分支18e64fa与index/AGENTS指纹保持。依赖安装在隔离工作区按本分支lock完成；原共享lock不同未混用。大数据/原始调查/策略/数据库/凭证不交Git，权重不适用。唯一跨任务状态仍为coordination/lei的investor-observation-map记录。
+
+
+## 2026-10-04 组合观察与连续宏观追问阶段
+
+更新时间：2026-10-04T02:07:01.210866+08:00（Asia/Shanghai）。基线63eaa0be1ce36b844c2d70792fdc917eb35f0234；设计69ec46e3。工程completed，来源续核paused，PE/盈利/资金资料用途blocked；原负责人仍active。新实现/报告当前正在本任务分支同步，远端以coordination/lei的准确成果SHA为准，不将设计HEAD当完整实现。
+
+完成四组中美观察图/同数据变化摘要/同段压力事实，实际间隔保守对齐、读取时间/发布修订缺口、2026-08-31官方PE14.65对接口13.04提示；Agent跨市场连续追问/当前数据重算/准确回图/歧义指代提示，旧持仓/标的/机会/成交不抢路由。实际80检查、build761模块、17检查独立恢复及Agent内存回归exit0，390/1280px无溢出；归置器既存2例exit1，不冒称全绿。报告docs/experiments/market-observation-flow-2026-10-04.md及同名raw/有原话、来源、验证、清单和恢复。
+
+来源实际6批/20查询打开项，原6次登记口径未清，保守记20/6超限并停止新来源；0金融拟合/模型/训练/付费。未测理解/线上收益。FINRA月度/CFTC周度及盈利产品定义已核但连续输入/许可/逐期发布未齐，不称已接入。PE实际后台版本/供方/同日期口径仍待核，不能替换全史；完整中国日历未齐。数据库台账草案在raw/upgrade-goal-proposal.json，等待仓外写入确认；API只读检索未找到同目标，不改种子。
+
+自有PID59545/session31465/5185保持；原1753/8000不动，无金融后台checkpoint，远端进程未知。仅本地API原样/截图/restore-local-*不上传，原共享HEAD/index核对未变；脏AGENTS已有并行更新，本任务未写入或收走。其他AI暂避本轮自有data-quality/observation-model/ObservationPanel、MarketDashboard/IndexComparison/MacroReadingPanel/macro-reading/Agent宏观入口；后端未改，不独占全宏观/Agent。最新增量核至bd48ca7f22ca6ce3306ba5c2881751655d563524，无已登记冲突；情绪负结果共用、不重做。
+
+下一动作：安全普通推送源码/证据并逐项核回，协调本条写准确SHA；随后只处理获明确补齐的PE供方/合格输入/台账授权，不重新启动旧实验。
+
+发布边界核对（2026-10-04T02:12:46.401614+08:00）：按最新用户AGENTS仅发布codex/工作分支，本轮发布codex/investor-observation-map-progress-20261004；现有task/investor-observation-map-progress工作树与旧远端历史保留，不切换或清理。本轮规则/相关增量更新核至8509e1bca27478a1ab858e7a3147c2dd5f6847e3，技术因子新增周色结案不涉及本页或宏观，本题无已登记同块冲突；同步结果由唯一协调记录引用完整SHA。

@@ -1,0 +1,139 @@
+{
+  "verified_at": "2026-10-04T02:03:35.789735+08:00",
+  "system": "macOS; Node22.22.1; current branch worktree",
+  "checks": [
+    {
+      "command": [
+        "node",
+        "web/run-market-observation-regression.mjs"
+      ],
+      "cwd": "repository root",
+      "exit_code": 0,
+      "stdout": "PASS monthly PE uses conservative month alignment and discloses evidence limits\nPASS small samples do not certify cadence\nPASS explicit demonstration input never becomes real current data\nPASS four groups retain missing earnings and flows on both markets\nPASS changes sorted by observation date rather than claiming publication\nPASS index has its own date and unit and unavailable growth is blank\nPASS future input is excluded even bypassing decoder\nPASS old and terminally missing observations are disclosed\nPASS followup switches market carrying topic and refines with rates\nPASS new topic resets and ambiguous reference requests clarification\nPASS agent and page share changes and new inputs change answer\nPASS pressure inconsistency requires exact comparable index intervals\nPASS trade statements do not enter follow-up route and line identity is never guessed\nPASS official dated discrepancy is disclosed without replacing third-party curve\nPASS repeated market switches carry the subject without recursive quoted questions\nPASS summary links encode the selected market and metric, never inherit stale URL\nPASS macro follow-up does not hijack portfolio or opportunity entry\n17 observation checks passed; synthetic inputs only, no financial experiment.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "web/run-market-foundation-regression.mjs"
+      ],
+      "cwd": "repository root",
+      "exit_code": 0,
+      "stdout": "PASS quantiles independently checked with negatives, zeros, ties and copied input\nPASS unverified fixed CPI, VIX, rates and valuation thresholds are not offered\nPASS 12 observed values produce reproducible quantiles and disclose actual support\nPASS all four index identities explicit, malformed date / unit / zero rejected\nPASS daily alignment never carries values across missing dates\nPASS monthly labels use last same-month index, do not treat next month publication as observed\nPASS weekly bucketing across year and current incomplete week excluded\nPASS projection omits long gaps and zero-variance correlation\nPASS inconsistency reports simultaneous fact, never invents a future failure\nPASS macro entry detects relevant questions without catching trade recording\nPASS macro answers give actual periods, no fabricated zeros and no buying conclusion\nPASS official event times preserve daylight saving and data reference period separately\n12 foundation checks passed; synthetic math, no financial experiment.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "web/run-market-dashboard-regression.mjs"
+      ],
+      "cwd": "repository root",
+      "exit_code": 0,
+      "stdout": "PASS exactly 24 unique indicators with no foreign-only leakage\nPASS each metric is routed to the existing endpoint with the expected source unit\nPASS loader selects only its endpoint and sends the supplied abort signal\nPASS missing key and empty series do not borrow a neighboring reading\nPASS wrong unit or unequal array lengths block the entire affected series\nPASS invalid numbers, impossible dates, duplicate dates and descending dates are blocked\nPASS future periods are excluded and cannot become the latest reading\nPASS null is missing while numeric zero remains a real reading\nPASS each reading uses its own latest date, never the response-wide as_of\nPASS monthly windows use calendar years and include the boundary month\nPASS leap-day year subtraction clamps to February 28\nPASS change compares the previous valid value, including an earlier zero\nPASS reference policy drops unsupported fixed thresholds and retains definitions\nPASS malformed envelope is rejected while provider errors remain a count\n14 market dashboard boundary checks passed; synthetic data only.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "web/run-market-integration-regression.mjs"
+      ],
+      "cwd": "repository root",
+      "exit_code": 0,
+      "stdout": "PASS five old sections and all legacy deep links preserve destination and query\nPASS every plotted reference has readable meaning, color and original threshold identity\nPASS unsupported valuation and volatility fixed lines are removed\nPASS merged content keeps old modules and fixes CPI display without changing shared threshold numbers\n4 market integration checks passed; synthetic inputs, no financial experiment.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "web/run-market-understanding-regression.mjs"
+      ],
+      "cwd": "repository root",
+      "exit_code": 0,
+      "stdout": "PASS real zero retained and change basis not renamed trading days\nPASS wrong response market rejected\nPASS foreign market item and unknown ID not displayed\nPASS invalid units, infinities and duplicate IDs are excluded\nPASS missing status never displays numeric payload\nPASS invalid calendar date cannot display a value\nPASS fixed turnover stays historical even when API current\nPASS unknown publication precision never upgraded\nPASS date-only publication not represented as precise instant\nPASS monthly observation preserved without naive day-age expiry\nPASS survey is identified as week not release date\nPASS percentage changes use percentage points\nPASS malformed items/errors fail clearly\nPASS source errors are disclosed without exposing raw provider error\nPASS credential and executable source URLs never linked\nPASS unknown ETF fields stay unknown and explicit US/CNY is cross-currency\nPASS null value cannot retain qualified/current badge\nPASS invalid date cannot retain qualified/current badge\nPASS relative percentage change cannot silently replace pinned absolute change\nPASS unsupported change unit rejected by decoder\nPASS decoder excludes null current record with notice\nPASS decoder excludes numeric payload claiming missing\n22 market understanding boundary checks passed; synthetic data only.\nPASS all view preserves complete original catalogue for each market\nPASS new groups never leak foreign-only observations or old reading cards\nPASS events has its own reading even without a legacy numbered catalogue row\nPASS industry includes shared macro and earnings evidence without duplicating catalogue IDs\nPASS search aliases and new cash-flow cards are discoverable\nPASS method changes order without changing the underlying facts or count\nPASS all six layers have independent method order and current-market module paths\nPASS A-share sectors never offered as a US industry link\nPASS retained catalogue links resolve to existing fundamentals tab IDs\nPASS new and old reading IDs and all sources remain uniquely resolvable\nPASS personal plans and technical base remain all-only, never product attributes\n33 total checks passed; no live market data or investment-effect tests.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "npm",
+        "--prefix",
+        "web",
+        "run",
+        "build"
+      ],
+      "cwd": "repository root",
+      "exit_code": 0,
+      "stdout": "\n> biao-signal-web@0.1.0 build\n> tsc --noEmit && vite build\n\nvite v5.4.21 building for production...\ntransforming...\n✓ 761 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                      0.55 kB │ gzip:   0.34 kB\ndist/assets/index-D52_2MeK.css     231.20 kB │ gzip:  41.68 kB\ndist/assets/react-CM6ARAep.js      164.49 kB │ gzip:  53.66 kB\ndist/assets/index-L1AgkmJA.js      812.06 kB │ gzip: 286.18 kB\ndist/assets/echarts-BOcpYRet.js  1,035.04 kB │ gzip: 342.62 kB\n✓ built in 2.71s\n",
+      "stderr": "\n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_repo_hygiene.py"
+      ],
+      "cwd": "repository root",
+      "exit_code": 1,
+      "stdout": "✗ 归置自检发现 2 处违规（规约见 AGENTS.md「文件归置规约」）：\n  - [仓库根层] 多出文件: .git （新文件按目录地图进子目录，见 docs/README.md）\n  - [docs/ 根层] 多出目录: progress/（白名单外，归档或删除）\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "repository root",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "browser": {
+    "actual": [
+      "CN/US four-group controls",
+      "CN valuation 36 monthly observations / 35 adjacent changes in index comparison",
+      "official August PE mismatch warning and reference link",
+      "US HY OAS/index simultaneous pressure fact with explicit dates",
+      "page to Agent; US valuation then main-input A-share follow-up then rates in panel",
+      "ambiguous reference asks exact indicator",
+      "17-case synthetic model boundary tests; source availability not inferred",
+      "390px page/index/Agent no horizontal overflow; 3 charts plus missing earnings card",
+      "1280px combo 590px+590px grid; no overflow; viewport reset",
+      "summary VIX link explicitly encodes US market"
+    ],
+    "unverified": [
+      "forced service failure UI (synthetic decode/error cases tested only)",
+      "real user comprehension",
+      "clean dependency installation",
+      "cross-OS",
+      "real supplier freshness and vintage",
+      "production deployment/online return"
+    ]
+  },
+  "failures_retained": [
+    "initial test-write/build wrong cwd; no change to other workspaces",
+    "expected missing-function/assert failures before implementations",
+    "first preview React optimized-module version mix; reload fixed; no cache deletion or unrelated source edits",
+    "local changes variable shadowed imported changes; distinct alias fixed",
+    "nested follow-up topics repeated; explicit topic retention fixed",
+    "initial broad follow-up captured portfolio/opportunity; route narrowed and regression added",
+    "diff trailing space fixed",
+    "manifest audit initially used wrong registry top-level key reports; registry uses entries; corrected read-only audit passed, no registry content changed"
+  ],
+  "research": {
+    "financial_experiment": 0,
+    "model_calls": 0,
+    "external_source_tool_batches": 6,
+    "external_source_query_open_items": 20,
+    "source_accounting": "six-batch counting hid 20 items; conservatively treated as above registered six-item cap, no additional source calls"
+  },
+  "delivery_checks": {
+    "registry_entry_and_all_30_manifest_files": "passed; sha256 matching",
+    "sha256sums": "passed",
+    "original_checkout_head": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
+    "original_index_sha256": "83bb48fe19dcb073d4a449bcef331c745c942128ea53ca2a19c1f6791cbe7f92",
+    "original_dirty_agents_sha256": "bdd7bb36751b1fcde7c4ec4abaec7c59c7778b0372b047e80d27290188bba240",
+    "original_agents_note": "changed by concurrent work; this task did not modify or include it",
+    "sensitive_candidate_scan": "passed; no credential token/private key/password URL patterns",
+    "publication_branch": "codex/investor-observation-map-progress-20261004"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "mode": "report_only",
+  "date": "2026-10-04",
+  "timezone": "Asia/Shanghai",
+  "budget": {
+    "recorded_cap": 6,
+    "web_tool_batches": 6,
+    "query_or_open_items": 20,
+    "accounting_note": "此前登记未明确批次与子请求项。按保守请求项口径为20/6，超过登记上限；不将六批冒称六个访问项、不重置。停止本阶段新来源请求，来源续核paused；无拟合/训练/模型/付费。",
+    "financial_experiments": 0
+  },
+  "calls": [
+    {
+      "id": 1,
+      "searches": 3,
+      "opens": 0,
+      "scope": "FINRA月度、CFTC周度、CSI指数PE；只采用官方结果，其他命中不作依据"
+    },
+    {
+      "id": 2,
+      "searches": 0,
+      "opens": 3,
+      "scope": "FINRA统计正文、CFTC正文、CSI指标说明PDF"
+    },
+    {
+      "id": 3,
+      "searches": 2,
+      "opens": 2,
+      "scope": "读已定位PDF/CFTC段落；FactSet估计和FINRA使用条件搜索"
+    },
+    {
+      "id": 4,
+      "searches": 0,
+      "opens": 3,
+      "scope": "FINRA隐私（不是再分发许可证据）、FactSet产品说明、CSI300月报"
+    },
+    {
+      "id": 5,
+      "searches": 1,
+      "opens": 3,
+      "scope": "FINRA许可搜索未定位统计专用授权；CFTC/FactSet/CSI已定位段落"
+    },
+    {
+      "id": 6,
+      "searches": 0,
+      "opens": 3,
+      "scope": "CSI月报实际PE和日期、CFTC TFF分类/公开接口、FactSet内容日期与版本"
+    }
+  ],
+  "sources": [
+    {
+      "id": "finra-margin",
+      "url": "https://www.finra.org/rules-guidance/key-topics/margin-accounts/margin-statistics",
+      "access": "正文L190-217",
+      "verified": "2026-10-04",
+      "meaning": "月末结算口径的客户融资借款和两类可用贷方余额；百万美元；通常下一月第三周更新，无数据feed。2010年2月统计覆盖变更、2021年FAQ后方法变更可能影响比较。",
+      "use": "公开页面阅读与字段资格说明",
+      "missing": "逐期真实发布时刻和版本、连续文件解析及应用/再分发许可能否适用未确认；未下载Excel、未接入图表"
+    },
+    {
+      "id": "cftc-cot",
+      "url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm",
+      "access": "正文、TFF分类及PRE/API说明",
+      "meaning": "周二持仓通常周五美东15:30公布，假期可变；TFF将金融期货区分做市/中介、资产管理/机构、杠杆基金等；不是机构情绪同义词。公开PRE可过滤/导出，官方说明一般可无令牌使用。",
+      "missing": "未选合约代码/期货或期权合并口径、未获取历史文件和每期实际发布版本；尚非本系统连续输入"
+    },
+    {
+      "id": "cftc-schedule",
+      "url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/ReleaseSchedule/index.htm",
+      "access": "搜索返回的官方正文片段，非单独打开",
+      "meaning": "2026暂定安排可因假期延迟；不硬算固定三天延迟"
+    },
+    {
+      "id": "csi300-factsheet",
+      "url": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000300factsheet.pdf",
+      "access": "PDF2页文本，L9-30；未保存或独立核PDF字节SHA",
+      "version": "所用月报所属2026-08-31",
+      "meaning": "000300滚动PE14.65；指标使用计算用股本。仅此报告版本，不是今天值。",
+      "counterevidence": "本地API同日PE13.04；接口是第三方链、频率和官方一致性不能依注释推断。不能直接覆盖历史或推断服务提供商错误根因。"
+    },
+    {
+      "id": "csi-industry-method",
+      "url": "https://oss-ch.csindex.com.cn/indexCalculationDescription/%E6%8C%87%E6%A0%87%E8%AE%A1%E7%AE%97%E8%AF%B4%E6%98%8E.pdf",
+      "access": "PDF5页文本",
+      "version": "2020-12 V1.1",
+      "meaning": "文件明确是行业指标说明；不能拿它认证沪深300指数PE公式。属于已排除错误证据方向。"
+    },
+    {
+      "id": "factset-estimates",
+      "url": "https://insight.factset.com/resources/factset-consensus-estimates-datafeed",
+      "access": "正文L39-72",
+      "version": "产品内容统计注明截至2019-04，不当当前覆盖规模",
+      "meaning": "共识快照、分析师明细、实际盈利与管理层指引分开；其产品可保存历史快照。",
+      "missing": "本项目无已确认数据服务许可/端点/合格交付，不把公开Earnings Insight旧报告或TTM倒数当盈利预测"
+    },
+    {
+      "id": "factset-old-report",
+      "url": "https://advantage.factset.com/hubfs/Website/Resources%20Section/Research%20Desk/Earnings%20Insight/EarningsInsight_121225.pdf",
+      "access": "搜索片段，不单独打开",
+      "version": "2025-12-12",
+      "meaning": "只能证明该报告讨论预期修订与前瞻估值；不提供2026当前预测。"
+    },
+    {
+      "id": "finra-privacy",
+      "url": "https://www.finra.org/privacy-policy",
+      "access": "正文",
+      "meaning": "隐私说明不能替代Margin Statistics数据使用或再分发许可；本次检索未解决许可，不引用其他产品条款硬套"
+    }
+  ]
+}

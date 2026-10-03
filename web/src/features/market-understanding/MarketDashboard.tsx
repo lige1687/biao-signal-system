@@ -1,7 +1,9 @@
+import ObservationPanel from './ObservationPanel';
+import {observedFrequency,qualityNote,cnValuationAudit} from './data-quality';
 import { useEffect, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import TrendChart from '../../components/trend/TrendChart';
-import { formatValue, groups, lastReading, loadHistory, metrics, periodLabel, referencesFor, windowSeries, yRangeFor, type Market, type Metric, type Series, type WindowYears } from './dashboard-model';
+import { formatValue, groups, lastReading, loadHistory, metrics, periodLabel, referencesFor, windowSeries, yRangeFor, type Market, type Metric, type Series, type WindowYears, shanghaiToday } from './dashboard-model';
 import './dashboard.css';
 import {evidenceFor} from './reference-evidence';
 
@@ -17,6 +19,8 @@ function Reading({metric,series}:{metric:Metric;series?:Series}) {
   return <div className="md-reading"><p>{metric.reading}</p>{refs.length>0 && <ul className="md-reading-lines">{refs.map(r=><li key={r.y}><strong className={`md-tone-text-${r.tone}`}>{r.label}</strong>：{r.explanation}<small>{r.kind} · {r.basis}</small></li>)}</ul>}{evidence && <p><a href={evidence.url} target="_blank" rel="noreferrer">{evidence.title} ↗</a> · 定义核查 {evidence.verified}。{evidence.meaning}</p>}<p>来源路径：{metric.source}。名称依据现有实现；历史接口未返回逐期来源、首次发布时间或修订记录。</p></div>;
 }
 function Card({metric,series,years,showLines,pending,failed,onExpand,market}:{market:Market;metric:Metric;series?:Series;years:WindowYears;showLines:boolean;pending:boolean;failed:boolean;onExpand:(button:HTMLButtonElement)=>void}) {
+  const inputQuality=qualityNote(metric,series,shanghaiToday());
+  metric={...metric,frequency:observedFrequency(metric,series)};
   const latest=lastReading(series), refs=referencesFor(metric.key,series?windowSeries(series,years):undefined);
   return <article id={`metric-${metric.key}`} className="md-card" data-metric={metric.key}>
     <header><div><p className="md-category">{groups[metric.group]} · {metric.frequency}频</p><h2>{metric.title}</h2></div><button className="md-expand" aria-label={`放大${metric.title}`} disabled={!latest} onClick={e=>onExpand(e.currentTarget)}>放大 ↗</button></header>
@@ -27,12 +31,14 @@ function Card({metric,series,years,showLines,pending,failed,onExpand,market}:{ma
     {latest?.trailingMissing && <p className="md-warning">末期读数缺失，上方显示最近有效观测。</p>}
     {latest && series?.notice && <p className="md-warning">{series.notice}</p>}
     <div className="md-reference" aria-label="阈值与参考">{refs.length ? <><span>{!latest?'参考定义':showLines?'图中虚线':'参考线已隐藏'}：</span>{refs.map(r=><span className={`md-ref-chip md-tone-${r.tone}`} title={r.explanation} key={r.y}>{r.label}<small>{r.kind}</small></span>)}</> : <span>无经核验的固定投资阈值 · 本项不画分位或有效历史不足</span>}</div>
+    <p className={/不一致|市盈率口径/.test(inputQuality)?"md-warning":"md-meta"}>{inputQuality}</p>{metric.key==='pe_cn'&&<a href={cnValuationAudit.url} target="_blank" rel="noreferrer">核查官方月报（{cnValuationAudit.period}）↗</a>}
     <a href={`/market-understanding?market=${market}&metric=${metric.key}#index-comparison`}>与指数对照 ↗</a><details><summary>怎么看 · 与什么一起看</summary><Reading metric={metric} series={series?windowSeries(series,years):undefined}/></details>
   </article>;
 }
 function Enlarged({metric,series,years,showLines,onClose,opener}:{metric:Metric;series:Series;years:WindowYears;showLines:boolean;onClose:()=>void;opener:HTMLButtonElement|null}) {
   const ref=useRef<HTMLDialogElement>(null);
   useEffect(()=>{const dialog=ref.current!;dialog.showModal();return ()=>{dialog.close();opener?.focus();};},[opener]);
+  metric={...metric,frequency:observedFrequency(metric,series)};
   const value=lastReading(series);
   return <dialog ref={ref} className="md-dialog" onCancel={e=>{e.preventDefault();onClose();}} aria-labelledby="md-dialog-title">
     <header><div><h2 id="md-dialog-title">{metric.title}</h2><p>{value && `${formatValue(value.value,metric.unit)} · ${periodLabel(value.date,metric.frequency)}`}</p></div><button autoFocus onClick={onClose} aria-label="关闭放大图">关闭 ×</button></header>
@@ -68,6 +74,7 @@ export default function MarketDashboard({embedded=false}:{embedded?:boolean}) {
     <div className="md-toolbar"><div className="md-groups" aria-label="指标分类">{Object.entries(groups).map(([id,label])=><button key={id} aria-pressed={group===id} onClick={()=>setGroup(id as keyof typeof groups)}>{label}</button>)}</div><div className="md-options"><label>区间 <select value={years} onChange={e=>setYears(e.target.value==='all'?'all':Number(e.target.value) as 1|3)}><option value={1}>近1年</option><option value={3}>近3年</option><option value="all">已取得全部</option></select></label><label><input type="checkbox" checked={showLines} onChange={e=>setShowLines(e.target.checked)}/>参考线</label><button disabled={isFetching} onClick={()=>{void rates.refetch();void (market==='cn'?macro:usMacro).refetch();}}>{isFetching?'读取中…':'重新读取'}</button></div></div>
     <div className="md-status" role="status"><span>{market==='cn'?'A股':'美股'} · 已有读数 {count}/{selected.length} 项{isFetching?' · 更新中':''}</span><span>各图按自身日期显示 · 月度数据标所属月 · 参考线不代表买卖条件</span></div>
     {(failures>0 || (sourceErrors>0 && count<selected.length)) && <p className="md-warning">{failures>0?`${failures}组接口暂不可用。`:''}{sourceErrors>0?'共享资料接口有缺失提示。':''}已取得的曲线仍可查看，空缺不会填成零值。</p>}
+    <ObservationPanel market={market} today={shanghaiToday()}/>
     <section className="md-grid" aria-label={`${market==='cn'?'A股':'美股'}指标图表`}>{visible.map(m=>{const q=queries[m.endpoint];return <Card key={m.key} market={market} metric={m} series={q.data?.series[m.key]} years={years} showLines={showLines} pending={q.isPending} failed={q.isError} onExpand={button=>{opener.current=button;setExpanded(m.key);}}/>;})}</section>
     <footer className="md-footer"><p>显示最近已取得的数据，未确认全部为最新发布；资料所属期不是发布时间。区间以每项最新所属期为终点，切换区间不会补取更早历史。</p><details><summary>当前覆盖与缺项</summary><p>A股：两融、利率、估值及月度经济；美股：利率、估值、波动、信用与经济。接口无有效历史时保留空卡。FINRA美国融资、CFTC持仓、盈利预期、完整事件日历等尚未接到这些图表（首批美国安排见“指数对照与事件”）；情绪研究与技术判定仍沿用各自模块。</p><p>这次增加的是已有市场资料的直接展示；没有新增交易条件，也未测量对投资收益的影响。</p></details></footer>
     {large && largeSeries && <Enlarged metric={large} series={largeSeries} years={years} showLines={showLines} onClose={()=>setExpanded(null)} opener={opener.current}/>}

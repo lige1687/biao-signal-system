@@ -1,5 +1,5 @@
 import MacroReadingPanel from '../features/market-understanding/MacroReadingPanel';
-import {isMacroQuestion} from '../features/market-understanding/macro-reading';
+import {isMacroQuestion,isMacroFollowup} from '../features/market-understanding/macro-reading';
 import { useEffect, useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
@@ -440,7 +440,7 @@ export default function AgentWorkspacePage() {
   };
   const send = async (raw:string, forceDispatch=false) => {
     const message=raw.trim();if(!message||requestLock.current||loadingHistory)return;
-    if(!forceDispatch&&isMacroQuestion(message)){setMacroQuestion(message);setInput('');return;}
+    if(!forceDispatch&&(isMacroQuestion(message)||(macroQuestion!==null&&isMacroFollowup(message)))){setMacroQuestion(message);setInput('');return;}
     requestLock.current=true;setBusy(true);
     const gen=generationRef.current;
     try{
@@ -493,7 +493,7 @@ export default function AgentWorkspacePage() {
           <div>{(symbol||latest) && <button className="btn small" onClick={()=>resource?closeResource():symbol?inspect(symbol):latest&&setResource({kind:"result",id:latest.id})}>{resource?"收起资料":"查看资料"}</button>}<button className="btn small" disabled={busy} onClick={newSession}>新对话</button></div></header>
         {historyError && <p className="ar-notice" role="alert">{historyError}</p>}
         <div className="ar-messages" ref={bodyRef} onScroll={()=>{const el=bodyRef.current;if(el){followRef.current=shouldFollowOutput(el.scrollTop,el.clientHeight,el.scrollHeight);if(followRef.current)setHasNew(false);}}}>
-          {macroQuestion!==null&&<MacroReadingPanel key={macroQuestion} initialQuestion={macroQuestion} onClose={()=>setMacroQuestion(null)}/>}
+          {macroQuestion!==null&&<MacroReadingPanel initialQuestion={macroQuestion} onClose={()=>setMacroQuestion(null)}/>}
           {turns.some(t=>t.history) && <p className="ar-footnote">以下是按当时内容恢复的历史记录（回答、数据日期与动作都是当时的）；右侧图表展示的是当前最新数据，两者日期可能不同。</p>}
           {loadingHistory && <div className="ar-working" role="status">正在恢复对话…</div>}
           {!turns.length && !loadingHistory && <div className="ar-welcome"><span className="ar-welcome-mark" aria-hidden="true">BIAO</span><h2>今天，从哪个问题开始？</h2><p>查看机会、讨论标的，或回顾你的交易。<br/>分析与资料会在这里逐步展开。</p>

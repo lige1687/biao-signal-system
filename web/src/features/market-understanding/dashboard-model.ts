@@ -41,7 +41,7 @@ export const metrics: Metric[] = [
 ];
 export interface Reference extends MarkLine, ReferenceReading { kind: '定义线' | '原页面参考' | '历史分位参考'; basis: string; sourceUrl?: string }
 export function referencesFor(key:string,series?:Series):Reference[] { return [...definedReferences(key),...historicalReferences(key,series)]; }
-export interface Series { dates: string[]; values: (number|null)[]; notice: string }
+export interface Series { dates: string[]; values: (number|null)[]; notice: string; receivedAt?: string }
 export interface Decoded { series: Record<string, Series>; errors: number }
 function record(x: unknown): x is Record<string, unknown> { return !!x && typeof x==='object' && !Array.isArray(x); }
 export function validDate(x: unknown): x is string { return typeof x==='string' && /^\d{4}-\d{2}-\d{2}$/.test(x) && Number.isFinite(Date.parse(x+'T00:00:00Z')) && new Date(x+'T00:00:00Z').toISOString().slice(0,10)===x; }
@@ -51,6 +51,7 @@ export function decodeHistory(raw: unknown, endpoint: Endpoint, today: string): 
   for(const m of metrics.filter(m=>m.endpoint===endpoint)) {
     const s=raw.series[m.key];
     const missing = (notice: string) => {result.series[m.key]={dates:[],values:[],notice};};
+    if(['synthetic','demo','test'].includes(String(raw.data_mode))) {missing('演示数据不作为真实市场观测');continue;}
     if(!record(s) || !Array.isArray(s.dates) || !Array.isArray(s.values)) { missing('本次未返回该序列'); continue; }
     if(s.unit!==m.apiUnit || s.dates.length!==s.values.length) {missing('单位或日期与数值不匹配，暂不展示');continue;}
     if(!s.dates.every((d,i)=>validDate(d) && (i===0 || d > (s.dates as string[])[i-1])) || !s.values.every(v=>v===null || (typeof v==='number' && Number.isFinite(v)))) {missing('日期顺序或数值格式异常，暂不展示');continue;}
@@ -90,5 +91,8 @@ export const endpoints: Record<Endpoint,string> = {rates:'/api/fundamentals/rate
 export async function loadHistory(endpoint: Endpoint, signal: AbortSignal): Promise<Decoded> {
   const response=await fetch(endpoints[endpoint],{signal});
   if(!response.ok) throw new Error(`资料服务暂不可用（${response.status}）`);
-  return decodeHistory(await response.json(),endpoint,shanghaiToday());
+  const decoded=decodeHistory(await response.json(),endpoint,shanghaiToday());
+  const receivedAt=new Date().toLocaleString('zh-CN',{timeZone:'Asia/Shanghai'})+' 中国时间';
+  Object.values(decoded.series).forEach(s=>{s.receivedAt=receivedAt;});
+  return decoded;
 }
