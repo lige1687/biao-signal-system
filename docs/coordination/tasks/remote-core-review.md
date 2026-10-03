@@ -2,11 +2,11 @@
 
 - task-id：remote-core-review（稳定唯一；旧入口 docs/progress/remote-core-review.md、docs/ops/work-progress/remote-core-review.md 一对一映射）。
 - 负责人：本远端核心验收会话的主负责人 /root，MacBook-Air-126.local；继续负责，未移交。其他同名 /root 会话不表示同一任务。
-- 更新时间：2026-10-03T14:07:08.806905+08:00，Asia/Shanghai。
+- 更新时间：2026-10-03T15:23:15.146744+08:00，Asia/Shanghai。
 - 状态：active（有界资格准备）；独立验收 completed；正式效果 blocked、尚未启动；返修差异验收等待交付。
 - 仓库：https://github.com/lige1687/biao-signal-system ；工作分支 codex/remote-core-acceptance-20261002。
 - 基础完整 commit：639ad8dbd3d2aa72f824b626b86149c466c132a4；原远端 Opus 5.5 交付4155b4db7ccd14674eff2e29dfaf102d2ac3e5f9。
-- 最近已推送成果完整 commit：bcf6fcf96cb9b5c540714e87316c2ed108299d5b（已核 ls-remote 一致；仅新增工具资格证据/接续状态和本任务进度）；协作AGENTS入口b149a02db84522937281a09df72001b046e7a03e；初步研究前检查0e4f3f4213ecb60a2d27d5147e8b440237946311。
+- 最近已推送成果完整 commit：f87de4f9aacab9f58ccefa85297ea143250d4f9d（已核 ls-remote 一致；本轮5份任务文档/状态/指纹）；先前工具资格证据bcf6fcf96cb9b5c540714e87316c2ed108299d5b；协作AGENTS入口b149a02db84522937281a09df72001b046e7a03e；初步研究前检查0e4f3f4213ecb60a2d27d5147e8b440237946311。
 - 实际读取规则：coordination/lei@b172008890b39e912c8f1d0cfb9125d1e414a97f 的 COORDINATION.md 1.0；后续已读取37226ce542433dde4eef08c51696e8c1f12d0f2b的最新协调任务；规则正文不变。适用本工作分支 AGENTS.md、docs/research/current-standards.json 和原冻结版本；不移植旧实验到新合同。
 
 ## 原始目标、最新要求和验收
@@ -88,3 +88,18 @@
 本轮仅继续现有black-reset资格准备：拟在同一raw/remote-core-rule-next-2026-10-03/写BLACK-RESET-DEFINITION-DRAFT.md及source-mapping.json，明确共同趋势身份、严格比较、未知/缺价、共同字段和最小执行器验收，不写正式登记或执行代码。涉及src/lei_signal/rules/first_ma_pullback.py、lei_color.py与旧lifecycle_ref.py均只读。定义草案不是第二登记表、不是正式策略采用，不用旧raw进口充当正式实现。独立只读协作复核一名临时助手，不创建新用户任务/市场实验；累计新效果/拟合/采购/封存重跑均0，历史预算承接不变。正式工具/定义/数据依赖仍blocked。本轮文档同步无新增运行中实验或checkpoint，不杀进程；其他远端进程未知。
 
 本轮首次普通push因同期任务更新被拒，未冒称已同步。已fetch/read a5e4ecec9f37a93c434a9d2a70df2fca29cedb8e新增市场观察日期说明、地图链接修复和抵扣路径恒等审查；各自文件/问题与本题无冲突，规则未变。只整合本任务未发布提交，保留他人原字节，不强推。
+
+
+## 2026-10-03T15:20:24.172752+08:00：定义准备阶段完成，原任务未结束
+
+本轮范围登记5ebcf90b4c93c153e045ce1a146ca8ac2bd00678已push并fetch读回一致，随后才写草案。独立只读助手完成固定15b3e4e0下9条任务复核（8邻居＋自己），无登记同题/写入冲突，没有提供本题执行器/对象/56引用修复；本轮未启动另一用户任务或市场实验。
+
+已继续原任务并推工作分支f87de4f9aacab9f58ccefa85297ea143250d4f9d：raw/remote-core-rule-next-2026-10-03/的BLACK-RESET-DEFINITION-DRAFT.md、source-mapping.json、continuation-state.json及两份本任务进度共5路径。草案明确定义共同父趋势、观察边界、缺价/左端未知不能重计首次、唯一开关、全部无信号/取消记录、反例与正式执行验收；不是定义登记或可执行实现。9份源/候选输入大小和SHA逐项核合，JSON及新版菜单核19特征/4评价器（含等待描述），所以之前本分支的“两预测入口”不能泛化成所有新版。d4443168仍拒绝政策层且无black-reset，仅源码核对，没有采用共享新代码/统计未来价格。
+
+一次静态菜单抽取断言失败（多个上下文名单），未写文件，已纠正为唯一全局名单后通过并在source-mapping保留失败。本次定义实施/数值边界测试/效果未运行；0市场实验/拟合/收费/封存重跑。工作分支目录卫生、diff、敏感形态/大小、准确暂存路径、来源指纹核验通过，AGENTS协作入口仍在且本轮未变。原研究策略有效性仍未测，不能把定义草案完成当原任务完成。
+
+最新审阅协调f9e14cd0b03e8f27b63a51a87577d54c0b04b09a的external接口审查、technical-reader合成页面验收、sentiment输入/预算状态、technical抵扣路径合成归档：无本black-reset/返修验收冲突。规则不变，其他记录保留。当前进行中只是本阶段同步核验，无研究进程；准备阶段completed，正式效果blocked、返修差异验收等待实际交付；本负责人继续持有原任务。下一步直接处理准确研究对象/执行器与因果输入交付，生产/登记/账户政策不接管；没有新证据不反复盘点、重跑已封存题来维持活动。未提交任务成果为空；共享他人脏文件仍仅本地不上传。
+
+本阶段普通push因同期更新被拒，未强推。已读取bb05d300d04ad8010117148220222c1e6669a42a新增dot-formula-time-validation、dot-pro-increment-review、dot-pro-source-qualification、dot-pro-strategy-definition四份Pro接续记录；它们分别做公式/绝对时间合成验证、未来SMA协议书面审阅、三宏观源资格、历史爆量价位定义，均明确避开本black-reset与原T2—T10验收，当前无同题写入冲突。dot-source提到Pro R3历史隔离原型21/18/6及后续5映射摘要，原件/准确成果提交尚待恢复，不等于原Opus R1—R8完整返修交付或R3关闭；本方仍需确切材料后只核相关差异，不重跑该线已封存核查。external新增兼容结果只涉及其固定工具，未补black执行器/对象。规则未改，保留全部13任务原文件，只整合自己的未发布提交。
+
+本阶段第二次普通push也因并行更新被拒。已读59b2367d884e89e60ff9970026894a903e32d318的地图阶段完成和sentiment获准6次免费来源资格查新，均无本题冲突，未借其预算。改用GitHub单文件更新接口，以本task当前blobSHA作比较，只提交此文件；本地未发布Git提交保留，不能当作已在远端。此轮临时助手已结束，无新市场进程。
