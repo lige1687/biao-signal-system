@@ -1,0 +1,60 @@
+{
+  "checked_at": "2026-10-03T19:32:19.215362+08:00",
+  "delegate": "c_hourly_inventory",
+  "model": "gpt-6-sol",
+  "reasoning_effort": "medium",
+  "writes": [],
+  "market_requests": 0,
+  "scope": [
+    "src/lei_signal/data source",
+    "scripts/intraday_check.py",
+    "tests/unit/test_intraday_check.py",
+    "fixed f87de4f9 T4/T8 Git objects",
+    "data directory filenames/sizes only"
+  ],
+  "found_qualified_hourly_history": false,
+  "scope_limit": "Not a whole-machine or every remote-storage search. Unlisted source and permissions remain unknown.",
+  "data_directory_file_count": 3,
+  "data_directory_relevant_hourly_candidates": 0,
+  "reusable": [
+    {
+      "path": "docs/research/proposals/remote-astra-2026-09-30/T4/field-contract.json",
+      "commit": "f87de4f9aacab9f58ccefa85297ea143250d4f9d",
+      "identity": "draft timing fields only; not live source"
+    },
+    {
+      "path": "docs/research/proposals/remote-astra-2026-09-30/T8/data-contract.json",
+      "commit": "f87de4f9aacab9f58ccefa85297ea143250d4f9d",
+      "identity": "D4 input fields only; source not connected"
+    }
+  ],
+  "excluded_substitutes": [
+    {
+      "path": "src/lei_signal/data/providers.py",
+      "evidence": [
+        "88: interval=1d",
+        "355 and1048: klt101",
+        "504: scale240",
+        "1503: default_provider"
+      ],
+      "reason": "existing default providers daily, not 60m"
+    },
+    {
+      "path": "scripts/intraday_check.py",
+      "evidence": "_fetch_intraday_bars line68: historical daily plus current quote synthetic daily row",
+      "reason": "snapshot is not a historical hourly feed"
+    },
+    {
+      "path": "src/lei_signal/rules/low_level_confirmation.py",
+      "evidence": "module docstring explicitly daily OHLC proxy, no 60m connected",
+      "reason": "cannot relabel its confirmed events as true hourly confirmation"
+    }
+  ],
+  "controller_review": "independently read provider interval literals, daily-proxy module and intraday fetch; data filenames/size count matched; no tests rerun",
+  "unknown": [
+    "authorised data location",
+    "source entitlement/licence",
+    "historical coverage",
+    "availability/revision timestamps"
+  ]
+}
