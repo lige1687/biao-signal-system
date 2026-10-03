@@ -55,3 +55,8 @@ EMA/SMA 固定等待描述与每周入金旧研究各已运行一次核心计算
 ## 另一 AI 的第一步
 
 先核远端分支和本文件实际提交，再读两份报告与 protocol/acceptance；核 `withheld-materials.json`，区分已公开代码、未应用补丁与未交付数据。最低可运行检查：在隔离 clone 根目录以 pytest 运行 `tests/unit/test_ema_sma_waiting_path.py`；每周入金只运行 `test_synthetic.py`，不得运行真实账户入口或旧冻结合同。先核新版本是否已修复旧问题，再按自身授权推进，不继承本机登录、资料许可或交易权限。
+
+
+## 统一协作接入：2026-10-03T14:01:55.025115+08:00
+
+唯一跨任务当前记录：远端 `coordination/lei` 的 `docs/coordination/tasks/lei-technical-reader-research.md`。规则入口是该分支根 `COORDINATION.md`；本轮已读规则完整 commit `0b758e7e10f720c44cbd898d511ff392f2857535`（版本1.0）。本文件和 `docs/ops/work-progress/technical-factor-mainline.md` 留作本工作分支阶段证据，不再承担跨分支实时状态。每轮实质工作先 fetch/read 最新记录，更新自己的记录并核验同步后再开展可能冲突的修改。当前无新实验；只保留原负责人范围，未知任务不视为空闲。

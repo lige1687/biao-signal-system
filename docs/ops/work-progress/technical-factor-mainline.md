@@ -132,3 +132,8 @@
 - 负责设备：本地 Air，主控。
 - 相关提交：上述首阶段SHA；当前接续记录所属提交通过本文件Git历史定位。
 - 下一步：读取 `docs/archive/handoffs-plans/technical-mainline-sync-2026-10-03/next-question-readiness.md`，只在明确原义/资料/分工变化后执行该顺序，不重跑封存研究。
+
+
+### 2026-10-03T14:01:55.025115+08:00：接入统一协作机制
+
+当前跨任务状态入口改为远端 `coordination/lei` 的 `docs/coordination/tasks/lei-technical-reader-research.md`；本文件保留阶段历史，旧路径不移动。已读取协调规则1.0及初始化任务；规则 commit `0b758e7e10f720c44cbd898d511ff392f2857535`。本阶段仅增补本工作分支 AGENTS 协作入口和旧进度映射；不更改研究规则、结果、生产代码、共享脏工作区或运行进程。成果基础 `4b2bd6d9e746809a7f39c89575156298461c2d07`；本阶段提交从文件 Git 历史定位，协调记录引用完整成果 SHA。下一研究仍未启动，定义/输入/归属限制保留；本任务持续负责，不因同步接管或结束。
