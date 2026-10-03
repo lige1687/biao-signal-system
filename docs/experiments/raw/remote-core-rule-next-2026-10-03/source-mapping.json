@@ -1,0 +1,105 @@
+{
+  "updated_at": "2026-10-03T15:18:12.910956+08:00",
+  "work_source_commit": "bcf6fcf96cb9b5c540714e87316c2ed108299d5b",
+  "draft_version": "0.1-unregistered",
+  "formal_definition_ref": null,
+  "sources": [
+    {
+      "path": "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+      "size_bytes": 65786,
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    {
+      "path": "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md",
+      "size_bytes": 36427,
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    },
+    {
+      "path": "src/lei_signal/rules/lei_color.py",
+      "size_bytes": 3924,
+      "sha256": "ae6f3a2547cc37dd1ebdfea1bea206f932defdd8cd90d4061630914c0fc9d4d7"
+    },
+    {
+      "path": "src/lei_signal/rules/first_ma_pullback.py",
+      "size_bytes": 24508,
+      "sha256": "cbad98a136135a936470a1114e95bea656953c42c37637ee4e3f5bedc9153367"
+    },
+    {
+      "path": "docs/experiments/raw/remote-astra-T2-2026-09-30/lifecycle_ref.py",
+      "size_bytes": 9564,
+      "sha256": "cf5ca1535e1d12c4a5d9c98b5c81a439d402e1bffa8b7e070fe726dc1ccc6885"
+    },
+    {
+      "path": "docs/experiments/raw/remote-astra-T2-2026-09-30/real_coverage.py",
+      "size_bytes": 14203,
+      "sha256": "cde15ecd77220a165b732c0bd94ab34daad95aa35f716a93b50010eca427f0bf"
+    }
+  ],
+  "input_candidates": [
+    {
+      "path": "docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/inputs/bars/sh510300-nominal.csv",
+      "size_bytes": 145545,
+      "sha256": "9e282d1d6ba01d54ee3940ee2b14e62ebd8cfd3dccfdaf1feec7f7dc77fdbc44",
+      "qualification": "existing Git historical input; not accepted causal/action completeness for new study"
+    },
+    {
+      "path": "docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/inputs/bars/sz159915-nominal.csv",
+      "size_bytes": 145533,
+      "sha256": "bc4586140bb1c199c93dfc3137d137507067410699f972a1f9b405296b0dcb3f",
+      "qualification": "existing Git historical input; not accepted causal/action completeness for new study"
+    },
+    {
+      "path": "docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/inputs/actions.json",
+      "size_bytes": 8633,
+      "sha256": "42803eceab514880d34918dbf4e04b64eac2a90749ccedb791b214e904ff2789",
+      "qualification": "existing Git historical input; not accepted causal/action completeness for new study"
+    }
+  ],
+  "newer_unadopted_tool_read": {
+    "commit": "d444316817e9330c2d72a4a90c655467b45dd5bb",
+    "path": "src/lei_signal/research/question_contract.py",
+    "sha256": "cb848061d714dc4d5ed1d0d0c172d7278484a5ee1b3d34e9ec350b739c23919c",
+    "feature_kinds": [
+      "a01_signed_band",
+      "a03_pullback_order",
+      "decline_event",
+      "double_ma_order_information",
+      "ema_only_wait_age_information",
+      "ema_sma_waiting_path",
+      "future_deduction_box_information",
+      "key_fluctuation_information",
+      "ma_cluster_information",
+      "prior_top_dual_break_information",
+      "profile_overhead_information",
+      "pullback_layer_change_information",
+      "simple_top3_information",
+      "simple_top_invalidation_information",
+      "slope_change_information",
+      "sma_distance",
+      "space_prior_target",
+      "tsfresh_price_information",
+      "volume_anomaly_information"
+    ],
+    "evaluator_kinds": [
+      "event_risk",
+      "prediction_ols",
+      "prediction_ridge",
+      "waiting_path_description"
+    ],
+    "policy_layer_supported": false,
+    "black_reset_adapter_supported": false,
+    "qualification": "source-only menu review; no runtime, registry or code adoption"
+  },
+  "assembly_attempts": {
+    "failed": 1,
+    "reason": "first AST scan selected multiple context-specific feature lists; no file written before assertion",
+    "correction": "select unique global whitelist by existing sma_distance, not max length or last match",
+    "current": "passed source extraction"
+  },
+  "coordination_rule_read_commit": "15b3e4e0edd878c3e84ef30482d108e492563dbd",
+  "scope_sync_commit": "5ebcf90b4c93c153e045ce1a146ca8ac2bd00678",
+  "market_experiments": 0,
+  "fits": 0,
+  "paid_calls": 0,
+  "sealed_reruns": 0
+}
