@@ -1,3 +1,48 @@
+# 当前：EMA持续性研究闭环已交，相邻变色证据不足
+
+- task-id technical-factor-sequence；负责人本技术因子对话/root，设备Air原负责人继续，非接管或总任务结束。状态：本轮有界问题completed；持续责任active，无本题运行中的实验/助手/checkpoint或后台自动承诺。更新时间2026-10-04T00:41:57+08:00（Asia/Shanghai）。
+- 原始目标：从LEI原汁原味技术策略拆出可计算、可复现、有金融语义的因子，在合法当时资料和明确用途下，用多种方法检验稳定增量；收益/风险/机会/后期反例优先，功能测试不是有效证据。当前范围仅EMA20过去20天方向比例、严格20组高于60组且当前绿色的相邻黑转绿；情绪、宽度、宏观、账户、生产不进入。
+- 工作分支task/technical-factor-sequence-progress；基础ae175d3caea2a5bd301cba46c6d2927bf6a50c6f；**最新成果已推并核实完整commit 2ab565017a7a4959af744430339e32a09ce12667**，远端ref等于本地，87个manifest文件逐项Git对象SHA一致（本次共89准确Git路径）。没有合main/部署/强推/修改权限。
+- [完整结果](https://github.com/lige1687/biao-signal-system/blob/2ab565017a7a4959af744430339e32a09ce12667/docs/experiments/technical-persistence-and-color-transition-2026-10-04.md)；[保存证据入口](https://github.com/lige1687/biao-signal-system/blob/2ab565017a7a4959af744430339e32a09ce12667/docs/experiments/raw/technical-multimethod-2026-10-03/README.md)；[进度](https://github.com/lige1687/biao-signal-system/blob/2ab565017a7a4959af744430339e32a09ce12667/docs/progress/technical-factor-sequence.md)。工作进度里的“正在同步/仅本地”是提交形成前的快照，本条已用准确已推事实替代，不为自指SHA无限补交。
+
+## 已完成的效果、规范与反例
+
+两个明确研究代理 research.trend.ema_direction_persistence20@1.0.0、research.signal.bull_green_adjacent_black20@1.0.0；原文§2.2/§2.7映射及省略条件在报告。严格方向、灰/未知、252连续暖启动、缺失重置、t收盘及t+1..t+21端点实测；没有修改原文或宣称唯一作者公式/完整LEI交易信号。
+
+EMA两目标各两时间折，共8真实OLS拟合。较晚1268条、317日期：收益已有信息误差7.202728961→新增7.291959618，改善−0.089230657个百分点；风险3.525641117→3.539513143，改善−0.013872026。收益新增还输每ETF训练均值6.794336114；风险已有背景优于简单均值，但不能归给新增比例。训练略好不延续；年份/ETF/去掉一ETF、20/60连续日期敏感性不支持稳定改善。结论：本实验范围内未发现实际增量，不等于永久无效或已证实冗余。
+
+固定四组保留0至1、5/10/20/60/120期限的收益、上涨、极端下跌、下探、上探、途中回撤，全部写analysis.json。不同组自然日期不同，不充当净增量。两种排名用途分开：2026H1每ETF跨时间收益关系均负，同日四ETF关系+0.314；不能挑后者证明择时。全部历史已接触，较晚历史不是盲验证。
+
+相邻黑转绿完整安排4340；两折成熟训练事件10/14、较晚4/3。不是550背景日就有550个事件。主控在目标值读取前改qualification_only，专属拟合0、未做事件条件结果比较；同日EMA总体研究包含这些日期不构成事件验证。结论证据不足，不放宽条件凑事件。仅新合法资料与相同定义下足够成熟支持才可新冻结重开。
+
+Alphalens原生窄组件实际落地：上游固定f0a07c22d554e4b4036983cc80320b432714fe7e、Apache-2.0原performance/utils/LICENSE及SHA；只装载三个原函数体、不安装完整平台、不用其独立观察假设误差。并列/常数/小ETF池工程测试，真实4256行1064日与独立排名/组均值误差0，43常数日保留缺值；不硬分十组、不构造资金组合。
+
+## workflow-fusion-2026-10-04 / D1-D2-D5
+
+D1真实已冻题目原文→想帮助的判断→可测目标/方法→未到入场退出资金的距离已交；D2区分固定方法未支持、弱背景、事件不足及未知冗余原因已交；D5就绪/缺口卡已交，执行blocked：合法新资料、真实取得时间/接触史及成熟支持尚缺，最早新观察起点未确定。准确成果是上述2ab565017a7a4959af744430339e32a09ce12667完整报告同名小节，非另造规范/登记表，等待classic负责人独立验收，不替其标passed。未启动采集/自动化、未接管dot-pro未来SMA20或宽度input_observation_only；派发没有新增拟合/来源预算。
+
+## 实际验证、失败、预算和材料
+
+新两个测试文件主控最终12 passed、exit0；代理Sol三批7→2→1失败后停止，root修权限夹具及背景外访问标签。首次冻结被前缀检查拦截（0真实拟合）：past条件错误依赖标签成熟，回归修复后正式冻结；不是改参数。Luna上游组件两批后3通过。analyze首次calendar类型错误exit1，修实际列表后exit0，无拟合。旧归置器因用户指定docs/progress不在白名单exit1；当前共享器只读检查隔离树exit0，源码SHA回执保留，未改器或删目录。
+
+冻结→正式运行→not_supported发布完整；两个accepted-01均0新增拟合。保存系数反算差<1e-10、直接收盘下探差0。独立临时目录无行情/preflight/第三方包的python3 -S核验exit0，破坏副本exit1；只证明保存身份与算术，不重证明市场来源资格。Linux/Windows/全新安装/完整账户/线上未测量或未验证。
+
+预算：真实8/12、相邻事件0、市场/付费0、公开源6/6；旧封存预算保持。人工拟合root准确20、代理最终批明确6，更早失败批总次数未精确记录，不冒称累计已精确计量。负结果不追加种子/条件/参数追正。原20/60黑绿、Q01等待、斜率及旧双均线保持封存不重跑。
+
+来源panel1,582,974字节、SHA382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b；source-manifest a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94；原文df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20/85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903。行情、PDF、原文、完整preflight及本机副本不上传，local-only-artifacts列准确大小/指纹/原因；远端可核保存成绩，缺原件不能完整市场复现。无凭据/权重/数据库/个人账户交付。
+
+## 当前范围、避让及下一步
+
+已完成并可读回的具体范围：new technical_persistence_information.py、alphalens_component.py、两测试和vendor固定公开源；workflow.py/workflow_inputs.py/question_contract.py仅两个new-kind绑定/分派/校验块；definitions只两新对象和相关源；本方用法/报告/registry单项/INDEX/两进度/raw。共享Desktop脏修改、旧nominal.csv及无关恢复材料保留、不收走。
+
+规则v1.0 SHA6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0；本轮问题事前范围b3a2f9f6f260c7a7ea0ebd08985e84c42248f915已同步。发布前最新读至9cb0813bbb6689227787034c26142da08ee54169：risk-shape隔夜/日内/D3只其新kind块，明确避开本模块；external STUMPY/D4/AI候选、classic分发和市场UI不同。无已登记同题/同块冲突；记录不是锁，未登记活动未知。不要与本方同时写上述块；不圈占全部因子/工具方向。
+
+本阶段科学任务结束，没有“继续优化”排队进程。下一步planned：最新协调/已见结论/原文再核后，选择真实未覆盖的用途；相邻变色和未来观察受上述输入支持阻塞，不以换条件重开。最小接续先读本报告和SHA，独立保存复核；有新适用前提时先资格和冻结，不凭completed推断数据/许可/执行权继承。项目AGENTS原协作入口保留，规则不改。本条自身commit由路径Git历史定位，推后核远端与字节才报同步。
+
+---
+
+## 历史阶段（保留）
+
 # 本轮正式有界问题与代码范围补充（结果前）
 
 更新时间2026-10-03T23:50:42.202033+08:00 Asia/Shanghai。旧八份原报告逐一SHA匹配；未覆盖§2.7排列再黑转绿完整条件，EMA20过去20日严格日涨比例也非旧E-only等待日龄。
