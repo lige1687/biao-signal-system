@@ -1,0 +1,91 @@
+{
+  "schema": "bounded-source-ledger/1",
+  "limit": 6,
+  "operations": [
+    {
+      "id": 1,
+      "kind": "single_url_read",
+      "url": "https://api.github.com/repos/arielNacamulli/pitindex/commits?per_page=1",
+      "purpose": "check newer exact commit without re-downloading old data",
+      "started_at": "2026-10-03T07:22:54.323553+00:00",
+      "status": "completed",
+      "http_status": 200,
+      "bytes": 1473,
+      "sha256": "5beb20be10347b418aa5c8f1ead13a4c9cd9f34422f063841acb10dd886a3135",
+      "ended_at": "2026-10-03T07:22:55.169911+00:00"
+    },
+    {
+      "id": 2,
+      "kind": "web_search_query",
+      "query": "\"S&P 500\" \"breadth\" \"20\" \"50\" historical data github",
+      "purpose": "find new open long-history20/50 candidate, excluding previously failed exports",
+      "started_at": "2026-10-03T07:23:18.338107+00:00",
+      "status": "completed",
+      "primary_candidates": [
+        "https://github.com/kssteoh/market",
+        "https://github.com/tradermonty/market-breadth-analysis",
+        "https://github.com/DeanFinancials/deanfi-data"
+      ],
+      "finding": "Search surfaced previously studied DeanFi; reused2026-10-02 qualification, no repeat download. kssteoh uses live constituents; tradermonty saved current list not qualified from excerpt."
+    },
+    {
+      "id": 3,
+      "kind": "web_search_query",
+      "query": "historical SP500 delisted stocks prices free open source permanent identifiers github dataset",
+      "purpose": "identify genuinely distinct dated identity+price sources, not current-member breadth backfill",
+      "started_at": "2026-10-03T07:25:13.354014+00:00",
+      "status": "completed",
+      "primary_candidates": [
+        "https://github.com/coiltrade/point-in-time-sp500",
+        "https://github.com/K0D1Z/sp500-quantitative-dataset"
+      ],
+      "finding": "New leads only; primary README reads and missing-example check are operations4-6, not implied data qualification."
+    },
+    {
+      "id": 4,
+      "kind": "single_url_read",
+      "url": "https://api.github.com/repos/coiltrade/point-in-time-sp500/contents/README.md",
+      "purpose": "new candidate methodology, identity and usable-price qualifications",
+      "status": "completed",
+      "started_at": "2026-10-03T07:26:43.418450+00:00",
+      "http_status": 200,
+      "bytes": 4235,
+      "sha256": "73e0a9b04b8ec63a6eac5bdf13a8a4524f308094676cb7c99df0d28e5c31576f",
+      "git_blob": "4ee960c16c44d2e2d4dda0835b61691cf14f48a9",
+      "source_html": "https://github.com/coiltrade/point-in-time-sp500/blob/main/README.md",
+      "ended_at": "2026-10-03T07:26:44.325828+00:00"
+    },
+    {
+      "id": 5,
+      "kind": "single_url_read",
+      "url": "https://api.github.com/repos/K0D1Z/sp500-quantitative-dataset/contents/README.md",
+      "purpose": "new candidate methodology, identity and usable-price qualifications",
+      "status": "completed",
+      "started_at": "2026-10-03T07:26:43.418589+00:00",
+      "http_status": 200,
+      "bytes": 18686,
+      "sha256": "e74003c12e3f162b345167f7ee2b5e611175a803e9584951eaad96d8e585e160",
+      "git_blob": "43162eeeab46d3002328294002bd2efd6f5b04c7",
+      "source_html": "https://github.com/K0D1Z/sp500-quantitative-dataset/blob/main/README.md",
+      "ended_at": "2026-10-03T07:26:44.325904+00:00"
+    },
+    {
+      "id": 6,
+      "kind": "single_url_read",
+      "url": "https://api.github.com/repos/K0D1Z/sp500-quantitative-dataset/contents/data/missing/missing_example/example_missing_tickers_tiingo.json",
+      "purpose": "verify creator-provided missing-price artifact instead of trusting survivorship-free claim",
+      "status": "completed",
+      "started_at": "2026-10-03T07:27:32.133696+00:00",
+      "http_status": 200,
+      "bytes": 2186,
+      "sha256": "640f04a42c6caa87774a495a7dcc704c3331a2494018abf5ad143706b4350f8d",
+      "git_blob": "b47b892cbe4a72ce5f5fe834bb820c276f84ed71",
+      "source_html": "https://github.com/K0D1Z/sp500-quantitative-dataset/blob/main/data/missing/missing_example/example_missing_tickers_tiingo.json",
+      "ended_at": "2026-10-03T07:27:32.947497+00:00"
+    }
+  ],
+  "fits": 0,
+  "pro": 0,
+  "paid": 0,
+  "updated_at": "2026-10-03T19:24:17.348884+08:00"
+}

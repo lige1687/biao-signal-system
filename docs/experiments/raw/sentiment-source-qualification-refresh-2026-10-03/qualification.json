@@ -1,0 +1,65 @@
+{
+  "schema": "sentiment-source-qualification/1",
+  "research_id": "sentiment.source-qualification-refresh@1.0.0",
+  "execution": "completed",
+  "evidence": "inconclusive",
+  "completion_reason": "evidence_boundary",
+  "budget_stop": "6/6 source operations used; no seventh request",
+  "complete_only_for": "本次已取得公开说明能否补齐原E输入的资格判断；不代表穷尽全网或原E已完成",
+  "original_E": "blocked_missing_qualified_long_history",
+  "records": [
+    {
+      "source": "pitindex",
+      "version": "2df030e5c9be7c83cf4b28c3d8597d74d274757e",
+      "finding": "与旧已核commit相同，复用旧判断，不重新下载历史。",
+      "qualified_for_original_E": false
+    },
+    {
+      "source": "coiltrade/point-in-time-sp500",
+      "readme_git_blob": "4ee960c16c44d2e2d4dda0835b61691cf14f48a9",
+      "claim": "成员重建跨度1976—2026；2016年前未验证；不提供价格。",
+      "status": "method_candidate_only",
+      "gaps": [
+        "更早真实成员/生效日验证",
+        "证券身份而非只看ticker",
+        "退出证券价格与调整版本",
+        "输入可得时点",
+        "上游与再分发许可"
+      ],
+      "qualified_for_original_E": false
+    },
+    {
+      "source": "K0D1Z/sp500-quantitative-dataset",
+      "readme_git_blob": "43162eeeab46d3002328294002bd2efd6f5b04c7",
+      "claim": "2015起成员/价格整理流程，Yahoo加Tiingo补价；需要自己的TIINGO_API_KEY。",
+      "status": "reusable_pipeline_lead_not_executed",
+      "author_missing_example": {
+        "rows": 18,
+        "distinct_tickers": 18,
+        "git_blob": "b47b892cbe4a72ce5f5fe834bb820c276f84ed71",
+        "meaning": "作者示例中的历史缺价记录，不是本线当前Tiingo请求结果"
+      },
+      "gaps": [
+        "不覆盖原问题包含的2008历史",
+        "实际成员生效日/证券级身份",
+        "实际缺价和调整版本",
+        "市场数据使用权及历史可得性"
+      ],
+      "qualified_for_original_E": false
+    },
+    {
+      "source": "DeanFi",
+      "status": "previously_studied",
+      "finding": "搜索再次出现旧源，沿2026-10-02版本/效果报告，不再次下载或拟合。",
+      "qualified_for_original_E": false
+    }
+  ],
+  "new_fits": 0,
+  "new_pro_calls": 0,
+  "paid": 0,
+  "online_benefit": "unmeasured",
+  "strategy_benefit": "unmeasured",
+  "source_requests": 6,
+  "report": "docs/experiments/sentiment-source-qualification-refresh-2026-10-03.md",
+  "no_more_requests_without_new_bounded_authorization": true
+}

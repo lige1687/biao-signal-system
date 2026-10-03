@@ -1,0 +1,30 @@
+{
+  "research_id": "sentiment.source-qualification-refresh@1.0.0",
+  "run_id": "source-refresh-20261003",
+  "mode": "qualification_only",
+  "question": "真正新增免费公开资料能否补齐原E历史20/50宽度输入？",
+  "decision_use": "决定是否有资格另冻市场比较；不运行效果",
+  "scope": "旧开源成员/证券身份资料查新，以及有算法/许可说明的长期20/50成品候选",
+  "authority": {
+    "user_reply": "可以",
+    "approved_scope": "最多6次免费公开来源核查；每查询/单URL读取/失败/重试计1；0拟合/付费",
+    "scope_coordination_commit": "7214234daf544aa351dd3a718f7a307bfb24d88a"
+  },
+  "budget": {
+    "source_request_limit": 6,
+    "used": 0,
+    "fits_limit": 0,
+    "pro_limit": 0,
+    "paid_limit": 0
+  },
+  "existing_evidence": [
+    "docs/experiments/raw/sentiment-open-source-input-2026-09-30/source-catalog.json",
+    "docs/experiments/raw/sentiment-open-source-input-2026-09-30/pitindex-tree.json",
+    "docs/progress/sentiment-factor-research/local-input-resume-check.json"
+  ],
+  "success": "新资料准确版本/身份/时间/算法/许可至少改变一个必要资格；完整输入资格逐项核实才允许后续提议",
+  "stop": "六次耗完或问题已回答/无可取得新材料；不反复登陆/旧超时、不拟合",
+  "output": "docs/experiments/sentiment-source-qualification-refresh-2026-10-03.md",
+  "old_budget": "at least30 prior requests+24 continuation+6NAAIM retained; AAII20 80/80; at least824 fits and4Pro retained",
+  "created_at": "2026-10-03T15:22:54.169660+08:00"
+}

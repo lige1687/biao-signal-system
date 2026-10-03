@@ -1,5 +1,23 @@
 # 情绪与市场状态因子研究进展
 
+## 当前阶段：2026-10-03T19:32:53.566766+08:00（Asia/Shanghai）
+
+用户已确认同时解决低位机会、持有风险和市场状态解释，并要求与其他线避重。工作基线`d53497de0accff778d0db96c010c30078e5b54d9`；本次文档所属准确提交从工作分支`git log -- 本文件`定位，推送核验记录写唯一协调记录，不用文件自指SHA无限补交。
+
+- **本轮已完成**：六次来源资格结论、三用途证据矩阵及具体设计；四份旧结果/四报告按基线字节核对，0模型重跑。报告`docs/experiments/sentiment-source-qualification-refresh-2026-10-03.md`；矩阵`docs/research/sentiment-factor-library/three-use-evidence-2026-10-03.json`；设计`docs/superpowers/specs/2026-10-03-sentiment-three-uses-design.md`。验证回执在本报告同名raw/validation.json。
+- **当前责任**：本线维护S01—S05机会/风险研究证据及解释边界。市场理解12卡/页面由investor-observation-map负责（d58a0740502207ca6dfeb9c9f18b1c135aa54632），技术策略C由technical-factor-sequence负责（3deaad7a1724228780a62af49cf34fc046b0640a）；本线只引用，不接管。原宏观/QQQ/共享工具范围保持。
+- **已计划，尚未运行**：真正合格宽度到位后，先原连续/双低及同低状态AAII确认，再按不同目标检验风险；输入版本共同准备。完整资金、实时预警、生产页面/收益均未测量。
+- **阻塞**：原E真实历史成员、证券身份、退出价格/调整/缺失政策等没有补齐。pitindex版本未变；coil仅方法/成员线索，K0D1Z从2015起且作者有缺价，均未运行其流程。不能以短史或当前成员回填代替。
+- **预算**：本轮来源6/6已用；三用途整理另增0来源/拟合；原至少824拟合/至少4Pro及旧账保持。没有新实验进程，无checkpoint需迁移。Luna一次来源只读、Sol两回合目标/证据只读均结束，没有新Pro。
+- **仅本地**：7份第三方README/API响应共见source-index.json准确大小/SHA，不随公开Git传；旧行情/大包/桌面原件缺口按artifact-locations保留。公开Git只交本线文档、元数据和复用结果引用。
+
+协调规则读取`8778bd3f417834f49885047afddc22c8d72bf2b8`，三用途范围先登记并读回`6dfa0af44325fefb60dd01ca1cee9648401c0e63`。原共享HEAD、默认index、脏AGENTS未切换/清理；后续按最新协调再核重叠。不得重复AAII/PutCall/NAAIM/短史宽度封存模型，不将信息误差改善当收益。
+
+---
+
+以下保留此前阶段原记录，其日期状态不代表当前。
+
+
 更新时间：2026-10-03T13:36:37.405934+08:00（Asia/Shanghai）。负责人仍是本聊天/root、本地Air；未移交接管。
 
 当前完整状态及并行避重范围：[本任务进展](../../progress/sentiment-factor-research.md)。独立工作分支 `task/sentiment-factor-progress`；source HEAD `18e64fa632dba5dbad0e5fcae09b4ccc75f119a9`，同步基础为远端main `d197600b6394244465e1c31b1766b7fc2652197c`。本阶段提交由该文件Git历史定位；推送结果须核远端ref，不以本地commit代替。
