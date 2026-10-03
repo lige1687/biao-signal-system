@@ -199,3 +199,12 @@ bootstrap、Calmar、expR、PF、样本内/样本外、走查（walk-forward）*
 
 跨项目的继续、停止、交付与恢复流程使用用户级 `$research-closure`；项目委派和回调仍由 `.agents/skills/lei-gpt-zcode-orchestrator/SKILL.md` 管理。先复用本项目权威规范、定义、报告模板、实验账本和 manifest；通用默认值不扩大原预算和授权，不重启已有绿色/黑色研究。默认由 AI 自主设计和完成必要实验，中间结果留在产物中，最后一次性交付因子性能、相对已有信息的增量和适用范围；不逐项请求继续。只在关键定义、数据或权限确实阻塞时合并提问，用户主动要求进度或阶段交付时服从。
 <!-- research-closure:project:end -->
+
+
+<!-- lei-coordination:market-observation:start -->
+## 统一协作入口（2026-10-03）
+
+每轮实质工作先获取远端 `coordination/lei`，读取根目录 `COORDINATION.md` 与相关 `docs/coordination/tasks/<task-id>.md`。跨任务当前摘要只维护该协调分支；本分支任务编号为 `market-observation`，记录为 `docs/coordination/tasks/market-observation.md`。阶段完成、范围变化、阻塞或暂停时更新并推送自己的记录，核对远端并读回；同步不表示接管或结案。
+
+代码、测试、研究产物保留独立工作分支；`docs/ops/work-progress/market-observation.md`保留本任务阶段历史。记录不是排他锁：先核对负责人、真实版本和重叠，冲突部分暂停协调，独立部分可继续。不切换脏开发区、不强推、不覆盖他人任务；不扩大原研究、来源预算、数据上传或生产权限。未登记任务状态未知，不能视为无人负责。
+<!-- lei-coordination:market-observation:end -->
