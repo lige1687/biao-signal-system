@@ -2,13 +2,40 @@
   "schema_version": "market-observations/1",
   "role": "叙事观察；不参与技术交易判定或硬过滤",
   "us": {
-    "VXNCLS": {"source": "FRED / Cboe", "unit": "指数点", "universe": "Nasdaq-100 期权预期波动"},
-    "DFII10": {"source": "FRED / 美国财政部", "unit": "%", "universe": "美国10年通胀保值国债"},
-    "BAMLH0A0HYM2": {"source": "FRED / ICE", "unit": "%", "universe": "美国高收益债"}
+    "VXNCLS": {
+      "source": "FRED / Cboe",
+      "unit": "指数点",
+      "universe": "Nasdaq-100 期权预期波动"
+    },
+    "DFII10": {
+      "source": "FRED / 美国财政部",
+      "unit": "%",
+      "universe": "美国10年通胀保值国债"
+    },
+    "BAMLH0A0HYM2": {
+      "source": "FRED / ICE",
+      "unit": "%",
+      "universe": "美国高收益债"
+    }
   },
   "cn": {
-    "margin_balance": {"source": "东方财富汇总", "unit": "亿元", "universe": "沪深交易所融资标的证券"},
-    "margin_buy": {"source": "东方财富汇总", "unit": "亿元", "universe": "沪深交易所融资标的证券"},
-    "stock_turnover": {"source": "待核实", "unit": "亿元", "universe": "同一范围A股股票"}
+    "margin_balance": {
+      "source": "东方财富汇总",
+      "unit": "亿元",
+      "universe": "沪深交易所融资标的证券"
+    },
+    "margin_buy": {
+      "source": "东方财富汇总",
+      "unit": "亿元",
+      "universe": "沪深交易所融资标的证券"
+    },
+    "stock_turnover": {
+      "source": "上交所、深交所每日成交统计（固定历史快照）",
+      "unit": "亿元",
+      "universe": "沪深A股股票，排除B股、基金和北交所",
+      "observation_date": "2026-09-29",
+      "refresh_policy": "fixed historical snapshot only; no automatic update",
+      "publication_status": "first publication and revisions unverified"
+    }
   }
 }

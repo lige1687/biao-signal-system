@@ -1,0 +1,37 @@
+{
+  "checked_at": "2026-10-03T05:34:47.188690+00:00",
+  "python_dependency_versions": "same pinned fresh venv as local handoff verification",
+  "network_guard": {
+    "exit_code": 0,
+    "blocked_socket_attempts": 0,
+    "socket_connections_permitted": 0
+  },
+  "checks": [
+    {
+      "name": "offline-http",
+      "cwd": "isolated public-base-plus-task-delta",
+      "command": [
+        "handoff-tools/offline_smoke.py"
+      ],
+      "exit_code": 0,
+      "output": "{\"offline_http\": {\"cn\": {\"http_status\": 200, \"items\": 3, \"actual_market_data\": false}, \"us\": {\"http_status\": 200, \"items\": 6, \"actual_market_data\": false}}, \"strategy_hashes\": \"match\", \"live_survey\": \"deliberately absent\", \"trading_usefulness\": \"not measured\"}\n"
+    },
+    {
+      "name": "relevant-tests",
+      "cwd": "isolated public-base-plus-task-delta",
+      "command": [
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/unit/test_fundamentals.py",
+        "tests/unit/test_observation_meta.py",
+        "tests/unit/test_market_observations.py",
+        "tests/unit/test_turnover_snapshot.py"
+      ],
+      "exit_code": 0,
+      "output": "....................................................                     [100%]\n52 passed in 0.80s\n"
+    }
+  ]
+}

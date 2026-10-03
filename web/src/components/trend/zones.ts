@@ -226,8 +226,8 @@ export const US_PPI_ZONES: readonly ZoneLevel[] = [
 /** 美国 CPI 同比区间（%） */
 export const US_CPI_ZONES: readonly ZoneLevel[] = [
   { max: 0, label: "通缩", tone: "warning", note: "< 0：通缩压力" },
-  { max: 2, label: "低于目标", tone: "opportunity", note: "0–2%：低于联储 2% 目标，政策空间充裕" },
-  { max: 3, label: "目标上方", tone: "neutral", note: "2–3%：目标附近略偏高" },
+  { max: 2, label: "较低", tone: "neutral", note: "0–2%：CPI同比处于本页较低参考区间；不能据此判断联储目标达成或政策宽松" },
+  { max: 3, label: "温和", tone: "neutral", note: "2–3%：CPI同比处于本页参考区间；联储长期2%目标针对PCE价格指数" },
   { max: 4, label: "偏高", tone: "caution", note: "3–4%：偏高，紧缩压力" },
   { max: Infinity, label: "高通胀", tone: "danger", note: "> 4%：高通胀（2022 峰值 9.1%）" },
 ];
@@ -362,7 +362,7 @@ export const MARKLINES: Record<string, MarkLine[]> = {
   ppiaco_yoy: [{ y: 0, label: "0 通胀/通缩", color: "#6b7280" }],
   cpiaucsl_yoy: [
     { y: 0, label: "0 通胀/通缩", color: "#dc2626" },
-    { y: 2, label: "2 联储目标", color: "#6b7280" },
+    { y: 2, label: "2% 参考线", color: "#6b7280" },
   ],
   dgorder_yoy: [{ y: 0, label: "0 扩张/收缩", color: "#dc2626" }],
   hy_oas: [
@@ -516,7 +516,7 @@ export const SOURCE_NOTES: Record<string, string> = {
   ppiaco_yoy:
     "数据来源：美国劳工部最终需求 PPI PPIFIS（FRED，月频），同比由本系统计算。配铜金比看工业品通胀。",
   cpiaucsl_yoy:
-    "数据来源：美国劳工部城市 CPI CPIAUCSL（FRED，月频，季调），同比由本系统计算。2% 为联储官方目标。配油金比看整体通胀。",
+    "数据来源：美国劳工部城市 CPI CPIAUCSL（FRED，月频，季调），同比由本系统计算。2% 为本页对照线；联储长期2%目标针对个人消费支出物价指数（PCE）的年度变化，不能把CPI直接等同政策目标。配油金比看整体通胀。",
   dgorder_yoy:
     "数据来源：美国普查局耐用品新订单 DGORDER（FRED，月频，未剔除飞机与国防），同比由本系统计算。ISM 制造业 PMI 因 ISM 授权已从 FRED 下架（NAPM 404），以订单同比替代「制造业订单&采购」视角。",
   hy_oas:

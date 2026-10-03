@@ -94,7 +94,7 @@ const FOCUS_CODES = new Set(FOCUS_SEED.map((x) => x.code));
 
 const STAGE_FILTERS: { key: string | null; label: string; tip: string }[] = [
   { key: null, label: "全部阶段", tip: "不按阶段筛选" },
-  { key: "markup", label: "上升", tip: "道路向上：三条件确立，机会区" },
+  { key: "markup", label: "上升", tip: "道路向上：三条件确立" },
   { key: "accumulation", label: "筑底", tip: "底部积累：RS 相对强，但道路条件未齐" },
   { key: "distribution", label: "派发", tip: "高位转弱：价格仍在 SMA60 上，斜率/宽度走坏" },
   { key: "decline", label: "下降", tip: "道路向下：价格 < SMA60 且斜率向下" },
@@ -235,7 +235,7 @@ export default function SectorsPage() {
       </div>
       {data && (
         <div className="sx-snapshot-notice" role="status">
-          截至 {data.trading_day || data.date || "未知"} 的历史快照；最新交易日尚未核实，生成时间不代表行情更新。
+          截至 {data.trading_day || data.date || "未知"} 的历史快照；最新交易日尚未核实，生成时间不代表行情更新。阶段转变日期未提供；近20日变化只指相对强弱排名。
         </div>
       )}
       {helpOpen && <HelpCard note={data?.research_proxy_note} onClose={() => setHelpOpen(false)} />}
@@ -313,7 +313,7 @@ export default function SectorsPage() {
                     cur={sortKey}
                     asc={sortAsc}
                     onToggle={toggleSort}
-                    tip="BIAO 市场阶段：上升=机会 / 筑底=中性 / 派发=谨慎 / 下降=危险（绿=上升与 A 股红涨无关）"
+                    tip="BIAO 市场阶段：上升=道路条件确立 / 筑底=道路条件未齐 / 派发=高位转弱 / 下降=道路向下；阶段色与 A 股红涨绿跌无关"
                   />
                   <SortableTh
                     label="RS强弱排名"
@@ -323,7 +323,7 @@ export default function SectorsPage() {
                     onToggle={toggleSort}
                     tip="相对全 A 等权基准的强弱排名：0 最弱、100 最强，不代表收益百分点；按现有行业层级分组比较"
                   />
-                  <th className="num" title="RS强弱排名近20日变化">强弱变化</th>
+                  <th className="num" title="相对全A等权基准的强弱排名近20日变化，不是收益百分点">近20日排名变化</th>
                   <SortableTh
                     label="50个交易日均线占比"
                     sortKey="b50"
@@ -667,7 +667,7 @@ function HelpCard({ note, onClose }: { note?: string; onClose: () => void }) {
           <tbody>
             <tr>
               <td>阶段</td>
-              <td>上升=机会 / 筑底=中性 / 派发=谨慎 / 下降=危险。绿色系= BIAO 阶段色，与 A 股红涨绿跌无关。</td>
+              <td>上升=道路条件确立 / 筑底=道路条件未齐 / 派发=高位转弱 / 下降=道路向下。阶段转变日期未提供；绿色系为 BIAO 阶段色，与 A 股红涨绿跌无关。</td>
             </tr>
             <tr>
               <td>RS强弱排名（不是收益百分点） / RS20Δ</td>

@@ -2076,8 +2076,10 @@ export default function FundamentalsPage() {
           {observationsLoading && <p className="muted">观察资料加载中…</p>}
           {observationsError && <p className="fund-errors">观察资料不可用：{(observationsError as Error).message}</p>}
           {(observations || (!observationsLoading && !observationsError)) &&
-            <MarketObservationCards response={observations} title={`${market === "cn" ? "A股" : "美股"}背景观察`} />}
-          <details className="observation-legacy"><summary>已有宽度、产品强弱与调查历史</summary>
+            <MarketObservationCards response={observations} title={`${market === "cn" ? "A股" : "美股"}背景观察`} limit={4}
+              metricIds={market === "us" ? ["vix", "vxn", "real_yield_10y", "hy_oas"] : undefined} />}
+          <details className="observation-legacy"><summary>每周调查、已有宽度与产品历史</summary>
+          {market === "us" && <MarketObservationCards response={observations} title="个人看法与管理人股票敞口调查" metricIds={["aaii", "naaim"]} /> }
           <div className="reference-reading-group"><h2>当前市场：宽度与情绪</h2><p>宽度是一批股票中有多少站在各自均线上方；这里展示现有市场读数。</p></div>
           <MarketSection onOpen={setDrawer} />
           <div className="reference-reading-group"><h2>进一步查看：产品强弱与历史变化</h2><p>历史叠图只用于观察同期变化，不能据此认定原因或交易效果。</p></div>
@@ -2091,6 +2093,7 @@ export default function FundamentalsPage() {
       {activeSection === "fund-sec-rates" &&
         (rates ? (
           <>
+            <p className="fund-hint-row">本页利率、估值和波动区间沿用原页面经验参考，只说明指标所处位置，不能单独判断价格方向或 ETF 买卖点。</p>
             <RatesSection data={rates} hist={ratesHist} />
             <PositionBandCard />
             <CorrelationMapCard />
@@ -2100,7 +2103,7 @@ export default function FundamentalsPage() {
         ))}
 
       {/* ── ②⁺ 长周期叠加 ── */}
-      {activeSection === "fund-sec-overlay" && <OverlaySection />}
+      {activeSection === "fund-sec-overlay" && <><p className="fund-hint-row">图中的颜色和分界线沿用原页面经验参考，用于对照历史位置，不能单独判断价格方向或 ETF 买卖点。</p><OverlaySection /></>}
 
       {/* ── 消费 ── */}
       {activeSection === "fund-sec-macro" &&

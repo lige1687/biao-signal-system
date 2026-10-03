@@ -123,7 +123,7 @@ export default function SentimentPage() {
         <SentimentSectorBlock
           view={data.sector_boards}
           heatAvailable={data.sector_heat.available}
-          heatHint="散户热度分位数据暂不可用，恢复后显示"
+          heatHint="订单规模差额排名暂不可用，恢复后显示"
         />
       )}
       {!data.sector_boards?.available && <p className="muted">板块情绪数据暂不可用；当前不展示板块结论。</p>}
@@ -139,7 +139,7 @@ export default function SentimentPage() {
           {(data.action.opportunity_cards ?? []).map((c) => (
             <div key={c.code} className="mood-card action pick">
               <div className="mood-card-head">
-                <b>❄ 冰点机会 · {c.name}</b>
+                <b>❄ 旧冰点提示记录 · {c.name}（当前未核）</b>
                 {c.holding && <span className="mood-hold-tag">持仓相关</span>}
                 <span className="spacer" />
                 {(etfsForSector(c.name) ?? []).slice(0, 2).map((e) => (
@@ -147,18 +147,18 @@ export default function SentimentPage() {
                 ))}
               </div>
               <div className="mood-card-facts">
-                <span>散户涌入强度 <b>{c.z?.toFixed(2) ?? "-"}</b></span>
+                <span>旧小单净流入强度 <b>{c.z?.toFixed(2) ?? "-"}</b></span>
                 <span>板块内走强股票占比 <b>{c.b50?.toFixed(0) ?? "-"}%</b></span>
                 <span>阶段 <b>{c.stage ?? "-"}</b></span>
               </div>
-        <div className="mood-card-body">旧提示：{c.plan_cn}</div>
-        <div className="mood-card-win">原研究说明：{c.win_rate_cn}；完整条件与当前资料时效未核实。</div>
+        <div className="mood-card-body">旧研究只复现四个指定区间的简化条件，未验证完整条件或交易规则。</div>
+        <div className="mood-card-win"><a href="/library?report=docs%2Fexperiments%2Ficepoint-legacy-replay-2026-09-08.md">查看旧研究复核与适用限制</a></div>
             </div>
           ))}
           {(data.action.alarm_cards ?? []).map((c) => (
             <div key={c.code} className="mood-card action alarm">
               <div className="mood-card-head">
-                <b>⚠ 强热警报 · {c.name}</b>
+                <b>⚠ 旧偏热提示记录 · {c.name}（当前未核）</b>
                 {c.holding && <span className="mood-hold-tag danger">持仓相关</span>}
                 <span className="spacer" />
                 {(etfsForSector(c.name) ?? []).slice(0, 2).map((e) => (
@@ -166,23 +166,23 @@ export default function SentimentPage() {
                 ))}
               </div>
               <div className="mood-card-facts">
-                <span>散户涌入强度 <b>{c.z?.toFixed(2) ?? "-"}</b></span>
+                <span>旧小单净流入强度 <b>{c.z?.toFixed(2) ?? "-"}</b></span>
                 <span>板块内走强股票占比 <b>{c.b50?.toFixed(0) ?? "-"}%</b></span>
               </div>
-              <div className="mood-card-body">旧提示：{c.plan_cn}</div>
-              <div className="mood-card-win">原研究说明：{c.win_rate_cn}；当前资料时效未核实。</div>
+              <div className="mood-card-body">旧研究的结果随时期改变，不能一概当作顶部警报。</div>
+              <div className="mood-card-win"><a href="/library?report=docs%2Fexperiments%2Fretail-sentiment-ts-2026-09-05.md">查看历史研究和相反案例</a></div>
             </div>
           ))}
           {(holdDanger.length > 0 || holdWatch.length > 0) && (
             <div className="mood-holding">
-              <div className="sx-rail-title" style={{ fontSize: 12 }}>持仓情绪风险</div>
+              <div className="sx-rail-title" style={{ fontSize: 12 }}>旧持仓情绪标签（当前未核）</div>
               {holdDanger.map((h) => (
-                <span key={h.code} className="mood-hold-chip danger" title={h.detail_cn}>{h.name} · 情绪危险</span>
+                <span key={h.code} className="mood-hold-chip danger" title={h.detail_cn}>{h.name} · 旧风险标签（当前未核）</span>
               ))}
               {holdWatch.map((h) => (
-                <span key={h.code} className="mood-hold-chip watch" title={h.detail_cn}>{h.name} · 需留意</span>
+                <span key={h.code} className="mood-hold-chip watch" title={h.detail_cn}>{h.name} · 旧留意标签</span>
               ))}
-              <span className="mood-hold-chip">其余 {(data.action.holding_risk ?? []).length - holdDanger.length - holdWatch.length} 个持仓情绪正常</span>
+              <span className="mood-hold-chip">其余 {(data.action.holding_risk ?? []).length - holdDanger.length - holdWatch.length} 个持仓未列入旧风险提示；当前状态未核实</span>
             </div>
           )}
         </section>
@@ -241,7 +241,7 @@ function CnMoodCard({ cn }: { cn: SentimentDashboard["cn_mood"] }) {
   return (
     <section className="sx-rail-card mood-card">
       <CardHead
-        title="全A情绪（散户视角）"
+        title="全A情绪（旧来源投票）"
         badge={<Badge tone={tone}>{state === "热" ? "偏热" : state === "冷" ? "偏冷" : state === "中" ? "中性" : "数据不足"}</Badge>}
         verdict={verdict}
         verdictColor={MOOD_TONE[state]}
@@ -404,10 +404,10 @@ function SignalCards({ cn }: { cn: SentimentDashboard["cn_mood"] }) {
       <div className="mood-signal-grid">
         <div className={`mood-signal-card${cold ? " on-blue" : ""}`}>
           <div className="mood-signal-head">
-            <b>❄ 信号一：冰点机会</b>
+            <b>❄ 旧冰点提示记录（当前未核）</b>
             {cold
               ? <Badge tone="info">旧分类显示偏冷</Badge>
-              : <Badge tone="neutral">未激活</Badge>}
+              : <Badge tone="neutral">旧分类非偏冷</Badge>}
           </div>
           <div className="mood-signal-body">
             <p><b>是什么：</b>旧研究观察恐慌、板块下跌与小单资金流的组合。</p>
@@ -417,8 +417,8 @@ function SignalCards({ cn }: { cn: SentimentDashboard["cn_mood"] }) {
         </div>
         <div className="mood-signal-card">
           <div className="mood-signal-head">
-            <b>⚠ 信号二：强热警报</b>
-            <Badge tone="neutral">未激活</Badge>
+            <b>⚠ 旧偏热提示记录（当前未核）</b>
+            <Badge tone="neutral">当前未核</Badge>
           </div>
           <div className="mood-signal-body">
             <p><b>是什么：</b>旧研究观察板块走强时小单资金流增加的现象。</p>
@@ -428,7 +428,7 @@ function SignalCards({ cn }: { cn: SentimentDashboard["cn_mood"] }) {
         </div>
       </div>
       <div className="muted mood-note">
-        两个信号都来自散户资金流研究（2026-09 归档，实验报告库「retail-sentiment-ts」），
+        两个旧提示来自按订单规模分类的资金流研究（2026-09 归档，实验报告库「retail-sentiment-ts」），
         样本范围有限，完整条件的交易效果尚未验证。这些历史记录不构成买卖指令。
       </div>
     </section>

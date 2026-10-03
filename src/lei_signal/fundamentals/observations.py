@@ -7,7 +7,7 @@ from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any, Callable
 
-from lei_signal.fundamentals import sources
+from lei_signal.fundamentals import sources, turnover_snapshot
 from lei_signal.fundamentals.observation_meta import observation_item
 
 
@@ -81,13 +81,16 @@ def build_observations(market: str, fetch: Callable[[str, Callable[[], Any]], An
                 )
 
             add(spec, load_margin)
-        items.append(_missing({"metric_id": "stock_turnover", "label": "A股股票成交额",
-            "market": "cn", "universe": "沪深A股股票，排除B股、基金与北交所", "unit": "亿元",
-            "source_name": "沪深交易所每日成交统计（核验中）", "source_url": "https://www.sse.com.cn/market/stockdata/overview/day/", "source_access": "unverified",
-            "reading": "待取得同一股票范围、同一交易日的可靠原始成交额",
-            "limitations": ["已取得两日分类样本，尚缺上交所明确金额单位与深交所表内日期证明", "连续20个完整交易日资料不足，不能展示20日比较", "不可相加父子分类；不能用含基金的融资额除以股票成交额"],
-            "evidence_refs": ["https://www.sse.com.cn/market/stockdata/overview/day/", "https://www.szse.cn/market/overview/index.html"]},
-            "已找到交易所统计；金额单位、所属日期和连续历史仍待核实，暂不展示合计"))
+        turnover_spec = {
+            "metric_id": "stock_turnover", "label": "A股股票成交额", "market": "cn",
+            "universe": "沪深A股股票（上交所主板A股和科创板；深交所主板A股和创业板A股）", "unit": "亿元",
+            "source_name": "上交所、深交所每日成交统计（固定历史快照）",
+            "source_url": "https://www.sse.com.cn/market/stockdata/overview/day/", "source_access": "public_web",
+            "reading": "仅说明截至2026-09-29的历史交易活跃度，不表示当前市场，也不参与交易判定。",
+            "limitations": ["首次公布时间与修订记录未核实", "固定历史资料；未来日期及自动刷新未核实"],
+            "evidence_refs": ["https://www.sse.com.cn/market/stockdata/overview/day/", "https://www.szse.cn/market/overview/index.html"],
+        }
+        add(turnover_spec, turnover_snapshot.load_turnover_snapshot)
     else:
         series_specs = [
             ("vix", "标普500预期波动率 VIX", "标普500期权", "指数点", "Yahoo / Cboe",

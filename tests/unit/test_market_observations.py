@@ -3,7 +3,7 @@ from datetime import UTC, datetime, timedelta
 from lei_signal.fundamentals import observations, sources
 
 
-def test_cn_observations_keep_fund_scope_and_missing_turnover(monkeypatch):
+def test_cn_observations_keep_fund_scope_and_fixed_historical_turnover(monkeypatch):
     start = datetime(2026, 8, 31, tzinfo=UTC).date()
     hist = {(start + timedelta(days=i)).isoformat():
             {"rzye_yi": 100.0 + i / 10, "buy_yi": 4.0 + i / 20}
@@ -14,8 +14,15 @@ def test_cn_observations_keep_fund_scope_and_missing_turnover(monkeypatch):
     assert by_id["margin_balance"]["value"] == 102.0
     assert by_id["margin_balance"]["change"] == 2.0
     assert "可能含基金" in by_id["margin_balance"]["universe"]
-    assert by_id["stock_turnover"]["value"] is None
-    assert by_id["stock_turnover"]["quality_status"] == "missing"
+    turnover = by_id["stock_turnover"]
+    assert turnover["value"] == 14108.03
+    assert turnover["change"] == -24.63
+    assert turnover["change_unit"] == "%"
+    assert turnover["comparison_period"] == "相对此前20个完整交易日均值"
+    assert turnover["observation_date"] == "2026-09-29"
+    assert turnover["quality_status"] == "time_unverified"
+    assert turnover["published_at"] is None and turnover["fetched_at"] is None
+    assert turnover["observation_count"] == 21
 
 
 def test_us_independent_failure_and_required_fields(monkeypatch, tmp_path):
