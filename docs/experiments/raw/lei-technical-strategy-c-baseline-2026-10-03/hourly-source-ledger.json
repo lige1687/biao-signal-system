@@ -1,0 +1,83 @@
+{
+  "checked_at": "2026-10-03T16:02:17.087264+08:00",
+  "budget": {
+    "web_calls_used": 4,
+    "web_calls_limit": 4,
+    "market_downloads": 0,
+    "paid_calls": 0
+  },
+  "calls": [
+    {
+      "attempt": 1,
+      "kind": "discovery",
+      "queries": [
+        "official Tushare ETF historical minutes",
+        "official AKShare ETF minutes",
+        "official BaoStock ETF minute coverage"
+      ],
+      "use": "search snippets only leads; non-primary content not relied upon"
+    },
+    {
+      "attempt": 2,
+      "kind": "open",
+      "urls": [
+        "https://tushare.pro/document/2?doc_id=387",
+        "https://akshare.akfamily.xyz/data/fund/fund_public.html",
+        "https://www.baostock.com/"
+      ],
+      "result": "Tushare/AKShare content readable; BaoStock returned no usable API detail"
+    },
+    {
+      "attempt": 3,
+      "kind": "find/click",
+      "urls": [
+        "https://akshare.akfamily.xyz/data/fund/fund_public.html",
+        "https://tushare.pro/document/1?doc_id=290"
+      ],
+      "result": "ETF minute section and linked permission page located"
+    },
+    {
+      "attempt": 4,
+      "kind": "open",
+      "urls": [
+        "https://tushare.pro/document/1?doc_id=290"
+      ],
+      "result": "independent minute entitlement confirmed in published docs"
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://tushare.pro/document/2?doc_id=387",
+      "locator": "ETF historical minutes, lines281-315 in observed web tool",
+      "fact": "etf_mins; 1/5/15/30/60 minute frequencies, 8000 rows per response, vendor advertises more than 10 years",
+      "qualification": "public documentation only; no actual ETF dates, action alignment, live availability or user entitlement verified",
+      "conflict": "third-party search snippets use stk_mins; current official page uses etf_mins; do not copy snippets into runnable contract"
+    },
+    {
+      "url": "https://tushare.pro/document/1?doc_id=290",
+      "locator": "permission modes and table2, lines54-76",
+      "fact": "minutes have separate permissions from daily-data points; generic historical minute list price2000CNY/year for individuals",
+      "qualification": "not a quote or user purchase authorization; exact ETF entitlement/package/research licence must be confirmed before subscription or fetch"
+    },
+    {
+      "url": "https://akshare.akfamily.xyz/data/fund/fund_public.html",
+      "locator": "fund_etf_hist_min_em lines599-616",
+      "fact": "supports60minute ETF requests; explicitly recent intraday data; 1minute onlylast5tradingdays",
+      "qualification": "does not establish full2022-2026 history; do not extrapolate1minute five-day limit to60minute or fabricate exact60minute retention"
+    },
+    {
+      "url": "https://www.baostock.com/",
+      "fact": "No usable ETF minute coverage/API detail in retrieved page",
+      "qualification": "unverified; not proof unavailable"
+    }
+  ],
+  "not_done": [
+    "no token inspection",
+    "no live entitlement test",
+    "no price sample",
+    "no software installation",
+    "no purchase",
+    "no vendor original pages redistributed"
+  ],
+  "stop": "public documentation question answered; input acquisition requires existing authorised source/entitlement, not yet supplied"
+}

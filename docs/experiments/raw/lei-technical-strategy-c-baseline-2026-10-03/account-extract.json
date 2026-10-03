@@ -1,0 +1,4063 @@
+{
+  "kind": "saved_aggregate_extract_not_new_backtest",
+  "currency": "CNY",
+  "initial_cash_per_separate_account": "100000",
+  "evidence": "already_seen_history",
+  "input_manifest": [
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "size": 110998,
+      "sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "delivery": "original not uploaded; selected aggregate facts delivered",
+      "access": "local task artifact; no vendor price rows exported"
+    },
+    {
+      "path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "size": 137951,
+      "sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "delivery": "original not uploaded; selected aggregate facts delivered",
+      "access": "local task artifact; no vendor price rows exported"
+    },
+    {
+      "path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "size": 116377,
+      "sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "delivery": "original not uploaded; selected aggregate facts delivered",
+      "access": "local task artifact; no vendor price rows exported"
+    }
+  ],
+  "rows": [
+    {
+      "symbol": "510300.SS",
+      "policy_id": "A_ALL",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "100426.003600",
+      "total_fees_cny": "1482.796400",
+      "net_annualized_return_pct": 0.0898421424650353,
+      "max_account_drawdown_pct": 12.683284648581429,
+      "average_invested_pct": 8.148152888346365,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/0",
+      "trade_sides": 14,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "10542.384400",
+          "return_pct": 10.5423844,
+          "trade_sides": 4,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-10116.380800",
+          "return_pct": -9.151585480003451,
+          "trade_sides": 10,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510300.SS",
+      "policy_id": "A_ALL",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "99050.662400",
+      "total_fees_cny": "2944.637600",
+      "net_annualized_return_pct": -0.20130199828274353,
+      "max_account_drawdown_pct": 13.80451829499004,
+      "average_invested_pct": 8.150183587578246,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/1",
+      "trade_sides": 14,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "10113.941800",
+          "return_pct": 10.1139418,
+          "trade_sides": 4,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-11063.279400",
+          "return_pct": -10.04711957373594,
+          "trade_sides": 10,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510300.SS",
+      "policy_id": "A_SMA",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "101820.097800",
+      "total_fees_cny": "1064.102200",
+      "net_annualized_return_pct": 0.38176401388332337,
+      "max_account_drawdown_pct": 11.471171031880031,
+      "average_invested_pct": 7.711813137824634,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/2",
+      "trade_sides": 10,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "10542.384400",
+          "return_pct": 10.5423844,
+          "trade_sides": 4,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-8722.286600",
+          "return_pct": -7.890445504086666,
+          "trade_sides": 6,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510300.SS",
+      "policy_id": "A_SMA",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "100807.202800",
+      "total_fees_cny": "2118.697200",
+      "net_annualized_return_pct": 0.16998076785710303,
+      "max_account_drawdown_pct": 12.27594854852148,
+      "average_invested_pct": 7.714412833375445,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/3",
+      "trade_sides": 10,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "10113.941800",
+          "return_pct": 10.1139418,
+          "trade_sides": 4,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-9306.739000",
+          "return_pct": -8.451917030546262,
+          "trade_sides": 6,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510050.SS",
+      "policy_id": "A_ALL",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "98982.363100",
+      "total_fees_cny": "1220.936900",
+      "net_annualized_return_pct": -0.2158430931720079,
+      "max_account_drawdown_pct": 8.779033095612402,
+      "average_invested_pct": 7.485977222285965,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/4",
+      "trade_sides": 12,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "3319.509300",
+          "return_pct": 3.3195093,
+          "trade_sides": 6,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-4337.146200",
+          "return_pct": -4.197799843790006,
+          "trade_sides": 6,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510050.SS",
+      "policy_id": "A_ALL",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "97790.374200",
+      "total_fees_cny": "2428.125800",
+      "net_annualized_return_pct": -0.4709039228016021,
+      "max_account_drawdown_pct": 9.686915362078194,
+      "average_invested_pct": 7.4832133346357725,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/5",
+      "trade_sides": 12,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "2692.223000",
+          "return_pct": 2.692223,
+          "trade_sides": 6,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-4901.848800",
+          "return_pct": -4.773339846776907,
+          "trade_sides": 6,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510050.SS",
+      "policy_id": "A_SMA",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "101396.690000",
+      "total_fees_cny": "617.710000",
+      "net_annualized_return_pct": 0.2934379631564177,
+      "max_account_drawdown_pct": 6.023782598131954,
+      "average_invested_pct": 6.8767341794596595,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/6",
+      "trade_sides": 6,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "4283.380600",
+          "return_pct": 4.2833806,
+          "trade_sides": 4,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-2886.690600",
+          "return_pct": -2.7681214239424072,
+          "trade_sides": 2,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510050.SS",
+      "policy_id": "A_SMA",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "100786.636200",
+      "total_fees_cny": "1230.463800",
+      "net_annualized_return_pct": 0.16566320463751172,
+      "max_account_drawdown_pct": 6.389865622759694,
+      "average_invested_pct": 6.869678560574312,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/7",
+      "trade_sides": 6,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "3859.706200",
+          "return_pct": 3.8597062,
+          "trade_sides": 4,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-3073.070000",
+          "return_pct": -2.9588664482472797,
+          "trade_sides": 2,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510500.SS",
+      "policy_id": "A_ALL",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "88357.982600",
+      "total_fees_cny": "1129.217400",
+      "net_annualized_return_pct": -2.580821657058152,
+      "max_account_drawdown_pct": 16.044279033961946,
+      "average_invested_pct": 3.9074794429917103,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/8",
+      "trade_sides": 12,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-5882.277300",
+          "return_pct": -5.8822773,
+          "trade_sides": 6,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-5759.740100",
+          "return_pct": -6.119718937908386,
+          "trade_sides": 6,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510500.SS",
+      "policy_id": "A_ALL",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "87298.803200",
+      "total_fees_cny": "2245.396800",
+      "net_annualized_return_pct": -2.828693077188016,
+      "max_account_drawdown_pct": 16.97223108376423,
+      "average_invested_pct": 3.908075273241486,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/9",
+      "trade_sides": 12,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-6450.803200",
+          "return_pct": -6.4508032,
+          "trade_sides": 6,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-6250.393600",
+          "return_pct": -6.681397397096626,
+          "trade_sides": 6,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510500.SS",
+      "policy_id": "A_SMA",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "89526.414700",
+      "total_fees_cny": "947.085300",
+      "net_annualized_return_pct": -2.3100867040281248,
+      "max_account_drawdown_pct": 14.9340617511676,
+      "average_invested_pct": 3.556726570126778,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/10",
+      "trade_sides": 10,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-4630.987700",
+          "return_pct": -4.6309877,
+          "trade_sides": 4,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-5842.597600",
+          "return_pct": -6.126306081079126,
+          "trade_sides": 6,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510500.SS",
+      "policy_id": "A_SMA",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "88628.907800",
+      "total_fees_cny": "1887.392200",
+      "net_annualized_return_pct": -2.517795797269806,
+      "max_account_drawdown_pct": 15.70720094228318,
+      "average_invested_pct": 3.564891338520343,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/11",
+      "trade_sides": 10,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-5021.875400",
+          "return_pct": -5.0218754,
+          "trade_sides": 4,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-6349.216800",
+          "return_pct": -6.684925425448967,
+          "trade_sides": 6,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "512100.SS",
+      "policy_id": "A_ALL",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "80957.537500",
+      "total_fees_cny": "1275.962500",
+      "net_annualized_return_pct": -4.364437022218559,
+      "max_account_drawdown_pct": 21.455956808906535,
+      "average_invested_pct": 5.746805146336583,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/12",
+      "trade_sides": 14,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-7873.015900",
+          "return_pct": -7.8730159,
+          "trade_sides": 6,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-11169.446600",
+          "return_pct": -12.123968573502886,
+          "trade_sides": 8,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "512100.SS",
+      "policy_id": "A_ALL",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "79834.443600",
+      "total_fees_cny": "2533.756400",
+      "net_annualized_return_pct": -4.646251126607471,
+      "max_account_drawdown_pct": 22.386552557719483,
+      "average_invested_pct": 5.743138364809939,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/13",
+      "trade_sides": 14,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-8412.749800",
+          "return_pct": -8.4127498,
+          "trade_sides": 6,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-11752.806600",
+          "return_pct": -12.832361026600621,
+          "trade_sides": 8,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "512100.SS",
+      "policy_id": "A_SMA",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "89867.708700",
+      "total_fees_cny": "762.991300",
+      "net_annualized_return_pct": -2.2315323122966357,
+      "max_account_drawdown_pct": 12.634271045790648,
+      "average_invested_pct": 2.7892763093256643,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/14",
+      "trade_sides": 8,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-4461.597600",
+          "return_pct": -4.4615976,
+          "trade_sides": 4,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-5670.693700",
+          "return_pct": -5.9355123777954235,
+          "trade_sides": 4,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "512100.SS",
+      "policy_id": "A_SMA",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "89157.779400",
+      "total_fees_cny": "1519.520600",
+      "net_annualized_return_pct": -2.39519993746804,
+      "max_account_drawdown_pct": 13.233167438076368,
+      "average_invested_pct": 2.785747609685969,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/15",
+      "trade_sides": 8,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-4836.809600",
+          "return_pct": -4.8368096,
+          "trade_sides": 4,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-6005.411000",
+          "return_pct": -6.310644877244469,
+          "trade_sides": 4,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "159915.SZ",
+      "policy_id": "A_ALL",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "89800.167300",
+      "total_fees_cny": "1563.132700",
+      "net_annualized_return_pct": -2.247059370908644,
+      "max_account_drawdown_pct": 14.400433682054958,
+      "average_invested_pct": 5.050630026951579,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/16",
+      "trade_sides": 16,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-846.23100",
+          "return_pct": -0.846231,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-9353.601700",
+          "return_pct": -9.433430311660668,
+          "trade_sides": 15,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "159915.SZ",
+      "policy_id": "A_ALL",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "88370.556400",
+      "total_fees_cny": "3100.843600",
+      "net_annualized_return_pct": -2.5778932187568993,
+      "max_account_drawdown_pct": 15.670496539906965,
+      "average_invested_pct": 5.046764523786331,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/17",
+      "trade_sides": 16,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-943.02000",
+          "return_pct": -0.94302,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-10686.423600",
+          "return_pct": -10.788158088405279,
+          "trade_sides": 15,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "159915.SZ",
+      "policy_id": "A_SMA",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "92996.687300",
+      "total_fees_cny": "1193.612700",
+      "net_annualized_return_pct": -1.5221002810271278,
+      "max_account_drawdown_pct": 11.353437958622296,
+      "average_invested_pct": 4.788218911842321,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/18",
+      "trade_sides": 12,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-846.23100",
+          "return_pct": -0.846231,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-6157.081700",
+          "return_pct": -6.209629509897904,
+          "trade_sides": 11,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "159915.SZ",
+      "policy_id": "A_SMA",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "91875.290000",
+      "total_fees_cny": "2372.910000",
+      "net_annualized_return_pct": -1.774158788024971,
+      "max_account_drawdown_pct": 12.326029148413838,
+      "average_invested_pct": 4.785602582180817,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/19",
+      "trade_sides": 12,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-943.02000",
+          "return_pct": -0.94302,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-7181.690000",
+          "return_pct": -7.250059511202542,
+          "trade_sides": 11,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "588000.SS",
+      "policy_id": "A_ALL",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "101054.926600",
+      "total_fees_cny": "200.873400",
+      "net_annualized_return_pct": 0.22193112188548803,
+      "max_account_drawdown_pct": 22.89320845840628,
+      "average_invested_pct": 1.9165230378029652,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/20",
+      "trade_sides": 2,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "1054.926600",
+          "return_pct": 1.0549266,
+          "trade_sides": 2,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "588000.SS",
+      "policy_id": "A_ALL",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "100852.489000",
+      "total_fees_cny": "401.011000",
+      "net_annualized_return_pct": 0.17948528829212496,
+      "max_account_drawdown_pct": 22.878260870380927,
+      "average_invested_pct": 1.915129761312201,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/21",
+      "trade_sides": 2,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "852.489000",
+          "return_pct": 0.852489,
+          "trade_sides": 2,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "588000.SS",
+      "policy_id": "A_SMA",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "100000.000",
+      "total_fees_cny": "0",
+      "net_annualized_return_pct": 0.0,
+      "max_account_drawdown_pct": 0.0,
+      "average_invested_pct": 0.0,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/22",
+      "trade_sides": 0,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "588000.SS",
+      "policy_id": "A_SMA",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "100000.000",
+      "total_fees_cny": "0",
+      "net_annualized_return_pct": 0.0,
+      "max_account_drawdown_pct": 0.0,
+      "average_invested_pct": 0.0,
+      "completed_trade_windows": null,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/accounts.json",
+      "source_sha256": "d2792c29e009a7f796e024b1d59824ee6db534263da9f5fc9b4f87665a166b66",
+      "json_pointer": "/23",
+      "trade_sides": 0,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510300.SS",
+      "policy_id": "A_WAIT",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "101820.097800",
+      "total_fees_cny": "1064.102200",
+      "net_annualized_return_pct": 0.38176401388332337,
+      "max_account_drawdown_pct": 11.471171031880031,
+      "average_invested_pct": 7.711813137824634,
+      "completed_trade_windows": 5,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/0",
+      "trade_sides": 10,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "10542.384400",
+          "return_pct": 10.5423844,
+          "trade_sides": 4,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-8722.286600",
+          "return_pct": -7.890445504086666,
+          "trade_sides": 6,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510300.SS",
+      "policy_id": "A_WAIT",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "100807.202800",
+      "total_fees_cny": "2118.697200",
+      "net_annualized_return_pct": 0.16998076785710303,
+      "max_account_drawdown_pct": 12.27594854852148,
+      "average_invested_pct": 7.714412833375445,
+      "completed_trade_windows": 5,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/1",
+      "trade_sides": 10,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "10113.941800",
+          "return_pct": 10.1139418,
+          "trade_sides": 4,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-9306.739000",
+          "return_pct": -8.451917030546262,
+          "trade_sides": 6,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510300.SS",
+      "policy_id": "A_HALF",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "100216.144000",
+      "total_fees_cny": "740.456000",
+      "net_annualized_return_pct": 0.04562139215964489,
+      "max_account_drawdown_pct": 6.781529870896167,
+      "average_invested_pct": 4.2459902186115475,
+      "completed_trade_windows": 7,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/2",
+      "trade_sides": 14,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "5271.192200",
+          "return_pct": 5.2711922,
+          "trade_sides": 4,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-5055.048200",
+          "return_pct": -4.801929278426088,
+          "trade_sides": 10,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510300.SS",
+      "policy_id": "A_HALF",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "99549.542000",
+      "total_fees_cny": "1467.558000",
+      "net_annualized_return_pct": -0.09532843170216854,
+      "max_account_drawdown_pct": 7.358711646500003,
+      "average_invested_pct": 4.232940481061038,
+      "completed_trade_windows": 7,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/3",
+      "trade_sides": 14,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "5058.357400",
+          "return_pct": 5.0583574,
+          "trade_sides": 4,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-5508.815400",
+          "return_pct": -5.243576557194487,
+          "trade_sides": 10,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510050.SS",
+      "policy_id": "A_WAIT",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "101396.690000",
+      "total_fees_cny": "617.710000",
+      "net_annualized_return_pct": 0.2934379631564177,
+      "max_account_drawdown_pct": 6.023782598131954,
+      "average_invested_pct": 6.8767341794596595,
+      "completed_trade_windows": 3,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/4",
+      "trade_sides": 6,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "4283.380600",
+          "return_pct": 4.2833806,
+          "trade_sides": 4,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-2886.690600",
+          "return_pct": -2.7681214239424072,
+          "trade_sides": 2,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510050.SS",
+      "policy_id": "A_WAIT",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "100786.636200",
+      "total_fees_cny": "1230.463800",
+      "net_annualized_return_pct": 0.16566320463751172,
+      "max_account_drawdown_pct": 6.389865622759694,
+      "average_invested_pct": 6.869678560574312,
+      "completed_trade_windows": 3,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/5",
+      "trade_sides": 6,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "3859.706200",
+          "return_pct": 3.8597062,
+          "trade_sides": 4,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-3073.070000",
+          "return_pct": -2.9588664482472797,
+          "trade_sides": 2,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510050.SS",
+      "policy_id": "A_HALF",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "99486.244100",
+      "total_fees_cny": "609.855900",
+      "net_annualized_return_pct": -0.10875113514362544,
+      "max_account_drawdown_pct": 4.540537172004189,
+      "average_invested_pct": 3.810674987242706,
+      "completed_trade_windows": 6,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/6",
+      "trade_sides": 12,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "1654.817200",
+          "return_pct": 1.6548172,
+          "trade_sides": 6,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-2168.573100",
+          "return_pct": -2.1332713586346403,
+          "trade_sides": 6,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510050.SS",
+      "policy_id": "A_HALF",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "98898.619600",
+      "total_fees_cny": "1212.180400",
+      "net_annualized_return_pct": -0.23368310216254073,
+      "max_account_drawdown_pct": 5.008293585656224,
+      "average_invested_pct": 3.8024145406619825,
+      "completed_trade_windows": 6,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/7",
+      "trade_sides": 12,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "1346.588600",
+          "return_pct": 1.3465886,
+          "trade_sides": 6,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-2447.969000",
+          "return_pct": -2.415442920986489,
+          "trade_sides": 6,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510500.SS",
+      "policy_id": "A_WAIT",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "88965.934400",
+      "total_fees_cny": "1135.065600",
+      "net_annualized_return_pct": -2.4396043886247165,
+      "max_account_drawdown_pct": 15.466617229338526,
+      "average_invested_pct": 3.6503248297332314,
+      "completed_trade_windows": 6,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/8",
+      "trade_sides": 12,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-5220.582200",
+          "return_pct": -5.2205822,
+          "trade_sides": 6,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-5813.483400",
+          "return_pct": -6.133698154031075,
+          "trade_sides": 6,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510500.SS",
+      "policy_id": "A_WAIT",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "87895.696400",
+      "total_fees_cny": "2257.103600",
+      "net_annualized_return_pct": -2.6887170283272033,
+      "max_account_drawdown_pct": 16.404540475638314,
+      "average_invested_pct": 3.6518282682166134,
+      "completed_trade_windows": 6,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/9",
+      "trade_sides": 12,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-5795.123400",
+          "return_pct": -5.7951234,
+          "trade_sides": 6,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-6309.180200",
+          "return_pct": -6.697296814886969,
+          "trade_sides": 6,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510500.SS",
+      "policy_id": "A_HALF",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "94187.740000",
+      "total_fees_cny": "563.060000",
+      "net_annualized_return_pct": -1.2569970406332343,
+      "max_account_drawdown_pct": 8.201444815082086,
+      "average_invested_pct": 1.917582929717022,
+      "completed_trade_windows": 6,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/10",
+      "trade_sides": 12,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-2936.167000",
+          "return_pct": -2.936167,
+          "trade_sides": 6,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-2876.093000",
+          "return_pct": -2.9630943999501853,
+          "trade_sides": 6,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510500.SS",
+      "policy_id": "A_HALF",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "93685.509800",
+      "total_fees_cny": "1116.390200",
+      "net_annualized_return_pct": -1.368458631240188,
+      "max_account_drawdown_pct": 8.64698623732724,
+      "average_invested_pct": 1.913814354714055,
+      "completed_trade_windows": 6,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/11",
+      "trade_sides": 12,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-3214.082600",
+          "return_pct": -3.2140826,
+          "trade_sides": 6,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-3100.407600",
+          "return_pct": -3.2033664434739344,
+          "trade_sides": 6,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "512100.SS",
+      "policy_id": "A_WAIT",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "77536.560400",
+      "total_fees_cny": "1264.439600",
+      "net_annualized_return_pct": -5.23273769674486,
+      "max_account_drawdown_pct": 24.775178050976145,
+      "average_invested_pct": 5.312541198769113,
+      "completed_trade_windows": 7,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/12",
+      "trade_sides": 14,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-8523.000600",
+          "return_pct": -8.5230006,
+          "trade_sides": 6,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-13940.439000",
+          "return_pct": -15.239283198438622,
+          "trade_sides": 8,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "512100.SS",
+      "policy_id": "A_WAIT",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "76461.320200",
+      "total_fees_cny": "2511.779800",
+      "net_annualized_return_pct": -5.511889822828686,
+      "max_account_drawdown_pct": 25.665909984468,
+      "average_invested_pct": 5.31009989727428,
+      "completed_trade_windows": 7,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/13",
+      "trade_sides": 14,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-9070.913000",
+          "return_pct": -9.070913,
+          "trade_sides": 6,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-14467.766800",
+          "return_pct": -15.911043734553278,
+          "trade_sides": 8,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "512100.SS",
+      "policy_id": "A_HALF",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "90506.496300",
+      "total_fees_cny": "636.403700",
+      "net_annualized_return_pct": -2.0851350857682305,
+      "max_account_drawdown_pct": 10.84797796654954,
+      "average_invested_pct": 2.7712069700178112,
+      "completed_trade_windows": 7,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/14",
+      "trade_sides": 14,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-3924.262000",
+          "return_pct": -3.924262,
+          "trade_sides": 6,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-5569.241700",
+          "return_pct": -5.796720187567021,
+          "trade_sides": 8,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "512100.SS",
+      "policy_id": "A_HALF",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "89934.070800",
+      "total_fees_cny": "1264.929200",
+      "net_annualized_return_pct": -2.2162853245170644,
+      "max_account_drawdown_pct": 11.328781251911169,
+      "average_invested_pct": 2.7662595000790944,
+      "completed_trade_windows": 7,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/15",
+      "trade_sides": 14,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-4200.625800",
+          "return_pct": -4.2006258,
+          "trade_sides": 6,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-5865.303400",
+          "return_pct": -6.122486132064942,
+          "trade_sides": 8,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "159915.SZ",
+      "policy_id": "A_WAIT",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "92249.334700",
+      "total_fees_cny": "1389.765300",
+      "net_annualized_return_pct": -1.6898156797082065,
+      "max_account_drawdown_pct": 12.065831491619518,
+      "average_invested_pct": 4.8743648427798325,
+      "completed_trade_windows": 7,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/16",
+      "trade_sides": 14,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-846.23100",
+          "return_pct": -0.846231,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-6904.434300",
+          "return_pct": -6.963360414468965,
+          "trade_sides": 13,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "159915.SZ",
+      "policy_id": "A_WAIT",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "90973.849400",
+      "total_fees_cny": "2758.050600",
+      "net_annualized_return_pct": -1.9785425900827547,
+      "max_account_drawdown_pct": 13.186248222430763,
+      "average_invested_pct": 4.867908831253165,
+      "completed_trade_windows": 7,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/17",
+      "trade_sides": 14,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-943.02000",
+          "return_pct": -0.94302,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-8083.130600",
+          "return_pct": -8.160081803422637,
+          "trade_sides": 13,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "159915.SZ",
+      "policy_id": "A_HALF",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "94905.686400",
+      "total_fees_cny": "780.513600",
+      "net_annualized_return_pct": -1.0984720934786751,
+      "max_account_drawdown_pct": 7.360050532113364,
+      "average_invested_pct": 2.510908211365966,
+      "completed_trade_windows": 8,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/18",
+      "trade_sides": 16,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-421.75500",
+          "return_pct": -0.421755,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-4672.558600",
+          "return_pct": -4.692348815747858,
+          "trade_sides": 15,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "159915.SZ",
+      "policy_id": "A_HALF",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "94198.816000",
+      "total_fees_cny": "1546.984000",
+      "net_annualized_return_pct": -1.2545441962679926,
+      "max_account_drawdown_pct": 8.00536622576724,
+      "average_invested_pct": 2.502079753476344,
+      "completed_trade_windows": 8,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/19",
+      "trade_sides": 16,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-471.51000",
+          "return_pct": -0.47151,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-5329.674000",
+          "return_pct": -5.3549229974251595,
+          "trade_sides": 15,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "588000.SS",
+      "policy_id": "A_WAIT",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "95470.242400",
+      "total_fees_cny": "195.357600",
+      "net_annualized_return_pct": -0.9744792588555429,
+      "max_account_drawdown_pct": 22.89930344274481,
+      "average_invested_pct": 1.8299544227168199,
+      "completed_trade_windows": 1,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/20",
+      "trade_sides": 2,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-4529.757600",
+          "return_pct": -4.5297576,
+          "trade_sides": 2,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "588000.SS",
+      "policy_id": "A_WAIT",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "95284.042000",
+      "total_fees_cny": "389.958000",
+      "net_annualized_return_pct": -1.015310187471441,
+      "max_account_drawdown_pct": 22.88146626054143,
+      "average_invested_pct": 1.8283737557068986,
+      "completed_trade_windows": 1,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/21",
+      "trade_sides": 2,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-4715.958000",
+          "return_pct": -4.715958,
+          "trade_sides": 2,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "588000.SS",
+      "policy_id": "A_HALF",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "100527.463300",
+      "total_fees_cny": "100.436700",
+      "net_annualized_return_pct": 0.1111951798628441,
+      "max_account_drawdown_pct": 12.85557619125507,
+      "average_invested_pct": 1.0259987738152567,
+      "completed_trade_windows": 1,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/22",
+      "trade_sides": 2,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "527.463300",
+          "return_pct": 0.5274633,
+          "trade_sides": 2,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "588000.SS",
+      "policy_id": "A_HALF",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "100425.462400",
+      "total_fees_cny": "200.137600",
+      "net_annualized_return_pct": 0.08972819681085653,
+      "max_account_drawdown_pct": 12.819856040136472,
+      "average_invested_pct": 1.0229807958387513,
+      "completed_trade_windows": 1,
+      "open_positions": null,
+      "source_path": "docs/experiments/raw/factor-confirmation-wait-2026-09-27/accounts.json",
+      "source_sha256": "69c6950f4822c19f2497ad0ae0dd95ec8299ad51a3a63a637906abb14492cde2",
+      "json_pointer": "/23",
+      "trade_sides": 2,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "425.462400",
+          "return_pct": 0.4254624,
+          "trade_sides": 2,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510300.SS",
+      "policy_id": "A_STOP",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "110777.092200",
+      "total_fees_cny": "99.507800",
+      "net_annualized_return_pct": 2.1856759615176413,
+      "max_account_drawdown_pct": 11.01233220707077,
+      "average_invested_pct": 23.7836552993699,
+      "completed_trade_windows": 0,
+      "open_positions": 1,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/0",
+      "trade_sides": 1,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "13514.092200",
+          "return_pct": 13.5140922,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-2737.000000",
+          "return_pct": -2.411154374716481,
+          "trade_sides": 0,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510300.SS",
+      "policy_id": "A_STOP",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "110677.584400",
+      "total_fees_cny": "199.015600",
+      "net_annualized_return_pct": 2.166278436374247,
+      "max_account_drawdown_pct": 11.021141957077418,
+      "average_invested_pct": 23.804459342555614,
+      "completed_trade_windows": 0,
+      "open_positions": 1,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/1",
+      "trade_sides": 1,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.0000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "13414.584400",
+          "return_pct": 13.4145844,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-2737.000000",
+          "return_pct": -2.4132698757215567,
+          "trade_sides": 0,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510300.SS",
+      "policy_id": "B0",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "98098.705000",
+      "total_fees_cny": "99.495000",
+      "net_annualized_return_pct": -0.40469344150100284,
+      "max_account_drawdown_pct": 32.353695,
+      "average_invested_pct": 94.88443969841644,
+      "completed_trade_windows": 0,
+      "open_positions": 1,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/2",
+      "trade_sides": 1,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "-20137.095000",
+          "return_pct": -20.137095,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "-7425.000000",
+          "return_pct": -9.297182465376133,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "11721.600000",
+          "return_pct": 16.18158338510756,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "16216.200000",
+          "return_pct": 19.268411809218698,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-2277.000000",
+          "return_pct": -2.2684772176693553,
+          "trade_sides": 0,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510300.SS",
+      "policy_id": "B0",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "97999.210000",
+      "total_fees_cny": "198.990000",
+      "net_annualized_return_pct": -0.42604088483239044,
+      "max_account_drawdown_pct": 32.45319,
+      "average_invested_pct": 94.9964489835599,
+      "completed_trade_windows": 0,
+      "open_positions": 1,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/3",
+      "trade_sides": 1,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "-20236.590000",
+          "return_pct": -20.23659,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "-7425.000000",
+          "return_pct": -9.308779551927381,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "11721.600000",
+          "return_pct": 16.203839702863252,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "16216.200000",
+          "return_pct": 19.29121826181082,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-2277.000000",
+          "return_pct": -2.2707280221300747,
+          "trade_sides": 0,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510050.SS",
+      "policy_id": "A_STOP",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "104324.887000",
+      "total_fees_cny": "99.813000",
+      "net_annualized_return_pct": 0.8984362392591594,
+      "max_account_drawdown_pct": 11.062407397123835,
+      "average_invested_pct": 23.795441390222027,
+      "completed_trade_windows": 0,
+      "open_positions": 1,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/4",
+      "trade_sides": 1,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "9332.687000",
+          "return_pct": 9.332687,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-5007.800000",
+          "return_pct": -4.580331955072137,
+          "trade_sides": 0,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510050.SS",
+      "policy_id": "A_STOP",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "104212.756000",
+      "total_fees_cny": "199.044000",
+      "net_annualized_return_pct": 0.8755169255657336,
+      "max_account_drawdown_pct": 11.043716660714576,
+      "average_invested_pct": 23.752651520332478,
+      "completed_trade_windows": 0,
+      "open_positions": 1,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/5",
+      "trade_sides": 1,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "9205.956000",
+          "return_pct": 9.205956,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-4993.200000",
+          "return_pct": -4.572278090766405,
+          "trade_sides": 0,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510050.SS",
+      "policy_id": "B0",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "96850.265000",
+      "total_fees_cny": "99.735000",
+      "net_annualized_return_pct": -0.6738031502847353,
+      "max_account_drawdown_pct": 29.379735,
+      "average_invested_pct": 96.84752776131869,
+      "completed_trade_windows": 0,
+      "open_positions": 1,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/6",
+      "trade_sides": 1,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "-17911.735000",
+          "return_pct": -17.911735,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "-7777.500000",
+          "return_pct": -9.474557660586443,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "13359.000000",
+          "return_pct": 17.97720693630324,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "13633.500000",
+          "return_pct": 15.550971306926623,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-4453.000000",
+          "return_pct": -4.395712221121403,
+          "trade_sides": 0,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510050.SS",
+      "policy_id": "B0",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "96750.530000",
+      "total_fees_cny": "199.470000",
+      "net_annualized_return_pct": -0.6954194954237769,
+      "max_account_drawdown_pct": 29.47947,
+      "average_invested_pct": 96.95994426734721,
+      "completed_trade_windows": 0,
+      "open_positions": 1,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/7",
+      "trade_sides": 1,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "-18011.470000",
+          "return_pct": -18.01147,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "-7777.500000",
+          "return_pct": -9.486082992340513,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "13359.000000",
+          "return_pct": 18.001367182209975,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "13633.500000",
+          "return_pct": 15.568682573250232,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-4453.000000",
+          "return_pct": -4.400044148657661,
+          "trade_sides": 0,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510500.SS",
+      "policy_id": "A_STOP",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "86934.907700",
+      "total_fees_cny": "744.792300",
+      "net_annualized_return_pct": -2.9144001775118222,
+      "max_account_drawdown_pct": 17.396452043151637,
+      "average_invested_pct": 5.37420281983436,
+      "completed_trade_windows": 4,
+      "open_positions": 0,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/8",
+      "trade_sides": 8,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-7795.819700",
+          "return_pct": -7.7958197,
+          "trade_sides": 4,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-5269.272600",
+          "return_pct": -5.714787098432673,
+          "trade_sides": 4,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510500.SS",
+      "policy_id": "A_STOP",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "86220.943800",
+      "total_fees_cny": "1486.156200",
+      "net_annualized_return_pct": -3.0833833095674335,
+      "max_account_drawdown_pct": 17.997356949262834,
+      "average_invested_pct": 5.389860487141719,
+      "completed_trade_windows": 4,
+      "open_positions": 0,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/9",
+      "trade_sides": 8,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-8183.539400",
+          "return_pct": -8.1835394,
+          "trade_sides": 4,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-5595.516800",
+          "return_pct": -6.094241450208983,
+          "trade_sides": 4,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510500.SS",
+      "policy_id": "B0",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "110976.635000",
+      "total_fees_cny": "99.420000",
+      "net_annualized_return_pct": 2.2245324059718463,
+      "max_account_drawdown_pct": 37.185845,
+      "average_invested_pct": 98.15073440783992,
+      "completed_trade_windows": 0,
+      "open_positions": 1,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/10",
+      "trade_sides": 1,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "-18602.605000",
+          "return_pct": -18.602605,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "-5058.160000",
+          "return_pct": -6.214154642172517,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "5209.355000",
+          "return_pct": 6.8239549426975525,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "25675.660000",
+          "return_pct": 31.48510599631459,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "3752.385000",
+          "return_pct": 3.4995674952261266,
+          "trade_sides": 0,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "510500.SS",
+      "policy_id": "B0",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "110877.215000",
+      "total_fees_cny": "198.840000",
+      "net_annualized_return_pct": 2.2051795054271572,
+      "max_account_drawdown_pct": 37.285265,
+      "average_invested_pct": 98.26366861087259,
+      "completed_trade_windows": 0,
+      "open_positions": 1,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/11",
+      "trade_sides": 1,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "-18702.025000",
+          "return_pct": -18.702025,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "-5058.160000",
+          "return_pct": -6.221753985877262,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "5209.355000",
+          "return_pct": 6.832853673634964,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "25675.660000",
+          "return_pct": 31.523537931694086,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "3752.385000",
+          "return_pct": 3.5028153603604317,
+          "trade_sides": 0,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "512100.SS",
+      "policy_id": "A_STOP",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "83890.334900",
+      "total_fees_cny": "919.365100",
+      "net_annualized_return_pct": -3.642793691808399,
+      "max_account_drawdown_pct": 18.61067265646418,
+      "average_invested_pct": 6.5333934152341415,
+      "completed_trade_windows": 5,
+      "open_positions": 0,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/12",
+      "trade_sides": 10,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-4524.471000",
+          "return_pct": -4.524471,
+          "trade_sides": 2,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-11585.194100",
+          "return_pct": -12.134202576662341,
+          "trade_sides": 8,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "512100.SS",
+      "policy_id": "A_STOP",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "83055.919800",
+      "total_fees_cny": "1830.780200",
+      "net_annualized_return_pct": -3.8460574945518022,
+      "max_account_drawdown_pct": 19.25477560347076,
+      "average_invested_pct": 6.528955749936248,
+      "completed_trade_windows": 5,
+      "open_positions": 0,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/13",
+      "trade_sides": 10,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-4705.768000",
+          "return_pct": -4.705768,
+          "trade_sides": 2,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-12238.312200",
+          "return_pct": -12.842657885106835,
+          "trade_sides": 8,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "512100.SS",
+      "policy_id": "B0",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "98793.748800",
+      "total_fees_cny": "99.895200",
+      "net_annualized_return_pct": -0.25604070395360834,
+      "max_account_drawdown_pct": 45.6408912,
+      "average_invested_pct": 99.36166746973092,
+      "completed_trade_windows": 0,
+      "open_positions": 1,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/14",
+      "trade_sides": 1,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "-21546.051200",
+          "return_pct": -21.5460512,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "-4161.836000",
+          "return_pct": -5.3048139241654075,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "1439.432000",
+          "return_pct": 1.9375300361628698,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "21779.232000",
+          "return_pct": 28.75846789804293,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "1282.972000",
+          "return_pct": 1.3157232893667195,
+          "trade_sides": 0,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "512100.SS",
+      "policy_id": "B0",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "98693.978000",
+      "total_fees_cny": "199.557000",
+      "net_annualized_return_pct": -0.2773284099017781,
+      "max_account_drawdown_pct": 45.688122,
+      "average_invested_pct": 99.34080933539595,
+      "completed_trade_windows": 0,
+      "open_positions": 1,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/15",
+      "trade_sides": 1,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "-21621.772000",
+          "return_pct": -21.621772,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "-4156.915000",
+          "return_pct": -5.303660348126268,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "1437.730000",
+          "return_pct": 1.937085106538064,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "21753.480000",
+          "return_pct": 28.751989368937696,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "1281.455000",
+          "return_pct": 1.3154930809050085,
+          "trade_sides": 0,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "159915.SZ",
+      "policy_id": "A_STOP",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "100158.800800",
+      "total_fees_cny": "299.599200",
+      "net_annualized_return_pct": 0.03352556482205671,
+      "max_account_drawdown_pct": 25.61645078031481,
+      "average_invested_pct": 15.58860274710902,
+      "completed_trade_windows": 1,
+      "open_positions": 1,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/16",
+      "trade_sides": 3,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-846.23100",
+          "return_pct": -0.846231,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "1005.031800",
+          "return_pct": 1.0136092759116397,
+          "trade_sides": 2,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "159915.SZ",
+      "policy_id": "A_STOP",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "99859.647400",
+      "total_fees_cny": "597.252600",
+      "net_annualized_return_pct": -0.02966581043922778,
+      "max_account_drawdown_pct": 25.61016584196291,
+      "average_invested_pct": 15.57710775630474,
+      "completed_trade_windows": 1,
+      "open_positions": 1,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/17",
+      "trade_sides": 3,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "-943.02000",
+          "return_pct": -0.94302,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "802.667400",
+          "return_pct": 0.8103087737986763,
+          "trade_sides": 2,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "159915.SZ",
+      "policy_id": "B0",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "102241.131200",
+      "total_fees_cny": "99.668800",
+      "net_annualized_return_pct": 0.4693079411258738,
+      "max_account_drawdown_pct": 53.5684688,
+      "average_invested_pct": 99.67314331299696,
+      "completed_trade_windows": 0,
+      "open_positions": 1,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/18",
+      "trade_sides": 1,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "-29575.268800",
+          "return_pct": -29.5752688,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "-13459.600000",
+          "return_pct": -19.11203602861604,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "8008.000000",
+          "return_pct": 14.057722384390821,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "33387.200000",
+          "return_pct": 51.38616437805294,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "3880.800000",
+          "return_pct": 3.9454930180226966,
+          "trade_sides": 0,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "159915.SZ",
+      "policy_id": "B0",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "102141.462400",
+      "total_fees_cny": "199.337600",
+      "net_annualized_return_pct": 0.4486098994789689,
+      "max_account_drawdown_pct": 53.6681376,
+      "average_invested_pct": 99.8135708329019,
+      "completed_trade_windows": 0,
+      "open_positions": 1,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/19",
+      "trade_sides": 1,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "-29674.937600",
+          "return_pct": -29.6749376,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "-13459.600000",
+          "return_pct": -19.139122726181895,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "8008.000000",
+          "return_pct": 14.08236152846266,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "33387.200000",
+          "return_pct": 51.4651118729251,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "3880.800000",
+          "return_pct": 3.9494950524575336,
+          "trade_sides": 0,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "588000.SS",
+      "policy_id": "A_STOP",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "97673.111800",
+      "total_fees_cny": "197.488200",
+      "net_annualized_return_pct": -0.4961278927006041,
+      "max_account_drawdown_pct": 28.776379347158734,
+      "average_invested_pct": 2.700469436044365,
+      "completed_trade_windows": 1,
+      "open_positions": 0,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/20",
+      "trade_sides": 2,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-2326.888200",
+          "return_pct": -2.3268882,
+          "trade_sides": 2,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "588000.SS",
+      "policy_id": "A_STOP",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "97480.247000",
+      "total_fees_cny": "394.253000",
+      "net_annualized_return_pct": -0.5376664707007595,
+      "max_account_drawdown_pct": 28.7575904795291,
+      "average_invested_pct": 2.6984279224227947,
+      "completed_trade_windows": 1,
+      "open_positions": 0,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/21",
+      "trade_sides": 2,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "0.000",
+          "return_pct": 0.0,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "-2519.753000",
+          "return_pct": -2.519753,
+          "trade_sides": 2,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "588000.SS",
+      "policy_id": "B0",
+      "fee_scenario_id": "base",
+      "fee": "0.001",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "117693.410200",
+      "total_fees_cny": "99.889800",
+      "net_annualized_return_pct": 3.5014275499879677,
+      "max_account_drawdown_pct": 53.6858898,
+      "average_invested_pct": 99.98607035659217,
+      "completed_trade_windows": 0,
+      "open_positions": 1,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/22",
+      "trade_sides": 1,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "-31083.589800",
+          "return_pct": -31.0835898,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "-7282.200000",
+          "return_pct": -10.566714050930065,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "10167.600000",
+          "return_pct": 16.496682551794912,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "25556.400000",
+          "return_pct": 35.59297450692963,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "20335.200000",
+          "return_pct": 20.886990381423423,
+          "trade_sides": 0,
+          "is_partial_year": true
+        }
+      ]
+    },
+    {
+      "symbol": "588000.SS",
+      "policy_id": "B0",
+      "fee_scenario_id": "stress",
+      "fee": "0.002",
+      "period_start": "2022-01-01",
+      "period_end": "2026-09-25",
+      "ending_assets_100k_cny": "117567.911200",
+      "total_fees_cny": "199.488800",
+      "net_annualized_return_pct": 3.4781030468206353,
+      "max_account_drawdown_pct": 53.7074888,
+      "average_invested_pct": 99.92412986647464,
+      "completed_trade_windows": 0,
+      "open_positions": 1,
+      "source_path": "docs/experiments/raw/factor-a-exit-comparison-2026-09-27/accounts.json",
+      "source_sha256": "bb82c1369ccbe1313bf7818283f5db500661e0c5d8e88697df9caf7139d0ee71",
+      "json_pointer": "/23",
+      "trade_sides": 1,
+      "annual": [
+        {
+          "year": 2022,
+          "profit_cny": "-31138.088800",
+          "return_pct": -31.1380888,
+          "trade_sides": 1,
+          "is_partial_year": false
+        },
+        {
+          "year": 2023,
+          "profit_cny": "-7271.600000",
+          "return_pct": -10.559683681855173,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2024,
+          "profit_cny": "10152.800000",
+          "return_pct": 16.484410944168115,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2025,
+          "profit_cny": "25519.200000",
+          "return_pct": 35.570244408357915,
+          "trade_sides": 0,
+          "is_partial_year": false
+        },
+        {
+          "year": 2026,
+          "profit_cny": "20305.600000",
+          "return_pct": 20.87715143663993,
+          "trade_sides": 0,
+          "is_partial_year": true
+        }
+      ]
+    }
+  ]
+}
