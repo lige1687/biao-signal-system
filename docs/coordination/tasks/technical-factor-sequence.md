@@ -1,3 +1,48 @@
+# 当前状态：小时确认准备已交付，真实效果等待输入
+
+- task-id：technical-factor-sequence；原负责人/root，MacBook-Air-126.local，继续保留责任；不是接管、转派或整项任务结束。
+- 更新时间：2026-10-03T11:46:02.213Z，UTC（用户时区Asia/Shanghai）。
+- 当前阶段：准备问题completed；小时效果blocked_inputs_and_definition_binding。没有本任务后台回测、拟合或等待输出的助手；不写成持续计算。
+- 最终目标仍为用户选择的C：将原技术策略变成可重复的买入、持有、退出流程，检验相同对象、日期、资金、费用下的收益、风险和机会增量。国内宽基/ETF优先；情绪、宽度、宏观、Module E和生产交易不进入本轮。
+- 工作分支：task/technical-factor-sequence-progress；本轮基础3deaad7a1724228780a62af49cf34fc046b0640a；最新成果完整commit：3e348e6fa49cdd399e9838f252a2c0c1f411c8c1。已核git ls-remote完全相等，并按准确commit从GitHub逐字读回报告，blob a9c0766a52c4119fcaddbc57910ce952ad4d23b3。
+- 规则：COORDINATION.md v1.0，SHA256 6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0。发布前完整复读107871b70eb08441325bcdc9e3ecfd29c67acd69；同步前增量核至c890d36588685edea89ad33273623c8509abf3d1，规则不变。
+
+## 本轮真实成果与验收
+
+[小时确认准备报告](https://github.com/lige1687/biao-signal-system/blob/3e348e6fa49cdd399e9838f252a2c0c1f411c8c1/docs/experiments/lei-hourly-confirmation-readiness-2026-10-03.md)、[共同机会和等待代价设计](https://github.com/lige1687/biao-signal-system/blob/3e348e6fa49cdd399e9838f252a2c0c1f411c8c1/docs/research/proposals/technical-sequence-c-2026-10-03/hourly-confirmation/README.md)、[六ETF最小资料请求](https://github.com/lige1687/biao-signal-system/blob/3e348e6fa49cdd399e9838f252a2c0c1f411c8c1/docs/research/proposals/technical-sequence-c-2026-10-03/hourly-confirmation/data-request.json)。
+
+1. 同一次已知日线机会先定共同起点，再看真实小时确认；确认/未确认/先失效/资料未知全部保留。第一轮同样日线复核、次日开盘，不同时改变条件和成交节奏；等待期间错失上涨与现金保留都进入对照。
+2. 候选H明确为真实60分钟20/60/120 SMA及EMA各自多头排列，标研究代理，不代表原文全部小时结构/传导；尚未注册正式对象或实现适配器。源语义未改，回调起点/附近容差/底部身份/事前目标仍需唯一绑定。
+3. 在限定项目接口、data目录元信息、固定T4/T8交付范围内未发现合格历史小时输入。默认源为日线，盘中脚本为快照拼虚拟日线，现有次级别确认是日线代理。其他存储/订阅未知，不能宣称全世界无数据。
+4. T4/T8按f87de4f9aacab9f58ccefa85297ea143250d4f9d复用草案及既有证据，不重跑12例、不从归档raw导入正式实现。历史到达未知只限制时点结论，不能编造到达时间，也不一概说历史价格无用。
+5. 已交12准确小文档/JSON共331714字节，包括报告、raw四材料、C设计/资料请求和入口、自身两进度、仅自己的registry/INDEX增量。没有源码、原始行情、数据库或桌面原文上传。
+
+小时确认收益、风险、信息增量、完整A/C和线上业务增量均未测量；此次不是新盈利结论。旧72行资金结果仍按上阶段封存用途，不用它替代真实小时证据。
+
+## 下一步、阻塞与别人应避开的范围
+
+下一步只在取得现有授权小时来源名称/目录后核许可、连续覆盖、原件指纹、日历/行动/完成和到达时点，再绑定共同机会与正式入口，冻结必要市场合同及预算。已向用户询问来源，不要传密钥；当前未取得，不猜订阅、不采购、不扩大下载授权。无新输入不反复盘点或改名重跑旧研究。
+
+本轮限定目录：docs/research/proposals/technical-sequence-c-2026-10-03/hourly-confirmation/、报告及同名raw、C入口、自身进度与自身报告登记。共享src、workflow、总定义、规则账本、原文和web只读；未来需要正式实现时先登记准确小块和实现/独立验证分工。当前原文两SHA保持df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20与85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903；改原文仍须用户确认。
+
+最新分工：remote-core按用户决定paused，返修/转黑未解决清单保留，不等于交给本任务；reader暂停泛化研究，保留阅读与137旧证据；dot未来SMA协议和历史爆量价位均paused待目标/字段，不因暂停接管。经典仅教学设计、外部仅能力试点设计、地图页面与情绪三用途各归原负责人。当前没有发现已登记的同文件写入或同实验执行冲突；未登记进程未知，记录不是排他锁。
+
+## 实际检查、预算与接续
+
+14项来源原字节SHA/大小核对；11个交付文件在独立临时目录恢复、字节/UTF-8/JSON/登记一致；新增报告4条相对链接、准确12路径、差异空白、大小与有限凭据形态检查通过。回执在同raw/validation.json（第12文件）。只证明文档可恢复，不代表真实行情运行/远端系统/生产通过。当前共享工作区check_repo_hygiene退出0；无代码改变，不重跑旧市场或测试。
+
+发布前纠正草案一句笔误：SMA斜率比较C[t]与C[t-n]，不是价格高于当前SMA；无代码/结果受影响。首轮凭据扫描因sk-出现在旧报告长文件名内部停止，确认均非独立token后修正边界再通过；不是忽略真实凭据。其余失败保留brief.json。
+
+实际用量1个Sol/medium只读助手已结束；0新增市场实验/拟合/标签/行情下载/公开来源调用/付费。旧4/4网页额度、C01/Q01旧4+4拟合和全部历史账不重置。旧35/48、137、T4演练、C01/Q01/D01及抵扣数学不重跑。
+
+原共享分支codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9与脏修改保留，使用独立index发布，默认index指纹未变。原受限输入/桌面原件与不在工作基线内的源码版本仍仅本地，source-manifest.json准确标明；权重不适用。工作及协调树无版本管理的GitHub workflows；未合并、部署、付费或改变权限。
+
+恢复第一步：核最新协调、上述工作commit和原文/输入指纹；有真实输入才做资格，不仅看completed。此版新增是有边界的设计、真实数据缺口、校验和准确远端成果，不启动另一个同题任务。
+
+---
+
+## 既往阶段（当前状态以上文为准）
+
 # 当前阶段：原文回调机会与小时确认对照准备
 
 更新时间：2026-10-03 11:23:03 UTC（UTC；用户时区Asia/Shanghai）。用户已明确“可以继续做吧”，承接下一波完整回调机会→小时确认→资金对照的顺序。本轮先完成不依赖行情的定义和现成资料资格；未获得小时输入前不启动效果。
