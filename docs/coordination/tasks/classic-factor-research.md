@@ -1,7 +1,7 @@
 # 经典因子与研究方法：当前协作记录
 
 - task-id：classic-factor-research；负责人：本聊天经典研究主控，MacBook-Air-126.local。会话内部ID未取得，不猜测。原负责人持续负责，不接管、不转移。
-- 状态：active（本轮协作接入及成果维护；固定科学问题completed/archived，不代表实验运行）。更新时间2026-10-03T14:07:20.645836+08:00，Asia/Shanghai。
+- 状态：active（本轮协作接入及成果维护；固定科学问题completed/archived，不代表实验运行）。更新时间2026-10-03T14:12:36.782713+08:00，Asia/Shanghai。
 - 唯一映射：阶段历史docs/ops/work-progress/classic-factor-research.md；成果详情docs/progress/classic-factor.md。跨任务当前摘要只有本文件，旧文件不是锁。
 - 规则读取commit：b172008890b39e912c8f1d0cfb9125d1e414a97f，COORDINATION.md1.0；初读0b758e7e10f720c44cbd898d511ff392f2857535，新版规则内容相同。
 - 工作分支task/classic-factor-progress；发布基础d7da6cb0f9c127606b6faa572fabc9ee93f104f7；最近已推送成果0961a2cec0a31b0ad3ddbaf8e82863afc5aa0364（代码/报告同560e4eef8a5571fff4543886ede4acafe7805f2d），远端完整SHA与进展文件已读回。
