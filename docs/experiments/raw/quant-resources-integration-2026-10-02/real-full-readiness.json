@@ -1,0 +1,95 @@
+{
+  "status": "not_applicable",
+  "reasons": [
+    "planned dates lack predictions; do not compress or fill the axis",
+    "multiple fitted periods; inspect a declared explicit period separately"
+  ],
+  "range": [
+    "2025-01-01",
+    "2026-06-30"
+  ],
+  "explicit_range": false,
+  "planned_dates": 359,
+  "prediction_dates": 317,
+  "prediction_rows": 1268,
+  "assets": [
+    "510050.SS",
+    "510300.SS",
+    "510500.SS",
+    "588000.SS"
+  ],
+  "missing_dates": [
+    "2025-12-03",
+    "2025-12-04",
+    "2025-12-05",
+    "2025-12-08",
+    "2025-12-09",
+    "2025-12-10",
+    "2025-12-11",
+    "2025-12-12",
+    "2025-12-15",
+    "2025-12-16",
+    "2025-12-17",
+    "2025-12-18",
+    "2025-12-19",
+    "2025-12-22",
+    "2025-12-23",
+    "2025-12-24",
+    "2025-12-25",
+    "2025-12-26",
+    "2025-12-29",
+    "2025-12-30",
+    "2025-12-31",
+    "2026-06-01",
+    "2026-06-02",
+    "2026-06-03",
+    "2026-06-04",
+    "2026-06-05",
+    "2026-06-08",
+    "2026-06-09",
+    "2026-06-10",
+    "2026-06-11",
+    "2026-06-12",
+    "2026-06-15",
+    "2026-06-16",
+    "2026-06-17",
+    "2026-06-18",
+    "2026-06-22",
+    "2026-06-23",
+    "2026-06-24",
+    "2026-06-25",
+    "2026-06-26",
+    "2026-06-29",
+    "2026-06-30"
+  ],
+  "incomplete_asset_dates": {},
+  "folds": [
+    "0",
+    "1"
+  ],
+  "weighting": "equal_asset",
+  "baseline": "B1",
+  "candidate": "B2",
+  "metric": "MSE",
+  "unit": "percentage_point_squared",
+  "positive_means": "candidate has lower squared prediction error",
+  "original_primary_metric": {
+    "name": "RMSE",
+    "direction": "lower",
+    "attention_threshold": 0.1,
+    "unit": "percentage_point",
+    "threshold_provenance": "researcher planning choice, no trading rule"
+  },
+  "scope": "auxiliary calculation on already-seen saved predictions; no new fit or evidence",
+  "source": {
+    "run_dir": "docs/experiments/raw/double-ma-order-information-2026-10-01/core-01",
+    "files": {
+      "contract.json": "f36b47c7c108e57534a42aac5a62b5229cd646060c970c3ba2a618a842540079",
+      "result.json": "c3e4e88aa41b341e3e468678148c1d126588f1dece4367f0b65c860501c3c6a7",
+      "preflight.json": "5e646be2f0907fa3ba04c0145f864de8cd20dd77f75c3a5baa85ea7f97ac3727",
+      "receipt.json": "0067324306c5a9c2487bf0f91f3a7a7023dbfdf713bd8da5c012988e873cad90"
+    },
+    "receipt_matches_archived_journal": true,
+    "qualification": "archived snapshot only; current sources and code not requalified"
+  }
+}

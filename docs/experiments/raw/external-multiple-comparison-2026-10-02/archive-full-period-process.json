@@ -1,0 +1,25 @@
+{
+  "command": [
+    "/opt/homebrew/opt/python@3.11/bin/python3.11",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.agents/skills/lei-quant-tools/scripts/multiple_comparison.py",
+    "compare-workflows",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-joint",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-amplitude",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-serial",
+    "--start",
+    "2025-01-02",
+    "--end",
+    "2026-06-30",
+    "--baseline",
+    "B1",
+    "--block-size",
+    "20",
+    "--reps",
+    "1000",
+    "--seed",
+    "20261002"
+  ],
+  "returncode": 2,
+  "stderr": "",
+  "stdout": "{\n  \"status\": \"not_applicable\",\n  \"reasons\": [\n    \"planned dates lack predictions; do not compress or fill the axis\",\n    \"multiple fitted periods; inspect a declared explicit period separately\"\n  ],\n  \"sources\": [\n    {\n      \"status\": \"not_applicable\",\n      \"reasons\": [\n        \"planned dates lack predictions; do not compress or fill the axis\",\n        \"multiple fitted periods; inspect a declared explicit period separately\"\n      ],\n      \"range\": [\n        \"2025-01-02\",\n        \"2026-06-30\"\n      ],\n      \"explicit_range\": true,\n      \"planned_dates\": 359,\n      \"prediction_dates\": 317,\n      \"prediction_rows\": 1268,\n      \"assets\": [\n        \"510050.SS\",\n        \"510300.SS\",\n        \"510500.SS\",\n        \"588000.SS\"\n      ],\n      \"missing_dates\": [\n        \"2025-12-03\",\n        \"2025-12-04\",\n        \"2025-12-05\",\n        \"2025-12-08\",\n        \"2025-12-09\",\n        \"2025-12-10\",\n        \"2025-12-11\",\n        \"2025-12-12\",\n        \"2025-12-15\",\n        \"2025-12-16\",\n        \"2025-12-17\",\n        \"2025-12-18\",\n        \"2025-12-19\",\n        \"2025-12-22\",\n        \"2025-12-23\",\n        \"2025-12-24\",\n        \"2025-12-25\",\n        \"2025-12-26\",\n        \"2025-12-29\",\n        \"2025-12-30\",\n        \"2025-12-31\",\n        \"2026-06-01\",\n        \"2026-06-02\",\n        \"2026-06-03\",\n        \"2026-06-04\",\n        \"2026-06-05\",\n        \"2026-06-08\",\n        \"2026-06-09\",\n        \"2026-06-10\",\n        \"2026-06-11\",\n        \"2026-06-12\",\n        \"2026-06-15\",\n        \"2026-06-16\",\n        \"2026-06-17\",\n        \"2026-06-18\",\n        \"2026-06-22\",\n        \"2026-06-23\",\n        \"2026-06-24\",\n        \"2026-06-25\",\n        \"2026-06-26\",\n        \"2026-06-29\",\n        \"2026-06-30\"\n      ],\n      \"incomplete_asset_dates\": {},\n      \"folds\": [\n        \"0\",\n        \"1\"\n      ],\n      \"weighting\": \"equal_asset\",\n      \"baseline\": \"B1\",\n      \"candidate\": \"B2\",\n      \"metric\": \"MSE\",\n      \"unit\": \"percentage_point_squared\",\n      \"positive_means\": \"candidate has lower squared prediction error\",\n      \"original_primary_metric\": {\n        \"name\": \"RMSE\",\n        \"direction\": \"lower\",\n        \"attention_threshold\": null,\n        \"threshold_reason\": \"\u56fa\u5b9a\u540c\u89c2\u5bdf\u9884\u6d4b\u8bef\u5dee\u6bd4\u8f83\uff0c\u65e0\u4e8b\u540e\u6548\u679c\u95e8\u69db\"\n      },\n      \"scope\": \"auxiliary calculation on already-seen saved predictions; no new fit or evidence\",\n      \"source\": {\n        \"run_dir\": \"docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-joint\",\n        \"files\": {\n          \"contract.json\": \"83e293942e27eb8721d3c1b564f75ce3398599d57b88ddd19313df56c65b1a6e\",\n          \"result.json\": \"c3bafce770fdbc121c63da0e3aececf7262df2095c1176f7b2a63b9f9ba528ca\",\n          \"preflight.json\": \"7fd6786ea97ee5fca5a776d48549c2d1748d6a64b0fa4e551f0c2bdfe459d897\",\n          \"receipt.json\": \"e4c701bbc3e415994c2d71b8b1001a739a8dfed186bf21e7658bec781303dd4d\"\n        },\n        \"receipt_matches_archived_journal\": true,\n        \"qualification\": \"archived snapshot only; current sources and code not requalified\"\n      }\n    }\n  ],\n  \"fits\": 0\n}\n"
+}

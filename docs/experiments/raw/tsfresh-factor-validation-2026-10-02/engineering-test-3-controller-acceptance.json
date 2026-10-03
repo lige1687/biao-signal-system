@@ -1,0 +1,53 @@
+{
+  "exit_code": 0,
+  "checks": [
+    {
+      "case": "joint",
+      "result": "accepted"
+    },
+    {
+      "case": "amplitude",
+      "result": "accepted"
+    },
+    {
+      "case": "serial",
+      "result": "accepted"
+    },
+    {
+      "case": "factor_only",
+      "result": "accepted"
+    },
+    {
+      "case": "window",
+      "result": "rejected",
+      "error": "workflow.evaluator: tsfresh study freezes two exact price expressions and four declared OLS comparisons"
+    },
+    {
+      "case": "refs",
+      "result": "rejected",
+      "error": "workflow.evaluator: tsfresh study freezes two exact price expressions and four declared OLS comparisons"
+    },
+    {
+      "case": "target",
+      "result": "rejected",
+      "error": "workflow.target.end_offset: question and executable target differ"
+    },
+    {
+      "case": "background",
+      "result": "rejected",
+      "error": "workflow.research_design.sample_fit.model_feature_count: must equal the distinct baseline and added feature count"
+    },
+    {
+      "case": "no_purge",
+      "result": "rejected",
+      "error": "workflow.split.label_policy: unknown maturity policy"
+    }
+  ],
+  "hygiene": {
+    "exit_code": 0,
+    "stdout": "✓ 归置自检通过：根层四层均在白名单内，关键配置均已入库。\n",
+    "stderr": ""
+  },
+  "real_fits": 0,
+  "scope": "repaired ledger binding, four positive contracts, five invalid designs and hygiene"
+}

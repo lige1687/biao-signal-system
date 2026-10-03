@@ -1,0 +1,50 @@
+{
+  "mission": "独立审阅最终有限组件适配和退化抽取修补的准确性与结论边界",
+  "task_scope": [
+    "只读检查最终代码、原失败反例、修补前后验证与数学参考；不执行测试、不运行金融效果、不联网",
+    "写一次可交回主控的审阅结论和未解决事项"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    ".agents/skills/lei-quant-tools/scripts/multiple_comparison.py",
+    "tests/unit/test_multiple_comparison.py",
+    "docs/experiments/raw/external-multiple-comparison-2026-10-02/protocol.json",
+    "docs/experiments/raw/external-multiple-comparison-2026-10-02/degenerate-probe.json",
+    "docs/experiments/raw/external-multiple-comparison-2026-10-02/repair-regression.json",
+    "docs/experiments/raw/external-multiple-comparison-2026-10-02/final-archive-recheck.json",
+    "docs/experiments/raw/external-multiple-comparison-2026-10-02/independent-core-check.json",
+    "docs/experiments/raw/external-multiple-comparison-2026-10-02/archive-demo-check.json"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/external-multiple-comparison-2026-10-02/final-review.md"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "local-gap-review.md：现有能力/具体缺口/适合用途/不能声称什么/重复归属风险"
+  ],
+  "stop_conditions": [
+    "定义或资料缺失时只记录范围",
+    "不改其他文件",
+    "不运行金融实验"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "strategy_sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    }
+  ]
+}

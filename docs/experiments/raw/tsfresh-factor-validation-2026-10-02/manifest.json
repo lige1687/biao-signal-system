@@ -1,0 +1,147 @@
+{
+  "question": "固定tsfresh两个价格轨迹表达，对四宽基ETF随后20交易间隔涨跌的预测，相对既有价格/趋势/波动背景有多少增量？",
+  "decision_use": "决定是否保留为后续因子候选及复用的大范围验证入口，不改生产信号",
+  "mode": "research",
+  "user_authorization": "搞吧搞吧，外部增量哈，能接入的看看效果，比如挖掘因子啥的，大规模的验证",
+  "scope": "四已有ETF全段2022-01-04..2026-06-30，20间隔经济收盘涨跌，2固定候选、4预定比较，不选择阈值/窗口/模型",
+  "sources_used": 0,
+  "strategy_sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "verified_snapshot": "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "verified_snapshot": "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
+    }
+  ],
+  "source_panel": "docs/experiments/raw/volume-information-2026-09-30/execution/panel.json",
+  "source_panel_sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+  "budget": {
+    "source_requests": 6,
+    "scientific_variants": 4,
+    "effect_attempts": 4,
+    "max_real_fits": 16,
+    "execution_seconds": 7200,
+    "engineering_checks_limit": 3
+  },
+  "candidate_definition_refs": [
+    "research.external.mean_abs_log_change20@1.0.0",
+    "research.external.return_autocorrelation20_lag1@1.0.0"
+  ],
+  "comparisons": [
+    {
+      "id": "joint",
+      "baseline": "existing10",
+      "added": [
+        "mean_abs_log_change20",
+        "return_autocorrelation20_lag1"
+      ],
+      "role": "primary"
+    },
+    {
+      "id": "amplitude",
+      "baseline": "existing10",
+      "added": [
+        "mean_abs_log_change20"
+      ],
+      "role": "fixed_component"
+    },
+    {
+      "id": "serial",
+      "baseline": "existing10",
+      "added": [
+        "return_autocorrelation20_lag1"
+      ],
+      "role": "fixed_component"
+    },
+    {
+      "id": "factor_only",
+      "baseline": "asset_dummies",
+      "added": [
+        "mean_abs_log_change20",
+        "return_autocorrelation20_lag1"
+      ],
+      "role": "minimal_candidate_only_vs_historical_mean"
+    }
+  ],
+  "split": "2022-2024 train -> 2025 evaluation; 2022-2025 train -> 2026H1 evaluation; all history previously seen",
+  "label": "100*(C[t+21]/C[t+1]-1), 20 intervals after next-day close; not account returns",
+  "estimator": "existing prediction_ols fixed lambda=0 rcond=1e-12; train-only preprocessing and label maturity; no model tuning",
+  "dependence": "equal_asset common paired evaluation; synchronous full-date blocks20,1000 draws,seed20261002; block60 sensitivity on saved predictions only",
+  "common_population": "both candidates finite plus existing10 features and segmented252 baseline warmup; no factor-sign filtering, common eligibility in all4 comparisons",
+  "stability": "asset/year errors, leave-one-ETF-out aggregation and delete 20 largest daily base-new loss differences; no refitting",
+  "limits": [
+    "already-seen retrospective data; no independent unknown-history confirmation",
+    "historical arrival and complete action-known timestamps not certified",
+    "4 related ETFs cannot represent all ETFs",
+    "no return/risk execution claims"
+  ],
+  "prior_cumulative": {
+    "source_requests": 23,
+    "test_batches": 9
+  },
+  "closure": {
+    "execution": "completed",
+    "evidence": "not_supported_in_fixed_configuration",
+    "coverage": "four_related_etfs_previously_seen_history",
+    "production_authorized": false
+  },
+  "attempts": [
+    {
+      "variant": "joint",
+      "effect": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-joint",
+      "accepted": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/accepted-joint-02",
+      "effect_fits": 4,
+      "accepted_fits": 0
+    },
+    {
+      "variant": "amplitude",
+      "effect": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-amplitude",
+      "accepted": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/accepted-amplitude",
+      "effect_fits": 4,
+      "accepted_fits": 0
+    },
+    {
+      "variant": "serial",
+      "effect": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-serial",
+      "accepted": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/accepted-serial",
+      "effect_fits": 4,
+      "accepted_fits": 0
+    },
+    {
+      "variant": "factor_only",
+      "effect": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-factor_only",
+      "accepted": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/accepted-factor_only",
+      "effect_fits": 4,
+      "accepted_fits": 0
+    }
+  ],
+  "actual_cost": {
+    "source_requests": 0,
+    "input_rows": 5348,
+    "scheduled_observations": 4340,
+    "scheduled_dates": 1085,
+    "paired_evaluation_rows": 1268,
+    "paired_evaluation_dates": 317,
+    "scientific_variants": 4,
+    "real_effect_runs": 4,
+    "real_fits": 16,
+    "zero_fit_publication_reaggregations": 4,
+    "synthetic_rehearsals": 4,
+    "engineering_check_batches": 3,
+    "failed_contract_check_batches": 1,
+    "controlled_seconds": 73.50045495801896,
+    "source_recovery_diagnostics": "multiple failed probes preserved in task output, a failed script snapshot and final recovery/source-drift records; not numerical fits",
+    "publication_gate_rejections": 1,
+    "independent_audit": "5072 repeated target labels/10144 baseline fields; common1268 identities; maxdifference1.56e-13"
+  },
+  "report": "docs/experiments/tsfresh-factor-validation-2026-10-02.md",
+  "resume_state": "None required for this bounded question; other candidates are separate studies, not pending tests.",
+  "prior_cumulative_after_this_batch": {
+    "source_requests": 23,
+    "test_batches": 12
+  }
+}

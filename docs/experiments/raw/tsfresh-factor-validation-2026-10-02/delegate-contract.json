@@ -1,0 +1,57 @@
+{
+  "mission": "实现已定义的两个tsfresh研究表达及现有workflow窄适配；不运行真实效果。",
+  "task_scope": [
+    "读取两份已核指纹策略快照与现有规范、manifest研究方案",
+    "新src研究适配器复用prepare_slope_observations的既有背景与标签口径（内部deepcopy转换为旧kind/ref只为复用背景，不改旧代码），计算两个20日固定核心；formal refs由root登记",
+    "在workflow_inputs.py新增tsfresh_price_information分发；workflow.py只增加新kind所需源码绑定/缓存键/显式real_labels+effect+four-fit上限/600点合成演练分支，不更改旧kind语义",
+    "原计算可从已经验收的项目技能固定tsfresh_calculators.py静态路径加载；不从raw导入。绑定实际导入源码与许可。若需要不同方式，仅报告",
+    "新增单元测试：独立20点手算、截断/未来变更、缺失重积累、constant未知与共同资格、real label权限，以及cache键绑定；最多1次合成测试，保留输出，不跑真实拟合或读取真实标签",
+    "交回实际diff、测试证据和限制；不要改定义登记、合同和报告"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "docs/research",
+    "configs/strategy-documents.v1.json",
+    "src/lei_signal/features",
+    "src/lei_signal/rules/clock_classifier.py",
+    ".agents/skills/lei-quant-tools/scripts",
+    "tests/unit/test_trend_slope_change_information.py",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/manifest.json",
+    "src/lei_signal/research/trend_slope_change_information.py",
+    "src/lei_signal/research/top_structure_information.py",
+    "src/lei_signal/research/volume_information.py",
+    "src/lei_signal/research/workflow_evaluation.py",
+    "src/lei_signal/research/definitions.py",
+    "src/lei_signal/domain"
+  ],
+  "write_paths": [
+    "src/lei_signal/research/tsfresh_price_information.py",
+    "src/lei_signal/research/workflow.py",
+    "src/lei_signal/research/workflow_inputs.py",
+    "tests/unit/test_tsfresh_price_information.py",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/executor-report.md",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/engineering-test-1.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "working bounded adapter and workflow hooks",
+    "one saved synthetic test output; no real fits",
+    "executor-report.md with exact changes and risks"
+  ],
+  "stop_conditions": [
+    "不改生产规则/策略源/冻结raw",
+    "不增加候选、窗口或正式效果尝试",
+    "不启动子代理",
+    "遇到定义/权限/实现歧义先报告"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

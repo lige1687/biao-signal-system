@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "batch": 2,
+  "source_ast_checks": [
+    {
+      "module": "arch/_typing.py",
+      "ast_equal_except_import_prefix": true
+    },
+    {
+      "module": "arch/bootstrap/base.py",
+      "ast_equal_except_import_prefix": true
+    },
+    {
+      "module": "arch/bootstrap/multiple_comparison.py",
+      "ast_equal_except_import_prefix": true
+    },
+    {
+      "module": "arch/bootstrap/_samplers_python.py",
+      "ast_equal_except_import_prefix": true
+    },
+    {
+      "module": "arch/utility/array.py",
+      "ast_equal_except_import_prefix": true
+    },
+    {
+      "module": "arch/utility/exceptions.py",
+      "ast_equal_except_import_prefix": true
+    },
+    {
+      "module": "arch/compat/pandas.py",
+      "ast_equal_except_import_prefix": true
+    },
+    {
+      "module": "arch/compat/numba.py",
+      "ast_equal_except_import_prefix": true
+    }
+  ],
+  "license_bytes_equal": true,
+  "independent_cases": [
+    {
+      "case": "mixed",
+      "observed_max_mean_improvement": 0.4992961618154388,
+      "library_upper_fraction": 0.0,
+      "independent_upper_fraction": 0.0,
+      "replications": 1000,
+      "max_replication_difference": 0.0
+    },
+    {
+      "case": "all_worse",
+      "observed_max_mean_improvement": -0.6967782670111544,
+      "library_upper_fraction": 1.0,
+      "independent_upper_fraction": 1.0,
+      "replications": 1000,
+      "max_replication_difference": 0.0
+    },
+    {
+      "case": "clear_improvement",
+      "observed_max_mean_improvement": 0.9959631230179226,
+      "library_upper_fraction": 0.0,
+      "independent_upper_fraction": 0.0,
+      "replications": 1000,
+      "max_replication_difference": 0.0
+    }
+  ],
+  "real_fits": 0,
+  "scope": "Synthetic fixed core agreement; not finite-sample guarantees or financial efficacy"
+}

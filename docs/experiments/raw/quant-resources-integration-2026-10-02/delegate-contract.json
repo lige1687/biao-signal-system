@@ -1,0 +1,40 @@
+{
+  "mission": "独立审阅当前量化工具适配与真实研究输入边界，提交可执行问题清单",
+  "task_scope": [
+    "只读审阅现有mean-hac及日历工具",
+    "重点检查从多ETF预测产物汇总为单日期序列的资格、权重、时间缺口和命名误导",
+    "评估哪个具体缺口必要修正，不追求新增功能或安装"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "configs/strategy-documents.v1.json",
+    "docs/research/current-standards.json",
+    ".agents/skills/lei-quant-tools/",
+    "src/lei_signal/research/workflow_evaluation.py",
+    "docs/experiments/raw/double-ma-order-information-2026-10-01/core-01/contract.json",
+    "docs/experiments/raw/double-ma-order-information-2026-10-01/core-01/result.json",
+    "docs/experiments/raw/double-ma-order-information-2026-10-01/core-01/receipt.json"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/quant-resources-integration-2026-10-02/independent-review.md"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "independent-review.md:缺陷与行号、证据、最小修正建议、无问题的范围、未解决事项"
+  ],
+  "stop_conditions": [
+    "不写其他路径",
+    "不联网、不运行新研究/统计实验、不读密钥",
+    "范围疑义报告"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

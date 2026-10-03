@@ -1,0 +1,57 @@
+{
+  "mission": "独立复核已保存四组ETF效果结果的数字和时间资格，不重新拟合",
+  "task_scope": [
+    "独立标准库重算各组B0/B1/B2整体、ETF、年份误差；核共同1268预测ID",
+    "直接经济价格和完整日历重算全部评价目标及label_end，并按日期核训练成熟与各折B0均值",
+    "检查保存预测分析的日期整段重复抽取范围方法、42尾端缺失、留一ETF/删除前20改善日计算；不调用任何拟合函数",
+    "输出独立审核json与大白话review，列出具体不通过事项或精确差值，禁止只复述root通过"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "docs/research/current-standards.json",
+    "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+    "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md",
+    "docs/experiments/raw/volume-information-2026-09-30/execution/panel.json",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/qualification.json",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/analyze_saved.py",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/saved-prediction-analysis.json",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-joint/result.json",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-joint/contract.json",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-joint/receipt.json",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-amplitude/result.json",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-amplitude/contract.json",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-amplitude/receipt.json",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-serial/result.json",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-serial/contract.json",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-serial/receipt.json",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-factor_only/result.json",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-factor_only/contract.json",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-factor_only/receipt.json"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/independent-numeric-audit.py",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/independent-numeric-audit.json",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/independent-numeric-audit.md"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "可复现的独立数值复核脚本和结果",
+    "实际差异、资格及结论边界review"
+  ],
+  "stop_conditions": [
+    "禁止重新拟合、统计方案更改、再调用外部数据",
+    "不修改任何源码、冻结合同、规范或结果",
+    "不启动子代理；问题如实回交"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

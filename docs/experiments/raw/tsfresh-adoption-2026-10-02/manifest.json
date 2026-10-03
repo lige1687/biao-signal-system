@@ -1,0 +1,365 @@
+{
+  "question": "tsfresh的两个窄范围时序计算能否在本项目按明确日期和输入口径实际复用，与已有涨跌/波动表达有哪些重叠与区别？",
+  "decision_use": "将新候选计算接成可调用的研究预览，保留数据资格与正式因子研究的现有入口",
+  "mode": "research",
+  "user_authorization": [
+    "外部增量可以评估和落地一下哈兄弟",
+    "这可能是后续的重点方向"
+  ],
+  "strategy_layer": "研究工具与候选表达的数学核验；不改策略原文、正式定义或生产判定",
+  "scope": "固定版本源码/许可核查，最多两个计算核心的项目内适配；有界人工数据和已有本地资料只读预览，0新行情0未来结果拟合",
+  "relationship_to_previous": "四候选比较已结案；用户明确授权落实候选。本轮为tsfresh具体组件采用的独立问题，旧18次来源/6批验证与旧暂停分支保留",
+  "strategy_sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    }
+  ],
+  "current_standards": {
+    "schema_version": "research-standards/1.0",
+    "new_entry": "scripts/run_factor_lab.py --workflow-contract",
+    "legacy_frozen_studies": "keep_original_bindings",
+    "standards": {
+      "mission": {
+        "path": "docs/research/lei-factor-research-mission.md",
+        "version": "1.1.0"
+      },
+      "question_method": {
+        "path": "docs/research/research-question-method-standard.md",
+        "version": "1.2.0"
+      },
+      "increment": {
+        "path": "docs/research/factor-increment-evidence-standard.md",
+        "version": "1.1.0"
+      },
+      "principles": {
+        "path": "docs/research/experiment-backtest-principles.md",
+        "version": "1.2"
+      },
+      "execution": {
+        "path": "docs/research/ai-execution-contract.md",
+        "version": "1.1.0"
+      },
+      "definition": {
+        "path": "docs/research/definition-standard.md",
+        "version": "1.2.0"
+      },
+      "template": {
+        "path": "docs/research/experiment-report-template.md",
+        "version": "1.2.1"
+      }
+    },
+    "definition_registry": "docs/research/definitions.v1.json",
+    "report_registry": "docs/experiments/registry.json",
+    "strategy_sources": "configs/strategy-documents.v1.json",
+    "new_contract_schema": "research-workflow/1.1"
+  },
+  "budget": {
+    "source_requests": 6,
+    "test_batches": 4,
+    "source_requests_used": 3,
+    "test_batches_used": 2
+  },
+  "sources": [
+    {
+      "attempt": 1,
+      "url": "https://tsfresh.readthedocs.io/en/latest/api/tsfresh.feature_extraction.html",
+      "method": "web.open",
+      "evidence": "official-api.json",
+      "status": "success",
+      "sha256": "0393ed739ded64d43a1aa5b574c4c71b72786c98532e8b10a35c3b31229cf667"
+    },
+    {
+      "attempt": 2,
+      "url": "https://pypi.org/pypi/tsfresh/json",
+      "method": "urllib GET",
+      "status": "success",
+      "sha256": "873768ab3e3825ab96dd51d42915aba1f8e5894e4012e20893afc7d571d685bf",
+      "version": "0.21.2"
+    },
+    {
+      "attempt": 3,
+      "url": "https://files.pythonhosted.org/packages/fc/c8/e17819b30246ce3780b7b628448913ca0232adb27f09791001302fe3a9c5/tsfresh-0.21.2-py2.py3-none-any.whl",
+      "method": "urllib GET",
+      "status": "success",
+      "expected_sha256": "28dcef148f90f5d5d5176446ff34f360b71c31500fa2b71c4cb2a3090f236318",
+      "sha256": "28dcef148f90f5d5d5176446ff34f360b71c31500fa2b71c4cb2a3090f236318",
+      "bytes": 97388
+    }
+  ],
+  "tests": [
+    {
+      "attempt": 1,
+      "status": "passed",
+      "bindings": {
+        "docs/experiments/raw/volume-information-2026-09-30/execution/panel.json": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+        "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94",
+        "docs/experiments/raw/volume-information-2026-09-30/source-recovery/qualification.json": "9d150d608a5e8a88d11021b96f5e2ec5443dddf14c1a98b4ddc2fb4b01bee5f2",
+        "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1"
+      },
+      "new_market_requests": 0,
+      "future_outcome_fits": 0,
+      "unit_tests": {
+        "returncode": 0,
+        "stdout": ".........................                                                [100%]\n25 passed in 1.57s\n",
+        "stderr": ""
+      },
+      "cli": {
+        "returncode": 0,
+        "stderr": ""
+      },
+      "independent_recalculation": [
+        {
+          "asset": "510300.SS",
+          "expected": {
+            "mean_abs_log_change20": 1.3738861877519848,
+            "return_autocorrelation20_lag1": -0.21413982714780988,
+            "ret20_pct": 3.10188989318001,
+            "vol20_annualized_pct": 25.46283530061164
+          },
+          "absolute_errors": {
+            "mean_abs_log_change20": 1.9984014443252818e-15,
+            "return_autocorrelation20_lag1": 4.440892098500626e-16,
+            "ret20_pct": 4.440892098500626e-15,
+            "vol20_annualized_pct": 1.0658141036401503e-14
+          }
+        },
+        {
+          "asset": "510050.SS",
+          "expected": {
+            "mean_abs_log_change20": 1.1219037689611202,
+            "return_autocorrelation20_lag1": -0.40627006579097713,
+            "ret20_pct": 3.8746630727762854,
+            "vol20_annualized_pct": 23.014354088708888
+          },
+          "absolute_errors": {
+            "mean_abs_log_change20": 1.1102230246251565e-15,
+            "return_autocorrelation20_lag1": 3.885780586188048e-16,
+            "ret20_pct": 1.199040866595169e-14,
+            "vol20_annualized_pct": 1.0658141036401503e-14
+          }
+        },
+        {
+          "asset": "510500.SS",
+          "expected": {
+            "mean_abs_log_change20": 1.5701793228560725,
+            "return_autocorrelation20_lag1": -0.10914825995519294,
+            "ret20_pct": 9.844683393070497,
+            "vol20_annualized_pct": 28.75511967137394
+          },
+          "absolute_errors": {
+            "mean_abs_log_change20": 6.661338147750939e-16,
+            "return_autocorrelation20_lag1": 2.040034807748725e-15,
+            "ret20_pct": 1.7763568394002505e-15,
+            "vol20_annualized_pct": 0.0
+          }
+        },
+        {
+          "asset": "588000.SS",
+          "expected": {
+            "mean_abs_log_change20": 2.731562457855637,
+            "return_autocorrelation20_lag1": 0.0037429658113784657,
+            "ret20_pct": 33.6374002280502,
+            "vol20_annualized_pct": 46.51364869398201
+          },
+          "absolute_errors": {
+            "mean_abs_log_change20": 4.440892098500626e-16,
+            "return_autocorrelation20_lag1": 1.5048726154098802e-16,
+            "ret20_pct": 1.4210854715202004e-14,
+            "vol20_annualized_pct": 0.0
+          }
+        }
+      ],
+      "panel_rows": 5348,
+      "calendar_dates": 1337,
+      "preview_assets": 4,
+      "elapsed_seconds": 3.332615667000937,
+      "tested_files": {
+        ".agents/skills/lei-quant-tools/scripts/tsfresh_candidates.py": "08f2dc5dd0b0f6bdf40d9d33c92495b1fa92d0d8e80d69ee2e395e130d416400",
+        ".agents/skills/lei-quant-tools/scripts/tsfresh_calculators.py": "a3ac672ac4a2410cd2b27e0c440ab949dce6bc13c68aa3ccd8f8b2510f4dfeba",
+        ".agents/skills/lei-quant-tools/scripts/quant_tools.py": "be2f0456855f09d4403ec08ae41849578f3ef6abf0fa2b425ed2776b93e0576b",
+        "tests/unit/test_tsfresh_candidates.py": "9b9b3a38aba7464254374545b85d906102b5e1d6de3761421872080897d074ff"
+      }
+    },
+    {
+      "attempt": 2,
+      "status": "passed",
+      "bindings": {
+        "docs/experiments/raw/volume-information-2026-09-30/execution/panel.json": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+        "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94",
+        "docs/experiments/raw/volume-information-2026-09-30/source-recovery/qualification.json": "9d150d608a5e8a88d11021b96f5e2ec5443dddf14c1a98b4ddc2fb4b01bee5f2",
+        "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1"
+      },
+      "new_market_requests": 0,
+      "future_outcome_fits": 0,
+      "unit_tests": {
+        "returncode": 0,
+        "stdout": "..........................                                               [100%]\n26 passed in 0.98s\n",
+        "stderr": ""
+      },
+      "cli": {
+        "returncode": 0,
+        "stderr": ""
+      },
+      "independent_recalculation": [
+        {
+          "asset": "510300.SS",
+          "expected": {
+            "mean_abs_log_change20": 1.3738861877519848,
+            "return_autocorrelation20_lag1": -0.21413982714780988,
+            "ret20_pct": 3.10188989318001,
+            "vol20_annualized_pct": 25.46283530061164
+          },
+          "absolute_errors": {
+            "mean_abs_log_change20": 1.9984014443252818e-15,
+            "return_autocorrelation20_lag1": 4.440892098500626e-16,
+            "ret20_pct": 4.440892098500626e-15,
+            "vol20_annualized_pct": 1.0658141036401503e-14
+          }
+        },
+        {
+          "asset": "510050.SS",
+          "expected": {
+            "mean_abs_log_change20": 1.1219037689611202,
+            "return_autocorrelation20_lag1": -0.40627006579097713,
+            "ret20_pct": 3.8746630727762854,
+            "vol20_annualized_pct": 23.014354088708888
+          },
+          "absolute_errors": {
+            "mean_abs_log_change20": 1.1102230246251565e-15,
+            "return_autocorrelation20_lag1": 3.885780586188048e-16,
+            "ret20_pct": 1.199040866595169e-14,
+            "vol20_annualized_pct": 1.0658141036401503e-14
+          }
+        },
+        {
+          "asset": "510500.SS",
+          "expected": {
+            "mean_abs_log_change20": 1.5701793228560725,
+            "return_autocorrelation20_lag1": -0.10914825995519294,
+            "ret20_pct": 9.844683393070497,
+            "vol20_annualized_pct": 28.75511967137394
+          },
+          "absolute_errors": {
+            "mean_abs_log_change20": 6.661338147750939e-16,
+            "return_autocorrelation20_lag1": 2.040034807748725e-15,
+            "ret20_pct": 1.7763568394002505e-15,
+            "vol20_annualized_pct": 0.0
+          }
+        },
+        {
+          "asset": "588000.SS",
+          "expected": {
+            "mean_abs_log_change20": 2.731562457855637,
+            "return_autocorrelation20_lag1": 0.0037429658113784657,
+            "ret20_pct": 33.6374002280502,
+            "vol20_annualized_pct": 46.51364869398201
+          },
+          "absolute_errors": {
+            "mean_abs_log_change20": 4.440892098500626e-16,
+            "return_autocorrelation20_lag1": 1.5048726154098802e-16,
+            "ret20_pct": 1.4210854715202004e-14,
+            "vol20_annualized_pct": 0.0
+          }
+        }
+      ],
+      "panel_rows": 5348,
+      "calendar_dates": 1337,
+      "preview_assets": 4,
+      "elapsed_seconds": 2.711627666998538,
+      "tested_files": {
+        ".agents/skills/lei-quant-tools/scripts/tsfresh_candidates.py": "e728e5d769d44e7c1f35e2a672e3610701bab695115b1e30a833455fb1393673",
+        ".agents/skills/lei-quant-tools/scripts/tsfresh_calculators.py": "a3ac672ac4a2410cd2b27e0c440ab949dce6bc13c68aa3ccd8f8b2510f4dfeba",
+        ".agents/skills/lei-quant-tools/scripts/quant_tools.py": "be2f0456855f09d4403ec08ae41849578f3ef6abf0fa2b425ed2776b93e0576b",
+        "tests/unit/test_tsfresh_candidates.py": "7030e1488785947e49dfc286a7379af5f823275401dd51dfb5657bcba990d2e6"
+      }
+    }
+  ],
+  "baseline": "现有ret20与simplevol20/vol20及程序输入资格；禁止把linear_trend默认直线斜率改称LEI端点对数斜率",
+  "candidate_selection_before_statistics": [
+    "mean_abs_change：对数价格相邻变化绝对值的平均值；须核实固定源码",
+    "autocorrelation：对数收益的一期间隔相似程度；须核实固定源码及常数序列处理"
+  ],
+  "limits": [
+    "候选预览不是已登记因子或效果通过",
+    "原真实资料有历史到达与行动完整性限制，不能借本工具消除",
+    "不复制整套默认特征筛选或批量寻优",
+    "仓库外数据库及策略文档写入仍待许可"
+  ],
+  "closure": {
+    "execution": "completed",
+    "evidence": "bounded_engineering_adoption_verified",
+    "financial_effect": "not_tested",
+    "completed_at": "2026-10-02T04:39:31.477125+00:00",
+    "report": "docs/experiments/tsfresh-adoption-2026-10-02.md"
+  },
+  "cumulative_prior": {
+    "source_requests": 18,
+    "test_batches": 6,
+    "includes_previous_closed_questions": true
+  },
+  "repair_before_batch_2": {
+    "review": "independent-review.md",
+    "finding": "Huge Python integer price can raise OverflowError before clean unknown handling; add safe float conversion and regression case",
+    "maintenance": "ruff found formatting/import issues and explicit zip strict argument omissions; preserve original files before repair"
+  },
+  "source_core_verification": [
+    {
+      "function": "mean_abs_change",
+      "source_ast_equal_after_metadata_decorators_removed": true
+    },
+    {
+      "function": "autocorrelation",
+      "source_ast_equal_after_metadata_decorators_removed": true
+    }
+  ],
+  "license": {
+    "spdx": "MIT",
+    "exact_license_sha256": "1804283622c8e51a4427aaa772d5ca522f89932fd610b294055435922af1c748"
+  },
+  "runtime": {
+    "numpy": "2.1.1",
+    "pandas": "2.3.3",
+    "pytest": "8.4.2"
+  },
+  "new_installs": 0,
+  "strategy_sources_reverified_at_close": true,
+  "standards_at_close": {
+    "docs/research/lei-factor-research-mission.md": "1f58a65ea41c9b678cc14c4490020b674e991f63267a8746f692e919eb109591",
+    "docs/research/research-question-method-standard.md": "367da1f21f3344ff17abf449aaf887db2adf31ebcfcb1715333a34fb4bf90f16",
+    "docs/research/factor-increment-evidence-standard.md": "05f5b04c8b54ad3bf86296f09a5addd4fd6344dad6e7b639650c39692b2f3871",
+    "docs/research/experiment-backtest-principles.md": "67b49a08396b0c8cb93cb526466200cc798bdb4cd8ce77509658f291cc29493c",
+    "docs/research/ai-execution-contract.md": "f70a929f15d9d59f99f78a609a8658ce468f2c4025f05dba5380198f0bf23d22",
+    "docs/research/definition-standard.md": "938e04d7beb96a46069bbb6eb6c03d2331e86bfa771623fdfe21794b4e98fcbd",
+    "docs/research/experiment-report-template.md": "a141107c915dcf738621e6e8746d89e97fb2d835b4c16883805dc7fb19ab7170"
+  },
+  "final_files": {
+    ".agents/skills/lei-quant-tools/scripts/tsfresh_candidates.py": "aefed96e626ec98a8ddd911fe074eb8ef889eb08bbfb4dcc48ec6a5d44f1cf21",
+    ".agents/skills/lei-quant-tools/scripts/tsfresh_calculators.py": "a3ac672ac4a2410cd2b27e0c440ab949dce6bc13c68aa3ccd8f8b2510f4dfeba",
+    ".agents/skills/lei-quant-tools/scripts/tsfresh-LICENSE.txt": "1804283622c8e51a4427aaa772d5ca522f89932fd610b294055435922af1c748",
+    ".agents/skills/lei-quant-tools/scripts/quant_tools.py": "be2f0456855f09d4403ec08ae41849578f3ef6abf0fa2b425ed2776b93e0576b",
+    ".agents/skills/lei-quant-tools/SKILL.md": "eb022f1c412f63371bb81c32e7b2363072d3f29a156a16265bdcc75fe26ba83c",
+    ".agents/skills/lei-quant-tools/references/provenance.md": "0fbb4daa92b2f08b474298284a6de0695b07ab62c648903f5311acdd4497807a",
+    "tests/unit/test_tsfresh_candidates.py": "7030e1488785947e49dfc286a7379af5f823275401dd51dfb5657bcba990d2e6",
+    "docs/research/research-workflow-usage.md": "bbc128ae035144f7bced79848c824107746f544696e3bffbfd57e36ff1b1b818",
+    "docs/research/factor-research-roadmap-2026-09-10.md": "ce40cff9f9ff0422e9dbbe1f999d59ccc6849f8d5fb8567280a01649859a3a6f",
+    "docs/experiments/tsfresh-adoption-2026-10-02.md": "cec135a0c8e20b8b432db40c9748fa8f6441afb1adff96b98059d549efdce0f0"
+  },
+  "cumulative_with_this_question": {
+    "source_requests": 21,
+    "test_batches": 8,
+    "prior_attempts_preserved": true
+  },
+  "maintenance_evidence": "maintenance-checks.json",
+  "independent_review": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium",
+    "scope": "static code and arithmetic review; no test or network",
+    "path": "independent-review.md",
+    "controller_acceptance": "controller-review.md"
+  }
+}

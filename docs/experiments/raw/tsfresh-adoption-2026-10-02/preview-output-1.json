@@ -1,0 +1,92 @@
+{
+  "schema": "tsfresh-candidate-preview/1.0",
+  "as_of": "2026-06-30",
+  "upstream": "tsfresh 0.21.2 selected calculators",
+  "window_returns": 20,
+  "units": {
+    "mean_abs_log_change20": "log-return percentage points per declared session",
+    "return_autocorrelation20_lag1": "dimensionless; upstream full-window normalization"
+  },
+  "data_mode": "historical_reconstruction",
+  "source_note": "Existing retrospective economic-price panel; original historical arrival and action availability times remain unverified. Source hashes in attempt record; not newly qualified for predictions or trading.",
+  "scope": "candidate calculation only; not a registered factor or effect/production approval",
+  "limitations": [
+    "calendar and historical availability are caller declarations",
+    "economic prices and action_known are not independently verified here",
+    "lag-one estimator is not clipped to [-1,1]"
+  ],
+  "rows": [
+    {
+      "asset": "510300.SS",
+      "date": "2026-06-30",
+      "continuous_prices": 1337,
+      "last_break": null,
+      "values": {
+        "mean_abs_log_change20": 1.3738861877519828,
+        "return_autocorrelation20_lag1": -0.21413982714781032
+      },
+      "baseline": {
+        "ret20_pct": 3.1018898931800143,
+        "vol20_annualized_pct": 25.46283530061163
+      },
+      "status": "available",
+      "window_start": "2026-06-01",
+      "window_end": "2026-06-30",
+      "unknown_reasons": {}
+    },
+    {
+      "asset": "510050.SS",
+      "date": "2026-06-30",
+      "continuous_prices": 1337,
+      "last_break": null,
+      "values": {
+        "mean_abs_log_change20": 1.1219037689611213,
+        "return_autocorrelation20_lag1": -0.40627006579097674
+      },
+      "baseline": {
+        "ret20_pct": 3.8746630727762734,
+        "vol20_annualized_pct": 23.0143540887089
+      },
+      "status": "available",
+      "window_start": "2026-06-01",
+      "window_end": "2026-06-30",
+      "unknown_reasons": {}
+    },
+    {
+      "asset": "510500.SS",
+      "date": "2026-06-30",
+      "continuous_prices": 1337,
+      "last_break": null,
+      "values": {
+        "mean_abs_log_change20": 1.5701793228560732,
+        "return_autocorrelation20_lag1": -0.1091482599551909
+      },
+      "baseline": {
+        "ret20_pct": 9.844683393070495,
+        "vol20_annualized_pct": 28.75511967137394
+      },
+      "status": "available",
+      "window_start": "2026-06-01",
+      "window_end": "2026-06-30",
+      "unknown_reasons": {}
+    },
+    {
+      "asset": "588000.SS",
+      "date": "2026-06-30",
+      "continuous_prices": 1337,
+      "last_break": null,
+      "values": {
+        "mean_abs_log_change20": 2.7315624578556372,
+        "return_autocorrelation20_lag1": 0.003742965811378616
+      },
+      "baseline": {
+        "ret20_pct": 33.63740022805018,
+        "vol20_annualized_pct": 46.51364869398201
+      },
+      "status": "available",
+      "window_start": "2026-06-01",
+      "window_end": "2026-06-30",
+      "unknown_reasons": {}
+    }
+  ]
+}

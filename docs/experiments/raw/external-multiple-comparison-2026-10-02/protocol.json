@@ -1,0 +1,66 @@
+{
+  "question": "同单位保存预测误差的多个候选共同比较工具是否能限定适配？",
+  "scope": "工程验收及历史归档只读演示，不改变旧效果结论",
+  "method": {
+    "library": "arch-8.0.0 limited Python bootstrap component",
+    "bootstrap": "circular",
+    "block_size": 20,
+    "reps": 1000,
+    "seed": 20261002,
+    "studentize": false,
+    "primary_pvalue": "upper",
+    "statistic": "max_k mean(baseline daily loss - candidate daily loss); centered joint resampled maximum",
+    "date_handling": "complete balanced daily calendar; one fitted evaluation period; reject missing dates/unequal identity or target; no compression or fill",
+    "fixed_references": [
+      "B0",
+      "B1"
+    ],
+    "family_scope": "declared tsfresh joint/amplitude/serial only; retrospective incomplete family; no global discovery claim"
+  },
+  "archive_demo": {
+    "runs": [
+      "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-joint",
+      "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-amplitude",
+      "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-serial"
+    ],
+    "start": "2025-01-02",
+    "end": "2025-12-02",
+    "reason": "already-seen 2025 complete mature-label portion; full2025-2026 calendar unsupported due known tails/multiple fits; engineering example not new factor validation",
+    "common_rows": 888,
+    "common_dates": 222
+  },
+  "engineering_batches": [
+    {
+      "id": 1,
+      "purpose": "executor synthetic and boundary tests once"
+    },
+    {
+      "id": 2,
+      "purpose": "controller independent sampler/statistic reimplementation and provenance/source AST checks"
+    },
+    {
+      "id": 3,
+      "purpose": "archived receipt checks/full-calendar rejection/explicit2025 demo with B0 and B1,0 fits"
+    },
+    {
+      "id": 4,
+      "purpose": "reserve one objective repair regression; no alternative financial parameter search"
+    }
+  ],
+  "stop": [
+    "6 external source requests",
+    "4 engineering batches",
+    "0 real fits allowed",
+    "missing core source/identity/calendar blocks dependent scope"
+  ],
+  "strategy_sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    }
+  ]
+}

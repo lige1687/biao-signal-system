@@ -1,0 +1,221 @@
+{
+  "question": "哪些开源Codex兼容技能能为LeiSignal开发与因子研究补上实际缺口？",
+  "mode": "research",
+  "scope": "有限开源技能发现、正文审阅和兼容性/重复性核对；不是新因子收益实验",
+  "baseline": [
+    "research-closure",
+    "lei-gpt-zcode-orchestrator",
+    "westock-data",
+    "factorhub-readonly",
+    "gstack review/qa/investigate",
+    "vercel-react-best-practices"
+  ],
+  "allowed_actions": [
+    "公开来源查阅",
+    "项目内准备候选和归档",
+    "在项目.agents/skills中新增两项窄范围方法适配技能"
+  ],
+  "restricted_actions": [
+    "无确认不写用户全局技能目录",
+    "不安装整套金融平台",
+    "不改变策略语义或生产规则",
+    "不取真实密钥或上传研究数据"
+  ],
+  "budget": {
+    "source_requests": 6,
+    "test_batches": 4
+  },
+  "sources": [
+    {
+      "attempt": 1,
+      "method": "web.open",
+      "url": "https://skills.sh/",
+      "result": "success; discovery only, popularity not independent evidence"
+    },
+    {
+      "attempt": 2,
+      "method": "web.search_query",
+      "query": "open source agent skills factor research statistical analysis statsmodels quantitative finance github SKILL.md",
+      "result": "success; identified ml4t/skills, K-Dense-AI/scientific-agent-skills, Vibe-Trading and other catalogs"
+    },
+    {
+      "attempt": 3,
+      "url": "https://api.github.com/repos/ml4t/skills",
+      "result": "success"
+    },
+    {
+      "attempt": 4,
+      "url": "https://api.github.com/repos/ml4t/skills/tarball/main",
+      "result": "success",
+      "sha256": "a57f2a6d50677dead06ab8e814ca9586a9f1c1f7c3eea472490e63024601adef"
+    },
+    {
+      "attempt": 5,
+      "url": "https://api.github.com/repos/K-Dense-AI/scientific-agent-skills",
+      "result": "success"
+    },
+    {
+      "attempt": 6,
+      "url": "https://api.github.com/repos/K-Dense-AI/scientific-agent-skills/tarball/main",
+      "result": "curl: (28) Operation timed out after 44357 milliseconds with 4118122 bytes received\n"
+    }
+  ],
+  "tests": [
+    {
+      "id": "source-counterexample-and-adapter-invariants",
+      "status": "passed",
+      "batch": 1,
+      "scope": "从保存的源码只抽取purged_split函数验证未来训练反例；模拟发布/修订时点、两ETF同日期切分及训练统计量不读检验值",
+      "attempts": 1,
+      "result": "case-checks.json",
+      "checks": 24
+    }
+  ],
+  "strategy_sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    }
+  ],
+  "closure": {
+    "execution": "completed",
+    "evidence": "supported",
+    "completion_reason": "question_answered",
+    "scope": "仅已审阅的项目技能取舍与模拟/结构核验；不是全面生态评估或收益研究"
+  },
+  "repositories": {
+    "ml4t": {
+      "repo": "ml4t/skills",
+      "archive_sha256": "a57f2a6d50677dead06ab8e814ca9586a9f1c1f7c3eea472490e63024601adef",
+      "stars_observed": 22,
+      "archive_root": "ml4t-skills-f0ea019"
+    }
+  },
+  "decision_use": "为项目Codex选择可用研究方法技能；不推断交易效果",
+  "success_and_falsification": "正文可审阅、许可明确、可由项目现有工具支撑且不覆盖本地研究标准；固定阈值或未来信息进入历史判断构成原样接入反例",
+  "output_location": "docs/experiments/open-finance-skills-2026-10-02.md",
+  "reviewed_skills": [
+    {
+      "path": "reviewed/concepts/backtest-overfitting/SKILL.md",
+      "sha256": "be65e56bddcbd414ae8b9049a0ad5bf7eda87fdab9118fdc637ff8ba01d4372a"
+    },
+    {
+      "path": "reviewed/concepts/data-leakage/SKILL.md",
+      "sha256": "391956cb6f95a9eaf3d72ea4289290e118500ce2b17878f68dcee7ba01e087ca"
+    },
+    {
+      "path": "reviewed/concepts/point-in-time/SKILL.md",
+      "sha256": "cff8e72b709d54bed7bbc1edc3387fafa6a8a4191326cd1844ff6dd65c9be697"
+    },
+    {
+      "path": "reviewed/infrastructure/polars-patterns/SKILL.md",
+      "sha256": "bcc9062c8b4947765ef467c3becf3c1873eac16612118c2bdd187adcaf62df8e"
+    },
+    {
+      "path": "reviewed/validation/evaluate-factor/SKILL.md",
+      "sha256": "2919eb8dc6215dc8681d84d3a25ba671f78d54d537271863838164fa5f63cbbe"
+    },
+    {
+      "path": "reviewed/validation/purging-embargo/SKILL.md",
+      "sha256": "a6977a7ac0cbe50bf52b7bf60478a96b4b3a6561d0e2bc760bf6367d49b6a916"
+    },
+    {
+      "path": "reviewed/workflows/factor-research/SKILL.md",
+      "sha256": "cd93000c5430f613644c1a5089f731f55514bc3edae721468d3c0ca94a6bb2bf"
+    }
+  ],
+  "installed_skills": [
+    {
+      "name": "lei-data-availability",
+      "path": ".agents/skills/lei-data-availability",
+      "type": "project_adaptation",
+      "dependencies_installed": []
+    },
+    {
+      "name": "lei-causal-validation",
+      "path": ".agents/skills/lei-causal-validation",
+      "type": "project_adaptation",
+      "dependencies_installed": []
+    }
+  ],
+  "current_standards": {
+    "schema_version": "research-standards/1.0",
+    "new_entry": "scripts/run_factor_lab.py --workflow-contract",
+    "legacy_frozen_studies": "keep_original_bindings",
+    "standards": {
+      "mission": {
+        "path": "docs/research/lei-factor-research-mission.md",
+        "version": "1.1.0"
+      },
+      "question_method": {
+        "path": "docs/research/research-question-method-standard.md",
+        "version": "1.2.0"
+      },
+      "increment": {
+        "path": "docs/research/factor-increment-evidence-standard.md",
+        "version": "1.1.0"
+      },
+      "principles": {
+        "path": "docs/research/experiment-backtest-principles.md",
+        "version": "1.2"
+      },
+      "execution": {
+        "path": "docs/research/ai-execution-contract.md",
+        "version": "1.1.0"
+      },
+      "definition": {
+        "path": "docs/research/definition-standard.md",
+        "version": "1.2.0"
+      },
+      "template": {
+        "path": "docs/research/experiment-report-template.md",
+        "version": "1.2.1"
+      }
+    },
+    "definition_registry": "docs/research/definitions.v1.json",
+    "report_registry": "docs/experiments/registry.json",
+    "strategy_sources": "configs/strategy-documents.v1.json",
+    "new_contract_schema": "research-workflow/1.1"
+  },
+  "remaining_core_actions": [],
+  "coverage_boundary": "61项技能目录，7项相关技能全文审阅；第二套scientific-agent-skills正文下载失败，仅元数据，不作接入结论。",
+  "verification": [
+    {
+      "check": "repo_hygiene",
+      "result": "passed"
+    },
+    {
+      "check": "archive and reviewed file SHA-256, 24 recorded checks, registry category and summary",
+      "result": "passed"
+    },
+    {
+      "check": "diff_whitespace_initial",
+      "result": "failed: INDEX.md trailing blank line at EOF; removed empty trailing line only",
+      "retained_failure": true
+    },
+    {
+      "check": "diff_whitespace_after_fix and new text artifacts",
+      "result": "passed"
+    }
+  ],
+  "deferred_branches": [
+    {
+      "name": "scientific-agent-skills full source review",
+      "execution": "paused",
+      "reason": "source_budget_exhausted_after_download_timeout",
+      "evidence": "not_evaluated",
+      "resume_requires": "新的来源请求预算及完整技能正文"
+    }
+  ],
+  "ledger_update": {
+    "goal_id": "okr-4f4157e2957e",
+    "observed_version": 48,
+    "status": "pending_user_permission",
+    "proposal": "upgrades-note-proposed.json",
+    "reason": "数据库默认位置在仓库外；已向用户请求本次追加许可"
+  }
+}

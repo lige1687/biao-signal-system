@@ -1,0 +1,41 @@
+[
+  {
+    "command": [
+      "python3",
+      "-m",
+      "ruff",
+      "check",
+      ".agents/skills/lei-quant-tools/scripts/tsfresh_candidates.py",
+      "tests/unit/test_tsfresh_candidates.py",
+      "docs/experiments/raw/tsfresh-adoption-2026-10-02/verify_adoption.py",
+      "--output-format",
+      "concise"
+    ],
+    "exit": 0,
+    "stdout": "All checks passed!\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "/Users/yongbiaoli/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+      ".agents/skills/lei-quant-tools"
+    ],
+    "exit": 0,
+    "stdout": "Skill is valid!\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "scripts/check_repo_hygiene.py"
+    ],
+    "exit": 0,
+    "stdout": "✓ 归置自检通过：根层四层均在白名单内，关键配置均已入库。\n",
+    "stderr": ""
+  },
+  {
+    "report_links_exist": true,
+    "registry_and_summary_valid": true
+  }
+]

@@ -1,0 +1,282 @@
+{
+  "checks": [
+    {
+      "name": "complete_daily_panel_ready",
+      "actual": "ready",
+      "expected": "ready",
+      "passed": true
+    },
+    {
+      "name": "independent_paired_daily_losses",
+      "actual": [
+        3.0,
+        0.0,
+        -5.0
+      ],
+      "expected": [
+        3.0,
+        0.0,
+        -5.0
+      ],
+      "passed": true
+    },
+    {
+      "name": "unit_remains_squared_not_RMSE",
+      "actual": "percentage_point_squared",
+      "expected": "percentage_point_squared",
+      "passed": true
+    },
+    {
+      "name": "positive_is_improvement",
+      "actual": -0.6666666666666666,
+      "expected": -0.6666666666666666,
+      "passed": true
+    },
+    {
+      "name": "missing_date_prevents_packet",
+      "actual": null,
+      "expected": null,
+      "passed": true
+    },
+    {
+      "name": "missing_date_identified",
+      "actual": [
+        "2026-03-03"
+      ],
+      "expected": [
+        "2026-03-03"
+      ],
+      "passed": true
+    },
+    {
+      "name": "unequal_asset_pool_prevents_packet",
+      "actual": null,
+      "expected": null,
+      "passed": true
+    },
+    {
+      "name": "unequal_pool_identified",
+      "actual": {
+        "2026-03-04": [
+          "A"
+        ]
+      },
+      "expected": {
+        "2026-03-04": [
+          "A"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "changed_target_identity",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "weekly_not_silently_daily",
+      "actual": null,
+      "expected": null,
+      "passed": true
+    },
+    {
+      "name": "unsupported_original_axis_not_reinterpreted",
+      "actual": null,
+      "expected": null,
+      "passed": true
+    },
+    {
+      "name": "unordered_calendar_rejected",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "real_full_period_refused",
+      "actual": "not_applicable",
+      "expected": "not_applicable",
+      "passed": true
+    },
+    {
+      "name": "real_full_period_42_missing_dates",
+      "actual": 42,
+      "expected": 42,
+      "passed": true
+    },
+    {
+      "name": "real_full_period_no_packet",
+      "actual": null,
+      "expected": null,
+      "passed": true
+    },
+    {
+      "name": "explicit_auxiliary_period_ready",
+      "actual": "ready",
+      "expected": "ready",
+      "passed": true
+    },
+    {
+      "name": "real_rows",
+      "actual": 888,
+      "expected": 888,
+      "passed": true
+    },
+    {
+      "name": "real_dates",
+      "actual": 222,
+      "expected": 222,
+      "passed": true
+    },
+    {
+      "name": "real_assets",
+      "actual": 4,
+      "expected": 4,
+      "passed": true
+    },
+    {
+      "name": "real_old_score_independent",
+      "actual": 15.815464643597098,
+      "expected": 15.815464643597098,
+      "passed": true
+    },
+    {
+      "name": "real_new_score_independent",
+      "actual": 16.161131517591354,
+      "expected": 16.161131517591354,
+      "passed": true
+    },
+    {
+      "name": "real_improvement_independent",
+      "actual": -0.3456668739942532,
+      "expected": -0.3456668739942561,
+      "passed": true
+    },
+    {
+      "name": "real_standard_error_independent",
+      "actual": 0.23328050414259652,
+      "expected": 0.23328050414259652,
+      "passed": true
+    },
+    {
+      "name": "bad_receipt_refused",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "real_bridge_cli",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "real_bridge_cli_matches",
+      "actual": -0.3456668739942532,
+      "expected": -0.34566687399425333,
+      "passed": true
+    },
+    {
+      "name": "unqualified_full_period_cli_refused",
+      "actual": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "name": "unqualified_cli_has_no_estimate",
+      "actual": null,
+      "expected": null,
+      "passed": true
+    },
+    {
+      "name": "archived_source_unchanged",
+      "actual": {
+        "state.json": "2b480b41013457a517d04497aec7639354f585a6fdd60a75d09a6b7633b02e1c",
+        "result.json": "c3e4e88aa41b341e3e468678148c1d126588f1dece4367f0b65c860501c3c6a7",
+        "report.md": "8df624140b2ed6fd0741442a17d24eda2db2560f24f3c761ab12127a51a540dc",
+        "preflight.json": "5e646be2f0907fa3ba04c0145f864de8cd20dd77f75c3a5baa85ea7f97ac3727",
+        "contract.json": "f36b47c7c108e57534a42aac5a62b5229cd646060c970c3ba2a618a842540079",
+        "receipt.json": "0067324306c5a9c2487bf0f91f3a7a7023dbfdf713bd8da5c012988e873cad90"
+      },
+      "expected": {
+        "state.json": "2b480b41013457a517d04497aec7639354f585a6fdd60a75d09a6b7633b02e1c",
+        "result.json": "c3e4e88aa41b341e3e468678148c1d126588f1dece4367f0b65c860501c3c6a7",
+        "report.md": "8df624140b2ed6fd0741442a17d24eda2db2560f24f3c761ab12127a51a540dc",
+        "preflight.json": "5e646be2f0907fa3ba04c0145f864de8cd20dd77f75c3a5baa85ea7f97ac3727",
+        "contract.json": "f36b47c7c108e57534a42aac5a62b5229cd646060c970c3ba2a618a842540079",
+        "receipt.json": "0067324306c5a9c2487bf0f91f3a7a7023dbfdf713bd8da5c012988e873cad90"
+      },
+      "passed": true
+    }
+  ],
+  "passed": 29,
+  "total": 29,
+  "real_auxiliary_result": {
+    "status": "ready",
+    "reasons": [],
+    "range": [
+      "2025-01-02",
+      "2025-12-02"
+    ],
+    "explicit_range": true,
+    "planned_dates": 222,
+    "prediction_dates": 222,
+    "prediction_rows": 888,
+    "assets": [
+      "510050.SS",
+      "510300.SS",
+      "510500.SS",
+      "588000.SS"
+    ],
+    "missing_dates": [],
+    "incomplete_asset_dates": {},
+    "folds": [
+      "0"
+    ],
+    "weighting": "equal_asset",
+    "baseline": "B1",
+    "candidate": "B2",
+    "metric": "MSE",
+    "unit": "percentage_point_squared",
+    "positive_means": "candidate has lower squared prediction error",
+    "original_primary_metric": {
+      "name": "RMSE",
+      "direction": "lower",
+      "attention_threshold": 0.1,
+      "unit": "percentage_point",
+      "threshold_provenance": "researcher planning choice, no trading rule"
+    },
+    "scope": "auxiliary calculation on already-seen saved predictions; no new fit or evidence",
+    "paired_scores": {
+      "baseline": 15.815464643597098,
+      "candidate": 16.161131517591354,
+      "improvement": -0.34566687399425333
+    },
+    "source": {
+      "run_dir": "docs/experiments/raw/double-ma-order-information-2026-10-01/core-01",
+      "files": {
+        "contract.json": "f36b47c7c108e57534a42aac5a62b5229cd646060c970c3ba2a618a842540079",
+        "result.json": "c3e4e88aa41b341e3e468678148c1d126588f1dece4367f0b65c860501c3c6a7",
+        "preflight.json": "5e646be2f0907fa3ba04c0145f864de8cd20dd77f75c3a5baa85ea7f97ac3727",
+        "receipt.json": "0067324306c5a9c2487bf0f91f3a7a7023dbfdf713bd8da5c012988e873cad90"
+      },
+      "receipt_matches_archived_journal": true,
+      "qualification": "archived snapshot only; current sources and code not requalified"
+    },
+    "hac": {
+      "metric": "B1 minus B2 daily MSE improvement",
+      "unit": "percentage_point_squared",
+      "frequency": "qualified_session",
+      "n": 222,
+      "nlags": 20,
+      "mean_difference": -0.3456668739942532,
+      "mean_variance": 0.054419793613023994,
+      "mean_standard_error": 0.23328050414259652,
+      "method": "statsmodels-0.15.0 S_hac_simple; Bartlett; no finite-sample correction",
+      "scope": "declared consecutive equal-interval observations; not a strategy-effectiveness verdict",
+      "warning": "declared calendar is not independently qualified by this utility"
+    }
+  },
+  "new_fits": 0,
+  "new_market_observations": 0
+}

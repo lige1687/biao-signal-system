@@ -1,0 +1,165 @@
+{
+  "question": "FactorHub 能否在 Codex 中以限定查询工具接入，或有哪些现有工具可直接使用？",
+  "mode": "research",
+  "decision_use": "准备可审阅的 Codex 接入并验证安装与启动，不改变交易逻辑",
+  "scope": "MCP工程兼容性与可用查询范围；不重做ETF资格或收益研究",
+  "baseline": "2026-09-23未安装；既有FactorHub数据资格报告与westock-data技能",
+  "allowed_actions": [
+    "读取公开文档",
+    "仓库内独立安装与无凭据启动检查",
+    "保存报告及登记"
+  ],
+  "blocked_actions": [
+    "未经确认修改仓库外配置",
+    "搜索历史凭据",
+    "供应商回测POST",
+    "生产规则或行情源替换"
+  ],
+  "budget": {
+    "source_requests": 6,
+    "purposeful_test_batches": 4,
+    "external_failures_per_operation": 2
+  },
+  "sources": [
+    {
+      "attempt": 1,
+      "url": "OpenAI official domain search: codex MCP enabled_tools disabled_tools",
+      "result": "search returned official MCP documentation",
+      "method": "web.search_query"
+    },
+    {
+      "attempt": 2,
+      "url": "https://developers.openai.com/codex/mcp/",
+      "result": "opened; redirect https://learn.chatgpt.com/docs/extend/mcp?surface=cli",
+      "method": "web.open"
+    },
+    {
+      "attempt": 3,
+      "url": "https://learn.chatgpt.com/docs/extend/mcp.md?surface=cli",
+      "result": "success",
+      "sha256": "adb28990c0c7be47b9ff6c177e3cdeae5803978935cd792f781af2c8b5643e92"
+    },
+    {
+      "attempt": 4,
+      "url": "https://pypi.org/pypi/factorhub-mcp/json",
+      "result": "failed: TLS handshake timeout; urllib 25 seconds"
+    },
+    {
+      "attempt": 5,
+      "url": "https://pypi.org/pypi/factorhub-mcp/json",
+      "result": "success"
+    },
+    {
+      "attempt": 6,
+      "url": "https://files.pythonhosted.org/packages/e3/60/4b67c1aa7a1361e651097928484268b10ddc3131bb808f5fa80dd5eaa3a9/factorhub_mcp-0.1.0-py3-none-any.whl",
+      "result": "success"
+    }
+  ],
+  "strategy_sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    }
+  ],
+  "closure": {
+    "execution": "completed",
+    "evidence": "supported",
+    "completion_reason": "evidence_boundary",
+    "question_scope": "Codex query integration compatibility and an available ETF query alternative",
+    "pending_branches": {
+      "factorhub_authentication": "blocked: authorized credential not configured",
+      "host_tool_catalog": "not_evaluated: reload trusted project",
+      "historical_etf_qualification": "not_evaluated: separate question",
+      "okr_writeback": "pending permission for repository-external SQLite"
+    }
+  },
+  "package": {
+    "version": "0.1.0",
+    "wheel": "factorhub_mcp-0.1.0-py3-none-any.whl",
+    "url": "https://files.pythonhosted.org/packages/e3/60/4b67c1aa7a1361e651097928484268b10ddc3131bb808f5fa80dd5eaa3a9/factorhub_mcp-0.1.0-py3-none-any.whl",
+    "sha256": "5bbe87dd8f6a5af784d8820a0b490bc4aa966c80b1894212550d1e18752936da",
+    "requires_dist": [
+      "httpx>=0.27.0",
+      "mcp>=1.0.0"
+    ]
+  },
+  "tests": [
+    {
+      "batch": 1,
+      "name": "isolated official package installation",
+      "status": "passed",
+      "runtime": "logs/factorhub-codex-2026-10-02/venv",
+      "targets": [
+        "factorhub-mcp==0.1.0",
+        "mcp>=1,<2"
+      ],
+      "reason": "published server uses MCP v1 API; do not mix with future major versions",
+      "exit_code": 0
+    },
+    {
+      "batch": 2,
+      "name": "MCP protocol, allow-list, five GET dispatch paths and error handling",
+      "status": "passed",
+      "network": "mock transport only; fake test credential never sent outside",
+      "assertions": 25,
+      "live_provider_queries": 0
+    },
+    {
+      "batch": 3,
+      "name": "existing WeStock 1.0.3 ETF unadjusted daily query",
+      "status": "passed",
+      "command": "kline sh510300 --period day --limit 3 --fq bfq",
+      "scope": "public data lookup, not full ETF price or corporate-action qualification",
+      "exit_code": 0,
+      "seconds": 0.64,
+      "package_version": "1.0.3",
+      "entry_sha256": "8d8f9c3ed8e2a4980fc4dd8b53a72541ced8a74109fa5ec1216eb61ca9276d84",
+      "data_rows": 3,
+      "data_dates": [
+        "2026-09-30",
+        "2026-09-29",
+        "2026-09-28"
+      ]
+    }
+  ],
+  "artifacts": {
+    ".codex/config.toml": {
+      "sha256": "e1cca80c44bda2a8524b3cc5f058d5f2237482880aac58021e2c029635a390f5"
+    },
+    ".agents/skills/factorhub-readonly/SKILL.md": {
+      "sha256": "264e01d8c54403ba0eb8689bf266c69b79bd65b7165b4683fdcadcfb92febc95"
+    },
+    ".agents/skills/factorhub-readonly/scripts/server.py": {
+      "sha256": "7461e0e2c71060c7f5406f5cc899993e218b0729651ea70df51c06bec43b0f47"
+    },
+    ".agents/skills/factorhub-readonly/references/requirements.lock.txt": {
+      "sha256": "da3baf9109ca396e310340d76f30ffec3ec9d8a8a60126e816967cbec2ece4a1"
+    },
+    "docs/experiments/raw/factorhub-codex-2026-10-02/adapter-checks.json": {
+      "sha256": "3f65cf3a1de2ca0cf0e3ca8734db0d8810d8b549669d4989a4f7f7722ecfa92a"
+    },
+    "docs/experiments/raw/factorhub-codex-2026-10-02/westock-etf.txt": {
+      "sha256": "496e0fecdd4bf6116a0be9fd669e94f380a5b1438d34786af6f7d007a12b5f85"
+    },
+    "docs/experiments/factorhub-codex-2026-10-02.md": {
+      "sha256": "c23a839de7126bcf1859b35b8d6fd6e475ce5a760834798cb62ad765e29d64f9"
+    },
+    "scripts/check_repo_hygiene.py": {
+      "sha256": "d0948e34e2c175729ec514dd346db0c6ecc5c0504294a5194717c09e5de431b9"
+    }
+  },
+  "verification": {
+    "skill_format": "passed",
+    "protocol_checks": 25,
+    "project_config_parse": "passed",
+    "repo_hygiene": "passed_after_adding_codex_tool_config_directory",
+    "diff_whitespace": "passed",
+    "source_requests": 6,
+    "factorhub_live_queries": 0,
+    "westock_live_query_commands": 1
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "question": "在已有开源技能与工具评估之外，哪些量化资源或项目组件可实际适配到LeiSignal宽基/ETF研究？",
+  "decision_use": "选择并小范围接入有明确用途的研究组件，而非新增交易策略",
+  "mode": "research",
+  "scope": "统计核心与跨市场日历小组件，其他资源按现有证据列候选；不做新行情/账户收益实验",
+  "user_authorization": "对的，量化相关的资源，skill，或许项目，你发散一下，能搞进来的，适配我们系统的也可以搞",
+  "relationship_to_previous": "前轮技能问题已结案；本轮是用户明确扩大到资源与项目的新问题。累计保留前轮6次来源请求、1批模拟，不重置旧暂停分支。",
+  "budget": {
+    "source_requests": 6,
+    "test_batches": 4
+  },
+  "sources": [
+    {
+      "attempt": 1,
+      "method": "web.search_query",
+      "query": "open source quantitative research exchange_calendars arch statsmodels Alphalens QuantStats Riskfolio github official",
+      "result": "success; discovery only"
+    },
+    {
+      "attempt": 2,
+      "url": "https://pypi.org/pypi/statsmodels/json",
+      "result": "success",
+      "sha256": "0551920642f254d22d41e5671db7df6b3c7ee4ff2385490d552b12769ab44aa2",
+      "version": "0.15.0"
+    },
+    {
+      "attempt": 3,
+      "url": "https://pypi.org/pypi/exchange-calendars/json",
+      "result": "success",
+      "sha256": "91efd757fdcec580e2a5cdf5a62f97595717f12539e4412fa5e84c79563524b5",
+      "version": "4.13.2"
+    },
+    {
+      "attempt": 4,
+      "url": "https://files.pythonhosted.org/packages/58/c8/08a71f7ad3f0506967d0ab0cdc16a6dec0fe94d0b317f5567836010a10f6/statsmodels-0.15.0-cp311-cp311-macosx_11_0_arm64.whl",
+      "filename": "statsmodels-0.15.0-cp311-cp311-macosx_11_0_arm64.whl",
+      "result": "success",
+      "sha256": "0ca5d27711f171ee478d547d5a8c5424d1820a1b73c2a3d6bf63f71ad4525f71"
+    },
+    {
+      "attempt": 5,
+      "url": "https://files.pythonhosted.org/packages/c8/4c/0469b40057bc9f8d9594dcc6024202626b981ae4b52dfcd304552e8e1c3a/exchange_calendars-4.13.2-py3-none-any.whl",
+      "filename": "exchange_calendars-4.13.2-py3-none-any.whl",
+      "result": "success",
+      "sha256": "fc5a2ad0d61b5c3a6539a3061cd4cbb55c59f4a903455cec7926e4b798919996"
+    },
+    {
+      "attempt": 6,
+      "method": "web.open",
+      "url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20251222_10802507.shtml",
+      "result": "success; annual schedule published 2025-12-22; explicit seven closure ranges verified, not intraday arrival evidence"
+    }
+  ],
+  "tests": [
+    {
+      "id": "borrowed-core-and-calendar-check",
+      "batch": 1,
+      "attempts": 1,
+      "status": "passed",
+      "scope": "实际调用复制的两个statsmodels原函数；独立手算验证正负序列相关误差、缺值/日期拒绝；2026日历快照与官方七组休市日期逐日核对",
+      "result": "checks.json",
+      "checks": 27
+    }
+  ],
+  "allowed_actions": [
+    "公开来源查阅",
+    "项目内隔离安装和研究工具适配",
+    "模拟例与已有来源资格核对",
+    "项目报告登记"
+  ],
+  "restricted_actions": [
+    "不修改仓库外内容，台账许可仍待用户明确回复",
+    "不变更策略与生产消费者",
+    "不采购、不取密钥、不上传数据",
+    "不重跑已结案市场研究"
+  ],
+  "strategy_sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    }
+  ],
+  "current_standards": {
+    "schema_version": "research-standards/1.0",
+    "new_entry": "scripts/run_factor_lab.py --workflow-contract",
+    "legacy_frozen_studies": "keep_original_bindings",
+    "standards": {
+      "mission": {
+        "path": "docs/research/lei-factor-research-mission.md",
+        "version": "1.1.0"
+      },
+      "question_method": {
+        "path": "docs/research/research-question-method-standard.md",
+        "version": "1.2.0"
+      },
+      "increment": {
+        "path": "docs/research/factor-increment-evidence-standard.md",
+        "version": "1.1.0"
+      },
+      "principles": {
+        "path": "docs/research/experiment-backtest-principles.md",
+        "version": "1.2"
+      },
+      "execution": {
+        "path": "docs/research/ai-execution-contract.md",
+        "version": "1.1.0"
+      },
+      "definition": {
+        "path": "docs/research/definition-standard.md",
+        "version": "1.2.0"
+      },
+      "template": {
+        "path": "docs/research/experiment-report-template.md",
+        "version": "1.2.1"
+      }
+    },
+    "definition_registry": "docs/research/definitions.v1.json",
+    "report_registry": "docs/experiments/registry.json",
+    "strategy_sources": "configs/strategy-documents.v1.json",
+    "new_contract_schema": "research-workflow/1.1"
+  },
+  "baseline": [
+    "现有研究资格和日期划分",
+    "项目已有统计评价器",
+    "两项已适配方法技能",
+    "既有Qlib/RD-Agent/QuantaAlpha及Alphalens取舍报告"
+  ],
+  "closure": {
+    "execution": "completed",
+    "evidence": "supported",
+    "completion_reason": "question_answered",
+    "scope": "两项小组件及既有资源取舍；未评完整库、其他市场或投资效果"
+  },
+  "component_hashes": {
+    "upstream_hac_file_sha256": "91ea0b210cc9f0395159345daae43ec8e575b7a40f27061cf52710130058754d",
+    "selected_function_sha256": {
+      "weights_bartlett": "daabe8e1f3b2f8a53f8c168d948ec04743087f080b7f08456dd882927f38c4e9",
+      "S_hac_simple": "bb62e09ebf5e8264f0b5099df947320612d0df231484234806d33850253c4dc3"
+    }
+  },
+  "runtime": {
+    "python": "3.11.7 (main, Dec  4 2023, 18:10:11) [Clang 15.0.0 (clang-1500.1.0.2.5)]",
+    "numpy": "2.1.1",
+    "added_dependencies": [],
+    "full_libraries_installed": false
+  },
+  "components": [
+    {
+      "name": "statsmodels",
+      "version": "0.15.0",
+      "adopted": "weights_bartlett, S_hac_simple unchanged source functions",
+      "full_library_installed": false,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "exchange_calendars",
+      "version": "4.13.2",
+      "adopted": "XSHG 2026 holiday list snapshot, official-notice comparison",
+      "full_library_installed": false,
+      "license": "Apache-2.0",
+      "unreviewed": "other markets and intraday session logic"
+    }
+  ],
+  "scope_adjustments": [
+    "日历项目列为跨市场候选，但本轮实际采用仅上交所2026快照，未核其他市场；避免安装无当前消费问题的完整库和多余依赖。",
+    "统计核心直接复用两个原函数，未安装整个statsmodels及公式/模型依赖。"
+  ],
+  "cumulative_history": {
+    "previous_manifest": "docs/experiments/raw/open-finance-skills-2026-10-02/manifest.json",
+    "previous_source_attempts": 6,
+    "previous_test_batches": 1,
+    "current_source_attempts": 6,
+    "current_test_batches": 1,
+    "total_sources": 12,
+    "total_test_batches": 2,
+    "previous_scientific_download_branch": "still paused; not resumed or judged in this batch"
+  },
+  "code_files": [
+    {
+      "path": ".agents/skills/lei-quant-tools/SKILL.md",
+      "sha256": "4756d1440269c9efb4ea4e1b4b95f30819cd9fb713fd52220c478b97d5d95041"
+    },
+    {
+      "path": ".agents/skills/lei-quant-tools/references/provenance.md",
+      "sha256": "236c0ca1e64a0cb2b768f063af7bb75b7b5e0923999a9e1d952ec8f6ecc10555"
+    },
+    {
+      "path": ".agents/skills/lei-quant-tools/references/xshg-2026.json",
+      "sha256": "2ab878192c7c5e544ab099414e949d6c8c551e8c00f36a45802d3a17f76e5b20"
+    },
+    {
+      "path": ".agents/skills/lei-quant-tools/references/exchange-calendars-LICENSE.txt",
+      "sha256": "e35c4578f7db4498e62e278978f6c42e0fce6f21f9993a060b08a33549cd3044"
+    },
+    {
+      "path": ".agents/skills/lei-quant-tools/scripts/statsmodels_hac.py",
+      "sha256": "9c7cf8f74d79314cbc16215c0632cf7b675b83b600a5dbf501d29f7875207bf7"
+    },
+    {
+      "path": ".agents/skills/lei-quant-tools/scripts/statsmodels-LICENSE.txt",
+      "sha256": "1ca78e1dec9dcebc55f3b96a862317f23e76422c5fc943568d955aad1f6b5fad"
+    },
+    {
+      "path": ".agents/skills/lei-quant-tools/scripts/quant_tools.py",
+      "sha256": "351a849ab1cf23f2aa45b9466dbef861ceb6b795dc3a9bf5aa6edcc42c90aa81"
+    }
+  ],
+  "ledger_update": {
+    "goal_id": "okr-4f4157e2957e",
+    "observed_version": 49,
+    "status": "pending_user_permission_for_repository_external_database",
+    "proposal": "upgrades-note-proposed.json"
+  },
+  "report": "docs/experiments/quant-resources-adoption-2026-10-02.md",
+  "remaining_core_actions": [],
+  "verification": {
+    "repo_hygiene": "passed",
+    "diff_whitespace": "passed",
+    "source_artifact_hashes": "passed",
+    "report_links_and_registry": "passed",
+    "real_cli_checks": "passed in recorded single batch",
+    "new_skill_catalog_and_automatic_invocation": "not evaluated",
+    "existing_method_skill_catalog": "both present in current host-provided skills list"
+  }
+}

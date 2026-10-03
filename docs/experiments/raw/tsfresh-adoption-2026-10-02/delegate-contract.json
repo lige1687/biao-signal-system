@@ -1,0 +1,43 @@
+{
+  "mission": "独立审阅tsfresh两函数窄范围适配的公式、输入边界与既有计算重叠；只读不实验。",
+  "task_scope": [
+    "检查固定tsfresh源码两个函数的确切公式/单位/近零情况；检查protocol有无语义越界",
+    "对照既有ret20/vol20与LEI端点斜率；明确数学不同不等于增量有效",
+    "如新适配代码已出现，可静态审阅；只写审阅报告，不改其他文件、不运行测试、不联网"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "configs/strategy-documents.v1.json",
+    "docs/research/current-standards.json",
+    "src/lei_signal/research/trend_slope_change_information.py",
+    "src/lei_signal/research/workflow_inputs.py",
+    "docs/experiments/raw/tsfresh-adoption-2026-10-02/protocol.md",
+    "docs/experiments/raw/tsfresh-adoption-2026-10-02/feature_calculators.py",
+    "docs/experiments/raw/tsfresh-adoption-2026-10-02/LICENSE.txt",
+    ".agents/skills/lei-quant-tools/scripts",
+    "tests/unit/test_tsfresh_candidates.py"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/tsfresh-adoption-2026-10-02/independent-review.md"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "independent-review.md: formula/overlap/bugs/limits with exact paths; do not claim execution"
+  ],
+  "stop_conditions": [
+    "关键定义不足时仅指出",
+    "不启动子代理",
+    "不修改既有成果或其他文件"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "strategy_read_evidence": "Same existing reviewer read both strategy sources in prior task; controller current hashes unchanged."
+}
