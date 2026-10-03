@@ -1,0 +1,153 @@
+{
+  "schema_version": "research-workflow-fusion/1.0",
+  "id": "workflow-fusion-2026-10-04",
+  "updated_at": "2026-10-03 16:10:51 UTC",
+  "display_timezone": "Asia/Shanghai",
+  "coordinator_thread": "01a0e6d5-4bcf-7bd3-82e4-4961c963d20e",
+  "task_id": "classic-factor-research",
+  "mode": "integrate_existing_tasks_and_review",
+  "base_commit": "385bb0c4ce1833b2162f1e5341c97adb8d85079e",
+  "coordination_scope_commit": "f0999d3b6b5b709e5740c84a16bfbdad10f805ae",
+  "user_authorization": [
+    "就你6个方向，你去核对和分发吧哈，让他们顺手把你的调研的任务做了",
+    "就你说的6个方向可以融合，交给他们去做，然后你验收"
+  ],
+  "execution": "awaiting_scoped_deliveries",
+  "research_evidence": "not_evaluated",
+  "budget": {
+    "new_market_fits": 0,
+    "new_market_data_requests": 0,
+    "paid_operations": 0,
+    "new_threads": 0,
+    "new_subagents": 0,
+    "existing_thread_messages": 4
+  },
+  "assignments": [
+    {
+      "id": "technical",
+      "directions": [
+        "D1",
+        "D2",
+        "D5"
+      ],
+      "thread_id": "01a0e703-4c27-74e2-bf77-997e1879f967",
+      "title": "因子挖掘+lei系统（非情绪因子",
+      "status": "sent",
+      "acceptance": "pending",
+      "brief": "technical.md"
+    },
+    {
+      "id": "errors",
+      "directions": [
+        "D3"
+      ],
+      "thread_id": "01a101c1-ac35-70a3-8ecd-4a6179bb99ad",
+      "title": "宽基ETF量价与风险因子发掘验证",
+      "status": "sent",
+      "acceptance": "pending",
+      "brief": "errors.md"
+    },
+    {
+      "id": "complement",
+      "directions": [
+        "D4"
+      ],
+      "thread_id": "01a0cd21-07e5-7163-8f4e-72a4d5ebc32e",
+      "title": "外部增量",
+      "status": "sent",
+      "acceptance": "pending",
+      "brief": "complement.md"
+    },
+    {
+      "id": "materials",
+      "directions": [
+        "D6"
+      ],
+      "thread_id": "01a101d0-6400-7e81-ab5d-2654902fb237",
+      "title": "整理 LEI 系统过时内容",
+      "status": "sent",
+      "acceptance": "pending",
+      "brief": "materials.md"
+    }
+  ],
+  "delivery_tool_receipts": [
+    {
+      "id": "technical",
+      "threadId": "01a0e703-4c27-74e2-bf77-997e1879f967",
+      "title": "因子挖掘+lei系统（非情绪因子",
+      "directions": [
+        "D1",
+        "D2",
+        "D5"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"threadId\":\"01a0e703-4c27-74e2-bf77-997e1879f967\"}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "id": "errors",
+      "threadId": "01a101c1-ac35-70a3-8ecd-4a6179bb99ad",
+      "title": "宽基ETF量价与风险因子发掘验证",
+      "directions": [
+        "D3"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"threadId\":\"01a101c1-ac35-70a3-8ecd-4a6179bb99ad\"}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "id": "complement",
+      "threadId": "01a0cd21-07e5-7163-8f4e-72a4d5ebc32e",
+      "title": "外部增量",
+      "directions": [
+        "D4"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"threadId\":\"01a0cd21-07e5-7163-8f4e-72a4d5ebc32e\"}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "id": "materials",
+      "threadId": "01a101d0-6400-7e81-ab5d-2654902fb237",
+      "title": "整理 LEI 系统过时内容",
+      "directions": [
+        "D6"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"threadId\":\"01a101d0-6400-7e81-ab5d-2654902fb237\"}"
+          }
+        ],
+        "isError": false
+      }
+    }
+  ],
+  "boundaries": [
+    "No reopening dot-pro-increment-review or other paused research",
+    "No new automation/collection/production/deletion",
+    "No budget increase, refit, old result overwrite or positive-result search",
+    "Existing threads retain ownership, settings and original priorities",
+    "Prior conclusions with precise evidence can satisfy a direction without new work"
+  ],
+  "next": "Read each receiver's actual scoped artifacts and version, independently verify critical numbers/boundaries; classify pass, partial or blocked. Message acceptance is not task acceptance."
+}
