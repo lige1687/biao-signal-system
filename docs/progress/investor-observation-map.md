@@ -1,5 +1,7 @@
 # A股与美股投资观察地图：持续负责与并行协调
 
+统一协作更新：2026-10-03T14:11:20.753581+08:00。跨任务当前摘要以[唯一协调记录](https://github.com/lige1687/biao-signal-system/blob/coordination/lei/docs/coordination/tasks/investor-observation-map.md)为准，本文件继续保留阶段历史；不再作为第二份实时状态。首次登记提交`9c994de31b2c325ee49080df50009e3369a52f55`已从远端fetch并逐字读回。原负责人继续负责。
+
 更新时间：2026-10-03T13:34:25.766648+08:00（Asia/Shanghai，UTC+08:00）。负责人：当前聊天Codex；执行设备：MacBook-Air-126.local。**用户最新明确要求：此次只同步成果和进展，原负责人继续负责；不是交接接管，也不是任务结束。**
 
 仓库：https://github.com/lige1687/biao-signal-system；已核origin为`git@github.com:lige1687/biao-signal-system.git`。专属分支：`task/investor-observation-map-progress`（用户本次要求的task/命名）；共享工作区仍在`codex/factor-unit-research-20260915`，不切换、不清理、不共用其分支提交。资料审查基准和本分支基础commit：`18e64fa632dba5dbad0e5fcae09b4ccc75f119a9`。此commit已是远端`codex/air-factor-parallel-20261001`的祖先；不把共享分支后来他人提交带入本次同步。
@@ -91,3 +93,13 @@
 阈值已区分“指标定义”“策略原参考”“历史展示”“原研究用途”；本轮没有提出跨市场统一买卖数字。事件需包含预期/实际/修订/公开时刻及影响产品，已有资讯流不能证明完整覆盖。原任务的后续维护仍由我负责；FINRA等新增接入仍是未派发候选。
 
 - 2026-10-03T13:34:25.766648+08:00：首批远端commit核对成功，GitHub读回进展；继续核原报告使用顺序，未扩大范围。
+
+## 统一协作接入与原任务独立续整（2026-10-03T14:11:20.753581+08:00）
+
+规则首次读取0b758e7e10f720c44cbd898d511ff392f2857535，最新已读取协调树9c994de31b2c325ee49080df50009e3369a52f55，规则未变。已读初始化、market-observation、technical-factor-sequence及lei-technical-reader-research；不进入CPI措辞/观察卡日期来源、抵扣候选、阅读页或技术等待研究。指标口径/阈值说明与market-observation有主题交叠，重叠改写暂停；地图清单、缺口和投资方式读取顺序可继续。
+
+本工作分支AGENTS只追加协作入口，原字节完整保留；共享脏AGENTS没有上传。此前完整同步成果`713f5e27b6e7060b7d202021404bb4a0f2ac1e1b`已核远端，本阶段是协作说明、映射与资料版本记录，没有功能/因子改动。
+
+继续原任务取得了可访问证据：market-observation已推成果`5106f18ad6ffaf11f8fbf88a33427fbe936530fd`，本轮核远端SHA并比较5个已引用文件。observations.py、turnover_snapshot.py、market-observations.v1.json、SentimentPage.tsx这4个与原覆盖快照SHA256一致；FundamentalsPage.tsx指纹不同，旧快照不能代表当前页面，不由本任务重复修页或验收。准确原/新指纹、路径见本任务raw的coordination-verification.json。此进展改善证据可定位性，不证明实时源或收益改善；0新市场来源检索/实验。
+
+失败留痕：原生worktree因空间不足失败，改用独立小文档目录及独立Git索引；两次普通协调推送遇并发更新被拒，fetch读新增记录后通过单文件接口登记，保留他人更新。没有强推、清理、终止进程或切换原工作区。新增来源核查仍为6/6预算暂停，其他未验证/未交付项不变。

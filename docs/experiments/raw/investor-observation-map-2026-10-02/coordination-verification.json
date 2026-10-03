@@ -1,0 +1,65 @@
+{
+  "checked_at": "2026-10-03T14:11:20.753581+08:00",
+  "rule_version": "1.0",
+  "initial_rule_commit": "0b758e7e10f720c44cbd898d511ff392f2857535",
+  "latest_coord_read": "9c994de31b2c325ee49080df50009e3369a52f55",
+  "initial_coord_record_remote_readback": "exact bytes matched",
+  "work_parent": "713f5e27b6e7060b7d202021404bb4a0f2ac1e1b",
+  "agents_old_prefix_preserved": true,
+  "shared_agents_not_staged": true,
+  "research_calls_added": 0,
+  "experiments_added": 0,
+  "fits_added": 0,
+  "dependency_repository": "https://github.com/lige1687/biao-signal-system",
+  "dependency_branch": "task/market-observation-progress",
+  "dependency_commit": "5106f18ad6ffaf11f8fbf88a33427fbe936530fd",
+  "dependency_remote_sha_verified": true,
+  "dependency_fingerprints": [
+    {
+      "path": "src/lei_signal/fundamentals/observations.py",
+      "published_commit": "5106f18ad6ffaf11f8fbf88a33427fbe936530fd",
+      "published_sha256": "5859c5aed9e43a1e522f7c39fb270c0f996bdf486ce826a98c8cc957d8c2bbc7",
+      "coverage_capture_sha256": "5859c5aed9e43a1e522f7c39fb270c0f996bdf486ce826a98c8cc957d8c2bbc7",
+      "same_as_capture": true,
+      "bytes": 13479
+    },
+    {
+      "path": "src/lei_signal/fundamentals/turnover_snapshot.py",
+      "published_commit": "5106f18ad6ffaf11f8fbf88a33427fbe936530fd",
+      "published_sha256": "45cbf14e8f284b1dccb5ef7ff828eed762f0ff32d2c21e7bdd7e18006f49e08b",
+      "coverage_capture_sha256": "45cbf14e8f284b1dccb5ef7ff828eed762f0ff32d2c21e7bdd7e18006f49e08b",
+      "same_as_capture": true,
+      "bytes": 5982
+    },
+    {
+      "path": "configs/market-observations.v1.json",
+      "published_commit": "5106f18ad6ffaf11f8fbf88a33427fbe936530fd",
+      "published_sha256": "1956fa1786b3aba85789fe381ade3dbbdfc2e560b11c75d14ff79ba8bb40d252",
+      "coverage_capture_sha256": "1956fa1786b3aba85789fe381ade3dbbdfc2e560b11c75d14ff79ba8bb40d252",
+      "same_as_capture": true,
+      "bytes": 1218
+    },
+    {
+      "path": "web/src/pages/FundamentalsPage.tsx",
+      "published_commit": "5106f18ad6ffaf11f8fbf88a33427fbe936530fd",
+      "published_sha256": "ee1ed2d15c95cd722f4de279bbc921a89f3ecd49198985df69780fe641c4ca06",
+      "coverage_capture_sha256": "a56ed25549ccdd79895ba6817e0392533790e2441f7b5fe7a386935eef4aba33",
+      "same_as_capture": false,
+      "bytes": 92373
+    },
+    {
+      "path": "web/src/pages/SentimentPage.tsx",
+      "published_commit": "5106f18ad6ffaf11f8fbf88a33427fbe936530fd",
+      "published_sha256": "d51e47999bf84f240706808097e091054ccff6c9752f3edafd339ecb028f9ddd",
+      "coverage_capture_sha256": "d51e47999bf84f240706808097e091054ccff6c9752f3edafd339ecb028f9ddd",
+      "same_as_capture": true,
+      "bytes": 24020
+    }
+  ],
+  "interpretation": "4/5 published files match captured evidence; FundamentalsPage differs, do not treat old snapshot as current UI",
+  "failures": [
+    "native worktree no-space-left; no retry of full checkout",
+    "coordination push rejected twice due concurrent other-task updates; fetched/read and used single-file contents API"
+  ],
+  "no_full_runtime_or_scientific_reruns": true
+}

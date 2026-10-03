@@ -181,3 +181,10 @@ bootstrap、Calmar、expR、PF、样本内/样本外、走查（walk-forward）*
   什么、对用户实际有什么意义——不能让用户翻完整份报告才搞懂讲的是什么。
 - 如果一个术语确实没有更简单的说法（比如"宽度"这个系统专用概念本身），
   第一次出现时要用一句话定义它，不能假设读者已经知道。
+
+
+## 统一协作入口（2026-10-03）
+
+每轮实质工作先获取并读取远端 `coordination/lei` 根目录的 `COORDINATION.md` 与相关 `docs/coordination/tasks/` 记录；唯一跨任务当前状态为该分支任务文件。本任务沿用 `investor-observation-map`，只维护自己的记录；登记范围并推送读回后才修改可能冲突的内容。阶段完成、范围变化、阻塞、暂停或结束时同步记录并核远端；旧进展保留为阶段证据并链接协调入口。记录不是排他锁，重叠先暂停并明确分工。成果仍留本独立工作分支；不切换脏工作区、不覆盖他人、不强推、不合入main/master，不扩大既有研究、数据或发布权限。
+
+规则：[coordination/lei / COORDINATION.md](https://github.com/lige1687/biao-signal-system/blob/coordination/lei/COORDINATION.md)；本任务：[investor-observation-map](https://github.com/lige1687/biao-signal-system/blob/coordination/lei/docs/coordination/tasks/investor-observation-map.md)。
