@@ -206,3 +206,8 @@ bootstrap、Calmar、expR、PF、样本内/样本外、走查（walk-forward）*
 
 跨项目的继续、停止、交付与恢复流程使用用户级 `$research-closure`；项目委派和回调仍由 `.agents/skills/lei-gpt-zcode-orchestrator/SKILL.md` 管理。先复用本项目权威规范、定义、报告模板、实验账本和 manifest；通用默认值不扩大原预算和授权，不重启已有绿色/黑色研究。默认由 AI 自主设计和完成必要实验，中间结果留在产物中，最后一次性交付因子性能、相对已有信息的增量和适用范围；不逐项请求继续。只在关键定义、数据或权限确实阻塞时合并提问，用户主动要求进度或阶段交付时服从。
 <!-- research-closure:project:end -->
+
+
+## 统一协作入口（2026-10-03）
+
+每轮实质工作先 fetch 远端 coordination/lei，读取该分支根目录 COORDINATION.md 和相关 docs/coordination/tasks/ 记录。本任务唯一 task-id 为 remote-core-review；跨任务当前状态只维护 docs/coordination/tasks/remote-core-review.md，阶段证据仍保留 docs/ops/work-progress/remote-core-review.md。阶段完成、范围变化、阻塞或暂停时更新并推送自己的协调记录；重叠先明确实现/核验负责人，记录不构成排他锁。代码和研究证据仍只推本任务独立工作分支，不覆盖旧指令、不合入 main/master、不扩大研究与发布权限。

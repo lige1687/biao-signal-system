@@ -80,3 +80,12 @@
 - 单开关草案完成：comparison-options.json从原源码字典核出两边仅episode_reset_on_black一项不同。COMPARISON-DRAFT.md记录共同单位、全部不触发/取消项、当时构造、旧实现缺陷与收益边界。
 - 当前正式效果执行有资料/对象绑定阻塞；其余返修差异核验由本负责人继续负责，未确认远端返修新交付。研究尚未结案、未移交；0新效果/拟合/采购。
 - 接续状态在 docs/experiments/raw/remote-core-rule-next-2026-10-03/continuation-state.json；另一AI避开同时写该目录或另做同一black-reset题。完整A3/小时和B仍未启动，不抢占全部方向。
+
+
+## 2026-10-03T14:04:34.006991+08:00：接入统一协作
+
+- 唯一跨任务当前状态：[https://github.com/lige1687/biao-signal-system/blob/coordination/lei/docs/coordination/tasks/remote-core-review.md](https://github.com/lige1687/biao-signal-system/blob/coordination/lei/docs/coordination/tasks/remote-core-review.md)；task-id remote-core-review。本文件保留本任务阶段历史与证据，不作为另一套实时锁。
+- 实际读取规则：coordination/lei@b172008890b39e912c8f1d0cfb9125d1e414a97f，COORDINATION.md 1.0。已读 bootstrap 和 technical-factor-sequence 两份记录；登记范围无同题冲突，未登记任务状态未知。
+- 本负责人继续负责验收返修差异与转黑重置单问题资格准备；正式效果仍受资料/定义绑定阻塞，未启动计算。工作分支 codex/remote-core-acceptance-20261002，此前已推成果0e4f3f4213ecb60a2d27d5147e8b440237946311。
+- 本阶段只补本分支AGENTS协作入口和本任务旧入口映射，不变更代码、规则、冻结或历史包。新提交由文件Git历史定位，协调记录推后另核远端完整SHA与原文。
+- 下一步：读取最新协调记录后，继续只读核对具体研究工具/输入绑定，不重跑封存研究。
