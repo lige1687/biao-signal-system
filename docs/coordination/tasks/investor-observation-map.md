@@ -2,15 +2,15 @@
 
 - task-id：investor-observation-map（沿用原任务稳定标识；已接入，更新原记录，不重启任务）。
 - 负责人/会话：原聊天Codex，01a0fd40-f651-7360-9411-d90f80affdc4；设备MacBook-Air-126.local。用户明确要求继续负责，不接管、不结束。
-- 更新时间：2026-10-03T15:38:16.326638+08:00（Asia/Shanghai，UTC+08:00）。
-- 状态：active（用户新确认市场理解目标，正在做补充内容与具体设计）；旧链接修订completed，新阶段来源上限6次。无市场实验。
+- 更新时间：2026-10-03T16:04:28.626775+08:00（Asia/Shanghai）。
+- 状态：active（原任务持续负责）；市场理解内容与具体方案阶段completed，页面设计待审阅，生产实现未开始。无市场实验。
 - 原目标：整理A股/美股机构、专业个人的指标与事件，说明系统已有/缺失、阈值/组合读法及趋势、定投、价值投资用途，并避开其他任务已在研究的方向。
 - 用途与验收：50组观察地图能定位来源、当前覆盖、限制、使用方法及负责人；本阶段主报告引用绑定准确远端版本或标明仅本地，统一任务记录可远端读回；工作分支AGENTS保留协作入口，原工作区/进程/封存结果保持。信息地图不是收益改善；线上收益未测量。
 - 适用规范：COORDINATION.md v1.0，本轮完整读取commit `15b3e4e0edd878c3e84ef30482d108e492563dbd`，增量核对至 `e37ec45db9dca41b7e3c062d99eaa892f01ca7ea`，规则指纹未变；工作分支原AGENTS、报告所绑定研究规范与策略源不变。此次为文档同步，不创建新实验合同。
 - 工作分支：`task/investor-observation-map-progress`。
 - 基础commit：`18e64fa632dba5dbad0e5fcae09b4ccc75f119a9`。
-- 最近已推送成果commit：`1f59cf73dd019df487b7a2d3138445f4a3756e28`（本轮git ls-remote确认；主报告通过GitHub按准确commit读回）。
-- 成果入口：[持续进展](https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/progress/investor-observation-map.md)、[主报告](https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md)。
+- 最近已推送成果commit：`d58a0740502207ca6dfeb9c9f18b1c135aa54632`（git ls-remote已核完全一致，GitHub准确提交的设计稿逐字读回相同）。
+- 成果入口：[本轮报告](https://github.com/lige1687/biao-signal-system/blob/d58a0740502207ca6dfeb9c9f18b1c135aa54632/docs/experiments/market-understanding-expansion-2026-10-03.md)、[设计草案](https://github.com/lige1687/biao-signal-system/blob/d58a0740502207ca6dfeb9c9f18b1c135aa54632/docs/superpowers/specs/2026-10-03-market-understanding-design.md)、[持续进展](https://github.com/lige1687/biao-signal-system/blob/d58a0740502207ca6dfeb9c9f18b1c135aa54632/docs/progress/investor-observation-map.md)。
 
 ## 已完成与证据
 
@@ -122,3 +122,19 @@ AAII20周背景、VXN、认沽认购、EMA/SMA等待、经典因子等沿原负�
 验收：完整职业目的分类及其差异；现有50组覆盖再分“已有/部分/未发现/未验证”，绑定已发布版本；至少一批12张完整说明卡（对象、单位、频率/可用日期、高低变化、组合、反例、参考值身份、来源和系统状态）；明确中美不能硬对照；给日常/理解/ETF关联三个使用入口及信息分层的可审阅方案。内容完成不等于接口或页面可用；用户理解/线上收益未测量。原始用户请求和方案建议分开记录。
 
 当前无新市场进程/训练/实验checkpoint；旧修改及共享索引保留。本轮正在准备登记，成功同步读回后才写可能冲突的新材料；范围或阶段变化继续只更新本条任务。
+
+## 市场理解内容与方案阶段交付（2026-10-03T16:04:28.626775+08:00）
+
+用户确认的三项目标已整理进具体成果：日常观察、理解专业投资目的、联系ETF。工作基线1f59cf73dd019df487b7a2d3138445f4a3756e28，新增工作提交d58a0740502207ca6dfeb9c9f18b1c135aa54632；已普通推送到本任务工作分支，git ls-remote完整SHA相同，GitHub按准确提交读回设计稿逐字一致。目标没有被缩成“只要指标数量”，也未将建议布局冒充用户已拍板。
+
+新增成果：`docs/experiments/market-understanding-expansion-2026-10-03.md`；同名raw的brief、18来源访问账、50行原目录索引、12项准确代码/显示差额、12张完整说明卡(JSON和可读版)、委派合同、验证及manifest/SHA256SUMS；`docs/superpowers/specs/2026-10-03-market-understanding-design.md`；自身两进度与registry/INDEX本报告一项。共17精确文档路径，无src/web/配置修改。建议B方案：新“市场理解”显眼入口，复用现有模块与来源；导航/新页尚未实现、未占文件。
+
+主要新增判断：机构应按投资目的区分；被动基金跟踪、主动基金经营/估值、长期资金支付约束不是同一任务。现统一观察构造为cn3/us6，但这只是指定接口而非全系统覆盖率。两融来源已存在更多字段，可按原负责人资格复用；FINRA月度三列、CFTC分类头寸、ETF产品成本和事件关系是新内容/资料候选。12卡逐项区分位置高低、变化方向、对象/单位/时点、组合和反例。所有latest_value为空且明确设计素材，不假装已接入。原NAAIM推测日期过滤、中美开关范围/CPI说明已由原负责人修复，不重做。
+
+验证通过：原50个ID/全部单元格/证据行号逐字核对，12卡字段/引用/无伪造值，18来源条目访问等级，registry仅增本项且原条目不变，新增报告相对链接存在，准确Git树42项指纹校验（阶段15＋原任务扩展27），差异检查0、共享归置检查0。凭证形态扫描通过；初次diff发现附录多一空行已修，初次宽松sk-扫描误命中既有jev-task-router文件名，核原提交相同后改为token边界，失败记录保留。目录助手曾混淆高低/升降，其方向二元计数已撤回，不能拿作内容质量证据。
+
+源码审查绑定market-observation@55d8aa96b45d97b09901ded4ebf78f490bbb7f6b。推前增量核对协调846766fb188303b631db0d1d2121fcf4d84affaa的相关范围：technical主线转完整技术策略与有限小时资料，external收敛外部系统能力，sentiment在目标澄清/新资格整理，dot-formula仅交独立工具，均不进入本地图内容；本任务不改其原模块或重跑研究。规则1.0不变。市场卡/三项宏观源原分工保留；导航/新页若开始修改将先登记准确块并核最新归属，当前不构成锁。
+
+资料边界：旧公开查询6/6保留，本阶段新增6/6，累计12；18条来源不等于18次调用。失败包括BlackRock503、JPM有限正文、NBS/CFTC动态页空文与SSE教学PDF失败，不假称可用。没有新行情集、权重、数据库或私有账户材料；未运行市场实验/拟合/回测/部署/付费。两个只读助手Sol、Luna已结束，没有本任务后台实验/checkpoint；原工作区/索引/进程保留。用户理解和投资收益未测量。
+
+下一步：让用户审阅具体入口与内容方案，再确定新页/导航小块负责人并实施第一版；来源缺项待持续获取/许可与有界新预算，不继续无上限搜索。依据brainstorming流程，目标方向已获确认，但本轮才首次形成具体设计，故不在设计审阅前修改生产代码。此限制只影响实现，已授权资料/内容工作已完成并交付；原任务仍由本主控负责，不结束或移交。
