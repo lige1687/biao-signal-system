@@ -1,0 +1,13 @@
+{
+  "command": "node run-market-dashboard-regression.mjs",
+  "exit_code": 0,
+  "mode": "independent source copy; existing dependency symlink; not clean install or backend restore",
+  "copied": [
+    "web/run-market-dashboard-regression.mjs",
+    "web/package.json",
+    "web/src/features/market-understanding/dashboard-model.ts",
+    "web/src/components/trend/zones.ts"
+  ],
+  "stdout": "PASS exactly 24 unique indicators with no foreign-only leakage\nPASS each metric is routed to the existing endpoint with the expected source unit\nPASS loader selects only its endpoint and sends the supplied abort signal\nPASS missing key and empty series do not borrow a neighboring reading\nPASS wrong unit or unequal array lengths block the entire affected series\nPASS invalid numbers, impossible dates, duplicate dates and descending dates are blocked\nPASS future periods are excluded and cannot become the latest reading\nPASS null is missing while numeric zero remains a real reading\nPASS each reading uses its own latest date, never the response-wide as_of\nPASS monthly windows use calendar years and include the boundary month\nPASS leap-day year subtraction clamps to February 28\nPASS change compares the previous valid value, including an earlier zero\nPASS historical reference lines disclose their fixed basis and never become trading rules\nPASS malformed envelope is rejected while provider errors remain a count\n14 market dashboard boundary checks passed; synthetic data only.\n",
+  "stderr": ""
+}
