@@ -1,0 +1,43 @@
+URL http://127.0.0.1:8774/fundamentals#fund-sec-usmacro
+- generic: 人工资料验收页面 · 不是真实行情 · 场景 normal
+- navigation "主导航":
+  - link "BIAO 看盘首页":
+    - /url: /
+    - text: BIAO
+    - generic: 趋势研究
+  - link "看盘":
+    - /url: /
+  - link "市场理解":
+    - /url: /market-understanding
+  - link "行业板块":
+    - /url: /sectors
+  - link "情绪":
+    - /url: /sentiment
+  - link "今日操作":
+    - /url: /ops
+  - link "我的持仓":
+    - /url: /portfolio
+  - link "监督待办":
+    - /url: /plans
+  - generic "资讯与认知":
+    - text: 资讯与认知
+    - generic: ⌄
+  - generic "策略研究":
+    - text: 策略研究
+    - generic: ⌄
+  - link "工作台":
+    - /url: /agent
+  - button "AI 助手"
+- heading "基本面参考" [level=1]
+- button "刷新"
+- text: 部分数据源暂不可用（其余内容不受影响）：
+- generic: · 大宗商品：unrelated API intentionally disabled for synthetic UI check
+- generic: 加载失败：unrelated API intentionally disabled for synthetic UI check
+- navigation "分区导航":
+  - button "市场"
+  - button "利率"
+  - button "长周期叠加"
+  - button "消费"
+  - button "美国宏观"
+- generic: 美国宏观 消费驱动型经济体检（FRED，无需 API key）
+- generic: 美国宏观暂不可用（FRED 可能限流，稍后刷新重试）：无数据

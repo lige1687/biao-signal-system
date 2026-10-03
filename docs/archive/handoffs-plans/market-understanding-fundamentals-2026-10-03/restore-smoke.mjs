@@ -1,0 +1,30 @@
+// Run from web/: node ../docs/archive/handoffs-plans/market-understanding-fundamentals-2026-10-03/restore-smoke.mjs ..
+// Checks the restored content/filter runtime in an independent temporary directory. No API/provider calls.
+import { createRequire } from 'node:module';
+import { mkdtemp, mkdir, writeFile, copyFile } from 'node:fs/promises';
+import { resolve, join } from 'node:path';
+import { spawnSync } from 'node:child_process';
+const root=resolve(process.argv[2] ?? '.');
+const require=createRequire(join(root,'web/package.json'));
+const {build}=require('esbuild');
+await mkdir(join(root,'.biao'),{recursive:true});
+const destination=await mkdtemp(join(root,'.biao/market-understanding-restore-'));
+const result=await build({entryPoints:[join(root,'web/src/features/market-understanding/six-layers.ts')],bundle:true,platform:'node',format:'esm',write:false});
+await writeFile(join(destination,'six-layers.mjs'),result.outputFiles[0].contents);
+await copyFile(join(root,'web/src/features/market-understanding/content-data.json'),join(destination,'original.json'));
+await writeFile(join(destination,'smoke.mjs'),`import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {filterCatalogue,filterCards,readingCards,catalogueHref} from './six-layers.mjs';
+const old=JSON.parse(readFileSync('./original.json','utf8'));
+for(const market of ['cn','us'])assert.deepEqual(filterCatalogue(market,'all','','dca').map(x=>x.id).sort(),old.catalogue.filter(x=>x.markets.includes(market)).map(x=>x.id).sort());
+assert.equal(readingCards.length,20);
+assert.ok(filterCards('cn','all','现金流','value').some(x=>x.id==='M18'));
+assert.equal(filterCards('cn','all','FINRA','value').length,0);
+assert.equal(catalogueHref('13','cn'),'/fundamentals#fund-sec-overlay');
+assert.ok(!filterCatalogue('cn','etf','','dca').some(x=>x.id==='48'));
+console.log('Independent restored content/filter checks passed; 0 external APIs.');
+`);
+const run=spawnSync(process.execPath,['smoke.mjs'],{cwd:destination,encoding:'utf8'});
+process.stdout.write(run.stdout);process.stderr.write(run.stderr);
+console.log(JSON.stringify({destination,exitCode:run.status,scope:'compiled content/filter runtime only; not full app or fresh dependency installation'}));
+process.exitCode=run.status ?? 1;

@@ -1,0 +1,94 @@
+{
+  "updated_at": "2026-10-03T20:31:46.028554+08:00",
+  "timezone": "Asia/Shanghai",
+  "base_commit": "157b09a3c5fc8515b587049b633d3a0d95c10830",
+  "coordination_read_commit": "66a4c7f4edd0d9478fbf0aa8ff85c4a5325bdcdd",
+  "scope_registered_readback_commit": "b8abece953e9ce8aaf3c46dfe806ef1f121466a9",
+  "coordination_incremental_read": "e70f0f3a665d086ee36cb6b5958b6ec3543eb918",
+  "checks": [
+    {
+      "cwd": "web",
+      "command": "npm run test:market-understanding",
+      "exit_code": 0,
+      "result": "33 passed, final code; includes original 22 synthetic boundaries"
+    },
+    {
+      "cwd": "web",
+      "command": "npm run build",
+      "exit_code": 0,
+      "result": "tsc and Vite 752 modules; existing >500kB bundle warning"
+    },
+    {
+      "cwd": ".",
+      "command": "python3 scripts/check_repo_hygiene.py",
+      "exit_code": 1,
+      "result": "2 preexisting whitelist warnings: native worktree .git file and user-required docs/progress; checker unchanged"
+    },
+    {
+      "cwd": ".",
+      "command": "git diff --check",
+      "exit_code": 0
+    },
+    {
+      "cwd": "web",
+      "command": "node ../docs/archive/handoffs-plans/market-understanding-fundamentals-2026-10-03/restore-smoke.mjs ..",
+      "exit_code": 0,
+      "result": "independent compiled content/filter runtime; 0 API; temporary .biao/market-understanding-restore-qxGH3y; not fresh dependencies or full service"
+    }
+  ],
+  "browser": {
+    "runtime": "actual built React app in Codex IAB; synthetic Python fixture only",
+    "checks": [
+      "six categories and method ordering",
+      "value first card keyboard Enter expands",
+      "A/US isolation and US industry links",
+      "cashflow search across all categories",
+      "missing API notice retains cards",
+      "events reading with no legacy numbered row",
+      "native same-page ETF anchor observed top150.42 at viewport720",
+      "US macro destination hash and corresponding tab rendered",
+      "margin row13 links to overlay and target section rendered",
+      "390px body and main width390",
+      "final ETF category 5 catalogue rows, individual plans excluded"
+    ],
+    "unverified": [
+      "real chart data",
+      "live upstream",
+      "full backend integration",
+      "Linux/Windows",
+      "investment effects"
+    ],
+    "evidence": "TXT and PNG in this directory"
+  },
+  "failures": [
+    "wrong cwd edit aborted; only old22 tests ran at that point",
+    "native summary role locator failed then text+Enter succeeded",
+    "old fixture lacked fundamentals route; new fixture adds it without enabling data APIs"
+  ],
+  "preserved": [
+    "original50 content-data.json",
+    "observation.ts",
+    "FundamentalsPage.tsx",
+    "old UI evidence directory",
+    "shared checkout HEAD/index/AGENTS fingerprints"
+  ],
+  "processes": {
+    "fixture_sessions": [
+      1043,
+      61575
+    ],
+    "final_state": "both exited0 through own /__finish; browser closed; all 3 assistants done",
+    "market_experiments": 0,
+    "checkpoint": null
+  },
+  "source_budget": {
+    "this_phase_limit": 4,
+    "used": 4,
+    "successful": 3,
+    "failed": 1,
+    "retry": 0,
+    "legacy": "12/12 unchanged; prior discussion2 web tool batches separately recorded",
+    "paid": 0
+  },
+  "business_increment": "navigation and explanations implemented; understanding and online investment benefit unmeasured"
+}

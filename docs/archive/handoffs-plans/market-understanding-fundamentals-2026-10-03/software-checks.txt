@@ -1,0 +1,58 @@
+> biao-signal-web@0.1.0 test:market-understanding
+> node run-market-understanding-regression.mjs
+
+PASS real zero retained and change basis not renamed trading days
+PASS wrong response market rejected
+PASS foreign market item and unknown ID not displayed
+PASS invalid units, infinities and duplicate IDs are excluded
+PASS missing status never displays numeric payload
+PASS invalid calendar date cannot display a value
+PASS fixed turnover stays historical even when API current
+PASS unknown publication precision never upgraded
+PASS date-only publication not represented as precise instant
+PASS monthly observation preserved without naive day-age expiry
+PASS survey is identified as week not release date
+PASS percentage changes use percentage points
+PASS malformed items/errors fail clearly
+PASS source errors are disclosed without exposing raw provider error
+PASS credential and executable source URLs never linked
+PASS unknown ETF fields stay unknown and explicit US/CNY is cross-currency
+PASS null value cannot retain qualified/current badge
+PASS invalid date cannot retain qualified/current badge
+PASS relative percentage change cannot silently replace pinned absolute change
+PASS unsupported change unit rejected by decoder
+PASS decoder excludes null current record with notice
+PASS decoder excludes numeric payload claiming missing
+22 market understanding boundary checks passed; synthetic data only.
+PASS all view preserves complete original catalogue for each market
+PASS new groups never leak foreign-only observations or old reading cards
+PASS events has its own reading even without a legacy numbered catalogue row
+PASS industry includes shared macro and earnings evidence without duplicating catalogue IDs
+PASS search aliases and new cash-flow cards are discoverable
+PASS method changes order without changing the underlying facts or count
+PASS all six layers have independent method order and current-market module paths
+PASS A-share sectors never offered as a US industry link
+PASS fundamentals links resolve to existing tab IDs and ETF anchors use native navigation
+PASS new and old reading IDs and all sources remain uniquely resolvable
+PASS personal plans and technical base remain all-only, never product attributes
+33 total checks passed; no live market data or investment-effect tests.
+
+> biao-signal-web@0.1.0 build
+> tsc --noEmit && vite build
+
+vite v5.4.21 building for production...
+transforming...
+✓ 752 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                      0.55 kB │ gzip:   0.34 kB
+dist/assets/index-djfBq6oj.css     230.43 kB │ gzip:  41.65 kB
+dist/assets/react-7VFnTMk3.js      164.49 kB │ gzip:  53.66 kB
+dist/assets/index-ChtYOD6A.js      838.07 kB │ gzip: 294.43 kB
+dist/assets/echarts-BOcpYRet.js  1,035.04 kB │ gzip: 342.62 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 2.91s

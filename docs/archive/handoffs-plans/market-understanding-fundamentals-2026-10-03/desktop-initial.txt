@@ -1,0 +1,199 @@
+- generic: 人工资料验收页面 · 不是真实行情 · 场景 normal
+- navigation "主导航":
+  - link "BIAO 看盘首页":
+    - /url: /
+    - text: BIAO
+    - generic: 趋势研究
+  - link "看盘":
+    - /url: /
+  - link "市场理解":
+    - /url: /market-understanding
+  - link "行业板块":
+    - /url: /sectors
+  - link "情绪":
+    - /url: /sentiment
+  - link "今日操作":
+    - /url: /ops
+  - link "我的持仓":
+    - /url: /portfolio
+  - link "监督待办":
+    - /url: /plans
+  - generic "资讯与认知":
+    - text: 资讯与认知
+    - generic: ⌄
+  - generic "策略研究":
+    - text: 策略研究
+    - generic: ⌄
+  - link "工作台":
+    - /url: /agent
+  - button "AI 助手"
+- main:
+  - paragraph: 看市场，也读懂变化
+  - heading "市场理解" [level=1]
+  - paragraph: 先问这项信息在回答什么，再看变化、配套证据和另一种解释。
+  - link "研究依据 ↗":
+    - /url: https://github.com/lige1687/biao-signal-system/blob/d58a0740502207ca6dfeb9c9f18b1c135aa54632/docs/experiments/market-understanding-expansion-2026-10-03.md
+  - navigation "市场理解页内导航":
+    - link "六类观察问题":
+      - /url: "#mu-focus"
+    - link "指标读法":
+      - /url: "#mu-reading"
+    - link "已有读数":
+      - /url: "#mu-now"
+    - link "完整目录":
+      - /url: "#mu-map"
+    - link "联系ETF":
+      - /url: "#mu-etf"
+  - region "阅读范围":
+    - group "观察市场":
+      - generic: 观察市场
+      - button "A股" [pressed]
+      - button "美股"
+    - group "我的阅读目的":
+      - generic: 我的阅读目的
+      - button "趋势交易" [pressed]
+      - button "定投与长期配置"
+      - button "价值投资"
+    - paragraph:
+      - text: 先看技术阶段、触发和失效，再用市场参与、波动与成本理解背景。
+      - generic: 切换方法只调整阅读顺序，不改变读数或交易规则。
+  - region "从宏观到微观，专业投资者看什么":
+    - paragraph: 01 / 先选问题
+    - heading "从宏观到微观，专业投资者看什么" [level=2]
+    - generic: 6类问题 · A股与美股分别读
+    - paragraph: 先看它回答什么，再找对应图表。机构没有统一的每日必看表：交易日看价格与资金，发布日看经济数据，财报季核经营。
+    - generic "六类观察问题":
+      - button "资金与杠杆 谁在参与，借了多少，市场承受多大波动？":
+        - strong: 资金与杠杆
+        - generic: 谁在参与，借了多少，市场承受多大波动？
+      - button "行业 行业的需求、供给和利润，谁先发生变化？":
+        - strong: 行业
+        - generic: 行业的需求、供给和利润，谁先发生变化？
+      - button "宏观 经济、物价和资金价格，正在怎样变化？" [pressed]:
+        - strong: 宏观
+        - generic: 经济、物价和资金价格，正在怎样变化？
+      - button "ETF产品 指数判断之外，这只产品还带来什么成本和风险？":
+        - strong: ETF产品
+        - generic: 指数判断之外，这只产品还带来什么成本和风险？
+      - button "事件 什么时候知道了什么，和原先的预期差多少？":
+        - strong: 事件
+        - generic: 什么时候知道了什么，和原先的预期差多少？
+      - button "企业经营与估值 赚的钱、收到的钱，能否支持现在的价格？":
+        - strong: 企业经营与估值
+        - generic: 赚的钱、收到的钱，能否支持现在的价格？
+    - article:
+      - paragraph: A股 · 宏观
+      - heading "经济、物价和资金价格，正在怎样变化？" [level=3]
+      - paragraph: A股先连着看：PMI与订单 → 物价和企业成本 → 信贷结构与资金价格。
+      - list:
+        - listitem: 增长：订单与就业、消费能否相互印证？一次回升能否持续？
+        - listitem: 物价：上涨来自需求改善还是供给、能源冲击？不同成分是否同向？
+        - listitem: 融资：利率下降时，信用风险和融资可得性有没有一起改善？
+      - paragraph: 更新节奏：利率看交易日；经济数据按月或季度，先核所属期与修订。
+      - complementary:
+        - heading "接着看现有图表" [level=3]
+        - link "利率与估值图表 →":
+          - /url: /fundamentals#fund-sec-rates
+        - paragraph: 原页含中美不同系列，逐图看国家与单位。
+        - link "经济与物价图表 →":
+          - /url: /fundamentals#fund-sec-macro
+        - paragraph: 中国PMI/CPI/PPI及商品比值；不代表每项都为国内数据。
+        - paragraph: 还缺什么：已有利率和宏观图表；社融结构、修订历史及可比预期仍不完整。本页没有新增这些实时数据。
+    - generic "看任何指标，都先问这五件事"
+    - text: 找指标
+    - searchbox "找指标"
+    - button "全部类别"
+    - paragraph: 宏观 · 3张详细读法 · 9组目录
+  - region "指标升降，分别意味着什么":
+    - paragraph: 02 / 看懂指标
+    - heading "指标升降，分别意味着什么" [level=2]
+    - generic: 20项详细读法
+    - paragraph: “现在很高”与“最近在上升”是两件事。下面沿用相同市场、类别和搜索条件；卡片解释概念，未接通的指标不展示假读数。
+    - article:
+      - paragraph: 宏观 · 指标说明
+      - heading "PMI与新订单" [level=3]
+      - paragraph: 企业接到的新订单与生产景气是否同向变化？
+      - paragraph: 本页未加载此项真实读数。
+      - generic "展开读法与容易误判的地方"
+    - article:
+      - paragraph: 宏观 · 指标说明
+      - heading "政策利率与市场利率" [level=3]
+      - paragraph: 政策变化有没有传到实际融资条件？
+      - paragraph: 本页未加载此项真实读数。
+      - generic "展开读法与容易误判的地方"
+    - article:
+      - paragraph: 宏观 · 指标说明
+      - heading "物价与企业成本" [level=3]
+      - paragraph: 价格变化是需求转强，还是成本挤压？
+      - paragraph: 本页未加载此项真实读数。
+      - generic "展开读法与容易误判的地方"
+  - region "A股 · 目前能读到什么":
+    - paragraph: 03 / 核对事实
+    - heading "A股 · 目前能读到什么" [level=2]
+    - button "重新读取"
+    - paragraph: 读数按各自资料所属期展示；这不是“今日行情已齐全”的声明。所有内容用于理解市场。
+    - paragraph: 可显示读数 2 项；接口返回 3 项。页面整理时间：2026-10-03T09:00:00+08:00，不是数据公布时间。
+    - article:
+      - heading "融资余额（人工）" [level=3]
+      - generic: 可用时间未核实
+      - strong: 0亿元
+      - paragraph: 前20个有效观测日 0亿元
+      - paragraph: 人工资料：只用于界面检查，不用于投资判断。
+      - paragraph: 资料所属期：2026-09-29
+      - generic "对象、日期与来源"
+    - article:
+      - heading "融资买入额（人工）" [level=3]
+      - generic: 数据缺失
+      - strong: —
+      - paragraph: 暂无可比较的上期读数
+      - paragraph: 人工资料仅检查界面
+      - paragraph: 资料所属期：2026-09-29
+      - generic "对象、日期与来源"
+    - article:
+      - heading "股票成交额（人工）" [level=3]
+      - generic: 固定历史资料
+      - strong: 100亿元
+      - paragraph: 前20个有效观测日 0亿元
+      - paragraph: 固定历史样本；刷新不会增加新交易日。
+      - paragraph: 人工资料：只用于界面检查，不用于投资判断。
+      - paragraph: 资料所属期：2026-09-29
+      - generic "对象、日期与来源"
+    - strong: 事件观察：日历尚未接入本页
+    - paragraph: 关注数据发布、利率决定、财报、政策、指数调整与产品事项。先核官方时间、所属期、前值是否修订；没有可比预期，就不判断“超预期”。
+    - link "到资讯流核对事件 →":
+      - /url: /news
+  - region "专业投资者的50组观察目录":
+    - paragraph: 04 / 完整观察清单
+    - heading "专业投资者的50组观察目录" [level=2]
+    - generic "谁在看，想解决什么问题？"
+    - paragraph: 沿用上方市场、类别与搜索。目录保留技术和个人计划条目；同一资料可能帮助回答不同问题。覆盖盘点截至2026-10-03，不代表已经取得最新行情。
+    - generic "展开当前匹配的9组目录与系统覆盖"
+  - region "与我关注的ETF有什么关系":
+    - paragraph: 05 / 联系自己的产品
+    - heading "与我关注的ETF有什么关系" [level=2]
+    - paragraph: 先按基金文件确认下面三项。本页只按你明确选择的范围解释，不根据基金名称猜测，也不读取持仓金额；这不是具体基金的自动核验。
+    - text: 标的资产范围
+    - combobox "标的资产范围":
+      - option "尚未确认 / 其他资产" [selected]
+      - option "A股股票"
+      - option "美国股票"
+    - text: 交易计价币种
+    - combobox "交易计价币种":
+      - option "尚未确认 / 其他币种" [selected]
+      - option "人民币"
+      - option "美元"
+    - text: 产品结构
+    - combobox "产品结构":
+      - option "尚未确认" [selected]
+      - option "普通ETF"
+      - option "杠杆或反向ETF"
+    - list:
+      - listitem: 标的资产范围尚未确认：先核基金跟踪指数及成分，不能从名字或上市地点推断。
+      - listitem: 计价币种尚未确认：先核价格、净值和所持资产的币种，不能计算跨币种溢价。
+      - listitem: 产品结构尚未确认：先核是否含杠杆、反向或每日重置条款，再联系相应观察项。
+    - paragraph: 这三个选择独立于上方观察市场。具体指数、成分、费用版本、币种对冲和净值时点仍需核实；这里只提供检查顺序。
+    - link "回到我的持仓核对产品 →":
+      - /url: /portfolio
+  - text: 内容版本 market-understanding-content/2026-10-03 / six-layers-1 · 解释与观察层，不参与LEI触发、失效或退出判定。使用效果和投资收益尚未测量。
+  - link "来源、反例与未解决问题 ↗":
+    - /url: https://github.com/lige1687/biao-signal-system/blob/d58a0740502207ca6dfeb9c9f18b1c135aa54632/docs/experiments/market-understanding-expansion-2026-10-03.md
