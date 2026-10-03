@@ -1,3 +1,16 @@
+# 当前阶段：原策略语义与黑绿验证流程样板
+
+- task-id technical-factor-sequence；负责人/root持续负责；状态active，更新时间2026-10-03T22:50:37.863342+08:00 Asia/Shanghai。
+- 用户已认可“原文拆解—有金融含义定义—相关文献—互补验证—真实增量—有效后供agent复用”；明确黑绿不遗漏。本阶段完成已有黑绿证据的验证覆盖审查、原文条件映射及可复用执行说明，不重跑旧8拟合或启动未冻结新效果。
+- 工作分支task/technical-factor-sequence-progress；基础及最近已推0e9607c2d37444ed6d4330dd4f78e14ee9021fba。本次新材料尚仅本地。协调规则读自3e1b5f511208b6674e089d3e3870d8f8160fe6fa，1.0不变。
+- 精确范围：docs/research/research-workflow-usage.md追加新研究人工说明；docs/research/proposals/technical-factor-method-pilot-2026-10-03/规范方案；docs/experiments/technical-factor-method-pilot-2026-10-03.md及同名raw的证据指纹/核数/覆盖表；registry/INDEX仅本条；自己的两进度。不修改源策略、生产、总定义、workflow代码、经典baseline_review或他人资料。
+- 验收：原文条件不遗漏，旧报告/合同/保存预测及SHA可核；两目标关键数字独立复核；区分流程工程有效、识别假改善的能力、因子真增量；已有阴性不改写为正。新步骤未经实例执行的明确未验证。
+- 本轮预算0新市场拟合/行情请求/付费；只重算保存结果算术一次，核原源指纹；已完成黑绿8真实+24合成拟合预算保持。上轮只读EMA持续性候选助手不写文件/跑实验，候选未正式开工。
+- 黑绿原文§2.7排列前提、灰态、不做空边界、变色顺序及日/周频率必须在映射中保留；旧无条件颜色比较不能代表完整原判断。完整black-reset/账户、dot未见SMA20、reader等待、情绪宽度和外部自动挖掘均避让。当前登记任务无同块活跃实现冲突；记录非锁，未登记未知。
+- 本阶段下一步为有限证据核查与流程落盘；后续具体条件检验仍须查重、资格和冻结后另登记，不把所有新语义圈为本任务专属。当前无本轮市场进程/checkpoint。完整C小时数据缺口保持。
+
+---
+
 # 当前成果：20／60日绿黑状态信息核验已交付
 
 - task-id technical-factor-sequence；原负责人/root/Air继续。本有界问题completed / not_supported_within_scope / question_answered；整体责任保留，非移交或结束。更新时间2026-10-03 Asia/Shanghai。
