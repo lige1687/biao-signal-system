@@ -868,3 +868,5 @@
 - [Agent 消息可靠性 S2：GLM 首轮主控复核（需返修）](agent-news-glm-s2-controller-review-2026-09-18.md) — 2026-09-18；现有测试通过，独立反例未过；未上线。
 
 | classic-benchmarks（2026-09-28） | [接入与双20两表](classic-benchmarks-2026-09-28.md) · [验收复核](classic-benchmarks-review-2026-09-28.md) | 官方收益/简单对照已接通，预测改善暂无稳定证据；旧测试缺口单列 |
+
+- [抵扣路径首尾变化定义审查（2026-10-03）](deduction-path-definition-audit-2026-10-03.md)：固定基线不恒等重复，市场效果未测，不重跑数学证据。
