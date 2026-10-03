@@ -1,3 +1,43 @@
+# 当前成果：市场理解第一版已发布到工作分支
+
+- task-id：investor-observation-map；原负责人本聊天Codex持续负责，非接管或结束。
+- 更新时间：2026-10-03 11:49:07 UTC（UTC；用户时区Asia/Shanghai）。
+- 状态active（原任务）；第一版页面和合成验收completed，真实新增来源/后端整合/上线尚未完成。当前没有正在运行的开发助手、预览服务或市场实验。
+- 用户已确认统一“市场理解”入口并要求继续大范围做；本轮落实到可运行页面，业务用途是看懂市场信息，不新增交易规则。用户理解改善与线上收益未测量。
+- 规则读取完整commit：8778bd3f417834f49885047afddc22c8d72bf2b8；最后增量核至207b9dbeeee7d0093cfaceafb8bada19def0483b；COORDINATION.md v1.0，SHA256 6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0。实施范围登记c4ec1ccdc9a861a60c1aa8deecb63201e9a691f8已在写代码前读回。
+- 工作分支：task/investor-observation-map-progress；实施基础d58a0740502207ca6dfeb9c9f18b1c135aa54632；**最新工作成果157b09a3c5fc8515b587049b633d3a0d95c10830**。git ls-remote完整相等；GitHub按准确提交读取README与本地逐字相等。
+- [成果/复现入口](https://github.com/lige1687/biao-signal-system/blob/157b09a3c5fc8515b587049b633d3a0d95c10830/docs/archive/handoffs-plans/market-understanding-ui-2026-10-03/README.md)；[进展](https://github.com/lige1687/biao-signal-system/blob/157b09a3c5fc8515b587049b633d3a0d95c10830/docs/progress/investor-observation-map.md)；[新页面](https://github.com/lige1687/biao-signal-system/blob/157b09a3c5fc8515b587049b633d3a0d95c10830/web/src/pages/MarketUnderstandingPage.tsx)。
+
+## 已完成、证据与代码边界
+
+34个准确文件、600036字节：新/market-understanding页、独立web/src/features/market-understanding内容/适配/样式、App仅import和route、TopNav仅一个常驻入口、package仅一项测试命令及回归脚本；计划/设计状态、自身两进度及第一方小型界面证据。8主题、50目录、12详细解释、10角色目的；A股/美股筛选、趋势/定投/价值顺序、搜索、组合读法/反例/来源、显式ETF资产/币种/结构检查顺序。知识卡与实际读数分开，不编造最新值。
+
+22项合成边界检查exit0；最终完整tsc/Vite构建exit0，750模块，原大包提醒仍在。实际浏览器：中美切换、0与缺失、调查周/日期精度/固定历史、加载、空返回、404/503、错市场、状态冲突/单位错误、键盘展开、方法排序、FINRA搜索两卡、ETF未知及汇率关系通过；390px宽度无横溢。证据在上述目录validation.json、review.md、task-1-report.md、可访问性文本、截图、manifest/SHA256SUMS。33文件校验和通过；不把软件检查说成投资效果。
+
+独立审查2个Important已修：空值已核对标签、忽略变化单位；事件标题改为事件与预期，混合市场原标签保留，失效主题锚点已换已有模块。仅验证受影响软件，没有重跑既有金融实验。旧归置检查器未全绿：原生worktree .git文件、用户要求的既有docs/progress目录两警告；检查器与基线相同，准确新增文件路径另核，不越界改共享检查器、不冒称绿色。
+
+## 当前责任、下一步与重叠协调
+
+当前维护本新页/features及App/TopNav的新增入口小块；其他AI请先协调这些块，不把记录当排他锁，不独占整文件。原观察组件、CPI/日期、来源后端属于market-observation；本轮未改它们。最新market-observation@207b9dbe已纠正旧“地图未做UI”说法，明确不另做本页/卡片/导航；本方保留接口原负责人，不把产品个人判断复核/候选优先级收归本任务。该未决新方向仍需其与用户明确。
+
+sentiment-factor-research已发布69688860b30c1f4fdb1d06e40e0d8e75c50e85db的三用途证据，可作为后续准确引用输入，不重做S01—S05或原E。技术C、经典学习、外部能力、暂停的reader/remote-core/dot各保持责任；不因为暂停接管。已登记新页/入口范围没有发现同时写入冲突；目标相邻存在，按证据供应/原接口/页面实现分工，未登记任务与其他机器进程未知。
+
+下一步planned，非后台进行中：先核原观察后端与本分支的整合路径；再引用已发布且适用的解释证据，逐项确认FINRA/CFTC/ETF产品/事件真实来源、时点与许可。整合前重读协调；不自动合并他人分支，不从共享脏文件复制，不认领全部候选来源或个人决策流程。
+
+## 未完成、仅本地与预算
+
+- 此工作分支尚无原观察API后端实现，契约绑定55d8aa96b45d97b09901ded4ebf78f490bbb7f6b。本页已有只读消费能力；无接口显示未接通。真实上游冒烟、全系统合并、生产部署未验证/未执行。
+- FINRA/CFTC/ETF具体值和事件日历未新接入；ETF选择是显式范围说明，未自动核验实际基金/持仓。五个混合市场目录按原组保留市场标签；后续拆子项需保留原ID和证据。客户端不重新判定服务端的完整首次可用/未来资料资格。
+- 旧原始调查、策略原件、大数据、数据库和所有凭证不入公开Git；权重不适用。新增未推只有临时review-package.txt、初次不完整mobile-synthetic.png，README明确不作为验收。旧仅本地缺口仍沿历史清单。
+- 公开来源累计12/12不重置；本轮新市场来源0、市场实验0、拟合0、付费0。两名Sol medium助手均结束；人工服务session52804/42822通过自有/__finish正常退出0、浏览器tab已关、无checkpoint。没有杀他人进程或安排后台自动续跑。
+- 隔离工作区保留本工作分支；共享原HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9、原分支、默认index SHA83bb48fe19dcb073d4a449bcef331c745c942128ea53ca2a19c1f6791cbe7f92、AGENTS SHA060a0de558b0543f6afee81e8aa5f903daf348e9381b825ec3d141ec8763dc4e均原样。未切换/清理共享区。
+- 工作/协调树无.github工作流，前次成果combined statuses为空；未执行部署/Actions/付费命令，外部集成不能由空状态证不存在。无强推、main合并或权限变化。
+- 下一轮先核本准确成果/manifest与最新协调；旧QQQ/VXN/AAII/宽度/技术研究和预算不因本页重跑。本记录自身SHA从路径Git历史查询，返回后仍须核远端读回，不能预写同步已验证。
+
+---
+
+## 历史实施登记与既有证据（保留原状态，当前摘要以上为准）
+
 # 当前实施阶段（优先于下方历史记录）
 
 - 更新时间：2026-10-03 11:18:35 UTC（UTC；用户时区Asia/Shanghai）。
