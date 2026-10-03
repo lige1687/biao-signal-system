@@ -1,0 +1,73 @@
+# LEI 技术阅读页与限定等待研究：唯一协调记录
+
+- task-id：lei-technical-reader-research；首次接入，沿用稳定 ID，不另起同题任务。
+- 负责人：本聊天原主控（历史实施与复核按用户指定 Sol6.1），本地 Air；当前仍由本任务负责，不转交接管。此轮未派发新 agent。
+- 更新时间：2026-10-03T14:05:26.697979+08:00，Asia/Shanghai。
+- 状态：blocked（只指下一项科学研究启动仍缺唯一定义/合格资料或明确分工；已有代码与结案成果已完成同步，不阻塞其阅读）。本轮协作接入是文档/状态维护，没有运行中实验。
+- 规则读取：COORDINATION.md 1.0，首次读取完整 commit `0b758e7e10f720c44cbd898d511ff392f2857535`；本次推送前最新读取 commit `3fab17d5bd7225eb447bb2358aa9ca1ec1f97e13`。不扩大权限、不另造研究标准。
+- 工作分支：`task/lei-technical-reader-research-progress`；成果基础 commit `91a93ad2b881fbeed1ee15ae03d4fc3bbff08342`。
+- 最近已推送成果完整 commit：`179a4c89447a55eac63e900b05295159e5659359`，已核远端等于本地。
+- 代码/报告/检查快照 commit：`4b2bd6d9e746809a7f39c89575156298461c2d07`；最近成果提交只增补 AGENTS 协作入口与旧进度映射，不改变算法。
+- 原共享工作区 HEAD：`18e64fa632dba5dbad0e5fcae09b4ccc75f119a9`、原分支 `codex/factor-unit-research-20260915`，含其他任务脏文件；未切换、清理、终止进程或整批暂存。准确成果以本任务独立分支为准，不能用共享 HEAD 代表未提交内容。
+
+## 目标、用途与验收
+
+原 Task 1–6：项目正确索引两份只读权威技术文档并在 `/strategy` 按章节阅读，展示角色、指纹和变化/缺失状态；后续加入只读因子指南、改进前端理解与定位；继续做策略内、不重复的宽基/ETF技术信息研究。文字和界面不得改交易含义或变相纳入新过滤。
+
+本轮验收：读取实际远端规则与相关记录；本任务唯一记录可从协调分支读取并引用准确工作成果；工作分支 AGENTS 原文保留，只增补入口；保留共享修改、实验和进程。离线描述、测试/构建通过均不是线上收益，线上增量未测量。
+
+适用规范：COORDINATION.md 1.0；原项目 AGENTS 与权限约束、`configs/strategy-documents.v1.json`、既有冻结合同、定义登记和报告模板。新问题按 `docs/research/current-standards.json` 实际版本解析，未获准迁移旧合同。当前本地活动索引 research-standards/1.0，mission1.1.0/question_method1.2.0/increment1.1.0/principles1.2/execution1.1.0/definition1.2.0/template1.2.1；不是承诺本工作分支已包含其他负责人的全部最新规范代码。旧研究保留原规范与内容指纹。
+
+## 已完成与准确成果位置
+
+所有下面的源码、报告和小型证据均在本任务工作分支，**不复制到协调分支**。完整入口：[进展文档](https://github.com/lige1687/biao-signal-system/blob/179a4c89447a55eac63e900b05295159e5659359/docs/progress/lei-technical-reader-research.md)。旧阶段历史：`docs/ops/work-progress/technical-factor-mainline.md`；二者已注明本文件是唯一跨任务当前摘要。
+
+| 成果 | 工作分支路径与事实 |
+|---|---|
+| 技术体系/实现与指南阅读 | `configs/strategy-documents.v1.json`、`configs/factor-guide-documents.v1.json`、`src/lei_signal/api/strategy_documents.py`、`api/routes/strategy_documents.py`、`web/src/pages/StrategySystemPage.tsx`；固定 ID、只读路径、指纹状态、章节与安全渲染；原文不随 Git 上传 |
+| EMA20先行后SMA20确认的固定等待描述 | `docs/experiments/ema-sma-waiting-path-2026-10-02.md`、同名 raw/protocol、acceptance、controller；`src/lei_signal/research/ema_sma_waiting_path.py` 和 `tests/unit/test_ema_sma_waiting_path.py`。137起点：88先失效，49确认，47成熟配对、2未成熟；完整早期路径135。平均等待报价贵0.891262%，共同终点涨幅少0.989616个百分点。不回答完整作者EMA条件/模块A，不证明新规则、整体纪律或真实资金收益 |
+| 每周入金两ETF历史账户对照 | `docs/experiments/broad-etf-weekly-income-2026-10-02.md`、同名 raw/execution 三个代码文件与 terminal-review；12账户50388日记录、0对账差异。全期改善有近一年半落后的反例，最后独立人员复核未完成，来源资格有条件；不为技术因子补成绩，不改宽度规则 |
+| 前端后续增量 | `docs/archive/handoffs-plans/frontend-readability-2026-09-30/` 三组补丁、计划与验收。依赖其他任务版本，**仅作为未应用 WIP 补丁发布，不在远端运行树应用**。不把完整共享新版页面冒认自己成果 |
+| 已有方向复核与本轮前的接续条件 | `technical-mainline-resume-2026-10-02/pro-review-round-02.md`、`technical-mainline-sync-2026-10-03/next-question-readiness.md`（均在 docs/archive/handoffs-plans 下）。Pro第二轮 PLAN，仅看摘要，没有独立行情复算；第三轮未发送，没有新回复 |
+| 本轮协作入口 | `179a4c89447a55eac63e900b05295159e5659359` 的 `AGENTS.md` 只增补简短入口和要求，旧规范字节前缀完全保留；两旧进度文件保留且追加一对一映射 |
+
+## 正在做 / 下一步 / 阻塞
+
+当前没有运行中实验、模型拟合、行情请求或本任务后台进程；协作状态维护不写成科学研究运行中。接续条件已整理，没有再从头盘点或重复启动已有题目。
+
+下一步仅在出现唯一明确的原义、合格资料或明确不重复的分工后，核新版是否已修复旧问题，绑定一个有边界的问题、同对象/日期/条件的简单参照和累计预算，再按原 workflow 推进。若条件未变化，不反复去重、换参数或启动方向评审来维持运行。
+
+具体阻塞：2B（跌破最近已确认低点后收回）尚未明确是盘中最低价跌破且同日收回，还是先收盘跌破再另日收回；两者改变模块C的C1/C2/C3对象，旧3.0.0保留历史对照。本任务只维护已提出的定义歧义/确认记录，不启动正式适配器。最新 technical-factor-sequence 记录将2B定义准备指向本主线，与此前“原技术负责人保留”的范围文字存在待澄清之处；尚未有正在执行的2B实验，后续必须先在相关记录明确谁实现、谁验证，不凭历史描述抢做。用户“继续/ok”不能冒充两种原义的选择。完整历史20/60区域形成/边界/失效/选择与小时资料资格也缺条件，原负责人保留。
+
+## 模块范围、重叠与其他 AI 的避让
+
+本任务维护：上述固定等待适配器/test/报告的证据、已有 `/strategy` 只读阅读页及其索引/接口、自己的工作进度和此唯一记录。当前没有计划改阅读页运行代码或共享研究框架。记录不是排他锁；如其他人需修改共同模块，先明确实现者与独立验证者，不靠进度宣称独占。
+
+已读最新协调树中的 `lei-coordination-bootstrap.md`（completed）、`technical-factor-sequence.md`（active/抵扣路径形状的无标签资料资格）和 `market-observation.md`（active/CPI说明与观察卡日期来源）。本聊天不处理该抵扣候选，不改 US_CPI_ZONES 或观察卡字段；新增登记的同题新效果运行尚未发现。未登记任务状态未知，不能推定空闲。原技术任务的已核范围含 K01/P01/C01/Q01、历史目标及技术语义接续；2B未来执行分配尚未澄清，不能从任一记录推定排他权；“push git+oneapi+任务验证验收”负责四项规则/小时资料；“外部增量”负责减少多候选中偶然挑中赢家的验证工具。本聊天避开这些范围，以及情绪、宽度、宏观、经典因子和其他账户/持仓页面。
+
+已知潜在文件重叠：后续 UI 补丁与共享新版 `web/src/pages/*` 有交叉，**暂停将这些补丁应用到运行树**；当前只发布原始准确补丁，不覆盖他人页面。`AGENTS.md` 仅在各自独立分支追加入口，不写共享脏文件。其他 AI 请勿并发写本任务等待适配器/测试/封存输出和此 task-id；正式源码重叠时先协调。尚未发现两个已登记任务同时执行同一实验，但登记不完整，不能称全仓无冲突。
+
+## 测试证据、本轮检查与未验证
+
+- 工作成果 `4b2bd6d9e746809a7f39c89575156298461c2d07` 中 `docs/archive/handoffs-plans/technical-mainline-sync-2026-10-03/validation.json`：隔离发布树34项阅读接口/等待测试、14项模拟资金测试、前端构建745模块、完整发布目录四层检查通过；macOS arm64已有依赖。首次目录检查对中文路径引号误读的失败与修正均保留。活动代码/新文档 diff检查通过；历史补丁上下文及Markdown换行不为全量空白检查改写。
+- 本轮仅文档同步：remote目标和工作成果SHA核对、规则与相关记录读取、AGENTS原文前缀完全保留、准确三条工作分支差异与本文件唯一协调差异检查通过。协调提交不修改其他任务记录或规则。
+- 本轮未重跑：已完成测试/构建/封存市场实验；文档入口不使旧代码证据失效。未验证：冷安装、Linux/Windows、完整全站与生产部署、所有页面交互、真实200%缩放及所有失败路径。
+- 协调树沿用初始化者的旧目录检查器会报 `.git`文件/COORDINATION/docs/coordination 三项兼容问题；初始化任务已提供工作成果 `34b6435a915b7adeff8f8c04484fb75295e908c1` 的新版检查器。这里不抢改其文件，也不冒称协调分支旧检查器全绿。
+
+## 材料、仅本地缺口与研究预算
+
+公开交付清单/指纹：工作分支 `technical-mainline-sync-2026-10-03/published-files.json`；未上传清单 `withheld-materials.json`（同 docs/archive/handoffs-plans 目录）。
+
+- 两只读桌面源实际指纹与确认值一致：体系 `df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20`，实现 `85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903`。源/指南正文仅本地，不上传公开 Git，不改指纹或原文。
+- 等待输入 `docs/experiments/raw/volume-information-2026-09-30/execution/panel.json` 指纹 `382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b`，供应商公开传播许可未确认，**仅本地，远端不能真实重演**；可独立运行已公开的模拟测试。报告指纹 `cd15f2e88d1431e4ea3583abce96c32083a22353e63b31e64fc5d65bfcfbb9e0`。
+- 本地运输包主包31012640字节、登记依赖474711字节、指南42351字节，SHA/原路径见 withheld-materials；未指定获准私有交付位置，不进入协调或代码 Git。
+- 共享四个工作流代码已偏离旧冻结值，整文件含其他作者改动，未冒认上传；集成测试源保留 archive 下 WIP，不承诺该旧合同可执行。未推送的本任务资料和混合依赖为“仅本地”，本轮初查共享104项已跟踪脏修改不等于本任务104项成果。
+- 无模型训练，0拟合，无权重/tokenizer依赖；不需要也未复制live DB、账户、凭证或登录态。浏览器/Pro权限不随 Git 转移。
+- 等待研究已封存：1科学变体、1核心实际运行、0拟合/网络取数；记录用时12.079047333994822秒 / 原3600秒预算。历史23/134/58检查有重叠，不相加。本轮新增效果0、拟合0、取数0、付费计算0。每周入金旧核心1次，不因同步重算。
+- 不重跑固定等待、旧每周入金或已无增量结论；保留冻结前证明失败、第二版通过、反例和累计预算。只有新证据/前提改变/结论冲突/用户明确要求时重开并说明理由，不改旧锁/原成绩。
+
+## 最小接续与较上一版新增
+
+首次登记新增：已读新加入的技术顺序/市场观察记录，避开抵扣路径候选和CPI/观察卡；明确2B仅维护待确认问题、未来执行分工需共同澄清。唯一ID、旧进度映射、确切远端成果、作用与未测边界、暂停的UI应用范围、未登记任务未知、定义/资料缺口、预算和不应重跑题目。历史阶段与失败均通过工作分支引用保留，不复制研究合同到协调分支。
+
+接续先 fetch `coordination/lei`，读根规则、本文件及新相关任务，核 `179a4c89447a55eac63e900b05295159e5659359` 与代码/报告清单，再做必要模拟复现；不凭 completed 或测试通过推定完整资料许可/线上效果/交易授权。若本 task-id 已由另一维护者写入，停止覆盖并明确负责人。此文件包含自身的提交可从 `git log -- docs/coordination/tasks/lei-technical-reader-research.md` 定位，不无限补写自身SHA。
