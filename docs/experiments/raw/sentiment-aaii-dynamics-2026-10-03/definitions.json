@@ -1,0 +1,209 @@
+[
+  {
+    "id": "local:sentiment.aaii-change4-calendar-weeks",
+    "version": "1.0.0",
+    "name": "情绪4周变化",
+    "type": "feature",
+    "uses": [
+      "description",
+      "comparison",
+      "research_signal"
+    ],
+    "not_for": [
+      "production_trade"
+    ],
+    "scope": "AAII survey representation, SPY 120 quote interval retrospective return information only",
+    "definition": {
+      "field": "d4",
+      "formula": "x[w]-x[w-4]，须w-4..w五个连续调查日历周均有恰一条有限值",
+      "unit": "percentage_point",
+      "direction": "正值表示比四周前更乐观，不预设涨跌方向",
+      "parameters": "fixed 4 calendar week intervals, 5 surveys; not 4-row compression",
+      "transform": "none"
+    },
+    "input": {
+      "fields": [
+        "date",
+        "bull_bear"
+      ],
+      "source": {
+        "path": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/inputs/aaii-candidate-values.csv",
+        "sha256": "12f30895c7ea2c68663a60f2d60a85384dfd0d9d324474e0501298e460cf9c05",
+        "bytes": 144007
+      },
+      "frequency": "weekly",
+      "currency": "not_applicable_survey_percentage",
+      "adjustment": "not_applicable_to_survey; target old adjusted close vintage unknown"
+    },
+    "universe": {
+      "source": "AAII respondents, not SP500 constituents",
+      "target": "SPY USD broad US equity ETF",
+      "warmup": "5 consecutive calendar weeks",
+      "missing": "no forward fill, no missing-week compression; unknown durations remain missing",
+      "degrade": "not evaluable for missing inputs"
+    },
+    "time": {
+      "survey_week": "Monday-Sunday; duplicate or unordered weeks error",
+      "observation": "reported survey date, historical first release unknown",
+      "available_at": "unknown; inherited date+7 days 23:59 is assumption only",
+      "decision_at": "none; retrospective research; t first quote strictly after assumed date",
+      "timezone": "America/New_York date-label semantics only, intraday precision unknown"
+    },
+    "dependencies": [
+      "candidate:sentiment.aaii-spread@draft-1"
+    ],
+    "validation": {
+      "atol": 1e-10,
+      "rtol": 1e-10,
+      "integer_exact": true,
+      "tests": "analysis.py synthetic checks and independent-review.json",
+      "limitations": "formula correctness does not establish historical first-release eligibility"
+    },
+    "status": {
+      "definition_clarity": "frozen_explicit_research_definition",
+      "data_qualification": "retrospective_only",
+      "implementation": "pending",
+      "effectiveness": "not_evaluated",
+      "production": "not_authorized"
+    },
+    "registration": "local research proposal, not a second global registry or approved LEI trigger"
+  },
+  {
+    "id": "local:sentiment.aaii-negative-run-weeks",
+    "version": "1.0.0",
+    "name": "连续看跌占优周数",
+    "type": "feature",
+    "uses": [
+      "description",
+      "comparison",
+      "research_signal"
+    ],
+    "not_for": [
+      "production_trade"
+    ],
+    "scope": "AAII survey representation, SPY 120 quote interval retrospective return information only",
+    "definition": {
+      "field": "neg_run",
+      "formula": "本周x>=0则0；x<0且上一周已知连续值则上周计数+1；首条或缺周后x<0则未知，直到首次x>=0才重新有确定起点",
+      "unit": "week",
+      "direction": "越大表示看跌比例超过看涨比例持续越久，不预设涨跌方向",
+      "parameters": "x<0, no cap, no normalization",
+      "transform": "none"
+    },
+    "input": {
+      "fields": [
+        "date",
+        "bull_bear"
+      ],
+      "source": {
+        "path": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/inputs/aaii-candidate-values.csv",
+        "sha256": "12f30895c7ea2c68663a60f2d60a85384dfd0d9d324474e0501298e460cf9c05",
+        "bytes": 144007
+      },
+      "frequency": "weekly",
+      "currency": "not_applicable_survey_percentage",
+      "adjustment": "not_applicable_to_survey; target old adjusted close vintage unknown"
+    },
+    "universe": {
+      "source": "AAII respondents, not SP500 constituents",
+      "target": "SPY USD broad US equity ETF",
+      "warmup": "known nonnegative anchor; a gap makes negative duration left-censored",
+      "missing": "no forward fill, no missing-week compression; unknown durations remain missing",
+      "degrade": "not evaluable for missing inputs"
+    },
+    "time": {
+      "survey_week": "Monday-Sunday; duplicate or unordered weeks error",
+      "observation": "reported survey date, historical first release unknown",
+      "available_at": "unknown; inherited date+7 days 23:59 is assumption only",
+      "decision_at": "none; retrospective research; t first quote strictly after assumed date",
+      "timezone": "America/New_York date-label semantics only, intraday precision unknown"
+    },
+    "dependencies": [
+      "candidate:sentiment.aaii-spread@draft-1"
+    ],
+    "validation": {
+      "atol": 1e-10,
+      "rtol": 1e-10,
+      "integer_exact": true,
+      "tests": "analysis.py synthetic checks and independent-review.json",
+      "limitations": "formula correctness does not establish historical first-release eligibility"
+    },
+    "status": {
+      "definition_clarity": "frozen_explicit_research_definition",
+      "data_qualification": "retrospective_only",
+      "implementation": "pending",
+      "effectiveness": "not_evaluated",
+      "production": "not_authorized"
+    },
+    "registration": "local research proposal, not a second global registry or approved LEI trigger"
+  },
+  {
+    "id": "local:sentiment.aaii-exit-extreme-pessimism",
+    "version": "1.0.0",
+    "name": "退出极端悲观当周",
+    "type": "state_signal",
+    "uses": [
+      "description",
+      "comparison",
+      "research_signal"
+    ],
+    "not_for": [
+      "production_trade"
+    ],
+    "scope": "AAII survey representation, SPY 120 quote interval retrospective return information only",
+    "definition": {
+      "field": "exit_pessimism",
+      "formula": "1{x[w-1]<=-25 and x[w]>-25}；仅相邻两个连续调查周且值有限时返回0/1，否则缺失",
+      "unit": "boolean",
+      "direction": "1表示本周刚离开原定义极端悲观，下一周不自动延续",
+      "parameters": "-25 percentage points from original threshold; equality remains extreme",
+      "transform": "none"
+    },
+    "input": {
+      "fields": [
+        "date",
+        "bull_bear"
+      ],
+      "source": {
+        "path": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/inputs/aaii-candidate-values.csv",
+        "sha256": "12f30895c7ea2c68663a60f2d60a85384dfd0d9d324474e0501298e460cf9c05",
+        "bytes": 144007
+      },
+      "frequency": "weekly",
+      "currency": "not_applicable_survey_percentage",
+      "adjustment": "not_applicable_to_survey; target old adjusted close vintage unknown"
+    },
+    "universe": {
+      "source": "AAII respondents, not SP500 constituents",
+      "target": "SPY USD broad US equity ETF",
+      "warmup": "2 consecutive calendar weeks",
+      "missing": "no forward fill, no missing-week compression; unknown durations remain missing",
+      "degrade": "not evaluable for missing inputs"
+    },
+    "time": {
+      "survey_week": "Monday-Sunday; duplicate or unordered weeks error",
+      "observation": "reported survey date, historical first release unknown",
+      "available_at": "unknown; inherited date+7 days 23:59 is assumption only",
+      "decision_at": "none; retrospective research; t first quote strictly after assumed date",
+      "timezone": "America/New_York date-label semantics only, intraday precision unknown"
+    },
+    "dependencies": [
+      "candidate:sentiment.aaii-spread@draft-1"
+    ],
+    "validation": {
+      "atol": 1e-10,
+      "rtol": 1e-10,
+      "integer_exact": true,
+      "tests": "analysis.py synthetic checks and independent-review.json",
+      "limitations": "formula correctness does not establish historical first-release eligibility"
+    },
+    "status": {
+      "definition_clarity": "frozen_explicit_research_definition",
+      "data_qualification": "retrospective_only",
+      "implementation": "pending",
+      "effectiveness": "not_evaluated",
+      "production": "not_authorized"
+    },
+    "registration": "local research proposal, not a second global registry or approved LEI trigger"
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-03T12:12:51.707703+00:00",
+  "old_sha256": "acb82a5fd6389d7052d61f94b5c618e8473621648169fe684556649ceb5aa870",
+  "old_fields": {
+    "decision_use": "模块E的调查背景信息研究；不改变宽度主信号、调查阈值、买入或对冲规则。20周线来自原图，本轮只评价连续平均表示。",
+    "strategy_and_standards": "standards-manifest.json; snapshots preserved even if shared registries change",
+    "checks_before_statistics": [
+      "输入/代码冻结指纹",
+      "20周窗口连续且不含未来",
+      "数学模拟常量与缺周",
+      "全行原x/价格5/y独立重算一致",
+      "共同日期和年度训练标签成熟",
+      "只依训练拟合预处理"
+    ]
+  },
+  "new_fields": {
+    "decision_use": "模块E调查信息的研究表达；本轮只比较情绪动态对未来120段报价涨幅的信息，不改变宽度主信号、调查阈值、买入或对冲规则，也不测账户收益。",
+    "strategy_and_standards": "authority-manifest.json; bound current versions and desktop approved fingerprints; unpublished originals remain local",
+    "checks_before_statistics": [
+      "input/protocol/code/math fingerprints",
+      "20 calendar week mean and dynamic definitions prefix-safe",
+      "synthetic gap/left-censor/threshold tests",
+      "all legacy observation fields independent reconstruction",
+      "all models same eligible rows and yearly labels mature",
+      "training-only preprocessing; rank/variance checked before fitting"
+    ]
+  },
+  "reason": "copied background metadata still described mean20-only and nonexistent standards-manifest; scientific dynamics definitions/models/target/budget unchanged; no new results or fits viewed"
+}

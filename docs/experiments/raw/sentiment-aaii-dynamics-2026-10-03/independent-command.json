@@ -1,0 +1,11 @@
+{
+  "command": [
+    "python3",
+    "docs/experiments/raw/sentiment-aaii-dynamics-2026-10-03/verify_independently.py"
+  ],
+  "exit_code": 0,
+  "seconds": 11.684354540999266,
+  "at": "2026-10-03T12:24:30.345680+00:00",
+  "stdout": "{\"status\": \"passed\", \"completed_at\": \"2026-10-03T12:24:30.302408+00:00\", \"checks\": [\"all_bound_source_bytes_match\", \"all_2038_source_rows_five_survey_features_independently_reconstructed\", \"eligible_labels_dates_and_five_price_features_independently_reconstructed\", \"same_evaluation_dates_for_all_nine_models\", \"27_direct_unscaled_explicit_intercept_fits_agree\", \"all_headline_loss_and_increment_arithmetic_agrees\", \"52_and104_week_dependence_intervals_independently_recomputed\"], \"source_rows\": 2038, \"evaluation_rows\": 816, \"independent_fits\": 27, \"core_fits\": 153, \"total_new_fits\": 180, \"maximum_label_error_pp\": 7.105427357601002e-15, \"maximum_prediction_error_pp\": 2.6911806116913795e-13, \"not_validated\": [\"historical first releases or adjusted-price vintages\", \"independent unseen history\", \"account or production returns\", \"other OS\"]}\n",
+  "stderr": ""
+}

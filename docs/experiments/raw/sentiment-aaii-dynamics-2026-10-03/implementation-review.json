@@ -1,0 +1,28 @@
+{
+  "status": "implemented_synthetic_only_controller_preflight_and_market_fit_pending",
+  "files": {
+    "analysis.py": "c2b8c7009def4e57c65bc8518aea32bbe37453c11b24c9c0185e574bb7ae2873",
+    "test_analysis.py": "8fbba0bde975f8d4bc4c6dc1ede918d5fed5c14484353e59db98e6fae95bb643"
+  },
+  "protocol_sha256": "3c1378e295b60a88059d8c8244fbc50e529f9cb77905bf98a786b4c2a237c83f",
+  "checks": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest docs/experiments/raw/sentiment-aaii-dynamics-2026-10-03/test_analysis.py",
+    "result": "8 tests passed after correction; prior synthetic runs passed 5, 6, and 7 tests respectively",
+    "scope": "synthetic features, gaps, left censor, exact -25 threshold, prefix stability, narrow legacy label equivalence, output isolation, intercept-only OLS kernel; no market prepare or fit by implementer"
+  },
+  "implementation": {
+    "models": 9,
+    "yearly_fits_if_controller_runs": 153,
+    "preflight": "--prepare-only checks source and kernel fingerprints, reconstructs archived fields, checks eligible yearly X variance/rank and emits JSON without run-01 or fits",
+    "fit_gate": "--fit requires controller execution-freeze.json with protocol_sha256, analysis_sha256, reused_kernel_sha256, definitions_sha256, inputs exactly equal to protocol sources; refuses existing run or ledger",
+    "outputs": "run-01 and trial-ledger only after fit gate, one attempt recorded before each fit; 52/104-week intervals and diagnostics"
+  },
+  "review_correction": "Controller market preflight failed before fits: source_row 2037 old extremes exclusion no_quote_after_assumed_date differs from newer background/current no_observation_quote for the same missing-quote condition. Added exact one-row/one-label equivalence for old archive only, preserving full comparison of all other fields and rows. Earlier controller caught base-vs-background exclusion-level mismatch, also fixed.",
+  "limitations": [
+    "No market prepare or fit was run by implementer as contracted. Controller must verify actual source reconstruction, preflight X rank and numerical outputs before market fit.",
+    "Historical first-release survey timestamps and adjusted-price vintages remain unknown.",
+    "Intervals reaggregate fixed predictions; they do not refit models or establish independent confirmation.",
+    "Controller preflight after this correction is pending; no claim of actual market reconstruction success by implementer."
+  ],
+  "synthetic_fixture_note": "Tests retain new fixtures under task-owned synthetic-fixtures/. A prior test run created two synthetic-* directories directly under research dir before v2 fixture boundary; preserved and not added to Git. Test/compile bytecode cache was also preserved."
+}

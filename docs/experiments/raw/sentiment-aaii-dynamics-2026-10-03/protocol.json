@@ -1,0 +1,259 @@
+{
+  "mode": "research",
+  "decision_use": "模块E调查信息的研究表达；本轮只比较情绪动态对未来120段报价涨幅的信息，不改变宽度主信号、调查阈值、买入或对冲规则，也不测账户收益。",
+  "strategy_and_standards": "authority-manifest.json; bound current versions and desktop approved fingerprints; unpublished originals remain local",
+  "availability": {
+    "source_date": "Reported Date；并非已证明当年首次发布日期",
+    "delay": "沿用旧对照的源date+7日23:59，之后首条报价为t；是假设，不能证明历史当时可知",
+    "timezones": "source日标签及同日期美股报价按日期比较，纽约交易日身份；无历史精确时间戳，不伪造盘中时刻",
+    "price_basis": "旧冻结调整收盘，历史复权版本/到达时间未知，不是实际成交收益",
+    "vintages": "当前取得历史调查快照；历史首次版本与修订证据未知",
+    "permissible": "给定保存序列和假设延迟下的回顾信息估计；不授予当年可执行预测资格"
+  },
+  "universe": {
+    "source": "AAII调查，不是SP500成分样本",
+    "evaluation": [
+      "SPY"
+    ],
+    "market": "美国股票宽基ETF，USD旧调整价",
+    "selection": "沿用已见SPY1995—2026快照，不新增热门赢家或跨项目取数",
+    "intended_scope": "情绪背景能否补充宽指信息",
+    "tested_scope": "仅此SPY保存序列、120报价变化",
+    "independent_evidence": "无，旧历史已看过；更换问题不变成全新验证"
+  },
+  "range": [
+    "1995-01-01",
+    "2026-06-30"
+  ],
+  "initial_training": [
+    "1995-01-01",
+    "2009-12-31"
+  ],
+  "evaluation": [
+    "2010-01-01",
+    "2026-06-30"
+  ],
+  "fitting": "yearly 2010..2026 expanding training; t and target_end strictly before year Jan1; evaluation same calendar year and final target_end<=2026-06-30; min100; training-only mean/populationSD; intercept OLS equal observation weights; no clipping/hyperparameters. Shared frozen _ols_design/_ols_fit math only. Zero variance/rank failure blocks affected model, recorded not replaced.",
+  "minimum_meaningful_effect": "没有资金决策根据的事前最低幅度；报告量级/区间，不事后造过关线。",
+  "checks_before_statistics": [
+    "input/protocol/code/math fingerprints",
+    "20 calendar week mean and dynamic definitions prefix-safe",
+    "synthetic gap/left-censor/threshold tests",
+    "all legacy observation fields independent reconstruction",
+    "all models same eligible rows and yearly labels mature",
+    "training-only preprocessing; rank/variance checked before fitting"
+  ],
+  "stop": [
+    "输入或引用数学代码指纹变化",
+    "标签跨入未来训练",
+    "计算无法独立核对",
+    "预算耗尽暂停，保存已跑与未跑，不冒充证伪"
+  ],
+  "production_authorization": "none",
+  "id": "sentiment.aaii-dynamics@1.0.0",
+  "frozen_at": "2026-10-03T12:10:20.712799+00:00",
+  "delivery_mode": "final_only",
+  "question": "AAII动态表达是否在当前情绪、20周平均与五项价格背景之后，补充SPY未来120段报价涨幅的信息？",
+  "authorization": "2026-10-03 user authorized different factor definitions and thorough effectiveness research; one bounded new S03 question, not reopening old studies",
+  "original_mapping": {
+    "mission": "S03 explicitly includes change speed, consecutive pessimistic weeks and recovery from extremes",
+    "strategy": "module E survey confirmation research; original width-primary decision unchanged",
+    "proxy": "4-week interval and zero-based negative duration are explicit research definitions, not asserted original trading rules"
+  },
+  "definitions": {
+    "cards": "definitions.json",
+    "x": "candidate:sentiment.aaii-spread@draft-1;100*(bullish-bearish)，单位百分点；原阈值±25不改",
+    "m20": "local:sentiment.aaii-mean20-calendar-surveys@1.0.0;mean(x[i-19:i+1])，包括当前一期；仅20个连续周一到周日的调查周，逐周恰有1条。日期跨周缺一周则该完整20周窗口缺失。日期标签/发布时间未知故仅是原图20周线的有明确定义研究代理。",
+    "target": "local:sentiment.forward-h@1.0.0;100*(C[t+121]/C[t+1]-1),恰120段连续报价变化，121正有限收盘，终点<=2026-06-30",
+    "baseline_price": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20"
+    ],
+    "baseline_binding": "old exact five price definitions plus current x and calendar-complete m20; independently verify all legacy fields/dates/labels against archived observations"
+  },
+  "sources": [
+    {
+      "path": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/inputs/aaii-candidate-values.csv",
+      "sha256": "12f30895c7ea2c68663a60f2d60a85384dfd0d9d324474e0501298e460cf9c05",
+      "bytes": 144007
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/inputs/px_SPY.csv",
+      "sha256": "952f397be0ccc5745185b91cce6acc781737c0f30a7a34aa8a230ae892ed5e45",
+      "bytes": 321463
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/executor/run-01/observations-h120.csv",
+      "sha256": "b6150edb56f48ccb72d579c2ed41e05d2267634d9ec696c64d5d64510135f1d4",
+      "bytes": 480331
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/protocol.json",
+      "sha256": "e9ce1b5a60b306ef016a6ac4f0d88b81cb6d3ddb0140b8a5cea82ea9eca904ab",
+      "bytes": 5486
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-aaii-background-2026-10-02/run-01/observations.csv",
+      "bytes": 581867,
+      "sha256": "4c0b1bc21b3f5ab6c0eb284eb1e971c8fcc83c861319627e5c68a9061087798d"
+    }
+  ],
+  "models": {
+    "I": [],
+    "B": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20",
+      "x",
+      "m20"
+    ],
+    "X_D": [
+      "d4"
+    ],
+    "X_P": [
+      "neg_run"
+    ],
+    "X_R": [
+      "exit_pessimism"
+    ],
+    "BD": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20",
+      "x",
+      "m20",
+      "d4"
+    ],
+    "BP": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20",
+      "x",
+      "m20",
+      "neg_run"
+    ],
+    "BR": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20",
+      "x",
+      "m20",
+      "exit_pessimism"
+    ],
+    "BALL": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20",
+      "x",
+      "m20",
+      "d4",
+      "neg_run",
+      "exit_pessimism"
+    ]
+  },
+  "primary_comparisons": [
+    [
+      "BD",
+      "B"
+    ],
+    [
+      "BP",
+      "B"
+    ],
+    [
+      "BR",
+      "B"
+    ],
+    [
+      "BALL",
+      "B"
+    ]
+  ],
+  "secondary_comparisons": [
+    [
+      "X_D",
+      "I"
+    ],
+    [
+      "X_P",
+      "I"
+    ],
+    [
+      "X_R",
+      "I"
+    ],
+    [
+      "B",
+      "I"
+    ],
+    [
+      "BD",
+      "I"
+    ],
+    [
+      "BP",
+      "I"
+    ],
+    [
+      "BR",
+      "I"
+    ],
+    [
+      "BALL",
+      "I"
+    ]
+  ],
+  "metric": "100*(1-MSE(candidate)/MSE(reference)); RMSE and mean absolute error in percentage points. Improvement in squared prediction error, not investment return. All nine methods use same eligible rows; no winner selection.",
+  "common_population": "legacy base eligible AND complete20calendarweeks AND all three dynamic features finite; no outcome-dependent removal; exact counts/exclusions and event support by year saved",
+  "uncertainty": "paired fixed-prediction squared losses on full survey-calendar-week axis with gaps preserved; 52 and104 consecutive weeks, 2000 samples seed20261003; 95% individual intervals for all comparisons; for four primary comparisons also marginal98.75% intervals (Bonferroni approximate family coverage; same resampling limitations). No p-value winner selection; no full refit uncertainty; old history not independent confirmation.",
+  "stability": "all years; fixed2010-2014/2015-2019/2020-2026; remove each evaluation year without refitting; leave top5 absolute paired-loss contributions out for each primary; event/negative-run episode counts and overlapping labels; descriptive raw means/medians/up proportions for d4>0 vs<=0, neg_run>0 vs=0, recovery1vs0 (not causal/increment evidence).",
+  "core_attempt": "one frozen nine-method*17-year batch at most153 fits; include failed attempts; no rerun of successful core",
+  "followup": "max27 independent direct numpy.linalg.lstsq with explicit intercept for years2010/2020/2026, nine methods; independent headline aggregation from saved predictions plus eligibility/features/label reconstruction, no added methods",
+  "budget": {
+    "prepared_at": "2026-10-03T12:10:20.712799+00:00",
+    "core_wall_minutes_max": 45,
+    "source_operations_max": 0,
+    "fits_max": 180,
+    "core_fits_max": 153,
+    "review_fits_max": 27,
+    "market_core_batches": 1,
+    "followup_batches_max": 3,
+    "new_output_bytes_max": 20971520,
+    "pro_calls_max": 0,
+    "paid_calls_max": 0,
+    "family_prior_fits_at_least": 824,
+    "previous_source_refresh_used": 6,
+    "previous_source_refresh_max": 6
+  },
+  "outputs": [
+    "definitions.json",
+    "protocol.json",
+    "authority-manifest.json",
+    "analysis.py",
+    "test_analysis.py",
+    "qualification.json",
+    "execution-freeze.json",
+    "run-01/",
+    "trial-ledger.json",
+    "independent-review/",
+    "controller-review.json",
+    "research-state.json",
+    "dated report/registry/INDEX"
+  ],
+  "execution_status": "frozen_before_new_model_results",
+  "success_and_falsification": "no predetermined money-based minimum effect; report magnitude and dependence-aware ranges; baseline degradation, year/concentration fragility or sparse events weaken usefulness. No broad claim that all sentiment ineffective. Current information question can complete with negative or inconclusive results.",
+  "tool_boundary": "sentiment intentionally outside technical workflow CLI; use existing audited numerical kernel only, no production/shared implementation edits"
+}

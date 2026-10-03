@@ -1,0 +1,50 @@
+{
+  "mission": "Implement and synthetically validate frozen AAII dynamics research adapter; no market fitting",
+  "task_scope": [
+    "read protocol and definitions; implement exact standalone research runner reusing project OLS numerical kernel",
+    "synthetic tests for features/gaps/left-censoring/threshold/prefix and output isolation; no market evaluation"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/sentiment-aaii-dynamics-2026-10-03/protocol.json",
+    "docs/experiments/raw/sentiment-aaii-dynamics-2026-10-03/definitions.json",
+    "docs/experiments/raw/sentiment-aaii-dynamics-2026-10-03/authority-manifest.json",
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/analysis.py",
+    "src/lei_signal/research/workflow_evaluation.py",
+    "docs/research/current-standards.json",
+    "AGENTS.md",
+    "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/inputs/aaii-candidate-values.csv",
+    "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/inputs/px_SPY.csv",
+    "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/executor/run-01/observations-h120.csv",
+    "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/protocol.json",
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/run-01/observations.csv"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/sentiment-aaii-dynamics-2026-10-03/analysis.py",
+    "docs/experiments/raw/sentiment-aaii-dynamics-2026-10-03/test_analysis.py",
+    "docs/experiments/raw/sentiment-aaii-dynamics-2026-10-03/implementation-review.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "analysis.py exact frozen nine-model runner; prepare/preflight separated from fit; never overwrite run output; robust frozen execution checksum verification",
+    "test_analysis.py and fresh synthetic results, no market fits",
+    "implementation-review.json with changes/checks/limitations"
+  ],
+  "stop_conditions": [
+    "missing permissions/input",
+    "conflicting writer",
+    "cannot satisfy frozen method",
+    "need to change protocol",
+    "any market fit or network operation"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "workspace_root": "."
+}
