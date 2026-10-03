@@ -1,0 +1,71 @@
+{
+  "real_OLS_fits": 8,
+  "synthetic_fits": 24,
+  "agent_synthetic_fits": 12,
+  "controller_pytest_synthetic_fits": 4,
+  "workflow_rehearsal_synthetic_fits": 8,
+  "market_requests": 0,
+  "paid_requests": 0,
+  "publication_fits": 0,
+  "source_verification_new_fits": 0,
+  "core_batches": 1,
+  "followups": [
+    "preregistered source/arithmetic/groups/date sensitivity, no new regression",
+    "portable arithmetic recovery and publication, no new regression"
+  ],
+  "limit": {
+    "real_OLS_fits": 8,
+    "seconds": 7200
+  },
+  "agent_tests": [
+    {
+      "passed": 4,
+      "failed": 0,
+      "pytest_seconds": 0.58
+    },
+    {
+      "passed": 6,
+      "failed": 0,
+      "pytest_seconds": 1.15
+    },
+    {
+      "passed": 30,
+      "failed": 11,
+      "pytest_seconds": 1.01,
+      "reason": "existing workflow_design_review fixture contract.json absent"
+    },
+    {
+      "passed": 35,
+      "failed": 0,
+      "pytest_seconds": 0.87
+    },
+    {
+      "passed": 35,
+      "failed": 0,
+      "pytest_seconds": 0.97
+    }
+  ],
+  "agent_timing_provenance": "executor reported previous command results, not rerun by controller",
+  "controller_tests": {
+    "passed": 36,
+    "failed": 0,
+    "pytest_seconds": 1.16
+  },
+  "legacy_costs": "20day eight studies and prior families preserved; unsummarized old totals unknown, not zero",
+  "cost_seconds_by_family": {
+    "return": {
+      "path": "docs/experiments/raw/research-workflow-ledgers-2026-09-29/cdad4250779e7cf9b93212a6/attempts.jsonl",
+      "sha256": "3afcdcec8f6ba5b7dcc431cecc60906801df34b213a6a7b5b24d85ae7ef86713",
+      "charged_seconds": 18.07240750100209,
+      "core_fits": 4,
+      "reuse_fits": 0
+    },
+    "risk": {
+      "path": "docs/experiments/raw/research-workflow-ledgers-2026-09-29/478623ca0117f4acdc7c9463/attempts.jsonl",
+      "sha256": "a389d393ab8256bb940a795dc055d925a80e291521ae6f25469fea115a7d59cf",
+      "charged_seconds": 20.896627916999932,
+      "core_fits": 4,
+      "reuse_fits": 0
+    }
+  }
+}

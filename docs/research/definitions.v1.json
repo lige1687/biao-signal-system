@@ -706,6 +706,18 @@
     "docs/experiments/raw/technical-daily-risk-2026-10-03/age/qualification.json": {
       "path": "docs/experiments/raw/technical-daily-risk-2026-10-03/age/qualification.json",
       "sha256": "7909c5c781a4282ade9e45595c24eca152b3543978c3c33b66182296ce427edb"
+    },
+    "docs/experiments/raw/green-black-state-information-2026-10-03/brief.json": {
+      "path": "docs/experiments/raw/green-black-state-information-2026-10-03/brief.json",
+      "sha256": "2ae124fed059dbdffbfe2c329d3eb02d31c6f63ef835fa18b02e88c609ee3ae1"
+    },
+    "src/lei_signal/research/green_black_state_information.py": {
+      "path": "src/lei_signal/research/green_black_state_information.py",
+      "sha256": "6199864368dad9210f7d216959b4212f1f17ece0b70b1f8ef0f192fedf0545c9"
+    },
+    "tests/unit/test_green_black_state_information.py": {
+      "path": "tests/unit/test_green_black_state_information.py",
+      "sha256": "9beab24ac21e74049ef7697f8e77993aa6a860a7daeb8c86d045f61b112499eb"
     }
   },
   "objects": [
@@ -10998,6 +11010,119 @@
       "component_definition_refs": [
         "research.trend.ema_only_wait_age20@1.0.0"
       ]
+    },
+    {
+      "id": "research.trend.green_black60_state",
+      "version": "1.0.0",
+      "name": "60日SMA/EMA严格同向的绿黑灰趋势状态",
+      "type": "state_signal",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description",
+        "comparison"
+      ],
+      "not_for": [
+        "production_trade",
+        "holding_entry_or_exit",
+        "actual_account_return_claim",
+        "complete_LEI_state",
+        "unique_author_calibration"
+      ],
+      "scope": "四只国内宽基ETF已见日线的60周期方向状态信息",
+      "spec_anchor": [
+        "桌面技术体系§2.2、§2.7",
+        "技术实现§4.2"
+      ],
+      "spec_layer": "trend_road_information",
+      "definition": {
+        "formula": "G_N(t): C_t>EMA_N(t) AND C_t>C_(t-N); B_N(t): both strict below; gray: ready but neither; unknown: missing or <252 contiguous bars",
+        "parameters": {
+          "N": 60,
+          "baseline_N": 20,
+          "warmup": 252,
+          "primary_horizon": 60
+        },
+        "unit": "categorical green/black/gray/unknown",
+        "direction": "原文表示道路方向；未来收益/风险价值由本轮检验",
+        "transforms": "EMA_N用前N收盘均值播种，alpha=2/(N+1)，经济OHLC沿现有来源资格",
+        "nan_policy": "缺价或行动未知分段重置；unknown不填gray",
+        "endpoints": "只用t及以前；正式目标t+1..t+61收盘共61点60间隔，辅助期限如brief"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "calendar",
+          "action_known"
+        ],
+        "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+        "currency": "CNY ETF经济价格指数",
+        "frequency": "daily",
+        "calendar": "四ETF共同完整交易日历",
+        "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+      },
+      "dependencies": [],
+      "lifecycle": {
+        "state": "research_ready",
+        "basis": [
+          "docs/experiments/raw/green-black-state-information-2026-10-03/brief.json",
+          "src/lei_signal/research/green_black_state_information.py",
+          "tests/unit/test_green_black_state_information.py"
+        ],
+        "verification_scope": "源码与合成测试、无目标值来源/样本资格；效果由冻结合同"
+      },
+      "origin": "20日严格方向判据扩到原文60辅助组的固定研究代理，不增删策略原文、不替完整LEI或生产颜色",
+      "universe": {
+        "version": "semantic-four-etf-daily-20261002",
+        "eligibility": "四固定ETF全部4340安排日，全部背景",
+        "warmup": "252连续真实经济OHLC；缺失分段，生产SMA播种EMA",
+        "missing": "未知、背景外、未成熟分别保留，不造价格",
+        "quality_gate": "实际来源资格重新核全部名义OHLC与经济重建；到达及行动完整性未知",
+        "degrade": "只作有限四ETF回顾性信息，非完整ETF总体"
+      },
+      "time": {
+        "observation_time": "完整t收盘后",
+        "available_at": "历史到达时间未认证",
+        "decision_at": "t收盘后研究评价",
+        "execution_at": "无交易",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-03 risk-use research registration"
+      },
+      "validation": {
+        "method": "主控直接价格复算与合成前缀、缺失、边界、接口演练；效果另由冻结合同",
+        "tolerance": {
+          "absolute": 1e-09,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_green_black_state_information.py"
+        ],
+        "limitations": "色彩是既有价格的确定表达；不含排列/时钟/回调/结构/周线/交易动作；非独立新原始信息；已见资料"
+      },
+      "status": {
+        "definition_clarity": "fixed_research_scale_proxy",
+        "data_qualification": "limited_retrospective_economic_ohlc",
+        "implementation": "synthetic_checks_verified",
+        "effectiveness": "not_evaluated",
+        "production": "not_authorized"
+      },
+      "research_owner": "technical_agent",
+      "research_status": "IN_SCOPE",
+      "local_alias": "G60-green-black",
+      "sources": [
+        "docs/experiments/raw/green-black-state-information-2026-10-03/brief.json",
+        "src/lei_signal/research/green_black_state_information.py",
+        "tests/unit/test_green_black_state_information.py",
+        "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
+      ],
+      "component_definition_refs": []
     }
   ],
   "models": [],

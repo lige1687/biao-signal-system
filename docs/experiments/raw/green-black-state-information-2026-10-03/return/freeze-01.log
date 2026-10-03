@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/scripts/run_factor_lab.py", line 70, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/scripts/run_factor_lab.py", line 46, in main
+    freeze_workflow(args.workflow_draft, args.out)
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/src/lei_signal/research/workflow.py", line 1060, in freeze_workflow
+    frozen = freeze_contract(read_json(draft_path), root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/src/lei_signal/research/workflow.py", line 797, in freeze_contract
+    return _freeze_contract(contract, root, started, accounting)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/src/lei_signal/research/workflow.py", line 809, in _freeze_contract
+    checked = preflight(frozen, root, require_frozen=False)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/src/lei_signal/research/workflow.py", line 520, in preflight
+    validate_workflow_contract(contract)
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/src/lei_signal/research/question_contract.py", line 557, in validate_workflow_contract
+    _fail("workflow.evaluator", "OLS requires continuous target, zero penalty and rcond 1e-12")
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/src/lei_signal/research/question_contract.py", line 53, in _fail
+    raise QuestionContractError(f"{path}: {reason}")
+lei_signal.research.question_contract.QuestionContractError: workflow.evaluator: OLS requires continuous target, zero penalty and rcond 1e-12

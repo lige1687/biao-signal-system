@@ -174,6 +174,11 @@ def prepare_observations(payload, contract):
         return prepare_slope_observations(payload, contract, compute_labels=(
             payload.get('data_mode') == 'synthetic' or
             contract.get('permissions', {}).get('real_labels') is True))
+    if contract['feature']['kind'] == 'green_black_state60_information':
+        from lei_signal.research.green_black_state_information import prepare_state_observations
+        return prepare_state_observations(payload, contract, compute_labels=(
+            payload.get('data_mode') == 'synthetic' or
+            contract.get('permissions', {}).get('real_labels') is True))
     if contract['feature']['kind'] == 'tsfresh_price_information':
         from lei_signal.research.tsfresh_price_information import prepare_tsfresh_observations
         return prepare_tsfresh_observations(payload, contract, compute_labels=(
