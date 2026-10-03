@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-10-03T13:32:55.330378+08:00",
+  "command": "PYTHONDONTWRITEBYTECODE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=src python3 -m pytest -q -p no:cacheprovider tests/unit/test_ema_only_wait_age_information.py tests/unit/test_prior_top_dual_break_information.py",
+  "cwd": "isolated stage assembled from published base plus sealed task dependencies",
+  "exit_code": 0,
+  "result": "10 passed in 1.39s",
+  "market_fits": 0,
+  "real_label_recomputations": 0,
+  "reason_to_rerun_minimum": "sealed source dependency snapshot differs from previous handoff current-runtime snapshot; validate exact proposed branch code",
+  "not_verified": [
+    "Linux/cloud",
+    "complete historical workflow",
+    "production"
+  ],
+  "failures": [
+    {
+      "stage": "metadata registry selection",
+      "error": "KeyError -1 because registry entries is dict",
+      "effect_runs": 0,
+      "repair": "select two exact dictionary keys; no registry-wide current changes"
+    }
+  ]
+}

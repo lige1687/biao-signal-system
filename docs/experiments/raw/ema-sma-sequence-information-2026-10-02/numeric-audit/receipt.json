@@ -1,0 +1,116 @@
+{
+  "scope": "arithmetic only; saved predictions and frozen original panel; no fitting or experiment execution",
+  "saved_prediction_rmse": {
+    "B0": {
+      "overall": 8.337432220986809,
+      "eval_2025": 4.944985524361692,
+      "eval_2026H1": 11.800960653150739,
+      "assets": {
+        "510300.SS": 4.2581095569304885,
+        "510050.SS": 3.2070615381378698,
+        "510500.SS": 6.4206400882091,
+        "588000.SS": 14.43640344087309
+      }
+    },
+    "B1": {
+      "overall": 8.261842112524974,
+      "eval_2025": 6.264213923514646,
+      "eval_2026H1": 10.697527883263444,
+      "assets": {
+        "510300.SS": 4.940414221109944,
+        "510050.SS": 3.5061874417750363,
+        "510500.SS": 6.773632113095626,
+        "588000.SS": 13.800326275584858
+      }
+    },
+    "B2": {
+      "overall": 8.28749601297698,
+      "eval_2025": 6.279861025137899,
+      "eval_2026H1": 10.733164254615472,
+      "assets": {
+        "510300.SS": 5.032682750088967,
+        "510050.SS": 3.5036292749832825,
+        "510500.SS": 6.79889530359146,
+        "588000.SS": 13.816731507548242
+      }
+    }
+  },
+  "denominators": {
+    "qualification_eligible": 397,
+    "qualification_endpoint_mature": 388,
+    "qualification_same_phase": 339,
+    "saved_predictions": 89,
+    "fold_eval_0": 52,
+    "fold_eval_1": 37,
+    "fold_train_0": 250,
+    "fold_train_1": 331,
+    "path20_rows": 339,
+    "first_day_rows": 155,
+    "continued_rows": 184,
+    "preflight_raw": 4340
+  },
+  "descriptive_20": {
+    "all": {
+      "rows": 339,
+      "per_asset_counts": {
+        "510300.SS": 80,
+        "510050.SS": 88,
+        "510500.SS": 82,
+        "588000.SS": 89
+      },
+      "metrics": {
+        "return": 0.73402775700895,
+        "up_probability_percent": 49.509657066693244,
+        "mae": 3.3344012893288926,
+        "mfe": 4.129140780257928,
+        "mdd": 4.790251631913996,
+        "path_loss5_percent": 26.599753357084133
+      }
+    },
+    "first_day": {
+      "rows": 155,
+      "per_asset_counts": {
+        "510300.SS": 43,
+        "510050.SS": 34,
+        "510500.SS": 36,
+        "588000.SS": 42
+      },
+      "metrics": {
+        "return": 0.6000710659280928,
+        "up_probability_percent": 49.68813106638004,
+        "mae": 3.5652434700831304,
+        "mfe": 4.1223096825033405,
+        "mdd": 5.062917531723473,
+        "path_loss5_percent": 30.048802466723124
+      }
+    },
+    "continued_wait": {
+      "rows": 184,
+      "per_asset_counts": {
+        "510300.SS": 37,
+        "510050.SS": 54,
+        "510500.SS": 46,
+        "588000.SS": 47
+      },
+      "metrics": {
+        "return": 0.839210921898369,
+        "up_probability_percent": 49.0775465567325,
+        "mae": 3.155148640783706,
+        "mfe": 4.133839121865023,
+        "mdd": 4.568025437841431,
+        "path_loss5_percent": 23.560459164066934
+      }
+    }
+  },
+  "mismatch_count": 0,
+  "max_absolute_numeric_error": 3.375077994860476e-14,
+  "mismatches": [],
+  "path_mismatch_count": 0,
+  "path_max_absolute_error": 0.0,
+  "path_mismatches": [],
+  "notes": [
+    "Prediction error is reported as RMSE in percentage points.",
+    "Path summaries give each represented ETF equal weight, then average observations within ETF.",
+    "Path MAE/MFE/MDD are percentages relative to the t+1 close; MDD is peak-to-subsequent-trough drawdown."
+  ]
+}

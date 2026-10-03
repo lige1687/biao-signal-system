@@ -150,9 +150,57 @@ def prepare_observations(payload, contract):
     entry-day lows because they occurred before entry. MDD only supports closes,
     as daily high/low order is unknown. Fixed endpoint returns require a quote.
     """
+    if contract['feature']['kind'] == 'ema_only_wait_age_information':
+        from lei_signal.research.ema_only_wait_age_information import prepare_sequence_observations
+        return prepare_sequence_observations(payload, contract, compute_labels=(
+            payload.get('data_mode') == 'synthetic' or
+            contract.get('permissions', {}).get('real_labels') is True))
+    if contract['feature']['kind'] == 'ema_sma_waiting_path':
+        from lei_signal.research.ema_sma_waiting_path import prepare_waiting_observations
+        return prepare_waiting_observations(payload, contract)
+    if contract['feature']['kind'] == 'prior_top_dual_break_information':
+        from lei_signal.research.prior_top_dual_break_information import prepare_combination_observations
+        return prepare_combination_observations(payload, contract, compute_labels=(payload.get('data_mode') == 'synthetic' or contract.get('permissions', {}).get('real_labels') is True))
+    if contract['feature']['kind'] == 'pullback_layer_change_information':
+        from lei_signal.research.pullback_layer_change_information import prepare_pullback_observations
+        return prepare_pullback_observations(payload, contract, compute_labels=(
+            payload.get('data_mode') == 'synthetic' or
+            contract.get('permissions', {}).get('real_labels') is True))
+    if contract['feature']['kind'] == 'slope_change_information':
+        from lei_signal.research.trend_slope_change_information import prepare_slope_observations
+        return prepare_slope_observations(payload, contract, compute_labels=(
+            payload.get('data_mode') == 'synthetic' or
+            contract.get('permissions', {}).get('real_labels') is True))
+    if contract['feature']['kind'] == 'tsfresh_price_information':
+        from lei_signal.research.tsfresh_price_information import prepare_tsfresh_observations
+        return prepare_tsfresh_observations(payload, contract, compute_labels=(
+            payload.get('data_mode') == 'synthetic' or
+            contract.get('permissions', {}).get('real_labels') is True))
+    if contract['feature']['kind'] == 'simple_top_invalidation_information':
+        from lei_signal.research.top_invalidation_information import prepare_invalidation_observations
+        return prepare_invalidation_observations(payload, contract, compute_labels=(
+            payload.get('data_mode') == 'synthetic' or
+            contract.get('permissions', {}).get('real_labels') is True))
+    if contract['feature']['kind'] == 'double_ma_order_information':
+        from lei_signal.research.double_ma_order_information import prepare_double_order_observations
+        return prepare_double_order_observations(payload, contract, compute_labels=contract.get('permissions', {}).get('real_labels') is True)
     if contract['feature']['kind'] == 'volume_anomaly_information':
         from lei_signal.research.volume_information import prepare_volume_observations
         return prepare_volume_observations(payload, contract)
+    if contract['feature']['kind'] == 'key_fluctuation_information':
+        from lei_signal.research.key_fluctuation_information import prepare_key_observations
+        return prepare_key_observations(payload, contract, compute_labels=contract.get('permissions', {}).get('real_labels') is True or payload.get('data_mode') == 'synthetic')
+    if contract['feature']['kind'] == 'profile_overhead_information':
+        from lei_signal.research.profile_information import prepare_profile_observations
+        return prepare_profile_observations(payload, contract, compute_labels=(
+            payload.get('data_mode') == 'synthetic' or
+            contract.get('permissions', {}).get('real_labels') is True))
+    if contract['feature']['kind'] == 'simple_top3_information':
+        from lei_signal.research.top_structure_information import prepare_top_observations
+        return prepare_top_observations(payload, contract)
+    if contract['feature']['kind'] == 'future_deduction_box_information':
+        from lei_signal.research.deduction_box_information import prepare_deduction_observations
+        return prepare_deduction_observations(payload, contract)
     if contract['feature']['kind'] == 'ma_cluster_information':
         from lei_signal.research.ma_cluster_information import prepare_ma_cluster_observations
         return prepare_ma_cluster_observations(payload, contract)

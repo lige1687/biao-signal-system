@@ -1,0 +1,57 @@
+{
+  "question": "在EMA20已向上但SMA20还未向上的每个当日已知等待观察中，连续等待天数在当前价格背景和已知抵扣盒距离后，是否增加未来20交易日收益信息",
+  "mode": "research",
+  "execution": "completed",
+  "stage": "archived",
+  "delivery_mode": "final_only",
+  "user_authorization": "2026-10-02 继续发掘，避免重复研究",
+  "scope": "one bounded technical sequence question in LEI, fixed existing ETF data; no sentiment/breadth/macro/account/production",
+  "sources": {
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "budget": {
+    "scientific_question_max": 1,
+    "core_effect_batches_max": 1,
+    "followup_batches_max": 3,
+    "actual_fits_max": 12,
+    "network_max": 0,
+    "mechanical_repairs_per_stage_max": 2
+  },
+  "cumulative": {
+    "market_fits": 4,
+    "publication_new_fits": 0,
+    "network_requests": 0,
+    "effect_attempts": 1,
+    "planned_diagnostic_batches": 1
+  },
+  "prior_completed": "prior-top-dual-break interaction completed4fits; no reopen",
+  "output": "docs/experiments/raw/ema-sma-sequence-information-2026-10-02",
+  "definition_ref": "research.trend.ema_only_wait_age20@1.0.0",
+  "deduplication": "Existing research.trend.ema20_sma20_waiting_path@1.0.0 owns 137 starts and retrospective confirmation wait-price costs. This study owns each current E-only day causal age, predictive increment after ten current fields, not retrospective successful waiting time.",
+  "qualification_review": "docs/experiments/raw/ema-sma-sequence-information-2026-10-02/controller/qualification-review.json",
+  "planned_core_fits": 4,
+  "core_result": "docs/experiments/raw/ema-sma-sequence-information-2026-10-02/core-01/result.json",
+  "evidence": "not_supported_within_scope",
+  "completion_reason": "question_answered",
+  "question_answered": true,
+  "final_conclusion": "本实验范围内未发现实际增量",
+  "report": "docs/experiments/ema-only-wait-age-information-2026-10-02.md",
+  "publication": "docs/experiments/ema-only-wait-age-forecast-artifact-2026-10-02.md",
+  "pending_core_actions": [],
+  "evidence_boundaries": [
+    "genuinely unseen evidence unavailable",
+    "historical vendor arrival and all actions completeness unproved"
+  ],
+  "dedup_next": "This same current-age return20 use sealed; adjacent137start retrospective waiting path separately completed and not rerun",
+  "final_source_check": {
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md": {
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "unchanged": true
+    },
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md": {
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "unchanged": true
+    }
+  }
+}

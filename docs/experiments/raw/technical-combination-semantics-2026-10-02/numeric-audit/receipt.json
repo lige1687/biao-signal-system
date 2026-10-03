@@ -1,0 +1,56 @@
+{
+  "schema_version": "numeric-audit-v1",
+  "scope": "independent numeric check of frozen top x dual-break effect",
+  "status": "completed",
+  "inputs_sha256": {
+    "docs/experiments/raw/technical-combination-semantics-2026-10-02/controller/numeric-audit-contract.json": "562bcd709000d3e9c151ac856382852ebbacd0b6ee8e098c8a587e0a49ed43f7",
+    "docs/experiments/raw/technical-combination-semantics-2026-10-02/freeze-03/contract.json": "33034c9c60715205f17d4733c21f41a6b6d1b3955ee42022ef214f52944718f6",
+    "docs/experiments/raw/volume-information-2026-09-30/execution/panel.json": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+    "docs/experiments/raw/technical-combination-semantics-2026-10-02/independent-identity/identities.json": "c153be5301da1e7957c4677dc7eaac54028155ef0bd5ea00aa59050f14192572",
+    "docs/experiments/raw/technical-combination-semantics-2026-10-02/core-01/result.json": "c70f2de0e823df403a881ad394ce7c479a38b99148ebf26bb57ea36cbd70f5a7",
+    "docs/experiments/raw/technical-combination-semantics-2026-10-02/descriptive-01/paths.json": "6fe0cc2f2fc89c3f887ad2ab5d02407ccc997a1b33e29da9d115dd6306802401",
+    "docs/experiments/raw/technical-combination-semantics-2026-10-02/descriptive-01/results.json": "360864e60285af9ca6e34a974d368e567fbb0f3097116fc1641827bd0393ddc1",
+    "docs/experiments/raw/technical-combination-semantics-2026-10-02/descriptive-01/matched-cells.json": "eb2d9094117175b7737c92f16d200f0a9926722f6342c80d308d695ee97f3acb",
+    "docs/experiments/raw/technical-combination-semantics-2026-10-02/descriptive-01/prediction-sensitivity.json": "4e84e14200ee2484d8eecb915266430a60daf0e7a2bb86b628348df99ae93789"
+  },
+  "outputs_sha256": {
+    "independent_numeric_audit.py": "66a8f4cfec48500cb406fd76dbb4b49dba0ddae71ef8f3184195c38ca41d8df1",
+    "audit.json": "667d0b7d66fca04303b7154555b74d993270e58d66433722f297bf94d60c24ea",
+    "review.md": "9851ac5d5ae241d08b02e6a76ff11368752162ac5162a62152505fb770d7a9d0"
+  },
+  "checks": {
+    "source_rows": 4340,
+    "qualified_rows": 2069,
+    "horizons": [
+      5,
+      10,
+      20,
+      60,
+      120
+    ],
+    "path_rows": {
+      "5": 2003,
+      "10": 1956,
+      "20": 1857,
+      "60": 1467,
+      "120": 1015
+    },
+    "prediction_rows": 874,
+    "discrepancy_count": 0,
+    "fits_performed": 0,
+    "network_calls": 0
+  },
+  "limitations": [
+    "saved predictions audited without model refit",
+    "first joint day is a different-date subset, not a causal contrast",
+    "2025 and 2026H1 use already-observed historical data"
+  ],
+  "attempt_history": [
+    {
+      "attempt": "initial script run",
+      "result": "eight schema-only mismatches: empty 2026H1 120-interval groups represented as {} versus saved null",
+      "resolution": "corrected independent empty-group serialization; no price, identity, path or metric arithmetic changed",
+      "final_discrepancy_count": 0
+    }
+  ]
+}

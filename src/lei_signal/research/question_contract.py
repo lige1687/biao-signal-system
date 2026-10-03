@@ -299,7 +299,7 @@ def validate_workflow_contract(contract: dict) -> None:
     feature = _mapping(c["feature"], "workflow.feature", {
         "kind", "lookback", "bar_frequency", "missing_policy", "warmup",
     })
-    if feature["kind"] not in {"sma_distance", "decline_event", "a01_signed_band", "a03_pullback_order", "space_prior_target", "ma_cluster_information", "volume_anomaly_information"}:
+    if feature["kind"] not in {"sma_distance", "decline_event", "a01_signed_band", "a03_pullback_order", "space_prior_target", "ma_cluster_information", "volume_anomaly_information", "key_fluctuation_information", "profile_overhead_information", "simple_top3_information", "future_deduction_box_information", "double_ma_order_information", "slope_change_information", "simple_top_invalidation_information", "pullback_layer_change_information", "prior_top_dual_break_information", "ema_sma_waiting_path", "tsfresh_price_information", "ema_only_wait_age_information"}:
         _fail("workflow.feature.kind", "no implemented adapter for this feature")
     if feature["missing_policy"] not in {"real_quote", "segmented"}:
         _fail("workflow.feature.missing_policy", "must freeze a supported recovery policy")
@@ -308,6 +308,63 @@ def validate_workflow_contract(contract: dict) -> None:
     for key in ("lookback", "warmup"):
         if type(feature[key]) is not int or feature[key] < 1:
             _fail(f"workflow.feature.{key}", "must be a positive bar count")
+    if feature["kind"] == "ema_only_wait_age_information":
+        ref = "research.trend.ema_only_wait_age20@1.0.0"
+        if (schema_version != "research-workflow/1.1" or feature["lookback"] != 20 or
+                feature["warmup"] != 252 or feature["missing_policy"] != "segmented" or
+                feature.get("definition_ref") != ref or c["question"]["factor_refs"] != [ref] or
+                c["question"].get("sampling") != "daily" or feature.get("ema_seed") != "first_close" or
+                feature.get("age_transform") != "log1p" or feature.get("sma_lag") != 20 or
+                feature.get("censor_policy") != "left_censor_unknown_start"):
+            _fail("workflow.feature", "current wait age freezes exact prefix-only EMA20/SMA20, segmented252, left censor and log1p age")
+        if data["mode"] != "synthetic" and data.get("qualification", {}).get("adapter") != "top_etf_economic/1.0":
+            _fail("workflow.data.qualification", "current-age study needs economic OHLC source qualification")
+    if feature["kind"] == "ema_sma_waiting_path":
+        ref = "research.trend.ema20_sma20_waiting_path@1.0.0"
+        if (schema_version != "research-workflow/1.1" or feature["lookback"] != 20 or feature["warmup"] != 252 or
+                feature["missing_policy"] != "segmented" or feature.get("definition_ref") != ref or
+                c["question"]["factor_refs"] != [ref] or c["question"].get("sampling") != "daily" or
+                feature.get("ema_seed") != "first_close" or feature.get("ema_alpha") != "2/21" or
+                type(feature.get("sma_lag")) is not int or feature["sma_lag"] != 20 or
+                type(feature.get("terminal_offset")) is not int or feature["terminal_offset"] != 21):
+            _fail("workflow.feature", "waiting path freezes exact daily first-close EMA20, lag20, segmented252 and H=t0+21")
+        if data["mode"] != "synthetic" and data.get("qualification", {}).get("adapter") != "top_etf_economic/1.0":
+            _fail("workflow.data.qualification", "waiting path requires source-only economic OHLC qualification")
+    if feature["kind"] in {"slope_change_information", "simple_top_invalidation_information"}:
+        ref = ("research.trend.slope_change60_20@1.0.0" if
+               feature["kind"] == "slope_change_information" else
+               "research.structure.simple_top3_invalidation@1.0.0")
+        if (feature["lookback"] != 60 or feature["warmup"] != 252 or
+                feature["missing_policy"] != "segmented" or
+                feature.get("definition_ref") != ref or
+                c["question"]["factor_refs"] != [ref] or
+                c["question"].get("sampling") != "daily"):
+            _fail("workflow.feature", "semantic study requires its exact daily segmented252 card")
+        if (data["mode"] != "synthetic" and
+                data.get("qualification", {}).get("adapter") != "top_etf_economic/1.0"):
+            _fail("workflow.data.qualification", "semantic study requires source-only economic OHLC qualification")
+    if feature["kind"] == "prior_top_dual_break_information":
+        ref = "research.interaction.prior_top_dual_break20@1.0.0"
+        if (feature["lookback"] != 60 or feature["warmup"] != 252 or
+                feature["missing_policy"] != "segmented" or
+                feature.get("definition_ref") != ref or
+                c["question"]["factor_refs"] != [ref] or
+                c["question"].get("sampling") != "daily"):
+            _fail("workflow.feature", "prior-top combination study requires its exact daily segmented252 card")
+        if (data["mode"] != "synthetic" and
+                data.get("qualification", {}).get("adapter") != "top_etf_economic/1.0"):
+            _fail("workflow.data.qualification", "prior-top combination study requires source-only economic OHLC qualification")
+    if feature["kind"] == "pullback_layer_change_information":
+        ref = "research.pullback.ma_layer_change@1.0.0"
+        if (feature["lookback"] != 60 or feature["warmup"] != 252 or
+                feature["missing_policy"] != "segmented" or
+                feature.get("definition_ref") != ref or
+                c["question"]["factor_refs"] != [ref] or
+                c["question"].get("sampling") != "daily"):
+            _fail("workflow.feature", "pullback-layer study requires its exact daily segmented252 card")
+        if (data["mode"] != "synthetic" and
+                data.get("qualification", {}).get("adapter") != "top_etf_economic/1.0"):
+            _fail("workflow.data.qualification", "pullback-layer study requires source-only economic OHLC qualification")
     if feature["kind"] == "a01_signed_band":
         if feature["lookback"] != 60 or feature["warmup"] != 252 or feature["missing_policy"] != "segmented":
             _fail("workflow.feature", "A01 adapter freezes N60, segmented complete-OHLC252 and seeded ATR20")
@@ -339,6 +396,49 @@ def validate_workflow_contract(contract: dict) -> None:
             _fail("workflow.feature", "V01 requires its exact separate research definition")
         if c["question"].get("sampling") != "daily":
             _fail("workflow.question", "V01 retains all daily observations")
+    if feature["kind"] == "simple_top3_information":
+        if (feature["lookback"] != 60 or feature["warmup"] != 252 or
+            feature["missing_policy"] != "segmented" or
+            feature.get("definition_ref") != "research.structure.simple_top3@1.0.0" or
+            c["question"]["factor_refs"] != ["research.structure.simple_top3@1.0.0"]):
+            _fail("workflow.feature", "T01 requires exact registered research card, SMA60 and OHLC252")
+        if c["question"].get("sampling") != "daily":
+            _fail("workflow.question", "T01 retains all scheduled days")
+    if feature["kind"] == "key_fluctuation_information":
+        if (feature["lookback"] != 60 or feature["warmup"] != 252 or
+            feature["missing_policy"] != "segmented" or
+            feature.get("definition_ref") != "research.key_fluctuation.dual_break20@1.0.0" or
+            c["question"]["factor_refs"] != ["research.key_fluctuation.dual_break20@1.0.0"] or
+            c["question"].get("sampling") != "daily"):
+            _fail("workflow.feature", "K01 requires exact daily dual-break card, SMA60 and segmented OHLC252")
+        if data["mode"] != "synthetic" and data.get("qualification", {}).get("adapter") != "key_etf_economic/1.0":
+            _fail("workflow.data.qualification", "K01 requires its source-only economic ETF qualifier")
+    if feature["kind"] == "profile_overhead_information":
+        if (feature["lookback"] != 120 or feature["warmup"] != 252 or
+            feature["missing_policy"] != "segmented" or feature.get("bins") != 50 or
+            feature.get("value_area") != .70 or feature.get("support_zone_pct") != .05 or
+            feature.get("background_sma_lag") != 5 or
+            feature.get("definition_ref") != "research.volume_profile.overhead120@1.0.0" or
+            c["question"]["factor_refs"] != ["research.volume_profile.overhead120@1.0.0"] or
+            c["question"].get("sampling") != "daily"):
+            _fail("workflow.feature", "P01 freezes exact daily overhead120, bins50 and segmented OHLC252")
+        if data["mode"] != "synthetic" and data.get("qualification", {}).get("adapter") != "profile_etf_economic/1.0":
+            _fail("workflow.data.qualification", "P01 requires source-bound economic ETF OHLCV")
+    if feature["kind"] == "future_deduction_box_information":
+        if (feature["lookback"] != 20 or feature.get("box_horizon") != 10 or
+            feature["warmup"] != 252 or feature["missing_policy"] != "segmented" or
+            feature.get("definition_ref") != "research.trend.future_deduction_box20_10@1.0.0" or
+            c["question"]["factor_refs"] != ["research.trend.future_deduction_box20_10@1.0.0"] or
+            c["question"].get("sampling") != "daily"):
+            _fail("workflow.feature", "D01 requires exact registered N20/K10 card and scheduled daily OHLC252")
+        if (data.get("qualification", {}).get("adapter") != "deduction_etf_economic/1.0" and
+            data["mode"] != "synthetic"):
+            _fail("workflow.data.qualification", "D01 requires its source-only economic ETF qualifier")
+    if feature["kind"] == "double_ma_order_information":
+        if (feature["lookback"] != 120 or feature["warmup"] != 252 or feature["missing_policy"] != "segmented" or feature.get("definition_ref") != "research.trend.double_ma_order_state@1.0.0" or c["question"]["factor_refs"] != ["research.trend.double_ma_order_state@1.0.0"] or c["question"].get("sampling") != "daily"):
+            _fail("workflow.feature", "T03 requires exact dual20/60/120 daily segmented252 card")
+        if data["mode"] != "synthetic" and data.get("qualification", {}).get("adapter") != "double_order_etf_economic/1.0":
+            _fail("workflow.data.qualification", "T03 requires its explicit economic source qualifier")
     target = _mapping(c["target"], "workflow.target", {
         "kind", "start_offset", "end_offset", "entry_field", "unit",
     })
@@ -389,10 +489,26 @@ def validate_workflow_contract(contract: dict) -> None:
     e = _mapping(c["evaluator"], "workflow.evaluator", {
         "kind", "version", "baseline_features", "added_features",
     })
-    if e["kind"] not in {"prediction_ridge", "event_risk"} or e["version"] != "1.0.0":
+    if e["kind"] not in {"prediction_ridge", "prediction_ols", "event_risk", "waiting_path_description"} or e["version"] != "1.0.0":
         _fail("workflow.evaluator", "unsupported evaluator/version")
     metric = c["question"]["primary_metric"]
-    if metric["name"] not in ({"Brier"} if binary else {"MSE", "RMSE"}) or metric["direction"] != "lower":
+    if e["kind"] == "waiting_path_description":
+        if (feature["kind"] != "ema_sma_waiting_path" or e["baseline_features"] != ["early_reference"] or
+                e["added_features"] != ["first_s_confirmation"] or target["kind"] != "forward_return" or
+                target["start_offset"] != 1 or target["end_offset"] != 21 or target["entry_field"] != "close" or
+                target.get("price_measure", "economic_price") != "economic_price" or
+                c["question"]["target"]["horizon"] != 20 or metric["name"] != "paired_terminal_return_difference" or
+                metric["direction"] != "higher" or metric["attention_threshold"] is not None or
+                c["weights"]["policy"] != "equal_asset"):
+            _fail("workflow.evaluator", "waiting path describes fixed common terminal prices; it neither fits nor predicts")
+        if (s["folds"] != [
+                {"train_end": "2024-12-31", "eval_start": "2025-01-01", "eval_end": "2025-12-31"},
+                {"train_end": "2025-12-31", "eval_start": "2026-01-01", "eval_end": "2026-06-30"}] or
+                s["label_policy"] != "purge" or s.get("evaluation_label_policy") != "contained"):
+            _fail("workflow.split", "waiting path freezes the two calendar phases for description, without training")
+    elif feature["kind"] == "ema_sma_waiting_path":
+        _fail("workflow.evaluator", "waiting path requires its descriptive evaluator")
+    elif metric["name"] not in ({"Brier"} if binary else {"MSE", "RMSE"}) or metric["direction"] != "lower":
         _fail("workflow.question.primary_metric", "the implemented prediction evaluator minimizes its declared error metric")
     if c["question"]["method"]["name"] != e["kind"]:
         _fail("workflow.question.method", "question method differs from executable adapter")
@@ -410,6 +526,157 @@ def validate_workflow_contract(contract: dict) -> None:
             _fail("workflow.evaluator.added_features", "A03 only adds the frozen first-touch indicator")
         if feature["kind"] == "ma_cluster_information" and (e["baseline_features"] != ["distance20_atr", "distance60_atr", "distance120_atr", "ret20", "vol20"] or e["added_features"] != ["added"]):
             _fail("workflow.evaluator", "width study freezes three signed ATR distances, ret20, vol20 and width percentage points")
+        if feature["kind"] == "simple_top3_information" and (e["baseline_features"] != ["r1", "ret3", "ret20", "vol20", "black20", "asset_510050", "asset_510500", "asset_588000"] or e["added_features"] != ["added"]):
+            _fail("workflow.evaluator", "T01 freezes price, black20 and three ETF identity fields plus the top indicator")
+    if e["kind"] == "prediction_ols":
+        if (feature["kind"] not in {"future_deduction_box_information", "double_ma_order_information", "key_fluctuation_information", "profile_overhead_information", "slope_change_information", "simple_top_invalidation_information", "tsfresh_price_information", "ema_only_wait_age_information"} or
+            target["kind"] in {"up", "downside_event"} or e.get("lambda", 0) != 0 or
+            e.get("rcond", 1e-12) != 1e-12):
+            _fail("workflow.evaluator", "OLS requires continuous target, zero penalty and rcond 1e-12")
+    if feature["kind"] == "ema_only_wait_age_information":
+        from lei_signal.research.ema_only_wait_age_information import BASELINE_FEATURES
+        if (e["kind"] != "prediction_ols" or e["baseline_features"] != list(BASELINE_FEATURES) or
+                e["added_features"] != ["added"] or e.get("lambda") != 0 or e.get("rcond") != 1e-12 or
+                target["kind"] != "forward_return" or target["start_offset"] != 1 or target["end_offset"] != 21 or
+                target["entry_field"] != "close" or target.get("price_measure") != "economic_price" or
+                c.get("training_weights") != "equal_asset" or c["weights"]["policy"] != "equal_asset" or
+                s["label_policy"] != "purge" or s.get("evaluation_label_policy") != "contained" or
+                s["folds"] != [
+                    {"train_end": "2024-12-31", "eval_start": "2025-01-01", "eval_end": "2025-12-31"},
+                    {"train_end": "2025-12-31", "eval_start": "2026-01-01", "eval_end": "2026-06-30"}] or
+                metric["name"] != "RMSE" or c["dependence"].get("axis_scope") != "evaluation"):
+            _fail("workflow.evaluator", "age study freezes D01 nine current fields plus known box distance, one log-age and two contained return20 OLS folds")
+    if feature["kind"] == "tsfresh_price_information":
+        from lei_signal.research.trend_slope_change_information import BASELINE_FEATURES
+        refs = ["research.external.mean_abs_log_change20@1.0.0",
+                "research.external.return_autocorrelation20_lag1@1.0.0"]
+        fields = ["mean_abs_log_change20", "return_autocorrelation20_lag1"]
+        allowed_pairs = [(list(BASELINE_FEATURES), [fields[0]]),
+                         (list(BASELINE_FEATURES), [fields[1]]),
+                         (list(BASELINE_FEATURES), fields),
+                         (list(BASELINE_FEATURES[7:]), fields)]
+        if (feature["lookback"] != 20 or feature["warmup"] != 252 or
+                feature["missing_policy"] != "segmented" or
+                feature.get("definition_ref") != refs[0] or
+                feature.get("definition_refs") != refs or
+                c["question"]["factor_refs"] != refs or
+                c["question"].get("sampling") != "daily" or
+                e["kind"] != "prediction_ols" or
+                (e["baseline_features"], e["added_features"]) not in allowed_pairs or
+                target["kind"] != "forward_return" or
+                target["start_offset"] != 1 or target["end_offset"] != 21 or
+                target["entry_field"] != "close" or
+                target.get("price_measure") != "economic_price" or
+                c.get("training_weights") != "equal_asset" or
+                c["weights"]["policy"] != "equal_asset" or
+                s["label_policy"] != "purge" or
+                s.get("evaluation_label_policy") != "contained" or
+                s["folds"] != [
+                    {"train_end": "2024-12-31", "eval_start": "2025-01-01", "eval_end": "2025-12-31"},
+                    {"train_end": "2025-12-31", "eval_start": "2026-01-01", "eval_end": "2026-06-30"}] or
+                metric["name"] != "RMSE" or c["dependence"].get("axis_scope") != "evaluation"):
+            _fail("workflow.evaluator", "tsfresh study freezes two exact price expressions and four declared OLS comparisons")
+        if (data["mode"] != "synthetic" and
+                data.get("qualification", {}).get("adapter") != "top_etf_economic/1.0"):
+            _fail("workflow.data.qualification", "tsfresh study requires existing economic OHLC source qualification")
+    if feature["kind"] in {"slope_change_information", "simple_top_invalidation_information"}:
+        if feature["kind"] == "slope_change_information":
+            from lei_signal.research.trend_slope_change_information import BASELINE_FEATURES
+        else:
+            from lei_signal.research.top_invalidation_information import BASELINE_FEATURES
+        if (e["kind"] != "prediction_ols" or e["baseline_features"] != list(BASELINE_FEATURES) or
+                e["added_features"] != ["added"] or target["kind"] != "forward_return" or
+                target["start_offset"] != 1 or target["end_offset"] != 21 or
+                target["entry_field"] != "close" or target.get("price_measure", "economic_price") != "economic_price" or
+                c.get("training_weights") != "equal_asset" or c["weights"]["policy"] != "equal_asset" or
+                s["label_policy"] != "purge" or s.get("evaluation_label_policy") != "contained" or
+                s["folds"] != [
+                    {"train_end": "2024-12-31", "eval_start": "2025-01-01", "eval_end": "2025-12-31"},
+                    {"train_end": "2025-12-31", "eval_start": "2026-01-01", "eval_end": "2026-06-30"}] or
+                metric["name"] != "RMSE" or c["dependence"].get("axis_scope") != "evaluation"):
+            _fail("workflow.evaluator", "semantic study freezes exact B1 plus one expression, two return20 OLS folds")
+    if feature["kind"] == "prior_top_dual_break_information":
+        from lei_signal.research.prior_top_dual_break_information import BASELINE_FEATURES
+        if (e["kind"] != "prediction_ridge" or e["lambda"] != 1.0 or
+                e["baseline_features"] != list(BASELINE_FEATURES) or
+                e["added_features"] != ["added"] or target["kind"] != "mae" or
+                target["start_offset"] != 1 or target["end_offset"] != 21 or
+                target["entry_field"] != "close" or target.get("path_field", "close") != "close" or
+                target.get("price_measure", "economic_price") != "economic_price" or
+                c.get("training_weights") != "equal_asset" or c["weights"]["policy"] != "equal_asset" or
+                s["label_policy"] != "purge" or s.get("evaluation_label_policy") != "contained" or
+                s["folds"] != [
+                    {"train_end": "2024-12-31", "eval_start": "2025-01-01", "eval_end": "2025-12-31"},
+                    {"train_end": "2025-12-31", "eval_start": "2026-01-01", "eval_end": "2026-06-30"}] or
+                metric["name"] != "RMSE" or c["dependence"].get("axis_scope") != "evaluation"):
+            _fail("workflow.evaluator", "prior-top combination freezes both components in B1 plus their product, two risk20 ridge folds")
+    if feature["kind"] == "pullback_layer_change_information":
+        from lei_signal.research.pullback_layer_change_information import BASELINE_FEATURES
+        if (e["kind"] != "prediction_ridge" or e["lambda"] != 1.0 or
+                e["baseline_features"] != list(BASELINE_FEATURES) or
+                e["added_features"] != ["added"] or target["kind"] != "mae" or
+                target["start_offset"] != 1 or target["end_offset"] != 21 or
+                target["entry_field"] != "close" or target.get("path_field", "close") != "close" or
+                target.get("price_measure", "economic_price") != "economic_price" or
+                c.get("training_weights") != "equal_asset" or c["weights"]["policy"] != "equal_asset" or
+                s["label_policy"] != "purge" or s.get("evaluation_label_policy") != "contained" or
+                s["folds"] != [
+                    {"train_end": "2024-12-31", "eval_start": "2025-01-01", "eval_end": "2025-12-31"},
+                    {"train_end": "2025-12-31", "eval_start": "2026-01-01", "eval_end": "2026-06-30"}] or
+                metric["name"] != "RMSE" or c["dependence"].get("axis_scope") != "evaluation"):
+            _fail("workflow.evaluator", "pullback-layer study freezes B1 plus layer change, two risk20 ridge folds")
+    if feature["kind"] == "key_fluctuation_information":
+        if (e["kind"] != "prediction_ols" or
+            e["baseline_features"] != ["r1", "ret3", "ret20", "vol20", "ema20_distance", "asset_510050", "asset_510500", "asset_588000"] or
+            e["added_features"] != ["added"] or target["kind"] != "mae" or
+            target["start_offset"] != 1 or target["end_offset"] != 21 or
+            target["entry_field"] != "close" or target.get("path_field", "close") != "close" or
+            target.get("price_measure", "economic_price") != "economic_price" or
+            c.get("training_weights", "equal_asset") != "equal_asset" or
+            c["weights"]["policy"] != "equal_asset" or
+            s["label_policy"] != "purge" or s.get("evaluation_label_policy") != "contained" or
+            s["folds"] != [
+                {"train_end": "2024-12-31", "eval_start": "2025-01-01", "eval_end": "2025-12-31"},
+                {"train_end": "2025-12-31", "eval_start": "2026-01-01", "eval_end": "2026-06-30"}] or
+            metric["name"] != "RMSE"):
+            _fail("workflow.evaluator", "K01 freezes eight known baseline fields plus K, zero-penalty OLS and two contained MAE20 folds")
+    if feature["kind"] == "profile_overhead_information":
+        if (e["kind"] != "prediction_ols" or
+            e["baseline_features"] != ["r1", "ret3", "ret20", "vol20", "ema20_distance",
+                                       "sma60_atr_distance", "prior20_high_atr_distance",
+                                       "prior120_high_atr_distance", "price_only_overhead_ratio",
+                                       "asset_510050", "asset_510500", "asset_588000"] or
+            e["added_features"] != ["added"] or target["kind"] != "forward_return" or
+            target["start_offset"] != 1 or target["end_offset"] != 21 or
+            target["entry_field"] != "close" or target.get("price_measure", "economic_price") != "economic_price" or
+            e.get("lambda") != 0 or e.get("rcond") != 1e-12 or
+            c.get("training_weights") != "equal_asset" or c["weights"]["policy"] != "equal_asset" or
+            s["label_policy"] != "purge" or s.get("evaluation_label_policy") != "contained" or
+            s["folds"] != [
+                {"train_end": "2024-12-31", "eval_start": "2025-01-01", "eval_end": "2025-12-31"},
+                {"train_end": "2025-12-31", "eval_start": "2026-01-01", "eval_end": "2026-06-30"}] or
+            metric["name"] != "RMSE"):
+            _fail("workflow.evaluator", "P01 freezes 12 price/geometry fields plus profile ratio, equal-asset twofold return20 OLS")
+    if feature["kind"] == "double_ma_order_information":
+        if (e["kind"] != "prediction_ols" or e["baseline_features"] != ['distance_sma20', 'distance_sma60', 'distance_sma120', 'distance_ema20', 'distance_ema60', 'distance_ema120', 'ret20', 'vol20', 'sma60_up5', 'asset_510050', 'asset_510500', 'asset_588000'] or e["added_features"] != ["added"] or target["kind"] != "mae" or target["start_offset"] != 1 or target["end_offset"] != 21 or target["entry_field"] != "close" or target.get("path_field", "close") != "close" or target.get("price_measure", "economic_price") != "economic_price" or c["weights"]["policy"] != "equal_asset" or c.get("training_weights") != "equal_asset" or s["label_policy"] != "purge" or s.get("evaluation_label_policy") != "contained" or s["folds"] != [{'train_end': '2024-12-31', 'eval_start': '2025-01-01', 'eval_end': '2025-12-31'}, {'train_end': '2025-12-31', 'eval_start': '2026-01-01', 'eval_end': '2026-06-30'}] or metric["name"] != "RMSE" or metric["attention_threshold"] != 0.10 or c["dependence"].get("axis_scope") != "evaluation"):
+            _fail("workflow.evaluator", "T03 freezes exact pairedOLS/X/MAE20/RMSEpp/evaluationaxis/twofold design")
+    if feature["kind"] == "future_deduction_box_information":
+        if (e["kind"] != "prediction_ols" or
+            e["baseline_features"] != ["prior20high_distance", "ret20", "ema20_distance", "r1", "vol20", "sma60_up", "asset_510050", "asset_510500", "asset_588000"] or
+            e["added_features"] != ["added"] or
+            target["kind"] != "mae" or target["start_offset"] != 1 or
+            target["end_offset"] != 21 or target["entry_field"] != "close" or
+            target.get("path_field", "close") != "close" or
+            target.get("price_measure", "economic_price") != "economic_price" or
+            c.get("training_weights", "equal_asset") != "equal_asset" or
+            c["weights"]["policy"] != "equal_asset" or
+            s.get("evaluation_label_policy") != "contained" or
+            s["folds"] != [
+                {"train_end": "2024-12-31", "eval_start": "2025-01-01", "eval_end": "2025-12-31"},
+                {"train_end": "2025-12-31", "eval_start": "2026-01-01", "eval_end": "2026-06-30"}]):
+            _fail("workflow.target", "D01 freezes paired equal-asset OLS and two contained t+1..t+21 MAE folds")
+    if feature["kind"] == "simple_top3_information" and (e["kind"] != "prediction_ridge" or target["kind"] != "mae" or target["start_offset"] != 1 or target["end_offset"] != 21 or target["entry_field"] != "close" or target.get("path_field", "close") != "close" or target.get("price_measure", "economic_price") != "economic_price"):
+        _fail("workflow.target", "T01 freezes fixed t+1..t+21 closing-path MAE prediction")
     if e["kind"] == "event_risk" and (feature["kind"] not in {"decline_event", "volume_anomaly_information"} or target["kind"] != "downside_event"):
         _fail("workflow.evaluator", "event/risk adapter requires an event and a risk target")
     if feature["kind"] == "volume_anomaly_information" and (e["kind"] != "event_risk" or target["kind"] != "downside_event" or target["start_offset"] != 1 or target["end_offset"] != 21 or target["threshold"] != 5 or target["entry_field"] != "close" or target.get("price_measure", "economic_price") != "economic_price"):
@@ -445,6 +712,8 @@ def validate_workflow_contract(contract: dict) -> None:
         if type(desc["minimum_each_background"]) is not int or desc["minimum_each_background"] < 1:
             _fail("workflow.descriptive.minimum_each_background", "positive common-support minimum needed")
     b = _mapping(c["budget"], "workflow.budget", {"scientific_variants", "execution_seconds", "max_rows"})
+    if feature["kind"] == "ema_sma_waiting_path" and (type(b.get("real_runs")) is not int or b["real_runs"] < 0):
+        _fail("workflow.budget.real_runs", "waiting path requires an explicit nonnegative real-run ceiling")
     for key in ("scientific_variants", "max_rows"):
         if type(b[key]) is not int or b[key] < 1:
             _fail(f"workflow.budget.{key}", "must be positive integer")
@@ -522,6 +791,10 @@ def _validate_research_design(contract: dict) -> None:
         _fail("workflow.research_design.sample_fit.episodes", "must be a nonnegative integer or null")
     evaluator = contract["evaluator"]
     features = set(evaluator["baseline_features"]) | set(evaluator["added_features"])
+    if evaluator["kind"] == "waiting_path_description":
+        if sample["model_feature_count"] != 0 or sample["decision"] != "describe_only":
+            _fail("workflow.research_design.sample_fit", "waiting-path description requires decision=describe_only and zero model features")
+        return
     if sample["model_feature_count"] != len(features):
         _fail("workflow.research_design.sample_fit.model_feature_count", "must equal the distinct baseline and added feature count")
     decision = sample["decision"]

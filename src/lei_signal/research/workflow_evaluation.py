@@ -159,6 +159,54 @@ def _ridge(train: pd.DataFrame, evaluation: pd.DataFrame, cols: list[str], polic
     return prediction, fit
 
 
+def _ols_design(train: pd.DataFrame, evaluation: pd.DataFrame, cols: list[str], policy: str) -> dict[str, Any]:
+    """Validate only X before any fold can inspect a target or fit coefficients."""
+    w = _weights(train, policy)
+    x = np.array([[r[c] for c in cols] for r in train.features], dtype=float).reshape(len(train), len(cols))
+    xe = np.array([[r[c] for c in cols] for r in evaluation.features], dtype=float).reshape(len(evaluation), len(cols))
+    mean = w @ x
+    std = np.sqrt(w @ ((x - mean) ** 2))
+    zero = std < 1e-12
+    std[zero] = 1.0
+    z, ze = (x - mean) / std, (xe - mean) / std
+    z[:, zero] = 0.0
+    ze[:, zero] = 0.0
+    weighted = np.sqrt(w)[:, None] * z
+    _, singular, vt = np.linalg.svd(weighted, full_matrices=True)
+    rank = int(np.sum(singular > (singular[0] * 1e-12 if len(singular) else 0)))
+    nonzero = int(np.sum(~zero))
+    residual = float(np.max(np.abs(ze @ vt[rank:].T))) if rank < len(cols) and len(ze) else 0.0
+    if rank < nonzero and residual > 1e-10:
+        raise EvaluationError("prediction_ols: training linear dependence fails on evaluation X")
+    return {"w": w, "z": z, "ze": ze, "weighted": weighted,
+            "mean": mean, "std": std, "zero": zero, "rank": rank,
+            "singular_values": singular.tolist(), "dependence_evaluation_residual": residual,
+            "nonzero_columns": nonzero, "features": cols}
+
+
+def _ols_fit(train: pd.DataFrame, design: dict[str, Any]) -> tuple[np.ndarray, dict[str, Any]]:
+    w = design["w"]
+    y = train.y.to_numpy(float)
+    intercept = float(w @ y)
+    coef, _, rank, singular = np.linalg.lstsq(
+        design["weighted"], np.sqrt(w) * (y - intercept), rcond=1e-12)
+    if rank != design["rank"]:
+        raise EvaluationError("prediction_ols: SVD rank changed between preflight and fit")
+    prediction = intercept + design["ze"] @ coef
+    cols = design["features"]
+    detail = {"features": cols, "mean": design["mean"].tolist(),
+              "std": design["std"].tolist(), "coef": coef.tolist(),
+              "intercept": intercept, "lambda": 0.0, "rcond": 1e-12,
+              "rank": int(rank), "singular_values": singular.tolist(),
+              "weight_sum": float(w.sum()), "training_rows": len(train),
+              "zero_variance": [c for c, flag in zip(cols, design["zero"]) if flag],
+              "dependence_evaluation_residual": design["dependence_evaluation_residual"],
+              "negative_prediction_rows": int(np.sum(prediction < 0)),
+              "raw_min": float(prediction.min()), "raw_max": float(prediction.max()),
+              "clipped_rows": 0}
+    return prediction, detail
+
+
 def _event(train: pd.DataFrame, evaluation: pd.DataFrame, cols: list[str], policy: str) -> tuple[np.ndarray, dict[str, Any]]:
     w = _weights(train, policy)
     train_mean = float(w @ train.y.to_numpy(float))
@@ -187,14 +235,16 @@ def evaluate_observations(observations: Sequence[Mapping[str, Any]], contract: M
     folds = _folds(contract)
     evaluator = contract.get("evaluator", {})
     kind = evaluator.get("kind")
-    if kind not in {"prediction_ridge", "event_risk"} or evaluator.get("version") != VERSION:
+    if kind not in {"prediction_ridge", "prediction_ols", "event_risk"} or evaluator.get("version") != VERSION:
         raise EvaluationError("evaluator: unsupported kind/version")
     if kind == "prediction_ridge" and evaluator.get("lambda") != 1.0:
         raise EvaluationError("evaluator.lambda: first version freezes normalized penalty at 1")
+    if kind == "prediction_ols" and (binary or evaluator.get("lambda", 0) != 0 or evaluator.get("rcond", 1e-12) != 1e-12):
+        raise EvaluationError("prediction_ols: continuous target, zero penalty and rcond=1e-12 required")
     if kind == "event_risk" and not binary:
         raise EvaluationError("event_risk: frequency evaluator requires up/downside_event binary target")
-    baseline = evaluator.get("baseline_features", []) if kind == "prediction_ridge" else ["existing_state"]
-    added = evaluator.get("added_features", []) if kind == "prediction_ridge" else ["added"]
+    baseline = evaluator.get("baseline_features", []) if kind != "event_risk" else ["existing_state"]
+    added = evaluator.get("added_features", []) if kind != "event_risk" else ["added"]
     if not isinstance(baseline, list) or not isinstance(added, list) or not added or any(not isinstance(c, str) or not c for c in baseline + added):
         raise EvaluationError("evaluator features: require declared names and added information")
     if len(set(baseline + added)) != len(baseline + added):
@@ -221,6 +271,20 @@ def evaluate_observations(observations: Sequence[Mapping[str, Any]], contract: M
         if contract["split"].get("evaluation_label_policy") == "contained" and len(ev):
             ev = ev.loc[ev.label_end <= fold["eval_end"]].copy()
         prepared.append((fold, train, ev))
+    # All X-only rank checks precede every outcome fit, including later folds.
+    designs = {}
+    if kind == "prediction_ols":
+        for fold, train, ev in prepared:
+            if len(train) < evaluator.get("minimum_training_rows", 1) or not len(ev):
+                continue
+            for model, cols in (("B1", baseline), ("B2", baseline + added)):
+                designs[(fold["name"], model)] = _ols_design(train, ev, cols, training_policy)
+            first, second = designs[(fold["name"], "B1")], designs[(fold["name"], "B2")]
+            if second["rank"] == first["rank"]:
+                # An added column spanned by B1 may only be reused when the
+                # same relationship holds in evaluation; _ols_design checks it.
+                if second["dependence_evaluation_residual"] > 1e-10:
+                    raise EvaluationError("prediction_ols: added feature loses B1 span in evaluation")
     predictions, warnings, fit_details = [], [], []
     total_training_rows, fits = 0, 0
     for fold, train, ev in prepared:
@@ -231,7 +295,16 @@ def evaluate_observations(observations: Sequence[Mapping[str, Any]], contract: M
         train_mean = float(_weights(train, training_policy) @ train.y.to_numpy(float))
         predicted = {"B0": np.full(len(ev), train_mean)}
         for model, cols in [("B1", baseline), ("B2", baseline + added)]:
-            predicted[model], detail = (_ridge(train, ev, cols, training_policy, binary) if kind == "prediction_ridge" else _event(train, ev, cols, training_policy))
+            if kind == "prediction_ols":
+                predicted[model], detail = _ols_fit(train, designs[(fold["name"], model)])
+            elif kind == "prediction_ridge":
+                predicted[model], detail = _ridge(train, ev, cols, training_policy, binary)
+            else:
+                predicted[model], detail = _event(train, ev, cols, training_policy)
+            if kind == "prediction_ols" and model == "B2" and detail["rank"] == designs[(fold["name"], "B1")]["rank"]:
+                if not np.allclose(predicted["B1"], predicted["B2"], rtol=0, atol=1e-10):
+                    raise EvaluationError("prediction_ols: spanned added feature prediction differs from B1")
+                detail["added_spanned_by_baseline"] = True
             fit_details.append({"fold": fold["name"], "model": model, "training_weights": training_policy, **detail})
             fits += 1
             if detail.get("zero_variance"):
