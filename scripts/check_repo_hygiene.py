@@ -93,7 +93,8 @@ DOCS_KEEP = {
 }
 DOCS_KEEP_DIRS = {
     "archive", "artifacts", "experiments", "literature-learning", "okr",
-    "ops", "prompts", "reports", "research", "superpowers", "timing-sweep",
+    "ops", "progress", "prompts", "reports", "research", "superpowers", "timing-sweep",
+    # 2026-10-03 用户指定的跨任务实时进展入口；阶段历史仍在 ops/work-progress。
 }
 
 TESTS_KEEP_FILES = {"__init__.py", "conftest.py"}
