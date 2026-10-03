@@ -1,3 +1,23 @@
+# 当前实施阶段（优先于下方历史记录）
+
+- 更新时间：2026-10-03 11:18:35 UTC（UTC；用户时区Asia/Shanghai）。
+- 状态active。用户已确认市场理解统一入口方案，并于2026-10-03再次要求“继续大范围的做吧，按照我们的目标去做”；进入有限第一版开发，不是交接、不结束原任务。
+- 规则读取commit：8778bd3f417834f49885047afddc22c8d72bf2b8；COORDINATION.md v1.0、SHA256 6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0。
+- 工作分支沿用task/investor-observation-map-progress，实施基础/最近已推成果d58a0740502207ca6dfeb9c9f18b1c135aa54632。新原生隔离工作区创建成功，不切换共享脏区。
+- 已完成：50组目录、12张详细解释卡、来源与覆盖审计、设计文档均在基础提交。当前没有新市场实验。
+- 正在做：独立页/market-understanding，8类知识目录、A股/美股和趋势/定投/价值阅读顺序、来源状态、ETF显式暴露范围联系；已有观察接口只读消费。内容用于理解市场，不产生交易信号或账户建议。
+- 本轮准确写范围：web/src/pages/MarketUnderstandingPage.tsx；web/src/features/market-understanding/内内容、只读适配与样式；web/src/App.tsx仅新增import/route；web/src/components/TopNav.tsx仅新增常驻入口；web/run-market-understanding-regression.mjs；web/package.json仅本项检查命令；docs/superpowers/plans/2026-10-03-market-understanding-implementation.md、已确认spec状态、自身两进度及docs/archive/handoffs-plans/market-understanding-ui-2026-10-03/验证证据。必要浏览器人工夹具仅测试使用，不混入真实读数。
+- 依赖差异：基础分支没有另一工作分支的observations接口。按已发布55d8aa96b45d97b09901ded4ebf78f490bbb7f6b契约读取/api/fundamentals/observations；未具备接口的环境明确显示“未接通”，知识内容仍可使用。后端整合未授权借此自动合并；不复制他人未提交内容或宣称已接通。
+- 重叠核对：已读13任务及ce4a以来唯一技术C状态变更，未见上述新页/目录或App/TopNav入口块被认领。market-observation继续维护原观察卡/日期/CPI/宏观单位映射，本方不改其组件和原页面、不重做情绪/宽度/宏观/技术实验。未登记范围未知；此记录不是排他锁，出现同块冲突先暂停该块。
+- 下一步：实现并检查市场隔离、加载/失败/缺失/历史日期、知识筛选、显式ETF条件与未知状态、桌面/窄屏与键盘；再推本任务工作分支及本记录。验证未运行，不预写通过。
+- 预算：既有来源累计12/12保持，新网页检索0、新实验/拟合/付费0；本轮只做既有证据的软件展示。没有市场进程/checkpoint；开发助手/本地预览按实际启动再登记。权重不适用，不上传策略原件、原始调查资料、数据库或凭证。
+- 尚未完成：新界面实现及验证、观察后端在此分支的整合、FINRA/CFTC/ETF产品具体取数、事件日历的真实接入。后四项不作为已完成或本轮独占。
+- 新版重要变化：上轮“设计待审阅/不写web”为历史状态；用户已批准后开始上述有限开发。投资效果及线上收益仍未测量。
+
+---
+
+## 既往证据与历史状态（保留原文；当前状态以上为准）
+
 # A股与美股专业投资观察地图
 
 - task-id：investor-observation-map（沿用原任务稳定标识；已接入，更新原记录，不重启任务）。
