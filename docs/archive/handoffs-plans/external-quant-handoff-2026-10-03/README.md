@@ -25,3 +25,7 @@
 本包自检：manifest 不纳入自身与 SHA256SUMS；SHA256SUMS 纳入 manifest、排除自身，以避免循环哈希。包含本目录的准确交付提交可用 `git log -1 --format=%H -- docs/archive/handoffs-plans/external-quant-handoff-2026-10-03` 定位；最终推送收据不写入自身提交。
 
 最低恢复已实测：新虚拟环境安装成功，56项唯一测试已有通过证据（修补遗漏V2配置后复查5项），迁移目录真实保存预测只读检查通过且原件不变。Linux/Windows、FactorHub真实访问仍未验证；补充包仍未交远端。磁盘空间造成整仓检出失败，记录保留。
+
+## 已验证远端交付
+
+首次代码/文档交付提交 `725478cb15750c4b4f16e409a591b8b55489cad1`，独立分支 `codex/handoff-external-quant-20261003`，仓库 https://github.com/lige1687/biao-signal-system。已从远端重新获取并核对313个包文件的大小和SHA；本次追加的发布收据和阶段记录位于同分支后续提交，以Git目录历史核最终版本，避免文件写入自身SHA造成循环。补充资料仍未交远端。
