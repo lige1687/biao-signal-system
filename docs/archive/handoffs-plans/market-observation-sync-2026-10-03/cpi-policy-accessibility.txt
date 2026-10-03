@@ -1,0 +1,77 @@
+Browser tab: 2, Title: "BIAO 看盘系统", URL: "http://127.0.0.1:18044/fundamentals#fund-sec-usmacro".
+0 AXWebArea BIAO 看盘系统, URL: 127.0.0.1:18044/fundamentals#fund-sec-usmacro
+	1 text 人工CPI显示验收：所有数字均为人工资料，其他接口不可用；不是市场页面或生产服务。
+	2 container root
+		3 container 主导航
+			4 link Description: BIAO 看盘首页, Value: 127.0.0.1:18044/
+			5 link Description: 看盘, Value: 127.0.0.1:18044/
+			6 link Description: 行业板块, Value: 127.0.0.1:18044/sectors
+			7 link Description: 情绪, Value: 127.0.0.1:18044/sentiment
+			8 link Description: 今日操作, Value: 127.0.0.1:18044/ops
+			9 link Description: 我的持仓, Value: 127.0.0.1:18044/portfolio
+			10 link Description: 监督待办, Value: 127.0.0.1:18044/plans
+			11 button (collapsed) 资讯与认知, Secondary Actions: Expand
+				12 text 资讯与认知
+			13 button (collapsed) 策略研究, Secondary Actions: Expand
+				14 text 策略研究
+			15 link Description: 工作台, Value: 127.0.0.1:18044/agent
+			16 button AI 助手, Help: AI 助手：问行情、查信号、复盘对话
+		17 heading 基本面参考, Value: 1
+			18 text 基本面参考
+		19 text 叙事标注层：解释"为什么"，不参与技术判定、不做硬过滤 概览生成于
+		20 text 未知
+		21 text 数据源
+		22 text 未知
+		23 button 刷新
+		35 text 部分数据源暂不可用（其余内容不受影响）：
+		36 container
+			37 text ·  概览 资料读取失败
+		38 container
+			39 text ·  利率 资料读取失败
+		40 container
+			41 text ·  利率历史 资料读取失败
+		42 container
+			43 text ·  经济历史 资料读取失败
+		44 container
+			45 text ·  大宗商品 资料读取失败
+		46 container
+			47 text 加载失败： artificial fixture: other endpoints deliberately unavailable
+		24 container 分区导航
+			25 button 市场环境, Help: 当前宽度与情绪、产品强弱和历史变化
+			26 button 利率, Help: 价格的标尺 / 资本的成本
+			27 button 长周期叠加, Help: 利率 / 两融 × 股指（20 年级，可滑动缩放）
+			28 button 经济与物价, Help: 就业 / 物价 / 景气
+			29 button 美国宏观, Help: 就业 / 房产 / 汽车 / WEI / 物价 / 订单（FRED）
+		30 container
+			31 text 美国宏观  消费驱动型经济体检（FRED，无需 API key）
+		32 container
+			33 text CPI同比（人工验收资料） 较高 4.50% 月更 · 2026-09-01 · 人工值，不能用于市场判断
+			34 container 点击查看大图；可滚轮缩放、拖拽平移
+		48 container
+			49 heading CPI同比（人工验收资料）当前 4.50% · 较高（近 9 月）, Value: 2
+				50 text CPI同比（人工验收资料） 当前 4.50% · 较高（近 9 月）
+			51 button 关闭
+			52 text 图中虚线分界线可上下拖动，标签实时显示当前阈值（仅本地探索，不改变判断依据）。 滚轮缩放 / 底部滑块拖拽可任意选窗口。
+			53 heading 区间与判断依据, Value: 5
+				54 text 区间与判断依据
+			55 content list
+				56 container
+					57 AXListMarker 1. 
+					58 text 通缩 （≤ 0） ： < 0：通缩压力
+				59 container
+					60 AXListMarker 2. 
+					61 text 较低 （≤ 2） ： 0–2%：CPI同比处于本页较低参考区间；不能据此判断联储目标达成或政策宽松
+				62 container
+					63 AXListMarker 3. 
+					64 text 温和 （≤ 3） ： 2–3%：CPI同比处于本页参考区间；联储长期2%目标针对PCE价格指数
+				65 container
+					66 AXListMarker 4. 
+					67 text 偏高 （≤ 4） ： 3–4%：CPI同比处于本页偏高参考区间；不能仅据此推断加息或宽松
+				68 container
+					69 AXListMarker 5. 
+					70 text 较高 ： > 4%：CPI同比高于本页最高参考分界；不能仅据此推断利率路径或ETF涨跌
+			71 heading 数据与分界线来源, Value: 5
+				72 text 数据与分界线来源
+			73 text 数据来源：美国劳工部城市 CPI CPIAUCSL（FRED，月频，季调），同比由本系统计算。2% 为本页对照线；联储长期2%目标针对个人消费支出物价指数（PCE）的年度变化，不能把CPI直接等同政策目标。配油金比看整体通胀。
+
+The focused UI element is 0 AXWebArea BIAO 看盘系统, URL: 127.0.0.1:18044/fundamentals#fund-sec-usmacro

@@ -228,8 +228,8 @@ export const US_CPI_ZONES: readonly ZoneLevel[] = [
   { max: 0, label: "通缩", tone: "warning", note: "< 0：通缩压力" },
   { max: 2, label: "较低", tone: "neutral", note: "0–2%：CPI同比处于本页较低参考区间；不能据此判断联储目标达成或政策宽松" },
   { max: 3, label: "温和", tone: "neutral", note: "2–3%：CPI同比处于本页参考区间；联储长期2%目标针对PCE价格指数" },
-  { max: 4, label: "偏高", tone: "caution", note: "3–4%：偏高，紧缩压力" },
-  { max: Infinity, label: "高通胀", tone: "danger", note: "> 4%：高通胀（2022 峰值 9.1%）" },
+  { max: 4, label: "偏高", tone: "caution", note: "3–4%：CPI同比处于本页偏高参考区间；不能仅据此推断加息或宽松" },
+  { max: Infinity, label: "较高", tone: "danger", note: "> 4%：CPI同比高于本页最高参考分界；不能仅据此推断利率路径或ETF涨跌" },
 ];
 
 /** 耐用品订单同比区间（%，替代未上架 FRED 的 ISM PMI） */

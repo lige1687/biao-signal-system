@@ -15,12 +15,14 @@ def main():
     parser.add_argument("--dist", type=Path, required=True)
     parser.add_argument("--port", type=int, default=18043)
     parser.add_argument("--seconds", type=int, default=600)
+    parser.add_argument("--cpi-value", type=float, default=2.5)
     args = parser.parse_args()
     dist = args.dist.resolve()
     assert (dist / "index.html").is_file(), "Build web/dist first"
     finished = False
     dates = [f"2026-{month:02d}-01" for month in range(1, 10)]
     values = [1.1, 1.5, 1.8, 2.1, 2.3, 2.7, 2.5, 2.8, 2.5]
+    values[-1] = args.cpi_value
     payload = {"as_of": "2026-09-01", "items": [{"key": "cpiaucsl_yoy",
         "name_cn": "CPI同比（人工验收资料）", "freq": "月", "date": dates[-1],
         "value": values[-1], "note_cn": "人工值，不能用于市场判断"}],

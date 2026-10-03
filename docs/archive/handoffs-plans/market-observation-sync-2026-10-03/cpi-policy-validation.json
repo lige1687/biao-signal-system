@@ -1,0 +1,67 @@
+{
+  "checked_at": "2026-10-03T14:10:53.995376+08:00",
+  "timezone": "Asia/Shanghai",
+  "work_base": "5106f18ad6ffaf11f8fbf88a33427fbe936530fd",
+  "coordination_started_after_verified": "067b29d17c0488d04edeba8d056dbed424433cd0",
+  "latest_overlap_review": "9c994de31b2c325ee49080df50009e3369a52f55",
+  "files_changed": [
+    "web/src/components/trend/zones.ts US_CPI_ZONES two lines"
+  ],
+  "unchanged": "all numeric boundaries and tones; trading rules; all other production code",
+  "build_command": "cd web && ./node_modules/.bin/vite build",
+  "build_exit_code": 0,
+  "build_modules": 767,
+  "build_seconds": 2.85,
+  "build_warning": "existing chunks larger than 500kB; not optimized in this task",
+  "fixture_command": "python3 docs/archive/handoffs-plans/market-observation-sync-2026-10-03/cpi_browser_fixture.py --dist web/dist --port 18044 --cpi-value 4.5 --seconds 600",
+  "browser_actions": [
+    "open actual built /fundamentals#fund-sec-usmacro",
+    "click CPI chart",
+    "read real drawer accessibility text",
+    "inspect screenshot"
+  ],
+  "checks": {
+    "old_tightening_claim_absent": true,
+    "policy_and_price_limit_visible": true,
+    "two_percent_reference_line_visible": true,
+    "PCE_explanation_visible": true,
+    "artificial_4_5_percent_label_visible": true,
+    "thresholds_and_tones_equal_original": true
+  },
+  "artifacts": [
+    {
+      "path": "docs/archive/handoffs-plans/market-observation-sync-2026-10-03/cpi-policy-browser.jpg",
+      "bytes": 78592,
+      "sha256": "28b61d0d4ac27fe951d01ec51af70fdc6b6d62c92ba0bc489d7361c22b348294"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/market-observation-sync-2026-10-03/cpi-policy-accessibility.txt",
+      "bytes": 4328,
+      "sha256": "7694aff586c0a6b0b9920c241fb438b9c02afd34acdbb1fbeb2e44f3196f8d6f"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/market-observation-sync-2026-10-03/cpi-policy-copy-review.md",
+      "bytes": 1914,
+      "sha256": "4d02fb97a96f78caf04039e234cff5ca03ed624758f91ffaedbd68ed917cfd22"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/market-observation-sync-2026-10-03/cpi_browser_fixture.py",
+      "bytes": 3533,
+      "sha256": "087cfcbde8c91c2abe5c5a2f94570d74f9182d72c5a726f5f2a15d703d236392"
+    }
+  ],
+  "fixture_status": "owned fixture stopped; created browser tab closed",
+  "new_market_source_requests": 0,
+  "new_market_fits": 0,
+  "sealed_experiments_rerun": 0,
+  "not_verified": [
+    "real upstream CPI",
+    "Linux and mobile",
+    "full-page usability",
+    "account and production benefit"
+  ],
+  "strategy_sha256": {
+    "technical_system": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "implementation": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  }
+}
