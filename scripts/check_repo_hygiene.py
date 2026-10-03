@@ -25,6 +25,7 @@ REPO = Path(__file__).resolve().parents[1]
 ROOT_KEEP_FILES = {
     ".DS_Store", ".env", ".env.example", ".gitignore", ".plan.md",
     "AGENTS.md", "CLAUDE.md", "README.md", "pyproject.toml",
+    "COORDINATION.md", ".git",  # 协调入口与 Git worktree 指针文件
     "project.config.json", "project.private.config.json",
 }
 ROOT_KEEP_DIRS = {
@@ -93,6 +94,7 @@ DOCS_KEEP = {
 DOCS_KEEP_DIRS = {
     "archive", "artifacts", "experiments", "literature-learning", "okr",
     "ops", "prompts", "reports", "research", "superpowers", "timing-sweep",
+    "coordination",  # 跨任务状态目录，权威副本位于 coordination/lei
 }
 
 TESTS_KEEP_FILES = {"__init__.py", "conftest.py"}
