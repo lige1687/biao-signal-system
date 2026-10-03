@@ -1,3 +1,23 @@
+# 当前active：观测日期核实、四组图表与连续宏观追问
+
+更新时间：2026-10-04T01:29:28.672087+08:00。原负责人/root继续，非接管；task-id不变。
+
+用户已认可下一阶段方案并明确“开始做吧，推全”“继续哈”：先基础数据可信度，再四组图表、变化摘要和超级Agent连续追问。基线/最近已推63eaa0be1ce36b844c2d70792fdc917eb35f0234，工作分支task/investor-observation-map-progress；尚无新增实现，仅本地只读核查。规则读取80d3af5fda978b6e9be738234232405c8a49613a，v1.0不变。
+
+本轮具体写范围：web/src/features/market-understanding自有data-quality/observation-model/ObservationPanel、dashboard-model/use-market-data/MarketDashboard/IndexComparison/MacroReadingPanel/macro-reading及样式；AgentWorkspacePage仅已有宏观入口的上下文保持；自有run-market测试与package；本轮dated spec/plan/report/raw、两进度、registry/INDEX仅自身条目。必要来源解析修复仅fundamentals/sources.py的沪深300 PE历史函数及独立测试，不认领全后端。不改原聊天/交易/技术判定/Streamlit/他人研究。
+
+正在核查：现有8000后台cwd为共享原checkout，不是本工作分支；只读返回沪深300估值每月1点，原元数据称日频。尚不能据此声称真实上游已修复。实现将显式显示实际观测间隔/来源与发布修订缺口，避免月度当每日；按相同输入构建增长通胀利率、估值盈利利率、融资资金指数、信用波动指数四组合（缺输入保留缺口），页面与Agent共用变化摘要，保留连续追问上下文。验收日期/频率/缺数/不同期不混写、回图、更新后回答同步、桌面手机实际流程。
+
+对照market-observation archived、dot-pro三源资格blocked、sentiment板块/NAAIM效果、technical EMA/黑绿、external FactorMiner、risk日内隔夜及classic现阶段，没有已登记同文件/同实验冲突。记录不是锁；不重抓T10Y3M/DTWEXBGS/Fed EBP、不研究AAII/NAAIM效果、不跑金融大实验。其他AI暂避上述实际块和沪深300历史解析修复；新FINRA/CFTC/盈利预期仅本阶段来源资格核查，不宣称整方向独占。
+
+采用report_only来源核实+软件改进；本阶段必要官方来源请求上限6次（含失败），当前0；旧每阶段6/6、宏观18/18及封存QQQ/VXN预算不重置。拟合/回测/训练/付费/新代理0。阻塞：逐期首次发布和修订/许可、完整中国日历、盈利预期/资金流、FINRA/CFTC输入尚缺；可独立工程继续，不以这些缺口终止全阶段。
+
+运行状态：原API1753/8000不动；原自有26760已退出，当前无5185自有预览（后续确认空端口再启动）；无本题金融进程/checkpoint；远端进程未知。没有复制/迁移进程或杀其他进程。旧未跟踪截图/恢复副本保留且不上传。已测仅本地API只读日期检查，不代表真实来源资格；尚未执行新代码测试。重要负结果保留旧报告/raw，用户理解/线上收益未测量。
+
+下一步：此记录推送核回后按已批准方案实现和必要检查；完整保存准确小产物与源码并推本工作分支，阶段同步协调记录；无main/强推/部署/改权限/资料删除/私人数据上传。
+
+---
+
 # 当前成果：基础证据、四指数对照与超级Agent宏观解读已发布
 
 更新时间：2026-10-04T00:27:47.551418+08:00（Asia/Shanghai）。task-id investor-observation-map；负责人「基本面指标」会话01a0fd40-f651-7360-9411-d90f80affdc4/root，原负责人继续，非接管/任务结束。软件阶段completed，原市场理解责任active，资料资格缺口blocked；没有正在运行的新金融实验。
