@@ -730,6 +730,18 @@
     "tests/unit/test_technical_persistence_information.py": {
       "path": "tests/unit/test_technical_persistence_information.py",
       "sha256": "ff1b04cc0357323d2f4876b053cc307dd89a35c1ff2a47274804f69ac496038f"
+    },
+    "docs/experiments/raw/weekly-color-information-2026-10-04/brief.json": {
+      "path": "docs/experiments/raw/weekly-color-information-2026-10-04/brief.json",
+      "sha256": "9b766541fb1688f14ab176977dfb1774c730a904ff2d1ad6b8f96c67d2b49014"
+    },
+    "src/lei_signal/research/weekly_color_information.py": {
+      "path": "src/lei_signal/research/weekly_color_information.py",
+      "sha256": "543830114921d72f107f9ad8de1c927ab7a8917a7465c4f59bb2dd1131358863"
+    },
+    "tests/unit/test_weekly_color_information.py": {
+      "path": "tests/unit/test_weekly_color_information.py",
+      "sha256": "f6cf3a1fcbb444803d2cb2d3c8f6c02e440a6205ab4833c7e8fcd152503b100b"
     }
   },
   "objects": [
@@ -11354,6 +11366,120 @@
         "docs/experiments/raw/technical-multimethod-2026-10-03/brief.json",
         "src/lei_signal/research/technical_persistence_information.py",
         "tests/unit/test_technical_persistence_information.py",
+        "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
+      ],
+      "component_definition_refs": []
+    },
+    {
+      "id": "research.trend.completed_week_color20",
+      "version": "1.0.0",
+      "name": "上一已完成周的20周绿黑灰状态",
+      "type": "state_signal",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description",
+        "comparison"
+      ],
+      "not_for": [
+        "production_trade",
+        "holding_entry_or_exit",
+        "actual_account_return_claim",
+        "complete_LEI_state",
+        "unique_author_calibration"
+      ],
+      "scope": "四国内宽基ETF已见经济日线聚合的上一完成周背景信息",
+      "spec_anchor": [
+        "桌面技术体系§2.7日周共振",
+        "技术实现§3.2周线完成与§6多周期"
+      ],
+      "spec_layer": "trend_road_information",
+      "definition": {
+        "formula": "上一ISO周最后报价收盘，EMA20以首20完整周SMA播种；green=Cw>EMAw20 and Cw>Cw[-20]; black=Cw<both; elsegray;当前ISO周永不使用；120连续完整周+252连续日；未知周重置",
+        "parameters": {
+          "N_weeks": 20,
+          "daily_warmup": 252,
+          "weekly_warmup": 120,
+          "primary_horizon_days": 20,
+          "week_policy": "previous_iso_week_only"
+        },
+        "unit": "categorical green/black/gray/unknown; green and black binary fields, gray reference",
+        "direction": "颜色表达周道路方向；不预设同向就有新增收益",
+        "transforms": "日线经济价每完整交易周最后报价；EMA20首20完整周SMA播种alpha2/21；周涨幅20/60作已有背景",
+        "nan_policy": "缺报价或行动未知使该周失效并重置连续周；头部不完整周保守丢弃；当前周不用于信号；不造交易周",
+        "endpoints": "在t收盘使用严格早于t所在ISO周的最后完成周；目标t+1..t+21共21收盘20间隔"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "calendar",
+          "action_known"
+        ],
+        "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+        "currency": "CNY ETF经济价格指数",
+        "frequency": "daily_quote_aggregated_to_completed_trading_weeks",
+        "calendar": "源交易日历定义周内应有报价；整周无交易不伪造报价；ISO周边界",
+        "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+      },
+      "dependencies": [],
+      "lifecycle": {
+        "state": "research_ready",
+        "basis": [
+          "docs/experiments/raw/weekly-color-information-2026-10-04/brief.json",
+          "src/lei_signal/research/weekly_color_information.py",
+          "tests/unit/test_weekly_color_information.py"
+        ],
+        "verification_scope": "合成口径/时点及无未来结果来源资格；研究结果由冻结合同和报告给出"
+      },
+      "origin": "原20周期判据应用于已完成交易周；上一ISO周才使用与120周暖启动为本轮保守代理，非完整共振事件或作者唯一标定",
+      "universe": {
+        "version": "weekly-color-four-etf-20261004",
+        "eligibility": "保留四固定ETF全部4340安排日；仅252连续日且120连续有效完成周及所需指标齐全进入效果比较",
+        "warmup": "252连续日+120连续有效交易周；EMA20首20周SMA播种；周内缺失重置",
+        "missing": "未知周、日不足和未成熟分别保留，不把unknown叫gray",
+        "quality_gate": "实际来源资格重新核全部名义OHLC与经济重建；到达及行动完整性未知",
+        "degrade": "只作有限四ETF回顾性信息，非完整ETF总体"
+      },
+      "time": {
+        "observation_time": "t完整收盘后；周输入严格为上一ISO周或更早",
+        "available_at": "报价理论完成时间可核；历史供应商实际到达时间未认证",
+        "decision_at": "t收盘后研究评价",
+        "execution_at": "无交易",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-04 completed-week color research registration"
+      },
+      "validation": {
+        "method": "人工周聚合/EMA/严格判据独立复算、前缀/缺失/权限及冻结演练；效果另用固定共同支持比较",
+        "tolerance": {
+          "absolute": 1e-09,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_weekly_color_information.py"
+        ],
+        "limitations": "周线为日线的确定表达；非新原始资料。保守晚到下一ISO周；不测日周同时变绿事件、三周期共振、小时扩散或资金动作；已见历史"
+      },
+      "status": {
+        "definition_clarity": "fixed_explicit_completed_week_proxy",
+        "data_qualification": "limited_retrospective_economic_ohlc",
+        "implementation": "synthetic_checks_verified",
+        "effectiveness": "not_evaluated",
+        "production": "not_authorized"
+      },
+      "research_owner": "technical_agent",
+      "research_status": "IN_SCOPE",
+      "local_alias": "completed-week-color20",
+      "sources": [
+        "docs/experiments/raw/weekly-color-information-2026-10-04/brief.json",
+        "src/lei_signal/research/weekly_color_information.py",
+        "tests/unit/test_weekly_color_information.py",
         "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
         "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
         "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"

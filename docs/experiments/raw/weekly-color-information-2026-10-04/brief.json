@@ -1,0 +1,70 @@
+{
+  "base_commit": "2ab565017a7a4959af744430339e32a09ce12667",
+  "coordination_read_commit": "80d3af5fda978b6e9be738234232405c8a49613a",
+  "mode": "research",
+  "delivery_mode": "final_only",
+  "question": "上一已完成周的20周黑绿状态，在日线20/60状态及日/周涨跌与波动之后，是否增加未来20日收益或收盘下探信息？",
+  "decision_use": "判断日周共振是新增帮助、重复表达或不稳定；不引入交易过滤",
+  "ref": "research.trend.completed_week_color20@1.0.0",
+  "feature": "上一ISO周最后报价收盘，EMA20以首20完整周SMA播种；green=Cw>EMAw20 and Cw>Cw[-20]; black=Cw<both; elsegray;当前ISO周永不使用；120连续完整周+252连续日；未知周重置",
+  "baseline": [
+    "color20_green",
+    "color20_black",
+    "color60_green",
+    "color60_black",
+    "ema20_up",
+    "ret20",
+    "ret60",
+    "vol20",
+    "week_ret20",
+    "week_ret60",
+    "asset_510050",
+    "asset_510500",
+    "asset_588000"
+  ],
+  "added": [
+    "week20_green",
+    "week20_black"
+  ],
+  "targets": [
+    "forward_return20",
+    "close_mae20"
+  ],
+  "splits": [
+    {
+      "train_end": "2024-12-31",
+      "eval_start": "2025-01-01",
+      "eval_end": "2025-12-31"
+    },
+    {
+      "train_end": "2025-12-31",
+      "eval_start": "2026-01-01",
+      "eval_end": "2026-06-30"
+    }
+  ],
+  "auxiliary": [
+    "all three week states and daily20 crossed groups",
+    "5/10/20/60/120 returns up threshold tails closeMAE MFE and path drawdown",
+    "saved prediction peryear perETF leaveoneETF and constantETFtrainmeans",
+    "synchronous20/60 date blocks draws1000 seed20261004",
+    "independent seededEMA/weekaggregation and savedpredictions arithmetic",
+    "state-only trained color-group means alongside overall/ETF means; 0 additional OLS fits, explicitly estimated from earlier mature training only"
+  ],
+  "budget": {
+    "new_real_fits_max": 8,
+    "core_batches_max": 1,
+    "purposeful_followups_max": 3,
+    "market_requests": 0,
+    "paid_requests": 0,
+    "source_requests_max": 6,
+    "source_requests_used": 0
+  },
+  "falsification": "After qualification, fixed methods; negative improvement, perETF/year reversals or no advantage over simplemeans cannot support stable information; no new threshold/seed/condition search",
+  "selection_history": "all existing history has been examined; later2025/2026 periods not blind prospective data; previous daily20/60 and EMA persistence sealed",
+  "source_sha256": {
+    "system": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "implementation": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+    "panel": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b"
+  },
+  "stopping": "finite singlecandidate/two targets; source/sample missing blocks affected question; after complete necessary evidence close; no old study rerun"
+}

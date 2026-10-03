@@ -299,7 +299,7 @@ def validate_workflow_contract(contract: dict) -> None:
     feature = _mapping(c["feature"], "workflow.feature", {
         "kind", "lookback", "bar_frequency", "missing_policy", "warmup",
     })
-    if feature["kind"] not in {"sma_distance", "decline_event", "a01_signed_band", "a03_pullback_order", "space_prior_target", "ma_cluster_information", "volume_anomaly_information", "key_fluctuation_information", "profile_overhead_information", "simple_top3_information", "future_deduction_box_information", "double_ma_order_information", "slope_change_information", "simple_top_invalidation_information", "pullback_layer_change_information", "prior_top_dual_break_information", "ema_sma_waiting_path", "tsfresh_price_information", "ema_only_wait_age_information", "slope_change_risk_information", "ema_only_wait_age_risk_information", "green_black_state60_information", "ema_direction_persistence_information", "bull_green_transition_information"}:
+    if feature["kind"] not in {"sma_distance", "decline_event", "a01_signed_band", "a03_pullback_order", "space_prior_target", "ma_cluster_information", "volume_anomaly_information", "key_fluctuation_information", "profile_overhead_information", "simple_top3_information", "future_deduction_box_information", "double_ma_order_information", "slope_change_information", "simple_top_invalidation_information", "pullback_layer_change_information", "prior_top_dual_break_information", "ema_sma_waiting_path", "tsfresh_price_information", "ema_only_wait_age_information", "slope_change_risk_information", "ema_only_wait_age_risk_information", "green_black_state60_information", "ema_direction_persistence_information", "bull_green_transition_information", "weekly_color_information"}:
         _fail("workflow.feature.kind", "no implemented adapter for this feature")
     if feature["missing_policy"] not in {"real_quote", "segmented"}:
         _fail("workflow.feature.missing_policy", "must freeze a supported recovery policy")
@@ -308,6 +308,21 @@ def validate_workflow_contract(contract: dict) -> None:
     for key in ("lookback", "warmup"):
         if type(feature[key]) is not int or feature[key] < 1:
             _fail(f"workflow.feature.{key}", "must be a positive bar count")
+    if feature["kind"] == "weekly_color_information":
+        from lei_signal.research.weekly_color_information import DEFINITION_REF, WEEK_WARMUP
+        if (schema_version != "research-workflow/1.1" or feature["lookback"] != 20 or
+                feature["warmup"] != 252 or feature["missing_policy"] != "segmented" or
+                feature.get("week_warmup") != WEEK_WARMUP or
+                feature.get("week_policy") != "previous_iso_week_only" or
+                feature.get("definition_ref") != DEFINITION_REF or
+                c["question"]["factor_refs"] != [DEFINITION_REF] or
+                c["question"].get("sampling") != "daily"):
+            _fail("workflow.feature", "weekly colour requires previous completed ISO week and fixed warmups")
+        if data["mode"] != "synthetic" and (
+                data.get("qualification", {}).get("adapter") != "top_etf_economic/1.0" or
+                c["universe"]["assets"] != ["510300.SS", "510050.SS", "510500.SS", "588000.SS"] or
+                c["question"]["period"] != ["2022-01-04", "2026-06-30"]):
+            _fail("workflow.universe", "weekly colour requires fixed four-ETF history")
     if feature["kind"] in {"ema_direction_persistence_information", "bull_green_transition_information"}:
         from lei_signal.research.technical_persistence_information import REFS
         ref = REFS[feature["kind"]]
@@ -564,7 +579,7 @@ def validate_workflow_contract(contract: dict) -> None:
         if feature["kind"] == "simple_top3_information" and (e["baseline_features"] != ["r1", "ret3", "ret20", "vol20", "black20", "asset_510050", "asset_510500", "asset_588000"] or e["added_features"] != ["added"]):
             _fail("workflow.evaluator", "T01 freezes price, black20 and three ETF identity fields plus the top indicator")
     if e["kind"] == "prediction_ols":
-        if (feature["kind"] not in {"future_deduction_box_information", "double_ma_order_information", "key_fluctuation_information", "profile_overhead_information", "slope_change_information", "simple_top_invalidation_information", "tsfresh_price_information", "ema_only_wait_age_information", "slope_change_risk_information", "ema_only_wait_age_risk_information", "green_black_state60_information", "ema_direction_persistence_information", "bull_green_transition_information"} or
+        if (feature["kind"] not in {"future_deduction_box_information", "double_ma_order_information", "key_fluctuation_information", "profile_overhead_information", "slope_change_information", "simple_top_invalidation_information", "tsfresh_price_information", "ema_only_wait_age_information", "slope_change_risk_information", "ema_only_wait_age_risk_information", "green_black_state60_information", "ema_direction_persistence_information", "bull_green_transition_information", "weekly_color_information"} or
             target["kind"] in {"up", "downside_event"} or e.get("lambda", 0) != 0 or
             e.get("rcond", 1e-12) != 1e-12):
             _fail("workflow.evaluator", "OLS requires continuous target, zero penalty and rcond 1e-12")
@@ -790,6 +805,25 @@ def validate_workflow_contract(contract: dict) -> None:
                 (data["mode"] != "synthetic" and s["folds"] != fixed_folds) or
                 metric["name"] != "RMSE" or c["dependence"].get("axis_scope") != "evaluation"):
             _fail("workflow.technical_persistence", "requires fixed 21-close OLS, exact fields and two historical folds")
+    if feature["kind"] == "weekly_color_information":
+        from lei_signal.research.weekly_color_information import BASELINE_FEATURES, ADDED_FEATURES
+        fixed_folds = [
+            {"train_end": "2024-12-31", "eval_start": "2025-01-01", "eval_end": "2025-12-31"},
+            {"train_end": "2025-12-31", "eval_start": "2026-01-01", "eval_end": "2026-06-30"},
+        ]
+        if (e["kind"] != "prediction_ols" or e["baseline_features"] != list(BASELINE_FEATURES) or
+                e["added_features"] != list(ADDED_FEATURES) or e.get("lambda") != 0 or
+                e.get("rcond") != 1e-12 or e.get("minimum_training_rows") != 32 or
+                target["kind"] not in {"forward_return", "mae"} or
+                target["start_offset"] != 1 or target["end_offset"] != 21 or
+                target["entry_field"] != "close" or target.get("path_field", "close") != "close" or
+                target.get("price_measure") != "economic_price" or
+                c["question"]["target"]["horizon"] != 20 or
+                c.get("training_weights") != "equal_asset" or c["weights"]["policy"] != "equal_asset" or
+                s["label_policy"] != "purge" or s.get("evaluation_label_policy") != "contained" or
+                (data["mode"] != "synthetic" and s["folds"] != fixed_folds) or
+                metric["name"] != "RMSE" or c["dependence"].get("axis_scope") != "evaluation"):
+            _fail("workflow.weekly_color", "requires fixed prior-week two-state 21-close OLS contract")
     w = _mapping(c["weights"], "workflow.weights", {"policy", "comparison"})
     if w["policy"] not in {"equal_asset", "equal_date"} or w["comparison"] != "fixed_common":
         _fail("workflow.weights", "paired comparison requires a supported common weighting policy")

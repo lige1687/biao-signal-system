@@ -1,0 +1,183 @@
+{
+  "at": "2026-10-04T01:54:44.302626+08:00",
+  "workflow_steps": [
+    {
+      "target": "return",
+      "stage": "freeze-01",
+      "entry": "--workflow-draft",
+      "exit_code": 0,
+      "log": "docs/experiments/raw/weekly-color-information-2026-10-04/return/freeze-01.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "synthetic_fits": 2
+    },
+    {
+      "target": "return",
+      "stage": "core-01",
+      "entry": "--workflow-contract",
+      "exit_code": 0,
+      "log": "docs/experiments/raw/weekly-color-information-2026-10-04/return/core-01.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "real_fits": 4,
+      "status": null
+    },
+    {
+      "target": "return",
+      "stage": "accepted-freeze-01",
+      "entry": "--workflow-draft",
+      "exit_code": 0,
+      "log": "docs/experiments/raw/weekly-color-information-2026-10-04/return/accepted-freeze-01.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "synthetic_fits": 2
+    },
+    {
+      "target": "return",
+      "stage": "accepted-01",
+      "entry": "--workflow-contract --reuse-predictions --register-report",
+      "exit_code": 0,
+      "log": "docs/experiments/raw/weekly-color-information-2026-10-04/return/accepted-01.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "real_fits": 0,
+      "status": null
+    },
+    {
+      "target": "risk",
+      "stage": "freeze-01",
+      "entry": "--workflow-draft",
+      "exit_code": 0,
+      "log": "docs/experiments/raw/weekly-color-information-2026-10-04/risk/freeze-01.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "synthetic_fits": 2
+    },
+    {
+      "target": "risk",
+      "stage": "core-01",
+      "entry": "--workflow-contract",
+      "exit_code": 0,
+      "log": "docs/experiments/raw/weekly-color-information-2026-10-04/risk/core-01.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "real_fits": 4,
+      "status": null
+    },
+    {
+      "target": "risk",
+      "stage": "accepted-freeze-01",
+      "entry": "--workflow-draft",
+      "exit_code": 0,
+      "log": "docs/experiments/raw/weekly-color-information-2026-10-04/risk/accepted-freeze-01.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "synthetic_fits": 2
+    },
+    {
+      "target": "risk",
+      "stage": "accepted-01",
+      "entry": "--workflow-contract --reuse-predictions --register-report",
+      "exit_code": 0,
+      "log": "docs/experiments/raw/weekly-color-information-2026-10-04/risk/accepted-01.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "real_fits": 0,
+      "status": null
+    }
+  ],
+  "root_other_steps": [
+    {
+      "entry": "prepare.py",
+      "exit_code": 0
+    },
+    {
+      "entry": "manual independent qualification",
+      "exit_code": 0,
+      "labels_used": false
+    },
+    {
+      "entry": "analyze.py first and expanded descriptive numbers",
+      "exit_codes": [
+        0,
+        0
+      ],
+      "new_fits": 0
+    },
+    {
+      "entry": "write_report.py",
+      "exit_code": 0
+    },
+    {
+      "entry": "baseline-support saved-feature range diagnostic",
+      "exit_code": 0,
+      "new_fits": 0,
+      "post_result": true
+    }
+  ],
+  "delegated_engineering": "engineering.json",
+  "original_source_stdout_preserved": false,
+  "current_real_fits": 8,
+  "accepted_publication_added_real_fits": 0,
+  "root_synthetic_workflow_fits": 8,
+  "source_requests": 0,
+  "market_requests": 0,
+  "paid_requests": 0,
+  "old_sealed_research_rerun": false,
+  "first_coordination_push": "rejected concurrent update; other changed task read and incorporated with ordinary push; no force",
+  "linux_windows_fresh_install": "not_verified",
+  "full_account_live_profit": "not_measured",
+  "hygiene": {
+    "old_checkout_checker_exit": 1,
+    "old_issue": "docs/progress existing whitelist mismatch",
+    "current_checker": "/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/check_repo_hygiene.py",
+    "current_checker_sha256": "a661696b29d685c25388441975be6316d33342c3bcc24040cff5c58a377634bb",
+    "target": "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab",
+    "exit_code": 0,
+    "stdout": "✓ 归置自检通过：根层四层均在白名单内，关键配置均已入库。\n",
+    "mode": "read_only_execute_current_checker_with_target_REPO_no_source_copy_or_change"
+  },
+  "dependency_versions": {
+    "numpy": "2.1.1",
+    "pandas": "2.3.3",
+    "pytest": "8.4.2",
+    "PyYAML": "6.0.3",
+    "pyarrow": "23.0.1"
+  },
+  "evidence_state_readback": {
+    "return": {
+      "execution": "completed",
+      "evidence": "not_supported",
+      "coverage": "declared_scope",
+      "production_authorized": false,
+      "receipt": "0681bd06585f4dc7a8db3a897af8719d"
+    },
+    "risk": {
+      "execution": "completed",
+      "evidence": "not_supported",
+      "coverage": "declared_scope",
+      "production_authorized": false,
+      "receipt": "62910c56a3a940f4abefb2f0f4a2f09f"
+    }
+  },
+  "family_budget_readback": {
+    "return": {
+      "path": "docs/experiments/raw/research-workflow-ledgers-2026-09-29/b6fd552b199c7f1535005032/attempts.jsonl",
+      "execution_seconds_used": 18.56487270699654,
+      "execution_ceiling_seconds": 7200,
+      "note": "existing workflow execution ceiling, not new user-approved total research wall-clock budget"
+    },
+    "risk": {
+      "path": "docs/experiments/raw/research-workflow-ledgers-2026-09-29/fe487ed8a3f70863750314bd/attempts.jsonl",
+      "execution_seconds_used": 19.112650749997556,
+      "execution_ceiling_seconds": 7200,
+      "note": "existing workflow execution ceiling, not new user-approved total research wall-clock budget"
+    }
+  },
+  "portable_check": {
+    "receipt": "portable-receipt.json",
+    "exit_code": 0,
+    "negative_exit_code": 1,
+    "new_fits": 0,
+    "original_manifest_evidence_arithmetic_recovered": true
+  },
+  "branch_boundary": {
+    "publication_branch": "codex/technical-factor-sequence-progress-20261004",
+    "existing_local_checkout_branch": "task/technical-factor-sequence-progress",
+    "dirty_checkout_switched": false,
+    "old_remote_task_branch_retained": true,
+    "authority": "latest user-supplied AGENTS restricts code/progress publication to codex branches; original scope and task-id unchanged"
+  }
+}

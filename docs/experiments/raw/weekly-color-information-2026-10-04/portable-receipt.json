@@ -1,0 +1,17 @@
+{
+  "purpose": "saved evidence and minimum material recovery only; no price data/preflight/thirdparty/no market rerun",
+  "portable_root": "docs/experiments/raw/weekly-color-information-2026-10-04/.portable.local-vcz0xms8",
+  "files_copied": 9,
+  "command": "python3 -S docs/experiments/raw/weekly-color-information-2026-10-04/verify_saved.py --root . --results-only",
+  "exit_code": 0,
+  "stdout": "{\"saved_evidence_verified\": true, \"new_fits\": 0, \"mode\": \"results_only\", \"input_qualification_rechecked\": false, \"summary\": {\"return\": {\"rows\": 1268, \"rmse\": {\"B0\": 6.6426561833709155, \"B1\": 13.88068808815766, \"B2\": 13.882444000226144, \"ETF_mean\": 6.625508487406582}, \"B1_minus_B2\": -0.0017559120684840224}, \"risk\": {\"rows\": 1268, \"rmse\": {\"B0\": 3.6035537581267842, \"B1\": 4.136563943922631, \"B2\": 4.169039831654752, \"ETF_mean\": 3.46401966048353}, \"B1_minus_B2\": -0.03247588773212051}}}\n",
+  "stderr": "",
+  "negative_root": "docs/experiments/raw/weekly-color-information-2026-10-04/.negative.local-kmpvv5_n",
+  "negative_modified": "analysis return B2 error +1 in private copy",
+  "negative_exit_code": 1,
+  "negative_stderr": "Traceback (most recent call last):\n  File \"/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/docs/experiments/raw/weekly-color-information-2026-10-04/.negative.local-kmpvv5_n/docs/experiments/raw/weekly-color-information-2026-10-04/verify_saved.py\", line 57, in <module>\n    main()\n  File \"/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/docs/experiments/raw/weekly-color-information-2026-10-04/.negative.local-kmpvv5_n/docs/experiments/raw/weekly-color-information-2026-10-04/verify_saved.py\", line 27, in main\n    assert hashlib.sha256(path.read_bytes()).hexdigest() == item[\"sha256\"], item[\"path\"]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: docs/experiments/raw/weekly-color-information-2026-10-04/analysis.json\n",
+  "new_fits": 0,
+  "input_qualification_rechecked": false,
+  "platform": "macOS Python3.11; Linux Windows fresh dependencies not verified",
+  "manifest_sha256_used": "f210846c314c04aecb16ce61890c09e2892008f839dec847bdc2372930f476c4"
+}
