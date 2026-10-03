@@ -1,0 +1,86 @@
+{
+  "schema": "classic-learning-design-validation/1",
+  "checked_at": "2026-10-03T19:40:24.480812+08:00",
+  "base_commit": "0961a2cec0a31b0ad3ddbaf8e82863afc5aa0364",
+  "scope": "文档设计与所有权核对，无应用或市场实验",
+  "checks": [
+    {
+      "name": "5文档UTF-8读取与SHA256",
+      "status": "passed"
+    },
+    {
+      "name": "设计目录相对Markdown链接",
+      "status": "passed"
+    },
+    {
+      "name": "草稿9个数值与封存报告逐字核对",
+      "status": "passed",
+      "limitation": "只核对报告数字，未重算研究"
+    },
+    {
+      "name": "设计无TODO/TBD；范围/来源/未知项人工检查",
+      "status": "passed"
+    },
+    {
+      "name": "选定5文件凭证特征检查和人工diff审阅",
+      "status": "passed"
+    },
+    {
+      "name": "git diff --check",
+      "status": "passed",
+      "exit_code": 0
+    },
+    {
+      "name": "发布树check_repo_hygiene.py首次调用",
+      "status": "failed",
+      "exit_code": 2,
+      "reason": "稀疏目录未展开既有检查脚本；随后从HEAD原样展开"
+    },
+    {
+      "name": "发布树check_repo_hygiene.py",
+      "status": "failed",
+      "exit_code": 1,
+      "reason": "旧检查器不允许用户明确要求且已存在的docs/progress目录；唯一报错。本轮不修改共享检查器，不删除用户要求的进度目录。"
+    },
+    {
+      "name": "当前共享检查器只读核对发布目录",
+      "status": "passed",
+      "exit_code": 0,
+      "checker_sha256": "a661696b29d685c25388441975be6316d33342c3bcc24040cff5c58a377634bb",
+      "reason": "当前检查器已允许用户要求的docs/progress；只在内存设REPO为发布目录，不复制他人改动到分支"
+    }
+  ],
+  "not_run": [
+    "应用测试/浏览器",
+    "新训练/真实数据实验/全量回测",
+    "学习效果验收"
+  ],
+  "files": [
+    {
+      "path": "docs/archive/handoffs-plans/classic-learning-design-2026-10-03/README.md",
+      "bytes": 7848,
+      "sha256": "a4a666fa9d5ce6024ac6bdd269a84cacc456346e4a29cd7d5b760e8231384e58"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/classic-learning-design-2026-10-03/case-volatility.md",
+      "bytes": 6669,
+      "sha256": "8e22f23921293af3dde82131b9132edbf2bfaf4b1baa6de02f998d9435692cf6"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/classic-learning-design-2026-10-03/ownership-audit.md",
+      "bytes": 3015,
+      "sha256": "ff3ec75d0a46164970be4454bc3ea7fa941953affd72a8d05eea3c8d579f7210"
+    },
+    {
+      "path": "docs/progress/classic-factor.md",
+      "bytes": 11631,
+      "sha256": "769ee5f3249ba22200db8a43ae26a30255c8dd08e07322932cfad0d72549e253"
+    },
+    {
+      "path": "docs/ops/work-progress/classic-factor-research.md",
+      "bytes": 7147,
+      "sha256": "85951e9bcdff2c7ed6d453677b41c328cd403fabb72023bb87025ca8b4e87a97"
+    }
+  ],
+  "publication_note": "首次git add因5文件在稀疏规则外退出1，已停止依赖命令，未提交；核对暂存只含本任务路径后，使用精确路径git add --sparse继续。未清理、切换或回滚工作区。"
+}
