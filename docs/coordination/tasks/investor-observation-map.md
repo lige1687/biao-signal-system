@@ -2,15 +2,15 @@
 
 - task-id：investor-observation-map（沿用原任务稳定标识；已接入，更新原记录，不重启任务）。
 - 负责人/会话：原聊天Codex，01a0fd40-f651-7360-9411-d90f80affdc4；设备MacBook-Air-126.local。用户明确要求继续负责，不接管、不结束。
-- 更新时间：2026-10-03T15:10:02.505328+08:00（Asia/Shanghai，UTC+08:00）。
-- 状态：active（协调接入与既有报告维护）；新增来源核查子项paused。没有运行中的市场实验。
+- 更新时间：2026-10-03T15:21:39.225956+08:00（Asia/Shanghai，UTC+08:00）。
+- 状态：active（原任务持续负责）；本轮证据链接修订已完成，新增来源核查子项paused。没有运行中的市场实验。
 - 原目标：整理A股/美股机构、专业个人的指标与事件，说明系统已有/缺失、阈值/组合读法及趋势、定投、价值投资用途，并避开其他任务已在研究的方向。
-- 用途与验收：50组观察地图能定位来源、当前覆盖、限制、使用方法及负责人；本阶段统一任务记录可远端读回，工作分支AGENTS仅增补协作入口，原工作区/进程/封存结果保持。信息地图不是收益改善；线上收益未测量。
-- 适用规范：COORDINATION.md v1.0，读取commit `0b758e7e10f720c44cbd898d511ff392f2857535`；工作分支原AGENTS、报告所绑定研究规范与策略源不变。此次为文档同步，不创建新实验合同。
+- 用途与验收：50组观察地图能定位来源、当前覆盖、限制、使用方法及负责人；本阶段主报告引用绑定准确远端版本或标明仅本地，统一任务记录可远端读回；工作分支AGENTS保留协作入口，原工作区/进程/封存结果保持。信息地图不是收益改善；线上收益未测量。
+- 适用规范：COORDINATION.md v1.0，本轮完整读取commit `15b3e4e0edd878c3e84ef30482d108e492563dbd`，增量核对至 `e37ec45db9dca41b7e3c062d99eaa892f01ca7ea`，规则指纹未变；工作分支原AGENTS、报告所绑定研究规范与策略源不变。此次为文档同步，不创建新实验合同。
 - 工作分支：`task/investor-observation-map-progress`。
 - 基础commit：`18e64fa632dba5dbad0e5fcae09b4ccc75f119a9`。
-- 最近已推送成果commit：`5ad8672f8907c85d0cd2162583450c75ff1f2373`（本轮git ls-remote确认；AGENTS由GitHub读回逐字一致）。
-- 成果入口：[持续进展](https://github.com/lige1687/biao-signal-system/blob/5ad8672f8907c85d0cd2162583450c75ff1f2373/docs/progress/investor-observation-map.md)、[主报告](https://github.com/lige1687/biao-signal-system/blob/5ad8672f8907c85d0cd2162583450c75ff1f2373/docs/experiments/investor-observation-map-2026-10-02.md)。
+- 最近已推送成果commit：`1f59cf73dd019df487b7a2d3138445f4a3756e28`（本轮git ls-remote确认；主报告通过GitHub按准确commit读回）。
+- 成果入口：[持续进展](https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/progress/investor-observation-map.md)、[主报告](https://github.com/lige1687/biao-signal-system/blob/1f59cf73dd019df487b7a2d3138445f4a3756e28/docs/experiments/investor-observation-map-2026-10-02.md)。
 
 ## 已完成与证据
 
@@ -78,8 +78,31 @@ AAII20周背景、VXN、认沽认购、EMA/SMA等待、经典因子等沿原负�
 
 已重新fetch并完整读取协调规则，读取commit `15b3e4e0edd878c3e84ef30482d108e492563dbd`，规则1.0未变；对照前次已读任务检查了新增变化：market-observation已完成CPI较高区间说明并继续保留观察卡日期/范围，sentiment-factor-research继续保留SPY/AAII与原E宽度资格。其余任务无新差异，已接受分工不变，没有本地图同文件或同实验执行冲突。AGENTS入口已在工作分支5ad8672f保留，本次核验而不重复添加。
 
-当前基线 `5ad8672f8907c85d0cd2162583450c75ff1f2373`；本轮有界问题：主报告的仓库文件链接能否从准确远端版本取得，哪些仍只是本地原件。正在只读核对本报告相对链接；首次阶段记录成功同步后，限定修改主报告的证据链接和版本说明、raw/source-link-index.json（引用索引）、本任务brief/manifest及两份进展。只取已授权仓库中已发布成果：market-observation@eb8dd780212e9dcd4e3a12f59b2ad55c84478e83、sentiment-factor-research@d53497de0accff778d0db96c010c30078e5b54d9。不同主题或新版文件不能假装成原审查字节；无法取得同一原件则保留缺口。
+本轮开始时基线 `5ad8672f8907c85d0cd2162583450c75ff1f2373`；本轮有界问题：主报告的仓库文件链接能否从准确远端版本取得，哪些仍只是本地原件。正在只读核对本报告相对链接；首次阶段记录成功同步后，限定修改主报告的证据链接和版本说明、raw/source-link-index.json（引用索引）、本任务brief/manifest及两份进展。只取已授权仓库中已发布成果：market-observation@eb8dd780212e9dcd4e3a12f59b2ad55c84478e83、sentiment-factor-research@d53497de0accff778d0db96c010c30078e5b54d9。不同主题或新版文件不能假装成原审查字节；无法取得同一原件则保留缺口。
 
 验收：每个仓库文件引用对应存在的准确commit/path或明确“仅本地”；修正前后50组指标、阈值/用途与科学结论不变；差异仅在本任务文档；工作与协调两分支都推送并读回。不会改别人报告/页面、复制受限材料、新增市场检索或重跑实验。一次Luna只读引用审查，0市场资料请求、0拟合、0付费；来源累计6/6不重置。原任务持续负责，新的来源资格研究仍paused。
 
 原共享HEAD/分支/index/脏AGENTS本轮检查与前次指纹一致；没有强制终止、删除、回滚或切换。先前空间不足仍沿用轻量独立目录，不重试整仓worktree。此阶段首次登记后才修改报告；若链接已满足则只记录核验，不制造无意义修改。
+
+## 本轮阶段完成：证据链接已修订（2026-10-03T15:21:39.225956+08:00）
+
+本阶段首次登记提交 `a5e4ecec9f37a93c434a9d2a70df2fca29cedb8e` 已fetch并逐字核对后才修改自己的报告。成果已推送到工作分支 `task/investor-observation-map-progress`，完整commit `1f59cf73dd019df487b7a2d3138445f4a3756e28`，父commit `5ad8672f8907c85d0cd2162583450c75ff1f2373`。git ls-remote已核远端一致，GitHub准确commit读回主报告（Git blob `9b701988883109c29041467185e801ca6e5c4c94`）。
+
+原报告13条仓库相对引用，在原任务分支8条存在、5条缺失。本轮从已公开的准确负责人提交核对内容：7条可绑定与原审查快照完全相同的版本，2条只能绑定不同字节的已发布相关版本（sources.py、FundamentalsPage.tsx，明确不能当原快照），2份原报告仍仅本地，2条本任务维护型元数据继续相对链接。原5条缺失中3条现在可定位，另2份不以其他报告冒充。新增source-link-index保留路径、commit、大小、SHA256及资格说明，不上传别人源码或受限原件。
+
+准确变更路径共7条：
+- `docs/experiments/investor-observation-map-2026-10-02.md`
+- `docs/experiments/raw/investor-observation-map-2026-10-02/source-link-index.json`
+- `docs/experiments/raw/investor-observation-map-2026-10-02/reference-validation.json`
+- `docs/experiments/raw/investor-observation-map-2026-10-02/brief.json`
+- `docs/experiments/raw/investor-observation-map-2026-10-02/sync-manifest.json`
+- `docs/progress/investor-observation-map.md`
+- `docs/ops/work-progress/investor-observation-map.md`
+
+验证：17项manifest内容指纹及JSON检查通过；原报告全部表格行逐字不变，§3—8除链接目标外逐字不变，仍为50组指标；保留的相对链接在最终任务树存在；git diff --check退出0；共享工作区check_repo_hygiene退出0（不宣称完整独立发布树或云端运行通过）；本次变更凭证模式扫描无命中。Luna只读审查矩阵与逐路径核对一致，其文字合计9/4已由实际计数纠正为8/5，未另起重复审查。运行证据在同commit的reference-validation.json和source-link-index.json，历史恢复包未改。没有重跑历史10项测试、已封存实验或新增市场检索；实时网页、资料许可、全应用、投资效果均未验证。
+
+推前增量核对协调 `e37ec45db9dca41b7e3c062d99eaa892f01ca7ea`：已读external-quant-resources、lei-technical-reader-research、remote-core-review、sentiment-factor-research变化，分别保留外部工具、技术阅读、转黑定义及SPY/AAII/原E输入资格范围；规则1.0与原SHA256不变，没有本地图同文件或同实验冲突。与market-observation已有的页面/政策/阈值措辞主题交叠继续按对方已接受分工避让。本轮仅维护地图证据入口，不改其模块、报告、阈值或页面。
+
+仍未交付的最小缺口：`docs/experiments/fundamentals-expansion-review-2026-10-02.md`、`docs/experiments/market-observation-continuation-2026-10-02.md`两份原报告，在所核工作/负责人提交均未发现；sources.py与FundamentalsPage.tsx原审查字节也未在已核版本取得。来源、已知大小及SHA256详见source-link-index；标明仅本地，不以现有链接掩盖。公开仓库中不擅自上传这些未确认可外传的原件。
+
+当前工作状态分开：本阶段completed；原任务维护责任active；新市场来源资格研究paused（原预算6/6未重置）；后续新版本/反馈核对为planned，尚未启动。仅出现实际新证据、允许取得的原件或明确后续预算/范围时继续相应缺口，不为更新进展重做已完成审查。当前没有本任务市场实验、训练、后台进程、checkpoint或运行中的子agent；本轮来源请求/拟合/付费均新增0。共享HEAD、index、脏AGENTS保留，未切换脏工作区、清理或终止进程。AGENTS已有入口本轮核验有效，不重复添加、不改原研究限制。
