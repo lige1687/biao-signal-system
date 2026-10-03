@@ -1,3 +1,37 @@
+# 当前成果：六类市场理解与基本面对齐已同步
+
+- task-id：investor-observation-map；原聊天Codex继续负责；原任务active，本有界页面阶段completed。不是接管，不宣称所有数据/研究已完成。更新时间：2026-10-03T12:36:37.437Z（UTC，用户时区Asia/Shanghai）。
+- 用户最新批准“你说的这些感觉没啥问题，去推进的做哈”；落实宏观、行业、企业经营与估值、资金与杠杆、ETF产品、事件六类问题。业务增量为可检验的内容与导航功能；理解改善、真实账户和线上收益未测量。
+- 工作分支task/investor-observation-map-progress；本轮基础157b09a3c5fc8515b587049b633d3a0d95c10830；**最新成果959971e30893c0894837b4c2b35442e4bedb1aac**。普通push成功，git ls-remote完整相等；GitHub准确commit读回README blob55d1f7486757c243d5492a9a2ed1330c20e9ea74与本地相同。32个准确交付文件、450030字节，代码/小文档/第一方浏览器证据。
+- [成果与恢复入口](https://github.com/lige1687/biao-signal-system/blob/959971e30893c0894837b4c2b35442e4bedb1aac/docs/archive/handoffs-plans/market-understanding-fundamentals-2026-10-03/README.md)；[持续进展](https://github.com/lige1687/biao-signal-system/blob/959971e30893c0894837b4c2b35442e4bedb1aac/docs/progress/investor-observation-map.md)；[页面](https://github.com/lige1687/biao-signal-system/blob/959971e30893c0894837b4c2b35442e4bedb1aac/web/src/pages/MarketUnderstandingPage.tsx)。
+- 规则读取66a4c7f4edd0d9478fbf0aa8ff85c4a5325bdcdd；本轮写前scope b8abece953e9ce8aaf3c46dfe806ef1f121466a9已推读回；推前增量核至e70f0f3a665d086ee36cb6b5958b6ec3543eb918，仅外部工具试点结案变化，无同文件/研究冲突。COORDINATION v1.0/SHA6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0保持。未登记任务状态未知，记录不当锁。
+
+## 已完成与验证
+
+六类问题面板、中美各自重点/更新节奏/组合检查/现有图表/缺项；原50目录与12卡保留，新增8卡使详细读法20项。新卡覆盖PMI、利率、物价、行业供需库存、收入利润、现金流负债、估值分母、盈利预期。价值/定投/趋势排序与市场/搜索联动；原目录可多问题索引但不复制原证据。01技术底座和48–50个人计划只在all展示，不称ETF产品属性。A股行业页、美股11行业ETF图分链；融资余额13准确指向长周期叠加，进入后按原页选择图组。
+
+33合成检查exit0；最终tsc/Vite构建exit0（752模块），既有大包提醒仍在。实际浏览器核默认/价值/定投/中美行业/现金流搜索/事件/404保留知识/键盘展开/页内ETF定位，390px body/main均390；美国宏观与长周期叠加实际目标页签已读回，真实图表API故意关闭未验证。独立仓内临时目录的内容/筛选恢复exit0、0外部API；不是全新依赖安装/全服务/跨平台验收。38文件SHA校验通过；旧content-data、observation、FundamentalsPage、第一版证据未变。
+
+三个Sol medium分别只读复用审计、限定新增JSON、独立实现审查；两项Important已修并验证，没有重跑投资实验。细节及失败在新目录review/validation/software-checks。归置检查仍exit1：原生worktree.git文件、用户要求既有docs/progress两旧白名单警告；检查器SHA与基线相同，不冒称全绿。敏感检查初次仅对旧人工u:p@example.com URL误报，精确排除该测试文字后通过；未忽略真实凭证。
+
+## 当前范围、未完成与下一步
+
+当前维护MarketUnderstandingPage、features/market-understanding、自己的测试/解释/证据与两进度；未新增App/TopNav变化，不独占它们整文件。market-observation已按用户决定归档cfe06fbd，原代码55d8保留，只复用已有分区，没有复制或接管其来源实现。情绪S01—S05/三用途、技术S01/Q01风险、dot回测状态计数/宏观资格、经典学习及外部工具保留原负责人，未新增同块冲突。
+
+下一步planned，非正在后台执行：先核已发布观察后端与本分支整合依赖，再选择一个具备许可/时点/口径依据的数据缺口；真实取数、跨分支整合和新实验尚未启动，不圈为全部独占。当前本轮页面开发没有剩余P0检查。FINRA/CFTC、行业经营与指数财报、历史盈利预期、事件日历仍未接真实数据；本分支observations后端仍缺，404明确未接通。没有全系统合并、上线或真实上游验收。
+
+## 材料、运行、预算与接续
+
+本轮公开定义核对4/4（CFA/SEC/Fed成功，NBS失败1不重试并明示沿前轮定义）；新市场实验/拟合/付费0。旧12/12不重置；上一讨论2次网页工具批次独立记录，不猜其页面请求数，更不挪用原宏观18/18。3助手已结束；预览sessions1043/61575由自有/__finish正常退出0，浏览器tab已关，无checkpoint、无市场任务运行，本地临时恢复目录仍在.biao不上传。
+
+旧两个不完整/中间文件mobile-synthetic.png与review-package.txt仅本地且不交；本轮必要代码和小证据齐全。策略原件、原调查大数据/数据库/凭证与旧受限包不上传、缺口保持；权重不适用。共享原HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9/分支/index83bb48fe…/AGENTS060a0de…保持，未切换清理或夺取他人修改。工作与协调树无跟踪.github工作流、无本地pre-push；未执行main合并/部署/权限/付费命令，不能由此断言外部集成不存在。
+
+接续先核最新协调和准确成果/manifest，检查新版是否已解决旧缺口；按README恢复最小检查再推进限定项。旧AAII/QQQ/VXN/宽度/技术/外部搜索不得换名重跑。下方阶段历史保留；本同步记录自身SHA由路径历史定位，更新后还须远端读回才宣称已同步。
+
+---
+
+## 既往阶段（当前状态以上为准）
+
 # 当前实施：六类市场问题与基本面对齐
 
 - task-id：investor-observation-map；原负责人本聊天Codex持续负责；状态active，非接管或结束。
