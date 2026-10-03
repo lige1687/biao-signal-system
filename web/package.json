@@ -19,7 +19,8 @@
     "test:strategy-system": "esbuild src/pages/strategySystemLogic.ts --bundle --platform=node --format=esm --outfile=/tmp/lei-strategy-system-logic.mjs && node run-strategy-system-regression.mjs",
     "test:market-understanding": "node run-market-understanding-regression.mjs",
     "test:market-dashboard": "node run-market-dashboard-regression.mjs",
-    "test:market-integration": "node run-market-integration-regression.mjs"
+    "test:market-integration": "node run-market-integration-regression.mjs",
+    "test:market-foundation": "node run-market-foundation-regression.mjs"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.59.0",

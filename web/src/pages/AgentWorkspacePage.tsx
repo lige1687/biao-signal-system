@@ -1,3 +1,5 @@
+import MacroReadingPanel from '../features/market-understanding/MacroReadingPanel';
+import {isMacroQuestion} from '../features/market-understanding/macro-reading';
 import { useEffect, useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
@@ -235,6 +237,7 @@ function ChartResource({ resource, displayName, onFocus }: { displayName?: strin
 }
 
 export default function AgentWorkspacePage() {
+  const [macroQuestion,setMacroQuestion]=useState<string|null>(new URLSearchParams(window.location.search).has('macro')?'当前宏观环境怎么看？':null);
   const queryClient = useQueryClient();
   const [turns, setTurns] = useState<Turn[]>([]);
   const [input, setInput] = useState("");
@@ -437,6 +440,7 @@ export default function AgentWorkspacePage() {
   };
   const send = async (raw:string, forceDispatch=false) => {
     const message=raw.trim();if(!message||requestLock.current||loadingHistory)return;
+    if(!forceDispatch&&isMacroQuestion(message)){setMacroQuestion(message);setInput('');return;}
     requestLock.current=true;setBusy(true);
     const gen=generationRef.current;
     try{
@@ -489,6 +493,7 @@ export default function AgentWorkspacePage() {
           <div>{(symbol||latest) && <button className="btn small" onClick={()=>resource?closeResource():symbol?inspect(symbol):latest&&setResource({kind:"result",id:latest.id})}>{resource?"收起资料":"查看资料"}</button>}<button className="btn small" disabled={busy} onClick={newSession}>新对话</button></div></header>
         {historyError && <p className="ar-notice" role="alert">{historyError}</p>}
         <div className="ar-messages" ref={bodyRef} onScroll={()=>{const el=bodyRef.current;if(el){followRef.current=shouldFollowOutput(el.scrollTop,el.clientHeight,el.scrollHeight);if(followRef.current)setHasNew(false);}}}>
+          {macroQuestion!==null&&<MacroReadingPanel key={macroQuestion} initialQuestion={macroQuestion} onClose={()=>setMacroQuestion(null)}/>}
           {turns.some(t=>t.history) && <p className="ar-footnote">以下是按当时内容恢复的历史记录（回答、数据日期与动作都是当时的）；右侧图表展示的是当前最新数据，两者日期可能不同。</p>}
           {loadingHistory && <div className="ar-working" role="status">正在恢复对话…</div>}
           {!turns.length && !loadingHistory && <div className="ar-welcome"><span className="ar-welcome-mark" aria-hidden="true">BIAO</span><h2>今天，从哪个问题开始？</h2><p>查看机会、讨论标的，或回顾你的交易。<br/>分析与资料会在这里逐步展开。</p>
@@ -505,7 +510,7 @@ export default function AgentWorkspacePage() {
             placeholder={busy?"可以先写下一条问题，当前回复完成后再发送":"输入问题，或说出标的名称 / 代码…"} />
             <div className="ar-input-bottom"><span>Enter 发送 · Shift + Enter 换行</span>{busy?<button className="btn ar-stop" onClick={stopReceiving}>停止接收</button>:<button className="btn primary" disabled={!input.trim()||loadingHistory} onClick={()=>void send(input)}>发送 ↑</button>}</div>
           </div>
-          <div className="ar-composer-tools">{QUICK.map(q=><button key={q.kind} disabled={busy||loadingHistory} onClick={()=>quick(q.kind,q.label)}>{q.label}</button>)}</div>
+          <div className="ar-composer-tools"><button disabled={busy||loadingHistory} onClick={()=>setMacroQuestion('当前宏观环境怎么看？')}>宏观解读</button>{QUICK.map(q=><button key={q.kind} disabled={busy||loadingHistory} onClick={()=>quick(q.kind,q.label)}>{q.label}</button>)}</div>
           {input.startsWith("我买了") && <p className="ar-footnote">填写实际成交，例如“我买了1万元012414”。发送后先核对确认卡，确认后才记入基金台账。</p>}
         </footer>
       </main>

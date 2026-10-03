@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "verified_date": "2026-10-03",
+  "mode": "report_only",
+  "budget": {
+    "source_requests_used": 6,
+    "source_requests_cap": 6,
+    "search_queries": 3,
+    "opens": 3,
+    "financial_fits": 0,
+    "backtests": 0,
+    "paid_tasks": 0,
+    "new_agents": 0
+  },
+  "sources": [
+    {
+      "url": "https://zjzd.stats.gov.cn/gjtjjtzdcd/dczs/tjbw/art/2024/art_b136331cbe474e8c86d51c01effd651b.html",
+      "access": "search result text only",
+      "supports": "PMI 50 expansion/contraction against prior month; no buy/sell threshold"
+    },
+    {
+      "url": "https://cdn.cboe.com/api/global/us_indices/governance/Volatility_Index_Methodology_Cboe_Volatility_Index.pdf",
+      "access": "official method search result; full PDF not opened",
+      "supports": "VIX expected 30-day volatility from SPX options; fixed 15/20/30 thresholds not proven"
+    },
+    {
+      "url": "https://www.federalreserve.gov/faqs/economy_14419.htm",
+      "access": "search and opened body",
+      "supports": "Long-run 2% target uses PCE, not CPI"
+    },
+    {
+      "url": "https://www.bls.gov/schedule/2026/home.htm",
+      "access": "opened body",
+      "supports": "Selected 2026 release facts with Eastern times; only partial schedule copied into events.ts"
+    },
+    {
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "access": "opened body; individual meeting dates not extracted/verified",
+      "supports": "Calendar source exists; no FOMC dates implemented"
+    }
+  ],
+  "limitations": [
+    "No full official web bodies copied; factual paraphrases only",
+    "Underlying API numerical authenticity / continuous availability / license / first-publication-vintage qualification remain unverified",
+    "No CPI=2 or VIX fixed risk/bottom threshold claimed",
+    "Historical P20/P50/P80 use current obtained window with (n-1)p linear interpolation; 12 minimum is engineering display floor, not scientific significance"
+  ]
+}

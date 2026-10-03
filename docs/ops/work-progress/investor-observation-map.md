@@ -1,3 +1,20 @@
+# 当前阶段：可信参考、四指数对照与宏观解读完成软件验证
+
+更新时间：2026-10-04T00:21:55.156890+08:00（Asia/Shanghai）；investor-observation-map原负责人继续，非接管/整体结束。基础打磨及有界三项发散的软件范围completed，资料资格缺口blocked；此阶段未新增市场实验。
+
+- 基线11662774379c07466935386fa7ef25ceac63bb24；设计087e3bb5b0f221cab941800bea27dc8fc3b5646a；工作分支task/investor-observation-map-progress。本文件所在提交包含阶段代码，准确已推完整SHA以自己协调记录及远端读回为准。当前提交前尚未推的新代码明确仅本地，发布步骤随后执行。
+- 已完成：24指标参考身份、日期、数量及可复算历史P20/P50/P80；官方PMI50/算术零，撤无依据经验线；四指数同期间图/变化散点、双指标组合、不一致事实、选定BLS日历；/agent主输入/快捷面板解读与回图。没有后端LLM插件、旧聊天历史持久化、交易判定或信号过滤变更。
+- 证据：docs/experiments/market-foundation-agent-2026-10-04.md及同名raw的原始目标/来源账/validation/restore/manifest。63组检查exit0，最终构建758模块exit0；复制目录8文件相同，12组最低模型检查exit0。390px与真实浏览器主问题→资料→CPI图链已核。归置器既存.git/progress问题exit1，洁净安装/全服务/跨OS/用户效果/线上收益未测或未验证。
+- 本轮具体源码：web/src/features/market-understanding的参考/对照/事件/解读/共享读数及自有图卡；MarketUnderstandingPage/navigation、FundamentalsPage显示校正、AgentWorkspacePage宏观入口；own run-market-*及package，无新依赖。其他AI暂避同时改这些具体块，不占整个宏观/情绪方向。
+- 当前正在做：阶段证据归档、准确路径审查和任务分支/协调分支同步；未把未来来源接入写成正在运行。planned：用户阅图反馈的局部调整/已登记负责人交付的合格单项输入。blocked：A股PE/ERP、完整中国日历、逐期发布时间/修订、FINRA/CFTC/盈利预期；不填虚值，不无限取数。
+- 协调读取66068173f96a8fcc51d5740adce963ecfadcb597，规则1.0不变；sentiment只读板块与131周NAAIM效果题、technical EMA/黑绿、external STUMPY均不同问题/文件。情绪研究证据由对方供给，本线只展示，不重启AAII/NAAIM/QQQ/VXN等已封存题，进度不是排他锁。
+- 本轮来源6/6（3查询+3打开），市场拟合/回测/付费/新代理0；旧预算保留。实际策略SHA两份见raw original-goals，原件不传公开Git。代码/小证据可推；截图、临时恢复副本、node_modules/数据/权重/数据库/凭证均不入Git。
+- 中断导致原预览退出，确认5185未监听后恢复本任务本地预览PID26760/session46007，127.0.0.1:5185；原API1753/8000不动，无市场实验/checkpoint。共享index/脏AGENTS指纹仍原值；没有reset/clean/强推/main/部署。docs/ops/work-progress/README.md本分支缺失，沿自身既有进度格式，不另造规范。
+
+---
+
+## 历史阶段（原文保留；当前状态以上为准）
+
 # 当前阶段：基本面已合并到市场理解，参考线增加机会/风险颜色
 
 更新时间：2026-10-03 13:22:04 UTC（Asia/Shanghai为UTC+08:00）。原负责人继续；本轮软件验收完成，不代表整体研究结束或线上投资效果通过。

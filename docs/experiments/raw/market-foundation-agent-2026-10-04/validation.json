@@ -1,0 +1,104 @@
+{
+  "updated_at": "2026-10-04T00:21:55.156890+08:00",
+  "commands": [
+    {
+      "cwd": "web",
+      "command": "npm run test:market-foundation",
+      "exit": 0,
+      "result": "12 synthetic model groups"
+    },
+    {
+      "cwd": "web",
+      "command": "npm run test:market-dashboard",
+      "exit": 0,
+      "result": "14 boundary groups"
+    },
+    {
+      "cwd": "web",
+      "command": "npm run test:market-integration",
+      "exit": 0,
+      "result": "4 integration groups; rerun after legacy subtitle corrections"
+    },
+    {
+      "cwd": "web",
+      "command": "npm run test:market-understanding",
+      "exit": 0,
+      "result": "33 existing input/content groups"
+    },
+    {
+      "cwd": "web",
+      "command": "npm run build",
+      "exit": 0,
+      "result": "TypeScript and Vite 758 modules; final rerun after interrupted prior result; chunk-size warning remains"
+    },
+    {
+      "cwd": ".",
+      "command": "python3 scripts/check_repo_hygiene.py",
+      "exit": 1,
+      "result": "Existing .git worktree file and docs/progress whitelist violations; checker unchanged"
+    },
+    {
+      "cwd": ".",
+      "command": "git diff --check",
+      "exit": 0,
+      "result": "No whitespace errors"
+    },
+    {
+      "cwd": "web",
+      "command": "node --input-type=module (esbuild write:false; existing agent regression import in-memory)",
+      "exit": 0,
+      "result": "Existing stream, cleanup, scrolling and preview checks passed; no /tmp write"
+    }
+  ],
+  "browser_checks": [
+    "A-share margin vs CSI300 and SSE, daily/scatter/preset combination",
+    "US VIX and HYOAS vs NASDAQCOM; correct Composite identity, not QQQ/100",
+    "Monthly CPI vs SP500, support counts and adjacent changes; incomplete periods excluded",
+    "Official event details distinguish reference period and US/China local time; final day-frequency-only switch",
+    "Main Agent question US CPI and PPI -> macro panel -> period/source/references -> CPI graph deep link",
+    "Macro buy question refuses single-input trade inference; missing input synthetic cases",
+    "Legacy rates VIX drawer and US CPI drawer still open/close; unsupported VIX/credit/margin subtitles corrected",
+    "390px overview, comparison and Agent with no horizontal overflow; viewport reset before interruption",
+    "After interruption own preview absent, re-established only port5185; current real comparison loaded and screenshot saved"
+  ],
+  "not_verified": [
+    "No live backend outage induced; errors/missing tested with synthetic responses",
+    "No clean dependency install",
+    "No backend/server independent restore",
+    "No Linux/Windows/browser matrix",
+    "No user comprehension study",
+    "No financial increment or online收益测量",
+    "Legacy position-band / correlation widgets and shared zones.ts not fully reaudited"
+  ],
+  "failures_retained": [
+    "Initial newline literal build error fixed",
+    "Wrong cwd reads / first-file FileNotFound produced no unintended source writes",
+    "Quantile strict floating equality replaced with 1e-12 tolerance; math unchanged",
+    "AX checkbox representation differed from DOM button; DOM snapshot used to correct locator",
+    "Event label crowding fixed using tooltip-only event labels",
+    "Browser session handles/tab lost on deliberate interruption; initial unavailable local preview recorded; no security bypass",
+    "Previous build result session lost on interruption; final build explicitly rechecked"
+  ],
+  "runtime": {
+    "os": "macOS-15.6.1-arm64-arm-64bit",
+    "node": "v22.22.1",
+    "npm": "10.9.4",
+    "preview_pid": 26760,
+    "preview_session": 46007,
+    "preview_url": "http://127.0.0.1:5185",
+    "original_api_pid": 1753,
+    "financial_experiment_running": false,
+    "checkpoint": "Not applicable; no market experiment/training launched"
+  },
+  "shared_checkout_preserved": {
+    "index_sha256": "83bb48fe19dcb073d4a449bcef331c745c942128ea53ca2a19c1f6791cbe7f92",
+    "dirty_agents_sha256": "060a0de558b0543f6afee81e8aa5f903daf348e9381b825ec3d141ec8763dc4e"
+  },
+  "coordination_checked_commit": "d87e47ef54eba4b91a40e61dba886e1c91448301",
+  "upload_checks": {
+    "remote": "git@github.com:lige1687/biao-signal-system.git",
+    "workflows_in_feature_tree": [],
+    "active_hooks": [],
+    "rule_unchanged_sha256": "6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0"
+  }
+}

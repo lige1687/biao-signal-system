@@ -149,16 +149,11 @@ await test('change compares the previous valid value, including an earlier zero'
   assert.equal(lastReading({...s, values:[null,null,2,null]}).change, null);
 });
 
-await test('historical reference lines disclose their fixed basis and never become trading rules', () => {
-  for (const key of ['erp_cn','erp_us','cape_us','pe_cn']) {
-    const refs = referencesFor(key);
-    assert.ok(refs.some(x => x.kind === '历史分位参考'), key);
-    assert.ok(refs.filter(x => x.kind === '历史分位参考').every(x => /固定标定|未随当前窗口重算/.test(x.basis)), key);
-  }
-  assert.ok(referencesFor('pmi').some(x => x.y === 50 && x.kind === '定义线'));
-  assert.ok(referencesFor('cpiaucsl_yoy').some(x => x.y === 2 && x.kind === '原页面参考' && !/联储目标|PCE目标/.test(x.label + x.basis)));
-  assert.deepEqual(referencesFor('margin_rzrqye'), []);
-  assert.ok(metrics.find(m => m.key === 'margin_rzrqye').reading.includes('不画风险阈值'));
+await test('reference policy drops unsupported fixed thresholds and retains definitions',()=>{
+ for(const key of ['vix','us_10y','cape_us','pe_cn'])assert.deepEqual(referencesFor(key),[]);
+ assert.equal(referencesFor('pmi')[0].y,50);
+ assert.deepEqual(referencesFor('cpiaucsl_yoy').map(x=>x.y),[0]);
+ assert.deepEqual(referencesFor('margin_rzrqye'),[]);
 });
 
 await test('malformed envelope is rejected while provider errors remain a count', () => {

@@ -1,5 +1,6 @@
-import { MARKLINES, type MarkLine } from '../../components/trend/zones';
-import { referenceColors, referenceReading, type ReferenceReading } from './reference-reading';
+import { type MarkLine } from '../../components/trend/zones';
+import {definedReferences,historicalReferences} from './reference-evidence';
+import { type ReferenceReading } from './reference-reading';
 
 export type Market = 'cn' | 'us';
 export type Endpoint = 'rates' | 'macro' | 'usMacro';
@@ -27,7 +28,7 @@ export const metrics: Metric[] = [
   metric('cape_us','标普500 CAPE',['us'],'valuation','rates','倍','倍','月','用平滑后的实际盈利比较估值。高位说明价格相对长期盈利高，但不能给出短期拐点；结合利率和盈利结构。','multpl · 月度 CAPE'),
   metric('cpi','中国 CPI 同比',['cn'],'inflation','macro','%','%','月','上升说明居民消费价格同比涨幅扩大；结合核心价格、PPI与需求。零线表示与去年同月持平。','东方财富转引月度宏观资料'),
   metric('ppi','中国 PPI 同比',['cn'],'inflation','macro','%','%','月','上升说明工业生产者价格同比改善；结合原料成本、销售价格和利润，涨价不一定令所有行业受益。','东方财富转引月度宏观资料'),
-  metric('cpiaucsl_yoy','美国 CPI 同比',['us'],'inflation','usMacro','%','%','月','结合就业、增长和利率判断通胀压力。2%沿用旧页经验参考，不能称为美联储的PCE通胀目标。','FRED · CPIAUCSL'),
+  metric('cpiaucsl_yoy','美国 CPI 同比',['us'],'inflation','usMacro','%','%','月','结合就业、增长和利率判断通胀压力。美联储2%目标使用PCE口径，本CPI图不画该政策目标。','FRED · CPIAUCSL'),
   metric('ppiaco_yoy','美国最终需求 PPI 同比',['us'],'inflation','usMacro','%','%','月','观察生产者价格变化，结合CPI和利润。成本传导存在时差，不能机械预测消费通胀。','FRED · PPIFIS（保留旧接口键）'),
   metric('icwa','美国初请失业金 · 4周均值',['us'],'growth','usMacro','人','人','周','上升可能表示裁员压力增加；结合续请、非农和季节性，单周变化不代表就业趋势逆转。','FRED · ICSA，系统计算4周均值'),
   metric('ccwa','美国续请失业金人数',['us'],'growth','usMacro','人','人','周','上升可能表示再就业变慢；结合初请、非农和人口规模。旧页人数线不是固定衰退标准。','FRED · CCSA'),
@@ -38,29 +39,12 @@ export const metrics: Metric[] = [
   metric('altsa','美国汽车销量 · 折年率',['us'],'growth','usMacro','百万辆','百万辆','月','上升可能来自消费改善或供应恢复；结合库存、信贷与促销。折年率不是当月销量。','FRED · TOTALSA'),
   metric('dgorder_yoy','美国耐用品新订单同比',['us'],'growth','usMacro','%','%','月','观察订单需求；结合出货与细项，大额飞机订单或基数会造成波动。','FRED · DGORDER'),
 ];
-export interface Reference extends MarkLine, ReferenceReading { kind: '定义线' | '原页面参考' | '历史分位参考'; basis: string }
-const historical: Record<string, {window: string; labels: string[]}> = {
-  erp_cn:{window:'2005年起固定标定',labels:['P20','P50','P80']},
-  erp_us:{window:'2006年起固定标定',labels:['零线','P50','P80']},
-  cape_us:{window:'1950年起固定标定',labels:['P20','P50','P80']},
-  pe_cn:{window:'2010年起固定标定',labels:['P20','P50','P80']},
-};
-const zeroKeys = new Set(['cpi','ppi','cpiaucsl_yoy','ppiaco_yoy','payems_yoy','cshpi_yoy','dgorder_yoy','wei','cn_us_spread_10y','erp_us']);
-export function referencesFor(key: string): Reference[] {
-  if(key==='margin_rzrqye') return [];
-  return (MARKLINES[key] ?? []).map((line,i)=>{
-    const definition = key==='pmi' || (line.y===0 && zeroKeys.has(key));
-    const h = historical[key];
-    const kind: Reference['kind'] = definition ? '定义线' : h ? '历史分位参考' : '原页面参考';
-    const reading = referenceReading(key,i,line.y);
-    const basis = definition ? (key==='pmi'?'PMI定义分界；不是交易阈值':'数值零点；不等于市场多空分界') : h ? `${h.window}；P20/P50/P80为当时历史的20/50/80百分位，未随当前窗口重算` : '沿用原基本面经验线；不是官方或LEI买卖阈值';
-    return {y:line.y,...reading,color:referenceColors[reading.tone],kind,basis:h && !definition?`${h.labels[i]}；${basis}`:basis};
-  });
-}
+export interface Reference extends MarkLine, ReferenceReading { kind: '定义线' | '原页面参考' | '历史分位参考'; basis: string; sourceUrl?: string }
+export function referencesFor(key:string,series?:Series):Reference[] { return [...definedReferences(key),...historicalReferences(key,series)]; }
 export interface Series { dates: string[]; values: (number|null)[]; notice: string }
 export interface Decoded { series: Record<string, Series>; errors: number }
 function record(x: unknown): x is Record<string, unknown> { return !!x && typeof x==='object' && !Array.isArray(x); }
-function validDate(x: unknown): x is string { return typeof x==='string' && /^\d{4}-\d{2}-\d{2}$/.test(x) && Number.isFinite(Date.parse(x+'T00:00:00Z')) && new Date(x+'T00:00:00Z').toISOString().slice(0,10)===x; }
+export function validDate(x: unknown): x is string { return typeof x==='string' && /^\d{4}-\d{2}-\d{2}$/.test(x) && Number.isFinite(Date.parse(x+'T00:00:00Z')) && new Date(x+'T00:00:00Z').toISOString().slice(0,10)===x; }
 export function decodeHistory(raw: unknown, endpoint: Endpoint, today: string): Decoded {
   if(!record(raw) || !record(raw.series) || !Array.isArray(raw.errors)) throw new Error('数据格式不完整');
   const result: Decoded = {series:{},errors:raw.errors.length};

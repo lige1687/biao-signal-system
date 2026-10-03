@@ -1,0 +1,55 @@
+{
+  "restored_directory": "docs/experiments/raw/market-foundation-agent-2026-10-04/restore-local-adao0nbe",
+  "command": "cd <restored_directory>/web && node run-market-foundation-regression.mjs",
+  "exit_code": 0,
+  "stdout": "PASS quantiles independently checked with negatives, zeros, ties and copied input\nPASS unverified fixed CPI, VIX, rates and valuation thresholds are not offered\nPASS 12 observed values produce reproducible quantiles and disclose actual support\nPASS all four index identities explicit, malformed date / unit / zero rejected\nPASS daily alignment never carries values across missing dates\nPASS monthly labels use last same-month index, do not treat next month publication as observed\nPASS weekly bucketing across year and current incomplete week excluded\nPASS projection omits long gaps and zero-variance correlation\nPASS inconsistency reports simultaneous fact, never invents a future failure\nPASS macro entry detects relevant questions without catching trade recording\nPASS macro answers give actual periods, no fabricated zeros and no buying conclusion\nPASS official event times preserve daylight saving and data reference period separately\n12 foundation checks passed; synthetic math, no financial experiment.\n",
+  "stderr": "",
+  "files": [
+    {
+      "path": "web/package.json",
+      "sha256": "99d310adeea790506915f827658456a3abb583eecf8d2b6e70a62171dc332be0",
+      "matches_original": true
+    },
+    {
+      "path": "web/run-market-foundation-regression.mjs",
+      "sha256": "cacd113067eaad264ca56239832f83cd3e8343e620fe918da31361548ec5e3b6",
+      "matches_original": true
+    },
+    {
+      "path": "web/src/features/market-understanding/dashboard-model.ts",
+      "sha256": "9eb09bde628147a08b777226d03d99f95d151989b4cab7dc36f6200b47ccb5f8",
+      "matches_original": true
+    },
+    {
+      "path": "web/src/features/market-understanding/comparison-model.ts",
+      "sha256": "e62b4b5869cdc5af44837ec70688f269b860a37f83318f39083636f992badd44",
+      "matches_original": true
+    },
+    {
+      "path": "web/src/features/market-understanding/reference-evidence.ts",
+      "sha256": "b2631cf3333df289948ee3a26f03e9267445877a46264ab31c402cb5f625b6a1",
+      "matches_original": true
+    },
+    {
+      "path": "web/src/features/market-understanding/reference-reading.ts",
+      "sha256": "2691a26312b20b9bdcc96abfc4e843d9c51b32251e57ab7762efb2a3f4ee8863",
+      "matches_original": true
+    },
+    {
+      "path": "web/src/features/market-understanding/macro-reading.ts",
+      "sha256": "6a976d80ac0ed5e267c0b73ed3c3d86b00b52d37dfde0a189b39f2d32eec12f3",
+      "matches_original": true
+    },
+    {
+      "path": "web/src/features/market-understanding/events.ts",
+      "sha256": "2bb38161032996a2a1afafec420caae2b730e65b167d67483a384453342c32a2",
+      "matches_original": true
+    }
+  ],
+  "limitations": [
+    "macOS only",
+    "Existing node_modules symlink reused; clean install unverified",
+    "Frontend model minimum only; backend and whole service restoration unverified",
+    "Local copied directory excluded from Git; source code available on task branch"
+  ]
+}

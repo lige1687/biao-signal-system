@@ -9,7 +9,7 @@ import TrendChart from "../components/trend/TrendChart";
 import TrendDrawer, { type DrawerState } from "../components/trend/TrendDrawer";
 import SentimentProjectionCard from "../components/SentimentProjectionCard";
 import { metrics as dashboardMetrics, referencesFor } from '../features/market-understanding/dashboard-model';
-import { buildDrawer } from "../components/trend/drawer";
+import { buildDrawer as oldBuildDrawer } from "../components/trend/drawer";
 import { alignTo, unionDates } from "../components/trend/align";
 import { fmt, pctClass } from "../utils/format";
 import {
@@ -25,15 +25,11 @@ import {
   BREADTH_HIGHLIGHT_RULES,
   BREADTH_LINES,
   BREADTH_ZONES,
-  CAPE_US_ZONES,
-  ERP_CN_ZONES,
-  ERP_US_ZONES,
-  PE_CN_ZONES,
   RATE_LOOKBACK_OPTIONS,
-  MARKLINES,
-  OVERLAY_MARKLINES,
-  SOURCE_NOTES,
-  ZONES,
+  MARKLINES as OLD_MARKLINES,
+  OVERLAY_MARKLINES as OLD_OVERLAY_MARKLINES,
+  SOURCE_NOTES as OLD_SOURCE_NOTES,
+  ZONES as OLD_ZONES,
   computeHighlightBands,
   findZone,
   type HighlightBand,
@@ -52,30 +48,18 @@ import type {
   SentimentIngest,
 } from "../types";
 
-/** 小图分界线（单条，落在数据区间内才有意义）。 */
-const SPARK_MARK: Record<string, number> = {
-  us_10y: 4.5,
-  cn_10y: 2.0,
-  cn_us_spread_10y: 0,
-  vix: 20,
-  margin_rzyezb: 3.0,
-  pmi: 50,
-  cpi: 0,
-  ppi: 0,
-  erp_us: 1.9,
-  erp_cn: 5.1,
-  // 估值分位对照：小图分界线取各自标定窗口中位（CAPE 1950 起 / 沪深300 PE 2010 起）。
-  cape_us: 20.2,
-  pe_cn: 11.9,
-  // 美国宏观（FRED）
-  wei: 0,
-  hy_oas: 4.5,
-  payems_yoy: 0,
-  ppiaco_yoy: 0,
-  cpiaucsl_yoy: 2,
-  cshpi_yoy: 0,
-  dgorder_yoy: 0,
-};
+// Page-local display correction; original shared research definitions remain versioned.
+const neutralZones = [{max:Infinity,label:'无经核验的固定投资阈值',tone:'neutral' as const,note:'请看数据总览的当前历史位置与定义来源；不据固定经验值判断机会或危险。'}];
+const ZONES=Object.fromEntries(Object.keys(OLD_ZONES).map(k=>[k,k==='pmi'?[{max:50,label:'调查活动≤50；结合前值',tone:'neutral' as const,note:'国家统计局PMI定义；不等于买卖点。'},{max:Infinity,label:'调查活动>50，较上月扩张',tone:'neutral' as const,note:'国家统计局PMI定义。'}]:neutralZones]));
+const CAPE_US_ZONES=neutralZones,ERP_CN_ZONES=neutralZones,ERP_US_ZONES=neutralZones,PE_CN_ZONES=neutralZones;
+const MARKLINES=Object.fromEntries(Object.keys(OLD_MARKLINES).map(k=>[k,k==='breadth'?OLD_MARKLINES[k]:referencesFor(k)]));
+const OVERLAY_MARKLINES=Object.fromEntries(Object.keys(OLD_OVERLAY_MARKLINES).map(k=>[k,k==='breadth'?OLD_OVERLAY_MARKLINES[k]:referencesFor(k)]));
+const SOURCE_NOTES=Object.fromEntries(Object.keys(OLD_SOURCE_NOTES).map(k=>[k,k==='breadth'?OLD_SOURCE_NOTES[k]:'当前资料沿原接口；未经核验的固定机会/危险线已撤下。定义与可复算历史位置见数据总览。']));
+function buildDrawer(p:Parameters<typeof oldBuildDrawer>[0]) {
+ const d=oldBuildDrawer(p);return {...d,zones:[],markLines:referencesFor(p.key,{dates:p.dates,values:p.values,notice:''}),subtitle:`${p.curDisplay??p.cur??'暂无数据'} ${p.unit} · ${p.dates[p.dates.length-1]??''} 资料所属期；历史位置不是买卖阈值`,footnote:SOURCE_NOTES[p.key]};
+}
+const SPARK_MARK:Record<string,number>={pmi:50,cpi:0,ppi:0,cn_us_spread_10y:0,payems_yoy:0,wei:0,cshpi_yoy:0,cpiaucsl_yoy:0,ppiaco_yoy:0,dgorder_yoy:0};
+
 
 type MacroItem = {
   key: string;
@@ -583,7 +567,7 @@ function OverlaySection() {
           rightZones={ZONES.margin_rzyezb}
         />
         <div className="fund-hint-row">
-          两融数据自 2010-03 开闸；利率格背景色带为杠杆水位分档，占比 &gt; 3.5% 进入 2015 式警戒区（历史顶 2015-07-03 达 4.70%）。
+          融资占比同时受融资余额和流通市值影响，不能只凭占比升高断言资金流入。未核验的固定警戒线已撤下；请结合指数、成交与信用看。
         </div>
       </div>
       )}
@@ -600,14 +584,10 @@ function OverlaySection() {
             (new Date(vixDates[vixDates.length - 1]).getTime() - new Date(vixDates[0]).getTime()) / 86400000 || 1
           ) * 100))}
           mode={mode}
-          rightMarkLines={[
-            { y: 20, label: "20 正常/升温界", color: "#6b7280" },
-            { y: 30, label: "30 恐慌区（尖峰事后看多为阶段底）", color: "#e33d47" },
-          ]}
+          rightMarkLines={referencesFor('vix',vixSer?{dates:vixSer.dates,values:vixSer.values,notice:''}:undefined)}
         />
         <div className="fund-hint-row">
-          左轴标普500（近 10 年）；右轴 VIX。月度相关性：同期 <strong>-0.78</strong>（构造性镜像——VIX 本身由标普期权定价反推，见「相关性速查」卡），
-          指数领先 VIX 变化 +0.28。用法：VIX&gt;30 尖峰用于<strong>确认</strong>底部区域，不是领先抄底信号。
+          标普500与VIX历史对照。VIX反映期权中的预期波动，升高不能确认底部；变化关系和当前窗口的观测数见“指数对照与事件”。
         </div>
       </div>
       )}
@@ -681,7 +661,7 @@ function RatesSection({ data, hist }: {
       <MetricCard
         label="中美 10Y 利差"
         value={fmt(spread, 2, "%")}
-        sub="为负 = 美债收益更高，资本外流压力侧"
+        sub="为负表示美国10年期收益率较高；资金流还需结合汇率与其他资料"
         zoneLabel={findZone(spread, ZONES.cn_us_spread_10y).label}
         zoneTone={findZone(spread, ZONES.cn_us_spread_10y).tone}
         sparkValues={spark("cn_us_spread_10y")}
@@ -691,15 +671,7 @@ function RatesSection({ data, hist }: {
       <MetricCard
         label="VIX 恐慌指数"
         value={data.vix == null ? "暂不可用" : data.vix.value.toFixed(2)}
-        sub={
-          data.vix == null
-            ? "yfinance 限流，稍后刷新重试"
-            : data.vix.value > 30
-              ? "恐慌区：持股风险高，但常伴逆向机会"
-              : data.vix.value < 15
-                ? "低波动区：风险资产环境友好，需防自满"
-                : "15–30 正常/升温区间"
-        }
+        sub={data.vix == null ? "资料暂不可用，稍后重试" : "标普期权隐含的未来30天波动预期；不据固定15/30判断安全或抄底"}
         zoneLabel={data.vix == null ? undefined : findZone(data.vix.value, ZONES.vix).label}
         zoneTone={data.vix == null ? undefined : findZone(data.vix.value, ZONES.vix).tone}
         sparkValues={spark("vix")}
@@ -835,6 +807,9 @@ function RatesSection({ data, hist }: {
       {drawer && (
         <TrendDrawer
           {...drawer}
+          zones={[]}
+          markLines={openMeta?referencesFor(openMeta.key,{dates:drawer.dates,values:drawer.series[0]?.values??[],notice:''}):[]}
+          subtitle={`${openMeta?.curDisplay??openMeta?.cur??'暂无数据'} · 历史位置参考；未经核验的固定投资阈值已撤下`}
           periodOptions={RATE_LOOKBACK_OPTIONS}
           activeDays={1095}
           resetKey={openMeta?.key}
@@ -858,7 +833,7 @@ function HyOasCard() {
       <MetricCard
         label="信用利差（高收益债 OAS）"
         value={hy?.value == null ? "暂不可用" : `${hy.value.toFixed(2)}%`}
-        sub={hy ? `日更 · ${hy.date ?? "-"} · ${hy.note_cn}` : "FRED 拉取中，稍后刷新重试"}
+        sub={hy ? `日更 · ${hy.date ?? "-"} · 信用风险补偿；结合VIX、利率和盈利，未核验固定警戒值` : "FRED 拉取中，稍后刷新重试"}
         zoneLabel={hyZone?.label}
         zoneTone={hyZone?.tone}
         sparkValues={hySer?.values}
@@ -1392,7 +1367,7 @@ function UsMacroSection({ onOpen }: { onOpen: (d: DrawerState) => void }) {
               key={it.key}
               label={it.name_cn}
               value={it.value == null || !fmtVal ? "-" : fmtVal(it.value)}
-              sub={isUsCpi ? `${it.date?.slice(0,7) ?? '-'} 所属月 · ${cpiReading.reading}` : `${it.freq}更 · ${it.date ?? "-"} · ${it.note_cn}`}
+              sub={isUsCpi ? `${it.date?.slice(0,7) ?? '-'} 所属月 · ${cpiReading.reading}` : `${it.freq}更 · ${it.date ?? "-"} · ${dashboardMetrics.find(m=>m.key===it.key)?.reading??"原接口说明尚未完成证据核查，请结合其他资料"}`}
               zoneLabel={it.value == null ? undefined : isUsCpi ? '涨幅需结合增长与利率' : zone.label}
               zoneTone={it.value == null ? undefined : isUsCpi ? 'neutral' : zone.tone}
               sparkValues={ser?.values}
@@ -1411,7 +1386,7 @@ function UsMacroSection({ onOpen }: { onOpen: (d: DrawerState) => void }) {
                     periodLabel: it.freq,
                     curDisplay: it.value == null || !fmtVal ? "-" : fmtVal(it.value),
                   }), ...(isUsCpi ? {
-                    subtitle: `${it.value == null || !fmtVal ? '-' : fmtVal(it.value)} · ${it.date?.slice(0,7) ?? '-'} 所属月 · 2%为经验参考，非政策目标；结合增长与利率看`,
+                    subtitle: `${it.value == null || !fmtVal ? '-' : fmtVal(it.value)} · ${it.date?.slice(0,7) ?? '-'} 所属月 · CPI不画PCE政策目标；结合增长与利率看`,
                     zones: [], markLines: referencesFor(it.key),
                     footnote: `${cpiReading.reading} ${referencesFor(it.key).map(r=>`${r.label}：${r.explanation}`).join(' ')}`,
                   } : {})},
