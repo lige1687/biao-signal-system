@@ -1,3 +1,42 @@
+# 当前成果：外部挖掘组件复用检查完成，AlphaGen暂不默认接入
+
+- task-id external-quant-resources；原聊天外部增量/会话01a0cd21-07e5-7163-8f4e-72a4d5ebc32e/Air负责人继续。此有限问题completed / question_answered；整体研究能力方向保留，非接管或结束。更新时间2026-10-03T21:00:14.210887+08:00，Asia/Shanghai。
+- 用户原话：“不要重复造轮子哈”“对的哈，就继续推进我们的因子挖掘能力哈”。本輪只检验AlphaGen现成组合/去重接口相对已有Qlib、RD-Agent、QuantaAlpha的缺口；没有复写生成器/池/验证框架或改变LEI定义。
+- 工作分支task/external-quant-progress；基础ada1fd79d471ae88d7f2cc41a0d0ebd8f0887026；**本轮已推并核实完整commit af8934d60511ae24f9e182bdf2d4a441a723cc12**。普通push成功，ls-remote完整相同，16准确文件全部逐字读回。代码/小文档共279267字节，原共享HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9/default index83bb48fe…均保持。
+- [本轮结论](https://github.com/lige1687/biao-signal-system/blob/af8934d60511ae24f9e182bdf2d4a441a723cc12/docs/experiments/external-mining-reuse-2026-10-03.md)；[保存证据与恢复入口](https://github.com/lige1687/biao-signal-system/blob/af8934d60511ae24f9e182bdf2d4a441a723cc12/docs/experiments/raw/external-mining-reuse-2026-10-03/README.md)；[持续进度](https://github.com/lige1687/biao-signal-system/blob/af8934d60511ae24f9e182bdf2d4a441a723cc12/docs/progress/external-quant-resources.md)。工作进度“正在发布”为提交形成时状态，现在已核实；此记录是唯一跨任务当前摘要。
+
+## 完成什么、真实增量和封存
+
+固定上游259687e8f316994426416c530a94842a2fe6405e，原生TensorAlphaCalculator/MseAlphaPool四次尝试：两人工互补输入组合分数0.7071→约1；同向副本拒绝，完全负号副本仍收录，池大小1→2→2→3。单ETF随时间完全一致的人工关系，以及四ETF一起变化的关系，按其同日产品比较原生都给0；与我们同ETF跨时间研究的问题不同。只是组件代数能力与适配反例，不是新有效金融因子或线上收益。
+
+核心许可未确认（GitHub license=null，固定树无核心许可文件）；不把vendored子代码许可覆盖整个核心。StockData即便传预载数组仍先依赖Qlib，实际缺包。正式接入blocked，不下载整套旧依赖或伪造Qlib；源码仅忽略目录本地评估，未复制/再分发到Git。保留已有QuantaAlpha原生修订/融合入口、RD-Agent旧执行恢复，不重建这些轮子；完整自动研究与人工节省未测量。
+
+## 检查、运行和预算
+
+一次核心退出0，PID46304于2026-10-03T20:46:36.559065+08:00结束，墙钟3.524秒。固定协议SHA75762afc18244a0f67bef00acd1f37986a1a6dcc28ee68d9af58dbb7c1e6f826；105源文件前后未变。六组独立数值核验；独立临时目录无上游源码/第三方包，Python -S保存结果核验退出0，故意破坏的副本退出1。0新增拟合；目录卫生在共享工作区退出0，完整系统/干净依赖/Linux/Windows/RL/市场有效性未验。
+
+来源5/6（此前两官方页+本轮API/zip/API），核心1/1，后续1/3，按实际接受分支推算2次人工权重求解；0新市场拟合/回测、0外部模型/新依赖/新付费。累计43公开来源/22工程批/16旧真实拟合；旧DEAP/arch/tsfresh与RD-Agent失败调用账保持。一个Sol medium只读盘点旧接口，0网络/写入/实验，已结束；主控及助手模型成本未精确计量。无本任务运行中实验、助手、checkpoint或后台自动继续。
+
+失败留痕：apply_patch写核验文件一次失败，原因未确认；df当时107MiB可用，直接写同一小文件成功，未删资料。最新技术方另报明确磁盘写入失败；本次只同步小成果，不开启需要较大空间的新运行。不能猜测其他任务已停止，也未杀任何进程。
+
+## 当前范围、下一步、缺口
+
+- 正在做：本轮协调同步和远端读回；科学/工程核心已结束。维护本raw/报告/两进度，以及原四技能/固定tsfresh适配器；不要求独占整个外部工具或ETF因子领域。
+- 下一步planned：先核现有候选登记/表达规范是否已有“正反面重复、完全重复、没有共同可比较机会”的检查，优先复用；确认缺口和有限合同后才写接口或执行。未启动，不接手经典方baseline_review/CLI，也不认领全局验证器。
+- 正式接入阻塞：AlphaGen核心许可、目标评价语义及完整运行依赖不齐；现有QuantaAlpha许可原文与旧模型服务记录也需准确核实，不能当现成全平台可用。不能为了接入而改研究问题。
+- 未交：上游zip277278字节及API元数据仅本地，URL/大小/SHA在sources；部分RD-Agent/QuantaAlpha旧报告不在工作基础，索引给准确路径/大小/SHA，未夹带原件。原历史行情/供应商资料远端缺口保持，本轮保存证据复核不依赖它们。无数据库、权重、凭据或受限行情上传。
+- 封存：Qlib五公式、RD-Agent旧两失败请求、QuantaAlpha16版、DEAP固定人工比较、tsfresh/arch和本轮AlphaGen固定人工例子不重跑；只有新版/许可/适用前提实变或必要独立复核才重开，旧预算不清零。
+
+## 协作与权限
+
+规则读取85a5a28aafcfa0b25f51efedf9590cca47c51766，范围启动同步40c8a8bc02d9f90c35ba9fd982aca368adaa9f59已核字节；阶段增量核c04e6188255b110987b2dffed5b274365d3771b3及22e413c9fb487e549f7531f71c2bde0d8473d49e，发布前最新f9bf9e4eda2c742b4283e075dc4d4c9f513a1265。COORDINATION1.0/SHA6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0未变。技术两风险/AAII动态已封存、经典baseline审查CLI和观察图表另有负责人，均不同题/文件；无已登记当前冲突，未登记者未知，记录不是锁。
+
+项目AGENTS既有协作入口保留，不重复追加。共享workflow/definitions/CLI/策略/生产只读，工作/协调基线无跟踪GitHub workflows、无pre-push/core.hooksPath；本次仅授权分支小产物同步，无main合并/上线/强推/付费/权限变更，外部仓库集成未全面验证。本记录自身提交由路径Git历史定位，返回后核远端与文件字节才报已同步。
+
+---
+
+## 历史阶段（当前以上为准）
+
 # 当前阶段：复用现成因子挖掘组件，先核能力重叠
 
 - task-id external-quant-resources，原负责人/会话01a0cd21-07e5-7163-8f4e-72a4d5ebc32e继续；状态active（有界复用核查，尚无新搜索或市场计算）。更新时间2026-10-03T20:34:54.573111+08:00，Asia/Shanghai。
