@@ -1,0 +1,35 @@
+{
+  "question": "已有经典资源的比较与同期解释价值",
+  "status": "design_frozen_before_new_outcomes",
+  "selected_scope": "条件性六ETF月变化解释、旧预测零拟合复核",
+  "primary_models": [
+    "M1",
+    "M3"
+  ],
+  "auxiliary_models": [
+    "M0",
+    "MX"
+  ],
+  "market_estimates": {
+    "main_ols_fits": 18,
+    "main_training_means": 6,
+    "independent_verification_ols_limit": 3,
+    "note": "独立复核限一ETF主模型及只用新增信息模型；不重新选方法或生成新候选，核算另记"
+  },
+  "attempts_planned": [
+    "E1旧预测重汇总0拟合",
+    "E2CH3固定批次"
+  ],
+  "max_experiment_attempts": 4,
+  "counterchecks_no_refits": [
+    "各ETF",
+    "各年",
+    "去一ETF",
+    "去一月",
+    "去连续6月",
+    "3月/6月相关性范围"
+  ],
+  "method_review": "docs/archive/handoffs-plans/classic-factor-increment-2026-10-02/design-review.md",
+  "qualification": "monthly-qualification-final.json",
+  "acceptance": "主控接受仅条件性历史解释；不扩大为完整LEI增量、资金收益或预测"
+}

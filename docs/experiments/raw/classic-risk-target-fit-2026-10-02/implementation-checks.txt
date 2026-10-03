@@ -1,0 +1,52 @@
+.........FF.........                                                     [100%]
+=================================== FAILURES ===================================
+____________________ test_qualification_never_reads_labels _____________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10c4c7650>
+
+    def test_qualification_never_reads_labels(monkeypatch):
+        p, c = fixture()
+        c['data'] = {'sha256': 'synthetic-only'}
+        c['split'] = {'folds': [{'train_end':p['calendar'][310], 'eval_start':p['calendar'][311], 'eval_end':p['calendar'][-1]}]}
+        monkeypatch.setattr(risk, 'qualify_top_panel', lambda *a: {'quality': {}, 'warnings': []})
+        monkeypatch.setattr(shared, '_label', lambda *a, **k: pytest.fail('qualification label read'))
+        q = risk.build_qualification(p, c, ROOT)
+        assert q['outcome_values_used_for_design'] is False
+        assert q['counts']['observations'] == len(p['calendar'])
+>       assert q['scientific_support']['folds'][0]['train'] == 60
+E       assert 39 == 60
+
+tests/unit/test_classic_volatility_risk_information.py:133: AssertionError
+__________________ test_contract_rehearsal_and_cache_bindings __________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10c46c1d0>
+
+    def test_contract_rehearsal_and_cache_bindings(monkeypatch):
+        c = full_contract()
+>       validate_workflow_contract(c)
+
+tests/unit/test_classic_volatility_risk_information.py:138: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/lei_signal/research/question_contract.py:521: in validate_workflow_contract
+    _validate_research_design(c)
+src/lei_signal/research/question_contract.py:826: in _validate_research_design
+    _fail("workflow.research_design.sample_fit.model_feature_count", "must equal the distinct baseline and added feature count")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = 'workflow.research_design.sample_fit.model_feature_count'
+reason = 'must equal the distinct baseline and added feature count'
+
+    def _fail(path: str, reason: str) -> None:
+>       raise QuestionContractError(f"{path}: {reason}")
+E       lei_signal.research.question_contract.QuestionContractError: workflow.research_design.sample_fit.model_feature_count: must equal the distinct baseline and added feature count
+
+src/lei_signal/research/question_contract.py:53: QuestionContractError
+=========================== short test summary info ============================
+FAILED tests/unit/test_classic_volatility_risk_information.py::test_qualification_never_reads_labels
+FAILED tests/unit/test_classic_volatility_risk_information.py::test_contract_rehearsal_and_cache_bindings
+2 failed, 18 passed in 1.61s
+..........................................................               [100%]
+58 passed in 8.72s
+
+Repository hygiene: PASS (root four levels whitelisted).
+Final declaration guards ddof/annualized: source AST parse PASS; 3 added parameter cases unexecuted because requested after test batch2; controller must verify.

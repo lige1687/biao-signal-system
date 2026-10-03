@@ -1,0 +1,57 @@
+{
+  "updated_at": "2026-10-03T13:44:36.229850+08:00",
+  "timezone": "Asia/Shanghai",
+  "artifacts": [
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/execution/panel.json",
+      "bytes": 1582974,
+      "sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+      "published": false,
+      "reason": "行情原件及来源资格材料未获公开分发许可；本机研究复用"
+    },
+    {
+      "path": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/freeze-joint/contract.json",
+      "bytes": 71302,
+      "sha256": "83e293942e27eb8721d3c1b564f75ce3398599d57b88ddd19313df56c65b1a6e",
+      "published": false,
+      "reason": "其他任务的原封存合同，仅作结构样例，不能重跑"
+    },
+    {
+      "path": "src/lei_signal/research/top_structure_information.py",
+      "bytes": 15728,
+      "sha256": "5ce72eb21cc0d56208befd3e2dbb124792abbd3432288a8bf42c4fd42c341ad9",
+      "published": false,
+      "reason": "共享适配器由其他任务维护，未复制未发布代码；公开快照仅位于其他分支payload路径"
+    },
+    {
+      "path": "web/src/pages/reports-library.css",
+      "bytes": 868,
+      "sha256": "f0f97797b69f6f59dbc0c64d246056eab1deff23dc81778b4066292c6df44a32",
+      "published": false,
+      "reason": "其他任务共享样式未随本分支发布；学习页两行依赖变更因此只保存补丁，不改变发布分支页面"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/classic-factor-handoff-2026-10-03/code.tar.gz",
+      "bytes": 660486,
+      "sha256": "45d48bce33d1462a9b41de350b43d1ff3d2bdf6c46d50d6acac0f924257001da",
+      "published": false,
+      "reason": "完整本地交接档案不等于获准公开上传"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/classic-factor-handoff-2026-10-03/materials.tar.gz",
+      "bytes": 32875857,
+      "sha256": "1fb0cb0d8f9b99e1fc7992e5ff79066cab3b1ed2d0d65373ef67c0e395a14ef5",
+      "published": false,
+      "reason": "含行情来源和策略原件，不公开上传"
+    },
+    {
+      "path": "docs/archive/handoffs-plans/classic-factor-handoff-2026-10-03/registry-profile.tar.gz",
+      "bytes": 15178,
+      "sha256": "6bb19d2e7eadc629c8d3ff6d8fa33f940fba7f758a3c7e8f91f3bbf0e8871d5a",
+      "published": false,
+      "reason": "完整跨任务登记依赖，不属于本次最小代码进展发布"
+    }
+  ],
+  "restore": "用户提供获准的数据位置后先核SHA256；共享适配器请与对应负责人协调，不能假设payload快照已部署到canonical src。",
+  "weights": "不适用：本任务无持久模型权重/tokenizer；拟合只生成研究预测。"
+}

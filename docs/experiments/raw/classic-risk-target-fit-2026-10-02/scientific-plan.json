@@ -1,0 +1,58 @@
+{
+  "question": "四只国内宽基ETF：过去20日经济收盘简单收益标准差，在已有价格信息后是否改善接下来20个收盘间隔波动的判断？",
+  "target": "t+1收盘至t+21收盘之间20个简单日涨幅的样本标准差，ddof=1，不年化，百分点评价",
+  "factor_ref": "etf.reference.volatility20@1.0.0",
+  "existing_information": [
+    "S",
+    "E",
+    "return20",
+    "asset_510050",
+    "asset_510500",
+    "asset_588000"
+  ],
+  "added_information": [
+    "volatility20"
+  ],
+  "simple_references": [
+    "训练期共同成熟结果平均",
+    "各ETF训练期成熟结果平均",
+    "当前20日波动直接延续"
+  ],
+  "model": "固定prediction_ridge，lambda=1；只用成熟训练资料标准化；不搜索参数；非负预测不事后截断",
+  "assets": [
+    "510300.SS",
+    "510050.SS",
+    "510500.SS",
+    "588000.SS"
+  ],
+  "period": [
+    "2022-01-04",
+    "2026-06-30"
+  ],
+  "folds": [
+    {
+      "train_end": "2024-12-31",
+      "eval_start": "2025-01-02",
+      "eval_end": "2025-12-31"
+    },
+    {
+      "train_end": "2025-12-31",
+      "eval_start": "2026-01-05",
+      "eval_end": "2026-06-30"
+    }
+  ],
+  "maturity": "train label_end<eval_start; evaluation label_end<=eval_end; same observations across all comparisons",
+  "weighting": "equal_asset",
+  "primary_metric": "MSE; also RMSE in daily-return percentage points",
+  "uncertainty": "synchronized contiguous date blocks60, 1000 draws, seed20261002; preset120 sensitivity only, same saved predictions",
+  "counterexamples": [
+    "year/fold",
+    "each asset",
+    "delete each asset without refitting",
+    "compare untrained persistence and product-specific means"
+  ],
+  "scientific_scope": "seen retrospective economic-price reconstruction, four related ETFs; no live availability or trading use; no predeclared useful-effect threshold",
+  "core_budget": "one frozen real comparison,4ridge fits; one fixed reaggregation/check batch; no further parameter changes",
+  "source": "existing volume-information execution/panel.json and top_etf_economic source-only qualification; inspect without future outcomes before freezing",
+  "stop": "completed fixed comparison may be positive/negative/inconclusive; no automatic production adoption"
+}

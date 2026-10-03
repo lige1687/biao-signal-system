@@ -78,6 +78,15 @@ def _selected(calendar, available_end, question, payload):
 
 
 def _label(rows, i, target):
+    if target.get('kind') == 'forward_volatility':
+        if (target.get('start_offset') != 1 or target.get('end_offset') != 21 or
+                target.get('entry_field') != 'close' or target.get('path_field', 'close') != 'close' or
+                target.get('unit') != 'percentage_point' or
+                type(target.get('ddof', 1)) is not int or target.get('ddof', 1) != 1 or
+                target.get('annualized', False) is not False or
+                target.get('price_measure', 'economic_price') != 'economic_price'):
+            raise ValueError('forward_volatility freezes 20 simple close returns, ddof1, no annualization')
+
     a, b = i + target['start_offset'], i + target['end_offset']
     if b >= len(rows):
         return None, None, 'immature_label'
@@ -113,6 +122,16 @@ def _label(rows, i, target):
         elif kind == 'downside_event':
             value = float(value <= -abs(target['threshold']))
         return value, end, None
+    if kind == 'forward_volatility':
+        for r in path:
+            if r['status'] != 'quoted':
+                return None, end, 'path_' + r['status']
+            if not _number(r.get('close')):
+                return None, end, 'path_close_missing'
+        from statistics import stdev
+        returns = [right['close'] / left['close'] - 1 for left, right in zip(path, path[1:])]
+        return 100 * stdev(returns), end, None
+
     path_field = target.get('path_field', 'close')
     price_path = path[1:] if kind == 'mae' and path_field == 'low' and field == 'close' else path
     for r in path:
@@ -159,6 +178,13 @@ def prepare_observations(payload, contract):
     if contract['feature']['kind'] == 'a01_signed_band':
         from lei_signal.research.a01_index_features import prepare_a01_observations
         return prepare_a01_observations(payload, contract)
+    if contract['feature']['kind'] == 'classic_volatility_risk_information':
+        from lei_signal.research.classic_volatility_risk_information import prepare_risk_observations
+        return prepare_risk_observations(payload, contract, compute_labels=(
+            payload.get('data_mode') == 'synthetic' or
+            (contract.get('permissions', {}).get('real_labels') is True and
+             contract.get('permissions', {}).get('effect_authorized') is True)))
+
     if contract['feature']['kind'] == 'space_prior_target':
         from lei_signal.research.space_prior_target import prepare_space_observations
         return prepare_space_observations(payload, contract)

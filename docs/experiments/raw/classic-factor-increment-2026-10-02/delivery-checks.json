@@ -1,0 +1,58 @@
+{
+  "status": "passed_with_documented_legacy_compatibility_failure",
+  "new_module_synthetic_tests": {
+    "passed": 20,
+    "evidence": "engineering/controller-tests-01.log"
+  },
+  "related_extended_tests": {
+    "passed": 78,
+    "failed": 1,
+    "failure": "legacy frozen execution document SHA differs; rejected before fit",
+    "evidence": "engineering/accepted-tests.log"
+  },
+  "learning_tests": {
+    "command": "PYTHONPATH=src python3 -m pytest -q tests/unit/test_learning_library.py",
+    "passed": 4
+  },
+  "frontend_build": {
+    "command": "npm run build in web",
+    "exit_code": 0,
+    "warning": "existing large bundle size advisory"
+  },
+  "ruff": "passed for classic_attribution.py/run_factor_lab.py/test_classic_attribution.py",
+  "numerical_audit": "controller-numeric-audit.json",
+  "learning_service": "learning-service-check.json",
+  "ui": {
+    "browser": "Codex in-app browser",
+    "observed_viewport_width": 832,
+    "route_count": 9,
+    "flow": [
+      "directory",
+      "new two-lesson article",
+      "local research report",
+      "browser back",
+      "return to directory preserving path",
+      "reopen article"
+    ],
+    "result": "verified visible",
+    "fix": "shared reader hidden at max-width 900px without reading-state class; explicit stylesheet and conditional class added",
+    "screenshot": "learning-page.jpg"
+  },
+  "old_papers_and_entries_preserved": true,
+  "old_fund_attribution_module_unchanged": true,
+  "frozen_research_bindings_unchanged": true,
+  "okr": {
+    "id": "okr-4f4157e2957e",
+    "version": 49,
+    "status": "in_progress",
+    "change": "note only; milestones preserved"
+  },
+  "limitations": [
+    "one legacy compatibility test rejected",
+    "30 correlated historical months, conditional interpretation only",
+    "no full-account or independent new-period evidence",
+    "relative report evidence-file links verified on disk; UI flow verifies learning-to-report navigation"
+  ],
+  "repo_hygiene": "passed",
+  "diff_whitespace": "INDEX trailing blank line normalized after check"
+}

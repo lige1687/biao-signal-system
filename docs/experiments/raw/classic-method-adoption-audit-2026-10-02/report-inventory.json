@@ -1,0 +1,31 @@
+{
+  "scope": "仅核对合同指定的三份已存报告文本和其中嵌入的结果结构；不代表全库，不新增市场统计。行号为各报告当前文本的一基行号。",
+  "reports": [
+    {
+      "path": "docs/experiments/t03-double-ma-order-information-2026-10-01.md",
+      "simple_reference": {"shown": true, "lines": [10, 18, 20, 21, 31, 34], "finding": "B0为仅用训练期已成熟结果的简单参照；也声明二元目标另列固定50%的B50。表中直接给B0数值，并列出B2相对B0。"},
+      "existing_information": {"shown": true, "lines": [7, 10, 22, 23, 31, 33], "finding": "B1代表已有信息，报告说明候选条件是它的确定组合，无新原始信息；表中列B1误差。"},
+      "added_information": {"shown": true, "lines": [10, 24, 25, 27, 33, 34], "finding": "B2加入候选后，对B1错误减少0.0261百分点平方，但允许的改善与恶化范围跨过0；对B0反而更差。"},
+      "counterexamples_and_scope": {"shown": true, "lines": [8, 9, 40, 432, 445, 576, 588, 621, 650, 661, 667, 668, 669, 677, 684, 697], "finding": "列明4只ETF、时期和评价量；嵌入结果按ETF和年份展示组成，2022年有无共同状态的分组；正文指出年份方向相反、B2不如B0及不适用于完整LEI或其他资产。产品/年份细分存在，但主要埋在长段JSON中。"},
+      "actual_gap": "人读的逐产品与逐时期反例呈现弱于另两份报告；这属展示可读性问题，现有嵌入结果与结论边界已保留这些信息，未见足以证明需扩建研究报告流程的判断缺口。"
+    },
+    {
+      "path": "docs/experiments/key-fluctuation-information-2026-10-02.md",
+      "simple_reference": {"shown": true, "lines": [32, 34, 35, 38], "finding": "仅用较早历史平均下探的简单参照、已有价格模型和加入双跌破模型同表比较；已有模型本身优于简单参照。"},
+      "existing_information": {"shown": true, "lines": [30, 32, 35, 38, 40], "finding": "明确已有涨跌、波动、EMA距离及产品身份，并说明双跌破可由现有原始量确定。"},
+      "added_information": {"shown": true, "lines": [32, 36, 38, 40], "finding": "加入双跌破后同覆盖预测误差略增；只否定本次固定表达的帮助，不外推全部模型。"},
+      "counterexamples_and_scope": {"shown": true, "lines": [5, 7, 24, 26, 42, 44, 50, 52, 59, 65, 73, 75, 83, 88, 94], "finding": "列出年份、4只ETF、集中性反例、不同期限方向及主比较153个观察和367个无可比日；未评价完整退出、全部ETF和独立新资料。"},
+      "actual_gap": "四类证据均已直接展示；没有从此报告证明进一步扩建的必要性。"
+    },
+    {
+      "path": "docs/experiments/classic-factor-increment-2026-10-02.md",
+      "simple_reference": {"shown": true, "lines": [11, 13, 16, 53], "finding": "预测用始终预测0涨幅，月度同期解释用各ETF较早历史平均值；旧预测模型也不如0涨幅参照。"},
+      "existing_information": {"shown": true, "lines": [14, 17, 24, 29, 47, 49, 50], "finding": "预测对手为旧双20状态，同期解释对手为仅市场因素；重复已有列的边界和未单独估计的项目均明确。"},
+      "added_information": {"shown": true, "lines": [15, 18, 19, 43, 47, 49, 50, 51], "finding": "预测联合加入历史涨幅和波动未见稳定增量；同期解释加入规模与价值减少误差，但不能当作事前预测或交易收益。"},
+      "counterexamples_and_scope": {"shown": true, "lines": [13, 16, 30, 31, 32, 49, 51, 55, 60, 61, 64, 66, 99, 105], "finding": "表中列预测的跨ETF及时期方向、月度解释的逐ETF反例和科创50集中性，并限制为6只ETF、已见历史、30个共同月及同期解释。"},
+      "actual_gap": "四类证据均已直接展示；不能从这份报告推断全库每份报告都同样完整。"
+    }
+  ],
+  "overall_judgment": "三份指定报告都已有简单参照、原信息、加入新信息、反例及范围；没有观察到会改变当前结论的共同缺口，因此仅凭此样本没有明确增量可支持继续扩建报告。T03的细分反例可读性较弱，但数据与边界已经在报告中，不能把版面差异包装成研究缺失。",
+  "limits": "本盘点未核算底层统计、未审计全库报告、未检验报告生成程序或界面；是否有代码层确定故障由主控另行核验。"
+}

@@ -1,0 +1,52 @@
+{
+  "controller_completed_after_helper_transport_failure": true,
+  "reports_read": 3,
+  "scope": "仅上述最相关资料与登记簿搜索，不声称全库无同类",
+  "reports": [
+    {
+      "path": "docs/experiments/classic-benchmarks-2026-09-28.md",
+      "lines": [
+        45,
+        47,
+        49,
+        57
+      ],
+      "target": "未来21收盘区间涨幅",
+      "definition": "volatility20为最近20简单日涨幅std(ddof1),未年化",
+      "duplicate": false,
+      "reason": "目标为涨幅；波动信息只作既有背景或联合变量，不能代表未来波动用途已答。",
+      "sha256": "4242aed6a8152245e5966be8931fdeaf182c4f30878d68329adc3370890b508f"
+    },
+    {
+      "path": "docs/experiments/vxn-qqq-risk-information-2026-10-02.md",
+      "lines": [
+        3,
+        9,
+        15,
+        21,
+        26
+      ],
+      "target": "QQQ未来20对数日涨幅波动，年化",
+      "definition": "QQQ近期波动+外部VIX再加VXN",
+      "duplicate": false,
+      "reason": "有相似风险目标和延续波动参照，方法可学习；资产/因子/增量对手不同，不重复VXN研究或美国数据。",
+      "sha256": "262a7a83f9be4781081a30de86cc71fd59727219489c246c9505a88c740d0c75"
+    },
+    {
+      "path": "docs/experiments/factor-lab-extension-2026-09-05.md",
+      "lines": [
+        42,
+        44,
+        48,
+        57
+      ],
+      "target": "市场难度各档未来20日波动均值",
+      "definition": "宽度和波动分档，不是既有volatility20单独增量",
+      "duplicate": false,
+      "reason": "描述和市场级分档，未在已有国内ETF价格信息后核当前精确变量的固定预测帮助。",
+      "sha256": "fbf26aeb9cd40d1339ef068f172f458af4e94d90101813e59026a5fb8ac1644d"
+    }
+  ],
+  "conclusion": "未发现当前四ETF精确volatility20、当前目标与当前对手问题已结案；同类QQQ方法复用但不复跑。",
+  "live_ownership_check": "external-quant-resources维护多归档统计组件，technical-factor-sequence上轮Q01/C01已结案；本轮不写他们的模块或进度文件。"
+}

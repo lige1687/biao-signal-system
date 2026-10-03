@@ -1,0 +1,21 @@
+diff --git a/web/src/pages/LearningLibraryPage.tsx b/web/src/pages/LearningLibraryPage.tsx
+index 196270ce..47bd53b7 100644
+--- a/web/src/pages/LearningLibraryPage.tsx
++++ b/web/src/pages/LearningLibraryPage.tsx
+@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
+ import { learningApi } from "../api/client";
+ import type { LearningEntry, LearningPaper, LearningResponse } from "../types";
+ import "./page-reading.css";
++import "./reports-library.css";
+ 
+ /**
+  * 文献学习库：以论文为线索的学习目录（独立学习层，不参与交易判定）。
+@@ -185,7 +186,7 @@ export default function LearningLibraryPage() {
+   const selected = paperId ? paperById.get(paperId) : undefined;
+ 
+   return (
+-    <div className="page lib-page learning-page">
++    <div className={`page lib-page learning-page${paperId != null ? " lib-page--reading" : ""}`}>
+       <div className="pg-head">
+         <div className="pg-head-title">
+           <h1>文献学习库</h1>

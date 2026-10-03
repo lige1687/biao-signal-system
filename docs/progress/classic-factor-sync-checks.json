@@ -1,0 +1,40 @@
+{
+  "at": "2026-10-03T13:45:30.100228+08:00",
+  "timezone": "Asia/Shanghai",
+  "checks": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider --basetemp docs/experiments/raw/classic-sync-test-tmp-01 tests/unit/test_classic_attribution.py",
+      "exit_code": 0,
+      "result": "20 passed in 1.09s",
+      "scope": "public worktree; synthetic/unit only"
+    },
+    {
+      "command": "git diff --check; Python AST/JSON parse changed selected files; existing registry entries unchanged",
+      "exit_code": 0,
+      "result": "passed; exactly 3 own registry additions"
+    },
+    {
+      "command": "python3 scripts/check_repo_hygiene.py",
+      "exit_code": 0,
+      "result": "primary repository green"
+    },
+    {
+      "command": "targeted credential signature scan of selected task payload",
+      "exit_code": 1,
+      "result": "no matches; heuristic not comprehensive"
+    },
+    {
+      "command": "risk workflow end-to-end on publication branch",
+      "exit_code": null,
+      "result": "NOT RUN; shared qualifier and input artifacts absent"
+    }
+  ],
+  "ci": {
+    "tracked_workflows_at_base": 0,
+    "pre_push_hook": false,
+    "observed_github_runs": "only historical dynamic Dependabot graph update",
+    "workflow_listing": "GitHub connector endpoint unsupported (400); external integrations not exhaustively verified",
+    "production_or_paid_action_authorized": false
+  },
+  "real_market_experiments_this_sync": 0
+}

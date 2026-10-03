@@ -13,7 +13,7 @@ import pandas as pd
 
 VERSION = "1.0.0"
 _BINARY = {"up", "downside_event"}
-_CONTINUOUS = {"forward_return", "mae", "max_drawdown"}
+_CONTINUOUS = {"forward_return", "mae", "max_drawdown", "forward_volatility"}
 
 
 class EvaluationError(ValueError):

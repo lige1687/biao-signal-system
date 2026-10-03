@@ -1,0 +1,52 @@
+{
+  "research_id": "classic-risk-target-fit-2026-10-02",
+  "question": "四只国内宽基ETF：过去20日经济收盘简单收益标准差，在已有价格信息后是否改善接下来20个收盘间隔波动的判断？",
+  "execution": "running",
+  "evidence": "not_evaluated",
+  "mode": "research",
+  "delivery_mode": "final_only",
+  "authorization": "用户：这一块有无进一步的增量，去做哈，目标要清晰，就是为了我们更好的研究流程和因子效果。",
+  "strategy_layer": "研究比较和风险信息评价；现有经典价格变量的研究用途，不改变策略规则或执行。",
+  "budget": {
+    "market_experiments": 2,
+    "source_requests": 2,
+    "synthetic_check_batches": 2,
+    "helpers": 2,
+    "paid_actions": 0
+  },
+  "used": {
+    "market_experiments": 0,
+    "source_requests": 2,
+    "synthetic_check_batches": 2,
+    "helpers": 2
+  },
+  "stop": "同定义同用途已有完成结果则不重跑；否则最多一个冻结主比较与一个预定反例批次；不换参数追正结果。",
+  "allowed_actions": [
+    "既有资料和代码只读",
+    "repo内研究代码与证据",
+    "限定人工检查和真实历史研究",
+    "repo内学习/交接记录"
+  ],
+  "forbidden": [
+    "生产信号/账户/交易",
+    "仓库外写入",
+    "删旧数据或封存结果",
+    "参数扫描/跨项目取数"
+  ],
+  "scientific_plan": "docs/experiments/raw/classic-risk-target-fit-2026-10-02/scientific-plan.json",
+  "strategy_sources": {
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "handoff_at": "2026-10-03T12:50:54.962895+08:00",
+  "accounting_correction": "此前used误记0，实际两批工程检查已用2：18通过2失败；58通过。最后声明防错变更尚未验证。交接恢复检查另列，不重置研究预算。",
+  "handoff": "docs/archive/handoffs-plans/classic-factor-handoff-2026-10-03",
+  "previous_pause": {
+    "reason": "user_requested_handoff_no_new_experiment",
+    "handoff_at": "2026-10-03T12:50:54.962895+08:00"
+  },
+  "phase": "progress_sync_then_source_only_qualification",
+  "resumed_at": "2026-10-03T13:44:36.229850+08:00",
+  "resume_authorization": "用户2026-10-03：同步完成后按原任务已有授权继续推进，仍由原任务负责人负责，不接管、不结束。",
+  "real_experiment_started": false
+}

@@ -1,0 +1,43 @@
+{
+  "mission": "只读盘点经典因子接入及已有增量证据，供本轮研究设计使用",
+  "task_scope": [
+    "核对13个经典参考对象及相关research_references的准确ID、版本、实现、适用资产与用途",
+    "检索已有2026-09-28至10-02相关实验，找已回答问题与未覆盖问题；不得运行新市场实验",
+    "核对现有资料与工作流可直接复用部分"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "configs",
+    "docs/research",
+    "docs/experiments",
+    "docs/literature-learning",
+    "src/lei_signal/research",
+    "tests/unit/test_classic_benchmarks.py"
+  ],
+  "write_paths": [
+    "docs/archive/handoffs-plans/classic-factor-increment-2026-10-02/inventory.json",
+    "docs/archive/handoffs-plans/classic-factor-increment-2026-10-02/inventory.md"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "inventory.json和简明inventory.md，含文件/行号、已知局限、可复用数据/结果路径；不提出策略定义变更"
+  ],
+  "stop_conditions": [
+    "须新增权限或访问密钥",
+    "不得写其他文件/运行真实实验/联网/调参/修改生产"
+  ],
+  "executor": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "external_read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei signal doc"
+  ],
+  "preflight_note": "预检工具只支持仓库内相对路径；桌面策略源在external_read_only_paths中单独授权只读；不写仓库外。初次预检拒绝绝对只读路径，尚未委派。"
+}

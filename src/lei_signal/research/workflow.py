@@ -209,6 +209,13 @@ def actual_bindings(contract, root=ROOT):
         related_code.append("src/lei_signal/research/provider_index_input.py")
     if contract.get("descriptive"):
         related_code.append("src/lei_signal/research/workflow_descriptions.py")
+    if contract["feature"]["kind"] == "classic_volatility_risk_information":
+        related_code.extend(("src/lei_signal/research/classic_volatility_risk_information.py",
+                             "src/lei_signal/research/factor_lab/benchmarks.py",
+                             "src/lei_signal/research/top_structure_information.py",
+                             "src/lei_signal/research/volume_information.py",
+                             "src/lei_signal/features/indicators.py"))
+
     for name in related_code:
         files[name] = file_hash(root / name)
     source_config = root / catalog["strategy_sources"]
@@ -268,6 +275,11 @@ def cache_keys(contract, bindings):
                       "sampling": {k: contract["question"].get(k) for k in ("sampling", "frequency", "period", "event_definition")}})
     labels = digest({"data": bindings["data_sha256"], "target": contract["target"],
                      "code": bindings["files"][CODE_PATHS[1]]})
+    if contract["feature"]["kind"] == "classic_volatility_risk_information":
+        feature = digest({"base": feature, "adapter": bindings["files"]["src/lei_signal/research/classic_volatility_risk_information.py"],
+                          "classic_definitions": bindings["files"]["src/lei_signal/research/factor_lab/benchmarks.py"]})
+        labels = digest({"base": labels, "adapter": bindings["files"]["src/lei_signal/research/classic_volatility_risk_information.py"]})
+
     prediction = digest({"features": feature, "labels": labels, "split": contract["split"],
                          "evaluator": contract["evaluator"],
                          "training_weights": contract.get("training_weights", "equal_asset"),
@@ -379,6 +391,13 @@ def preflight(contract, root=ROOT, *, require_frozen=True):
     """Actual input-derived evidence. This function does not fit or do final statistics."""
     from lei_signal.research.input_preflight import inspect_workflow_input
     validate_workflow_contract(contract)
+    if contract["feature"]["kind"] == "classic_volatility_risk_information" and not (
+            contract.get("permissions", {}).get("real_labels") is True and
+            contract.get("permissions", {}).get("effect_authorized") is True and
+            type(contract.get("permissions", {}).get("real_fits")) is int and
+            contract["permissions"]["real_fits"] == 4):
+        raise WorkflowBlocked("classic risk requires explicit real label/effect permission and four-fit ceiling")
+
     bindings = actual_bindings(contract, root)
     if require_frozen and contract.get("bindings") != bindings:
         raise WorkflowBlocked("stale_proof: freeze does not match this input/definition/code")
@@ -592,6 +611,8 @@ def run_rehearsal(contract):
     if c["feature"]["kind"] in ("space_prior_target", "ma_cluster_information"):
         n = max(n, 600)  # enough weekly training rows; space also needs 730 natural days
     count = n + c["target"]["end_offset"] * 2 + 72
+    if c["feature"]["kind"] == "classic_volatility_risk_information":
+        count = 600  # existing fixed engineering fixture
     if count > 2000:
         raise WorkflowBlocked("synthetic rehearsal size exceeds finite engineering adapter limit")
     dates, d = [], date(2020, 1, 2)
@@ -628,10 +649,19 @@ def run_rehearsal(contract):
     cutoff = n + c["target"]["end_offset"] + 32
     c["split"] = {"label_policy": "purge", "folds": [{"train_end": dates[cutoff],
         "eval_start": dates[cutoff + 1], "eval_end": dates[-1 - c["target"]["end_offset"]]}]}
+    if c["feature"]["kind"] == "classic_volatility_risk_information":
+        c["split"]["evaluation_label_policy"] = "contained"
     c["calendar"] = dates
     c["dependence"] = {"block_length": 5, "draws": 16, "seed": 7}
     inputs = prepare_observations(payload, c)
     result = evaluate_observations(inputs["observations"], c)
+    if c["feature"]["kind"] == "classic_volatility_risk_information":
+        ready = [r for r in inputs["observations"] if r["eligible"]]
+        if (not result["performance"] or not result["predictions"] or result["execution"]["fits"] != 2 or
+                len({r["features"]["volatility20"] for r in ready}) < 2 or
+                any(r["y"] < 0 for r in ready)):
+            raise WorkflowBlocked("classic risk rehearsal requires changing volatility and both continuous-target fits")
+
     if c["feature"]["kind"] == "space_prior_target" and not result["performance"]:
         raise WorkflowBlocked("space synthetic rehearsal must exercise available upper targets and real predictions")
     if c["feature"]["kind"] == "ma_cluster_information" and not result["performance"]:

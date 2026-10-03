@@ -1,0 +1,56 @@
+{
+  "research_id": "classic-method-adoption-audit-2026-10-02",
+  "question": "在现有规范和实现之外，简单参照/增量比较/反例与学习过程是否有具体未覆盖缺口，补上是否改变错误放行或读者可见判断？",
+  "mode": "research",
+  "delivery_mode": "final_only",
+  "execution": "completed",
+  "evidence": "not_supported_within_scope",
+  "parent_research": "classic-factor-increment-2026-10-02 (completed; do not rerun)",
+  "authorization": "用户：确定是有效的，有增量的哈，再去做；之后：那你继续哈。只核必要缺口，证实后最小修复。",
+  "strategy_layer": "研究比较与学习解释，不变更技术判断或交易",
+  "budget": {
+    "market_experiments": 0,
+    "external_source_requests": 0,
+    "synthetic_check_batches": 2,
+    "helpers": 1,
+    "paid_actions": 0
+  },
+  "used": {
+    "market_experiments": 0,
+    "external_source_requests": 0,
+    "synthetic_check_batches": 2,
+    "helpers": 1,
+    "paid_actions": 0
+  },
+  "stop": "若现有流程已覆盖则不扩建；只修可复现且影响判断的确定缺口，不批量加因子或重跑已结案行情。",
+  "allowed": [
+    "read repository standards/code/tests/saved reports",
+    "local synthetic adversarial check",
+    "minimal research-only fix if failure is demonstrated",
+    "archive findings and existing OKR note"
+  ],
+  "forbidden": [
+    "new market statistics or parameter search",
+    "old frozen evidence overwrite",
+    "strategy semantics/production/trades changes",
+    "outside repo writes"
+  ],
+  "strategy_sources": {
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "conclusion": "本次未证实继续扩建比较或学习功能有明确增量；复用已有能力，不进行产品开发。",
+  "report": "docs/experiments/classic-method-adoption-audit-2026-10-02.md",
+  "verification": {
+    "hand_example": "passed",
+    "unique_tests_passed": 8,
+    "first_batch": "5 passed; 3 fixture setup errors caused by audit harness missing parent directory",
+    "second_batch": "3 formerly unstarted integration checks passed",
+    "code_changed": false
+  },
+  "limits": [
+    "Three reports only; no whole-library audit",
+    "Current controlled workflow only; legacy independent entries not migrated",
+    "No market efficacy or UI comprehension evaluation"
+  ]
+}

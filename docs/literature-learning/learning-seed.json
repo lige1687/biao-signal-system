@@ -497,6 +497,27 @@
       "source_note_path": "docs/literature-learning/classic-research-process-2026-09-29.md",
       "checked_at": "2026-09-29",
       "replication_status": "已有双20历史探索案例；工程接通、外部证券级复现和本地有效性分别记录"
+    },
+    {
+      "id": "lei-classic-increment-2026",
+      "title": "经典因子给LeiSignal增加了什么：比较基准与同期解释（本地研究）",
+      "authors": [
+        "LeiSignal 本库整理"
+      ],
+      "year": 2026,
+      "publication_kind": "report",
+      "venue": "本地学习笔记；非外部论文",
+      "doi": null,
+      "source_url": null,
+      "zotero_item_key": null,
+      "zotero_uri": null,
+      "selection_label": "本地真实案例：简单参照、有限帮助与反例",
+      "reading_level": "已完成本地两项有限比较、逐行独立核数与方法复核；不代表复现作者完整实验或未来预测",
+      "read_version": "2026-10-02 结案版1",
+      "source_locator": "docs/experiments/classic-factor-increment-2026-10-02.md；原始结果与冻结协议在同名raw目录；原文方法与本地延伸分别说明。",
+      "source_note_path": "docs/literature-learning/classic-factor-usage-2026-10-02.md",
+      "checked_at": "2026-10-02",
+      "replication_status": "六ETF既有预测重新汇总及CH3同期解释；完整账户、未来验证与外部股票组合重建未完成"
     }
   ],
   "entries": [
@@ -1607,6 +1628,88 @@
       "review_question": "工程测试全部通过，但研究没有稳定改善，这次工作算失败吗？",
       "answer_hint": "不能混为一谈。工程证明计算按约定运行；研究可以得到没有稳定改善或证据不足的结论，仍然有价值。",
       "updated_at": "2026-09-29"
+    },
+    {
+      "id": "classic-use-baseline",
+      "paper_id": "lei-classic-increment-2026",
+      "title": "复杂模型也要接受简单参照",
+      "category": "实验方法",
+      "question": "给旧模型增加经典信息后，为什么还要和最简单的办法比较？",
+      "author_finding_summary": "这是本库本地实测。六ETF保存的预测中，旧双20状态模型的典型误差为9.3791个百分点；同时加入过去涨幅和波动后为9.4643；始终预测涨幅为0反而为9.0300。这不是外部论文的结论。",
+      "our_learning": "新增内容既要超过已有模型，已有模型也要接受简单参照。如果原模型本身没有优势，只讨论多加一项改善多少，会遗漏重要问题。",
+      "example": {
+        "kind": "本地真实实验：2026-10-02旧预测汇总",
+        "text": "同样3474行预测、579个日期，新增两项后误差平方均值从87.9670增至89.5731，未确认稳定帮助；两个模型都不如固定0涨幅的81.5407。"
+      },
+      "practice_steps": [
+        "先固定同一资产、日期、目标与单位",
+        "保留简单参照、原模型和增加信息后的模型",
+        "检查新信息是否已经在原模型中，不按名字数因子",
+        "把变差、年份差异和未估计的比较一起报告"
+      ],
+      "method_acceptance": {
+        "origin": "本库预定研究设计与实际结果；不是作者统一通过标准",
+        "checks": [
+          "是否保留相同日期的简单参照与已有信息",
+          "是否明确事前预测或事后解释",
+          "是否披露产品、时期反例及已见历史身份"
+        ],
+        "paper_numeric_threshold": null,
+        "threshold_note": "本轮无预先有依据的最小有用幅度；误差或范围不能解释为交易通过线。"
+      },
+      "applicability": "只评价旧SMA20/EMA20状态上联合加入涨幅和波动的保存模型，不分别否定两因子的所有用途；不代表完整LEI或账户收益。",
+      "related_paper_ids": [
+        "lei-research-process-2026"
+      ],
+      "local_research_path": "docs/experiments/classic-factor-increment-2026-10-02.md",
+      "system_relation": "研究比较与事后解释层；不改变道路、路牌、触发条件、失效位或交易规则。",
+      "adoption_status": "限定研究工具和学习案例；没有生产或真实交易采用",
+      "content_status": "本地数字已独立核数；原文方法与本库研究分开",
+      "priority": 1,
+      "review_question": "新增因子比原模型略好，但原模型和新模型都不如固定0涨幅，应该怎样报告？",
+      "answer_hint": "同时披露两层比较，说明没有胜过简单参照；不能只展示局部改善就称技术方法有效。",
+      "updated_at": "2026-10-02"
+    },
+    {
+      "id": "classic-use-attribution",
+      "paper_id": "lei-classic-increment-2026",
+      "title": "解释得更好，不等于提前知道",
+      "category": "判断标准",
+      "question": "三因子对当月ETF涨跌解释得更好，可以拿来提前选ETF吗？",
+      "author_finding_summary": "这是本库的中国三因子适配诊断。先用2022—2023确定关系，再代入2024—2026年上半年已经发生的市场、规模和价值收益解释同月ETF变化；并非作者原股票实验的复制。",
+      "our_learning": "先区分事后解释和事前预测，再看改善集中在哪里。整体数字为正，仍可能只有部分产品受益。",
+      "example": {
+        "kind": "本地真实实验：2026-10-02同期解释",
+        "text": "市场解释的误差平方均值25.8478，加入规模与价值后20.3653，减少21.21%；约85%的净改善来自科创50，上证50和中证500反而变差。去掉科创50，剩余五只仅减少7.61%，没有单独证明稳定性。"
+      },
+      "practice_steps": [
+        "说明输入是在月初已知，还是月底才完整实现",
+        "先比仅市场，再比加入规模和价值，保留简单平均值参照",
+        "把每只ETF、每年和去掉主要贡献产品的结果列出",
+        "把误差改善与投资收益分开，未解释部分不自动叫独特收益"
+      ],
+      "method_acceptance": {
+        "origin": "本库预定研究设计与实际结果；不是作者统一通过标准",
+        "checks": [
+          "是否保留相同日期的简单参照与已有信息",
+          "是否明确事前预测或事后解释",
+          "是否披露产品、时期反例及已见历史身份"
+        ],
+        "paper_numeric_threshold": null,
+        "threshold_note": "本轮无预先有依据的最小有用幅度；误差或范围不能解释为交易通过线。"
+      },
+      "applicability": "六只相关国内ETF、30个月的已见历史；经济价格指数不是完整账户。科创50超出原论文实证年代与板块。不能把21.21%称预测准确率或收益增加。",
+      "related_paper_ids": [
+        "lei-research-process-2026"
+      ],
+      "local_research_path": "docs/experiments/classic-factor-increment-2026-10-02.md",
+      "system_relation": "研究比较与事后解释层；不改变道路、路牌、触发条件、失效位或交易规则。",
+      "adoption_status": "限定研究工具和学习案例；没有生产或真实交易采用",
+      "content_status": "本地数字已独立核数；原文方法与本库研究分开",
+      "priority": 1,
+      "review_question": "解释误差减少21.21%，可以说系统多赚21.21%吗？",
+      "answer_hint": "不可以。它衡量用当月已发生的信息解释价格变化的偏差；没有买卖、现金、费用和事前预测证据。",
+      "updated_at": "2026-10-02"
     }
   ],
   "reading_paths": [

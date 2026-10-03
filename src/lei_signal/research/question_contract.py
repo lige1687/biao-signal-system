@@ -299,7 +299,7 @@ def validate_workflow_contract(contract: dict) -> None:
     feature = _mapping(c["feature"], "workflow.feature", {
         "kind", "lookback", "bar_frequency", "missing_policy", "warmup",
     })
-    if feature["kind"] not in {"sma_distance", "decline_event", "a01_signed_band", "a03_pullback_order", "space_prior_target", "ma_cluster_information", "volume_anomaly_information"}:
+    if feature["kind"] not in {"sma_distance", "decline_event", "a01_signed_band", "a03_pullback_order", "space_prior_target", "ma_cluster_information", "volume_anomaly_information", "classic_volatility_risk_information"}:
         _fail("workflow.feature.kind", "no implemented adapter for this feature")
     if feature["missing_policy"] not in {"real_quote", "segmented"}:
         _fail("workflow.feature.missing_policy", "must freeze a supported recovery policy")
@@ -342,7 +342,8 @@ def validate_workflow_contract(contract: dict) -> None:
     target = _mapping(c["target"], "workflow.target", {
         "kind", "start_offset", "end_offset", "entry_field", "unit",
     })
-    if target["kind"] not in {"forward_return", "mae", "max_drawdown", "up", "downside_event"}:
+    if (target["kind"] not in {"forward_return", "mae", "max_drawdown", "up", "downside_event"} and
+            not (feature["kind"] == "classic_volatility_risk_information" and target["kind"] == "forward_volatility")):
         _fail("workflow.target.kind", "unsupported target")
     binary = target["kind"] in {"up", "downside_event"}
     if target["unit"] != ("probability" if binary else "percentage_point"):
@@ -400,6 +401,35 @@ def validate_workflow_contract(contract: dict) -> None:
         _nonempty_sequence(e[key], f"workflow.evaluator.{key}")
     if set(e["baseline_features"]) & set(e["added_features"]):
         _fail("workflow.evaluator", "added information duplicates the baseline fields")
+    if feature["kind"] == "classic_volatility_risk_information":
+        from lei_signal.research.classic_volatility_risk_information import BASELINE_FEATURES, DEFINITION_REF
+        if (schema_version != "research-workflow/1.1" or
+                feature["lookback"] != 20 or feature["warmup"] != 252 or
+                feature["missing_policy"] != "segmented" or feature.get("definition_ref") != DEFINITION_REF or
+                c["question"]["factor_refs"] != [DEFINITION_REF] or c["question"].get("sampling") != "daily" or
+                e["kind"] != "prediction_ridge" or e.get("lambda") != 1.0 or
+                e["baseline_features"] != list(BASELINE_FEATURES) or e["added_features"] != ["volatility20"] or
+                target["kind"] != "forward_volatility" or target["start_offset"] != 1 or target["end_offset"] != 21 or
+                type(target.get("ddof", 1)) is not int or target.get("ddof", 1) != 1 or
+                target.get("annualized", False) is not False or
+                target["entry_field"] != "close" or target.get("path_field", "close") != "close" or
+                target.get("price_measure", "economic_price") != "economic_price" or
+                c["weights"]["policy"] != "equal_asset" or c.get("training_weights") != "equal_asset" or
+                s["label_policy"] != "purge" or s.get("evaluation_label_policy") != "contained" or
+                s["folds"] != [
+                    {"train_end": "2024-12-31", "eval_start": "2025-01-02", "eval_end": "2025-12-31"},
+                    {"train_end": "2025-12-31", "eval_start": "2026-01-05", "eval_end": "2026-06-30"}] or
+                metric["name"] != "MSE" or metric["attention_threshold"] is not None or
+                c["dependence"].get("axis_scope") != "evaluation" or
+                c["dependence"]["block_length"] != 60 or c["dependence"]["draws"] != 1000 or
+                c["dependence"]["seed"] != 20261002):
+            _fail("workflow.evaluator", "classic volatility risk freezes exact classic features, simple-return volatility and fixed ridge design")
+        if data["mode"] != "synthetic" and (
+                data.get("qualification", {}).get("adapter") != "top_etf_economic/1.0" or
+                u["assets"] != ["510300.SS", "510050.SS", "510500.SS", "588000.SS"] or
+                c["question"]["period"] != ["2022-01-04", "2026-06-30"]):
+            _fail("workflow.data.qualification", "classic risk freezes four economic-price ETFs and period")
+
     if schema_version == "research-workflow/1.1":
         _validate_research_design(c)
     if e["kind"] == "prediction_ridge":

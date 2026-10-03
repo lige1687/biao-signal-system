@@ -1,0 +1,232 @@
+{
+  "contract": {
+    "target": {
+      "kind": "forward_return",
+      "unit": "percentage_point"
+    },
+    "evaluator": {
+      "kind": "prediction_ridge",
+      "version": "1.0.0",
+      "baseline_features": [
+        "lag_return"
+      ],
+      "added_features": [
+        "added"
+      ],
+      "lambda": 1.0
+    },
+    "split": {
+      "folds": [
+        {
+          "train_end": "2022-01-03",
+          "eval_start": "2022-01-04",
+          "eval_end": "2022-01-06"
+        }
+      ],
+      "label_policy": "purge"
+    },
+    "weights": {
+      "policy": "equal_asset",
+      "comparison": "fixed_common"
+    },
+    "dependence": {
+      "block_length": 2,
+      "draws": 40,
+      "seed": 7
+    },
+    "calendar": [
+      "2022-01-01",
+      "2022-01-02",
+      "2022-01-03",
+      "2022-01-04",
+      "2022-01-05",
+      "2022-01-06",
+      "2022-01-07"
+    ],
+    "data": {
+      "mode": "synthetic"
+    },
+    "publication": {
+      "conclusion": "not_supported"
+    },
+    "question": {
+      "question_id": "classic-adoption-counterexample",
+      "added_information": "新增方法优于原模型但不如简单参照，是否仍清楚展示？",
+      "period": [
+        "2022-01-04",
+        "2022-01-05"
+      ]
+    },
+    "universe": {
+      "assets": [
+        "a",
+        "b"
+      ]
+    },
+    "controller_review": {
+      "conclusion_scope": "人工手算只验证报告行为"
+    },
+    "feature": {
+      "kind": "sma_distance"
+    }
+  },
+  "result": {
+    "predictions": [
+      {
+        "id": "a:2022-01-04",
+        "asset": "a",
+        "date": "2022-01-04",
+        "y": 0.0,
+        "label_end": "2022-01-04",
+        "fold": "0",
+        "B0": 0.0,
+        "B1": 3.0,
+        "B2": 2.0
+      },
+      {
+        "id": "b:2022-01-05",
+        "asset": "b",
+        "date": "2022-01-05",
+        "y": 0.0,
+        "label_end": "2022-01-05",
+        "fold": "0",
+        "B0": 0.0,
+        "B1": 3.0,
+        "B2": 2.0
+      }
+    ],
+    "performance": [
+      {
+        "model": "B0",
+        "metric": "MSE",
+        "value": 0.0,
+        "unit": "percentage_point_squared",
+        "rows": 2,
+        "dates": 2,
+        "assets": 2
+      },
+      {
+        "model": "B0",
+        "metric": "RMSE",
+        "value": 0.0,
+        "unit": "percentage_point",
+        "rows": 2,
+        "dates": 2,
+        "assets": 2
+      },
+      {
+        "model": "B1",
+        "metric": "MSE",
+        "value": 9.0,
+        "unit": "percentage_point_squared",
+        "rows": 2,
+        "dates": 2,
+        "assets": 2
+      },
+      {
+        "model": "B1",
+        "metric": "RMSE",
+        "value": 3.0,
+        "unit": "percentage_point",
+        "rows": 2,
+        "dates": 2,
+        "assets": 2
+      },
+      {
+        "model": "B2",
+        "metric": "MSE",
+        "value": 4.0,
+        "unit": "percentage_point_squared",
+        "rows": 2,
+        "dates": 2,
+        "assets": 2
+      },
+      {
+        "model": "B2",
+        "metric": "RMSE",
+        "value": 2.0,
+        "unit": "percentage_point",
+        "rows": 2,
+        "dates": 2,
+        "assets": 2
+      }
+    ],
+    "increments": [
+      {
+        "new_model": "B2",
+        "old_model": "B1",
+        "old_value": 9.0,
+        "new_value": 4.0,
+        "absolute_error_improvement": 5.0,
+        "relative_percent": 55.55555555555556,
+        "lo": 5.0,
+        "hi": 5.0,
+        "unit": "percentage_point_squared",
+        "metric": "MSE",
+        "rows": 2,
+        "dates": 2,
+        "assets": 2,
+        "calendar_dates": 7,
+        "block_length": 2,
+        "draws": 40,
+        "valid_draws": 24,
+        "unestimable_draws": 16,
+        "seed": 7,
+        "weighting": "equal_asset",
+        "interpretation": "positive means lower prediction error; not investment return"
+      },
+      {
+        "new_model": "B2",
+        "old_model": "B0",
+        "old_value": 0.0,
+        "new_value": 4.0,
+        "absolute_error_improvement": -4.0,
+        "relative_percent": null,
+        "lo": -4.0,
+        "hi": -4.0,
+        "unit": "percentage_point_squared",
+        "metric": "MSE",
+        "rows": 2,
+        "dates": 2,
+        "assets": 2,
+        "calendar_dates": 7,
+        "block_length": 2,
+        "draws": 40,
+        "valid_draws": 24,
+        "unestimable_draws": 16,
+        "seed": 7,
+        "weighting": "equal_asset",
+        "interpretation": "positive means lower prediction error; not investment return"
+      }
+    ],
+    "descriptions": {
+      "available": false,
+      "reason": "observations not supplied; own-group and common-support descriptions not reconstructed"
+    },
+    "period_comparisons": [
+      {
+        "year": "2022",
+        "old_value": 9.0,
+        "new_value": 4.0,
+        "absolute_error_improvement": 5.0,
+        "rows": 2,
+        "dates": 2,
+        "assets": 2,
+        "unit": "percentage_point_squared"
+      }
+    ],
+    "warnings": [
+      "B2 vs B1: 16 date-block draws lacked fixed common support and were excluded",
+      "B2 underperforms B0: valid numerical negative result; do not retune to pass",
+      "B2 vs B0: 16 date-block draws lacked fixed common support and were excluded",
+      "few date blocks: the evaluation span contains fewer than three declared blocks; interval evidence is limited"
+    ],
+    "execution": {
+      "fits": 0,
+      "training_rows": 0,
+      "purged_rows": 0,
+      "mode": "pure_reaggregation"
+    }
+  },
+  "passed": true
+}
