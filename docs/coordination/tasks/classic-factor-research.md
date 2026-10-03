@@ -1,13 +1,22 @@
 # 经典因子与研究方法：当前协作记录
 
 - task-id：classic-factor-research；负责人：本聊天经典研究主控，MacBook-Air-126.local。会话内部ID未取得，不猜测。原负责人持续负责，不接管、不转移。
-- 状态：active（C：研究思路与实验过程的学习设计；固定科学问题completed/archived，无新市场实验）。更新时间2026-10-03T19:43:00+08:00，Asia/Shanghai。
+- 状态：active（落实研究方法到项目工具；用户明确暂不做学习页）。更新时间2026-10-03T12:26:28.000Z，UTC；用户时区Asia/Shanghai。
 - 唯一映射：阶段历史docs/ops/work-progress/classic-factor-research.md；成果详情docs/progress/classic-factor.md。跨任务当前摘要只有本文件，旧文件不是锁。
 - 规则读取commit：b172008890b39e912c8f1d0cfb9125d1e414a97f，COORDINATION.md1.0；初读0b758e7e10f720c44cbd898d511ff392f2857535，新版规则内容相同。
 - 工作分支task/classic-factor-progress；发布基础d7da6cb0f9c127606b6faa572fabc9ee93f104f7；最近已推送成果cf8d630954257fff441d55a974f8a0fe95eca443（新增教学设计及阶段文档；代码/报告同560e4eef8a5571fff4543886ede4acafe7805f2d），远端完整SHA与设计文件blob已核对。
 - 共享研究区HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9、codex/factor-unit-research-20260915有多任务未提交内容，不整批上传，不用它代表成果。
 
-## 当前范围：用户选择C（2026-10-03）
+## 当前执行：强简单对照的可复用核查入口
+
+用户最新要求：“那你现在继续做啊，学习页先不用吧，主要是落实到项目里边”。据此不再等待教学方式审批，页面与路线修补全部暂不实施；把经典研究中“复杂方法须挑战合理简单办法”的已接受结论落实到已有研究命令。
+具体缺口：现有workflow自动比较B0共同训练均值/B1已有/B2新增，已能识别输给B0；但每只ETF自己的成熟历史平均只存在本任务风险raw核查，未成为可复用入口。旧方法采用审计不重跑；10-03风险报告是新增的具体适用证据，不声称旧通用流程有同一漏洞。
+设计：新增src/lei_signal/research/factor_lab/baseline_review.py，读取已保存且由原check_publication验收的运行，逐折只用较早已成熟目标计算各ETF平均，与原B0/B1/B2在原来同一批观察及原权重上比较。输出到全新辅助目录，原合同/报告/预测/账本字节不变，无拟合/新行情；数值辅助不自动升级原结论或交易授权。缺某ETF成熟训练记录、配对不齐、旧依赖不匹配或收据失败则停，不删样本、不拿总体均值补齐。
+精确写范围：新baseline_review.py、新tests/unit/test_classic_baseline_review.py、新tests/integration/test_classic_baseline_review_entry.py；scripts/run_factor_lab.py仅新增--review-baselines及本分支参数；研究用法只追加本入口段，本任务新计划/验收与自身两进度。公开工作树仍task/classic-factor-progress@cf8d630954257fff441d55a974f8a0fe95eca443。不改workflow.py/workflow_inputs.py/workflow_evaluation.py/question_contract.py或总定义，避开technical-factor-sequence的两风险适配器及共享块。现有benchmark-protocol不改变。
+规则/任务核对e70f0f3a665d086ee36cb6b5958b6ec3543eb918，规则1.0。当前已登记写范围没有同CLI新增分支或新模块实现者；记录不是锁，后续出现重叠停冲突部分。实现拟由用户早先指定的Sol6.1/medium一个助手单写代码及测试；主控写设计/使用说明/证据并独立手算。
+验收：固定人工异质两ETF案例暴露“胜原模型却输各ETF均值”；正常受控保存结果经过真实CLI产生可读报告；伪造/缺行/缺成熟数据/覆盖旧目录/不支持目标/与登记参数混用被拒绝；核源字节不变和审查期间0拟合；旧相关入口回归。无新市场实验/取数/付费，无全量回测。工程预算最多3批必要测试与1次独立CLI验收，失败计入，不为凑批次重复绿测。旧科学预算全部保留。
+
+## 历史范围：C教学设计（已被最新要求收敛）
 
 用户本轮明确C优先，并要求核对B是否已有其他任务负责。本聊天C指“帮助用户及后续AI学习研究思路与实验过程”，B指“日常ETF决策辅助”，与其他任务A/B/C字母命名无关。沿用唯一task-id，原负责人继续。
 已完成本轮设计交付：B归属核对、现有课程核查、一份完整波动研究教学草稿和验收设计；入口docs/archive/handoffs-plans/classic-learning-design-2026-10-03/README.md，案例case-volatility.md、核对ownership-audit.md、检查validation.json。Luna low只读助手1名已返回，无后台教学/市场任务。
@@ -78,3 +87,5 @@ B核对：技术完整策略/小时确认、市场观察、投资观察地图、
 新增真实缺口：本机classic-process有9条路线引用，已发布基线只有7条；classic-use-baseline与classic-use-attribution两条内容存在但未接路线。当前尚未修正，不能继续称九条前端入口远端已完整。
 实际检查：5文档指纹/UTF-8、相对链接、9个数值与原报告、diff及敏感特征核对通过；共享现行归置检查器只读指向发布目录后通过。旧发布树检查器报docs/progress目录未列白名单，保留失败及两检查器差异，不夹带其他任务检查器修改。首次add因稀疏范围退出1，已停止依赖步骤，核暂存后按精确路径--sparse继续，仅6指定文件提交。无研究/训练/付费批次，无页面测试，学习成效未测量。
 设计内容已在远端；共享本机只读委派合同仍仅本地，但不影响查看完整设计和归属证据。历史受限数据、完整风险复现和未应用CSS补丁缺口均保留，未因教学同步解决。当前等待用户对具体教学方式答复，未启动实现，不转移任务。
+
+本版变化（2026-10-03T12:26:28.000Z）：用户收回学习页方向，执行有界项目工具接入；取消教学审批等待，旧设计作为历史草稿保留。尚无实现已启动或新测试通过声明。
