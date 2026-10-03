@@ -2,19 +2,19 @@
 
 - task-id：external-quant-resources；任务名：量化资源适配与效果验证。负责人：本聊天“外部增量”，会话01a0cd21-07e5-7163-8f4e-72a4d5ebc32e，设备MacBook-Air-126.local；继续负责，不是接管或结束。
 - 状态：active（工具维护/有界来源资格核查）；固定tsfresh、arch和catch22来源阶段completed；共享研究主线整合paused；FactorHub真实调用blocked。
-- 更新时间：2026-10-03T15:10:47.560751+08:00，Asia/Shanghai（UTC+08:00）。
+- 更新时间：2026-10-03T15:20:13.406851+08:00，Asia/Shanghai（UTC+08:00）。
 - 验收：公开原始来源与许可可定位、限定工具有测试证据；金融用途同对象/日期/条件核简单基准、原有信息增量及反例。负结果可结案，不换参数求正结果。线上收益和效率节省未测量。
-- 规范：COORDINATION.md 1.0，实际读取b172008890b39e912c8f1d0cfb9125d1e414a97f，最新基线3fab17d5bd7225eb447bb2358aa9ca1ec1f97e13规则字节未变；工作分支AGENTS.md、docs/research/current-standards.json、准确定义登记；旧冻结合同不迁移。
-- 工作分支：task/external-quant-progress（用户明确task/命名）；初始基础1ac596f65110e06c286f04707165251328df0962，本轮基础6d8ad5c80c055337e2bb33c536ec3cbf1f50fd5e；最近已推成果完整commit：59826afc936835e7ef38d3f1d832812b03abdc68，已核远端SHA并fetch逐文件读回AGENTS及两份自身进度。
-- 成果入口：https://github.com/lige1687/biao-signal-system/blob/59826afc936835e7ef38d3f1d832812b03abdc68/docs/progress/external-quant-resources.md 。阶段历史仍为docs/ops/work-progress/external-quant-resources.md并已链接本入口；唯一跨任务当前摘要为本记录，旧交接文本不代表当前移交。
+- 规范：COORDINATION.md 1.0；本轮首次完整读取15b3e4e0edd878c3e84ef30482d108e492563dbd，推前审阅最新f9e14cd0b03e8f27b63a51a87577d54c0b04b09a及相关任务增量，规则SHA2566871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0不变；原研究合同/规范/权限不变。
+- 工作分支：task/external-quant-progress（用户明确task/命名）；初始基础1ac596f65110e06c286f04707165251328df0962，本轮基础59826afc936835e7ef38d3f1d832812b03abdc68；最近已推成果完整commit：50fc231c6c54727f03aff3fc157500e3a3a99f27，远端SHA匹配、七文件SHA256读回相同。
+- 成果入口：https://github.com/lige1687/biao-signal-system/blob/50fc231c6c54727f03aff3fc157500e3a3a99f27/docs/progress/external-quant-resources.md 。阶段历史docs/ops/work-progress/external-quant-resources.md保留；本文件为唯一跨任务当前摘要；旧包不是接管许可。
 
 ## 本轮实际范围、冲突、运行与验证
 
 已读取最新远端lei-coordination-bootstrap、technical-factor-sequence和market-observation。前者已完成初始化；后两者负责抵扣路径资料资格和CPI/观察卡说明，本任务不碰这些问题/文件。没有已登记同题冲突；未登记的技术主线/经典Qlib等实时状态未知，不当作空闲。共享workflow.py、workflow_inputs.py、workflow_evaluation.py、question_contract.py、top_structure_information.py、trend_slope_change_information.py的实现者/独立验证者尚未在本记录明确，本任务是使用者，整合写入暂停；独立工具/公开来源核查可继续。记录不是排他锁，新重叠先暂停冲突块并在记录协调，不替别人改状态。
 
-正在做：统一接入及既有工具维护。同步后继续原任务的只读依赖发布状态核对：docs/progress/external-quant-shared-dependencies-2026-10-03.json列出的17个导入绑定能否对应准确远端版本；核对后才决定最小整合是否具备条件。不新增模型/标签、不认领共同主线，亦不圈所有外部方法。
+当前责任：继续维护四技能及固定适配器；本轮依赖兼容问题已结案，当前无研究计算运行。下一步共享主线整合仅在准确共同版本和实现者/验证者分工具备后进行；当前暂停写入，不重复静态审查、不新增模型/标签、不认领全部外部方法。
 
-本轮通过：remote一致、规则和三条任务读取、独立索引准确3路径、差异检查、工作分支推后完整SHA匹配与三文件读回、原共享HEAD和索引不变；两基线无.github/workflows、未配置core.hooksPath、本地无pre-push。外部仓库级集成未独立确认；仅普通文档推送，不执行上线或付费动作。协调记录远端核验待本提交推后执行，不能预写通过。
+本轮通过：remote一致、规则和三条任务读取、独立索引准确3路径、差异检查、工作分支推后完整SHA匹配与三文件读回、原共享HEAD和索引不变；两基线无.github/workflows、未配置core.hooksPath、本地无pre-push。外部仓库级集成未独立确认；仅普通文档推送，不执行上线或付费动作。启动范围协调提交7b7b70050cb4661ca36966517ea2324da8d5db50已fetch核包含且文件字节一致；本最终记录待API返回后fetch核验，不预写本提交通过。
 
 本轮曾因共享FETCH_HEAD被其他fetch改写，版本断言停止，未生成提交、首次推送无ref失败；已改为专属远端跟踪引用和固定已读commit，保留对方新增记录，不盲重试、不强推。
 
@@ -113,3 +113,20 @@
 已开始的有限下一步：只读比较d444316817e9330c2d72a4a90c655467b45dd5bb已发布研究模块与17导入绑定；主控核桥接接口，Sol中等思考助手published_adapter_closure只查tsfresh适配器的导入闭包与准确定义。contract位于本地.biao/external-quant-review-20261003/delegate-contract.json，0写入路径、0网络、最多1助手；当前仅代码静态阅读，不启动金融实验/拟合。范围是准确接口能否使用，验收为符号/签名/依赖/定义可定位，必要时最小合成验证；不能把它当新因子效果。结果只写本任务证据/进度；共享源码整合写入继续暂停。旧累计预算34公开来源、16工程批、16tsfresh真拟合、arch已用数不变；本轮最多1静态审阅批、1最小兼容批，0来源预算、0市场拟合。
 
 正在做不是重启旧任务：tsfresh/arch/catch22来源阶段保持封存；没有研究后台进程，无可迁checkpoint。其他程序状态未知，不杀进程。原共享修改及索引保留；本轮契约/启动记录仅本地，远端不能据此宣称已验证，本协调说明提供范围和恢复入口。同步后继续完成有限审查，阶段结论再同步同一记录；不合并/生产/上传资料。
+
+
+## 2026-10-03T15:20:13.406851+08:00：兼容阶段完成，持续任务保留
+
+工作成果50fc231c6c54727f03aff3fc157500e3a3a99f27已推送、七精确路径共64,555字节远端SHA256逐项相同；原共享HEAD/index未变，AGENTS协作入口已存在未重复增补。报告docs/progress/external-quant-compatibility-2026-10-03.md；同名子目录static-bindings.json、synthetic-results.json、adapter-closure.json；复现脚本scripts/archive/external_quant_bridge_compatibility_20261003.py。本轮是工程进度证据，不冒称新金融效果。
+
+17绑定已定位：11函数参数/内容一致、3直接常量一致、2由同字节上游导入、1相对模块存在；未发现当前用途直接接口不兼容。七个人工桥接场景新旧输出一致（完整配对、缺日、缺对象、身份错配、非有限数、重复日、多拟合时期），一个反例确认旧版支持forward_volatility而技术发布版拒绝：差异是classic专属代码未随另一任务分支发布，不能全文件覆盖共同主线。脚本实际退出0，16次人工函数调用，拟合保护计数0、0市场输入；完整workflow导入/资格/研究执行未验证。
+
+Sol中等思考published_adapter_closure只读审查完成，无文件写入/网络；主控独立核必需模块、缺失定义和计算器所有权。候选d444316817e9330c2d72a4a90c655467b45dd5bb缺两tsfresh准确定义与本任务固定计算器/许可，本任务工作分支根路径缺共同模块；合并后的完整材料/注册绑定仍未交。最有价值下一步是明确谁维护共同发布版本、谁独立验收，再合并准确自己的定义/适配器及已发布依赖，不能直接拿快照替别人新版。当前共享实现者/验证者分工请求：本任务承担自己四技能/tsfresh适配器及限定兼容核查，**不承担整个workflow或classic专属实现**；待相关任务在自己的记录明确共同发布维护角色，现阶段只读和原工具维护可继续。记录不是排他锁。
+
+最新相关记录复核：技术顺序只做抵扣路径定义/合成反例，阅读主线只做阅读页验收，远端核心只做转黑草案，情绪只核原E输入与预算，市场观察/地图只维护页面说明/引用；均不写本工具范围。未发现已登记同题执行冲突，未登记者未知。不调整他们的用途/预算、规则或状态。
+
+预算：本轮静态1批、人工兼容1批，工程累计由16到18；公开来源仍34，tsfresh实际拟合仍16；arch旧5/6来源、4/4工程、0拟合、3565.764652/3600秒保留。没有市场研究后台任务、活跃助手或checkpoint，其他进程/远端状态未知，不终止。原研究补充包8,326,487字节及供应商资料仍仅本地、远端不可完整复现，凭据/许可/交付位置未补；本轮没有数据/权重上传。
+
+失败留痕：本轮普通协调推送两次因并发前进被拒；未强推，已读市场观察/地图/技术顺序新增范围，改用GitHub单文件API按本文件blobSHA更新，保留其他记录。首次文档差异检查因末尾额外空行停止，修正后通过，未影响研究。工程最小验证/目录卫生/diff/小文件敏感形态检查通过，Linux/Windows/全项目/真实收益未验证。局部契约、Git计划/失败提交仅本地.biao/external-quant-review-20261003/，不把未发布临时文件当远端交付。
+
+本版新增：最新真实成果commit、限定兼容结论与能力差异反例、助手结束和累计工程预算、共享发布角色依赖。原任务继续负责，不结束或移交；固定tsfresh/arch/catch22旧问题不重做。
