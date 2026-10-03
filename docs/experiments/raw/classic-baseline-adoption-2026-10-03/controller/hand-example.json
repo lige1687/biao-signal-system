@@ -1,0 +1,230 @@
+{
+  "scope": "人工工程例，不是行情/正式来源资格",
+  "contract": {
+    "question": {
+      "layer": "factor_information"
+    },
+    "target": {
+      "kind": "forward_volatility",
+      "unit": "percentage_point"
+    },
+    "calendar": [
+      "2022-01-01",
+      "2022-01-02",
+      "2022-01-03",
+      "2022-01-04",
+      "2022-01-05",
+      "2022-01-06",
+      "2022-01-07",
+      "2022-01-08",
+      "2022-01-09"
+    ],
+    "split": {
+      "label_policy": "purge",
+      "evaluation_label_policy": "contained",
+      "folds": [
+        {
+          "train_end": "2022-01-04",
+          "eval_start": "2022-01-06",
+          "eval_end": "2022-01-08"
+        }
+      ]
+    },
+    "evaluator": {
+      "kind": "prediction_ridge",
+      "version": "1.0.0",
+      "baseline_features": [
+        "lag_return"
+      ],
+      "added_features": [
+        "added"
+      ],
+      "lambda": 1.0
+    },
+    "weights": {
+      "policy": "equal_asset",
+      "comparison": "fixed_common"
+    },
+    "dependence": {
+      "block_length": 2,
+      "draws": 4,
+      "seed": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "A:2022-01-01",
+      "asset": "A",
+      "date": "2022-01-01",
+      "stratum": "A|2022",
+      "features": {
+        "lag_return": 0.0,
+        "added": 0.0
+      },
+      "eligible": true,
+      "y": 0,
+      "label_end": "2022-01-01",
+      "label_reason": null,
+      "tested_condition": false
+    },
+    {
+      "id": "A:2022-01-02",
+      "asset": "A",
+      "date": "2022-01-02",
+      "stratum": "A|2022",
+      "features": {
+        "lag_return": 0.0,
+        "added": 0.0
+      },
+      "eligible": true,
+      "y": 2,
+      "label_end": "2022-01-03",
+      "label_reason": null,
+      "tested_condition": false
+    },
+    {
+      "id": "A:2022-01-04",
+      "asset": "A",
+      "date": "2022-01-04",
+      "stratum": "A|2022",
+      "features": {
+        "lag_return": 0.0,
+        "added": 0.0
+      },
+      "eligible": true,
+      "y": 999,
+      "label_end": "2022-01-06",
+      "label_reason": null,
+      "tested_condition": false
+    },
+    {
+      "id": "B:2022-01-01",
+      "asset": "B",
+      "date": "2022-01-01",
+      "stratum": "B|2022",
+      "features": {
+        "lag_return": 0.0,
+        "added": 0.0
+      },
+      "eligible": true,
+      "y": 8,
+      "label_end": "2022-01-02",
+      "label_reason": null,
+      "tested_condition": false
+    },
+    {
+      "id": "B:2022-01-03",
+      "asset": "B",
+      "date": "2022-01-03",
+      "stratum": "B|2022",
+      "features": {
+        "lag_return": 0.0,
+        "added": 0.0
+      },
+      "eligible": true,
+      "y": 12,
+      "label_end": "2022-01-04",
+      "label_reason": null,
+      "tested_condition": false
+    },
+    {
+      "id": "A:2022-01-06",
+      "asset": "A",
+      "date": "2022-01-06",
+      "stratum": "A|2022",
+      "features": {
+        "lag_return": 0.0,
+        "added": 0.0
+      },
+      "eligible": true,
+      "y": 1,
+      "label_end": "2022-01-07",
+      "label_reason": null,
+      "tested_condition": false
+    },
+    {
+      "id": "A:2022-01-07",
+      "asset": "A",
+      "date": "2022-01-07",
+      "stratum": "A|2022",
+      "features": {
+        "lag_return": 0.0,
+        "added": 0.0
+      },
+      "eligible": true,
+      "y": 1,
+      "label_end": "2022-01-08",
+      "label_reason": null,
+      "tested_condition": false
+    },
+    {
+      "id": "B:2022-01-06",
+      "asset": "B",
+      "date": "2022-01-06",
+      "stratum": "B|2022",
+      "features": {
+        "lag_return": 0.0,
+        "added": 0.0
+      },
+      "eligible": true,
+      "y": 10,
+      "label_end": "2022-01-07",
+      "label_reason": null,
+      "tested_condition": false
+    }
+  ],
+  "predictions": [
+    {
+      "id": "A:2022-01-06",
+      "asset": "A",
+      "date": "2022-01-06",
+      "label_end": "2022-01-07",
+      "y": 1,
+      "fold": "0",
+      "B0": 5.5,
+      "B1": 4,
+      "B2": 2
+    },
+    {
+      "id": "A:2022-01-07",
+      "asset": "A",
+      "date": "2022-01-07",
+      "label_end": "2022-01-08",
+      "y": 1,
+      "fold": "0",
+      "B0": 5.5,
+      "B1": 4,
+      "B2": 4
+    },
+    {
+      "id": "B:2022-01-06",
+      "asset": "B",
+      "date": "2022-01-06",
+      "label_end": "2022-01-07",
+      "y": 10,
+      "fold": "0",
+      "B0": 5.5,
+      "B1": 6,
+      "B2": 8
+    }
+  ],
+  "independent_expected": {
+    "training_means": {
+      "A": 1.0,
+      "B": 10.0
+    },
+    "equal_asset": {
+      "B0": 20.25,
+      "B1": 12.5,
+      "B2": 4.5,
+      "asset_training_mean": 0.0
+    },
+    "equal_date": {
+      "B0": 20.25,
+      "B1": 10.75,
+      "B2": 5.75,
+      "asset_training_mean": 0.0
+    },
+    "excluded_from_training": "A:2022-01-04: label matures on evaluation start, value999 not allowed in training"
+  }
+}

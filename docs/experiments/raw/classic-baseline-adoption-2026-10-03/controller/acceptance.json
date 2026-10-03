@@ -1,0 +1,80 @@
+{
+  "status": "passed_synthetic_engineering_acceptance",
+  "updated_at": "2026-10-03T20:50:45.594670+08:00",
+  "hand_checks": {
+    "equal_asset": {
+      "expected": {
+        "B0": 20.25,
+        "B1": 12.5,
+        "B2": 4.5,
+        "asset_training_mean": 0
+      },
+      "actual": {
+        "B0": 20.25,
+        "B1": 12.5,
+        "B2": 4.5,
+        "asset_training_mean": 0
+      },
+      "immature_label_ignored": true
+    },
+    "equal_date": {
+      "expected": {
+        "B0": 20.25,
+        "B1": 10.75,
+        "B2": 5.75,
+        "asset_training_mean": 0
+      },
+      "actual": {
+        "B0": 20.25,
+        "B1": 10.75,
+        "B2": 5.75,
+        "asset_training_mean": 0
+      },
+      "immature_label_ignored": true
+    }
+  },
+  "saved_cli_results_recomputed": true,
+  "source_files_unchanged": {
+    "docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/saved/state.json": "630afdd8ecf4e7a5fa7da77f17bc43edc9378d57baf0d8a33c79539def0c272c",
+    "docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/saved/result.json": "fe3c501a1f28fff23d705a3a0b113f8f6f141c1003aed0354a920fdd8ced25d3",
+    "docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/saved/report.md": "5df4c1351bbde6b4f97d9628b17c60c04c0940462e0b3a4e29d1a553489f0081",
+    "docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/saved/preflight.json": "b1e0d3e7f57ed290d0a5e186027f15196d672c4025c437e0815c9e5cc1f34f0a",
+    "docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/saved/contract.json": "f49c74d2ecd88d24840344924e8e7057d162083e484fa2e2a121e26978643f21",
+    "docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/saved/receipt.json": "4541c35b7697ee5a3a8de9705d9fcab77b5b0a0cb114ddc01a29a34edf5580ca",
+    "docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/docs/experiments/raw/research-workflow-ledgers-2026-09-29/c912f32a1bc9c5594b61dd47/attempts.jsonl": "18c26cd7de76cbb78ab158c4a3327a408408b1bddeff17f2dfa56bda08f9bea5",
+    "docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/docs/experiments/registry.json": "96ea7054916e403d34dcc354964071373e50858a0822223bec2be1f6a1368579",
+    "docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/docs/experiments/raw/input-2026-09-29/panel.json": "825b3ebe78cf7379d2497c2e10b3f440802b63b01c55709402101f7b1e0d56f5"
+  },
+  "original_conclusion": "not_supported",
+  "new_model_fits": 0,
+  "code_sha256": {
+    "src/lei_signal/research/factor_lab/baseline_review.py": "8a75b70a4ddfa6391aeeeb4279c4ba2d15640b32c6d7a5f91bb9f39e832e0873",
+    "scripts/run_factor_lab.py": "e86090adad26d87310656d5691f492c11da14e93e2a3eb7cbe6dcd7f41988bc8"
+  },
+  "limitations": [
+    "Synthetic evidence only; historical lifecycle dependencies missing",
+    "No market data, no new market fits, macOS only"
+  ],
+  "controller_cli": {
+    "status": "passed",
+    "command": [
+      "/opt/homebrew/opt/python@3.11/bin/python3.11",
+      "scripts/run_factor_lab.py",
+      "--review-baselines",
+      "docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/saved",
+      "--review-root",
+      "docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo",
+      "--out",
+      "docs/experiments/raw/classic-baseline-adoption-2026-10-03/controller/cli-review"
+    ],
+    "exit_code": 0,
+    "source_files_unchanged": true,
+    "data_mode": "synthetic",
+    "fits": 0,
+    "stdout": "",
+    "stderr": "",
+    "review_json_sha256": "d9e7ef3b1fff849de99a7593da7883dd3fbbd6207bb77fc1b12da564caec333e",
+    "report_sha256": "4e25f0ad5f22e4313dbb158daec904cd6268e3388815b533382aa74173af2897"
+  },
+  "disk_incident": "Initial writes failed errno28; after capacity recovered from 108MiB to 1.1GiB (cause unknown, no deletion by this task), small write and one independent CLI succeeded. No fit rerun."
+}

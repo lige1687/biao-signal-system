@@ -1,0 +1,137 @@
+{
+  "schema_version": "executor-receipt/1.0",
+  "status": "implementation_verified_synthetic_only",
+  "worktree": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress",
+  "baseline": "cf8d630954257fff441d55a974f8a0fe95eca443",
+  "model": "gpt-6.1-sol",
+  "written_code_paths": [
+    "src/lei_signal/research/factor_lab/baseline_review.py",
+    "scripts/run_factor_lab.py",
+    "tests/unit/test_classic_baseline_review.py",
+    "tests/integration/test_classic_baseline_review_entry.py"
+  ],
+  "file_sha256": {
+    "src/lei_signal/research/factor_lab/baseline_review.py": "8a75b70a4ddfa6391aeeeb4279c4ba2d15640b32c6d7a5f91bb9f39e832e0873",
+    "scripts/run_factor_lab.py": "e86090adad26d87310656d5691f492c11da14e93e2a3eb7cbe6dcd7f41988bc8",
+    "tests/unit/test_classic_baseline_review.py": "0920a6ad429ce3fbba745832fa027fc042030d33d4275f6bf81b52f8294c0607",
+    "tests/integration/test_classic_baseline_review_entry.py": "2d8aed49abd66e8d37242921646531490f922d7edffbfb3517d46f731886584a"
+  },
+  "tests": [
+    {
+      "batch": "round-01",
+      "command": "PYTHONPATH=\"$PWD/src\" PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest -q tests/unit/test_classic_baseline_review.py -p no:cacheprovider --basetemp docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-01",
+      "exit_code": 2,
+      "result": "expected red: baseline_review module not yet implemented",
+      "log": "docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-01.log",
+      "fits": 0
+    },
+    {
+      "batch": "round-02",
+      "command": "PYTHONPATH=\"$PWD/src\" PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest -q tests/unit/test_classic_baseline_review.py tests/integration/test_classic_baseline_review_entry.py tests/unit/test_workflow_evaluation.py tests/integration/test_research_workflow_entry.py -p no:cacheprovider --basetemp docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-02",
+      "exit_code": 1,
+      "result": "36 passed, 30 failed: lifecycle evidence missing blocks 28 integration cases before fitting; two legacy unit tests lack old A01/A02 artifacts",
+      "log": "docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-02.log",
+      "new_integration_fits": 0,
+      "old_unit_model_calls_instrumented": false,
+      "old_unit_model_calls_reconstructed": 14,
+      "reconstruction_basis": "The same unchanged core unit tests were instrumented in round-03; the two additional archived tests fail before numerical model execution."
+    },
+    {
+      "batch": "round-03",
+      "command": "PYTHONPATH=\"$PWD/src\" PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 stdin wrapper instruments workflow_evaluation._ridge/_event then pytest.main(-q tests/unit/test_classic_baseline_review.py tests/integration/test_classic_baseline_review_entry.py tests/unit/test_workflow_evaluation.py -k \"not old_ridge_expression and not sealed_a02\" -p no:cacheprovider --basetemp docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03)",
+      "exit_code": 0,
+      "result": "36 passed, 2 deselected; minimum synthetic-only registry fixture avoids claiming absent historical lifecycle evidence",
+      "log": "docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03.log",
+      "actual_model_calls": 18,
+      "model_call_records": "docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03-fit-calls.json"
+    }
+  ],
+  "fit_accounting": {
+    "new_synthetic_rehearsal": 2,
+    "new_synthetic_saved_run": 2,
+    "auxiliary_review": 0,
+    "market": 0,
+    "round_03_old_core_unit_checks": 14,
+    "round_02_old_core_unit_checks_reconstructed_not_instrumented": 14,
+    "total_actual_calls_with_reconstructed_round_02": 32
+  },
+  "manual_fixed_case": {
+    "evaluation_y": [
+      0,
+      10
+    ],
+    "B0": [
+      5,
+      5
+    ],
+    "B1": [
+      4,
+      6
+    ],
+    "B2": [
+      2,
+      8
+    ],
+    "asset_training_mean": [
+      0,
+      10
+    ],
+    "mse": {
+      "B0": 25,
+      "B1": 16,
+      "B2": 4,
+      "asset_training_mean": 0
+    }
+  },
+  "synthetic_saved_run": {
+    "root": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo",
+    "run_dir": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/saved",
+    "review_dir": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/cli-review",
+    "fixture_definition": "synthetic.test.sma_distance@1.0.0",
+    "definition_lifecycle": "exists",
+    "purpose": "engineering_error_check_only",
+    "fits": {
+      "synthetic_setup_fits": 4,
+      "synthetic_rehearsal_fits": 2,
+      "synthetic_saved_run_fits": 2,
+      "market_fits": 0,
+      "auxiliary_review_fits": 0
+    }
+  },
+  "verified_boundaries": [
+    "no calls to fitting or research execution during auxiliary review",
+    "same full observation identities and actual evaluable rows",
+    "strictly mature training labels; absent ETF training rejects",
+    "equal_asset/equal_date reuse existing weight rule",
+    "no nonfinite scores or zero-denominator percentage",
+    "controlled check_publication verifies original receipt and source",
+    "review-root eight source files match actual imported tree",
+    "missing journal rejected before a+ can create it",
+    "original five artifacts/journal/registry bytes and saved directory membership unchanged",
+    "material changes during verification reject output",
+    "existing/contained output, altered result, missing receipt, stale code and mixed modes rejected"
+  ],
+  "limitations": [
+    "No real-market research rerun or new strategy efficacy claim.",
+    "Existing publication registry requires missing lifecycle basis files; 30 round-02 failures remain an explicit dependency limitation.",
+    "Two archived A01/A02 core tests are excluded from final bounded regression because exact read-only artifacts are absent.",
+    "Round-02 core numerical fit count was not instrumented at runtime; reconstructed separately and not presented as recorded.",
+    "Repository hygiene and controller independent review are controller-owned remaining acceptance steps."
+  ],
+  "operations": {
+    "network_requests": 0,
+    "market_data_requests": 0,
+    "new_agents": 0,
+    "commits": 0,
+    "pushes": 0,
+    "installs": 0,
+    "original_workflow_definition_changes": 0
+  },
+  "failure_notes": [
+    "First red-test launch could not open log output because executor-tests directory did not exist; pytest never started. Created authorized output directory and ran preserved round-01."
+  ],
+  "diff_check": {
+    "command": "git diff --check",
+    "exit_code": 0
+  }
+}

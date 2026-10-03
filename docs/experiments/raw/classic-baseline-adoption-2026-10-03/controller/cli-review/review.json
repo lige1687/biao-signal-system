@@ -1,0 +1,253 @@
+{
+  "schema_version": "baseline-review/1.0",
+  "diagnostic_only": true,
+  "source_verification": "workflow.check_publication",
+  "status": "completed",
+  "target": {
+    "kind": "forward_return",
+    "start_offset": 1,
+    "end_offset": 4,
+    "entry_field": "close",
+    "unit": "percentage_point"
+  },
+  "weighting": "equal_asset",
+  "training_mean_definition": "equal rows within each asset; date <= train_end and label_end < eval_start",
+  "rows": 82,
+  "assets": 2,
+  "dates": 41,
+  "training_means": [
+    {
+      "fold": "0",
+      "asset": "SIM-0",
+      "mean": -1.1743645899999997,
+      "rows": 50
+    },
+    {
+      "fold": "0",
+      "asset": "SIM-1",
+      "mean": -1.1148255008000065,
+      "rows": 50
+    }
+  ],
+  "performance": [
+    {
+      "model": "B0",
+      "mse": 13.584611450314561,
+      "rmse": 3.6857307891806967,
+      "mse_unit": "percentage_point_squared",
+      "rmse_unit": "percentage_point"
+    },
+    {
+      "model": "B1",
+      "mse": 6.429984440551092,
+      "rmse": 2.5357413985955057,
+      "mse_unit": "percentage_point_squared",
+      "rmse_unit": "percentage_point"
+    },
+    {
+      "model": "B2",
+      "mse": 6.429984440551092,
+      "rmse": 2.5357413985955057,
+      "mse_unit": "percentage_point_squared",
+      "rmse_unit": "percentage_point"
+    },
+    {
+      "model": "asset_training_mean",
+      "mse": 13.583732988013974,
+      "rmse": 3.6856116165453425,
+      "mse_unit": "percentage_point_squared",
+      "rmse_unit": "percentage_point"
+    }
+  ],
+  "increments": [
+    {
+      "new_model": "B2",
+      "old_model": "B0",
+      "old_value": 13.584611450314561,
+      "new_value": 6.429984440551092,
+      "absolute_error_improvement": 7.15462700976347,
+      "relative_percent": 52.66714499661158,
+      "unit": "percentage_point_squared",
+      "interpretation": "positive means lower error, not investment return"
+    },
+    {
+      "new_model": "B2",
+      "old_model": "B1",
+      "old_value": 6.429984440551092,
+      "new_value": 6.429984440551092,
+      "absolute_error_improvement": 0.0,
+      "relative_percent": 0.0,
+      "unit": "percentage_point_squared",
+      "interpretation": "positive means lower error, not investment return"
+    },
+    {
+      "new_model": "B2",
+      "old_model": "asset_training_mean",
+      "old_value": 13.583732988013974,
+      "new_value": 6.429984440551092,
+      "absolute_error_improvement": 7.153748547462882,
+      "relative_percent": 52.66408397290504,
+      "unit": "percentage_point_squared",
+      "interpretation": "positive means lower error, not investment return"
+    }
+  ],
+  "execution": {
+    "fits": 0,
+    "mode": "saved_prediction_arithmetic"
+  },
+  "limitations": [
+    "Point estimates only; no stability, causality or trading adoption claim.",
+    "Asset training means use equal rows within each ETF, not a universal optimal baseline."
+  ],
+  "original_run_id": "650fe3aea0ef457b842eaece39f474bd",
+  "original_conclusion": "not_supported",
+  "original_state": {
+    "execution": "completed",
+    "evidence": "not_supported",
+    "coverage": "declared_scope",
+    "production_authorized": false,
+    "receipt": "650fe3aea0ef457b842eaece39f474bd"
+  },
+  "data_mode": "synthetic",
+  "saved_run": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/saved",
+  "source_sha256": {
+    "contract.json": "f49c74d2ecd88d24840344924e8e7057d162083e484fa2e2a121e26978643f21",
+    "preflight.json": "b1e0d3e7f57ed290d0a5e186027f15196d672c4025c437e0815c9e5cc1f34f0a",
+    "result.json": "fe3c501a1f28fff23d705a3a0b113f8f6f141c1003aed0354a920fdd8ced25d3",
+    "receipt.json": "4541c35b7697ee5a3a8de9705d9fcab77b5b0a0cb114ddc01a29a34edf5580ca",
+    "report.md": "5df4c1351bbde6b4f97d9628b17c60c04c0940462e0b3a4e29d1a553489f0081"
+  },
+  "review_code_sha256": {
+    "baseline_review.py": "8a75b70a4ddfa6391aeeeb4279c4ba2d15640b32c6d7a5f91bb9f39e832e0873",
+    "scripts/run_factor_lab.py": "e86090adad26d87310656d5691f492c11da14e93e2a3eb7cbe6dcd7f41988bc8"
+  },
+  "original_source_bindings": {
+    "files": {
+      "docs/research/current-standards.json": "616c0ae1a636accd35c8500be7c5c21a35c13aaf2039e9e6144cb5531d96cb57",
+      "docs/research/lei-factor-research-mission.md": "1f58a65ea41c9b678cc14c4490020b674e991f63267a8746f692e919eb109591",
+      "docs/research/research-question-method-standard.md": "367da1f21f3344ff17abf449aaf887db2adf31ebcfcb1715333a34fb4bf90f16",
+      "docs/research/factor-increment-evidence-standard.md": "05f5b04c8b54ad3bf86296f09a5addd4fd6344dad6e7b639650c39692b2f3871",
+      "docs/research/experiment-backtest-principles.md": "67b49a08396b0c8cb93cb526466200cc798bdb4cd8ce77509658f291cc29493c",
+      "docs/research/ai-execution-contract.md": "f70a929f15d9d59f99f78a609a8658ce468f2c4025f05dba5380198f0bf23d22",
+      "docs/research/definition-standard.md": "938e04d7beb96a46069bbb6eb6c03d2331e86bfa771623fdfe21794b4e98fcbd",
+      "docs/research/experiment-report-template.md": "a141107c915dcf738621e6e8746d89e97fb2d835b4c16883805dc7fb19ab7170",
+      "src/lei_signal/research/workflow.py": "0a9b9f6cd7bf4f12ec86244c9e13d19ffe1318afc59a10214f55bf51554162cd",
+      "src/lei_signal/research/workflow_inputs.py": "92f602a3934fb850a0c4fb5db069427dc00743f52876c7c5e78ed47e33bcc146",
+      "src/lei_signal/research/workflow_evaluation.py": "ac1bf69ef1817c38ad9a7d80554a8bdb99bd61f757ed332ff79f5c7f92fd4709",
+      "src/lei_signal/research/question_contract.py": "21539cc5264d5bd2116d54728b2d12181463538514e43f1224413b52f3f52e0e",
+      "src/lei_signal/research/input_preflight.py": "514fb1fa1819d145366365865b49159e6b77beaeb27f15a3bdd64fa024484e04",
+      "src/lei_signal/research/candidate_preflight.py": "5b328590d115a2295b2406ba73caa0c460fe8646dfd0183eab284d830affa4df",
+      "src/lei_signal/research/definitions.py": "84f7b9ba76f4704e81f4f4d0c1784e2ab1ad7e3aa225abeb4796fa10dcbfec94",
+      "scripts/run_factor_lab.py": "e86090adad26d87310656d5691f492c11da14e93e2a3eb7cbe6dcd7f41988bc8",
+      "configs/strategy-documents.v1.json": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b",
+      "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    },
+    "versions": {
+      "mission": "1.1.0",
+      "question_method": "1.2.0",
+      "increment": "1.1.0",
+      "principles": "1.2",
+      "execution": "1.1.0",
+      "definition": "1.2.0",
+      "template": "1.2.1"
+    },
+    "definition_closure": {
+      "synthetic.test.sma_distance@1.0.0": {
+        "id": "synthetic.test.sma_distance",
+        "version": "1.0.0",
+        "name": "合成工具验收用均线距离",
+        "type": "feature",
+        "uses": [
+          "diagnostic"
+        ],
+        "not_for": [],
+        "scope": "synthetic engineering test only; no market or production claim",
+        "definition": {
+          "formula": "100 * (close / previous close - 1)",
+          "parameters": {
+            "lookback": 1
+          },
+          "endpoints": "current and preceding synthetic quote",
+          "unit": "percentage_point",
+          "direction": "signed distance",
+          "transforms": "none"
+        },
+        "input": {
+          "fields": [
+            "close"
+          ],
+          "price_basis": "synthetic close",
+          "currency": "synthetic",
+          "frequency": "daily",
+          "calendar": "artificial weekdays"
+        },
+        "universe": {
+          "version": "synthetic/1",
+          "eligibility": "synthetic quoted rows only",
+          "warmup": "two quotes",
+          "missing": "reject",
+          "quality_gate": "controlled workflow",
+          "degrade": "no market inference"
+        },
+        "time": {
+          "observation_time": "synthetic quote close",
+          "available_at": "synthetic quote close",
+          "decision_at": "engineering only",
+          "execution_at": "none",
+          "timezone": "Asia/Shanghai",
+          "effective_from": "2022-01-03"
+        },
+        "dependencies": [],
+        "validation": {
+          "method": "engineering boundaries only",
+          "tolerance": {
+            "absolute": 1e-12,
+            "relative": 1e-10,
+            "integer": 0
+          },
+          "tests": [
+            "tests/integration/test_classic_baseline_review_entry.py"
+          ],
+          "limitations": "not a market factor study"
+        },
+        "status": {
+          "definition_clarity": "synthetic_only",
+          "data_qualification": "synthetic_only",
+          "implementation": "engineering_fixture",
+          "effectiveness": "not_evaluated_for_market",
+          "production": "not_authorized"
+        },
+        "sources": [
+          "synthetic_test"
+        ],
+        "lifecycle": {
+          "state": "exists",
+          "basis": [
+            "tests/integration/test_classic_baseline_review_entry.py"
+          ]
+        }
+      }
+    },
+    "data_sha256": "825b3ebe78cf7379d2497c2e10b3f440802b63b01c55709402101f7b1e0d56f5"
+  },
+  "input_sha256": "825b3ebe78cf7379d2497c2e10b3f440802b63b01c55709402101f7b1e0d56f5",
+  "original_material_sha256": {
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/saved/contract.json": "f49c74d2ecd88d24840344924e8e7057d162083e484fa2e2a121e26978643f21",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/saved/preflight.json": "b1e0d3e7f57ed290d0a5e186027f15196d672c4025c437e0815c9e5cc1f34f0a",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/saved/result.json": "fe3c501a1f28fff23d705a3a0b113f8f6f141c1003aed0354a920fdd8ced25d3",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/saved/receipt.json": "4541c35b7697ee5a3a8de9705d9fcab77b5b0a0cb114ddc01a29a34edf5580ca",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/saved/report.md": "5df4c1351bbde6b4f97d9628b17c60c04c0940462e0b3a4e29d1a553489f0081",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/docs/experiments/raw/research-workflow-ledgers-2026-09-29/c912f32a1bc9c5594b61dd47/attempts.jsonl": "18c26cd7de76cbb78ab158c4a3327a408408b1bddeff17f2dfa56bda08f9bea5",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/docs/experiments/registry.json": "96ea7054916e403d34dcc354964071373e50858a0822223bec2be1f6a1368579",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/docs/experiments/raw/input-2026-09-29/panel.json": "825b3ebe78cf7379d2497c2e10b3f440802b63b01c55709402101f7b1e0d56f5",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/src/lei_signal/research/workflow.py": "0a9b9f6cd7bf4f12ec86244c9e13d19ffe1318afc59a10214f55bf51554162cd",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/src/lei_signal/research/workflow_inputs.py": "92f602a3934fb850a0c4fb5db069427dc00743f52876c7c5e78ed47e33bcc146",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/src/lei_signal/research/workflow_evaluation.py": "ac1bf69ef1817c38ad9a7d80554a8bdb99bd61f757ed332ff79f5c7f92fd4709",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/src/lei_signal/research/question_contract.py": "21539cc5264d5bd2116d54728b2d12181463538514e43f1224413b52f3f52e0e",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/src/lei_signal/research/input_preflight.py": "514fb1fa1819d145366365865b49159e6b77beaeb27f15a3bdd64fa024484e04",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/src/lei_signal/research/candidate_preflight.py": "5b328590d115a2295b2406ba73caa0c460fe8646dfd0183eab284d830affa4df",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/src/lei_signal/research/definitions.py": "84f7b9ba76f4704e81f4f4d0c1784e2ab1ad7e3aa225abeb4796fa10dcbfec94",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/classic-factor-progress/docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/round-03/test_real_cli_saved_receipt_an0/repo/scripts/run_factor_lab.py": "e86090adad26d87310656d5691f492c11da14e93e2a3eb7cbe6dcd7f41988bc8"
+  }
+}

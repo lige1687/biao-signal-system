@@ -1,0 +1,81 @@
+{
+  "updated_at": "2026-10-03 12:56:36 UTC",
+  "task_id": "classic-factor-research",
+  "question": "将已发现的逐ETF简单历史平均对照用于可复用研究核查，而非仅讲授",
+  "mode": "engineering_adoption",
+  "execution": "bounded_implementation_complete_sync_pending",
+  "evidence": "synthetic_engineering_verified_not_market_effect",
+  "user_scope": "继续落实项目；学习页暂不做",
+  "baseline": "既有B0共同均值/B1已有/B2新增且正式来源核验；逐ETF均值只在旧风险一次性脚本",
+  "new_scope": "--review-baselines saved-run辅助入口及纯核数，不动共享workflow",
+  "work_branch": "task/classic-factor-progress",
+  "base_commit": "cf8d630954257fff441d55a974f8a0fe95eca443",
+  "coordination_start": "85a5a28aafcfa0b25f51efedf9590cca47c51766",
+  "stopped_scope": [
+    "learning-page implementation",
+    "route visibility repair"
+  ],
+  "current_helper": {
+    "name": "classic_baseline_adoption",
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "status": "completed",
+    "dispatch_contract": "executor-contract.json"
+  },
+  "budget": {
+    "new_market_fits": 0,
+    "network_source_requests": 0,
+    "paid_operations": 0,
+    "helper_count": 1,
+    "engineering_test_batches_limit": 3,
+    "independent_cli_acceptance_limit": 1,
+    "actual_engineering_test_batches": 3,
+    "actual_controller_cli_runs": 1,
+    "controller_readonly_acceptance": 1
+  },
+  "failures": [
+    {
+      "stage": "delegate-preflight",
+      "exit_code": 1,
+      "reason": "只读research父目录与新模块写路径重叠；派发前改为准确只读文件列表",
+      "resolved": true
+    },
+    {
+      "stage": "executor-round-01",
+      "exit_code": 2,
+      "reason": "预期红测：模块尚未实现时测试收集失败，无拟合"
+    },
+    {
+      "stage": "executor-round-02",
+      "reason": "36通过30失败；新集成和旧集成因未交付生命周期basis阻断，另2旧归档核数缺原件；未伪造旧资格",
+      "resolution": "保留旧回归未验证；新集成采用独立合法合成定义测试目录",
+      "new_market_fits": 0
+    },
+    {
+      "stage": "controller-file-output",
+      "reason": "apply_patch could not write verify_adoption.py; explicit 58-byte write-check failed OSError errno28 No space left on device. Neither file exists; no cleanup performed.",
+      "resolution": "Read-only acceptance completed first. Later available capacity recovered to 1.1GiB, so small write and the one authorized independent CLI succeeded; no source changed or new fits. No files removed. GitHub tree/ref fallback not used.",
+      "resolved": true
+    },
+    {
+      "stage": "staged_diff_check",
+      "exit_code": 2,
+      "reason": "Extra blank line at end of controller CLI command record; removed whitespace only before commit; dependent commit never ran",
+      "resolved": true
+    }
+  ],
+  "frozen_old_studies": "不重跑或覆盖；原累计预算保留于既有报告",
+  "checks_pending": [
+    "scoped local commit, normal push and remote readback"
+  ],
+  "next": "Commit only scoped files to task/classic-factor-progress and push normally; local capacity recovered and no cleanup performed. No new market study or learning page.",
+  "fit_accounting": {
+    "new_synthetic_rehearsal": 2,
+    "new_synthetic_saved_run": 2,
+    "auxiliary_review": 0,
+    "market": 0,
+    "round_03_old_core_unit_checks": 14,
+    "round_02_old_core_unit_checks_reconstructed_not_instrumented": 14,
+    "total_actual_calls_with_reconstructed_round_02": 32
+  }
+}

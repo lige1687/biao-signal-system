@@ -22,12 +22,27 @@ def main() -> int:
     )
     mode.add_argument("--workflow-contract", help="新研究六阶段受控合同（已有冻结入口不变）")
     mode.add_argument("--workflow-draft", help="先检查资料并做模拟流程演练，生成冻结合同")
+    mode.add_argument("--review-baselines", help="只读核查已保存结果的简单对手，输出补充诊断")
+    parser.add_argument("--review-root", help="本核查模式的来源仓库根目录")
     parser.add_argument(
         "--register-report", action="store_true", help="登记本次基准报告至现有实验库"
     )
     parser.add_argument("--out", required=True, help="输出目录（必须不存在）")
     parser.add_argument("--reuse-predictions", help="同预测依赖的已验收输出；只重汇总，不拟合")
     args = parser.parse_args()
+    if args.review_root and not args.review_baselines:
+        parser.error("--review-root requires --review-baselines")
+    if args.review_baselines:
+        if args.register_report or args.reuse_predictions:
+            parser.error("baseline review neither registers reports nor reuses workflow execution")
+        from lei_signal.research.factor_lab.baseline_review import review_saved_run
+
+        try:
+            review_saved_run(args.review_baselines, args.out, root=args.review_root)
+        except (ValueError, OSError, KeyError, TypeError) as exc:
+            print(f"baseline review blocked: {exc}", file=sys.stderr)
+            return 3
+        return 0
     if args.attribution_protocol:
         if args.register_report or args.reuse_predictions:
             parser.error(

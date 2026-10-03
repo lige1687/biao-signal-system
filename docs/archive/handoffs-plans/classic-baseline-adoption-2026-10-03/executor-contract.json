@@ -1,0 +1,56 @@
+{
+  "mission": "把各ETF较早成熟历史平均接入既有Factor Lab保存结果辅助核查入口，不修改旧实验或共享工作流",
+  "task_scope": [
+    "按同目录implementation-plan.md的设计实现固定辅助核查",
+    "仅人工数据单元和真实CLI合成验收，保存红绿结果与已执行拟合次数；不运行旧行情研究"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "pyproject.toml",
+    "tests/unit/test_workflow_evaluation.py",
+    "tests/integration/test_research_workflow_entry.py",
+    "docs/research/",
+    "docs/experiments/classic-risk-target-fit-2026-10-02.md",
+    "docs/experiments/raw/classic-risk-target-fit-2026-10-02/check-saved-results.py",
+    "src/lei_signal/research/workflow.py",
+    "src/lei_signal/research/workflow_evaluation.py",
+    "src/lei_signal/research/workflow_inputs.py",
+    "src/lei_signal/research/question_contract.py",
+    "src/lei_signal/research/definitions.py",
+    "src/lei_signal/research/input_preflight.py",
+    "src/lei_signal/research/candidate_preflight.py",
+    "src/lei_signal/research/factor_lab/runner.py",
+    "src/lei_signal/research/factor_lab/contracts.py",
+    "src/lei_signal/research/factor_lab/benchmarks.py"
+  ],
+  "write_paths": [
+    "src/lei_signal/research/factor_lab/baseline_review.py",
+    "scripts/run_factor_lab.py",
+    "tests/unit/test_classic_baseline_review.py",
+    "tests/integration/test_classic_baseline_review_entry.py",
+    "docs/archive/handoffs-plans/classic-baseline-adoption-2026-10-03/executor-receipt.json",
+    "docs/experiments/raw/classic-baseline-adoption-2026-10-03/executor-tests/"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "四指定代码/测试路径",
+    "测试命令/退出码/红绿与修复及人工拟合计数",
+    "无改原结果、代码审查与未验证项"
+  ],
+  "stop_conditions": [
+    "missing permission",
+    "scope ambiguity",
+    "unsafe action",
+    "已有同功能或共享文件块出现写入冲突"
+  ],
+  "executor": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}
