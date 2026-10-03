@@ -1,0 +1,28 @@
+{
+  "status": "proposal_only_not_executed",
+  "goal": "obtaincompleteproviderB20B50normalexports",
+  "source_urls": [
+    "https://www.investing.com/indices/s-p-500-stocks-above-20-day-average-historical-data",
+    "https://www.investing.com/indices/s-p-500-stocks-above-50-day-average-historical-data"
+  ],
+  "max_initiated_source_operations": 6,
+  "operation_definition": "per series onepagevisit+onehistoricaldatequery+onenormaldownload; not exactnetworkHTTPcount",
+  "max_saved_bytes": 20000000,
+  "paid_actions": 0,
+  "pro_calls": 0,
+  "effect_fits": 0,
+  "retries": 0,
+  "preconditions": [
+    "separateboundedsourceauthorization preservingallpastcounts",
+    "evidence normalbrowserconnection restored or normallyexportedfilesprovided"
+  ],
+  "stop": [
+    "accessdeny/challenge",
+    "timeout",
+    "paidrequirement",
+    "noactualfile",
+    "6operationsor20MBcap"
+  ],
+  "does_not_override_access_rejection": true,
+  "budget_provenance": "newproposalonly;notalreadyallocated"
+}

@@ -1,0 +1,23 @@
+{
+  "failures": [
+    {
+      "operation": "record prior CUA observation",
+      "exit_code": 1,
+      "cause": "past observation submitted outside native evidence freshness window; original time retained",
+      "effect": "one observation appending saved raw but native update failed; no Pro resend/no business writes",
+      "correction": "save backlog explicitly as raw-only, only fresh actual observations passed to native state",
+      "tool_output": "RuntimeError with empty stderr; native stdout not durably captured in first script version",
+      "original_times": [
+        "2026-09-29T12:07:43.568Z",
+        "2026-09-29T12:08:44.224Z"
+      ]
+    },
+    {
+      "operation": "final verification tool orchestration",
+      "failure": "JavaScript string quoting syntax error before execution",
+      "side_effects": "no nested tools or commands executed",
+      "correction": "same local verification with safe multiline source succeeded; no source/market/Pro retry"
+    }
+  ],
+  "browser_timing": "some first polling gaps exceeded 30s while preparing evidence; retain timestamps and recompute at closure; no speed certification or additional Pro calls"
+}

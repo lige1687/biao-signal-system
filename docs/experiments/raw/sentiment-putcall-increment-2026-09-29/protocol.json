@@ -1,0 +1,145 @@
+{
+  "id": "sentiment.putcall-increment@1.0.0",
+  "frozen_at": "2026-09-29T08:43:18.560242+00:00",
+  "question": "在2012-06-11后未拼接的CBOE缓存中，股票期权或总体期权Put/Call相对已有价格信息，是否改善SPY未来20段涨幅或窗口内最大下跌的估计？",
+  "primary_target": "window_mdd20",
+  "secondary_target": "forward_return20",
+  "target_interpretation": "主问题是未来20段期间从该期间已到达高点往低点的最大下跌，非此前跌幅、非账户回撤、非未来下跌概率；涨幅辅助检验原反弹含义",
+  "authorization": "用户2026-09-29继续推进；属于已给S05核心线；Pro仅在真正架构分歧时咨询",
+  "strategy_layer": "模块E股票期权确认输入的独立信息研究；Total是分开研究的产品对照，未授予原阈值，也不将本轮代替宽度或完整E",
+  "source_regime_start": "2012-06-11",
+  "source_end": "2019-10-04",
+  "label_cutoff": "2019-10-04",
+  "initial_training": [
+    "2012-06-11",
+    "2014-12-31"
+  ],
+  "evaluation": [
+    "2015-01-01",
+    "2019-10-04"
+  ],
+  "inputs": {
+    "equity": "inputs/equitypc.csv",
+    "total": "inputs/totalpc.csv",
+    "price": "inputs/px_SPY.csv",
+    "parse": "latin1 CSV skip first2 metadata lines, date mm/dd/yyyy",
+    "feature": "use official reported P/C Ratio rounded as provided, not silently substitute exact PUT/CALL",
+    "no_source_join": "inner common source dates only to compare2products fairly; never add volumes or ratios into total score",
+    "price_basis": "old same SPY adjusted Close cache, revision/vintage unproven, not actual executable quotes"
+  },
+  "objects": {
+    "e": "local:sentiment.equity-putcall-reported@1.0.0 = reported_equity_ratio, dimensionless",
+    "c": "local:sentiment.total-putcall-reported@1.0.0 = reported_total_ratio, dimensionless",
+    "eq": "local:sentiment.equity-putcall-original-extreme@1.0.0 = 1(e>1)",
+    "original_LEI_threshold": {
+      "product": "Equity",
+      "condition": "reported_ratio>1",
+      "top": null,
+      "optimized": false
+    },
+    "total_threshold": "None; same>1 count only warns product semantics, not LEI signal"
+  },
+  "availability": "actual historical first release and revisions unknown; hypothetical conservative use: source date must be a real SPY quote date i, t=quote[i+2] close after2actual quote rows; begin labels at t+1 close; do not forward fill daily factor or assume same-day availability",
+  "horizons": [
+    20
+  ],
+  "target_formulas": {
+    "forward_return20": "100*(C_(t+21)/C_(t+1)-1), 20return segments21closes",
+    "window_mdd20": "100*max_{j=t+1..t+21}(1-C_j/max_{k=t+1..j}C_k), positive magnitude, firstpointincluded =>min0; no pre-signal peak included"
+  },
+  "baseline": {
+    "r20": "100*(C_t/C_(t-20)-1)",
+    "r63": "100*(C_t/C_(t-63)-1)",
+    "dma200": "100*(C_t/mean(C_(t-199)..C_t)-1)",
+    "dd252": "100*(C_t/max(C_(t-251)..C_t)-1)",
+    "rv20": "100*std(past20 one-day returns,ddof1)*sqrt20"
+  },
+  "models": {
+    "I": [],
+    "E": [
+      "e"
+    ],
+    "T": [
+      "c"
+    ],
+    "EQ": [
+      "e",
+      "eq"
+    ],
+    "B": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20"
+    ],
+    "BE": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20",
+      "e"
+    ],
+    "BT": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20",
+      "c"
+    ],
+    "BEQ": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20",
+      "e",
+      "eq"
+    ]
+  },
+  "no_combination": "no BE+T or AAII/NAAIM interaction before these single-factor questions answered",
+  "estimation": "OLS with intercept, training mean/std ddof0 only, each eval year2015..2019 train both t and target_end strictly before Jan1, min400rows; no changing sign/threshold, clipping, ridge tuning. If EQ/BEQ scale or rank unavailable, preserve unestimable flag for that branch and common E/T core continues; no silent different features",
+  "valid_population": "all8models same common source dates valide/c/price/B/y within eachtarget; labelend full<=2019-10-04, source>=2012-06-11, retain explicit exclusion reason. No future-data eligibility shopping. Target labels20share same dates asrisk. Rare branch unestimable mustreportednot0",
+  "primary_metric": "100*(1-MSE(model)/MSE(B)), positive improves estimation not investment profit. All E/BE,T/BT,EQ/BEQ compared, and all core challengers versus I; raw errorRMSE too. Risk negative fitted values kept as estimated—not clipped; report fraction negative to expose model limitations",
+  "primary_comparisons": [
+    "BE vs B for window_mdd20",
+    "BT vs B for window_mdd20"
+  ],
+  "secondary_comparisons": [
+    "BEQ vs BE",
+    "BEQ vs B",
+    "all signal/combined models vs I",
+    "same compares for forward_return20"
+  ],
+  "uncertainty": "2000 paired moving126-row contiguous blocks about halfyear; seed20260929+0 forrisk,+1 forreturn; same indices allmodels, save blockstarts/losses/draws; missing branch no range. Blocks do not refit model, not complete model uncertainty or multiple testing correction",
+  "raw_behavior": "eval sources Equity>1 and<=1: fulln, consecutive source quote episodes with gaps>=4calendar days breaking, rawreturnmean/median/upshare and riskmean/median; originalthresholdone nottrained probability. Total no hard bottom threshold",
+  "stability": "all eval year errors/groupcounts; bands2015-2016 and2017-2019; leave eachyear no refit; drop Equity>1 group no refit and compare separategroup error contributions; all outputs preservebad years. Later chosen stressyears needexploratory tag",
+  "selection_history": "old VIX/PutCall experiments already seen and negative sealed; this new objective controls price backgrounds and separates Equity/Total, stable2012definition segment chosenbeforelabels, not replication or freshindependent validation",
+  "budget": {
+    "one_core_batch": 1,
+    "market_attempts_max": 4,
+    "followup_batches_max": 3,
+    "core_fits_max": 80,
+    "source_requests_max": 6,
+    "pro_architecture_calls_max": 1,
+    "new_output_bytes_max": 20971520
+  },
+  "stop": [
+    "protocol or inputhash drift",
+    "date/product identity unknown",
+    "E/T baseline rank insufficient",
+    "new production/trading/paid/deletion/outsidewrites",
+    "attempt budget exceeded"
+  ],
+  "not_evaluated": [
+    "other horizons",
+    "current2020—2026 forecasting",
+    "true firstrelease/C evidence",
+    "fullE orstrategyaccount",
+    "probability/volatility forecast",
+    "factor combinations"
+  ],
+  "outputs": "new executor/run-01 only, no overwrite; observation rows, eachtarget predictions/fits/draws/results, source/header manifest, all rootreviews"
+}

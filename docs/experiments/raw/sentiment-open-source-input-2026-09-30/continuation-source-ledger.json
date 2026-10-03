@@ -1,0 +1,216 @@
+{
+  "research_id": "sentiment-open-source-input",
+  "prior_source_requests_at_least": 30,
+  "new_source_operations_budget": 24,
+  "operations": [
+    {
+      "id": 1,
+      "type": "web_search",
+      "queries": [
+        "github WIKI_PRICES LEH",
+        "github delisted stock csv 2008",
+        "free historical S5TW 20/50 breadth"
+      ],
+      "result": "Investing historical data UI and Barchart free historical limits found; no raw price archive found in this batch"
+    },
+    {
+      "id": 2,
+      "type": "web_search",
+      "queries": [
+        "Kaggle Boris Marjanovic stock archive",
+        "Github wiki_prices.csv raw archive",
+        "Github LEHMQ prices"
+      ],
+      "result": "CC0 public 2017 stock archive and 225MB WIKI Git LFS mirror found"
+    },
+    {
+      "id": 3,
+      "type": "browser_page",
+      "url": "https://www.investing.com/indices/s-p-500-stocks-above-20-day-average-historical-data",
+      "result": "Public B20 table visible; restrictive storage/reuse notice observed"
+    },
+    {
+      "id": 4,
+      "type": "browser_date_query",
+      "dates": [
+        "2008-09-10",
+        "2008-09-16"
+      ],
+      "result": "Actual dated B20 values visible, including2008-09-12=45.86 and2008-09-15=23.23; no bulk data downloaded"
+    },
+    {
+      "id": 5,
+      "type": "http_download",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/borismarjanovic/price-volume-data-for-all-us-stocks-etfs",
+      "output": "boris-stooq-2017.zip",
+      "initiated_at": "2026-09-30T04:27:15.114093+00:00",
+      "result": "downloaded",
+      "bytes": 515591518,
+      "status": 200,
+      "content_type": "application/zip",
+      "sha256": "d9317c8fb2d63b9b00db5f933b6c9639d2bf7ea3b918169bb5cec5903dce85a1"
+    },
+    {
+      "id": 6,
+      "type": "browser_download_check",
+      "result": "Investing Download requires free login; no account created or data downloaded"
+    },
+    {
+      "id": 7,
+      "type": "web_read_search",
+      "urls": [
+        "https://cdn.investing.com/about-us/terms_and_conditions.pdf"
+      ],
+      "queries": [
+        "Barchart S5TW/S5FI calculation and special symbols",
+        "Investing historical download help"
+      ],
+      "result": "PDF fetch failed; primary Barchart free historical limit and proprietary breadth symbols documentation found"
+    },
+    {
+      "id": 8,
+      "type": "http_range_sample",
+      "url": "https://media.githubusercontent.com/media/kmfranz/trading_pairs/master/WIKI_PRICES.csv",
+      "result": "sample_read",
+      "status": 206,
+      "content_length": "65536",
+      "content_range": "bytes 0-65535/235562224",
+      "content_type": "text/plain",
+      "bytes_read": 65536
+    },
+    {
+      "id": 9,
+      "type": "http_download",
+      "url": "https://www.quandl.com/api/v3/datatables/WIKI/PRICES?qopts.export=true",
+      "output": "wiki-anonymous-export-response.txt",
+      "initiated_at": "2026-09-30T04:32:52.968356+00:00",
+      "result": "http_failure",
+      "bytes": 0,
+      "status": 403,
+      "content_type": "application/json; charset=utf-8",
+      "response_excerpt": "{\"quandl_error\":{\"code\":\"QEPx04\",\"message\":\"A valid API key is required to retrieve data. Please check your API key and try again. You can find your API key under your account settings.\"}}"
+    },
+    {
+      "id": 10,
+      "type": "web_read",
+      "urls": [
+        "https://www.barchart.com/education/special-symbols",
+        "https://github.com/kmfranz/trading_pairs"
+      ],
+      "result": "Barchart direct read failed; WIKI mirror repo exists, no full ancient range established"
+    },
+    {
+      "id": 11,
+      "type": "web_search",
+      "queries": [
+        "Investing S&P500 B50 historical page",
+        "Investing help historical downloads"
+      ],
+      "result": "B50 exact page found; no applicable personal-download license documented by search"
+    },
+    {
+      "id": 12,
+      "type": "browser_page",
+      "url": "https://www.investing.com/indices/s-p-500-stocks-above-50-day-average-historical-data",
+      "result": "Public B50 table visible"
+    },
+    {
+      "id": 13,
+      "type": "browser_date_query",
+      "series": "S5FI",
+      "begin": "2008-09-10",
+      "end": "2025-12-31",
+      "result": "4364 displayed dated rows; five prespecified facts observed; bulk not stored"
+    },
+    {
+      "id": 14,
+      "type": "browser_date_query",
+      "series": "S5TW",
+      "begin": "2008-09-10",
+      "end": "2025-12-31",
+      "result": "4364 displayed dated rows; five prespecified facts observed; first wait timed out but same query later completed, no resubmission"
+    },
+    {
+      "id": 15,
+      "type": "browser_download_check",
+      "series": "S5TW",
+      "result": "Download opens free login; login page prepared, credentials user handoff; bulk not downloaded"
+    },
+    {
+      "id": 16,
+      "type": "http_download",
+      "url": "https://cdn.investing.com/about-us/terms_and_conditions.pdf",
+      "output": "investing-terms.pdf",
+      "initiated_at": "2026-09-30T04:41:56.477895+00:00",
+      "result": "http_failure",
+      "bytes": 0,
+      "status": 403,
+      "content_type": "text/plain",
+      "response_excerpt": "403"
+    },
+    {
+      "id": 17,
+      "type": "web_search",
+      "queries": [
+        "Nasdaq WIKI official API/free account authorization",
+        "Nasdaq WIKI large-table download key requirements"
+      ],
+      "result": "Official Nasdaq documentation distinguishes free/premium account access; WIKI example and bulk export require API key. Does not prove current full WIKI entitlement."
+    },
+    {
+      "id": 18,
+      "type": "web_search",
+      "queries": [
+        "\"S5TW\" \".csv\"",
+        "\"S5FI\" \"dataset\" historical",
+        "\"SPXA20R\" github data"
+      ],
+      "result": "No independently licensed downloadable long breadth archive located. Public chart discussions do not supply a qualified raw file."
+    },
+    {
+      "id": 19,
+      "type": "web_search",
+      "queries": [
+        "Kaggle Boris CC0/data card",
+        "Barchart free historical download limits"
+      ],
+      "result": "Search returned unrelated results; no supporting evidence taken from this batch."
+    },
+    {
+      "id": 20,
+      "type": "web_read",
+      "urls": [
+        "https://www.kaggle.com/datasets/borismarjanovic/price-volume-data-for-all-us-stocks-etfs",
+        "https://www.barchart.com/stocks/quotes/%24S5TW/price-history/historical"
+      ],
+      "result": "Kaggle web reader returned zero text lines; Barchart reader requested JavaScript/robot verification. No new license evidence from this read."
+    },
+    {
+      "id": 21,
+      "type": "browser_page",
+      "url": "https://www.kaggle.com/datasets/borismarjanovic/price-volume-data-for-all-us-stocks-etfs",
+      "result": "Normal public browser data card opened for license/source observation; no account or CAPTCHA interaction."
+    },
+    {
+      "id": 22,
+      "type": "browser_authenticated_page",
+      "url": "https://www.investing.com/indices/s-p-500-stocks-above-20-day-average-historical-data",
+      "result": "User Chrome account logged in after optional onboarding skipped and paid promotion dismissed. No credentials entered/read/stored by agent."
+    },
+    {
+      "id": 23,
+      "type": "browser_date_query",
+      "series": "S5TW",
+      "begin": "2008-09-10",
+      "end": "2025-12-31",
+      "result": "Authenticated normal page query confirmed4364 rows; first2025-12-31, last2008-09-10."
+    },
+    {
+      "id": 24,
+      "type": "browser_download_attempt",
+      "series": "S5TW",
+      "result": "Clicked normal Download once. Browser download event timed out45000ms; no matching width file found in standard Downloads folder. No login/terms/CAPTCHA dialog or error observed after click. Not proof export unavailable. No repeat or authenticated API workaround used."
+    }
+  ],
+  "operation_unit": "initiated search tool batch, page/date query, download check or HTTP data operation; not exact network HTTP request count"
+}

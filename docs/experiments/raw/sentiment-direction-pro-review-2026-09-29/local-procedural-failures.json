@@ -1,0 +1,23 @@
+{
+  "failures": [
+    {
+      "operation": "C2C session set",
+      "attempts": 2,
+      "error": "unknown option --json",
+      "correction": "documented session set without --json succeeded; zero webpage resends"
+    },
+    {
+      "operation": "read quote date column",
+      "attempts": 1,
+      "error": "KeyError date; actual header Date",
+      "correction": "Date field inspected and used; no source write or fit"
+    },
+    {
+      "operation": "archive JSON readability check",
+      "attempts": 1,
+      "error": "Initial failed-session stdout was empty but recorded with JSON extension; JSON parsing failed",
+      "correction": "Preserved empty stdout/hash explicitly in structured first-attempt metadata; repeat structural check only; no market rerun."
+    }
+  ],
+  "market_fits_from_failures": 0
+}

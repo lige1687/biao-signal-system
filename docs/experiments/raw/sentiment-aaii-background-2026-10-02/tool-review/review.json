@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-02",
+  "scope": "AAII 20 survey background; semantic factor ideas and historical conditional increment for one ETF",
+  "method": "Read three named local reports, then checked four official public pages in three web requests. No installation, clone, fitting, trading, or extra data access.",
+  "public_source_requests": {
+    "web_calls": 3,
+    "source_urls_attempted": 4,
+    "budget_limit": 4,
+    "log": [
+      {
+        "url": "https://github.com/microsoft/qlib",
+        "outcome": "opened; modular components, data/model/workflow and MIT license visible; exact current version not visible",
+        "version_seen": null
+      },
+      {
+        "url": "https://github.com/microsoft/RD-Agent",
+        "outcome": "opened; quant factor/model automation claims, Linux requirement and MIT license visible; exact current version not visible",
+        "version_seen": null
+      },
+      {
+        "url": "https://www.statsmodels.org/stable/generated/statsmodels.stats.sandwich_covariance.cov_hac.html",
+        "outcome": "opened; 0.15.0 documentation describes covariance for equally spaced single time series and lag choice",
+        "version_seen": "0.15.0"
+      },
+      {
+        "url": "https://github.com/hkuds/vibe-trading",
+        "outcome": "opened; repository title and MIT license visible, README body not rendered by source tool; functional suitability unverified",
+        "version_seen": null
+      }
+    ],
+    "followup_within_same_sources": "One find request inspected RD-Agent and statsmodels text; no additional source URL."
+  },
+  "local_evidence": [
+    "docs/experiments/research-tool-reuse-shortlist-2026-09-14.md",
+    "docs/experiments/quant-resources-adoption-2026-10-02.md",
+    "docs/experiments/rdagent-pilot-controller-review-2026-09-27.md"
+  ],
+  "decisions": [
+    {
+      "tool": "statsmodels / local lei-quant-tools",
+      "useful_for_this_question": "Estimate uncertainty of a predeclared daily conditional-return difference when adjacent days are related, with complete evenly spaced observations and explicit lag choice.",
+      "local_status": "Two statsmodels 0.15.0 source functions were already adapted into lei-quant-tools; 27 simulated checks reported, not full package installation or real-market evidence.",
+      "limit": "Does not define AAII semantics, prove historical availability, fix repeated-search bias, or show incremental ETF trading value.",
+      "license": "BSD license retained in local adapted component, per local adoption report."
+    },
+    {
+      "tool": "Qlib",
+      "useful_for_this_question": "Reference modular data and feature-expression boundaries if a concrete missing component appears.",
+      "local_status": "Existing Alpha158 definition review and general shortlist only; no AAII one-ETF adapter or current runtime qualification shown.",
+      "limit": "Default multi-instrument model training, cross-sectional ranking, and full backtest workflow do not answer whether one ETF's lagged sentiment condition adds information beyond existing baseline.",
+      "license": "MIT shown in official repository."
+    },
+    {
+      "tool": "RD-Agent",
+      "useful_for_this_question": "Potential bounded execution and saved-result orchestration after semantic hypothesis and request budget have been frozen.",
+      "local_status": "Fixed upstream commit 484776c211e4fbbeef03e0ec00d6bbee7362a4f4 was trialed for a fixed SMA task: result capture, failure record, and resume worked; autonomous factor proposal and feedback did not run.",
+      "limit": "Upstream quant-stock automation claims do not validate AAII one-ETF semantics or incremental value; local pilot found step-count overshoot and stop-cleanup warning. Do not use for this bounded current experiment.",
+      "license": "MIT shown in official repository and local pilot."
+    },
+    {
+      "tool": "Vibe-Trading",
+      "useful_for_this_question": "No established contribution from inspected material.",
+      "local_status": "Not locally adapted; README body was unavailable in this check.",
+      "limit": "Repository popularity and title are insufficient to claim semantic factor mining, historical point-in-time data handling, or one-ETF incremental testing.",
+      "license": "MIT shown on official repository page."
+    }
+  ],
+  "access_boundary": "The previously denied DeanFinancials/deanfi-collectors advance-decline source was not requested."
+}

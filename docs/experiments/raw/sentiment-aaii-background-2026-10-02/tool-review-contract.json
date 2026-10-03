@@ -1,0 +1,36 @@
+{
+  "mission": "Sentiment strategy semantic mining: AAII 20 survey background. Root owns design and experiment.",
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "stop_conditions": [
+    "No production or external-file changes",
+    "No other writers paths",
+    "No new experiments or extra source requests",
+    "Stop on explicit access denial"
+  ],
+  "controller_review": {
+    "required": true,
+    "by": "root"
+  },
+  "task_scope": [
+    "Read existing tool adoption and verify official public sources for Qlib, RD-Agent, statsmodels with at most4 source operations; no install or cloning."
+  ],
+  "read_only_paths": [
+    "docs/experiments/research-tool-reuse-shortlist-2026-09-14.md",
+    "docs/experiments/quant-resources-adoption-2026-10-02.md",
+    "docs/experiments/rdagent-pilot-controller-review-2026-09-27.md"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/tool-review"
+  ],
+  "network_allowed": true,
+  "expected_outputs": [
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/tool-review/review.json",
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/tool-review/review.md"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  }
+}

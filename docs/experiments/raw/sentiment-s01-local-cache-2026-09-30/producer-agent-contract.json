@@ -1,0 +1,14 @@
+{
+  "mission": "Trace the precise producer and transformation lineage of the user's existing self-calculated US SP500 breadth cache, without touching cache files or testing returns.",
+  "task_scope": ["Read frozen research state and previous S01 source audit", "Inspect only named repository producer scripts and market-context modules, tracing current-membership acquisition, historical membership, price source and adjustment, missing/denominator formula, available_at and transformations into JSON/parquet/database", "Report independently which provenance facts are proven by code and which are only claimed by comments; do not assume cache bytes match source without a fingerprint or run manifest", "Write one producer-lineage evidence file and short handoff"],
+  "read_only_paths": ["AGENTS.md", "configs/strategy-documents.v1.json", "docs/experiments/raw/sentiment-s01-local-cache-2026-09-30/research-state.json", "docs/experiments/raw/sentiment-s01-historical-input-2026-09-30/", "src/lei_signal/market_context/", "scripts/backfill_breadth_full.py", "scripts/backfill_timing_data.py", "scripts/archive/refresh_sp500_breadth_tail.py", "scripts/archive/rebuild_us_breadth_qfq.py", "scripts/archive/fetch_us_adjusted_matrix.py", "scripts/archive/ingest_sp500_breadth_to_sqlite.py", "scripts/round5_repro/"],
+  "write_paths": ["docs/experiments/raw/sentiment-s01-local-cache-2026-09-30/producer/"],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": ["producer/lineage.json with code path and line references, confirmed transformations, assumptions, unresolved links", "producer/delivery.md with qualification implications and exact read/write scope"],
+  "stop_conditions": ["outside listed paths", "network", "outside-repository write", "market outcome calculation"],
+  "executor": {"model": "gpt-6-sol", "reasoning_effort": "medium"},
+  "controller_review": {"required": true}
+}

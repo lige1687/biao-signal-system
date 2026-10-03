@@ -1,0 +1,53 @@
+{
+  "schema": "sentiment-source-qualification/1",
+  "research_id": "sentiment-s01-historical-input",
+  "run_id": "2026-09-30",
+  "mode": "research",
+  "delivery_mode": "final_only",
+  "question": "Can existing local or two previously shortlisted official sources supply genuine historical S&P 500 20-day and 50-day breadth inputs for Module E, with explicit reconstruction and historical decision-use qualifications?",
+  "decision_use": "Decide whether to run the already planned continuous breadth and original 15% market-effect study; no trading or production approval.",
+  "scope": "US S&P 500 breadth source qualification for sentiment factor S01; China breadth and earlier AAII/PutCall experiments remain unchanged.",
+  "strategy_layer": "LEI Module E market breadth as primary index-level sentiment state; AAII, NAAIM and Put/Call are subordinate confirmation.",
+  "strategy_sha256": {
+    "LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "basis": "docs/experiments/raw/sentiment-standard-pro-review-2026-09-29/next-stage-plan.json",
+  "source_versions": "Actual raw identities, prices, memberships, effective/available times, revisions, coverage and research rights must be verified before historical effects.",
+  "target_and_baseline": "This stage evaluates input qualification only; the reserved downstream target is SPY future 120-quote endpoint return, compared within prespecified price states after a separate freeze.",
+  "success": "At least one source yields inspectable historical B20/B50 raw inputs or a documented equivalent with membership/denominator/price/time/version qualifications and permitted research use for a stated range.",
+  "falsification": "No candidate provides all required fields within this bounded, no-pay inquiry; this is an evidence/access boundary, not proof that the factor fails or the source does not exist.",
+  "candidate_providers": ["S&P Dow Jones Indices SPICE", "StockCharts"],
+  "prespecified_sample_dates": ["2008-09-12", "2008-09-15", "2009-03-09", "2020-03-23", "2025-12-31"],
+  "new_source_request_budget": {
+    "max": 6,
+    "count_unit": "individual search queries or URL reads including failures; provider count <=2; no paid, login, contact, bulk export or acquisition outside public pages",
+    "used": 6
+  },
+  "prior_source_requests": {
+    "ledger": "docs/experiments/raw/sentiment-method-and-source-2026-09-29/source/source-ledger.json",
+    "used": 4,
+    "remaining": 0,
+    "not_reset": true
+  },
+  "new_market_fits_max": 0,
+  "pro_calls_max": 0,
+  "review_batches_max": 1,
+  "allowed_actions": ["read local repository and known read-only SQLite sources", "read only official free public source pages", "write research artifacts inside this raw directory and dated repo report"],
+  "stop_conditions": ["paywall or login", "provider contact required", "data rights unclear", "attempt to expand providers, fit outcomes, or change strategy/rules", "source request cap reached"],
+  "output_location": "docs/experiments/raw/sentiment-s01-historical-input-2026-09-30/",
+  "execution": "completed",
+  "evidence": "inconclusive",
+  "completion_reason": "evidence_boundary",
+  "source_question_answer": "No qualified actual historical B20/B50 input obtained in the bounded local/two-official-provider inquiry; this is not a global no-data proof.",
+  "market_effect_status": "blocked_missing_qualified_inputs",
+  "market_effect_evidence": "not_evaluated",
+  "actual_new_market_fits": 0,
+  "actual_new_pro_calls": 0,
+  "prior_and_new_official_source_requests": {"prior_used": 4, "new_used": 6, "not_reset": true},
+  "controller_review": "controller-review.json",
+  "report": "docs/experiments/sentiment-s01-historical-input-2026-09-30.md",
+  "known_prior_market_model_fits_at_least": 708,
+  "known_prior_pro_calls_at_least": 4,
+  "external_upgrade_write": "not authorized in this run"
+}

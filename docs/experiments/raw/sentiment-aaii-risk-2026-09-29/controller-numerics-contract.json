@@ -1,0 +1,51 @@
+{
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "stop_conditions": [
+    "source drift",
+    "any new model fitting or optimization",
+    "write boundary exceeded"
+  ],
+  "mission": "independent numerical audit of saved68risk fits and uncertainty, no refit",
+  "task_scope": [
+    "Independently reconstruct training masks/scales for all68 saved fits from observations; check saved coefficients objective, analyticgradient and saved predictions without optimizing",
+    "Check all optimizer singleinitialization/finalgradient/nonincrease/success records; validate I maturemean",
+    "Replay first2 pairedblock draws per52/104 using saved starts and recalculate all six percentile ranges from all2000 saved draw rows",
+    "Summarize differences, exactnorm/protocol/input/code/result identities and limitations; no entire independent-real-target rerun needed",
+    "禁止联网、安装、新委派、改规则/封存/实验输出；不得重求系数或选择模型"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "docs/research/ai-execution-contract.md",
+    "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/protocol.json",
+    "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/source-manifest.json",
+    "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/controller/norm-binding.json",
+    "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/controller/code-review.json",
+    "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/executor/run-01"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/controller/numerics"
+  ],
+  "expected_outputs": [
+    "independent-review.py",
+    "audit.json",
+    "delivery.md"
+  ],
+  "budget": {
+    "new_model_fits": 0,
+    "new_source_requests": 0,
+    "runs_max": 1,
+    "output_bytes_max": 2097152
+  },
+  "frozen_at": "2026-09-29T10:21:36.102752+00:00",
+  "review_is_independent": "do not import executor code; own arithmetic from frozen protocol and saved records"
+}

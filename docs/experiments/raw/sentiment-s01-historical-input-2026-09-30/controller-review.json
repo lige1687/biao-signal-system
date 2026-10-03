@@ -1,0 +1,45 @@
+{
+  "schema": "sentiment-s01-controller-review/1",
+  "research_id": "sentiment-s01-historical-input",
+  "reviewed": [
+    "source/source-ledger.json",
+    "source/qualification.json",
+    "local/inventory.json",
+    "local/delivery.md",
+    "controller-local-db-audit.json"
+  ],
+  "strategy_sha256_match_approved_config": true,
+  "accepted_findings": [
+    "The read-only SP500 database has 11706 snapshot rows, of which 11694 belong to the same current-494-member historical backfill; no SP500 universe_membership_versions row exists.",
+    "All 11694 backfill rows store date-only available_at equal to as_of, and 6098 rows have different 20-day and 50-day eligible counts.",
+    "The repository fixture has 503 members, all effective_from 2026-08-04; its own backfill source warns that earlier dates use the present basket and omit removed-company prices.",
+    "Six newly counted official-provider searches/URL reads, including failures, obtained no actual dated historical B20/B50 sample or reconstructible input and no task-specific research entitlement."
+  ],
+  "independent_checks": [
+    "Read-only SQLite aggregation and five prespecified dates re-queried by controller; result in controller-local-db-audit.json.",
+    "Controller read the relevant producer's source text and independently counted all effective_from/source_kind values in SP500.parquet.",
+    "Source ledger compared with prior four-request ledger and old official-page qualification; current search snippets are treated as catalogue evidence only, failed URL reads as no observation."
+  ],
+  "delegate_contract_issue": {
+    "agent": "gpt-6-luna/low local lineage",
+    "observation": "Read repository tests/fixtures/market_context and docs/experiments/raw/breadth_overlay/A_us_indices.json, which were not listed in its narrow read_only_paths.",
+    "assessment": "These are ordinary repository files within the user's research authorization, not protected external data; no out-of-scope writes, network, outcomes, or strategy edits occurred. Their relevant facts were rechecked by controller. The frozen delegation contract was nevertheless exceeded and is recorded rather than silently relabeled.",
+    "remedy": "Do not treat the helper's completion as acceptance; controller independently verified the decisive fixture count and producer source, and limits the conclusion to inspected paths."
+  },
+  "scientific_decision": {
+    "source_qualification_question": "answered_within_bounded_public_and_local_scope",
+    "historical_SP500_breadth_effect": "blocked_missing_qualified_inputs",
+    "historical_E_trade_claim": "blocked_missing_available_time_and_rights",
+    "actual_market_effects": "not_evaluated",
+    "factor_failure_inferred": false
+  },
+  "budgets": {
+    "prior_official_source_requests_used": 4,
+    "new_official_source_requests_used": 6,
+    "new_market_model_fits": 0,
+    "new_pro_calls": 0,
+    "new_provider_contacts": 0,
+    "new_paid_actions": 0
+  },
+  "next_action_gate": "Only an already-authorized historical member/price file or a documented precomputed B20/B50 series, with field dictionary, vintage and research rights, can release the planned market-effect contract. Acquisition requiring payment, account access or provider contact needs a distinct authorization."
+}

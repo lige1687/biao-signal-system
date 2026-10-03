@@ -1,0 +1,107 @@
+{
+  "mission": "S01宽度研究线资料资格盘点：复用已登记对象，定位真实可用数据和不能公平研究的缺口；不重复技术因子研究",
+  "task_scope": [
+    "读最新权威快照及用户分工",
+    "从登记表解析宽度20/50/200准确对象ID@版本及状态",
+    "核现有宽度实验最新报告/manifest，与源成员/发布时间的证据绑定",
+    "给本地S01首批可执行最小研究或真正资料阻塞，不跑预测实验"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "configs/strategy-documents.v1.json",
+    "configs/rules.v1.yaml",
+    ".claude/skills/macd-reading/SKILL.md",
+    "docs/plan-sector-trend-page.md",
+    "docs/research",
+    "src/lei_signal/research",
+    "data",
+    "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/strategy-source",
+    "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/user-mission.txt",
+    "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/strategy-source-manifest.json",
+    "docs/experiments/breadth-b200-first-description-2026-09-17.md",
+    "docs/experiments/breadth-b200-first-description-controller-review-2026-09-17.md",
+    "docs/experiments/breadth-freeze-start-2026-09-09.md",
+    "docs/experiments/breadth-input-comparison-2026-09-04.md",
+    "docs/experiments/breadth-overlay-report-2026-08-27.md",
+    "docs/experiments/breadth-position-report-2026-08-27.md",
+    "docs/experiments/breadth-preflight-controller-review-2026-09-18.md",
+    "docs/experiments/breadth-price50-decision-2026-09-09.md",
+    "docs/experiments/breadth-risk-information-findings-2026-09-28.md",
+    "docs/experiments/breadth-source-provenance-audit-2026-09-09.md",
+    "docs/experiments/broad-breadth-cash-reconciliation-2026-09-08.md",
+    "docs/experiments/etf-breadth-source-and-confirmation-backtest-2026-09-09.md",
+    "docs/experiments/factor-breadth-dual-ma-findings-2026-09-24.md",
+    "docs/experiments/factor-breadth-readiness-controller-review-2026-09-17.md",
+    "docs/experiments/factor-breadth-road-risk-findings-2026-09-24.md",
+    "docs/experiments/factor-core-breadth-readiness-review-2026-09-23.md",
+    "docs/experiments/factor-verification-completion-b6-2026-09-20.md",
+    "docs/experiments/midzone-breadth-timing-2026-09-07.md",
+    "docs/experiments/research-input-preflight-2026-09-13.md",
+    "docs/experiments/research-input-preflight-controller-review-2026-09-13.md",
+    "docs/experiments/research-input-preflight-fix-2026-09-13.md",
+    "docs/experiments/sentiment-factor-readiness-controller-review-2026-09-17.md",
+    "docs/experiments/raw/breadth-b200-description-recovery-2026-09-23",
+    "docs/experiments/raw/breadth-b200-description-run-2026-09-24",
+    "docs/experiments/raw/breadth-b200-first-description-2026-09-17",
+    "docs/experiments/raw/breadth-risk-information-2026-09-28",
+    "docs/experiments/raw/breadth-risk-information-review-2026-09-28",
+    "docs/experiments/raw/breadth-risk-purpose-2026-09-24",
+    "docs/experiments/raw/breadth-road-context-2026-09-24",
+    "docs/experiments/raw/breadth_overlay",
+    "docs/experiments/raw/breadth_position",
+    "docs/experiments/raw/etf_breadth",
+    "docs/experiments/raw/factor-b12-b200-distance200-2026-09-21",
+    "docs/experiments/raw/factor-b12-controller-2026-09-21",
+    "docs/experiments/raw/factor-breadth-entry-context-2026-09-27",
+    "docs/experiments/raw/factor-breadth-expansion-map-2026-09-27",
+    "docs/experiments/raw/factor-breadth-readiness-2026-09-17",
+    "docs/experiments/raw/factor-verification-completion-b6-2026-09-20",
+    "docs/experiments/raw/research-breadth-freeze-2026-09-09",
+    "docs/experiments/raw/research-breadth-price50-decision-2026-09-09",
+    "docs/experiments/raw/research-breadth-provenance-2026-09-09",
+    "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09",
+    "docs/experiments/raw/stock_breadth",
+    "docs/archive/handoffs-plans/core-factor-plan-2026-09-28",
+    "docs/archive/handoffs-plans/factor-core-breadth-trend-2026-09-23",
+    "docs/archive/handoffs-plans/breadth-risk-information-2026-09-28"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/sol-inventory"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "inventory.json：每对象准确ID、版本、数据路径及sha、覆盖、资格/限制、已有结果精确引用",
+    "delivery.md：人话总结、首批能否执行和最关键缺口；最多3000字",
+    "sources.json：实际读文件hash；最多25份实质来源，登记表/规范必读不计机械目录查询"
+  ],
+  "stop_conditions": [
+    "任何仓库外取数、源写入、网络、新回测、注册全局对象或技术因子开发需求",
+    "关键定义无法由现有来源解释",
+    "范围超过S01资料资格"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "budget": {
+    "market_experiments": 0,
+    "network_requests": 0,
+    "new_output_bytes": 1048576,
+    "maximum_substantive_sources": 25
+  },
+  "strategy_layer": "最新模块E的主宽度输入；中国既有宽度仅独立信息研究，不迁入E；A-D技术由其他technical_agent负责",
+  "controller_note": "仅助手子任务，不创建用户侧任务。不得修改本任务兄弟feasibility目录或公共登记簿。冻结旧研究不改、不重启。",
+  "preflight_history": [
+    {
+      "attempt": 1,
+      "status": "blocked",
+      "reason": "Parent read directory overlapped write subtree; no agent spawned. Narrowed to existing report files and existing raw directories."
+    }
+  ]
+}

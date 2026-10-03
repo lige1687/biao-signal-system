@@ -1,0 +1,151 @@
+{
+  "frozen_at": "2026-09-29T10:06:36.008146+00:00",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "306b2bb3613e057fbddc14a381742663f5f67692cd5f77a88d7bd771baa1332b"
+    },
+    {
+      "path": "configs/strategy-documents.v1.json",
+      "sha256": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b"
+    },
+    {
+      "path": "configs/rules.v1.yaml",
+      "sha256": "9be26a1626fdf6351478b40b388907e9d8128f74b6bd4aa2b8ff4a850cfdcfd2"
+    },
+    {
+      "path": "docs/research/experiment-backtest-principles.md",
+      "sha256": "67b49a08396b0c8cb93cb526466200cc798bdb4cd8ce77509658f291cc29493c"
+    },
+    {
+      "path": "docs/research/ai-execution-contract.md",
+      "sha256": "f70a929f15d9d59f99f78a609a8658ce468f2c4025f05dba5380198f0bf23d22"
+    },
+    {
+      "path": "docs/research/definition-standard.md",
+      "sha256": "938e04d7beb96a46069bbb6eb6c03d2331e86bfa771623fdfe21794b4e98fcbd"
+    },
+    {
+      "path": "docs/research/definitions.v1.json",
+      "sha256": "8fedb09a4074729674b3a81da970efae8b04ad1b102560ff2dc12ebbc8426f1e"
+    },
+    {
+      "path": "docs/research/research-question-method-standard.md",
+      "sha256": "590e05fd59fede6117fe319250e82455136d3d411a3ae11dae6ccf320a4d2dc4"
+    },
+    {
+      "path": "docs/research/factor-increment-evidence-standard.md",
+      "sha256": "05f5b04c8b54ad3bf86296f09a5addd4fd6344dad6e7b639650c39692b2f3871"
+    },
+    {
+      "path": "docs/research/experiment-report-template.md",
+      "sha256": "a3e32f99b7da248bad1f8c052ee3210a664947c620cba43947309c29b2247b9d"
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-direction-pro-review-2026-09-29/next-stage-plan.json",
+      "sha256": "2d41d53838eddbfba76424cdbd7977d1b4030026b67d59043e4c49b56574a590"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "role": "readonly approved desktop authority"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "role": "readonly approved desktop authority"
+    }
+  ],
+  "strategy_layer": "E sentiment confirmation / market state information; risk research extension only, not trading",
+  "new_pro_calls": 0,
+  "existing_sources_and_protocols_unchanged": true,
+  "protocol_sha256": "10610236e4da9e497ee43086d3f5b9845d0c7bc9c9f16018dc15d254d66f8230",
+  "inputs": {
+    "aaii-candidate-values.csv": {
+      "path": "inputs/aaii-candidate-values.csv",
+      "sha256": "12f30895c7ea2c68663a60f2d60a85384dfd0d9d324474e0501298e460cf9c05",
+      "source_path": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/inputs/aaii-candidate-values.csv",
+      "new_market_data": false
+    },
+    "px_SPY.csv": {
+      "path": "inputs/px_SPY.csv",
+      "sha256": "952f397be0ccc5745185b91cce6acc781737c0f30a7a34aa8a230ae892ed5e45",
+      "source_path": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/inputs/px_SPY.csv",
+      "new_market_data": false
+    }
+  },
+  "method_doc_sources": [
+    {
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html",
+      "result": "official API inspected; live docs1.18.0, actual installed1.17.1 signature verified locally",
+      "type": "open"
+    },
+    {
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.expit.html",
+      "result": "official API inspected; actual local expit docstring confirms sigmoid",
+      "type": "open"
+    }
+  ],
+  "method_docs_already_counted_in_parent": true,
+  "prerequisite_review": {
+    "reviewed_at": "2026-09-29T10:06:36.008146+00:00",
+    "diagnostic_accepted": true,
+    "source_qualification_accepted": true,
+    "review_type": "independent saved-loss arithmetic plus existing audit/code and qualification-ledger review, not new fitting or independent provider re-fetch",
+    "diagnostic_sha256": "b0c5ad14bb0c280682c500928f06054ce7498bb665e2ffde63342e5c6ecf43cf",
+    "source_sha256": "ae8b7c5f40451fc25714dcba510ea5f0d04781a773109bd7ab247b70214a853c",
+    "limits": [
+      "source capabilities reflect executor official-page reading; raw historical membership/prices/first releases not obtained",
+      "diagnostic identifies saved implementation correctness and numerical sensitivity, not causal explanation for all underperformance"
+    ],
+    "selected_method": "bounded sigmoid mean squared-risk loss with fixed standardized-slope penalty 0.001",
+    "gamma_proposal": "not run; superseded before any new real risk label or fit",
+    "allowed_next_stage": "one exploratory AAII continuous-spread SPY120 downside-risk study",
+    "independent_saved_losses": {
+      "sentiment-aaii-extremes-increment": {
+        "rows": 835,
+        "mse": {
+          "pred_I": 77.04659494442026,
+          "pred_X": 75.89312392082262,
+          "pred_XE": 77.5628386223168,
+          "pred_B": 82.60242123584587,
+          "pred_BX": 80.49730212939127,
+          "pred_BXE": 81.35104154801267
+        },
+        "negative_n": {
+          "pred_I": 0,
+          "pred_X": 0,
+          "pred_XE": 1,
+          "pred_B": 5,
+          "pred_BX": 4,
+          "pred_BXE": 4
+        },
+        "source_sha256": "dbc8415e6f085ae515371d1dd25bdd3f9e4cbc6ec28aa484e5501efef0fac6a4"
+      },
+      "sentiment-putcall-increment": {
+        "rows": 1177,
+        "mse": {
+          "pred_I": 7.694058237782889,
+          "pred_E": 7.801112684718066,
+          "pred_T": 7.7482160609062465,
+          "pred_EQ": 7.822192757579274,
+          "pred_B": 9.808369377746455,
+          "pred_BE": 9.87461108569988,
+          "pred_BT": 9.823611785037587,
+          "pred_BEQ": 9.923894150946326
+        },
+        "negative_n": {
+          "pred_I": 0,
+          "pred_E": 0,
+          "pred_T": 0,
+          "pred_EQ": 0,
+          "pred_B": 18,
+          "pred_BE": 18,
+          "pred_BT": 18,
+          "pred_BEQ": 21
+        },
+        "source_sha256": "32d024b1183c508fb3e9cea85a89802448852944d8bfc43f1a0b6777bc1e0915"
+      }
+    }
+  }
+}

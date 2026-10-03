@@ -1,0 +1,29 @@
+{
+  "schema": "sentiment-s01-local-cache-controller-review/1",
+  "question": "Does the user's locally calculated B20/B50 source qualify for genuine historical SP500 S01 research?",
+  "answer": "The local self-calculated series exists and its arithmetic exactly reproduces from the 494-column local matrix; historical S&P 500 constituent identity and first-available vintage are not qualified.",
+  "strategy_sha256_match_approved": true,
+  "cache_profile": "cache-profile.json",
+  "producer_review": "producer/lineage.json",
+  "independent_decisive_checks": [
+    "Read-only SHA-256, rows and source-value profiles for local JSON, price matrices, timing parquet, external B200-only local material and backdated membership fixture.",
+    "Full non-return reconstruction from current 494-column matrix: stored JSON and independently recomputed B20/B50/B200 have identical null status and no discrepancy beyond four-decimal rounding on 11694/11664/11514 valid dates.",
+    "Read-only price-column comparison: all 494 matrix ticker columns are members of repository's current 503-ticker fixture, all effective_from 2026-08-04; no departed-company history is supplied by this route.",
+    "SQLite backfill breadth values equal JSON exactly on all valid dates; three storage surfaces are not independent confirmation of historical membership.",
+    "Timing parquet differs from JSON beyond rounding on 14 dates 2026-08-10 through 2026-08-27 per window, up to 0.153 percentage points; current matrix also adds values in two dates compared with the qfq matrix. Different cache vintages must not be silently combined.",
+    "Repository producer paths read as code, separately from actual cache bytes; actual bytes match no-forward-fill formula, but no immutable run manifest proves which executable last wrote them."
+  ],
+  "qualification": {
+    "local_numeric_series_exists": true,
+    "arithmetic_reproduced": true,
+    "historical_SP500_membership_reconstruction": "blocked",
+    "historical_decision_use": "blocked",
+    "source_vintage_and_real_available_at": "unproven",
+    "current_member_proxy_description": "available_only_as_494_current_member_basket_description",
+    "original_LEI_E_market_effect": "not_evaluated"
+  },
+  "no_experiment_reason": "Future SPY outcome statistics using a basket selected by 2026 membership would not answer the original historical S&P 500 breadth question and could reward survival of later winners.",
+  "correction_to_prior_user_reply": "The previous source inquiry did find DB fields but did not directly open this external cache. This run rectifies that omission and documents the present numeric data without relabeling them historically qualified.",
+  "budgets_this_run": {"source_network_requests": 0, "pro_calls": 0, "market_fits": 0, "outside_repository_writes": 0},
+  "required_to_release_original_effect": "A dated historical member chain including entries/exits, matching exited-member prices, denominator and price-version policy; to claim historical execution also actual input availability and version times."
+}

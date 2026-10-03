@@ -1,0 +1,109 @@
+{
+  "id": "sentiment.naaim-public-window-return20-increment@1.0.0",
+  "frozen_at": "2026-09-30T06:48:16.178298+00:00",
+  "authorization": "用户持续授权市场情绪因子研究及免费来源续查，2026-09-30：总之你继续吧",
+  "mode": "research",
+  "question": "在免费官方表可核实的短历史中，管理人连续自报敞口，能否帮助解释SPY以后20个交易日的涨跌，超过只看之前20日涨跌？",
+  "strategy_layer": "体系§3.6、实现§9模块E确认项的独立信息研究；单列研究代理，不检验完整宽度确认/入场/对冲，也不改原40/100阈值",
+  "input_qualification": {
+    "file": "qualification.json",
+    "sha256": "f4b17df90f051ba54db5d7833721902333b2fb84007de85b50c15d1bd237628c",
+    "counts": {
+      "source_rows": 131,
+      "range": [
+        "2023-12-27",
+        "2026-06-24"
+      ],
+      "unique": true,
+      "weekdays": {
+        "Wednesday": 131
+      },
+      "old_file_overlap": 131,
+      "max_abs_numeric_difference": 0.010000000000005116,
+      "low40_rows": 1,
+      "high100_rows": 6,
+      "model_training_support": {
+        "2025": 49,
+        "2026": 101
+      },
+      "evaluation_support": {
+        "2025": 52,
+        "2026": 26
+      },
+      "source_observation_identity": "official FAQ: each Wednesday exposure; actual Wednesdays in all downloaded rows",
+      "availability": "Free table currently three-month delayed. Historical first publication and revision vintage unknown; no simulated historical trading/predictor availability claim.",
+      "qualification": "current revised retrospective observation dates/numerics only; no qualification of1047week legacy file",
+      "chosen_analysis": "limited retrospective time-split estimation, continuous NAAIM plus one20day prior-return price background; sparse original40/100 groups describe only",
+      "reason": "131weeks and49mature initial training rows support at most a deliberately small descriptive comparison; no five-background or extreme-state prediction model, uncertainty and year reversal mandatory",
+      "future_outcomes_inspected": false
+    },
+    "intended_scope": "美国宽基ETF市场状态信息；非中国/行业/全体机构持仓",
+    "tested_scope": "SPY一只ETF；官方NAAIM公开延迟表131周2023-12-27..2026-06-24；回顾性当前版本关联",
+    "unsupported_scope": "历史当时可交易、即时免费渠道、20年全史、原E组合、资金账户、生产"
+  },
+  "definition": {
+    "x": "candidate:sentiment.naaim-exposure@draft-1; official untrimmed percent exposure, continuous, negative/>100 legal",
+    "b": "local:sentiment.naaim-public-price-r20@1.0.0 =100*(C_t/C_(t-20)-1)",
+    "target": "local:sentiment.naaim-public-return20@1.0.0 =100*(C_(t+21)/C_(t+1)-1);20returnsegments21closes",
+    "diagnostic_risk": "100*max(1-C_j/runningmax(C)), j=t+1..t+21; descriptive only no fitted risk model",
+    "observation_anchor": "t=first actualSPYquote date strictly after official Wednesday survey label; useanchorclose forpricebackground; targetnextquoteclose through20laterquoteclose",
+    "availability": "Wednesday is actual survey observation definition, not historical release timestamp. currentpublicchannel3monthdelay. This alignment is retrospective association, NOT simulated live historical forecasts; first publication and revisionsunknown. No assumed delay grants qualification.",
+    "calendar": "all original quote rows retained; required21positivefinite targetcloses and21positivefinite backgroundcloses; no filling, no missingcompression",
+    "price": "same old adjustedClose vintage all comparisons; not economic cashflow or actualfill",
+    "weight": "one sourceweek oneobservation; all models same dates",
+    "groups": "original <=40 and>=100, middle; mutually exclusive, no parameter changes; low1/high6 too few for state models; complete casesdescribed only"
+  },
+  "estimation": {
+    "models": {
+      "I": [],
+      "B": [
+        "r20"
+      ],
+      "X": [
+        "naaim"
+      ],
+      "BX": [
+        "r20",
+        "naaim"
+      ]
+    },
+    "method": "fixed standardized linear ridge, lambda0.001;minimize mean squared return error +lambda*sum(slopes^2); interceptunpenalized; no bounds/clipping or searches",
+    "rationale": "small available history; onlyone pricebackground. Increment relative onlyto past20day return, not fivepricecontrols or AAII. Largest model3parameters includingintercept",
+    "schedule": "annual expanding fits atJan1 2025,2026; onlyhistorical rows whose entire targetend strictlybeforeyearstart; no futuretargets intraining;49/101maturetrainrows; eval52/26weeks",
+    "scaling": "trainingmeans/populationstd; solve (Z.T@Z + n*lambda*diag(0,1,...)) beta=Z.T@y; mean-modelarithmetictrainmean",
+    "primary": "100*(1-MSE(BX)/MSE(B)); lesssquared errornot financialreturn",
+    "simple_challenge": "I samecommontraining/evaldates; mustdisclose ifB orBX worsethansimplemean",
+    "support_limits": "49firsttrainingrows withoverlapping4weektargets implymuchlessthan49independentopportunities; this is restricted exploratory descriptiveestimate, notvalidatedpredictor"
+  },
+  "uncertainty": {
+    "method": "paired noncircular contiguous surveyblocks; samefixedpredictionrowsallmodels;2000draws seed20260930+blocklength",
+    "primary_block_rows": 8,
+    "sensitivity_block_rows": 16,
+    "interval": "2.5/97.5percentile; shortseries/annualfitting/selection uncertaintynotfullyrepresented; nocausalorwholefamilyclaim"
+  },
+  "stability": "2025,2026partialseparate; delete eachyear fromsavedpredictions; largestfiveweekserrorcontribution; adjacentfuturesegmentoverlap;no refits/alternatehorizons",
+  "numerical_checks": "syntheticlinear/scaling/constant/missing; independently recomputeheadlineerrorsfromsavedCSV and3labelsfrominputcloses; independently numpyaugmented-lstsqcompare8fitcoefficients",
+  "selection_history": "allSPYcache previouslyseen; NAAIM old131 overlappingvaluespreviouslya udited andnowcurrentofficialfetch; neithernewindependentvalidation nororiginalfullfamilycompletion. Newsingle20dayreturnquestionfrozenbeforeitsoutcomenumbers. Oldsource/AAII/PutCallfailuresretained.",
+  "minimum_attention_size": "notpredefined becausecompleteaction/fees/capitalunknown; reporteffectsizeanduncertainty withoutinventedpassline",
+  "budget": {
+    "new_source_operations_max": 0,
+    "core_fits_max": 8,
+    "correction_fits_max": 8,
+    "total_fits_max": 16,
+    "primary_batches_max": 1,
+    "correction_batches_max": 1,
+    "local_review_refits_max": 8,
+    "pro_calls_max": 0,
+    "paid_actions_max": 0,
+    "wall_minutes_max": 15
+  },
+  "stop": [
+    "input/protocolhashdrift",
+    "eligiblecomparisonsetsdiffer",
+    "missingcalendarposition/invalidclose",
+    "nonfiniteestimates",
+    "budgetlimit"
+  ],
+  "effect_status": "not_run",
+  "source_manifest": "source-manifest.json"
+}

@@ -1,0 +1,51 @@
+{
+  "mission": "有限资格核查股票期权与总体Put/Call两个CBOE原始CSV，不计算未来标签或效果",
+  "task_scope": [
+    "latin1逐行解析两份CSV，记录原头、产品、日期、重复、缺失、数值、volume合计和PUT/CALL一致性",
+    "按2012-06-11口径变化前后审计，尤其后段2012-06-11—2019-10-04，与已给SPY日期核日期缺口",
+    "分开输出normalized-equity.csv和normalized-total.csv，保留原reported_ratio和重算ratio_exact，不无痕替换",
+    "原Equity>1在不同阶段的来源日期数与连续段数，Total只报同界限频率作为产品混用检查，绝不将Total>1称原底部阈值",
+    "保存源sha、独立小例、局限；最多1MiB，禁止读价格结果列或旧未来成绩"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "configs/strategy-documents.v1.json",
+    "docs/research/definition-standard.md",
+    "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/strategy-source",
+    "docs/experiments/raw/sentiment-putcall-increment-2026-09-29/inputs",
+    "docs/experiments/raw/sentiment-putcall-increment-2026-09-29/source-manifest.json",
+    "docs/experiments/raw/vix-sentiment/DATA_SOURCES.md",
+    "docs/experiments/raw/sentiment-putcall-increment-2026-09-29/luna-contract.json"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/sentiment-putcall-increment-2026-09-29/qualification"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "audit.json详列所有数值/日期/口径问题与可用区间、量级",
+    "normalized-equity.csv和normalized-total.csv 日期ISO、CALL/PUT/TOTAL/reported_ratio/ratio_exact，全部源行不补日",
+    "audit_source.py可复現，delivery.md<=1500字"
+  ],
+  "stop_conditions": [
+    "源hash漂移",
+    "出现不能确定字段含义",
+    "需要未来效果或生产/其他文件写入"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "budget": {
+    "market_experiments": 0,
+    "network_requests": 0,
+    "pro_calls": 0,
+    "output_bytes_max": 1048576
+  },
+  "strategy_layer": "模块E股票期权确认项的资料资格；Total另列对照，非技术研究"
+}

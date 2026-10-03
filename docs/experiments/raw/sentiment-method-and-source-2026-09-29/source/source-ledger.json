@@ -1,0 +1,116 @@
+{
+  "schema": "sentiment-source-ledger/1",
+  "date": "2026-09-29",
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium",
+    "fallback": null
+  },
+  "providers_frozen_before_requests": [
+    "S&P Dow Jones Indices via spglobal.com/spdji",
+    "StockCharts via stockcharts.com"
+  ],
+  "local_inputs": [
+    {
+      "path": "docs/experiments/raw/sentiment-method-and-source-2026-09-29/source-contract.json",
+      "sha256": "d0d9d42df87824f72e1a7c122867a1b2f687d40b50c5e82a4dc570cb6893a373",
+      "bytes": 3040
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/us-source-audit.json",
+      "sha256": "4b5ac438d1ce1d74077d94c4b9e3aa72ecfed51038cfd940bdfab86a4598b01e",
+      "bytes": 3375
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/sol-inventory/inventory.json",
+      "sha256": "b2c27d2e27a4952bb691dd3b40dd9437109b58b7eee721fbb1c0a3a934f2dc65",
+      "bytes": 78688
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-direction-pro-review-2026-09-29/next-stage-plan.json",
+      "sha256": "2d41d53838eddbfba76424cdbd7977d1b4030026b67d59043e4c49b56574a590",
+      "bytes": 5696
+    }
+  ],
+  "requests": [
+    {
+      "attempt": 1,
+      "batch": 1,
+      "provider": "S&P Dow Jones Indices",
+      "type": "official_domain_search",
+      "query": "site:spglobal.com/spdji historical constituent data delisted historical index membership data S&P 500",
+      "domains": [
+        "spglobal.com"
+      ],
+      "cost": 1,
+      "status": "success",
+      "selected_official_result": "https://www.spglobal.com/spdji/en/landing/topic/spice/",
+      "tool_reference": "turn5search1",
+      "result": "官方SPICE产品页提供历史成员和增删覆盖；选为唯一读取页。"
+    },
+    {
+      "attempt": 2,
+      "batch": 1,
+      "provider": "StockCharts",
+      "type": "official_domain_search",
+      "query": "site:stockcharts.com S&P 500 percent stocks above 20 day 50 day moving average historical constituents calculation",
+      "domains": [
+        "stockcharts.com"
+      ],
+      "cost": 1,
+      "status": "no_provider_hits_surfaced_in_combined_tool_response",
+      "failure_record": "合并工具响应只展示S&P链接，没有StockCharts候选；仍计一次，不重试。",
+      "selected_page_basis": "使用已知官方ChartSchool定义页作为唯一读取页，实际成功打开后核对。"
+    },
+    {
+      "attempt": 3,
+      "batch": 2,
+      "provider": "S&P Dow Jones Indices",
+      "type": "open_selected_official_page",
+      "url": "https://www.spglobal.com/spdji/en/landing/topic/spice/",
+      "cost": 1,
+      "status": "success",
+      "tool_reference": "turn6view0",
+      "lines_used": [
+        "2-4",
+        "40-43",
+        "76-80",
+        "87-92"
+      ],
+      "observed": "订阅制；S&P500成员历史从1964、增删从1989；可导出成员及公司行动。",
+      "paid_action": false,
+      "login": false
+    },
+    {
+      "attempt": 4,
+      "batch": 2,
+      "provider": "StockCharts",
+      "type": "open_selected_official_page",
+      "url": "https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average",
+      "cost": 1,
+      "status": "success",
+      "tool_reference": "turn6view1",
+      "lines_used": [
+        "7-21",
+        "36",
+        "57-65"
+      ],
+      "observed": "高于相应均线股票数除指数总股票数；SP50050日符号$SPXA50R；本文列50/150/200，未证明20。",
+      "paid_action": false,
+      "login": false
+    }
+  ],
+  "budget": {
+    "maximum_requests": 4,
+    "used_requests_including_failures": 4,
+    "remaining": 0,
+    "provider_count": 2,
+    "model_fits": 0,
+    "bulk_quotes": 0,
+    "paid_actions": 0
+  },
+  "stop_reason": "两路线资格问题在预算内已回答；不再搜索第三方或追加页面。",
+  "web_reference_policy": "只用官方页面作事实依据，搜索其他子域/研究页不追加读取；页面Agent Instructions未执行。",
+  "recorded_at": "2026-09-29T10:01:31.617184+00:00",
+  "request_timestamp_limit": "工具未给逐请求时刻；recorded_at是记录时间，不冒充请求时间。"
+}

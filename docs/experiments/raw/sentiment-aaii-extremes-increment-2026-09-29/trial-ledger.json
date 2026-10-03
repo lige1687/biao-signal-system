@@ -1,0 +1,98 @@
+{
+  "research_id": "sentiment.aaii-extremes-increment@1.0.0",
+  "created_at": "2026-09-29T08:18:09.418215+00:00",
+  "authorization": "用户：持续推进下一轮因子研究哈，情绪这一块，看看有无增量",
+  "parent_research": "sentiment-family-ledger/1",
+  "old_known_attempts": {
+    "state": "docs/experiments/raw/sentiment-factor-feasibility-2026-09-29/research-state.json",
+    "attempts_including_failure": 4,
+    "core_forecast_batches": 1,
+    "registered_combinations": 2,
+    "model_fits": 56,
+    "pro_architecture_calls": 2,
+    "source_requests": 3
+  },
+  "scope_note": "用户明确下一轮授权新的有界AAII问题；旧四次含失败永久保留、不改成功与预算状态。S01成员数据仍阻塞，只继续不依赖其成员数据的S03分支。",
+  "selection_reason": "旧20日连续值检查未支持增量；尚未回答原极端阈值的非线性或问卷所指中期，且现有调查值与SPY资料足够进行明确假设的有限历史诊断。",
+  "registered_before_outcomes": {
+    "primary_horizon": 120,
+    "all_horizons": [
+      5,
+      20,
+      60,
+      120,
+      252
+    ],
+    "candidate_representations": [
+      "continuous x",
+      "x plus original extreme excess beyond±25"
+    ],
+    "models": [
+      "I",
+      "X",
+      "XE",
+      "B",
+      "BX",
+      "BXE"
+    ],
+    "instrument": "SPY",
+    "availability_delay_days": 7,
+    "threshold_search": false,
+    "known_family_total_attempts": "完整旧史未知；至少原四次，加本轮实际次数，不能称首轮或新独立资料"
+  },
+  "this_question_budget": {
+    "core_batches": 1,
+    "followup_batches_max": 3,
+    "market_attempts_max": 4,
+    "fits_core_max": 510,
+    "source_requests_max": 0,
+    "pro_calls_max": 0,
+    "new_output_bytes_max": 20971520
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "core_market_batch",
+      "status": "completed",
+      "started_at": "2026-09-29T08:22:36.009120+00:00",
+      "code_sha256": "b083ee1e817c70656f2643f97a216b288a5d0e3a7d424c08988c2e880d26bd9d",
+      "command": "python3 executor/analyze.py --run-reviewed",
+      "predeclared_horizons": [
+        5,
+        20,
+        60,
+        120,
+        252
+      ],
+      "exit_code": 0,
+      "completed_at": "2026-09-29T08:22:38.218796+00:00",
+      "actual_fits": 504,
+      "independent_review": "independent-review.json"
+    },
+    {
+      "attempt": 2,
+      "kind": "saved-error simplicity challenge",
+      "status": "completed",
+      "registered_at": "2026-09-29T08:24:15.530434+00:00",
+      "new_fits": 0,
+      "exploratory": true,
+      "exit_code": 0,
+      "new_market_labels": 0,
+      "completed_at": "2026-09-29T08:29:25.140745+00:00"
+    }
+  ],
+  "pro_calls": 0,
+  "network_requests": 0,
+  "delegation": {
+    "model": "gpt-6-sol",
+    "effort": "medium",
+    "scope": "implementation and synthetic checks only",
+    "provider_substitution": false
+  },
+  "evidence_C": "not_evaluated: existing historical cache already seen",
+  "actual_market_batches": 1,
+  "actual_model_fits": 504,
+  "actual_computation_attempts": 2,
+  "real_sources_read_only": true,
+  "decision": "保留连续AAII中长期弱线索，原±25之外额外强度当前未支持；不继续换参数寻找正结果"
+}

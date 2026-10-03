@@ -1,0 +1,403 @@
+{
+  "status": "passed",
+  "real_inputs_loaded": false,
+  "real_market_batches": 0,
+  "checks": [
+    {
+      "name": "target_monotonic_up",
+      "actual": [
+        19.999999999999996,
+        0.0
+      ],
+      "independent_expected": [
+        20,
+        0
+      ],
+      "passed": true
+    },
+    {
+      "name": "target_monotonic_down",
+      "actual": [
+        -19.999999999999996,
+        19.999999999999996
+      ],
+      "independent_expected": [
+        -20,
+        20
+      ],
+      "passed": true
+    },
+    {
+      "name": "target_recover_after_dip",
+      "actual": [
+        30.000000000000004,
+        25.0
+      ],
+      "independent_expected": [
+        30,
+        25
+      ],
+      "passed": true
+    },
+    {
+      "name": "target_new_peak_then_drop",
+      "actual": [
+        -4.0000000000000036,
+        19.999999999999996
+      ],
+      "independent_expected": [
+        -4,
+        20
+      ],
+      "passed": true
+    },
+    {
+      "name": "target_larger_late_drop",
+      "actual": [
+        -9.999999999999998,
+        40.0
+      ],
+      "independent_expected": [
+        -10,
+        40
+      ],
+      "passed": true
+    },
+    {
+      "name": "reject20_closes_not21",
+      "passed": true
+    },
+    {
+      "name": "two_actual_quotes_wait",
+      "actual": 402,
+      "independent_expected": 402,
+      "passed": true
+    },
+    {
+      "name": "target_start_after_t",
+      "actual": 403,
+      "independent_expected": 403,
+      "passed": true
+    },
+    {
+      "name": "target_end_tplus21",
+      "actual": 423,
+      "independent_expected": 423,
+      "passed": true
+    },
+    {
+      "name": "20_return_segments21_closes",
+      "actual": 20,
+      "independent_expected": 20,
+      "passed": true
+    },
+    {
+      "name": "compound_return",
+      "actual": 2.01911448605403,
+      "independent_expected": 2.019114486054052,
+      "passed": true
+    },
+    {
+      "name": "future_peak_excludes_pre_window",
+      "actual": 0.0,
+      "independent_expected": 0,
+      "passed": true
+    },
+    {
+      "name": "pre_window_peak_not_used",
+      "actual": 0.0,
+      "independent_expected": 0,
+      "passed": true
+    },
+    {
+      "name": "baseline_r20",
+      "actual": 2.019114486054052,
+      "independent_expected": 2.019114486054052,
+      "passed": true
+    },
+    {
+      "name": "baseline_r63",
+      "actual": 6.499331376234219,
+      "independent_expected": 6.499331376234241,
+      "passed": true
+    },
+    {
+      "name": "baseline_dma200",
+      "actual": 10.272664106041907,
+      "independent_expected": 10.272664106041862,
+      "passed": true
+    },
+    {
+      "name": "baseline_dd252",
+      "actual": 0.0,
+      "independent_expected": 0,
+      "passed": true
+    },
+    {
+      "name": "baseline_rv20",
+      "actual": 6.004795917927884e-14,
+      "independent_expected": 0,
+      "passed": true
+    },
+    {
+      "name": "rv20_ddof1",
+      "actual": 6.88247201611685,
+      "independent_expected": 6.882472016116853,
+      "passed": true
+    },
+    {
+      "name": "internal_missing_no_compression",
+      "passed": true
+    },
+    {
+      "name": "nonquote_source_not_shifted",
+      "passed": true
+    },
+    {
+      "name": "no_pre2012_regime_splice",
+      "passed": true
+    },
+    {
+      "name": "inner_common_dates_only",
+      "actual": 1,
+      "independent_expected": 1,
+      "passed": true
+    },
+    {
+      "name": "reported_rounded_e_not_exact",
+      "actual": [
+        1.0
+      ],
+      "independent_expected": [
+        1.0
+      ],
+      "passed": true
+    },
+    {
+      "name": "Equity_eq_boundary_strict_gt1",
+      "actual": [
+        0.0
+      ],
+      "independent_expected": [
+        0
+      ],
+      "passed": true
+    },
+    {
+      "name": "Total_not_added_to_Equity",
+      "actual": [
+        1.5
+      ],
+      "independent_expected": [
+        1.5
+      ],
+      "passed": true
+    },
+    {
+      "name": "Equity_above1_positive",
+      "actual": [
+        1.0
+      ],
+      "independent_expected": [
+        1.0
+      ],
+      "passed": true
+    },
+    {
+      "name": "strict_year_maturity",
+      "actual": [
+        true,
+        false,
+        false,
+        false
+      ],
+      "independent_expected": [
+        true,
+        false,
+        false,
+        false
+      ],
+      "passed": true
+    },
+    {
+      "name": "cutoff_exact_allowed",
+      "actual": true,
+      "independent_expected": true,
+      "passed": true
+    },
+    {
+      "name": "cutoff_no_shortening",
+      "passed": true
+    },
+    {
+      "name": "train_scale_ddof0",
+      "actual": [
+        0.6065395162433982,
+        0.17767583900456208
+      ],
+      "independent_expected": [
+        0.6065395162433982,
+        0.177675839004562
+      ],
+      "passed": true
+    },
+    {
+      "name": "unclipped_over100_prediction",
+      "actual": [
+        155.00000000000003
+      ],
+      "independent_expected": [
+        155
+      ],
+      "passed": true
+    },
+    {
+      "name": "rare_zero_eq_not_estimable_no_feature_drop",
+      "passed": true
+    },
+    {
+      "name": "optional_rank_not_estimable",
+      "passed": true
+    },
+    {
+      "name": "core_rank_stop",
+      "passed": true
+    },
+    {
+      "name": "core_zero_stop",
+      "passed": true
+    },
+    {
+      "name": "min400_stop",
+      "passed": true
+    },
+    {
+      "name": "single_rare_row_estimable_not_reliability_claim",
+      "passed": true
+    },
+    {
+      "name": "negative_risk_prediction_not_clipped",
+      "actual": [
+        -4.500000000000003
+      ],
+      "independent_expected": [
+        -4.5
+      ],
+      "passed": true
+    },
+    {
+      "name": "skip_empty_eval_years",
+      "actual": 8,
+      "independent_expected": 8,
+      "passed": true
+    },
+    {
+      "name": "mature_training_excludes_crossing_label",
+      "actual": [
+        450,
+        450,
+        450,
+        450,
+        450,
+        450,
+        450,
+        450
+      ],
+      "independent_expected": [
+        450,
+        450,
+        450,
+        450,
+        450,
+        450,
+        450,
+        450
+      ],
+      "passed": true
+    },
+    {
+      "name": "same_population_optional_missing",
+      "actual": 1,
+      "independent_expected": 1,
+      "passed": true
+    },
+    {
+      "name": "optional_preds_missing_core_present",
+      "passed": true
+    },
+    {
+      "name": "not_estimable_not_zero",
+      "passed": true
+    },
+    {
+      "name": "2000_paired_draws",
+      "actual": 2000,
+      "independent_expected": 2000,
+      "passed": true
+    },
+    {
+      "name": "126_block_rows",
+      "actual": [
+        126
+      ],
+      "independent_expected": [
+        126
+      ],
+      "passed": true
+    },
+    {
+      "name": "paired_BEvsB_manual",
+      "actual": -43.99999999999999,
+      "independent_expected": -43.99999999999999,
+      "passed": true
+    },
+    {
+      "name": "paired_EQvsE_manual",
+      "actual": -300.0,
+      "independent_expected": -300.0,
+      "passed": true
+    },
+    {
+      "name": "starts_rebuild_n",
+      "actual": 252,
+      "independent_expected": 252,
+      "passed": true
+    },
+    {
+      "name": "missing_branch_no_range_core_continues",
+      "passed": true
+    },
+    {
+      "name": "negative_prediction_share_reported",
+      "actual": 1.0,
+      "independent_expected": 1.0,
+      "passed": true
+    },
+    {
+      "name": "episode_break_nonextreme_between_and_gap_ge4",
+      "actual": 3,
+      "independent_expected": 3,
+      "passed": true
+    },
+    {
+      "name": "episode_break_nonconsecutive_actual_quotes",
+      "actual": 3,
+      "independent_expected": 3,
+      "passed": true
+    },
+    {
+      "name": "truncated_final_block_retains253_rows",
+      "actual": 253,
+      "independent_expected": 253,
+      "passed": true
+    },
+    {
+      "name": "core_draw_n253",
+      "actual": 253,
+      "independent_expected": 253,
+      "passed": true
+    }
+  ],
+  "checks_count": 55,
+  "code_sha256": "f2f26f38ba2d0a4eaee280f995298967f878deed333cf882e3bf6475ee8f5239"
+}

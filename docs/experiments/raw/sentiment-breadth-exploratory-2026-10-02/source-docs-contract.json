@@ -1,0 +1,50 @@
+{
+  "read_only_paths": [
+    "AGENTS.md",
+    "configs/strategy-documents.v1.json",
+    "docs/research/current-standards.json",
+    "docs/research/research-question-method-standard.md",
+    "docs/research/factor-increment-evidence-standard.md",
+    "docs/experiments/raw/sentiment-short-history-2026-10-02/",
+    "docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/protocol.json",
+    "docs/experiments/raw/sentiment-breadth-exploratory-2026-10-02/controller-contract.json"
+  ],
+  "network_allowed": true,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "controller_review": {
+    "required": true
+  },
+  "stop_conditions": [
+    "遇访问拒绝则停止该源，不替代通道",
+    "0浏览器/0collector算法代码访问",
+    "不读未来结果或进行效果计算"
+  ],
+  "mission": "Find only independent permitted public documentation for the provider data file semantics",
+  "task_scope": [
+    "最多4次公开来源操作，失败和重试均计数，最多20MB",
+    "仅DeanFinancials/deanfi-data公开README/元数据/说明，以及独立来源；不要读取已受限deanfi-collectors/advancedecline目录或其代码任何替代渠道",
+    "准确区分说明支持的字段语义、成员政策、算法、价格调整与未知"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/sentiment-breadth-exploratory-2026-10-02/source-docs"
+  ],
+  "expected_outputs": [
+    "source-ledger.json",
+    "qualification.json",
+    "review.md",
+    "保存实际公开资料快照"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "budget": {
+    "source_operations_max": 4,
+    "bytes_max": 20000000,
+    "fit_max": 0,
+    "pro_max": 0,
+    "paid_max": 0
+  }
+}

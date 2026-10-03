@@ -1,0 +1,29 @@
+{
+  "id": "sentiment.price-diagnostic@1.0.0",
+  "question": "在假设原资料7日后可得的历史缓存中，AAII多空差与中国融资20日变化，分别是否改善本市场价格背景对随后20交易间隔涨幅的估计？",
+  "kind": "独立的、受限的价格背景信息诊断；不是模块E验证",
+  "hypotheses": [
+    {"id":"H-AAII-SPY","factor":"candidate:sentiment.aaii-spread@draft-1","instrument":"SPY","unit":"调查一行","x":"100*(bullish-bearish)，百分点","source":"aaii_clean.csv：reported与缓存官方xls逐值核对一致"},
+    {"id":"H-MARGIN-510300","factor":"candidate:sentiment.margin-change20@draft-1","instrument":"510300","unit":"中国融资一行，510300报价日期轴，缺日不压缩","x":"100*(RZYE_s/RZYE_(s-20)-1)，相对增长百分比","source":"margin_history.csv；仅RZYE，不依赖其额外字段；脚本与CSV字段不完全一致、发布时间及修订版本未知"}
+  ],
+  "observation_range": ["2014-01-01","2026-06-30"],
+  "initial_training": ["2014-01-01","2019-12-31"],
+  "evaluation": ["2020-01-01","2026-06-30"],
+  "price_convention": "同一产品全部模型用同一份缓存Close。旧提取器提示SPY auto_adjust、510300 adjclose，但没有逐公司行动审计，结果只适用于此缓存，不声明可成交价或当时可得复权版本。",
+  "assumed_available_at": "源日期加7个自然日当地23:59；AAII America/New_York、融资Asia/Shanghai。真实available_at未知，假设不回写原列。",
+  "t": "严格在假设可得日期之后的首个实际缓存报价日期收盘。源频率不前填增加行数。",
+  "target": {"id":"local:sentiment.forward20@1.0.0","formula":"100*(C_(t+21)/C_(t+1)-1)","unit":"percentage_points_of_return","intervals":20,"price_points":21,"end":"起止端点均须在观察范围内，未成熟不缩窗","downside_auxiliary":"100*(min(C_(t+1):C_(t+21))/C_(t+1)-1)，包含起点，不是账户回撤"},
+  "baseline": {"name":"B_price","features":["20报价间隔涨幅，100*(C_t/C_(t-20)-1)","相对包含当日200报价简单均值的距离，100*(C_t/mean(C_(t-199):C_t)-1)","过去20个单日报价收益标准差，ddof=1，乘sqrt(20)*100"],"width":"不含宽度；它的历史成员和到达版本未合格。不得把这一分支冒称超越宽度。"},
+  "models": ["I：只估计训练历史均值","X：均值加本候选","B：均值加三个固定价格背景","B+X：均值加相同价格背景和候选"],
+  "estimation": "带截距普通线性最小二乘；每个评价年单独拟合，训练只用2014起且结果日期早于该年1月1日的成熟行；该年不再更新。按训练均值与标准差缩放特征。无参数搜索、不加交互、不更换标的。",
+  "common_population": "四模型同一组x、全部B与Y有效的行；所有排除逐条记原因。源date可早于2014以提供预热；t与Y端点须满足范围。",
+  "primary_metric": "1-MSE(B+X)/MSE(B)，百分比；正值表示估计误差减少，不是账户收益。另保存MSE百分点平方、平方根误差百分点、真实差值。没有预设最低有用幅度，不给交易过关线。",
+  "uncertainty": "2000次成对连续块重抽；AAII块26行（约半年）、融资块130行（约半年）；每次按相同索引重抽所有模型误差，保留局部时间相关；seed=20260929；2.5/97.5分位范围。历史依赖仍可能更长，不能解释成结论为真的概率。",
+  "counterexamples": "逐年误差差与变化符号；逐个排除评价年后总体差（不重拟合）；误差改善最多年份占总差；不按结果删年或变换符号。",
+  "selection_history": "数据已有旧家族探索，全部为已见历史，不是新的独立验证；本次公式/区间/基准/方法在查看本次未来标签与成绩前冻结。",
+  "scope_limits": ["相对本次价格基线，不能称已超过宽度","不能称AAII半年预期准确率","不能把融资余额说成散户心理或证明因果","NAAIM及时来源未合格不进入收益评价","不评价完整E、定投资金或期货对冲","不新增生产策略输入"],
+  "budget": {"one_core_invocation":true,"registered_combinations":2,"horizons":1,"delay_scenarios":1,"factor_versions":1,"evaluation_years":7,"models_per_asset_year":4,"no_parameter_search":true,"maximum_model_fits":56},
+  "run_condition": "集中架构裁定结束后，由主控核本分支具有有限方向价值再执行；Pro不是交易审批者。若架构指出不可辩护且无法本地修复，则保留协议，不运行。",
+  "stop": ["输入或批准桌面源哈希漂移","日期重复或错误单位","源日期含义无法确认","输入包含未来值","矩阵秩不满或训练标准差为零","预算越界"],
+  "writes": "本实验新run-01目录；原输入、规则、定义表、桌面文档、旧实验只读"
+}

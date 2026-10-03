@@ -1,0 +1,134 @@
+{
+  "primary_target": "window_mdd20",
+  "coverage": {
+    "common_source_rows_before_regime_filter": 3253,
+    "source_regime_rows": 1842,
+    "source_regime_equity_extreme_rows": 6,
+    "source_regime_total_ratio_gt1_product_audit_only": 543,
+    "mature_common_eligible_rows": 1819,
+    "evaluation_rows": 1177,
+    "exclusion_counts_nonexclusive": {
+      "source_outside_frozen_regime": 1411,
+      "target_beyond_cutoff": 23
+    },
+    "first_eval_t": "2015-01-02T00:00:00",
+    "last_eval_t": "2019-09-05T00:00:00",
+    "first_label_start": "2015-01-05T00:00:00",
+    "last_label_end": "2019-10-04T00:00:00",
+    "adjacent_eval_pairs": 1176,
+    "overlapping_pairs": 1176,
+    "mean_overlap_return_segments": 19.0,
+    "max_overlap_return_segments": 19,
+    "source_quote_gaps_in_eval": 0
+  },
+  "five_original_equity_events": [
+    {
+      "source_date": "2015-08-21",
+      "t": "2015-08-25",
+      "target_start": "2015-08-26",
+      "target_end": "2015-09-24",
+      "e": "1.04",
+      "c": "1.6899999999999999",
+      "y_return": "-0.28653470415727078",
+      "y_mdd": "3.768581925783876",
+      "pred_B": "1.280177845931711",
+      "pred_BE": "1.4538795838608976",
+      "pred_BEQ": "-1.0453373358025306"
+    },
+    {
+      "source_date": "2015-12-28",
+      "t": "2015-12-30",
+      "target_start": "2015-12-31",
+      "target_end": "2016-02-01",
+      "e": "1.21",
+      "c": "1.3100000000000001",
+      "y_return": "-5.0130003205801739",
+      "y_mdd": "8.9370667651045732",
+      "pred_B": "0.36564487674211987",
+      "pred_BE": "0.90423482613009343",
+      "pred_BEQ": "-1.5308064627923006"
+    },
+    {
+      "source_date": "2016-01-15",
+      "t": "2016-01-20",
+      "target_start": "2016-01-21",
+      "target_end": "2016-02-19",
+      "e": "1.1399999999999999",
+      "c": "1.52",
+      "y_return": "2.8442977202631115",
+      "y_mdd": "5.606045317457653",
+      "pred_B": "3.5929825228220547",
+      "pred_BE": "4.1474083999722451",
+      "pred_BEQ": "2.4688950441350244"
+    },
+    {
+      "source_date": "2016-06-24",
+      "t": "2016-06-28",
+      "target_start": "2016-06-29",
+      "target_end": "2016-07-28",
+      "e": "1.01",
+      "c": "1.24",
+      "y_return": "4.8921370419001242",
+      "y_mdd": "0.71928847861838507",
+      "pred_B": "2.8559567366662746",
+      "pred_BE": "3.483019237888489",
+      "pred_BEQ": "1.7460100132167462"
+    },
+    {
+      "source_date": "2018-12-21",
+      "t": "2018-12-26",
+      "target_start": "2018-12-27",
+      "target_end": "2019-01-28",
+      "e": "1.1299999999999999",
+      "c": "1.4299999999999999",
+      "y_return": "6.3248380993897957",
+      "y_mdd": "2.3862803809223565",
+      "pred_B": "3.2051310726284896",
+      "pred_BE": "3.0441586562551919",
+      "pred_BEQ": "3.569284673187914"
+    }
+  ],
+  "mature_training_counts": [
+    {
+      "year": 2015,
+      "train_rows": 621,
+      "train_extreme_rows": 1,
+      "train_t_max": "2014-12-01T00:00:00",
+      "train_label_end_max": "2014-12-31T00:00:00"
+    },
+    {
+      "year": 2016,
+      "train_rows": 873,
+      "train_extreme_rows": 2,
+      "train_t_max": "2015-12-01T00:00:00",
+      "train_label_end_max": "2015-12-31T00:00:00"
+    },
+    {
+      "year": 2017,
+      "train_rows": 1125,
+      "train_extreme_rows": 5,
+      "train_t_max": "2016-11-30T00:00:00",
+      "train_label_end_max": "2016-12-30T00:00:00"
+    },
+    {
+      "year": 2018,
+      "train_rows": 1376,
+      "train_extreme_rows": 5,
+      "train_t_max": "2017-11-29T00:00:00",
+      "train_label_end_max": "2017-12-29T00:00:00"
+    },
+    {
+      "year": 2019,
+      "train_rows": 1627,
+      "train_extreme_rows": 5,
+      "train_t_max": "2018-11-28T00:00:00",
+      "train_label_end_max": "2018-12-31T00:00:00"
+    }
+  ],
+  "output_bytes_before_archiving": 6747541,
+  "market_attempts": 1,
+  "fits": 80,
+  "source_tool_calls": 3,
+  "pro_calls": 0,
+  "independent_verified": true
+}

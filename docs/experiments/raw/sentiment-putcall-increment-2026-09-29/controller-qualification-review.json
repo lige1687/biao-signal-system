@@ -1,0 +1,64 @@
+{
+  "passed": true,
+  "no_helper_imports": true,
+  "original_source_checks": {
+    "equity": {
+      "original_sha256": "2e73b05586b558d6763c8ab110edf9ee8bc1989384bd2b568da93dc80aa29349",
+      "rows": 3253,
+      "max_reported_exact_difference": 0.004998486424604653,
+      "segments": {
+        "pre_2012_06_11": {
+          "source_dates": 1411,
+          "reported_gt1_dates": 20,
+          "exact_gt1_dates": 22,
+          "reported_runs": 12,
+          "exact_runs": 14,
+          "helper_gap_only_reported_runs": 12,
+          "helper_gap_only_exact_runs": 14
+        },
+        "post_2012_06_11_through_2019_10_04": {
+          "source_dates": 1842,
+          "reported_gt1_dates": 6,
+          "exact_gt1_dates": 6,
+          "reported_runs": 6,
+          "exact_runs": 6,
+          "helper_gap_only_reported_runs": 6,
+          "helper_gap_only_exact_runs": 6
+        }
+      },
+      "normalized_all_values_verified": true,
+      "corrected_prior_max_difference": "0.0049984864246046816262954829"
+    },
+    "total": {
+      "original_sha256": "0c49f75637aa83152d28129edb1fb3593d314e0ea7dff1396a39f1a6f2c56030",
+      "rows": 3253,
+      "max_reported_exact_difference": 0.004998720580042582,
+      "segments": {
+        "pre_2012_06_11": {
+          "source_dates": 1411,
+          "reported_gt1_dates": 461,
+          "exact_gt1_dates": 472,
+          "reported_runs": 187,
+          "exact_runs": 188,
+          "helper_gap_only_reported_runs": 182,
+          "helper_gap_only_exact_runs": 183
+        },
+        "post_2012_06_11_through_2019_10_04": {
+          "source_dates": 1842,
+          "reported_gt1_dates": 543,
+          "exact_gt1_dates": 570,
+          "reported_runs": 262,
+          "exact_runs": 266,
+          "helper_gap_only_reported_runs": 260,
+          "helper_gap_only_exact_runs": 262
+        }
+      },
+      "normalized_all_values_verified": true,
+      "corrected_prior_max_difference": "0.004998720580042705819679282"
+    }
+  },
+  "acceptance": "source normalization and coverage arithmetic accepted; not predictive qualification",
+  "preserved_failure": "audit-v1 retained: date object/string comparison marked present quotes missing; published and exact >1 now separate. Controller early incomplete read showed zero rounding error, final report and retained audit-v1 have correct nonzero maximum.",
+  "episode_definition": "Controller requires adjacent actual quote rows plus gaps<4 days; helper gap-only runs are retained with their explicit name, not used as original strategy events.",
+  "remaining": "First-release timing unknown; 2012 definition boundary and 2019 end must remain explicit. Exact ratios never replace original reported Equity>1."
+}

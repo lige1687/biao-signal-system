@@ -1,0 +1,50 @@
+{
+  "hypothesis_id": "sentiment.aaii-risk120-increment@1.0.0",
+  "parent_direction_plan": "docs/experiments/raw/sentiment-direction-pro-review-2026-09-29/next-stage-plan.json",
+  "protocol_sha256": "10610236e4da9e497ee43086d3f5b9845d0c7bc9c9f16018dc15d254d66f8230",
+  "code_sha256": "b91993aafcb601baa9876c20511fb645166ca1bbd98ffd46e4833710c2277402",
+  "inputs": {
+    "aaii-candidate-values.csv": {
+      "sha256": "12f30895c7ea2c68663a60f2d60a85384dfd0d9d324474e0501298e460cf9c05",
+      "bytes": 144007
+    },
+    "px_SPY.csv": {
+      "sha256": "952f397be0ccc5745185b91cce6acc781737c0f30a7a34aa8a230ae892ed5e45",
+      "bytes": 321463
+    }
+  },
+  "selection_history": "seenhistory, newsingle risk target and one estimator frozen before real labels/performance; no untouched validation",
+  "configuration_count": 4,
+  "horizon_count": 1,
+  "core_market_batches": 1,
+  "actual_model_fits": 68,
+  "failed_market_fits": 0,
+  "market_correction_batches": 0,
+  "root_review_runs": 2,
+  "root_review_failures": 1,
+  "root_review_failure_effect": "CSVphysical line vs zero-basedrow identity only; no marketchanges",
+  "independent_numeric_runs": 1,
+  "numeric_refits": 0,
+  "synthetic_execution_attempts": 3,
+  "synthetic_execution_failures": 2,
+  "last_synthetic_model_function_calls": 7,
+  "all_synthetic_model_function_calls": "unknown beforelast two failed calls; not inferred",
+  "delegation_preflight_failures": 2,
+  "delegation_preflight_failures_effect": "unsupported CLIargument and falsepositive no-network wording; noagent spawned untilready",
+  "new_sources": 0,
+  "new_pro_calls": 0,
+  "source_qualification_and_method_doc_requests_parent": 6,
+  "method_draft_abandoned_before_fitting": "Gamma draft in earlierdiagnostic, actualcurrentmethodonlyboundedmeansquaredrisk",
+  "known_prior_market_fits": {
+    "feasibility": 56,
+    "aaii_return": 504,
+    "putcall": 80
+  },
+  "known_cumulative_market_fits": 708,
+  "total_family_attempts": "unknown; notreset",
+  "verdict": "Insufficient evidence",
+  "primary": 0.2091584176831196,
+  "primary_without2016": -0.10877011543770632,
+  "report": "docs/experiments/sentiment-aaii-risk-increment-2026-09-29.md",
+  "no_budget_reset": true
+}

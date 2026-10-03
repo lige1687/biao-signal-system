@@ -1,0 +1,49 @@
+{
+  "schema": "sentiment-local-cache-qualification/1",
+  "research_id": "sentiment-s01-local-cache",
+  "run_id": "2026-09-30-local-cache",
+  "mode": "research",
+  "delivery_mode": "final_only",
+  "question": "Does the user's existing locally self-calculated breadth contain historically valid S&P 500 B20/B50 input for original LEI Module E, and if so what bounded effect test is justified?",
+  "authorization": "2026-09-30 user: 你来搞吧，宽度我是肯定有的，但是是自己算的，在本地. Read local data and continue research; no external deletion, modification, provider contact, purchase, production or trading.",
+  "strategy_layer": "LEI Module E US index market breadth primary sentiment state; user mission requires continuous levels before original 15% extreme.",
+  "strategy_sha256": {
+    "LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "prior_question": "docs/experiments/raw/sentiment-s01-historical-input-2026-09-30/research-state.json",
+  "prior_known_official_source_requests": 10,
+  "prior_known_market_model_fits_at_least": 708,
+  "prior_known_pro_calls_at_least": 4,
+  "local_sources_to_qualify": [
+    "/Users/yongbiaoli/.lei_signal_lab/cache/sp500_ma_breadth_history.json",
+    "/Users/yongbiaoli/.lei_signal_lab/cache/sp500_klines.parquet",
+    "/Users/yongbiaoli/.lei_signal_lab/cache/timing/breadth_sp500.parquet",
+    "/Users/yongbiaoli/.lei_signal_lab/cache/sentiment_research_2026-09/breadth_raw.json",
+    "/Users/yongbiaoli/.lei_signal_lab/sp500_backfill_root/fixtures/market_context/universes/SP500.parquet"
+  ],
+  "qualification_requirements": [
+    "Actual historical membership identities and entry/exit effective dates, or documented equivalent precomputed historic-member algorithm",
+    "Exit and pre-entry warmup prices and corporate-action/revision versions",
+    "B20/B50 same-date/denominator/coverage/missing semantics and clear 0..100 unit",
+    "Actual calendar/range; vintage and available time if historical decision claim"
+  ],
+  "decision_use": "Qualify input before any SPY future120-quote endpoint-return comparison; if qualified, freeze a separate effect contract with continuous-first and fixed original-threshold analyses.",
+  "allowed_actions": ["read user-owned local breadth/cache files and producer code", "write new research artifacts inside this repository", "run only source and numerical consistency checks before qualification"],
+  "budget": {"new_source_network_requests_max": 0, "new_pro_calls_max": 0, "prequalification_market_fits_max": 0, "core_effect_batches_after_qualification_max": 1, "repair_batches_max": 1},
+  "stop_conditions": ["historical identities or price lineage unqualified", "license/protected-data uncertainty", "outside-repository write required", "any need to change strategy or production"],
+  "execution": "completed",
+  "evidence": "inconclusive",
+  "completion_reason": "evidence_boundary",
+  "local_series_exists": true,
+  "arithmetic_qualification": "11694/11664/11514 valid B20/B50/B200 dates reproduced from the 494 current-member price columns; 0 beyond-rounding discrepancies",
+  "historical_membership_qualification": "blocked_missing_actual_entry_exit_chain_and_exited_company_prices",
+  "historical_available_at_qualification": "unproven_date_stamp_only",
+  "original_E_market_effect": "not_evaluated",
+  "actual_this_run": {"local_qualification_batches": 1, "source_network_requests": 0, "market_fits": 0, "pro_calls": 0, "outside_repository_writes": 0},
+  "source_profile": "cache-profile.json",
+  "producer_review": "producer/lineage.json",
+  "controller_review": "controller-review.json",
+  "alternate_local_historical_member_file": "not identified in targeted cache, Desktop, Downloads and Documents filename scans; if user identifies one, qualify separately",
+  "report": "docs/experiments/sentiment-s01-local-cache-2026-09-30.md"
+}

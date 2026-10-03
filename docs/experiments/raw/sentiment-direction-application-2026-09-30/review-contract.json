@@ -1,0 +1,14 @@
+{
+  "mission": "Map existing S01-S05 evidence to ready versus blocked next questions and identify stale card wording, using already archived evidence only.",
+  "task_scope": ["Read named reports and current sentiment cards", "Extract exact existing performance and incremental evidence, observation limits, unresolved input definitions and actionable missing facts", "Decide only whether archived evidence already identifies a ready independent next core question; do not invent new experiments or repeat cache arithmetic", "Flag stale statements that make initial reports look current"],
+  "read_only_paths": ["AGENTS.md", "docs/research/sentiment-factor-library/research-cards.md", "docs/research/sentiment-factor-library/registry.json", "docs/experiments/raw/factor-direction-audit-2026-09-30/sentiment-review.md", "docs/experiments/sentiment-factor-feasibility-2026-09-29.md", "docs/experiments/raw/sentiment-factor-feasibility-2026-09-29/candidate-qualification.json", "docs/experiments/raw/sentiment-factor-feasibility-2026-09-29/controller-input-review.json", "docs/experiments/sentiment-aaii-risk-increment-2026-09-29.md", "docs/experiments/sentiment-aaii-extremes-increment-2026-09-29.md", "docs/experiments/sentiment-putcall-increment-2026-09-29.md", "docs/experiments/raw/sentiment-s01-local-cache-2026-09-30/research-state.json"],
+  "write_paths": ["docs/experiments/raw/sentiment-direction-application-2026-09-30/independent/"],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": ["independent/readiness.json with separate family dependencies and exact evidence paths", "independent/delivery.md limited to actionable inconsistencies and readiness"],
+  "stop_conditions": ["Need additional data or any market fitting", "Need source acquisition or outside-contract read/write", "Current card edits by controller: use initially read state and record that fact"],
+  "executor": {"model": "gpt-6-luna", "reasoning_effort": "low"},
+  "controller_review": {"required": true}
+}

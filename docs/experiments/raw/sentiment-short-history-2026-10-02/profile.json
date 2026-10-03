@@ -1,0 +1,62 @@
+{
+  "rows": 404,
+  "start": "2025-02-24",
+  "end": "2026-10-01",
+  "unique_dates": 404,
+  "sorted": true,
+  "source_metadata": {
+    "generated_at": "2026-10-01T16:08:55.512161+00:00",
+    "data_source": "Yahoo Finance (yfinance)",
+    "universe": "S&P 500",
+    "total_stocks": 503,
+    "period": "2y",
+    "moving_average_periods": [
+      20,
+      50,
+      200
+    ],
+    "description": "Historical percentage of S&P 500 stocks above their moving averages",
+    "interpretation": {
+      "above_70_percent": "Strong market with broad participation - most stocks in uptrend",
+      "above_50_percent": "Moderate market - slight bullish bias",
+      "below_50_percent": "Weak market - more stocks in downtrend than uptrend",
+      "below_30_percent": "Very weak market - most stocks in downtrend, potential oversold",
+      "20_day_ma": "Measures short-term trend strength (1 month)",
+      "50_day_ma": "Measures intermediate-term trend strength (2-3 months)",
+      "200_day_ma": "Measures long-term trend strength (bull vs bear market)"
+    }
+  },
+  "source_sha256": "613fa152ee6cf2820df59f5566eb4601bda2f1c71747b7bda96d8128282011c7",
+  "windows": {
+    "20": {
+      "nonnull": 404,
+      "min": 2.19,
+      "max": 89.84,
+      "count_over_502_rounding_mismatches": 224
+    },
+    "50": {
+      "nonnull": 404,
+      "min": 5.78,
+      "max": 82.67,
+      "count_over_502_rounding_mismatches": 224
+    },
+    "200": {
+      "nonnull": 404,
+      "min": 18.53,
+      "max": 72.31,
+      "count_over_502_rounding_mismatches": 224
+    }
+  },
+  "dual_low15_dates": 4,
+  "dual_high85_dates": 0,
+  "qualification": "complete saved provider file; historical membership, code method, adjustment vintage and first publication unqualified; no original-E effects",
+  "denominator_check": {
+    "method": "integers1..1000 common to all three windows, absolute percentage-point rounding tolerance0.005; inferred arithmetic only, not provider definition",
+    "unique_counts": {
+      "502": 180,
+      "503": 224
+    },
+    "ambiguous_rows": 0,
+    "no_compatible_rows": 0
+  }
+}

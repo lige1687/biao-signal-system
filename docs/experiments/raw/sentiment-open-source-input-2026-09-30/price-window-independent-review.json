@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-09-30T04:53:39.035911+00:00",
+  "method": "Independent Python csv/set based count versus original pandas/numpy reindex calculation; no outcome tests",
+  "checks": {
+    "independently_recounted_stooq20080912_complete50": 382,
+    "original_count": 382,
+    "all_five_counts_and_complements_match": true,
+    "duplicate_stock_directories_identical_crc_and_size": 7195,
+    "unique_stock_files_used": 7195,
+    "all_dates_prespecified": true,
+    "known_company_identity_counterexample_verified": true
+  },
+  "archive_bytes": 515591518,
+  "archive_sha256": "d9317c8fb2d63b9b00db5f933b6c9639d2bf7ea3b918169bb5cec5903dce85a1",
+  "market_fits": 0,
+  "pro_calls": 0,
+  "source_reuse": true,
+  "limitations": [
+    "Counts measure usable quote windows by ticker string only, not qualified membership or security identity",
+    "No claim that all source series have matching adjustment versions or historical available-at",
+    "Checking five windows does not establish entire series coverage"
+  ]
+}

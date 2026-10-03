@@ -1,0 +1,203 @@
+{
+  "id": "sentiment.provider-b20-delta20-return20@1.0.0",
+  "frozen_at": "2026-10-01T17:16:30.569571+00:00",
+  "authorization": "用户2026-10-02：那你继续啊，推全了？；承接持续情绪S01/S02研究和免费取数授权。新增有限研究批次，原来源/拟合累计与超额记录不重置。；用户随后再次说继续。",
+  "mode": "research",
+  "evidence_stage": "A raw descriptive plus B model-specific retrospective comparison; not C independent validation",
+  "strategy_layer": "体系3.6 / 实现模块E，宽度主输入独立信息研究；不改原定义阈值、不做仓位或生产。",
+  "method_review": "method-review/method-review.json; Astra usage-limit partial saved, controller adoption of extra secondary S02 documented below",
+  "controller_reasons": {
+    "object": "SPY美国宽基ETF与这个供应商自称SP500的记录，符合本线短期市场参与研究，不推广中国、板块、真实历史SP500。",
+    "proxy": "连续B20保留20日参与概念，delta20是新增派生研究；二者均不含50共同确认、真实历史成员与调查确认，不能代表原E。",
+    "method_support": "固定一条20报价间隔问题、一次2026分界、175成熟训练/147评价，小模型最多4参数；窗口大量共享行情，只能有限估计，不强塞5价格背景。已知4月极端一次，预先删除其训练窗口再比较。",
+    "inference": "数值可解释这个已固定供应商版本的回顾性联系；计算定义/历史成员/公布时间未知仍限制原策略与可交易结论。特定模型误差改善不是资金收益、原始独立信息或因果。"
+  },
+  "primary_question": "加入连续B20是否比只看SPY此前20报价间隔涨跌更准确解释以后20间隔涨跌？",
+  "secondary_question": "在已知此前涨跌和B20水平后，再知道B20最近20报价日变化是否多提供帮助？作为唯一预定S02代理对照，不替代主问题。",
+  "inputs": {
+    "docs/experiments/raw/sentiment-short-history-2026-10-02/inputs/ma_percentage_historical.json": "613fa152ee6cf2820df59f5566eb4601bda2f1c71747b7bda96d8128282011c7",
+    "docs/experiments/raw/sentiment-short-history-2026-10-02/version-resume/earliest-ma-snapshot.json": "d864e90bb71817bbb55caeba7985807d3806d290934102072d4fcd1aea8096b2",
+    "docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/inputs/px_SPY.csv": "952f397be0ccc5745185b91cce6acc781737c0f30a7a34aa8a230ae892ed5e45"
+  },
+  "authority_hashes": {
+    "docs/research/current-standards.json": "616c0ae1a636accd35c8500be7c5c21a35c13aaf2039e9e6144cb5531d96cb57",
+    "docs/research/definitions.v1.json": "149cb7d0e7511ac7f328d3be3c590f270ecc6439a89e69c20d2691fbdcf0436d",
+    "configs/strategy-documents.v1.json": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b",
+    "configs/rules.v1.yaml": "9be26a1626fdf6351478b40b388907e9d8128f74b6bd4aa2b8ff4a850cfdcfd2",
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+    "docs/research/lei-factor-research-mission.md": "1f58a65ea41c9b678cc14c4490020b674e991f63267a8746f692e919eb109591",
+    "docs/research/research-question-method-standard.md": "367da1f21f3344ff17abf449aaf887db2adf31ebcfcb1715333a34fb4bf90f16",
+    "docs/research/factor-increment-evidence-standard.md": "05f5b04c8b54ad3bf86296f09a5addd4fd6344dad6e7b639650c39692b2f3871",
+    "docs/research/experiment-backtest-principles.md": "67b49a08396b0c8cb93cb526466200cc798bdb4cd8ce77509658f291cc29493c",
+    "docs/research/ai-execution-contract.md": "f70a929f15d9d59f99f78a609a8658ce468f2c4025f05dba5380198f0bf23d22",
+    "docs/research/definition-standard.md": "938e04d7beb96a46069bbb6eb6c03d2331e86bfa771623fdfe21794b4e98fcbd",
+    "docs/research/experiment-report-template.md": "a141107c915dcf738621e6e8746d89e97fb2d835b4c16883805dc7fb19ab7170"
+  },
+  "qualification_file": "qualification.json",
+  "qualification_sha256": "af12877c735ace4cb815c4b5a660893ce27852db289d4b31842e8050c6bab9be",
+  "schedule_file": "common-qualification-schedule.csv",
+  "schedule_sha256": "3e812daccddbea8cfebbf770e061e5e4afdaa9c5822ea843f73fc1cb986edc57",
+  "support": {
+    "source_rows": 404,
+    "partitions": {
+      "boundary_purge": 21,
+      "eval": 147,
+      "insufficient_source_prefix": 20,
+      "train": 175,
+      "unmatched_quote": 20,
+      "unmatured": 21
+    },
+    "train_range": [
+      "2025-03-24",
+      "2025-12-01"
+    ],
+    "eval_range": [
+      "2026-01-02",
+      "2026-08-04"
+    ],
+    "eval_final_target_end": "2026-09-02",
+    "removed_April_affected_train": 26,
+    "remaining_train": 149,
+    "eval_quarters": {
+      "1": 61,
+      "2": 62,
+      "3": 24
+    },
+    "target_value_computed": false,
+    "price_preflight": "positive-finite validation only; no returns/loss/average label calculations",
+    "calendar": "original ordered SPY quote calendar; no insertion/compression; delta requires entire21-date supplier B20 prefix",
+    "x20_train_range": [
+      2.19,
+      89.84
+    ],
+    "x20_eval_range": [
+      12.52,
+      80.12
+    ]
+  },
+  "definition": {
+    "x": "local:sentiment.provider-b20-continuous@1.0.0 = saved ma_20.percentage_above, percentage points; no numerator recalculation",
+    "delta": "local:sentiment.provider-b20-delta20@1.0.0 = b20[d_t]-b20[d_(t-20)] in percentage points; use exact originalSPYcalendar, require21 consecutive calendar-index breadthvalues, no source-row-lag substitute",
+    "b": "local:sentiment.provider-price-r20@1.0.0 =100*(C_t/C_(t-20)-1), all21backgroundclosespositivefinite",
+    "target": "local:sentiment.provider-return20@1.0.0 =100*(C_(t+21)/C_(t+1)-1),all21targetclosespositivefinite",
+    "anchor": "source date exact same SPYquote date; never shift/fill/compress",
+    "risk_describe_only": "100*max_j(1-C_j/max(C_(t+1)..C_j)),j=t+1..t+21; maximumfuturepeak-to-trough notaccountloss",
+    "price": "frozen adjustedClose vintage, no cashflow/fill/totalportfolioclaim; quote-calendar completeness unknown, horizon explicitly quoteintervals",
+    "availability": "current generated revisedfile2026-10-01; historical firstpublication/revision unknown; same-date anchor retrospective only, nextclose convention not claimed actionable delay",
+    "universe": "provider labelledSP500503; no per-date members; studying saved percentages, not certifying source algorithm; targetsingleSPYquotehistory8456rows1993-01-29..2026-09-02",
+    "weight": "one common eligible source date oneequalweight; daily overlaps are not independent opportunities"
+  },
+  "models": {
+    "I": [],
+    "B": [
+      "r20"
+    ],
+    "X": [
+      "b20"
+    ],
+    "BX": [
+      "r20",
+      "b20"
+    ],
+    "BXD": [
+      "r20",
+      "b20",
+      "delta20"
+    ]
+  },
+  "training": {
+    "boundary": "2026-01-01",
+    "rule": "observation<boundary AND target_end<boundary; allmodelscommon175dates",
+    "eval": "source date>=boundary, complete target, allmodelscommon147dates2026-01-02..2026-08-04; targetfinalSep2",
+    "scaler": "coretrainingmeansandpopulationstd retained forAprildeletedfits; constantcolscale1zero standardized; no outcome scaling",
+    "ridge_lambda": 0.001,
+    "objective": "mean squared error +lambda sum standardized slope squares, intercept unpenalized",
+    "fit": "numpy linear solve fixed, eachmodelonce; Itrainingarithmeticmean counts asoneestimate",
+    "largest_parameters": 4,
+    "no_tuning": true
+  },
+  "metrics": {
+    "performance": [
+      "MSEpp2",
+      "RMSEpp",
+      "MAEpp",
+      "n"
+    ],
+    "primary": "100*(1-MSE_BX/MSE_B); absolute MSE_B-MSE_BX",
+    "secondary": "100*(1-MSE_BXD/MSE_BX); absolute MSE_BX-MSE_BXD",
+    "simple_comparators": [
+      "I_vs_B",
+      "I_vs_BX",
+      "I_vs_BXD"
+    ],
+    "minimum_attention_effect": "notpredefined; no posthocpassline"
+  },
+  "descriptive": {
+    "population": "all343commonmature dates inclboundarypurge21; distinctfrom175training/147eval",
+    "bins_b20": "[0,10),[10,20),...,[90,100]; no winnerselection",
+    "original_states": "dual20+50<=15 low;dual>=85 high; neither;343commonmature,4low339other0high; sourcecount404 separately",
+    "original_states_note": "April4/7/8/10 split2contiguousruns butoneepisode; no fittedextremestate, no independentvictorycount",
+    "outputs": [
+      "mean/median return,positivefrequency",
+      "mean/median maxfuturepeak-to-troughdecline",
+      "full lowcase dates endpoints outcomes",
+      "contiguousruns andsharedwindows"
+    ]
+  },
+  "uncertainty": {
+    "moving_blocks": [
+      40,
+      80
+    ],
+    "draws": 2000,
+    "seed": 20261002,
+    "scheme": "noncircular contiguous blocks uniformstart0..n-L, drawceil(n/L)concatenate thentruncate147;pairedpredictionrowsallmodels; percentile2.5/97.5",
+    "comparisons": [
+      "B_to_BX",
+      "BX_to_BXD",
+      "I_to_B",
+      "I_to_BX",
+      "I_to_BXD"
+    ],
+    "limitations": "only conditional onfixedpredictions; doesnotincludefitting/source/revision/familyuncertainty; shortsamplefewlongblocks; no probabilityclaim"
+  },
+  "counterexamples": {
+    "quarters": "fixed2026Q1/Q2/Q3partial, eacherrors; delete eachfromsavedpredictionsonly",
+    "background": "priorr20<0vs>=0, errors fixedno refits",
+    "largest_five": "five largestpositivepairgain dates forprimary; fullcontributions, removefivefromsavedpredictions; maynotcallindependentepisodes",
+    "overlap": "actualtargetrangeintersection betweenadjacent evalrows; countsandintervalsharedsegments",
+    "April_training_deletion": "remove entiretrainrow iftarget_start<=2025-04-30 andtarget_end>=2025-04-01;26removed149remaining; repeat5models samecoretraining scaler, sameeval147; classifyexploratorycounterexample notnewconfirmation",
+    "version": "carryforward186commondatesB20changed185,max1.90pp,50/200allchanged; no extra vintagefits"
+  },
+  "synthetic_required": [
+    "targetend21 andnextstart1",
+    "quote-calendarlag20missingdaycannotcompress",
+    "invalidpositivepricesexcludeallmodels",
+    "crossboundarytargetpurge",
+    "constantfeature andridge scale arithmetic",
+    "maximumpeak-to-troughdistinctfromentryminimum",
+    "manualheadlineaggregation"
+  ],
+  "budget": {
+    "core_fits": 5,
+    "April_fits": 5,
+    "independent_refits_max": 10,
+    "all_fits_max": 24,
+    "purposeful_followups_max": 2,
+    "source_ops_max": 4,
+    "source_ops_used": 1,
+    "pro_max": 0,
+    "paid_max": 0,
+    "parent_wall_minutes_max": 40
+  },
+  "selection_history": "known at least724past fits pluscurrentactual; atleast4Pro; sourcepriorbudgets/deviationsretained; currentpricehistorypreviouslyseen, splitnotunseen evidence. Providerseriesnewoutcomebatchfrozenbeforeresult; S02 secondarychosenbeforefirstcurrentresult.",
+  "stop": [
+    "inputs/protocol/codehashdrift",
+    "mismatchedcommon dates ornonfinitecalculations",
+    "no parameter/horizon/universe/boundarychanges",
+    "remainingmissingoriginalE/availability cannotvalidated; completeonlysaved-seriesquestion",
+    "actuallimits keepcumulativeandpauseifexceeded"
+  ],
+  "implementation_route": "sentiment-onlyrawresearchrunner; no importoffrozenrawimplementation orpretending technicalFactorLabsupports this"
+}

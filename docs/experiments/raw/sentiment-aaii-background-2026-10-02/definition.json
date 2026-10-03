@@ -1,0 +1,21 @@
+{
+  "id": "local:sentiment.aaii-mean20-calendar-surveys",
+  "version": "1.0.0",
+  "formula": "local:sentiment.aaii-mean20-calendar-surveys@1.0.0;mean(x[i-19:i+1])，包括当前一期；仅20个连续周一到周日的调查周，逐周恰有1条。日期跨周缺一周则该完整20周窗口缺失。日期标签/发布时间未知故仅是原图20周线的有明确定义研究代理。",
+  "unit": "percentage_point",
+  "direction": "larger means more sustained bullish survey views; no imposed return prediction direction",
+  "input_source": {
+    "path": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/inputs/aaii-candidate-values.csv",
+    "sha256": "12f30895c7ea2c68663a60f2d60a85384dfd0d9d324474e0501298e460cf9c05"
+  },
+  "warmup": "20consecutive survey calendar weeks, includingcurrent; no missing-week compression",
+  "available_at": "unknown historical exact release; hypothetical7daydelay; separate from retrieval",
+  "universe": "AAIIrespondents, not SP500 constituents",
+  "frequency": "one survey/week",
+  "provenance": "research_proxy_original_graph",
+  "dependencies": [
+    "candidate:sentiment.aaii-spread@draft-1"
+  ],
+  "not_a_global_registry": true,
+  "production": "not_authorized"
+}

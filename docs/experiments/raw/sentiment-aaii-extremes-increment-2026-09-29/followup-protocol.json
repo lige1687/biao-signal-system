@@ -1,0 +1,37 @@
+{
+  "id": "aaii.simplicity-challenge@1.0.0",
+  "created_at": "2026-09-29T08:24:15.530434+00:00",
+  "reason": "核心结果显示多项价格背景模型在20—252日反而不如仅过去均值；须判断AAII改善是否只是超过较弱的复杂对手。I/X/XE/B/BX/BXE均已在核心批次冻结，只有附加误差范围和贡献核算属于看到结果后的诊断。",
+  "method": "重用核心2000个同日期抽取的各模型误差，计算X/BX/BXE对I及XE对X的误差变化范围；不再拟合，不重新生成结果标签、不重新抽取、不更改主目标",
+  "horizons": [
+    5,
+    20,
+    60,
+    120,
+    252
+  ],
+  "pairs": [
+    [
+      "X",
+      "I"
+    ],
+    [
+      "BX",
+      "I"
+    ],
+    [
+      "BXE",
+      "I"
+    ],
+    [
+      "XE",
+      "X"
+    ]
+  ],
+  "additional": "120/252低/高/中性调查行按年数量与错误差贡献、年度改善比例、所有年份删除范围；明确年份和条件重叠不计独立次数",
+  "fits": 0,
+  "new_source_requests": 0,
+  "new_hypotheses_selected_as_success": false,
+  "stop": "任何原run文件指纹变化",
+  "output": "simplicity-challenge.json"
+}

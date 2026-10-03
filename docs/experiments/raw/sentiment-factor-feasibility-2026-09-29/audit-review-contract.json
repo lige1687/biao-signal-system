@@ -1,0 +1,16 @@
+{
+  "mission": "独立复核情绪输入盘点的关键计数和口径，不运行预测或收益实验",
+  "task_scope": ["独立重新计算指定计数", "核对已有公式、单位与缺口", "交付短书面复核"],
+  "read_only_paths": ["AGENTS.md", "docs/trading-spec-v1.md", "configs/rules.v1.yaml", ".claude/skills/macd-reading/SKILL.md", "docs/plan-sector-trend-page.md", "configs/rules.v2.yaml", "src/lei_signal/market_context/", "scripts/fetch_sentiment_weekly.py", "data/sentiment/", "/Users/yongbiaoli/.lei_signal_lab/cache/sector_trend_history.json", "/Users/yongbiaoli/.lei_signal_lab/cache/tx_sector_flow_pilot.json", "/Users/yongbiaoli/.lei_signal_lab/cache/sector_flow_history.json", "/Users/yongbiaoli/.lei_signal_lab/cache/sentiment_research_2026-09/naaim_clean.csv", "/Users/yongbiaoli/.lei_signal_lab/cache/sentiment_research_2026-09/aaii_clean.csv", "docs/experiments/raw/sentiment-factor-feasibility-2026-09-29/input-audit.json", "docs/experiments/raw/sentiment-factor-feasibility-2026-09-29/source-manifest.json"],
+  "write_paths": ["docs/experiments/raw/sentiment-factor-feasibility-2026-09-29/audit-review/"],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": ["短书面复核", "独立重算的计数/差值", "未解决事实问题"],
+  "stop_conditions": ["需要网络或预测实验", "路径之外写入", "方法歧义无法通过源码解释"],
+  "executor": {"model": "gpt-6-luna", "reasoning_effort": "low"},
+  "controller_review": {"required": true},
+  "budget": {"market_experiments":0,"network_requests":0,"new_output_bytes":1048576},
+  "strategy_layer": "环境独立研究，叙事/路牌预警；不改道路、触发或交易纪律"
+}

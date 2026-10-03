@@ -1,0 +1,148 @@
+{
+  "research_id": "sentiment.putcall-increment@1.0.0",
+  "authorization": "用户继续推进哈，兄弟，不确定的方向和架构可以问6pro",
+  "old_known_history": {
+    "initial_feasibility_attempts": 4,
+    "aaii_computation_attempts": 2,
+    "aaii_fits": 504,
+    "pro_architecture_calls": 2,
+    "previous_vix_putcall_family": "已有2026-09-01等阴性结果，不重跑旧策略、家族全部尝试数未知"
+  },
+  "new_question": "两个期权产品在稳定2012后分开检验未来20段涨幅及未来窗口最大跌幅，风险主问题；未扩大成整个因子族无效",
+  "original_threshold": "Equity published P/C>1；Total没有原阈值",
+  "registered_before_outcomes": {
+    "targets": [
+      "window_mdd20",
+      "forward_return20"
+    ],
+    "primary": "window_mdd20",
+    "horizon": 20,
+    "models": {
+      "I": [],
+      "E": [
+        "e"
+      ],
+      "T": [
+        "c"
+      ],
+      "EQ": [
+        "e",
+        "eq"
+      ],
+      "B": [
+        "r20",
+        "r63",
+        "dma200",
+        "dd252",
+        "rv20"
+      ],
+      "BE": [
+        "r20",
+        "r63",
+        "dma200",
+        "dd252",
+        "rv20",
+        "e"
+      ],
+      "BT": [
+        "r20",
+        "r63",
+        "dma200",
+        "dd252",
+        "rv20",
+        "c"
+      ],
+      "BEQ": [
+        "r20",
+        "r63",
+        "dma200",
+        "dd252",
+        "rv20",
+        "e",
+        "eq"
+      ]
+    },
+    "source_segment": "2012-06-11..2019-10-04",
+    "evaluation": "2015..2019"
+  },
+  "budget": {
+    "one_core_batch": 1,
+    "market_attempts_max": 4,
+    "followup_batches_max": 3,
+    "core_fits_max": 80,
+    "source_requests_max": 6,
+    "pro_architecture_calls_max": 1,
+    "new_output_bytes_max": 20971520
+  },
+  "helper_ownership": {
+    "qualification": "gpt-6-luna/low only normalized/raw source arithmetic",
+    "executor": "existing gpt-6-sol/medium only implementation/synthetic",
+    "no_concurrent_shared_writer": true
+  },
+  "source_requests": 3,
+  "pro_calls": 0,
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "core_batch",
+      "status": "completed",
+      "started_at": "2026-09-29T08:56:26.613689+00:00",
+      "code_sha256": "f2f26f38ba2d0a4eaee280f995298967f878deed333cf882e3bf6475ee8f5239",
+      "fit_budget_max": 80,
+      "output": "executor/run-01",
+      "targets": [
+        "window_mdd20",
+        "forward_return20"
+      ],
+      "models": [
+        "I",
+        "E",
+        "T",
+        "EQ",
+        "B",
+        "BE",
+        "BT",
+        "BEQ"
+      ],
+      "completed_at": "2026-09-29T08:56:27.745713+00:00",
+      "exit_code": 0,
+      "actual_fits": 80,
+      "actual_estimable_fits": 80,
+      "primary_evaluation_rows": 1177,
+      "independent_review": "independent-review.json"
+    }
+  ],
+  "selection_history": "旧源已见；不是独立验证。不能因股票PC数据末端2019而把2020以后填0或称不存在；官网已另有历史成交量下载表但本轮未取得同口径连续近年数据。",
+  "qualification_note": "Initial helper date-type error preserved audit-v1; source normalization final accepted by independent root allrow check; gap-only Total run definition remains separately named.",
+  "result": {
+    "verdict": "Insufficient evidence",
+    "primary_risk_improvement_pct": {
+      "BE_vs_B": -0.6753590265851539,
+      "BT_vs_B": -0.15540205210577973,
+      "BEQ_vs_B": -1.1778183381019103
+    },
+    "secondary_return_improvement_pct": {
+      "BE_vs_B": 0.10024706236669845,
+      "BT_vs_B": -1.234309375680831,
+      "BEQ_vs_B": -0.13504177067913403
+    },
+    "past_mean_challenger": "All factor-only and combined point errors exceed past-mean I in both targets",
+    "scope": "2015-01-02—2019-09-05 SPY observations; labels2015-01-05—2019-10-04; 2quote availability hypothetical; not current or full family evidence"
+  },
+  "verification_records": [
+    {
+      "kind": "root_source_normalization",
+      "passed": true,
+      "file": "controller-qualification-review.json",
+      "new_fits": 0
+    },
+    {
+      "kind": "root_all80fits_and_outputs",
+      "passed": true,
+      "file": "independent-review.json",
+      "new_fits_for_evidence": 0,
+      "same_saved_population_recomputed": true
+    }
+  ],
+  "report_extractions": "Read predeclared five event rows and all annual/leave-one-year scores from saved predictions/results; no new model, horizon or candidate. No followup experiment needed within this bounded question."
+}

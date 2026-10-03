@@ -1,0 +1,63 @@
+{
+  "execution": "completed",
+  "mode": "research",
+  "evidence": "diagnosticaccepted_sourcequalifiedblocked_riskinsufficient",
+  "delivery_mode": "final_only",
+  "authorization": "2026-09-29 持续推进这一块因子研究？",
+  "question": "Diagnose existing method and qualify original breadth; if both dependencies warrant it, complete one AAII120-interval downside-risk increment question",
+  "plan_parent": "docs/experiments/raw/sentiment-direction-pro-review-2026-09-29/next-stage-plan.json",
+  "budget": {
+    "diagnostic_runs_max": 1,
+    "qualification_candidates_max": 2,
+    "total_external_requests_max": 6,
+    "method_docs_requests_reserved": 2,
+    "source_requests_max": 4,
+    "pro_calls_max": 0,
+    "aaii_risk_core_fits_max_if_dependencies_met": 68,
+    "correction_fits_max": 68
+  },
+  "actual": {
+    "diagnostic_runs": 1,
+    "diagnostic_model_fits": 0,
+    "source_model_fits": 0,
+    "external_requests": 6,
+    "method_docs_requests": 2,
+    "source_requests": 4,
+    "pro_calls": 0,
+    "risk_model_fits": 68
+  },
+  "prior_feasibility_fits": 56,
+  "prior_aaii_fits": 504,
+  "prior_putcall_fits": 80,
+  "prior_known_sentiment_pro_calls": 3,
+  "no_budget_reset": true,
+  "next": "dispatch two non-overlapping zero-fit tasks; root designs next risk method without new target results",
+  "dispatch": [
+    {
+      "agent": "/root/aaii_increment_implementation",
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "contract": "diagnostic-contract.json",
+      "write": "diagnostic/",
+      "state": "running"
+    },
+    {
+      "agent": "/root/sentiment_s01_inventory",
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "contract": "source-contract.json",
+      "write": "source/",
+      "state": "running"
+    }
+  ],
+  "prerequisite_review": "docs/experiments/raw/sentiment-method-and-source-2026-09-29/controller-prerequisite-review.json",
+  "next_active_risk_stage": "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/research-state.json",
+  "stages": {
+    "diagnostic": "completed accepted",
+    "source": "completed documentaryqualification blockedfororiginalE",
+    "risk": "completed 68fits, insufficientevidence; notOriginalE"
+  },
+  "upgrades": "read-only checked; external mutation pending per outside-repo rule; proposal preserved",
+  "report": "docs/experiments/sentiment-aaii-risk-increment-2026-09-29.md",
+  "completed_at": "2026-09-29T10:31:52.070116+00:00"
+}

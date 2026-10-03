@@ -1,0 +1,20 @@
+{
+  "schema": "sentiment-qualification-review/1",
+  "kind": "one local documentary re-evaluation; no new source request or input calculation",
+  "pro_task": "sentiment-standard-review-20260929",
+  "principle": "自算宽度不另要求指标自身历史首发；可靠历史重建、模拟当时可执行、真正后续观察分别证明。输入身份、价格版本、许可及修订限制仍须核。",
+  "tiers": [
+    {"use": "retrospective_reconstruction", "requirements": ["当时成员身份及生效", "进入退出与价格/行动", "共同分母/缺失及计算版本", "真实范围与研究权限"], "vintage_unknown": "明确今天重建与修订限制，不称当时可交易或真正未见验证", "indicator_own_first_publication_archive": "not_required_for_self_computed_deterministic_feature"},
+    {"use": "historical_available_decision", "requirements": ["上述重建输入", "公告/输入可知时间与实际版本", "修订边界", "计算后合理使用时刻"], "vintage_unknown": "blocks historical-executability claim"},
+    {"use": "prospective_fixed_rule_observation", "requirements": ["实际到达时间及保留版本/修订", "冻结计算与对手", "未来完整成熟窗口"], "future_label_incomplete": "not_evaluated"}
+  ],
+  "cases": [
+    {"route": "current494_backfill", "evidence": "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/us-source-audit.json", "original_sp500_reconstruction": "blocked", "historical_executable": "blocked", "reason": "historical_membership_proven=false; 494 current identities; eligible20/50 denominators differ; available_at date-only synthetic", "limited_use": "audit/descriptive frozen current-member group only"},
+    {"route": "S&P SPICE", "evidence": "docs/experiments/raw/sentiment-method-and-source-2026-09-29/source/qualification.json", "original_sp500_reconstruction": "not_qualified_actual_inputs_absent", "historical_executable": "not_qualified", "prospective": "not_started", "gaps": ["actual daily member and add/drop samples", "price and action versions including exits", "calendar/common denominator/coverage", "actual research entitlement and permitted export"], "entitlement": "unknown in allowed local materials; not proof no license exists"},
+    {"route": "StockCharts", "evidence": "docs/experiments/raw/sentiment-method-and-source-2026-09-29/source/qualification.json", "original_sp500_reconstruction": "not_qualified_actual_inputs_absent", "historical_executable": "not_qualified", "prospective": "not_started", "gaps": ["exact20 product and actual values", "historical member algorithm and common20/50 denominators", "version/coverage and allowed export sample"], "entitlement": "unknown in allowed local materials"}
+  ],
+  "old_frozen_qualification": "unchanged; this is a subsequent purpose-specific interpretation",
+  "old_source_requests": {"used": 4, "remaining": 0, "reset": false},
+  "actual_this_review": {"local_qualification_reviews": 1, "new_network_requests": 0, "actual_input_samples_acquired": 0, "new_market_fits": 0, "paid_actions": 0, "provider_messages": 0},
+  "conclusion": "标准按用途收紧表述，三现有路线仍无合格原S01输入；没有新资料使来源阻塞解除。"
+}

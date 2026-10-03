@@ -1,0 +1,58 @@
+{
+  "mission": "实现冻结S05单因子20日涨幅与窗口最大下跌研究脚本，仅合成验证；真实批次由主控后运行",
+  "task_scope": [
+    "按protocol直接解析两产品原CSV与SPY冻结源，保留原published_ratio不换exact",
+    "实现8对照、2目标、2015—2019年度成熟训练、共有样本、原Equity>1事件、各年/分期/删除年份和极端组以及2000成对126行块范围",
+    "合成手算验证future窗口内高到低最大跌幅、20段21价格、2真实报价等待、成熟、原>1边界、稀有/零尺度枝状态",
+    "代码和synthetic-check/delivery落executor，只做合成，真实数据效果调用0"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "configs/strategy-documents.v1.json",
+    "configs/rules.v1.yaml",
+    "docs/research",
+    "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/strategy-source",
+    "docs/experiments/raw/sentiment-putcall-increment-2026-09-29/inputs",
+    "docs/experiments/raw/sentiment-putcall-increment-2026-09-29/protocol.json",
+    "docs/experiments/raw/sentiment-putcall-increment-2026-09-29/source-manifest.json",
+    "docs/experiments/raw/sentiment-putcall-increment-2026-09-29/controller-input-audit.json",
+    "docs/experiments/raw/sentiment-putcall-increment-2026-09-29/sol-contract.json"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/sentiment-putcall-increment-2026-09-29/executor"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "executor/analyze.py 默认synthetic，显式--run-reviewed由主控运行，拒绝任何已有run-01",
+    "executor/synthetic-check.json、delivery.md",
+    "真实运行后run-01/observations.csv、predictions-{target}.csv、fits-{target}.json、draws-{target}.csv、results.json、manifest.json；target=window_mdd20或forward_return20，数值/日期/exclusion逐行保留"
+  ],
+  "stop_conditions": [
+    "protocol/datahash漂移",
+    "根核心E/T或B秩不足、训练<400",
+    "任何真实调用/网络/其他写入",
+    "除EQ/BEQ明确欠拟合标志以外的临时替换方法"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "budget": {
+    "market_attempts": 0,
+    "network_requests": 0,
+    "pro_calls": 0,
+    "executor_artifact_bytes": 1048576
+  },
+  "notes": [
+    "前一个AAII任务已完成，复用同一Sol/medium仅新工作合同，不改旧目录",
+    "原Equity2012后>1仅6源日期，初训1条、预测年份约5条；必须报告稀少而不认定此阈值已预测有效。数学可拟合不等于信息可靠。Total543日期>1只作口径检查，非原阈值。",
+    "无E+T或AAII组合，真正风险不确定时报告主控，不擅自询问6Pro",
+    "Root并行独立数值验证，Luna独立来源盘点写qualification，与executor不重叠"
+  ]
+}

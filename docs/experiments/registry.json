@@ -817,6 +817,96 @@
    "category": "数据与质量",
    "verdict": "mixed",
    "oneLiner": "round1复验成立；round2修概念放行/本人肯定边界/文案；round3（最后一轮）按主控二轮复核共同根因改分句级判断：先否定比较再肯定回测仍拦截、同句第三人不挡本人清仓、否定闲钱后定投用途生效；50项连续讨论+13文件相关回归+1已知xfail；待主控复验。"
-  }
+  },
+    "docs/experiments/sentiment-factor-feasibility-2026-09-29.md": {
+      "category": "宏观与情绪",
+      "verdict": "mixed",
+      "oneLiner": "现有情绪可以做研究候选；在七日可得假设和价格背景下，AAII／融资变化的20日估计误差增加0.96%／0.45%，机构时点与板块口径待核，不代表完整E失败。"
+    },
+    "docs/experiments/sentiment-library-readiness-2026-09-29.md": {
+      "category": "宏观与情绪",
+      "verdict": "mixed",
+      "oneLiner": "情绪库已建，美国宽度多年数值用近期成员倒推、缺真实当时名单；AAII限定20日未改善，正式S01及后续组合未完成。"
+    },
+    "docs/experiments/sentiment-aaii-extremes-increment-2026-09-29.md": {
+      "category": "宏观与情绪",
+      "verdict": "mixed",
+      "oneLiner": "AAII原120日连续加极端主比较误差少1.51%且范围含恶化、不胜过去均值；连续值另一对照有弱线索，极端额外强度未支持，暂不确认稳定增量。"
+    },
+    "docs/experiments/sentiment-putcall-increment-2026-09-29.md": {
+      "category": "宏观与情绪",
+      "verdict": "mixed",
+      "oneLiner": "SPY旧历史20日下跌风险估计，加入股票／总体期权比例误差增加0.68%／0.16%；股票的涨跌估计误差仅少0.10%且不胜过去平均，原极端仅5次，暂不升级。"
+    },
+    "docs/experiments/sentiment-direction-pro-review-2026-09-29.md": {
+      "category": "宏观与情绪",
+      "verdict": "mixed",
+      "oneLiner": "Pro方向审阅完成：AAII原主比较改善1.51%仍不胜过去平均；下一轮先诊断方法、补真历史宽度，有条件才做单一AAII风险问题。"
+    },
+    "docs/experiments/sentiment-aaii-risk-increment-2026-09-29.md": {
+      "category": "宏观与情绪",
+      "verdict": "mixed",
+      "oneLiner": "835个SPY调查日期：AAII对约半年最大下跌估计误差只改善0.21%，范围含恶化；整套方法仍不如此前平均，去掉2016优势消失。真实历史宽度和发布资料仍缺。"
+    },
+    "docs/experiments/sentiment-standard-pro-review-2026-09-29.md": {
+      "category": "宏观与情绪",
+      "verdict": "mixed",
+      "oneLiner": "一次6 Pro方向审阅：既有AAII风险结论保留；自算宽度核当时输入，无需指标自身首发。优先真实20/50宽度，连续值先于原阈值，再研究AAII确认；尚无新因子效果。"
+    },
+    "docs/experiments/sentiment-s01-historical-input-2026-09-30.md": {
+      "category": "宏观与情绪",
+      "verdict": "mixed",
+      "oneLiner": "本机多年20/50宽度主要用近年标普成分股倒推；两家官方公开资料未取得真实历史样本。原S01收益和新增信息未评估，资料受阻不等于因子无效。"
+    },
+    "docs/experiments/sentiment-s01-local-cache-2026-09-30.md": {
+      "category": "宏观与情绪",
+      "verdict": "mixed",
+      "oneLiner": "找到本地自算标普宽度，20/50/200日全部数值可从494只当前成员价格重算；旧年份缺当时已退出股票，原S01收益与增量仍未评估。"
+    },
+    "docs/experiments/sentiment-direction-application-2026-09-30.md": {
+      "category": "宏观与情绪",
+      "verdict": "mixed",
+      "oneLiner": "方向修正已落实：历史重建与当年可执行分开、独立分母不是普遍错误；AAII/期权旧结果未升级。真实宽度仍缺当年成员和退出价格，免费样本询问稿已备，未发送。"
+    },
+    "docs/experiments/sentiment-input-boundary-review-2026-09-30.md": {
+      "category": "宏观与情绪",
+      "verdict": "mixed",
+      "oneLiner": "完整20/50宽度输入仍缺；原Chrome库存复查恢复，但读取原页超时，新一轮来源操作1/6、无导出。阻塞是页面读取和资料，不是用户限额；NAAIM封存不重跑。"
+    },
+    "docs/experiments/sentiment-breadth-version-audit-2026-10-02.md": {
+      "category": "宏观与情绪",
+      "verdict": "mixed",
+      "oneLiner": "两个宽度实物版本的186个共同旧日，20/50数值分别185/186天不同，最大差1.90/1.67个百分点；不能当历史实时读数，原因仍待核，原E效果未评价。"
+    },
+    "docs/experiments/sentiment-short-history-2026-10-02.md": {
+      "category": "宏观与情绪",
+      "verdict": "mixed",
+      "oneLiner": "取得404日三窗口宽度历史文件，补上单日快照缺口；历史成员、计算及修订仍未核，原双低4天集中2025年4月，效果未评价，0拟合/Pro。"
+    },
+    "docs/experiments/sentiment-parallel-resume-2026-10-01.md": {
+      "category": "宏观与情绪",
+      "verdict": "mixed",
+      "oneLiner": "并行核本地成员、4次独立免费来源和旧情绪增量：仍缺可核的标普500历史20/50日宽度，原E效果未评价；NAAIM短史线索保留，本轮0新拟合、0Pro。"
+    },
+    "docs/experiments/sentiment-open-source-input-2026-09-30.md": {
+      "category": "宏观与情绪",
+      "verdict": "watch",
+      "oneLiner": "免费旧价约516MB已落地，宽度完整导出与口径仍缺；新续查取得官方131周NAAIM，另冻短历史检验已完成，原E宽度效果仍未评价。"
+    },
+    "docs/experiments/sentiment-naaim-public-window-2026-09-30.md": {
+      "category": "宏观与情绪",
+      "verdict": "mixed",
+      "oneLiner": "免费官方131周敞口，78周评价中加入后典型涨跌误差4.852→4.464个百分点，有短历史线索；页面延迟三个月、低敞口只有1周，不能证明原规则或当时可交易。"
+    },
+    "docs/experiments/sentiment-breadth-effects-2026-10-02.md": {
+      "category": "宏观与情绪",
+      "verdict": "mixed",
+      "oneLiner": "短历史中宽度水平/变化把SPY约一月典型误差4.262降至4.149/4.022，但删除学习期4月行情后都变差；限定比较完成，原E和稳定帮助未确认。"
+    },
+    "docs/experiments/sentiment-aaii-background-2026-10-02.md": {
+      "category": "宏观与情绪",
+      "verdict": "mixed",
+      "oneLiner": "AAII20周平均加入当前情绪和价格后平方误差少1.40%，但仍不如过去平均；删2020年后优势消失，816个SPY已见历史日期尚未确认稳定帮助。"
+    }
  }
 }

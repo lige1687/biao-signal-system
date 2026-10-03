@@ -1,0 +1,230 @@
+{
+  "id": "sentiment.aaii-risk120-increment@1.0.0",
+  "frozen_at": "2026-09-29T10:06:36.008146+00:00",
+  "question": "已有涨跌、趋势、当前跌幅、近期波动之外，AAII连续多空差能否改善SPY接下来120交易日区间内部最严重下跌的估计？",
+  "authorization": "2026-09-29 用户：持续推进这一块因子研究？；沿上次Pro方向审阅三阶段计划，前两项核查已接受，来源仍不足以原E实验",
+  "strategy_layer": "模块E情绪确认与市场状态的信息研究；风险目标及新估计方法是单列研究扩展，不改变原E阈值、状态、交易或生产",
+  "prerequisites": {
+    "diagnostic_review": "docs/experiments/raw/sentiment-method-and-source-2026-09-29/controller-prerequisite-review.json",
+    "source_verdict": "blocked for original E; two routes checked, not proof no suitable data exists"
+  },
+  "inputs": {
+    "aaii-candidate-values.csv": {
+      "path": "inputs/aaii-candidate-values.csv",
+      "sha256": "12f30895c7ea2c68663a60f2d60a85384dfd0d9d324474e0501298e460cf9c05",
+      "source_path": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/inputs/aaii-candidate-values.csv",
+      "new_market_data": false
+    },
+    "px_SPY.csv": {
+      "path": "inputs/px_SPY.csv",
+      "sha256": "952f397be0ccc5745185b91cce6acc781737c0f30a7a34aa8a230ae892ed5e45",
+      "source_path": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/inputs/px_SPY.csv",
+      "new_market_data": false
+    }
+  },
+  "price_basis": "旧缓存调整后Close；具体历史调整/分红版本未知，未使用实际成交价",
+  "range": [
+    "1995-01-01",
+    "2026-06-30"
+  ],
+  "initial_training": [
+    "1995-01-01",
+    "2009-12-31"
+  ],
+  "evaluation": [
+    "2010-01-01",
+    "2026-06-30"
+  ],
+  "universe": {
+    "target": "one US-listed SPY ETF, US equity broad-index exposure, USD; not SP500 historical constituents or China/sector/overseas multiple evidence",
+    "selection": "original E US broad-index context and already frozen SPY cache, selected before new target generation",
+    "list": [
+      "SPY"
+    ],
+    "input_source": "AAII weekly survey plus same pre-existing SPY adjusted Close cache; no new market download",
+    "membership": "single ETF fixed identity, dynamic constituent qualification not required for isolated ETF risk target; still required for original E breadth",
+    "listing_warmup": "keep all quote positions from1993 including invalid/missing; need200/252-window warmup and1995-start",
+    "actions_dividends": "cache historical adjustment vintage unknown, no new reconstruction",
+    "calendar": "actual SPY quote dates; weekends not counted; no missing-close date compression; external exchange holiday calendar not independently qualified",
+    "weight": "one eligible survey date one equal observation; no ETF cross-section",
+    "history_seen": "entire historical cache previously observed; no independent untouched data"
+  },
+  "objects": {
+    "x": "candidate:sentiment.aaii-spread@draft-1 = 100*(bullish-bearish) survey percentage points; original candidate formula unchanged",
+    "risk_target": "local:sentiment.window-mdd120@1.0.0",
+    "estimator": "local:sentiment.bounded-risk-mean@1.0.0; protocol-local method, not globally registered production object",
+    "global_runtime_objects_called": []
+  },
+  "baseline": [
+    "r20=100*(C_t/C_(t-20)-1)",
+    "r63=100*(C_t/C_(t-63)-1)",
+    "dma200=100*(C_t/mean(C_(t-199)..C_t)-1)",
+    "dd252=100*(C_t/max(C_(t-251)..C_t)-1)",
+    "rv20=100*std(last20 daily returns,ddof=1)*sqrt(20)"
+  ],
+  "publication_time": {
+    "assumed": "source date+7calendar days at23:59 Asia/Shanghai, first SPY quote date strictly after assumed date is t; features use its close; target begins next quote close",
+    "actual_first_publication": "unknown; added delay is scenario assumption, does not prove historical availability",
+    "historical_revisions": "unknown; one survey row, no forward-fill",
+    "duplicate_t": "sort source_date then physicalsource_row; keep latest source for same t"
+  },
+  "target": {
+    "identity": "local:sentiment.window-mdd120@1.0.0",
+    "h": 120,
+    "window": "quote indexes a=t_index+1 through b=t_index+121 inclusive; exactly121closes120return segments",
+    "formula": "y_pp=100*max_{a<=j<=b}(1-C_j/max_{a<=i<=j}C_i)",
+    "meaning": "largest peak-to-later-trough decline inside fixed future window; peak cannot precede window; not initial-close return, account drawdown, or probability of crossing a loss threshold",
+    "valid": "all121closes finite positive, both ends<=2026-06-30; actualy0<=y<100 unmodified",
+    "maturity": "train only t and target_end strictly before Jan1 of fitted evaluationyear; complete endpoint required",
+    "missing": "exclude entire invalid/incomplete path, never shorten or fill; retain exclusion record"
+  },
+  "models": {
+    "I": [],
+    "V": [
+      "rv20"
+    ],
+    "B": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20"
+    ],
+    "BX": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20",
+      "x"
+    ]
+  },
+  "estimation": {
+    "schedule": "annual expanding fits2010..2026; if evaluationyear has no eligible row no fit; each model only identical full-eligible common training dates, mintrain100",
+    "I": "arithmetic mature training-risk mean, same dates; counted as one fit per year for budget",
+    "feature_scaling": "training only means and population std ddof0; finite scales>0 required, no coefficient sign flip or feature selection",
+    "V_B_BX_prediction": "100*expit(intercept+Z@slopes)",
+    "objective": "mean((expit(intercept+Z@slopes)-y_pp/100)^2)+0.001*sum(slopes^2); mean not sum, intercept unpenalized, target not clipped/floored",
+    "lambda": 0.001,
+    "lambda_rationale": "one fixed research method parameter before new risk target/performance; shrink extreme standardized slopes and avoid physically negative risk, no optimality or investment meaningful-size claim",
+    "optimizer": "scipy.optimize.minimize method L-BFGS-B, analytic gradient; single start intercept logit(mean trainrisk/100), slopes0; no bounds/restarts/search",
+    "options": {
+      "maxiter": 1000,
+      "ftol": 1e-12,
+      "gtol": 1e-08
+    },
+    "constant_zero_train_target": "if mean trainrisk0, all nonnegative trainrisks0: analytic constant0 branch, interceptnull recorded, no target modification",
+    "convergence": "stop if optimizer not success, any result nonfinite, or maxabs finalgradient>1e-6; retain every startedfit and failure; one objective code correction may be authorized within residual budget, no solver/hyperparameter tuning",
+    "local_minimum_limit": "nonlinear objective may have local optima; successful single-start optimization is not global-optimum proof"
+  },
+  "coverage": "require finite x and all fivebackgrounds+y for ALL four models, one common eligible date set; raw survey and quote rows to exclusions, maturetrain and eval counts all reported",
+  "primary_comparison": "100*(1-MSE(BX)/MSE(B)), same target/dates/estimator/preprocessing/year schedule; positive=less squared estimation error, not money return",
+  "comparisons": [
+    [
+      "BX",
+      "B"
+    ],
+    [
+      "BX",
+      "I"
+    ],
+    [
+      "BX",
+      "V"
+    ],
+    [
+      "B",
+      "I"
+    ],
+    [
+      "V",
+      "I"
+    ],
+    [
+      "B",
+      "V"
+    ]
+  ],
+  "performance": [
+    "MSE squared percentage points",
+    "RMSE percentage points: larger mistakes count more",
+    "MAE percentage points",
+    "prediction mean and actual mean, signed mean error",
+    "prediction range and negative/out-of-range counts"
+  ],
+  "uncertainty": {
+    "method": "paired noncircular moving contiguous blocks of survey dates; jointly resample all models same indices, nrows retained by truncation; existing predictions not refit",
+    "primary_block_rows": 52,
+    "sensitivity_block_rows": 104,
+    "draws_each": 2000,
+    "seed_each": "20260929+block_rows",
+    "interval": "2.5/97.5 percentile of squared-error-improvement values; store all draws",
+    "limits": "overlapping120day outcomes, long regime persistence, old family selection and annual model fitting are not fully represented; no formal whole-family significance claim"
+  },
+  "stability": {
+    "annual": "all2010..2026, label exact partialyear rows",
+    "bands": [
+      [
+        "2010-01-01",
+        "2014-12-31"
+      ],
+      [
+        "2015-01-01",
+        "2019-12-31"
+      ],
+      [
+        "2020-01-01",
+        "2026-06-30"
+      ]
+    ],
+    "delete_one_year": "saved predictions only, no refitting or selecting alternate model",
+    "contribution": "eachyear and fixedbands totalpaired squared-error reduction; sumpositive/sumnegative separately; largestyear and remove effects reported",
+    "overlap": "adjacent actual shared future-return segments with target indexes, count/% and min/median/max"
+  },
+  "minimum_attention_size": {
+    "status": "not investment-qualified; exploratory effect magnitude only",
+    "reason": "no specified account action/fees/capital impact to set justified financial threshold; no small-effect equivalence/no-meaningful-value claim"
+  },
+  "selection_history": "new single risk target and one method selected after prior forecasts and Pro suggestedriskbranch; all prices previously seen. This is exploration, not independent validation. Discarded Gamma proposal was never fitted; no additional horizons/extreme/recovery/state/252 models this round.",
+  "budget": {
+    "core_batches_max": 1,
+    "objective_correction_batches_max": 1,
+    "core_fits_max": 68,
+    "objective_correction_fits_max": 68,
+    "total_fits_max": 136,
+    "new_source_requests_max": 0,
+    "pro_calls_max": 0,
+    "wall_minutes_max": 15,
+    "output_bytes_max": 20971520
+  },
+  "stop": [
+    "protocol/input hash drift",
+    "future label enters training",
+    "common eligible set differs across model comparisons",
+    "optimizer invalid or gradient nonfinite/>1e-6",
+    "budget exhausted; preserve partial state, not complete",
+    "method/target identity unresolved"
+  ],
+  "not_evaluated": [
+    "original fullE confirmation/breadth/NAAIM/PutCall combination",
+    "China/sector institutions and retail labels",
+    "original extreme threshold risk effect",
+    "probability or calibrated tail alarm",
+    "account capital/fees/position/entry/exit or futures hedge",
+    "new independent observation",
+    "production"
+  ],
+  "output": "executor default synthetic only; real --run-reviewed needs controller code review. Unique run-01; never overwrite frozen/old attempts.",
+  "adopted_standards": [
+    "AGENTS.md",
+    "configs/strategy-documents.v1.json",
+    "configs/rules.v1.yaml",
+    "docs/research/experiment-backtest-principles.md",
+    "docs/research/ai-execution-contract.md",
+    "docs/research/definition-standard.md",
+    "docs/research/definitions.v1.json",
+    "docs/research/research-question-method-standard.md",
+    "docs/research/factor-increment-evidence-standard.md",
+    "docs/research/experiment-report-template.md"
+  ]
+}

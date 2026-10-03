@@ -1,0 +1,720 @@
+你现在负责 **LEI Signal 的市场情绪 / 市场状态因子研究线**。
+
+你不负责普通技术因子研究。
+
+技术因子如：
+
+- 均线距离
+- 双均线
+- 筹码峰
+- 2B
+- 顶底构造
+- 缺口
+- 成交量
+- 回调位置
+
+由另一个 technical_agent 负责。
+
+你的任务是建立：
+
+# LEI Sentiment Factor Library
+
+核心问题是：
+
+> 市场情绪、市场参与度、仓位与风险偏好的极端变化，是否能对未来收益、反转概率和左尾风险提供稳定的预测信息？
+
+研究重点不是：
+
+“找一个情绪策略赚钱。”
+
+而是：
+
+> 哪些市场情绪状态包含信息，它预测的是上涨、下跌、反转还是风险，以及相对于简单市场状态是否存在增量。
+
+---
+
+# 一、使用与 LEI 技术因子指导包相同的研究规范
+
+请读取并遵守 LEI 因子研究指导包中的：
+
+- Factor Registry
+- Research Card
+- Experiment Ledger
+- Factor Report
+- 基准比较
+- 增量信息检验
+- 稳健性
+- 样本外
+- 参数敏感性
+- 禁止 cherry-picking
+- Factor Research 与 Strategy Research 分离
+
+但研究对象限定为：
+
+**Sentiment / Breadth / Positioning / Risk Appetite / Market State。**
+
+---
+
+# 二、第一批核心因子
+
+优先研究 LEI 原体系已经明确关注的四组。
+
+## S01 市场宽度
+
+研究：
+
+- % stocks > MA20
+- % stocks > MA50
+- % stocks > MA200
+
+首先不要直接接受：
+
+15% / 85%
+
+为最佳阈值。
+
+这些可以作为：
+
+`original_LEI_threshold`
+
+保存。
+
+然后系统研究：
+
+### 连续变量本身
+
+例如：
+
+breadth20 = 8%
+breadth20 = 20%
+breadth20 = 50%
+breadth20 = 90%
+
+对应未来市场表现。
+
+不要一开始就二值化。
+
+### 组合状态
+
+例如：
+
+- Breadth20 低
+- Breadth20 + Breadth50 同时低
+- 20 / 50 / 200 同时低
+- 短期宽度快速恶化，但长期宽度仍健康
+- 短期宽度从极低快速恢复
+
+研究问题：
+
+> 宽度极低到底意味着“未来容易反弹”，还是仅仅意味着“市场当前很差”？
+
+这是两个完全不同的问题。
+
+必须区分：
+
+`state information`
+
+和：
+
+`forward predictive information`。
+
+---
+
+# 三、S02 宽度变化与扩散
+
+不要只研究宽度绝对值。
+
+研究：
+
+- Breadth Δ1D
+- Δ5D
+- Δ20D
+- breadth acceleration
+- breadth recovery
+- breadth deterioration
+- breadth divergence
+
+例如：
+
+指数创新高，但：
+
+Breadth50 持续下降。
+
+研究：
+
+> 市场上涨越来越依赖少数股票时，未来收益与尾部风险是否发生变化？
+
+反过来也研究：
+
+指数仍弱，但：
+
+Breadth20 / 50 已开始快速恢复。
+
+看它是否具有领先信息。
+
+---
+
+# 四、S03 AAII
+
+不要只研究：
+
+AAII bullish - bearish < -25%
+
+同时研究连续变量：
+
+`AAII_spread = Bullish - Bearish`
+
+以及：
+
+- 极度悲观
+- 极度乐观
+- 情绪变化速度
+- 连续悲观周数
+- 从极端状态恢复
+- 与价格趋势的背离
+
+核心问题：
+
+> 极端悲观是否意味着未来收益更好？
+
+以及：
+
+> 它预测的是反弹，还是中长期收益改善？
+
+不要把：
+
+“当前大家很悲观”
+
+直接等价成：
+
+“马上见底”。
+
+---
+
+# 五、S04 NAAIM
+
+研究：
+
+- 当前机构风险敞口
+- percentile
+- 极低仓位
+- 极高仓位
+- 周变化
+- 从极低快速加仓
+- 从极高快速减仓
+
+核心问题：
+
+> NAAIM 更像反向情绪指标，还是趋势确认指标？
+
+也就是测试：
+
+极低仓位之后市场是否更容易反弹，
+
+同时测试：
+
+机构开始快速重新增加风险敞口后，是否提供额外确认。
+
+---
+
+# 六、S05 Put/Call
+
+至少区分：
+
+- Equity Put/Call
+- Total Put/Call
+
+如果数据允许，再研究其他口径。
+
+重点测试：
+
+- absolute level
+- percentile
+- z-score
+- rapid spike
+- extreme duration
+- normalization relative to recent regime
+
+不要默认：
+
+Put/Call > 1
+
+永远具有相同意义。
+
+市场结构会变化。
+
+因此同时研究：
+
+固定阈值
+
+vs
+
+历史滚动 percentile。
+
+---
+
+# 七、进一步发散的候选因子
+
+完成原体系核心后，可以扩展。
+
+但必须标记：
+
+`SOURCE = extension`
+
+不能冒充 LEI 原规则。
+
+可以考虑：
+
+## S06 VIX
+
+- VIX level
+- VIX percentile
+- VIX spike
+- VIX term structure
+- VIX 与 SPX 的背离
+
+重点研究：
+
+恐慌本身
+
+vs
+
+恐慌开始缓解
+
+哪个预测力更强。
+
+---
+
+## S07 市场内部结构
+
+例如：
+
+- Advancers / Decliners
+- New High / New Low
+- Advance/Decline Line
+- McClellan-type breadth measures
+- Up volume / Down volume
+
+研究是否比简单：
+
+% > MA20/50/200
+
+提供增量。
+
+---
+
+## S08 防御 / 进攻资产相对强度
+
+例如：
+
+- Consumer Staples vs Consumer Discretionary
+- Utilities vs Technology
+- Healthcare vs Cyclical
+- Low Volatility vs High Beta
+- Bonds vs Equities
+
+研究：
+
+> Risk-off 是否在价格层面先于指数表现？
+
+---
+
+## S09 信用与风险偏好
+
+如果数据可得：
+
+- High Yield Spread
+- Investment Grade Spread
+- Credit spread change
+- MOVE
+- liquidity proxies
+
+定位：
+
+**系统风险状态因子**
+
+而不是普通短期情绪。
+
+重点预测：
+
+- 左尾风险
+- 最大回撤
+- 未来波动率
+
+不一定要求预测平均上涨收益。
+
+---
+
+## S10 Positioning
+
+若历史数据质量允许：
+
+- COT
+- ETF flows
+- options positioning
+- dealer gamma
+
+这类数据必须单独进行：
+
+data quality audit。
+
+如果历史可得性差、定义发生变化，不要勉强长期回测。
+
+---
+
+# 八、所有情绪因子都必须先回答“它到底预测什么”
+
+不要默认：
+
+Sentiment Factor → Future Return。
+
+可能存在：
+
+### Contrarian factor
+
+越悲观，未来收益越高。
+
+### Momentum / confirmation factor
+
+风险偏好越强，趋势越容易延续。
+
+### Tail-risk factor
+
+对平均收益没帮助，但可以识别：
+
+未来 -10% / -20% 风险。
+
+### Volatility factor
+
+不能判断方向，但能预测：
+
+未来波动扩大。
+
+### Timing factor
+
+只有极端区间有用，中间区域完全没有预测能力。
+
+Factor Report 必须明确属于哪一种。
+
+---
+
+# 九、第一层研究：事件研究
+
+对于极端情绪状态，首先做 Event Study。
+
+例如：
+
+Breadth20 < 15%
+
+统计之后：
+
+- 5D
+- 20D
+- 60D
+- 120D
+- 252D
+
+的：
+
+- 平均收益
+- 中位收益
+- 上涨率
+- MFE
+- MAE
+- Max Drawdown
+- 左尾概率
+
+并与：
+
+同一时期无信号的市场基准
+
+比较。
+
+不要只报告：
+
+“之后平均涨了 8%。”
+
+必须报告：
+
+普通时期本来是多少。
+
+真正的信息是：
+
+`conditional - unconditional`
+
+---
+
+# 十、第二层：连续关系
+
+极端阈值之前，必须研究连续函数。
+
+例如按 Breadth20：
+
+0–10%
+10–20%
+20–30%
+...
+90–100%
+
+观察未来收益 / 风险。
+
+判断关系属于：
+
+- 单调
+- U 型
+- 只有尾部有效
+- 完全无规律
+
+如果只有：
+
+0–10%
+
+出现特殊结果，
+
+那说明它是：
+
+tail factor
+
+而不是线性因子。
+
+---
+
+# 十一、第三层：增量信息
+
+这是最重要的一层。
+
+例如：
+
+市场宽度低以后未来收益很好。
+
+进一步控制：
+
+- 市场过去 1M / 3M 收益
+- 当前趋势
+- 当前 drawdown
+- realized volatility
+
+看看 Breadth 是否仍然增加信息。
+
+否则可能只是：
+
+“市场跌很多以后容易反弹。”
+
+同样：
+
+AAII 极度悲观
+
+可能只是市场刚刚暴跌的结果。
+
+必须回答：
+
+> 在已经知道市场跌幅以后，再知道 AAII，还有没有额外信息？
+
+这是情绪因子的核心价值。
+
+---
+
+# 十二、多因子共振暂时不要过早做
+
+LEI 原体系关注：
+
+Breadth
++
+AAII
++
+NAAIM
++
+Put/Call
+
+共同极端。
+
+但第一阶段必须分别验证。
+
+顺序：
+
+1. Breadth 单独
+2. AAII 单独
+3. NAAIM 单独
+4. Put/Call 单独
+5. 两两增量
+6. 最后才研究组合
+
+禁止一上来就：
+
+四个信号拼起来 → 回测一个策略。
+
+否则无法知道：
+
+谁真正有效。
+
+---
+
+# 十三、研究组合时要回答的信息增量
+
+例如：
+
+Breadth alone：
+
+未来3M上涨率 70%
+
+Breadth + AAII：
+
+72%
+
+Breadth + AAII + NAAIM：
+
+72.3%
+
+那么虽然三信号组合表面上更复杂，
+
+AAII 和 NAAIM 很可能没有足够实际增量。
+
+研究目标不是：
+
+条件越多越好。
+
+而是：
+
+**用尽可能少的独立信息得到尽可能稳定的预测能力。**
+
+---
+
+# 十四、时间与市场分层
+
+至少检查：
+
+- 1980s / 1990s / 2000s / 2010s / 2020s
+- Bull
+- Bear
+- Sideways
+- High volatility
+- Low volatility
+
+如果是美国指数研究：
+
+至少 SPX / SPY，
+
+条件允许可以：
+
+NDX / QQQ
+Russell
+Equal Weight
+
+进行跨资产验证。
+
+不要把一个时代的情绪结构默认推广到所有市场阶段。
+
+---
+
+# 十五、样本外
+
+冻结定义后才能进入样本外。
+
+例如：
+
+1987–2014：
+
+Research / Discovery
+
+2015–2026：
+
+Out-of-sample
+
+禁止：
+
+看到 2015–2026 不好，
+
+再返回重新调整阈值，
+
+然后仍称为 OOS。
+
+如果参数更新，则必须生成新版本并重新记录。
+
+---
+
+# 十六、最终输出格式
+
+每个 Sentiment Factor 必须给一个决策表：
+
+| 项目 | 结论 |
+|---|---|
+| Signal | |
+| Hypothesis | |
+| Prediction target | |
+| Baseline | |
+| Signal result | |
+| Incremental improvement | |
+| Sample size | |
+| Robustness | |
+| Out-of-sample | |
+| Main regime | |
+| Failure regime | |
+| Information overlap | |
+| Research verdict | |
+
+最终 verdict 只能属于：
+
+- Stable predictive information
+- Conditional information
+- Tail-risk information
+- Volatility information
+- Mostly redundant
+- No meaningful incremental information
+- Insufficient evidence
+
+---
+
+# 十七、Strategy Research 最后再做
+
+只有某个情绪因子通过研究以后，才能进一步讨论：
+
+- 是否作为指数加仓信号
+- 是否作为减仓信号
+- 是否作为 Hedge trigger
+- 是否与 DCA 结合
+- 是否调整仓位
+- 是否与技术信号组合
+
+而 Strategy Research 必须至少对比：
+
+1. Buy & Hold
+2. 定期 DCA
+3. Original LEI rule
+4. Research-derived rule
+
+不能因为择时策略回撤下降，就忽略它可能错过的大量上涨。
+
+---
+
+# 十八、当前执行优先级
+
+建议严格按：
+
+S01 Breadth absolute level
+→ S02 Breadth change / recovery
+→ S03 AAII
+→ S04 NAAIM
+→ S05 Put/Call
+→ 单因子增量控制
+→ 两两组合
+→ 原 LEI 情绪共振
+→ VIX / credit / risk-off 等扩展
+
+推进。
+
+---
+
+最终目标不是证明：
+
+“恐慌一定可以买。”
+
+而是建立一张真正的数据地图：
+
+> 哪些情绪状态包含未来信息；
+> 包含什么类型的信息；
+> 信息持续多久；
+> 哪些只是价格变化的结果；
+> 哪些指标其实重复；
+> 什么情况下这些信号会失效。
+
+最后才考虑如何把这些证据装回 LEI。

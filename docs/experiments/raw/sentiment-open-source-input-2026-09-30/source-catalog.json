@@ -1,0 +1,57 @@
+{
+  "checked_at": "2026-09-30T04:54:40.231540+00:00",
+  "sources": [
+    {
+      "id": "boris-public-archive",
+      "url": "https://www.kaggle.com/datasets/borismarjanovic/price-volume-data-for-all-us-stocks-etfs",
+      "local_file": "inputs/boris-stooq-2017.zip",
+      "anonymous_download": "verified",
+      "data_card_license_observed": "CC0: Public Domain",
+      "license_ui_evidence": "Kaggle public data card heading License and CC0 link, browser tab3",
+      "data_card_scope": "Author describes daily US stock/ETF prices; says data last updated 2017-11-10, adjusted for splits/dividends.",
+      "upstream_provider": "Not identified in current data-card text; archive has Stooq-style filenames and columns, format alone is not provenance proof.",
+      "download_bytes": 515591518,
+      "sha256": "d9317c8fb2d63b9b00db5f933b6c9639d2bf7ea3b918169bb5cec5903dce85a1",
+      "usability": "Real old windows found; duplicated directory excluded. Full exited-member coverage and identities unqualified."
+    },
+    {
+      "id": "investing-compiled-width",
+      "urls": [
+        "https://www.investing.com/indices/s-p-500-stocks-above-20-day-average-historical-data",
+        "https://www.investing.com/indices/s-p-500-stocks-above-50-day-average-historical-data"
+      ],
+      "download_status": "Free Chrome login restored; authenticated long B20 query worked; normal Download emitted no confirmed file, full export remains unqualified.",
+      "audit": "compiled-breadth-five-date-audit.json",
+      "open_license": false,
+      "research_qualification": "not_yet_qualified"
+    },
+    {
+      "id": "barchart-history",
+      "url": "https://www.barchart.com/stocks/quotes/%24S5TW/price-history/historical",
+      "method_url": "https://www.barchart.com/education/special-symbols",
+      "prior_primary_search_observation": "Free account: one download daily, two years daily history; longer historical export requires paid plan. No payment made.",
+      "latest_direct_read": "JavaScript/robot verification page; not solved.",
+      "role": "Recent-history candidate, not established free 2008 route"
+    },
+    {
+      "id": "wiki-public-mirror",
+      "url": "https://github.com/kmfranz/trading_pairs",
+      "sample_file": "inputs/wiki-mirror-head.csv",
+      "full_bytes_from_content_range": 235562224,
+      "downloaded_sample_bytes": 65536,
+      "observation": "First ticker A begins 2014-01-02 in sampled head. This does not establish all tickers historical start.",
+      "anonymous_official_export_status": "403 valid API key required",
+      "official_auth_docs": "https://docs.data.nasdaq.com/docs/large-table-download",
+      "role": "Unqualified fallback, no full archive download"
+    },
+    {
+      "id": "previous-open-inputs",
+      "report": "docs/experiments/sentiment-open-source-input-2026-09-30.md",
+      "role": "fja candidate membership, iShares identity snapshots, FNSPID selected actual price rows, Tiingo metadata, Engo login fallback. Prior source attempts at least30 retained."
+    }
+  ],
+  "free_does_not_mean_identity_qualified": true,
+  "paid_actions": 0,
+  "provider_contacts": 0,
+  "pro_calls": 0
+}

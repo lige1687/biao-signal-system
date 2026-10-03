@@ -1,0 +1,38 @@
+{
+  "mission": "Sentiment strategy semantic mining: AAII 20 survey background. Root owns design and experiment.",
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "stop_conditions": [
+    "No production or external-file changes",
+    "No other writers paths",
+    "No new experiments or extra source requests",
+    "Stop on explicit access denial"
+  ],
+  "controller_review": {
+    "required": true,
+    "by": "root"
+  },
+  "task_scope": [
+    "Independently recalculate saved headline scores/counts and12predeclared direct OLS fits; no new parameters or extra fits."
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/protocol.json",
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/definition.json",
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/run-01",
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/qualification.json",
+    "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/inputs"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/independent-review"
+  ],
+  "network_allowed": false,
+  "expected_outputs": [
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/independent-review/review.json",
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/independent-review/verify.py"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  }
+}

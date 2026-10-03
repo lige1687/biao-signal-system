@@ -1,0 +1,84 @@
+{
+  "execution": "completed",
+  "mode": "research",
+  "evidence": "insufficient_evidence",
+  "delivery_mode": "final_only",
+  "question": "sentiment.aaii-risk120-increment@1.0.0",
+  "protocol_sha256": "10610236e4da9e497ee43086d3f5b9845d0c7bc9c9f16018dc15d254d66f8230",
+  "actual_model_fits": 68,
+  "actual_market_batches": 1,
+  "new_network_requests": 0,
+  "new_pro_calls": 0,
+  "budget": {
+    "core_batches_max": 1,
+    "objective_correction_batches_max": 1,
+    "core_fits_max": 68,
+    "objective_correction_fits_max": 68,
+    "total_fits_max": 136,
+    "new_source_requests_max": 0,
+    "pro_calls_max": 0,
+    "wall_minutes_max": 15,
+    "output_bytes_max": 20971520
+  },
+  "attempts": [],
+  "prior_known_fits": {
+    "feasibility": 56,
+    "aaii_return": 504,
+    "putcall": 80
+  },
+  "prior_known_sentiment_pro_calls": 3,
+  "no_budget_reset": true,
+  "source_request_parent": "docs/experiments/raw/sentiment-method-and-source-2026-09-29/research-state.json",
+  "resume": "implement and pass synthetic, root code review then one run; do not refit old studies",
+  "delegations": [
+    {
+      "target": "/root/sentiment_s01_inventory",
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "write": "executor/",
+      "phase": "implement synthetic then real authorization"
+    },
+    {
+      "target": "/root/putcall_source_qualification",
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "write": "validation/",
+      "phase": "independent six-window expectations, no fitting"
+    }
+  ],
+  "phase": "boundedquestion closed with negative/stabilitycounterexamples",
+  "actual_market_batches_started": 1,
+  "code_review": "controller/code-review.json",
+  "synthetic_execution_attempts_known": 3,
+  "synthetic_failures_known": 2,
+  "last_synthetic_fit_calls": 7,
+  "all_synthetic_fit_calls": "unknown; no durable per-call logs for first two failures; not inferred",
+  "actual_failed_market_fits": 0,
+  "core_exit_code": 0,
+  "core_command": "python3 docs/experiments/raw/sentiment-aaii-risk-2026-09-29/executor/analyze.py --run-reviewed",
+  "objective_correction_batches": 0,
+  "primary_provisional_increment_pct": 0.2091584176831307,
+  "report_requires_independent_acceptance": true,
+  "controller_review": "controller/final-review.md",
+  "report": "docs/experiments/sentiment-aaii-risk-increment-2026-09-29.md",
+  "primary_increment_pct": 0.2091584176831196,
+  "primary_interval52_pct": [
+    -1.3350134030203598,
+    2.3449045882790744
+  ],
+  "primary_interval104_pct": [
+    -1.393697259356288,
+    2.2612244969269018
+  ],
+  "root_outcome_review_runs": 2,
+  "independent_numerical_review_runs": 1,
+  "independent_numerical_review_failed_runs": 0,
+  "unresolved": [
+    "historicalfirstreleaseandadjustment",
+    "true historicalSP500breadth originalE",
+    "newindependentrecords",
+    "othermarkets/usagesandaccountproduction"
+  ],
+  "decision": "retain observation for thisfixeduse, pauseparameter/modelsearch; dataqualification next",
+  "completed_at": "2026-09-29T10:31:52.070116+00:00"
+}

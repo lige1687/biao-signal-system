@@ -1,0 +1,73 @@
+{
+  "inputs": [
+    {
+      "path": "docs/experiments/raw/vix-sentiment/data/totalpc.csv",
+      "sha256": "0c49f75637aa83152d28129edb1fb3593d314e0ea7dff1396a39f1a6f2c56030",
+      "bytes": 139830,
+      "encoding": "latin-1",
+      "date_rows": 3253,
+      "start": "2006-11-01",
+      "end": "2019-10-04",
+      "type": "total",
+      "headers": [
+        "Volume and Put/Call Ratio data is compiled for the convenience of site visitors and is furnished without responsibility for accuracy and is accepted by the site visitor on the condition that transmission or omissions shall not be made the basis for any claim demand or cause for action.  Historical index volume from November 1 2006 through May 31 2012 is based on cleared volume as reported by the OCC. The volume data reflected after May 31 2012 below is based upon preliminary reported volume rather than cleared volume. The information and data was obtained from sources believed to be reliable but accuracy is not guaranteed. Your use of Cboe Volume and Put/Call Ratio data is subject to the Terms and Conditions of Cboe Websites.,,,,",
+        ", PRODUCT: TOTAL,,EXCHANGE: Cboe,",
+        "DATE,CALLS,PUTS,TOTAL,P/C Ratio"
+      ]
+    },
+    {
+      "path": "docs/experiments/raw/vix-sentiment/data/equitypc.csv",
+      "sha256": "2e73b05586b558d6763c8ab110edf9ee8bc1989384bd2b568da93dc80aa29349",
+      "bytes": 135696,
+      "encoding": "latin-1",
+      "date_rows": 3253,
+      "start": "2006-11-01",
+      "end": "2019-10-04",
+      "type": "equity",
+      "headers": [
+        "Cboe Volume and Put/Call Ratio data is compiled for the convenience of site visitors and is furnished without responsibility for accuracy and is accepted by the site visitor on the condition that transmission or omissions shall not be made the basis for any claim demand or cause for action.  As of June 11 2012 Equity Volume includes only the volume of equity option products and excludes that of exchange-traded products.  Historical index volume from November 1 2006 through May 31 2012 is based on cleared volume as reported by the OCC. The volume data reflected after May 31 2012 below is based upon preliminary reported volume rather than cleared volume. The information and data was obtained from sources believed to be reliable but accuracy is not guaranteed. Your use of Cboe Volume and Put/Call Ratio data is subject to the Terms and Conditions of Cboe Websites.,,,,",
+        ", PRODUCT: EQUITY,,EXCHANGE: Cboe,",
+        "DATE,CALL,PUT,TOTAL,P/C Ratio"
+      ]
+    },
+    {
+      "path": "docs/experiments/raw/vix-sentiment/data/pcratioarchive.csv",
+      "sha256": "8a8472688b7eb6275adb4b41fe9e370b9c9650287ad552a29abb937b9b6dc9fb",
+      "bytes": 34394,
+      "encoding": "latin-1",
+      "date_rows": 2077,
+      "start": "1995-09-27",
+      "end": "2003-12-31",
+      "type": "total",
+      "headers": [
+        "Cboe Volume and Put/Call Ratio data is provided for informational purposes only. The volume data reflected below may be based upon preliminary reported volume rather than cleared volume. Cboe makes no guarantee as to the accuracy of the data. Your use of Cboe Volume and Put/Call Ratio data is subject to the Terms and Conditions of the Cboe Website.,,,,",
+        "Cboe PUT/CALL RATIO ARCHIVE,,,,",
+        "DATE,TOTAL VOLUME P/C RATIO,INDEX P/C RATIO,EQUITY P/C RATIO,\"Cboe Put/Call Ratio data is compiled for the convenience of site visitors and is furnished without responsibility for accuracy and is accepted by the site visitor on the condition that transmission or omissions shall not be made the basis for any claim, demand or cause for action. The information and data was obtained from sources believed to be reliable, but accuracy is not guaranteed. "
+      ]
+    },
+    {
+      "path": "docs/experiments/raw/vix-sentiment/data/equitypcarchive.csv",
+      "sha256": "0f546fc578b14038ee23e4b63526d5a5c35169330a7d9edda2e267dafbe7b762",
+      "bytes": 84114,
+      "encoding": "latin-1",
+      "date_rows": 2175,
+      "start": "2003-10-17",
+      "end": "2012-06-07",
+      "type": "equity",
+      "headers": [
+        "Cboe Volume and Put/Call Ratio data is provided for informational purposes only. The volume data reflected below may be based upon preliminary reported volume rather than cleared volume. Cboe makes no guarantee as to the accuracy of the data. Your use of Cboe Volume and Put/Call Ratio data is subject to the Terms and Conditions of the Cboe Website.,,,,",
+        "Equity P/C Ratios,,,,",
+        "Date,Equity Call Volume,Equity Put Volume,Equity Total Volume,Equity P/C Ratio"
+      ]
+    }
+  ],
+  "meaning": "Equity and Total retained as different types; no merge or future-label calculation",
+  "structure_break": "equitypc file notes exclusion of exchange-traded products from 2012-06-11; June 2012 reported-volume convention differs; no silent uniform all-history meaning",
+  "availability": "Daily date label, no row-level actual historical arrival or revision vintage proven",
+  "missing_recent": "These four cached files end no later than 2019-10-04; not evidence that all other sources do not exist",
+  "failed_read_attempt": {
+    "kind": "qualification_read",
+    "status": "corrected",
+    "reason": "utf-8 failed on pcratioarchive nonbreaking space; reread explicit latin-1, sources unmodified"
+  }
+}

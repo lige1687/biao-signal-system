@@ -1,0 +1,131 @@
+{
+  "review_id": "sentiment.breadth-provider-retrospective-method@1.0.0",
+  "status": "completed",
+  "mode": "plan_only",
+  "future_outcomes_read": false,
+  "fits_performed": 0,
+  "verdict": "restricted_estimate",
+  "strategy_scope": "体系3.6/实现模块E的供应商宽度序列研究代理；不修改原E、阈值、原文或生产",
+  "adopted_standards": {
+    "question_method": "docs/research/research-question-method-standard.md@1.2.0",
+    "increment": "docs/research/factor-increment-evidence-standard.md@1.1.0"
+  },
+  "admissibility": {
+    "original_E": "blocked: historical membership and price/algorithm definition unqualified",
+    "historically_available_prediction": "blocked: historical release/revision availability unqualified; current file generated after most or all labels",
+    "saved_series_retrospective_association": "allowed: named immutable provider percentages are themselves an observable object; unknown construction limits interpretation, not arithmetic comparison",
+    "independent_validation_C": "not_computed: previously seen SPY history, same research family, revised provider vintage; chronological split does not change this",
+    "extreme_state_models": "describe_only: four dual-low dates in one April 2025 episode and no dual-high dates"
+  },
+  "four_controller_reasons": {
+    "object": "SPY is the bounded US broad-market ETF outcome; current provider-labelled SP500 percentage is the studied input, not certified historical SP500 breadth. No China/global/sector transfer.",
+    "proxy": "B20 preserves the short moving-average participation idea, but omits B50 confirmation, historical membership fidelity, confirmations/entry/exit. Continuous B20 is a separate research proxy, never original E validation.",
+    "method_support": "Controller date-only support is 175 common training rows and 147 evaluation rows after delta20 warmup, versus 195 training without warmup. Five tiny models have at most four parameters. Twenty-interval overlap means only a short run of market environments; restricted exploratory arithmetic is defensible, stable generalization or precise inference is not.",
+    "inference": "Report representation/model-specific retrospective error differences and raw later-price distributions. Even a favorable difference cannot establish real-time availability, unique information beyond all price state, profitable policy or causal effects."
+  },
+  "primary_question": "For this frozen saved provider B20 series, does including its continuous value reduce retrospective 2026 SPY 20-interval return-estimation error beyond the preceding 20-interval SPY return?",
+  "definition": {
+    "X": "local:sentiment.provider-b20-continuous@1.0.0 = saved ma20 percentage_above, percentage points; do not reconstruct from current members or numerator",
+    "B": "local:sentiment.provider-price-r20@1.0.0 = 100*(C[t]/C[t-20]-1)",
+    "Y": "local:sentiment.provider-return20@1.0.0 = 100*(C[t+21]/C[t+1]-1)",
+    "t": "provider date must match an actual SPY quote date exactly; unmatched dates excluded explicitly, never rolled or filled",
+    "price": "frozen existing SPY adjustedClose vintage only, all quote rows retained; do not compress across missing/invalid required prices",
+    "label": "twenty return intervals, twenty-one closes from next actual quote close through twenty quotes later; complete positive finite closes required",
+    "background": "requires full twenty-one close sequence t-20..t; only data through t enter B",
+    "time_semantics": "provider labels are retrospective observation anchors, not known publication timestamps. Next close is a comparison convention, not a claimed implementable delay.",
+    "unit_and_weight": "one source date, one SPY target, equal weight per common eligible date",
+    "D": "local:sentiment.provider-b20-change20@1.0.0 = B20[t]-B20[t-20], percentage points; t-20 refers to original SPY quote calendar, not compressed matched-provider rows; require all B20 values at original quote dates t-20..t, no filling. Separate research proxy; original S02 equivalence not asserted."
+  },
+  "estimation": {
+    "models": {
+      "I": [],
+      "B": [
+        "r20"
+      ],
+      "X": [
+        "b20"
+      ],
+      "BX": [
+        "r20",
+        "b20"
+      ],
+      "BXD": [
+        "r20",
+        "b20",
+        "b20_change20"
+      ]
+    },
+    "fit_boundary": "2026-01-01",
+    "training": "eligible observation date before 2026-01-01 AND complete target endpoint strictly before 2026-01-01",
+    "evaluation": "eligible observation date on/after 2026-01-01 with complete target inside available frozen price history; freeze the exact resulting last date before values are evaluated",
+    "fit_schedule": "one fit per model; no annual refit in 2025, random split, alternate boundary or tuning",
+    "model": "standardize slopes with training mean/population SD; fixed ridge lambda 0.001 minimizing mean squared error plus lambda times squared slopes, unpenalized intercept; I arithmetic training target mean",
+    "max_parameters": 4,
+    "primary": "100*(1-MSE_BX/MSE_B) on same evaluation dates; also absolute paired squared-error difference in squared percentage points",
+    "mandatory_comparators": "show I, B, X, BX, BXD MSE and root MSE on common rows; prominently disclose if B/BX/BXD is worse than I; X alone does not establish increment",
+    "support_record_before_fits": "source dates, matched quote dates, valid inputs, mature labels, boundary exclusions, common train/evaluation, fixed quarter counts, overlapping target spans, and training/evaluation feature ranges; no unsupported effective-sample-number claim",
+    "common_support": "All five models use identical delta20-complete population: controller date-only counts 175 train and 147 evaluation. Do not compare expanded model against baseline trained on 195 dates.",
+    "secondary": "100*(1-MSE_BXD/MSE_BX), with paired absolute squared-error difference and same uncertainty procedure; explicitly secondary and subject to same source/selection limits."
+  },
+  "descriptive_evidence": {
+    "population": "all mature common dates, reported separately from 2026 evaluation dates",
+    "groups": "original dual-low B20<=15 AND B50<=15; original dual-high B20>=85 AND B50>=85; neither. No new threshold or quantile search.",
+    "columns": "source count, mature count, first/last date, contiguous runs plus explanation that April runs share one market episode, mean/median 20-interval change, positive proportion, mean/median future maximum peak-to-trough loss",
+    "downside": "100*max over j of [1-C[j]/max(C[t+1..j])] for j=t+1..t+21; distinct from loss relative to first price; no fitted risk model",
+    "limitations": "four low dates are cases, not four independent reversals; no high dates means not evaluated, never zero return or ineffectiveness. Full-period description is not the fitted evaluation population."
+  },
+  "uncertainty": {
+    "method": "paired noncircular contiguous moving-block resampling of fixed 2026 evaluation prediction rows; models travel together; 2000 draws",
+    "primary_block_rows": 40,
+    "sensitivity_block_rows": 80,
+    "seed": 20261002,
+    "outputs": "2.5 and 97.5 percentiles of paired loss difference and MSE-ratio improvement when denominator positive",
+    "qualification": "conditional descriptive ranges only: short evaluation series has few long blocks; does not include source construction, revisions, model fitting or research-family selection uncertainty. Do not turn interval exclusion of zero into certification. If insufficient eligible blocks, mark interval insufficient without reducing length."
+  },
+  "necessary_counterexamples": [
+    "Report fixed calendar-quarter evaluation results (2026 Q1/Q2/Q3 partial as available), and delete each available quarter from saved predictions without refitting; report unsupported quarters separately.",
+    "Report same-model errors within prior-20-return negative/nonnegative backgrounds and largest five individual dates' paired-error contributions; these are descriptions, not new fitted models or independently sampled dates.",
+    "Repeat the five fixed model fits after removing training rows whose entire target interval intersects 2025-04-01..2025-04-30. Evaluate on exactly the original 2026 dates. This deliberately tests dependence on the one known low-breadth market episode, not whether another cutoff works. Recompute scaling only on the retained training rows for each sensitivity fit; never scale on evaluation rows. Record how much training coverage is removed; constant feature or inadequate remaining calendar support means this check is insufficient, not permission to move the cutoff.",
+    "Carry forward old/current version audit: 186 shared dates, B20 185 changed, B50/B200 all changed; maxima 1.90/1.67/1.68 percentage points, unchanged four low dates. Neither unchanged low classification nor small numerical revisions prove original validity. No version-outcome scan required to answer this bounded object-specific question."
+  ],
+  "predeclared_fit_cost": {
+    "core": 5,
+    "April_episode_sensitivity": 5,
+    "independent_numerical_refits_reserved": 10,
+    "total_expected": 20,
+    "parent_absolute_limit": 24,
+    "new_sources": 0,
+    "pro": 0
+  },
+  "verification": "Independent recomputation of three exact label endpoints, raw group denominators, core loss totals/differences from saved predictions, and independent linear solve/scaling check. Include synthetic missing-day/invalid-price/boundary/constant-feature cases before real fitting. Numerical mismatch is a correction attempt under existing budget, never silent replacement.",
+  "stops": [
+    "Input or frozen protocol hash drift; mismatched common evaluation rows; time endpoints invalid; nonfinite model results; budget limit.",
+    "No switch to 120-day horizon, B50/B200 outcome models, thresholds, years or universes after seeing results.",
+    "Complete this bounded question after core comparison, necessary counterexamples and numerical reconciliation; favorable, unfavorable or uncertain outcomes all may close it.",
+    "If source qualification prevents original E or historical live prediction, close those uses as evidence boundaries while completing the allowed saved-series association. Do not claim the factor family or original E completed."
+  ],
+  "required_parent_actions_before_compute": [
+    "Bind actual strategy-document hashes and exact original quotation/sections from controller's existing reading; this review relied on delegated mapping and did not inspect desktop documents.",
+    "Freeze concrete protocol and complete date-only training/evaluation support artifact; acknowledge all prior family trials and previously seen SPY cache.",
+    "Record fit/batch use cumulatively within controller's existing budget; technical workflow sentiment guard is not a scientific rejection and must not be bypassed by relabelling as technical factor."
+  ],
+  "date_only_support_supplied_by_controller": {
+    "source_rows": 404,
+    "exact_same_day_quote_anchors": 384,
+    "mature_20_interval_labels": 363,
+    "2025_cross_boundary_excluded_from_training": 21,
+    "no_anchor": 20,
+    "anchored_but_immature": 21,
+    "without_delta20": {
+      "train": 195,
+      "evaluation": 147
+    },
+    "common_with_delta20": {
+      "train": 175,
+      "evaluation": 147
+    },
+    "qualification": "Controller reports reading only Date, no outcome values; concrete protocol must bind saved date-only qualification artifact."
+  },
+  "secondary_question": "Does the predeclared 20-quote-interval change in saved B20 reduce retrospective error beyond r20 plus current B20? One secondary contrast, no promotion to primary if primary is unfavorable.",
+  "amendment_before_outcomes": "Controller requested one predeclared S02-related delta20 contrast before any provider outcome values or fits; admitted only as subordinate research proxy, same common population, no extra horizon or threshold."
+}

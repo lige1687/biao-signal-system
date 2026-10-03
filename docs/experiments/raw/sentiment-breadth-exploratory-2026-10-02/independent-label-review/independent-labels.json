@@ -1,0 +1,1697 @@
+{
+  "input_hashes": {
+    "docs/experiments/raw/sentiment-short-history-2026-10-02/inputs/ma_percentage_historical.json": "613fa152ee6cf2820df59f5566eb4601bda2f1c71747b7bda96d8128282011c7",
+    "docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/inputs/px_SPY.csv": "952f397be0ccc5745185b91cce6acc781737c0f30a7a34aa8a230ae892ed5e45"
+  },
+  "source_rows": 404,
+  "all_spy_quote_closes_positive_finite": true,
+  "spy_quote_rows": 8456,
+  "partition_counts": {
+    "unmatched_quote": 20,
+    "unmatured": 21,
+    "insufficient_source_prefix": 20,
+    "boundary_purge": 21,
+    "train": 175,
+    "eval": 147
+  },
+  "common_mature_dates": 343,
+  "common_mature_split": {
+    "train": 175,
+    "eval": 147,
+    "cross_year_purge": 21
+  },
+  "partition_dates": [
+    {
+      "date": "2025-02-24",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-02-25",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-02-26",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-02-27",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-02-28",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-03-03",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-03-04",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-03-05",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-03-06",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-03-07",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-03-10",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-03-11",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-03-12",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-03-13",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-03-14",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-03-17",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-03-18",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-03-19",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-03-20",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-03-21",
+      "partition": "insufficient_source_prefix"
+    },
+    {
+      "date": "2025-03-24",
+      "partition": "train"
+    },
+    {
+      "date": "2025-03-25",
+      "partition": "train"
+    },
+    {
+      "date": "2025-03-26",
+      "partition": "train"
+    },
+    {
+      "date": "2025-03-27",
+      "partition": "train"
+    },
+    {
+      "date": "2025-03-28",
+      "partition": "train"
+    },
+    {
+      "date": "2025-03-31",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-01",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-02",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-03",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-04",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-07",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-08",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-09",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-10",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-11",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-14",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-15",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-16",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-17",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-21",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-22",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-23",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-24",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-25",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-28",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-29",
+      "partition": "train"
+    },
+    {
+      "date": "2025-04-30",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-01",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-02",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-05",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-06",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-07",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-08",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-09",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-12",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-13",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-14",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-15",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-16",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-19",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-20",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-21",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-22",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-23",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-27",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-28",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-29",
+      "partition": "train"
+    },
+    {
+      "date": "2025-05-30",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-02",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-03",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-04",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-05",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-06",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-09",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-10",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-11",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-12",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-13",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-16",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-17",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-18",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-20",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-23",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-24",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-25",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-26",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-27",
+      "partition": "train"
+    },
+    {
+      "date": "2025-06-30",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-01",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-02",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-03",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-07",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-08",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-09",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-10",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-11",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-14",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-15",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-16",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-17",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-18",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-21",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-22",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-23",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-24",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-25",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-28",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-29",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-30",
+      "partition": "train"
+    },
+    {
+      "date": "2025-07-31",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-01",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-04",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-05",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-06",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-07",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-08",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-11",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-12",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-13",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-14",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-15",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-18",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-19",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-20",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-21",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-22",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-25",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-26",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-27",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-28",
+      "partition": "train"
+    },
+    {
+      "date": "2025-08-29",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-02",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-03",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-04",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-05",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-08",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-09",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-10",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-11",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-12",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-15",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-16",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-17",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-18",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-19",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-22",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-23",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-24",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-25",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-26",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-29",
+      "partition": "train"
+    },
+    {
+      "date": "2025-09-30",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-01",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-02",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-03",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-06",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-07",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-08",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-09",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-10",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-13",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-14",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-15",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-16",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-17",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-20",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-21",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-22",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-23",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-24",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-27",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-28",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-29",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-30",
+      "partition": "train"
+    },
+    {
+      "date": "2025-10-31",
+      "partition": "train"
+    },
+    {
+      "date": "2025-11-03",
+      "partition": "train"
+    },
+    {
+      "date": "2025-11-04",
+      "partition": "train"
+    },
+    {
+      "date": "2025-11-05",
+      "partition": "train"
+    },
+    {
+      "date": "2025-11-06",
+      "partition": "train"
+    },
+    {
+      "date": "2025-11-07",
+      "partition": "train"
+    },
+    {
+      "date": "2025-11-10",
+      "partition": "train"
+    },
+    {
+      "date": "2025-11-11",
+      "partition": "train"
+    },
+    {
+      "date": "2025-11-12",
+      "partition": "train"
+    },
+    {
+      "date": "2025-11-13",
+      "partition": "train"
+    },
+    {
+      "date": "2025-11-14",
+      "partition": "train"
+    },
+    {
+      "date": "2025-11-17",
+      "partition": "train"
+    },
+    {
+      "date": "2025-11-18",
+      "partition": "train"
+    },
+    {
+      "date": "2025-11-19",
+      "partition": "train"
+    },
+    {
+      "date": "2025-11-20",
+      "partition": "train"
+    },
+    {
+      "date": "2025-11-21",
+      "partition": "train"
+    },
+    {
+      "date": "2025-11-24",
+      "partition": "train"
+    },
+    {
+      "date": "2025-11-25",
+      "partition": "train"
+    },
+    {
+      "date": "2025-11-26",
+      "partition": "train"
+    },
+    {
+      "date": "2025-11-28",
+      "partition": "train"
+    },
+    {
+      "date": "2025-12-01",
+      "partition": "train"
+    },
+    {
+      "date": "2025-12-02",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-03",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-04",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-05",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-08",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-09",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-10",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-11",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-12",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-15",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-16",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-17",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-18",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-19",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-22",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-23",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-24",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-26",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-29",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-30",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2025-12-31",
+      "partition": "boundary_purge"
+    },
+    {
+      "date": "2026-01-02",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-01-05",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-01-06",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-01-07",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-01-08",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-01-09",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-01-12",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-01-13",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-01-14",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-01-15",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-01-16",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-01-20",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-01-21",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-01-22",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-01-23",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-01-26",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-01-27",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-01-28",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-01-29",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-01-30",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-02-02",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-02-03",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-02-04",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-02-05",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-02-06",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-02-09",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-02-10",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-02-11",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-02-12",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-02-13",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-02-17",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-02-18",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-02-19",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-02-20",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-02-23",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-02-24",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-02-25",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-02-26",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-02-27",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-02",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-03",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-04",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-05",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-06",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-09",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-10",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-11",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-12",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-13",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-16",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-17",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-18",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-19",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-20",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-23",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-24",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-25",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-26",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-27",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-30",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-03-31",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-01",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-02",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-06",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-07",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-08",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-09",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-10",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-13",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-14",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-15",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-16",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-17",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-20",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-21",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-22",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-23",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-24",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-27",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-28",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-29",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-04-30",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-01",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-04",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-05",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-06",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-07",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-08",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-11",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-12",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-13",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-14",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-15",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-18",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-19",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-20",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-21",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-22",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-26",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-27",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-28",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-05-29",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-01",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-02",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-03",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-04",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-05",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-08",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-09",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-10",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-11",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-12",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-15",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-16",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-17",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-18",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-22",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-23",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-24",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-25",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-26",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-29",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-06-30",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-01",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-02",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-06",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-07",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-08",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-09",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-10",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-13",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-14",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-15",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-16",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-17",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-20",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-21",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-22",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-23",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-24",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-27",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-28",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-29",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-30",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-07-31",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-08-03",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-08-04",
+      "partition": "eval"
+    },
+    {
+      "date": "2026-08-05",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-08-06",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-08-07",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-08-10",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-08-11",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-08-12",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-08-13",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-08-14",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-08-17",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-08-18",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-08-19",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-08-20",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-08-21",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-08-24",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-08-25",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-08-26",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-08-27",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-08-28",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-08-31",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-09-01",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-09-02",
+      "partition": "unmatured"
+    },
+    {
+      "date": "2026-09-03",
+      "partition": "unmatched_quote"
+    },
+    {
+      "date": "2026-09-04",
+      "partition": "unmatched_quote"
+    },
+    {
+      "date": "2026-09-08",
+      "partition": "unmatched_quote"
+    },
+    {
+      "date": "2026-09-09",
+      "partition": "unmatched_quote"
+    },
+    {
+      "date": "2026-09-10",
+      "partition": "unmatched_quote"
+    },
+    {
+      "date": "2026-09-11",
+      "partition": "unmatched_quote"
+    },
+    {
+      "date": "2026-09-14",
+      "partition": "unmatched_quote"
+    },
+    {
+      "date": "2026-09-15",
+      "partition": "unmatched_quote"
+    },
+    {
+      "date": "2026-09-16",
+      "partition": "unmatched_quote"
+    },
+    {
+      "date": "2026-09-17",
+      "partition": "unmatched_quote"
+    },
+    {
+      "date": "2026-09-18",
+      "partition": "unmatched_quote"
+    },
+    {
+      "date": "2026-09-21",
+      "partition": "unmatched_quote"
+    },
+    {
+      "date": "2026-09-22",
+      "partition": "unmatched_quote"
+    },
+    {
+      "date": "2026-09-23",
+      "partition": "unmatched_quote"
+    },
+    {
+      "date": "2026-09-24",
+      "partition": "unmatched_quote"
+    },
+    {
+      "date": "2026-09-25",
+      "partition": "unmatched_quote"
+    },
+    {
+      "date": "2026-09-28",
+      "partition": "unmatched_quote"
+    },
+    {
+      "date": "2026-09-29",
+      "partition": "unmatched_quote"
+    },
+    {
+      "date": "2026-09-30",
+      "partition": "unmatched_quote"
+    },
+    {
+      "date": "2026-10-01",
+      "partition": "unmatched_quote"
+    }
+  ],
+  "oracle_labels": [
+    {
+      "anchor_date": "2025-04-07",
+      "prior_price_endpoint_date_t_minus_20": "2025-03-10",
+      "target_start_date_t_plus_1": "2025-04-08",
+      "target_end_date_t_plus_21": "2025-05-07",
+      "close_t_minus_20": 551.14453125,
+      "close_t": 497.3821716308594,
+      "r20_percent": -9.75467532939267,
+      "b20_percentage_points": 2.39,
+      "b20_t_minus_20_percentage_points": 38.25,
+      "delta20_percentage_points": -35.86,
+      "target20_return_percent": 13.025694471931427,
+      "max_future_peak_to_trough_decline_percent": 6.332265027896355,
+      "max_decline_date": "2025-04-21",
+      "future_first_close": 489.5918273925781,
+      "future_last_close": 553.3645629882812,
+      "future_close_count": 21
+    },
+    {
+      "anchor_date": "2026-01-02",
+      "prior_price_endpoint_date_t_minus_20": "2025-12-03",
+      "target_start_date_t_plus_1": "2026-01-05",
+      "target_end_date_t_plus_21": "2026-02-03",
+      "close_t_minus_20": 678.2706298828125,
+      "close_t": 679.55859375,
+      "r20_percent": 0.1898893760754472,
+      "b20_percentage_points": 57.46,
+      "b20_t_minus_20_percentage_points": 68.39,
+      "delta20_percentage_points": -10.93,
+      "target20_return_percent": 0.26319496868363323,
+      "max_future_peak_to_trough_decline_percent": 2.5289130990863162,
+      "max_decline_date": "2026-01-20",
+      "future_first_close": 684.0845336914062,
+      "future_last_close": 685.885009765625,
+      "future_close_count": 21
+    },
+    {
+      "anchor_date": "2026-08-04",
+      "prior_price_endpoint_date_t_minus_20": "2026-07-07",
+      "target_start_date_t_plus_1": "2026-08-05",
+      "target_end_date_t_plus_21": "2026-09-02",
+      "close_t_minus_20": 747.7100219726562,
+      "close_t": 771.3300170898438,
+      "r20_percent": 3.158978002578028,
+      "b20_percentage_points": 67.4,
+      "b20_t_minus_20_percentage_points": 66.8,
+      "delta20_percentage_points": 0.6000000000000085,
+      "target20_return_percent": -0.6014633880629727,
+      "max_future_peak_to_trough_decline_percent": 2.069724827078301,
+      "max_decline_date": "2026-09-01",
+      "future_first_close": 769.7899780273438,
+      "future_last_close": 765.1599731445312,
+      "future_close_count": 21
+    }
+  ]
+}

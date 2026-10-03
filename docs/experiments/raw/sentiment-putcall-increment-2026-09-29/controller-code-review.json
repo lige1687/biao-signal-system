@@ -1,0 +1,24 @@
+{
+  "accepted": true,
+  "reviewed_at": "2026-09-29T08:56:26.613689+00:00",
+  "code_sha256": "f2f26f38ba2d0a4eaee280f995298967f878deed333cf882e3bf6475ee8f5239",
+  "synthetic_checks": 55,
+  "independent_expectations": "Controller separately reconstructed raw normalization and reviewed full target/time/train/feature/metric/block path; independent stdlib future-label and all-fit verifier prepared before outcomes",
+  "pre_run_market_batches": 0,
+  "scope": "8 predeclared models, 2 predeclared targets, annual matured fitting 2015—2019, maximum80fits, one unique batch",
+  "confirmed": [
+    "reported Equity/Total ratios kept separately; strict original Equity>1",
+    "t=source actual quote index+2; labels t+1 to t+21",
+    "future risk peak restricted to that future window",
+    "all price controls at or before t; standardized training only",
+    "train t and label_end before evaluation Jan1",
+    "shared common population; optional rare branch missing remains missing",
+    "negative risk predictions kept and exposed",
+    "2000 shared126row draws with saved starts; primary risk comparisons fixed",
+    "complete annual/band/delete-year/delete-extreme diagnostics",
+    "no combined E+T, threshold tuning, source network or production write"
+  ],
+  "source_review": "controller-qualification-review.json",
+  "binding_note": "Shared definitions.v1.json changed by another line; no global consumers/objects called, actual change recorded by manifest; local protocol and all inputs/strategy docs remain same",
+  "approved_command": "python3 docs/experiments/raw/sentiment-putcall-increment-2026-09-29/executor/analyze.py --run-reviewed"
+}

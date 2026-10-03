@@ -1,0 +1,112 @@
+{
+  "scope": "Local-only audit of AAII 20-survey arithmetic mean and prior-research inventory; no model fits",
+  "strategy_sources": {
+    "system": {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "excerpt_location": "lines 269-279",
+      "excerpt": "AAII 散户情绪 | 每周问卷调查；改造成「看涨 − 総跌 + 20 周均线」 | 极度看空（约 −25%） | 极度看多（约 +25%）"
+    },
+    "implementation": {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21b7a1531eda59edcbf0aab903",
+      "excerpt_location": "lines 606-653",
+      "finding": "AAII spread is a weekly confirmation input at <= -25 and >= +25 percentage points; breadth remains primary. No rolling-mean edge or missing-week rule specified."
+    },
+    "fingerprints_match_config": true
+  },
+  "input": {
+    "path": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/inputs/aaii-candidate-values.csv",
+    "rows": 2038,
+    "first_date": "1987-07-24",
+    "last_date": "2026-08-27",
+    "unique_dates": 2038,
+    "duplicate_dates": 0,
+    "spread_unit": "percentage points",
+    "formula": "arithmetic mean of current and prior 19 observed survey spread_pp values, inclusive",
+    "initial_blank_ma_rows": 19,
+    "recomputed_ma_values": 2019,
+    "provided_ma_values": 2019,
+    "maximum_absolute_difference": 7.105427357601002e-15,
+    "mismatch_count_tolerance_1e-9": 0,
+    "adjacent_gap_days": {
+      "5": 6,
+      "6": 29,
+      "7": 1965,
+      "8": 28,
+      "9": 6,
+      "14": 3
+    },
+    "non_seven_day_gaps": 72,
+    "note": "Survey dates do not form a fixed weekday calendar; gaps are described without treating a Friday grid as a missing-data oracle.",
+    "examples": [
+      {
+        "ma_date": "1987-12-04",
+        "source_start_date": "1987-07-24",
+        "source_end_date": "1987-12-04",
+        "spread_sum_pp": 351.0,
+        "divisor": 20,
+        "recomputed_ma_pp": 17.55,
+        "stored_ma_pp": 17.55
+      },
+      {
+        "ma_date": "2007-02-08",
+        "source_start_date": "2006-09-28",
+        "source_end_date": "2007-02-08",
+        "spread_sum_pp": 212.52000000000004,
+        "divisor": 20,
+        "recomputed_ma_pp": 10.626000000000001,
+        "stored_ma_pp": 10.626000000000001
+      },
+      {
+        "ma_date": "2026-08-27",
+        "source_start_date": "2026-04-16",
+        "source_end_date": "2026-08-27",
+        "spread_sum_pp": -66.83700000000002,
+        "divisor": 20,
+        "recomputed_ma_pp": -3.341850000000001,
+        "stored_ma_pp": -3.34185
+      }
+    ]
+  },
+  "inventory": {
+    "aaii_20_week_mean_already_evaluated": false,
+    "evidence": [
+      {
+        "path": "docs/research/sentiment-factor-library/registry.json",
+        "location": "S03 entry, lines 137 onward",
+        "finding": "20-week background remains unevaluated; completed scope identifies five return horizons and 120-quote-interval drawdown."
+      },
+      {
+        "path": "docs/research/sentiment-factor-library/research-cards.md",
+        "location": "line 25",
+        "finding": "20-week line, persistence, and recovery remain pending."
+      },
+      {
+        "path": "docs/experiments/sentiment-aaii-extremes-increment-2026-09-29.md",
+        "location": "line 76",
+        "finding": "20-week mean line listed as not tested."
+      }
+    ],
+    "semantic_mining": {
+      "contract_named_report_path_exists": false,
+      "existing_report": "docs/experiments/semantic-structure-forecast-artifact-2026-10-02.md",
+      "existing_raw_directory": "docs/experiments/raw/semantic-mining-2026-10-02/",
+      "reviewed_definition": "research.trend.slope_change60_20@1.0.0",
+      "finding": "Existing semantic-mining work covers ETF price-trend slope/invalidation semantics, not AAII. No duplicated AAII 20-week evaluation found."
+    }
+  },
+  "limitations": [
+    "Historical first-publication time and source revisions are not established by this local arithmetic audit.",
+    "The original documents do not define rolling-mean edge treatment or how survey date gaps should be handled.",
+    "No predictive value, risk benefit, or trading value was evaluated."
+  ],
+  "execution": {
+    "network": false,
+    "model_fits": 0,
+    "written_paths": [
+      "docs/experiments/raw/sentiment-aaii-background-2026-10-02/local-audit/review.json",
+      "docs/experiments/raw/sentiment-aaii-background-2026-10-02/local-audit/review.md"
+    ]
+  }
+}

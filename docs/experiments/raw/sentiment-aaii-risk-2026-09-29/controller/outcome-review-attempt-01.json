@@ -1,0 +1,10 @@
+{
+  "attempt": 1,
+  "exit_code": 1,
+  "error": "source_row equality assertion",
+  "cause": "independent CSV physical row starts at2 including header, executor source_row is zero-based data index; all six source dates/endpoints/targets match",
+  "review_code_sha256": "a8eddc9dc549e2f9ac1684d47a25f4487c825914efb351d3928cf94dac49be3c",
+  "market_fits_added": 0,
+  "experiment_results_changed": false,
+  "correction": "compare executor source_row+2 to independent CSV physical line, also verify original source_date"
+}

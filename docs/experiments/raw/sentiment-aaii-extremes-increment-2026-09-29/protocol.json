@@ -1,0 +1,130 @@
+{
+  "id": "sentiment.aaii-extremes-increment@1.0.0",
+  "frozen_at": "2026-09-29T08:14:07.872410+00:00",
+  "question": "AAII连续多空差和原阈值之外的极端强度，是否在已有涨跌、趋势、当前跌幅、波动之外，改善SPY未来涨幅的估计？",
+  "authorization": "用户2026-09-29明确继续下一轮情绪因子增量研究；旧四次尝试保留，新有界问题不复跑旧实验",
+  "strategy_layer": "原模块E调查确认项的独立信息研究；不评价完整E，不增加技术规则或生产输入",
+  "primary_horizon": 120,
+  "horizons": [
+    5,
+    20,
+    60,
+    120,
+    252
+  ],
+  "objects": {
+    "x": "candidate:sentiment.aaii-spread@draft-1 = 100*(bullish-bearish), survey percentage points",
+    "lo": "local:sentiment.aaii-low-excess@1.0.0 = max(-25-x,0)",
+    "hi": "local:sentiment.aaii-high-excess@1.0.0 = max(x-25,0)",
+    "original_LEI_threshold": [
+      -25,
+      25
+    ],
+    "threshold_selection": "original, no tuning"
+  },
+  "inputs": {
+    "survey": "inputs/aaii-candidate-values.csv",
+    "price": "inputs/px_SPY.csv",
+    "price_basis": "same old cache adjusted Close; historical adjustment vintages not proven; not actual execution price"
+  },
+  "range": [
+    "1995-01-01",
+    "2026-06-30"
+  ],
+  "initial_training": [
+    "1995-01-01",
+    "2009-12-31"
+  ],
+  "evaluation": [
+    "2010-01-01",
+    "2026-06-30"
+  ],
+  "time": "source date+7 calendar days local 23:59, then first quote strictly after assumed date t; actual historical first release/revision unknown; one row per survey, no forward fill",
+  "baseline": [
+    "r20=100*(C_t/C_(t-20)-1)",
+    "r63=100*(C_t/C_(t-63)-1)",
+    "dma200=100*(C_t/mean(C_(t-199)..C_t)-1)",
+    "dd252=100*(C_t/max(C_(t-251)..C_t)-1)",
+    "rv20=100*std(last20 daily returns,ddof=1)*sqrt(20)"
+  ],
+  "target": "local:sentiment.forward-h@1.0.0 = 100*(C_(t+1+h)/C_(t+1)-1), h returns h+1 closes; both ends <=2026-06-30; no shortening",
+  "models": {
+    "I": [],
+    "X": [
+      "x"
+    ],
+    "XE": [
+      "x",
+      "lo",
+      "hi"
+    ],
+    "B": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20"
+    ],
+    "BX": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20",
+      "x"
+    ],
+    "BXE": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20",
+      "x",
+      "lo",
+      "hi"
+    ]
+  },
+  "estimation": "OLS with intercept, scaling only training mean and std ddof0; expanding annual fits 2010..2026, train only t and target_end strictly before Jan1. min train100, nonzero scales/full rank required; no clipping outcomes or fitted predictions, no direction flip or regularization search",
+  "primary_metric": "100*(1-MSE(BXE)/MSE(B)); positive indicates less estimation error, not investment return. Also BX versus B and BXE versus BX to isolate extreme representation contribution. All models same eligible dates within horizon",
+  "raw_behavior": "evaluation only group x<=-25, -25<x<25, x>=25; counts, contiguous survey runs (break if gap>14days), mean and median future return and up share; raw group differences not incremental evidence",
+  "uncertainty": "paired moving contiguous blocks of52 survey rows (about1yr), 2000 draws, seed20260929+h; same indices for all models; save all draws and2.5/97.5 percentiles. Boundaries discontinuous years and long-range dependence remain limitations. Draws do not refit models, not full model uncertainty",
+  "stability": "all annual scores, chronological bands2010-2014/2015-2019/2020-2026H1, remove each eval year without refit; x<=-25/neutral/x>=25 group errors; remove entire low or high group contribution diagnostics without refit; all comparisons not selecting best",
+  "coverage": "models use per-horizon common finite x/B/y population; duplicates t keep latest source; explicit exclude codes; no missing-date compression; must report adjacent target overlap",
+  "selection_history": "old family already studied and whole cache already seen; longer data, extra price controls and nonlinear original thresholds are new exploratory branch, not independent confirmation; all5 horizons reported, primary120 fixed before results",
+  "budget": {
+    "core_batches": 1,
+    "followup_batches_max": 3,
+    "market_attempts_max": 4,
+    "fits_core_max": 510,
+    "source_requests_max": 0,
+    "pro_calls_max": 0,
+    "new_output_bytes_max": 20971520
+  },
+  "stop": [
+    "frozen source drift",
+    "any future in training",
+    "rank deficient or missing signal meaning",
+    "budget exceeded"
+  ],
+  "not_evaluated": [
+    "breadth/NAAIM/PutCall/combination",
+    "future volatility or downside predictor",
+    "actual account return and costs",
+    "new independent evidence"
+  ],
+  "output": "new executor/run-01 only; refuse overwriting any previous run",
+  "adopted_standards": [
+    "AGENTS.md",
+    "configs/strategy-documents.v1.json",
+    "configs/rules.v1.yaml",
+    "docs/research/experiment-backtest-principles.md",
+    "docs/research/ai-execution-contract.md",
+    "docs/research/definition-standard.md",
+    "docs/research/experiment-report-template.md",
+    "docs/research/research-question-method-standard.md",
+    "docs/research/factor-increment-evidence-standard.md",
+    "docs/research/definitions.v1.json",
+    "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/strategy-source/LEI 技术交易体系.md",
+    "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/strategy-source/LEI 技术实现.md"
+  ]
+}

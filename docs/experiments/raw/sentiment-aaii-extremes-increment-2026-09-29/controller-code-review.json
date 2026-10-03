@@ -1,0 +1,24 @@
+{
+  "reviewed_at": "2026-09-29T08:22:36.009120+00:00",
+  "code_sha256": "b083ee1e817c70656f2643f97a216b288a5d0e3a7d424c08988c2e880d26bd9d",
+  "accepted_for_one_run": true,
+  "checks": [
+    "x from original survey fractions, no MA20 or outcome used",
+    "original±25 hinge threshold fixed",
+    "all five price controls at t, no forward fill",
+    "future labels t+1..t+1+h, full end cutoff",
+    "training labels mature strictly before Jan1, test rows same for allmodels",
+    "zero scale/rank failure stops; no partial rank fallback",
+    "52-row paired blocks preserve same error indices and saves starts",
+    "all predeclared horizons, years, groups, leave-year/group diagnostics preserved",
+    "empty year skips fits, never labels zero",
+    "no real source/script output overwrite; one invocation"
+  ],
+  "semantic_limits": [
+    "local candidates only, not global registered runtime calls",
+    "hypothetical source availability and price vintages limit real predictive use",
+    "global authority drift recorded separately; two approved desktop hashes independently checked at input audit"
+  ],
+  "executor_synthetic_checks": 41,
+  "required_revisions": []
+}

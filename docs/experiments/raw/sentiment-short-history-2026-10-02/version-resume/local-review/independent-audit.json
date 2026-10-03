@@ -1,0 +1,193 @@
+{
+  "task": "Independent local arithmetic and calendar-coverage audit; no fits or outcome values",
+  "input_sha256": "613fa152ee6cf2820df59f5566eb4601bda2f1c71747b7bda96d8128282011c7",
+  "expected_input_sha256": "613fa152ee6cf2820df59f5566eb4601bda2f1c71747b7bda96d8128282011c7",
+  "hash_match": true,
+  "input_rows": 404,
+  "date_unique_count": 404,
+  "dates_sorted_non_decreasing": true,
+  "first_source_date": "2025-02-24",
+  "last_source_date": "2026-10-01",
+  "profile_rows_match": true,
+  "profile_date_bounds_match": true,
+  "window_arithmetic": {
+    "20": {
+      "nonnull_rows": 404,
+      "count_min": 11,
+      "count_max": 451,
+      "unique_denominator_distribution": {
+        "502": 178,
+        "503": 224,
+        "ambiguous": 2
+      },
+      "ambiguous_rows": 2,
+      "no_compatible_denominator_rows": 0,
+      "all_rows_exactly_one_denominator": false,
+      "percentage_min": 2.19,
+      "percentage_max": 89.84
+    },
+    "50": {
+      "nonnull_rows": 404,
+      "count_min": 29,
+      "count_max": 415,
+      "unique_denominator_distribution": {
+        "502": 180,
+        "503": 224
+      },
+      "ambiguous_rows": 0,
+      "no_compatible_denominator_rows": 0,
+      "all_rows_exactly_one_denominator": true,
+      "percentage_min": 5.78,
+      "percentage_max": 82.67
+    },
+    "200": {
+      "nonnull_rows": 404,
+      "count_min": 93,
+      "count_max": 363,
+      "unique_denominator_distribution": {
+        "502": 180,
+        "503": 224
+      },
+      "ambiguous_rows": 0,
+      "no_compatible_denominator_rows": 0,
+      "all_rows_exactly_one_denominator": true,
+      "percentage_min": 18.53,
+      "percentage_max": 72.31
+    }
+  },
+  "common_rowwise_implied_denominator_distribution": {
+    "502": 180,
+    "503": 224
+  },
+  "common_denominator_candidate_range": [
+    1,
+    1000
+  ],
+  "dual_low_definition": "MA20 <= 15% and MA50 <= 15%, matching saved profile threshold",
+  "dual_low_row_count": 4,
+  "dual_low_cluster_count": 2,
+  "dual_low_clusters": [
+    {
+      "n": 3,
+      "first_date": "2025-04-04",
+      "last_date": "2025-04-08",
+      "row_indices_1based": [
+        30,
+        32
+      ],
+      "calendar_day_span": 4
+    },
+    {
+      "n": 1,
+      "first_date": "2025-04-10",
+      "last_date": "2025-04-10",
+      "row_indices_1based": [
+        34,
+        34
+      ],
+      "calendar_day_span": 0
+    }
+  ],
+  "dual_low_rows": [
+    {
+      "date": "2025-04-04",
+      "ma20_pct": 5.78,
+      "ma50_pct": 11.55,
+      "row_index_1based": 30
+    },
+    {
+      "date": "2025-04-07",
+      "ma20_pct": 2.39,
+      "ma50_pct": 6.97,
+      "row_index_1based": 31
+    },
+    {
+      "date": "2025-04-08",
+      "ma20_pct": 2.19,
+      "ma50_pct": 5.78,
+      "row_index_1based": 32
+    },
+    {
+      "date": "2025-04-10",
+      "ma20_pct": 10.16,
+      "ma50_pct": 14.34,
+      "row_index_1based": 34
+    }
+  ],
+  "spy_calendar": {
+    "date_only_used": true,
+    "row_count": 8456,
+    "unique_dates": 8456,
+    "sorted": true,
+    "first_date": "1993-01-29",
+    "last_date": "2026-09-02"
+  },
+  "outcome_label_coverage_only": {
+    "rule": "t=first SPY quote date strictly after source date; start=t+1 quote; end=t+1+h quotes; matured only if end quote date exists",
+    "horizons": {
+      "20": {
+        "h_quote_intervals": 20,
+        "rows_with_t_quote": 383,
+        "matured_endpoint_covered_rows": 362,
+        "eligible_but_endpoint_not_covered_rows": 21,
+        "no_strictly_later_t_quote_rows": 21,
+        "first_matured_source_date": "2025-02-24",
+        "last_matured_source_date": "2026-08-03"
+      },
+      "120": {
+        "h_quote_intervals": 120,
+        "rows_with_t_quote": 383,
+        "matured_endpoint_covered_rows": 262,
+        "eligible_but_endpoint_not_covered_rows": 121,
+        "no_strictly_later_t_quote_rows": 21,
+        "first_matured_source_date": "2025-02-24",
+        "last_matured_source_date": "2026-03-10"
+      }
+    },
+    "outcomes_or_returns_read_or_computed": false
+  },
+  "limitations": [
+    "The current two-year generated sequence does not establish which members were in the S&P 500 at each historical date.",
+    "Completeness of the supplied SPY quote calendar remains unverified.",
+    "This audit infers arithmetic denominators from counts and displayed percentages; it does not establish the provider methodology or original publication timing."
+  ],
+  "single_window_ambiguous_rows_resolved_by_other_windows": [
+    {
+      "date": "2025-04-07",
+      "candidate_denominators_by_window": {
+        "20": [
+          502,
+          503
+        ],
+        "50": [
+          502
+        ],
+        "200": [
+          502
+        ]
+      },
+      "joint_candidates": [
+        502
+      ]
+    },
+    {
+      "date": "2025-04-08",
+      "candidate_denominators_by_window": {
+        "20": [
+          502,
+          503
+        ],
+        "50": [
+          502
+        ],
+        "200": [
+          502
+        ]
+      },
+      "joint_candidates": [
+        502
+      ]
+    }
+  ],
+  "profile_denominator_summary_matches_independent_common_result": true
+}

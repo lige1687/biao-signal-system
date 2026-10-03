@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "review_role": "same controller different calculation; no external reviewer",
+  "evaluation_rows": 78,
+  "source_rows": 131,
+  "mse_pp2": {
+    "I": 21.811229879114446,
+    "B": 23.540312865451792,
+    "X": 19.82803870266627,
+    "BX": 19.92355455374425
+  },
+  "increment_pct": 15.36410468450301,
+  "price_label_checks": [
+    {
+      "source_date": "2024-07-03",
+      "target_start": "2024-07-08",
+      "target_end": "2024-08-05",
+      "return_pp": -6.825391020797622,
+      "fall_pp": 8.405618936617676
+    },
+    {
+      "source_date": "2025-04-16",
+      "target_start": "2025-04-21",
+      "target_end": "2025-05-19",
+      "return_pp": 15.75659304211725,
+      "fall_pp": 1.4044722032839907
+    },
+    {
+      "source_date": "2026-06-24",
+      "target_start": "2026-06-26",
+      "target_end": "2026-07-27",
+      "return_pp": 1.3854835808988941,
+      "fall_pp": 2.221341712708147
+    }
+  ],
+  "review_refits": 8,
+  "max_beta_difference": 1.3322676295501878e-15,
+  "group_counts": {
+    "low40": 1,
+    "high100": 6,
+    "middle": 124
+  },
+  "artifact_sha256": {
+    "run-01/all-observations.csv": "93650baa1fdce14e5b5bee614d6417449c24c8e51fd7ec625ac32106aa0978ba",
+    "run-01/all-original-extreme-cases.csv": "f27d8462f73ed00062a760289888572557a9d7fc7c329c2654af4317f99dd980",
+    "run-01/predictions.csv": "8bae2dfd701b04afb422c4abd4bd066090c40eafec863518d6a8fcce303e942d",
+    "run-01/results.json": "179358653bc4e1caceceb903c55fe6f504da3d05fc7ee6c97968d92fe187c6c9",
+    "run-01/largest-five-contributions.csv": "111152ed0f7e7bc8e7475b7c283c639ed8af0025d7a6682a45bdfdbaa158d5f0",
+    "run-01/exclusions.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "run-01/uncertainty-8.csv": "1f563eec8d7f428efcede621f6921d43b67e36c6a6e43d2951199860b848c031",
+    "run-01/uncertainty-16.csv": "1f8a0022c814c1eecbe0621bb52b62cffa3f7f6a05e4890477303973d163e04c",
+    "run-01/fits.json": "494548f85188da14488b2640fe1ff65164fba1aff3955447d2eb83c3e9ab9243"
+  },
+  "limits": "Numeric agreement does not validate first publication, causal effect, future robustness or real trades."
+}

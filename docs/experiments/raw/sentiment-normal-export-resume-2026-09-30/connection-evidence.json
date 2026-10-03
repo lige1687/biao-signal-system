@@ -1,0 +1,28 @@
+{
+  "observed_at": "2026-09-30T07:59:42.534907+00:00",
+  "method": "cua.getState() supported read-only inventory; one call",
+  "wall_seconds": 21.4865,
+  "relevant_inventory": {
+    "native_google_chrome_is_running": true,
+    "original_browser_id": "1",
+    "original_browser_family": "chrome",
+    "original_browser_type": "extension",
+    "original_browser_tabs_returned": [],
+    "in_app_browser_id": "2",
+    "in_app_tabs_returned": 2
+  },
+  "error": "Browser 1: Error: Unable to load browser request-header policy. Retry the browser command.",
+  "terminal_error": "Error: Unable to load browser request-header policy. Retry the browser command.",
+  "interpretation": "OriginalChrome tab access did not succeed. Empty tablist under error is not evidence that original tabs closed. IAB inventory success does not prove originalChrome recovered.",
+  "classification": "BROWSER_POLICY_LOAD_FAILURE",
+  "is_new_site_permission_denial": false,
+  "site_access_not_tested": true,
+  "no_retry": true,
+  "no_repair_pairing_or_alternate_channel": true,
+  "prior_failures_retained": [
+    "chrome://downloads URLprotocolrejection",
+    "normaldownload45secondunconfirmed",
+    "DOMread30secondtimeout",
+    "knownChromeTabreconnect30secondtimeout"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "mission": "Independent numerical oracle for three frozen20interval labels plus common-date support",
+  "task_scope": [
+    "From rawfrozen CSV/JSON manually recompute labels for2025-04-07,2026-01-02,2026-08-04; exactquoteendpoints,r20,b20,delta20,future20return,maxpeak-to-troughloss",
+    "Independently count common175train/147eval/343mature dates with full21SPYdateB20prefix andpositivepricewindows; keep exclusions",
+    "No model fitting or alternate parameter choices; protocol already frozen before outcomes"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "docs/experiments/raw/sentiment-breadth-exploratory-2026-10-02/protocol.json",
+    "docs/experiments/raw/sentiment-breadth-exploratory-2026-10-02/qualification.json",
+    "docs/experiments/raw/sentiment-short-history-2026-10-02/inputs/ma_percentage_historical.json",
+    "docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/inputs/px_SPY.csv"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/sentiment-breadth-exploratory-2026-10-02/independent-label-review"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "independent-labels.json",
+    "independent-check.py",
+    "review.md"
+  ],
+  "stop_conditions": [
+    "input hash drift",
+    "no outcome-driven definition/model/budget change",
+    "no reading executor implementation/results for oracle"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "fits_max": 0,
+  "time_minutes_max": 5
+}

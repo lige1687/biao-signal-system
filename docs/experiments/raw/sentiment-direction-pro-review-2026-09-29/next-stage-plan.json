@@ -1,0 +1,89 @@
+{
+  "kind": "bounded_next_stage_plan_not_executed",
+  "updated_at": "2026-09-29T09:40:31.402732+00:00",
+  "owner": "sentiment_agent",
+  "authority": "Existing global definitions, current adopted standards and original frozen units unchanged",
+  "prior_family_attempts_preserved": true,
+  "new_pro_budget": 0,
+  "tasks": [
+    {
+      "priority": 1,
+      "id": "sentiment-method-diagnostic",
+      "question": "Why do saved price-background and combined estimates often lose to the mature historical mean?",
+      "dependencies": [],
+      "sources": [
+        "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/executor/run-01/",
+        "docs/experiments/raw/sentiment-putcall-increment-2026-09-29/executor/run-01/"
+      ],
+      "actions": [
+        "Compare mean/background/background-plus on identical dates and year periods",
+        "Check existing label endpoints, maturity and training-only scaling from actual records/code; do not re-fit",
+        "Inspect coefficient/design conditioning and training/evaluation shifts, contributions and negative risk outputs",
+        "Separate proven implementation faults, descriptive distribution changes and untested explanations"
+      ],
+      "budget": {
+        "diagnostic_attempts": 1,
+        "new_model_fits": 0,
+        "new_source_requests": 0
+      },
+      "output": "new dated report and raw diagnostic records; no old run overwrite",
+      "close": "Traceable findings and unresolved items; negative or inconclusive permitted; propose at most one revised nonnegative estimator before task3 targets are newly computed."
+    },
+    {
+      "priority": 2,
+      "id": "sentiment-breadth-source-qualification",
+      "question": "Can original E 20/50 historical breadth be supported by a legitimate, verifiable source?",
+      "dependencies": [],
+      "input_scope": "Historical SP500 membership/prices or independently verifiable original-universe historical breadth; 200 optional and later",
+      "baseline": "Frozen current-member backfill; compare provenance/definition/date coverage, never future returns",
+      "actions": [
+        "First inspect existing inventory/provenance and project-authorized data capabilities read-only",
+        "Freeze no more than two candidate provider/source identities before any public requests; routeA historical membership+exit prices, routeB documented breadth history",
+        "Record member entry/exit, common denominator, price actions, missing policy, publication/revision timezone and actual access limits",
+        "Deliver source-by-field-by-date gap table and exact acquisition action; preserve unknowns; no payment/expanded access"
+      ],
+      "budget": {
+        "candidate_sources_max": 2,
+        "new_source_requests_max_including_failures": 6,
+        "new_model_fits": 0,
+        "paid_actions": 0
+      },
+      "priority_rule": "If qualified breadth becomes available, finish S01 actual contract first and defer task3; absence does not falsify breadth or E.",
+      "close": "Data-ready range or specific field/access gap plus next acquisition action; stop empty repeated review without new evidence."
+    },
+    {
+      "priority": 3,
+      "id": "sentiment-aaii-risk-proposed",
+      "question": "Does continuous AAII bullish-minus-bearish improve SPY future120-interval within-window maximum decline estimates?",
+      "status": "planned_dependency_bound_not_frozen_or_executed",
+      "dependencies": [
+        "task1 completed",
+        "task2 still blocks original breadth"
+      ],
+      "strategy_identity": "Research extension in risk use, not original E confirmation test; no risk-to-trading authorization",
+      "inputs": "Reuse frozen AAII original values and complete SPY adjusted close paths. If historical first release unknown, retain explicitly hypothetical survey+7calendar-day mapping and retrospective identity.",
+      "time_and_scope": "Initial training1995-2009; evaluation2010-2026H1; mature labels only before annual fit; fixed120 returns121 closes startingt+1 and endingt+121, endpoint<=2026-06-30; one record per survey; exact coverage from actual qualifying dates",
+      "models": [
+        "mature past mean risk",
+        "recent20-day volatility only",
+        "same five price backgrounds",
+        "same five backgrounds plus continuous AAII"
+      ],
+      "estimator": "Exactly one nonnegative risk model; diagnostic must specify its loss/link or fixed transformation, preprocessing and all hyperparameters from training data before formal protocol; currently undecided, no runnable effect claim.",
+      "comparisons": "Primary background-plus versus background; simple mean and volatility challengers also mandatory. Same dates and training budget for each; annual examples and overlap disclosed.",
+      "effect_attention": "Freeze numeric interpretation threshold only from a stated use/accuracy rationale before running; without such rationale remain exploratory and do not claim practical irrelevance or trade-ready value.",
+      "budget": {
+        "horizons": 1,
+        "models": 4,
+        "core_batches": 1,
+        "correction_batches_max": 1,
+        "core_annual_model_fits_max": 68,
+        "total_annual_model_fits_including_one_full_correction_max": 136,
+        "new_market_source_requests": 0,
+        "pro_calls": 0
+      },
+      "uncertainty": "Predeclare paired whole-date blocks suited to120-interval labels; preserve fixed-prediction vs re-training uncertainty distinction; no silent full-confidence claim.",
+      "close": "supported, not_supported_within_scope or inconclusive allowed; no changing horizon/threshold to pass. Missing definitions/data => contract only; no run."
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "passed": true,
+  "new_fits": 0,
+  "real_records_loaded": false,
+  "checks": [
+    {
+      "name": "mean_fraction_objective",
+      "actual": 0.09666666666666668,
+      "expected": 0.09666666666666668,
+      "passed": true
+    },
+    {
+      "name": "analytic_gradient",
+      "actual": [
+        0.15,
+        -0.03333333333333333
+      ],
+      "expected": [
+        0.15,
+        -0.03333333333333333
+      ],
+      "passed": true
+    },
+    {
+      "name": "analytic_gradient_finite_difference",
+      "actual": [
+        0.04654307756249343,
+        -0.005956267309295153
+      ],
+      "expected": [
+        0.046543077565630586,
+        -0.005956267311833796
+      ],
+      "passed": true
+    },
+    {
+      "name": "stable_expit",
+      "actual": [
+        0.0,
+        0.5,
+        1.0
+      ],
+      "expected": [
+        0,
+        0.5,
+        1
+      ],
+      "passed": true
+    },
+    {
+      "name": "linear_percentile_2_5",
+      "actual": 49.975,
+      "expected": 49.975,
+      "passed": true
+    },
+    {
+      "name": "linear_percentile_97_5",
+      "actual": 1949.0249999999999,
+      "expected": 1949.025,
+      "passed": true
+    },
+    {
+      "name": "paired_block_truncation",
+      "actual": [
+        1,
+        2,
+        3,
+        0,
+        1
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        0,
+        1
+      ],
+      "passed": true
+    },
+    {
+      "name": "mature_boundary_strict",
+      "actual": [
+        true,
+        false
+      ],
+      "expected": [
+        true,
+        false
+      ],
+      "passed": true
+    }
+  ],
+  "code_sha256": "8a5512354b27fd63a9000f36b41bc05c5571d2f07d4550a04cf853efc4e9291e"
+}

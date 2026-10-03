@@ -1,0 +1,60 @@
+{
+  "network_allowed": false,
+  "max_agents": 2,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "stop_conditions": [
+    "boundary ambiguity or permission absent",
+    "budget exhausted: preserve partial evidence",
+    "sealed source drift; never edit frozen source",
+    "no new fitting or production/database writes in these two stages"
+  ],
+  "mission": "One zero-refit diagnostic of existing AAII and PutCall mean/background/combined model underperformance",
+  "task_scope": [
+    "Inspect saved predictions, fits, observations and actual immutable execution code",
+    "Calculate paired loss contributions, training/evaluation feature shifts, coefficient/condition/range diagnostics without model fitting",
+    "Check actual label endpoint/maturity and training-only scaling; propose at most one new nonnegative risk estimator, with limitations",
+    "Keep results internal; deliver concise human-readable explanation with traceable rows"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "configs/strategy-documents.v1.json",
+    "configs/rules.v1.yaml",
+    "docs/research/experiment-backtest-principles.md",
+    "docs/research/ai-execution-contract.md",
+    "docs/research/definition-standard.md",
+    "docs/research/definitions.v1.json",
+    "docs/research/research-question-method-standard.md",
+    "docs/research/factor-increment-evidence-standard.md",
+    "docs/research/experiment-report-template.md",
+    "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/strategy-source",
+    "docs/experiments/raw/sentiment-direction-pro-review-2026-09-29/next-stage-plan.json",
+    "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29",
+    "docs/experiments/raw/sentiment-putcall-increment-2026-09-29"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/sentiment-method-and-source-2026-09-29/diagnostic"
+  ],
+  "expected_outputs": [
+    "diagnostic/audit.py reproducible zero-refit arithmetic",
+    "diagnostic/audit.json and loss/feature summaries",
+    "diagnostic/delivery.md: proved defects vs model/domain/maturity issues vs untested explanations",
+    "All failures retained; no real fits"
+  ],
+  "budget": {
+    "diagnostic_runs": 1,
+    "model_fits": 0,
+    "new_source_requests": 0,
+    "new_output_bytes_max": 4194304
+  },
+  "primary_focus": "AAII120 original primary BXE/B; secondary BX separately; PutCall20 window_mdd main and forward_return auxiliary. Five old AAII horizons may inspect saved results but no new target or fit.",
+  "reuse_agent": "/root/aaii_increment_implementation",
+  "frozen_at": "2026-09-29T09:56:58.251495+00:00"
+}

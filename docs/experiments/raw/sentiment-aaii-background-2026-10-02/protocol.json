@@ -1,0 +1,142 @@
+{
+  "id": "sentiment.aaii-background@1.0.0",
+  "frozen_at": "2026-10-02T02:54:55.522955+00:00",
+  "mode": "research",
+  "question": "AAII最近连续20个调查周的平均多空差，是否在已知当前多空差和五项价格背景之后，改善SPY未来120段报价涨幅的估计？",
+  "decision_use": "模块E的调查背景信息研究；不改变宽度主信号、调查阈值、买入或对冲规则。20周线来自原图，本轮只评价连续平均表示。",
+  "authorization": "用户要求继续从策略语义挖因子并复用开源能力；限既有情绪研究线、仓库内历史研究。",
+  "original_mapping": {
+    "strategy_section": "3.6 AAII图看涨−看跌与20周均线",
+    "original_role": "显示与确认；不是将多空差与均线算术相加，不是20周线穿越触发规则",
+    "implementation": "模块E E1/E2调查确认；完整E以宽度为主，本研究不声称完整E通过"
+  },
+  "definitions": {
+    "x": "candidate:sentiment.aaii-spread@draft-1;100*(bullish-bearish)，单位百分点；原阈值±25不改",
+    "m20": "local:sentiment.aaii-mean20-calendar-surveys@1.0.0;mean(x[i-19:i+1])，包括当前一期；仅20个连续周一到周日的调查周，逐周恰有1条。日期跨周缺一周则该完整20周窗口缺失。日期标签/发布时间未知故仅是原图20周线的有明确定义研究代理。",
+    "target": "local:sentiment.forward-h@1.0.0;100*(C[t+121]/C[t+1]-1),恰120段连续报价变化，121正有限收盘，终点<=2026-06-30",
+    "baseline_price": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20"
+    ],
+    "baseline_binding": "继承旧protocol.json精确五项定义与数据快照；独立重算逐行核验"
+  },
+  "sources": [
+    {
+      "path": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/inputs/aaii-candidate-values.csv",
+      "sha256": "12f30895c7ea2c68663a60f2d60a85384dfd0d9d324474e0501298e460cf9c05"
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/inputs/px_SPY.csv",
+      "sha256": "952f397be0ccc5745185b91cce6acc781737c0f30a7a34aa8a230ae892ed5e45"
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/executor/run-01/observations-h120.csv",
+      "sha256": "b6150edb56f48ccb72d579c2ed41e05d2267634d9ec696c64d5d64510135f1d4"
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/protocol.json",
+      "sha256": "e9ce1b5a60b306ef016a6ac4f0d88b81cb6d3ddb0140b8a5cea82ea9eca904ab"
+    }
+  ],
+  "strategy_and_standards": "standards-manifest.json; snapshots preserved even if shared registries change",
+  "availability": {
+    "source_date": "Reported Date；并非已证明当年首次发布日期",
+    "delay": "沿用旧对照的源date+7日23:59，之后首条报价为t；是假设，不能证明历史当时可知",
+    "timezones": "source日标签及同日期美股报价按日期比较，纽约交易日身份；无历史精确时间戳，不伪造盘中时刻",
+    "price_basis": "旧冻结调整收盘，历史复权版本/到达时间未知，不是实际成交收益",
+    "vintages": "当前取得历史调查快照；历史首次版本与修订证据未知",
+    "permissible": "给定保存序列和假设延迟下的回顾信息估计；不授予当年可执行预测资格"
+  },
+  "universe": {
+    "source": "AAII调查，不是SP500成分样本",
+    "evaluation": [
+      "SPY"
+    ],
+    "market": "美国股票宽基ETF，USD旧调整价",
+    "selection": "沿用已见SPY1995—2026快照，不新增热门赢家或跨项目取数",
+    "intended_scope": "情绪背景能否补充宽指信息",
+    "tested_scope": "仅此SPY保存序列、120报价变化",
+    "independent_evidence": "无，旧历史已看过；更换问题不变成全新验证"
+  },
+  "range": [
+    "1995-01-01",
+    "2026-06-30"
+  ],
+  "initial_training": [
+    "1995-01-01",
+    "2009-12-31"
+  ],
+  "evaluation": [
+    "2010-01-01",
+    "2026-06-30"
+  ],
+  "fitting": "每年2010..2026扩展训练；观察t和target_end均严格早于当年Jan1。完整共同有限价格/x/m20/y集合；mintrain100；训练等权，训练均值/总体标准差；截距OLS，不裁剪、不调参。重用workflow_evaluation._ols_design/_ols_fit只作数学内核，不绕过技术workflow的情绪范围拒绝，不称技术workflow登记成功。",
+  "models": {
+    "I": [],
+    "B": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20",
+      "x"
+    ],
+    "X": [
+      "m20"
+    ],
+    "BX": [
+      "r20",
+      "r63",
+      "dma200",
+      "dd252",
+      "rv20",
+      "x",
+      "m20"
+    ]
+  },
+  "metric": "主比较100*(1-MSE(BX)/MSE(B))；RMSE/平均绝对误差单位百分点，误差减少不是投资收益；因子单独X与简单历史平均I比较，并披露B/BX与I退化",
+  "uncertainty": "保存逐日期配对损失；在完整评价调查周轴保留缺失周，按52周连续片段抽取2000次，seed20261002，同索引应用全部方法；104周另作预定依赖敏感性，不重新拟合。区间不包含完整拟合不确定性或所有长期变化。",
+  "stability": "逐年、固定2010-2014/2015-2019/2020-2026，删各评价年份后汇总，不重拟合。计算目标重叠。按m20<=0和>0两个预定状态报原始涨幅均值/中位/上涨比例与未来最大阶段跌幅；不以分组差当增量。",
+  "minimum_meaningful_effect": "没有资金决策根据的事前最低幅度；报告量级/区间，不事后造过关线。",
+  "checks_before_statistics": [
+    "输入/代码冻结指纹",
+    "20周窗口连续且不含未来",
+    "数学模拟常量与缺周",
+    "全行原x/价格5/y独立重算一致",
+    "共同日期和年度训练标签成熟",
+    "只依训练拟合预处理"
+  ],
+  "core_attempt": "唯一预定4方法*17年度最多68 fits；模型结果全部保存。",
+  "followup": "独立用显式截距直接最小二乘核2010/2020/2026四方法最多12 fits；再从保存预测独立核全部标题数值和覆盖，无新参数。所有尝试算账。",
+  "budget": {
+    "started_at": "2026-10-02T02:44:37Z",
+    "wall_minutes_max": 45,
+    "source_operations_max": 6,
+    "fits_max": 80,
+    "market_core_batches": 1,
+    "followup_batches_max": 3,
+    "new_output_bytes_max": 20971520,
+    "pro_calls_max": 0,
+    "family_prior_fits_at_least": 744
+  },
+  "stop": [
+    "输入或引用数学代码指纹变化",
+    "标签跨入未来训练",
+    "计算无法独立核对",
+    "预算耗尽暂停，保存已跑与未跑，不冒充证伪"
+  ],
+  "outputs": [
+    "definition.json",
+    "qualification.json",
+    "analysis.py",
+    "run-01/",
+    "trial-ledger.json",
+    "review.json",
+    "dated report and registry entry"
+  ],
+  "production_authorization": "none",
+  "execution_status": "frozen_before_new_model_results"
+}

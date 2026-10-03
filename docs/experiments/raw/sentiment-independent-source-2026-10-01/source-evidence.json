@@ -1,0 +1,73 @@
+{
+  "schema": "sentiment-independent-source-evidence/1",
+  "date": "2026-10-01",
+  "question": "Can a provider independent of Investing supply free, complete historical S&P 500 percentages above the 20-day and 50-day moving averages for 2008-09-10 through 2025-12-31?",
+  "decision": "no_qualified_complete_pair_found_within_four_public_operations",
+  "strategy_layer": "LEI module E sentiment breadth input qualification only; no signal or effect study",
+  "strategy_source_sha256": {
+    "LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "prior_cumulative_history": "at least 30 initial source requests + 24 source operations + 6 source operations + 1 later Investing Chrome tab read, all retained; exact early total unknown. The present four operations are additional and do not reset the old history.",
+  "new_operations": [
+    {
+      "number": 1,
+      "kind": "public_web_search_batch",
+      "queries": 3,
+      "providers_surfaced": ["Barchart", "DeanFinancials", "EODData", "MacroMicro"],
+      "important_primary_link": "https://www.barchart.com/stocks/quotes/%24S5TW",
+      "observation": "Barchart calls $S5TW S&P 500 Stocks Above 20-Day Average and defines its major-index widget as percentages above 20/50/100/150/200-day averages. Search also surfaced Barchart history text limiting free historical daily data to at most two years, with longer history for Premier. Barchart had already been investigated in the prior research; this is corroboration, not a new qualified independent route."
+    },
+    {
+      "number": 2,
+      "kind": "public_provider_repository_page",
+      "url": "https://github.com/DeanFinancials/deanfi-data/blob/main/advance-decline/daily_breadth.json",
+      "observation": "Public file contains one trading date, 2026-09-30, with above_20_day_ma 112/502 or 22.31% and above_50_day_ma 101/502 or 20.12%. Metadata says generated 2026-10-01, Yahoo Finance/yfinance source, 503 stocks analyzed. This is a current-member derivative snapshot, not a historical 2008-2025 pair. Historical membership, denominator policy, old publication times, revisions and data license were not established."
+    },
+    {
+      "number": 3,
+      "kind": "public_web_search_batch",
+      "queries": 2,
+      "providers_surfaced": ["Barchart", "EODData", "MacroMicro", "StockCharts"],
+      "observation": "No search result established a freely downloadable complete historical 20/50 pair. MacroMicro and StockCharts results described a 50-day series, not the required 20-day pair. Barchart's own historical-page text again separated its short free view from Premier long history. Search snippets are leads only, not proof of full data or rights."
+    },
+    {
+      "number": 4,
+      "kind": "public_provider_page",
+      "url": "https://www.eoddata.com/stockquote/INDEX/S5FI.htm?e=INDEX&s=S5FI",
+      "observation": "EODData shows S5FI as S&P 500 Stocks Above 50-Day Average and ten recent rows, 2026-09-16 through 2026-09-29. Its Symbol History line offers purchase of history from 2010-08-23; the 2008 starting dates are outside even that advertised history. No S5TW historical pair, full file, free long-history entitlement, independent upstream methodology, original membership/denominator, vintage or reuse license was established."
+    }
+  ],
+  "qualification_matrix": {
+    "DeanFinancials": {
+      "identity": "creator's public repository; upstream Yahoo Finance/yfinance for prices",
+      "units": "percentage of analyzed stocks",
+      "complete_dates": false,
+      "historical_availability": "current snapshot only; no historical first-release record observed",
+      "historical_membership_and_denominator": "current 502 denominator shown; past membership absent",
+      "license": "not established",
+      "decision": "not_qualified"
+    },
+    "EODData": {
+      "identity": "EODData page for the named S5FI series; independence of upstream calculation not established",
+      "units": "a 0-100 index quote consistent with a percentage; formal calculation unit not established",
+      "complete_dates": false,
+      "historical_availability": "recent dated rows only; advertised paid history begins 2010-08-23",
+      "historical_membership_and_denominator": "not documented on inspected page",
+      "license": "page restricts redistribution; free local full-history research right not established",
+      "decision": "not_qualified"
+    },
+    "Barchart": {
+      "identity": "original provider of $S5TW/$S5FI symbols; previously investigated",
+      "units": "percentage according to its own index widget description",
+      "complete_dates": false,
+      "historical_availability": "free daily history at most two years according to its own page; longer history Premier",
+      "historical_membership_and_denominator": "not established",
+      "license": "long-history free use not established",
+      "decision": "not_qualified_for_free_2008_to_2025_pair"
+    }
+  },
+  "actual": {"new_public_source_operations": 4, "download_bytes": 0, "paid_actions": 0, "pro_calls": 0, "effect_fits": 0, "investing_access_attempts": 0},
+  "limit": {"new_public_source_operations": 4, "download_bytes": 20000000},
+  "stop_reason": "Four-operation cap reached with no qualified free long-history pair. The absence of a qualified result within this limited search does not prove no such source exists."
+}

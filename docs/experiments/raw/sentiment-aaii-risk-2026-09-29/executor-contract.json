@@ -1,0 +1,70 @@
+{
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "stop_conditions": [
+    "protocol/input hash drift",
+    "future label enters training",
+    "common eligible set differs across model comparisons",
+    "optimizer invalid or gradient nonfinite/>1e-6",
+    "budget exhausted; preserve partial state, not complete",
+    "method/target identity unresolved"
+  ],
+  "mission": "Implement frozen one AAII120risk exploratory experiment, synthetic only until controller authorizes real run",
+  "task_scope": [
+    "Read protocol and actual bindings first; reproduce old input timing/backgrounds with fresh code",
+    "Implement exactly four models and single bounded estimator; synthetic objective gradient/path/maturity checks before labels",
+    "Default no market labels/fits; --run-reviewed separate unique outputs and reject overwrite",
+    "Save inputs/coverage/fits/predictions/objective gradients/loss draws/annual bands/deleteyear/overlap/actual fit count and all failures; no model selection",
+    "禁止联网、安装依赖、新委派、改生产、全局定义、OKR或策略；只按合同离线计算并说明限制"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "configs/strategy-documents.v1.json",
+    "configs/rules.v1.yaml",
+    "docs/research/experiment-backtest-principles.md",
+    "docs/research/ai-execution-contract.md",
+    "docs/research/definition-standard.md",
+    "docs/research/definitions.v1.json",
+    "docs/research/research-question-method-standard.md",
+    "docs/research/factor-increment-evidence-standard.md",
+    "docs/research/experiment-report-template.md",
+    "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/protocol.json",
+    "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/source-manifest.json",
+    "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/inputs",
+    "docs/experiments/raw/sentiment-method-and-source-2026-09-29/controller-prerequisite-review.json",
+    "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/strategy-source",
+    "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/executor/analyze.py"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/executor"
+  ],
+  "expected_outputs": [
+    "executor/analyze.py",
+    "executor/synthetic-check.json",
+    "executor/delivery.md synthetic implementation and pending real execution",
+    "future run-01 only after root review"
+  ],
+  "budget": {
+    "core_batches_max": 1,
+    "objective_correction_batches_max": 1,
+    "core_fits_max": 68,
+    "objective_correction_fits_max": 68,
+    "total_fits_max": 136,
+    "new_source_requests_max": 0,
+    "pro_calls_max": 0,
+    "wall_minutes_max": 15,
+    "output_bytes_max": 20971520
+  },
+  "frozen_at": "2026-09-29T10:06:36.008146+00:00",
+  "protocol_sha256": "10610236e4da9e497ee43086d3f5b9845d0c7bc9c9f16018dc15d254d66f8230",
+  "reused_agent": "/root/sentiment_s01_inventory"
+}

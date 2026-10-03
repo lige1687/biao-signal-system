@@ -1,0 +1,60 @@
+{
+  "run_id": "authenticated-export-resume-20260930",
+  "budget_source_operations": 6,
+  "operations": [
+    {
+      "id": 1,
+      "type": "web_search",
+      "source": "NAAIM official free historical download",
+      "result": "official delayed index and subscription transition found"
+    },
+    {
+      "id": 2,
+      "type": "web_read",
+      "url": "https://naaim.org/programs/naaim-exposure-index/",
+      "result": "official weekly observation definition and three-month public delay"
+    },
+    {
+      "id": 3,
+      "type": "web_read_batch",
+      "urls": [
+        "https://naaim.org/programs/naaim-exposure-index/faqs/",
+        "https://index.naaim.org/embeddable/chart",
+        "https://index.naaim.org/embeddable/table"
+      ],
+      "result": "FAQ Wednesday identity; table131dated observations; chart no text"
+    },
+    {
+      "id": 4,
+      "type": "http_download",
+      "url": "https://index.naaim.org/embeddable/table",
+      "result": "200;52744bytes;131rows"
+    },
+    {
+      "id": 5,
+      "type": "http_download",
+      "url": "https://naaim.org/programs/naaim-exposure-index/",
+      "result": "200;145106bytes"
+    },
+    {
+      "id": 6,
+      "type": "http_download",
+      "url": "https://naaim.org/programs/naaim-exposure-index/faqs/",
+      "result": "200;166848bytes"
+    }
+  ],
+  "browser_transport_failures": [
+    {
+      "operation": "read Download DOM",
+      "timeout_seconds": 30
+    },
+    {
+      "operation": "reconnect known authenticated tab",
+      "timeout_seconds": 30
+    }
+  ],
+  "pro_calls": 0,
+  "paid_actions": 0,
+  "prior_attempts": "at least30 public requests +24 continuation source operations; retained",
+  "operation_unit": "initiated tool search/read batch or individualHTTPdownload; not exactnetworkrequests"
+}

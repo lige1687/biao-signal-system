@@ -1,0 +1,184 @@
+{
+  "schema": "sentiment-source-qualification/1",
+  "scope": "original E SP50020/50 first;200 later",
+  "verdict": "blocked",
+  "qualified_for_original_E": false,
+  "execution": "completed",
+  "evidence_boundary": "official_document_route_qualification_only",
+  "local_frozen_baseline": {
+    "source": {
+      "path": "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/us-source-audit.json",
+      "sha256": "4b5ac438d1ce1d74077d94c4b9e3aa72ecfed51038cfd940bdfab86a4598b01e",
+      "bytes": 3375
+    },
+    "date_range": [
+      "1980-04-14",
+      "2026-09-22"
+    ],
+    "rows": 11706,
+    "actual_B20_B50_B200_exist": true,
+    "membership": "fixed_current494 backfill",
+    "historical_membership_proven": false,
+    "historical_available_at_proven": false,
+    "denominator": "per-window eligible counts",
+    "usable_scope": "冻结当前成员集合的资料核查和受限历史描述，不是历史标普500"
+  },
+  "providers": [
+    {
+      "provider": "S&P Dow Jones Indices",
+      "route": "historical members plus constituent/exit prices",
+      "official_url": "https://www.spglobal.com/spdji/en/landing/topic/spice/",
+      "verdict": "blocked",
+      "fields": {
+        "historical_universe": {
+          "status": "capability_confirmed_not_data_qualified",
+          "evidence": "成员历史宣称从1964；逐日原始名单未取得",
+          "source": "https://www.spglobal.com/spdji/en/landing/topic/spice/"
+        },
+        "entry_exit": {
+          "status": "capability_confirmed_not_data_qualified",
+          "evidence": "增删从1989；公告/生效字段、证券ID、撤销修订档案未核",
+          "source": "https://www.spglobal.com/spdji/en/landing/topic/spice/"
+        },
+        "20day": {
+          "status": "must_compute_after_qualified_data",
+          "gap": "无现成B20声明；需真实当时成员价格及20日预热"
+        },
+        "50day": {
+          "status": "must_compute_after_qualified_data",
+          "gap": "无现成B50声明；需真实当时成员价格及50日预热"
+        },
+        "common_denominator_20_50": {
+          "status": "not_verified",
+          "gap": "自行固定同一合格成员集合；产品页没有认证20/50共同分母"
+        },
+        "price_actions_and_exit_prices": {
+          "status": "not_verified",
+          "gap": "可导出成员/公司行动不证明所有退出或退市股票日价、复权版本与退市最后价；未给字段字典"
+        },
+        "date_coverage": {
+          "status": "catalogue_range_only",
+          "constituents_from_year": 1964,
+          "adds_drops_from_year": 1989,
+          "qualified_date_range": null,
+          "gap": "每日频率、精确末日、价格覆盖未核；1928是指数层"
+        },
+        "publication_timezone": {
+          "status": "not_verified",
+          "gap": "提到盘中公司行动公告/EOD文件，无具体发布时间、时区、半日规则"
+        },
+        "first_available_and_revision_history": {
+          "status": "not_verified",
+          "gap": "历史首次发布版本与修订档案能否导出未知"
+        },
+        "free_public_download": {
+          "status": "not_obtained",
+          "gap": "公开能力说明不是免费全量成员/退出价格文件"
+        },
+        "license_and_paid_access": {
+          "status": "subscription_confirmed_cost_scope_unknown",
+          "gap": "明确订阅；具体费用、研究/存储/导出许可和权限未报价"
+        }
+      },
+      "qualified_date_range": null,
+      "exact_next_acquisition_action": {
+        "action": "先确认用户是否已有SPICE或机构数据授权；若有，在现有权限内要字段字典及5日小样本。若无，先由获授权人员向S&P Client Services要书面字段/样本/报价；用户批准订阅或访问后才登录。",
+        "request_fields": [
+          "每日成员起止、生效/公告日、带时区首次发布时间与稳定证券ID，含更名合并/多股类",
+          "1989后完整增删与修订档案；1964—1988逐日身份的核证方式",
+          "包含退出/退市股票、入指数前至少50日预热的日价和公司行动；实际/复权价、调整版本、停牌缺价、退市末价",
+          "2008-09-12、2008-09-15、2009-03-09、2020-03-23、2025-12-31五日名单/价格/时点小样本，仅核结构不测效果",
+          "研究、本地存储和导出许可、费用、免费样本范围；本轮没有发出外部询价"
+        ]
+      }
+    },
+    {
+      "provider": "StockCharts",
+      "route": "documented precomputed breadth",
+      "official_url": "https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average",
+      "verdict": "blocked",
+      "fields": {
+        "historical_universe": {
+          "status": "index_family_definition_only",
+          "evidence": "标普500等指数宽度",
+          "source": "https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average",
+          "gap": "没证明每天按当时名单计算，还是后来名单回算"
+        },
+        "entry_exit": {
+          "status": "not_verified",
+          "gap": "新增/退出、多股类、退市与历史改组政策未说明"
+        },
+        "20day": {
+          "status": "not_verified_on_selected_page",
+          "gap": "本文列50/150/200，无20日符号；不是全产品没有20日结论"
+        },
+        "50day": {
+          "status": "definition_and_symbol_confirmed_not_history_qualified",
+          "symbol": "$SPXA50R",
+          "evidence": "高于50日均线成员比例，0—100%",
+          "source": "https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average"
+        },
+        "common_denominator_20_50": {
+          "status": "not_verified",
+          "gap": "理论分母为指数总股票数；实际20/50分母、缺价/预热政策未核"
+        },
+        "price_actions_and_exit_prices": {
+          "status": "not_verified",
+          "gap": "价格调整、退出股票、缺价/上市不足、停牌处理及历史重算未详述"
+        },
+        "date_coverage": {
+          "status": "not_verified",
+          "qualified_date_range": null,
+          "gap": "2009图例不证明整条日序列精确起止/覆盖；未下载数据"
+        },
+        "publication_timezone": {
+          "status": "not_verified",
+          "gap": "收盘更新时间、时区、半日/节假日规则未给"
+        },
+        "first_available_and_revision_history": {
+          "status": "not_verified",
+          "gap": "首次发布序列和成员/价格修订日志未证"
+        },
+        "free_public_download": {
+          "status": "not_obtained",
+          "gap": "免费定义页与图表入口不证明免费合法导出20/50完整历史"
+        },
+        "license_and_paid_access": {
+          "status": "not_verified",
+          "gap": "本文未列导出许可/收费等级，不能断言必须付费或已有权限"
+        }
+      },
+      "qualified_date_range": null,
+      "exact_next_acquisition_action": {
+        "action": "另获来源请求预算后，向官方支持核B20符号与B20/B50原始日度导出能力，先要书面算法、历史成员政策和小样本；不先买图表套餐代替资料核验。",
+        "request_fields": [
+          "20日与$SPXA50R精确符号、真实起止、日度值和总/合格成员计数",
+          "每历史日用当时名单的书面确认、加入退出生效与修订历史政策、改组日前后样本",
+          "SMA含当天/严格高于规则、缺价/预热/停牌政策和20/50相同实际分母",
+          "复权口径、首次发布时刻/时区与修订日志；免费导出范围和许可；仅付费提供时列费用/权限待批准"
+        ]
+      }
+    }
+  ],
+  "minimum_pass_gate": [
+    "准确20/50日值与证券身份、分母/缺失政策可核",
+    "当时成员及退出价格或预计算成员机制可核",
+    "精确日期覆盖、真实发布时点与修订记录",
+    "权限允许且定义/数据指纹可冻结"
+  ],
+  "decision": "公开免费页只建立两条获取路线，不建立原E当时可知资料资格；补证通过后优先S01，不以本轮阻塞判负宽度或E。",
+  "budget": {
+    "maximum_requests": 4,
+    "used_requests_including_failures": 4,
+    "remaining": 0,
+    "provider_count": 2,
+    "model_fits": 0,
+    "bulk_quotes": 0,
+    "paid_actions": 0
+  },
+  "unexecuted": [
+    "未联系提供方",
+    "未登录付款或下载行情",
+    "未新登记、生成未来标签、拟合或收益研究"
+  ]
+}

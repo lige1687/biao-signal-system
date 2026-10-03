@@ -1,0 +1,18 @@
+{
+  "id": "sentiment.qualification@1.0.0",
+  "scope": "本轮已有材料的计算资格与既定极值覆盖；不计算未来涨跌，不建立账户",
+  "objects": [
+    {"id": "candidate:sentiment.aaii-spread@draft-1", "formula": "100*(bullish-bearish)", "unit": "percentage_points", "low": -25, "high": 25, "time": "reported源日期；历史首次发布时间未知", "interpretation": "美国个人投资者未来六个月看法，不是持仓"},
+    {"id": "candidate:sentiment.naaim-exposure@draft-1", "formula": "原始naaim不裁剪", "unit": "percent_exposure", "low": 40, "high": 100, "time": "源date；历史首次发布时间未知", "interpretation": "美国主动管理人自报股票敞口，不是全部机构实仓"},
+    {"id": "candidate:sentiment.margin-change20@draft-1", "formula": "100*(RZYE_s/RZYE_(s-20)-1)", "unit": "percent_change", "time": "源date；以510300现有报价日期为资料轴核21个日期，不声明独立验证交易日历", "interpretation": "融资借款余额增长，不是散户心理"}
+  ],
+  "missing": "不补零、不压缩缺日；融资要求21个报价日期均有正余额；报价轴早于ETF历史仅可保留原输入，不用于融资窗口",
+  "survey_checks": "AAII原始xls的Reported Date与三比例逐行对CSV；bull_bear列与重新相减核差；来源文件一致不证明首发历史",
+  "extreme_episodes": "按原调查序列从非极值进入极值计一段；调查间隔超过8日时另起段；段不自动独立",
+  "range": "原文件全覆盖计算；另列2014-01-01—2026-06-30覆盖，不按结果改范围",
+  "protected": "源文件、规则、全局定义、桌面文档、旧实验只读",
+  "stop": "输入哈希漂移、同日期重复、单位不符或原始xls核对不符则只报告缺陷",
+  "not_evaluated": ["固定期限未来涨跌", "超过价格与宽度的新增信息", "模块E完整资金效果", "可交易性", "机构与散户差值", "板块总分"],
+  "threshold_source": "用户确认LEI技术实现模块E1；数值只统计覆盖，不重定义触发策略",
+  "registration": "本地草案身份；未登记全局对象库，未获生产采用"
+}

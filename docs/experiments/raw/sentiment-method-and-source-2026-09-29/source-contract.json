@@ -1,0 +1,62 @@
+{
+  "network_allowed": true,
+  "max_agents": 2,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "stop_conditions": [
+    "boundary ambiguity or permission absent",
+    "budget exhausted: preserve partial evidence",
+    "sealed source drift; never edit frozen source",
+    "no new fitting or production/database writes in these two stages"
+  ],
+  "mission": "Qualify two public provider routes for original E historical SP50020/50 breadth, without forecasting",
+  "task_scope": [
+    "Inspect existing S01 audit and inventory, then primary official provider pages only",
+    "Choose source providers before requests: S&P Dow Jones Indices via spglobal.com/spdji and StockCharts via stockcharts.com",
+    "Record source definition/member history/exit price/common-denominator/availability/actual access range and unknowns",
+    "No pay, login, permission grant, download bulk quotations or return experiment"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "configs/strategy-documents.v1.json",
+    "configs/rules.v1.yaml",
+    "docs/research/experiment-backtest-principles.md",
+    "docs/research/ai-execution-contract.md",
+    "docs/research/definition-standard.md",
+    "docs/research/definitions.v1.json",
+    "docs/research/research-question-method-standard.md",
+    "docs/research/factor-increment-evidence-standard.md",
+    "docs/research/experiment-report-template.md",
+    "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/strategy-source",
+    "docs/experiments/raw/sentiment-direction-pro-review-2026-09-29/next-stage-plan.json",
+    "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/us-source-audit.json",
+    "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/sol-inventory",
+    "docs/experiments/sentiment-library-readiness-2026-09-29.md"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/sentiment-method-and-source-2026-09-29/source"
+  ],
+  "expected_outputs": [
+    "source/source-ledger.json containing every attempted request with provider/url/outcome",
+    "source/qualification.json field/date/membership/denominator/release unknowns and actual usable scope",
+    "source/delivery.md with direct authoritative links and precise next acquisition action",
+    "Clearly qualified_for_original_E or blocked; no assumed PIT from long chart history"
+  ],
+  "budget": {
+    "candidate_providers_max": 2,
+    "web_requests_max": 4,
+    "model_fits": 0,
+    "paid_actions": 0,
+    "new_output_bytes_max": 2097152
+  },
+  "request_count_rule": "Count each query or opened URL as one request including failures even when batched. At most one search and one selected-page open per provider; no click loops. Root reserves2 other requests for method documentation, total6. Stop and record uncertainty if remaining budget insufficient.",
+  "reuse_agent": "/root/sentiment_s01_inventory",
+  "frozen_at": "2026-09-29T09:56:58.251495+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "mission": "实现冻结AAII极端与多期限增量研究脚本并做合成数值检查；不运行真实研究",
+  "task_scope": [
+    "精确实现protocol全部模型、时点、端点、排除、连续块不确定范围与稳健性输出",
+    "合成边界验证，包括x=±25、rank缺陷、训练成熟和目标h段收益",
+    "输出脚本、合成检查和简短交接；不得执行真实市场批次"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "docs/research",
+    "configs/strategy-documents.v1.json",
+    "configs/rules.v1.yaml",
+    ".claude/skills/macd-reading/SKILL.md",
+    "docs/plan-sector-trend-page.md",
+    "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/strategy-source",
+    "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/protocol.json",
+    "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/source-manifest.json",
+    "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/inputs",
+    "docs/experiments/raw/sentiment-factor-feasibility-2026-09-29/run_price_diagnostic.py"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/executor"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "executor/analyze.py 可由主控一次运行得到run-01结果、观察行、预测、fit、重抽draws和manifest",
+    "executor/synthetic-check.json 与独立预期值",
+    "executor/delivery.md"
+  ],
+  "stop_conditions": [
+    "缺定义／输入漂移／权限扩项",
+    "真实预测或全局写入需求",
+    "超出目录边界"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "budget": {
+    "market_attempts": 0,
+    "network_requests": 0,
+    "pro_calls": 0,
+    "output_bytes_max": 1048576
+  },
+  "controller_note": "完整真实计算待主控检查代码后运行；脚本仅验证inputs中两份冻结源和protocol哈希，其他共享权威漂移分开审计，不盲目影响纯本地算术。禁止创建其他agent。"
+}

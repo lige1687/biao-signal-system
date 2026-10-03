@@ -1,0 +1,37 @@
+{
+  "schema": "sentiment-s01-source-qualification/1",
+  "date": "2026-09-30",
+  "decision": "blocked_actual_historical_inputs_and_rights_unconfirmed",
+  "plain_language": "The official pages describe possible sources, but this public, no-pay check obtained no actual historical S&P 500 20-day and 50-day breadth values or the data needed to reconstruct both. Therefore the planned return study cannot start from these source checks.",
+  "strategy_layer": "LEI Module E index market breadth; input qualification only, no factor effect or trading conclusion",
+  "strategy_sha256_from_frozen_research_state": {"LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20", "LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"},
+  "providers": [
+    {
+      "provider": "S&P Dow Jones Indices SPICE",
+      "official_urls": ["https://www.spglobal.com/spdji/en/landing/topic/spice/", "https://www.spglobal.com/spdji/en/about-us/data-index-licensing/", "https://www.spglobal.com/spdji/en/spice-terms-of-use/"],
+      "evidence_basis": "Prior ledger successfully read SPICE landing page; this run's official-domain search excerpts surfaced the landing, licensing and terms pages. Direct terms read failed.",
+      "confirmed_product_claims": ["SPICE is subscription-based and advertises historical S&P 500 constituents from 1964 and adds/drops from 1989", "Its advertised advanced download covers constituent and corporate-action data", "S&P offers constituent and corporate-action data in separately tailored subscription packages for research and analysis"],
+      "not_confirmed_for_this_run": ["No dated B20 or B50 value or reconstructable member-and-price record was inspected", "No stable security IDs, effective/announced/available times, full historical prices or corporate-action adjustment policy were inspected", "No usable historical range, revision vintage, calendar, common B20/B50 denominator, missing-price policy or research/storage/export entitlement was established for this task"],
+      "rights": "Public product descriptions do not grant use of subscription-only historical inputs. Exact entitlement and permitted local research/storage/export are unconfirmed; no subscription or contact action was taken.",
+      "status": "blocked_subscription_and_no_actual_sample"
+    },
+    {
+      "provider": "StockCharts",
+      "official_urls": ["https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average", "https://stockcharts.com/h-sc/ui?s=%24SPXA20R"],
+      "evidence_basis": "Prior ledger successfully read ChartSchool definition; this run's official ChartSchool search result repeated it. Direct 20-day chart URL failed in the web reader.",
+      "confirmed_product_claims": ["ChartSchool defines breadth as stocks above a moving average divided by the index's stock count", "It identifies S&P 500 percent above 50-day average as $SPXA50R", "Its documented symbol set lists 50-, 150- and 200-day averages"],
+      "not_confirmed_for_this_run": ["No official S&P 500 B20 symbol or 20-day series was confirmed; ChartSchool's 20-day smoothing example is not a B20 series", "No dated B50 value or accessible historical series was inspected", "Historical constituent membership, denominator eligibility, price adjustment, availability timing, revisions, range, and research/storage/export rights are unconfirmed"],
+      "rights": "Viewing a public educational definition does not establish permission to obtain, store, export or reuse historical breadth values; task-specific research rights remain unconfirmed.",
+      "status": "blocked_b20_and_dated_history_unconfirmed"
+    }
+  ],
+  "prespecified_date_sample_status": [
+    {"date": "2008-09-12", "b20": "not_observed", "b50": "not_observed", "member_or_price_sample": "not_observed"},
+    {"date": "2008-09-15", "b20": "not_observed", "b50": "not_observed", "member_or_price_sample": "not_observed"},
+    {"date": "2009-03-09", "b20": "not_observed", "b50": "not_observed", "member_or_price_sample": "not_observed"},
+    {"date": "2020-03-23", "b20": "not_observed", "b50": "not_observed", "member_or_price_sample": "not_observed"},
+    {"date": "2025-12-31", "b20": "not_observed", "b50": "not_observed", "member_or_price_sample": "not_observed"}
+  ],
+  "inference_boundary": "This bounded public-source check did not qualify either route; it does not show the historical data do not exist or that the breadth factor fails. No return statistics were run.",
+  "source_ledger": "source-ledger.json"
+}

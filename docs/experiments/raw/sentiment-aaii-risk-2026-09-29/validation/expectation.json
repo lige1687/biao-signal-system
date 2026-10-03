@@ -1,0 +1,238 @@
+{
+  "protocol_sha256": "10610236e4da9e497ee43086d3f5b9845d0c7bc9c9f16018dc15d254d66f8230",
+  "input_sha256": {
+    "aaii-candidate-values.csv": "12f30895c7ea2c68663a60f2d60a85384dfd0d9d324474e0501298e460cf9c05",
+    "px_SPY.csv": "952f397be0ccc5745185b91cce6acc781737c0f30a7a34aa8a230ae892ed5e45"
+  },
+  "price_basis_limit": "cached adjusted Close; historical adjustment/dividend vintage unknown",
+  "source_identity": {
+    "survey": {
+      "rows": 2038,
+      "valid_date_rows": 2038,
+      "invalid_date_physical_rows": [],
+      "source_dates_monotonic": true,
+      "first_date": "1987-07-24",
+      "last_date": "2026-08-27"
+    },
+    "spy": {
+      "rows": 8456,
+      "unique_ordered_dates": 8456,
+      "invalid_date_rows": [],
+      "invalid_or_nonpositive_close_rows": 0,
+      "first_date": "1993-01-29",
+      "last_date": "2026-09-02"
+    }
+  },
+  "timing_rule": {
+    "assumed_publication": "survey source date + 7 calendar days, 23:59 Asia/Shanghai",
+    "t": "first actual SPY quote date strictly after assumed publication date",
+    "target": "t+1 through t+121 quote closes inclusive (121 closes, 120 changes); peak is inside this future window"
+  },
+  "coverage": {
+    "raw_survey_rows": 2038,
+    "valid_source_dates": 2038,
+    "mapped_to_t_rows": 2037,
+    "mapped_t_date_min": "1993-01-29",
+    "mapped_t_date_max": "2026-08-28",
+    "unique_t_after_latest_source_dedup": 1751,
+    "common_eligible_rows": 1615,
+    "training_common_eligible_1995_2009": 780,
+    "evaluation_common_eligible_2010_2026_06_30": 835,
+    "evaluation_by_t_year": {
+      "2010": 53,
+      "2011": 52,
+      "2012": 52,
+      "2013": 52,
+      "2014": 52,
+      "2015": 52,
+      "2016": 53,
+      "2017": 52,
+      "2018": 52,
+      "2019": 52,
+      "2020": 52,
+      "2021": 52,
+      "2022": 52,
+      "2023": 52,
+      "2024": 52,
+      "2025": 52,
+      "2026": 1
+    },
+    "exclusions_by_stage": {
+      "invalid_source_date": 0,
+      "no_quote_after_assumed_publication": 1,
+      "duplicate_t_superseded": 286,
+      "invalid_x": 0,
+      "insufficient_252_quote_warmup": 53,
+      "before_1995_evaluation_range": 49,
+      "target_endpoint_after_cutoff_or_quote_range": 34,
+      "target_missing_or_nonpositive_close": 0,
+      "outside_train_and_evaluation_ranges": 0
+    },
+    "tail_rows_excluded_by_incomplete_endpoint": 34,
+    "mature_common_training_rows_available_before_evaluation_year": {
+      "2010": 756,
+      "2011": 808,
+      "2012": 860,
+      "2013": 912,
+      "2014": 964,
+      "2015": 1016,
+      "2016": 1069,
+      "2017": 1121,
+      "2018": 1173,
+      "2019": 1225,
+      "2020": 1277,
+      "2021": 1330,
+      "2022": 1381,
+      "2023": 1433,
+      "2024": 1485,
+      "2025": 1537,
+      "2026": 1589
+    }
+  },
+  "real_target_values_computed_only_for_prespecified_examples": 6,
+  "prespecified_examples": [
+    {
+      "requested_date": "2010-01-08",
+      "selected": true,
+      "source_date": "2009-12-31",
+      "physical_source_row": 1171,
+      "assumed_publication_date": "2010-01-07 23:59 Asia/Shanghai",
+      "t_date": "2010-01-08",
+      "target_start": "2010-01-11",
+      "target_end": "2010-07-02",
+      "target_pct": 15.699643042334433,
+      "peak_date": "2010-04-23",
+      "trough_date": "2010-07-02",
+      "peak_close": 91.28146362304688,
+      "trough_close": 76.95059967041016
+    },
+    {
+      "requested_date": "2015-01-09",
+      "selected": true,
+      "source_date": "2015-01-01",
+      "physical_source_row": 1432,
+      "assumed_publication_date": "2015-01-08 23:59 Asia/Shanghai",
+      "t_date": "2015-01-09",
+      "target_start": "2015-01-12",
+      "target_end": "2015-07-06",
+      "target_pct": 3.5331719092882463,
+      "peak_date": "2015-03-02",
+      "trough_date": "2015-03-11",
+      "peak_close": 175.1064910888672,
+      "trough_close": 168.919677734375
+    },
+    {
+      "requested_date": "2020-01-10",
+      "selected": true,
+      "source_date": "2020-01-02",
+      "physical_source_row": 1693,
+      "assumed_publication_date": "2020-01-09 23:59 Asia/Shanghai",
+      "t_date": "2020-01-10",
+      "target_start": "2020-01-13",
+      "target_end": "2020-07-06",
+      "target_pct": 33.717264353564524,
+      "peak_date": "2020-02-19",
+      "trough_date": "2020-03-23",
+      "peak_close": 308.4034729003906,
+      "trough_close": 204.4182586669922
+    },
+    {
+      "requested_date": "2022-01-07",
+      "selected": true,
+      "source_date": "2021-12-30",
+      "physical_source_row": 1796,
+      "assumed_publication_date": "2022-01-06 23:59 Asia/Shanghai",
+      "t_date": "2022-01-07",
+      "target_start": "2022-01-10",
+      "target_end": "2022-07-05",
+      "target_pct": 21.91647764397704,
+      "peak_date": "2022-01-12",
+      "trough_date": "2022-06-16",
+      "peak_close": 443.1917419433594,
+      "trough_close": 346.0597229003906
+    },
+    {
+      "requested_date": "2025-07-03",
+      "selected": true,
+      "source_date": "2025-06-26",
+      "physical_source_row": 1978,
+      "assumed_publication_date": "2025-07-03 23:59 Asia/Shanghai",
+      "t_date": "2025-07-07",
+      "target_start": "2025-07-08",
+      "target_end": "2025-12-26",
+      "target_pct": 5.071354461223931,
+      "peak_date": "2025-10-29",
+      "trough_date": "2025-11-20",
+      "peak_close": 681.7418823242188,
+      "trough_close": 647.1683349609375
+    },
+    {
+      "requested_date": "2026-01-02",
+      "selected": true,
+      "source_date": "2025-12-25",
+      "physical_source_row": 2004,
+      "assumed_publication_date": "2026-01-01 23:59 Asia/Shanghai",
+      "t_date": "2026-01-02",
+      "target_start": "2026-01-05",
+      "target_end": "2026-06-29",
+      "target_pct": 8.884968175523733,
+      "peak_date": "2026-01-27",
+      "trough_date": "2026-03-30",
+      "peak_close": 691.8134765625,
+      "trough_close": 630.3460693359375
+    }
+  ],
+  "synthetic_checks": {
+    "all_up_zero": {
+      "input_prices": [
+        100,
+        101,
+        102,
+        103
+      ],
+      "calculated_pct": 0.0,
+      "expected_pct": 0.0
+    },
+    "rise_then_fall": {
+      "input_prices": [
+        100,
+        110,
+        99
+      ],
+      "calculated_pct": 9.999999999999998,
+      "peak_close": 110,
+      "trough_close": 99
+    },
+    "prewindow_peak_ignored": {
+      "prior_outside_window": 200,
+      "future_window_prices": [
+        100,
+        90
+      ],
+      "calculated_pct": 9.999999999999998,
+      "expected_pct": 10.0,
+      "incorrect_if_prewindow_peak_used_pct": 55.0
+    },
+    "missing_close_excludes_whole_window": {
+      "future_window_prices_example": [
+        100,
+        102,
+        null,
+        98
+      ],
+      "121_close_test_reason": "invalid_or_missing_close",
+      "expected_valid": false
+    },
+    "endpoint_boundary": {
+      "mature_t_index_0_valid": true,
+      "late_t_index_1_valid": false,
+      "rule": "last required close on cutoff is valid; next quote beyond cutoff is not"
+    }
+  },
+  "limitations": [
+    "Counts assert quote-row coverage only; no external holiday calendar qualified.",
+    "No forward-risk values were computed except the six prespecified examples.",
+    "Historical first publication time and survey revisions are unknown; +7 days is an assumption.",
+    "This checks source/timing/target expectations, not estimator correctness or predictive performance."
+  ]
+}

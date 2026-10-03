@@ -1,0 +1,114 @@
+{
+  "source_database": "/Users/yongbiaoli/.lei_signal_lab/lab.db",
+  "query": "SELECT * FROM market_breadth_snapshots WHERE market_id='SP500' ORDER BY as_of, universe_version",
+  "snapshot_file": "us-sp500-source-snapshot.csv",
+  "snapshot_sha256": "0c2798eeed50f559946dc4a4a2e7f7f46685226b9c7d1c85abfc37b27e8cdec8",
+  "transaction": "consistent SQLite read transaction, query_only; no DB writes",
+  "read_at": "2026-09-29T07:50:11.910698+00:00",
+  "rows": 11706,
+  "source_dates": 11702,
+  "start": "1980-04-14",
+  "end": "2026-09-22",
+  "backfill_rows": 11694,
+  "backfill_end": "2026-09-04",
+  "source_counts": {
+    "formal|complete|backfill_v1": 11694,
+    "formal|unavailable|": 12
+  },
+  "historical_available_at_proven": false,
+  "historical_membership_proven": false,
+  "new_return_experiments": 0,
+  "fields": {
+    "breadth_20": {
+      "non_null_rows": 11694,
+      "null_rows": 12,
+      "min_percent": 0.0,
+      "max_percent": 98.954,
+      "count_fixed_10pp_intervals": [
+        231,
+        523,
+        738,
+        1073,
+        1448,
+        1920,
+        2204,
+        2132,
+        1167,
+        258
+      ],
+      "coverage_min": 0.3076923076923077,
+      "coverage_max": 1.0,
+      "below_90pct_coverage_rows": 8389,
+      "coverage_count_fraction_max_difference": 0.0
+    },
+    "breadth_50": {
+      "non_null_rows": 11664,
+      "null_rows": 42,
+      "min_percent": 0.2433,
+      "max_percent": 97.9167,
+      "count_fixed_10pp_intervals": [
+        196,
+        343,
+        637,
+        835,
+        1276,
+        1869,
+        2214,
+        2298,
+        1636,
+        360
+      ],
+      "coverage_min": 0.1902834008097166,
+      "coverage_max": 1.0,
+      "below_90pct_coverage_rows": 8419,
+      "coverage_count_fraction_max_difference": 0.0
+    },
+    "breadth_200": {
+      "non_null_rows": 11514,
+      "null_rows": 192,
+      "min_percent": 0.7389,
+      "max_percent": 97.8102,
+      "count_fixed_10pp_intervals": [
+        180,
+        132,
+        448,
+        577,
+        804,
+        1248,
+        2084,
+        2570,
+        2390,
+        1081
+      ],
+      "coverage_min": 0.18421052631578946,
+      "coverage_max": 1.0,
+      "below_90pct_coverage_rows": 8569,
+      "coverage_count_fraction_max_difference": 0.0
+    }
+  },
+  "source_available_at_equals_as_of_rows": 11706,
+  "timestamp_timezone_rows": 0,
+  "distinct_constituent_counts_backfill": [
+    494
+  ],
+  "earliest_row": {
+    "as_of": "1980-04-14",
+    "available_at": "1980-04-14",
+    "constituent_count": 494,
+    "eligible_20": 152,
+    "eligible_50": 94,
+    "eligible_200": 91,
+    "coverage_20": 0.3076923076923077,
+    "coverage_50": 0.1902834008097166,
+    "coverage_200": 0.18421052631578946,
+    "provenance": "sp500_components_wikipedia+akshare_sina_v1",
+    "run_id": "backfill:sp500_components_v1"
+  },
+  "original_LEI_threshold_only": {
+    "low_20_and_50_count": 227,
+    "high_20_and_50_count": 306,
+    "not_interpretation": "Counts only for the present-member backfill; not genuine historical SP500 triggers or independent evidence."
+  },
+  "qualification_verdict": "blocked_for_historical_SP500_prediction: current members backfilled; per-window denominators; synthetic date-only arrival; nonvalidated price actions",
+  "meaningful_available_use": "Audit and descriptive map of the frozen current-member group; not the historical SP500 market."
+}

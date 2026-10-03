@@ -1,0 +1,37 @@
+{
+  "mission": "Independently audit404-row breadth input arithmetic and study support without outcome values",
+  "task_scope": [
+    "dates uniqueness/order, denominators implied by each window",
+    "extreme chronological clustering and label maturity counts only"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/sentiment-short-history-2026-10-02/inputs/ma_percentage_historical.json",
+    "docs/experiments/raw/sentiment-short-history-2026-10-02/profile.json",
+    "docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/inputs/px_SPY.csv",
+    "AGENTS.md"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/sentiment-short-history-2026-10-02/version-resume/local-review/"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "independent-audit.json",
+    "review.md",
+    "no outcome values/no fits"
+  ],
+  "stop_conditions": [
+    "input hash drift",
+    "permission or scope ambiguity"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "input_sha256": "613fa152ee6cf2820df59f5566eb4601bda2f1c71747b7bda96d8128282011c7"
+}

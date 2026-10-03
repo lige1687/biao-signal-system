@@ -1,0 +1,34 @@
+{
+  "counts": {
+    "source_rows": 2038,
+    "price_rows": 8456,
+    "complete_20week_inputs": 1962,
+    "prefix19_unavailable": 19,
+    "gap_20week_windows_unavailable": 57,
+    "base_eligible_all_years": 1615,
+    "common_eligible_all_years": 1558,
+    "old_evaluation_rows": 835,
+    "common_evaluation_rows": 816,
+    "exclusion_counts_nonexclusive": {
+      "observation_outside_range": 397,
+      "nonfinite_x_or_baseline": 339,
+      "duplicate_t_keep_latest_source": 286,
+      "incomplete_20_calendar_survey_weeks": 76,
+      "incomplete_target_quotes": 25,
+      "target_beyond_cutoff": 9,
+      "no_observation_quote": 1
+    }
+  },
+  "numerical_examples": {
+    "first20_mean": 9.5,
+    "first19_missing": true,
+    "missing_calendar_week_not_compressed": true,
+    "restored20_complete_weeks_mean": 15.5,
+    "future_append_or_change_leaves_past_features_unchanged": true
+  },
+  "original_observation_reconstruction": "all2038source rows,5pricefeatures,currentAAII,target dates and y agree",
+  "calendar": "AAII source gaps3 calendar weeks. No empty survey week compressed into20week mean.",
+  "available_at": "unknown;source+7days assumption only",
+  "permitted_scope": "saved-series retrospective120quote-interval comparison only",
+  "production": "not_authorized"
+}

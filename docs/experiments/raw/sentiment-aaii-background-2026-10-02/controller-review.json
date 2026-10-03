@@ -1,0 +1,128 @@
+{
+  "execution": "completed",
+  "evidence": "inconclusive",
+  "completion_reason": "evidence_boundary",
+  "scope": "One saved-series SPY120quote outcome; no actualasofprediction qualification",
+  "coverage": [
+    {
+      "check": "definition",
+      "status": "complete",
+      "artifact": "definition.json",
+      "reason": "20calendar survey weeks includingcurrent, no gapcompression"
+    },
+    {
+      "check": "implementation",
+      "status": "complete",
+      "artifact": "qualification.json",
+      "reason": "preheat/gap/futureprefix examples plus rawinput checks"
+    },
+    {
+      "check": "data_time_quality",
+      "status": "complete",
+      "artifact": "qualification.json",
+      "reason": "sourcehash/datebounds and preserved unknown revisions"
+    },
+    {
+      "check": "performance",
+      "status": "complete",
+      "artifact": "run-01/results.json",
+      "reason": "all4models same816dates"
+    },
+    {
+      "check": "baseline_increment",
+      "status": "complete",
+      "artifact": "run-01/results.json",
+      "reason": "Bcurrentmood+price5;X,BX,I comparators"
+    },
+    {
+      "check": "uncertainty_dependence",
+      "status": "complete",
+      "artifact": "run-01/paired-blocks-52.csv",
+      "reason": "52/104calendarweeks withmissingpositions; overlappingtargets retained"
+    },
+    {
+      "check": "stability_counterexample",
+      "status": "complete",
+      "artifact": "run-01/results.json",
+      "reason": "fixedbands, allannual, delete2020flips, no newfit"
+    },
+    {
+      "check": "selection_history",
+      "status": "complete",
+      "artifact": "protocol.json",
+      "reason": "seenhistory,priorfamilyatleast744fits"
+    },
+    {
+      "check": "independent_arithmetic",
+      "status": "complete",
+      "artifact": "independent-review/review.json",
+      "reason": "12alternateOLSfits and raw source checks pass"
+    },
+    {
+      "check": "reproducibility",
+      "status": "complete",
+      "artifact": "executed-analysis.py",
+      "reason": "exact executedcodehashpreserved; unusedreplaywriter corrected separately"
+    },
+    {
+      "check": "actual_historical_available_at",
+      "status": "evidence_boundary",
+      "artifact": "protocol.json",
+      "reason": "firstrelease/revision/pricevintage unknown; never passed"
+    },
+    {
+      "check": "independent_new_data",
+      "status": "evidence_boundary",
+      "artifact": "protocol.json",
+      "reason": "none newlyunseen qualifiedhistory"
+    },
+    {
+      "check": "account_trading",
+      "status": "not_applicable",
+      "artifact": "protocol.json",
+      "reason": "not authorizedorstudied bythisquestion"
+    }
+  ],
+  "root_recomputed": {
+    "rmse": {
+      "I": 8.750926840259678,
+      "B": 8.971200864258938,
+      "X": 8.703815673403861,
+      "BX": 8.908118289819152
+    },
+    "primary_increment_pct": 1.4013906786930375,
+    "delete_2020_increment_pct": -0.24709188874576515,
+    "evaluation_rows": 816,
+    "max_review_prediction_difference": 1.7763568394002505e-14
+  },
+  "p0_pending": [],
+  "fit_accounting": {
+    "core": 68,
+    "independent": 12,
+    "preflight_failure_fit_count": 0,
+    "total": 80,
+    "family_at_least": 824
+  },
+  "model_assignments": [
+    "root:designandthinadapter",
+    "gpt-6-sol/medium:primarytoolandmethodreview",
+    "gpt-6-luna/low:sourceauditandindependentarithmetic"
+  ],
+  "pro_calls": 0,
+  "paid": 0,
+  "new_market_data_requests": 0,
+  "repo_hygiene": "passed;final2026-10-02check",
+  "system_upgrade": {
+    "system_upgrade": "registered_and_submitted_review",
+    "goal_id": "okr-ca396566bb0f",
+    "status": "review",
+    "version": 5,
+    "api_writes": 5,
+    "user_permission": "允许登记并提交待验收",
+    "evidence": "system-upgrade-api-responses.json",
+    "accepted_by_user": false
+  },
+  "actual_elapsed_minutes_at_archive": 29.665779566666668,
+  "replay_writer_actual_check": "replay-writer-check.json;newauditpath,oldhashesunchanged,0fits",
+  "final_elapsed_minutes": 32.29175743333333
+}

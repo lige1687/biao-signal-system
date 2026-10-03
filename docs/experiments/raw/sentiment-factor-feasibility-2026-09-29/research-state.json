@@ -1,0 +1,152 @@
+{
+  "research_id": "sentiment-factor-feasibility-2026-09-29",
+  "run_id": "20260929-r1",
+  "question": "现有机构、散户与板块情绪资料哪些能成为可检验的因子；是否值得在价格与宽度之后评价新增信息",
+  "mode": "research",
+  "scope": "现有本地情绪资料与宽基ETF用途；数据资格、架构讨论及必要受限历史诊断",
+  "decision_use": "研究候选排序，不改变生产交易",
+  "execution_status": "completed",
+  "evidence_status": "inconclusive",
+  "allowed_actions": [
+    "本地只读取数",
+    "仓库内研究产物",
+    "6 Pro架构讨论",
+    "有限诊断",
+    "报告登记"
+  ],
+  "protected": [
+    "旧实验与raw路径",
+    "生产代码",
+    "规则与全局定义",
+    "仓库外配置和数据"
+  ],
+  "budget": {
+    "core_batches": 1,
+    "followup_batches": 3,
+    "experiment_attempts": 4,
+    "source_requests": 6,
+    "pro_architecture_calls": 2,
+    "paid_actions": 0,
+    "new_output_bytes": 20971520
+  },
+  "usage": {
+    "experiment_attempts": 4,
+    "source_requests": 3,
+    "pro_architecture_calls": 2,
+    "input_audit_runs": 1
+  },
+  "attempts": [
+    {
+      "id": "official-naaim",
+      "kind": "source",
+      "status": "completed",
+      "url": "https://naaim.org/programs/naaim-exposure-index/"
+    },
+    {
+      "id": "official-aaii",
+      "kind": "source",
+      "status": "completed",
+      "url": "https://www.aaii.com/sentimentsurvey"
+    },
+    {
+      "id": "official-sse",
+      "kind": "source",
+      "status": "completed",
+      "url": "https://www.sse.com.cn/market/othersdata/margin/",
+      "result": "no row-level publication history obtained"
+    },
+    {
+      "id": "audit-inputs-1",
+      "kind": "qualification",
+      "status": "completed",
+      "exit_code": 0,
+      "artifact": "input-audit.json"
+    },
+    {
+      "id": "survey-overlap-audit",
+      "kind": "qualification",
+      "status": "completed",
+      "artifact": "survey-overlap-audit.json"
+    },
+    {
+      "id": "audit-review-preflight",
+      "kind": "delegation_preflight",
+      "status": "blocked",
+      "reason": "Generic checker rejects read-only paths outside project; no agent spawned, no model call. Controller can perform the small independent count check directly without changes outside repo."
+    },
+    {
+      "id": "c2c-session-initial-record",
+      "kind": "state_record",
+      "status": "failed_then_corrected",
+      "reason": "session set does not accept --json; retry without option succeeded in repository-local state directory, no global state writes."
+    },
+    {
+      "id": "authority-correction",
+      "kind": "source_correction",
+      "status": "completed",
+      "reason": "Initial briefing used historical V1; latest approved documents include index sentiment module E. Sent version retained, correction follows."
+    },
+    {
+      "id": "calculate-qualification-1",
+      "kind": "qualification",
+      "status": "failed",
+      "exit_code": 1,
+      "reason": "Source verification found concurrent drift in research principles; no candidate or future-return outputs written. Need read current text and freeze separate accepted manifest."
+    },
+    {
+      "id": "calculate-qualification-2",
+      "kind": "qualification",
+      "status": "completed",
+      "exit_code": 0,
+      "artifact": "candidate-qualification.json",
+      "reason": "Accepted updated authority-only normative fingerprints in a separate manifest; original hashes retained."
+    },
+    {
+      "id": "price-diagnostic-1",
+      "kind": "price_information_diagnostic",
+      "status": "completed",
+      "protocol": "sentiment.price-diagnostic@1.0.1",
+      "registered_combinations": 2,
+      "fits_planned": 56,
+      "reason": "Pro direction allows this bounded branch; controller froze before labels; price-only results cannot answer breadth increment or E effectiveness.",
+      "exit_code": 0,
+      "artifact": "run-01/results.json",
+      "fits_actual": 56
+    }
+  ],
+  "next_action": "New user-authorized Sentiment Factor Library starts with S01; do not rerun this finite completed diagnostic.",
+  "communication": {
+    "provider": "ChatGPT",
+    "model_observed": "GPT-6",
+    "reasoning_strength_observed": "Pro",
+    "task_id": "sentiment-factor-feasibility-20260929",
+    "round": 2,
+    "conversation_url": "https://chatgpt.com/g/g-p-6aad1e2462ec81918c8871f063e61440/c/6aba1e74-6024-83ee-ba4d-ee287a8009b2",
+    "message_present": true,
+    "reply_complete": true,
+    "decision": "PLAN",
+    "rounds_completed": 2,
+    "further_pro_calls": 0,
+    "review_record": "pro-architecture-review.md"
+  },
+  "completion_reason": "question_answered_with_evidence_boundary",
+  "completed_at": "2026-09-29T07:45:11.372506+00:00",
+  "report": "docs/experiments/sentiment-factor-feasibility-2026-09-29.md",
+  "remaining_unanswered": [
+    "Relative-to-qualified-breadth increment",
+    "Actual historical availability/revision vintages",
+    "E full capital strategy",
+    "Tail/long-horizon uses"
+  ],
+  "user_preferences": {
+    "pro": "Only centralized architecture/direction discussion; no routine or every-round GPT-6 Pro calls; budget limited.",
+    "new_mission": "Own sentiment/breadth/positioning/risk-appetite/market-state only, technical factors handled separately."
+  },
+  "outputs": {
+    "new_bytes": 5194178,
+    "paid_actions": 0,
+    "production_changes": 0,
+    "trades": 0,
+    "okr_writes": 0
+  }
+}

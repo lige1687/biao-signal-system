@@ -1,0 +1,38 @@
+{
+  "mission": "Sentiment strategy semantic mining: AAII 20 survey background. Root owns design and experiment.",
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "stop_conditions": [
+    "No production or external-file changes",
+    "No other writers paths",
+    "No new experiments or extra source requests",
+    "Stop on explicit access denial"
+  ],
+  "controller_review": {
+    "required": true,
+    "by": "root"
+  },
+  "task_scope": [
+    "Audit AAII dates and 20 period mean definition, quote strategy references, check prior research inventory. No fits."
+  ],
+  "read_only_paths": [
+    "configs/strategy-documents.v1.json",
+    "docs/research/sentiment-factor-library",
+    "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29",
+    "docs/experiments/semantic-mining-2026-10-02.md",
+    "docs/plan-sector-trend-page.md"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/local-audit"
+  ],
+  "network_allowed": false,
+  "expected_outputs": [
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/local-audit/review.json",
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/local-audit/review.md"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  }
+}

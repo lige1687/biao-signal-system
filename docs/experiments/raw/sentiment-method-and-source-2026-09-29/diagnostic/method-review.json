@@ -1,0 +1,35 @@
+{
+  "kind": "controller_candidate_review_after_single_diagnostic_not_a_new_fit",
+  "new_fits": 0,
+  "new_target_labels_computed": false,
+  "active_candidates": 1,
+  "withdraws": "audit.json/new_estimator_proposal is an untested earlier draft; it is superseded by the controller's sole candidate below, preserving the original diagnostic output",
+  "candidate": {
+    "prediction_pp": "100*expit(intercept + training_standardized_features @ slopes)",
+    "target_training_unit": "risk percentage points divided by100",
+    "objective_to_freeze": "mean((target_fraction-expit(linear_predictor))**2) + 0.001*sum(slopes**2); intercept not penalized",
+    "optimizer": "one fixed starting point, SciPy L-BFGS-B; no model was fitted here",
+    "four_comparators": "mature arithmetic mean / rv20 / five price backgrounds / five price backgrounds plus continuous AAII"
+  },
+  "conflicts_with_proved_diagnostic_findings": false,
+  "directly_addresses": [
+    "Future within-window maximum drop has support0..100 percentage points; transformed predictions stay in that range, unlike saved negative linear-risk predictions",
+    "Fixed slope penalty restricts extreme coefficient sensitivity while respecting training-only standardization",
+    "Mandatory arithmetic mean comparison prevents crediting AAII only against a background that itself underperforms the mean"
+  ],
+  "does_not_resolve": [
+    "No demonstrated severe numerical ill-conditioning was found; support restriction is a modeling correction, not proof of a solver defect",
+    "Training/evaluation market distributions change; transformation and penalty cannot guarantee transportability",
+    "Historical first release and revisions remain unknown",
+    "Risk information and actual trading value remain different questions",
+    "The new target and estimator remain untested; no claim of improvement"
+  ],
+  "minimum_contract_clarifications": [
+    "Freeze mean rather than summed squared error explicitly, since0.001 has different strength and time dependence under summed error",
+    "Freeze starting intercept at logit of matured training mean risk fraction and slopes0; arithmetic-mean comparator should remain the exact matured mean",
+    "If matured mean is exactly0or1, predeclare a stop/not-estimable state instead of silently inventing clipping",
+    "Freeze optimizer iteration/gradient tolerances and stopping checks; one-start squared error with logistic link is not guaranteed to reach a global minimum",
+    "Record starting/final penalized objective, convergence and gradient norm; do not accept a final objective worse than the fixed starting point",
+    "Do not tune penalty, horizon or starting points using evaluation outcomes; preserve the same complete label population for all comparators"
+  ]
+}

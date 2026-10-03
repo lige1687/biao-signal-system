@@ -1,0 +1,36 @@
+{
+  "operations": [
+    {
+      "n": 1,
+      "request": "public data repository commits for ma_percentage_historical.json page1",
+      "result": "200;100records",
+      "artifact": "commits-page1.json"
+    },
+    {
+      "n": 2,
+      "request": "public data repository metadata",
+      "result": "200;created2025-11-17;MIT metadata",
+      "artifact": "repository-metadata.json"
+    },
+    {
+      "n": 3,
+      "request": "public data repository commits until2025-11-18",
+      "result": "200;15records",
+      "artifact": "commits-early.json"
+    },
+    {
+      "n": 4,
+      "request": "immutable public data snapshot at5f39b07",
+      "result": "curl28 20secondtimeout; no saved JSON at this point"
+    },
+    {
+      "n": 5,
+      "request": "same immutable public data snapshot; single transport retry",
+      "result": "200;301rows",
+      "artifact": "earliest-ma-snapshot.json"
+    }
+  ],
+  "actual": 5,
+  "max": 6,
+  "no_collector_directory_or_browser_attempts": true
+}

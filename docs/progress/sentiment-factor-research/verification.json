@@ -1,0 +1,43 @@
+{
+  "time_utc": "2026-10-03T05:33:02.101777+00:00",
+  "prior_checks": "local handoff restored657 files and recomputed816 saved-prediction scores,0 fits; original reports retain independent checks",
+  "this_sync": "exact file/secret/diff checks; AST/JSON/registry validation to be run before commit; no refit",
+  "github_cli": "gh unavailable; remote verified via git ls-remote/fetch",
+  "ci": "remote main tree has no .github workflows or known root CI/deploy config; no configured pre-push hook, only pre-push.sample; no deployment paths changed",
+  "pending": [
+    "push_remote_commit_readback"
+  ],
+  "checked_at_utc": "2026-10-03T05:37:54.155255+00:00",
+  "this_sync_results": {
+    "included_files_sha_and_size": 419,
+    "python_ast_parse": 31,
+    "json_parse": 297,
+    "reports_conclusion_and_registry": 18,
+    "repo_hygiene": {
+      "command": "python3 scripts/check_repo_hygiene.py",
+      "exit_code": 0,
+      "output": "✓ 归置自检通过：根层四层均在白名单内，关键配置均已入库。\n"
+    },
+    "fits": 0,
+    "paid_tasks": 0,
+    "pro_calls": 0
+  },
+  "sync_failures": [
+    {
+      "step": "first candidate list comparison",
+      "reason": "Git quoted Chinese paths; list comparison rejected before commit, no content lost",
+      "correction": "per-command core.quotepath=false, preserve real path names; no global config change",
+      "fits": 0
+    }
+  ],
+  "candidate_review": {
+    "files": 426,
+    "reports": 18,
+    "code_files": 31,
+    "total_selected_task_content_bytes": 4582858,
+    "shared_global_registry": "append18only, existing entry text preserved except final comma",
+    "no_large_inputs_or_session_material": true,
+    "no_shared_index_worktree_mutation": true,
+    "no_deployment_or_ci_paths": true
+  }
+}

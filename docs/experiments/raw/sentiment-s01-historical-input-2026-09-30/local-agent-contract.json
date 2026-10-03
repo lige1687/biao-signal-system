@@ -1,0 +1,14 @@
+{
+  "mission": "Check whether project-repository evidence already has historically valid S&P 500 20/50 breadth inputs or reconstructible membership and price lineage.",
+  "task_scope": ["Read existing inventory and US source audit first", "Inspect only directly relevant repository files; do not read secrets or broad private directories", "Check actual fields, source producer, constituent vintage, eligible denominator and price provenance, without running a factor outcome test", "Record concrete path/table/field evidence and exact unresolved gaps; controller separately checks the known read-only SQLite database"],
+  "read_only_paths": ["AGENTS.md", "configs/strategy-documents.v1.json", "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/", "docs/experiments/raw/sentiment-standard-pro-review-2026-09-29/", "docs/experiments/raw/sentiment-s01-historical-input-2026-09-30/research-state.json", "src/", "scripts/", "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/", "docs/experiments/raw/breadth-b200-description-run-2026-09-24/"],
+  "write_paths": ["docs/experiments/raw/sentiment-s01-historical-input-2026-09-30/local/"],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": ["local/inventory.json with inspectable local evidence and precise gaps", "local/delivery.md with whether any historical B20/B50 input qualifies; distinguish absence in inspected scope from global absence"],
+  "stop_conditions": ["secret or protected data path", "write outside assigned directory", "method ambiguity needing strategy change"],
+  "executor": {"model": "gpt-6-luna", "reasoning_effort": "low"},
+  "controller_review": {"required": true}
+}

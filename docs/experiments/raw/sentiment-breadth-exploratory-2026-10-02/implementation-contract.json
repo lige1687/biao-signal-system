@@ -1,0 +1,43 @@
+{
+  "mission": "Implement one frozen provider-breadth20+delta20 retrospective20quote study; synthetic and qualification only before controller-run",
+  "task_scope": [
+    "Write execution/analyze.py from protocol.json definitions without reading real outcome magnitudes",
+    "synthetic checks of exact calendar/missing/positive/scaling/ridge/overlap/quarter aggregation",
+    "code must implement later --run command, but do NOT execute real effects or models; root owns result execution after freeze"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "docs/experiments/raw/sentiment-breadth-exploratory-2026-10-02/controller-contract.json",
+    "docs/experiments/raw/sentiment-breadth-exploratory-2026-10-02/qualification.json",
+    "docs/experiments/raw/sentiment-breadth-exploratory-2026-10-02/method-review",
+    "docs/experiments/raw/sentiment-breadth-exploratory-2026-10-02/protocol.json",
+    "docs/research/current-standards.json",
+    "docs/research/research-question-method-standard.md",
+    "docs/research/factor-increment-evidence-standard.md"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/sentiment-breadth-exploratory-2026-10-02/execution"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "analyze.py",
+    "synthetic-check.json",
+    "implementation-notes.md"
+  ],
+  "stop_conditions": [
+    "scope/time ambiguity report to root",
+    "no importing implementation from frozen raw/analyze.py",
+    "no real fitting or reading real outcome magnitudes",
+    "no production/global/sharedregistry writes"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

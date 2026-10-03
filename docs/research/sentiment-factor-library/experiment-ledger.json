@@ -1,0 +1,385 @@
+{
+  "schema": "sentiment-family-ledger/1",
+  "updated_at": "2026-10-02T03:11:23.985668+00:00",
+  "family_attempt_history": "既有宽度、调查、PutCall/VIX、定投与板块家族均有多轮探索；总次数未知，不重置成首次试验",
+  "new_user_authorization": "2026-09-29 pasted Sentiment Factor Library mission; breadth belongs to this line, technical factors separate",
+  "scope_change": "原可行性问题已封存；本批是新授权S01来源资格与库初始化，不重跑原四次尝试，原计数永久保留",
+  "prior_feasibility": {
+    "state": "docs/experiments/raw/sentiment-factor-feasibility-2026-09-29/research-state.json",
+    "attempts_including_failure": 4,
+    "core_forecast_batches": 1,
+    "registered_combinations": 2,
+    "model_fits": 56,
+    "pro_architecture_calls": 2,
+    "source_requests": 3
+  },
+  "this_phase": {
+    "market_experiments": 0,
+    "new_hypotheses_with_returns": 0,
+    "pro_architecture_calls": 0,
+    "network_requests": 0,
+    "delegate_model": "gpt-6-sol",
+    "delegate_effort": "medium",
+    "delegate_substantive_sources": 25,
+    "source_snapshot_runs": 1,
+    "paid_actions": 0
+  },
+  "records": [
+    {
+      "id": "sol-preflight-1",
+      "kind": "delegation_check",
+      "result": "blocked_parent_read_write_overlap",
+      "side_effects": "none; no helper spawned"
+    },
+    {
+      "id": "sol-preflight-2",
+      "kind": "delegation_check",
+      "result": "ready_narrowed_read_paths"
+    },
+    {
+      "id": "S01-source-inventory",
+      "kind": "qualification",
+      "result": "delivered; shared registry drift recorded, relevant objects unchanged",
+      "artifact": "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/sol-inventory/sources.json"
+    },
+    {
+      "id": "S01-US-database-and-lineage",
+      "kind": "qualification",
+      "result": "data exists but historical-market prediction qualification blocked",
+      "artifact": "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/us-source-audit.json"
+    },
+    {
+      "id": "S05-encoding-read-1",
+      "kind": "qualification_read",
+      "result": "utf8_failed; explicit latin1 corrected, no source change",
+      "artifact": "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/putcall-source-audit.json"
+    },
+    {
+      "id": "S05-source-metadata",
+      "kind": "qualification",
+      "result": "different products and 2012 structure; four sources end2019; no market experiment"
+    },
+    {
+      "id": "registry-final-binding",
+      "kind": "definition_read_check",
+      "result": "first all-status equality failed; only three_tier scope status changed, formula/input/time unchanged; three_tier not an indexed S01 reference",
+      "artifact": "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/accepted-registry-binding.json"
+    }
+  ],
+  "no_budget_reset": true,
+  "next_experiment_requires": "合格输入、新冻结问题与有限预算；不能把骨架或计划说成已经运行全部S01—S10",
+  "subsequent_questions": [
+    {
+      "question": "sentiment.aaii-extremes-increment@1.0.0",
+      "authorization": "用户明确下一轮情绪增量研究",
+      "ledger": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/trial-ledger.json",
+      "state": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/research-state.json",
+      "actual_market_batches": 1,
+      "actual_model_fits": 504,
+      "actual_computation_attempts": 2,
+      "new_pro_calls": 0,
+      "new_network_calls": 0,
+      "historical_family_attempts_not_reset": true,
+      "verdict": "Insufficient evidence"
+    },
+    {
+      "question": "sentiment.putcall-increment@1.0.0",
+      "authorization": "用户继续推进；Pro仅方向架构疑问",
+      "ledger": "docs/experiments/raw/sentiment-putcall-increment-2026-09-29/trial-ledger.json",
+      "state": "docs/experiments/raw/sentiment-putcall-increment-2026-09-29/research-state.json",
+      "actual_market_batches": 1,
+      "actual_model_fits": 80,
+      "actual_computation_attempts": 1,
+      "new_pro_calls": 0,
+      "new_network_calls": 3,
+      "source_call_basis": "web tool invocations;2queries2opens4same-page finds separately recorded",
+      "models": "8 fixed comparisons,2 targets,5 years; no Equity+Total combination",
+      "delegate_models": [
+        "gpt-6-luna/low",
+        "gpt-6-sol/medium"
+      ],
+      "historical_family_attempts_not_reset": true,
+      "verdict": "Insufficient evidence"
+    },
+    {
+      "question": "sentiment.aaii-risk120-increment@1.0.0",
+      "authorization": "用户明确持续推进情绪研究；Pro方向plan前置完成",
+      "ledger": "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/trial-ledger.json",
+      "state": "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/research-state.json",
+      "actual_market_batches": 1,
+      "actual_model_fits": 68,
+      "actual_failed_market_fits": 0,
+      "new_pro_calls": 0,
+      "new_market_source_requests": 0,
+      "diagnostic_runs": 1,
+      "diagnostic_fits": 0,
+      "source_qualification_requests": 4,
+      "method_api_doc_requests": 2,
+      "source_request_unit": "individualqueries/URLreads, not oldtool-invocationunit",
+      "delegate_models": [
+        "gpt-6-sol/medium",
+        "gpt-6-luna/low"
+      ],
+      "historical_family_attempts_not_reset": true,
+      "verdict": "Insufficient evidence",
+      "primary_increment_pct": 0.2091584176831307,
+      "report": "docs/experiments/sentiment-aaii-risk-increment-2026-09-29.md"
+    },
+    {
+      "question": "sentiment-s01-historical-input",
+      "authorization": "2026-09-30 用户同意按上一轮条件计划继续；官方范围限既定两家和五个预定日期，不含付费或联系",
+      "ledger": "docs/experiments/raw/sentiment-s01-historical-input-2026-09-30/source/source-ledger.json",
+      "state": "docs/experiments/raw/sentiment-s01-historical-input-2026-09-30/research-state.json",
+      "report": "docs/experiments/sentiment-s01-historical-input-2026-09-30.md",
+      "actual_new_source_requests_including_failures": 6,
+      "prior_source_requests_retained": 4,
+      "actual_model_fits": 0,
+      "actual_pro_calls": 0,
+      "data_qualification": "no genuine historical US20/50 input acquired",
+      "market_effects": "not_evaluated",
+      "verdict": "Insufficient evidence",
+      "executor_models": [
+        "gpt-6-sol/medium",
+        "gpt-6-luna/low"
+      ],
+      "controller_db_review": "docs/experiments/raw/sentiment-s01-historical-input-2026-09-30/controller-local-db-audit.json",
+      "delegate_contract_deviation": "Local assistant read ordinary repository fixture paths beyond its narrow read_only_paths; controller rechecked decisive facts, no out-of-scope writes or market fit."
+    },
+    {
+      "question": "sentiment-s01-local-cache",
+      "authorization": "2026-09-30 用户指明宽度为本地自算，并授权直接处理；仓外仅只读，未联系外部或付费",
+      "state": "docs/experiments/raw/sentiment-s01-local-cache-2026-09-30/research-state.json",
+      "report": "docs/experiments/sentiment-s01-local-cache-2026-09-30.md",
+      "cache_profile": "docs/experiments/raw/sentiment-s01-local-cache-2026-09-30/cache-profile.json",
+      "actual_local_qualification_batches": 1,
+      "actual_market_fits": 0,
+      "actual_pro_calls": 0,
+      "actual_network_requests": 0,
+      "prior_official_source_requests_retained": 10,
+      "prior_known_market_fits_at_least": 708,
+      "verdict": "Insufficient evidence for original historical S01; local arithmetic qualified but historical membership not qualified",
+      "executor_models": [
+        "gpt-6-sol/medium"
+      ]
+    },
+    {
+      "question": "sentiment.aaii-background@1.0.0",
+      "authorization": "用户2026-10-02要求继续挖策略语义与因子并复用开源组件；限情绪线仓库内研究",
+      "ledger": "docs/experiments/raw/sentiment-aaii-background-2026-10-02/trial-ledger.json",
+      "independent_ledger": "docs/experiments/raw/sentiment-aaii-background-2026-10-02/independent-review/trials.json",
+      "state": "docs/experiments/raw/sentiment-aaii-background-2026-10-02/research-state.json",
+      "report": "docs/experiments/sentiment-aaii-background-2026-10-02.md",
+      "actual_core_fits": 68,
+      "actual_independent_fits": 12,
+      "actual_model_fits": 80,
+      "known_family_fits_at_least": 824,
+      "new_pro_calls": 0,
+      "new_paid_calls": 0,
+      "new_market_source_requests": 0,
+      "source_new_page_or_query_operations": 6,
+      "already_read_page_find_operations": 2,
+      "source_budget_conservative_overrun": 2,
+      "source_budget_unit_caveat": "6newURL/query operations;8includingpagefinds;5webtoolcalls. No more externalaccess afterthisaudit.",
+      "nonfit_audit_failures": 2,
+      "primary_increment_pct": 1.4013906786930153,
+      "delete2020_increment_pct": -0.24709188874576515,
+      "evidence": "inconclusive",
+      "evidence_scope": "SavedSPYcurrentvintage only,816dates,actualhistoricalavailabilitynotqualified",
+      "executor_models": [
+        "gpt-6-sol/medium",
+        "gpt-6-luna/low",
+        "root"
+      ],
+      "historical_family_attempts_not_reset": true,
+      "system_upgrade": {
+        "system_upgrade": "registered_and_submitted_review",
+        "goal_id": "okr-ca396566bb0f",
+        "status": "review",
+        "version": 5,
+        "api_writes": 5,
+        "user_permission": "允许登记并提交待验收",
+        "evidence": "system-upgrade-api-responses.json",
+        "accepted_by_user": false
+      }
+    }
+  ],
+  "subsequent_direction_reviews": [
+    {
+      "id": "sentiment-direction-review-20260929",
+      "user_request": "docs/experiments/raw/sentiment-direction-pro-review-2026-09-29/user-request.txt",
+      "requested_url": "https://chatgpt.com/c/6ab1f426-5850-83ee-8eef-bf77c8d7c697",
+      "actual_pro_calls": 1,
+      "actual_new_market_fits": 0,
+      "actual_local_market_source_requests": 0,
+      "pro_internal_source_requests": "unknown; do not infer request count from four websites",
+      "review_reply": "docs/experiments/raw/sentiment-direction-pro-review-2026-09-29/pro-reply-verbatim.txt",
+      "decision": "REVISE",
+      "report": "docs/experiments/sentiment-direction-pro-review-2026-09-29.md",
+      "next_plan": "docs/experiments/raw/sentiment-direction-pro-review-2026-09-29/next-stage-plan.json",
+      "next_tasks_execution": "completed diagnostic/source qualification and oneconditionalriskquestion, no originalE fit",
+      "old_protocols_results_unchanged": true,
+      "actual_next_evidence": "docs/experiments/sentiment-aaii-risk-increment-2026-09-29.md"
+    },
+    {
+      "id": "sentiment-standard-review-20260929",
+      "user_request": "docs/experiments/raw/sentiment-standard-pro-review-2026-09-29/user-request.txt",
+      "requested_url": "https://chatgpt.com/c/6ab1f426-5850-83ee-8eef-bf77c8d7c697",
+      "actual_pro_calls": 1,
+      "actual_new_market_fits": 0,
+      "actual_local_market_source_requests": 0,
+      "local_qualification_reinterpretations": 1,
+      "pro_internal_source_requests": "unknown; websites displayed are not request count",
+      "review_reply": "docs/experiments/raw/sentiment-standard-pro-review-2026-09-29/pro-reply-verbatim.txt",
+      "decision": "REVISE",
+      "report": "docs/experiments/sentiment-standard-pro-review-2026-09-29.md",
+      "next_plan": "docs/experiments/raw/sentiment-standard-pro-review-2026-09-29/next-stage-plan.json",
+      "next_tasks_execution": "not started; real width source still blocked, direction review and local documentation complete",
+      "old_protocols_results_unchanged": true,
+      "controller_adjustments": [
+        "continuous relation before extreme as user instruction",
+        "descriptive versus mature-training mean distinguished",
+        "Pro suggested fresh acquisition budget not automatically authorized or spent"
+      ]
+    },
+    {
+      "id": "sentiment-direction-application-20260930",
+      "kind": "report_only_direction_application",
+      "authorization": "User-authorized direction review handoff, then user继续哈; owned sentiment cards and report only",
+      "report": "docs/experiments/sentiment-direction-application-2026-09-30.md",
+      "state": "docs/experiments/raw/sentiment-direction-application-2026-09-30/research-state.json",
+      "actual_new_market_fits": 0,
+      "actual_new_network_requests": 0,
+      "actual_pro_calls": 0,
+      "actual_cache_recomputations": 0,
+      "actual_provider_contacts": 0,
+      "executor_models": [
+        "gpt-6-luna/low"
+      ],
+      "result": "Corrected purpose-specific qualification and original-decision mapping; concrete free-sample inquiry drafted, not sent; historical effects unchanged",
+      "old_protocols_results_unchanged": true
+    }
+  ],
+  "open_source_input_runs": [
+    {
+      "id": "sentiment-open-source-input-20260930",
+      "authorization": "User explicitly requested open/free or limited-quota sources and offered to log in if needed; no provider outreach or payment",
+      "report": "docs/experiments/sentiment-open-source-input-2026-09-30.md",
+      "state": "docs/experiments/raw/sentiment-open-source-input-2026-09-30/research-state.json",
+      "source_requests": "at_least_30; exact count not logged; internal 30-request cap reached, stopped",
+      "actual_new_market_fits": 0,
+      "actual_pro_calls": 0,
+      "actual_provider_contacts": 0,
+      "status": "paused_until_free_account_login_and_input_qualification",
+      "result": "Historical membership and selected former-member bars downloaded; 2008-09-12 at least 141 old members have no name-matched public price file in local-plus-FNSPID inventory, which is only an upper-bound proxy"
+    },
+    {
+      "id": "sentiment-open-source-continuation-20260930",
+      "authorization": "用户：你找一下免费的开源的数据源啥的呢，也是不错的哈，总之推全本轮任务。",
+      "report": "docs/experiments/sentiment-open-source-input-2026-09-30.md",
+      "state": "docs/experiments/raw/sentiment-open-source-input-2026-09-30/research-state.json",
+      "source_ledger": "docs/experiments/raw/sentiment-open-source-input-2026-09-30/continuation-source-ledger.json",
+      "prior_source_requests_at_least": 30,
+      "new_source_operations": 24,
+      "operation_unit": "initiated search tool batch/page-date query/download check/HTTP operation; not exact HTTP requests",
+      "continuation_budget": {
+        "source_operations_max": 24,
+        "download_bytes_max": 750000000,
+        "market_fits_max": 0,
+        "pro_calls_max": 0,
+        "paid_actions_max": 0
+      },
+      "saved_download_bytes": 515657054,
+      "actual_new_market_fits": 0,
+      "actual_pro_calls": 0,
+      "actual_provider_contacts": 0,
+      "actual_paid_actions": 0,
+      "actual_new_delegates": 0,
+      "actual_local_window_batches": 1,
+      "independent_csv_recounts": 1,
+      "status": "paused_continuation_budget_exhausted; login_resolved_export_and_method_pending",
+      "result": "Public 2017 archive downloaded; actual 50quote windows counted; AGN company mismatch independently verified. Investing20/50 long-history public pages observed; full export pending free account. No qualified full originalE input. User Chrome login repaired, authenticatedB20 date query verified; normal download failed to confirm artifact.",
+      "prior_attempts_and_fits_retained": true,
+      "old_price_filename_counts_not_relabelled_as_actual_coverage": true,
+      "failed_edit_attempts": [
+        {
+          "operation": "apply_patch",
+          "result": "rejected duplicate target paths; zero file mutations; corrected with normal in-place write after saving prior report"
+        },
+        {
+          "operation": "metadata documentation update",
+          "result": "Registry schema key mismatch stopped after owned library edits; remaining registry/navigation update corrected using actual entries key. No model fitting or data changes."
+        }
+      ],
+      "local_input_snapshot_reproduction_runs": 1,
+      "frozen_reproduction_output_identical": true,
+      "login_repair": "docs/experiments/raw/sentiment-open-source-input-2026-09-30/login-repair.json"
+    },
+    {
+      "id": "authenticated-export-resume-20260930",
+      "source_ledger": "docs/experiments/raw/sentiment-open-source-input-2026-09-30/export-resume-ledger.json",
+      "authorization": "用户：总之你继续吧",
+      "new_source_operations": 6,
+      "saved_download_bytes": 364698,
+      "browser_transport_failures": 2,
+      "actual_new_market_fits": 0,
+      "actual_pro_calls": 0,
+      "paid_actions": 0,
+      "result": "authenticatedwidthcontrol unavailableduebrowsertransport; official delayedNAAIMtable131weeks downloaded andqualifiedforrestrictedseparatestudy",
+      "status": "completed_source_tranche_width_export_paused"
+    }
+  ],
+  "known_cumulative": {
+    "market_model_fits_at_least": 744,
+    "pro_architecture_calls_at_least": 4,
+    "s01_official_source_requests_at_least": 10,
+    "full_earlier_family_history": "unknown; not reset",
+    "fit_count_note": "previous724 retained;this20estimates(core5+Aprilsensitivity5+independentalternative10);earlierfullhistoryunknown"
+  },
+  "limited_public_window_runs": [
+    {
+      "id": "sentiment-naaim-public-window-20260930",
+      "family": "S04",
+      "authorization": "用户：总之你继续吧；继续本线免费来源与信息研究",
+      "report": "docs/experiments/sentiment-naaim-public-window-2026-09-30.md",
+      "protocol": "docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/protocol.json",
+      "state": "docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/research-state.json",
+      "definition": "candidate:sentiment.naaim-exposure@draft-1",
+      "scope": "official current delayed131weeks; retrospective association only",
+      "period": [
+        "2023-12-27",
+        "2026-06-24"
+      ],
+      "target": "20SPYquoteintervalreturn",
+      "price_background": "past20quoteintervalreturn only",
+      "actual_core_fits": 8,
+      "actual_review_refits": 8,
+      "actual_correction_fits": 0,
+      "pro_calls": 0,
+      "paid_actions": 0,
+      "delegates": 0,
+      "result": "limited historical error-reduction clue15.3641%; no as-of trading availability; low40only1week/high100only6; no fullfamilyvalidation",
+      "status": "completed_limited_retrospective_question",
+      "evidence": "inconclusive_for_broad_live_use"
+    },
+    {
+      "id": "provider-b20-delta20-return20-20261002",
+      "family": [
+        "S01",
+        "S02"
+      ],
+      "report": "docs/experiments/sentiment-breadth-effects-2026-10-02.md",
+      "protocol": "docs/experiments/raw/sentiment-breadth-exploratory-2026-10-02/protocol.json",
+      "state": "docs/experiments/raw/sentiment-breadth-exploratory-2026-10-02/research-state.json",
+      "actual_core_fits": 5,
+      "actual_sensitivity_fits": 5,
+      "actual_review_refits": 10,
+      "source_operations": 1,
+      "pro": 0,
+      "paid": 0,
+      "verdict": "Insufficient evidence",
+      "scope": "current-provider retrospective20intervalreturn only",
+      "status": "completed_bounded_question_original_E_blocked",
+      "source_and_model_failures_preserved": true
+    }
+  ]
+}

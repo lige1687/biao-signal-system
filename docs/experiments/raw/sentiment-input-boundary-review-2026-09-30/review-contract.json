@@ -1,0 +1,185 @@
+{
+  "question": "现有实物及已保存来源证据能否支持20/50成品宽度的完整回顾性研究，或原E当时可得研究？",
+  "mode": "resume_qualification_only",
+  "authority": "既有用户继续情绪研究授权；监督任务要求先核累计预算、不绕过浏览器拒绝、只完成可做资格核验",
+  "scope": "LEI模块E；仅保存的来源实物、谱系及明确文件名的本地下载盘点",
+  "writable": [
+    "docs/experiments/sentiment-input-boundary-review-2026-09-30.md",
+    "docs/experiments/raw/sentiment-input-boundary-review-2026-09-30/",
+    "docs/research/sentiment-factor-library/qualification-review-notes.json"
+  ],
+  "forbidden_writes": [
+    "web/",
+    "docs/research/definitions.v1.json",
+    "docs/experiments/registry.json",
+    "docs/experiments/INDEX.md",
+    "AGENTS.md",
+    "shared standards",
+    "technical and market-observation artifacts",
+    "all external repository paths"
+  ],
+  "source_state_snapshot": {
+    "research_id": "sentiment-open-source-input",
+    "run_id": "2026-09-30",
+    "question": "Can freely downloadable or free-tier point-in-time S&P 500 membership and exited-member daily prices qualify a bounded original-E 20/50-day breadth history?",
+    "authorization": "User explicitly corrected prior procurement route: obtain open/free or limited-quota sources autonomously; user can assist with login if required. No paid action or provider outreach requested.",
+    "scope": "Open-source historical membership and free price data, five prespecified source-check dates; input qualification first, effect testing only after separate frozen protocol.",
+    "budget": {
+      "public_source_page_or_data_requests_max": 30,
+      "candidate_membership_sources_max": 3,
+      "candidate_price_sources_max": 3,
+      "new_market_effect_fits_max": 0,
+      "pro_calls_max": 0,
+      "paid_actions_max": 0
+    },
+    "prespecified_dates": [
+      "2008-09-12",
+      "2008-09-15",
+      "2009-03-09",
+      "2020-03-23",
+      "2025-12-31"
+    ],
+    "strategy_layer": "LEI Module E S&P 500 market breadth 20/50 main indicator; AAII later as confirmation",
+    "decision": "Open source membership must include actual historical entrants/exits. Price route must include former constituents, at least 50-day lookback, adjustment/version, and usable identity join. If partial, qualify only its actual era/members.",
+    "source_status": "Free Chrome account login restored; authenticatedB20 long-history page4364 rows confirmed; normal export event timed out, no verified full file.",
+    "effect_status": "not_run",
+    "status": "paused",
+    "pause_reason": "normal authenticated browser transport failed twice; bounded source acquisition6/6 finished; independent qualified public NAAIM study continues separately",
+    "request_count_audit": "At least 30 public source/data requests; exact total not recorded. Stop further requests in this run rather than claim the cap was met.",
+    "downloaded_evidence": [
+      "inputs/fja-sp500-historical-components.csv",
+      "inputs/ishares-sp500-20080829.csv",
+      "inputs/ishares-sp500-20080930.csv",
+      "inputs/ishares-sp500-20090227.csv",
+      "inputs/ishares-sp500-20200228.csv",
+      "inputs/ishares-sp500-20251231.csv",
+      "inputs/fnspid-AGN-sample.csv",
+      "inputs/fnspid-ALTR-sample.csv",
+      "fnspid-zip-index.json",
+      "fnspid-and-ishares-coverage-proxy.json",
+      "inputs/boris-stooq-2017.zip",
+      "actual-50day-window-coverage.json",
+      "security-identity-counterexamples.json",
+      "compiled-breadth-five-date-audit.json"
+    ],
+    "planned_report": "docs/experiments/sentiment-open-source-input-2026-09-30.md",
+    "created_at": "2026-09-30T03:39:22.426827+00:00",
+    "resume_authorization": "2026-09-30 用户：你找一下免费的开源的数据源啥的呢，也是不错的哈，总之推全本轮任务。继续同一问题，不重置先前至少30次来源尝试。",
+    "continuation_budget": {
+      "new_source_operations_max": 24,
+      "new_price_routes_max": 3,
+      "download_bytes_max": 750000000,
+      "new_market_effect_fits_max": 0,
+      "pro_calls_max": 0,
+      "paid_actions_max": 0,
+      "rationale": "User renewed free-source acquisition; bounded additional evidence requests, no effect fitting before qualification. Prior consumed attempts retained."
+    },
+    "continuation_candidates": [
+      "Investing/Barchart compiled B20/B50 historical series",
+      "Boris Marjanovic public Stooq historical stock archive",
+      "Public WIKI price archive mirror"
+    ],
+    "blocking_reason": "Complete exported B20/B50 files and source methodology still unqualified; login itself resolved.",
+    "source_qualification_outcome": "partial; full originalE not qualified",
+    "continuation_actual": {
+      "source_operations": 24,
+      "saved_download_bytes": 515657054,
+      "local_window_check_runs": 2,
+      "independent_csv_recounts": 1,
+      "market_fits": 0,
+      "pro_calls": 0,
+      "paid_actions": 0,
+      "provider_contacts": 0,
+      "new_delegates": 0,
+      "local_window_reproduction_runs": 1
+    },
+    "next_action": "Resume bounded source acquisition from existing authenticated Chrome breadth tab; diagnose normal export without bypassing internal-browser URL restriction; then full source qualification.",
+    "login_request_sent": true,
+    "login_requested_url": "https://www.investing.com/indices/s-p-500-stocks-above-20-day-average-historical-data",
+    "last_update": "2026-09-30T06:39:48.213073+00:00",
+    "source_manifest": "source-manifest.json",
+    "local_inputs_frozen": "inputs/local-prespecified-window-prices.parquet",
+    "login_resolved": true,
+    "login_repair_evidence": "login-repair.json",
+    "budget_remaining_source_operations": 0,
+    "resume_tranches": [
+      {
+        "id": "authenticated-export-resume-20260930",
+        "authorization": "用户：总之你继续吧",
+        "started_at": "2026-09-30T06:39:48.213073+00:00",
+        "budget": {
+          "source_operations_max": 6,
+          "download_bytes_max": 50000000,
+          "new_effect_fits_max": 0,
+          "pro_calls_max": 0,
+          "paid_actions_max": 0
+        },
+        "actual": {
+          "source_operations": 6,
+          "download_bytes": 364698,
+          "browser_transport_failures": 2
+        },
+        "rationale": "Continue normal authenticated exports and one bounded free-source fallback; previous at least30 plus24 source operations retained.",
+        "outcome": "131official NAAIM delayed weeks qualified for limited retrospective-only study; width export unresolved"
+      }
+    ],
+    "related_active_study": "docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/protocol.json"
+  },
+  "naaim_state_snapshot": {
+    "research_id": "sentiment.naaim-public-window-return20-increment@1.0.0",
+    "question": "在免费官方表可核实的短历史中，管理人连续自报敞口，能否帮助解释SPY以后20个交易日的涨跌，超过只看之前20日涨跌？",
+    "mode": "research",
+    "execution": "completed",
+    "evidence": "inconclusive",
+    "protocol": "protocol.json",
+    "protocol_sha256": "2a291e97ea64a1bb7207a45cbbb0b4bbe09b24a01097d4ab905abff221f8e486",
+    "budget": {
+      "new_source_operations_max": 0,
+      "core_fits_max": 8,
+      "correction_fits_max": 8,
+      "total_fits_max": 16,
+      "primary_batches_max": 1,
+      "correction_batches_max": 1,
+      "local_review_refits_max": 8,
+      "pro_calls_max": 0,
+      "paid_actions_max": 0,
+      "wall_minutes_max": 15
+    },
+    "actual": {
+      "fits": 8,
+      "review_refits": 8,
+      "source_operations": 0,
+      "pro_calls": 0,
+      "paid_actions": 0
+    },
+    "output_report": "docs/experiments/sentiment-naaim-public-window-2026-09-30.md",
+    "next_action": "No remaining core test in this bounded question; qualified longhistory or firstrelease needed for newuses.",
+    "completion_reason": "question_answered_with_limited_scope",
+    "effect_summary": "retrospectivecurrentofficialshort-windowclue; stable/livefullfamilyuseunproven",
+    "completed_at": "2026-09-30T07:10:38.353498+00:00",
+    "independent_review": "independent-review.json",
+    "metadata_freeze": "norm-freeze-map.json"
+  },
+  "budget_remaining": {
+    "source_operations": 0,
+    "market_effect_fits": 0,
+    "pro_calls": 0,
+    "paid_actions": 0,
+    "browser_retries": 0
+  },
+  "this_review_allowance": {
+    "local_evidence_inventory_and_hash_audit": 1,
+    "repository_hygiene": 1
+  },
+  "no_budget_reset": true,
+  "preserve_failures": [
+    "chrome://downloads/ URL-policy rejection",
+    "normaldownload event45secondtimeout",
+    "browserDOM read30secondtimeout",
+    "known-tabreconnect30secondtimeout"
+  ],
+  "run_completed_study": false,
+  "model_route": "current controller; bounded local qualification only; no delegated model",
+  "definition_and_source_scope": "成品提供者序列与原E当时历史成员重建分别判定；只缺历史首发不一概禁止回顾性研究；缺完整文件仍阻断全部效果检验",
+  "created_at": "2026-09-30T07:46:47.613412+00:00"
+}

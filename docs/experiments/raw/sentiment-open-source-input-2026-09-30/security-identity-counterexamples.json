@@ -1,0 +1,118 @@
+{
+  "stage": "security_identity_counterexample",
+  "historical_snapshot_date": "2008-08-29",
+  "identity_term": "CUSIP/ISIN are security identifiers, used to distinguish companies sharing later ticker aliases",
+  "holdings": {
+    "AG4": {
+      "symbol": "AG4",
+      "name": "ALLERGAN",
+      "sector": "Health Care",
+      "asset_class": "Equity",
+      "market_value": "27036945.62",
+      "weight_pct": "0.152781",
+      "notional_value": "",
+      "shares": "483926",
+      "CUSIP": "-",
+      "ISIN": "US0184901025",
+      "SEDOL": "5793208",
+      "price": "55.87",
+      "location": "United States",
+      "exchange": "Boerse Berlin",
+      "market_currency": "USD",
+      "fx_rate": "1",
+      "accrual_date": "-",
+      "date": "2008-08-29"
+    },
+    "WPI": {
+      "symbol": "WPI",
+      "name": "WATSON PHARMACEUTICALS",
+      "sector": "Health Care",
+      "asset_class": "Equity",
+      "market_value": "4965020.48",
+      "weight_pct": "0.028056",
+      "notional_value": "",
+      "shares": "163808",
+      "CUSIP": "942683103",
+      "ISIN": "US9426831031",
+      "SEDOL": "2943545",
+      "price": "30.31",
+      "location": "United States",
+      "exchange": "New York Stock Exchange Inc.",
+      "market_currency": "USD",
+      "fx_rate": "1",
+      "accrual_date": "-",
+      "date": "2008-08-29"
+    },
+    "ALTR": {
+      "symbol": "ALTR",
+      "name": "ALTERA CORP",
+      "sector": "Information Technology",
+      "asset_class": "Equity",
+      "market_value": "10673107.28",
+      "weight_pct": "0.060312",
+      "notional_value": "",
+      "shares": "471427",
+      "CUSIP": "021441100",
+      "ISIN": "US0214411003",
+      "SEDOL": "2021690",
+      "price": "22.64",
+      "location": "United States",
+      "exchange": "NASDAQ",
+      "market_currency": "USD",
+      "fx_rate": "1",
+      "accrual_date": "-",
+      "date": "2008-08-29"
+    }
+  },
+  "holdings_implied_price": {
+    "Watson": 30.310000000000002,
+    "old_Allergan": 55.870000000000005
+  },
+  "fnspid_agn_20080829_raw_close": 30.309999465942383,
+  "fnspid_agn_20080829_adjusted_close": 28.12055397033692,
+  "matches": "Watson implied price, not original Allergan implied price",
+  "fja_20080912_presence": {
+    "AGN": true,
+    "WPI": false,
+    "ACT": false
+  },
+  "inference": "FNSPID AGN does not qualify a price window for original Allergan. Future ticker aliases may also hide multiple historical entities in a reconstructed roster; exact alias history remains unqualified.",
+  "not_claimed": "No full corporate-action lineage reconstruction. Kaggle AGN identity is unqualified; adjusted price resemblance alone is not proof.",
+  "input_sha256": {
+    "inputs/ishares-sp500-20080829.csv": "1a4046fe8ae6de4f906476420a775cc13430f18d7fae0dec168f9bdef9725c92",
+    "inputs/fnspid-AGN-sample.csv": "764343f57d619d9963b9d07cd3cc555650c22258b55d0ff88ce38e805ce9f732",
+    "inputs/fja-sp500-historical-components.csv": "36326709d46d6cd25834de5df457b16f5f96fad3a06b9beac28f7b88aa0b0d54"
+  },
+  "known_ambiguous_agn_removed_candidate_upper_bounds": [
+    {
+      "date": "2008-09-12",
+      "candidate_upper_bound": 383,
+      "ambiguous_name_removed": true,
+      "identity_qualified": false
+    },
+    {
+      "date": "2008-09-15",
+      "candidate_upper_bound": 385,
+      "ambiguous_name_removed": true,
+      "identity_qualified": false
+    },
+    {
+      "date": "2009-03-09",
+      "candidate_upper_bound": 399,
+      "ambiguous_name_removed": true,
+      "identity_qualified": false
+    },
+    {
+      "date": "2020-03-23",
+      "candidate_upper_bound": 388,
+      "ambiguous_name_removed": false,
+      "identity_qualified": false
+    },
+    {
+      "date": "2025-12-31",
+      "candidate_upper_bound": 482,
+      "ambiguous_name_removed": false,
+      "identity_qualified": false
+    }
+  ]
+}

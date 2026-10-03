@@ -1,0 +1,100 @@
+{
+  "schema": "sentiment-direction-readiness/1",
+  "review_mode": "archived-evidence-only; no cache recalculation, fitting, returns run, or network",
+  "readiness_decision": {
+    "ready_independent_next_core_question": false,
+    "reason": "The inputs needed for a currently defined next question are still incomplete; the archived evidence does not support starting a new, defined core question within this round’s budget. Historical association questions require the observation dates and source version relevant to the studied records. First-publication/available-at evidence is additionally required when claiming the value could have been used for a decision at that historical time; its absence alone does not prohibit every descriptive or retrospective question."
+  },
+  "families": [
+    {
+      "id": "S01",
+      "topic": "S&P 500 20/50-day breadth level",
+      "state": "input_identity_blocked; effect_not_evaluated",
+      "independent_of_S02": true,
+      "evidence": [
+        "docs/experiments/sentiment-s01-local-cache-2026-09-30.md",
+        "docs/experiments/raw/sentiment-s01-local-cache-2026-09-30/research-state.json",
+        "docs/experiments/raw/factor-direction-audit-2026-09-30/sentiment-review.md"
+      ],
+      "fact": "1980-present series exists and 20/50/200 values reproduce from 494 current-member price columns; the historical entry/exit chain and exited-company prices are missing, and the date stamp does not establish historical availability.",
+      "next_condition": "Qualify actual historic membership, its price lineage and use rights before freezing an effect question.",
+      "do_not_infer": "No performance result; not evidence that breadth has no value."
+    },
+    {
+      "id": "S02",
+      "topic": "Breadth change, recovery and divergence",
+      "state": "dependent_on_S01_input_qualification_and_partly_undefined",
+      "independent_of_S01": false,
+      "evidence": [
+        "docs/research/sentiment-factor-library/research-cards.md",
+        "docs/research/sentiment-factor-library/registry.json",
+        "docs/experiments/raw/factor-direction-audit-2026-09-30/sentiment-review.md"
+      ],
+      "fact": "Some 20-day change objects exist; newer 1/5-day, acceleration and divergence definitions remain pending. Historical membership comparability inherits S01.",
+      "next_condition": "S01-quality history plus an explicitly defined, registered question; no evidence authorizes inventing or testing new variants now.",
+      "do_not_infer": "Not all breadth research is failed; current series is not a qualified substitute."
+    },
+    {
+      "id": "S03",
+      "topic": "AAII individual-investor survey spread",
+      "state": "bounded_historical_questions_completed; other_uses_unassessed; timely_input_unproven",
+      "independent_of_S01": true,
+      "evidence": [
+        "docs/experiments/sentiment-aaii-risk-increment-2026-09-29.md",
+        "docs/experiments/sentiment-aaii-extremes-increment-2026-09-29.md",
+        "docs/experiments/sentiment-factor-feasibility-2026-09-29.md"
+      ],
+      "fact": "The 20-day return, five-horizon return/extreme, and 120-interval maximum-decline questions have bounded results. Mid/long-horizon continuous-value clues remain uncertain; extreme emphasis did not add support. Historical first-publication/revision timing is unknown; seven days was an assumption.",
+      "next_condition": "For a defined retrospective association question, establish the observation-date meaning and source version for the records used. First-publication/available-at evidence is additionally needed only if claiming contemporaneous decision availability or prediction eligibility; missing first-publication evidence alone does not prohibit descriptive work.",
+      "do_not_infer": "Do not call the whole AAII family blocked by S01, or the family invalid because the bounded tests were inconclusive."
+    },
+    {
+      "id": "S04",
+      "topic": "NAAIM manager-reported exposure",
+      "state": "source_observation_date_known_as_label; first_publication_time_unproven; predictive_eligibility_blocked",
+      "independent_of_S01": true,
+      "evidence": [
+        "docs/experiments/sentiment-factor-feasibility-2026-09-29.md",
+        "docs/experiments/raw/sentiment-factor-feasibility-2026-09-29/candidate-qualification.json",
+        "docs/experiments/raw/sentiment-factor-feasibility-2026-09-29/controller-input-review.json",
+        "docs/research/sentiment-factor-library/research-cards.md",
+        "docs/experiments/raw/factor-direction-audit-2026-09-30/sentiment-review.md"
+      ],
+      "fact": "The weekly date in the file is an observation-week source label, not a verified publication timestamp. The actual source version/provenance is unconfirmed. The noted public-channel delay and script recent-week labeling conflict; they do not establish when this particular file first became available.",
+      "next_condition": "First establish the actual source version/provenance and what the observation-week label means. First-publication/available-at records are additionally needed to claim contemporaneous decision availability. No fit is recommended in this review.",
+      "do_not_infer": "NAAIM is independently blocked on its own time/provenance evidence, not because S01 breadth is blocked. This is not a market-effect failure."
+    },
+    {
+      "id": "S05",
+      "topic": "CBOE Equity and Total put/call volume ratios",
+      "state": "bounded_2015_2019_question_completed; newer_comparable_data_and_first_release_time_missing",
+      "independent_of_S01": true,
+      "evidence": [
+        "docs/experiments/sentiment-putcall-increment-2026-09-29.md",
+        "docs/experiments/sentiment-factor-feasibility-2026-09-29.md",
+        "docs/experiments/raw/factor-direction-audit-2026-09-30/sentiment-review.md"
+      ],
+      "fact": "Equity and Total were assessed separately on a shared 1,177-date SPY set for 2015-2019; neither added support for the main 20-interval maximum-decline estimate, and the small Equity return-error difference was unstable. No 2020+ comparable evaluation or verified first-release timing exists.",
+      "next_condition": "Comparable post-2019 data with historical availability evidence, followed by a new frozen same-question contract.",
+      "do_not_infer": "The old bounded result does not settle newer periods or every put/call use, and S01 is not a prerequisite for this source's data qualification."
+    }
+  ],
+  "card_wording_flags": [
+    {
+      "card": "S04",
+      "issue": "Avoid phrasing the source's weekly date as if it were an available_at/publication date. It is an exposure observation-date label; first release and revision times are separate, currently unknown facts.",
+      "evidence": "candidate-qualification.json: naaim.date field interpretation and prediction_eligibility; feasibility report source-time qualification."
+    },
+    {
+      "card": "S01",
+      "issue": "Any wording that treats cached values as historical S&P 500 breadth must preserve the distinction between arithmetic reproduction from current constituents and actual historic membership.",
+      "evidence": "sentiment-s01-local-cache-2026-09-30.md and its research-state.json."
+    },
+    {
+      "card": "S03/S05",
+      "issue": "Keep seven-day / two-quote waiting rules labeled as study assumptions, not verified first-publication histories; bounded historical results are not new-data confirmation.",
+      "evidence": "The two S03 reports and sentiment-putcall-increment-2026-09-29.md."
+    }
+  ],
+  "card_snapshot_note": "Cards were read at the start of this review. The controller was editing the current entrypoint concurrently; this record relies on the initially read state and archived reports, and does not treat later card edits as old evidence."
+}

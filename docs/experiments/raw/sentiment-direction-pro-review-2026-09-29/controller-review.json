@@ -1,0 +1,45 @@
+{
+  "pro_decision": "REVISE",
+  "review_scope": "one advisory direction review; no automatic execution",
+  "independent_action": "Verified primary metric and saved results, quoted raw CSV Date bounds and checked strategy snapshots; no market model reruns.",
+  "checks": [
+    {
+      "pro_claim": "S03 primary is BXE/B at 120 intervals, not BX/B",
+      "status": "confirmed",
+      "source": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/protocol.json:primary_metric",
+      "primary_improvement_percent": 1.5149431083384624,
+      "primary_interval_percent": [
+        -4.610697224985192,
+        7.280423262211265
+      ],
+      "correction": "New review, library/navigation use 1.51% as primary; retain 2.55% and 9.54% as separate continuous-value/auxiliary comparisons. Frozen results unchanged."
+    },
+    {
+      "pro_claim": "Negative S05 risk predictions are output-domain mismatch",
+      "status": "confirmed_for_observed_negative_output_only",
+      "source": "docs/experiments/raw/sentiment-putcall-increment-2026-09-29/executor/run-01/results.json",
+      "limit": "Cannot prove domain mismatch explains all underperformance, nor that an alternative model works."
+    },
+    {
+      "pro_claim": "Input market universe differs from target ETF universe; original E primary breadth",
+      "status": "confirmed",
+      "sources": [
+        "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/strategy-source/LEI 技术实现.md §9E",
+        "docs/experiments/raw/sentiment-library-s01-readiness-2026-09-29/us-source-audit.json"
+      ],
+      "limit": "No mechanical stock expansion and no account/futures validation."
+    },
+    {
+      "pro_claim": "SPY full cache actually ends2026-09-02; evaluation labels remain2019-10-04",
+      "status": "confirmed",
+      "source": "observed-report-date-typo.json",
+      "limit": "Erratum here; preserve original frozen report and every numerical artifact."
+    },
+    {
+      "pro_claim": "One diagnostic, source qualification, then conditional new AAII risk question",
+      "status": "accepted_as_future_plan",
+      "limit": "Not executed this review turn; data qualification/method choice and meaningful-effect threshold not yet frozen."
+    }
+  ],
+  "not_independent_pro_reproduction": true
+}

@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-02",
+  "scope": "Pre-result methodological review of frozen AAII 20-consecutive-calendar-survey-week mean for one SPY 120-quote-interval retrospective study",
+  "inputs_read": [
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/protocol.json",
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/definition.json",
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/local-audit/review.json",
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/local-audit/review.md",
+    "docs/experiments/raw/sentiment-aaii-background-2026-10-02/standards-manifest.json"
+  ],
+  "p0_method_defects": [],
+  "verdict": "Ready for the bounded historical estimate, provided the controller's pre-statistics qualification verifies exact input counts, weekly calendar labels, common dates, input/code fingerprints and independently recalculated rows. This is a method review, not a result or a production authorization.",
+  "checks": [
+    {
+      "topic": "Strategy semantics",
+      "assessment": "Pass with explicit proxy label. The 20-week arithmetic average is background/confirmation for module E, not a crossing trigger or an addition to the current spread; breadth remains primary. The original source does not specify edge, gap, or publication rules, so the frozen interpretation must be called a research proxy."
+    },
+    {
+      "topic": "Calendar weeks and support",
+      "assessment": "Pass conditional on qualification. Requiring exactly one survey in each of 20 consecutive Monday-Sunday weeks avoids compressing a missing week. The local audit's 2,019 rolling values are based on 20 observed rows and therefore are not the eligible count. The stated three missing calendar weeks and 57 invalid post-gap rolling values plus 19 initial warmup rows are plausible but must be independently enumerated, including any duplicate week labels and the last eligible date, before statistics. Non-seven-day date differences alone are not missing-week evidence."
+    },
+    {
+      "topic": "Incremental baseline",
+      "assessment": "Pass. B contains the current AAII spread plus all five frozen price controls; BX adds only the 20-week mean. Equal finite training/evaluation rows and identical evaluation dates are needed for a fair paired MSE comparison. X versus the training historical mean I is descriptive standalone evidence, not the incremental answer. Because the mean includes current spread, it tests persistence/background conditional on current mood rather than an independent source."
+    },
+    {
+      "topic": "Time and target boundary",
+      "assessment": "Pass with historical-only label. Annual expanding training requires both feature observation and complete 120-interval outcome to end before January 1 of each evaluation year; all scaling and coefficients use training rows only. At evaluation, source date plus seven days at 23:59 precedes the first quote t, and target is C[t+121]/C[t+1]-1. The seven-day delay is hypothetical because actual first-release timestamps and revisions are unavailable; adjusted-close vintage and quote availability are also unknown. No claim of what a trader actually knew or could earn then is supported."
+    },
+    {
+      "topic": "Dependence and uncertainty",
+      "assessment": "Pass as a limited uncertainty estimate. Overlapping 120-interval outcomes and weekly signals create dependence; paired 52-week blocks on the complete survey-week calendar with a predeclared 104-week sensitivity preserve local clusters better than independent-row resampling. Keep missing weeks on the axis, use the same sampled indices for B and BX, and never treat 2,000 resamples as 2,000 fresh market histories. Saved-prediction intervals omit refitting uncertainty and historical selection bias."
+    },
+    {
+      "topic": "Budget and stopping",
+      "assessment": "Pass. Four methods across 17 annual fits require at most 68 core fits; twelve fixed independent checks reach the 80-fit cap. One primary horizon, fixed controls and fixed comparisons avoid further parameter search. Input/code drift, future labels or failed independent arithmetic stop before a scientific verdict; exhaustion pauses with the trial ledger."
+    },
+    {
+      "topic": "External tool boundary",
+      "assessment": "Pass. Reusing only OLS numerical functions does not turn the technical factor workflow's sentiment-scope rejection into a successful workflow registration. There is no new network source, fitting, or external result in this review."
+    }
+  ],
+  "material_limits_to_report": [
+    "Only the saved SPY and AAII historical series, a single 120-quote outcome, and the frozen retrospective delay are tested.",
+    "Historical first publication, corrections, adjusted-price vintage and actual trading costs remain unverified.",
+    "The prior AAII research family has at least 744 fits; a newly phrased 20-week question is not independent fresh evidence.",
+    "Conditional forecast error reduction is neither an investment return nor proof that the AAII line should change a trigger, threshold, hedge, or production rule.",
+    "The predefined m20<=0 versus >0 state summaries are descriptive and do not substitute for the paired B versus BX incremental comparison."
+  ],
+  "execution": {
+    "network_requests": 0,
+    "model_fits": 0,
+    "written_paths": [
+      "docs/experiments/raw/sentiment-aaii-background-2026-10-02/method-review/review.json"
+    ]
+  }
+}

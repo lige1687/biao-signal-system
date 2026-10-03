@@ -1,0 +1,40 @@
+{
+  "read_only_paths": [
+    "AGENTS.md",
+    "configs/strategy-documents.v1.json",
+    "docs/research/current-standards.json",
+    "docs/research/research-question-method-standard.md",
+    "docs/research/factor-increment-evidence-standard.md",
+    "docs/experiments/raw/sentiment-short-history-2026-10-02/",
+    "docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/protocol.json",
+    "docs/experiments/raw/sentiment-breadth-exploratory-2026-10-02/controller-contract.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "controller_review": {
+    "required": true
+  },
+  "stop_conditions": [
+    "不要读取/计算未来价格数值或拟合任何结果",
+    "不要修改既有实验/生产/规则/全局定义"
+  ],
+  "mission": "Resolve admissibility and design of one bounded provider-series retrospective breadth study before outcome computation",
+  "task_scope": [
+    "审阅供应商宽度已知版本差异、缺失成员/算法资格到底阻断哪些结论",
+    "在不假称历史可知的前提下决定describe_only或restricted estimate；给一个可计算主问题/公平对手/严格时间端点/依赖与反例",
+    "写出具体可执行必要检验；不把技术workflow不支持情绪当科学阻塞"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/sentiment-breadth-exploratory-2026-10-02/method-review"
+  ],
+  "expected_outputs": [
+    "method-review.json",
+    "review.md"
+  ],
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  }
+}

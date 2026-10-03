@@ -1,0 +1,56 @@
+{
+  "schema": "sentiment-s01-producer-lineage/1",
+  "scope": "Repository producer-code inspection only. No external cache bytes, database, network, market outcome, or code changes.",
+  "strategy_layer": "LEI Module E US S&P 500 market breadth input; this inspection tests input provenance, not returns or trading use.",
+  "code_proven": [
+    {
+      "fact": "The main full backfill reads a single SP500 fixture's symbol column, with no per-date membership filtering, then fetches each selected ticker's entire available US daily close history from Akshare/Sina using adjust='' (unadjusted). It resumes from pre-existing matrix columns without refreshing those columns; the date-by-symbol matrix is written to sp500_klines.parquet.",
+      "refs": ["scripts/backfill_breadth_full.py:70-78", "scripts/backfill_breadth_full.py:99-120", "scripts/backfill_breadth_full.py:144-149", "scripts/backfill_breadth_full.py:195-204"]
+    },
+    {
+      "fact": "That backfill computes B20/B50/B200 as 100 times the count of same-day original closes strictly above each moving average divided by that horizon's eligible count. Moving averages use forward-filled internal gaps; a ticker is eligible only where original same-day close and moving average both exist. Each horizon requires at least 100 eligible tickers; dates without B20 are skipped and B50/B200 may remain null. Values are rounded to four decimals in JSON.",
+      "refs": ["scripts/backfill_breadth_full.py:155-184", "scripts/backfill_breadth_full.py:204-211"]
+    },
+    {
+      "fact": "A separate us_breadth path loads the same fixture symbols and prioritizes the existing sp500_klines.parquet, then a user file, then five years of yfinance unadjusted Close. Its formula uses raw rolling windows without forward-fill, a distinct missing-price rule, and writes only the last max_points (default 1260) to the same JSON path. Therefore identical JSON path does not identify the producer or algorithm.",
+      "refs": ["src/lei_signal/market_context/us_breadth.py:28-62", "src/lei_signal/market_context/us_breadth.py:70-120", "src/lei_signal/market_context/us_breadth.py:123-154", "src/lei_signal/market_context/us_breadth.py:157-183"]
+    },
+    {
+      "fact": "The tail-refresh path takes existing matrix columns, fetches three-month yfinance unadjusted Close, retains old values on overlaps, recomputes all JSON history using us_breadth's no-forward-fill algorithm, then overwrites both JSON and matrix. Thus a tail refresh can change the JSON algorithm without replacing historical matrix prices.",
+      "refs": ["scripts/archive/refresh_sp500_breadth_tail.py:33-71"]
+    },
+    {
+      "fact": "The timing conversion reads JSON's breadth_20/50/200 into b20/b50/b200, optionally joins advance/decline breadth from the matrix, and writes breadth_sp500.parquet after date deduplication. This path does not retain denominator, membership, source version, or available_at.",
+      "refs": ["scripts/backfill_timing_data.py:64-69", "scripts/backfill_timing_data.py:130-145"]
+    },
+    {
+      "fact": "An alternative archived adjusted-price path takes ticker names from existing matrix columns, downloads yfinance auto_adjust=True closes into us_qfq_matrix.parquet, rejects series with <=250 observations or a daily fall of at least 40%, then computes breadth via an imported timing function and directly replaces timing breadth_sp500.parquet and sp500_klines.parquet. It does not write sp500_ma_breadth_history.json. The imported timing function lies outside this frozen contract, so its exact denominator and missing rules are not independently verified here.",
+      "refs": ["scripts/archive/fetch_us_adjusted_matrix.py:20-62", "scripts/archive/rebuild_us_breadth_qfq.py:20-43"]
+    },
+    {
+      "fact": "The archived SQLite importer reads JSON values and recomputes eligible counts from the current matrix with forward-filled moving-average warmup. It uses the matrix's fixed column count for constituent_count and missing/coverage, copies JSON B values without reconciling formula or price revision, sets available_at equal to the row date, and stamps constant 'formal', 'complete', source, run and universe-version strings. It deletes prior SP500 rows before inserting into both snapshot and revision tables.",
+      "refs": ["scripts/archive/ingest_sp500_breadth_to_sqlite.py:43-57", "scripts/archive/ingest_sp500_breadth_to_sqlite.py:100-119", "scripts/archive/ingest_sp500_breadth_to_sqlite.py:122-137", "scripts/archive/ingest_sp500_breadth_to_sqlite.py:169-219"]
+    },
+    {
+      "fact": "The distinct Round 5 fixture pipeline obtains the then-current Wikipedia list and gives every ticker effective_from=today. Its universe provider can filter historical membership if such effective intervals exist; its snapshot breadth computes each horizon over observed bars, records coverage, and sets available_at=as_of. This does not reconstruct former S&P 500 members.",
+      "refs": ["scripts/round5_repro/ingest_sp500.py:34-43", "scripts/round5_repro/ingest_sp500.py:75-89", "src/lei_signal/market_context/universe.py:104-125", "src/lei_signal/market_context/universe.py:179-204", "src/lei_signal/market_context/breadth.py:191-280"]
+    }
+  ],
+  "code_comment_claims_not_validated_by_code_alone": [
+    {"claim": "'True' or 'real' historical SP500 breadth", "refs": ["scripts/backfill_breadth_full.py:2-5", "src/lei_signal/market_context/us_breadth.py:1-3"], "caveat": "The producer takes one current fixture list across all dates and does not establish historical entries/exits."},
+    {"claim": "Adjusted matrix is 'true adjusted' and Akshare US qfq was bad", "refs": ["scripts/archive/fetch_us_adjusted_matrix.py:1-7"], "caveat": "Code requests yfinance auto_adjust=True, but supplier revisions, action history, and actual fetched bytes are not evidenced by this code."},
+    {"claim": "SQLite rows are formal/complete and were available on the as_of date", "refs": ["scripts/archive/ingest_sp500_breadth_to_sqlite.py:48-54", "scripts/archive/ingest_sp500_breadth_to_sqlite.py:186-208"], "caveat": "These are stamped constants; no original publication or historical acquisition timestamp is checked."}
+  ],
+  "previous_local_audit_context": {
+    "repository_fixture": "Previous S01 audit observed a 503-symbol Wikipedia snapshot dated 2026-08-04, not a dated add/remove history.",
+    "database": "Controller's earlier read-only audit found 11,694 backfill-tagged SP500 rows, a fixed 494 constituent_count, and available_at=as_of throughout those rows. This establishes numeric local rows exist, while historic membership and actual availability remain unqualified.",
+    "refs": ["docs/experiments/raw/sentiment-s01-historical-input-2026-09-30/local/inventory.json", "docs/experiments/raw/sentiment-s01-historical-input-2026-09-30/controller-local-db-audit.json"]
+  },
+  "unresolved_links": [
+    "No cache file, run manifest, or fingerprint was read under this executor contract. Existing JSON, matrix, timing parquet, adjusted matrix, and database bytes cannot be attributed to one producer/version or proven mutually consistent from code alone.",
+    "No historical constituent identities with entry and exit effective dates, including departed names, are produced by the inspected current-list routes.",
+    "Historical warmup and adjusted prices for departed members, corporate-action revision vintages, and true data availability time are not established.",
+    "Timing parquet may be generated from unadjusted JSON or directly from adjusted matrix; a later timing conversion can overwrite the direct adjusted result. Exact present-cache lineage requires read-only fingerprints and value reconciliation by the controller."
+  ],
+  "qualification_implication": "Local self-calculated breadth definitely has producer paths and previously audited numeric rows; that is separate from whether the values represent historical S&P 500 membership and were knowable at the decision date. Do not treat 'formal'/'complete' stamps or equal-date available_at as proof of historical qualification. No S01 market-effect test is justified from code provenance alone."
+}

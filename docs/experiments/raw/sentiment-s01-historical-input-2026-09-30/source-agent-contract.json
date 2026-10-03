@@ -1,0 +1,14 @@
+{
+  "mission": "Qualify two shortlisted official public provider routes for historical S&P 500 B20/B50 inputs, documenting exact evidence and access gaps.",
+  "task_scope": ["Read existing source qualification and next-stage plan first", "Use at most six new individual official-domain search or URL reads total across both providers, counting failures", "Inspect any publicly accessible samples only for five prespecified dates; never login, pay, contact provider or bulk download", "Write concise source ledger and qualification evidence; avoid factor efficacy claims"],
+  "read_only_paths": ["AGENTS.md", "configs/strategy-documents.v1.json", "docs/experiments/raw/sentiment-standard-pro-review-2026-09-29/", "docs/experiments/raw/sentiment-method-and-source-2026-09-29/source/", "docs/experiments/raw/sentiment-s01-historical-input-2026-09-30/research-state.json"],
+  "write_paths": ["docs/experiments/raw/sentiment-s01-historical-input-2026-09-30/source/"],
+  "network_allowed": true,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": ["source/source-ledger.json containing every request including failures", "source/qualification.json with source URL, fields confirmed, fields unconfirmed, rights, exact dated sample status", "short delivery with qualified or blocked conclusion"],
+  "stop_conditions": ["six individual source requests used", "paid or login or contact route", "non-official source", "unclear rights requiring access"],
+  "executor": {"model": "gpt-6-sol", "reasoning_effort": "medium"},
+  "controller_review": {"required": true}
+}

@@ -1,0 +1,20 @@
+{
+  "time": "2026-09-30T08:05:35.987984+00:00",
+  "reason": "Parent task explicitly authorized one same-channel safe read-only inventory retry after request-header-policy tool error; this was a connection/tool failure, not provider access denial.",
+  "allowance": {
+    "new_connection_inventory_retries_max": 1,
+    "same_call": "cua.getState()",
+    "new_browser_connection": 0,
+    "new_site_visits_until_originalChrome_inventory_works": 0,
+    "source_operations_budget_unchanged": 6,
+    "saved_download_bytes_budget_unchanged": 20000000,
+    "pro_calls": 0,
+    "paid_actions": 0,
+    "effect_fits": 0
+  },
+  "prior_inventory": {
+    "attempts": 1,
+    "result": "Browser 1 unable to loadbrowser requestheaderpolicy"
+  },
+  "stop": "If same inventory call errors or original Chrome cannot be enumerated, preserve exact error and stop browser actions; never use IAB as substitute for original Chrome authentication."
+}

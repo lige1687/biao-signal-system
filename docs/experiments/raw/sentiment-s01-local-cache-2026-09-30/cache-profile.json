@@ -1,0 +1,421 @@
+{
+  "schema": "sentiment-s01-local-cache-profile/1",
+  "read_only_external_data": true,
+  "no_future_returns_or_market_fits": true,
+  "files": [
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/sp500_ma_breadth_history.json",
+      "bytes": 1092639,
+      "sha256": "0311f63b151d3315fa9bded4125740852d3adff2a58f3cd56260e0a80241f7ce"
+    },
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/sp500_klines.parquet",
+      "bytes": 26058681,
+      "sha256": "8ef96624e7ea58cb568dbd5637cfdb848a532f0335e1d2cae9a23caced0b4f51"
+    },
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/us_qfq_matrix.parquet",
+      "bytes": 26039960,
+      "sha256": "6eda4723c180dc2eb8c816411293c607f6df359df274fb3c981023b89317afba"
+    },
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/breadth_sp500.parquet",
+      "bytes": 311721,
+      "sha256": "9bdffa27413866d524c1f9a3cb418dd6e70fb80a393ecf845e296f5b0ac3aafb"
+    },
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/sentiment_research_2026-09/breadth_raw.json",
+      "bytes": 823657,
+      "sha256": "79ec5835601c05088ad3357a979bad8789cb211b123b4c372651665730e6ab0a"
+    },
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/sentiment_research_2026-09/breadth_sp500_200dma.csv",
+      "bytes": 112809,
+      "sha256": "ac9ab39b7086b42e01617ee4a08e21e25300d9e981668058b7a23628ad915bca"
+    },
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/sp500_backfill_root/fixtures/market_context/universes/SP500.parquet",
+      "bytes": 7819,
+      "sha256": "2d20038b23c4ac65b133487326f64259750fac0cebd0c1b7af6d430b78237af1"
+    },
+    {
+      "path": "tests/fixtures/market_context/universes/SP500.parquet",
+      "bytes": 7662,
+      "sha256": "27292a31b656e7ecd832b96d346522a4903011207b2682ed07a592edd8f19a30"
+    }
+  ],
+  "json_breadth": {
+    "rows": 11694,
+    "first_date": "1980-04-14",
+    "last_date": "2026-09-04",
+    "non_null": {
+      "20": 11694,
+      "50": 11664,
+      "200": 11514
+    }
+  },
+  "price_matrix": {
+    "rows": 24787,
+    "columns": 494,
+    "first_date": "1927-12-30",
+    "last_date": "2026-09-04",
+    "columns_also_in_current_fixture": 494,
+    "columns_not_in_current_fixture": []
+  },
+  "qfq_matrix": {
+    "rows": 24783,
+    "columns": 494,
+    "first_date": "1927-12-30",
+    "last_date": "2026-08-31",
+    "current_matrix_columns_identical": true,
+    "current_matrix_identical_on_qfq_dates": false,
+    "current_matrix_changed_cells_on_qfq_dates": 494,
+    "current_matrix_changed_dates_on_qfq_dates": [
+      "2026-08-10",
+      "2026-08-28"
+    ]
+  },
+  "timing_breadth": {
+    "rows": 10244,
+    "first_date": "1986-01-02",
+    "last_date": "2026-08-31",
+    "fields": [
+      "b20",
+      "n20",
+      "b50",
+      "n50",
+      "b200",
+      "n200"
+    ],
+    "compared_to_json": {
+      "20": {
+        "overlap_nonnull_dates": 10242,
+        "max_absolute_percent_point_difference": 0.14127626774848068,
+        "within_json_4decimal_rounding_tolerance": false,
+        "dates_beyond_rounding_tolerance": 14,
+        "first_beyond_rounding_tolerance": "2026-08-10",
+        "last_beyond_rounding_tolerance": "2026-08-27"
+      },
+      "50": {
+        "overlap_nonnull_dates": 10242,
+        "max_absolute_percent_point_difference": 0.1437148073022314,
+        "within_json_4decimal_rounding_tolerance": false,
+        "dates_beyond_rounding_tolerance": 14,
+        "first_beyond_rounding_tolerance": "2026-08-10",
+        "last_beyond_rounding_tolerance": "2026-08-27"
+      },
+      "200": {
+        "overlap_nonnull_dates": 10242,
+        "max_absolute_percent_point_difference": 0.1525520325203189,
+        "within_json_4decimal_rounding_tolerance": false,
+        "dates_beyond_rounding_tolerance": 14,
+        "first_beyond_rounding_tolerance": "2026-08-10",
+        "last_beyond_rounding_tolerance": "2026-08-27"
+      }
+    }
+  },
+  "full_reconstruction_from_current_494_column_matrix": {
+    "20": {
+      "candidate_nonnull_on_json_dates": 11694,
+      "stored_nonnull": 11694,
+      "shared_nonnull": 11694,
+      "null_status_mismatch": 0,
+      "dates_beyond_4decimal_rounding_tolerance": 0,
+      "max_absolute_percent_point_difference": 5.000000000165983e-05
+    },
+    "50": {
+      "candidate_nonnull_on_json_dates": 11664,
+      "stored_nonnull": 11664,
+      "shared_nonnull": 11664,
+      "null_status_mismatch": 0,
+      "dates_beyond_4decimal_rounding_tolerance": 0,
+      "max_absolute_percent_point_difference": 5.000000000165983e-05
+    },
+    "200": {
+      "candidate_nonnull_on_json_dates": 11514,
+      "stored_nonnull": 11514,
+      "shared_nonnull": 11514,
+      "null_status_mismatch": 0,
+      "dates_beyond_4decimal_rounding_tolerance": 0,
+      "max_absolute_percent_point_difference": 5.000000000165983e-05
+    }
+  },
+  "db_backfill": {
+    "rows": 11694,
+    "provenance_counts": {
+      "sp500_components_wikipedia+akshare_sina_v1": 11694
+    },
+    "compared_to_json": {
+      "20": {
+        "overlap_nonnull_dates": 11694,
+        "max_absolute_percent_point_difference": 0.0
+      },
+      "50": {
+        "overlap_nonnull_dates": 11664,
+        "max_absolute_percent_point_difference": 0.0
+      },
+      "200": {
+        "overlap_nonnull_dates": 11514,
+        "max_absolute_percent_point_difference": 0.0
+      }
+    }
+  },
+  "current_fixture": {
+    "rows": 503,
+    "effective_from_counts": {
+      "2026-08-04": 503
+    },
+    "source_kind_counts": {
+      "research_proxy": 503
+    }
+  },
+  "backdated_universe": {
+    "rows": 503,
+    "effective_from_counts": {
+      "2024-08-16": 503
+    },
+    "source_counts": {
+      "wikipedia_sp500_backdated": 503
+    }
+  },
+  "other_research_json_names": [
+    "US - S&P - Technology - Constituent stocks above 200-day moving average",
+    "Technology Select Sector SPDR Fund",
+    "US - S&P 500",
+    "US - S&P 500 Stocks above 200-Day Average",
+    "US - S&P - Technology - Constituent stocks above 200-day moving average"
+  ],
+  "samples": [
+    {
+      "date": "2008-09-12",
+      "json": {
+        "breadth_20": 45.2555,
+        "breadth_50": 53.528,
+        "breadth_200": 41.2346
+      },
+      "price_columns": 494,
+      "quoted_price_columns": 411,
+      "timing": {
+        "b20": 45.25547445255474,
+        "n20": 411.0,
+        "b50": 53.52798053527981,
+        "n50": 411.0,
+        "b200": 41.23456790123457,
+        "n200": 405.0
+      },
+      "recomputed_no_fill": {
+        "20": {
+          "eligible": 411,
+          "above": 186,
+          "percent": 45.25547445255474,
+          "absolute_difference_from_json_pp": 2.5547445254403556e-05
+        },
+        "50": {
+          "eligible": 411,
+          "above": 220,
+          "percent": 53.5279805352798,
+          "absolute_difference_from_json_pp": 1.946472019653811e-05
+        }
+      },
+      "recomputed_forward_fill": {
+        "20": {
+          "eligible": 411,
+          "above": 186,
+          "percent": 45.25547445255474,
+          "absolute_difference_from_json_pp": 2.5547445254403556e-05
+        },
+        "50": {
+          "eligible": 411,
+          "above": 220,
+          "percent": 53.5279805352798,
+          "absolute_difference_from_json_pp": 1.946472019653811e-05
+        }
+      }
+    },
+    {
+      "date": "2008-09-15",
+      "json": {
+        "breadth_20": 23.601,
+        "breadth_50": 37.2263,
+        "breadth_200": 32.0988
+      },
+      "price_columns": 494,
+      "quoted_price_columns": 411,
+      "timing": {
+        "b20": 23.600973236009732,
+        "n20": 411.0,
+        "b50": 37.22627737226277,
+        "n50": 411.0,
+        "b200": 32.098765432098766,
+        "n200": 405.0
+      },
+      "recomputed_no_fill": {
+        "20": {
+          "eligible": 411,
+          "above": 97,
+          "percent": 23.600973236009732,
+          "absolute_difference_from_json_pp": 2.6763990266687188e-05
+        },
+        "50": {
+          "eligible": 411,
+          "above": 153,
+          "percent": 37.22627737226277,
+          "absolute_difference_from_json_pp": 2.262773723060718e-05
+        }
+      },
+      "recomputed_forward_fill": {
+        "20": {
+          "eligible": 411,
+          "above": 97,
+          "percent": 23.600973236009732,
+          "absolute_difference_from_json_pp": 2.6763990266687188e-05
+        },
+        "50": {
+          "eligible": 411,
+          "above": 153,
+          "percent": 37.22627737226277,
+          "absolute_difference_from_json_pp": 2.262773723060718e-05
+        }
+      }
+    },
+    {
+      "date": "2009-03-09",
+      "json": {
+        "breadth_20": 6.8127,
+        "breadth_50": 7.2993,
+        "breadth_200": 1.4634
+      },
+      "price_columns": 494,
+      "quoted_price_columns": 411,
+      "timing": {
+        "b20": 6.81265206812652,
+        "n20": 411.0,
+        "b50": 7.2992700729927,
+        "n50": 411.0,
+        "b200": 1.4634146341463417,
+        "n200": 410.0
+      },
+      "recomputed_no_fill": {
+        "20": {
+          "eligible": 411,
+          "above": 28,
+          "percent": 6.81265206812652,
+          "absolute_difference_from_json_pp": 4.793187348006711e-05
+        },
+        "50": {
+          "eligible": 411,
+          "above": 30,
+          "percent": 7.299270072992701,
+          "absolute_difference_from_json_pp": 2.9927007298979902e-05
+        }
+      },
+      "recomputed_forward_fill": {
+        "20": {
+          "eligible": 411,
+          "above": 28,
+          "percent": 6.81265206812652,
+          "absolute_difference_from_json_pp": 4.793187348006711e-05
+        },
+        "50": {
+          "eligible": 411,
+          "above": 30,
+          "percent": 7.299270072992701,
+          "absolute_difference_from_json_pp": 2.9927007298979902e-05
+        }
+      }
+    },
+    {
+      "date": "2020-03-23",
+      "json": {
+        "breadth_20": 1.4644,
+        "breadth_50": 1.4644,
+        "breadth_200": 3.7815
+      },
+      "price_columns": 494,
+      "quoted_price_columns": 480,
+      "timing": {
+        "b20": 1.4644351464435146,
+        "n20": 478.0,
+        "b50": 1.4644351464435146,
+        "n50": 478.0,
+        "b200": 3.7815126050420167,
+        "n200": 476.0
+      },
+      "recomputed_no_fill": {
+        "20": {
+          "eligible": 478,
+          "above": 7,
+          "percent": 1.4644351464435146,
+          "absolute_difference_from_json_pp": 3.5146443514655346e-05
+        },
+        "50": {
+          "eligible": 478,
+          "above": 7,
+          "percent": 1.4644351464435146,
+          "absolute_difference_from_json_pp": 3.5146443514655346e-05
+        }
+      },
+      "recomputed_forward_fill": {
+        "20": {
+          "eligible": 478,
+          "above": 7,
+          "percent": 1.4644351464435146,
+          "absolute_difference_from_json_pp": 3.5146443514655346e-05
+        },
+        "50": {
+          "eligible": 478,
+          "above": 7,
+          "percent": 1.4644351464435146,
+          "absolute_difference_from_json_pp": 3.5146443514655346e-05
+        }
+      }
+    },
+    {
+      "date": "2025-12-31",
+      "json": {
+        "breadth_20": 42.915,
+        "breadth_50": 57.4037,
+        "breadth_200": 61.6633
+      },
+      "price_columns": 494,
+      "quoted_price_columns": 494,
+      "timing": {
+        "b20": 42.91497975708502,
+        "n20": 494.0,
+        "b50": 57.40365111561866,
+        "n50": 493.0,
+        "b200": 61.66328600405679,
+        "n200": 493.0
+      },
+      "recomputed_no_fill": {
+        "20": {
+          "eligible": 494,
+          "above": 212,
+          "percent": 42.91497975708502,
+          "absolute_difference_from_json_pp": 2.0242914978041426e-05
+        },
+        "50": {
+          "eligible": 493,
+          "above": 283,
+          "percent": 57.40365111561866,
+          "absolute_difference_from_json_pp": 4.8884381342872985e-05
+        }
+      },
+      "recomputed_forward_fill": {
+        "20": {
+          "eligible": 494,
+          "above": 212,
+          "percent": 42.91497975708502,
+          "absolute_difference_from_json_pp": 2.0242914978041426e-05
+        },
+        "50": {
+          "eligible": 494,
+          "above": 283,
+          "percent": 57.28744939271255,
+          "absolute_difference_from_json_pp": 0.11625060728744785
+        }
+      }
+    }
+  ],
+  "interpretation_boundary": "Numerical duplication and source membership can be audited; none of these checks proves historical S&P 500 membership, first availability, or investable predictive effect."
+}
