@@ -26,6 +26,24 @@ brainstorming 的通用“所有项目都先批准设计”描述，在本项目
 
 参考 grill-me 的需求追问思路；本项目采用用户要求的逐题推进方式。本轮核对的公开 grill-me 入口转到 grilling，当前公开版本按轮提问；它负责需求澄清，执行授权和持续目标仍按本项目约定。未安装外部技能，也不因引用它自动委派代理。来源：[grill-me 入口](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md)、[grilling 内容](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md)。规则指导运行中的行为，跨轮自动续做另见第 3 节。
 
+### 同一份规则供不同 AI 入口使用（2026-10-04）
+
+用户授权合入 main，并要求所有 AI 可用。根 AGENTS.md 是共同规则的唯一完整来源，入口按客户端而非模型名区分；客户端把规则载入上下文后，其所选模型沿用该上下文。适用范围是本仓库，不自动覆盖其他项目、普通网页聊天或未加载仓库规则的接口。
+
+| 使用入口 | 仓库入口及条件 |
+|---|---|
+| Codex | 原生读取根 AGENTS.md；使用包含本次 main 更新的 checkout，覆盖文件和更具体的规则仍按客户端层级处理 |
+| Claude Code | 根 CLAUDE.md 的 @AGENTS.md 导入共同规则；客户端须允许项目指令加载 |
+| GitHub Copilot | .github/copilot-instructions.md 提供仓库入口，要求先读根 AGENTS.md；支持 agent instructions 的功能也可原生读取 AGENTS.md。各功能支持范围及指令开关按客户端文档，不保证普通补全执行完整任务流程 |
+| Gemini CLI | 项目 .gemini/settings.json 的 context.fileName 包含 AGENTS.md 和 GEMINI.md；保留默认 GEMINI.md 名称支持，只改变项目上下文发现，不改模型、权限或用户全局设置 |
+| Cursor Agent | 原生支持根 AGENTS.md；不另造重复 .mdc。Cursor Tab 等其他功能不按 Agent 规则推断 |
+| Windsurf／Devin Desktop Cascade | 原生支持根 AGENTS.md；以支持此入口的客户端版本及项目工作区为前提 |
+| 其他 agent 或自建接口 | 由其启动流程将根 AGENTS.md 纳入实际指令上下文；没有自动发现能力时须显式加载。仅看到 GitHub 链接不等于已加载 |
+
+其他设备、旧分支和已有会话先同步包含本轮修改的 main，再按客户端方式刷新或新建会话。可以用客户端的上下文列表、加载记录或可见的实际读文件结果核对；AI 自称“已加载”不作为唯一证据。仓库入口检查与逐客户端运行验证分开记录；本轮不启动付费模型任务，也不保证任何模型始终遵守指令。跨轮续做仍需第 3 节的持续目标或等效执行机制。
+
+依据：[Codex](https://developers.openai.com/codex/guides/agents-md)、[Claude Code](https://code.claude.com/docs/en/memory)、[GitHub Copilot](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions)、[Gemini CLI](https://geminicli.com/docs/cli/gemini-md/)、[项目设置](https://geminicli.com/docs/reference/configuration/)、[Cursor](https://cursor.com/docs/rules)、[Cascade](https://docs.devin.ai/desktop/cascade/agents-md)。
+
 ## 2. 控制进入上下文的内容
 
 - 先定位目录、文件、关键词、字段和日期，再读取命中的相关内容；不要先把整仓库状态、全量日志或整份大表返回给模型。
