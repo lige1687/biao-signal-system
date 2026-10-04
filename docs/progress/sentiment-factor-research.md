@@ -158,3 +158,7 @@ CSV/Parquet行情、小输入原件、515.6MB旧价格zip、13MB本地资料包�
 跨任务当前状态唯一入口：[sentiment-factor-research](https://github.com/lige1687/biao-signal-system/blob/coordination/lei/docs/coordination/tasks/sentiment-factor-research.md)。本文件保留阶段证据，原路径和历史不删除，不作为实时锁或接管许可。本线原负责人继续；最新规则实际读取`d5f4c68459a1fbd40cf89e6813a15982f830bc31`，首次登记`4fd13b9528fd829808c1e170f1b6d577e8199db2`已核远端ref并逐字读回。
 
 已读八条其他任务，市场观察/覆盖地图、技术阅读/抵扣、经典风险、外部工具与转黑准备当前无本线同实验执行冲突；不改其页面、共享工具或全局登记表。未登记者状态未知。工作分支AGENTS只追加协作入口，保留该分支原文；共享脏AGENTS、HEAD和暂存区保持。科学输入缺口与预算保持，0新增拟合/Pro/市场请求，不重跑封存实验。本阶段只检查文档差异、原文保留、路径和远端内容；不把同步记作研究完成。
+
+
+## 2026-10-04T22:41:09.000158+08:00 聚宽方法规划回执
+已将条件分组、期间说明的采用边界及股票排序不适用理由追加到`docs/archive/handoffs-plans/sentiment-increment-next-plan-2026-10-04.md`；计划适配完成，原宽度资格仍阻塞。无新拟合/安装/生产改动，旧组合不重跑，共用工具归外部增量负责人。共享计划只读；本轮仅三份自有文档，提交由Git历史定位。
