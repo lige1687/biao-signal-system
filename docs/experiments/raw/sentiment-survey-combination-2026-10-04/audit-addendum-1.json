@@ -1,0 +1,78 @@
+{
+  "version": "audit-addendum-1",
+  "at": "2026-10-04T22:47:53.533131+08:00",
+  "mode": "report_only",
+  "base_commit": "65dcc416972bc442300540f95e9b1bd14c66f7c0",
+  "frozen_checks": [
+    {
+      "path": "docs/experiments/raw/sentiment-survey-combination-2026-10-04/run.py",
+      "sha256": "1aa4cfbce924a0996a060239f95e381ea4f055875b56c7121d51c149c3d38ee3",
+      "match": true
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-survey-combination-2026-10-04/review.py",
+      "sha256": "2780184c6a5b2f5e4a59f780725f4bfd26473cb500401ba8413f27d4a2a69e14",
+      "match": true
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-survey-combination-2026-10-04/protocol.json",
+      "sha256": "e5867484d2bd4e274d70b615a623e11e1b436eecf7e068ed88171b44d4cce48d",
+      "match": true
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-survey-combination-2026-10-04/qualification.json",
+      "sha256": "9ecce9e8411643243f0cc7d0b0e073a9e85a29aacb28a41bb5372848cc79925d",
+      "match": true
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-survey-combination-2026-10-04/source-manifest.json",
+      "sha256": "014b5b896dfe542559f30e41c5b4a845f3d19d8c892786865d64a7814dff8b8b",
+      "match": true
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/inputs/px_SPY.csv",
+      "sha256": "952f397be0ccc5745185b91cce6acc781737c0f30a7a34aa8a230ae892ed5e45",
+      "match": true
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-aaii-extremes-increment-2026-09-29/inputs/aaii-candidate-values.csv",
+      "sha256": "12f30895c7ea2c68663a60f2d60a85384dfd0d9d324474e0501298e460cf9c05",
+      "match": true
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/inputs/naaim-official-delayed.csv",
+      "sha256": "c4bc5d964a5ce2cda21b893cfe54c5f0872975ddce8b2be3d70c2e5d80c6ba93",
+      "match": true
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-naaim-public-window-2026-09-30/run-01/predictions.csv",
+      "sha256": "8bae2dfd701b04afb422c4abd4bd066090c40eafec863518d6a8fcce303e942d",
+      "match": true
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-short-history-2026-10-02/inputs/ma_percentage_historical.json",
+      "sha256": "613fa152ee6cf2820df59f5566eb4601bda2f1c71747b7bda96d8128282011c7",
+      "match": true
+    },
+    {
+      "source": "LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "private_original_not_uploaded": true
+    },
+    {
+      "source": "LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "private_original_not_uploaded": true
+    }
+  ],
+  "no_new_fits": true,
+  "new_formula_defect_found": false,
+  "unresolved": [
+    "combination protocol has no explicit objectID@version for interaction and model variants",
+    "current global definitions do not contain AAII/NAAIM keys; historical local candidate IDs do not prove global registration",
+    "protocol text omits second normalization of interaction column; code immutable hash includes it",
+    "numerical independent algorithm review is by same controller, not independent semantic reviewer",
+    "retrospective availability remains unqualified; no live forecast evidence"
+  ],
+  "old_artifacts_unchanged": true
+}
