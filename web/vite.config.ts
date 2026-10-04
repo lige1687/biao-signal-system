@@ -9,6 +9,7 @@ export default defineConfig({
     // 不占用 8000/5173；不设时行为与原来完全一致）。
     port: Number(process.env.LEI_WEB_PORT ?? 5173),
     proxy: {
+      "/api/fundamentals/market-context": process.env.LEI_MARKET_CONTEXT_PROXY ?? process.env.LEI_API_PROXY ?? "http://127.0.0.1:8000",
       "/api": process.env.LEI_API_PROXY ?? "http://127.0.0.1:8000",
     },
   },

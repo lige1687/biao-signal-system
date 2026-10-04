@@ -39,6 +39,7 @@ class _TtlCache:
     def __init__(self) -> None:
         self._lock = threading.Lock()
         self._items: dict[str, tuple[float, Any]] = {}
+        self._retrieved_at: dict[str, str] = {}
 
     def get_or_load(self, key: str, ttl: int, loader: Callable[[], Any]) -> tuple[Any, bool]:
         """返回 (value, fresh)。fresh=True 表示本次是新拉取的。"""
@@ -49,16 +50,24 @@ class _TtlCache:
             return hit[1], False
         value = loader()
         with self._lock:
-            self._items[key] = (now, value)
+            self._items[key] = (time.monotonic(), value)
+            self._retrieved_at[key] = datetime.now(UTC).isoformat()
         return value, True
+
+    def retrieved_at_for(self, key: str) -> str | None:
+        """Successful upstream load time, never a first-publication timestamp."""
+        with self._lock:
+            return self._retrieved_at.get(key)
 
     def invalidate(self, prefix: str | None = None) -> None:
         with self._lock:
             if prefix is None:
                 self._items.clear()
+                self._retrieved_at.clear()
             else:
                 for key in [k for k in self._items if k.startswith(prefix)]:
                     del self._items[key]
+                    self._retrieved_at.pop(key, None)
 
 
 class FundamentalsService:
@@ -313,6 +322,72 @@ class FundamentalsService:
         }
         as_of = max((s["dates"][-1] for s in series.values() if s["dates"]), default="")
         return {"as_of": as_of, "series": series, "errors": errors}
+
+    def market_context(self, *, lookback_days: int = 1095) -> dict[str, Any]:
+        """Additional background fields from existing sources, with honest provenance."""
+        from .market_context import SOURCE_GAPS, financing_series, make_series, metadata_for
+        import math
+        days = max(5, min(int(lookback_days), 7665))
+        today = datetime.now(UTC).date().isoformat()
+        cutoff = (datetime.now(UTC) - timedelta(days=days)).date().isoformat()
+        errors: list[str] = []
+
+        def load(key: str, ttl: int, loader: Callable[[], Any], title: str) -> dict:
+            try:
+                data, _ = self._cache.get_or_load(key, ttl, loader)
+                if not isinstance(data, dict):
+                    raise ValueError('unexpected source shape')
+                return data
+            except (sources.FundamentalsSourceError, ValueError):
+                errors.append(f'{title}读取失败，其他资料保留')
+                return {}
+
+        margin_key = f'margin_hist:{days}'
+        margin = load(margin_key, _MARGIN_TTL, lambda: sources.fetch_margin_history(days), '融资')
+        try:
+            series = financing_series(margin, today, metadata_for('eastmoney-margin', self._cache.retrieved_at_for(margin_key)), cutoff)
+        except (ValueError, TypeError, AttributeError):
+            errors.append('融资日期或数值不合格')
+            series = financing_series({}, today, metadata_for('eastmoney-margin', None), cutoff)
+        treasury_key = f'treasury_hist:{days}'
+        treasury = load(treasury_key, _TREASURY_TTL, lambda: sources.fetch_treasury_history(days), '国债')
+        treasury_meta = metadata_for('eastmoney-treasury', self._cache.retrieved_at_for(treasury_key))
+        for market, title in [('cn', '中国'), ('us', '美国')]:
+            for key, label, unit, spread in [
+                (f'{market}_2y', f'{title}2年国债收益率', '%', False),
+                (f'{market}_10_2_spread', f'{title}10年减2年期限差', '百分点', True),
+            ]:
+                try:
+                    rows = {}
+                    for d, r in treasury.items():
+                        short = r.get(f'{market}_2y')
+                        long = r.get(f'{market}_10y')
+                        for v in [short, long] if spread else [short]:
+                            if v is not None and (isinstance(v, bool) or not isinstance(v, (int, float)) or not math.isfinite(v)):
+                                raise ValueError('invalid treasury value')
+                        rows[d] = (long - short if long is not None and short is not None else None) if spread else short
+                    series[key] = make_series(label, unit, rows, today=today, cutoff=cutoff, metadata=treasury_meta)
+                except (ValueError, TypeError, AttributeError):
+                    errors.append(f'{label}资料不合格')
+                    series[key] = make_series(label, unit, {}, today=today, metadata=treasury_meta)
+        for key, cache_key, source_id, loader, label, inverse in [
+            ('earnings_yield_cn', 'hs300_pe_hist', 'legulegu-hs300', sources.fetch_hs300_pe_history, '沪深300历史盈利收益率', True),
+            ('earnings_yield_us', 'us_ey_hist', 'multpl-ey', sources.fetch_us_ey_history, '标普500历史盈利收益率', False),
+        ]:
+            rows = load(cache_key, _VALUATION_TTL, loader, label)
+            metadata = metadata_for(source_id, self._cache.retrieved_at_for(cache_key))
+            try:
+                if inverse:
+                    if any(pe is not None and (isinstance(pe, bool) or not isinstance(pe, (int, float)) or not math.isfinite(pe)) for pe in rows.values()):
+                        raise ValueError('invalid PE')
+                    rows = {d: (100.0 / pe if isinstance(pe, (float, int)) and not isinstance(pe, bool) and pe > 0 else None) for d, pe in rows.items()}
+                series[key] = make_series(label, '%', rows, today=today, cutoff=cutoff, metadata=metadata)
+            except (ValueError, TypeError):
+                errors.append(f'{label}资料不合格')
+                series[key] = make_series(label, '%', {}, today=today, metadata=metadata)
+        return {'schema_version': 'market-context/1', 'data_mode': 'provider_observed',
+                'series': series, 'errors': errors, 'source_gaps': SOURCE_GAPS,
+                'generated_at': datetime.now(UTC).isoformat()}
 
     def macro_history(self, *, page_size: int = 60) -> dict[str, Any]:
         """PMI/CPI/PPI 月度历史序列，供趋势图。单项失败降级。

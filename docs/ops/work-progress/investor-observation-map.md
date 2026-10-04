@@ -1,3 +1,17 @@
+# 本轮：市场理解扩展首批已实现，整体计划继续
+
+更新时间 2026-10-04T15:15:12.127977+08:00（Asia/Shanghai）。用户“方向是对的感觉，开始做吧”；原task-id investor-observation-map和负责人持续。本文件所在提交为本轮成果，基础48e2eadc918e4cf0c361c89d25f25a8c2fba524c；发布codex/investor-observation-map-progress-20261004。同步状态以coordination/lei唯一记录及远端SHA为准。
+
+- completed：新market-context/1只读出口，融资3字段、中美2年/10减2期限差/历史盈利收益率共9项；33项总目录（中15/美19，含共享）。数据图、组合、指数投影和Agent同事实；趋势/定投/价值排序；9项中国年末安排、2次FOMC日期、4组ETF映射（510300仅历史）与两项有版本费用。
+- completed证据：docs/experiments/market-expansion-implementation-2026-10-04.md与同名raw。Python47、前端95项本轮相关检查通过；构建765模块、diff检查exit0；真实API9序列/无错误；桌面和390px手机、指数746共同期、Agent跨市场追问已核。独立复制13模型文件15项exit0，本机依赖复用；不称洁净安装/云端。
+- 来源结论：CN PE同日官方14.65/供方13.04差异确认，日期/列名bug没有支持，具体原因未定；FINRA应用用途授权不明，原值不自动接入；1/PE不等于盈利预测，行业订单分类资金不等于ETF净申赎。收益和用户理解未测量。
+- active：原任务继续负责，当前本批证据/同步完成后进入下一有界输入核查；不是交接或整体完成。planned：ETF持续份额/净值/分红拆分、带日期行业权重与产品成本/跟踪、完整事件实际/预期、P3择一；尚未启动，不认领所有未来方向。blocked：FINRA许可、合格盈利共识/修订/首次公布链；仓外台账权限未答复不写DB。
+- 下一步：先读最新协调，核ETF持续公开输入与许可、当前510300披露，复用现有行业/价格；不会重跑三项宏观资格、情绪/宽度或金融训练/封存实验。需其他AI暂避的具体块为fundamentals新context出口/缓存元信息及自有market-understanding模型/图/宏观回答；不占整个fundamentals或Agent。
+- 规则读1e13fb9f51eb54e732031770c9283173683f82e1，v1.0未变，未见本题重叠；记录非锁。当前旧API1753/8000保留，独立只读8045 PID87776/session12109、Vite5185 PID87856/session44605；没有本题金融进程/checkpoint，不杀任何进程。分享代码不会迁移进程。
+- 本轮0训练/回测/付费/用户流LLM，助手Sol2+Luna1只读结束，费用未知；源实际请求与未知底层数见source-ledger，旧账不清零。原下载/完整响应/截图/恢复目录仅本地，指纹/大小见audit-summary。归置器既有.git和progress误报exit1保留，未移动/覆盖其他资料。
+
+---
+
 # 当前阶段：可信参考、四指数对照与宏观解读完成软件验证
 
 更新时间：2026-10-04T00:21:55.156890+08:00（Asia/Shanghai）；investor-observation-map原负责人继续，非接管/整体结束。基础打磨及有界三项发散的软件范围completed，资料资格缺口blocked；此阶段未新增市场实验。

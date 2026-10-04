@@ -1,0 +1,82 @@
+{
+  "directory": "docs/experiments/raw/market-expansion-implementation-2026-10-04/restore-local-qzhixo5t",
+  "files": [
+    {
+      "path": "web/src/features/market-understanding/context-model.ts",
+      "sha256": "121214dda13630044273c9cacf65488347f0a0bfb408966ef444d30928f280c9",
+      "copy_equal": true
+    },
+    {
+      "path": "web/src/features/market-understanding/dashboard-model.ts",
+      "sha256": "f7a7dd20af424711702754e46272b7a792afd2fe3833d6a7ba939c457e96d35d",
+      "copy_equal": true
+    },
+    {
+      "path": "web/src/features/market-understanding/reference-evidence.ts",
+      "sha256": "1f9ff09f0ad91b888b86e001016eab6a9a4e7b2bfc9fb92c1d702f803e01ab71",
+      "copy_equal": true
+    },
+    {
+      "path": "web/src/features/market-understanding/reference-reading.ts",
+      "sha256": "2691a26312b20b9bdcc96abfc4e843d9c51b32251e57ab7762efb2a3f4ee8863",
+      "copy_equal": true
+    },
+    {
+      "path": "web/src/features/market-understanding/data-quality.ts",
+      "sha256": "7b22f0101bbd9f8367a145b60dbbb3b263a2b152869bf8a9203499a785d38b5e",
+      "copy_equal": true
+    },
+    {
+      "path": "web/src/features/market-understanding/observation-model.ts",
+      "sha256": "2d73bbc4f09da75856c39c0d2df22e48dc1078d0fd7dba8b1391fdb5ee719213",
+      "copy_equal": true
+    },
+    {
+      "path": "web/src/features/market-understanding/comparison-model.ts",
+      "sha256": "b6bf28206824e1159995b51cd76d0fa741d2a55ced8e41a8f13aef3c43a0967d",
+      "copy_equal": true
+    },
+    {
+      "path": "web/src/features/market-understanding/macro-reading.ts",
+      "sha256": "69d0259a834d74e5df46d74e6cf81edd87a36c23983fd2165b3798b4a1d4695d",
+      "copy_equal": true
+    },
+    {
+      "path": "web/src/features/market-understanding/metric-catalog.ts",
+      "sha256": "a9c87f5cf31c6646c3648e90e34bb077ad755d04f8087d4c4bd2b07ff395c625",
+      "copy_equal": true
+    },
+    {
+      "path": "web/src/features/market-understanding/policy-events.ts",
+      "sha256": "7e7d68a29188e81c37559fcdff20a2513fb7298ed0d5926afc32c6507a38acb3",
+      "copy_equal": true
+    },
+    {
+      "path": "web/src/features/market-understanding/events.ts",
+      "sha256": "2bb38161032996a2a1afafec420caae2b730e65b167d67483a384453342c32a2",
+      "copy_equal": true
+    },
+    {
+      "path": "web/src/features/market-understanding/etf-relations.ts",
+      "sha256": "d2524fa979ab91e63d3293e4015e3a073400ab4d14be1e77e5b1f6f9a5c66198",
+      "copy_equal": true
+    },
+    {
+      "path": "web/src/features/market-understanding/purpose-model.ts",
+      "sha256": "e1b3f4a7b2df12eedf65996e73bf5872624ee1a096c981b89eeced01dfe9e4ad",
+      "copy_equal": true
+    }
+  ],
+  "command": [
+    "node",
+    "run-market-context-regression.mjs"
+  ],
+  "exit_code": 0,
+  "stdout": "PASS catalogue adds nine unique actual fields without forecast or flows\nPASS zero retained and missing context fields stay absent\nPASS obtained timestamp never upgrades null publication or vintage\nPASS unsafe source links are never published\nPASS demo envelope and demo series never show market values\nPASS bad dates units booleans unsorted and future are blocked or omitted\nPASS malformed schema errors and missing source do not qualify facts\nPASS only known gap states survive and raw errors are not exposed\nPASS purpose changes order without dropping or changing facts\nPASS Chinese schedules keep exact official clock and future selection\nPASS Fed meeting range never invents announcement hour\nPASS Agent names unqualified financing earnings ETF flow and event gaps\nPASS absolute financing does not pretend to have a fixed danger line\nPASS ETF examples preserve exact composite identity and stale document scope\nPASS demo index envelopes and individual series cannot enter comparisons\n15 context input checks passed; synthetic only.\n",
+  "stderr": "",
+  "limitations": [
+    "same Mac, installed dependencies reused; no clean install or cross-OS test",
+    "no full backend or DB restored; live context API checked separately"
+  ],
+  "deleted": false
+}

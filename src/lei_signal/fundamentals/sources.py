@@ -648,15 +648,16 @@ def fetch_cn_erp(treasury: dict[str, Any] | None = None) -> dict[str, Any]:
 
 # ── ERP 历史走势（股债性价比长序列）────────────────────────────────────────
 # 口径：ERP = 盈利收益率(1/PE_TTM×100) − 10Y 国债收益率，与上方现值一致。
-# 历史：A股取乐咕乐股沪深300 PE_TTM 全史（2005-04 起，日频，与中证指数公司
-# 官方口径一致）；美股取 multpl.com 月度盈利收益率（溯源自 Robert Shiller
+# 历史：A股取乐咕乐股沪深300滚动PE；频率以实际返回日期为准，
+# 不能声称与中证官方同值同口径。美股取 multpl.com 月度盈利收益率（溯源自 Robert Shiller
 # 耶鲁数据，1871 起），按 as-of 前向填充对齐到国债日频。
 
 
 def fetch_hs300_pe_history() -> dict[str, float]:
-    """沪深300 PE_TTM 全史日频（乐咕乐股，via akshare），升序 {date: pe}。
+    """沪深300滚动PE历史（乐咕乐股，via akshare），升序 {date: pe}。
 
-    与现值链的 akshare 分支同源同口径（滚动市盈率），保证卡片与趋势图衔接一致。
+    频率以实际观测为准；现值有多源降级，不能保证其与历史同源。
+    本供方与中证官方同日期读数不一致，原因尚未确认，不能称官方一致。
     akshare 未安装或接口失败时抛错，由 service 层降级。
     """
     try:

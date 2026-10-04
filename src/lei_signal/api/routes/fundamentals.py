@@ -36,6 +36,12 @@ def rates_history(request: Request, lookback_days: int = 1095) -> dict:
     return _service(request).rates_history(lookback_days=max(5, min(int(lookback_days), 7665)))
 
 
+@router.get("/market-context")
+def market_context(request: Request, lookback_days: int = 1095) -> dict:
+    """融资细项、期限差与历史盈利收益率；来源资格和缺项分别返回。"""
+    return _service(request).market_context(lookback_days=lookback_days)
+
+
 @router.get("/macro-history")
 def macro_history(request: Request, page_size: int = 60) -> dict:
     """PMI/CPI/PPI 月度历史序列，供趋势图。page_size 默认 60 期（约 5 年）。"""

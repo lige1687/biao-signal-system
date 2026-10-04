@@ -1,0 +1,9 @@
+export interface EtfRelation {index:string;code:string;name:string;source:string;verified:string;version:string;currency:string;expense?:string;limitation:string}
+export const etfRelations:EtfRelation[]=[
+ {index:'hs300',code:'510300',name:'华泰柏瑞沪深300ETF',source:'https://www.sse.com.cn/disclosure/fund/announcement/c/new/2023-07-21/510300_20230721_0R3C.pdf',verified:'2026-10-04',version:'2023披露，仅历史映射；最新合同待核',currency:'未在本次原件核实',limitation:'当前产品条款和费用尚未核实，不从历史映射生成当前投资建议。'},
+ {index:'sse',code:'510210',name:'富国上证综指ETF',source:'https://www.fullgoal.com.cn/fundDetail/510210/index.html',verified:'2026-10-04',version:'基金管理人产品页面，动态快照',currency:'人民币',limitation:'跟踪上证综合指数；净值、价格和指数点位不同，费率/折溢价未接入。'},
+ {index:'sp500',code:'SPY',name:'State Street SPDR S&P 500 ETF Trust',source:'https://www.ssga.com/us/en/individual/etfs/state-street-spdr-sp-500-etf-trust-spy',verified:'2026-10-04',version:'管理人产品页面，动态快照',currency:'USD（基础币种）',expense:'年度总费用率0.0945%（管理人页面快照）；不含所有交易或账户费用',limitation:'目标对应标普500价格与收益表现；本页指数曲线不包含ETF费用、分红、折溢价或人民币汇率变化。'},
+ {index:'nasdaq',code:'ONEQ',name:'Fidelity Nasdaq Composite Index ETF',source:'https://www.sec.gov/Archives/edgar/data/205323/000020532326000014/filing10683.htm',verified:'2026-10-04',version:'SEC 2026公开招募文件',currency:'本次文件未核交易币种',expense:'年度运营费用合计0.21%（2026-01-29招募文件）；不含经纪佣金等额外费用',limitation:'目标对应纳斯达克综合指数；QQQ跟踪纳斯达克100，本页NASDAQCOM不能当作QQQ回报。'},
+];
+export function relationsFor(index:string){return etfRelations.filter(x=>x.index===index);}
+export function etfRelationAnswer(market:'cn'|'us'){const keys=market==='cn'?['hs300','sse']:['sp500','nasdaq'];return ['### 指数与ETF对应（示例，不是产品推荐）',...etfRelations.filter(x=>keys.includes(x.index)).map(x=>`${x.code} ${x.name}；${x.version}，核查${x.verified}。[原始披露](${x.source})。${x.expense??'费用尚未在本轮核实'}。${x.limitation}`),'行业权重、实时买卖价差、跟踪差异与ETF净申赎尚未接入；不把指数点位当成持有ETF的实际回报。'].join('\n\n');}

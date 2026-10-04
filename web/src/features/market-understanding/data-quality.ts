@@ -18,6 +18,8 @@ export const cnValuationAudit={period:'2026-08-31',pe:14.65,verified:'2026-10-04
 export function qualityNote(m:Pick<Metric,'frequency'>&{key?:string},s:Series|undefined,today:string){
  const frequency=observedFrequency(m,s),latest=lastReading(s);
  const i=s?.dates.indexOf(cnValuationAudit.period)??-1,value=i<0?null:s?.values[i];
- const audit=m.key==='pe_cn'&&value!==null&&value!==undefined&&Math.abs(value-cnValuationAudit.pe)>.02?`${cnValuationAudit.period}的接口市盈率${value}与官方月报${cnValuationAudit.pe}不一致，市盈率口径待核；不代表今天官方估值。`:m.key==='erp_cn'?'该股债差继承市盈率口径限制，不能作为经官方核验的估值结论。':'';
- return [audit,s?.notice,frequency!==m.frequency?`实际观测间隔按${frequency}度展示，间隔识别不等于官方发布频率核实。`:'',latest?ageNotice(latest.date,frequency,today):'尚无有效观测',latest?.trailingMissing?'末期缺值，保留最近有效观测。':'',s?.receivedAt?`客户端读取：${s.receivedAt}（不是首次公布时间）。`:'', '逐期来源、首次发布与修订版本未核实。'].filter(Boolean).join(' ');
+ const audit=m.key==='pe_cn'&&value!==null&&value!==undefined&&Math.abs(value-cnValuationAudit.pe)>.02?`${cnValuationAudit.period}的接口市盈率${value}与官方月报${cnValuationAudit.pe}不一致，市盈率口径待核；不代表今天官方估值。`:['erp_cn','earnings_yield_cn'].includes(m.key??'')?'该衍生指标继承市盈率口径限制，不能作为经官方核验的估值结论。':'';
+ const meta=s?.source;
+ const trace=meta?`供方：${meta.provider}；系列：${meta.series_identity}。来源取得：${meta.retrieved_at??'未知'}；首次公布：${meta.published_at??'未知'}；修订版本：${meta.vintage??'未知'}。${meta.limitations}`:'';
+ return [trace,audit,s?.notice,frequency!==m.frequency?`实际观测间隔按${frequency}度展示，间隔识别不等于官方发布频率核实。`:'',latest?ageNotice(latest.date,frequency,today):'尚无有效观测',latest?.trailingMissing?'末期缺值，保留最近有效观测。':'',s?.receivedAt?`客户端读取：${s.receivedAt}（不是首次公布时间）。`:'', '逐期来源、首次发布与修订版本未核实。'].filter(Boolean).join(' ');
 }

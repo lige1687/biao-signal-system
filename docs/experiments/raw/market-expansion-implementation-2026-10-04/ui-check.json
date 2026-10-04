@@ -1,0 +1,54 @@
+{
+  "checked_at": "2026-10-04T07:12:02.632728+00:00",
+  "environment": "Codex IAB real localhost, Mac; desktop and 390x844",
+  "checks": [
+    {
+      "name": "A-share current catalogue",
+      "result": "15/15 readings after actual API return; 6 newly exposed fields"
+    },
+    {
+      "name": "new context route through Vite",
+      "result": "HTTP200; nine series, no source error; actual dates preserved"
+    },
+    {
+      "name": "purpose ordering",
+      "result": "trend changes chart order; no facts removed"
+    },
+    {
+      "name": "CN events",
+      "result": "9 future selected schedule facts visible, 2026-10-14 09:30 verified"
+    },
+    {
+      "name": "US calendar",
+      "result": "FOMC date range without invented hour plus prior BLS exact clocks"
+    },
+    {
+      "name": "Agent",
+      "result": "real entry -> FINRA/ETF/event query -> 那A股呢 retains topic and switches market; no LLM request"
+    },
+    {
+      "name": "index comparison",
+      "result": "US10Y−2Y × SP500 and NASDAQCOM, 746 common observations, 698 changes; scatter visible"
+    },
+    {
+      "name": "ETF facts",
+      "result": "ONEQ shown for Composite, QQQ identity warning; dated expense evidence and source links"
+    },
+    {
+      "name": "mobile",
+      "result": "dashboard comparison and Agent scrollWidth=innerWidth=390; viewport restored"
+    }
+  ],
+  "failures_repaired": [
+    "getByLabel locator did not match; used observed combobox role",
+    "ETF JSX insertion pattern initially missed actual PairCard map; rendered section verified after fix",
+    "Agent 0/0 source-only query now returns qualified facts without empty numeric summary"
+  ],
+  "limits": [
+    "User comprehension not measured",
+    "No production backend reload",
+    "Old API8000 runtime loaded commit unknown",
+    "Preview8045 started before final one-line source wording change; cache metadata carries prior wording, numerical series unchanged",
+    "Clean install and Linux/Windows not tested"
+  ]
+}

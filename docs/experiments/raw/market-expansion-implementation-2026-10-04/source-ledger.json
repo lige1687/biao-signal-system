@@ -1,0 +1,22 @@
+{
+  "old_phase": "6 batches /20items preserved, not a user-approved permanent cap",
+  "this_phase": {
+    "parent_web": "9 batches, 25 request items (search/open/find); failed NBS timeout and Fullgoal PDF/internal find included",
+    "parent_direct_http": "2 successful GETs: NBS and Fullgoal product page",
+    "finra_audit": "9 requests (7 web +2 direct GET), see local immutable audit fingerprint",
+    "cn_pe_audit": "4 external source operations identified, local pdftotext unavailable then pypdf; provider 403 retained; nested provider HTTP count unknown",
+    "live_source_loaders": "4 successful loaders, underlying HTTP request count unknown; existing API cache requests not item-counted"
+  },
+  "compute": {
+    "new_backtest": 0,
+    "new_training": 0,
+    "paid_source": 0,
+    "LLM_user_flow": 0,
+    "assistant_model_credit": "unknown; Sol2+Luna1 read-only assistants finished"
+  },
+  "not_repeat": [
+    "Do not refetch sources merely to improve counts",
+    "Do not turn same-period plot into forward-return proof",
+    "Do not numerically adjust PE to the official one-point value"
+  ]
+}

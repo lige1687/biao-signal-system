@@ -353,6 +353,12 @@ def test_fetch_vix_history_uses_calendar_day_timestamps(monkeypatch: pytest.Monk
 
 def test_fetch_cn_erp_history_joins_pe_and_treasury(monkeypatch: pytest.MonkeyPatch) -> None:
     """ERP = 1/PE×100 − 中债10Y，按交集日期逐日计算，并按 lookback 截尾。"""
+    from datetime import datetime
+    class FixedDatetime(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return cls(2026, 8, 20, tzinfo=tz)
+    monkeypatch.setattr(sources, 'datetime', FixedDatetime)
     monkeypatch.setattr(
         sources, "fetch_hs300_pe_history",
         lambda: {"2025-01-02": 10.0, "2025-01-03": 12.5, "2026-08-18": 13.77},

@@ -1,0 +1,111 @@
+{
+  "mode": "engineering_only_no_financial_experiment",
+  "checks": [
+    {
+      "name": "python",
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "tests/unit/test_market_context.py",
+        "tests/unit/test_fundamentals.py",
+        "-q"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "elapsed_s": 0.52,
+      "stdout": "...............................................                          [100%]\n47 passed in 0.23s\n",
+      "stderr": ""
+    },
+    {
+      "name": "context",
+      "command": [
+        "npm",
+        "run",
+        "test:market-context"
+      ],
+      "cwd": "web",
+      "exit_code": 0,
+      "elapsed_s": 0.33,
+      "stdout": "\n> biao-signal-web@0.1.0 test:market-context\n> node run-market-context-regression.mjs\n\nPASS catalogue adds nine unique actual fields without forecast or flows\nPASS zero retained and missing context fields stay absent\nPASS obtained timestamp never upgrades null publication or vintage\nPASS unsafe source links are never published\nPASS demo envelope and demo series never show market values\nPASS bad dates units booleans unsorted and future are blocked or omitted\nPASS malformed schema errors and missing source do not qualify facts\nPASS only known gap states survive and raw errors are not exposed\nPASS purpose changes order without dropping or changing facts\nPASS Chinese schedules keep exact official clock and future selection\nPASS Fed meeting range never invents announcement hour\nPASS Agent names unqualified financing earnings ETF flow and event gaps\nPASS absolute financing does not pretend to have a fixed danger line\nPASS ETF examples preserve exact composite identity and stale document scope\nPASS demo index envelopes and individual series cannot enter comparisons\n15 context input checks passed; synthetic only.\n",
+      "stderr": ""
+    },
+    {
+      "name": "foundation",
+      "command": [
+        "npm",
+        "run",
+        "test:market-foundation"
+      ],
+      "cwd": "web",
+      "exit_code": 0,
+      "elapsed_s": 0.29,
+      "stdout": "\n> biao-signal-web@0.1.0 test:market-foundation\n> node run-market-foundation-regression.mjs\n\nPASS quantiles independently checked with negatives, zeros, ties and copied input\nPASS unverified fixed CPI, VIX, rates and valuation thresholds are not offered\nPASS 12 observed values produce reproducible quantiles and disclose actual support\nPASS all four index identities explicit, malformed date / unit / zero rejected\nPASS daily alignment never carries values across missing dates\nPASS monthly labels use last same-month index, do not treat next month publication as observed\nPASS weekly bucketing across year and current incomplete week excluded\nPASS projection omits long gaps and zero-variance correlation\nPASS inconsistency reports simultaneous fact, never invents a future failure\nPASS macro entry detects relevant questions without catching trade recording\nPASS macro answers give actual periods, no fabricated zeros and no buying conclusion\nPASS official event times preserve daylight saving and data reference period separately\n12 foundation checks passed; synthetic math, no financial experiment.\n",
+      "stderr": ""
+    },
+    {
+      "name": "observation",
+      "command": [
+        "npm",
+        "run",
+        "test:market-observation"
+      ],
+      "cwd": "web",
+      "exit_code": 0,
+      "elapsed_s": 0.29,
+      "stdout": "\n> biao-signal-web@0.1.0 test:market-observation\n> node run-market-observation-regression.mjs\n\nPASS monthly PE uses conservative month alignment and discloses evidence limits\nPASS small samples do not certify cadence\nPASS explicit demonstration input never becomes real current data\nPASS four groups retain missing earnings and flows on both markets\nPASS changes sorted by observation date rather than claiming publication\nPASS index has its own date and unit and unavailable growth is blank\nPASS future input is excluded even bypassing decoder\nPASS old and terminally missing observations are disclosed\nPASS followup switches market carrying topic and refines with rates\nPASS new topic resets and ambiguous reference requests clarification\nPASS agent and page share changes and new inputs change answer\nPASS pressure inconsistency requires exact comparable index intervals\nPASS trade statements do not enter follow-up route and line identity is never guessed\nPASS official dated discrepancy is disclosed without replacing third-party curve\nPASS repeated market switches carry the subject without recursive quoted questions\nPASS summary links encode the selected market and metric, never inherit stale URL\nPASS macro follow-up does not hijack portfolio or opportunity entry\n17 observation checks passed; synthetic inputs only, no financial experiment.\n",
+      "stderr": ""
+    },
+    {
+      "name": "integration",
+      "command": [
+        "npm",
+        "run",
+        "test:market-integration"
+      ],
+      "cwd": "web",
+      "exit_code": 0,
+      "elapsed_s": 0.28,
+      "stdout": "\n> biao-signal-web@0.1.0 test:market-integration\n> node run-market-integration-regression.mjs\n\nPASS five old sections and all legacy deep links preserve destination and query\nPASS every plotted reference has readable meaning, color and original threshold identity\nPASS unsupported valuation and volatility fixed lines are removed\nPASS merged content keeps old modules and fixes CPI display without changing shared threshold numbers\n4 market integration checks passed; synthetic inputs, no financial experiment.\n",
+      "stderr": ""
+    },
+    {
+      "name": "build",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "web",
+      "exit_code": 0,
+      "elapsed_s": 8.46,
+      "stdout": "\n> biao-signal-web@0.1.0 build\n> tsc --noEmit && vite build\n\nvite v5.4.21 building for production...\ntransforming...\n✓ 766 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                      0.55 kB │ gzip:   0.34 kB\ndist/assets/index-D52_2MeK.css     231.20 kB │ gzip:  41.68 kB\ndist/assets/react-CM6ARAep.js      164.49 kB │ gzip:  53.66 kB\ndist/assets/index-BzTyJXyz.js      824.22 kB │ gzip: 292.17 kB\ndist/assets/echarts-BOcpYRet.js  1,035.04 kB │ gzip: 342.62 kB\n✓ built in 3.17s\n",
+      "stderr": "\n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "elapsed_s": 0.06,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "hygiene",
+      "command": [
+        "python3",
+        "scripts/check_repo_hygiene.py"
+      ],
+      "cwd": ".",
+      "exit_code": 1,
+      "elapsed_s": 0.06,
+      "stdout": "✗ 归置自检发现 2 处违规（规约见 AGENTS.md「文件归置规约」）：\n  - [仓库根层] 多出文件: .git （新文件按目录地图进子目录，见 docs/README.md）\n  - [docs/ 根层] 多出目录: progress/（白名单外，归档或删除）\n",
+      "stderr": ""
+    }
+  ]
+}

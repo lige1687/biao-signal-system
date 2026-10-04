@@ -8,7 +8,7 @@ export type WindowYears = 1 | 3 | 'all';
 export const groups = { all: '全部指标', rates: '利率与信用', valuation: '估值', leverage: '资金与波动', growth: '经济与就业', inflation: '价格与通胀' } as const;
 export interface Metric {
   key: string; title: string; market: Market[]; group: Exclude<keyof typeof groups, 'all'>;
-  endpoint: Endpoint; apiUnit: string; unit: string; frequency: '日' | '周' | '月';
+  endpoint: Endpoint|'context'; apiUnit: string; unit: string; frequency: '日' | '周' | '月';
   reading: string; source: string;
 }
 const metric = (key: string, title: string, market: Market[], group: Metric['group'], endpoint: Endpoint, apiUnit: string, unit: string, frequency: Metric['frequency'], reading: string, source: string): Metric => ({key,title,market,group,endpoint,apiUnit,unit,frequency,reading,source});
@@ -41,7 +41,8 @@ export const metrics: Metric[] = [
 ];
 export interface Reference extends MarkLine, ReferenceReading { kind: '定义线' | '原页面参考' | '历史分位参考'; basis: string; sourceUrl?: string }
 export function referencesFor(key:string,series?:Series):Reference[] { return [...definedReferences(key),...historicalReferences(key,series)]; }
-export interface Series { dates: string[]; values: (number|null)[]; notice: string; receivedAt?: string }
+export interface SourceMeta {provider:string;source_url:string|null;series_identity:string;retrieved_at:string|null;published_at:string|null;vintage:string|null;frequency:string;value_status:'provider_observed';historical_prediction_use:'unqualified';limitations:string}
+export interface Series { source?:SourceMeta; dates: string[]; values: (number|null)[]; notice: string; receivedAt?: string }
 export interface Decoded { series: Record<string, Series>; errors: number }
 function record(x: unknown): x is Record<string, unknown> { return !!x && typeof x==='object' && !Array.isArray(x); }
 export function validDate(x: unknown): x is string { return typeof x==='string' && /^\d{4}-\d{2}-\d{2}$/.test(x) && Number.isFinite(Date.parse(x+'T00:00:00Z')) && new Date(x+'T00:00:00Z').toISOString().slice(0,10)===x; }
@@ -51,7 +52,7 @@ export function decodeHistory(raw: unknown, endpoint: Endpoint, today: string): 
   for(const m of metrics.filter(m=>m.endpoint===endpoint)) {
     const s=raw.series[m.key];
     const missing = (notice: string) => {result.series[m.key]={dates:[],values:[],notice};};
-    if(['synthetic','demo','test'].includes(String(raw.data_mode))) {missing('演示数据不作为真实市场观测');continue;}
+    if(['synthetic','demo','test'].includes(String(raw.data_mode)) || (record(s)&&['synthetic','demo','test'].includes(String(s.data_mode)))) {missing('演示数据不作为真实市场观测');continue;}
     if(!record(s) || !Array.isArray(s.dates) || !Array.isArray(s.values)) { missing('本次未返回该序列'); continue; }
     if(s.unit!==m.apiUnit || s.dates.length!==s.values.length) {missing('单位或日期与数值不匹配，暂不展示');continue;}
     if(!s.dates.every((d,i)=>validDate(d) && (i===0 || d > (s.dates as string[])[i-1])) || !s.values.every(v=>v===null || (typeof v==='number' && Number.isFinite(v)))) {missing('日期顺序或数值格式异常，暂不展示');continue;}

@@ -1,10 +1,11 @@
 import {validDate, type Market, type Metric, type Series, type WindowYears, windowSeries} from './dashboard-model';
 export const indexChoices=[{key:'hs300',title:'沪深300',market:'cn',source:'腾讯 · 沪深300价格指数'}, {key:'sse',title:'上证指数',market:'cn',source:'腾讯 · 上证综合价格指数'}, {key:'sp500',title:'标普500',market:'us',source:'FRED · SP500价格指数'}, {key:'nasdaq',title:'纳斯达克综合',market:'us',source:'FRED · NASDAQCOM；不是纳斯达克100或QQQ'}] as const;
 export function decodeIndices(raw:unknown,today:string):Record<string,Series> {
- const data=raw as {series?:Record<string,{unit?:unknown;dates?:unknown;values?:unknown}>};if(!data || typeof data.series!=='object'||!data.series)throw new Error('指数资料格式不完整');
+ const data=raw as {data_mode?:unknown;series?:Record<string,{data_mode?:unknown;unit?:unknown;dates?:unknown;values?:unknown}>};if(!data || typeof data.series!=='object'||!data.series)throw new Error('指数资料格式不完整');
  const result:Record<string,Series>={};
  for(const {key} of indexChoices){
   const s=data.series[key],empty={dates:[],values:[],notice:'本次未取得指数历史'};
+  if(['synthetic','demo','test'].includes(String(data.data_mode))||['synthetic','demo','test'].includes(String(s?.data_mode))){result[key]={...empty,notice:'演示指数不作为真实观测'};continue;}
   if(!s||s.unit!==''||!Array.isArray(s.dates)||!Array.isArray(s.values)||s.dates.length!==s.values.length){result[key]=empty;continue;}
   const ds=s.dates as unknown[],vs=s.values as unknown[];
   if(!ds.every((d,i)=>validDate(d)&&(i===0||d>(ds[i-1] as string)))||!vs.every(v=>v===null||typeof v==='number'&&Number.isFinite(v)&&v>0)){result[key]={...empty,notice:'指数日期、单位或数值不合格'};continue;}

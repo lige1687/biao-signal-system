@@ -1,12 +1,15 @@
+import {etfRelationAnswer} from './etf-relations';
+import {eventAnswer} from './policy-events';
+import {allMetrics as metrics} from './metric-catalog';
 import {observedFrequency,qualityNote,cnValuationAudit} from './data-quality';
 import {observationSnapshot,observationText} from './observation-model';
 export {ageNotice} from './data-quality';
 import {ageNotice} from './data-quality';
-import {metrics,lastReading,formatValue,periodLabel,referencesFor,windowSeries,type Market,type Series} from './dashboard-model';
+import {lastReading,formatValue,periodLabel,referencesFor,windowSeries,type Market,type Series} from './dashboard-model';
 import {evidenceFor} from './reference-evidence';
-export function isMacroQuestion(q:string){return /宏观|通胀|国债|利率|就业|非农|PMI|CPI|PPI|VIX|WEI|信用利差|两融|融资余额|股债|CAPE|估值|增长|资金流/i.test(q)&&! /买了|卖了|成交了|报单|申购|赎回/.test(q);}
+export function isMacroQuestion(q:string){return /ETF|FINRA|宏观|通胀|国债|利率|就业|非农|PMI|CPI|PPI|VIX|WEI|信用利差|两融|融资余额|股债|CAPE|估值|增长|资金流|盈利|政策|财报|事件/i.test(q)&&! /买了|卖了|成交了|报单|申购|赎回/.test(q);}
 export function questionKeys(q:string):string[]{
- const rules:[RegExp,string[]][]=[[/PMI|景气/i,['pmi','wei','dgorder_yoy']],[/通胀|CPI|PPI/i,['cpi','ppi','cpiaucsl_yoy','ppiaco_yoy']],[/利率|国债/,['cn_10y','us_10y','cn_us_spread_10y','hy_oas']],[/波动|VIX|信用|风险/i,['vix','hy_oas','margin_rzyezb','icwa']],[/两融|融资|杠杆/,['margin_rzrqye','margin_rzyezb']],[/估值|CAPE|股债/i,['pe_cn','cape_us','erp_cn','erp_us']],[/增长|经济/,['pmi','wei','payems_yoy','dgorder_yoy']],[/就业/,['icwa','ccwa','payems_yoy']]];
+ const rules:[RegExp,string[]][]=[[/PMI|景气/i,['pmi','wei','dgorder_yoy']],[/通胀|CPI|PPI/i,['cpi','ppi','cpiaucsl_yoy','ppiaco_yoy']],[/利率|国债/,['cn_10y','us_10y','cn_2y','us_2y','cn_10_2_spread','us_10_2_spread','cn_us_spread_10y','hy_oas']],[/波动|VIX|信用|风险/i,['vix','hy_oas','margin_rzyezb','icwa']],[/两融|融资|杠杆/,['margin_rzrqye','margin_rzye','margin_rqye','margin_buy','margin_rzyezb']],[/估值|CAPE|股债|盈利|财报/i,['pe_cn','cape_us','erp_cn','erp_us','earnings_yield_cn','earnings_yield_us']],[/增长|经济/,['pmi','wei','payems_yoy','dgorder_yoy']],[/就业/,['icwa','ccwa','payems_yoy']]];
  return [...new Set(rules.filter(([re])=>re.test(q)).flatMap(([,keys])=>keys))];
 }
 export function isMacroFollowup(q:string){
@@ -28,6 +31,12 @@ export function macroAnswer(market:Market,series:Record<string,Series>,question:
  const wanted=questionKeys(question),selected=metrics.filter(m=>m.market.includes(market)&&(wanted.length?wanted.includes(m.key):['cn_10y','us_10y','pmi','cpi','cpiaucsl_yoy','hy_oas','vix','margin_rzyezb','cape_us'].includes(m.key)));
  const lines=[`### ${market==='cn'?'A股':'美股'}宏观资料解读`,`本次整理：${readAt}。这是按系统已取得数据整理的解读；各项所属期如下，整理时间不是首次公布时间。`];
  if(/买|卖|预测|收益|涨多少|抄底|必涨|必跌/.test(question))lines.push('这些背景资料不能单独确定买卖、未来涨跌或收益。需要结合原技术条件与个人计划；下方仅回答目前能核查的事实。');
+ if(/盈利|财报|预测/.test(question))lines.push('历史盈利收益率是过去盈利相对价格的比例；不是指数盈利增速、现金流或分析师预测。现系统未取得合格的指数盈利预期与修订资料。');
+ if(/FINRA|美股.*融资|美国.*融资/i.test(question))lines.push('美国FINRA是月度客户融资余额；官方资料已核，应用使用范围未明确，暂不接入曲线。[核官方统计](https://www.finra.org/rules-guidance/key-topics/margin-accounts/margin-statistics)。不能用A股两融或ETF成交额替代。');
+ if(/政策|事件|发布|会议/.test(question))lines.push(eventAnswer(market,today));
+ if(/ETF/i.test(question))lines.push(etfRelationAnswer(market));
+ if(/ETF|资金流|净申赎/.test(question))lines.push('现有行业成交额、订单分类资金和ETF价格相对强弱不是ETF净申赎。还缺基金份额变化、份额净值及分拆/合并处理，暂不给出ETF净流入数字。');
+ if(!selected.length||(!wanted.length&&/政策|事件|ETF/i.test(question))){lines.push('这次回答按来源对应关系与已核安排整理。所问融资 / 净申赎连续数据、事件预期与实际值仍有缺口，不能据此给出市场方向判断。');return lines.join('\n\n');}
  const snapshot=observationSnapshot(market,series,indices,today);
  lines.push('### 最近观测变化',...snapshot.changes.filter(x=>!wanted.length||wanted.includes(x.key)).slice(0,5).map(observationText),'按各项观测期排序，不代表刚刚发布；所属期、读取时间与首次发布时间不同。');
  const current=selected.flatMap(m=>{const x=lastReading(series[m.key]);return x?[{m,x}]:[];});
@@ -52,6 +61,6 @@ export function macroAnswer(market:Market,series:Record<string,Series>,question:
  }
  lines.push(`
 ### 还要核查什么
-本次${available}/${selected.length}项有有效观测。不同频率和所属期不能混称“今天一起发生”。利率下降可能来自增长转弱；估值下降可能来自盈利变化。历史分位描述位置，不证明买点或危险线有效。逐期首次公布/修订、预期差、盈利预期、完整中国事件日历尚缺，相关判断暂不能完成。`);
+本次${available}/${selected.length}项有有效观测。不同频率和所属期不能混称“今天一起发生”。利率下降可能来自增长转弱；估值下降可能来自盈利变化。历史分位描述位置，不证明买点或危险线有效。逐期首次公布/修订、预期差、盈利预期、完整事件日历尚缺（选定中国发布与FOMC安排已可核），相关判断暂不能完成。`);
  return lines.join('\n\n');
 }
