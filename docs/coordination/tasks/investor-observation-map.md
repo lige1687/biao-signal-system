@@ -1,3 +1,38 @@
+# 当前 active：价格与指标同图叠加已发布，原任务持续
+
+更新时间 2026-10-04T23:26:42.316927+08:00（Asia/Shanghai）。稳定task-id investor-observation-map，原负责人继续，非接管/非整体结案。本轮最新规则读取commit **752ad4521fcf9cc3d258f90f60b375ba84fa362e**；COORDINATION v1.0 / SHA256 6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0未变。已读最新external候选组件及sentiment历史宽度输入记录，和本轮图表块无已登记冲突；记录不是排他锁。
+
+## 目标、准确成果与本轮变化
+
+用户澄清：映射是指数价格走势与对应指标走势能直接同图看出关系。原图表优先的中美市场理解、宏观解释/权威参考、专业投资者观察范围仍保留；这里只改叙事展示，不进入技术判定/过滤，不宣称收益或因果已成立。
+
+基础73cbd557dcf57541ba22230f1d6a6b5ba815e70b；本地task/investor-observation-map-progress，远端 **codex/investor-observation-map-progress-20261004**。本轮成果 **396983aa6f7999ce8cc424f01e8bd3c614af25f2** 已普通推送，ls-remote和fetch对象完整SHA核实；17项冻结文件大小/SHA以及本次24个发布文件字节均与本地一致。没有合并main、部署、强推、付费或改权限。协调本记录自身版本用git log -- 本路径定位。
+
+[报告](https://github.com/lige1687/biao-signal-system/blob/396983aa6f7999ce8cc424f01e8bd3c614af25f2/docs/experiments/market-price-indicator-overlay-2026-10-04.md)；[最小恢复/证据](https://github.com/lige1687/biao-signal-system/blob/396983aa6f7999ce8cc424f01e8bd3c614af25f2/docs/experiments/raw/market-price-indicator-overlay-2026-10-04/README.md)；[进度](https://github.com/lige1687/biao-signal-system/blob/396983aa6f7999ce8cc424f01e8bd3c614af25f2/docs/progress/investor-observation-map.md)。raw/status是发布前的冻结证据快照；当前同步以本记录和远端Git为准，不改封存指纹。
+
+## completed / active / planned / paused / blocked
+
+- completed有界工程：单图同日期轴，蓝色指数左轴/橙色指标右轴；图例/共同期间/原值单位；悬停包含各自观察日期。缺失不断言可得、不补零、不移位追求贴合；两轴独立尺度，交点不是交易点。默认事件标记关闭，散点/ETF/日历收起，来源/参考仍可展开。
+- completed证据：foundation17+context15项通过，构建767模块exit0；既有大包提示保留。真实标普500、纳斯达克综合、沪深300、上证切换及日/月频悬停通过；4条真实API值独立匹配。390px页面宽390/图318，左右轴/两曲线/提示均可见。独立目录纯绘图源码逐字恢复6项检查exit0（复用本机依赖，非洁净/跨OS恢复）。现行共享归置器只读检查此树exit0；未重跑旧后端/金融实验。
+- active原任务：本轮可交付结果已发布；继续负责市场理解的有限显示/说明与原资料资格任务。当前无运行中的金融实验或助手；用户是否更容易理解待验收，收益未测量。
+- planned下一步：先依据用户反馈核同图可读性；随后恢复原510300最新合同/当前费用及连续份额资料资格，有合格原件才更新。不把整个ETF/宏观/Agent未来方向圈作独占，未启动净申赎效果研究。
+- paused原ETF源核查：用户优先本轮图表，保存checkpoint与失败请求。510300条目仅由2023映射换成2026一季报历史对象/财务币种及报告日期；当前完整持仓/费用未补。聚宽新风格规划已由发送方撤回且未写/未实现，不能重开。
+- blocked原限定项：FINRA应用许可、合格盈利共识/首次公布及修订、CN PE差异根因仍未知；当前最新合同/连续ETF输入未交齐，来源未宣称穷尽。仓外台账未获允许，不写DB。
+
+## 文件范围、未交材料和避让
+
+本轮IndexComparison.tsx、index-overlay-model.ts、dashboard.css本节、navigation本节、foundation相关回归；etf-relations仅510300历史来源；自己的报告/raw、扩大计划与两进度、registry/INDEX自身条目。其他AI暂避这些具体块，不占整个基本面/API/Agent，不接管情绪/技术/外部因子/三宏观源资格。API/公式/Streamlit/策略原文未改，项目AGENTS原简短协作入口保留。
+
+7个本轮原件仅本地，远端不可复现原字节：管理人HTML/3官方PDF、2个API响应、实际截图。manifest逐项记录位置/大小/SHA/来源及可取得方式，总清单只交小元数据，不上传密钥/凭证/数据库/权重/受限资料。旧未跟踪来源与恢复目录均保留且未入本次提交，见旧清单。恢复先核commit/manifest/来源资格，再做README最低检查；不能凭completed假定全部依赖/许可已继承。
+
+## 运行、失败、预算及禁止重复
+
+本轮确认共享API PID1753/8000保留，其加载commit未知；独立只读预览PID17186/8045、Vite PID15493/5185仍在。本轮Python3.11/AkShare1.18.49预览因libmini_racer退出133，失败封存；复用已有Python3.13.12/AkShare1.18.91环境后实际200。未安装/杀进程/重启共享服务。复制文件不迁移进程；新执行者不得同时写本任务输出，接管先与原负责人明确且核实际端口/来源。无金融checkpoint。
+
+0新金融回测/拟合/训练/付费/新助手/模型调用；模型费用未知。撤回分发只读6项、原ETF18项来源操作（含失败）保留；直接API核至少7含2个404，页面/缓存底层HTTP精确次数未知，不记0。旧累计研究账及负结论沿用：情绪组合、技术/QQQ/VXN、三源资格不重跑；曲线同向/交叉不证明预测价值，不调参考线追求正结果。已记录错误API路径/浏览器定位/native失败，只有新证据或具体错误才重开；下一轮实质工作前再fetch并读最新协调。
+
+---
+
 # 当前 active：按用户澄清改为指数价格与指标同图叠加
 
 更新时间 2026-10-04T22:57:02.818525+08:00（Asia/Shanghai）。规则读取04a31078d5c94ad161ac16e09b9186e2e345e811，v1.0未变；稳定task-id investor-observation-map，原负责人继续。用户明确：“映射图，其实是指数价格的映射图和对应数据的映射图……能直接看出来价格走势和对应指标的关系……有点看不懂”。这是历史走势叠加，不是ETF对应关系或未来预测。
