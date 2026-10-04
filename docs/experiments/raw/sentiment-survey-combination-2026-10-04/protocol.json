@@ -1,0 +1,41 @@
+{
+  "question": "Do fixed AAII and NAAIM combinations improve same-date future20-interval SPY return estimates over each alone and historical mean?",
+  "status": "frozen before new outcome fitting",
+  "qualification": "current revised history only; NOT historically available or tradable",
+  "models": [
+    "A",
+    "BA",
+    "BAN",
+    "BANI"
+  ],
+  "primary_comparisons": [
+    "BAN vs BN",
+    "BAN vs BA",
+    "BANI vs BAN"
+  ],
+  "required_challenges": [
+    "historical mean I",
+    "NAAIM alone N"
+  ],
+  "definition": "A=AAII bullish minus bearish percentage points, seven-day hypothetical delay, maxage14; B=last20quoteinterval return; N=NAAIM exposure; interaction=train-standardized A times N",
+  "training": "annual 2025/2026; targets must end before January1; ridge .001 unchanged; training counts49,101; evaluation52,26",
+  "target": "100*(close[t+21]/close[t+1]-1)",
+  "planned_fits": {
+    "core": 8,
+    "independent": 8
+  },
+  "no_search": true,
+  "counterexamples": "yearly errors; remove most favorable5weeks; fixed-prediction 8/16week block intervals2000draws",
+  "limitations": [
+    "78 strongly overlapping evaluation observations",
+    "old outcomes already seen; exploratory not independent confirmation",
+    "NAAIM public release delayed3months",
+    "AAII vintages unknown",
+    "no breadth interaction fitted; historical membership unqualified"
+  ],
+  "original_width_half_year_question": "not answered by this shorter two-survey test",
+  "strategy_sha256": [
+    "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  ]
+}

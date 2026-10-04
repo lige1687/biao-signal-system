@@ -1,3 +1,17 @@
+# 本轮两调查组合检验完成，原宽度问题仍受资料资格限制
+
+更新时间2026-10-04T14:56:01.290335+08:00。负责人/root和任务sentiment-factor-research不变，非移交。用户授权组合有效性检验。
+
+- completed：AAII/NAAIM固定组合，同78日期；报告`docs/experiments/sentiment-survey-combination-2026-10-04.md`。对NAAIM单项平方误差多2.64%，交互组合多4.68%；未证明增量。独立8次复核通过，核心8次，7边界检查通过；不是交易收益。
+- 正在做：本轮归档与远端同步；无运行中市场实验。同步结束后本轮封存。
+- blocked：原宽度20/50与AAII约半年确认缺历史成员与首发资格；短资料4日集中一次行情，不能支持稳定条件结论。
+- planned：先补合格来源证据再推进原宽度问题，不换参数重跑此次调查组合。外部增量任务负责保存预测的固定平均，基本面任务负责观察/数据/UI，不重复其范围。
+- 基础commit：2f8c92984c7b403ba578abab1ca3e978beda595a；分支codex/sentiment-factor-progress-20261004。本轮发布commit由Git历史和协调记录定位。
+- 输入及未交付材料：raw/sentiment-survey-combination-2026-10-04/source-manifest.json与withheld-artifacts.json；原数据和逐行结果仅本地，远端无法完整重现。新16拟合，家族至少1028；新增Pro/代理/付费0；源码页面读取1次。无生产改动。
+- 其他AI避开本轮同名report/raw与情绪库该记录；不是排他锁，不圈占尚未设计的全部组合方向。
+
+---
+
 # 下一阶段详细计划已形成（plan_only，尚未启动实验）
 
 更新时间2026-10-04T13:34:13+08:00（Asia/Shanghai）。原负责人/root、本地、任务sentiment-factor-research不变；对话“情绪与市场宽度因子：定义和有效性研究”，非移交/结束。用户当前要求下一步增量的详细计划。
