@@ -1,3 +1,13 @@
+# 2026-10-04 Asia/Shanghai：外部候选公式筛选组件评估 active
+
+external-quant-resources原负责人继续。已读协调d6d6c1a8682a46ded31f36e8b47a7420430045e3、规则v1.0；用户授权继续研究且不要重复。基础成果a043c55a992b0ad6984a3877a9c87875c2c90784，工作分支codex/external-quant-progress-20261004。新有界问题：FactorMiner公式文字相似检索与原生结构指纹能否减少候选重复而不错误认作新信息等价？不做市场效果，不进入任何他人研究题。
+
+只读Sol/medium盘点确认：现有candidate_preflight是封闭布尔条件去重，shape_mining是模板去重，experience_actions是四修改建议；都未验证本次FormulaEmbedder/expression_plan组件。旧DEAP、AlphaGen池、两组预测组合与4修改经验结论封存。将只写新candidate_fingerprints研究适配器/对应测试、新external-candidate-diversity-2026-10-04报告和raw、自己的进度及registry自项，不改共享workflow/定义/旧数据。
+
+本轮预期核心1+最多3必要后续、来源6上限目前4（2搜索+固定源码打开+main核对），0市场拟合/数据下载/模型权重/外部模型调用/付费；人工公式案例先冻结，不装模型或改上游。代码主控一人写，助手仅只读盘点已交。验收为候选身份/相似提示安全边界、固定正反例误判和可恢复入口；不冒称挖出有效因子。资料来自已授权MIT缓存75e056067a90ed6c4cf2e1737df773eed79abce8，已核main未变。未启动核心/无后台市场进程。下一步冻结案例及成本、原生比较、必要薄适配及独立审阅。另一审查线刚接受此前组合有限历史算术，无新增返修；引用其factor-process-definition-semantic-audit-2026-10-04.md，不重跑。
+
+---
+
 # 2026-10-04 Asia/Shanghai：固定组合审查证据附件 completed，独立审查待验收
 
 external-quant-resources原负责人继续。最新成果已推并读回核实 a043c55a992b0ad6984a3877a9c87875c2c90784，分支codex/external-quant-progress-20261004，基础955611c1e7633a00752a14148f9102e0ad3b8538。入口docs/archive/handoffs-plans/external-combination-audit-2026-10-04/README.md；bindings.json保留五个运行的准确对象/合同/代码/来源绑定，SHA256SUMS核附件。只追加本任务进度和三个附件，旧合同/成绩不改；本轮五合同指纹匹配、归置检查通过，旧239/63/162数值检查复用，0新实验/拟合/付费/模型调用，无后台任务或checkpoint。
