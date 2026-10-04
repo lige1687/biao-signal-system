@@ -1,0 +1,62 @@
+{
+  "command": [
+    "python3",
+    "docs/experiments/raw/sentiment-environment-readiness-2026-10-05/check_coverage.py",
+    "--root",
+    ".",
+    "--self-test",
+    "--output",
+    "docs/experiments/raw/sentiment-environment-readiness-2026-10-05/self-test.json"
+  ],
+  "cwd": "isolated repo-shaped directory under .git/coordination-sentiment-workspace",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "base_commit": "41fd886cd31d1101609690d2192a331fe47dd93c",
+  "published_dependencies": [
+    {
+      "path": "src/lei_signal/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/lei_signal/domain/__init__.py",
+      "sha256": "6607ab27da936dd7ce98fdf35bc5d0821936c682a5138ebd7bb48fd9b5d683e5"
+    },
+    {
+      "path": "src/lei_signal/domain/types.py",
+      "sha256": "88ea22c7100068d8be9e50a342e024fb18aadc7139409aeae71f3bc1719dffd9"
+    },
+    {
+      "path": "src/lei_signal/domain/canonical.py",
+      "sha256": "3e406f77dfa3f03c7ff4d2fe1989dd117a47e448d137d5ccce76d61864ee06a9"
+    },
+    {
+      "path": "src/lei_signal/domain/rules_config.py",
+      "sha256": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031"
+    },
+    {
+      "path": "src/lei_signal/rules/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/lei_signal/rules/clock_classifier.py",
+      "sha256": "3ce68b924292fdc5977df12a0f70ae3480db2d01d6bd3a9f4ba9845e5c2e84af"
+    },
+    {
+      "path": "configs/rules.v2.yaml",
+      "sha256": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5"
+    }
+  ],
+  "python": "3.11.7",
+  "PyYAML": "6.0.3",
+  "OS": "macOS-15.6.1-arm64-i386-64bit",
+  "scope": "isolated synthetic minimum only; withheld market/cache files not copied; no full remote reproduction",
+  "new_install": false,
+  "self_test": {
+    "slope_boundary_cases": 12,
+    "synthetic_paths": 4,
+    "prefix_checks": 20,
+    "independent_scalar_points": 1120,
+    "run_count_case": 1
+  }
+}

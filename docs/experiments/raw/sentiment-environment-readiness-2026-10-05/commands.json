@@ -1,0 +1,15 @@
+{
+  "core": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 docs/experiments/raw/sentiment-environment-readiness-2026-10-05/check_coverage.py --root . --cache-root CACHE_ROOT --output docs/experiments/raw/sentiment-environment-readiness-2026-10-05/result.json",
+    "exit_code": 0
+  },
+  "independent": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python3 docs/experiments/raw/sentiment-environment-readiness-2026-10-05/verify_saved.py --root . --cache-root CACHE_ROOT --output docs/experiments/raw/sentiment-environment-readiness-2026-10-05/verification.json",
+    "exit_code": 0
+  },
+  "minimal_restore": {
+    "evidence": "restore-check.json",
+    "exit_code": 0
+  },
+  "cache_root_meaning": "local user .lei_signal_lab/cache read-only; portable caller must explicitly supply equivalent legitimate directory"
+}

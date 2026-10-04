@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "verified_inputs_and_code": [
+    "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/inputs/px_SPY.csv",
+    "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/executor/run-01/predictions.csv",
+    "sector_trend_history.json",
+    "tx_sector_flow_pilot.json",
+    "src/lei_signal/rules/clock_classifier.py",
+    "src/lei_signal/domain/rules_config.py",
+    "configs/rules.v2.yaml",
+    "docs/experiments/raw/sentiment-environment-readiness-2026-10-05/check_coverage.py"
+  ],
+  "US_dates": 835,
+  "CN_boards": 458,
+  "CN_dates": 261,
+  "checks": "source SHA, group/era denominators, board union, price-flow date intersections, b200 field absence",
+  "limitation": "core scalar oracle checks labels; this independent script checks persisted counts and dates, not factor effectiveness"
+}

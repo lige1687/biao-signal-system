@@ -1,0 +1,29 @@
+{
+  "execution": "accepted_for_coverage_only",
+  "checks": {
+    "slope_boundary_cases": 12,
+    "synthetic_paths": 4,
+    "prefix_checks": 20,
+    "independent_scalar_points": 1120,
+    "run_count_case": 1,
+    "real_scalar_points": 127994,
+    "source_hashes_verified": 8
+  },
+  "numeric_reconciliation": "verification.json",
+  "minimal_restore": "restore-check.json",
+  "claims_rejected": [
+    "458 boards equals 458 independent market cycles",
+    "274 all-three labels proves multiple independent bull/bear cycles",
+    "140 same-date points qualifies flow factor",
+    "clock completeness proves risk increment"
+  ],
+  "definition_collision": "definitions.v1.json single writer technical line; no mutation; next effect blocked until exact registered objects available",
+  "necessary_current_scope_remaining": [],
+  "not_evaluated": [
+    "future returns",
+    "future risk increment",
+    "position policies",
+    "full remote market reproduction"
+  ],
+  "scope_note": "qualification closes only bounded coverage question, not overall sentiment task"
+}

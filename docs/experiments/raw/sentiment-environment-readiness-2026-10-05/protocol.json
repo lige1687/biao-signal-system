@@ -1,0 +1,172 @@
+{
+  "schema_version": "sentiment-coverage/1",
+  "id": "sentiment.environment-input-coverage@1.0.0",
+  "frozen_at": "2026-10-05T00:55:18.669195+08:00",
+  "question": "现有美国调查日期与国内合成板块缓存，能否支撑按事前价格环境区分的下一轮情绪/宽度研究？",
+  "mode": "qualification_only",
+  "strategy_layer": "模块E信息研究扩展；国内板块仅输入可行性，不迁移美股长期持有/期货对冲规则。",
+  "authorization": "用户要求中美及板块差异、牛熊震荡区分，制定计划并继续研究；仅研究，无生产/付费授权。",
+  "rule": "clock_classifier@2.0.0",
+  "clock_parameters": {
+    "window": 60,
+    "window_s20": 20,
+    "annualization": 252.0,
+    "type3_max_abs_s60": 0.1,
+    "type2_min_s60": 0.1,
+    "type1_min_s60": 1.0,
+    "type1_s20_multiple": 2.0,
+    "type1_s60_floor": 0.4
+  },
+  "mapping": {
+    "0": "unknown",
+    "1": "up",
+    "2": "up",
+    "3": "sideways",
+    "4": "down",
+    "5": "down"
+  },
+  "clock_identity_status": "现有规则账本准确版本；仅核标签输入覆盖，不登记新因子或检验效果。三类不是统一牛熊识别标准，也不是模块B完整横盘条件。",
+  "inputs": [
+    {
+      "path": "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/inputs/px_SPY.csv",
+      "location": "ROOT",
+      "bytes": 321463,
+      "sha256": "952f397be0ccc5745185b91cce6acc781737c0f30a7a34aa8a230ae892ed5e45"
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/executor/run-01/predictions.csv",
+      "location": "ROOT",
+      "bytes": 255909,
+      "sha256": "fc7af320f4a1a451821fa76579009a3aba122a39e863af33436c54ea471fe2d0"
+    },
+    {
+      "path": "sector_trend_history.json",
+      "location": "CACHE",
+      "bytes": 10731451,
+      "sha256": "f96e6a2c926461c7c0c10c3a55608b7a1b5921ff8733381ce0b4c4896cac7800"
+    },
+    {
+      "path": "tx_sector_flow_pilot.json",
+      "location": "CACHE",
+      "bytes": 8435957,
+      "sha256": "7243e428ddbc91b4028012298e35853a7f044d20916be90eb8084560ca464d29"
+    }
+  ],
+  "code": [
+    {
+      "path": "src/lei_signal/rules/clock_classifier.py",
+      "location": "ROOT",
+      "bytes": 5756,
+      "sha256": "3ce68b924292fdc5977df12a0f70ae3480db2d01d6bd3a9f4ba9845e5c2e84af"
+    },
+    {
+      "path": "src/lei_signal/domain/rules_config.py",
+      "location": "ROOT",
+      "bytes": 2987,
+      "sha256": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031"
+    },
+    {
+      "path": "configs/rules.v2.yaml",
+      "location": "ROOT",
+      "bytes": 77474,
+      "sha256": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5"
+    },
+    {
+      "path": "docs/experiments/raw/sentiment-environment-readiness-2026-10-05/check_coverage.py",
+      "location": "ROOT",
+      "bytes": 8907,
+      "sha256": "a299e872a4dd373e5c7e226ed6a9c5ec39314db46f499789867ecf6c1d8e2761"
+    }
+  ],
+  "spy": "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/inputs/px_SPY.csv",
+  "aaii_panel": "docs/experiments/raw/sentiment-aaii-risk-2026-09-29/executor/run-01/predictions.csv",
+  "source_authority": [
+    {
+      "id": "technical-system",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "delivered": false
+    },
+    {
+      "id": "technical-implementation",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "delivered": false
+    }
+  ],
+  "standards": {
+    "schema_version": "research-standards/1.0",
+    "new_entry": "scripts/run_factor_lab.py --workflow-contract",
+    "legacy_frozen_studies": "keep_original_bindings",
+    "standards": {
+      "mission": {
+        "path": "docs/research/lei-factor-research-mission.md",
+        "version": "1.1.0"
+      },
+      "question_method": {
+        "path": "docs/research/research-question-method-standard.md",
+        "version": "1.2.0"
+      },
+      "increment": {
+        "path": "docs/research/factor-increment-evidence-standard.md",
+        "version": "1.1.0"
+      },
+      "principles": {
+        "path": "docs/research/experiment-backtest-principles.md",
+        "version": "1.2"
+      },
+      "execution": {
+        "path": "docs/research/ai-execution-contract.md",
+        "version": "1.1.0"
+      },
+      "definition": {
+        "path": "docs/research/definition-standard.md",
+        "version": "1.2.0"
+      },
+      "template": {
+        "path": "docs/research/experiment-report-template.md",
+        "version": "1.2.1"
+      }
+    },
+    "definition_registry": "docs/research/definitions.v1.json",
+    "report_registry": "docs/experiments/registry.json",
+    "strategy_sources": "configs/strategy-documents.v1.json",
+    "new_contract_schema": "research-workflow/1.1"
+  },
+  "definition_status": "新情绪高低分组定义待唯一注册表维护者协调；本次不改共享登记表、不做该效力实验。",
+  "qualification": {
+    "us": "只读原风险实验835日期，t仍为原source+7日23:59后严格下一报价；首次公布/修订与价格调整版本未知，当前历史版本描述资格。",
+    "cn": "只读现有成员回填合成板块，缺每日成员/回填/首发版本，不当历史合格资料；无获准指数绑定，市场背景不计算。",
+    "missing": "保留日期索引；正有限价格外均未知，不删日期或填充。SMA60+60差分最早第120个完整报价有值。",
+    "calendar": "使用来源日期序列，独立交易所日历未核，未出现日期无法被此检查发现。",
+    "correlation": "同日多个板块共享环境；日期、板块、连续环境段分别计数，不相加为独立样本。",
+    "flow": "只检查small_yi有限且同日正价格交集；140日仅20均值+此前120均值所需的点数条件，不证明连续/时点/市值归一化合格。",
+    "prior_evidence": "旧中国六缓存资格与AAII风险结果已见；本次新增实际环境覆盖和同日期输入交集，不重跑模型。"
+  },
+  "method": {
+    "us_periods": [
+      "2010-2014",
+      "2015-2019",
+      "2020-2026"
+    ],
+    "cn_selection": "所有历史缓存出现过板块，不按未来表现挑选",
+    "runs": "相邻供应日期映射状态变化即新段；unknown中断，不是独立行情事件估计",
+    "targets": "不读取、不生成未来目标；无收益/风险统计"
+  },
+  "validation": [
+    "12人工斜率边界",
+    "4人工价格路径及20前缀一致性",
+    "所有输入价格标签与独立标量计算逐点一致",
+    "独立重算保存汇总的分母/日期及字段缺失"
+  ],
+  "budget": {
+    "qualification_core_batches_max": 1,
+    "new_model_fits": 0,
+    "source_requests": 0,
+    "Pro": 0,
+    "paid": 0,
+    "old_family_fits_at_least": 1028,
+    "old_Pro_at_least": 4
+  },
+  "stop": "完成输入覆盖与可答边界即可关闭此资格问题；效果研究另需唯一对象版本和合格输入，不因数量多宣称通过。",
+  "delivery": "只交自有代码、统计汇总与指纹；原调查/价格/缓存不上传。无数据许可继承。",
+  "coordination_start": "491817d55d53c028d4041f30999d28a5dd5d7dc1"
+}
