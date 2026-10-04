@@ -150,6 +150,10 @@ def prepare_observations(payload, contract):
     entry-day lows because they occurred before entry. MDD only supports closes,
     as daily high/low order is unknown. Fixed endpoint returns require a quote.
     """
+    if contract['feature']['kind'] == 'color_continuous_eight_etf':
+        from .color_continuous_eight_etf import prepare_observations as prepare_eight
+        return prepare_eight(payload, contract, compute_labels=(
+            payload.get('data_mode') == 'synthetic' or contract.get('permissions', {}).get('real_labels') is True))
     if contract['feature']['kind'] == 'color_continuous_workflow':
         from .color_continuous_workflow import prepare_observations as prepare_continuous
         return prepare_continuous(payload, contract, compute_labels=(

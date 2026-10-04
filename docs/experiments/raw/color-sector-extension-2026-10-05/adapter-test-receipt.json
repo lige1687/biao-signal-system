@@ -1,0 +1,54 @@
+{
+  "schema": "color-eight-etf-adapter-test/1.0",
+  "scope": "engineering_and_source_binding_only_no_factor_effect_claim",
+  "code_sha256": {
+    "src/lei_signal/research/color_continuous_eight_etf.py": "93d3753e64feb24554924866682ee6ea58c85663f24c1012a2d2e445bf030823",
+    "src/lei_signal/research/workflow.py": "4eba6e6b3045928747b8be313ca6c86f2bc11ada613e8eea2354c0ba4b4ce6bd",
+    "src/lei_signal/research/workflow_inputs.py": "f075edb8af55b4401408be4836b23149445dffb5612b36bc999d441e24fae374",
+    "src/lei_signal/research/question_contract.py": "8b70c58d05ea993171f411f6c9afe33c5d3926ce074c76e5b767e5f0fdaba745",
+    "tests/unit/test_color_continuous_eight_etf.py": "430932acccc840720148ad8757ee81a833022dc91f43f9e8119824dcb87dfff9"
+  },
+  "bound_input_sha256": "aaf497e345404bacd0bc3db3899928de4ba5767fc10b332af5351dd13340c00d",
+  "source_manifest_sha256": "804a5b5bfd3caf2b157be59f361f66f359a7b009f575d18af362487bfc3ca5fa",
+  "owner_qualification_sha256": "113d8a9f4169a5750450c4270545989a31ba88c098d45bbb47d0c6b186c63f7d",
+  "checks": [
+    {
+      "command": "PYTHONPATH=src python3 -m pytest -q tests/unit/test_color_continuous_eight_etf.py",
+      "exit_code": 0,
+      "result": "4 passed in 5.37s"
+    },
+    {
+      "command": "PYTHONPATH=src python3 -m pytest -q tests/unit/test_color_continuous_eight_etf.py tests/unit/test_color_continuous_information.py tests/unit/test_workflow_inputs.py tests/unit/test_question_contract.py",
+      "exit_code": 1,
+      "result": "51 passed, 1 failed; unrelated frozen-question fixture missing at docs/archive/handoffs-plans/dual-ma-information-2026-09-28/questions.json"
+    },
+    {
+      "command": "PYTHONPATH=src python3 -m pytest -q tests/unit/test_color_continuous_eight_etf.py tests/unit/test_color_continuous_information.py tests/unit/test_workflow_inputs.py",
+      "exit_code": 0,
+      "result": "37 passed in 5.30s"
+    },
+    {
+      "command": "python3 -m py_compile src/lei_signal/research/color_continuous_eight_etf.py src/lei_signal/research/workflow.py src/lei_signal/research/workflow_inputs.py src/lei_signal/research/question_contract.py",
+      "exit_code": 0,
+      "result": "compiled"
+    }
+  ],
+  "source_check": {
+    "source_files_bound": 11,
+    "owner_qualification_bound": true,
+    "roundoff_ohlc_rows": 13,
+    "roundoff_max_absolute": 1.1102230246251565e-16,
+    "roundoff_policy": "validated <=1e-12, repaired high/low only in memory before existing color calculation; close/date/source files unchanged"
+  },
+  "prior_four_etf_identity": {
+    "scope": "every scheduled 2022-01-04..2026-06-30 observation for first four assets, X-only",
+    "observations": 4340,
+    "compared": "eligibility, feature reason, all 12 original baseline controls and three continuous color additions",
+    "result": "identical to frozen four-ETF adapter"
+  },
+  "limitations": [
+    "No outcome labels or real model fits were computed for these checks.",
+    "Byte/hash binding and the owner qualification receipt do not independently prove historical source arrival or completeness.",
+    "This receipt does not state predictive or trading value."
+  ]
+}

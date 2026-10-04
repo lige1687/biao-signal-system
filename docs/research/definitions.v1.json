@@ -766,6 +766,18 @@
     "src/lei_signal/research/color_continuous_workflow.py": {
       "path": "src/lei_signal/research/color_continuous_workflow.py",
       "sha256": "1bbb546cfb7844d51b6c42cd61c69343be47e0842f600263b8a05bedd28fff52"
+    },
+    "src/lei_signal/research/color_continuous_eight_etf.py": {
+      "path": "src/lei_signal/research/color_continuous_eight_etf.py",
+      "sha256": "93d3753e64feb24554924866682ee6ea58c85663f24c1012a2d2e445bf030823"
+    },
+    "docs/experiments/raw/color-sector-extension-2026-10-05/source-manifest.json": {
+      "path": "docs/experiments/raw/color-sector-extension-2026-10-05/source-manifest.json",
+      "sha256": "804a5b5bfd3caf2b157be59f361f66f359a7b009f575d18af362487bfc3ca5fa"
+    },
+    "docs/experiments/raw/color-sector-extension-2026-10-05/brief.json": {
+      "path": "docs/experiments/raw/color-sector-extension-2026-10-05/brief.json",
+      "sha256": "92e34d604370be87c96407c668e2bb3851fa1697132a227305db73c411a925c9"
     }
   },
   "objects": [
@@ -12397,6 +12409,122 @@
         "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
       ],
       "component_definition_refs": []
+    },
+    {
+      "id": "research.trend.color_continuous20_bundle",
+      "version": "1.1.0",
+      "name": "颜色连续表达的固定组合",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description",
+        "comparison"
+      ],
+      "not_for": [
+        "production_trade",
+        "holding_entry_or_exit",
+        "actual_account_return_claim",
+        "complete_LEI_state",
+        "unique_author_calibration"
+      ],
+      "scope": "固定四国内宽基加四行业ETF的回顾性连续表达研究",
+      "spec_anchor": [
+        "桌面技术体系§2.7颜色与多头排列"
+      ],
+      "spec_layer": "trend_road_information",
+      "definition": {
+        "formula": "B为当前20/60颜色、ret20/ret60/vol20、多头组、旧EMA20上行占比及ETF身份；X为绿色占比20、19对变色频率、带符号EMA20距离。排名是单独描述变换不额外放入模型",
+        "parameters": {
+          "daily_warmup": 252,
+          "lookback": 20
+        },
+        "unit": "mixed fixed feature vector",
+        "direction": "按原值从低到高描述；不预设越高越好，不依评价成绩翻转",
+        "transforms": "模型使用原始连续值；同日名次单列研究；旧EMA上行占比作控制，不能把绿色比例当同一对象",
+        "nan_policy": "颜色比例需20连续合格颜色日；252预热后另积满20色，缺失重置；unknown非gray",
+        "endpoints": "t完整收盘可知，目标t+1..t+21close"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "calendar",
+          "action_known"
+        ],
+        "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+        "currency": "CNY ETF经济价格指数",
+        "frequency": "daily_quote",
+        "calendar": "完整交易日历，缺失重置历史",
+        "sources": "docs/experiments/raw/color-sector-extension-2026-10-05/source-manifest.json"
+      },
+      "dependencies": [
+        "research.trend.green_share20@1.0.0",
+        "research.trend.color_switch_frequency20@1.0.0",
+        "research.trend.signed_ema20_distance@1.0.0",
+        "research.trend.ema_direction_persistence20@1.0.0"
+      ],
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "src/lei_signal/research/color_continuous_information.py",
+          "src/lei_signal/research/color_continuous_eight_etf.py"
+        ],
+        "verification_scope": "定义、无未来时点与本轮冻结合同；不等于有效或交易规则"
+      },
+      "origin": "原颜色/价格的研究表达，用户批准研究，不添加策略动作",
+      "universe": {
+        "version": "color-continuous-eight-etf-20261005",
+        "eligibility": "连续20合格颜色日；共同输入交集；不按未来结果选样",
+        "warmup": "252连续日后20个合格颜色日",
+        "missing": "缺报重置，不填色，排名并列不按代码拆分",
+        "quality_gate": "逐件核验量价线来源资格回执与价格输入指纹；缺报分段；实际到达及行动完整性未知",
+        "degrade": "仅固定八ETF回顾性研究，不代表ETF总体"
+      },
+      "time": {
+        "observation_time": "t完整日收盘后",
+        "available_at": "报价理论完成时间可核；历史供应商实际到达时间未认证",
+        "decision_at": "t收盘后研究",
+        "execution_at": "无交易",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-05 fixed eight ETF research"
+      },
+      "validation": {
+        "method": "合成缺口/并列/前缀，实际样本资格，固定线性与浅树共同样本",
+        "tolerance": {
+          "absolute": 1e-09,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_color_continuous_information.py",
+          "tests/unit/test_color_continuous_eight_etf.py"
+        ],
+        "limitations": "八ETF人为固定小池、同日及重叠目标依赖；历史资料非独立未见验证；不含账户净收益"
+      },
+      "status": {
+        "definition_clarity": "fixed_continuous_color_bundle",
+        "data_qualification": "limited_retrospective_economic_ohlc",
+        "implementation": "implemented_pending_formal_freeze",
+        "effectiveness": "not_evaluated",
+        "production": "not_authorized"
+      },
+      "research_owner": "technical_agent",
+      "research_status": "IN_SCOPE",
+      "local_alias": "color_continuous20_bundle",
+      "sources": [
+        "src/lei_signal/research/color_continuous_information.py",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md",
+        "src/lei_signal/research/color_continuous_eight_etf.py",
+        "docs/experiments/raw/color-sector-extension-2026-10-05/source-manifest.json",
+        "docs/experiments/raw/color-sector-extension-2026-10-05/brief.json"
+      ],
+      "component_definition_refs": [],
+      "change_reason": "用户授权扩行业ETF；只扩固定资料和身份控制，旧1.0.0卡/合同/成绩保留，公式不变"
     }
   ],
   "models": [],

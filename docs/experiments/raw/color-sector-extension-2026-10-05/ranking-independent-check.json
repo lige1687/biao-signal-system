@@ -1,0 +1,292 @@
+{
+  "matched_dates": {
+    "green_share20": {
+      "valid_dates": 317,
+      "pool_return_on_valid_dates": 2.130785447498731,
+      "high_minus_pool": 0.42383669885154135,
+      "low_return": 1.4532619516484282,
+      "high_return": 2.5546221463502716,
+      "high_minus_low": 1.1013601947018437,
+      "mean_high_count": 3.9621451104100944,
+      "mean_low_count": 3.810725552050473,
+      "excluded_constant_dates": 0
+    },
+    "switch_frequency20": {
+      "valid_dates": 317,
+      "pool_return_on_valid_dates": 2.130785447498731,
+      "high_minus_pool": -0.9523635227762661,
+      "low_return": 2.856901935063951,
+      "high_return": 1.1784219247224643,
+      "high_minus_low": -1.6784800103414863,
+      "mean_high_count": 3.7034700315457414,
+      "mean_low_count": 4.063091482649842,
+      "excluded_constant_dates": 0
+    },
+    "distance_to_ema20": {
+      "valid_dates": 317,
+      "pool_return_on_valid_dates": 2.130785447498731,
+      "high_minus_pool": 0.6428568329875649,
+      "low_return": 1.4879286145111656,
+      "high_return": 2.7736422804862957,
+      "high_minus_low": 1.2857136659751298,
+      "mean_high_count": 4.0,
+      "mean_low_count": 4.0,
+      "excluded_constant_dates": 0
+    },
+    "ret20": {
+      "valid_dates": 317,
+      "pool_return_on_valid_dates": 2.130785447498731,
+      "high_minus_pool": 0.5801735134214185,
+      "low_return": 1.5506119340773123,
+      "high_return": 2.7109589609201494,
+      "high_minus_low": 1.160347026842837,
+      "mean_high_count": 4.0,
+      "mean_low_count": 4.0,
+      "excluded_constant_dates": 0
+    },
+    "ema20_up_share20": {
+      "valid_dates": 317,
+      "pool_return_on_valid_dates": 2.130785447498731,
+      "high_minus_pool": 0.05823626897446431,
+      "low_return": 1.6540719395571866,
+      "high_return": 2.189021716473195,
+      "high_minus_low": 0.5349497769160082,
+      "mean_high_count": 4.012618296529968,
+      "mean_low_count": 3.804416403785489,
+      "excluded_constant_dates": 0
+    }
+  },
+  "independent_checks": {
+    "rank_values_checked": 12680,
+    "max_rank_error": 8.326672684688674e-17,
+    "future_labels_used_to_rank": false,
+    "new_fits": 0
+  },
+  "model_ranking": {
+    "ridge-forward_return-B1": {
+      "dates": 317,
+      "usable_dates": 317,
+      "mean_rank_correlation": 0.03004356316659157,
+      "high_minus_low_target_pp": 0.5530574500347504,
+      "by_period": {
+        "2025": {
+          "dates": 222,
+          "high_minus_low": -0.5155032805011638
+        },
+        "2026": {
+          "dates": 95,
+          "high_minus_low": 3.0501151571818337
+        }
+      },
+      "interpretation": "return prediction: high expected better return; risk prediction: high expected larger loss, not a buy rank"
+    },
+    "ridge-forward_return-B2": {
+      "dates": 317,
+      "usable_dates": 317,
+      "mean_rank_correlation": 0.0245606128886886,
+      "high_minus_low_target_pp": 0.5004461334325888,
+      "by_period": {
+        "2025": {
+          "dates": 222,
+          "high_minus_low": -0.9507812133330794
+        },
+        "2026": {
+          "dates": 95,
+          "high_minus_low": 3.8917353016639384
+        }
+      },
+      "interpretation": "return prediction: high expected better return; risk prediction: high expected larger loss, not a buy rank"
+    },
+    "lightgbm-forward_return-B1": {
+      "dates": 317,
+      "usable_dates": 317,
+      "mean_rank_correlation": 0.057646647772834174,
+      "high_minus_low_target_pp": -0.21729415144320324,
+      "by_period": {
+        "2025": {
+          "dates": 222,
+          "high_minus_low": -0.8052968884641885
+        },
+        "2026": {
+          "dates": 95,
+          "high_minus_low": 1.1567754024374153
+        }
+      },
+      "interpretation": "return prediction: high expected better return; risk prediction: high expected larger loss, not a buy rank"
+    },
+    "lightgbm-forward_return-B2": {
+      "dates": 317,
+      "usable_dates": 317,
+      "mean_rank_correlation": 0.09908942464435481,
+      "high_minus_low_target_pp": 0.45140607231043356,
+      "by_period": {
+        "2025": {
+          "dates": 222,
+          "high_minus_low": -1.1839277727813977
+        },
+        "2026": {
+          "dates": 95,
+          "high_minus_low": 4.272923057682924
+        }
+      },
+      "interpretation": "return prediction: high expected better return; risk prediction: high expected larger loss, not a buy rank"
+    },
+    "ridge-mae-B1": {
+      "dates": 317,
+      "usable_dates": 317,
+      "mean_rank_correlation": 0.3047523329266706,
+      "high_minus_low_target_pp": 2.103503288590253,
+      "by_period": {
+        "2025": {
+          "dates": 222,
+          "high_minus_low": 1.5130353781885817
+        },
+        "2026": {
+          "dates": 95,
+          "high_minus_low": 3.4833335634236344
+        }
+      },
+      "interpretation": "return prediction: high expected better return; risk prediction: high expected larger loss, not a buy rank"
+    },
+    "ridge-mae-B2": {
+      "dates": 317,
+      "usable_dates": 317,
+      "mean_rank_correlation": 0.30907497863233974,
+      "high_minus_low_target_pp": 2.103503288590253,
+      "by_period": {
+        "2025": {
+          "dates": 222,
+          "high_minus_low": 1.5130353781885817
+        },
+        "2026": {
+          "dates": 95,
+          "high_minus_low": 3.4833335634236344
+        }
+      },
+      "interpretation": "return prediction: high expected better return; risk prediction: high expected larger loss, not a buy rank"
+    },
+    "lightgbm-mae-B1": {
+      "dates": 317,
+      "usable_dates": 317,
+      "mean_rank_correlation": 0.2844792930677241,
+      "high_minus_low_target_pp": 1.5451569638295324,
+      "by_period": {
+        "2025": {
+          "dates": 222,
+          "high_minus_low": 1.3223640411995512
+        },
+        "2026": {
+          "dates": 95,
+          "high_minus_low": 2.065788846185909
+        }
+      },
+      "interpretation": "return prediction: high expected better return; risk prediction: high expected larger loss, not a buy rank"
+    },
+    "lightgbm-mae-B2": {
+      "dates": 317,
+      "usable_dates": 317,
+      "mean_rank_correlation": 0.2869337930165699,
+      "high_minus_low_target_pp": 1.4700252005349397,
+      "by_period": {
+        "2025": {
+          "dates": 222,
+          "high_minus_low": 1.273295742878799
+        },
+        "2026": {
+          "dates": 95,
+          "high_minus_low": 1.9297508805313943
+        }
+      },
+      "interpretation": "return prediction: high expected better return; risk prediction: high expected larger loss, not a buy rank"
+    }
+  },
+  "rank_difference_vs_simple": {
+    "green_share20/ret20": {
+      "common_dates": 317,
+      "gap_candidate_minus_simple_pp": -0.058986832140993345,
+      "high_candidate_minus_simple_pp": -0.1563368145698773
+    },
+    "green_share20/ema20_up_share20": {
+      "common_dates": 317,
+      "gap_candidate_minus_simple_pp": 0.5664104177858355,
+      "high_candidate_minus_simple_pp": 0.365600429877077
+    },
+    "switch_frequency20/ret20": {
+      "common_dates": 317,
+      "gap_candidate_minus_simple_pp": -2.838827037184323,
+      "high_candidate_minus_simple_pp": -1.532537036197685
+    },
+    "switch_frequency20/ema20_up_share20": {
+      "common_dates": 317,
+      "gap_candidate_minus_simple_pp": -2.2134297872574944,
+      "high_candidate_minus_simple_pp": -1.0105997917507308
+    },
+    "distance_to_ema20/ret20": {
+      "common_dates": 317,
+      "gap_candidate_minus_simple_pp": 0.125366639132293,
+      "high_candidate_minus_simple_pp": 0.0626833195661465
+    },
+    "distance_to_ema20/ema20_up_share20": {
+      "common_dates": 317,
+      "gap_candidate_minus_simple_pp": 0.7507638890591218,
+      "high_candidate_minus_simple_pp": 0.5846205640131008
+    },
+    "ret20/ret20": {
+      "common_dates": 317,
+      "gap_candidate_minus_simple_pp": 0.0,
+      "high_candidate_minus_simple_pp": 0.0
+    },
+    "ret20/ema20_up_share20": {
+      "common_dates": 317,
+      "gap_candidate_minus_simple_pp": 0.625397249926829,
+      "high_candidate_minus_simple_pp": 0.5219372444469543
+    },
+    "ema20_up_share20/ret20": {
+      "common_dates": 317,
+      "gap_candidate_minus_simple_pp": -0.625397249926829,
+      "high_candidate_minus_simple_pp": -0.5219372444469543
+    },
+    "ema20_up_share20/ema20_up_share20": {
+      "common_dates": 317,
+      "gap_candidate_minus_simple_pp": 0.0,
+      "high_candidate_minus_simple_pp": 0.0
+    }
+  },
+  "early_period": {
+    "green_share20": {
+      "rows": 5558,
+      "dates": 708,
+      "dates_excluded_missing_or_immature_outcome_after_ranking": 21,
+      "nonconstant_dates": 682,
+      "high_minus_low_pp": -1.4426755344886166
+    },
+    "switch_frequency20": {
+      "rows": 5558,
+      "dates": 708,
+      "dates_excluded_missing_or_immature_outcome_after_ranking": 21,
+      "nonconstant_dates": 687,
+      "high_minus_low_pp": -0.6677494630637604
+    },
+    "distance_to_ema20": {
+      "rows": 5558,
+      "dates": 708,
+      "dates_excluded_missing_or_immature_outcome_after_ranking": 21,
+      "nonconstant_dates": 687,
+      "high_minus_low_pp": -0.9333532667618454
+    },
+    "ret20": {
+      "rows": 5558,
+      "dates": 708,
+      "dates_excluded_missing_or_immature_outcome_after_ranking": 21,
+      "nonconstant_dates": 687,
+      "high_minus_low_pp": -1.171531408986547
+    },
+    "ema20_up_share20": {
+      "rows": 5558,
+      "dates": 708,
+      "dates_excluded_missing_or_immature_outcome_after_ranking": 21,
+      "nonconstant_dates": 686,
+      "high_minus_low_pp": -1.6376629278761812
+    }
+  }
+}

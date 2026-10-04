@@ -204,6 +204,17 @@ def actual_bindings(contract, root=ROOT):
                              "src/lei_signal/research/volume_information.py",
                              "src/lei_signal/features/indicators.py",
                              "src/lei_signal/domain/rules_config.py", "configs/rules.v2.yaml"))
+    if contract["feature"]["kind"] == "color_continuous_eight_etf":
+        related_code.extend(("src/lei_signal/research/color_continuous_eight_etf.py",
+                             "src/lei_signal/research/color_continuous_workflow.py",
+                             "src/lei_signal/research/color_continuous_information.py",
+                             "src/lei_signal/research/color_history_information.py",
+                             "src/lei_signal/research/lightgbm_information.py",
+                             "src/lei_signal/research/technical_persistence_information.py",
+                             "src/lei_signal/research/green_black_state_information.py",
+                             "src/lei_signal/research/top_structure_information.py",
+                             "src/lei_signal/features/indicators.py",
+                             "src/lei_signal/domain/rules_config.py", "configs/rules.v2.yaml"))
     if contract["feature"]["kind"] == "color_event_information":
         related_code.extend(("src/lei_signal/research/color_event_information.py",
                              "src/lei_signal/research/weekly_color_information.py",
@@ -435,6 +446,12 @@ def cache_keys(contract, bindings):
         adapter = bindings["files"]["src/lei_signal/research/" + contract["feature"]["kind"] + ".py"]
         feature = digest({"base": feature, "gray_adapter": adapter, "history": bindings["files"]["src/lei_signal/research/color_history_information.py"], "continuous": bindings["files"]["src/lei_signal/research/color_continuous_information.py"]})
         labels = digest({"base": labels, "gray_adapter": adapter})
+    if contract["feature"]["kind"] == "color_continuous_eight_etf":
+        adapter = bindings["files"]["src/lei_signal/research/color_continuous_eight_etf.py"]
+        feature = digest({"base": feature, "eight_adapter": adapter,
+                          "history": bindings["files"]["src/lei_signal/research/color_history_information.py"],
+                          "continuous": bindings["files"]["src/lei_signal/research/color_continuous_information.py"]})
+        labels = digest({"base": labels, "eight_adapter": adapter})
     if contract["feature"]["kind"] == "color_event_information":
         adapter = bindings["files"]["src/lei_signal/research/color_event_information.py"]
         feature = digest({"base": feature, "color_event_adapter": adapter})
@@ -588,6 +605,12 @@ def preflight(contract, root=ROOT, *, require_frozen=True):
             type(contract.get("permissions", {}).get("real_fits")) is int and
             contract["permissions"]["real_fits"] == 4):
         raise WorkflowBlocked("bull gray requires explicit four-fit permissions")
+    if contract["feature"]["kind"] == "color_continuous_eight_etf" and not (
+            contract.get("permissions", {}).get("real_labels") is True and
+            contract.get("permissions", {}).get("effect_authorized") is True and
+            type(contract.get("permissions", {}).get("real_fits")) is int and
+            contract["permissions"]["real_fits"] == 4):
+        raise WorkflowBlocked("eight-ETF continuous color requires explicit four-fit permissions")
     if contract["feature"]["kind"] == "color_event_information" and not (
             contract.get("permissions", {}).get("real_labels") is True and
             contract.get("permissions", {}).get("effect_authorized") is True and
@@ -668,7 +691,15 @@ def preflight(contract, root=ROOT, *, require_frozen=True):
     top_etf = contract["data"].get("qualification", {}).get("adapter") == "top_etf_economic/1.0"
     deduction_etf = contract["data"].get("qualification", {}).get("adapter") == "deduction_etf_economic/1.0"
     double_order_etf = contract["data"].get("qualification", {}).get("adapter") == "double_order_etf_economic/1.0"
-    if contract["data"]["mode"] != "synthetic" and double_order_etf:
+    eight_etf = contract["data"].get("qualification", {}).get("adapter") == "color_eight_etf_economic/1.0"
+    if contract["data"]["mode"] != "synthetic" and eight_etf:
+        from lei_signal.research.color_continuous_eight_etf import qualify_source
+        try:
+            quality = qualify_source(payload, contract, root)
+        except (ValueError, KeyError, TypeError, OSError) as exc:
+            raise WorkflowBlocked(f"eight-ETF economic source qualification failed: {exc}") from exc
+        warnings.extend(_warning("eight_etf_retrospective", str(w)) for w in quality["warnings"])
+    elif contract["data"]["mode"] != "synthetic" and double_order_etf:
         from lei_signal.research.double_ma_order_information import qualify_double_order_panel
         try:
             quality = qualify_double_order_panel(payload, contract, root)
@@ -953,7 +984,7 @@ def run_rehearsal(contract):
     if c["feature"]["kind"] in {"ema_direction_persistence_information",
                                  "bull_green_transition_information"}:
         count = 600  # two assets, 252 warmup and 21-close labels
-    if c["feature"]["kind"] in {"bull_gray_origin_information", "color_continuous_workflow"}:
+    if c["feature"]["kind"] in {"bull_gray_origin_information", "color_continuous_workflow", "color_continuous_eight_etf"}:
         count = 1200
     if c["feature"]["kind"] == "color_event_information":
         count = 1200  # synthetic fixture: enough adjacent events after 120 completed weeks
@@ -984,7 +1015,7 @@ def run_rehearsal(contract):
                          if c["feature"]["kind"] == "ema_only_wait_age_risk_information" else
                          100.0 + j + 0.10 * i + 4.0 * math.sin(i / 7))
                 low = price - 0.8
-            elif c["feature"]["kind"] in {"bull_gray_origin_information", "color_continuous_workflow"}:
+            elif c["feature"]["kind"] in {"bull_gray_origin_information", "color_continuous_workflow", "color_continuous_eight_etf"}:
                 price = 120.0 + j + 0.08 * i + 4.0 * math.sin(i / 7) + 2.0 * math.sin(i / 2.3)
                 low = price - 0.8
             elif c["feature"]["kind"] == "color_event_information":
@@ -1044,7 +1075,7 @@ def run_rehearsal(contract):
         cutoff = 550  # training includes rising restart EMA120 lag vs SMA60_up5
     if c["feature"]["kind"] == "ema_only_wait_age_risk_information":
         cutoff = 400  # sparse current E-only state needs 22 mature synthetic training rows
-    if c["feature"]["kind"] in {"bull_gray_origin_information", "color_continuous_workflow"}:
+    if c["feature"]["kind"] in {"bull_gray_origin_information", "color_continuous_workflow", "color_continuous_eight_etf"}:
         cutoff = 850
     if c["feature"]["kind"] == "color_event_information":
         cutoff = 1000

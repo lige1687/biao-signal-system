@@ -1,0 +1,98 @@
+{
+  "status": "completed",
+  "evidence": "inconclusive_overall_with_positive_fixed_tree_increment",
+  "question": "fixed color-history8ETF extension",
+  "checks": [
+    {
+      "branch": "lightgbm-forward_return",
+      "core_fits": 4,
+      "accepted_fits": 0,
+      "predictions_identical": true,
+      "rows": 2536,
+      "dates": 317,
+      "ranking_membership_formed_without_labels_and_all8_mature_on_evaluation_dates": true,
+      "contract_sha256": "160c565ece4ae0a21349d32c570825c43dfb86e993512b90c02fa90569d55e7f"
+    },
+    {
+      "branch": "lightgbm-mae",
+      "core_fits": 4,
+      "accepted_fits": 0,
+      "predictions_identical": true,
+      "rows": 2536,
+      "dates": 317,
+      "ranking_membership_formed_without_labels_and_all8_mature_on_evaluation_dates": true,
+      "contract_sha256": "627154bafdfc10e75e3febe467b78d56f264a05c05f96f6803ff93f3a8e60e10"
+    },
+    {
+      "branch": "ridge-forward_return",
+      "core_fits": 4,
+      "accepted_fits": 0,
+      "predictions_identical": true,
+      "rows": 2536,
+      "dates": 317,
+      "ranking_membership_formed_without_labels_and_all8_mature_on_evaluation_dates": true,
+      "contract_sha256": "b70d0e23c36cf36a7623386f71c14212dc26cc0fb319a9827679bd7a5e80a004"
+    },
+    {
+      "branch": "ridge-mae",
+      "core_fits": 4,
+      "accepted_fits": 0,
+      "predictions_identical": true,
+      "rows": 2536,
+      "dates": 317,
+      "ranking_membership_formed_without_labels_and_all8_mature_on_evaluation_dates": true,
+      "contract_sha256": "9d679f800ae0562a5ac82d6c6abaf673237bc62cfccda056ceef2cf5b5cc506a"
+    }
+  ],
+  "original_definition_objects_unchanged": true,
+  "actual_fits": 16,
+  "previous_stage_fits": 32,
+  "further_fits": 0,
+  "verdict_reason": "fixed tree return improvement against B1 positive both periods and leave-one asset; weaker than simple ownETF mean overall; ranking improvement period reversal; risk not stable",
+  "independent_numeric_checks": [
+    {
+      "branch": "continuous/ridge-forward_return",
+      "rows": 2536,
+      "label_max_error": 0.0,
+      "saved_model_replay_max_error": 0.0,
+      "new_fits": 0
+    },
+    {
+      "branch": "continuous/lightgbm-forward_return",
+      "rows": 2536,
+      "label_max_error": 0.0,
+      "saved_model_replay_max_error": 0.0,
+      "new_fits": 0
+    },
+    {
+      "branch": "continuous/ridge-mae",
+      "rows": 2536,
+      "label_max_error": 0.0,
+      "saved_model_replay_max_error": 0.0,
+      "new_fits": 0
+    },
+    {
+      "branch": "continuous/lightgbm-mae",
+      "rows": 2536,
+      "label_max_error": 0.0,
+      "saved_model_replay_max_error": 0.0,
+      "new_fits": 0
+    }
+  ],
+  "ranking_checks": {
+    "rank_values_checked": 12680,
+    "max_rank_error": 8.326672684688674e-17,
+    "future_labels_used_to_rank": false,
+    "new_fits": 0
+  },
+  "limits": [
+    "historical reconstruction/source timing incomplete",
+    "seen history/exploratory/multiple previous tests",
+    "no net account, stock selection or market-index background evidence"
+  ],
+  "budget_reason": "one fixed planned core batch complete; no tuning or repeat; new ablation question not performed",
+  "test_limit": "37 related pass; expanded51pass1missing old fixture failure retained",
+  "hygiene": "actual worktree checked using current main checkout checker code with __file__ bound to this root, exit0",
+  "scope_conflict": "15 remote task records checked before edits; separate technical implementation and sourceowner; no known overlap",
+  "time": "2026-10-05T01:27:12.609987+08:00"
+}

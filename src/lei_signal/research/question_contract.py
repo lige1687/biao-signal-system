@@ -299,7 +299,7 @@ def validate_workflow_contract(contract: dict) -> None:
     feature = _mapping(c["feature"], "workflow.feature", {
         "kind", "lookback", "bar_frequency", "missing_policy", "warmup",
     })
-    if feature["kind"] not in {"sma_distance", "decline_event", "a01_signed_band", "a03_pullback_order", "space_prior_target", "ma_cluster_information", "volume_anomaly_information", "key_fluctuation_information", "profile_overhead_information", "simple_top3_information", "future_deduction_box_information", "double_ma_order_information", "slope_change_information", "simple_top_invalidation_information", "pullback_layer_change_information", "prior_top_dual_break_information", "ema_sma_waiting_path", "tsfresh_price_information", "ema_only_wait_age_information", "slope_change_risk_information", "ema_only_wait_age_risk_information", "green_black_state60_information", "ema_direction_persistence_information", "bull_green_transition_information", "weekly_color_information", "color_event_information", "bull_gray_origin_information", "color_continuous_workflow"}:
+    if feature["kind"] not in {"sma_distance", "decline_event", "a01_signed_band", "a03_pullback_order", "space_prior_target", "ma_cluster_information", "volume_anomaly_information", "key_fluctuation_information", "profile_overhead_information", "simple_top3_information", "future_deduction_box_information", "double_ma_order_information", "slope_change_information", "simple_top_invalidation_information", "pullback_layer_change_information", "prior_top_dual_break_information", "ema_sma_waiting_path", "tsfresh_price_information", "ema_only_wait_age_information", "slope_change_risk_information", "ema_only_wait_age_risk_information", "green_black_state60_information", "ema_direction_persistence_information", "bull_green_transition_information", "weekly_color_information", "color_event_information", "bull_gray_origin_information", "color_continuous_workflow", "color_continuous_eight_etf"}:
         _fail("workflow.feature.kind", "no implemented adapter for this feature")
     if feature["missing_policy"] not in {"real_quote", "segmented"}:
         _fail("workflow.feature.missing_policy", "must freeze a supported recovery policy")
@@ -323,6 +323,19 @@ def validate_workflow_contract(contract: dict) -> None:
                 c["universe"]["assets"] != ["510300.SS", "510050.SS", "510500.SS", "588000.SS"] or
                 c["question"]["period"] != ["2022-01-04", "2026-06-30"]):
             _fail("workflow.universe", "bull-gray requires fixed four-ETF historical panel")
+    if feature["kind"] == "color_continuous_eight_etf":
+        from lei_signal.research.color_continuous_eight_etf import DEFINITION_REF, ASSETS
+        if (schema_version != "research-workflow/1.1" or feature["lookback"] != 20 or
+                feature["warmup"] != 252 or feature["missing_policy"] != "segmented" or
+                feature.get("definition_ref") != DEFINITION_REF or
+                c["question"]["factor_refs"] != [DEFINITION_REF] or
+                c["question"]["sampling"] != "daily"):
+            _fail("workflow.feature", "eight-ETF continuous color requires its versioned daily definition")
+        if data["mode"] != "synthetic" and (
+                data.get("qualification", {}).get("adapter") != "color_eight_etf_economic/1.0" or
+                c["universe"]["assets"] != list(ASSETS) or
+                c["question"]["period"] != ["2022-01-04", "2026-06-30"]):
+            _fail("workflow.universe", "eight-ETF continuous color requires qualified fixed panel")
     if feature["kind"] == "color_event_information":
         from lei_signal.research.color_event_information import DEFINITION_REFS
         color = feature.get("event_color")
@@ -602,7 +615,7 @@ def validate_workflow_contract(contract: dict) -> None:
         _validate_research_design(c)
     if e["kind"] == "prediction_lightgbm":
         from lei_signal.research.lightgbm_information import validate_evaluator
-        if feature["kind"] not in {"bull_gray_origin_information", "color_continuous_workflow"} or binary:
+        if feature["kind"] not in {"bull_gray_origin_information", "color_continuous_workflow", "color_continuous_eight_etf"} or binary:
             _fail("workflow.evaluator", "LightGBM is limited to the frozen bull-gray origin continuous-target study")
         validate_evaluator(e)
     if e["kind"] == "prediction_ridge":
@@ -861,9 +874,11 @@ def validate_workflow_contract(contract: dict) -> None:
                 (data["mode"] != "synthetic" and s["folds"] != fixed_folds) or
                 metric["name"] != "RMSE" or c["dependence"].get("axis_scope") != "evaluation"):
             _fail("workflow.weekly_color", "requires fixed prior-week two-state 21-close OLS contract")
-    if feature["kind"] in {"bull_gray_origin_information", "color_continuous_workflow"}:
+    if feature["kind"] in {"bull_gray_origin_information", "color_continuous_workflow", "color_continuous_eight_etf"}:
         if feature["kind"] == "bull_gray_origin_information":
             from lei_signal.research.bull_gray_origin_information import BASELINE_FEATURES, ADDED_FEATURES
+        elif feature["kind"] == "color_continuous_eight_etf":
+            from lei_signal.research.color_continuous_eight_etf import BASELINE_FEATURES, ADDED_FEATURES
         else:
             from lei_signal.research.color_continuous_workflow import BASELINE_FEATURES, ADDED_FEATURES
         fixed_folds = [
