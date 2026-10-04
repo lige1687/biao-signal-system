@@ -1,7 +1,7 @@
 {
   "schema_version": "research-workflow-fusion/1.0",
   "id": "workflow-fusion-2026-10-04",
-  "updated_at": "2026-10-04T00:28:32+08:00",
+  "updated_at": "2026-10-04T14:34:01.696516+08:00",
   "display_timezone": "Asia/Shanghai",
   "coordinator_thread": "01a0e6d5-4bcf-7bd3-82e4-4961c963d20e",
   "task_id": "classic-factor-research",
@@ -12,8 +12,8 @@
     "就你6个方向，你去核对和分发吧哈，让他们顺手把你的调研的任务做了",
     "就你说的6个方向可以融合，交给他们去做，然后你验收"
   ],
-  "execution": "awaiting_scoped_deliveries",
-  "research_evidence": "not_evaluated",
+  "execution": "completed",
+  "research_evidence": "scoped_deliveries_verified; financial adoption not established",
   "budget": {
     "new_market_fits": 0,
     "new_market_data_requests": 0,
@@ -33,10 +33,14 @@
       "thread_id": "01a0e703-4c27-74e2-bf77-997e1879f967",
       "title": "因子挖掘+lei系统（非情绪因子",
       "status": "sent",
-      "acceptance": "pending",
+      "acceptance": "passed_with_documented_scope_limits",
       "brief": "technical.md",
-      "acknowledgment": "awaiting_scoped_confirmation; receipt returned but not accepted as implementation",
-      "followup_receipt": "technical-followup.json"
+      "acknowledgment": "actual_artifacts_read",
+      "followup_receipt": "technical-followup.json",
+      "implementation": "scoped_delivery_completed",
+      "remaining_execution_blockers": [
+        "future collection not ready"
+      ]
     },
     {
       "id": "errors",
@@ -46,11 +50,12 @@
       "thread_id": "01a101c1-ac35-70a3-8ecd-4a6179bb99ad",
       "title": "宽基ETF量价与风险因子发掘验证",
       "status": "sent",
-      "acceptance": "pending",
+      "acceptance": "passed_with_documented_scope_limits",
       "brief": "errors.md",
-      "acknowledgment": "confirmed_in_remote_coordination",
+      "acknowledgment": "actual_artifacts_read",
       "evidence": "coordination/lei@81637d235093652de22fd4991cf1f995062c4e0d:docs/coordination/tasks/risk-shape-information.md#workflow-fusion-2026-10-04--d3-errors",
-      "implementation": "planned_by_owner; no scoped delivery yet"
+      "implementation": "scoped_delivery_completed",
+      "remaining_execution_blockers": []
     },
     {
       "id": "complement",
@@ -60,10 +65,12 @@
       "thread_id": "01a0cd21-07e5-7163-8f4e-72a4d5ebc32e",
       "title": "外部增量",
       "status": "sent",
-      "acceptance": "pending",
+      "acceptance": "passed_with_documented_scope_limits",
       "brief": "complement.md",
-      "acknowledgment": "awaiting_scoped_confirmation; receipt returned but not accepted as implementation",
-      "followup_receipt": "complement-followup.json"
+      "acknowledgment": "actual_artifacts_read",
+      "followup_receipt": "complement-followup.json",
+      "implementation": "scoped_delivery_completed",
+      "remaining_execution_blockers": []
     },
     {
       "id": "materials",
@@ -73,11 +80,14 @@
       "thread_id": "01a101d0-6400-7e81-ab5d-2654902fb237",
       "title": "整理 LEI 系统过时内容",
       "status": "sent",
-      "acceptance": "pending",
+      "acceptance": "passed_with_documented_scope_limits",
       "brief": "materials.md",
-      "implementation": "in_progress_readonly_missing_material_check; no scoped delivery yet",
-      "acknowledgment": "confirmed_by_owner_in_thread",
-      "evidence": "thread 01a101d0-6400-7e81-ab5d-2654902fb237 turn 01a10290-e9cf-77e0-9d5f-4ddf7df95d03 commentary; owner explicitly accepted old research dependency check"
+      "implementation": "scoped_delivery_completed",
+      "acknowledgment": "actual_artifacts_read",
+      "evidence": "thread 01a101d0-6400-7e81-ab5d-2654902fb237 turn 01a10290-e9cf-77e0-9d5f-4ddf7df95d03 commentary; owner explicitly accepted old research dependency check",
+      "remaining_execution_blockers": [
+        "cross-machine restoration and transfer permission not established; original report local only"
+      ]
     }
   ],
   "delivery_tool_receipts": [
@@ -159,19 +169,19 @@
     "Existing threads retain ownership, settings and original priorities",
     "Prior conclusions with precise evidence can satisfy a direction without new work"
   ],
-  "next": "Read each receiver's actual scoped artifacts and version, independently verify critical numbers/boundaries; classify pass, partial or blocked. Message acceptance is not task acceptance.",
+  "next": "No mandatory action remains for the six bounded deliveries. Preserve blocked future collection/restoration and sealed research.",
   "published_dispatch_commit": "73e8976e578598d2ff1424e0924558864c2b82be",
-  "latest_coordination_read": "d2fd985cdbe4a5cac89d4c855b15c048a47ff98e",
+  "latest_coordination_read": "2a1cafee62d0a58d0f4ebd7f929d9242def61ffc",
   "followup_receipts": [
     "materials-followup.json",
     "complement-followup.json",
     "technical-followup.json"
   ],
   "last_snapshot": {
-    "at": "2026-10-04T00:28:32+08:00",
-    "active_existing_threads": 4,
-    "scoped_deliveries_received": 0,
-    "acceptance": "pending",
-    "note": "Do not repeatedly resend. Read new scoped artifacts and latest coordination before acceptance. Original thread progress does not satisfy these additions by itself."
-  }
+    "scoped_deliveries_received": 4,
+    "directions_reviewed": 6,
+    "acceptance": "completed; D5 future execution and D6 restoration blocked"
+  },
+  "acceptance_report": "controller-review.md",
+  "checks": "controller-checks.json"
 }

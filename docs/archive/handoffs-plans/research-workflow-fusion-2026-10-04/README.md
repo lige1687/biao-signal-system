@@ -1,3 +1,9 @@
+## 2026-10-04 六项交付已完成主控验收
+
+已实际读取四方交付，六项限定要求通过。D5通过的是就绪/缺口检查，真正未来观察仍blocked；D6通过的是材料定位，跨机器恢复与分发资格仍blocked。详见docs/archive/handoffs-plans/research-workflow-fusion-2026-10-04/controller-review.md和controller-checks.json。主控重核D3全部951条预测，481改善/470恶化，净少错1.2628%；D4人工组合/副本边界、D6原件SHA已独立核对。未新增任何行情、拟合、交易或上线；原因子结论不升级。
+
+本有界六项任务completed，原负责人其他新研究不在本次验收内，无需重复派发。D6原报告仍仅本地，本方已保存最小可公开核验结果，不能宣称全部资料远端可恢复。后续只在对应缺口具备条件时另行处理，不自动收样本或迁资料。发布沿新版约定使用codex/classic-factor-review-20261004，旧task分支历史保留；准确本轮提交由Git历史和协调记录定位。
+
 # 六个研究流程方向：现有任务融合与验收
 
 更新时间：2026-10-04（Asia/Shanghai）；精确派发时间见dispatch-state.json。

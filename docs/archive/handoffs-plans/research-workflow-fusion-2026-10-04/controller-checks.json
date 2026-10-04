@@ -1,0 +1,165 @@
+{
+  "checked_at": "2026-10-04T14:34:01.696516+08:00",
+  "mode": "report_only",
+  "coordination_read": "2a1cafee62d0a58d0f4ebd7f929d9242def61ffc",
+  "D1_D2_D5": {
+    "required_sections_present": true,
+    "reported_aggregate_arithmetic_matches": true,
+    "scores": {
+      "return": {
+        "rows": 1268,
+        "dates": 317,
+        "rmse": {
+          "B0": 6.804367217320675,
+          "B1": 7.202728961004526,
+          "B2": 7.291959618431015,
+          "ETF_mean": 6.794336113635843
+        },
+        "B1_minus_B2": -0.08923065742648895,
+        "B2_beats_ETF_mean": false
+      },
+      "risk": {
+        "rows": 1268,
+        "dates": 317,
+        "rmse": {
+          "B0": 3.7092705129115173,
+          "B1": 3.525641117051642,
+          "B2": 3.5395131430106064,
+          "ETF_mean": 3.575432897727927
+        },
+        "B1_minus_B2": -0.013872025958964418,
+        "B2_beats_ETF_mean": true
+      }
+    },
+    "future_collection": "blocked; readiness review only"
+  },
+  "D3": {
+    "rows": 951,
+    "dates": 317,
+    "assets": 3,
+    "original_saved_predictions_sha_matches": true,
+    "original_identity_values_weights_match": true,
+    "sign_counts": {
+      "better": 481,
+      "same": 0,
+      "worse": 470
+    },
+    "signed_contributions": {
+      "better": 0.3670419297056497,
+      "same": 0.0,
+      "worse": -0.18111556573226287
+    },
+    "net": 0.1859263639733868,
+    "B1_mse": 14.72343986442354,
+    "B2_mse": 14.537513500450153,
+    "relative_percent": 1.262791614496578
+  },
+  "D4": {
+    "synthetic_input_correlation": 0.0,
+    "single_target_correlation": 0.7071067811865476,
+    "combined_target_correlation": 1.0,
+    "negative_duplicate_combination_correlation": 1.0,
+    "saved_pool_sizes": [
+      1,
+      2,
+      2,
+      3
+    ],
+    "financial_increment": "not_evaluated",
+    "scope": "saved algebra only; native pool not rerun"
+  },
+  "D6": {
+    "lifecycle_basis": {
+      "count": 63,
+      "matched": 62,
+      "mismatches": [
+        {
+          "path": "docs/research/definitions.v1.json",
+          "expected": "707f075361c6c1ec52c025cebfa8bd9820cd2947e6418f4d78cbce7baf02b77d",
+          "actual": "cfadf6523b79244e6b904cbdd23c711842a8ed49edfa3a218ddcf087542d0019",
+          "matches": false
+        }
+      ]
+    },
+    "definition_sources": {
+      "count": 52,
+      "matched": 52,
+      "mismatches": []
+    },
+    "legacy_inputs": {
+      "count": 3,
+      "matched": 3,
+      "mismatches": []
+    },
+    "local_only_saved_artifacts": {
+      "count": 10,
+      "matched": 10,
+      "mismatches": []
+    },
+    "classic_missing_legacy_inputs": [
+      "docs/experiments/raw/a01-guide-study-2026-09-29/execution/run.py",
+      "docs/experiments/raw/a02-sma-maintenance-2026-09-29/execution/attempt1/predictions.csv",
+      "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json"
+    ]
+  },
+  "sources": [
+    {
+      "commit": "2ab565017a7a4959af744430339e32a09ce12667",
+      "path": "docs/experiments/technical-persistence-and-color-transition-2026-10-04.md",
+      "bytes": 14428,
+      "sha256": "d5b415a1a1129defd927d5a0b172adc7c75ecd20500bd268691d2df4b648e56f"
+    },
+    {
+      "commit": "2ab565017a7a4959af744430339e32a09ce12667",
+      "path": "docs/experiments/raw/technical-multimethod-2026-10-03/analysis.json",
+      "bytes": 167721,
+      "sha256": "f49641304b8f42ba179c4cde1b39fef5dc376c43016f47b443e2a914ca0a21e1"
+    },
+    {
+      "commit": "c47aaa78b6972689743c57fdcb739c675c7c05af",
+      "path": "docs/experiments/raw/risk-shape-error-decomposition-2026-10-04/summary.json",
+      "bytes": 2663,
+      "sha256": "af23bfcbf539092388c95e6af6a813c2f0aee5918f0e72475fb25df3b9c24f23"
+    },
+    {
+      "commit": "c47aaa78b6972689743c57fdcb739c675c7c05af",
+      "path": "docs/experiments/raw/risk-shape-error-decomposition-2026-10-04/verification.json",
+      "bytes": 27003,
+      "sha256": "f7f817b4c598663b5c47f519cb45ece014b94ed5a350bee1b33daa68b3e6f364"
+    },
+    {
+      "commit": "c47aaa78b6972689743c57fdcb739c675c7c05af",
+      "path": "docs/experiments/raw/risk-shape-information-2026-10-03/run-vol_instability20-main/result.json",
+      "bytes": 419231,
+      "sha256": "85dc7048128091b3d88dde96c3851f06c00bd3a618855ecd516978c9d5df4f79"
+    },
+    {
+      "commit": "c47aaa78b6972689743c57fdcb739c675c7c05af",
+      "path": "docs/experiments/raw/risk-shape-error-decomposition-2026-10-04/full-differences.csv",
+      "bytes": 239710,
+      "sha256": "b683d9c7ae8074c3b86c7c351e3ac3b195d4f0d93da6f2f68afc222f21e59e29"
+    },
+    {
+      "commit": "af8934d60511ae24f9e182bdf2d4a441a723cc12",
+      "path": "docs/experiments/raw/external-mining-reuse-2026-10-03/core-result.json",
+      "bytes": 4500,
+      "sha256": "87b71f9e11be1be1bdd616de9c6343b280f9d68753bc70c7e3d2d2829b2fc050"
+    },
+    {
+      "path": "docs/ops/materials-readiness-classic-baseline-2026-10-04.json",
+      "delivery": "local_only",
+      "bytes": 53930,
+      "sha256": "9c7f875db52c1aa687f1d942d03ce7af07d3ffb61ce5d90ddd19457136467736"
+    }
+  ],
+  "budget": {
+    "new_market_fits": 0,
+    "market_requests": 0,
+    "paid_operations": 0,
+    "saved_result_review_batches": 1
+  },
+  "limitations": [
+    "D1/D2 review verifies scope and saved aggregate, not a new full financial replication.",
+    "D6 local source presence does not establish transfer permission or cross-machine restoration."
+  ]
+}
