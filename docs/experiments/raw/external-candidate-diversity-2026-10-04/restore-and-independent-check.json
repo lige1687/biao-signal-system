@@ -1,0 +1,180 @@
+{
+  "restore_directory": ".biao/external-candidate-diversity-20261004/restore-7q1w7fvr",
+  "actual_platform": "Darwin arm64",
+  "commands": [
+    {
+      "command": [
+        "<PYTHON312>",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/unit",
+        "-p",
+        "test_candidate_fingerprints.py",
+        "-v"
+      ],
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "elapsed_seconds": 0.8534915410127724,
+      "stdout": "",
+      "stderr": "test_all_revisions_retained (test_candidate_fingerprints.CandidateFingerprintsTests.test_all_revisions_retained) ... ok\ntest_changed_or_incomplete_source_rejected (test_candidate_fingerprints.CandidateFingerprintsTests.test_changed_or_incomplete_source_rejected) ... ok\ntest_every_context_field_separates (test_candidate_fingerprints.CandidateFingerprintsTests.test_every_context_field_separates) ... ok\ntest_missing_context_results_or_duplicate_id_rejected (test_candidate_fingerprints.CandidateFingerprintsTests.test_missing_context_results_or_duplicate_id_rejected) ... ok\ntest_order_nesting_and_safe_division_not_collapsed (test_candidate_fingerprints.CandidateFingerprintsTests.test_order_nesting_and_safe_division_not_collapsed) ... ok\ntest_real_entry_keeps_all_and_distinguishes (test_candidate_fingerprints.CandidateFingerprintsTests.test_real_entry_keeps_all_and_distinguishes) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.389s\n\nOK\n"
+    },
+    {
+      "command": [
+        "<PYTHON312>",
+        "-m",
+        "lei_signal.research.candidate_fingerprints",
+        "--input",
+        "docs/experiments/raw/external-candidate-diversity-2026-10-04/example-input.json",
+        "--upstream",
+        "upstream",
+        "--provenance",
+        "docs/experiments/raw/external-candidate-diversity-2026-10-04/provenance.json",
+        "--output",
+        "result.json"
+      ],
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "elapsed_seconds": 0.09111695899628103,
+      "stdout": "{\"candidates\": 5, \"automatic_deletions\": 0}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "<PYTHON312>",
+        "-m",
+        "lei_signal.research.candidate_fingerprints",
+        "--input",
+        "docs/experiments/raw/external-candidate-diversity-2026-10-04/example-input.json",
+        "--upstream",
+        "upstream",
+        "--provenance",
+        "docs/experiments/raw/external-candidate-diversity-2026-10-04/provenance.json",
+        "--output",
+        "result.json"
+      ],
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "elapsed_seconds": 0.03972108299785759,
+      "stdout": "",
+      "stderr": "usage: candidate_fingerprints.py [-h] --input INPUT --upstream UPSTREAM\n                                 --provenance PROVENANCE --output OUTPUT\ncandidate_fingerprints.py: error: Output already exists; preserve evidence\n"
+    }
+  ],
+  "restored_result_identical": true,
+  "separated_counts": {
+    "0": {
+      "raw_string": {
+        "same_context_pairs": 17,
+        "known_equivalent": 7,
+        "detected_equivalent": 1,
+        "false_duplicates": 0,
+        "different_context_flagged_same": 4
+      },
+      "native_structure": {
+        "same_context_pairs": 17,
+        "known_equivalent": 7,
+        "detected_equivalent": 3,
+        "false_duplicates": 0,
+        "different_context_flagged_same": 4
+      },
+      "native_semantic_hash": {
+        "same_context_pairs": 17,
+        "known_equivalent": 7,
+        "detected_equivalent": 4,
+        "false_duplicates": 5,
+        "different_context_flagged_same": 4
+      },
+      "native_algebraic": {
+        "same_context_pairs": 17,
+        "known_equivalent": 7,
+        "detected_equivalent": 7,
+        "false_duplicates": 1,
+        "different_context_flagged_same": 4
+      },
+      "context_bound_structure": {
+        "same_context_pairs": 17,
+        "known_equivalent": 7,
+        "detected_equivalent": 3,
+        "false_duplicates": 0,
+        "different_context_flagged_same": 0
+      }
+    },
+    "1": {
+      "raw_string": {
+        "same_context_pairs": 17,
+        "known_equivalent": 7,
+        "detected_equivalent": 1,
+        "false_duplicates": 0,
+        "different_context_flagged_same": 4
+      },
+      "native_structure": {
+        "same_context_pairs": 17,
+        "known_equivalent": 7,
+        "detected_equivalent": 3,
+        "false_duplicates": 0,
+        "different_context_flagged_same": 4
+      },
+      "native_semantic_hash": {
+        "same_context_pairs": 17,
+        "known_equivalent": 7,
+        "detected_equivalent": 4,
+        "false_duplicates": 5,
+        "different_context_flagged_same": 4
+      },
+      "native_algebraic": {
+        "same_context_pairs": 17,
+        "known_equivalent": 7,
+        "detected_equivalent": 7,
+        "false_duplicates": 1,
+        "different_context_flagged_same": 4
+      },
+      "context_bound_structure": {
+        "same_context_pairs": 17,
+        "known_equivalent": 7,
+        "detected_equivalent": 3,
+        "false_duplicates": 0,
+        "different_context_flagged_same": 0
+      }
+    },
+    "2": {
+      "raw_string": {
+        "same_context_pairs": 17,
+        "known_equivalent": 7,
+        "detected_equivalent": 1,
+        "false_duplicates": 0,
+        "different_context_flagged_same": 4
+      },
+      "native_structure": {
+        "same_context_pairs": 17,
+        "known_equivalent": 7,
+        "detected_equivalent": 3,
+        "false_duplicates": 0,
+        "different_context_flagged_same": 4
+      },
+      "native_semantic_hash": {
+        "same_context_pairs": 17,
+        "known_equivalent": 7,
+        "detected_equivalent": 4,
+        "false_duplicates": 5,
+        "different_context_flagged_same": 4
+      },
+      "native_algebraic": {
+        "same_context_pairs": 17,
+        "known_equivalent": 7,
+        "detected_equivalent": 7,
+        "false_duplicates": 1,
+        "different_context_flagged_same": 4
+      },
+      "context_bound_structure": {
+        "same_context_pairs": 17,
+        "known_equivalent": 7,
+        "detected_equivalent": 3,
+        "false_duplicates": 0,
+        "different_context_flagged_same": 0
+      }
+    }
+  },
+  "original_adapter_sha256": "8626003b66c7c6deb5a47b1111a34de18c98d6d3a6a8f92501f6d47db86d504e",
+  "claim": "component and saved counts only; no market recovery; Linux Windows not tested"
+}

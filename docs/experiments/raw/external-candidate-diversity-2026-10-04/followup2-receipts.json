@@ -1,0 +1,38 @@
+[
+  {
+    "command": [
+      "<PYTHON312>",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests/unit",
+      "-p",
+      "test_candidate_fingerprints.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.2578139580000425,
+    "stdout": "",
+    "stderr": "test_all_revisions_retained (test_candidate_fingerprints.CandidateFingerprintsTests.test_all_revisions_retained) ... ok\ntest_changed_or_incomplete_source_rejected (test_candidate_fingerprints.CandidateFingerprintsTests.test_changed_or_incomplete_source_rejected) ... ok\ntest_every_context_field_separates (test_candidate_fingerprints.CandidateFingerprintsTests.test_every_context_field_separates) ... ok\ntest_missing_context_results_or_duplicate_id_rejected (test_candidate_fingerprints.CandidateFingerprintsTests.test_missing_context_results_or_duplicate_id_rejected) ... ok\ntest_order_nesting_and_safe_division_not_collapsed (test_candidate_fingerprints.CandidateFingerprintsTests.test_order_nesting_and_safe_division_not_collapsed) ... ok\ntest_real_entry_keeps_all_and_distinguishes (test_candidate_fingerprints.CandidateFingerprintsTests.test_real_entry_keeps_all_and_distinguishes) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.109s\n\nOK\n"
+  },
+  {
+    "command": [
+      "<PYTHON312>",
+      "-m",
+      "lei_signal.research.candidate_fingerprints",
+      "--input",
+      "docs/experiments/raw/external-candidate-diversity-2026-10-04/example-input.json",
+      "--upstream",
+      ".biao/external-factorminer-20261004/source/factorminer-75e056067a90ed6c4cf2e1737df773eed79abce8",
+      "--provenance",
+      "docs/experiments/raw/external-candidate-diversity-2026-10-04/provenance.json",
+      "--output",
+      "docs/experiments/raw/external-candidate-diversity-2026-10-04/adapter-result.json"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.08714141699601896,
+    "stdout": "{\"candidates\": 5, \"automatic_deletions\": 0}\n",
+    "stderr": ""
+  }
+]

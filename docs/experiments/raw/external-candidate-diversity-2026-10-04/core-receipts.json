@@ -1,0 +1,17 @@
+[
+  {
+    "command": [
+      "python3",
+      "docs/experiments/raw/external-candidate-diversity-2026-10-04/run_probe.py",
+      "--upstream",
+      ".biao/external-factorminer-20261004/source/factorminer-75e056067a90ed6c4cf2e1737df773eed79abce8",
+      "--output",
+      "docs/experiments/raw/external-candidate-diversity-2026-10-04/core/seed-0.json"
+    ],
+    "seed": 0,
+    "exit_code": 1,
+    "elapsed_seconds": 0.46121958299772814,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"<PROJECT_ROOT>/docs/experiments/raw/external-candidate-diversity-2026-10-04/run_probe.py\", line 47, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"<PROJECT_ROOT>/docs/experiments/raw/external-candidate-diversity-2026-10-04/run_probe.py\", line 15, in main\n    from factorminer.core.parser import parse\n  File \"<PROJECT_ROOT>/.biao/external-factorminer-20261004/source/factorminer-75e056067a90ed6c4cf2e1737df773eed79abce8/factorminer/__init__.py\", line 10, in <module>\n    from factorminer._lazy_exports import public_dir, resolve_export\n  File \"<PROJECT_ROOT>/.biao/external-factorminer-20261004/source/factorminer-75e056067a90ed6c4cf2e1737df773eed79abce8/factorminer/_lazy_exports.py\", line 8\n    type ExportTarget = str | tuple[str, str]\n         ^^^^^^^^^^^^\nSyntaxError: invalid syntax\n"
+  }
+]

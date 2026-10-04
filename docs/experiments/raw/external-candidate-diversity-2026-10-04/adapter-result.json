@@ -1,0 +1,81 @@
+{
+  "schema": "candidate-fingerprints-result/1",
+  "upstream_commit": "75e056067a90ed6c4cf2e1737df773eed79abce8",
+  "candidates": [
+    {
+      "candidate_id": "parent",
+      "formula": "Mean($close,20)",
+      "context_sha256": "23d611d73f003107aba0a3d262fe6799f54076e7adf59079ad2410c5d0852c31",
+      "status": "unreviewed_candidate",
+      "duplicate_of": null,
+      "identity": "150d8c62f996824d6b5d4773073dafd87bde4b7749a868207c0e84132b280f23",
+      "structure_sha256": "2b8883d6de0a6f73320b44133fe55794990085dac8f86624092c7f05d198494a",
+      "normalized_formula": "Mean($close, 20)",
+      "required_features": [
+        "$close"
+      ],
+      "lookback": 19,
+      "cross_sectional": false
+    },
+    {
+      "candidate_id": "format_revision",
+      "formula": "Mean( $close , 20 )",
+      "context_sha256": "23d611d73f003107aba0a3d262fe6799f54076e7adf59079ad2410c5d0852c31",
+      "status": "same_structure_and_context",
+      "duplicate_of": "parent",
+      "identity": "150d8c62f996824d6b5d4773073dafd87bde4b7749a868207c0e84132b280f23",
+      "structure_sha256": "2b8883d6de0a6f73320b44133fe55794990085dac8f86624092c7f05d198494a",
+      "normalized_formula": "Mean($close, 20)",
+      "required_features": [
+        "$close"
+      ],
+      "lookback": 19,
+      "cross_sectional": false
+    },
+    {
+      "candidate_id": "new_window",
+      "formula": "Mean($close,21)",
+      "context_sha256": "23d611d73f003107aba0a3d262fe6799f54076e7adf59079ad2410c5d0852c31",
+      "status": "unreviewed_candidate",
+      "duplicate_of": null,
+      "identity": "cf1049cd373deeacc5e32a66637936760dfed747c065856439a74f3d63c107d3",
+      "structure_sha256": "c5f30e1355a23815bde08bcc79f0c1ff779f99347160e285096132ab94ca49d2",
+      "normalized_formula": "Mean($close, 21)",
+      "required_features": [
+        "$close"
+      ],
+      "lookback": 20,
+      "cross_sectional": false
+    },
+    {
+      "candidate_id": "different_target",
+      "formula": "Mean($close,20)",
+      "context_sha256": "6b8901965835cce90a82107a3cd079954f65d3a8f784729a8114ecaecff419ac",
+      "status": "unreviewed_candidate",
+      "duplicate_of": null,
+      "identity": "4f511d54de76bba9a1b676107f1a3055e69a7078a4041e1db19a5b52bd8fcdec",
+      "structure_sha256": "2b8883d6de0a6f73320b44133fe55794990085dac8f86624092c7f05d198494a",
+      "normalized_formula": "Mean($close, 20)",
+      "required_features": [
+        "$close"
+      ],
+      "lookback": 19,
+      "cross_sectional": false
+    },
+    {
+      "candidate_id": "invalid",
+      "formula": "Unknown($close)",
+      "context_sha256": "23d611d73f003107aba0a3d262fe6799f54076e7adf59079ad2410c5d0852c31",
+      "status": "invalid_formula",
+      "error_type": "SyntaxError",
+      "reason": "Unknown operator 'Unknown' at position 0. Available operators: ['Abs', 'Add', 'And', 'Beta', 'Clip', 'Corr', 'CountNaN', 'CountNotNaN', 'Cov', 'CsDemean', 'CsNeutralize', 'CsQuantile', 'CsRank', 'CsScale', 'CsZScore', 'CumMax', 'CumMin', 'CumProd', 'CumSum', 'DEMA', 'Decay', 'Delay', 'Delta', 'Div', 'EMA', 'Eq', 'Equal', 'Exp', 'Greater', 'GreaterEqual', 'HMA', 'IfElse', 'Inv', 'KAMA', 'Kurt', 'Less', 'LessEqual', 'Log', 'LogReturn', 'Max', 'Max2', 'Mean', 'Med', 'Median', 'Min', 'Min2', 'Mul', 'Ne', 'Neg', 'Not', 'Or', 'Pow', 'Power', 'Prod', 'Product', 'Quantile', 'Resi', 'Resid', 'Return', 'Rsquare', 'SMA', 'Scale', 'Sign', 'SignedPower', 'Skew', 'Slope', 'Sqrt', 'Square', 'Std', 'Sub', 'Sum', 'Tanh', 'TsArgMax', 'TsArgMin', 'TsDecay', 'TsLinReg', 'TsLinRegIntercept', 'TsLinRegResid', 'TsLinRegSlope', 'TsMax', 'TsMin', 'TsRank', 'Var', 'WMA']"
+    }
+  ],
+  "automatic_deletions": 0,
+  "financial_validity": "not_evaluated",
+  "limitations": [
+    "Caller context has not been independently qualified",
+    "Algebraic, correlated and complementary candidates require separate review",
+    "Retain every attempted proposal; matching identity does not authorize score reuse"
+  ]
+}

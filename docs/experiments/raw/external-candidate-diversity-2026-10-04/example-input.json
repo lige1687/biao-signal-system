@@ -1,0 +1,85 @@
+{
+  "schema": "candidate-fingerprints/1",
+  "candidates": [
+    {
+      "candidate_id": "parent",
+      "formula": "Mean($close,20)",
+      "context": {
+        "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "universe": "synthetic-only-v1",
+        "target": "none-engineering",
+        "horizon": "none",
+        "available_at": "synthetic-cutoff-v1",
+        "units": "synthetic-unit-v1",
+        "missing_policy": "native-nan-v1",
+        "evaluation_protocol": "synthetic-fixture-v1",
+        "baseline": "synthetic-no-model",
+        "evaluator": "native-DSL-identity"
+      }
+    },
+    {
+      "candidate_id": "format_revision",
+      "formula": "Mean( $close , 20 )",
+      "context": {
+        "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "universe": "synthetic-only-v1",
+        "target": "none-engineering",
+        "horizon": "none",
+        "available_at": "synthetic-cutoff-v1",
+        "units": "synthetic-unit-v1",
+        "missing_policy": "native-nan-v1",
+        "evaluation_protocol": "synthetic-fixture-v1",
+        "baseline": "synthetic-no-model",
+        "evaluator": "native-DSL-identity"
+      }
+    },
+    {
+      "candidate_id": "new_window",
+      "formula": "Mean($close,21)",
+      "context": {
+        "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "universe": "synthetic-only-v1",
+        "target": "none-engineering",
+        "horizon": "none",
+        "available_at": "synthetic-cutoff-v1",
+        "units": "synthetic-unit-v1",
+        "missing_policy": "native-nan-v1",
+        "evaluation_protocol": "synthetic-fixture-v1",
+        "baseline": "synthetic-no-model",
+        "evaluator": "native-DSL-identity"
+      }
+    },
+    {
+      "candidate_id": "different_target",
+      "formula": "Mean($close,20)",
+      "context": {
+        "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "universe": "synthetic-only-v1",
+        "target": "other-target",
+        "horizon": "none",
+        "available_at": "synthetic-cutoff-v1",
+        "units": "synthetic-unit-v1",
+        "missing_policy": "native-nan-v1",
+        "evaluation_protocol": "synthetic-fixture-v1",
+        "baseline": "synthetic-no-model",
+        "evaluator": "native-DSL-identity"
+      }
+    },
+    {
+      "candidate_id": "invalid",
+      "formula": "Unknown($close)",
+      "context": {
+        "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "universe": "synthetic-only-v1",
+        "target": "none-engineering",
+        "horizon": "none",
+        "available_at": "synthetic-cutoff-v1",
+        "units": "synthetic-unit-v1",
+        "missing_policy": "native-nan-v1",
+        "evaluation_protocol": "synthetic-fixture-v1",
+        "baseline": "synthetic-no-model",
+        "evaluator": "native-DSL-identity"
+      }
+    }
+  ]
+}

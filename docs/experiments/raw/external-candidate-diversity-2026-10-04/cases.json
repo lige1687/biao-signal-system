@@ -1,0 +1,590 @@
+[
+  {
+    "id": "same",
+    "left": "Sub($close,$open)",
+    "right": "Sub($close,$open)",
+    "kind": "exact",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": true,
+    "changed_context": null
+  },
+  {
+    "id": "spaces",
+    "left": "Mean($close,20)",
+    "right": "Mean( $close , 20 )",
+    "kind": "exact",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": true,
+    "changed_context": null
+  },
+  {
+    "id": "number",
+    "left": "Mul($close,2)",
+    "right": "Mul($close,2.0)",
+    "kind": "exact",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": true,
+    "changed_context": null
+  },
+  {
+    "id": "add_swap",
+    "left": "Add($close,$open)",
+    "right": "Add($open,$close)",
+    "kind": "equivalent",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": true,
+    "changed_context": null
+  },
+  {
+    "id": "mul_swap",
+    "left": "Mul($close,$open)",
+    "right": "Mul($open,$close)",
+    "kind": "equivalent",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": true,
+    "changed_context": null
+  },
+  {
+    "id": "neg_neg",
+    "left": "Neg(Neg($close))",
+    "right": "$close",
+    "kind": "equivalent",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": true,
+    "changed_context": null
+  },
+  {
+    "id": "abs_neg",
+    "left": "Abs(Neg($close))",
+    "right": "Abs($close)",
+    "kind": "equivalent",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": true,
+    "changed_context": null
+  },
+  {
+    "id": "sub_swap",
+    "left": "Sub($close,$open)",
+    "right": "Sub($open,$close)",
+    "kind": "different",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": false,
+    "changed_context": null
+  },
+  {
+    "id": "div_swap",
+    "left": "Div($close,$open)",
+    "right": "Div($open,$close)",
+    "kind": "different",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": false,
+    "changed_context": null
+  },
+  {
+    "id": "sub_nesting",
+    "left": "Sub($close,Sub($open,$low))",
+    "right": "Sub(Sub($close,$open),$low)",
+    "kind": "different",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": false,
+    "changed_context": null
+  },
+  {
+    "id": "delay_scope",
+    "left": "Delay(Sub($close,$open),1)",
+    "right": "Sub(Delay($close,1),$open)",
+    "kind": "different",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": false,
+    "changed_context": null
+  },
+  {
+    "id": "mean_window",
+    "left": "Mean($close,20)",
+    "right": "Mean($close,21)",
+    "kind": "different",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": false,
+    "changed_context": null
+  },
+  {
+    "id": "trend_sign",
+    "left": "Sub(Mean($close,20),Mean($close,60))",
+    "right": "Sub(Mean($close,60),Mean($close,20))",
+    "kind": "different",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": false,
+    "changed_context": null
+  },
+  {
+    "id": "safe_div_self",
+    "left": "Div(Sub($close,$open),Sub($close,$open))",
+    "right": "1",
+    "kind": "edge_different",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": false,
+    "changed_context": null
+  },
+  {
+    "id": "safe_div_cancel",
+    "left": "Div(Mul($close,$open),$open)",
+    "right": "$close",
+    "kind": "edge_different",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": false,
+    "changed_context": null
+  },
+  {
+    "id": "nan_sub",
+    "left": "Sub($close,$close)",
+    "right": "0",
+    "kind": "edge_different",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": false,
+    "changed_context": null
+  },
+  {
+    "id": "nan_mul",
+    "left": "Mul($close,0)",
+    "right": "0",
+    "kind": "edge_different",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": false,
+    "changed_context": null
+  },
+  {
+    "id": "context_data_sha256",
+    "left": "Sub($close,$open)",
+    "right": "Sub($close,$open)",
+    "kind": "context_different",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "different-data_sha256",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": false,
+    "changed_context": "data_sha256"
+  },
+  {
+    "id": "context_target",
+    "left": "Sub($close,$open)",
+    "right": "Sub($close,$open)",
+    "kind": "context_different",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "different-target",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": false,
+    "changed_context": "target"
+  },
+  {
+    "id": "context_horizon",
+    "left": "Sub($close,$open)",
+    "right": "Sub($close,$open)",
+    "kind": "context_different",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "different-horizon",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": false,
+    "changed_context": "horizon"
+  },
+  {
+    "id": "context_available_at",
+    "left": "Sub($close,$open)",
+    "right": "Sub($close,$open)",
+    "kind": "context_different",
+    "context_left": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "synthetic-cutoff-v1",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "context_right": {
+      "data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "universe": "synthetic-only-v1",
+      "target": "none-engineering",
+      "horizon": "none",
+      "available_at": "different-available_at",
+      "units": "synthetic-unit-v1",
+      "missing_policy": "native-nan-v1",
+      "evaluation_protocol": "synthetic-fixture-v1"
+    },
+    "safe_same_evaluation": false,
+    "changed_context": "available_at"
+  }
+]

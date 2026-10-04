@@ -1,0 +1,57 @@
+{
+  "created_at": "2026-10-04T22:58:29.070751+08:00",
+  "question": "Can native formula similarity or canonicalization safely skip repeated candidate evaluations under the actual DSL and evaluation context?",
+  "mode": "research_engineering",
+  "strategy_layer": "research tooling only; not a LEI formula or trading rule",
+  "cases_sha256": "0d71956bf270494ff97327db2b71a195a2d6f0afbb4ec9ff20902421606a0cd1",
+  "scope": "21 predeclared artificial pairs, no market data or labels",
+  "methods": [
+    "raw-string equality",
+    "native ordered expression plan digest",
+    "native hash fallback FormulaEmbedder default .92",
+    "native SymPy canonicalizer"
+  ],
+  "adaptation": "reuse native structural fingerprint, bind exact context; fuzzy/algebraic matches are review hints, no auto-delete",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "synthetic_values": "1x80 increasing close plus sinusoid; open close+varying offset, zero/1e-12/NaN and equal close injected at predefined indices 1,2,3,4,5; high/low offsets. Used only as counterexamples, not universal equivalence proof.",
+  "invalid_controls": [
+    "Unknown($close)",
+    "$unlisted_feature",
+    "Add($close)"
+  ],
+  "success_and_falsification": "Any unsafe equivalence forbids automatic pruning for that method. Missed known equivalents measured separately; no threshold tuning. Exact-structure method intentionally conservative.",
+  "allowed": [
+    "read checked MIT source",
+    "local artificial evaluation",
+    "first-party optional research adapter/tests",
+    "task docs and authorized branch push"
+  ],
+  "forbidden": [
+    "production",
+    "market re-fit",
+    "old study rerun",
+    "network models",
+    "weights download",
+    "paid calls",
+    "global install",
+    "automatic candidate deletion"
+  ],
+  "budget": {
+    "source_requests_max": 6,
+    "source_requests_used": 4,
+    "core_batches_max": 1,
+    "followup_batches_max": 3,
+    "core_attempts_per_batch": 1,
+    "market_fits": 0,
+    "llm_calls": 0,
+    "paid": 0
+  },
+  "stop": "answer bounded component applicability with limitations and necessary adapter checks; not full factor discovery effectiveness",
+  "provenance_sha256": "9de1eeab70d2f6932500b0f216a443530ea8bdedb9f1a72b7c114f25131b4a3b",
+  "existing_budget": "old source77+previous discussion3; old engineering/diagnostic33, marketfits16 retained, not reused for this question",
+  "coordination_commit": "cd644cfac28cb54861ae928d6e5b9b3b28d48459"
+}

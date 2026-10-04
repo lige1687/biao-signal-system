@@ -1,0 +1,646 @@
+{
+  "seed": "0",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "sympy": "1.13.1",
+  "protocol_sha256": "51060120e46700bf8b141fee74a1ac1f7af862d60183a8864fe92afe3d739e89",
+  "elapsed_seconds": 0.20576112499111332,
+  "rows": [
+    {
+      "id": "same",
+      "kind": "exact",
+      "safe_same_evaluation": true,
+      "same_context": true,
+      "same_synthetic_values": true,
+      "decisions": {
+        "raw_string": true,
+        "native_structure": true,
+        "native_semantic_hash": true,
+        "native_algebraic": true,
+        "context_bound_structure": true
+      },
+      "similarity": 1.0000001192092896,
+      "left_digest": "b4261b12509a552e3726af1768d76a3bc1aabcab6376663b2cef42dff7228427",
+      "right_digest": "b4261b12509a552e3726af1768d76a3bc1aabcab6376663b2cef42dff7228427",
+      "left_canonical": "$close - $open",
+      "right_canonical": "$close - $open",
+      "witnesses": []
+    },
+    {
+      "id": "spaces",
+      "kind": "exact",
+      "safe_same_evaluation": true,
+      "same_context": true,
+      "same_synthetic_values": true,
+      "decisions": {
+        "raw_string": false,
+        "native_structure": true,
+        "native_semantic_hash": true,
+        "native_algebraic": true,
+        "context_bound_structure": true
+      },
+      "similarity": 0.9999999403953552,
+      "left_digest": "2b8883d6de0a6f73320b44133fe55794990085dac8f86624092c7f05d198494a",
+      "right_digest": "2b8883d6de0a6f73320b44133fe55794990085dac8f86624092c7f05d198494a",
+      "left_canonical": "Mean($close, 20.0)",
+      "right_canonical": "Mean($close, 20.0)",
+      "witnesses": []
+    },
+    {
+      "id": "number",
+      "kind": "exact",
+      "safe_same_evaluation": true,
+      "same_context": true,
+      "same_synthetic_values": true,
+      "decisions": {
+        "raw_string": false,
+        "native_structure": true,
+        "native_semantic_hash": false,
+        "native_algebraic": true,
+        "context_bound_structure": true
+      },
+      "similarity": 0.8164965510368347,
+      "left_digest": "3a7ada493f88ca7fe44ce2261b7fc00c9c86390bb73e35c92285e02c44daf3d3",
+      "right_digest": "3a7ada493f88ca7fe44ce2261b7fc00c9c86390bb73e35c92285e02c44daf3d3",
+      "left_canonical": "2.0*$close",
+      "right_canonical": "2.0*$close",
+      "witnesses": []
+    },
+    {
+      "id": "add_swap",
+      "kind": "equivalent",
+      "safe_same_evaluation": true,
+      "same_context": true,
+      "same_synthetic_values": true,
+      "decisions": {
+        "raw_string": false,
+        "native_structure": false,
+        "native_semantic_hash": true,
+        "native_algebraic": true,
+        "context_bound_structure": false
+      },
+      "similarity": 0.9999999403953552,
+      "left_digest": "16ec80d62bbb7f10ba7c3a1749402f5514b3256d76dcd7029708d352dad59049",
+      "right_digest": "09ac2c5a0857f26ea3a8f405582ad8a125856fe41f98369dc3885a94b3ca91f7",
+      "left_canonical": "$close + $open",
+      "right_canonical": "$close + $open",
+      "witnesses": []
+    },
+    {
+      "id": "mul_swap",
+      "kind": "equivalent",
+      "safe_same_evaluation": true,
+      "same_context": true,
+      "same_synthetic_values": true,
+      "decisions": {
+        "raw_string": false,
+        "native_structure": false,
+        "native_semantic_hash": true,
+        "native_algebraic": true,
+        "context_bound_structure": false
+      },
+      "similarity": 1.0000001192092896,
+      "left_digest": "8e8e55eaa8778fa02a7fa6ce22fffbf68109205ce2617f9374b20b841b123ad6",
+      "right_digest": "6534485c1d5babe7572d6352a90bdd7a1f0a4fe8449be273b99cf43ea91f97d0",
+      "left_canonical": "$close*$open",
+      "right_canonical": "$close*$open",
+      "witnesses": []
+    },
+    {
+      "id": "neg_neg",
+      "kind": "equivalent",
+      "safe_same_evaluation": true,
+      "same_context": true,
+      "same_synthetic_values": true,
+      "decisions": {
+        "raw_string": false,
+        "native_structure": false,
+        "native_semantic_hash": false,
+        "native_algebraic": true,
+        "context_bound_structure": false
+      },
+      "similarity": 0.5773502588272095,
+      "left_digest": "b0e1c354fd946cbb9a812bcf24777741f3f5034ab2f1ff1f505a24f3441d7e13",
+      "right_digest": "106352e78e09be7937661b9bc6c64ea8eb031885eb5aa6042aeb6cdb3d53a4d2",
+      "left_canonical": "$close",
+      "right_canonical": "$close",
+      "witnesses": []
+    },
+    {
+      "id": "abs_neg",
+      "kind": "equivalent",
+      "safe_same_evaluation": true,
+      "same_context": true,
+      "same_synthetic_values": true,
+      "decisions": {
+        "raw_string": false,
+        "native_structure": false,
+        "native_semantic_hash": false,
+        "native_algebraic": true,
+        "context_bound_structure": false
+      },
+      "similarity": 0.8944271802902222,
+      "left_digest": "fd663960804b9e4770e68eb578571e58ad1509aa569c671eeda4568a67d2bf8a",
+      "right_digest": "fc4badc5f0185770f095022e339e141de8e13f3ea724729503f3c0e20ad1bf03",
+      "left_canonical": "Abs($close)",
+      "right_canonical": "Abs($close)",
+      "witnesses": []
+    },
+    {
+      "id": "sub_swap",
+      "kind": "different",
+      "safe_same_evaluation": false,
+      "same_context": true,
+      "same_synthetic_values": false,
+      "decisions": {
+        "raw_string": false,
+        "native_structure": false,
+        "native_semantic_hash": true,
+        "native_algebraic": false,
+        "context_bound_structure": false
+      },
+      "similarity": 1.0000001192092896,
+      "left_digest": "b4261b12509a552e3726af1768d76a3bc1aabcab6376663b2cef42dff7228427",
+      "right_digest": "e13905cfa7db4498c6c505e67d20a5293b61a2e8f1f2432fb17d6dc8ad16cefa",
+      "left_canonical": "$close - $open",
+      "right_canonical": "-$close + $open",
+      "witnesses": [
+        {
+          "asset_index": 0,
+          "time_index": 0,
+          "left": -0.6999999999999993,
+          "right": 0.6999999999999993
+        },
+        {
+          "asset_index": 0,
+          "time_index": 1,
+          "left": 10.941470984807896,
+          "right": -10.941470984807896
+        },
+        {
+          "asset_index": 0,
+          "time_index": 2,
+          "left": 11.10929742682468,
+          "right": -11.10929742682468
+        }
+      ]
+    },
+    {
+      "id": "div_swap",
+      "kind": "different",
+      "safe_same_evaluation": false,
+      "same_context": true,
+      "same_synthetic_values": false,
+      "decisions": {
+        "raw_string": false,
+        "native_structure": false,
+        "native_semantic_hash": true,
+        "native_algebraic": false,
+        "context_bound_structure": false
+      },
+      "similarity": 1.0000001192092896,
+      "left_digest": "b864ff7c1441431e18babf5370b332d10d63b85fd5320e731c3dfd35ac48b8a4",
+      "right_digest": "eab63e3ffc6dda7e27ed3d3985d23aa2ef71ac506b7980043d5f8a2a406796de",
+      "left_canonical": "$close/$open",
+      "right_canonical": "$open/$close",
+      "witnesses": [
+        {
+          "asset_index": 0,
+          "time_index": 0,
+          "left": 0.9345794392523366,
+          "right": 1.0699999999999998
+        },
+        {
+          "asset_index": 0,
+          "time_index": 3,
+          "left": 0.0,
+          "right": null
+        },
+        {
+          "asset_index": 0,
+          "time_index": 5,
+          "left": null,
+          "right": 0.0
+        }
+      ]
+    },
+    {
+      "id": "sub_nesting",
+      "kind": "different",
+      "safe_same_evaluation": false,
+      "same_context": true,
+      "same_synthetic_values": false,
+      "decisions": {
+        "raw_string": false,
+        "native_structure": false,
+        "native_semantic_hash": true,
+        "native_algebraic": false,
+        "context_bound_structure": false
+      },
+      "similarity": 1.0,
+      "left_digest": "ff39b8615189261385231a03322f5116f003dc16de66b3c0b3039332b9f76ead",
+      "right_digest": "1419ebdccafcbcaee19b7ded5c71fe5c12590c68d2509610fb56121c0dac7562",
+      "left_canonical": "$close + $low - $open",
+      "right_canonical": "$close - $low - $open",
+      "witnesses": [
+        {
+          "asset_index": 0,
+          "time_index": 0,
+          "left": 7.300000000000001,
+          "right": -8.7
+        },
+        {
+          "asset_index": 0,
+          "time_index": 1,
+          "left": 19.882941969615793,
+          "right": 2.0
+        },
+        {
+          "asset_index": 0,
+          "time_index": 2,
+          "left": 20.21859485365036,
+          "right": 1.999999999999
+        }
+      ]
+    },
+    {
+      "id": "delay_scope",
+      "kind": "different",
+      "safe_same_evaluation": false,
+      "same_context": true,
+      "same_synthetic_values": false,
+      "decisions": {
+        "raw_string": false,
+        "native_structure": false,
+        "native_semantic_hash": true,
+        "native_algebraic": false,
+        "context_bound_structure": false
+      },
+      "similarity": 1.0,
+      "left_digest": "f6bf649e0dd61cda847e77633a74c4e591e22996ab6a0b662c81518fbe706b03",
+      "right_digest": "3553e298147c9dd916bb4c0240be353b9fbcdafc6b7b7a5c85e7512eef2c6459",
+      "left_canonical": "Delay($close - $open, 1.0)",
+      "right_canonical": "-$open + Delay($close, 1.0)",
+      "witnesses": [
+        {
+          "asset_index": 0,
+          "time_index": 1,
+          "left": -0.6999999999999993,
+          "right": 10.0
+        },
+        {
+          "asset_index": 0,
+          "time_index": 2,
+          "left": 10.941470984807896,
+          "right": 10.941470984806896
+        },
+        {
+          "asset_index": 0,
+          "time_index": 3,
+          "left": 11.10929742682468,
+          "right": null
+        }
+      ]
+    },
+    {
+      "id": "mean_window",
+      "kind": "different",
+      "safe_same_evaluation": false,
+      "same_context": true,
+      "same_synthetic_values": false,
+      "decisions": {
+        "raw_string": false,
+        "native_structure": false,
+        "native_semantic_hash": false,
+        "native_algebraic": false,
+        "context_bound_structure": false
+      },
+      "similarity": 0.7999999523162842,
+      "left_digest": "2b8883d6de0a6f73320b44133fe55794990085dac8f86624092c7f05d198494a",
+      "right_digest": "c5f30e1355a23815bde08bcc79f0c1ff779f99347160e285096132ab94ca49d2",
+      "left_canonical": "Mean($close, 20.0)",
+      "right_canonical": "Mean($close, 21.0)",
+      "witnesses": [
+        {
+          "asset_index": 0,
+          "time_index": 19,
+          "left": 11.02864215307133,
+          "right": null
+        },
+        {
+          "asset_index": 0,
+          "time_index": 20,
+          "left": 11.181955061004363,
+          "right": 11.122857307954146
+        },
+        {
+          "asset_index": 0,
+          "time_index": 21,
+          "left": 11.286964779621634,
+          "right": 11.269690089880948
+        }
+      ]
+    },
+    {
+      "id": "trend_sign",
+      "kind": "different",
+      "safe_same_evaluation": false,
+      "same_context": true,
+      "same_synthetic_values": false,
+      "decisions": {
+        "raw_string": false,
+        "native_structure": false,
+        "native_semantic_hash": true,
+        "native_algebraic": false,
+        "context_bound_structure": false
+      },
+      "similarity": 0.9999999403953552,
+      "left_digest": "053d305c49c5d5850c61050efa835100696ed2342f08388cc24aa0fa0e2f2f14",
+      "right_digest": "e716f3f87556d8714380cf2a4385af543bbcbce3cc7318d9a8f298487e4c6efa",
+      "left_canonical": "Mean($close, 20.0) - Mean($close, 60.0)",
+      "right_canonical": "-Mean($close, 20.0) + Mean($close, 60.0)",
+      "witnesses": [
+        {
+          "asset_index": 0,
+          "time_index": 59,
+          "left": 1.9486635176368612,
+          "right": -1.9486635176368612
+        },
+        {
+          "asset_index": 0,
+          "time_index": 60,
+          "left": 1.8996386950171402,
+          "right": -1.8996386950171402
+        },
+        {
+          "asset_index": 0,
+          "time_index": 61,
+          "left": 1.8882061222419804,
+          "right": -1.8882061222419804
+        }
+      ]
+    },
+    {
+      "id": "safe_div_self",
+      "kind": "edge_different",
+      "safe_same_evaluation": false,
+      "same_context": true,
+      "same_synthetic_values": false,
+      "decisions": {
+        "raw_string": false,
+        "native_structure": false,
+        "native_semantic_hash": false,
+        "native_algebraic": false,
+        "context_bound_structure": false
+      },
+      "similarity": 0.0,
+      "left_digest": "fb10691c60dce115b34a7a009d944d95d84d4efdb469df87018f7245b558891f",
+      "right_digest": "fe63c2d5366d0341b10c5bfe911b7af6b6b16b820e5d185ef09829b06724e4ed",
+      "left_canonical": "1",
+      "right_canonical": "1.00000000000000",
+      "witnesses": [
+        {
+          "asset_index": 0,
+          "time_index": 3,
+          "left": 0.0,
+          "right": 1.0
+        },
+        {
+          "asset_index": 0,
+          "time_index": 4,
+          "left": 0.0,
+          "right": 1.0
+        },
+        {
+          "asset_index": 0,
+          "time_index": 5,
+          "left": 0.0,
+          "right": 1.0
+        }
+      ]
+    },
+    {
+      "id": "safe_div_cancel",
+      "kind": "edge_different",
+      "safe_same_evaluation": false,
+      "same_context": true,
+      "same_synthetic_values": false,
+      "decisions": {
+        "raw_string": false,
+        "native_structure": false,
+        "native_semantic_hash": false,
+        "native_algebraic": true,
+        "context_bound_structure": false
+      },
+      "similarity": 0.7071067690849304,
+      "left_digest": "83a184032671b0855f18a78b2350af52441a6b997f0172a2113f20ad4d4066f3",
+      "right_digest": "106352e78e09be7937661b9bc6c64ea8eb031885eb5aa6042aeb6cdb3d53a4d2",
+      "left_canonical": "$close",
+      "right_canonical": "$close",
+      "witnesses": [
+        {
+          "asset_index": 0,
+          "time_index": 1,
+          "left": 0.0,
+          "right": 10.941470984807896
+        },
+        {
+          "asset_index": 0,
+          "time_index": 2,
+          "left": 0.0,
+          "right": 11.10929742682568
+        },
+        {
+          "asset_index": 0,
+          "time_index": 3,
+          "left": 0.0,
+          "right": 10.441120008059867
+        }
+      ]
+    },
+    {
+      "id": "nan_sub",
+      "kind": "edge_different",
+      "safe_same_evaluation": false,
+      "same_context": true,
+      "same_synthetic_values": false,
+      "decisions": {
+        "raw_string": false,
+        "native_structure": false,
+        "native_semantic_hash": false,
+        "native_algebraic": false,
+        "context_bound_structure": false
+      },
+      "similarity": 0.0,
+      "left_digest": "ae897a8b46b5aec6ee3fa49a5db9ead60381c49fc519b52b6288de1c17ff850d",
+      "right_digest": "781bbc47dadae03113ae7f7767135299c3126b4bab32b2bcb627970da41415a4",
+      "left_canonical": "0",
+      "right_canonical": "0.0",
+      "witnesses": [
+        {
+          "asset_index": 0,
+          "time_index": 5,
+          "left": null,
+          "right": 0.0
+        }
+      ]
+    },
+    {
+      "id": "nan_mul",
+      "kind": "edge_different",
+      "safe_same_evaluation": false,
+      "same_context": true,
+      "same_synthetic_values": false,
+      "decisions": {
+        "raw_string": false,
+        "native_structure": false,
+        "native_semantic_hash": false,
+        "native_algebraic": false,
+        "context_bound_structure": false
+      },
+      "similarity": 0.5,
+      "left_digest": "95f26619ee607329163c32cee428ba85a704fe6b11dff3a2f6e65676248743ce",
+      "right_digest": "781bbc47dadae03113ae7f7767135299c3126b4bab32b2bcb627970da41415a4",
+      "left_canonical": "0",
+      "right_canonical": "0.0",
+      "witnesses": [
+        {
+          "asset_index": 0,
+          "time_index": 5,
+          "left": null,
+          "right": 0.0
+        }
+      ]
+    },
+    {
+      "id": "context_data_sha256",
+      "kind": "context_different",
+      "safe_same_evaluation": false,
+      "same_context": false,
+      "same_synthetic_values": true,
+      "decisions": {
+        "raw_string": true,
+        "native_structure": true,
+        "native_semantic_hash": true,
+        "native_algebraic": true,
+        "context_bound_structure": false
+      },
+      "similarity": 1.0000001192092896,
+      "left_digest": "b4261b12509a552e3726af1768d76a3bc1aabcab6376663b2cef42dff7228427",
+      "right_digest": "b4261b12509a552e3726af1768d76a3bc1aabcab6376663b2cef42dff7228427",
+      "left_canonical": "$close - $open",
+      "right_canonical": "$close - $open",
+      "witnesses": []
+    },
+    {
+      "id": "context_target",
+      "kind": "context_different",
+      "safe_same_evaluation": false,
+      "same_context": false,
+      "same_synthetic_values": true,
+      "decisions": {
+        "raw_string": true,
+        "native_structure": true,
+        "native_semantic_hash": true,
+        "native_algebraic": true,
+        "context_bound_structure": false
+      },
+      "similarity": 1.0000001192092896,
+      "left_digest": "b4261b12509a552e3726af1768d76a3bc1aabcab6376663b2cef42dff7228427",
+      "right_digest": "b4261b12509a552e3726af1768d76a3bc1aabcab6376663b2cef42dff7228427",
+      "left_canonical": "$close - $open",
+      "right_canonical": "$close - $open",
+      "witnesses": []
+    },
+    {
+      "id": "context_horizon",
+      "kind": "context_different",
+      "safe_same_evaluation": false,
+      "same_context": false,
+      "same_synthetic_values": true,
+      "decisions": {
+        "raw_string": true,
+        "native_structure": true,
+        "native_semantic_hash": true,
+        "native_algebraic": true,
+        "context_bound_structure": false
+      },
+      "similarity": 1.0000001192092896,
+      "left_digest": "b4261b12509a552e3726af1768d76a3bc1aabcab6376663b2cef42dff7228427",
+      "right_digest": "b4261b12509a552e3726af1768d76a3bc1aabcab6376663b2cef42dff7228427",
+      "left_canonical": "$close - $open",
+      "right_canonical": "$close - $open",
+      "witnesses": []
+    },
+    {
+      "id": "context_available_at",
+      "kind": "context_different",
+      "safe_same_evaluation": false,
+      "same_context": false,
+      "same_synthetic_values": true,
+      "decisions": {
+        "raw_string": true,
+        "native_structure": true,
+        "native_semantic_hash": true,
+        "native_algebraic": true,
+        "context_bound_structure": false
+      },
+      "similarity": 1.0000001192092896,
+      "left_digest": "b4261b12509a552e3726af1768d76a3bc1aabcab6376663b2cef42dff7228427",
+      "right_digest": "b4261b12509a552e3726af1768d76a3bc1aabcab6376663b2cef42dff7228427",
+      "left_canonical": "$close - $open",
+      "right_canonical": "$close - $open",
+      "witnesses": []
+    }
+  ],
+  "summary": {
+    "raw_string": {
+      "correct_duplicate": 1,
+      "unsafe_duplicate": 4,
+      "missed_duplicate": 6,
+      "correct_keep": 10
+    },
+    "native_structure": {
+      "correct_duplicate": 3,
+      "unsafe_duplicate": 4,
+      "missed_duplicate": 4,
+      "correct_keep": 10
+    },
+    "native_semantic_hash": {
+      "correct_duplicate": 4,
+      "unsafe_duplicate": 9,
+      "missed_duplicate": 3,
+      "correct_keep": 5
+    },
+    "native_algebraic": {
+      "correct_duplicate": 7,
+      "unsafe_duplicate": 5,
+      "missed_duplicate": 0,
+      "correct_keep": 9
+    },
+    "context_bound_structure": {
+      "correct_duplicate": 3,
+      "unsafe_duplicate": 0,
+      "missed_duplicate": 4,
+      "correct_keep": 14
+    }
+  },
+  "invalid": [
+    {
+      "formula": "Unknown($close)",
+      "rejected": true,
+      "error": "SyntaxError"
+    },
+    {
+      "formula": "$unlisted_feature",
+      "rejected": true,
+      "error": "SyntaxError"
+    },
+    {
+      "formula": "Add($close)",
+      "rejected": true,
+      "error": "SyntaxError"
+    }
+  ],
+  "financial_increment": "not_measured"
+}
