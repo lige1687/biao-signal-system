@@ -1,0 +1,2201 @@
+{
+  "created_at": "2026-10-04T22:47:46.582325+08:00",
+  "scope": "metadata evidence index; no market requalification or numerical rerun",
+  "base_commit": "955611c1e7633a00752a14148f9102e0ad3b8538",
+  "runs": [
+    {
+      "run": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-joint",
+      "contract_sha256": "83e293942e27eb8721d3c1b564f75ce3398599d57b88ddd19313df56c65b1a6e",
+      "feature": {
+        "kind": "tsfresh_price_information",
+        "lookback": 20,
+        "bar_frequency": "daily_quote",
+        "missing_policy": "segmented",
+        "warmup": 252,
+        "definition_ref": "research.external.mean_abs_log_change20@1.0.0",
+        "definition_refs": [
+          "research.external.mean_abs_log_change20@1.0.0",
+          "research.external.return_autocorrelation20_lag1@1.0.0"
+        ]
+      },
+      "target": {
+        "kind": "forward_return",
+        "start_offset": 1,
+        "end_offset": 21,
+        "entry_field": "close",
+        "unit": "percentage_point",
+        "price_measure": "economic_price"
+      },
+      "split": {
+        "label_policy": "purge",
+        "evaluation_label_policy": "contained",
+        "folds": [
+          {
+            "train_end": "2024-12-31",
+            "eval_start": "2025-01-01",
+            "eval_end": "2025-12-31"
+          },
+          {
+            "train_end": "2025-12-31",
+            "eval_start": "2026-01-01",
+            "eval_end": "2026-06-30"
+          }
+        ]
+      },
+      "evaluator": {
+        "kind": "prediction_ols",
+        "version": "1.0.0",
+        "baseline_features": [
+          "r1",
+          "ret3",
+          "ret20",
+          "vol20",
+          "slope60",
+          "ema20_distance",
+          "sma60_atr_distance",
+          "asset_510050",
+          "asset_510500",
+          "asset_588000"
+        ],
+        "added_features": [
+          "mean_abs_log_change20",
+          "return_autocorrelation20_lag1"
+        ],
+        "lambda": 0,
+        "rcond": 1e-12,
+        "minimum_training_rows": 1
+      },
+      "weights": {
+        "policy": "equal_asset",
+        "comparison": "fixed_common"
+      },
+      "training_weights": "equal_asset",
+      "data": {
+        "path": "docs/experiments/raw/volume-information-2026-09-30/execution/panel.json",
+        "sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+        "mode": "historical_reconstruction",
+        "qualification": {
+          "adapter": "top_etf_economic/1.0",
+          "manifest_path": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+        }
+      },
+      "research_design": {
+        "claim_mapping": {
+          "original_statement": "外部时序计算表达可能补充已有价格背景，需用未来涨跌误差检查",
+          "source_section": "tsfresh0.21.2 mean_abs_change/autocorrelation fixed functions；用户2026-10-02研究授权",
+          "proxy_definition": "mean(abs(diff(100*ln(C[-21:])))); autocorrelation(diff(100*ln(C[-21:])),lag=1)",
+          "preserved_conditions": [
+            "t及以前完整经济收盘价格",
+            "252连续有效OHLC共同资格",
+            "两表达共同可计算观察"
+          ],
+          "omitted_conditions": [
+            "LEI完整规则执行",
+            "真实到账/到达时间证明",
+            "全部ETF总体",
+            "未见历史确认"
+          ],
+          "decision_use": "对未来20交易间隔涨跌，两个外部价格表达是否补充既有价格、趋势与波动背景？",
+          "observation_time": "t日收盘后",
+          "intended_action_time": "无交易，随后20间隔涨跌研究",
+          "application_scope": "external_price_information",
+          "tested_scope": "四ETF全部已见历史的固定价格表达",
+          "unresolved_uses": [
+            "账户收益与成交风险",
+            "独立未见历史",
+            "更大独立ETF市场总体"
+          ]
+        },
+        "sample_fit": {
+          "qualification_artifact": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/qualification.json",
+          "qualification_sha256": "b878c7a33c426bcf34fafae10ce831f98c5b38782bbd66f4df91c8d20fa01b35",
+          "outcome_values_used_for_design": false,
+          "unit": "ETF×安排交易日；相邻观察相关",
+          "assets": 4,
+          "observations": 4340,
+          "dates": 1085,
+          "episodes": null,
+          "paired_support": "同一B0/B1/B2且全部四比较要求两候选已知；未知观察保留",
+          "dependence": "同日相关ETF、相邻特征与未来目标重叠",
+          "model_feature_count": 12,
+          "rationale": "先固定两折较早训练与较晚评价，剔除未成熟训练标签，评价目标止于同一期；固定零惩罚线性预测适合本轮有限问题，并列更简单历史平均。",
+          "decision": "estimate"
+        }
+      },
+      "bindings": {
+        "files": {
+          "docs/research/current-standards.json": "616c0ae1a636accd35c8500be7c5c21a35c13aaf2039e9e6144cb5531d96cb57",
+          "docs/research/lei-factor-research-mission.md": "1f58a65ea41c9b678cc14c4490020b674e991f63267a8746f692e919eb109591",
+          "docs/research/research-question-method-standard.md": "367da1f21f3344ff17abf449aaf887db2adf31ebcfcb1715333a34fb4bf90f16",
+          "docs/research/factor-increment-evidence-standard.md": "05f5b04c8b54ad3bf86296f09a5addd4fd6344dad6e7b639650c39692b2f3871",
+          "docs/research/experiment-backtest-principles.md": "67b49a08396b0c8cb93cb526466200cc798bdb4cd8ce77509658f291cc29493c",
+          "docs/research/ai-execution-contract.md": "f70a929f15d9d59f99f78a609a8658ce468f2c4025f05dba5380198f0bf23d22",
+          "docs/research/definition-standard.md": "938e04d7beb96a46069bbb6eb6c03d2331e86bfa771623fdfe21794b4e98fcbd",
+          "docs/research/experiment-report-template.md": "a141107c915dcf738621e6e8746d89e97fb2d835b4c16883805dc7fb19ab7170",
+          "src/lei_signal/research/workflow.py": "1f2554509c3719d0274d425d6e8179c357a45054dcfb4775d57ac5f1b8564bdb",
+          "src/lei_signal/research/workflow_inputs.py": "0ff1fe0a3de19680cc9c8800fb62267993cc9f55dab36fbe28a2dd7153ca4691",
+          "src/lei_signal/research/workflow_evaluation.py": "65188447542c8c84b7a749c6e033c558034ecf3133fc45fca1757c0ceab27cab",
+          "src/lei_signal/research/question_contract.py": "1ed03d459d33d94d2e64d0067ebef205a66c587457cfc822a80b2c13c539c357",
+          "src/lei_signal/research/input_preflight.py": "514fb1fa1819d145366365865b49159e6b77beaeb27f15a3bdd64fa024484e04",
+          "src/lei_signal/research/candidate_preflight.py": "5b328590d115a2295b2406ba73caa0c460fe8646dfd0183eab284d830affa4df",
+          "src/lei_signal/research/definitions.py": "84f7b9ba76f4704e81f4f4d0c1784e2ab1ad7e3aa225abeb4796fa10dcbfec94",
+          "scripts/run_factor_lab.py": "a8542f48980a52edb6f59b276ef64dacf801aa48cf751fbd39165f9d30497476",
+          "src/lei_signal/research/tsfresh_price_information.py": "e90fa135099d60c8f712d9ba383343faeff1ccc0b75231f9df4550641edec146",
+          "src/lei_signal/research/trend_slope_change_information.py": "037b64c871881100dd408f4d24883cf37b8af2feb82d473959b46a525233fd15",
+          "src/lei_signal/research/top_structure_information.py": "5ce72eb21cc0d56208befd3e2dbb124792abbd3432288a8bf42c4fd42c341ad9",
+          "src/lei_signal/research/volume_information.py": "e794f2fe131ff1e9e0fe49560dfbe463ce0d2244af0663b7769b02779d2d2570",
+          "src/lei_signal/features/indicators.py": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+          "src/lei_signal/rules/clock_classifier.py": "3ce68b924292fdc5977df12a0f70ae3480db2d01d6bd3a9f4ba9845e5c2e84af",
+          "src/lei_signal/domain/rules_config.py": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031",
+          "configs/rules.v2.yaml": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+          ".agents/skills/lei-quant-tools/scripts/tsfresh_calculators.py": "a3ac672ac4a2410cd2b27e0c440ab949dce6bc13c68aa3ccd8f8b2510f4dfeba",
+          ".agents/skills/lei-quant-tools/scripts/tsfresh-LICENSE.txt": "1804283622c8e51a4427aaa772d5ca522f89932fd610b294055435922af1c748",
+          "configs/strategy-documents.v1.json": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b",
+          "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+          "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+          "docs/experiments/raw/exit_three_piece/pool/588000.SS.bars.parquet": "7c7bce89fee5b6483f822d14814dbc14a4ed67a0edcc034196485828e9def543",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/23-510500-2024-annual.pdf": "0d30dc196f1dca210bce70fd1e4c58a08646a5ee7d0214f4136ba25e75ec36b7",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/24-510500-2025-annual.pdf": "feb6751fdfdadc14600c7f3c5b8b99f669bc40f924bf1c1827c2c28a07398b38",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/25-510500-2026-half.pdf": "01136d5f27e09722b45876afe96bc30070635b76495c95d656b0c34b44a07861",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/26-510500-2022-split-result.pdf": "2cb13ff91d3a42dde84c199bc9f1d9b1ac7246a947ff254ccd48516350032bca",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/44-510050-2022-annual.pdf": "b13600f67e34e673efcbc1d0a15a1166a8c2aa08a695cf9c24f270271b1333b5",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/45-510050-2023-annual.pdf": "8b1eef27c0824ed4d9535cbce99379bf48959e9faff0aefbcb7a8e5cf621716e",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/46-510050-2024-annual.pdf": "e7ab0da569d9a836d753e71bed70cca8de5ee862eed747f09e1c939ad41f2391",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/47-510050-2025-annual.pdf": "d0a37d5e7874cd0bc451e59ea7d68aa8fdcd0413e3765487bb14af320e6d758f",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/normalized/510050.SS.nominal-candidate.csv": "bac2a6b082f77468dc0a01a8460d40766f8a77700150cf040699a6a0465d8c86",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/normalized/510500.SS.nominal-candidate.csv": "bc8619d96c93975d7cf00885aebcf2b00a69b47b5e97617385dcb92373352b69",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/01-sh510050-2020-12-01-2022-12-31.json": "1d3280b020f3a78b3c950302644cf635b32821a69c6d530193f732e2dd3187a3",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/02-sh510050-2022-12-01-2024-12-31.json": "73b7c0c404c4d0ec691b3befa26dafc74377fe0157bbab778225d5b475e478e0",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/03-sh510050-2024-12-01-2026-06-30.json": "d8d934bb9e2253b28251b719f6ed2f606ecb79e1061ce1727ad5a879e0afec21",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/04-sh510500-2020-12-01-2022-12-31.json": "b3ac7e514093a862366cc43570b3e7ede57372e6d0b18b45de24a1ed6e82e7c3",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/05-sh510500-2022-12-01-2024-12-31.json": "a07955b1ff0aefa0b194be0ec0c5afed0f77b66dcbdb5ec4810763c29eda7646",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/06-sh510500-2024-12-01-2026-06-30.json": "339ff4e81205b5f2478dffd006fba9f69a6e12209704e047ccf7bb6495341a26",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/02-510050-2021-annual.pdf": "ba98d80942e3daacf4a11e2bbe4150145b03792c91d80a53dc4e0999c7a7527b",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/10-510300-2021-annual.pdf": "35a8647d9dd401c65030eafb67e0b65f1c40b3f75d8270c12d1436c00b204889",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/11-510300-2022-annual.pdf": "0bc9c86850dc6f131c6dad12925135a21fe80bead53dbbd046bb0f811678d0e5",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/12-510300-2023-annual.pdf": "a2a2cb594905a00fc6d092b17ddf841a1f7195dfde3698d4aa8bdc7b6a9f86e7",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/13-510300-2024-annual.pdf": "77041d9520683ee3e2eb2111811b068af9b70526715dcffed57f2bf170fbff0b",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/14-510300-2025-annual.pdf": "4e5632ab0b46865f679d15d7ecdf036076517f48285c9a2d03cdecf5697acabe",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/15-510300-2026-half.pdf": "b77ce47ece834f968b085c6823c72ffaa635f82d80793cc6c2ebafce301221c5",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510050.SS-wealth-features.csv": "decd4123589f3ebf7cc19457f6bead82079a96c5344497fa71004350c9fb684d",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510300.SS-wealth-features.csv": "43c424bff72257ae4c523ace643dce38f816079b4d2281ce255ae8a2d06e34a4",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510500.SS-wealth-features.csv": "a7922b40a515d5f4b4d29d795075c6e87f56b13250e79cd635cfc710e776b8d4",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/588000.SS-wealth-features.csv": "79f69c7f833e250a5ac0b524e894ea759f4f3a96505327f4beb3337c389a8e5e",
+          "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/actions.json": "37427a7f656e30dfa08711dd19e91b1578371df597ac88fc557fc53b4202e97b",
+          "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/bars-helper-native/sh510300-nominal.csv": "d11357f678570ff9698e39799fd4db81ed825c3c05f7bb4c876e895a5c66d0bf",
+          "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510050.SS-row-source-index.json": "ac67a2a985e5e6c9e6120c5c52acc66ff5cd903f8d2863a9e9e165610c3fd3e5",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510300.SS-row-source-index.json": "5a0305f2c715a33e65d249b4538fd0094eee1c68163928151b478de51c5bba77",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510500.SS-row-source-index.json": "93714223de080e92b6f221f2d709c1153e23be6933d64caa30dc8281b519dd96",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/588000.SS-row-source-index.json": "7b8b6f9560e7673d0344e1c4838656c7b4a37110705b5e176cda1c16113dbef2",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/qualification.json": "9d150d608a5e8a88d11021b96f5e2ec5443dddf14c1a98b4ddc2fb4b01bee5f2",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/01-sh510300-2020-12-01-2022-12-31.body": "103bbd9c266d14429479896ec19e3f4a3923e5fe42ba13c9a6a74aa6855e27c7",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/02-sh510300-2022-12-01-2024-12-31.body": "c1177a9939a174b47e5a6329dada01a514c054e3e4070c7071f571478dc76620",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/03-sh510300-2024-12-01-2026-06-30.body": "aa23db71c3dfffc7e85a5e1990dd388214416c9855cbc920eed48a116cf89e33",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/04-sh588000-2020-12-01-2022-12-31.body": "d3b36bf0c9f7bea7ca9cf0f10de53bc56b72a991d8f2d5348b52df3e333d8ce6",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/05-sh588000-2022-12-01-2024-12-31.body": "e2f7eb219a3ca999dc16efd7411c2b20d40f2f4e66dd6fa00c9fd20b1a98cf42",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/06-sh588000-2024-12-01-2026-06-30.body": "7cec676f93319ed2a7877f425adedb8548309ad68c774433d957ff229e8b8276",
+          "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+          "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+          "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json": "c4dbf35966a6d15a1f5b7e5ef7c45f13f8d32a105479be6e3a8269edf6c45fc1",
+          "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/qualification.json": "b878c7a33c426bcf34fafae10ce831f98c5b38782bbd66f4df91c8d20fa01b35",
+          "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/controller-pre-freeze-review.json": "d5a149e357ee4f285975048a5ac5d11acf640c113563b6d3cef36c08e547191a",
+          "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/analyze_saved.py": "7fbd4aa7cba4ff86edea99774fa9f0510c3d4dc02eb326824c9806dca2bedd81",
+          "tests/unit/test_tsfresh_price_information.py": "b408e0550854e6b4fb94319d963a4e51a7ee6ac8bc030cbd760594f97e6f8c60",
+          "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94"
+        },
+        "versions": {
+          "mission": "1.1.0",
+          "question_method": "1.2.0",
+          "increment": "1.1.0",
+          "principles": "1.2",
+          "execution": "1.1.0",
+          "definition": "1.2.0",
+          "template": "1.2.1"
+        },
+        "definition_closure": {
+          "research.external.mean_abs_log_change20@1.0.0": {
+            "scope": "四国内宽基ETF价格轨迹表达；回顾性有限预测研究",
+            "not_for": [
+              "production_trade",
+              "holding_entry_or_exit",
+              "actual_account_return_claim",
+              "complete_LEI_state",
+              "unique_author_calibration"
+            ],
+            "input": {
+              "fields": [
+                "date",
+                "open",
+                "high",
+                "low",
+                "close",
+                "calendar",
+                "action_known"
+              ],
+              "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+              "currency": "CNY ETF经济价格指数",
+              "frequency": "daily",
+              "calendar": "四ETF共同完整交易日历",
+              "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+            },
+            "universe": {
+              "version": "external-tsfresh-four-etf-20261002",
+              "eligibility": "四固定ETF完整安排日与所有背景；不按候选值过滤",
+              "warmup": "为公平比较既有背景保持252连续有效OHLC，候选本身只用末21个价格",
+              "missing": "未知、背景外、未成熟分别保留，不造价格",
+              "quality_gate": "实际来源资格重新核全部名义OHLC与经济重建；到达及行动完整性未知",
+              "degrade": "只作有限四ETF回顾性信息，非完整ETF总体"
+            },
+            "time": {
+              "observation_time": "完整t收盘后",
+              "available_at": "历史到达时间未认证",
+              "decision_at": "t收盘后研究评价",
+              "execution_at": "无交易",
+              "timezone": "Asia/Shanghai",
+              "effective_from": "2026-10-02研究登记"
+            },
+            "validation": {
+              "method": "既有两核心工程验收、本轮精确手算/未来/缺失检查，效果必须另过workflow冻结",
+              "tolerance": {
+                "absolute": 1e-09,
+                "relative": 1e-10,
+                "integer": 0
+              },
+              "tests": [
+                "tests/unit/test_tsfresh_candidates.py",
+                "tests/unit/test_tsfresh_price_information.py"
+              ],
+              "limitations": "现有完整价格包含这些表达；历史已见、到达和行动完整性未知，不能从数学差别推增量"
+            },
+            "status": {
+              "definition_clarity": "fixed_external_formula",
+              "data_qualification": "limited_retrospective_economic_ohlc",
+              "implementation": "research_adapter_reviewed_pre_freeze",
+              "effectiveness": "not_evaluated_at_registration",
+              "production": "not_authorized"
+            },
+            "sources": [
+              "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json",
+              ".agents/skills/lei-quant-tools/scripts/tsfresh_calculators.py",
+              ".agents/skills/lei-quant-tools/scripts/tsfresh-LICENSE.txt",
+              "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+              "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+              "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
+            ],
+            "id": "research.external.mean_abs_log_change20",
+            "version": "1.0.0",
+            "name": "20日平均绝对对数变化",
+            "type": "feature",
+            "profile": "mixed",
+            "uses": [
+              "research_signal",
+              "description",
+              "comparison"
+            ],
+            "spec_anchor": [
+              "用户2026-10-02授权外部因子挖掘与较大范围验证",
+              "tsfresh0.21.2固定发布包两个函数，非LEI原文交易定义"
+            ],
+            "spec_layer": "external_price_information",
+            "definition": {
+              "formula": "r[j]=100*ln(C[j]/C[j-1]); X[t]=(1/20)*sum(abs(r[j]), j=t-19..t)",
+              "parameters": {
+                "window_returns": 20,
+                "lag": null,
+                "common_baseline_warmup": 252,
+                "upstream_version": "0.21.2"
+              },
+              "unit": "log percentage points per session",
+              "direction": "连续描述量，不事先指定未来收益方向",
+              "transforms": "21个经济收盘价取100倍自然对数；上游两个函数正文不变；比较背景沿现有指标",
+              "nan_policy": "缺报价/行动未知重置；共同252暖启动；任一候选未知则全部四比較同日资格未知，不填零",
+              "endpoints": "t及以前21个连续经济收盘价；目标另从t+1收盘至t+21收盘"
+            },
+            "dependencies": [],
+            "lifecycle": {
+              "state": "exists",
+              "basis": [
+                "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json"
+              ],
+              "verification_scope": "研究适配器公式4340行独立重算、既有背景逐字段一致及5合成检查；效果尚未计算，研究限定"
+            },
+            "origin": "外部通用算法研究表达；无原作者预测有效性主张",
+            "research_owner": "technical_agent",
+            "research_status": "IN_SCOPE",
+            "local_alias": "20日平均绝对对数变化"
+          },
+          "research.external.return_autocorrelation20_lag1@1.0.0": {
+            "scope": "四国内宽基ETF价格轨迹表达；回顾性有限预测研究",
+            "not_for": [
+              "production_trade",
+              "holding_entry_or_exit",
+              "actual_account_return_claim",
+              "complete_LEI_state",
+              "unique_author_calibration"
+            ],
+            "input": {
+              "fields": [
+                "date",
+                "open",
+                "high",
+                "low",
+                "close",
+                "calendar",
+                "action_known"
+              ],
+              "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+              "currency": "CNY ETF经济价格指数",
+              "frequency": "daily",
+              "calendar": "四ETF共同完整交易日历",
+              "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+            },
+            "universe": {
+              "version": "external-tsfresh-four-etf-20261002",
+              "eligibility": "四固定ETF完整安排日与所有背景；不按候选值过滤",
+              "warmup": "为公平比较既有背景保持252连续有效OHLC，候选本身只用末21个价格",
+              "missing": "未知、背景外、未成熟分别保留，不造价格",
+              "quality_gate": "实际来源资格重新核全部名义OHLC与经济重建；到达及行动完整性未知",
+              "degrade": "只作有限四ETF回顾性信息，非完整ETF总体"
+            },
+            "time": {
+              "observation_time": "完整t收盘后",
+              "available_at": "历史到达时间未认证",
+              "decision_at": "t收盘后研究评价",
+              "execution_at": "无交易",
+              "timezone": "Asia/Shanghai",
+              "effective_from": "2026-10-02研究登记"
+            },
+            "validation": {
+              "method": "既有两核心工程验收、本轮精确手算/未来/缺失检查，效果必须另过workflow冻结",
+              "tolerance": {
+                "absolute": 1e-09,
+                "relative": 1e-10,
+                "integer": 0
+              },
+              "tests": [
+                "tests/unit/test_tsfresh_candidates.py",
+                "tests/unit/test_tsfresh_price_information.py"
+              ],
+              "limitations": "现有完整价格包含这些表达；历史已见、到达和行动完整性未知，不能从数学差别推增量"
+            },
+            "status": {
+              "definition_clarity": "fixed_external_formula",
+              "data_qualification": "limited_retrospective_economic_ohlc",
+              "implementation": "research_adapter_reviewed_pre_freeze",
+              "effectiveness": "not_evaluated_at_registration",
+              "production": "not_authorized"
+            },
+            "sources": [
+              "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json",
+              ".agents/skills/lei-quant-tools/scripts/tsfresh_calculators.py",
+              ".agents/skills/lei-quant-tools/scripts/tsfresh-LICENSE.txt",
+              "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+              "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+              "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
+            ],
+            "id": "research.external.return_autocorrelation20_lag1",
+            "version": "1.0.0",
+            "name": "20日收益的相邻联系",
+            "type": "feature",
+            "profile": "mixed",
+            "uses": [
+              "research_signal",
+              "description",
+              "comparison"
+            ],
+            "spec_anchor": [
+              "用户2026-10-02授权外部因子挖掘与较大范围验证",
+              "tsfresh0.21.2固定发布包两个函数，非LEI原文交易定义"
+            ],
+            "spec_layer": "external_price_information",
+            "definition": {
+              "formula": "r[j]=100*ln(C[j]/C[j-1]); mu=mean(r), v=mean((r-mu)^2); X=sum((r[j]-mu)*(r[j+1]-mu))/(19*v); np.isclose(v,0) => unknown",
+              "parameters": {
+                "window_returns": 20,
+                "lag": 1,
+                "common_baseline_warmup": 252,
+                "upstream_version": "0.21.2"
+              },
+              "unit": "dimensionless",
+              "direction": "连续描述量，不事先指定未来收益方向",
+              "transforms": "21个经济收盘价取100倍自然对数；上游两个函数正文不变；比较背景沿现有指标",
+              "nan_policy": "缺报价/行动未知重置；共同252暖启动；任一候选未知则全部四比較同日资格未知，不填零",
+              "endpoints": "t及以前21个连续经济收盘价；目标另从t+1收盘至t+21收盘"
+            },
+            "dependencies": [],
+            "lifecycle": {
+              "state": "exists",
+              "basis": [
+                "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json"
+              ],
+              "verification_scope": "研究适配器公式4340行独立重算、既有背景逐字段一致及5合成检查；效果尚未计算，研究限定"
+            },
+            "origin": "外部通用算法研究表达；无原作者预测有效性主张",
+            "research_owner": "technical_agent",
+            "research_status": "IN_SCOPE",
+            "local_alias": "20日收益的相邻联系"
+          }
+        },
+        "data_sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b"
+      },
+      "freeze": {
+        "preflight_digest": "4db7495fcd3eaf84cc8c363145704fd9a536848d7ade27817e1f34caa7169bbc",
+        "observations_digest": "7ec2d3993f630a1df4022ab209a6001edc0a707b13aacb883ee91e6466c53849"
+      },
+      "saved_files": [
+        {
+          "path": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-joint/contract.json",
+          "size": 71302,
+          "sha256": "83e293942e27eb8721d3c1b564f75ce3398599d57b88ddd19313df56c65b1a6e"
+        },
+        {
+          "path": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-joint/preflight.json",
+          "size": 5000897,
+          "sha256": "7fd6786ea97ee5fca5a776d48549c2d1748d6a64b0fa4e551f0c2bdfe459d897"
+        },
+        {
+          "path": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-joint/receipt.json",
+          "size": 913,
+          "sha256": "e4c701bbc3e415994c2d71b8b1001a739a8dfed186bf21e7658bec781303dd4d"
+        },
+        {
+          "path": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-joint/report.md",
+          "size": 15466,
+          "sha256": "f1bc5977d871f994aa883b0516fdc689ad52fa0ee6890d1295332be35462c0be"
+        },
+        {
+          "path": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-joint/result.json",
+          "size": 433052,
+          "sha256": "c3bafce770fdbc121c63da0e3aececf7262df2095c1176f7b2a63b9f9ba528ca"
+        },
+        {
+          "path": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-joint/state.json",
+          "size": 176,
+          "sha256": "e17c8327b5877d710c8f6e9ed885bad7cd5ba9d880fb8c6e577861d7613440b0"
+        }
+      ]
+    },
+    {
+      "run": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-amplitude",
+      "contract_sha256": "53c0783677bb8fc2418e4ded5de187bb123ec98b59bd85d49d5a738a3b327aa1",
+      "feature": {
+        "kind": "tsfresh_price_information",
+        "lookback": 20,
+        "bar_frequency": "daily_quote",
+        "missing_policy": "segmented",
+        "warmup": 252,
+        "definition_ref": "research.external.mean_abs_log_change20@1.0.0",
+        "definition_refs": [
+          "research.external.mean_abs_log_change20@1.0.0",
+          "research.external.return_autocorrelation20_lag1@1.0.0"
+        ]
+      },
+      "target": {
+        "kind": "forward_return",
+        "start_offset": 1,
+        "end_offset": 21,
+        "entry_field": "close",
+        "unit": "percentage_point",
+        "price_measure": "economic_price"
+      },
+      "split": {
+        "label_policy": "purge",
+        "evaluation_label_policy": "contained",
+        "folds": [
+          {
+            "train_end": "2024-12-31",
+            "eval_start": "2025-01-01",
+            "eval_end": "2025-12-31"
+          },
+          {
+            "train_end": "2025-12-31",
+            "eval_start": "2026-01-01",
+            "eval_end": "2026-06-30"
+          }
+        ]
+      },
+      "evaluator": {
+        "kind": "prediction_ols",
+        "version": "1.0.0",
+        "baseline_features": [
+          "r1",
+          "ret3",
+          "ret20",
+          "vol20",
+          "slope60",
+          "ema20_distance",
+          "sma60_atr_distance",
+          "asset_510050",
+          "asset_510500",
+          "asset_588000"
+        ],
+        "added_features": [
+          "mean_abs_log_change20"
+        ],
+        "lambda": 0,
+        "rcond": 1e-12,
+        "minimum_training_rows": 1
+      },
+      "weights": {
+        "policy": "equal_asset",
+        "comparison": "fixed_common"
+      },
+      "training_weights": "equal_asset",
+      "data": {
+        "path": "docs/experiments/raw/volume-information-2026-09-30/execution/panel.json",
+        "sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+        "mode": "historical_reconstruction",
+        "qualification": {
+          "adapter": "top_etf_economic/1.0",
+          "manifest_path": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+        }
+      },
+      "research_design": {
+        "claim_mapping": {
+          "original_statement": "外部时序计算表达可能补充已有价格背景，需用未来涨跌误差检查",
+          "source_section": "tsfresh0.21.2 mean_abs_change/autocorrelation fixed functions；用户2026-10-02研究授权",
+          "proxy_definition": "mean(abs(diff(100*ln(C[-21:])))); autocorrelation(diff(100*ln(C[-21:])),lag=1)",
+          "preserved_conditions": [
+            "t及以前完整经济收盘价格",
+            "252连续有效OHLC共同资格",
+            "两表达共同可计算观察"
+          ],
+          "omitted_conditions": [
+            "LEI完整规则执行",
+            "真实到账/到达时间证明",
+            "全部ETF总体",
+            "未见历史确认"
+          ],
+          "decision_use": "对未来20交易间隔涨跌，两个外部价格表达是否补充既有价格、趋势与波动背景？",
+          "observation_time": "t日收盘后",
+          "intended_action_time": "无交易，随后20间隔涨跌研究",
+          "application_scope": "external_price_information",
+          "tested_scope": "四ETF全部已见历史的固定价格表达",
+          "unresolved_uses": [
+            "账户收益与成交风险",
+            "独立未见历史",
+            "更大独立ETF市场总体"
+          ]
+        },
+        "sample_fit": {
+          "qualification_artifact": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/qualification.json",
+          "qualification_sha256": "b878c7a33c426bcf34fafae10ce831f98c5b38782bbd66f4df91c8d20fa01b35",
+          "outcome_values_used_for_design": false,
+          "unit": "ETF×安排交易日；相邻观察相关",
+          "assets": 4,
+          "observations": 4340,
+          "dates": 1085,
+          "episodes": null,
+          "paired_support": "同一B0/B1/B2且全部四比较要求两候选已知；未知观察保留",
+          "dependence": "同日相关ETF、相邻特征与未来目标重叠",
+          "model_feature_count": 11,
+          "rationale": "先固定两折较早训练与较晚评价，剔除未成熟训练标签，评价目标止于同一期；固定零惩罚线性预测适合本轮有限问题，并列更简单历史平均。",
+          "decision": "estimate"
+        }
+      },
+      "bindings": {
+        "files": {
+          "docs/research/current-standards.json": "616c0ae1a636accd35c8500be7c5c21a35c13aaf2039e9e6144cb5531d96cb57",
+          "docs/research/lei-factor-research-mission.md": "1f58a65ea41c9b678cc14c4490020b674e991f63267a8746f692e919eb109591",
+          "docs/research/research-question-method-standard.md": "367da1f21f3344ff17abf449aaf887db2adf31ebcfcb1715333a34fb4bf90f16",
+          "docs/research/factor-increment-evidence-standard.md": "05f5b04c8b54ad3bf86296f09a5addd4fd6344dad6e7b639650c39692b2f3871",
+          "docs/research/experiment-backtest-principles.md": "67b49a08396b0c8cb93cb526466200cc798bdb4cd8ce77509658f291cc29493c",
+          "docs/research/ai-execution-contract.md": "f70a929f15d9d59f99f78a609a8658ce468f2c4025f05dba5380198f0bf23d22",
+          "docs/research/definition-standard.md": "938e04d7beb96a46069bbb6eb6c03d2331e86bfa771623fdfe21794b4e98fcbd",
+          "docs/research/experiment-report-template.md": "a141107c915dcf738621e6e8746d89e97fb2d835b4c16883805dc7fb19ab7170",
+          "src/lei_signal/research/workflow.py": "1f2554509c3719d0274d425d6e8179c357a45054dcfb4775d57ac5f1b8564bdb",
+          "src/lei_signal/research/workflow_inputs.py": "0ff1fe0a3de19680cc9c8800fb62267993cc9f55dab36fbe28a2dd7153ca4691",
+          "src/lei_signal/research/workflow_evaluation.py": "65188447542c8c84b7a749c6e033c558034ecf3133fc45fca1757c0ceab27cab",
+          "src/lei_signal/research/question_contract.py": "1ed03d459d33d94d2e64d0067ebef205a66c587457cfc822a80b2c13c539c357",
+          "src/lei_signal/research/input_preflight.py": "514fb1fa1819d145366365865b49159e6b77beaeb27f15a3bdd64fa024484e04",
+          "src/lei_signal/research/candidate_preflight.py": "5b328590d115a2295b2406ba73caa0c460fe8646dfd0183eab284d830affa4df",
+          "src/lei_signal/research/definitions.py": "84f7b9ba76f4704e81f4f4d0c1784e2ab1ad7e3aa225abeb4796fa10dcbfec94",
+          "scripts/run_factor_lab.py": "a8542f48980a52edb6f59b276ef64dacf801aa48cf751fbd39165f9d30497476",
+          "src/lei_signal/research/tsfresh_price_information.py": "e90fa135099d60c8f712d9ba383343faeff1ccc0b75231f9df4550641edec146",
+          "src/lei_signal/research/trend_slope_change_information.py": "037b64c871881100dd408f4d24883cf37b8af2feb82d473959b46a525233fd15",
+          "src/lei_signal/research/top_structure_information.py": "5ce72eb21cc0d56208befd3e2dbb124792abbd3432288a8bf42c4fd42c341ad9",
+          "src/lei_signal/research/volume_information.py": "e794f2fe131ff1e9e0fe49560dfbe463ce0d2244af0663b7769b02779d2d2570",
+          "src/lei_signal/features/indicators.py": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+          "src/lei_signal/rules/clock_classifier.py": "3ce68b924292fdc5977df12a0f70ae3480db2d01d6bd3a9f4ba9845e5c2e84af",
+          "src/lei_signal/domain/rules_config.py": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031",
+          "configs/rules.v2.yaml": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+          ".agents/skills/lei-quant-tools/scripts/tsfresh_calculators.py": "a3ac672ac4a2410cd2b27e0c440ab949dce6bc13c68aa3ccd8f8b2510f4dfeba",
+          ".agents/skills/lei-quant-tools/scripts/tsfresh-LICENSE.txt": "1804283622c8e51a4427aaa772d5ca522f89932fd610b294055435922af1c748",
+          "configs/strategy-documents.v1.json": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b",
+          "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+          "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+          "docs/experiments/raw/exit_three_piece/pool/588000.SS.bars.parquet": "7c7bce89fee5b6483f822d14814dbc14a4ed67a0edcc034196485828e9def543",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/23-510500-2024-annual.pdf": "0d30dc196f1dca210bce70fd1e4c58a08646a5ee7d0214f4136ba25e75ec36b7",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/24-510500-2025-annual.pdf": "feb6751fdfdadc14600c7f3c5b8b99f669bc40f924bf1c1827c2c28a07398b38",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/25-510500-2026-half.pdf": "01136d5f27e09722b45876afe96bc30070635b76495c95d656b0c34b44a07861",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/26-510500-2022-split-result.pdf": "2cb13ff91d3a42dde84c199bc9f1d9b1ac7246a947ff254ccd48516350032bca",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/44-510050-2022-annual.pdf": "b13600f67e34e673efcbc1d0a15a1166a8c2aa08a695cf9c24f270271b1333b5",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/45-510050-2023-annual.pdf": "8b1eef27c0824ed4d9535cbce99379bf48959e9faff0aefbcb7a8e5cf621716e",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/46-510050-2024-annual.pdf": "e7ab0da569d9a836d753e71bed70cca8de5ee862eed747f09e1c939ad41f2391",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/47-510050-2025-annual.pdf": "d0a37d5e7874cd0bc451e59ea7d68aa8fdcd0413e3765487bb14af320e6d758f",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/normalized/510050.SS.nominal-candidate.csv": "bac2a6b082f77468dc0a01a8460d40766f8a77700150cf040699a6a0465d8c86",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/normalized/510500.SS.nominal-candidate.csv": "bc8619d96c93975d7cf00885aebcf2b00a69b47b5e97617385dcb92373352b69",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/01-sh510050-2020-12-01-2022-12-31.json": "1d3280b020f3a78b3c950302644cf635b32821a69c6d530193f732e2dd3187a3",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/02-sh510050-2022-12-01-2024-12-31.json": "73b7c0c404c4d0ec691b3befa26dafc74377fe0157bbab778225d5b475e478e0",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/03-sh510050-2024-12-01-2026-06-30.json": "d8d934bb9e2253b28251b719f6ed2f606ecb79e1061ce1727ad5a879e0afec21",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/04-sh510500-2020-12-01-2022-12-31.json": "b3ac7e514093a862366cc43570b3e7ede57372e6d0b18b45de24a1ed6e82e7c3",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/05-sh510500-2022-12-01-2024-12-31.json": "a07955b1ff0aefa0b194be0ec0c5afed0f77b66dcbdb5ec4810763c29eda7646",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/06-sh510500-2024-12-01-2026-06-30.json": "339ff4e81205b5f2478dffd006fba9f69a6e12209704e047ccf7bb6495341a26",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/02-510050-2021-annual.pdf": "ba98d80942e3daacf4a11e2bbe4150145b03792c91d80a53dc4e0999c7a7527b",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/10-510300-2021-annual.pdf": "35a8647d9dd401c65030eafb67e0b65f1c40b3f75d8270c12d1436c00b204889",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/11-510300-2022-annual.pdf": "0bc9c86850dc6f131c6dad12925135a21fe80bead53dbbd046bb0f811678d0e5",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/12-510300-2023-annual.pdf": "a2a2cb594905a00fc6d092b17ddf841a1f7195dfde3698d4aa8bdc7b6a9f86e7",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/13-510300-2024-annual.pdf": "77041d9520683ee3e2eb2111811b068af9b70526715dcffed57f2bf170fbff0b",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/14-510300-2025-annual.pdf": "4e5632ab0b46865f679d15d7ecdf036076517f48285c9a2d03cdecf5697acabe",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/15-510300-2026-half.pdf": "b77ce47ece834f968b085c6823c72ffaa635f82d80793cc6c2ebafce301221c5",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510050.SS-wealth-features.csv": "decd4123589f3ebf7cc19457f6bead82079a96c5344497fa71004350c9fb684d",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510300.SS-wealth-features.csv": "43c424bff72257ae4c523ace643dce38f816079b4d2281ce255ae8a2d06e34a4",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510500.SS-wealth-features.csv": "a7922b40a515d5f4b4d29d795075c6e87f56b13250e79cd635cfc710e776b8d4",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/588000.SS-wealth-features.csv": "79f69c7f833e250a5ac0b524e894ea759f4f3a96505327f4beb3337c389a8e5e",
+          "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/actions.json": "37427a7f656e30dfa08711dd19e91b1578371df597ac88fc557fc53b4202e97b",
+          "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/bars-helper-native/sh510300-nominal.csv": "d11357f678570ff9698e39799fd4db81ed825c3c05f7bb4c876e895a5c66d0bf",
+          "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510050.SS-row-source-index.json": "ac67a2a985e5e6c9e6120c5c52acc66ff5cd903f8d2863a9e9e165610c3fd3e5",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510300.SS-row-source-index.json": "5a0305f2c715a33e65d249b4538fd0094eee1c68163928151b478de51c5bba77",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510500.SS-row-source-index.json": "93714223de080e92b6f221f2d709c1153e23be6933d64caa30dc8281b519dd96",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/588000.SS-row-source-index.json": "7b8b6f9560e7673d0344e1c4838656c7b4a37110705b5e176cda1c16113dbef2",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/qualification.json": "9d150d608a5e8a88d11021b96f5e2ec5443dddf14c1a98b4ddc2fb4b01bee5f2",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/01-sh510300-2020-12-01-2022-12-31.body": "103bbd9c266d14429479896ec19e3f4a3923e5fe42ba13c9a6a74aa6855e27c7",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/02-sh510300-2022-12-01-2024-12-31.body": "c1177a9939a174b47e5a6329dada01a514c054e3e4070c7071f571478dc76620",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/03-sh510300-2024-12-01-2026-06-30.body": "aa23db71c3dfffc7e85a5e1990dd388214416c9855cbc920eed48a116cf89e33",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/04-sh588000-2020-12-01-2022-12-31.body": "d3b36bf0c9f7bea7ca9cf0f10de53bc56b72a991d8f2d5348b52df3e333d8ce6",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/05-sh588000-2022-12-01-2024-12-31.body": "e2f7eb219a3ca999dc16efd7411c2b20d40f2f4e66dd6fa00c9fd20b1a98cf42",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/06-sh588000-2024-12-01-2026-06-30.body": "7cec676f93319ed2a7877f425adedb8548309ad68c774433d957ff229e8b8276",
+          "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+          "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+          "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json": "c4dbf35966a6d15a1f5b7e5ef7c45f13f8d32a105479be6e3a8269edf6c45fc1",
+          "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/qualification.json": "b878c7a33c426bcf34fafae10ce831f98c5b38782bbd66f4df91c8d20fa01b35",
+          "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/controller-pre-freeze-review.json": "d5a149e357ee4f285975048a5ac5d11acf640c113563b6d3cef36c08e547191a",
+          "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/analyze_saved.py": "7fbd4aa7cba4ff86edea99774fa9f0510c3d4dc02eb326824c9806dca2bedd81",
+          "tests/unit/test_tsfresh_price_information.py": "b408e0550854e6b4fb94319d963a4e51a7ee6ac8bc030cbd760594f97e6f8c60",
+          "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94"
+        },
+        "versions": {
+          "mission": "1.1.0",
+          "question_method": "1.2.0",
+          "increment": "1.1.0",
+          "principles": "1.2",
+          "execution": "1.1.0",
+          "definition": "1.2.0",
+          "template": "1.2.1"
+        },
+        "definition_closure": {
+          "research.external.mean_abs_log_change20@1.0.0": {
+            "scope": "四国内宽基ETF价格轨迹表达；回顾性有限预测研究",
+            "not_for": [
+              "production_trade",
+              "holding_entry_or_exit",
+              "actual_account_return_claim",
+              "complete_LEI_state",
+              "unique_author_calibration"
+            ],
+            "input": {
+              "fields": [
+                "date",
+                "open",
+                "high",
+                "low",
+                "close",
+                "calendar",
+                "action_known"
+              ],
+              "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+              "currency": "CNY ETF经济价格指数",
+              "frequency": "daily",
+              "calendar": "四ETF共同完整交易日历",
+              "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+            },
+            "universe": {
+              "version": "external-tsfresh-four-etf-20261002",
+              "eligibility": "四固定ETF完整安排日与所有背景；不按候选值过滤",
+              "warmup": "为公平比较既有背景保持252连续有效OHLC，候选本身只用末21个价格",
+              "missing": "未知、背景外、未成熟分别保留，不造价格",
+              "quality_gate": "实际来源资格重新核全部名义OHLC与经济重建；到达及行动完整性未知",
+              "degrade": "只作有限四ETF回顾性信息，非完整ETF总体"
+            },
+            "time": {
+              "observation_time": "完整t收盘后",
+              "available_at": "历史到达时间未认证",
+              "decision_at": "t收盘后研究评价",
+              "execution_at": "无交易",
+              "timezone": "Asia/Shanghai",
+              "effective_from": "2026-10-02研究登记"
+            },
+            "validation": {
+              "method": "既有两核心工程验收、本轮精确手算/未来/缺失检查，效果必须另过workflow冻结",
+              "tolerance": {
+                "absolute": 1e-09,
+                "relative": 1e-10,
+                "integer": 0
+              },
+              "tests": [
+                "tests/unit/test_tsfresh_candidates.py",
+                "tests/unit/test_tsfresh_price_information.py"
+              ],
+              "limitations": "现有完整价格包含这些表达；历史已见、到达和行动完整性未知，不能从数学差别推增量"
+            },
+            "status": {
+              "definition_clarity": "fixed_external_formula",
+              "data_qualification": "limited_retrospective_economic_ohlc",
+              "implementation": "research_adapter_reviewed_pre_freeze",
+              "effectiveness": "not_evaluated_at_registration",
+              "production": "not_authorized"
+            },
+            "sources": [
+              "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json",
+              ".agents/skills/lei-quant-tools/scripts/tsfresh_calculators.py",
+              ".agents/skills/lei-quant-tools/scripts/tsfresh-LICENSE.txt",
+              "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+              "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+              "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
+            ],
+            "id": "research.external.mean_abs_log_change20",
+            "version": "1.0.0",
+            "name": "20日平均绝对对数变化",
+            "type": "feature",
+            "profile": "mixed",
+            "uses": [
+              "research_signal",
+              "description",
+              "comparison"
+            ],
+            "spec_anchor": [
+              "用户2026-10-02授权外部因子挖掘与较大范围验证",
+              "tsfresh0.21.2固定发布包两个函数，非LEI原文交易定义"
+            ],
+            "spec_layer": "external_price_information",
+            "definition": {
+              "formula": "r[j]=100*ln(C[j]/C[j-1]); X[t]=(1/20)*sum(abs(r[j]), j=t-19..t)",
+              "parameters": {
+                "window_returns": 20,
+                "lag": null,
+                "common_baseline_warmup": 252,
+                "upstream_version": "0.21.2"
+              },
+              "unit": "log percentage points per session",
+              "direction": "连续描述量，不事先指定未来收益方向",
+              "transforms": "21个经济收盘价取100倍自然对数；上游两个函数正文不变；比较背景沿现有指标",
+              "nan_policy": "缺报价/行动未知重置；共同252暖启动；任一候选未知则全部四比較同日资格未知，不填零",
+              "endpoints": "t及以前21个连续经济收盘价；目标另从t+1收盘至t+21收盘"
+            },
+            "dependencies": [],
+            "lifecycle": {
+              "state": "exists",
+              "basis": [
+                "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json"
+              ],
+              "verification_scope": "研究适配器公式4340行独立重算、既有背景逐字段一致及5合成检查；效果尚未计算，研究限定"
+            },
+            "origin": "外部通用算法研究表达；无原作者预测有效性主张",
+            "research_owner": "technical_agent",
+            "research_status": "IN_SCOPE",
+            "local_alias": "20日平均绝对对数变化"
+          },
+          "research.external.return_autocorrelation20_lag1@1.0.0": {
+            "scope": "四国内宽基ETF价格轨迹表达；回顾性有限预测研究",
+            "not_for": [
+              "production_trade",
+              "holding_entry_or_exit",
+              "actual_account_return_claim",
+              "complete_LEI_state",
+              "unique_author_calibration"
+            ],
+            "input": {
+              "fields": [
+                "date",
+                "open",
+                "high",
+                "low",
+                "close",
+                "calendar",
+                "action_known"
+              ],
+              "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+              "currency": "CNY ETF经济价格指数",
+              "frequency": "daily",
+              "calendar": "四ETF共同完整交易日历",
+              "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+            },
+            "universe": {
+              "version": "external-tsfresh-four-etf-20261002",
+              "eligibility": "四固定ETF完整安排日与所有背景；不按候选值过滤",
+              "warmup": "为公平比较既有背景保持252连续有效OHLC，候选本身只用末21个价格",
+              "missing": "未知、背景外、未成熟分别保留，不造价格",
+              "quality_gate": "实际来源资格重新核全部名义OHLC与经济重建；到达及行动完整性未知",
+              "degrade": "只作有限四ETF回顾性信息，非完整ETF总体"
+            },
+            "time": {
+              "observation_time": "完整t收盘后",
+              "available_at": "历史到达时间未认证",
+              "decision_at": "t收盘后研究评价",
+              "execution_at": "无交易",
+              "timezone": "Asia/Shanghai",
+              "effective_from": "2026-10-02研究登记"
+            },
+            "validation": {
+              "method": "既有两核心工程验收、本轮精确手算/未来/缺失检查，效果必须另过workflow冻结",
+              "tolerance": {
+                "absolute": 1e-09,
+                "relative": 1e-10,
+                "integer": 0
+              },
+              "tests": [
+                "tests/unit/test_tsfresh_candidates.py",
+                "tests/unit/test_tsfresh_price_information.py"
+              ],
+              "limitations": "现有完整价格包含这些表达；历史已见、到达和行动完整性未知，不能从数学差别推增量"
+            },
+            "status": {
+              "definition_clarity": "fixed_external_formula",
+              "data_qualification": "limited_retrospective_economic_ohlc",
+              "implementation": "research_adapter_reviewed_pre_freeze",
+              "effectiveness": "not_evaluated_at_registration",
+              "production": "not_authorized"
+            },
+            "sources": [
+              "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json",
+              ".agents/skills/lei-quant-tools/scripts/tsfresh_calculators.py",
+              ".agents/skills/lei-quant-tools/scripts/tsfresh-LICENSE.txt",
+              "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+              "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+              "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
+            ],
+            "id": "research.external.return_autocorrelation20_lag1",
+            "version": "1.0.0",
+            "name": "20日收益的相邻联系",
+            "type": "feature",
+            "profile": "mixed",
+            "uses": [
+              "research_signal",
+              "description",
+              "comparison"
+            ],
+            "spec_anchor": [
+              "用户2026-10-02授权外部因子挖掘与较大范围验证",
+              "tsfresh0.21.2固定发布包两个函数，非LEI原文交易定义"
+            ],
+            "spec_layer": "external_price_information",
+            "definition": {
+              "formula": "r[j]=100*ln(C[j]/C[j-1]); mu=mean(r), v=mean((r-mu)^2); X=sum((r[j]-mu)*(r[j+1]-mu))/(19*v); np.isclose(v,0) => unknown",
+              "parameters": {
+                "window_returns": 20,
+                "lag": 1,
+                "common_baseline_warmup": 252,
+                "upstream_version": "0.21.2"
+              },
+              "unit": "dimensionless",
+              "direction": "连续描述量，不事先指定未来收益方向",
+              "transforms": "21个经济收盘价取100倍自然对数；上游两个函数正文不变；比较背景沿现有指标",
+              "nan_policy": "缺报价/行动未知重置；共同252暖启动；任一候选未知则全部四比較同日资格未知，不填零",
+              "endpoints": "t及以前21个连续经济收盘价；目标另从t+1收盘至t+21收盘"
+            },
+            "dependencies": [],
+            "lifecycle": {
+              "state": "exists",
+              "basis": [
+                "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json"
+              ],
+              "verification_scope": "研究适配器公式4340行独立重算、既有背景逐字段一致及5合成检查；效果尚未计算，研究限定"
+            },
+            "origin": "外部通用算法研究表达；无原作者预测有效性主张",
+            "research_owner": "technical_agent",
+            "research_status": "IN_SCOPE",
+            "local_alias": "20日收益的相邻联系"
+          }
+        },
+        "data_sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b"
+      },
+      "freeze": {
+        "preflight_digest": "21ea5f94509a896d3f44dee80f7dbf845dda97ca9364d34275527c4d7fe9b0d4",
+        "observations_digest": "7ec2d3993f630a1df4022ab209a6001edc0a707b13aacb883ee91e6466c53849"
+      },
+      "saved_files": [
+        {
+          "path": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-amplitude/contract.json",
+          "size": 71271,
+          "sha256": "53c0783677bb8fc2418e4ded5de187bb123ec98b59bd85d49d5a738a3b327aa1"
+        },
+        {
+          "path": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-amplitude/preflight.json",
+          "size": 5000897,
+          "sha256": "76563fb2e25f7bf787ac0b4ee5a9a21ecdc977a4873f99f0b33310598501645f"
+        },
+        {
+          "path": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-amplitude/receipt.json",
+          "size": 913,
+          "sha256": "5f7d40b41601a038e06ec49c91f82d841bc30bb525fac7364e89e9cf898d596d"
+        },
+        {
+          "path": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-amplitude/report.md",
+          "size": 15472,
+          "sha256": "6057ff5b560a8f4625a2e6942ab2dc8469007eaf08b39940b3d7c89fa1e7e445"
+        },
+        {
+          "path": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-amplitude/result.json",
+          "size": 432746,
+          "sha256": "4596535f5bc979575a68e573f0a75ee7afbe79b510d37fa7249be0db5ccec15c"
+        },
+        {
+          "path": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-amplitude/state.json",
+          "size": 176,
+          "sha256": "d88d51a7b3cd73001f984b669dcaa4eb25f6f73e03e7d0e29159d266eb0b4848"
+        }
+      ]
+    },
+    {
+      "run": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-serial",
+      "contract_sha256": "69143f3d1233d1d1ed7631bd11a8e93a8f2e1edf4bdd44c81cd7554185fdeed0",
+      "feature": {
+        "kind": "tsfresh_price_information",
+        "lookback": 20,
+        "bar_frequency": "daily_quote",
+        "missing_policy": "segmented",
+        "warmup": 252,
+        "definition_ref": "research.external.mean_abs_log_change20@1.0.0",
+        "definition_refs": [
+          "research.external.mean_abs_log_change20@1.0.0",
+          "research.external.return_autocorrelation20_lag1@1.0.0"
+        ]
+      },
+      "target": {
+        "kind": "forward_return",
+        "start_offset": 1,
+        "end_offset": 21,
+        "entry_field": "close",
+        "unit": "percentage_point",
+        "price_measure": "economic_price"
+      },
+      "split": {
+        "label_policy": "purge",
+        "evaluation_label_policy": "contained",
+        "folds": [
+          {
+            "train_end": "2024-12-31",
+            "eval_start": "2025-01-01",
+            "eval_end": "2025-12-31"
+          },
+          {
+            "train_end": "2025-12-31",
+            "eval_start": "2026-01-01",
+            "eval_end": "2026-06-30"
+          }
+        ]
+      },
+      "evaluator": {
+        "kind": "prediction_ols",
+        "version": "1.0.0",
+        "baseline_features": [
+          "r1",
+          "ret3",
+          "ret20",
+          "vol20",
+          "slope60",
+          "ema20_distance",
+          "sma60_atr_distance",
+          "asset_510050",
+          "asset_510500",
+          "asset_588000"
+        ],
+        "added_features": [
+          "return_autocorrelation20_lag1"
+        ],
+        "lambda": 0,
+        "rcond": 1e-12,
+        "minimum_training_rows": 1
+      },
+      "weights": {
+        "policy": "equal_asset",
+        "comparison": "fixed_common"
+      },
+      "training_weights": "equal_asset",
+      "data": {
+        "path": "docs/experiments/raw/volume-information-2026-09-30/execution/panel.json",
+        "sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+        "mode": "historical_reconstruction",
+        "qualification": {
+          "adapter": "top_etf_economic/1.0",
+          "manifest_path": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+        }
+      },
+      "research_design": {
+        "claim_mapping": {
+          "original_statement": "外部时序计算表达可能补充已有价格背景，需用未来涨跌误差检查",
+          "source_section": "tsfresh0.21.2 mean_abs_change/autocorrelation fixed functions；用户2026-10-02研究授权",
+          "proxy_definition": "mean(abs(diff(100*ln(C[-21:])))); autocorrelation(diff(100*ln(C[-21:])),lag=1)",
+          "preserved_conditions": [
+            "t及以前完整经济收盘价格",
+            "252连续有效OHLC共同资格",
+            "两表达共同可计算观察"
+          ],
+          "omitted_conditions": [
+            "LEI完整规则执行",
+            "真实到账/到达时间证明",
+            "全部ETF总体",
+            "未见历史确认"
+          ],
+          "decision_use": "对未来20交易间隔涨跌，两个外部价格表达是否补充既有价格、趋势与波动背景？",
+          "observation_time": "t日收盘后",
+          "intended_action_time": "无交易，随后20间隔涨跌研究",
+          "application_scope": "external_price_information",
+          "tested_scope": "四ETF全部已见历史的固定价格表达",
+          "unresolved_uses": [
+            "账户收益与成交风险",
+            "独立未见历史",
+            "更大独立ETF市场总体"
+          ]
+        },
+        "sample_fit": {
+          "qualification_artifact": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/qualification.json",
+          "qualification_sha256": "b878c7a33c426bcf34fafae10ce831f98c5b38782bbd66f4df91c8d20fa01b35",
+          "outcome_values_used_for_design": false,
+          "unit": "ETF×安排交易日；相邻观察相关",
+          "assets": 4,
+          "observations": 4340,
+          "dates": 1085,
+          "episodes": null,
+          "paired_support": "同一B0/B1/B2且全部四比较要求两候选已知；未知观察保留",
+          "dependence": "同日相关ETF、相邻特征与未来目标重叠",
+          "model_feature_count": 11,
+          "rationale": "先固定两折较早训练与较晚评价，剔除未成熟训练标签，评价目标止于同一期；固定零惩罚线性预测适合本轮有限问题，并列更简单历史平均。",
+          "decision": "estimate"
+        }
+      },
+      "bindings": {
+        "files": {
+          "docs/research/current-standards.json": "616c0ae1a636accd35c8500be7c5c21a35c13aaf2039e9e6144cb5531d96cb57",
+          "docs/research/lei-factor-research-mission.md": "1f58a65ea41c9b678cc14c4490020b674e991f63267a8746f692e919eb109591",
+          "docs/research/research-question-method-standard.md": "367da1f21f3344ff17abf449aaf887db2adf31ebcfcb1715333a34fb4bf90f16",
+          "docs/research/factor-increment-evidence-standard.md": "05f5b04c8b54ad3bf86296f09a5addd4fd6344dad6e7b639650c39692b2f3871",
+          "docs/research/experiment-backtest-principles.md": "67b49a08396b0c8cb93cb526466200cc798bdb4cd8ce77509658f291cc29493c",
+          "docs/research/ai-execution-contract.md": "f70a929f15d9d59f99f78a609a8658ce468f2c4025f05dba5380198f0bf23d22",
+          "docs/research/definition-standard.md": "938e04d7beb96a46069bbb6eb6c03d2331e86bfa771623fdfe21794b4e98fcbd",
+          "docs/research/experiment-report-template.md": "a141107c915dcf738621e6e8746d89e97fb2d835b4c16883805dc7fb19ab7170",
+          "src/lei_signal/research/workflow.py": "1f2554509c3719d0274d425d6e8179c357a45054dcfb4775d57ac5f1b8564bdb",
+          "src/lei_signal/research/workflow_inputs.py": "0ff1fe0a3de19680cc9c8800fb62267993cc9f55dab36fbe28a2dd7153ca4691",
+          "src/lei_signal/research/workflow_evaluation.py": "65188447542c8c84b7a749c6e033c558034ecf3133fc45fca1757c0ceab27cab",
+          "src/lei_signal/research/question_contract.py": "1ed03d459d33d94d2e64d0067ebef205a66c587457cfc822a80b2c13c539c357",
+          "src/lei_signal/research/input_preflight.py": "514fb1fa1819d145366365865b49159e6b77beaeb27f15a3bdd64fa024484e04",
+          "src/lei_signal/research/candidate_preflight.py": "5b328590d115a2295b2406ba73caa0c460fe8646dfd0183eab284d830affa4df",
+          "src/lei_signal/research/definitions.py": "84f7b9ba76f4704e81f4f4d0c1784e2ab1ad7e3aa225abeb4796fa10dcbfec94",
+          "scripts/run_factor_lab.py": "a8542f48980a52edb6f59b276ef64dacf801aa48cf751fbd39165f9d30497476",
+          "src/lei_signal/research/tsfresh_price_information.py": "e90fa135099d60c8f712d9ba383343faeff1ccc0b75231f9df4550641edec146",
+          "src/lei_signal/research/trend_slope_change_information.py": "037b64c871881100dd408f4d24883cf37b8af2feb82d473959b46a525233fd15",
+          "src/lei_signal/research/top_structure_information.py": "5ce72eb21cc0d56208befd3e2dbb124792abbd3432288a8bf42c4fd42c341ad9",
+          "src/lei_signal/research/volume_information.py": "e794f2fe131ff1e9e0fe49560dfbe463ce0d2244af0663b7769b02779d2d2570",
+          "src/lei_signal/features/indicators.py": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+          "src/lei_signal/rules/clock_classifier.py": "3ce68b924292fdc5977df12a0f70ae3480db2d01d6bd3a9f4ba9845e5c2e84af",
+          "src/lei_signal/domain/rules_config.py": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031",
+          "configs/rules.v2.yaml": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+          ".agents/skills/lei-quant-tools/scripts/tsfresh_calculators.py": "a3ac672ac4a2410cd2b27e0c440ab949dce6bc13c68aa3ccd8f8b2510f4dfeba",
+          ".agents/skills/lei-quant-tools/scripts/tsfresh-LICENSE.txt": "1804283622c8e51a4427aaa772d5ca522f89932fd610b294055435922af1c748",
+          "configs/strategy-documents.v1.json": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b",
+          "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+          "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+          "docs/experiments/raw/exit_three_piece/pool/588000.SS.bars.parquet": "7c7bce89fee5b6483f822d14814dbc14a4ed67a0edcc034196485828e9def543",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/23-510500-2024-annual.pdf": "0d30dc196f1dca210bce70fd1e4c58a08646a5ee7d0214f4136ba25e75ec36b7",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/24-510500-2025-annual.pdf": "feb6751fdfdadc14600c7f3c5b8b99f669bc40f924bf1c1827c2c28a07398b38",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/25-510500-2026-half.pdf": "01136d5f27e09722b45876afe96bc30070635b76495c95d656b0c34b44a07861",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/26-510500-2022-split-result.pdf": "2cb13ff91d3a42dde84c199bc9f1d9b1ac7246a947ff254ccd48516350032bca",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/44-510050-2022-annual.pdf": "b13600f67e34e673efcbc1d0a15a1166a8c2aa08a695cf9c24f270271b1333b5",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/45-510050-2023-annual.pdf": "8b1eef27c0824ed4d9535cbce99379bf48959e9faff0aefbcb7a8e5cf621716e",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/46-510050-2024-annual.pdf": "e7ab0da569d9a836d753e71bed70cca8de5ee862eed747f09e1c939ad41f2391",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/47-510050-2025-annual.pdf": "d0a37d5e7874cd0bc451e59ea7d68aa8fdcd0413e3765487bb14af320e6d758f",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/normalized/510050.SS.nominal-candidate.csv": "bac2a6b082f77468dc0a01a8460d40766f8a77700150cf040699a6a0465d8c86",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/normalized/510500.SS.nominal-candidate.csv": "bc8619d96c93975d7cf00885aebcf2b00a69b47b5e97617385dcb92373352b69",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/01-sh510050-2020-12-01-2022-12-31.json": "1d3280b020f3a78b3c950302644cf635b32821a69c6d530193f732e2dd3187a3",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/02-sh510050-2022-12-01-2024-12-31.json": "73b7c0c404c4d0ec691b3befa26dafc74377fe0157bbab778225d5b475e478e0",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/03-sh510050-2024-12-01-2026-06-30.json": "d8d934bb9e2253b28251b719f6ed2f606ecb79e1061ce1727ad5a879e0afec21",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/04-sh510500-2020-12-01-2022-12-31.json": "b3ac7e514093a862366cc43570b3e7ede57372e6d0b18b45de24a1ed6e82e7c3",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/05-sh510500-2022-12-01-2024-12-31.json": "a07955b1ff0aefa0b194be0ec0c5afed0f77b66dcbdb5ec4810763c29eda7646",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/06-sh510500-2024-12-01-2026-06-30.json": "339ff4e81205b5f2478dffd006fba9f69a6e12209704e047ccf7bb6495341a26",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/02-510050-2021-annual.pdf": "ba98d80942e3daacf4a11e2bbe4150145b03792c91d80a53dc4e0999c7a7527b",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/10-510300-2021-annual.pdf": "35a8647d9dd401c65030eafb67e0b65f1c40b3f75d8270c12d1436c00b204889",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/11-510300-2022-annual.pdf": "0bc9c86850dc6f131c6dad12925135a21fe80bead53dbbd046bb0f811678d0e5",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/12-510300-2023-annual.pdf": "a2a2cb594905a00fc6d092b17ddf841a1f7195dfde3698d4aa8bdc7b6a9f86e7",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/13-510300-2024-annual.pdf": "77041d9520683ee3e2eb2111811b068af9b70526715dcffed57f2bf170fbff0b",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/14-510300-2025-annual.pdf": "4e5632ab0b46865f679d15d7ecdf036076517f48285c9a2d03cdecf5697acabe",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/15-510300-2026-half.pdf": "b77ce47ece834f968b085c6823c72ffaa635f82d80793cc6c2ebafce301221c5",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510050.SS-wealth-features.csv": "decd4123589f3ebf7cc19457f6bead82079a96c5344497fa71004350c9fb684d",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510300.SS-wealth-features.csv": "43c424bff72257ae4c523ace643dce38f816079b4d2281ce255ae8a2d06e34a4",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510500.SS-wealth-features.csv": "a7922b40a515d5f4b4d29d795075c6e87f56b13250e79cd635cfc710e776b8d4",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/588000.SS-wealth-features.csv": "79f69c7f833e250a5ac0b524e894ea759f4f3a96505327f4beb3337c389a8e5e",
+          "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/actions.json": "37427a7f656e30dfa08711dd19e91b1578371df597ac88fc557fc53b4202e97b",
+          "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/bars-helper-native/sh510300-nominal.csv": "d11357f678570ff9698e39799fd4db81ed825c3c05f7bb4c876e895a5c66d0bf",
+          "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510050.SS-row-source-index.json": "ac67a2a985e5e6c9e6120c5c52acc66ff5cd903f8d2863a9e9e165610c3fd3e5",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510300.SS-row-source-index.json": "5a0305f2c715a33e65d249b4538fd0094eee1c68163928151b478de51c5bba77",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510500.SS-row-source-index.json": "93714223de080e92b6f221f2d709c1153e23be6933d64caa30dc8281b519dd96",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/588000.SS-row-source-index.json": "7b8b6f9560e7673d0344e1c4838656c7b4a37110705b5e176cda1c16113dbef2",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/qualification.json": "9d150d608a5e8a88d11021b96f5e2ec5443dddf14c1a98b4ddc2fb4b01bee5f2",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/01-sh510300-2020-12-01-2022-12-31.body": "103bbd9c266d14429479896ec19e3f4a3923e5fe42ba13c9a6a74aa6855e27c7",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/02-sh510300-2022-12-01-2024-12-31.body": "c1177a9939a174b47e5a6329dada01a514c054e3e4070c7071f571478dc76620",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/03-sh510300-2024-12-01-2026-06-30.body": "aa23db71c3dfffc7e85a5e1990dd388214416c9855cbc920eed48a116cf89e33",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/04-sh588000-2020-12-01-2022-12-31.body": "d3b36bf0c9f7bea7ca9cf0f10de53bc56b72a991d8f2d5348b52df3e333d8ce6",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/05-sh588000-2022-12-01-2024-12-31.body": "e2f7eb219a3ca999dc16efd7411c2b20d40f2f4e66dd6fa00c9fd20b1a98cf42",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/06-sh588000-2024-12-01-2026-06-30.body": "7cec676f93319ed2a7877f425adedb8548309ad68c774433d957ff229e8b8276",
+          "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+          "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+          "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json": "c4dbf35966a6d15a1f5b7e5ef7c45f13f8d32a105479be6e3a8269edf6c45fc1",
+          "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/qualification.json": "b878c7a33c426bcf34fafae10ce831f98c5b38782bbd66f4df91c8d20fa01b35",
+          "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/controller-pre-freeze-review.json": "d5a149e357ee4f285975048a5ac5d11acf640c113563b6d3cef36c08e547191a",
+          "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/analyze_saved.py": "7fbd4aa7cba4ff86edea99774fa9f0510c3d4dc02eb326824c9806dca2bedd81",
+          "tests/unit/test_tsfresh_price_information.py": "b408e0550854e6b4fb94319d963a4e51a7ee6ac8bc030cbd760594f97e6f8c60",
+          "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94"
+        },
+        "versions": {
+          "mission": "1.1.0",
+          "question_method": "1.2.0",
+          "increment": "1.1.0",
+          "principles": "1.2",
+          "execution": "1.1.0",
+          "definition": "1.2.0",
+          "template": "1.2.1"
+        },
+        "definition_closure": {
+          "research.external.mean_abs_log_change20@1.0.0": {
+            "scope": "四国内宽基ETF价格轨迹表达；回顾性有限预测研究",
+            "not_for": [
+              "production_trade",
+              "holding_entry_or_exit",
+              "actual_account_return_claim",
+              "complete_LEI_state",
+              "unique_author_calibration"
+            ],
+            "input": {
+              "fields": [
+                "date",
+                "open",
+                "high",
+                "low",
+                "close",
+                "calendar",
+                "action_known"
+              ],
+              "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+              "currency": "CNY ETF经济价格指数",
+              "frequency": "daily",
+              "calendar": "四ETF共同完整交易日历",
+              "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+            },
+            "universe": {
+              "version": "external-tsfresh-four-etf-20261002",
+              "eligibility": "四固定ETF完整安排日与所有背景；不按候选值过滤",
+              "warmup": "为公平比较既有背景保持252连续有效OHLC，候选本身只用末21个价格",
+              "missing": "未知、背景外、未成熟分别保留，不造价格",
+              "quality_gate": "实际来源资格重新核全部名义OHLC与经济重建；到达及行动完整性未知",
+              "degrade": "只作有限四ETF回顾性信息，非完整ETF总体"
+            },
+            "time": {
+              "observation_time": "完整t收盘后",
+              "available_at": "历史到达时间未认证",
+              "decision_at": "t收盘后研究评价",
+              "execution_at": "无交易",
+              "timezone": "Asia/Shanghai",
+              "effective_from": "2026-10-02研究登记"
+            },
+            "validation": {
+              "method": "既有两核心工程验收、本轮精确手算/未来/缺失检查，效果必须另过workflow冻结",
+              "tolerance": {
+                "absolute": 1e-09,
+                "relative": 1e-10,
+                "integer": 0
+              },
+              "tests": [
+                "tests/unit/test_tsfresh_candidates.py",
+                "tests/unit/test_tsfresh_price_information.py"
+              ],
+              "limitations": "现有完整价格包含这些表达；历史已见、到达和行动完整性未知，不能从数学差别推增量"
+            },
+            "status": {
+              "definition_clarity": "fixed_external_formula",
+              "data_qualification": "limited_retrospective_economic_ohlc",
+              "implementation": "research_adapter_reviewed_pre_freeze",
+              "effectiveness": "not_evaluated_at_registration",
+              "production": "not_authorized"
+            },
+            "sources": [
+              "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json",
+              ".agents/skills/lei-quant-tools/scripts/tsfresh_calculators.py",
+              ".agents/skills/lei-quant-tools/scripts/tsfresh-LICENSE.txt",
+              "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+              "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+              "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
+            ],
+            "id": "research.external.mean_abs_log_change20",
+            "version": "1.0.0",
+            "name": "20日平均绝对对数变化",
+            "type": "feature",
+            "profile": "mixed",
+            "uses": [
+              "research_signal",
+              "description",
+              "comparison"
+            ],
+            "spec_anchor": [
+              "用户2026-10-02授权外部因子挖掘与较大范围验证",
+              "tsfresh0.21.2固定发布包两个函数，非LEI原文交易定义"
+            ],
+            "spec_layer": "external_price_information",
+            "definition": {
+              "formula": "r[j]=100*ln(C[j]/C[j-1]); X[t]=(1/20)*sum(abs(r[j]), j=t-19..t)",
+              "parameters": {
+                "window_returns": 20,
+                "lag": null,
+                "common_baseline_warmup": 252,
+                "upstream_version": "0.21.2"
+              },
+              "unit": "log percentage points per session",
+              "direction": "连续描述量，不事先指定未来收益方向",
+              "transforms": "21个经济收盘价取100倍自然对数；上游两个函数正文不变；比较背景沿现有指标",
+              "nan_policy": "缺报价/行动未知重置；共同252暖启动；任一候选未知则全部四比較同日资格未知，不填零",
+              "endpoints": "t及以前21个连续经济收盘价；目标另从t+1收盘至t+21收盘"
+            },
+            "dependencies": [],
+            "lifecycle": {
+              "state": "exists",
+              "basis": [
+                "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json"
+              ],
+              "verification_scope": "研究适配器公式4340行独立重算、既有背景逐字段一致及5合成检查；效果尚未计算，研究限定"
+            },
+            "origin": "外部通用算法研究表达；无原作者预测有效性主张",
+            "research_owner": "technical_agent",
+            "research_status": "IN_SCOPE",
+            "local_alias": "20日平均绝对对数变化"
+          },
+          "research.external.return_autocorrelation20_lag1@1.0.0": {
+            "scope": "四国内宽基ETF价格轨迹表达；回顾性有限预测研究",
+            "not_for": [
+              "production_trade",
+              "holding_entry_or_exit",
+              "actual_account_return_claim",
+              "complete_LEI_state",
+              "unique_author_calibration"
+            ],
+            "input": {
+              "fields": [
+                "date",
+                "open",
+                "high",
+                "low",
+                "close",
+                "calendar",
+                "action_known"
+              ],
+              "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+              "currency": "CNY ETF经济价格指数",
+              "frequency": "daily",
+              "calendar": "四ETF共同完整交易日历",
+              "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+            },
+            "universe": {
+              "version": "external-tsfresh-four-etf-20261002",
+              "eligibility": "四固定ETF完整安排日与所有背景；不按候选值过滤",
+              "warmup": "为公平比较既有背景保持252连续有效OHLC，候选本身只用末21个价格",
+              "missing": "未知、背景外、未成熟分别保留，不造价格",
+              "quality_gate": "实际来源资格重新核全部名义OHLC与经济重建；到达及行动完整性未知",
+              "degrade": "只作有限四ETF回顾性信息，非完整ETF总体"
+            },
+            "time": {
+              "observation_time": "完整t收盘后",
+              "available_at": "历史到达时间未认证",
+              "decision_at": "t收盘后研究评价",
+              "execution_at": "无交易",
+              "timezone": "Asia/Shanghai",
+              "effective_from": "2026-10-02研究登记"
+            },
+            "validation": {
+              "method": "既有两核心工程验收、本轮精确手算/未来/缺失检查，效果必须另过workflow冻结",
+              "tolerance": {
+                "absolute": 1e-09,
+                "relative": 1e-10,
+                "integer": 0
+              },
+              "tests": [
+                "tests/unit/test_tsfresh_candidates.py",
+                "tests/unit/test_tsfresh_price_information.py"
+              ],
+              "limitations": "现有完整价格包含这些表达；历史已见、到达和行动完整性未知，不能从数学差别推增量"
+            },
+            "status": {
+              "definition_clarity": "fixed_external_formula",
+              "data_qualification": "limited_retrospective_economic_ohlc",
+              "implementation": "research_adapter_reviewed_pre_freeze",
+              "effectiveness": "not_evaluated_at_registration",
+              "production": "not_authorized"
+            },
+            "sources": [
+              "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json",
+              ".agents/skills/lei-quant-tools/scripts/tsfresh_calculators.py",
+              ".agents/skills/lei-quant-tools/scripts/tsfresh-LICENSE.txt",
+              "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+              "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+              "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
+            ],
+            "id": "research.external.return_autocorrelation20_lag1",
+            "version": "1.0.0",
+            "name": "20日收益的相邻联系",
+            "type": "feature",
+            "profile": "mixed",
+            "uses": [
+              "research_signal",
+              "description",
+              "comparison"
+            ],
+            "spec_anchor": [
+              "用户2026-10-02授权外部因子挖掘与较大范围验证",
+              "tsfresh0.21.2固定发布包两个函数，非LEI原文交易定义"
+            ],
+            "spec_layer": "external_price_information",
+            "definition": {
+              "formula": "r[j]=100*ln(C[j]/C[j-1]); mu=mean(r), v=mean((r-mu)^2); X=sum((r[j]-mu)*(r[j+1]-mu))/(19*v); np.isclose(v,0) => unknown",
+              "parameters": {
+                "window_returns": 20,
+                "lag": 1,
+                "common_baseline_warmup": 252,
+                "upstream_version": "0.21.2"
+              },
+              "unit": "dimensionless",
+              "direction": "连续描述量，不事先指定未来收益方向",
+              "transforms": "21个经济收盘价取100倍自然对数；上游两个函数正文不变；比较背景沿现有指标",
+              "nan_policy": "缺报价/行动未知重置；共同252暖启动；任一候选未知则全部四比較同日资格未知，不填零",
+              "endpoints": "t及以前21个连续经济收盘价；目标另从t+1收盘至t+21收盘"
+            },
+            "dependencies": [],
+            "lifecycle": {
+              "state": "exists",
+              "basis": [
+                "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/protocol.json"
+              ],
+              "verification_scope": "研究适配器公式4340行独立重算、既有背景逐字段一致及5合成检查；效果尚未计算，研究限定"
+            },
+            "origin": "外部通用算法研究表达；无原作者预测有效性主张",
+            "research_owner": "technical_agent",
+            "research_status": "IN_SCOPE",
+            "local_alias": "20日收益的相邻联系"
+          }
+        },
+        "data_sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b"
+      },
+      "freeze": {
+        "preflight_digest": "cd4c938a8d4faa1dab51c27fe3269f5c033d3efdd90976eed34c690842706819",
+        "observations_digest": "7ec2d3993f630a1df4022ab209a6001edc0a707b13aacb883ee91e6466c53849"
+      },
+      "saved_files": [
+        {
+          "path": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-serial/contract.json",
+          "size": 71276,
+          "sha256": "69143f3d1233d1d1ed7631bd11a8e93a8f2e1edf4bdd44c81cd7554185fdeed0"
+        },
+        {
+          "path": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-serial/preflight.json",
+          "size": 5000897,
+          "sha256": "b8a30641c5f1d700dd338a5d17874984a4938a02017f014a7b6946163564b935"
+        },
+        {
+          "path": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-serial/receipt.json",
+          "size": 913,
+          "sha256": "a80dc5cf5b67cb20ad5ffb12a772bd10365c4fdab45cc4477a0e921f392251c4"
+        },
+        {
+          "path": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-serial/report.md",
+          "size": 15466,
+          "sha256": "f3d45924010a483bc4e090a8840ea0fb2bdedf984d8ad690e52e0b2bce529a99"
+        },
+        {
+          "path": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-serial/result.json",
+          "size": 432878,
+          "sha256": "14ecba5c99d91f0356c82ca40c9331a99c98a4e8ceda97d3e0e3c27eeec6c328"
+        },
+        {
+          "path": "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-serial/state.json",
+          "size": 176,
+          "sha256": "b2c4d277c08be5ed3771451d150112f1fd773b4630df52c244f9bcb8811916b8"
+        }
+      ]
+    },
+    {
+      "run": "docs/experiments/raw/volume-direction-information-2026-10-04/accepted-main",
+      "contract_sha256": "ea46b92efd8b831353d3962993cb551f7eaedb353bf81ba80258062aebddcc0b",
+      "feature": {
+        "kind": "volume_direction_information",
+        "definition_ref": "research.volume.direction_excess20@1.0.0",
+        "candidate": "direction_excess20",
+        "comparison_mode": "main",
+        "lookback": 20,
+        "warmup": 252,
+        "missing_policy": "segmented",
+        "bar_frequency": "daily_quote",
+        "anchor_asset": "510300.SS"
+      },
+      "target": {
+        "kind": "mae",
+        "start_offset": 1,
+        "end_offset": 21,
+        "entry_field": "close",
+        "path_field": "close",
+        "unit": "percentage_point",
+        "price_measure": "economic_price"
+      },
+      "split": {
+        "label_policy": "purge",
+        "evaluation_label_policy": "contained",
+        "folds": [
+          {
+            "train_end": "2024-12-31",
+            "eval_start": "2025-01-02",
+            "eval_end": "2025-12-31"
+          },
+          {
+            "train_end": "2025-12-31",
+            "eval_start": "2026-01-05",
+            "eval_end": "2026-06-30"
+          }
+        ]
+      },
+      "evaluator": {
+        "kind": "prediction_ridge",
+        "version": "1.0.0",
+        "baseline_features": [
+          "S",
+          "E",
+          "return1",
+          "return20",
+          "return60",
+          "volatility5",
+          "volatility20",
+          "volatility60",
+          "market_return20",
+          "market_volatility20",
+          "beta60",
+          "relative_return20",
+          "negative_fraction60",
+          "downside_rms60",
+          "return_autocorr1_60",
+          "current_negative_run",
+          "asset_510500",
+          "asset_588000",
+          "direction20"
+        ],
+        "added_features": [
+          "direction_excess20"
+        ],
+        "lambda": 1.0
+      },
+      "weights": {
+        "policy": "equal_asset",
+        "comparison": "fixed_common"
+      },
+      "training_weights": "equal_asset",
+      "data": {
+        "path": "docs/experiments/raw/volume-information-2026-09-30/execution/panel.json",
+        "sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+        "mode": "historical_reconstruction",
+        "qualification": {
+          "adapter": "top_etf_economic/1.0",
+          "manifest_path": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+        }
+      },
+      "research_design": {
+        "claim_mapping": {
+          "original_statement": "同涨跌天数下成交偏向可能补充后续风险",
+          "source_section": "用户P2继续授权；技术体系§2.5研究扩展",
+          "proxy_definition": "sum(sign(C[j]-C[j-1])*V[j])/sum(V[j])-mean(sign(C[j]-C[j-1])); j=t-19..t",
+          "preserved_conditions": [
+            "仅t及以前完整报价",
+            "同价尺度行动处理",
+            "252连续共同预热",
+            "未来起于t+1收盘"
+          ],
+          "omitted_conditions": [
+            "完整LEI条件/退出/账户",
+            "成交额及资金流",
+            "所有单位变化及真实到达",
+            "独立新资料"
+          ],
+          "decision_use": "过去20天成交量更偏向上涨还是下跌，在扣除上涨下跌天数及已有价格风险信息后，是否补充未来20个收盘间隔下探判断",
+          "observation_time": "完整t收盘，供应商历史到达未知",
+          "intended_action_time": "无真实交易；风险信息回顾比较",
+          "application_scope": "同一ETF多日成交与经济价方向",
+          "tested_scope": "510050、510500、588000；510300仅市场参照；2025/2026两期已见评价",
+          "unresolved_uses": [
+            "策略净收益",
+            "成交額/資金流",
+            "原文完整条件",
+            "独立新增资料"
+          ]
+        },
+        "sample_fit": {
+          "qualification_artifact": "docs/experiments/raw/volume-direction-information-2026-10-04/qualification.json",
+          "qualification_sha256": "2980a582a16b2ca133b2872f596112ad96908f11f8548c5278e72a474f028f32",
+          "outcome_values_used_for_design": false,
+          "unit": "ETF×安排交易日；相邻观察相关",
+          "assets": 4,
+          "observations": 4340,
+          "dates": 1085,
+          "episodes": null,
+          "paired_support": "全部比较按唯一新候选与已有背景共同就绪，未继承旧三风险缺值选择；510300仅参照排除",
+          "dependence": "同日相关ETF、相邻特征与未来目标重叠",
+          "model_feature_count": 20,
+          "rationale": "先当前输入和日历，20完整量价对；19+1或3+1，未看未来价格设计",
+          "decision": "estimate"
+        }
+      },
+      "bindings": {
+        "files": {
+          "docs/research/current-standards.json": "616c0ae1a636accd35c8500be7c5c21a35c13aaf2039e9e6144cb5531d96cb57",
+          "docs/research/lei-factor-research-mission.md": "1f58a65ea41c9b678cc14c4490020b674e991f63267a8746f692e919eb109591",
+          "docs/research/research-question-method-standard.md": "367da1f21f3344ff17abf449aaf887db2adf31ebcfcb1715333a34fb4bf90f16",
+          "docs/research/factor-increment-evidence-standard.md": "05f5b04c8b54ad3bf86296f09a5addd4fd6344dad6e7b639650c39692b2f3871",
+          "docs/research/experiment-backtest-principles.md": "67b49a08396b0c8cb93cb526466200cc798bdb4cd8ce77509658f291cc29493c",
+          "docs/research/ai-execution-contract.md": "f70a929f15d9d59f99f78a609a8658ce468f2c4025f05dba5380198f0bf23d22",
+          "docs/research/definition-standard.md": "938e04d7beb96a46069bbb6eb6c03d2331e86bfa771623fdfe21794b4e98fcbd",
+          "docs/research/experiment-report-template.md": "a141107c915dcf738621e6e8746d89e97fb2d835b4c16883805dc7fb19ab7170",
+          "src/lei_signal/research/workflow.py": "737bcd1729f6cbb38d5d6e67cc5f26b0d24705ae25224a7ed0f904dffd78d25a",
+          "src/lei_signal/research/workflow_inputs.py": "ae7f03d0609aeacf3afcb3dc90d676fae50237c5b9b75600bbc4ffead9a7df7d",
+          "src/lei_signal/research/workflow_evaluation.py": "508459ca3964a55e1688fef345d6e667acba68141f8be8f04f1ea1c5f0018c1c",
+          "src/lei_signal/research/question_contract.py": "229bb469bf2e8681cf0c8624c40988c2d623399d7db9cebe009e2c1685541254",
+          "src/lei_signal/research/input_preflight.py": "514fb1fa1819d145366365865b49159e6b77beaeb27f15a3bdd64fa024484e04",
+          "src/lei_signal/research/candidate_preflight.py": "5b328590d115a2295b2406ba73caa0c460fe8646dfd0183eab284d830affa4df",
+          "src/lei_signal/research/definitions.py": "84f7b9ba76f4704e81f4f4d0c1784e2ab1ad7e3aa225abeb4796fa10dcbfec94",
+          "scripts/run_factor_lab.py": "a8542f48980a52edb6f59b276ef64dacf801aa48cf751fbd39165f9d30497476",
+          "src/lei_signal/research/volume_direction_information.py": "2eb7397346111cac2f3bf865183af41e6dd631e91a7782a89edfbe4c0892dace",
+          "src/lei_signal/research/risk_shape_information.py": "787882b3eb6217afe1b09cddddfe14c50fef8f89b0d7bf34d6adad49717bd5d5",
+          "src/lei_signal/research/factor_lab/benchmarks.py": "6a958bc94a605e52540fcda8b28b5781528ec1b61255ee747db17ad7b9313618",
+          "src/lei_signal/research/top_structure_information.py": "5ce72eb21cc0d56208befd3e2dbb124792abbd3432288a8bf42c4fd42c341ad9",
+          "src/lei_signal/research/volume_information.py": "e794f2fe131ff1e9e0fe49560dfbe463ce0d2244af0663b7769b02779d2d2570",
+          "src/lei_signal/features/indicators.py": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+          "configs/strategy-documents.v1.json": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b",
+          "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+          "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+          "docs/experiments/raw/exit_three_piece/pool/588000.SS.bars.parquet": "7c7bce89fee5b6483f822d14814dbc14a4ed67a0edcc034196485828e9def543",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/23-510500-2024-annual.pdf": "0d30dc196f1dca210bce70fd1e4c58a08646a5ee7d0214f4136ba25e75ec36b7",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/24-510500-2025-annual.pdf": "feb6751fdfdadc14600c7f3c5b8b99f669bc40f924bf1c1827c2c28a07398b38",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/25-510500-2026-half.pdf": "01136d5f27e09722b45876afe96bc30070635b76495c95d656b0c34b44a07861",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/26-510500-2022-split-result.pdf": "2cb13ff91d3a42dde84c199bc9f1d9b1ac7246a947ff254ccd48516350032bca",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/44-510050-2022-annual.pdf": "b13600f67e34e673efcbc1d0a15a1166a8c2aa08a695cf9c24f270271b1333b5",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/45-510050-2023-annual.pdf": "8b1eef27c0824ed4d9535cbce99379bf48959e9faff0aefbcb7a8e5cf621716e",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/46-510050-2024-annual.pdf": "e7ab0da569d9a836d753e71bed70cca8de5ee862eed747f09e1c939ad41f2391",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/47-510050-2025-annual.pdf": "d0a37d5e7874cd0bc451e59ea7d68aa8fdcd0413e3765487bb14af320e6d758f",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/normalized/510050.SS.nominal-candidate.csv": "bac2a6b082f77468dc0a01a8460d40766f8a77700150cf040699a6a0465d8c86",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/normalized/510500.SS.nominal-candidate.csv": "bc8619d96c93975d7cf00885aebcf2b00a69b47b5e97617385dcb92373352b69",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/01-sh510050-2020-12-01-2022-12-31.json": "1d3280b020f3a78b3c950302644cf635b32821a69c6d530193f732e2dd3187a3",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/02-sh510050-2022-12-01-2024-12-31.json": "73b7c0c404c4d0ec691b3befa26dafc74377fe0157bbab778225d5b475e478e0",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/03-sh510050-2024-12-01-2026-06-30.json": "d8d934bb9e2253b28251b719f6ed2f606ecb79e1061ce1727ad5a879e0afec21",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/04-sh510500-2020-12-01-2022-12-31.json": "b3ac7e514093a862366cc43570b3e7ede57372e6d0b18b45de24a1ed6e82e7c3",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/05-sh510500-2022-12-01-2024-12-31.json": "a07955b1ff0aefa0b194be0ec0c5afed0f77b66dcbdb5ec4810763c29eda7646",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/06-sh510500-2024-12-01-2026-06-30.json": "339ff4e81205b5f2478dffd006fba9f69a6e12209704e047ccf7bb6495341a26",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/02-510050-2021-annual.pdf": "ba98d80942e3daacf4a11e2bbe4150145b03792c91d80a53dc4e0999c7a7527b",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/10-510300-2021-annual.pdf": "35a8647d9dd401c65030eafb67e0b65f1c40b3f75d8270c12d1436c00b204889",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/11-510300-2022-annual.pdf": "0bc9c86850dc6f131c6dad12925135a21fe80bead53dbbd046bb0f811678d0e5",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/12-510300-2023-annual.pdf": "a2a2cb594905a00fc6d092b17ddf841a1f7195dfde3698d4aa8bdc7b6a9f86e7",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/13-510300-2024-annual.pdf": "77041d9520683ee3e2eb2111811b068af9b70526715dcffed57f2bf170fbff0b",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/14-510300-2025-annual.pdf": "4e5632ab0b46865f679d15d7ecdf036076517f48285c9a2d03cdecf5697acabe",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/15-510300-2026-half.pdf": "b77ce47ece834f968b085c6823c72ffaa635f82d80793cc6c2ebafce301221c5",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510050.SS-wealth-features.csv": "decd4123589f3ebf7cc19457f6bead82079a96c5344497fa71004350c9fb684d",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510300.SS-wealth-features.csv": "43c424bff72257ae4c523ace643dce38f816079b4d2281ce255ae8a2d06e34a4",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510500.SS-wealth-features.csv": "a7922b40a515d5f4b4d29d795075c6e87f56b13250e79cd635cfc710e776b8d4",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/588000.SS-wealth-features.csv": "79f69c7f833e250a5ac0b524e894ea759f4f3a96505327f4beb3337c389a8e5e",
+          "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/actions.json": "37427a7f656e30dfa08711dd19e91b1578371df597ac88fc557fc53b4202e97b",
+          "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/bars-helper-native/sh510300-nominal.csv": "d11357f678570ff9698e39799fd4db81ed825c3c05f7bb4c876e895a5c66d0bf",
+          "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510050.SS-row-source-index.json": "ac67a2a985e5e6c9e6120c5c52acc66ff5cd903f8d2863a9e9e165610c3fd3e5",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510300.SS-row-source-index.json": "5a0305f2c715a33e65d249b4538fd0094eee1c68163928151b478de51c5bba77",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510500.SS-row-source-index.json": "93714223de080e92b6f221f2d709c1153e23be6933d64caa30dc8281b519dd96",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/588000.SS-row-source-index.json": "7b8b6f9560e7673d0344e1c4838656c7b4a37110705b5e176cda1c16113dbef2",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/qualification.json": "9d150d608a5e8a88d11021b96f5e2ec5443dddf14c1a98b4ddc2fb4b01bee5f2",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/01-sh510300-2020-12-01-2022-12-31.body": "103bbd9c266d14429479896ec19e3f4a3923e5fe42ba13c9a6a74aa6855e27c7",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/02-sh510300-2022-12-01-2024-12-31.body": "c1177a9939a174b47e5a6329dada01a514c054e3e4070c7071f571478dc76620",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/03-sh510300-2024-12-01-2026-06-30.body": "aa23db71c3dfffc7e85a5e1990dd388214416c9855cbc920eed48a116cf89e33",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/04-sh588000-2020-12-01-2022-12-31.body": "d3b36bf0c9f7bea7ca9cf0f10de53bc56b72a991d8f2d5348b52df3e333d8ce6",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/05-sh588000-2022-12-01-2024-12-31.body": "e2f7eb219a3ca999dc16efd7411c2b20d40f2f4e66dd6fa00c9fd20b1a98cf42",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/06-sh588000-2024-12-01-2026-06-30.body": "7cec676f93319ed2a7877f425adedb8548309ad68c774433d957ff229e8b8276",
+          "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+          "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+          "docs/experiments/raw/volume-direction-information-2026-10-04/brief.json": "7c26de2af1e583dff876cf998e63b0a2b3b6c87ee74ae37a9b98299223ea27ec",
+          "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94"
+        },
+        "versions": {
+          "mission": "1.1.0",
+          "question_method": "1.2.0",
+          "increment": "1.1.0",
+          "principles": "1.2",
+          "execution": "1.1.0",
+          "definition": "1.2.0",
+          "template": "1.2.1"
+        },
+        "definition_closure": {
+          "research.volume.direction_excess20@1.0.0": {
+            "scope": "同一国内宽基ETF20个完整报价间隔的成交方向；成交量恒定单位缩放不影响结果，不做同指数ETF产品比较",
+            "not_for": [
+              "production_trade",
+              "automatic_buy_or_sell",
+              "LEI_original_rule",
+              "account_return_claim"
+            ],
+            "input": {
+              "fields": [
+                "date",
+                "open",
+                "high",
+                "low",
+                "close",
+                "calendar",
+                "action_known",
+                "volume",
+                "volume_source_known",
+                "volume_break"
+              ],
+              "price_basis": "economic_price",
+              "currency": "CNY ETF economic price index",
+              "frequency": "daily",
+              "calendar": "four-source-ETF common trading calendar",
+              "sources": "source-qualified economic OHLC and raw-checked volume"
+            },
+            "universe": {
+              "version": "same-etf-volume-direction-20261004",
+              "eligibility": "Three tested ETFs, fourth source-only anchor; joint price252 and volume20 support for old19/new20 or old3/new4",
+              "warmup": "252 synchronized contiguous known OHLC rows for target and anchor",
+              "missing": "Price/anchor gap resets joint252 and volume; missing/invalid own volume resets only20 pairs; known break resets before append current pair, no filling",
+              "quality_gate": "Source-only qualify_top_panel -> qualify_volume_panel raw verification",
+              "degrade": "Historical arrival, action completeness and all volume-unit changes unproved"
+            },
+            "time": {
+              "observation_time": "After complete t close",
+              "available_at": "Historical provider arrival not certified",
+              "decision_at": "After t close for research",
+              "execution_at": "No trade",
+              "timezone": "Asia/Shanghai",
+              "effective_from": "2026-10-04 research proposal"
+            },
+            "validation": {
+              "method": "Independent up-volume minus down-volume arithmetic; equal-volume/one-direction zero, scale, prefix, split/missing-volume continuity,252 and maturity",
+              "tolerance": {
+                "absolute": 1e-10,
+                "relative": 1e-10,
+                "integer": 0
+              },
+              "tests": [
+                "tests/unit/test_volume_direction_information.py"
+              ],
+              "limitations": "Seen retrospective history, only3 ETFs; not money flow or traded returns"
+            },
+            "status": {
+              "definition_clarity": "fixed_research_proxy",
+              "data_qualification": "limited_frozen_sources",
+              "implementation": "verified_research_only",
+              "effectiveness": "not_proven",
+              "production": "not_authorized"
+            },
+            "sources": [
+              "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+              "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md",
+              "docs/experiments/raw/volume-direction-information-2026-10-04/brief.json",
+              "src/lei_signal/research/volume_direction_information.py",
+              "tests/unit/test_volume_direction_information.py"
+            ],
+            "id": "research.volume.direction_excess20",
+            "version": "1.0.0",
+            "name": "20日成交方向相对涨跌天数的偏向",
+            "type": "feature",
+            "profile": "mixed",
+            "uses": [
+              "research_signal",
+              "description",
+              "comparison",
+              "diagnostic"
+            ],
+            "spec_anchor": [
+              "LEI技术体系§2.5量价关系研究扩展；非原文唯一交易公式",
+              "用户批准P2方向并持续授权研究"
+            ],
+            "spec_layer": "technical_risk_observation_research_extension",
+            "definition": {
+              "formula": "sum(sign(C[j]-C[j-1])*V[j])/sum(V[j])-mean(sign(C[j]-C[j-1])); j=t-19..t",
+              "parameters": {
+                "candidate": "direction_excess20",
+                "lookback": 20,
+                "warmup": 252,
+                "anchor": "510300.SS",
+                "baseline_main": [
+                  "S",
+                  "E",
+                  "return1",
+                  "return20",
+                  "return60",
+                  "volatility5",
+                  "volatility20",
+                  "volatility60",
+                  "market_return20",
+                  "market_volatility20",
+                  "beta60",
+                  "relative_return20",
+                  "negative_fraction60",
+                  "downside_rms60",
+                  "return_autocorr1_60",
+                  "current_negative_run",
+                  "asset_510500",
+                  "asset_588000",
+                  "direction20"
+                ],
+                "baseline_solo": [
+                  "asset_510500",
+                  "asset_588000",
+                  "direction20"
+                ],
+                "comparison_modes": [
+                  "main",
+                  "solo"
+                ]
+              },
+              "endpoints": "21 economic closes and 20 paired known positive volumes through t; target=max(0,100*(1-min(C[t+1:t+21])/C[t+1]))",
+              "unit": "ratio",
+              "direction": "Positive: volume more biased toward upward than simple day-count direction; no preset risk or trading implication",
+              "transforms": "Economic close action-adjusted; nominal same-ETF volume weights within uninterrupted unit window; no normalization or epsilon. Known split begins new volume window."
+            },
+            "dependencies": [],
+            "lifecycle": {
+              "state": "verified",
+              "basis": [
+                "tests/unit/test_volume_direction_information.py",
+                "docs/experiments/raw/volume-direction-information-2026-10-04/controller-formula-check.json"
+              ],
+              "verification_scope": "Independent arithmetic and boundary tests verified; source qualification and predictive effects separate"
+            },
+            "research_owner": "technical_agent",
+            "research_status": "IN_SCOPE",
+            "origin": "User-authorized multi-day signed-volume composition proxy, not literal LEI rule"
+          }
+        },
+        "data_sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b"
+      },
+      "freeze": {
+        "preflight_digest": "e8bc962949bfe5d2768f5f1a13689524e07505dd3220cc322ba8f1a07dd42c52",
+        "observations_digest": "c9019c355a40a9aad6708d099c2b213c0690c02aa896bc7294d69204034ba4ea"
+      },
+      "saved_files": [
+        {
+          "path": "docs/experiments/raw/volume-direction-information-2026-10-04/accepted-main/contract.json",
+          "size": 63038,
+          "sha256": "ea46b92efd8b831353d3962993cb551f7eaedb353bf81ba80258062aebddcc0b"
+        },
+        {
+          "path": "docs/experiments/raw/volume-direction-information-2026-10-04/accepted-main/preflight.json",
+          "size": 5752566,
+          "sha256": "1f57dfe62314340b581c332a1f58486e044777c6c67549cff35fc41c1424e32f"
+        },
+        {
+          "path": "docs/experiments/raw/volume-direction-information-2026-10-04/accepted-main/receipt.json",
+          "size": 913,
+          "sha256": "a9bf4ebd31cc792f7ed1fbf62c7e2265cba84b6b17368706f4169a73532cb507"
+        },
+        {
+          "path": "docs/experiments/raw/volume-direction-information-2026-10-04/accepted-main/report.md",
+          "size": 113224,
+          "sha256": "b60f794d5f9ddcd99c348e745dba473ba8198f43f7c6ebaf7704f9816627476b"
+        },
+        {
+          "path": "docs/experiments/raw/volume-direction-information-2026-10-04/accepted-main/result.json",
+          "size": 411754,
+          "sha256": "8b2526ccac45844c1fcc442c918b3fd97de12bd19ced0db46f64bc73ad3c1785"
+        },
+        {
+          "path": "docs/experiments/raw/volume-direction-information-2026-10-04/accepted-main/state.json",
+          "size": 176,
+          "sha256": "d5ae08775aff621d33a224f86928b448e39d08e9ba9d710a82d967df30767955"
+        }
+      ]
+    },
+    {
+      "run": "docs/experiments/raw/session-composition-information-2026-10-04/accepted-main",
+      "contract_sha256": "392c69ce294059d480a0e013d5b579ad70ed3377e5c10252d0def4f0840707a9",
+      "feature": {
+        "kind": "session_composition_information",
+        "definition_ref": "research.price.overnight_minus_intraday20@1.0.0",
+        "candidate": "overnight_minus_intraday20",
+        "comparison_mode": "main",
+        "lookback": 20,
+        "warmup": 252,
+        "missing_policy": "segmented",
+        "bar_frequency": "daily_quote",
+        "anchor_asset": "510300.SS"
+      },
+      "target": {
+        "kind": "mae",
+        "start_offset": 1,
+        "end_offset": 21,
+        "entry_field": "close",
+        "path_field": "close",
+        "unit": "percentage_point",
+        "price_measure": "economic_price"
+      },
+      "split": {
+        "label_policy": "purge",
+        "evaluation_label_policy": "contained",
+        "folds": [
+          {
+            "train_end": "2024-12-31",
+            "eval_start": "2025-01-02",
+            "eval_end": "2025-12-31"
+          },
+          {
+            "train_end": "2025-12-31",
+            "eval_start": "2026-01-05",
+            "eval_end": "2026-06-30"
+          }
+        ]
+      },
+      "evaluator": {
+        "kind": "prediction_ridge",
+        "version": "1.0.0",
+        "baseline_features": [
+          "S",
+          "E",
+          "return1",
+          "return20",
+          "return60",
+          "volatility5",
+          "volatility20",
+          "volatility60",
+          "market_return20",
+          "market_volatility20",
+          "beta60",
+          "relative_return20",
+          "negative_fraction60",
+          "downside_rms60",
+          "return_autocorr1_60",
+          "current_negative_run",
+          "asset_510500",
+          "asset_588000"
+        ],
+        "added_features": [
+          "overnight_minus_intraday20"
+        ],
+        "lambda": 1.0
+      },
+      "weights": {
+        "policy": "equal_asset",
+        "comparison": "fixed_common"
+      },
+      "training_weights": "equal_asset",
+      "data": {
+        "path": "docs/experiments/raw/volume-information-2026-09-30/execution/panel.json",
+        "sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+        "mode": "historical_reconstruction",
+        "qualification": {
+          "adapter": "top_etf_economic/1.0",
+          "manifest_path": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+        }
+      },
+      "research_design": {
+        "claim_mapping": {
+          "original_statement": "相同近期总变化的隔夜与日内构成差异可能包含额外后续风险信息",
+          "source_section": "用户2026-10-03方向批准，2026-10-04持续研究授权；技术价格风险观察扩展",
+          "proxy_definition": "100*sum[j=t-19..t](log(O_j/C_(j-1))-log(C_j/O_j)); economic OHLC; no normalization/tuning",
+          "preserved_conditions": [
+            "仅t及以前完整报价",
+            "同价尺度行动处理",
+            "252连续共同预热",
+            "未来起于t+1收盘"
+          ],
+          "omitted_conditions": [
+            "LEI触发/退出/账户",
+            "历史供应商到达/公告时点",
+            "可成交开盘或隔夜资金收益",
+            "独立新资料"
+          ],
+          "decision_use": "同一ETF过去20个间隔的隔夜与日内累计经济价格变化之差，能否在已知近期涨跌与波动后补充未来20个收盘间隔风险判断",
+          "observation_time": "t完整收盘后，历史供应商到达时点未知",
+          "intended_action_time": "无真实交易；风险信息回顾比较",
+          "application_scope": "同一国内宽基ETF价格变化构成与未来收盘风险",
+          "tested_scope": "510050、510500、588000；510300仅市场参照；2025/2026两期已见评价",
+          "unresolved_uses": [
+            "策略净收益和账户回撤",
+            "行业、黄金和海外ETF",
+            "真正新增未见资料"
+          ]
+        },
+        "sample_fit": {
+          "qualification_artifact": "docs/experiments/raw/session-composition-information-2026-10-04/qualification.json",
+          "qualification_sha256": "68f8f1e0409d43fed105e38c9b29b7b2c314c286c776d8429c481d8680f61923",
+          "outcome_values_used_for_design": false,
+          "unit": "ETF×安排交易日；相邻观察相关",
+          "assets": 4,
+          "observations": 4340,
+          "dates": 1085,
+          "episodes": null,
+          "paired_support": "全部比较按唯一新候选与已有背景共同就绪，未继承旧三风险缺值选择；510300仅参照排除",
+          "dependence": "同日相关ETF、相邻特征与未来目标重叠",
+          "model_feature_count": 19,
+          "rationale": "固定20窗口与18+1或身份+1；先当前输入和日历核数，不用未来价格数值做设计。",
+          "decision": "estimate"
+        }
+      },
+      "bindings": {
+        "files": {
+          "docs/research/current-standards.json": "616c0ae1a636accd35c8500be7c5c21a35c13aaf2039e9e6144cb5531d96cb57",
+          "docs/research/lei-factor-research-mission.md": "1f58a65ea41c9b678cc14c4490020b674e991f63267a8746f692e919eb109591",
+          "docs/research/research-question-method-standard.md": "367da1f21f3344ff17abf449aaf887db2adf31ebcfcb1715333a34fb4bf90f16",
+          "docs/research/factor-increment-evidence-standard.md": "05f5b04c8b54ad3bf86296f09a5addd4fd6344dad6e7b639650c39692b2f3871",
+          "docs/research/experiment-backtest-principles.md": "67b49a08396b0c8cb93cb526466200cc798bdb4cd8ce77509658f291cc29493c",
+          "docs/research/ai-execution-contract.md": "f70a929f15d9d59f99f78a609a8658ce468f2c4025f05dba5380198f0bf23d22",
+          "docs/research/definition-standard.md": "938e04d7beb96a46069bbb6eb6c03d2331e86bfa771623fdfe21794b4e98fcbd",
+          "docs/research/experiment-report-template.md": "a141107c915dcf738621e6e8746d89e97fb2d835b4c16883805dc7fb19ab7170",
+          "src/lei_signal/research/workflow.py": "6653babd4d22068c0cebe9b5789c28caa20b54d50ac9b20726c0beee2024865a",
+          "src/lei_signal/research/workflow_inputs.py": "a24ddacb13b192c71b4622eeff159fc5bb38c600408e3db598016a09cd5329ec",
+          "src/lei_signal/research/workflow_evaluation.py": "508459ca3964a55e1688fef345d6e667acba68141f8be8f04f1ea1c5f0018c1c",
+          "src/lei_signal/research/question_contract.py": "1e4acc073e7eac02456c931d170c0c469c08202cfdb52f91157df1d8636cb23a",
+          "src/lei_signal/research/input_preflight.py": "514fb1fa1819d145366365865b49159e6b77beaeb27f15a3bdd64fa024484e04",
+          "src/lei_signal/research/candidate_preflight.py": "5b328590d115a2295b2406ba73caa0c460fe8646dfd0183eab284d830affa4df",
+          "src/lei_signal/research/definitions.py": "84f7b9ba76f4704e81f4f4d0c1784e2ab1ad7e3aa225abeb4796fa10dcbfec94",
+          "scripts/run_factor_lab.py": "a8542f48980a52edb6f59b276ef64dacf801aa48cf751fbd39165f9d30497476",
+          "src/lei_signal/research/session_composition_information.py": "299399c536efbcfd6147f1da317e7f0604823da6e770c0d8bdbb48892c00065a",
+          "src/lei_signal/research/risk_shape_information.py": "787882b3eb6217afe1b09cddddfe14c50fef8f89b0d7bf34d6adad49717bd5d5",
+          "src/lei_signal/research/factor_lab/benchmarks.py": "6a958bc94a605e52540fcda8b28b5781528ec1b61255ee747db17ad7b9313618",
+          "src/lei_signal/research/top_structure_information.py": "5ce72eb21cc0d56208befd3e2dbb124792abbd3432288a8bf42c4fd42c341ad9",
+          "src/lei_signal/research/volume_information.py": "e794f2fe131ff1e9e0fe49560dfbe463ce0d2244af0663b7769b02779d2d2570",
+          "src/lei_signal/features/indicators.py": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+          "configs/strategy-documents.v1.json": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b",
+          "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+          "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+          "docs/experiments/raw/exit_three_piece/pool/588000.SS.bars.parquet": "7c7bce89fee5b6483f822d14814dbc14a4ed67a0edcc034196485828e9def543",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/23-510500-2024-annual.pdf": "0d30dc196f1dca210bce70fd1e4c58a08646a5ee7d0214f4136ba25e75ec36b7",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/24-510500-2025-annual.pdf": "feb6751fdfdadc14600c7f3c5b8b99f669bc40f924bf1c1827c2c28a07398b38",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/25-510500-2026-half.pdf": "01136d5f27e09722b45876afe96bc30070635b76495c95d656b0c34b44a07861",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/26-510500-2022-split-result.pdf": "2cb13ff91d3a42dde84c199bc9f1d9b1ac7246a947ff254ccd48516350032bca",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/44-510050-2022-annual.pdf": "b13600f67e34e673efcbc1d0a15a1166a8c2aa08a695cf9c24f270271b1333b5",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/45-510050-2023-annual.pdf": "8b1eef27c0824ed4d9535cbce99379bf48959e9faff0aefbcb7a8e5cf621716e",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/46-510050-2024-annual.pdf": "e7ab0da569d9a836d753e71bed70cca8de5ee862eed747f09e1c939ad41f2391",
+          "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/47-510050-2025-annual.pdf": "d0a37d5e7874cd0bc451e59ea7d68aa8fdcd0413e3765487bb14af320e6d758f",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/normalized/510050.SS.nominal-candidate.csv": "bac2a6b082f77468dc0a01a8460d40766f8a77700150cf040699a6a0465d8c86",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/normalized/510500.SS.nominal-candidate.csv": "bc8619d96c93975d7cf00885aebcf2b00a69b47b5e97617385dcb92373352b69",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/01-sh510050-2020-12-01-2022-12-31.json": "1d3280b020f3a78b3c950302644cf635b32821a69c6d530193f732e2dd3187a3",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/02-sh510050-2022-12-01-2024-12-31.json": "73b7c0c404c4d0ec691b3befa26dafc74377fe0157bbab778225d5b475e478e0",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/03-sh510050-2024-12-01-2026-06-30.json": "d8d934bb9e2253b28251b719f6ed2f606ecb79e1061ce1727ad5a879e0afec21",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/04-sh510500-2020-12-01-2022-12-31.json": "b3ac7e514093a862366cc43570b3e7ede57372e6d0b18b45de24a1ed6e82e7c3",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/05-sh510500-2022-12-01-2024-12-31.json": "a07955b1ff0aefa0b194be0ec0c5afed0f77b66dcbdb5ec4810763c29eda7646",
+          "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/06-sh510500-2024-12-01-2026-06-30.json": "339ff4e81205b5f2478dffd006fba9f69a6e12209704e047ccf7bb6495341a26",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/02-510050-2021-annual.pdf": "ba98d80942e3daacf4a11e2bbe4150145b03792c91d80a53dc4e0999c7a7527b",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/10-510300-2021-annual.pdf": "35a8647d9dd401c65030eafb67e0b65f1c40b3f75d8270c12d1436c00b204889",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/11-510300-2022-annual.pdf": "0bc9c86850dc6f131c6dad12925135a21fe80bead53dbbd046bb0f811678d0e5",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/12-510300-2023-annual.pdf": "a2a2cb594905a00fc6d092b17ddf841a1f7195dfde3698d4aa8bdc7b6a9f86e7",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/13-510300-2024-annual.pdf": "77041d9520683ee3e2eb2111811b068af9b70526715dcffed57f2bf170fbff0b",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/14-510300-2025-annual.pdf": "4e5632ab0b46865f679d15d7ecdf036076517f48285c9a2d03cdecf5697acabe",
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/15-510300-2026-half.pdf": "b77ce47ece834f968b085c6823c72ffaa635f82d80793cc6c2ebafce301221c5",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510050.SS-wealth-features.csv": "decd4123589f3ebf7cc19457f6bead82079a96c5344497fa71004350c9fb684d",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510300.SS-wealth-features.csv": "43c424bff72257ae4c523ace643dce38f816079b4d2281ce255ae8a2d06e34a4",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510500.SS-wealth-features.csv": "a7922b40a515d5f4b4d29d795075c6e87f56b13250e79cd635cfc710e776b8d4",
+          "docs/experiments/raw/factor-module-a-continuation-2026-09-27/588000.SS-wealth-features.csv": "79f69c7f833e250a5ac0b524e894ea759f4f3a96505327f4beb3337c389a8e5e",
+          "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/actions.json": "37427a7f656e30dfa08711dd19e91b1578371df597ac88fc557fc53b4202e97b",
+          "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/bars-helper-native/sh510300-nominal.csv": "d11357f678570ff9698e39799fd4db81ed825c3c05f7bb4c876e895a5c66d0bf",
+          "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510050.SS-row-source-index.json": "ac67a2a985e5e6c9e6120c5c52acc66ff5cd903f8d2863a9e9e165610c3fd3e5",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510300.SS-row-source-index.json": "5a0305f2c715a33e65d249b4538fd0094eee1c68163928151b478de51c5bba77",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510500.SS-row-source-index.json": "93714223de080e92b6f221f2d709c1153e23be6933d64caa30dc8281b519dd96",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/588000.SS-row-source-index.json": "7b8b6f9560e7673d0344e1c4838656c7b4a37110705b5e176cda1c16113dbef2",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/qualification.json": "9d150d608a5e8a88d11021b96f5e2ec5443dddf14c1a98b4ddc2fb4b01bee5f2",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/01-sh510300-2020-12-01-2022-12-31.body": "103bbd9c266d14429479896ec19e3f4a3923e5fe42ba13c9a6a74aa6855e27c7",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/02-sh510300-2022-12-01-2024-12-31.body": "c1177a9939a174b47e5a6329dada01a514c054e3e4070c7071f571478dc76620",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/03-sh510300-2024-12-01-2026-06-30.body": "aa23db71c3dfffc7e85a5e1990dd388214416c9855cbc920eed48a116cf89e33",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/04-sh588000-2020-12-01-2022-12-31.body": "d3b36bf0c9f7bea7ca9cf0f10de53bc56b72a991d8f2d5348b52df3e333d8ce6",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/05-sh588000-2022-12-01-2024-12-31.body": "e2f7eb219a3ca999dc16efd7411c2b20d40f2f4e66dd6fa00c9fd20b1a98cf42",
+          "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/06-sh588000-2024-12-01-2026-06-30.body": "7cec676f93319ed2a7877f425adedb8548309ad68c774433d957ff229e8b8276",
+          "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+          "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+          "docs/experiments/raw/session-composition-information-2026-10-04/brief.json": "f66830d26f8db1a212c1484fd018fe58e2629cf1824e39386b1c6c550cd220c7",
+          "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94"
+        },
+        "versions": {
+          "mission": "1.1.0",
+          "question_method": "1.2.0",
+          "increment": "1.1.0",
+          "principles": "1.2",
+          "execution": "1.1.0",
+          "definition": "1.2.0",
+          "template": "1.2.1"
+        },
+        "definition_closure": {
+          "research.price.overnight_minus_intraday20@1.0.0": {
+            "scope": "同一国内宽基ETF过去20个间隔的价格变化构成；510300仅市场参照，不比较同指数ETF产品",
+            "not_for": [
+              "production_trade",
+              "automatic_buy_or_sell",
+              "LEI_original_rule",
+              "account_return_claim"
+            ],
+            "input": {
+              "fields": [
+                "date",
+                "open",
+                "high",
+                "low",
+                "close",
+                "calendar",
+                "action_known"
+              ],
+              "price_basis": "economic_price",
+              "currency": "CNY ETF economic price index",
+              "frequency": "daily",
+              "calendar": "four-source-ETF common trading calendar",
+              "sources": "source-qualified historical ETF OHLC"
+            },
+            "universe": {
+              "version": "same-etf-session-composition-20261004",
+              "eligibility": "Four source ETF scheduled, 510300 excluded as source-only anchor; all baseline fields and the sole candidate finite. No old risk-shape all-three-candidates filter.",
+              "warmup": "252 synchronized contiguous known OHLC rows for target and anchor",
+              "missing": "Missing/invalid/nonpositive own or anchor OHLC or unknown action resets synchronized 252 continuous warmup; no filling",
+              "quality_gate": "Reuse qualify_top_panel source-only V01 economic OHLC/action reconstruction",
+              "degrade": "Historical arrival and action-history completeness not independently certified; no sector or overseas extrapolation"
+            },
+            "time": {
+              "observation_time": "After complete t close",
+              "available_at": "Historical provider arrival not certified",
+              "decision_at": "After t close for research",
+              "execution_at": "No trade",
+              "timezone": "Asia/Shanghai",
+              "effective_from": "2026-10-04 research proposal"
+            },
+            "validation": {
+              "method": "Independent logarithmic product identity, boundary, scale, prefix, gap, no-label qualification and source action reconstruction; synthetic rehearsal and later exact real comparison.",
+              "tolerance": {
+                "absolute": 1e-10,
+                "relative": 1e-10,
+                "integer": 0
+              },
+              "tests": [
+                "tests/unit/test_session_composition_information.py"
+              ],
+              "limitations": "Seen retrospective history; announcement arrival/action completeness unknown; no independent evidence or real open execution"
+            },
+            "status": {
+              "definition_clarity": "fixed_research_proxy",
+              "data_qualification": "limited_frozen_sources",
+              "implementation": "verified_research_only",
+              "effectiveness": "not_proven",
+              "production": "not_authorized"
+            },
+            "sources": [
+              "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+              "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md",
+              "docs/experiments/raw/session-composition-information-2026-10-04/brief.json",
+              "src/lei_signal/research/session_composition_information.py",
+              "tests/unit/test_session_composition_information.py"
+            ],
+            "id": "research.price.overnight_minus_intraday20",
+            "version": "1.0.0",
+            "name": "20日隔夜与日内经济价格变化之差",
+            "type": "feature",
+            "profile": "mixed",
+            "uses": [
+              "research_signal",
+              "description",
+              "comparison",
+              "diagnostic"
+            ],
+            "spec_anchor": [
+              "用户2026-10-03方向制定及2026-10-04继续授权；候选为研究扩展，非原文交易公式",
+              "LEI技术体系§2.4风险背景观察；不替换原判断"
+            ],
+            "spec_layer": "technical_risk_observation_research_extension",
+            "definition": {
+              "formula": "100*sum[j=t-19..t](log(O[j]/C[j-1])-log(C[j]/O[j]))",
+              "parameters": {
+                "candidate": "overnight_minus_intraday20",
+                "lookback": 20,
+                "warmup": 252,
+                "anchor": "510300.SS",
+                "baseline_main": [
+                  "S",
+                  "E",
+                  "return1",
+                  "return20",
+                  "return60",
+                  "volatility5",
+                  "volatility20",
+                  "volatility60",
+                  "market_return20",
+                  "market_volatility20",
+                  "beta60",
+                  "relative_return20",
+                  "negative_fraction60",
+                  "downside_rms60",
+                  "return_autocorr1_60",
+                  "current_negative_run",
+                  "asset_510500",
+                  "asset_588000"
+                ],
+                "baseline_solo": [
+                  "asset_510500",
+                  "asset_588000"
+                ],
+                "comparison_modes": [
+                  "main",
+                  "solo"
+                ]
+              },
+              "endpoints": "21 contiguous close prices and last20 economic opens through t; future label is max(0,100*(1-min(C[t+1:t+21])/C[t+1]))",
+              "unit": "log_change_percentage_point",
+              "direction": "Positive means greater overnight than intraday change; risk relation estimated, no assumed trading direction",
+              "transforms": "Source economic OHLC: nominal*split multiplier plus effective cash, times previous economic/nominal-close scale. Both open and close include cash. Log partition is exact price-index identity, not actual trading gains. No normalization/tuning."
+            },
+            "dependencies": [],
+            "lifecycle": {
+              "state": "verified",
+              "basis": [
+                "tests/unit/test_session_composition_information.py",
+                "docs/experiments/raw/session-composition-information-2026-10-04/controller-formula-check.json"
+              ],
+              "verification_scope": "Independent product identity, mathematical cash/split/invalid cases, scale, causal prefix, no-label qualification, gap and snapshot boundaries; not proof of effectiveness."
+            },
+            "research_owner": "technical_agent",
+            "research_status": "IN_SCOPE",
+            "origin": "User-authorized same-ETF price composition, not a literal LEI rule"
+          }
+        },
+        "data_sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b"
+      },
+      "freeze": {
+        "preflight_digest": "3aa3c4fafabafb0ec066261872e8f18d1c9ce94be57f4bacbc47756080429b8f",
+        "observations_digest": "53f18f9fb067a9e9ee289f9a727d2c13c5244414216366f445106b2ec6d2efce"
+      },
+      "saved_files": [
+        {
+          "path": "docs/experiments/raw/session-composition-information-2026-10-04/accepted-main/contract.json",
+          "size": 63452,
+          "sha256": "392c69ce294059d480a0e013d5b579ad70ed3377e5c10252d0def4f0840707a9"
+        },
+        {
+          "path": "docs/experiments/raw/session-composition-information-2026-10-04/accepted-main/preflight.json",
+          "size": 5529207,
+          "sha256": "1e4df2bc3bce108126feaeaf020bf3a848139e8a892a3ad1725539cc8725c5c7"
+        },
+        {
+          "path": "docs/experiments/raw/session-composition-information-2026-10-04/accepted-main/receipt.json",
+          "size": 913,
+          "sha256": "d83209b9a5248af6fe505158bb89978756e19b03a784192746d509c2b5aa0587"
+        },
+        {
+          "path": "docs/experiments/raw/session-composition-information-2026-10-04/accepted-main/report.md",
+          "size": 111303,
+          "sha256": "c5a3d78146a85e720ede9aa701f8d1da2131b60a22b8b4628ae061a759730376"
+        },
+        {
+          "path": "docs/experiments/raw/session-composition-information-2026-10-04/accepted-main/result.json",
+          "size": 408773,
+          "sha256": "d42c232e7e0215994dad0f8927b42137fdad096d47284f67bea7652f6e8f9861"
+        },
+        {
+          "path": "docs/experiments/raw/session-composition-information-2026-10-04/accepted-main/state.json",
+          "size": 176,
+          "sha256": "e3d278e1b7a09646555de9808168cabafda291af35d36b3411287590fdaedcbe"
+        }
+      ]
+    }
+  ]
+}
