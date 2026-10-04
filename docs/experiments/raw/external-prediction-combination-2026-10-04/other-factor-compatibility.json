@@ -1,0 +1,84 @@
+{
+  "scope": "metadata/comparability only; no cross-task score recomputation or fitting",
+  "sources": [
+    {
+      "path": "docs/experiments/raw/volume-direction-information-2026-10-04/accepted-main",
+      "files": {
+        "contract.json": {
+          "size": 63038,
+          "sha256": "ea46b92efd8b831353d3962993cb551f7eaedb353bf81ba80258062aebddcc0b"
+        },
+        "result.json": {
+          "size": 411754,
+          "sha256": "8b2526ccac45844c1fcc442c918b3fd97de12bd19ced0db46f64bc73ad3c1785"
+        },
+        "receipt.json": {
+          "size": 913,
+          "sha256": "a9bf4ebd31cc792f7ed1fbf62c7e2265cba84b6b17368706f4169a73532cb507"
+        }
+      },
+      "rows": 951,
+      "target": {
+        "kind": "mae",
+        "start_offset": 1,
+        "end_offset": 21,
+        "entry_field": "close",
+        "path_field": "close",
+        "unit": "percentage_point",
+        "price_measure": "economic_price"
+      },
+      "assets": [
+        "510050.SS",
+        "510500.SS",
+        "588000.SS"
+      ],
+      "dates": 317
+    },
+    {
+      "path": "docs/experiments/raw/session-composition-information-2026-10-04/accepted-main",
+      "files": {
+        "contract.json": {
+          "size": 63452,
+          "sha256": "392c69ce294059d480a0e013d5b579ad70ed3377e5c10252d0def4f0840707a9"
+        },
+        "result.json": {
+          "size": 408773,
+          "sha256": "d42c232e7e0215994dad0f8927b42137fdad096d47284f67bea7652f6e8f9861"
+        },
+        "receipt.json": {
+          "size": 913,
+          "sha256": "d83209b9a5248af6fe505158bb89978756e19b03a784192746d509c2b5aa0587"
+        }
+      },
+      "rows": 951,
+      "target": {
+        "kind": "mae",
+        "start_offset": 1,
+        "end_offset": 21,
+        "entry_field": "close",
+        "path_field": "close",
+        "unit": "percentage_point",
+        "price_measure": "economic_price"
+      },
+      "assets": [
+        "510050.SS",
+        "510500.SS",
+        "588000.SS"
+      ],
+      "dates": 317
+    }
+  ],
+  "same_target": true,
+  "same_id_set": true,
+  "compared_identity_count": 951,
+  "mismatch_counts": {
+    "asset": 0,
+    "date": 0,
+    "fold": 0,
+    "label_end": 0,
+    "y": 0,
+    "B0": 951,
+    "B1": 951
+  },
+  "decision": "Different baseline predictions require an explicit common benchmark and contract; target is downside risk, not the forward-return target in the executed demonstration. No pooling or intersection-based scoring performed."
+}

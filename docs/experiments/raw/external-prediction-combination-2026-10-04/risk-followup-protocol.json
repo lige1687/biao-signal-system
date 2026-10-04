@@ -1,0 +1,25 @@
+{
+  "created_at": "2026-10-04T14:47:06.031689+08:00",
+  "mode": "read_only_archived_followup",
+  "new_question": "Can mean of two other tasks compatible downside forecasts improve both original baselines?",
+  "reason": "User explicitly requests combining existing factors; compatibility read found all 951 identities and targets equal, but baseline predictions differ",
+  "sources": [
+    "docs/experiments/raw/volume-direction-information-2026-10-04/accepted-main",
+    "docs/experiments/raw/session-composition-information-2026-10-04/accepted-main"
+  ],
+  "method": "one fixed arithmetic mean of the two B2 predictions; no fitted weight or search",
+  "comparators": [
+    "volume.B0",
+    "volume.B1",
+    "volume.B2",
+    "session.B0",
+    "session.B1",
+    "session.B2"
+  ],
+  "qualification": "read_archived_run receipts/journal; exact id/asset/date/fold/label_end/y; three assets on every saved date; original equal_asset weighting; original shared target and splits",
+  "not_required": "B0/B1 values equal: deliberate different baselines retained as separate comparators, no named common B0 claim",
+  "coverage": "all original predictions, no intersection or target pooling; periods/assets/leave-one-asset-out",
+  "scope": "already seen historical arithmetic; not source requalification, new evidence or fund return",
+  "budget": "followup 3 of max3; 0 new fits/model/network; core and followups remain counted",
+  "comparison_selection": "both original reference families shown; no cherry-picked baseline"
+}

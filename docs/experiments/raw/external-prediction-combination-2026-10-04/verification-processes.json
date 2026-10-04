@@ -1,0 +1,40 @@
+[
+  {
+    "command": [
+      "python3",
+      "-S",
+      "<PROJECT_ROOT>/docs/experiments/raw/external-prediction-combination-2026-10-04/verify_saved.py",
+      "--summary",
+      "<PROJECT_ROOT>/docs/experiments/raw/external-prediction-combination-2026-10-04/core/summary.json",
+      "--root",
+      "<PROJECT_ROOT>"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"status\": \"passed\", \"numeric_checks\": 239, \"max_abs_difference\": 2.842170943040401e-14, \"original_predictions_checked\": true, \"scope\": \"arithmetic and saved identities, not market source requalification\"}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "-S",
+      "<PROJECT_ROOT>/.biao/external-combination-20261004/restore-35ufggqp/verify_saved.py",
+      "--summary",
+      "<PROJECT_ROOT>/.biao/external-combination-20261004/restore-35ufggqp/summary.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"status\": \"passed\", \"numeric_checks\": 162, \"max_abs_difference\": 1.4210854715202004e-14, \"original_predictions_checked\": false, \"scope\": \"arithmetic and saved identities, not market source requalification\"}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "-S",
+      "<PROJECT_ROOT>/.biao/external-combination-20261004/restore-35ufggqp/verify_saved.py",
+      "--summary",
+      "<PROJECT_ROOT>/.biao/external-combination-20261004/restore-35ufggqp/bad.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"<PROJECT_ROOT>/.biao/external-combination-20261004/restore-35ufggqp/verify_saved.py\", line 75, in <module>\n    main()\n  File \"<PROJECT_ROOT>/.biao/external-combination-20261004/restore-35ufggqp/verify_saved.py\", line 27, in main\n    close(math.sqrt(mse), record['rmse'][model])\n  File \"<PROJECT_ROOT>/.biao/external-combination-20261004/restore-35ufggqp/verify_saved.py\", line 21, in close\n    assert delta < 1e-10, (a, b, delta)\n           ^^^^^^^^^^^^^\nAssertionError: (8.515888266747487, 9.515888266747487, 1.0)\n"
+  }
+]

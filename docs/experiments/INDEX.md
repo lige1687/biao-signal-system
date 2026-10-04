@@ -610,3 +610,6 @@
 - [STUMPY多日形态候选发现](stumpy-shape-mining-2026-10-03.md)：工具限定通过，金融增量未测量。
 
 - [FactorMiner经验到下一行动](factorminer-experience-actions-2026-10-04.md)：有限入口已核，AI候选质量未测量。
+
+- [AI发现路线与Skill初筛](external-ai-discovery-screening-2026-10-04.md)：候选来源，未安装/未验效果。
+- [已有预测组合诊断](external-prediction-combination-2026-10-04.md)：两组固定平均未胜强对手，0重训。

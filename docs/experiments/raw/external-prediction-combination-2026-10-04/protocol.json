@@ -1,0 +1,61 @@
+{
+  "mode": "archived_prediction_diagnostic",
+  "question": "Do fixed mean predictions improve already-seen matched archived errors, and are candidate errors complementary?",
+  "authorization": "用户要求试用网上最佳实践，并探索已有因子信息的组合流程",
+  "not_claimed": [
+    "new factor validity",
+    "unseen validation",
+    "fund returns",
+    "all system factors are useful"
+  ],
+  "read_only_runs": [
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-joint",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-amplitude",
+    "docs/experiments/raw/tsfresh-factor-validation-2026-10-02/run-serial"
+  ],
+  "target": {
+    "kind": "forward_return",
+    "start_offset": 1,
+    "end_offset": 21,
+    "unit": "percentage_point"
+  },
+  "windows": [
+    [
+      "2025-01-02",
+      "2025-12-02"
+    ],
+    [
+      "2026-01-05",
+      "2026-05-29"
+    ]
+  ],
+  "window_reason": "all saved mature prediction rows within each original fold; no outcome-based selection; metadata inspected before this protocol",
+  "methods": {
+    "equal3": "(joint.B2+amplitude.B2+serial.B2)/3",
+    "half_simple": "0.5*B0+0.5*equal3"
+  },
+  "baseline": [
+    "B0",
+    "B1",
+    "joint.B2",
+    "amplitude.B2",
+    "serial.B2"
+  ],
+  "weighting": "all exact common rows; balanced four assets per day; report periods separately and combined; no intersection or fill",
+  "uncertainty": "descriptive archived arithmetic, not new significance claim; inspect each period/ETF/leave-one-ETF-out; no resampling or p-value",
+  "budget": {
+    "source_requests_max": 6,
+    "source_requests_used": 5,
+    "core_max": 1,
+    "followup_max": 3,
+    "new_market_fits": 0,
+    "external_model_calls": 0,
+    "paid": 0
+  },
+  "outputs": "summary, compatibility, proof, script, independent numerical verification; no original forecast rows uploaded",
+  "stop": "question answered; on archive/identity/calendar failure report inapplicable, do not bypass",
+  "strategy_sources": {
+    "LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  }
+}
