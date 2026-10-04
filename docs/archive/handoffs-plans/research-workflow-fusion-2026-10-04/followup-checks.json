@@ -1,0 +1,115 @@
+{
+  "checked_at": "2026-10-04T22:50:50.250710+08:00",
+  "mode": "report_only",
+  "scope": "D4/D5/D6 resend acceptance only; not four-line semantic audit",
+  "coordination_read": "dd60802fc8f34fed7eb674956bf31738542465fe",
+  "D4": {
+    "status": "accepted_negative_result",
+    "price_check": {
+      "numeric_checks": 239,
+      "original_predictions_checked": true,
+      "exit_code": 0
+    },
+    "risk_checks": 63,
+    "risk_rows": 951,
+    "strong_reference_rmse": {
+      "volume": 3.800205932316994,
+      "session": 3.8072164135777564
+    },
+    "price_rmse": {
+      "joint": 8.725658688241786,
+      "amplitude": 8.602305087859024,
+      "serial": 8.324057274998772,
+      "B0": 6.804367217320674,
+      "B1": 8.221931873588815,
+      "equal3": 8.515888266747487,
+      "half_simple": 7.467765598797708
+    },
+    "risk_rmse": {
+      "volume.B0": 3.923091539356795,
+      "volume.B1": 3.8283975952221225,
+      "volume.B2": 3.8189449272476175,
+      "session.B0": 3.93082532664014,
+      "session.B1": 3.8371134807852036,
+      "session.B2": 3.846413731166046,
+      "equal2": 3.8320171821803357
+    },
+    "increment": "fixed combinations did not beat stronger single or strong simple reference; no online return measured"
+  },
+  "D5": {
+    "gap_audit": "accepted",
+    "future_execution": "blocked",
+    "source_fingerprints_verified": 5,
+    "minimum_missing": [
+      {
+        "item": "合法持续来源及可用范围",
+        "owner": "用户或数据服务提供方",
+        "start_condition": "明确可用资产/字段/持续取得与存储权限；付费另授权"
+      },
+      {
+        "item": "真实接收时刻、历史接触清单及版本",
+        "owner": "数据提供方/保管者和当前研究负责人",
+        "start_condition": "逐次不可倒填的原始获取记录；核清此前谁已看过哪些结果；由此确定未见起点，不能猜日期"
+      },
+      {
+        "item": "新研究事前冻结及完整行情/行动/交易日历",
+        "owner": "本任务研究负责人与数据提供方",
+        "start_condition": "固定定义/池/用途/成熟规则，当前资料缺项补齐；首批结果成熟后才可评价"
+      }
+    ],
+    "not_started": [
+      "future collection",
+      "automation",
+      "dot-pro SMA20 restart",
+      "new paid data acquisition"
+    ]
+  },
+  "D6": {
+    "minimum_bytes_restoration": "accepted_same_machine_only",
+    "files": 16,
+    "bytes": 1004207,
+    "destination_and_original_hashes_match": true,
+    "execution_and_cross_machine": "not_validated; blocked by backup access and transfer authority",
+    "delivery": "source receipt local_only"
+  },
+  "sources": [
+    {
+      "path": "docs/experiments/raw/external-prediction-combination-2026-10-04/risk-summary.json",
+      "bytes": 11132,
+      "sha256": "251004aabf4545075e2a2f979a9e37f084543b2e1378beecba940e001664e839",
+      "commit": "955611c1e7633a00752a14148f9102e0ad3b8538"
+    },
+    {
+      "path": "docs/experiments/raw/external-prediction-combination-2026-10-04/arithmetic-details.json",
+      "bytes": 7862,
+      "sha256": "6ef002f8adba6a26cd6e2fa0cfb862c4e3088c990aee0dce73f26b160da18fd0",
+      "commit": "955611c1e7633a00752a14148f9102e0ad3b8538"
+    },
+    {
+      "path": "docs/experiments/raw/external-prediction-combination-2026-10-04/core/summary.json",
+      "bytes": 22744,
+      "sha256": "f86f973dd8d378574e39bf5e8684c9f2056c80c175517f13105cc3d660a48ff9",
+      "commit": "955611c1e7633a00752a14148f9102e0ad3b8538"
+    },
+    {
+      "path": "docs/ops/materials-readiness-classic-baseline-restoration-2026-10-04.json",
+      "bytes": 17804,
+      "sha256": "9c791bc84dde17006b9ba052e6910ac36f0a16de3f16b6d798142915d1cf7fb5",
+      "delivery": "local_only"
+    },
+    {
+      "commit": "a8227e62eead2745d90cf65b14875340015076d5",
+      "path": "docs/experiments/raw/color-event-universe-2026-10-04/future-readiness.json",
+      "bytes": 3907,
+      "sha256": "c93e62ce033fa387a9c2cebc6d36e8c4a2879c7c8314b31ba67d6690bfdce686"
+    }
+  ],
+  "budget": {
+    "saved_result_review_batches": 1,
+    "new_fits": 0,
+    "market_requests": 0,
+    "paid_operations": 0,
+    "messages": 0
+  },
+  "not_reviewed": "ongoing new four-line semantic review owned by source thread 01a1074e-3d9d-70a2-a771-b079443ace18"
+}
