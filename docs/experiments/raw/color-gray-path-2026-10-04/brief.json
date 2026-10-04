@@ -1,0 +1,73 @@
+{
+  "mode": "research",
+  "created_at": "2026-10-04T23:33:54.030504+08:00",
+  "goal": "检验多头排列下当前灰色的此前明确方向，能否超出当前价格距离、波动和灰色日龄帮助未来收益/风险判断；先全面盘点状态与路径，不把黑绿研究缩成相邻黑转绿。",
+  "authorization": "用户经01a1074e主控明确授权深化双均线/黑绿灰状态与路径，有条件试用LightGBM；原权限不含账户生产或改原文",
+  "candidate_before_outcomes": "bull_current_gray_last_definite_black_vs_green",
+  "primary": "forward_return20",
+  "counter_target": "close_mae20",
+  "scope": "4已见宽基ETF，不扩大到不合格股票；本题信息预测非见黑等绿完整交易",
+  "known_semantic_gaps": [
+    "原文未唯一规定等待期重复黑重置、排列失效重启、最大等待；不得由灰不动作推为灰退出",
+    "研究中的连续颜色段不是独立市场行情段",
+    "灰色两个分歧方向/相等细分只作研究表达",
+    "原文完整日周同时变色未由上一周状态代理证明"
+  ],
+  "baseline_proposal": [
+    "ret20",
+    "ret60",
+    "vol20",
+    "distance_to_ema20",
+    "gray_age",
+    "gray_subtype",
+    "group_gap",
+    "ETF_identity"
+  ],
+  "candidate": "gray_origin_black one binary; unknown origin remains excluded with reason; all currentlygray observations regardless future resolution",
+  "methods": [
+    "fixed_ridge_lambda1",
+    "fixed_LightGBM4.6.0_shallow_40trees_depth2_leaves4"
+  ],
+  "planned_real_fits": 16,
+  "fit_accounting": "2 targets ×2methods ×2historicalfolds ×2comparators; only after support; actual attempts/failures recorded; old16color-event and prior40regime unaffected",
+  "simple_comparators": [
+    "overall training mean",
+    "perETF matured mean",
+    "ETF×origin training mean with explicit fallback"
+  ],
+  "uncertainty": "same dates/assets full evaluation calendar; synchronous20/60day blocks1000 seed20261004; period/asset/drop-one diagnostics on saved predictions",
+  "auxiliary": "3x3counts,states,grayorigins,pathclosures/censoring; fixed20interval summaries only; no newhorizon search",
+  "source_reads": [
+    {
+      "url": "https://lightgbm.readthedocs.io/en/v4.6.0/Parameters.html",
+      "purpose": "fixed parameters official docs"
+    },
+    {
+      "url": "https://pypi.org/project/lightgbm/4.6.0/",
+      "purpose": "pinned package"
+    },
+    {
+      "url": "https://lightgbm.readthedocs.io/en/v4.6.0/Installation-Guide.html",
+      "purpose": "OpenMP missing dependency diagnosis; one open and one find"
+    }
+  ],
+  "environment_failures": [
+    "initial .venv glob missing; no environment preexisting",
+    "LightGBM installed repo-local successfully but firstimport failed missinglibomp; then read-only process library path existingtorchlibomp allowed import; no globalinstall"
+  ],
+  "environment": {
+    "python": "3.11.7 (main, Dec  4 2023, 18:10:11) [Clang 15.0.0 (clang-1500.1.0.2.5)]",
+    "venv": "docs/experiments/raw/color-gray-path-2026-10-04/.venv.local",
+    "openmp_path": "/opt/homebrew/lib/python3.11/site-packages/torch/lib/libomp.dylib",
+    "openmp_sha256": "def839a00fd8cab0ee576014fe177423889d003b637f236f9854d05962b53dd0"
+  },
+  "actual_real_fits": 0,
+  "market_data_requests": 0,
+  "paid_requests": 0,
+  "hypothesis_search": "none; post-seen historical exploratory",
+  "stop": "complete bounded currenthistory inference or qualify inadequacy; ambiguous completeactions blocked only there; no winner search",
+  "source_sha256": {
+    "LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  }
+}

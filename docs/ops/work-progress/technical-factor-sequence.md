@@ -1,3 +1,23 @@
+# 2026-10-05：黑绿灰连续/灰来源有界研究完成，扩展用途仍有缺口
+
+目标：原文技术语义→可量化因子→同日排名与相对已有信息的帮助。负责人technical-factor-sequence，原thread01a0e703-4c27-74e2-bf77-997e1879f967，Air本机；原任务继续负责，不是接管。
+
+已完成：四ETF两个问题各16真实拟合，累计本轮32（旧16/40等不重置），固定线性与浅树、两目标两评价期、同日原值与预测排名/并列、时期/ETF/去一ETF、20/60连续日期不确定性、资产自身五/三类环境及组间差额。8发布复验只复用预测，0新增真实拟合。结论：连续表达稳定增量证据不足；灰来源线性收益局部改善但仍输简单每ETF均值，树收益完全无新增帮助。别把“黑不必跌”误解为否定黑色所有用途。
+
+入口docs/experiments/color-gray-continuous-ranking-2026-10-05.md；完整证据raw/color-gray-path-2026-10-04/{analysis.json,paired-diagnostics.json,ranking-independent-check.json,independent-verification.json,controller-review.json,manifest.json}。新增正式src/color_history、color_continuous、bull_gray、lightgbm及必要workflow模块，具体路径见manifest。源码与本轮定义冻结指纹保留；核心新源语义不修改原桌面两文档。
+
+验证：本题10检查通过；通用35通过/3旧夹具缺失失败如实保留；5560保存标签与原模型预测重放、6340名次独立核数；本工作树用当前归置器只读核过。原metadata中B0简称纠正至accepted合同，结果未变；常数日对手按共同日期核数。磁盘写失败在正式运行前，随后空间恢复约4GiB，未删除文件或重装环境。
+
+当前正在做：仅阶段证据远端同步与读回；没有后台市场计算或活跃助手。代码仍本task/technical-factor-sequence-progress工作树，发布codex/technical-factor-sequence-progress-20261004，基础/此前已推72f9e52c5a5f3dfa8c0e95442294994d7ce07290；本记录所属准确提交用git log定位，未同步前均仅本地。
+
+下一步及范围：已读量价线10月5日新manifest e16ca16d...，独立核13来源，八ETF输入可作有限扩展，尚未纳入本次四ETF冻结；扩展须另立固定合同，不能重跑本轮改变池。个股Top20/30受439候选成员未正式核准及1944缺价成员日等阻塞；代表指数环境输入未交，实际扣费组合缺可成交与成本限制证据。整体任务保留责任；本次仅四ETF问题结案，未称市场/个股/交易全完成。
+
+其他AI避开：本次新技术模块与四ETF两个问题的已封存32拟合；量价继续资料资格、external只读方法、情绪独立研究。不要圈全部技术或八ETF为排他锁；新范围前先读coordination。无付费/生产/真实账户/原文变更授权；行情、模型权重和完整preflight仅本地，不上Git，准确指纹列manifest。未来恢复先核原commit和输入，再查看新资料是否已补齐，不从零安装/重跑旧实验。
+
+更新时间：2026-10-05T01:02:22.879168+08:00 Asia/Shanghai。
+
+---
+
 # P2返修已补证，待外部验收
 
 详见raw/color-event-universe-2026-10-04/process-review.md §6四类覆盖表：每日20黑色有旧六ETF10日风险微弱增量线索；日20转黑事件本身增量、多头前提转黑增量尚未由本轮证据回答；事件后周色增量已完成且未支持。四题均列准确规则/对象、实际合同/报告，缺合同明确写未定位，不伪造ID。旧10日题只读复用，不重跑。

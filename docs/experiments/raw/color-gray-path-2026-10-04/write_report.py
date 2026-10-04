@@ -1,0 +1,61 @@
+from pathlib import Path
+import json
+HERE=Path(__file__).resolve().parent;ROOT=HERE.parents[3];a=json.loads((HERE/'analysis.json').read_text());b=json.loads((HERE/'ranking-independent-check.json').read_text());lines=[]
+def add(x=''):lines.append(x)
+add('# 黑绿灰连续表达、同日选优与固定模型比较｜2026-10-05')
+add('\n## 一句话结论（大白话）\n')
+add('黑色不需要意味着必跌。本轮检验的是：原策略颜色及其连续表达，能否比事先固定的简单方法更有帮助。四只宽基ETF中，均线距离较大的组在2025年至2026上半年随后20个交易间隔平均多涨0.70个百分点，但简单的过去20日涨幅排序多涨0.85个百分点；较早历史两者方向相反。绿色占比、变色频率的优势也随时期翻转。加入这些表达后，模型预测只有小幅变化，未稳定胜过每只ETF自己的历史平均；树模型没有证明优于简单线性方法。**连续表达的稳定增量结论：证据不足。**')
+add('\n多头排列且当前灰色时，“此前来自黑色还是绿色”让固定线性方法的收益误差略降，但加入后的误差仍高于简单每ETF均值，树模型的收益预测完全不变。保留这条局部线索，不升级成稳定有效，更不改原买卖规则。')
+add('\n这是已见历史的探索。已完成四ETF的信息比较及资产自身趋势分组；合格大盘指数背景、历史个股Top20/30、可成交扣费组合尚未完成，不能用下列表格替代。没有真实账户或线上收益测量。')
+add('\n## 1. 定义与原文边界\n')
+add('|对象|计算与金融含义|边界|\n|---|---|---|')
+for row in [('绿色占比','过去20个连续合格日中严格绿色天数/20；表示短期方向一致的持续程度','不是旧EMA上行占比，后者作为基准输入'),('变色频率','20个颜色之间19对相邻变化次数/19；描述方向来回切换','黑绿灰均保留，不预设变动越少越好'),('有符号EMA20距离','100×(收盘/EMA20−1)；表示价格相对短期平滑趋势的位置','复用旧背景字段公式，不包装为新原始信息'),('同日排名','同一天四只合格ETF的平均并列名次，换算0至1','只是表达；并列不按代码拆开，常数日没有区分力'),('多头灰来源','短期均线组全部高于60组且当前灰色，进入当前灰段前最后明确色：黑1、绿0','此前颜色可能形成于非多头排列；未知不填灰；未结束过程不删除')]:add('|'+ '|'.join(row)+'|')
+add('\n严格绿色=C>EMA20且C>C[t−20]；严格黑色两个条件都小于；其余灰。原文灰不动作保持。完整“见黑等绿”的反复黑重置、排列失效、等待到期没有唯一操作规则，本研究没有擅自补成交易系统。252日预热后颜色历史重新计数，连续占比另需20个合格颜色日；这是保守研究口径。')
+add('\n原文技术体系§2.7、技术实现§3.2及环境§4.4；实际SHA分别为`df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20`、`85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903`，未改原文。准确新对象见definitions.v1.json的green_share20、color_switch_frequency20、signed_ema20_distance、same_day_average_rank、color_continuous20_bundle、bull_gray_origin20，均1.0.0；旧EMA控制沿ema_direction_persistence20@1.0.0。卡中not_evaluated是建卡时状态，本报告与登记为本次证据，不能据卡字样否认已执行。')
+add('\n## 2. 样本、时间与机会数量\n')
+add('固定510300、510050、510500、588000。训练用此前已成熟的2022年起记录，分别评价2025年和2026上半年；结果从信号后第1个交易日收盘至第21个交易日收盘，共20间隔。训练结果须早于评价开始，评价结果须在该期结束前完成。连续表达共同评价1,268条、317日期（222＋95）；灰来源122条、80日期（75＋47条）。同日ETF共同变化且未来窗口重叠，这些不是同等数量独立交易机会。')
+add('\n冻结前无结果资格见core/与continuous/各qualification.json；全部3×3转移、灰来源/相等细分与完整/未结束路径计数见feature-executor/inventory.json。旧转色与周色实验没有重跑。来源经济价格重建可核，供应商历史到达及行动完整性仍未知，仅有限回顾研究，不升级资料资格。')
+add('\n## 3. 同日排序表现\n')
+add('每天高于中间名次为高组、低于为低组，等于留中间组；同值日期保留但不强行选赢家。下面池平均只用两组都存在的同一批日期。收益是后来20间隔的平均价格变化，不是组合净收益。途中亏损指从第1日收盘至期间最低收盘的跌幅，数值越大风险越高。\n')
+add('|排序表达|有效日期|同日期池平均收益|高组收益|低组收益|高−低（百分点）|高/低组途中亏损|60日成段重抽的差额范围|\n|---|---:|---:|---:|---:|---:|---:|---|')
+names={'green_share20':'绿色占比','switch_frequency20':'变色频率','distance_to_ema20':'有符号EMA20距离','ret20':'简单过去20日涨幅','ema20_up_share20':'旧EMA上行占比'}
+for k,n in names.items():
+ v=b['matched_dates'][k];z=a['ranking'][k];c=z['gap60'];s=z['overall'];add(f"|{n}|{v['valid_dates']}|{v['pool_return_on_valid_dates']:.3f}%|{v['high_return']:.3f}%|{v['low_return']:.3f}%|{v['high_minus_low']:+.3f}|{s['high_mae']:.3f}% / {s['low_mae']:.3f}%|[{c['lo']:+.3f}, {c['hi']:+.3f}]|")
+add('\n将连续60个交易日一起重抽，保留同日资产和相邻观察的共同变化，用来判断结果是否可能只是少数行情造成；表中区间都包含无优势。另有20日版本见analysis.json。没有调整多个候选检验后的错误发现率，也没有足够重复周期，因此不授予正式有效标签。绿色占比11日、变色频率7日、旧EMA占比7日为同值无法分组；每日组大小另存逐日CSV。')
+add('\n|高组−低组收益差（百分点）|较早2022—2024成熟期|2025|2026上半年|\n|---|---:|---:|---:|')
+for k,n in names.items():v=a['ranking'][k]['by_period'];add(f"|{n}|{b['early_period'][k]['high_minus_low_pp']:+.3f}|{v['2025']['high_minus_low']:+.3f}|{v['2026']['high_minus_low']:+.3f}|")
+add('\n反例很明确：变色频率从2025年高组领先1.07个百分点，转为2026上半年落后2.23个百分点；均线距离在较早历史为−0.80个百分点。不能把“离均线越远越好”或“越近越好”写成结论。所有方向按原数值事前固定，未看评价结果反转。')
+add('\n## 4. 相对已有信息的增量\n')
+add('预测误差用“预测与实际相差的典型幅度”（RMSE，单位百分点），越低越好。A/B为固定线性方法加入前/后，C/D为同数据浅树加入前/后；每只ETF训练与评价总权重相同。线性惩罚1；LightGBM4.6.0、40轮、深度2、4叶，固定其他设置，不调参、没有评价期提前停止。树训练权重按平均每行1重标，保留相同相对权重，惩罚不能跨方法作同一数值解释。\n')
+add('|研究/目标|每ETF自身成熟均值|A 线性已有信息|B 线性加候选|C 树已有信息|D 树加候选|评价条数|\n|---|---:|---:|---:|---:|---:|---:|')
+for k,n in [('continuous/forward_return','连续表达/收益'),('continuous/mae','连续表达/途中亏损'),('core/forward_return','灰来源/收益'),('core/mae','灰来源/途中亏损')]:
+ v=a['four_cells'][k]['performance'];m=v['rmse'];add(f"|{n}|{m['ETF_mean']:.4f}|{m['A']:.4f}|{m['B']:.4f}|{m['C']:.4f}|{m['D']:.4f}|{v['n']}|")
+add('\n连续表达的已有背景为20/60当前颜色、过去20/60日涨跌、波动、多头排列、旧EMA上行占比及ETF身份；候选合加绿色比例、变色频率、EMA距离。灰来源另控制EMA距离、灰持续日龄、灰几何/相等、组间距离等。两问题样本不同，不能横向把4.10比6.96当方法优劣。')
+add('\n|增量比较|平方误差改善|60日成段参考范围|判断|\n|---|---:|---|---|')
+for group,label in [('continuous','连续表达'),('core','灰来源')]:
+ for target,tlabel in [('forward_return','收益'),('mae','途中亏损')]:
+  for method,mlabel in [('ridge','线性'),('lightgbm','树')]:
+   v=next(x for x in a['models'][group+'/'+method+'-'+target]['increment60'] if x['old_model']=='B1');add(f"|{label}/{tlabel}/{mlabel}|{v['absolute_error_improvement']:+.4f}|[{v['lo']:+.4f}, {v['hi']:+.4f}]|{'固定方法局部线索，仍输简单均值' if group=='core' and target=='forward_return' and method=='ridge' else '未证明稳定额外帮助'}|")
+add('\n正数代表预测错误减少，不是收益增加。灰来源在线性收益中两期略好、参考区间为正，但加入后误差4.4341仍高于每ETF均值4.3261及“ETF×灰来源历史均值”4.2037。树收益前后完全一样，因此不能把这一结果称为各方法稳定的新信息。树风险小改善主要在后一期，参考区间含恶化。连续表达整体各模型仍未稳定超过简单均值。')
+add('\n模型预测也实际做了同日排序，不只评价误差：\n')
+add('|收益预测排序|高预测组−低预测组收益差（百分点）|可分组日期|\n|---|---:|---:|')
+for method,label in [('ridge','线性'),('lightgbm','浅树')]:
+ for m,suffix in [('B1','已有背景'),('B2','加入候选')]:v=b['model_ranking'][method+'-forward_return-'+m];add(f"|{label}/{suffix}|{v['high_minus_low_target_pp']:+.3f}|{v['usable_dates']}|")
+add('\n树两种模型有不同常数日，方法差额需使用共同日期；不能直接把这张各自覆盖表的均值相减当配对增量。完整预测/日期保存，核心误差四格是完全同样本。风险预测排序另存：高预测风险对应较大实际下探有区分，但加入候选没有稳定增强；这不是高分买入建议。')
+add('\n## 5. 环境适用性：已测的是资产自身，不是大盘\n')
+add('复用clock_classifier@2.0.0及实际rules.v2，1/2合上涨、3横向、4/5下跌，0未知。分类是有待确认标定的研究近似，横向不等于完整箱体；不改生产阈值、不硬过滤日期。按观察日价格分类，不看以后属于什么行情。\n')
+add('|资产自身趋势|条数/日期/资产|连续资产趋势段|连续表达收益误差：线性前→后|树前→后|\n|---|---|---:|---|---|')
+for env,label in [('up','上涨'),('sideways','横向'),('down','下跌')]:
+ v=a['models']['continuous/ridge-forward_return']['own_asset_environment'][env];t=a['models']['continuous/lightgbm-forward_return']['own_asset_environment'][env];add(f"|{label}|{v['n']}/{v['dates']}/{v['assets']}|{v['asset_regime_segments']}|{v['rmse']['B1']:.4f}→{v['rmse']['B2']:.4f}|{t['rmse']['B1']:.4f}→{t['rmse']['B2']:.4f}|")
+add('\n上涨/横向中线性误差分别少0.0801/0.0261个百分点，下跌反而多0.0699；下跌只有2资产、3连续段，不能宣称已经检验多个独立熊市。五类、风险、灰来源、各ETF/去一ETF及两期全表见analysis.json，unknown保持单列（本评价集合0行）。资产趋势与颜色共享价格来源，分组差异不是独立外生原因。合格代表指数输入尚待资料资格，市场整体环境差异未完成；不把510300 ETF当沪深300指数。')
+add('\n## 6. 未完成范围及恢复条件\n')
+add('|覆盖项|真实状态|缺口/恢复条件|\n|---|---|---|\n|定义、来源、前缀、缺口、成熟及共同样本|本轮已执行|原始到达与行动完整性仍是来源限制|\n|四ETF同日原始排名、固定分组、四模型预测及预测排名|本轮已执行|仅小池已见历史，非个股Top20/30|\n|灰来源预测、全三色路径盘点|本轮已执行|完整等待重置交易含义未补写|\n|总体/逐期/逐资产、日期成段不确定性|本轮已执行|少周期与多次探索风险保留|\n|资产自身环境五类/三类|已执行|连续段不等于独立市场周期|\n|大盘指数环境|受资料资格阻塞|需对应指数已核日线/版本/时点，量价线资料交接后固定使用，不额外训练|\n|历史个股Top20/30|受资料资格阻塞|历史沪深300生效成员及行情/行动/停牌退市等；今天名单不回填，量价线负责|\n|20日调仓扣费组合|未执行、资料阻塞|5348行情行无一带open_actionable=True；费用/成交/限制资料未绑定完整合同，不用经济价格指数冒充可成交金额|\n|真正后续未知资料与线上收益|未测量|另冻结新资料，旧历史不得重命名为未知验证|')
+add('\n## 7. 复现、失败与预算\n')
+add('产物目录 `docs/experiments/raw/color-gray-path-2026-10-04/`。两个问题各四分支，`freeze-final/contract.json`→`core-01/`为首次正式结果；`accepted-freeze/`→`accepted-01/`只复用预测登记，新增真实拟合0。共32次真实拟合，原16周背景及更早预算不重置。失败包括建草案重复参数、缺定义来源登记、字符串语法、磁盘写入失败；均在真实拟合之前，无失败市场拟合。完整命令/退出码见freeze-final-ledger、core-01-ledger、publication-ledger。')
+add('\n`analysis.json`保存误差/分组/不确定性；`same-day-ranking-daily.csv`与rows.csv保存每日原值/名次/组数量，`model-ranking-*.csv`保存模型分组；`independent-verification.json`独立核算5560个保存结果标签及原模型重放；`ranking-independent-check.json`手工平均并列公式核验6340个名次并补共同日期简单对手。`history-independent-check.json`为独立原式/路径核验。没有重新拟合来验算。')
+add('\n主汇总与原机器表口径说明：原draft有“成熟每ETF均值”的简称，流程B0实际是各ETF等总权重的整体成熟均值，不是每只分别预测；本报告ETF_mean已另用每只成熟训练记录计算，accepted合同修正名称。原冻结不改。原analysis.json的pool_return为317日全池均值；遇常数日时必须用ranking-independent-check.json的pool_return_on_valid_dates配对，本报告已采用，不能混分母。')
+add('\n本机复现环境：已有Python3.11，本题仓内.venv.local固定LightGBM4.6.0；OpenMP使用已有torch/lib只读过程路径，不是全局安装。完整运行例：`DYLD_LIBRARY_PATH=/opt/homebrew/lib/python3.11/site-packages/torch/lib PYTHONPATH=src <本题.venv.local/bin/python> <本题/analyze_saved.py>`只重聚合，不拟合。跨机应按manifest取同版本运行库核SHA，未验证其他系统；原始行情/行动/PDF及完整preflight只本地，不上传大包或受限来源。')
+add('\n模型官方资料：[固定参数](https://lightgbm.readthedocs.io/en/v4.6.0/Parameters.html)、[4.6.0包](https://pypi.org/project/lightgbm/4.6.0/)、[安装依赖](https://lightgbm.readthedocs.io/en/v4.6.0/Installation-Guide.html)。资料支持实现选择，不证明本市场有效。')
+add('\n## ARCHIVE / 最小决策卡\n')
+add('- 结论：连续表达稳定增量证据不足；灰来源仅固定线性收益有局部信息线索，未胜强简单参照，不升级生产。\n- 已完成边界：四ETF两阶段32拟合、无需新增拟合的排名与诊断及资产自身分组。市场环境/个股/可成交组合不能写完成。\n- 不重跑：本轮32和旧周色16；不增加窗口、树数或翻转分数找赢家。只有新资料、已确认定义变化或可定位实现错误才重开相应部分。\n- 最有价值接续：消费量价线历史池/指数资格清单，先核指纹与许可；合格指数只对保存结果分组，个股另冻结真实池合同，不沿用四ETF效果。\n- 真实资金增量：未测量。权限：研究/原独立分支同步，未获交易、部署或原文变更许可。')
+(ROOT/'docs/experiments/color-gray-continuous-ranking-2026-10-05.md').write_text('\n'.join(lines)+'\n')

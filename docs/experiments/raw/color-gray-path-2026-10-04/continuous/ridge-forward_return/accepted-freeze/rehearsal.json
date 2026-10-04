@@ -1,0 +1,73 @@
+{
+  "schema_version": "workflow-rehearsal/1.0",
+  "data_mode": "synthetic",
+  "input_sha256": "db6b583e114054333a978dccc3b4698dbe368a0f8500e3c24535e17547e5dc63",
+  "definition_and_method": "a99f7d828fe3028cd7866e7607e059903b31bc52a16272a4b4ac5464a238c85c",
+  "coverage": {
+    "scheduled": 2400,
+    "eligible": 1818,
+    "reasons": {
+      "continuous20_unknown": 540,
+      "feature_ready": 1860
+    }
+  },
+  "performance": [
+    {
+      "model": "B0",
+      "metric": "MSE",
+      "value": 9.474641739787643,
+      "unit": "percentage_point_squared",
+      "rows": 656,
+      "dates": 328,
+      "assets": 2
+    },
+    {
+      "model": "B0",
+      "metric": "RMSE",
+      "value": 3.078090599671758,
+      "unit": "percentage_point",
+      "rows": 656,
+      "dates": 328,
+      "assets": 2
+    },
+    {
+      "model": "B1",
+      "metric": "MSE",
+      "value": 0.7627937647656697,
+      "unit": "percentage_point_squared",
+      "rows": 656,
+      "dates": 328,
+      "assets": 2
+    },
+    {
+      "model": "B1",
+      "metric": "RMSE",
+      "value": 0.8733806528459798,
+      "unit": "percentage_point",
+      "rows": 656,
+      "dates": 328,
+      "assets": 2
+    },
+    {
+      "model": "B2",
+      "metric": "MSE",
+      "value": 0.622351823047451,
+      "unit": "percentage_point_squared",
+      "rows": 656,
+      "dates": 328,
+      "assets": 2
+    },
+    {
+      "model": "B2",
+      "metric": "RMSE",
+      "value": 0.7888927829860348,
+      "unit": "percentage_point",
+      "rows": 656,
+      "dates": 328,
+      "assets": 2
+    }
+  ],
+  "fits": 2,
+  "purpose": "engineering_error_check_only",
+  "selection_used": false
+}

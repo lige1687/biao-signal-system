@@ -742,6 +742,30 @@
     "tests/unit/test_weekly_color_information.py": {
       "path": "tests/unit/test_weekly_color_information.py",
       "sha256": "f6cf3a1fcbb444803d2cb2d3c8f6c02e440a6205ab4833c7e8fcd152503b100b"
+    },
+    "docs/experiments/raw/color-gray-path-2026-10-04/brief.json": {
+      "path": "docs/experiments/raw/color-gray-path-2026-10-04/brief.json",
+      "sha256": "e3c5dc403be4ac3ef07ec0e2591b6a7599013ad44ca8cd09badd8dd941074ac2"
+    },
+    "src/lei_signal/research/color_history_information.py": {
+      "path": "src/lei_signal/research/color_history_information.py",
+      "sha256": "be0fddcd3c31d53325ba507a1fc1b6a86613430e50188a89cfd2d4f5ff70e39a"
+    },
+    "src/lei_signal/research/bull_gray_origin_information.py": {
+      "path": "src/lei_signal/research/bull_gray_origin_information.py",
+      "sha256": "fcdbc1991045206dfc724dac934123fb0e718c825e8adf7287590af6a30b8fdc"
+    },
+    "docs/experiments/raw/color-gray-path-2026-10-04/ranking-plan-source.md": {
+      "path": "docs/experiments/raw/color-gray-path-2026-10-04/ranking-plan-source.md",
+      "sha256": "ac0b99b9a4758c2a144ba4482e0ccc2ffde97fd30b4995d06a9771f6b7871efd"
+    },
+    "src/lei_signal/research/color_continuous_information.py": {
+      "path": "src/lei_signal/research/color_continuous_information.py",
+      "sha256": "1e34fe8c07238efb4f63146bc898fc39f03c1c575f77d18a1b8c81b9fc67ecdc"
+    },
+    "src/lei_signal/research/color_continuous_workflow.py": {
+      "path": "src/lei_signal/research/color_continuous_workflow.py",
+      "sha256": "1bbb546cfb7844d51b6c42cd61c69343be47e0842f600263b8a05bedd28fff52"
     }
   },
   "objects": [
@@ -11708,6 +11732,666 @@
         "docs/experiments/raw/weekly-color-information-2026-10-04/brief.json",
         "src/lei_signal/research/weekly_color_information.py",
         "tests/unit/test_weekly_color_information.py",
+        "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
+      ],
+      "component_definition_refs": []
+    },
+    {
+      "id": "research.trend.bull_gray_origin20",
+      "version": "1.0.0",
+      "name": "多头排列当前灰色的先前明确方向",
+      "type": "state_signal",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description",
+        "comparison"
+      ],
+      "not_for": [
+        "production_trade",
+        "holding_entry_or_exit",
+        "actual_account_return_claim",
+        "complete_LEI_state",
+        "unique_author_calibration"
+      ],
+      "scope": "四国内宽基ETF回顾性日线；只比较当前多头灰色来源黑或绿",
+      "spec_anchor": [
+        "桌面技术体系§2.7颜色与多头排列"
+      ],
+      "spec_layer": "trend_road_information",
+      "definition": {
+        "formula": "min(SMA20,EMA20)>max(SMA60,EMA60)且当日严格灰；当前连续灰段进入时锁定此前最后已知非灰色，black=1 green=0 unknown排除。既往方向不要求当时已是多头排列。",
+        "parameters": {
+          "daily_warmup": 252,
+          "lookback": 20
+        },
+        "unit": "binary, not ordered quality",
+        "direction": "黑来源不预设必跌；估计相对基线的未来收益与风险帮助",
+        "transforms": "背景ret20/ret60/vol20、EMA20距离、灰日龄、组间距离、灰几何/相等与ETF身份；来源是历史表达，不按未来是否转绿选样",
+        "nan_policy": "缺报价分段重置；252日前未知，首次合格灰而没有明确前色时不补；灰日龄为合格可见历史内计数",
+        "endpoints": "t收盘已知；t+1..t+21收盘结果"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "calendar",
+          "action_known"
+        ],
+        "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+        "currency": "CNY ETF经济价格指数",
+        "frequency": "daily_quote",
+        "calendar": "完整交易日历，缺失重置历史",
+        "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+      },
+      "dependencies": [],
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "src/lei_signal/research/bull_gray_origin_information.py",
+          "src/lei_signal/research/color_history_information.py"
+        ],
+        "verification_scope": "定义、无未来时点与本轮冻结合同；不等于有效或交易规则"
+      },
+      "origin": "原颜色序列的历史表达，非完整见黑等待交易规则",
+      "universe": {
+        "version": "bull-gray-four-etf-20261004",
+        "eligibility": "252连续合格日、当前bull gray、此前方向已知，目标成熟",
+        "warmup": "252连续日，历史状态在合格起点计数",
+        "missing": "unknown不填gray，不根据未来是否结束筛选",
+        "quality_gate": "实际来源资格重新核全部名义OHLC与经济重建；到达及行动完整性未知",
+        "degrade": "只作有限四ETF回顾性信息，非完整ETF总体"
+      },
+      "time": {
+        "observation_time": "t完整日收盘后",
+        "available_at": "报价理论完成时间可核；历史供应商实际到达时间未认证",
+        "decision_at": "t收盘后研究",
+        "execution_at": "无交易",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-04 bull gray information"
+      },
+      "validation": {
+        "method": "无标签资格、前缀/缺口/相等测试；固定线性与浅树两折共同样本",
+        "tolerance": {
+          "absolute": 1e-09,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_color_history_information.py",
+          "tests/unit/test_lightgbm_information.py"
+        ],
+        "limitations": "四ETF已见历史，前色可能形成于非多头组；连续段非独立机会"
+      },
+      "status": {
+        "definition_clarity": "fixed_prefix_known_gray_origin",
+        "data_qualification": "limited_retrospective_economic_ohlc",
+        "implementation": "implemented_pending_formal_freeze",
+        "effectiveness": "not_evaluated",
+        "production": "not_authorized"
+      },
+      "research_owner": "technical_agent",
+      "research_status": "IN_SCOPE",
+      "local_alias": "bull-gray-origin20",
+      "sources": [
+        "docs/experiments/raw/color-gray-path-2026-10-04/brief.json",
+        "src/lei_signal/research/color_history_information.py",
+        "src/lei_signal/research/bull_gray_origin_information.py",
+        "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
+      ],
+      "component_definition_refs": []
+    },
+    {
+      "id": "research.trend.green_share20",
+      "version": "1.0.0",
+      "name": "20日严格绿色占比",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description",
+        "comparison"
+      ],
+      "not_for": [
+        "production_trade",
+        "holding_entry_or_exit",
+        "actual_account_return_claim",
+        "complete_LEI_state",
+        "unique_author_calibration"
+      ],
+      "scope": "四国内宽基ETF的已见日线连续表达与同日选优研究",
+      "spec_anchor": [
+        "桌面技术体系§2.7颜色与多头排列"
+      ],
+      "spec_layer": "trend_road_information",
+      "definition": {
+        "formula": "sum(color20[j]==green,j=t-19..t)/20；严格原判色，两条件同时大于；20个连续合格日，否则未知",
+        "parameters": {
+          "daily_warmup": 252,
+          "lookback": 20
+        },
+        "unit": "proportion 0..1",
+        "direction": "按原值从低到高描述；不预设越高越好，不依评价成绩翻转",
+        "transforms": "模型使用原始连续值；同日名次单列研究；旧EMA上行占比作控制，不能把绿色比例当同一对象",
+        "nan_policy": "颜色比例需20连续合格颜色日；252预热后另积满20色，缺失重置；unknown非gray",
+        "endpoints": "t完整收盘可知，目标t+1..t+21close"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "calendar",
+          "action_known"
+        ],
+        "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+        "currency": "CNY ETF经济价格指数",
+        "frequency": "daily_quote",
+        "calendar": "完整交易日历，缺失重置历史",
+        "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+      },
+      "dependencies": [],
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "src/lei_signal/research/color_continuous_information.py",
+          "src/lei_signal/research/color_continuous_workflow.py"
+        ],
+        "verification_scope": "定义、无未来时点与本轮冻结合同；不等于有效或交易规则"
+      },
+      "origin": "原颜色/价格的研究表达，用户批准研究，不添加策略动作",
+      "universe": {
+        "version": "color-continuous-four-etf-20261004",
+        "eligibility": "连续20合格颜色日；共同输入交集；不按未来结果选样",
+        "warmup": "252连续日后20个合格颜色日",
+        "missing": "缺报重置，不填色，排名并列不按代码拆分",
+        "quality_gate": "实际来源资格重新核全部名义OHLC与经济重建；到达及行动完整性未知",
+        "degrade": "只作有限四ETF回顾性信息，非完整ETF总体"
+      },
+      "time": {
+        "observation_time": "t完整日收盘后",
+        "available_at": "报价理论完成时间可核；历史供应商实际到达时间未认证",
+        "decision_at": "t收盘后研究",
+        "execution_at": "无交易",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-04 bull gray information"
+      },
+      "validation": {
+        "method": "合成缺口/并列/前缀，实际样本资格，固定线性与浅树共同样本",
+        "tolerance": {
+          "absolute": 1e-09,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_color_continuous_information.py"
+        ],
+        "limitations": "四ETF横向分辨率低；同日/重叠结果依赖，历史已见；独立未知期与净收益未测量"
+      },
+      "status": {
+        "definition_clarity": "fixed_prefix_known_gray_origin",
+        "data_qualification": "limited_retrospective_economic_ohlc",
+        "implementation": "implemented_pending_formal_freeze",
+        "effectiveness": "not_evaluated",
+        "production": "not_authorized"
+      },
+      "research_owner": "technical_agent",
+      "research_status": "IN_SCOPE",
+      "local_alias": "green_share20",
+      "sources": [
+        "docs/experiments/raw/color-gray-path-2026-10-04/ranking-plan-source.md",
+        "src/lei_signal/research/color_continuous_information.py",
+        "src/lei_signal/research/color_continuous_workflow.py",
+        "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
+      ],
+      "component_definition_refs": []
+    },
+    {
+      "id": "research.trend.color_switch_frequency20",
+      "version": "1.0.0",
+      "name": "20日颜色变动比例",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description",
+        "comparison"
+      ],
+      "not_for": [
+        "production_trade",
+        "holding_entry_or_exit",
+        "actual_account_return_claim",
+        "complete_LEI_state",
+        "unique_author_calibration"
+      ],
+      "scope": "四国内宽基ETF的已见日线连续表达与同日选优研究",
+      "spec_anchor": [
+        "桌面技术体系§2.7颜色与多头排列"
+      ],
+      "spec_layer": "trend_road_information",
+      "definition": {
+        "formula": "sum(color20[j]!=color20[j-1],j=t-18..t)/19；20日19相邻对，灰参与，缺失断开",
+        "parameters": {
+          "daily_warmup": 252,
+          "lookback": 20
+        },
+        "unit": "proportion 0..1",
+        "direction": "按原值从低到高描述；不预设越高越好，不依评价成绩翻转",
+        "transforms": "模型使用原始连续值；同日名次单列研究；旧EMA上行占比作控制，不能把绿色比例当同一对象",
+        "nan_policy": "颜色比例需20连续合格颜色日；252预热后另积满20色，缺失重置；unknown非gray",
+        "endpoints": "t完整收盘可知，目标t+1..t+21close"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "calendar",
+          "action_known"
+        ],
+        "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+        "currency": "CNY ETF经济价格指数",
+        "frequency": "daily_quote",
+        "calendar": "完整交易日历，缺失重置历史",
+        "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+      },
+      "dependencies": [],
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "src/lei_signal/research/color_continuous_information.py",
+          "src/lei_signal/research/color_continuous_workflow.py"
+        ],
+        "verification_scope": "定义、无未来时点与本轮冻结合同；不等于有效或交易规则"
+      },
+      "origin": "原颜色/价格的研究表达，用户批准研究，不添加策略动作",
+      "universe": {
+        "version": "color-continuous-four-etf-20261004",
+        "eligibility": "连续20合格颜色日；共同输入交集；不按未来结果选样",
+        "warmup": "252连续日后20个合格颜色日",
+        "missing": "缺报重置，不填色，排名并列不按代码拆分",
+        "quality_gate": "实际来源资格重新核全部名义OHLC与经济重建；到达及行动完整性未知",
+        "degrade": "只作有限四ETF回顾性信息，非完整ETF总体"
+      },
+      "time": {
+        "observation_time": "t完整日收盘后",
+        "available_at": "报价理论完成时间可核；历史供应商实际到达时间未认证",
+        "decision_at": "t收盘后研究",
+        "execution_at": "无交易",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-04 bull gray information"
+      },
+      "validation": {
+        "method": "合成缺口/并列/前缀，实际样本资格，固定线性与浅树共同样本",
+        "tolerance": {
+          "absolute": 1e-09,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_color_continuous_information.py"
+        ],
+        "limitations": "四ETF横向分辨率低；同日/重叠结果依赖，历史已见；独立未知期与净收益未测量"
+      },
+      "status": {
+        "definition_clarity": "fixed_prefix_known_gray_origin",
+        "data_qualification": "limited_retrospective_economic_ohlc",
+        "implementation": "implemented_pending_formal_freeze",
+        "effectiveness": "not_evaluated",
+        "production": "not_authorized"
+      },
+      "research_owner": "technical_agent",
+      "research_status": "IN_SCOPE",
+      "local_alias": "color_switch_frequency20",
+      "sources": [
+        "docs/experiments/raw/color-gray-path-2026-10-04/ranking-plan-source.md",
+        "src/lei_signal/research/color_continuous_information.py",
+        "src/lei_signal/research/color_continuous_workflow.py",
+        "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
+      ],
+      "component_definition_refs": []
+    },
+    {
+      "id": "research.trend.signed_ema20_distance",
+      "version": "1.0.0",
+      "name": "到EMA20的有符号距离",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description",
+        "comparison"
+      ],
+      "not_for": [
+        "production_trade",
+        "holding_entry_or_exit",
+        "actual_account_return_claim",
+        "complete_LEI_state",
+        "unique_author_calibration"
+      ],
+      "scope": "四国内宽基ETF的已见日线连续表达与同日选优研究",
+      "spec_anchor": [
+        "桌面技术体系§2.7颜色与多头排列"
+      ],
+      "spec_layer": "trend_road_information",
+      "definition": {
+        "formula": "100*(C[t]/EMA20[t]-1)，沿用旧trend_slope_change_information.ema20_distance计算；本卡是既有基准字段明确命名，非新信息来源",
+        "parameters": {
+          "daily_warmup": 252,
+          "lookback": 20
+        },
+        "unit": "percentage_point",
+        "direction": "按原值从低到高描述；不预设越高越好，不依评价成绩翻转",
+        "transforms": "模型使用原始连续值；同日名次单列研究；旧EMA上行占比作控制，不能把绿色比例当同一对象",
+        "nan_policy": "颜色比例需20连续合格颜色日；252预热后另积满20色，缺失重置；unknown非gray",
+        "endpoints": "t完整收盘可知，目标t+1..t+21close"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "calendar",
+          "action_known"
+        ],
+        "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+        "currency": "CNY ETF经济价格指数",
+        "frequency": "daily_quote",
+        "calendar": "完整交易日历，缺失重置历史",
+        "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+      },
+      "dependencies": [],
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "src/lei_signal/research/color_continuous_information.py",
+          "src/lei_signal/research/color_continuous_workflow.py"
+        ],
+        "verification_scope": "定义、无未来时点与本轮冻结合同；不等于有效或交易规则"
+      },
+      "origin": "原颜色/价格的研究表达，用户批准研究，不添加策略动作",
+      "universe": {
+        "version": "color-continuous-four-etf-20261004",
+        "eligibility": "连续20合格颜色日；共同输入交集；不按未来结果选样",
+        "warmup": "252连续日后20个合格颜色日",
+        "missing": "缺报重置，不填色，排名并列不按代码拆分",
+        "quality_gate": "实际来源资格重新核全部名义OHLC与经济重建；到达及行动完整性未知",
+        "degrade": "只作有限四ETF回顾性信息，非完整ETF总体"
+      },
+      "time": {
+        "observation_time": "t完整日收盘后",
+        "available_at": "报价理论完成时间可核；历史供应商实际到达时间未认证",
+        "decision_at": "t收盘后研究",
+        "execution_at": "无交易",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-04 bull gray information"
+      },
+      "validation": {
+        "method": "合成缺口/并列/前缀，实际样本资格，固定线性与浅树共同样本",
+        "tolerance": {
+          "absolute": 1e-09,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_color_continuous_information.py"
+        ],
+        "limitations": "四ETF横向分辨率低；同日/重叠结果依赖，历史已见；独立未知期与净收益未测量"
+      },
+      "status": {
+        "definition_clarity": "fixed_prefix_known_gray_origin",
+        "data_qualification": "limited_retrospective_economic_ohlc",
+        "implementation": "implemented_pending_formal_freeze",
+        "effectiveness": "not_evaluated",
+        "production": "not_authorized"
+      },
+      "research_owner": "technical_agent",
+      "research_status": "IN_SCOPE",
+      "local_alias": "signed_ema20_distance",
+      "sources": [
+        "docs/experiments/raw/color-gray-path-2026-10-04/ranking-plan-source.md",
+        "src/lei_signal/research/color_continuous_information.py",
+        "src/lei_signal/research/color_continuous_workflow.py",
+        "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
+      ],
+      "component_definition_refs": []
+    },
+    {
+      "id": "research.transform.same_day_average_rank",
+      "version": "1.0.0",
+      "name": "同日平均并列排名比例",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description",
+        "comparison"
+      ],
+      "not_for": [
+        "production_trade",
+        "holding_entry_or_exit",
+        "actual_account_return_claim",
+        "complete_LEI_state",
+        "unique_author_calibration"
+      ],
+      "scope": "四国内宽基ETF的已见日线连续表达与同日选优研究",
+      "spec_anchor": [
+        "桌面技术体系§2.7颜色与多头排列"
+      ],
+      "spec_layer": "trend_road_information",
+      "definition": {
+        "formula": "当天相同合格池升序平均名次r，(r-1)/(n-1)；n<2未知，同值rank.5无区分；颜色类别不排序",
+        "parameters": {
+          "daily_warmup": 252,
+          "lookback": 20
+        },
+        "unit": "proportion 0..1",
+        "direction": "按原值从低到高描述；不预设越高越好，不依评价成绩翻转",
+        "transforms": "模型使用原始连续值；同日名次单列研究；旧EMA上行占比作控制，不能把绿色比例当同一对象",
+        "nan_policy": "颜色比例需20连续合格颜色日；252预热后另积满20色，缺失重置；unknown非gray",
+        "endpoints": "t完整收盘可知，目标t+1..t+21close"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "calendar",
+          "action_known"
+        ],
+        "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+        "currency": "CNY ETF经济价格指数",
+        "frequency": "daily_quote",
+        "calendar": "完整交易日历，缺失重置历史",
+        "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+      },
+      "dependencies": [],
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "src/lei_signal/research/color_continuous_information.py",
+          "src/lei_signal/research/color_continuous_workflow.py"
+        ],
+        "verification_scope": "定义、无未来时点与本轮冻结合同；不等于有效或交易规则"
+      },
+      "origin": "原颜色/价格的研究表达，用户批准研究，不添加策略动作",
+      "universe": {
+        "version": "color-continuous-four-etf-20261004",
+        "eligibility": "连续20合格颜色日；共同输入交集；不按未来结果选样",
+        "warmup": "252连续日后20个合格颜色日",
+        "missing": "缺报重置，不填色，排名并列不按代码拆分",
+        "quality_gate": "实际来源资格重新核全部名义OHLC与经济重建；到达及行动完整性未知",
+        "degrade": "只作有限四ETF回顾性信息，非完整ETF总体"
+      },
+      "time": {
+        "observation_time": "t完整日收盘后",
+        "available_at": "报价理论完成时间可核；历史供应商实际到达时间未认证",
+        "decision_at": "t收盘后研究",
+        "execution_at": "无交易",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-04 bull gray information"
+      },
+      "validation": {
+        "method": "合成缺口/并列/前缀，实际样本资格，固定线性与浅树共同样本",
+        "tolerance": {
+          "absolute": 1e-09,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_color_continuous_information.py"
+        ],
+        "limitations": "四ETF横向分辨率低；同日/重叠结果依赖，历史已见；独立未知期与净收益未测量"
+      },
+      "status": {
+        "definition_clarity": "fixed_prefix_known_gray_origin",
+        "data_qualification": "limited_retrospective_economic_ohlc",
+        "implementation": "implemented_pending_formal_freeze",
+        "effectiveness": "not_evaluated",
+        "production": "not_authorized"
+      },
+      "research_owner": "technical_agent",
+      "research_status": "IN_SCOPE",
+      "local_alias": "same_day_average_rank",
+      "sources": [
+        "docs/experiments/raw/color-gray-path-2026-10-04/ranking-plan-source.md",
+        "src/lei_signal/research/color_continuous_information.py",
+        "src/lei_signal/research/color_continuous_workflow.py",
+        "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+        "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"
+      ],
+      "component_definition_refs": []
+    },
+    {
+      "id": "research.trend.color_continuous20_bundle",
+      "version": "1.0.0",
+      "name": "颜色连续表达的固定组合",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description",
+        "comparison"
+      ],
+      "not_for": [
+        "production_trade",
+        "holding_entry_or_exit",
+        "actual_account_return_claim",
+        "complete_LEI_state",
+        "unique_author_calibration"
+      ],
+      "scope": "四国内宽基ETF的已见日线连续表达与同日选优研究",
+      "spec_anchor": [
+        "桌面技术体系§2.7颜色与多头排列"
+      ],
+      "spec_layer": "trend_road_information",
+      "definition": {
+        "formula": "B为当前20/60颜色、ret20/ret60/vol20、多头组、旧EMA20上行占比及ETF身份；X为绿色占比20、19对变色频率、带符号EMA20距离。排名是单独描述变换不额外放入模型",
+        "parameters": {
+          "daily_warmup": 252,
+          "lookback": 20
+        },
+        "unit": "mixed fixed feature vector",
+        "direction": "按原值从低到高描述；不预设越高越好，不依评价成绩翻转",
+        "transforms": "模型使用原始连续值；同日名次单列研究；旧EMA上行占比作控制，不能把绿色比例当同一对象",
+        "nan_policy": "颜色比例需20连续合格颜色日；252预热后另积满20色，缺失重置；unknown非gray",
+        "endpoints": "t完整收盘可知，目标t+1..t+21close"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "calendar",
+          "action_known"
+        ],
+        "price_basis": "从指纹绑定名义OHLC/行动清单经economic_index及同行动日仿射公式逐行复核的经济价格",
+        "currency": "CNY ETF经济价格指数",
+        "frequency": "daily_quote",
+        "calendar": "完整交易日历，缺失重置历史",
+        "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+      },
+      "dependencies": [
+        "research.trend.green_share20@1.0.0",
+        "research.trend.color_switch_frequency20@1.0.0",
+        "research.trend.signed_ema20_distance@1.0.0",
+        "research.trend.ema_direction_persistence20@1.0.0"
+      ],
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "src/lei_signal/research/color_continuous_information.py",
+          "src/lei_signal/research/color_continuous_workflow.py"
+        ],
+        "verification_scope": "定义、无未来时点与本轮冻结合同；不等于有效或交易规则"
+      },
+      "origin": "原颜色/价格的研究表达，用户批准研究，不添加策略动作",
+      "universe": {
+        "version": "color-continuous-four-etf-20261004",
+        "eligibility": "连续20合格颜色日；共同输入交集；不按未来结果选样",
+        "warmup": "252连续日后20个合格颜色日",
+        "missing": "缺报重置，不填色，排名并列不按代码拆分",
+        "quality_gate": "实际来源资格重新核全部名义OHLC与经济重建；到达及行动完整性未知",
+        "degrade": "只作有限四ETF回顾性信息，非完整ETF总体"
+      },
+      "time": {
+        "observation_time": "t完整日收盘后",
+        "available_at": "报价理论完成时间可核；历史供应商实际到达时间未认证",
+        "decision_at": "t收盘后研究",
+        "execution_at": "无交易",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-04 bull gray information"
+      },
+      "validation": {
+        "method": "合成缺口/并列/前缀，实际样本资格，固定线性与浅树共同样本",
+        "tolerance": {
+          "absolute": 1e-09,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_color_continuous_information.py"
+        ],
+        "limitations": "四ETF横向分辨率低；同日/重叠结果依赖，历史已见；独立未知期与净收益未测量"
+      },
+      "status": {
+        "definition_clarity": "fixed_prefix_known_gray_origin",
+        "data_qualification": "limited_retrospective_economic_ohlc",
+        "implementation": "implemented_pending_formal_freeze",
+        "effectiveness": "not_evaluated",
+        "production": "not_authorized"
+      },
+      "research_owner": "technical_agent",
+      "research_status": "IN_SCOPE",
+      "local_alias": "color_continuous20_bundle",
+      "sources": [
+        "docs/experiments/raw/color-gray-path-2026-10-04/ranking-plan-source.md",
+        "src/lei_signal/research/color_continuous_information.py",
+        "src/lei_signal/research/color_continuous_workflow.py",
         "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
         "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
         "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md"

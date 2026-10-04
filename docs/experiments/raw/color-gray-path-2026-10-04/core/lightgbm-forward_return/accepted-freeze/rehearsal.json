@@ -1,0 +1,75 @@
+{
+  "schema_version": "workflow-rehearsal/1.0",
+  "data_mode": "synthetic",
+  "input_sha256": "db6b583e114054333a978dccc3b4698dbe368a0f8500e3c24535e17547e5dc63",
+  "definition_and_method": "90f5184ae924c5c0a023d920577889ab32e0047f384763cfff6044d2d17aa9d8",
+  "coverage": {
+    "scheduled": 2400,
+    "eligible": 206,
+    "reasons": {
+      "daily252_unknown": 502,
+      "not_gray": 1284,
+      "not_bull": 408,
+      "feature_ready": 206
+    }
+  },
+  "performance": [
+    {
+      "model": "B0",
+      "metric": "MSE",
+      "value": 2.8063543271670994,
+      "unit": "percentage_point_squared",
+      "rows": 38,
+      "dates": 19,
+      "assets": 2
+    },
+    {
+      "model": "B0",
+      "metric": "RMSE",
+      "value": 1.6752176954554592,
+      "unit": "percentage_point",
+      "rows": 38,
+      "dates": 19,
+      "assets": 2
+    },
+    {
+      "model": "B1",
+      "metric": "MSE",
+      "value": 0.3044934117766286,
+      "unit": "percentage_point_squared",
+      "rows": 38,
+      "dates": 19,
+      "assets": 2
+    },
+    {
+      "model": "B1",
+      "metric": "RMSE",
+      "value": 0.5518092168282699,
+      "unit": "percentage_point",
+      "rows": 38,
+      "dates": 19,
+      "assets": 2
+    },
+    {
+      "model": "B2",
+      "metric": "MSE",
+      "value": 0.31124447410810846,
+      "unit": "percentage_point_squared",
+      "rows": 38,
+      "dates": 19,
+      "assets": 2
+    },
+    {
+      "model": "B2",
+      "metric": "RMSE",
+      "value": 0.5578928876658211,
+      "unit": "percentage_point",
+      "rows": 38,
+      "dates": 19,
+      "assets": 2
+    }
+  ],
+  "fits": 2,
+  "purpose": "engineering_error_check_only",
+  "selection_used": false
+}

@@ -1,0 +1,44 @@
+{
+  "mission": "Implement only outcome-free continuous color expressions and same-day rank transformation, with definition reuse audit",
+  "task_scope": [
+    "strict green share20, switch frequency19 pairs, signed EMA20 distance, old EMA-above share20, same-day average-tie ranks",
+    "synthetic tests and definition identity audit only; no future labels or fits"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "src/lei_signal/research/color_history_information.py",
+    "src/lei_signal/research/technical_persistence_information.py",
+    "docs/research/definitions.v1.json",
+    "configs/strategy-documents.v1.json",
+    "docs/experiments/raw/color-gray-path-2026-10-04/brief.json"
+  ],
+  "write_paths": [
+    "src/lei_signal/research/color_continuous_information.py",
+    "tests/unit/test_color_continuous_information.py",
+    "docs/experiments/raw/color-gray-path-2026-10-04/continuous-executor/"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "new pure features module and tests",
+    "exact definition reuse references/formulas and limitations",
+    "no-outcome support counts if convenient"
+  ],
+  "stop_conditions": [
+    "missing permission",
+    "scope ambiguity",
+    "unsafe action"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "real_fit_budget": 0,
+  "real_label_budget": 0,
+  "synthetic_attempt_budget": 3
+}

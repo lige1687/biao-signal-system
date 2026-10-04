@@ -1,0 +1,1008 @@
+{
+  "model_rank_common_dates": {
+    "forward_return/B-A": {
+      "common_dates": 317,
+      "mean_gap_before": 0.26262515576899775,
+      "mean_gap_after": -0.24329832041061308,
+      "difference": -0.505923476179611,
+      "date_block_uncertainty": {
+        "20": {
+          "lo": -1.4389087182296523,
+          "hi": 0.4171881681818263,
+          "valid_draws": 1000
+        },
+        "60": {
+          "lo": -1.505216885796363,
+          "hi": 0.09723935681511398,
+          "valid_draws": 1000
+        }
+      }
+    },
+    "forward_return/D-C": {
+      "common_dates": 310,
+      "mean_gap_before": -1.3829549075108991,
+      "mean_gap_after": -0.7911310843249401,
+      "difference": 0.5918238231859589,
+      "date_block_uncertainty": {
+        "20": {
+          "lo": -0.46617283784991304,
+          "hi": 2.0976106304574986,
+          "valid_draws": 1000
+        },
+        "60": {
+          "lo": -0.5133408293787389,
+          "hi": 2.1414297276621967,
+          "valid_draws": 1000
+        }
+      }
+    },
+    "forward_return/C-A": {
+      "common_dates": 310,
+      "mean_gap_before": 0.2720301597353196,
+      "mean_gap_after": -1.3829549075108991,
+      "difference": -1.6549850672462185,
+      "date_block_uncertainty": {
+        "20": {
+          "lo": -4.122746606818476,
+          "hi": 1.045704910817716,
+          "valid_draws": 1000
+        },
+        "60": {
+          "lo": -3.716154273097158,
+          "hi": 0.17275864563120988,
+          "valid_draws": 1000
+        }
+      }
+    },
+    "forward_return/D-B": {
+      "common_dates": 315,
+      "mean_gap_before": -0.2273514056046918,
+      "mean_gap_after": -0.7818382310816293,
+      "difference": -0.5544868254769375,
+      "date_block_uncertainty": {
+        "20": {
+          "lo": -1.8718657153234803,
+          "hi": 1.002279975459589,
+          "valid_draws": 1000
+        },
+        "60": {
+          "lo": -1.416708033289764,
+          "hi": 0.5659743827019447,
+          "valid_draws": 1000
+        }
+      }
+    },
+    "mae/B-A": {
+      "common_dates": 317,
+      "mean_gap_before": 1.754435924761843,
+      "mean_gap_after": 1.767796784383274,
+      "difference": 0.013360859621431034,
+      "date_block_uncertainty": {
+        "20": {
+          "lo": -0.04366996875296962,
+          "hi": 0.06910752498301534,
+          "valid_draws": 1000
+        },
+        "60": {
+          "lo": -0.05364797234808183,
+          "hi": 0.0698051540820163,
+          "valid_draws": 1000
+        }
+      }
+    },
+    "mae/D-C": {
+      "common_dates": 317,
+      "mean_gap_before": 1.458518463521565,
+      "mean_gap_after": 1.2494431975259073,
+      "difference": -0.20907526599565743,
+      "date_block_uncertainty": {
+        "20": {
+          "lo": -0.5383739932216954,
+          "hi": -0.0013186005361025912,
+          "valid_draws": 1000
+        },
+        "60": {
+          "lo": -0.5977118376046738,
+          "hi": -0.009445316494647428,
+          "valid_draws": 1000
+        }
+      }
+    },
+    "mae/C-A": {
+      "common_dates": 317,
+      "mean_gap_before": 1.754435924761843,
+      "mean_gap_after": 1.458518463521565,
+      "difference": -0.29591746124027823,
+      "date_block_uncertainty": {
+        "20": {
+          "lo": -0.6418195153266117,
+          "hi": -0.05925159019065963,
+          "valid_draws": 1000
+        },
+        "60": {
+          "lo": -0.6320387115626663,
+          "hi": -0.08054116717414675,
+          "valid_draws": 1000
+        }
+      }
+    },
+    "mae/D-B": {
+      "common_dates": 317,
+      "mean_gap_before": 1.767796784383274,
+      "mean_gap_after": 1.2494431975259073,
+      "difference": -0.5183535868573667,
+      "date_block_uncertainty": {
+        "20": {
+          "lo": -0.9499250863654906,
+          "hi": -0.1805505176722302,
+          "valid_draws": 1000
+        },
+        "60": {
+          "lo": -0.9112829350030319,
+          "hi": -0.2607395986583265,
+          "valid_draws": 1000
+        }
+      }
+    }
+  },
+  "environment_differences": {
+    "core/ridge-forward_return": {
+      "up-sideways": {
+        "first_dates": 56,
+        "second_dates": 28,
+        "equal_date_increment_difference": 0.14454345885363795,
+        "uncertainty": {
+          "20": {
+            "lo": -0.22719546019162612,
+            "hi": 0.6473731262022469,
+            "valid_draws": 1000
+          },
+          "60": {
+            "lo": -0.21631695204735865,
+            "hi": 0.5567169694205728,
+            "valid_draws": 999
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "up-down": {
+        "first_dates": 56,
+        "second_dates": 3,
+        "equal_date_increment_difference": 0.4278959586164185,
+        "uncertainty": {
+          "20": {
+            "lo": 0.04781867755845068,
+            "hi": 0.9890820282076552,
+            "valid_draws": 737
+          },
+          "60": {
+            "lo": 0.0367774408603054,
+            "hi": 0.9132341673535701,
+            "valid_draws": 519
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "sideways-down": {
+        "first_dates": 28,
+        "second_dates": 3,
+        "equal_date_increment_difference": 0.28335249976278054,
+        "uncertainty": {
+          "20": {
+            "lo": 0.03722543230073879,
+            "hi": 0.5931496090397526,
+            "valid_draws": 737
+          },
+          "60": {
+            "lo": 0.15014804149370312,
+            "hi": 0.5505557813294972,
+            "valid_draws": 519
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "period_environment": {
+        "2025": {
+          "sideways": {
+            "rows": 30,
+            "dates": 20,
+            "segments": 3,
+            "mean_squared_error_improvement_equal_date": 0.20625830224294334
+          },
+          "up": {
+            "rows": 45,
+            "dates": 28,
+            "segments": 8,
+            "mean_squared_error_improvement_equal_date": 0.11703055895266425
+          }
+        },
+        "2026": {
+          "down": {
+            "rows": 3,
+            "dates": 3,
+            "segments": 1,
+            "mean_squared_error_improvement_equal_date": 0.029551922378044576
+          },
+          "sideways": {
+            "rows": 8,
+            "dates": 8,
+            "segments": 3,
+            "mean_squared_error_improvement_equal_date": 0.5795197218855295
+          },
+          "up": {
+            "rows": 36,
+            "dates": 28,
+            "segments": 5,
+            "mean_squared_error_improvement_equal_date": 0.797865203036262
+          }
+        }
+      }
+    },
+    "core/ridge-mae": {
+      "up-sideways": {
+        "first_dates": 56,
+        "second_dates": 28,
+        "equal_date_increment_difference": 0.15581396641585887,
+        "uncertainty": {
+          "20": {
+            "lo": -0.10413378451767802,
+            "hi": 0.407981387472255,
+            "valid_draws": 1000
+          },
+          "60": {
+            "lo": -0.06533391456338125,
+            "hi": 0.3772244707148967,
+            "valid_draws": 999
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "up-down": {
+        "first_dates": 56,
+        "second_dates": 3,
+        "equal_date_increment_difference": 0.03141513714631543,
+        "uncertainty": {
+          "20": {
+            "lo": -0.2465851780242036,
+            "hi": 0.36976959927182335,
+            "valid_draws": 737
+          },
+          "60": {
+            "lo": -0.21543321840007462,
+            "hi": 0.39501325020450767,
+            "valid_draws": 519
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "sideways-down": {
+        "first_dates": 28,
+        "second_dates": 3,
+        "equal_date_increment_difference": -0.12439882926954345,
+        "uncertainty": {
+          "20": {
+            "lo": -0.25059962452611567,
+            "hi": 0.10883589013915228,
+            "valid_draws": 737
+          },
+          "60": {
+            "lo": -0.20843504048018627,
+            "hi": 0.16903145823846696,
+            "valid_draws": 519
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "period_environment": {
+        "2025": {
+          "sideways": {
+            "rows": 30,
+            "dates": 20,
+            "segments": 3,
+            "mean_squared_error_improvement_equal_date": -0.08044820875597505
+          },
+          "up": {
+            "rows": 45,
+            "dates": 28,
+            "segments": 8,
+            "mean_squared_error_improvement_equal_date": -0.05543362393682243
+          }
+        },
+        "2026": {
+          "down": {
+            "rows": 3,
+            "dates": 3,
+            "segments": 1,
+            "mean_squared_error_improvement_equal_date": 0.12124875441974022
+          },
+          "sideways": {
+            "rows": 8,
+            "dates": 8,
+            "segments": 3,
+            "mean_squared_error_improvement_equal_date": 0.19009525991562629
+          },
+          "up": {
+            "rows": 36,
+            "dates": 28,
+            "segments": 5,
+            "mean_squared_error_improvement_equal_date": 0.3607614070689338
+          }
+        }
+      }
+    },
+    "core/lightgbm-forward_return": {
+      "up-sideways": {
+        "first_dates": 56,
+        "second_dates": 28,
+        "equal_date_increment_difference": 0.0,
+        "uncertainty": {
+          "20": {
+            "lo": 0.0,
+            "hi": 0.0,
+            "valid_draws": 1000
+          },
+          "60": {
+            "lo": 0.0,
+            "hi": 0.0,
+            "valid_draws": 999
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "up-down": {
+        "first_dates": 56,
+        "second_dates": 3,
+        "equal_date_increment_difference": 0.0,
+        "uncertainty": {
+          "20": {
+            "lo": 0.0,
+            "hi": 0.0,
+            "valid_draws": 737
+          },
+          "60": {
+            "lo": 0.0,
+            "hi": 0.0,
+            "valid_draws": 519
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "sideways-down": {
+        "first_dates": 28,
+        "second_dates": 3,
+        "equal_date_increment_difference": 0.0,
+        "uncertainty": {
+          "20": {
+            "lo": 0.0,
+            "hi": 0.0,
+            "valid_draws": 737
+          },
+          "60": {
+            "lo": 0.0,
+            "hi": 0.0,
+            "valid_draws": 519
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "period_environment": {
+        "2025": {
+          "sideways": {
+            "rows": 30,
+            "dates": 20,
+            "segments": 3,
+            "mean_squared_error_improvement_equal_date": 0.0
+          },
+          "up": {
+            "rows": 45,
+            "dates": 28,
+            "segments": 8,
+            "mean_squared_error_improvement_equal_date": 0.0
+          }
+        },
+        "2026": {
+          "down": {
+            "rows": 3,
+            "dates": 3,
+            "segments": 1,
+            "mean_squared_error_improvement_equal_date": 0.0
+          },
+          "sideways": {
+            "rows": 8,
+            "dates": 8,
+            "segments": 3,
+            "mean_squared_error_improvement_equal_date": 0.0
+          },
+          "up": {
+            "rows": 36,
+            "dates": 28,
+            "segments": 5,
+            "mean_squared_error_improvement_equal_date": 0.0
+          }
+        }
+      }
+    },
+    "core/lightgbm-mae": {
+      "up-sideways": {
+        "first_dates": 56,
+        "second_dates": 28,
+        "equal_date_increment_difference": -0.01728491277863703,
+        "uncertainty": {
+          "20": {
+            "lo": -0.1600025963263711,
+            "hi": 0.049761045395774105,
+            "valid_draws": 1000
+          },
+          "60": {
+            "lo": -0.22249037043063513,
+            "hi": 0.046561141963381035,
+            "valid_draws": 999
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "up-down": {
+        "first_dates": 56,
+        "second_dates": 3,
+        "equal_date_increment_difference": 0.17763893887085563,
+        "uncertainty": {
+          "20": {
+            "lo": 0.09472371731322925,
+            "hi": 0.2473134262991367,
+            "valid_draws": 737
+          },
+          "60": {
+            "lo": 0.11690516537552666,
+            "hi": 0.2553050288624056,
+            "valid_draws": 519
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "sideways-down": {
+        "first_dates": 28,
+        "second_dates": 3,
+        "equal_date_increment_difference": 0.19492385164949266,
+        "uncertainty": {
+          "20": {
+            "lo": 0.11458702075154707,
+            "hi": 0.359403267390087,
+            "valid_draws": 737
+          },
+          "60": {
+            "lo": 0.11775987408282192,
+            "hi": 0.4142940821992104,
+            "valid_draws": 519
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "period_environment": {
+        "2025": {
+          "sideways": {
+            "rows": 30,
+            "dates": 20,
+            "segments": 3,
+            "mean_squared_error_improvement_equal_date": 0.0
+          },
+          "up": {
+            "rows": 45,
+            "dates": 28,
+            "segments": 8,
+            "mean_squared_error_improvement_equal_date": 0.0
+          }
+        },
+        "2026": {
+          "down": {
+            "rows": 3,
+            "dates": 3,
+            "segments": 1,
+            "mean_squared_error_improvement_equal_date": -0.11610501377996012
+          },
+          "sideways": {
+            "rows": 8,
+            "dates": 8,
+            "segments": 3,
+            "mean_squared_error_improvement_equal_date": 0.2758659325433639
+          },
+          "up": {
+            "rows": 36,
+            "dates": 28,
+            "segments": 5,
+            "mean_squared_error_improvement_equal_date": 0.12306785018179103
+          }
+        }
+      }
+    },
+    "continuous/ridge-forward_return": {
+      "up-sideways": {
+        "first_dates": 286,
+        "second_dates": 179,
+        "equal_date_increment_difference": 0.6503440837320809,
+        "uncertainty": {
+          "20": {
+            "lo": -1.4741244958517465,
+            "hi": 2.6815634594302526,
+            "valid_draws": 1000
+          },
+          "60": {
+            "lo": -1.6443559367725231,
+            "hi": 2.3771916612930846,
+            "valid_draws": 1000
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "up-down": {
+        "first_dates": 286,
+        "second_dates": 57,
+        "equal_date_increment_difference": 3.2814019797131015,
+        "uncertainty": {
+          "20": {
+            "lo": -5.604006456191146,
+            "hi": 8.972949361784654,
+            "valid_draws": 999
+          },
+          "60": {
+            "lo": -3.878812080510326,
+            "hi": 6.749951696073551,
+            "valid_draws": 980
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "sideways-down": {
+        "first_dates": 179,
+        "second_dates": 57,
+        "equal_date_increment_difference": 2.6310578959810207,
+        "uncertainty": {
+          "20": {
+            "lo": -5.9205120104002384,
+            "hi": 8.79612346105316,
+            "valid_draws": 999
+          },
+          "60": {
+            "lo": -4.14883160585707,
+            "hi": 6.304960431093762,
+            "valid_draws": 980
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "period_environment": {
+        "2025": {
+          "down": {
+            "rows": 43,
+            "dates": 43,
+            "segments": 1,
+            "mean_squared_error_improvement_equal_date": -2.296673345933063
+          },
+          "sideways": {
+            "rows": 297,
+            "dates": 111,
+            "segments": 5,
+            "mean_squared_error_improvement_equal_date": 0.6002636510795291
+          },
+          "up": {
+            "rows": 548,
+            "dates": 191,
+            "segments": 8,
+            "mean_squared_error_improvement_equal_date": 0.6737194060846158
+          }
+        },
+        "2026": {
+          "down": {
+            "rows": 14,
+            "dates": 14,
+            "segments": 2,
+            "mean_squared_error_improvement_equal_date": -0.9636931798458013
+          },
+          "sideways": {
+            "rows": 127,
+            "dates": 68,
+            "segments": 5,
+            "mean_squared_error_improvement_equal_date": 0.7622047832749768
+          },
+          "up": {
+            "rows": 239,
+            "dates": 95,
+            "segments": 6,
+            "mean_squared_error_improvement_equal_date": 2.5956630838139185
+          }
+        }
+      }
+    },
+    "continuous/ridge-mae": {
+      "up-sideways": {
+        "first_dates": 286,
+        "second_dates": 179,
+        "equal_date_increment_difference": 0.006068600305033464,
+        "uncertainty": {
+          "20": {
+            "lo": -0.21987760221896346,
+            "hi": 0.22674082322724987,
+            "valid_draws": 1000
+          },
+          "60": {
+            "lo": -0.1434596102103659,
+            "hi": 0.12795245288659585,
+            "valid_draws": 1000
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "up-down": {
+        "first_dates": 286,
+        "second_dates": 57,
+        "equal_date_increment_difference": -0.1819322163564373,
+        "uncertainty": {
+          "20": {
+            "lo": -0.8098289449878541,
+            "hi": 0.5079625688510667,
+            "valid_draws": 999
+          },
+          "60": {
+            "lo": -0.5476596040036738,
+            "hi": 0.4091251018567741,
+            "valid_draws": 980
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "sideways-down": {
+        "first_dates": 179,
+        "second_dates": 57,
+        "equal_date_increment_difference": -0.18800081666147078,
+        "uncertainty": {
+          "20": {
+            "lo": -0.7906349140250095,
+            "hi": 0.5428865864498439,
+            "valid_draws": 999
+          },
+          "60": {
+            "lo": -0.498337039748319,
+            "hi": 0.4707245121282326,
+            "valid_draws": 980
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "period_environment": {
+        "2025": {
+          "down": {
+            "rows": 43,
+            "dates": 43,
+            "segments": 1,
+            "mean_squared_error_improvement_equal_date": 0.144989908967994
+          },
+          "sideways": {
+            "rows": 297,
+            "dates": 111,
+            "segments": 5,
+            "mean_squared_error_improvement_equal_date": -0.0237958158344892
+          },
+          "up": {
+            "rows": 548,
+            "dates": 191,
+            "segments": 8,
+            "mean_squared_error_improvement_equal_date": -0.045950726008048885
+          }
+        },
+        "2026": {
+          "down": {
+            "rows": 14,
+            "dates": 14,
+            "segments": 2,
+            "mean_squared_error_improvement_equal_date": 0.016834944491548532
+          },
+          "sideways": {
+            "rows": 127,
+            "dates": 68,
+            "segments": 5,
+            "mean_squared_error_improvement_equal_date": -0.15723439251540328
+          },
+          "up": {
+            "rows": 239,
+            "dates": 95,
+            "segments": 6,
+            "mean_squared_error_improvement_equal_date": -0.11359195175631807
+          }
+        }
+      }
+    },
+    "continuous/lightgbm-forward_return": {
+      "up-sideways": {
+        "first_dates": 286,
+        "second_dates": 179,
+        "equal_date_increment_difference": 1.4565136601460364,
+        "uncertainty": {
+          "20": {
+            "lo": -1.0763177011860994,
+            "hi": 4.673095410258676,
+            "valid_draws": 1000
+          },
+          "60": {
+            "lo": -1.2491466931166855,
+            "hi": 4.815143208806759,
+            "valid_draws": 1000
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "up-down": {
+        "first_dates": 286,
+        "second_dates": 57,
+        "equal_date_increment_difference": 0.1977647068079953,
+        "uncertainty": {
+          "20": {
+            "lo": -2.9908527675136236,
+            "hi": 4.016558900338622,
+            "valid_draws": 999
+          },
+          "60": {
+            "lo": -3.2626398798722547,
+            "hi": 4.5348443763310335,
+            "valid_draws": 980
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "sideways-down": {
+        "first_dates": 179,
+        "second_dates": 57,
+        "equal_date_increment_difference": -1.2587489533380412,
+        "uncertainty": {
+          "20": {
+            "lo": -2.474870436293499,
+            "hi": 0.10736367241282761,
+            "valid_draws": 999
+          },
+          "60": {
+            "lo": -2.368403311870316,
+            "hi": 0.4437139034771689,
+            "valid_draws": 980
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "period_environment": {
+        "2025": {
+          "down": {
+            "rows": 43,
+            "dates": 43,
+            "segments": 1,
+            "mean_squared_error_improvement_equal_date": 2.2227816650928593
+          },
+          "sideways": {
+            "rows": 297,
+            "dates": 111,
+            "segments": 5,
+            "mean_squared_error_improvement_equal_date": 0.27883845653579326
+          },
+          "up": {
+            "rows": 548,
+            "dates": 191,
+            "segments": 8,
+            "mean_squared_error_improvement_equal_date": 0.10530575651235376
+          }
+        },
+        "2026": {
+          "down": {
+            "rows": 14,
+            "dates": 14,
+            "segments": 2,
+            "mean_squared_error_improvement_equal_date": 0.22696145962180236
+          },
+          "sideways": {
+            "rows": 127,
+            "dates": 68,
+            "segments": 5,
+            "mean_squared_error_improvement_equal_date": 0.7921283303978273
+          },
+          "up": {
+            "rows": 239,
+            "dates": 95,
+            "segments": 6,
+            "mean_squared_error_improvement_equal_date": 5.599634179293007
+          }
+        }
+      }
+    },
+    "continuous/lightgbm-mae": {
+      "up-sideways": {
+        "first_dates": 286,
+        "second_dates": 179,
+        "equal_date_increment_difference": -0.16128944554662347,
+        "uncertainty": {
+          "20": {
+            "lo": -0.5453312504692949,
+            "hi": 0.18816003207525017,
+            "valid_draws": 1000
+          },
+          "60": {
+            "lo": -0.58348796890167,
+            "hi": 0.05029269485193077,
+            "valid_draws": 1000
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "up-down": {
+        "first_dates": 286,
+        "second_dates": 57,
+        "equal_date_increment_difference": -0.3200160063897424,
+        "uncertainty": {
+          "20": {
+            "lo": -0.8286383552052103,
+            "hi": -0.007994889221465457,
+            "valid_draws": 999
+          },
+          "60": {
+            "lo": -0.7788705995428877,
+            "hi": -0.06075785036422627,
+            "valid_draws": 980
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "sideways-down": {
+        "first_dates": 179,
+        "second_dates": 57,
+        "equal_date_increment_difference": -0.15872656084311892,
+        "uncertainty": {
+          "20": {
+            "lo": -0.6192420488033695,
+            "hi": 0.26761613976690335,
+            "valid_draws": 999
+          },
+          "60": {
+            "lo": -0.47351099578557665,
+            "hi": 0.1986440277716396,
+            "valid_draws": 980
+          }
+        },
+        "interpretation": "own-asset conditional groups, shared price source, not causal market regimes"
+      },
+      "period_environment": {
+        "2025": {
+          "down": {
+            "rows": 43,
+            "dates": 43,
+            "segments": 1,
+            "mean_squared_error_improvement_equal_date": 0.42447128299385406
+          },
+          "sideways": {
+            "rows": 297,
+            "dates": 111,
+            "segments": 5,
+            "mean_squared_error_improvement_equal_date": 0.18147675896908186
+          },
+          "up": {
+            "rows": 548,
+            "dates": 191,
+            "segments": 8,
+            "mean_squared_error_improvement_equal_date": 0.03381708736701628
+          }
+        },
+        "2026": {
+          "down": {
+            "rows": 14,
+            "dates": 14,
+            "segments": 2,
+            "mean_squared_error_improvement_equal_date": 0.018915771691915613
+          },
+          "sideways": {
+            "rows": 127,
+            "dates": 68,
+            "segments": 5,
+            "mean_squared_error_improvement_equal_date": 0.14109077264806819
+          },
+          "up": {
+            "rows": 239,
+            "dates": 95,
+            "segments": 6,
+            "mean_squared_error_improvement_equal_date": -0.05340368942150314
+          }
+        }
+      }
+    }
+  },
+  "rank_vs_simple": {
+    "green_share20/ret20": {
+      "common_dates": 306,
+      "gap_difference_pp": -0.4958535043827197,
+      "uncertainty": {
+        "20": {
+          "lo": -2.201641520073497,
+          "hi": 0.6863123235053069,
+          "valid_draws": 1000
+        },
+        "60": {
+          "lo": -2.1819578865300984,
+          "hi": 0.5493050185293123,
+          "valid_draws": 1000
+        }
+      }
+    },
+    "green_share20/ema20_up_share20": {
+      "common_dates": 303,
+      "gap_difference_pp": -0.09964857105680756,
+      "uncertainty": {
+        "20": {
+          "lo": -0.5332853973255473,
+          "hi": 0.24795798237042907,
+          "valid_draws": 1000
+        },
+        "60": {
+          "lo": -0.53324802293097,
+          "hi": 0.1885060527952038,
+          "valid_draws": 1000
+        }
+      }
+    },
+    "switch_frequency20/ret20": {
+      "common_dates": 310,
+      "gap_difference_pp": -0.7099813259729615,
+      "uncertainty": {
+        "20": {
+          "lo": -3.6751684639041504,
+          "hi": 1.2516263069473617,
+          "valid_draws": 1000
+        },
+        "60": {
+          "lo": -3.1304898096541502,
+          "hi": 1.0455296371385465,
+          "valid_draws": 1000
+        }
+      }
+    },
+    "switch_frequency20/ema20_up_share20": {
+      "common_dates": 309,
+      "gap_difference_pp": -0.34121463704233007,
+      "uncertainty": {
+        "20": {
+          "lo": -3.5376964957424444,
+          "hi": 2.4442186880000096,
+          "valid_draws": 1000
+        },
+        "60": {
+          "lo": -3.118580687957798,
+          "hi": 1.7401675783060575,
+          "valid_draws": 1000
+        }
+      }
+    },
+    "distance_to_ema20/ret20": {
+      "common_dates": 317,
+      "gap_difference_pp": -0.1493452035171867,
+      "uncertainty": {
+        "20": {
+          "lo": -0.6598236922613571,
+          "hi": 0.398756342310733,
+          "valid_draws": 1000
+        },
+        "60": {
+          "lo": -0.45587995396983605,
+          "hi": 0.22921980826227298,
+          "valid_draws": 1000
+        }
+      }
+    },
+    "distance_to_ema20/ema20_up_share20": {
+      "common_dates": 310,
+      "gap_difference_pp": 0.23113429968383684,
+      "uncertainty": {
+        "20": {
+          "lo": -0.8284172915856608,
+          "hi": 1.9340172280356571,
+          "valid_draws": 1000
+        },
+        "60": {
+          "lo": -0.6638208477700087,
+          "hi": 1.8628990311037428,
+          "valid_draws": 1000
+        }
+      }
+    }
+  }
+}

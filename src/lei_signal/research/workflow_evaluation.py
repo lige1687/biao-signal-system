@@ -235,12 +235,17 @@ def evaluate_observations(observations: Sequence[Mapping[str, Any]], contract: M
     folds = _folds(contract)
     evaluator = contract.get("evaluator", {})
     kind = evaluator.get("kind")
-    if kind not in {"prediction_ridge", "prediction_ols", "event_risk"} or evaluator.get("version") != VERSION:
+    if kind not in {"prediction_ridge", "prediction_ols", "prediction_lightgbm", "event_risk"} or evaluator.get("version") != VERSION:
         raise EvaluationError("evaluator: unsupported kind/version")
     if kind == "prediction_ridge" and evaluator.get("lambda") != 1.0:
         raise EvaluationError("evaluator.lambda: first version freezes normalized penalty at 1")
     if kind == "prediction_ols" and (binary or evaluator.get("lambda", 0) != 0 or evaluator.get("rcond", 1e-12) != 1e-12):
         raise EvaluationError("prediction_ols: continuous target, zero penalty and rcond=1e-12 required")
+    if kind == "prediction_lightgbm":
+        from .lightgbm_information import validate_evaluator
+        if binary:
+            raise EvaluationError("LightGBM comparator supports continuous targets only")
+        validate_evaluator(evaluator)
     if kind == "event_risk" and not binary:
         raise EvaluationError("event_risk: frequency evaluator requires up/downside_event binary target")
     baseline = evaluator.get("baseline_features", []) if kind != "event_risk" else ["existing_state"]
@@ -299,6 +304,9 @@ def evaluate_observations(observations: Sequence[Mapping[str, Any]], contract: M
                 predicted[model], detail = _ols_fit(train, designs[(fold["name"], model)])
             elif kind == "prediction_ridge":
                 predicted[model], detail = _ridge(train, ev, cols, training_policy, binary)
+            elif kind == "prediction_lightgbm":
+                from .lightgbm_information import fit_predict
+                predicted[model], detail = fit_predict(train, ev, cols, _weights(train, training_policy), evaluator)
             else:
                 predicted[model], detail = _event(train, ev, cols, training_policy)
             if kind == "prediction_ols" and model == "B2" and detail["rank"] == designs[(fold["name"], "B1")]["rank"]:

@@ -1,0 +1,4160 @@
+{
+  "models": {
+    "core/ridge-forward_return": {
+      "overall": {
+        "n": 122,
+        "dates": 80,
+        "assets": 4,
+        "rmse": {
+          "B0": 4.7789860016715595,
+          "ETF_mean": 4.326106031036129,
+          "ETF_state_mean": 4.2037054088702925,
+          "B1": 4.488306736813935,
+          "B2": 4.434058632576417
+        },
+        "mean_y": -1.706035080569033,
+        "asset_regime_segments": 16
+      },
+      "by_period": {
+        "2025": {
+          "n": 75,
+          "dates": 47,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.7195348426682857,
+            "ETF_mean": 3.226063451438823,
+            "ETF_state_mean": 3.2813139754203764,
+            "B1": 3.309589902609649,
+            "B2": 3.2920644378713577
+          },
+          "mean_y": -0.6149728619147008,
+          "asset_regime_segments": 11
+        },
+        "2026": {
+          "n": 47,
+          "dates": 33,
+          "assets": 4,
+          "rmse": {
+            "B0": 5.496788578008423,
+            "ETF_mean": 5.188656462698736,
+            "ETF_state_mean": 4.967251873048814,
+            "B1": 5.338817115584862,
+            "B2": 5.255925255001199
+          },
+          "mean_y": -3.0233691335632846,
+          "asset_regime_segments": 9
+        }
+      },
+      "by_asset": {
+        "510050.SS": {
+          "n": 47,
+          "dates": 47,
+          "assets": 1,
+          "rmse": {
+            "B0": 3.0955479333565283,
+            "ETF_mean": 3.1768786750829374,
+            "ETF_state_mean": 2.9892119760972373,
+            "B1": 3.035389046403755,
+            "B2": 2.9972498078076613
+          },
+          "mean_y": -0.03380952777791975,
+          "asset_regime_segments": 5
+        },
+        "510300.SS": {
+          "n": 39,
+          "dates": 39,
+          "assets": 1,
+          "rmse": {
+            "B0": 3.6492423816117596,
+            "ETF_mean": 3.623697316234282,
+            "ETF_state_mean": 3.433797357695913,
+            "B1": 3.515595815664606,
+            "B2": 3.4768005204746713
+          },
+          "mean_y": -0.06643262113437096,
+          "asset_regime_segments": 6
+        },
+        "510500.SS": {
+          "n": 23,
+          "dates": 23,
+          "assets": 1,
+          "rmse": {
+            "B0": 3.940294220424402,
+            "ETF_mean": 4.279316425674024,
+            "ETF_state_mean": 4.743618611093706,
+            "B1": 4.135632150375776,
+            "B2": 4.120069414347312
+          },
+          "mean_y": 0.25268102360995565,
+          "asset_regime_segments": 3
+        },
+        "588000.SS": {
+          "n": 13,
+          "dates": 13,
+          "assets": 1,
+          "rmse": {
+            "B0": 7.275267919858457,
+            "ETF_mean": 5.772736278416406,
+            "ETF_state_mean": 5.239874673976875,
+            "B1": 6.473263131493208,
+            "B2": 6.371568376772361
+          },
+          "mean_y": -6.976579196973797,
+          "asset_regime_segments": 2
+        }
+      },
+      "drop_one": {
+        "510050.SS": {
+          "n": 75,
+          "dates": 56,
+          "assets": 3,
+          "rmse": {
+            "B0": 5.220868759411055,
+            "ETF_mean": 4.64644005129633,
+            "ETF_state_mean": 4.536855313989278,
+            "B1": 4.877362770729331,
+            "B2": 4.818713431961506
+          },
+          "mean_y": -2.2634435981660705,
+          "asset_regime_segments": 11
+        },
+        "510300.SS": {
+          "n": 83,
+          "dates": 73,
+          "assets": 3,
+          "rmse": {
+            "B0": 5.1002568189239055,
+            "ETF_mean": 4.536136069659033,
+            "ETF_state_mean": 4.430710716673717,
+            "B1": 4.768653741389313,
+            "B2": 4.710108348694639
+          },
+          "mean_y": -2.2525692337139205,
+          "asset_regime_segments": 10
+        },
+        "510500.SS": {
+          "n": 99,
+          "dates": 70,
+          "assets": 3,
+          "rmse": {
+            "B0": 5.027554417845086,
+            "ETF_mean": 4.341590511015717,
+            "ETF_state_mean": 4.007602738576885,
+            "B1": 4.599860004090545,
+            "B2": 4.533892067876545
+          },
+          "mean_y": -2.3589404486286956,
+          "asset_regime_segments": 13
+        },
+        "588000.SS": {
+          "n": 109,
+          "dates": 75,
+          "assets": 3,
+          "rmse": {
+            "B0": 3.578887420738894,
+            "ETF_mean": 3.720944746831721,
+            "ETF_state_mean": 3.7959746249273563,
+            "B1": 3.59056420289663,
+            "B2": 3.561208607978299
+          },
+          "mean_y": 0.05081295823255499,
+          "asset_regime_segments": 14
+        }
+      },
+      "own_asset_environment": {
+        "up": {
+          "n": 81,
+          "dates": 56,
+          "assets": 4,
+          "rmse": {
+            "B0": 4.590224968671022,
+            "ETF_mean": 4.195928216501569,
+            "ETF_state_mean": 4.079588015479785,
+            "B1": 4.383120413144796,
+            "B2": 4.326802448799613
+          },
+          "mean_y": -1.9964512500181602,
+          "asset_regime_segments": 9
+        },
+        "sideways": {
+          "n": 38,
+          "dates": 28,
+          "assets": 3,
+          "rmse": {
+            "B0": 5.049057660509669,
+            "ETF_mean": 5.055923250057867,
+            "ETF_state_mean": 4.863156713739336,
+            "B1": 4.8582542924948084,
+            "B2": 4.869341289864511
+          },
+          "mean_y": 1.1324523795231447,
+          "asset_regime_segments": 6
+        },
+        "down": {
+          "n": 3,
+          "dates": 3,
+          "assets": 1,
+          "rmse": {
+            "B0": 1.5856968834974763,
+            "ETF_mean": 0.5338526126397335,
+            "ETF_state_mean": 1.2663883470243877,
+            "B1": 0.5135380334411039,
+            "B2": 0.4839105179808678
+          },
+          "mean_y": 0.2793064069895582,
+          "asset_regime_segments": 1
+        },
+        "unknown": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        }
+      },
+      "own_asset_five": {
+        "0": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        },
+        "1": {
+          "n": 3,
+          "dates": 3,
+          "assets": 2,
+          "rmse": {
+            "B0": 6.662503261433648,
+            "ETF_mean": 6.20398174348205,
+            "ETF_state_mean": 6.863632991552181,
+            "B1": 6.7119656193835535,
+            "B2": 6.654388507917918
+          },
+          "mean_y": -0.08608566804854112,
+          "asset_regime_segments": 3
+        },
+        "2": {
+          "n": 78,
+          "dates": 54,
+          "assets": 4,
+          "rmse": {
+            "B0": 4.621385004624761,
+            "ETF_mean": 4.223364072777901,
+            "ETF_state_mean": 4.051402564826186,
+            "B1": 4.416349605289918,
+            "B2": 4.358374830411651
+          },
+          "mean_y": -2.089406340554322,
+          "asset_regime_segments": 9
+        },
+        "3": {
+          "n": 38,
+          "dates": 28,
+          "assets": 3,
+          "rmse": {
+            "B0": 5.049057660509669,
+            "ETF_mean": 5.055923250057867,
+            "ETF_state_mean": 4.863156713739336,
+            "B1": 4.8582542924948084,
+            "B2": 4.869341289864511
+          },
+          "mean_y": 1.1324523795231447,
+          "asset_regime_segments": 6
+        },
+        "4": {
+          "n": 3,
+          "dates": 3,
+          "assets": 1,
+          "rmse": {
+            "B0": 1.5856968834974763,
+            "ETF_mean": 0.5338526126397335,
+            "ETF_state_mean": 1.2663883470243877,
+            "B1": 0.5135380334411039,
+            "B2": 0.4839105179808678
+          },
+          "mean_y": 0.2793064069895582,
+          "asset_regime_segments": 1
+        },
+        "5": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        }
+      },
+      "by_state": {
+        "green": {
+          "n": 84,
+          "dates": 63,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.6021055379795097,
+            "ETF_mean": 3.2719953193499007,
+            "ETF_state_mean": 3.5135058520639144,
+            "B1": 3.318742342094015,
+            "B2": 3.2971471606236897
+          },
+          "mean_y": -0.528017910877804,
+          "asset_regime_segments": 13
+        },
+        "black": {
+          "n": 38,
+          "dates": 27,
+          "assets": 4,
+          "rmse": {
+            "B0": 6.310943956446854,
+            "ETF_mean": 5.76933227735808,
+            "ETF_state_mean": 5.215314508422321,
+            "B1": 6.0303116770090455,
+            "B2": 5.941443248014633
+          },
+          "mean_y": -3.8787274293227587,
+          "asset_regime_segments": 12
+        }
+      },
+      "increment20": [
+        {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 20.14489736372935,
+          "new_value": 19.660875957125448,
+          "absolute_error_improvement": 0.484021406603901,
+          "relative_percent": 2.402699789751105,
+          "lo": 0.056744123042615655,
+          "hi": 0.9671351623609632,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 122,
+          "dates": 80,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 20,
+          "draws": 1000,
+          "valid_draws": 997,
+          "unestimable_draws": 3,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        },
+        {
+          "new_model": "B2",
+          "old_model": "B0",
+          "old_value": 22.83870720417272,
+          "new_value": 19.660875957125448,
+          "absolute_error_improvement": 3.1778312470472727,
+          "relative_percent": 13.914234368163669,
+          "lo": 1.1767131634135675,
+          "hi": 5.481051443629038,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 122,
+          "dates": 80,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 20,
+          "draws": 1000,
+          "valid_draws": 997,
+          "unestimable_draws": 3,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        }
+      ],
+      "fallback_ETF_state_mean": 0,
+      "increment60": [
+        {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 20.14489736372935,
+          "new_value": 19.660875957125448,
+          "absolute_error_improvement": 0.484021406603901,
+          "relative_percent": 2.402699789751105,
+          "lo": 0.08145281501945982,
+          "hi": 0.8744780431194319,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 122,
+          "dates": 80,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 995,
+          "unestimable_draws": 5,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        },
+        {
+          "new_model": "B2",
+          "old_model": "B0",
+          "old_value": 22.83870720417272,
+          "new_value": 19.660875957125448,
+          "absolute_error_improvement": 3.1778312470472727,
+          "relative_percent": 13.914234368163669,
+          "lo": 1.56775637851516,
+          "hi": 4.997337506901883,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 122,
+          "dates": 80,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 995,
+          "unestimable_draws": 5,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        }
+      ]
+    },
+    "core/lightgbm-forward_return": {
+      "overall": {
+        "n": 122,
+        "dates": 80,
+        "assets": 4,
+        "rmse": {
+          "B0": 4.7789860016715595,
+          "ETF_mean": 4.326106031036129,
+          "ETF_state_mean": 4.2037054088702925,
+          "B1": 4.104594826331051,
+          "B2": 4.104594826331051
+        },
+        "mean_y": -1.706035080569033,
+        "asset_regime_segments": 16
+      },
+      "by_period": {
+        "2025": {
+          "n": 75,
+          "dates": 47,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.7195348426682857,
+            "ETF_mean": 3.226063451438823,
+            "ETF_state_mean": 3.2813139754203764,
+            "B1": 3.2503489863879222,
+            "B2": 3.2503489863879222
+          },
+          "mean_y": -0.6149728619147008,
+          "asset_regime_segments": 11
+        },
+        "2026": {
+          "n": 47,
+          "dates": 33,
+          "assets": 4,
+          "rmse": {
+            "B0": 5.496788578008423,
+            "ETF_mean": 5.188656462698736,
+            "ETF_state_mean": 4.967251873048814,
+            "B1": 4.793658014485657,
+            "B2": 4.793658014485657
+          },
+          "mean_y": -3.0233691335632846,
+          "asset_regime_segments": 9
+        }
+      },
+      "by_asset": {
+        "510050.SS": {
+          "n": 47,
+          "dates": 47,
+          "assets": 1,
+          "rmse": {
+            "B0": 3.0955479333565283,
+            "ETF_mean": 3.1768786750829374,
+            "ETF_state_mean": 2.9892119760972373,
+            "B1": 3.122399319880551,
+            "B2": 3.122399319880551
+          },
+          "mean_y": -0.03380952777791975,
+          "asset_regime_segments": 5
+        },
+        "510300.SS": {
+          "n": 39,
+          "dates": 39,
+          "assets": 1,
+          "rmse": {
+            "B0": 3.6492423816117596,
+            "ETF_mean": 3.623697316234282,
+            "ETF_state_mean": 3.433797357695913,
+            "B1": 3.6190518757236263,
+            "B2": 3.6190518757236263
+          },
+          "mean_y": -0.06643262113437096,
+          "asset_regime_segments": 6
+        },
+        "510500.SS": {
+          "n": 23,
+          "dates": 23,
+          "assets": 1,
+          "rmse": {
+            "B0": 3.940294220424402,
+            "ETF_mean": 4.279316425674024,
+            "ETF_state_mean": 4.743618611093706,
+            "B1": 4.077307599367863,
+            "B2": 4.077307599367863
+          },
+          "mean_y": 0.25268102360995565,
+          "asset_regime_segments": 3
+        },
+        "588000.SS": {
+          "n": 13,
+          "dates": 13,
+          "assets": 1,
+          "rmse": {
+            "B0": 7.275267919858457,
+            "ETF_mean": 5.772736278416406,
+            "ETF_state_mean": 5.239874673976875,
+            "B1": 5.283885265743605,
+            "B2": 5.283885265743605
+          },
+          "mean_y": -6.976579196973797,
+          "asset_regime_segments": 2
+        }
+      },
+      "drop_one": {
+        "510050.SS": {
+          "n": 75,
+          "dates": 56,
+          "assets": 3,
+          "rmse": {
+            "B0": 5.220868759411055,
+            "ETF_mean": 4.64644005129633,
+            "ETF_state_mean": 4.536855313989278,
+            "B1": 4.38335553507371,
+            "B2": 4.38335553507371
+          },
+          "mean_y": -2.2634435981660705,
+          "asset_regime_segments": 11
+        },
+        "510300.SS": {
+          "n": 83,
+          "dates": 73,
+          "assets": 3,
+          "rmse": {
+            "B0": 5.1002568189239055,
+            "ETF_mean": 4.536136069659033,
+            "ETF_state_mean": 4.430710716673717,
+            "B1": 4.2541453616520055,
+            "B2": 4.2541453616520055
+          },
+          "mean_y": -2.2525692337139205,
+          "asset_regime_segments": 10
+        },
+        "510500.SS": {
+          "n": 99,
+          "dates": 70,
+          "assets": 3,
+          "rmse": {
+            "B0": 5.027554417845086,
+            "ETF_mean": 4.341590511015717,
+            "ETF_state_mean": 4.007602738576885,
+            "B1": 4.113650345435774,
+            "B2": 4.113650345435774
+          },
+          "mean_y": -2.3589404486286956,
+          "asset_regime_segments": 13
+        },
+        "588000.SS": {
+          "n": 109,
+          "dates": 75,
+          "assets": 3,
+          "rmse": {
+            "B0": 3.578887420738894,
+            "ETF_mean": 3.720944746831721,
+            "ETF_state_mean": 3.7959746249273563,
+            "B1": 3.6272740569116153,
+            "B2": 3.6272740569116153
+          },
+          "mean_y": 0.05081295823255499,
+          "asset_regime_segments": 14
+        }
+      },
+      "own_asset_environment": {
+        "up": {
+          "n": 81,
+          "dates": 56,
+          "assets": 4,
+          "rmse": {
+            "B0": 4.590224968671022,
+            "ETF_mean": 4.195928216501569,
+            "ETF_state_mean": 4.079588015479785,
+            "B1": 4.111104377215493,
+            "B2": 4.111104377215493
+          },
+          "mean_y": -1.9964512500181602,
+          "asset_regime_segments": 9
+        },
+        "sideways": {
+          "n": 38,
+          "dates": 28,
+          "assets": 3,
+          "rmse": {
+            "B0": 5.049057660509669,
+            "ETF_mean": 5.055923250057867,
+            "ETF_state_mean": 4.863156713739336,
+            "B1": 4.246073240949725,
+            "B2": 4.246073240949725
+          },
+          "mean_y": 1.1324523795231447,
+          "asset_regime_segments": 6
+        },
+        "down": {
+          "n": 3,
+          "dates": 3,
+          "assets": 1,
+          "rmse": {
+            "B0": 1.5856968834974763,
+            "ETF_mean": 0.5338526126397335,
+            "ETF_state_mean": 1.2663883470243877,
+            "B1": 0.661373975359804,
+            "B2": 0.661373975359804
+          },
+          "mean_y": 0.2793064069895582,
+          "asset_regime_segments": 1
+        },
+        "unknown": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        }
+      },
+      "own_asset_five": {
+        "0": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        },
+        "1": {
+          "n": 3,
+          "dates": 3,
+          "assets": 2,
+          "rmse": {
+            "B0": 6.662503261433648,
+            "ETF_mean": 6.20398174348205,
+            "ETF_state_mean": 6.863632991552181,
+            "B1": 6.219567937766832,
+            "B2": 6.219567937766832
+          },
+          "mean_y": -0.08608566804854112,
+          "asset_regime_segments": 3
+        },
+        "2": {
+          "n": 78,
+          "dates": 54,
+          "assets": 4,
+          "rmse": {
+            "B0": 4.621385004624761,
+            "ETF_mean": 4.223364072777901,
+            "ETF_state_mean": 4.051402564826186,
+            "B1": 4.102928332072557,
+            "B2": 4.102928332072557
+          },
+          "mean_y": -2.089406340554322,
+          "asset_regime_segments": 9
+        },
+        "3": {
+          "n": 38,
+          "dates": 28,
+          "assets": 3,
+          "rmse": {
+            "B0": 5.049057660509669,
+            "ETF_mean": 5.055923250057867,
+            "ETF_state_mean": 4.863156713739336,
+            "B1": 4.246073240949725,
+            "B2": 4.246073240949725
+          },
+          "mean_y": 1.1324523795231447,
+          "asset_regime_segments": 6
+        },
+        "4": {
+          "n": 3,
+          "dates": 3,
+          "assets": 1,
+          "rmse": {
+            "B0": 1.5856968834974763,
+            "ETF_mean": 0.5338526126397335,
+            "ETF_state_mean": 1.2663883470243877,
+            "B1": 0.661373975359804,
+            "B2": 0.661373975359804
+          },
+          "mean_y": 0.2793064069895582,
+          "asset_regime_segments": 1
+        },
+        "5": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        }
+      },
+      "by_state": {
+        "green": {
+          "n": 84,
+          "dates": 63,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.6021055379795097,
+            "ETF_mean": 3.2719953193499007,
+            "ETF_state_mean": 3.5135058520639144,
+            "B1": 3.3903566467362123,
+            "B2": 3.3903566467362123
+          },
+          "mean_y": -0.528017910877804,
+          "asset_regime_segments": 13
+        },
+        "black": {
+          "n": 38,
+          "dates": 27,
+          "assets": 4,
+          "rmse": {
+            "B0": 6.310943956446854,
+            "ETF_mean": 5.76933227735808,
+            "ETF_state_mean": 5.215314508422321,
+            "B1": 5.098562028837706,
+            "B2": 5.098562028837706
+          },
+          "mean_y": -3.8787274293227587,
+          "asset_regime_segments": 12
+        }
+      },
+      "increment20": [
+        {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 16.84769868834363,
+          "new_value": 16.84769868834363,
+          "absolute_error_improvement": 0.0,
+          "relative_percent": 0.0,
+          "lo": 0.0,
+          "hi": 0.0,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 122,
+          "dates": 80,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 20,
+          "draws": 1000,
+          "valid_draws": 997,
+          "unestimable_draws": 3,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        },
+        {
+          "new_model": "B2",
+          "old_model": "B0",
+          "old_value": 22.83870720417272,
+          "new_value": 16.84769868834363,
+          "absolute_error_improvement": 5.99100851582909,
+          "relative_percent": 26.231819788532118,
+          "lo": -0.5521571326957784,
+          "hi": 12.592722242913853,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 122,
+          "dates": 80,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 20,
+          "draws": 1000,
+          "valid_draws": 997,
+          "unestimable_draws": 3,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        }
+      ],
+      "fallback_ETF_state_mean": 0,
+      "increment60": [
+        {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 16.84769868834363,
+          "new_value": 16.84769868834363,
+          "absolute_error_improvement": 0.0,
+          "relative_percent": 0.0,
+          "lo": 0.0,
+          "hi": 0.0,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 122,
+          "dates": 80,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 995,
+          "unestimable_draws": 5,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        },
+        {
+          "new_model": "B2",
+          "old_model": "B0",
+          "old_value": 22.83870720417272,
+          "new_value": 16.84769868834363,
+          "absolute_error_improvement": 5.99100851582909,
+          "relative_percent": 26.231819788532118,
+          "lo": -0.6760860418802894,
+          "hi": 11.903038840873695,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 122,
+          "dates": 80,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 995,
+          "unestimable_draws": 5,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        }
+      ]
+    },
+    "core/ridge-mae": {
+      "overall": {
+        "n": 122,
+        "dates": 80,
+        "assets": 4,
+        "rmse": {
+          "B0": 4.6046398952052705,
+          "ETF_mean": 4.017929125920996,
+          "ETF_state_mean": 4.03846209491216,
+          "B1": 4.236830172304248,
+          "B2": 4.2174461224695925
+        },
+        "mean_y": 4.940927412202866,
+        "asset_regime_segments": 16
+      },
+      "by_period": {
+        "2025": {
+          "n": 75,
+          "dates": 47,
+          "assets": 4,
+          "rmse": {
+            "B0": 4.550420316322662,
+            "ETF_mean": 4.00279814030763,
+            "ETF_state_mean": 4.1889237236730406,
+            "B1": 4.100937572910697,
+            "B2": 4.109891407812194
+          },
+          "mean_y": 4.341054485422222,
+          "asset_regime_segments": 11
+        },
+        "2026": {
+          "n": 47,
+          "dates": 33,
+          "assets": 4,
+          "rmse": {
+            "B0": 4.574708060560995,
+            "ETF_mean": 3.9790784660640357,
+            "ETF_state_mean": 3.8121331982855415,
+            "B1": 4.295534403955893,
+            "B2": 4.248661348465177
+          },
+          "mean_y": 5.79450875479038,
+          "asset_regime_segments": 9
+        }
+      },
+      "by_asset": {
+        "510050.SS": {
+          "n": 47,
+          "dates": 47,
+          "assets": 1,
+          "rmse": {
+            "B0": 2.5349847223086353,
+            "ETF_mean": 2.3584402236062565,
+            "ETF_state_mean": 2.1930702516789546,
+            "B1": 2.2411943259537406,
+            "B2": 2.223818956244336
+          },
+          "mean_y": 2.4049433045019444,
+          "asset_regime_segments": 5
+        },
+        "510300.SS": {
+          "n": 39,
+          "dates": 39,
+          "assets": 1,
+          "rmse": {
+            "B0": 2.797559936769899,
+            "ETF_mean": 2.766484162177723,
+            "ETF_state_mean": 2.7224584347907275,
+            "B1": 2.676825665864105,
+            "B2": 2.6846835196007888
+          },
+          "mean_y": 3.049473963435992,
+          "asset_regime_segments": 6
+        },
+        "510500.SS": {
+          "n": 23,
+          "dates": 23,
+          "assets": 1,
+          "rmse": {
+            "B0": 3.242114635636676,
+            "ETF_mean": 3.1394809026200123,
+            "ETF_state_mean": 3.3111248022167556,
+            "B1": 3.2704043996880676,
+            "B2": 3.2820541266599847
+          },
+          "mean_y": 4.560954857538906,
+          "asset_regime_segments": 3
+        },
+        "588000.SS": {
+          "n": 13,
+          "dates": 13,
+          "assets": 1,
+          "rmse": {
+            "B0": 7.749002374841314,
+            "ETF_mean": 6.442282405939463,
+            "ETF_state_mean": 6.484737454542931,
+            "B1": 6.9942138261691325,
+            "B2": 6.94425169063173
+          },
+          "mean_y": 9.748337523334621,
+          "asset_regime_segments": 2
+        }
+      },
+      "drop_one": {
+        "510050.SS": {
+          "n": 75,
+          "dates": 56,
+          "assets": 3,
+          "rmse": {
+            "B0": 5.1115779271416715,
+            "ETF_mean": 4.435191749157078,
+            "ETF_state_mean": 4.488026561098247,
+            "B1": 4.718049301321586,
+            "B2": 4.697589326224801
+          },
+          "mean_y": 5.786255448103171,
+          "asset_regime_segments": 11
+        },
+        "510300.SS": {
+          "n": 83,
+          "dates": 73,
+          "assets": 3,
+          "rmse": {
+            "B0": 5.065717871412502,
+            "ETF_mean": 4.355899571237337,
+            "ETF_state_mean": 4.390327415239326,
+            "B1": 4.64174981339156,
+            "B2": 4.616632307332518
+          },
+          "mean_y": 5.571411895125156,
+          "asset_regime_segments": 10
+        },
+        "510500.SS": {
+          "n": 99,
+          "dates": 70,
+          "assets": 3,
+          "rmse": {
+            "B0": 4.976596124107806,
+            "ETF_mean": 4.270779690945641,
+            "ETF_state_mean": 4.253357768176193,
+            "B1": 4.513216690945661,
+            "B2": 4.48610922342176
+          },
+          "mean_y": 5.067584930424185,
+          "asset_regime_segments": 13
+        },
+        "588000.SS": {
+          "n": 109,
+          "dates": 75,
+          "assets": 3,
+          "rmse": {
+            "B0": 2.8730817631228738,
+            "ETF_mean": 2.7732060414990127,
+            "ETF_state_mean": 2.7799810858959284,
+            "B1": 2.761876933633787,
+            "B2": 2.764342938258177
+          },
+          "mean_y": 3.3384573751589466,
+          "asset_regime_segments": 14
+        }
+      },
+      "own_asset_environment": {
+        "up": {
+          "n": 81,
+          "dates": 56,
+          "assets": 4,
+          "rmse": {
+            "B0": 4.495656144125372,
+            "ETF_mean": 3.8112831624117196,
+            "ETF_state_mean": 3.8087365979148533,
+            "B1": 4.092898751695201,
+            "B2": 4.0707789619499115
+          },
+          "mean_y": 4.663471453233786,
+          "asset_regime_segments": 9
+        },
+        "sideways": {
+          "n": 38,
+          "dates": 28,
+          "assets": 3,
+          "rmse": {
+            "B0": 3.8121507220229742,
+            "ETF_mean": 3.8591113589631174,
+            "ETF_state_mean": 3.9657669276968677,
+            "B1": 3.7501664746708085,
+            "B2": 3.758138374545972
+          },
+          "mean_y": 3.786432760817929,
+          "asset_regime_segments": 6
+        },
+        "down": {
+          "n": 3,
+          "dates": 3,
+          "assets": 1,
+          "rmse": {
+            "B0": 0.6076080291534685,
+            "ETF_mean": 1.2124247781926012,
+            "ETF_state_mean": 0.9745312628944863,
+            "B1": 1.085259818413658,
+            "B2": 1.0278813740133175
+          },
+          "mean_y": 3.629736792422374,
+          "asset_regime_segments": 1
+        },
+        "unknown": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        }
+      },
+      "own_asset_five": {
+        "0": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        },
+        "1": {
+          "n": 3,
+          "dates": 3,
+          "assets": 2,
+          "rmse": {
+            "B0": 6.9579329953952245,
+            "ETF_mean": 5.930240887732355,
+            "ETF_state_mean": 6.793517189826319,
+            "B1": 6.252137675528106,
+            "B2": 6.270321500302429
+          },
+          "mean_y": 6.1829775892661925,
+          "asset_regime_segments": 3
+        },
+        "2": {
+          "n": 78,
+          "dates": 54,
+          "assets": 4,
+          "rmse": {
+            "B0": 4.364516846226353,
+            "ETF_mean": 3.7066976177385333,
+            "ETF_state_mean": 3.6081792386269154,
+            "B1": 4.005955546423856,
+            "B2": 3.9774222340983876
+          },
+          "mean_y": 4.604854336015446,
+          "asset_regime_segments": 9
+        },
+        "3": {
+          "n": 38,
+          "dates": 28,
+          "assets": 3,
+          "rmse": {
+            "B0": 3.8121507220229742,
+            "ETF_mean": 3.8591113589631174,
+            "ETF_state_mean": 3.9657669276968677,
+            "B1": 3.7501664746708085,
+            "B2": 3.758138374545972
+          },
+          "mean_y": 3.786432760817929,
+          "asset_regime_segments": 6
+        },
+        "4": {
+          "n": 3,
+          "dates": 3,
+          "assets": 1,
+          "rmse": {
+            "B0": 0.6076080291534685,
+            "ETF_mean": 1.2124247781926012,
+            "ETF_state_mean": 0.9745312628944863,
+            "B1": 1.085259818413658,
+            "B2": 1.0278813740133175
+          },
+          "mean_y": 3.629736792422374,
+          "asset_regime_segments": 1
+        },
+        "5": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        }
+      },
+      "by_state": {
+        "green": {
+          "n": 84,
+          "dates": 63,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.9418514854039914,
+            "ETF_mean": 3.4467939977024398,
+            "ETF_state_mean": 3.436738662950777,
+            "B1": 3.5327032688542594,
+            "B2": 3.5394931302765786
+          },
+          "mean_y": 4.00963585482105,
+          "asset_regime_segments": 13
+        },
+        "black": {
+          "n": 38,
+          "dates": 27,
+          "assets": 4,
+          "rmse": {
+            "B0": 5.517498981991822,
+            "ETF_mean": 4.871503555932298,
+            "ETF_state_mean": 4.92742374804791,
+            "B1": 5.225127761740605,
+            "B2": 5.172317115497795
+          },
+          "mean_y": 6.6513740731586,
+          "asset_regime_segments": 12
+        }
+      },
+      "increment20": [
+        {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 17.950729908947643,
+          "new_value": 17.7868517959338,
+          "absolute_error_improvement": 0.16387811301384403,
+          "relative_percent": 0.9129328659340925,
+          "lo": -0.10977557732836198,
+          "hi": 0.4389812544429053,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 122,
+          "dates": 80,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 20,
+          "draws": 1000,
+          "valid_draws": 997,
+          "unestimable_draws": 3,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        },
+        {
+          "new_model": "B2",
+          "old_model": "B0",
+          "old_value": 21.20270856451601,
+          "new_value": 17.7868517959338,
+          "absolute_error_improvement": 3.415856768582209,
+          "relative_percent": 16.110473613257355,
+          "lo": 0.549184494938058,
+          "hi": 6.514749949057808,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 122,
+          "dates": 80,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 20,
+          "draws": 1000,
+          "valid_draws": 997,
+          "unestimable_draws": 3,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        }
+      ],
+      "fallback_ETF_state_mean": 0,
+      "increment60": [
+        {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 17.950729908947643,
+          "new_value": 17.7868517959338,
+          "absolute_error_improvement": 0.16387811301384403,
+          "relative_percent": 0.9129328659340925,
+          "lo": -0.10508858316010389,
+          "hi": 0.3921999340356958,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 122,
+          "dates": 80,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 995,
+          "unestimable_draws": 5,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        },
+        {
+          "new_model": "B2",
+          "old_model": "B0",
+          "old_value": 21.20270856451601,
+          "new_value": 17.7868517959338,
+          "absolute_error_improvement": 3.415856768582209,
+          "relative_percent": 16.110473613257355,
+          "lo": 0.5557956069869524,
+          "hi": 7.153598544961228,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 122,
+          "dates": 80,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 995,
+          "unestimable_draws": 5,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        }
+      ]
+    },
+    "core/lightgbm-mae": {
+      "overall": {
+        "n": 122,
+        "dates": 80,
+        "assets": 4,
+        "rmse": {
+          "B0": 4.6046398952052705,
+          "ETF_mean": 4.017929125920996,
+          "ETF_state_mean": 4.03846209491216,
+          "B1": 3.8195816266690814,
+          "B2": 3.8117547694222704
+        },
+        "mean_y": 4.940927412202866,
+        "asset_regime_segments": 16
+      },
+      "by_period": {
+        "2025": {
+          "n": 75,
+          "dates": 47,
+          "assets": 4,
+          "rmse": {
+            "B0": 4.550420316322662,
+            "ETF_mean": 4.00279814030763,
+            "ETF_state_mean": 4.1889237236730406,
+            "B1": 3.8410821274716334,
+            "B2": 3.8410821274716334
+          },
+          "mean_y": 4.341054485422222,
+          "asset_regime_segments": 11
+        },
+        "2026": {
+          "n": 47,
+          "dates": 33,
+          "assets": 4,
+          "rmse": {
+            "B0": 4.574708060560995,
+            "ETF_mean": 3.9790784660640357,
+            "ETF_state_mean": 3.8121331982855415,
+            "B1": 3.785742091745686,
+            "B2": 3.7678226952145355
+          },
+          "mean_y": 5.79450875479038,
+          "asset_regime_segments": 9
+        }
+      },
+      "by_asset": {
+        "510050.SS": {
+          "n": 47,
+          "dates": 47,
+          "assets": 1,
+          "rmse": {
+            "B0": 2.5349847223086353,
+            "ETF_mean": 2.3584402236062565,
+            "ETF_state_mean": 2.1930702516789546,
+            "B1": 2.099046855743033,
+            "B2": 2.091974365651545
+          },
+          "mean_y": 2.4049433045019444,
+          "asset_regime_segments": 5
+        },
+        "510300.SS": {
+          "n": 39,
+          "dates": 39,
+          "assets": 1,
+          "rmse": {
+            "B0": 2.797559936769899,
+            "ETF_mean": 2.766484162177723,
+            "ETF_state_mean": 2.7224584347907275,
+            "B1": 2.700292890242963,
+            "B2": 2.6895228274263703
+          },
+          "mean_y": 3.049473963435992,
+          "asset_regime_segments": 6
+        },
+        "510500.SS": {
+          "n": 23,
+          "dates": 23,
+          "assets": 1,
+          "rmse": {
+            "B0": 3.242114635636676,
+            "ETF_mean": 3.1394809026200123,
+            "ETF_state_mean": 3.3111248022167556,
+            "B1": 3.2862169407022064,
+            "B2": 3.284249657190056
+          },
+          "mean_y": 4.560954857538906,
+          "asset_regime_segments": 3
+        },
+        "588000.SS": {
+          "n": 13,
+          "dates": 13,
+          "assets": 1,
+          "rmse": {
+            "B0": 7.749002374841314,
+            "ETF_mean": 6.442282405939463,
+            "ETF_state_mean": 6.484737454542931,
+            "B1": 5.988323140420241,
+            "B2": 5.976764349738912
+          },
+          "mean_y": 9.748337523334621,
+          "asset_regime_segments": 2
+        }
+      },
+      "drop_one": {
+        "510050.SS": {
+          "n": 75,
+          "dates": 56,
+          "assets": 3,
+          "rmse": {
+            "B0": 5.1115779271416715,
+            "ETF_mean": 4.435191749157078,
+            "ETF_state_mean": 4.488026561098247,
+            "B1": 4.240708176258119,
+            "B2": 4.232475278223155
+          },
+          "mean_y": 5.786255448103171,
+          "asset_regime_segments": 11
+        },
+        "510300.SS": {
+          "n": 83,
+          "dates": 73,
+          "assets": 3,
+          "rmse": {
+            "B0": 5.065717871412502,
+            "ETF_mean": 4.355899571237337,
+            "ETF_state_mean": 4.390327415239326,
+            "B1": 4.125741691625697,
+            "B2": 4.118428691042502
+          },
+          "mean_y": 5.571411895125156,
+          "asset_regime_segments": 10
+        },
+        "510500.SS": {
+          "n": 99,
+          "dates": 70,
+          "assets": 3,
+          "rmse": {
+            "B0": 4.976596124107806,
+            "ETF_mean": 4.270779690945641,
+            "ETF_state_mean": 4.253357768176193,
+            "B1": 3.9815237212987498,
+            "B2": 3.972052445025565
+          },
+          "mean_y": 5.067584930424185,
+          "asset_regime_segments": 13
+        },
+        "588000.SS": {
+          "n": 109,
+          "dates": 75,
+          "assets": 3,
+          "rmse": {
+            "B0": 2.8730817631228738,
+            "ETF_mean": 2.7732060414990127,
+            "ETF_state_mean": 2.7799810858959284,
+            "B1": 2.7384181064414768,
+            "B2": 2.732287539562391
+          },
+          "mean_y": 3.3384573751589466,
+          "asset_regime_segments": 14
+        }
+      },
+      "own_asset_environment": {
+        "up": {
+          "n": 81,
+          "dates": 56,
+          "assets": 4,
+          "rmse": {
+            "B0": 4.495656144125372,
+            "ETF_mean": 3.8112831624117196,
+            "ETF_state_mean": 3.8087365979148533,
+            "B1": 3.646589008914459,
+            "B2": 3.639049372924984
+          },
+          "mean_y": 4.663471453233786,
+          "asset_regime_segments": 9
+        },
+        "sideways": {
+          "n": 38,
+          "dates": 28,
+          "assets": 3,
+          "rmse": {
+            "B0": 3.8121507220229742,
+            "ETF_mean": 3.8591113589631174,
+            "ETF_state_mean": 3.9657669276968677,
+            "B1": 3.649255434822482,
+            "B2": 3.6441422358930784
+          },
+          "mean_y": 3.786432760817929,
+          "asset_regime_segments": 6
+        },
+        "down": {
+          "n": 3,
+          "dates": 3,
+          "assets": 1,
+          "rmse": {
+            "B0": 0.6076080291534685,
+            "ETF_mean": 1.2124247781926012,
+            "ETF_state_mean": 0.9745312628944863,
+            "B1": 0.8007821446187413,
+            "B2": 0.8702626367483272
+          },
+          "mean_y": 3.629736792422374,
+          "asset_regime_segments": 1
+        },
+        "unknown": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        }
+      },
+      "own_asset_five": {
+        "0": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        },
+        "1": {
+          "n": 3,
+          "dates": 3,
+          "assets": 2,
+          "rmse": {
+            "B0": 6.9579329953952245,
+            "ETF_mean": 5.930240887732355,
+            "ETF_state_mean": 6.793517189826319,
+            "B1": 5.757541220143079,
+            "B2": 5.757541220143079
+          },
+          "mean_y": 6.1829775892661925,
+          "asset_regime_segments": 3
+        },
+        "2": {
+          "n": 78,
+          "dates": 54,
+          "assets": 4,
+          "rmse": {
+            "B0": 4.364516846226353,
+            "ETF_mean": 3.7066976177385333,
+            "ETF_state_mean": 3.6081792386269154,
+            "B1": 3.5369183317255883,
+            "B2": 3.5282285653503926
+          },
+          "mean_y": 4.604854336015446,
+          "asset_regime_segments": 9
+        },
+        "3": {
+          "n": 38,
+          "dates": 28,
+          "assets": 3,
+          "rmse": {
+            "B0": 3.8121507220229742,
+            "ETF_mean": 3.8591113589631174,
+            "ETF_state_mean": 3.9657669276968677,
+            "B1": 3.649255434822482,
+            "B2": 3.6441422358930784
+          },
+          "mean_y": 3.786432760817929,
+          "asset_regime_segments": 6
+        },
+        "4": {
+          "n": 3,
+          "dates": 3,
+          "assets": 1,
+          "rmse": {
+            "B0": 0.6076080291534685,
+            "ETF_mean": 1.2124247781926012,
+            "ETF_state_mean": 0.9745312628944863,
+            "B1": 0.8007821446187413,
+            "B2": 0.8702626367483272
+          },
+          "mean_y": 3.629736792422374,
+          "asset_regime_segments": 1
+        },
+        "5": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        }
+      },
+      "by_state": {
+        "green": {
+          "n": 84,
+          "dates": 63,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.9418514854039914,
+            "ETF_mean": 3.4467939977024398,
+            "ETF_state_mean": 3.436738662950777,
+            "B1": 3.4812274331253463,
+            "B2": 3.477009453117479
+          },
+          "mean_y": 4.00963585482105,
+          "asset_regime_segments": 13
+        },
+        "black": {
+          "n": 38,
+          "dates": 27,
+          "assets": 4,
+          "rmse": {
+            "B0": 5.517498981991822,
+            "ETF_mean": 4.871503555932298,
+            "ETF_state_mean": 4.92742374804791,
+            "B1": 4.326039147188534,
+            "B2": 4.313130895381867
+          },
+          "mean_y": 6.6513740731586,
+          "asset_regime_segments": 12
+        }
+      },
+      "increment20": [
+        {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 14.589203802788028,
+          "new_value": 14.529474422213427,
+          "absolute_error_improvement": 0.0597293805746002,
+          "relative_percent": 0.40940808958461317,
+          "lo": -0.0029477550625864215,
+          "hi": 0.12679822487050513,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 122,
+          "dates": 80,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 20,
+          "draws": 1000,
+          "valid_draws": 997,
+          "unestimable_draws": 3,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        },
+        {
+          "new_model": "B2",
+          "old_model": "B0",
+          "old_value": 21.20270856451601,
+          "new_value": 14.529474422213427,
+          "absolute_error_improvement": 6.673234142302581,
+          "relative_percent": 31.473498407041422,
+          "lo": 0.4451436153410662,
+          "hi": 12.271689224594146,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 122,
+          "dates": 80,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 20,
+          "draws": 1000,
+          "valid_draws": 997,
+          "unestimable_draws": 3,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        }
+      ],
+      "fallback_ETF_state_mean": 0,
+      "increment60": [
+        {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 14.589203802788028,
+          "new_value": 14.529474422213427,
+          "absolute_error_improvement": 0.0597293805746002,
+          "relative_percent": 0.40940808958461317,
+          "lo": -0.002630491460101714,
+          "hi": 0.12082723493542383,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 122,
+          "dates": 80,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 995,
+          "unestimable_draws": 5,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        },
+        {
+          "new_model": "B2",
+          "old_model": "B0",
+          "old_value": 21.20270856451601,
+          "new_value": 14.529474422213427,
+          "absolute_error_improvement": 6.673234142302581,
+          "relative_percent": 31.473498407041422,
+          "lo": 0.7873420497604683,
+          "hi": 11.20613126349346,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 122,
+          "dates": 80,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 995,
+          "unestimable_draws": 5,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        }
+      ]
+    },
+    "continuous/ridge-forward_return": {
+      "overall": {
+        "n": 1268,
+        "dates": 317,
+        "assets": 4,
+        "rmse": {
+          "B0": 6.774242407630619,
+          "ETF_mean": 6.758136847874303,
+          "ETF_state_mean": 6.9402420993815275,
+          "B1": 6.995442303694219,
+          "B2": 6.960365054830107
+        },
+        "mean_y": 2.107048208680971,
+        "asset_regime_segments": 23
+      },
+      "by_period": {
+        "2025": {
+          "n": 888,
+          "dates": 222,
+          "assets": 4,
+          "rmse": {
+            "B0": 6.047282885858321,
+            "ETF_mean": 6.044927051174927,
+            "ETF_state_mean": 6.322660786193275,
+            "B1": 6.480931525871878,
+            "B2": 6.47692003304355
+          },
+          "mean_y": 2.4006486193579333,
+          "asset_regime_segments": 14
+        },
+        "2026": {
+          "n": 380,
+          "dates": 95,
+          "assets": 4,
+          "rmse": {
+            "B0": 8.226264903922416,
+            "ETF_mean": 8.18600948378146,
+            "ETF_state_mean": 8.204136117029915,
+            "B1": 8.070890138316038,
+            "B2": 7.976669022767962
+          },
+          "mean_y": 1.4209504068884897,
+          "asset_regime_segments": 13
+        }
+      },
+      "by_asset": {
+        "510050.SS": {
+          "n": 317,
+          "dates": 317,
+          "assets": 1,
+          "rmse": {
+            "B0": 3.2967045661636947,
+            "ETF_mean": 3.280200265405651,
+            "ETF_state_mean": 3.310439393284424,
+            "B1": 3.6059529073825463,
+            "B2": 3.504201195536152
+          },
+          "mean_y": 0.8410929646060841,
+          "asset_regime_segments": 7
+        },
+        "510300.SS": {
+          "n": 317,
+          "dates": 317,
+          "assets": 1,
+          "rmse": {
+            "B0": 4.02858904122356,
+            "ETF_mean": 4.04633078464543,
+            "ETF_state_mean": 4.055668668506286,
+            "B1": 4.437609122602111,
+            "B2": 4.460437972954352
+          },
+          "mean_y": 1.6629849149168567,
+          "asset_regime_segments": 6
+        },
+        "510500.SS": {
+          "n": 317,
+          "dates": 317,
+          "assets": 1,
+          "rmse": {
+            "B0": 5.93609129335527,
+            "ETF_mean": 5.928404462146335,
+            "ETF_state_mean": 6.041335494937396,
+            "B1": 6.1780656895478065,
+            "B2": 6.1540430690455
+          },
+          "mean_y": 2.135579184673641,
+          "asset_regime_segments": 3
+        },
+        "588000.SS": {
+          "n": 317,
+          "dates": 317,
+          "assets": 1,
+          "rmse": {
+            "B0": 11.010289291689157,
+            "ETF_mean": 10.973202292478364,
+            "ETF_state_mean": 11.34736311679535,
+            "B1": 11.175020596742932,
+            "B2": 11.123827927515034
+          },
+          "mean_y": 3.7885357705273,
+          "asset_regime_segments": 7
+        }
+      },
+      "drop_one": {
+        "510050.SS": {
+          "n": 951,
+          "dates": 317,
+          "assets": 3,
+          "rmse": {
+            "B0": 7.587120222078108,
+            "ETF_mean": 7.570335546002751,
+            "ETF_state_mean": 7.782648062956067,
+            "B1": 7.804741202777493,
+            "B2": 7.7783310285091245
+          },
+          "mean_y": 2.5290332900392656,
+          "asset_regime_segments": 16
+        },
+        "510300.SS": {
+          "n": 951,
+          "dates": 317,
+          "assets": 3,
+          "rmse": {
+            "B0": 7.468420429298681,
+            "ETF_mean": 7.445733941876075,
+            "ETF_state_mean": 7.664189307930905,
+            "B1": 7.660558669188934,
+            "B2": 7.613392145323645
+          },
+          "mean_y": 2.2550693066023415,
+          "asset_regime_segments": 17
+        },
+        "510500.SS": {
+          "n": 951,
+          "dates": 317,
+          "assets": 3,
+          "rmse": {
+            "B0": 7.031459330426271,
+            "ETF_mean": 7.012932699700581,
+            "ETF_state_mean": 7.215033079843786,
+            "B1": 7.247444525092755,
+            "B2": 7.209125714221142
+          },
+          "mean_y": 2.0975378833500797,
+          "asset_regime_segments": 20
+        },
+        "588000.SS": {
+          "n": 951,
+          "dates": 317,
+          "assets": 3,
+          "rmse": {
+            "B0": 4.558324637505881,
+            "ETF_mean": 4.556258921042319,
+            "ETF_state_mean": 4.61537979252352,
+            "B1": 4.860170324849048,
+            "B2": 4.832086472220086
+          },
+          "mean_y": 1.5465523547321938,
+          "asset_regime_segments": 16
+        }
+      },
+      "own_asset_environment": {
+        "up": {
+          "n": 787,
+          "dates": 286,
+          "assets": 4,
+          "rmse": {
+            "B0": 6.333039005221792,
+            "ETF_mean": 6.31642764320035,
+            "ETF_state_mean": 6.343195360584994,
+            "B1": 6.446385505584028,
+            "B2": 6.366297559993013
+          },
+          "mean_y": 1.3646020539092696,
+          "asset_regime_segments": 10
+        },
+        "sideways": {
+          "n": 424,
+          "dates": 179,
+          "assets": 4,
+          "rmse": {
+            "B0": 6.951171760622707,
+            "ETF_mean": 6.922326117321186,
+            "ETF_state_mean": 7.2374886862134975,
+            "B1": 7.3225425292670145,
+            "B2": 7.2964692166814356
+          },
+          "mean_y": 3.262094882361068,
+          "asset_regime_segments": 10
+        },
+        "down": {
+          "n": 57,
+          "dates": 57,
+          "assets": 2,
+          "rmse": {
+            "B0": 10.905389231601161,
+            "ETF_mean": 10.88239983779014,
+            "ETF_state_mean": 11.88819088114163,
+            "B1": 11.627692607343612,
+            "B2": 11.697581742982722
+          },
+          "mean_y": 6.276446061443153,
+          "asset_regime_segments": 3
+        },
+        "unknown": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        }
+      },
+      "own_asset_five": {
+        "0": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        },
+        "1": {
+          "n": 89,
+          "dates": 80,
+          "assets": 3,
+          "rmse": {
+            "B0": 5.333606037205814,
+            "ETF_mean": 5.337929083310225,
+            "ETF_state_mean": 5.171161426341136,
+            "B1": 5.743468506617256,
+            "B2": 5.636880955667543
+          },
+          "mean_y": 1.5548732139388162,
+          "asset_regime_segments": 4
+        },
+        "2": {
+          "n": 698,
+          "dates": 286,
+          "assets": 4,
+          "rmse": {
+            "B0": 6.689279046691832,
+            "ETF_mean": 6.667595791358477,
+            "ETF_state_mean": 6.754885681869723,
+            "B1": 6.810102833789163,
+            "B2": 6.712794954906745
+          },
+          "mean_y": 1.5393979664753878,
+          "asset_regime_segments": 10
+        },
+        "3": {
+          "n": 424,
+          "dates": 179,
+          "assets": 4,
+          "rmse": {
+            "B0": 6.951171760622707,
+            "ETF_mean": 6.922326117321186,
+            "ETF_state_mean": 7.2374886862134975,
+            "B1": 7.3225425292670145,
+            "B2": 7.2964692166814356
+          },
+          "mean_y": 3.262094882361068,
+          "asset_regime_segments": 10
+        },
+        "4": {
+          "n": 57,
+          "dates": 57,
+          "assets": 2,
+          "rmse": {
+            "B0": 10.905389231601161,
+            "ETF_mean": 10.88239983779014,
+            "ETF_state_mean": 11.88819088114163,
+            "B1": 11.627692607343612,
+            "B2": 11.697581742982722
+          },
+          "mean_y": 6.276446061443153,
+          "asset_regime_segments": 3
+        },
+        "5": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        }
+      },
+      "by_state": {
+        "black": {
+          "n": 373,
+          "dates": 148,
+          "assets": 4,
+          "rmse": {
+            "B0": 6.130402513120108,
+            "ETF_mean": 6.120078074971183,
+            "ETF_state_mean": 5.987868882717653,
+            "B1": 5.960154770576728,
+            "B2": 5.966424481595801
+          },
+          "mean_y": 2.608797453084917,
+          "asset_regime_segments": 18
+        },
+        "green": {
+          "n": 710,
+          "dates": 224,
+          "assets": 4,
+          "rmse": {
+            "B0": 7.290411561528033,
+            "ETF_mean": 7.271955152910555,
+            "ETF_state_mean": 7.622308782764277,
+            "B1": 7.724358270078638,
+            "B2": 7.684248727553826
+          },
+          "mean_y": 2.1615415348652096,
+          "asset_regime_segments": 22
+        },
+        "gray": {
+          "n": 185,
+          "dates": 118,
+          "assets": 4,
+          "rmse": {
+            "B0": 6.775900608277031,
+            "ETF_mean": 6.760645166956546,
+            "ETF_state_mean": 6.903198754399664,
+            "B1": 6.739109376004166,
+            "B2": 6.689784736745404
+          },
+          "mean_y": 1.3405563122898727,
+          "asset_regime_segments": 18
+        }
+      },
+      "increment20": [
+        {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 48.936213024314675,
+          "new_value": 48.44668169650012,
+          "absolute_error_improvement": 0.48953132781455366,
+          "relative_percent": 1.0003457512564833,
+          "lo": -0.5865245718163645,
+          "hi": 1.6468613047788703,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 1268,
+          "dates": 317,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 20,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        },
+        {
+          "new_model": "B2",
+          "old_model": "B0",
+          "old_value": 45.89036019734108,
+          "new_value": 48.44668169650012,
+          "absolute_error_improvement": -2.55632149915904,
+          "relative_percent": -5.5704977868252925,
+          "lo": -7.9651091863212935,
+          "hi": 2.0756786042768045,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 1268,
+          "dates": 317,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 20,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        }
+      ],
+      "fallback_ETF_state_mean": 0,
+      "increment60": [
+        {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 48.936213024314675,
+          "new_value": 48.44668169650012,
+          "absolute_error_improvement": 0.48953132781455366,
+          "relative_percent": 1.0003457512564833,
+          "lo": -0.6655761547131329,
+          "hi": 1.6990595982293448,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 1268,
+          "dates": 317,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        },
+        {
+          "new_model": "B2",
+          "old_model": "B0",
+          "old_value": 45.89036019734108,
+          "new_value": 48.44668169650012,
+          "absolute_error_improvement": -2.55632149915904,
+          "relative_percent": -5.5704977868252925,
+          "lo": -9.396863799487097,
+          "hi": 3.1729727726848966,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 1268,
+          "dates": 317,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        }
+      ]
+    },
+    "continuous/lightgbm-forward_return": {
+      "overall": {
+        "n": 1268,
+        "dates": 317,
+        "assets": 4,
+        "rmse": {
+          "B0": 6.774242407630619,
+          "ETF_mean": 6.758136847874303,
+          "ETF_state_mean": 6.9402420993815275,
+          "B1": 7.048190814188872,
+          "B2": 6.985830279793171
+        },
+        "mean_y": 2.107048208680971,
+        "asset_regime_segments": 23
+      },
+      "by_period": {
+        "2025": {
+          "n": 888,
+          "dates": 222,
+          "assets": 4,
+          "rmse": {
+            "B0": 6.047282885858321,
+            "ETF_mean": 6.044927051174927,
+            "ETF_state_mean": 6.322660786193275,
+            "B1": 6.49052482542756,
+            "B2": 6.475357947018218
+          },
+          "mean_y": 2.4006486193579333,
+          "asset_regime_segments": 14
+        },
+        "2026": {
+          "n": 380,
+          "dates": 95,
+          "assets": 4,
+          "rmse": {
+            "B0": 8.226264903922416,
+            "ETF_mean": 8.18600948378146,
+            "ETF_state_mean": 8.204136117029915,
+            "B1": 8.204897409578649,
+            "B2": 8.053544880795075
+          },
+          "mean_y": 1.4209504068884897,
+          "asset_regime_segments": 13
+        }
+      },
+      "by_asset": {
+        "510050.SS": {
+          "n": 317,
+          "dates": 317,
+          "assets": 1,
+          "rmse": {
+            "B0": 3.2967045661636947,
+            "ETF_mean": 3.280200265405651,
+            "ETF_state_mean": 3.310439393284424,
+            "B1": 3.469783461077396,
+            "B2": 3.451359384230027
+          },
+          "mean_y": 0.8410929646060841,
+          "asset_regime_segments": 7
+        },
+        "510300.SS": {
+          "n": 317,
+          "dates": 317,
+          "assets": 1,
+          "rmse": {
+            "B0": 4.02858904122356,
+            "ETF_mean": 4.04633078464543,
+            "ETF_state_mean": 4.055668668506286,
+            "B1": 4.375451700935756,
+            "B2": 4.3725665158468106
+          },
+          "mean_y": 1.6629849149168567,
+          "asset_regime_segments": 6
+        },
+        "510500.SS": {
+          "n": 317,
+          "dates": 317,
+          "assets": 1,
+          "rmse": {
+            "B0": 5.93609129335527,
+            "ETF_mean": 5.928404462146335,
+            "ETF_state_mean": 6.041335494937396,
+            "B1": 6.188456785310657,
+            "B2": 6.145514768935264
+          },
+          "mean_y": 2.135579184673641,
+          "asset_regime_segments": 3
+        },
+        "588000.SS": {
+          "n": 317,
+          "dates": 317,
+          "assets": 1,
+          "rmse": {
+            "B0": 11.010289291689157,
+            "ETF_mean": 10.973202292478364,
+            "ETF_state_mean": 11.34736311679535,
+            "B1": 11.367805539118807,
+            "B2": 11.24316358870944
+          },
+          "mean_y": 3.7885357705273,
+          "asset_regime_segments": 7
+        }
+      },
+      "drop_one": {
+        "510050.SS": {
+          "n": 951,
+          "dates": 317,
+          "assets": 3,
+          "rmse": {
+            "B0": 7.587120222078108,
+            "ETF_mean": 7.570335546002751,
+            "ETF_state_mean": 7.782648062956067,
+            "B1": 7.888146756285646,
+            "B2": 7.816551183081275
+          },
+          "mean_y": 2.5290332900392656,
+          "asset_regime_segments": 16
+        },
+        "510300.SS": {
+          "n": 951,
+          "dates": 317,
+          "assets": 3,
+          "rmse": {
+            "B0": 7.468420429298681,
+            "ETF_mean": 7.445733941876075,
+            "ETF_state_mean": 7.664189307930905,
+            "B1": 7.736566797265307,
+            "B2": 7.661330625437415
+          },
+          "mean_y": 2.2550693066023415,
+          "asset_regime_segments": 17
+        },
+        "510500.SS": {
+          "n": 951,
+          "dates": 317,
+          "assets": 3,
+          "rmse": {
+            "B0": 7.031459330426271,
+            "ETF_mean": 7.012932699700581,
+            "ETF_state_mean": 7.215033079843786,
+            "B1": 7.312340656479474,
+            "B2": 7.24430689155512
+          },
+          "mean_y": 2.0975378833500797,
+          "asset_regime_segments": 20
+        },
+        "588000.SS": {
+          "n": 951,
+          "dates": 317,
+          "assets": 3,
+          "rmse": {
+            "B0": 4.558324637505881,
+            "ETF_mean": 4.556258921042319,
+            "ETF_state_mean": 4.61537979252352,
+            "B1": 4.812517436769981,
+            "B2": 4.788826276163392
+          },
+          "mean_y": 1.5465523547321938,
+          "asset_regime_segments": 16
+        }
+      },
+      "own_asset_environment": {
+        "up": {
+          "n": 787,
+          "dates": 286,
+          "assets": 4,
+          "rmse": {
+            "B0": 6.333039005221792,
+            "ETF_mean": 6.31642764320035,
+            "ETF_state_mean": 6.343195360584994,
+            "B1": 6.5046637074285245,
+            "B2": 6.432922297023215
+          },
+          "mean_y": 1.3646020539092696,
+          "asset_regime_segments": 10
+        },
+        "sideways": {
+          "n": 424,
+          "dates": 179,
+          "assets": 4,
+          "rmse": {
+            "B0": 6.951171760622707,
+            "ETF_mean": 6.922326117321186,
+            "ETF_state_mean": 7.2374886862134975,
+            "B1": 7.441915917996802,
+            "B2": 7.389208488255808
+          },
+          "mean_y": 3.262094882361068,
+          "asset_regime_segments": 10
+        },
+        "down": {
+          "n": 57,
+          "dates": 57,
+          "assets": 2,
+          "rmse": {
+            "B0": 10.905389231601161,
+            "ETF_mean": 10.88239983779014,
+            "ETF_state_mean": 11.88819088114163,
+            "B1": 11.73548547552712,
+            "B2": 11.68318226272066
+          },
+          "mean_y": 6.276446061443153,
+          "asset_regime_segments": 3
+        },
+        "unknown": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        }
+      },
+      "own_asset_five": {
+        "0": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        },
+        "1": {
+          "n": 89,
+          "dates": 80,
+          "assets": 3,
+          "rmse": {
+            "B0": 5.333606037205814,
+            "ETF_mean": 5.337929083310225,
+            "ETF_state_mean": 5.171161426341136,
+            "B1": 5.855697984762279,
+            "B2": 5.871616312247355
+          },
+          "mean_y": 1.5548732139388162,
+          "asset_regime_segments": 4
+        },
+        "2": {
+          "n": 698,
+          "dates": 286,
+          "assets": 4,
+          "rmse": {
+            "B0": 6.689279046691832,
+            "ETF_mean": 6.667595791358477,
+            "ETF_state_mean": 6.754885681869723,
+            "B1": 6.837601406880129,
+            "B2": 6.746456772373034
+          },
+          "mean_y": 1.5393979664753878,
+          "asset_regime_segments": 10
+        },
+        "3": {
+          "n": 424,
+          "dates": 179,
+          "assets": 4,
+          "rmse": {
+            "B0": 6.951171760622707,
+            "ETF_mean": 6.922326117321186,
+            "ETF_state_mean": 7.2374886862134975,
+            "B1": 7.441915917996802,
+            "B2": 7.389208488255808
+          },
+          "mean_y": 3.262094882361068,
+          "asset_regime_segments": 10
+        },
+        "4": {
+          "n": 57,
+          "dates": 57,
+          "assets": 2,
+          "rmse": {
+            "B0": 10.905389231601161,
+            "ETF_mean": 10.88239983779014,
+            "ETF_state_mean": 11.88819088114163,
+            "B1": 11.73548547552712,
+            "B2": 11.68318226272066
+          },
+          "mean_y": 6.276446061443153,
+          "asset_regime_segments": 3
+        },
+        "5": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        }
+      },
+      "by_state": {
+        "black": {
+          "n": 373,
+          "dates": 148,
+          "assets": 4,
+          "rmse": {
+            "B0": 6.130402513120108,
+            "ETF_mean": 6.120078074971183,
+            "ETF_state_mean": 5.987868882717653,
+            "B1": 6.298510376637991,
+            "B2": 6.175944699687574
+          },
+          "mean_y": 2.608797453084917,
+          "asset_regime_segments": 18
+        },
+        "green": {
+          "n": 710,
+          "dates": 224,
+          "assets": 4,
+          "rmse": {
+            "B0": 7.290411561528033,
+            "ETF_mean": 7.271955152910555,
+            "ETF_state_mean": 7.622308782764277,
+            "B1": 7.647531217457522,
+            "B2": 7.621792502230798
+          },
+          "mean_y": 2.1615415348652096,
+          "asset_regime_segments": 22
+        },
+        "gray": {
+          "n": 185,
+          "dates": 118,
+          "assets": 4,
+          "rmse": {
+            "B0": 6.775900608277031,
+            "ETF_mean": 6.760645166956546,
+            "ETF_state_mean": 6.903198754399664,
+            "B1": 6.9738064196565706,
+            "B2": 6.873436259224777
+          },
+          "mean_y": 1.3405563122898727,
+          "asset_regime_segments": 18
+        }
+      },
+      "increment20": [
+        {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 49.676993753216394,
+          "new_value": 48.80182469807513,
+          "absolute_error_improvement": 0.8751690551412636,
+          "relative_percent": 1.7617190353524559,
+          "lo": -0.5030004882564839,
+          "hi": 2.3809457005252095,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 1268,
+          "dates": 317,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 20,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        },
+        {
+          "new_model": "B2",
+          "old_model": "B0",
+          "old_value": 45.89036019734108,
+          "new_value": 48.80182469807513,
+          "absolute_error_improvement": -2.9114645007340485,
+          "relative_percent": -6.344392347791467,
+          "lo": -7.000184759886404,
+          "hi": 1.3076540116978335,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 1268,
+          "dates": 317,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 20,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        }
+      ],
+      "fallback_ETF_state_mean": 0,
+      "increment60": [
+        {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 49.676993753216394,
+          "new_value": 48.80182469807513,
+          "absolute_error_improvement": 0.8751690551412636,
+          "relative_percent": 1.7617190353524559,
+          "lo": -0.5230629263652165,
+          "hi": 2.7774690049857114,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 1268,
+          "dates": 317,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        },
+        {
+          "new_model": "B2",
+          "old_model": "B0",
+          "old_value": 45.89036019734108,
+          "new_value": 48.80182469807513,
+          "absolute_error_improvement": -2.9114645007340485,
+          "relative_percent": -6.344392347791467,
+          "lo": -7.796970523227395,
+          "hi": 1.4121646459566273,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 1268,
+          "dates": 317,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        }
+      ]
+    },
+    "continuous/ridge-mae": {
+      "overall": {
+        "n": 1268,
+        "dates": 317,
+        "assets": 4,
+        "rmse": {
+          "B0": 3.692465501123168,
+          "ETF_mean": 3.559120329324282,
+          "ETF_state_mean": 3.552572533207732,
+          "B1": 3.5814270688033485,
+          "B2": 3.58434596500684
+        },
+        "mean_y": 2.9222618142049357,
+        "asset_regime_segments": 23
+      },
+      "by_period": {
+        "2025": {
+          "n": 888,
+          "dates": 222,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.696357675693683,
+            "ETF_mean": 3.5822877857597337,
+            "ETF_state_mean": 3.555222917335784,
+            "B1": 3.547896228635311,
+            "B2": 3.5445658446777424
+          },
+          "mean_y": 2.3870625207810994,
+          "asset_regime_segments": 14
+        },
+        "2026": {
+          "n": 380,
+          "dates": 95,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.6833540684740864,
+            "ETF_mean": 3.504384547269507,
+            "ETF_state_mean": 3.5463712813028767,
+            "B1": 3.6585853954029877,
+            "B2": 3.6756276527446925
+          },
+          "mean_y": 4.172938057784847,
+          "asset_regime_segments": 13
+        }
+      },
+      "by_asset": {
+        "510050.SS": {
+          "n": 317,
+          "dates": 317,
+          "assets": 1,
+          "rmse": {
+            "B0": 3.0254687815886547,
+            "ETF_mean": 2.5954455099157943,
+            "ETF_state_mean": 2.562998028746836,
+            "B1": 2.6034574594070676,
+            "B2": 2.6206461721956185
+          },
+          "mean_y": 2.0189848474743677,
+          "asset_regime_segments": 7
+        },
+        "510300.SS": {
+          "n": 317,
+          "dates": 317,
+          "assets": 1,
+          "rmse": {
+            "B0": 3.1137831693206257,
+            "ETF_mean": 2.7504835959249707,
+            "ETF_state_mean": 2.6861737062698388,
+            "B1": 2.890236855641573,
+            "B2": 2.8971460095329684
+          },
+          "mean_y": 2.008110562975232,
+          "asset_regime_segments": 6
+        },
+        "510500.SS": {
+          "n": 317,
+          "dates": 317,
+          "assets": 1,
+          "rmse": {
+            "B0": 3.9180292703866844,
+            "ETF_mean": 3.93076351072565,
+            "ETF_state_mean": 3.9455803286283975,
+            "B1": 3.923313932909099,
+            "B2": 3.929644564591386
+          },
+          "mean_y": 3.2308593779423243,
+          "asset_regime_segments": 3
+        },
+        "588000.SS": {
+          "n": 317,
+          "dates": 317,
+          "assets": 1,
+          "rmse": {
+            "B0": 4.509672446023139,
+            "ETF_mean": 4.573505317673841,
+            "ETF_state_mean": 4.596846115494082,
+            "B1": 4.558796700426498,
+            "B2": 4.548273982844953
+          },
+          "mean_y": 4.431092468427819,
+          "asset_regime_segments": 7
+        }
+      },
+      "drop_one": {
+        "510050.SS": {
+          "n": 951,
+          "dates": 317,
+          "assets": 3,
+          "rmse": {
+            "B0": 3.8894620261921196,
+            "ETF_mean": 3.8267920716746326,
+            "ETF_state_mean": 3.8259694858274305,
+            "B1": 3.852639296797589,
+            "B2": 3.852374057106419
+          },
+          "mean_y": 3.2233541364484575,
+          "asset_regime_segments": 16
+        },
+        "510300.SS": {
+          "n": 951,
+          "dates": 317,
+          "assets": 3,
+          "rmse": {
+            "B0": 3.866159174270793,
+            "ETF_mean": 3.790522833901465,
+            "ETF_state_mean": 3.7976991821607182,
+            "B1": 3.7838697262159404,
+            "B2": 3.7857931351695404
+          },
+          "mean_y": 3.22697889794817,
+          "asset_regime_segments": 17
+        },
+        "510500.SS": {
+          "n": 951,
+          "dates": 317,
+          "assets": 3,
+          "rmse": {
+            "B0": 3.614150547700536,
+            "ETF_mean": 3.4262928604730263,
+            "ETF_state_mean": 3.4115237204289737,
+            "B1": 3.459965663628793,
+            "B2": 3.461600669411991
+          },
+          "mean_y": 2.8193959596258056,
+          "asset_regime_segments": 20
+        },
+        "588000.SS": {
+          "n": 951,
+          "dates": 317,
+          "assets": 3,
+          "rmse": {
+            "B0": 3.3763915816306387,
+            "ETF_mean": 3.1492009136523635,
+            "ETF_state_mean": 3.1279435313144095,
+            "B1": 3.189767600772291,
+            "B2": 3.1991325784978533
+          },
+          "mean_y": 2.4193182627973076,
+          "asset_regime_segments": 16
+        }
+      },
+      "own_asset_environment": {
+        "up": {
+          "n": 787,
+          "dates": 286,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.7152230145126404,
+            "ETF_mean": 3.4612437620808456,
+            "ETF_state_mean": 3.4804185630455966,
+            "B1": 3.5483290001079295,
+            "B2": 3.5550188467760098
+          },
+          "mean_y": 3.168104292222133,
+          "asset_regime_segments": 10
+        },
+        "sideways": {
+          "n": 424,
+          "dates": 179,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.4402089079017064,
+            "ETF_mean": 3.4825776352620523,
+            "ETF_state_mean": 3.4234824947545643,
+            "B1": 3.385113233469759,
+            "B2": 3.3916835626584962
+          },
+          "mean_y": 2.313981685314041,
+          "asset_regime_segments": 10
+        },
+        "down": {
+          "n": 57,
+          "dates": 57,
+          "assets": 2,
+          "rmse": {
+            "B0": 2.652452957236216,
+            "ETF_mean": 3.6143551335663666,
+            "ETF_state_mean": 3.5914400534734114,
+            "B1": 3.015946500371033,
+            "B2": 3.002502434032404
+          },
+          "mean_y": 2.327809089863477,
+          "asset_regime_segments": 3
+        },
+        "unknown": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        }
+      },
+      "own_asset_five": {
+        "0": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        },
+        "1": {
+          "n": 89,
+          "dates": 80,
+          "assets": 3,
+          "rmse": {
+            "B0": 4.141171371261106,
+            "ETF_mean": 3.8987390171555316,
+            "ETF_state_mean": 3.6621753913426343,
+            "B1": 3.8316266504825536,
+            "B2": 3.849071338954006
+          },
+          "mean_y": 2.420588674474462,
+          "asset_regime_segments": 4
+        },
+        "2": {
+          "n": 698,
+          "dates": 286,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.6351427589493315,
+            "ETF_mean": 3.3803948200370137,
+            "ETF_state_mean": 3.40246431472624,
+            "B1": 3.4601596888951907,
+            "B2": 3.4702591974567323
+          },
+          "mean_y": 3.187551035683949,
+          "asset_regime_segments": 10
+        },
+        "3": {
+          "n": 424,
+          "dates": 179,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.4402089079017064,
+            "ETF_mean": 3.4825776352620523,
+            "ETF_state_mean": 3.4234824947545643,
+            "B1": 3.385113233469759,
+            "B2": 3.3916835626584962
+          },
+          "mean_y": 2.313981685314041,
+          "asset_regime_segments": 10
+        },
+        "4": {
+          "n": 57,
+          "dates": 57,
+          "assets": 2,
+          "rmse": {
+            "B0": 2.652452957236216,
+            "ETF_mean": 3.6143551335663666,
+            "ETF_state_mean": 3.5914400534734114,
+            "B1": 3.015946500371033,
+            "B2": 3.002502434032404
+          },
+          "mean_y": 2.327809089863477,
+          "asset_regime_segments": 3
+        },
+        "5": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        }
+      },
+      "by_state": {
+        "black": {
+          "n": 373,
+          "dates": 148,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.6698792615315843,
+            "ETF_mean": 3.5571708129358175,
+            "ETF_state_mean": 3.7123999162114183,
+            "B1": 3.721916785588118,
+            "B2": 3.7133679646041022
+          },
+          "mean_y": 2.57341039759687,
+          "asset_regime_segments": 18
+        },
+        "green": {
+          "n": 710,
+          "dates": 224,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.728928416095719,
+            "ETF_mean": 3.5845329741386105,
+            "ETF_state_mean": 3.507103709897393,
+            "B1": 3.5347125791920053,
+            "B2": 3.533244206571079
+          },
+          "mean_y": 3.064858806714539,
+          "asset_regime_segments": 22
+        },
+        "gray": {
+          "n": 185,
+          "dates": 118,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.8199813684466233,
+            "ETF_mean": 3.650959022203137,
+            "ETF_state_mean": 3.5969367514334376,
+            "B1": 3.717707816778267,
+            "B2": 3.750329781422597
+          },
+          "mean_y": 3.089283267268148,
+          "asset_regime_segments": 18
+        }
+      },
+      "increment20": [
+        {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 12.826619849157346,
+          "new_value": 12.847535996860817,
+          "absolute_error_improvement": -0.0209161477034705,
+          "relative_percent": -0.16306827480230188,
+          "lo": -0.15230226792816076,
+          "hi": 0.11254667374847999,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 1268,
+          "dates": 317,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 20,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        },
+        {
+          "new_model": "B2",
+          "old_model": "B0",
+          "old_value": 13.634301476984769,
+          "new_value": 12.847535996860817,
+          "absolute_error_improvement": 0.7867654801239521,
+          "relative_percent": 5.770486162800807,
+          "lo": -0.016466218206219983,
+          "hi": 1.5410363344379034,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 1268,
+          "dates": 317,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 20,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        }
+      ],
+      "fallback_ETF_state_mean": 0,
+      "increment60": [
+        {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 12.826619849157346,
+          "new_value": 12.847535996860817,
+          "absolute_error_improvement": -0.0209161477034705,
+          "relative_percent": -0.16306827480230188,
+          "lo": -0.14092475039990568,
+          "hi": 0.09581445863912552,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 1268,
+          "dates": 317,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        },
+        {
+          "new_model": "B2",
+          "old_model": "B0",
+          "old_value": 13.634301476984769,
+          "new_value": 12.847535996860817,
+          "absolute_error_improvement": 0.7867654801239521,
+          "relative_percent": 5.770486162800807,
+          "lo": -0.27155526498361227,
+          "hi": 1.7922494948404757,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 1268,
+          "dates": 317,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        }
+      ]
+    },
+    "continuous/lightgbm-mae": {
+      "overall": {
+        "n": 1268,
+        "dates": 317,
+        "assets": 4,
+        "rmse": {
+          "B0": 3.692465501123168,
+          "ETF_mean": 3.559120329324282,
+          "ETF_state_mean": 3.552572533207732,
+          "B1": 3.5886565882753927,
+          "B2": 3.5795520766534663
+        },
+        "mean_y": 2.9222618142049357,
+        "asset_regime_segments": 23
+      },
+      "by_period": {
+        "2025": {
+          "n": 888,
+          "dates": 222,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.696357675693683,
+            "ETF_mean": 3.5822877857597337,
+            "ETF_state_mean": 3.555222917335784,
+            "B1": 3.552336976441304,
+            "B2": 3.5378873226964878
+          },
+          "mean_y": 2.3870625207810994,
+          "asset_regime_segments": 14
+        },
+        "2026": {
+          "n": 380,
+          "dates": 95,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.6833540684740864,
+            "ETF_mean": 3.504384547269507,
+            "ETF_state_mean": 3.5463712813028767,
+            "B1": 3.67212950079348,
+            "B2": 3.675074841809884
+          },
+          "mean_y": 4.172938057784847,
+          "asset_regime_segments": 13
+        }
+      },
+      "by_asset": {
+        "510050.SS": {
+          "n": 317,
+          "dates": 317,
+          "assets": 1,
+          "rmse": {
+            "B0": 3.0254687815886547,
+            "ETF_mean": 2.5954455099157943,
+            "ETF_state_mean": 2.562998028746836,
+            "B1": 2.672351448618,
+            "B2": 2.6636882343759507
+          },
+          "mean_y": 2.0189848474743677,
+          "asset_regime_segments": 7
+        },
+        "510300.SS": {
+          "n": 317,
+          "dates": 317,
+          "assets": 1,
+          "rmse": {
+            "B0": 3.1137831693206257,
+            "ETF_mean": 2.7504835959249707,
+            "ETF_state_mean": 2.6861737062698388,
+            "B1": 2.87065745640428,
+            "B2": 2.862166043252559
+          },
+          "mean_y": 2.008110562975232,
+          "asset_regime_segments": 6
+        },
+        "510500.SS": {
+          "n": 317,
+          "dates": 317,
+          "assets": 1,
+          "rmse": {
+            "B0": 3.9180292703866844,
+            "ETF_mean": 3.93076351072565,
+            "ETF_state_mean": 3.9455803286283975,
+            "B1": 3.891955642118344,
+            "B2": 3.871606573078499
+          },
+          "mean_y": 3.2308593779423243,
+          "asset_regime_segments": 3
+        },
+        "588000.SS": {
+          "n": 317,
+          "dates": 317,
+          "assets": 1,
+          "rmse": {
+            "B0": 4.509672446023139,
+            "ETF_mean": 4.573505317673841,
+            "ETF_state_mean": 4.596846115494082,
+            "B1": 4.580869919254693,
+            "B2": 4.5799787501789835
+          },
+          "mean_y": 4.431092468427819,
+          "asset_regime_segments": 7
+        }
+      },
+      "drop_one": {
+        "510050.SS": {
+          "n": 951,
+          "dates": 317,
+          "assets": 3,
+          "rmse": {
+            "B0": 3.8894620261921196,
+            "ETF_mean": 3.8267920716746326,
+            "ETF_state_mean": 3.8259694858274305,
+            "B1": 3.845879273948451,
+            "B2": 3.836558234839471
+          },
+          "mean_y": 3.2233541364484575,
+          "asset_regime_segments": 16
+        },
+        "510300.SS": {
+          "n": 951,
+          "dates": 317,
+          "assets": 3,
+          "rmse": {
+            "B0": 3.866159174270793,
+            "ETF_mean": 3.790522833901465,
+            "ETF_state_mean": 3.7976991821607182,
+            "B1": 3.7979446284483935,
+            "B2": 3.78861354670142
+          },
+          "mean_y": 3.22697889794817,
+          "asset_regime_segments": 17
+        },
+        "510500.SS": {
+          "n": 951,
+          "dates": 317,
+          "assets": 3,
+          "rmse": {
+            "B0": 3.614150547700536,
+            "ETF_mean": 3.4262928604730263,
+            "ETF_state_mean": 3.4115237204289737,
+            "B1": 3.4816904760988687,
+            "B2": 3.476753026469377
+          },
+          "mean_y": 2.8193959596258056,
+          "asset_regime_segments": 20
+        },
+        "588000.SS": {
+          "n": 951,
+          "dates": 317,
+          "assets": 3,
+          "rmse": {
+            "B0": 3.3763915816306387,
+            "ETF_mean": 3.1492009136523635,
+            "ETF_state_mean": 3.1279435313144095,
+            "B1": 3.1900603556023315,
+            "B2": 3.1768205764991677
+          },
+          "mean_y": 2.4193182627973076,
+          "asset_regime_segments": 16
+        }
+      },
+      "own_asset_environment": {
+        "up": {
+          "n": 787,
+          "dates": 286,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.7152230145126404,
+            "ETF_mean": 3.4612437620808456,
+            "ETF_state_mean": 3.4804185630455966,
+            "B1": 3.5526017876691864,
+            "B2": 3.5450740575292885
+          },
+          "mean_y": 3.168104292222133,
+          "asset_regime_segments": 10
+        },
+        "sideways": {
+          "n": 424,
+          "dates": 179,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.4402089079017064,
+            "ETF_mean": 3.4825776352620523,
+            "ETF_state_mean": 3.4234824947545643,
+            "B1": 3.414232544296797,
+            "B2": 3.3922588950328865
+          },
+          "mean_y": 2.313981685314041,
+          "asset_regime_segments": 10
+        },
+        "down": {
+          "n": 57,
+          "dates": 57,
+          "assets": 2,
+          "rmse": {
+            "B0": 2.652452957236216,
+            "ETF_mean": 3.6143551335663666,
+            "ETF_state_mean": 3.5914400534734114,
+            "B1": 3.3215926718465525,
+            "B2": 3.2880517560284597
+          },
+          "mean_y": 2.327809089863477,
+          "asset_regime_segments": 3
+        },
+        "unknown": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        }
+      },
+      "own_asset_five": {
+        "0": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        },
+        "1": {
+          "n": 89,
+          "dates": 80,
+          "assets": 3,
+          "rmse": {
+            "B0": 4.141171371261106,
+            "ETF_mean": 3.8987390171555316,
+            "ETF_state_mean": 3.6621753913426343,
+            "B1": 3.992328149189235,
+            "B2": 4.000727463430295
+          },
+          "mean_y": 2.420588674474462,
+          "asset_regime_segments": 4
+        },
+        "2": {
+          "n": 698,
+          "dates": 286,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.6351427589493315,
+            "ETF_mean": 3.3803948200370137,
+            "ETF_state_mean": 3.40246431472624,
+            "B1": 3.4558697628775823,
+            "B2": 3.443545557303748
+          },
+          "mean_y": 3.187551035683949,
+          "asset_regime_segments": 10
+        },
+        "3": {
+          "n": 424,
+          "dates": 179,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.4402089079017064,
+            "ETF_mean": 3.4825776352620523,
+            "ETF_state_mean": 3.4234824947545643,
+            "B1": 3.414232544296797,
+            "B2": 3.3922588950328865
+          },
+          "mean_y": 2.313981685314041,
+          "asset_regime_segments": 10
+        },
+        "4": {
+          "n": 57,
+          "dates": 57,
+          "assets": 2,
+          "rmse": {
+            "B0": 2.652452957236216,
+            "ETF_mean": 3.6143551335663666,
+            "ETF_state_mean": 3.5914400534734114,
+            "B1": 3.3215926718465525,
+            "B2": 3.2880517560284597
+          },
+          "mean_y": 2.327809089863477,
+          "asset_regime_segments": 3
+        },
+        "5": {
+          "n": 0,
+          "dates": 0,
+          "assets": 0
+        }
+      },
+      "by_state": {
+        "black": {
+          "n": 373,
+          "dates": 148,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.6698792615315843,
+            "ETF_mean": 3.5571708129358175,
+            "ETF_state_mean": 3.7123999162114183,
+            "B1": 3.5989131357062347,
+            "B2": 3.56391670414077
+          },
+          "mean_y": 2.57341039759687,
+          "asset_regime_segments": 18
+        },
+        "green": {
+          "n": 710,
+          "dates": 224,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.728928416095719,
+            "ETF_mean": 3.5845329741386105,
+            "ETF_state_mean": 3.507103709897393,
+            "B1": 3.6186668491737795,
+            "B2": 3.6130667034465844
+          },
+          "mean_y": 3.064858806714539,
+          "asset_regime_segments": 22
+        },
+        "gray": {
+          "n": 185,
+          "dates": 118,
+          "assets": 4,
+          "rmse": {
+            "B0": 3.8199813684466233,
+            "ETF_mean": 3.650959022203137,
+            "ETF_state_mean": 3.5969367514334376,
+            "B1": 3.6959347595910437,
+            "B2": 3.7122785700764673
+          },
+          "mean_y": 3.089283267268148,
+          "asset_regime_segments": 18
+        }
+      },
+      "increment20": [
+        {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 12.878456108572381,
+          "new_value": 12.813193069474142,
+          "absolute_error_improvement": 0.06526303909823916,
+          "relative_percent": 0.5067613582562714,
+          "lo": -0.032417369917770986,
+          "hi": 0.1768957531019181,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 1268,
+          "dates": 317,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 20,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        },
+        {
+          "new_model": "B2",
+          "old_model": "B0",
+          "old_value": 13.634301476984769,
+          "new_value": 12.813193069474142,
+          "absolute_error_improvement": 0.8211084075106267,
+          "relative_percent": 6.02237238846955,
+          "lo": -0.028907635295156324,
+          "hi": 1.5721869929623338,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 1268,
+          "dates": 317,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 20,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        }
+      ],
+      "fallback_ETF_state_mean": 0,
+      "increment60": [
+        {
+          "new_model": "B2",
+          "old_model": "B1",
+          "old_value": 12.878456108572381,
+          "new_value": 12.813193069474142,
+          "absolute_error_improvement": 0.06526303909823916,
+          "relative_percent": 0.5067613582562714,
+          "lo": -0.021961277211522905,
+          "hi": 0.15612648735388973,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 1268,
+          "dates": 317,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        },
+        {
+          "new_model": "B2",
+          "old_model": "B0",
+          "old_value": 13.634301476984769,
+          "new_value": 12.813193069474142,
+          "absolute_error_improvement": 0.8211084075106267,
+          "relative_percent": 6.02237238846955,
+          "lo": 0.034075949412276964,
+          "hi": 1.599433575184373,
+          "unit": "percentage_point_squared",
+          "metric": "MSE",
+          "rows": 1268,
+          "dates": 317,
+          "assets": 4,
+          "calendar_dates": 359,
+          "block_length": 60,
+          "draws": 1000,
+          "valid_draws": 1000,
+          "unestimable_draws": 0,
+          "seed": 20261004,
+          "weighting": "equal_asset",
+          "interpretation": "positive means lower prediction error; not investment return"
+        }
+      ]
+    }
+  },
+  "four_cells": {
+    "core/forward_return": {
+      "performance": {
+        "n": 122,
+        "dates": 80,
+        "assets": 4,
+        "rmse": {
+          "ETF_mean": 4.326106031036129,
+          "ETF_state_mean": 4.2037054088702925,
+          "A": 4.488306736813935,
+          "B": 4.434058632576417,
+          "C": 4.104594826331051,
+          "D": 4.104594826331051
+        },
+        "mean_y": -1.706035080569033,
+        "asset_regime_segments": 16
+      },
+      "differences": {
+        "B-A": {
+          "mse_improvement": 0.4840214066039028,
+          "date_weighted_improvement": 0.3695340191659943,
+          "date_blocks20": {
+            "lo": 0.09223719366892437,
+            "hi": 0.7181252631962808,
+            "valid_draws": 1000,
+            "block": 20
+          },
+          "date_blocks60": {
+            "lo": 0.10216596493665249,
+            "hi": 0.660115237478064,
+            "valid_draws": 1000,
+            "block": 60
+          },
+          "note": "positive error improvement; uncertainty here equal-date, primary model aggregate equal-asset"
+        },
+        "D-C": {
+          "mse_improvement": 0.0,
+          "date_weighted_improvement": 0.0,
+          "date_blocks20": {
+            "lo": 0.0,
+            "hi": 0.0,
+            "valid_draws": 1000,
+            "block": 20
+          },
+          "date_blocks60": {
+            "lo": 0.0,
+            "hi": 0.0,
+            "valid_draws": 1000,
+            "block": 60
+          },
+          "note": "positive error improvement; uncertainty here equal-date, primary model aggregate equal-asset"
+        },
+        "C-A": {
+          "mse_improvement": 3.2971986753857188,
+          "date_weighted_improvement": 1.3932324478384936,
+          "date_blocks20": {
+            "lo": -3.017775053305905,
+            "hi": 5.346924176974877,
+            "valid_draws": 1000,
+            "block": 20
+          },
+          "date_blocks60": {
+            "lo": -2.288906296450922,
+            "hi": 5.41821426960436,
+            "valid_draws": 1000,
+            "block": 60
+          },
+          "note": "positive error improvement; uncertainty here equal-date, primary model aggregate equal-asset"
+        },
+        "D-B": {
+          "mse_improvement": 2.813177268781816,
+          "date_weighted_improvement": 1.0236984286724997,
+          "date_blocks20": {
+            "lo": -3.249168311004745,
+            "hi": 4.737135558384591,
+            "valid_draws": 1000,
+            "block": 20
+          },
+          "date_blocks60": {
+            "lo": -2.4999465155434772,
+            "hi": 4.89024391571674,
+            "valid_draws": 1000,
+            "block": 60
+          },
+          "note": "positive error improvement; uncertainty here equal-date, primary model aggregate equal-asset"
+        }
+      }
+    },
+    "core/mae": {
+      "performance": {
+        "n": 122,
+        "dates": 80,
+        "assets": 4,
+        "rmse": {
+          "ETF_mean": 4.017929125920996,
+          "ETF_state_mean": 4.03846209491216,
+          "A": 4.236830172304248,
+          "B": 4.2174461224695925,
+          "C": 3.8195816266690814,
+          "D": 3.8117547694222704
+        },
+        "mean_y": 4.940927412202866,
+        "asset_regime_segments": 16
+      },
+      "differences": {
+        "B-A": {
+          "mse_improvement": 0.1638781130138432,
+          "date_weighted_improvement": 0.09199947342295343,
+          "date_blocks20": {
+            "lo": -0.07825330276129233,
+            "hi": 0.3011692456117774,
+            "valid_draws": 1000,
+            "block": 20
+          },
+          "date_blocks60": {
+            "lo": -0.08247230511290964,
+            "hi": 0.3068661494967806,
+            "valid_draws": 1000,
+            "block": 60
+          },
+          "note": "positive error improvement; uncertainty here equal-date, primary model aggregate equal-asset"
+        },
+        "D-C": {
+          "mse_improvement": 0.05972938057459886,
+          "date_weighted_improvement": 0.05309680310069222,
+          "date_blocks20": {
+            "lo": 0.0,
+            "hi": 0.11208071220353416,
+            "valid_draws": 1000,
+            "block": 20
+          },
+          "date_blocks60": {
+            "lo": -0.00014594928518185947,
+            "hi": 0.12008201324888988,
+            "valid_draws": 1000,
+            "block": 60
+          },
+          "note": "positive error improvement; uncertainty here equal-date, primary model aggregate equal-asset"
+        },
+        "C-A": {
+          "mse_improvement": 3.361526106159616,
+          "date_weighted_improvement": 1.8095467520041653,
+          "date_blocks20": {
+            "lo": -0.11029455635056933,
+            "hi": 3.861011212634436,
+            "valid_draws": 1000,
+            "block": 20
+          },
+          "date_blocks60": {
+            "lo": 0.4254350209209717,
+            "hi": 3.32281787277681,
+            "valid_draws": 1000,
+            "block": 60
+          },
+          "note": "positive error improvement; uncertainty here equal-date, primary model aggregate equal-asset"
+        },
+        "D-B": {
+          "mse_improvement": 3.2573773737203715,
+          "date_weighted_improvement": 1.770644081681904,
+          "date_blocks20": {
+            "lo": -0.06630965023325386,
+            "hi": 3.654251941021795,
+            "valid_draws": 1000,
+            "block": 20
+          },
+          "date_blocks60": {
+            "lo": 0.4602289108987545,
+            "hi": 3.155148579130205,
+            "valid_draws": 1000,
+            "block": 60
+          },
+          "note": "positive error improvement; uncertainty here equal-date, primary model aggregate equal-asset"
+        }
+      }
+    },
+    "continuous/forward_return": {
+      "performance": {
+        "n": 1268,
+        "dates": 317,
+        "assets": 4,
+        "rmse": {
+          "ETF_mean": 6.758136847874303,
+          "ETF_state_mean": 6.9402420993815275,
+          "A": 6.995442303694219,
+          "B": 6.960365054830107,
+          "C": 7.048190814188872,
+          "D": 6.985830279793171
+        },
+        "mean_y": 2.107048208680971,
+        "asset_regime_segments": 23
+      },
+      "differences": {
+        "B-A": {
+          "mse_improvement": 0.48953132781455067,
+          "date_weighted_improvement": 0.4895313278145506,
+          "date_blocks20": {
+            "lo": -0.5272087165012036,
+            "hi": 1.6327270228412927,
+            "valid_draws": 1000,
+            "block": 20
+          },
+          "date_blocks60": {
+            "lo": -0.5545160594277738,
+            "hi": 1.7959777456183301,
+            "valid_draws": 1000,
+            "block": 60
+          },
+          "note": "positive error improvement; uncertainty here equal-date, primary model aggregate equal-asset"
+        },
+        "D-C": {
+          "mse_improvement": 0.8751690551412568,
+          "date_weighted_improvement": 0.8751690551412568,
+          "date_blocks20": {
+            "lo": -0.5842149167803125,
+            "hi": 2.5086121279141405,
+            "valid_draws": 1000,
+            "block": 20
+          },
+          "date_blocks60": {
+            "lo": -0.6978097124757876,
+            "hi": 2.6420944409041573,
+            "valid_draws": 1000,
+            "block": 60
+          },
+          "note": "positive error improvement; uncertainty here equal-date, primary model aggregate equal-asset"
+        },
+        "C-A": {
+          "mse_improvement": -0.7407807289017156,
+          "date_weighted_improvement": -0.7407807289017156,
+          "date_blocks20": {
+            "lo": -3.4377726778116218,
+            "hi": 2.543288282661332,
+            "valid_draws": 1000,
+            "block": 20
+          },
+          "date_blocks60": {
+            "lo": -3.13649219082909,
+            "hi": 3.2058209018406836,
+            "valid_draws": 1000,
+            "block": 60
+          },
+          "note": "positive error improvement; uncertainty here equal-date, primary model aggregate equal-asset"
+        },
+        "D-B": {
+          "mse_improvement": -0.35514300157500966,
+          "date_weighted_improvement": -0.35514300157500955,
+          "date_blocks20": {
+            "lo": -2.445628585252144,
+            "hi": 2.4375719537188383,
+            "valid_draws": 1000,
+            "block": 20
+          },
+          "date_blocks60": {
+            "lo": -1.820230821996609,
+            "hi": 2.640328552331695,
+            "valid_draws": 1000,
+            "block": 60
+          },
+          "note": "positive error improvement; uncertainty here equal-date, primary model aggregate equal-asset"
+        }
+      }
+    },
+    "continuous/mae": {
+      "performance": {
+        "n": 1268,
+        "dates": 317,
+        "assets": 4,
+        "rmse": {
+          "ETF_mean": 3.559120329324282,
+          "ETF_state_mean": 3.552572533207732,
+          "A": 3.5814270688033485,
+          "B": 3.58434596500684,
+          "C": 3.5886565882753927,
+          "D": 3.5795520766534663
+        },
+        "mean_y": 2.9222618142049357,
+        "asset_regime_segments": 23
+      },
+      "differences": {
+        "B-A": {
+          "mse_improvement": -0.02091614770347016,
+          "date_weighted_improvement": -0.02091614770347017,
+          "date_blocks20": {
+            "lo": -0.16279255983837643,
+            "hi": 0.09900852023887423,
+            "valid_draws": 1000,
+            "block": 20
+          },
+          "date_blocks60": {
+            "lo": -0.1533627343813489,
+            "hi": 0.0589944976267627,
+            "valid_draws": 1000,
+            "block": 60
+          },
+          "note": "positive error improvement; uncertainty here equal-date, primary model aggregate equal-asset"
+        },
+        "D-C": {
+          "mse_improvement": 0.06526303909824063,
+          "date_weighted_improvement": 0.06526303909824065,
+          "date_blocks20": {
+            "lo": -0.04247822988195748,
+            "hi": 0.1618459936936499,
+            "valid_draws": 1000,
+            "block": 20
+          },
+          "date_blocks60": {
+            "lo": -0.032469296072347935,
+            "hi": 0.12616732777895528,
+            "valid_draws": 1000,
+            "block": 60
+          },
+          "note": "positive error improvement; uncertainty here equal-date, primary model aggregate equal-asset"
+        },
+        "C-A": {
+          "mse_improvement": -0.05183625941503438,
+          "date_weighted_improvement": -0.05183625941503437,
+          "date_blocks20": {
+            "lo": -0.7867810573255375,
+            "hi": 0.5949628526437606,
+            "valid_draws": 1000,
+            "block": 20
+          },
+          "date_blocks60": {
+            "lo": -0.9937587915160964,
+            "hi": 0.747265360367195,
+            "valid_draws": 1000,
+            "block": 60
+          },
+          "note": "positive error improvement; uncertainty here equal-date, primary model aggregate equal-asset"
+        },
+        "D-B": {
+          "mse_improvement": 0.03434292738667641,
+          "date_weighted_improvement": 0.03434292738667639,
+          "date_blocks20": {
+            "lo": -0.6225469317746573,
+            "hi": 0.6194886872150285,
+            "valid_draws": 1000,
+            "block": 20
+          },
+          "date_blocks60": {
+            "lo": -0.8175724949901817,
+            "hi": 0.7515040079696824,
+            "valid_draws": 1000,
+            "block": 60
+          },
+          "note": "positive error improvement; uncertainty here equal-date, primary model aggregate equal-asset"
+        }
+      }
+    }
+  },
+  "ranking": {
+    "green_share20": {
+      "overall": {
+        "dates": 317,
+        "valid_rank_dates": 306,
+        "valid_group_dates": 306,
+        "mean_rank_correlation": 0.10934437588604468,
+        "pool_return": 2.1070482086809705,
+        "low_return": 1.8684456775704397,
+        "high_return": 2.1715274866200134,
+        "high_minus_low": 0.30308180904957366,
+        "high_mae": 3.346147448656697,
+        "low_mae": 2.6548662609597358,
+        "unrankable_dates": 11,
+        "empty_group_dates": 11
+      },
+      "by_period": {
+        "2025": {
+          "dates": 222,
+          "valid_rank_dates": 214,
+          "valid_group_dates": 214,
+          "mean_rank_correlation": 0.0396496416658175,
+          "pool_return": 2.4006486193579333,
+          "low_return": 2.493479817578684,
+          "high_return": 2.3054899273469345,
+          "high_minus_low": -0.1879898902317498,
+          "high_mae": 2.679160956584997,
+          "low_mae": 2.183751563424493,
+          "unrankable_dates": 8,
+          "empty_group_dates": 8
+        },
+        "2026": {
+          "dates": 95,
+          "valid_rank_dates": 92,
+          "valid_group_dates": 92,
+          "mean_rank_correlation": 0.2714603880939645,
+          "pool_return": 1.42095040688849,
+          "low_return": 0.41456191711648005,
+          "high_return": 1.8599192005813057,
+          "high_minus_low": 1.4453572834648258,
+          "high_mae": 4.8976160280408685,
+          "low_mae": 3.75072001392215,
+          "unrankable_dates": 3,
+          "empty_group_dates": 3
+        }
+      },
+      "gap20": {
+        "lo": -1.1652021027295294,
+        "hi": 1.8681117795543358,
+        "valid_draws": 1000,
+        "block": 20
+      },
+      "gap60": {
+        "lo": -0.7022818476879863,
+        "hi": 1.3091777673012388,
+        "valid_draws": 1000,
+        "block": 60
+      },
+      "rank20": {
+        "lo": -0.07633506900373342,
+        "hi": 0.32910176981069383,
+        "valid_draws": 1000,
+        "block": 20
+      },
+      "rank60": {
+        "lo": -0.022413548447786317,
+        "hi": 0.24555731158345676,
+        "valid_draws": 1000,
+        "block": 60
+      },
+      "own_asset_environment": {
+        "down": {
+          "rows": 57,
+          "dates": 57,
+          "segments": 3,
+          "low_rows": 50,
+          "high_rows": 7,
+          "high_minus_low_pp": 11.346343499118566,
+          "note": "conditional observed difference, not randomized or whole-market environment"
+        },
+        "sideways": {
+          "rows": 424,
+          "dates": 179,
+          "segments": 10,
+          "low_rows": 153,
+          "high_rows": 222,
+          "high_minus_low_pp": 3.779354185417635,
+          "note": "conditional observed difference, not randomized or whole-market environment"
+        },
+        "up": {
+          "rows": 787,
+          "dates": 286,
+          "segments": 10,
+          "low_rows": 360,
+          "high_rows": 376,
+          "high_minus_low_pp": -0.42481569481035053,
+          "note": "conditional observed difference, not randomized or whole-market environment"
+        }
+      }
+    },
+    "switch_frequency20": {
+      "overall": {
+        "dates": 317,
+        "valid_rank_dates": 310,
+        "valid_group_dates": 310,
+        "mean_rank_correlation": 0.08522509283142687,
+        "pool_return": 2.1070482086809705,
+        "low_return": 2.0325039853714806,
+        "high_return": 2.1129587078642116,
+        "high_minus_low": 0.08045472249273061,
+        "high_mae": 2.562862653833046,
+        "low_mae": 3.394997093281572,
+        "unrankable_dates": 7,
+        "empty_group_dates": 7
+      },
+      "by_period": {
+        "2025": {
+          "dates": 222,
+          "valid_rank_dates": 217,
+          "valid_group_dates": 217,
+          "mean_rank_correlation": 0.15004333154697735,
+          "pool_return": 2.4006486193579333,
+          "low_return": 1.8462306115693556,
+          "high_return": 2.914936670066559,
+          "high_minus_low": 1.0687060584972026,
+          "high_mae": 2.245585984654142,
+          "low_mae": 2.742400233778651,
+          "unrankable_dates": 5,
+          "empty_group_dates": 5
+        },
+        "2026": {
+          "dates": 95,
+          "valid_rank_dates": 93,
+          "valid_group_dates": 93,
+          "mean_rank_correlation": -0.0660174641715243,
+          "pool_return": 1.42095040688849,
+          "low_return": 2.4671418575764394,
+          "high_return": 0.2416767960587353,
+          "high_minus_low": -2.2254650615177036,
+          "high_mae": 3.3031748819171542,
+          "low_mae": 4.917723098788389,
+          "unrankable_dates": 2,
+          "empty_group_dates": 2
+        }
+      },
+      "gap20": {
+        "lo": -1.8094267421429995,
+        "hi": 1.5348992097975238,
+        "valid_draws": 1000,
+        "block": 20
+      },
+      "gap60": {
+        "lo": -1.8019721849039716,
+        "hi": 1.3058897462382613,
+        "valid_draws": 1000,
+        "block": 60
+      },
+      "rank20": {
+        "lo": -0.13812853779450926,
+        "hi": 0.26376932810938497,
+        "valid_draws": 1000,
+        "block": 20
+      },
+      "rank60": {
+        "lo": -0.09712684903297333,
+        "hi": 0.24076244792125126,
+        "valid_draws": 1000,
+        "block": 60
+      },
+      "own_asset_environment": {
+        "down": {
+          "rows": 57,
+          "dates": 57,
+          "segments": 3,
+          "low_rows": 20,
+          "high_rows": 36,
+          "high_minus_low_pp": -1.4554912535376516,
+          "note": "conditional observed difference, not randomized or whole-market environment"
+        },
+        "sideways": {
+          "rows": 424,
+          "dates": 179,
+          "segments": 10,
+          "low_rows": 215,
+          "high_rows": 177,
+          "high_minus_low_pp": -1.262737245066431,
+          "note": "conditional observed difference, not randomized or whole-market environment"
+        },
+        "up": {
+          "rows": 787,
+          "dates": 286,
+          "segments": 10,
+          "low_rows": 392,
+          "high_rows": 312,
+          "high_minus_low_pp": -0.2675364563976046,
+          "note": "conditional observed difference, not randomized or whole-market environment"
+        }
+      }
+    },
+    "distance_to_ema20": {
+      "overall": {
+        "dates": 317,
+        "valid_rank_dates": 317,
+        "valid_group_dates": 317,
+        "mean_rank_correlation": 0.14132492113564668,
+        "pool_return": 2.1070482086809705,
+        "low_return": 1.7582229131275287,
+        "high_return": 2.455873504234413,
+        "high_minus_low": 0.6976505911068843,
+        "high_mae": 3.1891075271986185,
+        "low_mae": 2.655416101211253,
+        "unrankable_dates": 0,
+        "empty_group_dates": 0
+      },
+      "by_period": {
+        "2025": {
+          "dates": 222,
+          "valid_rank_dates": 222,
+          "valid_group_dates": 222,
+          "mean_rank_correlation": 0.13963963963963968,
+          "pool_return": 2.4006486193579333,
+          "low_return": 2.126605587349729,
+          "high_return": 2.674691651366137,
+          "high_minus_low": 0.5480860640164096,
+          "high_mae": 2.581098582692673,
+          "low_mae": 2.193026458869526,
+          "unrankable_dates": 0,
+          "empty_group_dates": 0
+        },
+        "2026": {
+          "dates": 95,
+          "valid_rank_dates": 95,
+          "valid_group_dates": 95,
+          "mean_rank_correlation": 0.14526315789473684,
+          "pool_return": 1.42095040688849,
+          "low_return": 0.8973707691556506,
+          "high_return": 1.9445300446213298,
+          "high_minus_low": 1.0471592754656787,
+          "high_mae": 4.609928429096723,
+          "low_mae": 3.7359476864729726,
+          "unrankable_dates": 0,
+          "empty_group_dates": 0
+        }
+      },
+      "gap20": {
+        "lo": -0.44609690462234886,
+        "hi": 2.2120635795656844,
+        "valid_draws": 1000,
+        "block": 20
+      },
+      "gap60": {
+        "lo": -0.34410194568617125,
+        "hi": 2.0859068501839486,
+        "valid_draws": 1000,
+        "block": 60
+      },
+      "rank20": {
+        "lo": -0.01012758581495795,
+        "hi": 0.3281654284024543,
+        "valid_draws": 1000,
+        "block": 20
+      },
+      "rank60": {
+        "lo": -0.016649202190997855,
+        "hi": 0.323044397364344,
+        "valid_draws": 1000,
+        "block": 60
+      },
+      "own_asset_environment": {
+        "down": {
+          "rows": 57,
+          "dates": 57,
+          "segments": 3,
+          "low_rows": 41,
+          "high_rows": 16,
+          "high_minus_low_pp": 16.01735562876456,
+          "note": "conditional observed difference, not randomized or whole-market environment"
+        },
+        "sideways": {
+          "rows": 424,
+          "dates": 179,
+          "segments": 10,
+          "low_rows": 179,
+          "high_rows": 245,
+          "high_minus_low_pp": 2.982179965023314,
+          "note": "conditional observed difference, not randomized or whole-market environment"
+        },
+        "up": {
+          "rows": 787,
+          "dates": 286,
+          "segments": 10,
+          "low_rows": 414,
+          "high_rows": 373,
+          "high_minus_low_pp": -1.0307135891502237,
+          "note": "conditional observed difference, not randomized or whole-market environment"
+        }
+      }
+    },
+    "ret20": {
+      "overall": {
+        "dates": 317,
+        "valid_rank_dates": 317,
+        "valid_group_dates": 317,
+        "mean_rank_correlation": 0.1703470031545741,
+        "pool_return": 2.1070482086809705,
+        "low_return": 1.6835503113689354,
+        "high_return": 2.5305461059930066,
+        "high_minus_low": 0.8469957946240712,
+        "high_mae": 3.1709698797834474,
+        "low_mae": 2.6735537486264245,
+        "unrankable_dates": 0,
+        "empty_group_dates": 0
+      },
+      "by_period": {
+        "2025": {
+          "dates": 222,
+          "valid_rank_dates": 222,
+          "valid_group_dates": 222,
+          "mean_rank_correlation": 0.1513513513513514,
+          "pool_return": 2.4006486193579333,
+          "low_return": 2.0230710924100985,
+          "high_return": 2.778226146305768,
+          "high_minus_low": 0.75515505389567,
+          "high_mae": 2.618916638041534,
+          "low_mae": 2.155208403520666,
+          "unrankable_dates": 0,
+          "empty_group_dates": 0
+        },
+        "2026": {
+          "dates": 95,
+          "valid_rank_dates": 95,
+          "valid_group_dates": 95,
+          "mean_rank_correlation": 0.21473684210526314,
+          "pool_return": 1.42095040688849,
+          "low_return": 0.8901438546201118,
+          "high_return": 1.9517569591568684,
+          "high_minus_low": 1.061613104536756,
+          "high_mae": 4.461031139432972,
+          "low_mae": 3.8848449761367245,
+          "unrankable_dates": 0,
+          "empty_group_dates": 0
+        }
+      },
+      "gap20": {
+        "lo": -0.4365872370113433,
+        "hi": 2.4152267092833766,
+        "valid_draws": 1000,
+        "block": 20
+      },
+      "gap60": {
+        "lo": -0.2621889233719112,
+        "hi": 2.236975039298931,
+        "valid_draws": 1000,
+        "block": 60
+      },
+      "rank20": {
+        "lo": -0.003595586604568628,
+        "hi": 0.38708129689819826,
+        "valid_draws": 1000,
+        "block": 20
+      },
+      "rank60": {
+        "lo": 0.005925647200481635,
+        "hi": 0.37255679285236637,
+        "valid_draws": 1000,
+        "block": 60
+      },
+      "own_asset_environment": {
+        "down": {
+          "rows": 57,
+          "dates": 57,
+          "segments": 3,
+          "low_rows": 42,
+          "high_rows": 15,
+          "high_minus_low_pp": 17.0294295732353,
+          "note": "conditional observed difference, not randomized or whole-market environment"
+        },
+        "sideways": {
+          "rows": 424,
+          "dates": 179,
+          "segments": 10,
+          "low_rows": 176,
+          "high_rows": 248,
+          "high_minus_low_pp": 3.3907845177782314,
+          "note": "conditional observed difference, not randomized or whole-market environment"
+        },
+        "up": {
+          "rows": 787,
+          "dates": 286,
+          "segments": 10,
+          "low_rows": 416,
+          "high_rows": 371,
+          "high_minus_low_pp": -0.990244975179394,
+          "note": "conditional observed difference, not randomized or whole-market environment"
+        }
+      }
+    },
+    "ema20_up_share20": {
+      "overall": {
+        "dates": 317,
+        "valid_rank_dates": 310,
+        "valid_group_dates": 310,
+        "mean_rank_correlation": 0.10651445492653594,
+        "pool_return": 2.1070482086809705,
+        "low_return": 1.776522957539909,
+        "high_return": 2.196426876341193,
+        "high_minus_low": 0.4199039188012844,
+        "high_mae": 3.192251392872126,
+        "low_mae": 2.679393205812151,
+        "unrankable_dates": 7,
+        "empty_group_dates": 7
+      },
+      "by_period": {
+        "2025": {
+          "dates": 222,
+          "valid_rank_dates": 218,
+          "valid_group_dates": 218,
+          "mean_rank_correlation": 0.01884662904155873,
+          "pool_return": 2.4006486193579333,
+          "low_return": 2.453582082855967,
+          "high_return": 2.2084845875580736,
+          "high_minus_low": -0.2450974952978926,
+          "high_mae": 2.6745724681678396,
+          "low_mae": 2.1848722827466864,
+          "unrankable_dates": 4,
+          "empty_group_dates": 4
+        },
+        "2026": {
+          "dates": 95,
+          "valid_rank_dates": 92,
+          "valid_group_dates": 92,
+          "mean_rank_correlation": 0.31424908582789507,
+          "pool_return": 1.42095040688849,
+          "low_return": 0.1721872040735989,
+          "high_return": 2.167855343240325,
+          "high_minus_low": 1.9956681391667253,
+          "high_mae": 4.418925366627937,
+          "low_mae": 3.851192784380317,
+          "unrankable_dates": 3,
+          "empty_group_dates": 3
+        }
+      },
+      "gap20": {
+        "lo": -1.0198860245515422,
+        "hi": 1.9676783977155778,
+        "valid_draws": 1000,
+        "block": 20
+      },
+      "gap60": {
+        "lo": -0.5781930068789265,
+        "hi": 1.4084165363474517,
+        "valid_draws": 1000,
+        "block": 60
+      },
+      "rank20": {
+        "lo": -0.06216449318231724,
+        "hi": 0.31805843976756354,
+        "valid_draws": 1000,
+        "block": 20
+      },
+      "rank60": {
+        "lo": -0.013436823613572004,
+        "hi": 0.24498880087053287,
+        "valid_draws": 1000,
+        "block": 60
+      },
+      "own_asset_environment": {
+        "down": {
+          "rows": 57,
+          "dates": 57,
+          "segments": 3,
+          "low_rows": 48,
+          "high_rows": 7,
+          "high_minus_low_pp": 10.869744249124325,
+          "note": "conditional observed difference, not randomized or whole-market environment"
+        },
+        "sideways": {
+          "rows": 424,
+          "dates": 179,
+          "segments": 10,
+          "low_rows": 157,
+          "high_rows": 228,
+          "high_minus_low_pp": 3.092401550818331,
+          "note": "conditional observed difference, not randomized or whole-market environment"
+        },
+        "up": {
+          "rows": 787,
+          "dates": 286,
+          "segments": 10,
+          "low_rows": 339,
+          "high_rows": 389,
+          "high_minus_low_pp": 0.08843997845115759,
+          "note": "conditional observed difference, not randomized or whole-market environment"
+        }
+      }
+    }
+  },
+  "actual_real_fits": 32,
+  "analysis_fits": 0,
+  "market_environment": "not evaluated: qualified index panel missing; own-asset proxy is separate",
+  "net_portfolio_return": "not evaluated: executable opening/limits/cost evidence missing",
+  "individual_stock_Top20_Top30": "pending new data-owner qualified historical membership manifest"
+}

@@ -1,0 +1,463 @@
+{
+  "schema_version": "research-workflow/1.1",
+  "question": {
+    "question_id": "color-continuous-ridge-mae-2026-10-04",
+    "hypothesis_family": "color-continuous-ridge-mae-2026-10-04",
+    "factor_refs": [
+      "research.trend.color_continuous20_bundle@1.0.0"
+    ],
+    "layer": "factor_information",
+    "comparison": "joint",
+    "joint_structure": "同日ETF共同波动、连续灰色和20间隔结果重叠",
+    "sampling": "daily",
+    "target": {
+      "kind": "mae",
+      "horizon": 20,
+      "start_offset": 1,
+      "end_offset": 21,
+      "price_basis": "close_to_close_path"
+    },
+    "baseline": "B0=各ETF等总权重的成熟训练整体均值；B1=冻结字段；辅助ETF_mean=每只ETF自身成熟均值，辅助结果独立表列出",
+    "added_information": "20日严格绿色占比、19对颜色变动频率、有符号EMA20距离",
+    "decision_use": "检验连续颜色表达的同日排序及额外预测帮助，非账户收益",
+    "method": {
+      "name": "prediction_ridge",
+      "reason": "固定线性lambda1与40轮depth2浅树；不调参"
+    },
+    "primary_metric": {
+      "name": "RMSE",
+      "direction": "lower",
+      "attention_threshold": null,
+      "threshold_reason": "事前无可支持的有意义改善门槛，报告差额与不确定性"
+    },
+    "auxiliary_metrics": [
+      "同日Spearman排名关联；平均并列名次高低两组rank大于/小于0.5，中间相等保留中组；同时期池均值/ret20趋势/旧EMA占比参照",
+      "逐期逐ETF、去一ETF、日期同步20/60日块1000次",
+      "按原值方向描述，不按评价翻转；排名原值与变换恒等检查",
+      "观察日资产自身五类/合并三类趋势下相同预测分组、差额、连续段数；市场指数资格另核；0额外拟合"
+    ],
+    "universe": [
+      "510300.SS",
+      "510050.SS",
+      "510500.SS",
+      "588000.SS"
+    ],
+    "period": [
+      "2022-01-04",
+      "2026-06-30"
+    ],
+    "validation": {
+      "stage": "exploration",
+      "split_policy": "2022—2024较早成熟历史；2025和2026H1分别评价，全部已见",
+      "label_boundary_policy": "训练标签先成熟，评价止于同一期"
+    },
+    "dependence": "完整评价交易日历同步20/60日块，灰日/ETF行不独立",
+    "sources": {
+      "panel": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b"
+    },
+    "trial_history": "两目标两方法两折两模型16拟合；全部行情已见；连续表达另批16不混算",
+    "added_information_reason": "历史路径表达，是否补充指定基线须检验；不预设黑必跌"
+  },
+  "data": {
+    "path": "docs/experiments/raw/volume-information-2026-09-30/execution/panel.json",
+    "sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+    "mode": "historical_reconstruction",
+    "qualification": {
+      "adapter": "top_etf_economic/1.0",
+      "manifest_path": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+    }
+  },
+  "universe": {
+    "assets": [
+      "510300.SS",
+      "510050.SS",
+      "510500.SS",
+      "588000.SS"
+    ],
+    "allow_partial": false,
+    "rationale": "四只已有来源与经济OHLC重建证据的国内宽基ETF，固定有限历史池；不能推断完整ETF总体或账户收益",
+    "identity_basis": "固定510300/510050/510500/588000名义OHLC及已保存行动记录，回顾性经济价格，历史来源到达与全部行动完整性未认证"
+  },
+  "feature": {
+    "kind": "color_continuous_workflow",
+    "lookback": 20,
+    "bar_frequency": "daily_quote",
+    "warmup": 252,
+    "missing_policy": "segmented",
+    "definition_ref": "research.trend.color_continuous20_bundle@1.0.0"
+  },
+  "target": {
+    "kind": "mae",
+    "start_offset": 1,
+    "end_offset": 21,
+    "entry_field": "close",
+    "unit": "percentage_point",
+    "price_measure": "economic_price",
+    "path_field": "close"
+  },
+  "split": {
+    "label_policy": "purge",
+    "evaluation_label_policy": "contained",
+    "folds": [
+      {
+        "train_end": "2024-12-31",
+        "eval_start": "2025-01-01",
+        "eval_end": "2025-12-31"
+      },
+      {
+        "train_end": "2025-12-31",
+        "eval_start": "2026-01-01",
+        "eval_end": "2026-06-30"
+      }
+    ]
+  },
+  "evaluator": {
+    "kind": "prediction_ridge",
+    "version": "1.0.0",
+    "baseline_features": [
+      "ret20",
+      "ret60",
+      "vol20",
+      "color20_green",
+      "color20_black",
+      "color60_green",
+      "color60_black",
+      "bull_group",
+      "ema20_up_share20",
+      "asset_510050",
+      "asset_510500",
+      "asset_588000"
+    ],
+    "added_features": [
+      "green_share20",
+      "switch_frequency20",
+      "distance_to_ema20"
+    ],
+    "minimum_training_rows": 40,
+    "lambda": 1.0
+  },
+  "training_weights": "equal_asset",
+  "weights": {
+    "policy": "equal_asset",
+    "comparison": "fixed_common"
+  },
+  "dependence": {
+    "block_length": 20,
+    "draws": 1000,
+    "seed": 20261004,
+    "axis_scope": "evaluation"
+  },
+  "budget": {
+    "scientific_variants": 1,
+    "execution_seconds": 7200,
+    "max_rows": 6000
+  },
+  "history": {
+    "family": "color-continuous-ridge-mae-2026-10-04",
+    "changed_after_results_reason": "New fixed continuous bundle question; no outcomes read before freeze; historical exploration",
+    "ledger_path": "docs/experiments/raw/research-workflow-ledgers-2026-09-29/54e5dbb96ba03073f7113116/attempts.jsonl"
+  },
+  "controller_review": {
+    "universe_fit": {
+      "reason": "四ETF有限回顾资料；真实到达/行动完整性未知",
+      "source_refs": [
+        "docs/experiments/raw/color-gray-path-2026-10-04/brief.json"
+      ]
+    },
+    "proxy_fidelity": {
+      "reason": "全日三色保留；绿色占比不等于旧EMA占比，价格距离复用旧公式；排名不新增信息",
+      "source_refs": [
+        "docs/experiments/raw/color-gray-path-2026-10-04/brief.json"
+      ]
+    },
+    "method_fit": {
+      "reason": "两折成熟训练，共同ETF日期权重，固定线性与浅树；来源组小须披露",
+      "source_refs": [
+        "docs/experiments/raw/color-gray-path-2026-10-04/brief.json"
+      ]
+    },
+    "conclusion_scope": {
+      "reason": "历史同条件预测比较；报告证据不足或本范围未发现增量。小改善不等于赢过更强简单基线；完整账户/真正未见证据未覆盖",
+      "source_refs": [
+        "docs/experiments/raw/color-gray-path-2026-10-04/brief.json"
+      ]
+    }
+  },
+  "publication": {
+    "report_path": "docs/experiments/color-continuous-ridge-mae-2026-10-04.md",
+    "category": "模块与信号",
+    "claimed_scope": "partial",
+    "conclusion": "insufficient"
+  },
+  "sources": [
+    {
+      "path": "docs/experiments/raw/exit_three_piece/pool/588000.SS.bars.parquet",
+      "sha256": "7c7bce89fee5b6483f822d14814dbc14a4ed67a0edcc034196485828e9def543"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/23-510500-2024-annual.pdf",
+      "sha256": "0d30dc196f1dca210bce70fd1e4c58a08646a5ee7d0214f4136ba25e75ec36b7"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/24-510500-2025-annual.pdf",
+      "sha256": "feb6751fdfdadc14600c7f3c5b8b99f669bc40f924bf1c1827c2c28a07398b38"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/25-510500-2026-half.pdf",
+      "sha256": "01136d5f27e09722b45876afe96bc30070635b76495c95d656b0c34b44a07861"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/26-510500-2022-split-result.pdf",
+      "sha256": "2cb13ff91d3a42dde84c199bc9f1d9b1ac7246a947ff254ccd48516350032bca"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/44-510050-2022-annual.pdf",
+      "sha256": "b13600f67e34e673efcbc1d0a15a1166a8c2aa08a695cf9c24f270271b1333b5"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/45-510050-2023-annual.pdf",
+      "sha256": "8b1eef27c0824ed4d9535cbce99379bf48959e9faff0aefbcb7a8e5cf621716e"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/46-510050-2024-annual.pdf",
+      "sha256": "e7ab0da569d9a836d753e71bed70cca8de5ee862eed747f09e1c939ad41f2391"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-action-coverage-recovery-2026-09-23/sources/47-510050-2025-annual.pdf",
+      "sha256": "d0a37d5e7874cd0bc451e59ea7d68aa8fdcd0413e3765487bb14af320e6d758f"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/normalized/510050.SS.nominal-candidate.csv",
+      "sha256": "bac2a6b082f77468dc0a01a8460d40766f8a77700150cf040699a6a0465d8c86"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/normalized/510500.SS.nominal-candidate.csv",
+      "sha256": "bc8619d96c93975d7cf00885aebcf2b00a69b47b5e97617385dcb92373352b69"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/01-sh510050-2020-12-01-2022-12-31.json",
+      "sha256": "1d3280b020f3a78b3c950302644cf635b32821a69c6d530193f732e2dd3187a3"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/02-sh510050-2022-12-01-2024-12-31.json",
+      "sha256": "73b7c0c404c4d0ec691b3befa26dafc74377fe0157bbab778225d5b475e478e0"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/03-sh510050-2024-12-01-2026-06-30.json",
+      "sha256": "d8d934bb9e2253b28251b719f6ed2f606ecb79e1061ce1727ad5a879e0afec21"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/04-sh510500-2020-12-01-2022-12-31.json",
+      "sha256": "b3ac7e514093a862366cc43570b3e7ede57372e6d0b18b45de24a1ed6e82e7c3"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/05-sh510500-2022-12-01-2024-12-31.json",
+      "sha256": "a07955b1ff0aefa0b194be0ec0c5afed0f77b66dcbdb5ec4810763c29eda7646"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-nominal-recovery-2026-09-23/sources/06-sh510500-2024-12-01-2026-06-30.json",
+      "sha256": "339ff4e81205b5f2478dffd006fba9f69a6e12209704e047ccf7bb6495341a26"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/02-510050-2021-annual.pdf",
+      "sha256": "ba98d80942e3daacf4a11e2bbe4150145b03792c91d80a53dc4e0999c7a7527b"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/10-510300-2021-annual.pdf",
+      "sha256": "35a8647d9dd401c65030eafb67e0b65f1c40b3f75d8270c12d1436c00b204889"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/11-510300-2022-annual.pdf",
+      "sha256": "0bc9c86850dc6f131c6dad12925135a21fe80bead53dbbd046bb0f811678d0e5"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/12-510300-2023-annual.pdf",
+      "sha256": "a2a2cb594905a00fc6d092b17ddf841a1f7195dfde3698d4aa8bdc7b6a9f86e7"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/13-510300-2024-annual.pdf",
+      "sha256": "77041d9520683ee3e2eb2111811b068af9b70526715dcffed57f2bf170fbff0b"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/14-510300-2025-annual.pdf",
+      "sha256": "4e5632ab0b46865f679d15d7ecdf036076517f48285c9a2d03cdecf5697acabe"
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/15-510300-2026-half.pdf",
+      "sha256": "b77ce47ece834f968b085c6823c72ffaa635f82d80793cc6c2ebafce301221c5"
+    },
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510050.SS-wealth-features.csv",
+      "sha256": "decd4123589f3ebf7cc19457f6bead82079a96c5344497fa71004350c9fb684d"
+    },
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510300.SS-wealth-features.csv",
+      "sha256": "43c424bff72257ae4c523ace643dce38f816079b4d2281ce255ae8a2d06e34a4"
+    },
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510500.SS-wealth-features.csv",
+      "sha256": "a7922b40a515d5f4b4d29d795075c6e87f56b13250e79cd635cfc710e776b8d4"
+    },
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/588000.SS-wealth-features.csv",
+      "sha256": "79f69c7f833e250a5ac0b524e894ea759f4f3a96505327f4beb3337c389a8e5e"
+    },
+    {
+      "path": "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/actions.json",
+      "sha256": "37427a7f656e30dfa08711dd19e91b1578371df597ac88fc557fc53b4202e97b"
+    },
+    {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/bars-helper-native/sh510300-nominal.csv",
+      "sha256": "d11357f678570ff9698e39799fd4db81ed825c3c05f7bb4c876e895a5c66d0bf"
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+      "sha256": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94"
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510050.SS-row-source-index.json",
+      "sha256": "ac67a2a985e5e6c9e6120c5c52acc66ff5cd903f8d2863a9e9e165610c3fd3e5"
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510300.SS-row-source-index.json",
+      "sha256": "5a0305f2c715a33e65d249b4538fd0094eee1c68163928151b478de51c5bba77"
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/510500.SS-row-source-index.json",
+      "sha256": "93714223de080e92b6f221f2d709c1153e23be6933d64caa30dc8281b519dd96"
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/588000.SS-row-source-index.json",
+      "sha256": "7b8b6f9560e7673d0344e1c4838656c7b4a37110705b5e176cda1c16113dbef2"
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/qualification.json",
+      "sha256": "9d150d608a5e8a88d11021b96f5e2ec5443dddf14c1a98b4ddc2fb4b01bee5f2"
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/01-sh510300-2020-12-01-2022-12-31.body",
+      "sha256": "103bbd9c266d14429479896ec19e3f4a3923e5fe42ba13c9a6a74aa6855e27c7"
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/02-sh510300-2022-12-01-2024-12-31.body",
+      "sha256": "c1177a9939a174b47e5a6329dada01a514c054e3e4070c7071f571478dc76620"
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/03-sh510300-2024-12-01-2026-06-30.body",
+      "sha256": "aa23db71c3dfffc7e85a5e1990dd388214416c9855cbc920eed48a116cf89e33"
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/04-sh588000-2020-12-01-2022-12-31.body",
+      "sha256": "d3b36bf0c9f7bea7ca9cf0f10de53bc56b72a991d8f2d5348b52df3e333d8ce6"
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/05-sh588000-2022-12-01-2024-12-31.body",
+      "sha256": "e2f7eb219a3ca999dc16efd7411c2b20d40f2f4e66dd6fa00c9fd20b1a98cf42"
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/source-recovery/sources/06-sh588000-2024-12-01-2026-06-30.body",
+      "sha256": "7cec676f93319ed2a7877f425adedb8548309ad68c774433d957ff229e8b8276"
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+      "sha256": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94"
+    },
+    {
+      "path": "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    {
+      "path": "docs/research/strategy-source-snapshots/2026-09-30/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    },
+    {
+      "path": "docs/experiments/raw/weekly-color-information-2026-10-04/brief.json",
+      "sha256": "9b766541fb1688f14ab176977dfb1774c730a904ff2d1ad6b8f96c67d2b49014"
+    },
+    {
+      "path": "src/lei_signal/research/weekly_color_information.py",
+      "sha256": "543830114921d72f107f9ad8de1c927ab7a8917a7465c4f59bb2dd1131358863"
+    },
+    {
+      "path": "tests/unit/test_weekly_color_information.py",
+      "sha256": "f6cf3a1fcbb444803d2cb2d3c8f6c02e440a6205ab4833c7e8fcd152503b100b"
+    }
+  ],
+  "research_design": {
+    "claim_mapping": {
+      "original_statement": "颜色序列与价格连续表达是否有同日区分和相对既有背景的额外帮助",
+      "source_section": "技术体系§2.7；实现§3.2",
+      "proxy_definition": "20日严格绿色占比、19对颜色变动频率、有符号EMA20距离",
+      "preserved_conditions": [
+        "严格原20判色",
+        "原多头排列作控制",
+        "未知非灰",
+        "原始值方向不看评价结果翻转"
+      ],
+      "omitted_conditions": [
+        "完整见黑等绿重置/到期",
+        "持仓动作",
+        "小时与日周共振"
+      ],
+      "decision_use": "检验连续颜色表达的同日排序及额外预测帮助，非账户收益",
+      "observation_time": "t完整收盘后",
+      "intended_action_time": "无交易；目标从t+1收盘开始",
+      "application_scope": "trend_road_information",
+      "tested_scope": "四ETF共同连续合格日期",
+      "unresolved_uses": [
+        "真正未见数据",
+        "历史到达/行动完整性",
+        "完整原文交易与资金收益"
+      ]
+    },
+    "sample_fit": {
+      "qualification_artifact": "docs/experiments/raw/color-gray-path-2026-10-04/continuous/ridge-mae/qualification.json",
+      "qualification_sha256": "2bac82076582d7512fa508e758c21f6bce583f5bb8d6ef2cc1962b97280e99be",
+      "outcome_values_used_for_design": false,
+      "unit": "ETF×全部合格连续日",
+      "assets": 4,
+      "observations": 4340,
+      "dates": 1085,
+      "episodes": null,
+      "paired_support": "{\"folds\": [{\"fold\": {\"train_end\": \"2024-12-31\", \"eval_start\": \"2025-01-01\", \"eval_end\": \"2025-12-31\"}, \"training\": {\"rows\": 2748, \"dates\": 687, \"colors\": {\"black\": 1441, \"green\": 853, \"gray\": 454}, \"color_segments\": 501, \"group_segments\": 86, \"per_asset\": {\"510300.SS\": {\"black\": 371, \"gray\": 114, \"green\": 202}, \"510050.SS\": {\"black\": 353, \"green\": 218, \"gray\": 116}, \"510500.SS\": {\"black\": 349, \"gray\": 108, \"green\": 230}, \"588000.SS\": {\"black\": 368, \"gray\": 116, \"green\": 203}}}, \"evaluation\": {\"rows\": 888, \"dates\": 222, \"colors\": {\"black\": 254, \"green\": 516, \"gray\": 118}, \"color_segments\": 153, \"group_segments\": 34, \"per_asset\": {\"510300.SS\": {\"black\": 54, \"gray\": 32, \"green\": 136}, \"510050.SS\": {\"black\": 50, \"green\": 133, \"gray\": 39}, \"510500.SS\": {\"black\": 62, \"gray\": 26, \"green\": 134}, \"588000.SS\": {\"black\": 88, \"green\": 113, \"gray\": 21}}}}, {\"fold\": {\"train_end\": \"2025-12-31\", \"eval_start\": \"2026-01-01\", \"eval_end\": \"2026-06-30\"}, \"training\": {\"rows\": 3720, \"dates\": 930, \"colors\": {\"black\": 1716, \"green\": 1391, \"gray\": 613}, \"color_segments\": 674, \"group_segments\": 121, \"per_asset\": {\"510300.SS\": {\"black\": 433, \"gray\": 154, \"green\": 343}, \"510050.SS\": {\"black\": 408, \"green\": 358, \"gray\": 164}, \"510500.SS\": {\"black\": 416, \"gray\": 148, \"green\": 366}, \"588000.SS\": {\"black\": 459, \"gray\": 147, \"green\": 324}}}, \"evaluation\": {\"rows\": 380, \"dates\": 95, \"colors\": {\"green\": 194, \"gray\": 67, \"black\": 119}, \"color_segments\": 72, \"group_segments\": 22, \"per_asset\": {\"510300.SS\": {\"green\": 52, \"gray\": 17, \"black\": 26}, \"510050.SS\": {\"green\": 29, \"gray\": 25, \"black\": 41}, \"510500.SS\": {\"green\": 61, \"gray\": 14, \"black\": 20}, \"588000.SS\": {\"green\": 52, \"gray\": 11, \"black\": 32}}}}], \"independent_episodes\": null, \"reason\": \"descriptive color/group runs are not independent market episodes\"}",
+      "dependence": "完整评价交易日历同步20/60日块，灰日/ETF行不独立",
+      "model_feature_count": 15,
+      "rationale": "四ETF同日分辨率低，日期和颜色段不独立",
+      "decision": "estimate"
+    }
+  },
+  "permissions": {
+    "real_labels": true,
+    "effect_authorized": true,
+    "real_fits": 4,
+    "paid_requests": 0,
+    "production": false
+  },
+  "environment_analysis": {
+    "rule": "clock_classifier@2.0.0",
+    "rules_path": "configs/rules.v2.yaml",
+    "rules_sha256": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+    "code": "src/lei_signal/rules/clock_classifier.py",
+    "code_sha256": "3ce68b924292fdc5977df12a0f70ae3480db2d01d6bd3a9f4ba9845e5c2e84af",
+    "main_groups": {
+      "up": [
+        1,
+        2
+      ],
+      "sideways": [
+        3
+      ],
+      "down": [
+        4,
+        5
+      ],
+      "unknown": [
+        0
+      ]
+    },
+    "role": "saved-prediction stratification only; research proxy calibration; not production filter",
+    "asset_state": "own ETF known-price classification",
+    "market_background": "qualified representative index needed; no ETF substitution asserted",
+    "scope": "overall,group differences,dates/assets and consecutive episodes; no new regime fits"
+  }
+}

@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/scripts/run_factor_lab.py", line 70, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/scripts/run_factor_lab.py", line 46, in main
+    freeze_workflow(args.workflow_draft, args.out)
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/src/lei_signal/research/workflow.py", line 1208, in freeze_workflow
+    frozen = freeze_contract(read_json(draft_path), root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/src/lei_signal/research/workflow.py", line 884, in freeze_contract
+    return _freeze_contract(contract, root, started, accounting)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/src/lei_signal/research/workflow.py", line 896, in _freeze_contract
+    checked = preflight(frozen, root, require_frozen=False)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/src/lei_signal/research/workflow.py", line 646, in preflight
+    bindings = actual_bindings(contract, root)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/src/lei_signal/research/workflow.py", line 183, in actual_bindings
+    registry = definitions.load_registry(root / catalog["definition_registry"])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/src/lei_signal/research/definitions.py", line 75, in load_registry
+    validate_registry(data)
+  File "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/src/lei_signal/research/definitions.py", line 197, in validate_registry
+    raise ValueError(f"unknown source: {source}")
+ValueError: unknown source: docs/experiments/raw/color-gray-path-2026-10-04/brief.json
