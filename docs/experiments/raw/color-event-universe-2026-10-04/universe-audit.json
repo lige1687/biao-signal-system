@@ -1,0 +1,3463 @@
+{
+  "scope": "all 127 retained inputs; no outcome values or candidate selection",
+  "sources": [
+    {
+      "path": "docs/experiments/raw/exit_three_piece/pool_manifest.json",
+      "bytes": 2849,
+      "sha256": "63e6333614f55d1a1ab3ceb7084830883ad7db4d4c41e2ea7fbb1f36a1914100"
+    },
+    {
+      "path": "docs/experiments/raw/exit_three_piece/README.md",
+      "bytes": 2894,
+      "sha256": "3846f1eb0958639f4a53259871b5d0d2e6a68ec36bc47d692146d7fdc9b6d0c6"
+    }
+  ],
+  "summary": {
+    "symbols": 127,
+    "present": 127,
+    "classes": {
+      "index": 1,
+      "ETF_candidate": 44,
+      "stock_candidate": 82
+    },
+    "bad_ohlc_rows": 0
+  },
+  "rows": [
+    {
+      "symbol": "000300.SS",
+      "instrument_class": "index",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000300.SS.bars.parquet",
+        "bytes": 106907,
+        "sha256": "63d5bce4855d3d295dc7c047213972b6674ee9bf853bf1abc4a3fd183987e5dd"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000300.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "b5ce76cdc9c2336758fbc4ef4b160630ccfdb39035ae3ffadbe6994bf6144615"
+      },
+      "fetched_at": "2026-09-02T04:11:26.288093+00:00"
+    },
+    {
+      "symbol": "000568.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000568.SZ.bars.parquet",
+        "bytes": 96333,
+        "sha256": "14d056520560e336c2e2143e0b46ba516a96fa5802bbb719dc88cc803f277d46"
+      },
+      "rows": 2392,
+      "first": "2016-10-26",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000568.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "579a8c172b23bc1c6eeec04ea0c207a2a75c6a35fae9922a7664a298dc7c9299"
+      },
+      "fetched_at": "2026-09-02T04:37:10.219795+00:00"
+    },
+    {
+      "symbol": "000596.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000596.SZ.bars.parquet",
+        "bytes": 94540,
+        "sha256": "c697303524bf2399ba2242efd77e80eecb791c42ba38fbc3e86e8ae95f36cf3b"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000596.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "404bf21616f83e476d7f1192b4c36cce03c6b999a224e24343f3b898d7d8ddfb"
+      },
+      "fetched_at": "2026-09-02T04:11:32.370889+00:00"
+    },
+    {
+      "symbol": "000625.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000625.SZ.bars.parquet",
+        "bytes": 88905,
+        "sha256": "cbd0339b2dbfa669d85ce61195f4c8ff89b04d60c2740021aed8af54fe262f91"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000625.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "c690cf5c5adbd3e9eb6fdf23df9ea1b92d74fca58b083d80f7a59faf009f78e8"
+      },
+      "fetched_at": "2026-09-02T04:11:35.618259+00:00"
+    },
+    {
+      "symbol": "000661.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000661.SZ.bars.parquet",
+        "bytes": 98085,
+        "sha256": "fc550f6050b036e64f98001c7eb17cd06ad370332129f6f83d19a395e16762f7"
+      },
+      "rows": 2424,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000661.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "06bd0cc136733974a0dd08a84f00e754f54f840db0b5de023a143ffd5602a9dd"
+      },
+      "fetched_at": "2026-09-02T04:11:38.711812+00:00"
+    },
+    {
+      "symbol": "000725.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000725.SZ.bars.parquet",
+        "bytes": 66621,
+        "sha256": "35237aa972182c3538ce1e491657f95e9ff2b5a668e57a2aefb4755ade8e04cb"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000725.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "923b6940014ea9ef5f8c667d5dbbd19aaac9db82f5cd59d4f7ad268ba58c6fdb"
+      },
+      "fetched_at": "2026-09-02T04:11:41.852604+00:00"
+    },
+    {
+      "symbol": "000768.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000768.SZ.bars.parquet",
+        "bytes": 82552,
+        "sha256": "754652436907617b008c0aa3c2c9f7e2d97b68e9f9d373f2a4066ead9daae489"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000768.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "6ec0a61a291c189aed1756b47a6cc7436f1a4e9fa34ceb73de51c5bb3b4c4522"
+      },
+      "fetched_at": "2026-09-02T04:11:44.999939+00:00"
+    },
+    {
+      "symbol": "000831.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000831.SZ.bars.parquet",
+        "bytes": 84352,
+        "sha256": "035b1928771bd29440b8eeb6769b2fe7f6fa1fc1996521484dde86a369683eeb"
+      },
+      "rows": 2432,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000831.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "2cbb3482b9d83c0a8600d72854ebb7620a2157fff996e7df1b088aa0f6287075"
+      },
+      "fetched_at": "2026-09-02T04:11:48.280770+00:00"
+    },
+    {
+      "symbol": "000858.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000858.SZ.bars.parquet",
+        "bytes": 99108,
+        "sha256": "0d2c587860fe6637366a08bf5e9fd2016f5e9c9cc1088e1f936ad69dbf24d597"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000858.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "3ac028655526b1d778b88e152f6af7d45f94a55d5575682579d49c16808ccec1"
+      },
+      "fetched_at": "2026-09-02T04:11:51.519395+00:00"
+    },
+    {
+      "symbol": "000938.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000938.SZ.bars.parquet",
+        "bytes": 88851,
+        "sha256": "0ded3d2b8aa0dc72015dc4c63c81c473fa84d043b366ce86bb6cf4d35a649ccf"
+      },
+      "rows": 2398,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/000938.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "4701f9447b2e4adebf2b05033f1a438d958e2a2bb59fe9cc3e13e3143721a8b6"
+      },
+      "fetched_at": "2026-09-02T04:11:54.660551+00:00"
+    },
+    {
+      "symbol": "002008.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002008.SZ.bars.parquet",
+        "bytes": 96388,
+        "sha256": "68571ad057f2dd59d19604e5c60890447677e6f5ace5787f73c491ef44d23e1b"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002008.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "2022ec4e1f26ca73a021fa8ffa23979b4632b9cd0386c4f52af118e95a6c2e96"
+      },
+      "fetched_at": "2026-09-02T04:11:57.817779+00:00"
+    },
+    {
+      "symbol": "002049.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002049.SZ.bars.parquet",
+        "bytes": 94216,
+        "sha256": "4033b6f49366f1e5b395ee2fc43b0de4c928d91857d2293c205725c67a460287"
+      },
+      "rows": 2307,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002049.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "3b96ec855ad1227aa5c6ff28677bea3a6ed4d1129e4908dd4ee531111bee9a97"
+      },
+      "fetched_at": "2026-09-02T04:12:00.888755+00:00"
+    },
+    {
+      "symbol": "002050.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002050.SZ.bars.parquet",
+        "bytes": 91246,
+        "sha256": "bd989c571826d44536b4f19cd8d43f879516396a0dfb81df4c9660b959af0bd4"
+      },
+      "rows": 2395,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002050.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "fd4a61f4fad22c8d516684366704ffb3ec51187326f723e85fefc7f09fa5c5ff"
+      },
+      "fetched_at": "2026-09-02T04:12:04.027349+00:00"
+    },
+    {
+      "symbol": "002179.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002179.SZ.bars.parquet",
+        "bytes": 92694,
+        "sha256": "b961ba3cc08da29a01a66bdd9b72c5dd3414e16c145094400f8acad1e8f426e7"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002179.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "f842b41409541010af1310e21f70c6a354b3d39d2eb0d673a276702feea5329c"
+      },
+      "fetched_at": "2026-09-02T04:12:07.208067+00:00"
+    },
+    {
+      "symbol": "002185.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002185.SZ.bars.parquet",
+        "bytes": 86048,
+        "sha256": "23bc689ef39e6c252a09bada74132845c7a14cdb9a4542e11b8144357d48f3bc"
+      },
+      "rows": 2417,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002185.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "b852e87f8bb7dd57db0ff13adec0c3701553e35bd9fc92c990c7ef7a6bfec3e3"
+      },
+      "fetched_at": "2026-09-02T04:12:10.351516+00:00"
+    },
+    {
+      "symbol": "002230.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002230.SZ.bars.parquet",
+        "bytes": 92692,
+        "sha256": "1c47a09bfd53be59763bdb06e3e61f470e966040df0b23ec6a5d317a9f5d32e8"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002230.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "4546bec2755584656f53a68d9d4f45f06672c8d659cca4c43be12d886adfb738"
+      },
+      "fetched_at": "2026-09-02T04:12:13.554370+00:00"
+    },
+    {
+      "symbol": "002241.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002241.SZ.bars.parquet",
+        "bytes": 95221,
+        "sha256": "721e0aaec281d9ecce9217d65e7f481469f11cb8ffc5a50f3b9e81cd726322f4"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002241.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "1d32b337eecfaab0654fbeced4d5510818b90b127cd9d859c41948da98d823d0"
+      },
+      "fetched_at": "2026-09-02T04:12:16.707475+00:00"
+    },
+    {
+      "symbol": "002281.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002281.SZ.bars.parquet",
+        "bytes": 86358,
+        "sha256": "118cb940578ac1e6aa8831dd60e72f6356dd21c77069552b7028fc17c9839f56"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002281.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "9ae370006e9de326ca7079091a0743044aadef77aa54a2aa7f017b1606ac952e"
+      },
+      "fetched_at": "2026-09-02T04:12:19.753888+00:00"
+    },
+    {
+      "symbol": "002304.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002304.SZ.bars.parquet",
+        "bytes": 97511,
+        "sha256": "fa3c470de3d6361fd3e357be98f5139d5aba130c091d70dfec51d5c56512a9b9"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002304.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "fda2768ff1973b8481cfe11718e0d32fc5e08f41c696f4962c21095fbd06d787"
+      },
+      "fetched_at": "2026-09-02T04:12:22.888969+00:00"
+    },
+    {
+      "symbol": "002326.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002326.SZ.bars.parquet",
+        "bytes": 84154,
+        "sha256": "9b73aea025c95d389db176cc4d9d97f3e71cdce90278c54ffe5a4a50b0023346"
+      },
+      "rows": 2423,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002326.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "0c7bce819c21cbfbffce1401928e7fc711a0b5c1118410c027888223c8742c1b"
+      },
+      "fetched_at": "2026-09-02T04:12:26.021533+00:00"
+    },
+    {
+      "symbol": "002371.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002371.SZ.bars.parquet",
+        "bytes": 101948,
+        "sha256": "469f8a9b1828c4cbfed831711e71d1aa17b1060deac24bfa2baec0a79a20921c"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002371.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "934556decc65654e29e1b6f1d67424af399ddbfb1e654a1a59c88cf645270dbf"
+      },
+      "fetched_at": "2026-09-02T04:12:29.174594+00:00"
+    },
+    {
+      "symbol": "002384.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002384.SZ.bars.parquet",
+        "bytes": 90556,
+        "sha256": "31adc77d4356e1e2b7a9770c3b4d7e974e2aaea0fc47437f9e2cdeff95c4d373"
+      },
+      "rows": 2363,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002384.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "b667a71dd32ca9a01e92b077c8ad3ba4fafd17edb78465a037f47595d0d39dfd"
+      },
+      "fetched_at": "2026-09-02T04:12:32.316374+00:00"
+    },
+    {
+      "symbol": "002410.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002410.SZ.bars.parquet",
+        "bytes": 95382,
+        "sha256": "5a8a4cfc015a8c3c080a5b0e269c0038e5e0eafacc50bd7a20dab05f427af7b9"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002410.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "05a15680af6e59e736ff8500e196dcb492d3ff18b5dd12571bbc072b592316fa"
+      },
+      "fetched_at": "2026-09-02T04:12:35.532118+00:00"
+    },
+    {
+      "symbol": "002415.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002415.SZ.bars.parquet",
+        "bytes": 86127,
+        "sha256": "2090c0fd4858e4eaf098dcccb5474785b7a55e4fdbc57c8b424445646c67ee1c"
+      },
+      "rows": 2431,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002415.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "fe0de8829ad676720b32ffc136e02125f657fadaa0da3205e4121f53e9ff1a86"
+      },
+      "fetched_at": "2026-09-02T04:12:38.719113+00:00"
+    },
+    {
+      "symbol": "002460.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002460.SZ.bars.parquet",
+        "bytes": 97206,
+        "sha256": "0cd93525f6376f4e49d979a0b24432a674b352a00ea9769875953de8e5a29ae3"
+      },
+      "rows": 2432,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002460.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "ceb2e53e656768b5f32af499b8edc875e532f8412991dd3c3fc5bee9d533e2af"
+      },
+      "fetched_at": "2026-09-02T04:12:41.950038+00:00"
+    },
+    {
+      "symbol": "002466.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002466.SZ.bars.parquet",
+        "bytes": 97982,
+        "sha256": "c1de57d065df58a70a5e62cb96ec6ac73139a65146915c4bed1c1d7e6aff3fab"
+      },
+      "rows": 2407,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002466.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "fab932a8ebf555def4b327e71430431a46d5992c709c304dc409ddfa30204845"
+      },
+      "fetched_at": "2026-09-02T04:12:45.886336+00:00"
+    },
+    {
+      "symbol": "002475.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002475.SZ.bars.parquet",
+        "bytes": 94741,
+        "sha256": "ea5b78169e1b8a77e9f2a707b30b4d60ef410b513b9fc74b22ce11c0c34abd77"
+      },
+      "rows": 2432,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002475.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "1f124369b51d82502de35f21664aa3c15ac8a54a65e772cf892deec88135b6fa"
+      },
+      "fetched_at": "2026-09-02T04:12:49.195423+00:00"
+    },
+    {
+      "symbol": "002555.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002555.SZ.bars.parquet",
+        "bytes": 94011,
+        "sha256": "046a21adcfc112ede0a055b4f2d0341a2c811593ce2c768f1d094f8103010077"
+      },
+      "rows": 2414,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002555.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "43b32b171b9168a39e3555556e22a0d59a978b71aba7325c1f34419feeead6b3"
+      },
+      "fetched_at": "2026-09-02T04:12:53.480906+00:00"
+    },
+    {
+      "symbol": "002594.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002594.SZ.bars.parquet",
+        "bytes": 99836,
+        "sha256": "f9a72b350802671f56d32c410e80d935564f72fe1023f1673a5c242e14d89a5f"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002594.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "d09a77965e422359908ee80bdde66a73735e45f54e79908115c20421a98a9595"
+      },
+      "fetched_at": "2026-09-02T04:12:56.642359+00:00"
+    },
+    {
+      "symbol": "002747.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002747.SZ.bars.parquet",
+        "bytes": 88373,
+        "sha256": "7b844caa5f474a97bb65575bd5e21164ca1df0a167f8a4d64b761bcc69d30074"
+      },
+      "rows": 2385,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002747.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "328f311bf571dd01d82aa89058284a74cad0f3b964ef3cef641a4b62e3e662b5"
+      },
+      "fetched_at": "2026-09-02T04:12:59.665343+00:00"
+    },
+    {
+      "symbol": "002812.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002812.SZ.bars.parquet",
+        "bytes": 95476,
+        "sha256": "ee30fa1480fdfceed7e6bc52e4b923c3067c6652dfa2d3a70284c632c2feb032"
+      },
+      "rows": 2322,
+      "first": "2016-09-14",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002812.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "df80fb3f2812dcdbcb810a57e3c7c6dc31c1a1082e58d570592867a878b0c50e"
+      },
+      "fetched_at": "2026-09-02T04:13:02.934807+00:00"
+    },
+    {
+      "symbol": "002821.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002821.SZ.bars.parquet",
+        "bytes": 98045,
+        "sha256": "4f0e688db513c0b149a7ad4955aa70e04c5478e64f828a965ab63ef04fbc667d"
+      },
+      "rows": 2378,
+      "first": "2016-11-18",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/002821.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "0cd783f53666669795fa5ef268c3e733706b56eca61970a28498d0f3a5db4cac"
+      },
+      "fetched_at": "2026-09-02T04:13:06.258733+00:00"
+    },
+    {
+      "symbol": "159611.SZ",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159611.SZ.bars.parquet",
+        "bytes": 33385,
+        "sha256": "f73bcb99414645bc1097859f01affb9e6e4e57fa89ccadc1fa35ee166e3f1596"
+      },
+      "rows": 1127,
+      "first": "2022-01-07",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159611.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "0894d633a056175bca9ed85641fa8ddc2d03684cbc2076e9e24f08aea02c1840"
+      },
+      "fetched_at": "2026-09-02T04:13:09.085427+00:00"
+    },
+    {
+      "symbol": "159652.SZ",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159652.SZ.bars.parquet",
+        "bytes": 30418,
+        "sha256": "807f4eb790bc00c53cd75b6264e8f27d86588b5f3aeaa42bb32c73ee4f05fb5d"
+      },
+      "rows": 867,
+      "first": "2023-02-08",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159652.SZ.bars.meta.json",
+        "bytes": 214,
+        "sha256": "d4cb8951fd4b85d785841930e3e5595dc041d396d272c8bacbe87c6851ba7853"
+      },
+      "fetched_at": "2026-09-02T04:13:12.155592+00:00"
+    },
+    {
+      "symbol": "159819.SZ",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159819.SZ.bars.parquet",
+        "bytes": 45872,
+        "sha256": "f0343781944ec7063ffbf74b447be922cef2d973cc93edebf847aa61663827b0"
+      },
+      "rows": 1439,
+      "first": "2020-09-23",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159819.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "16a0227967f67e059083dcf0fd73459d18dcda93991c30bbca191ddb883f85f1"
+      },
+      "fetched_at": "2026-09-02T04:13:15.222810+00:00"
+    },
+    {
+      "symbol": "159825.SZ",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159825.SZ.bars.parquet",
+        "bytes": 40319,
+        "sha256": "d4109d3eddf07aab76717e35fc67cbcd36257dd14e172a1453d2a3c20375cc16"
+      },
+      "rows": 1376,
+      "first": "2020-12-29",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159825.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "dd89314f69034049f0aff0ba4a99fa921e5c73a4ebdce142d034cf3033c1f305"
+      },
+      "fetched_at": "2026-09-02T04:13:18.311085+00:00"
+    },
+    {
+      "symbol": "159865.SZ",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159865.SZ.bars.parquet",
+        "bytes": 39256,
+        "sha256": "841b0b2121105d3a36362832181296497897e9937cc1c3cbb98b9735c70a04c6"
+      },
+      "rows": 1333,
+      "first": "2021-03-08",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159865.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "5803d435d1eb78333d33e0dcee533946a7bf3112e0df53eb244f83247b082d46"
+      },
+      "fetched_at": "2026-09-02T04:13:21.402577+00:00"
+    },
+    {
+      "symbol": "159901.SZ",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159901.SZ.bars.parquet",
+        "bytes": 80790,
+        "sha256": "16d1dded9d85b610a49c23758fc879ea342dfec8fe7104001cbea28af676577c"
+      },
+      "rows": 2432,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159901.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "4fb36c30beef4302cb5453a48bf5a3bd293f1462eace6dee8cefdf6d58deb0ce"
+      },
+      "fetched_at": "2026-09-02T04:13:24.534080+00:00"
+    },
+    {
+      "symbol": "159915.SZ",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159915.SZ.bars.parquet",
+        "bytes": 82192,
+        "sha256": "40e22c0faed389aa59c12327299dd4dcadc3f46d7653a21252b451b6a0740627"
+      },
+      "rows": 2432,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159915.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "d4310fb947c5b427252c847d1fe79d7bc152851144094af91c4c7cb36306be9b"
+      },
+      "fetched_at": "2026-09-02T04:13:27.548163+00:00"
+    },
+    {
+      "symbol": "159928.SZ",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159928.SZ.bars.parquet",
+        "bytes": 69717,
+        "sha256": "7fc12bddc59edd48d62337d0d8328e7c655c6f22ee95e65fa9b3ab67e9c82ae9"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159928.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "cf2e8211bc55f262edf80b3e4ffe5f40d281125c0ff680b3b180693cafcc430f"
+      },
+      "fetched_at": "2026-09-02T04:13:30.415946+00:00"
+    },
+    {
+      "symbol": "159992.SZ",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159992.SZ.bars.parquet",
+        "bytes": 49628,
+        "sha256": "47540a7b126d5458fba6498e94032e0dc89047b6d8f1ae4ee3a0cfd698305495"
+      },
+      "rows": 1552,
+      "first": "2020-04-10",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159992.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "09b1ac68f59e371d5afa0e1cc6decb5fad04ad193585eb0be829e0089bcd97fa"
+      },
+      "fetched_at": "2026-09-02T04:13:33.411889+00:00"
+    },
+    {
+      "symbol": "159995.SZ",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159995.SZ.bars.parquet",
+        "bytes": 48650,
+        "sha256": "9dcb8ac4591e02769b398077e40204728595da173868bddf55f7557c89263ce3"
+      },
+      "rows": 1595,
+      "first": "2020-02-10",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/159995.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "bddbe47c7337638074a4760fc21f497403e49457a67b9ee5546d10193822aed2"
+      },
+      "fetched_at": "2026-09-02T04:13:36.164512+00:00"
+    },
+    {
+      "symbol": "300003.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300003.SZ.bars.parquet",
+        "bytes": 93434,
+        "sha256": "2fc70a4dc9bf99af77c665ca4ce220e92939627ce91d1ca28a0ed9be1e3ba8d4"
+      },
+      "rows": 2426,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300003.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "97184fcce6b375d692bc6e46b27fb518352d3d2ce43359f50fb24f1ffa5f1f8e"
+      },
+      "fetched_at": "2026-09-02T04:13:39.205631+00:00"
+    },
+    {
+      "symbol": "300014.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300014.SZ.bars.parquet",
+        "bytes": 98965,
+        "sha256": "cf4a1a1584df77588d5ac996a28774cff36c3d1e4135794083fff2467d99b73b"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300014.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "878477305d0dcc4af567e14eeff573f6e413c53b1281bf600e5791741837a87a"
+      },
+      "fetched_at": "2026-09-02T04:13:42.280792+00:00"
+    },
+    {
+      "symbol": "300059.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300059.SZ.bars.parquet",
+        "bytes": 91126,
+        "sha256": "3833d23a9a43879133213f1029d9f859ebcc11f98f7d773cc2309f0a1c35cc49"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300059.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "5cf1a6176b0be9334d9de7b8ffcbe86cfa468664eede598adde705b29c08a0e6"
+      },
+      "fetched_at": "2026-09-02T04:13:45.385758+00:00"
+    },
+    {
+      "symbol": "300073.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300073.SZ.bars.parquet",
+        "bytes": 96158,
+        "sha256": "71a9b4f6fba6fcec9ce7577edc48db91a4501772320043399227840f7afc91af"
+      },
+      "rows": 2411,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300073.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "375bb15c4d0144bfbd8b41b12c3fa28cd1155e1850df26b340ca9a9cd76477b0"
+      },
+      "fetched_at": "2026-09-02T04:13:48.539179+00:00"
+    },
+    {
+      "symbol": "300122.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300122.SZ.bars.parquet",
+        "bytes": 95303,
+        "sha256": "552bb59bc416a1a570076f8e9a9d12913b7a346ca0cb5c918946224f16c638ea"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300122.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "2382e433978fe34dde848aa6e1b51d008274d6367df674763602da9ec2dbca5b"
+      },
+      "fetched_at": "2026-09-02T04:13:51.689636+00:00"
+    },
+    {
+      "symbol": "300124.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300124.SZ.bars.parquet",
+        "bytes": 91373,
+        "sha256": "8159a3a9974da208b5b7b570a40bee2396582597acfbfdb580c438708169b5e3"
+      },
+      "rows": 2422,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300124.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "d4ce9d48294c809765439e5ca4d8ec6bd4d7641a2715c3e8f0c30b93676acbf7"
+      },
+      "fetched_at": "2026-09-02T04:13:54.830682+00:00"
+    },
+    {
+      "symbol": "300136.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300136.SZ.bars.parquet",
+        "bytes": 88542,
+        "sha256": "2edff18fc24d395106d02398c96df74c1e10ca01c4d4356e1bbfc257b82b5475"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300136.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "5f94a47280c5c0bd5ae2e616892b04d03cb046cc82d2462ab37bbb791da2cef8"
+      },
+      "fetched_at": "2026-09-02T04:13:59.055710+00:00"
+    },
+    {
+      "symbol": "300223.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300223.SZ.bars.parquet",
+        "bytes": 88040,
+        "sha256": "b9bdc668c36587becf74bb9318a3027435bc5649a5f711dddcbdfc0bf71da5c8"
+      },
+      "rows": 2267,
+      "first": "2016-12-16",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300223.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "c2211e1282b62bd69573b8b018d2b0989a4fa3f4bf5218cb7f9d4562850efadf"
+      },
+      "fetched_at": "2026-09-02T04:14:02.541687+00:00"
+    },
+    {
+      "symbol": "300274.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300274.SZ.bars.parquet",
+        "bytes": 96774,
+        "sha256": "989f96f552c1796e84af9029a809bcf218411c6f504f973a094688fc243c57aa"
+      },
+      "rows": 2431,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300274.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "638e757c1a14a13c39de0f239309b369b591354d034ab26cd54bcadd5d3ef835"
+      },
+      "fetched_at": "2026-09-02T04:37:17.071983+00:00"
+    },
+    {
+      "symbol": "300308.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300308.SZ.bars.parquet",
+        "bytes": 100466,
+        "sha256": "cafd5b644db81518967aaa66b0c4d9f25e01050e7e145390ce2a75203c6b02c1"
+      },
+      "rows": 2403,
+      "first": "2016-09-30",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300308.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "a80cfd5f3db6f70e788890cde7624d86911160d4467364b8efc528ad2a22a538"
+      },
+      "fetched_at": "2026-09-02T04:26:09.981777+00:00"
+    },
+    {
+      "symbol": "300347.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300347.SZ.bars.parquet",
+        "bytes": 99452,
+        "sha256": "fa7c2d13e96f59a6f3877ca85fc677dec9ff5b5c8c7d7d379746eca1d34887ac"
+      },
+      "rows": 2428,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300347.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "57ff9c948e61cb7b3e7dafb316a04027b21ff8ce85ec973219738ff0390041f6"
+      },
+      "fetched_at": "2026-09-02T04:26:17.115786+00:00"
+    },
+    {
+      "symbol": "300383.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300383.SZ.bars.parquet",
+        "bytes": 77268,
+        "sha256": "e9198fe8b5737704626be5d7ac4d7a8639bb4b983ecb6e2383f4ba5d6abfc6e6"
+      },
+      "rows": 2330,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300383.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "b7def3ff8190cd67d9c720dd4ed0d8d8bf0e3bab2644d4f20930b888ba8b5ec3"
+      },
+      "fetched_at": "2026-09-02T04:26:24.300869+00:00"
+    },
+    {
+      "symbol": "300394.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300394.SZ.bars.parquet",
+        "bytes": 97650,
+        "sha256": "2e7883172bb552e352af810963adf6ea3c4d26058c0890a5180eca3a1c4bc0f0"
+      },
+      "rows": 2421,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300394.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "fb1a3b80157c682b3bd3225dc62e0625e220e15dcb626ff94d66da4a2e911c83"
+      },
+      "fetched_at": "2026-09-02T04:26:31.456451+00:00"
+    },
+    {
+      "symbol": "300474.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300474.SZ.bars.parquet",
+        "bytes": 96136,
+        "sha256": "ab7bb5a2b635632ec32b98ef45dc3b1c140121d496ccd0540235d4d8e4e97156"
+      },
+      "rows": 2426,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300474.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "b95dbec5194b41744191b5fde29d577d5815a202a99b4de291978e4ca311110e"
+      },
+      "fetched_at": "2026-09-02T04:26:38.441492+00:00"
+    },
+    {
+      "symbol": "300502.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300502.SZ.bars.parquet",
+        "bytes": 100010,
+        "sha256": "8af4e760f5e4a3efc3f3ceb3e2de79440b3598dae199bed1baa5a038592be4a0"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300502.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "473e749b5bebd109a1d862b43da670c03ced599a144a921b31cce50098fd9360"
+      },
+      "fetched_at": "2026-09-02T04:26:46.015001+00:00"
+    },
+    {
+      "symbol": "300661.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300661.SZ.bars.parquet",
+        "bytes": 92431,
+        "sha256": "e4f6298c84f6eb0ff5adfde11848d0b054d3c95bc835d37fc2c1a83b0d72474d"
+      },
+      "rows": 2237,
+      "first": "2017-06-06",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300661.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "5a00717552d66c5afe4e8aae0a4f400ffca2fc3136932f368595f17af4b10be0"
+      },
+      "fetched_at": "2026-09-02T04:26:52.855252+00:00"
+    },
+    {
+      "symbol": "300750.SZ",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300750.SZ.bars.parquet",
+        "bytes": 82344,
+        "sha256": "935ed24bf9f13c739cb291bd42689b5db40c659457e7e0f705996816bebd38e1"
+      },
+      "rows": 1996,
+      "first": "2018-06-13",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/300750.SZ.bars.meta.json",
+        "bytes": 215,
+        "sha256": "5c3f84128638834d0781d1f1fdedde18e19b926dc59042a0a4619adfaf824249"
+      },
+      "fetched_at": "2026-09-02T04:37:23.866804+00:00"
+    },
+    {
+      "symbol": "510050.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/510050.SS.bars.parquet",
+        "bytes": 77356,
+        "sha256": "80c7afc188c7de45c22150e39d676a4a3c5ceae3f3727a8acd3335395c939a65"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/510050.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "a996253a3f0947290aa256fff0134cc4d66d5f8956f8ce336f29a4585fbc6c45"
+      },
+      "fetched_at": "2026-09-02T04:27:05.402241+00:00"
+    },
+    {
+      "symbol": "510300.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/510300.SS.bars.parquet",
+        "bytes": 82438,
+        "sha256": "b7ca3f53331d675abfa6ed87d74b203a0ecb05236517f0d81973899fd4b9f831"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/510300.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "fab3572ee2ac5f2d4bacfc5bc8816499355889362189548dcc953ea5bda21e5a"
+      },
+      "fetched_at": "2026-09-02T04:27:12.184472+00:00"
+    },
+    {
+      "symbol": "510500.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/510500.SS.bars.parquet",
+        "bytes": 87310,
+        "sha256": "b34dcc1c046e3d13ae190bdcfbf873cb14c8e06fa83380c00f7e3496293ba962"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/510500.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "c3772676b9a56b7fb37624402c590bead4f9a3a28223e78a1e143d58f957e167"
+      },
+      "fetched_at": "2026-09-02T04:27:18.996796+00:00"
+    },
+    {
+      "symbol": "512000.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512000.SS.bars.parquet",
+        "bytes": 60503,
+        "sha256": "c8c8cce8e5054d2035c8b49335d3acd4769fcee28e70e95b040e9b0cba003fd5"
+      },
+      "rows": 2418,
+      "first": "2016-09-14",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512000.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "8e01b5ff92483eaa75656b315cf03370a208c2b5c44370f4936237a87d29966f"
+      },
+      "fetched_at": "2026-09-02T04:27:25.751658+00:00"
+    },
+    {
+      "symbol": "512010.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512010.SS.bars.parquet",
+        "bytes": 62678,
+        "sha256": "e92a5fa8b0d5ec3a067ca9f1d52fff7f09aa69ef764be040bf47709a5f4fa9cf"
+      },
+      "rows": 2431,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512010.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "c10dff353ef7b08145d291d96452b683a37f859ed40a410ca784366ffc10e4c8"
+      },
+      "fetched_at": "2026-09-02T04:27:32.603563+00:00"
+    },
+    {
+      "symbol": "512100.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512100.SS.bars.parquet",
+        "bytes": 74434,
+        "sha256": "e93b6a614ed61ecb5ead5ba3b7d09982598f2f8d88a57a68600410b5f00119d4"
+      },
+      "rows": 2387,
+      "first": "2016-11-04",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512100.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "acfd7b5c347e862acf36ec9ce01bd15bb66d5e0554f4e2b9ee79bf27212f2134"
+      },
+      "fetched_at": "2026-09-02T04:27:39.398679+00:00"
+    },
+    {
+      "symbol": "512170.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512170.SS.bars.parquet",
+        "bytes": 50208,
+        "sha256": "2aaae876962c418efdc7999e945ff2df79df161c2d307644b59cef9755813c37"
+      },
+      "rows": 1751,
+      "first": "2019-06-17",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512170.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "aad6568fe7102299e25852afb8ab0d0eb019de3a0730c5b2c9b9427a073d8dc9"
+      },
+      "fetched_at": "2026-09-02T04:27:46.250353+00:00"
+    },
+    {
+      "symbol": "512200.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512200.SS.bars.parquet",
+        "bytes": 63885,
+        "sha256": "5102af9cec3788255a2ae69b1f333003dec05670eddee0a6b250f5f388fe6977"
+      },
+      "rows": 2168,
+      "first": "2017-09-25",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512200.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "24dfeaecac09684705e323781ed0c6ae49085c267ca79e83d99285e8d2c47c87"
+      },
+      "fetched_at": "2026-09-02T04:27:53.000211+00:00"
+    },
+    {
+      "symbol": "512400.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512400.SS.bars.parquet",
+        "bytes": 67082,
+        "sha256": "b0939dfc0195a17d45e86fb019b9e5842e9583177825e6e8f3e3959367ea8a5c"
+      },
+      "rows": 2184,
+      "first": "2017-09-01",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512400.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "865cfce04492cce2629150909de79705562383e6c5cb7d706bc8ff934be26853"
+      },
+      "fetched_at": "2026-09-02T04:27:59.778289+00:00"
+    },
+    {
+      "symbol": "512480.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512480.SS.bars.parquet",
+        "bytes": 51927,
+        "sha256": "fe7628f7114ff94f1d6519abea0c2e44ae007de9f7cb64b99fb9bab1a2a6d14d"
+      },
+      "rows": 1754,
+      "first": "2019-06-12",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512480.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "477e01592fb1c0651f609517447d49a3186473c5f9d1f0d10082abb5e7466a06"
+      },
+      "fetched_at": "2026-09-02T04:28:06.539857+00:00"
+    },
+    {
+      "symbol": "512580.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512580.SS.bars.parquet",
+        "bytes": 68281,
+        "sha256": "c1a1a64af44e8bce5ee67fec9438fe6b5527c840115ccb7619f1c3a23e55a941"
+      },
+      "rows": 2312,
+      "first": "2017-02-28",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512580.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "11f929065369badb71b7d7573fc1e59967db25f74e109e075b4e97955c746cf2"
+      },
+      "fetched_at": "2026-09-02T04:28:13.320159+00:00"
+    },
+    {
+      "symbol": "512660.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512660.SS.bars.parquet",
+        "bytes": 69034,
+        "sha256": "6acb91e4d7121fd63c0b30f58927cf92651d7bdad2823a40fad983b5e8165fef"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512660.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "38d53871fe11fc90c483f4bf0b982b522fc78056107c2bafd174a777a92a6381"
+      },
+      "fetched_at": "2026-09-02T04:28:20.103826+00:00"
+    },
+    {
+      "symbol": "512690.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512690.SS.bars.parquet",
+        "bytes": 54503,
+        "sha256": "f1c407412e9794b9c607bcc9c0c5aeffb98a7332886d0995ff535aa8d459cd79"
+      },
+      "rows": 1780,
+      "first": "2019-05-06",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512690.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "31e52d068651e83ba265d796a9ed191ea458d5731ac4f2849d2e9e5e3ce0801a"
+      },
+      "fetched_at": "2026-09-02T04:28:26.923406+00:00"
+    },
+    {
+      "symbol": "512760.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512760.SS.bars.parquet",
+        "bytes": 52881,
+        "sha256": "f84f63db4e32257bc720e42d245c07f9dccdc1594231442bfc27b72b7ce1366a"
+      },
+      "rows": 1754,
+      "first": "2019-06-12",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512760.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "12efe69affbe4932b606a33c10d4483c3fc24626630789667bf915df0b6d049d"
+      },
+      "fetched_at": "2026-09-02T04:28:33.640995+00:00"
+    },
+    {
+      "symbol": "512800.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512800.SS.bars.parquet",
+        "bytes": 57296,
+        "sha256": "e86d5c9977c4fbca57fa3074428a6cb28ff79fc63f81f5ee9c880e7e236d372c"
+      },
+      "rows": 2205,
+      "first": "2017-08-03",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512800.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "c635c419e9ca483866f42a5cf7eb654326b48919d51a4d3046b3adb3cad2dd51"
+      },
+      "fetched_at": "2026-09-02T04:28:40.383051+00:00"
+    },
+    {
+      "symbol": "512890.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512890.SS.bars.parquet",
+        "bytes": 54747,
+        "sha256": "b7d79af15a01db1add66b704a0bc81f58fa184f5fbd564791cdc90b05ee5b89a"
+      },
+      "rows": 1847,
+      "first": "2019-01-18",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512890.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "3c2933219cb804ea9bb0c6ebd0c131470ee04d310b21056af89c843f604399ef"
+      },
+      "fetched_at": "2026-09-02T04:28:47.185506+00:00"
+    },
+    {
+      "symbol": "512920.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512920.SS.bars.parquet",
+        "bytes": 26144,
+        "sha256": "32702143c4e3c723e7660e48c23b0b2bfcc4ef4d5ade3819af4fa680f46f0ac2"
+      },
+      "rows": 720,
+      "first": "2018-12-07",
+      "last": "2022-12-02",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512920.SS.bars.meta.json",
+        "bytes": 214,
+        "sha256": "e630fa247f9f0a3311ce83f9943a27b4108bc2d5cb2c59f5eb4394445682c223"
+      },
+      "fetched_at": "2026-09-02T04:28:53.967506+00:00"
+    },
+    {
+      "symbol": "512980.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512980.SS.bars.parquet",
+        "bytes": 57602,
+        "sha256": "8f972b6c2f85d9391ceaf29d6b1735064b07917ca27a447264bf5c1f84472fa1"
+      },
+      "rows": 2090,
+      "first": "2018-01-19",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/512980.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "27a19f0628aacd9678727f0d3e3f20da4727e75a18cf130db80b59a9633583b7"
+      },
+      "fetched_at": "2026-09-02T04:29:01.091893+00:00"
+    },
+    {
+      "symbol": "515030.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/515030.SS.bars.parquet",
+        "bytes": 54878,
+        "sha256": "277c25c78259173e2373a088ba091e75c4eefb2ab81d4639a1e331010248a1a2"
+      },
+      "rows": 1578,
+      "first": "2020-03-04",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/515030.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "e579eea2dfd69d81102598d23510d664168c5fe7ff7310dc1d62f1ea43dffed8"
+      },
+      "fetched_at": "2026-09-02T04:29:08.215230+00:00"
+    },
+    {
+      "symbol": "515050.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/515050.SS.bars.parquet",
+        "bytes": 46240,
+        "sha256": "5d1c00037622c545031676517f65a902f0266b4f8e95a52e8b426c895c584d28"
+      },
+      "rows": 1671,
+      "first": "2019-10-16",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/515050.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "ea1bbd7ab9c2c7486a8cb871f782d6384d5394f5c7f1ef9a9c2b5c03665b3341"
+      },
+      "fetched_at": "2026-09-02T04:29:15.352872+00:00"
+    },
+    {
+      "symbol": "515130.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/515130.SS.bars.parquet",
+        "bytes": 45556,
+        "sha256": "b665478de53cd417bd4b99c7528bdb46b4d46fc989e98ac17baafe3461e42427"
+      },
+      "rows": 1534,
+      "first": "2020-05-11",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/515130.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "d0c726f7cf7c92e386c7c363212db8c0ffb21c39b53fd046dd38fcb95120b911"
+      },
+      "fetched_at": "2026-09-02T04:29:22.431912+00:00"
+    },
+    {
+      "symbol": "515170.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/515170.SS.bars.parquet",
+        "bytes": 40813,
+        "sha256": "b3080acb3152755ca875f5be2e2eb0344f95a417fb4a3546fb99e62713069860"
+      },
+      "rows": 1366,
+      "first": "2021-01-13",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/515170.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "7a6867173cc28e922140f4480962b55dd7c4a262ae3b5bfaf4d055e673569f8e"
+      },
+      "fetched_at": "2026-09-02T04:29:29.676321+00:00"
+    },
+    {
+      "symbol": "515210.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/515210.SS.bars.parquet",
+        "bytes": 48747,
+        "sha256": "27cb535012fe8b656a14080f7c13213b71edde3b60cf15ceb2a752c20a9ded93"
+      },
+      "rows": 1580,
+      "first": "2020-03-02",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/515210.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "c874cd116eb31dfdfe9029da1097d53bc09d940b3136f7380f04bfe655791413"
+      },
+      "fetched_at": "2026-09-02T04:29:36.783135+00:00"
+    },
+    {
+      "symbol": "515220.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/515220.SS.bars.parquet",
+        "bytes": 48892,
+        "sha256": "1120727abf2f2f270e9e18e32ef6c6be6996146fcf7781846d422f0b1737f8a2"
+      },
+      "rows": 1580,
+      "first": "2020-03-02",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/515220.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "3a0b995919257ec90dbd85494ba65a1f2bd7545b3e15c1846953e772797f3a19"
+      },
+      "fetched_at": "2026-09-02T04:29:43.955793+00:00"
+    },
+    {
+      "symbol": "515300.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/515300.SS.bars.parquet",
+        "bytes": 49487,
+        "sha256": "c96cf4efda8644389766822a5fb3d1a111f6b13b9789132bf5db40c0ca33f241"
+      },
+      "rows": 1685,
+      "first": "2019-09-19",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/515300.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "7868f86f91c73e0f13872363d58fbbc08715851ebf2db1a006fe1a580bfeb91f"
+      },
+      "fetched_at": "2026-09-02T04:29:51.116416+00:00"
+    },
+    {
+      "symbol": "515790.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/515790.SS.bars.parquet",
+        "bytes": 47563,
+        "sha256": "32114e8d35e74e874e19a60c910d16c24322a8ed9843e2e539577a78f6e94e44"
+      },
+      "rows": 1383,
+      "first": "2020-12-18",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/515790.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "49f2d0a4db00d6b735032790eb330f5a4cce31710b79d806f0c9118838f69b5b"
+      },
+      "fetched_at": "2026-09-02T04:29:58.199153+00:00"
+    },
+    {
+      "symbol": "515880.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/515880.SS.bars.parquet",
+        "bytes": 44934,
+        "sha256": "05ec41da774fb93314e8b751cae33c7b8a959cc0b787dc1fbda60b8737cd859c"
+      },
+      "rows": 1693,
+      "first": "2019-09-06",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/515880.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "7aa318737598e59ea3ecb742c8bd991d525e4d3af2a2de7e03f5ee3b2d112fdd"
+      },
+      "fetched_at": "2026-09-02T04:30:05.266977+00:00"
+    },
+    {
+      "symbol": "516010.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/516010.SS.bars.parquet",
+        "bytes": 43445,
+        "sha256": "fc8280ca97a6d3ec54057457723b86421facefe31b83c9fb6e7cccfd1b2a725e"
+      },
+      "rows": 1334,
+      "first": "2021-03-05",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/516010.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "1e02e5bb188fe193db8ca2bf182ddb4457416dfa87de53b0cfe0935345e14c70"
+      },
+      "fetched_at": "2026-09-02T04:30:12.460459+00:00"
+    },
+    {
+      "symbol": "516220.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/516220.SS.bars.parquet",
+        "bytes": 41449,
+        "sha256": "d9c81e741750078cdc6e9d0160f87cadc53e736ae25a2299851e9734358e945e"
+      },
+      "rows": 1331,
+      "first": "2021-03-10",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/516220.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "4ea8804fe2d6a38dc14403d702c9c4b2d22ab456c83d246c0977f412babd6a11"
+      },
+      "fetched_at": "2026-09-02T04:30:19.647881+00:00"
+    },
+    {
+      "symbol": "516510.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/516510.SS.bars.parquet",
+        "bytes": 43690,
+        "sha256": "451f966d5207f74a7354c1a5b9937f7cde9a86c9b8de22860f1c568653d48437"
+      },
+      "rows": 1312,
+      "first": "2021-04-07",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/516510.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "3c645a1e298ec67057d4220de13808ca4eb85542776c37b1558f82444b115f76"
+      },
+      "fetched_at": "2026-09-02T04:30:26.723925+00:00"
+    },
+    {
+      "symbol": "518850.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/518850.SS.bars.parquet",
+        "bytes": 56624,
+        "sha256": "551894e124ed5b0542e69822207b1f58b6e34608098ebe778cd6e56115b985c9"
+      },
+      "rows": 1515,
+      "first": "2020-06-05",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/518850.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "40c2a0ade5a3ae2a756ad8ad507d161bc3fad68e65b0d7d3a2334a32208c83af"
+      },
+      "fetched_at": "2026-09-02T04:30:33.798261+00:00"
+    },
+    {
+      "symbol": "562500.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/562500.SS.bars.parquet",
+        "bytes": 36371,
+        "sha256": "688002d1d096bb2ab3501007d3d186af78b79034ba482e33f55b49b8c2e8712d"
+      },
+      "rows": 1133,
+      "first": "2021-12-29",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/562500.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "d9bed7cbda5a71376396ca2b5961ebf4150df44e171ad1c948030ef42a43b284"
+      },
+      "fetched_at": "2026-09-02T04:30:40.830490+00:00"
+    },
+    {
+      "symbol": "562590.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/562590.SS.bars.parquet",
+        "bytes": 25069,
+        "sha256": "f726da571045d70b1a6c697c0691a3ce5155d6a5476f426d407fd424e8d1743d"
+      },
+      "rows": 699,
+      "first": "2023-10-18",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/562590.SS.bars.meta.json",
+        "bytes": 214,
+        "sha256": "25a8dd56051517502dc3f06b6a825e2e931e7999b5573becdce70816ee828732"
+      },
+      "fetched_at": "2026-09-02T04:30:47.951190+00:00"
+    },
+    {
+      "symbol": "588000.SS",
+      "instrument_class": "ETF_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/588000.SS.bars.parquet",
+        "bytes": 47344,
+        "sha256": "7c7bce89fee5b6483f822d14814dbc14a4ed67a0edcc034196485828e9def543"
+      },
+      "rows": 1407,
+      "first": "2020-11-16",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/588000.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "236d375c46ed07c2895c7cc0e61945a818a8d31a5b25325aa50888c0e3ed718d"
+      },
+      "fetched_at": "2026-09-02T04:30:55.119650+00:00"
+    },
+    {
+      "symbol": "600030.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600030.SS.bars.parquet",
+        "bytes": 85040,
+        "sha256": "2b83a523852d79541daa29f56cc70fff70fca6df652c7174badb99b1a0b08b99"
+      },
+      "rows": 2416,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600030.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "4aa4de70ece9886848c0a88c2eb7d0b3e0e18d5266eb58626c3d49118b76ef18"
+      },
+      "fetched_at": "2026-09-02T04:31:02.329045+00:00"
+    },
+    {
+      "symbol": "600111.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600111.SS.bars.parquet",
+        "bytes": 87747,
+        "sha256": "0dba4a22aa7d33418b09132e7b4a61462465ee87c1b92175347a473e3a8976f6"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600111.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "590d158b2341780e60727efdbd3f32d6a9ea46d43b19ad01f1e55036b305b66b"
+      },
+      "fetched_at": "2026-09-02T04:31:09.688117+00:00"
+    },
+    {
+      "symbol": "600188.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600188.SS.bars.parquet",
+        "bytes": 54139,
+        "sha256": "e32a7edd6a63e6b8a1512f681dbb3344fd03a9aa590c837a417058b1711d5d77"
+      },
+      "rows": 1379,
+      "first": "2017-12-28",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600188.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "b7915950854e001426fee5d8d2e411a018c6b4f3124a493ef23a9984fd7e7140"
+      },
+      "fetched_at": "2026-09-02T04:37:30.722668+00:00"
+    },
+    {
+      "symbol": "600196.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600196.SS.bars.parquet",
+        "bytes": 87171,
+        "sha256": "19617da81a2c2956941aeeca4dd29d8bbd362747e06a64d683a5d4b701483952"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600196.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "cfb6bca1fee0fafd06609c88c12042e7de0e5a00297ff37955ed03596402c0ff"
+      },
+      "fetched_at": "2026-09-02T04:31:23.171598+00:00"
+    },
+    {
+      "symbol": "600276.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600276.SS.bars.parquet",
+        "bytes": 97200,
+        "sha256": "77a288f4b75d5510572378b09826b0361b34bba2c199a62623fe744e0726cb22"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600276.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "6ba0fe6965acd9924ffde2eec2ab73047bb12b7a2b1ed68406d5aed6805330cd"
+      },
+      "fetched_at": "2026-09-02T04:31:30.495845+00:00"
+    },
+    {
+      "symbol": "600362.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600362.SS.bars.parquet",
+        "bytes": 81443,
+        "sha256": "c7912d320d53d0d4cdd70609199cede6833d06ea254074f0d7cfde4f7c00d1d7"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600362.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "965b5c4fe1f426aaacf3af30477b2a533ac373d0e109463026bf035629e09d42"
+      },
+      "fetched_at": "2026-09-02T04:31:37.767337+00:00"
+    },
+    {
+      "symbol": "600438.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600438.SS.bars.parquet",
+        "bytes": 89050,
+        "sha256": "819e2e8827d06fa936729ba7c3eca7661b7fd54a8ffcaab84037d67ca09f2202"
+      },
+      "rows": 2401,
+      "first": "2016-08-25",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600438.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "dd990bbf0d5d738257b731f26ec2bc4c757ded2bf7515919c730ca9bff400ae0"
+      },
+      "fetched_at": "2026-09-02T04:37:37.681320+00:00"
+    },
+    {
+      "symbol": "600460.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600460.SS.bars.parquet",
+        "bytes": 86194,
+        "sha256": "a919e6dc3f7f7a75e3a7991e42c81a6d424b2761d0865af9b2404b16b060f7d7"
+      },
+      "rows": 2348,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600460.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "bf4f0ee7011614cc422ac6c8e1416a1ba951d7809acfdc22bfa145678f11b938"
+      },
+      "fetched_at": "2026-09-02T04:31:51.305069+00:00"
+    },
+    {
+      "symbol": "600519.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600519.SS.bars.parquet",
+        "bytes": 99612,
+        "sha256": "32179a25ec29302eb2374b05ddf155f7dd8dfc76cd9ea3d82b6f7a9e7e4901f8"
+      },
+      "rows": 2427,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600519.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "5ecf14c5706643cd0497a19d7e6893a6d7a50d183ee2a3fc80d68346af2bf639"
+      },
+      "fetched_at": "2026-09-02T04:37:44.488852+00:00"
+    },
+    {
+      "symbol": "600584.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600584.SS.bars.parquet",
+        "bytes": 86811,
+        "sha256": "7882f4d92ba7f8e54f7b478eb1411410232e2c30598c0a36a830e913d39c341e"
+      },
+      "rows": 2415,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600584.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "9e3feffbbf52744e85f9552d35cae72abcec1301c53807fef2853a155854036f"
+      },
+      "fetched_at": "2026-09-02T04:32:04.833957+00:00"
+    },
+    {
+      "symbol": "600588.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600588.SS.bars.parquet",
+        "bytes": 90865,
+        "sha256": "2b9bf3e134e9a466fc891edbf61fcd384d4832c01c16c5d3f01a42f2d5c45e67"
+      },
+      "rows": 2431,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600588.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "b1d412287893c89e5f4c5acc52b59074c16644dac5e3ef11eda08bf999ef8856"
+      },
+      "fetched_at": "2026-09-02T04:32:12.028455+00:00"
+    },
+    {
+      "symbol": "600600.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600600.SS.bars.parquet",
+        "bytes": 88856,
+        "sha256": "98bee590336d403be9386f52168c53c79394a74685fbcfa1d460d225ae389319"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600600.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "28bb63ca1c69414e0bb5893234b5742a6d20c13669d475f128d243ae59a76e83"
+      },
+      "fetched_at": "2026-09-02T04:32:19.322589+00:00"
+    },
+    {
+      "symbol": "600660.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600660.SS.bars.parquet",
+        "bytes": 85041,
+        "sha256": "682c8bfcc2bc969a2c1c900107f00d74ec0f3bb594c51e8647cd28a922ccd859"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600660.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "cbd1044b089bfb1c62987819da560a7c2a5c90fb1df852730405e41aa7860790"
+      },
+      "fetched_at": "2026-09-02T04:32:26.594170+00:00"
+    },
+    {
+      "symbol": "600703.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600703.SS.bars.parquet",
+        "bytes": 86833,
+        "sha256": "273ce733baea916a973674258795effc8b32a5af8fb9025bd25dc5e19748cce1"
+      },
+      "rows": 2432,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600703.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "69472e045e46271d682ec92fdac66eef38802d1a2a23f7cc3ce4bc609a1588b5"
+      },
+      "fetched_at": "2026-09-02T04:32:33.790612+00:00"
+    },
+    {
+      "symbol": "600745.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600745.SS.bars.parquet",
+        "bytes": 88248,
+        "sha256": "8a734642c32bd2cb6dc71e4a69be18189647172ed79ead400c58164e3ae8ca70"
+      },
+      "rows": 2236,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600745.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "85ee1e5ab0512ca93f82fcc15ca5e1e930bea0b52fa7b8c056cba00006d50d3a"
+      },
+      "fetched_at": "2026-09-02T04:32:41.012734+00:00"
+    },
+    {
+      "symbol": "600760.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600760.SS.bars.parquet",
+        "bytes": 88284,
+        "sha256": "0b5de2b215daeba6e32916ca4a7b2ce479d49dc5f2d375db70e703d4e1221d1a"
+      },
+      "rows": 2352,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600760.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "a3c9a51718103a59e0752121d07803011fc953174832617703af69c65aa906ae"
+      },
+      "fetched_at": "2026-09-02T04:32:48.240221+00:00"
+    },
+    {
+      "symbol": "600809.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600809.SS.bars.parquet",
+        "bytes": 88679,
+        "sha256": "b455568cf2d7c98bbbf1a6bd7d8d60a09065658c1a5a99f14d3ab290ea4cc9e7"
+      },
+      "rows": 2205,
+      "first": "2017-06-12",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600809.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "09555585616b3fe46d62c8b50b5d31898bfdd92886f8e310d251e4c6de75f6d7"
+      },
+      "fetched_at": "2026-09-02T04:37:51.312227+00:00"
+    },
+    {
+      "symbol": "600850.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600850.SS.bars.parquet",
+        "bytes": 80970,
+        "sha256": "3df5357431f756c6d6e91d4a759bbba96223cb8587585e6464f10afe10ba5b1f"
+      },
+      "rows": 2348,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600850.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "8c2c337cc289d877f1ba3207059f126cc8070123aa4692bff4ba9a0be19cf748"
+      },
+      "fetched_at": "2026-09-02T04:33:01.660768+00:00"
+    },
+    {
+      "symbol": "600893.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600893.SS.bars.parquet",
+        "bytes": 91166,
+        "sha256": "d443b07bab4e30fe9e7c60226d5c1a7fe4bddaa2bb1e4c22e6baee7136b1c835"
+      },
+      "rows": 2402,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/600893.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "da8c842acf305e7e7b7549612287e12ed1a2ccb3c28d2312b5ef500d45cb8305"
+      },
+      "fetched_at": "2026-09-02T04:33:08.880652+00:00"
+    },
+    {
+      "symbol": "601012.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/601012.SS.bars.parquet",
+        "bytes": 93376,
+        "sha256": "9edbb7b858946187ce153d89d3aacc476c061ecd0a55e0eae46149318c18debe"
+      },
+      "rows": 2426,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/601012.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "c169aad8af6c310a390677b7afbb612b0317ad9614a8476ee5ab7d146fa5b2da"
+      },
+      "fetched_at": "2026-09-02T04:33:15.978376+00:00"
+    },
+    {
+      "symbol": "601127.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/601127.SS.bars.parquet",
+        "bytes": 91699,
+        "sha256": "82cfe79478928fc033d5cc5f1945a377828a3f3aaa4f871825016b4b870754a6"
+      },
+      "rows": 2408,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/601127.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "48075615f6b9ad175c7beabe223f372434030da7e0ee43695e8c557a9ab4689a"
+      },
+      "fetched_at": "2026-09-02T04:33:23.180020+00:00"
+    },
+    {
+      "symbol": "601225.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/601225.SS.bars.parquet",
+        "bytes": 64832,
+        "sha256": "ed50ceeb3ae92573e188dec0b214584ed41d1fe80cdd61f37bfe139398410a3a"
+      },
+      "rows": 1689,
+      "first": "2018-01-09",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/601225.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "cbdea0b972f678c69d19126d38b345a62ac356b23379b15df2c3d15ef65a4245"
+      },
+      "fetched_at": "2026-09-02T04:37:58.089366+00:00"
+    },
+    {
+      "symbol": "601238.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/601238.SS.bars.parquet",
+        "bytes": 74994,
+        "sha256": "81a9ed0d8327c8f616f1e6e392b596c128ca502000c203a4bf97dac84115be73"
+      },
+      "rows": 2423,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/601238.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "08213c539cae83edb8569f35d56adcc8aa5145b857bb18c2fa3ee3e8a833d946"
+      },
+      "fetched_at": "2026-09-02T04:33:36.563372+00:00"
+    },
+    {
+      "symbol": "601318.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/601318.SS.bars.parquet",
+        "bytes": 97435,
+        "sha256": "0c7aaf36b4e2a5968cc2d31dc8366ae4cbf691c2bfe9220e52bf69ba40f78931"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/601318.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "3800fe2be4e082f1d5bbc21a98e4a7eeb6e22527e54d6d244cb773516095d5e6"
+      },
+      "fetched_at": "2026-09-02T04:33:43.785459+00:00"
+    },
+    {
+      "symbol": "601600.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/601600.SS.bars.parquet",
+        "bytes": 71775,
+        "sha256": "d0b295be559e5b83e268d4d03f51e18bb840c905dcc7ec6c1cf2b2da70fd2901"
+      },
+      "rows": 2324,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/601600.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "f4b74b77466bb601bb61228afb6ce807bda053865aff8b3bcf18edf709fda0bf"
+      },
+      "fetched_at": "2026-09-02T04:33:51.006589+00:00"
+    },
+    {
+      "symbol": "601688.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/601688.SS.bars.parquet",
+        "bytes": 79645,
+        "sha256": "9665fc7f810888ed5d6e85d5fcd766f60f4d2541cef3f479a62126499280e63a"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/601688.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "faa3cfc2dc81e428441cc29e566684b8dcea2fcce5c82b7acaa0c69353ca863c"
+      },
+      "fetched_at": "2026-09-02T04:33:58.239480+00:00"
+    },
+    {
+      "symbol": "601689.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/601689.SS.bars.parquet",
+        "bytes": 97914,
+        "sha256": "d8a3036ab77ebd601dbef2826aca00dfe4d0731ee426579c20731200c95b91f3"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/601689.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "657580363134a3f3ed275e56fbbe436a456100b089ee2c1e27213c1790cf24ee"
+      },
+      "fetched_at": "2026-09-02T04:34:05.537435+00:00"
+    },
+    {
+      "symbol": "601899.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/601899.SS.bars.parquet",
+        "bytes": 75225,
+        "sha256": "d49497e81bb79c2d16db8827913225103df484d37f3dd2066571056240ceaeb0"
+      },
+      "rows": 2429,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/601899.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "bda1280c68b7d22eb966d166ae24858f5517b50277032623589e812f10831b5d"
+      },
+      "fetched_at": "2026-09-02T04:34:12.791057+00:00"
+    },
+    {
+      "symbol": "603160.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/603160.SS.bars.parquet",
+        "bytes": 96528,
+        "sha256": "bcddb2d5ce1b6206d201665424ecbc83505bc4188dd8fd7ab369618f43239931"
+      },
+      "rows": 2392,
+      "first": "2016-10-17",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/603160.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "8910a141446c6e7cc9377684fb0aecc9fa0437c0f2f0a3249aeff9752646715a"
+      },
+      "fetched_at": "2026-09-02T04:34:19.987552+00:00"
+    },
+    {
+      "symbol": "603259.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/603259.SS.bars.parquet",
+        "bytes": 83324,
+        "sha256": "783e95ec3d55a5a2a077a6edbce55f33899bcf7b528f16fd1a5b75b5ccd454cb"
+      },
+      "rows": 2022,
+      "first": "2018-05-08",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/603259.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "71130244b077cbedea4054b1986f52866f7025da5ff5ced313492f9c576a61ff"
+      },
+      "fetched_at": "2026-09-02T04:34:27.084816+00:00"
+    },
+    {
+      "symbol": "603288.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/603288.SS.bars.parquet",
+        "bytes": 94834,
+        "sha256": "bfd46c1d01a10e838ea09a47cceecaa5e7a44ebe05d72952f604c90711731484"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/603288.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "fa5a04d9bb714924b8486d814545e305930e9d4f05ca4db7d0dd97e35351dffa"
+      },
+      "fetched_at": "2026-09-02T04:34:34.523397+00:00"
+    },
+    {
+      "symbol": "603799.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/603799.SS.bars.parquet",
+        "bytes": 99933,
+        "sha256": "140be1965b23f84c07f38f861b3c639b64daa099df712a9759b137bf89ea3c0e"
+      },
+      "rows": 2421,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/603799.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "2c87bc68cd31f505d42dd2455bf0d1e5f3587c93fa2ff1ce61d706ba5b425c2f"
+      },
+      "fetched_at": "2026-09-02T04:34:41.734707+00:00"
+    },
+    {
+      "symbol": "603986.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/603986.SS.bars.parquet",
+        "bytes": 91945,
+        "sha256": "1414dc600dedd4ee4a2d7fe631769ce2a6bf4109a1d9d5deeeca5ce257801701"
+      },
+      "rows": 2227,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/603986.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "186e70af63a50ab8c3c8fbd49ef26f7b14801583a972923b5f321477e6ba75a6"
+      },
+      "fetched_at": "2026-09-02T04:34:48.891258+00:00"
+    },
+    {
+      "symbol": "603993.SS",
+      "instrument_class": "stock_candidate",
+      "input": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/603993.SS.bars.parquet",
+        "bytes": 80466,
+        "sha256": "67aba2c330efd4b2484e70119e0e5cd02b341729a9b5f790f26cddb606dd64d7"
+      },
+      "rows": 2433,
+      "first": "2016-08-24",
+      "last": "2026-09-01",
+      "duplicate_dates": 0,
+      "sorted": true,
+      "invalid_ohlc_rows": 0,
+      "price_basis": "tencent_qfq; source README, not economic_price",
+      "corporate_action_reconstruction": "not_in_pool_manifest",
+      "exchange_calendar_and_suspension_classification": "not_in_pool_manifest",
+      "historical_vendor_arrival": "unknown",
+      "sampling": "union of old strategy run symbols; not representative random sample",
+      "effect_eligible_current_contract": false,
+      "metadata": {
+        "path": "docs/experiments/raw/exit_three_piece/pool/603993.SS.bars.meta.json",
+        "bytes": 215,
+        "sha256": "6b99d65fa17a25927c47abb0a12737958f0593486671b7ef013f6657cfb7ad31"
+      },
+      "fetched_at": "2026-09-02T04:34:56.041262+00:00"
+    }
+  ],
+  "limitations": [
+    "File presence does not qualify market data or licensing.",
+    "Current surviving/run-selected pool cannot estimate an entire sector/stock universe.",
+    "No exchange-day gaps inferred from quote-date union; do not invent suspension status.",
+    "qfq input cannot silently replace frozen economic prices.",
+    "Do not upload these input prices to Git."
+  ]
+}

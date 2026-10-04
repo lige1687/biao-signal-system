@@ -1,0 +1,83 @@
+{
+  "status": "blocked_for_prospective_observation",
+  "current_historical_research": "authorized retrospective scope; independent future validation absent",
+  "sources": [
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/execution/panel.json",
+      "sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+      "bytes": 1582974
+    },
+    {
+      "path": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+      "sha256": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94",
+      "bytes": 9680
+    },
+    {
+      "path": "docs/experiments/raw/exit_three_piece/pool_manifest.json",
+      "sha256": "63e6333614f55d1a1ab3ceb7084830883ad7db4d4c41e2ea7fbb1f36a1914100",
+      "bytes": 2849
+    },
+    {
+      "path": "docs/experiments/raw/exit_three_piece/pool/512660.SS.bars.meta.json",
+      "sha256": "38d53871fe11fc90c483f4bf0b982b522fc78056107c2bafd174a777a92a6381",
+      "bytes": 215
+    },
+    {
+      "path": "docs/experiments/raw/weekly-color-information-2026-10-04/brief.json",
+      "sha256": "9b766541fb1688f14ab176977dfb1774c730a904ff2d1ad6b8f96c67d2b49014",
+      "bytes": 2903
+    }
+  ],
+  "verified_fields": [
+    {
+      "source": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+      "field": "economic_actions.historical_available_at",
+      "value": null,
+      "meaning": "真实历史公告/到达时间未知，不能据close_effective_date造可知时间"
+    },
+    {
+      "source": "docs/experiments/raw/volume-information-2026-09-30/execution/panel.json",
+      "field": "metadata.not_claimed",
+      "value": [
+        "historical arrival time",
+        "account return",
+        "future outcome"
+      ],
+      "meaning": "panel已有明确限制，decision_at的15:00属于研究假设而非实际接收回执"
+    },
+    {
+      "source": "docs/experiments/raw/exit_three_piece/pool/512660.SS.bars.meta.json",
+      "field": "fetched_at",
+      "value": "2026-09-02T04:28:20.103826+00:00",
+      "meaning": "保留文件记录的一次抓取时刻，未独立证明每行历史可得/完整性/持续服务许可"
+    }
+  ],
+  "contact_history": "旧日20/日60、持续比例、周色及当前事件都使用已接触历史。结束日2026-06-30不等于未来资料起点，不能推定其后资料未见。",
+  "license": "当前有用户本地研究授权；供应商持续取得/商业再分发/跨机器原价上传许可未证实，不由私有仓库推定。",
+  "continuous_source": "没有本任务已启动或已验证的持续采集器、稳定供给承诺或未来样本；不启动自动化。",
+  "maturity": "每个信号之后第1个收盘到第21个收盘；结果需第21个后续交易日真实收盘及必要行动记录到达后才成熟。未成熟留空，缺报价不填。",
+  "minimum_missing": [
+    {
+      "item": "合法持续来源及可用范围",
+      "owner": "用户或数据服务提供方",
+      "start_condition": "明确可用资产/字段/持续取得与存储权限；付费另授权"
+    },
+    {
+      "item": "真实接收时刻、历史接触清单及版本",
+      "owner": "数据提供方/保管者和当前研究负责人",
+      "start_condition": "逐次不可倒填的原始获取记录；核清此前谁已看过哪些结果；由此确定未见起点，不能猜日期"
+    },
+    {
+      "item": "新研究事前冻结及完整行情/行动/交易日历",
+      "owner": "本任务研究负责人与数据提供方",
+      "start_condition": "固定定义/池/用途/成熟规则，当前资料缺项补齐；首批结果成熟后才可评价"
+    }
+  ],
+  "not_started": [
+    "future collection",
+    "automation",
+    "dot-pro SMA20 restart",
+    "new paid data acquisition"
+  ],
+  "followup": "workflow-fusion D5; reuses current audit, no new financial experiment or extra budget"
+}

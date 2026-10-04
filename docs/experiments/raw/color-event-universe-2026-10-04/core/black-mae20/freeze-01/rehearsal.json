@@ -1,0 +1,97 @@
+{
+  "schema_version": "workflow-rehearsal/1.0",
+  "data_mode": "synthetic",
+  "input_sha256": "c4a8c2a9b546518901edcb70ea1ff5631e1cb88161d333159d505a5b62728bcc",
+  "definition_and_method": "3511dd3b05165745f36bd227533ecddfea7a93fe03176cd8e8fa7c0c2f52b1aa",
+  "coverage": {
+    "scheduled": 2400,
+    "adjacent_ready": 1896,
+    "events": 66,
+    "eligible": 42,
+    "daily252_or_adjacent_missing": 504,
+    "not_target_color_transition": 1830,
+    "previous_week_unknown_or_warmup120": 24,
+    "per_asset": {
+      "synthetic-A": {
+        "scheduled": 1200,
+        "adjacent_ready": 948,
+        "events": 33,
+        "eligible": 21,
+        "daily252_or_adjacent_missing": 252,
+        "not_target_color_transition": 915,
+        "previous_week_unknown_or_warmup120": 12,
+        "feature_ready": 21
+      },
+      "synthetic-B": {
+        "scheduled": 1200,
+        "adjacent_ready": 948,
+        "events": 33,
+        "eligible": 21,
+        "daily252_or_adjacent_missing": 252,
+        "not_target_color_transition": 915,
+        "previous_week_unknown_or_warmup120": 12,
+        "feature_ready": 21
+      }
+    },
+    "definition_ref": "research.trend.daily20_non_black_to_black_week_context@1.0.0"
+  },
+  "performance": [
+    {
+      "model": "B0",
+      "metric": "MSE",
+      "value": 2.4308800587537336,
+      "unit": "percentage_point_squared",
+      "rows": 8,
+      "dates": 4,
+      "assets": 2
+    },
+    {
+      "model": "B0",
+      "metric": "RMSE",
+      "value": 1.5591279802356617,
+      "unit": "percentage_point",
+      "rows": 8,
+      "dates": 4,
+      "assets": 2
+    },
+    {
+      "model": "B1",
+      "metric": "MSE",
+      "value": 0.44788470774607925,
+      "unit": "percentage_point_squared",
+      "rows": 8,
+      "dates": 4,
+      "assets": 2
+    },
+    {
+      "model": "B1",
+      "metric": "RMSE",
+      "value": 0.6692418903102818,
+      "unit": "percentage_point",
+      "rows": 8,
+      "dates": 4,
+      "assets": 2
+    },
+    {
+      "model": "B2",
+      "metric": "MSE",
+      "value": 0.4497857415594429,
+      "unit": "percentage_point_squared",
+      "rows": 8,
+      "dates": 4,
+      "assets": 2
+    },
+    {
+      "model": "B2",
+      "metric": "RMSE",
+      "value": 0.6706606754234535,
+      "unit": "percentage_point",
+      "rows": 8,
+      "dates": 4,
+      "assets": 2
+    }
+  ],
+  "fits": 2,
+  "purpose": "engineering_error_check_only",
+  "selection_used": false
+}

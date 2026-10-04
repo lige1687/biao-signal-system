@@ -190,6 +190,16 @@ def actual_bindings(contract, root=ROOT):
         files[item["path"]] = file_hash(root / item["path"])
         versions[key] = item["version"]
     related_code = list(CODE_PATHS)
+    if contract["feature"]["kind"] == "color_event_information":
+        related_code.extend(("src/lei_signal/research/color_event_information.py",
+                             "src/lei_signal/research/weekly_color_information.py",
+                             "src/lei_signal/research/technical_persistence_information.py",
+                             "src/lei_signal/research/green_black_state_information.py",
+                             "src/lei_signal/research/trend_slope_change_information.py",
+                             "src/lei_signal/research/top_structure_information.py",
+                             "src/lei_signal/research/volume_information.py",
+                             "src/lei_signal/features/indicators.py",
+                             "src/lei_signal/domain/rules_config.py", "configs/rules.v2.yaml"))
     if contract["feature"]["kind"] == "weekly_color_information":
         related_code.extend(("src/lei_signal/research/weekly_color_information.py",
                              "src/lei_signal/research/technical_persistence_information.py",
@@ -371,6 +381,7 @@ def cache_keys(contract, bindings):
                            "src/lei_signal/research/green_black_state_information.py",
                            "src/lei_signal/research/technical_persistence_information.py",
                            "src/lei_signal/research/weekly_color_information.py",
+                           "src/lei_signal/research/color_event_information.py",
                            "src/lei_signal/research/tsfresh_price_information.py",
                            ".agents/skills/lei-quant-tools/scripts/tsfresh_calculators.py",
                            ".agents/skills/lei-quant-tools/scripts/tsfresh-LICENSE.txt",
@@ -406,6 +417,10 @@ def cache_keys(contract, bindings):
         labels = digest({"base": labels, "adapter": bindings["files"][f"src/lei_signal/research/{semantic_adapter}.py"]})
     if contract["feature"]["kind"] == "green_black_state60_information":
         labels = digest({"base": labels, "adapter": bindings["files"]["src/lei_signal/research/green_black_state_information.py"]})
+    if contract["feature"]["kind"] == "color_event_information":
+        adapter = bindings["files"]["src/lei_signal/research/color_event_information.py"]
+        feature = digest({"base": feature, "color_event_adapter": adapter})
+        labels = digest({"base": labels, "color_event_adapter": adapter})
     if contract["feature"]["kind"] == "weekly_color_information":
         adapter = bindings["files"]["src/lei_signal/research/weekly_color_information.py"]
         feature = digest({"base": feature, "weekly_adapter": adapter})
@@ -547,6 +562,12 @@ def preflight(contract, root=ROOT, *, require_frozen=True):
     """Actual input-derived evidence. This function does not fit or do final statistics."""
     from lei_signal.research.input_preflight import inspect_workflow_input
     validate_workflow_contract(contract)
+    if contract["feature"]["kind"] == "color_event_information" and not (
+            contract.get("permissions", {}).get("real_labels") is True and
+            contract.get("permissions", {}).get("effect_authorized") is True and
+            type(contract.get("permissions", {}).get("real_fits")) is int and
+            contract["permissions"]["real_fits"] == 4):
+        raise WorkflowBlocked("color event requires explicit real labels, effect and four-fit ceiling per target")
     if contract["feature"]["kind"] == "weekly_color_information" and not (
             contract.get("permissions", {}).get("real_labels") is True and
             contract.get("permissions", {}).get("effect_authorized") is True and
@@ -906,6 +927,8 @@ def run_rehearsal(contract):
     if c["feature"]["kind"] in {"ema_direction_persistence_information",
                                  "bull_green_transition_information"}:
         count = 600  # two assets, 252 warmup and 21-close labels
+    if c["feature"]["kind"] == "color_event_information":
+        count = 1200  # synthetic fixture: enough adjacent events after 120 completed weeks
     if c["feature"]["kind"] == "weekly_color_information":
         count = 900  # 180 observed weeks; preserve the real 120-week threshold
     if count > 2000:
@@ -932,6 +955,9 @@ def run_rehearsal(contract):
                 price = (100.0 + j - 0.03 * i + 5.0 * math.sin(i / 3)
                          if c["feature"]["kind"] == "ema_only_wait_age_risk_information" else
                          100.0 + j + 0.10 * i + 4.0 * math.sin(i / 7))
+                low = price - 0.8
+            elif c["feature"]["kind"] == "color_event_information":
+                price = 120.0 + j + 0.025 * i + 8.0 * math.sin(i / 7) + 5.0 * math.sin(i / 2.3)
                 low = price - 0.8
             elif c["feature"]["kind"] == "weekly_color_information":
                 price = 120.0 + j + 0.045 * i + 17.0 * math.sin(i / 24) + 4.0 * math.sin(i / 5)
@@ -979,7 +1005,7 @@ def run_rehearsal(contract):
                          "volume_source_known": True, "volume_break": False})
     payload = {"data_mode": "synthetic", "calendar": dates, "bars": bars}
     c["universe"]["assets"] = assets
-    c["question"].update(sampling="daily", universe=assets, period=[dates[0], dates[-1]])
+    c["question"].update(sampling=("event" if c["feature"]["kind"] == "color_event_information" else "daily"), universe=assets, period=[dates[0], dates[-1]])
     cutoff = n + c["target"]["end_offset"] + 32
     if c["feature"]["kind"] == "pullback_layer_change_information":
         cutoff = 700
@@ -987,6 +1013,8 @@ def run_rehearsal(contract):
         cutoff = 550  # training includes rising restart EMA120 lag vs SMA60_up5
     if c["feature"]["kind"] == "ema_only_wait_age_risk_information":
         cutoff = 400  # sparse current E-only state needs 22 mature synthetic training rows
+    if c["feature"]["kind"] == "color_event_information":
+        cutoff = 1000
     if c["feature"]["kind"] == "weekly_color_information":
         cutoff = 760  # 32+ mature observations after 120 completed trading weeks
     c["split"] = {"label_policy": "purge", "folds": [{"train_end": dates[cutoff],
@@ -1070,6 +1098,12 @@ def run_rehearsal(contract):
                 (c["target"]["kind"] == "mae" and not any(r["y"] > 0 for r in ready)) or
                 any(r["ready_252"] for r in inputs["observations"] if r["date"] < dates[251])):
             raise WorkflowBlocked("green-black rehearsal requires two assets, three 60-day colors, segmented252 and two fits")
+    if c["feature"]["kind"] == "color_event_information":
+        ready = [r for r in inputs["observations"] if r["eligible"]]
+        if (not result["performance"] or result["execution"]["fits"] != 2 or
+                len({r["asset"] for r in ready}) != 2 or
+                any(r["week_continuous"] < 120 or not r["ready_252"] for r in ready)):
+            raise WorkflowBlocked("color event rehearsal requires two assets, adjacent transitions and prior week")
     if c["feature"]["kind"] == "weekly_color_information":
         ready = [r for r in inputs["observations"] if r["eligible"]]
         colors = {r["week20_state"] for r in ready}

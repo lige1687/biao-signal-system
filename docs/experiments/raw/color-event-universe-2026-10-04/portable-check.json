@@ -1,0 +1,87 @@
+{
+  "files": [
+    "verify_saved.py",
+    "evidence-index.json",
+    "core/green-return20/core-01/result.json",
+    "core/green-return20/core-01/receipt.json",
+    "core/green-return20/core-01/contract.json",
+    "core/black-mae20/core-01/result.json",
+    "core/black-mae20/core-01/receipt.json",
+    "core/black-mae20/core-01/contract.json",
+    "core/black-return20/core-01/result.json",
+    "core/black-return20/core-01/receipt.json",
+    "core/black-return20/core-01/contract.json",
+    "core/green-mae20/core-01/result.json",
+    "core/green-mae20/core-01/receipt.json",
+    "core/green-mae20/core-01/contract.json"
+  ],
+  "positive": {
+    "command": [
+      "/opt/homebrew/opt/python@3.11/bin/python3.11",
+      "-S",
+      "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/docs/experiments/raw/color-event-universe-2026-10-04/.portable.local-5vime2k0/verify_saved.py",
+      "--directory",
+      "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/docs/experiments/raw/color-event-universe-2026-10-04/.portable.local-5vime2k0"
+    ],
+    "exit_code": 0,
+    "stdout": {
+      "saved_evidence_verified": true,
+      "new_fits": 0,
+      "branches": [
+        {
+          "branch": "green-return20",
+          "rows": 64,
+          "dates": 50,
+          "baseline_rmse": 5.464765446809433,
+          "candidate_rmse": 5.7012496394370675
+        },
+        {
+          "branch": "black-mae20",
+          "rows": 59,
+          "dates": 40,
+          "baseline_rmse": 4.040473058333943,
+          "candidate_rmse": 4.0570157216938005
+        },
+        {
+          "branch": "black-return20",
+          "rows": 59,
+          "dates": 40,
+          "baseline_rmse": 5.447450186725212,
+          "candidate_rmse": 5.457918931471025
+        },
+        {
+          "branch": "green-mae20",
+          "rows": 64,
+          "dates": 50,
+          "baseline_rmse": 3.3335958140116704,
+          "candidate_rmse": 3.371301235045802
+        }
+      ],
+      "not_verified": [
+        "original market provenance",
+        "future live validity",
+        "full trading strategy"
+      ]
+    }
+  },
+  "negative": {
+    "command": [
+      "/opt/homebrew/opt/python@3.11/bin/python3.11",
+      "-S",
+      "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/docs/experiments/raw/color-event-universe-2026-10-04/.negative.local-foxtnbgx/verify_saved.py",
+      "--directory",
+      "/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/docs/experiments/raw/color-event-universe-2026-10-04/.negative.local-foxtnbgx"
+    ],
+    "exit_code": 1,
+    "stderr": "-signal-lab/docs/experiments/raw/color-event-universe-2026-10-04/.negative.local-foxtnbgx/verify_saved.py\", line 48, in <module>\n    print(json.dumps(verify(ap.parse_args().directory),ensure_ascii=False,indent=2))\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/yongbiaoli/.codex/worktrees/technical-daily-risk/lei-signal-lab/docs/experiments/raw/color-event-universe-2026-10-04/.negative.local-foxtnbgx/verify_saved.py\", line 19, in verify\n    assert sha(p)==receipt['outputs']['result.json'],name+' changed result bytes'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: green-return20 changed result bytes\n",
+    "change": "one saved B1 prediction +1; original unchanged"
+  },
+  "new_fits": 0,
+  "environment": "3.11.7 (main, Dec  4 2023, 18:10:11) [Clang 15.0.0 (clang-1500.1.0.2.5)]",
+  "unverified": [
+    "Linux",
+    "Windows",
+    "fresh dependencies",
+    "full market input restoration"
+  ]
+}

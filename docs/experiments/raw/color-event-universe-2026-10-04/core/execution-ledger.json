@@ -1,0 +1,61 @@
+{
+  "source_sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+  "planned_real_fits": 16,
+  "actual_real_fits": 16,
+  "real_fitting_failures": 0,
+  "pure_auxiliary_fits": 0,
+  "runs": [
+    {
+      "branch": "green-return20",
+      "contract_sha256": "30cd8efcb8f92deadc1cee91bf77030934acc2a85d26a46665fa4788422f83e1",
+      "receipt_sha256": "1523a6168afcb741ca4bf5cc9bef6b673aa5b1c5eb436fcdc033cd6e81008271",
+      "real_fits": 4,
+      "prediction_rows": 64,
+      "state": "completed",
+      "freeze": "freeze-01"
+    },
+    {
+      "branch": "green-mae20",
+      "contract_sha256": "a7e899065456d94eb130aaaeaba94360bafab3081c8e918d183c1ccf76516b0b",
+      "receipt_sha256": "d6462bdc3ea2e51e815793d51af09897acf408c49af79a99787677c1196ad3e6",
+      "real_fits": 4,
+      "prediction_rows": 64,
+      "state": "completed",
+      "freeze": "freeze-02"
+    },
+    {
+      "branch": "black-return20",
+      "contract_sha256": "21021f87b2a82d1edc97acc7a20ba43ab7f689116893aa570ae911fd5045f529",
+      "receipt_sha256": "8c13032c7b43829bd7754dfc6c5a6909670b5f604a77dc16e85adcc6380b4a1c",
+      "real_fits": 4,
+      "prediction_rows": 59,
+      "state": "completed",
+      "freeze": "freeze-02"
+    },
+    {
+      "branch": "black-mae20",
+      "contract_sha256": "d72521d859b3622cf9dcfdfa79f5c922ef2367860d81b835cb8c0a55a45dc2e9",
+      "receipt_sha256": "fb25274b83bdbae0a3b44c671ee9751ee70bd3f615d75f9ac25ec6cc8240ca4f",
+      "real_fits": 4,
+      "prediction_rows": 59,
+      "state": "completed",
+      "freeze": "freeze-02"
+    }
+  ],
+  "qualification_implementation_errors_before_freeze": [
+    "independent black count initially excluded 588000.SS|2023-05-04 by requiring previous-day weekly120; corrected to current-day weekly120 plus previous-day daily252"
+  ],
+  "pre_fitting_draft_rejections": [
+    "two prepare_contracts schema/path corrections with no effect labels/fits",
+    "definition ID and synthetic rehearsal fixture corrected before first successful freeze; no real fit"
+  ],
+  "metadata_correction_after_first_core": "First contract/receipt/result retained; registry original bytes preserved; later three branches used corrected card; see metadata-erratum.json",
+  "old_first_publication_gate": "After metadata correction current verify_receipt reports stale_proof; original 76 bound code/standard file hashes all match current files, only definition card metadata changed",
+  "known_unresolved": "first branch requires archived registry snapshot-aware independent verification for final report; do not relabel with corrected binding",
+  "controller_resolution": {
+    "first_snapshot_verification": "passed using preserved original definition bytes, no refit",
+    "evidence": "../historical-snapshot-verification.json",
+    "registration": "../registration.json",
+    "original_current_registry_rejection_preserved": true
+  }
+}

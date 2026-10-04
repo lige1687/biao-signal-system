@@ -11521,7 +11521,7 @@
         },
         "unit": "event 0/1, week categorical green/black/gray/unknown",
         "direction": "事件和周色不强制作顺序；仅研究收益及收盘下探",
-        "transforms": "周状态沿用已完成ISO周20周EMA及20周滞后价；日事件背景仅ret20、ret60、vol20、原文多头排列及ETF身份；不加入周涨幅20/60。",
+        "transforms": "日线经济价每完整交易周最后报价；EMA20首20完整周SMA播种alpha2/21；周涨幅20/60作已有背景",
         "nan_policy": "缺报价或未知行动分段重置；前一真实合格观察须与事件日相邻；周未知不填灰",
         "endpoints": "t收盘后已知；结果t+1..t+21共21收盘20间隔"
       },
@@ -11576,12 +11576,12 @@
           "integer": 0
         },
         "tests": [
-          "tests/unit/test_color_event_information.py"
+          "tests/unit/test_weekly_color_information.py"
         ],
         "limitations": "4 ETF全已见历史；周色不是新增原始资料，结果仅事件局部代理"
       },
       "status": {
-        "definition_clarity": "fixed_explicit_daily_event_week_context",
+        "definition_clarity": "fixed_explicit_completed_week_proxy",
         "data_qualification": "limited_retrospective_economic_ohlc",
         "implementation": "synthetic_checks_verified",
         "effectiveness": "not_evaluated",
@@ -11635,7 +11635,7 @@
         },
         "unit": "event 0/1, week categorical green/black/gray/unknown",
         "direction": "事件和周色不强制作顺序；仅研究收益及收盘下探",
-        "transforms": "周状态沿用已完成ISO周20周EMA及20周滞后价；日事件背景仅ret20、ret60、vol20、原文多头排列及ETF身份；不加入周涨幅20/60。",
+        "transforms": "日线经济价每完整交易周最后报价；EMA20首20完整周SMA播种alpha2/21；周涨幅20/60作已有背景",
         "nan_policy": "缺报价或未知行动分段重置；前一真实合格观察须与事件日相邻；周未知不填灰",
         "endpoints": "t收盘后已知；结果t+1..t+21共21收盘20间隔"
       },
@@ -11690,12 +11690,12 @@
           "integer": 0
         },
         "tests": [
-          "tests/unit/test_color_event_information.py"
+          "tests/unit/test_weekly_color_information.py"
         ],
         "limitations": "4 ETF全已见历史；周色不是新增原始资料，结果仅事件局部代理"
       },
       "status": {
-        "definition_clarity": "fixed_explicit_daily_event_week_context",
+        "definition_clarity": "fixed_explicit_completed_week_proxy",
         "data_qualification": "limited_retrospective_economic_ohlc",
         "implementation": "synthetic_checks_verified",
         "effectiveness": "not_evaluated",

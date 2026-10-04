@@ -1,0 +1,137 @@
+{
+  "input_sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+  "branches": [
+    {
+      "branch": "green-return20",
+      "label_max_absolute_error": 0,
+      "prediction_max_absolute_error": 4.440892098500626e-16,
+      "evaluated_rows": 64,
+      "training": [
+        {
+          "fold": 0,
+          "training_rows": 69,
+          "training_rmse": {
+            "B1": 5.938368967599732,
+            "B2": 5.859100913757626
+          }
+        },
+        {
+          "fold": 1,
+          "training_rows": 120,
+          "training_rmse": {
+            "B1": 5.387951682365614,
+            "B2": 5.382669368964106
+          }
+        }
+      ],
+      "simple_etf_rmse": 5.545839793487594,
+      "state_only_rmse": 6.483893690163086,
+      "fallback_rows": 3,
+      "negative_predictions": {
+        "B1": 45,
+        "B2": 51
+      },
+      "nonnegative_prediction_required_for_interpretation": false
+    },
+    {
+      "branch": "black-mae20",
+      "label_max_absolute_error": 0,
+      "prediction_max_absolute_error": 8.881784197001252e-16,
+      "evaluated_rows": 59,
+      "training": [
+        {
+          "fold": 0,
+          "training_rows": 91,
+          "training_rmse": {
+            "B1": 2.681853265316592,
+            "B2": 2.6616374351220866
+          }
+        },
+        {
+          "fold": 1,
+          "training_rows": 139,
+          "training_rmse": {
+            "B1": 3.0537554488081886,
+            "B2": 3.016767774674914
+          }
+        }
+      ],
+      "simple_etf_rmse": 3.7912336334208456,
+      "state_only_rmse": 4.111064419063404,
+      "fallback_rows": 0,
+      "negative_predictions": {
+        "B1": 0,
+        "B2": 0
+      },
+      "nonnegative_prediction_required_for_interpretation": true
+    },
+    {
+      "branch": "black-return20",
+      "label_max_absolute_error": 0,
+      "prediction_max_absolute_error": 4.440892098500626e-16,
+      "evaluated_rows": 59,
+      "training": [
+        {
+          "fold": 0,
+          "training_rows": 91,
+          "training_rmse": {
+            "B1": 5.147866859228951,
+            "B2": 5.144767466848421
+          }
+        },
+        {
+          "fold": 1,
+          "training_rows": 139,
+          "training_rmse": {
+            "B1": 5.1152742807563385,
+            "B2": 5.034002741644019
+          }
+        }
+      ],
+      "simple_etf_rmse": 5.45699390321108,
+      "state_only_rmse": 5.578103159084451,
+      "fallback_rows": 0,
+      "negative_predictions": {
+        "B1": 32,
+        "B2": 20
+      },
+      "nonnegative_prediction_required_for_interpretation": false
+    },
+    {
+      "branch": "green-mae20",
+      "label_max_absolute_error": 0,
+      "prediction_max_absolute_error": 4.440892098500626e-16,
+      "evaluated_rows": 64,
+      "training": [
+        {
+          "fold": 0,
+          "training_rows": 69,
+          "training_rmse": {
+            "B1": 2.5083713904517873,
+            "B2": 2.4966851049306533
+          }
+        },
+        {
+          "fold": 1,
+          "training_rows": 120,
+          "training_rmse": {
+            "B1": 2.851045683618584,
+            "B2": 2.8511793519315223
+          }
+        }
+      ],
+      "simple_etf_rmse": 3.392994877087515,
+      "state_only_rmse": 3.5647565245583546,
+      "fallback_rows": 3,
+      "negative_predictions": {
+        "B1": 0,
+        "B2": 0
+      },
+      "nonnegative_prediction_required_for_interpretation": true
+    }
+  ],
+  "new_fits": 0,
+  "max_error": 8.881784197001252e-16,
+  "all_checks_passed": true,
+  "scope": "Independent labels, features, saved-coefficient predictions and training-only simple means. No proof of vendor arrival, full action coverage or live profitability."
+}

@@ -1,0 +1,33 @@
+{
+  "kind": "metadata_erratum_before_remaining_real_runs",
+  "previous_registry_sha256": "6e10a6819254cdce3ef24b4b8e54e6c3e9d253f983ecf49ad1a1a93da01619e7",
+  "corrected_registry_sha256": "b17eed7038261f7a3bdb1777415bbcf6662b71c9a81cd12b0af92404da988e08",
+  "corrections": [
+    {
+      "definition_ref": "research.trend.daily20_non_green_to_green_week_context@1.0.0",
+      "old_transforms": "日线经济价每完整交易周最后报价；EMA20首20完整周SMA播种alpha2/21；周涨幅20/60作已有背景",
+      "new_transforms": "周状态沿用已完成ISO周20周EMA及20周滞后价；日事件背景仅ret20、ret60、vol20、原文多头排列及ETF身份；不加入周涨幅20/60。"
+    },
+    {
+      "definition_ref": "research.trend.daily20_non_black_to_black_week_context@1.0.0",
+      "old_transforms": "日线经济价每完整交易周最后报价；EMA20首20完整周SMA播种alpha2/21；周涨幅20/60作已有背景",
+      "new_transforms": "周状态沿用已完成ISO周20周EMA及20周滞后价；日事件背景仅ret20、ret60、vol20、原文多头排列及ETF身份；不加入周涨幅20/60。"
+    }
+  ],
+  "numeric_algorithm_changed": false,
+  "actual_B1_fields": [
+    "ret20",
+    "ret60",
+    "vol20",
+    "bull_group",
+    "asset_510050",
+    "asset_510500",
+    "asset_588000"
+  ],
+  "actual_B2_added": [
+    "week20_green",
+    "week20_black"
+  ],
+  "already_executed": "green-return20/core-01; preserve original frozen contract, receipt, result and four fits",
+  "new_freezes": "remaining three branches only; do not relabel first run under new hash"
+}
