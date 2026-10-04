@@ -1,7 +1,7 @@
 {
   "schema_version": "research-workflow-fusion/1.0",
   "id": "workflow-fusion-2026-10-04",
-  "updated_at": "2026-10-04T14:34:01.696516+08:00",
+  "updated_at": "2026-10-04T14:45:31+08:00",
   "display_timezone": "Asia/Shanghai",
   "coordinator_thread": "01a0e6d5-4bcf-7bd3-82e4-4961c963d20e",
   "task_id": "classic-factor-research",
@@ -183,5 +183,16 @@
     "acceptance": "completed; D5 future execution and D6 restoration blocked"
   },
   "acceptance_report": "controller-review.md",
-  "checks": "controller-checks.json"
+  "checks": "controller-checks.json",
+  "followup_remaining_gaps": {
+    "status": "sent_pending_delivery",
+    "record": "unresolved-followup.json",
+    "directions": [
+      "D4",
+      "D5",
+      "D6"
+    ],
+    "new_threads": 0,
+    "extra_market_budget": 0
+  }
 }
