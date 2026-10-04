@@ -1,0 +1,936 @@
+{
+  "version": "timing-erratum-1",
+  "all_rows": 131,
+  "different_source_rows": 124,
+  "eval_rows": 78,
+  "different_eval_source_rows": 73,
+  "new_rule": "survey_date+7 calendar days <= anchor_date (day7 accepted)",
+  "old_cutoff": "survey_date+7days 23:59 then strictly later quote; backward comparison survey_date+7days < anchor_date",
+  "scope": "source-week alignment audit only, not new forecast or proof of leakage",
+  "old_freeze_sha256": "0d940f0ac18496c0c2197b270330a00f98f0623c9ab269f50d4760cfd0ada2ed",
+  "row_evidence": {
+    "path": "docs/experiments/raw/sentiment-survey-combination-2026-10-04/aaii-time-row-audit.csv",
+    "bytes": 9542,
+    "sha256": "6ffbdbd1bfed17a28f059d9d9e14321cc4a06a6b9b6b91a1d576a35bcb197c0a",
+    "git_delivery": false
+  },
+  "dates_only_rows": [
+    {
+      "anchor_date": "2023-12-28",
+      "evaluation": false,
+      "new_source_date": "2023-12-21",
+      "old_cutoff_source_date": "2023-12-14",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-01-04",
+      "evaluation": false,
+      "new_source_date": "2023-12-28",
+      "old_cutoff_source_date": "2023-12-21",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-01-11",
+      "evaluation": false,
+      "new_source_date": "2024-01-04",
+      "old_cutoff_source_date": "2023-12-28",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-01-18",
+      "evaluation": false,
+      "new_source_date": "2024-01-11",
+      "old_cutoff_source_date": "2024-01-04",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-01-25",
+      "evaluation": false,
+      "new_source_date": "2024-01-18",
+      "old_cutoff_source_date": "2024-01-11",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-02-01",
+      "evaluation": false,
+      "new_source_date": "2024-01-25",
+      "old_cutoff_source_date": "2024-01-18",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-02-08",
+      "evaluation": false,
+      "new_source_date": "2024-02-01",
+      "old_cutoff_source_date": "2024-01-25",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-02-15",
+      "evaluation": false,
+      "new_source_date": "2024-02-08",
+      "old_cutoff_source_date": "2024-02-01",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-02-22",
+      "evaluation": false,
+      "new_source_date": "2024-02-15",
+      "old_cutoff_source_date": "2024-02-08",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-02-29",
+      "evaluation": false,
+      "new_source_date": "2024-02-22",
+      "old_cutoff_source_date": "2024-02-15",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-03-07",
+      "evaluation": false,
+      "new_source_date": "2024-02-29",
+      "old_cutoff_source_date": "2024-02-22",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-03-14",
+      "evaluation": false,
+      "new_source_date": "2024-03-07",
+      "old_cutoff_source_date": "2024-02-29",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-03-21",
+      "evaluation": false,
+      "new_source_date": "2024-03-14",
+      "old_cutoff_source_date": "2024-03-07",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-03-28",
+      "evaluation": false,
+      "new_source_date": "2024-03-21",
+      "old_cutoff_source_date": "2024-03-14",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-04-04",
+      "evaluation": false,
+      "new_source_date": "2024-03-28",
+      "old_cutoff_source_date": "2024-03-21",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-04-11",
+      "evaluation": false,
+      "new_source_date": "2024-04-04",
+      "old_cutoff_source_date": "2024-03-28",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-04-18",
+      "evaluation": false,
+      "new_source_date": "2024-04-11",
+      "old_cutoff_source_date": "2024-04-04",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-04-25",
+      "evaluation": false,
+      "new_source_date": "2024-04-18",
+      "old_cutoff_source_date": "2024-04-11",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-05-02",
+      "evaluation": false,
+      "new_source_date": "2024-04-25",
+      "old_cutoff_source_date": "2024-04-18",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-05-09",
+      "evaluation": false,
+      "new_source_date": "2024-05-02",
+      "old_cutoff_source_date": "2024-04-25",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-05-16",
+      "evaluation": false,
+      "new_source_date": "2024-05-09",
+      "old_cutoff_source_date": "2024-05-02",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-05-23",
+      "evaluation": false,
+      "new_source_date": "2024-05-16",
+      "old_cutoff_source_date": "2024-05-09",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-05-30",
+      "evaluation": false,
+      "new_source_date": "2024-05-23",
+      "old_cutoff_source_date": "2024-05-16",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-06-06",
+      "evaluation": false,
+      "new_source_date": "2024-05-30",
+      "old_cutoff_source_date": "2024-05-23",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-06-13",
+      "evaluation": false,
+      "new_source_date": "2024-06-06",
+      "old_cutoff_source_date": "2024-05-30",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-06-20",
+      "evaluation": false,
+      "new_source_date": "2024-06-13",
+      "old_cutoff_source_date": "2024-06-06",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-06-27",
+      "evaluation": false,
+      "new_source_date": "2024-06-20",
+      "old_cutoff_source_date": "2024-06-13",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-07-05",
+      "evaluation": false,
+      "new_source_date": "2024-06-27",
+      "old_cutoff_source_date": "2024-06-27",
+      "changed": false
+    },
+    {
+      "anchor_date": "2024-07-11",
+      "evaluation": false,
+      "new_source_date": "2024-07-04",
+      "old_cutoff_source_date": "2024-06-27",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-07-18",
+      "evaluation": false,
+      "new_source_date": "2024-07-11",
+      "old_cutoff_source_date": "2024-07-04",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-07-25",
+      "evaluation": false,
+      "new_source_date": "2024-07-18",
+      "old_cutoff_source_date": "2024-07-11",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-08-01",
+      "evaluation": false,
+      "new_source_date": "2024-07-25",
+      "old_cutoff_source_date": "2024-07-18",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-08-08",
+      "evaluation": false,
+      "new_source_date": "2024-08-01",
+      "old_cutoff_source_date": "2024-07-25",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-08-15",
+      "evaluation": false,
+      "new_source_date": "2024-08-08",
+      "old_cutoff_source_date": "2024-08-01",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-08-22",
+      "evaluation": false,
+      "new_source_date": "2024-08-15",
+      "old_cutoff_source_date": "2024-08-08",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-08-29",
+      "evaluation": false,
+      "new_source_date": "2024-08-22",
+      "old_cutoff_source_date": "2024-08-15",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-09-05",
+      "evaluation": false,
+      "new_source_date": "2024-08-29",
+      "old_cutoff_source_date": "2024-08-22",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-09-12",
+      "evaluation": false,
+      "new_source_date": "2024-09-05",
+      "old_cutoff_source_date": "2024-08-29",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-09-19",
+      "evaluation": false,
+      "new_source_date": "2024-09-12",
+      "old_cutoff_source_date": "2024-09-05",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-09-26",
+      "evaluation": false,
+      "new_source_date": "2024-09-19",
+      "old_cutoff_source_date": "2024-09-12",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-10-03",
+      "evaluation": false,
+      "new_source_date": "2024-09-26",
+      "old_cutoff_source_date": "2024-09-19",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-10-10",
+      "evaluation": false,
+      "new_source_date": "2024-10-03",
+      "old_cutoff_source_date": "2024-09-26",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-10-17",
+      "evaluation": false,
+      "new_source_date": "2024-10-10",
+      "old_cutoff_source_date": "2024-10-03",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-10-24",
+      "evaluation": false,
+      "new_source_date": "2024-10-17",
+      "old_cutoff_source_date": "2024-10-10",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-10-31",
+      "evaluation": false,
+      "new_source_date": "2024-10-24",
+      "old_cutoff_source_date": "2024-10-17",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-11-07",
+      "evaluation": false,
+      "new_source_date": "2024-10-31",
+      "old_cutoff_source_date": "2024-10-24",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-11-14",
+      "evaluation": false,
+      "new_source_date": "2024-11-07",
+      "old_cutoff_source_date": "2024-10-31",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-11-21",
+      "evaluation": false,
+      "new_source_date": "2024-11-14",
+      "old_cutoff_source_date": "2024-11-07",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-11-29",
+      "evaluation": false,
+      "new_source_date": "2024-11-21",
+      "old_cutoff_source_date": "2024-11-21",
+      "changed": false
+    },
+    {
+      "anchor_date": "2024-12-05",
+      "evaluation": false,
+      "new_source_date": "2024-11-28",
+      "old_cutoff_source_date": "2024-11-21",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-12-12",
+      "evaluation": false,
+      "new_source_date": "2024-12-05",
+      "old_cutoff_source_date": "2024-11-28",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-12-19",
+      "evaluation": false,
+      "new_source_date": "2024-12-12",
+      "old_cutoff_source_date": "2024-12-05",
+      "changed": true
+    },
+    {
+      "anchor_date": "2024-12-26",
+      "evaluation": false,
+      "new_source_date": "2024-12-19",
+      "old_cutoff_source_date": "2024-12-12",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-01-02",
+      "evaluation": true,
+      "new_source_date": "2024-12-26",
+      "old_cutoff_source_date": "2024-12-19",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-01-10",
+      "evaluation": true,
+      "new_source_date": "2025-01-02",
+      "old_cutoff_source_date": "2025-01-02",
+      "changed": false
+    },
+    {
+      "anchor_date": "2025-01-16",
+      "evaluation": true,
+      "new_source_date": "2025-01-09",
+      "old_cutoff_source_date": "2025-01-02",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-01-23",
+      "evaluation": true,
+      "new_source_date": "2025-01-16",
+      "old_cutoff_source_date": "2025-01-09",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-01-30",
+      "evaluation": true,
+      "new_source_date": "2025-01-23",
+      "old_cutoff_source_date": "2025-01-16",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-02-06",
+      "evaluation": true,
+      "new_source_date": "2025-01-30",
+      "old_cutoff_source_date": "2025-01-23",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-02-13",
+      "evaluation": true,
+      "new_source_date": "2025-02-06",
+      "old_cutoff_source_date": "2025-01-30",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-02-20",
+      "evaluation": true,
+      "new_source_date": "2025-02-13",
+      "old_cutoff_source_date": "2025-02-06",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-02-27",
+      "evaluation": true,
+      "new_source_date": "2025-02-20",
+      "old_cutoff_source_date": "2025-02-13",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-03-06",
+      "evaluation": true,
+      "new_source_date": "2025-02-27",
+      "old_cutoff_source_date": "2025-02-20",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-03-13",
+      "evaluation": true,
+      "new_source_date": "2025-03-06",
+      "old_cutoff_source_date": "2025-02-27",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-03-20",
+      "evaluation": true,
+      "new_source_date": "2025-03-13",
+      "old_cutoff_source_date": "2025-03-06",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-03-27",
+      "evaluation": true,
+      "new_source_date": "2025-03-20",
+      "old_cutoff_source_date": "2025-03-13",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-04-03",
+      "evaluation": true,
+      "new_source_date": "2025-03-27",
+      "old_cutoff_source_date": "2025-03-20",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-04-10",
+      "evaluation": true,
+      "new_source_date": "2025-04-03",
+      "old_cutoff_source_date": "2025-03-27",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-04-17",
+      "evaluation": true,
+      "new_source_date": "2025-04-10",
+      "old_cutoff_source_date": "2025-04-03",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-04-24",
+      "evaluation": true,
+      "new_source_date": "2025-04-17",
+      "old_cutoff_source_date": "2025-04-10",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-05-01",
+      "evaluation": true,
+      "new_source_date": "2025-04-24",
+      "old_cutoff_source_date": "2025-04-17",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-05-08",
+      "evaluation": true,
+      "new_source_date": "2025-05-01",
+      "old_cutoff_source_date": "2025-04-24",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-05-15",
+      "evaluation": true,
+      "new_source_date": "2025-05-08",
+      "old_cutoff_source_date": "2025-05-01",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-05-22",
+      "evaluation": true,
+      "new_source_date": "2025-05-15",
+      "old_cutoff_source_date": "2025-05-08",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-05-29",
+      "evaluation": true,
+      "new_source_date": "2025-05-22",
+      "old_cutoff_source_date": "2025-05-15",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-06-05",
+      "evaluation": true,
+      "new_source_date": "2025-05-29",
+      "old_cutoff_source_date": "2025-05-22",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-06-12",
+      "evaluation": true,
+      "new_source_date": "2025-06-05",
+      "old_cutoff_source_date": "2025-05-29",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-06-20",
+      "evaluation": true,
+      "new_source_date": "2025-06-12",
+      "old_cutoff_source_date": "2025-06-12",
+      "changed": false
+    },
+    {
+      "anchor_date": "2025-06-26",
+      "evaluation": true,
+      "new_source_date": "2025-06-19",
+      "old_cutoff_source_date": "2025-06-12",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-07-03",
+      "evaluation": true,
+      "new_source_date": "2025-06-26",
+      "old_cutoff_source_date": "2025-06-19",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-07-10",
+      "evaluation": true,
+      "new_source_date": "2025-07-03",
+      "old_cutoff_source_date": "2025-06-26",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-07-17",
+      "evaluation": true,
+      "new_source_date": "2025-07-10",
+      "old_cutoff_source_date": "2025-07-03",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-07-24",
+      "evaluation": true,
+      "new_source_date": "2025-07-17",
+      "old_cutoff_source_date": "2025-07-10",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-07-31",
+      "evaluation": true,
+      "new_source_date": "2025-07-24",
+      "old_cutoff_source_date": "2025-07-17",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-08-07",
+      "evaluation": true,
+      "new_source_date": "2025-07-31",
+      "old_cutoff_source_date": "2025-07-24",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-08-14",
+      "evaluation": true,
+      "new_source_date": "2025-08-07",
+      "old_cutoff_source_date": "2025-07-31",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-08-21",
+      "evaluation": true,
+      "new_source_date": "2025-08-14",
+      "old_cutoff_source_date": "2025-08-07",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-08-28",
+      "evaluation": true,
+      "new_source_date": "2025-08-21",
+      "old_cutoff_source_date": "2025-08-14",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-09-04",
+      "evaluation": true,
+      "new_source_date": "2025-08-28",
+      "old_cutoff_source_date": "2025-08-21",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-09-11",
+      "evaluation": true,
+      "new_source_date": "2025-09-04",
+      "old_cutoff_source_date": "2025-08-28",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-09-18",
+      "evaluation": true,
+      "new_source_date": "2025-09-11",
+      "old_cutoff_source_date": "2025-09-04",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-09-25",
+      "evaluation": true,
+      "new_source_date": "2025-09-18",
+      "old_cutoff_source_date": "2025-09-11",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-10-02",
+      "evaluation": true,
+      "new_source_date": "2025-09-25",
+      "old_cutoff_source_date": "2025-09-18",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-10-09",
+      "evaluation": true,
+      "new_source_date": "2025-10-02",
+      "old_cutoff_source_date": "2025-09-25",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-10-16",
+      "evaluation": true,
+      "new_source_date": "2025-10-09",
+      "old_cutoff_source_date": "2025-10-02",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-10-23",
+      "evaluation": true,
+      "new_source_date": "2025-10-16",
+      "old_cutoff_source_date": "2025-10-09",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-10-30",
+      "evaluation": true,
+      "new_source_date": "2025-10-23",
+      "old_cutoff_source_date": "2025-10-16",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-11-06",
+      "evaluation": true,
+      "new_source_date": "2025-10-30",
+      "old_cutoff_source_date": "2025-10-23",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-11-13",
+      "evaluation": true,
+      "new_source_date": "2025-11-06",
+      "old_cutoff_source_date": "2025-10-30",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-11-20",
+      "evaluation": true,
+      "new_source_date": "2025-11-13",
+      "old_cutoff_source_date": "2025-11-06",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-11-28",
+      "evaluation": true,
+      "new_source_date": "2025-11-20",
+      "old_cutoff_source_date": "2025-11-20",
+      "changed": false
+    },
+    {
+      "anchor_date": "2025-12-04",
+      "evaluation": true,
+      "new_source_date": "2025-11-27",
+      "old_cutoff_source_date": "2025-11-20",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-12-11",
+      "evaluation": true,
+      "new_source_date": "2025-12-04",
+      "old_cutoff_source_date": "2025-11-27",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-12-18",
+      "evaluation": true,
+      "new_source_date": "2025-12-11",
+      "old_cutoff_source_date": "2025-12-04",
+      "changed": true
+    },
+    {
+      "anchor_date": "2025-12-26",
+      "evaluation": true,
+      "new_source_date": "2025-12-18",
+      "old_cutoff_source_date": "2025-12-18",
+      "changed": false
+    },
+    {
+      "anchor_date": "2026-01-02",
+      "evaluation": true,
+      "new_source_date": "2025-12-25",
+      "old_cutoff_source_date": "2025-12-25",
+      "changed": false
+    },
+    {
+      "anchor_date": "2026-01-08",
+      "evaluation": true,
+      "new_source_date": "2026-01-01",
+      "old_cutoff_source_date": "2025-12-25",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-01-15",
+      "evaluation": true,
+      "new_source_date": "2026-01-08",
+      "old_cutoff_source_date": "2026-01-01",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-01-22",
+      "evaluation": true,
+      "new_source_date": "2026-01-15",
+      "old_cutoff_source_date": "2026-01-08",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-01-29",
+      "evaluation": true,
+      "new_source_date": "2026-01-22",
+      "old_cutoff_source_date": "2026-01-15",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-02-05",
+      "evaluation": true,
+      "new_source_date": "2026-01-29",
+      "old_cutoff_source_date": "2026-01-22",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-02-12",
+      "evaluation": true,
+      "new_source_date": "2026-02-05",
+      "old_cutoff_source_date": "2026-01-29",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-02-19",
+      "evaluation": true,
+      "new_source_date": "2026-02-12",
+      "old_cutoff_source_date": "2026-02-05",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-02-26",
+      "evaluation": true,
+      "new_source_date": "2026-02-19",
+      "old_cutoff_source_date": "2026-02-12",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-03-05",
+      "evaluation": true,
+      "new_source_date": "2026-02-26",
+      "old_cutoff_source_date": "2026-02-19",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-03-12",
+      "evaluation": true,
+      "new_source_date": "2026-03-05",
+      "old_cutoff_source_date": "2026-02-26",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-03-19",
+      "evaluation": true,
+      "new_source_date": "2026-03-12",
+      "old_cutoff_source_date": "2026-03-05",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-03-26",
+      "evaluation": true,
+      "new_source_date": "2026-03-19",
+      "old_cutoff_source_date": "2026-03-12",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-04-02",
+      "evaluation": true,
+      "new_source_date": "2026-03-26",
+      "old_cutoff_source_date": "2026-03-19",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-04-09",
+      "evaluation": true,
+      "new_source_date": "2026-04-02",
+      "old_cutoff_source_date": "2026-03-26",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-04-16",
+      "evaluation": true,
+      "new_source_date": "2026-04-09",
+      "old_cutoff_source_date": "2026-04-02",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-04-23",
+      "evaluation": true,
+      "new_source_date": "2026-04-16",
+      "old_cutoff_source_date": "2026-04-09",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-04-30",
+      "evaluation": true,
+      "new_source_date": "2026-04-23",
+      "old_cutoff_source_date": "2026-04-16",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-05-07",
+      "evaluation": true,
+      "new_source_date": "2026-04-30",
+      "old_cutoff_source_date": "2026-04-23",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-05-14",
+      "evaluation": true,
+      "new_source_date": "2026-05-07",
+      "old_cutoff_source_date": "2026-04-30",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-05-21",
+      "evaluation": true,
+      "new_source_date": "2026-05-14",
+      "old_cutoff_source_date": "2026-05-07",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-05-28",
+      "evaluation": true,
+      "new_source_date": "2026-05-21",
+      "old_cutoff_source_date": "2026-05-14",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-06-04",
+      "evaluation": true,
+      "new_source_date": "2026-05-28",
+      "old_cutoff_source_date": "2026-05-21",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-06-11",
+      "evaluation": true,
+      "new_source_date": "2026-06-04",
+      "old_cutoff_source_date": "2026-05-28",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-06-18",
+      "evaluation": true,
+      "new_source_date": "2026-06-11",
+      "old_cutoff_source_date": "2026-06-04",
+      "changed": true
+    },
+    {
+      "anchor_date": "2026-06-25",
+      "evaluation": true,
+      "new_source_date": "2026-06-18",
+      "old_cutoff_source_date": "2026-06-11",
+      "changed": true
+    }
+  ]
+}
