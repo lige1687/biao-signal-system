@@ -1,0 +1,72 @@
+{
+  "at": "2026-10-04T23:56:40.473109+08:00",
+  "mode": "plan_only_and_readonly_qualification",
+  "plan": "docs/archive/handoffs-plans/sentiment-increment-next-plan-2026-10-04.md",
+  "plan_sha256": "768e396ad56dde18f578dc7f408b8b60a008fc198bbc65ceb3dbbd599cf0401d",
+  "required_topics": [
+    "金融含义",
+    "中国",
+    "纳斯达克100",
+    "震荡",
+    "20%",
+    "仓位",
+    "基线",
+    "classify_stage",
+    "200日窗口",
+    "P0",
+    "P4"
+  ],
+  "all_topics_present": true,
+  "source_bindings": [
+    {
+      "path": "src/lei_signal/market_context/sector_trend.py",
+      "sha256": "999ce1cdc2fe755f562d7929e6146b56e165207976646d73aa7d786d95bb87fb",
+      "bytes": 68458,
+      "scope": "read relevant source sections; no implementation or effectiveness test"
+    },
+    {
+      "path": "src/lei_signal/market_context/sentiment_signals.py",
+      "sha256": "5d8d6e7b452cc3a40d370cdb56ca5d71c2a18b9e2f423a1431f6e92997a926f4",
+      "bytes": 7168,
+      "scope": "read relevant source sections; no implementation or effectiveness test"
+    },
+    {
+      "path": "src/lei_signal/rules/long_trend.py",
+      "sha256": "acc3806c85882ce109b5788c814e3773c9c420e172b41816d54c2f6aeb977ae5",
+      "bytes": 7624,
+      "scope": "read relevant source sections; no implementation or effectiveness test"
+    },
+    {
+      "path": "src/lei_signal/market_context/vol_regime.py",
+      "sha256": "fc2464af473e937d6c85e9250dcf9f92e0f5dbcf23397fc428a026c069c5f2e8",
+      "bytes": 4282,
+      "scope": "read relevant source sections; no implementation or effectiveness test"
+    },
+    {
+      "path": "docs/research/current-standards.json",
+      "sha256": "616c0ae1a636accd35c8500be7c5c21a35c13aaf2039e9e6144cb5531d96cb57",
+      "bytes": 1209,
+      "scope": "read relevant source sections; no implementation or effectiveness test"
+    },
+    {
+      "path": "private-strategy/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "bytes": 65786,
+      "scope": "read relevant source sections; no implementation or effectiveness test"
+    },
+    {
+      "path": "private-strategy/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "bytes": 36427,
+      "scope": "read relevant source sections; no implementation or effectiveness test"
+    }
+  ],
+  "new_fits": 0,
+  "execution_or_effectiveness_validated": false,
+  "unresolved": [
+    "historical members/prices/source time",
+    "price-only environment three-way definition not frozen",
+    "new object registration before any effect test",
+    "position policy and acceptable return cost before P4"
+  ]
+}
