@@ -332,3 +332,5 @@
   与本目录研究线互不隶属
 
 - 2026-10-04：[两调查组合](sentiment-survey-combination-2026-10-04.md) — 未胜NAAIM单项，当前历史关联封存。
+
+- 2026-10-04：[宽度实际输入链](sentiment-breadth-input-chain-2026-10-04.md) — 候选成员报价缺口已定位，效果未测。

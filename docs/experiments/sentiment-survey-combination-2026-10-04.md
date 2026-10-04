@@ -94,7 +94,7 @@
 
 本报告摘要、原protocol.qualification/limitations、qualification.as_of_qualified=false、registry该报告的mixed及“仅当前历史关联”、聊天“线上收益未测量”一致。原`state.json`的completed表示执行结束，不代表资料时点或交易资格通过；消费方必须同时读取qualification。本审查未给旧state倒填字段。
 
-发现本线库`registry.json`的旧NAAIM remaining仍含“fullprice/AAIIincrementnotrun”，该旧阶段状态已落后于10月4日报告；不能据其重开已封存研究。本附件明确最新两调查及完整价格背景研究已执行，资格限制仍未解除；保留旧卡作为历史，不修改原冻结版本。当前最新入口是本报告及coordination唯一任务记录。
+发现本线库`registry.json`的旧NAAIM remaining仍含“fullprice/AAIIincrementnotrun”，该旧阶段状态已落后于10月4日报告；不能据其重开已封存研究。本附件明确两调查加单一20日价格背景的短期组合研究已执行；完整价格背景联合比较仍未完成，资格限制仍未解除；保留旧卡作为历史，不修改原冻结版本。当前最新入口是本报告及coordination唯一任务记录。
 
 验收结论：数值及冻结一致性有已核证据；对象登记链不完整、第二次标准化文字已补明、独立语义审查未验证、真实历史可得资格不通过。原负结果及原宽度阻塞保持；禁止将本次审查写成全部合规通过。采购、仓外台账、生产和策略原文均未动。
 
