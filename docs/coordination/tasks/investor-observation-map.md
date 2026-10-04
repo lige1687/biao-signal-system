@@ -1,3 +1,46 @@
+# 当前active：首批数据/事件/ETF与Agent增量已发布，原任务持续
+
+更新时间 2026-10-04T15:22:33.075466+08:00（Asia/Shanghai）。稳定task-id investor-observation-map，原会话/负责人持续；本次非接管、非整体任务结束。用户最新“方向是对的感觉，开始做吧”。规则1.0读取commit 4f2e59685bf5be529c936f0ee0ccc0efef5ee2f5，SHA256 6871aa85da956453ca8e4d077e9bd9d9bf229df42c8447ffb94f97ba7f2461e0；规则未变。最新相关technical黑绿事件结案、sentiment调查组合、external保存预测组合与本题数据展示/源对象不同；三源资格仍dot-pro负责。未发现本轮已登记冲突，记录不是锁。
+
+## 目标、成果位置和准确版本
+
+图表优先理解专业投资者/机构关注的中美宏观、估值、融资、盈利背景；参考线讲清机会/风险/条件、高低变化、来源和反例；统一市场理解与宏观Agent，宽基/ETF优先。叙事背景不进入技术触发/过滤，线上收益及用户理解未测量。
+
+仓库 https://github.com/lige1687/biao-signal-system；实际工作task/investor-observation-map-progress；发布codex/investor-observation-map-progress-20261004。基础48e2eadc918e4cf0c361c89d25f25a8c2fba524c；实现与42文件证据commit **51fd2c73fa00acc29a8abc787dbf6e7f556e964d**；最新补充现行归置器回执 **73cbd557dcf57541ba22230f1d6a6b5ba815e70b**（另2文件）。两次普通推送，ls-remote完整SHA等于本地；原42份SHA清单按实现commit逐项对象核过，后续补证未改冻结清单。协调本记录的SHA以git log -- 本路径定位。
+
+[报告](https://github.com/lige1687/biao-signal-system/blob/51fd2c73fa00acc29a8abc787dbf6e7f556e964d/docs/experiments/market-expansion-implementation-2026-10-04.md)；[恢复/证据入口](https://github.com/lige1687/biao-signal-system/blob/73cbd557dcf57541ba22230f1d6a6b5ba815e70b/docs/experiments/raw/market-expansion-implementation-2026-10-04/README.md)；[进展](https://github.com/lige1687/biao-signal-system/blob/73cbd557dcf57541ba22230f1d6a6b5ba815e70b/docs/progress/investor-observation-map.md)；[当前归置器回执](https://github.com/lige1687/biao-signal-system/blob/73cbd557dcf57541ba22230f1d6a6b5ba815e70b/docs/experiments/raw/market-expansion-implementation-2026-10-04/current-hygiene.json)。AGENTS短协作入口原有且有效，不覆盖指令。
+
+## completed / active / planned / blocked
+
+- completed本批：新market-context/1只读出口；融资余额/融券余额/当日融资买入额、中美2年/10年减2年、历史盈利收益率共9字段，原24+9目录。A股15/美股19，含共享字段，不是全系统覆盖率。图/组合/指数对照/宏观回答复用同资料；来源取得/所属期/未知首次公布与修订分开；演示/错单位/未来日期/非数保留缺项。
+- completed：趋势/定投/价值图排序；9项中国2026年末官方计划、2次FOMC会议日期，旧BLS安排保留。4组ETF关系，510300仅历史披露；510210/ SPY /ONEQ准确对应，QQQ≠NASDAQCOM。SPY/ONEQ两项有版本费用，其余成本/权重不填。已有行业/美国行业ETF入口复用。
+- completed工程证据：Python47；本轮前端相关95项（含最终新context15）通过，构建765模块exit0，diff检查exit0。真实8045新API9序列无错误；A股15/15读数、组合/排序/来源/事件、指数SP500与NASDAQCOM746共同期/698变化区间、Agent入口→融资/ETF/事件→那A股呢已实际操作。390px Agent与指数页宽度390/390，恢复默认视图。独立13模型文件复制15检查exit0，本机依赖复用，非洁净/跨OS恢复。
+- active原任务：本批可验收交付与协作同步；没有把未来输入或实验写成运行中，继续由本方负责。下一有界问题为ETF持续输入与产品成本/流动性/跟踪资料资格核查，尚未启动。
+- planned未启动：ETF份额/净值/分红拆分和净申赎、带日期的行业权重、微观现金流、完整事件实际/预期、P3择一机构输入；不圈整个未来方向为本任务独占，不宣称公开资料已穷尽。
+- blocked对应部分：FINRA应用用途授权不明，官方月度资料虽能取得但不接自动数值；合格指数盈利共识/修订与逐期首次公布资料未齐；CN PE具体差异原因未确认；510300最新合同未核。仓外台账确认未答复，不写DB。未完成不是完成、缺口不补零，不将成交额/相对价格当ETF净申赎。
+
+## 实际文件范围和避让
+
+本轮src/lei_signal/fundamentals/market_context.py、service.py只新增context与缓存取得时刻、sources.py只校正PE来源声明；api/routes/fundamentals.py新增本题GET。web/src/features/market-understanding自有context/catalog、dashboard/observation/comparison、参考/日期/宏观回答、policy-events/purpose/etf-relations；web/vite.config.ts只增加隔离预览context代理变量，默认代理不变；自己的unit/runner/package、报告raw、registry/INDEX自身条目、已有两进度和批准计划检查点。不要同时改这些具体块；不占整个API/fundamentals/Agent文件，不改Streamlit、交易报单、技术/情绪研究。
+
+避开技术黑绿/EMA、sentiment调查组合与历史宽度、dot-pro T10Y3M/DTWEXBGS/Fed EBP资格、external候选/预测组合。新增10Y−2Y不是T10Y3M；高收益债利差不是Fed EBP。不复跑原研究、不覆盖别人记录。
+
+## 来源结论、失败和不得重复
+
+CN PE2026-08-31官方下载版本14.65/供方13.04；PDF版本、日期和滚动列核过，日期/列名bug解释不受支持；具体计算差异仅假设，不能按单点修全史。历史盈利收益率≠增长/预测。FINRA2010-02前后信用余额口径不同，不能桥接为同质流量；条款用途授权待核。参照线只有可定位定义或窗口历史位置，颜色不证明买点或未来收益。新金融回测/拟合/训练0，线上收益未测。
+
+失败原样留：最初缺模块；旧固定日期ERP测试受当前日期影响，冻结测试时钟后47项通过；错误cache.py路径/一次web前缀写路径无成功；web NBS超时后直接GET成功、Fullgoal PDF/部分find失败；标签控件定位失败；ETF JSX初次未渲染后补入；Agent0/0来源题已修。旧归置器.git/progress两项exit1保留；复用共享项目现行checker（HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9、SHA a661696b29d685c25388441975be6316d33342c3bcc24040cff5c58a377634bb）只读核此树exit0，不复制/改其代码。不得为全绿删除/搬历史文件。
+
+## 运行状态、预算与材料
+
+当前共享API PID1753/8000保留，其实际加载commit未知；独立只读预览API PID87776/8045 session12109、Vite PID87856/5185 session44605。旧59545已自然退出，端口空闲才起新预览，未杀任何进程。没有本题金融实验/checkpoint或运行中助手；复制代码不迁移进程，不允许第二执行者同时写本题输出。8045在最终一行来源措辞修订前启动，缓存可能保留旧措辞，数值未变。
+
+本轮0付费源/训练/回测/用户流LLM，Sol2+Luna1只读助手已结束，模型费用未知。主控web9批25请求项（含失败），直接GET2；FINRA助手9请求，CN审计4已识别外部操作、底层HTTP数未知；真实接口4源loader成功，底层/旧API缓存请求数量未知。不把未知计零，旧来源账不清零，旧6次自定限额不是永久用户预算。source-ledger与小证据已远端；FINRA原值审计/XLSX、PDF、HTML、完整响应、截图、恢复目录仅本地，大小SHA列audit-summary，远端不能复现原件；未上传数据/权重/DB/凭证。
+
+接续第一步：fetch协调和本工作发布版本，读上述报告/README，核实现commit42清单和补证清单，实际文件/依赖/权限后最小复现。现行版本先核旧问题是否已经修复，再做下一有限输入资格；只有新证据/前提/授权可重开已封存问题。本方持续负责，不接管/新建同名任务。
+
+---
+
 # 当前active：执行已批准扩大计划，先真实数据链/估值/资金/盈利
 
 更新时间2026-10-04T14:38:34.261898+08:00；用户最新“方向是对的感觉，开始做吧”授权按详细计划执行。原task-id/负责人持续，成果基线48e2eadc918e4cf0c361c89d25f25a8c2fba524c，发布codex/investor-observation-map-progress-20261004。规则/相关owner核3c94f567970ee90355fe15a3ff74851f707375a5，v1.0；技术新增日周颜色事件、sentiment宽度调查、external大规模候选均不进入本页/融资盈利，本题未见已登记同块冲突，记录不是锁。
