@@ -1,0 +1,40 @@
+{
+  "status": "paused_by_priority_change",
+  "resume_condition": "本轮叠加图验收后恢复原产品资料核查，不恢复撤回聚宽规划",
+  "upstream_dissemination": {
+    "withdrawn": true,
+    "new_plan_written": false,
+    "new_page_started": false,
+    "read_only_requests": 6
+  },
+  "original_task_source_requests": {
+    "web_query_or_open_or_screenshot_items": 10,
+    "direct_http_attempts": 8,
+    "total": 18,
+    "failures": [
+      "web管理人页不可访问，直接GET成功",
+      "web季报超时，直接GET成功",
+      "两个静态JS各原请求和带浏览器头重试均连接关闭"
+    ]
+  },
+  "qualified_facts": {
+    "mapping": "2026一季报p2，510300，以沪深300为基准，主要完全复制且保留替代方法",
+    "dates": "持仓/报告期末2026-03-31，报告送出2026-04-22，取得2026-10-04；不混为同日",
+    "currency": "一季报p3财务/净值单位人民币元，不另外推断交易报价",
+    "fees": "2024公告p1：2024-11-22起管理费0.15%/年、托管费0.05%/年；2026最新法律文件及全部费用未核",
+    "coverage": "官方产品HTML可见2026-06-30行业表与前10股票；季度报告前10仅部分持仓，不是完整权重",
+    "share_changes": "2026一季报§6有期间总申购/总赎回/拆分字段；具备季末变动说明来源，不是每日净流量或人民币净申赎金额",
+    "pcf": "官方产品页有日期选择下载清单；成分替代/权限/稳定取得未核，清单不能直接当实际完整持仓"
+  },
+  "not_done": [
+    "最新2026招募/概要原件",
+    "当前综合费用",
+    "买卖价差/折溢价",
+    "持续份额/分红拆分与净流量",
+    "完整历史成分权重/再分发许可"
+  ],
+  "delivered_data": false,
+  "code_change": "仅etf-relations中510300历史来源由2023换2026一季报，最新费用仍空",
+  "financial_experiments": 0,
+  "source_limit": "没有宣称公开资料已穷尽或采购/复用商业数据获准"
+}

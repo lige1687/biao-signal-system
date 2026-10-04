@@ -1,0 +1,55 @@
+{
+  "task_id": "investor-observation-map",
+  "status": "completed",
+  "mode": "engineering",
+  "updated_at": "2026-10-04T23:18:24.021449+08:00",
+  "base_commit": "73cbd557dcf57541ba22230f1d6a6b5ba815e70b",
+  "goal": "用户直接看同一日期轴上指数价格与指标升降，而非上下分图、散点或ETF关系",
+  "user_quote": "映射图，其实是指数价格的映射图和对应数据的映射图……能直接看出来价格走势和对应指标的关系……有点看不懂",
+  "acceptance": [
+    "单图双曲线、两轴原单位、颜色一致",
+    "悬停同期间原值及各自观察日期",
+    "缺失不填，不以交点当交易点",
+    "实际桌面/390px选择指数指标和回读依据"
+  ],
+  "financial_experiments": 0,
+  "business_increment": "能直接并看同期价格和指标；实际阅读理解改善和线上收益未测量",
+  "source_checkpoint": "../market-etf-product-qualification-2026-10-04/",
+  "scope_correction": "聚宽分发已撤回，无新增聚宽规划或实现",
+  "tests_so_far": {
+    "context_15": 0,
+    "foundation_17": 0,
+    "build_767_modules": 0,
+    "diff_check": 0
+  },
+  "pending": [
+    "安全工作分支/协调分支同步",
+    "用户本人是否更容易理解：待验收"
+  ],
+  "completion_scope": "本轮走势叠加工程；原扩大计划仍active",
+  "tests": {
+    "foundation_17": 0,
+    "context_15": 0,
+    "build_767_modules": 0,
+    "diff_check": 0,
+    "independent_restore_6": 0
+  },
+  "processes": {
+    "shared_api": 1753,
+    "read_only_context_preview": 17186,
+    "vite_preview": 15493
+  },
+  "runtime_failure": {
+    "pid": 15449,
+    "exit_code": 133,
+    "message": "libmini_racer address_pool_manager.cc(67): Check failed: !pool->IsInitialized().",
+    "resolution": "未改库/配置或重启共享API；改用项目已有Python3.13.12、AkShare1.18.91的隔离只读预览，真实HTTP200和用户流程验证成功",
+    "failed_runtime": "Python3.11.7, AkShare1.18.49"
+  },
+  "other_failures": [
+    "getTab URL未附browser返回错误，按已有browser2取回",
+    "getByLabel指数无匹配，读DOM后改用实际combobox角色定位",
+    "API rates/history拼错路径404，核现有loadHistory后rates-history200"
+  ],
+  "source_scope": "既有定义/窗口参考线沿用，无新增投资阈值/金融拟合/交易判断"
+}

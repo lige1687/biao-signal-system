@@ -1,0 +1,48 @@
+{
+  "context": {
+    "url": "http://127.0.0.1:8045/api/fundamentals/market-context?lookback_days=1095",
+    "status": 200,
+    "bytes": 112125,
+    "sha256": "93f90a0e681afcc4b1b7bd523bd902c9e24cfe409db718d8a42a083619b8d48b",
+    "series_counts": {
+      "margin_rzye": 725,
+      "margin_rqye": 725,
+      "margin_buy": 725,
+      "cn_2y": 798,
+      "cn_10_2_spread": 798,
+      "us_2y": 798,
+      "us_10_2_spread": 798,
+      "earnings_yield_cn": 36,
+      "earnings_yield_us": 32
+    },
+    "errors": [],
+    "delivered": false
+  },
+  "indices": {
+    "url": "http://127.0.0.1:8000/api/fundamentals/overlay-history?years=20",
+    "status": 200,
+    "bytes": 1010254,
+    "sha256": "8b61bfea289f6c4bfc6679ed896063a035c1c0577268e425a641581583607b38",
+    "series_counts": {
+      "cn_10y": 6182,
+      "us_10y": 7098,
+      "margin_rzyezb": 4000,
+      "margin_rzrqye": 4000,
+      "sse": 8000,
+      "hs300": 5221,
+      "sp500": 2514,
+      "nasdaq": 14033
+    },
+    "errors": [],
+    "delivered": false
+  },
+  "checked_at": "2026-10-04T23:13:55.134917+08:00",
+  "hover_values_against_real_api": {
+    "sp500_hover_20251120": true,
+    "spread_hover_20251120": true,
+    "sse_mobile_hover_20250915": true,
+    "financing_mobile_hover_20250915": true
+  },
+  "client_scope": "UI facts, not source/prediction qualification",
+  "browser_calls": "minimum observed initial+retry; exact lower-level count unknown"
+}
