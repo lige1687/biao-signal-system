@@ -1,3 +1,19 @@
+# 当前：D4/D5/D6返修证据复验完成；未来资料与跨机器条件仍blocked
+
+更新时间2026-10-04T22:52:57.181046+08:00（Asia/Shanghai）。task-id classic-factor-research，原负责人研究流程发散，会话01a0e6d5-4bcf-7bd3-82e4-4961c963d20e。用户“你看看之前修的结果满足了吗”“继续哈”。本轮report_only只核原三项补发交付，验收检查completed；尚未具备的后续执行blocked，不结束或接管其他研究。
+
+已推并核远端工作分支codex/classic-factor-review-20261004完整commit 604445fdf9660828f4ba17db8b2bc192d33b4a9f；基础822f3d1cc0d8c43534b1b2d39718dc9fbe23d699。入口 https://github.com/lige1687/biao-signal-system/blob/604445fdf9660828f4ba17db8b2bc192d33b4a9f/docs/archive/handoffs-plans/research-workflow-fusion-2026-10-04/followup-review.md ；followup-checks.json为具体原件指纹/独立核数；原controller-review及失败保留。
+
+- D4外部955611c1e7633a00752a14148f9102e0ad3b8538：原1268条239项数值，风险951条逐ID/目标配对和63项分组数值、强简单参照/改善恶化贡献独立核算通过。价格组合误差8.515888，较好单项8.324057、简单均值6.804367；风险组合3.832017，较好单项3.818945、强简单参照3.800206。返修accepted_negative_result，候选互补未获支持，线上收益未测量；不改权重重跑。
+- D5技术a8227e62eead2745d90cf65b14875340015076d5：future-readiness.json原Git字节一致、5来源SHA一致，具体缺件/负责人/成熟要求验收通过；真正未来验证仍blocked于合法持续来源、实际取得/接触版本记录、行动/日历与冻结，不重启暂停SMA20。
+- D6仅本地materials-readiness-classic-baseline-restoration-2026-10-04.json：16份1,004,207字节恢复文件及原件SHA/大小重核一致，accepted_same_machine_bytes_only；未运行恢复代码，跨机器备份位置/旧原件/移交资格仍blocked。原报告/原件没有上传，远端不具备完整材料恢复。
+
+当前无本方运行实验/PID/checkpoint。1批保存材料复验、0新拟合/行情/付费/派发/删除；token费用未知。旧检查器归置退出1的2项既有白名单差异保留；只读当前主仓库检查器检查隔离树退出0，manifest15项SHA及diff通过。只更新本方5文档，未动其他owner文件/数据。
+
+四线新流程/语义审查由01a1074e-3d9d-70a2-a771-b079443ace18及各原负责人承担，本方已停止新增学习规划，保留产物，不重复组织/派发/提前验收其新修改。已读规则v1.0及最新相关记录d6d6c1a8682a46ded31f36e8b47a7420430045e3，外部/情绪审查的新增范围与本方限定返修核验不冲突，记录不是锁。下一步仅在上述缺件/权限实际具备后沿原任务接续；本次可查检查已完成，无必须再跑实验。普通协调push因technical并发前进被拒，已读其72f9e52c5a5f3dfa8c0e95442294994d7ce07290新语义审查范围，保留其记录；本方不重复验收该范围。较上版新增三项实际交付与独立检查，把“等待交付”更新为限定通过/执行仍受阻，历史如下。
+
+---
+
 # 当前：用户要求补未解决部分，D4/D5/D6已发回原负责人
 
 更新时间2026-10-04T14:47:26+08:00（Asia/Shanghai）。classic-factor-research原负责人不变；六项限定交付验收completed保留，本次缺口跟进active/等待原方交付。用户原话“没通过的可以重新发一下哈”。本轮只分发后续未解决项，不将此前通过部分重开，不把blocked改为通过。
