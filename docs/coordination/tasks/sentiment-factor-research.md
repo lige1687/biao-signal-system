@@ -1,3 +1,19 @@
+# 当前范围：下一步增量的详细计划（只规划）
+
+更新时间2026-10-04T13:29:59+08:00（Asia/Shanghai）。原task-id sentiment-factor-research、原负责人和对话名称不变。用户当前明确要求“看看下一步增量”“详细的计划哦下一步增量”，本轮plan_only；不是新实验启动、移交或原任务结束。
+
+- 目标：明确下一问怎样超过旧单独AAII/NAAIM/短宽度结果，优先可核历史20/50输入和同低宽度状态内AAII确认。先交付输入资格/定义/公平比较/反例/业务验收/分工计划，不把想法写成有效。
+- 已完成基础：工作task/sentiment-factor-progress@362a48084808c9c8afe7d72c8004ecc8588f99fe，旧结论与资料指纹保持；协调已核5fc0ae706d9a9cc41f4241acfd5abec4be14059c。新用户AGENTS只推codex，计划发布拟用codex/sentiment-factor-progress-20261004从该工作提交接续；已核该新远端分支不存在，旧分支保留，不切换共享脏树。
+- 本轮具体仅写docs/archive/handoffs-plans/sentiment-increment-next-plan-2026-10-04.md及自己docs/progress/sentiment-factor-research.md、docs/ops/work-progress/sentiment-factor-research.md的阶段追加。本协调只写此记录。src/API/UI/全局定义/registry/旧raw与规则都不改；计划完成再推工作分支和核对。
+- 实际准备：已读取研究闭环plan_only、当前规范索引、准确研究卡/最新报告、两桌面策略有关模块E段，实际SHA与批准一致；核协调规则v1.0@ce64f7a7f8c118fd9ea5a26718f413e50595121b及市场理解/technical/risk/external当前记录。一次读取共享FETCH_HEAD被另一任务fetch改变而找不到协调入口，未假称成功；改为ls-remote固定完整SHA后fetch准确对象、读取上述版本成功，不依赖共享FETCH_HEAD。
+- 分工：市场理解最新只规划产品/数据扩展，不接管其页面、宏观/资金源；技术周颜色、risk量价、external FactorMiner都不同问题。此计划不独占所有新情绪定义，不把计划当锁；目前无已登记冲突，未登记活动未知。
+- 当前新实验/行情下载/来源请求/Pro/付费/代理0，无本题运行中实验或checkpoint；仅Git同步与仓内规划。旧家族至少1012拟合/至少4Pro和各来源尝试数保留。自行登记旧轮来源上限不是用户永久禁止免费必要核查的额度；后续仍核真实额度/许可/范围，不能清零旧账、免费绕付费或无限扫描。
+- 待完成：写详细可接续计划、仅本3路径发布和读回，再补准确成果位置。未启动任何计划内资料恢复/来源续查/效果检验；原历史成员/价格/日期与调查首发资格缺口保持。大数据、原始调查/流量/私人策略和凭据不上Git；无系统待升级仓外写入。
+
+---
+
+## 历史阶段（原记录保持）
+
 # 当前成果：本地板块资格与NAAIM完整价格背景已发布
 
 更新时间2026-10-04T01:36:40+08:00（Asia/Shanghai）。task-id sentiment-factor-research；负责人/root，会话01a0ebfb-fd80-7c62-97c9-ac24d20f58e4，实际名称已改为「情绪与市场宽度因子：定义和有效性研究」。原负责人继续，非接管或整条任务结束；本轮有界问题completed，原E/板块历史用途blocked，持续研究责任active。
