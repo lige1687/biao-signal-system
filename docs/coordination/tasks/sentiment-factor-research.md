@@ -1,3 +1,17 @@
+# 2026-10-04 Asia/Shanghai：研究链审查补交及P2/P3纠正 completed，待独立验收
+
+本线原负责人/root保持。已读澄清，本次是report_only研究语义/定义/时点证据审查，替换上次工具采纳分发任务。工作分支codex/sentiment-factor-progress-20261004；已推且origin ref核实43a4c737b1dfd2b39e130178b8d47bd4a0055a2e（含前件70768b56117eb26950d2c47c6e52e391e8deabb8），基础65dcc416972bc442300540f95e9b1bd14c66f7c0。
+
+入口原报告docs/experiments/sentiment-survey-combination-2026-10-04.md追加审查v1及时间勘误v1；raw/audit-addendum-1.json逐项核10冻结SHA；timing-erratum-1.json给131行日期配对。本轮数值结果复用，0新拟合/采购/安装/代理/Pro，原累计至少1028拟合、至少4Pro不变，无运行实验。归置/diff/日期重建exit0。
+
+P2已核：新AAII日期+7日当天可配对，不等于旧第7日23:59后严格下一报价；131行124行、78评价73行调查周不同。报告已更正“沿用”说法，不继承旧时点资格，不声称证明泄漏。原freeze SHA0d940f0ac18496c0c2197b270330a00f98f0623c9ab269f50d4760cfd0ada2ed和原结果不变。含值逐行CSV仅本地，JSON记录大小SHA，日期证据可审。
+
+P3家族registry为S03/S04追加latest_combination_evidence_20261004；保留旧条目历史，仅完成短期单价格背景组合，完整背景+AAII联合、合格宽度和真实发布时间仍未完成。定义链缺口：组合ID@版本未明确事前注册，当前全局表无对应调查对象；不能事后倒填称通过。补明乘积列训练标准化后仍会在fit再次标准化，代码原本如此；独立算法复核是同一主控，不等于独立语义审查。外方已给P2/P3及数值核验消息，独立报告原件待提供/验收。
+
+最新协调b6b1cf607d4962c14da2ae20ca3be3f83a14f802，规则v1.0；外部线只补自有附件，无本线冲突，记录非锁。只改本报告追加、两进度、家族registry追加和两个审查JSON；不动共享计划、全局定义、他人文件、原冻结/成绩或仓外台账。下一步接独立验收的具体问题，原宽度资格阻塞保持，不重跑封存实验。未跨对话发送回信。
+
+---
+
 # 2026-10-04 Asia/Shanghai：聚宽方法规划建议已融合
 
 原情绪负责人继续，plan_only文档交付completed；宽度资格blocked状态不变。读取规则commit 463cabfb09f5aa4343e4ee1d42ca9d4f1887d2a0，技术/市场理解最新范围无本次三份自有文档冲突。只读joinquant-method-integration共享计划，在既有sentiment-increment-next-plan-2026-10-04.md追加采用/不采用理由、落点及验收，两进度同步。
