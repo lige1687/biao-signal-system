@@ -1,0 +1,11 @@
+{
+  "checker": "scripts/check_repo_hygiene.py from existing shared checkout, no file copied or modified",
+  "source_checkout_head": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
+  "source_sha256": "a661696b29d685c25388441975be6316d33342c3bcc24040cff5c58a377634bb",
+  "target": "this isolated task worktree",
+  "method": "runpy load then REPO=root; read-only main()",
+  "exit_code": 0,
+  "stdout": "✓ 归置自检通过：根层四层均在白名单内，关键配置均已入库。\n",
+  "old_branch_checker_exit_code": 1,
+  "old_failure_retained": true
+}
