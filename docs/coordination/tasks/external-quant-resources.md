@@ -1,3 +1,19 @@
+# 2026-10-04T23:11:15.663163+08:00：外部候选公式筛选组件有限验收 completed
+
+external-quant-resources原负责人继续，非移交。用户明确继续研究外部挖掘/组合流程且不得重复其他任务。新成果已推并核远端9ac8225235332919f67944c6cb8f151aba66e1da，codex/external-quant-progress-20261004，基础a043c55a992b0ad6984a3877a9c87875c2c90784；26准确路径逐字读回、仅registry自项、默认HEAD/index保持。
+
+入口 docs/experiments/external-candidate-diversity-2026-10-04.md，同名raw包含人工case/原生结果/失败/协议/恢复/manifest。最终效果：候选级准确结构重复提示，保留所有提出记录；金融有效性、组合增量及真实节省未测量。17同条件人工对中字符串/结构/hash文字/代数识别重复1/3/4/7（7个已知等价），误认0/0/5/1（10个不同）；另外4个研究条件不同单列，不算原生公式算法缺陷。原生main已核等于75e056067a90ed6c4cf2e1737df773eed79abce8。
+
+实际落点src/lei_signal/research/candidate_fingerprints.py、tests/unit/test_candidate_fingerprints.py；薄适配原生parser/compile_tree，十项声明context/指纹绑定。真实5候选CLI输出5记录（1重复提示/3待审/1非法）及0自动删除。6测试实际无跳过；独立仓内目录6测试和CLI相同，覆盖输出退出2；18文件清单、归置、敏感项检查通过。无共享workflow消费者，不改原定义/原成绩/生产。源码及原始行情不入Git，MIT上游固定URL/字节SHA可恢复；无行情输入或模型权重。
+
+第一次Python3.11加载语法失败原件保留，复用已有3.12.14和纯Python依赖纠正，无全局安装。Sol/medium只读盘点/独立审阅，无并行写入；已按其P1分清概念规则与实际adapter、同条件与异条件。来源4/6、核心1失败/后续3（原生比较/适配/恢复）；累计来源84、工程诊断37、旧市场拟合16，0新市场/模型调用/付费；代理费用未知，无运行进程/助手/checkpoint。
+
+已完成：此有界组件问题与实际入口；正在做：本条协作同步；下一步planned：有冻结模型调用预算、合格新评价资料后比较候选来源在相同成本下产生的新增帮助。大规模方案未启动，资料/调用范围未具备不借旧预算。复用candidate_preflight布尔去重、STUMPY模板及multiple_comparison保存误差比较，不另建框架；不接管技术/量价/情绪/周频配置研究。无已登记本组件写入冲突，记录非排他锁。DEAP、AlphaGen、旧组合及本人工比较封存不重做。
+
+先前保存预测组合已获独立审查负责人有限接受，引用docs/experiments/factor-process-definition-semantic-audit-2026-10-04.md，无新增返修；不因数值验收扩大原市场资料资格。此记录替换上一阶段当前摘要但历史保留。
+
+---
+
 # 2026-10-04 Asia/Shanghai：外部候选公式筛选组件评估 active
 
 external-quant-resources原负责人继续。已读协调d6d6c1a8682a46ded31f36e8b47a7420430045e3、规则v1.0；用户授权继续研究且不要重复。基础成果a043c55a992b0ad6984a3877a9c87875c2c90784，工作分支codex/external-quant-progress-20261004。新有界问题：FactorMiner公式文字相似检索与原生结构指纹能否减少候选重复而不错误认作新信息等价？不做市场效果，不进入任何他人研究题。
