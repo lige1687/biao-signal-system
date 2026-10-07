@@ -20,7 +20,7 @@
 
 合同：`docs/experiments/raw/douyin-vike-increment-2026-10-07/execution-history-followup/controller-contract.json`；全部实际源码基线SHA在同目录`source-baseline.json`；隔离副本`data/cache/douyin-execution-history-2026-10-07`，不含.env、市场原始资料或私人数据库。
 
-唯一后台实现者vike_inventory：`src/lei_signal/storage/sqlite_store.py`、`plans/store.py`、`plans/models.py`、新增`plans/evidence.py`、`api/schemas.py`、`api/routes/plans.py`、`api/routes/feishu_webhook.py`、`copilot/trades.py`，新增`tests/unit/test_execution_history_followup.py`。唯一前端实现者vike_useful_rank：`web/src/types.ts`、`api/client.ts`、`pages/SupervisorPage.tsx`、`components/copilot/CopilotCards.tsx`。主控独立复核：`src/lei_signal/copilot/review.py`及仅本任务报告/登记/进度/raw。
+唯一后台实现者vike_inventory：`src/lei_signal/storage/sqlite_store.py`、`plans/store.py`、`plans/actions.py`、`plans/models.py`、新增`plans/evidence.py`、`api/schemas.py`、`api/routes/plans.py`、`api/routes/feishu_webhook.py`、`copilot/trades.py`，新增`tests/unit/test_execution_history_followup.py`。唯一前端实现者vike_useful_rank：`web/src/types.ts`、`api/client.ts`、`pages/SupervisorPage.tsx`、`components/copilot/CopilotCards.tsx`。主控独立复核：`src/lei_signal/copilot/review.py`及仅本任务报告/登记/进度/raw。
 
 先在副本实现并用合成资料验收；共享原文件指纹与基线相同后，主控才接回准确差额。不上传源码、账户资料、浏览器配置、数据库、大包或桌面策略原文。本协调仅公开不含凭据的范围与证据位置，当前源码/产物仍本地。
 
@@ -35,3 +35,5 @@
 实际通过：上阶段收据复用、当前策略指纹、源码入口及三个只读设计审查。尚未运行本轮实现验收；当前只有范围准备和只读审阅完成，不称代码完成或已获收益。完整作者目录的旧访问阻塞仍保留，不依赖该阻塞的本轮记录工作继续。
 
 本版新增：本任务首次稳定协调入口与本轮ER02/03范围登记；同步读回成功后才派发隔离实施。问题回答且验收/报告完整可收尾；缺关键权限或可靠资料仅暂停受影响使用。没有进程退出后自动继续承诺。
+
+原子完成补充：plans/actions.py仅增加事务提交控制，保持同方向顶替规则不变。新界面须检验服务明确支持动作证据，否则不能把日期发给旧服务并当作已保存。
