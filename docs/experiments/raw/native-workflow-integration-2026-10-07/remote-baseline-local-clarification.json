@@ -1,0 +1,61 @@
+{
+  "schema_version": "native-workflow-local-baseline-clarification/1.0",
+  "time": "2026-10-08T00:41:42.885878+08:00",
+  "prior_inventory_path": "docs/experiments/raw/native-workflow-integration-2026-10-07/remote-baseline-inventory.json",
+  "prior_inventory_sha256": "b22800bd0c4df938410343b39f65654a2bb44352a5e79c28b3f527cab8df364b",
+  "patch_path": "docs/experiments/raw/native-workflow-integration-2026-10-07/shared-entry-changes.patch",
+  "patch_sha256": "c6cac32a00041c5d263d6f667d499d69dc053d4bca4481dc0611d93fdf5fd59d",
+  "entries": [
+    {
+      "path": "src/lei_signal/research/question_contract.py",
+      "original_baseline_sha256": "ed4a44fbb3fbf6c7b986bd2fb9261f98f15cf33b604f04b84e7ceb4e2fffcb97",
+      "original_exact_at_shared_root": true,
+      "patched_isolated_sha256": "74c6d17a7d0e8735b3b842bab2896aa3bb7fb8dd7c263e86d488fa5dbb038cff",
+      "patched_bytes_are_expected_task_delta": true,
+      "exact_original_remote_match_in_checked_refs": false,
+      "original_owner": "not established from inspected coordination records"
+    },
+    {
+      "path": "src/lei_signal/research/workflow_inputs.py",
+      "original_baseline_sha256": "43a0683c13132fa34c73d4ce618d37746b5a8aa8da89e2967d132f59bee777ad",
+      "original_exact_at_shared_root": true,
+      "patched_isolated_sha256": "f250e8dd0a357a5fa0814ae51008f43145a7ec5b377b10596c0fccc30ccf7e43",
+      "patched_bytes_are_expected_task_delta": true,
+      "exact_original_remote_match_in_checked_refs": false,
+      "original_owner": "not established from inspected coordination records"
+    },
+    {
+      "path": "src/lei_signal/research/workflow.py",
+      "original_baseline_sha256": "967d92adc77a18c42f16fda27c80eb5a136eadd72e4918515302003216a43cb6",
+      "original_exact_at_shared_root": true,
+      "patched_isolated_sha256": "3b1b277137d6bfa883b7f05f0e7cc52000d480aac4a15c89edb35659537d6784",
+      "patched_bytes_are_expected_task_delta": true,
+      "exact_original_remote_match_in_checked_refs": false,
+      "original_owner": "not established from inspected coordination records"
+    }
+  ],
+  "checks": [
+    {
+      "command": "git apply --check --unidiff-zero .codex/worktrees/native-workflow-integration-20261007/docs/experiments/raw/native-workflow-integration-2026-10-07/shared-entry-changes.patch",
+      "working_directory": "shared root",
+      "exit_code": 0,
+      "result": "patch can apply to untouched original local bytes"
+    },
+    {
+      "command": "git apply -R --check --unidiff-zero docs/experiments/raw/native-workflow-integration-2026-10-07/shared-entry-changes.patch",
+      "working_directory": "isolated worktree",
+      "exit_code": 0,
+      "result": "patch can reverse from expected modified local bytes"
+    },
+    {
+      "command": "git apply -R --check docs/experiments/raw/native-workflow-integration-2026-10-07/shared-entry-changes.patch",
+      "working_directory": "isolated worktree",
+      "exit_code": 1,
+      "result": "without --unidiff-zero the zero-context patch was refused; preserved as diagnostic, not a source-byte mismatch"
+    }
+  ],
+  "conclusion": "Three old baseline bytes are locally present and reversible from expected patched local bytes. They remain without an exact remote match in checked refs; this does not make the local source unknown or grant permission to upload it.",
+  "real_X": 0,
+  "real_Y": 0,
+  "fits": 0
+}

@@ -127,3 +127,5 @@ MacBook-Air-126.local，本聊天主控；原分支codex/factor-unit-research-20
 Luna/low只读盘点49项；主负责人复核全部49行基线SHA、对已匹配的86个远端blob逐字节重算SHA，并用`git ls-remote`确认10个已检查远端分支ref仍指向所记完整commit。结果：**30项**在这些远端工作分支的当前tip有相同字节；**19项**未在限定分支tip找到相同字节（合计972,036字节）。19项原字节仍在本机共享根工作树，含3份共享入口原文件；没有上传、复制或认领其他任务的未跟踪材料。逐项路径、原SHA、匹配commit与来源见 `remote-baseline-inventory.json`；独立读回、当前ref和19项缺件见 `remote-baseline-verification.json`。未扫全Git历史/所有分支，因此“未找到”限已检查ref，不能断言远端历史绝无原件；原负责人部分尚无法从协调记录唯一确定。因49项未齐，不做纯Git恢复/导入，也不把人工接入测试说成跨机器已通过。下一步由中控向相应原owner核19项的可交付来源与授权；真实六件及真实X/Y阶段许可依旧独立缺失。
 
 补核2026-10-08：远端main@ed597373e8e10143c66b02a05d94a9f19fdb9c48与协调分支@a4c24030e78e8302688825a23b714b9074f47cdc的当前tip，19项待交路径在两者均不存在；30/19结论不变。只查精确路径与当前提交，不扫历史，证据见 `remote-baseline-main-check.json`。
+
+补注：49项中3份共享入口在隔离树是本任务补丁后的字节，因此Luna清单标`unmatched_unknown`只针对已查远端ref及当前隔离树；共享根工作树的三份**原基线字节**仍逐项等于原SHA，零上下文补丁用`--unidiff-zero`正反方向检查均退出0。记录见 `remote-baseline-local-clarification.json`。这不改变远端30/19统计，也不授权上传原未跟踪文件。
