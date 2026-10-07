@@ -1,0 +1,79 @@
+{
+  "schema_version": "native-d-mae-workflow-mapping/1.0",
+  "status": "design_only_not_executable",
+  "purpose": "Map one frozen descriptive D versus V close-MAE20 question onto the existing Factor Lab workflow without granting real X or Y.",
+  "source": {
+    "design_contract_path": "docs/experiments/raw/native-risk-d-mae-2026-10-07/immutable-handoff/PROPOSED-CONTRACT.json",
+    "design_contract_sha256": "ace132ddb89de3e45951148d9673524fa9fe448f662f2576221d216bbe9717c6",
+    "synthetic_math_path": "docs/experiments/raw/native-risk-d-mae-2026-10-07/study.py",
+    "synthetic_math_sha256": "84f4fee2a538a918352bca099ec9c9b4a38f6d6a19dab5faa564b668c0bd8745"
+  },
+  "existing_entry": {
+    "cli": "scripts/run_factor_lab.py",
+    "modes": ["--review-workflow-contract", "--workflow-draft", "--workflow-contract"],
+    "schema_current": "research-workflow/1.1",
+    "current_compatibility": false,
+    "reason": "Validator lacks a descriptive D/V rank comparison and preflight computes or demands Y before execution reservation; generic MAE can skip a halt."
+  },
+  "fixed_question": {
+    "layer": "factor_information",
+    "assets": ["510050.SS", "510300.SS", "510500.SS", "512400.SS", "512800.SS", "588000.SS"],
+    "cases": 76,
+    "original_events": 84,
+    "asset_lifecycle_groups": 33,
+    "mature_paths_expected": 75,
+    "unknown_paths_expected": 1,
+    "study_cutoff": "2026-06-26",
+    "period_start": null,
+    "period_start_reason": "Cannot bind earliest frozen case without deduplicated-cases.json.",
+    "candidate_D": "(A_signal_close-C_event)/ATR20_SMA; reuse saved frozen D rather than regenerate",
+    "benchmark_V": "100*ATR20_SMA/A_signal_close",
+    "target_Y": "max(0,100*(1-min(close[t+1:t+21 inclusive])/close[t+1]))",
+    "target_unit": "percentage_point",
+    "target_price_basis": "unchanged saved economic close; retrospective price-path measure only",
+    "comparison": "per-asset average-tied-rank signed Spearman rho(D,Y), rho(V,Y), difference on identical complete cases; equal mean over fixed common computable assets",
+    "sensitivity": "exactly 33 leave-one-asset-lifecycle-out summaries, same saved labels, fixed initial asset set, no rescue selection",
+    "not_estimated": ["conditional information gain", "predictive error improvement", "trading return", "production effect"]
+  },
+  "stage_gates": [
+    {
+      "stage": "synthetic_engineering",
+      "allowed_real_X": 0,
+      "allowed_real_Y": 0,
+      "entry_expectation": "One CLI chain must produce separate X-only and synthetic-Y receipts through existing family ledger, lock and publication audit.",
+      "required_checks": ["76 synthetic case identities and 84 alias memberships", "75 full 21-close paths before any Y output; one frozen unknown", "one explicit halt or gap rejects the whole planned label batch", "D/V same-case and fixed-asset rank comparison", "33 deterministic deletion scenarios", "old workflow modes retain behavior"]
+    },
+    {
+      "stage": "real_X_binding",
+      "requires": ["synthetic independent acceptance", "all six missing frozen inputs found with exact SHA and usage authority", "coordination scope registered and read back", "separate controller X grant tied to final source and membership hashes"],
+      "allowed_real_Y": 0,
+      "output": "sealed X/V, membership and source receipt only; no target values or target-derived statistic"
+    },
+    {
+      "stage": "real_Y_once",
+      "requires": ["real_X receipt verified", "all 75 planned future price paths and their calendar/action status prevalidated as a set", "separate controller one-shot Y grant tied to frozen code, contract, 76 members and input hashes"],
+      "max_real_Y_cases": 75,
+      "max_fits": 0,
+      "automatic_retries": 0,
+      "failure": "block entire stage; preserve errors and original denominator; no partial label release"
+    }
+  ],
+  "unavailable_real_inputs": "docs/experiments/raw/native-risk-d-mae-2026-10-07/MISSING-INPUTS.json",
+  "shared_write_scope_proposal": [
+    "src/lei_signal/research/native_risk_d_mae_workflow.py",
+    "src/lei_signal/research/question_contract.py",
+    "src/lei_signal/research/workflow_inputs.py",
+    "src/lei_signal/research/workflow.py",
+    "tests/unit/test_native_risk_d_mae_workflow.py",
+    "tests/integration/test_native_risk_d_mae_workflow.py"
+  ],
+  "conditional_write_scope": ["scripts/run_factor_lab.py"],
+  "controller_only": ["docs/research/definitions.v1.json", "docs/experiments/registry.json", "docs/experiments/INDEX.md"],
+  "coordination": {
+    "checked_coordination_sha": "e5f716f348b525f330ceb427c559919cb8c53b4f",
+    "shared_write_registered": false,
+    "check_exit_code": 2,
+    "work_clearance": false
+  },
+  "real_execution": {"X": 0, "V": 0, "Y": 0, "fits": 0, "market_requests": 0}
+}
