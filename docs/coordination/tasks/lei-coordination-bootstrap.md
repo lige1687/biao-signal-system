@@ -1,7 +1,7 @@
 # 当前：统一八目标与四线查重接续
 
 - task-id：lei-coordination-bootstrap
-- 状态：blocked（仅远端同步；本地验证准备已推进）
+- 状态：active（独立成果已推，正在核协调发布）
 - 更新时间：2026-10-07T22:43:59+08:00
 - 负责人／唯一Git协调入口写者：Codex会话01a10051-4db1-7490-b40f-c13243767fc6；执行调度仍由01a116c7-3700-7062-a6c6-53af00ef60a0负责。
 - 目标：参与者从最新Git能查到八目标、四线范围、依赖和冲突，并留下开工查重SHA；不把文字规则说成控制所有AI的硬拦截。
@@ -75,7 +75,7 @@ fetch origin coordination/lei，读本文件和 COORDINATION.md；核对成果�
     {
       "task_id": "lei-coordination-bootstrap",
       "owner": "01a10051-4db1-7490-b40f-c13243767fc6",
-      "status": "blocked",
+      "status": "active",
       "write_paths": [
         "COORDINATION.md",
         "docs/coordination/tasks/lei-coordination-bootstrap.md",
@@ -92,3 +92,5 @@ fetch origin coordination/lei，读本文件和 COORDINATION.md；核对成果�
 ```
 
 2026-10-07T23:18:13+08:00：本地工具成果完整commit 4a1bab7301c30b5e3d716a660ddc4df0617460d3，未推。已完成8项测试和目录检查；实际在线查询证明远端未登记即退出2，不使用本地声明凑通过。两份已交研究报告仅定位与SHA，实质验收仍由中控。最终协调文件必须另提交并核远端，不能以c02c39bb冒充当前全部工作。
+
+安全写通道新证据：工作分支codex/lei-coordination-refresh-20261007已普通推并fetch比对，最近成果commit 0163bdaf62e6a74ce4cc8820e93ef3b601fbbe79。前一版“未推”保留为失败阶段历史，不代表当前成果状态；当前协调发布仍须核验。本轮没有修改其他任务文件。

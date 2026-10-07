@@ -147,3 +147,7 @@
 - [research-evidence-catalog报告（本机）](/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/research-evidence-catalog-2026-10-07.md)：SHA256 6a7f23fa1fe6fa9f53e7e097dbfb76d017c52a7080166a5521f939a88ce4cef5；位置已查存在，仅核定位，不替中控独立验收，准确成果分支／commit仍待交。
 
 本协调本地工具成果分支codex/lei-coordination-refresh-20261007完整commit 4a1bab7301c30b5e3d716a660ddc4df0617460d3（未推）。8项测试、目录检查、原AGENTS前缀保留通过；实际在线查询退出2，读到ccc290e9b1c13286252c77ff281fbada8c1206c1并拒绝尚未登记native-risk-d-mae；离线声明核对退出0但online_verified=false／work_clearance=false。
+
+### 新成果远端入口（已核，协调发布待核）
+
+本轮工具与项目协作增量已在独立[codex工作分支](https://github.com/lige1687/biao-signal-system/tree/codex/lei-coordination-refresh-20261007)发布，完整commit 0163bdaf62e6a74ce4cc8820e93ef3b601fbbe79；脚本代码原commit 4a1bab7301c30b5e3d716a660ddc4df0617460d3，后续仅阶段记录。可从该提交读取[只读检查工具](https://github.com/lige1687/biao-signal-system/blob/0163bdaf62e6a74ce4cc8820e93ef3b601fbbe79/scripts/sync/check_coordination.py)、[项目说明](https://github.com/lige1687/biao-signal-system/blob/0163bdaf62e6a74ce4cc8820e93ef3b601fbbe79/AGENTS.md)、[回执](https://github.com/lige1687/biao-signal-system/blob/0163bdaf62e6a74ce4cc8820e93ef3b601fbbe79/docs/ops/work-progress/lei-coordination-bootstrap.md)。不代表四线研究产物已推或仓外目标数据库更新。
