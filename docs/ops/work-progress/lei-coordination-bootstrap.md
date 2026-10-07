@@ -8,3 +8,57 @@
 失败证据：旧检查器在协调 worktree 报上述 3 项；本次修复针对该兼容问题，不放宽其他路径。
 验证：检查原 AGENTS.md 为当前文件完整前缀；目录检查分别在工作 worktree 和协调 worktree 上执行（协调树使用本分支更新后的检查器）。结果随协调状态登记；提交与推送最终状态以该入口为准。
 后续：推送本分支、读回准确提交、更新协调状态。原任务未能从本聊天确认，等待用户给出名称或进度路径；没有移交或宣布其完成。研究预算 0，无数据产物。
+
+
+## 2026-10-07 接续（仅本地，远端不可复现）
+
+负责人／唯一协调Git写者：01a10051-4db1-7490-b40f-c13243767fc6；调度中控仍01a116c7-3700-7062-a6c6-53af00ef60a0。目标是八目标／四线可查、同步SHA可核，并区分文字规则和工具能力。成果分支codex/lei-coordination-refresh-20261007，基础34b6435a915b7adeff8f8c04484fb75295e908c1；本轮未推。
+
+通过：remote正确，fetch读到ccc290e9b1c13286252c77ff281fbada8c1206c1；原16任务只读，未修改他人记录；独立工作区完整保留主区脏修改。当前主区AGENTS/CLAUDE是一般复用规则，没有coordination专用远端检查；原生factor_lab没有跨AI查重硬检查。只有旧成果分支AGENTS有协作文字。新增本分支AGENTS SHA记录说明和scripts/sync/check_coordination.py手动只读工具；8项负例／范围测试通过，目录检查通过。它不接运行框架、不装hook、不授权限，所有旧Markdown列未程序检查；不能声称所有AI已遵守。
+
+失败：GitHub SSH正常读取，但4次安全提交写入Internal Server Error。已核远端没有本次提交；分别检查并发增量、线性重建、完整对象传输，仍同错。HTTPS现有Git/API凭据不可用且无进展，结束本次HTTPS进程，没有改网络、认证或权限。准确request-id和待推历史见协调目录新中控摘要。fetch成功不叫同步；等待普通写入恢复或现有授权可用写通道。
+
+本地协调目录：.codex/worktrees/lei-coordination。开工待推commit c02c39bb10d6d0cc9755690a46b07eca210cfd99；旧合并待推89de34a43c58000c9a37511da69a69353948c213保留在codex/lei-coordination-pending-20261007。后续本地修改另提交，不伪装旧SHA代表最新。COORDINATION.md、本任务和中控摘要仅本地，工作分支工具／测试也未推。0行情、0研究标签、0拟合，不重跑已封存研究，不写仓外OKR。
+
+最小恢复：读本地待推任务与本分支脚本→fetch远端、核新增范围和唯一写者→只整合本任务准确文件→普通推→fetch比完整SHA及文件→再称同步；涉及冲突共享修改继续暂停。其他独立研究沿原授权执行，本轮没有替原负责人结束或转移任务。
+
+
+### 本轮实际在线反例回执
+
+远端尚未包含本轮声明，工具实际拒绝此查询；在线读取成功不等于已登记。
+
+```json
+{
+  "exit_code": 2,
+  "checked_at": "2026-10-07T23:16:52+08:00",
+  "online_verified": true,
+  "work_clearance": false,
+  "checked_coordination_sha": "ccc290e9b1c13286252c77ff281fbada8c1206c1",
+  "rules_present": true,
+  "mode": "online_declarations_only",
+  "declared_checks_passed": false,
+  "errors": [
+    "unregistered task_id: native-risk-d-mae; human review required"
+  ],
+  "legacy_records_require_human_review": [
+    "docs/coordination/tasks/classic-factor-research.md",
+    "docs/coordination/tasks/dot-formula-time-validation.md",
+    "docs/coordination/tasks/dot-pro-increment-review.md",
+    "docs/coordination/tasks/dot-pro-source-qualification.md",
+    "docs/coordination/tasks/dot-pro-strategy-definition.md",
+    "docs/coordination/tasks/dot-trade-state-accounting.md",
+    "docs/coordination/tasks/douyin-vike-increment.md",
+    "docs/coordination/tasks/external-quant-resources.md",
+    "docs/coordination/tasks/investor-observation-map.md",
+    "docs/coordination/tasks/lei-coordination-bootstrap.md",
+    "docs/coordination/tasks/lei-technical-reader-research.md",
+    "docs/coordination/tasks/market-observation.md",
+    "docs/coordination/tasks/remote-core-review.md",
+    "docs/coordination/tasks/risk-shape-information.md",
+    "docs/coordination/tasks/sentiment-factor-research.md",
+    "docs/coordination/tasks/technical-factor-sequence.md"
+  ],
+  "declared_task_ids": [],
+  "scope": "explicit declarations only; no lock, authorization, or legacy clearance"
+}
+```

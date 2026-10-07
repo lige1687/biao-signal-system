@@ -178,3 +178,5 @@ bootstrap、Calmar、expR、PF、样本内/样本外、走查（walk-forward）*
 ## 多 AI 协作（2026-10-03）
 
 每轮实质工作前，获取并读取远端 `coordination/lei` 的 `COORDINATION.md` 和 `docs/coordination/tasks/` 相关任务记录；核对已有成果与重叠，使用稳定 task-id，按规则登记范围、基线和验证目标并成功推送后再修改可能冲突的文件。阶段完成、范围变化或阻塞时及时同步并核验远端。跨任务当前状态以协调分支任务文件为准；`docs/ops/work-progress/` 保留工作分支阶段证据，互相链接，不另立实时事实来源。实际成果留在独立工作分支并引用准确 commit。仅维护自己的任务，不覆盖他人、不直接改 main/master，不扩大研究或执行权限；本说明服从更高优先级指令和原有研究、安全规范。
+
+每轮开始、范围变化及交付前还须在自己的任务记录写完整checked_coordination_sha、含时区时间、已读task-id及冲突决定。可使用scripts/sync/check_coordination.py只读检查显式登记；退出0不是开工权限，旧记录仍须人工核对，工具不取得锁、不控制所有AI。fetch失败不能用缓存冒充最新，也不能继续可能冲突的共享修改。本轮八目标摘要在coordination/lei的docs/coordination/tasks/research-dispatch-controller.md；它不替代原负责人记录或仓外目标数据库。
