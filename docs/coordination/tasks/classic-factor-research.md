@@ -1,3 +1,15 @@
+# 当前：19项基线原字节已独立发布；纯Git恢复最小检查待执行
+
+更新时间 2026-10-08T01:09+08:00（Asia/Shanghai）；task-id `classic-factor-research`，负责人会话 `01a0e6d5-4bcf-7bd3-82e4-4961c963d20e`。状态 active（纯Git人工恢复准备）；真实X/V/Y阶段仍blocked。开工实际读取协调 `47113b400a77f691841981f37ffe8d41becbc325` 的规则1.1、本记录和中控记录。此阶段唯一写者为本任务隔离快照执行者；其他任务共享源码根树不动，未见同一精确快照分支并发写者，记录不构成锁。
+
+本轮新增19项资格清单：`docs/experiments/raw/native-workflow-integration-2026-10-07/baseline-delivery-qualification.json` SHA256 `69bde6aac84e2af8350bae77d28da156f4d42525b772f26ed3432fba91ec6647`，19路径/顺序/原SHA与先前缺件清单一致，总972036字节。19项原作者均unknown；本会话仅作原字节快照整理人。中控另审第3项两处本机策略文档定位键后准许原字节交付，原资格清单未改，中央决定另见快照中的`central-review-decision.json`。静态检查未发现凭证、账户内容或无关任务正文；外部引用再分发资格未作法律结论。
+
+已推并由主负责人从远端指针及提交对象独立读回：[19项基线快照](https://github.com/lige1687/biao-signal-system/blob/ec565b87f794541bfa6518a8675dce941390e3e8/docs/experiments/raw/native-workflow-integration-2026-10-07/baseline-delivery-manifest.json)，分支 `codex/native-workflow-baseline-20261008`，父 `18e64fa632dba5dbad0e5fcae09b4ccc75f119a9`，完整commit `ec565b87f794541bfa6518a8675dce941390e3e8`。提交只含19原路径和manifest、qualification、recovery说明、中央决定4份小文档；19/19提交对象大小和SHA准确，远端分支ref等于该commit。代码人工适配仍在 `codex/native-workflow-integration-20261007`，既有代码commit `b2f45151128baa1fe387cda85862d71cb01e1206`，非作者29项局部复核已通过；这次没有改实现。
+
+下一步仅在独立检出装配49项准确基线与3个已验收入口小补丁、新适配器和两测试，跑现有最小人工节点 `tests/integration/test_native_risk_d_mae_workflow.py::test_cli_x_then_one_y_restart_verify_and_repeat_rejection`，记录实际退出码/回执。不重跑169/1754旧测试、市场实验或封存研究。纯Git恢复尚未运行，跨机器环境也未验证；真实六原件、历史可知资料资格及阶段预算/许可仍缺，真实X/V/Y、拟合、行情、付费请求为0，因子、资金和线上效果未测量。无本任务运行研究PID/checkpoint；模型费用未知。其他AI暂避本任务适配器及恢复快照同写，共享源码只按具体块协调，不独占整个研究模块。
+
+---
+
 # 当前：目标6人工接入闭合；49项远端依赖核30项，19项待原owner交付
 
 更新时间2026-10-08T00:39+08:00（Asia/Shanghai）；task-id `classic-factor-research`，负责人会话 `01a0e6d5-4bcf-7bd3-82e4-4961c963d20e`，状态 blocked（本轮有界依赖盘点completed；纯远端恢复仍缺材料，真实X/Y另缺原件与阶段授权）。本轮开工读取协调 `57aee5e470582f0a14c97a970d3ed09b9d25b0b2`、规则1.1和相关本/中控记录；只写本方raw证据和进度，没有重叠写代码。较上版新增Luna/low机械盘点、主负责人远端ref及blob指纹独立核数。作者代码保持 `b2f45151128baa1fe387cda85862d71cb01e1206`，人工R1/R2已获非作者29项局部通过；真实效果仍未测量。
