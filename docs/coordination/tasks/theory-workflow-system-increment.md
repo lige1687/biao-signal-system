@@ -2,7 +2,7 @@
 
 - task-id: theory-workflow-system-increment
 - owner: 01a11579-7f2c-7c21-88d1-e5b334b569b7；仅维护本任务记录。
-- status: active（外部项目实际辅助研究试用）
+- status: completed（Alphalens两诊断本地接入与真实试用；远端代码未发布）
 - updated_at: 2026-10-08T00:13:35.518178+08:00
 - checked_coordination_sha: 050cdf179c8feb6c0be68d4eeeedb7a52a0d93be
 - 已读：COORDINATION.md、research-dispatch-controller、classic-factor-research、external-quant-resources；另检索全部任务对拟写路径的声明。
@@ -77,3 +77,8 @@
 已核82dfbda1942f96f3fdc712a2154fd7b8eb82baf6，新增daily范围与本任务无冲突。新报告 docs/experiments/alphalens-ranking-use-2026-10-08.md，SHA ee756b350f555d0b3915b7979889d6202abbd36450f1b4245d8bbe066f875887；两原函数在已有6510分数/1085日实用，CLI1次，主控10单测、标准库独立6510输出格差0，资料不变与原文/入口/33链接/归置通过。前两名新增成员均值4.99%/10.62%，仅日历lag1/5描述；原效果稿待审、无行情/因子计算/拟合/收益复算。源vendor四文件已从原技术分支2ab56501逐字恢复，不改原组件或原研究。
 
 原“未见实际接入”已纠正为本地主工作区缺文件的局限，既有4256行技术试用证据已复用、未重做。RD-Agent有限试跑保留，Qlib新Ridge仍缺原件，CrossSection/pysystemtrade仅方法借用。用户新要求中的可用落地已完成，成果仅本机；已请求中控准确一条registry/INDEX窗口，当前这两文件只读。失败日志、定义/案例适用判断、人工日历映射、运行回执与所有限制在raw/alphalens-ranking-use-2026-10-08/。下一步仅登记读回及释放，无必要新市场实验。
+
+
+## 本轮完成与登记释放
+
+更新时间：2026-10-08T01:31:12.825826+08:00。Alphalens结案补记：中控明确1条窗口后，fetch核98753df888943e37aa17fce35e64e69a63e70276，写前618/写后619，准确1报告1导航，原条目及字节可逆保留、读回通过，scope_released=true且已回调。verification与registration-receipt具备完整证据；10测试、真实CLI1次及独立6510结果格差0，功能/研究描述完成。其他项目未伪报整套接入。旧报告的本地主工作区扫描局限已在新报告纠正。新模块、恢复vendor与方法指引/报告仍本地，远端仅协调元数据。无本题后台任务、必要剩余市场计算或用户待决输入。失败与未持久保存的中间夹具日志说明保留，不把不完整日志补造成原件。
