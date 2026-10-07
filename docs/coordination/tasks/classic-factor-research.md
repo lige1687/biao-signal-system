@@ -1,3 +1,15 @@
+# 当前：人工X→Y流程已从远端Git恢复并通过单节点；真实研究仍缺原件与授权
+
+更新时间 2026-10-08T01:28+08:00（Asia/Shanghai）；task-id `classic-factor-research`，负责人会话 `01a0e6d5-4bcf-7bd3-82e4-4961c963d20e`。状态 blocked（纯Git人工工程单节点阶段completed；真实X/V/Y与因子效果阶段因六份原件、来源时间资格及预算/许可未具备而blocked）。本轮读协调 `82dfbda1942f96f3fdc712a2154fd7b8eb82baf6` 的规则1.1、本记录与中控记录；只写自己隔离恢复raw与本任务协调文件，未与其他任务同写共享源码，记录不是排他锁。
+
+原49依赖清单漏列已跟踪但更新过的CLI入口；先前失败回执保留于恢复分支提交 `3222df857a73a39fc30b7c71f6541152961a94c2`（pytest退出1，旧842字节入口不认新参数）。中控核原冻结SHA并授权准确补交后，单文件快照 `codex/native-workflow-baseline-20261008` @ `dbd86bccf9ffe9ea9617a484bf8b96825880fb7d` 的`scripts/run_factor_lab.py`为4889字节、SHA256 `eb38c3ce70a4331026ab1dc5d8f71eb5f2e1cbffda59ceac4abbaffb15820c52`；原19/19快照SHA不变。本会话只是快照整理人，原作者unknown。
+
+仅从该远端Git blob补CLI并在既有隔离恢复工作树重跑同一节点一次：`PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -m pytest -q tests/integration/test_native_risk_d_mae_workflow.py::test_cli_x_then_one_y_restart_verify_and_repeat_rejection --tb=short`，实际退出0、`1 passed in 3.40s`，Python3.11.7、pytest8.4.2。人工X76、Y75成熟/1未知、33逐组核、独立新进程读回、重复Y拒绝与篡改拒绝按现有测试断言通过。最终成果分支 `codex/native-workflow-pure-git-recovery-20261008` @ `fe6e51e2c9d767ebd718f77b5de020b372e0a7db` 已核远端ref相等；[复验manifest](https://github.com/lige1687/biao-signal-system/blob/fe6e51e2c9d767ebd718f77b5de020b372e0a7db/docs/experiments/raw/native-workflow-integration-2026-10-07/pure-git-recovery-cli50/manifest.json) SHA256 `d837ea5b3afd972e92312bbb4b9c1c9a6481c1a6aaf2d70037d2e97db69d42cc`，原始输出SHA `009704c852a24f718c6210cf0200912bc521db4ade20943927bdee60c2449462`。46项未被实现覆盖的基线与6实现指纹仍正确；首次失败manifest原SHA `3ba9f4231522f51d15c4285bf56a50612b60d7dcc366a903d0dade4ee5718b6f`未改。
+
+另有5项运行时源码与108项实施起点记录不同，已保存[定点静态审计](https://github.com/lige1687/biao-signal-system/blob/fe6e51e2c9d767ebd718f77b5de020b372e0a7db/docs/experiments/raw/native-workflow-integration-2026-10-07/pure-git-recovery-cli50/five-runtime-static-audit.json) SHA256 `bb174e27cac7e72380106bfda4cf739dae7bd8f9c38909c2f793513b4362e597`：3模块加载但相关函数未调用，2模块未导入。这只说明**指定人工节点**在现有Python环境下可从远端Git字节恢复；108项完整环境同字节、新机器依赖自动安装、真实因子和线上效果均未验证。未重跑169/1754旧测试、112旧夹具、市场研究；真实X/V/Y/拟合/行情/付费均0，无本方研究PID/checkpoint，模型费用未知。下一步只有在真实六原件、资料资格和阶段预算/许可由中控核给后，才按冻结定义开始真实X；Y须另获准。其他AI暂避本方人工适配/恢复证据同写，不独占整个研究模块。
+
+---
+
 # 当前：纯Git人工恢复检查发现未列入基线的旧CLI入口；工程恢复仍未通过
 
 更新时间 2026-10-08T01:14+08:00（Asia/Shanghai）；task-id `classic-factor-research`，负责人会话 `01a0e6d5-4bcf-7bd3-82e4-4961c963d20e`。状态 blocked（纯Git工程恢复缺准确CLI入口版本；真实X/V/Y仍另缺资料与授权）。本轮实际读取协调 `64d418d38bcf69f95a4e610b83e862128ddca178` 的规则1.1、本记录与中控记录；隔离恢复文件仅本任务写者，未改共享源码/快照分支，不把记录视作锁。
