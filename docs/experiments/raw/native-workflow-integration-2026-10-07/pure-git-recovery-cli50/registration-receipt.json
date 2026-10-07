@@ -1,0 +1,39 @@
+{
+  "task": "classic-factor-research / native workflow synthetic recovery report registration",
+  "updated_at": "2026-10-08T00:00:00+08:00 (exact minute not recorded; Asia/Shanghai)",
+  "coordination_base_commit": "d84a1e55087d381ab7c0c07201c9391c92f6a70a",
+  "report_path": "docs/experiments/native-workflow-synthetic-recovery-2026-10-08.md",
+  "report_sha256": "990e3ebaf59d8ac13a0bd60929a84715bff46b676839a06e0dcc50d7b4717c6c",
+  "candidate_path": "docs/experiments/raw/native-workflow-integration-2026-10-07/pure-git-recovery-cli50/registry-candidate.json",
+  "candidate_sha256": "efbd3e877a1ace51a9664f16cf4120e0c9e9d1144d572a5772276347ea451493",
+  "registry": {
+    "path": "docs/experiments/registry.json",
+    "before_sha256": "2556dfa1e8d99356dc402b6777d77de85832c760fc568696ff27a5e5a6f0b866",
+    "after_sha256": "06991fd4f24cd71328070de02ae2bc94cef737346259a46e75d4e1bc84667266",
+    "entries_before": 619,
+    "entries_after": 620,
+    "inserted_entry": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": "人工案例验证了研究流程能分阶段保存、重启读回并拒绝重复或篡改；行情资料已找到但本轮没有用于真实计算，六份冻结研究原件仍缺，因此D信号与后续最不利价格变化的真实关系尚未测量，也没有发生买入。",
+      "report_sha256": "990e3ebaf59d8ac13a0bd60929a84715bff46b676839a06e0dcc50d7b4717c6c"
+    },
+    "original_bytes_recoverable": true
+  },
+  "index": {
+    "path": "docs/experiments/INDEX.md",
+    "before_sha256": "3a866c08ac9cf43734fba55c3cfc6235ddda2ed3677602c35e6a41363c65316c",
+    "after_sha256": "1499d032befa4c0c1a0de7ddbc8fd4feac49d3d518712897f610dab371f2f5e7",
+    "inserted_line": "- 2026-10-08：[D—MAE人工流程与Git恢复增量](native-workflow-synthetic-recovery-2026-10-08.md)：人工案例验证流程可分阶段保存和恢复；行情已找到但未用于真实计算，六份冻结研究原件仍缺，因子效果未测。",
+    "original_bytes_recoverable": true
+  },
+  "validation": [
+    "registry JSON parses",
+    "candidate equals inserted entry",
+    "report hash equals candidate hash",
+    "registry count 619 to 620",
+    "index contains exactly one navigation row",
+    "removing exact insertion restores both original byte streams"
+  ],
+  "scope": "One registry entry and one navigation line only; shared root files intentionally not staged or pushed from this worktree."
+}
