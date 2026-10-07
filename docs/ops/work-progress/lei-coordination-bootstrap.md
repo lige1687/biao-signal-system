@@ -62,3 +62,8 @@
   "scope": "explicit declarations only; no lock, authorization, or legacy clearance"
 }
 ```
+
+
+### 安全写通道恢复的实际证据
+
+独立成果分支首次普通push成功，fetch完整SHA为4a1bab7301c30b5e3d716a660ddc4df0617460d3，四个成果文件逐字读回相同。此前“本轮未推”是失败阶段历史，此处替代当前成果推送状态；协调分支仍待再次核验。没有因网络恢复删除旧失败记录，也不称所有AI已采用新规则。下一步协调文件普通推后在线查询与读回。
