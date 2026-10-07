@@ -2,7 +2,7 @@
 
 - task-id: theory-workflow-system-increment
 - owner: 01a11579-7f2c-7c21-88d1-e5b334b569b7；仅维护本任务记录。
-- status: active（新一轮研究准备与经验复用）
+- status: completed（限定本地研究准备与经验复用；远端操作文件未发布）
 - updated_at: 2026-10-08T00:13:35.518178+08:00
 - checked_coordination_sha: 050cdf179c8feb6c0be68d4eeeedb7a52a0d93be
 - 已读：COORDINATION.md、research-dispatch-controller、classic-factor-research、external-quant-resources；另检索全部任务对拟写路径的声明。
@@ -42,3 +42,17 @@
 验收：先写真实反例测试（错误版本、来源缺失、无相关案例、拒绝案例保留、完整定义继承、输出不授予执行）；再最小实现、真实本库只读调用、相关回归；新指引和报告可定位。市场效果不测，不改源策略，两源SHA与确认值一致。
 
 分工：两个Sol/medium仅只读（坑与定义覆盖、五项目适配）；2次官方web请求已消费，其余复用旧固定12源码和封存试跑。下一步按测试先行实现独立辅助，主控验证；不重跑旧因子，不安装第三方、不改仓外内容。
+
+
+## 准备功能验收完成，等待一条报告登记
+
+已核协调 a4c24030e78e8302688825a23b714b9074f47cdc。只读准备模块与金融含义指引完成；14项测试、5次真实CLI（3准备成功/2预期拒绝）、主控独立展开核对、旧指引保留与导航/链接、18受保护文件及两策略源指纹、归置通过。报告 docs/experiments/research-preparation-learning-2026-10-08.md，SHA e1d8098bae2eff7c62084e735b18571e576d726a8f9796846ef77659f7a50611；raw内verification.json和registry-candidate.json。没有行情/拟合/收益回测/第三方安装。五项目各有取舍，完整平台未接入。源代码和报告仍仅本地，协调状态不等于远端采用。
+
+新单条registry/INDEX窗口已向中控请求，尚未写；前两条完成状态保留。主控报告与准备工具均完成，其余工作仅获窗口后原子式精确追加、读回释放与最终归档。指南新增要求是AI准备责任，工具未成为所有runner强制检查。
+
+一次机械操作误在主工作区调用协调分支ff-only整合，立即因不能快进退出且未merge；已在准确协调worktree恢复。失败记录保存在新raw/coordination-check-failure.json，不改主代码历史。
+
+
+## 本轮完成与单条窗口释放
+
+更新时间：2026-10-08T00:47:20.970226+08:00。完成补记：中控批准准确单条窗口后，fetch/readback核44e4057b3dda5b819fc9f47f935eb884d1945204。实际写前617条，现618；仅本报告与一导航，原617逐项保留且准确删除本次插入可逐字还原两文件。写后读回成功，窗口已释放并回调。registration-receipt.json和verification.json含证据；本轮完成限定本地准备工具与五项目采用判断，所有AI普遍使用及减少错误幅度未验证。代码/指南/报告未推，协调元数据已同步；无必需剩余市场计算。机械ff-only错工作区失败无merge，正确worktree恢复，原始失败记录保留。
