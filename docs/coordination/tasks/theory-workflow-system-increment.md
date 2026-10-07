@@ -2,7 +2,7 @@
 
 - task-id: theory-workflow-system-increment
 - owner: 01a11579-7f2c-7c21-88d1-e5b334b569b7；仅维护本任务记录。
-- status: completed（本地操作接入与限定演练）
+- status: active（新一轮研究准备与经验复用）
 - updated_at: 2026-10-08T00:13:35.518178+08:00
 - checked_coordination_sha: 050cdf179c8feb6c0be68d4eeeedb7a52a0d93be
 - 已读：COORDINATION.md、research-dispatch-controller、classic-factor-research、external-quant-resources；另检索全部任务对拟写路径的声明。
@@ -30,3 +30,15 @@
 本轮问题已回答，无必需市场实验或后台任务。操作说明/报告仍仅本地，尚未将完整操作文件分发到远端AI；本协调只同步真实状态和路径，不将元数据当成果发布。需要跨设备采用时先独立发布准确文档增量并核其入口依赖，不重跑旧市场实验。无需返修；只保留该分发限制，不另造更多框架。
 
 机械失败留痕：最终状态第一次生成用错相对路径，在读取指南时失败且未写文件、未生成新commit；改用已经核对的绝对路径恢复。没有改变研究或登记内容。
+
+## 新一轮：金融含义优先、旧坑检索和外部项目取舍
+
+更新时间：2026-10-08T00:30:05.462729+08:00；checked_coordination_sha=dcbee1e174a87b685560dfaeb182e61075eaa761。用户明确要求AI下次研究避开已确认错误，挖掘前先讲清技术信念及精确定义，并评估五外部项目的融入价值。已读本任务、中控和既有定义语义审阅/案例库；全任务拟写路径检索仅本任务旧指引声明命中。
+
+本轮唯一写入：src/lei_signal/research/preparation.py、tests/unit/test_research_preparation.py、docs/research/methods/factor-validation-guide.md 中本任务新增准备段、docs/experiments/research-preparation-learning-2026-10-08.md、其raw/research-preparation-learning-2026-10-08/、本任务原进度。共享registry/INDEX暂只读，已告知中控预计一条串行登记。原scope_released=true指前一轮登记已释放，不授权新写入。
+
+工具是只读准备辅助：复用精确定义解析与既有案例，输出引用/指纹/含义审阅问题，零计算、零自动批准，不创建第二定义表或错误库。未知精确对象拒绝；新挖掘尚无ID则只供定义讨论、不成为可执行合同。主控仍判金融意义和相关性。现有run_factor_lab/workflow/question_contract/definitions及D—MAE共享路径全部不改。
+
+验收：先写真实反例测试（错误版本、来源缺失、无相关案例、拒绝案例保留、完整定义继承、输出不授予执行）；再最小实现、真实本库只读调用、相关回归；新指引和报告可定位。市场效果不测，不改源策略，两源SHA与确认值一致。
+
+分工：两个Sol/medium仅只读（坑与定义覆盖、五项目适配）；2次官方web请求已消费，其余复用旧固定12源码和封存试跑。下一步按测试先行实现独立辅助，主控验证；不重跑旧因子，不安装第三方、不改仓外内容。
