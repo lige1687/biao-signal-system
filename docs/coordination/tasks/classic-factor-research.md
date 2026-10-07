@@ -1,3 +1,13 @@
+# 当前：纯Git人工恢复检查发现未列入基线的旧CLI入口；工程恢复仍未通过
+
+更新时间 2026-10-08T01:14+08:00（Asia/Shanghai）；task-id `classic-factor-research`，负责人会话 `01a0e6d5-4bcf-7bd3-82e4-4961c963d20e`。状态 blocked（纯Git工程恢复缺准确CLI入口版本；真实X/V/Y仍另缺资料与授权）。本轮实际读取协调 `64d418d38bcf69f95a4e610b83e862128ddca178` 的规则1.1、本记录与中控记录；隔离恢复文件仅本任务写者，未改共享源码/快照分支，不把记录视作锁。
+
+已推并由主负责人核远端提交/manifest：`codex/native-workflow-pure-git-recovery-20261008` @ `3222df857a73a39fc30b7c71f6541152961a94c2`，证据[manifest](https://github.com/lige1687/biao-signal-system/blob/3222df857a73a39fc30b7c71f6541152961a94c2/docs/experiments/raw/native-workflow-integration-2026-10-07/pure-git-recovery/manifest.json) SHA256 `3ba9f4231522f51d15c4285bf56a50612b60d7dcc366a903d0dade4ee5718b6f`。只从保存的远端Git来源装配49/49准确基线字节并核6/6实现SHA，均通过；唯一人工恢复测试实际退出1（1 failed in 1.59s）。第一步旧 `scripts/run_factor_lab.py`（842字节，SHA256 `17a7bc63bc97893f24ee72861836d64e65298b18b4d53c67041ef999cc4613d5`）不识别`--review-workflow-contract`，要求旧`--protocol`/`--out`，其内部命令退出2。该入口未列入原49项清单；没有从本机脏树补文件、改代码或重跑以掩盖失败。Python3.11.7、pytest8.4.2；现有环境之外的新机安装未验证。归置器对worktree根`.git`指针文件报1项，未改归置器；原pytest输出尾部空格保留原字节。
+
+下一步限定位：先找该CLI入口在远端有资格的准确原字节/提交及其负责人确认，补进依赖清单并由中控核范围，再在隔离工作树只重验受影响人工节点；不得为通过改CLI语义或从根工作树临时借文件。19项快照仍为 `ec565b87f794541bfa6518a8675dce941390e3e8`，代码适配既有 `b2f45151128baa1fe387cda85862d71cb01e1206`，29项非作者局部复核保留。真实六原件、历史可知资格和阶段预算/许可未交；真实X/V/Y、拟合、行情和付费请求为0，因子、资金、线上效果未测量。无本方运行研究PID/checkpoint，模型费用未知。其他AI仅避开本方人工适配/恢复证据的同写，不独占研究模块。较上一版新增失败回执及具体入口版本缺口，原19快照不变。
+
+---
+
 # 当前：19项基线原字节已独立发布；纯Git恢复最小检查待执行
 
 更新时间 2026-10-08T01:09+08:00（Asia/Shanghai）；task-id `classic-factor-research`，负责人会话 `01a0e6d5-4bcf-7bd3-82e4-4961c963d20e`。状态 active（纯Git人工恢复准备）；真实X/V/Y阶段仍blocked。开工实际读取协调 `47113b400a77f691841981f37ffe8d41becbc325` 的规则1.1、本记录和中控记录。此阶段唯一写者为本任务隔离快照执行者；其他任务共享源码根树不动，未见同一精确快照分支并发写者，记录不构成锁。
