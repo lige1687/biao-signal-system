@@ -78,3 +78,15 @@
 - 准确新写路径: src/lei_signal/portfolio/notifications.py、tests/unit/test_portfolio_notifications.py、docs/ops/system-notifications.md；续写本任务docs/ops/work-progress/daily-trading-system-audit.md、原raw目录的notifications-*证据；本仓data/cache内保存私有通知比较状态与试跑。
 - 验收: 现有已知缺口建立起点不刷屏；新故障/恢复及真实新增变化可见；时间戳刷新、盘中未确认、源离线不能伪造信号或恢复；相同事件不重复；定时工具创建并读回；实际本机只读试跑及合成反例。
 - 权威策略SHA仍为确认值；此改动服务§5执行/复盘的消息送达层，无新金融规则或阈值，不改生产账户、计划、新闻库、OKR或其他源码。基线HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；既有脏字节保留。没有源文件同路径声明；仅本任务新模块及文档。
+
+## 关键通知试运行交付
+
+- checked_coordination_sha: d65cb5ed89ce818eafbb9ccc09200a096f98f04f；checked_at: 2026-10-08T01:19:55.093887+08:00
+- 已读task-id: daily-trading-system-audit、research-dispatch-controller、classic-factor-research、theory-workflow-system-increment；新增协调差异不声明本任务通知文件，无同路径冲突。唯一写者、HEAD和准确文件范围不变。
+- 本批status: completed（通知配置与手动试跑）；首次定时触发/消息送达未验证。新automation-5每日09:10/17:10、automation-6周日20:00均ACTIVE且已读回到本聊天；原已暂停自动化仍暂停。已有日报与研究中控不变。
+- 成果: 新src/lei_signal/portfolio/notifications.py、tests/unit/test_portfolio_notifications.py、docs/ops/system-notifications.md；本任务阶段记录及原raw/notifications-*回执。只比较资料可用性/来源给定质量、原计划条件及成交记录的新变化；有实质变化才提醒，周报用真实成果与使用边界说话。
+- 验收: 初次9项检查有1项成交前值共享可变输入失败，已留notifications-failure-01.json并修复；新9项加原简报13项=22项通过。真实接口建立起点无报警，另一次真实取数0新通知，避免旧29只资料缺口刷屏；归置通过。数据日期变化不判停更，来源失联不造清仓或条件恢复。
+- 周报资料: 实际报告库可读；仅核3份候选正文SHA与登记一致，索引日期窗口计数不代表新研究数量，未假称已完成整周评估。持仓原计划不足，真实条件通知案例未发生。
+- 回执: docs/experiments/raw/daily-trading-system-audit-2026-10-08/notifications-delivery-receipt.json、notifications-tests.log、notifications-weekly-source-check.json；观察和事件原件在本仓私有data/cache，非送达回执。
+- 边界: 0新市场计算/阈值/真实交易/持仓写入/生产库改动/重启/部署/外发/删除/仓外OKR；未接管他人或新增研究派发。代码/文档仍未提交未推成果分支，仅本地，协调同步不是源码发布。
+- 接续: 定时按SOP执行并核真实消息是否交付；最近运行失败可从保留事件恢复，不把观察状态当送达。用户具体条件未确认时保持未知；此配置不是连续盯盘。当前无待跑的本批必要检查。
