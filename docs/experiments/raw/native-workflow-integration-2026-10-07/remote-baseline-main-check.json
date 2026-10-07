@@ -1,0 +1,27 @@
+{
+  "schema_version": "native-workflow-main-coordination-spotcheck/1.0",
+  "time": "2026-10-08T00:40:27.020400+08:00",
+  "prior_verification_path": "docs/experiments/raw/native-workflow-integration-2026-10-07/remote-baseline-verification.json",
+  "prior_verification_sha256": "c242fd23ba8cc767f3432a637039ac5d569921bffda6f5a169071feec4456e5f",
+  "scope": "Only the 19 not found in selected task branch tips; read current main and coordination/lei tips, no history scan.",
+  "checks": [
+    {
+      "branch": "main",
+      "complete_remote_commit": "ed597373e8e10143c66b02a05d94a9f19fdb9c48",
+      "remote_ref_verified": true,
+      "missing_19_paths_present": [],
+      "exact_original_sha256_matches": []
+    },
+    {
+      "branch": "coordination/lei",
+      "complete_remote_commit": "a4c24030e78e8302688825a23b714b9074f47cdc",
+      "remote_ref_verified": true,
+      "missing_19_paths_present": [],
+      "exact_original_sha256_matches": []
+    }
+  ],
+  "conclusion": "Neither current main nor coordination/lei contains any of the 19 exact paths; the previously reported 30/19 count is unchanged.",
+  "real_X": 0,
+  "real_Y": 0,
+  "fits": 0
+}
