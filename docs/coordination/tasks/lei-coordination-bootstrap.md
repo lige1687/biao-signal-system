@@ -1,3 +1,26 @@
+# 当前：统一八目标与四线查重接续
+
+- task-id：lei-coordination-bootstrap
+- 状态：active
+- 更新时间：2026-10-07T22:43:59+08:00
+- 负责人／唯一Git协调入口写者：Codex会话01a10051-4db1-7490-b40f-c13243767fc6；执行调度仍由01a116c7-3700-7062-a6c6-53af00ef60a0负责。
+- 目标：参与者从最新Git能查到八目标、四线范围、依赖和冲突，并留下开工查重SHA；不把文字规则说成控制所有AI的硬拦截。
+- 验收：统一入口可读、原负责人文件不改；小检查验证重复编号／写者／依赖；独立分支精确成果可读；推后fetch完整SHA核对。
+- 规范：现有COORDINATION.md 1.0、2026-10-07用户及中控明确授权；本轮只做协作工程，研究规范和冻结合同不变。
+- 基线：协调24f40fc9131c86aec5ad5bb678743e3ca5868333；成果分支codex/lei-coordination-refresh-20261007，基础34b6435a915b7adeff8f8c04484fb75295e908c1。最近已推本轮成果：暂无。
+- 已完成：fetch并读16个原任务；四个原对话active/inProgress已通过App快照核实，源中控阶段记录已读。AGENTS/CLAUDE和原生研究入口未见coordination硬检查；旧独立成果分支AGENTS有协作文字入口。
+- 正在做：新增docs/coordination/tasks/research-dispatch-controller.md（受权中控摘要唯一Git写者），COORDINATION.md增加检查SHA与小工具使用边界；独立成果分支修改AGENTS.md、scripts/sync/check_coordination.py、tests/unit/test_coordination_check.py及自身阶段证据。
+- 下一步：开工登记推后读回；实现只读检查、负例与在线核验；发布独立成果；同步最终索引。
+- 重叠：所有其他任务文件只读。上述协调文件本会话唯一写；不修改共享研究代码、登记簿、数据或根脏AGENTS。需采用规则的其他AI只合入本分支增量，不能覆盖其既有规范。
+- 阻塞：本轮无；各研究资料／预算阻塞仅在中控摘要据来源记录，不替别人解除。
+- 检查：remote和fetch通过；版本树无.github/workflows，core.hooksPath未配置；完整推后与工具检查待运行。未检查仓库外发布集成，不调用部署。
+- 数据／预算：不传价格、数据、模型或ZIP；0市场实验、0拟合。源中控记录仅本地，远端不可复现，摘要将标证据等级。
+- 封存／禁止重跑：10月3日初始化已完成；不重跑PPO/P26、ETF负结果或旧403排查。
+- 恢复：fetch远端规则及本记录，再核独立分支实际SHA后继续未验收项；网络失败停止可能冲突的修改。
+- 较上一版新增：本轮中控授权归属已明确，八目标／四线同步和小检查范围登记；旧初始化历史保留下方。
+
+---
+
 # LEI 协调机制初始化
 
 - task-id：lei-coordination-bootstrap
