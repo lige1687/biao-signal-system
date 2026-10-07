@@ -5,7 +5,7 @@
 ## 可复核的输入与协调基线
 
 - 本轮读到 `coordination/lei` 完整 commit `eb61b3a20737da3c561260434886016b34c57f8f`，规则 `COORDINATION.md` v1.1，并读 `research-dispatch-controller`、`classic-factor-research` 的任务记录。协调检查器 SHA `1426314a0b76a1758f5c5a9a9aa71ed9ff4ce801504b38b74b0e8828581f355e`。在线检查两次：使用旧稳定任务名 `classic-factor-research` 时退出 2（旧记录无机器声明）；使用新范围名 `native-workflow-integration` 时退出 2（下列共享源码路径尚未登记）。`online_verified=true` **不等于准入**，`work_clearance=false`。因此本轮不写共享源码。
-- 技术线合成纯函数 `docs/experiments/raw/native-risk-d-mae-2026-10-07/study.py` SHA `84f4fee2a538a918352bca099ec9c9b4a38f6d6a19dab5faa564b668c0bd8745`；交付 `MANIFEST.json`、`REPORT.md`、`synthetic-receipt.json`、`MISSING-INPUTS.json`。其五组合成检查是交付者证据，**独立审查尚未读到通过回执**。原设计合同 `immutable-handoff/PROPOSED-CONTRACT.json` SHA `ace132ddb89de3e45951148d9673524fa9fe448f662f2576221d216bbe9717c6`，明确 `native_workflow_contract=false`，真实 X/Y 预算均为零。
+- 技术线合成纯函数 `docs/experiments/raw/native-risk-d-mae-2026-10-07/study.py` SHA `84f4fee2a538a918352bca099ec9c9b4a38f6d6a19dab5faa564b668c0bd8745`；交付 `MANIFEST.json`、`REPORT.md`、`synthetic-receipt.json`、`MISSING-INPUTS.json`。独立人工审查 `docs/experiments/raw/research-dispatch-controller-2026-10-07/independent-review/d-mae-synthetic/REVIEW.md` 已给**合成纯运算限定通过**，但审查报告仍仅本机、未推送，不证明真实资料绑定或完整原生入口可用。原设计合同 `immutable-handoff/PROPOSED-CONTRACT.json` SHA `ace132ddb89de3e45951148d9673524fa9fe448f662f2576221d216bbe9717c6`，明确 `native_workflow_contract=false`，真实 X/Y 预算均为零。
 - 当前实际源码 SHA：`scripts/run_factor_lab.py` `eb38c3ce70a4331026ab1dc5d8f71eb5f2e1cbffda59ceac4abbaffb15820c52`；`question_contract.py` `ed4a44fbb3fbf6c7b986bd2fb9261f98f15cf33b604f04b84e7ceb4e2fffcb97`；`workflow.py` `967d92adc77a18c42f16fda27c80eb5a136eadd72e4918515302003216a43cb6`；`workflow_inputs.py` `43a0683c13132fa34c73d4ce618d37746b5a8aa8da89e2967d132f59bee777ad`；`workflow_evaluation.py` `508459ca3964a55e1688fef345d6e667acba68141f8be8f04f1ea1c5f0018c1c`。这些是共享脏工作区**实际字节**，不是 HEAD 中的版本。
 
 ## 唯一入口与必须保留的调用链
@@ -21,7 +21,7 @@
 
 ## 待远端登记的准确写入清单
 
-本负责人（流程线）拟成为下列**共享入口适配**唯一写者；技术线仍是原 `study.py` 和同题合成/来源材料唯一写者。实际动手前先由协调负责人在同一 `native-workflow-integration` 记录登记并推送，在线复核无冲突，且技术独审通过、中控回复“可继续”。本清单是待确认范围，不是目录排他权。
+本负责人（流程线）拟成为下列**共享入口适配**唯一写者；技术线仍是原 `study.py` 和同题合成/来源材料唯一写者。实际动手前先由协调负责人在同一 `native-workflow-integration` 记录登记并推送，在线复核无冲突，再核中控对限定独审的接续意见。本清单是待确认范围，不是目录排他权。
 
 | 路径 | 精确改动目的 | 是否必要 |
 |---|---|---|
@@ -38,7 +38,7 @@
 
 ## 最小验收与停止条件
 
-- 先通过最新远端范围登记、技术线独审与中控接续确认。核原六份缺件的**准确 SHA 和成员身份**；原件仍缺时仅合成端到端，不运行真实 X/Y，不填造 76 个案例的字段。已定位原行情 ZIP 不等于原 D/案例/绑定文件齐全。
+- 先通过最新远端范围登记、中控对合成限定独审的接续确认。核原六份缺件的**准确 SHA 和成员身份**；原件仍缺时仅合成端到端，不运行真实 X/Y，不填造 76 个案例的字段。已定位原行情 ZIP 不等于原 D/案例/绑定文件齐全。
 - 合成阶段以项目隔离根目录验证 CLI 实际产生 X-only 回执，X 阶段没有任何 Y 值或统计；模拟 Y 的 75 条必须全路径预检、1 条按原截断未知，坏路径全批拒绝；复核报告、回执和研究族账本。独立人工复核在 `docs/experiments/raw/research-dispatch-controller-2026-10-07/independent-review/d-mae-synthetic/verification.json` 已记录 1,754 项断言通过、0 失败，同时指出纯函数接受 `action_known=null/0/"false"` 且极端正有限输入可能使 V 溢出为无穷大。**正式输入适配必须拒绝非布尔行动状态，重新核对 V 结果有限性，并逐项测试**；纯函数通过不表示原件资格通过。现有已通过的 45/10 项只在改动影响后做必要回归；旧冻结协议 8 项源码指纹失败保留，不改原锁或成绩凑绿。
 - 真实 X 只在中控单独授权并绑定六份原件及最终源码/合同 SHA 后执行；真实 Y 还需**另一次**许可与封存回执。一次 Y 最多 75 案例，0 拟合、0 搜参、0 新窗口、0 自动重试；不把排序相关差称条件增量或线上收益。
 - 若范围远端未登记、独审未通过、原件/权限不足、严格路径任一失败，相关阶段标 blocked，保留错误证据；不缩样本、不重算旧结果、不启动付费/生产/交易。

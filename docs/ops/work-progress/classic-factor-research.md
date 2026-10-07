@@ -1,3 +1,9 @@
+## 2026-10-07T23:40+08:00 合成独审限定通过，真实接入仍停写
+
+读取独立审查 `docs/experiments/raw/research-dispatch-controller-2026-10-07/independent-review/d-mae-synthetic/REVIEW.md`：1754项人工断言通过、0失败，结论限已绑定人工输入的纯计算。六份原案例/特征原件、84事件成员绑定、原生入口仍未完成；`action_known`非布尔编码和 V 数值溢出的两个边界已纳入本方接口清单与设计映射的验收条件。审查报告目前仅本机，不能冒称远端已交。共享源码登记在线仍退出2，本方0共享源码改动、0真实X/Y；仅在自有分支更新设计材料并核远端，不把此限定通过解释成真实执行许可。下一步仍待协调分支对准确文件范围登记、读回与中控接续意见，然后合成原生端到端实现；真实阶段另待六原件及分阶段批准。
+
+---
+
 ## 2026-10-07T23:36+08:00 D—MAE 原生接口定位与共享停写
 
 中控目标6的下一有界阶段已把准确调用链、拟写文件、合成验收和真实 X/Y 分段停止条件写入 `docs/experiments/raw/native-workflow-integration-2026-10-07/next-stage-interface-map.md`。独立成果分支 `codex/native-workflow-integration-20261007` 已推并核远端 commit `3e1bcfe0340cb1f4aea95611f7f20820e996e7f0`；新图谱本地/提交字节 SHA256 同为 `709054b96857d9aaf0a1d5bab410b2b39c7175227e78ee60dca1284fe8f073f2`。本轮在线协调规则读至 `eb61b3a20737da3c561260434886016b34c57f8f`；登记检查 `native-workflow-integration` 退出2，准确原因是共享源码路径尚未在远端声明。已把文件清单发给中控协调者；未获远端登记与独立合成审查回执前不改共享研究代码。技术纯函数 SHA 已核 `84f4fee2a538a918352bca099ec9c9b4a38f6d6a19dab5faa564b668c0bd8745`；原六份 D/案例/绑定原件仍缺，真实 X=0、Y=0、拟合=0，效果未测量。`python3 scripts/check_repo_hygiene.py` 退出0；此阶段未重跑已有45/10合成检查和旧研究。无本方后台实验/checkpoint；模型token费用未知。接续先读最新协调并确认专人已把所列共享写路径推送读回，再核技术独审；合成原生端到端可在此前提下进行，真实阶段仍需各自许可与原件。
