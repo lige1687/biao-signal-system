@@ -49,3 +49,16 @@
 权威收据：execution-history-followup/controller-integration-receipt.json、controller-browser-result.json、upgrades-delivery-receipt.json及archive-verification.json。精确源码/报告SHA见该目录evidence-manifest.json。初始失败、修正依据和最初合同保留；修复累计3批。新金融拟合/账户回测/部署/重启/真实账户迁移/回填/删除0。原运行13815进程不动；仅结束本任务演练端口。
 
 代码提交/推送无；所有源码和产物本地，不因协调同步说远端能复现。当前本任务无未等待必要验收队列。剩余真实服务接入、用户操作验收、每周来源缺件由原目标承接；作者完整目录95件仍需可定位新资料。
+
+
+## 2026-10-08：用户新增第1／3项诊断，第2项仅To do（active）
+
+用户明确“可以的，13可以做…2其他模型可能正在做了，你可以列个todo”，随后“继续”。本轮不再做视频提取或上阶段工程。最终用途：判断既有ETF历史方法扣费、成交口径、少数盈利依赖及连续亏损／恢复等待，是否足以支持继续研究；属于§5.4复盘与历史诊断，不改变道路、触发、退出、资金规则或生产。
+
+已检查协调 d1386c354c43b6c66ce335e4a62edb0b27898da3，Asia/Shanghai 2026-10-08；实际读取本任务、research-dispatch-controller、theory-workflow-system-increment、daily-trading-system-audit、technical-factor-sequence及COORDINATION1.1。技术线当前做真实资料缺口／人工例子流程，理论线做验证约束，日常交易报告不接管；资金与退出原负责人保留。第2项只在K-risk-attribution原条目追加note，原版本再读，不改owner/status/authorization/milestones/next_action。
+
+本轮唯一主控写者：docs/experiments/douyin-vike-trade-diagnostics-2026-10-08.md、该同名raw目录、docs/ops/work-progress/douyin-vike-increment.md及registry/INDEX本条（共享窗口交付前再次查）；源码和旧raw只读。独立资料资格助手只写新raw/source-qualification，模型gpt-6-sol medium，新独立合同，不替换旧失败助手。允许核旧文件指纹、费用对照与既有集中／连亏结果，至多一个新保存路径描述计算批及3个必要纠错／独立复核；0重新拟合／重新生成策略账户／交易／安装／部署／删除。
+
+基线HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，分支codex/factor-unit-research-20260915，已有dirty保留。旧R1仅诊断代理，有历史语义修复依赖待核；2015—2026两ETF现金完整路径仅条件历史。新金融效果未验，不把旧胜绩当现行体系。
+
+必需验收：源锁与报告数对齐，基准同期间／本金／公司行动／费用；按费用分别陈列而不重新回测；卖出亏损和期末未卖持仓分开；回撤恢复标明自然日且未恢复保持未知；盈利集中复用不重做；新结果能定位原文件；第2项note读回且保护字段不变；归档登记与hygiene。阶段仅本地准备，push读回后才派发；代码和产物无提交，远端不可复现。
