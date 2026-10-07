@@ -1,6 +1,6 @@
 # LEI 多 AI 协作与进度同步
 
-版本：1.0；生效：2026-10-03；授权：用户本轮统一协作要求。
+版本：1.1（本地待推，远端仍1.0）；更新：2026-10-07；生效源：2026-10-03；授权：用户本轮统一协作要求。
 仓库：https://github.com/lige1687/biao-signal-system
 唯一跨任务当前状态入口：`coordination/lei` 分支的 `docs/coordination/tasks/<task-id>.md`。
 本规则不覆盖更高优先级指令，不扩大研究、数据、执行或发布权限。
@@ -40,3 +40,21 @@
 ## LEI 研究边界
 
 沿用工作分支适用 AGENTS.md、docs/research/current-standards.json、定义登记、原始策略和已接受结论；旧冻结实验保留其原版本。不另造研究标准。先明确用途、基线、公式、单位、可用时点和输入资格，检查重复信息、未来资料混入与样本支持；冻结后评价。保留负结果、选择历史、预算与停止条件，不把封存实验改名重跑。分别报告因子指标、具体决策和资金效果；功能测试通过不代表因子有效，离线改善不代表线上收益。同步不授权重训、新市场实验或正式策略变更。
+
+## 开工查重的执行入口与证据（1.1增量）
+
+每轮实质开始、范围变化、交付前，获取最新远端coordination/lei，读本规则、相关负责人记录和本轮[中控摘要](docs/coordination/tasks/research-dispatch-controller.md)。在自己的任务或受权中控快照记录完整checked_coordination_sha、含时区时间、实际读取task-id、重叠决定、唯一写者和检查回执。该SHA是实际读到的基线，不要求等于包含记录自身的提交；推后完整SHA另核。未做写未验证。网络失败禁止继续可能冲突的共享修改，保留本地与待推提交；独立只读和自己隔离的新文件准备可继续，不算已登记开工。
+
+根AGENTS.md的新协作说明及CLAUDE.md的@AGENTS加载路径只在采用了成果分支增量的客户端生效。当前主工作区尚未采用本轮增量；是否所有客户端读取过未验证。原生run_factor_lab.py的研究合同／预算／锁检查不是Git跨AI查重，本轮不插入其执行链、不安装hook或CI。
+
+成果分支codex/lei-coordination-refresh-20261007的scripts/sync/check_coordination.py是手动调用的只读小检查。在线默认先fetch唯一协调分支，读取规则与任务文件，输出完整checked_coordination_sha和时间。检查显式lei-coordination-json区块中的稳定编号、重复编号、写入路径重叠、登记者身份、未知／循环依赖和请求范围；不控制所有AI，不获得锁，不评价科学上的重复信息。旧Markdown记录均列入legacy_records_require_human_review，不改、不自动清空。退出0只代表已声明项无格式／冲突错误，work_clearance始终false，仍须读取旧记录、核负责人和原权限。离线--local-tasks-dir只用于草稿／测试，online_verified=false，不能作为开工通过证据。
+
+工具取得并审阅成果提交后，从自己的工作区运行，例如：
+
+```bash
+python3 <已审阅的工具路径>/scripts/sync/check_coordination.py --repo <自己的仓库工作区> --task-id native-risk-d-mae --owner 01a0e703-4c27-74e2-bf77-997e1879f967 --write-path docs/experiments/raw/native-risk-d-mae-2026-10-07/result.json
+```
+
+工具输出的SHA记录到自己的状态后还须推送读回。它没有强制挡住任意编辑器、API或代理；对旧记录、同题研究和未声明文件仍靠负责人核对。结构区块与同一任务正文同文件维护，不另建第二实时登记表。共享研究入口实际文件尚未列出时只读，角色归属不是整个目录的空白排他权。completed／记录旧不会自动释放已声明路径，scope_released=true必须由负责人明确确认；任何科学或权限决定以原协议和用户授权为准。
+
+本轮受权Git摘要由协调会话01a10051-4db1-7490-b40f-c13243767fc6写，实际研究调度由01a116c7-3700-7062-a6c6-53af00ef60a0承担。总摘要是有生成时间的核实快照，原负责人各任务记录与研究账本仍权威；Git目标摘要不表示仓外OKR数据库同步。

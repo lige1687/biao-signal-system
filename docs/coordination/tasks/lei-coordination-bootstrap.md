@@ -1,14 +1,14 @@
 # 当前：统一八目标与四线查重接续
 
 - task-id：lei-coordination-bootstrap
-- 状态：active
+- 状态：blocked（仅远端同步；本地验证准备已推进）
 - 更新时间：2026-10-07T22:43:59+08:00
 - 负责人／唯一Git协调入口写者：Codex会话01a10051-4db1-7490-b40f-c13243767fc6；执行调度仍由01a116c7-3700-7062-a6c6-53af00ef60a0负责。
 - 目标：参与者从最新Git能查到八目标、四线范围、依赖和冲突，并留下开工查重SHA；不把文字规则说成控制所有AI的硬拦截。
 - 验收：统一入口可读、原负责人文件不改；小检查验证重复编号／写者／依赖；独立分支精确成果可读；推后fetch完整SHA核对。
 - 规范：现有COORDINATION.md 1.0、2026-10-07用户及中控明确授权；本轮只做协作工程，研究规范和冻结合同不变。
 - 基线：协调24f40fc9131c86aec5ad5bb678743e3ca5868333；成果分支codex/lei-coordination-refresh-20261007，基础34b6435a915b7adeff8f8c04484fb75295e908c1。最近已推本轮成果：暂无。
-- 已完成：fetch并读16个原任务；四个原对话active/inProgress已通过App快照核实，源中控阶段记录已读。AGENTS/CLAUDE和原生研究入口未见coordination硬检查；旧独立成果分支AGENTS有协作文字入口。
+- 已完成：fetch列出16个原任务并检索相关范围；四个原对话active/inProgress已通过App快照核实，源中控阶段记录已读。AGENTS/CLAUDE和原生研究入口未见coordination硬检查；旧独立成果分支AGENTS有协作文字入口。
 - 正在做：新增docs/coordination/tasks/research-dispatch-controller.md（受权中控摘要唯一Git写者），COORDINATION.md增加检查SHA与小工具使用边界；独立成果分支修改AGENTS.md、scripts/sync/check_coordination.py、tests/unit/test_coordination_check.py及自身阶段证据。
 - 下一步：开工登记推后读回；实现只读检查、负例与在线核验；发布独立成果；同步最终索引。
 - 重叠：所有其他任务文件只读。上述协调文件本会话唯一写；不修改共享研究代码、登记簿、数据或根脏AGENTS。需采用规则的其他AI只合入本分支增量，不能覆盖其既有规范。
@@ -60,3 +60,35 @@ fetch origin coordination/lei，读本文件和 COORDINATION.md；核对成果�
 阶段更新：远端首次登记已 fetch 读回。目录检查失败 3 项：.git 文件、COORDINATION.md、docs/coordination 不在旧白名单；下一步只补白名单并验证，不改变交易代码。较上一版增加这项必要兼容范围。
 
 最终阶段新增：项目协作说明、三项目录兼容配置与阶段证据已推工作分支，完整成果 commit 见上。首次目录失败记录保留；没有本轮待推成果。共享源工作区的未提交文件和 14 个本地提交仍未上传，不属于本轮成果。此状态更新推后须再次核验远端。
+
+## 本轮失败与本地准备阶段
+
+更新时间：2026-10-07T23:16:08+08:00。已读最新协调完整SHA ccc290e9b1c13286252c77ff281fbada8c1206c1，相关原负责人记录均保留。四次SSH服务器错误及HTTPS缺现有凭据见中控摘要；远端未含待推提交，不声称已同步。独立成果分支本地只读小检查已实现，8项独立负例／范围测试通过，目录检查通过；尚未接入任何生产入口、hook或客户端强制流程。规则1.1仅本地；在线最新远端未有本轮结构声明，不能判定新范围已登记。下一步先恢复安全写通道，fetch／整合／推送／读回，再据本轮规则继续后续同步。
+
+```lei-coordination-json
+{
+  "schema_version": 1,
+  "record_id": "lei-coordination-bootstrap",
+  "checked_coordination_sha": "ccc290e9b1c13286252c77ff281fbada8c1206c1",
+  "checked_at": "2026-10-07T23:16:08+08:00",
+  "assignments": [
+    {
+      "task_id": "lei-coordination-bootstrap",
+      "owner": "01a10051-4db1-7490-b40f-c13243767fc6",
+      "status": "blocked",
+      "write_paths": [
+        "COORDINATION.md",
+        "docs/coordination/tasks/lei-coordination-bootstrap.md",
+        "docs/coordination/tasks/research-dispatch-controller.md",
+        "AGENTS.md",
+        "scripts/sync/check_coordination.py",
+        "tests/unit/test_coordination_check.py",
+        "docs/ops/work-progress/lei-coordination-bootstrap.md"
+      ],
+      "depends_on": []
+    }
+  ]
+}
+```
+
+2026-10-07T23:18:13+08:00：本地工具成果完整commit 4a1bab7301c30b5e3d716a660ddc4df0617460d3，未推。已完成8项测试和目录检查；实际在线查询证明远端未登记即退出2，不使用本地声明凑通过。两份已交研究报告仅定位与SHA，实质验收仍由中控。最终协调文件必须另提交并核远端，不能以c02c39bb冒充当前全部工作。
