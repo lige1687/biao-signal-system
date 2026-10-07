@@ -2,7 +2,7 @@
 
 - task-id: theory-workflow-system-increment
 - owner: 01a11579-7f2c-7c21-88d1-e5b334b569b7；仅维护本任务记录。
-- status: completed（限定本地研究准备与经验复用；远端操作文件未发布）
+- status: active（外部项目实际辅助研究试用）
 - updated_at: 2026-10-08T00:13:35.518178+08:00
 - checked_coordination_sha: 050cdf179c8feb6c0be68d4eeeedb7a52a0d93be
 - 已读：COORDINATION.md、research-dispatch-controller、classic-factor-research、external-quant-resources；另检索全部任务对拟写路径的声明。
@@ -56,3 +56,14 @@
 ## 本轮完成与单条窗口释放
 
 更新时间：2026-10-08T00:47:20.970226+08:00。完成补记：中控批准准确单条窗口后，fetch/readback核44e4057b3dda5b819fc9f47f935eb884d1945204。实际写前617条，现618；仅本报告与一导航，原617逐项保留且准确删除本次插入可逐字还原两文件。写后读回成功，窗口已释放并回调。registration-receipt.json和verification.json含证据；本轮完成限定本地准备工具与五项目采用判断，所有AI普遍使用及减少错误幅度未验证。代码/指南/报告未推，协调元数据已同步；无必需剩余市场计算。机械ff-only错工作区失败无merge，正确worktree恢复，原始失败记录保留。
+
+
+## 新一轮：Alphalens排名诊断的真实研究试用
+
+用户明确“去落地一下，看看效果……这些项目有没有真实的用到系统里边，去辅助我们的研究”。本轮checked_coordination_sha=59457a8785f150a47edc1e3cab869a51ec2ecfef，已读规则、中控、external-quant-resources、classic-factor-research与technical-factor-sequence。发现技术原分支2ab565017a7a4959af744430339e32a09ce12667已经接入Alphalens三原函数并在4256行上验证；主工作区缺这些文件，不再把本机搜索无结果写成全系统从未使用。该原实验与三函数不重做。
+
+唯一写者本任务。新增范围：src/lei_signal/research/ranking_diagnostics.py、src/lei_signal/research/vendor/alphalens_ranking/（两未覆盖原函数体与Apache许可/来源）、tests/unit/test_ranking_diagnostics.py、docs/research/methods/factor-validation-guide.md本任务诊断段、docs/experiments/alphalens-ranking-use-2026-10-08.md、其raw/alphalens-ranking-use-2026-10-08/、原工作进度与本协调。不改原alphalens_component.py或其vendor目录、D—MAE/shared workflow、定义、旧市场输出。registry/INDEX只读，报告完成后再向中控申请准确1条窗口。
+
+有界问题：直接调用固定Alphalens两函数，补充已有分数的前后排名稳定性与高/低组成员更换；辅助判断排名持续性和潜在名单变更负担，不测盈利。拟用已保存六ETF日动量6510行/1085日期（原研究报告仍待审，输入只能支持本轮描述）；先核金融定义、保存指纹、完整固定池与日期，不读取未来收益列。新独立合成例和真实保存分数对照上游与手算/独立公式，输出可读报告并接入AI指引。未知历史可得性不升级，零新因子拟合/收益重算/行情/账户。
+
+两只读Sol/medium已交接输入和项目使用盘点；接下来实现者只写上述新模块/测试，主控核关键设计和独立数值。现有本机约3.66GB可用；不安装整包、不写仓外。完整源来源沿旧固定commit，恢复必要许可；无收费请求。验收需真实调用与独立核对、可发现入口、原始资料不变、报告归档；工具数量不当收益证据。
