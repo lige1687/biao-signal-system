@@ -67,3 +67,89 @@
 ### 安全写通道恢复的实际证据
 
 独立成果分支首次普通push成功，fetch完整SHA为4a1bab7301c30b5e3d716a660ddc4df0617460d3，四个成果文件逐字读回相同。此前“本轮未推”是失败阶段历史，此处替代当前成果推送状态；协调分支仍待再次核验。没有因网络恢复删除旧失败记录，也不称所有AI已采用新规则。下一步协调文件普通推后在线查询与读回。
+
+
+### 协调分支恢复与实际在线查询
+
+规则／两份任务记录已普通推到coordination/lei，fetch逐字读回及其他负责人文件逐字不变通过，提交dbb9603223e9708d3afac63da09d8fe04da4597d。登记路径查询退出0；请求未登记共享scripts/run_factor_lab.py退出2。均从最新远端读取，legacy人工检查15份，work_clearance仍false，不授开工权限。此前SSH失败保留历史，当前网络阻塞已解除。
+
+```json
+{
+  "registered": {
+    "checked_at": "2026-10-07T23:20:36+08:00",
+    "online_verified": true,
+    "work_clearance": false,
+    "checked_coordination_sha": "dbb9603223e9708d3afac63da09d8fe04da4597d",
+    "rules_present": true,
+    "mode": "online_declarations_only",
+    "declared_checks_passed": true,
+    "errors": [],
+    "legacy_records_require_human_review": [
+      "docs/coordination/tasks/classic-factor-research.md",
+      "docs/coordination/tasks/dot-formula-time-validation.md",
+      "docs/coordination/tasks/dot-pro-increment-review.md",
+      "docs/coordination/tasks/dot-pro-source-qualification.md",
+      "docs/coordination/tasks/dot-pro-strategy-definition.md",
+      "docs/coordination/tasks/dot-trade-state-accounting.md",
+      "docs/coordination/tasks/douyin-vike-increment.md",
+      "docs/coordination/tasks/external-quant-resources.md",
+      "docs/coordination/tasks/investor-observation-map.md",
+      "docs/coordination/tasks/lei-technical-reader-research.md",
+      "docs/coordination/tasks/market-observation.md",
+      "docs/coordination/tasks/remote-core-review.md",
+      "docs/coordination/tasks/risk-shape-information.md",
+      "docs/coordination/tasks/sentiment-factor-research.md",
+      "docs/coordination/tasks/technical-factor-sequence.md"
+    ],
+    "declared_task_ids": [
+      "d-mae-independent-review",
+      "factor-fusion-risk-exit",
+      "lei-coordination-bootstrap",
+      "native-risk-d-mae",
+      "native-workflow-integration",
+      "research-evidence-catalog",
+      "stock-data-qualification"
+    ],
+    "scope": "explicit declarations only; no lock, authorization, or legacy clearance"
+  },
+  "unregistered_shared_path": {
+    "checked_at": "2026-10-07T23:20:42+08:00",
+    "online_verified": true,
+    "work_clearance": false,
+    "checked_coordination_sha": "dbb9603223e9708d3afac63da09d8fe04da4597d",
+    "rules_present": true,
+    "mode": "online_declarations_only",
+    "declared_checks_passed": false,
+    "errors": [
+      "native-risk-d-mae: write not registered: scripts/run_factor_lab.py"
+    ],
+    "legacy_records_require_human_review": [
+      "docs/coordination/tasks/classic-factor-research.md",
+      "docs/coordination/tasks/dot-formula-time-validation.md",
+      "docs/coordination/tasks/dot-pro-increment-review.md",
+      "docs/coordination/tasks/dot-pro-source-qualification.md",
+      "docs/coordination/tasks/dot-pro-strategy-definition.md",
+      "docs/coordination/tasks/dot-trade-state-accounting.md",
+      "docs/coordination/tasks/douyin-vike-increment.md",
+      "docs/coordination/tasks/external-quant-resources.md",
+      "docs/coordination/tasks/investor-observation-map.md",
+      "docs/coordination/tasks/lei-technical-reader-research.md",
+      "docs/coordination/tasks/market-observation.md",
+      "docs/coordination/tasks/remote-core-review.md",
+      "docs/coordination/tasks/risk-shape-information.md",
+      "docs/coordination/tasks/sentiment-factor-research.md",
+      "docs/coordination/tasks/technical-factor-sequence.md"
+    ],
+    "declared_task_ids": [
+      "d-mae-independent-review",
+      "factor-fusion-risk-exit",
+      "lei-coordination-bootstrap",
+      "native-risk-d-mae",
+      "native-workflow-integration",
+      "research-evidence-catalog",
+      "stock-data-qualification"
+    ],
+    "scope": "explicit declarations only; no lock, authorization, or legacy clearance"
+  }
+}
+```
