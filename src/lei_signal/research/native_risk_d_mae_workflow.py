@@ -143,6 +143,7 @@ def prepare_x(payload):
         _fail("exactly 76 cases required")
     ids, keys, aliases, groups, rows = set(), set(), set(), set(), []
     counts = Counter()
+    member_occurrences = 0
     for case in cases:
         if not isinstance(case, dict):
             _fail("case is not an object")
@@ -157,9 +158,12 @@ def prepare_x(payload):
             _fail("duplicate case or asset-date")
         ids.add(cid); keys.add((asset, day)); groups.add((asset, lifecycle)); counts[asset] += 1
         members = case.get("event_ids")
-        if not isinstance(members, list) or not members or any(not isinstance(v, str) or not v or v in aliases for v in members):
+        if not isinstance(members, list) or not members or any(not isinstance(v, str) or not v for v in members):
+            _fail("missing/invalid event membership")
+        if len(members) != len(set(members)) or any(v in aliases for v in members):
             _fail("missing/duplicate event membership")
         aliases.update(members)
+        member_occurrences += len(members)
         A, C, atr, D = (case.get(k) for k in ("A", "C", "ATR20_SMA", "D"))
         if not _positive(A) or not _positive(C) or not _positive(atr) or not _finite(D):
             _fail("case A/C/ATR/D invalid")
@@ -170,7 +174,7 @@ def prepare_x(payload):
         rows.append({"case_id": cid, "asset": asset, "signal_date": day,
                      "lifecycle": lifecycle, "event_ids": list(members),
                      "D": D, "V": V, "A": A, "C": C, "ATR20_SMA": atr})
-    if tuple(counts[a] for a in ASSETS) != COUNTS or len(aliases) != 84 or len(groups) != 33:
+    if tuple(counts[a] for a in ASSETS) != COUNTS or member_occurrences != 84 or len(aliases) != 84 or len(groups) != 33:
         _fail("frozen 76/84/33 population structure differs")
     return sorted(rows, key=lambda row: row["case_id"])
 
@@ -518,8 +522,10 @@ def execute_workflow(contract_path, output_dir, root, *, register_report=False, 
             workflow.write_json(out / "contract.json", contract)
             workflow.write_json(out / "preflight.json", proof)
             result = _expected_result(contract, proof)
-            if time.monotonic() - started_at >= contract["budget"]["execution_seconds"]:
-                raise workflow.WorkflowPaused("native stage time budget interrupted")
+            # A checkpoint before result publication charges prior stages plus
+            # this stage's calculation time. This is not an OS hard deadline.
+            if spent + time.monotonic() - started_at >= contract["budget"]["execution_seconds"]:
+                raise workflow.WorkflowPaused("native family time budget exhausted before result publication")
             workflow.write_json(out / "result.json", result)
             (out / "report.md").write_text(render_report(contract, result), encoding="utf-8")
             receipt = {"schema_version": "workflow-receipt/1.0", "entry": "scripts/run_factor_lab.py --workflow-contract",

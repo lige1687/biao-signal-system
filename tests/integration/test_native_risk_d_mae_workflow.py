@@ -9,10 +9,12 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
 
 from lei_signal.research import native_risk_d_mae_workflow as native
+from lei_signal.research import workflow
 from tests.unit.test_native_risk_d_mae_workflow import artificial_inputs
 
 REPO = Path(__file__).resolve().parents[2]
@@ -169,3 +171,42 @@ def test_permission_encodings_must_be_exact(field, bad):
     contract["permissions"][field] = bad
     with pytest.raises(ValueError, match="permissions must remain zero"):
         native.validate_contract(contract)
+
+
+@pytest.mark.parametrize("elapsed,should_complete", [(0.9, False), (0.5, True)])
+def test_two_stage_family_budget_uses_prior_spend(tmp_path, elapsed, should_complete):
+    root = _isolated_root(tmp_path)
+    x, y = artificial_inputs()
+    x_sha = _write_json(root / "inputs/x.json", x)
+    y_sha = _write_json(root / "inputs/y.json", y)
+    family = f"native-d-mae20-synthetic-budget-{elapsed}"
+    draft_x = _contract("x", x_sha, family)
+    draft_x["budget"]["execution_seconds"] = 1.5
+    _write_json(root / "inputs/draft-x.json", draft_x)
+    native.freeze_workflow(root / "inputs/draft-x.json", root / "runs/frozen-x", root)
+    # Deterministic checkpoint values; no wall-clock sleep or market computation.
+    with patch.object(native.time, "monotonic", side_effect=[0.0, 0.1, elapsed, elapsed]):
+        native.execute_workflow(root / "runs/frozen-x/contract.json", root / "runs/x", root)
+    receipt_sha = hashlib.sha256((root / "runs/x/receipt.json").read_bytes()).hexdigest()
+    draft_y = _contract("y", x_sha, family, y_sha=y_sha, x_receipt_sha=receipt_sha)
+    draft_y["budget"]["execution_seconds"] = 1.5
+    _write_json(root / "inputs/draft-y.json", draft_y)
+    native.freeze_workflow(root / "inputs/draft-y.json", root / "runs/frozen-y", root)
+    with patch.object(native.time, "monotonic", side_effect=[0.0, 0.1, elapsed, elapsed]):
+        if should_complete:
+            native.execute_workflow(root / "runs/frozen-y/contract.json", root / "runs/y", root)
+        else:
+            with pytest.raises(workflow.WorkflowPaused, match="family time budget exhausted"):
+                native.execute_workflow(root / "runs/frozen-y/contract.json", root / "runs/y", root)
+    journal = workflow.family_ledger(root, family)
+    events = [json.loads(line) for line in journal.read_text().splitlines()]
+    starts = [e for e in events if e["event"] == "start"]
+    assert [e["stage"] for e in starts] == ["x", "y"]
+    assert (root / "runs/y/receipt.json").exists() is should_complete
+    assert (root / "runs/y/result.json").exists() is should_complete
+    assert (root / "runs/y/state.json").exists() is should_complete
+    if not should_complete:
+        assert any(e["event"] == "finish" and e["stage"] == "y" and e["status"] == "failed_after_start" for e in events)
+        assert (root / "runs/y/failure.json").is_file()
+        with pytest.raises(ValueError, match="stage already started"):
+            native.execute_workflow(root / "runs/frozen-y/contract.json", root / "runs/y-repeat", root)

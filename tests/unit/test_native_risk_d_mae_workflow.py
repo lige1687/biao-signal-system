@@ -64,6 +64,21 @@ def test_x_only_keeps_exact_structure_and_has_no_outcomes():
     assert rows[0]["D"] == x["cases"][0]["D"]
 
 
+def test_duplicate_event_membership_within_one_case_is_rejected():
+    x, _ = artificial_inputs()
+    x["cases"][0]["event_ids"].append(x["cases"][0]["event_ids"][0])
+    assert sum(len(case["event_ids"]) for case in x["cases"]) == 85
+    with pytest.raises(ValueError, match="duplicate event membership"):
+        native.prepare_x(x)
+
+
+def test_duplicate_event_membership_across_cases_is_rejected():
+    x, _ = artificial_inputs()
+    x["cases"][1]["event_ids"][0] = x["cases"][0]["event_ids"][0]
+    with pytest.raises(ValueError, match="duplicate event membership"):
+        native.prepare_x(x)
+
+
 def test_path_qualification_and_comparison_hold_one_fixed_denominator():
     x, y = artificial_inputs()
     rows = native.prepare_x(x)
