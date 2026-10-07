@@ -53,3 +53,18 @@
 - 验收: 午间无操作输出；下午只引用可靠已确认计划；时点/未知不造结论；实时API试跑和固定反例；两条定时任务读回；自然语言草稿/确认/成交分清。
 - 共享冲突: 新文件范围，经任务路径检索无同文件声明；计划存储/确认源码只读，复用原接口。
 - 仍缺: 用户原交易计划；ChatGPT手机/网页查询本机的授权连接尚未建立，本批先用允许的Codex入口。
+
+## 每日简报首批配置交付（实际条件监督仍待资料）
+
+- checked_coordination_sha: 7722ee0266cf5702228f1ea61c457638623fc287
+- checked_at: 2026-10-08T01:01:03.631364+08:00
+- 已读task-id: daily-trading-system-audit、research-dispatch-controller、douyin-vike-increment；COORDINATION1.1。与7722ee0266cf5702228f1ea61c457638623fc287无增量。唯一写者及文件范围不变，无共享源码/registry/INDEX写入。
+- 本批状态: completed（只读聚合、流程和定时配置）；首次定时触发/用户体验待验收。完整原条件监督仍缺原计划与同产品技术资料；真实持仓自动对账、手机ChatGPT直连未实现。
+- 成果: src/lei_signal/portfolio/briefing.py、tests/unit/test_portfolio_briefing.py、docs/ops/portfolio-chat-briefing.md、docs/ops/work-progress/daily-trading-system-audit.md；独立新闻缓存、持仓变化、成交变化和用户原话背景进入资料包。
+- 定时: 本聊天heartbeat automation-3每日11:35、automation-4每日14:40，ACTIVE、时间及绑定聊天已读回。本机+08:00；0次已验收定时运行，不把手动试跑说成已按时送达。
+- 验收: 13项针对性测试通过、真实本机接口取数、截图及原话读取通过、归置通过。午间无操作复核段；下午对缺计划/行情不生成止损或安全结论；盘中不当收盘；原话不转为确认计划。
+- 失败保留: 4位博主来源被风控拦截；取得的昨日视频仅标题/简介，不能概括完整建议。新闻来源失败不阻断其余资料；独立缓存未改生产新闻库、未清理原正文。
+- 权威回执: docs/experiments/raw/daily-trading-system-audit-2026-10-08/briefing-delivery-receipt.json及briefing-tests.log、briefing-hygiene.log。实际包、截图及原话含私人信息，仅本机data/cache，不入Git。
+- 生产/研究边界: 0真实交易、0真实持仓写入、0下单、0新市场实验、0规则修改、0付费外部模型调用、0删除/全局设置修改。两份策略源SHA仍为已确认值。仓外OKR未写，原拟写内容保留。
+- 代码状态: 工作HEAD仍18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，codex/factor-unit-research-20260915。成果均未提交未推，仅本地；本协调同步不代表源码发布。
+- 最小接续: 定时按流程出简报，列真实来源缺口；用户具体原计划未确定时核持有理由，不补造目标或失效。未来用户报实际交易按确认/读回/对账处理，旧持仓快照未更新时不冒充已更新。无待运行的本批测试。
