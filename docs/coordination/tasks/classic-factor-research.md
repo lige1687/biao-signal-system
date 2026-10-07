@@ -1,3 +1,13 @@
+# 当前：目标6人工接入闭合；49项远端依赖核30项，19项待原owner交付
+
+更新时间2026-10-08T00:39+08:00（Asia/Shanghai）；task-id `classic-factor-research`，负责人会话 `01a0e6d5-4bcf-7bd3-82e4-4961c963d20e`，状态 blocked（本轮有界依赖盘点completed；纯远端恢复仍缺材料，真实X/Y另缺原件与阶段授权）。本轮开工读取协调 `57aee5e470582f0a14c97a970d3ed09b9d25b0b2`、规则1.1和相关本/中控记录；只写本方raw证据和进度，没有重叠写代码。较上版新增Luna/low机械盘点、主负责人远端ref及blob指纹独立核数。作者代码保持 `b2f45151128baa1fe387cda85862d71cb01e1206`，人工R1/R2已获非作者29项局部通过；真实效果仍未测量。
+
+成果分支 `codex/native-workflow-integration-20261007`，基础 `0b00490e8c7310ea8842851f874aab9d01ad7d96`，最新已推并核远端完整提交 `66e632c19b902c94b473517e1d199b49180a3642`。Luna生成的[49项逐项清单](https://github.com/lige1687/biao-signal-system/blob/66e632c19b902c94b473517e1d199b49180a3642/docs/experiments/raw/native-workflow-integration-2026-10-07/remote-baseline-inventory.json)SHA256 `b22800bd0c4df938410343b39f65654a2bb44352a5e79c28b3f527cab8df364b`；[主负责人复核](https://github.com/lige1687/biao-signal-system/blob/66e632c19b902c94b473517e1d199b49180a3642/docs/experiments/raw/native-workflow-integration-2026-10-07/remote-baseline-verification.json)SHA256 `c242fd23ba8cc767f3432a637039ac5d569921bffda6f5a169071feec4456e5f`。30项在10个已核远端分支当前tip有原SHA字节；对86个匹配blob独立重算、10个ref用`git ls-remote`核完整commit全部一致。剩余19项合计972,036字节，原字节都仍在共享本机根工作树，其中3份共享入口在本任务隔离树已加补丁但根原字节仍相同；这些并**未**在限定远端tip找到相同内容，未授权本任务上传别人的未跟踪材料。没有扫所有Git历史或全部远端分支，所以是“未在已核范围找到”，不是证明永远不存在。原owner无法从现有协调记录对全部19项唯一确定，逐项保留unknown而不猜。
+
+49项未齐，按预设停止条件没有做纯Git导入或原人工回执恢复，跨机器可运行状态仍未验证。下一步中控向原owner核19项准确路径、原SHA、可交付资格和远端位置；有同SHA资料齐全后再在隔离目录做一次最小恢复检查，不重跑旧研究。原六份真实资料及来源时间资格、真实X/Y预算/许可继续独立blocked；0真实X/Y/拟合/行情/付费、无本方研究PID/checkpoint，模型费用未知。其他AI只避开本方适配器/自有证据同写，不把这项记录当整个仓库排他锁。
+
+---
+
 # 当前：人工接入已局部独审通过，核49项远端依赖能否恢复
 
 更新时间2026-10-08T00:32+08:00（Asia/Shanghai）。task-id `classic-factor-research`，原负责人会话 `01a0e6d5-4bcf-7bd3-82e4-4961c963d20e`，状态 active（只读依赖盘点）；真实X/Y仍blocked。最新读取协调 `57aee5e470582f0a14c97a970d3ed09b9d25b0b2`、COORDINATION.md 1.1、本记录及中控目标6；已登记写范围与其他任务不重叠，本轮只新增本方 `docs/experiments/raw/native-workflow-integration-2026-10-07/remote-baseline-inventory.json` 候选，不碰别人的代码/数据。中控已接受非作者R1/R2局部重验，29项独立断言通过；正式报告仍仅本机，详见下一历史段。作者代码保持冻结，工作分支 `codex/native-workflow-integration-20261007` 最新远端 `8c069a98bc5f5450a53de8e64537900543cc4ca6`，本轮尚无新成果提交。
