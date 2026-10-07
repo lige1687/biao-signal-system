@@ -1,23 +1,23 @@
 # LEI 八目标研究调度｜当前快照
 
-- 更新时间：2026-10-07T23:56:15+08:00（Asia/Shanghai）
+- 更新时间：2026-10-08T00:10:06+08:00（Asia/Shanghai）
 - task-id：research-dispatch-controller；状态：active。研究调度：[中控对话](codex://threads/01a116c7-3700-7062-a6c6-53af00ef60a0)；本文件唯一Git写者：[协调对话](codex://threads/01a10051-4db1-7490-b40f-c13243767fc6)。原负责人文件仍由各自维护。
-- 最新读取协调分支：`d3c97ead075cc0f359fecfe2bd179e57b8e4f6b5`；本轮在线读回并核 `COORDINATION.md`、本任务、已登记范围，流程六路径与报告两路径均在线检查通过。旧任务人工排重沿用上轮核对；本轮另核情绪原对话最后turn `01a10a47-9453-7e72-9999-9f08aba75464` completed/notLoaded，未来登记责任保留，但本批当前无并行写全局登记文件。此SHA是编辑前查重基线。
+- 最新读取协调分支：`658c13cd12e7c8807cf5030839ecdd7c2de70c19`；先纳入原负责人 `classic-factor-research.md` 的新修复记录，再核工作分支最新 `f0c72d078a97b02ddf21595422747377fd6e09cd`、权限类型回执指纹与独审对话当前范围。其他任务旧范围沿前轮排重；此SHA是编辑前查重基线。
 - 原始目标：把八项LEI研究与工程成果做成可定位、可复算、可审查的接续链。当前验收按问题、输入、合同、合成检查、独审、真实效果与归档逐项看；不能用某一阶段的“交付”表示整条链已完成。适用规则为 `COORDINATION.md` 1.1 和各执行任务冻结规范。
-- 最新已推协调提交（编辑前）：`d3c97ead075cc0f359fecfe2bd179e57b8e4f6b5`；本次新成果commit须推后单独核对。Git只存目标摘要和成果索引，不表示仓外系统待升级数据库已写入。工作分支研究成果以各负责人准确提交为准，尚未推送的原件明标仅本机。
-- 较上一版：本机共享AGENTS.md已仅追加远端协作入口，原字节前缀保留；三项报告已在本机登记并验收，串行窗口释放但未推远端；流程人工接入仍在隔离实现。新增下一流程独审的planned准确范围，未派/未运行。真实X/V/Y仍为0。
+- 最新已推协调提交（编辑前）：`658c13cd12e7c8807cf5030839ecdd7c2de70c19`；本次新成果commit须推后单独核对。Git只存目标摘要和成果索引，不表示仓外系统待升级数据库已写入。工作分支研究成果以各负责人准确提交为准，尚未推送的原件明标仅本机。
+- 较上一版：流程作者停止写共享源码并推送人工接入代码及准确三入口补丁，原负责人记录已在协调分支更新；非作者流程独审已派且确认运行中。资料与目录两线仅进入已验收安全成果的独立分支发布，不重启研究。初次163项、权限类型修复后169项均为作者隔离环境自测，不能写成独审通过；真实X/V/Y仍为0。
 
 ## 八项目标现在到哪一步
 
 |目标|负责人／实际状态|接下来可验收的边界|
 |---|---|---|
 |1 核心计算|[技术对话](codex://threads/01a0e703-4c27-74e2-bf77-997e1879f967)：合成实现及小例已交，实际旧结果影响未核完|只沿D—MAE消费链核结构确认、时点、价格与缺口；真实输入齐备后才判定是否影响旧结果。|
-|2 旧研究结论|[目录对话](codex://threads/01a1074e-3d9d-70a2-a771-b079443ace18)：16项证据目录已交，独审有限接受；原作者已补动态来源快照说明，16项研究结论未变|原报告与新交接数字分开；不重跑封存实验。该对话已交D—MAE人工合成独审，不接管技术实现。|
+|2 旧研究结论|[目录对话](codex://threads/01a1074e-3d9d-70a2-a771-b079443ace18)：16项证据目录及合成独审已有限接受；原作者已补动态来源快照说明，正仅安全发布自己的报告/raw与独审小文件，研究结论未变|原报告与新交接数字分开；不重跑封存实验。该对话已交D—MAE人工合成独审，不接管技术实现。|
 |3 D—MAE机会风险|技术线：合成实现阶段完成；真实X/Y均为0|原76案例、D值等六份原件仍缺；专用实现的人工边界已由目录对话独立核验，限定通过。案例、资格、阶段批准齐备后才可绑定真实输入和一次标签。|
-|4 个股资料资格|[数据对话](codex://threads/01a101c1-ac35-70a3-8ecd-4a6179bb99ad)：成果已交；保存价格包资料资格获有限独立接受|5,211只缓存可用于注明来源限制的探索；原P26包及历史完整沪深300名单仍缺，1,944缺价键分类不等于主价格修复。|
+|4 个股资料资格|[数据对话](codex://threads/01a101c1-ac35-70a3-8ecd-4a6179bb99ad)：资料资格与三项本机登记已有限验收；原负责人正仅安全发布资格报告、小回执和已验收登记精确增量|5,211只缓存可用于注明来源限制的探索；原P26包及历史完整沪深300名单仍缺，1,944缺价键分类不等于主价格修复。|
 |5 融合、仓位与退出|中控保留依赖，尚未启动新计算|待可靠特征和合格数据，先做同风险的简单基线；真实风险约束尚未确认。|
-|6 原生研究流程|[流程对话](codex://threads/01a0e6d5-4bcf-7bd3-82e4-4961c963d20e)：限定入口核验已推；人工数据接入正在隔离实现，完整接入未验收|[远端成果](https://github.com/lige1687/biao-signal-system/blob/5ce079e059d7ab94f2971ec81e09f489b2a7fa7e/docs/experiments/native-workflow-integration-2026-10-07.md)提交 `5ce079e059d7ab94f2971ec81e09f489b2a7fa7e` 已核；六文件范围已在线核实；待人工端到端回执和独立验收，真实原件仍缺，不把8项旧指纹失败改成通过。|
-|7 外部增量／独审|[外部对话](codex://threads/01a0cd21-07e5-7163-8f4e-72a4d5ebc32e)：工具引入仍未启动；资料独审已有本机回执，目录独审有限接受且原作者已补动态来源快照；三项报告本机串行登记已验收，远端未推|个股资料有限接受；旧turn `01a116ea-e0d5-7c80-9873-1b1186af5071` 误回旧计龄，未交目录复核；修复turn `01a116fb-3b27-7390-864e-5edc543e9ad1` 的 `catalog/REVIEW.md` 已本机读回，有限接受；原作者已补旧指纹的快照说明。|
+|6 原生研究流程|[流程对话](codex://threads/01a0e6d5-4bcf-7bd3-82e4-4961c963d20e)：人工接入代码/补丁已推，作者停写；进入非作者独审，完整接入未验收|[远端成果](https://github.com/lige1687/biao-signal-system/blob/5ce079e059d7ab94f2971ec81e09f489b2a7fa7e/docs/experiments/native-workflow-integration-2026-10-07.md)提交 `5ce079e059d7ab94f2971ec81e09f489b2a7fa7e` 已核；六文件范围已在线核实；人工接入作者初次自测163项、修复权限字段类型后169项通过，待独立审查和49项依赖的可移交验证，真实原件仍缺，不把8项旧指纹失败改成通过。|
+|7 外部增量／独审|[外部对话](codex://threads/01a0cd21-07e5-7163-8f4e-72a4d5ebc32e)：工具引入仍未启动；资料独审已有本机回执，目录独审有限接受且原作者已补动态来源快照；三项报告本机串行登记已验收，远端未推|个股资料有限接受，安全发布turn `01a1171e-0b0d-76f1-a01d-afab7cccbc9d` 已核inProgress；目录安全发布turn `01a1171e-0bec-71e2-b01c-e787d53b415c` 已核inProgress。旧turn `01a116ea-e0d5-7c80-9873-1b1186af5071` 误回旧计龄，未交目录复核；修复turn `01a116fb-3b27-7390-864e-5edc543e9ad1` 的 `catalog/REVIEW.md` 已本机读回，有限接受；原作者已补旧指纹的快照说明。|
 |8 存储与恢复|各执行人开工自测，中控汇集；持续义务|大任务前重测空间和输入输出预算；云端Library 403继续暂停，迁移和删除仍按既有授权。|
 
 ## 本批任务、唯一写者与依赖
@@ -25,23 +25,24 @@
 |有界任务|唯一执行写者／已登记可写范围|当前交付或等待|
 |---|---|---|
 |`native-risk-d-mae`|技术对话；`docs/experiments/raw/native-risk-d-mae-2026-10-07/`及同题报告|[本机合成报告](/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/native-risk-d-mae-2026-10-07/REPORT.md)已核存在；六份冻结原件缺，真实X/Y未做。共享研究入口只读。|
-|`stock-data-qualification`|数据对话；同名日期报告与raw目录|成果已交；[本机独审](/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-dispatch-controller-2026-10-07/independent-review/stock-data/REVIEW.md)有限接受资料资格；最新效果原件和历史全池仍不合格。|
-|`research-evidence-catalog`|目录对话；同名日期报告与raw目录|目录已交，独审有限接受16项导航；原作者已用 `snapshot-clarification-2026-10-07.json` 说明动态中控进度旧指纹仅指建立目录时快照，未重算研究结论。|
-|`native-workflow-integration`|流程对话；原报告/raw及下方六个准确源码和测试文件，人工接入执行中|限定核验已推，接口图已推。合成独审已限定通过，中控已核在线范围并启动人工接入；流程turn `01a11707-848e-7d42-ac40-a39e81d5b9ce` 正在隔离实现，回调/验收未到，真实X/V/Y仍缺。|
+|`stock-data-qualification`|数据对话；同名日期报告与raw目录|有界资料研究及三项本机登记已验收，安全发布active；[本机独审](/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-dispatch-controller-2026-10-07/independent-review/stock-data/REVIEW.md)有限接受资料资格；最新效果原件和历史全池仍不合格。|
+|`research-evidence-catalog`|目录对话；同名日期报告与raw目录|目录研究已交且有限接受，安全发布active；原作者已用 `snapshot-clarification-2026-10-07.json` 说明动态中控进度旧指纹仅指建立目录时快照，未重算研究结论。|
+|`native-workflow-integration`|流程对话；原报告/raw及六个准确源码和测试范围；实现已交待独审|首个代码commit `8a4a6f064341f39a2ed2420f102e88a451a04f1c` 已推，权限类型修复后最新commit `f0c72d078a97b02ddf21595422747377fd6e09cd` 已读回；新模块/两测试与三共享入口补丁交付，作者停写。初次163项、修复后169项均仅作者隔离自测；49项另有负责人的本机依赖使纯拉分支运行未验证。独立审查已注意修复并核变更中，真实X/V/Y仍为0。|
 |`report-registration-20261007`|资料原对话；两份全局登记文件已由资料原对话串行登记完成并释放窗口，回执沿用该负责人既有raw目录|目录快照补注和情绪线当前空闲已核；资料原对话turn `01a1170d-71b2-7323-ab61-cb0c4ab9a759` 已本机完成三项追加；中控已核回执及文件SHA，未创建本机共享脏分支commit或推送；D—MAE合成报告未登记。|
 |`stock-data-independent-review`|外部对话受权；`docs/experiments/raw/research-dispatch-controller-2026-10-07/independent-review/stock-data/`|本机 `REVIEW.md` 与 `independent-checks.json` 已读回；有限接受的只是资料资格。|
 |`catalog-independent-review`|外部对话受权；相邻 `independent-review/catalog/`|原回调误入旧计龄的失败保留；修复turn的本机 `catalog/REVIEW.md` 已读回，有限接受，动态来源快照说明已补且报告SHA-256已核；远端成果是否齐备仍由原负责人同步。|
 |`d-mae-synthetic-review`|目录对话受权；相邻 `independent-review/d-mae-synthetic/`|本机 `d-mae-synthetic/closeout.json` 及 `REVIEW.md` 已读回，限定通过人工接入，1,754项断言通过；真实X/V/Y未做，需保留三项接入验收。远端成果是否齐备仍由原负责人同步。|
-|`d-mae-workflow-integration-review`|外部对话；仅 `independent-review/native-workflow/`，planned、未派/未运行|流程人工接入停止写入并交准确成果commit后，独立核正式适配、人工完整路径、恢复与重复拒绝、来源依赖；不计算真实市场数据。|
+|`d-mae-workflow-integration-review`|外部对话；仅 `independent-review/native-workflow/`，active、已派|作者已停写并交首个代码commit `8a4a6f064341f39a2ed2420f102e88a451a04f1c`，最新权限类型修复commit `f0c72d078a97b02ddf21595422747377fd6e09cd` 也已推；App核独审turn `01a1171c-dd35-7250-adeb-6f209769e137` inProgress。只核正式适配、人工完整路径、恢复/重复拒绝及来源依赖；不算真实市场数据。|
 |`dispatch-runtime`|中控对话；自身阶段进度与 `thread-state.json` 两个准确路径|负责真实回调、依赖、验收与下阶段派发；协调对话仅写这份Git摘要。|
 
-`docs/research/definitions.v1.json`仍由中控串行协调；`docs/experiments/registry.json`、`docs/experiments/INDEX.md`本批仅由资料原对话串行登记三项并经中控本机验收，窗口已释放；本机共享脏分支尚未提交或推送，其他本批线只读。目标5、人工流程接入独审（planned）与未来真实结果独审只保留依赖；`d-mae-independent-review` 是未来真实结果后审，仍为 planned、没有已占路径，不能复用已完成的 `d-mae-synthetic-review` 合成审查输出。路径登记不是排他锁；共享文件写入前仍需核准准确文件、唯一实现者及独立验证者。其他15份旧任务记录须人工查阅，工具只检查本文件显式结构。
+`docs/research/definitions.v1.json`仍由中控串行协调；`docs/experiments/registry.json`、`docs/experiments/INDEX.md`本批仅由资料原对话串行登记三项并经中控本机验收，窗口已释放；本机共享脏分支中的该增量尚未核安全分支发布，其他本批线只读。目标5、人工流程接入独审（active）与未来真实结果独审只保留依赖；`d-mae-independent-review` 是未来真实结果后审，仍为 planned、没有已占路径，不能复用已完成的 `d-mae-synthetic-review` 合成审查输出。路径登记不是排他锁；共享文件写入前仍需核准准确文件、唯一实现者及独立验证者。其他15份旧任务记录须人工查阅，工具只检查本文件显式结构。
 
-## 当前执行范围与冲突核对（2026-10-07T23:56:15+08:00）
+## 当前执行范围与冲突核对（2026-10-08T00:08:12+08:00）
 
 - `native-workflow-integration`：唯一实现者[流程对话](codex://threads/01a0e6d5-4bcf-7bd3-82e4-4961c963d20e)。[已推接口图](https://github.com/lige1687/biao-signal-system/blob/751b94b3d93f3937b90357eaa8abb6ca9acac793/docs/experiments/raw/native-workflow-integration-2026-10-07/next-stage-interface-map.md)所在工作分支 `codex/native-workflow-integration-20261007`，最新已核commit `751b94b3d93f3937b90357eaa8abb6ca9acac793`、图SHA-256 `4f0b3218a609803e5cdd53de9a49d3d7b75705dfc276f5dc419f026db2631202`；旧图 `3e1bcfe0340cb1f4aea95611f7f20820e996e7f0` 的SHA-256 `709054b96857d9aaf0a1d5bab410b2b39c7175227e78ee60dca1284fe8f073f2`，新图补入合成独审指出的字段拒绝与有限V检查，六路径未变。本批唯一流程写者六路径：`src/lei_signal/research/native_risk_d_mae_workflow.py`、`src/lei_signal/research/question_contract.py`、`src/lei_signal/research/workflow_inputs.py`、`src/lei_signal/research/workflow.py`、`tests/unit/test_native_risk_d_mae_workflow.py`、`tests/integration/test_native_risk_d_mae_workflow.py`。其中三份共享研究入口已有旧kind历史写入；本轮读 `technical-factor-sequence`、`risk-shape-information`、`classic-factor-research`、`external-quant-resources` 当前首屏均未发现同时写这六个准确文件的人，但不能据此覆盖本机脏字节。`scripts/run_factor_lab.py` 仅条件候选，未登记；`workflow_evaluation.py`、`input_preflight.py`、全局登记和定义文件只读。**中控已核合成独审限定通过及本协调在线声明，正式启动流程人工数据接入；App确认流程turn `01a11707-848e-7d42-ac40-a39e81d5b9ce` inProgress，独立隔离工作区。独审列出的原成员绑定、字段拒绝、有限V检查须进接入验收；原六份真实输入缺，未批准真实X/V/Y。**
+- 目标6实际成果与映射：原负责人自身稳定记录是 `classic-factor-research.md`，其中本阶段对应中控子任务 `native-workflow-integration`，不是第二位代码写者。[作者自验](https://github.com/lige1687/biao-signal-system/blob/20541a1c24678ce9341e370e89acdb33f9686b24/docs/experiments/raw/native-workflow-integration-2026-10-07/implementation-checks.json)记录隔离环境163项通过、归置通过、共享入口补丁对原根字节可应用；[依赖清单](https://github.com/lige1687/biao-signal-system/blob/20541a1c24678ce9341e370e89acdb33f9686b24/docs/experiments/raw/native-workflow-integration-2026-10-07/baseline-dependencies.json)列49项本机另有owner路径。代码commit `8a4a6f064341f39a2ed2420f102e88a451a04f1c` 提交新模块、两测试及三入口补丁；新commit `f0c72d078a97b02ddf21595422747377fd6e09cd` 收紧权限字段类型并附[权限类型复核](https://github.com/lige1687/biao-signal-system/blob/f0c72d078a97b02ddf21595422747377fd6e09cd/docs/experiments/raw/native-workflow-integration-2026-10-07/permission-type-recheck.json)（作者169项通过），两次自测不是非作者验收。三份共享入口完整源码仍未随分支提交，不能称纯拉该分支已可运行。作者停写后，中控派独立流程审查给外部对话，App确认在 `independent-review/native-workflow/` 审查，已知悉新修复并补核该差额；这与先前纯算式合成独审和未来真实结果独审分开。真实X/V/Y、拟合、行情请求均0；旧8项冻结指纹失败不改。
 - `report-registration-20261007`：本批唯一写者[资料原对话](codex://threads/01a101c1-ac35-70a3-8ecd-4a6179bb99ad)。本批串行窗口仅认领 `docs/experiments/registry.json`、`docs/experiments/INDEX.md`；准确回执 `docs/experiments/raw/stock-data-qualification-2026-10-07/registration-receipt.json` 由同一负责人沿用既有 `stock-data-qualification` raw目录认领，不产生第二个task-id的重叠声明。只登记已有限接受的资料资格、补好快照说明并有限接受的目录、限定入口核验；中控已实际派给资料原对话，回调与中控核验已完成：registry SHA-256 `b86488672cda210d2a7107ddb693a76f15b040ae8657529891a3340b9344d860`、INDEX SHA-256 `5e266d5453bbe82dd454818008c5d640fd044dd53c21a43399c002871a925fc3`、登记回执SHA-256 `78ce939692658377e42273ac431aed3ed4144c8368e22f15cf377e53631bbf6b`；旧条目、作者报告和definitions未改。仅本机，远端不可复现，本批写入窗口已释放。`native-risk-d-mae` 合成报告虽已独审限定通过，但仍不在本批三项报告登记。草稿检查曾因同一负责人两task重复声明回执父目录而失败，已按原目录归属修正，保留此失败证据。全部其他任务记录已人工查看：`sentiment-factor-research` 原负责人/root 保留两份全局登记文件的**未来自身条目**，当前状态是planned／部分blocked且明确无运行研究进程；`technical-factor-sequence` 的报告登记历史已完成；`douyin-vike-increment` 本轮完成且未列全局登记写入。故未发现当前同时写全局登记的人，但情绪线的未来范围有文件级重叠；中控已核情绪原对话最后turn completed/notLoaded并启用本批串行窗口；仍保留其未来登记责任，不覆盖其条目。只追加本批三项，旧行、定义、研究状态和仓外OKR不改。
-- 当前是执行中快照：中控在线查六路径和两份全局登记均 exit0、`online_verified=true`、`declared_checks_passed=true`；`work_clearance=false` 是工具固定的非自动授权提示，中控另已作人工排重和启动决定。流程原对话仍在运行；资料原对话的三项本机登记已完成且有回执，但未推远端；下一人工流程独审只预登记，未派/未运行；本协调只更新摘要，无源码、登记簿、行情、拟合或付费操作。登记不是排他锁，其他 AI 避开流程六路径的并行写入；登记窗口已释放，新登记需求重新查重和排程。
+- 当前是执行中快照：资料原对话和目录原对话各有一个仅安全发布turn active/inProgress，尚未核独立分支完整commit或远端读回；原研究/登记已有限验收，不重复实验或改变旧登记内容。若发布过程中需要重写或重放共享 `registry.json`／`INDEX.md`，须先重新登记串行窗口并审远端差额。中控在线查六路径和两份全局登记均 exit0、`online_verified=true`、`declared_checks_passed=true`；`work_clearance=false` 是工具固定的非自动授权提示，中控另已作人工排重和启动决定。流程作者已交付并停写；资料原对话的三项本机登记已完成且有回执，但未推远端；新人工流程独审已派并核实运行中，尚无结论；本协调只更新摘要，无源码、登记簿、行情、拟合或付费操作。登记不是排他锁，流程源码由作者停写等待非作者审查，其他 AI 暂避准确六路径直到审查与后续返修分工明确；登记窗口已释放，新登记需求重新查重和排程。
 
 - 项目级协作入口本机采用：本协调会话在远端范围登记后，向共享工作区 `/Users/yongbiaoli/Desktop/lei-signal-lab/AGENTS.md` 仅追加已发布的两段说明，原23,939字节前缀逐字保留；本机完成后SHA-256 `a2a8fd1dde803b603717ec1fa1b49c14d76ab0a4e28d1f7d99de7d9642fb12b1`。该根文件未暂存/提交/推送，远端不可复现；只读工具仍在独立成果分支。四线已有按协调分工行动的证据，但各客户端是否读取此本机文件未全面验证，别把分支文件存在当全局生效。
 
@@ -49,17 +50,17 @@
 
 - 个股独审本机路径如上；5,211保存价格资格和1,944键分类获有限接受，主价格修复0。P26早四个周检查日准备期不足277根的条件判断已留报告；原P26合同和历史完整300名单缺。独审报告目前仅本地，远端不可复现。
 - 技术合成报告在本机：5组人工检查、完整21根收盘路径、停牌与缺口拒绝；设计ZIP、行情与源码指纹已核。原76案例、D特征等六原件缺，真实X/Y预算未开；合成通过不代表风险信息有效。
-- 流程远端提交如上；原生通用MAE在人工停牌行仍产数，与本次完整路径资格不同。流程限定核验完成，专用适配与全流程结果未完成。
+- 流程代码提交和依赖清单如上；原生通用MAE在人工停牌行仍产数，与本次完整路径资格不同。专用适配已有作者自测但非作者审查尚未完成，49项依赖使纯拉分支不可直接复现；真实全流程结果未做。
 - 目录独审及合成独审按各自准确目录留证，均已本机读回：目录16项导航有限接受，原作者已补动态来源快照说明；人工D—MAE合成接入限定通过1,754项断言，真实成员绑定、字段拒绝和有限V检查待做。两份独审是否已推远端，本协调未核；外部工具引入、融合与实盘均未启动本轮新实验。
-- 本轮检查：fetch/读协调 `0bc83cedd6445fce1e87001075a1ae56476aa8e0`；中控在线范围检查六文件与报告两文件均exit0、online_verified和declared_checks_passed为true，本会话独立核两执行对话App状态与情绪原对话静止状态；本机核目录补注JSON、报告SHA-256 `8e61d7ed4ca119bece1209d920479a0d5ed3d63aadcb6d45e12741f93e8fb601`、合成独审SHA-256 `b0a1b5f716336a861a8c5efb71107c5f76ad87923ed589e2974b30fd5c5eb94c`。新流程产物与结果测试尚未到；登记回执本机已核，远端未推，不能写成远端登记已发布；本协调没有新行情计算、拟合或付费。各执行线累计预算以原账本为准。
-- 下次最小操作：等流程人工接入最终停止写入并交准确成果commit，再由中控派已预登记的独立流程审查；逐项核合成端到端回执、独审三项条件与旧8项指纹失败；三项登记已本机读回并释放窗口；由原资料负责人按各自分支边界处理后续同步，不由本协调收走共享脏文件。真实X/V/Y须另取六冻结原件和阶段授权。各线只复用已有报告，失败与负结果保留；每次范围或阶段变化再读最新协调分支并推送读回本任务索引。
+- 本轮检查：fetch协调 `658c13cd12e7c8807cf5030839ecdd7c2de70c19` 并保留原负责人新修复记录 `classic-factor-research.md`；核作者原代码commit `8a4a6f064341f39a2ed2420f102e88a451a04f1c`、新commit `f0c72d078a97b02ddf21595422747377fd6e09cd`、`implementation-checks.json` 和 `permission-type-recheck.json` 的两份源码指纹；App核独审turn `01a1171c-dd35-7250-adeb-6f209769e137` active/inProgress。初次163项、修复后169项通过都是作者报告，非本会话重跑或独审结果；纯拉分支的49项依赖未验证。真实X/V/Y、市场拟合、付费均未执行。
+- 下次最小操作：等非作者在 `independent-review/native-workflow/` 交结果，核正式适配、人工路径、恢复/重复拒绝和49项依赖；发现问题只由原实现者按准确范围修复并重验。真实X/V/Y仍须六冻结原件、来源资格与中控分别授权。资料与目录的已验收安全成果正在由各自原负责人发布，等准确分支commit及远端读回，不能提前称远端已复现；本协调继续随阶段更新并推后读回。
 
 ```lei-coordination-json
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "d3c97ead075cc0f359fecfe2bd179e57b8e4f6b5",
-  "checked_at": "2026-10-07T23:56:15+08:00",
+  "checked_coordination_sha": "658c13cd12e7c8807cf5030839ecdd7c2de70c19",
+  "checked_at": "2026-10-08T00:10:06+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -77,26 +78,26 @@
     {
       "task_id": "stock-data-qualification",
       "owner": "01a101c1-ac35-70a3-8ecd-4a6179bb99ad",
-      "status": "completed",
+      "status": "active",
       "write_paths": [
         "docs/experiments/raw/stock-data-qualification-2026-10-07/",
         "docs/experiments/stock-data-qualification-2026-10-07.md"
       ],
       "depends_on": [],
       "scope_released": false,
-      "source": "delivery completed; locally saved independent review gives limited acceptance of cached-input qualification, not market effect or historical full pool"
+      "source": "bounded data qualification and three local report registrations accepted; original owner safe-publication turn 01a1171e-0b0d-76f1-a01d-afab7cccbc9d active/inProgress, exact branch commit/readback pending; no new research or market computation"
     },
     {
       "task_id": "research-evidence-catalog",
       "owner": "01a1074e-3d9d-70a2-a771-b079443ace18",
-      "status": "completed",
+      "status": "active",
       "write_paths": [
         "docs/experiments/raw/research-evidence-catalog-2026-10-07/",
         "docs/experiments/research-evidence-catalog-2026-10-07.md"
       ],
       "depends_on": [],
       "scope_released": false,
-      "source": "16-item catalog delivered; independent limited acceptance; snapshot-clarification-2026-10-07.json and revised report SHA-256 8e61d7ed4ca119bece1209d920479a0d5ed3d63aadcb6d45e12741f93e8fb601 checked locally; 16 findings and 56 other source entries unchanged"
+      "source": "16-item catalog, snapshot clarification and pure-study synthetic review accepted in bounded scope; original owner safe-publication turn 01a1171e-0bec-71e2-b01c-e787d53b415c active/inProgress for own report/raw and review small files; exact branch commit/readback pending; no new study"
     },
     {
       "task_id": "native-workflow-integration",
@@ -117,8 +118,8 @@
         "d-mae-synthetic-review"
       ],
       "scope_released": false,
-      "source": "controller read coordination 0bc83cedd6445fce1e87001075a1ae56476aa8e0 and limited synthetic review, then started six-file isolated synthetic integration; visible turn 01a11707-848e-7d42-ac40-a39e81d5b9ce inProgress; no real X/V/Y, code outcome pending; source map 751b94b3d93f3937b90357eaa8abb6ca9acac793",
-      "gate_status": "synthetic_review_limited_pass_controller_started_synthetic_integration_in_progress"
+      "source": "author classic-factor-research maps to central native-workflow-integration; first code commit 8a4a6f064341f39a2ed2420f102e88a451a04f1c, latest permission-type fix f0c72d078a97b02ddf21595422747377fd6e09cd verified; module/two tests/three-entry patch delivered and author stopped; self-reported 163 then 169 passes in isolated environment, not independent result; 49 separately owned baseline paths missing from pure branch; review in progress; real X/V/Y zero",
+      "gate_status": "synthetic_implementation_delivered_pending_independent_review"
     },
     {
       "task_id": "factor-fusion-risk-exit",
@@ -210,7 +211,7 @@
     {
       "task_id": "d-mae-workflow-integration-review",
       "owner": "01a0cd21-07e5-7163-8f4e-72a4d5ebc32e",
-      "status": "planned",
+      "status": "active",
       "write_paths": [
         "docs/experiments/raw/research-dispatch-controller-2026-10-07/independent-review/native-workflow/"
       ],
@@ -218,7 +219,7 @@
         "native-workflow-integration"
       ],
       "scope_released": false,
-      "source": "pre-registered only; controller will dispatch after author stops writing and publishes exact integration commit; review formal adapter, synthetic complete path, resume and duplicate rejection, source dependencies; no real market computation; distinct from completed pure-study synthetic review and future real-result review"
+      "source": "controller dispatched after author stopped; first code commit 8a4a6f064341f39a2ed2420f102e88a451a04f1c and latest fix f0c72d078a97b02ddf21595422747377fd6e09cd; visible reviewer turn 01a1171c-dd35-7250-adeb-6f209769e137 inProgress and aware of fix; exact native-workflow review directory only; no conclusion or real data computation yet"
     }
   ]
 }
