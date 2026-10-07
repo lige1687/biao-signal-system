@@ -40,3 +40,16 @@
 - 证据限制: 首次登记写前/写后SHA未保存，不能事后补造；本回执只能证明当前自身条目存在及本次只读核查未改他人内容，不能证明首次写入无并发丢失。
 - 当前registry SHA256: 37c97bc0e8b19b5552796324e01d5d69a812982983faeab2cd85fcf8f84890cf；INDEX SHA256: bec60e6ea31b93efc1946f148a373193f2a08246f14a46b8c7363f073bb69006。
 - 原报告与研究不变；登记已结束，无后续共享写入计划。
+
+## 用户授权接续：每日持仓简报与自然语言流程
+
+- status: active；thread-id=01a11721-303e-7c83-9451-c82078c9ba23
+- checked_coordination_sha: af0917564a4a0b01a55ce0d424364aa9fa38769d
+- checked_at: 2026-10-08T00:36:41.953644+08:00
+- 已读: COORDINATION 1.1、research-dispatch-controller、douyin-vike-increment、自己的原记录；沿用持仓原设计及已有计划版本/动作日期成果。
+- 用户明确: 每天上午11:30之后和14:40两份汇总，前者不提操作，后者核原计划/依据；自然语言准备计划与记录已发生交易；29只持仓仍适用，计划尚未导入；不做ETF产品比较。
+- 本批准确范围: 新src/lei_signal/portfolio/briefing.py、新tests/unit/test_portfolio_briefing.py、docs/ops/portfolio-chat-briefing.md、docs/ops/work-progress/daily-trading-system-audit.md、原raw目录下briefing接续证据；用户授权两条Codex本聊天heartbeat。
+- 不写其他任务源码、原交易数据库、规则、registry/INDEX；不接管新闻源码/生产部署。只读API聚合和本仓输出，不创建模拟胜率。新闻旧调度不存在，更新路径独立核查。
+- 验收: 午间无操作输出；下午只引用可靠已确认计划；时点/未知不造结论；实时API试跑和固定反例；两条定时任务读回；自然语言草稿/确认/成交分清。
+- 共享冲突: 新文件范围，经任务路径检索无同文件声明；计划存储/确认源码只读，复用原接口。
+- 仍缺: 用户原交易计划；ChatGPT手机/网页查询本机的授权连接尚未建立，本批先用允许的Codex入口。
