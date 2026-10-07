@@ -1,0 +1,13 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__________ test_cli_x_then_one_y_restart_verify_and_repeat_rejection ___________
+tests/integration/test_native_risk_d_mae_workflow.py:82: in test_cli_x_then_one_y_restart_verify_and_repeat_rejection
+    assert declaration.returncode == 0, declaration.stderr
+E   AssertionError: usage: run_factor_lab.py [-h] --protocol PROTOCOL --out OUT
+E     run_factor_lab.py: error: the following arguments are required: --protocol, --out
+E     
+E   assert 2 == 0
+E    +  where 2 = CompletedProcess(args=['/opt/homebrew/opt/python@3.11/bin/python3.11', '/private/var/folders/l3/zrwg12bn3lz_zny9r8sq2y...h] --protocol PROTOCOL --out OUT\nrun_factor_lab.py: error: the following arguments are required: --protocol, --out\n').returncode
+=========================== short test summary info ============================
+FAILED tests/integration/test_native_risk_d_mae_workflow.py::test_cli_x_then_one_y_restart_verify_and_repeat_rejection
+1 failed in 1.59s
