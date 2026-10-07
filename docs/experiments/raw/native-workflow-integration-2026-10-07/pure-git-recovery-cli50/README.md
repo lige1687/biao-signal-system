@@ -20,6 +20,7 @@ Use a clean, isolated checkout and the existing Python environment. The verified
 From a clone with the stated commits available, run the following. Replace `REPLAY_ID` with a new unique value each time. Both the worktree and replay evidence directory must be absent. The replay directory is a sibling of the preserved evidence directories, and the script writes only there.
 
 ```bash
+set -e
 REPLAY_ID=replace-with-a-new-unique-token
 replay_worktree=".codex/worktrees/native-workflow-replay-${REPLAY_ID}"
 test ! -e "$replay_worktree" || { echo "replay worktree already exists" >&2; exit 1; }
