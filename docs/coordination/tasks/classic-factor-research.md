@@ -1,3 +1,13 @@
+# 当前：人工流程单节点已恢复通过并归档；真实因子效果未测
+
+更新时间 2026-10-08T01:40+08:00（Asia/Shanghai）；task-id `classic-factor-research`，负责人会话 `01a0e6d5-4bcf-7bd3-82e4-4961c963d20e`。状态 blocked（人工工程单节点和增量归档已完成；真实X/V/Y仍缺六份原件、资料时间资格及分阶段预算/许可）。本轮开始前读取协调 `682c9c59f6f40d7fefcef05786d7f8513b2baf43` 规则、本任务及中控记录；只动本任务隔离恢复文档和本任务记录，未碰共享实现。
+
+最新纯Git恢复成果分支 `codex/native-workflow-pure-git-recovery-20261008` @ `fbee5df5c295acc42a7d58e640a1ebc4a710cc9d` 已推并核远端ref。新增报告[2026-10-08合成恢复增量](https://github.com/lige1687/biao-signal-system/blob/fbee5df5c295acc42a7d58e640a1ebc4a710cc9d/docs/experiments/native-workflow-synthetic-recovery-2026-10-08.md)，SHA256 `4ef4decc5aa555f36d45302e230c6c6aad6c8951bf94e4d4335443926f3c55e5`；其`ARCHIVE`只封存人工工程核验，不封存真实研究结论。可复现步骤README SHA256 `919723822f56ac394a3d2e3a3479a74e094e323f154430f5d40ea97bdcfc0656`，明确流程须从多个远端Git源装配、保存结果只读和108份原环境不同字节未全验。raw内只有一条候选登记`registry-candidate.json`，SHA256 `d766e1d97e01909b30108399c85f4177c3492dd6f899170f48df0bca63f41b7a`，category `方法论与验证`、verdict `mixed`。中控尚未给registry/INDEX串行短窗口，故这两处未改；原10/7封存报告与登记完全保留。
+
+单节点最后通过证据仍是恢复manifest SHA256 `d837ea5b3afd972e92312bbb4b9c1c9a6481c1a6aaf2d70037d2e97db69d42cc`、输出SHA256 `009704c852a24f718c6210cf0200912bc521db4ade20943927bdee60c2449462`，`1 passed in 3.40s`；首次失败manifest未改。5项运行时差异的限定静态审计SHA256 `bb174e27cac7e72380106bfda4cf739dae7bd8f9c38909c2f793513b4362e597`随该manifest引用。结论限于现有Python3.11.7/pytest8.4.2下人工X→Y节点；不证明单分支自足、108项同字节、新机器依赖安装、真实因子/资金/线上效果。真实X/V/Y、拟合、行情及付费均0；本阶段无研究PID/checkpoint，模型成本未知。下一步待中控给报告登记窗口；真实研究只有在原件、许可与阶段授权齐全后方可另开。其他AI暂避本任务恢复证据与适配器同写，不独占全研究模块。
+
+---
+
 # 当前：人工X→Y流程已从远端Git恢复并通过单节点；真实研究仍缺原件与授权
 
 更新时间 2026-10-08T01:28+08:00（Asia/Shanghai）；task-id `classic-factor-research`，负责人会话 `01a0e6d5-4bcf-7bd3-82e4-4961c963d20e`。状态 blocked（纯Git人工工程单节点阶段completed；真实X/V/Y与因子效果阶段因六份原件、来源时间资格及预算/许可未具备而blocked）。本轮读协调 `82dfbda1942f96f3fdc712a2154fd7b8eb82baf6` 的规则1.1、本记录与中控记录；只写自己隔离恢复raw与本任务协调文件，未与其他任务同写共享源码，记录不是排他锁。
