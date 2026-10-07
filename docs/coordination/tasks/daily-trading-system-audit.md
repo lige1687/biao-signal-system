@@ -1,7 +1,7 @@
 # 日常交易价值的系统审查
 
 - task-id: daily-trading-system-audit
-- owner: 当前系统审查会话 Codex /root，唯一写者；不接管其他任务
+- owner: Codex /root；thread-id=01a11721-303e-7c83-9451-c82078c9ba23，唯一写者；不接管其他任务
 - status: completed
 - updated_at: 2026-10-08T00:13:18.507746+08:00
 - checked_coordination_sha: 050cdf179c8feb6c0be68d4eeeedb7a52a0d93be
@@ -29,3 +29,14 @@
 - 验证: 报告本地链接全部存在，两份策略SHA与确认值一致，归置检查通过；未跑产品测试因为未改产品代码。
 - 权限边界: 无产品/交易/部署修改，仓外OKR只读，拟写内容留goal-update-proposal.json待允许。
 - 停止理由: report_only问题已回答；真实模型质量与改造效果未验证，实施需要后续具体范围。
+
+## 登记结束／释放窗口
+
+- checked_coordination_sha: 84e3d5dec5455ecc73df55df3c0517823bd7dc3b
+- checked_at: 2026-10-08T00:20:47.663651+08:00
+- 已读 task-id: daily-trading-system-audit、theory-workflow-system-increment；仅补本任务身份与回执，不改全局登记。
+- scope_released: true；registry.json自身一项、INDEX.md自身一行已存在，不重复追加；本轮全局文件写入0，核查前后SHA相同。
+- 回执: docs/experiments/raw/daily-trading-system-audit-2026-10-08/registration-release-receipt.json（仅本地）。
+- 证据限制: 首次登记写前/写后SHA未保存，不能事后补造；本回执只能证明当前自身条目存在及本次只读核查未改他人内容，不能证明首次写入无并发丢失。
+- 当前registry SHA256: 37c97bc0e8b19b5552796324e01d5d69a812982983faeab2cd85fcf8f84890cf；INDEX SHA256: bec60e6ea31b93efc1946f148a373193f2a08246f14a46b8c7363f073bb69006。
+- 原报告与研究不变；登记已结束，无后续共享写入计划。
