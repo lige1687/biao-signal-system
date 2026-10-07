@@ -1,0 +1,136 @@
+{
+  "schema_version": "cli-entry-delivery-qualification/1.0",
+  "created_at": "2026-10-08T01:16:59+08:00",
+  "timezone": "Asia/Shanghai",
+  "task_id": "classic-factor-research",
+  "path": "scripts/run_factor_lab.py",
+  "bytes": 4889,
+  "sha256": "eb38c3ce70a4331026ab1dc5d8f71eb5f2e1cbffda59ceac4abbaffb15820c52",
+  "purpose": "原研究工作流统一命令入口；人工恢复节点调用 --review-workflow-contract。原49基线盘点漏列了此已跟踪但在共享工作区更新过的入口。",
+  "source_evidence": {
+    "implementation_start_path": "docs/experiments/raw/native-workflow-integration-2026-10-07/implementation-start.json",
+    "implementation_start_sha256": "5b1c03c28d4b9182cc6d65e02df9712b21f56fd93194b0510c00624554fb646b",
+    "controller_receipt_path": "docs/experiments/raw/native-workflow-integration-2026-10-07/controller-receipt.json",
+    "controller_receipt_sha256": "b138248885fe9eeb797edb1eace8131ba530ed52422533770482d1aded506ee0",
+    "root_current_sha_matches": true,
+    "author_worktree_current_sha_matches": true
+  },
+  "content_check": {
+    "python_ast_parsed": true,
+    "entry_functions": [
+      "main",
+      "_review_workflow_contract"
+    ],
+    "review_option_present": true,
+    "credential_or_session_marker_lines": 0,
+    "private_account_marker_lines": 0,
+    "absolute_user_directory_reference_lines": 0,
+    "raw_market_data_found": false,
+    "unrelated_task_payload_found": false
+  },
+  "original_byte_author": "unknown",
+  "snapshot_organizer": {
+    "thread": "01a0e6d5-4bcf-7bd3-82e4-4961c963d20e",
+    "role": "整理原字节，不代表原作者"
+  },
+  "checked_related_refs": [
+    {
+      "ref": "origin/codex/classic-factor-review-20261004",
+      "commit": "604445fdf9660828f4ba17db8b2bc192d33b4a9f",
+      "status": "different",
+      "bytes": 3945,
+      "sha256": "e86090adad26d87310656d5691f492c11da14e93e2a3eb7cbe6dcd7f41988bc8"
+    },
+    {
+      "ref": "origin/codex/technical-factor-sequence-progress-20261004",
+      "commit": "2699a201404377b8c33a1c7b4c48dc344cacfbd3",
+      "status": "different",
+      "bytes": 3073,
+      "sha256": "a8542f48980a52edb6f59b276ef64dacf801aa48cf751fbd39165f9d30497476"
+    },
+    {
+      "ref": "origin/codex/price-volume-risk-research-20261004",
+      "commit": "dd965fb9dd7e0568fd41cd1a8bde95e138a1a023",
+      "status": "different",
+      "bytes": 3073,
+      "sha256": "a8542f48980a52edb6f59b276ef64dacf801aa48cf751fbd39165f9d30497476"
+    },
+    {
+      "ref": "origin/codex/sentiment-factor-progress-20261004",
+      "commit": "f4f3da0a65360b666a2cebf0f27ed0db48ec5e52",
+      "status": "missing",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "ref": "origin/codex/air-factor-parallel-20261001",
+      "commit": "d0f34a2f400bcb08f468141df8d51e67d7101b3d",
+      "status": "different",
+      "bytes": 842,
+      "sha256": "17a7bc63bc97893f24ee72861836d64e65298b18b4d53c67041ef999cc4613d5"
+    },
+    {
+      "ref": "origin/codex/factor-unit-research-20260915",
+      "commit": "91a93ad2b881fbeed1ee15ae03d4fc3bbff08342",
+      "status": "different",
+      "bytes": 842,
+      "sha256": "17a7bc63bc97893f24ee72861836d64e65298b18b4d53c67041ef999cc4613d5"
+    },
+    {
+      "ref": "origin/codex/stock-data-qualification-20261008",
+      "commit": "a6be33c2493e982451e5c5b3646c102553b43f6b",
+      "status": "different",
+      "bytes": 842,
+      "sha256": "17a7bc63bc97893f24ee72861836d64e65298b18b4d53c67041ef999cc4613d5"
+    },
+    {
+      "ref": "origin/codex/research-evidence-publication-20261008",
+      "commit": "e869bdce98ac7289993b42ba50661a1a1bcf878d",
+      "status": "missing",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "ref": "origin/codex/native-workflow-integration-20261007",
+      "commit": "8c069a98bc5f5450a53de8e64537900543cc4ca6",
+      "status": "different",
+      "bytes": 842,
+      "sha256": "17a7bc63bc97893f24ee72861836d64e65298b18b4d53c67041ef999cc4613d5"
+    },
+    {
+      "ref": "origin/task/classic-factor-progress",
+      "commit": "908d8090eb159c72971bcf6b4b7349da8ef2a1db",
+      "status": "different",
+      "bytes": 3945,
+      "sha256": "e86090adad26d87310656d5691f492c11da14e93e2a3eb7cbe6dcd7f41988bc8"
+    },
+    {
+      "ref": "classic-progress/native-workflow",
+      "commit": "5ce079e059d7ab94f2971ec81e09f489b2a7fa7e",
+      "status": "different",
+      "bytes": 842,
+      "sha256": "17a7bc63bc97893f24ee72861836d64e65298b18b4d53c67041ef999cc4613d5"
+    },
+    {
+      "ref": "classic-progress/work",
+      "commit": "604445fdf9660828f4ba17db8b2bc192d33b4a9f",
+      "status": "different",
+      "bytes": 3945,
+      "sha256": "e86090adad26d87310656d5691f492c11da14e93e2a3eb7cbe6dcd7f41988bc8"
+    },
+    {
+      "ref": "technical-factor-sequence/work-progress",
+      "commit": "b355cf0c8c028c99ec53e83ed2a23291081e92a1",
+      "status": "different",
+      "bytes": 3073,
+      "sha256": "a8542f48980a52edb6f59b276ef64dacf801aa48cf751fbd39165f9d30497476"
+    }
+  ],
+  "exact_match_in_checked_related_refs": 0,
+  "check_limit": "仅对既有13个相关ref/commit的同路径Git blob核SHA；没有全历史搜索或判定远端绝无此字节。",
+  "recommendation": "可由中控按已授权的原字节快照边界审阅单文件交付；未批准前不上传、不改原件。取得远端同SHA之后，只重验受影响的人工集成节点。",
+  "status": "candidate_only_not_uploaded",
+  "research_runs": 0,
+  "market_requests": 0,
+  "paid_requests": 0
+}

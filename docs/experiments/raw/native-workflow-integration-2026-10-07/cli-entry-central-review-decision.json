@@ -1,0 +1,44 @@
+{
+  "schema_version": "cli-entry-central-review-decision/1.0",
+  "recorded_at": "2026-10-08T01:20:08+08:00",
+  "timezone": "Asia/Shanghai",
+  "task_id": "classic-factor-research",
+  "decision_source": "中控负责人于本轮明确批准，只补交1个准确原字节CLI入口及最小资格/决定记录。",
+  "scope": "将 scripts/run_factor_lab.py 恢复为经核对的4889字节版本；不动此前19份快照及其原资格记录，不做测试或市场计算。",
+  "approved_file": {
+    "path": "scripts/run_factor_lab.py",
+    "bytes": 4889,
+    "sha256": "eb38c3ce70a4331026ab1dc5d8f71eb5f2e1cbffda59ceac4abbaffb15820c52",
+    "original_byte_author": "unknown",
+    "snapshot_organizer": "当前会话，仅整理原字节"
+  },
+  "prior_snapshot_base": {
+    "commit": "ec565b87f794541bfa6518a8675dce941390e3e8",
+    "branch": "codex/native-workflow-baseline-20261008"
+  },
+  "existing_path_at_base": {
+    "bytes": 842,
+    "sha256": "17a7bc63bc97893f24ee72861836d64e65298b18b4d53c67041ef999cc4613d5",
+    "note": "基础提交中同路径存在旧版CLI；本次获批将该路径更新到已核对的准确版本。"
+  },
+  "source_evidence": [
+    {
+      "path": "docs/experiments/raw/native-workflow-integration-2026-10-07/implementation-start.json",
+      "sha256": "5b1c03c28d4b9182cc6d65e02df9712b21f56fd93194b0510c00624554fb646b"
+    },
+    {
+      "path": "docs/experiments/raw/native-workflow-integration-2026-10-07/controller-receipt.json",
+      "sha256": "b138248885fe9eeb797edb1eace8131ba530ed52422533770482d1aded506ee0"
+    },
+    {
+      "path": "docs/experiments/raw/native-workflow-integration-2026-10-07/cli-entry-delivery-qualification.json",
+      "sha256": "4838b62e6f18adc178a0b0dc17f57885c4cb322bebf13446b4a9652ad7294118"
+    }
+  ],
+  "qualification_sha256": "4838b62e6f18adc178a0b0dc17f57885c4cb322bebf13446b4a9652ad7294118",
+  "limits": [
+    "原19份文件及baseline-delivery-qualification.json保持原字节。",
+    "本次不声称增加新功能；这是恢复一个既有CLI版本。",
+    "本次未运行测试、恢复流程或市场研究；工程恢复结论仍待指定节点验证。"
+  ]
+}
