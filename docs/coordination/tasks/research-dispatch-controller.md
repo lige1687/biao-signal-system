@@ -6,8 +6,8 @@
 - 研究调度负责人：[本轮中控](codex://threads/01a116c7-3700-7062-a6c6-53af00ef60a0)；本记录唯一Git写者：[协调入口](codex://threads/01a10051-4db1-7490-b40f-c13243767fc6)。
 - 原始目标：为个人周／月频趋势判断，推进可定位、可复算、可审查的八类成果；日／小时资料是辅助，周检查不意味着每周换仓。
 - 用途及验收：每条线用已冻结问题、基准、代码／输入指纹及独立核验交付；区分计算正确、观察关联、稳定增量和可执行策略改善。研究流程优先，不用测试数量作成果。
-- 适用规范：各执行分支AGENTS.md、current-standards.json实际版本、原合同和定义；本摘要不迁移旧冻结协议。Git规则COORDINATION.md 1.0；下一阶段补明确SHA查重。
-- 本记录协调基线：24f40fc9131c86aec5ad5bb678743e3ca5868333。成果工作分支codex/lei-coordination-refresh-20261007，基线34b6435a915b7adeff8f8c04484fb75295e908c1；本轮成果未推。四线实际新成果分支／commit尚未交付，不能把旧分支SHA冒充本轮工作。
+- 适用规范：各执行分支AGENTS.md、current-standards.json实际版本、原合同和定义；本摘要不迁移旧冻结协议。Git规则COORDINATION.md 1.1；每轮记录完整SHA查重。
+- 本记录协调基线：24f40fc9131c86aec5ad5bb678743e3ca5868333。成果工作分支codex/lei-coordination-refresh-20261007，基线34b6435a915b7adeff8f8c04484fb75295e908c1；本轮成果已推完整commit 7c5559679871115de509135f8260e59755285b28。四线实际新成果分支／commit尚未交付，不能把旧分支SHA冒充本轮工作。
 - 来源：本地docs/ops/work-progress/research-dispatch-controller-2026-10-07.md与用户交接；App四线快照均active/inProgress。源阶段记录尚未推送；原研究数据与成果是否远端可复现各线待交，未验证。
 
 ## 当前八目标
@@ -66,8 +66,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "ccc290e9b1c13286252c77ff281fbada8c1206c1",
-  "checked_at": "2026-10-07T23:18:13+08:00",
+  "checked_coordination_sha": "dbb9603223e9708d3afac63da09d8fe04da4597d",
+  "checked_at": "2026-10-07T23:21:50+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -151,3 +151,11 @@
 ### 新成果远端入口（已核，协调发布待核）
 
 本轮工具与项目协作增量已在独立[codex工作分支](https://github.com/lige1687/biao-signal-system/tree/codex/lei-coordination-refresh-20261007)发布，完整commit 0163bdaf62e6a74ce4cc8820e93ef3b601fbbe79；脚本代码原commit 4a1bab7301c30b5e3d716a660ddc4df0617460d3，后续仅阶段记录。可从该提交读取[只读检查工具](https://github.com/lige1687/biao-signal-system/blob/0163bdaf62e6a74ce4cc8820e93ef3b601fbbe79/scripts/sync/check_coordination.py)、[项目说明](https://github.com/lige1687/biao-signal-system/blob/0163bdaf62e6a74ce4cc8820e93ef3b601fbbe79/AGENTS.md)、[回执](https://github.com/lige1687/biao-signal-system/blob/0163bdaf62e6a74ce4cc8820e93ef3b601fbbe79/docs/ops/work-progress/lei-coordination-bootstrap.md)。不代表四线研究产物已推或仓外目标数据库更新。
+
+## 当前Git同步与验收状态（覆盖上文失败阶段）
+
+2026-10-07T23:21:50+08:00：网络写入已恢复。规则1.1、八目标／四线摘要和独立工作分支均已普通推并fetch读回；规则与摘要基线实际验证SHA dbb9603223e9708d3afac63da09d8fe04da4597d，本轮最终成果commit 7c5559679871115de509135f8260e59755285b28。安全推送失败、HTTPS缺凭据、线性重建与完整对象尝试均作为历史保留，不再是当前阻塞。其他负责人15文件逐字未改，未接管或宣告研究全部完成。
+
+[最新工具与验收回执](https://github.com/lige1687/biao-signal-system/blob/7c5559679871115de509135f8260e59755285b28/docs/ops/work-progress/lei-coordination-bootstrap.md)含在线已登记路径通过和未登记共享路径被拒的实际回执；工具源码仍4a1bab7301c30b5e3d716a660ddc4df0617460d3不变。所有使用者仍需阅读旧负责人记录、确认科学重复和授权，工具不取得锁。根脏AGENTS未改；仅已发布独立分支的规则增量可采用，所有客户端是否采用尚未验证。
+
+下一次最小操作：fetch最新协调→读本摘要和相关原负责人状态→记SHA／重叠决定→明确共享准确文件的唯一写者→推送读回登记→按原实验独审与预算推进。目标5／7仍未启动新计算；数据／目录已交待中控验收，技术／流程继续原对话，研究原件与新成果commit等待对应负责人交付，不冒充Git复现已完成。

@@ -1,19 +1,19 @@
 # 当前：统一八目标与四线查重接续
 
 - task-id：lei-coordination-bootstrap
-- 状态：active（独立成果已推，正在核协调发布）
-- 更新时间：2026-10-07T22:43:59+08:00
+- 状态：completed（仅本轮协调接续；原研究执行与验收仍归原对话）
+- 更新时间：2026-10-07T23:21:50+08:00
 - 负责人／唯一Git协调入口写者：Codex会话01a10051-4db1-7490-b40f-c13243767fc6；执行调度仍由01a116c7-3700-7062-a6c6-53af00ef60a0负责。
 - 目标：参与者从最新Git能查到八目标、四线范围、依赖和冲突，并留下开工查重SHA；不把文字规则说成控制所有AI的硬拦截。
 - 验收：统一入口可读、原负责人文件不改；小检查验证重复编号／写者／依赖；独立分支精确成果可读；推后fetch完整SHA核对。
 - 规范：现有COORDINATION.md 1.0、2026-10-07用户及中控明确授权；本轮只做协作工程，研究规范和冻结合同不变。
-- 基线：协调24f40fc9131c86aec5ad5bb678743e3ca5868333；成果分支codex/lei-coordination-refresh-20261007，基础34b6435a915b7adeff8f8c04484fb75295e908c1。最近已推本轮成果：暂无。
+- 基线：协调24f40fc9131c86aec5ad5bb678743e3ca5868333；成果分支codex/lei-coordination-refresh-20261007，基础34b6435a915b7adeff8f8c04484fb75295e908c1。最近已推成果完整commit：7c5559679871115de509135f8260e59755285b28。
 - 已完成：fetch列出16个原任务并检索相关范围；四个原对话active/inProgress已通过App快照核实，源中控阶段记录已读。AGENTS/CLAUDE和原生研究入口未见coordination硬检查；旧独立成果分支AGENTS有协作文字入口。
-- 正在做：新增docs/coordination/tasks/research-dispatch-controller.md（受权中控摘要唯一Git写者），COORDINATION.md增加检查SHA与小工具使用边界；独立成果分支修改AGENTS.md、scripts/sync/check_coordination.py、tests/unit/test_coordination_check.py及自身阶段证据。
-- 下一步：开工登记推后读回；实现只读检查、负例与在线核验；发布独立成果；同步最终索引。
+- 正在做：本轮实施和在线验收已完成；后续按原规则维护自己的协调记录。本方不接手四线实验或再派发。
+- 下一步：各执行负责人或中控采用已发布工具／规则增量后，开工、改范围和交付前查最新SHA，登记共享准确文件，再沿原授权推进。协调入口按实际新成果更新，不重复旧实验。
 - 重叠：所有其他任务文件只读。上述协调文件本会话唯一写；不修改共享研究代码、登记簿、数据或根脏AGENTS。需采用规则的其他AI只合入本分支增量，不能覆盖其既有规范。
-- 阻塞：本轮无；各研究资料／预算阻塞仅在中控摘要据来源记录，不替别人解除。
-- 检查：remote和fetch通过；版本树无.github/workflows，core.hooksPath未配置；完整推后与工具检查待运行。未检查仓库外发布集成，不调用部署。
+- 阻塞：本轮网络写入已恢复，无未解决同步阻塞；四线资料／预算阻塞据各负责人及中控记录，协调完成不替其解除。
+- 检查：remote和fetch通过；版本树无.github/workflows，core.hooksPath未配置；完整推后与在线工具检查通过；8项测试、目录归置、原AGENTS保留、其他负责人文件不变均通过。未检查仓库外发布集成，不调用部署。
 - 数据／预算：不传价格、数据、模型或ZIP；0市场实验、0拟合。源中控记录仅本地，远端不可复现，摘要将标证据等级。
 - 封存／禁止重跑：10月3日初始化已完成；不重跑PPO/P26、ETF负结果或旧403排查。
 - 恢复：fetch远端规则及本记录，再核独立分支实际SHA后继续未验收项；网络失败停止可能冲突的修改。
@@ -69,13 +69,13 @@ fetch origin coordination/lei，读本文件和 COORDINATION.md；核对成果�
 {
   "schema_version": 1,
   "record_id": "lei-coordination-bootstrap",
-  "checked_coordination_sha": "ccc290e9b1c13286252c77ff281fbada8c1206c1",
-  "checked_at": "2026-10-07T23:16:08+08:00",
+  "checked_coordination_sha": "dbb9603223e9708d3afac63da09d8fe04da4597d",
+  "checked_at": "2026-10-07T23:21:50+08:00",
   "assignments": [
     {
       "task_id": "lei-coordination-bootstrap",
       "owner": "01a10051-4db1-7490-b40f-c13243767fc6",
-      "status": "active",
+      "status": "completed",
       "write_paths": [
         "COORDINATION.md",
         "docs/coordination/tasks/lei-coordination-bootstrap.md",
@@ -94,3 +94,7 @@ fetch origin coordination/lei，读本文件和 COORDINATION.md；核对成果�
 2026-10-07T23:18:13+08:00：本地工具成果完整commit 4a1bab7301c30b5e3d716a660ddc4df0617460d3，未推。已完成8项测试和目录检查；实际在线查询证明远端未登记即退出2，不使用本地声明凑通过。两份已交研究报告仅定位与SHA，实质验收仍由中控。最终协调文件必须另提交并核远端，不能以c02c39bb冒充当前全部工作。
 
 安全写通道新证据：工作分支codex/lei-coordination-refresh-20261007已普通推并fetch比对，最近成果commit 0163bdaf62e6a74ce4cc8820e93ef3b601fbbe79。前一版“未推”保留为失败阶段历史，不代表当前成果状态；当前协调发布仍须核验。本轮没有修改其他任务文件。
+
+## 最终验收（替代失败阶段当前阻塞）
+
+2026-10-07T23:21:50+08:00：协调规则／两任务文件普通推送后fetch与逐字读回通过，实际检查SHA dbb9603223e9708d3afac63da09d8fe04da4597d。其他15负责人记录逐字不变。已登记产物路径在线查询退出0；请求未登记共享scripts/run_factor_lab.py退出2；旧记录人工核对列表15，work_clearance始终false。工具是手动声明检查，不是全AI硬拦截。工作分支成果与回执完整commit 7c5559679871115de509135f8260e59755285b28，已推并读回。没有本轮待推代码或研究原始数据；本状态更新包含自身的提交需从git log定位并再核远端，不为写自身SHA无限补交。
