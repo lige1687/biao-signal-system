@@ -1,0 +1,776 @@
+{
+  "checked_at_utc": "2026-10-07T14:43:43.806040+00:00",
+  "zip": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/stock-large-cloud-input-2026-10-07/stock-5211-frozen-close-2020-2024-v1.zip",
+    "bytes": 16619603,
+    "sha256": "43ebf06bfe66c79c2fb332fa287db33d49a60f23c4c3da0e4bb39ea9d23fe192"
+  },
+  "zip_members_verified": 14,
+  "payload_hashes": [
+    {
+      "name": "close.parquet",
+      "bytes": 14137323,
+      "sha256": "ecd33847c39bd4768db7d9827e6d20f18dc375d1edc1d053de614eb8e9b0c963"
+    },
+    {
+      "name": "daily-input-status.parquet",
+      "bytes": 1178403,
+      "sha256": "9e8dd6525a781b8b8e66955ad751724ce2ea590cd08574f8867bc3c8263eac42"
+    },
+    {
+      "name": "weekly-evaluation-status.parquet",
+      "bytes": 1206267,
+      "sha256": "2dd33e92adc79c74787f5cb6b6f7e094a532aaa4754dbb0b33cf68a80f02cc76"
+    },
+    {
+      "name": "pool.json",
+      "bytes": 79844,
+      "sha256": "5c5d14d848718bc96b0ed63ae282930173e869cfbefb20412fbcd5d42ff30cc8"
+    },
+    {
+      "name": "calendar.json",
+      "bytes": 22836,
+      "sha256": "fd07bb5e42f2eb7c0aeee7cbb1d84bf73f7f2147e4e0743d0cfa03753a6d57ac"
+    },
+    {
+      "name": "calendar-source.json",
+      "bytes": 296252,
+      "sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1"
+    },
+    {
+      "name": "field-definitions.json",
+      "bytes": 2309,
+      "sha256": "2a1f2a147c6e79839f10db21538a08897cfe12c2e9d54fe324395624d029606b"
+    },
+    {
+      "name": "weekly-availability-summary.json",
+      "bytes": 32556,
+      "sha256": "521353883f523f41784f829e9d2af586a720c8c923cbba92bcc5d2f352e146db"
+    },
+    {
+      "name": "per-code-missing-summary.json",
+      "bytes": 772331,
+      "sha256": "82cc62b2776fce590c1a6f8b897c31763516a05ba5f397c64ac404b8c305348b"
+    },
+    {
+      "name": "qualification-provenance.json",
+      "bytes": 37487,
+      "sha256": "b0ab9e130bd21b269a4f93d65a0fc889990cc000b4354a8716a83bfdd6b2c6c0"
+    },
+    {
+      "name": "README.md",
+      "bytes": 1971,
+      "sha256": "34ae0236378f1db64f433dcce7ea678777bd7188e1718cdb27bdc72184de4d2b"
+    },
+    {
+      "name": "verify_input.py",
+      "bytes": 5388,
+      "sha256": "1bd577caeb04877587545efab8571eef8d82884b921798fd9b981ca63e8d3ffc"
+    },
+    {
+      "name": "export_readonly.py",
+      "bytes": 21274,
+      "sha256": "8541bdacc1a79f3e8b92203da42205c0e265fa992c4e77b79388233ce591eca9"
+    }
+  ],
+  "export_sources_and_code_and_strategy_unchanged": [
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_klines_full.parquet",
+      "bytes": 49432584,
+      "sha256": "5ad045c518d0bb4394d8c8cb946d207ad9b5b1454e5a776b1a3766c62b475b04",
+      "expected_sha256": "5ad045c518d0bb4394d8c8cb946d207ad9b5b1454e5a776b1a3766c62b475b04",
+      "matches_export_snapshot": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+      "bytes": 296252,
+      "sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+      "expected_sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+      "matches_export_snapshot": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/stock-week-month-qualification-2026-10-05/qualification.json",
+      "bytes": 329639,
+      "sha256": "33dd041fa39a98b07756e65539fb6e69e66e6038462e74705a58ddc635130be7",
+      "expected_sha256": "33dd041fa39a98b07756e65539fb6e69e66e6038462e74705a58ddc635130be7",
+      "matches_export_snapshot": true
+    },
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_codes_cached.json",
+      "bytes": 55430,
+      "sha256": "cf6ea5486a358be0cba7e74d2de3ee10a782237b2faea8862864ba6b29e8a237",
+      "expected_sha256": "cf6ea5486a358be0cba7e74d2de3ee10a782237b2faea8862864ba6b29e8a237",
+      "matches_export_snapshot": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/proposals/stock-price-scale-and-membership-2026-10-06/saved-factor-and-basic-inventory.json",
+      "bytes": 32970,
+      "sha256": "4d190301d9eabdb3b31ec43a3945639d1532cc4624fd92786a0e6c439e777ef2",
+      "expected_sha256": "4d190301d9eabdb3b31ec43a3945639d1532cc4624fd92786a0e6c439e777ef2",
+      "matches_export_snapshot": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/stock-ppo82-cloud-input-2026-10-07/stock-ppo82-frozen-close-2020-2024-v1.zip",
+      "bytes": 287207,
+      "sha256": "418893633d01d209aeecf312f1a89eaa9fe599f22b40a8a41d65e27ce7e58447",
+      "expected_sha256": "418893633d01d209aeecf312f1a89eaa9fe599f22b40a8a41d65e27ce7e58447",
+      "matches_export_snapshot": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/baostock-bounded-air-probe-2026-10-05/run-01/normalized/security_basic/basic-1-sh-600705.json",
+      "bytes": 561,
+      "sha256": "fd316a88d961ed724d388bef661adc270ed989cb9ef423fb0ae2c67926de17da",
+      "expected_sha256": "fd316a88d961ed724d388bef661adc270ed989cb9ef423fb0ae2c67926de17da",
+      "matches_export_snapshot": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/baostock-bounded-air-probe-2026-10-05/run-01/normalized/security_basic/basic-2-sh-600837.json",
+      "bytes": 561,
+      "sha256": "b7cf0cc33540f03bfdecee4bf05b272c83ee8872bb4e3535e36172f2f1407157",
+      "expected_sha256": "b7cf0cc33540f03bfdecee4bf05b272c83ee8872bb4e3535e36172f2f1407157",
+      "matches_export_snapshot": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/baostock-bounded-air-probe-2026-10-05/run-01/normalized/security_basic/basic-3-sh-601989.json",
+      "bytes": 561,
+      "sha256": "16293d4a49895379b833e77364b521e1e328a647da923c631ce2a1ea22008163",
+      "expected_sha256": "16293d4a49895379b833e77364b521e1e328a647da923c631ce2a1ea22008163",
+      "matches_export_snapshot": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b02-targeted-gap-batch-2026-10-05/run-01/normalized/security_basic/basic-1-sz-000425.json",
+      "bytes": 788,
+      "sha256": "015dd7e10cd138ee0f5b33a2114d08ee2c6045a749c0857a8b6292f00a234652",
+      "expected_sha256": "015dd7e10cd138ee0f5b33a2114d08ee2c6045a749c0857a8b6292f00a234652",
+      "matches_export_snapshot": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b02-targeted-gap-batch-2026-10-05/run-01/normalized/security_basic/basic-2-sh-600958.json",
+      "bytes": 788,
+      "sha256": "b1a7f580f6d483ed896c1a675b5b2791909b6482fba038e2419e1738486d2bec",
+      "expected_sha256": "b1a7f580f6d483ed896c1a675b5b2791909b6482fba038e2419e1738486d2bec",
+      "matches_export_snapshot": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/backfill_breadth_full.py",
+      "bytes": 11825,
+      "sha256": "3f4805526e4e7792c5c197b833d9839ab6d569ec8497cc52d02bb007ca7546e3",
+      "expected_sha256": "3f4805526e4e7792c5c197b833d9839ab6d569ec8497cc52d02bb007ca7546e3",
+      "matches_export_snapshot": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/stock-large-cloud-input-2026-10-07/export_readonly.py",
+      "bytes": 21274,
+      "sha256": "8541bdacc1a79f3e8b92203da42205c0e265fa992c4e77b79388233ce591eca9",
+      "expected_sha256": "8541bdacc1a79f3e8b92203da42205c0e265fa992c4e77b79388233ce591eca9",
+      "matches_export_snapshot": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/stock-large-cloud-input-2026-10-07/verify_input.py",
+      "bytes": 5388,
+      "sha256": "1bd577caeb04877587545efab8571eef8d82884b921798fd9b981ca63e8d3ffc",
+      "expected_sha256": "1bd577caeb04877587545efab8571eef8d82884b921798fd9b981ca63e8d3ffc",
+      "matches_export_snapshot": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/stock-large-exploration-qualification-2026-10-07/profile_readonly.py",
+      "bytes": 20228,
+      "sha256": "0b9dc0e6a9b4451ed37df6418ecffcb0bb1f18d5f44133159c8ba8934f180156",
+      "expected_sha256": "0b9dc0e6a9b4451ed37df6418ecffcb0bb1f18d5f44133159c8ba8934f180156",
+      "matches_export_snapshot": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/stock-ppo82-cloud-input-2026-10-07/export_readonly.py",
+      "bytes": 14573,
+      "sha256": "61f44db1bf4877644d249c67b2aa241a71ee19a82f51de7cc85ad948c13810c5",
+      "expected_sha256": "61f44db1bf4877644d249c67b2aa241a71ee19a82f51de7cc85ad948c13810c5",
+      "matches_export_snapshot": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/current-standards.json",
+      "bytes": 1209,
+      "sha256": "d1293a6c4536b0b440f8260d91e5a8d8d1485a0ccbd0fc3801d478baec68ce71",
+      "expected_sha256": "d1293a6c4536b0b440f8260d91e5a8d8d1485a0ccbd0fc3801d478baec68ce71",
+      "matches_export_snapshot": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/configs/strategy-documents.v1.json",
+      "bytes": 806,
+      "sha256": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b",
+      "expected_sha256": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b",
+      "matches_export_snapshot": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "bytes": 65786,
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "expected_sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "matches_export_snapshot": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "bytes": 36427,
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "expected_sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "matches_export_snapshot": true
+    }
+  ],
+  "input_shape": {
+    "stock_columns": 5211,
+    "shared_daily_sessions": 979,
+    "warmup_sessions": 253,
+    "formal_daily_sessions": 726,
+    "weekly_sessions": 151
+  },
+  "weekly_availability": {
+    "input_eligible_cells": 645439,
+    "input_ineligible_cells": 141422,
+    "eligible_evaluable_cells": 625720,
+    "eligible_immature_cells": 18989,
+    "eligible_mature_missing_endpoint_cells": 730,
+    "codes_ever_eligible": 4984,
+    "codes_never_eligible": 227,
+    "evaluable_union_used_as_candidate_pool": false
+  },
+  "null_cells": 543539,
+  "source_partition_1944": {
+    "normal_raw_observation": 1601,
+    "provider_status0_placeholder": 339,
+    "queried_no_return": 4,
+    "never_queried": 0
+  },
+  "source_partition_method": "B04 accepted exact-key classification plus B05 final34; not all returned raw rows",
+  "source_partition_evidence": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b04-targeted-gap-batch-2026-10-06/run01-review-01/acceptance.json",
+      "bytes": 49608,
+      "sha256": "d01154fe45c4079f2305d9350c5b6a44b0a4bfbdbf4c0a0de84fd78591572860"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b05-final-gap-batch-2026-10-06/run01-review-01/selected-34-independent-classification.json",
+      "bytes": 6402,
+      "sha256": "b292d6417ef9c69cd12ac2393d21b1673ce831bc6800587872fce339c08f7b56"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b05-final-gap-batch-2026-10-06/run-01/receipt.json",
+      "bytes": 238331,
+      "sha256": "d98632261d2e2750b6a91c248715fd11671328eb7e7127816585b47115312a23"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/b05-final-gap-batch-2026-10-06/run01-review-01/post-run-audit.json",
+      "bytes": 28943,
+      "sha256": "cc47d93606c3fa5068ac581e6ff1d6c54d73e64ca0ef8b8b8d1dd6a7c32c9e7b"
+    }
+  ],
+  "main_price_repairs": 0,
+  "anchor_sources_hash_verified": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/announcement-13888.json",
+      "bytes": 40501,
+      "sha256": "f04250fc675f42e487a6091df32971ed4aa2b9b5a4ac7c5f6cc849ecca10a7a9"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/official-20211126-adjustments.xlsx",
+      "bytes": 872904,
+      "sha256": "f6b9d596f3fa6072258aa1eb2c036517bf20cc74c7879eaad1069cb8e1747909"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/current-000300cons.xls",
+      "bytes": 67072,
+      "sha256": "0f9fde0e470ba81bddd0d3e6db05269e1b5077aca778879f3833d04e027fa25d"
+    }
+  ],
+  "historical_complete_anchor_acquired": false,
+  "warmup_compatibility": {
+    "handoff_P26_requires_277_contiguous_closes": true,
+    "P26_original_contract_verified_here": false,
+    "first_six_weekly_dates": [
+      {
+        "date": "2022-01-07",
+        "available_calendar_rows_including_t": 257,
+        "available_calendar_rows_before_t": 256
+      },
+      {
+        "date": "2022-01-14",
+        "available_calendar_rows_including_t": 262,
+        "available_calendar_rows_before_t": 261
+      },
+      {
+        "date": "2022-01-21",
+        "available_calendar_rows_including_t": 267,
+        "available_calendar_rows_before_t": 266
+      },
+      {
+        "date": "2022-01-28",
+        "available_calendar_rows_including_t": 272,
+        "available_calendar_rows_before_t": 271
+      },
+      {
+        "date": "2022-02-11",
+        "available_calendar_rows_including_t": 277,
+        "available_calendar_rows_before_t": 276
+      },
+      {
+        "date": "2022-02-18",
+        "available_calendar_rows_including_t": 282,
+        "available_calendar_rows_before_t": 281
+      }
+    ],
+    "first_four_weekly_dates_insufficient_under_either_counting_convention": true,
+    "2022_02_11_boundary_requires_original_contract": true,
+    "not_an_assertion_that_original_P26_input_is_wrong": true
+  },
+  "environment": {
+    "branch": "codex/factor-unit-research-20260915",
+    "tracked_dirty_paths": 115,
+    "untracked_paths": 1173,
+    "space_bytes": [
+      {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+        "total": 245107195904,
+        "used": 230855544832,
+        "free": 14251651072
+      },
+      {
+        "path": "/Volumes/win+mac通用",
+        "total": 699702312960,
+        "used": 53123743744,
+        "free": 646578569216
+      }
+    ],
+    "process_snapshot": [
+      {
+        "pid": 5564,
+        "elapsed": "03:39:49",
+        "cpu_percent": "0.0",
+        "rss_kib": 8848,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 5566,
+        "elapsed": "03:39:49",
+        "cpu_percent": "0.0",
+        "rss_kib": 9936,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 13357,
+        "elapsed": "08:55:28",
+        "cpu_percent": "19.7",
+        "rss_kib": 94160,
+        "executable_basename": "Codex (Service)"
+      },
+      {
+        "pid": 13358,
+        "elapsed": "08:55:28",
+        "cpu_percent": "0.0",
+        "rss_kib": 46896,
+        "executable_basename": "Codex (Service)"
+      },
+      {
+        "pid": 13367,
+        "elapsed": "08:55:28",
+        "cpu_percent": "0.0",
+        "rss_kib": 14288,
+        "executable_basename": "Codex (Service)"
+      },
+      {
+        "pid": 13464,
+        "elapsed": "08:55:25",
+        "cpu_percent": "5.7",
+        "rss_kib": 730192,
+        "executable_basename": "codex"
+      },
+      {
+        "pid": 13510,
+        "elapsed": "08:55:24",
+        "cpu_percent": "0.0",
+        "rss_kib": 74656,
+        "executable_basename": "Codex (Renderer)"
+      },
+      {
+        "pid": 13511,
+        "elapsed": "08:55:24",
+        "cpu_percent": "6.8",
+        "rss_kib": 979184,
+        "executable_basename": "Codex (Renderer)"
+      },
+      {
+        "pid": 13815,
+        "elapsed": "08:55:11",
+        "cpu_percent": "78.5",
+        "rss_kib": 678560,
+        "executable_basename": "python3"
+      },
+      {
+        "pid": 14212,
+        "elapsed": "08:54:34",
+        "cpu_percent": "0.1",
+        "rss_kib": 135072,
+        "executable_basename": "Codex (Renderer)"
+      },
+      {
+        "pid": 14214,
+        "elapsed": "08:54:34",
+        "cpu_percent": "0.0",
+        "rss_kib": 24560,
+        "executable_basename": "Codex (Renderer)"
+      },
+      {
+        "pid": 14325,
+        "elapsed": "08:54:20",
+        "cpu_percent": "0.1",
+        "rss_kib": 25184,
+        "executable_basename": "codex"
+      },
+      {
+        "pid": 14326,
+        "elapsed": "08:54:20",
+        "cpu_percent": "0.0",
+        "rss_kib": 832,
+        "executable_basename": "python3"
+      },
+      {
+        "pid": 14885,
+        "elapsed": "08:52:12",
+        "cpu_percent": "0.0",
+        "rss_kib": 16928,
+        "executable_basename": "Codex (Service)"
+      },
+      {
+        "pid": 29592,
+        "elapsed": "07:52:16",
+        "cpu_percent": "0.7",
+        "rss_kib": 61008,
+        "executable_basename": "codex-code-mode-host"
+      },
+      {
+        "pid": 30924,
+        "elapsed": "07:49:14",
+        "cpu_percent": "0.0",
+        "rss_kib": 116240,
+        "executable_basename": "Codex (Renderer)"
+      },
+      {
+        "pid": 46959,
+        "elapsed": "06:52:02",
+        "cpu_percent": "0.0",
+        "rss_kib": 29424,
+        "executable_basename": "Codex (Renderer)"
+      },
+      {
+        "pid": 56356,
+        "elapsed": "06:26:44",
+        "cpu_percent": "0.0",
+        "rss_kib": 7712,
+        "executable_basename": "codex"
+      },
+      {
+        "pid": 56357,
+        "elapsed": "06:26:44",
+        "cpu_percent": "0.0",
+        "rss_kib": 7712,
+        "executable_basename": "codex"
+      },
+      {
+        "pid": 56363,
+        "elapsed": "06:26:44",
+        "cpu_percent": "0.0",
+        "rss_kib": 40208,
+        "executable_basename": "codex"
+      },
+      {
+        "pid": 59068,
+        "elapsed": "06:16:35",
+        "cpu_percent": "0.0",
+        "rss_kib": 3200,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 59069,
+        "elapsed": "06:16:35",
+        "cpu_percent": "0.0",
+        "rss_kib": 3168,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 59636,
+        "elapsed": "22:19",
+        "cpu_percent": "7.7",
+        "rss_kib": 152048,
+        "executable_basename": "Codex (Renderer)"
+      },
+      {
+        "pid": 59637,
+        "elapsed": "22:19",
+        "cpu_percent": "0.0",
+        "rss_kib": 60112,
+        "executable_basename": "Codex (Renderer)"
+      },
+      {
+        "pid": 60433,
+        "elapsed": "19:24",
+        "cpu_percent": "0.0",
+        "rss_kib": 11024,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 60435,
+        "elapsed": "19:24",
+        "cpu_percent": "0.0",
+        "rss_kib": 9776,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 60571,
+        "elapsed": "19:17",
+        "cpu_percent": "0.0",
+        "rss_kib": 9776,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 60574,
+        "elapsed": "19:17",
+        "cpu_percent": "0.0",
+        "rss_kib": 11024,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 60577,
+        "elapsed": "19:17",
+        "cpu_percent": "0.0",
+        "rss_kib": 9776,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 60581,
+        "elapsed": "19:17",
+        "cpu_percent": "0.0",
+        "rss_kib": 9776,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 60583,
+        "elapsed": "19:17",
+        "cpu_percent": "0.0",
+        "rss_kib": 11024,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 60585,
+        "elapsed": "19:17",
+        "cpu_percent": "0.0",
+        "rss_kib": 11024,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 60594,
+        "elapsed": "19:17",
+        "cpu_percent": "0.0",
+        "rss_kib": 9776,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 60595,
+        "elapsed": "19:17",
+        "cpu_percent": "0.0",
+        "rss_kib": 11024,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 60597,
+        "elapsed": "19:17",
+        "cpu_percent": "0.0",
+        "rss_kib": 9776,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 60602,
+        "elapsed": "19:17",
+        "cpu_percent": "0.0",
+        "rss_kib": 11024,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 60618,
+        "elapsed": "19:17",
+        "cpu_percent": "0.0",
+        "rss_kib": 9776,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 60619,
+        "elapsed": "19:17",
+        "cpu_percent": "0.0",
+        "rss_kib": 9776,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 60620,
+        "elapsed": "19:17",
+        "cpu_percent": "0.0",
+        "rss_kib": 11024,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 60621,
+        "elapsed": "19:17",
+        "cpu_percent": "0.0",
+        "rss_kib": 11024,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 63110,
+        "elapsed": "11:47",
+        "cpu_percent": "0.0",
+        "rss_kib": 9776,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 63112,
+        "elapsed": "11:47",
+        "cpu_percent": "0.0",
+        "rss_kib": 11024,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 64906,
+        "elapsed": "07:09",
+        "cpu_percent": "0.0",
+        "rss_kib": 11152,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 64979,
+        "elapsed": "07:07",
+        "cpu_percent": "0.0",
+        "rss_kib": 9872,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 64982,
+        "elapsed": "07:07",
+        "cpu_percent": "0.0",
+        "rss_kib": 11280,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 65048,
+        "elapsed": "07:06",
+        "cpu_percent": "0.0",
+        "rss_kib": 11168,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 65049,
+        "elapsed": "07:06",
+        "cpu_percent": "0.0",
+        "rss_kib": 9888,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 65159,
+        "elapsed": "07:05",
+        "cpu_percent": "0.0",
+        "rss_kib": 9856,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 65161,
+        "elapsed": "07:05",
+        "cpu_percent": "0.0",
+        "rss_kib": 11136,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 66799,
+        "elapsed": "03:58",
+        "cpu_percent": "0.0",
+        "rss_kib": 53728,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 66803,
+        "elapsed": "03:58",
+        "cpu_percent": "0.0",
+        "rss_kib": 59664,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 68226,
+        "elapsed": "00:14",
+        "cpu_percent": "0.0",
+        "rss_kib": 16240,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 68352,
+        "elapsed": "00:01",
+        "cpu_percent": "25.3",
+        "rss_kib": 90544,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 68353,
+        "elapsed": "00:01",
+        "cpu_percent": "6.6",
+        "rss_kib": 13392,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 68354,
+        "elapsed": "00:01",
+        "cpu_percent": "25.8",
+        "rss_kib": 37008,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 75969,
+        "elapsed": "05:12:41",
+        "cpu_percent": "0.0",
+        "rss_kib": 8512,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 75975,
+        "elapsed": "05:12:41",
+        "cpu_percent": "0.0",
+        "rss_kib": 7488,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 93533,
+        "elapsed": "04:09:52",
+        "cpu_percent": "0.0",
+        "rss_kib": 8512,
+        "executable_basename": "Python"
+      },
+      {
+        "pid": 93539,
+        "elapsed": "04:09:52",
+        "cpu_percent": "0.0",
+        "rss_kib": 7488,
+        "executable_basename": "Python"
+      }
+    ],
+    "process_arguments_captured": false,
+    "cloud_scratch_present_local": false
+  },
+  "activity": {
+    "new_market_or_web_requests": 0,
+    "library_downloads": 0,
+    "factor_or_return_calculations": 0,
+    "new_fits": 0,
+    "subagents": 0,
+    "external_writes": 0
+  },
+  "local_search_scope_for_PPO_P26_originals": "docs/experiments/raw and docs/research/proposals filenames; no original large-stock effect bundle found in that bounded scope",
+  "not_qualified_for": [
+    "historical all-A inference",
+    "historical CSI300 full membership",
+    "cash-dividend total wealth",
+    "live execution",
+    "historical industry comparisons",
+    "volume or OHLC-dependent stock factors"
+  ]
+}
