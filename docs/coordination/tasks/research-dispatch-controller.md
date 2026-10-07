@@ -33,7 +33,7 @@
 |`d-mae-synthetic-review`|目录对话受权；相邻 `independent-review/d-mae-synthetic/`|App新turn `01a116f8-95c5-7233-81d2-1a37d08c1dd4` active/inProgress；只审人工例子、公式及拒绝边界，依赖技术合成包。|
 |`dispatch-runtime`|中控对话；自身阶段进度与 `thread-state.json` 两个准确路径|负责真实回调、依赖、验收与下阶段派发；协调对话仅写这份Git摘要。|
 
-`docs/experiments/registry.json`、`docs/experiments/INDEX.md`、`docs/research/definitions.v1.json`仍由中控串行协调，四条执行线只交登记候选。目标5与未来真实结果独审只保留依赖，不因任务名取得整个模块。路径登记不是排他锁；共享文件写入前仍需核准准确文件、唯一实现者及独立验证者。其他15份旧任务记录须人工查阅，工具只检查本文件显式结构。
+`docs/experiments/registry.json`、`docs/experiments/INDEX.md`、`docs/research/definitions.v1.json`仍由中控串行协调，四条执行线只交登记候选。目标5与未来真实结果独审只保留依赖；`d-mae-independent-review` 是未来真实结果后审，仍为 planned、没有已占路径，不能复用正在执行的 `d-mae-synthetic-review` 合成审查输出。路径登记不是排他锁；共享文件写入前仍需核准准确文件、唯一实现者及独立验证者。其他15份旧任务记录须人工查阅，工具只检查本文件显式结构。
 
 ## 真实证据、限制与下一次操作
 
