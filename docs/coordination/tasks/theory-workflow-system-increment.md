@@ -2,7 +2,7 @@
 
 - task-id: theory-workflow-system-increment
 - owner: 01a11579-7f2c-7c21-88d1-e5b334b569b7；仅维护本任务记录。
-- status: active
+- status: completed（本地操作接入与限定演练）
 - updated_at: 2026-10-08T00:13:35.518178+08:00
 - checked_coordination_sha: 050cdf179c8feb6c0be68d4eeeedb7a52a0d93be
 - 已读：COORDINATION.md、research-dispatch-controller、classic-factor-research、external-quant-resources；另检索全部任务对拟写路径的声明。
@@ -22,3 +22,11 @@
 ## 本地接入已核，等待两条登记窗口
 
 更新时间：2026-10-08T00:20:37.608557+08:00。本轮指引增补已完成，原文逐字保留；必读链和实际代码映射检查通过，一个Sol/medium助手8案例演练及主控复核符合预期。报告与证据仍仅本地，未发布操作文件。收到中控串行安排时尚未写registry/INDEX；先daily后本任务，等待明确窗口。本任务同意暂停这两共享文件写入，不回滚他人内容。待追加仅principles-ai-execution-2026-10-08.md与literature-tools-fit-2026-10-08.md。Python入口、技能、定义、旧冻结实验都未改。开工协调5bd2e162已推并读回，第一次非快进失败保留。新读取4197415e046ba115dcbfd8c2450fbe3e4dd58c9e及daily新增状态，无方法指引写入冲突。用户原始调度消息已核允许中控接受回调，已回传未写共享登记状态。
+
+## 本轮完成与登记释放
+
+更新时间：2026-10-08T00:24:41.865969+08:00；checked_coordination_sha=9bbb3d8f3c6000b5e6ee04bd9ddce4082d7727bd，已读daily释放及中控明确窗口。只追加两报告，写前614条逐项保存，移除准确插入可逐字还原两个原文件；写后616条及导航读回通过。scope_released=true，共享registry/INDEX不再写，receipt已回调中控。完整证据 docs/experiments/raw/principles-ai-execution-2026-10-08/registration-receipt.json、verification.json。指南SHA=e217adf97daa9d8d669c74b0311f14ac7f2f958e0dfb43a191a0b223e67da4ff。报告principles-ai-execution-2026-10-08.md与literature-tools-fit-2026-10-08.md已本机归档，归置通过；8例仅一次已知上下文AI演练，非长期行为保证。实际来源映射和原文保留检查通过，Python未改。
+
+本轮问题已回答，无必需市场实验或后台任务。操作说明/报告仍仅本地，尚未将完整操作文件分发到远端AI；本协调只同步真实状态和路径，不将元数据当成果发布。需要跨设备采用时先独立发布准确文档增量并核其入口依赖，不重跑旧市场实验。无需返修；只保留该分发限制，不另造更多框架。
+
+机械失败留痕：最终状态第一次生成用错相对路径，在读取指南时失败且未写文件、未生成新commit；改用已经核对的绝对路径恢复。没有改变研究或登记内容。
