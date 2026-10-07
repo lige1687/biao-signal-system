@@ -70,3 +70,10 @@
 
 
 来源复用精化（写代码前）：中控确认未见两诊断冲突，并要求复用技术线固定vendor而非另复制。撤回尚未实施的vendor/alphalens_ranking/新目录计划；改为只在主工作区恢复原来缺失的 src/lei_signal/research/vendor/alphalens_components/{performance.py,utils.py,LICENSE,PROVENANCE.json} 四公开文件，逐字来自2ab565017a7a4959af744430339e32a09ce12667，保留原路径与原指纹，不修改其内容，不写原alphalens_component.py。新ranking_diagnostics.py从这个统一固定源只载两原函数，不重建原三个分析。接入层和新测试仍本任务唯一写者。第一次scope普通push非快进失败，已fetch核20d25895新增classic状态并普通merge保留，不强推。两次读源时误把manifest.path当本地saved造成FileNotFoundError，未写源或启动研究，后按saved准确路径读取。
+
+
+## Alphalens真实试用已验，等单条登记
+
+已核82dfbda1942f96f3fdc712a2154fd7b8eb82baf6，新增daily范围与本任务无冲突。新报告 docs/experiments/alphalens-ranking-use-2026-10-08.md，SHA ee756b350f555d0b3915b7979889d6202abbd36450f1b4245d8bbe066f875887；两原函数在已有6510分数/1085日实用，CLI1次，主控10单测、标准库独立6510输出格差0，资料不变与原文/入口/33链接/归置通过。前两名新增成员均值4.99%/10.62%，仅日历lag1/5描述；原效果稿待审、无行情/因子计算/拟合/收益复算。源vendor四文件已从原技术分支2ab56501逐字恢复，不改原组件或原研究。
+
+原“未见实际接入”已纠正为本地主工作区缺文件的局限，既有4256行技术试用证据已复用、未重做。RD-Agent有限试跑保留，Qlib新Ridge仍缺原件，CrossSection/pysystemtrade仅方法借用。用户新要求中的可用落地已完成，成果仅本机；已请求中控准确一条registry/INDEX窗口，当前这两文件只读。失败日志、定义/案例适用判断、人工日历映射、运行回执与所有限制在raw/alphalens-ranking-use-2026-10-08/。下一步仅登记读回及释放，无必要新市场实验。
