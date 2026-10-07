@@ -1,3 +1,17 @@
+# 当前：共享工作区 AGENTS.md 协作入口已在本机采用
+
+- task-id：lei-coordination-bootstrap；状态：completed（仅本机采用阶段）；更新时间：2026-10-07T23:56:15+08:00（Asia/Shanghai）。负责人/唯一协调写者：会话 `01a10051-4db1-7490-b40f-c13243767fc6`；研究调度仍由中控会话负责，不因本阶段移交。
+- 原始目标：参与者读取项目 AGENTS.md 即能找到唯一远端协调规则，先查已完成和活跃范围，再登记并同步；仅文字指引，不是自动锁或权限扩张。适用规则：`COORDINATION.md` 1.1 与原项目研究/安全规范。
+- 本轮前置登记：协调 `d3c97ead075cc0f359fecfe2bd179e57b8e4f6b5` 已推并远端读回；该SHA的本记录将 `/Users/yongbiaoli/Desktop/lei-signal-lab/AGENTS.md` 作为准确本机采用范围，在线检查 `online_verified=true`、`declared_checks_passed=true`。根文件原始23,939字节、SHA-256 `345510fa39b12a995d3660fee40ce71475e58d7a32670e93ce70fddf91438cb0`；根工作分支 `codex/factor-unit-research-20260915` HEAD `18e64fa632dba5dbad0e5fcae09b4ccc75f119a9`，原工作区已脏。
+- 已完成：仅在原文件尾部追加「多 AI 协作（2026-10-03）」标题与两段已发布的协作说明，说明以 `codex/lei-coordination-refresh-20261007` @ `7c5559679871115de509135f8260e59755285b28` 为来源，并准确注明只读检查器在该成果分支、当前根工作区尚未采用。采用后25,460字节、SHA-256 `a2a8fd1dde803b603717ec1fa1b49c14d76ab0a4e28d1f7d99de7d9642fb12b1`；追加1,521字节，前23,939字节逐字未变，原研究闭环结尾标记仍仅一处。文件仅本机，远端不可复现；未暂存/提交根AGENTS，也未触及其他根脏文件。
+- 验收检查：原SHA与前缀完全相同、协作标题唯一、规则/任务目录/成果分支指向均可读、工具源文件在已推成果commit可读、`git diff --check -- AGENTS.md`通过、AGENTS未进入暂存区。初次读取追加段的代码误用字符索引检查UTF-8字节位置，产生一次假阴性；立即改用字节切片后全部预期词通过，文件本身无错误。未运行交易/研究功能测试，因仅改文字。数据/权重/实验/拟合/付费0；旧封存结论不变。
+- 四线当前采用证据：技术与目录原对话已按协调范围完成各自合成/独审阶段；流程原对话已在线核范围并正在隔离实现，资料原对话已按串行窗口完成三项本机登记；这是协作行为证据，不等于四线各自工作分支的 AGENTS 都含新段。流程已推分支的 AGENTS 未见本段；技术、目录、资料的其他客户端本地配置/读取状态未统一验证。其他工作分支如需让新AI自动读到入口，仍须各自审阅并带入这两段；本任务不替其覆盖或推送。
+- 当前正在做：本机采用已验收；继续维护本会话的协调摘要。下一步仅随实际阶段或冲突变化更新本任务记录；不自动向main/master、其他设备或全局配置推广。重叠范围只有本机AGENTS已追加，其他任务/未登记参与者读新规则是否生效未知；记录不是锁。没有本轮网络或权限阻塞。
+- 最小交接：先fetch最新协调分支与本记录，核本机AGENTS实际SHA；若位于其他分支/设备，先比较其现有规范再只追加协作段。工具从上述成果分支取得并审阅，不能把源分支存在等同所有客户端已采用。
+- 较上一版新增：登记推后成功、根AGENTS仅追加的真实本机回执、四线可见采用边界；下方保留开工登记和历史失败。
+
+---
+
 # 当前：共享工作区 AGENTS.md 协调入口本机采用（开工登记）
 
 - task-id：lei-coordination-bootstrap；状态：active；更新时间：2026-10-07T23:52:19+08:00（Asia/Shanghai）。负责人/唯一协调写者：会话 `01a10051-4db1-7490-b40f-c13243767fc6`；研究调度仍由中控 `01a116c7-3700-7062-a6c6-53af00ef60a0` 负责。
@@ -83,8 +97,8 @@ fetch origin coordination/lei，读本文件和 COORDINATION.md；核对成果�
 {
   "schema_version": 1,
   "record_id": "lei-coordination-bootstrap",
-  "checked_coordination_sha": "dbb9603223e9708d3afac63da09d8fe04da4597d",
-  "checked_at": "2026-10-07T23:21:50+08:00",
+  "checked_coordination_sha": "d3c97ead075cc0f359fecfe2bd179e57b8e4f6b5",
+  "checked_at": "2026-10-07T23:56:15+08:00",
   "assignments": [
     {
       "task_id": "lei-coordination-bootstrap",
@@ -99,7 +113,8 @@ fetch origin coordination/lei，读本文件和 COORDINATION.md；核对成果�
         "tests/unit/test_coordination_check.py",
         "docs/ops/work-progress/lei-coordination-bootstrap.md"
       ],
-      "depends_on": []
+      "depends_on": [],
+      "source": "local root AGENTS append-only adoption verified; 23939-byte original SHA-256 345510fa39b12a995d3660fee40ce71475e58d7a32670e93ce70fddf91438cb0 preserved as exact prefix; 25460-byte local after SHA-256 a2a8fd1dde803b603717ec1fa1b49c14d76ab0a4e28d1f7d99de7d9642fb12b1; not staged/committed/pushed in shared dirty branch; other clients unverified"
     }
   ]
 }

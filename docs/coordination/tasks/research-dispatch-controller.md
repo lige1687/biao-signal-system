@@ -1,11 +1,11 @@
 # LEI 八目标研究调度｜当前快照
 
-- 更新时间：2026-10-07T23:50:18+08:00（Asia/Shanghai）
+- 更新时间：2026-10-07T23:56:15+08:00（Asia/Shanghai）
 - task-id：research-dispatch-controller；状态：active。研究调度：[中控对话](codex://threads/01a116c7-3700-7062-a6c6-53af00ef60a0)；本文件唯一Git写者：[协调对话](codex://threads/01a10051-4db1-7490-b40f-c13243767fc6)。原负责人文件仍由各自维护。
-- 最新读取协调分支：`0bc83cedd6445fce1e87001075a1ae56476aa8e0`；本轮在线读回并核 `COORDINATION.md`、本任务、已登记范围，流程六路径与报告两路径均在线检查通过。旧任务人工排重沿用上轮核对；本轮另核情绪原对话最后turn `01a10a47-9453-7e72-9999-9f08aba75464` completed/notLoaded，未来登记责任保留，但本批当前无并行写全局登记文件。此SHA是编辑前查重基线。
+- 最新读取协调分支：`d3c97ead075cc0f359fecfe2bd179e57b8e4f6b5`；本轮在线读回并核 `COORDINATION.md`、本任务、已登记范围，流程六路径与报告两路径均在线检查通过。旧任务人工排重沿用上轮核对；本轮另核情绪原对话最后turn `01a10a47-9453-7e72-9999-9f08aba75464` completed/notLoaded，未来登记责任保留，但本批当前无并行写全局登记文件。此SHA是编辑前查重基线。
 - 原始目标：把八项LEI研究与工程成果做成可定位、可复算、可审查的接续链。当前验收按问题、输入、合同、合成检查、独审、真实效果与归档逐项看；不能用某一阶段的“交付”表示整条链已完成。适用规则为 `COORDINATION.md` 1.1 和各执行任务冻结规范。
-- 最新已推协调提交（编辑前）：`0bc83cedd6445fce1e87001075a1ae56476aa8e0`；本次新成果commit须推后单独核对。Git只存目标摘要和成果索引，不表示仓外系统待升级数据库已写入。工作分支研究成果以各负责人准确提交为准，尚未推送的原件明标仅本机。
-- 较上一版：把已在线核实的两项待准入范围转为实际执行状态：流程人工接入已由中控启动，三份报告串行登记已在本机完成、验收并释放窗口，尚未推到工作分支；目录动态来源快照说明已由原作者补好。仍不把执行中当完成，不声明真实X/V/Y或收益。
+- 最新已推协调提交（编辑前）：`d3c97ead075cc0f359fecfe2bd179e57b8e4f6b5`；本次新成果commit须推后单独核对。Git只存目标摘要和成果索引，不表示仓外系统待升级数据库已写入。工作分支研究成果以各负责人准确提交为准，尚未推送的原件明标仅本机。
+- 较上一版：本机共享AGENTS.md已仅追加远端协作入口，原字节前缀保留；三项报告已在本机登记并验收，串行窗口释放但未推远端；流程人工接入仍在隔离实现。新增下一流程独审的planned准确范围，未派/未运行。真实X/V/Y仍为0。
 
 ## 八项目标现在到哪一步
 
@@ -37,11 +37,13 @@
 
 `docs/research/definitions.v1.json`仍由中控串行协调；`docs/experiments/registry.json`、`docs/experiments/INDEX.md`本批仅由资料原对话串行登记三项并经中控本机验收，窗口已释放；本机共享脏分支尚未提交或推送，其他本批线只读。目标5、人工流程接入独审（planned）与未来真实结果独审只保留依赖；`d-mae-independent-review` 是未来真实结果后审，仍为 planned、没有已占路径，不能复用已完成的 `d-mae-synthetic-review` 合成审查输出。路径登记不是排他锁；共享文件写入前仍需核准准确文件、唯一实现者及独立验证者。其他15份旧任务记录须人工查阅，工具只检查本文件显式结构。
 
-## 当前执行范围与冲突核对（2026-10-07T23:50:18+08:00）
+## 当前执行范围与冲突核对（2026-10-07T23:56:15+08:00）
 
 - `native-workflow-integration`：唯一实现者[流程对话](codex://threads/01a0e6d5-4bcf-7bd3-82e4-4961c963d20e)。[已推接口图](https://github.com/lige1687/biao-signal-system/blob/751b94b3d93f3937b90357eaa8abb6ca9acac793/docs/experiments/raw/native-workflow-integration-2026-10-07/next-stage-interface-map.md)所在工作分支 `codex/native-workflow-integration-20261007`，最新已核commit `751b94b3d93f3937b90357eaa8abb6ca9acac793`、图SHA-256 `4f0b3218a609803e5cdd53de9a49d3d7b75705dfc276f5dc419f026db2631202`；旧图 `3e1bcfe0340cb1f4aea95611f7f20820e996e7f0` 的SHA-256 `709054b96857d9aaf0a1d5bab410b2b39c7175227e78ee60dca1284fe8f073f2`，新图补入合成独审指出的字段拒绝与有限V检查，六路径未变。本批唯一流程写者六路径：`src/lei_signal/research/native_risk_d_mae_workflow.py`、`src/lei_signal/research/question_contract.py`、`src/lei_signal/research/workflow_inputs.py`、`src/lei_signal/research/workflow.py`、`tests/unit/test_native_risk_d_mae_workflow.py`、`tests/integration/test_native_risk_d_mae_workflow.py`。其中三份共享研究入口已有旧kind历史写入；本轮读 `technical-factor-sequence`、`risk-shape-information`、`classic-factor-research`、`external-quant-resources` 当前首屏均未发现同时写这六个准确文件的人，但不能据此覆盖本机脏字节。`scripts/run_factor_lab.py` 仅条件候选，未登记；`workflow_evaluation.py`、`input_preflight.py`、全局登记和定义文件只读。**中控已核合成独审限定通过及本协调在线声明，正式启动流程人工数据接入；App确认流程turn `01a11707-848e-7d42-ac40-a39e81d5b9ce` inProgress，独立隔离工作区。独审列出的原成员绑定、字段拒绝、有限V检查须进接入验收；原六份真实输入缺，未批准真实X/V/Y。**
-- `report-registration-20261007`：唯一候选写者[资料原对话](codex://threads/01a101c1-ac35-70a3-8ecd-4a6179bb99ad)。本批串行窗口仅认领 `docs/experiments/registry.json`、`docs/experiments/INDEX.md`；准确回执 `docs/experiments/raw/stock-data-qualification-2026-10-07/registration-receipt.json` 由同一负责人沿用既有 `stock-data-qualification` raw目录认领，不产生第二个task-id的重叠声明。只登记已有限接受的资料资格、补好快照说明并有限接受的目录、限定入口核验；中控已实际派给资料原对话，回调与中控核验已完成：registry SHA-256 `b86488672cda210d2a7107ddb693a76f15b040ae8657529891a3340b9344d860`、INDEX SHA-256 `5e266d5453bbe82dd454818008c5d640fd044dd53c21a43399c002871a925fc3`、登记回执SHA-256 `78ce939692658377e42273ac431aed3ed4144c8368e22f15cf377e53631bbf6b`；旧条目、作者报告和definitions未改。仅本机，远端不可复现，本批写入窗口已释放。`native-risk-d-mae` 合成报告虽已独审限定通过，但仍不在本批三项报告登记。草稿检查曾因同一负责人两task重复声明回执父目录而失败，已按原目录归属修正，保留此失败证据。全部其他任务记录已人工查看：`sentiment-factor-research` 原负责人/root 保留两份全局登记文件的**未来自身条目**，当前状态是planned／部分blocked且明确无运行研究进程；`technical-factor-sequence` 的报告登记历史已完成；`douyin-vike-increment` 本轮完成且未列全局登记写入。故未发现当前同时写全局登记的人，但情绪线的未来范围有文件级重叠；中控已核情绪原对话最后turn completed/notLoaded并启用本批串行窗口；仍保留其未来登记责任，不覆盖其条目。只追加本批三项，旧行、定义、研究状态和仓外OKR不改。
-- 当前是执行中快照：中控在线查六路径和两份全局登记均 exit0、`online_verified=true`、`declared_checks_passed=true`；`work_clearance=false` 是工具固定的非自动授权提示，中控另已作人工排重和启动决定。流程原对话仍在运行；资料原对话的三项本机登记已完成且有回执，但未推远端；下一人工流程独审只预登记，未派/未运行；本协调只更新摘要，无源码、登记簿、行情、拟合或付费操作。登记不是排他锁，其他 AI 避开六路径与本批登记窗口的并行写入，碰到新认领先协调。
+- `report-registration-20261007`：本批唯一写者[资料原对话](codex://threads/01a101c1-ac35-70a3-8ecd-4a6179bb99ad)。本批串行窗口仅认领 `docs/experiments/registry.json`、`docs/experiments/INDEX.md`；准确回执 `docs/experiments/raw/stock-data-qualification-2026-10-07/registration-receipt.json` 由同一负责人沿用既有 `stock-data-qualification` raw目录认领，不产生第二个task-id的重叠声明。只登记已有限接受的资料资格、补好快照说明并有限接受的目录、限定入口核验；中控已实际派给资料原对话，回调与中控核验已完成：registry SHA-256 `b86488672cda210d2a7107ddb693a76f15b040ae8657529891a3340b9344d860`、INDEX SHA-256 `5e266d5453bbe82dd454818008c5d640fd044dd53c21a43399c002871a925fc3`、登记回执SHA-256 `78ce939692658377e42273ac431aed3ed4144c8368e22f15cf377e53631bbf6b`；旧条目、作者报告和definitions未改。仅本机，远端不可复现，本批写入窗口已释放。`native-risk-d-mae` 合成报告虽已独审限定通过，但仍不在本批三项报告登记。草稿检查曾因同一负责人两task重复声明回执父目录而失败，已按原目录归属修正，保留此失败证据。全部其他任务记录已人工查看：`sentiment-factor-research` 原负责人/root 保留两份全局登记文件的**未来自身条目**，当前状态是planned／部分blocked且明确无运行研究进程；`technical-factor-sequence` 的报告登记历史已完成；`douyin-vike-increment` 本轮完成且未列全局登记写入。故未发现当前同时写全局登记的人，但情绪线的未来范围有文件级重叠；中控已核情绪原对话最后turn completed/notLoaded并启用本批串行窗口；仍保留其未来登记责任，不覆盖其条目。只追加本批三项，旧行、定义、研究状态和仓外OKR不改。
+- 当前是执行中快照：中控在线查六路径和两份全局登记均 exit0、`online_verified=true`、`declared_checks_passed=true`；`work_clearance=false` 是工具固定的非自动授权提示，中控另已作人工排重和启动决定。流程原对话仍在运行；资料原对话的三项本机登记已完成且有回执，但未推远端；下一人工流程独审只预登记，未派/未运行；本协调只更新摘要，无源码、登记簿、行情、拟合或付费操作。登记不是排他锁，其他 AI 避开流程六路径的并行写入；登记窗口已释放，新登记需求重新查重和排程。
+
+- 项目级协作入口本机采用：本协调会话在远端范围登记后，向共享工作区 `/Users/yongbiaoli/Desktop/lei-signal-lab/AGENTS.md` 仅追加已发布的两段说明，原23,939字节前缀逐字保留；本机完成后SHA-256 `a2a8fd1dde803b603717ec1fa1b49c14d76ab0a4e28d1f7d99de7d9642fb12b1`。该根文件未暂存/提交/推送，远端不可复现；只读工具仍在独立成果分支。四线已有按协调分工行动的证据，但各客户端是否读取此本机文件未全面验证，别把分支文件存在当全局生效。
 
 ## 真实证据、限制与下一次操作
 
@@ -56,8 +58,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "0bc83cedd6445fce1e87001075a1ae56476aa8e0",
-  "checked_at": "2026-10-07T23:52:19+08:00",
+  "checked_coordination_sha": "d3c97ead075cc0f359fecfe2bd179e57b8e4f6b5",
+  "checked_at": "2026-10-07T23:56:15+08:00",
   "snapshot_only": true,
   "assignments": [
     {
