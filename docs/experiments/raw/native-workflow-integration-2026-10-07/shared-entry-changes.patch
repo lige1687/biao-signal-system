@@ -1,0 +1,43 @@
+--- a/src/lei_signal/research/question_contract.py
++++ b/src/lei_signal/research/question_contract.py
+@@ -262,0 +263,4 @@
++    if isinstance(contract, dict) and contract.get("schema_version") == "research-workflow/d-mae20/1.0":
++        from lei_signal.research.native_risk_d_mae_workflow import validate_contract as validate_native
++        validate_native(contract)
++        return
+--- a/src/lei_signal/research/workflow_inputs.py
++++ b/src/lei_signal/research/workflow_inputs.py
+@@ -169,0 +170,4 @@
++    if isinstance(contract, dict) and contract.get("schema_version") == "research-workflow/d-mae20/1.0":
++        from lei_signal.research.native_risk_d_mae_workflow import prepare_x
++        return {"observations": prepare_x(payload), "coverage": {"mode": "synthetic", "stage": "x_only"},
++                "warnings": ["Artificial D/V input binding only; no future price file opened here."]}
+--- a/src/lei_signal/research/workflow.py
++++ b/src/lei_signal/research/workflow.py
+@@ -565,0 +566,3 @@
++    if isinstance(contract, dict) and contract.get("schema_version") == "research-workflow/d-mae20/1.0":
++        from lei_signal.research.native_risk_d_mae_workflow import preflight as native_preflight
++        return native_preflight(contract, root, require_frozen=require_frozen)
+@@ -888,0 +892,3 @@
++    if isinstance(contract, dict) and contract.get("schema_version") == "research-workflow/d-mae20/1.0":
++        from lei_signal.research.native_risk_d_mae_workflow import freeze_contract as native_freeze
++        return native_freeze(contract, root)[0]
+@@ -1172,0 +1179,3 @@
++    if read_json(draft_path).get("schema_version") == "research-workflow/d-mae20/1.0":
++        from lei_signal.research.native_risk_d_mae_workflow import freeze_workflow as native_freeze
++        return native_freeze(draft_path, output_dir, root)
+@@ -1285,0 +1295,3 @@
++    if read_json(Path(output_dir) / "contract.json").get("schema_version") == "research-workflow/d-mae20/1.0":
++        from lei_signal.research.native_risk_d_mae_workflow import verify_receipt as native_verify
++        return native_verify(output_dir, root)
+@@ -1323,0 +1336,3 @@
++    if read_json(Path(output_dir) / "contract.json").get("schema_version") == "research-workflow/d-mae20/1.0":
++        from lei_signal.research.native_risk_d_mae_workflow import check_publication as native_check
++        return native_check(output_dir, root)
+@@ -1547,0 +1563,6 @@
++    if read_json(contract_path).get("schema_version") == "research-workflow/d-mae20/1.0":
++        from lei_signal.research.native_risk_d_mae_workflow import execute_workflow as native_execute
++        if executor is not None:
++            raise WorkflowBlocked("native D-MAE does not accept an injected evaluator")
++        return native_execute(contract_path, output_dir, root,
++                              register_report=register_report, reuse_predictions=reuse_predictions)

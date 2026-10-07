@@ -1,0 +1,75 @@
+{
+  "schema_version": "native-workflow-synthetic-implementation-checks/1.0",
+  "time": "2026-10-08T00:00:06.427049+08:00",
+  "checked_coordination_sha": "dab6762151679bd34decfcf70d5d8640248e878c",
+  "base_commit": "0b00490e8c7310ea8842851f874aab9d01ad7d96",
+  "status": "synthetic_implementation_wip_pending_independent_review_and_baseline_delivery",
+  "source_files": [
+    {
+      "path": "src/lei_signal/research/native_risk_d_mae_workflow.py",
+      "bytes": 31616,
+      "sha256": "ad154e28ca77818006aa3e870c2b9933ddd8701c03cc703147ae45a608fd8bdd"
+    },
+    {
+      "path": "src/lei_signal/research/question_contract.py",
+      "bytes": 70954,
+      "sha256": "74c6d17a7d0e8735b3b842bab2896aa3bb7fb8dd7c263e86d488fa5dbb038cff"
+    },
+    {
+      "path": "src/lei_signal/research/workflow_inputs.py",
+      "bytes": 25126,
+      "sha256": "f250e8dd0a357a5fa0814ae51008f43145a7ec5b377b10596c0fccc30ccf7e43"
+    },
+    {
+      "path": "src/lei_signal/research/workflow.py",
+      "bytes": 122092,
+      "sha256": "3b1b277137d6bfa883b7f05f0e7cc52000d480aac4a15c89edb35659537d6784"
+    },
+    {
+      "path": "tests/unit/test_native_risk_d_mae_workflow.py",
+      "bytes": 5771,
+      "sha256": "d37ab017d2af718374c7b5fc4aa2fec51b09a12e6debd7831758784989e846bc"
+    },
+    {
+      "path": "tests/integration/test_native_risk_d_mae_workflow.py",
+      "bytes": 8780,
+      "sha256": "e5f3625fd943d4b97b9663abcd28f4b86ec6643cb1f3c166f4ea6da46630bcbd"
+    }
+  ],
+  "checks": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -m pytest -q tests/unit/test_question_contract.py tests/unit/test_workflow_inputs.py tests/unit/test_workflow_evaluation.py tests/integration/test_workflow_declaration_review_cli.py tests/integration/test_research_workflow_entry.py tests/unit/test_native_risk_d_mae_workflow.py tests/integration/test_native_risk_d_mae_workflow.py --tb=short",
+      "exit_code": 0,
+      "result": "163 passed in 13.79s",
+      "environment": "isolated worktree with root working-tree source mirror and 112 local legacy test fixtures; see implementation-start.json, test-fixture-source.json and baseline-dependencies.json"
+    },
+    {
+      "command": "python3 scripts/check_repo_hygiene.py",
+      "exit_code": 0,
+      "result": "repository placement check passed"
+    },
+    {
+      "command": "git apply --check .codex/worktrees/native-workflow-integration-20261007/docs/experiments/raw/native-workflow-integration-2026-10-07/shared-entry-changes.patch",
+      "working_directory": "original root working tree",
+      "exit_code": 0,
+      "result": "three exact shared-entry additions apply to original baseline bytes without touching root"
+    }
+  ],
+  "coverage": [
+    "artificial X 76 cases, 84 event aliases, 33 lifecycle groups",
+    "X stage reads no Y file",
+    "artificial Y 75 complete 21-close paths and 1 unknown",
+    "bad close path rejects all Y before freeze or journal start",
+    "fresh-process receipt check, repeated Y refusal, saved-result tamper refusal",
+    "real input mode rejected before artifact"
+  ],
+  "real_X": 0,
+  "real_Y": 0,
+  "fits": 0,
+  "market_requests": 0,
+  "paid_requests": 0,
+  "factor_effect": "unmeasured",
+  "pure_branch_recovery": "not verified; base commit misses 49 separately owned source/dependency paths listed in baseline-dependencies.json",
+  "legacy_frozen_failures": "8 old source-fingerprint failures remain historical; not rerun or modified in this stage",
+  "delivery_boundary": "Commit only new native adapter, two new tests, exact three-file shared-entry patch, this task raw evidence and progress. The complete shared files are pre-existing untracked work and are deliberately not committed by this task."
+}
