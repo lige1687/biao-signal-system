@@ -1,0 +1,24 @@
+{
+  "schema_version": "central-review-decision/1.0",
+  "recorded_at": "2026-10-08T01:05:16+08:00",
+  "timezone": "Asia/Shanghai",
+  "task_id": "classic-factor-research",
+  "input_qualification": {
+    "path": "docs/experiments/raw/native-workflow-integration-2026-10-07/baseline-delivery-qualification.json",
+    "sha256": "69bde6aac84e2af8350bae77d28da156f4d42525b772f26ed3432fba91ec6647"
+  },
+  "decision_source": "中央负责人本轮明确指令（经本任务派发）；不改写原资格历史。",
+  "decision": "解除第3项交付hold，允许将19项仅按准确原路径、原字节纳入此隔离基线分支。",
+  "item_3_review": {
+    "path": "docs/experiments/raw/research-workflow-engineering-2026-09-29/demos-final/continuous/run/contract.json",
+    "sha256": "f4daf9950f05e46edd7654e349599c8b4f1ddcaa3fa08875a28a47664427bc62",
+    "finding": "两处用户策略文档绝对路径仅用作定位键；无凭证、账户资料或文档正文。",
+    "handling": "原样保存，不改写或删除路径。"
+  },
+  "scope_limits": [
+    "不改变原qualification文件中hold_for_central_review历史字段。",
+    "不确认任何原作者；当前会话仅为快照整理人。",
+    "不代表生产采用、纯Git运行可用或研究结论有效。",
+    "不运行49项恢复检查、市场研究、旧回归或其他计算。"
+  ]
+}

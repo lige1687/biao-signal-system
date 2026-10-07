@@ -1,0 +1,517 @@
+{
+  "schema_version": "research-workflow/1.0",
+  "question": {
+    "question_id": "synthetic-continuous",
+    "hypothesis_family": "engineering-workflow-continuous-2026-09-29",
+    "factor_refs": [
+      "research.a01.signed_band@1.0.1"
+    ],
+    "layer": "factor_information",
+    "comparison": "joint",
+    "joint_structure": "同日对象和连续日期一起保留",
+    "sampling": "daily",
+    "target": {
+      "kind": "forward_return",
+      "horizon": 3,
+      "start_offset": 1,
+      "end_offset": 4,
+      "price_basis": "close_to_close"
+    },
+    "baseline": "训练期简单均值/频率与已有滞后价变状态",
+    "added_information": "人工示例候选；不声称复现注册A01公式",
+    "method": {
+      "name": "prediction_ridge",
+      "reason": "两种共享管线验收形态"
+    },
+    "primary_metric": {
+      "name": "MSE",
+      "direction": "lower",
+      "attention_threshold": null,
+      "threshold_reason": "工程演示不设市场效果门槛"
+    },
+    "auxiliary_metrics": [
+      "coverage",
+      "risk"
+    ],
+    "universe": [
+      "SIM-0",
+      "SIM-1"
+    ],
+    "period": [
+      "2022-01-03",
+      "2022-05-27"
+    ],
+    "validation": {
+      "stage": "exploration",
+      "split_policy": "训练在前、评价在后",
+      "label_boundary_policy": "训练标签严格成熟，不成熟者排除并计数"
+    },
+    "dependence": "同日一起，日期连续抽取",
+    "sources": {
+      "panel": "825b3ebe78cf7379d2497c2e10b3f440802b63b01c55709402101f7b1e0d56f5"
+    },
+    "trial_history": "人工生成；无市场发现；本轮只有限工程例"
+  },
+  "data": {
+    "path": "docs/experiments/raw/research-workflow-engineering-2026-09-29/demos-final/continuous/panel.json",
+    "sha256": "825b3ebe78cf7379d2497c2e10b3f440802b63b01c55709402101f7b1e0d56f5",
+    "mode": "synthetic"
+  },
+  "universe": {
+    "assets": [
+      "SIM-0",
+      "SIM-1"
+    ],
+    "allow_partial": false,
+    "rationale": "人工对象",
+    "identity_basis": "合成"
+  },
+  "feature": {
+    "kind": "sma_distance",
+    "lookback": 1,
+    "bar_frequency": "daily_quote",
+    "warmup": 2,
+    "missing_policy": "real_quote"
+  },
+  "target": {
+    "kind": "forward_return",
+    "start_offset": 1,
+    "end_offset": 4,
+    "entry_field": "close",
+    "unit": "percentage_point"
+  },
+  "split": {
+    "label_policy": "purge",
+    "folds": [
+      {
+        "train_end": "2022-03-18",
+        "eval_start": "2022-03-21",
+        "eval_end": "2022-05-16"
+      }
+    ]
+  },
+  "evaluator": {
+    "kind": "prediction_ridge",
+    "version": "1.0.0",
+    "baseline_features": [
+      "lag_return"
+    ],
+    "added_features": [
+      "added"
+    ],
+    "lambda": 1.0
+  },
+  "training_weights": "equal_asset",
+  "weights": {
+    "policy": "equal_asset",
+    "comparison": "fixed_common"
+  },
+  "dependence": {
+    "block_length": 5,
+    "draws": 32,
+    "seed": 17
+  },
+  "budget": {
+    "scientific_variants": 3,
+    "execution_seconds": 30,
+    "max_rows": 2000
+  },
+  "history": {
+    "family": "engineering-workflow-continuous-2026-09-29",
+    "ledger_path": "docs/experiments/raw/research-workflow-ledgers-2026-09-29/164d279da406968dbce9c29e/attempts.jsonl"
+  },
+  "controller_review": {
+    "universe_fit": {
+      "reason": "人工样例验证机械行为，不能推断真实市场。登记A01仅用于来源解析演示，公式不等价。",
+      "source_refs": [
+        "docs/research/lei-factor-research-mission.md"
+      ]
+    },
+    "proxy_fidelity": {
+      "reason": "人工样例验证机械行为，不能推断真实市场。登记A01仅用于来源解析演示，公式不等价。",
+      "source_refs": [
+        "docs/research/lei-factor-research-mission.md"
+      ]
+    },
+    "method_fit": {
+      "reason": "人工样例验证机械行为，不能推断真实市场。登记A01仅用于来源解析演示，公式不等价。",
+      "source_refs": [
+        "docs/research/lei-factor-research-mission.md"
+      ]
+    },
+    "conclusion_scope": {
+      "reason": "人工样例验证机械行为，不能推断真实市场。登记A01仅用于来源解析演示，公式不等价。",
+      "source_refs": [
+        "docs/research/lei-factor-research-mission.md"
+      ]
+    }
+  },
+  "publication": {
+    "report_path": "docs/experiments/research-workflow-continuous-final-demo-2026-09-29.md",
+    "category": "方法论与验证",
+    "claimed_scope": "full",
+    "conclusion": "not_supported"
+  },
+  "sources": [],
+  "calendar": [
+    "2022-01-03",
+    "2022-01-04",
+    "2022-01-05",
+    "2022-01-06",
+    "2022-01-07",
+    "2022-01-10",
+    "2022-01-11",
+    "2022-01-12",
+    "2022-01-13",
+    "2022-01-14",
+    "2022-01-17",
+    "2022-01-18",
+    "2022-01-19",
+    "2022-01-20",
+    "2022-01-21",
+    "2022-01-24",
+    "2022-01-25",
+    "2022-01-26",
+    "2022-01-27",
+    "2022-01-28",
+    "2022-01-31",
+    "2022-02-01",
+    "2022-02-02",
+    "2022-02-03",
+    "2022-02-04",
+    "2022-02-07",
+    "2022-02-08",
+    "2022-02-09",
+    "2022-02-10",
+    "2022-02-11",
+    "2022-02-14",
+    "2022-02-15",
+    "2022-02-16",
+    "2022-02-17",
+    "2022-02-18",
+    "2022-02-21",
+    "2022-02-22",
+    "2022-02-23",
+    "2022-02-24",
+    "2022-02-25",
+    "2022-02-28",
+    "2022-03-01",
+    "2022-03-02",
+    "2022-03-03",
+    "2022-03-04",
+    "2022-03-07",
+    "2022-03-08",
+    "2022-03-09",
+    "2022-03-10",
+    "2022-03-11",
+    "2022-03-14",
+    "2022-03-15",
+    "2022-03-16",
+    "2022-03-17",
+    "2022-03-18",
+    "2022-03-21",
+    "2022-03-22",
+    "2022-03-23",
+    "2022-03-24",
+    "2022-03-25",
+    "2022-03-28",
+    "2022-03-29",
+    "2022-03-30",
+    "2022-03-31",
+    "2022-04-01",
+    "2022-04-04",
+    "2022-04-05",
+    "2022-04-06",
+    "2022-04-07",
+    "2022-04-08",
+    "2022-04-11",
+    "2022-04-12",
+    "2022-04-13",
+    "2022-04-14",
+    "2022-04-15",
+    "2022-04-18",
+    "2022-04-19",
+    "2022-04-20",
+    "2022-04-21",
+    "2022-04-22",
+    "2022-04-25",
+    "2022-04-26",
+    "2022-04-27",
+    "2022-04-28",
+    "2022-04-29",
+    "2022-05-02",
+    "2022-05-03",
+    "2022-05-04",
+    "2022-05-05",
+    "2022-05-06",
+    "2022-05-09",
+    "2022-05-10",
+    "2022-05-11",
+    "2022-05-12",
+    "2022-05-13",
+    "2022-05-16",
+    "2022-05-17",
+    "2022-05-18",
+    "2022-05-19",
+    "2022-05-20",
+    "2022-05-23",
+    "2022-05-24",
+    "2022-05-25",
+    "2022-05-26",
+    "2022-05-27"
+  ],
+  "bindings": {
+    "files": {
+      "docs/research/current-standards.json": "395e7b3520cbbc80c983474755de10c81a6e71e3250503008279063b6812dc16",
+      "docs/research/lei-factor-research-mission.md": "1f58a65ea41c9b678cc14c4490020b674e991f63267a8746f692e919eb109591",
+      "docs/research/research-question-method-standard.md": "590e05fd59fede6117fe319250e82455136d3d411a3ae11dae6ccf320a4d2dc4",
+      "docs/research/factor-increment-evidence-standard.md": "05f5b04c8b54ad3bf86296f09a5addd4fd6344dad6e7b639650c39692b2f3871",
+      "docs/research/experiment-backtest-principles.md": "67b49a08396b0c8cb93cb526466200cc798bdb4cd8ce77509658f291cc29493c",
+      "docs/research/ai-execution-contract.md": "f70a929f15d9d59f99f78a609a8658ce468f2c4025f05dba5380198f0bf23d22",
+      "docs/research/definition-standard.md": "938e04d7beb96a46069bbb6eb6c03d2331e86bfa771623fdfe21794b4e98fcbd",
+      "docs/research/experiment-report-template.md": "a3e32f99b7da248bad1f8c052ee3210a664947c620cba43947309c29b2247b9d",
+      "src/lei_signal/research/workflow.py": "da62c4b4c90b8c59fbe8c78d163fbb6e8531d5302befa5ece6a53735a0877ee2",
+      "src/lei_signal/research/workflow_inputs.py": "607cf49dd40b65158f8ec60e39f3d0dc371e793b355ea7ba54e7135cb1ad32e0",
+      "src/lei_signal/research/workflow_evaluation.py": "a088b0db8bdab1aee5fe8be31a55375df8c314a034807c0c89b8faab5aab8f7c",
+      "src/lei_signal/research/question_contract.py": "5dccbac19c25874ec7df24b054bedb2f504a2aea0d37575ed9543abb59102951",
+      "src/lei_signal/research/input_preflight.py": "514fb1fa1819d145366365865b49159e6b77beaeb27f15a3bdd64fa024484e04",
+      "src/lei_signal/research/candidate_preflight.py": "5b328590d115a2295b2406ba73caa0c460fe8646dfd0183eab284d830affa4df",
+      "src/lei_signal/research/definitions.py": "84f7b9ba76f4704e81f4f4d0c1784e2ab1ad7e3aa225abeb4796fa10dcbfec94",
+      "scripts/run_factor_lab.py": "075d02d39fd38d8f21dc7cc2aa8a15b3260ca69169df6302a3ee6c8ffb042247",
+      "configs/strategy-documents.v1.json": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b",
+      "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    },
+    "versions": {
+      "mission": "1.1.0",
+      "question_method": "1.1.0",
+      "increment": "1.1.0",
+      "principles": "1.2",
+      "execution": "1.1.0",
+      "definition": "1.2.0",
+      "template": "1.2.0"
+    },
+    "definition_closure": {
+      "research.a01.signed_band@1.0.1": {
+        "id": "research.a01.signed_band",
+        "version": "1.0.1",
+        "name": "A01决策收盘至双均线组的有符号ATR距离",
+        "type": "feature",
+        "uses": [
+          "description",
+          "research_signal"
+        ],
+        "not_for": [
+          "production_trade",
+          "best_threshold_selection",
+          "actual_account_return_claim"
+        ],
+        "scope": "固定六只国内宽基ETF2022-01-01—2026-06-30的周/月上升趋势状态研究；非原A事件准入规则",
+        "definition": {
+          "formula": "lo=min(SMA_N,EMA_N); hi=max(SMA_N,EMA_N); d=(close-hi)/ATR20 if close>hi; d=(close-lo)/ATR20 if close<lo; else0。",
+          "parameters": {
+            "N": [
+              20,
+              60,
+              120
+            ],
+            "EMA_alpha": "2/(N+1)",
+            "ATR_smoothing": "seeded EMA20 of true range",
+            "warmup_calendar_rows": 252,
+            "class_boundaries": [
+              -1,
+              0,
+              1
+            ],
+            "threshold_semantics": "用于完整比较的固定描述分组，不是交易阈值"
+          },
+          "endpoints": "全部指标含决策日收盘；低价与当日均线的几何描述只在收盘后可知；EMA从首有效行的连续N行种子，内部缺价永久未知且不重启；SMA完整N交易日滚动可恢复。TR=max(H-L,abs(H-prevC),abs(L-prevC))，首日TR未知；以首个有效连续20行TR均值为EMA20种子（无缺价时第21原始行），中途缺TR后永久未知且不重启。",
+          "unit": "ATR20倍数（有正负）；不是收益百分比",
+          "direction": "无越近越好预设；负值表示低于组，0表示组内，正值表示高于组",
+          "transforms": "d、d²、inside；五固定描述组；低价距离和单线百分比仅保留/诊断"
+        },
+        "input": {
+          "fields": [
+            "date",
+            "nominal_OHLC",
+            "economic_index",
+            "nominal_close",
+            "calendar"
+          ],
+          "price_basis": "economic OHLC proxy=nominal OHLC*same-date economic_index/nominal_close；经济指数已含行动，不重复加分红；不能当实际成交价",
+          "currency": "CNY underlying，经济指数任意尺度；ATR距离无单位",
+          "frequency": "daily观察；W/M收盘决策",
+          "calendar": "既有SZSE官方月度接口合并日历，沪市使用共同日期，非新独立SSE日历资格"
+        },
+        "universe": {
+          "version": "A01-guide-technical-20260929-six-fixed-domestic-ETF",
+          "eligibility": "全体固定W/M时点SMA60(t)>SMA60(t-5)且指标有效；不以距离、首次、RR、未来标签或成功成交预筛",
+          "warmup": "252原始日历行统一起点，SMA20/60/120完整窗口；EMA首N行均值种子；仅复用已封存输入",
+          "missing": "缺行保留，不插值/前填/重种子；ATR<=0或缺失、价格或均线未知逐行排除并保留原因；未来标签缺失另列不能改变因子母样本",
+          "quality_gate": "历史数据到达时间未知；OHLC经济映射是研究代理；保留六ETF排除账，不隐藏无法计算ETF",
+          "degrade": "unknown与空组显示null及原因，不填0，不推为原A部署效果"
+        },
+        "time": {
+          "observation_time": "已完成日线收盘",
+          "available_at": "理论当日收盘后；历史逐条到达未知",
+          "decision_at": "每周/每月最后实际交易日收盘后",
+          "execution_at": "仅未来结果评价用下一交易日开盘代理；非交易授权",
+          "timezone": "Asia/Shanghai",
+          "effective_from": "2026-09-29研究定义登记，不追溯实盘参数"
+        },
+        "dependencies": [],
+        "validation": {
+          "method": "执行者人工边界与前缀测试、独立源审查186项、主控独立源重建与关键拟合300项；语义映射非自动计算入口",
+          "tolerance": {
+            "absolute": 1e-10,
+            "relative": 1e-10,
+            "integer": 0
+          },
+          "tests": [
+            "docs/experiments/raw/a01-guide-study-2026-09-29/controller-check.json",
+            "docs/experiments/raw/a01-guide-study-2026-09-29/audit/source-audit.json",
+            "docs/experiments/raw/a01-guide-study-2026-09-29/execution/verification.json"
+          ],
+          "limitations": "仅本轮固定源与计算域；历史到达时点未知/非实际成交价/严格原A机会无法识别/真实未见数据验证未完成，预测结论相对固定B2另见报告。runner未调用definitions.calculate，不宣称已集成生产。；当前个股/指数下一合同见docs/research/proposals/a01-universe-expansion-2026-09-29/contract.md。旧测试范围不扩大，stocks/index未评估；无事前实际意义门槛，未获稳定增量不等于证明彻底无效。"
+        },
+        "status": {
+          "definition_clarity": "explicit_new_guide_alias",
+          "data_qualification": "limited_frozen_historical_proxy_inputs",
+          "implementation": "isolated_runner_key_outputs_independently_verified",
+          "effectiveness": "本实验范围内未发现相对固定B2稳定实际增量；用途/范围/不确定性见A01报告，不代表普遍无效",
+          "production": "not_authorized"
+        },
+        "sources": [
+          "a01guide_protocol",
+          "a01guide_sources",
+          "a01_universe_expansion_contract"
+        ],
+        "lifecycle": {
+          "state": "verified",
+          "basis": [
+            "docs/research/definitions.v1.json",
+            "docs/experiments/raw/a01-guide-study-2026-09-29/controller-check.json",
+            "docs/experiments/raw/a01-guide-study-2026-09-29/audit/source-audit.json"
+          ],
+          "verification_scope": "有限边界/前缀与固定六ETF来源代理数值域；不等于所有真实资料合格、research_ready、预测成立或交易授权"
+        },
+        "research_owner": "technical_agent",
+        "research_status": "IN_SCOPE",
+        "origin": "用户2026-09-29桌面因子研究包A01与技术研究职责；原文H4.4/S9A2只读索引；1.0.1纠正主控首TR登记文字笔误，实际计算从始至终首TR未知且数值零变更。",
+        "spec_layer": "entry_trigger_research",
+        "local_alias": "research_A01_signed_band@1.0.0"
+      }
+    },
+    "data_sha256": "825b3ebe78cf7379d2497c2e10b3f440802b63b01c55709402101f7b1e0d56f5"
+  },
+  "freeze": {
+    "preflight_digest": "87c303b6c586e9cb43eaac96bc0c4dea6e5edc0071bbbf77c03fe4d728630705",
+    "observations_digest": "89832c10693f3633a119dab15e4d6c6b8dc5a2fc3f4b65eb92b43bdb582d336e"
+  },
+  "rehearsal": {
+    "schema_version": "workflow-rehearsal/1.0",
+    "data_mode": "synthetic",
+    "input_sha256": "49ce039f35afffa6a214cd15de025e36930a30f68a77b15d264c6b18fb36ff11",
+    "definition_and_method": "cb139caf166c8cda87dd38154d4402b1ab628266175ccfe50c5e5f8888e95e4b",
+    "coverage": {
+      "raw": 164,
+      "calendar_slots": 164,
+      "indicators": 162,
+      "observations": 164,
+      "feature_qualified": 162,
+      "labels_evaluable": 156,
+      "eligible": 154,
+      "per_asset": {
+        "synthetic-A": {
+          "raw": 82,
+          "calendar_slots": 82,
+          "indicators": 81,
+          "observations": 82,
+          "feature_qualified": 81,
+          "labels_evaluable": 78,
+          "eligible": 77,
+          "reasons": {
+            "feature_not_ready:quoted": 1,
+            "eligible": 77,
+            "immature_label": 4
+          }
+        },
+        "synthetic-B": {
+          "raw": 82,
+          "calendar_slots": 82,
+          "indicators": 81,
+          "observations": 82,
+          "feature_qualified": 81,
+          "labels_evaluable": 78,
+          "eligible": 77,
+          "reasons": {
+            "feature_not_ready:quoted": 1,
+            "eligible": 77,
+            "immature_label": 4
+          }
+        }
+      },
+      "common_comparison": null,
+      "common_comparison_reason": "not evaluated by input builder"
+    },
+    "performance": [
+      {
+        "model": "B0",
+        "metric": "MSE",
+        "value": 2.627597319224839,
+        "unit": "percentage_point_squared",
+        "rows": 78,
+        "dates": 39,
+        "assets": 2
+      },
+      {
+        "model": "B0",
+        "metric": "RMSE",
+        "value": 1.6209865265401928,
+        "unit": "percentage_point",
+        "rows": 78,
+        "dates": 39,
+        "assets": 2
+      },
+      {
+        "model": "B1",
+        "metric": "MSE",
+        "value": 1.4990258193773363,
+        "unit": "percentage_point_squared",
+        "rows": 78,
+        "dates": 39,
+        "assets": 2
+      },
+      {
+        "model": "B1",
+        "metric": "RMSE",
+        "value": 1.2243470992236378,
+        "unit": "percentage_point",
+        "rows": 78,
+        "dates": 39,
+        "assets": 2
+      },
+      {
+        "model": "B2",
+        "metric": "MSE",
+        "value": 1.4990258193773363,
+        "unit": "percentage_point_squared",
+        "rows": 78,
+        "dates": 39,
+        "assets": 2
+      },
+      {
+        "model": "B2",
+        "metric": "RMSE",
+        "value": 1.2243470992236378,
+        "unit": "percentage_point",
+        "rows": 78,
+        "dates": 39,
+        "assets": 2
+      }
+    ],
+    "fits": 2,
+    "purpose": "engineering_error_check_only",
+    "selection_used": false
+  }
+}

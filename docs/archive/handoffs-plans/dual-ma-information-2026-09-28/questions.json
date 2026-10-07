@@ -1,0 +1,921 @@
+{
+  "version": "1.0.0",
+  "frozen_at": "2026-09-28T03:37:57.625128+00:00",
+  "questions": [
+    {
+      "question_id": "dual20-given-s-daily-h21-v1",
+      "hypothesis_family": "dual-ma-additional-information",
+      "factor_refs": [
+        "etf.ma20260924.state.s20@1.0.0",
+        "etf.ma20260924.state.e20@1.0.0"
+      ],
+      "layer": "factor_information",
+      "comparison": "joint",
+      "joint_structure": "within each ETF across dates; cross-ETF equal-weight summary auxiliary, not cross-sectional ranking",
+      "sampling": "daily",
+      "target": {
+        "kind": "return_distribution",
+        "horizon": 21,
+        "start_offset": 1,
+        "end_offset": 22,
+        "price_basis": "accepted economic close; ex-date economic action adjustment; no execution or account"
+      },
+      "baseline": "S20 == true within each fixed ETF",
+      "added_information": "E20",
+      "baseline_column": "S20",
+      "added_columns": [
+        "E20"
+      ],
+      "ma_period": 20,
+      "method": {
+        "name": "conditional_state_mean_difference",
+        "reason": "at fixed single confirmation compare second true/false over complete daily observations; retain disagreement samples; no fitted model"
+      },
+      "primary_metric": {
+        "name": "mean_future_return_difference_pp",
+        "direction": "higher",
+        "attention_threshold": 0.5,
+        "threshold_reason": "provisional 0.5 percentage point attention level for 21-interval return distribution; not universal or adoption threshold"
+      },
+      "auxiliary_metrics": [
+        "up_probability_difference_pp",
+        "median_return",
+        "close_adverse_excursion",
+        "excluded_positive_fraction"
+      ],
+      "universe": [
+        "510300.SS",
+        "510050.SS",
+        "510500.SS",
+        "512100.SS",
+        "159915.SZ",
+        "588000.SS"
+      ],
+      "period": [
+        "2022-01-01",
+        "2026-06-30"
+      ],
+      "validation": {
+        "stage": "exploration",
+        "split_policy": "all previously seen; no fit or unseen evaluation",
+        "label_boundary_policy": "labels must end by 2026-06-30; all exact calendar dates required; future split must purge each actual crossing label"
+      },
+      "dependence": {
+        "method": "shared-date circular moving blocks",
+        "block_sessions": 60,
+        "draws": 2000,
+        "seed": 20260928,
+        "interval": "percentile 2.5/97.5 exploratory unadjusted",
+        "min_valid_fraction": 0.9,
+        "min_design_spans": 8,
+        "note": "stationarity approximate; long MA states and old selection reduce certainty; not effective independent count"
+      },
+      "sources": {
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510300.SS.csv": "7bab49b4aac17b15a313e8b69445a9ec75d7093adce4ae77c2e8b9b1694308e4",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510300.SS.csv": "40de4d21113bff96f81149a17bf012a924b99583e5a7edf1a5ce143770a100c4",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-states-protected.csv": "947f37e56f934855dbf195136773d3cbb6aede6107d4153c6dd1a69fe152b077",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-states-raw.csv": "947f37e56f934855dbf195136773d3cbb6aede6107d4153c6dd1a69fe152b077",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510050.SS.csv": "feab2473048c77faebddeb66636e1b17d73dbe1d6a8ccfc0a425f9639178d787",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510050.SS.csv": "d52280ec806938c295e246940080b0910b73d5baa6c076e15e731a5de57950cd",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510050.SS-states-protected.csv": "70744fc4ee51ccda1d6c20b3e0d460470e806c2ac27a09c337d679803cf89642",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510050.SS-states-raw.csv": "70744fc4ee51ccda1d6c20b3e0d460470e806c2ac27a09c337d679803cf89642",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510500.SS.csv": "3504322a6c7a346d6e88b0395994d326770a78a477e52ea531d6c643aaa4956a",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510500.SS.csv": "93f09f93a2a7e6e4a47e3527d261f993b92e892b3a654be5eb9205e8cc429b54",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510500.SS-states-protected.csv": "e537d152789ee48b3382412d2d866115a2d09c2b2083d0eeacb707cd64a26541",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510500.SS-states-raw.csv": "e537d152789ee48b3382412d2d866115a2d09c2b2083d0eeacb707cd64a26541",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/512100.SS.csv": "8a69a2dd856d7d8e37b98c441090b7caf67ea5e927229c6d6d74fbc3b11b3fa9",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/512100.SS.csv": "88e695248889318287d98793f0bef5a76145f25715ebd0f6cad83f966d95a706",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/512100.SS-states-protected.csv": "0f8077e55e804deb8175de674ce368d43a2a5caa5432d95aab5f1899a51f506b",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/512100.SS-states-raw.csv": "5d3aeedf93be415fe8d8e21944cb30dce184729bf9bb76f9ddccd8bb8d825432",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/159915.SZ.csv": "72a2cd8877a8bde6a5fe6ecd20a48a18b4e2a8804bab238ad2382ac81bc007be",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/159915.SZ.csv": "db9cb7f0e77f35cba0648741698bba861cbf8fd28282c9c02c3b781ae31a0e33",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/159915.SZ-states-protected.csv": "5f19b845d9c93af4bb347f4db1e8880a1e43e9aa19c404256eaa5fcd44219f96",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/159915.SZ-states-raw.csv": "5f19b845d9c93af4bb347f4db1e8880a1e43e9aa19c404256eaa5fcd44219f96",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/588000.SS.csv": "bcefa963b84e0154b9c35edb5d2da5d33fe0a8711682953e97151bbc03d15065",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/588000.SS.csv": "4c47f323acc1c0b484a9956905f26ad9d292b2f775e3a3641348363c0b3065e5",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/588000.SS-states-protected.csv": "575a8b643308990d290bd46debb76a4e5f2a3197473f115b9ebcccc739204d3b",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/588000.SS-states-raw.csv": "575a8b643308990d290bd46debb76a4e5f2a3197473f115b9ebcccc739204d3b",
+        "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/manifest.json": "bbd2299cc228e0f5fcf07abbca7a384ad700d298428e07d49c6c0036aacfa2e9",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/calendar.json": "730dcb8f1bbb502ce215ba42a2d95efc42c6465962b0f96da90ef18bfeb72370",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/release-manifest.json": "f05b06f008b2d81fb22ab1993d728d132f6527b224fdf1924d513a6bca6c596d",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/resolved-cards.json": "7bc7717ff522c6fb4ab90df471ba3a8248c9d0e46de731791af7c025c7b80b33",
+        "docs/archive/handoffs-plans/dual-ma-information-2026-09-28/plan.md": "34547fab578d73ca64ce57b404fd390290eb69dd11d2bc50b3d1f6fd788ce394",
+        "docs/experiments/raw/dual-ma-information-2026-09-28/analysis.py": "4c8e432c6bded552da7a5f088208b654955c32bf2d91fa3066f19700321e3157",
+        "docs/experiments/raw/dual-ma-information-2026-09-28/test_analysis.py": "937d6a3149f4e8180267477bb0ecaa40e223dd9bd7e366a4e9f65524f564f4d0",
+        "docs/research/definitions.v1.json": "ecdbd3d3277360a9aaa185603bdadd5fc28b7ad8a886f195bfdee05eb4ff9022",
+        "docs/research/proposals/factor-ma-baselines-2026-09-24/method/protocol.json": "a0503f18c8224020615eff5a51967cc72c0b2770d591229d79575971538ee383"
+      },
+      "trial_history": {
+        "parent": "factor-ma-state-participation-2026-09-24 and D1 fixed-event studies",
+        "known_previous": "9 MA state policy versions plus2baselines,6ETF,2costs,132accounts; D1 event and risk variants; actual historical total unknown",
+        "new_questions": 7,
+        "new_horizons": 1,
+        "primary_period": 20,
+        "secondary_periods": [
+          60,
+          120
+        ],
+        "all_seen": true,
+        "multiplicity_adjusted": false,
+        "post_hoc_question": true
+      },
+      "formula": "S_n: C>SMA_n and SMA_n>SMA_n(previous); E_n: C>EMA_n and EMA_n>EMA_n(previous); D_n:S_n and E_n; strict, missing unknown; seeded EMA original252-row origin",
+      "limitations": [
+        "date/regime/volatility not conditioned; B contains only fixed ETF identity and stated confirmation",
+        "historical available_at unknown",
+        "6ETF not independent markets"
+      ]
+    },
+    {
+      "question_id": "dual20-given-e-daily-h21-v1",
+      "hypothesis_family": "dual-ma-additional-information",
+      "factor_refs": [
+        "etf.ma20260924.state.e20@1.0.0",
+        "etf.ma20260924.state.s20@1.0.0"
+      ],
+      "layer": "factor_information",
+      "comparison": "joint",
+      "joint_structure": "within each ETF across dates; cross-ETF equal-weight summary auxiliary, not cross-sectional ranking",
+      "sampling": "daily",
+      "target": {
+        "kind": "return_distribution",
+        "horizon": 21,
+        "start_offset": 1,
+        "end_offset": 22,
+        "price_basis": "accepted economic close; ex-date economic action adjustment; no execution or account"
+      },
+      "baseline": "E20 == true within each fixed ETF",
+      "added_information": "S20",
+      "baseline_column": "E20",
+      "added_columns": [
+        "S20"
+      ],
+      "ma_period": 20,
+      "method": {
+        "name": "conditional_state_mean_difference",
+        "reason": "at fixed single confirmation compare second true/false over complete daily observations; retain disagreement samples; no fitted model"
+      },
+      "primary_metric": {
+        "name": "mean_future_return_difference_pp",
+        "direction": "higher",
+        "attention_threshold": 0.5,
+        "threshold_reason": "provisional 0.5 percentage point attention level for 21-interval return distribution; not universal or adoption threshold"
+      },
+      "auxiliary_metrics": [
+        "up_probability_difference_pp",
+        "median_return",
+        "close_adverse_excursion",
+        "excluded_positive_fraction"
+      ],
+      "universe": [
+        "510300.SS",
+        "510050.SS",
+        "510500.SS",
+        "512100.SS",
+        "159915.SZ",
+        "588000.SS"
+      ],
+      "period": [
+        "2022-01-01",
+        "2026-06-30"
+      ],
+      "validation": {
+        "stage": "exploration",
+        "split_policy": "all previously seen; no fit or unseen evaluation",
+        "label_boundary_policy": "labels must end by 2026-06-30; all exact calendar dates required; future split must purge each actual crossing label"
+      },
+      "dependence": {
+        "method": "shared-date circular moving blocks",
+        "block_sessions": 60,
+        "draws": 2000,
+        "seed": 20260928,
+        "interval": "percentile 2.5/97.5 exploratory unadjusted",
+        "min_valid_fraction": 0.9,
+        "min_design_spans": 8,
+        "note": "stationarity approximate; long MA states and old selection reduce certainty; not effective independent count"
+      },
+      "sources": {
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510300.SS.csv": "7bab49b4aac17b15a313e8b69445a9ec75d7093adce4ae77c2e8b9b1694308e4",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510300.SS.csv": "40de4d21113bff96f81149a17bf012a924b99583e5a7edf1a5ce143770a100c4",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-states-protected.csv": "947f37e56f934855dbf195136773d3cbb6aede6107d4153c6dd1a69fe152b077",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-states-raw.csv": "947f37e56f934855dbf195136773d3cbb6aede6107d4153c6dd1a69fe152b077",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510050.SS.csv": "feab2473048c77faebddeb66636e1b17d73dbe1d6a8ccfc0a425f9639178d787",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510050.SS.csv": "d52280ec806938c295e246940080b0910b73d5baa6c076e15e731a5de57950cd",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510050.SS-states-protected.csv": "70744fc4ee51ccda1d6c20b3e0d460470e806c2ac27a09c337d679803cf89642",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510050.SS-states-raw.csv": "70744fc4ee51ccda1d6c20b3e0d460470e806c2ac27a09c337d679803cf89642",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510500.SS.csv": "3504322a6c7a346d6e88b0395994d326770a78a477e52ea531d6c643aaa4956a",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510500.SS.csv": "93f09f93a2a7e6e4a47e3527d261f993b92e892b3a654be5eb9205e8cc429b54",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510500.SS-states-protected.csv": "e537d152789ee48b3382412d2d866115a2d09c2b2083d0eeacb707cd64a26541",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510500.SS-states-raw.csv": "e537d152789ee48b3382412d2d866115a2d09c2b2083d0eeacb707cd64a26541",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/512100.SS.csv": "8a69a2dd856d7d8e37b98c441090b7caf67ea5e927229c6d6d74fbc3b11b3fa9",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/512100.SS.csv": "88e695248889318287d98793f0bef5a76145f25715ebd0f6cad83f966d95a706",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/512100.SS-states-protected.csv": "0f8077e55e804deb8175de674ce368d43a2a5caa5432d95aab5f1899a51f506b",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/512100.SS-states-raw.csv": "5d3aeedf93be415fe8d8e21944cb30dce184729bf9bb76f9ddccd8bb8d825432",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/159915.SZ.csv": "72a2cd8877a8bde6a5fe6ecd20a48a18b4e2a8804bab238ad2382ac81bc007be",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/159915.SZ.csv": "db9cb7f0e77f35cba0648741698bba861cbf8fd28282c9c02c3b781ae31a0e33",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/159915.SZ-states-protected.csv": "5f19b845d9c93af4bb347f4db1e8880a1e43e9aa19c404256eaa5fcd44219f96",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/159915.SZ-states-raw.csv": "5f19b845d9c93af4bb347f4db1e8880a1e43e9aa19c404256eaa5fcd44219f96",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/588000.SS.csv": "bcefa963b84e0154b9c35edb5d2da5d33fe0a8711682953e97151bbc03d15065",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/588000.SS.csv": "4c47f323acc1c0b484a9956905f26ad9d292b2f775e3a3641348363c0b3065e5",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/588000.SS-states-protected.csv": "575a8b643308990d290bd46debb76a4e5f2a3197473f115b9ebcccc739204d3b",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/588000.SS-states-raw.csv": "575a8b643308990d290bd46debb76a4e5f2a3197473f115b9ebcccc739204d3b",
+        "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/manifest.json": "bbd2299cc228e0f5fcf07abbca7a384ad700d298428e07d49c6c0036aacfa2e9",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/calendar.json": "730dcb8f1bbb502ce215ba42a2d95efc42c6465962b0f96da90ef18bfeb72370",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/release-manifest.json": "f05b06f008b2d81fb22ab1993d728d132f6527b224fdf1924d513a6bca6c596d",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/resolved-cards.json": "7bc7717ff522c6fb4ab90df471ba3a8248c9d0e46de731791af7c025c7b80b33",
+        "docs/archive/handoffs-plans/dual-ma-information-2026-09-28/plan.md": "34547fab578d73ca64ce57b404fd390290eb69dd11d2bc50b3d1f6fd788ce394",
+        "docs/experiments/raw/dual-ma-information-2026-09-28/analysis.py": "4c8e432c6bded552da7a5f088208b654955c32bf2d91fa3066f19700321e3157",
+        "docs/experiments/raw/dual-ma-information-2026-09-28/test_analysis.py": "937d6a3149f4e8180267477bb0ecaa40e223dd9bd7e366a4e9f65524f564f4d0",
+        "docs/research/definitions.v1.json": "ecdbd3d3277360a9aaa185603bdadd5fc28b7ad8a886f195bfdee05eb4ff9022",
+        "docs/research/proposals/factor-ma-baselines-2026-09-24/method/protocol.json": "a0503f18c8224020615eff5a51967cc72c0b2770d591229d79575971538ee383"
+      },
+      "trial_history": {
+        "parent": "factor-ma-state-participation-2026-09-24 and D1 fixed-event studies",
+        "known_previous": "9 MA state policy versions plus2baselines,6ETF,2costs,132accounts; D1 event and risk variants; actual historical total unknown",
+        "new_questions": 7,
+        "new_horizons": 1,
+        "primary_period": 20,
+        "secondary_periods": [
+          60,
+          120
+        ],
+        "all_seen": true,
+        "multiplicity_adjusted": false,
+        "post_hoc_question": true
+      },
+      "formula": "S_n: C>SMA_n and SMA_n>SMA_n(previous); E_n: C>EMA_n and EMA_n>EMA_n(previous); D_n:S_n and E_n; strict, missing unknown; seeded EMA original252-row origin",
+      "limitations": [
+        "date/regime/volatility not conditioned; B contains only fixed ETF identity and stated confirmation",
+        "historical available_at unknown",
+        "6ETF not independent markets"
+      ]
+    },
+    {
+      "question_id": "dual60-given-s-daily-h21-v1",
+      "hypothesis_family": "dual-ma-additional-information",
+      "factor_refs": [
+        "etf.ma20260924.state.s60@1.0.0",
+        "etf.ma20260924.state.e60@1.0.0"
+      ],
+      "layer": "factor_information",
+      "comparison": "joint",
+      "joint_structure": "within each ETF across dates; cross-ETF equal-weight summary auxiliary, not cross-sectional ranking",
+      "sampling": "daily",
+      "target": {
+        "kind": "return_distribution",
+        "horizon": 21,
+        "start_offset": 1,
+        "end_offset": 22,
+        "price_basis": "accepted economic close; ex-date economic action adjustment; no execution or account"
+      },
+      "baseline": "S60 == true within each fixed ETF",
+      "added_information": "E60",
+      "baseline_column": "S60",
+      "added_columns": [
+        "E60"
+      ],
+      "ma_period": 60,
+      "method": {
+        "name": "conditional_state_mean_difference",
+        "reason": "at fixed single confirmation compare second true/false over complete daily observations; retain disagreement samples; no fitted model"
+      },
+      "primary_metric": {
+        "name": "mean_future_return_difference_pp",
+        "direction": "higher",
+        "attention_threshold": 0.5,
+        "threshold_reason": "provisional 0.5 percentage point attention level for 21-interval return distribution; not universal or adoption threshold"
+      },
+      "auxiliary_metrics": [
+        "up_probability_difference_pp",
+        "median_return",
+        "close_adverse_excursion",
+        "excluded_positive_fraction"
+      ],
+      "universe": [
+        "510300.SS",
+        "510050.SS",
+        "510500.SS",
+        "512100.SS",
+        "159915.SZ",
+        "588000.SS"
+      ],
+      "period": [
+        "2022-01-01",
+        "2026-06-30"
+      ],
+      "validation": {
+        "stage": "exploration",
+        "split_policy": "all previously seen; no fit or unseen evaluation",
+        "label_boundary_policy": "labels must end by 2026-06-30; all exact calendar dates required; future split must purge each actual crossing label"
+      },
+      "dependence": {
+        "method": "shared-date circular moving blocks",
+        "block_sessions": 60,
+        "draws": 2000,
+        "seed": 20260928,
+        "interval": "percentile 2.5/97.5 exploratory unadjusted",
+        "min_valid_fraction": 0.9,
+        "min_design_spans": 8,
+        "note": "stationarity approximate; long MA states and old selection reduce certainty; not effective independent count"
+      },
+      "sources": {
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510300.SS.csv": "7bab49b4aac17b15a313e8b69445a9ec75d7093adce4ae77c2e8b9b1694308e4",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510300.SS.csv": "40de4d21113bff96f81149a17bf012a924b99583e5a7edf1a5ce143770a100c4",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-states-protected.csv": "947f37e56f934855dbf195136773d3cbb6aede6107d4153c6dd1a69fe152b077",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-states-raw.csv": "947f37e56f934855dbf195136773d3cbb6aede6107d4153c6dd1a69fe152b077",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510050.SS.csv": "feab2473048c77faebddeb66636e1b17d73dbe1d6a8ccfc0a425f9639178d787",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510050.SS.csv": "d52280ec806938c295e246940080b0910b73d5baa6c076e15e731a5de57950cd",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510050.SS-states-protected.csv": "70744fc4ee51ccda1d6c20b3e0d460470e806c2ac27a09c337d679803cf89642",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510050.SS-states-raw.csv": "70744fc4ee51ccda1d6c20b3e0d460470e806c2ac27a09c337d679803cf89642",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510500.SS.csv": "3504322a6c7a346d6e88b0395994d326770a78a477e52ea531d6c643aaa4956a",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510500.SS.csv": "93f09f93a2a7e6e4a47e3527d261f993b92e892b3a654be5eb9205e8cc429b54",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510500.SS-states-protected.csv": "e537d152789ee48b3382412d2d866115a2d09c2b2083d0eeacb707cd64a26541",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510500.SS-states-raw.csv": "e537d152789ee48b3382412d2d866115a2d09c2b2083d0eeacb707cd64a26541",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/512100.SS.csv": "8a69a2dd856d7d8e37b98c441090b7caf67ea5e927229c6d6d74fbc3b11b3fa9",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/512100.SS.csv": "88e695248889318287d98793f0bef5a76145f25715ebd0f6cad83f966d95a706",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/512100.SS-states-protected.csv": "0f8077e55e804deb8175de674ce368d43a2a5caa5432d95aab5f1899a51f506b",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/512100.SS-states-raw.csv": "5d3aeedf93be415fe8d8e21944cb30dce184729bf9bb76f9ddccd8bb8d825432",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/159915.SZ.csv": "72a2cd8877a8bde6a5fe6ecd20a48a18b4e2a8804bab238ad2382ac81bc007be",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/159915.SZ.csv": "db9cb7f0e77f35cba0648741698bba861cbf8fd28282c9c02c3b781ae31a0e33",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/159915.SZ-states-protected.csv": "5f19b845d9c93af4bb347f4db1e8880a1e43e9aa19c404256eaa5fcd44219f96",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/159915.SZ-states-raw.csv": "5f19b845d9c93af4bb347f4db1e8880a1e43e9aa19c404256eaa5fcd44219f96",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/588000.SS.csv": "bcefa963b84e0154b9c35edb5d2da5d33fe0a8711682953e97151bbc03d15065",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/588000.SS.csv": "4c47f323acc1c0b484a9956905f26ad9d292b2f775e3a3641348363c0b3065e5",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/588000.SS-states-protected.csv": "575a8b643308990d290bd46debb76a4e5f2a3197473f115b9ebcccc739204d3b",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/588000.SS-states-raw.csv": "575a8b643308990d290bd46debb76a4e5f2a3197473f115b9ebcccc739204d3b",
+        "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/manifest.json": "bbd2299cc228e0f5fcf07abbca7a384ad700d298428e07d49c6c0036aacfa2e9",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/calendar.json": "730dcb8f1bbb502ce215ba42a2d95efc42c6465962b0f96da90ef18bfeb72370",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/release-manifest.json": "f05b06f008b2d81fb22ab1993d728d132f6527b224fdf1924d513a6bca6c596d",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/resolved-cards.json": "7bc7717ff522c6fb4ab90df471ba3a8248c9d0e46de731791af7c025c7b80b33",
+        "docs/archive/handoffs-plans/dual-ma-information-2026-09-28/plan.md": "34547fab578d73ca64ce57b404fd390290eb69dd11d2bc50b3d1f6fd788ce394",
+        "docs/experiments/raw/dual-ma-information-2026-09-28/analysis.py": "4c8e432c6bded552da7a5f088208b654955c32bf2d91fa3066f19700321e3157",
+        "docs/experiments/raw/dual-ma-information-2026-09-28/test_analysis.py": "937d6a3149f4e8180267477bb0ecaa40e223dd9bd7e366a4e9f65524f564f4d0",
+        "docs/research/definitions.v1.json": "ecdbd3d3277360a9aaa185603bdadd5fc28b7ad8a886f195bfdee05eb4ff9022",
+        "docs/research/proposals/factor-ma-baselines-2026-09-24/method/protocol.json": "a0503f18c8224020615eff5a51967cc72c0b2770d591229d79575971538ee383"
+      },
+      "trial_history": {
+        "parent": "factor-ma-state-participation-2026-09-24 and D1 fixed-event studies",
+        "known_previous": "9 MA state policy versions plus2baselines,6ETF,2costs,132accounts; D1 event and risk variants; actual historical total unknown",
+        "new_questions": 7,
+        "new_horizons": 1,
+        "primary_period": 20,
+        "secondary_periods": [
+          60,
+          120
+        ],
+        "all_seen": true,
+        "multiplicity_adjusted": false,
+        "post_hoc_question": true
+      },
+      "formula": "S_n: C>SMA_n and SMA_n>SMA_n(previous); E_n: C>EMA_n and EMA_n>EMA_n(previous); D_n:S_n and E_n; strict, missing unknown; seeded EMA original252-row origin",
+      "limitations": [
+        "date/regime/volatility not conditioned; B contains only fixed ETF identity and stated confirmation",
+        "historical available_at unknown",
+        "6ETF not independent markets"
+      ]
+    },
+    {
+      "question_id": "dual60-given-e-daily-h21-v1",
+      "hypothesis_family": "dual-ma-additional-information",
+      "factor_refs": [
+        "etf.ma20260924.state.e60@1.0.0",
+        "etf.ma20260924.state.s60@1.0.0"
+      ],
+      "layer": "factor_information",
+      "comparison": "joint",
+      "joint_structure": "within each ETF across dates; cross-ETF equal-weight summary auxiliary, not cross-sectional ranking",
+      "sampling": "daily",
+      "target": {
+        "kind": "return_distribution",
+        "horizon": 21,
+        "start_offset": 1,
+        "end_offset": 22,
+        "price_basis": "accepted economic close; ex-date economic action adjustment; no execution or account"
+      },
+      "baseline": "E60 == true within each fixed ETF",
+      "added_information": "S60",
+      "baseline_column": "E60",
+      "added_columns": [
+        "S60"
+      ],
+      "ma_period": 60,
+      "method": {
+        "name": "conditional_state_mean_difference",
+        "reason": "at fixed single confirmation compare second true/false over complete daily observations; retain disagreement samples; no fitted model"
+      },
+      "primary_metric": {
+        "name": "mean_future_return_difference_pp",
+        "direction": "higher",
+        "attention_threshold": 0.5,
+        "threshold_reason": "provisional 0.5 percentage point attention level for 21-interval return distribution; not universal or adoption threshold"
+      },
+      "auxiliary_metrics": [
+        "up_probability_difference_pp",
+        "median_return",
+        "close_adverse_excursion",
+        "excluded_positive_fraction"
+      ],
+      "universe": [
+        "510300.SS",
+        "510050.SS",
+        "510500.SS",
+        "512100.SS",
+        "159915.SZ",
+        "588000.SS"
+      ],
+      "period": [
+        "2022-01-01",
+        "2026-06-30"
+      ],
+      "validation": {
+        "stage": "exploration",
+        "split_policy": "all previously seen; no fit or unseen evaluation",
+        "label_boundary_policy": "labels must end by 2026-06-30; all exact calendar dates required; future split must purge each actual crossing label"
+      },
+      "dependence": {
+        "method": "shared-date circular moving blocks",
+        "block_sessions": 60,
+        "draws": 2000,
+        "seed": 20260928,
+        "interval": "percentile 2.5/97.5 exploratory unadjusted",
+        "min_valid_fraction": 0.9,
+        "min_design_spans": 8,
+        "note": "stationarity approximate; long MA states and old selection reduce certainty; not effective independent count"
+      },
+      "sources": {
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510300.SS.csv": "7bab49b4aac17b15a313e8b69445a9ec75d7093adce4ae77c2e8b9b1694308e4",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510300.SS.csv": "40de4d21113bff96f81149a17bf012a924b99583e5a7edf1a5ce143770a100c4",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-states-protected.csv": "947f37e56f934855dbf195136773d3cbb6aede6107d4153c6dd1a69fe152b077",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-states-raw.csv": "947f37e56f934855dbf195136773d3cbb6aede6107d4153c6dd1a69fe152b077",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510050.SS.csv": "feab2473048c77faebddeb66636e1b17d73dbe1d6a8ccfc0a425f9639178d787",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510050.SS.csv": "d52280ec806938c295e246940080b0910b73d5baa6c076e15e731a5de57950cd",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510050.SS-states-protected.csv": "70744fc4ee51ccda1d6c20b3e0d460470e806c2ac27a09c337d679803cf89642",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510050.SS-states-raw.csv": "70744fc4ee51ccda1d6c20b3e0d460470e806c2ac27a09c337d679803cf89642",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510500.SS.csv": "3504322a6c7a346d6e88b0395994d326770a78a477e52ea531d6c643aaa4956a",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510500.SS.csv": "93f09f93a2a7e6e4a47e3527d261f993b92e892b3a654be5eb9205e8cc429b54",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510500.SS-states-protected.csv": "e537d152789ee48b3382412d2d866115a2d09c2b2083d0eeacb707cd64a26541",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510500.SS-states-raw.csv": "e537d152789ee48b3382412d2d866115a2d09c2b2083d0eeacb707cd64a26541",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/512100.SS.csv": "8a69a2dd856d7d8e37b98c441090b7caf67ea5e927229c6d6d74fbc3b11b3fa9",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/512100.SS.csv": "88e695248889318287d98793f0bef5a76145f25715ebd0f6cad83f966d95a706",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/512100.SS-states-protected.csv": "0f8077e55e804deb8175de674ce368d43a2a5caa5432d95aab5f1899a51f506b",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/512100.SS-states-raw.csv": "5d3aeedf93be415fe8d8e21944cb30dce184729bf9bb76f9ddccd8bb8d825432",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/159915.SZ.csv": "72a2cd8877a8bde6a5fe6ecd20a48a18b4e2a8804bab238ad2382ac81bc007be",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/159915.SZ.csv": "db9cb7f0e77f35cba0648741698bba861cbf8fd28282c9c02c3b781ae31a0e33",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/159915.SZ-states-protected.csv": "5f19b845d9c93af4bb347f4db1e8880a1e43e9aa19c404256eaa5fcd44219f96",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/159915.SZ-states-raw.csv": "5f19b845d9c93af4bb347f4db1e8880a1e43e9aa19c404256eaa5fcd44219f96",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/588000.SS.csv": "bcefa963b84e0154b9c35edb5d2da5d33fe0a8711682953e97151bbc03d15065",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/588000.SS.csv": "4c47f323acc1c0b484a9956905f26ad9d292b2f775e3a3641348363c0b3065e5",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/588000.SS-states-protected.csv": "575a8b643308990d290bd46debb76a4e5f2a3197473f115b9ebcccc739204d3b",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/588000.SS-states-raw.csv": "575a8b643308990d290bd46debb76a4e5f2a3197473f115b9ebcccc739204d3b",
+        "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/manifest.json": "bbd2299cc228e0f5fcf07abbca7a384ad700d298428e07d49c6c0036aacfa2e9",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/calendar.json": "730dcb8f1bbb502ce215ba42a2d95efc42c6465962b0f96da90ef18bfeb72370",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/release-manifest.json": "f05b06f008b2d81fb22ab1993d728d132f6527b224fdf1924d513a6bca6c596d",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/resolved-cards.json": "7bc7717ff522c6fb4ab90df471ba3a8248c9d0e46de731791af7c025c7b80b33",
+        "docs/archive/handoffs-plans/dual-ma-information-2026-09-28/plan.md": "34547fab578d73ca64ce57b404fd390290eb69dd11d2bc50b3d1f6fd788ce394",
+        "docs/experiments/raw/dual-ma-information-2026-09-28/analysis.py": "4c8e432c6bded552da7a5f088208b654955c32bf2d91fa3066f19700321e3157",
+        "docs/experiments/raw/dual-ma-information-2026-09-28/test_analysis.py": "937d6a3149f4e8180267477bb0ecaa40e223dd9bd7e366a4e9f65524f564f4d0",
+        "docs/research/definitions.v1.json": "ecdbd3d3277360a9aaa185603bdadd5fc28b7ad8a886f195bfdee05eb4ff9022",
+        "docs/research/proposals/factor-ma-baselines-2026-09-24/method/protocol.json": "a0503f18c8224020615eff5a51967cc72c0b2770d591229d79575971538ee383"
+      },
+      "trial_history": {
+        "parent": "factor-ma-state-participation-2026-09-24 and D1 fixed-event studies",
+        "known_previous": "9 MA state policy versions plus2baselines,6ETF,2costs,132accounts; D1 event and risk variants; actual historical total unknown",
+        "new_questions": 7,
+        "new_horizons": 1,
+        "primary_period": 20,
+        "secondary_periods": [
+          60,
+          120
+        ],
+        "all_seen": true,
+        "multiplicity_adjusted": false,
+        "post_hoc_question": true
+      },
+      "formula": "S_n: C>SMA_n and SMA_n>SMA_n(previous); E_n: C>EMA_n and EMA_n>EMA_n(previous); D_n:S_n and E_n; strict, missing unknown; seeded EMA original252-row origin",
+      "limitations": [
+        "date/regime/volatility not conditioned; B contains only fixed ETF identity and stated confirmation",
+        "historical available_at unknown",
+        "6ETF not independent markets"
+      ]
+    },
+    {
+      "question_id": "dual120-given-s-daily-h21-v1",
+      "hypothesis_family": "dual-ma-additional-information",
+      "factor_refs": [
+        "etf.ma20260924.state.s120@1.0.0",
+        "etf.ma20260924.state.e120@1.0.0"
+      ],
+      "layer": "factor_information",
+      "comparison": "joint",
+      "joint_structure": "within each ETF across dates; cross-ETF equal-weight summary auxiliary, not cross-sectional ranking",
+      "sampling": "daily",
+      "target": {
+        "kind": "return_distribution",
+        "horizon": 21,
+        "start_offset": 1,
+        "end_offset": 22,
+        "price_basis": "accepted economic close; ex-date economic action adjustment; no execution or account"
+      },
+      "baseline": "S120 == true within each fixed ETF",
+      "added_information": "E120",
+      "baseline_column": "S120",
+      "added_columns": [
+        "E120"
+      ],
+      "ma_period": 120,
+      "method": {
+        "name": "conditional_state_mean_difference",
+        "reason": "at fixed single confirmation compare second true/false over complete daily observations; retain disagreement samples; no fitted model"
+      },
+      "primary_metric": {
+        "name": "mean_future_return_difference_pp",
+        "direction": "higher",
+        "attention_threshold": 0.5,
+        "threshold_reason": "provisional 0.5 percentage point attention level for 21-interval return distribution; not universal or adoption threshold"
+      },
+      "auxiliary_metrics": [
+        "up_probability_difference_pp",
+        "median_return",
+        "close_adverse_excursion",
+        "excluded_positive_fraction"
+      ],
+      "universe": [
+        "510300.SS",
+        "510050.SS",
+        "510500.SS",
+        "512100.SS",
+        "159915.SZ",
+        "588000.SS"
+      ],
+      "period": [
+        "2022-01-01",
+        "2026-06-30"
+      ],
+      "validation": {
+        "stage": "exploration",
+        "split_policy": "all previously seen; no fit or unseen evaluation",
+        "label_boundary_policy": "labels must end by 2026-06-30; all exact calendar dates required; future split must purge each actual crossing label"
+      },
+      "dependence": {
+        "method": "shared-date circular moving blocks",
+        "block_sessions": 60,
+        "draws": 2000,
+        "seed": 20260928,
+        "interval": "percentile 2.5/97.5 exploratory unadjusted",
+        "min_valid_fraction": 0.9,
+        "min_design_spans": 8,
+        "note": "stationarity approximate; long MA states and old selection reduce certainty; not effective independent count"
+      },
+      "sources": {
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510300.SS.csv": "7bab49b4aac17b15a313e8b69445a9ec75d7093adce4ae77c2e8b9b1694308e4",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510300.SS.csv": "40de4d21113bff96f81149a17bf012a924b99583e5a7edf1a5ce143770a100c4",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-states-protected.csv": "947f37e56f934855dbf195136773d3cbb6aede6107d4153c6dd1a69fe152b077",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-states-raw.csv": "947f37e56f934855dbf195136773d3cbb6aede6107d4153c6dd1a69fe152b077",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510050.SS.csv": "feab2473048c77faebddeb66636e1b17d73dbe1d6a8ccfc0a425f9639178d787",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510050.SS.csv": "d52280ec806938c295e246940080b0910b73d5baa6c076e15e731a5de57950cd",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510050.SS-states-protected.csv": "70744fc4ee51ccda1d6c20b3e0d460470e806c2ac27a09c337d679803cf89642",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510050.SS-states-raw.csv": "70744fc4ee51ccda1d6c20b3e0d460470e806c2ac27a09c337d679803cf89642",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510500.SS.csv": "3504322a6c7a346d6e88b0395994d326770a78a477e52ea531d6c643aaa4956a",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510500.SS.csv": "93f09f93a2a7e6e4a47e3527d261f993b92e892b3a654be5eb9205e8cc429b54",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510500.SS-states-protected.csv": "e537d152789ee48b3382412d2d866115a2d09c2b2083d0eeacb707cd64a26541",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510500.SS-states-raw.csv": "e537d152789ee48b3382412d2d866115a2d09c2b2083d0eeacb707cd64a26541",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/512100.SS.csv": "8a69a2dd856d7d8e37b98c441090b7caf67ea5e927229c6d6d74fbc3b11b3fa9",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/512100.SS.csv": "88e695248889318287d98793f0bef5a76145f25715ebd0f6cad83f966d95a706",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/512100.SS-states-protected.csv": "0f8077e55e804deb8175de674ce368d43a2a5caa5432d95aab5f1899a51f506b",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/512100.SS-states-raw.csv": "5d3aeedf93be415fe8d8e21944cb30dce184729bf9bb76f9ddccd8bb8d825432",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/159915.SZ.csv": "72a2cd8877a8bde6a5fe6ecd20a48a18b4e2a8804bab238ad2382ac81bc007be",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/159915.SZ.csv": "db9cb7f0e77f35cba0648741698bba861cbf8fd28282c9c02c3b781ae31a0e33",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/159915.SZ-states-protected.csv": "5f19b845d9c93af4bb347f4db1e8880a1e43e9aa19c404256eaa5fcd44219f96",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/159915.SZ-states-raw.csv": "5f19b845d9c93af4bb347f4db1e8880a1e43e9aa19c404256eaa5fcd44219f96",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/588000.SS.csv": "bcefa963b84e0154b9c35edb5d2da5d33fe0a8711682953e97151bbc03d15065",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/588000.SS.csv": "4c47f323acc1c0b484a9956905f26ad9d292b2f775e3a3641348363c0b3065e5",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/588000.SS-states-protected.csv": "575a8b643308990d290bd46debb76a4e5f2a3197473f115b9ebcccc739204d3b",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/588000.SS-states-raw.csv": "575a8b643308990d290bd46debb76a4e5f2a3197473f115b9ebcccc739204d3b",
+        "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/manifest.json": "bbd2299cc228e0f5fcf07abbca7a384ad700d298428e07d49c6c0036aacfa2e9",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/calendar.json": "730dcb8f1bbb502ce215ba42a2d95efc42c6465962b0f96da90ef18bfeb72370",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/release-manifest.json": "f05b06f008b2d81fb22ab1993d728d132f6527b224fdf1924d513a6bca6c596d",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/resolved-cards.json": "7bc7717ff522c6fb4ab90df471ba3a8248c9d0e46de731791af7c025c7b80b33",
+        "docs/archive/handoffs-plans/dual-ma-information-2026-09-28/plan.md": "34547fab578d73ca64ce57b404fd390290eb69dd11d2bc50b3d1f6fd788ce394",
+        "docs/experiments/raw/dual-ma-information-2026-09-28/analysis.py": "4c8e432c6bded552da7a5f088208b654955c32bf2d91fa3066f19700321e3157",
+        "docs/experiments/raw/dual-ma-information-2026-09-28/test_analysis.py": "937d6a3149f4e8180267477bb0ecaa40e223dd9bd7e366a4e9f65524f564f4d0",
+        "docs/research/definitions.v1.json": "ecdbd3d3277360a9aaa185603bdadd5fc28b7ad8a886f195bfdee05eb4ff9022",
+        "docs/research/proposals/factor-ma-baselines-2026-09-24/method/protocol.json": "a0503f18c8224020615eff5a51967cc72c0b2770d591229d79575971538ee383"
+      },
+      "trial_history": {
+        "parent": "factor-ma-state-participation-2026-09-24 and D1 fixed-event studies",
+        "known_previous": "9 MA state policy versions plus2baselines,6ETF,2costs,132accounts; D1 event and risk variants; actual historical total unknown",
+        "new_questions": 7,
+        "new_horizons": 1,
+        "primary_period": 20,
+        "secondary_periods": [
+          60,
+          120
+        ],
+        "all_seen": true,
+        "multiplicity_adjusted": false,
+        "post_hoc_question": true
+      },
+      "formula": "S_n: C>SMA_n and SMA_n>SMA_n(previous); E_n: C>EMA_n and EMA_n>EMA_n(previous); D_n:S_n and E_n; strict, missing unknown; seeded EMA original252-row origin",
+      "limitations": [
+        "date/regime/volatility not conditioned; B contains only fixed ETF identity and stated confirmation",
+        "historical available_at unknown",
+        "6ETF not independent markets"
+      ]
+    },
+    {
+      "question_id": "dual120-given-e-daily-h21-v1",
+      "hypothesis_family": "dual-ma-additional-information",
+      "factor_refs": [
+        "etf.ma20260924.state.e120@1.0.0",
+        "etf.ma20260924.state.s120@1.0.0"
+      ],
+      "layer": "factor_information",
+      "comparison": "joint",
+      "joint_structure": "within each ETF across dates; cross-ETF equal-weight summary auxiliary, not cross-sectional ranking",
+      "sampling": "daily",
+      "target": {
+        "kind": "return_distribution",
+        "horizon": 21,
+        "start_offset": 1,
+        "end_offset": 22,
+        "price_basis": "accepted economic close; ex-date economic action adjustment; no execution or account"
+      },
+      "baseline": "E120 == true within each fixed ETF",
+      "added_information": "S120",
+      "baseline_column": "E120",
+      "added_columns": [
+        "S120"
+      ],
+      "ma_period": 120,
+      "method": {
+        "name": "conditional_state_mean_difference",
+        "reason": "at fixed single confirmation compare second true/false over complete daily observations; retain disagreement samples; no fitted model"
+      },
+      "primary_metric": {
+        "name": "mean_future_return_difference_pp",
+        "direction": "higher",
+        "attention_threshold": 0.5,
+        "threshold_reason": "provisional 0.5 percentage point attention level for 21-interval return distribution; not universal or adoption threshold"
+      },
+      "auxiliary_metrics": [
+        "up_probability_difference_pp",
+        "median_return",
+        "close_adverse_excursion",
+        "excluded_positive_fraction"
+      ],
+      "universe": [
+        "510300.SS",
+        "510050.SS",
+        "510500.SS",
+        "512100.SS",
+        "159915.SZ",
+        "588000.SS"
+      ],
+      "period": [
+        "2022-01-01",
+        "2026-06-30"
+      ],
+      "validation": {
+        "stage": "exploration",
+        "split_policy": "all previously seen; no fit or unseen evaluation",
+        "label_boundary_policy": "labels must end by 2026-06-30; all exact calendar dates required; future split must purge each actual crossing label"
+      },
+      "dependence": {
+        "method": "shared-date circular moving blocks",
+        "block_sessions": 60,
+        "draws": 2000,
+        "seed": 20260928,
+        "interval": "percentile 2.5/97.5 exploratory unadjusted",
+        "min_valid_fraction": 0.9,
+        "min_design_spans": 8,
+        "note": "stationarity approximate; long MA states and old selection reduce certainty; not effective independent count"
+      },
+      "sources": {
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510300.SS.csv": "7bab49b4aac17b15a313e8b69445a9ec75d7093adce4ae77c2e8b9b1694308e4",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510300.SS.csv": "40de4d21113bff96f81149a17bf012a924b99583e5a7edf1a5ce143770a100c4",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-states-protected.csv": "947f37e56f934855dbf195136773d3cbb6aede6107d4153c6dd1a69fe152b077",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-states-raw.csv": "947f37e56f934855dbf195136773d3cbb6aede6107d4153c6dd1a69fe152b077",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510050.SS.csv": "feab2473048c77faebddeb66636e1b17d73dbe1d6a8ccfc0a425f9639178d787",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510050.SS.csv": "d52280ec806938c295e246940080b0910b73d5baa6c076e15e731a5de57950cd",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510050.SS-states-protected.csv": "70744fc4ee51ccda1d6c20b3e0d460470e806c2ac27a09c337d679803cf89642",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510050.SS-states-raw.csv": "70744fc4ee51ccda1d6c20b3e0d460470e806c2ac27a09c337d679803cf89642",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510500.SS.csv": "3504322a6c7a346d6e88b0395994d326770a78a477e52ea531d6c643aaa4956a",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510500.SS.csv": "93f09f93a2a7e6e4a47e3527d261f993b92e892b3a654be5eb9205e8cc429b54",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510500.SS-states-protected.csv": "e537d152789ee48b3382412d2d866115a2d09c2b2083d0eeacb707cd64a26541",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510500.SS-states-raw.csv": "e537d152789ee48b3382412d2d866115a2d09c2b2083d0eeacb707cd64a26541",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/512100.SS.csv": "8a69a2dd856d7d8e37b98c441090b7caf67ea5e927229c6d6d74fbc3b11b3fa9",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/512100.SS.csv": "88e695248889318287d98793f0bef5a76145f25715ebd0f6cad83f966d95a706",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/512100.SS-states-protected.csv": "0f8077e55e804deb8175de674ce368d43a2a5caa5432d95aab5f1899a51f506b",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/512100.SS-states-raw.csv": "5d3aeedf93be415fe8d8e21944cb30dce184729bf9bb76f9ddccd8bb8d825432",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/159915.SZ.csv": "72a2cd8877a8bde6a5fe6ecd20a48a18b4e2a8804bab238ad2382ac81bc007be",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/159915.SZ.csv": "db9cb7f0e77f35cba0648741698bba861cbf8fd28282c9c02c3b781ae31a0e33",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/159915.SZ-states-protected.csv": "5f19b845d9c93af4bb347f4db1e8880a1e43e9aa19c404256eaa5fcd44219f96",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/159915.SZ-states-raw.csv": "5f19b845d9c93af4bb347f4db1e8880a1e43e9aa19c404256eaa5fcd44219f96",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/588000.SS.csv": "bcefa963b84e0154b9c35edb5d2da5d33fe0a8711682953e97151bbc03d15065",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/588000.SS.csv": "4c47f323acc1c0b484a9956905f26ad9d292b2f775e3a3641348363c0b3065e5",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/588000.SS-states-protected.csv": "575a8b643308990d290bd46debb76a4e5f2a3197473f115b9ebcccc739204d3b",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/588000.SS-states-raw.csv": "575a8b643308990d290bd46debb76a4e5f2a3197473f115b9ebcccc739204d3b",
+        "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/manifest.json": "bbd2299cc228e0f5fcf07abbca7a384ad700d298428e07d49c6c0036aacfa2e9",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/calendar.json": "730dcb8f1bbb502ce215ba42a2d95efc42c6465962b0f96da90ef18bfeb72370",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/release-manifest.json": "f05b06f008b2d81fb22ab1993d728d132f6527b224fdf1924d513a6bca6c596d",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/resolved-cards.json": "7bc7717ff522c6fb4ab90df471ba3a8248c9d0e46de731791af7c025c7b80b33",
+        "docs/archive/handoffs-plans/dual-ma-information-2026-09-28/plan.md": "34547fab578d73ca64ce57b404fd390290eb69dd11d2bc50b3d1f6fd788ce394",
+        "docs/experiments/raw/dual-ma-information-2026-09-28/analysis.py": "4c8e432c6bded552da7a5f088208b654955c32bf2d91fa3066f19700321e3157",
+        "docs/experiments/raw/dual-ma-information-2026-09-28/test_analysis.py": "937d6a3149f4e8180267477bb0ecaa40e223dd9bd7e366a4e9f65524f564f4d0",
+        "docs/research/definitions.v1.json": "ecdbd3d3277360a9aaa185603bdadd5fc28b7ad8a886f195bfdee05eb4ff9022",
+        "docs/research/proposals/factor-ma-baselines-2026-09-24/method/protocol.json": "a0503f18c8224020615eff5a51967cc72c0b2770d591229d79575971538ee383"
+      },
+      "trial_history": {
+        "parent": "factor-ma-state-participation-2026-09-24 and D1 fixed-event studies",
+        "known_previous": "9 MA state policy versions plus2baselines,6ETF,2costs,132accounts; D1 event and risk variants; actual historical total unknown",
+        "new_questions": 7,
+        "new_horizons": 1,
+        "primary_period": 20,
+        "secondary_periods": [
+          60,
+          120
+        ],
+        "all_seen": true,
+        "multiplicity_adjusted": false,
+        "post_hoc_question": true
+      },
+      "formula": "S_n: C>SMA_n and SMA_n>SMA_n(previous); E_n: C>EMA_n and EMA_n>EMA_n(previous); D_n:S_n and E_n; strict, missing unknown; seeded EMA original252-row origin",
+      "limitations": [
+        "date/regime/volatility not conditioned; B contains only fixed ETF identity and stated confirmation",
+        "historical available_at unknown",
+        "6ETF not independent markets"
+      ]
+    },
+    {
+      "question_id": "multi-given-dual20-daily-h21-v1",
+      "hypothesis_family": "dual-ma-additional-information",
+      "factor_refs": [
+        "etf.ma20260924.state.d20@1.0.0",
+        "etf.ma20260924.state.d60@1.0.0",
+        "etf.ma20260924.state.d120@1.0.0"
+      ],
+      "layer": "factor_information",
+      "comparison": "joint",
+      "joint_structure": "within each ETF across dates; cross-ETF equal-weight summary auxiliary, not cross-sectional ranking",
+      "sampling": "daily",
+      "target": {
+        "kind": "return_distribution",
+        "horizon": 21,
+        "start_offset": 1,
+        "end_offset": 22,
+        "price_basis": "accepted economic close; ex-date economic action adjustment; no execution or account"
+      },
+      "baseline": "D20 == true within each fixed ETF",
+      "added_information": "D60 and D120",
+      "baseline_column": "D20",
+      "added_columns": [
+        "D60",
+        "D120"
+      ],
+      "ma_period": 20,
+      "method": {
+        "name": "conditional_state_mean_difference",
+        "reason": "at fixed single confirmation compare second true/false over complete daily observations; retain disagreement samples; no fitted model"
+      },
+      "primary_metric": {
+        "name": "mean_future_return_difference_pp",
+        "direction": "higher",
+        "attention_threshold": 0.5,
+        "threshold_reason": "provisional 0.5 percentage point attention level for 21-interval return distribution; not universal or adoption threshold"
+      },
+      "auxiliary_metrics": [
+        "up_probability_difference_pp",
+        "median_return",
+        "close_adverse_excursion",
+        "excluded_positive_fraction"
+      ],
+      "universe": [
+        "510300.SS",
+        "510050.SS",
+        "510500.SS",
+        "512100.SS",
+        "159915.SZ",
+        "588000.SS"
+      ],
+      "period": [
+        "2022-01-01",
+        "2026-06-30"
+      ],
+      "validation": {
+        "stage": "exploration",
+        "split_policy": "all previously seen; no fit or unseen evaluation",
+        "label_boundary_policy": "labels must end by 2026-06-30; all exact calendar dates required; future split must purge each actual crossing label"
+      },
+      "dependence": {
+        "method": "shared-date circular moving blocks",
+        "block_sessions": 60,
+        "draws": 2000,
+        "seed": 20260928,
+        "interval": "percentile 2.5/97.5 exploratory unadjusted",
+        "min_valid_fraction": 0.9,
+        "min_design_spans": 8,
+        "note": "stationarity approximate; long MA states and old selection reduce certainty; not effective independent count"
+      },
+      "sources": {
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510300.SS.csv": "7bab49b4aac17b15a313e8b69445a9ec75d7093adce4ae77c2e8b9b1694308e4",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510300.SS.csv": "40de4d21113bff96f81149a17bf012a924b99583e5a7edf1a5ce143770a100c4",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-states-protected.csv": "947f37e56f934855dbf195136773d3cbb6aede6107d4153c6dd1a69fe152b077",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-states-raw.csv": "947f37e56f934855dbf195136773d3cbb6aede6107d4153c6dd1a69fe152b077",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510050.SS.csv": "feab2473048c77faebddeb66636e1b17d73dbe1d6a8ccfc0a425f9639178d787",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510050.SS.csv": "d52280ec806938c295e246940080b0910b73d5baa6c076e15e731a5de57950cd",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510050.SS-states-protected.csv": "70744fc4ee51ccda1d6c20b3e0d460470e806c2ac27a09c337d679803cf89642",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510050.SS-states-raw.csv": "70744fc4ee51ccda1d6c20b3e0d460470e806c2ac27a09c337d679803cf89642",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510500.SS.csv": "3504322a6c7a346d6e88b0395994d326770a78a477e52ea531d6c643aaa4956a",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510500.SS.csv": "93f09f93a2a7e6e4a47e3527d261f993b92e892b3a654be5eb9205e8cc429b54",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510500.SS-states-protected.csv": "e537d152789ee48b3382412d2d866115a2d09c2b2083d0eeacb707cd64a26541",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510500.SS-states-raw.csv": "e537d152789ee48b3382412d2d866115a2d09c2b2083d0eeacb707cd64a26541",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/512100.SS.csv": "8a69a2dd856d7d8e37b98c441090b7caf67ea5e927229c6d6d74fbc3b11b3fa9",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/512100.SS.csv": "88e695248889318287d98793f0bef5a76145f25715ebd0f6cad83f966d95a706",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/512100.SS-states-protected.csv": "0f8077e55e804deb8175de674ce368d43a2a5caa5432d95aab5f1899a51f506b",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/512100.SS-states-raw.csv": "5d3aeedf93be415fe8d8e21944cb30dce184729bf9bb76f9ddccd8bb8d825432",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/159915.SZ.csv": "72a2cd8877a8bde6a5fe6ecd20a48a18b4e2a8804bab238ad2382ac81bc007be",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/159915.SZ.csv": "db9cb7f0e77f35cba0648741698bba861cbf8fd28282c9c02c3b781ae31a0e33",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/159915.SZ-states-protected.csv": "5f19b845d9c93af4bb347f4db1e8880a1e43e9aa19c404256eaa5fcd44219f96",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/159915.SZ-states-raw.csv": "5f19b845d9c93af4bb347f4db1e8880a1e43e9aa19c404256eaa5fcd44219f96",
+        "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/588000.SS.csv": "bcefa963b84e0154b9c35edb5d2da5d33fe0a8711682953e97151bbc03d15065",
+        "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/588000.SS.csv": "4c47f323acc1c0b484a9956905f26ad9d292b2f775e3a3641348363c0b3065e5",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/588000.SS-states-protected.csv": "575a8b643308990d290bd46debb76a4e5f2a3197473f115b9ebcccc739204d3b",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/588000.SS-states-raw.csv": "575a8b643308990d290bd46debb76a4e5f2a3197473f115b9ebcccc739204d3b",
+        "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/manifest.json": "bbd2299cc228e0f5fcf07abbca7a384ad700d298428e07d49c6c0036aacfa2e9",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/calendar.json": "730dcb8f1bbb502ce215ba42a2d95efc42c6465962b0f96da90ef18bfeb72370",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/release-manifest.json": "f05b06f008b2d81fb22ab1993d728d132f6527b224fdf1924d513a6bca6c596d",
+        "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/resolved-cards.json": "7bc7717ff522c6fb4ab90df471ba3a8248c9d0e46de731791af7c025c7b80b33",
+        "docs/archive/handoffs-plans/dual-ma-information-2026-09-28/plan.md": "34547fab578d73ca64ce57b404fd390290eb69dd11d2bc50b3d1f6fd788ce394",
+        "docs/experiments/raw/dual-ma-information-2026-09-28/analysis.py": "4c8e432c6bded552da7a5f088208b654955c32bf2d91fa3066f19700321e3157",
+        "docs/experiments/raw/dual-ma-information-2026-09-28/test_analysis.py": "937d6a3149f4e8180267477bb0ecaa40e223dd9bd7e366a4e9f65524f564f4d0",
+        "docs/research/definitions.v1.json": "ecdbd3d3277360a9aaa185603bdadd5fc28b7ad8a886f195bfdee05eb4ff9022",
+        "docs/research/proposals/factor-ma-baselines-2026-09-24/method/protocol.json": "a0503f18c8224020615eff5a51967cc72c0b2770d591229d79575971538ee383"
+      },
+      "trial_history": {
+        "parent": "factor-ma-state-participation-2026-09-24 and D1 fixed-event studies",
+        "known_previous": "9 MA state policy versions plus2baselines,6ETF,2costs,132accounts; D1 event and risk variants; actual historical total unknown",
+        "new_questions": 7,
+        "new_horizons": 1,
+        "primary_period": 20,
+        "secondary_periods": [
+          60,
+          120
+        ],
+        "all_seen": true,
+        "multiplicity_adjusted": false,
+        "post_hoc_question": true
+      },
+      "formula": "S_n: C>SMA_n and SMA_n>SMA_n(previous); E_n: C>EMA_n and EMA_n>EMA_n(previous); D_n:S_n and E_n; strict, missing unknown; seeded EMA original252-row origin",
+      "limitations": [
+        "date/regime/volatility not conditioned; B contains only fixed ETF identity and stated confirmation",
+        "historical available_at unknown",
+        "6ETF not independent markets"
+      ]
+    }
+  ],
+  "formal_batches": 1,
+  "price_cutoff": "2026-06-30",
+  "sources": {
+    "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510300.SS.csv": "7bab49b4aac17b15a313e8b69445a9ec75d7093adce4ae77c2e8b9b1694308e4",
+    "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510300.SS.csv": "40de4d21113bff96f81149a17bf012a924b99583e5a7edf1a5ce143770a100c4",
+    "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-states-protected.csv": "947f37e56f934855dbf195136773d3cbb6aede6107d4153c6dd1a69fe152b077",
+    "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-states-raw.csv": "947f37e56f934855dbf195136773d3cbb6aede6107d4153c6dd1a69fe152b077",
+    "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510050.SS.csv": "feab2473048c77faebddeb66636e1b17d73dbe1d6a8ccfc0a425f9639178d787",
+    "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510050.SS.csv": "d52280ec806938c295e246940080b0910b73d5baa6c076e15e731a5de57950cd",
+    "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510050.SS-states-protected.csv": "70744fc4ee51ccda1d6c20b3e0d460470e806c2ac27a09c337d679803cf89642",
+    "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510050.SS-states-raw.csv": "70744fc4ee51ccda1d6c20b3e0d460470e806c2ac27a09c337d679803cf89642",
+    "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/510500.SS.csv": "3504322a6c7a346d6e88b0395994d326770a78a477e52ea531d6c643aaa4956a",
+    "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/510500.SS.csv": "93f09f93a2a7e6e4a47e3527d261f993b92e892b3a654be5eb9205e8cc429b54",
+    "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510500.SS-states-protected.csv": "e537d152789ee48b3382412d2d866115a2d09c2b2083d0eeacb707cd64a26541",
+    "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510500.SS-states-raw.csv": "e537d152789ee48b3382412d2d866115a2d09c2b2083d0eeacb707cd64a26541",
+    "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/512100.SS.csv": "8a69a2dd856d7d8e37b98c441090b7caf67ea5e927229c6d6d74fbc3b11b3fa9",
+    "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/512100.SS.csv": "88e695248889318287d98793f0bef5a76145f25715ebd0f6cad83f966d95a706",
+    "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/512100.SS-states-protected.csv": "0f8077e55e804deb8175de674ce368d43a2a5caa5432d95aab5f1899a51f506b",
+    "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/512100.SS-states-raw.csv": "5d3aeedf93be415fe8d8e21944cb30dce184729bf9bb76f9ddccd8bb8d825432",
+    "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/159915.SZ.csv": "72a2cd8877a8bde6a5fe6ecd20a48a18b4e2a8804bab238ad2382ac81bc007be",
+    "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/159915.SZ.csv": "db9cb7f0e77f35cba0648741698bba861cbf8fd28282c9c02c3b781ae31a0e33",
+    "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/159915.SZ-states-protected.csv": "5f19b845d9c93af4bb347f4db1e8880a1e43e9aa19c404256eaa5fcd44219f96",
+    "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/159915.SZ-states-raw.csv": "5f19b845d9c93af4bb347f4db1e8880a1e43e9aa19c404256eaa5fcd44219f96",
+    "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/formal/588000.SS.csv": "bcefa963b84e0154b9c35edb5d2da5d33fe0a8711682953e97151bbc03d15065",
+    "docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/warmup/formal/588000.SS.csv": "4c47f323acc1c0b484a9956905f26ad9d292b2f775e3a3641348363c0b3065e5",
+    "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/588000.SS-states-protected.csv": "575a8b643308990d290bd46debb76a4e5f2a3197473f115b9ebcccc739204d3b",
+    "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/588000.SS-states-raw.csv": "575a8b643308990d290bd46debb76a4e5f2a3197473f115b9ebcccc739204d3b",
+    "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+    "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/manifest.json": "bbd2299cc228e0f5fcf07abbca7a384ad700d298428e07d49c6c0036aacfa2e9",
+    "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/calendar.json": "730dcb8f1bbb502ce215ba42a2d95efc42c6465962b0f96da90ef18bfeb72370",
+    "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/release-manifest.json": "f05b06f008b2d81fb22ab1993d728d132f6527b224fdf1924d513a6bca6c596d",
+    "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/resolved-cards.json": "7bc7717ff522c6fb4ab90df471ba3a8248c9d0e46de731791af7c025c7b80b33",
+    "docs/archive/handoffs-plans/dual-ma-information-2026-09-28/plan.md": "34547fab578d73ca64ce57b404fd390290eb69dd11d2bc50b3d1f6fd788ce394",
+    "docs/experiments/raw/dual-ma-information-2026-09-28/analysis.py": "4c8e432c6bded552da7a5f088208b654955c32bf2d91fa3066f19700321e3157",
+    "docs/experiments/raw/dual-ma-information-2026-09-28/test_analysis.py": "937d6a3149f4e8180267477bb0ecaa40e223dd9bd7e366a4e9f65524f564f4d0",
+    "docs/research/definitions.v1.json": "ecdbd3d3277360a9aaa185603bdadd5fc28b7ad8a886f195bfdee05eb4ff9022",
+    "docs/research/proposals/factor-ma-baselines-2026-09-24/method/protocol.json": "a0503f18c8224020615eff5a51967cc72c0b2770d591229d79575971538ee383"
+  }
+}
