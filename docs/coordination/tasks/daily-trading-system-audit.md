@@ -68,3 +68,13 @@
 - 生产/研究边界: 0真实交易、0真实持仓写入、0下单、0新市场实验、0规则修改、0付费外部模型调用、0删除/全局设置修改。两份策略源SHA仍为已确认值。仓外OKR未写，原拟写内容保留。
 - 代码状态: 工作HEAD仍18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，codex/factor-unit-research-20260915。成果均未提交未推，仅本地；本协调同步不代表源码发布。
 - 最小接续: 定时按流程出简报，列真实来源缺口；用户具体原计划未确定时核持有理由，不补造目标或失效。未来用户报实际交易按确认/读回/对账处理，旧持仓快照未更新时不冒充已更新。无待运行的本批测试。
+
+## 用户新增授权：其他关键通知试运行
+
+- status: active；checked_coordination_sha: e67bf7e9723198a3a10f12fa9264645055110709；checked_at: 2026-10-08T01:08:19.904183+08:00
+- 已读task-id: daily-trading-system-audit、research-dispatch-controller；COORDINATION1.1；读取全部本机自动化配置排重。
+- 用户原话范围: 系统其他关键东西，能做成通知或定时提示的也可以试试。负责人仍本聊天01a11721-303e-7c83-9451-c82078c9ba23。
+- 方案: 新增每日09:10/17:10关键变化检查（只有新故障/恢复、资料资格变化、已确认计划重要变化、成交台账变化才提醒），以及周日20:00证据周报。复用已有11:35/14:40报告、研究中控/AI资讯/宽度观察；不另启研究或自动恢复暂停任务。具体操作建议仍只在原14:40简报。
+- 准确新写路径: src/lei_signal/portfolio/notifications.py、tests/unit/test_portfolio_notifications.py、docs/ops/system-notifications.md；续写本任务docs/ops/work-progress/daily-trading-system-audit.md、原raw目录的notifications-*证据；本仓data/cache内保存私有通知比较状态与试跑。
+- 验收: 现有已知缺口建立起点不刷屏；新故障/恢复及真实新增变化可见；时间戳刷新、盘中未确认、源离线不能伪造信号或恢复；相同事件不重复；定时工具创建并读回；实际本机只读试跑及合成反例。
+- 权威策略SHA仍为确认值；此改动服务§5执行/复盘的消息送达层，无新金融规则或阈值，不改生产账户、计划、新闻库、OKR或其他源码。基线HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；既有脏字节保留。没有源文件同路径声明；仅本任务新模块及文档。
