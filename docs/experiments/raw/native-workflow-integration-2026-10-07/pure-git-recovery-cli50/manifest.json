@@ -1,0 +1,34 @@
+{
+  "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/native-workflow-pure-git-recovery-20261008",
+  "started_at": "2026-10-08T01:24:58.706095+08:00",
+  "ended_at": "2026-10-08T01:25:02.451555+08:00",
+  "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -m pytest -q tests/integration/test_native_risk_d_mae_workflow.py::test_cli_x_then_one_y_restart_verify_and_repeat_rejection --tb=short",
+  "actual_python": "/opt/homebrew/opt/python@3.11/bin/python3.11",
+  "python_version": "3.11.7",
+  "pytest_version": "pytest 8.4.2",
+  "exit_code": 0,
+  "output_file": "pytest-output.txt",
+  "output_sha256": "009704c852a24f718c6210cf0200912bc521db4ade20943927bdee60c2449462",
+  "cli_source_commit": "dbd86bccf9ffe9ea9617a484bf8b96825880fb7d",
+  "cli_source_path": "scripts/run_factor_lab.py",
+  "cli_bytes": 4889,
+  "cli_sha256": "eb38c3ce70a4331026ab1dc5d8f71eb5f2e1cbffda59ceac4abbaffb15820c52",
+  "baseline_unoverlaid_count": 46,
+  "implementation_count": 6,
+  "test_scope": "single synthetic X then Y, fresh-process receipt verification, repeat rejection; no real X/Y, market, fits or paid call",
+  "before_cli": {
+    "bytes": 842,
+    "sha256": "17a7bc63bc97893f24ee72861836d64e65298b18b4d53c67041ef999cc4613d5"
+  },
+  "source_qualification": "Only this CLI exact blob from remote baseline tip is added; source commit parent is ec565b87f794541bfa6518a8675dce941390e3e8 and original 19 snapshot entries are unchanged.",
+  "test_assertions_covered": [
+    "declaration review returns execution_authorized=false",
+    "artificial X has 76 rows and no future close/Y fields",
+    "artificial Y has 75 mature rows and one unknown, 33 leave-one-lifecycle checks, real_X=real_Y=fits=0",
+    "fresh subprocess check_publication reports completed",
+    "repeat Y start is rejected with stage already started",
+    "receipt detects tampered result in fresh subprocess"
+  ],
+  "qualification_boundary": "One synthetic integration node passed. This does not establish 108 copied sources, real six inputs, real X/V/Y, model effectiveness, funding result, or production eligibility.",
+  "prior_failure_preserved": "docs/experiments/raw/native-workflow-integration-2026-10-07/pure-git-recovery/manifest.json"
+}
