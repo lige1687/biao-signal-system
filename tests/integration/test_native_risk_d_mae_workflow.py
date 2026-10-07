@@ -10,6 +10,9 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
+from lei_signal.research import native_risk_d_mae_workflow as native
 from tests.unit.test_native_risk_d_mae_workflow import artificial_inputs
 
 REPO = Path(__file__).resolve().parents[2]
@@ -156,3 +159,13 @@ def test_bad_y_path_rejects_whole_batch_before_y_start(tmp_path):
     journal = next((root / "docs/experiments/raw/research-workflow-ledgers-2026-09-29").glob("*/attempts.jsonl"))
     events = [json.loads(line) for line in journal.read_text().splitlines()]
     assert [r["stage"] for r in events if r["event"] == "start"] == ["x"]
+
+
+@pytest.mark.parametrize("field,bad", [("real_X", 0), ("real_Y", "false"),
+                                         ("real_fits", False), ("market_requests", False),
+                                         ("paid_requests", False), ("production", 0)])
+def test_permission_encodings_must_be_exact(field, bad):
+    contract = _contract("x", "a" * 64, "native-d-mae20-synthetic-permission-type")
+    contract["permissions"][field] = bad
+    with pytest.raises(ValueError, match="permissions must remain zero"):
+        native.validate_contract(contract)

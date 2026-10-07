@@ -1,0 +1,26 @@
+{
+  "schema_version": "native-workflow-permission-recheck/1.0",
+  "time": "2026-10-08T00:07:07.921967+08:00",
+  "reason": "Exact permission types: Python 0 equals False; numeric aliases must not pass explicit deny fields.",
+  "changed_files": [
+    {
+      "path": "src/lei_signal/research/native_risk_d_mae_workflow.py",
+      "sha256": "354e004ab8cbdf7e930be9046c3e5eeafa6e3eb0a44adc16e5d007e76df5a4c2",
+      "bytes": 32136
+    },
+    {
+      "path": "tests/integration/test_native_risk_d_mae_workflow.py",
+      "sha256": "b95fb201d7695f091a2fefbf667c72847bb983f941de7aa12c9462ed1263d68c",
+      "bytes": 9418
+    }
+  ],
+  "test_command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -m pytest -q tests/unit/test_question_contract.py tests/unit/test_workflow_inputs.py tests/unit/test_workflow_evaluation.py tests/integration/test_workflow_declaration_review_cli.py tests/integration/test_research_workflow_entry.py tests/unit/test_native_risk_d_mae_workflow.py tests/integration/test_native_risk_d_mae_workflow.py --tb=short",
+  "test_exit_code": 0,
+  "test_result": "169 passed in 14.28s",
+  "real_X": 0,
+  "real_Y": 0,
+  "fits": 0,
+  "market_requests": 0,
+  "paid_requests": 0,
+  "factor_effect": "unmeasured"
+}

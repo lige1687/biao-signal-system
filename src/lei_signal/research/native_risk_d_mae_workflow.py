@@ -84,6 +84,8 @@ def validate_contract(contract):
                                        "evaluator": "signed_spearman_equal_asset_fixed_groups/1.0",
                                        "deletion_groups": 33, "fits": 0}:
         _fail("comparison differs from frozen D/V descriptive design")
+    if type(contract["comparison"]["fits"]) is not int or type(contract["comparison"]["deletion_groups"]) is not int:
+        _fail("comparison counts must be integers")
     data = contract.get("data")
     if not isinstance(data, dict) or data.get("mode") != "synthetic" or data.get("artificial_only") is not True:
         _fail("this adapter accepts artificial synthetic inputs only; real X/Y remain blocked")
@@ -110,14 +112,17 @@ def validate_contract(contract):
     if not isinstance(history, dict) or not isinstance(history.get("family"), str) or not history["family"].startswith("native-d-mae20-synthetic-"):
         _fail("dedicated synthetic family is required")
     budget = contract.get("budget")
-    if not isinstance(budget, dict) or not _positive(budget.get("execution_seconds")) or budget.get("stage_runs") != 2:
+    if not isinstance(budget, dict) or not _positive(budget.get("execution_seconds")) or type(budget.get("stage_runs")) is not int or budget["stage_runs"] != 2:
         _fail("budget must hold positive seconds and exactly two stage runs")
-    if contract.get("permissions") != {"real_X": False, "real_Y": False,
-                                        "real_fits": 0, "market_requests": 0,
-                                        "paid_requests": 0, "production": False}:
+    permissions = contract.get("permissions")
+    if (not isinstance(permissions, dict) or
+        set(permissions) != {"real_X", "real_Y", "real_fits", "market_requests", "paid_requests", "production"} or
+        any(permissions[key] is not False for key in ("real_X", "real_Y", "production")) or
+        any(type(permissions[key]) is not int or permissions[key] != 0 for key in ("real_fits", "market_requests", "paid_requests"))):
         _fail("real-data, fit, paid and production permissions must remain zero")
-    if contract.get("publication") != {"conclusion": "synthetic_engineering_only",
-                                            "register_report": False}:
+    publication = contract.get("publication")
+    if (not isinstance(publication, dict) or set(publication) != {"conclusion", "register_report"} or
+        publication["conclusion"] != "synthetic_engineering_only" or publication["register_report"] is not False):
         _fail("synthetic runs cannot register a market-effect report")
 
 
