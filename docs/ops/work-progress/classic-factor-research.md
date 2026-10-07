@@ -1,3 +1,9 @@
+## 2026-10-07T23:36+08:00 D—MAE 原生接口定位与共享停写
+
+中控目标6的下一有界阶段已把准确调用链、拟写文件、合成验收和真实 X/Y 分段停止条件写入 `docs/experiments/raw/native-workflow-integration-2026-10-07/next-stage-interface-map.md`。独立成果分支 `codex/native-workflow-integration-20261007` 已推并核远端 commit `3e1bcfe0340cb1f4aea95611f7f20820e996e7f0`；新图谱本地/提交字节 SHA256 同为 `709054b96857d9aaf0a1d5bab410b2b39c7175227e78ee60dca1284fe8f073f2`。本轮在线协调规则读至 `eb61b3a20737da3c561260434886016b34c57f8f`；登记检查 `native-workflow-integration` 退出2，准确原因是共享源码路径尚未在远端声明。已把文件清单发给中控协调者；未获远端登记与独立合成审查回执前不改共享研究代码。技术纯函数 SHA 已核 `84f4fee2a538a918352bca099ec9c9b4a38f6d6a19dab5faa564b668c0bd8745`；原六份 D/案例/绑定原件仍缺，真实 X=0、Y=0、拟合=0，效果未测量。`python3 scripts/check_repo_hygiene.py` 退出0；此阶段未重跑已有45/10合成检查和旧研究。无本方后台实验/checkpoint；模型token费用未知。接续先读最新协调并确认专人已把所列共享写路径推送读回，再核技术独审；合成原生端到端可在此前提下进行，真实阶段仍需各自许可与原件。
+
+---
+
 ## 2026-10-07T23:12:37.156751+08:00 原生D—MAE流程入口核验
 
 本轮由中控分工目标6，独占`docs/experiments/raw/native-workflow-integration-2026-10-07/`。当前HEAD 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9、根工作区115项跟踪修改均保留；无共享源码改动。真实结果未运行。入口45项和合成恢复10项通过；旧8项指纹失败保留；原设计ZIP/SHA与8文件核验；设计提案CLI拒绝、通用MAE停牌跳过反例复现。详见`docs/experiments/native-workflow-integration-2026-10-07.md`及本目录记录；registry候选交中控串行处理。当前原生合同/专用X-Y适配、原75成熟案例与价格原件、分阶段中控批准均未满足，状态blocked。技术线独占研究实现，本方独占共享入口整合，尚未触及共享文件。累计本轮0真实X/Y/拟合/市场请求/付费/删除，合成测试与资料核验实际次数见`executed-commands.json`。无本方运行进程或checkpoint；下一步先核技术线独审产物与原输入，再映射原生合同和专用资格，不能靠现有通用MAE算真实Y。协调规则读至ccc290e9b1c13286252c77ff281fbada8c1206c1，新范围的远端登记由协调专人推进；未读回之前不改共享源码。原历史记录如下。
