@@ -134,8 +134,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "77f5fc67630ac46bdf080a6960a1bd099e233f38",
-  "checked_at": "2026-10-08T18:57:05.559988+08:00",
+  "checked_coordination_sha": "d074b828267c573535825768c87b7d146f876a9d",
+  "checked_at": "2026-10-08T19:07:31.111051+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -1117,7 +1117,7 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
     "theory-workflow-system-increment",
     "daily-trading-system-audit"
   ],
-  "conflict_decision": "原durableowner派发连接失败，compact实核旧turncompleted且新handle不存在；目标新raw路径尚不存在、原六文件不变。新任务由当前root子代理唯一写新raw，root负责progress/Git，原源与其他owner路径不改。",
+  "conflict_decision": "CLI delivered source reviewed readonly; settlement singlewriter plus readonlycriticalreview; theory nextscope only newmetadata provenance receipt. Shared registry unchanged.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -2173,3 +2173,9 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 
 - 原durableowner发送返回net::ERR_CONNECTION_CLOSED；随后wait_threads核仍为10月4日旧turn completed/idle，无新turnhandle。新输出目录不存在、原六源SHA未变，失败保存，未把发送当运行。
 - checked_coordination_sha=77f5fc67630ac46bdf080a6960a1bd099e233f38；上一范围中classic/theory无新重叠。按用户主Goal及子代理授权，采用新合同settlement-local-executor-contract-v2.json，由本聊天/root/settlement_implementation_v1（Sol6.1/medium）只写docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/。root负责原progress与Git，不由助手提交/联网。独立review用原Astra/high助手。原v0.2/六源、旧16检查及市场预算不变；当前dry_run ready待实际spawn。
+
+## 实际执行与有限工程验收 2026-10-08T19:07:31.111051+08:00
+
+- checked_coordination_sha=d074b828267c573535825768c87b7d146f876a9d；已读本任务/classic/theory/daily，未发现本轮准确写范围冲突。结算本聊天Sol6.1/medium已实际写新raw并交23合成检查；四源码固定，原Astra/high只读独立反例审查正在运行，尚未验收。
+- 原CLI成果3d3c172c5119ca9ec3f8c77b17116d416f86f86a已中控核17远端文件及6项独立拒绝/角色累计/实际CLI顺序，限定显式计划保护accepted；2旧附件兼容例、真实外盘/新机/竞态仍未验证，不等同整个目标8。原owner已收到仅状态更新回执。
+- 下个独立必要工作：由原theory owner核剩余36项准确资料的原负责人/既有Git字节/明确传播依据；合同remaining36-provenance-contract.json，仅新增theory-safe-publication raw/remaining36-provenance.json及自己的进度/协调。39已验收不重做，36原件不修改不上传，0市场/拟合/新来源取数。当前合同ready，待实际派发。
