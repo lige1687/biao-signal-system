@@ -2,11 +2,11 @@
 
 - task-id: mac-local-storage-cleanup
 - owner: 01a1155d-b204-7232-a993-4c9e0567af59 / root
-- status: completed（项目默认外盘规则/统一启动器与第五批）
-- updated_at: 2026-10-08T20:34:15.766327+08:00
-- checked_coordination_sha: ff4cc9ed72599d016e411c2c283acea62fa8d663
-- checked_at: 2026-10-08T20:34:15.766327+08:00
-- read_task_ids: daily-trading-system-audit, theory-workflow-system-increment, research-dispatch-controller
+- status: completed（参数缩写限定修复、原默认外盘规则及已封存第五批）
+- updated_at: 2026-10-08T22:32:27.908648+08:00
+- checked_coordination_sha: d255c92256af696f0d20f983232be993bb0fead7
+- checked_at: 2026-10-08T22:32:27.908648+08:00
+- read_task_ids: mac-local-storage-cleanup, research-dispatch-controller, classic-factor-research, daily-trading-system-audit, theory-workflow-system-increment, trend-trading-video
 - rules: COORDINATION 1.1；用户既有清理授权；AGENTS 的 AI 使用存储资源；macos-cleaner 固定版本 d8d8528d25da61a68a1c91cc6f8c161068e52a13
 - source baseline: 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；共享脏工作区只读，不切换，不操作其索引。
 - work branch: codex/mac-local-storage-cleanup-20261008（进度小文档待发布）；此前三轮私有清单在外盘，未入 Git。
@@ -76,3 +76,14 @@
 - 下一步：准确缩写检查与回归→必要25原检查及静态质量→原分支普通push/fetch逐字读回→交付中控复核。无需重做已封存清理或实验。
 
 - 登记首次普通push因中控新记录被拒；已fetch并读新中控末节，本记录未变，当前 checked_at: 2026-10-08T22:05:37.130039+08:00。按新基线只重建自身准确记录，未强推、未改共享源码或其他任务。
+
+## 参数缩写修复已发布并验收 2026-10-08T22:32:27.908648+08:00
+
+- status: completed；checked_coordination_sha: d255c92256af696f0d20f983232be993bb0fead7；checked_at: 2026-10-08T22:32:27.908648+08:00；已读COORDINATION1.1、自身、中控原限定修复/独审、classic/daily/theory相关范围及video V8登记归属与V9新范围。唯一root写本5准确文件/自身记录，范围无重叠；他人registry/INDEX变动不恢复、不发布。
+- 原工作分支codex/mac-local-storage-cleanup-20261008修复188b06d077044d1b2accfe24882bbf3d2627d90a，基线8dd49d0f2733701ce17dfc964eeb738a94c3f685。5准确文件50550B普通push/fetch，远端commit相等及每文件字节/SHA完全读回。无main/master合并、强推或共享索引/HEAD操作；原428dd196的8文件/清理成果未撤销。
+- 仅新启动器、两测试、默认外盘说明及自己的进度改变；输出/替代根目录/只读长参数可能的缩写在建目录/启动前拒绝，含等号和分隔值。当前模块SHA256 aa722aa7641ea472231fa027fa53edcb78400615294410f256902834bc88ff95。10个原CLI、两存储策略本轮SHA不变；原合同/registry/INDEX均未由本任务修改。
+- 本机55项通过（原25及新增回归），Ruff/归置/diff通过。只提取真实解析器AST构造、不导入/运行runner，10入口12种调用152种受保护参数写法拒绝；37完整非保护参数保留；6个在写/启动前拒绝场景通过。旧--repo-r反例两形式保存，0错误写盘事实、0市场研究、0清理/迁移/下载/拔盘/他人进程停止。
+- 中控独立结果已实际读回 docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/output-routing-controller-review.json 的repair_independent_verification：固定上述SHA，12缩写案例实际原解析器复核且mkdir/Popen=0、8合法完整命令与原版一致；没有重跑本任务55项或原设备独审。独立受影响行为已接受，主Goal整体验收仍归中控，不代表所有Goal完成。
+- 真实容量预检仍明确因内盘不足5GiB拒绝，阈值与fallback=false安排不降低。尚未验证真实拔盘竞态、系统硬配额、全部历史/第三方写入；不改已有冻结路径或正在运行实验。
+- 完整小回执/失败记录/测试临时文件在既有外盘第五批output-argument-repair：old-counterexample.json、parameter-acceptance.json、tests-verified.log、lint-verified.log、hygiene-final.log、source-publication-receipt.json；私人归档原件与DB未入Git。首次非快进/小文件写失败/2夹具类别期望错误/Ruff条件/他人共享SHA变化均保留且逐项解决，未忽略实际失败。
+- scope_released=true：本轮src/lei_signal/research/output_storage.py、两相关测试与docs/ops/research-output-storage.md限定修复范围释放；私有恢复证据和自己进度继续由本owner保留。当前没有必需后台过程、科研重跑或清理动作；中控可按准确188b06d0成果接回。
