@@ -91,3 +91,14 @@
 拟在 codex/theory-safe-publication-20261008 独立稀疏工作区，以已发布技术基线2ab565017a7a4959af744430339e32a09ce12667继承定义解析器与原vendor。准确范围：preparation.py、ranking_diagnostics.py及对应两测试；已验收累计factor-validation-guide；principles-ai-execution、literature-tools-fit、research-preparation-learning、alphalens-ranking-use四份2026-10-08报告与最小安全回执；仅隔离分支四条registry/INDEX导航；本任务进度及发布指纹清单。原主工作区和共享登记表只读，原vendor四文件逐字核验、不改内容。
 
 验收：源文件与已验收本地字节相符、依赖继承可定位、必要合成单测与准备入口检查、归置、安全路径和正常推送后远端逐文件SHA读回。只检查发布造成的依赖差异；新行情/拟合/标签/封存重跑/安装均0。原真实6510行输入不上传；既有研究描述保留，不声称另一设备已具备该输入。旧指南回执与累计指南版本差异显式记录。失败记录保留；尚未发布成果。
+
+
+## 隔离发布完成；准备入口跨设备缺件保留
+
+更新时间：2026-10-08T18:33:30.655187+08:00；checked_coordination_sha=c405d4a4d87541ade8e6039c0add3c69590743a6；已读本任务、research-dispatch-controller及规则，期间无新增重叠。发布范围completed，准备工具跨设备运行依赖blocked；不等于本地原工具失效，也不将缺件装成通过。
+
+成果分支codex/theory-safe-publication-20261008，准确成果commit d5da760b0dda01430ff98c08e8707648b32cb0ae，远端33件（29发布文件+4继承vendor）逐字相符。回执/进度后继bad2a59ec8075f8a7d2f1d53b0a09898a78e53aa亦推送后fetch逐字核两文件。安全子集22份原字节、四条准确登记，整体29文件约442KB；原登记条目全部保留。没有动根工作区分支/索引、市场资料、原报告定义或生产。
+
+继承已发布2ab565017a7a4959af744430339e32a09ce12667，定义解析器和vendor原字节；现基线11案例，非后来本机12。原本机24测试通过；隔离基线排名诊断10测试通过，准备13失败/1通过，全部失败来源继承定义登记表75份basis证据未在该Git基线出现。CLI同样明确停止。限定合同不授权批量补他人证据，因而保留缺件清单而不减弱验证、改测试、复制其他负责人全套raw或伪造。准备源码已交付，完整跨设备使用待原证据负责人提供75件可发布准确原件；排名诊断可在自备合格输入下使用，真实6510分数不随包移交。旧回执指南历史SHA与累计指南合法演进已解释。
+
+证据入口：docs/experiments/raw/theory-safe-publication-2026-10-08/{README.md,package-manifest.json,dependency-check.json,remote-readback.json}；原四报告不改。没有新市场运行/拟合/标签/取数/安装；无main合并或部署。失误保留：第一次24测试误在原根运行，独立测试随后暴露缺件；普通git add稀疏路径拒绝，文件未丢失，改用准确--sparse登记后成功核远端，不能把第一次空提交/推送当回执交付。发布范围释放；无后台研究或必要剩余计算，不向中控重复发消息，由其读取此记录接续。
