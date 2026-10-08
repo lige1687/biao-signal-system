@@ -104,3 +104,12 @@
 证据入口：docs/experiments/raw/theory-safe-publication-2026-10-08/{README.md,package-manifest.json,dependency-check.json,remote-readback.json}；原四报告不改。没有新市场运行/拟合/标签/取数/安装；无main合并或部署。失误保留：第一次24测试误在原根运行，独立测试随后暴露缺件；普通git add稀疏路径拒绝，文件未丢失，改用准确--sparse登记后成功核远端，不能把第一次空提交/推送当回执交付。发布范围释放；无后台研究或必要剩余计算，不向中控重复发消息，由其读取此记录接续。
 
 最终同步前普通push被新中控登记拒绝；fetch核b1d7a706be47819e8807d916b22e08ea4e76337a，仅中控预检范围变化，本任务无文件重叠，已读取并正常merge保留后推送。checked_coordination_sha=b1d7a706be47819e8807d916b22e08ea4e76337a；记录时间2026-10-08T18:34:10.413360+08:00。
+
+
+## 39份合成验证依赖的精确后继：active
+
+更新时间：2026-10-08T18:42:43.400231+08:00；checked_coordination_sha=b99ea39141a45b5d8a8775e11b3ae41251de4f8d。已读规则、本任务、research-dispatch-controller和classic-factor-research相关预检范围；CLI存储预检由其owner执行，无文件重叠。用户主Goal/Git交接授权沿用，中控合同synthetic-dependency-publication-contract.json仅39准确候选（110834字节）。
+
+在现有codex/theory-safe-publication-20261008@bad2a59ec8075f8a7d2f1d53b0a09898a78e53aa稀疏树逐件核候选SHA/内容/资格，安全者原字节发布；不符单项拒绝。写范围只有合同candidate_exact_files中的39路径及自身发布README/manifest/dependency-check/remote-readback、进度/协调。主工作区和其余36件只读，不更改定义、方法案例、workflow、测试、旧失败或状态；不占位让入口通过。无需重跑已验收测试/市场，市场/取数/拟合/标签/安装预算0，Git正常同步后逐文件读回和缺件集合差核。
+
+已读存储指引并实测内盘可用5174071296字节，允许本次约111KB原件及少量元数据，复用原树，不新检出或清理。验收是准确安全资料交付；即使39全部通过，仍36缺件，不宣告准备入口跨设备完整可用。
