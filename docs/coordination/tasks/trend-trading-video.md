@@ -1,3 +1,14 @@
+## 第七版重做：用户否定V6观感
+
+- task-id trend-trading-video；active；owner本对话root；2026-10-08T20:51:57.153449+08:00；checked_coordination_sha: ba41327e371fe82e45bb5f22cbf0728f85c713cd；已读COORDINATION.md、本任务及research-dispatch-controller。冲突决定：只写自有媒体与skill，不占registry/INDEX。
+- 用户明确说“感觉你还是没学会咋做这些视频…重新做一下”，本轮重新制作。V6技术可播放仍成立，但主观效果未通过；不把其skill/检查通过当作质量认可。
+- 范围：docs/ops/media/trend-trading-60s-20261008/v7/（代码、项目依赖、原始许可素材、镜头比较、成片、记录）；v6/index.html仅新入口；.agents/skills/code-explainer-video/经实际验证后的方法修订；本协调文件。策略/系统/其他报告不改。
+- 方案：沿用已核历史事实，60秒无旁白发展史；重拆参考的连续镜头，使用成熟时间线渲染、空间镜头、关键字编排和图形形态变化；避免固定标题+卡片+卡通头像。原有图像/音乐不足时仅选有明确许可的公开素材，依赖/缓存限定仓内。不开付费服务、不删旧版本、不写仓外配置。
+- 验收：先检查短段实际导出与参考的运动差别，再完整成片；文字可读、事件顺序、历史含义、音画时序、解码、浏览器播放、许可署名及额度记录。观感仍由用户决定，不能自评通过代替用户。
+- 基线V6 SHA a5010f99ccc47b177b8305938bfcee1cc009a78e939eb7d5839eff5db84aa87d；当前可用磁盘约2.1GiB；账号周额度起始40%，精确单任务未知。仅本次有界重做，不创建后台持续任务。
+
+---
+
 ## 第六版与代码科普skill实际交付
 
 - task-id: trend-trading-video；owner本对话root；本轮completed，主观观感待用户验收；2026-10-08T20:40:55.632744+08:00。checked_coordination_sha: dc78990b8e3b923b555d6a6d39bed7044c64d40b；已读COORDINATION.md、本任务和research-dispatch-controller；冲突决定：按中控明确释放后串行单项登记，当前全部完成。
