@@ -134,8 +134,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "e7760e44fd51ab2ad7eca32c4bd7e84cea0630ee",
-  "checked_at": "2026-10-08T20:48:17.409932+08:00",
+  "checked_coordination_sha": "e2c225e807df38d97f3fc4ce526edadb1b9bce74",
+  "checked_at": "2026-10-08T20:53:51.220539+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -464,7 +464,7 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       "owner": "01a116c7-3700-7062-a6c6-53af00ef60a0",
       "executor": "/root/settlement_implementation_v1",
       "status": "active",
-      "phase": "four_sources_frozen_independent_review_running",
+      "phase": "v1_not_accepted_v2_repair_ready",
       "write_paths": [
         "docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/"
       ],
@@ -475,12 +475,15 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       "validation": "410.50 to0.10; firstrefusal then205.30; sell200+174.82 then300buy leaves69.52; replay/identity/cash/calendar/action refusals; independent review before acceptance",
       "model": "gpt-6.1-sol",
       "reasoning_effort": "medium",
-      "executor_status": "code_delivered_receipt_finalization",
+      "executor_status": "completed_waiting_bounded_repair_dispatch",
       "reviewer": "/root/settlement_scope_review",
       "review_contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-independent-review-contract-v1.json",
       "review_write_paths": [],
       "source_sha256": "81be6d159af70090352f33af815b740a5c730234c1c7c80af5e022c3f6b3d61d",
-      "author_check": "tests04 twelvepassed, notcontrolleracceptance; fixture/loadformat/self-retryfailure preserved"
+      "author_check": "tests04 twelvepassed, notcontrolleracceptance; fixture/loadformat/self-retryfailure preserved",
+      "review_status": "completed_two_classes_findings",
+      "review_receipt": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-independent-review-v1.json",
+      "repair_contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-repair-contract-v2.json"
     }
   ],
   "final_acceptance": {
@@ -1155,10 +1158,9 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
   ],
   "read_task_ids": [
     "research-dispatch-controller",
-    "trend-trading-video",
-    "mac-local-storage-cleanup"
+    "trend-trading-video"
   ],
-  "conflict_decision": "Adapter fourcode sources frozen; author only finishing sameown raw receipts, Astra readonly probes no writes. Video completed own634to635 and released registry/INDEX; root notwriting sharedregistration. Root own contract/receipt/progress only.",
+  "conflict_decision": "Video v7 only ownmedia/skill, no registry/INDEX; adapter sameunique raw repair by same Sol. Fourv1 sources andfailures immutable; review readonlyfinished.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -2299,3 +2301,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 - checked_coordination_sha=e7760e44fd51ab2ad7eca32c4bd7e84cea0630ee；root七份登记/接口范围/进度凭据449020f5a6895cb70883365ceb127a3f057b467a已远端逐字读回。主Goal仍active，八目标原依赖分项保持，不能因下列工程阶段通过宣称完成。
 - Sol原raw源码已冻结，adapter SHA81be6d159af70090352f33af815b740a5c730234c1c7c80af5e022c3f6b3d61d与另三源码root核同。作者12新检查通过；先前夹具重名、金额字符串以及拒单后重建context追单漏洞与各轮源快照保留。作者仅补回执，Astra/high已实际followup只读独立资金/身份/时点/重放反例，尚未验收。
 - 准确范围未扩：只新raw，旧spec/planner/ledger不改不重跑；主registry/INDEX仍释放。独立审查write_paths空，代码与审核分离，无共有写冲突。
+
+## 固定订单适配独审失败与同范围修复 2026-10-08T20:53:51.220539+08:00
+
+- checked_coordination_sha=e2c225e807df38d97f3fc4ce526edadb1b9bce74；video新V7仅媒体/skill，不占研究路径/登记。适配金额三路径独审通过，但整体不接受：原两单拒绝后换下一开盘可追单（余额200.30），决策只换名字可重开（余额0.10）；到账374.82快照能假称不含卖款，导致后续预算400/限价1.315，账本虽最终拒绝380.375成本，适配资金依据仍错。
+- repair-contract-v2 dry_run ready：同原Sol、同新raw，先保留冻结v1与3真实复现，限定单原决策内存锁及与方向/产品绑定的一次尝试，不因开盘/名字重置；有funding_receipt须同账本已释放且快照明确含同回执。原spec/planner/ledger四SHA不改，卖后不同方向合法后续买单保持。0预占/部分成交/恢复/市场/旧suite。此刻ready，推回后实际派修。
