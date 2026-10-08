@@ -166,3 +166,10 @@
 原缺件36扣准确9为27，远端Git对象从历史75集合重查后精确27，与manifest/dependency-check新阶段相同。39和36旧索引是历史快照不重做/覆盖；新传播依据为原technicalowner精确9内容/权利核定＋中控有限Git合同，不追溯把过去未知状态改成已知。定义解析器/登记、preparation、测试、registry/INDEX与前成果67f523d0逐字相同；完整准备工具仍blocked，不能因为文档已交就称入口可运行。其余25元数据和2逐观察资料保持原负责人核定/许可条件，不在本合同自动扩入。
 
 核验：原9大小SHA/13远端字节/剩余集合/不变文件/归置/diff通过；只原raw发布manifest、dependency-check、README、remote-readback和自身进度/协调更新。0科研/测试重跑/拟合/标签/取数/安装/付费/删除/仓外写，没有新失败或后台任务。原失败历史保留。证据入口raw/theory-safe-publication-2026-10-08的method9阶段，合同和owner callback SHA可定位于manifest。本次有限交付释放，中控读取回执继续另25核定；无本合同必须剩余计算。
+
+
+## 原owner核定14自有汇总的精确发布：active
+
+更新时间：2026-10-08T19:36:00.844934+08:00；checked_coordination_sha=e7d1bf8a529c289ba1be094a3906cbbdb4ccd248。已读规则、本任务、中控新14核定范围，原technical owner另25逐项核已接受，11受限＋2逐观察保持。无本task准确写范围冲突。合同metadata14-publication-contract.json：只在既有codex/theory-safe-publication-20261008@4f6ff52a7d5a2a415159c88ad06a38e7a7e6cbac复制准确14文件34104B，以及自己的既有发布回执、进度和协调。
+
+根源14只读；definitions/preparation/tests/registry/INDEX不改，不上传其依赖或11＋2受限资料。保留旧科研用途/预算/未授权/负向/不可用状态，39＋9已验收不重做。验收准确14源SHA/大小与owner分类相符、内容界限、缺件27减14准确13、归置和普通push/fetch逐文件读回。科研/测试/取数/安装/仓外写/删除0；完整准备入口仍未恢复，不以自有汇总交付代替源输入资格。
