@@ -1,3 +1,18 @@
+# 第二版交付（最新）
+
+- task-id: trend-trading-video；owner: 本对话root；状态: completed（技术制作完成，观感待用户验收）；更新时间: 2026-10-08T16:09:33.559690+08:00
+- checked_coordination_sha: e3a1b0891dddc00643d5c769a44de4596ac1cb6e
+- 已读task-id: trend-trading-video、research-dispatch-controller；冲突决定: 无本任务路径重叠，仅维护本记录与既定媒体目录。
+- 产物: docs/ops/media/trend-trading-60s-20261008/v2/trend-trading-v2.mp4；60秒1080×1920、30fps、H264/AAC；SHA256 b4bb297a58d6c9c6ef8d364e23b3ff21bd4dac298a16eb9db0db1d975576db94。
+- 实际使用: Pillow/FFmpeg空间走势图，Edge神经网络中文男声，时间戳字幕，原创轻背景音；参考两条公开视频的若干片段，未搬运素材。Remotion技能评估，未用其运行时。
+- 验证: 1800帧完整解码成功；浏览器60秒1080×1920、readyState4、paused=false、无error；11场景图检；旧版SHA未变；归置检查通过。自然程度待用户听看。
+- 证据: v2/validation.json、storyboard.jpg、production-notes.md、usage-record.json；父index.html提供新旧版切换。
+- 额度: 本轮同周账号显示27%→28%，增加1个百分点；全账号共享且整数读数，不能精确归因到本任务；未调用付费生成服务。
+- 成果提交: 媒体及脚本仅本机，未提交/推送；只推协调状态。未发布社交平台。
+- 下一动作: 用户观看验收；无必需制作步骤待执行。scope_released: false（原路径保留供修改）。
+
+---
+
 # 新版制作（最新）
 
 - task-id: trend-trading-video；owner: 本对话root；状态: active；更新时间: 2026-10-08T15:56:02.395446+08:00
