@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "mode": "external-for-new-results",
+  "external_results_directory": "LeiSignal-新实验结果",
+  "external_reserve_bytes": 10737418240,
+  "default_internal_metadata_bytes": 1048576,
+  "entrypoints": {
+    "scripts/run_factor_lab.py": {
+      "output_flag": "--out",
+      "readonly_flags": [
+        "--review-workflow-contract",
+        "--review-baselines"
+      ]
+    },
+    "scripts/run_factor_library_v0.py": {
+      "output_flag": "--output",
+      "subcommands": [
+        "prepare",
+        "run"
+      ]
+    },
+    "scripts/run_factor_evidence_reliability.py": {
+      "output_flag": "--out"
+    },
+    "scripts/run_b1_dual_ma_description.py": {
+      "output_flag": "--out"
+    },
+    "scripts/run_momentum_research_prototype.py": {
+      "output_flag": "--out"
+    },
+    "scripts/run_research_data_snapshot.py": {
+      "output_flag": "--out",
+      "subcommands": [
+        "import",
+        "acquire"
+      ]
+    },
+    "scripts/prepare_momentum_qualified_inputs.py": {
+      "output_flag": "--out"
+    },
+    "scripts/check_factor_unit_readiness.py": {
+      "output_flag": "--out"
+    },
+    "scripts/check_research_input.py": {
+      "output_flag": "--out"
+    },
+    "scripts/verify_research_definitions.py": {
+      "output_flag": "--output"
+    }
+  },
+  "scope": "new outputs through this launcher; existing running jobs, explicit frozen replay and fixed-path historical scripts unchanged"
+}

@@ -18,3 +18,15 @@
 技能：macos-cleaner 固定 d8d8528d25da61a68a1c91cc6f8c161068e52a13，任务专用快照；计划 9 检查通过，0 自有命令被其识别，另审执行器准确 scope/inode/恢复及删除语义，不冒称命令自动受检。复制容量峰值/外盘保留 10 GiB 通过。没有全局安装、通知或新自动化。
 
 本轮范围已交付。后续有新清理范围须仍绑定依赖/占用和恢复证据；五个旧代理工作树各有独有改动，不能自动删除。所有实验全迁移需要各原负责人和明确逐项依赖方案，不把本轮评估当迁移授权。
+
+## 后继：AI默认大结果外盘及第五批 2026-10-08T21:33:21.500896+08:00
+
+- 用户明确授权写skill或项目md、后续大结果外盘、必留本机继续留、可迁移继续迁移。选择项目md＋AGENTS入口＋通用启动器，0新子agent。
+- checked_coordination_sha: 427aac8380b4c01036e80ec434c0b1beac5cfc0e；已读classic/daily/中控、自身和COORDINATION1.1，原classic四实现scope释放但旧CLI指纹受冻结约束，故保持10个原入口内容，不改其源或旧合同。
+- 新文件：docs/ops/research-output-storage.md、configs/research-output-policy.v1.json、src/lei_signal/research/output_storage.py和两测试；AGENTS仅独立块追加，本机原前缀完整保留。文档规定未来AI默认统一入口，输出/临时普通文件/日志外盘；小报告与原科学账本本机。无盘/错盘/不足/已存在/参数冲突拒绝；断盘只停止新子进程，未停止任何当前任务。
+- 25相关检查通过，Ruff/归置通过；真实盘身份及2624B小文件fsync/SHA读回通过。真实默认计划exit3容量拒绝，0实际研究或计算、0内部备用大输出。
+- 19项（Gradle缓存/下载wrapper、17个闲置npx包）全归档及源再核后移除，实测146325504→2728640512B，净增2582315008B（2.40GiB）；后续系统swap分配增长等使余量降至约1.40GiB，份额只作部分归因，不更改swap/活动日志/进程。
+- 私有清单在/Volumes/win+mac通用/个人资料归档/2026-10-08-第五批-210009；不上传原件、大日志、数据库/凭证。归档失败无，19源及holding不存在、对应ZIP均留。
+- 发布依赖是daily已发表8bde94333264ed9649acfb05d975ed32a6019d06的configs/storage-policy.v1.json，SHA dbdcc8af8bd5f1d6be7ce5262e10d21177a4c4faae97d4a4d2aeda900877d4dd，与本机完全同字节；只复用blob，不重设其身份/规则或发布整项daily代码。
+- 目前未运行的历史固定输出脚本/第三方工具不作全局IO重写，所有后续AI先按本入口选新外盘目录；明确旧路径的小记录和冻结复现继续原安排。不是“所有旧进程已切换”，不能宣称新入口现在能跨过5GiB余量限制。
+- source publication pending；既有第四批提交4e23a898220cc99474892570afacfa413b12c860作本工作分支基础。测试/原始失败和恢复记录仅外盘，无改main/master、强推、部署、自动化或交易。
