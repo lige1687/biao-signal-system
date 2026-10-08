@@ -1,10 +1,9 @@
 # LEI 八目标｜本对话直接执行
 
-- 更新：2026-10-08T12:38:41.770757+08:00；checked_coordination_sha=11ef654017de2dde5cf155647570dcf461cb469c；已读COORDINATION.md、research-dispatch-controller、risk-shape-information、report-library-integration-20261008。增量仅独立日报记录，无同写冲突。
-- **本轮实际接续：** 2026-10-08T04:33:16.952Z首次v4-direct定时触发已观察。root直接核尚未解释的600837在2024-09-06至2024-10-09的17条旧停牌占位。先登记、推送核回，再取发行人正式停复牌资料并核旧行。没有派发其他对话或子代理。
-- 本单元范围：docs/experiments/raw/haitong-2024-suspension-2026-10-08/、docs/experiments/haitong-2024-suspension-qualification-2026-10-08.md；共享registry/INDEX由root临时单写，只增本报告，完成后释放。估计4次来源操作、文件上限5MiB、保留512MiB空闲；已有27次来源操作及旧封存批次不清零。不获取新行情、不计算新因子/标签或改冻结原件。
-- 前两报告已完成并核远端：codex/research-direct-20261008@6c781464a9d622dc73b817aa5d89267c2cc75fa8；12份来源、42项核查、36条2025占位已解释，本轮不重做。原件仅本地，摘要与指纹在Git；研究引擎未接入。
-- 八目标未整体完成，D—MAE六原件/原合同/独审条件、原新浪快照和完整历史成员等各自依赖保持。不能用这些缺件阻塞本轮独立资料资格核验。403、automation-2保持暂停；不切主树、不删、不交易、不付费、不部署或写仓外内容。
+- 更新：2026-10-08T12:43:06.000736+08:00；checked_coordination_sha=0b41e0b5ff0a8218b89c195a15873e2d2dd42586。已读COORDINATION.md及research-dispatch-controller、risk-shape-information、report-library-integration-20261008；代码300114/302132的相关任务登记检索无命中，未发现同写任务。
+- **首次v4-direct心跳已实际产出：** 2026-10-08T04:33:16.952Z触发后，root完成海通2024年17条停牌占位核验，2份发行人来源、18项检查，发布748716dc7de72afc7ffa604fee6fd0a6223d8edc并读回10条文件。前三报告合计14份原件、60项检查；B01海通36条加重工17条，共53条占位已解释，非其他批次305条全量。
+- **当前接续：** 直接核原方案中的300114→302132及2025-02-17生效假定，固定原代码只读。新增范围docs/experiments/raw/runze-security-identity-2026-10-08/及docs/experiments/runze-security-identity-qualification-2026-10-08.md；registry/INDEX继续root单写，只增该报告。计划约3次来源操作、5MiB上限、保留512MiB空闲；旧预算不重开。正式来源核完即收尾，不计算收益。
+- root不再派发，前三已完成单元不重跑；未接入研究引擎、未修主行情、未拟合/标签/交易。全部8目标未完，D—MAE六原件/原SHA/独审及阶段条件、原价快照和完整历史成员等依赖保持。403和automation-2暂停，不切主树或写仓外。
 
 ## 当前直接执行规则
 
@@ -134,8 +133,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "11ef654017de2dde5cf155647570dcf461cb469c",
-  "checked_at": "2026-10-08T12:38:41.770757+08:00",
+  "checked_coordination_sha": "0b41e0b5ff0a8218b89c195a15873e2d2dd42586",
+  "checked_at": "2026-10-08T12:43:06.000736+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -271,15 +270,15 @@
         "docs/ops/work-progress/research-dispatch-controller-2026-10-07.md",
         "docs/experiments/raw/research-dispatch-controller-2026-10-07/thread-state.json",
         "docs/coordination/tasks/research-dispatch-controller.md",
-        "docs/experiments/raw/haitong-2024-suspension-2026-10-08/",
-        "docs/experiments/haitong-2024-suspension-qualification-2026-10-08.md",
+        "docs/experiments/raw/runze-security-identity-2026-10-08/",
+        "docs/experiments/runze-security-identity-qualification-2026-10-08.md",
         "docs/experiments/registry.json",
         "docs/experiments/INDEX.md"
       ],
       "depends_on": [],
       "scope_released": false,
       "source": "User latest instruction replaces dispatcher-only role with direct root execution. Root is sole writer of central record and new corporate-action qualification paths; no further delegation.",
-      "scope_note": "Root direct17-row2024 suspension source qualification; temporary exact report registration scope until publication."
+      "scope_note": "Root direct named code-change qualification, original frozen preparer read-only; shared registration single writer."
     },
     {
       "task_id": "report-registration-20261007",
@@ -560,37 +559,37 @@
   },
   "current_execution_mode": "root_direct_no_delegation",
   "direct_execution_unit": {
-    "id": "haitong-2024-suspension-qualification-20261008",
+    "id": "runze-security-identity-qualification-20261008",
     "state": "scope_registered_before_source_work",
-    "question": "Qualify 17 existing 600837 B01 status0 rows dated 2024-09-06 through 2024-10-09 using issuer suspension and resumption disclosure.",
-    "original_authority": "Original goal4 trading availability and qualification-plan sections3/4/6; prior report explicitly leaves these17 rows unqualified.",
+    "question": "Qualify original preparer assumption300114 to302132 effective2025-02-17 and preserved holder identity using issuer/exchange original disclosure.",
+    "original_authority": "Original goal4 identity/permanent-security qualification; existing qualification-plan line64 and source-manifest explicit_code_rename_assumption_in_old_preparer.",
     "write_paths": [
-      "docs/experiments/raw/haitong-2024-suspension-2026-10-08/",
-      "docs/experiments/haitong-2024-suspension-qualification-2026-10-08.md",
+      "docs/experiments/raw/runze-security-identity-2026-10-08/",
+      "docs/experiments/runze-security-identity-qualification-2026-10-08.md",
       "docs/experiments/registry.json",
       "docs/experiments/INDEX.md"
     ],
     "source_policy": {
-      "planning_estimate_operations": 4,
+      "planning_estimate_operations": 3,
       "max_new_bytes": 5242880,
       "minimum_free_bytes": 536870912,
-      "stop": "Exact suspension and resumption fields sourced and fixed old rows checked, or actual inaccessible necessary evidence; estimate is not an invented hard quota.",
-      "previous_operations": 27,
-      "prior_closed_budgets": "Unchanged; no price or index-query reopening",
+      "previous_direct_operations": 30,
+      "stop": "Official code/effective/rights fields qualified or actual necessary-source access blocked; no redundant sources after answer",
+      "prior_closed_budgets": "unchanged",
       "fits": 0,
       "labels": 0,
       "price_repairs": 0
     },
-    "acceptance": "Original source hashes, date and availability distinctions, fixed B01 SHA and 17-row match; preserve originals/no zero fills; registry and Git readback.",
-    "strategy_layer": "Historical trading availability data only; no signal or strategy change",
-    "checked_at": "2026-10-08T12:38:41.770757+08:00",
-    "checked_coordination_sha": "11ef654017de2dde5cf155647570dcf461cb469c",
+    "acceptance": "Official source bytes/hash, announcement and effective time, exact mapping and equity continuity, compare fixed preparer bytes; no inferred439-universe identity completeness.",
+    "checked_at": "2026-10-08T12:43:06.000736+08:00",
+    "checked_coordination_sha": "0b41e0b5ff0a8218b89c195a15873e2d2dd42586",
     "read_task_ids": [
       "research-dispatch-controller",
       "risk-shape-information",
       "report-library-integration-20261008"
     ],
-    "conflict_decision": "Only intervening daily-trading owner record changed. New raw/report paths unused; previous shared registration window released. Root is sole temporary registry/INDEX writer; no owner delegation."
+    "conflict_decision": "No task record mentions either code, latest related owners unchanged; no active overlap. Root retains temporary registry/INDEX window for next bounded report.",
+    "free_bytes_before": 2774487040
   },
   "controller_owner": "01a116c7-3700-7062-a6c6-53af00ef60a0",
   "direct_execution_completed_units": [
@@ -676,26 +675,71 @@
       "source_operations_used": 14,
       "raw_response_bytes": 1220566,
       "vendor_placeholder_rows_matched": 17
+    },
+    {
+      "id": "haitong-2024-suspension-qualification-20261008",
+      "state": "completed_bounded_factual_qualification",
+      "question": "Qualify 17 existing 600837 B01 status0 rows dated 2024-09-06 through 2024-10-09 using issuer suspension and resumption disclosure.",
+      "original_authority": "Original goal4 trading availability and qualification-plan sections3/4/6; prior report explicitly leaves these17 rows unqualified.",
+      "write_paths": [
+        "docs/experiments/raw/haitong-2024-suspension-2026-10-08/",
+        "docs/experiments/haitong-2024-suspension-qualification-2026-10-08.md",
+        "docs/experiments/registry.json",
+        "docs/experiments/INDEX.md"
+      ],
+      "source_policy": {
+        "planning_estimate_operations": 4,
+        "max_new_bytes": 5242880,
+        "minimum_free_bytes": 536870912,
+        "stop": "Exact suspension and resumption fields sourced and fixed old rows checked, or actual inaccessible necessary evidence; estimate is not an invented hard quota.",
+        "previous_operations": 27,
+        "prior_closed_budgets": "Unchanged; no price or index-query reopening",
+        "fits": 0,
+        "labels": 0,
+        "price_repairs": 0
+      },
+      "acceptance": "Original source hashes, date and availability distinctions, fixed B01 SHA and 17-row match; preserve originals/no zero fills; registry and Git readback.",
+      "strategy_layer": "Historical trading availability data only; no signal or strategy change",
+      "checked_at": "2026-10-08T12:38:41.770757+08:00",
+      "checked_coordination_sha": "11ef654017de2dde5cf155647570dcf461cb469c",
+      "read_task_ids": [
+        "research-dispatch-controller",
+        "risk-shape-information",
+        "report-library-integration-20261008"
+      ],
+      "conflict_decision": "Only intervening daily-trading owner record changed. New raw/report paths unused; previous shared registration window released. Root is sole temporary registry/INDEX writer; no owner delegation.",
+      "started_at": "2026-10-08T12:39:32.956543+08:00",
+      "scope_commit": "0b41e0b5ff0a8218b89c195a15873e2d2dd42586",
+      "scope_remote_readback": "equal",
+      "accepted_at": "2026-10-08T12:43:06.000736+08:00",
+      "published_commit": "748716dc7de72afc7ffa604fee6fd0a6223d8edc",
+      "remote_readback_files": 10,
+      "source_documents": 2,
+      "checks": 18,
+      "source_operations_used": 3,
+      "raw_response_bytes": 132478,
+      "matched_placeholder_rows": 17
     }
   ],
   "direct_execution_summary": {
-    "reports": 2,
+    "reports": 3,
     "securities": 3,
-    "source_documents": 12,
-    "local_checks": 42,
+    "source_documents": 14,
+    "local_checks": 60,
     "officially_matched_2025_placeholders": 36,
-    "visible_source_operations": 27,
-    "raw_response_bytes": 1434102,
+    "visible_source_operations": 30,
+    "raw_response_bytes": 1566580,
     "labels": 0,
     "fits": 0,
     "price_repairs": 0,
     "source_originals": "local_only; hashes and factual summaries published",
     "publication_branch": "codex/research-direct-20261008",
-    "publication_tip": "6c781464a9d622dc73b817aa5d89267c2cc75fa8",
-    "main_registry_entries": 623,
-    "isolated_registry_entries": 202,
+    "publication_tip": "748716dc7de72afc7ffa604fee6fd0a6223d8edc",
+    "main_registry_entries": 624,
+    "isolated_registry_entries": 203,
     "primary_branch_unchanged": true,
-    "free_bytes_after": 2815746048
+    "free_bytes_after": 2815746048,
+    "officially_matched_2024_placeholders": 17
   },
   "direct_remaining_goals": {
     "at": "2026-10-08T12:29:41.899191+08:00",
