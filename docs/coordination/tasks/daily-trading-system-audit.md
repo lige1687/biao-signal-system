@@ -239,3 +239,8 @@
 - 精确文件分工：name_brief独占portfolio/briefing.py、portfolio/notifications.py、tests/unit/test_portfolio_briefing.py、tests/unit/test_portfolio_notifications.py及新portfolio/brief_render.py、tests/unit/test_brief_render.py；chat_transactions独占新integrations/chat_transactions.py、tests/integration/test_chat_transactions.py；daily_decisions独占新integrations/daily_decisions.py、tests/unit/test_daily_decisions.py。root独占gpt_context.py/gpt_mcp.py及相应tests、拟新增integrations/chat_workflow.py、tests/integration/test_chat_workflow.py、.agents/skills/lei-system-chat/SKILL.md、docs/ops/gpt-system-integration.md、portfolio-chat-briefing.md、system-notifications.md、自身work-progress、docs/archive/handoffs-plans/2026-10-08-codex-daily-trading-integration-acceptance.md和原raw下implementation-*。私人包/截图/隔离SQLite/合同/失败日志在本仓cache。
 - 验收：真实29持仓均名称优先且未知名不编造；两个时段简报实生成；隔离真实路由/业务层走至少买入、卖出、撤回/未成交、重复确认、计划确认/条件触发/盘中未知/错误产品以及对账缺失；系统实际只读接口回执、来源时点和异常可见；0真实测试交易/生产持仓改写。各项效果和未能在真实账户验证部分分别交付。
 - 成果仍现有codex/gpt-system-integration-20261008；先注册推送读回后写上述路径，root最终独立核验，不以助手测试通过替代真实链路。
+
+
+### 分工调整 2026-10-08T15:01:43.173611+08:00
+
+- checked_coordination_sha: 71bdd179268db2f921ba2d99030d34788538ef97；已读task-id沿用刚完成登记，无其他范围改变。daily_decisions首次spawn及向旧空闲助手followup均返回agent thread limit reached，未创建该助手，未发现该组件文件写入。失败留本仓implementation/delegation-failure.json。此组件准确两个新文件改由/root直接实现；name_brief Luna/low、chat_transactions Sol/medium继续原范围。无模型重置，无新增用户侧任务。
