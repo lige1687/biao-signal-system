@@ -2,7 +2,7 @@
 
 - task-id: mac-local-storage-cleanup
 - owner: 01a1155d-b204-7232-a993-4c9e0567af59 / root
-- status: active
+- status: completed（第四批 17 项及写盘评估）
 - updated_at: 2026-10-08T20:34:15.766327+08:00
 - checked_coordination_sha: ff4cc9ed72599d016e411c2c283acea62fa8d663
 - checked_at: 2026-10-08T20:34:15.766327+08:00
@@ -20,3 +20,17 @@
 - next: 检查器计划→准确归档→内容读回→按项移除→结果测量；实验现有入口不自动重定向。
 - blockers: 无需重复询问已授权的安全归档；所有实验全迁移超出可自动处理边界，不作为当前已授权迁移动作。
 - research budget: 不运行市场/拟合/冻结实验；0 新研究。
+
+## 第四批完成及未来实验写盘评估 2026-10-08T20:47:04.412938+08:00
+
+- checked_coordination_sha: cfbae47c948683d67396cf650752db0f9a137aec；checked_at: 2026-10-08T20:47:04.412938+08:00；已读 COORDINATION1.1 和 daily-trading-system-audit、theory-workflow-system-increment、research-dispatch-controller 最新记录。冲突决定：其他 owner 源码、报告登记、既有 storage/preflight 范围未修改；root 唯一自身记录写者。
+- completed: 17 精确路径归档后移除；22,860 普通文件和 3,213 内部链接的内容、类型、权限及恢复清单通过。原件移除前再次全指纹/源未变/无打开句柄核验。无失败或跳过。
+- actual space: 内盘 509898752 → 2392268800 B，净增 1882370048 B（1.75 GiB）；名义目录量 3392286720 B，不替代物理测量。ZIP 总计 1753315463 B，外盘余量约 598 GiB。其他进程会继续影响容量。
+- source outcome: codex/mac-local-storage-cleanup-20261008@4e23a898220cc99474892570afacfa413b12c860，唯一小进度文件 docs/ops/work-progress/mac-local-storage-cleanup.md 已普通推送/fetch逐字读回；共享 HEAD、源码/索引不操作。私有数据只存原外盘第四批目录，远端无原始个人资料。
+- validation: API health ok；六份原 CLI/workflow/storage 配置/登记文件 SHA 相同，两活动数据库 inode/设备相同；归置通过。raw 路径均保留，盘点到验收略增长来自其他运行写入；不重跑科研，不宣称全部实验收益合格。
+- cleaner: d8d8528d25da61a68a1c91cc6f8c161068e52a13 任务专用快照，未全局安装；计划 9 检查通过但识别 0 自有命令，额外核准确 scope/inode 和删除语义，未把缺少覆盖当自动通过。完整规则文本保留，exFAT ._ 元数据不删除。
+- future outputs: /Volumes/win+mac通用/LeiSignal-新实验结果 父目录已准备，可在新任务开工前显式绑定大结果；当前 --out 仍会有内盘小记录。只读审阅已发布 native preflight@3d3c172c5119ca9ec3f8c77b17116d416f86f86a，本机现有入口尚未采用，未越权覆盖原owner范围。
+- live path check: 正确 UUID/exfat/设备路径检查后，内盘保留 5 GiB 计划被容量拒绝（需 5370806272 B，实测 2384359424 B），未降低条件、未新运行实验。首次 Data 非独立挂载点修正为同设备 /，原失败回执保留。
+- scope boundary: 全部现有实验不能自动搬走；冻结 raw、活动 DB/环境/会话/工作树保留。五旧代理树各有 8–95 独有修改；活动日志、swap 未动。现有冻结路径迁移需要各负责人明确依赖与恢复方案，本轮提问不解除原限制。
+- previous batch: 原 Time Machine 快照已消失，缺少隔离物理释放测量，不归因本輪。前三轮清单不重做、不覆盖。
+- next / stop: 本轮所有已验真非实验闲置项与写盘问题已交付；没有必要后台运行、待删源或实验重跑。未来新实验须先核当前磁盘、对应入口采用状态与实际余量；不自动改既有任务默认路径、不创建或恢复提醒。
