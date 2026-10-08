@@ -1,3 +1,13 @@
+## V9 staged-flow
+
+- task-id: trend-trading-video；2026-10-08T22:32:40.212473+08:00；checked_coordination_sha: 865b64a35851f3f47cc9d9c0605321213841b825；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active，用户最新再次明确固定skill流程：需求探讨→参考样例→静态图确认→10—15秒视频确认→成品。当前只静态风格图，不以“继续/感觉不错”对一张原料的评价跳过三张正式图确认。
+- 按刚更新存储规则读取storage，两盘身份和容量通过；plan_output得到/Volumes/win+mac通用/LeiSignal-新实验结果/trend-trading-video/trend-trading-video-20261008T223240-7b33ed111534。本轮生成素材、静帧、大日志/临时文件放此独立外盘目录，估计100MiB；本地只源/skill/小记录约2MiB。原图工具预览素材此前已生成，复制选用素材到该新目录，原件不删。
+- 外盘写入来自用户最新默认新结果授权，设备UUIDDEBA1C85-6059-3865-B50A-A8EE1F80E4D9。不移动旧媒体、不修改原任务。自有skill增加阶段状态和确认依据记录，仍只本报告一条登记。
+
+
+---
+
 ## V9 style-start
 
 - task-id: trend-trading-video；2026-10-08T22:20:41.336781+08:00；checked_coordination_sha: fdb79b360bde07c33b379e113c6d6fc3dcc72c16；已读 COORDINATION.md、自身与 research-dispatch-controller。
