@@ -1,0 +1,182 @@
+{
+  "status": "passed",
+  "passed": 29,
+  "total": 29,
+  "checks": [
+    {
+      "name": "notice-15546:source_hash",
+      "passed": true,
+      "evidence": "docs/experiments/raw/csi300-2025-transitions-2026-10-08/originals/notice-15546.json"
+    },
+    {
+      "name": "notice-15546-adjustments:source_hash",
+      "passed": true,
+      "evidence": "docs/experiments/raw/csi300-2025-transitions-2026-10-08/originals/notice-15546-adjustments.xlsx"
+    },
+    {
+      "name": "notice-1006022:source_hash",
+      "passed": true,
+      "evidence": "docs/experiments/raw/csi300-2025-transitions-2026-10-08/originals/notice-1006022.json"
+    },
+    {
+      "name": "notice-1006022-adjustments:source_hash",
+      "passed": true,
+      "evidence": "docs/experiments/raw/csi300-2025-transitions-2026-10-08/originals/notice-1006022-adjustments.xlsx"
+    },
+    {
+      "name": "haitong-termination:source_hash",
+      "passed": true,
+      "evidence": "docs/experiments/raw/haitong-corporate-action-2026-10-08/S1-termination.html"
+    },
+    {
+      "name": "chinaheavy-termination:source_hash",
+      "passed": true,
+      "evidence": "docs/experiments/raw/stock-terminal-actions-2026-10-08/C2-termination.html"
+    },
+    {
+      "name": "csi300_membership_daily.parquet:unchanged",
+      "passed": true,
+      "evidence": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/csi300_membership_daily.parquet"
+    },
+    {
+      "name": "source-manifest.json:unchanged",
+      "passed": true,
+      "evidence": "docs/research/proposals/stock-price-scale-and-membership-2026-10-06/source-manifest.json"
+    },
+    {
+      "name": "march:notice_identity",
+      "passed": true,
+      "evidence": "official notice metadata"
+    },
+    {
+      "name": "march:conditional_effective",
+      "passed": true,
+      "evidence": "effective condition is not bare inferred corporate date"
+    },
+    {
+      "name": "march:attachment_binding",
+      "passed": true,
+      "evidence": "creation date does not replace publication date"
+    },
+    {
+      "name": "march:exact_index_removal_addition",
+      "passed": true,
+      "evidence": [
+        [
+          "000300",
+          "沪深300",
+          "600837",
+          "海通证券",
+          "601058",
+          "赛轮轮胎"
+        ]
+      ]
+    },
+    {
+      "name": "march:exchange_condition_resolution",
+      "passed": true,
+      "evidence": "docs/experiments/raw/haitong-corporate-action-2026-10-08/S1-termination.html"
+    },
+    {
+      "name": "march:publication_time_boundary",
+      "passed": true,
+      "evidence": "sufficient known document day, not earliest or intraday availability"
+    },
+    {
+      "name": "march:candidate_transition_pair",
+      "passed": true,
+      "evidence": "fixed window includes before and transition dates"
+    },
+    {
+      "name": "march:mismatch_dates_and_count",
+      "passed": true,
+      "evidence": [
+        "2025-03-04",
+        "2025-03-05",
+        "2025-03-06",
+        "2025-03-07"
+      ]
+    },
+    {
+      "name": "september:notice_identity",
+      "passed": true,
+      "evidence": "official notice metadata"
+    },
+    {
+      "name": "september:conditional_effective",
+      "passed": true,
+      "evidence": "effective condition is not bare inferred corporate date"
+    },
+    {
+      "name": "september:attachment_binding",
+      "passed": true,
+      "evidence": "creation date does not replace publication date"
+    },
+    {
+      "name": "september:exact_index_removal_addition",
+      "passed": true,
+      "evidence": [
+        [
+          "000300",
+          "沪深300",
+          "601989",
+          "中国重工",
+          "601298",
+          "青岛港"
+        ]
+      ]
+    },
+    {
+      "name": "september:exchange_condition_resolution",
+      "passed": true,
+      "evidence": "docs/experiments/raw/stock-terminal-actions-2026-10-08/C2-termination.html"
+    },
+    {
+      "name": "september:publication_time_boundary",
+      "passed": true,
+      "evidence": "sufficient known document day, not earliest or intraday availability"
+    },
+    {
+      "name": "september:candidate_transition_pair",
+      "passed": true,
+      "evidence": "fixed window includes before and transition dates"
+    },
+    {
+      "name": "september:mismatch_dates_and_count",
+      "passed": true,
+      "evidence": [
+        "2025-09-05"
+      ]
+    },
+    {
+      "name": "all_nine_observed_rows_recomputed",
+      "passed": true,
+      "evidence": "not recomputing market signals"
+    },
+    {
+      "name": "five_dates_ten_pair_status_errors",
+      "passed": true,
+      "evidence": "5 stale included rows plus5 missing included rows"
+    },
+    {
+      "name": "300_counts_do_not_prove_membership_correct",
+      "passed": true,
+      "evidence": "candidate counts all300 despite wrong pair on5dates"
+    },
+    {
+      "name": "not_full_chain_or_repair",
+      "passed": true,
+      "evidence": "bounded source qualification only"
+    },
+    {
+      "name": "inherited_source_budget_not_reset",
+      "passed": true,
+      "evidence": "old acquisition costs carried forward"
+    }
+  ],
+  "independent_agent_review": false,
+  "labels": 0,
+  "fits": 0,
+  "membership_repairs": 0,
+  "price_repairs": 0
+}
