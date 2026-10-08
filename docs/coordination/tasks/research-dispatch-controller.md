@@ -1,10 +1,9 @@
 # LEI 八目标｜本对话直接执行
 
-- 更新：2026-10-08T12:48:30.130195+08:00；checked_coordination_sha=526a34677a8c35ac2aacd0a3ca6b86f2339154bd；已读COORDINATION.md及research-dispatch-controller、risk-shape-information、report-library-integration-20261008，相关owner无范围变化和冲突。
-- v4-direct首次心跳2026-10-08T04:33:16.952Z已实际完成两项增量：17条海通2024停牌占位（748716dc7de72afc7ffa604fee6fd0a6223d8edc）及300114/302132身份边界（909acdf0eac740593bdb54e66e2331ac14e4af53）；两阶段各10文件远端读回。四报告累计15份原件、76项本地检查，B01共53占位和1代码变更已有正式依据。中航任务初始runze命名错误、无关搜索及PDF渲染警告保留，不动原证据路径。
-- **继续直接执行：** 核原资格方案已列出的六个分红观测日：600837在2022-07-28、2023-07-28、2024-08-08、2024-10-18；601989在2024-08-01、2025-06-18。只补公告含义、登记/除息/派发日期、税前每股金额，不取新行情，不重建任何价格。root单写docs/experiments/raw/saved-dividend-events-2026-10-08/、docs/experiments/saved-dividend-events-qualification-2026-10-08.md与单项registry/INDEX增量；约9次来源操作估计、10MiB上限、至少512MiB空闲。
-- 此六件问题核完即收尾；不能由已知事件匹配推出全历史没有漏事件或原因子数值正确。原累计33次来源及封存失败/预算不重开。D—MAE、原价格快照、完整历史成员等各自依赖保持；全部八目标未完成。
-- 无对外派发、没有新agent；不切主树、不删、不交易、不付费、不部署/网络更改或仓外写入。403和automation-2继续暂停。
+- 更新：2026-10-08T13:05:38.615820+08:00；checked_coordination_sha=cd03ef10b5c241c2abc55b15654df29c6a53861a；已读相关任务，只有日常交易owner记录新增，范围无冲突。
+- 首次v4-direct定时唤醒已完成三项实际资料增量：17条2024海通停牌占位、300114→302132身份边界、六个既有分红日期。最新成果分支 `codex/research-direct-20261008@8e0e26c9f053faa7462f798dead579b746befc2d` 的12个文件逐字读回一致。累计五报告、21份发行人/交易所披露、132项本地核对；无独立agent复审，不代表收益改善。
+- 当前root直接核实新出现的单项完整性线索：中国重工2021年度分红是否在2022年实施，且落在旧B02请求区间却未返回。准确写入raw `china-heavy-dividend-coverage-2026-10-08/` 和同题报告，以及单项登记。估计3次来源操作、最多5MiB、至少512MiB余量；既有64次来源消耗和失败继承。反例证实或否定即停止本有界问题，不批量重取历史，不重开旧市场请求。
+- 已核六条分红不等于完整事件链；海通2024的实领金额与除息参考金额分别保存。全部八目标仍未完成，D—MAE六冻结原件、旧价格原始快照及官方历史成员等依赖不变。无派发、无新agent、不切主树、不删或仓外改动；403和automation-2暂停。
 
 ## 当前直接执行规则
 
@@ -134,8 +133,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "526a34677a8c35ac2aacd0a3ca6b86f2339154bd",
-  "checked_at": "2026-10-08T12:49:04.296354+08:00",
+  "checked_coordination_sha": "cd03ef10b5c241c2abc55b15654df29c6a53861a",
+  "checked_at": "2026-10-08T13:05:38.615820+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -271,15 +270,15 @@
         "docs/ops/work-progress/research-dispatch-controller-2026-10-07.md",
         "docs/experiments/raw/research-dispatch-controller-2026-10-07/thread-state.json",
         "docs/coordination/tasks/research-dispatch-controller.md",
-        "docs/experiments/raw/saved-dividend-events-2026-10-08/",
-        "docs/experiments/saved-dividend-events-qualification-2026-10-08.md",
+        "docs/experiments/raw/china-heavy-dividend-coverage-2026-10-08/",
+        "docs/experiments/china-heavy-dividend-coverage-2026-10-08.md",
         "docs/experiments/registry.json",
         "docs/experiments/INDEX.md"
       ],
       "depends_on": [],
       "scope_released": false,
       "source": "User latest instruction replaces dispatcher-only role with direct root execution. Root is sole writer of central record and new corporate-action qualification paths; no further delegation.",
-      "scope_note": "Root qualifies only six already saved dividend-event dates, with no market reconstruction; registry/INDEX solewriter until publication."
+      "scope_note": "Only one2022 dividend-completeness lead; six positive matches completed, no repeated collection. Shared registration root only."
     },
     {
       "task_id": "report-registration-20261007",
@@ -862,7 +861,50 @@
     "For goal4, use the new three-security event sidecars. Evaluate the next specific remaining official action/warmup/identity qualification against original scope and already used source plans; original price restoration still needs original adjustment snapshot, and full CSI300 still needs official complete anchor/chain. Do not generalize these two external gaps into a claim that every independent qualification is blocked.",
     "Any further market-price reconstruction must first bind the original approved consumer, definition/version, warmup and explicit price policy; do not silently replace the old frozen price panel or reopen sealed three-key/PPO/P26 runs.",
     "Shared registry/INDEX window for these two reports is now released. Read latest coordination before any new scope, and preserve exact old source budgets/failures."
-  ]
+  ],
+  "read_task_ids": [
+    "research-dispatch-controller",
+    "risk-shape-information",
+    "report-library-integration-20261008"
+  ],
+  "conflict_decision": "Only daily trading owner update since scope; related owners unchanged, unique raw/report paths. Root sole registry/INDEX writer. No delegated work.",
+  "direct_execution": {
+    "current_unit": {
+      "id": "china-heavy-2022-dividend-coverage-20261008",
+      "state": "scope_registered_not_started",
+      "question": "Determine whether one observed lead, China Heavy2021 annual dividend implemented2022, is inside fixed B02 request window but missing from its preserved factor records. Stop after counterexample confirmed/refuted or exact issuer source unavailable; no general-history collection.",
+      "original_authority": "Goal4 complete corporate-action qualification, saved dividend task new completeness lead, existing qualification-plan sections2/3. No new factor/vendor/price requests.",
+      "write_paths": [
+        "docs/experiments/raw/china-heavy-dividend-coverage-2026-10-08/",
+        "docs/experiments/china-heavy-dividend-coverage-2026-10-08.md",
+        "docs/experiments/registry.json",
+        "docs/experiments/INDEX.md"
+      ],
+      "checked_at": "2026-10-08T13:05:38.615820+08:00",
+      "checked_coordination_sha": "cd03ef10b5c241c2abc55b15654df29c6a53861a",
+      "read_task_ids": [
+        "research-dispatch-controller",
+        "risk-shape-information",
+        "report-library-integration-20261008"
+      ],
+      "conflict_decision": "Only daily trading owner update since scope; related owners unchanged, unique raw/report paths. Root sole registry/INDEX writer. No delegated work.",
+      "source_policy": {
+        "planning_estimate_operations": 3,
+        "max_new_bytes": 5242880,
+        "minimum_free_bytes": 536870912,
+        "previous_direct_operations": 64,
+        "prior_closed_budgets": "unchanged",
+        "fits": 0,
+        "labels": 0,
+        "price_repairs": 0
+      },
+      "free_bytes_before": 2775785472,
+      "acceptance": "Official implementation source/hash, exact old request-window/raw response binding, no inferred provider cause or changed frozen input."
+    },
+    "completed_reports": 5,
+    "latest_commit": "8e0e26c9f053faa7462f798dead579b746befc2d",
+    "mode": "root_direct_no_delegation"
+  }
 }
 ```
 
