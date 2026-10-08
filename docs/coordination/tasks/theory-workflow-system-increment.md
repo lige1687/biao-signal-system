@@ -113,3 +113,16 @@
 在现有codex/theory-safe-publication-20261008@bad2a59ec8075f8a7d2f1d53b0a09898a78e53aa稀疏树逐件核候选SHA/内容/资格，安全者原字节发布；不符单项拒绝。写范围只有合同candidate_exact_files中的39路径及自身发布README/manifest/dependency-check/remote-readback、进度/协调。主工作区和其余36件只读，不更改定义、方法案例、workflow、测试、旧失败或状态；不占位让入口通过。无需重跑已验收测试/市场，市场/取数/拟合/标签/安装预算0，Git正常同步后逐文件读回和缺件集合差核。
 
 已读存储指引并实测内盘可用5174071296字节，允许本次约111KB原件及少量元数据，复用原树，不新检出或清理。验收是准确安全资料交付；即使39全部通过，仍36缺件，不宣告准备入口跨设备完整可用。
+
+
+## 39件精确后继已交付：completed，完整准备依赖仍blocked
+
+更新时间：2026-10-08T18:45:51.309206+08:00；checked_coordination_sha=bbea1dec5837841c552e38a90182c7aef04b0e65；已读规则、本任务、research-dispatch-controller与classic范围，最终fetch未见新增变更/冲突。已接受的首批发布不重做。
+
+候选39逐件核大小/SHA/内容，均为B批合成计算证据摘要、编造观察点或自有验证脚本，未含实际行情逐行资料、私人凭证或外部受限正文；39全部通过、0拒绝，准确110834字节，旧pending/unavailable/失败状态保持原字节。成果commit60934d6dbd39f233f01f12730bd27997d6474556，在原codex/theory-safe-publication-20261008推送后43件（39原件+4元数据）逐字读回；回执和进度后继4d9e1ad0f17abc67f46b38efe1a0d4fd7c9a03dd两文件亦fetch比对相符。
+
+远端Git对象独立重新核旧75集合：75−39=36，准确等于合同remaining_read_only_dependencies；原75历史清单保留，新阶段单独记录。定义源码/登记表、两工具源码/测试、registry/INDEX均与bad2a59e逐字相同，其余36件未读取正文或复制。准备工具仍不能完整跨设备运行；恢复条件仍是36准确原件的来源/传播资格与原owner交接，不用占位绕过。合成脚本仅保存，未运行或声称可单独复现；其引用子依赖不在本合同自动扩入。
+
+验证：39原件SHA、43远端字节、剩余集合与不变文件检查通过，归置通过。diff --check发现一处原证据第35行已有尾空格，为保留准确SHA未修改，此失败位置保存在manifest。科学重算/原市场/排名测试/取数/拟合/标签/安装均0。另保留只读摘要相对路径找不到合同和过宽root状态输出失误；修正为准确根路径和限定清单，没有写原件/切root分支/删资料。证据仍为raw/theory-safe-publication-2026-10-08的manifest、dependency-check、remote-readback与README新阶段及自身进度。
+
+本轮限定39件交付范围释放，中控读取此回执接续。完整准备缺件未解除，不以completed发布状态冒充工具全部可用；没有必要剩余本合同计算或后台任务。
