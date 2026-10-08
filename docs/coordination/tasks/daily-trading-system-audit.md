@@ -1,5 +1,16 @@
 # 日常交易价值的系统审查
 
+## 当前接入阶段
+
+- task-id: daily-trading-system-audit；owner: 本机Codex /root，thread-id=01a11721-303e-7c83-9451-c82078c9ba23，唯一协调写者
+- status: active；updated_at: 2026-10-08T12:21:52.221617+08:00；checked_coordination_sha: cd2091de7252521e5e68026d3ecca6956e13167e
+- 当前目标: 持续完成系统接入GPT；不是重开已结案的原系统审查或其他研究。当前阶段与准确范围见本文末尾登记。
+- 当前结果: 日报已在本聊天实际交付；10个只读工具已有真实标准客户端取数证据，项目Codex配置可读回。手机/网页ChatGPT未实际调用，会话过期等待用户登录；计划和产品资料不足不判止盈止损。
+- 当前工作分支: codex/factor-unit-research-20260915，基础18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；待发布成果分支codex/gpt-system-integration-20261008。不得把协调提交当源码发布。
+
+## 原系统审查及接续历史
+
+
 - task-id: daily-trading-system-audit
 - owner: Codex /root；thread-id=01a11721-303e-7c83-9451-c82078c9ba23，唯一写者；不接管其他任务
 - status: completed
@@ -122,3 +133,12 @@
 - 各agent仍独占原两文件：context owner补数据路由及反例，MCP owner补固定枚举参数及SDK往返；root docs/livecheck准确增量，不写其他源码。实际新section请求可读和返回错误单独验收；原43项与十工具证据保留，非参数改动不重跑无关测试。
 - 项目内lei_system表已追加、原配置所有字节保留，codex mcp get实测enabled且正确stdio参数；当前正在运行的聊天未重新发现工具，不宣称此会话动态加载成功，CLI当前可用。手机/网页仍依赖过期登录和实际连接授权；总体active。
 
+
+## 2026-10-08 系统进度与慢来源增量登记
+
+- status: active；checked_coordination_sha: cd2091de7252521e5e68026d3ecca6956e13167e；checked_at: 2026-10-08T12:21:52.221617+08:00
+- 已读task-id: daily-trading-system-audit、research-dispatch-controller；COORDINATION1.1。上次e3c5da9以来只新增中控自身终止事件资格范围，与本任务集成模块/配置无同路径冲突；唯一写者仍本聊天，子代理各限原文件。
+- 新增准确范围仍只在已登记gpt_context.py/test_gpt_context.py及自身SOP/技能/进度/raw-gpt-integration-*：overview读取固定GET /api/upgrades的已有权威任务状态与证据，不把报告计数当进度；不写目标台账、不读Agent私聊。台账资料和跨AI协调状态不得混称。
+- 美国宏观首读实测8秒超时，原API说明首次逐序列约15秒；适配器仅此固定路径改30秒等待，其余8秒/大小界限保持，失败仍独立可见；无refresh或来源服务重启。先查实现再改，不原样重试。
+- 验收: 已有总览工具可返回台账来源/原更新时间/负责人/状态/验收证据/下一动作，坏源不伪造空成功；固定慢路径时限测试和真实本机读取。0新研究、交易/计划/持仓/OKR写入，权限边界不变。
+- 当前成果仅本地；本阶段源码按之前登记的codex/gpt-system-integration-20261008安全发布，先验收再推送；共享配置仅自身lei_system段，不混入既有factorhub段。手机/网页仍等待用户恢复登录，仅该依赖等待，总体持续active。
