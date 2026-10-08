@@ -1,13 +1,10 @@
 # LEI 八目标｜本对话直接执行
 
-- 更新：2026-10-08T12:30:59.575116+08:00；root会话01a116c7-3700-7062-a6c6-53af00ef60a0按最新人类指令直接推进，不再派发。checked_coordination_sha=54b5f794f7338279faa517e236aa02971c317d6d；已读COORDINATION.md、本记录、risk-shape-information及report-library-integration-20261008。最新增量只属独立日报owner，与本报告无同写冲突。
-- **已交付并核远端：** 三只原清单证券的2025年终止事件资料；12份交易所/发行人原件、42项本地来源/算术/旧记录核验、36条旧停牌占位解释。两份报告在codex/research-direct-20261008@6c781464a9d622dc73b817aa5d89267c2cc75fa8，前一阶段995b5079d58813770d7a37fd81e058d21c37e2e5；两阶段各10条准确文件读回一致。独立agent审查未新做，原件只本机，Git仅摘要/指纹/核数。报告和数据文件不代表研究引擎已支持公司合并。
-- 报告：docs/experiments/haitong-corporate-action-qualification-2026-10-08.md；docs/experiments/stock-terminal-actions-qualification-2026-10-08.md。主登记621→623仅本地，独立分支200→202已发布；旧条目逐字保留，未整表发布主树脏修改。本轮共享registry/INDEX窗口现已释放，两个已完成raw/report范围释放；root仍单写自己的状态、进度和中央摘要。
-- 具体新增：600837每股换0.62股601211，停牌/终止/新股上市分开；600705有效申报才适用3.54元现金选择，股份已交割和账户未来转款分开；601989每股换0.1339股600150，指定1,454,168,398股锁定六个月。未把退市或账户显示中断当权益归零。原价格修复、真实标签、拟合、交易均0。
-- 消耗/失败：两单元可见来源13+14=27次，原响应1,434,102字节；海通两PDF返回校验HTML、初始自定检查估计修订及第11次顺序错误、错误路径查找、登记缩进断言、第二PDF提取器缺失/对象警告均留回执，未删冻结失败。其他36次成员查询、B01—B05、三键4/6等旧批次保留且未重开。磁盘期末空闲约2.85GB；归置检查通过。
-- **当前运行状态：** 这两个有界问题已答完，无正在跑的本单元任务；七个原负责人只读快照均无新交付，没有任何新派发。八目标未整体完成。不能把本段解释成全部公共资料问题已穷尽。
-- 后续依赖分开：目标1/3/6真实流程仍需六份准确冻结原件和原SHA/独审/阶段授权；目标4仍缺原新浪调整快照/基准、完整官方历史成员，完整预热/分红/身份链须按实际研究消费者逐项限定；新价版本不能冒充旧价恢复。目标5研究需合格特征，账户使用另需实际约束；目标7需Qlib准确原输入/回执。两个新报告归档已完成，不再重派重核。更详细依赖及恢复条件见本文件机器区direct_remaining_goals。
-- 定时leisignal仍ACTIVE/30分钟/原线程，v4-direct原生提示已应用并读回，改为本对话直接执行；下一次自动v4触发还未观察，不能以本轮人工执行冒称定时运行已验证。403、automation-2保持暂停；不切主树、不删、不付费、不部署或写仓外数据库。
+- 更新：2026-10-08T12:38:41.770757+08:00；checked_coordination_sha=11ef654017de2dde5cf155647570dcf461cb469c；已读COORDINATION.md、research-dispatch-controller、risk-shape-information、report-library-integration-20261008。增量仅独立日报记录，无同写冲突。
+- **本轮实际接续：** 2026-10-08T04:33:16.952Z首次v4-direct定时触发已观察。root直接核尚未解释的600837在2024-09-06至2024-10-09的17条旧停牌占位。先登记、推送核回，再取发行人正式停复牌资料并核旧行。没有派发其他对话或子代理。
+- 本单元范围：docs/experiments/raw/haitong-2024-suspension-2026-10-08/、docs/experiments/haitong-2024-suspension-qualification-2026-10-08.md；共享registry/INDEX由root临时单写，只增本报告，完成后释放。估计4次来源操作、文件上限5MiB、保留512MiB空闲；已有27次来源操作及旧封存批次不清零。不获取新行情、不计算新因子/标签或改冻结原件。
+- 前两报告已完成并核远端：codex/research-direct-20261008@6c781464a9d622dc73b817aa5d89267c2cc75fa8；12份来源、42项核查、36条2025占位已解释，本轮不重做。原件仅本地，摘要与指纹在Git；研究引擎未接入。
+- 八目标未整体完成，D—MAE六原件/原合同/独审条件、原新浪快照和完整历史成员等各自依赖保持。不能用这些缺件阻塞本轮独立资料资格核验。403、automation-2保持暂停；不切主树、不删、不交易、不付费、不部署或写仓外内容。
 
 ## 当前直接执行规则
 
@@ -137,8 +134,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "54b5f794f7338279faa517e236aa02971c317d6d",
-  "checked_at": "2026-10-08T12:30:59.575116+08:00",
+  "checked_coordination_sha": "11ef654017de2dde5cf155647570dcf461cb469c",
+  "checked_at": "2026-10-08T12:38:41.770757+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -273,12 +270,16 @@
       "write_paths": [
         "docs/ops/work-progress/research-dispatch-controller-2026-10-07.md",
         "docs/experiments/raw/research-dispatch-controller-2026-10-07/thread-state.json",
-        "docs/coordination/tasks/research-dispatch-controller.md"
+        "docs/coordination/tasks/research-dispatch-controller.md",
+        "docs/experiments/raw/haitong-2024-suspension-2026-10-08/",
+        "docs/experiments/haitong-2024-suspension-qualification-2026-10-08.md",
+        "docs/experiments/registry.json",
+        "docs/experiments/INDEX.md"
       ],
       "depends_on": [],
       "scope_released": false,
       "source": "User latest instruction replaces dispatcher-only role with direct root execution. Root is sole writer of central record and new corporate-action qualification paths; no further delegation.",
-      "scope_note": "Root state/progress/central coordination only. Both completed direct factual reports/raw and shared registration window released. Any new substantive scope must be registered before edits."
+      "scope_note": "Root direct17-row2024 suspension source qualification; temporary exact report registration scope until publication."
     },
     {
       "task_id": "report-registration-20261007",
@@ -558,7 +559,39 @@
     "current_native_configuration_evidence": "v4-direct native prompt applied and read back during this human direct-execution turn; exact tool completion timestamp was not separately retained; do not reuse earlier v2 timestamp as v4 proof."
   },
   "current_execution_mode": "root_direct_no_delegation",
-  "direct_execution_unit": null,
+  "direct_execution_unit": {
+    "id": "haitong-2024-suspension-qualification-20261008",
+    "state": "scope_registered_before_source_work",
+    "question": "Qualify 17 existing 600837 B01 status0 rows dated 2024-09-06 through 2024-10-09 using issuer suspension and resumption disclosure.",
+    "original_authority": "Original goal4 trading availability and qualification-plan sections3/4/6; prior report explicitly leaves these17 rows unqualified.",
+    "write_paths": [
+      "docs/experiments/raw/haitong-2024-suspension-2026-10-08/",
+      "docs/experiments/haitong-2024-suspension-qualification-2026-10-08.md",
+      "docs/experiments/registry.json",
+      "docs/experiments/INDEX.md"
+    ],
+    "source_policy": {
+      "planning_estimate_operations": 4,
+      "max_new_bytes": 5242880,
+      "minimum_free_bytes": 536870912,
+      "stop": "Exact suspension and resumption fields sourced and fixed old rows checked, or actual inaccessible necessary evidence; estimate is not an invented hard quota.",
+      "previous_operations": 27,
+      "prior_closed_budgets": "Unchanged; no price or index-query reopening",
+      "fits": 0,
+      "labels": 0,
+      "price_repairs": 0
+    },
+    "acceptance": "Original source hashes, date and availability distinctions, fixed B01 SHA and 17-row match; preserve originals/no zero fills; registry and Git readback.",
+    "strategy_layer": "Historical trading availability data only; no signal or strategy change",
+    "checked_at": "2026-10-08T12:38:41.770757+08:00",
+    "checked_coordination_sha": "11ef654017de2dde5cf155647570dcf461cb469c",
+    "read_task_ids": [
+      "research-dispatch-controller",
+      "risk-shape-information",
+      "report-library-integration-20261008"
+    ],
+    "conflict_decision": "Only intervening daily-trading owner record changed. New raw/report paths unused; previous shared registration window released. Root is sole temporary registry/INDEX writer; no owner delegation."
+  },
   "controller_owner": "01a116c7-3700-7062-a6c6-53af00ef60a0",
   "direct_execution_completed_units": [
     {
@@ -715,7 +748,7 @@
     "current_real_experiment_readiness": "No new original input package reported by seven original-owner snapshots; D-MAE original six files, stage approvals and original SHA remain prerequisites. Public data qualification is a separate bounded stream, not claimed globally exhausted.",
     "next_required_decision_boundary": "Before a new market run, original approved inputs and consumer/price/member policies must be bound. Existing independent source gaps can be qualified directly when scope is concrete, without sending new tasks."
   },
-  "shared_registration_scope_released": true,
+  "shared_registration_scope_released": false,
   "direct_next_actions": [
     "Continue in this chat only; no new messages/tasks to other chats or subagents. Both direct qualification units above are accepted and must not be rerun.",
     "On next wakeup inspect relevant new input/callback evidence; do not retest unchanged frozen missing files or retry403. Apply original D-MAE contract SHA and six exact files, independent review and staged X/Y approvals before any actual labels.",
