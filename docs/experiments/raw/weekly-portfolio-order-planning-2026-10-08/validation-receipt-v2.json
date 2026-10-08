@@ -1,0 +1,53 @@
+{
+  "at": "2026-10-08T12:13:45.189452+00:00",
+  "old_artifacts_sha_unchanged": 12,
+  "v2_sha_frozen": {
+    "order_planning_v2.py": "a9ab958fa737fc53e7a08905da9ffd82b40687354f2b8be2d508db121a13b958",
+    "test_order_planning_v2.py": "ad1f59ce099e58c95e2bcb69c437909b6569e9e7c8a0914e4c5d277ee7abdb44",
+    "run_checks_v2.py": "82743e955bb41a9bad21d786d6a738088c87deffbde89f6066fd37485e7bdf83"
+  },
+  "v2_reuses_unchanged_v1_arithmetic_sha": "645cac7faa6fc25bd95e0c25b63621d4e233b501a6d0b946895ff685b584a75a",
+  "checked_coordination_sha_controller": "62df134063b2b86c0b869531da0b8de8b819ee17",
+  "commands": [
+    {
+      "command": "python3 -B prove_v1_defects.py (before disk failure; not rerun)",
+      "exit_code": 0,
+      "old_defects_reproduced": 3
+    },
+    {
+      "command": "initial order_planning_v2.py shell write",
+      "exit_code": 1,
+      "error": "No space left on device",
+      "readback": "target did not exist; no partial source; stopped"
+    },
+    {
+      "command": "python3 -B run_checks_v2.py",
+      "exit_code": 0,
+      "new_groups": 9
+    },
+    {
+      "command": "python3 -B independent_arithmetic_v2.py",
+      "exit_code": 0,
+      "amount_checks": 13,
+      "plan_hashes": 17
+    },
+    {
+      "command": "python3 -B scripts/check_repo_hygiene.py",
+      "exit_code": 0,
+      "stdout": "归置自检通过：根层四层均在白名单内，关键配置均已入库。"
+    }
+  ],
+  "budget": {
+    "file_count_before_receipt": 28,
+    "total_bytes_before_receipt": 149329,
+    "free_bytes_now": 960040960,
+    "old_tests_rerun": 0,
+    "old_failure_repro_rerun": 0,
+    "ledger_runs": 0,
+    "market_runs": 0,
+    "fits": 0,
+    "network": 0,
+    "git_mutations": 0
+  },
+  "status": "controller_independent_review_pending"
+}

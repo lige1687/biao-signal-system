@@ -1,0 +1,90 @@
+{
+  "command": "python3 -B /Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/prove_v1_defects.py",
+  "exit_code": 0,
+  "old_defects_reproduced": 3,
+  "old_actual_current_cash": "174.82",
+  "wrong_buy_cost": "305.3",
+  "overspend": "130.48",
+  "high": {
+    "input_hash": "ff029e23e010bccf9936826adc375dc7b919fb1744fe9e26d61a3bcb50c52193",
+    "status": "ready",
+    "reason": "frozen budgets; residual not reallocated",
+    "ordering": [
+      [
+        "B",
+        "400.0"
+      ],
+      [
+        "A",
+        "0"
+      ]
+    ],
+    "budgets": [
+      [
+        "B",
+        "374.8200"
+      ],
+      [
+        "A",
+        "0"
+      ]
+    ],
+    "orders": [
+      {
+        "order_id": "161d4129e541755db9e255e1d5187698f80bb044aa5b1cf13254f71a0a5f6534",
+        "input_hash": "ff029e23e010bccf9936826adc375dc7b919fb1744fe9e26d61a3bcb50c52193",
+        "symbol": "B",
+        "side": "buy",
+        "quantity": "300",
+        "reference": "1",
+        "budget": "374.8200",
+        "cap": "1.231",
+        "frozen_at": "2026-01-07 08:00:00+08:00",
+        "opening_at": "2026-01-07 09:30:00+08:00"
+      }
+    ],
+    "unallocated": "0.0000"
+  },
+  "low": {
+    "input_hash": "ff029e23e010bccf9936826adc375dc7b919fb1744fe9e26d61a3bcb50c52193",
+    "status": "ready",
+    "reason": "frozen budgets; residual not reallocated",
+    "ordering": [
+      [
+        "B",
+        "400.0"
+      ],
+      [
+        "A",
+        "0"
+      ]
+    ],
+    "budgets": [
+      [
+        "B",
+        "244.9500"
+      ],
+      [
+        "A",
+        "0"
+      ]
+    ],
+    "orders": [
+      {
+        "order_id": "161d4129e541755db9e255e1d5187698f80bb044aa5b1cf13254f71a0a5f6534",
+        "input_hash": "ff029e23e010bccf9936826adc375dc7b919fb1744fe9e26d61a3bcb50c52193",
+        "symbol": "B",
+        "side": "buy",
+        "quantity": "200",
+        "reference": "1",
+        "budget": "244.9500",
+        "cap": "1.198",
+        "frozen_at": "2026-01-07 08:00:00+08:00",
+        "opening_at": "2026-01-07 09:30:00+08:00"
+      }
+    ],
+    "unallocated": "0.0000"
+  },
+  "initial_known_action": "2026-01-06T08:00:00+08:00",
+  "later_forgotten_action_wrongly_ready": true
+}

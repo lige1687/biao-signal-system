@@ -1,0 +1,18 @@
+{
+  "state": "retry_after_measured_capacity_change_pending_readback",
+  "failures": [
+    "root shell here-document and coordination FETCH_HEAD: no space left on device",
+    "executor v2 source write failed; immediate readback confirmed order_planning_v2.py absent",
+    "direct small recovery-file write failed; immediate readback confirmed absent"
+  ],
+  "preserved": ["v1-source three sources", "v1-preservation-sha256.json", "prove_v1_defects.py", "v1-defect-reproductions.json"],
+  "verified": "Three v1 defects reproduced; original twelve artifacts unchanged. No v2 implementation or tests saved before retry.",
+  "free_bytes_before_failed_write": 137265152,
+  "free_bytes_after_external_change": 1123262464,
+  "capacity_change_cause": "unknown; root did not delete or migrate anything",
+  "retry_reason": "Measured capacity changed by about 1GB; meaningful small recovery file is attempted again and must be read back before resuming.",
+  "backup_recovery": "leisignal automation prompt updated through app and exact prompt readback verified; schedule remains ACTIVE every30minutes",
+  "last_remote_work_commit": "703a34e0c71f04403edb516dfcee27f4bd6f0923",
+  "last_remote_coordination": "62df134063b2b86c0b869531da0b8de8b819ee17",
+  "scope": "same registered isolated raw and root recovery files; no deletes, cleanup, outside files or market runs"
+}

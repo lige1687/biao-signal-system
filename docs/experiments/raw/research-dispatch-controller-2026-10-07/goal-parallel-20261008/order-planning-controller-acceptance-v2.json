@@ -1,0 +1,83 @@
+{
+  "at": "2026-10-08T20:16:04.302911+08:00",
+  "decision": "accepted_bounded_pure_planning_v2",
+  "reviewer": "/root/settlement_scope_review",
+  "independent_review": "Three original failures and legal counterpart paths independently recalculated in memory; no author9 group or old tests rerun.",
+  "closed_findings": [
+    {
+      "id": "current_available_cash",
+      "actual_cash": "174.82",
+      "quantity": "100",
+      "reference_cost": "105.10",
+      "remaining": "69.72",
+      "included_or_excluding_zero_cash_equivalent": true,
+      "old200_not_added": true,
+      "legal_current200_excluding_sale_cash": "374.82",
+      "legal_quantity": 300
+    },
+    {
+      "id": "plan_identity",
+      "high": {
+        "budget": "374.82",
+        "quantity": 300,
+        "cap": "1.231"
+      },
+      "low": {
+        "budget": "244.95",
+        "quantity": 200,
+        "cap": "1.198"
+      },
+      "plan_and_order_ids_differ": true,
+      "receipt_source_freeze_changes_change_identity": true,
+      "identical_inputs_stable": true,
+      "cross_plan_order_refused": true
+    },
+    {
+      "id": "action_context_inheritance",
+      "known_crossing": "unsupported_company_action_crossing",
+      "short_coverage": "unsupported_action_coverage_unknown",
+      "complete_no_action_coverage": "ready",
+      "cannot_override_with_empty_actions": true
+    }
+  ],
+  "additional_refusals": [
+    "missing cash",
+    "future cash knowledge",
+    "empty cash source",
+    "wrong proceeds receipt",
+    "claiming cash already contains sale before availability"
+  ],
+  "frozen_v2_source_sha256": {
+    "order_planning_v2.py": "a9ab958fa737fc53e7a08905da9ffd82b40687354f2b8be2d508db121a13b958",
+    "test_order_planning_v2.py": "ad1f59ce099e58c95e2bcb69c437909b6569e9e7c8a0914e4c5d277ee7abdb44",
+    "run_checks_v2.py": "82743e955bb41a9bad21d786d6a738088c87deffbde89f6066fd37485e7bdf83"
+  },
+  "unchanged_v1_dependency_sha256": "645cac7faa6fc25bd95e0c25b63621d4e233b501a6d0b946895ff685b584a75a",
+  "controller_checks": {
+    "original_artifacts_sha_unchanged": 12,
+    "v1_source_snapshots_equal": 3,
+    "saved_amount_records_recomputed": 13,
+    "author_plan_hash_checks": 17,
+    "author_order_id_checks": 14
+  },
+  "author_new_checks": 9,
+  "limits": [
+    "synthetic input sources only",
+    "no reservation/partialfill/cancel/restart engine",
+    "no datedledger execution adapter",
+    "no full P0/P1 or returns comparison",
+    "triggered_no_whole_sale pendinguser",
+    "cross corporate action unsupported"
+  ],
+  "failures_preserved": [
+    "v1 actual three counterexamples",
+    "initialENOSPC and absentv2 source; later actual write recovery"
+  ],
+  "budgets": {
+    "market_runs": 0,
+    "source_requests": 0,
+    "fits": 0,
+    "labels": 0,
+    "sealed_reruns": 0
+  }
+}

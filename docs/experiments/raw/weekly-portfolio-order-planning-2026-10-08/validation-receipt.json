@@ -1,0 +1,43 @@
+{
+  "checked_at": "2026-10-08T11:55:53.987525+00:00",
+  "commands": [
+    {
+      "command": "python3 -B /Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/run_checks.py",
+      "exit_code": 0,
+      "new_tests": 15
+    },
+    {
+      "command": "python3 -B /Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/independent_arithmetic.py",
+      "exit_code": 0,
+      "independent_amount_checks": 16,
+      "input_sha_equal": true
+    },
+    {
+      "command": "python3 -B scripts/check_repo_hygiene.py",
+      "exit_code": 0,
+      "stdout": "归置自检通过：根层四层均在白名单内，关键配置均已入库。"
+    }
+  ],
+  "source_sha_frozen": {
+    "order_planning.py": "645cac7faa6fc25bd95e0c25b63621d4e233b501a6d0b946895ff685b584a75a",
+    "test_order_planning.py": "00be16b38514a8ddf895d70e85be4191cbfa7c905d82ad51a944ad60a9c04ece",
+    "run_checks.py": "ca93b463b2848b2e56e455114e0af8583c12ff63afd2089c438deddd7cb07f2a"
+  },
+  "old_spec_and_ledger_unchanged": true,
+  "unexpected_failures": [],
+  "status": "controller_independent_review_pending",
+  "budget": {
+    "output_bytes_before_receipt": 50586,
+    "output_file_count_before_receipt": 11,
+    "free_bytes_before": 1703477248,
+    "free_bytes_after": 449306624,
+    "market_runs": 0,
+    "fits": 0,
+    "new_data_requests": 0,
+    "labels": 0,
+    "old_tests_rerun": 0,
+    "ledger_runs": 0,
+    "network": 0,
+    "git_mutations": 0
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "command": "python3 -B /Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/independent_arithmetic_v2.py",
+  "exit_code": 0,
+  "amount_checks": [
+    {
+      "name": "cash after unrelated outflow",
+      "actual": "174.82",
+      "expected": "174.82",
+      "formula": "actual current cash; old free200 is not added"
+    },
+    {
+      "name": "affordable whole lot",
+      "actual": "100",
+      "expected": "100",
+      "formula": "100 cost105.1 <=174.82; 200 cost205.2 >174.82"
+    },
+    {
+      "name": "actual100cost",
+      "actual": "105.1",
+      "expected": "1051/10",
+      "formula": "100+5+.1"
+    },
+    {
+      "name": "excluding snapshot adds exactly once",
+      "actual": "174.8200",
+      "expected": "174.82",
+      "formula": "current excluding cash0 +180-5-.18"
+    },
+    {
+      "name": "included snapshot unchanged",
+      "actual": "174.82",
+      "expected": "174.82",
+      "formula": "current included cash174.82; no additional sale"
+    },
+    {
+      "name": "legal original available path",
+      "actual": "374.8200",
+      "expected": "374.82",
+      "formula": "current excluding cash200 + net174.82"
+    },
+    {
+      "name": "high original reference quantity",
+      "actual": "300",
+      "expected": "300",
+      "formula": "reference1 cost305.3 <=374.82"
+    },
+    {
+      "name": "low current available",
+      "actual": "244.9500",
+      "expected": "244.95",
+      "formula": "current excluding200 +100*.5-5-.05"
+    },
+    {
+      "name": "low quantity",
+      "actual": "200",
+      "expected": "200",
+      "formula": "reference1 cost205.2 <=244.95; 300 cost305.3 >244.95"
+    },
+    {
+      "name": "cap fits",
+      "cost": "3746693/10000",
+      "budget": "18741/50",
+      "fits": true
+    },
+    {
+      "name": "next tick exceeds",
+      "cost": "234356/625",
+      "budget": "18741/50",
+      "fits": false
+    },
+    {
+      "name": "cap fits",
+      "cost": "612099/2500",
+      "budget": "4899/20",
+      "fits": true
+    },
+    {
+      "name": "next tick exceeds",
+      "cost": "1225199/5000",
+      "budget": "4899/20",
+      "fits": false
+    }
+  ],
+  "complete_plan_hashes_recomputed": 17,
+  "order_ids_recomputed": 14,
+  "inherited_action_context_equal": true,
+  "planner_imported": false
+}

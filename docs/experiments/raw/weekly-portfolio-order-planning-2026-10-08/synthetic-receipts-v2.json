@@ -1,0 +1,1144 @@
+{
+  "test_cash_excluding_proceeds_add_once_and_included_never_twice": {
+    "excluding": {
+      "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+      "plan_hash": "95984fe680f155d1f67e0804df4e3f2c8435d962e1c97f1bc646083e51730bfb",
+      "status": "ready",
+      "reason": "frozen budgets; residual not reallocated",
+      "ordering": [
+        [
+          "B",
+          "400.0"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "budgets": [
+        [
+          "B",
+          "174.8200"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "orders": [
+        {
+          "order_id": "140e8f88f24e757cb25bb58dde0c091566120704b9a02f84e05ccf0110f737f2",
+          "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+          "plan_hash": "95984fe680f155d1f67e0804df4e3f2c8435d962e1c97f1bc646083e51730bfb",
+          "symbol": "B",
+          "side": "buy",
+          "quantity": "100",
+          "reference": "1",
+          "budget": "174.8200",
+          "cap": "1.696",
+          "frozen_at": "2026-01-07 08:00:00+08:00",
+          "opening_at": "2026-01-07 09:30:00+08:00"
+        }
+      ],
+      "unallocated": "0.0000",
+      "current_cash": {
+        "name": "invented-allocatable-cash",
+        "source_id": "synthetic-current-cash",
+        "amount": "0",
+        "known_at": "2026-01-06 10:00:00+08:00",
+        "available_at": "2026-01-06 10:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "action_context": {
+        "name": "invented-covered-action-calendar",
+        "source_id": "synthetic-covered-actions",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-07 09:30:00+08:00",
+        "events": []
+      },
+      "funding_receipt": {
+        "order_id": "d97d7a5e11097d9fb9f74a0d72dbbef05a1adf750df8d49554ccef85a24d3815",
+        "status": "filled",
+        "quantity": "100",
+        "price": "1.8",
+        "sold_at": "2026-01-02 09:30:00+08:00",
+        "proceeds_available_at": "2026-01-06 10:00:00+08:00",
+        "receipt_id": "synthetic-sale-high"
+      },
+      "frozen_at": "2026-01-07 08:00:00+08:00",
+      "opening_at": "2026-01-07 09:30:00+08:00"
+    },
+    "included": {
+      "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+      "plan_hash": "61b5c3a97cc2fd66993a286b989e63e3ffc3c4de262c6c113cbf6d90c075f8ee",
+      "status": "ready",
+      "reason": "frozen budgets; residual not reallocated",
+      "ordering": [
+        [
+          "B",
+          "400.0"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "budgets": [
+        [
+          "B",
+          "174.82"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "orders": [
+        {
+          "order_id": "ba2ee07455a498a0dc650b29846412a700743db997fc52bd431a5d2a3e5e14c9",
+          "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+          "plan_hash": "61b5c3a97cc2fd66993a286b989e63e3ffc3c4de262c6c113cbf6d90c075f8ee",
+          "symbol": "B",
+          "side": "buy",
+          "quantity": "100",
+          "reference": "1",
+          "budget": "174.82",
+          "cap": "1.696",
+          "frozen_at": "2026-01-07 08:00:00+08:00",
+          "opening_at": "2026-01-07 09:30:00+08:00"
+        }
+      ],
+      "unallocated": "0.00",
+      "current_cash": {
+        "name": "invented-allocatable-cash",
+        "source_id": "synthetic-current-cash",
+        "amount": "174.82",
+        "known_at": "2026-01-06 10:00:00+08:00",
+        "available_at": "2026-01-06 10:00:00+08:00",
+        "includes_sale_proceeds": true,
+        "included_receipt_id": "synthetic-sale-high"
+      },
+      "action_context": {
+        "name": "invented-covered-action-calendar",
+        "source_id": "synthetic-covered-actions",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-07 09:30:00+08:00",
+        "events": []
+      },
+      "funding_receipt": {
+        "order_id": "d97d7a5e11097d9fb9f74a0d72dbbef05a1adf750df8d49554ccef85a24d3815",
+        "status": "filled",
+        "quantity": "100",
+        "price": "1.8",
+        "sold_at": "2026-01-02 09:30:00+08:00",
+        "proceeds_available_at": "2026-01-06 10:00:00+08:00",
+        "receipt_id": "synthetic-sale-high"
+      },
+      "frozen_at": "2026-01-07 08:00:00+08:00",
+      "opening_at": "2026-01-07 09:30:00+08:00"
+    },
+    "original_legal_path": {
+      "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+      "plan_hash": "1f20d1e36f129b035f5864a1a92e65dc40892042ac6c32ea2354292c79c20bf6",
+      "status": "ready",
+      "reason": "frozen budgets; residual not reallocated",
+      "ordering": [
+        [
+          "B",
+          "400.0"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "budgets": [
+        [
+          "B",
+          "374.8200"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "orders": [
+        {
+          "order_id": "fd105540a04e63354338e2eacb5d76120c395e42082b61ec5357778e4a838172",
+          "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+          "plan_hash": "1f20d1e36f129b035f5864a1a92e65dc40892042ac6c32ea2354292c79c20bf6",
+          "symbol": "B",
+          "side": "buy",
+          "quantity": "300",
+          "reference": "1",
+          "budget": "374.8200",
+          "cap": "1.231",
+          "frozen_at": "2026-01-07 08:00:00+08:00",
+          "opening_at": "2026-01-07 09:30:00+08:00"
+        }
+      ],
+      "unallocated": "0.0000",
+      "current_cash": {
+        "name": "invented-allocatable-cash",
+        "source_id": "synthetic-current-cash",
+        "amount": "200",
+        "known_at": "2026-01-06 10:00:00+08:00",
+        "available_at": "2026-01-06 10:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "action_context": {
+        "name": "invented-covered-action-calendar",
+        "source_id": "synthetic-covered-actions",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-07 09:30:00+08:00",
+        "events": []
+      },
+      "funding_receipt": {
+        "order_id": "d97d7a5e11097d9fb9f74a0d72dbbef05a1adf750df8d49554ccef85a24d3815",
+        "status": "filled",
+        "quantity": "100",
+        "price": "1.8",
+        "sold_at": "2026-01-02 09:30:00+08:00",
+        "proceeds_available_at": "2026-01-06 10:00:00+08:00",
+        "receipt_id": "synthetic-sale-high"
+      },
+      "frozen_at": "2026-01-07 08:00:00+08:00",
+      "opening_at": "2026-01-07 09:30:00+08:00"
+    }
+  },
+  "test_current_cash_outflow_not_old_free": {
+    "decision": {
+      "name": "synthetic-v2-two-products",
+      "decision_at": "2026-01-01 16:00:00+08:00",
+      "holdings_known_at": "2026-01-01 15:00:00+08:00",
+      "cash_available_at": "2026-01-01 15:00:00+08:00",
+      "free": "200",
+      "restricted": "0",
+      "receivable": "0",
+      "assets": [
+        {
+          "symbol": "A",
+          "reference": "2",
+          "known_at": "2026-01-01 15:00:00+08:00",
+          "held": "350",
+          "sellable": "100",
+          "target": "0.5"
+        },
+        {
+          "symbol": "B",
+          "reference": "1",
+          "known_at": "2026-01-01 15:00:00+08:00",
+          "held": "100",
+          "sellable": "100",
+          "target": "0.5"
+        }
+      ],
+      "costs": {
+        "commission": "0.001",
+        "minimum": "5",
+        "slippage": "0.001",
+        "name": "synthetic-floor5"
+      },
+      "future_inflow": "0",
+      "input_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd"
+    },
+    "sale": {
+      "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+      "plan_hash": "da6165cec4959153629c96405ece8c972682ace1c2611878f740afcb765d1122",
+      "status": "await_sale",
+      "reason": "actual later proceeds required",
+      "ordering": [
+        [
+          "B",
+          "400.0"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "budgets": [],
+      "orders": [
+        {
+          "order_id": "d97d7a5e11097d9fb9f74a0d72dbbef05a1adf750df8d49554ccef85a24d3815",
+          "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+          "plan_hash": "da6165cec4959153629c96405ece8c972682ace1c2611878f740afcb765d1122",
+          "symbol": "A",
+          "side": "sell",
+          "quantity": "100",
+          "reference": "2",
+          "budget": "0",
+          "cap": null,
+          "frozen_at": "2026-01-02 08:00:00+08:00",
+          "opening_at": "2026-01-02 09:30:00+08:00"
+        }
+      ],
+      "unallocated": "200",
+      "current_cash": {
+        "name": "invented-allocatable-cash",
+        "source_id": "synthetic-current-cash",
+        "amount": "200",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "available_at": "2026-01-01 15:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "action_context": {
+        "name": "invented-covered-action-calendar",
+        "source_id": "synthetic-covered-actions",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-07 09:30:00+08:00",
+        "events": []
+      },
+      "funding_receipt": null,
+      "frozen_at": "2026-01-02 08:00:00+08:00",
+      "opening_at": "2026-01-02 09:30:00+08:00"
+    },
+    "receipt": {
+      "order_id": "d97d7a5e11097d9fb9f74a0d72dbbef05a1adf750df8d49554ccef85a24d3815",
+      "status": "filled",
+      "quantity": "100",
+      "price": "1.8",
+      "sold_at": "2026-01-02 09:30:00+08:00",
+      "proceeds_available_at": "2026-01-06 10:00:00+08:00",
+      "receipt_id": "synthetic-sale-high"
+    },
+    "cash": {
+      "name": "invented-allocatable-cash",
+      "source_id": "synthetic-current-cash",
+      "amount": "174.82",
+      "known_at": "2026-01-06 10:00:00+08:00",
+      "available_at": "2026-01-06 10:00:00+08:00",
+      "includes_sale_proceeds": true,
+      "included_receipt_id": "synthetic-sale-high"
+    },
+    "plan": {
+      "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+      "plan_hash": "61b5c3a97cc2fd66993a286b989e63e3ffc3c4de262c6c113cbf6d90c075f8ee",
+      "status": "ready",
+      "reason": "frozen budgets; residual not reallocated",
+      "ordering": [
+        [
+          "B",
+          "400.0"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "budgets": [
+        [
+          "B",
+          "174.82"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "orders": [
+        {
+          "order_id": "ba2ee07455a498a0dc650b29846412a700743db997fc52bd431a5d2a3e5e14c9",
+          "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+          "plan_hash": "61b5c3a97cc2fd66993a286b989e63e3ffc3c4de262c6c113cbf6d90c075f8ee",
+          "symbol": "B",
+          "side": "buy",
+          "quantity": "100",
+          "reference": "1",
+          "budget": "174.82",
+          "cap": "1.696",
+          "frozen_at": "2026-01-07 08:00:00+08:00",
+          "opening_at": "2026-01-07 09:30:00+08:00"
+        }
+      ],
+      "unallocated": "0.00",
+      "current_cash": {
+        "name": "invented-allocatable-cash",
+        "source_id": "synthetic-current-cash",
+        "amount": "174.82",
+        "known_at": "2026-01-06 10:00:00+08:00",
+        "available_at": "2026-01-06 10:00:00+08:00",
+        "includes_sale_proceeds": true,
+        "included_receipt_id": "synthetic-sale-high"
+      },
+      "action_context": {
+        "name": "invented-covered-action-calendar",
+        "source_id": "synthetic-covered-actions",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-07 09:30:00+08:00",
+        "events": []
+      },
+      "funding_receipt": {
+        "order_id": "d97d7a5e11097d9fb9f74a0d72dbbef05a1adf750df8d49554ccef85a24d3815",
+        "status": "filled",
+        "quantity": "100",
+        "price": "1.8",
+        "sold_at": "2026-01-02 09:30:00+08:00",
+        "proceeds_available_at": "2026-01-06 10:00:00+08:00",
+        "receipt_id": "synthetic-sale-high"
+      },
+      "frozen_at": "2026-01-07 08:00:00+08:00",
+      "opening_at": "2026-01-07 09:30:00+08:00"
+    }
+  },
+  "test_freeze_and_action_coverage_in_plan_identity": {
+    "first": {
+      "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+      "plan_hash": "1f20d1e36f129b035f5864a1a92e65dc40892042ac6c32ea2354292c79c20bf6",
+      "status": "ready",
+      "reason": "frozen budgets; residual not reallocated",
+      "ordering": [
+        [
+          "B",
+          "400.0"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "budgets": [
+        [
+          "B",
+          "374.8200"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "orders": [
+        {
+          "order_id": "fd105540a04e63354338e2eacb5d76120c395e42082b61ec5357778e4a838172",
+          "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+          "plan_hash": "1f20d1e36f129b035f5864a1a92e65dc40892042ac6c32ea2354292c79c20bf6",
+          "symbol": "B",
+          "side": "buy",
+          "quantity": "300",
+          "reference": "1",
+          "budget": "374.8200",
+          "cap": "1.231",
+          "frozen_at": "2026-01-07 08:00:00+08:00",
+          "opening_at": "2026-01-07 09:30:00+08:00"
+        }
+      ],
+      "unallocated": "0.0000",
+      "current_cash": {
+        "name": "invented-allocatable-cash",
+        "source_id": "synthetic-current-cash",
+        "amount": "200",
+        "known_at": "2026-01-06 10:00:00+08:00",
+        "available_at": "2026-01-06 10:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "action_context": {
+        "name": "invented-covered-action-calendar",
+        "source_id": "synthetic-covered-actions",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-07 09:30:00+08:00",
+        "events": []
+      },
+      "funding_receipt": {
+        "order_id": "d97d7a5e11097d9fb9f74a0d72dbbef05a1adf750df8d49554ccef85a24d3815",
+        "status": "filled",
+        "quantity": "100",
+        "price": "1.8",
+        "sold_at": "2026-01-02 09:30:00+08:00",
+        "proceeds_available_at": "2026-01-06 10:00:00+08:00",
+        "receipt_id": "synthetic-sale-high"
+      },
+      "frozen_at": "2026-01-07 08:00:00+08:00",
+      "opening_at": "2026-01-07 09:30:00+08:00"
+    },
+    "later_freeze": {
+      "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+      "plan_hash": "977ca3ea446d643ab8043ade7cd9abd3c0b4c10732a771452181223eba5e6a0e",
+      "status": "ready",
+      "reason": "frozen budgets; residual not reallocated",
+      "ordering": [
+        [
+          "B",
+          "400.0"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "budgets": [
+        [
+          "B",
+          "374.8200"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "orders": [
+        {
+          "order_id": "0eec119103e74cc68c8437f715b4b054488ba2db0e6fc760c9c1b48d8fea6cb4",
+          "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+          "plan_hash": "977ca3ea446d643ab8043ade7cd9abd3c0b4c10732a771452181223eba5e6a0e",
+          "symbol": "B",
+          "side": "buy",
+          "quantity": "300",
+          "reference": "1",
+          "budget": "374.8200",
+          "cap": "1.231",
+          "frozen_at": "2026-01-07 08:01:00+08:00",
+          "opening_at": "2026-01-07 09:30:00+08:00"
+        }
+      ],
+      "unallocated": "0.0000",
+      "current_cash": {
+        "name": "invented-allocatable-cash",
+        "source_id": "synthetic-current-cash",
+        "amount": "200",
+        "known_at": "2026-01-06 10:00:00+08:00",
+        "available_at": "2026-01-06 10:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "action_context": {
+        "name": "invented-covered-action-calendar",
+        "source_id": "synthetic-covered-actions",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-07 09:30:00+08:00",
+        "events": []
+      },
+      "funding_receipt": {
+        "order_id": "d97d7a5e11097d9fb9f74a0d72dbbef05a1adf750df8d49554ccef85a24d3815",
+        "status": "filled",
+        "quantity": "100",
+        "price": "1.8",
+        "sold_at": "2026-01-02 09:30:00+08:00",
+        "proceeds_available_at": "2026-01-06 10:00:00+08:00",
+        "receipt_id": "synthetic-sale-high"
+      },
+      "frozen_at": "2026-01-07 08:01:00+08:00",
+      "opening_at": "2026-01-07 09:30:00+08:00"
+    }
+  },
+  "test_known_action_inherited_cannot_be_omitted": {
+    "initial": {
+      "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+      "plan_hash": "8ce61c5ef6a1ddc73018a51fc4ef61985eb314420cc992ab2f83c0df7408b5a5",
+      "status": "await_sale",
+      "reason": "actual later proceeds required",
+      "ordering": [
+        [
+          "B",
+          "400.0"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "budgets": [],
+      "orders": [
+        {
+          "order_id": "e874ed366bdd9cc762a7f239437530cf39430e2aeec6c52bcf6b0e91f5fa1510",
+          "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+          "plan_hash": "8ce61c5ef6a1ddc73018a51fc4ef61985eb314420cc992ab2f83c0df7408b5a5",
+          "symbol": "A",
+          "side": "sell",
+          "quantity": "100",
+          "reference": "2",
+          "budget": "0",
+          "cap": null,
+          "frozen_at": "2026-01-02 08:00:00+08:00",
+          "opening_at": "2026-01-02 09:30:00+08:00"
+        }
+      ],
+      "unallocated": "200",
+      "current_cash": {
+        "name": "invented-allocatable-cash",
+        "source_id": "synthetic-current-cash",
+        "amount": "200",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "available_at": "2026-01-01 15:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "action_context": {
+        "name": "invented-covered-action-calendar",
+        "source_id": "synthetic-covered-actions",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-07 09:30:00+08:00",
+        "events": [
+          "2026-01-06 08:00:00+08:00"
+        ]
+      },
+      "funding_receipt": null,
+      "frozen_at": "2026-01-02 08:00:00+08:00",
+      "opening_at": "2026-01-02 09:30:00+08:00"
+    },
+    "later": {
+      "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+      "plan_hash": "44d27b1dac62d383376ca4a971b85f07baef48c939487acef4e9849a5379088c",
+      "status": "unsupported",
+      "reason": "unsupported_company_action_crossing",
+      "ordering": [
+        [
+          "B",
+          "400.0"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "budgets": [],
+      "orders": [],
+      "unallocated": "200",
+      "current_cash": {
+        "name": "invented-allocatable-cash",
+        "source_id": "synthetic-current-cash",
+        "amount": "200",
+        "known_at": "2026-01-06 10:00:00+08:00",
+        "available_at": "2026-01-06 10:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "action_context": {
+        "name": "invented-covered-action-calendar",
+        "source_id": "synthetic-covered-actions",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-07 09:30:00+08:00",
+        "events": [
+          "2026-01-06 08:00:00+08:00"
+        ]
+      },
+      "funding_receipt": {
+        "order_id": "e874ed366bdd9cc762a7f239437530cf39430e2aeec6c52bcf6b0e91f5fa1510",
+        "status": "filled",
+        "quantity": "100",
+        "price": "1.8",
+        "sold_at": "2026-01-02 09:30:00+08:00",
+        "proceeds_available_at": "2026-01-06 10:00:00+08:00",
+        "receipt_id": "synthetic-sale-high"
+      },
+      "frozen_at": "2026-01-07 08:00:00+08:00",
+      "opening_at": "2026-01-07 09:30:00+08:00"
+    },
+    "omission_override_refused": true
+  },
+  "test_missing_action_coverage_unknown_and_explicit_empty_valid": {
+    "short_coverage": {
+      "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+      "plan_hash": "849f5fd833c8e8c6a8a6665e29daddd1cdc517802262a21fbf4a78bec04da1f6",
+      "status": "unsupported",
+      "reason": "unsupported_action_coverage_unknown",
+      "ordering": [
+        [
+          "B",
+          "400.0"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "budgets": [],
+      "orders": [],
+      "unallocated": "200",
+      "current_cash": {
+        "name": "invented-allocatable-cash",
+        "source_id": "synthetic-current-cash",
+        "amount": "200",
+        "known_at": "2026-01-06 10:00:00+08:00",
+        "available_at": "2026-01-06 10:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "action_context": {
+        "name": "invented-covered-action-calendar",
+        "source_id": "synthetic-covered-actions",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-02 09:30:00+08:00",
+        "events": []
+      },
+      "funding_receipt": {
+        "order_id": "9978eb96a78f7071ab5d3a0a750842b909221c2e7ace4ca369d6d7f7495cdbd2",
+        "status": "filled",
+        "quantity": "100",
+        "price": "1.8",
+        "sold_at": "2026-01-02 09:30:00+08:00",
+        "proceeds_available_at": "2026-01-06 10:00:00+08:00",
+        "receipt_id": "synthetic-sale-high"
+      },
+      "frozen_at": "2026-01-07 08:00:00+08:00",
+      "opening_at": "2026-01-07 09:30:00+08:00"
+    },
+    "fully_covered_empty": {
+      "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+      "plan_hash": "1f20d1e36f129b035f5864a1a92e65dc40892042ac6c32ea2354292c79c20bf6",
+      "status": "ready",
+      "reason": "frozen budgets; residual not reallocated",
+      "ordering": [
+        [
+          "B",
+          "400.0"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "budgets": [
+        [
+          "B",
+          "374.8200"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "orders": [
+        {
+          "order_id": "fd105540a04e63354338e2eacb5d76120c395e42082b61ec5357778e4a838172",
+          "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+          "plan_hash": "1f20d1e36f129b035f5864a1a92e65dc40892042ac6c32ea2354292c79c20bf6",
+          "symbol": "B",
+          "side": "buy",
+          "quantity": "300",
+          "reference": "1",
+          "budget": "374.8200",
+          "cap": "1.231",
+          "frozen_at": "2026-01-07 08:00:00+08:00",
+          "opening_at": "2026-01-07 09:30:00+08:00"
+        }
+      ],
+      "unallocated": "0.0000",
+      "current_cash": {
+        "name": "invented-allocatable-cash",
+        "source_id": "synthetic-current-cash",
+        "amount": "200",
+        "known_at": "2026-01-06 10:00:00+08:00",
+        "available_at": "2026-01-06 10:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "action_context": {
+        "name": "invented-covered-action-calendar",
+        "source_id": "synthetic-covered-actions",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-07 09:30:00+08:00",
+        "events": []
+      },
+      "funding_receipt": {
+        "order_id": "d97d7a5e11097d9fb9f74a0d72dbbef05a1adf750df8d49554ccef85a24d3815",
+        "status": "filled",
+        "quantity": "100",
+        "price": "1.8",
+        "sold_at": "2026-01-02 09:30:00+08:00",
+        "proceeds_available_at": "2026-01-06 10:00:00+08:00",
+        "receipt_id": "synthetic-sale-high"
+      },
+      "frozen_at": "2026-01-07 08:00:00+08:00",
+      "opening_at": "2026-01-07 09:30:00+08:00"
+    }
+  },
+  "test_missing_future_or_wrong_receipt_cash_refused": {
+    "missing_cash_refused": true,
+    "future_cash_refused": true,
+    "wrong_inclusion_refused": true
+  },
+  "test_plan_identity_binds_cash_receipt_and_contents": {
+    "high": {
+      "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+      "plan_hash": "1f20d1e36f129b035f5864a1a92e65dc40892042ac6c32ea2354292c79c20bf6",
+      "status": "ready",
+      "reason": "frozen budgets; residual not reallocated",
+      "ordering": [
+        [
+          "B",
+          "400.0"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "budgets": [
+        [
+          "B",
+          "374.8200"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "orders": [
+        {
+          "order_id": "fd105540a04e63354338e2eacb5d76120c395e42082b61ec5357778e4a838172",
+          "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+          "plan_hash": "1f20d1e36f129b035f5864a1a92e65dc40892042ac6c32ea2354292c79c20bf6",
+          "symbol": "B",
+          "side": "buy",
+          "quantity": "300",
+          "reference": "1",
+          "budget": "374.8200",
+          "cap": "1.231",
+          "frozen_at": "2026-01-07 08:00:00+08:00",
+          "opening_at": "2026-01-07 09:30:00+08:00"
+        }
+      ],
+      "unallocated": "0.0000",
+      "current_cash": {
+        "name": "invented-allocatable-cash",
+        "source_id": "synthetic-current-cash",
+        "amount": "200",
+        "known_at": "2026-01-06 10:00:00+08:00",
+        "available_at": "2026-01-06 10:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "action_context": {
+        "name": "invented-covered-action-calendar",
+        "source_id": "synthetic-covered-actions",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-07 09:30:00+08:00",
+        "events": []
+      },
+      "funding_receipt": {
+        "order_id": "d97d7a5e11097d9fb9f74a0d72dbbef05a1adf750df8d49554ccef85a24d3815",
+        "status": "filled",
+        "quantity": "100",
+        "price": "1.8",
+        "sold_at": "2026-01-02 09:30:00+08:00",
+        "proceeds_available_at": "2026-01-06 10:00:00+08:00",
+        "receipt_id": "synthetic-sale-high"
+      },
+      "frozen_at": "2026-01-07 08:00:00+08:00",
+      "opening_at": "2026-01-07 09:30:00+08:00"
+    },
+    "low": {
+      "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+      "plan_hash": "bbda2b73a571688deb96b653f68d35844646271a5eede154fdde10e0841a883d",
+      "status": "ready",
+      "reason": "frozen budgets; residual not reallocated",
+      "ordering": [
+        [
+          "B",
+          "400.0"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "budgets": [
+        [
+          "B",
+          "244.9500"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "orders": [
+        {
+          "order_id": "14866f2cc8361cdcbe28117f598c346cfd733b3ac2ccd062a785a5e11803f0af",
+          "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+          "plan_hash": "bbda2b73a571688deb96b653f68d35844646271a5eede154fdde10e0841a883d",
+          "symbol": "B",
+          "side": "buy",
+          "quantity": "200",
+          "reference": "1",
+          "budget": "244.9500",
+          "cap": "1.198",
+          "frozen_at": "2026-01-07 08:00:00+08:00",
+          "opening_at": "2026-01-07 09:30:00+08:00"
+        }
+      ],
+      "unallocated": "0.0000",
+      "current_cash": {
+        "name": "invented-allocatable-cash",
+        "source_id": "synthetic-current-cash",
+        "amount": "200",
+        "known_at": "2026-01-06 10:00:00+08:00",
+        "available_at": "2026-01-06 10:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "action_context": {
+        "name": "invented-covered-action-calendar",
+        "source_id": "synthetic-covered-actions",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-07 09:30:00+08:00",
+        "events": []
+      },
+      "funding_receipt": {
+        "order_id": "d97d7a5e11097d9fb9f74a0d72dbbef05a1adf750df8d49554ccef85a24d3815",
+        "status": "filled",
+        "quantity": "100",
+        "price": "0.5",
+        "sold_at": "2026-01-02 09:30:00+08:00",
+        "proceeds_available_at": "2026-01-06 10:00:00+08:00",
+        "receipt_id": "synthetic-sale-low"
+      },
+      "frozen_at": "2026-01-07 08:00:00+08:00",
+      "opening_at": "2026-01-07 09:30:00+08:00"
+    },
+    "different_source": {
+      "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+      "plan_hash": "5274e5cfb5bf7012d46ea9ce59a970b05a58c40adaafb73bee19b1c12db42417",
+      "status": "ready",
+      "reason": "frozen budgets; residual not reallocated",
+      "ordering": [
+        [
+          "B",
+          "400.0"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "budgets": [
+        [
+          "B",
+          "374.8200"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "orders": [
+        {
+          "order_id": "612c9ccf584e1c3b2aa7aec8265d63fd1f7815752c97cceb303b104df3ee04d2",
+          "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+          "plan_hash": "5274e5cfb5bf7012d46ea9ce59a970b05a58c40adaafb73bee19b1c12db42417",
+          "symbol": "B",
+          "side": "buy",
+          "quantity": "300",
+          "reference": "1",
+          "budget": "374.8200",
+          "cap": "1.231",
+          "frozen_at": "2026-01-07 08:00:00+08:00",
+          "opening_at": "2026-01-07 09:30:00+08:00"
+        }
+      ],
+      "unallocated": "0.0000",
+      "current_cash": {
+        "name": "invented-allocatable-cash",
+        "source_id": "another-cash-source",
+        "amount": "200",
+        "known_at": "2026-01-06 10:00:00+08:00",
+        "available_at": "2026-01-06 10:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "action_context": {
+        "name": "invented-covered-action-calendar",
+        "source_id": "synthetic-covered-actions",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-07 09:30:00+08:00",
+        "events": []
+      },
+      "funding_receipt": {
+        "order_id": "d97d7a5e11097d9fb9f74a0d72dbbef05a1adf750df8d49554ccef85a24d3815",
+        "status": "filled",
+        "quantity": "100",
+        "price": "1.8",
+        "sold_at": "2026-01-02 09:30:00+08:00",
+        "proceeds_available_at": "2026-01-06 10:00:00+08:00",
+        "receipt_id": "synthetic-sale-high"
+      },
+      "frozen_at": "2026-01-07 08:00:00+08:00",
+      "opening_at": "2026-01-07 09:30:00+08:00"
+    }
+  },
+  "test_related_original_arithmetic_and_p0_snapshot": {
+    "p0": {
+      "decision_hash": "8990cc28ddbfab2fb817bd4fa9c156aaee5008380a435965fdde6d3b31f4d8fc",
+      "plan_hash": "0a4aa844c867d3890be3068611ab1a37f8a26849b00f7c7f1b071f13cc678b22",
+      "status": "ready",
+      "reason": "frozen budgets; residual not reallocated",
+      "ordering": [
+        [
+          "A",
+          "125.0"
+        ],
+        [
+          "B",
+          "125.0"
+        ]
+      ],
+      "budgets": [
+        [
+          "A",
+          "125.0"
+        ],
+        [
+          "B",
+          "125.0"
+        ]
+      ],
+      "orders": [
+        {
+          "order_id": "9283c3c1c4b3aee16e66c0457faaaceeabaafc620751c328778762a5728c87ca",
+          "decision_hash": "8990cc28ddbfab2fb817bd4fa9c156aaee5008380a435965fdde6d3b31f4d8fc",
+          "plan_hash": "0a4aa844c867d3890be3068611ab1a37f8a26849b00f7c7f1b071f13cc678b22",
+          "symbol": "A",
+          "side": "buy",
+          "quantity": "100",
+          "reference": "1",
+          "budget": "125.0",
+          "cap": "1.25",
+          "frozen_at": "2026-01-02 08:00:00+08:00",
+          "opening_at": "2026-01-02 09:30:00+08:00"
+        },
+        {
+          "order_id": "364162d6e53e50d800aa7a028aa6fe9b0bbc8e14bd16cbfea9d11426c398a0e3",
+          "decision_hash": "8990cc28ddbfab2fb817bd4fa9c156aaee5008380a435965fdde6d3b31f4d8fc",
+          "plan_hash": "0a4aa844c867d3890be3068611ab1a37f8a26849b00f7c7f1b071f13cc678b22",
+          "symbol": "B",
+          "side": "buy",
+          "quantity": "100",
+          "reference": "1",
+          "budget": "125.0",
+          "cap": "1.25",
+          "frozen_at": "2026-01-02 08:00:00+08:00",
+          "opening_at": "2026-01-02 09:30:00+08:00"
+        }
+      ],
+      "unallocated": "0.0",
+      "current_cash": {
+        "name": "invented-allocatable-cash",
+        "source_id": "synthetic-current-cash",
+        "amount": "250",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "available_at": "2026-01-01 15:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "action_context": {
+        "name": "invented-covered-action-calendar",
+        "source_id": "synthetic-covered-actions",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-07 09:30:00+08:00",
+        "events": []
+      },
+      "funding_receipt": null,
+      "frozen_at": "2026-01-02 08:00:00+08:00",
+      "opening_at": "2026-01-02 09:30:00+08:00"
+    },
+    "retained_exact_arithmetic": true
+  },
+  "test_related_same_open_unavailable_partial_and_pending_branch": {
+    "partial": {
+      "decision_hash": "141e10e1a40fd11c73ae66b75c66c044409071252be7545e8d4240fdff0076cd",
+      "plan_hash": "814582838c763562670c45ef6b138459da787b7c588320c7f358c80cce8ca4fd",
+      "status": "unsupported",
+      "reason": "failed_or_partial_sale_no_chase",
+      "ordering": [
+        [
+          "B",
+          "400.0"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "budgets": [],
+      "orders": [],
+      "unallocated": "200",
+      "current_cash": {
+        "name": "invented-allocatable-cash",
+        "source_id": "synthetic-current-cash",
+        "amount": "200",
+        "known_at": "2026-01-06 10:00:00+08:00",
+        "available_at": "2026-01-06 10:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "action_context": {
+        "name": "invented-covered-action-calendar",
+        "source_id": "synthetic-covered-actions",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-07 09:30:00+08:00",
+        "events": []
+      },
+      "funding_receipt": {
+        "order_id": "d97d7a5e11097d9fb9f74a0d72dbbef05a1adf750df8d49554ccef85a24d3815",
+        "status": "partial",
+        "quantity": "50",
+        "price": "1.8",
+        "sold_at": "2026-01-02 09:30:00+08:00",
+        "proceeds_available_at": "2026-01-06 10:00:00+08:00",
+        "receipt_id": "synthetic-sale-high"
+      },
+      "frozen_at": "2026-01-07 08:00:00+08:00",
+      "opening_at": "2026-01-07 09:30:00+08:00"
+    },
+    "pending_user": {
+      "decision_hash": "a857cc1f3db26eaa2b54617948ca07dcca09e279800205d6f9da52aee226ec8e",
+      "plan_hash": "21fd8d87dd299b281633813afcb835f05e3c73d5ee7935474fab152ea405274c",
+      "status": "unsupported",
+      "reason": "triggered_no_sellable_whole_lot_pending_user",
+      "ordering": [
+        [
+          "B",
+          "20.0"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "budgets": [],
+      "orders": [],
+      "unallocated": "0",
+      "current_cash": {
+        "name": "invented-allocatable-cash",
+        "source_id": "synthetic-current-cash",
+        "amount": "0",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "available_at": "2026-01-01 15:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "action_context": {
+        "name": "invented-covered-action-calendar",
+        "source_id": "synthetic-covered-actions",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-07 09:30:00+08:00",
+        "events": []
+      },
+      "funding_receipt": null,
+      "frozen_at": "2026-01-02 08:00:00+08:00",
+      "opening_at": "2026-01-02 09:30:00+08:00"
+    },
+    "same_open_refused": true
+  }
+}
