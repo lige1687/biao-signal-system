@@ -254,3 +254,13 @@
 - .codex/config.toml仅自身lei_system配置增加--allow-confirmed-records；默认服务仍只读，启用后每笔写入仍完整卡人工确认；既有factorhub表不改。原四自动化仅修改名字优先及配套可读报告流程，原ID/日程/目的地/通知偏好保留。
 - 用户已授权自行调整磁盘空间和利用外接盘。已将两项未启用隧道文件复制至外接盘，SHA/大小逐项核对后移除原副本，实测释放47747072字节；私人迁移回执留本仓cache，不移动活跃数据库/代码/持仓和生产依赖。
 - 验收沿用全流程至少多笔隔离演练、真实只读取数、名字/时点/确认/重复保护；原计划未知或来源资料不足不判安全，不制造胜率。
+
+
+## 无字幕视频内容接入 2026-10-08T16:01:48.917958+08:00
+
+- status: active；checked_coordination_sha: ccb0220123421f4eb0c70b2e91d195a47d2a5073；checked_at: 2026-10-08T16:01:48.917958+08:00；已读自身/中控新增范围、全任务新路径检索无冲突，COORDINATION1.1沿用。
+- 用户全落实范围继续：补无字幕视频实际正文。根已试yt-dlp（2026.08.19）对松哥9月30日视频未取得格式；匿名B站view/playurl成功取得3个audio格式，本机已有mlx_whisper与固定cached模型，无需新安装MCP/依赖或读取登录Cookie。只处理原配置5位作者且来源日期匹配上个交易日的视频，不读取用户私人视频。
+- 新精确代码范围：src/lei_signal/integrations/bilibili_content.py、tests/unit/test_bilibili_content.py，由原Sol/medium助手chat_transactions实现；root负责原briefing.py/brief_render.py/gpt_context.py/SKILL/文档/自动化集成及本机实际2条目标视频核验。原source/核心API/研究文件保持只读，不写生产新闻库。
+- 新缓存范围：data/cache/portfolio-chat-briefing/video-content；音频可在已授权外接盘目录保存并建立本仓专用链接，模型仍复用固定缓存，只读；公开音频不外上传、0付费模型。来源字幕/本机转写/仅标题分别注明；转写数值需听音或画面核对，不自动变交易条件。
+- 路径不接受工具客户端任意URL/SQL；音频仅view/playurl返回已核CDN，保存音频/转写hash、作者、发布时间、总时长和分段。沿用30分钟视频上限，不突破原抓取过滤。
+- 原接入99项相关检查通过；2时段真实名称版29/29，SDK确认写功能实往返、0真实测试成交/持仓改写。剩来源覆盖与音频集成按真实结果核，不冒称全部5位已读。
