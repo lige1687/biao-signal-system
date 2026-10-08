@@ -1,3 +1,13 @@
+## V9 full-start
+
+- task-id: trend-trading-video；2026-10-08T23:09:23.327394+08:00；checked_coordination_sha: cbc020ba556c75533b441b8946214d93ded8ac2d；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active；用户批准V10小样“可以啊，继续做吧”，授权完整60秒编年史。沿用已批视觉与开头15秒，补利弗莫尔/唐奇安/机械执行/海龟/2012研究与结尾。
+- 唯一范围新v11/与v10/stage-state.json、skill当前案例状态；不碰registry/INDEX和交易系统。基线38f21851bc301d45d31676087b9f3cf39d53f4c3，分支codex/trend-film-v11-20261008。读中控无重叠。
+- 复用V8已核史实与来源，不做新收益实验。实际1080导出/解码/关键帧/播放检查；声音沿用获批音乐与原创音效，无旁白无品牌。新产物外盘独立运行，不覆盖旧版。周额度起点48%，共享限额非单任务账单。
+
+
+---
+
 ## V9 motion-delivered
 
 - task-id: trend-trading-video；2026-10-08T23:06:34.011076+08:00；checked_coordination_sha: dff98bb70e8abb81b3c398a77f020d95278a802d；已读 COORDINATION.md、自身与 research-dispatch-controller。
