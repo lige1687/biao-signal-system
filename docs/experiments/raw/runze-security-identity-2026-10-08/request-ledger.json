@@ -1,0 +1,39 @@
+{
+  "previous_direct_operations": 30,
+  "operations": [
+    {
+      "id": 1,
+      "kind": "discovery_search",
+      "query": "润泽科技 300442 300114 302132 2025 2月17 证券代码 公告",
+      "result": "Wrong guessed company name; results are300442 not the target. Rejected without fetching. No factual reliance."
+    },
+    {
+      "id": 2,
+      "kind": "discovery_search",
+      "query": "300114 302132 2025 变更",
+      "result": "Issuer code-change disclosure located; actual issuer中航成飞, formerly中航电测."
+    },
+    {
+      "id": 3,
+      "kind": "source_fetch",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-02-15/1222544408.PDF",
+      "status": 200,
+      "at": "2026-10-08T12:44:18.887888+08:00",
+      "bytes": 370156
+    }
+  ],
+  "raw_response_bytes": 370156,
+  "failures": [
+    {
+      "type": "incorrect_unverified_entity_guess",
+      "effect": "First search and draft directory name usedrunze. Target security codes never changed; actual facts use only exact-code issuer document. Existingraw directory retained to avoid moving evidence; report title and facts corrected.",
+      "source_budget_effect": "One failed discovery operation retained"
+    },
+    {
+      "type": "pdf_renderer_fontconfig_warning",
+      "message": "Cannot load default config file: File not found",
+      "result": "exit0; firstpage PNG visually inspected and actual header2025-028 confirmed; web indexed title2011-007 rejected."
+    }
+  ],
+  "closed_prior_batches": "unchanged"
+}
