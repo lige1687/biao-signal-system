@@ -123,3 +123,8 @@ Alphalens结案补记：中控明确1条窗口后，fetch核98753df888943e37aa17
 合同限定的39件逐文件内容/大小/SHA核过，全部安全原字节复制，总110834字节；原有状态保留。新增39件后缺件集合精确75减39等于36，符合合同剩余只读集合。未改定义、案例、源码或测试；未重跑任何科学计算或市场测试。仍不宣称准备入口完整可用。详见发布manifest新阶段及dependency-check；待本次Git推送后逐字读回。
 
 本次准确成果60934d6dbd39f233f01f12730bd27997d6474556已正常推送及fetch读回：39原件和4个元数据共43件逐字一致，Git对象缺件重新核算36；原定义、源码、测试、registry/INDEX与前成果逐字相同。回执补存后再同步，准备入口缺件未解除。
+
+
+## 剩余36来源索引完成
+
+36原文件均在本地且准确SHA/大小与合同相符；七相关现有Gitref与准确路径的有限历史没有同字节已发布原件。分类：{'source_audit_publication_scope_missing': 3, 'local_computed_metadata_owner_clearance': 22, 'local_method_candidate_owner_scope_confirmation': 9, 'source_redistribution_evidence_missing': 2}。9份自有协议/方法决定可优先交原technical-factor-sequence负责人核安全发布范围，其余22份真实计算元数据、3份来源审核及2份逐观察资料分别有精确接续；6件已在原已发布manifest明确local only。0源复制/0测试/0科学运行；未把元数据默认为有传播许可，完整准备仍36缺件。只交remaining36-provenance.json索引，原件不上传。
