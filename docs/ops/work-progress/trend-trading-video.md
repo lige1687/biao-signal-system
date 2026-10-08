@@ -29,3 +29,7 @@ V14导出与完整播放已完成：240秒、1080p、30fps，检查0失败；13�
 ## 2026-10-09 V14恢复归档完成
 
 01:22固定外盘恢复，成片SHA一致；原归档持久化核验通过，补自然旁白草稿，全部17份归档小文件核SHA，现代研究章节恢复播放。V14交付ready、审美待用户、未发布，旁白候选稿未录音。准确路径及证据archive-write-receipt.json、validation.json；开工协调final-archive-start.json。无新媒体生成或迁移。
+
+## 2026-10-09 两篇文章与Skill前置流程复查
+
+task-id trend-trading-video，基线2f7bc4683f74237d19fde484ce665ac975d08a3f，成果分支沿用codex/trend-history-long-v14-20261009；开工协调workflow-review-start.json（远端读回成功）。重新读两篇转载、作者实际Skill与两处候选例库；X原帖403如实记录。已补最小输入、文稿与镜头交接、声音分支、索引和分镜模板，以及只读缺件检查。10项结构/失效检查均符合预期；V14内容齐全，独立分镜表尚缺，有声自动化未接入。旧成片不重做。报告xilo-learning/workflow-review-20261009.md，核验workflow-check-results.json。此次只交付文档工作流和检查器，不宣称全链路已自动运行。

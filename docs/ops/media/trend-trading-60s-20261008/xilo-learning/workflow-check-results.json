@@ -1,0 +1,119 @@
+{
+  "synthetic_cases_do_not_validate_real_audio": true,
+  "checks": [
+    {
+      "case": "existing-v14-content",
+      "expected_observed": true,
+      "result": {
+        "ready": true,
+        "stage": "content",
+        "missing_or_invalid": [],
+        "limits": "只核文件与声明；不代表内容正确、审美通过、真实批准或磁盘安全。"
+      }
+    },
+    {
+      "case": "existing-v14-sample",
+      "expected_observed": true,
+      "result": {
+        "ready": false,
+        "stage": "sample",
+        "missing_or_invalid": [
+          "storyboard：缺文件位置"
+        ],
+        "limits": "只核文件与声明；不代表内容正确、审美通过、真实批准或磁盘安全。"
+      }
+    },
+    {
+      "case": "existing-v14-full",
+      "expected_observed": true,
+      "result": {
+        "ready": false,
+        "stage": "full",
+        "missing_or_invalid": [
+          "storyboard：缺文件位置"
+        ],
+        "limits": "只核文件与声明；不代表内容正确、审美通过、真实批准或磁盘安全。"
+      }
+    },
+    {
+      "case": "no-voice-does-not-require-audio",
+      "expected_observed": true,
+      "result": {
+        "ready": true,
+        "stage": "full",
+        "missing_or_invalid": [],
+        "limits": "只核文件与声明；不代表内容正确、审美通过、真实批准或磁盘安全。"
+      }
+    },
+    {
+      "case": "missing-sample-approval",
+      "expected_observed": true,
+      "result": {
+        "ready": false,
+        "stage": "full",
+        "missing_or_invalid": [
+          "sample_approval：缺文件位置"
+        ],
+        "limits": "只核文件与声明；不代表内容正确、审美通过、真实批准或磁盘安全。"
+      }
+    },
+    {
+      "case": "real-pauses-are-allowed",
+      "expected_observed": true,
+      "result": {
+        "ready": true,
+        "stage": "full",
+        "missing_or_invalid": [],
+        "limits": "只核文件与声明；不代表内容正确、审美通过、真实批准或磁盘安全。"
+      }
+    },
+    {
+      "case": "overlap-is-rejected",
+      "expected_observed": true,
+      "result": {
+        "ready": false,
+        "stage": "full",
+        "missing_or_invalid": [
+          "声音时间轴：时间段重叠、倒序或超过配音长度"
+        ],
+        "limits": "只核文件与声明；不代表内容正确、审美通过、真实批准或磁盘安全。"
+      }
+    },
+    {
+      "case": "changed-script-requires-alignment",
+      "expected_observed": true,
+      "result": {
+        "ready": false,
+        "stage": "full",
+        "missing_or_invalid": [
+          "script_sha256：与当前文件不符，需重新对齐"
+        ],
+        "limits": "只核文件与声明；不代表内容正确、审美通过、真实批准或磁盘安全。"
+      }
+    },
+    {
+      "case": "unchecked-alignment-is-rejected",
+      "expected_observed": true,
+      "result": {
+        "ready": false,
+        "stage": "full",
+        "missing_or_invalid": [
+          "音文对应尚未人工核对"
+        ],
+        "limits": "只核文件与声明；不代表内容正确、审美通过、真实批准或磁盘安全。"
+      }
+    },
+    {
+      "case": "beyond-audio-is-rejected",
+      "expected_observed": true,
+      "result": {
+        "ready": false,
+        "stage": "full",
+        "missing_or_invalid": [
+          "声音时间轴：时间段重叠、倒序或超过配音长度"
+        ],
+        "limits": "只核文件与声明；不代表内容正确、审美通过、真实批准或磁盘安全。"
+      }
+    }
+  ]
+}
