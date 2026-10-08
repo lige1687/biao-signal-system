@@ -1,3 +1,17 @@
+# 指定参考视觉版交付（最新）
+
+- task-id: trend-trading-video；owner: 本对话root；状态completed（本轮视觉仿制与prompt交付；专业配音尚未接入）；时间2026-10-08T16:50:26.522087+08:00
+- checked_coordination_sha: a15c3e3214f2ded3109a2150cc66927899f62b3b；已读task-id: trend-trading-video、research-dispatch-controller；无路径冲突。
+- 输出: docs/ops/media/trend-trading-60s-20261008/v3/trend-trading-v3.mp4；60秒1920×1080@30；SHA256 b76f6a9ca1da9ce90809e8a1bd203992706ffc9cd535c28ba7af04f18e1df1a1。
+- 文档: v3/prompt-and-tools.md包括反推导演prompt、配音指令、实际工具、原作者工具未知边界；验证见validation.json和contactsheet.jpg。
+- 验证: 1800帧完整解码通过；浏览器播放readyState4、paused=false、无error；8张实际导出帧已看；归置通过。skill probe因ffprobe缺失失败，记录并改用FFmpeg与浏览器验证，不称其检查全过。
+- 语音限制: 原第二版音轨占位，未解决用户对自然度的不满；本轮未获专业TTS可用入口或付费授权。没有假称获取原片声音或完整工具链。
+- 额度: 28%→28%显示不变，全账号整数读数，不代表零消耗。无付费调用。
+- 提交: 媒体与源文件仅本地；只同步本协调记录，远端不含媒体。既有两版未覆盖。
+- 下一动作: 用户观看参考风格版；若确认画面方向，接入可用的专业语音或用户提供配音后再替换；原作者prompt/配音软件仍未知。
+
+---
+
 # 指定参考风格第三版（最新）
 
 - task-id: trend-trading-video；owner: 本对话root；状态active；时间2026-10-08T16:45:04.419286+08:00
