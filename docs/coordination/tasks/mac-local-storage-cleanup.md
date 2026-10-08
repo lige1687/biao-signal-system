@@ -152,3 +152,8 @@
 - 工作成果e34f3fda83935e51204e6216c503fa8965ac3b80单一自身进度路径正常push/fetch逐字核；私有回执外盘第八批232605/第九批232931，小文件与指纹留存，原件/私人正文/DB未Git。归置通过，不动共享index/HEAD/main。
 - 当前实测内盘9087287296B，外盘639830327296B，UUID正常4资源available；其他活动写入会改变余量。
 - 新增候选核到边界：gstack1.20GiB主要当前依赖/可执行bundle且4本地修改，Zcode为DB/checkpoints，WorkBuddy为会话/执行环境，旧量化项目Git未提交工作/近期更新/数据库，原位保留；不是“全部存储问题解决”。没有仍待删除原件/后台清理，未来新增候选先核依赖及准确授权，不自动清会话/环境或通知。
+
+## 新五准确退休程序包迁移 2026-10-08T23:49:02.601647+08:00
+- status: active；checked_coordination_sha: 3cd71ec066078435107b0ef20cf09d04a4f9da6b；checked_at: 2026-10-08T23:49:02.601647+08:00；已读COORDINATION1.1、自身、中控原八目标限缩、video v12独立媒体范围，保留他人源/环境，无重叠。
+- 用户当次可以继续检查哈；沿用闲置可恢复对象继续迁移及外盘保留授权，不扩大到用户资料/活动资源。五准确目标：~/.tabnine/4.4.321、4.4.322、4.5.28（三旧版本；.active实际4.10.0、新版保留，无相关进程/句柄）；~/Library/Application Support/Caches/quark-cloud-drive-updater/pending、adrive-desktop-updater/pending（两普通ZIP和各update-info，实际sha512匹配，应用bundle ID在/Applications/~/Applications与mdfind均无，无句柄）。只软件包，无源码/DB/用户唯一记录。
+- 准确源inode绑定，外盘第十批独立ZIP/完整SHA模式元数据/源稳定/无句柄后移除本机。当前Tabnine/.active及其他cache/config留。峰值按两份未压缩+元数据预算且外盘10GiB余量，停止错盘/源改变。新私有回执/自身进度/本记录唯一写者，0科研/新工具安装/运行进程更改。
