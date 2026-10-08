@@ -17,3 +17,7 @@ V14导出与完整播放已完成：240秒、1080p、30fps，检查0失败；13�
 ## 2026-10-09 视频分层归档要求
 
 用户要求所有产出媒体写外盘、每片配定位描述和文稿。已更新code-explainer-video入口与storage-and-packaging参考，V14/package已准备6份小文件、archive-plan.json记录拟写位置。外盘00:51实查仍不可用，未创建外盘目录、未迁移旧片；落盘及V14交付仍受阻。开工协调archive-start.json，成果分支沿用V14。
+
+## 2026-10-09 恢复后再次断盘
+
+01:06固定盘恢复，成片SHA与52秒章节定位通过；6份配套文档、制作记录与视频库索引已写外盘并保留回执。01:09设备再次消失，diskutil无外置物理设备且UUID查不到；当前交付读取仍blocked。下一步需稳定连接原盘后只核归档持久化与播放，不重做视频。精确证据v14/archive-write-receipt.json与validation.json，开工协调reconnect-start.json。
