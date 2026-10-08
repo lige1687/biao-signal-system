@@ -1,3 +1,13 @@
+## V9 plain-narration-start
+
+- task-id: trend-trading-video；2026-10-09T01:18:29.959205+08:00；checked_coordination_sha: 1f15870494dab179cfd09d2caeb2df6fd5b29f00；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active文案增量：用户明确要求旁白去掉像AI的话和说明，采用说人话处理；使用humanizer-zh，保持史实不变。只改视频Skill及references/natural-narration.md、新v14/narration/旁白草稿与说明、自有work-progress；不改变旧成片/准确屏幕稿，不生成语音或新片。
+- 基线c537e971cbd56dd38ec665018f893e05b2873837；分支沿用codex/trend-history-long-v14-20261009。自身与中控已读，无重叠，唯一写者本视频任务。验收新稿只讲内容、不读制作/来源备注、不过度免责、不新增史实/盈利承诺；保存用户长期要求。
+- 外盘01:18实查未挂载，新旁白草稿仅存本机小文字，待外盘恢复归档；不冒称旁白已录制或已经入片。当前V14仍无旁白，已有成片不重渲染。
+
+
+---
+
 ## V9 reconnect-blocked
 
 - task-id: trend-trading-video；2026-10-09T01:11:56.181608+08:00；checked_coordination_sha: 7d96c729abb89810d39dab90f02ee96600122f66；已读 COORDINATION.md、自身与 research-dispatch-controller。
