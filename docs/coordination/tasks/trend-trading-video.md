@@ -1,3 +1,13 @@
+## V9 archive-start
+
+- task-id: trend-trading-video；2026-10-09T00:51:39.365440+08:00；checked_coordination_sha: a746321de62d1f6dde4d8654d557151db1fc829d；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active：用户新增“产生的视频都搞到外部磁盘，创建合适目录层级，每个视频对应描述文件、文稿、定位”。本轮使用code-explainer-video与skill-creator，范围仅Skill入口及新references/storage-and-packaging.md、v14/package/小文档、v14/archive-plan.json、自有work-progress；不生成新大媒体，不搬移或删除旧片。
+- 基线d2a3354f20474dbd1c3ec3dd5e957e35f1b21fdf；沿用codex/trend-history-long-v14-20261009。自身与research-dispatch-controller已读，无重叠，本任务唯一写者。新目标是明确归档结构并补齐当前片定位/描述/分时文稿/清单；本机只有少量源码与待落盘小文字。
+- storage实查2026-10-09 00:51 +08:00固定外盘仍未挂载，内盘低于5GiB；停止新增媒体/外盘创建，允许保存本机小恢复记录和文稿。不把计划目录声称已创建。接盘后核设备，建立视频库索引及归档包；旧成片原路径保留，不能为分类破坏已绑定路径。V14文件交付仍blocked。
+
+
+---
+
 ## V9 v14-blocked
 
 - task-id: trend-trading-video；2026-10-09T00:50:09.648223+08:00；checked_coordination_sha: 89a2605cabdb380e19659215d8a664b6105184cf；已读 COORDINATION.md、自身与 research-dispatch-controller。
