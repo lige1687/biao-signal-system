@@ -122,3 +122,7 @@
 - 验收：固定UUID/容量、准确inode与87文件内容、ZIP权限元数据、源稳定/无句柄、外盘恢复、实际释放测量；无实验改动。基线成果80d51cba8f7dee3216fb89a0f0cea507b57f590a。
 
 - 首次登记非快进拒绝，已读中控23:11新增收尾记录，无本任务范围冲突；保留其他记录后仅重建自身增量。
+
+## 学业完成与准确旧扩展范围 2026-10-08T23:17:52.041295+08:00
+- checked_coordination_sha: c2c48fb483eb98ad1285171aad62befea44d5254；已读本任务与新增差异，无重叠。学业3目录87文件内容/元数据/源稳定/无句柄核后已移除，本轮实测125255680B净增，恢复第六批231546。
+- 新批准安全缓存动作范围仅 ~/.cursor/extensions/ 下四个精确旧版本：anysphere.remote-containers-1.0.37、vue.volar-3.3.8-universal、yzane.markdown-pdf-2.1.0-universal、vscjava.vscode-java-test-0.45.0-universal；.obsolete=true，extensions.json各项均登记新版本，旧四项lsof无句柄。沿用用户闲置可恢复清理授权；外盘第七批独立归档，当前版本/配置/项目不动。
