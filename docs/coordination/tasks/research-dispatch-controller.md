@@ -1,9 +1,9 @@
 # LEI 八目标｜本对话直接执行
 
-- 更新2026-10-08T15:06:54.484907+08:00；checked_coordination_sha=6846a3c3c7f1b8a8c702c4909ccfef8793319b93。
-- 本轮登记两个互不依赖的本地研究单元：固定成交的共同现金需求；2026上半年沪深日历与已存正式公告对照。登记不等于运行，远端读回后执行。
-- 原九项成果与失败保持；不下载、不重跑策略、不计算D—MAE真实结果、不使用或修改真实账户。
-- 共享registry/INDEX暂由root串行登记；准确范围与验收见下方机器记录。
+- 更新2026-10-08T15:23:35.308714+08:00；checked_coordination_sha=eb8236dc2d55586b74014828bd55d4f2676e46ba，与原登记以来范围无变化。
+- 两项本地计算及独立复算已完成；上次因Errno28未能保存核验与归档，本次恢复归档。没有真实研究进程运行，不重跑主计算。
+- 固定成交现金需求：A_ALL约41.21万至49.90万元，A_SMA约39.904万至39.907万元；2026上半年日历181日一致。仅条件研究，不构成实盘建议或完整历史日历合格。
+- 准确路径范围保持，仅root写两份报告及其raw、共享registry/INDEX，其他负责人文件不变。此前九份成果、失败与预算保持；两项新成果尚未推送。
 
 ## 当前直接执行规则
 
@@ -133,8 +133,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "6846a3c3c7f1b8a8c702c4909ccfef8793319b93",
-  "checked_at": "2026-10-08T15:06:54.484907+08:00",
+  "checked_coordination_sha": "eb8236dc2d55586b74014828bd55d4f2676e46ba",
+  "checked_at": "2026-10-08T15:23:35.308714+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -564,7 +564,7 @@
   "current_execution_mode": "root_direct_no_delegation",
   "direct_execution_unit": {
     "id": "cash-and-calendar-local-parallel-20261008",
-    "state": "scope_registered_not_started",
+    "state": "computed_verified_archival_resuming",
     "question": "Fixed saved quantities: minimum cash to fund all original fills under sell-first/buy-first within-day bounds; independently compare existing SSE2026 notice against saved SZSE daily flags January-June2026.",
     "original_authority": "Original eight goals1/3 calendar correctness and goal5 shared-capital feasibility; latest user continue and parallel, root-only execution remains.",
     "write_paths": [
@@ -575,8 +575,8 @@
       "docs/experiments/registry.json",
       "docs/experiments/INDEX.md"
     ],
-    "checked_coordination_sha": "6846a3c3c7f1b8a8c702c4909ccfef8793319b93",
-    "checked_at": "2026-10-08T15:06:54.484907+08:00",
+    "checked_coordination_sha": "eb8236dc2d55586b74014828bd55d4f2676e46ba",
+    "checked_at": "2026-10-08T15:23:35.308714+08:00",
     "read_task_ids": [
       "research-dispatch-controller",
       "theory-workflow-system-increment",
@@ -604,7 +604,8 @@
       "181 dates compared to independently parsed official notice and explicit weekends; no extrapolation beyond2026H1 or claim no amendments/full historical SSE qualification.",
       "Two reports registered, hygiene checked, exact published files read back; no frozen evidence edits."
     ],
-    "stop": "Each fixed question answered or actual input/hash/space failure; no strategy rerun, new capital allocation, old source retry or production rule changes."
+    "stop": "Each fixed question answered or actual input/hash/space failure; no strategy rerun, new capital allocation, old source retry or production rule changes.",
+    "prior_failure": "Errno28 blocked receipt/report/registry writes; main results persisted, independently recalculated via no-temp Python invocation. Recovery receipt preserved in automation prompt."
   },
   "controller_owner": "01a116c7-3700-7062-a6c6-53af00ef60a0",
   "direct_execution_completed_units": [
@@ -1126,7 +1127,7 @@
   },
   "shared_registration_scope_released": false,
   "direct_next_actions": [
-    "Execute cash and calendar independent calculations concurrently after remote scope readback; verify results then register serially."
+    "Archive the two existing verified results without rerunning main calculations; publish exact paths and read back remote."
   ],
   "read_task_ids": [
     "research-dispatch-controller",
@@ -1140,7 +1141,7 @@
     "mode": "root_direct_no_delegation",
     "current_unit": {
       "id": "cash-and-calendar-local-parallel-20261008",
-      "state": "scope_registered_not_started",
+      "state": "computed_verified_archival_resuming",
       "question": "Fixed saved quantities: minimum cash to fund all original fills under sell-first/buy-first within-day bounds; independently compare existing SSE2026 notice against saved SZSE daily flags January-June2026.",
       "original_authority": "Original eight goals1/3 calendar correctness and goal5 shared-capital feasibility; latest user continue and parallel, root-only execution remains.",
       "write_paths": [
@@ -1151,8 +1152,8 @@
         "docs/experiments/registry.json",
         "docs/experiments/INDEX.md"
       ],
-      "checked_coordination_sha": "6846a3c3c7f1b8a8c702c4909ccfef8793319b93",
-      "checked_at": "2026-10-08T15:06:54.484907+08:00",
+      "checked_coordination_sha": "eb8236dc2d55586b74014828bd55d4f2676e46ba",
+      "checked_at": "2026-10-08T15:23:35.308714+08:00",
       "read_task_ids": [
         "research-dispatch-controller",
         "theory-workflow-system-increment",
@@ -1180,7 +1181,8 @@
         "181 dates compared to independently parsed official notice and explicit weekends; no extrapolation beyond2026H1 or claim no amendments/full historical SSE qualification.",
         "Two reports registered, hygiene checked, exact published files read back; no frozen evidence edits."
       ],
-      "stop": "Each fixed question answered or actual input/hash/space failure; no strategy rerun, new capital allocation, old source retry or production rule changes."
+      "stop": "Each fixed question answered or actual input/hash/space failure; no strategy rerun, new capital allocation, old source retry or production rule changes.",
+      "prior_failure": "Errno28 blocked receipt/report/registry writes; main results persisted, independently recalculated via no-temp Python invocation. Recovery receipt preserved in automation prompt."
     },
     "completed_reports": 9,
     "current_unit_running": false,
@@ -1268,7 +1270,7 @@
       "next_required_decision_boundary": "Full dated historical member source/coverage; original price scale and actual consumer; exact6D-MAE originals and staged grants; exactQlib receipt. Do not repeatedly request unchanged missing inputs."
     },
     "next_actions": [
-      "Execute cash and calendar independent calculations concurrently after remote scope readback; verify results then register serially."
+      "Archive the two existing verified results without rerunning main calculations; publish exact paths and read back remote."
     ],
     "latest_commit": "4307e20771f503386ea5987fdc037a716b57684e",
     "completed_units": [
