@@ -3,12 +3,12 @@
 ## 当前接入阶段
 
 - task-id: daily-trading-system-audit；owner: 本机Codex /root，thread-id=01a11721-303e-7c83-9451-c82078c9ba23，唯一协调写者
-- status: active；updated_at: 2026-10-08T12:55:56.486223+08:00；checked_coordination_sha: e3e47d781d5abe47f7e7bd60c9d60d4eb8705763
+- status: blocked；updated_at: 2026-10-08T12:57:32.393759+08:00；checked_coordination_sha: 2fe3ca05df4b7e0234a62815a71ffaa19797849e
 - 当前目标: 完成系统接入GPT，不能以配置/本机测试称手机网页已调用。不重开原审查或他人研究。
 - 当前成果: 独立分支codex/gpt-system-integration-20261008@5be2684e7612c1a7fe90ea1854d3d899cabfccaf已普通推且39个自身文件逐字读回；源码/流程/安全证据可接续。原HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9及脏区不切换。
 - 已验收: 10只读工具真实本机MCP取数；stdio/loopback HTTP；项目Codex配置读回但当前会话未动态发现工具，CLI立即可用；48项相关检查、Ruff/技能/归置通过。总览目标默认10项可按文字查，实测169571→13211字节，日期/状态计数/截短明确。
 - 已交付: 09:10检查和11:35午间任务实际运行，午间final消息已核。14:40、手机送达和真实计划条件触发未发生验收，不称连续盯盘。
-- 必需依赖: ChatGPT浏览器仍登录页，用户需恢复登录，随后核账户入口与具体连接权限并真实工具取数；只影响账户侧。原计划/同产品技术缺项不补造，不把原话自动确认。总体active，本轮未达到goal blocked三次阈值。
+- 必需依赖: ChatGPT浏览器仍登录页，用户需恢复登录，随后核账户入口与具体连接权限并真实工具取数；只影响账户侧。原计划/同产品技术缺项不补造，不把原话自动确认。相同账户登录依赖连续三次接续仍未解除，本阶段阻塞；goal工具状态待本轮实际更新读回。
 - 本机私有材料: data/cache/gpt-system-integration、portfolio-chat-briefing；不入Git。当前恢复点required-input-state.json，源代码及安全回执见成果分支，本机API/资料/依赖需分别移交。
 
 ## 原系统审查及接续历史
@@ -173,3 +173,12 @@
 - 窄范围独立审阅未发现现有十只读工具必须补做的实现，源码仍5be2684e7612c1a7fe90ea1854d3d899cabfccaf；未重跑已通过检查、未新增交易/持仓/计划记录，未将只读MCP称自然语言写入接口。
 - 本轮没有新增进展，不是运行中任务等待；必需输入及真实调用/手机送达/已确认条件验收仍缺。相同末端阻塞累计2次goal接续，goal保持active，未达3次blocked阈值。私有恢复点required-input-state.json及goal-continuation-audit-2.json均本机cache，不上传私人资料。
 - 恢复条件：用户完成已打开ChatGPT页面的登录，随后核账户入口及具体连接授权；不外露本机服务或读取登录凭证绕过依赖。
+
+
+## 账户接入阻塞审计
+
+- checked_coordination_sha: 2fe3ca05df4b7e0234a62815a71ffaa19797849e；checked_at: 2026-10-08T12:57:32.393759+08:00；已读COORDINATION1.1、自身及research-dispatch-controller，较上轮无新增他人范围；仅自身记录，唯一写者/root。
+- 前轮及本轮均无进展，不是已核活任务的等待。本轮真实AX仍为ChatGPT登录页（原登录请求未回复），当前可调用工具目录lei_system数0；不把本机标准客户端成功当手机/网页已连接。
+- 相同账户依赖已连续3次goal接续，阻塞审计满足阈值；task当前blocked，goal工具待实际状态读回，不标完成。已有源码5be2684e7612c1a7fe90ea1854d3d899cabfccaf及48项有效检查复用，不重跑或改小验收范围。
+- 本轮无源代码、研究、交易/计划/持仓/生产库修改，不关闭或改已有定时任务；独立窄审未发现未执行的本机必要实现。手机真实调用、手机送达和真实已确认条件监督尚未验收，不能称完整接入。
+- 恢复条件：用户在保留的ChatGPT登录页完成登录并回复，随后核账户支持入口、必要连接授权及实际工具取数；无需重做已通过检查或重开其他研究。私有接续证据goal-continuation-audit-3.json与required-input-state.json在本仓cache，未上传。
