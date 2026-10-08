@@ -3,7 +3,7 @@
 ## 当前接入阶段
 
 - task-id: daily-trading-system-audit；owner: 本机Codex /root，thread-id=01a11721-303e-7c83-9451-c82078c9ba23，唯一协调写者
-- status: active；updated_at: 2026-10-08T12:48:04.067110+08:00；checked_coordination_sha: 61852a386b0c0a34af98347ef1a4924e036a38de
+- status: active；updated_at: 2026-10-08T12:55:56.486223+08:00；checked_coordination_sha: e3e47d781d5abe47f7e7bd60c9d60d4eb8705763
 - 当前目标: 完成系统接入GPT，不能以配置/本机测试称手机网页已调用。不重开原审查或他人研究。
 - 当前成果: 独立分支codex/gpt-system-integration-20261008@5be2684e7612c1a7fe90ea1854d3d899cabfccaf已普通推且39个自身文件逐字读回；源码/流程/安全证据可接续。原HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9及脏区不切换。
 - 已验收: 10只读工具真实本机MCP取数；stdio/loopback HTTP；项目Codex配置读回但当前会话未动态发现工具，CLI立即可用；48项相关检查、Ruff/技能/归置通过。总览目标默认10项可按文字查，实测169571→13211字节，日期/状态计数/截短明确。
@@ -164,3 +164,12 @@
 - 云端替代入口只读核查：已有ChatGPT Pages工具find_pages(LeiSignal)请求成功、0返回、next_cursor=null、partial_results=false；边界是有界搜索，不证明无页面，也不等于本机实时连接。本轮未创建/编辑Page、未上传持仓。浏览器会话过期和已有Pages连接可用是不同事实。
 - 账户登录请求仍pending。本批其他必要实现/验收/发布已执行，恢复条件是用户在已打开页面完成登录；之后检验Remote或自定义MCP实际可用路径、需动作时确认具体权限、私有连接、真实调用返回与源数据比对。不调用未知账户/新接口或公开本机端口绕过该条件。
 - 真实交易/持仓/计划/目标台账写入0，新闻/基本面只背景；没有完整计划不判断止损/安全，没有平台确认不称成交。总体goal active未完成，仅等必需输入的部分等待；不恢复他人研究或403。
+
+
+## 接入目标第二次接续核查
+
+- checked_coordination_sha: e3e47d781d5abe47f7e7bd60c9d60d4eb8705763；checked_at: 2026-10-08T12:55:56.486223+08:00；已读COORDINATION1.1、自身和research-dispatch-controller最新六个分红资料范围；不交叉集成源码，唯一写者仍/root。
+- 本轮实际复核：ChatGPT仍登录页，原登录请求待用户回复；当前可调用工具目录未出现lei_system，保留标准本机客户端成功证据但不称本聊天动态加载。013403计划接口可用、关联计划0，来源生成时间2026-10-08T12:51:55.759745+08:00。
+- 窄范围独立审阅未发现现有十只读工具必须补做的实现，源码仍5be2684e7612c1a7fe90ea1854d3d899cabfccaf；未重跑已通过检查、未新增交易/持仓/计划记录，未将只读MCP称自然语言写入接口。
+- 本轮没有新增进展，不是运行中任务等待；必需输入及真实调用/手机送达/已确认条件验收仍缺。相同末端阻塞累计2次goal接续，goal保持active，未达3次blocked阈值。私有恢复点required-input-state.json及goal-continuation-audit-2.json均本机cache，不上传私人资料。
+- 恢复条件：用户完成已打开ChatGPT页面的登录，随后核账户入口及具体连接授权；不外露本机服务或读取登录凭证绕过依赖。
