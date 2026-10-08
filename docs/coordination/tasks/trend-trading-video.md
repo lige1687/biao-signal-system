@@ -1,3 +1,17 @@
+# 教程学习与可复用视频skill（最新）
+
+- task-id trend-trading-video；owner本对话root；active；2026-10-08T20:08:16.349231+08:00
+- checked_coordination_sha: 62df134063b2b86c0b869531da0b8de8b819ee17；已读COORDINATION.md、trend-trading-video、research-dispatch-controller及共享登记窗口摘要；中控明确不抢视频路径。共享登记仅本报告单项与一行，先检查读回，不覆盖旧条目。
+- 用户授权：学习7692352215482240296视频，多看相关教学视频，可以沉淀为skill；延续无旁白，聚焦画面、剪辑、音效。
+- 目标：拆解三条教程的可核实流程，区分作者声明、实际画面与推测；制作10秒原创方法小样；项目级code-explainer-video skill经格式及实际小样验证。
+- 范围：.agents/skills/code-explainer-video/；docs/experiments/code-explainer-video-2026-10-08.md及raw/code-explainer-video-2026-10-08/；docs/experiments/registry.json自身单项、INDEX.md自身一行；媒体目录tutorial-study/预览；补完v5/原缺失验收与额度记录；本协调记录。
+- 原片及缓存只读，既有版本保留，不改策略、系统计算或仓外配置，不购买或新增声音服务。媒体不推送，skill与报告可独立成果分支保存。
+- 预算：复用既有工具/依赖/小模型；本轮问题最多6次来源请求含失败，至少三条教程证据；1个核心10秒小样及最多必要修正，不为追求观感无限重跑。
+- 已检查：周额度起始38%；可用磁盘约1GiB。MCP ASR依赖缺失，改无ASR取得元数据/31顶层评论/本地视频；未配置vision，不能把空分析称已观看。优先复用v4本地MLX转写和人工帧检查，不安装新模型。
+- 上轮V5已实际完成：4K SHA 7a2f3ccae9732ad3966aa70c1df75dd27f76d29d501ca5e07684fa5aa2197239，1080 SHA 7e48ee0b4126e22c5d72a1f5d3312b22d6cb680bef9cb934ddddc558b5284190；完整解码/浏览器播放通过，磁盘满阻止最终记录和同步。现恢复仅补记录，不重渲染。
+
+---
+
 # 第五版：高清K线与真实行情案例（最新）
 
 - task-id trend-trading-video；owner本对话root；active；2026-10-08T19:46:46.303807+08:00
