@@ -1,0 +1,118 @@
+{
+  "status": "passed",
+  "passed": 20,
+  "total": 20,
+  "checks": [
+    {
+      "name": "unchanged:factor-2-sh-601989.json",
+      "passed": true,
+      "evidence": "docs/experiments/raw/b02-targeted-gap-batch-2026-10-05/run-01/normalized/factor/factor-2-sh-601989.json"
+    },
+    {
+      "name": "unchanged:factor-2-sh-601989-client-decoded-protocol.txt",
+      "passed": true,
+      "evidence": "docs/experiments/raw/b02-targeted-gap-batch-2026-10-05/run-01/raw/factor-2-sh-601989-client-decoded-protocol.txt"
+    },
+    {
+      "name": "unchanged:factor-2-sh-601989-client-decoded.json",
+      "passed": true,
+      "evidence": "docs/experiments/raw/b02-targeted-gap-batch-2026-10-05/run-01/raw/factor-2-sh-601989-client-decoded.json"
+    },
+    {
+      "name": "unchanged:factor-2-sh-601989-request-wire.bin",
+      "passed": true,
+      "evidence": "docs/experiments/raw/b02-targeted-gap-batch-2026-10-05/run-01/raw/factor-2-sh-601989-request-wire.bin"
+    },
+    {
+      "name": "unchanged:factor-2-sh-601989-wire.bin",
+      "passed": true,
+      "evidence": "docs/experiments/raw/b02-targeted-gap-batch-2026-10-05/run-01/raw/factor-2-sh-601989-wire.bin"
+    },
+    {
+      "name": "unchanged:receipt.json",
+      "passed": true,
+      "evidence": "docs/experiments/raw/b02-targeted-gap-batch-2026-10-05/run-01/receipt.json"
+    },
+    {
+      "name": "issuer-html:source_hash",
+      "passed": true,
+      "evidence": "docs/experiments/raw/china-heavy-dividend-coverage-2026-10-08/originals/issuer.html"
+    },
+    {
+      "name": "issuer-html:text_hash",
+      "passed": true,
+      "evidence": "docs/experiments/raw/china-heavy-dividend-coverage-2026-10-08/originals/issuer.txt"
+    },
+    {
+      "name": "issuer-page:source_hash",
+      "passed": true,
+      "evidence": "docs/experiments/raw/china-heavy-dividend-coverage-2026-10-08/originals/issuer-page.pdf"
+    },
+    {
+      "name": "issuer-page:text_hash",
+      "passed": true,
+      "evidence": "docs/experiments/raw/china-heavy-dividend-coverage-2026-10-08/originals/issuer-page.txt"
+    },
+    {
+      "name": "issuer_notice_amount",
+      "passed": true,
+      "evidence": "issuer-html"
+    },
+    {
+      "name": "date_row",
+      "passed": true,
+      "evidence": "issuer original PDF A-share row"
+    },
+    {
+      "name": "gross_cash_recomputed",
+      "passed": true,
+      "evidence": "68406105.97"
+    },
+    {
+      "name": "original_request_window",
+      "passed": true,
+      "evidence": {
+        "code": "sh.601989",
+        "start_date": "2022-01-04",
+        "end_date": "2025-07-31"
+      }
+    },
+    {
+      "name": "successful_saved_response",
+      "passed": true,
+      "evidence": "success does not establish event completeness"
+    },
+    {
+      "name": "raw_and_protocol_bytes_equal",
+      "passed": true,
+      "evidence": "this saved wire response is plaintext and identical to decoded-protocol"
+    },
+    {
+      "name": "original_rows_not_lost_by_normalization",
+      "passed": true,
+      "evidence": "raw protocol, client serialization, normalized records"
+    },
+    {
+      "name": "saved_two_dates",
+      "passed": true,
+      "evidence": [
+        "2024-08-01",
+        "2025-06-18"
+      ]
+    },
+    {
+      "name": "official_event_inside_request_but_absent",
+      "passed": true,
+      "evidence": "incomplete dated cash-dividend coverage established for this fixed response"
+    },
+    {
+      "name": "limits_preserved",
+      "passed": true,
+      "evidence": "does not establish cause or cumulative factor arithmetic"
+    }
+  ],
+  "scientific_result": "fixed response is not a complete dividend-event inventory",
+  "independent_agent_review": false,
+  "labels": 0,
+  "fits": 0
+}

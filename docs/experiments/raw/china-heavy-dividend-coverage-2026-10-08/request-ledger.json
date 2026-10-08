@@ -1,0 +1,46 @@
+{
+  "previous_direct_operations": 64,
+  "search_tool_calls": 2,
+  "search_queries": 5,
+  "http_operations": 3,
+  "source_operations_used": 5,
+  "raw_response_bytes": 843679,
+  "operations": [
+    {
+      "type": "search",
+      "queries": [
+        "中国重工2021年年度权益分派实施公告",
+        "6019892022年8月除息"
+      ]
+    },
+    {
+      "type": "search",
+      "queries": [
+        "中国船舶重工股份有限公司2022/8/22",
+        "site:epaper.cs.com.cn/zgzqb/html/2022-08/16/601989",
+        "site:paper.cnstock.com2021年年度权益分派重工"
+      ]
+    },
+    {
+      "type": "http",
+      "url": "https://epaper.cs.com.cn/zgzqb/html/2022-08/16/node_tc.htm"
+    },
+    {
+      "type": "http",
+      "url": "https://epaper.cs.com.cn/zgzqb/html/2022-08/16/nw.D110000zgzqb_20220816_6-B005.htm"
+    },
+    {
+      "type": "http",
+      "url": "https://epaper.cs.com.cn/zgzqb/images/2022-08/16/B005/zqB00516.pdf"
+    }
+  ],
+  "failures": [
+    "Second narrow web search produced unrelated results; reused actual known newspaper contents pattern, then followed its observed issuer and PDF links",
+    "Initial local search guessed manifest.json, absent; actual receipt.json contains fixed query checksums",
+    "Attempted coverage_per_symbol.get on list, stopped at read-only inspection; used original decoded query fields instead"
+  ],
+  "no_challenge_retry": true,
+  "fits": 0,
+  "labels": 0,
+  "price_repairs": 0
+}
