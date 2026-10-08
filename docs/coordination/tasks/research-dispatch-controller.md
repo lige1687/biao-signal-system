@@ -1,6 +1,6 @@
 # LEI 八目标｜本对话直接执行
 
-- 更新2026-10-08T13:49:28.653456+08:00；checked_coordination_sha=f077c6711c76cd2c91807ed630a34051da3bd0e8；已读中控、日报、独立视频及报告整合负责人；范围无交叉，未改他人记录。
+- 更新2026-10-08T13:49:28.653456+08:00；checked_coordination_sha=d8354bfdd9e488258e6d6885065ad964d5d7cbe9；已读中控、日报、独立视频及报告整合负责人；范围无交叉，未改他人记录。
 - 本轮实际完成三项：两次2025替换、九次定期调整、公开公告目录覆盖。前两项查出69个保存日期、1930个成员判断不符；目录77/83条对照证明按指数查询漏2份已核公告。原表未改，不推全历史合格。
 - 三份成果分别003d6de4a4a02a0780e749372aab28b029c058d6、4d172ca61b6cac379072b81c699266ade7aa580b、4307e20771f503386ea5987fdc037a716b57684e；12/12/10文件远端读回相同，新增29+119+24检查。本轮验收实际产物，无派发。
 - 累计九报告324项核对，33正式披露；来源操作112次/8,511,710字节。成员资料家族76次HTTP/5,965,466字节，原10MiB上限不变。主登记630、隔离登记209。
@@ -135,8 +135,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "f077c6711c76cd2c91807ed630a34051da3bd0e8",
-  "checked_at": "2026-10-08T13:49:28.653456+08:00",
+  "checked_coordination_sha": "d8354bfdd9e488258e6d6885065ad964d5d7cbe9",
+  "checked_at": "2026-10-08T13:50:00.769754+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -1138,7 +1138,7 @@
     "trend-trading-video",
     "research-evidence-catalog/report-library-integration-20261008"
   ],
-  "conflict_decision": "Latest daily-reminder and isolated video scopes read, no overlap. Root completion releases shared registration; other owner records preserved.",
+  "conflict_decision": "Final publication raced daily-reminder acceptance in its own record only; fetched/read and normal merged. No conflict, no force, all foreign records preserved.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -1348,6 +1348,10 @@
         "checks": 24
       }
     ]
+  },
+  "final_coordination_publication_failure": {
+    "kind": "non_fast_forward",
+    "recovery": "Normal merge of latest unrelated daily owner; exact readback pending"
   }
 }
 ```
