@@ -134,8 +134,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "ac3ae972d99a65ebb409a93d83f0828587421871",
-  "checked_at": "2026-10-08T19:59:57.656499+08:00",
+  "checked_coordination_sha": "b930a4558d6501c2c99ed0b78dc102fe950f8af5",
+  "checked_at": "2026-10-08T20:18:28.754037+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -446,13 +446,20 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       "executor": "/root/settlement_implementation_v1",
       "status": "active",
       "write_paths": [
-        "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/"
+        "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/",
+        "docs/experiments/weekly-portfolio-order-planning-2026-10-08.md"
       ],
       "depends_on": [],
       "scope_released": false,
       "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-planning-repair-contract-v2.json",
-      "source": "15 authorchecks not accepted; independent review currentcash stale, planidentitycollision, lostactioncontext. Same writer/scope; preserve v1. Zero markets.",
-      "phase": "v1_delivered_review_failed_bounded_repair_ready"
+      "source": "v2 accepted by independent three-counterexample checks. Frozen source and12v1 artifacts unchanged; 29raw files151094B. Root archives unique report. Full policy/real execution unaccepted.",
+      "phase": "v2_limited_accepted_report_publication",
+      "executor_status": "delivered",
+      "controller_only_write_paths": [
+        "docs/experiments/weekly-portfolio-order-planning-2026-10-08.md",
+        "existing isolated codex/research-direct-20261008 registry/INDEX own entry only"
+      ],
+      "main_shared_registration": "pending explicit video-owner release; not writing"
     }
   ],
   "final_acceptance": {
@@ -1127,11 +1134,10 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
   ],
   "read_task_ids": [
     "research-dispatch-controller",
-    "theory-workflow-system-increment",
-    "daily-trading-system-audit",
-    "trend-trading-video"
+    "trend-trading-video",
+    "theory-workflow-system-increment"
   ],
-  "conflict_decision": "No new remote change since scope; pure arithmetic exactnewraw solewriter; originalsources and otherownerpaths readonly. Review threefailures repaired sameoriginalcontract scope.",
+  "conflict_decision": "Video owner has main registry/INDEX single-entry scope active. Root sent explicit coordination request, will not write main shared files before release. New root unique report and isolated branch safe; v2 source solewriter completed.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -2248,3 +2254,10 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 - 纯规划Sol首版已交12小文件52110B、15作者检查；独立Astra内存复核费用与P0通过，但发现旧现金误作当前可用、不同回执订单ID相同、后续漏继承已知公司行动三项，整体不接受。准确反例与冻结三源码见order-planning-independent-review-v1.json。
 - 同范围repair-contract-v2：显式当前可分配现金快照、新plan_hash和强制行动覆盖继承；保留v1三源/所有失败回执，仍不实施预占/部分成交/恢复或真实市场。不修改原spec、旧账本或策略。唯一Sol原执行者，root复核；本登记推回后实际派修。
 - 原预占等历史交接声明保留；Luna限定报告定位只证研究模拟器+datedledger，不是全库不存在，原接口仍待准确包。触发无整手分支仍待用户，不阻塞这三项修复。磁盘仅约433MB实测，只有小文件/小Git操作，无清理授权。
+
+## 订单规划v2有限接受及独立归档范围 2026-10-08T20:18:28.754037+08:00
+
+- checked_coordination_sha=b930a4558d6501c2c99ed0b78dc102fe950f8af5；已读video新23行，媒体范围独立，但其registry/INDEX单项窗口仍active。root已向原制作视频聊天01a11a02-7ff5-7563-9831-a36273f51532请求串行交接，不写主共享表直到明确释放。新增报告路径独立，自己的codex/research-direct隔离登记不占其主表。
+- 三项v2修复独审通过：当前174.82只买100份/成本105.10/余69.72，不加旧200；原合法当前200加净卖款仍374.82/300份；不同资金/回执/冻结时刻身份不同且同输入稳定；原已知行动强制继承、覆盖不足拒绝。old12文件和v1三快照逐字不变。root核29raw/151094B及13金额。9作者组与13金额/17计划指纹有重叠，不累计为市场证据。
+- 接受只为原规范纯人工订单算术，未知原始订单预占包、真实输入、无整手待用户、跨行动unsupported保持。正式报告weekly-portfolio-order-planning-2026-10-08.md拟由root归档；原datedledger和封存结果不改不重跑。
+- 磁盘ENOSPC及未保存v2源已保留，后测容量约1GB、1358B真实写回及普通fetch恢复后才接续，未删除/迁移。自动化已准确保存恢复说明，规则与30分钟周期未改。
