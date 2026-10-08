@@ -2,7 +2,7 @@
 
 - task-id: mac-local-storage-cleanup
 - owner: 01a1155d-b204-7232-a993-4c9e0567af59 / root
-- status: completed（第四批 17 项及写盘评估）
+- status: active（后继 AI 默认外盘与第五批）
 - updated_at: 2026-10-08T20:34:15.766327+08:00
 - checked_coordination_sha: ff4cc9ed72599d016e411c2c283acea62fa8d663
 - checked_at: 2026-10-08T20:34:15.766327+08:00
@@ -34,3 +34,15 @@
 - scope boundary: 全部现有实验不能自动搬走；冻结 raw、活动 DB/环境/会话/工作树保留。五旧代理树各有 8–95 独有修改；活动日志、swap 未动。现有冻结路径迁移需要各负责人明确依赖与恢复方案，本轮提问不解除原限制。
 - previous batch: 原 Time Machine 快照已消失，缺少隔离物理释放测量，不归因本輪。前三轮清单不重做、不覆盖。
 - next / stop: 本轮所有已验真非实验闲置项与写盘问题已交付；没有必要后台运行、待删源或实验重跑。未来新实验须先核当前磁盘、对应入口采用状态与实际余量；不自动改既有任务默认路径、不创建或恢复提醒。
+
+## 用户授权后续默认写盘与项目说明 2026-10-08T21:00:09.425852+08:00
+
+- checked_coordination_sha: 6599115559a75fe0f4a864c97913b002b93dfb10；checked_at: 2026-10-08T21:00:09.425852+08:00；已读规则、自身、classic-factor-research、daily-trading-system-audit、research-dispatch-controller。
+- 用户原话：“写一个skill 或者项目md让后续ai写大结果文件可以放在外接磁盘…必须继续留本机的继续留…目前所有实验默认写盘切过去吧，cleaner能清理的清一下”。具体执行为所有后续 AI 大结果默认外盘、现有输出型 CLI 通过统一默认外盘启动器；不改变正在运行进程或冻结精确路径。
+- 新准确写范围：docs/ops/research-output-storage.md；configs/research-output-policy.v1.json；src/lei_signal/research/output_storage.py；tests/unit/test_research_output_storage.py；tests/integration/test_research_output_routing_cli.py；AGENTS.md仅新增独立默认写盘入口段；自己的 work-progress 和协调记录。
+- 冲突决定：原 classic CLI 四文件已 scope_released=true，但一些旧 CLI 自身指纹绑定在冻结合同，故不批改或替换；新统一启动器向原 CLI 传外盘新 --out/--output，不改旧源码/冻结合同。daily拥有的storage-health/配置/doc不改，原 storage-policy只读复用。主 registry/INDEX、workflow/raw/DB/环境全部只读。root 唯一写者，不派新子 agent。
+- 支持输出型入口清单为本机10个脚本、12输出参数定义；特殊只读子命令不强塞 output。仓内固定写路径的历史 raw脚本不猴子补丁，后续AI按默认规则先做明确的新输出绑定；覆盖明细写项目md，不能冒称所有旧进程已切换。
+- 验收：外盘正确身份及路由，无盘/错盘/不足/已有输出均拒绝且无结果写入；输出不写回内盘，留本机记录只小索引；原CLI参数及科学检查由原入口执行；小合成/假执行器验证默认路径与子命令，实际设备只探容量/新小文件，不执行科研。
+- 清理：第五批准确 Gradle 下载/构建缓存和闲置 npx 子目录正在核依赖，过门后归档/移除；不清 npm内容缓存、运行环境/工作树/会话/活动日志/虚拟内存/原raw。设备/恢复指纹沿用已核盘身份，私有回执在本轮外盘目录。
+- 已读两策略源 SHA 与已批准指纹一致；本改造只服务研究文件可靠存放及复现，不改变趋势规则、计算、数据资格、费用、研究预算或交易授权。
+- 基线内盘实测521596928B且其他进程持续写入；只小源码/文档，不创建完整checkout、不安装依赖；保留5GiB阈值，不为跑实验降条件。
