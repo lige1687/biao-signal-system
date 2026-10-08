@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-10-08T12:10:08.974661+08:00",
+  "project_config": ".codex/config.toml",
+  "before_sha256": "e1cca80c44bda2a8524b3cc5f058d5f2237482880aac58021e2c029635a390f5",
+  "after_sha256": "762e5e02c71181564d794b7f760f1fcd389362975a80931b5417802613234024",
+  "previous_bytes_preserved": true,
+  "previous_mcp_servers": [
+    "factorhub_readonly"
+  ],
+  "added_server": "lei_system",
+  "user_config_modified": false,
+  "private_data_or_credentials_in_config": false,
+  "current_chat_mcp_tool_discovery_verified": false,
+  "codex_cli_get_exit": 0,
+  "codex_parsed_server": {
+    "name": "lei_system",
+    "enabled": true,
+    "disabled_reason": null,
+    "transport": {
+      "type": "stdio",
+      "command": "/opt/homebrew/bin/python3",
+      "args": [
+        "-m",
+        "lei_signal.integrations.gpt_mcp",
+        "--transport",
+        "stdio"
+      ],
+      "env_vars": [],
+      "cwd": null
+    },
+    "enabled_tools": null,
+    "disabled_tools": null,
+    "startup_timeout_sec": 30.0,
+    "tool_timeout_sec": 60.0
+  }
+}

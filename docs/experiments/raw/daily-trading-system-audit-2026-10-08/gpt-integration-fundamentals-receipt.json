@@ -1,0 +1,152 @@
+{
+  "verified_at": "2026-10-08T12:20:05.441079+08:00",
+  "transport": "local_stdio",
+  "checks": [
+    {
+      "section": "overview",
+      "protocol_succeeded": true,
+      "available": true,
+      "elapsed_seconds": 0.038,
+      "selection": {
+        "section": "overview",
+        "requested_market": "us",
+        "market_parameter_applied": false,
+        "effective_market_scope": "mixed"
+      },
+      "sources": {
+        "overview": {
+          "path": "/api/fundamentals/overview",
+          "retrieved_at": "2026-10-08T12:19:53.565015+08:00",
+          "available": true,
+          "error": null,
+          "source_generated_at": "2026-10-08T04:19:53.583007+00:00"
+        }
+      },
+      "errors": {},
+      "limitations": [
+        "仅作市场背景，不参与技术判定。",
+        "本适配器不显式请求刷新；既有 GET 可能按系统缓存期限更新公开背景资料。",
+        "逐项使用 observation_date、published_at 和 quality_status；接口读取时间不等于数据日期。",
+        "除 observations 外，market 参数不筛选结果；以 selection.effective_market_scope 为准。"
+      ]
+    },
+    {
+      "section": "rates",
+      "protocol_succeeded": true,
+      "available": true,
+      "elapsed_seconds": 0.007,
+      "selection": {
+        "section": "rates",
+        "requested_market": "us",
+        "market_parameter_applied": false,
+        "effective_market_scope": "mixed"
+      },
+      "sources": {
+        "rates": {
+          "path": "/api/fundamentals/rates",
+          "retrieved_at": "2026-10-08T12:19:53.602288+08:00",
+          "available": true,
+          "error": null,
+          "source_generated_at": null
+        }
+      },
+      "errors": {},
+      "limitations": [
+        "仅作市场背景，不参与技术判定。",
+        "本适配器不显式请求刷新；既有 GET 可能按系统缓存期限更新公开背景资料。",
+        "逐项使用 observation_date、published_at 和 quality_status；接口读取时间不等于数据日期。",
+        "除 observations 外，market 参数不筛选结果；以 selection.effective_market_scope 为准。"
+      ]
+    },
+    {
+      "section": "us-macro",
+      "protocol_succeeded": true,
+      "available": false,
+      "elapsed_seconds": 8.016,
+      "selection": {
+        "section": "us-macro",
+        "requested_market": "us",
+        "market_parameter_applied": false,
+        "effective_market_scope": "us"
+      },
+      "sources": {
+        "us-macro": {
+          "path": "/api/fundamentals/us-macro",
+          "retrieved_at": "2026-10-08T12:19:53.609195+08:00",
+          "available": false,
+          "error": "local API unavailable: timed out",
+          "source_generated_at": null
+        }
+      },
+      "errors": {
+        "us-macro": "local API unavailable: timed out"
+      },
+      "limitations": [
+        "仅作市场背景，不参与技术判定。",
+        "本适配器不显式请求刷新；既有 GET 可能按系统缓存期限更新公开背景资料。",
+        "逐项使用 observation_date、published_at 和 quality_status；接口读取时间不等于数据日期。",
+        "除 observations 外，market 参数不筛选结果；以 selection.effective_market_scope 为准。"
+      ]
+    },
+    {
+      "section": "rates-history",
+      "protocol_succeeded": true,
+      "available": true,
+      "elapsed_seconds": 3.739,
+      "selection": {
+        "section": "rates-history",
+        "requested_market": "us",
+        "market_parameter_applied": false,
+        "effective_market_scope": "mixed"
+      },
+      "sources": {
+        "rates-history": {
+          "path": "/api/fundamentals/rates-history?lookback_days=1095",
+          "retrieved_at": "2026-10-08T12:20:01.634202+08:00",
+          "available": true,
+          "error": null,
+          "source_generated_at": null
+        }
+      },
+      "errors": {},
+      "limitations": [
+        "仅作市场背景，不参与技术判定。",
+        "本适配器不显式请求刷新；既有 GET 可能按系统缓存期限更新公开背景资料。",
+        "逐项使用 observation_date、published_at 和 quality_status；接口读取时间不等于数据日期。",
+        "除 observations 外，market 参数不筛选结果；以 selection.effective_market_scope 为准。"
+      ]
+    },
+    {
+      "section": "macro-history",
+      "protocol_succeeded": true,
+      "available": true,
+      "elapsed_seconds": 0.008,
+      "selection": {
+        "section": "macro-history",
+        "requested_market": "us",
+        "market_parameter_applied": false,
+        "effective_market_scope": "cn"
+      },
+      "sources": {
+        "macro-history": {
+          "path": "/api/fundamentals/macro-history?page_size=60",
+          "retrieved_at": "2026-10-08T12:20:05.365649+08:00",
+          "available": true,
+          "error": null,
+          "source_generated_at": null
+        }
+      },
+      "errors": {},
+      "limitations": [
+        "仅作市场背景，不参与技术判定。",
+        "本适配器不显式请求刷新；既有 GET 可能按系统缓存期限更新公开背景资料。",
+        "逐项使用 observation_date、published_at 和 quality_status；接口读取时间不等于数据日期。",
+        "除 observations 外，market 参数不筛选结果；以 selection.effective_market_scope 为准。"
+      ]
+    }
+  ],
+  "all_sections_available": false,
+  "private_responses": "data/cache/gpt-system-integration/fundamentals-mcp-20261008T122005441079.json",
+  "forced_refresh_requested": false,
+  "production_writes": false
+}

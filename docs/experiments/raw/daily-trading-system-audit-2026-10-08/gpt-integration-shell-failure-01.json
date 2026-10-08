@@ -1,0 +1,8 @@
+{
+  "action": "combined test command shell wrapper",
+  "error": "zsh read-only variable: status",
+  "pytest_log": "gpt-integration-tests.log",
+  "actual_pytest_result": "43 passed, 1 warning in 2.09s",
+  "interpretation": "Tests completed; the wrapper failed afterward. Test success is verified from the complete saved log, not the wrapper exit code.",
+  "resolution": "Use a task-specific variable or structured subprocess result in subsequent commands; no test changes or repeated suite required."
+}

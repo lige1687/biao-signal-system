@@ -1,0 +1,517 @@
+I001 [*] Import block is un-sorted or un-formatted
+  --> docs/experiments/raw/daily-trading-system-audit-2026-10-08/gpt-integration-live-check.py:2:1
+   |
+ 1 |   """Verify the real local MCP adapter; private responses stay in ignored cache."""
+ 2 | / from __future__ import annotations
+ 3 | |
+ 4 | | import asyncio
+ 5 | | from datetime import datetime
+ 6 | | import json
+ 7 | | import os
+ 8 | | from pathlib import Path
+ 9 | | import sys
+10 | | from zoneinfo import ZoneInfo
+11 | |
+12 | | from mcp import ClientSession
+13 | | from mcp.client.stdio import StdioServerParameters, stdio_client
+   | |________________________________________________________________^
+   |
+help: Organize imports
+
+SIM117 Use a single `with` statement with multiple contexts instead of nested `with` statements
+  --> docs/experiments/raw/daily-trading-system-audit-2026-10-08/gpt-integration-live-check.py:30:5
+   |
+28 |       )
+29 |       responses = {}
+30 | /     async with stdio_client(params) as (read, write):
+31 | |         async with ClientSession(read, write) as session:
+   | |_________________________________________________________^
+32 |               initialized = await session.initialize()
+33 |               names = (await session.list_tools()).tools
+   |
+help: Combine `with` statements
+
+E501 Line too long (103 > 100)
+  --> docs/experiments/raw/daily-trading-system-audit-2026-10-08/gpt-integration-live-check.py:36:101
+   |
+34 |             assert initialized.serverInfo.name == "lei-system-readonly"
+35 |             assert len(names) == 10
+36 |             assert all(t.annotations.readOnlyHint and not t.annotations.destructiveHint for t in names)
+   |                                                                                                     ^^^
+37 |             calls = [
+38 |                 ("overview", {}), ("portfolio", {"fund_code": "013403"}),
+   |
+
+E501 Line too long (125 > 100)
+  --> docs/experiments/raw/daily-trading-system-audit-2026-10-08/gpt-integration-live-check.py:42:101
+   |
+40 |                 ("plans", {"fund_code": "013403"}), ("trades", {}), ("factors", {}),
+41 |                 ("research_search", {"query": "research-evidence-catalog", "limit": 3}),
+42 |                 ("research_report", {"name": "docs/experiments/research-evidence-catalog-2026-10-07.md", "max_chars": 3000}),
+   |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+43 |                 ("latest_brief", {"slot": "1135"}),
+44 |             ]
+   |
+
+E501 Line too long (128 > 100)
+  --> docs/experiments/raw/daily-trading-system-audit-2026-10-08/gpt-integration-live-check.py:55:101
+   |
+53 |                 responses[name] = value
+54 |             assert responses["portfolio"]["data"]["user_stated_context"]
+55 |             assert not any(x.get("is_confirmed_monitoring_plan") for x in responses["portfolio"]["data"]["user_stated_context"])
+   |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+56 |             assert responses["news"]["data"]["blogger_yesterday"]
+57 |             assert responses["news"]["errors"].get("news_receipt"), "known source failures hidden"
+   |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> src/lei_signal/integrations/gpt_context.py:6:1
+   |
+ 4 |   interprets a plan as a signal, or treats a research report as trading approval.
+ 5 |   """
+ 6 | / from __future__ import annotations
+ 7 | |
+ 8 | | import argparse
+ 9 | | import hashlib
+10 | | import ipaddress
+11 | | import json
+12 | | import re
+13 | | import sys
+14 | | from concurrent.futures import ThreadPoolExecutor
+15 | | from datetime import datetime
+16 | | from pathlib import Path
+17 | | from typing import Any, Callable
+18 | | from zoneinfo import ZoneInfo
+19 | | from urllib.error import HTTPError, URLError
+20 | | from urllib.parse import urlsplit
+21 | | from urllib.request import HTTPRedirectHandler, ProxyHandler, Request, build_opener
+   | |___________________________________________________________________________________^
+   |
+help: Organize imports
+
+UP035 [*] Import from `collections.abc` instead: `Callable`
+  --> src/lei_signal/integrations/gpt_context.py:17:1
+   |
+15 | from datetime import datetime
+16 | from pathlib import Path
+17 | from typing import Any, Callable
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+18 | from zoneinfo import ZoneInfo
+19 | from urllib.error import HTTPError, URLError
+   |
+help: Import from `collections.abc`
+
+SIM103 Return the condition directly
+  --> src/lei_signal/integrations/gpt_context.py:51:5
+   |
+50 |   def _allowed_path(path: str) -> bool:
+51 | /     if path in {
+52 | |         "/api/portfolio/workspace", "/api/portfolio", "/api/plans",
+53 | |         "/api/plans/summary", "/api/factors/panel", "/api/experiments",
+54 | |         "/api/fundamentals/observations?market=cn",
+55 | |         "/api/fundamentals/observations?market=us",
+56 | |     }:
+57 | |         return True
+58 | |     return False
+   | |________________^
+   |
+help: Inline condition
+
+E501 Line too long (108 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:143:101
+    |
+141 |                 expected_list = name == "plans"
+142 |                 if not isinstance(value, list if expected_list else dict):
+143 |                     errors[name] = "invalid API schema: expected " + ("list" if expected_list else "object")
+    |                                                                                                     ^^^^^^^^
+144 |                 else:
+145 |                     data[name] = value
+    |
+
+E501 Line too long (115 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:148:101
+    |
+146 |             sources[name] = {"path": paths[name], "retrieved_at": retrieved_at,
+147 |                              "available": name in data, "error": errors.get(name),
+148 |                              "source_generated_at": value.get("generated_at") if isinstance(value, dict) else None}
+    |                                                                                                     ^^^^^^^^^^^^^^^
+149 |         return data, errors, sources
+    |
+
+E501 Line too long (105 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:151:101
+    |
+149 |         return data, errors, sources
+150 |
+151 |     def _packet(self, slot: str | None = None) -> tuple[dict | None, str | None, str | None, list[dict]]:
+    |                                                                                                     ^^^^^
+152 |         if slot not in (None, "1135", "1440"):
+153 |             return None, None, "slot must be 1135 or 1440", []
+    |
+
+E501 Line too long (102 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:186:101
+    |
+184 |     @staticmethod
+185 |     def _packet_sources(packet: dict | None, path: str | None, rejected: list[dict]) -> dict:
+186 |         return {"briefing_packet": {"path": path, "retrieved_at": datetime.now(_SHANGHAI).isoformat(),
+    |                                                                                                     ^^
+187 |                                      "available": packet is not None,
+188 |                                      "source_generated_at": packet.get("generated_at") if packet else None,
+    |
+
+E501 Line too long (107 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:188:101
+    |
+186 |         return {"briefing_packet": {"path": path, "retrieved_at": datetime.now(_SHANGHAI).isoformat(),
+187 |                                      "available": packet is not None,
+188 |                                      "source_generated_at": packet.get("generated_at") if packet else None,
+    |                                                                                                     ^^^^^^^
+189 |                                      "fallback": bool(rejected), "rejected": rejected}}
+    |
+
+E501 Line too long (111 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:207:101
+    |
+205 |             if receipt.get("status") == "failed":
+206 |                 errors["news_receipt_status"] = "failed"
+207 |         if view in {"trades", "latest_brief"} and (packet.get("trade_ledger") or {}).get("available") is False:
+    |                                                                                                     ^^^^^^^^^^^
+208 |             errors["trade_ledger"] = "trade ledger unavailable in packet"
+209 |         return errors
+    |
+
+E501 Line too long (109 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:227:101
+    |
+225 |             errors["briefing_packet_fallback"] = rejected
+226 |         if packet:
+227 |             errors.update({f"packet_{k}": v for k, v in self._packet_errors(packet, "latest_brief").items()})
+    |                                                                                                     ^^^^^^^^^
+228 |         research = data.get("research") or {}
+229 |         summary = {
+    |
+
+E501 Line too long (107 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:236:101
+    |
+234 |             "portfolio_as_of": data.get("portfolio", {}).get("as_of"),
+235 |             "plans_summary": data.get("plans_summary"),
+236 |             "fundamentals": {m: {"generated_at": (data.get(f"fundamentals_{m}") or {}).get("generated_at"),
+    |                                                                                                     ^^^^^^^
+237 |                                  "items": len((data.get(f"fundamentals_{m}") or {}).get("items", []))}
+238 |                              for m in ("cn", "us")},
+    |
+
+E501 Line too long (102 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:237:101
+    |
+235 |             "plans_summary": data.get("plans_summary"),
+236 |             "fundamentals": {m: {"generated_at": (data.get(f"fundamentals_{m}") or {}).get("generated_at"),
+237 |                                  "items": len((data.get(f"fundamentals_{m}") or {}).get("items", []))}
+    |                                                                                                     ^^
+238 |                              for m in ("cn", "us")},
+239 |             "factors": {k: (data.get("factors") or {}).get(k) for k in
+    |
+
+E501 Line too long (103 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:240:101
+    |
+238 |                              for m in ("cn", "us")},
+239 |             "factors": {k: (data.get("factors") or {}).get(k) for k in
+240 |                         ("generated_at", "data_as_of", "study_date", "research_proxy_note", "counts")},
+    |                                                                                                     ^^^
+241 |             "research_count": len(research.get("items", [])),
+242 |             "briefing_packet_at": packet.get("generated_at") if packet else None,
+    |
+
+E501 Line too long (101 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:264:101
+    |
+262 | …     if rejected:
+263 | …         errors["briefing_packet_fallback"] = rejected
+264 | …     if packet and (packet.get("source_status") or {}).get("user_context", {}).get("ok") is False:
+    |                                                                                                   ^
+265 | …         errors["user_context"] = ((packet.get("source_status") or {}).get("user_context") or {}).get("error") or "user context unav…
+266 | …     workspace = data.get("workspace") or {}
+    |
+
+E501 Line too long (143 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:265:101
+    |
+263 | …d
+264 | …).get("user_context", {}).get("ok") is False:
+265 | …e_status") or {}).get("user_context") or {}).get("error") or "user context unavailable"
+    |                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+266 | …
+267 | …
+    |
+
+E501 Line too long (127 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:285:101
+    |
+283 |                                      "groups": groups},
+284 |             "user_stated_context": [entry for entry in (packet or {}).get("user_stated_context", [])
+285 |                                     if isinstance(entry, dict) and (fund_code is None or entry.get("fund_code") == fund_code)],
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+286 |             "user_context_note": (packet or {}).get("user_context_note"),
+287 |             "user_context_packet_generated_at": packet.get("generated_at") if packet else None,
+    |
+
+E501 Line too long (132 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:304:95
+    |
+302 | …, sources=sources,
+303 | …与技术判定。",
+304 | …rvation_date、published_at 和 quality_status；接口读取时间不等于数据日期。"],
+    |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+305 | …d_at=(payload or {}).get("generated_at"))
+    |
+
+E501 Line too long (116 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:340:74
+    |
+338 | …                         limitations=["仅按明确基金代码绑定，不从标题推测持仓关联。",
+339 | …                                      "博主全局抓取覆盖情况不能当作某只基金的持仓关联。",
+340 | …                                      "需区分发布时间、抓取时间和正文/标题覆盖；来源错误保留在 news_coverage。"],
+    |                                                                                                   ^^^^^^^^^^^^^^^^
+341 | …                         errors=errors)
+342 | …     status = packet.get("source_status") or {}
+    |
+
+E501 Line too long (119 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:345:101
+    |
+343 |         response["available"] = (status.get("news", {}).get("ok") is True
+344 |                                  and status.get("news_status", {}).get("ok") is not False
+345 |                                  and (packet.get("news_coverage", {}).get("last_run") or {}).get("status") != "failed")
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^
+346 |         return response
+    |
+
+E501 Line too long (101 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:391:89
+    |
+389 |         return self._result("factors", panel, sources=sources,
+390 |                             limitations=["冻结预计算研究观察，不重算，也不是买卖点。",
+391 |                                          "保留 study_date、data_as_of、provenance 与研究代理说明。"],
+    |                                                                                                     ^
+392 |                             errors=errors, generated_at=(panel or {}).get("generated_at"))
+    |
+
+E501 Line too long (104 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:430:101
+    |
+428 |             if not isinstance(row, dict):
+429 |                 continue
+430 |             haystack = " ".join(str(row.get(k) or "") for k in ("title", "oneLiner", "name")).casefold()
+    |                                                                                                     ^^^^
+431 |             if words and not all(word in haystack for word in words):
+432 |                 continue
+    |
+
+E501 Line too long (113 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:434:101
+    |
+432 |                 continue
+433 |             item = {k: row.get(k) for k in
+434 |                     ("name", "title", "date", "category", "verdict", "archived", "oneLiner", "pending", "bytes")}
+    |                                                                                                     ^^^^^^^^^^^^^
+435 |             entry = registry.get(row.get("name"), {})
+436 |             item["registered"] = isinstance(entry, dict) and bool(entry)
+    |
+
+E501 Line too long (116 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:437:101
+    |
+435 |             entry = registry.get(row.get("name"), {})
+436 |             item["registered"] = isinstance(entry, dict) and bool(entry)
+437 |             item["report_sha256_available"] = bool(entry.get("report_sha256")) if isinstance(entry, dict) else False
+    |                                                                                                     ^^^^^^^^^^^^^^^^
+438 |             matches.append(item)
+439 |             if len(matches) >= limit:
+    |
+
+E501 Line too long (179 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:443:101
+    |
+441 | …": query,
+442 | …},
+443 | …riments", "retrieved_at": datetime.now(_SHANGHAI).isoformat(), "available": "experiments" not in errors},
+    |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+444 | …s/registry.json", "retrieved_at": datetime.now(_SHANGHAI).isoformat(), "available": "registry" not in errors}},
+445 | …
+    |
+
+E501 Line too long (185 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:444:101
+    |
+442 | …
+443 | …ents", "retrieved_at": datetime.now(_SHANGHAI).isoformat(), "available": "experiments" not in errors},
+444 | …egistry.json", "retrieved_at": datetime.now(_SHANGHAI).isoformat(), "available": "registry" not in errors}},
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+445 | …
+446 | …errors)
+    |
+
+E501 Line too long (150 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:496:101
+    |
+494 | …ed": True}
+495 | …
+496 | … "retrieved_at": datetime.now(_SHANGHAI).isoformat(), "available": True, "sha256": actual},
+    |                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+497 | …docs/experiments/registry.json", "retrieved_at": datetime.now(_SHANGHAI).isoformat(), "available": True}},
+498 | …用范围；不代表生产采用。", *conflicts],
+    |
+
+E501 Line too long (165 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:497:101
+    |
+495 | …
+496 | …ved_at": datetime.now(_SHANGHAI).isoformat(), "available": True, "sha256": actual},
+497 | …eriments/registry.json", "retrieved_at": datetime.now(_SHANGHAI).isoformat(), "available": True}},
+    |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+498 | …产采用。", *conflicts],
+499 | …
+    |
+
+E501 Line too long (115 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:498:72
+    |
+496 | …     sources={"file": {"path": name, "retrieved_at": datetime.now(_SHANGHAI).isoformat(), "available": True, "sha256": actual},
+497 | …              "registry": {"path": "docs/experiments/registry.json", "retrieved_at": datetime.now(_SHANGHAI).isoformat(), "available…
+498 | …     limitations=["研究结论须结合对象、时期、样本与适用范围；不代表生产采用。", *conflicts],
+    |                                                                               ^^^^^^^^^^^^^^^
+499 | …     errors=errors)
+    |
+
+E501 Line too long (105 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:509:101
+    |
+507 |             "schema_version", "slot", "generated_at", "mode", "holding_record_as_of",
+508 |             "coverage", "changes", "removed_since_previous", "plan_review", "trade_ledger",
+509 |             "news_coverage", "source_status", "user_stated_context", "user_context_note", "limitations")}
+    |                                                                                                     ^^^^^
+510 |         result["holdings_count"] = len(packet.get("holdings", []))
+511 |         result["news_count"] = len(packet.get("news", []))
+    |
+
+E501 Line too long (107 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:521:101
+    |
+519 |                                          "用户原话是待复核背景，不自动变成确认计划或成交。"],
+520 |                             errors=errors)
+521 |         response["available"] = ((packet.get("source_status") or {}).get("workspace", {}).get("ok") is True
+    |                                                                                                     ^^^^^^^
+522 |                                  and (packet.get("trade_ledger") or {}).get("available") is not False)
+523 |         return response
+    |
+
+E501 Line too long (102 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:522:101
+    |
+520 |                             errors=errors)
+521 |         response["available"] = ((packet.get("source_status") or {}).get("workspace", {}).get("ok") is True
+522 |                                  and (packet.get("trade_ledger") or {}).get("available") is not False)
+    |                                                                                                     ^^
+523 |         return response
+    |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests/unit/test_gpt_context.py:2:1
+   |
+ 1 |   """Boundaries for the local, read-only GPT context transport."""
+ 2 | / from __future__ import annotations
+ 3 | |
+ 4 | | import hashlib
+ 5 | | import json
+ 6 | | import threading
+ 7 | | from datetime import datetime, timedelta
+ 8 | | from http.server import BaseHTTPRequestHandler, HTTPServer
+ 9 | | from pathlib import Path
+10 | | from zoneinfo import ZoneInfo
+11 | |
+12 | | import pytest
+13 | |
+14 | | from lei_signal.integrations.gpt_context import SystemContext, _MAX_HTTP_BYTES
+   | |______________________________________________________________________________^
+   |
+help: Organize imports
+
+E501 Line too long (102 > 100)
+  --> tests/unit/test_gpt_context.py:27:97
+   |
+25 |         "news": [
+26 |             {"title": "代码未绑定的标题", "symbols": None},
+27 |             {"title": "明确绑定", "symbols": ["013403"], "published_at": "2026-10-08T10:00:00+08:00"},
+   |                                                                                                     ^^
+28 |             {"title": "其他基金", "symbols": ["012345"]},
+29 |         ],
+   |
+
+E501 Line too long (102 > 100)
+   --> tests/unit/test_gpt_context.py:124:101
+    |
+122 |     all_news = context.news(limit=20)
+123 |     assert len(all_news["data"]["items"]) == 20
+124 |     assert [x["title"] for x in all_news["data"]["blogger_yesterday"]] == ["author one", "author two"]
+    |                                                                                                     ^^
+125 |     assert [x["title"] for x in context.news("013403")["data"]["blogger_yesterday"]] == ["author one"]
+126 |     assert "不能当作某只基金" in " ".join(all_news["limitations"])
+    |
+
+E501 Line too long (102 > 100)
+   --> tests/unit/test_gpt_context.py:125:101
+    |
+123 |     assert len(all_news["data"]["items"]) == 20
+124 |     assert [x["title"] for x in all_news["data"]["blogger_yesterday"]] == ["author one", "author two"]
+125 |     assert [x["title"] for x in context.news("013403")["data"]["blogger_yesterday"]] == ["author one"]
+    |                                                                                                     ^^
+126 |     assert "不能当作某只基金" in " ".join(all_news["limitations"])
+    |
+
+E501 Line too long (104 > 100)
+   --> tests/unit/test_gpt_context.py:133:96
+    |
+131 |     context = SystemContext(tmp_path, fetch=_fake)
+132 |     portfolio = context.portfolio("013403")
+133 |     assert portfolio["data"]["user_stated_context"] == [{"fund_code": "013403", "text": "当初看好恒科"}]
+    |                                                                                                      ^^^
+134 |     assert portfolio["data"]["items"][0]["plan"] is None
+135 |     assert portfolio["data"]["user_context_packet_generated_at"] == "2026-10-08T11:39:00+08:00"
+    |
+
+E501 Line too long (109 > 100)
+   --> tests/unit/test_gpt_context.py:179:101
+    |
+177 |     assert result["errors"]["briefing_packet_fallback"]
+178 |     future = (datetime.now(ZoneInfo("Asia/Shanghai")) + timedelta(days=1)).isoformat()
+179 |     (folder / "packet-99999998-future.json").write_text(json.dumps({"slot": "1135", "generated_at": future}))
+    |                                                                                                     ^^^^^^^^^
+180 |     (folder / "packet-99999997-oversize.json").write_bytes(b" " * (8 * 1024 * 1024 + 1))
+181 |     outside = tmp_path / "outside.json"
+    |
+
+E501 Line too long (107 > 100)
+   --> tests/unit/test_gpt_context.py:210:82
+    |
+210 | def _report_fixture(root: Path, *, content: str = "# 已登记报告\n\n## 一句话结论（大白话）\n无交易依据。"):
+    |                                                                                                     ^^^^^^^
+211 |     path = root / "docs/experiments/registered-2026-10-08.md"
+212 |     path.parent.mkdir(parents=True, exist_ok=True)
+    |
+
+E501 Line too long (101 > 100)
+   --> tests/unit/test_gpt_context.py:216:101
+    |
+214 |     name = path.relative_to(root).as_posix()
+215 |     registry = {"entries": {name: {"category": "方法论与验证", "verdict": "mixed",
+216 |                                     "report_sha256": hashlib.sha256(path.read_bytes()).hexdigest()}}}
+    |                                                                                                     ^
+217 |     (root / "docs/experiments/registry.json").write_text(json.dumps(registry), encoding="utf-8")
+218 |     return name, path
+    |
+
+Found 44 errors.
+[*] 4 fixable with the `--fix` option (1 hidden fix can be enabled with the `--unsafe-fixes` option).

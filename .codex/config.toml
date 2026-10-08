@@ -1,0 +1,9 @@
+# Read-only LeiSignal evidence for this project; no trading or account writes.
+[mcp_servers.lei_system]
+command = "/opt/homebrew/bin/python3"
+args = ["-m", "lei_signal.integrations.gpt_mcp", "--transport", "stdio"]
+startup_timeout_sec = 30
+tool_timeout_sec = 60
+
+[mcp_servers.lei_system.env]
+PYTHONPATH = "/Users/yongbiaoli/Desktop/lei-signal-lab/data/cache/gpt-system-integration/runtime/compat:/Users/yongbiaoli/Desktop/lei-signal-lab/data/cache/gpt-system-integration/runtime:/Users/yongbiaoli/Desktop/lei-signal-lab/src"
