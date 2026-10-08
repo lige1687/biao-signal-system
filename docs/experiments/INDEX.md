@@ -1,5 +1,7 @@
 # docs/experiments 总索引
 
+- 2026-10-08：[X外部学习与内容入口路径评估](x-learning-path-review-2026-10-08.md)：官方能力和价格支持小范围学习入口；现有学习页可复用，实际读帖、持续质量与发送尚未实施。
+
 - 2026-09-23：[开发任务路由改为GPT-6系列](jev-gpt6-skill-routing-2026-09-23.md)：项目级路由与编排Skill改用GPT-6 Luna、Sol、Astra；32项离线检查通过，真实任务效果继续观察。
 
 - 2026-09-22：[Jev开发任务路由Skill首版接入](jev-task-router-skill-adoption-2026-09-22.md)：项目级Skill的26项离线检查和一次真实调用通过，明确任务零Jev调用、边界任务最多问一次；20个真实任务观察完成前不自动派发。

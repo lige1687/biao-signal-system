@@ -1,0 +1,236 @@
+{
+  "schema": "bounded-path-review/1",
+  "task_id": "external-learning-x-review",
+  "question": "X能否成为LeiSignal的外部学习与帖子素材发现入口",
+  "mode": "report_only",
+  "scope": "资料和方案评估，不实施采集或发送",
+  "closure": {
+    "execution": "completed",
+    "evidence": "supported",
+    "reason": "mode_boundary",
+    "supported_scope": "官方文档可行性与现有系统复用",
+    "actual_x_connection": "not_evaluated",
+    "continuous_content_quality": "not_evaluated"
+  },
+  "checked_coordination_sha": "758b287782c37364c4df171d86d9c15d4fe25444",
+  "checked_at": "2026-10-08T22:45:46.136758+08:00",
+  "read_task_ids": [
+    "external-quant-resources",
+    "theory-workflow-system-increment",
+    "daily-trading-system-audit",
+    "research-dispatch-controller",
+    "research-evidence-catalog/report-library-integration-20261008",
+    "external-learning-x-review"
+  ],
+  "budget": {
+    "web_tool_requests": 5,
+    "source_limit": 6,
+    "financial_experiments": 0,
+    "paid_api_reads": 0,
+    "install_or_upgrade": 0,
+    "x_account_operations": 0,
+    "automation_creation": 0,
+    "public_posts": 0,
+    "assistant": "gpt-6-sol/medium read-only reuse audit",
+    "model_cost": "unknown"
+  },
+  "user_attachment": {
+    "sha256": "599e211b9dca6a2297b0e73f30dc6883cc39e5c6771c1dd3bc10b31389a4b855",
+    "bytes": 17743,
+    "uploaded_or_copied": false
+  },
+  "sources": [
+    {
+      "url": "https://docs.x.com/x-api/getting-started/pricing",
+      "title": "X API pay-per-usage pricing and credits",
+      "checked": "2026-10-08",
+      "facts": [
+        "ordinary posts read USD0.005/resource",
+        "user read USD0.010/resource",
+        "spending caps",
+        "daily UTC duplicate charging is a soft guarantee"
+      ],
+      "lines": "119-169,227-234,285-293"
+    },
+    {
+      "url": "https://docs.x.com/x-api/posts/search/introduction",
+      "title": "Search Posts",
+      "facts": [
+        "recent 7 days",
+        "full-archive separate endpoint",
+        "requires developer account/project/app/credentials"
+      ],
+      "lines": "200-234,356-362"
+    },
+    {
+      "url": "https://docs.x.com/x-api/posts/search/integrate/operators",
+      "title": "Search Operators",
+      "facts": [
+        "from:",
+        "conversation_id:",
+        "quotes_of_tweet_id:"
+      ],
+      "lines": "244-250,268-298"
+    },
+    {
+      "url": "https://docs.x.com/developer-terms/policy",
+      "title": "X Developer Policy",
+      "facts": [
+        "stored content must follow modification/deletion state",
+        "24-hour removal request condition"
+      ],
+      "lines": "258-265"
+    },
+    {
+      "url": "https://github.com/Panniantong/Agent-Reach/blob/main/agent_reach/channels/twitter.py",
+      "title": "Twitter channel upstream implementation",
+      "facts": [
+        "twitter-cli,OpenCLI,bird legacy candidates",
+        "checks do not prove actual commands",
+        "no doctor automatic credentials read"
+      ],
+      "web_lines": "520-683",
+      "qualification": "upstream main at observation time, not installed or runtime-tested here"
+    }
+  ],
+  "local_sources": {
+    "docs/literature-learning/README.md": {
+      "sha256": "c73aa2a8ab18c9e71fc193e50473eb9dae5e4b6f48cbed06ae1222e189589c74",
+      "bytes": 7828
+    },
+    "src/lei_signal/api/learning_library.py": {
+      "sha256": "f7defca54f0e1f2414a363d6c70624704d5d913d4c86b742c9897dee02df558b",
+      "bytes": 4723
+    },
+    "src/lei_signal/api/routes/learning.py": {
+      "sha256": "87ef4760fd4f59630deb792f96fd097fb92b969e1fa41efc9c7bfd88e006e9fa",
+      "bytes": 1049
+    },
+    "web/src/pages/LearningLibraryPage.tsx": {
+      "sha256": "3bc8cc35aff3cc45923d30388a301b4ebf5558d2d5ebdb0d593bc2ef7cab5498",
+      "bytes": 21128
+    },
+    "docs/ops/gpt-system-integration.md": {
+      "sha256": "a6deabeb597f098b12c5baf44f6cb58f7c01fadf3061becad252b285ba66c98a",
+      "bytes": 11311
+    },
+    "docs/research/current-standards.json": {
+      "sha256": "d1293a6c4536b0b440f8260d91e5a8d8d1485a0ccbd0fc3801d478baec68ce71",
+      "bytes": 1209
+    },
+    "configs/strategy-documents.v1.json": {
+      "sha256": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b",
+      "bytes": 806
+    },
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md": {
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "bytes": 65786,
+      "modified": false
+    },
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md": {
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "bytes": 36427,
+      "modified": false
+    }
+  },
+  "cost_arithmetic": [
+    {
+      "posts_per_day": 50,
+      "days": 30,
+      "usd_per_post": 0.005,
+      "post_read_usd": 7.5,
+      "other_costs_included": false
+    },
+    {
+      "posts_per_day": 100,
+      "days": 30,
+      "usd_per_post": 0.005,
+      "post_read_usd": 15.0,
+      "other_costs_included": false
+    },
+    {
+      "posts_per_day": 200,
+      "days": 30,
+      "usd_per_post": 0.005,
+      "post_read_usd": 30.0,
+      "other_costs_included": false
+    }
+  ],
+  "existing_goals_read_only": [
+    {
+      "id": "okr-d294b817468b",
+      "title": "开发独立文献学习库页面",
+      "status": "review"
+    },
+    {
+      "id": "okr-27bab16d426d",
+      "title": "整理文献学习内容与开发交接",
+      "status": "review"
+    },
+    {
+      "id": "okr-4f4157e2957e",
+      "title": "因子库后续：外部资源适配与分批接入",
+      "status": "in_progress"
+    }
+  ],
+  "goal_keyword_check": {
+    "terms": [
+      "X平台",
+      "twitter",
+      "推特",
+      "帖子",
+      "内容推送",
+      "外部内容",
+      "社交媒体"
+    ],
+    "matches": 0,
+    "limitation": "字面匹配不证明无语义相关目标",
+    "database_modified": false
+  },
+  "corrections": [
+    {
+      "kind": "assistant_source_baseline",
+      "failure": "助手误用旧本地coordination/lei而非origin/coordination/lei，误报两任务不存在",
+      "resolution": "直接从已fetch远端ref读回，两记录存在；撤回旧发现，未据此修改"
+    },
+    {
+      "kind": "local_coordination_delta_check",
+      "failure": "git diff path缺少 -- 返回128",
+      "resolution": "增加 --，最新SHA与登记SHA一致，0差异"
+    }
+  ],
+  "checks": {
+    "source_facts": "passed documentary only",
+    "cost_arithmetic": "passed",
+    "content_entry_and_notification_policy": "passed",
+    "strategy_fingerprints": "passed",
+    "registration_and_preservation": "passed",
+    "repo_hygiene": {
+      "exit": 0,
+      "output": "✓ 归置自检通过：根层四层均在白名单内，关键配置均已入库。",
+      "stderr": ""
+    },
+    "remote_readback": "see final coordination task and repository-local publication receipt"
+  },
+  "report": {
+    "path": "docs/experiments/x-learning-path-review-2026-10-08.md",
+    "sha256": "e661b84a6d74008a475f963a70f67d216cca7bea801bd44397b170aa9cbc4aeb"
+  },
+  "registration": {
+    "entries_before": 637,
+    "entries_after": 638,
+    "other_entries_unchanged": true,
+    "registry_sha256": "96ae0f8939d61c4e33da33ae040c852980280b9f79b65477fb6b3b024a039718",
+    "index_sha256": "c39f0256d371265bdc18281f6ab9eef0395c83fcbd6aab9b77f3be9b43c32097",
+    "exact_text_reverse_restores_before": true
+  },
+  "publication_scope": {
+    "branch": "codex/x-learning-path-review-20261008",
+    "base_commit": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
+    "published_registry_entries_before": 317,
+    "published_registry_entries_after": 318,
+    "shared_local_registry_is_not_uploaded_whole": true,
+    "only_own_delta": true,
+    "default_head_and_index_preserved": true
+  }
+}
