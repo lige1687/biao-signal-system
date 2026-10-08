@@ -134,8 +134,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "d074b828267c573535825768c87b7d146f876a9d",
-  "checked_at": "2026-10-08T19:07:31.111051+08:00",
+  "checked_coordination_sha": "bb57287b147c882256dd502141186f9a6805249e",
+  "checked_at": "2026-10-08T19:11:57.660887+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -1117,7 +1117,7 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
     "theory-workflow-system-increment",
     "daily-trading-system-audit"
   ],
-  "conflict_decision": "CLI delivered source reviewed readonly; settlement singlewriter plus readonlycriticalreview; theory nextscope only newmetadata provenance receipt. Shared registry unchanged.",
+  "conflict_decision": "Classic fourfile implementation scope released, no rootedit; settlement fixes retain singlewriter newraw; theory provenance originalowner newmetadata only. All scopes disjoint.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -2179,3 +2179,10 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 - checked_coordination_sha=d074b828267c573535825768c87b7d146f876a9d；已读本任务/classic/theory/daily，未发现本轮准确写范围冲突。结算本聊天Sol6.1/medium已实际写新raw并交23合成检查；四源码固定，原Astra/high只读独立反例审查正在运行，尚未验收。
 - 原CLI成果3d3c172c5119ca9ec3f8c77b17116d416f86f86a已中控核17远端文件及6项独立拒绝/角色累计/实际CLI顺序，限定显式计划保护accepted；2旧附件兼容例、真实外盘/新机/竞态仍未验证，不等同整个目标8。原owner已收到仅状态更新回执。
 - 下个独立必要工作：由原theory owner核剩余36项准确资料的原负责人/既有Git字节/明确传播依据；合同remaining36-provenance-contract.json，仅新增theory-safe-publication raw/remaining36-provenance.json及自己的进度/协调。39已验收不重做，36原件不修改不上传，0市场/拟合/新来源取数。当前合同ready，待实际派发。
+
+## 独审失败后的实际修复与中控证据发布 2026-10-08T19:11:57.660887+08:00
+
+- checked_coordination_sha=bb57287b147c882256dd502141186f9a6805249e；已读classicscope释放及theory新36索引范围，本轮无路径冲突。
+- 结算初版不是accepted：Astra/high独立复现3P1（跳过已知行动/漏收盘旧净值入金/同日释放），另补拆分390到390直接断言；已交同一Sol6.1/medium在原唯一raw范围修复，四v1源码及失败回执保留。原六源和市场预算不变。
+- 36来源核查已实际启动原owner，turn01a11b33-0b25-7bc3-b78b-9fb91c15b0ae/cursor:10，工具完成标记已核；只小索引，不发布原36材料。
+- 研究写前预检有限验收及本轮合同/独审/失败/进度14文件，codex/research-direct-20261008@d4227cd441f5f5420f468cfc92fa93a69cd3d714，已fetch逐文件字节读回。源实现3d3c172c/释放6f8b5775另由原CLIowner发布，代码未变。主Goal仍active，不拿阶段验收当全部八目标完成。
