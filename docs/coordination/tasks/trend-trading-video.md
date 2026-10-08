@@ -1,3 +1,13 @@
+## V9 v12-start
+
+- task-id: trend-trading-video；2026-10-08T23:37:55.100291+08:00；checked_coordination_sha: ee2076f1fab074533df6956723354cc51020ef10；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active；用户明确要求两篇文章有效方法沉淀Skill，再做十几秒。范围新v12/及code-explainer-video/SKILL.md和references/continuity-and-efficiency.md。只15秒新小样，无全片；主题/配色/字体延用已批，重点纸带→曲线→人物连续转场。
+- 基线a0f375661d1177dd0afe3aeb268036da2a2a1b71，分支codex/trend-continuity-v12-20261008。读中控与自身无重叠，不碰registry/INDEX、系统或语雀发布状态。已有两篇阅读证据复用，不重新研究或安装外部skill。
+- 大产物独立核定外盘，估计800MiB+本机2MiB。验收15秒实际导出/解码/关键帧与播放；无旁白无品牌无真实行情。周额度起点49%。语雀阻塞与本次制作独立。
+
+
+---
+
 ## V9 learning-publication-blocked
 
 - task-id: trend-trading-video；2026-10-08T23:32:13.485582+08:00；checked_coordination_sha: e9cc5da8e43596653d4037aadd3691947a2a231a；已读 COORDINATION.md、自身与 research-dispatch-controller。
