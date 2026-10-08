@@ -1,3 +1,16 @@
+# 当前：主动推送已取消，按需菜单交付 2026-10-08T19:45:43.215891+08:00
+
+- task-id daily-trading-system-audit；owner root；status completed（本次模式变更）；checked_coordination_sha 12ae1269bbf74538cb684a98f5359d5bd01034d9；checked_at 2026-10-08T19:45:43.215891+08:00。已读COORDINATION1.1、自身、中控、classic-factor-research、theory-workflow-system-increment、trend-trading-video以及登记前theory新增20行；交付前fetch无新增差异，与其研究/媒体/原生保护不重叠。
+- 最新用户取消“算了，你别通知我了…我想问的时候…今日操作简报、市场基本面、消息面”。当前仅用户主动问/点后才答，不沿用上一条仅交易提醒或更早全关键提醒。
+- 原automation-3/4/5/6专用工具全部PAUSED＋failed_runs_only，配置文件逐字读回最新停止前置声明、状态和静默偏好；原ID/名称/日程/目标/创建时间与完整历史流程保留，不新建、不删除、不自动恢复。没有改其他owner自动化，不向提醒对话发新消息。
+- 五项按需菜单：今日操作简报、市场基本面、持仓消息面、单只基金分析、交易计划与持仓变化；映射现有查询和确认流程。用户点选/自然语言请求才调用，先读系统，具体分析需要时再补公开原始来源；名称/数据日期/系统和搜索证据分开，未就具体主题本次执行无目的搜索。
+- 本机现有daily-review实际读29持仓、fundamentals(observations)3项、news限5条均available，news来源缺口原样保留，不宣称全部最新。0真实订单/计划/持仓写入/下载/ASR/市场研究；没有修改通知算法或新后端，不发送这三测试输出。
+- 源码/文档 codex/gpt-system-integration-20261008@8bde94333264ed9649acfb05d975ed32a6019d06，8准确小文件普通push/fetch逐字核；AGENTS源父e0a原文+自身lei-chat-on-demand块，原共享脏改不混入，本机旧字节全部保留。技能校验/归置/diff通过，不为低影响文档修改新增无意义单测，原功能证据保留。
+- 证据：原raw/on-demand-acceptance.json、ownprogress当前模式，私有三视图/自动化前后配置与读回回执仅本仓cache。历史通知、来源、比较状态不删除，但不补送旧事件。磁盘查询与音频预检仍内部可用，不另发运维通知。
+- 接续：后续AI从AGENTS和lei-system-chat读取新偏好，采用原生点选项或自由问题。若用户问真实交易，仍遵守准确确认卡，不因按需模式自动下单。原手机直连和未知同产品资料不冒称解决。已完成本次暂停、可访问菜单、实际查询、必要文档检查及远端核验；无本批必需剩余动作，只有用户后续具体问题才继续相应分析。
+
+---
+
 # 取消主动推送，改为用户点选查询：开工 2026-10-08T19:37:51.522053+08:00
 
 - task-id daily-trading-system-audit；owner root唯一写者；status active；checked_coordination_sha 05c04e2f8218d8d0cabee292dcbd57f736e6ee13；checked_at 2026-10-08T19:37:51.522053+08:00；已读COORDINATION1.1、自身、中控、classic-factor-research、theory-workflow-system-increment、trend-trading-video最新登记，另读theory新20行来源资格审查（仅其自身raw）。其他原生存储/研究/媒体范围不重叠。
