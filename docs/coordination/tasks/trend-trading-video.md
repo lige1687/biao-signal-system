@@ -1,3 +1,15 @@
+## V7 动画已重做，成片导出受磁盘空间阻塞
+
+- task-id trend-trading-video；blocked；owner本对话root；2026-10-08T21:15:49.315359+08:00；checked_coordination_sha: 43949fe9393758e6a9cfeb49386b69be7a3d8508；已读 COORDINATION.md、本任务与 research-dispatch-controller。冲突决定：本轮无共享登记写入，既有自有媒体/skill范围保持。
+- 成果分支 codex/trend-history-v7-20261008@d8185a03396db94e86104594f3e64847db4ac713，17个准确路径已逐字读回；无合并/部署。60秒/1800帧 Remotion 4.0.534 项目，深色宋体/金色图形、真实利弗莫尔档案照片、价格线拉远、通道突破、规则卡展开，保留无旁白无真实行情要求。
+- 实际检查：TypeScript无错误，1800帧时间表通过，仓库归置通过；实际静帧导出1张；Studio浏览器实际从0播放到1069帧且无错误，姓名裁切和图表裁切已在预览修正。混音完整解码60秒，−17.0LUFS、真峰−1.6dBFS。主观听审/全片视觉及MP4播放未完成，不能标交付完成。
+- 阻塞：磁盘仅约0.13GiB；Remotion影片导出明确ENOSPC，URL复用Studio也不兼容。失败保留v7/pilot-render.log。未删除数据；已向用户请求只删除v7/npm-cache约431MB，等待许可，或用户自行释放空间。此前约2.1GiB基线不是当前可用空间。
+- 可看 http://127.0.0.1:8773/v7/ 入口，动画工作台 http://127.0.0.1:8774/TrendHistoryV7 。没有新版MP4；预览服务及照片/音频/依赖/缓存仅本机，远端不含媒体。源码、许可来源、修复记录及恢复方式见v7/production-notes.md。旧片全部保留。
+- 额度40%→42%，账号共享显示变化2个百分点，单任务精确占用未知；无付费媒体服务。当前为用户切换后的Astra，不委派子agent。
+- 恢复：许可清理本轮缓存或有足够空间后，先10秒LivermoreStudy实际导出检查，再60秒TrendHistoryV7导出、完整解码/浏览器实播、用户观感验收。不重查封存历史资料，不动策略/生产。
+
+---
+
 ## 第七版重做：用户否定V6观感
 
 - task-id trend-trading-video；active；owner本对话root；2026-10-08T20:51:57.153449+08:00；checked_coordination_sha: ba41327e371fe82e45bb5f22cbf0728f85c713cd；已读COORDINATION.md、本任务及research-dispatch-controller。冲突决定：只写自有媒体与skill，不占registry/INDEX。
