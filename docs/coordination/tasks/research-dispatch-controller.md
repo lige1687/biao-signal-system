@@ -134,8 +134,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "a5eefb5c79a059b50d2d4f94f06bffd4b97d40e1",
-  "checked_at": "2026-10-08T19:16:02.218640+08:00",
+  "checked_coordination_sha": "ccb11c97e350a56eb80f1ae9ba6ba94d6d5898bc",
+  "checked_at": "2026-10-08T19:18:00.325061+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -1113,11 +1113,12 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
   ],
   "read_task_ids": [
     "research-dispatch-controller",
+    "technical-factor-sequence",
     "classic-factor-research",
     "theory-workflow-system-increment",
     "daily-trading-system-audit"
   ],
-  "conflict_decision": "Datedledger author finished andreadonlyreview accepted; root solewriter for one newreport and exactsingle registry/INDEX addition. Theory only source metadata, classic released. Preserve all oldentries/dirtyotherpaths.",
+  "conflict_decision": "Originaltechnicalowner inactive completed turn checked; new9filequalification strictlyreadonly; rootarchives oneledgerreport, other36sourcesunchanged.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -2192,3 +2193,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 - checked_coordination_sha=a5eefb5c79a059b50d2d4f94f06bffd4b97d40e1；原Astra/high已有限接受v2三P1修复并独算合法peer路径、跨时区日期与拆分390→390。源码dated_ledger.py SHA20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3。Sol作者停止写入，非作者审查没有修改源文件。原v1/3失败/初次v2夹具失败均保留。
 - root下一准确写范围：docs/experiments/weekly-portfolio-dated-execution-2026-10-08.md，docs/experiments/registry.json仅该路径新增1条（主树和既有codex/research-direct隔离树各自保留原条目），docs/experiments/INDEX.md仅导航新增1行；本任务已有goal-parallel/新ledger raw的验收/发布回执与原work-progress。不改运行账本代码、其他报告、definitions、原件、仓外或数据库。只有范围推送远端核后才开写归档。
 - 归档只接受带日期合成执行层及3缺陷修复，不代表完整P0/P1/市场规则/收益；旧11root报告不重做。预计新增小文档与约0.33MB人工raw，空间实测仍约5GB。注册后核原条目/报告SHA/链接/归置和精确远端字节。
+
+## 36来源回调验收与9方法原owner核定 2026-10-08T19:18:00.325061+08:00
+
+- checked_coordination_sha=ccb11c97e350a56eb80f1ae9ba6ba94d6d5898bc；36索引3c849c81a421432c86941b5306dcc55eb90e34a9/67f523d08501c8be4498813ca38058d7658ed29b已核远端索引SHA与全部36本地指纹。9自有方法候选、22计算元数据、3来源审核、2逐观察材料分别有恢复条件；7既有本地ref有限历史未找到同字节原件，不称全远端穷尽。
+- 下一必要工作是原technicalowner01a0e703-4c27-74e2-bf77-997e1879f967只读逐9内容/权利范围核定，旧turn01a116f0已completed、notLoaded、无新研究运行证据。合同method9-owner-qualification-contract.json；write_paths空，无新实验或D真实输入，root归档与之并行。当前ready未派发，不重复theory39或36索引。
