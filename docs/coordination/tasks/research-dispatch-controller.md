@@ -134,8 +134,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "bb57287b147c882256dd502141186f9a6805249e",
-  "checked_at": "2026-10-08T19:11:57.660887+08:00",
+  "checked_coordination_sha": "a5eefb5c79a059b50d2d4f94f06bffd4b97d40e1",
+  "checked_at": "2026-10-08T19:16:02.218640+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -1117,7 +1117,7 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
     "theory-workflow-system-increment",
     "daily-trading-system-audit"
   ],
-  "conflict_decision": "Classic fourfile implementation scope released, no rootedit; settlement fixes retain singlewriter newraw; theory provenance originalowner newmetadata only. All scopes disjoint.",
+  "conflict_decision": "Datedledger author finished andreadonlyreview accepted; root solewriter for one newreport and exactsingle registry/INDEX addition. Theory only source metadata, classic released. Preserve all oldentries/dirtyotherpaths.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -2186,3 +2186,9 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 - 结算初版不是accepted：Astra/high独立复现3P1（跳过已知行动/漏收盘旧净值入金/同日释放），另补拆分390到390直接断言；已交同一Sol6.1/medium在原唯一raw范围修复，四v1源码及失败回执保留。原六源和市场预算不变。
 - 36来源核查已实际启动原owner，turn01a11b33-0b25-7bc3-b78b-9fb91c15b0ae/cursor:10，工具完成标记已核；只小索引，不发布原36材料。
 - 研究写前预检有限验收及本轮合同/独审/失败/进度14文件，codex/research-direct-20261008@d4227cd441f5f5420f468cfc92fa93a69cd3d714，已fetch逐文件字节读回。源实现3d3c172c/释放6f8b5775另由原CLIowner发布，代码未变。主Goal仍active，不拿阶段验收当全部八目标完成。
+
+## 结算修复独审通过与精确归档范围 2026-10-08T19:16:02.218640+08:00
+
+- checked_coordination_sha=a5eefb5c79a059b50d2d4f94f06bffd4b97d40e1；原Astra/high已有限接受v2三P1修复并独算合法peer路径、跨时区日期与拆分390→390。源码dated_ledger.py SHA20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3。Sol作者停止写入，非作者审查没有修改源文件。原v1/3失败/初次v2夹具失败均保留。
+- root下一准确写范围：docs/experiments/weekly-portfolio-dated-execution-2026-10-08.md，docs/experiments/registry.json仅该路径新增1条（主树和既有codex/research-direct隔离树各自保留原条目），docs/experiments/INDEX.md仅导航新增1行；本任务已有goal-parallel/新ledger raw的验收/发布回执与原work-progress。不改运行账本代码、其他报告、definitions、原件、仓外或数据库。只有范围推送远端核后才开写归档。
+- 归档只接受带日期合成执行层及3缺陷修复，不代表完整P0/P1/市场规则/收益；旧11root报告不重做。预计新增小文档与约0.33MB人工raw，空间实测仍约5GB。注册后核原条目/报告SHA/链接/归置和精确远端字节。
