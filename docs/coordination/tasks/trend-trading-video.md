@@ -1,3 +1,11 @@
+## 共享登记窗口临时释放
+
+- 2026-10-08T20:20:54.153954+08:00；checked_coordination_sha: 6b37f4d6c4d90d4bc024860cd4a91ac70e337fcf；本任务本轮尚未修改registry.json和INDEX.md。
+- 根据中控送达的weekly-portfolio-order-planning单项登记请求，本视频任务临时释放两文件登记窗口：scope_released=true（仅registry.json与INDEX.md）。媒体、skill和自己的报告路径继续由本任务写。
+- 对方完成登记并记录释放后，本任务再fetch、核最新状态，串行追加自己的单项。当前不抢写，不将未登记报告写成归档完成。
+
+---
+
 ## 本轮范围更新：只讲趋势流派发展
 
 - 2026-10-08T20:12:55.673453+08:00；checked_coordination_sha: 72b4fc5be2bf2b5ba10fedeac1351110adcc7b54；已读自己的任务与中控，无重叠。
