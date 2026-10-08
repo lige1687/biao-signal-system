@@ -197,6 +197,11 @@
       "kind": "local_coordination_delta_check",
       "failure": "git diff path缺少 -- 返回128",
       "resolution": "增加 --，最新SHA与登记SHA一致，0差异"
+    },
+    {
+      "kind": "shared_registration_window",
+      "failure": "开工只看旧释放记录，没有把视频V9已声明的新单项登记纳入窗口判断",
+      "resolution": "自身两登记写入已在收到中控提醒前成功；重核原637条均保留、自项唯一，保存准确时间和指纹；保留成功写入，释放自身窗口，不再修改共享两文件，由中控与视频owner协调后续顺序"
     }
   ],
   "checks": {
@@ -232,5 +237,19 @@
     "shared_local_registry_is_not_uploaded_whole": true,
     "only_own_delta": true,
     "default_head_and_index_preserved": true
+  },
+  "registration_final_readback": {
+    "checked_at": "2026-10-08T22:47:36.424891+08:00",
+    "registry_write_at": "2026-10-08T22:45:46.147693+08:00",
+    "index_write_at": "2026-10-08T22:45:46.148973+08:00",
+    "current_entries": 638,
+    "before_entries": 637,
+    "before_entries_missing": [],
+    "before_entries_modified": [],
+    "own_entry_present": true,
+    "video_new_entry_present": false,
+    "registry_sha256": "96ae0f8939d61c4e33da33ae040c852980280b9f79b65477fb6b3b024a039718",
+    "index_sha256": "c39f0256d371265bdc18281f6ab9eef0395c83fcbd6aab9b77f3be9b43c32097",
+    "latest_coordination": "f06b311a2fcb3e54923137c6bf59c70c7c77a66a"
   }
 }
