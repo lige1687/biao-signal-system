@@ -1,3 +1,18 @@
+## V9 static-delivered
+
+- task-id: trend-trading-video；2026-10-08T22:50:33.446143+08:00；checked_coordination_sha: 492feed9b7144a8a5909cda3337665bcee3aa187；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- 静态图与流程沉淀阶段completed；下一阶段等待用户风格确认，未渲染动态小样或全片。scope_released=true：本轮registry/INDEX及自身写入窗口释放；未来确认后另登记。
+- 已读中控22:45共享登记顺序及external-learning-x-review。写前主表实际638条，X报告已存在；按中控“保留已成功写入”决定不回滚，原638项保留，只追加本报告至639。X报告登记SHA与文件同为e661b84a6d74008a475f963a70f67d216cca7bea801bd44397b170aa9cbc4aeb。不存在覆盖对方条目，原行保留。中控可直接读此释放回执，无额外研究/渲染。
+- 成果codex/trend-style-v9-20261008@eba7a6d9f8823c52e0ab9fd54dcd16e335911b19，19净文件逐字远端读回。报告docs/experiments/video-style-approval-2026-10-08.md SHA 36534a1c966b229e1357ab8d96d0a477294503438f36b0a5dde7f45706fdfe7a；隔离登记319→320仅自身。目录归置/空白检查通过。
+- 三张1920×1080 PNG为历史报价机开场、利弗莫尔人物页、趋势分层图；实际每张查看、尺寸/SHA/HTTP字节读回。图表标签SVG默认填色生成黑三角，已显式none并只重做该张；保留失败初图。TS与无品牌文字检查通过，主观风格待用户。
+- 图片/素材/临时普通文件/日志在已核外盘trend-trading-video-20261008T223240-7b33ed111534/result，位置/设备/估计100MiB见v9/storage-plan.json，未迁移旧媒体。源码和小记录本机；素材不上传Git。预览http://127.0.0.1:8776/仅本机，浏览器连接变化导致UI检查失败，open_in_codex返回queued，不冒称UI已验；实际PNG可直接交付。
+- 用户明确流程已写skill：需求探讨→参考样例→静态图确认→10—15秒小样确认→成片；stage-state.json区分原料正向反馈与未展示排版的确认。永久匿名/无旁白/无真实案例保持；未经用户确认不跳阶段。
+- 新教程简介自述Codex+HyperFrames，六阶段prompt来自普通用户转贴，未当作者原文；风格片实际观察约30/80秒，未完整听审。内置imagegen1次生成原料，无新安装或额外删除。周额度45%→46%，账号共享差1个百分点，单任务和图像独立费用未知。
+- Git保存首次严格路径断言因未改动的旧检查器而停止，尚未推送，随后从净路径列表去掉未改文件并成功推送核对，不绕过检查。旧V8已经技术完成，但用户主观仍一般，本轮不写成V8风格认可。
+
+
+---
+
 ## V9 staged-flow
 
 - task-id: trend-trading-video；2026-10-08T22:32:40.212473+08:00；checked_coordination_sha: 865b64a35851f3f47cc9d9c0605321213841b825；已读 COORDINATION.md、自身与 research-dispatch-controller。
