@@ -103,4 +103,4 @@
 
 证据入口：docs/experiments/raw/theory-safe-publication-2026-10-08/{README.md,package-manifest.json,dependency-check.json,remote-readback.json}；原四报告不改。没有新市场运行/拟合/标签/取数/安装；无main合并或部署。失误保留：第一次24测试误在原根运行，独立测试随后暴露缺件；普通git add稀疏路径拒绝，文件未丢失，改用准确--sparse登记后成功核远端，不能把第一次空提交/推送当回执交付。发布范围释放；无后台研究或必要剩余计算，不向中控重复发消息，由其读取此记录接续。
 
-最终同步前普通push被新中控登记拒绝；fetch核b1d7a706be47819e8807d916b22e08ea4e76337a，仅中控预检范围变化，本任务无文件重叠，已读取并正常merge保留后推送。checked_coordination_sha=b1d7a706be47819e8807d916b22e08ea4e76337a；检查时间2026-10-08T18:34:00+08:00（本追加实际工具时间以Git提交为准）。
+最终同步前普通push被新中控登记拒绝；fetch核b1d7a706be47819e8807d916b22e08ea4e76337a，仅中控预检范围变化，本任务无文件重叠，已读取并正常merge保留后推送。checked_coordination_sha=b1d7a706be47819e8807d916b22e08ea4e76337a；记录时间2026-10-08T18:34:10.413360+08:00。
