@@ -1,3 +1,13 @@
+## V9 workflow-review-start
+
+- task-id: trend-trading-video；2026-10-09T01:28:08.230298+08:00；checked_coordination_sha: e220e6e3593700b9a73fe27848eb8bb9c04949ad；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active：用户要求复查两条xilo文章可接入视频Skill之处，并打通文稿等前置材料与制作交接。应用research-closure的report_only核证模式，沿用视频工作流输出，不另建因子实验。既有Skill已涵盖参考/静图/小样/全片，本轮补文稿准备和文件接续，不重做媒体。
+- scope：视频Skill入口、references/preproduction-workflow.md及模板/必要轻量前置检查器；xilo-learning本轮核对文档、V14当前资料的接续索引、自有work-progress。基线2f7bc4683f74237d19fde484ce665ac975d08a3f，沿用codex/trend-history-long-v14-20261009；本人唯一写者，自身与中控已读无重叠。不改生产策略或旧媒体/语雀发布状态。
+- 证据：原X两帖403，复核对应转载与作者仓库；不执行远端脚本。最多6次定向来源工具请求（当前4次），无付费/安装/语音调用。验收：可清楚说明用户最少提供什么、AI补什么、旁白/无旁白的时序、每阶段读取和产生哪份材料；缺失明确而非假称工具自动接通。存储规则沿用；如仅做本机小文档不新增大媒体。
+
+
+---
+
 ## V9 final-archive-done
 
 - task-id: trend-trading-video；2026-10-09T01:25:50.714039+08:00；checked_coordination_sha: f85037d52443dbb4a6b5d7386018fb072594586b；已读 COORDINATION.md、自身与 research-dispatch-controller。
