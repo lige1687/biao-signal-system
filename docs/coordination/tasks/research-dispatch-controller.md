@@ -1,9 +1,10 @@
 # LEI 八目标｜本对话直接执行
 
-- 更新2026-10-08T15:23:35.308714+08:00；checked_coordination_sha=eb8236dc2d55586b74014828bd55d4f2676e46ba，与原登记以来范围无变化。
-- 两项本地计算及独立复算已完成；上次因Errno28未能保存核验与归档，本次恢复归档。没有真实研究进程运行，不重跑主计算。
-- 固定成交现金需求：A_ALL约41.21万至49.90万元，A_SMA约39.904万至39.907万元；2026上半年日历181日一致。仅条件研究，不构成实盘建议或完整历史日历合格。
-- 准确路径范围保持，仅root写两份报告及其raw、共享registry/INDEX，其他负责人文件不变。此前九份成果、失败与预算保持；两项新成果尚未推送。
+- 更新2026-10-08T15:33:22.762193+08:00；checked_coordination_sha=cc27d1b3d99a435eaaca598537180ca3a2fef2ba，沿原五task-id核对，无范围冲突。
+- 新完成两报告：原固定成交现金需求A_ALL约41.21万至49.90万元、A_SMA约39.904万至39.907万元；2026上半年日历181日一致，新增覆盖153日。独立计算路径复算相同，未声称外部人独审、收益改善或全历史合格。
+- 成果a9f438d67bf5c850a5ae49ce00d7ce646c7822bb的23文件已逐字远端读回；进度凭据c9d99bf4bb77e985f79aa7c97594c7835a7d1da6已远端核验。主登记632、隔离登记211，新增两项；累计11报告。
+- 磁盘Errno28失败保留，本轮恢复小文件写入并完成归档；空间仍低，新下载/大任务须另核容量。没有重跑主计算、旧实验、真实标签或拟合，来源操作仍112/8,511,710字节。
+- 共享registry/INDEX范围已释放；当前无真实研究进程运行。八整体目标仍待各自资料/合同，不用某一缺件阻塞独立项，也不重复封存研究。详见机器记录中八目标剩余项。
 
 ## 当前直接执行规则
 
@@ -133,8 +134,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "eb8236dc2d55586b74014828bd55d4f2676e46ba",
-  "checked_at": "2026-10-08T15:23:35.308714+08:00",
+  "checked_coordination_sha": "cc27d1b3d99a435eaaca598537180ca3a2fef2ba",
+  "checked_at": "2026-10-08T15:33:22.762193+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -269,17 +270,11 @@
       "write_paths": [
         "docs/ops/work-progress/research-dispatch-controller-2026-10-07.md",
         "docs/experiments/raw/research-dispatch-controller-2026-10-07/thread-state.json",
-        "docs/coordination/tasks/research-dispatch-controller.md",
-        "docs/experiments/raw/fixed-ledger-cash-requirement-2026-10-08/",
-        "docs/experiments/raw/sse-calendar-2026-h1-equivalence-2026-10-08/",
-        "docs/experiments/fixed-ledger-cash-requirement-2026-10-08.md",
-        "docs/experiments/sse-calendar-2026-h1-equivalence-2026-10-08.md",
-        "docs/experiments/registry.json",
-        "docs/experiments/INDEX.md"
+        "docs/coordination/tasks/research-dispatch-controller.md"
       ],
       "depends_on": [],
       "scope_released": false,
-      "source": "Root executes two independent local-only necessary followups under original goals1/3/5. Old overlap study and February calendar check closed and not rerun. Unique raw/report paths; shared registration solely root serial; other owner records read-only.",
+      "source": "Two local followups accepted and archived; no research process active. Root retains only central runtime/progress ownership.",
       "scope_note": "No active research write scope;9source reports accepted. Shared registration released. Refresh ownership before future source unit."
     },
     {
@@ -564,7 +559,7 @@
   "current_execution_mode": "root_direct_no_delegation",
   "direct_execution_unit": {
     "id": "cash-and-calendar-local-parallel-20261008",
-    "state": "computed_verified_archival_resuming",
+    "state": "completed_two_bounded_questions_archived_remote_verified",
     "question": "Fixed saved quantities: minimum cash to fund all original fills under sell-first/buy-first within-day bounds; independently compare existing SSE2026 notice against saved SZSE daily flags January-June2026.",
     "original_authority": "Original eight goals1/3 calendar correctness and goal5 shared-capital feasibility; latest user continue and parallel, root-only execution remains.",
     "write_paths": [
@@ -575,8 +570,8 @@
       "docs/experiments/registry.json",
       "docs/experiments/INDEX.md"
     ],
-    "checked_coordination_sha": "eb8236dc2d55586b74014828bd55d4f2676e46ba",
-    "checked_at": "2026-10-08T15:23:35.308714+08:00",
+    "checked_coordination_sha": "cc27d1b3d99a435eaaca598537180ca3a2fef2ba",
+    "checked_at": "2026-10-08T15:33:22.762193+08:00",
     "read_task_ids": [
       "research-dispatch-controller",
       "theory-workflow-system-increment",
@@ -605,7 +600,14 @@
       "Two reports registered, hygiene checked, exact published files read back; no frozen evidence edits."
     ],
     "stop": "Each fixed question answered or actual input/hash/space failure; no strategy rerun, new capital allocation, old source retry or production rule changes.",
-    "prior_failure": "Errno28 blocked receipt/report/registry writes; main results persisted, independently recalculated via no-temp Python invocation. Recovery receipt preserved in automation prompt."
+    "scope_commit": "eb8236dc2d55586b74014828bd55d4f2676e46ba",
+    "scope_remote_readback": "equal",
+    "started_at": "2026-10-08T15:08:11.121104+08:00",
+    "accepted_at": "2026-10-08T15:31:45.814395+08:00",
+    "published_commit": "a9f438d67bf5c850a5ae49ce00d7ce646c7822bb",
+    "remote_readback_files": 23,
+    "failures_preserved": "cash raw/execution-log.json: disk Errno28, preview schema, gh absent, sparse staging",
+    "archive_complete": true
   },
   "controller_owner": "01a116c7-3700-7062-a6c6-53af00ef60a0",
   "direct_execution_completed_units": [
@@ -1040,94 +1042,75 @@
       "source_operations_used": 5,
       "raw_response_bytes": 32128,
       "report": "docs/experiments/csi300-catalog-completeness-qualification-2026-10-08.md"
+    },
+    {
+      "id": "fixed-ledger-cash-requirement-2026-10-08",
+      "state": "completed_bounded_question",
+      "report": "docs/experiments/fixed-ledger-cash-requirement-2026-10-08.md",
+      "published_commit": "a9f438d67bf5c850a5ae49ce00d7ce646c7822bb",
+      "accepted_at": "2026-10-08T15:31:45.814395+08:00",
+      "source_requests_added": 0,
+      "independent_recomputation": "passed, same root separate arithmetic path; no external-review claim"
+    },
+    {
+      "id": "sse-calendar-2026-h1-equivalence-2026-10-08",
+      "state": "completed_bounded_question",
+      "report": "docs/experiments/sse-calendar-2026-h1-equivalence-2026-10-08.md",
+      "published_commit": "a9f438d67bf5c850a5ae49ce00d7ce646c7822bb",
+      "accepted_at": "2026-10-08T15:31:45.814395+08:00",
+      "source_requests_added": 0,
+      "independent_recomputation": "passed, same root separate arithmetic path; no external-review claim"
     }
   ],
-  "direct_execution_summary": {
-    "reports": 9,
-    "securities": 4,
-    "source_documents": 33,
-    "local_checks": 324,
-    "officially_matched_2025_placeholders": 36,
-    "visible_source_operations": 112,
-    "raw_response_bytes": 8511710,
-    "labels": 0,
-    "fits": 0,
-    "price_repairs": 0,
-    "source_originals": "local_only; hashes and factual summaries published",
-    "publication_branch": "codex/research-direct-20261008",
-    "publication_tip": "4307e20771f503386ea5987fdc037a716b57684e",
-    "main_registry_entries": 630,
-    "isolated_registry_entries": 209,
-    "primary_branch_unchanged": true,
-    "free_bytes_after": 1017417728,
-    "officially_matched_2024_placeholders": 17,
-    "code_transitions_qualified": 1,
-    "saved_dividend_events_qualified": 6,
-    "dividend_coverage_counterexamples": 1,
-    "securities_note": "three missing price securities plus300114/302132 one continuing issuer; not full439-universe qualification",
-    "official_2025_index_transitions": 2,
-    "index_mismatch_dates": 69,
-    "index_membership_pair_status_errors": 1930,
-    "membership_source_family_cumulative_bytes": 5965466,
-    "membership_source_family_limit_bytes": 10485760,
-    "official_regular_transitions": 9,
-    "membership_source_family_http_requests": 76,
-    "catalog_completeness_counterexamples": 2
-  },
-  "direct_remaining_goals": {
-    "at": "2026-10-08T13:49:28.653456+08:00",
-    "reviewer": "root direct evidence,7/7 unchanged compact snapshots, latest coordination and original missing-input contracts",
-    "goals": [
-      {
-        "goal": 1,
-        "accepted": "synthetic implementation and independent arithmetic",
-        "remaining": "real consumption-chain impact needs original frozen D-MAE inputs"
-      },
-      {
-        "goal": 2,
-        "accepted": "16-item catalog/four original reports plus9root factual reports registered; exact remote file readback",
-        "remaining": "No pending registration for9direct reports. Missing cloud evidence stays item-specific; no bulk dirty-registry publication."
-      },
-      {
-        "goal": 3,
-        "accepted": "original design and synthetic implementation",
-        "remaining": "six exact original files in native-risk-d-mae-2026-10-07/MISSING-INPUTS.json; true X/V/Y still zero"
-      },
-      {
-        "goal": 4,
-        "accepted": "33formal issuer/exchange/index documents;53 B01 placeholders,1code identity,6dividend observations,1missing-dividend counterexample. All12original candidate events source-bound;11new events this turn show69bad dates/1930member-status errors. Two catalog routes inspected; indexCode omits2known formal notices.",
-        "remaining": "Full dated2022official300 anchor/exhaustive chain unqualified.36prior anchor requests not repeated.5new catalog requests identify no extra formal event but cannot prove archive completeness. Original Sina scale/nominal/factor baseline, three warmup/initial-action inputs and actual consumer/definition/price policy separately needed.",
-        "scope_boundary": "Three necessary source units closed this heartbeat; no original12event left unexecuted. Complete historical source absent through checked routes; no claim every public archive exhausted. New concrete source/input is recovery trigger; no paid/login/mail or current-members backward reconstruction."
-      },
-      {
-        "goal": 5,
-        "accepted": "prior bounded evidence only; no full strategy improvement",
-        "remaining": "qualified features/data before new comparisons; user actual risk constraints before account-policy use"
-      },
-      {
-        "goal": 6,
-        "accepted": "adapter R1/R2 repair review and one pure-Git assembled synthetic restart/repeat-rejection test",
-        "remaining": "real data end-to-end depends on goal3 originals; no repeated accepted synthetic tests"
-      },
-      {
-        "goal": 7,
-        "accepted": "bounded external checks and independent workflow review",
-        "remaining": "Qlib new Ridge original inputs/receipt has no exact cloud file ID; no empty re-audit/install"
-      },
-      {
-        "goal": 8,
-        "accepted": "Disk free1017417728bytes; direct responses8511710bytes; no deletion/outside write. Other concurrent task disk use unknown, no attribution.",
-        "remaining": "next substantial job must measure capacity; deletion/outside-repo mutation unapproved; paused403 unchanged"
-      }
-    ],
-    "status_refreshed_at": "2026-10-08T13:49:28.653456+08:00",
-    "supersedes": "2026-10-08T12:29:41.899191+08:00",
-    "current_real_experiment_readiness": "No new frozen6-original package, no fits/labels. Three source units completed this heartbeat; no experiment process running.",
-    "next_required_decision_boundary": "Full dated historical member source/coverage; original price scale and actual consumer; exact6D-MAE originals and staged grants; exactQlib receipt. Do not repeatedly request unchanged missing inputs."
-  },
-  "shared_registration_scope_released": false,
+  "direct_execution_summary": "11 bounded direct reports accepted. Latest fixed-execution cash and2026H1 calendar reports archived with independent arithmetic, no real labels or strategy reruns; remote23 result files and progress receipt verified.",
+  "direct_remaining_goals": [
+    {
+      "goal": 1,
+      "accepted": "synthetic implementation and independent arithmetic; SSE2026 annual schedule agrees with181 saved SZSE dates,153 newly checked",
+      "remaining": "real consumption-chain impact needs original frozen D-MAE inputs"
+    },
+    {
+      "goal": 2,
+      "accepted": "Prior catalog and reports plus11 root reports registered; two new reports and21 supporting/registration files remote verified",
+      "remaining": "No pending registration for11 direct reports. Original cloud evidence remains item-specific; primary full dirty registry not published."
+    },
+    {
+      "goal": 3,
+      "accepted": "original design and synthetic implementation",
+      "remaining": "six exact original files in native-risk-d-mae-2026-10-07/MISSING-INPUTS.json; true X/V/Y still zero"
+    },
+    {
+      "goal": 4,
+      "accepted": "33formal issuer/exchange/index documents;53 B01 placeholders,1code identity,6dividend observations,1missing-dividend counterexample. All12original candidate events source-bound;11new events this turn show69bad dates/1930member-status errors. Two catalog routes inspected; indexCode omits2known formal notices.",
+      "remaining": "Full dated2022official300 anchor/exhaustive chain unqualified.36prior anchor requests not repeated.5new catalog requests identify no extra formal event but cannot prove archive completeness. Original Sina scale/nominal/factor baseline, three warmup/initial-action inputs and actual consumer/definition/price policy separately needed.",
+      "scope_boundary": "Three necessary source units closed this heartbeat; no original12event left unexecuted. Complete historical source absent through checked routes; no claim every public archive exhausted. New concrete source/input is recovery trigger; no paid/login/mail or current-members backward reconstruction."
+    },
+    {
+      "goal": 5,
+      "accepted": "Fixed old12account executions: A_ALL412072.40..499039.63 CNY, A_SMA399044.64..399067.77; causal within-day payment ordering matters. No strategy improvement claim.",
+      "remaining": "New strategy-effect comparisons require qualified features/data and a frozen distinct account-allocation/exit question; this completed fixed-execution question does not authorize switching orders/quantities. Actual account use also needs user's actual risk constraints."
+    },
+    {
+      "goal": 6,
+      "accepted": "adapter R1/R2 repair review and one pure-Git assembled synthetic restart/repeat-rejection test",
+      "remaining": "real data end-to-end depends on goal3 originals; no repeated accepted synthetic tests"
+    },
+    {
+      "goal": 7,
+      "accepted": "bounded external checks and independent workflow review",
+      "remaining": "Qlib new Ridge original inputs/receipt has no exact cloud file ID; no empty re-audit/install"
+    },
+    {
+      "goal": 8,
+      "accepted": "Small-file writes recovered after Errno28; both raw result hashes unchanged; exact reports/archive published. No deletion or outside-repo mutation.",
+      "remaining": "Free space remains below512MiB; no new source downloads or large jobs until measured capacity recovers. Deletion/outside writes still unapproved."
+    }
+  ],
+  "shared_registration_scope_released": true,
   "direct_next_actions": [
-    "Archive the two existing verified results without rerunning main calculations; publish exact paths and read back remote."
+    "Cash/calendar both completed and published; do not rerun main calculations or re-register.",
+    "On a real new input/source/decision, resume only its matching outstanding goal under original budgets and exact contract. New source acquisition requires storage guard; other independent authorized ready work still checked.",
+    "Unchanged external dependencies: exact six frozen D-MAE inputs and staged review; complete historical stock membership/price-scale/use contract; exact Qlib input/receipt. Preserve source failures and all sealed studies. No unchanged-status Git commits."
   ],
   "read_task_ids": [
     "research-dispatch-controller",
@@ -1136,12 +1119,12 @@
     "research-evidence-catalog/report-library-integration-20261008",
     "daily-trading-system-audit"
   ],
-  "conflict_decision": "Root executes two independent local-only necessary followups under original goals1/3/5. Old overlap study and February calendar check closed and not rerun. Unique raw/report paths; shared registration solely root serial; other owner records read-only.",
+  "conflict_decision": "Latest coordination unchanged since scope; root finished only scoped cash/calendar paths and own record/progress. Both reports registered and shared registry/INDEX released; other tasks untouched.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
       "id": "cash-and-calendar-local-parallel-20261008",
-      "state": "computed_verified_archival_resuming",
+      "state": "completed_two_bounded_questions_archived_remote_verified",
       "question": "Fixed saved quantities: minimum cash to fund all original fills under sell-first/buy-first within-day bounds; independently compare existing SSE2026 notice against saved SZSE daily flags January-June2026.",
       "original_authority": "Original eight goals1/3 calendar correctness and goal5 shared-capital feasibility; latest user continue and parallel, root-only execution remains.",
       "write_paths": [
@@ -1152,8 +1135,8 @@
         "docs/experiments/registry.json",
         "docs/experiments/INDEX.md"
       ],
-      "checked_coordination_sha": "eb8236dc2d55586b74014828bd55d4f2676e46ba",
-      "checked_at": "2026-10-08T15:23:35.308714+08:00",
+      "checked_coordination_sha": "cc27d1b3d99a435eaaca598537180ca3a2fef2ba",
+      "checked_at": "2026-10-08T15:33:22.762193+08:00",
       "read_task_ids": [
         "research-dispatch-controller",
         "theory-workflow-system-increment",
@@ -1182,12 +1165,19 @@
         "Two reports registered, hygiene checked, exact published files read back; no frozen evidence edits."
       ],
       "stop": "Each fixed question answered or actual input/hash/space failure; no strategy rerun, new capital allocation, old source retry or production rule changes.",
-      "prior_failure": "Errno28 blocked receipt/report/registry writes; main results persisted, independently recalculated via no-temp Python invocation. Recovery receipt preserved in automation prompt."
+      "scope_commit": "eb8236dc2d55586b74014828bd55d4f2676e46ba",
+      "scope_remote_readback": "equal",
+      "started_at": "2026-10-08T15:08:11.121104+08:00",
+      "accepted_at": "2026-10-08T15:31:45.814395+08:00",
+      "published_commit": "a9f438d67bf5c850a5ae49ce00d7ce646c7822bb",
+      "remote_readback_files": 23,
+      "failures_preserved": "cash raw/execution-log.json: disk Errno28, preview schema, gh absent, sparse staging",
+      "archive_complete": true
     },
-    "completed_reports": 9,
+    "completed_reports": 11,
     "current_unit_running": false,
     "cumulative_direct_evidence": {
-      "reports": 9,
+      "reports": 11,
       "securities": 4,
       "source_documents": 33,
       "local_checks": 324,
@@ -1199,11 +1189,11 @@
       "price_repairs": 0,
       "source_originals": "local_only; hashes and factual summaries published",
       "publication_branch": "codex/research-direct-20261008",
-      "publication_tip": "4307e20771f503386ea5987fdc037a716b57684e",
-      "main_registry_entries": 630,
-      "isolated_registry_entries": 209,
+      "publication_tip": "a9f438d67bf5c850a5ae49ce00d7ce646c7822bb",
+      "main_registry_entries": 632,
+      "isolated_registry_entries": 211,
       "primary_branch_unchanged": true,
-      "free_bytes_after": 1017417728,
+      "free_bytes_after": 218656768,
       "officially_matched_2024_placeholders": 17,
       "code_transitions_qualified": 1,
       "saved_dividend_events_qualified": 6,
@@ -1216,21 +1206,28 @@
       "membership_source_family_limit_bytes": 10485760,
       "official_regular_transitions": 9,
       "membership_source_family_http_requests": 76,
-      "catalog_completeness_counterexamples": 2
+      "catalog_completeness_counterexamples": 2,
+      "fixed_execution_funding_policies_checked": 2,
+      "cash_original_input_hashes": 59,
+      "cash_daily_rows_reconciled": 20748,
+      "cash_bound_proofs": 4,
+      "calendar_equivalent_dates": 181,
+      "calendar_new_dates_beyond_prior_check": 153,
+      "calendar_open_days": 116
     },
     "latest_eight_goal_review": {
-      "at": "2026-10-08T13:49:28.653456+08:00",
-      "reviewer": "root direct evidence,7/7 unchanged compact snapshots, latest coordination and original missing-input contracts",
+      "at": "2026-10-08T15:31:45.814395+08:00",
+      "reviewer": "Root: original eight-goal remaining list; new two saved results, separate arithmetic verification, original missing-input contract, latest unchanged coordination",
       "goals": [
         {
           "goal": 1,
-          "accepted": "synthetic implementation and independent arithmetic",
+          "accepted": "synthetic implementation and independent arithmetic; SSE2026 annual schedule agrees with181 saved SZSE dates,153 newly checked",
           "remaining": "real consumption-chain impact needs original frozen D-MAE inputs"
         },
         {
           "goal": 2,
-          "accepted": "16-item catalog/four original reports plus9root factual reports registered; exact remote file readback",
-          "remaining": "No pending registration for9direct reports. Missing cloud evidence stays item-specific; no bulk dirty-registry publication."
+          "accepted": "Prior catalog and reports plus11 root reports registered; two new reports and21 supporting/registration files remote verified",
+          "remaining": "No pending registration for11 direct reports. Original cloud evidence remains item-specific; primary full dirty registry not published."
         },
         {
           "goal": 3,
@@ -1245,8 +1242,8 @@
         },
         {
           "goal": 5,
-          "accepted": "prior bounded evidence only; no full strategy improvement",
-          "remaining": "qualified features/data before new comparisons; user actual risk constraints before account-policy use"
+          "accepted": "Fixed old12account executions: A_ALL412072.40..499039.63 CNY, A_SMA399044.64..399067.77; causal within-day payment ordering matters. No strategy improvement claim.",
+          "remaining": "New strategy-effect comparisons require qualified features/data and a frozen distinct account-allocation/exit question; this completed fixed-execution question does not authorize switching orders/quantities. Actual account use also needs user's actual risk constraints."
         },
         {
           "goal": 6,
@@ -1260,84 +1257,475 @@
         },
         {
           "goal": 8,
-          "accepted": "Disk free1017417728bytes; direct responses8511710bytes; no deletion/outside write. Other concurrent task disk use unknown, no attribution.",
-          "remaining": "next substantial job must measure capacity; deletion/outside-repo mutation unapproved; paused403 unchanged"
+          "accepted": "Small-file writes recovered after Errno28; both raw result hashes unchanged; exact reports/archive published. No deletion or outside-repo mutation.",
+          "remaining": "Free space remains below512MiB; no new source downloads or large jobs until measured capacity recovers. Deletion/outside writes still unapproved."
         }
       ],
-      "status_refreshed_at": "2026-10-08T13:49:28.653456+08:00",
-      "supersedes": "2026-10-08T12:29:41.899191+08:00",
-      "current_real_experiment_readiness": "No new frozen6-original package, no fits/labels. Three source units completed this heartbeat; no experiment process running.",
+      "status_refreshed_at": "2026-10-08T15:31:45.814395+08:00",
+      "supersedes": "2026-10-08T13:49:28.653456+08:00",
+      "current_real_experiment_readiness": "Both local fixed questions completed and archived. No process running. No new exact D-MAE originals, stock history/price source or Qlib receipt supplied; other sealed studies not reopened.",
       "next_required_decision_boundary": "Full dated historical member source/coverage; original price scale and actual consumer; exact6D-MAE originals and staged grants; exactQlib receipt. Do not repeatedly request unchanged missing inputs."
     },
     "next_actions": [
-      "Archive the two existing verified results without rerunning main calculations; publish exact paths and read back remote."
+      "Cash/calendar both completed and published; do not rerun main calculations or re-register.",
+      "On a real new input/source/decision, resume only its matching outstanding goal under original budgets and exact contract. New source acquisition requires storage guard; other independent authorized ready work still checked.",
+      "Unchanged external dependencies: exact six frozen D-MAE inputs and staged review; complete historical stock membership/price-scale/use contract; exact Qlib input/receipt. Preserve source failures and all sealed studies. No unchanged-status Git commits."
     ],
-    "latest_commit": "4307e20771f503386ea5987fdc037a716b57684e",
+    "latest_commit": "c9d99bf4bb77e985f79aa7c97594c7835a7d1da6",
     "completed_units": [
       {
         "id": "haitong-corporate-action-qualification-20261008",
-        "report": "docs/experiments/haitong-corporate-action-qualification-2026-10-08.md",
-        "commit": "995b5079d58813770d7a37fd81e058d21c37e2e5",
-        "status": "completed_bounded_factual_qualification",
-        "checks": 14
+        "state": "completed_bounded_factual_qualification",
+        "question": "Resolve official trading cessation, listing termination and share-conversion/successor facts for 600837, independently of historical CSI300 membership and old price-scale repair.",
+        "original_authority": "Pasted original goal4: supplement identities, delisting/terminal value, corporate actions and trading availability by actual need. Original qualification-plan.md already names exactly this security and missing documents.",
+        "existing_gap_evidence": [
+          "docs/research/proposals/stock-price-scale-and-membership-2026-10-06/qualification-plan.md:63",
+          "docs/research/proposals/stock-price-scale-and-membership-2026-10-06/qualification-plan.md:65",
+          "docs/experiments/baostock-bounded-local-probe-2026-10-05.md:48"
+        ],
+        "scope": "One existing missing security 600837, official 2025 action chain only; no new stock candidate, price repair, index membership inference, factor/label/strategy run.",
+        "write_paths": [
+          "docs/experiments/raw/haitong-corporate-action-2026-10-08/",
+          "docs/experiments/haitong-corporate-action-qualification-2026-10-08.md"
+        ],
+        "budget": {
+          "public_source_requests_max": 13,
+          "public_source_requests_used": 13,
+          "new_bytes_max": 10485760,
+          "minimum_free_bytes": 536870912,
+          "fit_or_labels": 0,
+          "paid_requests": 0,
+          "carry_forward": "Prior 36 index-anchor requests, B01-B05 and closed gap-pilot 4/6 preserved; no reuse of closed unused quota. This is the previously named company-action question, not renewed anchor/price probing.",
+          "amendment": {
+            "at": "2026-10-08T12:04:40.882752+08:00",
+            "before_source_operations_max": 6,
+            "after_source_operations_max": 10,
+            "reason": "Six was controller-created, not an explicit human total budget. Two exact official PDF paths returned diagnosed JavaScript challenge HTML. User AGENTS forbids inventing stopping points and authorizes direct completion; bounded necessary verification can use issuer-authored public disclosure text. Preserve all six attempts; no change to closed historical-source/price-pilot budgets, size cap or no-bypass rule.",
+            "allowed_followup": "At most one official document parser attempt plus two issuer public disclosure acquisitions and one discovery lookup; no challenge script execution, cookie generation, Library403 retries or paid routes."
+          },
+          "raw_response_bytes": 213536
+        },
+        "acceptance": "Official issuer/exchange sources, document and effective dates separated, original bytes/hash, exact conversion terms/successor, admissible vs still missing fields, no made-up total return.",
+        "strategy_layer": "Historical instrument identity and corporate-action/trading availability data; no technical signal semantics changed.",
+        "strategy_sha256": {
+          "technical-system": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+          "technical-implementation": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+        },
+        "status": "accepted_root_checked_not_independent_agent_review",
+        "started_at": "2026-10-08T12:02:18.903407+08:00",
+        "accepted_at": "2026-10-08T12:17:23.105302+08:00",
+        "published_commit": "995b5079d58813770d7a37fd81e058d21c37e2e5",
+        "checks": 14,
+        "report": "docs/experiments/haitong-corporate-action-qualification-2026-10-08.md"
       },
       {
         "id": "remaining-terminal-actions-qualification-20261008",
+        "state": "completed_bounded_factual_qualification",
+        "codes": [
+          "600705",
+          "601989"
+        ],
+        "question": "Qualify officially disclosed final trading/suspension/listing termination and cash or share consideration for the other two already named missing securities. No market panel repair, sample replacement or new backtest.",
+        "original_authority": "Original eight-goal request goal4 and existing qualification-plan sections4 and6; direct-execution user instruction.",
+        "write_paths": [
+          "docs/experiments/raw/stock-terminal-actions-2026-10-08/",
+          "docs/experiments/stock-terminal-actions-qualification-2026-10-08.md",
+          "docs/experiments/registry.json",
+          "docs/experiments/INDEX.md"
+        ],
+        "source_policy": {
+          "scope": "Two named 2025 terminal corporate actions only; existing reports reused; stop once event dates and terms are sourced and checked, or actual access/necessary evidence is unavailable. No fixed self-created request quota used as a reason to abandon accessible necessary facts.",
+          "planning_estimate_source_operations": 12,
+          "source_operations_used": 0,
+          "max_new_bytes": 10485760,
+          "minimum_free_bytes": 536870912,
+          "old_closed_budgets": "unchanged; none reused",
+          "fits": 0,
+          "labels": 0,
+          "paid": 0
+        },
+        "acceptance": "Issuer/exchange documents and original-byte hashes; publication/effective dates distinct; exact consideration terms; fixed old-row comparison only if needed; rights actually paid/issued distinguished from proposal; unclear fields remain unknown.",
+        "execution": "root only; independent read requests parallel, shared registration serial",
+        "status": "accepted_root_checked_not_independent_agent_review",
+        "accepted_at": "2026-10-08T12:29:41.899191+08:00",
+        "published_commit": "6c781464a9d622dc73b817aa5d89267c2cc75fa8",
         "report": "docs/experiments/stock-terminal-actions-qualification-2026-10-08.md",
-        "commit": "6c781464a9d622dc73b817aa5d89267c2cc75fa8",
-        "status": "completed_bounded_factual_qualification",
-        "checks": 28
+        "source_documents": 8,
+        "checks": 28,
+        "source_operations_used": 14,
+        "raw_response_bytes": 1220566,
+        "vendor_placeholder_rows_matched": 17
       },
       {
         "id": "haitong-2024-suspension-qualification-20261008",
-        "report": null,
-        "commit": "748716dc7de72afc7ffa604fee6fd0a6223d8edc",
-        "status": "completed_bounded_factual_qualification",
-        "checks": 18
+        "state": "completed_bounded_factual_qualification",
+        "question": "Qualify 17 existing 600837 B01 status0 rows dated 2024-09-06 through 2024-10-09 using issuer suspension and resumption disclosure.",
+        "original_authority": "Original goal4 trading availability and qualification-plan sections3/4/6; prior report explicitly leaves these17 rows unqualified.",
+        "write_paths": [
+          "docs/experiments/raw/haitong-2024-suspension-2026-10-08/",
+          "docs/experiments/haitong-2024-suspension-qualification-2026-10-08.md",
+          "docs/experiments/registry.json",
+          "docs/experiments/INDEX.md"
+        ],
+        "source_policy": {
+          "planning_estimate_operations": 4,
+          "max_new_bytes": 5242880,
+          "minimum_free_bytes": 536870912,
+          "stop": "Exact suspension and resumption fields sourced and fixed old rows checked, or actual inaccessible necessary evidence; estimate is not an invented hard quota.",
+          "previous_operations": 27,
+          "prior_closed_budgets": "Unchanged; no price or index-query reopening",
+          "fits": 0,
+          "labels": 0,
+          "price_repairs": 0
+        },
+        "acceptance": "Original source hashes, date and availability distinctions, fixed B01 SHA and 17-row match; preserve originals/no zero fills; registry and Git readback.",
+        "strategy_layer": "Historical trading availability data only; no signal or strategy change",
+        "checked_at": "2026-10-08T12:38:41.770757+08:00",
+        "checked_coordination_sha": "11ef654017de2dde5cf155647570dcf461cb469c",
+        "read_task_ids": [
+          "research-dispatch-controller",
+          "risk-shape-information",
+          "report-library-integration-20261008"
+        ],
+        "conflict_decision": "Only intervening daily-trading owner record changed. New raw/report paths unused; previous shared registration window released. Root is sole temporary registry/INDEX writer; no owner delegation.",
+        "started_at": "2026-10-08T12:39:32.956543+08:00",
+        "scope_commit": "0b41e0b5ff0a8218b89c195a15873e2d2dd42586",
+        "scope_remote_readback": "equal",
+        "accepted_at": "2026-10-08T12:43:06.000736+08:00",
+        "published_commit": "748716dc7de72afc7ffa604fee6fd0a6223d8edc",
+        "remote_readback_files": 10,
+        "source_documents": 2,
+        "checks": 18,
+        "source_operations_used": 3,
+        "raw_response_bytes": 132478,
+        "matched_placeholder_rows": 17
       },
       {
         "id": "runze-security-identity-qualification-20261008",
-        "report": "docs/experiments/avic-security-identity-qualification-2026-10-08.md",
-        "commit": "909acdf0eac740593bdb54e66e2331ac14e4af53",
-        "status": "completed_bounded_factual_qualification",
-        "checks": 16
+        "state": "completed_bounded_factual_qualification",
+        "question": "Qualify original preparer assumption300114 to302132 effective2025-02-17 and preserved holder identity using issuer/exchange original disclosure.",
+        "original_authority": "Original goal4 identity/permanent-security qualification; existing qualification-plan line64 and source-manifest explicit_code_rename_assumption_in_old_preparer.",
+        "write_paths": [
+          "docs/experiments/raw/runze-security-identity-2026-10-08/",
+          "docs/experiments/avic-security-identity-qualification-2026-10-08.md",
+          "docs/experiments/registry.json",
+          "docs/experiments/INDEX.md"
+        ],
+        "source_policy": {
+          "planning_estimate_operations": 3,
+          "max_new_bytes": 5242880,
+          "minimum_free_bytes": 536870912,
+          "previous_direct_operations": 30,
+          "stop": "Official code/effective/rights fields qualified or actual necessary-source access blocked; no redundant sources after answer",
+          "prior_closed_budgets": "unchanged",
+          "fits": 0,
+          "labels": 0,
+          "price_repairs": 0
+        },
+        "acceptance": "Official source bytes/hash, announcement and effective time, exact mapping and equity continuity, compare fixed preparer bytes; no inferred439-universe identity completeness.",
+        "checked_at": "2026-10-08T12:44:48.053072+08:00",
+        "checked_coordination_sha": "a51904547f94235bb9ee6785a247c16012e1709f",
+        "read_task_ids": [
+          "research-dispatch-controller",
+          "risk-shape-information",
+          "report-library-integration-20261008"
+        ],
+        "conflict_decision": "No task record mentions either code, latest related owners unchanged; no active overlap. Root retains temporary registry/INDEX window for next bounded report.",
+        "free_bytes_before": 2774487040,
+        "display_name": "中航电测至中航成飞代码身份资格",
+        "naming_correction": "Initial unverified runze search/name was wrong; exact codes300114/302132 unchanged. Existingraw path retained without rename, unused reportpath corrected before creation. Failure in request-ledger.",
+        "scope_correction_commit": "61852a386b0c0a34af98347ef1a4924e036a38de",
+        "scope_correction_remote_readback": "equal",
+        "accepted_at": "2026-10-08T12:48:30.130195+08:00",
+        "published_commit": "909acdf0eac740593bdb54e66e2331ac14e4af53",
+        "remote_readback_files": 10,
+        "source_documents": 1,
+        "checks": 16,
+        "source_operations_used": 3,
+        "raw_response_bytes": 370156,
+        "report": "docs/experiments/avic-security-identity-qualification-2026-10-08.md"
       },
       {
         "id": "saved-six-dividend-events-qualification-20261008",
-        "report": "docs/experiments/saved-dividend-events-qualification-2026-10-08.md",
-        "commit": "8e0e26c9f053faa7462f798dead579b746befc2d",
-        "status": "completed_bounded_factual_qualification",
-        "checks": 56
+        "state": "completed_bounded_factual_qualification",
+        "question": "Identify official cash-dividend meaning, record/ex/payment dates and gross cash per share for exactly six already saved600837/601989 factor-event dates; no new factor-price reconstruction.",
+        "original_authority": "Original goal4 corporate-action source qualification; qualification-plan section2 lists six saved observations and section4 exact missing issuer actions.",
+        "targets": {
+          "600837": [
+            "2022-07-28",
+            "2023-07-28",
+            "2024-08-08",
+            "2024-10-18"
+          ],
+          "601989": [
+            "2024-08-01",
+            "2025-06-18"
+          ]
+        },
+        "write_paths": [
+          "docs/experiments/raw/saved-dividend-events-2026-10-08/",
+          "docs/experiments/saved-dividend-events-qualification-2026-10-08.md",
+          "docs/experiments/registry.json",
+          "docs/experiments/INDEX.md"
+        ],
+        "source_policy": {
+          "planning_estimate_operations": 9,
+          "max_new_bytes": 10485760,
+          "minimum_free_bytes": 536870912,
+          "previous_direct_operations": 33,
+          "stop": "Exactly six known events source-qualified, or true inaccessible needed evidence; no extrapolation to full-history completeness",
+          "prior_closed_budgets": "unchanged; no new vendor/index/price requests",
+          "fits": 0,
+          "labels": 0,
+          "price_repairs": 0
+        },
+        "acceptance": "Original issuer implementation notices/hash, announced record/ex/payment dates, gross cash units, exact saved factor dates; no default1/zero, no inference that factor values themselves are validated or Sina-compatible.",
+        "checked_at": "2026-10-08T12:49:04.296354+08:00",
+        "checked_coordination_sha": "526a34677a8c35ac2aacd0a3ca6b86f2339154bd",
+        "read_task_ids": [
+          "research-dispatch-controller",
+          "risk-shape-information",
+          "report-library-integration-20261008"
+        ],
+        "conflict_decision": "Existing corporate-action missing fields explicit in original plan; related task owners unchanged. Unique raw/report paths and root-only shared registration; frozen saved factor files read-only.",
+        "free_bytes_before": 2809913344,
+        "publication_failure": {
+          "kind": "non_fast_forward_push",
+          "resolved": "Normal merge of intervening daily-trading-owner-only update; no force push, no shared research files written before scope readback."
+        },
+        "scope_commit": "e3e47d781d5abe47f7e7bd60c9d60d4eb8705763",
+        "scope_remote_readback": "equal",
+        "started_at": "2026-10-08T12:49:22.863544+08:00",
+        "accepted_at": "2026-10-08T13:05:38.615820+08:00",
+        "published_commit": "8e0e26c9f053faa7462f798dead579b746befc2d",
+        "remote_readback_files": 12,
+        "source_documents": 6,
+        "checks": 56,
+        "source_operations_used": 31,
+        "raw_response_bytes": 3762568,
+        "report": "docs/experiments/saved-dividend-events-qualification-2026-10-08.md"
       },
       {
         "id": "china-heavy-2022-dividend-coverage-20261008",
-        "report": "docs/experiments/china-heavy-dividend-coverage-2026-10-08.md",
-        "commit": "4f2da90c4688d12116b4891d56b802a802c2908b",
-        "status": "completed_counterexample_confirmed",
-        "checks": 20
+        "state": "completed_counterexample_confirmed",
+        "question": "Determine whether one observed lead, China Heavy2021 annual dividend implemented2022, is inside fixed B02 request window but missing from its preserved factor records. Stop after counterexample confirmed/refuted or exact issuer source unavailable; no general-history collection.",
+        "original_authority": "Goal4 complete corporate-action qualification, saved dividend task new completeness lead, existing qualification-plan sections2/3. No new factor/vendor/price requests.",
+        "write_paths": [
+          "docs/experiments/raw/china-heavy-dividend-coverage-2026-10-08/",
+          "docs/experiments/china-heavy-dividend-coverage-2026-10-08.md",
+          "docs/experiments/registry.json",
+          "docs/experiments/INDEX.md"
+        ],
+        "checked_at": "2026-10-08T13:05:38.615820+08:00",
+        "checked_coordination_sha": "cd03ef10b5c241c2abc55b15654df29c6a53861a",
+        "read_task_ids": [
+          "research-dispatch-controller",
+          "risk-shape-information",
+          "report-library-integration-20261008"
+        ],
+        "conflict_decision": "Only daily trading owner update since scope; related owners unchanged, unique raw/report paths. Root sole registry/INDEX writer. No delegated work.",
+        "source_policy": {
+          "planning_estimate_operations": 3,
+          "max_new_bytes": 5242880,
+          "minimum_free_bytes": 536870912,
+          "previous_direct_operations": 64,
+          "prior_closed_budgets": "unchanged",
+          "fits": 0,
+          "labels": 0,
+          "price_repairs": 0
+        },
+        "free_bytes_before": 2775785472,
+        "acceptance": "Official implementation source/hash, exact old request-window/raw response binding, no inferred provider cause or changed frozen input.",
+        "scope_commit": "0ef924f61b495744f76ebe6f773b0b552e78e9ae",
+        "scope_remote_readback": "equal",
+        "started_at": "2026-10-08T13:05:57.515982+08:00",
+        "accepted_at": "2026-10-08T13:12:13.356603+08:00",
+        "published_commit": "4f2da90c4688d12116b4891d56b802a802c2908b",
+        "remote_readback_files": 11,
+        "source_documents": 1,
+        "checks": 20,
+        "source_operations_used": 5,
+        "raw_response_bytes": 843679,
+        "report": "docs/experiments/china-heavy-dividend-coverage-2026-10-08.md"
       },
       {
         "id": "csi300-2025-two-transitions-20261008",
-        "report": "docs/experiments/csi300-2025-transitions-qualification-2026-10-08.md",
-        "commit": "003d6de4a4a02a0780e749372aab28b029c058d6",
-        "status": "completed_two_transitions_qualified_candidate_timing_falsified",
-        "checks": 29
+        "state": "completed_two_transitions_qualified_candidate_timing_falsified",
+        "question": "Qualify exact official removal/addition and effective dates for two already specified2025 CSI300 candidate transitions; compare saved candidate rows, preserve original membership. Reuse closed2022 anchor search without repeating it.",
+        "original_authority": "Eight-goal4 and existing csi300-official-member-binding object-mapping changes2025-03-10/2025-09-08; root direct instruction.",
+        "write_paths": [
+          "docs/experiments/raw/csi300-2025-transitions-2026-10-08/",
+          "docs/experiments/csi300-2025-transitions-qualification-2026-10-08.md",
+          "docs/experiments/registry.json",
+          "docs/experiments/INDEX.md"
+        ],
+        "checked_at": "2026-10-08T13:16:52.182099+08:00",
+        "checked_coordination_sha": "0d3f1fd758d894f1caf0dec41142cbfc79347c06",
+        "read_task_ids": [
+          "research-dispatch-controller",
+          "risk-shape-information",
+          "research-evidence-catalog/report-library-integration-20261008"
+        ],
+        "conflict_decision": "Original data owner gap-pilot completed; shared registration released. Two official2025 objects still unqualified, no related owner scope change. Root unique new paths and sole temporary registry/INDEX writer.",
+        "source_policy": {
+          "inherited_membership_source_family_limit_bytes": 10485760,
+          "previous_membership_http_bytes": 3996739,
+          "remaining_family_bytes": 6489021,
+          "previous_membership_successful_http_requests": 36,
+          "previous_root_direct_operations": 69,
+          "planning_estimate_new_operations": 6,
+          "minimum_free_bytes": 536870912,
+          "fits": 0,
+          "labels": 0,
+          "price_repairs": 0,
+          "membership_repairs": 0,
+          "stop": "Both specified objects official-qualified or exact necessary source inaccessible/remaining inherited byte limit reached; no full-period catalog expansion or anchor retry."
+        },
+        "prior_acquisition_manifest": {
+          "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/acquisition-manifest.json",
+          "sha256": "7e6038a6d9d79d0fb3417ee7a5926643353bb27e4b1ff4fa33d177f3625887b2"
+        },
+        "free_bytes_before": 2778419200,
+        "acceptance": "Issuer-index-authority primary bytes/hash; publication versus effective date; exact add/remove; frozen candidate rows hash and dated mismatch count; no retroactive overwrite or full-chain claim.",
+        "scope_commit": "bb09f07e3ec98282e6d3377fdd799dd692d6744c",
+        "scope_remote_readback": "equal",
+        "started_at": "2026-10-08T13:17:00.263549+08:00",
+        "accepted_at": "2026-10-08T13:25:16.056222+08:00",
+        "published_commit": "003d6de4a4a02a0780e749372aab28b029c058d6",
+        "remote_readback_files": 12,
+        "source_documents": 2,
+        "checks": 29,
+        "source_operations_used": 13,
+        "raw_response_bytes": 46999,
+        "report": "docs/experiments/csi300-2025-transitions-qualification-2026-10-08.md"
       },
       {
         "id": "csi300-remaining-nine-transitions-20261008",
-        "report": "docs/experiments/csi300-regular-transitions-qualification-2026-10-08.md",
-        "commit": "4d172ca61b6cac379072b81c699266ade7aa580b",
-        "status": "completed_nine_transitions_qualified_one_date_falsified",
-        "checks": 119
+        "state": "completed_nine_transitions_qualified_one_date_falsified",
+        "question": "Qualify only nine remaining candidate regular changes in original12-object queue. Match official add/remove sets and effective dates, recompute discrepancies in saved candidate table. Reuse already qualified2021 and two2025 actions; no full historical anchor claim or all-catalog completeness claim.",
+        "original_authority": "Original goal4 and existing12 candidate objects in stock-price-scale-and-membership qualification-plan; root direct continuation, no new market experiment.",
+        "candidate_dates": [
+          "2022-06-13",
+          "2023-03-20",
+          "2023-06-12",
+          "2023-12-11",
+          "2024-06-17",
+          "2024-12-16",
+          "2025-06-16",
+          "2025-12-15",
+          "2026-06-15"
+        ],
+        "write_paths": [
+          "docs/experiments/raw/csi300-regular-transitions-2026-10-08/",
+          "docs/experiments/csi300-regular-transitions-qualification-2026-10-08.md",
+          "docs/experiments/registry.json",
+          "docs/experiments/INDEX.md"
+        ],
+        "checked_at": "2026-10-08T13:25:16.056222+08:00",
+        "checked_coordination_sha": "b16fe34c162d10af9f403215a814185d786a8dd5",
+        "read_task_ids": [
+          "research-dispatch-controller",
+          "risk-shape-information",
+          "research-evidence-catalog/report-library-integration-20261008"
+        ],
+        "conflict_decision": "New nine regular candidate objects not yet source-qualified; owners unchanged. Root unique paths; shared registration solewriter. Prior2021/2025 units and anchor acquisition not reopened.",
+        "source_policy": {
+          "inherited_membership_source_family_limit_bytes": 10485760,
+          "previous_membership_http_bytes": 4043738,
+          "remaining_family_bytes": 6442022,
+          "previous_membership_http_requests": 46,
+          "previous_root_direct_operations": 82,
+          "planning_estimate_new_http_operations": 27,
+          "minimum_free_bytes": 536870912,
+          "fits": 0,
+          "labels": 0,
+          "membership_repairs": 0,
+          "price_repairs": 0,
+          "stop": "Nine explicitobjects matched/refuted or exact missing source/access or original family remaining budget exhausted; no unrelated whole-period search."
+        },
+        "free_bytes_before": 2679357440,
+        "acceptance": "Original CSI documents+attachments with hash, precise000300 rows and effective time, fixed candidate-byte binding, no parameter fitting or membership overwrite. Underlying full anchor and exhaustive event chain remain separate.",
+        "scope_commit": "4414de08bed11ebda526b5cc6fff08548369be09",
+        "scope_remote_readback": "equal",
+        "started_at": "2026-10-08T13:25:23.801068+08:00",
+        "accepted_at": "2026-10-08T13:39:57.293206+08:00",
+        "published_commit": "4d172ca61b6cac379072b81c699266ade7aa580b",
+        "remote_readback_files": 12,
+        "source_documents": 9,
+        "checks": 119,
+        "source_operations_used": 25,
+        "raw_response_bytes": 1889600,
+        "report": "docs/experiments/csi300-regular-transitions-qualification-2026-10-08.md"
       },
       {
         "id": "csi300-catalog-completeness-20261008",
-        "report": "docs/experiments/csi300-catalog-completeness-qualification-2026-10-08.md",
-        "commit": "4307e20771f503386ea5987fdc037a716b57684e",
-        "status": "completed_catalog_coverage_counterexample_full_chain_unqualified",
-        "checks": 24
+        "state": "completed_catalog_coverage_counterexample_full_chain_unqualified",
+        "question": "Check whether original12 candidate event queue omits officially indexed CSI300 changes during2022-01-04..2026-06-30. Enumerate official indexCode000300 catalog and title-search crosscheck via observed public frontend parameters; reuse known originals; qualify concrete missing events if present. Catalog limits remain explicit; no full anchor reconstruction or old table patch.",
+        "original_authority": "Original goal4 full official membership event-chain qualification and binding-result requirement to list formal events outside candidates. Not another original12-object rerun.",
+        "write_paths": [
+          "docs/experiments/raw/csi300-catalog-completeness-2026-10-08/",
+          "docs/experiments/csi300-catalog-completeness-qualification-2026-10-08.md",
+          "docs/experiments/registry.json",
+          "docs/experiments/INDEX.md"
+        ],
+        "checked_coordination_sha": "2e649dbba909ad052b2796b7fb35a83f58c049ee",
+        "checked_at": "2026-10-08T13:40:28.324326+08:00",
+        "read_task_ids": [
+          "research-dispatch-controller",
+          "daily-trading-system-audit",
+          "research-evidence-catalog/report-library-integration-20261008"
+        ],
+        "conflict_decision": "Intervening daily-trading acceptance changed only its own record, no shared research paths. Normal merge preserved both; no force push. New sources remain unstarted until scope readback.",
+        "source_policy": {
+          "inherited_membership_source_family_limit_bytes": 10485760,
+          "previous_membership_http_bytes": 5933338,
+          "previous_membership_http_requests": 71,
+          "remaining_family_bytes": 4552422,
+          "planning_estimate_new_http_requests": 12,
+          "minimum_free_bytes": 536870912,
+          "stop": "Enumerated official targeted catalog, known-vs-new comparison, and necessary new relevant originals qualified; or diagnosed source/coverage/budget limit. No whole-site scrape, paid source, login, old anchor retry, labels/fits/repairs."
+        },
+        "frontend_source": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/news-route.js",
+        "new_route_evidence": "queryNews adds indexCode; params.searchInput uses searchKeyword; page sizes10/20/30/40. Previously acquired files only cover2021 anchor and exactknown adjustment dates.",
+        "free_bytes_before": 1556074496,
+        "publication_failure": {
+          "kind": "non_fast_forward_push",
+          "resolved": "fetched own-unrelated daily record, normal merge and exact scope readback required"
+        },
+        "scope_commit": "c5e3732f5bfa34e500e72f81578f5e50c93a25ed",
+        "scope_remote_readback": "equal",
+        "started_at": "2026-10-08T13:41:04.157872+08:00",
+        "accepted_at": "2026-10-08T13:49:28.653456+08:00",
+        "published_commit": "4307e20771f503386ea5987fdc037a716b57684e",
+        "remote_readback_files": 10,
+        "source_documents": 0,
+        "new_catalog_responses": 5,
+        "checks": 24,
+        "source_operations_used": 5,
+        "raw_response_bytes": 32128,
+        "report": "docs/experiments/csi300-catalog-completeness-qualification-2026-10-08.md"
+      },
+      {
+        "id": "fixed-ledger-cash-requirement-2026-10-08",
+        "state": "completed_bounded_question",
+        "report": "docs/experiments/fixed-ledger-cash-requirement-2026-10-08.md",
+        "published_commit": "a9f438d67bf5c850a5ae49ce00d7ce646c7822bb",
+        "accepted_at": "2026-10-08T15:31:45.814395+08:00",
+        "source_requests_added": 0,
+        "independent_recomputation": "passed, same root separate arithmetic path; no external-review claim"
+      },
+      {
+        "id": "sse-calendar-2026-h1-equivalence-2026-10-08",
+        "state": "completed_bounded_question",
+        "report": "docs/experiments/sse-calendar-2026-h1-equivalence-2026-10-08.md",
+        "published_commit": "a9f438d67bf5c850a5ae49ce00d7ce646c7822bb",
+        "accepted_at": "2026-10-08T15:31:45.814395+08:00",
+        "source_requests_added": 0,
+        "independent_recomputation": "passed, same root separate arithmetic path; no external-review claim"
       }
-    ]
+    ],
+    "result_commit": "a9f438d67bf5c850a5ae49ce00d7ce646c7822bb",
+    "progress_commit": "c9d99bf4bb77e985f79aa7c97594c7835a7d1da6"
   },
   "final_coordination_publication_failure": {
     "kind": "non_fast_forward",
