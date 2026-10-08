@@ -2340,3 +2340,12 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 - 独立owner只读compact更新：storage01a1155d-b204-7232-a993-4c9e0567af59 turn01a11b93-9b09-7273-abac-e59c4a80f4a7 cursor97038648-8723-4658-99dd-c33457771744:3 inProgress，已报告新输出路由待验证；video01a11a02-7ff5-7563-9831-a36273f51532 turn01a11b8e-43f5-7862-8d22-898995d4e82c cursorb98f79ce-6e43-4628-96c2-94fa1475aa99:4 inProgress，已报告10秒小样成功/完整4K正导出。中控已发送实际空间变化事实提醒，不授权删除或改预算、不把它们的运行当成果、不声称由该提醒引起运行。两原owner路径独立，后续接真实回执再核。
 
 - 2026-10-08T21:19:19.383311+08:00 推送因video并发正常更新被拒，已fetch读取其恢复段（checked_coordination_sha=2cb9e127d389dd5f896fc4aced6b25c4432bacaa）；仅其自己的task文件，无冲突。普通merge保留双方历史，不force/rebase/reset；最新root范围释放与既有成果SHA不变。
+
+## Goal8 新输出路由独立验收 2026-10-08T21:50:49.872726+08:00
+
+- checked_coordination_sha: 7ce0479abef4cbba6a8add48d23f8891010fd718；已读 COORDINATION1.1、自身、mac-local-storage-cleanup、trend-trading-video；冲突决定：原 owner 的八个成果路径只读，root 不接管写盘实现或清理权限，不占 registry/INDEX。
+- 新依据：原 owner 已发表 codex/mac-local-storage-cleanup-20261008@428dd19607ecc75cbe9f59e5e2fe3018c53dd9fd，共八条准确源码/规则/测试/进度路径；六个完整文件及 AGENTS 仅授权追加块与本机一致，进度存在后续更新，尚不冒称整个交付已验收。
+- 本轮必要接续：复用 /root/settlement_scope_review 做一次该固定 SHA 的只读关键审查；root 核远端路径与设备实测。助手禁止文件写入、真实研究、下载、删除、外盘写入和停止现有进程。不是重跑已完成的 native CLI preflight 或订单研究。
+- root 唯一允许新增小凭据为 docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/output-routing-controller-review.json，并更新自己的 thread-state/工作进度/本协调记录；其他文件无写权。发现真实缺陷再交原 owner 有界修复，不自行改其源码。
+- 实测内盘1568157696B，外盘身份与登记四资源可读；新入口要求的5GiB内盘余量不满足，不降低阈值、不启动新实验。检查/独审运行中，未标通过。
+- 视频 V7 原 owner 已完成交付；root 核两成片 SHA 及远端 ae6118495e326262f511b834c7f3e88ad2a2ca15 的验证/制作/播放页三文件一致，技术交付可定位，观感仍待用户，不重复渲染或通知。
