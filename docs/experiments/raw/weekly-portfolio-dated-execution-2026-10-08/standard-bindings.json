@@ -1,0 +1,57 @@
+{
+  "authority_paths_sha256": {
+    "AGENTS.md": "8397c4797924c3fa64995391acccf6b2406b30e2e6bb9ece5a3a72637f3653dc",
+    "configs/strategy-documents.v1.json": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b",
+    "configs/rules.v1.yaml": "9be26a1626fdf6351478b40b388907e9d8128f74b6bd4aa2b8ff4a850cfdcfd2",
+    ".claude/skills/macd-reading/SKILL.md": "4a75dea4cb8f0ad2d1cb450c1d4237d87cc5c5b7f50f3eacda10880164c731ab",
+    "docs/plan-sector-trend-page.md": "921a483e16081fa975216a6f498a6af8654508df65be4feed64d8d593c24b23d",
+    "docs/research/current-standards.json": "d1293a6c4536b0b440f8260d91e5a8d8d1485a0ccbd0fc3801d478baec68ce71",
+    "docs/research/lei-factor-research-mission.md": "37e7bb1b13b1eddbe98930e42146806140274f91ea011f116c4602414625dbf8",
+    "docs/research/research-question-method-standard.md": "4326abd2dd3cf5a4a8edf9cdfed132677f394bb42c2d8d308db20852cb52c25b",
+    "docs/research/factor-increment-evidence-standard.md": "05f5b04c8b54ad3bf86296f09a5addd4fd6344dad6e7b639650c39692b2f3871",
+    "docs/research/experiment-backtest-principles.md": "67b49a08396b0c8cb93cb526466200cc798bdb4cd8ce77509658f291cc29493c",
+    "docs/research/ai-execution-contract.md": "f70a929f15d9d59f99f78a609a8658ce468f2c4025f05dba5380198f0bf23d22",
+    "docs/research/definition-standard.md": "938e04d7beb96a46069bbb6eb6c03d2331e86bfa771623fdfe21794b4e98fcbd",
+    "docs/research/experiment-report-template.md": "a141107c915dcf738621e6e8746d89e97fb2d835b4c16883805dc7fb19ab7170"
+  },
+  "standards": {
+    "schema_version": "research-standards/1.0",
+    "new_entry": "scripts/run_factor_lab.py --workflow-contract",
+    "legacy_frozen_studies": "keep_original_bindings",
+    "standards": {
+      "mission": {
+        "path": "docs/research/lei-factor-research-mission.md",
+        "version": "1.2.0"
+      },
+      "question_method": {
+        "path": "docs/research/research-question-method-standard.md",
+        "version": "1.3.1"
+      },
+      "increment": {
+        "path": "docs/research/factor-increment-evidence-standard.md",
+        "version": "1.1.0"
+      },
+      "principles": {
+        "path": "docs/research/experiment-backtest-principles.md",
+        "version": "1.2"
+      },
+      "execution": {
+        "path": "docs/research/ai-execution-contract.md",
+        "version": "1.1.0"
+      },
+      "definition": {
+        "path": "docs/research/definition-standard.md",
+        "version": "1.2.0"
+      },
+      "template": {
+        "path": "docs/research/experiment-report-template.md",
+        "version": "1.2.1"
+      }
+    },
+    "definition_registry": "docs/research/definitions.v1.json",
+    "report_registry": "docs/experiments/registry.json",
+    "strategy_sources": "configs/strategy-documents.v1.json",
+    "new_contract_schema": "research-workflow/1.1"
+  },
+  "adoption": "Synthetic money/time execution verification only; frozen source v0.2 retained; no factor workflow or new research definition"
+}

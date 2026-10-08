@@ -1,0 +1,42 @@
+{
+  "mission": "Independently accept or reject bounded repairs of three reproduced P1 defects and split conservation; version2 only.",
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "task_scope": [
+    "Read frozen v2 source and preserved v1 source/receipts. Independently replay only three prior P1 minimalcounterexamples and relevant valid-path peers using Python -B stdin.",
+    "Verify dueactions and explicitconcurrentordering, latestrequiredpriorclose fordeposit, timezone same-dayrelease refusal, split390conservation and priorlotrelease unchanged. Audit actualv1failureandv2repairs receipts without rerunning old16 or entire11suite.",
+    "Report exactsourcehashes numericcounterexamples, unchanged failed state andremainingmarketlimitations."
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/settlement-local-executor-contract-v2.json",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/settlement-scope-controller-review.json",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/settlement-independent-review-v1.json",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/settlement-repair-contract-v3.json"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "expected_outputs": [
+    "Verdict with exact source hashes, independent numeric evidence and specific fixes if any; preserve unresolved market dependencies."
+  ],
+  "stop_conditions": [
+    "No writes including pyc/tmp; no Git/messages/children/install/realdata/research reruns.",
+    "If sources change report stale scope and stop review."
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "source_sha256": {
+    "dated_ledger.py": "20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3",
+    "synthetic_fixtures.py": "1fa21b07f3162c5dc980f8919a2b495ae5e2f18d2b4a9c39f732015ec638bc92",
+    "test_dated_ledger.py": "caa6a38d367a8cfa29b5af02ef4bac7d19933702a3922dcfd2fd4601e40a6259",
+    "run_checks.py": "8fd9fe946ee6388d1c861f8faebceb0d046aca7dc9c2942a0c0ebe33a0492a29"
+  },
+  "created_at": "2026-10-08T19:13:13.288471+08:00"
+}

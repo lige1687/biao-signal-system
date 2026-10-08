@@ -1,0 +1,8 @@
+{
+  "command": "python3 -B /Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/arithmetic_checks_v2.py",
+  "exit_code": 1,
+  "reason": "Exact Decimal NAV check expected .3 but 28-digit division produced .3000000000000000000000000001",
+  "observed_difference": "1e-28",
+  "source_preserved": "arithmetic_checks_v2_attempt1.py",
+  "repair": "retain exact unit count and asset checks; report NAV rounding bound1e-27 explicitly; no ledger change"
+}

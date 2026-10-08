@@ -1,0 +1,66 @@
+{
+  "checked_at": "2026-10-08T11:14:58.546171+00:00",
+  "v1_four_preserved": true,
+  "v1_non_source_artifacts_unchanged": 21,
+  "v2_four_frozen_unchanged": true,
+  "original_source6_unchanged": true,
+  "snapshot6_exact": true,
+  "commands": [
+    {
+      "command": "python3 -B prove_v1_failures.py",
+      "exit_code": 0,
+      "old_defects_reproduced": 3
+    },
+    {
+      "command": "python3 -B run_checks.py (initial v2 runner)",
+      "exit_code": 1,
+      "run": 27,
+      "errors": 1,
+      "preserved": "tests-v2.json/log",
+      "correction": "Group6 bound required dividend now executed on legal path; runner narrowed"
+    },
+    {
+      "command": "python3 -B run_checks.py (final v2 runner)",
+      "exit_code": 0,
+      "run": 11,
+      "scope": "new7+repair4"
+    },
+    {
+      "command": "python3 -B money_receipts_v2.py",
+      "exit_code": 0,
+      "run": 11,
+      "steps": 60,
+      "rejections": 31
+    },
+    {
+      "command": "python3 -B arithmetic_checks_v2.py (attempt1)",
+      "exit_code": 1,
+      "preserved": "arithmetic-v2-attempt1-failure.json",
+      "reason": "1e-28 Decimal NAV rounding; exact unit count and asset remained correct"
+    },
+    {
+      "command": "python3 -B arithmetic_checks_v2.py (final)",
+      "exit_code": 0,
+      "checks": 20,
+      "refused_money_before_after_equal": 31
+    },
+    {
+      "command": "python3 -B scripts/check_repo_hygiene.py",
+      "exit_code": 0,
+      "stdout": "归置自检通过：根层四层均在白名单内，关键配置均已入库。"
+    }
+  ],
+  "budget": {
+    "free_bytes_before_repair": 5253394432,
+    "free_bytes_after": 5287440384,
+    "total_output_bytes_before_this_receipt": 325090,
+    "file_count_before_this_receipt": 49,
+    "market_runs": 0,
+    "fits": 0,
+    "downloads": 0,
+    "installs": 0,
+    "network": 0,
+    "git_actions": 0
+  },
+  "status": "second-review-pending"
+}

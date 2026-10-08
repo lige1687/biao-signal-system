@@ -1,0 +1,43 @@
+{
+  "checked_at": "2026-10-08T11:06:13.722912+00:00",
+  "source6_unchanged": true,
+  "snapshot6_exact": true,
+  "frozen_implementation4_unchanged": true,
+  "commands": [
+    {
+      "command": "python3 -B docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/run_checks.py",
+      "exit_code": 0,
+      "tests": 23
+    },
+    {
+      "command": "python3 -B docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/money_receipts.py",
+      "exit_code": 0,
+      "new_groups_only": 7,
+      "steps": 39
+    },
+    {
+      "command": "python3 -B docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/arithmetic_checks.py",
+      "exit_code": 0,
+      "arithmetic_checks": 27
+    },
+    {
+      "command": "python3 -B scripts/check_repo_hygiene.py",
+      "exit_code": 0,
+      "stdout": "归置自检通过：根层四层均在白名单内，关键配置均已入库。"
+    }
+  ],
+  "unexpected_execution_failures": [],
+  "tool_orchestration_failures": [
+    {
+      "reason": "JS SyntaxError: Invalid or unexpected token",
+      "effect": "No shell started; no files written",
+      "recovery": "Split receipt generation and README writes"
+    }
+  ],
+  "intentional_refusal_events": 19,
+  "production": false,
+  "market_runs": 0,
+  "fits": 0,
+  "downloads": 0,
+  "installs": 0
+}

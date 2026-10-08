@@ -1,0 +1,72 @@
+{
+  "command": "python3 -B /Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/prove_v1_failures.py",
+  "exit_code": 0,
+  "scope": "3 targeted v1 counterexamples; old sealed16 and new23 not rerun",
+  "expected_old_defects_reproduced": 3,
+  "observations": [
+    {
+      "finding": "R1",
+      "v1_wrongly_accepted": true,
+      "receipt": {
+        "at": "2026-01-02T09:30:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "100",
+        "receivable": "0",
+        "shares": {
+          "A": "0"
+        },
+        "sellable": {
+          "A": "0"
+        },
+        "equity": "100",
+        "units": "1000",
+        "fees": "0"
+      },
+      "correct_equity": "200",
+      "missing_required_action": "08:00 split2x"
+    },
+    {
+      "finding": "R2",
+      "v1_wrongly_accepted": true,
+      "receipt": {
+        "at": "2026-01-03T00:00:00+08:00",
+        "free_cash": "100",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "100"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "400",
+        "units": "1500",
+        "fees": "0"
+      },
+      "valuation_at_bound_close": "3",
+      "wrong_units": "1500",
+      "correct_units": "1333.333333333333333333333333"
+    },
+    {
+      "finding": "R3",
+      "v1_wrongly_accepted": true,
+      "receipt": {
+        "at": "2026-01-02T15:00:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "200",
+        "receivable": "0",
+        "shares": {
+          "A": "0"
+        },
+        "sellable": {
+          "A": "0"
+        },
+        "equity": "200",
+        "units": "1000",
+        "fees": "0"
+      },
+      "release_at": "2026-01-02T15:00:00+08:00",
+      "correct_behavior": "reject buy with same-local-date release"
+    }
+  ]
+}

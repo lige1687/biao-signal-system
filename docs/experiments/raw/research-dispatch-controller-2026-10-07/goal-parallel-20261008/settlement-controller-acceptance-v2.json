@@ -1,0 +1,43 @@
+{
+  "checked_at": "2026-10-08T19:20:43.467992+08:00",
+  "reviewer": "/root/settlement_scope_review",
+  "reviewer_model": "gpt-6-astra/high",
+  "controller": "root",
+  "status": "accepted_bounded_synthetic_execution_v2",
+  "source_sha256": {
+    "dated_ledger.py": "20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3",
+    "synthetic_fixtures.py": "1fa21b07f3162c5dc980f8919a2b495ae5e2f18d2b4a9c39f732015ec638bc92",
+    "test_dated_ledger.py": "caa6a38d367a8cfa29b5af02ef4bac7d19933702a3922dcfd2fd4601e40a6259",
+    "run_checks.py": "8fd9fe946ee6388d1c861f8faebceb0d046aca7dc9c2942a0c0ebe33a0492a29"
+  },
+  "independent_review_method": "Python -B memoryevent sequences, no old16 orfull11suite rerun, sourcehashesbeforeafterequal",
+  "closed_findings": [
+    "R1 due split skipped beforetrade/close bothrefuse atomically; correctsplit then sale retains100shares+100restrictedcash=200",
+    "R2 staleclose deposit refuses; validpriorclose then deposit100 givesunits1333.333333333333333333333333,assets400,NAVapprox.3",
+    "R3 samelocalShanghai release rejects even+09:00differentwritten date; legalcrossShanghaidate allowed",
+    "R4 split200to400shares, sellable100to200, price1.9to.95, receivable10; assets390to390, bothrelease_atunchanged",
+    "Sameinstantactions missingorder/reversed/skippedsecond refuse; explicitdividend then split then trade accepts"
+  ],
+  "root_source6_and_snapshot6_equal": true,
+  "root_v1_preserved_artifacts_equal": 25,
+  "source_original_tests_rerun": false,
+  "author_final_checks": 11,
+  "author_money_steps": 60,
+  "author_atomic_rejections": 31,
+  "author_saved_arithmetic_checks": 20,
+  "actual_output_bytes_before_archive": 326978,
+  "free_bytes_before_archive": 5290528768,
+  "limitations": [
+    "Syntheticcalendar/product/payments only",
+    "NotfullP0/P1generator or actualmarkettrading",
+    "No qualifiedactualaction/price/fee/settlementfullcoverage",
+    "No production or fullenduserflowvalidation",
+    "OriginalD sixinputs andother8goal blockersunchanged"
+  ],
+  "failures_preserved": [
+    "3v1independentreproductions",
+    "v2initial27checks1invalidfixtureerror",
+    "DecimalNAV1e-28rounding failure; explicit1e-27bound onlyderivedNAV, units/assets checkedexact",
+    "Originalownerconnectionfailure andpreflighttoolfailures"
+  ]
+}

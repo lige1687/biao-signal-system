@@ -1,0 +1,170 @@
+{
+  "command": "python3 -B /Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/arithmetic_checks.py",
+  "exit_code": 0,
+  "checks": [
+    {
+      "label": "group1 conserved assets new",
+      "actual": "400",
+      "expected": "400",
+      "formula": "opening cash200 + original100*2 =400; fee0"
+    },
+    {
+      "label": "group1 conserved assets repeat",
+      "actual": "400",
+      "expected": "400",
+      "formula": "opening cash200 + original100*2 =400; fee0"
+    },
+    {
+      "label": "group1 conserved assets closed-0",
+      "actual": "400",
+      "expected": "400",
+      "formula": "opening cash200 + original100*2 =400; fee0"
+    },
+    {
+      "label": "group1 conserved assets closed-1",
+      "actual": "400",
+      "expected": "400",
+      "formula": "opening cash200 + original100*2 =400; fee0"
+    },
+    {
+      "label": "group1 conserved assets closed-2",
+      "actual": "400",
+      "expected": "400",
+      "formula": "opening cash200 + original100*2 =400; fee0"
+    },
+    {
+      "label": "group1 conserved assets release",
+      "actual": "400",
+      "expected": "400",
+      "formula": "opening cash200 + original100*2 =400; fee0"
+    },
+    {
+      "label": "same opening sellable",
+      "actual": "100",
+      "expected": "100",
+      "formula": "original lot100; new100 release on Jan6"
+    },
+    {
+      "label": "explicit Jan6 release",
+      "actual": "200",
+      "expected": "200",
+      "formula": "original100 + newly released100"
+    },
+    {
+      "label": "group2 assets s",
+      "actual": "200",
+      "expected": "200",
+      "formula": "100 shares*2 sold; no fees; restricted and free are same asset"
+    },
+    {
+      "label": "group2 assets arrive",
+      "actual": "200",
+      "expected": "200",
+      "formula": "100 shares*2 sold; no fees; restricted and free are same asset"
+    },
+    {
+      "label": "group2 assets valid",
+      "actual": "200",
+      "expected": "200",
+      "formula": "100 shares*2 sold; no fees; restricted and free are same asset"
+    },
+    {
+      "label": "Jan6 10:00 cash",
+      "actual": "200",
+      "expected": "200",
+      "formula": "payment at10:00; Jan6 09:30 earlier opening cannot be reused"
+    },
+    {
+      "label": "mixed free remains usable",
+      "actual": "100",
+      "expected": "100",
+      "formula": "initial free100 unaffected by restricted sale200"
+    },
+    {
+      "label": "mixed restricted",
+      "actual": "200",
+      "expected": "200",
+      "formula": "100 sold*2 fee0"
+    },
+    {
+      "label": "cash after release",
+      "actual": "300",
+      "expected": "300",
+      "formula": "free100 + restricted200"
+    },
+    {
+      "label": "assets after release",
+      "actual": "300",
+      "expected": "300",
+      "formula": "cash conversion does not create assets"
+    },
+    {
+      "label": "split total",
+      "actual": "400",
+      "expected": "400",
+      "formula": "(released100 + pending100)*2"
+    },
+    {
+      "label": "split sellable",
+      "actual": "200",
+      "expected": "200",
+      "formula": "only original released100*2"
+    },
+    {
+      "label": "split receivable preserved",
+      "actual": "10.0",
+      "expected": "10",
+      "formula": "locked100*.1; not multiplied by2"
+    },
+    {
+      "label": "split mark conversion",
+      "actual": "390.00",
+      "expected": "390",
+      "formula": "400*.95+10=390; prior dividend effective mark1.9 was explicit synthetic assumption"
+    },
+    {
+      "label": "subsequent price jump explicitly counted",
+      "actual": "810.0",
+      "expected": "810",
+      "formula": "sold200*2 + remaining200*2 + receivable10; fixture next-open price2 differs from split mark.95"
+    },
+    {
+      "label": "unpaid assets",
+      "actual": "200.0",
+      "expected": "200",
+      "formula": "100*1.9+10"
+    },
+    {
+      "label": "paid assets",
+      "actual": "200.0",
+      "expected": "200",
+      "formula": "100*1.9+cash10"
+    },
+    {
+      "label": "paid accounting units",
+      "actual": "1000",
+      "expected": "1000",
+      "formula": "payment is internal asset transfer, units unchanged"
+    },
+    {
+      "label": "deposit units",
+      "actual": "1100",
+      "expected": "1100",
+      "formula": "prior saved NAV1: original1000 + deposit100/1"
+    },
+    {
+      "label": "ex dividend assets",
+      "actual": "1100",
+      "expected": "1100",
+      "formula": "cash100 + stock100*9 + receivable100"
+    },
+    {
+      "label": "known wrong ex-dividend mixture",
+      "wrong_nav": "1.1",
+      "wrong_result_nav": "1.008333333333333333333333333",
+      "correct_result_nav": "1",
+      "formula": "old nominal mark1000 + today receivable100 is wrong deposit denominator"
+    }
+  ],
+  "scope": "Independent arithmetic from saved receipts; not a second ledger implementation"
+}

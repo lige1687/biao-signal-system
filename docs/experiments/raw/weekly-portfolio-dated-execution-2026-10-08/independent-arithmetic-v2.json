@@ -1,0 +1,131 @@
+{
+  "command": "python3 -B /Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/arithmetic_checks_v2.py",
+  "exit_code": 0,
+  "checks": [
+    {
+      "name": "group1 assets new",
+      "actual": "400",
+      "expected": "400",
+      "formula": "initial200cash + original100*2; buy fee0"
+    },
+    {
+      "name": "group1 assets repeat",
+      "actual": "400",
+      "expected": "400",
+      "formula": "initial200cash + original100*2; buy fee0"
+    },
+    {
+      "name": "group1 assets closed-0",
+      "actual": "400",
+      "expected": "400",
+      "formula": "initial200cash + original100*2; buy fee0"
+    },
+    {
+      "name": "group1 assets closed-1",
+      "actual": "400",
+      "expected": "400",
+      "formula": "initial200cash + original100*2; buy fee0"
+    },
+    {
+      "name": "group1 assets closed-2",
+      "actual": "400",
+      "expected": "400",
+      "formula": "initial200cash + original100*2; buy fee0"
+    },
+    {
+      "name": "group1 assets release",
+      "actual": "400",
+      "expected": "400",
+      "formula": "initial200cash + original100*2; buy fee0"
+    },
+    {
+      "name": "group2 assets s",
+      "actual": "200",
+      "expected": "200",
+      "formula": "sale100*2; payment transfers restricted200 to free200"
+    },
+    {
+      "name": "group2 assets arrive",
+      "actual": "200",
+      "expected": "200",
+      "formula": "sale100*2; payment transfers restricted200 to free200"
+    },
+    {
+      "name": "group2 assets valid",
+      "actual": "200",
+      "expected": "200",
+      "formula": "sale100*2; payment transfers restricted200 to free200"
+    },
+    {
+      "name": "group3 assets s",
+      "actual": "300",
+      "expected": "300",
+      "formula": "free100 + sold100*2 =300"
+    },
+    {
+      "name": "group3 assets release",
+      "actual": "300",
+      "expected": "300",
+      "formula": "free100 + sold100*2 =300"
+    },
+    {
+      "name": "R1 fixed assets s",
+      "actual": "200",
+      "expected": "200",
+      "formula": "split100*2=200 shares; sell100*1, keep100*1"
+    },
+    {
+      "name": "R1 fixed assets valid",
+      "actual": "200",
+      "expected": "200",
+      "formula": "split100*2=200 shares; sell100*1, keep100*1"
+    },
+    {
+      "name": "R2 correct units",
+      "actual": "1333.333333333333333333333333",
+      "expected": "1333.333333333333333333333333",
+      "formula": "saved Jan2equity300 /units1000=.3; deposit100/.3"
+    },
+    {
+      "name": "R2 correct assets",
+      "actual": "400",
+      "expected": "400",
+      "formula": "hold100*3 + deposit100"
+    },
+    {
+      "name": "R2 correct NAV within finite Decimal rounding",
+      "actual": "0.3000000000000000000000000001",
+      "expected": ".3",
+      "max_absolute_rounding": "1e-27",
+      "actual_absolute_rounding": "1E-28",
+      "formula": "400/(1000+100/.3)=.3 exactly as rational; Decimal context stores 28 significant digits"
+    },
+    {
+      "name": "R4 pre-split",
+      "actual": "390.0",
+      "expected": "390",
+      "formula": "two100lots*1.9 + receivable10"
+    },
+    {
+      "name": "R4 post-split",
+      "actual": "390.00",
+      "expected": "390",
+      "formula": "four100shares*.95 + receivable10"
+    },
+    {
+      "name": "R4 split released",
+      "actual": "200",
+      "expected": "200",
+      "formula": "original100released*2; pending100*2 remains locked"
+    },
+    {
+      "name": "R4 separate price input",
+      "actual": "810.0",
+      "expected": "810",
+      "formula": "next-open price2: sold200*2 + held200*2 + receivable10; not split return"
+    }
+  ],
+  "rejected_before_after_equal": 31,
+  "independence": "direct saved receipt arithmetic; no ledger import",
+  "limits": "same synthetic input assumptions; no true exchange/account qualification"
+}

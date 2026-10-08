@@ -1,0 +1,52 @@
+test_01_shared_cash_cannot_be_spent_twice (test_dated_ledger.Checks.test_01_shared_cash_cannot_be_spent_twice) ... ok
+test_02_exact_affordability_includes_fees (test_dated_ledger.Checks.test_02_exact_affordability_includes_fees) ... ok
+test_03_buy_lot_and_closed_market (test_dated_ledger.Checks.test_03_buy_lot_and_closed_market) ... ok
+test_04_new_purchase_not_sellable_same_day (test_dated_ledger.Checks.test_04_new_purchase_not_sellable_same_day) ... ok
+test_05_marks_and_terminal_not_liquidated (test_dated_ledger.Checks.test_05_marks_and_terminal_not_liquidated) ... ok
+test_06_unknown_mark_rejected (test_dated_ledger.Checks.test_06_unknown_mark_rejected) ... ok
+test_07_deposit_does_not_create_return (test_dated_ledger.Checks.test_07_deposit_does_not_create_return) ... ok
+test_08_dividend_receivable_cannot_be_spent (test_dated_ledger.Checks.test_08_dividend_receivable_cannot_be_spent) ... ok
+test_09_entitlement_survives_sale (test_dated_ledger.Checks.test_09_entitlement_survives_sale) ... ok
+test_10_split_preserves_value_and_sellable (test_dated_ledger.Checks.test_10_split_preserves_value_and_sellable) ... ok
+test_11_commission_floor_and_slippage (test_dated_ledger.Checks.test_11_commission_floor_and_slippage) ... ok
+test_12_sale_then_purchase_actual_proceeds (test_dated_ledger.Checks.test_12_sale_then_purchase_actual_proceeds) ... ok
+test_13_ex_dividend_deposit_prior_complete_nav (test_dated_ledger.Checks.test_13_ex_dividend_deposit_prior_complete_nav) ... ok
+test_14_duplicate_split_atomic (test_dated_ledger.Checks.test_14_duplicate_split_atomic) ... ok
+test_15_sale_proceeds_same_open_forbidden (test_dated_ledger.Checks.test_15_sale_proceeds_same_open_forbidden) ... ok
+test_16_time_order_and_information (test_dated_ledger.Checks.test_16_time_order_and_information) ... ok
+test_group1_lots_repeat_open_weekend_holiday (test_dated_ledger.Checks.test_group1_lots_repeat_open_weekend_holiday) ... ok
+test_group2_paid_after_open_target_qualification (test_dated_ledger.Checks.test_group2_paid_after_open_target_qualification) ... ok
+test_group3_mixed_free_restricted_and_sale_fee (test_dated_ledger.Checks.test_group3_mixed_free_restricted_and_sale_fee) ... ok
+test_group4_split_all_lots_entitlement_preserved (test_dated_ledger.Checks.test_group4_split_all_lots_entitlement_preserved) ... ok
+test_group5_payment_due_and_units_unchanged (test_dated_ledger.Checks.test_group5_payment_due_and_units_unchanged) ... ok
+test_group6_order_unique_ids_atomic_multiple_orders (test_dated_ledger.Checks.test_group6_order_unique_ids_atomic_multiple_orders) ... ERROR
+test_group7_bindings_and_no_undated_escape (test_dated_ledger.Checks.test_group7_bindings_and_no_undated_escape) ... ok
+test_repair_R1_concurrent_actions_explicit_order (test_dated_ledger.Checks.test_repair_R1_concurrent_actions_explicit_order) ... ok
+test_repair_R1_required_split_and_dividend (test_dated_ledger.Checks.test_repair_R1_required_split_and_dividend) ... ok
+test_repair_R2_latest_required_close_before_deposit (test_dated_ledger.Checks.test_repair_R2_latest_required_close_before_deposit) ... ok
+test_repair_R3_same_local_date_release_forbidden (test_dated_ledger.Checks.test_repair_R3_same_local_date_release_forbidden) ... ok
+
+======================================================================
+ERROR: test_group6_order_unique_ids_atomic_multiple_orders (test_dated_ledger.Checks.test_group6_order_unique_ids_atomic_multiple_orders)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/dated_ledger.py", line 121, in apply
+    self._require_due_actions(work, e, at)
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/dated_ledger.py", line 167, in _require_due_actions
+    raise ValueError('required due action missing: ' + aid)
+ValueError: required due action missing: d
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/test_dated_ledger.py", line 191, in test_group6_order_unique_ids_atomic_multiple_orders
+    l.apply(trade('buy','b1')); l.apply(trade('buy','b2',symbol='B'))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/dated_ledger.py", line 139, in apply
+    raise ValueError(str(error)) from error
+ValueError: required due action missing: d
+
+----------------------------------------------------------------------
+Ran 27 tests in 0.010s
+
+FAILED (errors=1)

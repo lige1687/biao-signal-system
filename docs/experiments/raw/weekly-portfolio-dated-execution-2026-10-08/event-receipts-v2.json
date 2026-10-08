@@ -1,0 +1,1563 @@
+{
+  "test_01_shared_cash_cannot_be_spent_twice": [
+    {
+      "event": {
+        "kind": "buy",
+        "id": "a",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T09:30:00+08:00",
+        "free_cash": "49.800",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "100"
+        },
+        "sellable": {
+          "A": "0"
+        },
+        "equity": "249.800",
+        "units": "1000",
+        "fees": "0.200"
+      }
+    },
+    {
+      "event": {
+        "kind": "buy",
+        "id": "b",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "B",
+        "qty": 100
+      },
+      "accepted": false,
+      "reason": "insufficient free cash including fees",
+      "money_state_unchanged": true
+    }
+  ],
+  "test_02_exact_affordability_includes_fees": [
+    {
+      "event": {
+        "kind": "buy",
+        "id": "a",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100
+      },
+      "accepted": false,
+      "reason": "insufficient free cash including fees",
+      "money_state_unchanged": true
+    }
+  ],
+  "test_03_buy_lot_and_closed_market": [
+    {
+      "event": {
+        "kind": "buy",
+        "id": "odd",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 50,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "explicit later-local-date release and buy lot required",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "buy",
+        "id": "closed",
+        "at": "2026-01-05T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "missing opening, halt, or product permission",
+      "money_state_unchanged": true
+    }
+  ],
+  "test_04_new_purchase_not_sellable_same_day": [
+    {
+      "event": {
+        "kind": "buy",
+        "id": "b",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T09:30:00+08:00",
+        "free_cash": "800",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "100"
+        },
+        "sellable": {
+          "A": "0"
+        },
+        "equity": "1000",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "sell",
+        "id": "s",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "unreleased, oversale, or invalid remainder",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "sell",
+        "id": "s2",
+        "at": "2026-01-06T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-06T09:30:00+08:00",
+        "free_cash": "800",
+        "restricted_cash": "200",
+        "receivable": "0",
+        "shares": {
+          "A": "0"
+        },
+        "sellable": {
+          "A": "0"
+        },
+        "equity": "1000",
+        "units": "1000",
+        "fees": "0"
+      }
+    }
+  ],
+  "test_05_marks_and_terminal_not_liquidated": [
+    {
+      "event": {
+        "kind": "buy",
+        "id": "b",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T09:30:00+08:00",
+        "free_cash": "499.500",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "100"
+        },
+        "sellable": {
+          "A": "0"
+        },
+        "equity": "999.500",
+        "units": "1000",
+        "fees": "0.500"
+      }
+    }
+  ],
+  "test_06_unknown_mark_rejected": [
+    {
+      "event": {
+        "kind": "close",
+        "id": "c",
+        "at": "2026-01-02T15:00:00+08:00"
+      },
+      "accepted": false,
+      "reason": "missing or invalid mark",
+      "money_state_unchanged": true
+    }
+  ],
+  "test_07_deposit_does_not_create_return": [
+    {
+      "event": {
+        "kind": "close",
+        "id": "c",
+        "at": "2026-01-02T15:00:00+08:00"
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T15:00:00+08:00",
+        "free_cash": "500",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "100"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "1100",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "deposit",
+        "id": "dep",
+        "at": "2026-01-03T00:00:00+08:00",
+        "amount": 250
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-03T00:00:00+08:00",
+        "free_cash": "750",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "100"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "1350",
+        "units": "1227.272727272727272727272727",
+        "fees": "0"
+      }
+    }
+  ],
+  "test_08_dividend_receivable_cannot_be_spent": [
+    {
+      "event": {
+        "kind": "dividend",
+        "id": "r",
+        "at": "2026-01-02T08:00:00+08:00",
+        "action_id": "d"
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T08:00:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "0",
+        "receivable": "10.0",
+        "shares": {
+          "A": "100"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "200.0",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "pay",
+        "id": "p",
+        "at": "2026-01-02T09:00:00+08:00",
+        "action_id": "d"
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T09:00:00+08:00",
+        "free_cash": "10.0",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "100"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "200.0",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "pay",
+        "id": "p2",
+        "at": "2026-01-02T09:00:00+08:00",
+        "action_id": "d"
+      },
+      "accepted": false,
+      "reason": "not due or duplicate payment",
+      "money_state_unchanged": true
+    }
+  ],
+  "test_09_entitlement_survives_sale": [
+    {
+      "event": {
+        "kind": "sell",
+        "id": "s",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T09:30:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "200",
+        "receivable": "0",
+        "shares": {
+          "A": "0"
+        },
+        "sellable": {
+          "A": "0"
+        },
+        "equity": "200",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "dividend",
+        "id": "r",
+        "at": "2026-01-06T08:00:00+08:00",
+        "action_id": "d"
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-06T08:00:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "200",
+        "receivable": "10.0",
+        "shares": {
+          "A": "0"
+        },
+        "sellable": {
+          "A": "0"
+        },
+        "equity": "210.0",
+        "units": "1000",
+        "fees": "0"
+      }
+    }
+  ],
+  "test_10_split_preserves_value_and_sellable": [
+    {
+      "event": {
+        "kind": "split",
+        "id": "sp",
+        "at": "2026-01-02T08:00:00+08:00",
+        "action_id": "s"
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T08:00:00+08:00",
+        "free_cash": "7",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "200"
+        },
+        "sellable": {
+          "A": "200"
+        },
+        "equity": "1007",
+        "units": "1000",
+        "fees": "0"
+      }
+    }
+  ],
+  "test_12_sale_then_purchase_actual_proceeds": [
+    {
+      "event": {
+        "kind": "buy",
+        "id": "b",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "B",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "insufficient free cash including fees",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "sell",
+        "id": "s",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T09:30:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "200",
+        "receivable": "0",
+        "shares": {
+          "A": "0"
+        },
+        "sellable": {
+          "A": "0"
+        },
+        "equity": "200",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "buy",
+        "id": "b2",
+        "at": "2026-01-06T09:30:00+08:00",
+        "symbol": "B",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-06T09:30:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "0",
+          "B": "100"
+        },
+        "sellable": {
+          "A": "0",
+          "B": "0"
+        },
+        "equity": "200",
+        "units": "1000",
+        "fees": "0"
+      }
+    }
+  ],
+  "test_13_ex_dividend_deposit_prior_complete_nav": [
+    {
+      "event": {
+        "kind": "deposit",
+        "id": "dep",
+        "at": "2026-01-02T00:00:00+08:00",
+        "amount": 100
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T00:00:00+08:00",
+        "free_cash": "100",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "100"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "1100",
+        "units": "1100",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "dividend",
+        "id": "d",
+        "at": "2026-01-02T08:00:00+08:00",
+        "action_id": "d"
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T08:00:00+08:00",
+        "free_cash": "100",
+        "restricted_cash": "0",
+        "receivable": "100",
+        "shares": {
+          "A": "100"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "1100",
+        "units": "1100",
+        "fees": "0"
+      }
+    }
+  ],
+  "test_14_duplicate_split_atomic": [
+    {
+      "event": {
+        "kind": "split",
+        "id": "s",
+        "at": "2026-01-02T08:00:00+08:00",
+        "action_id": "s"
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T08:00:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "200"
+        },
+        "sellable": {
+          "A": "200"
+        },
+        "equity": "200",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "split",
+        "id": "new-id",
+        "at": "2026-01-02T08:00:00+08:00",
+        "action_id": "s"
+      },
+      "accepted": false,
+      "reason": "duplicate action",
+      "money_state_unchanged": true
+    }
+  ],
+  "test_15_sale_proceeds_same_open_forbidden": [
+    {
+      "event": {
+        "kind": "sell",
+        "id": "s",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T09:30:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "200",
+        "receivable": "0",
+        "shares": {
+          "A": "0"
+        },
+        "sellable": {
+          "A": "0"
+        },
+        "equity": "200",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "buy",
+        "id": "b",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "B",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "insufficient free cash including fees",
+      "money_state_unchanged": true
+    }
+  ],
+  "test_16_time_order_and_information": [
+    {
+      "event": {
+        "kind": "buy",
+        "id": "b",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "information or execution time invalid",
+      "money_state_unchanged": true
+    }
+  ],
+  "test_group1_lots_repeat_open_weekend_holiday": [
+    {
+      "event": {
+        "kind": "buy",
+        "id": "new",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T09:30:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "200"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "400",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "advance",
+        "id": "repeat",
+        "at": "2026-01-02T09:30:00+08:00",
+        "phase": 3
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T09:30:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "200"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "400",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "sell",
+        "id": "too-many",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 200,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "unreleased, oversale, or invalid remainder",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "advance",
+        "id": "closed-0",
+        "at": "2026-01-03T09:30:00+08:00",
+        "phase": 3
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-03T09:30:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "200"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "400",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "advance",
+        "id": "closed-1",
+        "at": "2026-01-04T09:30:00+08:00",
+        "phase": 3
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-04T09:30:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "200"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "400",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "advance",
+        "id": "closed-2",
+        "at": "2026-01-05T09:30:00+08:00",
+        "phase": 3
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-05T09:30:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "200"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "400",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "advance",
+        "id": "release",
+        "at": "2026-01-06T09:30:00+08:00",
+        "phase": 3
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-06T09:30:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "200"
+        },
+        "sellable": {
+          "A": "200"
+        },
+        "equity": "400",
+        "units": "1000",
+        "fees": "0"
+      }
+    }
+  ],
+  "test_group2_paid_after_open_target_qualification": [
+    {
+      "event": {
+        "kind": "sell",
+        "id": "s",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T09:30:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "200",
+        "receivable": "0",
+        "shares": {
+          "A": "0"
+        },
+        "sellable": {
+          "A": "0"
+        },
+        "equity": "200",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "buy",
+        "id": "same",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "B",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "insufficient free cash including fees",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "buy",
+        "id": "before-cash",
+        "at": "2026-01-06T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "insufficient free cash including fees",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "buy",
+        "id": "forbidden",
+        "at": "2026-01-06T09:30:00+08:00",
+        "symbol": "B",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "missing opening, halt, or product permission",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "advance",
+        "id": "arrive",
+        "at": "2026-01-06T10:00:00+08:00",
+        "phase": 3
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-06T10:00:00+08:00",
+        "free_cash": "200",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "0"
+        },
+        "sellable": {
+          "A": "0"
+        },
+        "equity": "200",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "buy",
+        "id": "go-back",
+        "at": "2026-01-06T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "backward time or same-day phase order",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "buy",
+        "id": "no-opening",
+        "at": "2026-01-06T10:00:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "missing opening, halt, or product permission",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "buy",
+        "id": "valid",
+        "at": "2026-01-07T09:30:00+08:00",
+        "symbol": "B",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-07T09:30:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "0",
+          "B": "100"
+        },
+        "sellable": {
+          "A": "0",
+          "B": "0"
+        },
+        "equity": "200",
+        "units": "1000",
+        "fees": "0"
+      }
+    }
+  ],
+  "test_group3_mixed_free_restricted_and_sale_fee": [
+    {
+      "event": {
+        "kind": "sell",
+        "id": "s",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T09:30:00+08:00",
+        "free_cash": "100",
+        "restricted_cash": "200",
+        "receivable": "0",
+        "shares": {
+          "A": "0"
+        },
+        "sellable": {
+          "A": "0"
+        },
+        "equity": "300",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "buy",
+        "id": "fee",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "B",
+        "qty": 100
+      },
+      "accepted": false,
+      "reason": "insufficient free cash including fees",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "advance",
+        "id": "release",
+        "at": "2026-01-06T09:30:00+08:00",
+        "phase": 3
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-06T09:30:00+08:00",
+        "free_cash": "300",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "0"
+        },
+        "sellable": {
+          "A": "0"
+        },
+        "equity": "300",
+        "units": "1000",
+        "fees": "0"
+      }
+    }
+  ],
+  "group3_sale_fee_success": [
+    {
+      "event": {
+        "kind": "sell",
+        "id": "cost",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "minimum_commission": 5,
+        "commission_rate": 0
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T09:30:00+08:00",
+        "free_cash": "0.00",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "0"
+        },
+        "sellable": {
+          "A": "0"
+        },
+        "equity": "0.00",
+        "units": "1000",
+        "fees": "5.00"
+      }
+    }
+  ],
+  "group3_sale_fee_failure": [
+    {
+      "event": {
+        "kind": "sell",
+        "id": "fail",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "minimum_commission": 5,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "available cash cannot cover sale fee excess",
+      "money_state_unchanged": true
+    }
+  ],
+  "test_group4_split_all_lots_entitlement_preserved": [
+    {
+      "event": {
+        "kind": "dividend",
+        "id": "d",
+        "at": "2026-01-02T08:00:00+08:00",
+        "action_id": "d"
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T08:00:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "0",
+        "receivable": "10.0",
+        "shares": {
+          "A": "200"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "390.0",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "split",
+        "id": "s",
+        "at": "2026-01-06T08:00:00+08:00",
+        "action_id": "s"
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-06T08:00:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "0",
+        "receivable": "10.0",
+        "shares": {
+          "A": "400"
+        },
+        "sellable": {
+          "A": "200"
+        },
+        "equity": "390.00",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "split",
+        "id": "s2",
+        "at": "2026-01-06T08:00:00+08:00",
+        "action_id": "s"
+      },
+      "accepted": false,
+      "reason": "duplicate action",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "sell",
+        "id": "sale",
+        "at": "2026-01-06T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 200,
+        "commission_rate": 0
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-06T09:30:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "400",
+        "receivable": "10.0",
+        "shares": {
+          "A": "200"
+        },
+        "sellable": {
+          "A": "0"
+        },
+        "equity": "810.0",
+        "units": "1000",
+        "fees": "0"
+      }
+    }
+  ],
+  "test_group5_payment_due_and_units_unchanged": [
+    {
+      "event": {
+        "kind": "dividend",
+        "id": "d",
+        "at": "2026-01-02T08:00:00+08:00",
+        "action_id": "d"
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T08:00:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "0",
+        "receivable": "10.0",
+        "shares": {
+          "A": "100"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "200.0",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "pay",
+        "id": "early",
+        "at": "2026-01-02T09:00:00+08:00",
+        "action_id": "d"
+      },
+      "accepted": false,
+      "reason": "unbound action clock",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "pay",
+        "id": "due",
+        "at": "2026-01-06T09:00:00+08:00",
+        "action_id": "d"
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-06T09:00:00+08:00",
+        "free_cash": "10.0",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "100"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "200.0",
+        "units": "1000",
+        "fees": "0"
+      }
+    }
+  ],
+  "test_group7_bindings_and_no_undated_escape": [
+    {
+      "event": {
+        "kind": "buy",
+        "id": "undated",
+        "symbol": "A",
+        "qty": 100
+      },
+      "accepted": false,
+      "reason": "'at'",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "buy",
+        "id": "naive",
+        "at": "2026-01-02T09:30:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "timezone-bound instant required",
+      "money_state_unchanged": true
+    }
+  ],
+  "group7_missing_release": [
+    {
+      "event": {
+        "kind": "buy",
+        "id": "missing-release",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "'release_at'",
+      "money_state_unchanged": true
+    }
+  ],
+  "group7_missing_payment": [
+    {
+      "event": {
+        "kind": "sell",
+        "id": "missing-payment",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "'proceeds_available_at'",
+      "money_state_unchanged": true
+    }
+  ],
+  "test_repair_R1_concurrent_actions_explicit_order": [
+    {
+      "event": {
+        "kind": "split",
+        "id": "ambiguous",
+        "at": "2026-01-02T08:00:00+08:00",
+        "action_id": "s"
+      },
+      "accepted": false,
+      "reason": "ambiguous concurrent required action order",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "sell",
+        "id": "skip-all",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "ambiguous concurrent required action order",
+      "money_state_unchanged": true
+    }
+  ],
+  "repair_R1_explicit_order": [
+    {
+      "event": {
+        "kind": "split",
+        "id": "out-of-order",
+        "at": "2026-01-02T08:00:00+08:00",
+        "action_id": "s"
+      },
+      "accepted": false,
+      "reason": "required due action missing: d",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "dividend",
+        "id": "first",
+        "at": "2026-01-02T08:00:00+08:00",
+        "action_id": "d"
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T08:00:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "0",
+        "receivable": "10.0",
+        "shares": {
+          "A": "100"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "200.0",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "sell",
+        "id": "skip-second",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "required due action missing: s",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "split",
+        "id": "second",
+        "at": "2026-01-02T08:00:00+08:00",
+        "action_id": "s"
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T08:00:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "0",
+        "receivable": "10.0",
+        "shares": {
+          "A": "200"
+        },
+        "sellable": {
+          "A": "200"
+        },
+        "equity": "200.00",
+        "units": "1000",
+        "fees": "0"
+      }
+    }
+  ],
+  "test_repair_R1_required_split_and_dividend": [
+    {
+      "event": {
+        "kind": "sell",
+        "id": "skip-split",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "required due action missing: s",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "close",
+        "id": "skip-close",
+        "at": "2026-01-02T15:00:00+08:00"
+      },
+      "accepted": false,
+      "reason": "required due action missing: s",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "split",
+        "id": "s",
+        "at": "2026-01-02T08:00:00+08:00",
+        "action_id": "s"
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T08:00:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "200"
+        },
+        "sellable": {
+          "A": "200"
+        },
+        "equity": "200",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "sell",
+        "id": "valid",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T09:30:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "100",
+        "receivable": "0",
+        "shares": {
+          "A": "100"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "200",
+        "units": "1000",
+        "fees": "0"
+      }
+    }
+  ],
+  "repair_R1_dividend": [
+    {
+      "event": {
+        "kind": "buy",
+        "id": "skip-dividend",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "B",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "required due action missing: d",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "dividend",
+        "id": "recognize",
+        "at": "2026-01-02T08:00:00+08:00",
+        "action_id": "d"
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T08:00:00+08:00",
+        "free_cash": "200",
+        "restricted_cash": "0",
+        "receivable": "10.0",
+        "shares": {
+          "A": "100"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "400.0",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "buy",
+        "id": "valid",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "B",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T09:30:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "0",
+        "receivable": "10.0",
+        "shares": {
+          "A": "100",
+          "B": "100"
+        },
+        "sellable": {
+          "A": "100",
+          "B": "0"
+        },
+        "equity": "400.0",
+        "units": "1000",
+        "fees": "0"
+      }
+    }
+  ],
+  "test_repair_R2_latest_required_close_before_deposit": [
+    {
+      "event": {
+        "kind": "deposit",
+        "id": "stale",
+        "at": "2026-01-03T00:00:00+08:00",
+        "amount": 100
+      },
+      "accepted": false,
+      "reason": "latest required complete-day close missing",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "close",
+        "id": "complete",
+        "at": "2026-01-02T15:00:00+08:00"
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-02T15:00:00+08:00",
+        "free_cash": "0",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "100"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "300",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    {
+      "event": {
+        "kind": "deposit",
+        "id": "good",
+        "at": "2026-01-03T00:00:00+08:00",
+        "amount": 100
+      },
+      "accepted": true,
+      "state": {
+        "at": "2026-01-03T00:00:00+08:00",
+        "free_cash": "100",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "100"
+        },
+        "sellable": {
+          "A": "100"
+        },
+        "equity": "400",
+        "units": "1333.333333333333333333333333",
+        "fees": "0"
+      }
+    }
+  ],
+  "repair_R2_missing_close_mark": [
+    {
+      "event": {
+        "kind": "close",
+        "id": "unknown-price",
+        "at": "2026-01-02T15:00:00+08:00"
+      },
+      "accepted": false,
+      "reason": "missing or invalid mark",
+      "money_state_unchanged": true
+    },
+    {
+      "event": {
+        "kind": "deposit",
+        "id": "still-stale",
+        "at": "2026-01-03T00:00:00+08:00",
+        "amount": 100
+      },
+      "accepted": false,
+      "reason": "latest required complete-day close missing",
+      "money_state_unchanged": true
+    }
+  ],
+  "test_repair_R3_same_local_date_release_forbidden": [
+    {
+      "event": {
+        "kind": "buy",
+        "id": "same-day",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "explicit later-local-date release and buy lot required",
+      "money_state_unchanged": true
+    }
+  ],
+  "repair_R3_timezone_alias": [
+    {
+      "event": {
+        "kind": "buy",
+        "id": "offset-alias",
+        "at": "2026-01-02T09:30:00+08:00",
+        "symbol": "A",
+        "qty": 100,
+        "commission_rate": 0
+      },
+      "accepted": false,
+      "reason": "explicit later-local-date release and buy lot required",
+      "money_state_unchanged": true
+    }
+  ]
+}
