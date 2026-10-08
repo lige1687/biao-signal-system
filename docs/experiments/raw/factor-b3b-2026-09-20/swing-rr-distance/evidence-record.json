@@ -1,0 +1,115 @@
+{
+  "schema_version": "factor-evidence-record/1.0",
+  "record_id": "mixed.swing_rr_distance-erv-20260920",
+  "factor": {
+    "id": "mixed.swing_rr_distance@1.0.0",
+    "lifecycle_state_at_record_time": "exists",
+    "lifecycle_basis": ["本目录 definition-draft.md（草案，尚未写入 docs/research/definitions.v1.json；拟入库片段见 proposed-card-fragment.json，待主控终审）"],
+    "lifecycle_note": "evidence record 只引用 lifecycle，不修改、不自动升级；definitions.v1.json 本任务零修改（前后 SHA-256 见上级 README.md）"
+  },
+  "mode": "BLOCK_AWARE_DIAGNOSTIC_ONLY",
+  "synthetic": true,
+  "data_origin": "synthetic_fixture",
+  "overall_status": "evidence_complete_target_unavailable",
+  "terminal_statement": "Evidence complete, Target analysis unavailable",
+  "lifecycle_unchanged": true,
+  "chain": [
+    {
+      "stage": "definition",
+      "status": "pass",
+      "evidence": {
+        "formula": "value[t] = (H_conf − close[t]) / (close[t] − L_conf)；H_conf/L_conf 为 t 时点最近已确认摆动高/低点（confirmed_index ≤ t）",
+        "card_snapshot_note": "草案完整卡见 definition-draft.md（八分节齐＋G2 六项核查表）；锚点 trading-spec §10，与 B1 表单 5 一致；结构性目标价≠未来收益 target",
+        "registry_version": "definitions.v1.json（本卡未写入，引用版本为登记表当前版本；开工指纹见上级 README.md）"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "input_manifest",
+      "status": "pass",
+      "evidence": {
+        "manifest_path": "fixtures/（4 个合成夹具：bars＋显式已确认摆动点输入，逐输入 SHA-256 见 independent-check-report.json fixture_sha256 与上级 README.md 指纹表）",
+        "manifest_sha256": null,
+        "frozen_binding": "以 independent-check-report.json fixture_sha256 为准",
+        "real_input_dependency": "已确认摆动点序列（生产口径 features/pivots.py::confirmed_pivots，三左三右）；合成验证以显式摆动点等价表达并留档，不补洞、不冒充真实识别"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "qualification",
+      "status": "undertaken_conditional",
+      "evidence": {
+        "ranking_use": "not_applicable",
+        "target_use": "blocked_conditional_not_undertaken",
+        "gate_record": "B1 表单 5 Stage 5＋F2 受限模式：卡 uses=[research_signal, description]，不含 ranking/target；target 用途固定阻塞"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "ranking_reconstruction",
+      "status": "not_applicable",
+      "evidence": {
+        "artifact_path": null,
+        "artifact_sha256": null,
+        "months": 0,
+        "months_ranking_recorded": 0,
+        "months_no_eligible_sample": 0,
+        "ordering_rule": "not_applicable",
+        "not_applicable_rationale": "单一标的时间序列描述型因子（feature/description）：每个观察日只有一个数值，无横截面集合，排序语义不存在。依据 definition-standard §2＋B1 表单 5 的 uses 声明。不为填满七阶段编造排名；sample_ledger 的 ranking_blocked 恒为 0。"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "sample_ledger",
+      "status": "pass",
+      "evidence": {
+        "artifact_path": "independent-check-report.json（sample_ledger 段）",
+        "artifact_sha256": "见上级 README.md 指纹表",
+        "rows": 13,
+        "identity": "expected(13) = factor_blocked(8) + ranking_blocked(0，not_applicable) + target_unavailable(5)；互斥主原因，行数守恒",
+        "all_ok": true
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "blocked_report",
+      "status": "blocked",
+      "evidence": {
+        "artifact_path": "independent-check-report.json（blocked_cases 段）",
+        "artifact_sha256": "见上级 README.md 指纹表",
+        "five_elements_present": true,
+        "terminal_note": "Evidence complete, Target analysis unavailable"
+      },
+      "blocked_reason": {
+        "code": "target_use_not_authorized",
+        "detail": "研究信号（target）用途未承担：卡 uses 不含 target，受限模式下 target 分析固定阻塞（结构性目标价是距离度量的输入，不是未来收益预测目标）。五要素：①ranking 不适用（时序描述型）／target 未允许；②原因：用途闸门（B1 表单 5 Stage 5）；③缺失字段：真实数据 available_at 与真实摆动点识别（仅合成显式摆动点输入）；④qualified-research 不成立（无有效性证据）；⑤不构成失败，终态声明如上"
+      }
+    },
+    {
+      "stage": "independent_check",
+      "status": "pass",
+      "evidence": {
+        "implementation": "independent_check.py（独立重写确认边界过滤＋最新摆动点选择＋比值判定，零 lei_signal import，import 清单已写入报告）",
+        "report_sha256": "见上级 README.md 指纹表",
+        "result": "13 观察点逐值比对全对（含最新摆动点取代、无结构、close 越过结构位、拐点日/确认日零后视分支）；零后视专项探针（fx-d t=9..14）确认日前恒 NaN、确认日当日可见、拐点当日 t=10 不回填；台账守恒 13=8+0+5；3 个阻断用例重演一致。被测实现（factor_lab/b3b_swing_rr_distance.py）对照同一期望表全对"
+      },
+      "blocked_reason": null
+    }
+  ],
+  "forbidden_statistics_not_computed": [
+    "rank_ic",
+    "quantile_groups_q2",
+    "reference_difference"
+  ],
+  "artifacts": [
+    { "path": "definition-draft.md" },
+    { "path": "hand-expectations.md" },
+    { "path": "hand-expectations.json" },
+    { "path": "independent_check.py" },
+    { "path": "independent-check-report.json" },
+    { "path": "proposed-card-fragment.json" },
+    { "path": "../../src/lei_signal/research/factor_lab/b3b_swing_rr_distance.py（最小实现，SHA-256 见上级 README.md）" },
+    { "path": "../../../tests/unit/test_b3b_swing_rr_distance.py（实现单测）" }
+  ],
+  "notes": "大白话：给『现价到前期已确认高点、前期已确认低点各有多远、两者差几倍』造了候选因子的完整证据档案。重点验证了不偷看未来：高点要等右边走过三根 K 线才算『确认』，确认之前任何一天都不许用它——专设了一组数据验证『拐点当天也算不知道』。用四组编造数据逐日核对，独立重算全对。『按这个比值排序』不适用；『未来涨多少』分析按规则被挡住，属正常终态。登记表一个字节没动，新卡片段另存待主控审。"
+}

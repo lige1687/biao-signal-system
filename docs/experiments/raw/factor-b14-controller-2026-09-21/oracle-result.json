@@ -1,0 +1,55 @@
+{
+  "pass": true,
+  "rows_checked": 6380,
+  "scale_checks": 3220,
+  "max_absolute_error": 0.0,
+  "per_ref": {
+    "mixed.rv_percentile@1.0.0": {
+      "base_rows": 1610,
+      "scaled_rows": 1610,
+      "prefix_rows": 1580,
+      "value_type": "continuous",
+      "pass": true
+    },
+    "trend.recovered200@1.0.0": {
+      "base_rows": 1610,
+      "scaled_rows": 1610,
+      "prefix_rows": 1580,
+      "value_type": "boolean",
+      "pass": true
+    }
+  },
+  "probes": {
+    "rv_raw_missing_30": [
+      null,
+      "price_missing"
+    ],
+    "rv_before_252_values_271": [
+      null,
+      "warmup_history_insufficient"
+    ],
+    "rv_first_252_values_272": [
+      0.501984126984127,
+      null
+    ],
+    "rv_full_756_values_777": [
+      0.5006613756613757,
+      null
+    ],
+    "recovered_before_200_valid_199": [
+      null,
+      "warmup_history_insufficient"
+    ],
+    "recovered_first_200_valid_200": [
+      1.0,
+      null
+    ],
+    "recovered_missing_500": [
+      null,
+      "price_missing"
+    ]
+  },
+  "expectation": "stdlib RV20 sample deviation then 756-slot average rank; valid-price SMA200 recovery equality included",
+  "synthetic_only": true,
+  "forbidden_statistics_computed": false
+}

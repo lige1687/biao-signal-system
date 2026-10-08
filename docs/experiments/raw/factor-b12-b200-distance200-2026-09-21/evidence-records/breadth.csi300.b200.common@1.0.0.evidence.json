@@ -1,0 +1,128 @@
+{
+  "schema_version": "factor-evidence-record/1.0",
+  "record_id": "breadth.csi300.b200.common-erv-20260921-b12",
+  "factor": {
+    "id": "breadth.csi300.b200.common@1.0.0",
+    "lifecycle_state_at_record_time": "exists",
+    "lifecycle_basis": ["docs/research/definitions.v1.json"],
+    "lifecycle_note": "本记录只提交合成计算的ready候选，不改登记表、不升级生命周期。"
+  },
+  "mode": "BLOCK_AWARE_DIAGNOSTIC_ONLY",
+  "synthetic": true,
+  "synthetic_only": true,
+  "data_origin": "synthetic_fixture",
+  "overall_status": "evidence_complete_target_not_applicable",
+  "terminal_statement": "Evidence complete; qualification, ranking, and target are not applicable to this calculation-only check",
+  "lifecycle_unchanged": true,
+  "chain": [
+    {
+      "stage": "definition",
+      "status": "pass",
+      "evidence": {
+        "formula": "count(P>SMA200 in E200)/count(E200)；E200=当日成员∩当日真实报价∩至少200个有效收盘；覆盖率至少0.90",
+        "registry_version": "1.4.1",
+        "registry_sha256": "d967e22f7f93726e1f14a5dfba84897e596d59eaa4f22574e8bccc0888bfc7e2"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "input_manifest",
+      "status": "pass",
+      "evidence": {
+        "manifest_path": "frozen-inputs.json",
+        "manifest_sha256": "20211db6d15a5bdccf8991de491a3b0950278644cb068a3604b71f26e51dfd14",
+        "fixture_path": "fixtures/breadth.csi300.b200.common@1.0.0.fixture.json",
+        "fixture_sha256": "4d6c7f74d291e1473fff8e6245b6670edf6140ef1ebdaa1ae0849e43a11cde7f",
+        "frozen_binding": "210日期×12人工股票；每日10成员或空名单；人工日期成员链"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "qualification",
+      "status": "not_applicable",
+      "evidence": {
+        "qualification_use": "not_applicable",
+        "ranking_use": "not_applicable",
+        "target_use": "not_applicable",
+        "gate_record": "B12冻结合同限定纯计算合成核验；人工成员链不冒充真实沪深300资格。"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "ranking_reconstruction",
+      "status": "not_applicable",
+      "evidence": {
+        "artifact_path": null,
+        "artifact_sha256": null,
+        "months": 0,
+        "months_ranking_recorded": 0,
+        "ordering_rule": "not_applicable",
+        "not_applicable_rationale": "同日市场宽度状态只做公式核验，不用于给资产排序。"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "sample_ledger",
+      "status": "not_applicable",
+      "evidence": {
+        "artifact_path": null,
+        "artifact_sha256": null,
+        "rows": 0,
+        "identity": "not_applicable",
+        "all_ok": true,
+        "not_applicable_rationale": "没有未来结果、预测样本或收益样本。"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "blocked_report",
+      "status": "not_applicable",
+      "evidence": {
+        "artifact_path": null,
+        "artifact_sha256": null,
+        "five_elements_present": false,
+        "terminal_note": "target并非失败或阻断，而是纯计算协议下不适用。"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "independent_check",
+      "status": "pass",
+      "evidence": {
+        "implementation": "independent_check.py；仅Python标准库，从原始人工价格和成员链逐日重建有效报价、SMA200、E200、覆盖率和B200",
+        "report_path": "independent-check/breadth.csi300.b200.common@1.0.0.result.json",
+        "report_sha256": "e852d0efc156348f9d27cb70870d56611d709e8ff6abbfa57faf6fa54d5aa4c0",
+        "result": "210行逐行一致，0处差异，首差为空。"
+      },
+      "blocked_reason": null
+    }
+  ],
+  "forbidden_statistics_not_computed": ["rank_ic", "target", "future_return", "return_difference", "prediction_statistics"],
+  "implementation_binding": {
+    "entry": "src/lei_signal/research/factor_lab/adapters.py::calculate_batch",
+    "calculation": "src/lei_signal/research/definitions.py::breadth",
+    "parameters": {"window": 200, "eligible_window": 200, "minimum_coverage": 0.9, "strict_above": true},
+    "definitions_sha256": "5a3859dfcadf3c225528f92e5ffba7722de02ff6a832f6cf7b26ead2154a4f24",
+    "adapters_sha256": "27596fd66d918cacf9db7a6ae2cdd11b408d7d46f3c9889ac2d35a42e7748020"
+  },
+  "implementation_output": {
+    "path": "implementation-output/breadth.csi300.b200.common@1.0.0.actual.csv",
+    "sha256": "2bd01b8eba5b049b204677ec1ce2b0f1ebd3e9124250daf379a3b11532c07606",
+    "rows": 210
+  },
+  "boundary_observations": [
+    "第200个有效收盘前返回no_eligible_quotes，不伪装成0。",
+    "10成员中9个合格时覆盖率恰好0.90，可输出5/9；8/10时返回coverage_below_minimum。",
+    "价格等于SMA200不进分子；m05等于SMA50但高于SMA200，证明本次算的是B200而不是B50。",
+    "空名单返回membership_missing；成员换成m03到m12后只用当日E200作分母。"
+  ],
+  "decision": {
+    "status": "ready_for_verified",
+    "reason": "精确登记身份、事前冻结人工成员链、calculate_batch实际输出和零系统导入独立逐行重算一致；只提交主控验收候选。"
+  },
+  "not_established": [
+    "真实沪深300历史成员链或真实股票价格资格",
+    "排序、未来结果、预测能力或收益改善",
+    "生产适用性、交易授权或生命周期升级"
+  ]
+}

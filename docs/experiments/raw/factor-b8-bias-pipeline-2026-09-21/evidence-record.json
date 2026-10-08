@@ -1,0 +1,33 @@
+{
+  "schema_version": "factor-evidence-record/1.0",
+  "record_id": "mixed.bias_ema120_pct-b8-pipeline-20260921",
+  "factor": {"id": "mixed.bias_ema120_pct@1.0.0", "lifecycle_state_at_record_time": "exists", "lifecycle_basis": ["docs/research/definitions.v1.json"], "lifecycle_note": "B8 controller decides lifecycle only after evidence review; this record preserves the pre-merge state."},
+  "mode": "BLOCK_AWARE_DIAGNOSTIC_ONLY",
+  "synthetic": true,
+  "synthetic_only": true,
+  "data_origin": "synthetic_fixture",
+  "overall_status": "evidence_complete_target_unavailable",
+  "terminal_statement": "Evidence complete, Target analysis unavailable",
+  "lifecycle_unchanged": true,
+  "chain": [
+    {"stage": "definition", "status": "pass", "evidence": {"formula": "close/EMA120-1; EMA120 first 120-value mean seed, alpha=2/121, includes current close", "registry_version": "1.3.5", "registry_sha256": "8a3b7af26197c362f43604576ae4321f19dece6ec60c6decea84c431aa0a6421"}, "blocked_reason": null},
+    {"stage": "input_manifest", "status": "pass", "evidence": {"manifest_path": "fixture-manifest.json", "manifest_sha256": "646463c6c40d96ade09bc25024f07cfc8d91130ac3f43a7e0965ac78cbec4ec8", "cases": 8, "rows": 1215, "origin": "4 frozen B2 synthetic inputs plus 4 explicitly specified synthetic boundaries"}, "blocked_reason": null},
+    {"stage": "qualification", "status": "not_applicable", "evidence": {"ranking_use": "not_applicable", "target_use": "not_authorized", "reason": "numerical synthetic verification only; no qualification change"}, "blocked_reason": null},
+    {"stage": "ranking_reconstruction", "status": "not_applicable", "evidence": {"artifact_path": null, "reason": "single-instrument numerical feature, no ranking"}, "blocked_reason": null},
+    {"stage": "sample_ledger", "status": "not_applicable", "evidence": {"artifact_path": null, "reason": "1215 rows are synthetic numerical checks, not a predictive sample"}, "blocked_reason": null},
+    {"stage": "blocked_report", "status": "not_applicable", "evidence": {"artifact_path": null, "five_elements_present": false, "reason": "target analysis outside authorized scope"}, "blocked_reason": null},
+    {"stage": "independent_check", "status": "pass", "evidence": {"implementation": "independent_check.py; standard library closed weighted sum from original prices; zero lei_signal imports", "report_path": "independent-report.json", "report_sha256": "9ba67b905e24815f78a1479694338ff185a9d2ab6a085330993dc3f03fe9e78f", "rows": 1215, "mismatches": 0}, "blocked_reason": null}
+  ],
+  "implementation_binding": {"pipeline": ["src/lei_signal/features/indicators.py::compute_features", "src/lei_signal/features/indicators.py::seeded_ema", "src/lei_signal/rules/two_b_reversal.py::_bias_ema120"], "source_sha256": {"src/lei_signal/features/indicators.py": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26", "src/lei_signal/rules/two_b_reversal.py": "f545654f5966ee97bd9583ab8245e22e796679c4a6a4f38eb61ece1997b9c307"}},
+  "artifacts": [
+    {"path": "fixture-manifest.json", "sha256": "646463c6c40d96ade09bc25024f07cfc8d91130ac3f43a7e0965ac78cbec4ec8"},
+    {"path": "capture_pipeline.py", "sha256": "1d7facddef5b9e6ee274eaaf6c38a6d2d75367b4632e0cdd352c43e05cde43f6"},
+    {"path": "implementation-output.json", "sha256": "47c8e8e2825b5fad72dc755460562b2d1552472a2ad837ddf1afaf51c5c5fd6c"},
+    {"path": "independent_check.py", "sha256": "5f5d116424aafc3b61cf2eaefd896160539c8d457ea7c2f6ddb55673d1710717"},
+    {"path": "independent-report.json", "sha256": "9ba67b905e24815f78a1479694338ff185a9d2ab6a085330993dc3f03fe9e78f"}
+  ],
+  "verification_scope": "synthetic raw-close -> real compute_features/seeded_ema -> real _bias_ema120 numerical pipeline only; 8 cases/1215 rows, prefix and positive scaling checks",
+  "boundary_notes": ["leading null rows delay first seed", "missing values within or after seed propagate unavailable EMA thereafter in current implementation; no recovery rule is added", "EMA zero produces missing bias", "no real calendar, price source qualification, market effectiveness or production consumer migration established"],
+  "forbidden_statistics_not_computed": ["target", "IC", "return_difference"],
+  "decision": {"status": "ready_for_verified", "authority": "controller under user 2026-09-21 decision delegation"}
+}

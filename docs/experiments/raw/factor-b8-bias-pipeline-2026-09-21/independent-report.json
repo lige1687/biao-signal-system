@@ -1,0 +1,83 @@
+{
+  "factor_id": "mixed.bias_ema120_pct@1.0.0",
+  "synthetic_only": true,
+  "method": "closed_form_weighted_sum",
+  "observations": [
+    {
+      "case": "fx-a-normal",
+      "rows": 200,
+      "mismatches": 0,
+      "maximum_absolute_error": {
+        "ema120": 2.1316282072803006e-13,
+        "bias": 2.1094237467877974e-15
+      }
+    },
+    {
+      "case": "fx-b-trend",
+      "rows": 130,
+      "mismatches": 0,
+      "maximum_absolute_error": {
+        "ema120": 2.842170943040401e-14,
+        "bias": 2.220446049250313e-16
+      }
+    },
+    {
+      "case": "fx-c-warmup",
+      "rows": 119,
+      "mismatches": 0,
+      "maximum_absolute_error": {
+        "ema120": 0.0,
+        "bias": 0.0
+      }
+    },
+    {
+      "case": "fx-d-missing-close",
+      "rows": 200,
+      "mismatches": 0,
+      "maximum_absolute_error": {
+        "ema120": 2.1316282072803006e-13,
+        "bias": 2.1094237467877974e-15
+      }
+    },
+    {
+      "case": "leading-missing",
+      "rows": 133,
+      "mismatches": 0,
+      "maximum_absolute_error": {
+        "ema120": 9.947598300641403e-14,
+        "bias": 9.992007221626409e-16
+      }
+    },
+    {
+      "case": "missing-in-seed",
+      "rows": 141,
+      "mismatches": 0,
+      "maximum_absolute_error": {
+        "ema120": 0.0,
+        "bias": 0.0
+      }
+    },
+    {
+      "case": "missing-after-seed",
+      "rows": 166,
+      "mismatches": 0,
+      "maximum_absolute_error": {
+        "ema120": 4.263256414560601e-14,
+        "bias": 3.3306690738754696e-16
+      }
+    },
+    {
+      "case": "zero-denominator",
+      "rows": 126,
+      "mismatches": 0,
+      "maximum_absolute_error": {
+        "ema120": 0.0,
+        "bias": 0.0
+      }
+    }
+  ],
+  "all_ok": true,
+  "actual_sha256": "47c8e8e2825b5fad72dc755460562b2d1552472a2ad837ddf1afaf51c5c5fd6c",
+  "manifest_sha256": "646463c6c40d96ade09bc25024f07cfc8d91130ac3f43a7e0965ac78cbec4ec8",
+  "checker_sha256": "5f5d116424aafc3b61cf2eaefd896160539c8d457ea7c2f6ddb55673d1710717"
+}

@@ -1,0 +1,116 @@
+{
+  "schema_version": "factor-evidence-record/1.0",
+  "record_id": "mixed.pullback_ma_distance@2.0.0-b10-synthetic-20260921-corrected",
+  "factor": {
+    "id": "mixed.pullback_ma_distance@2.0.0",
+    "lifecycle_state_at_record_time": "exists",
+    "lifecycle_basis": [
+      "docs/research/definitions.v1.json"
+    ],
+    "lifecycle_note": "执行者不修改登记；仅提供2.0.0人工合成计算证据，主控独立验收。"
+  },
+  "mode": "SYNTHETIC_CALCULATION_ONLY",
+  "synthetic": true,
+  "data_origin": "synthetic_fixture",
+  "overall_status": "synthetic_calculation_pass_pending_controller_review",
+  "terminal_statement": "新版本入口已实际逐行计算并与原始价独立复算吻合；不能据此判断真实行情或投资价值。",
+  "lifecycle_unchanged": true,
+  "chain": [
+    {
+      "stage": "definition",
+      "status": "pass",
+      "evidence": {
+        "exact_reference": "mixed.pullback_ma_distance@2.0.0",
+        "resolved_contract_sha256": "fd6013d8ee302d0e99e7d6dce6a587a2efbeed0c475f8c2d9a88a87e044138a7",
+        "registry_version": "1.4.0",
+        "registry_sha256": "78dfaa3c1896bbff63e84d11e77d90d5a5221e5dbae83e8ca1e9bf1438ae1ec9",
+        "full_card": "registry-snapshot.json/resolved_cards",
+        "source": "B9 corrected proposal; B10 registered exists"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "input_manifest",
+      "status": "pass",
+      "evidence": {
+        "manifest_path": "baseline.json",
+        "fixture_path": "docs/experiments/raw/factor-b9-missing-policy-2026-09-21/fixture-manifest.json",
+        "snapshot_path": "registry-snapshot.json",
+        "code_sha256": "bc0b25d9968bf8484085ec019e62b0352afe8380feb281f9bbebeb026bfd049c",
+        "output_path": "registered-output.json",
+        "output_sha256": "ae2d05ae4bca42dfcebaaee5915e0e383997373faad463f8c84af5780a3c5d78"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "qualification",
+      "status": "not_applicable",
+      "evidence": {
+        "data": "仅人工合成，真实资料资格未核",
+        "reason": "本轮纯计算核验不研究资格/排序/未来结果",
+        "future_result_contract": "not_applicable: 无target、IC、收益"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "ranking_reconstruction",
+      "status": "not_applicable",
+      "evidence": {
+        "months": 0,
+        "reason": "单标的逐日描述，没有同日跨资产排名"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "sample_ledger",
+      "status": "pass",
+      "evidence": {
+        "artifact_path": "registered-output.json",
+        "rows": 1303,
+        "calculated": 109,
+        "not_calculable": 1194,
+        "reason_counts": {
+          "price_missing": 151,
+          "warmup_history_insufficient": 1037,
+          "zero_denominator": 6
+        },
+        "conservation": "1303 = 109 + 1194"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "blocked_report",
+      "status": "not_applicable",
+      "evidence": {
+        "five_elements_present": false,
+        "reason": "无target研究，真实资料/预测/生产在合同外，不是算法失败；未生成目标阻断报告"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "independent_check",
+      "status": "pass",
+      "evidence": {
+        "implementation": "independent.py纯标准库从原始close逐行构建六线与20行滞后，不导入被测系统",
+        "report_path": "independent-stdlib-report.json",
+        "report_sha256": "9b7efbf742f303e42876bee2ff652a27c165dbe8a444c60ffe277390b68efaf4",
+        "rows": 1303,
+        "all_rows": 2606,
+        "probes": 62,
+        "prefix_rows": 2606,
+        "scale_rows": 2606,
+        "mismatches": 0
+      },
+      "blocked_reason": null
+    }
+  ],
+  "forbidden_statistics_not_computed": [
+    "target",
+    "IC",
+    "收益差"
+  ],
+  "notes": "只用编造价格核对抵扣价和六线距离；不是买卖判断。",
+  "corrects_record": "pullback-evidence-record.json",
+  "correction_ledger": "corrections.json",
+  "correction_note": "旧七阶段记录原样保留；本记录仅纠正资格阶段标注，不改变原始2606行与计算身份。"
+}

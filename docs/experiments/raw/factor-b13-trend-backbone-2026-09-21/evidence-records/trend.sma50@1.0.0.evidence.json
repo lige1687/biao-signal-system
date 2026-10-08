@@ -1,0 +1,21 @@
+{
+  "schema_version": "factor-evidence-record/1.0",
+  "record_id": "trend.sma50-erv-20260921-b13",
+  "factor": {"id": "trend.sma50@1.0.0", "lifecycle_state_at_record_time": "exists", "lifecycle_unchanged": true},
+  "mode": "BLOCK_AWARE_DIAGNOSTIC_ONLY",
+  "synthetic_only": true,
+  "overall_status": "evidence_complete_target_not_applicable",
+  "chain": [
+    {"stage": "definition", "status": "pass", "evidence": {"formula": "最近50条有效价格的算术平均，包含当期", "parameters": {"window": 50, "min_periods": 50}, "registry_version": "1.4.2", "registry_sha256": "adc923d21332e255d56dee18d0d820163369665e91f875790eb02401c10b3c6e"}, "blocked_reason": null},
+    {"stage": "input_manifest", "status": "pass", "evidence": {"manifest_path": "frozen-inputs.json", "manifest_sha256": "267d271daea47ebd9230e2ccbc8c5fe0530155fd4c688ddb3ae63e03e983f45c", "fixture_path": "fixtures/trend-backbone.fixture.json", "fixture_sha256": "5ff7de84e9d18ddc0c0685e50af5c636758bdf72c9c74fe5af57634ed4a5b85c"}, "blocked_reason": null},
+    {"stage": "qualification", "status": "not_applicable", "evidence": {"rationale": "纯人工价格计算；不声明真实资料资格。"}, "blocked_reason": null},
+    {"stage": "ranking_reconstruction", "status": "not_applicable", "evidence": {"rationale": "本卡不构造资产排序。"}, "blocked_reason": null},
+    {"stage": "sample_ledger", "status": "not_applicable", "evidence": {"rows": 0, "rationale": "未生成未来结果、预测或收益样本。"}, "blocked_reason": null},
+    {"stage": "blocked_report", "status": "not_applicable", "evidence": {"rationale": "未来结果并非失败，而是本协议不适用。"}, "blocked_reason": null},
+    {"stage": "independent_check", "status": "pass", "evidence": {"standard_library_only": true, "report_path": "independent-check/trend.sma50@1.0.0.result.json", "report_sha256": "41e3bbe6688a6e727340b2b243ff978f4e5bfacf39c392f4e0eb3a9fe4b9663f", "rows": 1911, "mismatches": 0}, "blocked_reason": null}
+  ],
+  "implementation_binding": {"entry": "src/lei_signal/research/factor_lab/adapters.py::calculate_batch", "calculation": "src/lei_signal/research/definitions.py::quote_features", "column": "sma50", "adapter_sha256": "883f90d975035a944e328a78b424e77e9c517336a1dae88fc15d35e988d1a97c"},
+  "implementation_output": {"path": "implementation-output/trend.sma50@1.0.0.actual.csv", "sha256": "3f7fe12f67d1bd3888a5c13aed1e5f5b35d4406ae30c3fbb0703598b2c49e1ca", "rows": 645},
+  "decision": {"status": "candidate_for_verified", "reason": "正式入口与独立逐行计算在基础、乘7和前缀三种场景共1911行一致。"},
+  "not_established": ["真实资料资格", "预测或收益效果", "research_ready、生产或交易资格"]
+}

@@ -1,0 +1,130 @@
+{
+  "schema_version": "factor-evidence-record/1.0",
+  "record_id": "trend.distance200-erv-20260921-b12",
+  "factor": {
+    "id": "trend.distance200@1.0.0",
+    "lifecycle_state_at_record_time": "exists",
+    "lifecycle_basis": ["docs/research/definitions.v1.json"],
+    "lifecycle_note": "本记录只提交合成计算的ready候选，不改登记表、不升级生命周期。"
+  },
+  "mode": "BLOCK_AWARE_DIAGNOSTIC_ONLY",
+  "synthetic": true,
+  "synthetic_only": true,
+  "data_origin": "synthetic_fixture",
+  "overall_status": "evidence_complete_target_not_applicable",
+  "terminal_statement": "Evidence complete; qualification, ranking, and target are not applicable to this calculation-only check",
+  "lifecycle_unchanged": true,
+  "chain": [
+    {
+      "stage": "definition",
+      "status": "pass",
+      "evidence": {
+        "formula": "P_signal/SMA200-1；SMA200包含当前有效正报价；原始缺价行保留",
+        "registry_version": "1.4.1",
+        "registry_sha256": "d967e22f7f93726e1f14a5dfba84897e596d59eaa4f22574e8bccc0888bfc7e2"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "input_manifest",
+      "status": "pass",
+      "evidence": {
+        "manifest_path": "frozen-inputs.json",
+        "manifest_sha256": "20211db6d15a5bdccf8991de491a3b0950278644cb068a3604b71f26e51dfd14",
+        "fixture_path": "fixtures/trend.distance200@1.0.0.fixture.json",
+        "fixture_sha256": "698618ed2592609c62f2dbd8a2beaed32057085171372505122bd92ba6677ddd",
+        "frozen_binding": "220原始行×2对象；第10与150位置缺价；另有×7及210行前缀场景"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "qualification",
+      "status": "not_applicable",
+      "evidence": {
+        "qualification_use": "not_applicable",
+        "ranking_use": "not_applicable",
+        "target_use": "not_applicable",
+        "gate_record": "B12冻结合同限定纯计算合成核验；未请求真实资料资格、排序或未来结果。"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "ranking_reconstruction",
+      "status": "not_applicable",
+      "evidence": {
+        "artifact_path": null,
+        "artifact_sha256": null,
+        "months": 0,
+        "months_ranking_recorded": 0,
+        "ordering_rule": "not_applicable",
+        "not_applicable_rationale": "逐对象数值计算检查，不构造横向排序。"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "sample_ledger",
+      "status": "not_applicable",
+      "evidence": {
+        "artifact_path": null,
+        "artifact_sha256": null,
+        "rows": 0,
+        "identity": "not_applicable",
+        "all_ok": true,
+        "not_applicable_rationale": "没有未来结果、预测样本或收益样本。"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "blocked_report",
+      "status": "not_applicable",
+      "evidence": {
+        "artifact_path": null,
+        "artifact_sha256": null,
+        "five_elements_present": false,
+        "terminal_note": "target并非失败或阻断，而是纯计算协议下不适用。"
+      },
+      "blocked_reason": null
+    },
+    {
+      "stage": "independent_check",
+      "status": "pass",
+      "evidence": {
+        "implementation": "independent_check.py；仅Python标准库，不导入lei_signal/pandas/numpy",
+        "report_path": "independent-check/trend.distance200@1.0.0.result.json",
+        "report_sha256": "16b34ed1df912bcaa8788d8f413e231dd4a6edbdaa29e99b588f24c5d51dbeae",
+        "result": "base 440行、×7 440行、前缀420行，共1300行逐行一致，0处差异，首差为空；×7最大浮点差2.220446049250313e-16，小于1e-10容差；前缀最大差0。"
+      },
+      "blocked_reason": null
+    }
+  ],
+  "forbidden_statistics_not_computed": ["rank_ic", "target", "future_return", "return_difference", "prediction_statistics"],
+  "implementation_binding": {
+    "entry": "src/lei_signal/research/factor_lab/adapters.py::calculate_batch",
+    "calculation": "src/lei_signal/research/definitions.py::quote_features",
+    "parameters": {"window": 200},
+    "definitions_sha256": "5a3859dfcadf3c225528f92e5ffba7722de02ff6a832f6cf7b26ead2154a4f24",
+    "adapters_sha256": "27596fd66d918cacf9db7a6ae2cdd11b408d7d46f3c9889ac2d35a42e7748020"
+  },
+  "implementation_output": {
+    "path": "implementation-output/trend.distance200@1.0.0.actual.csv",
+    "sha256": "5566541e7f2ab2b8653e4c429049e8c6fc9807347a8e61a0b72f25c5ad9b0a2c",
+    "base_rows": 440,
+    "scaled_rows": 440,
+    "prefix_rows": 420
+  },
+  "boundary_observations": [
+    "两处原始缺价各自保留为price_missing，不消耗有效报价计数。",
+    "第200个有效报价位于原始第202行（0基201），该行首次出值，当前报价已包含进SMA200。",
+    "平价对象首次及后续有效距离为0。",
+    "整体乘7不改变距离；追加未来10行不改写前210行。"
+  ],
+  "decision": {
+    "status": "ready_for_verified",
+    "reason": "精确登记身份、事前冻结夹具、calculate_batch实际输出和零系统导入独立逐行重算一致；只提交主控验收候选。"
+  },
+  "not_established": [
+    "真实市场输入或经济指数资料资格",
+    "排序、未来结果、预测能力或收益改善",
+    "生产适用性、交易授权或生命周期升级"
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "pass": true,
+  "rows_checked": 4956,
+  "max_absolute_error": 0.0,
+  "per_ref": {
+    "trend.sma50@1.0.0": {
+      "base_rows": 416,
+      "scaled_rows": 416,
+      "prefix_rows": 410,
+      "value_type": "continuous",
+      "pass": true
+    },
+    "trend.above50@1.0.0": {
+      "base_rows": 416,
+      "scaled_rows": 416,
+      "prefix_rows": 410,
+      "value_type": "boolean",
+      "pass": true
+    },
+    "trend.cross_up50@1.0.0": {
+      "base_rows": 416,
+      "scaled_rows": 416,
+      "prefix_rows": 410,
+      "value_type": "boolean",
+      "pass": true
+    },
+    "trend.sma200@1.0.0": {
+      "base_rows": 416,
+      "scaled_rows": 416,
+      "prefix_rows": 410,
+      "value_type": "continuous",
+      "pass": true
+    },
+    "trend.above200@1.0.0": {
+      "base_rows": 416,
+      "scaled_rows": 416,
+      "prefix_rows": 410,
+      "value_type": "boolean",
+      "pass": true
+    },
+    "trend.cross_up200@1.0.0": {
+      "base_rows": 416,
+      "scaled_rows": 416,
+      "prefix_rows": 410,
+      "value_type": "boolean",
+      "pass": true
+    }
+  },
+  "probes": {
+    "sma50_first_valid_row_50": [
+      100.0,
+      null
+    ],
+    "above50_equal_row_50": [
+      0.0,
+      null
+    ],
+    "cross50_no_previous_mean_row_50": [
+      null,
+      "warmup_history_insufficient"
+    ],
+    "cross50_up_row_51": [
+      1.0,
+      null
+    ],
+    "cross50_missing_row_53": [
+      null,
+      "price_missing"
+    ],
+    "cross50_after_previous_valid_row_55": [
+      1.0,
+      null
+    ],
+    "cross200_first_mean_row_201": [
+      null,
+      "warmup_history_insufficient"
+    ],
+    "cross200_up_row_202": [
+      1.0,
+      null
+    ],
+    "cross200_missing_row_203": [
+      null,
+      "price_missing"
+    ],
+    "cross200_after_previous_valid_row_205": [
+      1.0,
+      null
+    ]
+  },
+  "expectation": "standard-library valid-price SMA; strict greater-than; cross compares current and previous valid quote only when both means exist",
+  "synthetic_only": true,
+  "forbidden_statistics_computed": false
+}

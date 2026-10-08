@@ -1,0 +1,21 @@
+{
+  "schema_version": "factor-evidence-record/1.0",
+  "record_id": "trend.recovered200-erv-20260921-b14",
+  "factor": {"id": "trend.recovered200@1.0.0", "lifecycle_state_at_record_time": "exists", "lifecycle_unchanged": true},
+  "mode": "BLOCK_AWARE_DIAGNOSTIC_ONLY",
+  "synthetic_only": true,
+  "overall_status": "evidence_complete_target_not_applicable",
+  "chain": [
+    {"stage": "definition", "status": "pass", "evidence": {"formula": "P_signal>=SMA200", "parameters": {"equal": true}, "registry_version": "1.4.3", "registry_sha256": "bff88f177c99dc87502b946f26d6d2d7300af886b57afc44009938f12ab44ec6"}, "blocked_reason": null},
+    {"stage": "input_manifest", "status": "pass", "evidence": {"manifest_path": "frozen-inputs.json", "manifest_sha256": "387baf60aaa831c00a527bdfad1f5e0b0ec80e4c4d76b7d31aa62a1a3e2c8c47", "fixture_sha256": "3b98600cc5304d02de5958b894a50fa14dc4b564a17c4fd9a019eb86233b7876"}, "blocked_reason": null},
+    {"stage": "qualification", "status": "not_applicable", "evidence": {"rationale": "纯人工价格计算。"}, "blocked_reason": null},
+    {"stage": "ranking_reconstruction", "status": "not_applicable", "evidence": {"rationale": "本卡是单条价格状态，不构造资产排序。"}, "blocked_reason": null},
+    {"stage": "sample_ledger", "status": "not_applicable", "evidence": {"rows": 0, "rationale": "未生成未来结果或收益样本。"}, "blocked_reason": null},
+    {"stage": "blocked_report", "status": "not_applicable", "evidence": {"rationale": "未来结果在本协议不适用。"}, "blocked_reason": null},
+    {"stage": "independent_check", "status": "pass", "evidence": {"standard_library_only": true, "report_path": "independent-check/trend.recovered200@1.0.0.result.json", "report_sha256": "d16fb97cc0da3d488b53f6e39e428a466e85edab6caf7f046ede60324aee13f0", "rows": 4840, "mismatches": 0}, "blocked_reason": null}
+  ],
+  "implementation_binding": {"entry": "src/lei_signal/research/factor_lab/adapters.py::calculate_batch", "calculation": "src/lei_signal/research/definitions.py::quote_features", "column": "recovered200", "adapter_sha256": "386ec73574c0a47b17df2f7b2af3991bbe57bd0478ddcbcb239d47b3d017d1c9"},
+  "implementation_output": {"path": "implementation-output/trend.recovered200@1.0.0.base.actual.csv", "sha256": "1b1b46381ac0b8c2fcc6f94f83315a75996fee7ff6c1265e917b04ac89164ef8", "rows": 1620},
+  "decision": {"status": "candidate_for_verified", "reason": "第200条有效价格首次可用、等于为真、低于为假、缺价压缩、整体乘7和历史前缀共4840行独立一致。"},
+  "not_established": ["真实资料资格", "独立买点或预测效果", "research_ready、生产或交易资格"]
+}
