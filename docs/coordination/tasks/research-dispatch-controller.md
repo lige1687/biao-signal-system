@@ -74,12 +74,22 @@
 - `research-evidence-catalog/report-library-integration-20261008` 已 `completed/accepted`。成果分支 `codex/research-report-library-integration-20261008`，准确提交 `19508745c7160bc07f5bbdefe9ba52ab39a5199e`。本次中控复核该提交内4份报告及15份小证据的SHA-256，均与各自来源提交一致；登记簿由195项增至199项、原195项逐项保持，新增恰为四份报告；索引四行及其分隔空行移除后逐字还原原文件；5个真实相对链接均有目标文件。最新整合回执 `docs/experiments/raw/research-evidence-catalog-2026-10-07/report-library-integration-2026-10-08.json` SHA-256 `f34dda7c52266587d7933b491cfcd8ac70413079fbb38711d9ec6afdb1734c45`。首轮读回发现目录原报告有61处本机绝对路径，已在修正回执中说明；报告正文保持来源字节，所以这些链接不能称为远端可点击。本成果只在独立成果分支，未合入main，也未发布根级620项全量登记。旧目标分支基线记录的299项归置问题保留；本轮根工作区归置检查据最终阶段回执为通过，不能据此声称旧隔离基线全绿。研究测试未运行（本阶段只验登记/链接/哈希），不构成科学结果。该阶段写入范围已释放。
 - `stock-data-qualification/gap-pilot-20261008` 仍为 `active`，当前只核固定候选600837的2022-01-04、05、06。先选的600705经官方公告确认于2021-12-10收市后调出沪深300，故排除；其原2次请求、67,789字节和 `selection-correction.json` 保留。600837三日原始报价与B02原始价相符，但旧复权快照和完整历史成分起点仍缺，故它仍只是候选、不能写成正式成分资格已证实或补回主价格。总上限仍6次请求/20MiB，已用4次/153,482字节、剩2次；不再更换候选寻求可补价，不重训、不拟合、不做标签/PPO/P26重跑。Qlib所需新运行包仍未找到且无包ID，不重复安装或派无目标的检查，也不因此阻塞本试点。当前阶段报告路径为 `docs/experiments/stock-gap-pilot-2026-10-08.md`，raw候选登记文件为 `docs/experiments/raw/stock-data-qualification-2026-10-07/gap-pilot-20261008/registry-candidate.json`；最终成果提交尚未核，本阶段的 `registry.json` / `INDEX.md` 保持只读并待既有串行登记。仅数据负责人更新自己的状态文件；中控等其最终回执后再改状态，不提前宣布完成。中控下一步：继续等待固定候选的最终证据与回执，收到后先核准确文件/提交及资格结论，再更新本中控状态；不代写数据负责人的任务记录。
 
+## 最终验收快照（2026-10-08T10:56:00+08:00）
+
+- 本轮 fetch 并读取协调规则 `COORDINATION.md`、本文件、`risk-shape-information`、`classic-factor-research`、`research-evidence-catalog/report-library-integration-20261008`；协调基线为 `2f3ffbd0564fd3c8522cbd122264fe2185dc7f99`。相关任务文件分工没有冲突：此会话只维护本中控摘要；研究资料原件由资料负责人维护，报告库登记扩展由目录负责人维护且其最新记录明确 `scope_released=true`。未编辑他人状态文件。
+- 三键资料资格阶段已完成并有限接受。资料成果分支 `codex/stock-data-qualification-20261008@60a465b8b4064de567e24a96642d26ff5e841d30`；报告 SHA-256 `1fd356715d44bc60dae99837730aa67a33fe225b0a01c05309f585284dad39c4`，阶段回执 SHA-256 `4c0e360e1e929f38dfba919aabdf54466b18787c563897cb5b44e647c544e1ba`。4/6请求、153482/20971520字节；三个固定日原始报价与B02一致，但旧复权快照、锚点和完整历史成分起点未证，价格修复为0，拟合/标签为0。600705排除及其选择错误证据保留。它不是因子有效或主价格修复结论。
+- 四报告整合阶段的原验收提交仍为 `19508745c7160bc07f5bbdefe9ba52ab39a5199e`。后续获准的单报告登记扩展已接受：成果分支 `codex/research-report-library-integration-20261008` 最新提交 `3ceec29d9e5e2e4d14e94905e99c12531257524d`，登记发布提交 `4e4c075f6308c788013ad9cc81d2f4ced1ce3bee`；最终回执 `docs/experiments/raw/research-evidence-catalog-2026-10-07/stock-gap-registration-2026-10-08.json` SHA-256 `726ddfdb577311f24e87a72fc438a4605e7084e5625e467c47384cde3bde9e5c`。报告加19份raw共20份、219071字节，逐字节匹配来源；独立登记簿199→200，旧199条未变。最初四报告阶段为195→199、5个相对链接可用；原目录报告61处本机绝对路径仍不应称远端可点击。目录负责人任务明确完成并释放登记窗口。
+- 资料负责人工作区 registry 620→621 和 INDEX 新增一行是仅本地变更，经精确逆向核对可还原原字节；未提交、未推送。没有把完整根级登记簿发布，也未合并main。目录隔离成果分支内的199→200不能冒称根级全量登记已同步。
+- 八目标边界：目标1合成实现及指定人工流程检查已通过，真实D—MAE消费链仍等冻结输入；目标2目录及四报告整合有限接受，保留61个本机路径限制；目标3六份真实原件仍缺，真实X/V/Y均0；目标4仅完成固定三键资格判断，旧复权及历史成分仍未证；目标5未启动，需合格输入及真实风险约束；目标6人工X→Y重启/重复拒绝节点通过，不能代表真实研究；目标7已完成有限外部审阅，但Qlib Ridge原始包与精确云文件ID仍缺，不安装、不做空审计；目标8大任务前先测空间，未授权删除或仓外改动。接下来只在新原件或资格输入到达时重评依赖，不以D—MAE笼统阻塞其他可独立事项。
+- 本次只做状态核对与本摘要更新，没有新研究计算、行情请求或拟合。模型档位沿用已记录请求：三键资料 `gpt-6-sol/medium`、四报告整合 `gpt-6-sol/medium`、单报告登记扩展 `gpt-6-luna/low`；实际运行模型均未核实。阶段历史中的失败、预算、首轮错误候选和计数纠正保留。
+- 下一步：继续原中控任务，监测新输入/回调，收到新原件时先按冻结范围复核后再决定可执行的有限步骤；不启动新市场实验。其他AI应避开本任务协调摘要的并发写入；资料负责人已释放其报告登记扩展窗口，但共享registry/INDEX任何新写入仍须重新串行协调。报告库发布分支和本机根登记不构成代码合并或策略授权。
+
 ```lei-coordination-json
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "962e63d6e554d24b694b02cb09558ed9d6be34a2",
-  "checked_at": "2026-10-08T10:31:00+08:00",
+  "checked_coordination_sha": "2f3ffbd0564fd3c8522cbd122264fe2185dc7f99",
+  "checked_at": "2026-10-08T10:56:00+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -352,10 +362,47 @@
       }
     }
   ],
+  "final_acceptance": {
+    "coordination_sha": "2f3ffbd0564fd3c8522cbd122264fe2185dc7f99",
+    "pilot": {
+      "phase": "limited_qualification_pass",
+      "branch": "codex/stock-data-qualification-20261008",
+      "commit": "60a465b8b4064de567e24a96642d26ff5e841d30",
+      "report_sha256": "1fd356715d44bc60dae99837730aa67a33fe225b0a01c05309f585284dad39c4",
+      "receipt_sha256": "4c0e360e1e929f38dfba919aabdf54466b18787c563897cb5b44e647c544e1ba",
+      "requests": "4/6",
+      "bytes": "153482/20971520",
+      "price_repairs": 0,
+      "fits": 0,
+      "labels": 0,
+      "scope_release_explicitly_verified": false
+    },
+    "report_integration": {
+      "accepted_stage_commit": "19508745c7160bc07f5bbdefe9ba52ab39a5199e",
+      "branch": "codex/research-report-library-integration-20261008",
+      "publication_commit": "4e4c075f6308c788013ad9cc81d2f4ced1ce3bee",
+      "final_tip": "3ceec29d9e5e2e4d14e94905e99c12531257524d",
+      "receipt": "docs/experiments/raw/research-evidence-catalog-2026-10-07/stock-gap-registration-2026-10-08.json",
+      "receipt_sha256": "726ddfdb577311f24e87a72fc438a4605e7084e5625e467c47384cde3bde9e5c",
+      "source_files": 20,
+      "source_bytes": 219071,
+      "isolated_registry": "199 -> 200",
+      "scope_released": true,
+      "root_registry_and_index": "local only; uncommitted and unpublished"
+    },
+    "model_requests": [
+      {"scope": "pilot", "tier": "gpt-6-sol/medium", "actual_runtime_verified": false},
+      {"scope": "four-report integration", "tier": "gpt-6-sol/medium", "actual_runtime_verified": false},
+      {"scope": "single report registration", "tier": "gpt-6-luna/low", "actual_runtime_verified": false}
+    ],
+    "main_merged": false,
+    "research_effect_claimed": false
+  },
   "checked_task_ids": [
     "research-dispatch-controller",
     "risk-shape-information",
-    "classic-factor-research"
+    "classic-factor-research",
+    "research-evidence-catalog/report-library-integration-20261008"
   ]
 }
 ```
