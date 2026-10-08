@@ -1,3 +1,18 @@
+# 后续AI直接使用存储入口：本批完成 2026-10-08T18:24:30.533822+08:00
+
+- task-id daily-trading-system-audit；owner /root；status completed（仅本AI访问批，使用效果待用户）；checked_coordination_sha 0e4bbc013ee28ef55045eabf2b0a01caa0b1075b；checked_at 2026-10-08T18:24:30.533822+08:00（Asia/Shanghai）。
+- 已读本任务、research-dispatch-controller、trend-trading-video、lei-coordination-bootstrap原AGENTS范围及COORDINATION1.1。自f6后新增仅中控0e4只读回调/原owner发布和原生存储范围审查，明确避开daily入口；无冲突，不接管该研究保护或其他文件。
+- 用户原话“注意存储管理后续的ai也要能访问哈，能直接运用的哦”。已加AGENTS唯一lei-storage-access块、技能和运维入口；configs/storage-resources.v1.json登记原4项材料。storage/overview返回经当前设备与路径核对的resources[].read_path/available/mapping状态。没有改视频写阈值或交易规则；视频预检不读取无关资源路径。
+- 符合身份时：本工作目录正确链接可用；同机其他工作目录没链接也可直接只读外盘。错UUID/假挂载/缺盘不解析资源；错链/坏链/真目录冲突/目标逃逸拒绝；未知/偏低容量仅可读已有材料，新音频仍受原预检阻止。资源表损坏独立报告，不把容量可查当资源齐全。
+- 无聊天历史新AI /root/fresh_storage_reader（GPT-6 Luna/low，fork_turns=none）从AGENTS发现入口，实际读FLAC/MP4/m4a文件头、266B Whipser配置及权重ZIP头，4/4可用；未下载/ASR/散列/账户API。真实官方MCP SDK24工具只调用storage；独立仅两配置、无私有缓存链接目录实际四项只读成功，不冒充新Git工作树部署。
+- 103项针对性测试通过（3.16s，1既有python_multipart弃用提醒）；Ruff/format/归置通过。Luna只读审查发现容量未知合同待固定及预检访问无关路径，已补契约测试和隔离，不重跑原迁移或ASR。头部/配置可读不等于解码、内容指纹或模型识别准确率。
+- 源码 codex/gpt-system-integration-20261008@4830bdb8ed11f439d999bf2460d6c044abd00b92（13准确路径）及证据 e0a3078945c0a7eab6d673299b55104b8dde6a9d（3路径）已普通push/fetch逐字核。AGENTS发表为源父6ed原字节+自身块，原共享本机56新增/5删除不混入；本机AGENTS原字节前缀完整保留。没有切共享分支、合main、重启或仓外配置修改。
+- 当前内盘新的严重不足已实际提醒：18:18:48余5,119,950,848B（4.77GiB）；旧warning→critical 1事件，观察状态读回，独立提醒对话turn01a11b05-a8cf-7442-a2cc-9d0aa4014dcc/final msg_07e851276a95e9e4016ac76e284a388191b6fd65846ea9e7b8 已逐字核。有限cache/进程检查没归因；本轮无新增大下载/ASR，未删除/停止其他任务。此次无自动化ID/日程/偏好修改。
+- 证据原raw/implementation-storage-ai-access-{acceptance,source-publication}.json及tests/ruff/hygiene日志，ownprogress存阶段证据；真实包/通知事件及完整本地回执留本仓私有cache，媒体和恢复清单留原外盘。0真实订单/0持仓或计划写入/0OKR/0新市场实验。
+- 边界与停止依据：AI直接发现并使用批的实现、失败路径、独立新AI、实际MCP、源证据发布和严重等级实际送达都已验证，无本批必需未完成步骤；容量不足和来源未明没有冒充解决。检查后断盘/竞态、其他进程写入仍未覆盖；另一主机需接同盘并取得新代码/配置，代码同步不等于私有材料移交；手机ChatGPT仍非本批。其他原生写入保护由中控既有任务推进，不重复启动。
+
+---
+
 # 后续AI直接使用存储入口开工 2026-10-08T18:06:09.765947+08:00
 
 - task-id daily-trading-system-audit；owner /root，唯一写者；status active；checked_coordination_sha 1c84c8d991786556e2b56bbc1c3e08710f483132；checked_at 2026-10-08T18:06:09.765947+08:00
