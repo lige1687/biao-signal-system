@@ -1,5 +1,8 @@
 # docs/experiments 总索引
 
+- 2026-10-08：[fixed-ledger-cash-requirement-2026-10-08](fixed-ledger-cash-requirement-2026-10-08.md)：固定旧成交共用现金，原参与组需约41.21万至49.90万元；同日买卖先后影响付款能力，不是本金建议或收益改善。
+- 2026-10-08：[sse-calendar-2026-h1-equivalence-2026-10-08](sse-calendar-2026-h1-equivalence-2026-10-08.md)：2026上半年181个日期与上交所年度安排一致，新增核对153天；未证明全历史日历或D—MAE输入合格。
+
 - 2026-10-08：[沪深300公告目录覆盖核验](csi300-catalog-completeness-qualification-2026-10-08.md)：按指数目录漏两份正式公告；关键词能补回，但不能据分页读完认定完整。
 - 2026-10-08：[沪深300九次定期调整核验](csi300-regular-transitions-qualification-2026-10-08.md)：九次名单对上，一次晚记跨64个日期；1920个成员判断不符，原表保留。
 - 2026-10-08：[沪深300两次2025调整核验](csi300-2025-transitions-qualification-2026-10-08.md)：正式生效比旧表更早，五日期十个入选判断不符；完整历史和原表未修。

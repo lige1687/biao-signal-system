@@ -1,0 +1,212 @@
+{
+  "status": "completed_conditional_fixed_execution_funding_only",
+  "policies": {
+    "A_ALL": {
+      "symbols": [
+        "510300.SS",
+        "510050.SS",
+        "510500.SS",
+        "512100.SS",
+        "159915.SZ",
+        "588000.SS"
+      ],
+      "days": 1729,
+      "start": "2022-01-01",
+      "end": "2026-09-25",
+      "original_initial_cash": "600000",
+      "daily_close_only_requirement": "412072.395900",
+      "end_cash_change": "-40421.019300",
+      "orders_fixed": true,
+      "scenarios": {
+        "sell_first": {
+          "minimum_initial_cash_exact": "412072.395900",
+          "minimum_initial_cash_cents": "412072.40",
+          "binding_dates_and_stages": [
+            [
+              "2026-07-01",
+              "buys"
+            ],
+            [
+              "2026-07-01",
+              "payments"
+            ],
+            [
+              "2026-07-02",
+              "sells"
+            ],
+            [
+              "2026-07-02",
+              "buys"
+            ],
+            [
+              "2026-07-02",
+              "payments"
+            ]
+          ],
+          "cash_balance_min_at_600k": "187927.604100",
+          "difference_from_600k": "187927.60",
+          "cashflow_events": 85
+        },
+        "buy_first": {
+          "minimum_initial_cash_exact": "499039.630000",
+          "minimum_initial_cash_cents": "499039.63",
+          "binding_dates_and_stages": [
+            [
+              "2026-02-12",
+              "buys"
+            ]
+          ],
+          "cash_balance_min_at_600k": "100960.370000",
+          "difference_from_600k": "100960.37",
+          "cashflow_events": 85
+        }
+      }
+    },
+    "A_SMA": {
+      "symbols": [
+        "510300.SS",
+        "510050.SS",
+        "510500.SS",
+        "512100.SS",
+        "159915.SZ",
+        "588000.SS"
+      ],
+      "days": 1729,
+      "start": "2022-01-01",
+      "end": "2026-09-25",
+      "original_initial_cash": "600000",
+      "daily_close_only_requirement": "399044.637300",
+      "end_cash_change": "-24392.401500",
+      "orders_fixed": true,
+      "scenarios": {
+        "sell_first": {
+          "minimum_initial_cash_exact": "399044.637300",
+          "minimum_initial_cash_cents": "399044.64",
+          "binding_dates_and_stages": [
+            [
+              "2025-10-28",
+              "buys"
+            ],
+            [
+              "2025-10-28",
+              "payments"
+            ],
+            [
+              "2025-10-29",
+              "sells"
+            ],
+            [
+              "2025-10-29",
+              "buys"
+            ],
+            [
+              "2025-10-29",
+              "payments"
+            ],
+            [
+              "2025-10-30",
+              "sells"
+            ],
+            [
+              "2025-10-30",
+              "buys"
+            ],
+            [
+              "2025-10-30",
+              "payments"
+            ],
+            [
+              "2025-10-31",
+              "sells"
+            ],
+            [
+              "2025-10-31",
+              "buys"
+            ],
+            [
+              "2025-10-31",
+              "payments"
+            ],
+            [
+              "2025-11-01",
+              "sells"
+            ],
+            [
+              "2025-11-01",
+              "buys"
+            ],
+            [
+              "2025-11-01",
+              "payments"
+            ],
+            [
+              "2025-11-02",
+              "sells"
+            ],
+            [
+              "2025-11-02",
+              "buys"
+            ],
+            [
+              "2025-11-02",
+              "payments"
+            ],
+            [
+              "2025-11-03",
+              "sells"
+            ],
+            [
+              "2025-11-03",
+              "buys"
+            ],
+            [
+              "2025-11-03",
+              "payments"
+            ],
+            [
+              "2025-11-04",
+              "sells"
+            ],
+            [
+              "2025-11-04",
+              "buys"
+            ],
+            [
+              "2025-11-04",
+              "payments"
+            ]
+          ],
+          "cash_balance_min_at_600k": "200955.362700",
+          "difference_from_600k": "200955.36",
+          "cashflow_events": 61
+        },
+        "buy_first": {
+          "minimum_initial_cash_exact": "399067.769100",
+          "minimum_initial_cash_cents": "399067.77",
+          "binding_dates_and_stages": [
+            [
+              "2025-09-22",
+              "buys"
+            ]
+          ],
+          "cash_balance_min_at_600k": "200932.230900",
+          "difference_from_600k": "200932.23",
+          "cashflow_events": 61
+        }
+      }
+    }
+  },
+  "validation": {
+    "input_hashes": 59,
+    "account_daily_cash_rows": 20748,
+    "aggregate_daily_cash_rows": 6916,
+    "bound_feasibility_proofs": 4
+  },
+  "cash_interest_or_external_flows": "No additional cash movements needed to reconcile all saved daily cash rows.",
+  "limits": [
+    "Historical hindsight funding need, not a tradable initial-budget selector.",
+    "Fixed quantities originated in separate 100000 accounts; changing capital and recalculating quantity is a different unrun study.",
+    "No broker timing, execution liquidity or sell-proceeds availability is certified.",
+    "Short actual trade history and source quality inherited; no new forecast/factor validity."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "question": "Exact saved quantities and fees; retrospective minimum cash with all sales before purchases or all purchases before sales within each day. Payments only at day end.",
+  "baseline": "6 independent accounts with 100000 CNY each, separately for A_ALL and A_SMA.",
+  "formula": "C_min=max(0,-min(cumulative cash flow across all execution/payment prefixes)); round upward to cents.",
+  "forbidden_claims": [
+    "prospective capital recommendation",
+    "same strategy under smaller initial cash",
+    "observed broker settlement order",
+    "return or drawdown improvement"
+  ],
+  "qualification_sha256": "3a28e231ffbdb1597311bbab73e28310345dccb44f564a1982e634577f1e2c87",
+  "run_sha256": "9642d34d0f18504a8ea62a3d6cc0729610c8dee60ab6c71dff10741b7ade2f36",
+  "binding_count": 59
+}

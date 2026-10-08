@@ -1,0 +1,38 @@
+{
+  "status": "main_calculations_completed_once_independent_receipts_restored",
+  "source_requests_added": 0,
+  "source_bytes_added": 0,
+  "model_fits": 0,
+  "real_labels": 0,
+  "strategy_reruns": 0,
+  "failures": [
+    {
+      "phase": "source schema preview",
+      "error": "TypeError unhashable slice; qualification files is a mapping; corrected to items; no statistics ran"
+    },
+    {
+      "phase": "verifier and archival save",
+      "error": "Errno28 no space left on device; apply_patch and python write refused; verifier absent on readback"
+    },
+    {
+      "phase": "heredoc diagnostics",
+      "error": "shell could not create temporary file; no calculations executed"
+    },
+    {
+      "phase": "remote alternative diagnostic",
+      "error": "gh command not found; no remote mutation attempted"
+    },
+    {
+      "phase": "publication staging",
+      "error": "git add without --sparse refused new paths outside sparse checkout; only registry/INDEX staged, no commit made",
+      "resolved": "Inspected index then added exact registered paths with --sparse; no checkout expansion or deletion."
+    }
+  ],
+  "recovery": "Prior no-temp inline verification passed; this turn saved exact verifier and receipts, did not rerun either main run.py. Prior result SHA256s unchanged.",
+  "original_calendar_budget": {
+    "round3_requests": 67,
+    "round3_limit": 75,
+    "new_requests": 0
+  },
+  "review_identity": "Same root, independent calculation paths; not independent external reviewer"
+}
