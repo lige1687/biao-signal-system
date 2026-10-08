@@ -1,3 +1,12 @@
+## V9 final-archive-start
+
+- task-id: trend-trading-video；2026-10-09T01:22:40.472083+08:00；checked_coordination_sha: df5eb5d64effca5bec947a704ac1a1a547976417；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active：用户再次明确外盘已接。01:22 storage核固定UUID成功，外盘剩余639GB。只完成已有V14成片/15份归档文档持久化核验、旁白草稿落盘及播放交付；范围自有v14状态/归档清单/恢复记录、work-progress、既有外盘交付包与索引。无新媒体生成、移动或删除，内盘约0.70GiB不启动新实验/安装。
+- 基线84f06c7b4ba5115dfc3fdf208e876a5460bf228b，沿用codex/trend-history-long-v14-20261009。自身及中控已读，无重叠，本任务唯一写者。旧片240秒连续播放和恢复52秒章节验证复用；本次读回SHA、文档和网页重新载入。新旁白仍是草稿，无音频，不改成片。
+
+
+---
+
 ## V9 plain-narration-done
 
 - task-id: trend-trading-video；2026-10-09T01:20:55.454183+08:00；checked_coordination_sha: a4f286fc7cb9954edea4e4adf06fb8ac88a0e133；已读 COORDINATION.md、自身与 research-dispatch-controller。
