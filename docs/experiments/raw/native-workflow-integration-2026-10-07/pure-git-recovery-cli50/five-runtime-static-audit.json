@@ -1,0 +1,150 @@
+{
+  "schema_version": "native-cli50-five-runtime-static-audit/1.0",
+  "created_at": "2026-10-08T01:27:23+08:00",
+  "timezone": "Asia/Shanghai",
+  "checked_coordination_sha": "82dfbda1942f96f3fdc712a2154fd7b8eb82baf6",
+  "scope": "只读核5个implementation-start原字节与恢复基线差异；指定native人工测试的静态导入/调用判断，未据此追加文件或重跑研究。",
+  "source_record": {
+    "path": "docs/experiments/raw/native-workflow-integration-2026-10-07/implementation-start.json",
+    "sha256": "5b1c03c28d4b9182cc6d65e02df9712b21f56fd93194b0510c00624554fb646b",
+    "copied_source_files_total": 108
+  },
+  "entries": [
+    {
+      "path": "src/lei_signal/research/data_quality.py",
+      "frozen_source_bytes": 70867,
+      "frozen_source_sha256": "4496b0a0ea9e358ae22c5b6064801e4a9622bb5514ddce88393b6765d46b8c3d",
+      "recovery_git_source_commit": "b2f45151128baa1fe387cda85862d71cb01e1206",
+      "recovery_git_bytes": 70766,
+      "recovery_git_sha256": "ddad2ecfd676e0c1c9dbc3787afcc29024c53581f3eb664a97167f2e9fc8f783",
+      "static_native_chain_role": "loaded via input_preflight top-level import; native d-mae branch does not call its affected validation function",
+      "checked_related_commits": [
+        {
+          "commit": "604445fdf9660828f4ba17db8b2bc192d33b4a9f",
+          "status": "different_bytes"
+        },
+        {
+          "commit": "2699a201404377b8c33a1c7b4c48dc344cacfbd3",
+          "status": "different_bytes"
+        },
+        {
+          "commit": "dd965fb9dd7e0568fd41cd1a8bde95e138a1a023",
+          "status": "different_bytes"
+        }
+      ],
+      "exact_in_checked_related_commits": false,
+      "original_byte_author": "unknown"
+    },
+    {
+      "path": "src/lei_signal/research/definitions.py",
+      "frozen_source_bytes": 26232,
+      "frozen_source_sha256": "84f7b9ba76f4704e81f4f4d0c1784e2ab1ad7e3aa225abeb4796fa10dcbfec94",
+      "recovery_git_source_commit": "b2f45151128baa1fe387cda85862d71cb01e1206",
+      "recovery_git_bytes": 23118,
+      "recovery_git_sha256": "b6d5a35532644c371ffbfc541a21bd52c05114db9fcb1cc3071c1965ed41ad59",
+      "static_native_chain_role": "loaded by workflow top-level import; native d-mae branch exits before load_registry/resolve calls",
+      "checked_related_commits": [
+        {
+          "commit": "604445fdf9660828f4ba17db8b2bc192d33b4a9f",
+          "status": "exact_match"
+        },
+        {
+          "commit": "2699a201404377b8c33a1c7b4c48dc344cacfbd3",
+          "status": "exact_match"
+        },
+        {
+          "commit": "dd965fb9dd7e0568fd41cd1a8bde95e138a1a023",
+          "status": "exact_match"
+        }
+      ],
+      "exact_in_checked_related_commits": true,
+      "original_byte_author": "unknown"
+    },
+    {
+      "path": "src/lei_signal/research/factor_lab/__init__.py",
+      "frozen_source_bytes": 1456,
+      "frozen_source_sha256": "dfb563ec80d82c7e2c0d5cac4397ba87f5194a1b9bccabd2e1fb0d2ec7e93ba2",
+      "recovery_git_source_commit": "b2f45151128baa1fe387cda85862d71cb01e1206",
+      "recovery_git_bytes": 747,
+      "recovery_git_sha256": "ea269601b6b4fa5f1bb70f2dff555aca5a7afa236babc8005a8b4e7fd2d036c4",
+      "static_native_chain_role": "factor_lab package not imported by the specified native test path",
+      "checked_related_commits": [
+        {
+          "commit": "604445fdf9660828f4ba17db8b2bc192d33b4a9f",
+          "status": "different_bytes"
+        },
+        {
+          "commit": "2699a201404377b8c33a1c7b4c48dc344cacfbd3",
+          "status": "different_bytes"
+        },
+        {
+          "commit": "dd965fb9dd7e0568fd41cd1a8bde95e138a1a023",
+          "status": "different_bytes"
+        }
+      ],
+      "exact_in_checked_related_commits": false,
+      "original_byte_author": "unknown"
+    },
+    {
+      "path": "src/lei_signal/research/factor_lab/adapters.py",
+      "frozen_source_bytes": 16656,
+      "frozen_source_sha256": "386ec73574c0a47b17df2f7b2af3991bbe57bd0478ddcbcb239d47b3d017d1c9",
+      "recovery_git_source_commit": "b2f45151128baa1fe387cda85862d71cb01e1206",
+      "recovery_git_bytes": 14993,
+      "recovery_git_sha256": "27596fd66d918cacf9db7a6ae2cdd11b408d7d46f3c9889ac2d35a42e7748020",
+      "static_native_chain_role": "factor_lab adapters not imported or called by the specified native test path",
+      "checked_related_commits": [
+        {
+          "commit": "604445fdf9660828f4ba17db8b2bc192d33b4a9f",
+          "status": "exact_match"
+        },
+        {
+          "commit": "2699a201404377b8c33a1c7b4c48dc344cacfbd3",
+          "status": "exact_match"
+        },
+        {
+          "commit": "dd965fb9dd7e0568fd41cd1a8bde95e138a1a023",
+          "status": "exact_match"
+        }
+      ],
+      "exact_in_checked_related_commits": true,
+      "original_byte_author": "unknown"
+    },
+    {
+      "path": "src/lei_signal/research/input_preflight.py",
+      "frozen_source_bytes": 18885,
+      "frozen_source_sha256": "514fb1fa1819d145366365865b49159e6b77beaeb27f15a3bdd64fa024484e04",
+      "recovery_git_source_commit": "b2f45151128baa1fe387cda85862d71cb01e1206",
+      "recovery_git_bytes": 18447,
+      "recovery_git_sha256": "c4ed39dbde5d54624f727b6aaffe716650773c773de501b8d1ad3cfccf5a2dde",
+      "static_native_chain_role": "loaded by workflow top-level import; native d-mae branch exits before inspect_workflow_input call",
+      "checked_related_commits": [
+        {
+          "commit": "604445fdf9660828f4ba17db8b2bc192d33b4a9f",
+          "status": "exact_match"
+        },
+        {
+          "commit": "2699a201404377b8c33a1c7b4c48dc344cacfbd3",
+          "status": "exact_match"
+        },
+        {
+          "commit": "dd965fb9dd7e0568fd41cd1a8bde95e138a1a023",
+          "status": "exact_match"
+        }
+      ],
+      "exact_in_checked_related_commits": true,
+      "original_byte_author": "unknown"
+    }
+  ],
+  "code_line_evidence": [
+    "tests/integration/test_native_risk_d_mae_workflow.py:73-127",
+    "scripts/run_factor_lab.py:67,94-105",
+    "src/lei_signal/research/workflow.py:21-24,565-568,1178-1182,1335-1338,1562-1569",
+    "src/lei_signal/research/native_risk_d_mae_workflow.py:338-379"
+  ],
+  "finding": "3模块在指定链会被加载但相关函数不调用；factor_lab两模块未导入。旧版不似阻断此单节点的判断来自静态调用路径，并非全环境兼容承诺。",
+  "qualification_boundary": "单节点已另有实际通过回执；本审计不证明108项原环境同字节，也未解决五项版本交接资格。",
+  "test_runs_for_this_audit": 0,
+  "market_requests": 0,
+  "paid_requests": 0
+}

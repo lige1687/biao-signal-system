@@ -1,0 +1,187 @@
+{
+  "schema": "lei-report-library-integration/1.0",
+  "created_at": "2026-10-08T10:17:34+08:00",
+  "task_id": "research-evidence-catalog/report-library-integration-20261008",
+  "owner_thread": "01a1074e-3d9d-70a2-a771-b079443ace18",
+  "checked_coordination_sha": "a19be55717bc3e6a6634bb7be50d2671b82850cd",
+  "coordination_records_read": [
+    "COORDINATION.md",
+    "docs/coordination/tasks/research-dispatch-controller.md"
+  ],
+  "conflict_decision": "Existing report-registration window released; this isolated branch is the sole writer of its registry/INDEX integration. Other owners and main remain unchanged.",
+  "base_commit": "0d286582c0427cd3138e0539e8461a6fa1b95227",
+  "target_branch": "codex/research-report-library-integration-20261008",
+  "registry": {
+    "path": "docs/experiments/registry.json",
+    "before_sha256": "4feaabe0102830a6dd5d4ae8d90af2ac8b18b9535bac9860bd48dac2d13ec545",
+    "after_sha256": "b0527c044788e5c70103a02f784590120501896990e53560da0f282c9a4a51de",
+    "entries_before": 195,
+    "entries_after": 199,
+    "old_entries_identical": true,
+    "categories_unchanged": true,
+    "new_paths": [
+      "docs/experiments/stock-data-qualification-2026-10-07.md",
+      "docs/experiments/research-evidence-catalog-2026-10-07.md",
+      "docs/experiments/native-workflow-integration-2026-10-07.md",
+      "docs/experiments/native-workflow-synthetic-recovery-2026-10-08.md"
+    ]
+  },
+  "index": {
+    "path": "docs/experiments/INDEX.md",
+    "before_sha256": "e47c71b4afd64bf72105ef35723f2b324815cb817fad3b274a940ca16d17f2e7",
+    "after_sha256": "c792d7007a48473c002f4a18c77f02123a9a3429f119135dcbf788d849effbe2",
+    "old_bytes_preserved_after_removing_four_inserted_lines": true,
+    "inserted_lines": [
+      "- 2026-10-07：[个股资料资格与输入兼容性](stock-data-qualification-2026-10-07.md)：5,211只股票的保存价格包可供限定探索；1,944个旧缺价日期已分类但主价格未修复，P26原输入与沪深300历史完整名单仍待核。",
+      "- 2026-10-07：[旧研究结论与修复影响目录](research-evidence-catalog-2026-10-07.md)：已有结论按原问题复用；5,211股/P26、B1及现金新交接的效果原件仍待核，不以旧结果替代。",
+      "- 2026-10-07：[原生研究入口边界核验](native-workflow-integration-2026-10-07.md)：原入口的合同审查与中断恢复已核；D—MAE专用接入缺原输入、适配与分阶段授权，真实效果未测。",
+      "- 2026-10-08：[D—MAE人工流程与Git恢复增量](native-workflow-synthetic-recovery-2026-10-08.md)：人工案例验证流程可分阶段保存和恢复；行情已找到但未用于真实计算，六份冻结研究原件仍缺，因子效果未测。"
+    ]
+  },
+  "reports": [
+    {
+      "path": "docs/experiments/stock-data-qualification-2026-10-07.md",
+      "source_commit": "a6be33c2493e982451e5c5b3646c102553b43f6b",
+      "sha256": "e1f4a927df508e936734daccd778ae1f77d2088864b98ebcebe56da428b92c6c",
+      "bytes": 10022,
+      "relative_links": 0,
+      "missing_relative_links": 0,
+      "registry_entry_once": true,
+      "index_link_once": true
+    },
+    {
+      "path": "docs/experiments/research-evidence-catalog-2026-10-07.md",
+      "source_commit": "0d286582c0427cd3138e0539e8461a6fa1b95227",
+      "sha256": "8e61d7ed4ca119bece1209d920479a0d5ed3d63aadcb6d45e12741f93e8fb601",
+      "bytes": 36915,
+      "relative_links": 61,
+      "missing_relative_links": 0,
+      "registry_entry_once": true,
+      "index_link_once": true
+    },
+    {
+      "path": "docs/experiments/native-workflow-integration-2026-10-07.md",
+      "source_commit": "ba106251577952bc35f5f865a76cd49d1c274773",
+      "sha256": "55832bf9fc7129bf106d57687e6284909dc17fafea2a7f4776aad5aa170c5086",
+      "bytes": 6207,
+      "relative_links": 0,
+      "missing_relative_links": 0,
+      "registry_entry_once": true,
+      "index_link_once": true
+    },
+    {
+      "path": "docs/experiments/native-workflow-synthetic-recovery-2026-10-08.md",
+      "source_commit": "fda8a4895b78d8e5a125cf8af405b11c736531b6",
+      "sha256": "990e3ebaf59d8ac13a0bd60929a84715bff46b676839a06e0dcc50d7b4717c6c",
+      "bytes": 4954,
+      "relative_links": 5,
+      "missing_relative_links": 0,
+      "registry_entry_once": true,
+      "index_link_once": true
+    }
+  ],
+  "small_evidence": [
+    {
+      "path": "docs/experiments/raw/native-workflow-integration-2026-10-07/DELIVERABLES.json",
+      "source_commit": "ba106251577952bc35f5f865a76cd49d1c274773",
+      "sha256": "17b37821da474313d68c65f50cd0049d11dac0b62f964be956a9edd636a7552f",
+      "bytes": 1366
+    },
+    {
+      "path": "docs/experiments/raw/native-workflow-integration-2026-10-07/controller-receipt.json",
+      "source_commit": "ba106251577952bc35f5f865a76cd49d1c274773",
+      "sha256": "b138248885fe9eeb797edb1eace8131ba530ed52422533770482d1aded506ee0",
+      "bytes": 8335
+    },
+    {
+      "path": "docs/experiments/raw/native-workflow-integration-2026-10-07/pure-git-recovery-cli50/README.md",
+      "source_commit": "fda8a4895b78d8e5a125cf8af405b11c736531b6",
+      "sha256": "497e589b3c2024205c5432a24acf30951cf49c23bdcc226c87d153826fea29da",
+      "bytes": 6140
+    },
+    {
+      "path": "docs/experiments/raw/native-workflow-integration-2026-10-07/pure-git-recovery-cli50/five-runtime-static-audit.json",
+      "source_commit": "fda8a4895b78d8e5a125cf8af405b11c736531b6",
+      "sha256": "bb174e27cac7e72380106bfda4cf739dae7bd8f9c38909c2f793513b4362e597",
+      "bytes": 6586
+    },
+    {
+      "path": "docs/experiments/raw/native-workflow-integration-2026-10-07/pure-git-recovery-cli50/manifest.json",
+      "source_commit": "fda8a4895b78d8e5a125cf8af405b11c736531b6",
+      "sha256": "d837ea5b3afd972e92312bbb4b9c1c9a6481c1a6aaf2d70037d2e97db69d42cc",
+      "bytes": 2517
+    },
+    {
+      "path": "docs/experiments/raw/native-workflow-integration-2026-10-07/pure-git-recovery-cli50/registration-receipt.json",
+      "source_commit": "fda8a4895b78d8e5a125cf8af405b11c736531b6",
+      "sha256": "2b25cae80f9351defd955e291d4fc4a80636f4b50f488af89b78ada1353d0c82",
+      "bytes": 2451
+    },
+    {
+      "path": "docs/experiments/raw/native-workflow-integration-2026-10-07/pure-git-recovery-cli50/registry-candidate.json",
+      "source_commit": "fda8a4895b78d8e5a125cf8af405b11c736531b6",
+      "sha256": "efbd3e877a1ace51a9664f16cf4120e0c9e9d1144d572a5772276347ea451493",
+      "bytes": 586
+    },
+    {
+      "path": "docs/experiments/raw/native-workflow-integration-2026-10-07/pure-git-recovery/manifest.json",
+      "source_commit": "fda8a4895b78d8e5a125cf8af405b11c736531b6",
+      "sha256": "3ba9f4231522f51d15c4285bf56a50612b60d7dcc366a903d0dade4ee5718b6f",
+      "bytes": 33893
+    },
+    {
+      "path": "docs/experiments/raw/stock-data-qualification-2026-10-07/delivery-manifest.json",
+      "source_commit": "a6be33c2493e982451e5c5b3646c102553b43f6b",
+      "sha256": "afcb375d6df87376c07f24c835c1e9f683add014972cbfca7b62efbbb3a477bd",
+      "bytes": 2562
+    },
+    {
+      "path": "docs/experiments/raw/stock-data-qualification-2026-10-07/readback.json",
+      "source_commit": "a6be33c2493e982451e5c5b3646c102553b43f6b",
+      "sha256": "3e1eab81d020a99736a8530b2d8b15e11678461acd9dff965b4fab233aefa320",
+      "bytes": 25198
+    },
+    {
+      "path": "docs/experiments/raw/stock-data-qualification-2026-10-07/readback.py",
+      "source_commit": "a6be33c2493e982451e5c5b3646c102553b43f6b",
+      "sha256": "6704be03556f507b7a4e5973781796b02b80523e9954c249af7e61b43ed57319",
+      "bytes": 7200
+    },
+    {
+      "path": "docs/experiments/raw/stock-data-qualification-2026-10-07/registration-fragment.json",
+      "source_commit": "a6be33c2493e982451e5c5b3646c102553b43f6b",
+      "sha256": "28bf6ad97a12b98e0cdd7e9dcbac60fcaab48fad3e4295264e5e51ad78a2fa38",
+      "bytes": 899
+    },
+    {
+      "path": "docs/experiments/raw/stock-data-qualification-2026-10-07/registration-increment.json",
+      "source_commit": "a6be33c2493e982451e5c5b3646c102553b43f6b",
+      "sha256": "49d87788d11f87e4cefafbcea9f87d2e22b4924445cf67f109bc0666aaea446c",
+      "bytes": 4048
+    },
+    {
+      "path": "docs/experiments/raw/stock-data-qualification-2026-10-07/registration-receipt.json",
+      "source_commit": "a6be33c2493e982451e5c5b3646c102553b43f6b",
+      "sha256": "78ce939692658377e42273ac431aed3ed4144c8368e22f15cf377e53631bbf6b",
+      "bytes": 2668
+    },
+    {
+      "path": "docs/experiments/raw/stock-data-qualification-2026-10-07/scope.json",
+      "source_commit": "a6be33c2493e982451e5c5b3646c102553b43f6b",
+      "sha256": "0140fc907f120252f2db7d07a2e7c9b00677543f866964208bddfdf467134c91",
+      "bytes": 1198
+    }
+  ],
+  "bounds": "Report discoverability only on this independent branch; no market fit, strategy change, whole-root registry import, main merge or deployment. Original research limitations remain.",
+  "verification": {
+    "report_original_bytes_match_saved_commits": 4,
+    "registry_entries_old_semantically_unchanged": 195,
+    "registry_entries_added_once": 4,
+    "index_lines_added_once": 4,
+    "relative_links_checked": 66,
+    "relative_links_missing": 0,
+    "repo_hygiene": "Current isolated baseline lacks scripts/check_repo_hygiene.py. Running the root script read-only against this older isolated baseline reported 299 preexisting/root-scope violations; this integration adds only paths under docs/experiments and raw, so full hygiene is not claimed green.",
+    "sensitive_pattern_scan": "No matches for selected key/token/private-key patterns in newly copied reports and small evidence.",
+    "research_tests": "not run; report registration only"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema": "lei-stock-data-safe-branch-delivery/1.0",
+  "checked_coordination_sha": "658c13cd12e7c8807cf5030839ecdd7c2de70c19",
+  "source_branch": "codex/factor-unit-research-20260915",
+  "target_branch": "codex/stock-data-qualification-20261008",
+  "exact_files": [
+    {
+      "path": "docs/experiments/stock-data-qualification-2026-10-07.md",
+      "bytes": 10022,
+      "sha256": "e1f4a927df508e936734daccd778ae1f77d2088864b98ebcebe56da428b92c6c"
+    },
+    {
+      "path": "docs/experiments/raw/stock-data-qualification-2026-10-07/scope.json",
+      "bytes": 1198,
+      "sha256": "0140fc907f120252f2db7d07a2e7c9b00677543f866964208bddfdf467134c91"
+    },
+    {
+      "path": "docs/experiments/raw/stock-data-qualification-2026-10-07/readback.py",
+      "bytes": 7200,
+      "sha256": "6704be03556f507b7a4e5973781796b02b80523e9954c249af7e61b43ed57319"
+    },
+    {
+      "path": "docs/experiments/raw/stock-data-qualification-2026-10-07/readback.json",
+      "bytes": 25198,
+      "sha256": "3e1eab81d020a99736a8530b2d8b15e11678461acd9dff965b4fab233aefa320"
+    },
+    {
+      "path": "docs/experiments/raw/stock-data-qualification-2026-10-07/registration-fragment.json",
+      "bytes": 899,
+      "sha256": "28bf6ad97a12b98e0cdd7e9dcbac60fcaab48fad3e4295264e5e51ad78a2fa38"
+    },
+    {
+      "path": "docs/experiments/raw/stock-data-qualification-2026-10-07/registration-receipt.json",
+      "bytes": 2668,
+      "sha256": "78ce939692658377e42273ac431aed3ed4144c8368e22f15cf377e53631bbf6b"
+    },
+    {
+      "path": "docs/experiments/raw/stock-data-qualification-2026-10-07/registration-increment.json",
+      "bytes": 4048,
+      "sha256": "49d87788d11f87e4cefafbcea9f87d2e22b4924445cf67f109bc0666aaea446c"
+    }
+  ],
+  "total_payload_bytes": 51233,
+  "excluded": [
+    {
+      "path": "docs/experiments/raw/stock-large-cloud-input-2026-10-07/stock-5211-frozen-close-2020-2024-v1.zip",
+      "bytes": 16619603,
+      "sha256": "43ebf06bfe66c79c2fb332fa287db33d49a60f23c4c3da0e4bb39ea9d23fe192",
+      "reason": "large raw-price input remains local; obtain from authorized source/Library and verify before use"
+    },
+    {
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_klines_full.parquet",
+      "bytes": 49432584,
+      "sha256": "5ad045c518d0bb4394d8c8cb946d207ad9b5b1454e5a776b1a3766c62b475b04",
+      "reason": "original daily price panel stays on local device"
+    }
+  ],
+  "full_registry_and_INDEX_transferred": false,
+  "secrets_database_raw_prices_included": false,
+  "no_author_report_or_other_dirty_files_included": true
+}

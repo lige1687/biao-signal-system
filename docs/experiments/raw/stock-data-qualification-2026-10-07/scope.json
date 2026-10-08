@@ -1,0 +1,14 @@
+{
+  "schema": "stock-data-qualification-readback/1.0",
+  "owner_thread": "01a101c1-ac35-70a3-8ecd-4a6179bb99ad",
+  "controller_thread": "01a116c7-3700-7062-a6c6-53af00ef60a0",
+  "question": "现有个股输入和缺价分类，分别能支持什么下一轮研究；还有哪些最小必要缺件？",
+  "authorization": "目标4资料资格和目标8只读空间测量；复用完成证据，不重新跑PPO/P26或1944查询。",
+  "allowed": ["只读限定本地原件并核指纹", "输入字段和准备期资料兼容性检查", "本任务报告、证据和既有进度追加"],
+  "excluded": ["新行情或网页请求", "Library下载及403重试", "新因子或收益计算", "成员或价格修复", "全局登记簿写入", "仓库外写入", "外部发信、付款、删除、部署及交易"],
+  "source_request_budget": 0,
+  "new_output_cap_bytes": 1048576,
+  "minimum_free_bytes_before_write": 536870912,
+  "completion": "核回现有输入和分类；交可消费用途矩阵、原包缺件和空间快照。完整历史成员资格缺件单列受阻，不冒充通过。",
+  "unknown": "云端PPO/P26原审计和冻结合同本机未取得；不依据交接数值重建实验。"
+}
