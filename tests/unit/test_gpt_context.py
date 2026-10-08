@@ -526,3 +526,19 @@ def test_redirect_and_oversize_are_rejected(tmp_path: Path) -> None:
     finally:
         server.shutdown()
         worker.join(timeout=2)
+
+
+def test_blogger_window_new_packet_and_legacy_are_not_confused(tmp_path: Path) -> None:
+    _packet(tmp_path)
+    path = next((tmp_path / "data/cache/portfolio-chat-briefing").glob("packet-*.json"))
+    context = SystemContext(tmp_path, fetch=_fake)
+    assert context.news()["data"]["blogger_window"]["status"] == "legacy_packet"
+    assert context.news()["data"]["blogger_previous_trading_day"] == []
+    packet = json.loads(path.read_text())
+    packet["blogger_previous_trading_day"] = [{"title": "previous session", "symbols": ["013403"]}]
+    packet["blogger_window"] = {"status": "verified", "date": "2026-09-30"}
+    path.write_text(json.dumps(packet))
+    result = context.news("013403")["data"]
+    assert result["blogger_previous_trading_day"][0]["title"] == "previous session"
+    assert result["blogger_window"]["date"] == "2026-09-30"
+    assert context.latest_brief("1135")["data"]["blogger_previous_trading_day_count"] == 1

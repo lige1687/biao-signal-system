@@ -504,7 +504,9 @@ class SystemContext:
                 errors={"briefing_packet": error, "rejected_packets": rejected},
             )
         rows = list(packet.get("news", []))
-        bloggers = list(packet.get("blogger_yesterday", []))
+        bloggers = list(
+            packet.get("blogger_previous_trading_day", packet.get("blogger_yesterday", []))
+        )
         if fund_code:
             known_codes = {h.get("code") for h in packet.get("holdings", []) if isinstance(h, dict)}
 
@@ -521,6 +523,15 @@ class SystemContext:
             "items": rows[:limit],
             "matched_count": len(rows),
             "blogger_yesterday": bloggers[:50],
+            "blogger_previous_trading_day": bloggers[:50]
+            if "blogger_previous_trading_day" in packet
+            else [],
+            "blogger_window": packet.get("blogger_window")
+            or {
+                "status": "legacy_packet",
+                "date": None,
+                "note": "旧包按自然昨天筛选，不能称上个交易日；需生成新简报。",
+            },
             "news_coverage": packet.get("news_coverage"),
             "configured_authors": packet.get("configured_authors"),
             "unqualified_news": packet.get("unqualified_news"),
@@ -814,6 +825,7 @@ class SystemContext:
                 "plan_review",
                 "trade_ledger",
                 "news_coverage",
+                "blogger_window",
                 "source_status",
                 "user_stated_context",
                 "user_context_note",
@@ -823,6 +835,9 @@ class SystemContext:
         result["holdings_count"] = len(packet.get("holdings", []))
         result["news_count"] = len(packet.get("news", []))
         result["blogger_yesterday_count"] = len(packet.get("blogger_yesterday", []))
+        result["blogger_previous_trading_day_count"] = len(
+            packet.get("blogger_previous_trading_day", [])
+        )
         errors = self._packet_errors(packet, "latest_brief")
         if rejected:
             errors["briefing_packet_fallback"] = rejected

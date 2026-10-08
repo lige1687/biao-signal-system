@@ -1,0 +1,703 @@
+E501 Line too long (104 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:507:101
+    |
+505 |             )
+506 |         rows = list(packet.get("news", []))
+507 |         bloggers = list(packet.get("blogger_previous_trading_day", packet.get("blogger_yesterday", [])))
+    |                                                                                                     ^^^^
+508 |         if fund_code:
+509 |             known_codes = {h.get("code") for h in packet.get("holdings", []) if isinstance(h, dict)}
+    |
+
+E501 Line too long (110 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:524:101
+    |
+522 | …     "matched_count": len(rows),
+523 | …     "blogger_yesterday": bloggers[:50],
+524 | …     "blogger_previous_trading_day": bloggers[:50] if "blogger_previous_trading_day" in packet else [],
+    |                                                                                               ^^^^^^^^^^
+525 | …     "blogger_window": packet.get("blogger_window") or {"status": "legacy_packet", "date": None, "note": "旧包按自然昨天筛选，不能称            …
+526 | …     "news_coverage": packet.get("news_coverage"),
+    |
+
+E501 Line too long (168 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:525:101
+    |
+523 | …
+524 | …r_previous_trading_day" in packet else [],
+525 | …us": "legacy_packet", "date": None, "note": "旧包按自然昨天筛选，不能称上个交易日；需生成新简报。"},
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+526 | …
+527 | …
+    |
+
+E501 Line too long (106 > 100)
+   --> src/lei_signal/integrations/gpt_context.py:829:101
+    |
+827 |         result["news_count"] = len(packet.get("news", []))
+828 |         result["blogger_yesterday_count"] = len(packet.get("blogger_yesterday", []))
+829 |         result["blogger_previous_trading_day_count"] = len(packet.get("blogger_previous_trading_day", []))
+    |                                                                                                     ^^^^^^
+830 |         errors = self._packet_errors(packet, "latest_brief")
+831 |         if rejected:
+    |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> src/lei_signal/portfolio/briefing.py:6:1
+   |
+ 4 |   place trades, update holdings, or interpret free-text plans as executable rules.
+ 5 |   """
+ 6 | / from __future__ import annotations
+ 7 | |
+ 8 | | import argparse
+ 9 | | from concurrent.futures import ThreadPoolExecutor
+10 | | from datetime import date, datetime, timedelta
+11 | | import json
+12 | | from pathlib import Path
+13 | | from urllib.error import HTTPError, URLError
+14 | | from urllib.parse import urlencode, urlparse
+15 | | from urllib.request import urlopen
+16 | | from uuid import uuid4
+17 | | from zoneinfo import ZoneInfo
+   | |_____________________________^
+18 |
+19 |   SHANGHAI = ZoneInfo("Asia/Shanghai")
+   |
+help: Organize imports
+
+E501 Line too long (102 > 100)
+  --> src/lei_signal/portfolio/briefing.py:20:101
+   |
+19 | SHANGHAI = ZoneInfo("Asia/Shanghai")
+20 | BLOGGER_CALENDAR = Path(__file__).resolve().parents[3] / "configs/portfolio-briefing-calendar.v1.json"
+   |                                                                                                     ^^
+   |
+
+E501 Line too long (121 > 100)
+  --> src/lei_signal/portfolio/briefing.py:33:101
+   |
+31 |         path = calendar_path or BLOGGER_CALENDAR
+32 |         cfg = json.loads(path.read_text())
+33 |         if cfg.get("schema_version") != 1 or cfg.get("market") != "cn_a_share" or cfg.get("timezone") != "Asia/Shanghai":
+   |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^
+34 |             raise ValueError("unsupported calendar metadata")
+35 |         lower, upper = date.fromisoformat(cfg["coverage_start"]), date.fromisoformat(cfg["coverage_end"])
+   |
+
+E501 Line too long (105 > 100)
+  --> src/lei_signal/portfolio/briefing.py:35:101
+   |
+33 |         if cfg.get("schema_version") != 1 or cfg.get("market") != "cn_a_share" or cfg.get("timezone") != "Asia/Shanghai":
+34 |             raise ValueError("unsupported calendar metadata")
+35 |         lower, upper = date.fromisoformat(cfg["coverage_start"]), date.fromisoformat(cfg["coverage_end"])
+   |                                                                                                     ^^^^^
+36 |         published = datetime.fromisoformat(cfg["published_at"])
+37 |         if published.tzinfo is None or published > now or not lower <= now.date() <= upper:
+   |
+
+E501 Line too long (105 > 100)
+  --> src/lei_signal/portfolio/briefing.py:56:101
+   |
+54 |                       end_exclusive=(start + timedelta(days=1)).isoformat(),
+55 |                       calendar_source=cfg["source_url"], calendar_published_at=cfg["published_at"],
+56 |                       calendar_coverage_start=lower.isoformat(), calendar_coverage_end=upper.isoformat())
+   |                                                                                                     ^^^^^
+57 |     except (OSError, ValueError, KeyError, TypeError) as exc:
+58 |         result["error"] = str(exc)
+   |
+
+E501 Line too long (105 > 100)
+  --> src/lei_signal/portfolio/briefing.py:69:101
+   |
+68 | def _select_blogger_videos(videos: list[dict], window: dict) -> tuple[list[dict], dict]:
+69 |     start, end = datetime.fromisoformat(window["start"]), datetime.fromisoformat(window["end_exclusive"])
+   |                                                                                                     ^^^^^
+70 |     dated = [(v, datetime.fromtimestamp(v["created"], SHANGHAI)) for v in videos if v.get("created")]
+71 |     oldest = min((stamp for _, stamp in dated), default=None)
+   |
+
+E501 Line too long (101 > 100)
+  --> src/lei_signal/portfolio/briefing.py:70:101
+   |
+68 | def _select_blogger_videos(videos: list[dict], window: dict) -> tuple[list[dict], dict]:
+69 |     start, end = datetime.fromisoformat(window["start"]), datetime.fromisoformat(window["end_exclusive"])
+70 |     dated = [(v, datetime.fromtimestamp(v["created"], SHANGHAI)) for v in videos if v.get("created")]
+   |                                                                                                     ^
+71 |     oldest = min((stamp for _, stamp in dated), default=None)
+72 |     coverage = {"returned": len(videos), "list_limit": 10,
+   |
+
+E501 Line too long (101 > 100)
+  --> src/lei_signal/portfolio/briefing.py:74:101
+   |
+72 |     coverage = {"returned": len(videos), "list_limit": 10,
+73 |                 "oldest_returned_at": oldest.isoformat() if oldest else None,
+74 |                 "target_may_be_truncated": len(videos) >= 10 and (oldest is None or oldest >= start)}
+   |                                                                                                     ^
+75 |     return [v for v, stamp in dated if start <= stamp < end], coverage
+   |
+
+E501 Line too long (159 > 100)
+   --> src/lei_signal/portfolio/briefing.py:98:101
+    |
+ 96 | …("version"),
+ 97 | …ssment"),
+ 98 | …te", "provider", "adjusted", "is_intraday_forming", "cache_fallback_used")}} if tech else None,
+    |                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 99 | …
+100 | …
+    |
+
+E501 Line too long (102 > 100)
+   --> src/lei_signal/portfolio/briefing.py:115:101
+    |
+113 |         records.append(row)
+114 |         if comparable and row != before.get(row["trade_id"]):
+115 |             changes.append({"kind": "updated" if row["trade_id"] in before else "new", "record": row})
+    |                                                                                                     ^^
+116 |     return {
+117 |         "available": bool(source.get("ok")), "first_observation": not comparable,
+    |
+
+E501 Line too long (158 > 100)
+   --> src/lei_signal/portfolio/briefing.py:120:67
+    |
+118 | …
+119 | …if row["price_status"] != "priced"],
+120 | …早净值；不能当作平台确认的成交份额，不能用此台账推断完整持仓。",
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+121 | …
+    |
+
+E501 Line too long (102 > 100)
+   --> src/lei_signal/portfolio/briefing.py:157:84
+    |
+155 |         stamp = _published_at(item)
+156 |         if stamp is None or stamp > now:
+157 |             unqualified.append({"id": item.get("id"), "reason": "发布时间缺失、无时区或晚于本次核对"})
+    |                                                                                                     ^^
+158 |             continue
+159 |         is_blogger = item.get("source") == "bilibili"
+    |
+
+E501 Line too long (125 > 100)
+   --> src/lei_signal/portfolio/briefing.py:168:82
+    |
+166 | …         "id", "title", "url", "source", "source_name", "published_at", "ingested_at",
+167 | …         "symbols", "summary", "content", "direction", "importance", "llm_note")}
+168 | …     row["content_basis"] = "已保存正文或字幕，仍需核范围" if row.get("content") else "仅标题或简介，不能概括完整视频建议"
+    |                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+169 | …     if is_blogger:
+170 | …         blogger_previous.append(row)
+    |
+
+E501 Line too long (109 > 100)
+   --> src/lei_signal/portfolio/briefing.py:189:75
+    |
+187 | …     review.append({
+188 | …         "holding_id": item["holding_id"], "name": item.get("name"),
+189 | …         "state": "按系统原计划逐项复核" if qualified else "原计划或可用行情不足，不能判定安全或失效",
+    |                                                                                                ^^^^^^^^
+190 | …         "plan": plan or None, "system_alerts": item.get("alerts", []) if qualified else [],
+191 | …         "gaps": item.get("gaps", []),
+    |
+
+E501 Line too long (119 > 100)
+   --> src/lei_signal/portfolio/briefing.py:192:101
+    |
+190 | …         "plan": plan or None, "system_alerts": item.get("alerts", []) if qualified else [],
+191 | …         "gaps": item.get("gaps", []),
+192 | …         "user_stated_context": [entry for entry in user_context if entry.get("fund_code") == item.get("code")],
+    |                                                                                               ^^^^^^^^^^^^^^^^^^^
+193 | …         "execution_note": "逐条保留 data_as_of 与 actionable_from；盘中触及不自动等于收盘确认，提醒不等于成交。",
+194 | …     })
+    |
+
+E501 Line too long (121 > 100)
+   --> src/lei_signal/portfolio/briefing.py:193:83
+    |
+191 |                 "gaps": item.get("gaps", []),
+192 |                 "user_stated_context": [entry for entry in user_context if entry.get("fund_code") == item.get("code")],
+193 |                 "execution_note": "逐条保留 data_as_of 与 actionable_from；盘中触及不自动等于收盘确认，提醒不等于成交。",
+    |                                                                                                      ^^^^^^^^^^^^^^^^^^^^
+194 |             })
+195 |     return {
+    |
+
+E501 Line too long (126 > 100)
+   --> src/lei_signal/portfolio/briefing.py:208:81
+    |
+206 | …     "news": news, "blogger_previous_trading_day": blogger_previous, "blogger_window": window,
+207 | …     "blogger_yesterday": blogger_previous,
+208 | …     "blogger_yesterday_compatibility_note": "兼容字段，内容已改为上个A股交易日；日期以blogger_window为准，不是自然昨天。",
+    |                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+209 | …     "configured_authors": authors or [], "unqualified_news": unqualified,
+210 | …     "news_coverage": {"returned": len(news_data.get("items", [])), "total": news_data.get("total"),
+    |
+
+E501 Line too long (103 > 100)
+   --> src/lei_signal/portfolio/briefing.py:210:101
+    |
+208 | …     "blogger_yesterday_compatibility_note": "兼容字段，内容已改为上个A股交易日；日期以blogger_window为准，不是自然昨天。",
+209 | …     "configured_authors": authors or [], "unqualified_news": unqualified,
+210 | …     "news_coverage": {"returned": len(news_data.get("items", [])), "total": news_data.get("total"),
+    |                                                                                                   ^^^
+211 | …                       "truncated": len(news_data.get("items", [])) < (news_data.get("total") or 0),
+212 | …                       "last_run": (sources.get("news_status", {}).get("data") or {}).get("last_run"),
+    |
+
+E501 Line too long (103 > 100)
+   --> src/lei_signal/portfolio/briefing.py:211:101
+    |
+209 | …     "configured_authors": authors or [], "unqualified_news": unqualified,
+210 | …     "news_coverage": {"returned": len(news_data.get("items", [])), "total": news_data.get("total"),
+211 | …                       "truncated": len(news_data.get("items", [])) < (news_data.get("total") or 0),
+    |                                                                                                   ^^^
+212 | …                       "last_run": (sources.get("news_status", {}).get("data") or {}).get("last_run"),
+213 | …                       "note": "无条目不代表无消息；检查抓取状态、发布时间和是否截断。持仓关联需证据，不能按标题猜。"},
+    |
+
+E501 Line too long (105 > 100)
+   --> src/lei_signal/portfolio/briefing.py:212:101
+    |
+210 | …     "news_coverage": {"returned": len(news_data.get("items", [])), "total": news_data.get("total"),
+211 | …                       "truncated": len(news_data.get("items", [])) < (news_data.get("total") or 0),
+212 | …                       "last_run": (sources.get("news_status", {}).get("data") or {}).get("last_run"),
+    |                                                                                                   ^^^^^
+213 | …                       "note": "无条目不代表无消息；检查抓取状态、发布时间和是否截断。持仓关联需证据，不能按标题猜。"},
+214 | …     "plan_review": review,
+    |
+
+E501 Line too long (122 > 100)
+   --> src/lei_signal/portfolio/briefing.py:213:69
+    |
+211 | …                       "truncated": len(news_data.get("items", [])) < (news_data.get("total") or 0),
+212 | …                       "last_run": (sources.get("news_status", {}).get("data") or {}).get("last_run"),
+213 | …                       "note": "无条目不代表无消息；检查抓取状态、发布时间和是否截断。持仓关联需证据，不能按标题猜。"},
+    |                                                                                                    ^^^^^^^^^^^^^^^^^^^^^
+214 | …     "plan_review": review,
+215 | …     "user_stated_context": user_context,
+    |
+
+E501 Line too long (118 > 100)
+   --> src/lei_signal/portfolio/briefing.py:216:66
+    |
+214 | …     "plan_review": review,
+215 | …     "user_stated_context": user_context,
+216 | …     "user_context_note": "用户原话与待整理记录不是已确认的监控计划，也不是新增交易；未知目标和失效条件不得代填。",
+    |                                                                                                   ^^^^^^^^^^^^^^^^^^
+217 | …     "quantitative_evidence": {"win_rate": None, "reason": "本聚合器不估计概率；仅可引用有对象、时期、样本数和来源的既有研究。"},
+218 | …     "source_status": {key: {k: value.get(k) for k in ("url", "retrieved_at", "ok", "error")}
+    |
+
+E501 Line too long (132 > 100)
+   --> src/lei_signal/portfolio/briefing.py:217:83
+    |
+215 | …
+216 | …也不是新增交易；未知目标和失效条件不得代填。",
+217 | … "reason": "本聚合器不估计概率；仅可引用有对象、时期、样本数和来源的既有研究。"},
+    |                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+218 | … k in ("url", "retrieved_at", "ok", "error")}
+219 | ….items()},
+    |
+
+E501 Line too long (103 > 100)
+   --> src/lei_signal/portfolio/briefing.py:220:66
+    |
+218 |         "source_status": {key: {k: value.get(k) for k in ("url", "retrieved_at", "ok", "error")}
+219 |                           for key, value in sources.items()},
+220 |         "limitations": ["本次定时核对不是连续盯盘。", "未核交易日历；无当日资料不能推出休市或无触发。",
+    |                                                                                                      ^^
+221 |                         "场外基金净值、指数与场内ETF价格不可互换。", "基本面与博主观点仅作背景，不改技术条件。"],
+222 |     }
+    |
+
+E501 Line too long (113 > 100)
+   --> src/lei_signal/portfolio/briefing.py:221:67
+    |
+219 |                           for key, value in sources.items()},
+220 |         "limitations": ["本次定时核对不是连续盯盘。", "未核交易日历；无当日资料不能推出休市或无触发。",
+221 |                         "场外基金净值、指数与场内ETF价格不可互换。", "基本面与博主观点仅作背景，不改技术条件。"],
+    |                                                                                                     ^^^^^^^^^^^^^
+222 |     }
+    |
+
+E501 Line too long (103 > 100)
+   --> src/lei_signal/portfolio/briefing.py:227:101
+    |
+225 | def fetch_sources(base: str, now: datetime) -> dict:
+226 |     parsed = urlparse(base)
+227 |     if parsed.scheme != "http" or parsed.hostname not in {"127.0.0.1", "localhost"} or parsed.username:
+    |                                                                                                     ^^^
+228 |         raise ValueError("only the local system HTTP API is supported")
+229 |     since = _news_since(now)
+    |
+
+E501 Line too long (104 > 100)
+   --> src/lei_signal/portfolio/briefing.py:230:101
+    |
+228 |         raise ValueError("only the local system HTTP API is supported")
+229 |     since = _news_since(now)
+230 |     routes = {"workspace": "/api/portfolio/workspace", "cn": "/api/fundamentals/observations?market=cn",
+    |                                                                                                     ^^^^
+231 |               "us": "/api/fundamentals/observations?market=us", "plans": "/api/plans", "trades": "/api/copilot/trades", "news_status"…
+232 |               "news": "/api/news/items?" + urlencode({"date_from": since, "limit": 200, "with_content": "true"})}
+    |
+
+E501 Line too long (154 > 100)
+   --> src/lei_signal/portfolio/briefing.py:231:101
+    |
+229 | …
+230 | …"/api/fundamentals/observations?market=cn",
+231 | …", "plans": "/api/plans", "trades": "/api/copilot/trades", "news_status": "/api/news/status",
+    |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+232 | …rom": since, "limit": 200, "with_content": "true"})}
+    |
+
+E501 Line too long (113 > 100)
+   --> src/lei_signal/portfolio/briefing.py:232:101
+    |
+230 |     routes = {"workspace": "/api/portfolio/workspace", "cn": "/api/fundamentals/observations?market=cn",
+231 |               "us": "/api/fundamentals/observations?market=us", "plans": "/api/plans", "trades": "/api/copilot/trades", "news_status"…
+232 |               "news": "/api/news/items?" + urlencode({"date_from": since, "limit": 200, "with_content": "true"})}
+    |                                                                                                     ^^^^^^^^^^^^^
+233 |
+234 |     def fetch(pair):
+    |
+
+E501 Line too long (108 > 100)
+   --> src/lei_signal/portfolio/briefing.py:254:101
+    |
+252 |     items = [dict(row) for row in rows]
+253 |     while rows and len(items) < total:
+254 |         rows, total = store.query_items(date_from=since, limit=200, offset=len(items), include_content=True)
+    |                                                                                                     ^^^^^^^^
+255 |         items.extend(dict(row) for row in rows)
+256 |     for item in items:
+    |
+
+E501 Line too long (123 > 100)
+   --> src/lei_signal/portfolio/briefing.py:278:101
+    |
+276 |             finally:
+277 |                 store.close()
+278 |             return {"items": items, "total": total, "receipt": receipt, "receipt_path": str(path), "refresh_skipped": True}
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^
+279 |         except (ValueError, KeyError):
+280 |             continue
+    |
+
+E501 Line too long (125 > 100)
+   --> src/lei_signal/portfolio/briefing.py:308:90
+    |
+306 | …     blogger_coverage[str(mid)] = coverage
+307 | …     if coverage["target_may_be_truncated"]:
+308 | …         extra_errors.append({"source": f"bilibili:{mid}", "error": "最新10条列表未覆盖目标日边界，目标视频可能遗漏"})
+    |                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^
+309 | …     return selected
+    |
+
+E501 Line too long (110 > 100)
+   --> src/lei_signal/portfolio/briefing.py:313:101
+    |
+311 |     try:
+312 |         try:
+313 |             client = WindowClient(directory / "bili-cookies.json") if window["status"] == "verified" else None
+    |                                                                                                     ^^^^^^^^^^
+314 |             if client is None:
+315 |                 extra_errors.append({"source": "blogger_calendar", "error": window.get("error", "目标日未核实")})
+    |
+
+E501 Line too long (113 > 100)
+   --> src/lei_signal/portfolio/briefing.py:315:100
+    |
+313 |             client = WindowClient(directory / "bili-cookies.json") if window["status"] == "verified" else None
+314 |             if client is None:
+315 |                 extra_errors.append({"source": "blogger_calendar", "error": window.get("error", "目标日未核实")})
+    |                                                                                                      ^^^^^^^^^^^^
+316 |         except Exception as exc:
+317 |             client = None
+    |
+
+E501 Line too long (102 > 100)
+   --> src/lei_signal/portfolio/briefing.py:336:101
+    |
+334 |                         max_duration_sec=cfg.get("bili_max_duration_sec", 1800),
+335 |                     )
+336 |                     stats[key] = store.insert_items([item.to_row() for item in items]) if items else 0
+    |                                                                                                     ^^
+337 |                 except Exception as exc:
+338 |                     errors.append({"source": key, "error": str(exc)[:200]})
+    |
+
+E501 Line too long (103 > 100)
+   --> src/lei_signal/portfolio/briefing.py:345:101
+    |
+343 |                    "per_source": stats, "errors": errors, "total_recent": total,
+344 |                    "blogger_window": window, "blogger_list_coverage": blogger_coverage,
+345 |                    "production_news_database_updated": False, "model_calls": 0, "content_deletions": 0}
+    |                                                                                                     ^^^
+346 |         path = directory / f"news-receipt-{now.strftime('%Y%m%dT%H%M%S%f')}-{uuid4().hex[:8]}.json"
+347 |         with path.open("x") as stream:
+    |
+
+E501 Line too long (107 > 100)
+   --> src/lei_signal/portfolio/briefing.py:361:101
+    |
+359 |         receipt = {"started_at": now.isoformat(), "finished_at": datetime.now(SHANGHAI).isoformat(),
+360 |                    "status": "failed", "per_source": {},
+361 |                    "errors": [{"source": "collector", "error": f"{type(exc).__name__}: {str(exc)[:200]}"}],
+    |                                                                                                     ^^^^^^^
+362 |                    "production_news_database_updated": False, "model_calls": 0, "content_deletions": 0}
+363 |         directory.mkdir(parents=True, exist_ok=True)
+    |
+
+E501 Line too long (103 > 100)
+   --> src/lei_signal/portfolio/briefing.py:362:101
+    |
+360 |                    "status": "failed", "per_source": {},
+361 |                    "errors": [{"source": "collector", "error": f"{type(exc).__name__}: {str(exc)[:200]}"}],
+362 |                    "production_news_database_updated": False, "model_calls": 0, "content_deletions": 0}
+    |                                                                                                     ^^^
+363 |         directory.mkdir(parents=True, exist_ok=True)
+364 |         path = directory / f"news-receipt-{now.strftime('%Y%m%dT%H%M%S%f')}-{uuid4().hex[:8]}.json"
+    |
+
+E501 Line too long (139 > 100)
+   --> src/lei_signal/portfolio/briefing.py:375:101
+    |
+373 | …0.0.1:8000")
+374 | …uired=True)
+375 | …e_true", help="collect sources without model scoring, deletion or production writes")
+    |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+376 | …
+377 | …
+    |
+
+E501 Line too long (109 > 100)
+   --> src/lei_signal/portfolio/briefing.py:414:101
+    |
+412 |     packet = build_packet(sources, slot=args.slot, now=now, previous=previous, authors=authors)
+413 |     args.output_dir.mkdir(parents=True, exist_ok=True)
+414 |     output = args.output_dir / f"packet-{now.strftime('%Y%m%dT%H%M%S%f')}-{args.slot}-{uuid4().hex[:8]}.json"
+    |                                                                                                     ^^^^^^^^^
+415 |     with output.open("x") as stream:
+416 |         json.dump(packet, stream, ensure_ascii=False, indent=2)
+    |
+
+E501 Line too long (110 > 100)
+   --> src/lei_signal/portfolio/briefing.py:418:101
+    |
+416 |         json.dump(packet, stream, ensure_ascii=False, indent=2)
+417 |         stream.write("\n")
+418 |     print(json.dumps({"packet": str(output.resolve()), "mode": packet["mode"], "coverage": packet["coverage"],
+    |                                                                                                     ^^^^^^^^^^
+419 |                       "changes": len(packet["changes"]), "news": len(packet["news"]),
+420 |                       "blogger_previous_trading_day": len(packet["blogger_previous_trading_day"]),
+    |
+
+E501 Line too long (110 > 100)
+   --> src/lei_signal/portfolio/briefing.py:423:101
+    |
+421 |                       "blogger_window": packet["blogger_window"],
+422 |                       "trade_changes": len(packet["trade_ledger"]["changes"]),
+423 |                       "news_source_errors": (packet["news_coverage"].get("last_run") or {}).get("errors", []),
+    |                                                                                                     ^^^^^^^^^^
+424 |                       "failed_sources": [key for key, value in packet["source_status"].items() if not value["ok"]]}, ensure_ascii=Fal…
+425 |     return 0 if packet["source_status"]["workspace"]["ok"] else 2
+    |
+
+E501 Line too long (137 > 100)
+   --> src/lei_signal/portfolio/briefing.py:424:101
+    |
+422 | …ade_ledger"]["changes"]),
+423 | …news_coverage"].get("last_run") or {}).get("errors", []),
+424 | … value in packet["source_status"].items() if not value["ok"]]}, ensure_ascii=False))
+    |                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+425 | …"ok"] else 2
+    |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests/unit/test_portfolio_briefing.py:1:1
+   |
+ 1 | / from copy import deepcopy
+ 2 | | from datetime import datetime
+ 3 | | import json
+ 4 | | from pathlib import Path
+ 5 | | from tempfile import TemporaryDirectory
+ 6 | | import unittest
+ 7 | | from unittest.mock import patch
+ 8 | |
+ 9 | | from lei_signal.portfolio.briefing import (build_packet, collect_news_safely, blogger_window, _news_since,
+10 | |                                           _select_blogger_videos, refresh_news)
+   | |_______________________________________________________________________________^
+11 |
+12 |   NOW = datetime.fromisoformat("2026-10-08T14:40:00+08:00")
+   |
+help: Organize imports
+
+E501 Line too long (106 > 100)
+  --> tests/unit/test_portfolio_briefing.py:9:101
+   |
+ 7 | from unittest.mock import patch
+ 8 |
+ 9 | from lei_signal.portfolio.briefing import (build_packet, collect_news_safely, blogger_window, _news_since,
+   |                                                                                                     ^^^^^^
+10 |                                           _select_blogger_videos, refresh_news)
+   |
+
+E501 Line too long (111 > 100)
+  --> tests/unit/test_portfolio_briefing.py:17:101
+   |
+15 | class PortfolioBriefingTests(unittest.TestCase):
+16 |     def source(self):
+17 |         return {"workspace": {"ok": True, "data": {"as_of": "2026-09-04", "coverage": {"total": 1}, "items": [{
+   |                                                                                                     ^^^^^^^^^^^
+18 |             "holding_id": "h1", "name": "示例基金", "nav": {"value": 1.2, "date": "2026-09-30"},
+19 |             "plan": {"plan_id": "p1", "state": "entered"}, "technical": {"meta": {"last_bar_date": "2026-09-30"}},
+   |
+
+E501 Line too long (114 > 100)
+  --> tests/unit/test_portfolio_briefing.py:19:101
+   |
+17 |         return {"workspace": {"ok": True, "data": {"as_of": "2026-09-04", "coverage": {"total": 1}, "items": [{
+18 |             "holding_id": "h1", "name": "示例基金", "nav": {"value": 1.2, "date": "2026-09-30"},
+19 |             "plan": {"plan_id": "p1", "state": "entered"}, "technical": {"meta": {"last_bar_date": "2026-09-30"}},
+   |                                                                                                     ^^^^^^^^^^^^^^
+20 |             "status": "action_required",
+21 |             "gaps": ["行情时点尚未核实"], "alerts": [{"code": "STOP_PRICE_BREACHED"}],
+   |
+
+E501 Line too long (108 > 100)
+  --> tests/unit/test_portfolio_briefing.py:52:101
+   |
+50 |         src = self.source()
+51 |         src["news"] = {"ok": True, "data": {"items": [
+52 |             {"id": 1, "source": "bilibili", "published_at": "2026-09-30T10:00:00+08:00", "title": "仅标题"},
+   |                                                                                                      ^^^^^^^
+53 |             {"id": 2, "published_at": "2026-10-08T16:00:00+08:00"},
+54 |             {"id": 3, "published_at": "2026-10-08T13:00:00"},
+   |
+
+E501 Line too long (112 > 100)
+  --> tests/unit/test_portfolio_briefing.py:65:101
+   |
+63 |     def test_api_failure_is_not_all_holdings_removed(self):
+64 |         old = build_packet(self.source(), slot="1135", now=NOW)
+65 |         out = build_packet({"workspace": {"ok": False, "error": "offline"}}, slot="1440", now=NOW, previous=old)
+   |                                                                                                     ^^^^^^^^^^^^
+66 |         self.assertEqual(out["removed_since_previous"], [])
+67 |         self.assertFalse(out["source_status"]["workspace"]["ok"])
+   |
+
+E501 Line too long (143 > 100)
+  --> tests/unit/test_portfolio_briefing.py:94:101
+   |
+92 | … []}}
+93 | …
+94 | … "t1", "fund_code": "123456", "side": "sell", "amount": 100, "price_status": "pending"}]
+   |                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+95 | …revious=old)
+96 | …[0]["kind"], "new")
+   |
+
+E501 Line too long (119 > 100)
+   --> tests/unit/test_portfolio_briefing.py:116:101
+    |
+114 |     def test_total_news_failure_is_saved_and_other_sources_remain(self):
+115 |         with TemporaryDirectory(dir=Path(__file__).resolve().parents[2]) as folder:
+116 |             with patch("lei_signal.portfolio.briefing.refresh_news", side_effect=ImportError("collector unavailable")):
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^
+117 |                 fresh = collect_news_safely(Path(folder), NOW)
+118 |             saved = json.loads(Path(fresh["receipt_path"]).read_text())
+    |
+
+E501 Line too long (104 > 100)
+   --> tests/unit/test_portfolio_briefing.py:136:92
+    |
+134 |         item = src["workspace"]["data"]["items"][0]
+135 |         item.update(code="123456", plan=None, gaps=[])
+136 |         context = {"fund_code": "123456", "stated_reason": "觉得低估，分批定投", "stop_condition": None}
+    |                                                                                                     ^^^^
+137 |         src["user_context"] = {"ok": True, "data": {"entries": [context]}}
+138 |         out = build_packet(src, slot="1440", now=NOW)
+    |
+
+E501 Line too long (118 > 100)
+   --> tests/unit/test_portfolio_briefing.py:166:101
+    |
+165 |     def test_missing_or_uncovered_calendar_never_guesses_yesterday(self):
+166 |         self.assertEqual(blogger_window(datetime.fromisoformat("2027-01-04T11:35:00+08:00"))["status"], "unavailable")
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^
+167 |         self.assertEqual(blogger_window(datetime.fromisoformat("2026-01-01T11:35:00+08:00"))["date"], None)
+168 |         with TemporaryDirectory() as tmp:
+    |
+
+E501 Line too long (107 > 100)
+   --> tests/unit/test_portfolio_briefing.py:167:101
+    |
+165 |     def test_missing_or_uncovered_calendar_never_guesses_yesterday(self):
+166 |         self.assertEqual(blogger_window(datetime.fromisoformat("2027-01-04T11:35:00+08:00"))["status"], "unavailable")
+167 |         self.assertEqual(blogger_window(datetime.fromisoformat("2026-01-01T11:35:00+08:00"))["date"], None)
+    |                                                                                                     ^^^^^^^
+168 |         with TemporaryDirectory() as tmp:
+169 |             path = Path(tmp) / "calendar.json"
+    |
+
+E501 Line too long (129 > 100)
+   --> tests/unit/test_portfolio_briefing.py:201:101
+    |
+199 |                    "created": int(datetime.fromisoformat("2026-10-07T20:00:00+08:00").timestamp())}]
+200 |         with TemporaryDirectory() as tmp, \
+201 |              patch("lei_signal.newsfeed.config_loader.load_config", return_value={"bili_ups": [{"mid": 1, "name": "author"}]}), \
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+202 |              patch("lei_signal.newsfeed.pipeline._collect_all", return_value=({}, [])) as ordinary, \
+203 |              patch("lei_signal.newsfeed.sources.bilibili.BilibiliClient.__init__", return_value=None), \
+    |
+
+E501 Line too long (101 > 100)
+   --> tests/unit/test_portfolio_briefing.py:202:101
+    |
+200 |         with TemporaryDirectory() as tmp, \
+201 |              patch("lei_signal.newsfeed.config_loader.load_config", return_value={"bili_ups": [{"mid": 1, "name": "author"}]}), \
+202 |              patch("lei_signal.newsfeed.pipeline._collect_all", return_value=({}, [])) as ordinary, \
+    |                                                                                                     ^
+203 |              patch("lei_signal.newsfeed.sources.bilibili.BilibiliClient.__init__", return_value=None), \
+204 |              patch("lei_signal.newsfeed.sources.bilibili.BilibiliClient.fetch_up_videos", return_value=videos) as listing, \
+    |
+
+E501 Line too long (104 > 100)
+   --> tests/unit/test_portfolio_briefing.py:203:101
+    |
+201 |              patch("lei_signal.newsfeed.config_loader.load_config", return_value={"bili_ups": [{"mid": 1, "name": "author"}]}), \
+202 |              patch("lei_signal.newsfeed.pipeline._collect_all", return_value=({}, [])) as ordinary, \
+203 |              patch("lei_signal.newsfeed.sources.bilibili.BilibiliClient.__init__", return_value=None), \
+    |                                                                                                     ^^^^
+204 |              patch("lei_signal.newsfeed.sources.bilibili.BilibiliClient.fetch_up_videos", return_value=videos) as listing, \
+205 |              patch("lei_signal.newsfeed.sources.bilibili.BilibiliClient.fetch_video_detail", return_value={}) as detail:
+    |
+
+E501 Line too long (124 > 100)
+   --> tests/unit/test_portfolio_briefing.py:204:101
+    |
+202 |              patch("lei_signal.newsfeed.pipeline._collect_all", return_value=({}, [])) as ordinary, \
+203 |              patch("lei_signal.newsfeed.sources.bilibili.BilibiliClient.__init__", return_value=None), \
+204 |              patch("lei_signal.newsfeed.sources.bilibili.BilibiliClient.fetch_up_videos", return_value=videos) as listing, \
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^
+205 |              patch("lei_signal.newsfeed.sources.bilibili.BilibiliClient.fetch_video_detail", return_value={}) as detail:
+206 |             out = refresh_news(Path(tmp), NOW)
+    |
+
+E501 Line too long (120 > 100)
+   --> tests/unit/test_portfolio_briefing.py:205:101
+    |
+203 |              patch("lei_signal.newsfeed.sources.bilibili.BilibiliClient.__init__", return_value=None), \
+204 |              patch("lei_signal.newsfeed.sources.bilibili.BilibiliClient.fetch_up_videos", return_value=videos) as listing, \
+205 |              patch("lei_signal.newsfeed.sources.bilibili.BilibiliClient.fetch_video_detail", return_value={}) as detail:
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^
+206 |             out = refresh_news(Path(tmp), NOW)
+207 |             self.assertEqual(out["receipt"]["blogger_window"]["date"], "2026-09-30")
+    |
+
+Found 63 errors.
+[*] 2 fixable with the `--fix` option.
