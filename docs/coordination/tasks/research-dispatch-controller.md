@@ -1,4 +1,24 @@
-# LEI 八目标研究调度｜当前快照
+# LEI 八目标｜本对话直接执行
+
+- 更新：2026-10-08T12:00:42.613576+08:00；稳定task-id research-dispatch-controller。用户明确“就你这个对话直接开做，别分发”。当前负责人及本文件唯一写者改为root会话01a116c7-3700-7062-a6c6-53af00ef60a0；原协调会话已核idle，无并写任务。
+- checked_coordination_sha=ffe4f1596dee541f74060b3335a74b4c8179b35b；已读COORDINATION.md、本记录、risk-shape-information；新raw/report精确路径与旧三键试点不重叠。主树分支不切换。
+- 当前直接单元：haitong-corporate-action-qualification-20261008。只核600837官方停止交易、终止上市与换股/承接事实，服务原目标4的数据资格；未取新来源，此刻planned。
+- 新写入：docs/experiments/raw/haitong-corporate-action-2026-10-08/, docs/experiments/haitong-corporate-action-qualification-2026-10-08.md；root既有进度及thread-state沿用。本阶段不改其他owner记录、旧价格/成员、封存试验、共享registry/INDEX；结案登记前另登记准确窗口。
+- 预算：本单元公开来源请求至多6、取得字节至多10MiB、写前空闲至少512MiB；原36次成员查询、B01—B05、已闭合三键4/6及失败均保留，未用2次不重开。没有因子/标签/拟合/付费预算。
+- 验收：官方来源原件/日期/指纹、身份与换股条款、可用范围及仍缺件；不能把公司行动核明写成历史价格修复或完整历史成员通过。
+- 纠偏：先前“全部只能等资料”判断过宽；原qualification-plan明确另缺发行人官方行动记录，公开资格核查独立于D—MAE六原件。
+- 定时原leisignal已读回改为直接执行，仍ACTIVE/30分钟/原线程。完整规则2026-10-08.v4-direct，SHA 990099d2b1a53070b986c5d0c57b992ff32b38c432fec3cf645922e19bd479ca；原生提示SHA ef1f0ff333b28ba66b967133102836016bc076802531ab6387b4ca30c3a64cfb。
+
+## 当前直接执行规则
+
+用户最新明确改由本对话直接推进八目标，不再分发给其他对话或子代理。root既负责研究执行也负责检查与归档；可只读已有成果和真实回调，但不得发送新任务、创建或重启执行者。先按字段读thread-state.json的direct_execution、最新恢复点、next_actions和原累计预算/失败；再fetch协调并核范围。已有资料足够的必要工作在本对话实际做完，独立只读请求可以工具并行，有依赖的步骤先验前项；不把规划、记录或派发当成果。
+每轮核原始八目标剩余项，不能仅因D—MAE缺六原件就宣称整个数据/工程工作无事可做。缺件先区分已做过的方法与仍可直接完成的必要资格工作；不盲重试已耗尽/封存来源，不靠改名重置累计预算。新有界单元须引用原授权、明确问题、精确写入范围、已有尝试、来源/空间预算、验收与停止依据，并完成必要范围登记和远端读回后才写可能冲突的文件。
+当前直接工作见direct_execution.current_unit；优先接续真实产物，不再重复修改调度文档充当研究。产物须核数值、原件指纹与来源，再按原规约归档。只在成果、真实失败或确需用户资料/决定时通知；状态不变安静。保存已查、正在做、完成、未验证及下一直接动作，不虚称后台研究在运行。
+原科学与安全边界不变：D—MAE须使用ace132原合同和六份准确冻结原件及必要独审，行情不是原特征；不能猜设计/重建冻结输入替代原件。保留全部失败，不重跑封存PPO/P26、已验收合成检查或已闭合三键价格试点。暂停403和automation-2保持，不删除、不交易、不付费、不部署、不改网络或仓外内容；仓外目标数据库待确认。不切主工作区分支，使用仓内隔离区与准确路径提交，远端SHA和文件读回一致才称同步。全部八目标经验收后才暂停本心跳。
+
+---
+
+# 历史调度快照（以下旧派发规则已被本页顶部直接执行规则取代）
 
 - 更新时间：2026-10-08T11:41:50+08:00（Asia/Shanghai）
 - task-id：research-dispatch-controller；状态：active。研究调度：[中控对话](codex://threads/01a116c7-3700-7062-a6c6-53af00ef60a0)；本文件唯一Git写者：[协调对话](codex://threads/01a10051-4db1-7490-b40f-c13243767fc6)。原负责人文件仍由各自维护。
@@ -117,7 +137,7 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "cdc367e5a6512bfa01ab507c475befeb6f20d307",
+  "checked_coordination_sha": "ffe4f1596dee541f74060b3335a74b4c8179b35b",
   "checked_at": "2026-10-08T11:41:50+08:00",
   "snapshot_only": true,
   "assignments": [
@@ -252,11 +272,14 @@
       "status": "active",
       "write_paths": [
         "docs/ops/work-progress/research-dispatch-controller-2026-10-07.md",
-        "docs/experiments/raw/research-dispatch-controller-2026-10-07/thread-state.json"
+        "docs/experiments/raw/research-dispatch-controller-2026-10-07/thread-state.json",
+        "docs/coordination/tasks/research-dispatch-controller.md",
+        "docs/experiments/raw/haitong-corporate-action-2026-10-08/",
+        "docs/experiments/haitong-corporate-action-qualification-2026-10-08.md"
       ],
       "depends_on": [],
       "scope_released": false,
-      "source": "Controller heartbeats/status management remains active; this does not mean a research process is running. No new market computation is authorized by this status."
+      "source": "User latest instruction replaces dispatcher-only role with direct root execution. Root is sole writer of central record and new corporate-action qualification paths; no further delegation."
     },
     {
       "task_id": "report-registration-20261007",
@@ -472,15 +495,13 @@
   },
   "checked_task_ids": [
     "research-dispatch-controller",
-    "risk-shape-information",
-    "classic-factor-research",
-    "research-evidence-catalog/report-library-integration-20261008"
+    "risk-shape-information"
   ],
   "heartbeat_configuration": {
-    "policy_version": "2026-10-08.v3",
-    "policy_sha256": "5c3bb991c1d4cc024250f2a2f7cb14b317b021083b85b3f29fbd8d73893b50c8",
-    "native_prompt_sha256": "3446cd6c74aa14c5aa9bacc5599e11840d6e3d6d75d6cb00341c9dfadac8cf35",
-    "state": "v3_local_rule_saved_git_copy_published_with_this_commit",
+    "policy_version": "2026-10-08.v4-direct",
+    "policy_sha256": "990099d2b1a53070b986c5d0c57b992ff32b38c432fec3cf645922e19bd479ca",
+    "native_prompt_sha256": "ef1f0ff333b28ba66b967133102836016bc076802531ab6387b4ca30c3a64cfb",
+    "state": "direct_execution_native_readback_verified",
     "applied_verified_at": "2026-10-08T11:19:56.161075+08:00",
     "automation_id": "leisignal",
     "cadence_minutes": 30,
@@ -510,20 +531,11 @@
       "correction_commit": "cdc367e5a6512bfa01ab507c475befeb6f20d307"
     },
     "latest_followup": {
-      "checked_at": "2026-10-08T11:41:32.284239+08:00",
-      "research_ready_count": 0,
-      "dispatch_dependency_decision": {
-        "parallel_done": [
-          "read-only classic callback review",
-          "controller dispatch dependency policy update"
-        ],
-        "serial_ready": [],
-        "blocked_research": "Named external dependencies unchanged; not a blanket D-MAE block",
-        "unrelated_active_chat": "01a11721-303e-7c83-9451-c82078c9ba23 currently runs BIAO brief under its own user scope; observed only, no duplicate dispatch or claim as LeiSignal research",
-        "serial_running": [
-          "sole coordinator publishes accepted first-run/fix/policy status"
-        ]
-      }
+      "checked_at": "2026-10-08T12:00:42.613576+08:00",
+      "mode": "root_direct_no_delegation",
+      "ready_direct_data_units": 1,
+      "unit": "haitong-corporate-action-qualification-20261008",
+      "prior_zero_ready_assessment": "corrected: corporate-action official source qualification was independently actionable"
     },
     "parallel_serial_rule": "调度顺序按依赖和写入范围决定：每轮列出尚未验收的必要交付及其前置输入、原owner、已用/剩余预算、准确写入范围。原授权内、输入齐备、预算允许且与彼此无依赖/无写入冲突的任务，在原负责人对话并行派发并逐一核启动；同一owner已运行则先完成其当前任务，不重复追加相同工作。有依赖的任务只在所依赖成果按原合同验收、准确输入指纹/commit已保存后再派，不能以“已派发/运行/交付”代替前置验收。共享registry/INDEX等同一路径由唯一写者串行处理；缺件仅阻塞依赖它的任务。资料未齐不能为并行而重做封存工作、拆出没有验收价值的任务或扩大预算。每轮回执记录并行组、串行依赖、当前具备执行条件的任务，以及未派发的具体原因。",
     "classic_acceptance": {
@@ -539,7 +551,41 @@
       "eligible_running_tasks": 1,
       "acceptance_boundary": "Saved configuration verified; future timed execution and ready/stalled runtime scenarios not yet observed."
     }
-  }
+  },
+  "current_execution_mode": "root_direct_no_delegation",
+  "direct_execution_unit": {
+    "id": "haitong-corporate-action-qualification-20261008",
+    "state": "planned_scope_registration_pending",
+    "question": "Resolve official trading cessation, listing termination and share-conversion/successor facts for 600837, independently of historical CSI300 membership and old price-scale repair.",
+    "original_authority": "Pasted original goal4: supplement identities, delisting/terminal value, corporate actions and trading availability by actual need. Original qualification-plan.md already names exactly this security and missing documents.",
+    "existing_gap_evidence": [
+      "docs/research/proposals/stock-price-scale-and-membership-2026-10-06/qualification-plan.md:63",
+      "docs/research/proposals/stock-price-scale-and-membership-2026-10-06/qualification-plan.md:65",
+      "docs/experiments/baostock-bounded-local-probe-2026-10-05.md:48"
+    ],
+    "scope": "One existing missing security 600837, official 2025 action chain only; no new stock candidate, price repair, index membership inference, factor/label/strategy run.",
+    "write_paths": [
+      "docs/experiments/raw/haitong-corporate-action-2026-10-08/",
+      "docs/experiments/haitong-corporate-action-qualification-2026-10-08.md"
+    ],
+    "budget": {
+      "public_source_requests_max": 6,
+      "public_source_requests_used": 0,
+      "new_bytes_max": 10485760,
+      "minimum_free_bytes": 536870912,
+      "fit_or_labels": 0,
+      "paid_requests": 0,
+      "carry_forward": "Prior 36 index-anchor requests, B01-B05 and closed gap-pilot 4/6 preserved; no reuse of closed unused quota. This is the previously named company-action question, not renewed anchor/price probing."
+    },
+    "acceptance": "Official issuer/exchange sources, document and effective dates separated, original bytes/hash, exact conversion terms/successor, admissible vs still missing fields, no made-up total return.",
+    "strategy_layer": "Historical instrument identity and corporate-action/trading availability data; no technical signal semantics changed.",
+    "strategy_sha256": {
+      "technical-system": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "technical-implementation": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    },
+    "status": "planned_registered_before_sources"
+  },
+  "controller_owner": "01a116c7-3700-7062-a6c6-53af00ef60a0"
 }
 ```
 
