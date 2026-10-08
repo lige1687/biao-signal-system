@@ -173,3 +173,16 @@
 更新时间：2026-10-08T19:36:00.844934+08:00；checked_coordination_sha=e7d1bf8a529c289ba1be094a3906cbbdb4ccd248。已读规则、本任务、中控新14核定范围，原technical owner另25逐项核已接受，11受限＋2逐观察保持。无本task准确写范围冲突。合同metadata14-publication-contract.json：只在既有codex/theory-safe-publication-20261008@4f6ff52a7d5a2a415159c88ad06a38e7a7e6cbac复制准确14文件34104B，以及自己的既有发布回执、进度和协调。
 
 根源14只读；definitions/preparation/tests/registry/INDEX不改，不上传其依赖或11＋2受限资料。保留旧科研用途/预算/未授权/负向/不可用状态，39＋9已验收不重做。验收准确14源SHA/大小与owner分类相符、内容界限、缺件27减14准确13、归置和普通push/fetch逐文件读回。科研/测试/取数/安装/仓外写/删除0；完整准备入口仍未恢复，不以自有汇总交付代替源输入资格。
+
+
+## 14安全汇总精确交付完成，完整准备仍13缺件
+
+更新时间：2026-10-08T19:38:17.485799+08:00；checked_coordination_sha=0f46dd65b9c2ee7c23a3ac7a17586b717c8d0590；已读规则、中控原owner25核定和本任务，最终fetch无新增差异/冲突。限定metadata14发布completed，不扩大剩余13范围。
+
+准确成果c3422d203aefc334e8af341c217085922b249147，原codex/theory-safe-publication-20261008，14源34104B＋4本任务既有元数据，共18文件push/fetch逐文件字节相同。核验回执/进度后继afa6ea0bda5079413829254e685a7f4cfec499c2两文件亦远端读回相符。14源在根工作区重新SHA未变；草稿、未授权/不可用、原用途预算负结果等状态原字节保留。
+
+远端Git对象重新从历史75集合核余13，精确27−14=13，与当前dependency-check一致。其中6件已有准确旧local-only清单；5件嵌入真实逐观察/日期/区段；另2逐观察源未由25审查放行。13每文件原SHA/大小及恢复条件已从原owner分类或36来源索引保存到manifest/current dependency-check，未复制这些13或任何关联行情/策略全文。39＋9和36来源历史快照复用未重做。关键7路径（定义源码/登记、preparation、两测试、registry/INDEX）与4f6ff52a逐字一致。
+
+检查：14源大小SHA/ready分类内容、18远端字节、root原源不变、剩余集合、不变关键文件、归置/diff均通过。0科研/测试重跑/取数/拟合/标签/安装/付费/仓外写/删除，无新失败或后台任务。写前内盘实测2839859200B，仅小原件与回执，不清理或迁移他人资料。合同/owner callback/controller acceptance当前SHA记录于本阶段manifest，不改上一阶段已绑定历史回执指纹。
+
+用途是让AI继承原研究问题、审阅依据和真实限制，而不是交付新因子收益证据。完整准备工具跨设备仍blocked，源码验证条件未弱化；剩余13按原owner既定具体许可/私有移交条件恢复，新发布或摘要改写需后继明确范围。本有限交付范围释放，中控读原raw/theory-safe-publication-2026-10-08下metadata14阶段回执接续，无本合同必要剩余计算。
