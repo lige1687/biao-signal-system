@@ -1,0 +1,22 @@
+# Mac 本机空间清理与外盘归档
+
+- task-id: mac-local-storage-cleanup
+- owner: 01a1155d-b204-7232-a993-4c9e0567af59 / root
+- status: active
+- updated_at: 2026-10-08T20:34:15.766327+08:00
+- checked_coordination_sha: ff4cc9ed72599d016e411c2c283acea62fa8d663
+- checked_at: 2026-10-08T20:34:15.766327+08:00
+- read_task_ids: daily-trading-system-audit, theory-workflow-system-increment, research-dispatch-controller
+- rules: COORDINATION 1.1；用户既有清理授权；AGENTS 的 AI 使用存储资源；macos-cleaner 固定版本 d8d8528d25da61a68a1c91cc6f8c161068e52a13
+- source baseline: 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；共享脏工作区只读，不切换，不操作其索引。
+- work branch: codex/mac-local-storage-cleanup-20261008（进度小文档待发布）；此前三轮私有清单在外盘，未入 Git。
+- goal: 在已确认不影响实验的范围内，将旧软件组件和更新副本核验归档到既有外盘，再移除本机副本；核实际可用空间、API、保留对象。另只读评估未来实验写盘和现有实验迁移条件。
+- scope: 仓外 aiXcoder installer、TabNine models、Paradox launcher-v2.2024.14、pip 下载缓存、iStat Menus 7/Patch 下 13 个准确旧更新子目录；实际白名单和 inode 绑定在外盘 scope.json。任何占用/变化/校验失败项保留。
+- conflict decision: daily owner 的已迁移媒体/模型、原 storage 配置及 native CLI preflight 实现都只读复用。没有共享源码、配置、registry/INDEX 或 raw 修改；唯一写者 root。
+- preserve: 活动数据库、环境、会话、所有工作树、研究 raw 及冻结路径、活动日志、swap、现装应用、设置及最近占用的两个 iStat 子目录。
+- validation: 设备 UUID、复制容量计划、逐文件 SHA-256 和链接/目录/权限清单、源未变、无打开句柄、删除后实际 df、API 健康；归档失败不移除原件。
+- data: 私有归档和回执仅 /Volumes/win+mac通用/个人资料归档/2026-10-08-第四批-202744-fd8be8；远端不包含文件内容、个人文档、数据库或凭证。
+- completed: 三轮旧归档复用；本轮盘点、存储入口和技能安全说明已核；本轮尚未复制或删除原件。
+- next: 检查器计划→准确归档→内容读回→按项移除→结果测量；实验现有入口不自动重定向。
+- blockers: 无需重复询问已授权的安全归档；所有实验全迁移超出可自动处理边界，不作为当前已授权迁移动作。
+- research budget: 不运行市场/拟合/冻结实验；0 新研究。
