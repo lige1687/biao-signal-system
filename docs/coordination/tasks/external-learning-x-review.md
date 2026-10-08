@@ -1,0 +1,23 @@
+# X 外部学习与内容入口路径评估
+
+- task-id: external-learning-x-review
+- owner: 当前 X 路径评估对话 /root；本任务唯一写者。
+- status: active；scope_released=false
+- updated_at: 2026-10-08T22:37:58.883913+08:00（Asia/Shanghai）
+- checked_coordination_sha: 3b04c419485465b80af2f7ee1d3988f522899f2b
+- checked_at: 2026-10-08T22:37:58.883913+08:00
+- 已读 task-id: external-quant-resources、theory-workflow-system-increment、daily-trading-system-audit、research-dispatch-controller、research-evidence-catalog/report-library-integration-20261008；COORDINATION 1.1。其他任务只检索拟写路径声明，不以机械检索代替负责人判断。
+- 问题/用途: 用户问“看看接入x来给我们推送学习和帖子内容，这个路径怎样”；评估贴文方案、当前官方能力/成本和现有学习入口复用。research-closure report_only，0因子实验/市场取数。
+- 目标与验收: 明确适合的角色、接入选项、真实成本量级、现有基础/缺口、反例及未知；每个关键判断可定位原始文档。评估完成不等于实际接通 X 或用户接受自动发送。
+- 工作分支: codex/x-learning-path-review-20261008；基础完整 commit: 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9。当前共享主工作树有其他任务脏改，默认 HEAD/index 保留。
+- 最近已推成果: 尚无，本轮资料只读核查中；新报告待归档。
+- 唯一写入: docs/experiments/x-learning-path-review-2026-10-08.md；docs/experiments/raw/x-learning-path-review-2026-10-08/ 中小型来源/评估记录；registry.json 本报告唯一项；INDEX.md 本报告一行；本文。Git 准备材料只在仓内 .biao/x-learning-path-review-20261008/。
+- 冲突决定: 外部因子流程、理论方法、日常查询和媒体继续归原 owner；本轮不写这些源码/技能/既有报告/自动化。相关共享登记已明确释放窗口，本任务只串行追加自身项，写前再核文件指纹及远端变更，不认领全局登记职责。
+- 权限: 不安装/升级仓外工具，不读取登录凭证，不付费、不创建定时任务、不恢复旧通知、不发帖、不改交易含义；不删除资料、不强推、不改 main/master。
+- 来源/资料: 用户附件仅本地读与记指纹，正文不上传；官方 X 文档与 Agent-Reach 上游源码仅定位与概括。两份策略原件实际 SHA 将记入报告，不修改原件。
+- 只读助手: gpt-6-sol/medium，限现有入口/目标/负责人盘点，不写文件、不联网；一次用较旧本地 coordination ref 的发现已纠正，主控以已 fetch 的 origin/coordination/lei 重新核关键事实。
+- 已用预算: 5 次 web 工具请求（官方能力/价格/操作符/内容状态及上游源码）；0 X 真实采集、0市场拟合、0收费读取；代理实际费用未知。最多6次来源请求，不重做既有金融研究。
+- 验证状态: 官方价格、检索范围/作者/会话操作符及当前学习API/取消通知约定已只读核；实际账户/网络/帖子读取/持续采集与内容质量未验证。
+- 阻塞: 本评估无阻塞；实际接通、持续发送需要另定已授权范围及真实读取验证。用户此次问路径，未设置发送时间、渠道或收费额度。
+- 下一步: 小报告与来源记录归档、自项登记、目录归置核验，成果推到自身 codex 分支并读回；单轮小评估不另建重复进度文件。
+- 历史/变化: 首次登记本有界方案评估，不接管原外部因子任务，不新增运行中的后台任务。
