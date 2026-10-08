@@ -1,3 +1,13 @@
+## V9 reconnect-start
+
+- task-id: trend-trading-video；2026-10-09T01:07:32.242164+08:00；checked_coordination_sha: 040f438bb2b6a53ff0e13df12a6dcebd3e6de4a9；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active恢复V14交付，用户告知磁盘已接；2026-10-09 01:06 +08:00 storage实核固定UUID正确、外盘可读写且剩余639GB，原成片22,469,359字节存在，预览HTTP200。内盘约0.84GiB，故不启动新媒体生成/新实验或安装；只收尾既有片的外盘小文档归档、只读文件校验和少量恢复记录，不将大文件回退内盘。
+- 本轮范围v14/自己的归档/验收状态、必要预览服务修复、自有work-progress、原绑定外盘交付包和视频库索引。基线e1490f734c3e15ab0d26f257296d11a6fdb44db7，分支沿用codex/trend-history-long-v14-20261009。自身与中控已读、无重叠，本任务唯一写者；不碰其他任务、生产系统或冻结路径。
+- 核准原成片SHA/元数据与恢复后浏览器播放和章节定位；将已备6份小文档落外盘并逐字读回，成片不移动不复制，已有完整播放结果可复用。完成用户可播放交付及实际归档后释放范围，审美仍待用户。
+
+
+---
+
 ## V9 archive-prepared
 
 - task-id: trend-trading-video；2026-10-09T00:55:34.576322+08:00；checked_coordination_sha: bc2985b56fd63c551193a6faf9b1a1ad5831fc3c；已读 COORDINATION.md、自身与 research-dispatch-controller。
