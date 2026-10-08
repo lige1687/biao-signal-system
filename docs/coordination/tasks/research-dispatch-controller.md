@@ -1,21 +1,21 @@
-# LEI 八目标｜本对话直接执行
+# LEI 目标推进｜主 Goal 与有界并行
 
-- 更新2026-10-08T16:57:43.420479+08:00；checked_coordination_sha=a47a1fe0d07043ecfd1df7b49f2e5198620fd3ea；已读中控、日常流程和视频最新记录，无范围冲突。
-- 新完成两报告：原固定成交现金需求A_ALL约41.21万至49.90万元、A_SMA约39.904万至39.907万元；2026上半年日历181日一致，新增覆盖153日。独立计算路径复算相同，未声称外部人独审、收益改善或全历史合格。
-- 成果a9f438d67bf5c850a5ae49ce00d7ce646c7822bb的23文件已逐字远端读回；进度凭据c9d99bf4bb77e985f79aa7c97594c7835a7d1da6已远端核验。主登记632、隔离登记211，新增两项；累计11报告。
-- 2026-10-08T16:57:43.420479+08:00实测容量恢复至7612555264字节，普通fetch/索引/ff成功，仓内协调树已恢复干净；原因未核且本对话未清理。原Errno28失败保留。没有重跑主计算、旧实验、真实标签或拟合，来源操作仍112/8,511,710字节。
-- 共享registry/INDEX范围已释放；当前无真实研究进程运行。八整体目标仍待各自资料/合同，不用某一缺件阻塞独立项，也不重复封存研究。详见机器记录中八目标剩余项。
+- 当前授权更新：2026-10-08T18:13:53.827229+08:00；checked_coordination_sha=eec571d51f4bad98a8bca2050f01daa1a383d180。用户明确同意主Goal持续推进已有目标、恢复合理并行。旧root-only规则已被本节替代，历史成果和预算不变。
+- 已验收11份root研究报告与限定存储交付不重做；主Goal尚未完成。
+- 首批仅两个不重叠的只读任务：研究输入/原合同可执行性；其他已授权工程待办及原负责人。助手不改任何文件、不取新数据、不跑实验；root仅写本任务新goal-parallel附件、原状态/进度和本协调记录。
+- 原日常流程及视频负责人有新活动，只读跟进，不抢路径或借用清理授权。
 
-## 当前直接执行规则
+## 当前完整规则
 
-用户最新明确改由本对话直接推进八目标，不再分发给其他对话或子代理。root既负责研究执行也负责检查与归档；可只读已有成果和真实回调，但不得发送新任务、创建或重启执行者。先按字段读thread-state.json的direct_execution、最新恢复点、next_actions和原累计预算/失败；再fetch协调并核范围。已有资料足够的必要工作在本对话实际做完，独立只读请求可以工具并行，有依赖的步骤先验前项；不把规划、记录或派发当成果。
-每轮核原始八目标剩余项，不能仅因D—MAE缺六原件就宣称整个数据/工程工作无事可做。缺件先区分已做过的方法与仍可直接完成的必要资格工作；不盲重试已耗尽/封存来源，不靠改名重置累计预算。新有界单元须引用原授权、明确问题、精确写入范围、已有尝试、来源/空间预算、验收与停止依据，并完成必要范围登记和远端读回后才写可能冲突的文件。
-当前直接工作见direct_execution.current_unit；优先接续真实产物，不再重复修改调度文档充当研究。产物须核数值、原件指纹与来源，再按原规约归档。只在成果、真实失败或确需用户资料/决定时通知；状态不变安静。保存已查、正在做、完成、未验证及下一直接动作，不虚称后台研究在运行。
-原科学与安全边界不变：D—MAE须使用ace132原合同和六份准确冻结原件及必要独审，行情不是原特征；不能猜设计/重建冻结输入替代原件。保留全部失败，不重跑封存PPO/P26、已验收合成检查或已闭合三键价格试点。暂停403和automation-2保持，不删除、不交易、不付费、不部署、不改网络或仓外内容；仓外目标数据库待确认。不切主工作区分支，使用仓内隔离区与准确路径提交，远端SHA和文件读回一致才称同步。全部八目标经验收后才暂停本心跳。
+用户2026-10-08最新明确同意：本聊天设置主Goal，持续推进既有LeiSignal目标完成，恢复由root统筹的有界并行。原八目标为核心，纳入用户已明确授权的LeiSignal后续待办；不自动接管别的项目或借用别的聊天权限。root负责范围、依赖、预算、科学判断、验收及接续；通常最多2个执行者并行，关键审查按需要使用空闲第三槽，总活跃数不超过工具能力。短任务不另设Goal或定时器；跨轮Goal由本聊天持有，子任务按合同交付。
+每轮先按字段读本状态与最新相关coordination/lei。复用原合同、已做尝试、失败、累计预算、原负责人及成果指纹。先核实际运行，已运行不重派；独立且输入齐备任务可并行，一份文件同一时刻一个写者；共享登记与依赖验收串行。新增范围先登记推送并远端读回；仅允许原授权必要工作，不以并行或Goal新增研究方向/预算。
+回调先读真实产物并核原合同、输入指纹、关键数值，必要独审通过再验收。验收后在当前活跃轮次实际接续下一必要工作，不等下个定时点。检查、派发、运行、交付、验收分别记录。原负责人活跃且范围重合则只读跟进；不创建用户侧新聊天，除非用户单独明确要求。
+Goal用于连续执行；heartbeat仅用于接续恢复与外部变化检查，不为已运行的同范围另启执行者。若无新输入/成果且无可执行项，只保存紧凑本地回执和恢复条件，不重复Git提交或审查。连续无进展先诊断可执行项/工具/输入/权限，不把文字状态更新算研究推进。整个Goal确无可行路径时，按Goal工具的阻塞规则如实记blocked；各分支缺件不阻塞其他工作。
+D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不能猜设计或重建原件。保留冻结失败，不重跑封存PPO/P26、已验收现金/日历或关闭来源尝试，不重置累计预算。403及automation-2保持暂停，不删除、强推、交易、付费、部署、改网络或仓外内容；不切主工作区分支，仓外目标数据库待确认。工具失败不能虚称后台运行。仅成果、真实失败或需要用户资料/决定时通知；目标全部验收才完成主Goal。
 
 ---
 
-# 历史调度快照（以下旧派发规则已被本页顶部直接执行规则取代）
+# 历史调度快照（当前规则以本页顶部主Goal并行为准）
 
 - 更新时间：2026-10-08T11:41:50+08:00（Asia/Shanghai）
 - task-id：research-dispatch-controller；状态：active。研究调度：[中控对话](codex://threads/01a116c7-3700-7062-a6c6-53af00ef60a0)；本文件唯一Git写者：[协调对话](codex://threads/01a10051-4db1-7490-b40f-c13243767fc6)。原负责人文件仍由各自维护。
@@ -134,8 +134,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "008a26f1c82c3eab41cc57d60358980a4b5cab6e",
-  "checked_at": "2026-10-08T17:31:16.590672+08:00",
+  "checked_coordination_sha": "eec571d51f4bad98a8bca2050f01daa1a383d180",
+  "checked_at": "2026-10-08T18:13:53.827229+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -492,7 +492,9 @@
   "checked_task_ids": [
     "research-dispatch-controller",
     "daily-trading-system-audit",
-    "trend-trading-video"
+    "theory-workflow-system-increment",
+    "lei-technical-reader-research",
+    "external-quant-resources"
   ],
   "heartbeat_configuration": {
     "policy_version": "2026-10-08.v4-direct",
@@ -1114,9 +1116,11 @@
   "read_task_ids": [
     "research-dispatch-controller",
     "daily-trading-system-audit",
-    "trend-trading-video"
+    "theory-workflow-system-increment",
+    "lei-technical-reader-research",
+    "external-quant-resources"
   ],
-  "conflict_decision": "Root writes existing own central state/progress/coordination scope only; other owner paths read-only. No eligible new research from delivery; original budget/closed attempts unchanged.",
+  "conflict_decision": "Latest direct user authorization supersedes root-only mode. New first batch is two disjoint read-only eligibility audits; no owner/source/research scope takeover.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -1820,6 +1824,58 @@
       "remote_sha": "681f9c71e5f85e986d2dbe2ebafcbedc7b9ba6ab",
       "file_sha256": "3b8b6790248efdcf7b1e7b8689f60d1a22654d15f66ec75c7544486759aa5077",
       "file_readback_equal": true
+    }
+  },
+  "heartbeat_policy": {
+    "version": "2026-10-08.v5-goal-parallel",
+    "state": "active_goal_parallel",
+    "instructions": "用户2026-10-08最新明确同意：本聊天设置主Goal，持续推进既有LeiSignal目标完成，恢复由root统筹的有界并行。原八目标为核心，纳入用户已明确授权的LeiSignal后续待办；不自动接管别的项目或借用别的聊天权限。root负责范围、依赖、预算、科学判断、验收及接续；通常最多2个执行者并行，关键审查按需要使用空闲第三槽，总活跃数不超过工具能力。短任务不另设Goal或定时器；跨轮Goal由本聊天持有，子任务按合同交付。\n每轮先按字段读本状态与最新相关coordination/lei。复用原合同、已做尝试、失败、累计预算、原负责人及成果指纹。先核实际运行，已运行不重派；独立且输入齐备任务可并行，一份文件同一时刻一个写者；共享登记与依赖验收串行。新增范围先登记推送并远端读回；仅允许原授权必要工作，不以并行或Goal新增研究方向/预算。\n回调先读真实产物并核原合同、输入指纹、关键数值，必要独审通过再验收。验收后在当前活跃轮次实际接续下一必要工作，不等下个定时点。检查、派发、运行、交付、验收分别记录。原负责人活跃且范围重合则只读跟进；不创建用户侧新聊天，除非用户单独明确要求。\nGoal用于连续执行；heartbeat仅用于接续恢复与外部变化检查，不为已运行的同范围另启执行者。若无新输入/成果且无可执行项，只保存紧凑本地回执和恢复条件，不重复Git提交或审查。连续无进展先诊断可执行项/工具/输入/权限，不把文字状态更新算研究推进。整个Goal确无可行路径时，按Goal工具的阻塞规则如实记blocked；各分支缺件不阻塞其他工作。\nD—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不能猜设计或重建原件。保留冻结失败，不重跑封存PPO/P26、已验收现金/日历或关闭来源尝试，不重置累计预算。403及automation-2保持暂停，不删除、强推、交易、付费、部署、改网络或仓外内容；不切主工作区分支，仓外目标数据库待确认。工具失败不能虚称后台运行。仅成果、真实失败或需要用户资料/决定时通知；目标全部验收才完成主Goal。",
+    "policy_sha256": "cb585e948e0ec2b5d89bea852d097195131ecabf233bf64abe3d18793716a125",
+    "checked_coordination_sha": "eec571d51f4bad98a8bca2050f01daa1a383d180",
+    "checked_at": "2026-10-08T18:13:53.827229+08:00",
+    "read_task_ids": [
+      "research-dispatch-controller",
+      "daily-trading-system-audit",
+      "theory-workflow-system-increment",
+      "lei-technical-reader-research",
+      "external-quant-resources"
+    ],
+    "conflict_decision": "Latest direct user authorization supersedes root-only mode. New first batch is two disjoint read-only eligibility audits; no owner/source/research scope takeover."
+  },
+  "parallel_goal_execution_20261008": {
+    "authorized_at": "2026-10-08T18:13:53.827229+08:00",
+    "authorization_quote": "可以的， 你的主goal是持续推进我们给的目标完成哈",
+    "goal_status": "active",
+    "goal_thread": "01a116c7-3700-7062-a6c6-53af00ef60a0",
+    "max_parallel_executors": 2,
+    "first_batch": {
+      "state": "registered_read_only_audits_not_dispatched",
+      "purpose": "Newly authorized wider LeiSignal queue: separately determine research and engineering eligible work, not redo completed experiments.",
+      "write_paths": [
+        "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/",
+        "docs/experiments/raw/research-dispatch-controller-2026-10-07/thread-state.json",
+        "docs/ops/work-progress/research-dispatch-controller-2026-10-07.md",
+        "docs/coordination/tasks/research-dispatch-controller.md"
+      ],
+      "helper_write_paths": [],
+      "network_requests": 0,
+      "market_runs": 0,
+      "labels": 0,
+      "sealed_reruns": 0,
+      "helpers": [
+        {
+          "id": "research-readiness",
+          "model": "gpt-6.1-sol",
+          "reasoning_effort": "medium",
+          "scope": "original eight research goals and exact local evidence/source/contract prerequisites"
+        },
+        {
+          "id": "engineering-readiness",
+          "model": "gpt-6-luna",
+          "reasoning_effort": "low",
+          "scope": "other explicitly authorized LeiSignal engineering tasks; ownership/dependencies/ready candidates only"
+        }
+      ]
     }
   }
 }
