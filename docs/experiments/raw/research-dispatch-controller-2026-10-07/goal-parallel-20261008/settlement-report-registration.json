@@ -10,7 +10,8 @@
       "old_entries_and_metadata_equal": true,
       "index_exact_one_line_addition": true,
       "before_registry_sha256": "10255c3237c598429f5a6f4f34c21fa48010b25e8120995eedde21c305e587a4",
-      "after_registry_sha256": "df6bc6cb557ef92c0c21ecf62e20a9cb78dc13b47f0762e7d62313848109a85a"
+      "after_registry_sha256": "027fc2ae2f9aa27086588800c7e17d67773b895dce65d1b16cde3f0d94b3c674",
+      "existing_text_format_preserved": true
     },
     {
       "workspace": ".codex/worktrees/research-direct-20261008",
@@ -19,8 +20,14 @@
       "old_entries_and_metadata_equal": true,
       "index_exact_one_line_addition": true,
       "before_registry_sha256": "ece0d989962be7f7344ef6ae106d78442ded64b063af2b61f0b6caa8effc3ea5",
-      "after_registry_sha256": "f510ce4d057b30bb8a3278c67e26e209f951fda4501f8857656083f5a8eace49"
+      "after_registry_sha256": "752355ddb41605cc1f1962a35eef962a70b80ab2ce8b29471267a0ea28d3a974",
+      "existing_text_format_preserved": true
     }
   ],
-  "registry_change_scope": "exact single report; eachbranch preserveditsownexisting entries"
+  "registry_change_scope": "exact single report; eachbranch preserveditsownexisting entries",
+  "format_repair": {
+    "why": "Firstserialization usedindent2 vs originalindent1; semanticoldentries unchanged but unnecessary998linediff, correctedbeforefirstpush",
+    "preserved_failure": "Localfirstcommit233ca964 retained; normalfollowupcommit nohistoryrewrite",
+    "inspection_failure": "Preview cutUTF8bytesraisedUnicodeDecodeError, read-only; decodedwholethenbounded successfully"
+  }
 }
