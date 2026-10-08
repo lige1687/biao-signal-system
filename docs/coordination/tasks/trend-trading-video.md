@@ -1,3 +1,14 @@
+## V9 workflow-review-done
+
+- task-id: trend-trading-video；2026-10-09T01:39:02.777129+08:00；checked_coordination_sha: da1b0c24874f847e4bc4743fbee43cb46dbb0b54；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- completed：本轮两篇文章与前置材料接续复查完成，scope_released=true。本人唯一写者，自身与中控已读，无重叠；V14旧片状态不变、审美待用户。
+- 成果codex/trend-history-long-v14-20261009@4bea4f02836e77ecd28f9556b4b05f2ac485679f，13份准确小文件远端逐字读回。Skill新增准备入口、文稿/分镜/声音交接说明、制作索引与逐镜头模板、只读准备检查器；报告xilo-learning/workflow-review-20261009.md，当前材料索引v14/preproduction/production.json。
+- 核验10项全部得到预期结果，现有V14内容检查通过；sample/full如实指出独立storyboard缺失，没有冒充准备齐全。真实停顿允许，重叠/超长时间、未听审声明、旧文稿指纹拒绝，无旁白不强制音频。合成测试不等于真实音频验证。归置检查通过，准确差异无空白错误。保存路径比对首次因Git中文转义失败，改用NUL分隔后13路径准确匹配，未误暂存其他文件。
+- 来源5次定向web调用；原X两条403，转载和作者实际Skill可读，第二篇首次读取失败后成功；原评论未读。HyperFrames/shotcraft只核说明，无安装/执行。配音、自动音文对齐、自动选镜未接入；本轮无新视频、声音、迁移、删除或语雀发布。以后实质改片前补逐镜头表，有声片取得真实录音后再定时间；不为文档新规则重做已交付影片。
+
+
+---
+
 ## V9 workflow-review-start
 
 - task-id: trend-trading-video；2026-10-09T01:28:08.230298+08:00；checked_coordination_sha: e220e6e3593700b9a73fe27848eb8bb9c04949ad；已读 COORDINATION.md、自身与 research-dispatch-controller。
