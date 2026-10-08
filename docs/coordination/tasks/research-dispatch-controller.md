@@ -498,7 +498,8 @@
     "research-dispatch-controller",
     "theory-workflow-system-increment",
     "risk-shape-information",
-    "research-evidence-catalog/report-library-integration-20261008"
+    "research-evidence-catalog/report-library-integration-20261008",
+    "daily-trading-system-audit"
   ],
   "heartbeat_configuration": {
     "policy_version": "2026-10-08.v4-direct",
@@ -580,7 +581,8 @@
       "research-dispatch-controller",
       "theory-workflow-system-increment",
       "risk-shape-information",
-      "research-evidence-catalog/report-library-integration-20261008"
+      "research-evidence-catalog/report-library-integration-20261008",
+      "daily-trading-system-audit"
     ],
     "conflict_decision": "Root executes two independent local-only necessary followups under original goals1/3/5. Old overlap study and February calendar check closed and not rerun. Unique raw/report paths; shared registration solely root serial; other owner records read-only.",
     "budget": {
@@ -593,7 +595,9 @@
       "previous_direct_response_bytes": 8511710,
       "minimum_free_bytes": 536870912,
       "output_estimate_bytes": 2000000,
-      "free_bytes_before": 210571264
+      "free_bytes_before": 207781888,
+      "minimum_free_bytes_applies_to": "new external downloads only; this unit uses zero downloads",
+      "local_output_space_policy": "Check actual output estimate (2MB) before local write; 512MiB source-download stop retained for any future source acquisition. No source/compute budget increase."
     },
     "acceptance": [
       "Frozen inputs verified against recorded hashes; cashflows reconcile independently to saved daily cash; both ordering bounds and minimum-cash feasibility proof; original quantities/fees unchanged.",
@@ -1128,7 +1132,8 @@
     "research-dispatch-controller",
     "theory-workflow-system-increment",
     "risk-shape-information",
-    "research-evidence-catalog/report-library-integration-20261008"
+    "research-evidence-catalog/report-library-integration-20261008",
+    "daily-trading-system-audit"
   ],
   "conflict_decision": "Root executes two independent local-only necessary followups under original goals1/3/5. Old overlap study and February calendar check closed and not rerun. Unique raw/report paths; shared registration solely root serial; other owner records read-only.",
   "direct_execution": {
@@ -1152,7 +1157,8 @@
         "research-dispatch-controller",
         "theory-workflow-system-increment",
         "risk-shape-information",
-        "research-evidence-catalog/report-library-integration-20261008"
+        "research-evidence-catalog/report-library-integration-20261008",
+        "daily-trading-system-audit"
       ],
       "conflict_decision": "Root executes two independent local-only necessary followups under original goals1/3/5. Old overlap study and February calendar check closed and not rerun. Unique raw/report paths; shared registration solely root serial; other owner records read-only.",
       "budget": {
@@ -1165,7 +1171,9 @@
         "previous_direct_response_bytes": 8511710,
         "minimum_free_bytes": 536870912,
         "output_estimate_bytes": 2000000,
-        "free_bytes_before": 210571264
+        "free_bytes_before": 207781888,
+        "minimum_free_bytes_applies_to": "new external downloads only; this unit uses zero downloads",
+        "local_output_space_policy": "Check actual output estimate (2MB) before local write; 512MiB source-download stop retained for any future source acquisition. No source/compute budget increase."
       },
       "acceptance": [
         "Frozen inputs verified against recorded hashes; cashflows reconcile independently to saved daily cash; both ordering bounds and minimum-cash feasibility proof; original quantities/fees unchanged.",
