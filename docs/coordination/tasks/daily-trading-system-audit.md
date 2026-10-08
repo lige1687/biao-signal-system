@@ -105,3 +105,12 @@
 - 基线HEAD: 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；既有脏文件保留。0下单/生产库/持仓/计划/规则/全局配置/外发/删除；本轮源文件提交发布另核准确路径，不把协调同步当代码发布。
 - 冲突决定: 最新协调无同名集成路径，market-observation本轮只读、investor-observation-map拥有其UI范围；本轮使用新集成命名空间并复用这些接口，不接管其任务。
 
+## 接入范围增量：项目内 MCP 注册与本地验收
+
+- status: active；checked_coordination_sha: 4b57d6513f61aef92147a68d65f7ea1869a12ca1；checked_at: 2026-10-08T12:09:21.656749+08:00；已读task-id为原5份及最新变更classic-factor-research，全部20份再次检索.codex/config.toml与mcp_servers.lei_system，无共享配置写声明。
+- 范围仅补 .codex/config.toml 的 mcp_servers.lei_system 新表；保留已有factorhub_readonly及其他所有字节，不改用户级配置、账户安全或模型设置。配置基线SHA256=e1cca80c44bda2a8524b3cc5f058d5f2237482880aac58021e2c029635a390f5。目标是让Codex本项目自动发现已测试只读工具；官网和本机CLI会核真实解析结果，不把config加载等同手机连接。
+- 新增仓内验收脚本/摘要在原raw的gpt-integration-*。官方tunnel-client仅下载/验SHA/help于原登记的data/cache/gpt-system-integration/tunnel，未init/run/doctor或联网私有调用。
+- 当前验收: 43项combined pytest全过（一个multipart弃用提示）；shell wrapper用了zsh只读status导致收尾exit1，实际测试成功另读完整日志，失败保留。真实官方SDK客户端已调用全10工具，29/28/0/0覆盖、原话、博主、4项来源错误和报告SHA均保留；无写工具。初次lint44项风格问题已留文件并正在清零。
+- 源码成果将用隔离Git索引精确提交到codex/gpt-system-integration-20261008，不切换/覆盖现有脏工作区，只包括本任务新源文件、对应测试、技能、自己的SOP/进度与安全回执，0私人cache/库/大依赖/registry/INDEX。普通push后fetch/read回代码；阶段日志和协调更新不会称总体完成。
+- 手机/网页仍需用户恢复过期登录，问题已提出。关键条件监督仍缺确认计划与同产品技术资料；这些依赖不足时只列缺口，持续推进本地注册/证据/交付。
+
