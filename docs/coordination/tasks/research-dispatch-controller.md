@@ -134,8 +134,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "ccb11c97e350a56eb80f1ae9ba6ba94d6d5898bc",
-  "checked_at": "2026-10-08T19:18:00.325061+08:00",
+  "checked_coordination_sha": "9efd5049177bcfa3677fb8edc0616a383247a4ea",
+  "checked_at": "2026-10-08T19:25:53.937743+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -1114,11 +1114,11 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
   "read_task_ids": [
     "research-dispatch-controller",
     "technical-factor-sequence",
-    "classic-factor-research",
     "theory-workflow-system-increment",
+    "classic-factor-research",
     "daily-trading-system-audit"
   ],
-  "conflict_decision": "Originaltechnicalowner inactive completed turn checked; new9filequalification strictlyreadonly; rootarchives oneledgerreport, other36sourcesunchanged.",
+  "conflict_decision": "Originaltech9readonly callbackcompleted; new25readonlysourcequalification independent oftheory9copyinsolatedbranch. Rootledgerarchivepublished; no sharedregistrywriter now.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -2198,3 +2198,10 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 
 - checked_coordination_sha=ccb11c97e350a56eb80f1ae9ba6ba94d6d5898bc；36索引3c849c81a421432c86941b5306dcc55eb90e34a9/67f523d08501c8be4498813ca38058d7658ed29b已核远端索引SHA与全部36本地指纹。9自有方法候选、22计算元数据、3来源审核、2逐观察材料分别有恢复条件；7既有本地ref有限历史未找到同字节原件，不称全远端穷尽。
 - 下一必要工作是原technicalowner01a0e703-4c27-74e2-bf77-997e1879f967只读逐9内容/权利范围核定，旧turn01a116f0已completed、notLoaded、无新研究运行证据。合同method9-owner-qualification-contract.json；write_paths空，无新实验或D真实输入，root归档与之并行。当前ready未派发，不重复theory39或36索引。
+
+## 账本归档远端完成、九份方法接续与25元数据只读并行 2026-10-08T19:25:53.937743+08:00
+
+- checked_coordination_sha=9efd5049177bcfa3677fb8edc0616a383247a4ea；中控账本报告/raw/验收等60净文件在codex/research-direct-20261008@df36bfbab7ab1a3f621e812dd385eec71832d456逐字远端核，50人工raw共326978字节；主登记633、独立分支212，旧条目保留。第一序列化误用indent2造成多余格式差异，普通后继恢复原indent1，净登记仅11新增行，未重写历史。
+- 原technicalowner只读9已完成turn01a11b3c-698d-7a91-bcaa-a9dbdc8fc9bb/cursor:2：9份均自有方法文字，旧withheld不覆盖这9原件；39458字节/SHA再核。接受只限原字节、不包含链接原行情或策略全文，不解除科学用途限制。
+- 后继contract method9-publication-contract.json给原theoryowner在既有隔离安全分支补9准确原件及本阶段证据，原主树只读，definitions/registry/INDEX不改；将缺件36减9=27，需实际推回验收。
+- 并行contract metadata25-owner-qualification-contract.json给原technicalowner只读核另22计算元数据+3来源审核，写范围空；9不重审、2逐观察资料不放行。各文件权利/含真实逐行资料独立判断，不能推定命名metadata即可发布。当前2合同ready待派发。
