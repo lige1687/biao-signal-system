@@ -1,3 +1,13 @@
+## V9 learning-start
+
+- task-id: trend-trading-video；2026-10-08T23:25:02.483279+08:00；checked_coordination_sha: ea0c1504d2ec694c199e410dacdb7508f2c32fa4；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active；用户提供两条xilo帖子并明确授权总结沉淀及发布语雀。范围仅新docs/ops/media/trend-trading-60s-20261008/xilo-learning/正文/证据/发布状态，以及本项目视频skill参考。不改成片或系统、不安装或开通服务。基线609cf2ae5edf0ca1dd4415ac3445790337eaf82d。
+- 证据：X网页403，浏览器超时，Jina超时；已读注明相同原帖URL的两篇转载，未当直接原帖和完整演示。有限方法对照，非效果实验。语雀CLI未配置token，已问知识库链接；不写已发布。
+- 自身范围与中控无重叠；不碰共享registry/INDEX，文档是用户要求的制作操作手册，发布整体任务保持待恢复直至访问可用。
+
+
+---
+
 ## V9 full-delivered
 
 - task-id: trend-trading-video；2026-10-08T23:18:54.296726+08:00；checked_coordination_sha: 4e639cdf41e2de02d37182613dc932b7cf546275；已读 COORDINATION.md、自身与 research-dispatch-controller。
