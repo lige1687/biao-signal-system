@@ -65,3 +65,14 @@
 - 恢复与私有证据：/Volumes/win+mac通用/个人资料归档/2026-10-08-第五批-210009；远端只小实现/规则/安全摘要，无个人原件/数据库/凭证/大日志。
 - 失败保留：zsh临时文本因ENOSPC在任何源删除前失败，改外盘执行；首次Ruff15格式项修正、后验通过，未弱化测试。模拟挂载不冒充真实拔盘验证，容量预算不是硬配额，强制断盘竞态限度见md。
 - 收尾：本轮所有准确已授权实现、清理和必要验证交付；没有运行中后台实验或待删原件。之后的新实验先核空间和对应原合同；正在运行与冻结路径继续保护，尚未满足内盘5GiB余量，不能假称新实验已获启动条件。scope_released=true，仅本轮新增实现/说明与AGENTS新增块；自身恢复记录/协调/进度继续由本owner维护。
+
+## 参数缩写漏拦截限定修复 2026-10-08T22:04:50.799821+08:00
+
+- status: active；checked_coordination_sha: f83345b7c6414e1066f2498e570115a4966be653；checked_at: 2026-10-08T22:04:50.799821+08:00；已读COORDINATION1.1、自身、research-dispatch-controller（含限定修复末节）、daily-trading-system-audit、classic-factor-research、theory-workflow-system-increment相关记录。中控明确原owner修复，其他负责人只独审不写此范围；root唯一本记录及以下准确路径写者。
+- 基线：原成果428dd19607ecc75cbe9f59e5e2fe3018c53dd9fd，原分支最新进度8dd49d0f2733701ce17dfc964eeb738a94c3f685。原独审已确认真实run_factor_evidence_reliability.py的--repo-r=/different绕过完整旗标检查；只有参数解析反例，0真实错盘输出。
+- 准确写范围：src/lei_signal/research/output_storage.py；tests/unit/test_research_output_storage.py；tests/integration/test_research_output_routing_cli.py；必要docs/ops/research-output-storage.md说明及自己的docs/ops/work-progress/mac-local-storage-cleanup.md。本轮不改AGENTS/策略配置/10个原CLI/冻结合同/registry/INDEX。
+- 验收：实际注册解析器能接受的输出、替代根目录、只读模式相关缩写（等号/分隔值）在建目录和启动前拒绝；合法完整参数保持。保留旧反例、原25项及针对回归，旧10CLI逐字保护。只做小合成测试；不清理、迁移、下载、真实科研、拔盘或停止他人进程；内盘不足5GiB不降低要求。
+- 技术层：仅研究可靠存储/复现；两权威策略源SHA与已批准指纹一致，交易/科学语义及预算不变。资源入口已核4available；恢复证据放既有外盘第五批output-argument-repair，测试临时文件同处，不写本机大文件。
+- 下一步：准确缩写检查与回归→必要25原检查及静态质量→原分支普通push/fetch逐字读回→交付中控复核。无需重做已封存清理或实验。
+
+- 登记首次普通push因中控新记录被拒；已fetch并读新中控末节，本记录未变，当前 checked_at: 2026-10-08T22:05:37.130039+08:00。按新基线只重建自身准确记录，未强推、未改共享源码或其他任务。
