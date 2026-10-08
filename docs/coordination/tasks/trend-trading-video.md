@@ -1,3 +1,14 @@
+## V9 v14-start
+
+- task-id: trend-trading-video；2026-10-09T00:13:20.815561+08:00；checked_coordination_sha: 7fb1eb96832ac6d21491733291b8fe655b351942；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- V13 completed且获用户认可。成果codex/trend-film-v13-20261008@dce4520b26b10a512a8731b187afda1a49d679e4，准确路径已读回。60.01秒实际完整播放ended=true/error=null，媒体无失败、独立字幕轨提示，render157.651秒。用户新增“在这个基础上多产生几分钟，讲清楚趋势交易的历史”，进入V14约240秒长版。
+- active V14；基线dce4520b26b10a512a8731b187afda1a49d679e4，成果分支codex/trend-history-long-v14-20261009。唯一范围新v14/、自有work-progress、Skill staged-workflow.md与continuity-and-efficiency.md；复用已批风格素材，新增事实绑定公开来源；不改V13成片、不做收益实验、不新语音、不发布。
+- 核自身和中控无重叠，COORDINATION.md规则已读。本轮史料核对是制作内容的有限补充，由视频工作流保留source map，无另立研究控制器或registry。最多6次定向来源工具请求，无批量新数据，无付费。计划外盘3GiB、本机4MiB，经固定盘预检。周限额起点沿用50%累计，新增片准确消耗未知。
+- 验收240秒1080p实际渲染、声音及解码、每章和转场抽帧、网页完整播放。风格延用用户认可；长版阅读节奏待用户验收。无品牌、无旁白、无真实行情、自有系统不入片。
+
+
+---
+
 ## V9 v13-start
 
 - task-id: trend-trading-video；2026-10-08T23:54:59.669303+08:00；checked_coordination_sha: 49ca68cd99d412694158846ba069c7ffc1748fe1；已读 COORDINATION.md、自身与 research-dispatch-controller。
