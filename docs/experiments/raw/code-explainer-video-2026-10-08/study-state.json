@@ -1,0 +1,25 @@
+{
+  "question": "Which tutorial methods create reusable code explainer videos, demonstrated on trend-school history?",
+  "mode": "research",
+  "target": "60-second no-narration history video plus reusable project skill",
+  "baseline": "V5 dark real-ETF explainer",
+  "scope_change": "User explicitly cancelled real case and added extra tutorial",
+  "allowed_actions": "Read public videos; reuse local dependencies; create project skill/media/report; no paid service, publication or deletion",
+  "source_attempts": 11,
+  "source_failure": "MCP faster-whisper absent; vision unavailable",
+  "asr_fallback": "existing v4 MLX model reused; four full transcriptions, imperfect names/tail hallucinations",
+  "core_batch": "10-second pilot then 60-second film",
+  "status": "completed",
+  "evidence": "supported for workflow; subjective quality pending",
+  "source_files": {
+    "docs/experiments/raw/code-explainer-video-2026-10-08/extra-source.json": "fcbdf344b61e17528183ee39679661de4e3c54ac0405a1ca48a730633b0d91a2",
+    "docs/experiments/raw/code-explainer-video-2026-10-08/main-source.json": "0159e99890f90a0f866ac4620b625592055e9e99b926d025041756dd20436ee9",
+    "docs/experiments/raw/code-explainer-video-2026-10-08/remotion-source.json": "daaf09ec577f37b53522820db715c1144c1788045b9abaa81b192a0900e4792d",
+    "docs/experiments/raw/code-explainer-video-2026-10-08/animation-source.json": "177a2ce73bbfb9729d18e732a6647f97ada9db02c5cb489e04367ad55ea93c52"
+  },
+  "skill_check": "format passed; valid timeline accepted; out-of-range, overlap, invalid header rejected",
+  "extra_verification": "One existing Livermore page re-open to verify unusual URL is valid, not broader search",
+  "user_quality_acceptance": "pending",
+  "main_registration": "634 to635, preserved, readback passed",
+  "result_branch": "codex/code-explainer-video-20261008"
+}
