@@ -1,0 +1,5 @@
+from pathlib import Path
+import os,json,subprocess
+v=Path(__file__).resolve().parent;r=v.parents[4];o=Path(json.loads((v/'storage-plan.json').read_text())['output']);b=v.parent/'v7/studio/node_modules/@remotion/compositor-darwin-arm64';env=os.environ.copy();env['PATH']=str(Path.home()/'.local/bin')+':'+str(b)+':'+env['PATH'];env['TMPDIR']=str(o/'tmp');scripts=Path.home()/'.codex/skills/ffmpeg-skill/scripts'
+for name,file,args,log in [('loudness','trend-history.mp4',['-I','-18','--tp','-1.5','-o',str(o/'trend-history-final.mp4'),'--json'],'loudness.json'),('check','trend-history-final.mp4',['--platform','custom','--max-duration','60.1','--aspect','16:9','--lufs','-18','--content','--json'],'check-final.json'),('look','trend-history-final.mp4',['--tiles','4x3','--width','2560','-o',str(o/'contact-sheet.png'),'--json'],'look.json')]:
+ p=subprocess.run(['python3',str(scripts/(name+'.py')),str(o/file),*args],env=env,cwd=b,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(o/log).write_bytes(p.stdout);print(name,p.returncode,flush=True);assert p.returncode==0
