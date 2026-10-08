@@ -2,7 +2,8 @@
 
 - 更新：2026-10-08T12:43:06.000736+08:00；checked_coordination_sha=0b41e0b5ff0a8218b89c195a15873e2d2dd42586。已读COORDINATION.md及research-dispatch-controller、risk-shape-information、report-library-integration-20261008；代码300114/302132的相关任务登记检索无命中，未发现同写任务。
 - **首次v4-direct心跳已实际产出：** 2026-10-08T04:33:16.952Z触发后，root完成海通2024年17条停牌占位核验，2份发行人来源、18项检查，发布748716dc7de72afc7ffa604fee6fd0a6223d8edc并读回10条文件。前三报告合计14份原件、60项检查；B01海通36条加重工17条，共53条占位已解释，非其他批次305条全量。
-- **当前接续：** 直接核原方案中的300114→302132及2025-02-17生效假定，固定原代码只读。新增范围docs/experiments/raw/runze-security-identity-2026-10-08/及docs/experiments/runze-security-identity-qualification-2026-10-08.md；registry/INDEX继续root单写，只增该报告。计划约3次来源操作、5MiB上限、保留512MiB空闲；旧预算不重开。正式来源核完即收尾，不计算收益。
+- 命名纠正：第一次检索误加“润泽”未被用作事实；正式原件确认对象为中航电测/中航成飞。保留失败及原raw路径，尚未创建的报告路径改为avic，不移动既有证据。
+- **当前接续：** 直接核原方案中的300114→302132及2025-02-17生效假定，固定原代码只读。新增范围docs/experiments/raw/runze-security-identity-2026-10-08/及docs/experiments/avic-security-identity-qualification-2026-10-08.md；registry/INDEX继续root单写，只增该报告。计划约3次来源操作、5MiB上限、保留512MiB空闲；旧预算不重开。正式来源核完即收尾，不计算收益。
 - root不再派发，前三已完成单元不重跑；未接入研究引擎、未修主行情、未拟合/标签/交易。全部8目标未完，D—MAE六原件/原SHA/独审及阶段条件、原价快照和完整历史成员等依赖保持。403和automation-2暂停，不切主树或写仓外。
 
 ## 当前直接执行规则
@@ -133,8 +134,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "0b41e0b5ff0a8218b89c195a15873e2d2dd42586",
-  "checked_at": "2026-10-08T12:43:06.000736+08:00",
+  "checked_coordination_sha": "a51904547f94235bb9ee6785a247c16012e1709f",
+  "checked_at": "2026-10-08T12:44:48.053072+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -271,7 +272,7 @@
         "docs/experiments/raw/research-dispatch-controller-2026-10-07/thread-state.json",
         "docs/coordination/tasks/research-dispatch-controller.md",
         "docs/experiments/raw/runze-security-identity-2026-10-08/",
-        "docs/experiments/runze-security-identity-qualification-2026-10-08.md",
+        "docs/experiments/avic-security-identity-qualification-2026-10-08.md",
         "docs/experiments/registry.json",
         "docs/experiments/INDEX.md"
       ],
@@ -565,7 +566,7 @@
     "original_authority": "Original goal4 identity/permanent-security qualification; existing qualification-plan line64 and source-manifest explicit_code_rename_assumption_in_old_preparer.",
     "write_paths": [
       "docs/experiments/raw/runze-security-identity-2026-10-08/",
-      "docs/experiments/runze-security-identity-qualification-2026-10-08.md",
+      "docs/experiments/avic-security-identity-qualification-2026-10-08.md",
       "docs/experiments/registry.json",
       "docs/experiments/INDEX.md"
     ],
@@ -581,15 +582,17 @@
       "price_repairs": 0
     },
     "acceptance": "Official source bytes/hash, announcement and effective time, exact mapping and equity continuity, compare fixed preparer bytes; no inferred439-universe identity completeness.",
-    "checked_at": "2026-10-08T12:43:06.000736+08:00",
-    "checked_coordination_sha": "0b41e0b5ff0a8218b89c195a15873e2d2dd42586",
+    "checked_at": "2026-10-08T12:44:48.053072+08:00",
+    "checked_coordination_sha": "a51904547f94235bb9ee6785a247c16012e1709f",
     "read_task_ids": [
       "research-dispatch-controller",
       "risk-shape-information",
       "report-library-integration-20261008"
     ],
     "conflict_decision": "No task record mentions either code, latest related owners unchanged; no active overlap. Root retains temporary registry/INDEX window for next bounded report.",
-    "free_bytes_before": 2774487040
+    "free_bytes_before": 2774487040,
+    "display_name": "中航电测至中航成飞代码身份资格",
+    "naming_correction": "Initial unverified runze search/name was wrong; exact codes300114/302132 unchanged. Existingraw path retained without rename, unused reportpath corrected before creation. Failure in request-ledger."
   },
   "controller_owner": "01a116c7-3700-7062-a6c6-53af00ef60a0",
   "direct_execution_completed_units": [
