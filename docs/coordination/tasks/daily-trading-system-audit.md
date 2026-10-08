@@ -191,3 +191,13 @@
 - 实际读回本机automation-3/4/5/6配置：均heartbeat、ACTIVE、target_thread_id=本聊天；11:35信息、14:40已确认条件复核、09:10/17:10关键新变化、周日20:00实质周复盘。工具view只渲染卡片，因此另读真实toml核字段。原配置未写，未建重复任务，未改通知策略。配置证明安排存在，不证明所有未来触发或手机送达。
 - 当前准确范围仅自身协调任务与data/cache/gpt-system-integration/私有渠道偏好和状态页；不修改产品源码、规则、交易/计划/持仓/生产库、仓外配置。不在已授权日报之外制造新提醒，资料不足仍报缺项。
 - 验收：渠道偏好写回、四配置前后SHA一致、状态页不再要求ChatGPT登录。代码仍5be2684e7612c1a7fe90ea1854d3d899cabfccaf及48项相关有效检查，未重跑已通过测试。实际下一批14:40交付继续按原任务记录核验。
+
+
+## 上个交易日博主窗口修正登记
+
+- checked_coordination_sha: 4414de08bed11ebda526b5cc6fff08548369be09；checked_at: 2026-10-08T13:25:36.460669+08:00；已读COORDINATION1.1、自身及research-dispatch-controller最新2025成员公告范围，无同路径冲突，唯一写者/root。
+- 用户纠正B站应取上个交易日而非昨天。原briefing按自然昨日且抓取回看3日，长假后会遗漏；本轮服务策略执行/复盘的消息叙事层，不改信号或行情资格。两份策略实际SHA与已确认值相同。
+- 准确范围：src/lei_signal/portfolio/briefing.py、src/lei_signal/integrations/gpt_context.py、对应两个unit测试、configs/portfolio-briefing-calendar.v1.json（只供视频窗口）、docs/ops/portfolio-chat-briefing.md、自身work-progress、原raw目录blogger-window-*回执；automation-3/4原prompt仅日期口径更新，保留日程/目标/通知偏好。不改生产newsfeed模块/交易日历/数据库或其他任务源码。
+- 年内休市资料采用已读上交所2026公告（2025-12-22），记录来源、发布时间、覆盖区间与窗口；不把周一至周五冒充节假日历。未覆盖/坏来源不回退昨天；按北京时间目标日00:00—24:00过滤。默认A股日期用于这五位博主视频，不推出海外/港股休市结论。
+- 抓取层在隔离新闻库回看至目标日并读取既有有限视频列表，不受旧水位误排除；仍零模型调用/生产新闻写入。结果保留来源故障和有限列表覆盖，未取得不说无更新。新字段明确上个交易日，旧字段仅兼容并标语义，旧包不冒充新窗口。
+- 验收：普通工作日、周一、长假后、补班周末、跨时区、覆盖外/坏日历、旧包兼容、长窗口取数及来源失败；本机新包实际窗口与自动化读回；相关测试/归置。源码仅自身准确路径发布至现有codex/gpt-system-integration-20261008，保留他人脏改及main不动。
