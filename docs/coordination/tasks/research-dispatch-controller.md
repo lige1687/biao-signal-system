@@ -1,20 +1,22 @@
 # LEI 八目标研究调度｜当前快照
 
-- 更新时间：2026-10-08T11:20:17+08:00（Asia/Shanghai）
+- 更新时间：2026-10-08T11:41:50+08:00（Asia/Shanghai）
 - task-id：research-dispatch-controller；状态：active。研究调度：[中控对话](codex://threads/01a116c7-3700-7062-a6c6-53af00ef60a0)；本文件唯一Git写者：[协调对话](codex://threads/01a10051-4db1-7490-b40f-c13243767fc6)。原负责人文件仍由各自维护。
-- 最新读取协调分支：`e0018e48ceb0d91f7407fc63328757c1dec70b7c`；已读 `COORDINATION.md`、本任务、`risk-shape-information`、`classic-factor-research`、`research-evidence-catalog/report-library-integration-20261008`。本次仅同步已应用的定时接续规则及回执，唯一写入路径是本中控任务文件；资料三键试点已有限验收，报告库单报告登记已接受且目录负责人明确释放窗口。根工作区登记簿620→621及索引增量仍仅本地、未推送；独立成果分支登记簿199→200已推，不等同于发布完整根级登记簿。
+- 最新读取协调分支：`cdc367e5a6512bfa01ab507c475befeb6f20d307`；已读 `COORDINATION.md`、本任务、`risk-shape-information`、`classic-factor-research`、`research-evidence-catalog/report-library-integration-20261008`。本次同步v3并行／串行规则、首次实际定时巡检及已验收状态修正，唯一写入路径是本中控任务文件；资料三键试点已有限验收，报告库单报告登记已接受且目录负责人明确释放窗口。根工作区登记簿620→621及索引增量仍仅本地、未推送；独立成果分支登记簿199→200已推，不等同于发布完整根级登记簿。
 - 原始目标：把八项LEI研究与工程成果做成可定位、可复算、可审查的接续链。当前验收按问题、输入、合同、合成检查、独审、真实效果与归档逐项看；不能用某一阶段的“交付”表示整条链已完成。适用规则为 `COORDINATION.md` 1.1 和各执行任务冻结规范。
-- 最新已推协调提交（编辑前）：`e0018e48ceb0d91f7407fc63328757c1dec70b7c`；Git只存目标摘要和成果索引，不表示仓外系统待升级数据库已写入。工作分支研究成果以各负责人准确提交为准，尚未推送的原件明标仅本机。
-- 较上一版新增：定时接续规则已由中控应用并核保存配置；本次把完整规则和验收限制同步为Git恢复来源。保留30分钟、ACTIVE及原线程；未来定时执行尚未观察。上一阶段已完成修正上一版首屏和任务登记的过期“active／继续用剩余2次请求”叙述，使其与已验收回执一致。资料三键阶段在 `codex/stock-data-qualification-20261008@60a465b8b4064de567e24a96642d26ff5e841d30` 有限通过，4/6次请求、153482字节，主价格修复0；余2次是未用额度，不再用于本批。报告库四报告阶段提交 `19508745c7160bc07f5bbdefe9ba52ab39a5199e`，随后单报告登记最终提交 `3ceec29d9e5e2e4d14e94905e99c12531257524d`、回执SHA-256 `726ddfdb577311f24e87a72fc438a4605e7084e5625e467c47384cde3bde9e5c`，共20份来源文件、219071字节，负责人已释放写入窗口。旧复权依据及历史成员资格未证，六份D—MAE真实原件仍缺；原目录报告61处本机绝对路径及历史失败继续保留。
+- 最新已推协调提交（编辑前）：`cdc367e5a6512bfa01ab507c475befeb6f20d307`；Git只存目标摘要和成果索引，不表示仓外系统待升级数据库已写入。工作分支研究成果以各负责人准确提交为准，尚未推送的原件明标仅本机。
+- 较上一版新增：首次定时触发已实际运行并核8/8负责人，发现的人工恢复报告过期状态已由原负责人修正、推送并验收。同步完整v3规则：输入齐备、预算允许且无依赖／同文件冲突的必要任务并行；依赖成果按原合同验收并保存指纹/commit后串行；共享登记唯一写者串行。当前科研ready队列为0，真实实验派发及运行停滞场景尚未遇到。已验收三键、报告库和人工恢复阶段不重开，具体外部资料依赖保持。
 
-## 当前定时接续规则（2026-10-08T11:20:17+08:00）
+## 当前定时接续规则（2026-10-08T11:41:50+08:00）
 
-- 本轮范围仅本文件，唯一写者为协调会话；已读取 `COORDINATION.md`、本任务、`risk-shape-information`、`classic-factor-research`、`research-evidence-catalog/report-library-integration-20261008`，`checked_coordination_sha=e0018e48ceb0d91f7407fc63328757c1dec70b7c`。他人最新状态已保留，没有同文件并写冲突。资料负责人首屏现已改为completed；八目标既有验收与外部依赖保持。本轮不新增研究预算或实验。
-- 来源为主仓 `docs/experiments/raw/research-dispatch-controller-2026-10-07/thread-state.json` 的三个指定字段：`heartbeat_policy`、`automation_configuration_revision_20261008`、`heartbeat_cycle`。完整JSON仍在原负责人工作区；下方是可从Git恢复的完整执行规则和必要回执，不是整个本地状态副本。
-- 规则版本 `2026-10-08.v2`，状态 `applied_verified`；完整instructions的UTF-8 SHA-256 `18018dfdc09f8a231f488888ebaed21dc2b55ca005f4af1cffb0d8585ee79a4c`。本次重新计算一致。中控保存原生提示SHA-256 `3446cd6c74aa14c5aa9bacc5599e11840d6e3d6d75d6cb00341c9dfadac8cf35`，本次也重新计算一致；应用及原生逐字读回时间 `2026-10-08T11:19:56.161075+08:00`，回执记载提示和保留字段均匹配。
-- 原生定时任务 `leisignal`，名称“LeiSignal 研究调度与回调续接”，保留每30分钟、`ACTIVE`、`heartbeat`及原线程 `01a116c7-3700-7062-a6c6-53af00ef60a0`；通知设置保留原默认，`automation-2`仍暂停。本协调会话仅核回执和文本指纹，没有再次修改原生定时配置。
-- 人工验收是六种指令场景审阅及一次8/8负责人短快照。回执时间 `2026-10-08T11:19:56.161075+08:00`，输入齐备且获准的新研究工作为0，运行任务停滞计数为0；原阶段已完成，剩余科研交付仍等指名原件或资格。运行中某owner不再导致提前结束全轮；有可执行必要工作须实际派发并核启动；新交付验收后接续；同一运行任务连续两次成功巡检无新工具/产物才诊断；无变化外部依赖不重复通知或提交。当前只有保存配置和人工状态核验通过，未来定时触发、实际派发及停滞诊断行为尚未观察，不能据此宣布全部研究完成。
-- 本次检查：三个指定字段可解析、规则及原生提示指纹一致、当前任务状态保留、单文件差异与JSON格式核查；科研测试、数据请求、拟合、标签均未运行。真实成本未知。下次恢复：先读以下完整规则，再读取原负责人JSON最新恢复字段与cursor，按实际输入及预算逐项判断。
+- 本轮仅写本文件，使用已有仓内隔离树。已读 `COORDINATION.md`、`research-dispatch-controller`、`classic-factor-research`、`risk-shape-information`、`research-evidence-catalog/report-library-integration-20261008`；`checked_coordination_sha=cdc367e5a6512bfa01ab507c475befeb6f20d307`。原负责人修正已验收后才执行本次中央同步；没有同文件冲突，其他负责人文件保持只读。
+- 本次按字段读取主仓 `docs/experiments/raw/research-dispatch-controller-2026-10-07/thread-state.json` 的 `heartbeat_policy`、`parallel_serial_dispatch_20261008`、`automation_configuration_revision_20261008.first_scheduled_verification` 及 `heartbeat_cycle`最新followup。完整本地JSON不随本次上传；以下完整规则与必要回执是Git恢复来源。
+- 当前完整规则版本 `2026-10-08.v3`，UTF-8 SHA-256 `5c3bb991c1d4cc024250f2a2f7cb14b317b021083b85b3f29fbd8d73893b50c8`，本次重新计算一致。原生提示SHA-256 `3446cd6c74aa14c5aa9bacc5599e11840d6e3d6d75d6cb00341c9dfadac8cf35`保持不变，提示按字段加载最新规则；定时任务 `leisignal` 保留30分钟、`ACTIVE`及原线程 `01a116c7-3700-7062-a6c6-53af00ef60a0`。v3本地规则已保存，本次发布其Git副本；本协调会话没有再次改原生配置。
+- 首次实际定时触发：`2026-10-08T03:23:46.716Z`，北京时间2026-10-08T11:23:46.716+08:00；核验时间 `2026-10-08T11:27:07.656647+08:00`。该轮使用v2规则，8/8负责人已核，原负责人有界状态修正已实际派发并核工具启动；修正提交 `cdc367e5a6512bfa01ab507c475befeb6f20d307` 已远端验收。当前v3增加依赖调度规则；首次触发不能冒充v3运行验证。
+- `classic-factor-research`报告整合已完成，不再等待重复登记：远端修正仅新增顶部14行，保留旧历史，文件SHA-256 `9e8d2b6c8613381d717888c44654bc2e1ec3fc466db91b7eba2c3a9367a81e08`，本次读Git字节重算一致。人工恢复报告在成果分支提交 `3ceec29d9e5e2e4d14e94905e99c12531257524d`唯一登记；完整根级621项登记表未整表发布。真实六原件及阶段条件仍缺。
+- 最新followup `2026-10-08T11:41:32.284239+08:00`：科研ready队列0；已并行完成只读回调验收与调度规则更新，验收后串行执行本次唯一中央Git同步。目标1/3/6等六份原件及原合同阶段条件；目标4独立等历史调整快照/锚点及官方完整成分；目标5等合格输入/结果及账户使用所需风险约束；目标7独立等准确Qlib原输入/回执包；目标2现有发布已验收，云产物按单项依赖；目标8下个实质任务前测容量。缺件不能一概阻塞独立任务，未用封存额度不重开。日报原对话的BIAO简报属于其独立用户范围，仅观察，不计本控制器新派LEI实验。
+- 验收边界：已核实际首次触发、8/8巡检、有界状态修正派发/启动及远端验收；真实实验派发、运行停滞诊断和v3实际调度场景尚未遇到。原合同、预算、暂停、失败与真实输入条件保持，配置/文档修复不是科研计算或全部目标完成。首轮只读登记查找断言失败因登记表按路径作键，后续按准确键核验通过，失败保留在源回执。真实成本未知。
+- 历史：v2于2026-10-08T11:19:56.161075+08:00应用后，11:20:17的Git快照尚未观察后续定时执行；该当时事实已由上方首次触发回执更新。v2规则指纹 `18018dfdc09f8a231f488888ebaed21dc2b55ca005f4af1cffb0d8585ee79a4c`，原副本见 `eb3369938bb259ccdf7468fc5fece105904b0416`。本轮检查只限指定字段、完整规则指纹、已验收修正字节和中央状态一致性；数据/拟合/标签/科研测试均0。
 
 以下instructions按来源逐字保存（指纹不包含代码围栏）：
 
@@ -24,6 +26,8 @@
 每次唤醒先按字段读取 /Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-dispatch-controller-2026-10-07/thread-state.json 的最新恢复位置、next_actions、累计预算/失败和已存cursor；只读进度文件的最新增量，再fetch并读coordination/lei当前摘要及本轮相关owner记录。历史阶段不是固定优先任务；已验收项不重派。用带cursor的wait_threads短快照核实际负责人；若返回未覆盖所有目标，不把遗漏项当空闲。实际输入变化再核对应缺件，不每轮重读全部历史、重复搜索或重跑检查。
 
 本次调度须有明确落点：有新交付，先核原合同/输入指纹、真实产物和关键数值，再验收或向原owner派有界修复；有已授权、输入齐备、预算内且未重复的必要工作，就先登记准确写入范围并核远端，再在原可打开对话实际派发并核启动。八目标逐项判断依赖，某一项缺件不能阻塞独立工作。全部已派任务空闲时必须核剩余交付，不能只写“下一步”。某owner运行中时，只跳过该owner的重复派发，保存其turn/cursor并核停滞计数，继续检查其他owner。完成全部相关owner检查、可执行工作派发、新交付验收与必要接续、两轮停滞诊断及heartbeat_cycle记录后，再结束本次巡检；执行留在原对话，中控不长时间轮询。遇到验收后的下一必要步骤，本轮实际派出并核启动再结束。
+
+调度顺序按依赖和写入范围决定：每轮列出尚未验收的必要交付及其前置输入、原owner、已用/剩余预算、准确写入范围。原授权内、输入齐备、预算允许且与彼此无依赖/无写入冲突的任务，在原负责人对话并行派发并逐一核启动；同一owner已运行则先完成其当前任务，不重复追加相同工作。有依赖的任务只在所依赖成果按原合同验收、准确输入指纹/commit已保存后再派，不能以“已派发/运行/交付”代替前置验收。共享registry/INDEX等同一路径由唯一写者串行处理；缺件仅阻塞依赖它的任务。资料未齐不能为并行而重做封存工作、拆出没有验收价值的任务或扩大预算。每轮回执记录并行组、串行依赖、当前具备执行条件的任务，以及未派发的具体原因。
 
 在同一thread-state.json维护最近一次heartbeat_cycle回执：检查时间、协调SHA、任务状态/turn/cursor、实际动作或无动作原因、未完成项具体依赖和恢复条件、最近实质进展时间、连续无进展轮数及已通知的问题标识。检查、派发、运行、交付、验收分开。有可执行项却未派发或派发失败，当轮视为调度异常，查明并修复可解决原因，不能静默记“正常”。停滞计数仅适用于同一运行任务的成功巡检，已完成、明确外部依赖、未覆盖或工具读取失败不计作研究停滞；同一运行任务连续两次成功巡检都无新工具或产物进展，读一次近期失败/输出定位，不凭耗时宣布失败或重复开新任务；可解决就有界修复，否则一次性说明具体卡点。相同失败无新条件不原样重试。明确外部依赖且没有独立可执行项时允许安静等待，状态不变不重复问用户、不反复发通知或新增Git提交。只在成果、真实失败、首次关键阻塞或需用户决定时通知；若工具不可达或额度不足，保存可保存的恢复状态并说明，不能假称后台推进。
 
@@ -41,7 +45,7 @@
 |3 D—MAE机会风险|技术线：合成实现阶段完成；真实X/Y均为0|原76案例、D值等六份原件仍缺；专用实现的人工边界已由目录对话独立核验，限定通过。案例、资格、阶段批准齐备后才可绑定真实输入和一次标签。|
 |4 个股资料资格|[数据对话](codex://threads/01a101c1-ac35-70a3-8ecd-4a6179bb99ad)：固定三键试点已 `completed`，中控仅有限接受资料资格；600705排除证据保留，600837三日原始价与B02一致但历史成员资格未证|本批封存，已用4/6次请求、153482/20971520字节；剩余2次不再花。旧复权快照/锚点、官方完整历史成分名单及P26原输入仍缺，价格修复0；只有这些输入或前提改变才重评，不能补主价格。|
 |5 融合、仓位与退出|中控保留依赖，尚未启动新计算|待可靠特征和合格数据，先做同风险的简单基线；真实风险约束尚未确认。|
-|6 原生研究流程|[流程对话](codex://threads/01a0e6d5-4bcf-7bd3-82e4-4961c963d20e)：R1/R2返修29项非作者复验通过；人工接入有界验收完成；49项依赖中30项同SHA远端可取、19项已按原字节快照；映射与交接资格核验完成。纯Git人工恢复节点现已通过并归档；真实数据/因子效果仍blocked，六份冻结原件缺。|恢复报告 [native-workflow-synthetic-recovery-2026-10-08.md](https://github.com/lige1687/biao-signal-system/blob/fda8a4895b78d8e5a125cf8af405b11c736531b6/docs/experiments/native-workflow-synthetic-recovery-2026-10-08.md) 位于 `codex/native-workflow-pure-git-recovery-20261008` @ `fda8a4895b78d8e5a125cf8af405b11c736531b6`，报告SHA-256 `990e3ebaf59d8ac13a0bd60929a84715bff46b676839a06e0dcc50d7b4717c6c`；最新README SHA-256 `497e589b3c2024205c5432a24acf30951cf49c23bdcc226c87d153826fea29da`。快照分支 `codex/native-workflow-baseline-20261008` @ `dbd86bccf9ffe9ea9617a484bf8b96825880fb7d` 已含原19项及准确CLI版本（4889字节，SHA-256 `eb38c3ce70a4331026ab1dc5d8f71eb5f2e1cbffda59ceac4abbaffb15820c52`）；原49项缺CLI及首轮失败均保留。纯Git恢复核49/49依赖和6/6实现指纹；通过manifest SHA-256 `d837ea5b3afd972e92312bbb4b9c1c9a6481c1a6aaf2d70037d2e97db69d42cc`，输出SHA-256 `009704c852a24f718c6210cf0200912bc521db4ade20943927bdee60c2449462`；现有Python 3.11.7、pytest 8.4.2下1项通过、3.40秒。该节点仅证明从多个Git来源装配并通过一个人工X→Y流程；不是恢复分支单独含全部源码，不证明108项旧环境全量同字节、洁净新机安装、真实因子/资金/线上效果。5项已跟踪源码静态版本差异仍只读核查，当前节点通过不构成推广验收。登记回执SHA-256 `2b25cae80f9351defd955e291d4fc4a80636f4b50f488af89b78ada1353d0c82`；报告已本机登记619→620且窗口释放，整份共享 `registry.json`/`INDEX.md` 尚未同步远端；10/7封存报告/登记未改。
+|6 原生研究流程|[流程对话](codex://threads/01a0e6d5-4bcf-7bd3-82e4-4961c963d20e)：R1/R2返修29项非作者复验通过；人工接入有界验收完成；49项依赖中30项同SHA远端可取、19项已按原字节快照；映射与交接资格核验完成。纯Git人工恢复节点现已通过并归档；真实数据/因子效果仍blocked，六份冻结原件缺。|恢复报告 [native-workflow-synthetic-recovery-2026-10-08.md](https://github.com/lige1687/biao-signal-system/blob/fda8a4895b78d8e5a125cf8af405b11c736531b6/docs/experiments/native-workflow-synthetic-recovery-2026-10-08.md) 位于 `codex/native-workflow-pure-git-recovery-20261008` @ `fda8a4895b78d8e5a125cf8af405b11c736531b6`，报告SHA-256 `990e3ebaf59d8ac13a0bd60929a84715bff46b676839a06e0dcc50d7b4717c6c`；最新README SHA-256 `497e589b3c2024205c5432a24acf30951cf49c23bdcc226c87d153826fea29da`。快照分支 `codex/native-workflow-baseline-20261008` @ `dbd86bccf9ffe9ea9617a484bf8b96825880fb7d` 已含原19项及准确CLI版本（4889字节，SHA-256 `eb38c3ce70a4331026ab1dc5d8f71eb5f2e1cbffda59ceac4abbaffb15820c52`）；原49项缺CLI及首轮失败均保留。纯Git恢复核49/49依赖和6/6实现指纹；通过manifest SHA-256 `d837ea5b3afd972e92312bbb4b9c1c9a6481c1a6aaf2d70037d2e97db69d42cc`，输出SHA-256 `009704c852a24f718c6210cf0200912bc521db4ade20943927bdee60c2449462`；现有Python 3.11.7、pytest 8.4.2下1项通过、3.40秒。该节点仅证明从多个Git来源装配并通过一个人工X→Y流程；不是恢复分支单独含全部源码，不证明108项旧环境全量同字节、洁净新机安装、真实因子/资金/线上效果。5项已跟踪源码静态版本差异仍只读核查，当前节点通过不构成推广验收。登记回执SHA-256 `2b25cae80f9351defd955e291d4fc4a80636f4b50f488af89b78ada1353d0c82`；报告已在远端隔离报告库唯一登记，原本机619→620登记为历史；完整根级621项登记表仍未整表发布，窗口已释放；10/7封存报告/登记未改。
 |7 外部增量／独审|[外部对话](codex://threads/01a0cd21-07e5-7163-8f4e-72a4d5ebc32e)：新原生流程接入的R1/R2局部返修复验已通过；仅人工流程边界验收；资料/目录先前有限审查保持|[资料报告](https://github.com/lige1687/biao-signal-system/blob/a6be33c2493e982451e5c5b3646c102553b43f6b/docs/experiments/stock-data-qualification-2026-10-07.md)、[目录报告](https://github.com/lige1687/biao-signal-system/blob/e869bdce98ac7289993b42ba50661a1a1bcf878d/docs/experiments/research-evidence-catalog-2026-10-07.md)与[旧纯算式独审](https://github.com/lige1687/biao-signal-system/blob/e869bdce98ac7289993b42ba50661a1a1bcf878d/docs/experiments/raw/research-dispatch-controller-2026-10-07/independent-review/d-mae-synthetic/REVIEW.md)可远端读；[R1/R2复验报告](https://github.com/lige1687/biao-signal-system/blob/415b4776db77d655cdb64e1ad07b2151a29aa44e/docs/experiments/raw/research-dispatch-controller-2026-10-07/independent-review/native-workflow/revision-b2f45151/REVIEW.md)已随独立审查分支发布；仍无真实效果或数据流程验收。|
 |8 存储与恢复|各执行人开工自测，中控汇集；持续义务|大任务前重测空间和输入输出预算；云端Library 403继续暂停，迁移和删除仍按既有授权。|
 
@@ -113,8 +117,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "e0018e48ceb0d91f7407fc63328757c1dec70b7c",
-  "checked_at": "2026-10-08T11:20:17+08:00",
+  "checked_coordination_sha": "cdc367e5a6512bfa01ab507c475befeb6f20d307",
+  "checked_at": "2026-10-08T11:41:50+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -174,7 +178,14 @@
       ],
       "scope_released": false,
       "source": "manual workflow integration and R1/R2 review remain bounded and accepted; original 49-item inventory omitted the tracked CLI entry, now corrected in snapshot branch codex/native-workflow-baseline-20261008@dbd86bccf9ffe9ea9617a484bf8b96825880fb7d (CLI 4889 bytes, SHA-256 eb38c3ce70a4331026ab1dc5d8f71eb5f2e1cbffda59ceac4abbaffb15820c52); original omission and first failed recovery preserved. Final pure-Git recovery codex/native-workflow-pure-git-recovery-20261008@fda8a4895b78d8e5a125cf8af405b11c736531b6; report docs/experiments/native-workflow-synthetic-recovery-2026-10-08.md SHA-256 990e3ebaf59d8ac13a0bd60929a84715bff46b676839a06e0dcc50d7b4717c6c; README SHA-256 497e589b3c2024205c5432a24acf30951cf49c23bdcc226c87d153826fea29da. Controller verified 49/49 dependency and 6/6 implementation fingerprints; passing manifest SHA-256 d837ea5b3afd972e92312bbb4b9c1c9a6481c1a6aaf2d70037d2e97db69d42cc; output SHA-256 009704c852a24f718c6210cf0200912bc521db4ade20943927bdee60c2449462; one specified manual integration test passed in 3.40 s on Python 3.11.7/pytest 8.4.2. This only verifies a manual X-to-Y path assembled from multiple Git sources; it does not prove the recovery branch alone contains all code, all 108 old environment files are byte-identical, clean-machine installation, real factor/fund/online effect, or full recovery. Five tracked source versions still have static differences; no broader acceptance. Report registered locally from 619 to 620, single-entry window released; receipt SHA-256 2b25cae80f9351defd955e291d4fc4a80636f4b50f488af89b78ada1353d0c82; global registry.json/INDEX.md not published as full remote state; 10/7 sealed report and entry unchanged. Six frozen real inputs remain absent, true X/V/Y zero.",
-      "gate_status": "manual_workflow_and_pure_git_recovery_node_accepted_real_inputs_and_factor_effect_blocked"
+      "gate_status": "manual_workflow_and_pure_git_recovery_node_accepted_real_inputs_and_factor_effect_blocked",
+      "current_report_registration": {
+        "state": "accepted_remote_registered",
+        "report_library_commit": "3ceec29d9e5e2e4d14e94905e99c12531257524d",
+        "owner_status_correction_commit": "cdc367e5a6512bfa01ab507c475befeb6f20d307",
+        "root_full_621_entry_library_published": false,
+        "next_step": "Only exact six frozen originals and required stage conditions can unblock real research; do not repeat report integration."
+      }
     },
     {
       "task_id": "factor-fusion-risk-exit",
@@ -466,29 +477,68 @@
     "research-evidence-catalog/report-library-integration-20261008"
   ],
   "heartbeat_configuration": {
-    "policy_version": "2026-10-08.v2",
-    "policy_sha256": "18018dfdc09f8a231f488888ebaed21dc2b55ca005f4af1cffb0d8585ee79a4c",
+    "policy_version": "2026-10-08.v3",
+    "policy_sha256": "5c3bb991c1d4cc024250f2a2f7cb14b317b021083b85b3f29fbd8d73893b50c8",
     "native_prompt_sha256": "3446cd6c74aa14c5aa9bacc5599e11840d6e3d6d75d6cb00341c9dfadac8cf35",
-    "state": "applied_verified",
+    "state": "v3_local_rule_saved_git_copy_published_with_this_commit",
     "applied_verified_at": "2026-10-08T11:19:56.161075+08:00",
     "automation_id": "leisignal",
     "cadence_minutes": 30,
     "status": "ACTIVE",
     "target_thread_id": "01a116c7-3700-7062-a6c6-53af00ef60a0",
-    "manual_validation": {
+    "future_scheduled_execution": "first_v2_scheduled_trigger_observed_and_verified; v3_runtime_and_real_experiment_or_stall_scenarios_not_yet_exercised",
+    "source_fields": [
+      "heartbeat_policy",
+      "parallel_serial_dispatch_20261008",
+      "automation_configuration_revision_20261008.first_scheduled_verification",
+      "heartbeat_cycle"
+    ],
+    "actual_cost": "unknown",
+    "first_scheduled_verification": {
+      "state": "verified_actual_trigger_inspection_and_bounded_dispatch",
+      "scheduled_at": "2026-10-08T03:23:46.716Z",
+      "checked_at": "2026-10-08T11:27:07.656647+08:00",
+      "policy_version": "2026-10-08.v2",
+      "native_prompt_sha256": "3446cd6c74aa14c5aa9bacc5599e11840d6e3d6d75d6cb00341c9dfadac8cf35",
+      "checked_coordination_sha": "eb3369938bb259ccdf7468fc5fece105904b0416",
+      "owner_coverage": 8,
+      "new_scientific_results": 0,
+      "bounded_state_correction_dispatched": true,
+      "acceptance_boundary": "Actual trigger, saved prompt/policy v2, eight-owner inspection, actual bounded state correction and its remote acceptance verified. Running-stall and real experimental dispatch scenarios not exercised.",
+      "owner_tool_start_verified": true,
+      "bounded_correction_result": "accepted_remote_verified",
+      "correction_commit": "cdc367e5a6512bfa01ab507c475befeb6f20d307"
+    },
+    "latest_followup": {
+      "checked_at": "2026-10-08T11:41:32.284239+08:00",
+      "research_ready_count": 0,
+      "dispatch_dependency_decision": {
+        "parallel_done": [
+          "read-only classic callback review",
+          "controller dispatch dependency policy update"
+        ],
+        "serial_ready": [],
+        "blocked_research": "Named external dependencies unchanged; not a blanket D-MAE block",
+        "unrelated_active_chat": "01a11721-303e-7c83-9451-c82078c9ba23 currently runs BIAO brief under its own user scope; observed only, no duplicate dispatch or claim as LeiSignal research",
+        "serial_running": [
+          "sole coordinator publishes accepted first-run/fix/policy status"
+        ]
+      }
+    },
+    "parallel_serial_rule": "调度顺序按依赖和写入范围决定：每轮列出尚未验收的必要交付及其前置输入、原owner、已用/剩余预算、准确写入范围。原授权内、输入齐备、预算允许且与彼此无依赖/无写入冲突的任务，在原负责人对话并行派发并逐一核启动；同一owner已运行则先完成其当前任务，不重复追加相同工作。有依赖的任务只在所依赖成果按原合同验收、准确输入指纹/commit已保存后再派，不能以“已派发/运行/交付”代替前置验收。共享registry/INDEX等同一路径由唯一写者串行处理；缺件仅阻塞依赖它的任务。资料未齐不能为并行而重做封存工作、拆出没有验收价值的任务或扩大预算。每轮回执记录并行组、串行依赖、当前具备执行条件的任务，以及未派发的具体原因。",
+    "classic_acceptance": {
+      "state": "accepted_remote_verified",
+      "published_commit": "cdc367e5a6512bfa01ab507c475befeb6f20d307",
+      "file_sha256": "9e8d2b6c8613381d717888c44654bc2e1ec3fc466db91b7eba2c3a9367a81e08",
+      "accepted_at": "2026-10-08T11:41:32.284239+08:00"
+    },
+    "historical_manual_validation_v2": {
       "checked_at": "2026-10-08T11:19:56.161075+08:00",
       "coverage": "8/8; omitted targets from compact batch were checked separately",
       "research_ready_count": 0,
       "eligible_running_tasks": 1,
       "acceptance_boundary": "Saved configuration verified; future timed execution and ready/stalled runtime scenarios not yet observed."
-    },
-    "future_scheduled_execution": "not_yet_observed_after_update",
-    "source_fields": [
-      "heartbeat_policy",
-      "automation_configuration_revision_20261008",
-      "heartbeat_cycle"
-    ],
-    "actual_cost": "unknown"
+    }
   }
 }
 ```
