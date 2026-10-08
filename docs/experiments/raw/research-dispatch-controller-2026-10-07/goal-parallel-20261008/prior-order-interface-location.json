@@ -1,0 +1,47 @@
+{
+  "at": "2026-10-08T19:54:01.907518+08:00",
+  "reviewer": "/root/engineering_readiness_v5",
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "checked_scope": "work-progress and experiment top-level reports matching reservation/partialfill and their referenced exact small source; not all repository/history/cloud",
+  "sources": [
+    {
+      "path": "docs/experiments/raw/broad-etf-weekly-income-2026-10-02/execution/weekly_accounts.py",
+      "sha256": "77f2e4ba591040f1e6b1a441bd867457ff9084341e71f80666e6af56181e1d63",
+      "bytes": 20309
+    },
+    {
+      "path": "docs/experiments/raw/broad-etf-weekly-income-2026-10-02/execution/legacy_primitives.py",
+      "sha256": "08b4b605f57c24175e378e2802c0b96a6017b905f8c4e419780174d0e61c4969",
+      "bytes": 2689
+    },
+    {
+      "path": "docs/experiments/raw/broad-etf-weekly-income-2026-10-02/execution/test_synthetic.py",
+      "sha256": "a14d841371f994b05828e8a5790a591fdbddef540bf2640dc59a5e7e6f54f234",
+      "bytes": 12977
+    }
+  ],
+  "supported_existing_capabilities": [
+    "single pending weekly target",
+    "replacement/stale cancellation",
+    "whole fills with fee/cash constraints",
+    "unique generated trade IDs",
+    "separate dated ledger atomic complete events and duplicate event rejection"
+  ],
+  "not_verified": [
+    "persistent cash reservation across multiple orders",
+    "partial fills and cancel remainder",
+    "replayed order request duplicate immunity",
+    "restart unfinished order recovery"
+  ],
+  "important_distinction": "restricted sell proceeds are not buy order reserves; snapshots are not verified restart recovery",
+  "original_user_handoff_claim": "Goal5 explicitly says synthetic reservation/partial fill/cancel/duplicate/recovery exist; exact originating package remains unlocated in this bounded search, preserve statement and unknown source, do not infer nonexistent globally.",
+  "root_added_checks": [
+    "original user pasted Goal5 reread confirms claim",
+    "coordination task texts have no reservation/partialfill path matches",
+    "remaining-four-increments report does not supply such orderengine interfaces"
+  ],
+  "decision": "do not build replacement engine; pure order arithmetic independent and running. Further integration needs exact original package or scoped decision; no tests rerun."
+}

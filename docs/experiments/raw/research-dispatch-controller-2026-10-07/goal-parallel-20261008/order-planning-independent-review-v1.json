@@ -1,0 +1,48 @@
+{
+  "at": "2026-10-08T19:59:15.011395+08:00",
+  "reviewer": "/root/settlement_scope_review",
+  "verdict": "not_accepted_three_bounded_repairs",
+  "frozen_source_sha256": {
+    "test_order_planning.py": "00be16b38514a8ddf895d70e85be4191cbfa7c905d82ad51a944ad60a9c04ece",
+    "order_planning.py": "645cac7faa6fc25bd95e0c25b63621d4e233b501a6d0b946895ff685b584a75a",
+    "run_checks.py": "ca93b463b2848b2e56e455114e0af8583c12ff63afd2089c438deddd7cb07f2a"
+  },
+  "independent_cases_passed": [
+    "205.1999->0;205.2->100;cost205.2",
+    "B205.25 q100 cap2.000;nexttickcost205.3001",
+    "B500 q200 cost406 cap2.463;cost499.989;nexttick500.192",
+    "P0 total1000 gaps300/100 budgets300/0",
+    "futureprice/duplicateproduct/negativefees/nonfinitecash/beforeavailable/open-timefreeze/wrongorderid/mutatedorder refused",
+    "triggered_no_whole_sale explicitly unsupported"
+  ],
+  "findings": [
+    {
+      "priority": "P1",
+      "id": "current_available_cash",
+      "location": "order_planning.py:217",
+      "counterexample": "old free200 consumed by other committed outflow before sale funding; actual free174.82; computes374.82 buys300 cost305.30, overspend130.48. Correct max100",
+      "required": "explicit immutable named current allocatable cash snapshot, known/available time and source identity; bind whether sale proceeds included, never add twice; no new reservation engine"
+    },
+    {
+      "priority": "P2",
+      "id": "plan_identity",
+      "location": "order_planning.py:161",
+      "counterexample": "same originaldecision/opening with sale1.8/high receipt gives budget374.82 q300 cap1.231; sale.5/low gives244.95 q200 cap1.198; same order_id/input_hash",
+      "required": "preserve decision_hash, new immutable plan_hash binds sale receipt/currentcash/actions/freeze time/complete plan order contents; order IDs derive from plan identity"
+    },
+    {
+      "priority": "P1",
+      "id": "action_context_inheritance",
+      "location": "order_planning.py:142 and204",
+      "counterexample": "initialplan told Jan6 08 action; saleJan2 supported; laterbuyJan7 default actions() forgets known action and ready",
+      "required": "immutable action context with explicit covered interval inherited obligatorily; missing coverage unknown; crossing action remains unsupported, no new action semantics"
+    }
+  ],
+  "not_run": [
+    "original15tests",
+    "datedledger tests",
+    "market"
+  ],
+  "source_sha_unchanged": true,
+  "next": "bounded repair only, preservev1 failures, then review originalcounterexamples and corresponding validpaths"
+}

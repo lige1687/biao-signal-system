@@ -1,0 +1,91 @@
+{
+  "mission": "修复纯订单规划首版三个独审缺口；保留首版与失败，不实现完整订单引擎。",
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "task_scope": [
+    "只在同一新raw目录保留v1-source三源码，现有tests-01/独立算术/回执保持原字节；新v2实现与检查/回执另存。",
+    "Repair current_available_cash: explicit immutable named current allocatable cash snapshot, known/available time and source identity; bind whether sale proceeds included, never add twice; no new reservation engine",
+    "Repair plan_identity: preserve decision_hash, new immutable plan_hash binds sale receipt/currentcash/actions/freeze time/complete plan order contents; order IDs derive from plan identity",
+    "Repair action_context_inheritance: immutable action context with explicit covered interval inherited obligatorily; missing coverage unknown; crossing action remains unsupported, no new action semantics",
+    "新增明确资金快照/行动覆盖是具名合成资料绑定，不是假装查到真实账户/行动原件。保持原spec参数与全部未定义分支原样unsupported。",
+    "只验证三个原反例及合法对应路径；相关纯规划检查可重验，旧datedledger/原16绝不重跑。作者汇总新源码SHA、修复回执、失败留存、大小磁盘及限制。"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "configs",
+    "docs/research",
+    "docs/ops/agent-workflow.md",
+    ".claude/skills/macd-reading/SKILL.md",
+    "docs/plan-sector-trend-page.md",
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-planning-scope-controller-review.json"
+  ],
+  "strategy_sources_read_only": [
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium"
+  },
+  "expected_outputs": [
+    "v1源码/回执原字节保留；v2三个修复与实际新反例回执、说明；root再独审验收。"
+  ],
+  "acceptance": [
+    {
+      "priority": "P1",
+      "id": "current_available_cash",
+      "location": "order_planning.py:217",
+      "counterexample": "old free200 consumed by other committed outflow before sale funding; actual free174.82; computes374.82 buys300 cost305.30, overspend130.48. Correct max100",
+      "required": "explicit immutable named current allocatable cash snapshot, known/available time and source identity; bind whether sale proceeds included, never add twice; no new reservation engine"
+    },
+    {
+      "priority": "P2",
+      "id": "plan_identity",
+      "location": "order_planning.py:161",
+      "counterexample": "same originaldecision/opening with sale1.8/high receipt gives budget374.82 q300 cap1.231; sale.5/low gives244.95 q200 cap1.198; same order_id/input_hash",
+      "required": "preserve decision_hash, new immutable plan_hash binds sale receipt/currentcash/actions/freeze time/complete plan order contents; order IDs derive from plan identity"
+    },
+    {
+      "priority": "P1",
+      "id": "action_context_inheritance",
+      "location": "order_planning.py:142 and204",
+      "counterexample": "initialplan told Jan6 08 action; saleJan2 supported; laterbuyJan7 default actions() forgets known action and ready",
+      "required": "immutable action context with explicit covered interval inherited obligatorily; missing coverage unknown; crossing action remains unsupported, no new action semantics"
+    }
+  ],
+  "stop_conditions": [
+    "只写新raw；不改旧账本/原spec/策略/registry/INDEX/生产。仓外不写、不删除、无Git修改/联网/安装/代理或其他聊天发送。",
+    "未知语义保留unsupported，尤其触发无可卖整手等待用户；不能按推荐默认实施。",
+    "0行情/取数/拟合/真实标签/封存重跑/付费/生产接入。先测空间；不大拷贝或新建worktree。",
+    "运行Python禁止生成旧源码pyc，检查输出限定新raw；测完归置只读检查。",
+    "实际存储写入失败时先核已有产物，不重跑；恢复点准确保留。不得删除或借其他任务清理授权。"
+  ],
+  "controller_review": {
+    "required": true,
+    "reviewer": "/root/settlement_scope_review"
+  },
+  "source_spec_sha256": "695ce8a18e34d3520c53f793b1f347a05e146fea345474b5d72224ba93c30a5a",
+  "accepted_ledger_sha256": "20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3",
+  "budget": {
+    "market_runs": 0,
+    "fits": 0,
+    "new_data_requests": 0,
+    "labels": 0,
+    "sealed_reruns": 0
+  },
+  "authority": "User mainGoal continuous completion with bounded parallel; existing Goal5 originalspec engineering necessary slice; unknown user choice excluded.",
+  "source_review": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-planning-independent-review-v1.json",
+  "supersedes_implementation_contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-planning-pure-implementation-contract.json",
+  "frozen_v1_source_sha256": {
+    "test_order_planning.py": "00be16b38514a8ddf895d70e85be4191cbfa7c905d82ad51a944ad60a9c04ece",
+    "order_planning.py": "645cac7faa6fc25bd95e0c25b63621d4e233b501a6d0b946895ff685b584a75a",
+    "run_checks.py": "ca93b463b2848b2e56e455114e0af8583c12ff63afd2089c438deddd7cb07f2a"
+  }
+}

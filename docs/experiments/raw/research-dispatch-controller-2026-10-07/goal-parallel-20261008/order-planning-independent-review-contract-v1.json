@@ -1,0 +1,40 @@
+{
+  "mission": "独立审查原v0.2纯下单规划首版，重点预算、未来资料、固定计划及合法拒绝；不复述15通过。",
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "task_scope": [
+    "只读新纯规划实现及原spec，核冻结源码；原accepted账本/旧测试不重跑。",
+    "独立算至少费用分段/最大q/limit下一tick、P0现金含应收但不可花、计划不变与可用资金上限、P1真实到账后只能之后且提前冻结的开盘。",
+    "核输入未知/未来/重复产品或排序、无效数值/费用/身份、跨公司行动explicit unsupported，触发无整手分支不得默认。发现真实实现漏洞给最小可复算反例与期望，不扩大成订单引擎。",
+    "只可在内存运行必要新反例且PYTHONDONTWRITEBYTECODE=1；不写源码/证据/pyc，无联网/其他代理。作者源码冻结，作者仍补文档/回执。"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08",
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/source-baseline/shared-account-spec.md",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-planning-scope-controller-review.json",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-planning-pure-implementation-contract.json"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "expected_outputs": [
+    "通过的必要独立算术，实际失败/最小反例，准确限制和接纳或有界修复判断"
+  ],
+  "stop_conditions": [
+    "No file writes, Git mutations, newmarket/source requests, installs, sealedtests, childagents orotherchatmessages.",
+    "真实市场/预占/部分成交/撤单/恢复/完整P0P1均未实施，不审出不存在的承诺。"
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "frozen_source_sha256": {
+    "test_order_planning.py": "00be16b38514a8ddf895d70e85be4191cbfa7c905d82ad51a944ad60a9c04ece",
+    "order_planning.py": "645cac7faa6fc25bd95e0c25b63621d4e233b501a6d0b946895ff685b584a75a",
+    "run_checks.py": "ca93b463b2848b2e56e455114e0af8583c12ff63afd2089c438deddd7cb07f2a"
+  }
+}
