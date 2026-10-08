@@ -1,6 +1,6 @@
 ---
 name: lei-system-chat
-description: 在 LeiSignal 项目中通过自然语言查询持仓、计划、成交、基本面、新闻和已登记研究，保留来源日期与覆盖缺口；沿用午间简报和下午条件复核流程。
+description: 在 LeiSignal 项目中通过自然语言查询持仓、计划、成交、基本面、新闻、已登记研究及存储资源路径，保留来源日期与覆盖缺口；沿用午间简报和下午条件复核流程。
 ---
 
 # LeiSignal 系统查询
@@ -66,6 +66,15 @@ PYTHONPATH=src python3 -m lei_signal.integrations.gpt_context --view overview
 参照 [运行存储管理](../../../../docs/ops/codex-storage-management.md)：保留容量检查时间，
 只在内外盘状态变化时提醒。外盘身份或容量不符时不补新音频；能验证的缓存继续读，
 缺资料明确说明。旧研究存储保护未验收，本入口不控制其他进程的写入。
+
+后续AI从AGENTS.md的“AI 使用存储资源”进入。`storage`返回资源表和说明路径，
+`resources_status`与各项`available`分别说明覆盖；只有`available=true`时才用
+`resources[].read_path`读文件。原路径正确链接时照常用；同机其他工作树没有链接，
+可直接用返回的外盘只读路径，无需新下载或建链接。清单在
+`configs/storage-resources.v1.json`，可查用途、原路径、固定外盘目录和恢复清单。
+`logical_mapping_state=conflict`时不替换已有内容；外盘不可核时`read_path=null`。
+容量偏低不会禁读已存材料，新音频仍受原预检约束。查询不重新核所有内容指纹，
+重要复现按恢复清单核验；读取媒体时排除`._*`和`.DS_Store`说明文件，不自动删除。
 
 ## 已确认记录与场景
 

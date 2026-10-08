@@ -283,7 +283,7 @@ class SystemContext:
         return errors
 
     def storage(self) -> dict[str, Any]:
-        """Read fixed local disk identities and capacity without calling the API."""
+        """Read fixed disk identities, capacity and resource paths without API calls."""
         health = collect_storage_health(self.repo_root)
         response = self._result(
             "storage",
@@ -292,12 +292,13 @@ class SystemContext:
                 "storage": {
                     "retrieved_at": health.get("checked_at"),
                     "available": health.get("severity") != "unknown",
-                    "scope": "本机固定存储策略与容量，只读检查",
+                    "scope": "本机固定存储策略、容量与已登记资源路径，只读检查",
                 }
             },
             limitations=[
                 "这是检查时的容量，不能保证之后仍有空间；未控制其他任务的写入。",
                 "只对本日报新增音频工作执行预检，不自动删除资料或修改交易记录。",
+                "resources[].read_path 仅在本次核对设备和目录后可用；不授权迁移或新写入。",
             ],
             errors={"storage": health.get("reasons")}
             if health.get("severity") == "unknown"

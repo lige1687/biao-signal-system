@@ -255,6 +255,8 @@ def test_storage_snapshot_is_present_in_overview_and_saved_brief(
         "checked_at": "2026-10-08T17:00:00+08:00",
         "internal": {"status": "warning"},
         "external": {"status": "ok"},
+        "resources_status": "ok",
+        "resources": [{"name": "保存的模型", "read_path": "/verified/model", "available": True}],
     }
     monkeypatch.setattr(gpt_context, "collect_storage_health", lambda root: health)
     _packet(tmp_path)
@@ -266,6 +268,7 @@ def test_storage_snapshot_is_present_in_overview_and_saved_brief(
     assert context.overview()["data"]["storage_health"] == health
     assert context.latest_brief()["data"]["storage_health"] == health
     assert context.storage()["available"] is True
+    assert context.storage()["data"]["resources"][0]["read_path"] == "/verified/model"
 
 
 def test_overview_bounds_upgrade_progress_and_keeps_ledger_date(tmp_path: Path) -> None:

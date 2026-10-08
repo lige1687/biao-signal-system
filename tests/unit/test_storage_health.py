@@ -33,10 +33,13 @@ class FakeProbe:
         self.info_calls = 0
         self.internal_device = False
         self.internal_usage_unknown = False
+        self.external_usage_unknown = False
 
     def disk_usage(self, path):
         if path == self.root and self.internal_usage_unknown:
             raise OSError("simulated unavailable / noisy command details")
+        if path == self.mount and self.external_usage_unknown:
+            raise OSError("simulated unavailable external capacity")
         free = self.external_free if path == self.mount else self.internal_free
         return SimpleNamespace(total=100 * GIB, used=100 * GIB - free, free=free)
 
@@ -68,6 +71,12 @@ class FakeProbe:
 
     def is_file(self, path):
         return path.is_file()
+
+    def lexists(self, path):
+        return path.exists() or path.is_symlink()
+
+    def is_symlink(self, path):
+        return path.is_symlink()
 
     def same_device(self, left, right):
         def volume(path):
@@ -236,3 +245,166 @@ def test_invalid_policy_degrades_health_and_blocks_video_without_fallback(setup,
         preflight_video_storage(audio, model, root, probe=probe)
     assert caught.value.snapshot["status"] == "unavailable"
     assert probe.info_calls == 0
+
+
+class ResourceProbe(FakeProbe):
+    def __init__(self, *args):
+        super().__init__(*args)
+        self.resolved_paths = []
+
+    def resolve(self, path):
+        self.resolved_paths.append(path)
+        if path in {self.mount, self.audio, self.model}:
+            return super().resolve(path)
+        return path.resolve(strict=True)
+
+
+@pytest.fixture
+def resource_setup(setup):
+    root, mount, audio, model, _ = setup
+    target = mount / "saved-model"
+    target.mkdir()
+    (target / "config.json").write_text('{"model_type": "whisper"}')
+    logical = root / "data/cache/ai-resource"
+    logical.symlink_to(target, target_is_directory=True)
+    registry = {
+        "schema_version": 1,
+        "external_volume_uuid": UUID,
+        "resources": [
+            {
+                "id": "saved-model",
+                "name": "保存的模型",
+                "logical_path": "data/cache/ai-resource",
+                "external_path": str(target),
+                "role": "static_input",
+            }
+        ],
+    }
+    registry_path = root / "configs/storage-resources.v1.json"
+    registry_path.write_text(json.dumps(registry))
+    return root, target, logical, registry_path, ResourceProbe(root, mount, audio, model)
+
+
+def test_registered_resource_is_readable_and_query_does_not_write(resource_setup, monkeypatch):
+    root, target, _, _, probe = resource_setup
+
+    def reject_write(*args, **kwargs):
+        raise AssertionError("read-only resource query attempted a filesystem mutation")
+
+    for method in ("mkdir", "symlink_to", "write_text", "write_bytes", "unlink", "rename"):
+        monkeypatch.setattr(Path, method, reject_write)
+    health = collect_storage_health(root, probe=probe)
+    assert health["resources_status"] == "ok"
+    resource = health["resources"][0]
+    assert resource["available"] and resource["read_path"] == str(target)
+    assert resource["logical_mapping_state"] == "linked"
+    assert resource["access"] == "existing_files_read_only"
+    assert json.loads((Path(resource["read_path"]) / "config.json").read_text()) == {
+        "model_type": "whisper"
+    }
+
+
+def test_other_worktree_without_link_can_read_external_resource_without_setup(resource_setup):
+    root, target, logical, _, probe = resource_setup
+    logical.unlink()
+    health = collect_storage_health(root, probe=probe)
+    resource = health["resources"][0]
+    assert resource["available"] and resource["read_path"] == str(target)
+    assert resource["logical_mapping_state"] == "not_configured"
+    assert not logical.exists() and not logical.is_symlink()
+
+
+@pytest.mark.parametrize("state", ["wrong_link", "ordinary_directory", "broken_link"])
+def test_conflicting_local_path_is_not_replaced_or_used(resource_setup, state):
+    root, _, logical, _, probe = resource_setup
+    logical.unlink()
+    if state == "ordinary_directory":
+        logical.mkdir()
+    else:
+        logical.symlink_to(root / "wrong-target", target_is_directory=True)
+        if state == "wrong_link":
+            (root / "wrong-target").mkdir()
+    resource = collect_storage_health(root, probe=probe)["resources"][0]
+    assert not resource["available"] and resource["read_path"] is None
+    assert resource["logical_mapping_state"] == "conflict"
+    assert logical.is_dir() if state == "ordinary_directory" else logical.is_symlink()
+
+
+@pytest.mark.parametrize("state", ["missing", "wrong_uuid", "fake_mount"])
+def test_resource_directory_is_not_probed_before_external_identity(resource_setup, state):
+    root, target, logical, _, probe = resource_setup
+    if state == "missing":
+        probe.missing = True
+    elif state == "wrong_uuid":
+        probe.uuid = "wrong"
+    else:
+        probe.mounted = False
+    resource = collect_storage_health(root, probe=probe)["resources"][0]
+    assert not resource["available"] and resource["read_path"] is None
+    assert target not in probe.resolved_paths and logical not in probe.resolved_paths
+
+
+def test_low_space_blocks_new_audio_but_keeps_cached_resource_readable(resource_setup):
+    root, _, _, _, probe = resource_setup
+    probe.external_free = GIB
+    health = collect_storage_health(root, probe=probe)
+    assert health["external"]["status"] == "low_space"
+    assert health["resources"][0]["available"]
+    with pytest.raises(VideoStorageRejected):
+        preflight_video_storage(probe.audio, probe.model, root, probe=probe)
+
+
+def test_external_target_symlink_escape_is_unavailable(resource_setup):
+    root, target, _, _, probe = resource_setup
+    probe.resolve = lambda path: root if path == target else ResourceProbe.resolve(probe, path)
+    resource = collect_storage_health(root, probe=probe)["resources"][0]
+    assert not resource["available"] and resource["read_path"] is None
+
+
+def test_unknown_capacity_with_verified_identity_allows_reads_and_rejects_writes(resource_setup):
+    root, _, _, _, probe = resource_setup
+    probe.external_usage_unknown = True
+    health = collect_storage_health(root, probe=probe)
+    assert health["external"]["identity_ok"]
+    assert health["external"]["capacity"] is None
+    assert health["external"]["status"] == "unknown"
+    assert health["resources"][0]["available"]
+    with pytest.raises(VideoStorageRejected, match="外盘不足"):
+        preflight_video_storage(probe.audio, probe.model, root, probe=probe)
+
+
+def test_video_preflight_does_not_probe_unrelated_registered_resources(resource_setup):
+    root, target, logical, _, probe = resource_setup
+    checked = preflight_video_storage(probe.audio, probe.model, root, probe=probe)
+    assert checked["allowed"]
+    assert target not in probe.resolved_paths and logical not in probe.resolved_paths
+
+
+@pytest.mark.parametrize(
+    "damage",
+    ["missing", "bad_json", "wrong_uuid", "absolute_logical", "parent", "outside", "overlap"],
+)
+def test_invalid_resource_registry_keeps_disk_health_without_usable_paths(resource_setup, damage):
+    root, _, _, registry_path, probe = resource_setup
+    registry = json.loads(registry_path.read_text())
+    if damage == "missing":
+        registry_path.unlink()
+    elif damage == "bad_json":
+        registry_path.write_text("{invalid")
+    else:
+        entry = registry["resources"][0]
+        if damage == "wrong_uuid":
+            registry["external_volume_uuid"] = "wrong"
+        elif damage == "absolute_logical":
+            entry["logical_path"] = "/tmp/resource"
+        elif damage == "parent":
+            entry["logical_path"] = "data/cache/../../outside"
+        elif damage == "outside":
+            entry["external_path"] = str(root / "outside")
+        else:
+            registry["resources"].append({**entry, "id": "overlapping"})
+        registry_path.write_text(json.dumps(registry))
+    health = collect_storage_health(root, probe=probe)
+    assert health["external"]["identity_ok"] and health["severity"] == "healthy"
+    assert health["resources_status"] == "unavailable"
+    assert health["resources"] == [] and health["resource_errors"]

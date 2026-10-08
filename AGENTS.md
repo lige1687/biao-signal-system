@@ -181,3 +181,14 @@ bootstrap、Calmar、expR、PF、样本内/样本外、走查（walk-forward）*
   什么、对用户实际有什么意义——不能让用户翻完整份报告才搞懂讲的是什么。
 - 如果一个术语确实没有更简单的说法（比如"宽度"这个系统专用概念本身），
   第一次出现时要用一句话定义它，不能假设读者已经知道。
+
+
+<!-- lei-storage-access:start -->
+## AI 使用存储资源（2026-10-08）
+
+处理磁盘、缓存、已保存音视频或本机语音模型前，先读 [运行存储管理](docs/ops/codex-storage-management.md)；在仓库根运行 `PYTHONPATH=src python3 -m lei_signal.integrations.gpt_context --view storage`，或调用已注册的 `storage` 工具。固定资源表是 `configs/storage-resources.v1.json`，容量与设备规则是 `configs/storage-policy.v1.json`；不可仅凭卷名、旧聊天或文件夹存在判断可用。
+
+只使用返回中 `available=true` 的 `resources[].read_path` 读取已登记材料。当前工作目录正确的原链接继续可用；同机其他工作树缺链接时，可用返回的外盘绝对只读路径，不自动建链接。外盘未挂载、身份不符、目录缺失或原路径冲突时不回退到内置盘，不重复下载来填缺口；说明缺失与恢复条件。路径核对不是内容指纹核验，重要复现仍按返回的恢复清单核内容。
+
+资源登记不扩大写入授权。现有日报音频写入仍走自己的预检；本入口不保护所有进程。不要自动迁移活动数据库、执行环境、会话或冻结研究材料；删除、换盘和仓外配置沿用原确认要求。目录里的 `._*`、`.DS_Store` 是说明文件，读取媒体时排除，不自行删除。另一台电脑须连接同一资源盘并重新核身份，拉取代码不等于材料已移交。
+<!-- lei-storage-access:end -->

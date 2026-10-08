@@ -1,0 +1,158 @@
+{
+  "checked_at": "2026-10-08T18:20:19.112996+08:00",
+  "task_id": "daily-trading-system-audit",
+  "checked_coordination_sha": "f6d309fbbcb733ffeec8b5aaeaddd3da04416e2f",
+  "read_task_ids": [
+    "daily-trading-system-audit",
+    "research-dispatch-controller",
+    "trend-trading-video",
+    "lei-coordination-bootstrap"
+  ],
+  "conflict_decision": "Root only adds its marked AGENTS storage block. Other local dirty AGENTS changes excluded from publication. Latest controller readonly audits and media v4 scope do not overlap.",
+  "scope": "Future AI discovery and verified read paths for four already migrated resources; no new migrations or ASR",
+  "sources": [
+    "AGENTS.md own lei-storage-access block",
+    "configs/storage-resources.v1.json",
+    "configs/storage-policy.v1.json",
+    "docs/ops/codex-storage-management.md",
+    ".agents/skills/lei-system-chat/SKILL.md"
+  ],
+  "tests": {
+    "passed": 103,
+    "warning_count": 1,
+    "seconds": 3.16,
+    "warning": "existing python_multipart PendingDeprecationWarning",
+    "ruff_passed": true,
+    "format_passed": true,
+    "hygiene_passed": true
+  },
+  "mcp": {
+    "checked_at": "2026-10-08T18:17:18.383290+08:00",
+    "transport": "real MCP SDK stdio",
+    "tool_count": 24,
+    "called_tools": [
+      "storage"
+    ],
+    "writes_called": 0,
+    "orders": 0,
+    "resources_status": "ok",
+    "resources": [
+      {
+        "id": "douyin-audio-20261007",
+        "available": true,
+        "logical_mapping_state": "linked",
+        "read_path": "/Volumes/win+mac通用/个人资料归档/LeiSignal-运行存储管理-20261008/verified-static-cache-20261008T165506/douyin-vike-audio-2026-10-07"
+      },
+      {
+        "id": "douyin-media-20261007",
+        "available": true,
+        "logical_mapping_state": "linked",
+        "read_path": "/Volumes/win+mac通用/个人资料归档/LeiSignal-运行存储管理-20261008/verified-static-cache-20261008T165506/douyin-vike-media-2026-10-07"
+      },
+      {
+        "id": "whisper-small-mlx",
+        "available": true,
+        "logical_mapping_state": "linked",
+        "read_path": "/Volumes/win+mac通用/个人资料归档/LeiSignal-运行存储管理-20261008/verified-static-cache-20261008T165506/whisper-small-mlx"
+      },
+      {
+        "id": "portfolio-blogger-audio",
+        "available": true,
+        "logical_mapping_state": "linked",
+        "read_path": "/Volumes/win+mac通用/个人资料归档/LeiSignal-B站日报音频-20261008"
+      }
+    ],
+    "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "external_identity_ok": true
+  },
+  "isolated_directory": {
+    "checked_at": "2026-10-08T18:17:17.531915+08:00",
+    "scope": "Real same-computer isolated directory with only configs and no cache links, not a new Git worktree",
+    "api_calls": 0,
+    "links_created": 0,
+    "resource_files_written": 0,
+    "reads": [
+      {
+        "id": "douyin-audio-20261007",
+        "available": true,
+        "logical_mapping_state": "not_configured",
+        "header_hex": "664c6143000000220480048000004800",
+        "read_bytes": 16
+      },
+      {
+        "id": "douyin-media-20261007",
+        "available": true,
+        "logical_mapping_state": "not_configured",
+        "header_hex": "000000206674797069736f6d00000200",
+        "read_bytes": 16
+      },
+      {
+        "id": "whisper-small-mlx",
+        "available": true,
+        "logical_mapping_state": "not_configured",
+        "header_hex": "504b030414000000000000002100461a",
+        "read_bytes": 16
+      },
+      {
+        "id": "portfolio-blogger-audio",
+        "available": true,
+        "logical_mapping_state": "not_configured",
+        "header_hex": "000000206674797069736f3500000200",
+        "read_bytes": 16
+      }
+    ]
+  },
+  "fresh_ai": {
+    "agent": "/root/fresh_storage_reader",
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low",
+    "fork_turns": "none",
+    "entry_discovery": "AGENTS.md -> operations guide -> storage query, without prior conversation",
+    "checked_at": "2026-10-08T18:15:00+08:00",
+    "resource_count": 4,
+    "available_count": 4,
+    "actual_reads": [
+      "FLAC first16bytes fLaC",
+      "MP4 first16bytes ftyp/isom",
+      "m4a first16bytes ftyp/iso5",
+      "Whisper config.json 266bytes JSON model_type=whisper n_mels=80",
+      "weights.npz first16bytes PK ZIP header"
+    ],
+    "downloads": 0,
+    "asr_runs": 0,
+    "resource_writes": 0,
+    "account_api_calls": 0,
+    "limits": "Header/config readability only; no new decode, model inference or content hash recomputation"
+  },
+  "original_agents_prefix_proof": {
+    "before_sha256": "a2a8fd1dde803b603717ec1fa1b49c14d76ab0a4e28d1f7d99de7d9642fb12b1",
+    "before_bytes": 25460,
+    "block_sha256": "a3c7d40d73f974e5a8d784e099edd0c2cdd0c55b3657f39312d96f6dffb8ecf0",
+    "after_sha256": "8397c4797924c3fa64995391acccf6b2406b30e2e6bb9ece5a3a72637f3653dc",
+    "original_prefix_preserved": true,
+    "publication_rule": "source-parent AGENTS plus only own block; shared dirty increments excluded"
+  },
+  "review": {
+    "agent": "/root/name_brief",
+    "read_only": true,
+    "outcome": "No direct identity/path bypass identified. Added unknown-capacity read contract test and isolated video preflight from unrelated resource metadata probes."
+  },
+  "capacity_followup": {
+    "checked_at": "2026-10-08T18:17:23+08:00",
+    "internal_free_kib": 4857220,
+    "source": "actual df + bounded read-only cache/process inspection",
+    "cause": "not attributed in limited inspected directories",
+    "reminder_request_sent": true,
+    "delivered": false
+  },
+  "limits": [
+    "Device/path snapshot not a content integrity guarantee",
+    "Another host needs the same physical disk and a fresh identity check",
+    "Read path does not authorize new writes",
+    "No protection for other application or research writes",
+    "No real unmount or runtime race test"
+  ],
+  "real_orders": 0,
+  "production_holdings_changes": 0,
+  "production_plan_changes": 0
+}

@@ -52,6 +52,12 @@ class _SystemProbe:
     def is_file(self, path: Path) -> bool:
         return path.is_file()
 
+    def lexists(self, path: Path) -> bool:
+        return os.path.lexists(path)
+
+    def is_symlink(self, path: Path) -> bool:
+        return path.is_symlink()
+
     def same_device(self, left: Path, right: Path) -> bool:
         return left.stat().st_dev == right.stat().st_dev
 
@@ -110,6 +116,11 @@ def _unavailable_policy_snapshot(root: Path) -> dict:
             "capacity": None,
             "reasons": ["存储策略不可用"],
         },
+        "resource_registry": str(root / "configs/storage-resources.v1.json"),
+        "access_guide": str(root / "docs/ops/codex-storage-management.md"),
+        "resources_status": "unavailable",
+        "resource_errors": ["存储策略不可用，不能核对资源路径"],
+        "resources": [],
     }
 
 
@@ -124,6 +135,129 @@ def _usage(probe: Any, path: Path) -> dict:
 
 def _inside(path: Path, directory: Path) -> bool:
     return path == directory or directory in path.parents
+
+
+def _load_resources(root: Path, policy: dict) -> list[dict]:
+    registry = json.loads((root / "configs/storage-resources.v1.json").read_text(encoding="utf-8"))
+    if (
+        not isinstance(registry, dict)
+        or type(registry.get("schema_version")) is not int
+        or registry["schema_version"] != 1
+        or registry.get("external_volume_uuid") != policy["external_volume_uuid"]
+        or not isinstance(registry.get("resources"), list)
+        or not 1 <= len(registry["resources"]) <= 20
+    ):
+        raise ValueError("资源清单版本、设备身份或格式不符")
+    mount = Path(policy["external_mount"])
+    seen: set[str] = set()
+    paths: list[tuple[Path, Path]] = []
+    for entry in registry["resources"]:
+        if not isinstance(entry, dict) or any(
+            not isinstance(entry.get(key), str) or not 1 <= len(entry[key]) <= 2048
+            for key in ("id", "name", "logical_path", "external_path", "role")
+        ):
+            raise ValueError("资源清单缺少必要字段")
+        logical, target = Path(entry["logical_path"]), Path(entry["external_path"])
+        if (
+            entry["id"] in seen
+            or logical.is_absolute()
+            or logical.parts[:2] != ("data", "cache")
+            or ".." in logical.parts
+            or not target.is_absolute()
+            or ".." in target.parts
+            or not _inside(target, mount)
+            or target == mount
+            or entry["role"] not in {"static_input", "existing_audio_cache"}
+            or any(
+                _inside(logical, prior_logical)
+                or _inside(prior_logical, logical)
+                or _inside(target, prior_target)
+                or _inside(prior_target, target)
+                for prior_logical, prior_target in paths
+            )
+            or any("\x00" in entry[key] for key in ("id", "logical_path", "external_path"))
+        ):
+            raise ValueError("资源清单含重复身份、不允许的路径或用途")
+        recovery = entry.get("recovery_manifest")
+        if recovery is not None and (
+            not isinstance(recovery, str)
+            or not recovery
+            or "\x00" in recovery
+            or not Path(recovery).is_absolute()
+            or ".." in Path(recovery).parts
+            or not _inside(Path(recovery), mount)
+        ):
+            raise ValueError("资源恢复清单路径不在批准外盘内")
+        seen.add(entry["id"])
+        paths.append((logical, target))
+    return registry["resources"]
+
+
+def _resource_access(root: Path, policy: dict, external: dict, probe: Any) -> dict:
+    """Expose verified read paths; never create a directory or configure a link."""
+    result: dict[str, Any] = {
+        "resource_registry": str(root / "configs/storage-resources.v1.json"),
+        "access_guide": str(root / "docs/ops/codex-storage-management.md"),
+        "resources_status": "unavailable",
+        "resource_errors": [],
+        "resources": [],
+    }
+    try:
+        entries = _load_resources(root, policy)
+    except (OSError, ValueError, TypeError, KeyError):
+        result["resource_errors"].append("资源清单缺失或无效，未提供可读路径")
+        return result
+    mount = Path(policy["external_mount"])
+    for entry in entries:
+        logical, target = root / entry["logical_path"], Path(entry["external_path"])
+        resource = {
+            **entry,
+            "logical_path": str(logical),
+            "available": False,
+            "read_path": None,
+            "access": "existing_files_read_only",
+            "logical_mapping_state": "unchecked",
+            "reason": "",
+            "integrity": "本次只核设备与路径；内容指纹需另按恢复清单核对",
+        }
+        if not external["identity_ok"]:
+            resource["reason"] = "批准的外盘未挂载或身份无法核对"
+        else:
+            try:
+                actual = probe.resolve(target)
+                if (
+                    actual != target
+                    or not _inside(actual, mount)
+                    or not probe.is_dir(actual)
+                    or not probe.same_device(actual, mount)
+                ):
+                    raise ValueError("资源目录不在已核外盘固定位置")
+                if probe.lexists(logical):
+                    resource["logical_mapping_state"] = "conflict"
+                    if not probe.is_symlink(logical) or probe.resolve(logical) != actual:
+                        raise ValueError("仓库原路径与资源清单冲突，不能自动替换")
+                    resource["logical_mapping_state"] = "linked"
+                else:
+                    resource["logical_mapping_state"] = "not_configured"
+                resource["available"] = True
+                resource["read_path"] = str(actual)
+                resource["reason"] = (
+                    "原路径可读"
+                    if resource["logical_mapping_state"] == "linked"
+                    else "此工作目录未配置链接，可直接用外盘只读路径；未创建链接"
+                )
+            except (OSError, ValueError):
+                resource["reason"] = (
+                    "仓库原路径与资源清单冲突，不能自动替换"
+                    if resource["logical_mapping_state"] == "conflict"
+                    else "资源目录缺失、逃逸或设备不符，无法提供可读路径"
+                )
+        result["resources"].append(resource)
+    available = sum(item["available"] for item in result["resources"])
+    result["resources_status"] = (
+        "ok" if available == len(entries) else ("partial" if available else "unavailable")
+    )
+    return result
 
 
 def _external(policy: dict, probe: Any) -> dict:
@@ -179,7 +313,9 @@ def _external(policy: dict, probe: Any) -> dict:
     return result
 
 
-def collect_storage_health(repo_root: str | Path = _REPO, *, probe: Any = None) -> dict:
+def collect_storage_health(
+    repo_root: str | Path = _REPO, *, probe: Any = None, include_resources: bool = True
+) -> dict:
     """JSON-friendly, read-only current volume snapshot."""
     root = Path(repo_root)
     try:
@@ -213,7 +349,7 @@ def collect_storage_health(repo_root: str | Path = _REPO, *, probe: Any = None) 
         severity = "warning"
     else:
         severity = "healthy"
-    return {
+    snapshot = {
         "schema_version": 1,
         "checked_at": datetime.now(_SHANGHAI).isoformat(),
         "severity": severity,
@@ -224,6 +360,9 @@ def collect_storage_health(repo_root: str | Path = _REPO, *, probe: Any = None) 
         "internal": internal,
         "external": external,
     }
+    if include_resources:
+        snapshot.update(_resource_access(root, policy, external, probe))
+    return snapshot
 
 
 def _logical(repo_root: Path, path: str | Path) -> Path:
@@ -241,7 +380,7 @@ def preflight_video_storage(
     """Reject new audio work unless the exact intended paths and budgets pass."""
     root = Path(repo_root)
     probe = probe or _SystemProbe()
-    snapshot = collect_storage_health(root, probe=probe)
+    snapshot = collect_storage_health(root, probe=probe, include_resources=False)
     if snapshot["status"] == "unavailable":
         raise VideoStorageRejected(snapshot["reasons"], snapshot)
     try:
