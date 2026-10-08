@@ -1,3 +1,14 @@
+## V9 reconnect-blocked
+
+- task-id: trend-trading-video；2026-10-09T01:11:56.181608+08:00；checked_coordination_sha: 7d96c729abb89810d39dab90f02ee96600122f66；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- blocked当前文件访问，scope_released=true。用户告知连接后01:06实测固定盘成功，01:09再次从设备列表消失；diskutil external physical为空且固定UUID not found，不是仅网页故障。已请用户检查连接线/接口/扩展坞并保持连接。不重渲染，不回退内盘，不删除。自身及中控已读，无重叠。
+- 成果codex/trend-history-long-v14-20261009@c537e971cbd56dd38ec665018f893e05b2873837，9个准确小文件远端读回。原成片22,469,359字节，SHA256 1361a69f93c7462e8805c4f793c0f8966d674743a0fc3c69a7fc0e05f027486c；恢复后52秒章节定位实际52.258055、error=null、paused=false，通过，无需改服务器。原240秒连续播放证据沿用。
+- 外盘原result/交付包/趋势交易/20261009-趋势交易简史/v14已写6份配套文档并逐字读回；制作记录复制6份本机小记录并读回，另复制3份原外盘日志。视频库索引已建立。第二次整体验证被断盘打断，complete_readback_verified=false，物理持久化待重连复查；排除._*说明文件后实际15份归档文档。路径及时间见v14/archive-write-receipt.json。成片未移动或复制。
+- 当前内部可用约0.62GiB，不启动新媒体/新实验；仅保留小接续记录。归置检查通过。下一步：稳定连接固定盘后读取本回执核15份文档及成片SHA，完成可访问交付；不重复此前制作。长片观感仍待用户，不声称已发布。
+
+
+---
+
 ## V9 reconnect-start
 
 - task-id: trend-trading-video；2026-10-09T01:07:32.242164+08:00；checked_coordination_sha: 040f438bb2b6a53ff0e13df12a6dcebd3e6de4a9；已读 COORDINATION.md、自身与 research-dispatch-controller。
