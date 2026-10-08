@@ -1,3 +1,17 @@
+# 自然旁白与剪辑小样交付（最新）
+
+- task-id trend-trading-video；owner本对话root；completed（本轮探索小样；自然度待用户试听）；时间2026-10-08T16:59:52.207568+08:00
+- checked_coordination_sha: 7ecc14b50c7318de531d11cd0c3b209fded76dd4；已读trend-trading-video、research-dispatch-controller；无路径冲突，仅改既定媒体目录和本任务。
+- 输出: docs/ops/media/trend-trading-60s-20261008/exploration/index.html、report.md；3 WAV、2 MP4及源代码/词时间戳/validation.json/comparison.jpg。
+- 实际结果: 同云希男声、同字词、同语速下，标点分句10.416→12.768秒；晓晓同稿12.648秒；两种剪辑共享同音轨，MD5 f45c65e1515c02f64208e5c00e1f5f92。自然度没有盲听评分，不能声称主观胜出。
+- 专业路线: MiniMax公开页面两次试用均无audio源、播放NotSupportedError；已记录失败，未支付、未登录、未绕过权限。三本地样音均Edge，未冒称MiniMax。
+- 验证: 五媒体完整解码通过；三WAV浏览器readyState4，B实际播放；剪辑B 1920×1080、12.768秒实际播放；切换通过；六帧图检；目录归置通过。初次词匹配“不动”失败已修复跨词匹配，未重跑声音。
+- 额度: 开始查询失败，结束29%；上轮最后28%不是准确本轮起点，精确本轮差值未知；无付费调用。
+- 提交: 小样与源文件仅本地，未推媒体；仅本协调记录同步。旧三版保留。
+- 下一步: 用户在对比页试听声音B/C和两种剪辑；设计建议开头B问答、中段A图解；专业配音需有效可用入口，未当成已解决。
+
+---
+
 # 自然旁白与剪辑探索（最新）
 
 - task-id: trend-trading-video；owner本对话root；active；时间2026-10-08T16:52:30.955263+08:00
