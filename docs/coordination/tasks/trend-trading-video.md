@@ -1,3 +1,15 @@
+## V8：匿名品牌要求与趋势交易编年史
+
+- task-id trend-trading-video；active；2026-10-08T21:38:35.281221+08:00；checked_coordination_sha: b4c6b6efc0ec2ec5cfa7654b7565e5aa485064b8；已读COORDINATION.md、本任务与research-dispatch-controller。冲突决定：自有视频/skill路径，报告单文件不重叠；registry/INDEX尚不写，登记前另核共享窗口。
+- 用户认可V7质感进步，但信息密度不足；要求所有后续视频不出现LEI元素，此期只讲趋势交易来源、历史与编年，不讲自有系统。此次授权明确优先；不重做封存因子研究。
+- 范围：v8/素材、Remotion源、音画表、研究/验证记录/成片；v7/index.html新入口；.agents/skills/code-explainer-video/永久匿名品牌约束、密度设计方法与检查；docs/experiments/video-information-density-2026-10-08.md及自身登记（等窗口）；本任务记录。不改策略/生产、不删旧片、不写仓外、不安装依赖/付费。
+- 目标：保持60秒无旁白、4K质量，增加有来源的历史节点/因果解释，将系统介绍的8秒让给历史；以连续动作和明确转场推进，不以小字堆砌冒充密度。
+- 研究问题：在V7基础上，怎样提高每段新信息和解释动作，且仍可读？复用四教程缓存与史料；增量浏览最多6次来源请求，制作1个核心稿及最多3次有具体错误证据的修复。新史料只核片中新增事实。对照只评价结构/时间/可读性，吸引力与完播率无用户实验，不伪造统计。
+- 验收：匿名品牌文本检查，历史事实/日期来源，无直接师承暗示，时间表/静帧/完整解码/浏览器实播，许可及额度。账号起始43%；磁盘约1.5GiB。复用V7依赖与音乐素材，不复制node_modules和下载缓存。
+- 基线V7 codex/trend-history-v7-20261008@ae6118495e326262f511b834c7f3e88ad2a2ca15。新产物归V8独立版本，旧版为历史存档，不再作为新片交付。
+
+---
+
 ## V7 本轮制作与播放交付完成，观感待用户验收
 
 - task-id trend-trading-video；本轮制作 completed，主观观感待用户；owner本对话root；2026-10-08T21:31:41.506011+08:00；checked_coordination_sha: 4cee81719a37b4a579bdab75f6a1a4e7b4389f0d；已读 COORDINATION.md、本任务与 research-dispatch-controller；冲突决定：只有原自有媒体、skill与入口，未占registry/INDEX。
