@@ -22,3 +22,11 @@
 - 研究预算: 不适用；未启动回测/因子研究。无旧成果重跑。
 - 本地接续: docs/ops/work-progress/nasdaq-story-video-20261009.md 与 docs/ops/media/nasdaq-story-20261009/INTAKE.md。
 - 本记录提交以git log -- 本路径定位；成功推送后读回核验，不以本条文字冒充同步。
+
+## 准备阶段实际结果 2026-10-09T01:45:27.286388+08:00
+
+- checked_coordination_sha: 69eb29d2017367f112a3090d4691f67e9d9d799f；已重读自身、trend-trading-video、research-dispatch-controller相关阶段。无本任务新增冲突；本人独立新路径，媒体仍blocked。
+- 本机5份小记录已落盘：INTAKE.md、input-manifest.json、shot-queue.json、FACT_CHECK_DRAFT.md及work-progress同名文件。6份输入SHA记录、26镜头完整；Word正式正文与TTS文本忽略空白逐字一致，无需补写定稿。
+- 归置检查通过；输入清单与镜头数读取断言通过。准备文件仅本地未提交，远端不可重建；协调提交不等于影片源码或媒体成果。
+- 尚缺03/06/07及data，9月日期证据未核；F06原PDF文字层抽取为空，仍待图像核对。不把入口可访问当数据通过。0新音轨/视频/封面/素材，0发布。
+- 等完整制作包与内盘5GiB加小记录余量恢复后重做存储预检，继续普通配音及渲染；无清理授权，不自行删资料。
