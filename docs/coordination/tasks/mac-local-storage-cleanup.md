@@ -182,3 +182,7 @@
 - 原第十一批003826保留初版scope/控制器/0条目失败；更改精确预案时首次读取scope失败，立即核/Volumes与diskutil没有批准外盘，storage设备未挂载、4注册资源unavailable，内盘4381954048B。不创建假挂载文件夹、回退本机/TimeMachine盘、借未核旧柠檬副本。源和保留仓库实际仍在，归置通过，未重启服务/删swap或快照。
 - 恢复点源成果1700f6f1d455825566bfbefa6343e7546b15b031自己的进度单文件普通push/fetch逐字核，私有小恢复json在data/cache/mac-local-storage-cleanup/wechat-legacy-recovery.json，不入Git，不包含聊天正文或私有原件上传。待用户重新连接原UUID盘后先核设备/原scope/失败回执，再禁用旧整根remove并实施保留代码路径的准确移除器，完整归档/逐文件与源稳定/无句柄核验后才移除对应单元。尚未写出的执行器/恢复动作不称已完成。
 - 当前没有后台复制或删除过程。已向用户请求重新连接，迁移的实际目标盘缺失、当前授权内没有替代安全目标。新automation-7已ACTIVE每小时只读巡查同聊天，原用户明确授权；无变化安静，不无人值守删除，不恢复旧日报。新迁移不由巡查自动删除恢复。
+
+## 用户已重连，核同盘后恢复 2026-10-09T00:55:27.467932+08:00
+- status: active；checked_coordination_sha: 85cfcfdc80fb1133d4c3cd659a90810307db0e80；用户答已经重新连接；storage真实available/identity_ok=true，原第十一批scope/0复制失败回执实际读回一致。原阻塞记录保持历史，不重新索要迁移许可。
+- 初次scope/执行器/失败回执已分别重命名为初次-文件保留。新scope仍完整归档旧微信，保留课程仓库与当前新资料inode，whole-root remove已禁用；归档执行器SHA d87bc0ec1cf49aa680a64cfb6930cb969c5f2f4765f4ac1d898510b6299439df。精确移除单位783（726目录/57普通文件）只私有枚举、不包含保留代码或其祖先；将另审该移除器。源内容/ZIP指纹/路径核验全部保留，不用旧失败phase冒充有效副本，不清理当前DB或改新微信。
