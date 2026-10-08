@@ -1,0 +1,148 @@
+{
+  "mission": "按原v0.2研究情景实现已定义的开盘前预算、整手份额及限价计算；保留未定义分支，不重造订单引擎。",
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "task_scope": [
+    "只实现纯订单规划与算术；准确绑定原spec和已验收datedledger，只读旧目录。人工场景250/50-50/5个百分点仅研究情景，不是真实偏好。",
+    "不可变决策对象绑定参考价known_at、持仓/可卖份额/free/restricted/receivable、目标、排序、成本档、input hash。未来入金未到账不可用；实际到账后可建立独立决定。",
+    "P0按总资产正不足额降序、代码固定破同分，顺序分配不重叠预算。买量取最大100整数，q0不收费；固定q反求可承受最高价并floor .001，确保下一tick超预算。",
+    "P1按原5个百分点触发，超额份额floor100且受可卖整手上限；达到触发但无整手可卖返回显式未定义状态等待用户。未触发按P0。",
+    "后续买单使用原排序/目标不足/参考价和实际到账现金；计划冻结必须早于目标开盘，目标开盘严格晚于卖开盘，不能同开盘看到价格后缩量或把余款再分另一单。",
+    "本期纯函数可校验订单是否匹配/超限，但不执行账本/不实现预占、部分成交、撤单或恢复。已有此类实现由并行只读定位，得到新明确适配合同才接入。",
+    "跨公司行动的旧订单明确unsupported；真实撮合/部分成交、多卖单失败组合不推定。为新纯计算保存必要反例测试、输入/输出/失败与复现入口，旧检查不重跑。"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "configs",
+    "docs/research",
+    "docs/ops/agent-workflow.md",
+    ".claude/skills/macd-reading/SKILL.md",
+    "docs/plan-sector-trend-page.md",
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-planning-scope-controller-review.json"
+  ],
+  "strategy_sources_read_only": [
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium"
+  },
+  "expected_outputs": [
+    "纯规划模块、具名人工输入、新反例检查回执、源码/输入manifest与限制；root后续独审和归档。只交本期完整边界，不把全策略已完成。"
+  ],
+  "acceptance": [
+    {
+      "p": "2",
+      "c": ".001",
+      "M": "5",
+      "s": ".001",
+      "B": "205",
+      "q": 0
+    },
+    {
+      "p": "2",
+      "c": ".001",
+      "M": "5",
+      "s": ".001",
+      "B": "205.2",
+      "q": 100
+    },
+    {
+      "B": "205.25",
+      "q": 100,
+      "limit": "2.000",
+      "opening": "2.001",
+      "cost": "205.3001",
+      "decision": "reject_no_resize"
+    },
+    {
+      "p": "2",
+      "c": ".01",
+      "M": "1",
+      "s": ".005",
+      "B": "500",
+      "q": 200,
+      "cost": "406",
+      "limit": "2.463",
+      "limit_cost": "499.989",
+      "next_tick_cost": "500.192"
+    },
+    {
+      "holdings_value": [
+        "200",
+        "400"
+      ],
+      "free": "300",
+      "receivable": "100",
+      "total": "1000",
+      "gaps": [
+        "300",
+        "100"
+      ],
+      "budgets": [
+        "300",
+        "0"
+      ],
+      "unused_first_not_reallocated_same_open": true
+    },
+    {
+      "free": "250",
+      "holdings": 0,
+      "reference": "1",
+      "fees": 0,
+      "budgets": [
+        "125",
+        "125"
+      ],
+      "quantities": [
+        100,
+        100
+      ],
+      "remaining": "50"
+    },
+    {
+      "holdings_value": [
+        "700",
+        "100"
+      ],
+      "free": "200",
+      "sell_reference": "2",
+      "sellable": 100,
+      "sell_q": 100,
+      "actual_sell": "1.8",
+      "net": "174.82",
+      "later_available": "374.82",
+      "buy_reference": "1",
+      "buy_q": 300,
+      "buy_cost": "305.3"
+    }
+  ],
+  "stop_conditions": [
+    "只写新raw；不改旧账本/原spec/策略/registry/INDEX/生产。仓外不写、不删除、无Git修改/联网/安装/代理或其他聊天发送。",
+    "未知语义保留unsupported，尤其触发无可卖整手等待用户；不能按推荐默认实施。",
+    "0行情/取数/拟合/真实标签/封存重跑/付费/生产接入。先测空间；不大拷贝或新建worktree。",
+    "运行Python禁止生成旧源码pyc，检查输出限定新raw；测完归置只读检查。"
+  ],
+  "controller_review": {
+    "required": true,
+    "reviewer": "/root/settlement_scope_review"
+  },
+  "source_spec_sha256": "695ce8a18e34d3520c53f793b1f347a05e146fea345474b5d72224ba93c30a5a",
+  "accepted_ledger_sha256": "20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3",
+  "budget": {
+    "market_runs": 0,
+    "fits": 0,
+    "new_data_requests": 0,
+    "labels": 0,
+    "sealed_reruns": 0
+  },
+  "authority": "User mainGoal continuous completion with bounded parallel; existing Goal5 originalspec engineering necessary slice; unknown user choice excluded."
+}

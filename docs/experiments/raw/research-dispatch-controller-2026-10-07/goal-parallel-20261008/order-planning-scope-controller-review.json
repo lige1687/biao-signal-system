@@ -1,0 +1,122 @@
+{
+  "reviewer": "/root/settlement_scope_review",
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "received_at": "2026-10-08T19:48:31.029266+08:00",
+  "source_spec_sha256": "695ce8a18e34d3520c53f793b1f347a05e146fea345474b5d72224ba93c30a5a",
+  "accepted_ledger_sha256": "20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3",
+  "decision": "ready_bounded_pure_order_arithmetic; integration requires existing reservation identity; one undefined policy branch awaits user",
+  "ready_interfaces": [
+    "immutable decision snapshot with known_at and price inputs",
+    "P0 positive target shortfall allocation, descending shortfall and fixed code tie break",
+    "maximum affordable hundred-lot quantity and fixed-quantity price cap floored to .001",
+    "P1 trigger and excess-sale quantity capped by sellable hundred-lots",
+    "later funded buys reuse original reference/ordering/shortfalls; actual availability and later opening required"
+  ],
+  "reference_cases": [
+    {
+      "p": "2",
+      "c": ".001",
+      "M": "5",
+      "s": ".001",
+      "B": "205",
+      "q": 0
+    },
+    {
+      "p": "2",
+      "c": ".001",
+      "M": "5",
+      "s": ".001",
+      "B": "205.2",
+      "q": 100
+    },
+    {
+      "B": "205.25",
+      "q": 100,
+      "limit": "2.000",
+      "opening": "2.001",
+      "cost": "205.3001",
+      "decision": "reject_no_resize"
+    },
+    {
+      "p": "2",
+      "c": ".01",
+      "M": "1",
+      "s": ".005",
+      "B": "500",
+      "q": 200,
+      "cost": "406",
+      "limit": "2.463",
+      "limit_cost": "499.989",
+      "next_tick_cost": "500.192"
+    },
+    {
+      "holdings_value": [
+        "200",
+        "400"
+      ],
+      "free": "300",
+      "receivable": "100",
+      "total": "1000",
+      "gaps": [
+        "300",
+        "100"
+      ],
+      "budgets": [
+        "300",
+        "0"
+      ],
+      "unused_first_not_reallocated_same_open": true
+    },
+    {
+      "free": "250",
+      "holdings": 0,
+      "reference": "1",
+      "fees": 0,
+      "budgets": [
+        "125",
+        "125"
+      ],
+      "quantities": [
+        100,
+        100
+      ],
+      "remaining": "50"
+    },
+    {
+      "holdings_value": [
+        "700",
+        "100"
+      ],
+      "free": "200",
+      "sell_reference": "2",
+      "sellable": 100,
+      "sell_q": 100,
+      "actual_sell": "1.8",
+      "net": "174.82",
+      "later_available": "374.82",
+      "buy_reference": "1",
+      "buy_q": 300,
+      "buy_cost": "305.3"
+    }
+  ],
+  "critical_constraints": [
+    "same opening proceeds cannot finance new buy",
+    "no future-open resizing or reallocation",
+    "fee only on nonzero order",
+    "prior action crossing orders unsupported until explicitly defined",
+    "failed sale no chase",
+    "partial fills and reservation require existing accepted interface, no replacement engine"
+  ],
+  "pending_user_branch": {
+    "case": "P1 triggered but no executable hundred-lot sale",
+    "options": [
+      "P0 treatment for newly arrived cash",
+      "hold all new cash until next decision"
+    ],
+    "status": "asked_async_pending",
+    "scope": "research scenario only, not personal trading default"
+  }
+}
