@@ -134,8 +134,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "f6d309fbbcb733ffeec8b5aaeaddd3da04416e2f",
-  "checked_at": "2026-10-08T18:22:04.410404+08:00",
+  "checked_coordination_sha": "c405d4a4d87541ade8e6039c0add3c69590743a6",
+  "checked_at": "2026-10-08T18:33:05.084534+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -491,6 +491,7 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
   },
   "checked_task_ids": [
     "research-dispatch-controller",
+    "classic-factor-research",
     "theory-workflow-system-increment",
     "daily-trading-system-audit"
   ],
@@ -1116,7 +1117,7 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
     "theory-workflow-system-increment",
     "daily-trading-system-audit"
   ],
-  "conflict_decision": "Original theory owner gets existing artifact publication under own scope; native storage audit read-only. Daily storage access active paths remain untouched. Root only own central records/new raw contracts.",
+  "conflict_decision": "原CLI owner独占scripts/run_factor_lab.py及新storage_preflight；daily存储发现范围只读。理论安全发布在其隔离分支，与CLI无重叠。原冻结实验不动。",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -1897,22 +1898,49 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
     "ready_queue": [
       {
         "id": "theory-workflow-system-increment/safe-publication",
-        "status": "ready_not_dispatched",
+        "status": "running_original_owner",
         "owner": "01a11579-7f2c-7c21-88d1-e5b334b569b7",
-        "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/theory-safe-publication-contract.json"
+        "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/theory-safe-publication-contract.json",
+        "dispatch_at": "2026-10-08T18:25:20.275709+08:00",
+        "turn_id": "01a11b0a-7273-7822-a842-2a26f2f8148f",
+        "cursor": "b2c09e5c-80bb-4dd0-ba1f-cd3d99aabb13:4",
+        "tool_execution_verified": true,
+        "note": "actual tool execution verified; preparation remote baseline lacks75 definition evidence references; owner preserving limitation"
       },
       {
         "id": "research-native-storage-preflight/scope",
-        "status": "ready_not_dispatched",
+        "status": "scope_audit_delivered_controller_accepted",
         "owner": "/root/research_readiness_v5",
-        "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/storage-preflight-scope-contract.json"
+        "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/storage-preflight-scope-contract.json",
+        "agent": "/root/research_readiness_v5",
+        "scope_commit": "0e4bbc013ee28ef55045eabf2b0a01caa0b1075b",
+        "result": "Exact CLI write order reviewed; lazy imports already present; opted-in preflight remains boundedfirststage"
+      },
+      {
+        "id": "classic-factor-research/native-storage-preflight",
+        "status": "contract_ready_not_dispatched",
+        "owner": "01a0e6d5-4bcf-7bd3-82e4-4961c963d20e",
+        "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/storage-preflight-implementation-contract.json",
+        "executor": {
+          "model": "gpt-6.1-sol",
+          "reasoning_effort": "high",
+          "reason": "同卷预算累加、复用合同第二账本、拒绝零写入等涉及跨路径失效风险；独立模块与CLI最小接入。"
+        }
       },
       {
         "id": "factor-fusion-risk-exit/settlement-coverage",
         "status": "pending_scope_review",
         "dependency": "existing simulation coverage and settlement semantics; not D raw features"
       }
-    ]
+    ],
+    "latest_active_other_owner": {
+      "thread": "01a11721-303e-7c83-9451-c82078c9ba23",
+      "turn": "01a11af5-5be4-7a40-afb4-35afd49500ca",
+      "cursor": "418df178-0b47-45dc-bddd-530916c27c09:5",
+      "task": "daily-trading-system-audit",
+      "scope": "AI storage-resource discovery, original owner active; no takeover"
+    },
+    "last_updated": "2026-10-08T18:33:05.084534+08:00"
   }
 }
 ```
@@ -2023,3 +2051,11 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 ## 主Goal首批回调与实际接续 2026-10-08T18:22:04.410404+08:00
 
 两只读助手已返回。旧中控把独立模拟/写入保护也归入D缺件等待的判断过宽，现纠正。原始真实实验依赖不变；已验收理论工具仅本机、远端未交付是可继续事项，由原owner按已有清单隔离发布，不需重做研究。准确原生写入保护范围由只读审查先确定，避开活跃daily入口。此刻仅合同ready，派发/启动以随后回执为准。
+
+## 主Goal实际并行与原生预检接续 2026-10-08T18:33:05.084534+08:00
+
+- checked_coordination_sha=c405d4a4d87541ade8e6039c0add3c69590743a6；已读本任务、classic-factor-research、theory-workflow-system-increment、daily-trading-system-audit与规则。
+- 理论安全发布已实际派发原owner并核工具启动：turn01a11b0a-7273-7822-a842-2a26f2f8148f，cursor:4；隔离准备工具检查发现75份定义证据未进入基线，不改原定义凑通过，待原owner交付。
+- 研究CLI预检只读审查已交付，当前lazy imports已存在。下一实现明确交原CLI owner01a0e6d5-4bcf-7bd3-82e4-4961c963d20e；在其原对话本阶段未运行，合同ready。
+- 精确实现路径：scripts/run_factor_lab.py、新src/lei_signal/research/storage_preflight.py、tests/unit/test_research_storage_preflight.py、tests/integration/test_research_storage_preflight_cli.py，及该实现专属进度/raw；owner自行登记后改。首期显式--storage-plan保护draft/contract及reuse/register，保持旧调用，绝不改workflow.py/冻结预算/daily资源文件。
+- 验收含拒绝零写入、同卷增长累计、复用第二账本、报告登记、外盘身份与缺盘不回退。0市场/标签/封存重跑/安装。完整合同在本中控goal-parallel-20261008/storage-preflight-implementation-contract.json，现本地，工作分支发布另核。
