@@ -146,6 +146,20 @@ def plan_output(root, task, estimated_bytes, *, internal_bytes=None, probe=_prob
     }
 
 
+def _has_option(args, protected):
+    # Original argparse CLIs accept unique long-option prefixes, including --flag=value.
+    # Refuse every prefix of a protected option; complete unrelated flags stay unchanged.
+    for arg in args:
+        flag = arg.split("=", 1)[0]
+        if (
+            flag.startswith("--")
+            and flag != "--"
+            and any(option.startswith(flag) for option in protected)
+        ):
+            return True
+    return False
+
+
 def build_command(root, entry, args, plan):
     root, policy, _ = _read_policy(root)
     entries = policy["entrypoints"]
@@ -156,11 +170,11 @@ def build_command(root, entry, args, plan):
         source.is_file() and source.is_relative_to(root / "scripts"), "entry missing or aliased"
     )
     _require(
-        not any(a.split("=", 1)[0] in {"--out", "--output", "--output-dir"} for a in args),
+        not _has_option(args, {"--out", "--output", "--output-dir"}),
         "explicit output conflicts with default route; leave frozen replay commands unchanged",
     )
     _require(
-        not any(a.split("=", 1)[0] in spec.get("readonly_flags", []) for a in args),
+        not _has_option(args, spec.get("readonly_flags", [])),
         "read-only review does not need a result route; use the original CLI",
     )
     subcommands = spec.get("subcommands")
@@ -168,7 +182,7 @@ def build_command(root, entry, args, plan):
         _require(bool(args) and args[0] in subcommands, "unsupported/read-only subcommand")
     # Alternate repo-root options could redirect local scientific records to another tree.
     _require(
-        not any(a.split("=", 1)[0] in {"--repo-root", "--root"} for a in args),
+        not _has_option(args, {"--repo-root", "--root"}),
         "alternate repository root needs a separately checked storage plan",
     )
     return [sys.executable, str(source), *args, spec["output_flag"], plan["output"]]

@@ -34,3 +34,16 @@
 ## 发布与最终读回 2026-10-08T21:36:30.062971+08:00
 
 代码/项目规则8准确文件已普通推送并逐SHA/字节读回：codex/mac-local-storage-cleanup-20261008@428dd19607ecc75cbe9f59e5e2fe3018c53dd9fd；54,587B，含原daily已发布canonical policy原blob。共享主索引/HEAD/他人源码不改，AGENTS本机原前缀保留、发布仅自己的新增块。25相关检查、Ruff/归置、外盘小文件和容量拒绝回执已核；0实际科研。checked_coordination_sha=7ce0479abef4cbba6a8add48d23f8891010fd718，已读classic/daily/中控最终记录，本轮路径无新重叠。当前本机约1.42GiB，外盘约596GiB；不是5GiB余量已达标。该限定规则＋清理交付completed，外盘恢复清单保留，下一次新实验仍先预检和科学合同核对；不自动改旧进程/冻结路径。
+
+## 参数缩写漏拦截修复交付 2026-10-08T22:18:49.903726+08:00
+
+原程序允许把某些长参数写短，旧启动器只检查完整名称，因而没有拦住替代仓库目录的缩写。现在输出路径、仓库目录和只读审查的完整名称及相关缩写都会在建目录、启动前拒绝；正常完整研究参数保持原样。此前只有解析反例，没有已发生错误写盘的证据。
+
+- 原交付428dd19607ecc75cbe9f59e5e2fe3018c53dd9fd；修复在原codex/mac-local-storage-cleanup-20261008接续，基线进度8dd49d0f2733701ce17dfc964eeb738a94c3f685。开始登记2187d8126d95755a2009bc6bd392d7569a48ad23已普通推送、读回。
+- checked_coordination_sha: 2a3380bcd9b41a4dfa70964625bc1548a45c662e；已读COORDINATION1.1、自身、中控限定修复、classic/daily/theory相关记录、video V8 registry-window。root唯一新启动器/两测试/本说明与进度写者，不接管原CLI、科研合同或共享登记。
+- 仅改新output_storage.py、两相关测试、research-output-storage.md和本进度；未改10个原CLI、两存储策略、AGENTS、冻结合同、registry/INDEX。10入口和2策略本轮前后SHA相同。共享registry/INDEX观测变化归videoowner已登记的V8窗口，不恢复、不纳入本次发布。
+- 55测试通过（包含必要原25项）；真实10个注册入口、12种输出调用的实际参数构造仅以AST提取，不导入或执行runner。152种实际解析器接受的受保护参数写法拒绝，含等号/分隔值；37个完整非保护参数原样保留；6建目录/启动前拒绝案例通过。原科学参数/检查仍归原入口。
+- Ruff和归置通过。当前模块SHA256 aa722aa7641ea472231fa027fa53edcb78400615294410f256902834bc88ff95。真实计划仍因内盘不足5GiB拒绝；不降阈值、不运行科学实验，不清理/迁移/下载/拔盘/停止他人进程。
+- 私有小证据与测试临时文件在外盘第五批output-argument-repair：old-counterexample.json、parameter-acceptance.json、tests-verified.log、lint-verified.log、hygiene-final.log；0市场研究。未提交私人数据或完整原实验源。
+- 失败保留：初次协调push因其他任务新记录被拒，fetch/read后只重建本记录，未强推；2项新测试对--r的拒绝类别期望冲突，隔离夹具后保留原具体断言；小文件patch写失败原字节仍完整，外盘暂存后精确替换成功；Ruff条件合并后重验55项通过；整体SHA核对识别他人registry/INDEX修改，精确10CLI/2策略不变核对通过，不覆盖他人。
+- 本轮修复与本机验收完成，成果发布后由中控复核新反例；不宣称原项目所有写入者受控、真实拔盘/系统配额已验证，也不重跑封存科研或撤销既有清理结果。

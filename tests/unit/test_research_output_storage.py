@@ -122,6 +122,56 @@ def test_command_keeps_input_args_and_old_source_bytes(storage_root):
     assert (root / "scripts/probe.py").read_bytes() == before
 
 
+@pytest.mark.parametrize(
+    "flag,reason",
+    [
+        ("--o", "explicit output"),
+        ("--ou", "explicit output"),
+        ("--outp", "explicit output"),
+        ("--output-d", "explicit output"),
+        ("--r", "repository root"),
+        ("--roo", "repository root"),
+        ("--repo", "repository root"),
+        ("--repo-r", "repository root"),
+        ("--rev", "read-only review"),
+        ("--review-workflow", "read-only review"),
+        ("--review-b", "read-only review"),
+    ],
+)
+@pytest.mark.parametrize("equal", [False, True])
+def test_protected_option_prefixes_refuse_both_value_forms(storage_root, flag, reason, equal):
+    root, mount, snapshot = storage_root
+    policy_path = root / "configs/research-output-policy.v1.json"
+    policy = json.loads(policy_path.read_text())
+    # Isolate each refusal: --r can prefix both a root and a review option.
+    policy["entrypoints"]["scripts/probe.py"]["readonly_flags"] = (
+        ["--review-workflow-contract", "--review-baselines"] if reason == "read-only review" else []
+    )
+    policy_path.write_text(json.dumps(policy))
+    plan = plan_output(root, "sample", 30, probe=lambda *_: snapshot)
+    arguments = [f"{flag}=other"] if equal else [flag, "other"]
+    with pytest.raises(OutputStorageError, match=reason):
+        build_command(root, "scripts/probe.py", ["run", *arguments], plan)
+    assert not (mount / "results/sample").exists()
+
+
+def test_complete_unrelated_options_and_equals_values_stay_unchanged(storage_root):
+    root, _, snapshot = storage_root
+    plan = plan_output(root, "sample", 30, probe=lambda *_: snapshot)
+    arguments = [
+        "run",
+        "--protocol=--repo-r",
+        "--refs",
+        "id@v1",
+        "--reuse-predictions",
+        "prior",
+        "--register-report",
+        "--run04-values",
+        "frozen.csv",
+    ]
+    assert build_command(root, "scripts/probe.py", arguments, plan)[2:-2] == arguments
+
+
 def test_saved_plan_keeps_same_directory_and_rejects_changed_budget_or_route(
     storage_root, monkeypatch
 ):
