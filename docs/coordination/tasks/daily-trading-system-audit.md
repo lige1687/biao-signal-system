@@ -114,3 +114,11 @@
 - 源码成果将用隔离Git索引精确提交到codex/gpt-system-integration-20261008，不切换/覆盖现有脏工作区，只包括本任务新源文件、对应测试、技能、自己的SOP/进度与安全回执，0私人cache/库/大依赖/registry/INDEX。普通push后fetch/read回代码；阶段日志和协调更新不会称总体完成。
 - 手机/网页仍需用户恢复过期登录，问题已提出。关键条件监督仍缺确认计划与同产品技术资料；这些依赖不足时只列缺口，持续推进本地注册/证据/交付。
 
+## 基本面覆盖补齐（同路径范围内）
+
+- checked_coordination_sha: 39d896816f5b0c2d572e52f1df2a742a059b935b；checked_at: 2026-10-08T12:12:43.481889+08:00；已读最新research-dispatch-controller顶部直接执行范围（haitong公司行动资格），与本接入无交叉。上一登记“最新变更classic-factor-research”是记录错误：当时实际新变更是research-dispatch-controller，已补读并纠正；未扩大研究授权。
+- 现有observations只含国内3项/美国6项，不能冒称全部基本面看板已接入。为满足用户多角度关键功能接入，在已登记context/MCP及对应测试路径中补fundamentals的固定section：observations（默认cn/us）、overview、rates、us-macro、rates-history（固定1095日）、macro-history（固定60期）。不接受任意URL/刷新；非observations标明接口自身市场范围不依requested market猜测。
+- 此补充只读已有GET；公开资料可能按系统TTL获取。未传账户/持仓给公开数据源、不改生产库、技术规则或价格。API响应保留错误、数据日期/说明，慢或缺数据时不把transport成功当资料充足。历史接口第一次较慢，单来源请求有界，不重启服务。
+- 各agent仍独占原两文件：context owner补数据路由及反例，MCP owner补固定枚举参数及SDK往返；root docs/livecheck准确增量，不写其他源码。实际新section请求可读和返回错误单独验收；原43项与十工具证据保留，非参数改动不重跑无关测试。
+- 项目内lei_system表已追加、原配置所有字节保留，codex mcp get实测enabled且正确stdio参数；当前正在运行的聊天未重新发现工具，不宣称此会话动态加载成功，CLI当前可用。手机/网页仍依赖过期登录和实际连接授权；总体active。
+
