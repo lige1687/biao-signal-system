@@ -1,3 +1,13 @@
+## V9 motion-start
+
+- task-id: trend-trading-video；2026-10-08T22:59:52.482715+08:00；checked_coordination_sha: 4a2906bc086a3291ffc7f6b60a53b3c096dd03f6；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active；用户明确“图风格不错，继续下一步吧”，批准三张V9静态图。只制作15秒动态小样，完整成片仍待小样确认。
+- 范围：新v10/源码与记录，v9/stage-state.json，以及skill参考中的当前阶段；不占registry/INDEX。基线eba7a6d9f8823c52e0ab9fd54dcd16e335911b19；计划分支codex/trend-sample-v10-20261008。
+- 验收：沿用已批视觉，完整解释动作与转场；1080p15秒含音乐音效，无旁白/品牌/真实案例；实际解码、静帧与播放检查。外盘独立新结果，不覆盖批准图片。已读中控无重叠，本任务唯一写者。周额度起点47%。
+
+
+---
+
 ## V9 static-delivered
 
 - task-id: trend-trading-video；2026-10-08T22:50:33.446143+08:00；checked_coordination_sha: 492feed9b7144a8a5909cda3337665bcee3aa187；已读 COORDINATION.md、自身与 research-dispatch-controller。
