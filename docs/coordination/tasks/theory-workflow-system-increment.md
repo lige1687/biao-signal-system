@@ -135,3 +135,16 @@
 写范围仅原成果树raw/theory-safe-publication-2026-10-08/remaining36-provenance.json及本任务既有进度/协调。36源不复制/上传/修改，定义/preparation/registry等不改，预算科研/测试/取数/拟合/标签/安装0。以36行负责人/实际来源/大小SHA、既有已发布同字节commit或明确用户传播依据为验收，分别给可恢复/待授权/缺资料和最小接续，不猜测元数据传播许可。原分支基线4d9e1ad0f17abc67f46b38efe1a0d4fd7c9a03dd，只发索引并远端读回，不宣称完整准备可用。
 
 启动push被classic的新协调更新拒绝；已fetch/read新增classic有限预检交付，无本索引路径冲突，正常merge保留后推。checked_coordination_sha=22428f805aca464cdbc9b45f9fa4eb2c55867a2a；更新时间2026-10-08T19:09:18.980751+08:00。
+
+
+## 剩余36来源索引已交付：completed；恢复未授权扩大
+
+更新时间：2026-10-08T19:15:21.266260+08:00；checked_coordination_sha=23576f43a6221cb0e80461d6abe33633623b6328；已读新增中控结算修复/36实际启动、classic已释放、原theory范围和规则，无索引文件冲突。原scope启动普通push因classic并发更新拒绝后已正常整合/读回，未强推。
+
+准确成果3c849c81a421432c86941b5306dcc55eb90e34a9，原codex/theory-safe-publication-20261008，限定2文件；remaining36-provenance.json（78396字节，SHA b9840478d909b6bf2e5b105fe3107fc74ac2c50e55c37b6b7ee6ac6076a8c7e8）及自身progress都推送fetch逐字相同。回执progress后继67f523d08501c8be4498813ca38058d7658ed29b亦单文件远端一致。原36写后逐SHA复核不变，无源复制/上传，39验收不重做；归置/diff检查通过，科研/测试/新取数/安装0。
+
+实际36行：本地全在，SHA/大小全与合同相符；七相关既有ref及准确36路径有限Git历史均没有已发布同字节原文件。这里限定当次本地可用refs，不声称所有远端最新历史都查遍。六文件在已发布technical-daily-risk artifact-manifest的withheld_files已有同SHA“local only/不推定再分发”记录。原owner由technical-factor-sequence原研究族/协调记录定位，thread01a0e703-4c27-74e2-bf77-997e1879f967；不把Sol执行者当任务所有者。
+
+分类与实际缺口：9自有协议/主控方法决定为优先候选，需要原owner核安全内容/具体发布范围；22真实计算资格或复核元数据需要原owner内容与范围清查；3来源审核/绑定需要分清自有审查与供应商/行动内容；2逐观察资料需要提供确切再分发依据或获准私有交付位置。既有同字节远端0、已确认准确传播许可0、本地缺文件0；不能因元数据或一般研究/Git授权猜许可。不是所有36都等用户：最小下一步交原技术owner先核9份自有方法清单，不重新研究/取数/改定义，其他来源组有逐行条件。源派发/发布不在本索引合同内，需后继准确范围。完整准备入口仍36缺件，未解锁或用占位。
+
+每行含路径、指纹、原owner、源类型、证据位置、现有Git查证、传播依据状态及最小后继，没有逐行行情/私人值。证据路径docs/experiments/raw/theory-safe-publication-2026-10-08/remaining36-provenance.json。保留相对合同路径初查失败、不存在的price-volume文件glob失败等只读错误，随后按准确根路径/实际任务恢复。限定索引范围已完成释放，中控可读取接续，不向其他聊天重复发送或要求全36笼统批准。
